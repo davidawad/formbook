@@ -4,14 +4,20 @@ You are one of many agents working this repo in parallel. Read this file, then `
 
 ## Pick work
 
-- Work comes from the bead queue in `.beads/`. `br ready` lists unblocked beads; `br show <id>` gives the full brief. Take exactly one bead.
-- Claim it before starting: `br update <id> --claim`. If it is already in progress, pick another.
-- One bead = one court folder, or one tool. Do not edit another court's folder or shared files (`lib/`, `tools/`, `docs/`, `data/`) unless your bead is about them. If you need a shared change, file a new bead (`br create --parent fb-595 ...`) and mention it in your PR.
-- Fan-out beads (e.g. "remaining federal circuits") are parents: create one child bead per court with `br create --parent <id>`, then work one child.
+"Run the eval loop on a court" means exactly this, and nothing else needs to be asked:
+
+1. Claim a court: `sh tools/claim.sh --next` (highest-priority unclaimed court; order in `data/priority.json`), or `sh tools/claim.sh --random`, or `sh tools/claim.sh <alias>` for a specific one. It atomically creates the remote branch `court/<alias>` from `origin/master`, so two agents can never take the same court, and prints the alias and the court folder. Add `--dry-run` to see what it would claim without claiming. If it exits non-zero, nothing was claimed.
+2. Check the claimed branch out in your own worktree: `git fetch origin court/<alias> && git worktree add .worktrees/<alias> court/<alias>`. Work only there, with absolute paths.
+3. Run the full eval loop (`docs/EVAL-LOOP.md`) for all three engines: typst, latex, docx. Tier 1 (mandated form) must be perfect; tier 2 (professional convention) judged against 2 or 3 exemplars from different filers; tier 3 (one filer's style) is not chased.
+4. Push the branch and open a PR against `master` titled `court(<alias>): typst/latex/docx templates`. Body: see "Finish".
+
+Scope: one court folder per claim. Do not edit another court's folder or shared files (`lib/`, `tools/`, `docs/`, `data/`) unless the work is about them. Tool and infrastructure work (and any shared change you need) is tracked as beads in `.beads/`: `br ready`, `br show <id>`, `br update <id> --claim`; file a new one with `br create --parent fb-595 ...` and mention it in your PR. Court work is claimed by branch, not by bead.
 
 ## Do the work
 
-- Court templates follow `docs/EVAL-LOOP.md` exactly. Reference implementation: `courts/ninth-circuit/court-of-appeals/`. Copy its structure (`rules.md`, `checks.yaml`, `typst/`, `samples/`, `reviews/`, `LOG.md`, `README.extra.md`), not its numbers.
+- Court templates follow `docs/EVAL-LOOP.md` exactly. Reference implementation: `courts/ninth-circuit/court-of-appeals/`. Copy its structure (`rules.md`, `checks.yaml`, `typst/`, `latex/`, `docx/`, `exemplars/` with `SOURCE.md`, `samples/`, `reviews/`, `LOG.md`, `README.extra.md`), not its numbers.
+- Quality tiers decide where to spend effort: tier 1 (the court's mandated form: font, margins, spacing, length, cover contents, required sections, certificates, e-filing PDF rules) must be perfect; tier 2 (conventions a clerk expects) must look professional, judged against 2 or 3 filed exemplars from different filers; tier 3 (matching one filer exactly) is not chased. The overlay is a diagnostic, not a score. Stop when tiers 1 and 2 pass.
+- Three engines per court: `typst/` (primary), `latex/`, `docx/`; outputs `samples/<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`. `tools/render.sh` and `tools/check.sh` take `--engine typst|latex|docx`. DOCX limits: `docs/DOCX.md`.
 - The court's own rules (primary sources, cited with URL, rule number and date verified) decide the layout. The filed exemplar only settles what the rules leave open.
 - Banned, no exceptions:
   - case-specific text, coordinates measured off a filed PDF, or forced line breaks in a template;
@@ -25,12 +31,20 @@ You are one of many agents working this repo in parallel. Read this file, then `
 
 1. `sh tools/check.sh <court-dir>` exits 0: every gate green on every sample.
 2. `sh tools/check-selftest.sh <court-dir>` prints `SELFTEST OK`. Add mutants for any check you added.
-3. `sh tools/tracker.sh`, then commit the regenerated files.
-4. Commit on a branch named after the bead (`fb-595.N-<slug>`), push, and open a PR against `master` containing: bead id, the `check.sh` RESULT line, the selftest result, remaining known defects by page, and decisions you made. Never merge your own PR.
-5. Leave the bead `in_progress` and record the PR: `br comments add <id> "<PR URL>"`. David closes beads.
+3. The same two commands for the other engines: `sh tools/check.sh <court-dir> --engine latex` and `--engine docx` (each writes its pass stamp only when fully green).
+4. `sh tools/tracker.sh`, then commit the regenerated files.
+5. Commit on the claimed branch `court/<alias>`, push it, and open a PR against `master` titled `court(<alias>): typst/latex/docx templates`. The body contains:
+   - the tier-1 `check.sh` RESULT line for each engine (typst, latex, docx);
+   - the `check-selftest.sh` result;
+   - the path of the overlay PDF (`samples/<id>-overlay.pdf`);
+   - the exemplars used, with the filer of each (from `exemplars/SOURCE.md`);
+   - the remaining tier-2 findings, by page (`OPEN` or `ACCEPTED` rows of the Gate 2 review);
+   - the docx `BLOCKED` items: each failing check ID and why (a docx may be delivered BLOCKED or partial; silently missing is not acceptable, and the same holds for latex).
+   Never merge your own PR. Do not delete the claim branch.
+6. For tool or infrastructure beads (not court work): branch `fb-595.N-<slug>`, PR with the bead id, leave the bead `in_progress` and record the PR with `br comments add <id> "<PR URL>"`. David closes beads.
 
-If you are blocked on a decision only David can make (scope, license, which exemplar, conflicting rules), stop, add a bead comment with the question, and end with a single line `BLOCKED: <question>`. Do not guess, and do not report success you have not verified with the commands above.
+If you are blocked on a decision only David can make (scope, license, which exemplar, conflicting rules), stop, record the question (a bead comment for tool work, the PR description for court work), and end with a single line `BLOCKED: <question>`. Do not guess, and do not report success you have not verified with the commands above.
 
 ## Setup
 
-Dependencies: typst, poppler (`pdfinfo pdffonts pdftotext pdftohtml pdfimages pdftoppm`), gawk, jq, yq (mikefarah), bend, `br` (beads_rust). Fonts and the cmarker typst package are vendored; nothing is fetched at build time.
+Dependencies: typst, poppler (`pdfinfo pdffonts pdftotext pdftohtml pdfimages pdftoppm`), gawk, jq, yq (mikefarah), bend, `br` (beads_rust); latex engine: pandoc, tectonic or xelatex; docx engine: pandoc, LibreOffice (`soffice`). Fonts and the cmarker typst package are vendored; nothing is fetched at build time.
