@@ -697,3 +697,20 @@ chk_generalization_features() {
     MEAS="missing features:$miss"
   fi
 }
+
+# ---------------------------------------------------------------- Gate 1: the template itself
+chk_template_agnostic() { # CA9-TOOL-002: no case-specific text from any sample inside the template
+  tmpl="$COURT/$(cfg .template)"
+  for sid2 in $(cfg ".samples[].id"); do
+    smd="$COURT/$(cfg ".samples[] | select(.id == \"$sid2\") | .md")"
+    yq --front-matter=extract -o=json e '[.case_number, (.caption[].names[]), (.caption[].designation), (.counsel[].names[]), .signature.signer, .proceeding, (.authorities[]? | .name, .cite)] | map(select(. != null)) | .[]' "$smd" |
+      sed 's/^"//; s/"$//; s/[*]//g' | while IFS= read -r s; do
+      [ "${#s}" -ge 6 ] || continue
+      grep -F -i -q -- "$s" "$tmpl" && echo "$sid2: \"$s\" appears in the template"
+    done
+  done > "$W/agnostic.txt"
+  n=$(wc -l < "$W/agnostic.txt" | tr -d ' ')
+  MEAS="$n sample strings found in $(basename "$tmpl")"
+  pass_if "$n"
+  DETAIL=$(head -6 "$W/agnostic.txt")
+}

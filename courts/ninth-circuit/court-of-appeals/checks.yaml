@@ -110,6 +110,14 @@ checks:
     expect: "0 footnotes missing, split or on the wrong page"
     fix: {anchor: "show footnote.entry"}
 
+  - id: CA9-TOOL-002
+    gate: 0
+    kind: T
+    name: the template contains no text taken from any sample (it is content-agnostic)
+    method: template_agnostic
+    expect: "no party, counsel, case number, proceeding or citation string of any sample appears in the template"
+    fix: {anchor: "Rule-driven and content-agnostic"}
+
   # ------------------------------------------------------------------ Gate 1: rules
   - id: CA9-FORM-001
     gate: 1

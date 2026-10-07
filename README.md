@@ -13,6 +13,10 @@ jq -r '.legacy_aliases.calsuppctsd' data/index.json   # calsuperct-sandiego
 
 `calsuperct-sandiego` is the one alias that is not a CourtListener id (a county subdivision of `calsuperct`).
 
+## Building a template
+
+Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](docs/EVAL-LOOP.md): content gate, per-requirement rule checks, a recorded visual review of every page, and a second structurally different sample. The reference implementation is [courts/ninth-circuit/court-of-appeals](courts/ninth-circuit/court-of-appeals/README.md) (`tools/render.sh`, `tools/check.sh`, `tools/check-selftest.sh`).
+
 ## Tracker
 
 Regenerate with `tools/tracker.sh` (the completion logic is in [Bend](https://github.com/HigherOrderCO/Bend), `tools/tracker.bend`). Per-court detail is in [STATUS.md](STATUS.md). A court is `done` only when a human sets it in its `court.json`.

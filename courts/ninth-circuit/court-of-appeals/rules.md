@@ -43,7 +43,7 @@ IDs are stable. `checks.yaml` references them. Never renumber; retire an ID by m
 | CA9-FORM-006 | Reproduced clearly, one side of the page; text, not images of text. Covered by CA9-ELEC-001. | FRAP 32(a)(1), HB p. 138 | M |
 | CA9-FORM-007 | Every font used is embedded, and every embedded font is the template's declared family (no silent fallback to a system font). | project; supports FRAP 32(a)(5) and Circuit Rule 25-5(e) | T |
 | CA9-FORM-008 | Page numbering: front matter after the cover in lowercase roman numerals (cover unnumbered); the body starts at Arabic 1 on the first page of the first body section; numbers centered at the foot, inside the bottom margin. Numbers are consecutive within each run. | EX; FRAP says only that numbers may sit in the margin | C |
-| CA9-FORM-009 | Exemplar-derived open choices (headings: top-level section headings bold caps centered; point headings bold, small caps, centered; sub-point headings bold with hanging label; first-line indent on body paragraphs; cover layout with rules). Checked by visual review (Gate 2), not mechanically. | EX | C |
+| CA9-FORM-009 | Exemplar-derived open choices: top-level section headings and Argument point headings are centered (checked mechanically on every line); the rest is checked by visual review (Gate 2) only: point headings bold small capitals, sub-point headings bold with a hanging label, first-line indent on body paragraphs, cover layout with rules, TOC and TOA styling. | EX | C |
 
 ### Length (FRAP 32(a)(7), Circuit Rule 32-1)
 
@@ -99,6 +99,7 @@ Required order of the appellant's brief, with this court's overrides applied:
 | CA9-COVER-006 | Name, office address and telephone number of counsel for the filing party. | FRAP 32(a)(2)(F) | M |
 | CA9-COVER-007 | Convention: district court docket number and judge below ("D.C. No. ...; Hon. ..."), shown only when supplied. Not required by rule. | common 9th Cir. practice | C |
 | CA9-COVER-008 | Cover color: blue for the appellant's brief, only on paper copies requested by the Court. Not applicable to the electronic PDF (white). | FRAP 32(a)(2); Circuit Rule 25-5(c), HB p. 84 | M (paper only) |
+| CA9-COVER-009 | The cover occupies exactly one page; the table of contents starts on page 2. | EX | C |
 
 ### Certificates, signature, related cases
 
@@ -147,3 +148,6 @@ Required order of the appellant's brief, with this court's overrides applied:
 | CA9-TOOL-004 | Each footnote in the markdown appears in the PDF on the page that carries its reference. | T |
 | CA9-TOOL-005 | Every TOC entry's page number equals the page on which that heading really appears. | T (supports CA9-CONT-001) |
 | CA9-TOOL-006 | Every TOA page reference is a page that really contains the citation, and every cited authority is listed. | T (supports CA9-CONT-002) |
+| CA9-REVIEW-001 | A recorded visual review of the current PDF covers every page and lists no open defect (docs/EVAL-LOOP.md, Gate 2). | T |
+| CA9-GEN-001 | The second sample exercises every feature listed in `checks.yaml: generalization.require_features`. | T |
+| CA9-GEN-002 | Both samples pass gates 0 to 2. | T |
