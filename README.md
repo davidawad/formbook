@@ -17,32 +17,6 @@ jq -r '.legacy_aliases.calsuppctsd' data/index.json   # calsuperct-sandiego
 
 Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](docs/EVAL-LOOP.md): content gate, per-requirement rule checks, a recorded visual review of every page, and a second structurally different sample. The reference implementation is [courts/ninth-circuit/court-of-appeals](courts/ninth-circuit/court-of-appeals/README.md) (`tools/render.sh`, `tools/check.sh`, `tools/check-selftest.sh`).
 
-## Tracker
-
-Regenerate with `tools/tracker.sh` (the completion logic is in [Bend](https://github.com/HigherOrderCO/Bend), `tools/tracker.bend`). Per-court detail is in [STATUS.md](STATUS.md). A court is `done` only when a human sets it in its `court.json`.
-
-<!-- tracker:start -->
-| Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Supreme Court of the United States | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Federal Circuit and feeder courts | 6 | 0 | 0 | 0 | 6 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Military courts | 6 | 0 | 0 | 0 | 6 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| National courts and tribunals | 5 | 0 | 0 | 0 | 5 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| First Circuit | 23 | 0 | 0 | 0 | 23 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Second Circuit | 23 | 0 | 0 | 0 | 23 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Third Circuit | 23 | 0 | 0 | 0 | 23 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Fourth Circuit | 32 | 0 | 0 | 0 | 32 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Fifth Circuit | 30 | 0 | 0 | 0 | 30 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Sixth Circuit | 30 | 0 | 0 | 0 | 30 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Seventh Circuit | 22 | 0 | 0 | 0 | 22 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Eighth Circuit | 39 | 0 | 0 | 0 | 39 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Ninth Circuit | 65 | 0 | 1 | 2 | 62 | 0.0% | 1.5% | 1 | 0 | 0 | 0.9% |
-| Tenth Circuit | 34 | 0 | 0 | 0 | 34 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Eleventh Circuit | 32 | 0 | 0 | 0 | 32 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| D.C. Circuit | 4 | 0 | 0 | 0 | 4 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| **Total** | 375 | 0 | 1 | 3 | 371 | 0.0% | 0.2% | 1 | 0 | 0 | 0.1% |
-<!-- tracker:end -->
-
 ## Index
 
 <!-- index:start -->
@@ -794,3 +768,29 @@ In scope but with a location the circuit map cannot place; no folder is created 
 ## License
 
 LICENSE: TBD
+
+## Tracker
+
+Regenerate with `tools/tracker.sh` (the completion logic is in [Bend](https://github.com/HigherOrderCO/Bend), `tools/tracker.bend`). Per-court detail is in [STATUS.md](STATUS.md). A court is `done` only when a human sets it in its `court.json`.
+
+<!-- tracker:start -->
+| Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Supreme Court of the United States | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Federal Circuit and feeder courts | 6 | 0 | 0 | 0 | 6 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Military courts | 6 | 0 | 0 | 0 | 6 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| National courts and tribunals | 5 | 0 | 0 | 0 | 5 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| First Circuit | 23 | 0 | 0 | 0 | 23 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Second Circuit | 23 | 0 | 0 | 0 | 23 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Third Circuit | 23 | 0 | 0 | 0 | 23 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Fourth Circuit | 32 | 0 | 0 | 0 | 32 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Fifth Circuit | 30 | 0 | 0 | 0 | 30 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Sixth Circuit | 30 | 0 | 0 | 0 | 30 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Seventh Circuit | 22 | 0 | 0 | 0 | 22 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Eighth Circuit | 39 | 0 | 0 | 0 | 39 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Ninth Circuit | 65 | 0 | 1 | 2 | 62 | 0.0% | 1.5% | 1 | 0 | 0 | 0.9% |
+| Tenth Circuit | 34 | 0 | 0 | 0 | 34 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Eleventh Circuit | 32 | 0 | 0 | 0 | 32 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| D.C. Circuit | 4 | 0 | 0 | 0 | 4 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| **Total** | 375 | 0 | 1 | 3 | 371 | 0.0% | 0.2% | 1 | 0 | 0 | 0.1% |
+<!-- tracker:end -->
