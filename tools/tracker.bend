@@ -3,26 +3,30 @@
 # Input : the manifest written by tools/manifest.sh (path = first CLI arg), one
 #         line per court, fields separated by '|':
 #           alias|group|level|name|path|manual|flags
-#         flags is six presence bits, in order: rules exemplar sample typst latex render
+#         flags is eight characters (see tools/manifest.sh), in order:
+#           rules(0/1) exemplars(count) samples(count) typst latex docx(0 none,1 built,2 pass) overlay(0/1) review(0/1)
 # Output: three sections on stdout, each opened by a "=== <name>" line:
 #           summary  markdown aggregate table (per group + total)
 #           status   markdown per-court table (STATUS.md body)
-#           rows     alias|status|percent lines (consumed by tools/gen_readmes.py)
+#           rows     alias|status|percent|typst|latex|docx|items lines (consumed by tools/gen_readmes.py);
+#                    items = 8 bits, one per checklist item below
 #
 # Rules:
 #   done          iff court.json status == "done" (manual; nothing here ever writes it)
-#   up for review iff rules && sample && typst && render are all present
-#   in progress   iff any flag is present
+#   up for review iff rules.md is present and the typst engine passes (valid stamp)
+#   in progress   iff anything is present (any flag character other than 0)
 #   todo          otherwise
-#   percent       = round(flags present / 6 * 100); "done" forces 100
+#   percent       = round(items present / 8 * 100), "done" forces 100. The 8 items: rules, exemplars >= 2,
+#                   samples >= 2, typst pass, latex pass, docx pass, overlay pdf, review file
+#   engine cell   0 -> "—" (no template), 1 -> "built" (template and rendered PDF), 2 -> "pass" (valid stamp)
 
 import Base
 
 type Row is Data:
-  Row{alias: String, group: String, level: String, name: String, path: String, st: U32, pct: U32, fl: List<&2, Char>}
+  Row{alias: String, group: String, level: String, name: String, path: String, st: U32, pct: U32, ec: List<&2, Char>, it: List<&2, Char>}
 
 type Agg is Data:
-  Agg{n: U32, todo: U32, prog: U32, rev: U32, done: U32, sum: U32}
+  Agg{n: U32, todo: U32, prog: U32, rev: U32, done: U32, sum: U32, tp: U32, lp: U32, dp: U32}
 
 type Grp is Data:
   Grp{name: String, agg: Agg}
