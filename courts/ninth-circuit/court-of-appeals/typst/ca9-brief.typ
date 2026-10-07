@@ -263,15 +263,15 @@
 #let cover(meta) = page(numbering: none, footer: none, {
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
   set align(center)
-  v(0.3in)
+  v(0.2in)
   strong[No. #need(meta, "case_number")]
-  v(0.75em)
+  v(0.6em)
   double-rule
-  v(0.75em)
+  v(0.6em)
   strong[IN THE UNITED STATES COURT OF APPEALS\ FOR THE NINTH CIRCUIT]
-  v(0.75em)
+  v(0.6em)
   short-rule
-  v(0.75em)
+  v(0.6em)
   let sides = need(meta, "caption")
   for (i, side) in sides.enumerate() {
     for name in side.names { inl(name); parbreak() }
@@ -280,17 +280,17 @@
   }
   v(0.6em)
   short-rule
-  v(0.75em)
+  v(0.6em)
   inl(need(meta, "proceeding"))
   if "district_court_case" in meta or "judge" in meta {
     parbreak()
     [#if "district_court_case" in meta [D.C. No. #meta.district_court_case]#if "district_court_case" in meta and "judge" in meta [; ]#if "judge" in meta [#inl(meta.judge)]]
   }
-  v(0.75em)
+  v(0.6em)
   short-rule
-  v(0.75em)
+  v(0.6em)
   strong(upper(inl(need(meta, "brief_title"))))
-  v(0.75em)
+  v(0.6em)
   short-rule
   v(0.6em)
   // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number).
@@ -306,7 +306,7 @@
       })
     }
   }))
-  v(0.75em)
+  v(0.6em)
   double-rule
 })
 
@@ -474,6 +474,11 @@
     set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)
     block(above: 1em, below: 1em, it.body)
   })
+  // Typography that holds for any text: never break inside a token of adjacent parentheses
+  // ("60(b)(5)"), and never between a section sign / pilcrow and its number. Done with
+  // unbreakable boxes so the extracted text stays exactly the author's characters.
+  show regex("\\S*\\)\\(\\S*"): it => box(it)
+  show regex("[§¶] \\S+"): it => box(it)
   show heading: style-heading
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {
