@@ -110,11 +110,6 @@
 
 #let heading-tab = 0.5in
 
-/// Left edge of a heading's label for a given level (labels step in by half an inch).
-#let heading-indent(level, numbered) = {
-  if numbered { (level - 2) * heading-tab + heading-tab * 0 } else { 0pt }
-}
-
 #let style-heading(it) = {
   set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
   if it.level == 1 {
@@ -416,6 +411,12 @@
   form-sig-line(meta)
 }
 
+#let toc-addendum() = {
+  heading(level: 1, numbering: none, outlined: false)[Table of Contents]
+  show outline.entry: toc-entry
+  outline(title: none, target: selector(heading.where(level: 2)).after(<add-start>), depth: 2, indent: none)
+}
+
 // ---------------------------------------------------------------------------
 // The brief
 // ---------------------------------------------------------------------------
@@ -509,10 +510,4 @@
     pagebreak()
     cmarker.render(add-md, raw-typst: false, smart-punctuation: true, h1-level: 1)
   }
-}
-
-#let toc-addendum() = {
-  heading(level: 1, numbering: none, outlined: false)[Table of Contents]
-  show outline.entry: toc-entry
-  outline(title: none, target: selector(heading.where(level: 2)).after(<add-start>), depth: 2, indent: none)
 }
