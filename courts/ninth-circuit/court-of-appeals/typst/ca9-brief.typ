@@ -110,6 +110,20 @@
 
 #let heading-tab = 0.5in
 
+/// A single-spaced paragraph whose continuation lines are indented by `indent`.
+/// (Must be an explicit `par`: a `set par(hanging-indent)` inside a block is ignored by typst 0.15.)
+#let hang(indent, body) = par(
+  hanging-indent: indent, first-line-indent: 0pt, leading: single-leading, justify: false, body,
+)
+
+/// Left edge of a heading's label. Labels sit half an inch in from the margin; each further
+/// level steps in half an inch more. In the Argument the level-2 point heading is centered, so
+/// its sub-headings start at the first step.
+#let label-indent(h) = {
+  let first = if in-argument(h.location()) { 3 } else { 2 }
+  (h.level - first + 1) * heading-tab
+}
+
 #let style-heading(it) = {
   set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
   if it.level == 1 {
@@ -125,14 +139,13 @@
       align(center, strong(smallcaps(heading-label(it) + [ ] + it.body))))
   } else {
     // Sub-headings: label in a fixed box, text hangs under the text, bold (italic below level 3).
-    let ind = (it.level - 2) * heading-tab
+    let ind = label-indent(it)
     let lab = heading-label(it)
-    block(width: 100%, sticky: true, above: 1.1em, below: 0.9em, {
-      set par(hanging-indent: ind + heading-tab)
+    block(width: 100%, sticky: true, above: 1.1em, below: 0.9em, hang(ind + heading-tab, {
       h(ind)
       box(width: heading-tab, if it.level >= 4 { strong(emph(lab)) } else { strong(lab) })
       if it.level >= 4 { strong(emph(it.body)) } else { strong(it.body) }
-    })
+    }))
   }
 }
 
@@ -140,28 +153,28 @@
 // Tables of contents and authorities
 // ---------------------------------------------------------------------------
 
-#let dot-leader = box(width: 1fr, repeat[.#h(0.22em)])
+#let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
 
-/// One table-of-contents row, built from a heading element.
+/// One table-of-contents row, built from a heading element. The label sits where the
+/// heading's own label sits in the body, and wrapped lines hang under the title text.
 #let toc-entry(it) = {
   let hd = it.element
   let numbered = hd.numbering != none and hd.level >= 2
-  let ind = if numbered { (hd.level - 2) * heading-tab + heading-tab }
-            else if hd.level >= 2 { (hd.level - 2) * heading-tab }
-            else { 0pt }
+  let ind = if numbered { label-indent(hd) } else if hd.level >= 2 { (hd.level - 2) * heading-tab } else { 0pt }
+  // The Argument's centered point heading has no body indent in the table; its label starts at the margin.
+  if numbered and in-argument(hd.location()) and hd.level == 2 { ind = 0pt }
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
-  let tab = if numbered { heading-tab } else { 0pt }
-  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 1.2em } else { 0.85em }, below: 0pt, {
-    set par(first-line-indent: 0pt, hanging-indent: ind + (if numbered { tab } else { heading-tab }),
-      leading: single-leading, justify: false)
-    h(ind)
-    if numbered { box(width: tab, lab) }
-    title
-    h(0.8em)
-    dot-leader
-    box(width: 2.6em, align(right, it.page()))
-  }))
+  let hang-by = ind + heading-tab
+  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.9em } else { 0.6em }, below: 0pt,
+    hang(hang-by, {
+      h(ind)
+      if numbered { box(width: heading-tab, lab) }
+      title
+      h(0.8em)
+      dot-leader
+      box(width: 2.6em, align(right, it.page()))
+    })))
 }
 
 #let toc-section(has-addendum) = {
@@ -219,8 +232,7 @@
           if label not in pages { pages.push(label) }
         }
         let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        block(breakable: false, above: 0.8em, below: 0pt, width: 100%, {
-          set par(first-line-indent: 0pt, hanging-indent: 0.35in, leading: single-leading, justify: false)
+        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
@@ -231,7 +243,7 @@
           dot-leader
           h(0.3em)
           page-text
-        })
+        }))
       }
     }
   }
@@ -249,41 +261,41 @@
 #let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
 
 #let cover(meta) = page(numbering: none, footer: none, {
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em, justify: false)
+  set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
   set align(center)
-  v(0.2in)
+  v(0.05in)
   strong[No. #need(meta, "case_number")]
-  v(0.45em)
+  v(0.3em)
   double-rule
-  v(0.9em)
+  v(0.35em)
   strong[IN THE UNITED STATES COURT OF APPEALS\ FOR THE NINTH CIRCUIT]
-  v(0.9em)
+  v(0.35em)
   short-rule
-  v(0.7em)
+  v(0.3em)
   let sides = need(meta, "caption")
   for (i, side) in sides.enumerate() {
     for name in side.names { inl(name); parbreak() }
     align(left, pad(left: 50%, inl(side.designation)))
     if i < sides.len() - 1 { v(0.2em); [v.]; v(0.2em) }
   }
-  v(0.5em)
+  v(0.25em)
   short-rule
-  v(0.7em)
+  v(0.3em)
   inl(need(meta, "proceeding"))
   if "district_court_case" in meta or "judge" in meta {
     parbreak()
     [#if "district_court_case" in meta [D.C. No. #meta.district_court_case]#if "district_court_case" in meta and "judge" in meta [; ]#if "judge" in meta [#inl(meta.judge)]]
   }
-  v(0.7em)
+  v(0.3em)
   short-rule
-  v(0.7em)
+  v(0.3em)
   strong(upper(inl(need(meta, "brief_title"))))
-  v(0.7em)
+  v(0.3em)
   short-rule
-  v(1em)
+  v(0.25em)
   // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number).
   align(left, pad(left: 50%, {
-    set par(hanging-indent: 0pt, spacing: 0.7em)
+    set par(hanging-indent: 0pt, spacing: 0.5em)
     let groups = need(meta, "counsel")
     for (gi, g) in groups.enumerate() {
       block(breakable: false, {
@@ -294,7 +306,7 @@
       })
     }
   }))
-  v(0.6em)
+  v(0.3em)
   double-rule
 })
 
@@ -327,12 +339,11 @@
     [#meta.at("date", default: "")\ Date])
 })
 
-#let option-row(checked, body, indent: 0pt) = block(above: 0.8em, breakable: false, {
-  set par(first-line-indent: 0pt, hanging-indent: indent + 1.6em, leading: single-leading, justify: false)
+#let option-row(checked, body, indent: 0pt) = block(above: 0.8em, breakable: false, hang(indent + 1.6em, {
   h(indent)
   box(width: 1.6em, checkbox(checked))
   body
-})
+}))
 
 /// Statement of Related Cases, Form 17 wording (Circuit Rule 28-2.6; CA9-CERT-003).
 #let related-cases(meta) = {
@@ -348,11 +359,10 @@
   option-row(status == "pending", [I am aware of one or more related cases currently pending in this court. The case number and name of each related case and its relationship to this case are:])
   if status == "pending" {
     for c in rc.cases {
-      block(above: 0.7em, breakable: false, {
-        set par(hanging-indent: 1.6em)
+      block(above: 0.7em, breakable: false, hang(3.2em, {
         h(1.6em)
         [No. #c.number, #emph(inl(c.name)). #inl(c.relationship)]
-      })
+      }))
     }
   }
   form-sig-line(meta)
