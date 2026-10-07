@@ -60,6 +60,31 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
+/// Put an invisible `tag` right after the first word of `c`, keeping any emphasis around it.
+/// Returns (content, placed). Why not simply put the tag in front: when a citation begins at the
+/// start of a line, typst files a tag that sits before the first word under the PREVIOUS line, which
+/// may be on the previous page, so the table of authorities would cite the wrong page.
+#let tag-after-first-word(c, tag) = {
+  if type(c) == str or c.func() == text {
+    let t = if type(c) == str { c } else { c.text }
+    let m = t.match(regex("^\\s*\\S+"))
+    if m == none { return (c, false) }
+    return ([#m.text#tag#t.slice(m.end)], true)
+  }
+  if c.func() == emph { let r = tag-after-first-word(c.body, tag); return (emph(r.first()), r.last()) }
+  if c.func() == strong { let r = tag-after-first-word(c.body, tag); return (strong(r.first()), r.last()) }
+  if c.func() == [].func() {
+    let out = ()
+    let placed = false
+    for ch in c.children {
+      if placed { out.push(ch) }
+      else { let r = tag-after-first-word(ch, tag); out.push(r.first()); placed = r.last() }
+    }
+    return (out.join(), placed)
+  }
+  (c, false)
+}
+
 /// Word count of markdown source, whitespace-delimited like a word processor.
 /// Markup characters are removed first; links keep their text.
 #let count-words(md) = {
@@ -499,8 +524,7 @@
   show heading: style-heading
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {
-      [#metadata(it.dest.slice(4))<toa-hit>]
-      it.body
+      tag-after-first-word(it.body, [#metadata(it.dest.slice(4))<toa-hit>]).first()
     } else { it.body }
   }
 
