@@ -1,0 +1,14 @@
+{
+  "alias": "coloctapp",
+  "courtlistener_id": "coloctapp",
+  "name": "Colorado Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca10",
+  "state": "Colorado",
+  "path": "courts/tenth-circuit/colorado/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

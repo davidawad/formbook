@@ -1,0 +1,14 @@
+{
+  "alias": "ariztaxct",
+  "courtlistener_id": "ariztaxct",
+  "name": "Arizona Tax Court",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "Arizona",
+  "path": "courts/ninth-circuit/arizona/state/tax-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

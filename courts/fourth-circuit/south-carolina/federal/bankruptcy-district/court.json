@@ -1,0 +1,14 @@
+{
+  "alias": "scb",
+  "courtlistener_id": "scb",
+  "name": "United States Bankruptcy Court, D. South Carolina",
+  "level": "bankruptcy",
+  "circuit": "ca4",
+  "state": "South Carolina",
+  "path": "courts/fourth-circuit/south-carolina/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

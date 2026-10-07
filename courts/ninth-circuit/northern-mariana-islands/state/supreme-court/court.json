@@ -1,0 +1,14 @@
+{
+  "alias": "nmi",
+  "courtlistener_id": "nmi",
+  "name": "Supreme Court of The Commonwealth of The Northern Mariana Islands",
+  "level": "state-supreme",
+  "circuit": "ca9",
+  "state": "Northern Mariana Islands",
+  "path": "courts/ninth-circuit/northern-mariana-islands/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

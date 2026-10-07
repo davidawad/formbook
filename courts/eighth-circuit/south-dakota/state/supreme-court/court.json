@@ -1,0 +1,14 @@
+{
+  "alias": "sd",
+  "courtlistener_id": "sd",
+  "name": "Supreme Court of South Dakota",
+  "level": "state-supreme",
+  "circuit": "ca8",
+  "state": "South Dakota",
+  "path": "courts/eighth-circuit/south-dakota/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

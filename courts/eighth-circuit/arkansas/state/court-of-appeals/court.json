@@ -1,0 +1,14 @@
+{
+  "alias": "arkctapp",
+  "courtlistener_id": "arkctapp",
+  "name": "Arkansas Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca8",
+  "state": "Arkansas",
+  "path": "courts/eighth-circuit/arkansas/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

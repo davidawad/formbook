@@ -1,0 +1,14 @@
+{
+  "alias": "laeb",
+  "courtlistener_id": "laeb",
+  "name": "United States Bankruptcy Court, E.D. Louisiana",
+  "level": "bankruptcy",
+  "circuit": "ca5",
+  "state": "Louisiana",
+  "path": "courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

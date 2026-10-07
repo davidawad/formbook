@@ -1,0 +1,14 @@
+{
+  "alias": "msnd",
+  "courtlistener_id": "msnd",
+  "name": "District Court, N.D. Mississippi",
+  "level": "district",
+  "circuit": "ca5",
+  "state": "Mississippi",
+  "path": "courts/fifth-circuit/mississippi/federal/northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

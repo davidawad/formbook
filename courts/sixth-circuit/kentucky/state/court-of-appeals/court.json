@@ -1,0 +1,14 @@
+{
+  "alias": "kyctapp",
+  "courtlistener_id": "kyctapp",
+  "name": "Court of Appeals of Kentucky",
+  "level": "state-appellate",
+  "circuit": "ca6",
+  "state": "Kentucky",
+  "path": "courts/sixth-circuit/kentucky/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

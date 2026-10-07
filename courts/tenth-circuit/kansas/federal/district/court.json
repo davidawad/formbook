@@ -1,0 +1,14 @@
+{
+  "alias": "ksd",
+  "courtlistener_id": "ksd",
+  "name": "District Court, D. Kansas",
+  "level": "district",
+  "circuit": "ca10",
+  "state": "Kansas",
+  "path": "courts/tenth-circuit/kansas/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

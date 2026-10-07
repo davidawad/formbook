@@ -1,0 +1,14 @@
+{
+  "alias": "mtb",
+  "courtlistener_id": "mtb",
+  "name": "United States Bankruptcy Court, D. Montana",
+  "level": "bankruptcy",
+  "circuit": "ca9",
+  "state": "Montana",
+  "path": "courts/ninth-circuit/montana/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

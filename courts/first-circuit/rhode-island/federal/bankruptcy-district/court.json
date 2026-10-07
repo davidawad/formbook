@@ -1,0 +1,14 @@
+{
+  "alias": "rib",
+  "courtlistener_id": "rib",
+  "name": "United States Bankruptcy Court, D. Rhode Island",
+  "level": "bankruptcy",
+  "circuit": "ca1",
+  "state": "Rhode Island",
+  "path": "courts/first-circuit/rhode-island/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

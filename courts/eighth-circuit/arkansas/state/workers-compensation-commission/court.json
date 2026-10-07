@@ -1,0 +1,14 @@
+{
+  "alias": "arkworkcompcom",
+  "courtlistener_id": "arkworkcompcom",
+  "name": "Arkansas Workers' Compensation Commission",
+  "level": "state-appellate",
+  "circuit": "ca8",
+  "state": "Arkansas",
+  "path": "courts/eighth-circuit/arkansas/state/workers-compensation-commission",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

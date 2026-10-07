@@ -1,0 +1,14 @@
+{
+  "alias": "dcb",
+  "courtlistener_id": "dcb",
+  "name": "United States Bankruptcy Court, District of Columbia",
+  "level": "bankruptcy",
+  "circuit": "cadc",
+  "state": "District of Columbia",
+  "path": "courts/dc-circuit/district-of-columbia/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

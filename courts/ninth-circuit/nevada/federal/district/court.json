@@ -1,0 +1,14 @@
+{
+  "alias": "nvd",
+  "courtlistener_id": "nvd",
+  "name": "District Court, D. Nevada",
+  "level": "district",
+  "circuit": "ca9",
+  "state": "Nevada",
+  "path": "courts/ninth-circuit/nevada/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

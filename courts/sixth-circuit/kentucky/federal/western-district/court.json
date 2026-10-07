@@ -1,0 +1,14 @@
+{
+  "alias": "kywd",
+  "courtlistener_id": "kywd",
+  "name": "District Court, W.D. Kentucky",
+  "level": "district",
+  "circuit": "ca6",
+  "state": "Kentucky",
+  "path": "courts/sixth-circuit/kentucky/federal/western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

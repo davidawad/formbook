@@ -1,0 +1,14 @@
+{
+  "alias": "gand",
+  "courtlistener_id": "gand",
+  "name": "United States District Court for the Northern District of Georgia",
+  "level": "district",
+  "circuit": "ca11",
+  "state": "Georgia",
+  "path": "courts/eleventh-circuit/georgia/federal/northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

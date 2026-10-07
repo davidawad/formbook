@@ -1,0 +1,14 @@
+{
+  "alias": "iowactapp",
+  "courtlistener_id": "iowactapp",
+  "name": "Court of Appeals of Iowa",
+  "level": "state-appellate",
+  "circuit": "ca8",
+  "state": "Iowa",
+  "path": "courts/eighth-circuit/iowa/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "njb",
+  "courtlistener_id": "njb",
+  "name": "United States Bankruptcy Court, D. New Jersey",
+  "level": "bankruptcy",
+  "circuit": "ca3",
+  "state": "New Jersey",
+  "path": "courts/third-circuit/new-jersey/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

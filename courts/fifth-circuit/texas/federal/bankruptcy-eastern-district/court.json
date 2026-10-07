@@ -1,0 +1,14 @@
+{
+  "alias": "txeb",
+  "courtlistener_id": "txeb",
+  "name": "United States Bankruptcy Court, E.D. Texas",
+  "level": "bankruptcy",
+  "circuit": "ca5",
+  "state": "Texas",
+  "path": "courts/fifth-circuit/texas/federal/bankruptcy-eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

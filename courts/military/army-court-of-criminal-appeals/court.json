@@ -1,0 +1,14 @@
+{
+  "alias": "acca",
+  "courtlistener_id": "acca",
+  "name": "U S Army Court of Criminal Appeals",
+  "level": "military",
+  "circuit": null,
+  "state": null,
+  "path": "courts/military/army-court-of-criminal-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

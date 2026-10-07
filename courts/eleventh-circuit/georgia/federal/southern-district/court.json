@@ -1,0 +1,14 @@
+{
+  "alias": "gasd",
+  "courtlistener_id": "gasd",
+  "name": "United States District Court for the Southern District of Georgia",
+  "level": "district",
+  "circuit": "ca11",
+  "state": "Georgia",
+  "path": "courts/eleventh-circuit/georgia/federal/southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

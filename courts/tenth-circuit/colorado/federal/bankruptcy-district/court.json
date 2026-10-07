@@ -1,0 +1,14 @@
+{
+  "alias": "cob",
+  "courtlistener_id": "cob",
+  "name": "United States Bankruptcy Court, D. Colorado",
+  "level": "bankruptcy",
+  "circuit": "ca10",
+  "state": "Colorado",
+  "path": "courts/tenth-circuit/colorado/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

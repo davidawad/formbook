@@ -1,0 +1,14 @@
+{
+  "alias": "arwd",
+  "courtlistener_id": "arwd",
+  "name": "United States District Court for the Western District of Arkansas",
+  "level": "district",
+  "circuit": "ca8",
+  "state": "Arkansas",
+  "path": "courts/eighth-circuit/arkansas/federal/western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

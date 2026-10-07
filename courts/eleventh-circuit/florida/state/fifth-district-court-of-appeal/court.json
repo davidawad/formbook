@@ -1,0 +1,14 @@
+{
+  "alias": "fladistctapp5",
+  "courtlistener_id": "fladistctapp5",
+  "name": "Florida Fifth District Court of Appeal",
+  "level": "state-appellate",
+  "circuit": "ca11",
+  "state": "Florida",
+  "path": "courts/eleventh-circuit/florida/state/fifth-district-court-of-appeal",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

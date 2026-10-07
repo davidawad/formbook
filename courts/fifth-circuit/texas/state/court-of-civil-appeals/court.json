@@ -1,0 +1,14 @@
+{
+  "alias": "texapp",
+  "courtlistener_id": "texapp",
+  "name": "Court of Civil Appeals of Texas",
+  "level": "state-appellate",
+  "circuit": "ca5",
+  "state": "Texas",
+  "path": "courts/fifth-circuit/texas/state/court-of-civil-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

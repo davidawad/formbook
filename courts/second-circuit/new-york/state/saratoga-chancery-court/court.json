@@ -1,0 +1,14 @@
+{
+  "alias": "nychanctsara",
+  "courtlistener_id": "nychanctsara",
+  "name": "Saratoga Chancery Court",
+  "level": "state-appellate",
+  "circuit": "ca2",
+  "state": "New York",
+  "path": "courts/second-circuit/new-york/state/saratoga-chancery-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "vtd",
+  "courtlistener_id": "vtd",
+  "name": "District Court, D. Vermont",
+  "level": "district",
+  "circuit": "ca2",
+  "state": "Vermont",
+  "path": "courts/second-circuit/vermont/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

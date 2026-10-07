@@ -1,0 +1,14 @@
+{
+  "alias": "txwd",
+  "courtlistener_id": "txwd",
+  "name": "District Court, W.D. Texas",
+  "level": "district",
+  "circuit": "ca5",
+  "state": "Texas",
+  "path": "courts/fifth-circuit/texas/federal/western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

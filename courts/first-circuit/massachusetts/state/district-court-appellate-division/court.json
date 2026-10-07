@@ -1,0 +1,14 @@
+{
+  "alias": "massdistctapp",
+  "courtlistener_id": "massdistctapp",
+  "name": "Massachusetts District Court, Appellate Division",
+  "level": "state-appellate",
+  "circuit": "ca1",
+  "state": "Massachusetts",
+  "path": "courts/first-circuit/massachusetts/state/district-court-appellate-division",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "ala",
+  "courtlistener_id": "ala",
+  "name": "Supreme Court of Alabama",
+  "level": "state-supreme",
+  "circuit": "ca11",
+  "state": "Alabama",
+  "path": "courts/eleventh-circuit/alabama/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

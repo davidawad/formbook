@@ -1,0 +1,14 @@
+{
+  "alias": "mont",
+  "courtlistener_id": "mont",
+  "name": "Montana Supreme Court",
+  "level": "state-supreme",
+  "circuit": "ca9",
+  "state": "Montana",
+  "path": "courts/ninth-circuit/montana/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

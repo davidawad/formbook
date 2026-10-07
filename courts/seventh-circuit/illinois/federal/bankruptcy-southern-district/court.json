@@ -1,0 +1,14 @@
+{
+  "alias": "ilsb",
+  "courtlistener_id": "ilsb",
+  "name": "United States Bankruptcy Court, S.D. Illinois",
+  "level": "bankruptcy",
+  "circuit": "ca7",
+  "state": "Illinois",
+  "path": "courts/seventh-circuit/illinois/federal/bankruptcy-southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

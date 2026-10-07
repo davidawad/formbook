@@ -1,0 +1,14 @@
+{
+  "alias": "mieb",
+  "courtlistener_id": "mieb",
+  "name": "United States Bankruptcy Court, E.D. Michigan",
+  "level": "bankruptcy",
+  "circuit": "ca6",
+  "state": "Michigan",
+  "path": "courts/sixth-circuit/michigan/federal/bankruptcy-eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

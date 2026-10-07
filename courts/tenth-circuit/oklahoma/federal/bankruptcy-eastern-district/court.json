@@ -1,0 +1,14 @@
+{
+  "alias": "okeb",
+  "courtlistener_id": "okeb",
+  "name": "United States Bankruptcy Court, E.D. Oklahoma",
+  "level": "bankruptcy",
+  "circuit": "ca10",
+  "state": "Oklahoma",
+  "path": "courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

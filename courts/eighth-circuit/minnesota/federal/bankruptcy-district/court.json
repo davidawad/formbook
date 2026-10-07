@@ -1,0 +1,14 @@
+{
+  "alias": "mnb",
+  "courtlistener_id": "mnb",
+  "name": "United States Bankruptcy Court, D. Minnesota",
+  "level": "bankruptcy",
+  "circuit": "ca8",
+  "state": "Minnesota",
+  "path": "courts/eighth-circuit/minnesota/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

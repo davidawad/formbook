@@ -1,0 +1,14 @@
+{
+  "alias": "fladistctapp4",
+  "courtlistener_id": "fladistctapp4",
+  "name": "Florida Fourth District Court of Appeal",
+  "level": "state-appellate",
+  "circuit": "ca11",
+  "state": "Florida",
+  "path": "courts/eleventh-circuit/florida/state/fourth-district-court-of-appeal",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

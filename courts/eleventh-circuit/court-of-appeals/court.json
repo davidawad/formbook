@@ -1,0 +1,14 @@
+{
+  "alias": "ca11",
+  "courtlistener_id": "ca11",
+  "name": "United States Court of Appeals for the Eleventh Circuit",
+  "level": "appellate",
+  "circuit": "ca11",
+  "state": null,
+  "path": "courts/eleventh-circuit/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

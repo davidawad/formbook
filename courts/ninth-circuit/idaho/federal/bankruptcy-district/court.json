@@ -1,0 +1,14 @@
+{
+  "alias": "idb",
+  "courtlistener_id": "idb",
+  "name": "United States Bankruptcy Court, D. Idaho",
+  "level": "bankruptcy",
+  "circuit": "ca9",
+  "state": "Idaho",
+  "path": "courts/ninth-circuit/idaho/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "nmd",
+  "courtlistener_id": "nmd",
+  "name": "District Court, D. New Mexico",
+  "level": "district",
+  "circuit": "ca10",
+  "state": "New Mexico",
+  "path": "courts/tenth-circuit/new-mexico/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

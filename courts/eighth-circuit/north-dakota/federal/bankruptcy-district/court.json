@@ -1,0 +1,14 @@
+{
+  "alias": "ndb",
+  "courtlistener_id": "ndb",
+  "name": "United States Bankruptcy Court, D. North Dakota",
+  "level": "bankruptcy",
+  "circuit": "ca8",
+  "state": "North Dakota",
+  "path": "courts/eighth-circuit/north-dakota/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

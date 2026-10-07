@@ -1,0 +1,14 @@
+{
+  "alias": "calsuperct",
+  "courtlistener_id": "calsuperct",
+  "name": "California Superior Court",
+  "level": "state-trial",
+  "circuit": "ca9",
+  "state": "California",
+  "path": "courts/ninth-circuit/california/state/superior-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

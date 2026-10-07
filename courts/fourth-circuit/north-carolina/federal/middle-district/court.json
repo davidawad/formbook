@@ -1,0 +1,14 @@
+{
+  "alias": "ncmd",
+  "courtlistener_id": "ncmd",
+  "name": "District Court, M.D. North Carolina",
+  "level": "district",
+  "circuit": "ca4",
+  "state": "North Carolina",
+  "path": "courts/fourth-circuit/north-carolina/federal/middle-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

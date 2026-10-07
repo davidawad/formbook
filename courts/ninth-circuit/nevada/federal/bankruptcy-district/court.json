@@ -1,0 +1,14 @@
+{
+  "alias": "nvb",
+  "courtlistener_id": "nvb",
+  "name": "United States Bankruptcy Court, D. Nevada",
+  "level": "bankruptcy",
+  "circuit": "ca9",
+  "state": "Nevada",
+  "path": "courts/ninth-circuit/nevada/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

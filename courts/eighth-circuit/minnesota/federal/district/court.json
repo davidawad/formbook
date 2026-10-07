@@ -1,0 +1,14 @@
+{
+  "alias": "mnd",
+  "courtlistener_id": "mnd",
+  "name": "District Court, D. Minnesota",
+  "level": "district",
+  "circuit": "ca8",
+  "state": "Minnesota",
+  "path": "courts/eighth-circuit/minnesota/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

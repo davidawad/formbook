@@ -1,0 +1,14 @@
+{
+  "alias": "almb",
+  "courtlistener_id": "almb",
+  "name": "United States Bankruptcy Court for the Middle District of Alabama",
+  "level": "bankruptcy",
+  "circuit": "ca11",
+  "state": "Alabama",
+  "path": "courts/eleventh-circuit/alabama/federal/bankruptcy-middle-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "ared",
+  "courtlistener_id": "ared",
+  "name": "United States District Court for the Eastern District of Arkansas",
+  "level": "district",
+  "circuit": "ca8",
+  "state": "Arkansas",
+  "path": "courts/eighth-circuit/arkansas/federal/eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

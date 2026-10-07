@@ -1,0 +1,14 @@
+{
+  "alias": "coloworkcompcom",
+  "courtlistener_id": "coloworkcompcom",
+  "name": "Colorado Industrial Claim Appeals office",
+  "level": "state-appellate",
+  "circuit": "ca10",
+  "state": "Colorado",
+  "path": "courts/tenth-circuit/colorado/state/industrial-claim-appeals-office",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "vawd",
+  "courtlistener_id": "vawd",
+  "name": "District Court, W.D. Virginia",
+  "level": "district",
+  "circuit": "ca4",
+  "state": "Virginia",
+  "path": "courts/fourth-circuit/virginia/federal/western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

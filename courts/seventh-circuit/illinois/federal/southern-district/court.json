@@ -1,0 +1,14 @@
+{
+  "alias": "ilsd",
+  "courtlistener_id": "ilsd",
+  "name": "District Court, S.D. Illinois",
+  "level": "district",
+  "circuit": "ca7",
+  "state": "Illinois",
+  "path": "courts/seventh-circuit/illinois/federal/southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

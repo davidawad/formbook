@@ -1,0 +1,14 @@
+{
+  "alias": "va",
+  "courtlistener_id": "va",
+  "name": "Supreme Court of Virginia",
+  "level": "state-supreme",
+  "circuit": "ca4",
+  "state": "Virginia",
+  "path": "courts/fourth-circuit/virginia/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

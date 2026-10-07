@@ -1,0 +1,14 @@
+{
+  "alias": "ca10",
+  "courtlistener_id": "ca10",
+  "name": "Court of Appeals for the Tenth Circuit",
+  "level": "appellate",
+  "circuit": "ca10",
+  "state": null,
+  "path": "courts/tenth-circuit/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

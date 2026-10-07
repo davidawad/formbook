@@ -1,0 +1,14 @@
+{
+  "alias": "calctapp2d",
+  "courtlistener_id": "calctapp2d",
+  "name": "California Court of Appeal, Second Appellate District",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "California",
+  "path": "courts/ninth-circuit/california/state/court-of-appeal-second-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

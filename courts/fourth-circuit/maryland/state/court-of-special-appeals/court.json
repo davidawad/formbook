@@ -1,0 +1,14 @@
+{
+  "alias": "mdctspecapp",
+  "courtlistener_id": "mdctspecapp",
+  "name": "Court of Special Appeals of Maryland",
+  "level": "state-appellate",
+  "circuit": "ca4",
+  "state": "Maryland",
+  "path": "courts/fourth-circuit/maryland/state/court-of-special-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

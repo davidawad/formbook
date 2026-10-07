@@ -1,0 +1,14 @@
+{
+  "alias": "ctd",
+  "courtlistener_id": "ctd",
+  "name": "United States District Court for the District of Connecticut",
+  "level": "district",
+  "circuit": "ca2",
+  "state": "Connecticut",
+  "path": "courts/second-circuit/connecticut/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

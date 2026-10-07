@@ -1,0 +1,14 @@
+{
+  "alias": "connappct",
+  "courtlistener_id": "connappct",
+  "name": "Connecticut Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca2",
+  "state": "Connecticut",
+  "path": "courts/second-circuit/connecticut/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "flmb",
+  "courtlistener_id": "flmb",
+  "name": "United States Bankruptcy Court, M.D. Florida",
+  "level": "bankruptcy",
+  "circuit": "ca11",
+  "state": "Florida",
+  "path": "courts/eleventh-circuit/florida/federal/bankruptcy-middle-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

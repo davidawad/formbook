@@ -1,0 +1,14 @@
+{
+  "alias": "bap1",
+  "courtlistener_id": "bap1",
+  "name": "United States Bankruptcy Appellate Panel of The First Circuit",
+  "level": "bap",
+  "circuit": "ca1",
+  "state": null,
+  "path": "courts/first-circuit/bankruptcy-appellate-panel",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

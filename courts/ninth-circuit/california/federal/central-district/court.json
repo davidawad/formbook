@@ -1,0 +1,14 @@
+{
+  "alias": "cacd",
+  "courtlistener_id": "cacd",
+  "name": "United States District Court for the Central District of California",
+  "level": "district",
+  "circuit": "ca9",
+  "state": "California",
+  "path": "courts/ninth-circuit/california/federal/central-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,2 @@
+# Filed exemplars are small public court records; PDFs are committed as binary.
+*.pdf binary

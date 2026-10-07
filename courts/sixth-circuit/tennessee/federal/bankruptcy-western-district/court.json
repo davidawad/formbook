@@ -1,0 +1,14 @@
+{
+  "alias": "tnwb",
+  "courtlistener_id": "tnwb",
+  "name": "United States Bankruptcy Court, W.D. Tennessee",
+  "level": "bankruptcy",
+  "circuit": "ca6",
+  "state": "Tennessee",
+  "path": "courts/sixth-circuit/tennessee/federal/bankruptcy-western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

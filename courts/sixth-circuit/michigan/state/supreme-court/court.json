@@ -1,0 +1,14 @@
+{
+  "alias": "mich",
+  "courtlistener_id": "mich",
+  "name": "Michigan Supreme Court",
+  "level": "state-supreme",
+  "circuit": "ca6",
+  "state": "Michigan",
+  "path": "courts/sixth-circuit/michigan/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

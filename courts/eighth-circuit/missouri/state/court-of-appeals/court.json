@@ -1,0 +1,14 @@
+{
+  "alias": "moctapp",
+  "courtlistener_id": "moctapp",
+  "name": "Missouri Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca8",
+  "state": "Missouri",
+  "path": "courts/eighth-circuit/missouri/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

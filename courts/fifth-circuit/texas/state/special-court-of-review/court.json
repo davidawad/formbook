@@ -1,0 +1,14 @@
+{
+  "alias": "texreview",
+  "courtlistener_id": "texreview",
+  "name": "Texas Special Court of Review",
+  "level": "state-appellate",
+  "circuit": "ca5",
+  "state": "Texas",
+  "path": "courts/fifth-circuit/texas/state/special-court-of-review",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

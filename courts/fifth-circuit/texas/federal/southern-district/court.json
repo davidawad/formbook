@@ -1,0 +1,14 @@
+{
+  "alias": "txsd",
+  "courtlistener_id": "txsd",
+  "name": "District Court, S.D. Texas",
+  "level": "district",
+  "circuit": "ca5",
+  "state": "Texas",
+  "path": "courts/fifth-circuit/texas/federal/southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

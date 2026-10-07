@@ -1,0 +1,14 @@
+{
+  "alias": "utd",
+  "courtlistener_id": "utd",
+  "name": "District Court, D. Utah",
+  "level": "district",
+  "circuit": "ca10",
+  "state": "Utah",
+  "path": "courts/tenth-circuit/utah/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

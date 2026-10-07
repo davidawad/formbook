@@ -1,0 +1,14 @@
+{
+  "alias": "tennctapp",
+  "courtlistener_id": "tennctapp",
+  "name": "Court of Appeals of Tennessee",
+  "level": "state-appellate",
+  "circuit": "ca6",
+  "state": "Tennessee",
+  "path": "courts/sixth-circuit/tennessee/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

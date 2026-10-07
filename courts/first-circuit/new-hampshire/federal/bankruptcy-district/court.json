@@ -1,0 +1,14 @@
+{
+  "alias": "nhb",
+  "courtlistener_id": "nhb",
+  "name": "United States Bankruptcy Court, D. New Hampshire",
+  "level": "bankruptcy",
+  "circuit": "ca1",
+  "state": "New Hampshire",
+  "path": "courts/first-circuit/new-hampshire/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

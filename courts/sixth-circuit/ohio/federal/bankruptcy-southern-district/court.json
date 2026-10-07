@@ -1,0 +1,14 @@
+{
+  "alias": "ohsb",
+  "courtlistener_id": "ohsb",
+  "name": "United States Bankruptcy Court, S.D. Ohio",
+  "level": "bankruptcy",
+  "circuit": "ca6",
+  "state": "Ohio",
+  "path": "courts/sixth-circuit/ohio/federal/bankruptcy-southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "pawd",
+  "courtlistener_id": "pawd",
+  "name": "District Court, W.D. Pennsylvania",
+  "level": "district",
+  "circuit": "ca3",
+  "state": "Pennsylvania",
+  "path": "courts/third-circuit/pennsylvania/federal/western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

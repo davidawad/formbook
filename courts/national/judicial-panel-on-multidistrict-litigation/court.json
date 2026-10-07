@@ -1,0 +1,14 @@
+{
+  "alias": "jpml",
+  "courtlistener_id": "jpml",
+  "name": "United States Judicial Panel on Multidistrict Litigation",
+  "level": "national",
+  "circuit": null,
+  "state": null,
+  "path": "courts/national/judicial-panel-on-multidistrict-litigation",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

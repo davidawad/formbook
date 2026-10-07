@@ -1,0 +1,14 @@
+{
+  "alias": "delch",
+  "courtlistener_id": "delch",
+  "name": "Delaware Court of Chancery",
+  "level": "state-appellate",
+  "circuit": "ca3",
+  "state": "Delaware",
+  "path": "courts/third-circuit/delaware/state/court-of-chancery",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

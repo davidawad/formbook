@@ -1,0 +1,14 @@
+{
+  "alias": "mied",
+  "courtlistener_id": "mied",
+  "name": "District Court, E.D. Michigan",
+  "level": "district",
+  "circuit": "ca6",
+  "state": "Michigan",
+  "path": "courts/sixth-circuit/michigan/federal/eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

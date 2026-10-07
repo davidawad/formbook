@@ -1,0 +1,14 @@
+{
+  "alias": "nceb",
+  "courtlistener_id": "nceb",
+  "name": "United States Bankruptcy Court, E.D. North Carolina",
+  "level": "bankruptcy",
+  "circuit": "ca4",
+  "state": "North Carolina",
+  "path": "courts/fourth-circuit/north-carolina/federal/bankruptcy-eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

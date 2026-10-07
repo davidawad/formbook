@@ -1,0 +1,14 @@
+{
+  "alias": "fladistctapp6",
+  "courtlistener_id": "fladistctapp6",
+  "name": "Florida Sixth District Court of Appeal",
+  "level": "state-appellate",
+  "circuit": "ca11",
+  "state": "Florida",
+  "path": "courts/eleventh-circuit/florida/state/sixth-district-court-of-appeal",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

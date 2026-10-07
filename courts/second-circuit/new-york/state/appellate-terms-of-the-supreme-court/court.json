@@ -1,0 +1,14 @@
+{
+  "alias": "nyappterm",
+  "courtlistener_id": "nyappterm",
+  "name": "Appellate Terms of the Supreme Court of New York",
+  "level": "state-appellate",
+  "circuit": "ca2",
+  "state": "New York",
+  "path": "courts/second-circuit/new-york/state/appellate-terms-of-the-supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

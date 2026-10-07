@@ -1,0 +1,14 @@
+{
+  "alias": "calctapp1d",
+  "courtlistener_id": "calctapp1d",
+  "name": "California Court of Appeal, First Appellate District",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "California",
+  "path": "courts/ninth-circuit/california/state/court-of-appeal-first-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

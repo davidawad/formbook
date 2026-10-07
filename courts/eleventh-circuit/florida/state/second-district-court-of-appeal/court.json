@@ -1,0 +1,14 @@
+{
+  "alias": "fladistctapp2",
+  "courtlistener_id": "fladistctapp2",
+  "name": "Florida Second District Court of Appeal",
+  "level": "state-appellate",
+  "circuit": "ca11",
+  "state": "Florida",
+  "path": "courts/eleventh-circuit/florida/state/second-district-court-of-appeal",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

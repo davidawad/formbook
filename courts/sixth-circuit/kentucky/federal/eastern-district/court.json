@@ -1,0 +1,14 @@
+{
+  "alias": "kyed",
+  "courtlistener_id": "kyed",
+  "name": "District Court, E.D. Kentucky",
+  "level": "district",
+  "circuit": "ca6",
+  "state": "Kentucky",
+  "path": "courts/sixth-circuit/kentucky/federal/eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "alacivapp",
+  "courtlistener_id": "alacivapp",
+  "name": "Alabama Court of Civil Appeals",
+  "level": "state-appellate",
+  "circuit": "ca11",
+  "state": "Alabama",
+  "path": "courts/eleventh-circuit/alabama/state/court-of-civil-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

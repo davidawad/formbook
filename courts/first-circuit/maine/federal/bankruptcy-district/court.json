@@ -1,0 +1,14 @@
+{
+  "alias": "meb",
+  "courtlistener_id": "meb",
+  "name": "United States Bankruptcy Court, D. Maine",
+  "level": "bankruptcy",
+  "circuit": "ca1",
+  "state": "Maine",
+  "path": "courts/first-circuit/maine/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

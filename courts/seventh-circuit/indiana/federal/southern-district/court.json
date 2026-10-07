@@ -1,0 +1,14 @@
+{
+  "alias": "insd",
+  "courtlistener_id": "insd",
+  "name": "District Court, S.D. Indiana",
+  "level": "district",
+  "circuit": "ca7",
+  "state": "Indiana",
+  "path": "courts/seventh-circuit/indiana/federal/southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

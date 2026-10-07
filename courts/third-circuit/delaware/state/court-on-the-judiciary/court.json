@@ -1,0 +1,14 @@
+{
+  "alias": "deljudct",
+  "courtlistener_id": "deljudct",
+  "name": "Court on the Judiciary of Delaware",
+  "level": "state-appellate",
+  "circuit": "ca3",
+  "state": "Delaware",
+  "path": "courts/third-circuit/delaware/state/court-on-the-judiciary",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

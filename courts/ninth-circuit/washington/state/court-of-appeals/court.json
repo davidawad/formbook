@@ -1,0 +1,14 @@
+{
+  "alias": "washctapp",
+  "courtlistener_id": "washctapp",
+  "name": "Court of Appeals of Washington",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "Washington",
+  "path": "courts/ninth-circuit/washington/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

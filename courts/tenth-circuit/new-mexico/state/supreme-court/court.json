@@ -1,0 +1,14 @@
+{
+  "alias": "nm",
+  "courtlistener_id": "nm",
+  "name": "New Mexico Supreme Court",
+  "level": "state-supreme",
+  "circuit": "ca10",
+  "state": "New Mexico",
+  "path": "courts/tenth-circuit/new-mexico/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

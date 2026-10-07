@@ -1,0 +1,14 @@
+{
+  "alias": "dc",
+  "courtlistener_id": "dc",
+  "name": "District of Columbia Court of Appeals",
+  "level": "state-supreme",
+  "circuit": "cadc",
+  "state": "District of Columbia",
+  "path": "courts/dc-circuit/district-of-columbia/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

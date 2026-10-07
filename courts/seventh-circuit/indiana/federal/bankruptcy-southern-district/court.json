@@ -1,0 +1,14 @@
+{
+  "alias": "insb",
+  "courtlistener_id": "insb",
+  "name": "United States Bankruptcy Court, S.D. Indiana",
+  "level": "bankruptcy",
+  "circuit": "ca7",
+  "state": "Indiana",
+  "path": "courts/seventh-circuit/indiana/federal/bankruptcy-southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

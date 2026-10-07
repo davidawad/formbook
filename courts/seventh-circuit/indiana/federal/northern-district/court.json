@@ -1,0 +1,14 @@
+{
+  "alias": "innd",
+  "courtlistener_id": "innd",
+  "name": "District Court, N.D. Indiana",
+  "level": "district",
+  "circuit": "ca7",
+  "state": "Indiana",
+  "path": "courts/seventh-circuit/indiana/federal/northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

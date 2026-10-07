@@ -1,0 +1,14 @@
+{
+  "alias": "azd",
+  "courtlistener_id": "azd",
+  "name": "United States District Court for the District of Arizona",
+  "level": "district",
+  "circuit": "ca9",
+  "state": "Arizona",
+  "path": "courts/ninth-circuit/arizona/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

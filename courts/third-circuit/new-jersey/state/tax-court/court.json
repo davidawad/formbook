@@ -1,0 +1,14 @@
+{
+  "alias": "njtaxct",
+  "courtlistener_id": "njtaxct",
+  "name": "New Jersey Tax Court",
+  "level": "state-appellate",
+  "circuit": "ca3",
+  "state": "New Jersey",
+  "path": "courts/third-circuit/new-jersey/state/tax-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

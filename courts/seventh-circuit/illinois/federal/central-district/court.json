@@ -1,0 +1,14 @@
+{
+  "alias": "ilcd",
+  "courtlistener_id": "ilcd",
+  "name": "District Court, C.D. Illinois",
+  "level": "district",
+  "circuit": "ca7",
+  "state": "Illinois",
+  "path": "courts/seventh-circuit/illinois/federal/central-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

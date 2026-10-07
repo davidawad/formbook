@@ -1,0 +1,14 @@
+{
+  "alias": "akb",
+  "courtlistener_id": "akb",
+  "name": "United States Bankruptcy Court, D. Alaska",
+  "level": "bankruptcy",
+  "circuit": "ca9",
+  "state": "Alaska",
+  "path": "courts/ninth-circuit/alaska/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

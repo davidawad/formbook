@@ -1,0 +1,14 @@
+{
+  "alias": "ord",
+  "courtlistener_id": "ord",
+  "name": "District Court, D. Oregon",
+  "level": "district",
+  "circuit": "ca9",
+  "state": "Oregon",
+  "path": "courts/ninth-circuit/oregon/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

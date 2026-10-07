@@ -1,0 +1,14 @@
+{
+  "alias": "moctappwd",
+  "courtlistener_id": "moctappwd",
+  "name": "Missouri Court of Appeals, Western District",
+  "level": "state-appellate",
+  "circuit": "ca8",
+  "state": "Missouri",
+  "path": "courts/eighth-circuit/missouri/state/court-of-appeals-western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "bap9",
+  "courtlistener_id": "bap9",
+  "name": "United States Bankruptcy Appellate Panel of The Ninth Circuit",
+  "level": "bap",
+  "circuit": "ca9",
+  "state": null,
+  "path": "courts/ninth-circuit/bankruptcy-appellate-panel",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

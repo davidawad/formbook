@@ -1,0 +1,14 @@
+{
+  "alias": "ca9",
+  "courtlistener_id": "ca9",
+  "name": "Court of Appeals for the Ninth Circuit",
+  "level": "appellate",
+  "circuit": "ca9",
+  "state": null,
+  "path": "courts/ninth-circuit/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

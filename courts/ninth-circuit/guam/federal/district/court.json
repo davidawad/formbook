@@ -1,0 +1,14 @@
+{
+  "alias": "gud",
+  "courtlistener_id": "gud",
+  "name": "District Court, D. Guam",
+  "level": "district",
+  "circuit": "ca9",
+  "state": "Guam",
+  "path": "courts/ninth-circuit/guam/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

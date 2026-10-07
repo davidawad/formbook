@@ -1,0 +1,14 @@
+{
+  "alias": "cjdpa",
+  "courtlistener_id": "cjdpa",
+  "name": "Court of Judicial Discipline of Pennsylvania",
+  "level": "state-appellate",
+  "circuit": "ca3",
+  "state": "Pennsylvania",
+  "path": "courts/third-circuit/pennsylvania/state/court-of-judicial-discipline",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

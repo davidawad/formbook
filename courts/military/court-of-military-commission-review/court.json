@@ -1,0 +1,14 @@
+{
+  "alias": "mc",
+  "courtlistener_id": "mc",
+  "name": "United States Court of Military Commission Review",
+  "level": "military",
+  "circuit": null,
+  "state": null,
+  "path": "courts/military/court-of-military-commission-review",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

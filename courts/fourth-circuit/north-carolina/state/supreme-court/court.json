@@ -1,0 +1,14 @@
+{
+  "alias": "nc",
+  "courtlistener_id": "nc",
+  "name": "Supreme Court of North Carolina",
+  "level": "state-supreme",
+  "circuit": "ca4",
+  "state": "North Carolina",
+  "path": "courts/fourth-circuit/north-carolina/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

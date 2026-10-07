@@ -1,0 +1,14 @@
+{
+  "alias": "oklacivapp",
+  "courtlistener_id": "oklacivapp",
+  "name": "Court of Civil Appeals of Oklahoma",
+  "level": "state-appellate",
+  "circuit": "ca10",
+  "state": "Oklahoma",
+  "path": "courts/tenth-circuit/oklahoma/state/court-of-civil-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

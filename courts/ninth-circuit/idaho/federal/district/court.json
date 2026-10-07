@@ -1,0 +1,14 @@
+{
+  "alias": "idd",
+  "courtlistener_id": "idd",
+  "name": "United States District Court for the District of Idaho",
+  "level": "district",
+  "circuit": "ca9",
+  "state": "Idaho",
+  "path": "courts/ninth-circuit/idaho/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "gactapp",
+  "courtlistener_id": "gactapp",
+  "name": "Georgia Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca11",
+  "state": "Georgia",
+  "path": "courts/eleventh-circuit/georgia/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

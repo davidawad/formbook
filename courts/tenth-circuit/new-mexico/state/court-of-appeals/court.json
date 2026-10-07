@@ -1,0 +1,14 @@
+{
+  "alias": "nmctapp",
+  "courtlistener_id": "nmctapp",
+  "name": "New Mexico Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca10",
+  "state": "New Mexico",
+  "path": "courts/tenth-circuit/new-mexico/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

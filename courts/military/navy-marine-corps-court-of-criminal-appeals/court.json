@@ -1,0 +1,14 @@
+{
+  "alias": "nmcca",
+  "courtlistener_id": "nmcca",
+  "name": "U S Navy Marine Corps Court of Criminal Appeals",
+  "level": "military",
+  "circuit": null,
+  "state": null,
+  "path": "courts/military/navy-marine-corps-court-of-criminal-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

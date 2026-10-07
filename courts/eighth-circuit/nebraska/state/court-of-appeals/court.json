@@ -1,0 +1,14 @@
+{
+  "alias": "nebctapp",
+  "courtlistener_id": "nebctapp",
+  "name": "Nebraska Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca8",
+  "state": "Nebraska",
+  "path": "courts/eighth-circuit/nebraska/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

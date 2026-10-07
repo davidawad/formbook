@@ -1,0 +1,14 @@
+{
+  "alias": "moed",
+  "courtlistener_id": "moed",
+  "name": "District Court, E.D. Missouri",
+  "level": "district",
+  "circuit": "ca8",
+  "state": "Missouri",
+  "path": "courts/eighth-circuit/missouri/federal/eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

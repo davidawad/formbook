@@ -1,0 +1,14 @@
+{
+  "alias": "alnb",
+  "courtlistener_id": "alnb",
+  "name": "United States Bankruptcy Court, N.D. Alabama",
+  "level": "bankruptcy",
+  "circuit": "ca11",
+  "state": "Alabama",
+  "path": "courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

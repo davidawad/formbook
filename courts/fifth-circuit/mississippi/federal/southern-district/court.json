@@ -1,0 +1,14 @@
+{
+  "alias": "mssd",
+  "courtlistener_id": "mssd",
+  "name": "District Court, S.D. Mississippi",
+  "level": "district",
+  "circuit": "ca5",
+  "state": "Mississippi",
+  "path": "courts/fifth-circuit/mississippi/federal/southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

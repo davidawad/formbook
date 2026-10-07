@@ -1,0 +1,14 @@
+{
+  "alias": "ohnb",
+  "courtlistener_id": "ohnb",
+  "name": "United States Bankruptcy Court, N.D. Ohio",
+  "level": "bankruptcy",
+  "circuit": "ca6",
+  "state": "Ohio",
+  "path": "courts/sixth-circuit/ohio/federal/bankruptcy-northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

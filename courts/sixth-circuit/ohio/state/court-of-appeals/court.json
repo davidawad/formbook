@@ -1,0 +1,14 @@
+{
+  "alias": "ohioctapp",
+  "courtlistener_id": "ohioctapp",
+  "name": "Ohio Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca6",
+  "state": "Ohio",
+  "path": "courts/sixth-circuit/ohio/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

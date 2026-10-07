@@ -1,0 +1,14 @@
+{
+  "alias": "orctapp",
+  "courtlistener_id": "orctapp",
+  "name": "Court of Appeals of Oregon",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "Oregon",
+  "path": "courts/ninth-circuit/oregon/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

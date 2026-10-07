@@ -1,0 +1,14 @@
+{
+  "alias": "okwb",
+  "courtlistener_id": "okwb",
+  "name": "United States Bankruptcy Court, W.D. Oklahoma",
+  "level": "bankruptcy",
+  "circuit": "ca10",
+  "state": "Oklahoma",
+  "path": "courts/tenth-circuit/oklahoma/federal/bankruptcy-western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "sdd",
+  "courtlistener_id": "sdd",
+  "name": "District Court, D. South Dakota",
+  "level": "district",
+  "circuit": "ca8",
+  "state": "South Dakota",
+  "path": "courts/eighth-circuit/south-dakota/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "med",
+  "courtlistener_id": "med",
+  "name": "District Court, D. Maine",
+  "level": "district",
+  "circuit": "ca1",
+  "state": "Maine",
+  "path": "courts/first-circuit/maine/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

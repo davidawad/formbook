@@ -1,0 +1,14 @@
+{
+  "alias": "lamd",
+  "courtlistener_id": "lamd",
+  "name": "District Court, M.D. Louisiana",
+  "level": "district",
+  "circuit": "ca5",
+  "state": "Louisiana",
+  "path": "courts/fifth-circuit/louisiana/federal/middle-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

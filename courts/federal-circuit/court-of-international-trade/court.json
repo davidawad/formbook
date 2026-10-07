@@ -1,0 +1,14 @@
+{
+  "alias": "cit",
+  "courtlistener_id": "cit",
+  "name": "United States Court of International Trade",
+  "level": "national",
+  "circuit": "cafc",
+  "state": null,
+  "path": "courts/federal-circuit/court-of-international-trade",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "minnctapp",
+  "courtlistener_id": "minnctapp",
+  "name": "Court of Appeals of Minnesota",
+  "level": "state-appellate",
+  "circuit": "ca8",
+  "state": "Minnesota",
+  "path": "courts/eighth-circuit/minnesota/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

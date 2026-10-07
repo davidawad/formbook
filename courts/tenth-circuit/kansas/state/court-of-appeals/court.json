@@ -1,0 +1,14 @@
+{
+  "alias": "kanctapp",
+  "courtlistener_id": "kanctapp",
+  "name": "Court of Appeals of Kansas",
+  "level": "state-appellate",
+  "circuit": "ca10",
+  "state": "Kansas",
+  "path": "courts/tenth-circuit/kansas/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

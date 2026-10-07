@@ -1,0 +1,14 @@
+{
+  "alias": "areb",
+  "courtlistener_id": "areb",
+  "name": "United States Bankruptcy Court, E.D. Arkansas",
+  "level": "bankruptcy",
+  "circuit": "ca8",
+  "state": "Arkansas",
+  "path": "courts/eighth-circuit/arkansas/federal/bankruptcy-eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

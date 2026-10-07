@@ -1,0 +1,14 @@
+{
+  "alias": "massappct",
+  "courtlistener_id": "massappct",
+  "name": "Massachusetts Appeals Court",
+  "level": "state-appellate",
+  "circuit": "ca1",
+  "state": "Massachusetts",
+  "path": "courts/first-circuit/massachusetts/state/appeals-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

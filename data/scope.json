@@ -1,0 +1,232 @@
+{
+  "_comment": "Scope for the formbook tree. tools/gen_tree.py reads this plus data/courts-db.json and data/circuits.json; rerunning it reproduces the tree. A court is ACTIVE if any `dates` entry in courts-db has end == null. Ids are CourtListener court ids; never invent ids for courts that exist in courts-db.",
+  "active_rule": "any dates[].end == null",
+  "allow": {
+    "scotus": [
+      "scotus"
+    ],
+    "circuit_courts_of_appeals": [
+      "ca1",
+      "ca2",
+      "ca3",
+      "ca4",
+      "ca5",
+      "ca6",
+      "ca7",
+      "ca8",
+      "ca9",
+      "ca10",
+      "ca11",
+      "cadc",
+      "cafc"
+    ],
+    "bankruptcy_appellate_panels": [
+      "bap1",
+      "bap6",
+      "bap8",
+      "bap9",
+      "bap10"
+    ],
+    "federal_circuit_feeders": [
+      "cit",
+      "uscfc",
+      "cavc",
+      "ptab",
+      "ttab"
+    ],
+    "military": [
+      "armfor",
+      "acca",
+      "afcca",
+      "nmcca",
+      "uscgcoca",
+      "mc"
+    ],
+    "national": [
+      "tax",
+      "jpml",
+      "fisc",
+      "fiscr",
+      "bia"
+    ],
+    "extra_territorial_appellate": [
+      "prapp"
+    ]
+  },
+  "levels": {
+    "_comment": "Level for explicitly allowed national/agency/military ids. Everything else is derived from the rules below.",
+    "cafc": "appellate",
+    "cit": "national",
+    "uscfc": "national",
+    "cavc": "national",
+    "ptab": "agency",
+    "ttab": "agency",
+    "bia": "agency",
+    "tax": "national",
+    "jpml": "national",
+    "fisc": "national",
+    "fiscr": "national",
+    "armfor": "military",
+    "acca": "military",
+    "afcca": "military",
+    "nmcca": "military",
+    "uscgcoca": "military",
+    "mc": "military"
+  },
+  "rules": [
+    {
+      "name": "federal-districts",
+      "system": "federal",
+      "type": "trial",
+      "active": true,
+      "exclude_ids": [
+        "usdistct"
+      ],
+      "level": "district",
+      "placement": "circuit/state/federal"
+    },
+    {
+      "name": "federal-bankruptcy",
+      "system": "federal",
+      "type": "bankruptcy",
+      "active": true,
+      "exclude_id_prefixes": [
+        "bap"
+      ],
+      "level": "bankruptcy",
+      "placement": "circuit/state/federal"
+    },
+    {
+      "name": "state-appellate",
+      "system": "state",
+      "type": "appellate",
+      "active": true,
+      "level": "state-appellate or state-supreme",
+      "placement": "circuit/state/state"
+    }
+  ],
+  "state_supreme": {
+    "_comment": "State courts of last resort get level state-supreme: name matches the regex, or id is listed. Everything else state-level is state-appellate.",
+    "name_regex": "^(Supreme (Judicial )?Court\\b|.* Supreme (Judicial )?Court$)",
+    "extra_ids": [
+      "md",
+      "ny",
+      "dc",
+      "texcrimapp",
+      "oklacrimapp",
+      "amsamoa"
+    ]
+  },
+  "state_trial_allow": [
+    {
+      "id": "calsuperct",
+      "location": "California",
+      "subdivisions": [
+        {
+          "alias": "calsuperct-sandiego",
+          "name": "California Superior Court, San Diego County",
+          "slug": "san-diego-county",
+          "courtlistener_id": null,
+          "parent_alias": "calsuperct",
+          "legacy_aliases": [
+            "calsuppctsd"
+          ],
+          "notes": "county subdivision; not a CourtListener id"
+        }
+      ]
+    }
+  ],
+  "deny": {
+    "ids": [
+      "judcoun",
+      "usjudconfcomdis",
+      "usjc",
+      "fcc",
+      "olc",
+      "energyoha",
+      "educationoha",
+      "deptinterior",
+      "uslandoffice",
+      "ussurveyor",
+      "reglrailreorgct",
+      "atrc",
+      "usnbdrev",
+      "usdistct"
+    ],
+    "id_prefixes": [
+      "judcoun",
+      "circt"
+    ],
+    "systems": [
+      "tribal",
+      "international",
+      "colonial",
+      "special",
+      ""
+    ],
+    "state_trial_courts": "all denied except state_trial_allow",
+    "unplaceable_locations": [
+      "Dakota Territory"
+    ]
+  },
+  "slug_overrides": {
+    "_comment": "Folder slugs are derived deterministically from names (tools/gen_tree.py slugify). Overrides only where derivation is ugly.",
+    "nmi": "supreme-court",
+    "scotus": "supreme-court-of-the-united-states",
+    "cafc": "court-of-appeals",
+    "prapp": "court-of-appeals"
+  },
+  "note_overrides": {
+    "amsamoa": "American Samoa has no federal district court; placed under ca9 by convention.",
+    "prapp": "courts-db system is 'federal' but this is the Puerto Rico commonwealth Court of Appeals; included as a territorial appellate court.",
+    "wvnb": "courts-db name reads 'District Court'; id suffix and type indicate the bankruptcy court."
+  },
+  "groups": [
+    {
+      "key": "scotus",
+      "name": "Supreme Court of the United States",
+      "folder": "supreme-court-of-the-united-states",
+      "ids": [
+        "scotus"
+      ]
+    },
+    {
+      "key": "federal-circuit",
+      "name": "Federal Circuit and feeder courts",
+      "folder": "federal-circuit",
+      "ids": [
+        "cafc",
+        "cit",
+        "uscfc",
+        "cavc",
+        "ptab",
+        "ttab"
+      ]
+    },
+    {
+      "key": "military",
+      "name": "Military courts",
+      "folder": "military",
+      "ids": [
+        "armfor",
+        "acca",
+        "afcca",
+        "nmcca",
+        "uscgcoca",
+        "mc"
+      ]
+    },
+    {
+      "key": "national",
+      "name": "National courts and tribunals",
+      "folder": "national",
+      "ids": [
+        "tax",
+        "jpml",
+        "fisc",
+        "fiscr",
+        "bia"
+      ]
+    }
+  ]
+}

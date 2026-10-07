@@ -1,0 +1,14 @@
+{
+  "alias": "calappdeptsuper",
+  "courtlistener_id": "calappdeptsuper",
+  "name": "California Superior Court, Appellate Division",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "California",
+  "path": "courts/ninth-circuit/california/state/superior-court-appellate-division",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

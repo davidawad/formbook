@@ -1,0 +1,14 @@
+{
+  "alias": "bia",
+  "courtlistener_id": "bia",
+  "name": "United States Department of Justice Board of Immigration Appeals",
+  "level": "agency",
+  "circuit": null,
+  "state": null,
+  "path": "courts/national/board-of-immigration-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

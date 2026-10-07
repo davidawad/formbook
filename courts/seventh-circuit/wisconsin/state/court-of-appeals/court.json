@@ -1,0 +1,14 @@
+{
+  "alias": "wisctapp",
+  "courtlistener_id": "wisctapp",
+  "name": "Court of Appeals of Wisconsin",
+  "level": "state-appellate",
+  "circuit": "ca7",
+  "state": "Wisconsin",
+  "path": "courts/seventh-circuit/wisconsin/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

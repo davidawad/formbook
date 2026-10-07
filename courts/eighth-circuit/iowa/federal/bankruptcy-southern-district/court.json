@@ -1,0 +1,14 @@
+{
+  "alias": "iasb",
+  "courtlistener_id": "iasb",
+  "name": "United States Bankruptcy Court, S.D. Iowa",
+  "level": "bankruptcy",
+  "circuit": "ca8",
+  "state": "Iowa",
+  "path": "courts/eighth-circuit/iowa/federal/bankruptcy-southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

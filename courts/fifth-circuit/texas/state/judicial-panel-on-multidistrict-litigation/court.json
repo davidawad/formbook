@@ -1,0 +1,14 @@
+{
+  "alias": "texjpml",
+  "courtlistener_id": "texjpml",
+  "name": "Texas Judicial Panel on Multidistrict Litigation",
+  "level": "state-appellate",
+  "circuit": "ca5",
+  "state": "Texas",
+  "path": "courts/fifth-circuit/texas/state/judicial-panel-on-multidistrict-litigation",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

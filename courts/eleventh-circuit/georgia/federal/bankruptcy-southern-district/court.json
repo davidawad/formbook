@@ -1,0 +1,14 @@
+{
+  "alias": "gasb",
+  "courtlistener_id": "gasb",
+  "name": "United States Bankruptcy Court, S.D. Georgia",
+  "level": "bankruptcy",
+  "circuit": "ca11",
+  "state": "Georgia",
+  "path": "courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

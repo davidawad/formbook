@@ -1,0 +1,14 @@
+{
+  "alias": "dcd",
+  "courtlistener_id": "dcd",
+  "name": "District Court, District of Columbia",
+  "level": "district",
+  "circuit": "cadc",
+  "state": "District of Columbia",
+  "path": "courts/dc-circuit/district-of-columbia/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

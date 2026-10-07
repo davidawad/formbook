@@ -1,0 +1,14 @@
+{
+  "alias": "kyeb",
+  "courtlistener_id": "kyeb",
+  "name": "United States Bankruptcy Court, E.D. Kentucky",
+  "level": "bankruptcy",
+  "circuit": "ca6",
+  "state": "Kentucky",
+  "path": "courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

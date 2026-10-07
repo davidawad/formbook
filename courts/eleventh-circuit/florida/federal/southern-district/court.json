@@ -1,0 +1,14 @@
+{
+  "alias": "flsd",
+  "courtlistener_id": "flsd",
+  "name": "United States District Court for the Southern District of Florida",
+  "level": "district",
+  "circuit": "ca11",
+  "state": "Florida",
+  "path": "courts/eleventh-circuit/florida/federal/southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

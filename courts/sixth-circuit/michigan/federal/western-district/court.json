@@ -1,0 +1,14 @@
+{
+  "alias": "miwd",
+  "courtlistener_id": "miwd",
+  "name": "District Court, W.D. Michigan",
+  "level": "district",
+  "circuit": "ca6",
+  "state": "Michigan",
+  "path": "courts/sixth-circuit/michigan/federal/western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

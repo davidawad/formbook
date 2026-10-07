@@ -1,0 +1,14 @@
+{
+  "alias": "illappct",
+  "courtlistener_id": "illappct",
+  "name": "Appellate Court of Illinois",
+  "level": "state-appellate",
+  "circuit": "ca7",
+  "state": "Illinois",
+  "path": "courts/seventh-circuit/illinois/state/appellate-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

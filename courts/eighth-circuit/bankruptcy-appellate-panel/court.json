@@ -1,0 +1,14 @@
+{
+  "alias": "bap8",
+  "courtlistener_id": "bap8",
+  "name": "United States Bankruptcy Appellate Panel of The Eighth Circuit",
+  "level": "bap",
+  "circuit": "ca8",
+  "state": null,
+  "path": "courts/eighth-circuit/bankruptcy-appellate-panel",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

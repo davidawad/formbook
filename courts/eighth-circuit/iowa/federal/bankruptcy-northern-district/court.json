@@ -1,0 +1,14 @@
+{
+  "alias": "ianb",
+  "courtlistener_id": "ianb",
+  "name": "United States Bankruptcy Court, N.D. Iowa",
+  "level": "bankruptcy",
+  "circuit": "ca8",
+  "state": "Iowa",
+  "path": "courts/eighth-circuit/iowa/federal/bankruptcy-northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

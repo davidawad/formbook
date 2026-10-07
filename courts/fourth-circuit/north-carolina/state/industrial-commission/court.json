@@ -1,0 +1,14 @@
+{
+  "alias": "ncworkcompcom",
+  "courtlistener_id": "ncworkcompcom",
+  "name": "North Carolina Industrial Commission",
+  "level": "state-appellate",
+  "circuit": "ca4",
+  "state": "North Carolina",
+  "path": "courts/fourth-circuit/north-carolina/state/industrial-commission",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

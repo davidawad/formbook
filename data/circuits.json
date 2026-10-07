@@ -1,0 +1,391 @@
+{
+  "_comment": "Circuit map. Source: 28 U.S.C. § 41 (NMI: 48 U.S.C. § 1821). Federal Circuit (cafc, § 41(13)) has nationwide subject-matter jurisdiction, not a geographic list; see scope.json.",
+  "sources": [
+    "28 U.S.C. § 41",
+    "48 U.S.C. § 1821"
+  ],
+  "circuits": [
+    {
+      "alias": "ca1",
+      "name": "First Circuit",
+      "slug": "first-circuit",
+      "citation": "28 U.S.C. § 41(1)",
+      "jurisdictions": [
+        {
+          "name": "Maine",
+          "slug": "maine",
+          "citation": "28 U.S.C. § 41(1)"
+        },
+        {
+          "name": "Massachusetts",
+          "slug": "massachusetts",
+          "citation": "28 U.S.C. § 41(1)"
+        },
+        {
+          "name": "New Hampshire",
+          "slug": "new-hampshire",
+          "citation": "28 U.S.C. § 41(1)"
+        },
+        {
+          "name": "Rhode Island",
+          "slug": "rhode-island",
+          "citation": "28 U.S.C. § 41(1)"
+        },
+        {
+          "name": "Puerto Rico",
+          "slug": "puerto-rico",
+          "citation": "28 U.S.C. § 41(1)"
+        }
+      ]
+    },
+    {
+      "alias": "ca2",
+      "name": "Second Circuit",
+      "slug": "second-circuit",
+      "citation": "28 U.S.C. § 41(2)",
+      "jurisdictions": [
+        {
+          "name": "Connecticut",
+          "slug": "connecticut",
+          "citation": "28 U.S.C. § 41(2)"
+        },
+        {
+          "name": "New York",
+          "slug": "new-york",
+          "citation": "28 U.S.C. § 41(2)"
+        },
+        {
+          "name": "Vermont",
+          "slug": "vermont",
+          "citation": "28 U.S.C. § 41(2)"
+        }
+      ]
+    },
+    {
+      "alias": "ca3",
+      "name": "Third Circuit",
+      "slug": "third-circuit",
+      "citation": "28 U.S.C. § 41(3)",
+      "jurisdictions": [
+        {
+          "name": "Delaware",
+          "slug": "delaware",
+          "citation": "28 U.S.C. § 41(3)"
+        },
+        {
+          "name": "New Jersey",
+          "slug": "new-jersey",
+          "citation": "28 U.S.C. § 41(3)"
+        },
+        {
+          "name": "Pennsylvania",
+          "slug": "pennsylvania",
+          "citation": "28 U.S.C. § 41(3)"
+        },
+        {
+          "name": "Virgin Islands",
+          "slug": "virgin-islands",
+          "citation": "28 U.S.C. § 41(3)"
+        }
+      ]
+    },
+    {
+      "alias": "ca4",
+      "name": "Fourth Circuit",
+      "slug": "fourth-circuit",
+      "citation": "28 U.S.C. § 41(4)",
+      "jurisdictions": [
+        {
+          "name": "Maryland",
+          "slug": "maryland",
+          "citation": "28 U.S.C. § 41(4)"
+        },
+        {
+          "name": "North Carolina",
+          "slug": "north-carolina",
+          "citation": "28 U.S.C. § 41(4)"
+        },
+        {
+          "name": "South Carolina",
+          "slug": "south-carolina",
+          "citation": "28 U.S.C. § 41(4)"
+        },
+        {
+          "name": "Virginia",
+          "slug": "virginia",
+          "citation": "28 U.S.C. § 41(4)"
+        },
+        {
+          "name": "West Virginia",
+          "slug": "west-virginia",
+          "citation": "28 U.S.C. § 41(4)"
+        }
+      ]
+    },
+    {
+      "alias": "ca5",
+      "name": "Fifth Circuit",
+      "slug": "fifth-circuit",
+      "citation": "28 U.S.C. § 41(5)",
+      "jurisdictions": [
+        {
+          "name": "Louisiana",
+          "slug": "louisiana",
+          "citation": "28 U.S.C. § 41(5)"
+        },
+        {
+          "name": "Mississippi",
+          "slug": "mississippi",
+          "citation": "28 U.S.C. § 41(5)"
+        },
+        {
+          "name": "Texas",
+          "slug": "texas",
+          "citation": "28 U.S.C. § 41(5)"
+        }
+      ]
+    },
+    {
+      "alias": "ca6",
+      "name": "Sixth Circuit",
+      "slug": "sixth-circuit",
+      "citation": "28 U.S.C. § 41(6)",
+      "jurisdictions": [
+        {
+          "name": "Kentucky",
+          "slug": "kentucky",
+          "citation": "28 U.S.C. § 41(6)"
+        },
+        {
+          "name": "Michigan",
+          "slug": "michigan",
+          "citation": "28 U.S.C. § 41(6)"
+        },
+        {
+          "name": "Ohio",
+          "slug": "ohio",
+          "citation": "28 U.S.C. § 41(6)"
+        },
+        {
+          "name": "Tennessee",
+          "slug": "tennessee",
+          "citation": "28 U.S.C. § 41(6)"
+        }
+      ]
+    },
+    {
+      "alias": "ca7",
+      "name": "Seventh Circuit",
+      "slug": "seventh-circuit",
+      "citation": "28 U.S.C. § 41(7)",
+      "jurisdictions": [
+        {
+          "name": "Illinois",
+          "slug": "illinois",
+          "citation": "28 U.S.C. § 41(7)"
+        },
+        {
+          "name": "Indiana",
+          "slug": "indiana",
+          "citation": "28 U.S.C. § 41(7)"
+        },
+        {
+          "name": "Wisconsin",
+          "slug": "wisconsin",
+          "citation": "28 U.S.C. § 41(7)"
+        }
+      ]
+    },
+    {
+      "alias": "ca8",
+      "name": "Eighth Circuit",
+      "slug": "eighth-circuit",
+      "citation": "28 U.S.C. § 41(8)",
+      "jurisdictions": [
+        {
+          "name": "Arkansas",
+          "slug": "arkansas",
+          "citation": "28 U.S.C. § 41(8)"
+        },
+        {
+          "name": "Iowa",
+          "slug": "iowa",
+          "citation": "28 U.S.C. § 41(8)"
+        },
+        {
+          "name": "Minnesota",
+          "slug": "minnesota",
+          "citation": "28 U.S.C. § 41(8)"
+        },
+        {
+          "name": "Missouri",
+          "slug": "missouri",
+          "citation": "28 U.S.C. § 41(8)"
+        },
+        {
+          "name": "Nebraska",
+          "slug": "nebraska",
+          "citation": "28 U.S.C. § 41(8)"
+        },
+        {
+          "name": "North Dakota",
+          "slug": "north-dakota",
+          "citation": "28 U.S.C. § 41(8)"
+        },
+        {
+          "name": "South Dakota",
+          "slug": "south-dakota",
+          "citation": "28 U.S.C. § 41(8)"
+        }
+      ]
+    },
+    {
+      "alias": "ca9",
+      "name": "Ninth Circuit",
+      "slug": "ninth-circuit",
+      "citation": "28 U.S.C. § 41(9)",
+      "jurisdictions": [
+        {
+          "name": "Alaska",
+          "slug": "alaska",
+          "citation": "28 U.S.C. § 41(9)"
+        },
+        {
+          "name": "Arizona",
+          "slug": "arizona",
+          "citation": "28 U.S.C. § 41(9)"
+        },
+        {
+          "name": "California",
+          "slug": "california",
+          "citation": "28 U.S.C. § 41(9)"
+        },
+        {
+          "name": "Hawaii",
+          "slug": "hawaii",
+          "citation": "28 U.S.C. § 41(9)"
+        },
+        {
+          "name": "Idaho",
+          "slug": "idaho",
+          "citation": "28 U.S.C. § 41(9)"
+        },
+        {
+          "name": "Montana",
+          "slug": "montana",
+          "citation": "28 U.S.C. § 41(9)"
+        },
+        {
+          "name": "Nevada",
+          "slug": "nevada",
+          "citation": "28 U.S.C. § 41(9)"
+        },
+        {
+          "name": "Oregon",
+          "slug": "oregon",
+          "citation": "28 U.S.C. § 41(9)"
+        },
+        {
+          "name": "Washington",
+          "slug": "washington",
+          "citation": "28 U.S.C. § 41(9)"
+        },
+        {
+          "name": "Guam",
+          "slug": "guam",
+          "citation": "28 U.S.C. § 41(9)"
+        },
+        {
+          "name": "Northern Mariana Islands",
+          "slug": "northern-mariana-islands",
+          "citation": "48 U.S.C. § 1821"
+        },
+        {
+          "name": "American Samoa",
+          "slug": "american-samoa",
+          "citation": null,
+          "note": "American Samoa has no federal district court; its state-level courts are placed under ca9 by convention (not by statute)."
+        }
+      ]
+    },
+    {
+      "alias": "ca10",
+      "name": "Tenth Circuit",
+      "slug": "tenth-circuit",
+      "citation": "28 U.S.C. § 41(10)",
+      "jurisdictions": [
+        {
+          "name": "Colorado",
+          "slug": "colorado",
+          "citation": "28 U.S.C. § 41(10)"
+        },
+        {
+          "name": "Kansas",
+          "slug": "kansas",
+          "citation": "28 U.S.C. § 41(10)"
+        },
+        {
+          "name": "New Mexico",
+          "slug": "new-mexico",
+          "citation": "28 U.S.C. § 41(10)"
+        },
+        {
+          "name": "Oklahoma",
+          "slug": "oklahoma",
+          "citation": "28 U.S.C. § 41(10)"
+        },
+        {
+          "name": "Utah",
+          "slug": "utah",
+          "citation": "28 U.S.C. § 41(10)"
+        },
+        {
+          "name": "Wyoming",
+          "slug": "wyoming",
+          "citation": "28 U.S.C. § 41(10)"
+        }
+      ]
+    },
+    {
+      "alias": "ca11",
+      "name": "Eleventh Circuit",
+      "slug": "eleventh-circuit",
+      "citation": "28 U.S.C. § 41(11)",
+      "jurisdictions": [
+        {
+          "name": "Alabama",
+          "slug": "alabama",
+          "citation": "28 U.S.C. § 41(11)"
+        },
+        {
+          "name": "Florida",
+          "slug": "florida",
+          "citation": "28 U.S.C. § 41(11)"
+        },
+        {
+          "name": "Georgia",
+          "slug": "georgia",
+          "citation": "28 U.S.C. § 41(11)"
+        }
+      ]
+    },
+    {
+      "alias": "cadc",
+      "name": "D.C. Circuit",
+      "slug": "dc-circuit",
+      "citation": "28 U.S.C. § 41(12)",
+      "jurisdictions": [
+        {
+          "name": "District of Columbia",
+          "slug": "district-of-columbia",
+          "citation": "28 U.S.C. § 41(12)"
+        }
+      ]
+    }
+  ],
+  "location_aliases": {
+    "Washington D.C.": "District of Columbia",
+    "DC": "District of Columbia",
+    "D.C.": "District of Columbia"
+  }
+}

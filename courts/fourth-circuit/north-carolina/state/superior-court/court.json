@@ -1,0 +1,14 @@
+{
+  "alias": "ncsuperct",
+  "courtlistener_id": "ncsuperct",
+  "name": "Superior Court of North Carolina",
+  "level": "state-appellate",
+  "circuit": "ca4",
+  "state": "North Carolina",
+  "path": "courts/fourth-circuit/north-carolina/state/superior-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "ndctapp",
+  "courtlistener_id": "ndctapp",
+  "name": "North Dakota Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca8",
+  "state": "North Dakota",
+  "path": "courts/eighth-circuit/north-dakota/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

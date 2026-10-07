@@ -1,0 +1,14 @@
+{
+  "alias": "ttab",
+  "courtlistener_id": "ttab",
+  "name": "Trademark Trial and Appeal Board",
+  "level": "agency",
+  "circuit": "cafc",
+  "state": null,
+  "path": "courts/federal-circuit/trademark-trial-and-appeal-board",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

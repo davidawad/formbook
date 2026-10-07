@@ -1,0 +1,14 @@
+{
+  "alias": "ca7",
+  "courtlistener_id": "ca7",
+  "name": "Court of Appeals for the Seventh Circuit",
+  "level": "appellate",
+  "circuit": "ca7",
+  "state": null,
+  "path": "courts/seventh-circuit/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

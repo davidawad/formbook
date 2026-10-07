@@ -1,0 +1,14 @@
+{
+  "alias": "mdd",
+  "courtlistener_id": "mdd",
+  "name": "District Court, D. Maryland",
+  "level": "district",
+  "circuit": "ca4",
+  "state": "Maryland",
+  "path": "courts/fourth-circuit/maryland/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

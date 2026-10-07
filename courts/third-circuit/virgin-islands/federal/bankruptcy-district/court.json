@@ -1,0 +1,14 @@
+{
+  "alias": "vib",
+  "courtlistener_id": "vib",
+  "name": "United States Bankruptcy Court, D. Virgin Islands",
+  "level": "bankruptcy",
+  "circuit": "ca3",
+  "state": "Virgin Islands",
+  "path": "courts/third-circuit/virgin-islands/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

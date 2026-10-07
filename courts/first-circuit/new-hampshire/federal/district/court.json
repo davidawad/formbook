@@ -1,0 +1,14 @@
+{
+  "alias": "nhd",
+  "courtlistener_id": "nhd",
+  "name": "District Court, D. New Hampshire",
+  "level": "district",
+  "circuit": "ca1",
+  "state": "New Hampshire",
+  "path": "courts/first-circuit/new-hampshire/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

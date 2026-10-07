@@ -1,0 +1,14 @@
+{
+  "alias": "vaeb",
+  "courtlistener_id": "vaeb",
+  "name": "United States Bankruptcy Court, E.D. Virginia",
+  "level": "bankruptcy",
+  "circuit": "ca4",
+  "state": "Virginia",
+  "path": "courts/fourth-circuit/virginia/federal/bankruptcy-eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

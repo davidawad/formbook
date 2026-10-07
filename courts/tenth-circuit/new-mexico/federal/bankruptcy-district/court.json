@@ -1,0 +1,14 @@
+{
+  "alias": "nmb",
+  "courtlistener_id": "nmb",
+  "name": "United States Bankruptcy Court, D. New Mexico",
+  "level": "bankruptcy",
+  "circuit": "ca10",
+  "state": "New Mexico",
+  "path": "courts/tenth-circuit/new-mexico/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

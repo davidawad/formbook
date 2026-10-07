@@ -1,0 +1,14 @@
+{
+  "alias": "nynb",
+  "courtlistener_id": "nynb",
+  "name": "United States Bankruptcy Court, N.D. New York",
+  "level": "bankruptcy",
+  "circuit": "ca2",
+  "state": "New York",
+  "path": "courts/second-circuit/new-york/federal/bankruptcy-northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

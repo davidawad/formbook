@@ -1,0 +1,14 @@
+{
+  "alias": "ind",
+  "courtlistener_id": "ind",
+  "name": "Indiana Supreme Court",
+  "level": "state-supreme",
+  "circuit": "ca7",
+  "state": "Indiana",
+  "path": "courts/seventh-circuit/indiana/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

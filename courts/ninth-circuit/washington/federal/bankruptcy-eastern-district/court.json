@@ -1,0 +1,14 @@
+{
+  "alias": "waeb",
+  "courtlistener_id": "waeb",
+  "name": "United States Bankruptcy Court, E.D. Washington",
+  "level": "bankruptcy",
+  "circuit": "ca9",
+  "state": "Washington",
+  "path": "courts/ninth-circuit/washington/federal/bankruptcy-eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

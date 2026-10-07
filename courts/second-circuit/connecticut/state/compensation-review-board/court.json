@@ -1,0 +1,14 @@
+{
+  "alias": "connworkcompcom",
+  "courtlistener_id": "connworkcompcom",
+  "name": "Connecticut Compensation Review Board",
+  "level": "state-appellate",
+  "circuit": "ca2",
+  "state": "Connecticut",
+  "path": "courts/second-circuit/connecticut/state/compensation-review-board",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

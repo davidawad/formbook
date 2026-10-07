@@ -1,0 +1,14 @@
+{
+  "alias": "ilnb",
+  "courtlistener_id": "ilnb",
+  "name": "United States Bankruptcy Court, N.D. Illinois",
+  "level": "bankruptcy",
+  "circuit": "ca7",
+  "state": "Illinois",
+  "path": "courts/seventh-circuit/illinois/federal/bankruptcy-northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

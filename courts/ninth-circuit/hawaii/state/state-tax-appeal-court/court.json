@@ -1,0 +1,14 @@
+{
+  "alias": "hawtax",
+  "courtlistener_id": "hawtax",
+  "name": "Hawaii State Tax Appeal Court",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "Hawaii",
+  "path": "courts/ninth-circuit/hawaii/state/state-tax-appeal-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

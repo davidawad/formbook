@@ -1,0 +1,14 @@
+{
+  "alias": "mowb",
+  "courtlistener_id": "mowb",
+  "name": "United States Bankruptcy Court, W.D. Missouri",
+  "level": "bankruptcy",
+  "circuit": "ca8",
+  "state": "Missouri",
+  "path": "courts/eighth-circuit/missouri/federal/bankruptcy-western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

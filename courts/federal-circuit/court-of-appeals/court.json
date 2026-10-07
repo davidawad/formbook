@@ -1,0 +1,14 @@
+{
+  "alias": "cafc",
+  "courtlistener_id": "cafc",
+  "name": "Court of Appeals for the Federal Circuit",
+  "level": "appellate",
+  "circuit": "cafc",
+  "state": null,
+  "path": "courts/federal-circuit/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

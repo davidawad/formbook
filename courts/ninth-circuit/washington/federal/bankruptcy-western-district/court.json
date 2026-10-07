@@ -1,0 +1,14 @@
+{
+  "alias": "wawb",
+  "courtlistener_id": "wawb",
+  "name": "United States Bankruptcy Court, W.D. Washington",
+  "level": "bankruptcy",
+  "circuit": "ca9",
+  "state": "Washington",
+  "path": "courts/ninth-circuit/washington/federal/bankruptcy-western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

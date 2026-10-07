@@ -1,0 +1,14 @@
+{
+  "alias": "md",
+  "courtlistener_id": "md",
+  "name": "Court of Appeals of Maryland",
+  "level": "state-supreme",
+  "circuit": "ca4",
+  "state": "Maryland",
+  "path": "courts/fourth-circuit/maryland/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

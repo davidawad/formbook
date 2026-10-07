@@ -1,0 +1,14 @@
+{
+  "alias": "flnb",
+  "courtlistener_id": "flnb",
+  "name": "United States Bankruptcy Court, N.D. Florida",
+  "level": "bankruptcy",
+  "circuit": "ca11",
+  "state": "Florida",
+  "path": "courts/eleventh-circuit/florida/federal/bankruptcy-northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

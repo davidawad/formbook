@@ -1,0 +1,14 @@
+{
+  "alias": "paeb",
+  "courtlistener_id": "paeb",
+  "name": "United States Bankruptcy Court, E.D. Pennsylvania",
+  "level": "bankruptcy",
+  "circuit": "ca3",
+  "state": "Pennsylvania",
+  "path": "courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

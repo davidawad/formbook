@@ -1,0 +1,14 @@
+{
+  "alias": "indctapp",
+  "courtlistener_id": "indctapp",
+  "name": "Indiana Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca7",
+  "state": "Indiana",
+  "path": "courts/seventh-circuit/indiana/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

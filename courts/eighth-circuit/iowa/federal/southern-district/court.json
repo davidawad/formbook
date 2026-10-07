@@ -1,0 +1,14 @@
+{
+  "alias": "iasd",
+  "courtlistener_id": "iasd",
+  "name": "District Court, S.D. Iowa",
+  "level": "district",
+  "circuit": "ca8",
+  "state": "Iowa",
+  "path": "courts/eighth-circuit/iowa/federal/southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

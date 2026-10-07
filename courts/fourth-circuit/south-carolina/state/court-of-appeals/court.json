@@ -1,0 +1,14 @@
+{
+  "alias": "scctapp",
+  "courtlistener_id": "scctapp",
+  "name": "Court of Appeals of South Carolina",
+  "level": "state-appellate",
+  "circuit": "ca4",
+  "state": "South Carolina",
+  "path": "courts/fourth-circuit/south-carolina/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

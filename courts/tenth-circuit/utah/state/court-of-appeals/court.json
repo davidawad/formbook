@@ -1,0 +1,14 @@
+{
+  "alias": "utahctapp",
+  "courtlistener_id": "utahctapp",
+  "name": "Court of Appeals of Utah",
+  "level": "state-appellate",
+  "circuit": "ca10",
+  "state": "Utah",
+  "path": "courts/tenth-circuit/utah/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

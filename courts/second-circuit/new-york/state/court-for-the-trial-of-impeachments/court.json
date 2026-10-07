@@ -1,0 +1,14 @@
+{
+  "alias": "nyimpct",
+  "courtlistener_id": "nyimpct",
+  "name": "Court for the Trial of Impeachments",
+  "level": "state-appellate",
+  "circuit": "ca2",
+  "state": "New York",
+  "path": "courts/second-circuit/new-york/state/court-for-the-trial-of-impeachments",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

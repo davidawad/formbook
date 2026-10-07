@@ -1,0 +1,14 @@
+{
+  "alias": "ilnd",
+  "courtlistener_id": "ilnd",
+  "name": "District Court, N.D. Illinois",
+  "level": "district",
+  "circuit": "ca7",
+  "state": "Illinois",
+  "path": "courts/seventh-circuit/illinois/federal/northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

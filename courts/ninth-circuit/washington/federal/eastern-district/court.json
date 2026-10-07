@@ -1,0 +1,14 @@
+{
+  "alias": "waed",
+  "courtlistener_id": "waed",
+  "name": "District Court, E.D. Washington",
+  "level": "district",
+  "circuit": "ca9",
+  "state": "Washington",
+  "path": "courts/ninth-circuit/washington/federal/eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

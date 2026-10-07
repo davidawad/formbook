@@ -1,0 +1,14 @@
+{
+  "alias": "oklacoj",
+  "courtlistener_id": "oklacoj",
+  "name": "Court on the Judiciary of Oklahoma",
+  "level": "state-appellate",
+  "circuit": "ca10",
+  "state": "Oklahoma",
+  "path": "courts/tenth-circuit/oklahoma/state/court-on-the-judiciary",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

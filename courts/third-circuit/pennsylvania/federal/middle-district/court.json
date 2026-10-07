@@ -1,0 +1,14 @@
+{
+  "alias": "pamd",
+  "courtlistener_id": "pamd",
+  "name": "District Court, M.D. Pennsylvania",
+  "level": "district",
+  "circuit": "ca3",
+  "state": "Pennsylvania",
+  "path": "courts/third-circuit/pennsylvania/federal/middle-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

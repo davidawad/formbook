@@ -1,0 +1,14 @@
+{
+  "alias": "njd",
+  "courtlistener_id": "njd",
+  "name": "District Court, D. New Jersey",
+  "level": "district",
+  "circuit": "ca3",
+  "state": "New Jersey",
+  "path": "courts/third-circuit/new-jersey/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

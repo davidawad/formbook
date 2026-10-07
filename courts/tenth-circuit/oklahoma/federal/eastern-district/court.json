@@ -1,0 +1,14 @@
+{
+  "alias": "oked",
+  "courtlistener_id": "oked",
+  "name": "United States District Court, Oklahoma Eastern",
+  "level": "district",
+  "circuit": "ca10",
+  "state": "Oklahoma",
+  "path": "courts/tenth-circuit/oklahoma/federal/eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

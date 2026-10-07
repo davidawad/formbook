@@ -1,0 +1,14 @@
+{
+  "alias": "scd",
+  "courtlistener_id": "scd",
+  "name": "District Court, D. South Carolina",
+  "level": "district",
+  "circuit": "ca4",
+  "state": "South Carolina",
+  "path": "courts/fourth-circuit/south-carolina/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

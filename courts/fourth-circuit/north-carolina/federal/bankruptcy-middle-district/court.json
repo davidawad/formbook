@@ -1,0 +1,14 @@
+{
+  "alias": "ncmb",
+  "courtlistener_id": "ncmb",
+  "name": "United States Bankruptcy Court, M.D. North Carolina",
+  "level": "bankruptcy",
+  "circuit": "ca4",
+  "state": "North Carolina",
+  "path": "courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

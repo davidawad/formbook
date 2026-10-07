@@ -1,0 +1,14 @@
+{
+  "alias": "canb",
+  "courtlistener_id": "canb",
+  "name": "United States Bankruptcy Court, N.D. California",
+  "level": "bankruptcy",
+  "circuit": "ca9",
+  "state": "California",
+  "path": "courts/ninth-circuit/california/federal/bankruptcy-northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

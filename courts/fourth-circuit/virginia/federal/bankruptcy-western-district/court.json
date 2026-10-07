@@ -1,0 +1,14 @@
+{
+  "alias": "vawb",
+  "courtlistener_id": "vawb",
+  "name": "United States Bankruptcy Court, W.D. Virginia",
+  "level": "bankruptcy",
+  "circuit": "ca4",
+  "state": "Virginia",
+  "path": "courts/fourth-circuit/virginia/federal/bankruptcy-western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

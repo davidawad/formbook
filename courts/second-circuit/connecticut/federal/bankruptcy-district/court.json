@@ -1,0 +1,14 @@
+{
+  "alias": "ctb",
+  "courtlistener_id": "ctb",
+  "name": "United States Bankruptcy Court, D. Connecticut",
+  "level": "bankruptcy",
+  "circuit": "ca2",
+  "state": "Connecticut",
+  "path": "courts/second-circuit/connecticut/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

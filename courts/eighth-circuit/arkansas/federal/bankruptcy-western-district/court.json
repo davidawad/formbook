@@ -1,0 +1,14 @@
+{
+  "alias": "arwb",
+  "courtlistener_id": "arwb",
+  "name": "United States Bankruptcy Court, W.D. Arkansas",
+  "level": "bankruptcy",
+  "circuit": "ca8",
+  "state": "Arkansas",
+  "path": "courts/eighth-circuit/arkansas/federal/bankruptcy-western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "ca1",
+  "courtlistener_id": "ca1",
+  "name": "Court of Appeals for the First Circuit",
+  "level": "appellate",
+  "circuit": "ca1",
+  "state": null,
+  "path": "courts/first-circuit/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

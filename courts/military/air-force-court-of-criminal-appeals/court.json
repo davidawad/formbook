@@ -1,0 +1,14 @@
+{
+  "alias": "afcca",
+  "courtlistener_id": "afcca",
+  "name": "U S Air Force Court of Criminal Appeals",
+  "level": "military",
+  "circuit": null,
+  "state": null,
+  "path": "courts/military/air-force-court-of-criminal-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

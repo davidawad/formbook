@@ -1,0 +1,14 @@
+{
+  "alias": "ca2",
+  "courtlistener_id": "ca2",
+  "name": "Court of Appeals for the Second Circuit",
+  "level": "appellate",
+  "circuit": "ca2",
+  "state": null,
+  "path": "courts/second-circuit/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

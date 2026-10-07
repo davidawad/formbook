@@ -1,0 +1,14 @@
+{
+  "alias": "uscfc",
+  "courtlistener_id": "uscfc",
+  "name": "United States Court of Federal Claims",
+  "level": "national",
+  "circuit": "cafc",
+  "state": null,
+  "path": "courts/federal-circuit/court-of-federal-claims",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

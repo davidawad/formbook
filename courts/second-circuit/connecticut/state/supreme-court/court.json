@@ -1,0 +1,14 @@
+{
+  "alias": "conn",
+  "courtlistener_id": "conn",
+  "name": "Connecticut Supreme Court",
+  "level": "state-supreme",
+  "circuit": "ca2",
+  "state": "Connecticut",
+  "path": "courts/second-circuit/connecticut/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

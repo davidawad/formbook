@@ -1,0 +1,14 @@
+{
+  "alias": "sdb",
+  "courtlistener_id": "sdb",
+  "name": "United States Bankruptcy Court, D. South Dakota",
+  "level": "bankruptcy",
+  "circuit": "ca8",
+  "state": "South Dakota",
+  "path": "courts/eighth-circuit/south-dakota/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

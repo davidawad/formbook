@@ -1,0 +1,16 @@
+{
+  "alias": "calsuperct-sandiego",
+  "courtlistener_id": null,
+  "name": "California Superior Court, San Diego County",
+  "level": "state-trial",
+  "circuit": "ca9",
+  "state": "California",
+  "path": "courts/ninth-circuit/california/state/superior-court/san-diego-county",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "county subdivision; not a CourtListener id",
+  "parent_alias": "calsuperct",
+  "legacy_aliases": [
+    "calsuppctsd"
+  ]
+}

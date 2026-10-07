@@ -1,0 +1,14 @@
+{
+  "alias": "mad",
+  "courtlistener_id": "mad",
+  "name": "District Court, D. Massachusetts",
+  "level": "district",
+  "circuit": "ca1",
+  "state": "Massachusetts",
+  "path": "courts/first-circuit/massachusetts/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

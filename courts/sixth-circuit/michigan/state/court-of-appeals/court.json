@@ -1,0 +1,14 @@
+{
+  "alias": "michctapp",
+  "courtlistener_id": "michctapp",
+  "name": "Michigan Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca6",
+  "state": "Michigan",
+  "path": "courts/sixth-circuit/michigan/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

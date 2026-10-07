@@ -1,0 +1,14 @@
+{
+  "alias": "wvsd",
+  "courtlistener_id": "wvsd",
+  "name": "District Court, S.D. West Virginia",
+  "level": "district",
+  "circuit": "ca4",
+  "state": "West Virginia",
+  "path": "courts/fourth-circuit/west-virginia/federal/southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

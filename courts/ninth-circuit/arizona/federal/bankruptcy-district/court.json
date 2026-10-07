@@ -1,0 +1,14 @@
+{
+  "alias": "arb",
+  "courtlistener_id": "arb",
+  "name": "United States Bankruptcy Court, D. Arizona",
+  "level": "bankruptcy",
+  "circuit": "ca9",
+  "state": "Arizona",
+  "path": "courts/ninth-circuit/arizona/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

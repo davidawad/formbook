@@ -1,0 +1,14 @@
+{
+  "alias": "mowd",
+  "courtlistener_id": "mowd",
+  "name": "District Court, W.D. Missouri",
+  "level": "district",
+  "circuit": "ca8",
+  "state": "Missouri",
+  "path": "courts/eighth-circuit/missouri/federal/western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

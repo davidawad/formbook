@@ -1,0 +1,14 @@
+{
+  "alias": "wyd",
+  "courtlistener_id": "wyd",
+  "name": "District Court, D. Wyoming",
+  "level": "district",
+  "circuit": "ca10",
+  "state": "Wyoming",
+  "path": "courts/tenth-circuit/wyoming/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

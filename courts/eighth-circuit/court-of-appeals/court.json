@@ -1,0 +1,14 @@
+{
+  "alias": "ca8",
+  "courtlistener_id": "ca8",
+  "name": "Court of Appeals for the Eighth Circuit",
+  "level": "appellate",
+  "circuit": "ca8",
+  "state": null,
+  "path": "courts/eighth-circuit/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

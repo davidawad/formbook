@@ -1,0 +1,14 @@
+{
+  "alias": "hawapp",
+  "courtlistener_id": "hawapp",
+  "name": "Hawaii Intermediate Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "Hawaii",
+  "path": "courts/ninth-circuit/hawaii/state/intermediate-court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

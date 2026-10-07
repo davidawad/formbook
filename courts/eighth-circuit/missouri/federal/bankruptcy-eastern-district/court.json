@@ -1,0 +1,14 @@
+{
+  "alias": "moeb",
+  "courtlistener_id": "moeb",
+  "name": "United States Bankruptcy Court, E.D. Missouri",
+  "level": "bankruptcy",
+  "circuit": "ca8",
+  "state": "Missouri",
+  "path": "courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

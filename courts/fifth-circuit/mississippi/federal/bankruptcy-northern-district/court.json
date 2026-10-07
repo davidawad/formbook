@@ -1,0 +1,14 @@
+{
+  "alias": "msnb",
+  "courtlistener_id": "msnb",
+  "name": "United States Bankruptcy Court, N.D. Mississippi",
+  "level": "bankruptcy",
+  "circuit": "ca5",
+  "state": "Mississippi",
+  "path": "courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

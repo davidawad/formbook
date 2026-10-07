@@ -1,0 +1,14 @@
+{
+  "alias": "gub",
+  "courtlistener_id": "gub",
+  "name": "United States Bankruptcy Court, D. Guam",
+  "level": "bankruptcy",
+  "circuit": "ca9",
+  "state": "Guam",
+  "path": "courts/ninth-circuit/guam/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "idahoctapp",
+  "courtlistener_id": "idahoctapp",
+  "name": "Idaho Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "Idaho",
+  "path": "courts/ninth-circuit/idaho/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "ortc",
+  "courtlistener_id": "ortc",
+  "name": "Oregon Tax Court",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "Oregon",
+  "path": "courts/ninth-circuit/oregon/state/tax-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

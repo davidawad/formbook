@@ -1,0 +1,14 @@
+{
+  "alias": "nced",
+  "courtlistener_id": "nced",
+  "name": "District Court, E.D. North Carolina",
+  "level": "district",
+  "circuit": "ca4",
+  "state": "North Carolina",
+  "path": "courts/fourth-circuit/north-carolina/federal/eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

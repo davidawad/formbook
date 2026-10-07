@@ -1,0 +1,14 @@
+{
+  "alias": "flmd",
+  "courtlistener_id": "flmd",
+  "name": "United States District Court for the Middle District of Florida",
+  "level": "district",
+  "circuit": "ca11",
+  "state": "Florida",
+  "path": "courts/eleventh-circuit/florida/federal/middle-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

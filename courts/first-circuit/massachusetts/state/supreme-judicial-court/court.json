@@ -1,0 +1,14 @@
+{
+  "alias": "mass",
+  "courtlistener_id": "mass",
+  "name": "Massachusetts Supreme Judicial Court",
+  "level": "state-supreme",
+  "circuit": "ca1",
+  "state": "Massachusetts",
+  "path": "courts/first-circuit/massachusetts/state/supreme-judicial-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

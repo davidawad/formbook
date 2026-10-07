@@ -1,0 +1,14 @@
+{
+  "alias": "ndd",
+  "courtlistener_id": "ndd",
+  "name": "District Court, D. North Dakota",
+  "level": "district",
+  "circuit": "ca8",
+  "state": "North Dakota",
+  "path": "courts/eighth-circuit/north-dakota/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

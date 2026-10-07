@@ -1,0 +1,14 @@
+{
+  "alias": "nycommnapp",
+  "courtlistener_id": "nycommnapp",
+  "name": "New York Commission of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca2",
+  "state": "New York",
+  "path": "courts/second-circuit/new-york/state/commission-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

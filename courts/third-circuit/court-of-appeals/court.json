@@ -1,0 +1,14 @@
+{
+  "alias": "ca3",
+  "courtlistener_id": "ca3",
+  "name": "Court of Appeals for the Third Circuit",
+  "level": "appellate",
+  "circuit": "ca3",
+  "state": null,
+  "path": "courts/third-circuit/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "nmid",
+  "courtlistener_id": "nmid",
+  "name": "District Court, Northern Mariana Islands",
+  "level": "district",
+  "circuit": "ca9",
+  "state": "Northern Mariana Islands",
+  "path": "courts/ninth-circuit/northern-mariana-islands/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

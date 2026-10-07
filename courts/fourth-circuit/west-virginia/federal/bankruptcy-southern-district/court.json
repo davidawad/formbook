@@ -1,0 +1,14 @@
+{
+  "alias": "wvsb",
+  "courtlistener_id": "wvsb",
+  "name": "United States Bankruptcy Court, S.D. West Virginia",
+  "level": "bankruptcy",
+  "circuit": "ca4",
+  "state": "West Virginia",
+  "path": "courts/fourth-circuit/west-virginia/federal/bankruptcy-southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "miwb",
+  "courtlistener_id": "miwb",
+  "name": "United States Bankruptcy Court, W.D. Michigan",
+  "level": "bankruptcy",
+  "circuit": "ca6",
+  "state": "Michigan",
+  "path": "courts/sixth-circuit/michigan/federal/bankruptcy-western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

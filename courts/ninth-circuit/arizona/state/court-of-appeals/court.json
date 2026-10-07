@@ -1,0 +1,14 @@
+{
+  "alias": "arizctapp",
+  "courtlistener_id": "arizctapp",
+  "name": "Arizona Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "Arizona",
+  "path": "courts/ninth-circuit/arizona/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

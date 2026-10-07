@@ -1,0 +1,14 @@
+{
+  "alias": "kywb",
+  "courtlistener_id": "kywb",
+  "name": "United States Bankruptcy Court, W.D. Kentucky",
+  "level": "bankruptcy",
+  "circuit": "ca6",
+  "state": "Kentucky",
+  "path": "courts/sixth-circuit/kentucky/federal/bankruptcy-western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

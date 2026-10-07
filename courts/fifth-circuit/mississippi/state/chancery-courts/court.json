@@ -1,0 +1,14 @@
+{
+  "alias": "misschanceryct",
+  "courtlistener_id": "misschanceryct",
+  "name": "Mississippi Chancery Courts",
+  "level": "state-appellate",
+  "circuit": "ca5",
+  "state": "Mississippi",
+  "path": "courts/fifth-circuit/mississippi/state/chancery-courts",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "nd",
+  "courtlistener_id": "nd",
+  "name": "North Dakota Supreme Court",
+  "level": "state-supreme",
+  "circuit": "ca8",
+  "state": "North Dakota",
+  "path": "courts/eighth-circuit/north-dakota/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

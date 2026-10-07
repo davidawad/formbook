@@ -1,0 +1,14 @@
+{
+  "alias": "lamb",
+  "courtlistener_id": "lamb",
+  "name": "United States Bankruptcy Court, M.D. Louisiana",
+  "level": "bankruptcy",
+  "circuit": "ca5",
+  "state": "Louisiana",
+  "path": "courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "wiwb",
+  "courtlistener_id": "wiwb",
+  "name": "United States Bankruptcy Court, W.D. Wisconsin",
+  "level": "bankruptcy",
+  "circuit": "ca7",
+  "state": "Wisconsin",
+  "path": "courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

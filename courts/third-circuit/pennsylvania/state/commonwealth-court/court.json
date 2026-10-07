@@ -1,0 +1,14 @@
+{
+  "alias": "pacommwct",
+  "courtlistener_id": "pacommwct",
+  "name": "Commonwealth Court of Pennsylvania",
+  "level": "state-appellate",
+  "circuit": "ca3",
+  "state": "Pennsylvania",
+  "path": "courts/third-circuit/pennsylvania/state/commonwealth-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "alacrimapp",
+  "courtlistener_id": "alacrimapp",
+  "name": "Alabama Court of Criminal Appeals",
+  "level": "state-appellate",
+  "circuit": "ca11",
+  "state": "Alabama",
+  "path": "courts/eleventh-circuit/alabama/state/court-of-criminal-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

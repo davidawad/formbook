@@ -1,0 +1,14 @@
+{
+  "alias": "utb",
+  "courtlistener_id": "utb",
+  "name": "United States Bankruptcy Court, D. Utah",
+  "level": "bankruptcy",
+  "circuit": "ca10",
+  "state": "Utah",
+  "path": "courts/tenth-circuit/utah/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

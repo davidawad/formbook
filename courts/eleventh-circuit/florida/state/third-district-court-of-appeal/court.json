@@ -1,0 +1,14 @@
+{
+  "alias": "fladistctapp3",
+  "courtlistener_id": "fladistctapp3",
+  "name": "Florida Third District Court of Appeal",
+  "level": "state-appellate",
+  "circuit": "ca11",
+  "state": "Florida",
+  "path": "courts/eleventh-circuit/florida/state/third-district-court-of-appeal",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "hid",
+  "courtlistener_id": "hid",
+  "name": "United States District Court for the District of Hawaii",
+  "level": "district",
+  "circuit": "ca9",
+  "state": "Hawaii",
+  "path": "courts/ninth-circuit/hawaii/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

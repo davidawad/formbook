@@ -1,0 +1,14 @@
+{
+  "alias": "wva",
+  "courtlistener_id": "wva",
+  "name": "West Virginia Supreme Court",
+  "level": "state-supreme",
+  "circuit": "ca4",
+  "state": "West Virginia",
+  "path": "courts/fourth-circuit/west-virginia/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

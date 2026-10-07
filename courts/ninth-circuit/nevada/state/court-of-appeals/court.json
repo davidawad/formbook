@@ -1,0 +1,14 @@
+{
+  "alias": "nevapp",
+  "courtlistener_id": "nevapp",
+  "name": "Court of Appeals of Nevada",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "Nevada",
+  "path": "courts/ninth-circuit/nevada/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

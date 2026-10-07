@@ -1,0 +1,14 @@
+{
+  "alias": "oklacrimapp",
+  "courtlistener_id": "oklacrimapp",
+  "name": "Court of Criminal Appeals of Oklahoma",
+  "level": "state-supreme",
+  "circuit": "ca10",
+  "state": "Oklahoma",
+  "path": "courts/tenth-circuit/oklahoma/state/court-of-criminal-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

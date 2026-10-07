@@ -1,0 +1,14 @@
+{
+  "alias": "mdb",
+  "courtlistener_id": "mdb",
+  "name": "United States Bankruptcy Court, D. Maryland",
+  "level": "bankruptcy",
+  "circuit": "ca4",
+  "state": "Maryland",
+  "path": "courts/fourth-circuit/maryland/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

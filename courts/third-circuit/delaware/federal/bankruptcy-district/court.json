@@ -1,0 +1,14 @@
+{
+  "alias": "deb",
+  "courtlistener_id": "deb",
+  "name": "United States Bankruptcy Court, D. Delaware",
+  "level": "bankruptcy",
+  "circuit": "ca3",
+  "state": "Delaware",
+  "path": "courts/third-circuit/delaware/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

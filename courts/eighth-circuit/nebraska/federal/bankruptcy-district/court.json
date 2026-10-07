@@ -1,0 +1,14 @@
+{
+  "alias": "nebraskab",
+  "courtlistener_id": "nebraskab",
+  "name": "United States Bankruptcy Court, D. Nebraska",
+  "level": "bankruptcy",
+  "circuit": "ca8",
+  "state": "Nebraska",
+  "path": "courts/eighth-circuit/nebraska/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

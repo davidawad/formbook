@@ -1,0 +1,14 @@
+{
+  "alias": "nmib",
+  "courtlistener_id": "nmib",
+  "name": "United States Bankruptcy Court, Northern Mariana Islands",
+  "level": "bankruptcy",
+  "circuit": "ca9",
+  "state": "Northern Mariana Islands",
+  "path": "courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

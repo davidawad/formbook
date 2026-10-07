@@ -1,0 +1,14 @@
+{
+  "alias": "lawd",
+  "courtlistener_id": "lawd",
+  "name": "District Court, W.D. Louisiana",
+  "level": "district",
+  "circuit": "ca5",
+  "state": "Louisiana",
+  "path": "courts/fifth-circuit/louisiana/federal/western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

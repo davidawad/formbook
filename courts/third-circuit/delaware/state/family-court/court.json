@@ -1,0 +1,14 @@
+{
+  "alias": "delfamct",
+  "courtlistener_id": "delfamct",
+  "name": "Delaware Family Court",
+  "level": "state-appellate",
+  "circuit": "ca3",
+  "state": "Delaware",
+  "path": "courts/third-circuit/delaware/state/family-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

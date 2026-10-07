@@ -1,0 +1,14 @@
+{
+  "alias": "wawd",
+  "courtlistener_id": "wawd",
+  "name": "District Court, W.D. Washington",
+  "level": "district",
+  "circuit": "ca9",
+  "state": "Washington",
+  "path": "courts/ninth-circuit/washington/federal/western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

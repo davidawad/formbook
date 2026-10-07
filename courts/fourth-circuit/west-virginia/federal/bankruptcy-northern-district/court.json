@@ -1,0 +1,14 @@
+{
+  "alias": "wvnb",
+  "courtlistener_id": "wvnb",
+  "name": "United States District Court, N.D. West Virginia",
+  "level": "bankruptcy",
+  "circuit": "ca4",
+  "state": "West Virginia",
+  "path": "courts/fourth-circuit/west-virginia/federal/bankruptcy-northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "courts-db name reads 'District Court'; id suffix and type indicate the bankruptcy court.",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

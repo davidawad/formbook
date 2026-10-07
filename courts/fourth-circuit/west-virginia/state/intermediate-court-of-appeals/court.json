@@ -1,0 +1,14 @@
+{
+  "alias": "wvactapp",
+  "courtlistener_id": "wvactapp",
+  "name": "Intermediate Court of Appeals of West Virginia",
+  "level": "state-appellate",
+  "circuit": "ca4",
+  "state": "West Virginia",
+  "path": "courts/fourth-circuit/west-virginia/state/intermediate-court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "bap6",
+  "courtlistener_id": "bap6",
+  "name": "United States Bankruptcy Appellate Panel of The Sixth Circuit",
+  "level": "bap",
+  "circuit": "ca6",
+  "state": null,
+  "path": "courts/sixth-circuit/bankruptcy-appellate-panel",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "ca4",
+  "courtlistener_id": "ca4",
+  "name": "Court of Appeals for the Fourth Circuit",
+  "level": "appellate",
+  "circuit": "ca4",
+  "state": null,
+  "path": "courts/fourth-circuit/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

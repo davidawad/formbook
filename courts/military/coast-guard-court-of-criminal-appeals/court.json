@@ -1,0 +1,14 @@
+{
+  "alias": "uscgcoca",
+  "courtlistener_id": "uscgcoca",
+  "name": "U S Coast Guard Court of Criminal Appeals",
+  "level": "military",
+  "circuit": null,
+  "state": null,
+  "path": "courts/military/coast-guard-court-of-criminal-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

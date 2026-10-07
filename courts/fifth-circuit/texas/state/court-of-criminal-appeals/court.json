@@ -1,0 +1,14 @@
+{
+  "alias": "texcrimapp",
+  "courtlistener_id": "texcrimapp",
+  "name": "Court of Criminal Appeals of Texas",
+  "level": "state-supreme",
+  "circuit": "ca5",
+  "state": "Texas",
+  "path": "courts/fifth-circuit/texas/state/court-of-criminal-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

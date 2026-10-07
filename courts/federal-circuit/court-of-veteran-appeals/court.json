@@ -1,0 +1,14 @@
+{
+  "alias": "cavc",
+  "courtlistener_id": "cavc",
+  "name": "United States Court of Veteran Appeals",
+  "level": "national",
+  "circuit": "cafc",
+  "state": null,
+  "path": "courts/federal-circuit/court-of-veteran-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

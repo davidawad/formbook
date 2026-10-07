@@ -1,0 +1,14 @@
+{
+  "alias": "ganb",
+  "courtlistener_id": "ganb",
+  "name": "United States Bankruptcy Court, N.D. Georgia",
+  "level": "bankruptcy",
+  "circuit": "ca11",
+  "state": "Georgia",
+  "path": "courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

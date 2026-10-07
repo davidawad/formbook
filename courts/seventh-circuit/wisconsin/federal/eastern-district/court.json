@@ -1,0 +1,14 @@
+{
+  "alias": "wied",
+  "courtlistener_id": "wied",
+  "name": "District Court, E.D. Wisconsin",
+  "level": "district",
+  "circuit": "ca7",
+  "state": "Wisconsin",
+  "path": "courts/seventh-circuit/wisconsin/federal/eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

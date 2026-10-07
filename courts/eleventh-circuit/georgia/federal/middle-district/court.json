@@ -1,0 +1,14 @@
+{
+  "alias": "gamd",
+  "courtlistener_id": "gamd",
+  "name": "United States District Court for the Middle District of Georgia",
+  "level": "district",
+  "circuit": "ca11",
+  "state": "Georgia",
+  "path": "courts/eleventh-circuit/georgia/federal/middle-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

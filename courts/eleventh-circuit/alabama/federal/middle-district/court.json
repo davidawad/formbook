@@ -1,0 +1,14 @@
+{
+  "alias": "almd",
+  "courtlistener_id": "almd",
+  "name": "United States District Court for the Middle District of Alabama",
+  "level": "district",
+  "circuit": "ca11",
+  "state": "Alabama",
+  "path": "courts/eleventh-circuit/alabama/federal/middle-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

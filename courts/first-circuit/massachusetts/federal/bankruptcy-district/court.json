@@ -1,0 +1,14 @@
+{
+  "alias": "mab",
+  "courtlistener_id": "mab",
+  "name": "United States Bankruptcy Court, D. Massachusetts",
+  "level": "bankruptcy",
+  "circuit": "ca1",
+  "state": "Massachusetts",
+  "path": "courts/first-circuit/massachusetts/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

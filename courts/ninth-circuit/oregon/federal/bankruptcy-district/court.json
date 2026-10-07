@@ -1,0 +1,14 @@
+{
+  "alias": "orb",
+  "courtlistener_id": "orb",
+  "name": "United States Bankruptcy Court, D. Oregon",
+  "level": "bankruptcy",
+  "circuit": "ca9",
+  "state": "Oregon",
+  "path": "courts/ninth-circuit/oregon/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

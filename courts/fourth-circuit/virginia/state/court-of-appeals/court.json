@@ -1,0 +1,14 @@
+{
+  "alias": "vactapp",
+  "courtlistener_id": "vactapp",
+  "name": "Court of Appeals of Virginia",
+  "level": "state-appellate",
+  "circuit": "ca4",
+  "state": "Virginia",
+  "path": "courts/fourth-circuit/virginia/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

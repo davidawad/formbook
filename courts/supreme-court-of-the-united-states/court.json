@@ -1,0 +1,14 @@
+{
+  "alias": "scotus",
+  "courtlistener_id": "scotus",
+  "name": "Supreme Court of the United States",
+  "level": "supreme",
+  "circuit": null,
+  "state": null,
+  "path": "courts/supreme-court-of-the-united-states",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "alnd",
+  "courtlistener_id": "alnd",
+  "name": "United States District Court for the Northern District of Alabama",
+  "level": "district",
+  "circuit": "ca11",
+  "state": "Alabama",
+  "path": "courts/eleventh-circuit/alabama/federal/northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

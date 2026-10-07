@@ -1,0 +1,14 @@
+{
+  "alias": "alaskactapp",
+  "courtlistener_id": "alaskactapp",
+  "name": "Alaska Court of Appeals",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "Alaska",
+  "path": "courts/ninth-circuit/alaska/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

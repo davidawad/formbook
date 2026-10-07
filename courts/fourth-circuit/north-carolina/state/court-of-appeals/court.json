@@ -1,0 +1,14 @@
+{
+  "alias": "ncctapp",
+  "courtlistener_id": "ncctapp",
+  "name": "Court of Appeals of North Carolina",
+  "level": "state-appellate",
+  "circuit": "ca4",
+  "state": "North Carolina",
+  "path": "courts/fourth-circuit/north-carolina/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

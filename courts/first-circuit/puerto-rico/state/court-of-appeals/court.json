@@ -1,0 +1,14 @@
+{
+  "alias": "prapp",
+  "courtlistener_id": "prapp",
+  "name": "Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico",
+  "level": "state-appellate",
+  "circuit": "ca1",
+  "state": "Puerto Rico",
+  "path": "courts/first-circuit/puerto-rico/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "courts-db system is 'federal' but this is the Puerto Rico commonwealth Court of Appeals; included as a territorial appellate court.",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

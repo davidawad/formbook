@@ -1,0 +1,14 @@
+{
+  "alias": "cacb",
+  "courtlistener_id": "cacb",
+  "name": "United States Bankruptcy Court, C.D. California",
+  "level": "bankruptcy",
+  "circuit": "ca9",
+  "state": "California",
+  "path": "courts/ninth-circuit/california/federal/bankruptcy-central-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

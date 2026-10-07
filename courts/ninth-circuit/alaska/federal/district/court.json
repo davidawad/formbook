@@ -1,0 +1,14 @@
+{
+  "alias": "akd",
+  "courtlistener_id": "akd",
+  "name": "United States District Court for the District of Alaska",
+  "level": "district",
+  "circuit": "ca9",
+  "state": "Alaska",
+  "path": "courts/ninth-circuit/alaska/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

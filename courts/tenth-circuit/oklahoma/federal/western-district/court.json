@@ -1,0 +1,14 @@
+{
+  "alias": "okwd",
+  "courtlistener_id": "okwd",
+  "name": "United States District Court, Oklahoma Western",
+  "level": "district",
+  "circuit": "ca10",
+  "state": "Oklahoma",
+  "path": "courts/tenth-circuit/oklahoma/federal/western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

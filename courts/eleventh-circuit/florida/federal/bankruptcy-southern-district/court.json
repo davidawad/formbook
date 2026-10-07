@@ -1,0 +1,14 @@
+{
+  "alias": "flsb",
+  "courtlistener_id": "flsb",
+  "name": "United States Bankruptcy Court, Southern District Florida",
+  "level": "bankruptcy",
+  "circuit": "ca11",
+  "state": "Florida",
+  "path": "courts/eleventh-circuit/florida/federal/bankruptcy-southern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

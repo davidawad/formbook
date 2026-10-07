@@ -1,0 +1,14 @@
+{
+  "alias": "prb",
+  "courtlistener_id": "prb",
+  "name": "United States Bankruptcy Court, D. Puerto Rico",
+  "level": "bankruptcy",
+  "circuit": "ca1",
+  "state": "Puerto Rico",
+  "path": "courts/first-circuit/puerto-rico/federal/bankruptcy-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

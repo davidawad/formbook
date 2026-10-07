@@ -1,0 +1,14 @@
+{
+  "alias": "txnb",
+  "courtlistener_id": "txnb",
+  "name": "United States Bankruptcy Court, N.D. Texas",
+  "level": "bankruptcy",
+  "circuit": "ca5",
+  "state": "Texas",
+  "path": "courts/fifth-circuit/texas/federal/bankruptcy-northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

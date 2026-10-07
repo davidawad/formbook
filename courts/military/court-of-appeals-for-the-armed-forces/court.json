@@ -1,0 +1,14 @@
+{
+  "alias": "armfor",
+  "courtlistener_id": "armfor",
+  "name": "United States Court of Appeals For The Armed Forces",
+  "level": "military",
+  "circuit": null,
+  "state": null,
+  "path": "courts/military/court-of-appeals-for-the-armed-forces",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "ca6",
+  "courtlistener_id": "ca6",
+  "name": "Court of Appeals for the Sixth Circuit",
+  "level": "appellate",
+  "circuit": "ca6",
+  "state": null,
+  "path": "courts/sixth-circuit/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

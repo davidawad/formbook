@@ -1,0 +1,14 @@
+{
+  "alias": "nywd",
+  "courtlistener_id": "nywd",
+  "name": "District Court, W.D. New York",
+  "level": "district",
+  "circuit": "ca2",
+  "state": "New York",
+  "path": "courts/second-circuit/new-york/federal/western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

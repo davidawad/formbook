@@ -1,0 +1,14 @@
+{
+  "alias": "texrevtrib",
+  "courtlistener_id": "texrevtrib",
+  "name": "Texas Court of Review Tribunal",
+  "level": "state-appellate",
+  "circuit": "ca5",
+  "state": "Texas",
+  "path": "courts/fifth-circuit/texas/state/court-of-review-tribunal",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

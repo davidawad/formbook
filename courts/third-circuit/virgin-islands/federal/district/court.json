@@ -1,0 +1,14 @@
+{
+  "alias": "vid",
+  "courtlistener_id": "vid",
+  "name": "District Court, Virgin Islands",
+  "level": "district",
+  "circuit": "ca3",
+  "state": "Virgin Islands",
+  "path": "courts/third-circuit/virgin-islands/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

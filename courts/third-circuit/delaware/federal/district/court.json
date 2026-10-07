@@ -1,0 +1,14 @@
+{
+  "alias": "ded",
+  "courtlistener_id": "ded",
+  "name": "United States District Court for the District of Delaware",
+  "level": "district",
+  "circuit": "ca3",
+  "state": "Delaware",
+  "path": "courts/third-circuit/delaware/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "bap10",
+  "courtlistener_id": "bap10",
+  "name": "United States Bankruptcy Appellate Panel of The Tenth Circuit",
+  "level": "bap",
+  "circuit": "ca10",
+  "state": null,
+  "path": "courts/tenth-circuit/bankruptcy-appellate-panel",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

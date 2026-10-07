@@ -1,0 +1,14 @@
+{
+  "alias": "calctapp5d",
+  "courtlistener_id": "calctapp5d",
+  "name": "California Court of Appeal, Fifth Appellate District",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "California",
+  "path": "courts/ninth-circuit/california/state/court-of-appeal-fifth-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

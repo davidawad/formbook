@@ -1,0 +1,14 @@
+{
+  "alias": "txnd",
+  "courtlistener_id": "txnd",
+  "name": "District Court, N.D. Texas",
+  "level": "district",
+  "circuit": "ca5",
+  "state": "Texas",
+  "path": "courts/fifth-circuit/texas/federal/northern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

@@ -1,0 +1,14 @@
+{
+  "alias": "tenncrimapp",
+  "courtlistener_id": "tenncrimapp",
+  "name": "Court of Criminal Appeals of Tennessee",
+  "level": "state-appellate",
+  "circuit": "ca6",
+  "state": "Tennessee",
+  "path": "courts/sixth-circuit/tennessee/state/court-of-criminal-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

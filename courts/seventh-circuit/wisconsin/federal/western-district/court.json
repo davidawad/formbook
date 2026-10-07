@@ -1,0 +1,14 @@
+{
+  "alias": "wiwd",
+  "courtlistener_id": "wiwd",
+  "name": "District Court, W.D. Wisconsin",
+  "level": "district",
+  "circuit": "ca7",
+  "state": "Wisconsin",
+  "path": "courts/seventh-circuit/wisconsin/federal/western-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

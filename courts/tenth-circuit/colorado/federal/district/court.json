@@ -1,0 +1,14 @@
+{
+  "alias": "cod",
+  "courtlistener_id": "cod",
+  "name": "United States District Court for the District of Colorado",
+  "level": "district",
+  "circuit": "ca10",
+  "state": "Colorado",
+  "path": "courts/tenth-circuit/colorado/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

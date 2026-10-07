@@ -1,0 +1,14 @@
+{
+  "alias": "monttc",
+  "courtlistener_id": "monttc",
+  "name": "Montana Tax Appeal Board",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "Montana",
+  "path": "courts/ninth-circuit/montana/state/tax-appeal-board",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

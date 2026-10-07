@@ -1,0 +1,14 @@
+{
+  "alias": "calctapp3d",
+  "courtlistener_id": "calctapp3d",
+  "name": "California Court of Appeal, Third Appellate District",
+  "level": "state-appellate",
+  "circuit": "ca9",
+  "state": "California",
+  "path": "courts/ninth-circuit/california/state/court-of-appeal-third-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

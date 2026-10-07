@@ -1,0 +1,14 @@
+{
+  "alias": "prd",
+  "courtlistener_id": "prd",
+  "name": "District Court, D. Puerto Rico",
+  "level": "district",
+  "circuit": "ca1",
+  "state": "Puerto Rico",
+  "path": "courts/first-circuit/puerto-rico/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

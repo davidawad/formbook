@@ -1,0 +1,14 @@
+{
+  "alias": "moctapped",
+  "courtlistener_id": "moctapped",
+  "name": "Missouri Court of Appeals, Eastern District",
+  "level": "state-appellate",
+  "circuit": "ca8",
+  "state": "Missouri",
+  "path": "courts/eighth-circuit/missouri/state/court-of-appeals-eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

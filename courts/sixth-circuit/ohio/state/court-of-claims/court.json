@@ -1,0 +1,14 @@
+{
+  "alias": "ohioctcl",
+  "courtlistener_id": "ohioctcl",
+  "name": "Ohio Court of Claims",
+  "level": "state-appellate",
+  "circuit": "ca6",
+  "state": "Ohio",
+  "path": "courts/sixth-circuit/ohio/state/court-of-claims",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

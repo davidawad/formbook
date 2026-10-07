@@ -1,0 +1,14 @@
+{
+  "alias": "mtd",
+  "courtlistener_id": "mtd",
+  "name": "District Court, D. Montana",
+  "level": "district",
+  "circuit": "ca9",
+  "state": "Montana",
+  "path": "courts/ninth-circuit/montana/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

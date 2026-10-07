@@ -1,0 +1,14 @@
+{
+  "alias": "fladistctapp1",
+  "courtlistener_id": "fladistctapp1",
+  "name": "Florida First District Court of Appeal",
+  "level": "state-appellate",
+  "circuit": "ca11",
+  "state": "Florida",
+  "path": "courts/eleventh-circuit/florida/state/first-district-court-of-appeal",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

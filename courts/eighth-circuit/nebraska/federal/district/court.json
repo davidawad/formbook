@@ -1,0 +1,14 @@
+{
+  "alias": "ned",
+  "courtlistener_id": "ned",
+  "name": "United States District Court, Nebraska",
+  "level": "district",
+  "circuit": "ca8",
+  "state": "Nebraska",
+  "path": "courts/eighth-circuit/nebraska/federal/district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

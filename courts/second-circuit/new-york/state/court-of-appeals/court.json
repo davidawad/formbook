@@ -1,0 +1,14 @@
+{
+  "alias": "ny",
+  "courtlistener_id": "ny",
+  "name": "New York Court of Appeals",
+  "level": "state-supreme",
+  "circuit": "ca2",
+  "state": "New York",
+  "path": "courts/second-circuit/new-york/state/court-of-appeals",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}

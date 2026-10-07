@@ -1,0 +1,14 @@
+{
+  "alias": "paed",
+  "courtlistener_id": "paed",
+  "name": "District Court, E.D. Pennsylvania",
+  "level": "district",
+  "circuit": "ca3",
+  "state": "Pennsylvania",
+  "path": "courts/third-circuit/pennsylvania/federal/eastern-district",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}
