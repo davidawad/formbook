@@ -1,0 +1,518 @@
+// U.S. Court of Appeals for the Ninth Circuit: principal (opening) brief.
+//
+// Rule-driven and content-agnostic. Requirement IDs (CA9-...) refer to ../rules.md.
+// No case-specific text, no coordinates measured off any filed brief, no forced
+// line breaks. The markdown body is rendered by cmarker; the metadata comes from
+// the YAML frontmatter of the same file (schema: ../README.md, "Markdown contract").
+
+#import "@preview/cmarker:0.1.10"
+
+// ---------------------------------------------------------------------------
+// Parameters (the only numbers in this file; each traces to a rule or a style choice)
+// ---------------------------------------------------------------------------
+
+#let font-family = "EB Garamond"          // CA9-FORM-004: serif, proportional. Vendored in /fonts.
+#let type-size = 14pt                      // CA9-FORM-004: 14-point or larger, everywhere.
+#let body-leading = 0.94em                 // CA9-FORM-003: with the metric-aligned line box below this
+                                           // gives a baseline pitch of about 2.2 x type size (double spacing).
+#let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced.
+#let page-margin = 1in                     // CA9-FORM-002
+#let para-indent = 0.5in
+#let toc-depth = 4
+#let passim-threshold = 7                  // authority cited on this many pages or more: "passim"
+
+// ---------------------------------------------------------------------------
+// Small helpers
+// ---------------------------------------------------------------------------
+
+/// Render an inline markdown string (italics etc.) as inline content.
+#let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+
+/// Plain text of a piece of content, for comparisons only.
+#let plain(c) = {
+  if type(c) == str { c }
+  else if c == [] { "" }
+  else if c.has("text") { c.text }
+  else if c.has("children") { c.children.map(plain).join() }
+  else if c.has("body") { plain(c.body) }
+  else if c.func() == [ ].func() { " " }
+  else { "" }
+}
+
+#let need(meta, key) = {
+  if key not in meta { panic("ca9-brief: missing required metadata field `" + key + "`") }
+  meta.at(key)
+}
+
+/// A drawn check box (no font glyph needed, so no fallback can occur).
+#let checkbox(checked) = box(
+  width: 0.72em, height: 0.72em, baseline: 0.05em, stroke: 0.7pt, inset: 0pt,
+  if checked {
+    place(top + left, line(start: (0pt, 0pt), end: (100%, 100%), stroke: 0.9pt))
+    place(top + left, line(start: (0pt, 100%), end: (100%, 0pt), stroke: 0.9pt))
+  },
+)
+
+/// Split "---\nyaml\n---\nbody" into (meta, body).
+#let split-frontmatter(src) = {
+  let m = src.match(regex("^---\r?\n([\\s\\S]*?)\r?\n---[ \t]*\r?\n"))
+  if m == none { panic("ca9-brief: the sample must start with a YAML frontmatter block") }
+  (yaml(bytes(m.captures.at(0))), src.slice(m.end))
+}
+
+/// Word count of markdown source, whitespace-delimited like a word processor.
+/// Markup characters are removed first; links keep their text.
+#let count-words(md) = {
+  let s = md
+  s = s.replace(regex("<!--[\\s\\S]*?-->"), " ")
+  s = s.replace(regex("(?m)^\\[\\^[^\\]]+\\]:"), " ")      // footnote definition labels
+  s = s.replace(regex("\\[\\^[^\\]]+\\]"), "")             // footnote references
+  s = s.replace(regex("\\[([^\\]]*)\\]\\([^)]*\\)"), "$1") // links keep text
+  s = s.replace(regex("(?m)^#{1,6}[ \t]+"), "")
+  s = s.replace(regex("(?m)^>[ \t]?"), "")
+  s = s.replace(regex("\\\\(.)"), "$1")                    // backslash escapes
+  s = s.replace(regex("[*]"), "")
+  s = s.replace(regex("(^|[\\s(\\[\u{201C}\"])_"), "$1")
+  s = s.replace(regex("_([\\s.,;:)\\]\u{201D}\"!?]|$)"), "$1")
+  s.split(regex("\\s+")).filter(w => w != "").len()
+}
+
+// ---------------------------------------------------------------------------
+// Headings: numbering scheme and styles
+// ---------------------------------------------------------------------------
+
+/// True when the level-1 section that contains `loc` is the Argument.
+#let in-argument(loc) = {
+  let tops = query(selector(heading.where(level: 1)).before(loc, inclusive: true))
+  tops.len() > 0 and lower(plain(tops.last().body)).trim() == "argument"
+}
+
+/// Printed label of a numbered heading, e.g. "I.", "A.", "1.", "a.".
+/// Argument: I. / A. / 1. / a.   Elsewhere: A. / 1. / a. / (1)   (CA9-CONT-012)
+#let heading-label(h) = {
+  let loc = h.location()
+  let c = counter(heading).at(loc)
+  let n = c.at(h.level - 1, default: 1)
+  if in-argument(loc) {
+    if h.level == 2 { numbering("I.", n) }
+    else if h.level == 3 { numbering("A.", n) }
+    else if h.level == 4 { numbering("1.", n) }
+    else if h.level == 5 { numbering("a.", n) }
+    else { panic("ca9-brief: headings deeper than level 5 are not supported") }
+  } else {
+    if h.level == 2 { numbering("A.", n) }
+    else if h.level == 3 { numbering("1.", n) }
+    else if h.level == 4 { numbering("a.", n) }
+    else if h.level == 5 { numbering("(1)", n) }
+    else { panic("ca9-brief: headings deeper than level 5 are not supported") }
+  }
+}
+
+#let heading-tab = 0.5in
+
+/// Left edge of a heading's label for a given level (labels step in by half an inch).
+#let heading-indent(level, numbered) = {
+  if numbered { (level - 2) * heading-tab + heading-tab * 0 } else { 0pt }
+}
+
+#let style-heading(it) = {
+  set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
+  if it.level == 1 {
+    // Section headings: bold, capitals, centered.
+    block(width: 100%, sticky: true, above: 1.5em, below: 1.1em,
+      align(center, strong(upper(it.body))))
+  } else if it.numbering == none {
+    // Unnumbered sub-headings (addendum entries): bold, left.
+    block(width: 100%, sticky: true, above: 1.2em, below: 0.9em, strong(it.body))
+  } else if in-argument(it.location()) and it.level == 2 {
+    // Point headings: bold small capitals, centered, with the roman numeral.
+    block(width: 100%, sticky: true, above: 1.2em, below: 1em,
+      align(center, strong(smallcaps(heading-label(it) + [ ] + it.body))))
+  } else {
+    // Sub-headings: label in a fixed box, text hangs under the text, bold (italic below level 3).
+    let ind = (it.level - 2) * heading-tab
+    let lab = heading-label(it)
+    block(width: 100%, sticky: true, above: 1.1em, below: 0.9em, {
+      set par(hanging-indent: ind + heading-tab)
+      h(ind)
+      box(width: heading-tab, if it.level >= 4 { strong(emph(lab)) } else { strong(lab) })
+      if it.level >= 4 { strong(emph(it.body)) } else { strong(it.body) }
+    })
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Tables of contents and authorities
+// ---------------------------------------------------------------------------
+
+#let dot-leader = box(width: 1fr, repeat[.#h(0.22em)])
+
+/// One table-of-contents row, built from a heading element.
+#let toc-entry(it) = {
+  let h = it.element
+  let numbered = h.numbering != none and h.level >= 2
+  let ind = if numbered { (h.level - 2) * heading-tab + heading-tab }
+            else if h.level >= 2 { (h.level - 2) * heading-tab }
+            else { 0pt }
+  let lab = if numbered { heading-label(h) } else { none }
+  let title = if h.level == 1 { upper(h.body) } else { h.body }
+  let tab = if numbered { heading-tab } else { 0pt }
+  link(h.location(), block(width: 100%, above: if h.level == 1 { 1.2em } else { 0.85em }, below: 0pt, {
+    set par(first-line-indent: 0pt, hanging-indent: ind + (if numbered { tab } else { heading-tab }),
+      leading: single-leading, justify: false)
+    h(ind)
+    if numbered { box(width: tab, lab) }
+    title
+    h(0.8em)
+    dot-leader
+    box(width: 2.6em, align(right, it.page()))
+  }))
+}
+
+#let toc-section(has-addendum) = {
+  heading(level: 1, numbering: none, outlined: false)[Table of Contents]
+  align(right, block(above: 0.3em, below: 0pt, strong(underline[Page])))
+  let target = if has-addendum {
+    selector(heading.where(outlined: true)).before(<add-start>, inclusive: true)
+  } else {
+    selector(heading.where(outlined: true))
+  }
+  show outline.entry: toc-entry
+  outline(title: none, target: target, depth: toc-depth, indent: none)
+}
+
+#let toa-groups = (
+  ("case", "Cases:"),
+  ("constitution", "Constitutional Provisions:"),
+  ("statute", "Statutes:"),
+  ("regulation", "Regulations:"),
+  ("rule", "Rules:"),
+  ("other", "Other Authorities:"),
+)
+
+#let sort-key(a) = lower(plain(inl(a.at("sort", default: a.at("name", default: "") + " " + a.cite))))
+    .replace(regex("[^a-z0-9 ]"), "")
+
+/// Table of authorities, built from the `toa:` links found in the body.
+#let toa-section(authorities) = {
+  heading(level: 1, numbering: none)[Table of Authorities]
+  context {
+    let hits = query(<toa-hit>)
+    for h in hits {
+      if h.value not in authorities {
+        panic("ca9-brief: link `toa:" + h.value + "` has no entry under `authorities:` in the frontmatter")
+      }
+    }
+    let first = true
+    for (kind, title) in toa-groups {
+      let members = authorities.pairs()
+        .filter(p => p.last().kind == kind and hits.any(h => h.value == p.first()))
+        .sorted(key: p => sort-key(p.last()))
+      if members.len() == 0 { continue }
+      block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
+        set par(first-line-indent: 0pt)
+        strong(title)
+        if first { h(1fr); strong(underline[Page(s)]) }
+      })
+      first = false
+      for (key, a) in members {
+        // Distinct printed page labels, in document order.
+        let pages = ()
+        for h in hits.filter(h => h.value == key) {
+          let loc = h.location()
+          let label = numbering(loc.page-numbering(), ..counter(page).at(loc))
+          if label not in pages { pages.push(label) }
+        }
+        let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
+        block(breakable: false, above: 0.8em, below: 0pt, width: 100%, {
+          set par(first-line-indent: 0pt, hanging-indent: 0.35in, leading: single-leading, justify: false)
+          if "name" in a {
+            if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
+            [,]
+            linebreak()
+          }
+          inl(a.cite)
+          h(0.8em)
+          dot-leader
+          h(0.3em)
+          page-text
+        })
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Cover (FRAP 32(a)(2); CA9-COVER-001 to -007)
+// ---------------------------------------------------------------------------
+
+#let double-rule = {
+  line(length: 100%, stroke: 1.6pt)
+  v(2.5pt)
+  line(length: 100%, stroke: 0.5pt)
+}
+#let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
+
+#let cover(meta) = page(numbering: none, footer: none, {
+  set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em, justify: false)
+  set align(center)
+  v(0.2in)
+  strong[No. #need(meta, "case_number")]
+  v(0.45em)
+  double-rule
+  v(0.9em)
+  strong[IN THE UNITED STATES COURT OF APPEALS\ FOR THE NINTH CIRCUIT]
+  v(0.9em)
+  short-rule
+  v(0.7em)
+  let sides = need(meta, "caption")
+  for (i, side) in sides.enumerate() {
+    for name in side.names { inl(name); parbreak() }
+    align(left, pad(left: 50%, inl(side.designation)))
+    if i < sides.len() - 1 { v(0.2em); [v.]; v(0.2em) }
+  }
+  v(0.5em)
+  short-rule
+  v(0.7em)
+  inl(need(meta, "proceeding"))
+  if "district_court_case" in meta or "judge" in meta {
+    parbreak()
+    [#if "district_court_case" in meta [D.C. No. #meta.district_court_case]#if "district_court_case" in meta and "judge" in meta [; ]#if "judge" in meta [#inl(meta.judge)]]
+  }
+  v(0.7em)
+  short-rule
+  v(0.7em)
+  strong(upper(inl(need(meta, "brief_title"))))
+  v(0.7em)
+  short-rule
+  v(1em)
+  // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number).
+  align(left, pad(left: 50%, {
+    set par(hanging-indent: 0pt, spacing: 0.7em)
+    let groups = need(meta, "counsel")
+    for (gi, g) in groups.enumerate() {
+      block(breakable: false, {
+        for n in g.names { n; linebreak() }
+        let lines = g.at("lines", default: ())
+        if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
+        for l in lines { h(0.5em); emph(inl(l)); linebreak() }
+      })
+    }
+  }))
+  v(0.6em)
+  double-rule
+})
+
+// ---------------------------------------------------------------------------
+// Signature, related cases, certificates (Forms 17, 8, 15)
+// ---------------------------------------------------------------------------
+
+#let signature-line(meta) = [s/ #need(meta, "signature").signer]
+
+#let signature-block(meta) = {
+  let sig = need(meta, "signature")
+  block(breakable: false, above: 1.4em, {
+    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+    align(left, pad(left: 50%, {
+      [Respectfully submitted,]
+      v(1.2em)
+      signature-line(meta)
+      linebreak()
+      upper(sig.signer)
+      for l in sig.at("lines", default: ()) { linebreak(); h(0.5em); emph(inl(l)) }
+    }))
+    if "date" in meta { v(0.8em); meta.date }
+  })
+}
+
+#let form-sig-line(meta) = block(above: 1.6em, breakable: false, {
+  set par(first-line-indent: 0pt, leading: single-leading)
+  grid(columns: (1fr, 1fr), column-gutter: 1em,
+    [#signature-line(meta)\ #text(size: type-size)[Signature]],
+    [#meta.at("date", default: "")\ Date])
+})
+
+#let option-row(checked, body, indent: 0pt) = block(above: 0.8em, breakable: false, {
+  set par(first-line-indent: 0pt, hanging-indent: indent + 1.6em, leading: single-leading, justify: false)
+  h(indent)
+  box(width: 1.6em, checkbox(checked))
+  body
+})
+
+/// Statement of Related Cases, Form 17 wording (Circuit Rule 28-2.6; CA9-CERT-003).
+#let related-cases(meta) = {
+  let rc = meta.at("related_cases", default: (status: "none"))
+  let status = rc.at("status", default: "none")
+  heading(level: 1, numbering: none)[Statement of Related Cases]
+  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+  [9th Cir. Case Number(s) #need(meta, "case_number")]
+  parbreak()
+  [The undersigned attorney or self-represented party states the following:]
+  option-row(status == "none", [I am unaware of any related cases currently pending in this court.])
+  option-row(status == "other-briefs", [I am unaware of any related cases currently pending in this court other than the case(s) identified in the initial brief(s) filed by the other party or parties.])
+  option-row(status == "pending", [I am aware of one or more related cases currently pending in this court. The case number and name of each related case and its relationship to this case are:])
+  if status == "pending" {
+    for c in rc.cases {
+      block(above: 0.7em, breakable: false, {
+        set par(hanging-indent: 1.6em)
+        h(1.6em)
+        [No. #c.number, #emph(inl(c.name)). #inl(c.relationship)]
+      })
+    }
+  }
+  form-sig-line(meta)
+}
+
+#let limit-options = (
+  ("standard", [complies with the word limit of Cir. R. 32-1.]),
+  ("cross-appeal", [is a cross-appeal brief and complies with the word limit of Cir. R. 28.1-1.]),
+  ("amicus", [is an amicus brief and complies with the word limit of FRAP 29(a)(5), Cir. R. 29-2(c)(2), or Cir. R. 29-2(c)(3).]),
+  ("death-penalty", [is for a death penalty case and complies with the word limit of Cir. R. 32-4.]),
+)
+
+/// Certificate of Compliance, Form 8 wording (Circuit Rule 32-1(e); CA9-CERT-001, -002).
+#let certificate-of-compliance(meta, words) = {
+  let basis = meta.at("word_limit_basis", default: "standard")
+  let longer = ("longer-joint", "longer-multiple", "longer-response-to-joint")
+  heading(level: 1, numbering: none)[Certificate of Compliance]
+  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+  [9th Cir. Case Number(s) #need(meta, "case_number")]
+  parbreak()
+  [I am the attorney or self-represented party.]
+  parbreak()
+  [This brief contains #words words, including #meta.at("manual_image_words", default: 0) words manually counted in any visual images, and excluding the items exempted by FRAP 32(f). The brief’s type size and typeface comply with FRAP 32(a)(5) and (6).]
+  parbreak()
+  [I certify that this brief (select only one):]
+  for (key, body) in limit-options { option-row(basis == key, body) }
+  option-row(basis in longer, [complies with the longer length limit permitted by Cir. R. 32-2(b) because (select only one):])
+  option-row(basis == "longer-joint", [it is a joint brief submitted by separately represented parties.], indent: 1.6em)
+  option-row(basis == "longer-multiple", [a party or parties are filing a single brief in response to multiple briefs.], indent: 1.6em)
+  option-row(basis == "longer-response-to-joint", [a party or parties are filing a single brief in response to a longer joint brief.], indent: 1.6em)
+  option-row(basis == "court-order", [complies with the length limit designated by court order dated #meta.at("court_order_date", default: "__________").])
+  option-row(basis == "motion-to-exceed", [is accompanied by a motion to file a longer brief pursuant to Cir. R. 32-2(a).])
+  form-sig-line(meta)
+}
+
+/// Certificate of Service, Form 15 wording. Only when `service.certificate: true` (CA9-CERT-004).
+#let certificate-of-service(meta) = {
+  let svc = meta.service
+  heading(level: 1, numbering: none)[Certificate of Service]
+  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+  [9th Cir. Case Number(s) #need(meta, "case_number")]
+  parbreak()
+  [I hereby certify that I electronically filed the foregoing/attached document(s) on this date with the Clerk of the Court for the United States Court of Appeals for the Ninth Circuit using the Appellate Electronic Filing system.]
+  let unreg = svc.at("unregistered", default: ())
+  if unreg.len() > 0 {
+    parbreak()
+    strong[Service on Case Participants Who Are NOT Registered for Electronic Filing:]
+    parbreak()
+    [I certify that I served the foregoing/attached document(s) on this date by hand delivery, mail, third party commercial carrier for delivery within 3 calendar days, or, having obtained prior consent, by email to the following unregistered case participants (list each name and mailing/email address):]
+    for u in unreg { block(above: 0.7em, breakable: false, pad(left: 0.5in, [#u.name, #u.address])) }
+  }
+  parbreak()
+  strong[Description of Document(s) (required for all documents):]
+  parbreak()
+  inl(need(meta, "brief_title"))
+  form-sig-line(meta)
+}
+
+// ---------------------------------------------------------------------------
+// The brief
+// ---------------------------------------------------------------------------
+
+#let ca9-brief(meta, md) = {
+  // ---- metadata checks (loud failure beats silent omission) ----
+  for k in ("case_number", "caption", "proceeding", "brief_title", "counsel", "phone", "signature") { need(meta, k) }
+  let authorities = meta.at("authorities", default: (:))
+
+  // ---- split off the addendum ----
+  let add = md.match(regex("(?mi)^#[ \t]+addendum[ \t]*$"))
+  let body-md = if add == none { md } else { md.slice(0, add.start) }
+  let add-md = if add == none { none } else { md.slice(add.end) }
+  let words = count-words(body-md)
+  let limit = 14000
+  if words > limit {
+    panic("ca9-brief: the brief has " + str(words) + " words; Circuit Rule 32-1(a) allows " + str(limit))
+  }
+
+  // ---- document-wide settings ----
+  set document(
+    title: plain(inl(need(meta, "brief_title"))) + ", No. " + need(meta, "case_number"),
+    author: need(meta, "signature").signer,
+  )
+  set page(paper: "us-letter", margin: page-margin, number-align: center, footer-descent: 30%)
+  set text(
+    font: font-family, size: type-size, lang: "en", region: "us",
+    hyphenate: false, fallback: false,
+    top-edge: "ascender", bottom-edge: "descender",
+  )
+  set par(
+    leading: body-leading, spacing: body-leading,
+    first-line-indent: (amount: para-indent, all: true), justify: false,
+  )
+  set heading(numbering: none)
+  set footnote.entry(
+    gap: 0.5em, clearance: 0.9em, indent: 0pt,
+    separator: line(length: 30%, stroke: 0.5pt),
+  )
+  show footnote.entry: it => {
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 0.5em)
+    it
+  }
+  show quote.where(block: true): it => pad(left: para-indent, right: para-indent, {
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)
+    block(above: 1em, below: 1em, it.body)
+  })
+  show heading: style-heading
+  show link: it => {
+    if type(it.dest) == str and it.dest.starts-with("toa:") {
+      [#metadata(it.dest.slice(4))<toa-hit>]
+      it.body
+    } else { it.body }
+  }
+
+  // ---- cover ----
+  cover(meta)
+
+  // ---- front matter (lowercase roman) ----
+  set page(numbering: "i")
+  counter(page).update(1)
+  toc-section(add != none)
+  pagebreak()
+  toa-section(authorities)
+
+  // ---- body (arabic from 1) ----
+  set page(numbering: "1")
+  counter(page).update(1)
+  {
+    set heading(numbering: "1")
+    cmarker.render(body-md, raw-typst: false, smart-punctuation: true, h1-level: 1)
+  }
+  signature-block(meta)
+
+  // ---- certificates of counsel ----
+  pagebreak(weak: true)
+  related-cases(meta)
+  pagebreak(weak: true)
+  certificate-of-compliance(meta, words)
+  if meta.at("service", default: (:)).at("certificate", default: false) {
+    pagebreak(weak: true)
+    certificate-of-service(meta)
+  }
+
+  // ---- addendum (Circuit Rule 28-2.7) ----
+  if add != none {
+    set page(numbering: n => "Add-" + str(n))
+    counter(page).update(1)
+    [#heading(level: 1, numbering: none)[Addendum] <add-start>]
+    toc-addendum()
+    pagebreak()
+    cmarker.render(add-md, raw-typst: false, smart-punctuation: true, h1-level: 1)
+  }
+}
+
+#let toc-addendum() = {
+  heading(level: 1, numbering: none, outlined: false)[Table of Contents]
+  show outline.entry: toc-entry
+  outline(title: none, target: selector(heading.where(level: 2)).after(<add-start>), depth: 2, indent: none)
+}
