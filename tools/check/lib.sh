@@ -24,10 +24,7 @@ pass_if() { if [ "$1" = 0 ]; then ST=PASS; else ST=FAIL; fi; }
 page_text() { awk -F'\t' -v p="$1" '$1 == p { printf "%s ", $7 }' "$W/runs.tsv"; }
 # physical page of the first heading-like run (top of page) whose text equals $1, at or after page $2
 heading_page() { awk -F'\t' -v t="$1" -v from="${2:-1}" '$1 >= from && $2 < 110 && $7 == t { print $1; exit }' "$W/runs.tsv"; }
-body_first() {
-  awk -F'\t' 'NR == 1 || $4 < m { m = $4 } END { }' "$W/g0.heads"
-  sort -t"$(printf '\t')" -k4,4n "$W/g0.heads" | head -1 | cut -f4
-}
+body_first() { sort -t"$(printf '\t')" -k4,4n "$W/g0.heads" | head -1 | cut -f4; } # page of the first body heading
 add_page() { awk -F'\t' '$1 ~ /^1/ && tolower($5) == "addendum" { print $4; exit }' "$W/g0.heads"; }
 label_of() { awk -F'\t' -v p="$1" '$1 == p { print $2 }' "$W/labels.tsv"; }
 
@@ -123,7 +120,7 @@ chk_italic_face() {
 
 chk_fonts_embedded() {
   pre=$(cfg .font.pdf_prefix)
-  out=$(awk -v pre="$pre" 'NR > 2 { n++; if ($(NF-4) != "yes" && $0 !~ /yes +(yes|no) +(yes|no) +[0-9]+/) {}
+  out=$(awk -v pre="$pre" 'NR > 2 { n++
       name = $1; emb = ""; for (i = 1; i <= NF; i++) if ($i == "yes" || $i == "no") { emb = $i; break }
       sub(/^[A-Z]+\+/, "", name)
       if (emb != "yes") { bad++; msg[bad] = $1 " is not embedded" }
@@ -420,7 +417,6 @@ toa_run() {
     TOA_OUT="!no TABLE OF AUTHORITIES heading"
     return
   }
-  yq -o=json e '.authorities // {}' <(meta '.' | cat) > /dev/null 2>&1
   yq --front-matter=extract -o=json e '.authorities // {}' "$MD" |
     jq -r 'to_entries[] | [.key, .value.kind, (.value.name // ""), .value.cite, (.value.sort // ((.value.name // "") + " " + .value.cite))] | @tsv' |
     sed 's/[*]//g' > "$W/auth.tsv"
@@ -433,12 +429,12 @@ toa_run() {
     { key = $1; kind = $2; name = $3; cite = $4; srt = tolower($5); gsub(/[^a-z0-9 ]/, "", srt)
       if (!(key in np)) next
       title = (name != "") ? name "," cite : cite
-      exp = (np[key] >= thr) ? "passim" : pages[key]
-      print norm1(title) "\t" key "\t" kind "\t" srt "\t" exp }' "$W/auth.tsv" > "$W/toa.expect"
-  $AWKU -v from="$tp" -v to=$((bf - 1)) -v skip='^(TABLE OF AUTHORITIES|Cases:|Constitutional Provisions:|Statutes:|Regulations:|Rules:|Other Authorities:|Page\(s\))$' \
+      expv = (np[key] >= thr) ? "passim" : pages[key]
+      print norm1(title) "\t" key "\t" kind "\t" srt "\t" expv }' "$W/auth.tsv" > "$W/toa.expect"
+  $AWKU -v from="$tp" -v to=$((bf - 1)) -v skip='^(TABLE OF AUTHORITIES|Cases:|Constitutional Provisions:|Statutes:|Regulations:|Rules:|Other Authorities:|Page[(]s[)])$' \
     -f "$CHK/leader-entries.awk" "$W/runs.tsv" > "$W/toa.got"
-  TOA_OUT=$($AWKU -F'\t' -f "$CHK/norm.awk" -v exp="$W/toa.expect" -e '
-    BEGIN { while ((getline l < exp) > 0) { split(l, a, "\t"); want[a[1]] = a[5]; keyof[a[1]] = a[2]; kind[a[1]] = a[3]; srt[a[1]] = a[4]; nexp++ } }
+  TOA_OUT=$($AWKU -F'\t' -f "$CHK/norm.awk" -v expf="$W/toa.expect" -e '
+    BEGIN { while ((getline l < expf) > 0) { split(l, a, "\t"); want[a[1]] = a[5]; keyof[a[1]] = a[2]; kind[a[1]] = a[3]; srt[a[1]] = a[4]; nexp++ } }
     { k = norm1($1); pg = $2; gsub(/ /, "", pg)
       if (!(k in want)) { print "STRAY\t" $1; next }
       got[k] = 1
@@ -616,7 +612,7 @@ the addendum page starts with \"$first\", not ADDENDUM"
     DETAIL="$DETAIL
 the addendum has no TABLE OF CONTENTS of its own (Circuit Rule 28-2.7)"
   }
-  awk -F'\t' -v ap="$ap" '$1 ~ /^2/ && $4 >= ap { print norm_hold $5 "\t" $4 }' "$W/g0.heads" |
+  awk -F'\t' -v ap="$ap" '$1 ~ /^2/ && $4 >= ap { print $5 "\t" $4 }' "$W/g0.heads" |
     $AWKU -F'\t' -f "$CHK/norm.awk" -e '{ printf "%s\t%s\n", norm1($1), $2 }' > "$W/add.expect"
   $AWKU -v from="$ap" -v to="$NPAGES" -v skip='^(TABLE OF CONTENTS|ADDENDUM)$' -f "$CHK/leader-entries.awk" "$W/runs.tsv" > "$W/add.got"
   bad=$($AWKU -F'\t' -f "$CHK/norm.awk" -v labels="$W/labels.tsv" -e '
@@ -671,7 +667,7 @@ chk_review() {
 chk_generalization_features() {
   g=$(cfg .generalization.second_sample)
   gmd="$COURT/$(cfg ".samples[] | select(.id == \"$g\") | .md")"
-  body=$(sed '1,/^---$/d' "$gmd" | sed '1,/^---$/d')
+  body=$(sed '1,/^---$/d' "$gmd")
   miss=""
   has() { printf '%s\n' "$body" | grep -Eq "$1"; }
   for f in $(cfg '.generalization.require_features[]'); do

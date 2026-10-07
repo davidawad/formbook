@@ -67,14 +67,16 @@
   s = s.replace(regex("<!--[\\s\\S]*?-->"), " ")
   s = s.replace(regex("(?m)^\\[\\^[^\\]]+\\]:"), " ")      // footnote definition labels
   s = s.replace(regex("\\[\\^[^\\]]+\\]"), "")             // footnote references
-  s = s.replace(regex("\\[([^\\]]*)\\]\\([^)]*\\)"), "$1") // links keep text
+  // (typst's string replacement has no $1: a function returns the captured text)
+  let keep(m) = m.captures.at(0)
+  s = s.replace(regex("\\[([^\\]]*)\\]\\([^)]*\\)"), keep)  // links keep their text
   s = s.replace(regex("(?m)^#{1,6}[ \t]+"), "")
   s = s.replace(regex("(?m)^>[ \t]?"), "")
   s = s.replace(regex("(?m)^[ \t]*([-*+]|[0-9]+[.)])[ \t]+"), "")   // list markers are not words
-  s = s.replace(regex("\\\\(.)"), "$1")                    // backslash escapes
+  s = s.replace(regex("\\\\(.)"), keep)                    // backslash escapes
   s = s.replace(regex("[*]"), "")
-  s = s.replace(regex("(^|[\\s(\\[\u{201C}\"])_"), "$1")
-  s = s.replace(regex("_([\\s.,;:)\\]\u{201D}\"!?]|$)"), "$1")
+  s = s.replace(regex("(^|[\\s(\\[\u{201C}\"])_"), keep)
+  s = s.replace(regex("_([\\s.,;:)\\]\u{201D}\"!?]|$)"), keep)
   s.split(regex("\\s+")).filter(w => w != "").len()
 }
 
