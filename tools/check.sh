@@ -15,7 +15,6 @@
 # checks.yaml and must give the same verdicts (docs/EVAL-LOOP.md, "Replacing this script").
 #
 # Needs: sh, gawk, yq (mikefarah), jq, typst, poppler (pdfinfo pdffonts pdftotext pdftohtml pdfimages), shasum.
-set -u
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 COURT=$(cd "${1:?usage: tools/check.sh <court-dir> [--no-render] [--only SAMPLE_ID]}" && pwd)
 shift
@@ -88,9 +87,10 @@ FAILS=0
 PASSES=0
 ALLFAIL=0
 run_checks() { # $1 = space-separated gate numbers
+  GATES=$1
   yq -o=json e '.checks' "$COURT/checks.yaml" | jq -r '.[] | [.id, (.gate|tostring), .method, .name, .expect, (.fix.anchor // ""), ((.args // []) | join("\u001f"))] | @tsv' |
     while IFS="$TAB" read -r id gate method name expect anchor args; do
-      case " $1 " in *" $gate "*) ;; *) continue ;; esac
+      case " $GATES " in *" $gate "*) ;; *) continue ;; esac
       [ "$gate" = 3 ] && [ "$SID" != "$(cfg .generalization.second_sample)" ] && continue
       if [ "$method" = generalization_all ]; then
         ST=PASS
