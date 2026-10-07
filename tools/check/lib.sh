@@ -642,7 +642,7 @@ chk_review() {
     return
   fi
   sha=$(shasum -a 256 "$PDF" | cut -d' ' -f1)
-  sec=$(awk -v id="$SID" '/^## sample / { on = ($3 == id) } on' "$newest")
+  sec=$(awk -v id="$SID" -v eng="$ENGINE" '/^## sample / { on = ($3 == id && (eng == "typst" ? NF == 3 : $4 == eng)) } on' "$newest")
   if [ -z "$sec" ]; then
     ST=FAIL
     MEAS="$(basename "$newest") has no '## sample $SID' section"
@@ -700,13 +700,13 @@ chk_generalization_features() {
 
 # ---------------------------------------------------------------- Gate 1: the template itself
 chk_template_agnostic() { # CA9-TOOL-002: no case-specific text from any sample inside the template
-  tmpl="$COURT/$(cfg .template)"
+  tmpl="$COURT/$TEMPLATE"
   for sid2 in $(cfg ".samples[].id"); do
     smd="$COURT/$(cfg ".samples[] | select(.id == \"$sid2\") | .md")"
     yq --front-matter=extract -o=json e '[.case_number, (.caption[].names[]), (.caption[].designation), (.counsel[].names[]), .signature.signer, .proceeding, (.authorities[]? | .name, .cite)] | map(select(. != null)) | .[]' "$smd" |
       sed 's/^"//; s/"$//; s/[*]//g' | while IFS= read -r s; do
       [ "${#s}" -ge 6 ] || continue
-      grep -F -i -q -- "$s" "$tmpl" && echo "$sid2: \"$s\" appears in the template"
+      grep -r -F -i -q -- "$s" "$tmpl" && echo "$sid2: \"$s\" appears in the template"
     done
   done > "$W/agnostic.txt"
   n=$(wc -l < "$W/agnostic.txt" | tr -d ' ')
