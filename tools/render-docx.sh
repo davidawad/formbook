@@ -45,12 +45,15 @@ unzip -tq "$DOCX" > /dev/null || {
   exit 1
 }
 if command -v xmllint > /dev/null; then
-  for part in $(unzip -Z1 "$DOCX" | grep -E '\.(xml|rels)$'); do
-    unzip -p "$DOCX" "$part" | xmllint --noout - 2> /dev/null || {
-      echo "render-docx.sh: $part is not well-formed XML" >&2
+  X=$(mktemp -d)
+  unzip -q "$DOCX" -d "$X"
+  find "$X" -type f \( -name '*.xml' -o -name '*.rels' \) | while IFS= read -r part; do
+    xmllint --noout "$part" 2> /dev/null || {
+      echo "render-docx.sh: ${part#$X/} is not well-formed XML" >&2
       exit 1
     }
-  done
+  done || exit 1
+  rm -rf "$X"
 fi
 WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
