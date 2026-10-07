@@ -129,10 +129,11 @@
 
 #let style-heading(it) = {
   set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
+  set text(size: type-size)   // typst's built-in heading sizes are not used; every heading is body size or larger
   if it.level == 1 {
-    // Section headings: bold, capitals, centered.
+    // Section headings: bold, capitals, centered, a little larger than the body.
     block(width: 100%, sticky: true, above: 1.5em, below: 1.1em,
-      align(center, strong(upper(it.body))))
+      align(center, text(size: 1.15em, strong(upper(it.body)))))
   } else if it.numbering == none {
     // Unnumbered sub-headings (addendum entries): bold, left.
     block(width: 100%, sticky: true, above: 1.2em, below: 0.9em, strong(it.body))
@@ -169,7 +170,7 @@
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let hang-by = ind + heading-tab
-  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.7em } else { 0.45em }, below: 0pt,
+  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
     hang(hang-by, {
       h(ind)
       if numbered { box(width: heading-tab, lab) }
@@ -373,7 +374,7 @@
     for c in rc.cases {
       block(above: 0.7em, breakable: false, hang(3.2em, {
         h(1.6em)
-        [No. #c.number, #emph(inl(c.name)). #inl(c.relationship)]
+        [No. #c.number, #emph(inl(c.name)) (#inl(c.relationship)).]
       }))
     }
   }
@@ -481,12 +482,15 @@
   show footnote.entry: it => {
     set text(size: type-size)   // typst's default is 0.85em; FRAP 32(a)(5) allows nothing under 14 pt
     set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 0.5em)
-    it
+    // marker, a thin space, then the note (typst's default runs them together)
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    [#super(num)#h(0.25em)#note.body]
   }
-  show quote.where(block: true): it => pad(left: para-indent, right: para-indent, {
+  show quote.where(block: true): it => block(above: 0.5em, below: 0.5em, pad(left: para-indent, right: para-indent, {
     set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)
-    block(above: 1em, below: 1em, it.body)
-  })
+    it.body
+  }))
   // Typography that holds for any text: never break inside a token of adjacent parentheses
   // ("60(b)(5)"), and never between a section sign / pilcrow and its number. Done with
   // unbreakable boxes so the extracted text stays exactly the author's characters.
