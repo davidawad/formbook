@@ -32,7 +32,7 @@ related_cases:
       relationship: "arises out of the same consolidated district court proceedings and raises the same statutory question"
     - number: "25-4502"
       name: "Voss v. Quintana-Okafor"
-      relationship: "involves the same transaction (the 2024 curtailment order)"
+      relationship: "involves the same transaction, the 2024 curtailment order"
 service:
   certificate: true
   unregistered:

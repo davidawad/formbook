@@ -36,11 +36,11 @@ Regenerate with `tools/tracker.sh` (the completion logic is in [Bend](https://gi
 | Sixth Circuit | 30 | 0 | 0 | 0 | 30 | 0.0% | 0.0% | 0.0% |
 | Seventh Circuit | 22 | 0 | 0 | 0 | 22 | 0.0% | 0.0% | 0.0% |
 | Eighth Circuit | 39 | 0 | 0 | 0 | 39 | 0.0% | 0.0% | 0.0% |
-| Ninth Circuit | 65 | 0 | 0 | 3 | 62 | 0.0% | 0.0% | 0.7% |
+| Ninth Circuit | 65 | 0 | 1 | 2 | 62 | 0.0% | 1.5% | 1.8% |
 | Tenth Circuit | 34 | 0 | 0 | 0 | 34 | 0.0% | 0.0% | 0.0% |
 | Eleventh Circuit | 32 | 0 | 0 | 0 | 32 | 0.0% | 0.0% | 0.0% |
 | D.C. Circuit | 4 | 0 | 0 | 0 | 4 | 0.0% | 0.0% | 0.0% |
-| **Total** | 375 | 0 | 0 | 4 | 371 | 0.0% | 0.0% | 0.1% |
+| **Total** | 375 | 0 | 1 | 3 | 371 | 0.0% | 0.2% | 0.3% |
 <!-- tracker:end -->
 
 ## Index
@@ -521,7 +521,7 @@ Regenerate with `tools/tracker.sh` (the completion logic is in [Bend](https://gi
 | Court | Alias | Level | Status | % |
 |---|---|---|---|---:|
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](courts/ninth-circuit/bankruptcy-appellate-panel) | `bap9` | bap | todo | 0 |
-| [Court of Appeals for the Ninth Circuit](courts/ninth-circuit/court-of-appeals) | `ca9` | appellate | in progress | 17 |
+| [Court of Appeals for the Ninth Circuit](courts/ninth-circuit/court-of-appeals) | `ca9` | appellate | up for review | 83 |
 
 ### Alaska
 
