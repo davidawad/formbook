@@ -16,6 +16,7 @@ function flush() {
 }
 
 $1 < from || $1 > to { next }
+$2 >= footer_top { next }          # page numbers in the bottom margin are not part of any entry
 {
   t = $7
   if (have) {   # the page number may sit in its own run, on the same line as the leaders

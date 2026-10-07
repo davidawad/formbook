@@ -57,6 +57,7 @@ calibrate() {
   pdftotext -tsv "$d/c.pdf" - | awk -F'\t' '$1 == 5 { printf "%.5f", $10 / 100; exit }'
 }
 CALIB=$(calibrate)
+FTOP=$(($(cfg .params.page_height_pt) - $(cfg .params.margin_pt))) # text below this line is footer (page numbers)
 
 # ---- per-sample derived data ------------------------------------------------------------------------
 prepare() {
