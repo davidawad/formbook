@@ -88,6 +88,7 @@ mutant no-footnote-size "CA9-FORM-004" layout 's/^    set text(size: type-size).
 mutant wrong-word-count "CA9-CERT-002" layout 's/This brief contains #group-digits(words) words/This brief contains #group-digits(words + 7) words/'
 mutant argument-numbering "CA9-CONT-012" layout 's/if h.level == 2 { numbering("I.", n) }/if h.level == 2 { numbering("A.", n) }/'
 mutant case-text-in-template "CA9-TOOL-002" layout 's|^// U.S. Court of Appeals for the Ninth Circuit: principal (opening) brief\.|& Theresa Sweet, et al.,|'
+mutant toa-tag-before-citation "CA9-TOOL-006" layout 's/tag-after-first-word(it.body, \[#metadata(it.dest.slice(4))<toa-hit>\]).first()/{ [#metadata(it.dest.slice(4))<toa-hit>]; it.body }/'
 mutant toa-wrong-page "CA9-TOOL-006" layout 's/let page-text = if pages.len() >= passim-threshold { emph\[passim\] } else { pages.join(", ") }/let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.map(p => str(int(p) + 1)).join(", ") }/'
 
 echo
