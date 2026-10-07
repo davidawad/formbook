@@ -85,8 +85,7 @@ FTOP=$(($(cfg .params.page_height_pt) - $(cfg .params.margin_pt))) # text below 
 prepare() {
   W="$OUT/$SID"
   mkdir -p "$W"
-  [ "$RENDER" = 0 ] || sh "$ROOT/tools/render.sh" --engine "$ENGINE" "$COURT" "$(cfg ".samples[] | select(.id == \"$SID\")   case $ENGINE in latex) PDF="${PDF%.pdf}.latex.pdf" ;; docx) PDF="${PDF%.pdf}.docx.pdf" ;; esac
-| .md")" "$PDF" > /dev/null || return 1
+  [ "$RENDER" = 0 ] || sh "$ROOT/tools/render.sh" --engine "$ENGINE" "$COURT" "$(cfg ".samples[] | select(.id == \"$SID\") | .md")" "$PDF" > /dev/null || return 1
   [ -f "$PDF" ] || {
     echo "no PDF at $PDF" >&2
     return 1
@@ -192,6 +191,16 @@ P=$(grep -c P "$OUT/.tally")
 F=$(grep -c F "$OUT/.tally")
 echo
 echo "RESULT: $P checks passed, $F failed"
+STAMP="$COURT/samples/.check-$ENGINE.txt"
+if [ "$F" != 0 ]; then
+  rm -f "$STAMP" # any failure invalidates the engine's stamp
+elif [ -z "$ONLY" ]; then
+  {
+    echo PASS
+    sort -k2 "$OUT/.shas"
+  } > "$STAMP"
+  echo "stamp: ${STAMP#$COURT/} written for engine $ENGINE"
+fi
 if [ "$F" = 0 ]; then
   echo "All gates green: this court folder is eligible for 'up for review' (tools/tracker.sh). 'done' is set by David, by hand, in court.json."
   exit 0
