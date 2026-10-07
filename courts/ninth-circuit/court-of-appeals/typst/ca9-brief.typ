@@ -144,15 +144,15 @@
 
 /// One table-of-contents row, built from a heading element.
 #let toc-entry(it) = {
-  let h = it.element
-  let numbered = h.numbering != none and h.level >= 2
-  let ind = if numbered { (h.level - 2) * heading-tab + heading-tab }
-            else if h.level >= 2 { (h.level - 2) * heading-tab }
+  let hd = it.element
+  let numbered = hd.numbering != none and hd.level >= 2
+  let ind = if numbered { (hd.level - 2) * heading-tab + heading-tab }
+            else if hd.level >= 2 { (hd.level - 2) * heading-tab }
             else { 0pt }
-  let lab = if numbered { heading-label(h) } else { none }
-  let title = if h.level == 1 { upper(h.body) } else { h.body }
+  let lab = if numbered { heading-label(hd) } else { none }
+  let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let tab = if numbered { heading-tab } else { 0pt }
-  link(h.location(), block(width: 100%, above: if h.level == 1 { 1.2em } else { 0.85em }, below: 0pt, {
+  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 1.2em } else { 0.85em }, below: 0pt, {
     set par(first-line-indent: 0pt, hanging-indent: ind + (if numbered { tab } else { heading-tab }),
       leading: single-leading, justify: false)
     h(ind)
@@ -173,7 +173,7 @@
     selector(heading.where(outlined: true))
   }
   show outline.entry: toc-entry
-  outline(title: none, target: target, depth: toc-depth, indent: none)
+  outline(title: none, target: target, depth: toc-depth, indent: 0pt)
 }
 
 #let toa-groups = (
@@ -414,7 +414,7 @@
 #let toc-addendum() = {
   heading(level: 1, numbering: none, outlined: false)[Table of Contents]
   show outline.entry: toc-entry
-  outline(title: none, target: selector(heading.where(level: 2)).after(<add-start>), depth: 2, indent: none)
+  outline(title: none, target: selector(heading.where(level: 2)).after(<add-start>), depth: 2, indent: 0pt)
 }
 
 // ---------------------------------------------------------------------------
@@ -423,7 +423,7 @@
 
 #let ca9-brief(meta, md) = {
   // ---- metadata checks (loud failure beats silent omission) ----
-  for k in ("case_number", "caption", "proceeding", "brief_title", "counsel", "phone", "signature") { need(meta, k) }
+  for k in ("case_number", "caption", "proceeding", "brief_title", "counsel", "phone", "signature") { let _ = need(meta, k) }
   let authorities = meta.at("authorities", default: (:))
 
   // ---- split off the addendum ----
