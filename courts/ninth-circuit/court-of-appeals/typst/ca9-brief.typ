@@ -85,6 +85,17 @@
   (c, false)
 }
 
+/// 11622 -> "11,622"
+#let group-digits(n) = {
+  let s = str(n)
+  let out = ""
+  for (i, c) in s.clusters().enumerate() {
+    if i > 0 and calc.rem(s.len() - i, 3) == 0 { out += "," }
+    out += c
+  }
+  out
+}
+
 /// Word count of markdown source, whitespace-delimited like a word processor.
 /// Markup characters are removed first; links keep their text.
 #let count-words(md) = {
@@ -423,7 +434,7 @@
   parbreak()
   [I am the attorney or self-represented party.]
   parbreak()
-  [This brief contains #words words, including #meta.at("manual_image_words", default: 0) words manually counted in any visual images, and excluding the items exempted by FRAP 32(f). The brief’s type size and typeface comply with FRAP 32(a)(5) and (6).]
+  [This brief contains #group-digits(words) words, including #meta.at("manual_image_words", default: 0) words manually counted in any visual images, and excluding the items exempted by FRAP 32(f). The brief’s type size and typeface comply with FRAP 32(a)(5) and (6).]
   parbreak()
   [I certify that this brief (select only one):]
   for (key, body) in limit-options { option-row(basis == key, body) }
@@ -512,7 +523,7 @@
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
     [#super(num)#h(0.25em)#note.body]
   }
-  show quote.where(block: true): it => block(above: 0.5em, below: 0.5em, pad(left: para-indent, right: para-indent, {
+  show quote.where(block: true): it => block(above: 1em, below: 1em, pad(left: para-indent, right: para-indent, {
     set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)
     it.body
   }))

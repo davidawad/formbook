@@ -85,7 +85,7 @@ mutant left-aligned-headings "CA9-FORM-009" layout 's/align(center, strong(upper
 mutant wrong-font "CA9-FORM-007" layout 's/^#let font-family = "EB Garamond"/#let font-family = "DejaVu Sans Mono"/'
 mutant footnotes-small "CA9-FORM-004" layout 's/set text(size: type-size)   \/\/ typst/set text(size: 11pt)   \/\/ typst/'
 mutant no-footnote-size "CA9-FORM-004" layout 's/^    set text(size: type-size).*$//'
-mutant wrong-word-count "CA9-CERT-002" layout 's/\[This brief contains #words words/[This brief contains #(words + 7) words/'
+mutant wrong-word-count "CA9-CERT-002" layout 's/This brief contains #group-digits(words) words/This brief contains #group-digits(words + 7) words/'
 mutant argument-numbering "CA9-CONT-012" layout 's/if h.level == 2 { numbering("I.", n) }/if h.level == 2 { numbering("A.", n) }/'
 mutant toa-wrong-page "CA9-TOOL-006" layout 's/let page-text = if pages.len() >= passim-threshold { emph\[passim\] } else { pages.join(", ") }/let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.map(p => str(int(p) + 1)).join(", ") }/'
 
