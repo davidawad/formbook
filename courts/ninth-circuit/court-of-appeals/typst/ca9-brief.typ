@@ -166,7 +166,7 @@
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let hang-by = ind + heading-tab
-  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.9em } else { 0.6em }, below: 0pt,
+  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.7em } else { 0.45em }, below: 0pt,
     hang(hang-by, {
       h(ind)
       if numbered { box(width: heading-tab, lab) }
@@ -263,36 +263,36 @@
 #let cover(meta) = page(numbering: none, footer: none, {
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
   set align(center)
-  v(0.05in)
+  v(0.3in)
   strong[No. #need(meta, "case_number")]
-  v(0.3em)
+  v(0.75em)
   double-rule
-  v(0.35em)
+  v(0.75em)
   strong[IN THE UNITED STATES COURT OF APPEALS\ FOR THE NINTH CIRCUIT]
-  v(0.35em)
+  v(0.75em)
   short-rule
-  v(0.3em)
+  v(0.75em)
   let sides = need(meta, "caption")
   for (i, side) in sides.enumerate() {
     for name in side.names { inl(name); parbreak() }
     align(left, pad(left: 50%, inl(side.designation)))
     if i < sides.len() - 1 { v(0.2em); [v.]; v(0.2em) }
   }
-  v(0.25em)
+  v(0.6em)
   short-rule
-  v(0.3em)
+  v(0.75em)
   inl(need(meta, "proceeding"))
   if "district_court_case" in meta or "judge" in meta {
     parbreak()
     [#if "district_court_case" in meta [D.C. No. #meta.district_court_case]#if "district_court_case" in meta and "judge" in meta [; ]#if "judge" in meta [#inl(meta.judge)]]
   }
-  v(0.3em)
+  v(0.75em)
   short-rule
-  v(0.3em)
+  v(0.75em)
   strong(upper(inl(need(meta, "brief_title"))))
-  v(0.3em)
+  v(0.75em)
   short-rule
-  v(0.25em)
+  v(0.6em)
   // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number).
   align(left, pad(left: 50%, {
     set par(hanging-indent: 0pt, spacing: 0.5em)
@@ -306,7 +306,7 @@
       })
     }
   }))
-  v(0.3em)
+  v(0.75em)
   double-rule
 })
 
@@ -497,9 +497,22 @@
   counter(page).update(1)
   {
     set heading(numbering: "1")
-    cmarker.render(body-md, raw-typst: false, smart-punctuation: true, h1-level: 1)
+    // The signature block never stands alone on a page: the brief's last paragraph is
+    // kept together with it (unless that last block is a heading or a footnote definition).
+    let text-md = body-md.trim(at: end)
+    let breaks = text-md.matches(regex("\n[ \t]*\n"))
+    let cut = if breaks.len() > 0 { breaks.last().end } else { 0 }
+    let tail = text-md.slice(cut)
+    let keep = tail.len() > 0 and not tail.starts-with("#") and not tail.starts-with("[^")
+    let render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
+    if keep {
+      render(text-md.slice(0, cut))
+      block(breakable: false, { render(tail); signature-block(meta) })
+    } else {
+      render(text-md)
+      signature-block(meta)
+    }
   }
-  signature-block(meta)
 
   // ---- certificates of counsel ----
   pagebreak(weak: true)
