@@ -1,0 +1,62 @@
+#!/bin/sh
+# Render one sample to .docx and to the LibreOffice PDF of it (engine "docx").
+# Usage: tools/render-docx.sh <court-dir> <sample.md, relative to the court dir> [out.docx.pdf]
+# Default out: <court>/samples/<id>.docx.pdf ; the .docx sits beside it as <id>.docx.
+# Gates 0 and 1 are measured on the .docx.pdf (Word may paginate slightly differently; see docs/DOCX.md).
+#
+# Contract (docs/EVAL-LOOP.md, "Engines"):
+#   <court>/docx/render.sh        if present it owns the .docx: sh render.sh <court-dir> <sample.md> <out.docx>
+#   <court>/docx/reference.docx   otherwise: pandoc --reference-doc, plus every <court>/docx/*.lua as a filter.
+# Then: soffice --headless --convert-to pdf. The .docx must also open in Word and LibreOffice without repair:
+# this script checks that it is a valid zip with well-formed XML parts (necessary, not sufficient).
+set -eu
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+COURT=$(cd "$1" && pwd)
+SAMPLE=$2
+OUTPDF=${3:-$COURT/samples/$(basename "$SAMPLE" .md).docx.pdf}
+DOCX=${OUTPDF%.pdf}
+case $DOCX in
+  *.docx) ;;
+  *)
+    echo "render-docx.sh: output must end in .docx.pdf" >&2
+    exit 2
+    ;;
+esac
+D="$COURT/docx"
+SOFFICE=${SOFFICE:-$(command -v soffice || echo /opt/homebrew/bin/soffice)}
+if [ -f "$D/render.sh" ]; then
+  sh "$D/render.sh" "$COURT" "$SAMPLE" "$DOCX" >&2 || exit 1
+elif [ -f "$D/reference.docx" ]; then
+  filters=""
+  for f in "$D"/*.lua; do [ -e "$f" ] && filters="$filters --lua-filter=$f"; done
+  # shellcheck disable=SC2086
+  (cd "$COURT" && pandoc --from markdown+smart --to docx --reference-doc="$D/reference.docx" $filters "$SAMPLE" -o "$DOCX") || exit 1
+else
+  echo "render-docx.sh: no docx template ($D/reference.docx or $D/render.sh)" >&2
+  exit 1
+fi
+[ -f "$DOCX" ] || {
+  echo "render-docx.sh: $DOCX was not written" >&2
+  exit 1
+}
+# integrity: valid zip, well-formed XML parts
+unzip -tq "$DOCX" > /dev/null || {
+  echo "render-docx.sh: $DOCX is not a valid zip" >&2
+  exit 1
+}
+if command -v xmllint > /dev/null; then
+  for part in $(unzip -Z1 "$DOCX" | grep -E '\.(xml|rels)$'); do
+    unzip -p "$DOCX" "$part" | xmllint --noout - 2> /dev/null || {
+      echo "render-docx.sh: $part is not well-formed XML" >&2
+      exit 1
+    }
+  done
+fi
+WORK=$(mktemp -d)
+trap 'rm -rf "$WORK"' EXIT
+"$SOFFICE" "-env:UserInstallation=file://$WORK/profile" --headless --convert-to pdf --outdir "$WORK" "$DOCX" > "$WORK/soffice.log" 2>&1 || {
+  cat "$WORK/soffice.log" >&2
+  exit 1
+}
+cp "$WORK/$(basename "${DOCX%.docx}").pdf" "$OUTPDF"
+echo "$OUTPDF"

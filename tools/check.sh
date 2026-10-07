@@ -1,7 +1,15 @@
 #!/bin/sh
 # check.sh: run the eval loop's mechanical gates for one court folder.
 #
-# Usage: tools/check.sh <court-dir> [--no-render] [--only SAMPLE_ID]
+# Usage: tools/check.sh <court-dir> [--engine typst|latex|docx] [--no-render] [--only SAMPLE_ID]
+#
+#   --engine  which rendering of the samples to check (default typst). latex checks samples/<id>.latex.pdf,
+#             docx checks samples/<id>.docx.pdf (LibreOffice conversion of <id>.docx; Word may differ slightly).
+#             A check in checks.yaml may carry `engines: [typst]` and `engines_reason:` to run only there; it is
+#             printed as SKIP, with the reason, on the others.
+#   On a full green run (no --only) a stamp samples/.check-<engine>.txt is written: PASS plus the sha256 of every
+#   PDF checked (and the .docx). Any failure removes it. tools/manifest.sh counts an engine as passing only
+#   while the stamp exists and its hashes match the files on disk.
 #
 #   Gate 0 CONTENT        every markdown block is in the PDF, in order, unaltered; italics; footnotes
 #   Gate 1 RULES          one check per requirement ID in <court>/checks.yaml, measured on the PDF
@@ -16,13 +24,18 @@
 #
 # Needs: sh, gawk, yq (mikefarah), jq, typst, poppler (pdfinfo pdffonts pdftotext pdftohtml pdfimages), shasum.
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
-COURT=$(cd "${1:?usage: tools/check.sh <court-dir> [--no-render] [--only SAMPLE_ID]}" && pwd)
+COURT=$(cd "${1:?usage: tools/check.sh <court-dir> [--engine E] [--no-render] [--only SAMPLE_ID]}" && pwd)
 shift
+ENGINE=typst
 RENDER=1
 ONLY=""
 while [ $# -gt 0 ]; do
   case $1 in
     --no-render) RENDER=0 ;;
+    --engine)
+      ENGINE=$2
+      shift
+      ;;
     --only)
       ONLY=$2
       shift
@@ -34,6 +47,11 @@ while [ $# -gt 0 ]; do
   esac
   shift
 done
+case $ENGINE in typst | latex | docx) ;; *)
+  echo "unknown engine $ENGINE (typst, latex, docx)" >&2
+  exit 2
+  ;;
+esac
 export LC_ALL=en_US.UTF-8
 . "$ROOT/tools/check/lib.sh"
 
@@ -41,6 +59,10 @@ ALIAS=$(jq -r .alias "$COURT/court.json")
 OUT="$ROOT/out/check/$ALIAS"
 mkdir -p "$OUT"
 TAB=$(printf '\t')
+# the template file(s) a failure points at: checks.yaml `template` for typst, `templates.<engine>` otherwise
+if [ "$ENGINE" = typst ]; then TEMPLATE=$(cfg .template); else TEMPLATE=$(cfg ".templates.$ENGINE // \"\""); fi
+[ -n "$TEMPLATE" ] || TEMPLATE=$ENGINE
+export TEMPLATE ENGINE
 
 # ---- calibration: how tall is a word of the declared font at 14 pt, as pdftotext reports it? ---------
 calibrate() {
@@ -63,7 +85,8 @@ FTOP=$(($(cfg .params.page_height_pt) - $(cfg .params.margin_pt))) # text below 
 prepare() {
   W="$OUT/$SID"
   mkdir -p "$W"
-  [ "$RENDER" = 0 ] || sh "$ROOT/tools/render.sh" "$COURT" "$(cfg ".samples[] | select(.id == \"$SID\") | .md")" "$PDF" > /dev/null || return 1
+  [ "$RENDER" = 0 ] || sh "$ROOT/tools/render.sh" --engine "$ENGINE" "$COURT" "$(cfg ".samples[] | select(.id == \"$SID\")   case $ENGINE in latex) PDF="${PDF%.pdf}.latex.pdf" ;; docx) PDF="${PDF%.pdf}.docx.pdf" ;; esac
+| .md")" "$PDF" > /dev/null || return 1
   [ -f "$PDF" ] || {
     echo "no PDF at $PDF" >&2
     return 1
@@ -89,9 +112,14 @@ PASSES=0
 ALLFAIL=0
 run_checks() { # $1 = space-separated gate numbers
   GATES=$1
-  yq -o=json e '.checks' "$COURT/checks.yaml" | jq -r '.[] | [.id, (.gate|tostring), .method, .name, .expect, (.fix.anchor // ""), ((.args // []) | join("\u001f"))] | @tsv' |
-    while IFS="$TAB" read -r id gate method name expect anchor args; do
+  yq -o=json e '.checks' "$COURT/checks.yaml" | jq -r '.[] | [.id, (.gate|tostring), .method, .name, .expect, (.fix.anchor // ""), ((.engines // ["*"]) | join(",")), (.engines_reason // "-"), ((.args // []) | join("\u001f"))] | @tsv' |
+    while IFS="$TAB" read -r id gate method name expect anchor engines ereason args; do
       case " $GATES " in *" $gate "*) ;; *) continue ;; esac
+      case ",$engines," in *",*,"* | *",$ENGINE,"*) ;; *)
+        printf '  SKIP  %-14s %s\n          not run for engine %s (only: %s): %s\n' "$id" "$name" "$ENGINE" "$engines" "$ereason"
+        continue
+        ;;
+      esac
       [ "$gate" = 3 ] && [ "$SID" != "$(cfg .generalization.second_sample)" ] && continue
       if [ "$method" = generalization_all ]; then
         ST=PASS
@@ -115,8 +143,8 @@ run_checks() { # $1 = space-separated gate numbers
         printf '  PASS  %-14s %s\n          %s\n' "$id" "$name" "$MEAS"
         echo P >> "$OUT/.tally"
       else
-        line=$(grep -n -F -- "$anchor" "$COURT/$(cfg .template)" | head -1 | cut -d: -f1)
-        printf '  FAIL  %-14s %s\n          measured: %s\n          expected: %s\n          fix:      %s:%s  (%s)\n' "$id" "$name" "$MEAS" "$expect" "$(cfg .template)" "${line:-?}" "$anchor"
+        line=$(grep -rnH -F -- "$anchor" "$COURT/$TEMPLATE" 2> /dev/null | head -1 | sed "s/^[^:]*:\([0-9]*\):.*/\1/")
+        printf '  FAIL  %-14s %s\n          measured: %s\n          expected: %s\n          fix:      %s:%s  (%s)\n' "$id" "$name" "$MEAS" "$expect" "$TEMPLATE" "${line:-?}" "$anchor"
         [ -z "$DETAIL" ] || printf '%s\n' "$DETAIL" | sed 's/^/          - /'
         echo F >> "$OUT/.tally"
         [ "$gate" = 3 ] || echo F >> "$OUT/.fails_sample"
@@ -125,6 +153,7 @@ run_checks() { # $1 = space-separated gate numbers
 }
 
 : > "$OUT/.tally"
+: > "$OUT/.shas"
 printf '0\n' > "$OUT/.fails"
 : > "$OUT/.fails_sample"
 echo "formbook check: $ALIAS ($(jq -r .name "$COURT/court.json"))  font calibration: 14 pt = $(awk -v r="$CALIB" 'BEGIN { printf "%.2f", r * 14 }') pt word height"
@@ -132,6 +161,7 @@ for SID in $(cfg '.samples[].id'); do
   [ -z "$ONLY" ] || [ "$ONLY" = "$SID" ] || continue
   MD="$COURT/$(cfg ".samples[] | select(.id == \"$SID\") | .md")"
   PDF="$COURT/$(cfg ".samples[] | select(.id == \"$SID\") | .pdf")"
+  case $ENGINE in latex) PDF="${PDF%.pdf}.latex.pdf" ;; docx) PDF="${PDF%.pdf}.docx.pdf" ;; esac
   echo
   echo "=== sample $SID"
   prepare || {
@@ -140,6 +170,8 @@ for SID in $(cfg '.samples[].id'); do
     continue
   }
   echo "    $(basename "$PDF"): $NPAGES pages"
+  printf '%s  %s\n' "$(shasum -a 256 "$PDF" | cut -d" " -f1)" "${PDF#$COURT/}" >> "$OUT/.shas"
+  [ "$ENGINE" != docx ] || printf '%s  %s\n' "$(shasum -a 256 "${PDF%.pdf}" | cut -d' ' -f1)" "${PDF%.pdf}" | sed "s|  $COURT/|  |" >> "$OUT/.shas"
   echo " GATE 0 CONTENT"
   run_checks "0"
   echo " GATE 1 RULES"
