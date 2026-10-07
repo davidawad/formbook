@@ -2,8 +2,8 @@
 """Generate every README.md in the tree plus the index block of the top README.
 
 Usage: gen_readmes.py <manifest.txt> <rows.txt>
-  manifest.txt  from tools/manifest.sh (supplies the six presence flags)
-  rows.txt      from tools/tracker.bend, section "rows" (alias|status|pct)
+  manifest.txt  from tools/manifest.sh (supplies the court.json status)
+  rows.txt      from tools/tracker.bend, section "rows" (alias|status|pct|typst|latex|docx|items)
 Completion LOGIC lives in tracker.bend; this only lays results out as markdown.
 """
 import json, os, sys
@@ -15,16 +15,17 @@ flags = {}
 for line in open(sys.argv[1]):
     p = line.rstrip("\n").split("|")
     if len(p) >= 7:
-        flags[p[0]] = (p[5], p[6])
+        flags[p[0]] = p[5]
 rows = {}
 for line in open(sys.argv[2]):
     p = line.rstrip("\n").split("|")
-    if len(p) == 3:
-        rows[p[0]] = (p[1], p[2])
+    if len(p) == 7:
+        rows[p[0]] = tuple(p[1:])
 
-FLAGS = [("rules", "`rules.md` present"), ("exemplar", "`exemplars/` has a .pdf"),
-         ("sample", "`samples/` has a .md"), ("typst", "`typst/` has a .typ"),
-         ("latex", "`latex/` has a .tex"), ("render", "`samples/` has a .pdf")]
+FLAGS = ["`rules.md` present", "`exemplars/` has at least 2 filed PDFs (different filers)",
+         "`samples/` has at least 2 .md samples", "typst engine passes (`samples/.check-typst.txt` valid)",
+         "latex engine passes (`samples/.check-latex.txt` valid)", "docx engine passes (`samples/.check-docx.txt` valid)",
+         "overlay PDF present (`samples/*-overlay.pdf`)", "a review file in `reviews/`"]
 
 
 def write(rel, text):
@@ -38,12 +39,12 @@ def relto(frm_dir, to):
 
 def row(a, frm_dir):
     c = courts[a]
-    st, pct = rows[a]
+    st, pct, ty, la, dx, items = rows[a]
     link = relto(frm_dir, c["path"])
-    return "| [%s](%s) | `%s` | %s | %s | %s |" % (c["name"].strip(), link, a, c["level"], st, pct)
+    return "| [%s](%s) | `%s` | %s | %s | %s | %s | %s |" % (c["name"].strip(), link, a, st, ty, la, dx, pct)
 
 
-HEAD = "| Court | Alias | Level | Status | % |\n|---|---|---|---|---:|"
+HEAD = "| Court | Alias | Status | Typst | LaTeX | DOCX | % |\n|---|---|---|---|---|---|---:|"
 table = lambda aliases, d: HEAD + "\n" + "\n".join(row(a, d) for a in aliases) if aliases else ""
 
 paths = {c["path"]: a for a, c in courts.items()}
@@ -53,8 +54,8 @@ for a, c in courts.items():
     d = c["path"]
     depth = d.count("/") + 1
     up = "../" * depth
-    st, pct = rows[a]
-    manual, fl = flags[a]
+    st, pct, ty, la, dx, fl = rows[a]
+    manual = flags[a]
     cl = c["courtlistener_id"]
     cl_line = ("[%s](https://www.courtlistener.com/?court=%s)" % (cl, cl)) if cl else "none (not a CourtListener id)"
     out = ["# %s" % c["name"].strip(), "",
@@ -72,13 +73,15 @@ for a, c in courts.items():
         out.append("- Legacy aliases: " + ", ".join("`%s`" % l for l in leg))
     out += ["- Status: **%s** (%s%%); manual status in `court.json`: `%s`" % (st, pct, manual), "",
             "## Checklist", ""]
-    for i, (k, desc) in enumerate(FLAGS):
+    for i, desc in enumerate(FLAGS):
         out.append("- [%s] %s" % ("x" if fl[i] == "1" else " ", desc))
-    out += ["", "`done` is set by a human in `court.json` (`\"status\": \"done\"`); nothing automated writes it.",
-            "A court is `up for review` when rules, sample, typst and render are all present.", "",
+    out += ["", "Engines: typst `%s`, latex `%s`, docx `%s`." % (ty, la, dx), "",
+            "`done` is set by a human in `court.json` (`\"status\": \"done\"`); nothing automated writes it.",
+            "A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).", "",
             "## Folders", "",
-            "- `typst/` Typst templates (primary)", "- `latex/` LaTeX templates (where needed)",
-            "- `exemplars/` real filed examples (PDF)", "- `samples/` our sample inputs (.md) and rendered output (.pdf)"]
+            "- `typst/` Typst template (primary)", "- `latex/` LaTeX template", "- `docx/` Word template (reference.docx + filters)",
+            "- `exemplars/` real filed examples from different filers (PDF) and `SOURCE.md`",
+            "- `samples/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`"]
     # hand-written court documentation (markdown contract, decisions, known defects) lives in
     # README.extra.md and is appended verbatim, so regenerating never destroys it
     extra = os.path.join(ROOT, d, "README.extra.md")

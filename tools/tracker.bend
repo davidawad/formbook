@@ -121,14 +121,6 @@ def rows(ls: List<&2, String>) -> List<&2, Row>:
 def zero() -> Agg:
   Agg{0, 0, 0, 0, 0, 0, 0, 0, 0}
 
-# engine state of the i-th engine cell (0 typst, 1 latex, 2 docx): 1 iff it passes
-def epass(ec: List<&2, Char>, +i: U32) -> U32:
-  match ec:
-    case Nil{}:
-      0
-    case Con{+h, t}:
-      pick(U32.is_eq(i, 0), isc(h, '2'), epass(t, (i - 1 : U32)))
-
 def bump(a: Agg, +st: U32, +pct: U32, +tp: U32, +lp: U32, +dp: U32) -> Agg:
   match a:
     case Agg{n, todo, prog, rev, done, sum, t0, l0, d0}:
@@ -147,27 +139,31 @@ def merge(a: Agg, b: Agg) -> Agg:
     case Agg{n, t, p, r, d, s, x, y, z} Agg{n2, t2, p2, r2, d2, s2, x2, y2, z2}:
       Agg{(n + n2 : U32), (t + t2 : U32), (p + p2 : U32), (r + r2 : U32), (d + d2 : U32), (s + s2 : U32), (x + x2 : U32), (y + y2 : U32), (z + z2 : U32)}
 
-def put(same: Bool, g: String, st: U32, pct: U32, ec: List<&2, Char>, name: String, agg: Agg, rest: List<&2, Grp>) -> List<&2, Grp>:
+def put(same: Bool, g: String, st: U32, pct: U32, tp: U32, lp: U32, dp: U32, name: String, agg: Agg, rest: List<&2, Grp>) -> List<&2, Grp>:
   match same:
     case True{}:
-      Grp{name, bump(agg, st, pct, epass(ec, 0), epass(ec, 1), epass(ec, 2))} <> rest
+      Grp{name, bump(agg, st, pct, tp, lp, dp)} <> rest
     case False{}:
-      Grp{g, bump(zero(), st, pct, epass(ec, 0), epass(ec, 1), epass(ec, 2))} <> (Grp{name, agg} <> rest)
+      Grp{g, bump(zero(), st, pct, tp, lp, dp)} <> (Grp{name, agg} <> rest)
 
 # groups are contiguous in the manifest; acc holds them newest-first
-def push(+g: String, st: U32, pct: U32, ec: List<&2, Char>, acc: List<&2, Grp>) -> List<&2, Grp>:
+def push(+g: String, st: U32, pct: U32, tp: U32, lp: U32, dp: U32, acc: List<&2, Grp>) -> List<&2, Grp>:
   match acc:
     case Nil{}:
-      [Grp{g, bump(zero(), st, pct, epass(ec, 0), epass(ec, 1), epass(ec, 2))}]
+      [Grp{g, bump(zero(), st, pct, tp, lp, dp)}]
     case Con{Grp{+name, agg}, rest}:
-      put(String.eq(name, g), g, st, pct, ec, name, agg, rest)
+      put(String.eq(name, g), g, st, pct, tp, lp, dp, name, agg, rest)
 
 def groups(rs: List<&2, Row>, acc: List<&2, Grp>) -> List<&2, Grp>:
   match rs:
     case Nil{}:
       List.reverse(&2, Grp, acc)
     case Con{Row{a, g, lv, nm, p, st, pct, ec, it}, t}:
-      groups(t, push(g, st, pct, ec, acc))
+      match ec:
+        case Con{+e0, Con{+e1, Con{+e2, _}}}:
+          groups(t, push(g, st, pct, isc(e0, '2'), isc(e1, '2'), isc(e2, '2'), acc))
+        case _:
+          groups(t, push(g, st, pct, 0, 0, 0, acc))
 
 def total(gs: List<&2, Grp>, acc: Agg) -> Agg:
   match gs:
@@ -216,17 +212,24 @@ def stname(+st: U32) -> String:
 def cell(+c: Char) -> String:
   Bool.pick(String, Char.is_eq(c, '2'), "pass", Bool.pick(String, Char.is_eq(c, '1'), "built", "—"))
 
-def ecell(ec: List<&2, Char>, +i: U32) -> String:
+def e3t(ec: List<&2, Char>) -> String:
   match ec:
-    case Nil{}:
-      "—"
-    case Con{h, t}:
-      Bool.pick(String, U32.is_eq(i, 0), cell(h), ecell(t, (i - 1 : U32)))
+    case Con{+t, Con{+l, Con{+d, _}}}:
+      cell(t) ++ " | " ++ cell(l) ++ " | " ++ cell(d)
+    case _:
+      "— | — | —"
+
+def e3r(ec: List<&2, Char>) -> String:
+  match ec:
+    case Con{+t, Con{+l, Con{+d, _}}}:
+      cell(t) ++ "|" ++ cell(l) ++ "|" ++ cell(d)
+    case _:
+      "—|—|—"
 
 def statusrow(r: Row) -> String:
   match r:
     case Row{a, g, lv, nm, p, st, pct, ec, it}:
-      "| [" ++ nm ++ "](" ++ p ++ ") | " ++ a ++ " | " ++ stname(st) ++ " | " ++ ecell(ec, 0) ++ " | " ++ ecell(ec, 1) ++ " | " ++ ecell(ec, 2) ++ " | " ++ U32.show(pct) ++ " |"
+      "| [" ++ nm ++ "](" ++ p ++ ") | " ++ a ++ " | " ++ stname(st) ++ " | " ++ e3t(ec) ++ " | " ++ U32.show(pct) ++ " |"
 
 def status(rs: List<&2, Row>) -> List<&2, String>:
   "| Court | Alias | Status | Typst | LaTeX | DOCX | % |" <>
@@ -235,7 +238,7 @@ def status(rs: List<&2, Row>) -> List<&2, String>:
 def rowline(r: Row) -> String:
   match r:
     case Row{a, g, lv, nm, p, st, pct, ec, it}:
-      a ++ "|" ++ stname(st) ++ "|" ++ U32.show(pct) ++ "|" ++ ecell(ec, 0) ++ "|" ++ ecell(ec, 1) ++ "|" ++ ecell(ec, 2) ++ "|" ++ String.from_list(it)
+      a ++ "|" ++ stname(st) ++ "|" ++ U32.show(pct) ++ "|" ++ e3r(ec) ++ "|" ++ String.from_list(it)
 
 def rowsout(rs: List<&2, Row>) -> List<&2, String>:
   smap(~Row, ~(r => rowline(r)), rs)
