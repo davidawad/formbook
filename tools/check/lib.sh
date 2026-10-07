@@ -163,8 +163,9 @@ chk_centered_headings() {
 cert_page() { heading_page "CERTIFICATE OF COMPLIANCE" "$(body_first)"; }
 cert_words() { page_text "$(cert_page)" | sed -n 's/.*contains \([0-9,]*\) words.*/\1/p' | tr -d ','; }
 md_words() { $AWKU -f "$CHK/mdcount.awk" "$W/blocks.tsv"; }
-pdf_words() {
-  awk -F'\t' '$5 ~ /^(H|Hc|P|Q|L|F)$/ { n += $6 } END { print n + 0 }' "$W/lines.tsv"
+pdf_words() { # words on body lines (not the addendum, not the cover, tables or certificates)
+  ap=$(add_page)
+  awk -F'\t' -v ap="${ap:-0}" '$5 ~ /^(H|Hc|P|Q|L|F)$/ && !(ap > 0 && $1 >= ap) { n += $6 } END { print n + 0 }' "$W/lines.tsv"
 }
 chk_length_limit() {
   lim=$(cfg .params.word_limit)
@@ -373,8 +374,8 @@ chk_toc_present() {
     MEAS="no TABLE OF AUTHORITIES heading"
     return
   }
-  n=$($AWKU -v from=2 -v to=$((tp - 1)) -v skip='^(TABLE OF CONTENTS|Page)$' -f "$CHK/leader-entries.awk" "$W/runs.tsv" | wc -l | tr -d ' ')
-  empty=$($AWKU -v from=2 -v to=$((tp - 1)) -v skip='^(TABLE OF CONTENTS|Page)$' -f "$CHK/leader-entries.awk" "$W/runs.tsv" | awk -F'\t' '$2 == ""' | wc -l | tr -d ' ')
+  n=$($AWKU -v from=2 -v to=$((tp - 1)) -v skip='^(TABLE OF CONTENTS|Page)$' -v footer_top="$FTOP" -f "$CHK/leader-entries.awk" "$W/runs.tsv" | wc -l | tr -d ' ')
+  empty=$($AWKU -v from=2 -v to=$((tp - 1)) -v skip='^(TABLE OF CONTENTS|Page)$' -v footer_top="$FTOP" -f "$CHK/leader-entries.awk" "$W/runs.tsv" | awk -F'\t' '$2 == ""' | wc -l | tr -d ' ')
   MEAS="$n entries with dot leaders on pages 2-$((tp - 1)); $empty without a page number"
   [ "$empty" = 0 ] || {
     ST=FAIL
@@ -395,7 +396,7 @@ chk_toc_pages() {
     awk -F'\t' -v ap="${ap:-0}" '{ split($1, a, ""); lv = substr($1, 1, 1) + 0 } lv <= 4 && lv >= 1 && !(ap > 0 && $4 >= ap) { print $2 $5 "\t" $4 }' "$W/g0.heads"
     generated_heads | awk -F'\t' '{ print $1 "\t" $2 }'
   } | $AWKU -F'\t' -f "$CHK/norm.awk" -e '{ printf "%s\t%s\n", norm1($1), $2 }' > "$W/toc.expect"
-  $AWKU -v from=2 -v to=$((tp - 1)) -v skip='^(TABLE OF CONTENTS|Page)$' -f "$CHK/leader-entries.awk" "$W/runs.tsv" > "$W/toc.got"
+  $AWKU -v from=2 -v to=$((tp - 1)) -v skip='^(TABLE OF CONTENTS|Page)$' -v footer_top="$FTOP" -f "$CHK/leader-entries.awk" "$W/runs.tsv" > "$W/toc.got"
   out=$($AWKU -F'\t' -f "$CHK/norm.awk" -v labels="$W/labels.tsv" -e '
     BEGIN { while ((getline l < labels) > 0) { split(l, a, "\t"); lab[a[1]] = a[2] } }
     FILENAME == ARGV[1] { want[$1] = $2; order[++ne] = $1; next }
@@ -432,7 +433,7 @@ toa_run() {
       expv = (np[key] >= thr) ? "passim" : pages[key]
       print norm1(title) "\t" key "\t" kind "\t" srt "\t" expv }' "$W/auth.tsv" > "$W/toa.expect"
   $AWKU -v from="$tp" -v to=$((bf - 1)) -v skip='^(TABLE OF AUTHORITIES|Cases:|Constitutional Provisions:|Statutes:|Regulations:|Rules:|Other Authorities:|Page[(]s[)])$' \
-    -f "$CHK/leader-entries.awk" "$W/runs.tsv" > "$W/toa.got"
+    -v footer_top="$FTOP" -f "$CHK/leader-entries.awk" "$W/runs.tsv" > "$W/toa.got"
   TOA_OUT=$($AWKU -F'\t' -f "$CHK/norm.awk" -v expf="$W/toa.expect" -e '
     BEGIN { while ((getline l < expf) > 0) { split(l, a, "\t"); want[a[1]] = a[5]; keyof[a[1]] = a[2]; kind[a[1]] = a[3]; srt[a[1]] = a[4]; nexp++ } }
     { k = norm1($1); pg = $2; gsub(/ /, "", pg)
@@ -614,7 +615,7 @@ the addendum has no TABLE OF CONTENTS of its own (Circuit Rule 28-2.7)"
   }
   awk -F'\t' -v ap="$ap" '$1 ~ /^2/ && $4 >= ap { print $5 "\t" $4 }' "$W/g0.heads" |
     $AWKU -F'\t' -f "$CHK/norm.awk" -e '{ printf "%s\t%s\n", norm1($1), $2 }' > "$W/add.expect"
-  $AWKU -v from="$ap" -v to="$NPAGES" -v skip='^(TABLE OF CONTENTS|ADDENDUM)$' -f "$CHK/leader-entries.awk" "$W/runs.tsv" > "$W/add.got"
+  $AWKU -v from="$ap" -v to="$NPAGES" -v skip='^(TABLE OF CONTENTS|ADDENDUM)$' -v footer_top="$FTOP" -f "$CHK/leader-entries.awk" "$W/runs.tsv" > "$W/add.got"
   bad=$($AWKU -F'\t' -f "$CHK/norm.awk" -v labels="$W/labels.tsv" -e '
     BEGIN { while ((getline l < labels) > 0) { split(l, a, "\t"); lab[a[1]] = a[2] } }
     FILENAME == ARGV[1] { want[$1] = $2; n++; next }
