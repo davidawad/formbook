@@ -2,8 +2,8 @@
 
 Courts under `courts/ninth-circuit/guam/state` (1).
 
-| Court | Alias | Level | Status | % |
-|---|---|---|---|---:|
-| [Supreme Court of Guam](supreme-court) | `guam` | state-supreme | todo | 0 |
+| Court | Alias | Status | Typst | LaTeX | DOCX | % |
+|---|---|---|---|---|---|---:|
+| [Supreme Court of Guam](supreme-court) | `guam` | todo | — | — | — | 0 |
 
 [Formbook index](../../../../README.md)

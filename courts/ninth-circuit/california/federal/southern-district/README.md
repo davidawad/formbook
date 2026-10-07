@@ -5,25 +5,30 @@
 - Level: district
 - Circuit: `ca9`
 - State / territory: California
-- Status: **in progress** (17%); manual status in `court.json`: `todo`
+- Status: **in progress** (0%); manual status in `court.json`: `todo`
 
 ## Checklist
 
 - [ ] `rules.md` present
-- [x] `exemplars/` has a .pdf
-- [ ] `samples/` has a .md
-- [ ] `typst/` has a .typ
-- [ ] `latex/` has a .tex
-- [ ] `samples/` has a .pdf
+- [ ] `exemplars/` has at least 2 filed PDFs (different filers)
+- [ ] `samples/` has at least 2 .md samples
+- [ ] typst engine passes (`samples/.check-typst.txt` valid)
+- [ ] latex engine passes (`samples/.check-latex.txt` valid)
+- [ ] docx engine passes (`samples/.check-docx.txt` valid)
+- [ ] overlay PDF present (`samples/*-overlay.pdf`)
+- [ ] a review file in `reviews/`
+
+Engines: typst `—`, latex `—`, docx `—`.
 
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
-A court is `up for review` when rules, sample, typst and render are all present.
+A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 
 ## Folders
 
-- `typst/` Typst templates (primary)
-- `latex/` LaTeX templates (where needed)
-- `exemplars/` real filed examples (PDF)
-- `samples/` our sample inputs (.md) and rendered output (.pdf)
+- `typst/` Typst template (primary)
+- `latex/` LaTeX template
+- `docx/` Word template (reference.docx + filters)
+- `exemplars/` real filed examples from different filers (PDF) and `SOURCE.md`
+- `samples/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)

@@ -2,11 +2,11 @@
 
 Courts under `courts/eighth-circuit/north-dakota` (4).
 
-| Court | Alias | Level | Status | % |
-|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. North Dakota](federal/bankruptcy-district) | `ndb` | bankruptcy | todo | 0 |
-| [District Court, D. North Dakota](federal/district) | `ndd` | district | todo | 0 |
-| [North Dakota Court of Appeals](state/court-of-appeals) | `ndctapp` | state-appellate | todo | 0 |
-| [North Dakota Supreme Court](state/supreme-court) | `nd` | state-supreme | todo | 0 |
+| Court | Alias | Status | Typst | LaTeX | DOCX | % |
+|---|---|---|---|---|---|---:|
+| [United States Bankruptcy Court, D. North Dakota](federal/bankruptcy-district) | `ndb` | todo | — | — | — | 0 |
+| [District Court, D. North Dakota](federal/district) | `ndd` | todo | — | — | — | 0 |
+| [North Dakota Court of Appeals](state/court-of-appeals) | `ndctapp` | todo | — | — | — | 0 |
+| [North Dakota Supreme Court](state/supreme-court) | `nd` | todo | — | — | — | 0 |
 
 [Formbook index](../../../README.md)
