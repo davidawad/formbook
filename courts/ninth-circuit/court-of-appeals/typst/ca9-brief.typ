@@ -70,6 +70,7 @@
   s = s.replace(regex("\\[([^\\]]*)\\]\\([^)]*\\)"), "$1") // links keep text
   s = s.replace(regex("(?m)^#{1,6}[ \t]+"), "")
   s = s.replace(regex("(?m)^>[ \t]?"), "")
+  s = s.replace(regex("(?m)^[ \t]*([-*+]|[0-9]+[.)])[ \t]+"), "")   // list markers are not words
   s = s.replace(regex("\\\\(.)"), "$1")                    // backslash escapes
   s = s.replace(regex("[*]"), "")
   s = s.replace(regex("(^|[\\s(\\[\u{201C}\"])_"), "$1")
@@ -476,6 +477,7 @@
     separator: line(length: 30%, stroke: 0.5pt),
   )
   show footnote.entry: it => {
+    set text(size: type-size)   // typst's default is 0.85em; FRAP 32(a)(5) allows nothing under 14 pt
     set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 0.5em)
     it
   }
