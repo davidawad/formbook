@@ -79,6 +79,11 @@ for a, c in courts.items():
             "## Folders", "",
             "- `typst/` Typst templates (primary)", "- `latex/` LaTeX templates (where needed)",
             "- `exemplars/` real filed examples (PDF)", "- `samples/` our sample inputs (.md) and rendered output (.pdf)"]
+    # hand-written court documentation (markdown contract, decisions, known defects) lives in
+    # README.extra.md and is appended verbatim, so regenerating never destroys it
+    extra = os.path.join(ROOT, d, "README.extra.md")
+    if os.path.exists(extra):
+        out += ["", open(extra).read().rstrip("\n")]
     kids = [x for x, cc in courts.items() if cc["path"].startswith(d + "/")]
     if kids:
         out += ["", "## Subdivisions", "", table(kids, d)]
