@@ -1,0 +1,434 @@
+# Eval-loop contract for ca9 (principal brief). The loop itself is defined in docs/EVAL-LOOP.md.
+#
+# This file is the machine-readable half: which samples exist, which numbers the rules turn into,
+# and every check with the requirement ID it enforces (rules.md), the gate it belongs to, what it
+# measures, and where in the template to fix a failure. tools/check.sh reads it today; a Rust
+# validator will read the same file tomorrow and must produce the same verdicts.
+#
+# A check is PASS or FAIL on its worst instance. There are no scores and no averages.
+
+court: ca9
+rules: rules.md
+template: typst/ca9-brief.typ
+
+font:
+  typst_family: "EB Garamond"        # what the template asks typst for
+  pdf_prefix: "EBGaramond"           # every embedded font name must start with this (after the subset tag)
+  size_pt: 14                        # CA9-FORM-004
+
+samples:
+  - id: sweet
+    md: samples/sweet-opening-brief.md
+    pdf: samples/sweet-opening-brief.pdf
+    exemplar: exemplars/FILED-EXAMPLE-sweet-v-mcmahon-26-1136-opening-brief.pdf
+  - id: generic
+    md: samples/generic-opening-brief.md
+    pdf: samples/generic-opening-brief.pdf
+    exemplar: exemplars/FILED-EXAMPLE-sweet-v-mcmahon-26-1136-opening-brief.pdf
+
+# Numbers the checks use. Each is a rule or a stated tolerance, never a measurement off the exemplar.
+params:
+  page_width_pt: 612                 # CA9-FORM-001 (8 1/2 x 11 in)
+  page_height_pt: 792
+  margin_pt: 72                      # CA9-FORM-002 (1 in)
+  eps_pt: 0.1                        # rounding slack of pdftotext's 2-decimal coordinates
+  min_body_pitch_pt: 28              # CA9-FORM-003: double spacing = at least 2 x 14 pt between baselines
+  center_tolerance_pt: 3             # CA9-FORM-009: centered headings
+  word_limit: 14000                  # CA9-LEN-001 (Circuit Rule 32-1(a))
+  wordcount_tolerance: 0.015         # CA9-CERT-002: PDF-derived count vs certificate (automatic labels)
+  passim_threshold: 7                # template convention: a TOA entry cited on this many pages is "passim"
+  max_attachment_mb: 100             # CA9-ELEC-002
+
+# Wording each court form must carry (checked after removing case and spacing; see tools/check/lib.sh norm).
+forms:
+  form8:
+    - "I am the attorney or self-represented party."
+    - "This brief contains"
+    - "words, including"
+    - "words manually counted in any visual images, and excluding the items exempted by FRAP 32(f)."
+    - "The brief’s type size and typeface comply with FRAP 32(a)(5) and (6)."
+    - "I certify that this brief (select only one):"
+    - "complies with the word limit of Cir. R. 32-1."
+    - "is a cross-appeal brief and complies with the word limit of Cir. R. 28.1-1."
+    - "is for a death penalty case and complies with the word limit of Cir. R. 32-4."
+    - "complies with the longer length limit permitted by Cir. R. 32-2(b)"
+    - "is accompanied by a motion to file a longer brief pursuant to Cir. R. 32-2(a)."
+  form17:
+    - "The undersigned attorney or self-represented party states the following:"
+    - "I am unaware of any related cases currently pending in this court."
+    - "I am unaware of any related cases currently pending in this court other than the case(s) identified in the initial brief(s) filed by the other party or parties."
+    - "I am aware of one or more related cases currently pending in this court. The case number and name of each related case and its relationship to this case are:"
+  form15:
+    - "I hereby certify that I electronically filed the foregoing/attached document(s) on this date with the Clerk of the Court for the United States Court of Appeals for the Ninth Circuit using the Appellate Electronic Filing system."
+    - "Description of Document(s) (required for all documents):"
+
+# Gate 3: structure the second sample must exercise so that passing it means something.
+generalization:
+  second_sample: generic
+  require_features:
+    - footnote
+    - block_quote
+    - escaped_numeral_start       # a paragraph that begins "90\. "
+    - escaped_dash_start          # a paragraph that begins "\- "
+    - escaped_paren_numeral_start # a paragraph that begins "2\) "
+    - escaped_plus_start          # a paragraph that begins "\+ "
+    - heading_depth_5
+    - three_or_more_parties
+    - addendum
+    - toa_every_kind
+    - certificate_of_service
+    - related_cases_listed
+    - ordered_list
+
+# Gate 2 reads reviews/*.md (format in docs/EVAL-LOOP.md).
+review:
+  dir: reviews
+  statuses_pass: [PASS, FIXED, ACCEPTED]
+  statuses_fail: [OPEN]
+
+checks:
+  # ------------------------------------------------------------------ Gate 0: content
+  - id: CA9-TOOL-001
+    gate: 0
+    kind: T
+    name: every markdown block appears in the PDF, in order, unaltered
+    method: g0_content
+    expect: "0 blocks missing or altered"
+    fix: {anchor: "cmarker.render(body-md"}
+  - id: CA9-TOOL-003
+    gate: 0
+    kind: T
+    name: every markdown italic span is set in an italic face
+    method: g0_italics
+    expect: "0 blocks with italic text rendered roman"
+    fix: {anchor: "cmarker.render(body-md"}
+  - id: CA9-TOOL-004
+    gate: 0
+    kind: T
+    name: every footnote is in the PDF, whole, on the page of its reference
+    method: g0_footnotes
+    expect: "0 footnotes missing, split or on the wrong page"
+    fix: {anchor: "show footnote.entry"}
+
+  # ------------------------------------------------------------------ Gate 1: rules
+  - id: CA9-FORM-001
+    gate: 1
+    kind: M
+    name: every page is 612 x 792 pt (letter)
+    method: page_size
+    expect: "all pages 612 x 792"
+    fix: {anchor: "set page(paper:"}
+  - id: CA9-FORM-002
+    gate: 1
+    kind: M
+    name: no text in the 1 in margins on any page (page numbers excepted)
+    method: margins
+    expect: "left >= 72, right <= 540, top >= 72, bottom <= 720 for all body text"
+    fix: {anchor: "page-margin"}
+  - id: CA9-FORM-003
+    gate: 1
+    kind: M
+    name: body paragraphs are double-spaced (baseline pitch >= 2 x type size)
+    method: double_space
+    expect: "every consecutive pair of body-paragraph lines >= 28 pt apart"
+    fix: {anchor: "body-leading"}
+  - id: CA9-FORM-004
+    gate: 1
+    kind: M
+    name: all text is 14 pt or larger (footnotes and headings included)
+    method: font_size
+    expect: "smallest word height >= the height of 14 pt text in this font"
+    fix: {anchor: "type-size"}
+  - id: CA9-FORM-005
+    gate: 1
+    kind: M
+    name: italic face present and used (case names italic; type otherwise plain roman)
+    method: italic_face
+    expect: "an Italic font is embedded"
+    fix: {anchor: "font-family"}
+  - id: CA9-FORM-007
+    gate: 1
+    kind: T
+    name: every font is embedded and is the declared family (no fallback)
+    method: fonts_embedded
+    expect: "all fonts emb=yes and named EBGaramond-*"
+    fix: {anchor: "font-family"}
+  - id: CA9-FORM-008
+    gate: 1
+    kind: C
+    name: page numbers - cover none, front matter roman, body arabic from 1, addendum Add-n; consecutive
+    method: page_numbers
+    expect: "labels match the expected sequence on every page"
+    fix: {anchor: "counter(page).update(1)"}
+  - id: CA9-FORM-009
+    gate: 1
+    kind: C
+    name: section headings and Argument point headings are centered
+    method: centered_headings
+    expect: "every line within 3 pt of the page center"
+    fix: {anchor: "style-heading"}
+  - id: CA9-LEN-001
+    gate: 1
+    kind: M
+    name: the word count is at most 14,000
+    method: length_limit
+    expect: "<= 14000"
+    fix: {anchor: "let limit"}
+  - id: CA9-CERT-002
+    gate: 1
+    kind: M
+    name: the certificate states the true word count
+    method: cert_count
+    expect: "certificate = independent count of the markdown; PDF-derived count within tolerance"
+    fix: {anchor: "count-words"}
+  - id: CA9-CONT-001
+    gate: 1
+    kind: M
+    name: table of contents on its own page(s) after the cover, entries with dot leaders and page numbers
+    method: toc_present
+    expect: "page 2 is 'TABLE OF CONTENTS'; every entry ends in leaders and a page number"
+    fix: {anchor: "toc-section"}
+  - id: CA9-TOOL-005
+    gate: 1
+    kind: T
+    name: every table-of-contents page number is the page the heading is really on
+    method: toc_pages
+    expect: "0 entries pointing at the wrong page; every heading of depth <= 4 listed"
+    fix: {anchor: "toc-entry"}
+  - id: CA9-CONT-002
+    gate: 1
+    kind: M
+    name: table of authorities lists every cited authority, cases alphabetized
+    method: toa_complete
+    expect: "every `toa:` key cited in the body appears; cases in alphabetical order"
+    fix: {anchor: "toa-section"}
+  - id: CA9-TOOL-006
+    gate: 1
+    kind: T
+    name: every table-of-authorities page reference is a page that really cites the authority
+    method: toa_pages
+    expect: "page lists equal the pages of the citations"
+    fix: {anchor: "toa-section"}
+  - id: CA9-CONT-003
+    gate: 1
+    kind: M
+    name: statement of jurisdiction present
+    method: heading_present
+    args: ["^statement of jurisdiction"]
+    expect: "a level-1 heading"
+    fix: {anchor: "cmarker.render(body-md"}
+  - id: CA9-CONT-004
+    gate: 1
+    kind: M
+    name: statement of the issue(s) present
+    method: heading_present
+    args: ["^statement of (the )?issues?"]
+    expect: "a level-1 heading"
+    fix: {anchor: "cmarker.render(body-md"}
+  - id: CA9-CONT-005
+    gate: 1
+    kind: M
+    name: statement of the case present
+    method: heading_present
+    args: ["^statement of the case"]
+    expect: "a level-1 heading"
+    fix: {anchor: "cmarker.render(body-md"}
+  - id: CA9-CONT-006
+    gate: 1
+    kind: M
+    name: summary of the argument present
+    method: heading_present
+    args: ["^summary of (the )?argument"]
+    expect: "a level-1 heading"
+    fix: {anchor: "cmarker.render(body-md"}
+  - id: CA9-CONT-007
+    gate: 1
+    kind: M
+    name: argument present
+    method: heading_present
+    args: ["^argument"]
+    expect: "a level-1 heading"
+    fix: {anchor: "cmarker.render(body-md"}
+  - id: CA9-CONT-008
+    gate: 1
+    kind: M
+    name: a standard-of-review heading exists
+    method: heading_any_level
+    args: ["standard of review"]
+    expect: "a heading containing 'standard of review' at any level"
+    fix: {anchor: "cmarker.render(body-md"}
+  - id: CA9-CONT-009
+    gate: 1
+    kind: M
+    name: conclusion present
+    method: heading_present
+    args: ["^conclusion"]
+    expect: "a level-1 heading"
+    fix: {anchor: "cmarker.render(body-md"}
+  - id: CA9-CONT-010
+    gate: 1
+    kind: M
+    name: required sections appear in the required order
+    method: section_order
+    expect: "jurisdiction < issues < case < summary < argument < conclusion"
+    fix: {anchor: "cmarker.render(body-md"}
+  - id: CA9-CONT-011
+    gate: 1
+    kind: M
+    name: no disclosure statement in the brief (Circuit Rule 28-1(c))
+    method: no_disclosure
+    expect: "no heading containing 'disclosure statement'"
+    fix: {anchor: "// ---- cover ----"}
+  - id: CA9-CONT-012
+    gate: 1
+    kind: C
+    name: headings carry the right automatic labels (I./A./1./a. in Argument; A./1./a. elsewhere)
+    method: heading_labels
+    expect: "every numbered heading is preceded by its expected label"
+    fix: {anchor: "heading-label"}
+  - id: CA9-COVER-001
+    gate: 1
+    kind: M
+    name: case number centered, first line of page 1
+    method: cover_number
+    expect: "'No. <case number>' is the top line of page 1 and centered"
+    fix: {anchor: "cover-body"}
+  - id: CA9-COVER-002
+    gate: 1
+    kind: M
+    name: court name on the cover; no district-court caption
+    method: cover_court
+    expect: "'IN THE UNITED STATES COURT OF APPEALS FOR THE NINTH CIRCUIT' present; no district-court caption box text"
+    fix: {anchor: "cover-body"}
+  - id: CA9-COVER-003
+    gate: 1
+    kind: M
+    name: title of the case (every party and its designation) on the cover
+    method: cover_caption
+    expect: "all caption names and designations on page 1"
+    fix: {anchor: "cover-body"}
+  - id: CA9-COVER-004
+    gate: 1
+    kind: M
+    name: nature of the proceeding and court below on the cover
+    method: cover_field
+    args: ["proceeding"]
+    expect: "the proceeding line on page 1"
+    fix: {anchor: "cover-body"}
+  - id: CA9-COVER-005
+    gate: 1
+    kind: M
+    name: title of the brief on the cover
+    method: cover_field
+    args: ["brief_title"]
+    expect: "the brief title on page 1"
+    fix: {anchor: "cover-body"}
+  - id: CA9-COVER-006
+    gate: 1
+    kind: M
+    name: counsel name, office address and telephone number on the cover
+    method: cover_counsel
+    expect: "every counsel name and line, and the telephone number, on page 1"
+    fix: {anchor: "cover-body"}
+  - id: CA9-COVER-007
+    gate: 1
+    kind: C
+    name: district court docket number and judge on the cover when supplied
+    method: cover_optional
+    expect: "present on page 1 when given in the metadata"
+    fix: {anchor: "cover-body"}
+  - id: CA9-COVER-009
+    gate: 1
+    kind: C
+    name: the cover is exactly one page
+    method: cover_one_page
+    expect: "page 2 starts with TABLE OF CONTENTS"
+    fix: {anchor: "let cover(meta)"}
+  - id: CA9-CERT-001
+    gate: 1
+    kind: M
+    name: certificate of compliance carries the Form 8 wording, case number, signature and date
+    method: cert_form8
+    expect: "all Form 8 phrases present"
+    fix: {anchor: "certificate-of-compliance"}
+  - id: CA9-CERT-003
+    gate: 1
+    kind: M
+    name: statement of related cases carries the Form 17 wording (and lists related cases when given)
+    method: cert_form17
+    expect: "all Form 17 phrases present"
+    fix: {anchor: "related-cases"}
+  - id: CA9-CERT-004
+    gate: 1
+    kind: M
+    name: certificate of service present exactly when the metadata asks for it (Form 15 wording)
+    method: cert_service
+    expect: "present iff service.certificate is true"
+    fix: {anchor: "certificate-of-service"}
+  - id: CA9-ELEC-001
+    gate: 1
+    kind: M
+    name: text-searchable, generated from source (text on every page, no scanned images)
+    method: elec_text
+    expect: "words extracted on every page; 0 raster images"
+    fix: {anchor: "set text("}
+  - id: CA9-ELEC-002
+    gate: 1
+    kind: M
+    name: file size under 100 MB
+    method: elec_size
+    expect: "< 100 MB"
+    fix: {anchor: "set page(paper:"}
+  - id: CA9-ELEC-003
+    gate: 1
+    kind: M
+    name: electronic signature "s/ Name" in the signature block and on each certificate
+    method: elec_signature
+    expect: "'s/ <signer>' at least 3 times"
+    fix: {anchor: "signature-line"}
+  - id: CA9-ELEC-004
+    gate: 1
+    kind: C
+    name: nothing in the top margin (the court stamps its banner there)
+    method: top_margin_empty
+    expect: "0 words above 72 pt"
+    fix: {anchor: "page-margin"}
+  - id: CA9-ELEC-005
+    gate: 1
+    kind: C
+    name: PDF bookmarks exist for the section headings
+    method: elec_bookmarks
+    expect: ">= one bookmark per level-1 heading"
+    fix: {anchor: "set heading("}
+  - id: CA9-ADD-001
+    gate: 1
+    kind: M
+    name: addendum (when present) starts its own pages with its own table of contents, numbered Add-n
+    method: addendum
+    expect: "Add-1.. pages; a TABLE OF CONTENTS listing each addendum item with the right page"
+    fix: {anchor: "toc-addendum"}
+
+  # ------------------------------------------------------------------ Gate 2: visual review
+  - id: CA9-REVIEW-001
+    gate: 2
+    kind: T
+    name: a visual review of the CURRENT PDF covers every page and lists no open defect
+    method: review
+    expect: "reviews/*.md names the PDF's sha256, has a row for every page, and no row is OPEN"
+    fix: {anchor: "// ---- cover ----"}
+
+  # ------------------------------------------------------------------ Gate 3: generalization
+  - id: CA9-GEN-001
+    gate: 3
+    kind: T
+    name: the structurally different sample exercises every required feature
+    method: generalization_features
+    expect: "all features in generalization.require_features present in the second sample"
+    fix: {anchor: "// ---- cover ----"}
+  - id: CA9-GEN-002
+    gate: 3
+    kind: T
+    name: both samples pass gates 0 to 2
+    method: generalization_all
+    expect: "no failure on any sample"
+    fix: {anchor: "// ---- cover ----"}
