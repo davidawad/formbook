@@ -4,26 +4,31 @@
 - CourtListener: [ca9](https://www.courtlistener.com/?court=ca9)
 - Level: appellate
 - Circuit: `ca9`
-- Status: **up for review** (83%); manual status in `court.json`: `todo`
+- Status: **up for review** (63%); manual status in `court.json`: `todo`
 
 ## Checklist
 
 - [x] `rules.md` present
-- [x] `exemplars/` has a .pdf
-- [x] `samples/` has a .md
-- [x] `typst/` has a .typ
-- [ ] `latex/` has a .tex
-- [x] `samples/` has a .pdf
+- [ ] `exemplars/` has at least 2 filed PDFs (different filers)
+- [x] `samples/` has at least 2 .md samples
+- [x] typst engine passes (`samples/.check-typst.txt` valid)
+- [ ] latex engine passes (`samples/.check-latex.txt` valid)
+- [ ] docx engine passes (`samples/.check-docx.txt` valid)
+- [x] overlay PDF present (`samples/*-overlay.pdf`)
+- [x] a review file in `reviews/`
+
+Engines: typst `pass`, latex `—`, docx `—`.
 
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
-A court is `up for review` when rules, sample, typst and render are all present.
+A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 
 ## Folders
 
-- `typst/` Typst templates (primary)
-- `latex/` LaTeX templates (where needed)
-- `exemplars/` real filed examples (PDF)
-- `samples/` our sample inputs (.md) and rendered output (.pdf)
+- `typst/` Typst template (primary)
+- `latex/` LaTeX template
+- `docx/` Word template (reference.docx + filters)
+- `exemplars/` real filed examples from different filers (PDF) and `SOURCE.md`
+- `samples/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`
 
 ## What is here
 
