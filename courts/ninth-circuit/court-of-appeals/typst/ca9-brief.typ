@@ -260,39 +260,39 @@
 }
 #let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
 
-#let cover(meta) = page(numbering: none, footer: none, {
+#let cover-body(meta, gap) = {
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
   set align(center)
-  v(0.2in)
+  v(gap * 0.6)
   strong[No. #need(meta, "case_number")]
-  v(0.6em)
+  v(gap)
   double-rule
-  v(0.6em)
+  v(gap)
   strong[IN THE UNITED STATES COURT OF APPEALS\ FOR THE NINTH CIRCUIT]
-  v(0.6em)
+  v(gap)
   short-rule
-  v(0.6em)
+  v(gap)
   let sides = need(meta, "caption")
   for (i, side) in sides.enumerate() {
     for name in side.names { inl(name); parbreak() }
     align(left, pad(left: 50%, inl(side.designation)))
-    if i < sides.len() - 1 { v(0.2em); [v.]; v(0.2em) }
+    if i < sides.len() - 1 { v(gap * 0.3); [v.]; v(gap * 0.3) }
   }
-  v(0.6em)
+  v(gap)
   short-rule
-  v(0.6em)
+  v(gap)
   inl(need(meta, "proceeding"))
   if "district_court_case" in meta or "judge" in meta {
     parbreak()
     [#if "district_court_case" in meta [D.C. No. #meta.district_court_case]#if "district_court_case" in meta and "judge" in meta [; ]#if "judge" in meta [#inl(meta.judge)]]
   }
-  v(0.6em)
+  v(gap)
   short-rule
-  v(0.6em)
+  v(gap)
   strong(upper(inl(need(meta, "brief_title"))))
-  v(0.6em)
+  v(gap)
   short-rule
-  v(0.6em)
+  v(gap)
   // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number).
   align(left, pad(left: 50%, {
     set par(hanging-indent: 0pt, spacing: 0.5em)
@@ -306,9 +306,18 @@
       })
     }
   }))
-  v(0.6em)
+  v(gap)
   double-rule
-})
+}
+
+/// The cover is one page. The spacing between its parts is the only thing that gives:
+/// the largest spacing at which the whole cover fits the page is used (the type size never shrinks).
+#let cover(meta) = page(numbering: none, footer: none, layout(size => {
+  let fits(g) = measure(block(width: size.width, cover-body(meta, g * 1em))).height <= size.height
+  let g = (1.0, 0.8, 0.6, 0.45, 0.3, 0.2, 0.1, 0.0).find(fits)
+  if g == none { panic("ca9-brief: the cover does not fit on one page; shorten the counsel or party lines") }
+  cover-body(meta, g * 1em)
+}))
 
 // ---------------------------------------------------------------------------
 // Signature, related cases, certificates (Forms 17, 8, 15)
@@ -531,7 +540,7 @@
 
   // ---- addendum (Circuit Rule 28-2.7) ----
   if add != none {
-    set page(numbering: n => "Add-" + str(n))
+    set page(numbering: (..n) => "Add-" + str(n.pos().first()))
     counter(page).update(1)
     [#heading(level: 1, numbering: none)[Addendum] <add-start>]
     toc-addendum()
