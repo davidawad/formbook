@@ -9,17 +9,17 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-name = "EB Garamond"          // STAND-IN. LR 5.1(C) names Times New Roman, Courier New, Century Schoolbook
-                                        // or Book Antiqua; none of them is vendored in fonts/. BLOCKED, see README.md.
+#let font-name = "Liberation Serif"     // LR 5.1(C) names Times New Roman (14 pt); substitute per docs/FONTS.md, metric-compatible.
 #let font-family = font-name
+#let rule-font-name = "Times New Roman" // the face the filer certifies (LR 7.1(D)); not the rendered face
 #let type-size = 14pt                   // LR 5.1(C): Times New Roman at least 14 point; footnotes and quotations too
 #let page-w = 8.5in
 #let page-h = 11in
 #let margin = 1in                       // LR 5.1(D): top, bottom, left and right margins at least one inch
 #let text-width = page-w - 2 * margin
-// LR 5.1(C): double-spaced. Typst's line box for EB Garamond is about 0.65em, so 1.65em of leading gives a
+// LR 5.1(C): double-spaced. Typst's line box for Liberation Serif is about 0.655em, so 1.645em of leading gives a
 // 32.2 pt baseline pitch: the pitch of the filed exemplar's body text (Durand p.2). See README.md.
-#let body-leading = 1.65em
+#let body-leading = 1.645em
 #let single-leading = 0.3em             // headings, court title, footnotes, block quotations, signature block
 #let single-line = 1.4em                // one single-spaced caption line, as a fixed-height block (no overlap possible)
 #let para-indent = 0.5in                // first-line indent of body paragraphs
@@ -144,16 +144,16 @@
   })
 }
 
-/// LR 7.1(D): at the end of the brief, counsel certifies the font and point size, here as this template sets them.
-/// The text is generated from the template's own font parameters, so the certificate cannot name a font the
-/// PDF does not use.
+/// LR 7.1(D): at the end of the brief, counsel certifies the font and point size. The certificate names the rule's
+/// face (`rule-font-name`), because the filer prepares the brief in that face; `font-name` is the vendored
+/// metric-compatible substitute the render uses, and the two have the same metrics. See README.md.
 #let font-certificate(meta) = block(breakable: false, {
   set par(leading: body-leading, spacing: 0pt)
   v(body-leading)
   align(center, text(weight: "bold", "CERTIFICATE PURSUANT TO LOCAL RULE 7.1(D)"))
   v(body-leading)
   h(para-indent)
-  [I certify that the foregoing brief conforms to the requirements of LR 5.1(C). The brief is prepared in #int(type-size / 1pt)-point #font-name font.]
+  [I certify that the foregoing brief conforms to the requirements of LR 5.1(C). The brief is prepared in #int(type-size / 1pt)-point #rule-font-name font.]
   v(body-leading)
   set par(leading: single-leading, spacing: 0pt)
   align(right, [s/ #need(need(meta, "signature"), "signer")])

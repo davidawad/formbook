@@ -2,15 +2,17 @@
 
 Doc type: **motion-brief**: a motion to dismiss under Fed. R. Civ. P. 12(b)(6) with the supporting memorandum of law, in one document (the form of the primary exemplar). Court: United States District Court for the Northern District of Georgia (`gand`). Folder: `courts/eleventh-circuit/georgia/federal/northern-district/motion-brief/`.
 
-**BLOCKED (tier 1): font.** LR 5.1(C) requires Times New Roman (at least 14 point), Courier New (at least 12), Century Schoolbook (at least 13) or Book Antiqua (at least 13). None is vendored in `fonts/`, so the render uses **EB Garamond 14 pt as a stand-in**. The LR 7.1(D) certificate below states the font the PDF actually uses ("14-point EB Garamond font"), so it is accurate, and it is not compliant until a permitted font is vendored. The font is one parameter (`font-name` in `typst/gand-motion-brief.typ`); the certificate text follows it. Vendoring the font touches shared `fonts/`, which this doc type may not edit.
+**Typeface (tier 1): resolved.** LR 5.1(C) permits Times New Roman (at least 14 point), Courier New (at least 12), Century Schoolbook (at least 13) or Book Antiqua (at least 13). The template uses the first listed face, Times New Roman 14 pt, and renders it with its substitute **Liberation Serif** (metric-compatible, per `docs/FONTS.md`; vendored, SIL OFL). The font is `font-name` in `typst/gand-motion-brief.typ`. The leading is 1.645em so the baseline pitch stays at 32.2 pt, as before. The page count stays at 10 pages on this sample.
+
+The LR 7.1(D) certificate names **Times New Roman** (`rule-font-name`), not the substitute: the filer certifies the face it prepares the brief in, and the substitute has the same metrics. The rendered PDF uses Liberation Serif, so the certificate describes the filing, not the PDF's embedded font. Whether that reading is right is for David to confirm (see Known gaps 1).
 
 | Item | Status |
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-durand-1-26-cv-03458-motion-brief.pdf` (primary: motion with memorandum, 18 pages, counsel for the State); second filer `exemplars/FILED-EXAMPLE-electronic-maintenance-1-26-cv-03121-memorandum.pdf` (separate memorandum, 16 pages). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-durand-motion-brief.md` (a portion of the Durand motion; see Sample below) |
-| render | ok: `samples/OUTPUT-durand-motion-brief.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings. sha256 `9e17fd594d5abcd1334f9cd3ba41d53a4c7e7be096587529b9d299413288ba26`. |
-| overlay | ok: `samples/OVERLAY-durand-motion-brief.pdf` and `OVERLAY-durand-motion-brief.txt` |
-| pages reviewed | 10 of 10, each rendered at 60 dpi and viewed in the final PDF (page 1 again after the court-title change; pages 2–10 text-identical to the earlier render, checked with `pdftotext` per page) |
+| render | ok: `samples/OUTPUT-durand-motion-brief.pdf`, 10 pages, typst 0.15.0, vendored fonts only (`pdffonts`: LiberationSerif and LiberationSerif-Bold embedded), no typst warnings. sha256 `3b681a99945dc4a3340124577be62b572068892b16b5db8624d5c1ddde0d684b`. |
+| overlay | ok: `samples/OVERLAY-durand-motion-brief.pdf` and `OVERLAY-durand-motion-brief.txt` (run 2026-10-14 on the Liberation Serif render) |
+| pages reviewed | 10 of 10, each rendered at 60 dpi and viewed in the final PDF |
 
 File names: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `OVERLAY-<id>.pdf` and `.txt`; the brief's `<id>.pdf` and `<id>-overlay.pdf` names differ from the tools' names, which may not be edited.
 
@@ -22,7 +24,7 @@ M = mandated by a rule (tier 1). C = convention (tier 2). A = author responsibil
 
 | ID | Rule | Requirement (quoted or closely paraphrased) | M/C/A | Where in the template |
 |---|---|---|---|---|
-| GAND-FORM-001 | LR 5.1(C) | "Computer documents must be prepared in one of the following fonts: Times New Roman (at least 14 point), Courier New (at least 12 point), Century Schoolbook (at least 13 point), or Book Antiqua (at least 13 point)." | M | `font-name`, `type-size`. **BLOCKED**: stand-in font. |
+| GAND-FORM-001 | LR 5.1(C) | "Computer documents must be prepared in one of the following fonts: Times New Roman (at least 14 point), Courier New (at least 12 point), Century Schoolbook (at least 13 point), or Book Antiqua (at least 13 point)." | M | `font-name` = "Liberation Serif" (substitute for Times New Roman), `type-size` = 14pt. |
 | GAND-FORM-002 | LR 5.1(C) | "be double-spaced between lines"; "Footnotes, headings, and indented citations may be single-spaced." | M | `body-leading` = 1.65em (32.2 pt baseline pitch, matched to the filed exemplar's body text, Durand p.2). Headings, footnotes, block quotations single-spaced. |
 | GAND-FORM-003 | LR 5.1(D) | "The top, bottom, left, and right margins ... must be at least one inch." | M | `margin` = 1in on all four sides. |
 | GAND-FORM-004 | LR 5.1(E) | "All pages shall be numbered consecutively at the bottom center of the page." | M | `page-footer()`. |
@@ -32,7 +34,7 @@ M = mandated by a rule (tier 1). C = convention (tier 2). A = author responsibil
 | GAND-CAP-001 | Fed. R. Civ. P. 10(a) | "a caption with the court's name, a title, a file number, and a Rule 7(a) designation." | M | `court-title()`, `caption()`, `title`. |
 | GAND-MEM-001 | LR 7.1(A)(1) | "Every motion presented to the clerk for filing shall be accompanied by a memorandum of law which cites supporting authority." | M | The template produces one document containing the motion and the memorandum (the primary exemplar's form). A separate memorandum (the second exemplar) is equally compliant; the template does not generate a separate one. |
 | GAND-LIM-001 | LR 7.1(D) | "briefs filed in support of a motion ... are limited in length to twenty-five (25) pages." | M | Not enforced (no page counter). The sample is 10 pages; the author must keep the brief within 25. |
-| GAND-CERT-001 | LR 7.1(D) | "At the end of the brief, counsel must certify that the brief has been prepared with one of the font and point selections approved by the Court in LR 5.1(B) [sic; the font rule is LR 5.1(C)]." | M | `font-certificate()`: "I certify that the foregoing brief conforms to the requirements of LR 5.1(C). The brief is prepared in 14-point EB Garamond font." Font and size come from the template parameters, so the certificate names the font the PDF uses. |
+| GAND-CERT-001 | LR 7.1(D) | "At the end of the brief, counsel must certify that the brief has been prepared with one of the font and point selections approved by the Court in LR 5.1(B) [sic; the font rule is LR 5.1(C)]." | M | `font-certificate()`: "I certify that the foregoing brief conforms to the requirements of LR 5.1(C). The brief is prepared in 14-point Times New Roman font." The face is `rule-font-name`, the rule's face; the PDF embeds the metric-compatible Liberation Serif (see the top of this file). |
 | GAND-SVC-001 | Fed. R. Civ. P. 5(b)(2)(E), 5(d)(1)(B) | Service through the court's electronic filing system; a certificate of service is not required for ECF service. | C | `service-certificate()`: included because both the primary and second exemplar carry one; the date text comes from frontmatter (`service_text`). |
 | GAND-FIL-001 | Fed. R. Civ. P. 11(a) | The paper states the signer's address, email and telephone. | M | `signature-block()`. |
 | GAND-SEP-001 | LR 3.3 | Certificate of Interested Persons and Corporate Disclosure Statement at first appearance. | A | Not generated (separate filing). |
@@ -62,7 +64,7 @@ Changes from the exemplar, and why:
 
 The overlay pairs our pages with the exemplar by word overlap, which is coarse: ours p.9 maps to filed p.14 and ours p.10 to filed p.18, where the sample stops early and the exemplar continues. It is a diagnostic, not a score.
 
-## Gate 2 review (current PDF, all 10 pages rendered at 60 dpi and viewed)
+## Gate 2 review (current PDF, all 10 pages rendered at 60 dpi and viewed, 2026-10-14)
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -79,7 +81,7 @@ The overlay pairs our pages with the exemplar by word overlap, which is coarse: 
 
 ## Known gaps and open choices
 
-1. **BLOCKED: font (tier 1).** See the top of this file. The LR 7.1(D) certificate states the stand-in font, which is honest and is not compliant until the font changes.
+1. **Font (tier 1): resolved, see the top of this file.** The certificate names Times New Roman, the face LR 5.1(C) lists, while the PDF embeds the metric-compatible Liberation Serif. David should confirm that a certificate naming the rule's face, over a Times-metric render, is the intended reading.
 2. **LR 7.1(D) cross-reference.** The rule's own text says the font selections are "approved by the Court in LR 5.1(B)"; the font selections are in LR 5.1(C) (5.1(B) is paper). The template cites LR 5.1(C), as the exemplar's certificate does. David should confirm the reading.
 3. **Page limit.** LR 7.1(D) limits the brief to 25 pages. Not checked by the template; the sample is 10 pages.
 4. **Second exemplar.** The separate memorandum (First Horizon, 16 pages) is on file. It was checked on page 1 only; its layout was not compared, so tier 2 is judged against the primary exemplar's layout plus the LR rules.
