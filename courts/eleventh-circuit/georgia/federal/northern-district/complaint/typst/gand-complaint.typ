@@ -8,17 +8,16 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-name = "EB Garamond"          // STAND-IN. LR 5.1(C) names Times New Roman, Courier New, Century Schoolbook
-                                        // or Book Antiqua; none of them is vendored in fonts/. BLOCKED, see README.md.
+#let font-name = "Liberation Serif"     // LR 5.1(C) names Times New Roman (14 pt); substitute per docs/FONTS.md, metric-compatible.
 #let font-family = font-name
 #let type-size = 14pt                   // LR 5.1(C): Times New Roman at least 14 point
 #let page-w = 8.5in
 #let page-h = 11in
 #let margin = 1in                       // LR 5.1(D): top, bottom, left and right margins at least one inch
 #let text-width = page-w - 2 * margin
-// LR 5.1(C): double-spaced. Typst's line box for EB Garamond is about 0.65em, so 1.65em of leading gives a
+// LR 5.1(C): double-spaced. Typst's line box for Liberation Serif is about 0.655em, so 1.645em of leading gives a
 // 32.2 pt baseline pitch: the pitch of the filed exemplar's body text (Serveco p.2). See README.md.
-#let body-leading = 1.65em
+#let body-leading = 1.645em
 #let single-leading = 0.3em             // headings, court title, signature block: single-spaced
 #let single-line = 1.4em                // one single-spaced caption line, as a fixed-height block (no overlap possible)
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
