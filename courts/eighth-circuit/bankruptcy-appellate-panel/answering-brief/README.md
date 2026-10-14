@@ -5,6 +5,7 @@
 - **Exemplar: BLOCKED: no exemplar.** No public filed appellee's brief from this court was found after 20 searches in two passes, plus three direct fetch attempts (listed in `exemplars/SOURCE.md`). Nothing is stored in `exemplars/`. The one public BAP brief found (the debtor's opening brief in BAP No. 11-6012) is the opening-brief exemplar.
 - Template: built from the rules. Render (2026-10-14, ok, 9 pages) and full page review done (Gate 2 below). Overlay: fail, no exemplar (see Overlay).
 - Status: rule-driven template plus a synthetic rule-check sample. `court.json` untouched; `status` not set.
+- Typeface: rule names no face (FRBP 8015(a)(5)(A)); kept **EB Garamond**, 14 pt. Re-rendered 2026-10-14 with `tools/render.sh` (zero warnings); `pdffonts`: only EB Garamond embedded. Overlay re-run: fail, no exemplar PDF in `exemplars/`.
 
 ## Files
 
