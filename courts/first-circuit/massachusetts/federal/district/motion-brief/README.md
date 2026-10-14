@@ -9,7 +9,8 @@ Folder: `courts/first-circuit/massachusetts/federal/district/motion-brief/`.
 | sample md | `samples/INPUT-smith-college-motion-to-dismiss.md`: the whole 12-page memorandum (caption, introduction, facts with footnotes and a block quotation, argument I to III, conclusion, signature, certificate of service). Transcribed from the text layer of the exemplar. |
 | render | ok: `samples/OUTPUT-smith-college-motion-to-dismiss.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh courts/first-circuit/massachusetts/federal/district/motion-brief samples/INPUT-smith-college-motion-to-dismiss.md`) |
 | overlay | ok: `samples/OVERLAY-smith-college-motion-to-dismiss.pdf` and `OVERLAY-smith-college-motion-to-dismiss.txt` (`sh tools/overlay.sh courts/first-circuit/massachusetts/federal/district/motion-brief smith-college-motion-to-dismiss`) |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed in the final state, after the last template change) |
+| typeface | No face named by the court's rules: EB Garamond kept (`docs/FONTS.md`, "No face named"). Fonts pass 2026-10-14: re-rendered with vendored fonts only, `pdffonts` shows EB Garamond only, no warnings. |
+| pages reviewed | 12 of 12 (fonts pass 2026-10-14: every page rendered at 60 dpi and viewed; earlier review at the last template change) |
 
 File names follow the tools, not the brief's wording: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` reads that name and writes `OVERLAY-<id>.pdf` / `.txt`. The tools are shared and were not edited.
 
@@ -26,6 +27,7 @@ File names follow the tools, not the brief's wording: `tools/render.sh` writes `
 | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number and a Rule 7(a) designation. | `court-title()`, `caption()` (court name, `Civil Action No.`, the title centered below the caption) (MAD-CAP-001..003). |
 | Fed. R. Civ. P. 5(d)(1)(B) | No certificate of service is required when a paper is served by filing it with the court's electronic-filing system. | `service-block()`, rendered when the sample has `service`; the exemplar has one (MAD-CERT-001). |
 | Fed. R. Civ. P. 7(b)(1), 12(b)(6) | A request for a court order is made by motion; the motion must state the grounds. The argument is for failure to state a claim. | Content, not a template rule. |
+| Typeface (none named) | D. Mass. L.R. 5.1 names no typeface or size. Judges' standing orders were not checked. | `font-family = "EB Garamond"` (MAD-FORM-002): the no-face case in `docs/FONTS.md`, not a substitute. |
 
 Rule text: L.R. 5.1 and 7.1 from the court's combined local rules PDF, effective November 1, 2019 (https://www.mad.uscourts.gov/general/pdf/LC/Combined%20Local%20Rules%2011-1-19.pdf), read on 2026-10-14. This is the latest consolidated copy the search found; the court's rules page was not reachable in this run (HTTP 404 and 403), so later amendments are not checked. Fed. R. Civ. P. 5(d)(1)(B) was read on 2026-10-14 from https://www.law.cornell.edu/rules/frcp/rule_5. Fed. R. Civ. P. 7(b), 10 and 12(b)(6) are cited from the rule text, not fetched in this run (Rule 10 was read from https://www.law.cornell.edu/rules/frcp/rule_10).
 
@@ -72,7 +74,7 @@ Defects found in review and fixed (all in `mad-motion-brief.typ`):
 
 ## Known gaps and open choices
 
-1. **Typeface.** The only serif vendored in `fonts/` is EB Garamond, so the template is not Times New Roman as the exemplar is. It is set at 13 pt, which looks close to the exemplar's 12 pt Times. The local rules set no typeface. Whether David wants a vendored Times-metric font is a question for him.
+1. **Typeface.** The local rules name no face, so EB Garamond stays. The exemplar is in Times New Roman, which is the filer's choice, not a rule. If David wants the exemplar's look, the metric-compatible vendored substitute is Liberation Serif (`docs/FONTS.md`); switching it is a choice for David, not made here.
 2. **Footnotes** are 12 pt, single-spaced; the rules set no footnote size (L.R. 5.1(a)(2) exempts footnotes from double spacing only).
 3. **Certificate of consultation** (L.R. 7.1(a)(2)). The template renders it when the sample has `consultation`. The exemplar memorandum does not carry one: the certification belongs to the motion, which is a separate filing and is not produced here.
 4. **Request for oral argument** (L.R. 7.1(d)). Not generated.
@@ -82,5 +84,6 @@ Defects found in review and fixed (all in `mad-motion-brief.typ`):
 8. **Case names** are roman in the sample, as the exemplar's text layer shows no italics. The template does italicize `*...*` in markdown.
 9. **Rules currency.** The local rules are the 2019 consolidated copy (see above).
 10. **Not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and a `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
+11. **Page 6 gap.** Page 6 ends about a third of the way up the page; Argument II moves to page 7 with its heading. Seen in the fonts pass; not a font effect, and the cause was not investigated.
 
 [Formbook index](../../../../../../README.md) | [District Court, D. Mass.](../README.md)

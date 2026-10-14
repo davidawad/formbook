@@ -20,6 +20,8 @@
 
 Engines: typst `—`, latex `—`, docx `—`.
 
+Typeface: D. Mass. local rules name no face, so both doc types keep EB Garamond (no court-named substitute; see each doc type's README).
+
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 

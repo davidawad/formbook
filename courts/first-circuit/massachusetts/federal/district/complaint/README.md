@@ -9,7 +9,8 @@ Folder: `courts/first-circuit/massachusetts/federal/district/complaint/`.
 | sample md | `samples/INPUT-door-systems-complaint.md`: the whole filing (97 numbered paragraphs, Counts I to VI, prayer A to Q, jury demand, signature). Transcribed from the text layer of the exemplar. |
 | render | ok: `samples/OUTPUT-door-systems-complaint.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh courts/first-circuit/massachusetts/federal/district/complaint samples/INPUT-door-systems-complaint.md`) |
 | overlay | ok: `samples/OVERLAY-door-systems-complaint.pdf` and `OVERLAY-door-systems-complaint.txt` (`sh tools/overlay.sh courts/first-circuit/massachusetts/federal/district/complaint door-systems-complaint`) |
-| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed in the final state, after the last template change) |
+| typeface | No face named by the court's rules: EB Garamond kept (`docs/FONTS.md`, "No face named"). Fonts pass 2026-10-14: re-rendered with vendored fonts only, `pdffonts` shows EB Garamond only, no warnings. |
+| pages reviewed | 14 of 14 (fonts pass 2026-10-14: every page rendered at 60 dpi and viewed; earlier review at the last template change) |
 
 File names follow the tools, not the brief's wording: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` reads that name and writes `OVERLAY-<id>.pdf` / `.txt`, so the sample is `samples/<id>.md` with those outputs. The tools are shared and were not edited.
 
@@ -25,6 +26,7 @@ File names follow the tools, not the brief's wording: `tools/render.sh` writes `
 | Fed. R. Civ. P. 10(b) | Claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | `allegations()` numbers every paragraph from 1; headings, quotations, the prayer and the jury demand are not numbered. |
 | Fed. R. Civ. P. 38(b) | Jury demand. | `jury_demand` frontmatter, rendered after the prayer. |
 | Fed. R. Civ. P. 7.1 | Disclosure statement for a nongovernmental corporate party, filed with the first appearance. | Not generated (separate filing). |
+| Typeface (none named) | D. Mass. L.R. 5.1 names no typeface or size. Judges' standing orders were not checked. | `font-family = "EB Garamond"` (MAD-FORM-002): the no-face case in `docs/FONTS.md`, not a substitute. |
 
 Rule text: L.R. 3.1, 5.1 and 7.1 from the court's combined local rules PDF, effective November 1, 2019 (https://www.mad.uscourts.gov/general/pdf/LC/Combined%20Local%20Rules%2011-1-19.pdf), read on 2026-10-14. This is the latest consolidated copy the search found; the court's rules page was not reachable in this run (HTTP 404 and 403), so later amendments are not checked. Fed. R. Civ. P. 10(a), 10(b) and 5(d)(1)(B) were read on 2026-10-14 from https://www.law.cornell.edu/rules/frcp/rule_10 and https://www.law.cornell.edu/rules/frcp/rule_5. Fed. R. Civ. P. 38 and 7.1 are cited from the rule text, not fetched in this run.
 
@@ -65,7 +67,7 @@ Defects found in review and fixed (all in `mad-complaint.typ`):
 
 ## Known gaps and open choices
 
-1. **Typeface.** The only serif vendored in `fonts/` is EB Garamond, so the template is not Times New Roman as the exemplar is. It is set at 13 pt, which looks close to the exemplar's 12 pt Times. The local rules set no typeface. Whether David wants a vendored Times-metric font is a question for him.
+1. **Typeface.** The local rules name no face, so EB Garamond stays. The exemplar is in Times New Roman, which is the filer's choice, not a rule. If David wants the exemplar's look, the metric-compatible vendored substitute is Liberation Serif (`docs/FONTS.md`); switching it is a choice for David, not made here.
 2. **Paragraph gap.** Paragraphs are separated by 0.65 em on top of the double spacing; the exemplar shows no visible gap. Tier-2 choice, recorded as ACCEPTED: the gap is what keeps the paragraphs apart under typst 0.15 (see the defect above).
 3. **Caption.** The party column is closed by a rule (right and bottom) rather than the ")" column of the exemplar. Tier-2 convention choice, ACCEPTED (the CAND templates use the same closure).
 4. **Justified text.** Body text is justified; the exemplar's justification could not be read from the text layer.
