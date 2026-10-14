@@ -74,3 +74,29 @@ Tier-2 findings (ACCEPTED): the typeface is EB Garamond where the filed brief us
 6. The template does not require a standard-of-review statement from an appellee (FRAP 28(b)(4)); when one is given, it is ordinary argument text. The sample includes one (Argument I.A).
 7. The oral-argument section is excluded from the word count by heading match, a heuristic.
 8. Only the vendored EB Garamond is available. No Times New Roman is vendored (`fonts/` is shared and not edited here).
+
+## Engines
+
+The typst template is the reference. The same sample is rendered in two more engines; each has its own output in `samples/`.
+
+| Engine | Folder | Output | Status |
+|---|---|---|---|
+| typst (primary) | `typst/` | `samples/OUTPUT-griffin-answering-brief.pdf` (10 pages) | unchanged |
+| latex | `latex/` (`template.tex` + `ca1.lua`, tectonic) | `samples/OUTPUT-griffin-answering-brief.latex.pdf` (10 pages) | renders; checked by eye, see below |
+| docx | `docx/` (`reference.docx` + `ca1.lua`, pandoc) | `samples/OUTPUT-griffin-answering-brief.docx` | builds and validates; `.docx.pdf` BLOCKED (no LibreOffice) |
+
+**LaTeX matches** (tier 1): EB Garamond 14 pt from `fonts/` only (`fontdir`), body double-spaced at the typst pitch (31.5 pt), 1 inch margins, footnotes 14 pt, roman front matter, arabic body, the cover (FRAP 32(a)(2)), the TOC and TOA with page numbers from the aux file, the certificates (Form 6 wording and the word count, 1012 words, equal to typst), the signature and the addendum with `Add-N` pages. No addendum in the sample; the addendum is optional here (1st Cir. R. 28.0(b)(1)), so none is rendered.
+
+**LaTeX differs** (tier 2): the body breaks lines and pages a little differently, so the sample is 10 pages against typst's 10. The sub-heading paragraphs keep with the text below them by `\nobreak` only (`needspace` misfired in this box). The signature block is not kept with the last paragraph. Tectonic fetches TeX packages on its first run (cached afterwards).
+
+**DOCX** (`samples/OUTPUT-griffin-answering-brief.docx`): the word count is 1012, equal to typst. The cover, certificates and signature use the custom styles in `reference.docx`; the sections give roman front matter, arabic body and (addendum briefs) `Add-N`.
+
+BLOCKED (docx):
+- `docx.pdf` checks (every gate on the LibreOffice PDF): BLOCKED, no `soffice` on this box (LibreOffice has no conda-forge package; `docs/DOCX.md`). No `samples/.check-docx.txt` stamp is written.
+- Contents and authorities page numbers: no page numbers are printed. They need a first-pass layout, which needs LibreOffice. The entries list the headings and authorities only.
+- Point headings of the Argument are Heading 2 (left), not centered small capitals.
+- Check boxes are the text "[X]" (EB Garamond has no check-box glyph).
+- Cover rule lines are not drawn in the docx.
+- The `.docx` is not yet opened in Word or LibreOffice (no LibreOffice here), so the no-repair check is not done.
+
+Build: `sh docx/make-reference.sh none` once (the output is committed), then `sh tools/render.sh --engine latex|docx <court-dir> samples/INPUT-griffin-answering-brief.md`. The docx command exits non-zero at the LibreOffice step after writing the `.docx`.

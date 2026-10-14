@@ -75,3 +75,9 @@ Pages reviewed: 9 of 9.
 - CourtListener search API (`/api/rest/v4/search/?type=r&court=ca3`, query "reply brief"): several ca3 reply briefs, all public RECAP documents. The detail endpoint requires auth; the docket pages and their storage links were used instead.
 - Justia dockets (25-2303, 25-2729): found the docket entries but the fetch returned HTTP 403, so not used.
 - Chosen: 26-2469 Dkt. 30 (AFP). Reason: private-firm reply brief, text-based, the same cover and certificate structure as the court's form, 35 pages.
+
+## Engines
+
+- **typst** (`typst/`): primary, unchanged.
+- **latex** (`latex/template.tex`, `latex/ca3.lua`; built by `tools/render-latex.sh` with tectonic, two passes): 14 pt EB Garamond from the vendored `fonts/`, double spaced, 1 inch margins, roman front matter and arabic body; the Argument's point headings are centered with roman numerals; the certificates each on their own page. The word limit is 6,500 words (FRAP 32(a)(7)(B)(ii)), checked from the markdown source. Differs from typst: 10 pages against typst's 9; the certificate of compliance names LaTeX where typst names Typst; the layout is checked by eye on a contact sheet, not by Gate 2. Tier 1 is not signed off for this engine.
+- **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`): writes `samples/OUTPUT-<id>.docx`. `docx.pdf` checks are **BLOCKED**: LibreOffice (`soffice`) is not installed and has no conda-forge package. Not provided (not checked, not claimed): table of contents and table of authorities page numbers; footer page numbers; the cover's placement; body first-line indents; the Argument's centered point headings.

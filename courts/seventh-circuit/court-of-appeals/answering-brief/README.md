@@ -105,3 +105,9 @@ Every page was rasterized (`pdftoppm -r 60`) and viewed, first after the templat
 - *Lafalier* was cited only inside the *Allen* link text, so the TOA would have omitted it. It is now its own `toa:lafalier` link.
 
 [Formbook index](../../../../README.md)
+
+## Engines
+
+- **typst** (`typst/`): primary, unchanged.
+- **latex** (`latex/template.tex`, `latex/ca7-answering-brief.lua`): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 26.9 pt double spacing, one-inch margins, no hyphenation. The Argument's point headings are centered small capitals; other headings use A. / 1. / a. / (1). Cover, TOC, TOA, signers block (`/s/` and bar numbers) and both certificates follow the typst frontmatter fields. Output `samples/OUTPUT-craig-answering-brief.latex.pdf`, 14 pages (typst: 14). Differences: the cover is not fitted to the page, so its final date line and rule may sit differently; the TOC shows the short certificate title, not the full typst heading. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
+- **docx**: no `docx/` template yet. `samples/OUTPUT-craig-answering-brief.docx` is pandoc's default styling, not the court form. BLOCKED: the `.docx.pdf` checks (no LibreOffice on this box); the `.docx` is not in court form (fonts, sizes, spacing, margins, page numbering, cover, TOC/TOA, certificates); `tools/render-docx.sh` needs `unzip`, which this box lacks.

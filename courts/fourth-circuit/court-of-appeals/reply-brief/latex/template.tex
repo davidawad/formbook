@@ -1,0 +1,112 @@
+% Fourth Circuit brief, LaTeX engine. Matches typst/ca4-opening-brief.typ (the reference): EB Garamond 14 pt,
+% double spacing (baseline 31.43 pt), 1-inch margins, left-aligned, 0.5-inch paragraph indent, roman folios for the
+% front matter and arabic from the body. Everything that depends on the frontmatter is written by ca4.lua as raw LaTeX.
+% Fonts come only from the vendored directory (the fontdir variable); fontspec does not fall back to a system font.
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf, UprightFont=EBGaramond-Regular, BoldFont=EBGaramond-Bold,
+  ItalicFont=EBGaramond-Italic, BoldItalicFont=EBGaramond-BoldItalic]{EBGaramond}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{indentfirst}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\makeatletter
+% Type size and leading (FRAP 32(a)(4), (a)(5)): 14 pt everywhere; body double-spaced at 31.43 pt.
+\renewcommand\normalsize{\fontsize{14pt}{31.43pt}\selectfont}
+\renewcommand\footnotesize{\fontsize{14pt}{16.8pt}\selectfont}
+\newcommand\singlespacing{\fontsize{14pt}{20pt}\selectfont}
+\setlength{\parindent}{0.5in}
+\AtBeginDocument{\setlength{\parindent}{0.5in}}
+\setlength{\parskip}{0pt}
+\raggedright
+\addtolength{\topskip}{3pt}
+\addtolength{\textheight}{-8pt}
+\setcounter{secnumdepth}{0}
+\setlength{\footnotesep}{0.5em}
+% Footnote: marker, a thin space, then the note; no indent; single-spaced.
+\long\def\@makefntext#1{\noindent\textsuperscript{\@thefnmark}\,#1}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setlength{\leftmargini}{0.5in}
+\pagestyle{plain}
+
+% ---- headings (called by ca4.lua) ----
+% \brfsection{display}: a level-1 heading: centred, bold, capitals.
+\newcommand\cvrule[2]{\par\nointerlineskip\hbox to\linewidth{\hfil\vrule width #1 height #2 depth 0pt\hfil}\par\nointerlineskip}
+\newcommand\brfsection[1]{%
+  \par\needspace{100pt}\vspace{21pt}%
+  {\singlespacing\centering\textbf{#1}\par}%
+  \vspace{4.5pt}\nopagebreak}
+% \brfsub{indent}{label}{title}: a numbered sub-heading; the label sits at the indent, the title hangs under itself.
+\newcommand\brfsub[3]{%
+  \par\needspace{70pt}\vspace{15.4pt}%
+  {\singlespacing\noindent\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\relax
+    \hspace*{#1}\makebox[0.5in][l]{#2}#3\par}%
+  \vspace{9pt}\nopagebreak}
+% \brfunnum{indent}{title}: an unnumbered sub-heading: bold, left, single-spaced.
+\newcommand\brfunnum[2]{%
+  \par\needspace{70pt}\vspace{15.4pt}%
+  {\singlespacing\noindent\hangindent=#1\relax\hangafter=1\relax\hspace*{#1}\textbf{#2}\par}%
+  \vspace{9pt}\nopagebreak}
+% \brfpoint{title}: a centred point heading (answering brief: see CFG in ca4.lua).
+\newcommand\brfpoint[1]{%
+  \par\needspace{70pt}\vspace{15.4pt}%
+  {\singlespacing\centering\textbf{#1}\par}%
+  \vspace{11pt}\nopagebreak}
+
+% ---- table of contents: entry types written by the headings; \@dottedtocline does the leaders ----
+\newcommand\l@brfone[2]{\@dottedtocline{0}{0pt}{0pt}{#1}{#2}}
+\newcommand\l@brftwo[2]{\@dottedtocline{0}{0.5in}{0.5in}{#1}{#2}}
+\newcommand\l@brfthree[2]{\@dottedtocline{0}{1in}{0.5in}{#1}{#2}}
+\newcommand\l@brffour[2]{\@dottedtocline{0}{1.5in}{0.5in}{#1}{#2}}
+\newcommand\l@brfutwo[2]{\@dottedtocline{0}{0pt}{0pt}{#1}{#2}}
+\newcommand\l@brfuthree[2]{\@dottedtocline{0}{0.5in}{0pt}{#1}{#2}}
+\newcommand\l@brfufour[2]{\@dottedtocline{0}{1in}{0pt}{#1}{#2}}
+\newcommand\l@brfpoint[2]{\@dottedtocline{0}{0pt}{0.5in}{#1}{#2}}
+% The addendum's contents (reply brief): its level-2 headings, in their own list file.
+\newcommand\l@brfadd[2]{\@dottedtocline{0}{0pt}{0pt}{#1}{#2}}
+\newcommand\brfcontentsadd{%
+  \par\needspace{100pt}\vspace{21pt}%
+  {\singlespacing\centering\textbf{TABLE OF CONTENTS}\par}\vspace{14pt}%
+  {\singlespacing\raggedleft\textbf{\underline{Page}}\par}\vspace{4pt}%
+  {\singlespacing\@starttoc{adt}}}
+\newcommand\brfcontents{%
+  \par\needspace{100pt}\vspace{21pt}%
+  {\singlespacing\centering\textbf{TABLE OF CONTENTS}\par}\vspace{14pt}%
+  {\singlespacing\raggedleft\textbf{\underline{Page}}\par}\vspace{4pt}%
+  {\singlespacing\@starttoc{toc}}}
+
+% ---- table of authorities: the pages come from the aux file, written by \brfhit after each citation ----
+\newcommand\brfhit[1]{\protected@write\@auxout{}{\string\brfcite{#1}{\thepage}}}
+% \brfcite{key}{page}: keeps the distinct pages of each key in order, and their count.
+\newcommand\brfcite[2]{%
+  \@ifundefined{brfp@#1}{%
+    \expandafter\gdef\csname brfp@#1\endcsname{#2}%
+    \expandafter\gdef\csname brfn@#1\endcsname{1}%
+    \expandafter\gdef\csname brfl@#1\endcsname{#2}}{%
+    \edef\brf@page{#2}%
+    \expandafter\ifx\csname brfl@#1\endcsname\brf@page\else
+      \expandafter\xdef\csname brfp@#1\endcsname{\csname brfp@#1\endcsname, #2}%
+      \expandafter\xdef\csname brfn@#1\endcsname{\number\numexpr\csname brfn@#1\endcsname+1\relax}%
+      \expandafter\gdef\csname brfl@#1\endcsname{#2}%
+    \fi}}
+% \brfpages{key}: the page list, or "passim" from 7 distinct pages on (typst: passim-threshold).
+\newcommand\brfpages[1]{%
+  \@ifundefined{brfn@#1}{}{%
+    \ifnum\csname brfn@#1\endcsname>6 \emph{passim}\else\csname brfp@#1\endcsname\fi}}
+% \brftoaentry{name}{cite}{key}{has name}: the name (for cases, italic) and the cite, then the pages at the right.
+\newcommand\brftoaentry[4]{%
+  \par\noindent\ifnum#4=1 \needspace{42pt}\else\needspace{26pt}\fi\vspace{5.5pt}%
+  {\singlespacing\hangindent=0.35in\hangafter=1\relax
+    \ifnum#4=1 #1,\\\fi #2\ %
+    \leaders\hbox to 0.7em{\hss.\hss}\hfill\hspace{0.3em}\brfpages{#3}\par}}
+% \brftoagroup{title}{first}: a group heading ("Cases:"); the first group carries the "Page(s)" column head.
+\newcommand\brftoagroup[2]{%
+  \par\needspace{60pt}\ifnum#2=1 \else\vspace{19.6pt}\fi%
+  {\singlespacing\noindent\textbf{#1}\ifnum#2=1 \hfill\textbf{\underline{Page(s)}}\fi\par}}
+\makeatother
+
+\begin{document}
+$body$
+\end{document}

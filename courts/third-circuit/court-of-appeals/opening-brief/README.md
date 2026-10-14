@@ -114,3 +114,9 @@ Word count in the compliance certificate (2,157) is the count of this sample's b
 - **Certificate of service rule** (FRAP 25(d)) text was not fetched in this run; the wording follows the exemplar.
 - **Three-engine work** (latex, docx) is not part of this doc type.
 - **Checker** (`checks.yaml`, `tools/check.sh`) does not yet exist for this court; this doc type is rendered and overlaid only.
+
+## Engines
+
+- **typst** (`typst/`): primary, unchanged.
+- **latex** (`latex/template.tex`, `latex/ca3.lua`; built by `tools/render-latex.sh` with tectonic, two passes): 14 pt EB Garamond from the vendored `fonts/`, double spaced, 1 inch margins, roman front matter and arabic body, one-page cover, table of contents and table of authorities read from the previous pass, each certificate on its own page. Differs from typst: 17 pages against typst's 18 (line breaks and keep-with-next rules differ); the certificate of compliance names LaTeX where typst names Typst (`prepared_with` is not set in the sample); the heading layout is checked by eye on a contact sheet, not by Gate 2. Tier 1 is not signed off for this engine.
+- **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`): writes `samples/OUTPUT-<id>.docx`. `docx.pdf` checks are **BLOCKED**: LibreOffice (`soffice`) has no conda-forge package and is not installed on this box. Items the docx does not yet provide (not checked, not claimed): table of contents page numbers (a TOC field, not updated); table of authorities page numbers (names and citations only); footer page numbers and the roman/arabic sections; the cover's exact placement; first-line indents on body paragraphs; centered point headings (the opening brief has none).

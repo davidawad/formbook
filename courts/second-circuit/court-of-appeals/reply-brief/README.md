@@ -125,3 +125,10 @@ All 14 pages of `samples/OUTPUT-lowe-reply-brief.pdf` were rendered at `pdftoppm
 - **Cover color, binding, and paper requirements** are not in the fetched rule text and are not implemented.
 - **Overlay pairing for the body** is by word overlap, so a sample page can pair with an exemplar page one or two away; read the overlay with the `.txt` page map beside it.
 - **Alisigwe exemplar** is kept for conventions only; a second overlay against it is not run.
+
+## Engines (latex, docx)
+
+Built by `latex/` (`template.tex` + `ca2.lua`, `DOC = "reply"`) and `docx/` (`reference.docx` from `make-reference.sh`, + `ca2.lua`).
+
+- **latex** (`samples/OUTPUT-lowe-reply-brief.latex.pdf`, 14 pages; typst: 14). Matches: the cover with counsel in two columns, the contents and authorities (computed page numbers), the Introduction and Argument headings, the signature block with the date, the certificates of compliance and service (reply wording), word count 1,635. Differs: the cover has no short rules between its parts (the typst cover's rules were dropped to keep it on one page); the typst count is 1,634 against 1,635 here, because typst's counter and the rule text disagree by one token and this count follows the rule.
+- **docx** (`samples/OUTPUT-lowe-reply-brief.docx`, `.docx.pdf` 14 pages). Matches: the cover on one page (counsel in two columns), sections and numbering, the certificates, word count 1,635. BLOCKED: `DOCX-TOC-PAGES` and `DOCX-TOA-PAGES` (see the opening brief's README).

@@ -91,3 +91,18 @@ Every page of `samples/OUTPUT-netchoice-opening-brief.pdf` was rendered at 60 dp
 ## Exemplar search, for the record
 
 Searches (2026-10-14): CourtListener and RECAP for 4th Cir. opening briefs; the ca4 website's brief-requirement and rule pages; Justia docket pages for 2025 4th Cir. cases; advocacy-group repositories. The exemplar chosen is the NetChoice copy of the Attorney General's brief because it is a text-based PDF, a 4th Cir. opening brief, filed April 2026, and public. Others found and not used are listed in `exemplars/SOURCE.md`.
+
+## Engines
+
+Three renderings of the same markdown (`samples/INPUT-netchoice-opening-brief.md`). The typst template is the reference.
+
+**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-netchoice-opening-brief.latex.pdf`, 14 pages, rendered and reviewed page by page against the typst output. Matches: EB Garamond only (vendored, 14 pt text and footnotes), body double-spaced at the typst pitch (31.43 pt), 1-inch margins, 0.5-inch first-line indent, roman folios for the cover-less front matter and arabic from the body, the cover on one page with counsel in the right half, contents and authorities built from the frontmatter and the `toa:` links (passim from seven pages), the signature block kept with the last paragraph, and the certificate of compliance word count (1,523, the same as typst's count). Differs: the cover's spacing is a fixed gap (typst scales the gap to fit the page); paragraph and heading spacing differ slightly, so body page breaks and the folios in the contents and authorities differ from typst by a line or two per page. Not checked by `check.sh` (no `checks.yaml` in this court).
+
+**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `samples/OUTPUT-netchoice-opening-brief.docx` is written; the `.docx.pdf` is not, because LibreOffice is not installed (see BLOCKED). Matches in the styles: EB Garamond 14 pt, body at 31.43 pt exact, 0.5-inch first-line indent, single-spaced headings and block quotations, 1-inch margins, three sections (cover without folio, front matter in roman, body in arabic). The contents and the table of authorities are Word fields (`TOC`, `TA` on each citation, `TOA` per category). Certificate word count 1,523.
+
+BLOCKED (docx):
+- All gates on `samples/OUTPUT-netchoice-opening-brief.docx.pdf`: LibreOffice (`soffice`) is not on this box and conda-forge has no package. A Debian `libreoffice-writer-nogui` 25.2.3 was unpacked without root under `~/apt-lo` and its `soffice.bin` segfaulted at start-up; not resolved.
+- Contents and authorities page numbers: the cached results have no page numbers, and Word fills them on update (fields are marked dirty). LibreOffice does not honour TA/TOA fields (docs/DOCX.md), so the TOA page checks cannot pass in a LibreOffice PDF.
+- The cover's rules and caption positions are paragraph borders and indents, approximated; the cover was not seen in any renderer.
+- The last paragraph is not kept with the signature block (no keep-with-next across the pair).
+- Opened in neither Word nor LibreOffice: the `.docx` was checked only for well-formed XML parts.

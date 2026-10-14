@@ -137,3 +137,9 @@ in the word processor the brief was typed in.
     overlaid, because the overlay tool reads the first exemplar only.
 
 [Formbook index](../../../../README.md) | [Court README](../README.md)
+
+## Engines
+
+- **typst** (`typst/`): primary, unchanged.
+- **latex** (`latex/template.tex`, `latex/ca7-reply-brief.lua`): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 27.7 pt double spacing, one-inch margins, no hyphenation. TOC lists point headings down to level 3 (`toc_depth` 3). Counsel groups with `column: right` and `counsel_note` are handled; the certificates include the paper-copy and unregistered-participant paragraphs. Output `samples/OUTPUT-act-now-reply-brief.latex.pdf`, 11 pages (typst: 12). Differences: the cover spacing is hand-set; the certificate of compliance wording is written for LaTeX rather than copied from the typst text. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
+- **docx**: no `docx/` template yet. `samples/OUTPUT-act-now-reply-brief.docx` is pandoc's default styling, not the court form. BLOCKED: the `.docx.pdf` checks (no LibreOffice on this box); the `.docx` is not in court form (fonts, sizes, spacing, margins, page numbering, cover, TOC/TOA, certificates); `tools/render-docx.sh` needs `unzip`, which this box lacks.

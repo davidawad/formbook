@@ -1,0 +1,310 @@
+% U.S. Court of Appeals for the Ninth Circuit: appellant's reply brief (FRAP 28(c)). LaTeX engine.
+% The same form as typst/ca9-reply-brief.typ: rule-driven and content-agnostic. Everything printed comes from the
+% markdown frontmatter, the body, or latex/ca9.lua (heading labels, table of authorities, word count). Fonts: only
+% the vendored EB Garamond, through the pandoc variable fontdir (no system fonts). See ../README.md, "Engines".
+\documentclass[14pt,letterpaper]{extarticle}
+\usepackage{fontspec}
+\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf, UprightFont=EBGaramond-Regular, ItalicFont=EBGaramond-Italic,
+  BoldFont=EBGaramond-Bold, BoldItalicFont=EBGaramond-BoldItalic, Ligatures=TeX]{EBGaramond-Regular}
+\usepackage[letterpaper,margin=1in,footskip=0.3in]{geometry}
+\usepackage{indentfirst}   % every paragraph is indented, as in the typst form
+\usepackage{etoolbox}      % lists of page numbers for the table of authorities
+\usepackage{tikz}          % check boxes drawn as lines
+\usepackage[hidelinks,unicode,bookmarks=false]{hyperref}
+\usepackage{xcolor}
+\makeatletter
+
+% ---------------------------------------------------------------------------
+% Page, text and type (CA9-FORM-001 to -004; Circuit Rule 32; FRAP 32(a))
+% ---------------------------------------------------------------------------
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\raggedright
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\pagestyle{plain}
+\newcommand{\cabody}{\fontsize{14pt}{31.43pt}\selectfont}     % double spacing: 2.2 x type size
+\newcommand{\casingle}{\fontsize{14pt}{19.95pt}\selectfont}   % headings, quotations, notes, lists of authorities
+\AtBeginDocument{\cabody\setlength{\parindent}{0.5in}}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Footnotes: 14 point, single spaced, marker superscript with a thin space (FRAP 32(a)(5)).
+\renewcommand{\footnotesize}{\fontsize{14pt}{19.95pt}\selectfont\setlength{\parskip}{0.5em}}
+\renewcommand{\footnoterule}{\kern-3pt{\hrule width 0.3\textwidth height 0.5pt}\kern2.6pt}
+\renewcommand{\@makefntext}[1]{\parindent=0pt\noindent\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
+\setlength{\skip\footins}{1.2em}
+
+% Block quotations: inset half an inch on each side, single spaced.
+\renewenvironment{quote}{\par\addvspace{1em}\begingroup\casingle\leftskip=0.5in\rightskip=0.5in
+  \parindent=0pt\parskip=0.9em\relax}{\par\endgroup\addvspace{1em}}
+
+% ---------------------------------------------------------------------------
+% Headings (typst: style-heading). ca9.lua supplies the label and the entry; these set the form.
+% ---------------------------------------------------------------------------
+% A centered block: #1 space above, #2 space below, #3 text.
+\newcommand{\catitle}[3]{%
+  \vspace{#1}\par
+  \begingroup\centering\casingle#3\par\endgroup
+  \nopagebreak\vspace{#2}\par}
+% Section heading (level 1): bold capitals, centered, 1.15 x type size; listed in the table of contents.
+% Each heading makes its own table-of-contents entry at the END of its text, so the entry records the page the
+% heading's last line lands on (an entry written before a page break can name the previous page).
+\DeclareRobustCommand{\caHone}[1]{%
+  \catitle{1.5em}{1.1em}{\bfseries\fontsize{16.1pt}{20pt}\selectfont\MakeUppercase{#1}%
+  \addcontentsline{toc}{caLone}{\MakeUppercase{#1}}}}
+% Point heading of the Argument (level 2): bold small capitals, centered. #1 label, #2 text, #3 TOC style, #4 entry.
+\DeclareRobustCommand{\capoint}[4]{\catitle{1.2em}{1em}{\bfseries\scshape #1\ #2%
+  \ifx\relax#3\relax\else\addcontentsline{toc}{#3}{#4}\fi}}
+% Sub-heading: label in a half-inch box, text hangs under the text.
+% #1 indent, #2 label, #3 text, #4 TOC style (empty: not listed), #5 TOC entry.
+\newcommand{\casub}[5]{%
+  \par\addvspace{1.1em}\par
+  \begingroup\casingle\noindent\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\relax
+  \hspace*{#1}\makebox[0.5in][l]{#2}#3%
+  \ifx\relax#4\relax\else\addcontentsline{toc}{#4}{#5}\fi\par\endgroup
+  \nopagebreak\addvspace{0.9em}\par}
+% Unnumbered heading (addendum entries): bold, flush left. #1 text, #2 TOC style (empty: not listed), #3 entry.
+\newcommand{\caunnum}[3]{%
+  \par\addvspace{1.2em}\par
+  \begingroup\casingle\noindent\bfseries #1%
+  \ifx\relax#2\relax\else\addcontentsline{add}{#2}{#3}\fi\par\endgroup
+  \nopagebreak\addvspace{0.9em}\par}
+% Label of a table-of-contents entry: a half-inch box, then the title.
+\DeclareRobustCommand{\calab}[2]{\makebox[0.5in][l]{#1}#2}
+
+% ---------------------------------------------------------------------------
+% Tables of contents (typst: toc-entry). #1 indent; the entry is #2 text, #3 page.
+% ---------------------------------------------------------------------------
+\newcommand{\cadots}{\leaders\hbox to 0.16em{\hss.\hss}\hfill}
+\newcommand{\catocline}[3]{%
+  \par\begingroup\casingle\noindent\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\relax
+  \hspace*{#1}#2\nobreak\hspace{0.4em}\nobreak\cadots\nobreak\hbox to 2.2em{\hfill#3}\par\endgroup}
+\def\l@caLone#1#2{\par\addvspace{0.6em}\catocline{0in}{#1}{#2}}
+\def\l@caTzero#1#2{\par\addvspace{0.35em}\catocline{0in}{#1}{#2}}
+\def\l@caTone#1#2{\par\addvspace{0.35em}\catocline{0.5in}{#1}{#2}}
+\def\l@caTtwo#1#2{\par\addvspace{0.35em}\catocline{1in}{#1}{#2}}
+\def\l@caTthree#1#2{\par\addvspace{0.35em}\catocline{1.5in}{#1}{#2}}
+\def\l@caTfour#1#2{\par\addvspace{0.35em}\catocline{2in}{#1}{#2}}
+\def\l@caTfive#1#2{\par\addvspace{0.35em}\catocline{2.5in}{#1}{#2}}
+
+% ---------------------------------------------------------------------------
+% Table of authorities (typst: toa-section). Pages come from the links in the body (aux file).
+% ---------------------------------------------------------------------------
+\DeclareRobustCommand{\catoahit}[2]{#2\protected@write\@auxout{}{\string\catoaentry{#1}{\thepage}}}
+% Page lists are built in the aux file's order. Each (authority, page) pair is kept once; the page string
+% is "p1, p2, ..." and the count is kept beside it (seven or more pages print as "passim", typst passim-threshold).
+\def\catoatmp{}
+\newcommand{\catoaentry}[2]{%
+  \@ifundefined{catoaseen@#1@#2}{%
+    \expandafter\gdef\csname catoaseen@#1@#2\endcsname{}%
+    \@ifundefined{catoa@#1}{%
+      \expandafter\gdef\csname catoa@#1\endcsname{#2}%
+      \expandafter\gdef\csname catoan@#1\endcsname{1}%
+    }{%
+      \expandafter\edef\expandafter\catoatmp\expandafter{\csname catoa@#1\endcsname}%
+      \expandafter\xdef\csname catoa@#1\endcsname{\catoatmp, #2}%
+      \expandafter\xdef\csname catoan@#1\endcsname{\number\numexpr\csname catoan@#1\endcsname+1\relax}%
+    }%
+  }{}}
+% No list exists until the first pass has written the aux file: then nothing is printed.
+\newcommand{\catoapages}[1]{%
+  \@ifundefined{catoa@#1}{}{%
+    \ifnum\csname catoan@#1\endcsname>6 \emph{passim}\else\csname catoa@#1\endcsname\fi}}
+% A group heading; #2 is 1 for the first group, which carries the "Page(s)" label.
+\newcommand{\catoagroup}[2]{%
+  \par\begingroup\casingle
+  \ifnum#2=1 \addvspace{1em}\else \addvspace{1.4em}\fi
+  \noindent\textbf{#1}\ifnum#2=1 \hfill\textbf{\underline{Page(s)}}\fi\par\addvspace{0.2em}\endgroup
+  \nopagebreak}
+% One authority: #1 name (may be empty; a case name is italic), #2 citation, #3 key.
+\newcommand{\catoarow}[3]{%
+  \par\begingroup\casingle\addvspace{0.7em}\hangindent=0.35in\hangafter=1\relax\noindent
+  \ifx\relax#1\relax\else #1,\\\fi
+  #2\hspace{0.8em}\cadots\hspace{0.3em}\catoapages{#3}\par\endgroup}
+
+% ---------------------------------------------------------------------------
+% Forms (FRAP 32(a)(2); Form 17, Form 8, Form 15; typst: certificate-of-compliance and friends)
+% ---------------------------------------------------------------------------
+\def\cayes{yes}
+\def\cano{no}
+% A check box drawn with TikZ, crossed when #1 is \cayes.
+\newcommand{\cabox}[1]{\raisebox{-0.12em}{\begin{tikzpicture}[x=1em,y=1em]
+  \draw[line width=0.7pt] (0,0) rectangle (0.72,0.72);
+  \ifx#1\cayes \draw[line width=0.9pt] (0,0) -- (0.72,0.72) (0,0.72) -- (0.72,0); \fi
+\end{tikzpicture}}}
+% An option row: #1 indent, #2 \cayes or \cano, #3 text.
+\newcommand{\caopt}[3]{%
+  \par\addvspace{0.8em}\par\begingroup\casingle\noindent
+  \hangindent=\dimexpr#1+1.6em\relax\hangafter=1\relax
+  \hspace*{#1}\makebox[1.6em][l]{\cabox{#2}}#3\par\endgroup\nopagebreak}
+% A line of signature: "s/ name" and the date, under the form.
+\newcommand{\caformsig}[2]{%
+  \par\addvspace{1.6em}\noindent
+  \begin{minipage}[t]{0.45\textwidth}\casingle #1\\ Signature\end{minipage}\hfill
+  \begin{minipage}[t]{0.45\textwidth}\casingle #2\\ Date\end{minipage}\par}
+
+% Cover rules: drawn as rules (no line height) so they cost only the gaps around them.
+\newcommand{\cadoublerule}{\par\nointerlineskip\vskip 0.6em
+  \hrule height 1.6pt width\textwidth\vskip 2.5pt\hrule height 0.5pt width\textwidth\vskip 0.6em\par}
+\newcommand{\cashortrule}{\par\nointerlineskip\vskip 0.6em
+  \hbox to\textwidth{\hss\vrule width 2in height 0.7pt depth 0pt\hss}\nointerlineskip\vskip 0.6em\par}
+
+\begin{document}
+
+% ---------------------------------------------------------------------------
+% Cover (FRAP 32(a)(2); CA9-COVER-001 to -007). Page 1, no number.
+% ---------------------------------------------------------------------------
+\thispagestyle{empty}
+\casingle
+\par\begingroup\centering\textbf{No. $case_number$}\par\endgroup
+\cadoublerule
+\par\begingroup\centering\textbf{IN THE UNITED STATES COURT OF APPEALS\\FOR THE NINTH CIRCUIT}\par\endgroup
+\cashortrule
+$for(caption)$
+\par\begingroup\centering
+$for(caption.names)$$it$\par
+$endfor$
+\par\endgroup
+\par\noindent\hspace*{0.5\textwidth}$caption.designation$\par
+$sep$
+\par\begingroup\centering v.\par\endgroup
+$endfor$
+\cashortrule
+\par\begingroup\centering
+$proceeding$
+$if(district_court_case)$\par D.C. No. $district_court_case$$if(judge)$; $judge$$endif$\par
+$elseif(judge)$\par $judge$\par
+$endif$
+\par\endgroup
+\cashortrule
+\par\begingroup\centering\textbf{\MakeUppercase{$brief_title$}}\par\endgroup
+\cashortrule
+\par\noindent\hspace*{0.5\textwidth}\begin{minipage}[t]{0.5\textwidth}\casingle
+$for(counsel)$
+$for(counsel.names)$$it$\par
+$endfor$
+$for(counsel.lines)$\hspace*{0.5em}\emph{$it$}\par
+$endfor$
+$if(counsel.phone)$\hspace*{0.5em}\emph{$counsel.phone$}\par
+$endif$
+\vspace{0.35em}
+$endfor$
+\end{minipage}\par
+\cadoublerule
+
+% ---------------------------------------------------------------------------
+% Front matter (lowercase roman): table of contents, table of authorities
+% ---------------------------------------------------------------------------
+\clearpage
+\pagenumbering{roman}
+\catitle{0pt}{0.3em}{\bfseries\fontsize{16.1pt}{20pt}\selectfont TABLE OF CONTENTS}
+\begingroup\casingle\hfill\textbf{\underline{Page}}\par\endgroup
+\@starttoc{toc}
+
+\clearpage
+\caHone{Table of Authorities}
+$toa$
+
+% ---------------------------------------------------------------------------
+% Body (arabic from 1)
+% ---------------------------------------------------------------------------
+\clearpage
+\pagenumbering{arabic}
+\cabody
+$body$
+
+% The signature block (typst: signature-block). It stays with the last paragraph (samepage).
+\par\addvspace{1.4em}\noindent\hspace*{0.5\textwidth}
+\begin{minipage}[t]{0.5\textwidth}\casingle
+Respectfully submitted,\\[1.2em]
+s/ $signature.signer$\\
+\MakeUppercase{$signature.signer$}
+$for(signature.lines)$\\
+\hspace*{0.5em}\emph{$it$}
+$endfor$
+\end{minipage}
+$if(date)$\par\addvspace{0.8em}\noindent $date$\par$endif$
+$if(keep)$\end{samepage}$endif$
+
+% ---------------------------------------------------------------------------
+% Statement of related cases (Circuit Rule 28-2.6, Form 17): only when the metadata has related_cases
+% ---------------------------------------------------------------------------
+$if(related_cases)$
+\clearpage
+\caHone{Statement of Related Cases}
+\begingroup\casingle\parindent=0pt\parskip=1em\relax
+9th Cir. Case Number(s) $case_number$\par
+The undersigned attorney or self-represented party states the following:\par
+\endgroup
+\caopt{0in}{$if(rc_none)$\cayes$else$\cano$endif$}{I am unaware of any related cases currently pending in this court.}
+\caopt{0in}{$if(rc_other)$\cayes$else$\cano$endif$}{I am unaware of any related cases currently pending in this court other than the case(s) identified in the initial brief(s) filed by the other party or parties.}
+\caopt{0in}{$if(rc_pending)$\cayes$else$\cano$endif$}{I am aware of one or more related cases currently pending in this court. The case number and name of each related case and its relationship to this case are:}
+$if(rc_pending)$
+$for(related_cases.cases)$
+\par\addvspace{0.7em}\begingroup\casingle\hangindent=3.2em\hangafter=1\relax\noindent
+\hspace*{1.6em}No. $it.number$, \emph{$it.name$} ($it.relationship$).\par\endgroup
+$endfor$
+$endif$
+\caformsig{s/ $signature.signer$}{$if(date)$$date$$endif$}
+$endif$
+
+% ---------------------------------------------------------------------------
+% Certificate of compliance (Circuit Rule 32-1(e), Form 8; CA9-CERT-001, -002)
+% ---------------------------------------------------------------------------
+\clearpage
+\caHone{Certificate of Compliance}
+\begingroup\casingle\parindent=0pt\parskip=1em\relax
+9th Cir. Case Number(s) $case_number$\par
+I am the attorney or self-represented party.\par
+This brief contains $words$ words, including $if(manual_image_words)$$manual_image_words$$else$0$endif$ words manually counted in any visual images, and excluding the items exempted by FRAP 32(f). The brief’s type size and typeface comply with FRAP 32(a)(5) and (6).\par
+I certify that this brief (select only one):\par
+\endgroup
+\caopt{0in}{$if(wl_standard)$\cayes$else$\cano$endif$}{complies with the word limit of Cir. R. 32-1.}
+\caopt{0in}{$if(wl_cross-appeal)$\cayes$else$\cano$endif$}{is a cross-appeal brief and complies with the word limit of Cir. R. 28.1-1.}
+\caopt{0in}{$if(wl_amicus)$\cayes$else$\cano$endif$}{is an amicus brief and complies with the word limit of FRAP 29(a)(5), Cir. R. 29-2(c)(2), or Cir. R. 29-2(c)(3).}
+\caopt{0in}{$if(wl_death-penalty)$\cayes$else$\cano$endif$}{is for a death penalty case and complies with the word limit of Cir. R. 32-4.}
+\caopt{0in}{$if(wl_longer)$\cayes$else$\cano$endif$}{complies with the longer length limit permitted by Cir. R. 32-2(b) because (select only one):}
+\caopt{1.6em}{$if(wl_longer-joint)$\cayes$else$\cano$endif$}{it is a joint brief submitted by separately represented parties.}
+\caopt{1.6em}{$if(wl_longer-multiple)$\cayes$else$\cano$endif$}{a party or parties are filing a single brief in response to multiple briefs.}
+\caopt{1.6em}{$if(wl_longer-response-to-joint)$\cayes$else$\cano$endif$}{a party or parties are filing a single brief in response to a longer joint brief.}
+\caopt{0in}{$if(wl_court-order)$\cayes$else$\cano$endif$}{complies with the length limit designated by court order dated $if(court_order_date)$$court_order_date$$else$\underline{\hspace*{6em}}$endif$.}
+\caopt{0in}{$if(wl_motion-to-exceed)$\cayes$else$\cano$endif$}{is accompanied by a motion to file a longer brief pursuant to Cir. R. 32-2(a).}
+\caformsig{s/ $signature.signer$}{$if(date)$$date$$endif$}
+
+% ---------------------------------------------------------------------------
+% Certificate of service (Circuit Rule 25-5(g), Form 15): only when service.certificate is set
+% ---------------------------------------------------------------------------
+$if(service.certificate)$
+\clearpage
+\caHone{Certificate of Service}
+\begingroup\casingle\parindent=0pt\parskip=1em\relax
+9th Cir. Case Number(s) $case_number$\par
+I hereby certify that I electronically filed the foregoing/attached document(s) on this date with the Clerk of the Court for the United States Court of Appeals for the Ninth Circuit using the Appellate Electronic Filing system.\par
+$if(service.unregistered)$
+\textbf{Service on Case Participants Who Are NOT Registered for Electronic Filing:}\par
+I certify that I served the foregoing/attached document(s) on this date by hand delivery, mail, third party commercial carrier for delivery within 3 calendar days, or, having obtained prior consent, by email to the following unregistered case participants (list each name and mailing/email address):\par
+$for(service.unregistered)$
+\hspace*{0.5in}$it.name$, $it.address$\par
+$endfor$
+$endif$
+\textbf{Description of Document(s) (required for all documents):}\par
+$brief_title$
+\endgroup
+\caformsig{s/ $signature.signer$}{$if(date)$$date$$endif$}
+$endif$
+
+% ---------------------------------------------------------------------------
+% Addendum (Circuit Rule 28-2.7): its own numbering, Add-1, Add-2, ...
+% ---------------------------------------------------------------------------
+$if(addendum)$
+\clearpage
+\setcounter{page}{1}
+\renewcommand{\thepage}{Add-\arabic{page}}
+\caHone{Addendum}
+\catitle{1.5em}{1.1em}{\bfseries\fontsize{16.1pt}{20pt}\selectfont TABLE OF CONTENTS}
+\@starttoc{add}
+\clearpage
+$addendum$
+$endif$
+
+\end{document}

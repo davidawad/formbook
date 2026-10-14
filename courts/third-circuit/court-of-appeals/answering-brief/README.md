@@ -81,3 +81,9 @@ sh tools/overlay.sh courts/third-circuit/court-of-appeals/answering-brief binder
 ```
 
 `render.sh` uses only the vendored fonts (`--ignore-system-fonts`) and treats any typst warning as a failure.
+
+## Engines
+
+- **typst** (`typst/`): primary, unchanged.
+- **latex** (`latex/template.tex`, `latex/ca3.lua`; built by `tools/render-latex.sh` with tectonic, two passes): 14 pt EB Garamond from the vendored `fonts/`, double spaced, 1 inch margins; roman pages for the corporate disclosure statement, contents and authorities, then arabic body pages; the Argument's point headings are centered with roman numerals; the addendum uses `Add-N` page numbers. Differs from typst: 21 pages against typst's 20; the certificate of compliance names LaTeX; the addendum has no table of its own (the sample has no addendum, so it is not exercised); the layout is checked by eye on a contact sheet, not by Gate 2. Tier 1 is not signed off for this engine.
+- **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`): writes `samples/OUTPUT-<id>.docx`. `docx.pdf` checks are **BLOCKED**: LibreOffice (`soffice`) is not installed and has no conda-forge package. Not provided (not checked, not claimed): table of contents and table of authorities page numbers; footer page numbers and the roman/arabic sections; the disclosure statement's paragraph layout; the addendum's own page numbering; body first-line indents; the Argument's centered point headings.

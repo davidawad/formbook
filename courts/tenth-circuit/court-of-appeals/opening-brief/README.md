@@ -127,3 +127,9 @@ The overlay is a diagnostic. Red is our render, blue is the filed page, black is
 - **Sample is a portion** of the filed brief (roughly 1,100 words of body against about 5,650 in the original). Where the transcription drops text, it is dropped at paragraph boundaries; no sentence is stitched from non-adjacent text. The one paragraph read incompletely in the source (the district court’s "acknowledged" sentence, brief p. 7 / PDF p. 12) was omitted.
 - **No `checks.yaml`** for this doc type; no gate script was run against it (out of scope for this box). Verification is the render, the overlay, and the page review above.
 - **Court-root folders.** The court-root `typst/` and `samples/` (ca9's opening brief) are untouched; so are `data/`, `tools/`, `lib/`, `fonts/` and `vendor/`.
+
+## Engines
+
+- **typst** (primary): `typst/`, output `samples/OUTPUT-lyman-v-henderson-opening-brief.pdf`.
+- **latex** (`latex/template.tex` + `latex/ca10-opening-brief.lua`): output `samples/OUTPUT-lyman-v-henderson-opening-brief.latex.pdf`, 19 pages against typst's 13. Matches the 14-pt EB Garamond type, 31.43-pt double spacing, 1-inch margins, roman front matter and arabic body, cover on one page, TOC and TOA with page references, and the certificates. Known differences: pagination is longer; footnote text on some pages runs wide (not yet fixed); the TOC wrap indent is not hung; the signature block is not kept with the last paragraph.
+- **docx**: not built yet (see the court-level PR notes). LibreOffice is not installed on this box; a Debian-package extraction was started but not verified.

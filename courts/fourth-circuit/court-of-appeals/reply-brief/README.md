@@ -139,3 +139,18 @@ Nothing is `OPEN` that blocks the build. The docx and latex engines were not bui
 - The filed exemplar is a text layer PDF with a diagonal watermark-like letter stack ("DEMOCRACY") on each page. It is part of the source scan, not the brief; the overlay's text pairing is unaffected.
 - Used as a visual and structural reference for: cover order, TOC/TOA layout, Argument heading style, signature block, certificate of compliance.
 - The exemplar's certificate of compliance states 14-point Times New Roman; the template uses EB Garamond (vendored), which the rules permit as a proportional serif.
+
+## Engines
+
+Three renderings of the same markdown (`samples/INPUT-de-luca-reply-brief.md`). The typst template is the reference.
+
+**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-de-luca-reply-brief.latex.pdf`, 11 pages, every page rendered and compared with the typst output. Matches: EB Garamond only, double spacing at the typst pitch, 1-inch margins, the cover with the case number and judge line and counsel's telephone number, contents (addendum headings are kept out of the main contents) and authorities, the Form 6 style certificate of compliance (1,334 words, the same as typst's count) with its signature and date line, and the certificate of service on its own page. The addendum's `Add-N` folios are built but the sample has no addendum. Differs: the cover is tighter (fixed gap); body spacing differs slightly, so page breaks and folios differ from typst. Signature: typst's reply `signature-line` writes `s/` with no leading slash; this engine writes `/s/` as the other briefs do. Confirm which is wanted. Not checked by `check.sh` (no `checks.yaml` in this court).
+
+**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `samples/OUTPUT-de-luca-reply-brief.docx` is written; the `.docx.pdf` is not (see BLOCKED). Styles and sections as in the opening brief. Contents and authorities are Word fields. Certificate word count 1,334.
+
+BLOCKED (docx):
+- All gates on the `.docx.pdf`: no LibreOffice on this box (see the opening brief's README, Engines).
+- Contents and authorities page numbers: Word fills them on update; LibreOffice does not honour TA/TOA fields (docs/DOCX.md).
+- The addendum's `Add-N` folios are not built in the docx (the sample has no addendum).
+- The cover's rules and caption positions are paragraph borders and indents, approximated.
+- Opened in neither Word nor LibreOffice: well-formed XML only.

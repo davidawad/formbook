@@ -82,3 +82,9 @@ Open tier-2 items (left open, not papered over):
 | `samples/OUTPUT-torres-opening-brief.pdf` | The render (14 pages). |
 | `samples/OVERLAY-torres-opening-brief.pdf`, `-overlay.txt` | The red/blue overlay against the exemplar, and its page map. |
 | `exemplars/FILED-EXAMPLE-torres-22-2830-opening-brief.pdf`, `exemplars/SOURCE.md` | The filed exemplar and its source record. |
+
+## Engines
+
+- **typst** (`typst/`): primary, unchanged.
+- **latex** (`latex/template.tex`, `latex/ca7-opening-brief.lua`): EB Garamond 14 pt from the vendored `fonts/` (`fontdir`), 12 pt footnotes, 31.4 pt double spacing, one-inch margins, no hyphenation, left aligned. Cover, TOC, TOA (page list, `passim` at 7 or more pages), roman then arabic numbering, signature block and both certificates are built from the same frontmatter. Output `samples/OUTPUT-torres-opening-brief.latex.pdf`, 16 pages (typst: 14). Differences: the cover spacing is hand-set rather than fitted; the signature block can start a page alone (typst keeps the last paragraph with it); the body runs about one page longer; an addendum (FRAP 28(f)) is not rendered and the engine stops with an error if the sample has one. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
+- **docx**: no `docx/` template yet. `samples/OUTPUT-torres-opening-brief.docx` is pandoc's default styling, not the court form. BLOCKED: the `.docx.pdf` checks (LibreOffice `soffice` is not installable on this box); the `.docx` is not formatted to the court form (fonts, 14 pt double spacing, margins, page numbering, cover, TOC/TOA, certificates); `tools/render-docx.sh` needs `unzip`, which this box lacks.

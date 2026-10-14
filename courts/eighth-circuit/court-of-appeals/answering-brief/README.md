@@ -93,3 +93,9 @@ The sample's word count (1,222) and the filed brief's (11,620) are different bec
 3. Overlay regenerated after the last render.
 
 [Court folder](../README.md)
+
+## Engines
+
+- **typst** (primary, `typst/`): the reference for the court's form.
+- **latex** (`latex/template.tex`, `latex/ca8.lua`): tectonic (XeTeX) with the vendored EB Garamond; the same page order, 14 pt type, 31.4 pt double spacing, 1 in margins, centered page numbers, TOC and TOA with page numbers (TOA pages collected from a first pass), certificates. Differences: body is shorter in places (page breaks differ from typst by a few lines, so TOC page numbers differ); the LaTeX certificate of compliance uses the source word count (see the PR for the reconciliation with the typst figure); cover and heading spacing are approximate, not measured per page. The filter and template in this folder are the same as the other two briefs apart from the `CFG` block in `ca8.lua` and the cover/signature/certificate macros in `template.tex`.
+- **docx** (`docx/reference.docx`, `docx/ca8.lua`, `docx/build-reference.sh`): pandoc on reference.docx (EB Garamond 14 pt, exact 31.4 pt line spacing, 1 in margins, PAGE footer). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `samples/OUTPUT-<id>.docx.pdf` cannot be produced and the docx checks (Gates 0 to 3) cannot run. Known limits, per docs/DOCX.md: the table of contents is a TOC field (page numbers appear after field update); the table of authorities lists authorities without page numbers (a TOA field needs the same update, and LibreOffice does not honor it); cover and certificates are plain centered paragraphs, not the typst layout.
