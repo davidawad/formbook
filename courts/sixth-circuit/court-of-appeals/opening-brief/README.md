@@ -93,3 +93,11 @@ Pages reviewed: 18 of 18. Final render: 18 pages, zero typst warnings, `pdffonts
 ## Log
 
 - 2026-10-14: exemplar found (CourtListener RECAP, ca6, 25-5660, entry 16); rules read; template and sample written; render (18 pp.), overlay, full page review; findings fixed as above.
+
+## Engines
+
+Same rules and numbers as the typst template; the typst output is the reference for what each engine must match.
+
+**latex** (`latex/template.tex`, `latex/ca6-opening-brief.lua`; tectonic). Matches: EB Garamond 14 pt from `fonts/` only (embedded, `pdffonts`), double spacing (31.43 bp body pitch, measured from the typst render), single-spaced blocks, 1 in margins, roman front matter and arabic body, one-page cover, TOC and TOA page numbers (checked against the body pages), certificates, designation, 14-pt footnotes. Differs: 19 pages against typst's 18; the TOC runs two pages; the cover rules are drawn with `\vrule` and sit a few points from typst's. The appellant's blue cover is not drawn (same as typst). Tectonic fetches its TeX packages on the first run.
+
+**docx** (`docx/reference.docx`, `docx/reference-addendum.docx`, `docx/reference-src/`, `docx/make-reference.sh`, `docx/render.sh`, `docx/pages.lua`, `docx/ca6-opening-brief.lua`). The styles are the typst measures (`reference-src/styles.xml`); the TOC is one-row tables with dot leaders; the TOC and TOA numbers come from the LibreOffice PDF (`pages.lua`, rebuilt until stable). Matches: the same page order, cover, numbering, certificates and designation; the word count (1,472) equals typst's. Differs: the TOC and TOA are text, so they do not update in Word if the text changes (rerun `docx/render.sh`); Word may paginate slightly differently from the LibreOffice PDF that is checked (docs/DOCX.md). BLOCKED: none for the opening brief. The court has no `checks.yaml` or `reviews/` yet, so `tools/check.sh` cannot run here for any engine.

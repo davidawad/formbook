@@ -1,0 +1,127 @@
+% U.S. Court of Appeals for the Sixth Circuit: appellant's principal brief (LaTeX engine).
+% Pandoc template. The brief's parts are written by ca6-opening-brief.lua from the sample's frontmatter
+% and body; this file holds the page setup, the fonts and the macros those parts call.
+% Same rules and the same numbers as ../typst/ca6-opening-brief.typ (see ../README.md, "Engines").
+\documentclass[14bp,letterpaper]{extarticle}
+\usepackage{fontspec}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{fancyhdr,needspace,titletoc,longtable,array}
+\makeatletter
+
+% FRAP 32(a)(5)(A): EB Garamond from the vendored fonts directory only (no system fonts).
+\setmainfont[Path=$fontdir$eb-garamond/, BoldFont=EBGaramond-Bold.otf, ItalicFont=EBGaramond-Italic.otf,
+  BoldItalicFont=EBGaramond-BoldItalic.otf, Ligatures=TeX]{EBGaramond-Regular.otf}
+\newfontfamily\scfam[Path=$fontdir$eb-garamond/, Letters=SmallCaps]{EBGaramond-Regular.otf}
+\newfontfamily\scbfam[Path=$fontdir$eb-garamond/, Letters=SmallCaps]{EBGaramond-Bold.otf}
+\defaultfontfeatures{Path=$fontdir$eb-garamond/}
+
+% Metrics measured from the typst render (14-point EB Garamond): body lines 31.43 pt apart (FRAP 32(a)(4)
+% double spacing), single-spaced blocks 19.95 pt apart. Paragraphs are ragged right, first line indented 0.5 in.
+\newcommand{\doublespacing}{\fontsize{14bp}{31.43bp}\selectfont}
+\newcommand{\singlespacing}{\fontsize{14bp}{19.95bp}\selectfont}
+\doublespacing
+\raggedright
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0bp}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\tolerance=1000
+
+% Footnotes: 14 pt, single-spaced, the mark then a thin space (FRAP 32(a)(5)(A)); separator 30% wide.
+\renewcommand{\footnotesize}{\fontsize{14bp}{19.95bp}\selectfont}
+\renewcommand{\footnoterule}{\kern -6bp\hrule width 0.3\columnwidth height 0.5bp\kern 5.5bp}
+\long\def\@makefntext#1{\noindent\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
+\setlength{\footnotesep}{14bp}
+\setlength{\skip\footins}{14bp}
+
+% Page numbers: centered in the footer; none on the cover; roman in the front matter, arabic from the Introduction.
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\fontsize{14bp}{19.95bp}\selectfont\thepage}
+\renewcommand{\headrulewidth}{0bp}
+\renewcommand{\footrulewidth}{0bp}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\fontsize{14bp}{19.95bp}\selectfont\thepage}\renewcommand{\headrulewidth}{0bp}}
+
+\newcommand{\caGap}{4bp}
+\newcommand{\caShortRule}{\par\vskip 4bp\nointerlineskip\hbox to\textwidth{\hss\vrule width 2in height 0.7bp depth 0bp\hss}\nointerlineskip\vskip 4bp}
+\newcommand{\caDoubleRule}{\par\nointerlineskip\hbox to\textwidth{\vrule width\textwidth height 1.6bp depth 0bp}\nointerlineskip\vskip 2.5bp\nointerlineskip\hbox to\textwidth{\vrule width\textwidth height 0.5bp depth 0bp}\nointerlineskip\vskip 4bp}
+
+% Headings. Labels hang in a 0.5 in box; each level steps in 0.5 in (typst: label-indent, heading-tab).
+% Each heading ends with \nopagebreak, so the paragraph after it cannot be left alone at a page foot. The
+% TOC entry is written right after the heading box: a write whatsit must not sit between the penalty and the
+% glue, because glue after a whatsit is a legal break point.
+\newcommand{\caHeadOne}[1]{%
+  \Needspace{5\baselineskip}\par\nopagebreak\vspace{21bp}%
+  {\singlespacing\centering\fontsize{16.1bp}{19.95bp}\selectfont\bfseries\MakeUppercase{#1}\par}%
+  \addcontentsline{toc}{caone}{\protect\caTocLine{}{\protect\MakeUppercase{#1}}}%
+  \nopagebreak\vspace{15.4bp}}
+\newcommand{\caHeadOneNoToc}[1]{%
+  \Needspace{5\baselineskip}\par\nopagebreak\vspace{21bp}%
+  {\singlespacing\centering\fontsize{16.1bp}{19.95bp}\selectfont\bfseries\MakeUppercase{#1}\par}%
+  \nopagebreak\vspace{15.4bp}}
+\newcommand{\caHeadPoint}[2]{%
+  \Needspace{4\baselineskip}\par\nopagebreak\vspace{16.8bp}%
+  {\singlespacing\centering\textbf{\scbfam #1\ #2}\par}%
+  \addcontentsline{toc}{capoint}{\protect\caTocLine{#1}{#2}}%
+  \nopagebreak\vspace{14bp}}
+% d: steps from the margin (1..4); level: 2..5 (levels 4 and up are bold italic); label; title
+\newcommand{\caTab}{0.5in}
+\newcommand{\caHeadSub}[4]{%
+  \Needspace{4\baselineskip}\par\nopagebreak\vspace{15.4bp}%
+  {\singlespacing\noindent\hangindent=\dimexpr\caTab*(#1+1)\relax\hangafter=1
+   \hspace*{\dimexpr\caTab*#1\relax}\makebox[\caTab][l]{\ifnum#2>3\textbf{\textit{#3}}\else\textbf{#3}\fi}%
+   \ifnum#2>3\textbf{\textit{#4}}\else\textbf{#4}\fi\par}%
+  \ifnum#2<5 \addcontentsline{toc}{catoc#1}{\protect\caTocLine{#3}{#4}}\fi
+  \nopagebreak\vspace{12.6bp}}
+\newcommand{\caHeadPlain}[1]{%
+  \Needspace{4\baselineskip}\par\nopagebreak\vspace{16.8bp}%
+  {\singlespacing\noindent\textbf{#1}\par}%
+  \nopagebreak\vspace{12.6bp}}
+
+% Table of contents: one line per heading, label in a 0.5 in box, dot leader, page number at right.
+\newcommand{\caTocLine}[2]{\ifx\relax#1\relax\else\makebox[\caTab][l]{#1}\fi#2}
+\newcommand{\caTocList}{\@starttoc{toc}}
+\titlecontents{caone}[0bp]{\addvspace{6.3bp}\singlespacing}{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
+\titlecontents{capoint}[0bp]{\addvspace{6.3bp}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
+\titlecontents{catoc1}[0.5in]{\addvspace{2.8bp}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
+\titlecontents{catoc2}[1.0in]{\addvspace{2.8bp}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
+\titlecontents{catoc3}[1.5in]{\addvspace{2.8bp}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
+\titlecontents{catoc4}[2.0in]{\addvspace{2.8bp}\singlespacing\hangindent=0.5in\hangafter=1 }{}{}{\hspace{0.8em}\titlerule*[0.16em]{.}\hspace{0.3em}\contentspage}
+
+% Table of authorities. \toahit records each citation's printed page (written at shipout, so the page is the
+% page the citation sits on). \toaref keeps one entry per page; \toapages lists them; "passim" from 7 pages.
+\newcommand{\toahit}[1]{\protected@write\@auxout{}{\string\toaref{#1}{\thepage}}}
+\newcommand{\toaref}[2]{%
+  \@ifundefined{toalast@#1}{\expandafter\gdef\csname toalast@#1\endcsname{}\expandafter\gdef\csname toacount@#1\endcsname{0}}{}%
+  \edef\caTmp{#2}%
+  \expandafter\ifx\csname toalast@#1\endcsname\caTmp\relax\else
+    \expandafter\gdef\csname toalast@#1\endcsname{#2}%
+    \expandafter\xdef\csname toacount@#1\endcsname{\number\numexpr\csname toacount@#1\endcsname+1\relax}%
+    \@ifundefined{toapages@#1}{\expandafter\gdef\csname toapages@#1\endcsname{#2}}%
+      {\expandafter\xdef\csname toapages@#1\endcsname{\csname toapages@#1\endcsname, #2}}%
+  \fi}
+\newcommand{\caToaPages}[1]{%
+  \@ifundefined{toacount@#1}{}{%
+    \ifnum\csname toacount@#1\endcsname>6 \emph{passim}\else\csname toapages@#1\endcsname\fi}}
+\newcommand{\caToaGroup}[2]{%
+  \Needspace{3\baselineskip}\par\vspace{1em}%
+  {\singlespacing\noindent\textbf{#1}\ifnum#2=1\hfill\textbf{\underline{Page(s)}}\fi\par}\vspace{0.2em}}
+\newcommand{\caToaEntry}[2]{%
+  \par\vspace{0.7em}{\singlespacing\noindent\hangindent=0.35in\hangafter=1 #1\hspace{0.8em}%
+  \leaders\hbox to 0.16em{.\hss}\hfill\hspace{0.3em}\caToaPages{#2}\par}}
+
+% Certificates and designation: single-spaced, one blank line between paragraphs.
+\newenvironment{caSingle}{\singlespacing\setlength{\parindent}{0bp}\setlength{\parskip}{14bp}}{\par}
+\newenvironment{caCenter}{\par\centering}{\par}
+\newenvironment{caLeft}{\par\raggedright}{\par}
+\newenvironment{caBlock}{\singlespacing\setlength{\parindent}{0bp}}{\par}
+
+% Lists and quotations as typst sets them: single-spaced, indented 0.5 in on both sides.
+\renewenvironment{quote}{\par\singlespacing\setlength{\parindent}{0bp}\leftskip 0.5in\rightskip 0.5in\par}{\par}
+\providecommand{\tightlist}{}
+\providecommand{\pandocbounded}[1]{#1}
+
+\makeatother
+\begin{document}
+$body$
+\end{document}
