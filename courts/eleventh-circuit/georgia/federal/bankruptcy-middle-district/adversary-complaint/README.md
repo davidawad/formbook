@@ -8,7 +8,7 @@ Doc type: **adversary-complaint** (a complaint commencing an adversary proceedin
 | sample md | `samples/INPUT-galardi-complaint.md` (caption, all 96 numbered paragraphs, prayer, signature block) |
 | render | ok: `samples/OUTPUT-galardi-complaint.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-galardi-complaint.pdf` and `OVERLAY-galardi-complaint.txt` |
-| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed; pages 1-2 and 13-14 viewed again after the final changes) |
+| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed; pages 1-2 and 13-14 viewed again after the final changes; all 14 re-rendered and viewed again 2026-10-14 in the fonts pass, no change) |
 
 This folder is self-contained. It does not touch the court-root `typst/` or `samples/`.
 
@@ -27,7 +27,7 @@ Primary sources, fetched 2026-10-14. Rule text was read from the LII copies (FRB
 | GAMB-CONT-003 | FRCP 10(c) | Exhibits attached to a pleading are part of it. Exhibits are filed as attachments, not in the render. | Not produced (the sample refers to Exhibits A-F; they are not in the render). |
 | GAMB-SIG-001 | LBR 9011-1(b) (Local Rules p. 37) | Attorney's name, State Bar number, office address, telephone and e-mail (the registered CM/ECF address) appear in immediate proximity to the signature. | `signature-block()`, one block per attorney, with a `/s/` line |
 | GAMB-FORM-001 | FRBP 9004(a) | "A petition, pleading, schedule, or other document must be clearly legible." | Whole template: EB Garamond, 13 pt, 1-inch margins, us-letter |
-| GAMB-FORM-002 | No pleading font rule found. The only font rule in the Clerk's Instructions ("Courier or Times New Roman") is in the section on proposed **orders**, not pleadings. | Not applied to complaints. See gaps. | `font-family` |
+| GAMB-FORM-002 | No face named for pleadings. Checked 2026-10-14: the only face rule in the Clerk's Instructions ("Courier or Times New Roman", item f of the section on proposed **orders**) does not reach complaints, and the Local Rules (Apr. 2025, 51 pp.) name no typeface. Required face: none. Vendored substitute: none (EB Garamond kept). Fit: n/a. | Stays EB Garamond (no face required). See gaps. | `font-family` |
 
 Not produced by this template, and why:
 - **Adversary cover sheet (Form B1040).** Required only when the complaint is not filed electronically (Clerk's Instructions, "Adversary Cover Sheet"). It is a separate form.
@@ -86,7 +86,7 @@ Numbering check: the sample's COUNT I begins at ¶63 and COUNT II at ¶81, which
 ## Known gaps and open choices
 
 1. **One exemplar only.** The eval-loop tier-2 rule asks for two or three filers. A CourtListener API search (`court=gamb`, `type=r`, "adversary proceeding" complaint) found other adversary dockets: Morrison v. SN Servicing (23-05003), Padgett v. Bank of America (19-05042) and Harvey v. Nationstar (22-01008). In the search results I saw, none listed an available complaint PDF (the cover-sheet and order entries were unavailable), and I did not open those dockets. The Galardi complaint is the only text-based M.D. Ga. adversary complaint I downloaded. Tier 2 is not judged against two filers.
-2. **Font and size (GAMB-FORM-002).** No M.D. Ga. bankruptcy rule sets a font, type size or spacing for pleadings. The template uses EB Garamond (the only vendored font) at 13 pt, double-spaced. The exemplar is Times New Roman. EB Garamond sets smaller than Times at the same point size, so 13 pt is a style choice; I did not measure the visual match. **Needs David's call:** keep this, or vendor a Times-metric font.
+2. **Font and size (GAMB-FORM-002).** No M.D. Ga. bankruptcy rule names a face, font size or spacing for pleadings (checked 2026-10-14 against the Clerk's Instructions and the Local Rules, Apr. 2025; the only face rule is for proposed orders). Per the fonts pass, a court that names no face keeps EB Garamond, the template's font. The exemplar is Times New Roman, which is one filer's choice (tier 3), not a rule. Switching to Liberation Serif would be a style decision, not a rule requirement, and is not made here.
 3. **Exhibits and numbering.** The sample transcribes all 96 paragraphs of the exemplar's body. Exhibits A-F (attachments to ECF Doc. 1) are not in the exemplar PDF and are not reproduced. The exemplar's numbering skips ¶93 (it goes 92, 94). The template numbers consecutively, so from ¶93 on the sample's numbers are one lower than the exemplar's. No cross-reference in the complaint points past ¶81, so none is affected.
 4. **Transcription.** The exemplar's second signature block prints "Will Geer" under the `/s/ Garrett Nail` line; the sample uses Garrett Nail (see `exemplars/SOURCE.md`). Other typos in the exemplar are reproduced as printed (for example "is resides", "Subrust", "serve as the successor trustee"). Straight quotes in the sample are typeset as curly quotes by the template.
 5. **Jury demand, and other options.** No jury-demand option is built. A complaint seeking a jury trial would need one (FRCP 38 through FRBP 9015). Not in this exemplar.

@@ -10,6 +10,7 @@ Folder: `courts/eighth-circuit/nebraska/federal/district/complaint/`.
 | render | ok: `samples/OUTPUT-goldenstein-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-goldenstein-complaint.pdf` and `OVERLAY-goldenstein-complaint.txt` (page map) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed in the final state) |
+| typeface | face required: none (NECivR names no typeface). Substitute: none; EB Garamond kept (no-face default, `docs/FONTS.md`). Fit: n/a. Exemplar is Times New Roman, a filer's choice (see Known gaps, 1). |
 | tier 2 | not yet judged against 2 or 3 filers: one exemplar only (see Known gaps, 2) |
 
 ## Governing rules
@@ -55,7 +56,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Known gaps and open choices
 
-1. **Font.** The District's rules name no font. The exemplar is Times New Roman; the only vendored serif is EB Garamond, whose x-height is smaller, so the text looks smaller than the exemplar at the same 12 pt. Adding a Times-metric font to `fonts/` would remove the difference; that is a shared-tree change for David.
+1. **Font.** The District's rules name no font: NECivR 7.1 and 10.1 in the 2022 text (`NECivR.2022.pdf`, read 2026-10-14) contain no typeface, type-size or spacing rule beyond 10.1(b)(1)'s paper size and top margin. `docs/FONTS.md` says a court that names no face keeps EB Garamond, so the template does. The exemplar is Times New Roman, which is the filer's choice, not a rule; Liberation Serif (metric-compatible with Times New Roman) is vendored but is not used, because no rule calls for it. The text looks smaller than the exemplar at the same 12 pt because of EB Garamond's smaller x-height.
 2. **One exemplar.** Tier 2 asks for 2 or 3 filers. Harrison v. Bang, No. 8:26-cv-00501 (10 pp., another attorney, a different caption convention) is the likely second filer; it is listed in `exemplars/SOURCE.md` but not saved, per the one-exemplar rule.
 3. **Signature label.** NECivR 11.1(a)(1)(A) gives "s/ Judith Attorney" with no "By:" label. The exemplar writes "By: /s/". The template follows the rule.
 4. **Counsel block.** Its placement is the exemplar's; the District does not require one.

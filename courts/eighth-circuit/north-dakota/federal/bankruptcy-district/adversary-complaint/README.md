@@ -40,7 +40,7 @@ Nothing in the rules sets a font, a size beyond legibility, or a line spacing fo
 
 ## Layout choices (not set by a rule we could read)
 
-- **Type:** EB Garamond 12 pt (vendored; the only typeface in `fonts/`). The exemplar is Times New Roman 12 pt.
+- **Type:** EB Garamond 12 pt (vendored). Typeface row (fonts pass, 2026-10-14): face required by the rules = none (FRBP 7010, FRCP 10, FRBP 9004 and the 2023 bankruptcy local rules name no face); substitute = none, so EB Garamond is kept by policy (`docs/FONTS.md` "No face named"). The exemplar is Times New Roman 12 pt; a filer's choice is not a rule, so it is not chased (tier 2 at most). Court site not reachable on 2026-10-14 (HTTP 500), so the District general rules remain unverified.
 - **Spacing:** body pitch 27.6 pt, which is Word's double spacing for 12 pt Times New Roman (2 x 13.8 pt). The template sets `pitch = 27.6pt` and `body-leading = pitch - 0.65em`, so the line box of EB Garamond plus the leading gives 27.6 pt. Measured on the render: 27.6 pt between successive lines. Caption, counsel-style lines, quotations and signature are single spaced (13.8 pt).
 - **Margins:** 1 inch on all sides; page number centered at the foot of each page (as in the exemplar).
 - **Caption:** court name centered and bold on two lines; debtor block ("In re:"), then the parties with "v." between them; a column of ")" marks (as in the exemplar); case number, chapter and adversary number at the right, centered vertically against the parties. The title is centered and bold below the caption.
@@ -79,7 +79,7 @@ The overlay is a diagnostic, not a score. Differences in the lower-overlap pages
 
 ## Known gaps and open choices
 
-1. **Typeface.** The exemplar is Times New Roman. EB Garamond is the only vendored font, and the tools forbid system fonts. EB Garamond sets slightly smaller at the same point size, so the render looks lighter than the exemplar. Fixing this needs a vendored Times-metric font (a repo-level change, not made here).
+1. **Typeface.** The exemplar is Times New Roman. EB Garamond is the only vendored font, and the tools forbid system fonts. EB Garamond sets slightly smaller at the same point size, so the render looks lighter than the exemplar. A vendored Times-metric substitute exists (`Liberation Serif`, `docs/FONTS.md`), but no rule we could read names Times, so switching is a filer-convention choice, not a rule fix; EB Garamond is kept (fonts pass, 2026-10-14).
 2. **One filer only.** Tier 2 asks for 2 or 3 filers. Other ND bankruptcy adversary complaints in CourtListener RECAP were checked: Doeling v. Wasness, 24-07004 (2 pages); Doeling v. Werner, 24-07009 (4 pages, a 727 objection); Doeling v. O'Keeffe O'Brien Lyson, 26-07005 (3 pages). They are too short to test the 8-14 page depth bar and are not saved. Tier 2 is therefore **not** judged against two filers.
 3. **Exemplar lacks FRBP 7008(a) content.** The filed complaint has no consent statement, and its jurisdiction paragraph does not restate the case name, number, and chapter (they appear only in the caption). The template requires the consent statement; the sample supplies one. This is a case where the rule outranks the exemplar.
 4. **District general rules not checked.** D.N.D. Gen. L.R. (the District's general local rules, which the bankruptcy rules incorporate in part under L.R. 1001-1(D)) were not retrievable on 2026-10-14; the District's site has no rules text linked from its local-rules page. Any form-of-papers rule there is unverified.

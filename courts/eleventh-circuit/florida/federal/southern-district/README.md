@@ -20,6 +20,8 @@
 
 Engines: typst `—`, latex `—`, docx `—`.
 
+Typeface: S.D. Fla. L.R. 5.1(a)(4) names no face (only the 12-point minimum; read 2026-10-14), so both doc types keep EB Garamond (`docs/FONTS.md`, "No face named"). See each doc type's README.
+
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 
