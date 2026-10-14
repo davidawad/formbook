@@ -7,8 +7,9 @@ Doc-type folder for the Eleventh Circuit, `opening-brief` (one self-contained fo
 | Exemplar | yes: `exemplars/FILED-EXAMPLE-hill-v-clayton-county-23-12884-opening-brief.pdf` (see `exemplars/SOURCE.md`) |
 | Sample markdown | `samples/INPUT-hill-opening-brief.md`, a partial transcription of the exemplar (cover, CIP, oral argument, jurisdiction, issues, case, argument II.A/II.B, conclusion, certificates) |
 | Render | ok: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief samples/INPUT-hill-opening-brief.md` gives 16 pages, no typst warnings |
-| Overlay | ok: `samples/OVERLAY-hill-opening-brief.pdf` and `-overlay.txt` |
-| Pages reviewed | 16 of 16 (`pdftoppm -r 60`, each page viewed) |
+| Overlay | fail (2026-10-14): `tools/overlay.sh` needs `exemplars/*.pdf`, which is absent from this snapshot (`exemplars/` holds only `SOURCE.md`). No `OVERLAY-hill-opening-brief.pdf` exists; `-overlay.txt` is from an earlier pass |
+| Typeface | face required: none named (FRAP 32(a)(5)(A)); no substitute; EB Garamond kept |
+| Pages reviewed | 16 of 16 re-rendered 2026-10-14 and checked as 40-dpi contact sheets (every page visible; not a full-size read) |
 | Tier 1 gates | not built (no `checks.yaml` for this doc type); the form rules below are implemented in the template and checked by review only |
 | Status | not set. `court.json` is not used here |
 
@@ -86,7 +87,7 @@ Defects found during review and fixed in this pass: the signature block stood al
 ## Known gaps and open questions
 
 1. **Tier 1 gates not built.** There is no `checks.yaml` for this doc type yet, so the rules above are verified by review only. Gate 0 (content) and Gate 1 (rules) need to be added before this is marked green.
-2. **Typeface.** The exemplar uses Times New Roman. Only EB Garamond is vendored here (`fonts/`). Tier 2 says a clerk should not notice an odd face; this is a choice to confirm.
+2. **Typeface.** Decided 2026-10-14: the face required is none. FRAP 32(a)(5)(A) requires a proportionally spaced face with serifs, 14 pt or larger, and names no family (checked at Cornell LII). The Eleventh Circuit local-rule text (R. 32-3, 32-4) could not be read here, so a local face cannot be ruled out. No substitute is needed and EB Garamond stays. The exemplar's Times New Roman is one filer's choice (tier 3).
 3. **TOC and TOA spacing.** 11th Cir. R. 32-3 reads "All other typed matter must be double-spaced, including the Table of Contents and the Table of Citations." The exemplar single-spaces its TOC lines with space between entries. The template double-spaces wrapped lines and the space between single-line entries stays at the template default. Confirm the intended reading.
 4. **CIP placement.** 11th Cir. R. 26.1-1 may require the CIP to be filed separately (through the web-based form) rather than inside the brief. The exemplar includes it inside the brief as C-1; the template follows the exemplar. Confirm.
 5. **Primary-citation asterisks** (11th Cir. R. 28-1(d)) are implemented as a `toa*:` marker, with the asterisk on the page. The rule does not say exactly where the asterisk goes; the template puts it next to the page number in the Table of Citations.

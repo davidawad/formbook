@@ -78,7 +78,8 @@ Pages reviewed: 14 of 14. Every page was rendered and viewed.
 
 ## Differences from the exemplar (accepted, with reason)
 
-- **Typeface**: EB Garamond (vendored in `fonts/eb-garamond/`), not Times New Roman. Only vendored fonts are allowed; the rule is "proportionally spaced, 14-point", which EB Garamond meets. The certificate says so.
+- **Typeface**: decided 2026-10-14. Face required: none named. FRAP 32(a)(5)(A) requires a proportionally spaced serif face, 14 pt or larger, and names no family; the Eleventh Circuit local-rule text could not be read here. No substitute, so EB Garamond (vendored in `fonts/eb-garamond/`) stays; the exemplar's Times New Roman is a filer's choice (tier 3). The certificate says so.
+- **Overlay not run (2026-10-14)**: `tools/overlay.sh` needs `exemplars/*.pdf`, which is absent from this snapshot. `samples/OVERLAY-jg-v-northfield-reply-brief.txt` is from an earlier pass; no overlay PDF exists.
 - **Double-spaced TOC and TOA**: the exemplar single-spaces them; 11th Cir. R. 32-3 requires double spacing. The template follows the rule.
 - **Asterisks in the TOA**: the exemplar has none. The primary-citation marks (Ross, QBE, Trbovich) are the transcriber's choice, and need the brief's author to confirm.
 - **Certificates numbered**: 11th Cir. R. 32-4 lets them go unnumbered; the exemplar numbers them, so the template numbers them.

@@ -145,7 +145,8 @@ Nothing is marked OK without a render and a look.
 
 ## Known gaps
 
-1. **Typeface.** The exemplar is set in Times New Roman 14 pt. FRAP 32(a)(5)(A) requires a serif face at 14 pt; the template uses EB Garamond, the only serif face vendored in `fonts/`. Adding a Times-metric face is a change to `fonts/`, which this box does not touch.
+1. **Typeface.** Decided 2026-10-14: the face required is none. FRAP 32(a)(5)(A) requires a proportionally spaced face with serifs, 14 pt or larger, and names no family (checked at Cornell LII). The Eleventh Circuit local-rule text could not be read here, so a local face cannot be ruled out. No substitute is needed and EB Garamond stays. The exemplar is set in Times New Roman 14 pt, one filer's choice (tier 3).
+2. **Overlay not run (2026-10-14).** `tools/overlay.sh` needs `exemplars/*.pdf`, which is absent from this snapshot (`exemplars/` holds only `SOURCE.md`). `samples/OVERLAY-naacp-v-byrd-25-12813.txt` is from an earlier pass; no overlay PDF exists.
 2. **CIP.** The exemplar includes its Certificate of Interested Persons inside the brief (pp. C-1 to C-12). 11th Cir. R. 26.1-1 requires it as a separate filing; the template does not produce one.
 3. **Excerpt.** The sample is a transcription of part of the brief: the cover, oral-argument statement, contents, authorities, introduction, the statement of the case (I and II.A only), standard of review, summary, Argument I.A (first part), conclusion, signature, certificates. The exemplar's body runs from page 1 to page 28, with certificates on page 29 of its own numbering. Statement II.B–C and Argument I.B–C and II are not transcribed.
 4. **Exemplar inconsistency.** The exemplar's Table of Citations gives *In re Griffiths* as 413 U.S. 719; its text gives 413 U.S. 717. The sample uses 717, the cite in the body.
