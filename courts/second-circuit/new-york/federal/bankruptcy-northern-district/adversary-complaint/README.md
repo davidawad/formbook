@@ -3,22 +3,21 @@
 Doc type: **adversary complaint** in the United States Bankruptcy Court for the Northern District of New York (`nynb`).
 Folder: `courts/second-circuit/new-york/federal/bankruptcy-northern-district/adversary-complaint/`.
 
-**BLOCKED: no exemplar.** No public filed N.D.N.Y. adversary complaint could be retrieved; the searches are recorded in
-`exemplars/SOURCE.md`. The template is built from the rules. Tier 2 (professional convention, judged against 2 or 3
-filed exemplars from different filers) therefore **cannot be judged** for this doc type. Tier 1 (the rules) is judged
-below against the primary sources, not against a filing.
+**Exemplar found (1 filer).** `exemplars/FILED-EXAMPLE-fangio-v-vehifax-15-50001-adversary-complaint.pdf` is a real, public,
+text-based complaint filed in this court (Adv. No. 15-50001, Dkt 1, filed January 2015). The sample is a transcription of
+it. Provenance and the search log are in `exemplars/SOURCE.md`. Tier 2 would normally be judged against 2 or 3 filers; one
+filer is on file, so a second complaint is still wanted (candidate: Stevens, Adv. No. 26-90046, in `exemplars/SOURCE.md`).
 
 | Item | Status |
 |---|---|
-| exemplar | **no** (`exemplars/SOURCE.md` records the searches and the one docket that lists a complaint without a linked PDF) |
-| sample md | `samples/INPUT-rule-derived-adversary-complaint.md`: **rule-derived and fictional**, not a transcription of any filing. Frontmatter contract below. |
-| render | ok: `samples/OUTPUT-rule-derived-adversary-complaint.pdf`, 10 pages, letter, EB Garamond only (embedded, Regular and Bold), `tools/render.sh` exit 0, no typst warnings |
-| overlay | **fail**: `tools/overlay.sh` exits 1 with "no exemplar pdf in exemplars" (there is no filed PDF to overlay). No `OVERLAY-` file was written. |
-| pages reviewed | 10 of 10, each rendered at 60 dpi and viewed. Pages 1 to 3 were viewed before the last change, which only moves the prayer for relief and its lead-in (pages 9 and 10) and so cannot reach them. |
+| exemplar | **yes**: `exemplars/FILED-EXAMPLE-fangio-v-vehifax-15-50001-adversary-complaint.pdf` (6 pages, text layer) |
+| sample md | `samples/INPUT-adversary-complaint.md`: transcription of the filing's text (the 37 numbered paragraphs, the preamble, the WHEREFORE clause, the prayer, the signature block). Frontmatter comment lists every difference from the filing. |
+| render | ok: `samples/OUTPUT-adversary-complaint.pdf`, 6 pages, letter, EB Garamond only (embedded), `tools/render.sh` exit 0, no typst warnings |
+| overlay | ok: `samples/OVERLAY-adversary-complaint.pdf` and `.txt`, `tools/overlay.sh` exit 0. Page word-overlap: 70.3, 66.6, 66.3, 55.2, 50.5, 84.2 percent (pages 1 to 6) |
+| pages reviewed | 6 of 6, each rendered at 70 dpi and viewed. Pages 1 to 4 were viewed before the last template change (the prayer's sticky chain, which begins on page 5); that change cannot move text on pages 1 to 4. Pages 5 and 6 were viewed after it. |
 
-File names: the sample is `INPUT-rule-derived-adversary-complaint.md` (not `INPUT-<id>.md`) because it is not an input transcribed
-from a filing. `tools/render.sh` and `tools/overlay.sh` use the repo's default `OUTPUT-<id>.pdf` name, so that is the name
-used here, not the `<id>.pdf` the wave brief listed.
+File names: the sample is `INPUT-adversary-complaint.md`; the id is `adversary-complaint` (the render and overlay default
+names are `OUTPUT-adversary-complaint.pdf`, `OVERLAY-adversary-complaint.pdf/.txt`).
 
 ## Markdown contract (frontmatter)
 
@@ -26,17 +25,18 @@ The sample starts with a YAML block. The template reads these keys:
 
 | Key | Meaning |
 |---|---|
-| `counsel` | list of lines, single-spaced, top left of page 1 (optional) |
-| `debtor.names`, `debtor.tin` | the debtor under "In re:"; `tin` is printed as written (LBR 9004-1(c) allows only the last four digits, which the author must supply) |
+| `preamble` | number of leading body chunks printed unnumbered (the "Plaintiff, complaining of the defendant, alleges:" lead-in). Without it, the chunks before the first heading are the preamble. Numbering starts at the next chunk. |
+| `counsel` | list of lines, single-spaced, top left of page 1 (optional; the filing has none, so the sample omits it) |
+| `debtor.names`, `debtor.tin` | the debtor under "In re:"; `tin` is printed as written (LBR 9004-1(c) allows only the last four digits, which the author must supply; the sample uses a placeholder) |
 | `case_number`, `chapter` | right column of the bankruptcy caption |
 | `hearing` | not used by the complaint (the motion uses it) |
 | `adversary.number`, `adversary.parties[]` | the adversary caption: `names` (list) and `designation` per party; `v.` is inserted between parties |
 | `title` | centred bold title of the paper, here `ADVERSARY COMPLAINT` |
 | `dated`, `signature.firm`, `signature.signer`, `signature.lines` | the date and signature block |
 
-Body: blank-line-separated chunks. `#` is a centred bold heading, `##` a bold heading flush left. A chunk before the first
-heading is an unnumbered preamble. Every other chunk is a numbered paragraph (FRCP 10(b) via FRBP 7010). A chunk starting
-`(a) ` is an unnumbered prayer item. A numbered paragraph that leads into a `(a)` item sticks to it.
+Body: blank-line-separated chunks. `#` is a centred bold heading, `##` a bold heading flush left. Every other chunk is a
+numbered paragraph (FRCP 10(b) via FRBP 7010), except: a chunk starting `(a) ` is an unnumbered prayer item, and a chunk
+starting `% ` is an unnumbered paragraph (the WHEREFORE clause).
 
 ## Governing rules
 
@@ -55,34 +55,41 @@ Primary sources, fetched 2026-10-14 (the date verified for every row).
 | LBR 7003-1 | An Adversary Proceeding Cover Sheet is required for every adversary filed in CM/ECF or on paper | A (author) | not rendered: a separate form (the court's fillable cover sheet) |
 | FRBP 9004(a) (Cornell LII, https://www.law.cornell.edu/rules/frbp/rule_9004, fetched 2026-10-14) | A document must be clearly legible | M | as LBR 9004-1 |
 | FRBP 9004(b) (same) | Caption: court's name, the case's title, the case number and adversary number, and a brief designation of the document | M | `title` line and both captions |
-| FRBP 7001 (adversary proceeding; the sample cites 7001(1) and (6)) | Categories of adversary proceedings | content, A | in the sample text only |
+| FRBP 7001 (adversary proceeding; the sample cites 7001(1), (2) and (9)) | Categories of adversary proceedings | content, A | in the sample text only |
 | FRBP 7003 (Cornell, fetched 2026-10-14) | "Fed. R. Civ. P. 3 applies in an adversary proceeding" | content, A | sample's commencement by complaint |
-| FRBP 7008(a) (Cornell, fetched 2026-10-14) | "Fed. R. Civ. P. 8 applies"; the jurisdiction allegation refers to the bankruptcy case by name, number and chapter; the complaint states whether the pleader consents to final orders by the bankruptcy court | M (content) | the sample pleads these in "Jurisdiction and venue" (the template does not check the wording) |
+| FRBP 7008(a) (Cornell, fetched 2026-10-14) | "Fed. R. Civ. P. 8 applies"; the jurisdiction allegation refers to the bankruptcy case by name, number and chapter; the complaint states whether the pleader consents to final orders by the bankruptcy court | M (content) | the sample pleads the jurisdiction paragraphs as the filing does; the consent statement is not in the 2015 filing (the template does not check the wording) |
 | FRBP 7010 (Cornell, fetched 2026-10-14) | "Fed. R. Civ. P. 10 applies"; the caption substantially conforms to Official Form 416A | M (caption) | caption layout follows Official Form 416A's structure as the rules describe it; Form 416A's text was not fetched (the uscourts.gov page returned 404) |
 | FRCP 10(b) (via FRBP 7010) | Numbered paragraphs, each limited as far as practicable to a single set of circumstances | M (form) | numbering in `body-content` |
 
-Rows marked M are the tier-1 requirements. Rows marked C would be convention and need an exemplar to judge; none is
-claimed as convention here. Layout choices the rules leave open are: counsel block placement, the two-part caption
-(bankruptcy caption above, adversary caption below, each with rules along the bottom and right edge of the party column), the centred `ADVERSARY COMPLAINT`
-title, the heading styles, left-aligned text, and the page-number position. These are tier 2 by default and unjudged
-until an exemplar exists.
+Rows marked M are the tier-1 requirements. The filed exemplar (2015) predates the current LBR text in places; where the
+exemplar and the rules differ (the caption has no TIN line; the signature is handwritten), the rules govern and the sample
+keeps the template's rule-based form. Layout choices the rules leave open are the heading styles, the title placement
+(below the caption, centred), the lettering of prayer items, and the signature layout; see the next section.
 
-## What the overlay shows
+## Tier-2 comparison with the exemplar (overlay and page review)
 
-Nothing. There is no filed exemplar to overlay, so `tools/overlay.sh` cannot run (exit 1). The overlay is a tier-3
-diagnostic in any case and is not a score.
+| Item | Filed exemplar | Template | Status |
+|---|---|---|---|
+| Title placement | "ADVERSARY COMPLAINT" in the caption's right column, under the case number | centred below the caption | ACCEPTED: the rules leave the placement open and the short title is present. One exemplar only, so the convention is not established. |
+| Prayer labels | "1." to "5." | "(a)" to "(e)" | ACCEPTED: label style; the text and order match. |
+| Prayer page break | WHEREFORE on page 6 | WHEREFORE at the foot of page 5, items (a) to (d) on page 5, (e) and the signature on page 6 | ACCEPTED: break position follows the template's keep-with-next rule (only the last prayer item is kept with the signature). |
+| Signature | handwritten signature over the firm name | "By: /s/" line over the signer's name | ACCEPTED: `/s/` is the template's electronic-signature convention (FRBP 9011). |
+| Counsel block | at the foot of the signature block only | none at the top (frontmatter omits `counsel`) | ACCEPTED: matches the filing. |
+| Body spacing and paragraph numbering | double-spaced, numbered 1 to 37 | the same | matches (overlay line positions agree). |
 
 ## Known gaps
 
-- **No exemplar, so tier 2 is unjudged.** The caption layout, heading hierarchy, counsel block and signature layout are our
-  choices, not checked against a filed complaint from this court.
+- **One exemplar.** Tier 2 is judged against a single filer; a second complaint from a different filer is still wanted.
 - **Judges' individual practices are not checked.** The LBR text found contains no page limit for a complaint; any judge's
   individual procedures are the author's responsibility.
 - **Not rendered, author responsibility:** the Adversary Proceeding Cover Sheet (LBR 7003-1), the summons (LBR 7004-1),
   the redaction of personal identifiers beyond the caption (the rules on privacy protection are not in this template),
-  and the signer's Bar Roll number (the sample has a placeholder).
+  the consent-to-final-orders statement (FRBP 7008(a)), and the signer's Bar Roll number (the sample carries the filing's
+  number).
+- **TIN placeholder.** The 2015 filing has no TIN line; the sample prints `TIN: xx-xxx0000` as a placeholder so that the
+  template's rule-required line exists. The author supplies the real last four digits.
 - **No gate checks.** There is no `checks.yaml` for this doc type, so `tools/check.sh` is not wired here and no stamp exists.
-  Gates 0 and 1 are not run; this is a rule-derived template, not a court under the eval loop.
+  Gates 0 and 1 are not run.
 - **Pleading paper is not used.** LBR 9004-1 does not require numbered lines, so the template has none (the cand complaint
   uses line numbers because N.D. Cal. requires them).
 - **Footnotes are not exercised** by the sample. The rule (12-point, single-spaced allowed) is stated but no footnote is
