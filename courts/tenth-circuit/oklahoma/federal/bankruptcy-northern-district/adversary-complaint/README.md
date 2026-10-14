@@ -2,9 +2,7 @@
 
 Doc type: **adversary complaint** (complaint commencing an adversary proceeding, FRBP 7001). Court: United States Bankruptcy Court for the Northern District of Oklahoma. Folder: `courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/adversary-complaint/`.
 
-Status: **exemplar=no**, render=ok, overlay=**fail** (not produced: there is no exemplar to overlay), pages reviewed 4 of 4. Nothing here sets a court-level `court.json` status.
-
-BLOCKED: no exemplar. No filed adversary complaint from this court was found after the searches in `exemplars/SOURCE.md`. The template is built from the rules below; the sample is a synthetic transcription-free draft written to those rules.
+Status: **exemplar=yes**, render=ok, overlay=ok, pages reviewed 8 of 8 (every page rendered at 70 dpi and viewed). Nothing here sets a court-level `court.json` status.
 
 ## Governing rules
 
@@ -26,14 +24,22 @@ Not used, and why: LBR 7007.1-1 (corporate ownership statement) applies to a cor
 
 ## Exemplar
 
-None. See `exemplars/SOURCE.md` for the sources searched (court how-to, govinfo orders, CourtListener blocked to this box, eight WebSearch queries). Tier-2 comparison against 2-3 filers is therefore not possible; tier 2 is judged against the rules only.
+`exemplars/FILED-EXAMPLE-Retherford-09-01059-adversary-complaint.pdf`: the complaint in *Atlas Telephone Company, Inc. v. Retherford*, Adv. No. 09-01059-M (Bankr. N.D. Okla., main case 09-01996-M, Chapter 7), filed July 1, 2009 by Mark A. Craige (MorrelSaffaCraige, P.C.) for four plaintiffs. 8 pages, text-based (body text extracts; EB Garamond is not used by the filer; the fonts are embedded LiberationSans and Helvetica). Source, searches, and the candidates rejected (three scanned complaints, a trustee's avoidance complaint, short student-loan complaints) are in `exemplars/SOURCE.md`.
+
+Only one exemplar from this court, from one filer. Tier 2 is therefore judged against this filing and the rules, not against two or three filers. A second filer was not found on the public record reachable from this box.
 
 ## Sample
 
-- `samples/INPUT-adversary-complaint.md` is **synthetic**: fictional parties (Sample Lender, LLC v. John Quincy Example, chapter 7, a dischargeability claim under § 523(a)(2)(A)), fictional numbers (26-10000-R, 26-01000-R). It is not a transcription of any filing. Its frontmatter says so.
-- The sample covers the caption, generated jurisdiction paragraphs, parties, facts, one claim, prayer, signature block, and two footnotes. The template generates the jurisdiction section from frontmatter (`jurisdiction`, `core`), so the sample does not repeat it.
-- Length: 4 rendered pages. The 8-14 page target applies when an exemplar of that length exists; there is none to match, and a one-count complaint of this kind is short. Not padded.
-- Naming: the tools read and write `INPUT-` / `OUTPUT-` / `OVERLAY-` names, so the sample is `INPUT-adversary-complaint.md` and the render is `OUTPUT-adversary-complaint.pdf`, not `<id>.pdf` as the brief's layout said. That follows CLAUDE.md's file-role naming and `tools/overlay.sh`.
+- `samples/INPUT-adversary-complaint.md` is a **transcription** of the exemplar (not synthetic). Its frontmatter says so. Parties, numbers and facts are the filer's; they are typed from the PDF's text layer, with the filer's own spelling and punctuation kept (for example "SFR" and "f/k/a/").
+- Jurisdiction paragraphs (the filing's own ¶¶ 1-2) are generated from the frontmatter (`jurisdiction`, `core`), so the sample does not repeat them. The filer's paragraph numbers are not typed; the template numbers the body.
+- Length: 8 rendered pages, inside the 8-14 page target for an exemplar that long.
+- Naming: `INPUT-adversary-complaint.md` / `OUTPUT-adversary-complaint.pdf` / `OVERLAY-adversary-complaint.pdf` and `.txt`, as the tools read and write them.
+
+### Where the transcription departs from the filing
+
+1. **Consent.** The filing says nothing about consent to final orders (FRBP 7008(a)). The template generates a consent sentence from `core.consent`. The frontmatter sets `consent: false`, so the generated text reads "Plaintiff does not consent..." That sentence is generated, not in the exemplar; the exemplar is silent. This is a template-versus-filing gap, not a transcription choice.
+2. **Preamble numbering.** The filer's unnumbered preamble ("Ervin D. 'Bud' Raus ... allege and state that:") is numbered as ¶ 5 by the template. A complaint's preamble is unnumbered in the filing. Open (see gaps).
+3. **Paragraph numbers.** The filing's ¶ 3 is ¶ 6 in the render, and so on, because the generated jurisdiction paragraphs come first. Expected; not a defect in the content.
 
 ## Render and overlay
 
@@ -43,37 +49,35 @@ sh tools/render.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-dis
 sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/adversary-complaint adversary-complaint
 ```
 
-- render: **ok**. `samples/OUTPUT-adversary-complaint.pdf`, 4 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular and -Bold only (`pdffonts`), embedded; nothing from the system.
-- Measured: body line pitch 26.00 pt at 13 pt type on page 2 (= 2.0 em, double spacing per LBR 9004-1(A)). Margins 1 inch.
-- overlay: **fail**. `tools/overlay.sh` exits 1 with "no exemplar pdf in .../exemplars"; no `OVERLAY-adversary-complaint.pdf` or `.txt` was produced. There is nothing for the red/blue test to compare against.
+- render: **ok**. `samples/OUTPUT-adversary-complaint.pdf`, 8 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular and -Bold only, embedded.
+- overlay: **ok**. `samples/OVERLAY-adversary-complaint.pdf` and `.txt` written. Word overlap per page, as the tool reports it: p.1 58.5%, p.2 85.3%, p.3 90.2%, p.4 82.4%, p.5 70.9%, p.6 52.9%, p.7 35.6%, p.8 60.7%. The overlay is a diagnostic, not a score. The lowest pages are 7 (35.6%) and 6 (52.9%); I did not chase the cause in this pass, and I do not claim it is line breaks.
 
-## Visual review (Gate 2, all 4 pages rendered at 60 dpi and looked at)
+## Visual review (Gate 2, all 8 pages rendered at 70 dpi and looked at)
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Court title, caption (In re block, party block, Case No./Chapter/Adv. No.), title, jurisdiction paragraphs 1-4, Parties heading | OK. Caption rules and column widths clean. Headings have a full double-spaced line above and below. |
-| 2 | Parties paragraphs 5-6, Facts 7-10 with bullet list, footnote 1 | OK. Bullets, paragraph numbers and footnote separator correct. |
-| 3 | Facts 11-13 with footnote 2, First Claim heading and subheading, Count paragraphs 14-16 | OK. Long subheading ("Nondischargeability of Debt Under 11 U.S.C. § 523(a)(2)(A)") is on one line. |
-| 4 | Paragraph 17, Prayer for Relief (unnumbered), items (a)-(c), signature block | OK. Prayer paragraph is unnumbered; signature block carries bar number, phone, email and party. |
+| 1 | Court title, caption (In re block, party block, Case No. / Chapter / Adv. No.), title, Jurisdiction and Venue ¶¶ 1-4, the preamble | Caption and title OK. **OPEN (tier 2):** the preamble is numbered ¶ 5; the filing's preamble is unnumbered. |
+| 2 | Statement of Facts ¶¶ 6-8 | OK. Double spacing, headings, page number. |
+| 3 | ¶¶ 9-12 | OK. |
+| 4 | ¶¶ 13-15 | OK. |
+| 5 | ¶¶ 16-22 | OK. |
+| 6 | ¶¶ 23-27 (ends the facts) | OK. |
+| 7 | First Claim for Relief, Second Claim for Relief (¶¶ 28-31) | OK headings. **OPEN (tier 2):** "under §" ends one line and "523(a)(2)(A)." starts the next. A non-breaking space after § is needed; the template does not add one. |
+| 8 | Third Claim (¶¶ 32-33), Prayer for Relief, signature block | OK. Prayer unnumbered; signature block carries bar number, phone, email, and the party. |
 
-Defects found and fixed during the build (all in `typst/oknb-adversary-complaint.typ`, none in the sample):
-
-1. Headings overlapped the paragraph after them. EB Garamond's line box is 0.65 em, shorter than its glyphs, so an auto-height heading block sat inside the next paragraph. Fixed by giving heading and title blocks a fixed height of one double-spaced line (`pitch`) and `above: body-leading`.
-2. Numbered paragraphs ran together into one paragraph. Fixed by an explicit `parbreak()` after each chunk.
-3. Footnote definitions were rendered per chunk and lost. Fixed by attaching each definition to the chunk that references it, and by skipping definition-only chunks so they take no paragraph number.
-4. The title was uppercased, which turned `§ 523(a)(2)(A)` into `§ 523(A)(2)(A)`. Title now keeps its case; only level-1 headings are uppercased.
-5. The prayer for relief was numbered as paragraph 18. Paragraphs under a "Prayer" heading are now unnumbered.
-6. The court name lines overlapped (zero spacing in a stack). Fixed with single spacing.
+Defects the overlay and the review found during the build: none in the template for this court's adversary folder in this pass. The template was not changed for this exemplar.
 
 ## Known gaps and open choices
 
-1. **No exemplar** (BLOCKED, above). Tier 2 has no filer to compare against. The layout is rule-driven only.
-2. **Adversary cover sheet** (LBR 7003-1) is not generated; it is an Official Form filed with the complaint when the complaint is not filed through ECF.
-3. **Summons** (LBR 7004-2) is issued by the clerk; not generated.
-4. **Certificate of service:** none. A complaint is served with the summons under FRBP 7004; no certificate is in the rules this template reads.
-5. **Font:** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. 13 pt because EB Garamond sets small at 12; both meet the LBR 9004-1(A) floor. This is a choice; no court-specified font was found.
-6. **Caption layout:** the In re block and party block sit in one left column with a rule, and the case-number column on the right. LBR 9004-2(A) fixes what the caption contains, not its layout. A judge's standing order could differ.
-7. **Electronic filing:** the court's May 2024 how-to says to print the finished complaint to PDF rather than save the Word file as a PDF, so the document is flattened. The typst output is a flattened PDF.
-8. **Core / non-core and consent** (FRBP 7008(a)): generated from `core`. The sample says core under § 157(b)(2)(I) and consent. The author must choose these per complaint; the template does not decide them.
-9. **Dischargeability deadline** (FRBP 4007(c)) is a footnote in the sample, not a rule the template enforces.
-10. **Jurisdiction paragraphs** cite 28 U.S.C. §§ 1334(b), 157(a), (b)(1), and venue §§ 1408, 1409(a). These are not re-fetched this session (see the governing-rules note).
+1. **Preamble numbering** (OPEN, tier 2): the template numbers the unnumbered preamble. A complaint's opening paragraph is conventionally unnumbered.
+2. **Non-breaking § ** (OPEN, tier 2): "§" can end a line, separated from its number. Fix in the template by setting a non-breaking space after § in body text.
+3. **Consent** (see the sample notes): the exemplar states no consent; the template's generated sentence says "does not consent" in the sample. This is a transcription choice that the template forces.
+4. **Adversary cover sheet** (LBR 7003-1) is not generated; it is an Official Form filed with the complaint when the complaint is not filed through ECF.
+5. **Summons** (LBR 7004-2) is issued by the clerk; not generated.
+6. **Certificate of service:** none. A complaint is served with the summons under FRBP 7004; no certificate is in the rules this template reads.
+7. **Font:** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. 13 pt because EB Garamond sets small at 12; both meet the LBR 9004-1(A) floor. This is a choice; no court-specified font was found. The exemplar is in LiberationSans/Helvetica, 2009.
+8. **Caption layout:** the In re block and party block sit in one left column with a rule, and the case-number column on the right. LBR 9004-2(A) fixes what the caption contains, not its layout. The exemplar's layout is similar.
+9. **Electronic filing:** the court's May 2024 how-to says to print the finished complaint to PDF rather than save the Word file as a PDF, so the document is flattened. The typst output is a flattened PDF.
+10. **Core / non-core and consent** (FRBP 7008(a)): generated from `core`. The sample says core under § 157(b)(2)(I) and no consent. The author must choose these per complaint; the template does not decide them.
+11. **Dischargeability deadline** (FRBP 4007(c)) is in the filing's ¶ 27 text, not a rule the template enforces.
+12. **Jurisdiction paragraphs** cite 28 U.S.C. §§ 1334(b), 157(a), (b)(1), and venue §§ 1408, 1409(a). These are not re-fetched this session (see the governing-rules note).

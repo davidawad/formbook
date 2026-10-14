@@ -2,9 +2,7 @@
 
 Doc type: **motion with memorandum** (a contested-matter motion under FRBP 9013/9014, with the memorandum of law in the same filed document, and the notice of opportunity for hearing under LBR 9013-1(B)). Court: United States Bankruptcy Court for the Northern District of Oklahoma. Folder: `courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/motion-brief/`.
 
-Status: **exemplar=no**, render=ok, overlay=**fail** (not produced: there is no exemplar to overlay), pages reviewed 5 of 5. Nothing here sets a court-level `court.json` status.
-
-BLOCKED: no exemplar. No filed motion with memorandum from this court was found after the searches in `exemplars/SOURCE.md`. The template is built from the rules below; the sample is synthetic and written to those rules.
+Status: **exemplar=yes**, render=ok, overlay=ok, pages reviewed 10 of 10 (every page rendered at 70 dpi and viewed). Nothing here sets a court-level `court.json` status.
 
 ## Governing rules
 
@@ -24,14 +22,24 @@ Dates: the local rules were read from the PDF on the court's site (cover: "Updat
 
 ## Exemplar
 
-None. See `exemplars/SOURCE.md`: local rules and govinfo orders were read; no party-filed motion from this court was found; CourtListener was blocked to this box (HTTP 403). Tier 2 is judged against the rules only.
+`exemplars/FILED-EXAMPLE-OKF-24-11060-motion-brief.pdf`: the **amended joint motion** of OKF, LLC (debtor in possession) and the Official Committee of Unsecured Creditors to surcharge under 11 U.S.C. § 506(c) and exclude fees from a secured claim, with the NOTICE OF OPPORTUNITY FOR HEARING, in *In re OKF, LLC*, Case No. 24-11060-T, Chapter 11. Docket 409, entered September 15, 2025. 15 pages, text-based (4,257 words extract). Counsel: Crowe & Dunlevy (Craige, Sokolosky) for the debtor; Bernstein-Burkley (Kallergis) for the committee. Source, searches and rejected candidates (two scanned motions, one Chapter 15 stay motion) are in `exemplars/SOURCE.md`.
+
+Only one exemplar from this court, from one filer (the joint filing counts as one). Tier 2 is therefore judged against this filing and the rules, not against two or three filers.
 
 ## Sample
 
-- `samples/INPUT-motion-brief.md` is **synthetic**: fictional debtor John Quincy Example, fictional creditor (Sample Creditor Bank), fictional property and numbers. The motion avoids a judicial lien under § 522(f)(1)(A), with a memorandum in the same document. Its frontmatter says it is synthetic.
-- The template generates the notice of opportunity for hearing, the caption from `caption`, the certificate of service from `certificate`, and the signature block. The sample's headings are numbered by the template (I., A., 1.); the sample types no numbers.
-- Length: 5 rendered pages, the last of them the certificate of service. Shorter than the 8-14 page target because there is no exemplar length to match; the argument is one § 522(f)(2)(A) computation with its procedure. Not padded.
-- Naming: `INPUT-motion-brief.md` / `OUTPUT-motion-brief.pdf`, as for the complaint (the tools' conventions; the brief's `<id>.pdf` layout would not feed `tools/overlay.sh`).
+- `samples/INPUT-motion-brief.md` is a **transcription of an excerpt** of the exemplar (not synthetic). Its frontmatter says so. Names, numbers and facts are the filers', as filed.
+- The filing is 15 pages. The sample keeps the caption, the report on the sale (Section I), the equities (Section II), the surcharge (Section IV in the filing, Section III in the render), the prayer, the signature block and the certificate. **Section III of the filing (paragraphs 12-22, filing pages 6-10) is omitted** and the body says so in a bracketed note; it is not paraphrased. This keeps the render at 10 pages, inside the 8-14 page target for an exemplar of that length.
+- The notice of opportunity, the caption, the title and the signature block are generated from the frontmatter. The title is the filing's, with "And Notice of Opportunity for Hearing" appended as LBR 9013-1 requires.
+- Naming: `INPUT-motion-brief.md` / `OUTPUT-motion-brief.pdf` / `OVERLAY-motion-brief.pdf` and `.txt`, as the tools read and write them.
+
+### Where the transcription departs from the filing
+
+1. **Excerpt.** Section III is omitted (see above). The filing's Section IV is rendered as Section III, and the prayer as Section IV. The filer's paragraph numbers (1-11, then 23-29) are typed as written, so the numbers jump at the omission.
+2. **Signature.** The template's signature block takes one signer. The filing is joint: Craige and Sokolosky for the debtor, and Kallergis for the committee. The sample carries Craige and the firm, with the joint movants named in the `for` line; the second counsel block is not reproduced (see gaps).
+3. **Certificate.** The filing's certificate is an electronic-service certificate with no served list. The sample passes an empty `served` list. The template now omits "on the parties listed below" in that case (see fixes).
+4. **Footnote 4** (after "$3,500,000" in ¶ 27) has no text in the PDF's text layer. The sample has no footnote there and the gap is noted here.
+5. **Level-1 headings** are typed in title case. The filing's headings are in capitals. See fixes and gaps.
 
 ## Render and overlay
 
@@ -41,36 +49,45 @@ sh tools/render.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-dis
 sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/motion-brief motion-brief
 ```
 
-- render: **ok**. `samples/OUTPUT-motion-brief.pdf`, 5 pages, 612 x 792 pt. typst emitted no warnings. Fonts: EBGaramond-Regular, -Bold, -BoldItalic (vendored), embedded.
-- Measured: body line pitch 26.00 pt at 13 pt type on page 2 (2.0 em, double spacing per LBR 9004-1(A)), with `pdftotext -bbox`. Margins 1 inch.
-- overlay: **fail**. `tools/overlay.sh` exits 1 with "no exemplar pdf in .../exemplars"; no `OVERLAY-motion-brief.pdf` or `.txt` produced.
+- render: **ok**. `samples/OUTPUT-motion-brief.pdf`, 10 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular, -Bold and -Italic, embedded. No system or fallback font after the backtick fix (a stray backtick had pulled in DejaVu Sans Mono).
+- overlay: **ok**. `samples/OVERLAY-motion-brief.pdf` and `.txt` written. Word overlap per page as the tool reports it: ours p.1 vs filed p.13 51.6%; p.2 65.4%; p.3 54.1%; p.4 51.8%; p.5 53.9%; p.6 vs filed p.10 39.7%; p.7 vs filed p.11 46.7%; p.8 vs filed p.12 43.2%; p.9 vs filed p.12 40.9%; p.10 vs filed p.15 25.0%. The overlay is a diagnostic, not a score. The pairing of pages is the tool's, and the page numbers do not line up one to one because of the omission.
 
-## Visual review (Gate 2, all 5 pages rendered at 60 dpi and looked at)
+## Visual review (Gate 2, all 10 pages rendered at 70 dpi and looked at)
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Court title, caption (In re block, Case No., Chapter), title ("…And Notice of Opportunity for Hearing"), the prescribed NOTICE OF OPPORTUNITY box, the response-time paragraph, I. Relief Requested (begins) | OK. The notice box is a bordered single-spaced block; the statement reads as LBR 9013-1(B) prescribes, with 14 days filled from `response_days`. |
-| 2 | Relief completes, II. Background with footnote 1, III. Argument, A. Legal Standard (begins) | OK. Footnote 1 at foot of page. |
-| 3 | A. Legal Standard completes, B. with 1. The Computation Uses the Schedules, C. Motion Is Timely | OK. Nested heading labels (B., 1.) with hanging indent; the 1. heading is bold italic. |
-| 4 | C. 1. Procedure, IV. Conclusion (items (a)-(c)), signature block | OK. Signature block carries bar number, phone, email and party. |
-| 5 | Certificate of Service (starts on its own page, by design: `pagebreak(weak: true)`), served list, signature | OK. Certificate is kept together. |
+| 1 | Court title, caption (In re block, Case No., Chapter 11), title ("…And Notice of Opportunity for Hearing"), the prescribed NOTICE box, the response-time paragraph, the opening paragraph | OK. Notice box reads as LBR 9013-1(B) prescribes, with 14 days from `response_days`. |
+| 2 | I. Report on the Sale ¶¶ 1-3 (lead-in to table); footnote 1 | OK. Footnote 1 attaches to ¶ 3. The table moves to page 3 as one block, leaving white space at the foot of page 2 (a choice: the table is kept together). |
+| 3 | Payoff table (single-spaced, one block), ¶¶ 4-5, block quotation | OK. Table is single spaced and not split. |
+| 4 | II. The Equities of the Case… ¶¶ 6-7, footnote 2 | OK. The heading is in title case (see gaps). Citations are not altered. |
+| 5 | ¶¶ 8-10 | OK. |
+| 6 | ¶ 11; bracketed omission note for Section III; III. Surcharge… heading; ¶ 23 (begins) | OK. The omission note gives filing pages 6-10. The heading number is III in the render; the filing's is IV (see gaps). |
+| 7 | ¶ 23 (continues), ¶ 24; footnote 3 | OK. Footnote 2 attaches at "$47,747." |
+| 8 | ¶¶ 25-28 | OK. |
+| 9 | ¶ 29; IV. Prayer for Relief; signature block | OK. The signature block sits with the prayer on this page. |
+| 10 | Certificate of Service | OK. One "/s/" line; the ECF sentence; no served list. |
 
-Defects found and fixed during the build (all in `typst/oknb-motion-brief.typ`):
+## Fixes made during this pass
 
-1. Headings overlapped the paragraph after them (EB Garamond's 0.65 em line box), and the heading after a paragraph landed inside that paragraph's last line. Fixed as in the complaint: a fixed block height for the title and the notice, and `above`/`below` spacing of `body-leading` on headings.
-2. `pad(hanging-indent: …)` is not a typst argument. Level-2 and level-3 headings now put their label in a 0.5 in box and use `par(hanging-indent: 0.5in)`.
-3. A `set` rule inside a content-block argument was rejected. Rewritten as a block.
-4. The certificate of service split across pages 4-5. Now starts on a new page.
+1. **Citations in Level-1 headings.** The template uppercased level-1 headings, which turned "11 U.S.C. § 506(c)" into "§ 506(C)" in the heading. Level-1 headings now keep the case written (bold, centred). This is a choice: the filing's headings are in capitals, and the template no longer reproduces that.
+2. **Tables.** Table text was double spaced and the payoff table broke across pages 2 and 3. Tables are now single spaced and kept in one block.
+3. **Certificate signature.** The certificate printed the signer's name twice (`/s/ Name` and `Name`). It now prints `/s/ Name` only, as the filing does.
+4. **Certificate with no served list.** The sentence said "on the parties listed below" with no list beneath it. The clause is now omitted when `served` is empty.
+5. **Footnote reference on its own line.** A footnote reference that stood alone in a paragraph was dropped from the render (footnote 1 was missing). The reference now sits at the end of the paragraph before the table (transcription fix; the template's handling of a lone reference is not investigated).
+6. **Stray backtick.** Typed backticks pulled in a monospace font. The filer's quotation marks are now escaped in the sample.
 
 ## Known gaps and open choices
 
-1. **No exemplar** (BLOCKED, above). Tier 2 has no filer to compare against.
-2. **Page limit:** not counted. LBR 7007-1(A) caps briefs in adversary proceedings at 20 pages; no page limit for a contested-matter motion was found in the local rules read. Not checked by the template.
-3. **TOC and TOA:** not generated. No oknb local rule found requires them. A longer memorandum would need them as a convention; the CAND template has them.
-4. **Proposed order:** not generated. LBR 9013-1(B) addresses a request for entry of an order after the response period; the proposed order is a separate document.
-5. **Declaration of value** (footnote 1 in the sample): the template does not generate or check it; the author attaches it.
-6. **Certificate of service:** generated from `certificate` (served list written by the author; the method is the author's choice). The LBR 5005-1(E) rule that the ECF notice serves registered users is stated in the certificate text. The author confirms the parties are not registered before using it.
-7. **Response period:** `response_days` is the author's calculation (LBR 9013-1(B): 14 days where no period is prescribed, including FRBP 9006(f)'s 3 mailing days; add to a prescribed period unless hand-delivered). The template does not compute it.
-8. **Bracketed text in the notice:** "[and others who are required to be served]" is reproduced from the local rule's form with its brackets, as the rule prints it. The author deletes the brackets and the words, or keeps them, per the notice's filing.
-9. **Font:** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. 13 pt because EB Garamond sets small at 12; both meet the LBR 9004-1(A) floor. A choice, not a court-specified font.
-10. **Statute and rule text** not re-fetched (see governing rules): § 522(f)(1)(A), (f)(2)(A), § 101(36), FRBP 4003(d), 9006(f), 9014. Check before this folder is treated as complete.
+1. **Joint signature** (OPEN, tier 2): the signature block takes one signer. The second debtor's counsel and the committee's counsel are not in the render. A joint-motion signature block needs a list of signers in the template.
+2. **Excerpt** (documented): Section III is omitted; the render numbers the surcharge section III where the filing numbers it IV.
+3. **Heading case** (choice): Level-1 headings are in title case, not capitals. The filing's capitals are a convention, not a rule. Revisit if the clerk's standing orders require capitals.
+4. **Footnote 4** (documented): no text in the filing's text layer; not reproduced.
+5. **Page limit:** not counted. LBR 7007-1(A) caps briefs in adversary proceedings at 20 pages; no page limit for a contested-matter motion was found in the local rules read. Not checked by the template.
+6. **TOC and TOA:** not generated. No oknb local rule found requires them. The filing has neither.
+7. **Proposed order:** not generated. LBR 9013-1(B) addresses a request for entry of an order after the response period; the proposed order is a separate document.
+8. **Declaration of value:** the filing does not attach one and the template does not generate or check one; the author attaches it where a motion's value depends on schedules.
+9. **Certificate method:** the template states CM/ECF service in its certificate sentence. The author confirms that every party is registered before using an ECF-only certificate.
+10. **Response period:** `response_days` is the author's calculation (LBR 9013-1(B): 14 days where no period is prescribed, including FRBP 9006(f)'s 3 mailing days; add to a prescribed period unless hand-delivered). The template does not compute it.
+11. **Bracketed text in the notice:** "[and others who are required to be served]" is reproduced from the local rule's form with its brackets, as the rule prints it. The author deletes the brackets and the words, or keeps them, per the notice's filing.
+12. **Font:** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. 13 pt because EB Garamond sets small at 12; both meet the LBR 9004-1(A) floor. A choice, not a court-specified font.
+13. **Statute and rule text** not re-fetched (see governing rules): § 522(f)(1)(A), (f)(2)(A), § 101(36), FRBP 4003(d), 9006(f), 9014. Check before this folder is treated as complete.

@@ -207,7 +207,7 @@
   })
   block(width: text-width, {
     set par(leading: body-leading, spacing: body-leading)
-    [#h(para-indent)I certify that on #c.date, I served a true and correct copy of the #c.document, by #c.method, on the parties listed below. Parties registered to receive electronic notice through the Court's CM/ECF system were served by the Notice of Electronic Filing (LBR 5005-1(E)).]
+    [#h(para-indent)I certify that on #c.date, I served a true and correct copy of the #c.document, by #c.method#if c.served.len() > 0 [, on the parties listed below]. Parties registered to receive electronic notice through the Court's CM/ECF system were served by the Notice of Electronic Filing (LBR 5005-1(E)).]
     for s in c.served {
       block(width: text-width, inset: (left: 0.5in), {
         set par(leading: single-leading, spacing: 0pt)
@@ -218,7 +218,7 @@
   })
   block(width: text-width, breakable: false, above: body-leading, {
     set par(leading: single-leading, spacing: 0pt, justify: false)
-    line-stack(("/s/ " + meta.signature.signer, meta.signature.signer))
+    line-stack(("/s/ " + meta.signature.signer,))
   })
 }
 
@@ -241,9 +241,14 @@
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
   set heading(numbering: none)
 
-  // Headings: level 1 centered bold capitals; level 2 bold, hanging from its label; level 3 bold italic.
+  // Headings: level 1 centered bold, in the case written (no uppercasing: it turns "§ 506(c)" into "§ 506(C)"); level 2 bold, hanging from its label; level 3 bold italic.
   show heading.where(level: 1): it => block(width: text-width, above: body-leading, below: body-leading, breakable: false,
-    align(center, text(weight: "bold", upper(it.body))))
+    align(center, text(weight: "bold", it.body)))
+  // Tables (payoff tables and the like): single spaced, and kept on one page.
+  show table: it => block(width: text-width, breakable: false, {
+    set par(leading: single-leading, spacing: 0pt)
+    it
+  })
   show heading.where(level: 2): it => block(width: text-width, above: body-leading, below: body-leading, breakable: false,
     par(hanging-indent: 0.5in, first-line-indent: 0pt, text(weight: "bold", it.body)))
   show heading.where(level: 3): it => block(width: text-width, above: body-leading, below: body-leading, breakable: false,
