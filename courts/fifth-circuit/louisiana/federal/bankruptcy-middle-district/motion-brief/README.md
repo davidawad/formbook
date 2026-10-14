@@ -5,11 +5,12 @@ Folder: `courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/motio
 
 | Item | Status |
 |---|---|
-| exemplar | **yes**: `exemplars/FILED-EXAMPLE-kologik-24-10311-motion-brief.pdf`, pp. 1-19 of Doc. 8 in *In re Kologik, LLC, et al.*, No. 24-10311 (Bankr. M.D. La.), filed 04/23/2024. Source, fetch date and the reason for choosing it are in `exemplars/SOURCE.md`. |
+| exemplar | **yes**: `exemplars/FILED-EXAMPLE-kologik-24-10311-motion-brief.pdf`, pp. 1-19 of Doc. 8 in *In re Kologik, LLC, et al.*, No. 24-10311 (Bankr. M.D. La.), filed 04/23/2024. Source, fetch date, checksums and the reason for choosing it are in `exemplars/SOURCE.md`. The PDF was missing from the tree until re-fetched on 2026-10-14. |
+| typeface | Rule names **no face**: LR 5005-2(b) requires "12-point font and be double-spaced" (2022 local rules); LR 9013-5(b) requires "12 point font" for proposed orders. Neither names a typeface (read from the court's PDF 2026-10-14). Keeps **EB Garamond** (vendored, OFL). |
 | sample md | `samples/INPUT-motion-brief-sample.md`: a transcription of exemplar pp. 1-19 (caption, Material Terms table, nine footnotes, block quotation, prayer, signature). Placeholders only in the hearing fields (see gap 2). |
-| render | ok: `sh tools/render.sh` exit 0, no typst output; `samples/OUTPUT-motion-brief-sample.pdf`, 18 pages, letter, typst 0.15.0, vendored EB Garamond only (`pdffonts`). |
-| overlay | ok: `sh tools/overlay.sh` exit 0; `samples/OVERLAY-motion-brief-sample.pdf` (18 pages) and `.txt` (page map). |
-| pages reviewed | 18 of 18: every page of the final layout viewed as PNG (100 dpi, render), and the overlay built from the same render. The last re-render changed only an apostrophe glyph in the title; page 1 was re-viewed after it. |
+| render | ok (re-run 2026-10-14): `sh tools/render.sh` exit 0, no typst output; `samples/OUTPUT-motion-brief-sample.pdf`, 18 pages, letter, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -Italic, all embedded). |
+| overlay | ok (re-run 2026-10-14): `sh tools/overlay.sh` exit 0 once the exemplar was restored; `samples/OVERLAY-motion-brief-sample.pdf` (18 pages) and `.txt` (page map). |
+| pages reviewed | 18 of 18 (re-run 2026-10-14): every page of the re-rendered output viewed as PNG at 100 dpi. Page 18 is the signature block alone (gap 4, OPEN). |
 | tier 1 (mandated form) | Pass on the rule points the template checks: letter size, 12 pt, double-spaced body, legible vendored font, caption, notice, contact block (LR 9013-1(a)), footer page numbers. The 15-page memorandum limit (LR 9013-2) is not checked by the template; this exemplar is 18 pages including the motion. See gap 1. |
 | tier 2 (clerk conventions) | One open item: the signature block falls alone on page 18 (gap 4). Everything else in the overlay review matches the filing's conventions. |
 
@@ -113,5 +114,5 @@ Pitch: 24.06 pt on the body lines of page 2 (unchanged from the earlier calibrat
 10. **Overlay page size.** The overlay PDF's pages are 241 × 312 pt (see Render and overlay). A `tools/overlay.sh` artefact; left alone because `tools/` is shared.
 11. **Court's current rules.** Read from the 2022 PDF. The filing is from 2024 and cites LR 9013-3(d)(3); Standing Order 2024-2 amends LR 4001-1(f) and refers to LR 9013-5. Other amendments after 2022 were not checked because the court's site is blocked from this box.
 12. **FRBP 9013 wording.** Quoted from a summarizing fetch (see Governing rules). Check the official text before this template is treated as final.
-13. **Font.** EB Garamond at 12 pt, not Times New Roman. The rules name no typeface.
+13. **Font.** EB Garamond at 12 pt, not Times New Roman. LR 5005-2(b) and LR 9013-5(b) name a size only, no typeface (read from the court's 2022 PDF on 2026-10-14). The Administrative Procedures Manual, which the filing cites for the notice list, was not read, so a face named there is unchecked.
 14. **Overlay pairing.** The overlay pairs pages by word overlap (see Render and overlay); pairs are shown in `samples/OVERLAY-motion-brief-sample.txt`.
