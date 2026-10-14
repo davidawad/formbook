@@ -7,9 +7,10 @@ Folder: `courts/eighth-circuit/south-dakota/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-lone-eagle-5-26-cv-05068-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-lone-eagle-motion-to-dismiss.md` (the full filed text of the exemplar; see below) |
-| render | ok: `samples/OUTPUT-lone-eagle-motion-to-dismiss.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-lone-eagle-motion-to-dismiss.pdf` and `OVERLAY-lone-eagle-motion-to-dismiss.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none** (D.S.D. Civ. LR 83.4 says only "Fonts must be at least 12-point"; checked in the official PDF 2026-10-14). Substitute: none; **EB Garamond** kept, as `docs/FONTS.md` says for a court that names no face. Fit: n/a. |
+| render | ok: `samples/OUTPUT-lone-eagle-motion-to-dismiss.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond-Regular, -Bold and -Italic embedded |
+| overlay | ok: `samples/OVERLAY-lone-eagle-motion-to-dismiss.pdf` and `OVERLAY-lone-eagle-motion-to-dismiss.txt`, built against the filed exemplar fetched from the RECAP URL in `exemplars/SOURCE.md` (the PDF is not in `exemplars/` in this snapshot; pass it as the third argument to `tools/overlay.sh`) |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed again on 2026-10-14 after the fonts-pass re-render) |
 | tier 2 | not met to the eval-loop standard: one filer so far (see Known gaps) |
 
 File names follow the repo convention used by `tools/render.sh` and `tools/overlay.sh` (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf` and `.txt`), not the `<id>.pdf` and `<id>-overlay.pdf` names in the brief.
@@ -70,7 +71,7 @@ Filed pages 3 and 8 are not paired with any of our pages, because our pages brea
 1. **One filer so far.** The brief asks for one exemplar per doc type; EVAL-LOOP's tier 2 asks for two or three filers. Two other available memoranda in support of a motion to dismiss in this court were found and are not downloaded: *Mayday Health v. Rhoden*, 4:26-cv-04096, Doc. 15 (filed by Marty Jackley and Larry Rhoden, 5 pages, RECAP docket 73412271) and *Cura Industries, LLC v. Sunny Makhijani, DPM*, 4:26-cv-04079, Doc. 5 (filed by Sunny Makhijani and My Foot Podiatry PLLC, 5 pages, RECAP docket 73286298). Tier 2 is therefore **not** judged against two or three filers yet. Both are short, and either would be the second filer; the next step is to download one and run the overlay on it.
 2. **Length.** The sample renders to 8 pages; the exemplar is 10 pages. The sample carries the full filed text, so the difference is most likely the typeface and the line spacing (see gap 4); this was not measured line by line.
 3. **Page limit: which version?** LR 7.1(B)(1) on the official PDF (12/01/2015) says 25 pages or 12,000 words. A third-party copy of the rule on courtrules.net says 30 pages. The template follows the official PDF and prints no certificate; if the rule was amended after 2015, the limit needs to be checked against the court's current rules. Not resolved here.
-4. **Font.** EB Garamond is the only font vendored in `fonts/`. The exemplar is Times New Roman. EB Garamond's x-height is smaller, so the text looks smaller at the same 12 pt. The 12-point minimum is met; vendoring a Times-metric font is a repo decision.
+4. **Font.** LR 83.4 names no typeface, so EB Garamond stays (see the typeface row above). The filed exemplar is Times New Roman. That is a filer's convention, not a rule, so no Times substitute (Liberation Serif) is used. EB Garamond's x-height is smaller, so the text looks smaller at the same 12 pt. The 12-point minimum is met.
 5. **Certificate of compliance (LR 7.1(B)(1)).** Not printed; it is needed only over 25 pages. A longer brief would need it added to the template.
 6. **Caption.** The party column is closed by a right and bottom rule, not the ")" column of the filing. Both are seen in filings; recorded as a tier-2 choice.
 7. **Footnote reference only in paragraphs.** The template's footnote support covers a reference inside a body paragraph. A reference in a heading, list or table is not supported and would render as literal text.
