@@ -1,5 +1,34 @@
 #import "@preview/cmarker:0.1.10"
 
+// Texas Rules of Appellate Procedure 9.4 (form), 9.5 (service), 68.3-68.4 (petition contents).
+// Text is 14-point and double-spaced (9.4(d)-(e)); headings, the cover, and the identity block
+// are single-spaced; footnotes are 12-point. Leading 1.65em gives a 32.2 pt baseline pitch
+// (2 x 14 pt x 1.15) in EB Garamond.
+#let body-leading = 1.65em
+#let single-leading = 0.65em
+
+// A markdown block is single-spaced when it holds a hard line break (signature and address
+// blocks) or a table-of-contents or index dot leader. Consecutive blocks of the same kind are
+// rendered together so that numbered lists keep their numbers.
+#let single-block(chunk) = chunk.contains("\\\n") or chunk.contains("....")
+
+// Footnotes: each definition line "[^n]: text" is removed from the body, and each reference
+// "[^n]" becomes a token that the show rule below turns into a footnote with the rendered text.
+#let footnote-split(body) = {
+  let defs = (:)
+  let kept = ()
+  for line in body.split("\n") {
+    let m = line.match(regex("^\\[\\^([0-9]+)\\]:\\s*(.*)$"))
+    if m != none {
+      defs.insert(m.captures.at(0), m.captures.at(1))
+    } else {
+      kept.push(line)
+    }
+  }
+  let text = kept.join("\n").replace(regex("\\[\\^([0-9]+)\\]"), m => "ZQFN" + m.captures.at(0) + "ZQ")
+  (text, defs)
+}
+
 #let pdr(source) = {
   let fm = source.match(regex("^---\\r?\\n([\\s\\S]*?)\\r?\\n---[ \\t]*\\r?\\n"))
   if fm == none { panic("PDR sample requires YAML frontmatter") }
@@ -8,17 +37,37 @@
   let required = ("case_number", "style_petitioner", "style_respondent", "filing_party", "brief_title", "appeal_from", "lead_counsel", "counsel_lines")
   for key in required { if key not in meta { panic("PDR sample missing frontmatter field: " + key) } }
   set document(title: meta.brief_title, author: meta.filing_party)
-  set page(paper: "us-letter", margin: 1in, numbering: "1", footer: context align(center)[#counter(page).display()])
+  set page(
+    paper: "us-letter",
+    margin: 1in,
+    footer: context {
+      // the cover is unnumbered; the page after it is page 1
+      if here().page() > 1 { align(center, text(size: 14pt, counter(page).display())) }
+    },
+  )
   set text(font: "EB Garamond", size: 14pt, lang: "en")
-  set par(leading: 0.95em, first-line-indent: 0.5in, justify: true)
-  show heading.where(level: 1): it => { set text(hyphenate: false); set par(first-line-indent: 0pt, leading: 0.15em); block(width: 100%, sticky: true, above: 1.1em, below: 0.8em, align(center, strong(upper(it.body)))) }
-  show heading.where(level: 2): it => { set par(first-line-indent: 0pt, leading: 0.15em); block(sticky: true, above: 0.8em, below: 0.45em, strong(it.body)) }
-  show heading.where(level: 3): it => { set par(first-line-indent: 0pt, leading: 0.15em); block(sticky: true, above: 0.6em, below: 0.35em, emph(it.body)) }
+  set par(leading: body-leading, first-line-indent: 0.5in, justify: false)
+  show footnote.entry: set text(size: 12pt)
+  show footnote.entry: set par(leading: single-leading, first-line-indent: 0pt)
+  show heading.where(level: 1): it => {
+    set par(first-line-indent: 0pt, leading: single-leading)
+    block(width: 100%, sticky: true, above: 1.1em, below: 0.8em, align(center, strong(upper(it.body))))
+  }
+  show heading.where(level: 2): it => {
+    set par(first-line-indent: 0pt, leading: single-leading)
+    block(sticky: true, above: 0.8em, below: 0.7em, strong(it.body))
+  }
+  show heading.where(level: 3): it => {
+    set par(first-line-indent: 0pt, leading: single-leading)
+    block(sticky: true, above: 0.6em, below: 0.35em, emph(it.body))
+  }
+  // the cover is a single-spaced, centered block on its own page
+  set par(leading: single-leading)
   align(center)[
     #v(0.4in)
-    #text(size: 14pt, weight: "bold")[IN THE COURT OF CRIMINAL APPEALS OF TEXAS]
+    #text(weight: "bold")[IN THE COURT OF CRIMINAL APPEALS OF TEXAS]
     #v(0.3in)
-    #text(size: 14pt)[No. #meta.case_number]
+    No. #meta.case_number
     #v(0.2in)
     #strong(meta.style_petitioner)
     #v(0.08in)
@@ -37,5 +86,32 @@
     #if "filed_date" in meta { v(0.25in); meta.filed_date }
   ]
   pagebreak()
-  cmarker.render(body, smart-punctuation: false, raw-typst: false)
+  counter(page).update(1)
+  set par(leading: body-leading)
+
+  // group consecutive blocks by spacing kind, keeping list items together
+  let (text, defs) = footnote-split(body)
+  show regex("ZQFN[0-9]+ZQ"): it => footnote(cmarker.render(defs.at(it.text.slice(4, -2)), smart-punctuation: false, raw-typst: false))
+  let groups = ()
+  for chunk in text.split("\n\n") {
+    let single = single-block(chunk)
+    if groups.len() > 0 and groups.last().at(0) == single {
+      groups.last().at(1).push(chunk)
+    } else {
+      groups.push((single, (chunk,)))
+    }
+  }
+  for (single, chunks) in groups {
+    let text = chunks.join("\n\n")
+    if single {
+      // short single-spaced blocks (signatures, certificates) do not split across pages
+      let keep = text.len() < 700
+      block(breakable: not keep, {
+        set par(leading: single-leading, first-line-indent: 0pt)
+        cmarker.render(text, smart-punctuation: false, raw-typst: false)
+      })
+    } else {
+      cmarker.render(text, smart-punctuation: false, raw-typst: false)
+    }
+  }
 }

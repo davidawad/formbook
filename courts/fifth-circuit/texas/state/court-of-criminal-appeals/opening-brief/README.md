@@ -2,9 +2,9 @@
 
 ## Governing rules
 
-Rules verified October 14, 2026 against the current [Texas Rules of Appellate Procedure](https://www.txcourts.gov/media/1463134/texas-rules-of-appellate-procedure-02062026.pdf), which the official [Rules & Standards page](https://www.txcourts.gov/rules-forms/rules-standards/) lists as amended February 6, 2026.
+Rules checked October 14, 2026. The official [Texas Rules of Appellate Procedure](https://www.txcourts.gov/media/1463134/texas-rules-of-appellate-procedure-02062026.pdf) returned HTTP 403 to the fetcher, so the Rule 9.4 typeface and spacing wording below was confirmed from secondary summaries of the rule. Check it against the official text before relying on this template.
 
-- **TRAP 9.4(b)–(e), (g), (i), (j) (mandated):** 8.5 by 11 inch page; one-inch margins; double-spaced text, with stated exceptions; conventional computer type no smaller than 14 point and footnotes no smaller than 12 point; cover contents; applicable length limit and word-count certificate; text-searchable unlocked PDF for e-filing. Rule 70.3 makes Rule 9 applicable to a brief on the merits.
+- **TRAP 9.4(b)–(e), (g), (i), (j) (mandated):** 8.5 by 11 inch page; one-inch margins; double-spaced text, with stated exceptions (footnotes, block quotations, short lists, and issues or points of error may be single-spaced); conventional computer type no smaller than 14 point and footnotes no smaller than 12 point; cover contents; applicable length limit and word-count certificate; text-searchable unlocked PDF for e-filing. Rule 70.3 makes Rule 9 applicable to a brief on the merits.
 - **TRAP 9.5 (mandated):** serve each party and include proof of service.
 - **TRAP 38.1 (mandated through TRAP 70.3):** brief contents and their order, including identity of parties and counsel, contents, authorities, oral-argument statement, case and procedural history, issues, facts, argument, conclusion, and signature. Rule 70.3 dispenses with the appendix required by Rule 38.1(k).
 - **TRAP 70.1 (mandated):** after discretionary review is granted, the petitioner (or the losing party where no petition was filed) files the initial brief within 30 days.
@@ -12,7 +12,11 @@ Rules verified October 14, 2026 against the current [Texas Rules of Appellate Pr
 
 ## Markdown contract and template
 
-The markdown file begins with YAML frontmatter: `case_number`, `style_petitioner`, `style_respondent`, `filing_party`, `brief_title`, `appeal_from`, `lead_counsel`, `counsel_lines`, and optional `filed_date`. The body supplies the document-specific sections and text, including contents, authorities, signature, certificate of compliance, and proof of service. The layout module builds the cover and renders markdown with vendored cmarker; it does not create tables of contents or authorities automatically.
+The markdown file begins with YAML frontmatter: `case_number`, `style_petitioner`, `style_respondent`, `filing_party`, `brief_title`, `appeal_from`, `lead_counsel`, `counsel_lines`, and optional `filed_date`. The body supplies the document-specific sections and text, including contents, authorities, signature, certificate of compliance, and proof of service.
+
+The template builds the cover and renders markdown with vendored cmarker. Body text is 14-point, double-spaced (32.2 pt baseline pitch in EB Garamond). Headings, identity blocks (bold labels), signature and address blocks (hard line breaks), and contents or index entries (dot leaders) are single-spaced; short single-spaced blocks do not break across pages. Footnotes are written `[^1]` with a `[^1]: text` definition, rendered at 12 point.
+
+The front matter (identity, contents, index) is numbered in lower-case roman. The body starts at page 1 with the heading `# Statement Regarding Oral Argument`, which the template requires. The template does not create a table of contents or authorities.
 
 Build from the repository root:
 
@@ -21,21 +25,43 @@ sh tools/render.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/op
 sh tools/overlay.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/opening-brief becerra-merits
 ```
 
-## Overlay and page review
+## Exemplar
 
-The red/blue overlay is `samples/OVERLAY-becerra-merits.pdf`; its page map is `samples/OVERLAY-becerra-merits.txt`. The sample uses the filed brief's cover, front matter, table headings, and representative argument and certificate sections. The five rendered pages were rendered at 60 dpi and reviewed on October 14, 2026.
+`exemplars/FILED-EXAMPLE-becerra-pd0280-22-opening-brief.pdf` is the State's brief on the merits in *State v. Becerra*, PD-0280-22 (54 pages), retrieved October 14, 2026 (see `exemplars/SOURCE.md`). Its body is double-spaced, consistent with the rule.
+
+This is one filer. Tier 2 calls for two or three filings from different filers, and none was found in this pass.
+
+## Sample and overlay
+
+`samples/INPUT-becerra-merits.md` is a transcription of an excerpt of the exemplar: the cover, identity of parties and counsel, table of contents, index of authorities, the statements of oral argument, the case, and procedural history, the statement of facts through Maria Nava's testimony, the prayer, and both certificates. The argument, summary, and response are omitted. The render is 11 pages (cover unnumbered, front matter i–iii, body 1–7).
+
+The red/blue overlay is `samples/OVERLAY-becerra-merits.pdf`; its page map is `samples/OVERLAY-becerra-merits.txt`.
+
+## Page review
+
+Every page of `samples/OUTPUT-becerra-merits.pdf` (11 pages) was rendered at 100 dpi and viewed on October 14, 2026, after the final render. Footer numbers are shown; the cover has none.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
-| 1 | exemplar p.1 | Caption, appellate cause number, procedural origin, brief title, filing party, and counsel/contact block fit on one page. | PASS |
-| 2 | overlay paired exemplar p.2 | Identity of parties and counsel, table of contents, index of authorities, and compliance certificate are legible. | PASS |
-| 3 | exemplar p.10 | Oral argument, case and procedural history, and facts are readable. | PASS |
-| 4 | overlay paired exemplar p.52 | Summary, issue response, prayer, signature block, and service certificate fit on the page. | PASS |
-| 5 | exemplar p.53 | Compliance certificate is readable and not clipped. | PASS |
+| cover | exemplar p.1 | Case number, caption, title, counsel block, and date fit on one page. | PASS |
+| i | exemplar p.1–2 (identity) | Party and counsel blocks single-spaced and flush; a bold-label paragraph was indented. | FIXED |
+| ii | exemplar p.2–3 (contents, index) | Contents and first index entries single-spaced with dot leaders. | PASS |
+| iii | exemplar p.4–5 (index end) | Index continuation, constitutions, statutes, and rules. | PASS |
+| 1 | exemplar p.1 (body) | Oral argument, case, and procedural history. Footnote 1 printed as literal `[^1]` text and its definition was dropped; now a real 12-point footnote. | FIXED |
+| 2 | exemplar p.2 | Procedural history and facts. | PASS |
+| 3 | exemplar p.3–4 | Facts. | PASS |
+| 4 | exemplar p.4–5 | Facts. | PASS |
+| 5 | exemplar p.5–6 | Facts; footnote 2 now a real footnote. | FIXED |
+| 6 | exemplar p.6–7 | Facts; the prayer heading and "Respectfully submitted" were split from their signature block. | FIXED |
+| 7 | exemplar p.45–46 | Prayer signature block (kept together), certificate of service, certificate of compliance. | FIXED |
 
 ## Known gaps
 
-- One filed exemplar is available here; it shows one filer's style, not a cross-filer convention.
-- Tables of contents and authorities remain author-supplied markdown and are not page-numbered from the final rendered document. The sample's page references are retained from the filed exemplar and will not remain accurate after its text is shortened or reflowed.
-- The template does not calculate word limits or certificate counts, verify service details, create bookmarks, or mechanically check every Rule 38.1 requirement. Confirm case-specific requirements and any applicable length limit before use.
-- The sample is a representative excerpt, not the complete brief. This task rendered and visually reviewed the Typst sample; no other engine or automated rule-check suite was run.
+- One filed exemplar, not two or three from different filers.
+- Tables of contents and authorities are author-supplied markdown. Their page numbers are copied from the exemplar and do not match this excerpt.
+- The certificate of compliance's word count (11,214) is the exemplar's figure. It is not a count of this excerpt and does not verify any word limit. The template does not calculate word limits or certificate counts.
+- The transcription copies a citation year from the filed brief: *Williams v. Florida*, 399 U.S. 78 (1997), as printed. That is the filed brief's error, not verified here.
+- The template does not verify service details, create bookmarks, or check every Rule 38.1 requirement. Confirm case-specific requirements and the applicable length limit before use.
+- The sample is an excerpt, not the complete brief. No engine other than typst was run, and no automated rule-check suite (`checks.yaml`) exists for this folder.
+
+[Formbook index](../../../../../../README.md)
