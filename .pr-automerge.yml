@@ -1,0 +1,6 @@
+# Opt-in for the land queue's merge gate. David, 2026-10-14 (formbook pane): finished formbook units
+# that pass auto-merge; no per-unit human merge. Editing this file is itself a sensitive-path change,
+# so a diff that touches it never auto-merges itself.
+auto_merge: true
+substantiality_gate: false
+isolated_landing: true
