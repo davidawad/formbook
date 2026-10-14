@@ -8,8 +8,9 @@ Folder: `courts/fourth-circuit/north-carolina/federal/bankruptcy-eastern-distric
 | exemplar | yes: `exemplars/FILED-EXAMPLE-jsmith-second-wind-25-00159-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-jsmith-complaint.md`: an excerpt of the 38-page complaint (caption, introduction, jurisdiction, parties, factual allegations, part of the First Claim, prayer, signature); see Known gaps |
 | render | ok: `samples/OUTPUT-jsmith-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-jsmith-complaint.pdf` and `samples/OVERLAY-jsmith-complaint.txt` (page map) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | rules name no face: EB Garamond kept (`docs/FONTS.md`, "No face named"); no substitute needed. Checked 2026-10-14 against the NCEB Local Rules and Administrative Guide (see Typography). |
+| overlay | ok: `samples/OVERLAY-jsmith-complaint.pdf` and `samples/OVERLAY-jsmith-complaint.txt` (page map; exemplar copy fetched from CourtListener RECAP on 2026-10-14, 38 pages, matching `exemplars/SOURCE.md`) |
+| pages reviewed | 8 of 8 (fonts pass, 2026-10-14: every page rendered at 70 dpi and viewed after the re-render) |
 
 ## Governing rules
 
@@ -27,6 +28,8 @@ Rules were read from the primary sources on 2026-10-14.
 | Admin Guide, Rule 5005-4(8) | An electronic signature is the signatory's name "preceded by an 's/'". | NCEB Administrative Guide, "Newest" PDF (fetched 2026-10-14) | `sign` line `BY: s/Joseph Z. Frost`. |
 
 Typography: no local rule or Admin Guide provision sets a typeface, size, margin or spacing for a complaint (the same search as the motion-brief README). The template uses the exemplar's settings: a 12-point serif, double-spaced, 1-inch margins, page numbers at the foot.
+
+Fonts pass (2026-10-14): the Administrative Guide's only face wording is in the creditor-matrix instructions (Rule 1007-2, "Twelve (12) pitch Times New Roman and Courier New fonts create good print quality"). That applies to the mailing matrix, not to a complaint. The Local Rules and the Administrative Guide were fetched in full from the court's "Newest" PDFs and searched for font, typeface, point, margin and spacing terms. No rule names a face for this doc type, so `docs/FONTS.md` ("No face named") keeps EB Garamond. The TeX Gyre Schola substitute is not used.
 
 Not produced by this template (separate filings): the Adversary Proceeding Cover Sheet, the summons, and the civil-procedure disclosure statement, if any. The template does not produce a certificate of service for the complaint (service is by summons).
 
@@ -77,7 +80,7 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body.
 2. **Numbering.** The template numbers the allegations from 1 in the sample. The filed numbers differ after the first omission: filed paragraph 62 (the First Claim's incorporation paragraph) renders as paragraph 34. The filed numbers are not transcribed.
 3. **The exemplar's own numbers disagree.** The caption reads "CASE NO. 23-02734-5-JNC," but paragraph 9 says "BK Case No. 23-02437-5-JNC." The transcription keeps both as printed. A template cannot resolve the discrepancy; it is a question about the filing.
 4. **Only one exemplar** (one filer). The tier-2 bar (2 or 3 filers) is not met. The search: the CourtListener API for `court=nceb` with `type=r` and the query "complaint adversary" returned many adversary-complaint dockets; the one downloaded and checked is JSmith Civil v. Second Wind (this one, which has a text layer and a 12-point Century Schoolbook body). Other results seen in the search (Hussein v. L&W Supply, 25-00050; Wayne Bailey v. Nationwide, 20-00026) were not downloaded.
-5. **Typography is not in the rules.** EB Garamond at 12 pt is used; the exemplar body is Century Schoolbook, which has a larger x-height. A Century-metric font would remove the difference; that is a vendoring decision for David (fonts/ is shared).
+5. **Typography is not in the rules.** EB Garamond at 12 pt is used; the exemplar body is Century Schoolbook, which has a larger x-height. No rule names a face, so the template keeps EB Garamond. TeX Gyre Schola (Century Schoolbook substitute) is vendored if David wants the exemplar's look as a tier-2 choice; switching is not required by any rule.
 6. **The adversary-number line wraps** ("25-________-5-JNC" breaks at the hyphen on page 1). The caption column is 3.2 inches; widening it squeezes the party column. Not changed.
 7. **Not generated:** the Adversary Proceeding Cover Sheet, the summons, any disclosure statement, and the exhibits (EXHIBIT 1 to 4 are referred to but not included).
 8. **File names differ from the brief's naming.** The tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, not `<id>.pdf` and `<id>-overlay.pdf`; the names follow the tools (which the brief forbids editing).
