@@ -8,7 +8,7 @@ Doc type: **complaint** in the United States District Court for the District of 
 | sample md | `samples/INPUT-bitcanary-complaint.md`: the whole complaint (all 96 numbered paragraphs, counts I to VII, prayers, jury demand, signature) |
 | render | ok: `samples/OUTPUT-bitcanary-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh` exit 0) |
 | overlay | ok: `samples/OVERLAY-bitcanary-complaint.pdf` and `OVERLAY-bitcanary-complaint.txt` |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 9 of 9 (fonts pass 2026-10-14: every page rendered at 50 dpi and viewed again after the font check) |
 | depth | 9 rendered pages against a 10-page exemplar |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` defaults (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.pdf` / `<id>-overlay.pdf` form in the brief, because `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf`.
@@ -51,7 +51,7 @@ Not produced by this template (separate filings, not part of the complaint, and 
 
 1. **One exemplar.** Tier 2 asks for two or three filers. The second filer was not collected: the RECAP search turned up Lipps v. City of Fargo (3:26-cv-00294, 35 pages, RECAP PDF found, not downloaded) and Hoefer v. Teigen (1:25-cv-00207, 244 pages, too long). Tier 2 is therefore **not** judged against two filers.
 2. **Division line.** The exemplar's caption reads "EASTERN DISTRICT OF NORTH DAKOTA" with no division line. Civil Rule 3.1(A) requires the division to be designated in the complaint's caption, so the template prints "EASTERN DIVISION" from frontmatter. This departs from the exemplar on purpose (tier 1 over tier 2).
-3. **Font.** Civil Rule 5.1(B)(2) sets a size, not a typeface. EB Garamond (the vendored face) is used at 12 pt; the x-height is smaller than Times New Roman at 12 pt, so the text looks smaller than the exemplar. A Times-metric face is not vendored.
+3. **Font.** Typeface check (fonts pass, 2026-10-14): face required = none. D.N.D. Civ. R. 5.1(B)(2) sets a size ("12-point font or larger"), not a typeface, and the rest of the local rules text (`local_rules.pdf`, effective October 6, 2025) names no face. Per `docs/FONTS.md` ("No face named" → EB Garamond), the template keeps EB Garamond at 12 pt; vendored substitute = none needed, font = `EB Garamond`. The filed exemplar is set in Times New Roman, which the rule does not require, and EB Garamond's x-height is smaller at 12 pt, so the text looks smaller than the exemplar. The Times-metric substitute, `Liberation Serif`, is vendored if a court rule ever names Times.
 4. **Signature.** The exemplar has no "/s/" or "Respectfully submitted" line in its text layer; the template prints the firm and signer lines the exemplar shows, with no "/s/" and no date.
 5. **Lines per page.** No line numbering or 28-line limit: D.N.D. Civ. R. 5.1 does not require pleading paper. This is a reading of the rule, not a choice of style; the exemplar is also unnumbered.
 6. **Overlay pairing.** The overlay pairs our pages with the nearest exemplar pages by word overlap: ours p.1 ↔ p.1, p.2 ↔ p.2, p.3 ↔ p.4, p.4 ↔ p.5, p.5 ↔ p.6, p.6 ↔ p.7, p.7 ↔ p.8, p.8 ↔ p.9, p.9 ↔ p.10. The offsets follow the exemplar's own pagination, not an error in the render. The overlay is a diagnostic, not a score.
