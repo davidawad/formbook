@@ -1,0 +1,14 @@
+{
+  "alias": "nysupct",
+  "courtlistener_id": "nysupct",
+  "name": "Supreme Court of the State of New York",
+  "level": "state-trial",
+  "circuit": "ca2",
+  "state": "New York",
+  "path": "courts/second-circuit/new-york/state/supreme-court",
+  "status": "todo",
+  "reviewed_by": null,
+  "notes": "",
+  "parent_alias": null,
+  "legacy_aliases": []
+}
