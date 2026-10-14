@@ -74,7 +74,7 @@ Pages reviewed: 7 of 7.
 3. **Local rules currency.** The bankruptcy and district local rules used here are the 2017 and 2016 versions, unverified against the current ones. See `../adversary-complaint/README.md`.
 4. **Notice of motion and hearing.** The exemplar (Howard) has no separate notice of hearing; the court's hearing-notice practice is not in the rules found, so the template does not generate one. The Pruco exemplar shows only the memorandum.
 5. **Page limit.** LR 7.1(a) (26 pages) applies only if the judge directs; not counted. The sample is 7 pages.
-6. **Font.** EB Garamond at 13 pt, vendored; no S.D. Ga. rule names a font. The exemplar is set in Times. See `../adversary-complaint/README.md`.
+6. **Typeface (fonts pass, 2026-10-14).** Face required: **none** (the same local-rule text as `../adversary-complaint/README.md`, searched 2026-10-14). Vendored substitute: **EB Garamond** at 13 pt, the "no face named" row of `docs/FONTS.md`. Fit: n/a. The exemplar is set in Times; the rules do not require it.
 7. **Margins.** 1 inch all round: a style choice (no margin rule found).
 8. **Paragraph and citation checks.** The template does not check the citation form, that every fact is supported by a citation (LR 7.1(b), if directed), or that the requests match the motion. Author-written.
 9. **Privacy redactions** (FRBP 9037 / FRCP 5.2): the filer's job; not checked.

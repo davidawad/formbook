@@ -87,7 +87,7 @@ Pages reviewed: 8 of 8.
 ## Known gaps and open choices
 
 1. **Official Form 416 (GASB-CAP-003).** FRBP 7010 requires the caption to substantially conform to Form 416. The text of the appropriate form (416A, 416D or other) was not retrieved, so conformity is not checked. The caption follows the exemplar's layout and FRBP 9004(b). **Needs a check against the official form before this template is treated as complete.**
-2. **Font.** EB Garamond at 13 pt (vendored, OFL). No S.D. Ga. rule names a font; the exemplar is set in Times. 13 pt was chosen by eye to approximate Times at 12 pt (not measured). `fonts/` vendors only EB Garamond, and adding a font would change a shared folder.
+2. **Typeface (fonts pass, 2026-10-14).** Face required: **none**. The bankruptcy local rules (2017 PDF, GASB-localRules.pdf) and the district LR 10.1 (2016 PDF, Local_Rules_of_Civil_Procedure_Printable_rev_June_2016.pdf) were each extracted with `pdftotext` and searched for font, typeface, type size and named faces: no match. FRBP 9004 names none either. Vendored substitute: **EB Garamond** (`fonts/eb-garamond/`, OFL), the "no face named" row of `docs/FONTS.md`. Fit: n/a (no court face). The exemplar is set in Times, which the rules do not require; 13 pt was chosen by eye to approximate Times at 12 pt (not measured). Changing the font would need a court rule that names a face.
 3. **Margins.** 1 inch all round: a style choice (no margin rule found).
 4. **Second exemplar.** One exemplar only (see Exemplar).
 5. **Paragraph numbers are typed by the author.** The template does not check that they run 1..n without a gap. A checker that does is a candidate for the next iteration.
