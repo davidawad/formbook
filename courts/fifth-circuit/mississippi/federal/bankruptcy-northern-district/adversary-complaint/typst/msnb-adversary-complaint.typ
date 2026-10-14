@@ -17,7 +17,6 @@
 #let body-leading = 1.35em              // double spacing at 12 pt (EB Garamond line box is 0.65em)
 #let single-leading = 0.5em
 #let para-indent = 0.5in
-#let caption-left = 3.4in               // width of the party column of the caption
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -73,17 +72,32 @@
   }
 }
 
-/// A lettered list (the prayer for relief): "(a)", "(b)", ...
+/// A lettered list (a markdown "- " list): sub-items under a numbered allegation, "(a)", "(b)", ...
 #let lettered(s) = {
   let letters = "abcdefghijklmnopqrstuvwxyz"
   let items = s.split("\n").map(l => l.trim()).filter(l => l != "")
   body-text[
     #for (i, item) in items.enumerate() {
-      let text-item = item.replace(regex("^\\d+\\.\\s*"), "")
+      let text-item = item.replace(regex("^-\\s*"), "")
       grid(
         columns: (0.5in + para-indent, 1fr),
         [#h(para-indent) (#letters.at(i))],
         inl(text-item),
+      )
+    }
+  ]
+}
+
+/// A numbered list (a markdown "1." list): the prayer for relief, "1.", "2.", ...
+#let numbered-items(s) = {
+  let items = s.split("\n").map(l => l.trim()).filter(l => l != "")
+  body-text[
+    #for item in items {
+      let m = item.match(regex("^(\\d+)\\.\\s*"))
+      grid(
+        columns: (0.5in + para-indent, 1fr),
+        [#h(para-indent) #(m.captures.at(0) + ".")],
+        inl(item.slice(m.end)),
       )
     }
   ]
@@ -108,55 +122,43 @@
   v(12pt)
 }
 
-/// The caption: the debtor and the case number on the first row, then the adversary parties.
+/// The caption, as the filed exemplar sets it: full-width rows, party labels flush right, one rule under the
+/// debtor row. The debtor and the case number share the first row; the adversary parties follow.
 #let caption(meta) = {
   set par(leading: single-leading, spacing: 0pt, justify: false)
-  block(width: 100%, grid(
-    columns: (caption-left, 1fr),
-    column-gutter: 0.2in,
-    block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 8pt), {
-      text(weight: "bold", [IN RE:])
-      v(4pt)
-      for n in meta.debtor.names {
-        inl(n)
-        linebreak()
-      }
-      v(4pt)
-      inl(meta.debtor.role)
-    }),
-    block(inset: (left: 0.2in), {
-      [CASE NO. #meta.case_number]
-      if "chapter" in meta.debtor {
-        linebreak()
-        [Chapter #meta.debtor.chapter]
-      }
-    }),
-  ))
+  let names(list) = for (i, n) in list.enumerate() {
+    if i > 0 { linebreak() }
+    inl(n)
+  }
+  grid(
+    columns: (1fr, auto),
+    column-gutter: 0.5in,
+    [IN RE: #names(meta.debtor.names)],
+    align(right, [NO. #meta.case_number]),
+  )
+  v(6pt)
+  line(length: 100%, stroke: 0.75pt)
   v(12pt)
-  block(width: 100%, grid(
-    columns: (caption-left, 1fr),
-    column-gutter: 0.2in,
-    block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 8pt), {
-      for (i, p) in meta.plaintiffs.enumerate() {
-        if i > 0 { [and] + linebreak() }
-        inl(p)
-        linebreak()
-      }
-      v(4pt)
-      [PLAINTIFF#if meta.plaintiffs.len() > 1 [S]]
-      v(8pt)
-      [v.]
-      v(8pt)
-      for (i, d) in meta.defendants.enumerate() {
-        if i > 0 { [and] + linebreak() }
-        inl(d)
-        linebreak()
-      }
-      v(4pt)
-      [DEFENDANT#if meta.defendants.len() > 1 [S]]
-    }),
-    block(inset: (left: 0.2in), [ADV. PROC. NO. #meta.adv_number]),
-  ))
+  grid(
+    columns: (1fr, auto),
+    column-gutter: 0.5in,
+    names(meta.plaintiffs),
+    align(right, [PLAINTIFF#if meta.plaintiffs.len() > 1 [S]]),
+  )
+  v(18pt)
+  grid(
+    columns: (1fr, auto),
+    column-gutter: 0.5in,
+    [VS.],
+    align(right, [ADVERSARY NO. #meta.adv_number]),
+  )
+  v(18pt)
+  grid(
+    columns: (1fr, auto),
+    column-gutter: 0.5in,
+    names(meta.defendants),
+    align(right, [#meta.at("defendants_label", default: "DEFENDANT")]),
+  )
   v(12pt)
 }
 
@@ -168,19 +170,28 @@
   let s = meta.signature
   block(width: 100%, breakable: false, {
     v(12pt)
+    if "dated" in meta {
+      h(para-indent)
+      [DATED: #meta.dated]
+      v(12pt)
+    }
+    // The firm, the signature line and the title sit in the right column; the counsel block that
+    // follows is flush left, as in the filed exemplar.
     align(right, block(width: 3.2in, {
       set par(leading: single-leading, spacing: 0pt, justify: false)
-      [Respectfully submitted,]
-      v(18pt)
-      inl(s.firm)
-      v(18pt)
-      [By: /s/ #upper(s.signer)]
+      text(weight: "bold", inl(s.firm))
+      v(24pt)
+      [By: #underline[/s/ #s.signer]]
       linebreak()
-      for line in s.lines {
-        inl(line)
-        linebreak()
-      }
+      h(0.5in)
+      [#s.title]
     }))
+    v(18pt)
+    set par(leading: single-leading, spacing: 0pt, justify: false)
+    for line in s.lines {
+      inl(line)
+      linebreak()
+    }
   })
 }
 
@@ -197,8 +208,10 @@
   set text(font: font-family, size: type-size, lang: "en")
   set par(leading: body-leading, justify: false, spacing: 0pt)
 
-  counsel-block(meta)
-  v(18pt)
+  if meta.counsel.len() > 0 {
+    counsel-block(meta)
+    v(18pt)
+  }
   court-title()
   caption(meta)
   align(center, block(above: 6pt, below: 18pt, text(weight: "bold", upper(meta.title))))
@@ -208,8 +221,10 @@
       heading-block(c.match(regex("^#+")).text.len(), c)
     } else if c.starts-with(">") {
       unnumbered(inl(c.replace(regex("^>\\s*"), "")))
-    } else if c.match(regex("^\\d+\\.\\s")) != none {
+    } else if c.starts-with("- ") {
       lettered(c)
+    } else if c.match(regex("^\\d+\\.\\s")) != none {
+      numbered-items(c)
     } else {
       allegation(inl(c))
     }

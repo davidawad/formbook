@@ -15,7 +15,6 @@
 #let body-leading = 1.35em              // double spacing at 12 pt (EB Garamond line box is 0.65em)
 #let single-leading = 0.5em
 #let para-indent = 0.5in
-#let caption-left = 3.4in               // width of the party column of the caption
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -51,7 +50,7 @@
 #let heading-block(level, text-md) = {
   let t = text-md.replace(regex("^#+\\s*"), "").trim()
   if level == 1 {
-    align(center, block(above: 18pt, below: 12pt, sticky: true, text(weight: "bold", upper(t))))
+    align(center, block(above: 18pt, below: 12pt, sticky: true, text(weight: "bold", underline(upper(t)))))
   } else if level == 2 {
     block(above: 12pt, below: 12pt, sticky: true, text(weight: "bold", t))
   } else {
@@ -97,14 +96,6 @@
 // Cover: counsel, court title, caption, title of the paper
 // ---------------------------------------------------------------------------
 
-#let counsel-block(meta) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
-  for line in meta.counsel {
-    inl(line)
-    linebreak()
-  }
-}
-
 #let court-title() = {
   set par(leading: single-leading, spacing: 0pt, justify: false)
   align(center, text(weight: "bold", [UNITED STATES BANKRUPTCY COURT])) + linebreak()
@@ -112,31 +103,16 @@
   v(12pt)
 }
 
-/// The caption: the debtor and the case number. A contested motion may name the movant and respondent
-/// in the same left column when the frontmatter gives them.
+/// The caption, as the filed exemplar sets it: no boxes. "IN RE:" and the debtor names on the left, with
+/// "CASE NO." beside the first name; the role (DEBTORS.) on the left with "CHAPTER" on the right.
 #let caption(meta) = {
   set par(leading: single-leading, spacing: 0pt, justify: false)
-  block(width: 100%, grid(
-    columns: (caption-left, 1fr),
-    column-gutter: 0.2in,
-    block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 8pt), {
-      text(weight: "bold", [IN RE:])
-      v(4pt)
-      for n in meta.debtor.names {
-        inl(n)
-        linebreak()
-      }
-      v(4pt)
-      inl(meta.debtor.role)
-    }),
-    block(inset: (left: 0.2in), {
-      [CASE NO. #meta.case_number]
-      if "chapter" in meta.debtor {
-        linebreak()
-        [Chapter #meta.debtor.chapter]
-      }
-    }),
-  ))
+  let cells = ([IN RE:], [])
+  for (i, n) in meta.debtor.names.enumerate() {
+    cells += (inl(n), if i == 0 [CASE NO. #meta.case_number] else [])
+  }
+  cells += (inl(meta.debtor.role), if "chapter" in meta.debtor [CHAPTER #meta.debtor.chapter] else [])
+  grid(columns: (1fr, auto), column-gutter: 0.5in, row-gutter: 6pt, ..cells)
   v(12pt)
 }
 
@@ -152,16 +128,53 @@
       set par(leading: single-leading, spacing: 0pt, justify: false)
       [Respectfully submitted,]
       v(18pt)
-      inl(s.firm)
+      text(weight: "bold", inl(s.firm))
       v(18pt)
-      [By: /s/ #upper(s.signer)]
+      [By: #underline[#emph[#s.signer]]]
       linebreak()
-      for line in s.lines {
+      h(0.5in)
+      [#s.title]
+    }))
+  })
+}
+
+/// "OF COUNSEL" block: flush left after the signature, as in the filed exemplar.
+#let of-counsel(meta) = {
+  if meta.counsel.len() > 0 {
+    block(width: 100%, breakable: false, {
+      set par(leading: single-leading, spacing: 0pt, justify: false)
+      v(18pt)
+      [OF COUNSEL:]
+      linebreak()
+      for line in meta.counsel {
         inl(line)
         linebreak()
       }
-    }))
-  })
+    })
+  }
+}
+
+/// A footnote paragraph written as a "[^n]: text" chunk: the note number, then the text at 10 pt.
+#let footnote-note(c) = {
+  let m = c.match(regex("^\\[\\^(\\d+)\\]:\\s*"))
+  let mark = ("¹", "²", "³", "⁴", "⁵").at(int(m.captures.at(0)) - 1)
+  set par(leading: single-leading, spacing: 0pt, justify: false)
+  block(above: 6pt, below: 6pt, text(size: 10pt, [#mark #inl(c.slice(m.end))]))
+}
+
+/// One body chunk: a heading, a footnote note, a lettered list, numbered paragraphs, or a prose paragraph.
+#let render-chunk(c) = {
+  if c.starts-with("#") {
+    heading-block(c.match(regex("^#+")).text.len(), c)
+  } else if c.starts-with("[^") {
+    footnote-note(c)
+  } else if c.match(regex("^-\\s")) != none {
+    lettered(c)
+  } else if c.match(regex("^\\d+\\.\\s")) != none {
+    numbered(c)
+  } else {
+    prose(inl(c))
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -177,23 +190,22 @@
   set text(font: font-family, size: type-size, lang: "en")
   set par(leading: body-leading, justify: false, spacing: 0pt)
 
-  counsel-block(meta)
-  v(18pt)
   court-title()
   caption(meta)
   align(center, block(above: 6pt, below: 18pt, text(weight: "bold", upper(meta.title))))
 
-  for c in chunks(body) {
-    if c.starts-with("#") {
-      heading-block(c.match(regex("^#+")).text.len(), c)
-    } else if c.match(regex("^-\\s")) != none {
-      lettered(c)
-    } else if c.match(regex("^\\d+\\.\\s")) != none {
-      numbered(c)
-    } else {
-      prose(inl(c))
-    }
+  // The certificate of service is filed after the signature and OF COUNSEL block, so it is held back
+  // and printed last.
+  let all = chunks(body)
+  let cut = all.position(c => c.match(regex("^#\\s*CERTIFICATE OF SERVICE\\s*$")) != none)
+  let main = if cut == none { all } else { all.slice(0, cut) }
+  let tail = if cut == none { () } else { all.slice(cut) }
+  for c in main {
+    render-chunk(c)
   }
-
   signature(meta)
+  of-counsel(meta)
+  for c in tail {
+    render-chunk(c)
+  }
 }
