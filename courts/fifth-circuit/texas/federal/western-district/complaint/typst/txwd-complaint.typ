@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; the only font the repo ships
+#let font-family = "EB Garamond"        // CV-10 names no face; vendored in fonts/ (docs/FONTS.md: no face named)
 #let type-size = 13pt                   // CV-10(a): 12-point or larger. 13 pt because EB Garamond sets smaller than Times 12
 #let body-leading = 1.35em              // double spacing: the line box is 0.65em, so this gives a 2.0em (26 pt) pitch
 #let single-leading = 0.55em            // single spacing (caption, signature, headings): a 1.2em line pitch (line box 0.65em + leading)

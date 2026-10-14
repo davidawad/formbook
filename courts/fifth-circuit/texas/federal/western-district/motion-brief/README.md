@@ -7,9 +7,10 @@ Folder: `courts/fifth-circuit/texas/federal/western-district/motion-brief/`.
 |---|---|
 | exemplar | yes, one filer: `exemplars/FILED-EXAMPLE-lulac-1-26-cv-00729-motion-brief.pdf` (Dallas County Election Administrator's Rule 12 motion and brief, 22 pages). See `exemplars/SOURCE.md`. The second-filer check is not met: see gap 1. |
 | sample md | `samples/INPUT-lulac-rule-12-motion-to-dismiss.md` (an excerpt: cover, table of contents, introduction, grounds, argument A, B.1 to B.3, part of C, prayer, signature block, certificate of service). |
-| render | ok: `samples/OUTPUT-lulac-rule-12-motion-to-dismiss.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings. |
-| overlay | ok: `samples/OVERLAY-lulac-rule-12-motion-to-dismiss.pdf` and `.txt` (see "Overlay"). |
-| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed on the final build). |
+| typeface | face required: none (CV-10(a) names no face). Substitute: none needed; **EB Garamond** kept (`docs/FONTS.md`, "No face named"). Embedded: EB Garamond Regular and Bold only (`pdffonts`, 2026-10-14). |
+| render | ok: `samples/OUTPUT-lulac-rule-12-motion-to-dismiss.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14). |
+| overlay | ok: `samples/OVERLAY-lulac-rule-12-motion-to-dismiss.pdf` and `.txt` (see "Overlay"), regenerated 2026-10-14 against `exemplars/FILED-EXAMPLE-lulac-1-26-cv-00729-motion-brief.pdf`. That PDF was missing from the checkout and was fetched from the URL in `exemplars/SOURCE.md`. |
+| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed on the final build; all 14 viewed again on the 2026-10-14 re-render). |
 | gates | `tools/check.sh` not run: it expects a court folder with `court.json` and `rules.md`, which this doc-type folder does not have, and the brief forbids editing `tools/`. |
 
 ## Governing rules
@@ -84,7 +85,7 @@ Reviewed pages: 14 of 14.
 4. **Footnotes.** The exemplar has footnotes (for example, the note on Administrator Adams's title and the note on Secretary Nelson's resignation). They are omitted from the sample. The template has no footnote rule; CV-10(a) requires 12 pt or larger for footnotes, which 13 pt satisfies, but the footnote layout is untested.
 5. **Front matter numbering.** The exemplar numbers the cover and contents with Roman numerals (the TOC is page iii onward in the filing); the render numbers every page in Arabic. No rule requires either.
 6. **Justification.** Body text is left-aligned (ragged right). The exemplar's justification could not be read from the text layer; not asserted.
-7. **Font.** EB Garamond (vendored, OFL), 13 pt. The exemplar is Times New Roman 12 pt. The choice follows the brief (vendored fonts only). CV-10 does not name a font.
+7. **Font.** EB Garamond (vendored, OFL), 13 pt. The exemplar is Times New Roman 12 pt, but CV-10(a) names no face (it requires only "12-point or larger"), so no court-named substitute applies and EB Garamond is kept (`docs/FONTS.md`, "No face named"). Visual-only comparison with the exemplar's Times; not metric-compatible with it, so line breaks differ.
 8. **Headings.** Level 2 and 3 headings are single-spaced and kept with the text after them, which CV-10(a) allows for headings.
 9. **Page limit not counted.** CV-7(c)(2) sets 20 pages for this motion, excluding caption, signature and certificate. The template does not count; the sample's body is 11 pages.
 10. **Dated line.** The exemplar has no "Dated" line; its certificate carries the filing date ("on 12 June 2026"). The template prints a "Dated" line only if the frontmatter has a `date`, which this sample omits.
