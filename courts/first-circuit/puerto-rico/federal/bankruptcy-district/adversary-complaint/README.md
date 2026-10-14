@@ -18,6 +18,7 @@ Local rules text is from the court's "Local Bankruptcy Rules" compilation (PRLBR
 | LBR 5005-4(b)(2)(C)(ii) | An electronic signature is the filer's name preceded by "/s/". | `signature-block()`: prints `/s/ ` before the signer's name. |
 | LBR 7003-1 | With the complaint, counsel files the AO Form B 1040 cover sheet. | Not templated (a separate filing; see gap 5). |
 | LBR 7004-2 | The clerk issues a summons on the LBF D form; it is not part of the complaint. | Not templated (a separate filing). |
+| Typeface (fonts pass, 2026-10-14) | Face required: **none named** in the PR bankruptcy LBRs (2013 compilation, PRLBRs-2013, and the LBR 1005-1 text checked by search; no typeface or size clause found). LBR 1001-1(b) falls back to the District Court's local civil rules for matters not covered; their Local Rule 10 text was not retrieved, so this is OPEN. Vendored substitute: **none needed**; keeps **EB Garamond** (`docs/FONTS.md`, "No face named"). Metric fit: n/a. | `font-family` in `prb-adversary-complaint.typ`. |
 
 ## What the overlay shows
 
