@@ -111,12 +111,15 @@
         }
       ]
     ],
-    // Right: case number and judge initials, chapter, adversary number.
+    // Right: case number and judge initials, chapter (directly under the case number), adversary number.
     [
       #pad(left: 0.3in)[
-        Case No. #need(meta, "case_number")#if "judge" in meta and meta.judge != "" [-#meta.judge]
-        #v(1.2em)
-        Chapter #need(meta, "chapter")
+        #stack(
+          dir: ttb,
+          spacing: single-leading,
+          [Case No. #need(meta, "case_number")#if "judge" in meta and meta.judge != "" [-#meta.judge]],
+          [Chapter #need(meta, "chapter")],
+        )
         #v(1.2em)
         Adv. Proc. No. #need(meta, "adversary_number")
       ]
