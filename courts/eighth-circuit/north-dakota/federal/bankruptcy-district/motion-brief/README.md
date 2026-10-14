@@ -40,7 +40,7 @@ No type-size, margin, or spacing rule appears in the 2023 bankruptcy local rules
 
 ## Layout choices (not set by a rule we could read)
 
-- **Type:** EB Garamond 12 pt (vendored; the only typeface in `fonts/`). The exemplar is Times New Roman 12 pt.
+- **Type:** EB Garamond 12 pt (vendored). Typeface row (fonts pass, 2026-10-14): face required by the rules = none (FRBP 9013, FRCP 10, FRBP 9004 and the 2023 bankruptcy local rules name no face); substitute = none, so EB Garamond is kept by policy (`docs/FONTS.md` "No face named"). The exemplar is Times New Roman 12 pt; a filer's choice is not a rule, so it is not chased (tier 2 at most). Court site not reachable on 2026-10-14 (HTTP 500), so the District general rules remain unverified.
 - **Spacing:** body pitch 27.6 pt (Word's double spacing for 12 pt Times New Roman, 2 x 13.8 pt); `body-leading = pitch - 0.65em` gives that pitch with EB Garamond. Caption and signature are single spaced.
 - **Margins:** 1 inch; page number centered at the foot of each page.
 - **Caption:** as in `../adversary-complaint/README.md`: court name on two lines, debtor block ("In re:"), parties with "v.", a column of ")" marks, case number, chapter and adversary number at the right. The exemplar puts the title in the right-hand caption column; the template centers it below the caption, a common alternative. Recorded as a tier-2 choice.
@@ -79,7 +79,7 @@ The overlay is a diagnostic, not a score. The lower overlap on pages 7 to 10 com
 
 ## Known gaps and open choices
 
-1. **Typeface.** As in the adversary complaint: EB Garamond is substituted for the exemplar's Times New Roman, because it is the only vendored font.
+1. **Typeface.** As in the adversary complaint: EB Garamond is kept for the exemplar's Times New Roman. A vendored Times-metric substitute exists (`Liberation Serif`, `docs/FONTS.md`), but no rule we could read names Times, so switching is a filer-convention choice, not a rule fix (fonts pass, 2026-10-14).
 2. **One filer only.** Tier 2 asks for 2 or 3 filers. Other ND bankruptcy memoranda in CourtListener RECAP were looked at (Ahlgren v. Berg, 24-07014, a motion to dismiss party, 3 pages; Generations on 1st v. Red River, 25-07009, an exhibit of unpublished cases); none was a 10-page memorandum with a filer whose format could be compared, so none is saved. Tier 2 is therefore **not** judged against two filers.
 3. **Page limit not enforced.** The template does not count pages. The sample is 10 pages against a 20-page limit (L.R. 7007-1(B), non-dispositive). A dispositive motion has a 40-page limit with 25 pages of argument; a different template setting would be needed only if the motion were dispositive, which the template does not detect.
 4. **Notice and proposed order.** D.N.D. Bankr. L.R. 7007-1(C) requires the notice of motion to state the number of days to respond (14 days under 9013-1(A)). The notice, the motion (Doc 35 in the exemplar's docket), and any proposed order are separate filings and are not produced.
