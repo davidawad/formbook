@@ -6,6 +6,7 @@ Folder: `courts/eighth-circuit/south-dakota/federal/bankruptcy-district/adversar
 | Item | Status |
 |---|---|
 | exemplar | yes: 3 real filings from 3 different filers, see `exemplars/SOURCE.md`. Primary: `exemplars/FILED-EXAMPLE-chase-abrams-08-05003-adversary-complaint.pdf` (creditor). Also `…richards-14-01006…` (debtors) and `…pierce-bekuto-11-04028…` (trustee). |
+| typeface | **No face required; EB Garamond kept.** Bankr. D.S.D. R. 9004-1(a)(1) (June 2024 local rules, text checked with `pdftotext`) requires "one simple font" and names no face. The only face named in the local rules is Appendix 1F's creditor-mailing-list bullet ("Universal, Times New Roman, or Courier"), which governs the mailing list, not this document. So no substitute from `docs/FONTS.md` is needed: the template keeps EB Garamond (the "No face named" row). Fit: n/a. Re-checked 2026-10-14 (fonts pass, `fb-595.7.5.21`). |
 | sample md | `samples/INPUT-chase-abrams.md`: transcribed from the primary exemplar (all of it: caption, three headings, 16 allegations, the prayer, the signature). `samples/INPUT-fictional-joint-debtors.md`: FICTIONAL, for structure (joint debtors, fka, two plaintiffs, two defendants, two claims under different subsections, a 4-item prayer). |
 | render | ok: `samples/OUTPUT-chase-abrams.pdf` (2 pages) and `samples/OUTPUT-fictional-joint-debtors.pdf` (2 pages). typst 0.15.0, `tools/render.sh`, vendored EB Garamond only (pdffonts: EBGaramond-Regular and -Bold, embedded), zero typst warnings. |
 | overlay | ok: `samples/OVERLAY-chase-abrams.pdf` and `samples/OVERLAY-chase-abrams.txt` (page map: p.1 ↔ p.1 80.2 %, p.2 ↔ p.2 74.3 % word overlap; a diagnostic, not a score). |
@@ -76,8 +77,8 @@ Markdown contract (frontmatter; the body is blank-line-separated chunks):
 
 Reviewed after the last change, every page of each PDF, at 60 dpi, next to the exemplar pages where they correspond. sha256 of the reviewed PDFs (the review is stale if these change):
 
-- `samples/OUTPUT-chase-abrams.pdf`: `b466466dfc3e5d638a7224a0e888819bc9706fb92f96b3cd87d0b59118b65de8`
-- `samples/OUTPUT-fictional-joint-debtors.pdf`: `db23cc668bc4182cee68e986f8cb30e5f90f35ac3d4e73904cdb6b3741c2ffe3` (rendered once more after the consent line was added; the hash above is from that render. Recheck with `sha256sum` before landing.)
+- `samples/OUTPUT-chase-abrams.pdf`: `c5b24368c4095ddaf1a09acf672198d9b1ff8d183e078ab3a0d196b21920229c` (re-rendered 2026-10-14 with typst 0.15.0; same 2 pages, same text; the bytes differ from the earlier render only in the PDF's timestamps)
+- `samples/OUTPUT-fictional-joint-debtors.pdf`: `a60daa41ac0c34e003a5211618d91ba6bee21a8b631de7d664ff5bd6f6426d84` (re-rendered 2026-10-14; the consent line from the earlier review is present. Recheck with `sha256sum` before landing.)
 
 ### sample chase-abrams (transcribed)
 
