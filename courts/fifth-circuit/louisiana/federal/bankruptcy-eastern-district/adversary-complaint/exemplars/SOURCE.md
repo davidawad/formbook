@@ -1,0 +1,19 @@
+# Exemplar source: adversary complaint, Bankr. E.D. La.
+
+| Item | Value |
+|---|---|
+| File | `FILED-EXAMPLE-babin-crescent-24-01028-adversary-complaint.pdf` (19 pages; the complaint begins on PDF page 3 after the Form B1040 cover sheet on pages 1-2) |
+| Court | United States Bankruptcy Court, Eastern District of Louisiana (`laeb`) |
+| Case | *Babin, Jr. v. Crescent Drilling & Production, Inc.*, Adv. Proc. No. 24-01028, in *In re Martin Energy, LLC*, No. 23-10898 (Chapter 7), Section A (Judge Grabill) |
+| Document | Complaint (ECF Doc. 1 in the adversary), with Adversary Proceeding Cover Sheet (Form B1040) and Exhibit A (MSA) |
+| Filer | Wilbur J. "Bill" Babin, Jr., solely as Chapter 7 Trustee; counsel Patrick S. Garrity and Albert J. Derbes, IV (The Derbes Law Firm, LLC) and Charles Blaize (Fondren Blaize Law Firm) |
+| Date filed | 2024-09-30 (entered 09/30/24 16:43:45 per the ECF stamp) |
+| Source URL | https://storage.courtlistener.com/recap/gov.uscourts.laeb.204467/gov.uscourts.laeb.204467.1.0.pdf (RECAP archive) |
+| Docket page | https://www.courtlistener.com/docket/69216738/1/martin-energy-llc-adversary-proceeding/ |
+| How found | CourtListener search API, `type=r`, `court=laeb`, query "adversary proceeding" complaint; the entry shows the document as RECAP-available with text |
+| Date fetched | 2026-10-14 |
+| Text layer | Yes: `pdftotext` yields the full text |
+
+Public court record (RECAP). The filer is a Chapter 7 trustee's counsel, so the filing is a representative complaint in a pending adversary.
+
+Other candidates found and not saved (the brief asks for one exemplar per doc type): *Crosby Tugs, L.L.C. v. Pelican Marine Logistics, LLC*, Adv. No. 26-01083, complaint filed 2026-10-12 (6 pages, RECAP `gov.uscourts.laeb.211046.1.0.pdf`); *Brown v. Burmaster*, Adv. No. 23-01032 (5 pages, `gov.uscourts.laeb.202033.1.0.pdf`). Tier 2 of EVAL-LOOP asks for 2 or 3 filers; see README.md.
