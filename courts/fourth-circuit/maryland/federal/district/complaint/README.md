@@ -6,9 +6,10 @@ Doc type: **complaint** (original complaint) in the United States District Court
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-grecco-1-26-cv-03723-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-grecco-complaint.md` (about two-thirds of the 16-page filing's text, the rest omitted paragraph by paragraph; see the sample's frontmatter) |
-| render | ok: `samples/OUTPUT-grecco-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
-| overlay | ok: `samples/OVERLAY-grecco-complaint.pdf` and `samples/OVERLAY-grecco-complaint.txt` |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | Rule names Times New Roman (LR-102.2.b, "Times New Roman or larger typeface"). Substitute: **Liberation Serif** (vendored; metric-compatible per `docs/FONTS.md`, not checked against a Times New Roman file on this box). Text 12 pt, footnotes 10 pt. |
+| render | ok: `samples/OUTPUT-grecco-complaint.pdf`, 11 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: `LiberationSerif`, `LiberationSerif-Bold`), no warnings |
+| overlay | ok: `samples/OVERLAY-grecco-complaint.pdf` and `samples/OVERLAY-grecco-complaint.txt`, against the filed exemplar fetched from the RECAP URL in `exemplars/SOURCE.md` and checked against its SHA-256 (the exemplar PDF is not committed in this snapshot; it is passed to `tools/overlay.sh` as the third argument) |
+| pages reviewed | 11 of 11 (every page rendered at 70 dpi and viewed after the last template change) |
 | render command | `sh tools/render.sh courts/fourth-circuit/maryland/federal/district/complaint samples/INPUT-grecco-complaint.md` |
 | overlay command | `sh tools/overlay.sh courts/fourth-circuit/maryland/federal/district/complaint grecco-complaint` |
 
@@ -24,7 +25,7 @@ Primary sources, fetched 2026-10-14:
 | ID | Rule | Requirement (quoted or closely paraphrased) | Where it lives |
 |---|---|---|---|
 | LR-102.2.a | D. Md. L.R. 102.2.a | The short caption (first plaintiff and first defendant) applies to all court documents, *except* the original complaint, which "shall contain the names and addresses of all parties and the county of residence of any Maryland party." | `caption()`: every party needs `address`; a Maryland address needs `county` (checked, panics) |
-| LR-102.2.b | D. Md. L.R. 102.2.b | 8½ × 11 inch paper, one-inch margin on all sides; lines double-spaced except quotations and footnotes; "Pages shall be numbered at the bottom of every page after the first page"; at least 12-point text and 10-point footnotes "in Times New Roman or larger typeface." | `margins`, `line-pitch` (27.6 pt), `page-footer` (no number on page 1), `type-size` 13 pt, `footnote-size` 11 pt (see Known gaps 1) |
+| LR-102.2.b | D. Md. L.R. 102.2.b | 8½ × 11 inch paper, one-inch margin on all sides; lines double-spaced except quotations and footnotes; "Pages shall be numbered at the bottom of every page after the first page"; at least 12-point text and 10-point footnotes "in Times New Roman or larger typeface." | `margins`, `line-pitch` (27.6 pt), `page-footer` (no number on page 1), `font-family` Liberation Serif, `type-size` 12 pt, `footnote-size` 10 pt, `body-leading` set so double-spaced lines are 27.6 pt (Known gaps 1) |
 | LR-102.1.b.i | D. Md. L.R. 102.1.b.i | "At the bottom of all court documents, counsel … shall state their name, address, telephone number, email and fax number. Counsel shall also state their bar number." | `signature-block()` (panics if any of name, bar, firm, address, phone, fax, email, role is missing) |
 | LR-102.1.c | D. Md. L.R. 102.1.c | Proof of service: "all court documents other than the original complaint must bear a signed certificate." | Not applicable to the complaint; no certificate is generated |
 | LR-103.1.c | D. Md. L.R. 103.1.c | "Any pleading that states a claim for relief shall set forth each count separately and provide a clear statement of the supporting facts for each count." | Author content: each count is a `# … CAUSE OF ACTION` heading |
@@ -53,11 +54,11 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Overlay
 
-`samples/OVERLAY-grecco-complaint.pdf`: red = our render, blue = the filed exemplar, black = both. Pages are paired by word overlap, as the tool does. The pairing is coarse here: the sample skips filed paragraphs (see the frontmatter), so later sample pages pair with later filed pages that share the most words (ours p.8 with filed p.11, ours p.9 with filed p.13, ours p.10 to p.12 with filed p.15-16). Word overlap is 40-65%. The overlay is a diagnostic, not a score; the visible differences that matter are the caption (the filed caption has no party addresses, LR-102.2.a) and the paragraph numbers (the filed numbers are not transcribed).
+`samples/OVERLAY-grecco-complaint.pdf`: red = our render, blue = the filed exemplar, black = both. Pages are paired by word overlap, as the tool does. The pairing is coarse here: the sample skips filed paragraphs (see the frontmatter), so later sample pages pair with later filed pages that share the most words (ours p.5 with filed p.6, ours p.8 with filed p.11, ours p.9 with filed p.13, ours p.10 with filed p.15, ours p.11 with filed p.16). Word overlap is 38-61%. The overlay is a diagnostic, not a score; the visible differences that matter are the caption (the filed caption has no party addresses, LR-102.2.a) and the paragraph numbers (the filed numbers are not transcribed).
 
 ## Known gaps and open choices
 
-1. **Font and size (LR-102.2.b).** The rule asks for 12-point text "in Times New Roman or larger typeface." The only vendored font is EB Garamond (`fonts/`), and the rule forbids system fonts. At 13 pt, EB Garamond's cap height (0.65 em) matches Times New Roman's at 12 pt (0.66 em), and its x-height (0.40 em × 13 = 5.2 pt) is within 3% of Times New Roman's at 12 pt (about 5.4 pt). Footnotes are 11 pt on the same reasoning (Times 10 pt). Whether this reading is accepted is a **question for David** (a vendored Times-metric font would remove the difference).
+1. **Font and size (LR-102.2.b).** The rule asks for 12-point text and 10-point footnotes "in Times New Roman or larger typeface." The template now sets Liberation Serif (the `docs/FONTS.md` substitute for Times New Roman) at exactly the rule's 12 pt, with 10 pt footnotes. The earlier 13 pt EB Garamond was a stand-in for Times at 12 pt and is retired, since the rule's own size applies to the Times-named face. Effects: the body leading was re-measured for Liberation Serif's line box (double-spaced pitch 27.6 pt, single 13.9 pt, both from `pdftotext -bbox`), and the render went from 12 pages to 11. Liberation Serif is metric-compatible with Times New Roman per `docs/FONTS.md`; that metric claim is the vendored family's, not checked here against a Times New Roman file.
 2. **Caption addresses (LR-102.2.a).** The filed caption lists names only. The rule requires names and addresses of all parties, and the county of a Maryland party. The template enforces this; the sample adds the addresses the complaint itself gives (¶ 9 for the plaintiff; ¶¶ 16 and 20 for New Century and Taylor) and "Frederick County, Maryland" for Taylor: the complaint gives Frederick, Maryland (¶ 20) and does not name the county, so the county is inferred from the city and should be confirmed. For New Century the only address in the complaint is its registered agent's; it is given as such. This is the most visible difference from the exemplar, and the exemplar is not a tier-1 model on this point.
 3. **One exemplar only.** EVAL-LOOP tier 2 asks for two or three filers. The search and the candidates not saved (Yukich v. USA Fencing, Mestek v. 1987 Machinery) are in `exemplars/SOURCE.md`.
 4. **Partial sample.** The filed text runs to paragraph 97; the sample transcribes about two-thirds of it (the omitted paragraphs are listed in the sample's frontmatter). Images in the filed document (the photograph and the screenshot) are omitted; the text around them is kept.
@@ -71,17 +72,16 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Court title, caption (two parties, addresses, county, "Case No." line), "COMPLAINT", start of the lead-in | OK. No page number (LR-102.2.b). |
-| 2 | Lead-in end, I. INTRODUCTION, ¶¶ 1-8 | OK. Number "2" at the foot. |
+| 1 | Court title, caption (two parties, addresses, county, "Case No." line), "COMPLAINT", the lead-in paragraph | OK. No page number (LR-102.2.b). About 1 in of blank at the foot: I. INTRODUCTION moves to page 2 with its first paragraph (keep-with-next). |
+| 2 | I. INTRODUCTION, ¶¶ 1-8 | OK. Number "2" at the foot. About 1 in of blank at the foot: II. PARTIES moves to page 3 with ¶ 9 (keep-with-next). ACCEPTED: layout, not a rule point. |
 | 3 | II. PARTIES, ¶¶ 9-16 | OK. |
 | 4 | ¶¶ 17-25; III. JURISDICTION, VENUE, AND DIVISIONAL ASSIGNMENT; IV. FACTUAL ALLEGATIONS, A | OK. |
 | 5 | ¶¶ 26-34 | OK. |
 | 6 | ¶¶ 35-41; B. heading | OK. |
-| 7 | ¶¶ 42-50; C. heading (two lines, hanging) | OK. |
-| 8 | ¶¶ 51-58; FIRST CAUSE OF ACTION and its sub-title | OK. |
-| 9 | ¶¶ 59-64; SECOND CAUSE OF ACTION and its sub-title | OK. |
-| 10 | ¶¶ 65-66; VI. PRAYER FOR RELIEF, WHEREFORE paragraph, items (a)-(b) | OK. |
-| 11 | Prayer items (c)-(g) | OK. |
-| 12 | VII. DEMAND FOR JURY TRIAL (unnumbered), signature block (kept with the demand) | OK. |
+| 7 | ¶¶ 42-51; C. heading | OK. |
+| 8 | ¶¶ 52-59 (¶ 59 begins); FIRST CAUSE OF ACTION and its sub-title | OK. |
+| 9 | ¶ 59 (continued), ¶¶ 60-64; SECOND CAUSE OF ACTION and its sub-title | OK. |
+| 10 | ¶¶ 65-66; VI. PRAYER FOR RELIEF, WHEREFORE paragraph, items (a)-(c) | OK. |
+| 11 | Prayer items (d)-(g); VII. DEMAND FOR JURY TRIAL (unnumbered); signature block | OK. |
 
-Reviewed pages: 12 of 12.
+Reviewed pages: 11 of 11 (rendered at 70 dpi, viewed as 2×2 montages after the last template change; the montages are in `/work/artifacts/review`, outside the repo).
