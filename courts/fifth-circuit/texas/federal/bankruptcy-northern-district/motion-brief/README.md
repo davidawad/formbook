@@ -7,6 +7,7 @@ Exemplar: Shook adversary 26-03089 (Bankr. N.D. Tex., Dallas Division), Doc 9, "
 
 | Item | Status |
 |---|---|
+| typeface | face required: none (L.B.R. revised 12/1/2025 and 12/1/16 name no face for motions or briefs). Substitute: none; **EB Garamond** kept (`docs/FONTS.md`, "No face named"). Metric note: none needed. |
 | exemplar | yes: `exemplars/FILED-EXAMPLE-ruxton-v-shook-26-03089-motion-brief.pdf` (the whole 9-page filing, text layer present) |
 | sample md | `samples/INPUT-ruxton-v-shook.md`: a transcription of the whole filing: caption, counsel block, the body (sections I to IX), the signature, the certificate of conference and the certificate of service |
 | render | ok: `tools/render.sh` (typst 0.15.0, vendored EB Garamond only, no warnings) writes `samples/OUTPUT-ruxton-v-shook.pdf`, 8 pages |
@@ -31,7 +32,7 @@ Primary sources, fetched 2026-10-14:
 | L.B.R. 7007-2(d) | A brief over 10 pages shall contain (1) a table of contents with page references and (2) an alphabetically arranged table of authorities with page references. | Table of contents: generated from the headings when `toc: true`. Table of authorities: not generated (see Known gaps). |
 | L.B.R. 9013-1(b)(5) | A complete paper copy of a motion to dismiss under Fed. R. Bankr. P. 7012 is to be delivered within 24 hours of electronic filing, unless the Presiding Judge orders otherwise. | Not a template element; a filing step to note. |
 
-No font, margin or line-spacing rule for motions was found in the N.D. Tex. bankruptcy local rules (the copy above). The mailing-matrix type rule (10 to 14 pt, Courier, Times Roman, Helvetica or Orator) is for the matrix in a complex Chapter 11 case and is not applied here.
+No font, margin or line-spacing rule for motions was found in the N.D. Tex. bankruptcy local rules (the copy above). The 12/1/2025 revision (`TXNB Local Rules (Revised 12-1-2025)`, read 2026-10-14 from its PDF text) was also checked: no typeface, font size or spacing rule appears in L.B.R. 5005-1, 7007-1, 7007-2 or 9013-1, so the face is not court-named and the template keeps EB Garamond. The mailing-matrix type rule (10 to 14 pt, Courier, Times Roman, Helvetica or Orator) is for the matrix in a complex Chapter 11 case and is not applied here.
 
 The local rules copy is dated "Revised 12/1/16". A later revision may exist on the court's site; this run did not find one. Recheck before filing.
 
@@ -62,7 +63,7 @@ The local rules copy is dated "Revised 12/1/16". A later revision may exist on t
 4. **Page limit not enforced.** L.B.R. 7007-2(c) allows 25 pages, excluding the table of contents and authorities. The template does not count body pages or fail the build past 25.
 5. **Proposed order not generated.** L.B.R. 7007-1(c) requires it as a separate exhibit. It is a separate document, to be drafted separately.
 6. **Certificate of conference.** L.B.R. 7007-1(a) exempts motions to dismiss from the conference requirement. The template writes a certificate only when the frontmatter gives one, so a motion to dismiss can omit it.
-7. **Font.** No font rule was found for motions, so EB Garamond at 12 pt (the only vendored font) is used. It is smaller in apparent size than Times New Roman at 12 pt.
+7. **Font.** No typeface rule was found for motions in either the 2016 or the 2025 local-rules text, so the face is not court-named and EB Garamond at 12 pt is kept (`docs/FONTS.md`, "No face named"). It is smaller in apparent size than Times New Roman at 12 pt. Re-check if the court names a face in a later revision.
 8. **Output PDFs.** `samples/OUTPUT-ruxton-v-shook.pdf` and `samples/OVERLAY-ruxton-v-shook.pdf` (with `.txt`) are written where the tools put them. Regenerate with `sh tools/render.sh <this-folder> samples/INPUT-ruxton-v-shook.md` and `sh tools/overlay.sh <this-folder> ruxton-v-shook`.
 9. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and `tools/` is out of scope for this box. The gates were not run.
 10. **Signature block.** The template prints "Respectfully submitted," above the firm name; the filing's block is the same in substance. The filing's certificate of conference is written in the template's single-spaced certificate style.
