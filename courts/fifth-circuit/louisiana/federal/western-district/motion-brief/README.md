@@ -6,6 +6,7 @@ Folder: `courts/fifth-circuit/louisiana/federal/western-district/motion-brief/`.
 | Item | Status |
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-lewis-harris-county-1-26-cv-00172-motion-brief.pdf` (1 filer, see `exemplars/SOURCE.md`) |
+| typeface | face required: none (LR 7.1, 7.8 and 10.1 name no face or size, checked 2026-10-14). Vendored substitute: none needed, EB Garamond kept (`"EB Garamond"`, the no-face default in `docs/FONTS.md`). Fit: n/a. The filed exemplar is set in Times New Roman, which is a filer choice, not a rule. |
 | sample md | `samples/INPUT-lewis-motion-brief.md`: caption, opening, the TOC and TOA, filed pages 1 to 11 (Background, Law and Argument, Legal Standard, Part II.A and II.B), the conclusion, signature and certificate. Parts II.B (rest), II.C to II.F and Part III are a bracketed note. |
 | render | ok: `samples/OUTPUT-lewis-motion-brief.pdf`, 10 pages: caption, TOC, TOA, and 7 body pages (the last holds the signature and certificate), typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> samples/INPUT-lewis-motion-brief.md`) |
 | overlay | ok: `samples/OVERLAY-lewis-motion-brief.pdf` and `OVERLAY-lewis-motion-brief.txt` (`sh tools/overlay.sh <this dir> lewis-motion-brief`) |
@@ -48,7 +49,7 @@ Not produced: the motion itself, the proposed order (not required, LR 7.3), any 
 ## Known gaps and open choices
 
 1. **Table of authorities page references are typed, not generated.** The template does not find the pages where an authority is cited. The page references in the sample were taken from this sample's render (searched per body page), so they match this sample. They are not the filed pages, and they must be re-typed if the sample changes. A full brief needs generated references (a tier-1 gap for LR 7.8 on a complete filing); not solved here.
-2. **Font.** The same gap as `../complaint/README.md`: EB Garamond is the only vendored font, the exemplar is Times New Roman 12 pt. The text looks smaller than the exemplar.
+2. **Font.** The same finding as `../complaint/README.md`: the W.D. La. local rules name no typeface, so EB Garamond stays. The exemplar is Times New Roman 12 pt, and the text looks smaller than the exemplar. Switching to the vendored Liberation Serif is a question for David.
 3. **Footnotes.** The exemplar uses footnotes (references to the complaint, "Doc. 1, p. 23" and the like). The sample omits them (the markers are left out of the text), and the template does not render footnotes. Not tested whether cmarker renders `[^n]` footnotes; left as a gap.
 4. **Block quotations.** The exemplar's block quotations (the Armstrong and Webster passage at 60 F.4th 276) are single spaced; the template has no quotation directive, so a quotation would be double spaced. The sample replaces that quotation with a bracketed note.
 5. **Page limit.** LR 7.1 and 7.8 cap a memorandum at 25 pages, exclusive of tables. The template does not count pages. The exemplar is 15 pages of body text plus tables and certificate.

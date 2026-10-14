@@ -6,6 +6,7 @@ Folder: `courts/fifth-circuit/louisiana/federal/western-district/complaint/`.
 | Item | Status |
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-louisiana-dental-implant-lab-6-26-cv-00025-complaint.pdf` (1 filer, see `exemplars/SOURCE.md`) |
+| typeface | face required: none (LR 10.1 names no face or size, checked 2026-10-14). Vendored substitute: none needed, EB Garamond kept (`"EB Garamond"`, the no-face default in `docs/FONTS.md`). Fit: n/a. The filed exemplar is set in Times New Roman, which is a filer choice, not a rule. |
 | sample md | `samples/INPUT-ldil-complaint.md`: the whole filed text (9 pages), the comparison chart not transcribed |
 | render | ok: `samples/OUTPUT-ldil-complaint.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> samples/INPUT-ldil-complaint.md`) |
 | overlay | ok: `samples/OVERLAY-ldil-complaint.pdf` and `OVERLAY-ldil-complaint.txt` (`sh tools/overlay.sh <this dir> ldil-complaint`) |
@@ -45,7 +46,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Known gaps and open choices
 
-1. **Font.** The rule set names no font and no size, and EB Garamond is the only font vendored in `fonts/`. The exemplar is Times New Roman 12 pt. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the exemplar. Whether a larger size is wanted is a question for David (a vendored Times-metric font would remove the difference).
+1. **Font.** The W.D. La. local rules name no typeface and no point size (LR 10.1 asks for 8 1/2 x 11 paper, pagination and double spacing; the full text was searched on 2026-10-14). The template keeps EB Garamond, the no-face default in `docs/FONTS.md`. The filed exemplar is Times New Roman 12 pt, but a filer's choice does not make a court rule. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the exemplar. Whether to switch to the vendored Liberation Serif (Times New Roman metric substitute) to match the exemplar is a question for David.
 2. **Caption style.** The template uses the asterisk column (the style of the W.D. La. Alexandria filing in `../../motion-brief/`). The exemplar uses no asterisks (its party column is closed by `v.`). Both are seen in W.D. La. filings; recorded as ACCEPTED.
 3. **Judge lines.** The exemplar's caption has no judge names. LR 10.1 asks for the judges assigned, and a new complaint has none, so the template prints blank JUDGE lines. This follows the rule, not the exemplar.
 4. **Page count.** The exemplar is 9 pages; the render is 5. The 9 pages include a comparison chart (two pages, not transcribed) and the filing's own page breaks. The sample carries the full filed text.
