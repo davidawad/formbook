@@ -25,6 +25,12 @@ All on 2026-10-14. Nothing usable was found.
 6. Justia docket for *Imperial Pacific International (CNMI), LLC*, 1:24-bk-00002: HTTP 403. (The memorandum in `../motion-brief/` came from this case's Justia listing; the adversary complaints of this case were not listed in the three available documents.)
 7. CourtListener search and API for `court=nmib`, `type=r`: HTTP 403.
 8. Web search for the NMI bankruptcy court's adversary complaints in justia/scribd: returned the same general material.
+9. Second session, 2026-10-14. Direct fetches: CourtListener search page HTTP 403; CourtListener REST API timed out (no response); Justia `court/nmib` HTTP 403; the court's own site `nmib.uscourts.gov` does not resolve (the NMI district court is `nmid.uscourts.gov`, which hosts forms and the local rules only).
+10. Web search (standard and extended modes) for "Northern Mariana Islands" bankruptcy adversary complaint with adversary numbers 1:12-ap, 1:13-ap, 1:15-ap, 1:17-ap, 1:19-ap: no complaint text. Results were forms (B 416D, B 1040), the NMID local bankruptcy rules, and unrelated out-of-district complaints.
+11. inforuptcy.com docket pages for `1:12-bk-00003`, `1:24-bk-00002` (Imperial Pacific International (CNMI), LLC) and `1:17-bk-00001` (Saipan Sea Ventures): HTTP 403 to this box. Search snippets show no adversary complaint on those pages. The only adversary entries seen in snippets were the 2012 `1:12-ap-1` (closed) listing.
+12. Web search for a filed NMI bankruptcy complaint quoted in an opinion or appendix (Commonwealth Development Authority, Saipan): nothing. The one hit was a Leagle snippet for a different court's complaint, not tied to this court.
+
+Result of the search: no public, text-based filed adversary complaint from this court was found. Not reachable from this box: PACER, CourtListener, Justia dockets, inforuptcy dockets. Next step if David wants an exemplar: a PACER or CourtListener RECAP pull of an NMI adversary docket, from a box that can reach them.
 
 Not done: PACER's case locator (requires an account; not available to this box). A search by the adversary numbers on PACER is the next step if David wants an exemplar.
 
@@ -68,7 +74,7 @@ export PATH="$HOME/tb/bin:$PATH"
 sh tools/render.sh courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district/adversary-complaint samples/INPUT-synthetic-complaint.md
 ```
 
-The overlay command (`tools/overlay.sh`) exits 1 here: it needs `exemplars/*.pdf`. Nothing was produced.
+The overlay command (`sh tools/overlay.sh <court-dir>`) exits 2 here with `tools/overlay.sh: 16: 2: parameter not set` (2026-10-14, run for real): it needs `exemplars/*.pdf`. Nothing was produced.
 
 ## Visual review (Gate 2 record, all 3 pages, rendered at 60 dpi and viewed)
 
@@ -80,7 +86,7 @@ The overlay command (`tools/overlay.sh`) exits 1 here: it needs `exemplars/*.pdf
 
 Change log for this review: (1) text edges set to ascender/descender, as in the motion template (without them the line box was shorter and lines overlapped); (2) the sample's typed paragraph numbers removed (the template numbers them; typed numbers doubled); (3) the sub-heading changed from a bold paragraph (which was numbered) to a level-3 heading; (4) "v." removed from the sample's caption (Form 416D has none); (5) a line of space above the signature block.
 
-Reviewed pages: 3 of 3.
+Reviewed pages: 3 of 3. Re-rendered 2026-10-14 (second session, `tools/render.sh`, exit 0, 3 pages); all 3 pages rasterized at 60 dpi and viewed again. No template change in that session.
 
 ## Known gaps and open choices
 
