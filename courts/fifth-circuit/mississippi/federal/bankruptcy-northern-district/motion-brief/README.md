@@ -27,7 +27,17 @@ Not verified (not fetched on 2026-10-14; the template does not depend on them ye
 - **Fed. R. Bankr. P. 4001(a)(3)**, cited in the sample's relief (the fourteen-day stay). Cited from the exemplar text only; not fetched.
 
 Because the local rules were unreadable, the format is a **standard-letter default**, not a court requirement:
-- US Letter, 1-inch margins, 12-point EB Garamond (the only vendored font), double spaced, page number centered in the footer.
+- US Letter, 1-inch margins, 12-point EB Garamond (no face named by any rule read; see Typeface below), double spaced, page number centered in the footer.
+
+## Typeface
+
+| Item | Value |
+|---|---|
+| Face required | none found. Fed. R. Bankr. P. 9004(a) requires legibility only. The msnb local rule on form (Rule 9004-1, General Requirements of Form) could not be read: courtrules.net returned HTTP 403, and the msnb standing order adopting the amended local rules (eff. 3-1-26) is a scanned image with no text layer. |
+| Vendored substitute | `EB Garamond` (no court-named face to substitute; `docs/FONTS.md` "No face named") |
+| Fit | visual only, and the template's default |
+| Filer convention (not a rule) | the filed exemplar sets Times New Roman (embedded `TimesNewRomanPSMT`); the substitute for that would be `Liberation Serif` (metric-compatible). Not switched: a filer's choice does not make a rule. |
+| Open | If Rule 9004-1 or a local motion rule names Times New Roman, switch the font list to `Liberation Serif` and re-render; line counts should not change. |
 - The caption, paragraph layout and headings are the template's own choices.
 
 The filed exemplar is 14 pages, double spaced, with an ECF header line at the top of each page. The render is 13 pages and has no ECF header, which is why the overlay does not line up on the page edges.

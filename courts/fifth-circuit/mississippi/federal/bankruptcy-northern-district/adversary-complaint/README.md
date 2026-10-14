@@ -8,7 +8,7 @@ Folder: `courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district/a
 | exemplar | **no**: `BLOCKED: no exemplar`. See `exemplars/SOURCE.md` for the searches tried. |
 | sample md | `samples/INPUT-synthetic-adversary-complaint.md`. Synthetic content; not a transcription. |
 | render | ok: `samples/OUTPUT-synthetic-adversary-complaint.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | **fail (not run)**: `tools/overlay.sh` needs a filed PDF in `exemplars/`, and there is none |
+| overlay | ok: `samples/OVERLAY-community-bank-loancare.pdf` and `.txt` (`sh tools/overlay.sh`, 3 pages). The filed PDF was re-downloaded into `exemplars/` from the URL in `exemplars/SOURCE.md` (the saved copy was missing from this snapshot). |
 | pages reviewed | 3 of 3 (every page rendered at 60 dpi and viewed after the last template change) |
 
 ## Governing rules
@@ -27,7 +27,17 @@ Not verified (not fetched on 2026-10-14; the template does not depend on them ye
 - **N.D. Miss. local bankruptcy rules.** The local rules page (msnb.uscourts.gov/local-rules) lists only "Summary of Local Rules" with no rule text in the reader's copy, and the courtrules.net copy of L.U.Bankr.R. 9013-1 returned HTTP 403. No local rule on font, margins, page limits, line spacing, cover contents or certificates was read.
 
 Because the local rules were unreadable, the format below is a **standard-letter default**, not a court requirement:
-- US Letter, 1-inch margins, 12-point EB Garamond (the only vendored font), double spaced, page number centered in the footer.
+- US Letter, 1-inch margins, 12-point EB Garamond (no face named by any rule read; see Typeface below), double spaced, page number centered in the footer.
+
+## Typeface
+
+| Item | Value |
+|---|---|
+| Face required | none found. Fed. R. Bankr. P. 7010 incorporates Fed. R. Civ. P. 10 (caption, numbered paragraphs), which names no face. The msnb local rule on form (Rule 9004-1) could not be read: courtrules.net returned HTTP 403, and the msnb standing order (eff. 3-1-26) is a scanned image with no text layer. |
+| Vendored substitute | `EB Garamond` (no court-named face to substitute; `docs/FONTS.md` "No face named") |
+| Fit | visual only, and the template's default |
+| Filer convention (not a rule) | the filed exemplar sets Times New Roman (embedded `TimesNewRomanPSMT`); the substitute would be `Liberation Serif` (metric-compatible). Not switched: a filer's choice does not make a rule. |
+| Open | If Rule 9004-1 or a local rule names Times New Roman, switch the font list to `Liberation Serif` and re-render. |
 - The caption, paragraph numbering and prayer layout are the template's own choices.
 
 A local-rule text, or a filed complaint from this court, would settle each of these.
@@ -56,7 +66,7 @@ A local-rule text, or a filed complaint from this court, would settle each of th
 1. **No exemplar.** Tier 2 cannot be judged against filed complaints. Overlay not run.
 2. **Local rules unread.** Font, margins, line spacing and the caption form are defaults (see above). This is the biggest tier-1 risk.
 3. **Synthetic sample only.** The sample is 3 pages of invented content; the depth target (8 to 14 pages) was not met because there is no exemplar to transcribe.
-4. **Font.** EB Garamond is the only vendored font. Local rules may name Times New Roman; see the ca9 folder's README for the same issue.
+4. **Font.** EB Garamond stays because no rule read names a face (see Typeface). The filed exemplar uses Times New Roman; that would only change if Rule 9004-1 names it.
 5. **Caption.** The party column is closed by a rule (right and bottom). The adversary number is shown on the right of the party block, not in a separate row.
 
 ## Review of the rendered pages
