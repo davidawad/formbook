@@ -1,0 +1,149 @@
+% U.S. Court of Appeals for the Second Circuit: appellant's opening brief (engine "latex").
+%
+% The layout rules are those of typst/ca2-opening-brief.typ (see ../README.md, "Engines"). The body is
+% pandoc's LaTeX output; ca2.lua (in this folder) builds the cover, tables and certificates from the
+% frontmatter and numbers the headings. Fonts come from the vendored directory only ($fontdir$).
+% The tables of contents and authorities are two-pass: each entry writes its page to the .aux or .toc
+% file, and the next run prints the pages. tectonic reruns until the references are stable.
+\documentclass[14pt,letterpaper]{extarticle}
+\usepackage{fontspec}
+\usepackage[letterpaper,margin=1in,footskip=0.6in]{geometry}
+\usepackage{indentfirst}
+\usepackage{changepage}
+\usepackage{needspace}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+% EB Garamond, vendored (CA2-FORM-004: a proportional serif at 14 point or larger).
+\setmainfont{EBGaramond-Regular}[
+  Path=$fontdir$eb-garamond/, Extension=.otf,
+  BoldFont=EBGaramond-Bold, ItalicFont=EBGaramond-Italic, BoldItalicFont=EBGaramond-BoldItalic,
+  Ligatures=TeX]
+
+\makeatletter
+% ---------------------------------------------------------------------------
+% Type and spacing (CA2-FORM-004, CA2-CONV-001)
+% ---------------------------------------------------------------------------
+\raggedright
+\hyphenpenalty=10000 \exhyphenpenalty=10000
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+% Double spacing: 31.4 pt, the baseline pitch the typst template gets from its body leading (0.94 em).
+\renewcommand\normalsize{\fontsize{14}{31.4}\selectfont}
+\normalsize
+% Single spacing for headings, quotations, footnotes, the tables and the cover.
+\newcommand\briefsingle{\fontsize{14}{19.9}\selectfont}
+\renewcommand\footnotesize{\briefsingle}
+\renewcommand\small{\briefsingle}
+\renewcommand\large{\fontsize{14}{31.4}\selectfont}
+
+% Footnotes: 14 point, single spaced, the number then the note, no indent, a rule of 30% width.
+\setlength{\footnotesep}{0.5em}
+\setlength{\skip\footins}{0.9em}
+\renewcommand\footnoterule{\kern-0.3em\noindent{\rule{0.3\linewidth}{0.5pt}}\kern0.4em}
+\renewcommand\@makefntext[1]{\noindent\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
+
+% Quotations: single spaced, half an inch in on both sides.
+\renewenvironment{quote}{%
+  \begin{adjustwidth}{0.5in}{0.5in}\briefsingle\setlength{\parskip}{0.9em}\setlength{\parindent}{0pt}}{%
+  \end{adjustwidth}}
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\pandocbounded}[1]{#1}
+
+% ---------------------------------------------------------------------------
+% Headings (CA2-CONV-004). The labels come from ca2.lua; the layout is here.
+% ---------------------------------------------------------------------------
+\newlength{\briefheadtab}\setlength{\briefheadtab}{0.5in}
+% Section headings: bold capitals, centered (typst: 1.15 em, above 1.5 em, below 1.1 em).
+\newcommand\briefhead[1]{%
+  \par\needspace{2\baselineskip}\addvspace{1.5em}%
+  {\centering\briefsingle\bfseries\fontsize{16.1}{19.9}\selectfont\MakeUppercase{#1}\par}%
+  \nopagebreak\addvspace{1.1em}\nopagebreak}
+% Point headings of the Argument: bold small capitals, centered, the label in front.
+\newcommand\briefpoint[2]{%
+  \par\needspace{2\baselineskip}\addvspace{1.2em}%
+  {\centering\briefsingle\bfseries\scshape #1\ #2\par}%
+  \nopagebreak\addvspace{1.1em}\nopagebreak}
+% Sub-headings: the label at indent #1 in a half-inch box, the text hanging under it.
+% #2 label, #3 style (bold; bold italic from level 4), #4 text.
+\newcommand\briefsub[4]{%
+  \par\needspace{2\baselineskip}\addvspace{1.1em}%
+  \noindent\hspace*{#1}\makebox[\briefheadtab][l]{#3{#2}}%
+  \begingroup\parbox[t]{\dimexpr\linewidth-#1-\briefheadtab\relax}{\raggedright #3{#4}}\endgroup
+  \par\nopagebreak\addvspace{0.9em}\nopagebreak}
+
+% ---------------------------------------------------------------------------
+% Tables of contents and authorities (FRAP 28(a)(2)-(3))
+% ---------------------------------------------------------------------------
+\renewcommand\@pnumwidth{2.6em}
+\renewcommand\@tocrmarg{2.6em}
+\newcommand\l@brieftoc[2]{\@dottedtocline{1}{0in}{0in}{#1}{#2}}
+\newcommand\l@briefpt[2]{\@dottedtocline{2}{0in}{0.5in}{#1}{#2}}
+\newcommand\l@briefa[2]{\@dottedtocline{2}{0.5in}{0.5in}{#1}{#2}}
+\newcommand\l@briefb[2]{\@dottedtocline{3}{1in}{0.5in}{#1}{#2}}
+\newcommand\l@briefc[2]{\@dottedtocline{4}{1.5in}{0.5in}{#1}{#2}}
+\newcommand\briefTOCpage{\par{\raggedleft\briefsingle\bfseries\underline{Page}\par}}
+\newcommand\briefTOC{\par\briefTOCpage\begingroup\briefsingle\@starttoc{toc}\endgroup}
+
+% Table of authorities. A citation writes its page to the .aux file (\toamark); the next run reads the
+% marks back (\toaref) and keeps the distinct pages. Seven or more pages print as "passim" (typst).
+\newcommand\toamark[1]{\protected@write\@auxout{}{\string\toaref{#1}{\thepage}}}
+\newcommand\toaref[2]{%
+  \@ifundefined{toacnt@#1}{%
+    \expandafter\newcount\csname toacnt@#1\endcsname
+    \expandafter\gdef\csname toapg@#1\endcsname{}%
+    \expandafter\gdef\csname toalast@#1\endcsname{}}{}%
+  \edef\toapgnow{#2}%
+  \expandafter\ifx\csname toalast@#1\endcsname\toapgnow\else
+    \expandafter\gdef\csname toalast@#1\endcsname{#2}%
+    \global\advance\csname toacnt@#1\endcsname 1
+    \ifnum\csname toacnt@#1\endcsname>1 \expandafter\g@addto@macro\csname toapg@#1\endcsname{, }\fi
+    \expandafter\g@addto@macro\csname toapg@#1\endcsname{#2}%
+  \fi}
+\newcommand\toapages[1]{%
+  \@ifundefined{toacnt@#1}{}{%
+    \ifnum\csname toacnt@#1\endcsname>6 \emph{passim}\else\csname toapg@#1\endcsname\fi}}
+% One printed authority: key, the lines before the citation (name and line break, or nothing), citation.
+\newcommand\toaprint[3]{%
+  \@ifundefined{toacnt@#1}{}{%
+    \ifnum\csname toacnt@#1\endcsname>0
+      \par\addvspace{0.7em}\noindent\begin{minipage}{\linewidth}\briefsingle
+      #2\hspace*{0.35in}#3\ \leaders\hbox to 0.16em{\hss.\hss}\hfill\ \toapages{#1}
+      \end{minipage}\par
+    \fi}}
+\newcommand\toaitem[3]{\toaprint{#1}{#2,\\}{#3}}     % key, name, citation
+\newcommand\toaitemnoname[2]{\toaprint{#1}{}{#2}}    % key, citation
+\newcommand\toagroup[1]{%
+  \par\addvspace{1.4em}\noindent\begin{minipage}{\linewidth}\briefsingle\bfseries #1\end{minipage}\par\nopagebreak}
+\newcommand\toagroupfirst[1]{%
+  \par\addvspace{1em}\noindent\begin{minipage}{\linewidth}\briefsingle\bfseries #1\hfill\underline{Page(s)}\end{minipage}\par\nopagebreak}
+
+% ---------------------------------------------------------------------------
+% Cover (FRAP 32(a)(2)); ca2.lua writes the cover from the frontmatter
+% ---------------------------------------------------------------------------
+\newcommand\briefrulesmall{\par{\centering\rule{2in}{0.7pt}\par}}
+\newcommand\briefdouble{\par\noindent\rule{\linewidth}{1.6pt}\par\vspace{2.5pt}\noindent\rule{\linewidth}{0.5pt}\par}
+\newcommand\briefcaptiondesig[1]{\par\noindent\hspace*{0.5\linewidth}#1\par}
+\newcommand\briefcounselblock[1]{\par\noindent\hspace*{0.5\linewidth}\begin{minipage}[t]{0.5\linewidth}\raggedright#1\end{minipage}\par}
+
+% ---------------------------------------------------------------------------
+% Signature and certificates (FRAP 32(g); typst signature-block, certificates)
+% ---------------------------------------------------------------------------
+\newenvironment{briefsig}{%
+  \par\addvspace{1.4em}\noindent\hspace*{0.5\linewidth}%
+  \begin{minipage}[t]{0.5\linewidth}\briefsingle\raggedright}{\end{minipage}\par}
+\newcommand\briefsigfoot[2]{%
+  \par\needspace{160pt}\addvspace{1.6em}\noindent
+  \begin{minipage}[t]{0.47\linewidth}\briefsingle\raggedright\strut #1\\Signature\end{minipage}\hfill
+  \begin{minipage}[t]{0.47\linewidth}\briefsingle\raggedright\strut #2\\Date\end{minipage}\par}
+\newenvironment{briefcert}{\par\begingroup\briefsingle\setlength{\parindent}{0pt}\setlength{\parskip}{1em}}{\endgroup\par}
+
+% ---------------------------------------------------------------------------
+% Document
+% ---------------------------------------------------------------------------
+\setcounter{secnumdepth}{0}
+\pagestyle{plain}
+\begin{document}
+$body$
+\end{document}

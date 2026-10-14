@@ -86,3 +86,10 @@ Rendered at `pdftoppm -r 60` and read page by page: 12 of 12 pages reviewed.
 7. **Sample is a portion.** The sample transcribes the cover, counterstatement, summary, standard of review, part of Argument I.A, the conclusion, and both certificates. It ends mid-sentence on the exemplar's page 22 and says so. It is not the filed brief's full 48 pages.
 8. **Local Rule 32.1 not fetched.** The court's page cites Local Rule 32.1 and 25.1 without giving their text. The template relies on FRAP 32 and the court's summary.
 9. **Counsel lines.** The role line ("Counsel for the Defendant-Appellee ...") prints after the email, where the exemplar prints the telephone number before it.
+
+## Engines (latex, docx)
+
+Built by `latex/` (`template.tex` + `ca2.lua`, the same template as the other doc types with `DOC = "answering"`) and `docx/` (`reference.docx` from `make-reference.sh`, + `ca2.lua`).
+
+- **latex** (`samples/OUTPUT-finkelman-answering-brief.latex.pdf`, 13 pages; typst: 12). Matches: the cover and its counsel block, the heading structure and labels, contents and authorities with computed page numbers, the certificates (type-volume and typeface wording; certificate of service because `service.certificate: true`), certificate word count 1,428 (same as typst). Differs: one page longer than typst, from the heading spacing in the Counterstatement; the cover spreads less.
+- **docx** (`samples/OUTPUT-finkelman-answering-brief.docx`, `.docx.pdf` 13 pages). Matches: the cover, sections and numbering, styles, certificates, word count 1,428. BLOCKED: `DOCX-TOC-PAGES` and `DOCX-TOA-PAGES` (contents and authorities have no page numbers; see the opening brief's README).

@@ -82,5 +82,12 @@ Known, not fixed: after a block quotation, the following paragraph is first-line
 - FRAP 32(a)(7)(B) sets 13,000 words; the template uses 14,000 from LR 32.1(a). The certificate text cites both rules. Verify the interaction.
 - Form 6 wording and FRAP 25(d) were not fetched; the certificate text follows the rule's stated requirements and the exemplar's form.
 - The sample is a portion of the brief (about 12 body pages; the full exemplar is 28 pages). Its total of 19 pages is above the 8–14 target because the cover, the 4 front-matter pages and 2 certificate pages are fixed. The body alone is within range.
-- No `checks.yaml`, no Gate 0/1 checks, no latex or docx engines for this doc type.
+- No `checks.yaml`, no Gate 0/1 checks for this doc type yet (the latex and docx engines are described below).
 - No paper-copy cover color (see CA2-CONV-003).
+
+## Engines (latex, docx)
+
+Built by `latex/` (`template.tex` + `ca2.lua`) and `docx/` (`reference.docx` from `make-reference.sh`, + `ca2.lua`), against the same frontmatter and sample as the typst template.
+
+- **latex** (`samples/OUTPUT-munafo-opening-brief.latex.pdf`, 19 pages; typst: 19). Matches: letter, 1-inch margins, EB Garamond 14 pt throughout (vendored, `$fontdir$`), 31.4 pt double spacing, single-spaced footnotes, quotations and headings, the cover's parts, contents and authorities (page numbers computed in two passes, "passim" at seven pages), point and sub-heading labels, signature kept with the last paragraph, both certificates, certificate word count 2,584 (same count as typst). Differs: the cover spreads its parts less than the typst cover (content ends about 1 inch above the bottom margin); body pagination differs by a line or two per page, so some page numbers in the contents differ from typst by one page.
+- **docx** (`samples/OUTPUT-munafo-opening-brief.docx`, `.docx.pdf` 19 pages, checked on the LibreOffice PDF). Matches: the cover, the section breaks (cover without number; contents and authorities in lower-case roman; body from 1), 14 pt EB Garamond, double spacing, footnote and quotation styles, centered page number, certificates. BLOCKED: `DOCX-TOC-PAGES` and `DOCX-TOA-PAGES`: the contents and authorities list every entry but the page numbers are empty; the page numbers need a second render pass that reads them from the PDF (not built). Cover spacing differs from typst's (no full-page stretch).
