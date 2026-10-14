@@ -1,0 +1,17 @@
+# Exemplars: pretrial memorandum (Tax Court)
+
+**BLOCKED: no exemplar.** No public, filed Tax Court pretrial memorandum was found. No `FILED-EXAMPLE-*.pdf` is present, so `tools/overlay.sh` cannot run for this doc type.
+
+Searched 2026-10-14:
+
+| Search or source | Result |
+|---|---|
+| WebSearch: "United States Tax Court" "pretrial memorandum" "Docket No." petitioner respondent pdf filed | The Court's blank form and sample orders only: [Pretrial_Memorandum_Form.pdf](https://ustaxcourt.gov/files/documents/Pretrial_Memorandum_Form.pdf), [sample_pretrial_memorandum.pdf](https://ustaxcourt.gov/files/documents/sample_pretrial_memorandum.pdf), [SPTO_regular_sample.pdf](https://www.ustaxcourt.gov/resources/taxpayer/SPTO_regular_sample.pdf). These are court forms, not filings. |
+| Download of the form (https://www.ustaxcourt.gov/resources/forms/Pretrial_Memorandum_Form.pdf) | Returned an HTML error page, not the PDF. |
+| WebFetch: CourtListener RECAP search for "pretrial memorandum" | HTTP 403. |
+
+The field set and headings in this template come from the form printed in the SPTO sample (which states "A Pretrial Memorandum form is attached to this Order"). That copy has placeholder values (docket 16225-21 and 12345-00, Reno trial calendar, 2000 date), so it is a form layout, not a filed exemplar.
+
+Next step if an exemplar is wanted: a named Tax Court docket whose pretrial memorandum is public, downloaded into `exemplars/` with this table updated (filer, case, docket, date filed, URL, date retrieved).
+
+Retrieved and used as the form source (not a filed document): `SPTO_regular_sample.pdf`, https://www.ustaxcourt.gov/resources/taxpayer/SPTO_regular_sample.pdf.
