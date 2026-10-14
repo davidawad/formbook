@@ -1,8 +1,61 @@
 # formbook
 
-An open formbook of court filing templates for markdown-first litigators. Templates are written in Typst (primary) and LaTeX (where a court's rules force it), organized by court, and consume markdown. Every court has a folder with its rules, real filed exemplars, sample inputs, and templates; progress is tracked per court below.
+**Court-filing templates for markdown-first lawyers: write your brief in markdown, get a PDF that meets the court's rules, checked against a real filed example.**
 
-Want to help? Point your own AI agent at this repo: see [CONTRIBUTING.md](CONTRIBUTING.md) (`sh tools/contribute.sh pick`).
+![markdown input, formbook's rendered cover page, and the cover page of the brief actually filed with the court](docs/showcase/hero.png)
+
+formbook is an open collection of court-filing templates, one folder per court and document type (opening brief, complaint, motion brief, and so on). Templates are written in [Typst](https://typst.app) and take markdown with a YAML header; the template generates the cover or caption, tables of contents and authorities, spacing, fonts, certificates and signature block that the court's rules call for.
+
+Every template is checked against public record: each folder carries a real filed exemplar PDF (with its source URL), a markdown input sample, our rendered output PDF, and a red/blue overlay PDF that lays our render over the filed exemplar. As of this checkout:
+
+- 479 folders have a Typst template (`typst/main.typ`), across 233 courts (federal, state, bankruptcy, and the U.S. Supreme Court).
+- 453 folders have at least one filed exemplar PDF (558 PDFs in all); 446 have an overlay against it.
+- More pictures, and the command that regenerates each: [docs/showcase.md](docs/showcase.md). Per-court progress is in the [index](#index) at the bottom.
+
+These templates are not legal advice and do not check your arguments or citations. Verify every output against the court's current rules before you file; the court index below marks what is finished and what is still in progress.
+
+## Contribute to open access to the law
+
+Anyone can point their own AI agent at this repo to add courts and document types. Work is split into small units (one court, one document type) listed in `data/worklist.json`; you take one, build it against a real public exemplar, and open a PR. Paste this into Claude Code, Codex, or any agent with a shell and git:
+
+> Clone github.com/davidawad/formbook and read CONTRIBUTING.md and AGENTS.md. Run `sh tools/bootstrap.sh`, then `sh tools/contribute.sh pick`. Claim the unit it gives you with `sh tools/contribute.sh claim <id>`, do exactly what `sh tools/contribute.sh brief <id>` says inside the claimed worktree, make `sh tools/contribute.sh verify <id>` pass, then `sh tools/contribute.sh submit <id>`. Use only public court records, record every source URL, and look at every rendered page before submitting. If you are blocked on a decision only a human can make, stop and say so in the PR.
+
+The loop that prompt runs:
+
+```sh
+sh tools/contribute.sh pick            # get a unit; you take the one you are given
+sh tools/contribute.sh claim <id>      # atomic claim (branch contrib/<id>, or a draft PR from a fork)
+sh tools/contribute.sh brief <id>      # prints the exact task
+sh tools/contribute.sh verify <id>     # mechanical floor: layout, renders, exemplar source, overlay
+sh tools/contribute.sh submit <id>     # reruns verify, opens the PR
+```
+
+**The agent skill.** [`skills/formbook`](skills/formbook/SKILL.md) teaches an agent to use these templates (find the court, start from a sample, render, look at every page) and to write a new one when a court or document type is missing. To install it for Claude Code, symlink it into a skills directory:
+
+```sh
+mkdir -p ~/.claude/skills && ln -s "$PWD/skills/formbook" ~/.claude/skills/formbook   # every project
+mkdir -p .claude/skills && ln -s "$PWD/skills/formbook" .claude/skills/formbook       # one project
+```
+
+For other agents (Codex, Cursor, a plain LLM with a shell), point them at `skills/formbook/SKILL.md`, for example "Read skills/formbook/SKILL.md and follow it". Details: [skills/README.md](skills/README.md). Full contribution rules, quality bar and review process: [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Use a template
+
+Needs `typst`, poppler and `jq` on your PATH. On Linux, `sh tools/bootstrap.sh` installs the pinned toolchain without root (its micromamba download is linux-64 only; on macOS install typst, poppler and jq with Homebrew instead; the templates rendered here with typst 0.15.1).
+
+```sh
+export PATH="$HOME/.local/share/formbook/env/bin:$PATH"                 # if you used bootstrap.sh
+sh skills/formbook/scripts/find.sh ca1                                   # court folder and the doc types that have a template
+sh skills/formbook/scripts/new-filing.sh ca1 opening-brief ./my-filing   # copies the sample markdown to ./my-filing/filing.md
+# edit ./my-filing/filing.md: replace every party, fact and cite
+sh skills/formbook/scripts/render-filing.sh courts/first-circuit/court-of-appeals/opening-brief ./my-filing/filing.md ./my-filing/filing.pdf
+```
+
+Then look at every page of the PDF. Each doc type's `README.md` lists its rules, markdown contract and known gaps.
+
+## License
+
+GNU GPL v3.0: see [LICENSE](LICENSE).
 
 ## Using aliases programmatically
 
