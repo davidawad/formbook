@@ -47,7 +47,7 @@ Primary sources, read on 2026-10-14:
 | FRBP 8014(a)(4)(A)-(D) | Jurisdiction: bankruptcy court, BAP, timeliness, final order | section heading check only; content not checked |
 | FRBP 8015(a)(2)(A)-(F) | Cover: case number at top; court name; case title (8003(d)(2)); nature of proceeding and court below; brief title; counsel name, address, telephone and email | `cover-body` |
 | FRBP 8015(a)(4) | 8.5 x 11; double spaced; long quotations may be single spaced; headings and footnotes single spaced; margins at least 1 inch | `page`, `body-leading`, quote and footnote styles |
-| FRBP 8015(a)(5)(A) | Proportional face with serifs, 14 pt or larger | `type-size = 14pt`; `font-family = "EB Garamond"` (the only vendored serif) |
+| FRBP 8015(a)(5)(A) | Proportional face with serifs, 14 pt or larger. No face named by the rule. | `type-size = 14pt`; `font-family = "EB Garamond"` (kept; no court-named face, so no vendored substitute needed) |
 | FRBP 8015(a)(6) | Plain roman; italics or bold for emphasis; case names italic or underlined | markdown emphasis; the template does not guess case names |
 | FRBP 8015(a)(7)(B)(i) | Principal brief: 13,000 words (or 1,300 monospaced lines), with certificate | `word-limit = 13000` (panic when exceeded) |
 | FRBP 8015(g) | Excluded from length: cover, disclosure, TOC, TOA, oral-argument statement, statute addendum, certificate, signature block, proof of service. Headings, footnotes and quotations count. | `strip-oral-argument`; cover, TOC, TOA, certificates and signature sit outside the body count |
