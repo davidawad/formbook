@@ -7,15 +7,16 @@ Folder: `courts/eighth-circuit/missouri/federal/western-district/motion-brief/` 
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-mannon-6-26-cv-03197-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-mannon-suggestions.md` (an excerpt: cover, introduction, Sections I.A to I.C and VIII, certificate; see Known gaps) |
-| render | ok: `samples/OUTPUT-mannon-suggestions.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-mannon-suggestions.pdf` and `samples/OVERLAY-mannon-suggestions.txt` (`tools/overlay.sh`) |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last change) |
+| typeface | face required by the rules: none (see Governing rules). Substitute: none; EB Garamond kept (`docs/FONTS.md`, "No face named"). Metric note: n/a. |
+| render | ok: `samples/OUTPUT-mannon-suggestions.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`; re-rendered 2026-10-14, `pdffonts`: EB Garamond Regular, Bold and Italic embedded) |
+| overlay | fail: `samples/OVERLAY-mannon-suggestions.pdf` not regenerated. `exemplars/` holds only `SOURCE.md` in this snapshot (no `FILED-EXAMPLE-*.pdf`), so `tools/overlay.sh` exits 1. The `.txt` page map is from an earlier run. |
+| pages reviewed | 9 of 9 (re-rendered 2026-10-14 and every page viewed at 60 dpi; the template did not change) |
 
 File names: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf` and the overlay `OVERLAY-<id>.{pdf,txt}`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default (the brief's `<id>.pdf` / `<id>-overlay.pdf` would not be found by the overlay tool).
 
 ## Governing rules
 
-Primary source: W.D. Mo. Local Civil Rules, effective Dec. 1, 2022 (`https://www.mow.uscourts.gov/sites/mow/files/DC-Local_Rules-120122.pdf`, fetched 2026-10-14). The local rules set no typeface, font size, margin or spacing rule for filed papers.
+Primary source: W.D. Mo. Local Civil Rules, effective Dec. 1, 2022 (`https://www.mow.uscourts.gov/sites/mow/files/DC-Local_Rules-120122.pdf`, fetched 2026-10-14). The local rules set no typeface, font size, margin or spacing rule for filed papers. The typeface check was repeated on 2026-10-14 by extracting the text of that 76-page PDF and searching it for font, typeface, point size and paper-format terms: no match for filed papers.
 
 | Rule | Requirement | Where it lives |
 |---|---|---|
@@ -43,7 +44,9 @@ Primary source: W.D. Mo. Local Civil Rules, effective Dec. 1, 2022 (`https://www
 - Table of contents: every heading, with its page.
 - Page numbers centred at the foot.
 
-Why 13 pt: the same reason as the complaint folder: EB Garamond is the only serif face vendored in `fonts/`, and at 13 pt its x-height is close to the Mannon exemplar's Times New Roman at 12 to 14 pt (the exemplar's body measures about 14 pt Times by text-box height). Not a rule.
+Why EB Garamond: the same reason as the complaint folder. The local rules name no face, so the court-named-face rows of `docs/FONTS.md` do not apply and the template keeps EB Garamond. The exemplar is set in Times New Roman; the rules do not require Times, and a metric-compatible Times substitute ("Liberation Serif") is vendored but not used.
+
+Why 13 pt: at 13 pt the EB Garamond x-height is close to the Mannon exemplar's Times New Roman at 12 to 14 pt (the exemplar's body measures about 14 pt Times by text-box height). Not a rule.
 
 ## Markdown contract (for samples)
 
@@ -58,7 +61,7 @@ Why 13 pt: the same reason as the complaint folder: EB Garamond is the only seri
 ## Known gaps and open choices
 
 1. **Local rules text is from December 2022.** The 2026 revision PDF (`DC-Local_Rules-072026.pdf`) returned HTTP 404 to WebFetch from this box, and courtrules.net returned 403. A later amendment would not be seen here (in particular any change to the 15-page limit in L.R. 7.0(d)). **Needs a check of the current local rules before this is treated as complete.**
-2. **No typeface, size or spacing rule** in the local rules; the exemplar is Times New Roman at about 14 pt (text-box measure); this template is EB Garamond 13 pt, double spaced. A judge's standing order could require a different face; there is no vendored Times.
+2. **No typeface, size or spacing rule** in the local rules; the exemplar is Times New Roman at about 14 pt (text-box measure); this template is EB Garamond 13 pt, double spaced. If a judge's standing order requires Times New Roman, the face would change to "Liberation Serif" (`docs/FONTS.md`), and the page count and line breaks would need a re-render and check.
 3. **Excerpt.** The sample transcribes the cover, the COME NOW paragraph, Section I (the typed heading and the first paragraph), I.A (standing), I.B (Folsom and Pope), I.C (Laclede County, through the failure-to-train paragraph), VIII (statute of limitations, in full) and the WHEREFORE paragraph, the signature and the certificate. Omitted: I.D, Sections II to VII. The 22-page exemplar is therefore not reproduced in full; the render is 9 pages (within the 8 to 14 target for an excerpt).
 4. **The motion itself is not generated.** The exemplar's motion (Doc. 24, 3 pages) is a separate document, and L.R. 7.0(c)(1) requires it to accompany the suggestions. A motion-only template is not part of this doc type.
 5. **Table of contents and authorities have no dot leaders and no hanging indent.** The exemplar's TOC and TOA use dot leaders. Typst's dot leaders did not lay out inside grid cells, so the rows use plain columns. Wrapped TOA entries start at the left margin (the Bartis entry in the sample shows this).
