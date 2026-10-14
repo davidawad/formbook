@@ -57,8 +57,7 @@
     ],
     table.cell(inset: (left: 0.25in))[
       #v(0.6em)
-      Chapter #need(meta, "chapter")\
-      #v(0.6em)
+      #if "chapter" in meta [Chapter #meta.chapter\ #v(0.6em)]
       Case No. #need(meta, "case_number")\
       #if "judge" in meta [Judge #meta.judge\ ]
       #v(0.6em)
@@ -72,12 +71,15 @@
 }
 
 // Counsel block, upper left (convention; the rules text read does not set a position).
+// Optional: a filing that gives counsel only in its signature block omits `counsel`.
 #let counsel-block(meta) = {
-  set par(first-line-indent: 0pt, leading: single-leading)
-  for line in need(meta, "counsel") {
-    [#line\ ]
+  if "counsel" in meta {
+    set par(first-line-indent: 0pt, leading: single-leading)
+    for line in meta.counsel {
+      [#line\ ]
+    }
+    v(1.2em)
   }
-  v(1.2em)
 }
 
 // LBR 9013-1(c)(2)(B): negative notice, "...an order may be entered granting the relief sought unless
@@ -105,6 +107,8 @@
     #v(0.8em)
     #h(3.2in)Respectfully submitted,\
     #v(0.8em)
+    // Optional party lines above the signature (e.g. "DAVID A. LEVINE" / "By Counsel").
+    #for line in sig.at("parties", default: ()) [#h(3.2in)#line\ ]
     #h(3.2in)#strong[s/ #sig.signer]\
     #for line in sig.lines [#h(3.2in)#line\ ]
   ]
@@ -117,16 +121,22 @@
   set par(first-line-indent: 0pt, leading: single-leading)
   align(center, strong(upper("Certificate of Service")))
   v(0.8em)
+  // `text` gives the certificate sentence as filed; otherwise the template builds it from date and method.
   block(width: 100%)[
-    I certify that on #svc.date, I #svc.method the foregoing #need(meta, "motion_title") and this
-    certificate of service, which were served on the following parties:
+    #if "text" in svc [#svc.text] else [
+      I certify that on #svc.date, I #svc.method the foregoing #need(meta, "motion_title") and this
+      certificate of service, which were served on the following parties:
+    ]
   ]
   v(0.8em)
-  for p in svc.parties [
-    #block(width: 100%, breakable: false)[#p.name\ #for line in p.lines [#line\ ]]
-    #v(0.6em)
-  ]
-  v(0.8em)
+  // Parties are listed only when the filing lists them; the CM/ECF certificate lists none.
+  if "parties" in svc {
+    for p in svc.parties [
+      #block(width: 100%, breakable: false)[#p.name\ #for line in p.lines [#line\ ]]
+      #v(0.6em)
+    ]
+    v(0.8em)
+  }
   block(width: 100%, breakable: false)[
     #h(3.2in)#strong[s/ #need(meta, "signature").signer]\
     #for line in need(meta, "signature").lines [#h(3.2in)#line\ ]
@@ -134,7 +144,7 @@
 }
 
 #let wvnb-motion-brief(meta, md) = {
-  for k in ("court", "caption", "chapter", "case_number", "adversary_number", "motion_title", "counsel", "signature", "service") {
+  for k in ("court", "caption", "case_number", "adversary_number", "motion_title", "signature", "service") {
     let _ = need(meta, k)
   }
 
@@ -150,10 +160,11 @@
   show footnote.entry: set par(first-line-indent: 0pt)
 
   // Body headings: centered capitals (sections). The author types the heading text; no numbers are generated.
+  // Heading text is set to the body size: typst's default heading size (1.4em) would otherwise leak through.
   show heading.where(level: 1): it => block(width: 100%, above: 1.2em, below: 0.8em, sticky: true,
-    align(center, strong(upper(it.body))))
+    align(center, text(size: type-size, strong(upper(it.body)))))
   show heading.where(level: 2): it => block(width: 100%, above: 1em, below: 0.6em, sticky: true,
-    align(center, strong(it.body)))
+    align(center, text(size: type-size, strong(it.body))))
 
   set page(footer: context {
     set text(size: 10pt)
