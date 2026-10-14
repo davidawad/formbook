@@ -7,9 +7,10 @@ Folder: `courts/fifth-circuit/texas/federal/western-district/complaint/`.
 |---|---|
 | exemplar | yes, two filers: `exemplars/FILED-EXAMPLE-lilly-5-26-cv-05147-complaint.pdf` (counsel-drafted, used for the sample) and `exemplars/FILED-EXAMPLE-callier-3-26-cv-01039-complaint.pdf` (self-represented, not transcribed). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-lilly-first-amended-complaint.md` (an excerpt of the 35-page filing: caption, parties, jurisdiction, opening general allegations, the first count, prayer in part, jury demand, signature). |
-| render | ok: `samples/OUTPUT-lilly-first-amended-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings. |
-| overlay | ok: `samples/OVERLAY-lilly-first-amended-complaint.pdf` and `.txt` (see "Overlay" below). |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change). |
+| typeface | face required: none (CV-10(a) names no face). Substitute: none needed; **EB Garamond** kept (`docs/FONTS.md`, "No face named"). Embedded: EB Garamond Regular and Bold only (`pdffonts`, 2026-10-14). |
+| render | ok: `samples/OUTPUT-lilly-first-amended-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14). |
+| overlay | ok: `samples/OVERLAY-lilly-first-amended-complaint.pdf` and `.txt` (see "Overlay" below), regenerated 2026-10-14 against `exemplars/FILED-EXAMPLE-lilly-5-26-cv-05147-complaint.pdf`. That PDF was missing from the checkout and was fetched from the URL in `exemplars/SOURCE.md`. |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; all 9 viewed again on the 2026-10-14 re-render). |
 | gates | `tools/check.sh` not run: it expects a court folder with `court.json` and `rules.md`, which this doc-type folder does not have, and the brief forbids editing `tools/`. |
 
 ## Governing rules
@@ -78,7 +79,7 @@ Reviewed pages: 9 of 9.
 3. **Prayer sub-items.** Item 1 of the prayer lists four of the eight declarations, with bullets where the exemplar has romanettes (i to viii). Romanette lists are not supported by the markdown contract.
 4. **Footnotes.** The exemplar has eight footnotes; the sample omits them. The template has no footnote rule; CV-10(a) requires 12 pt or larger for footnotes, which the 13 pt setting satisfies, but the layout is untested.
 5. **Signature block on its own page.** Page 9 holds only the signature block because the block is unbreakable. A breakable block would let the last paragraphs and the block share page 8; left as is because the convention is to keep the signature with the text, which here means a page break.
-6. **Font.** EB Garamond (vendored, OFL), 13 pt. The exemplar is Times New Roman 12 pt. The choice follows the brief (vendored fonts only). The W.D. Tex. rule does not name a font.
+6. **Font.** EB Garamond (vendored, OFL), 13 pt. The exemplar is Times New Roman 12 pt, but CV-10(a) names no face (it requires only "12-point or larger"), so no court-named substitute applies and EB Garamond is kept (`docs/FONTS.md`, "No face named"). Visual-only comparison with the exemplar's Times; not metric-compatible with it, so line breaks differ.
 7. **Justification.** Body text is left-aligned (ragged right). The exemplar's justification could not be read from the text layer; not asserted.
 8. **Paragraph numbers differ from the filing.** Numbering is by the template; the filed numbers are not carried over.
 9. **Characters per line.** Not measured; CV-10 does not set a characters-per-inch limit.
