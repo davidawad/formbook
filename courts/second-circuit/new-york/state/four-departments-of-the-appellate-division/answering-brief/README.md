@@ -5,11 +5,11 @@ Status: **BLOCKED: no exemplar.** No filed answering brief of any Appellate Divi
 | Gate | Result |
 |---|---|
 | exemplar | no |
-| render | ok (`sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/answering-brief samples/INPUT-nyappdiv-answering-brief-sample.md`; 10 pages; vendored EB Garamond only; no typst warnings) |
-| overlay | fail (`sh tools/overlay.sh …/answering-brief nyappdiv-answering-brief-sample` exits 1: `no exemplar pdf in …/exemplars`; no `-overlay.pdf` written) |
-| pages reviewed | 10 of 10 (every page rasterized at 60 dpi and viewed; page 10 re-viewed after the affidavit wording fix, page count unchanged) |
+| render | ok (`sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/answering-brief samples/INPUT-nyappdiv-answering-brief-sample.md`; re-run 2026-10-14: 10 pages; vendored EB Garamond only; no typst warnings) |
+| overlay | fail (`sh tools/overlay.sh …/answering-brief nyappdiv-answering-brief-sample` exits 1: `no exemplar pdf in …/exemplars`; no `-overlay.pdf` written; re-run 2026-10-14) |
+| pages reviewed | 10 of 10 (re-rendered and every page rasterized at 60 dpi and viewed on 2026-10-14) |
 
-`BLOCKED: no exemplar`. Tier 2 (professional convention, judged against filed exemplars) has not been assessed. Tier 1 is not claimed as met: see the table of authorities gap below.
+`BLOCKED: no exemplar`. A second search on 2026-10-14 found one candidate, *Fuks v. Rakia Associates* (First Department, plaintiff-respondent brief filed 2024-04-17). Its only host returns 403 to curl and WebFetch, so it is not saved. See `exemplars/SOURCE.md`, "Second search pass". Tier 2 (professional convention, judged against filed exemplars) has not been assessed. Tier 1 is not claimed as met: see the table of authorities gap below.
 
 ## Governing rules
 
