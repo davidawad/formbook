@@ -23,12 +23,20 @@ File names: the brief lists `samples/<id>.pdf` and `samples/<id>-overlay.pdf`. T
 | Fed. R. Bankr. P. 9013 | A request for an order is made by written motion (unless made in a hearing or an exempt application). The motion states its grounds with particularity and sets forth the relief requested. It is served on the parties the rules specify. | M | Heading "III. Relief Requested" (author content; the template does not assert headings); lead-in paragraph; the motion's grounds are the numbered paragraphs. | https://www.law.cornell.edu/rules/frbp/rule_9013 (eff. 2024-12-01; restyled, stylistic only per the committee note), verified 2026-10-14 |
 | Fed. R. Bankr. P. 9014(a) | Relief in a contested matter by motion; reasonable notice and an opportunity to be heard. | M | Not asserted by the template (notice is a matter of the case, not form). | https://www.law.cornell.edu/rules/frbp/rule_9014 (eff. 2024-12-01), verified 2026-10-14 |
 | Fed. R. Bankr. P. 9014(b)(1) | The motion is served within the time prescribed by Rule 9006(d) and **in the manner for serving a summons and complaint under Rule 7004**. | M | `certificate-block()` prints the certificate. The template does not assert the method: the exemplar's certificate describes CM/ECF service only (see Known gaps 3). | same |
-| Fed. R. Bankr. P. 9004(a) | Documents must be legible; commonly used abbreviations are acceptable. | M | Text is 12 pt serif, black (`type-size`). | https://www.law.cornell.edu/rules/frbp/rule_9004 (eff. 2024-12-01), verified 2026-10-14 |
+| Fed. R. Bankr. P. 9004(a) | Documents must be legible; commonly used abbreviations are acceptable. | M | Text is EB Garamond, 12 pt, black (`type-size`); no typeface is required (see Typeface below). | https://www.law.cornell.edu/rules/frbp/rule_9004 (eff. 2024-12-01), verified 2026-10-14 |
 | Fed. R. Bankr. P. 9004(b) | Caption: the court's name, the case title, the case number (and adversary number if any), and a brief designation of the document. | M | `caption()`: court name; "In re" debtor block; Case No.; Chapter; title. | same |
 | Fed. R. Bankr. P. 9011(a) | Signed by at least one attorney of record in the attorney's individual name; the document states the signer's address and telephone number. | M | `signature-block()` and the verifications: "/s/" signature, counsel lines. | https://www.law.cornell.edu/rules/frbp/rule_9011 (eff. 2024-12-01), verified 2026-10-14 |
 | Fed. R. Bankr. P. 9037 | Redaction of taxpayer identification numbers to the last four digits (the exemplar prints a full EIN on its caption). | A | The sample does not transcribe the EIN. The template has no EIN field. | not re-verified this pass |
 
 Convention (C), not rule: the caption's Form 416A-style debtor address and EIN line (the exemplar has them); the "No Hearing Set" line; the verifications (FRBP 9013 requires none; the exemplar has two, one by counsel and one by the officer); the certificate of service; the "Dated" line.
+
+## Typeface
+
+| Item | Value |
+|---|---|
+| Face required | none. No local rule (abolished 2003-08-04, General Order 2003-1) and no FRBP text names a typeface; FRBP 9004(a) asks only for legibility. |
+| Vendored substitute | not applicable: no face is named, so the template keeps **EB Garamond** (`fonts/eb-garamond/`, SIL OFL 1.1), per `docs/FONTS.md` ("No face named"). |
+| Metric fit | n/a (not a substitute). Page count (10) and line breaks are EB Garamond's; the exemplar is set in a Times-type face. |
 
 ## Markdown contract (for samples)
 
