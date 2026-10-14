@@ -6,9 +6,10 @@ Doc type: **motion with memorandum** (a motion under FRBP 9013, with the grounds
 |---|---|
 | exemplar | yes, 2 filers, each partial: `exemplars/FILED-EXAMPLE-mcquillen-first-security-20-09040-motion-brief.pdf` (3 pp.: the brief in support of a motion to dismiss; the motion itself is not in RECAP) and `exemplars/FILED-EXAMPLE-veroblue-19-09015-motion-brief.pdf` (6 pp.: a motion to strike with its grounds and facts; no separate brief). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-mcquillen-gray-brief.md` (3 rendered pages; the whole brief) and `samples/INPUT-veroblue-motion.md` (5 rendered pages; the whole motion) |
-| render | ok: `samples/OUTPUT-mcquillen-gray-brief.pdf` (3 pp.) and `samples/OUTPUT-veroblue-motion.pdf` (5 pp.), typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-mcquillen-gray-brief.pdf` and `.txt`; `samples/OVERLAY-veroblue-motion.pdf` and `.txt` |
-| pages reviewed | 8 of 8 rendered sample pages (3 + 5), each rendered at 60 dpi and viewed after the last template change |
+| typeface | face required: none (no N.D. Iowa or FRBP rule names one; checked 2026-10-14 against the 2024 Local Rules PDF, Rules 5005-1 and 9004-1 and a full-text search for font, typeface and point size). Substitute: none needed. Font kept: **EB Garamond** (vendored). Not metric-compatible with any court-named face, because none is named. |
+| render | ok: `samples/OUTPUT-mcquillen-gray-brief.pdf` (3 pp.) and `samples/OUTPUT-veroblue-motion.pdf` (5 pp.), re-rendered 2026-10-14 with `tools/render.sh` (typst 0.15.0, vendored fonts only, exit 0, no warnings); `pdffonts` shows EB Garamond only, embedded |
+| overlay | **not regenerated 2026-10-14: fail.** `tools/overlay.sh` needs the filed exemplar PDFs, and `exemplars/` holds only `SOURCE.md` in this snapshot (no PDF on the box, none in git history). The `OVERLAY-*.txt` maps are from an earlier run and were not rebuilt. |
+| pages reviewed | 8 of 8 rendered sample pages (3 + 5), each rendered at 60 dpi and viewed on 2026-10-14 after the font pass (the font did not change; this is the re-check) |
 | check.sh | not run: same reason as `../adversary-complaint/README.md` (no `court.json` or `rules.md` in a doc-type folder). Not a stamp. |
 
 ## Governing rules
@@ -74,7 +75,7 @@ Every sample page was rendered at 60 dpi and looked at, after the last template 
 ## Known gaps and open choices
 
 1. **No complete exemplar.** Neither filing is a motion and its brief in one PDF. The Gray filing is the brief only (its motion is not in RECAP storage). The VeroBlue filing is a motion with its own facts section and no brief. The template covers both shapes: grounds and facts as numbered items, argument under `##` headings. Whether David wants the two shapes merged, or one document per filing, is a question for him; the template produces one document.
-2. **No N.D. Iowa format rule found.** No font, size, spacing, margin or page limit in the current local rules; no L.R. 9013-1 or 9013-2 exists in Parts 1-9. The form is a convention: EB Garamond at 13 pt, double spaced, one-inch margins, page numbers at the foot. Recorded as ACCEPTED.
+2. **No N.D. Iowa format rule found.** No font, size, spacing, margin or page limit in the current local rules (checked 2026-10-14 against the 2024 Local Rules PDF: no face or point size anywhere, including Rules 5005-1 and 9004-1); no L.R. 9013-1 or 9013-2 exists in Parts 1-9. So the template keeps EB Garamond, as `docs/FONTS.md` rule 3 requires for a court that names no face. The form is a convention: EB Garamond at 13 pt, double spaced, one-inch margins, page numbers at the foot. Recorded as ACCEPTED.
 3. **FRBP 9013(b) is checked by keyword.** The template asserts that the body contains "relief", "request" or "requests". It does not check that the grounds are stated with particularity, which is a reading question for the author.
 4. **Certificate of service placeholders.** L.R. 9013-3 requires the date and manner of service. Gray has no certificate; the template renders one with placeholders, so the missing date and manner are visible. VeroBlue's certificate has no date. Both are gaps in the filed copies, flagged for David rather than filled in.
 5. **Second attorney not transcribed.** VeroBlue's signature block lists two attorneys (Michael D. Schwartz, AT0013972, and Brandon M. Schwartz, AT0011248). The sample keeps the first; the template has one `signer` field.
