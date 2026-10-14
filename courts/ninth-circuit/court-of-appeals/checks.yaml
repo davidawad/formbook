@@ -10,6 +10,8 @@
 court: ca9
 rules: rules.md
 template: typst/ca9-brief.typ
+templates:                          # the file a failure points at, per engine (docs/EVAL-LOOP.md)
+  latex: latex/template.tex
 
 font:
   typst_family: "EB Garamond"        # what the template asks typst for
