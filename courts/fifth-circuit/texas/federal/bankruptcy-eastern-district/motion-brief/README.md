@@ -9,6 +9,7 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-eastern-district/motion-b
 | sample md | `samples/INPUT-ballout-wisner-motion.md` (the whole 8-page filing, transcribed; paragraph numbers left to the template) |
 | render | ok: `samples/OUTPUT-ballout-wisner-motion.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-ballout-wisner-motion.pdf` and `OVERLAY-ballout-wisner-motion.txt` (page map) |
+| typeface | face required: none (the 2022 E.D. Tex. Bankr. local rules name no typeface; checked 2026-10-14). Font: EB Garamond (vendored, kept). No substitute applies. |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed after the last template change) |
 
 Gate files: none (this folder has no `court.json` or `.check-*` stamp).
@@ -27,7 +28,7 @@ Each row was read from the text of the rule, fetched 2026-10-14. The local rules
 | E.D. Tex. LBR 9004-1(a), (b), (c) (same PDF) | Caption identifies the district and division, the debtor's name, address and last four digits of the TIN, the case number and chapter. The title must designate the relief sought "in the motion and proposed order". One form of relief per motion (with listed exceptions). | Caption as above; `title`. A motion to dismiss seeks one form of relief. |
 | E.D. Tex. LBR 9013-1(a), (b), (d), (e) (same PDF) | (a) the motion must contain all required information, including negative-notice language; (b) **a proposed order with a title that describes the relief must accompany the motion; a missing proposed order may result in dismissal**; (d) personal identifiers redacted; (e) a certificate of service showing the parties served (with addresses), the method, the date, and signed by an attorney. | `motion-body()` prints the certificate when the sample has one (`# CERTIFICATE OF SERVICE` with `~|` and `~>` lines). The proposed order is **not produced** by this template (see gap 1). The sample has no personal identifiers. |
 
-No font, type size, margin, paper, or spacing rule was found in FRBP 9013, FRBP 9004, FRBP 7010, the 2017 local rules, or the Court's Guide to Practice (as of 8-22-22, https://www.txeb.uscourts.gov/sites/txeb/files/GUIDE_Prac_Proc_TXEB_as%20of%208-22-22.pdf). The template's choices: EB Garamond 12 pt (the only vendored font), 1-inch margins, letter paper, double spacing (as the exemplar is double spaced), and a centered page number at the foot.
+No font, type size, margin, paper, or spacing rule was found in FRBP 9013, FRBP 9004, FRBP 7010, the 2017 local rules, the 2022 local rules (LBR 9004-1, "Revised: August 22, 2022", https://www.txeb.uscourts.gov/sites/txeb/files/2022%20LOCAL%20RULES_rev%20as%20of%208-22-22.pdf; read 2026-10-14: no typeface, point size or paper size for a pleading), or the Court's Guide to Practice (as of 8-22-22, https://www.txeb.uscourts.gov/sites/txeb/files/GUIDE_Prac_Proc_TXEB_as%20of%208-22-22.pdf). The template's choices: EB Garamond 12 pt (the only vendored font), 1-inch margins, letter paper, double spacing (as the exemplar is double spaced), and a centered page number at the foot.
 
 ## Layout
 

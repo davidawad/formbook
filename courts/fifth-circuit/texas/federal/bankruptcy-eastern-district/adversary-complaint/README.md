@@ -9,6 +9,7 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-eastern-district/adversar
 | sample md | `samples/INPUT-lrk-96-simpson-complaint.md` (the whole 15-page filing, text transcribed, paragraph numbers left to the template) |
 | render | ok: `samples/OUTPUT-lrk-96-simpson-complaint.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-lrk-96-simpson-complaint.pdf` and `OVERLAY-lrk-96-simpson-complaint.txt` (page map) |
+| typeface | face required: none (the 2022 E.D. Tex. Bankr. local rules name no typeface; checked 2026-10-14). Font: EB Garamond (vendored, kept). No substitute applies. |
 | pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed after the last template change) |
 
 Gate files: none (this doc type has no `court.json` or `.check-*` stamp; the court-level gates belong to the court folder, not this folder).
@@ -25,7 +26,7 @@ Each row was read from the text of the rule, fetched 2026-10-14. The local rules
 | Fed. R. Civ. P. 10(b) (https://www.law.cornell.edu/rules/frcp/rule_10; the text "single set of circumstances" was confirmed on 2026-10-14) | Claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | `complaint-body()` numbers each body paragraph; headings and block quotations are not numbered. |
 | E.D. Tex. LBR 7007-1 and 9013-1 (same 2017 PDF) | Not applicable to the complaint: the 14-day negative notice belongs to motions in adversary proceedings (see `../motion-brief/README.md`). LBR 9013-1(e) (certificate of service) is written for motions and other papers. The filed complaint has none, and the rules read here do not settle whether a complaint needs one (service is by summons under FRBP 7004, which is not produced here). | Not in this template. |
 
-No font, type size, margin, paper, or spacing rule was found in FRBP 7010, FRBP 9004, the 2017 local rules (LBR 7010-1, 9004-1), or the Court's Guide to Practice (as of 8-22-22, https://www.txeb.uscourts.gov/sites/txeb/files/GUIDE_Prac_Proc_TXEB_as%20of%208-22-22.pdf). The template's choices for those are: EB Garamond 12 pt (the only vendored font), 1-inch margins, letter paper, double spacing, and a `§` caption column. Double spacing and the caption layout follow the filed exemplar (checked by the overlay). Numbered pleading paper is not used: the filed exemplar does not use it and no rule read here requires it.
+No font, type size, margin, paper, or spacing rule was found in FRBP 7010, FRBP 9004, the 2017 local rules (LBR 7010-1, 9004-1), the 2022 local rules (LBR 9004-1, "Revised: August 22, 2022", https://www.txeb.uscourts.gov/sites/txeb/files/2022%20LOCAL%20RULES_rev%20as%20of%208-22-22.pdf; read 2026-10-14: no typeface, point size or paper size for a pleading), or the Court's Guide to Practice (as of 8-22-22, https://www.txeb.uscourts.gov/sites/txeb/files/GUIDE_Prac_Proc_TXEB_as%20of%208-22-22.pdf). The template's choices for those are: EB Garamond 12 pt (the only vendored font), 1-inch margins, letter paper, double spacing, and a `§` caption column. Double spacing and the caption layout follow the filed exemplar (checked by the overlay). Numbered pleading paper is not used: the filed exemplar does not use it and no rule read here requires it.
 
 ## Layout
 
