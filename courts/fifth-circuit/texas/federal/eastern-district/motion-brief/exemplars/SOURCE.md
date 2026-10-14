@@ -1,22 +1,26 @@
 # Exemplars: txed motion to dismiss (Rule 12(b)(6)) with memorandum
 
-BLOCKED: no exemplar. No downloadable filed E.D. Tex. Rule 12(b)(6) motion to dismiss with memorandum was found, so this folder holds no `FILED-EXAMPLE-*.pdf`. Searches run on 2026-10-14:
+Date fetched: 2026-10-14.
 
-| # | Query or source | Result |
-|---|---|---|
-| 1 | Web search: E.D. Tex. "Defendant's Motion to Dismiss" "Rule 12(b)(6)" with Marshall/Plano/Sherman divisions, 2025 | Docket-aggregator pages and orders; no PDF of a defendant's motion. Leads (docket pages, not files): Daedalus Prime v. MediaTek (2:24-cv-235); Touchstream v. Charter (2:23-cv-59); Calibrate Networks v. Lee Hecht Harrison (2:25-cv-1075). |
-| 2 | Web search: E.D. Tex. motion to dismiss, "Local Rule CV-7", courtlistener/RECAP | Orders and local-rule commentary only. The Texas v. Google order (4:20-cv-957, Dkt. 217) was downloaded from storage.courtlistener.com; it is an order striking a second 12(b)(6) motion, not a motion. |
-| 3 | Web search: `storage.courtlistener.com` txed "MOTION TO DISMISS" (extended mode) | Mostly W.D. and N.D. Tex. items and Clearinghouse entries. No txed motion PDF. |
-| 4 | Download: texaspolicy.com `Motion-to-Dismiss-ESI-v.-City-of-Dallas.pdf` (a motion to dismiss, E.D. Tex.) | HTTP 403; the body was an HTML error page, not a PDF. Not usable. |
-| 5 | Download: eff.org / kittens.eff.org `lifescan_mtd_re_101.pdf` (My Health v. LifeScan, Marshall Div., 2014 Rule 12(b)(6) motion) | HTTP 401. Not usable. |
-| 6 | Download: cases.justia.com txedce 2:2016cv00535/168392/78 and 2:2016cv00134/166036/232 | HTTP 403 (Justia refused the download). Not usable. |
-| 7 | Web search: cdn.lawlytics.com E.D. Tex. motion to dismiss 2025 | No lawlytics motion found. |
-| 8 | Web search: eff.org-hosted E.D. Tex. defendant motion to dismiss, section 101 | An EFF blog post on § 101 practice in E.D. Tex. and secondary sources. No motion PDF. |
+| File | Case | Docket | Filer (counsel) | Date filed | Fetched from |
+|---|---|---|---|---|---|
+| `FILED-EXAMPLE-abc-ip-stark80-4-26-cv-01018-motion-brief.pdf` | *ABC IP, LLC v. Stark80 LLC* (E.D. Tex., Sherman Div.; member case of *In re Rare Breed Triggers Patent Litigation*, MDL No. 3176) | 4:26-cv-01018-ALM, Dkt. 33 (MDL 4:26-md-03176-ALM) | Defendant Jeremiah Williamson, individually (The Langley Law Firm, P.C., H. Dale Langley, Jr.) | 2026-09-15 (header "Filed 09/15/26"; certificate of service dated September 15, 2026) | https://storage.courtlistener.com/recap/gov.uscourts.txed.248046/gov.uscourts.txed.248046.33.0.pdf (docket page: https://www.courtlistener.com/docket/73728020/33/abc-ip-llc-v-stark80-llc/) |
 
-Searches 1 through 8 found no downloadable E.D. Tex. Rule 12(b)(6) motion. The E.D. Tex. complaint exemplars are in `../../complaint/exemplars/`.
+## Which one the sample uses
 
-## What this means for the build
+`samples/INPUT-williamson-motion-to-dismiss.md` is the transcription of this filing. It is the motion and its memorandum in one document (the court's CM/ECF entry, not split), with a Statement of the Issues under CV-7(a)(1), a body with argument, a conclusion and prayer, signature block and certificate of service. It runs 10 pages as filed.
 
-- The template (`typst/txed-motion-brief.typ`) is built from the rules alone (see `../README.md`).
-- The sample `samples/INPUT-generic-motion-to-dismiss.md` is fictional. It is not a transcription of any filing, so there is nothing for `tools/overlay.sh` to compare against.
-- To close the block: download a text-based E.D. Tex. motion to dismiss (CourtListener RECAP, PACER, or a court-provided copy) into this folder as `FILED-EXAMPLE-<short-case>-<docket>-motion-brief.pdf`, add the source to this file, then transcribe it into `samples/`.
+## Provenance and checks
+
+- Public CM/ECF document, re-hosted by CourtListener RECAP (the RECAP copy of the entry, `gov.uscourts.txed.248046.33.0.pdf`, is marked available). The text layer was checked with `pdftotext`: 10 pages, about 3,000 words, text-based (not a scan).
+- The ECF header on every page (`Case 4:26-cv-01018-ALM Document 33 Filed 09/15/26 Page x of 10`) shows it is the stamped Dkt. 33 of the member case.
+- Downloaded with `curl` from storage.courtlistener.com. Found through the CourtListener search API (`type=rd`, `court=txed`, query `"motion to dismiss" AND "12(b)(6)"`).
+
+## Other candidates checked (not used)
+
+| Candidate | Result |
+|---|---|
+| *Eli Lilly v. Legendary Peptides* (1:26-cv-00347, Dkt. 12, motion to dismiss under 12(b)(1) and 12(b)(6)) | Text-based, 27 pages. Not used: too long for the 8 to 14 page transcription target, and it is a pending motion from a 2026 docket. |
+| *Stua v. Charanza* (Dkt. 13, 25 pages) and *Innovation Technologies Partners v. Guardsquare* (Dkt. 13, 21 pages) | Text-based. Not used: longer than the target. |
+| *Wonderland Montessori v. Philadelphia Indemnity* (Dkt. 7, 4 pages) | Text-based. Not used: a partial motion, too short to carry the body sections. |
+| texaspolicy.com (*ESI v. City of Dallas* motion), cases.justia.com txedce dockets, texasattorneygeneral.gov BlackRock order | HTTP 403 or no response to scripted download. Not used. The BlackRock item is an order, not a motion. |

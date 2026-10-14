@@ -172,7 +172,8 @@
 #let certificate(meta) = if "certificate" in meta and meta.certificate != none {
   block(width: text-width, breakable: true, {
     v(pitch)
-    block(width: text-width, sticky: true, align(center, text(weight: "bold", "CERTIFICATE OF SERVICE")))
+    block(width: text-width, sticky: true, align(center, text(weight: "bold",
+      meta.certificate.at("title", default: "CERTIFICATE OF SERVICE"))))
     v(body-leading)
     set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
     for p in meta.certificate.paragraphs {
@@ -182,7 +183,8 @@
     block(width: text-width, breakable: false, grid(
       columns: (3in, 1fr),
       column-gutter: caption-gutter,
-      [Dated: #meta.certificate.dated],
+      // A sworn affidavit of service may carry no date line of its own (the jurat carries the date).
+      if "dated" in meta.certificate [Dated: #meta.certificate.dated] else [],
       line-stack(("", "/s/ " + meta.certificate.signer)),
     ))
   })

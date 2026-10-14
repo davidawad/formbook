@@ -18,7 +18,7 @@
 #let margin-top = 1in
 #let margin-bottom = 1in
 #let text-width = page-w - 2 * margin-x
-#let body-leading = 1.35em              // convention: loosely double-spaced body; measured pitch in README.md
+#let body-leading = 1.65em              // double-spaced body: 27.6 pt baseline pitch at 12 pt, measured on the filed exemplar (README.md)
 #let single-leading = 0.5em             // single-spaced caption and signature block
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 3.4in               // width of the party column of the caption
@@ -77,7 +77,9 @@
   columns: (caption-left, 1fr),
   column-gutter: 0.25in,
   block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 10pt), {
-    line-stack(("In re:", meta.debtor, "Case No. " + meta.bankruptcy_case, "Chapter " + meta.chapter))
+    // The debtor's designation ("Debtor.") is printed under the name, as the caption does on filed papers.
+    line-stack(("In re:", meta.debtor, "Debtor.", "Case No. " + meta.bankruptcy_case)
+      + if "chapter" in meta { ("Chapter " + meta.chapter,) } else { () })
     if "caption" in meta {
       v(1.2em)
       party-column(meta)
@@ -116,11 +118,28 @@
 /// Chunks are emitted with parbreak() so that paragraphs do not run together.
 #let brief-body(body) = {
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
+  // Footnote text is kept apart from the chunks: each chunk is rendered alone, so a chunk gets the
+  // definitions of the notes it refers to, and a definition chunk is not printed as a paragraph.
+  let notes = (:)
+  for m in body.matches(regex("(?m)^\\[\\^([^\\]]+)\\]:[ \\t]*(.*)$")) {
+    notes.insert(m.captures.at(0), m.captures.at(1))
+  }
   for c in chunks {
     let t = c.trim()
+    if t.starts-with(regex("^\\[\\^[^\\]]+\\]:")) { continue }
+    for r in t.matches(regex("\\[\\^([^\\]]+)\\]")) {
+      let id = r.captures.at(0)
+      t = t + "\n\n[^" + id + "]: " + notes.at(id, default: "")
+    }
     parbreak()
     if t.starts-with("#") {
       cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+    } else if t.starts-with(">") {
+      // Block quotation: indented 0.5 inch on both sides, single-spaced, not first-line indented.
+      pad(left: 0.5in, right: 0.5in, {
+        set par(leading: single-leading, spacing: body-leading, first-line-indent: 0pt)
+        cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+      })
     } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
       set enum(numbering: "1.", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
       set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
@@ -144,11 +163,12 @@
     align(top, {
       if "firm" in meta.signature { text(weight: "bold", meta.signature.firm) }
       v(single-leading)
-      "Respectfully submitted,"
-      v(2 * body-leading)
-      "/s/ " + box(width: 2.8in, line(length: 2.8in, stroke: 0.5pt))
+      // The closing line ("Respectfully submitted,") is the filer's choice; it is printed only when given.
+      if "closing" in meta.signature { meta.signature.closing; v(2 * body-leading) }
+      // Electronic signature: "/s/" over the signer's name, as CM/ECF filers type it (Fed. R. Bankr. P. 9011).
+      "By: /s/ " + meta.signature.signer
       v(0.2em)
-      line-stack((meta.signature.signer,) + meta.signature.lines)
+      line-stack(meta.signature.lines)
     }),
   ))
 }
@@ -158,10 +178,9 @@
 // ---------------------------------------------------------------------------
 
 #let wiwb-motion-brief(meta, body) = {
-  // Fed. R. Bankr. P. 9013(a)-(b): a motion is written and states its grounds with particularity and the relief
-  // requested. The template requires a relief statement; the grounds are the sample's to write.
-  assert(body.match(regex("(?im)^# *relief requested")) != none, message: "wiwb-motion-brief: Fed. R. Bankr. P. 9013(b) requires the relief requested (a '# RELIEF REQUESTED' heading)")
-  assert(body.match(regex("(?im)^# *grounds")) != none, message: "wiwb-motion-brief: Fed. R. Bankr. P. 9013(b) requires the grounds stated with particularity (a '# GROUNDS' heading)")
+  // Fed. R. Bankr. P. 9013(b) requires the grounds and the relief requested, in substance. It does not require
+  // headings for them: the filed memorandum (../exemplars/SOURCE.md) states both in its own headings, so the
+  // template asserts nothing about heading names.
 
   set page(
     paper: "us-letter",
@@ -169,14 +188,15 @@
     footer: footer(),
   )
   set text(font: font-family, size: type-size, lang: "en")
-  // Paragraph gap of body-leading: with the 1.35em leading and a 0.65em line box, paragraphs start at the
-  // same 24 pt pitch as lines (see README.md for the measurement method).
+  // Paragraph gap of body-leading: with the 1.65em leading and a 0.65em line box, paragraphs start at the
+  // same 27.6 pt pitch as lines (see README.md for the measurement method).
   set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
 
+  // Headings are the body size (typst's default heading size is larger; the filed memorandum's are 12 pt).
   show heading.where(level: 1): it => block(width: text-width, above: 1.2em, below: 0.6em, sticky: true,
-    align(center, text(weight: "bold", upper(it.body))))
+    align(center, text(size: type-size, weight: "bold", upper(it.body))))
   show heading.where(level: 2): it => block(width: text-width, above: 1em, below: 0.5em, sticky: true,
-    text(weight: "bold", it.body))
+    { set par(hanging-indent: 0.4in); text(size: type-size, weight: "bold", it.body) })
 
   cover(meta)
   brief-body(body)

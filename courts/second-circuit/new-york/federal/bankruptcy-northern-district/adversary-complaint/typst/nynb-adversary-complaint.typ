@@ -107,9 +107,11 @@
 // ---------------------------------------------------------------------------
 
 /// Each blank-line-separated chunk of markdown is one unit. A chunk starting with "#" is a heading (one
-/// "#" centred, "##" flush left); a chunk starting with "(a)", "(b)", ... is an unnumbered sub-item;
-/// every other chunk is one numbered paragraph. Numbering is applied per chunk, not with a show rule.
-#let body-content(body) = {
+/// "#" centred, "##" flush left); a chunk starting with "(a)", "(b)", ... is an unnumbered sub-item; a chunk
+/// starting with "%" is an unnumbered paragraph (a WHEREFORE clause); every other chunk is one numbered
+/// paragraph. The first `preamble` chunks (frontmatter key, when given) are unnumbered; without it, the chunks
+/// before the first heading are. Numbering is applied per chunk, not with a show rule.
+#let body-content(body, preamble: none) = {
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
   let n = counter("nynb-para")
@@ -120,9 +122,13 @@
   // one more leading: n lines then take n double-spaced pitches (24 pt each) and the next unit starts on the grid.
   for (i, c) in chunks.enumerate() {
     let t = c.trim()
+    if preamble != none and i >= preamble { numbered = true }
     // A paragraph that leads into a lettered sub-item sticks to it (a lead-in is never left alone at a page foot).
     let leads-in = i + 1 < chunks.len() and chunks.at(i + 1).trim().starts-with(regex("^\\([a-z]\\)[ \\t]"))
-    if t.starts-with("#") {
+    if t.starts-with("%") {
+      out += block(width: text-width, breakable: true, sticky: leads-in, [#h(para-indent)#inl(t.slice(1).trim())])
+      out += v(body-leading)
+    } else if t.starts-with("#") {
       numbered = true
       let level = t.match(regex("^#+")).text.len()
       let words = t.slice(level).trim()
@@ -134,8 +140,9 @@
       }
       out += v(body-leading)
     } else if t.starts-with(regex("^\\([a-z]\\)[ \\t]")) {
-      // Sticky: the prayer items stay with the signature block that follows them (no signature alone on a page).
-      out += block(width: text-width, breakable: true, sticky: true, inset: (left: 0.5in), inl(t))
+      // Only the last prayer item is sticky: it stays with the signature block (no signature alone on a page).
+      // The others may break across pages, as a prayer does in the filed exemplar.
+      out += block(width: text-width, breakable: true, sticky: i + 1 == chunks.len(), inset: (left: 0.5in), inl(t))
       out += v(body-leading)
     } else if not numbered {
       out += block(width: text-width, breakable: true, [#h(para-indent)#inl(t)])
@@ -180,6 +187,6 @@
   )
   set text(font: font-family, size: type-size, lang: "en", region: "us")
   cover(meta)
-  body-content(body)
+  body-content(body, preamble: meta.at("preamble", default: none))
   signature(meta)
 }
