@@ -1,0 +1,31 @@
+# Exemplar sources: paed complaint
+
+| Field | Value |
+|---|---|
+| Saved file | `FILED-EXAMPLE-murphy-2-26-cv-07848-complaint.pdf` (22 pages, text layer present, pdffonts: TimesNewRoman embedded) |
+| URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.paed.663619/gov.uscourts.paed.663619.1.0.pdf (RECAP document 1 of docket 2:26-cv-07848, reached from https://www.courtlistener.com/docket/74955140/1/murphy-v-lexisnexis-risk-solutions-inc/) |
+| Case | *Murphy v. LexisNexis Risk Solutions, Inc.* |
+| Court | United States District Court, E.D. Pa. |
+| Docket no. | 2:26-cv-07848 (assigned judge initials GAW in the ECF header) |
+| Document | Complaint and Jury Demand (FCRA, 15 U.S.C. § 1681e(b), 1681i) |
+| Filer | Plaintiff Logan Reid Murphy, counsel Richard H. Kim, The Kim Law Firm, LLC, Philadelphia (signature block on page 22) |
+| Date filed | October 13, 2026 (ECF header "Filed 10/13/26") |
+| Date fetched | October 14, 2026 |
+| Public record | Yes: RECAP copy of a public ECF filing; no sealed or redacted material in the transcribed parts |
+
+## Search trail
+
+CourtListener REST search, `type=r`, `court_id:paed`, query `short_description:complaint`, ordered by filing date (2026-10-08 to 2026-10-13). Candidates checked for a text layer with `pdftotext`:
+
+| Case | Docket | Pages | Text layer | Filer | Status |
+|---|---|---|---|---|---|
+| Murphy v. LexisNexis Risk Solutions | 2:26-cv-07848 | 22 | yes | Kim Law Firm (Richard H. Kim) | **saved** |
+| Evenstad v. CoilPlus, Inc. | 2:26-cv-07849 | 28 | yes | Gurmankin (Caren Gurmankin) | not saved; second-filer check |
+| J v. La Academia Partnership Charter School | 5:26-cv-07843 | 15 | not checked | Zeff (Gregg Zeff) | not saved |
+| Johnson v. La Academia Partnership Charter School | 5:26-cv-07834 | 12 | yes | Zeff (Gregg Zeff) | not saved; second-filer check |
+| Gaines v. Urban Outfitters Inc. | 2:26-cv-07850 | 8 | no (528 characters: image or fonts without text) | not identified | rejected |
+| Rabidoux v. Novo Nordisk A/S | 2:26-cv-07835 | 11 | no (695 characters) | Aminolroaya | rejected |
+
+The tier-2 rule asks for two or three exemplars from different filers. The brief asks for one saved exemplar per doc type. The second-filer candidates (Evenstad, Johnson) were located and their text layers confirmed but not saved, so **tier 2 is judged against one filer only** (see the README, "Known gaps").
+
+The overlay pairs against `FILED-EXAMPLE-murphy-2-26-cv-07848-complaint.pdf` (the first `exemplars/*.pdf` in the folder).
