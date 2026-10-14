@@ -769,7 +769,7 @@ In scope but with a location the circuit map cannot place; no folder is created 
 
 ## License
 
-LICENSE: TBD
+GNU General Public License v3.0 (see [LICENSE](LICENSE)) for the templates, tools and skill. The filed exemplars under `courts/**/exemplars/` are public court records reproduced for reference; each folder's `SOURCE.md` names its docket and source.
 
 ## Tracker
 

@@ -72,7 +72,7 @@ A maintainer reads the PR body (verify output, exemplar sources, the open tier-2
 
 - Exemplars must be public court records: filings from a public docket or archive (CourtListener RECAP, the court's own site, a state e-filing portal open to the public). No sealed, restricted, private or client documents. Do not include filings that contain unredacted personal data the court would have required redacted.
 - Record the exact source URL, filer, case, docket number, date filed and date retrieved for every exemplar in that folder's `exemplars/SOURCE.md`. A PR whose exemplar has no source URL fails verification.
-- Rules text and templates you write are contributed under the repository's license. Quote court rules briefly and cite them; do not paste large copyrighted commentary.
+- Rules text, templates and tools you write are contributed under the repository's license, the GNU GPL v3.0 ([LICENSE](LICENSE)). Quote court rules briefly and cite them; do not paste large copyrighted commentary.
 - Disclose substantial AI assistance in the PR body (the template has a line for it). You are responsible for what your agent submits.
 
 ## Changing the tools or the vocabulary
