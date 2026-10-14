@@ -1,28 +1,27 @@
 # Exemplar source
 
-**BLOCKED: no exemplar.** No filed adversary complaint from the U.S. Bankruptcy Court, N.D. W. Va. was found. No `FILED-EXAMPLE-*.pdf` is in this folder, so `tools/overlay.sh` cannot run for this doc type.
+Exemplar: `FILED-EXAMPLE-protea-v-ckr-law-1-19-ap-00056-adversary-complaint.pdf` (5 pages, text-based, public).
 
-- Doc type: adversary complaint (FRBP 7001 et seq.; LBR 7001-1, 7003-1).
-- Date searched: 2026-10-14.
+- Court: United States Bankruptcy Court, N.D. West Virginia (wvnb).
+- Case: *Protea Biosciences, Inc. and Protea Biosciences Group, Inc. v. CKR Law LLP*, adversary proceeding No. 1:19-ap-00056 (main cases 1:17-bk-1200 and 1:17-bk-1201, Chapter 11, Judge Flatley).
+- Document: Complaint, ECF Doc. 1 (header "No. 1:19-ap-00056 Doc 1").
+- Filer: Protea Biosciences, Inc. and Protea Biosciences Group, Inc. (plaintiffs), by Christopher P. Schueller, Buchanan Ingersoll & Rooney LLP.
+- Date filed: 2019-11-26 (entered 11/26/2019 13:47:14).
+- Date fetched: 2026-10-14.
+- URL (docket entry): https://www.courtlistener.com/docket/16517663/1/protea-biosciences-inc-and-protea-biosciences-group-inc-adversary/
+- URL (PDF, CourtListener RECAP): https://storage.courtlistener.com/recap/gov.uscourts.wvnb.76195/gov.uscourts.wvnb.76195.1.0.pdf
+- Found by: CourtListener RECAP search API, `court=wvnb`, `type=rd`, query `"adversary proceeding" complaint`. The document is marked available, so it was downloaded from RECAP storage without a login.
 
-## Searches tried (all returned no party-filed complaint)
+## Why this one
 
-1. WebSearch: "Northern District of West Virginia" bankruptcy adversary proceeding complaint pdf "adversary proceeding no." trustee. Found court opinions (In re Russell, 2024; In re Warner, 2012), InForuptcy docket pages, and the court's pro hac vice form. No complaint.
-2. WebSearch: "Bankruptcy Court" "Northern District of West Virginia" complaint, wvnb, courtlistener. Found forms and the 2003 local rules. No complaint.
-3. WebSearch: "Bankruptcy Court for the Northern District of West Virginia" adversary complaint trustee plaintiff 2024/2025. Found the Russell opinion and InForuptcy dockets. No complaint.
-4. WebSearch: adversary complaint fraudulent transfer Chapter 7 trustee Wheeling/Clarksburg/Martinsburg. Found the Truth Tellers v. Levine opinion (20-ap-36, 2022) and Sheehan v. Saoud (district court, appeal to the Fourth Circuit). Opinions only.
-5. WebFetch: CourtListener search filtered to wvnb. HTTP 403.
-6. WebFetch: InForuptcy docket page for 5:24-bk-00267. HTTP 403.
-7. WebFetch: GovInfo USCOURTS-wvnb-3_18-ap-00054 (Weaver v. Hartman). This is a court-issued Memorandum Opinion (Doc. 23, 2019), not a party complaint. Its caption was used as a reference for the court name and the "In re" block, and it is not an exemplar.
-8. WebFetch: Tika govdocs PDFs surfaced by search. DNS failure in this box.
-9. WebSearch: Local rules, wvnb amended 2024/2025. Nothing current found on wvnb.uscourts.gov. courtrules.net returned HTTP 403.
+It is a filed complaint in this court, with the caption, the Rule 7001 jurisdiction and venue paragraphs, numbered counts, a prayer, a signature block, and a schedule table. It is a 2019 filing by a firm, so it is closer to current practice than the 2004 pro se filing below.
 
-## Sources actually used for the rules (not exemplars)
+## Other candidates considered (not used)
 
-- Local Bankruptcy Rules, N.D. W. Va., effective Nov. 21, 2003 (adopted by order Oct. 22, 2003): https://www.wvnb.uscourts.gov/sites/wvnb/files/local_rules/Local%20Rules.pdf (fetched 2026-10-14; LBR 7001-1, 7003-1, 9004-2, 9013-1). Saved text was extracted with pdftotext to /tmp and is not in the repo.
-- Fed. R. Bankr. P. 7010, 9004 (subd. (b)), 7008, 9013: https://www.law.cornell.edu/rules/frbp/ (fetched 2026-10-14).
-- Fed. R. Civ. P. 10: https://www.law.cornell.edu/rules/frcp/rule_10 (fetched 2026-10-14).
+- Schultz and Schultz v. Firstplus Bank et al. (CourtListener docket 24187820, RECAP document 1, 34 pages, filed 2004-09-15). Available as `recap/gov.uscourts.wvnb.42647/gov.uscourts.wvnb.42647.1.0.pdf`. Its text is not embedded (Helvetica, not embedded) and it predates the 2024 caption and Rule 10 amendments. It could serve as a second-filer comparison later.
+- Talon Manufacturing v. Fulcrum Insurance (adv. 01-3343, 2001): the complaint is not in RECAP storage.
+- Linda J. Romano v. Wells Fargo (adv. 02-1118, 2002): the complaint is not in RECAP storage.
 
-## Caveat for the sample
+## Caveat
 
-`samples/INPUT-example-adversary-complaint.md` is **fictional**. Its parties, numbers and transfers are invented, and its legal citations are illustrative. It is not a transcription of any filing. It exists to exercise the template's structure: caption, numbered paragraphs, counts, prayer and signature.
+The exemplar is an actual filing. The transcription in `samples/INPUT-protea-adversary-complaint.md` copies its text, including the blank "Adversary No." line on the filed caption. The number 1:19-ap-00056 appears only in the ECF page header, which the template does not reproduce.

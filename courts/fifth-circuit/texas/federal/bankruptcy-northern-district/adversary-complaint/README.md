@@ -3,15 +3,15 @@
 Doc type: **adversary complaint** in the United States Bankruptcy Court for the Northern District of Texas (`txnb`).
 Folder: `courts/fifth-circuit/texas/federal/bankruptcy-northern-district/adversary-complaint/`.
 
-BLOCKED: no exemplar. No filed adversary complaint from this court could be found or downloaded (searches listed in `exemplars/SOURCE.md`). The template is built from the rules below; the layout choices the rules leave open are conventions, not checked against a filing.
+Exemplar: Prime Asset LLC v. PrimaLend Capital Partners, LP, adversary 26-09001 (Bankr. N.D. Tex., Fort Worth Division), Doc 1, filed January 7, 2026. Source and URLs in `exemplars/SOURCE.md`.
 
 | Item | Status |
 |---|---|
-| exemplar | no (`BLOCKED: no exemplar`; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-synthetic-adversary-complaint.md`: a SYNTHETIC test fixture, not a transcription of a filing. It exists only to exercise the template. |
-| render | ok on the synthetic fixture: `tools/render.sh` ran with typst 0.15.0, vendored EB Garamond only, no warnings. The PDF is `samples/OUTPUT-synthetic-adversary-complaint.pdf` (kept out of git, see Known gaps). |
-| overlay | fail: `tools/overlay.sh` exits 1 with "no exemplar pdf in exemplars". There is nothing to overlay against. |
-| pages reviewed | 2 of 2 (synthetic render, every page rendered at 60 dpi and viewed after the last template change) |
+| exemplar | yes: `exemplars/FILED-EXAMPLE-prime-asset-v-primalend-26-09001-adversary-complaint.pdf` (the whole 27-page filing, text layer present) |
+| sample md | `samples/INPUT-prime-asset-v-primalend.md`: a transcription of the caption and counsel block, ¶¶ 1–37, the Count Six to Eight paragraphs, the prayer and the signature. Filing pages 10–24 (¶¶ 38–122, the factual allegations and Counts One to Five) are not transcribed; the sample marks the gap. |
+| render | ok: `tools/render.sh` (typst 0.15.0, vendored EB Garamond only, no warnings) writes `samples/OUTPUT-prime-asset-v-primalend.pdf`, 11 pages |
+| overlay | ok: `tools/overlay.sh` writes `samples/OVERLAY-prime-asset-v-primalend.pdf` and `.txt`; every rendered page is paired with a filed page (see the page map in the `.txt`) |
+| pages reviewed | 11 of 11 (every page of the final render rasterized at 80 dpi and viewed after the last template change) |
 
 ## Governing rules
 
@@ -39,7 +39,7 @@ The local rules copy is dated "Revised 12/1/16". A later revision may exist on t
 - Court title centered and bold: UNITED STATES BANKRUPTCY COURT / NORTHERN DISTRICT OF TEXAS / DIVISION.
 - Form 416 caption: left column, the debtor ("In re: ..., Debtor.") above the adversary parties ("Plaintiff. v. Defendant."), closed by a rule on the right and bottom; right column, Chapter, Case No., Adversary Proceeding No.
 - Title centered and bold.
-- Body double-spaced (about 24 pt pitch at 12 pt, a convention). Headings: level 1 centered bold caps; level 2 bold; level 3 bold italic.
+- Body double-spaced (about 24 pt pitch at 12 pt, a convention). Headings are set as written: level 1 centered bold (the template does not change their case, because `upper()` turned citation letters such as "(a)" into "(A)"); level 2 bold; level 3 bold italic. Headings keep with the paragraph that follows.
 - Numbered paragraphs, first line indented 0.5 in. Lists are lettered (a), (b), ... by the template.
 - Signature block: "Dated", "Respectfully submitted," the firm, "By: /s/ <signer>", bar number. Kept together on one block.
 
@@ -52,20 +52,25 @@ The local rules copy is dated "Revised 12/1/16". A later revision may exist on t
 
 ## Known gaps and open choices
 
-1. **No exemplar (blocking for tier 2).** The brief asks for a filed exemplar; none was found (see `exemplars/SOURCE.md`). Every layout choice that the rules leave open (spacing, caption details, counsel block placement, signature block) is unchecked against a filing. Tier 2 cannot be judged. The overlay cannot run.
-2. **Synthetic fixture.** `samples/INPUT-synthetic-adversary-complaint.md` is a placeholder test document. It is not an exemplar and is not evidence of how a filing looks. Its render is for template testing only.
+1. **Excerpt, not the whole filing.** The sample covers filing pages 1–9 and 24–27. Filing pages 10–24 (¶¶ 38–122 and Counts One to Five) are marked in the sample and not transcribed. Counts Six to Eight are unnumbered in the sample, because the template numbers paragraphs in sequence and the filing's numbers there (¶¶ 123 onward) would not match.
+2. **Footnote and ECF header not reproduced.** Footnote 1 of the filing (the debtors' last-four EIN digits and headquarters address) is not transcribed: the markdown contract does not support footnotes. The ECF stamp at the top of each filed page is added by the court's system and is not part of the form. The filer's two-column counsel block is set as one column.
 3. **Adversary cover sheet (L.B.R. 7003-1) and summons.** Not generated. The cover sheet is a separate filing that must accompany the complaint; the N.D. Tex. form is not in the vendored set, and the Southern District's B104 form found in search is not this court's form. Needs a decision.
 4. **Certificates and proposed order.** Not part of a complaint in this template. A certificate of service of the summons may be needed; not in scope.
 5. **Font.** No font rule was found for complaints, so EB Garamond at 12 pt (the only vendored font) is used. It is smaller in apparent size than Times New Roman at 12 pt. Whether the court expects a different font is a question for David.
-6. **Output PDFs are not committed.** Following the snapshot's rule against PDFs in the repo, `OUTPUT-synthetic-adversary-complaint.pdf` was moved to `/work/artifacts/` after review. Rerun `sh tools/render.sh <this-folder> samples/INPUT-synthetic-adversary-complaint.md` to regenerate it.
+6. **Output PDFs.** `samples/OUTPUT-prime-asset-v-primalend.pdf` and `samples/OVERLAY-prime-asset-v-primalend.pdf` (with `.txt`) are written where the tools put them. Regenerate with `sh tools/render.sh <this-folder> samples/INPUT-prime-asset-v-primalend.md` and `sh tools/overlay.sh <this-folder> prime-asset-v-primalend`.
 7. **Paragraph numbering is not checked for continuity across sections or claim headings.** Numbering is by the template only; a complaint that restarts numbering per claim would need a change.
 8. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and `tools/` is out of scope for this box. The gates were not run.
+9. **Signature block differs from the filing.** The template prints "Respectfully submitted," and the firm name above "By: /s/"; the filing has only the "Dated" line, the firm and the signers. Recorded here, not changed.
 
-## Review of the rendered pages (synthetic fixture, final template)
+## Review of the rendered pages (Prime Asset transcription, final template, 11 pages)
 
-- Page 1: counsel block at top left; court title centered on three lines; Form 416 caption with the debtor, plaintiff, defendant and the chapter / case / adversary numbers on the right; the title centered below. No overlap. Pass.
-- Page 1 (continued): the first heading (fixture text) with paragraph 1, the unnumbered line under JURISDICTION AND VENUE, paragraphs 2 and 3 under PARTIES. Paragraph text is line-spaced and spaced between paragraphs. Pass.
-- Page 2: paragraph 4 (wraps to a second line), FACTUAL BACKGROUND with paragraphs 5 and 6, the first claim sub-heading with paragraph 7, REQUEST FOR RELIEF with the unnumbered WHEREFORE line, relief items (a) and (b), and the date and signature block. The signature block is not split. Pass.
+- Page 1: counsel block at top left; court title centered on three lines; Form 416 style caption with the debtor, plaintiff, defendants and the chapter / case / adversary numbers on the right; the title centered below. No overlap. Pass.
+- Pages 2–8: ¶¶ 1–37 numbered in sequence; PRELIMINARY STATEMENT, JURISDICTION AND VENUE, PARTIES and FACTUAL BACKGROUND centered bold; sub-headings A and B bold; no orphaned heading. Pass.
+- Page 9: the bracketed omission note (unnumbered), COUNT SIX and COUNT SEVEN with their unnumbered paragraphs. Pass.
+- Page 10: COUNT EIGHT, the WHEREFORE line and relief items (a) and (b) with the hanging letter. Pass.
+- Page 11: relief items (c) to (i), the date and the signature block, kept together. Pass.
+- Overlay: the filed pages differ from ours in the places listed in Known gaps (ECF header, two-column counsel block, the omitted pages). The word-overlap scores (45–83%) are a pairing aid, not a grade.
+- Fixed in this pass: level-1 headings no longer pass through `upper()`, and headings are kept with the following paragraph (the first render had "(A)" for "(a)" in a heading).
 
 Earlier template versions overlapped headings and body text (block-wrapped paragraphs with `context`); the final version puts paragraphs in plain content separated by `parbreak()`, which fixed it. Both pages were re-reviewed after that change.
 

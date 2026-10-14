@@ -1,20 +1,25 @@
 # Exemplar source: adversary complaint (msnb)
 
-**Status: BLOCKED: no exemplar.** No public filed adversary complaint from the U.S. Bankruptcy Court for the
-Northern District of Mississippi was found, so `exemplars/` holds no PDF and the overlay was not run.
+**Status: exemplar = yes.** One public, text-based filed adversary complaint from this court is saved here.
 
-Searches tried on 2026-10-14 (no complaint PDF returned):
-
-| Route | Result |
+| Field | Value |
 |---|---|
-| CourtListener RECAP search, `court=msnb`, `type=r`, complaint query (WebFetch) | HTTP 403; not reachable from this box |
-| Web search: msnb adversary complaint, "Adversary Proceeding No.", RECAP / courtlistener | Only msnb hearing calendars (Judge Woodard, 2018 to 2025), court opinions, and PACER/UniCourt pages |
-| Web search: § 523 dischargeability complaint, "Comes now", N.D. Miss. | Calendars and opinions only (e.g. A.P. Dkt. 1 described, not printed) |
-| Web search: storage.courtlistener.com recap msnb adversary | Southern District of Mississippi statistics only |
-| govinfo USCOURTS-msnb packages | Opinions only (e.g. USCOURTS-msnb-1_16-ap-01053); no complaint found |
+| File | `FILED-EXAMPLE-community-bank-loancare-20-01059-adversary-complaint.pdf` |
+| Court | United States Bankruptcy Court, N.D. Mississippi (`msnb`) |
+| Case | *Community Bank of Mississippi v. LoanCare, LLC, Margaret B. Hall and William L. Fava, Trustee* (main case *In re Margaret B. Hall*, No. 20-12866-JDW) |
+| Adversary docket | 20-01059-JDW |
+| Document | Doc. 1, "Complaint for Declaratory Judgment, to Determine Extent, Validity and Priority of Liens and for Other Relief" (3 pages) |
+| Filer | Community Bank of Mississippi, by Jeff D. Rawlings (Rawlings & MacInnis, P.A.), counsel of record. Exhibits A to D are attachments and are not in the saved PDF. |
+| Date filed | 2020-10-05 (Entered 10/05/2020) |
+| Date fetched | 2026-10-14 |
+| URL (docket) | https://www.courtlistener.com/docket/18510100/community-bank-of-mississippi-v-loancare-llc/ |
+| URL (document) | https://storage.courtlistener.com/recap/gov.uscourts.msnb.181317/gov.uscourts.msnb.181317.1.0.pdf |
 
-Filers of any filed document: none. The sample in `samples/` is **synthetic** (fictional parties, numbers and
-addresses); it is not a transcription and must not be read as the court's format.
+The PDF is the RECAP copy of the complaint as filed (a text layer is present; `pdftotext` returns the caption, paragraphs 1 to 9, the WHEREFORE clause and the signature block).
 
-A future box with CourtListener access should search RECAP for msnb adversary numbers (e.g. the 24-01002 and
-22-01005 entries in the court's calendars) and save a PDF here as `FILED-EXAMPLE-<short-case>-<docket>-adversary-complaint.pdf`.
+## Other searches
+
+- CourtListener RECAP search API (`court=msnb`, `type=r`, query "adversary proceeding" complaint): many msnb adversary dockets with free RECAP documents. The complaints (Doc. 1) of Littrell v. Burgess (24-01024), Thorne v. Prommis (10-01172) and Premier Trust v. Capital Asset Management (20-01038) were not among the free documents returned, so they were not used.
+- The filer's complaint is 3 pages with no certificate of service. The exemplar therefore sets the caption, the paragraph form and the signature block; it does not show a certificate.
+
+The exemplar is an older (2020) filing made before the 2024 amendments to the rules. It was chosen because it is the only free, text-based complaint from this court that was found.

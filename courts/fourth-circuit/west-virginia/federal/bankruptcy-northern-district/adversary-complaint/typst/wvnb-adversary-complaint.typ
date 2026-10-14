@@ -5,7 +5,7 @@
 // ---- parameters ----
 #let font-family = "EB Garamond"   // vendored in /fonts; no system font is ever used
 #let type-size = 12pt              // LBR 9004-1 (search excerpt, see README): minimum 10 pt; 12 pt used
-#let body-leading = 0.85em         // ~1.5 spacing: inside LBR 9004-1's single-to-double range (see README)
+#let body-leading = 1.65em         // double spacing (27.6 pt line pitch at 12 pt), as in the filed complaints; LBR 9004-1 allows up to double
 #let single-leading = 0.3em        // caption, counsel block, signature, footer
 #let para-indent = 0.5in           // FRCP 10(b) numbered paragraphs; indent is presentation only
 #let margins = (top: 1in, bottom: 1in, left: 1in, right: 1in)  // LBR 9004-1 is silent on margins; 1 in is the convention
@@ -71,13 +71,16 @@
   v(0.6em)
 }
 
-// Counsel block, upper left (convention; the rules text read does not set a position).
+// Counsel block, upper left, only when the filing has one. The two WVNB complaints read
+// (Protea 2019, see exemplars/SOURCE.md) put counsel at the signature only, so it is optional here.
 #let counsel-block(meta) = {
-  set par(first-line-indent: 0pt, leading: single-leading)
-  for line in need(meta, "counsel") {
-    [#line\ ]
+  if "counsel" in meta {
+    set par(first-line-indent: 0pt, leading: single-leading)
+    for line in meta.counsel {
+      [#line\ ]
+    }
+    v(1.2em)
   }
-  v(1.2em)
 }
 
 // Paragraphs of the complaint are numbered continuously across the whole document (FRCP 10(b)).
@@ -87,18 +90,23 @@
   let sig = need(meta, "signature")
   set par(first-line-indent: 0pt, leading: single-leading)
   v(1.2em)
+  // "Dated" at left, signer block in a right column so long lines wrap inside it.
   block(width: 100%, breakable: false)[
-    #if "date" in meta [Dated: #meta.date\ ]
-    #v(0.8em)
-    #h(3.2in)Respectfully submitted,\
-    #v(0.8em)
-    #h(3.2in)#strong[s/ #sig.signer]\
-    #for line in sig.lines [#h(3.2in)#line\ ]
+    #grid(
+      columns: (3.2in, 3.3in),
+      [#if "date" in meta [Dated: #meta.date]],
+      [
+        Respectfully submitted,\
+        #v(0.8em)
+        #strong[s/ #sig.signer]\
+        #for line in sig.lines [#line\ ]
+      ],
+    )
   ]
 }
 
 #let wvnb-adversary-complaint(meta, md) = {
-  for k in ("court", "caption", "chapter", "case_number", "adversary_number", "complaint_title", "counsel", "signature") {
+  for k in ("court", "caption", "chapter", "case_number", "adversary_number", "complaint_title", "signature") {
     let _ = need(meta, k)
   }
 
@@ -109,23 +117,26 @@
   )
   set text(font: font-family, size: type-size, lang: "en", region: "us", hyphenate: false, fallback: false)
   set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: false)
-  set enum(
-    numbering: _ => {
-      para-no.step()
-      context para-no.display() + "."
-    },
-    indent: 0pt,
-    body-indent: 0.5in,
-  )
+  // Numbered paragraphs: the number sits on the first-line indent and the text wraps to the
+  // margin (as in the filed Protea complaint). One counter runs through the whole document.
+  show enum.item: it => block(width: 100%, {
+    set par(first-line-indent: 0pt)
+    h(para-indent)
+    para-no.step()
+    context para-no.display() + "."
+    h(0.25in)
+    it.body
+  })
   set footnote.entry(separator: line(length: 30%, stroke: 0.5pt))
   show footnote.entry: set text(size: 10pt)
   show footnote.entry: set par(first-line-indent: 0pt)
 
-  // Headings in a complaint are centered capitals (parts) or bold centered (counts and subparts).
+  // Headings in a complaint are centered capitals (parts) or bold centered (counts and subparts),
+  // set at body size as in the filed complaint.
   show heading.where(level: 1): it => block(width: 100%, above: 1.2em, below: 0.8em, sticky: true,
-    align(center, strong(upper(it.body))))
+    align(center, strong(text(size: type-size, upper(it.body)))))
   show heading.where(level: 2): it => block(width: 100%, above: 1em, below: 0.6em, sticky: true,
-    align(center, strong(it.body)))
+    align(center, strong(text(size: type-size, it.body))))
 
   // Running footer: page number on every page.
   set page(footer: context {
@@ -136,6 +147,13 @@
   counsel-block(meta)
   court-caption(meta)
 
-  cmarker.render(md, raw-typst: false, smart-punctuation: true)
+  // A line `@@after-signature@@` in the sample starts the part that follows the signature
+  // (the filed Protea complaint puts Schedule 1 on its own page after the signature).
+  let parts = md.split("@@after-signature@@")
+  cmarker.render(parts.at(0), raw-typst: false, smart-punctuation: true)
   signature-block(meta)
+  for tail in parts.slice(1) {
+    pagebreak(weak: true)
+    cmarker.render(tail, raw-typst: false, smart-punctuation: true)
+  }
 }
