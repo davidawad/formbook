@@ -7,9 +7,10 @@ Folder: `courts/eighth-circuit/south-dakota/federal/district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-knosp-5-26-cv-05092-complaint.pdf` (1 filer, pro se; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-knosp-complaint.md` (the filed content of the exemplar; see below) |
-| render | ok: `samples/OUTPUT-knosp-complaint.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-knosp-complaint.pdf` and `OVERLAY-knosp-complaint.txt` |
-| pages reviewed | 3 of 3 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none** (D.S.D. Civ. LR 83.4 says only "Fonts must be at least 12-point"; checked in the official PDF 2026-10-14). Substitute: none; **EB Garamond** kept, as `docs/FONTS.md` says for a court that names no face. Fit: n/a. |
+| render | ok: `samples/OUTPUT-knosp-complaint.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond-Regular and -Bold embedded |
+| overlay | ok: `samples/OVERLAY-knosp-complaint.pdf` and `OVERLAY-knosp-complaint.txt`, built against the filed exemplar fetched from the RECAP URL in `exemplars/SOURCE.md` (the PDF is not in `exemplars/` in this snapshot; pass it as the third argument to `tools/overlay.sh`) |
+| pages reviewed | 3 of 3 (every page rendered at 60 dpi and viewed again on 2026-10-14 after the fonts-pass re-render) |
 | tier 2 | not met to the eval-loop standard: one filer, and that filer is pro se (see Known gaps) |
 
 File names follow the repo convention used by `tools/render.sh` and `tools/overlay.sh` (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf` and `.txt`), not the `<id>.pdf` and `<id>-overlay.pdf` names in the brief, because the tools read and write the repo names by default.
@@ -70,7 +71,7 @@ The pairing is partial: the exemplar is a 7-page form whose entries sit on pages
 5. **Redactions.** Plaintiff's street address, telephone and e-mail are `[redacted]` in the sample, and the signature block shows the city only. Defendants' service addresses are kept (they are the registered-agent addresses). No SSN, birth date or financial-account number appears (LR 5.2).
 6. **Jury demand.** The form's jury box is ambiguous in the text layer ("|^| Yes |_| No"). The docket text on CourtListener says "COMPLAINT with Jury Demand", so `jury_demand: true`.
 7. **Signing date.** The text layer of the "Date of signing" line is illegible. The sample uses "July 21, 2026", the filing date stamped in the header, and says so in `exemplars/SOURCE.md`.
-8. **Font.** EB Garamond is the only font vendored in `fonts/`. The exemplar is in a Times-metric face. EB Garamond's x-height is smaller, so the text looks smaller than the exemplar at the same 12 pt. The 12-point minimum is met. Vendoring a Times-metric font is a repo decision, not this box's.
+8. **Font.** LR 83.4 names no typeface, so EB Garamond stays (see the typeface row above). The filed exemplar is in a Times-style face. That is a filer's convention, not a rule, so no Times substitute (Liberation Serif) is used. EB Garamond's x-height is smaller, so the text looks smaller than the exemplar at the same 12 pt. The 12-point minimum is met.
 9. **Caption.** The party column is closed by a right and bottom rule, not the ")" column of the form. Both are seen in filings; recorded as a tier-2 choice.
 10. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` and are not run here; the brief says not to touch `tools/`. Render and overlay were run, and every page was reviewed.
 11. **Page-number footer.** The number is centered at the foot of each page; the footer is not the case title (the complaint has no line-numbered pleading paper, so there is no required footer title).
