@@ -79,12 +79,52 @@ In *Hazel v. Van Beek*, 135 Wash. 2d 45 (1998), the Washington State Supreme Cou
 
 Lois Hazel foreclosed on real property of Leonard Van Beek to satisfy a judgment Hazel had won against Van Beek in his bankruptcy in Western District of Washington on 11/2/1983. On January 31, 1984, Van Beek filed a new petition for chapter 13 bankruptcy. This bankruptcy was dismissed just over six months later, on August 7, 1984. Bankruptcy filings stay enforcement of judgment liens during the pendency of the bankruptcy proceeding, 11 U.S.C. § 362(a)(2), (4), (5), so Hazel was precluded from enforcing her judgment during those six months in 1984. No legal barrier prevented Hazel from enforcing her judgment after August 7, 1984.
 
+## First Mortgage History
+
+On or about April 28, 2003, Debtor Melanie A Smith executed a note in favor of Arboretum Mortgage Corporation in the original principal amount of $322,700 . Exhibit G. The interest rate was fixed at 5.75% for 30 years ( maturity 5/1/33) . The monthly mortgage amount was $1,883.19 and it included escrow/reserve for property taxes and insurance. Exhibit G. The debt was secured by a deed of trust . Exhibit H. It was assigned to Citimortgage 5/16/2013 and then assigned to Federal National Mortgage Association on 10/13/2014.
+
+The loan was transferred to Creditor Wilmington Savings Fund Society, FSB, D/B/A Christiana Trust, Not Individually But As Trustee for Pretium Mortgage Acquisition Trust (“Creditor”) on 12/20/18 and then again after 8/23/24 to US Bank Trust National Association, Not IN Its Individual Capacity But Solely AS Owner Trustee for RCF 2 Acquisition Trust ( “Creditor” ) ,who is the current holder of the Note.
+
+Quality Loan Service Corp. is the Trustee of the Deed of Trust ( See EX B).
+
+Selene is the loan servicer. See Ex E ,C.
+
+## Years in Bankruptcy, but Big Gaps in Bankruptcy Filings Allowing the Statute of Limitations to Run
+
+Debtor filed for protection under Chapter 7 of Title 11 of the United States Code on 10/4/04 and that case was closed three months later on 1/18/05 (04-49413-PHB) and then in Chapter 7 again 08/01/11 and closed three months later 11/07/11 (11-19182-TWD). She was in Chapter 13 from 06/25/13 through 12/11/18 for five years and six months (13-15848-MLB), but the clerks office also shows for much of that time she was under Chapter 13 and case number 14-15325-TWD from 07/16/14 through 04/17/20 for 5.9 months. She made years of payments under her Ch13, but just prior to completion of the Ch 13 , the court converted it to a Ch7. Of late, she has been in Chapter 7 starting 01/31/24 until present under case 24-10218-CMA (the Ch 7 was converted to Ch 13 6/6/24, but converted back to Ch 7 8/9/24).
+
+Thus, there was no bankruptcy case open and therefore no bankruptcy Stays effective to “toll” statute of limitations for any mortgage payments missed during:
+
+- 1/19/05-7/31/11 6.5 years–these missed payments on the first and second mortgages are all barred by 6 year S/L because not foreclosed in last 6 years ;
+- 11/8/11-6/24/13 1.5 years–these missed payments on the first and second mortgages are all barred by 6 year S/L because not foreclosed in last 6 years ;
+- 4/18/20-1/30/24 2yrs ,10 months–NOT S/L barred because within the last 6 years.
+
+Prior to filing bankruptcy, Creditor first mortgage had initiated foreclosure proceedings and the sale has been discontinued five times. [The recording table of the first mortgage (recording date, document, acceleration date, foreclosure sale date) is not transcribed here.] The current foreclosure sale is set for 4/11/25, having been continued from 2/14/25. Chicago Title cannot find any recordings after 2/21/24.
+
+The gaps in bankruptcy periods allowed the statute of limitations to run during times of foreclosure periods not stayed by bankruptcy, and that led to a history of foreclosure filings above for times out of bankruptcy–have a great impact on statute of limitations running when no stays and the great impact of 11 U.S.C. § 108(c) (2), barring creditors bringing collection on each payment and charge missed when under the stays and NOT collected upon with 30 days of the stay liftings. This is especially true of the second mortgage creditor which NEVER filed default notices or foreclosure sales at any time in or out of bankruptcy and much of its payments and charges are barred by the statute of limitations.
+
+## Recent Stay Lifted for First Mortgage US Bank
+
+First Mortgage Creditor was granted by the bankruptcy court Relief From Stay on 8/23/24 (doc 76). See EX F . A new notice of foreclosure sale was set for 2/14/25 ( See EX B) and was continued to 4/11/25.
+
+## Impact of 11 U.S.C. § 108(c)(2)
+
+In the instant case of Melanie Smith, the first mortgage creditor here had her bankruptcy stay lifted as to the first mortgage and was allowed to initiate foreclosure sale for nonpayment of mortgage by bankruptcy court order of 8/23/24, upon Creditor’s motion. See EX F . Under 11 U.S.C. § 108(c) (2), the first mortgage had 30 days until 9/22/24 to enforce collection for the missed mortgage payments older than 6 years before that date–meaning the Creditor could have arguably collected costs from as old as 8/24/18 (6 years before the stay was lifted 8/23/24) if enforced within 30 days of 8/23/24 or 9/22/24. BUT here, the first mortgage creditor did NOT file a notice of default and notice of trustee sale until 10/09/24–17 days AFTER the 30 day deadline, so it can not collect on payments 8/23/18 and older, barred by the 6 year statute of limitations. Furthermore, the first mortgage creditor can not collect on payments missed more than 6 years from the 10/09/24 notice of default and trustee sale, or payments or charges missed before 10/10/18 because that was the first enforcement action taken after the stay was lifted.
+
+But here, the first mortgage is only claiming from 12/01/18 to now 4/30/25 because first mortgage creditor claims that all payments were made before 12/01/18 and no payments made thereafter. 12/1/18 is closer in time than six years ( under six years ) before enforcement was last made 10/9/24. Therefore, there is no statute of limitations impact from bankruptcy on the first mortgage, EXCEPT for any amounts creditor first mortgage claims is due before 10/09/18.
+
+The First Mortgage’s servicer, Quality Loan Service Corp., payoff calculations dated 2/7/2025 in Exhibit C have a total $384,403.83 owing , BUT the amount owing should be reduced by all amounts for interests, late charges, escrow/impound, reconveyance fees and costs, Advances (posting, credit, title, prior foreclosure fees and costs, recording fee, mailing, postpone sale costs, publication, reset of sale, sale postponement fee, trustee fees, etc.), and incurred foreclosure fees and costs (trustee fees, posting/publication charges, and rescission recording) incurred prior to 10/10/2018. Such amounts are barred by the six year statute of limitations starting before enforcement was last made 10/9/24 with the filing of a notice of default and notice of Trustee’s Sale ( Ex B) .
+
+There is No genuine dispute regarding facts of missed payments and charges on US Bank, FIRST MORTGAGE , per Creditor’s own documents, BUT DEBTOR disputes charges and costs older than 6 years and argues costs of $18,219.43 ( See Ex D) for notated dates and amounts barred by statute of limitations) older than 6 years before 10/09/24 or 10/10/18 must be barred by the statute of limitations.
+
+On or about April 13, 2006, Debtor Melanie A Smith executed a Balloon Payment Note, Balloon Rider and deed of Trust in favor of Plaza Home Mortgage ,Inc in the original principal amount of $350,000.00 (“Note”). The debt described by the Note is secured by a deed of trust (“Deed of Trust”) properly recorded and creating a lien against property commonly described as 3057 42nd Avenue West, Seattle, WA (“the Property”). The interest rate was fixed at 11.250 for 15 years ( maturity 5/1/21) . The monthly mortgage amount is $1,907.42 dollars and it included escrow/reserve for property taxes and insurance. See EX. I Creditor’s 6/21/24 Proof of Claim, Claim 2-1 p13-15 .
+
 Dated: 4/8/24
 
-/s/ William C. Budigan
-William C. Budigan, WSBA 13443
-Attorney for Debtor Melanie Smith
-info@BudiganLaw.com
+/s/ William C. Budigan\
+William C. Budigan, WSBA 13443\
+Attorney for Debtor Melanie Smith\
+info@BudiganLaw.com\
 206 284-5305
 
 # CERTIFICATE OF SERVICE
@@ -96,12 +136,43 @@ I declare under penalty of perjury under the laws of the United States of Americ
 /s/ William C. Budigan
 
 DEBTOR Melanie A Smith, 3057 42nd Ave W, Seattle, WA 98199\
-TRUSTEE Michael P Klein, WSBA #18079, 330 Madison Ave S Suite 105, Bainbridge Island, WA 98110\
+TRUSTEE\
+Michael P Klein,WSBA #18079\
+330 Madison Ave S Suite 105,\
+Bainbridge Island, WA 98110\
 trusteeklein@hotmail.com
 
-Lance E. Olsen, Esq. WSBA #25130, McCarthy & Holthus, LLP\
-Attorney for Creditor First Mortgage Wilmington Savings Fund Society, FSB/ US Bank Trust National Association\
-bknotice@McCarthyHolthus.com; lolsen@McCarthyHolthus.com
+Lance E. Olsen, Esq. WSBA #25130\
+McCarthy & Holthus, LLP\
+Attorney for Creditor First Mortgage\
+Wilmington Savings Fund Society, FSB/\
+US Bank Trust National Association\
+bknotice@McCarthyHolthus.com\
+lolsen@McCarthyHolthus.com
 
 Michael S. Scott, Esq. WSBA #28501\
-mscott@mccarthyholthus.com
+mscott@mccarthyholthus.com\
+Attorney for Creditor First Mortgage\
+Wilmington Savings Fund Society, FSB/\
+US Bank Trust National Association
+
+DEUTSCHE BANK NATIONAL TRUST COMPANY\
+(second mortgage)\
+NewRez LLC d/b/a Shellpoint Mortgage Servicing\
+P.O. Box 10826\
+Greenville, SC 29603-0826
+
+Issa F. Kamara\
+Authorized agent for NewRez LLC d/b/a Shellpoint Mortgage Servicing\
+Bonial and Associates, P.C.\
+PO BO 9013\
+Addison Texas, 75001\
+pocinquiries@bonialpc.com
+
+CREDITOR WA STATE EMPLOYMENT SECURITY DEPT.\
+POBox 9045 Olympia,WA 98507
+
+Cambria Queen\
+Dickson Frohlich Phillips Burgess, PLLC,\
+Attorney for Stephen Fry, Interested Party\
+cqueen@dfpblaw.com
