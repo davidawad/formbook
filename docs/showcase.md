@@ -1,0 +1,49 @@
+# Showcase
+
+Every image here is generated from files committed in this repo. One script regenerates all of them (needs `pdftoppm`, `magick` and `typst` on your PATH):
+
+```sh
+sh docs/showcase/make-screenshots.sh
+```
+
+Labels and layout are typeset by typst with its bundled fonts, so the output does not depend on your installed fonts. The source documents are the sample folders named in each caption.
+
+## hero.png
+
+![hero](showcase/hero.png)
+
+Markdown input (first lines of the YAML header of `courts/third-circuit/court-of-appeals/opening-brief/samples/INPUT-tresslar-opening-brief.md`), formbook's rendered cover page (`OUTPUT-tresslar-opening-brief.pdf`, page 1), and the cover page of the brief actually filed (`exemplars/FILED-EXAMPLE-tresslar-26-1367-opening-brief.pdf`, page 1).
+
+Regenerate all images, including this one: `sh docs/showcase/make-screenshots.sh`
+
+## overlay.png
+
+![overlay](showcase/overlay.png)
+
+One page of the red/blue overlay for the N.D. Cal. complaint (`courts/ninth-circuit/california/federal/northern-district/complaint/samples/OVERLAY-superhuman-complaint.pdf`, page 2): red is text only in our render, blue is text only in the filed exemplar, black is where both agree. The overlay PDFs are produced by `tools/overlay.sh`.
+
+Regenerate: `sh docs/showcase/make-screenshots.sh`
+
+## pages.png
+
+![pages](showcase/pages.png)
+
+Eight pages of one rendered brief (`courts/third-circuit/court-of-appeals/opening-brief/samples/OUTPUT-tresslar-opening-brief.pdf`, pages 1, 2, 3, 6, 11, 14, 15 and 18): cover, table of contents, table of authorities, statement, argument, conclusion, certificate of compliance, certificate of service. All generated from the markdown.
+
+Regenerate: `sh docs/showcase/make-screenshots.sh`
+
+## courts.png
+
+![courts](showcase/courts.png)
+
+Page 1 of the rendered sample from eight different courts and document types: U.S. Supreme Court merits brief, 1st and 3rd Circuit opening briefs, N.D. Cal. complaint, D. Md. bankruptcy adversary complaint, California Superior Court complaint, New York Supreme Court motion brief, Texas Supreme Court brief on the merits. The list is in `docs/showcase/make-screenshots.sh`.
+
+Regenerate: `sh docs/showcase/make-screenshots.sh`
+
+## folder.png
+
+![folder](showcase/folder.png)
+
+The layout of one doc-type folder (`courts/third-circuit/court-of-appeals/opening-brief/`): `README.md`, the filed exemplar and its `SOURCE.md`, the markdown input with our output and overlay, and the Typst template. Listing generated with `find`.
+
+Regenerate: `sh docs/showcase/make-screenshots.sh`
