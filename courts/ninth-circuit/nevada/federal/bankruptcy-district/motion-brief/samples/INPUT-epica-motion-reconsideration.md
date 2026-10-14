@@ -139,10 +139,10 @@ On July 16, 2026, the foregoing document was served via ECF automated system to 
 
 I declare under penalty of perjury that the foregoing is true and correct.
 
-[sig] Dated July 16, 2026.
+Dated July 16, 2026.
 
-[sig] /s/ Norma Guariglia
+/s/ Norma Guariglia
 
-[sig] Norma Guariglia
+Norma Guariglia
 
 [^1]: Because of the related nature of the cases, the combined hearing on relevant matters, and the similarities in the Memorandum Decision entered in each case, an almost identical motion was filed in the related case of Epica International, Inc., Case No. 26-50580-gs ("Epica"). References in this motion to "Petitioning Creditors" refers to Devdend LLC, Advanced Imaging, LLC, Sanjeev Kaila, M.D., e-Possible, Inc., South Florida Veterinary Medical Services, LLC, Mobile Pet Imaging, LLC, Texas Avian & Exotic Hospital, PLLC, and Laurel Oaks Veterinary Center LLC.
