@@ -1,0 +1,132 @@
+% U.S. Court of Appeals for the Seventh Circuit: appellant's opening brief (LaTeX engine).
+%
+% Matches the typst template (../typst/ca7-opening-brief.typ) in the mandated form: EB Garamond 12 pt
+% text, 11 pt footnotes, double spacing (26.9 pt baseline pitch), one-inch margins, no hyphenation, left
+% alignment. The cover, tables, certificates and the signature block are built by ca7-opening-brief.lua
+% from the YAML frontmatter; this file holds the page setup and the macros that filter emits.
+% Fonts come only from the vendored directory (pandoc variable fontdir): no system fonts.
+\documentclass[12pt,letterpaper]{extarticle}
+\usepackage{fontspec}
+\setmainfont{EBGaramond}[Path=$fontdir$eb-garamond/, Extension=.otf, UprightFont=*-Regular, ItalicFont=*-Italic,
+  BoldFont=*-Bold, BoldItalicFont=*-BoldItalic]
+\usepackage[letterpaper,margin=1in,footskip=0.45in]{geometry}
+\usepackage{needspace}
+\usepackage{booktabs,longtable}
+% Links in the brief are citations (toa:) or none; the fallbacks keep pandoc's output valid.
+\providecommand{\href}[2]{#2}
+\providecommand{\hypertarget}[2]{#2}
+\providecommand{\hyperlink}[2]{#2}
+
+% FRAP 32(a)(4): double spacing. Baseline pitch 31.4 pt on the 14 pt body (typst: 0.94em leading).
+\renewcommand\normalsize{\fontsize{12pt}{26.9pt}\selectfont}
+\normalsize
+% Cir. R. 32(b): footnotes 11 pt or larger (12 pt here, as in the typst template), single-spaced.
+\renewcommand\footnotesize{\fontsize{11pt}{15pt}\selectfont}
+\renewcommand\footnoterule{\kern-3pt\hrule width 0.3\columnwidth height 0.5pt\kern2.5pt}
+\setlength{\footnotesep}{0.9em}
+\setlength{\skip\footins}{1.2em}
+% Single spacing for headings, quotations, the TOC/TOA and the certificates (14 pt, 20 pt pitch).
+\newcommand\singlespacing{\fontsize{12pt}{17pt}\selectfont}
+\newcommand\singlefootnote{\fontsize{12pt}{17pt}\selectfont}
+
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\raggedright
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\sloppy
+\setcounter{secnumdepth}{-\maxdimen}
+\pagestyle{plain}
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\pandocbounded}[1]{#1}
+
+\makeatletter
+% Block quotations: 0.5 in in from both margins, single-spaced, 1 em above and below (typst quote).
+\renewenvironment{quote}{%
+  \par\addvspace{1em}%
+  \begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\rightmargin}{0.5in}%
+    \setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}\setlength{\parsep}{0.9em}%
+    \setlength{\itemsep}{0pt}\setlength{\listparindent}{0pt}\setlength{\itemindent}{0pt}}%
+  \item\relax\singlespacing}%
+  {\end{list}\addvspace{1em}}
+
+% Section headings (level 1: centered, bold capitals) and numbered headings. #1 level, #2 indent in
+% half inches (the label sits at #2 x 0.5 in), #3 label, #4 title, #5 index (the TOC refers to
+% ca-hd-<index>), #6 the level from which the text is italic.
+\newcommand{\cahead}[6]{%
+  \ifnum#1=1
+    \par\needspace{5\baselineskip}\addvspace{1.5em}%
+    \begin{center}\singlespacing\textbf{\MakeUppercase{#4}}\label{ca-hd-#5}\par\end{center}%
+    \addvspace{1.1em}%
+  \else
+    \par\needspace{3\baselineskip}\addvspace{1.1em}%
+    \begingroup\singlespacing\noindent
+    \hangindent=\dimexpr0.5in*(#2+1)\relax\hangafter=1\relax
+    \hspace*{\dimexpr0.5in*#2\relax}%
+    \makebox[0.5in][l]{\textbf{#3}}%
+    \ifnum#1<#6 \textbf{#4}\else\textbf{\emph{#4}}\fi\label{ca-hd-#5}\par
+    \endgroup\addvspace{0.9em}%
+  \fi}
+% A centered point heading (the Argument of the answering brief): bold small capitals.
+\newcommand{\cacenter}[3]{%
+  \par\needspace{3\baselineskip}\addvspace{1.2em}%
+  \begin{center}\singlespacing\textbf{\textsc{#1 #2}}\label{ca-hd-#3}\par\end{center}%
+  \addvspace{1em}}
+
+% One table-of-contents row. #1 level, #2 indent in half inches, #3 label, #4 title, #5 index.
+\newcommand{\tocline}[5]{%
+  \par\ifnum#1=1 \addvspace{0.6em}\else\addvspace{0.35em}\fi
+  \begingroup\singlespacing\noindent
+  \ifnum#1=1 \hangindent=0.5in\else\hangindent=\dimexpr0.5in*(#2+1)\relax\fi
+  \hangafter=1\relax
+  \ifnum#1>1 \hspace*{\dimexpr0.5in*#2\relax}\makebox[0.5in][l]{#3}\fi
+  \ifnum#1=1 \MakeUppercase{#4}\else#4\fi
+  \hspace{0.8em}\leaders\hbox{.\hspace{0.16em}}\hfill
+  \makebox[2.6em][r]{\pageref{ca-hd-#5}}\par
+  \endgroup}
+
+% Table of authorities. Each citation writes its page to the .aux file (\toahit, at shipout time);
+% the next run reads them back as \toapg@<key> = "p1,p2,...". \toapages prints the distinct pages in
+% document order; 7 or more distinct pages print as "passim" (typst passim-threshold). No \pageref
+% is expanded here, so the page numbers come from the same aux pass that LaTeX already reruns for.
+\newcommand{\toahit}[1]{\protected@write\@auxout{}{\string\toarec{#1}{\thepage}}}
+\newcommand{\toarec}[2]{%
+  \@ifundefined{toapg@#1}%
+    {\expandafter\gdef\csname toapg@#1\endcsname{#2,}}%
+    {\expandafter\xdef\csname toapg@#1\endcsname{\csname toapg@#1\endcsname#2,}}}
+\newcounter{toacnt}
+\newcommand{\toapages}[1]{%
+  \setcounter{toacnt}{0}\gdef\toapgs{}\def\toalast{}%
+  \@ifundefined{toapg@#1}{}{%
+    \expandafter\let\expandafter\toalist\csname toapg@#1\endcsname
+    \@for\toap:=\toalist\do{%
+      \ifx\toap\empty\else
+        \ifx\toap\toalast\else
+          \ifnum\value{toacnt}>0 \xdef\toapgs{\toapgs, }\fi
+          \xdef\toapgs{\toapgs\toap}\stepcounter{toacnt}%
+        \fi
+        \edef\toalast{\toap}%
+      \fi
+    }%
+  }%
+  \ifnum\value{toacnt}>6 \emph{passim}\else\toapgs\fi}
+% One authority. #1 name (empty for a constitutional provision etc.), #2 cite, #3 1 for a case, #4 key.
+\newcommand{\toaitem}[4]{%
+  \par\needspace{3\baselineskip}\addvspace{0.7em}%
+  \begingroup\singlespacing\noindent
+  \hangindent=0.35in\hangafter=1\relax
+  \def\toaname{#1}\ifx\toaname\empty\else\ifnum#3=1 \emph{#1}\else#1\fi,\\\fi
+  #2\hspace{0.8em}\leaders\hbox{.\hspace{0.16em}}\hfill\hspace{0.3em}\toapages{#4}\par
+  \endgroup}
+% A group heading. #1 title, #2 1 for the first group (carries the "Page(s)" column head).
+\newcommand{\toagroup}[2]{%
+  \par\needspace{3\baselineskip}\ifnum#2=1 \addvspace{1em}\else\addvspace{1.4em}\fi
+  \begingroup\singlespacing\noindent\textbf{#1}%
+  \ifnum#2=1 \hfill\textbf{\underline{Page(s)}}\fi\par\endgroup\addvspace{0.2em}}
+\makeatother
+
+\AtBeginDocument{\normalsize}
+\begin{document}
+$body$
+\end{document}
