@@ -7,15 +7,16 @@ Folder: `courts/eighth-circuit/missouri/federal/western-district/complaint/` (se
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-johnson-4-26-cv-00380-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-johnson-complaint.md` (an excerpt of the 60-page filing, see Known gaps) |
-| render | ok: `samples/OUTPUT-johnson-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-johnson-complaint.pdf` and `samples/OVERLAY-johnson-complaint.txt` (`tools/overlay.sh`) |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; the overlap defects found on pages 1 to 8 were fixed and the pages re-rendered) |
+| typeface | face required by the rules: none (see Governing rules). Substitute: none; EB Garamond kept (`docs/FONTS.md`, "No face named"). Metric note: n/a. |
+| render | ok: `samples/OUTPUT-johnson-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`; re-rendered 2026-10-14, `pdffonts`: EB Garamond Regular and Bold embedded) |
+| overlay | fail: `samples/OVERLAY-johnson-complaint.pdf` not regenerated. `exemplars/` holds only `SOURCE.md` in this snapshot (no `FILED-EXAMPLE-*.pdf`), so `tools/overlay.sh` exits 1. The `.txt` page map is from an earlier run. |
+| pages reviewed | 10 of 10 (re-rendered 2026-10-14 and every page viewed at 60 dpi; the template did not change) |
 
 File names: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf` and the overlay `OVERLAY-<id>.{pdf,txt}`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default (the brief's `<id>.pdf` / `<id>-overlay.pdf` would not be found by the overlay tool).
 
 ## Governing rules
 
-The W.D. Mo. local rules do not set a typeface, font size, margin or line spacing for filed papers. Searched and read:
+The W.D. Mo. local rules do not set a typeface, font size, margin or line spacing for filed papers. Searched and read (the typeface check was repeated on 2026-10-14 by extracting the text of the 76-page local rules PDF listed below and searching it for font, typeface, point size and paper-format terms: no match for filed papers):
 
 | Source | What it says | Used for |
 |---|---|---|
@@ -40,7 +41,9 @@ Not generated, on purpose (separate filings): the civil cover sheet (L.R. 3.1; J
 - Signature block: "Dated" at left; "Respectfully submitted," and the `/s/` signer at right; one block per firm.
 - Page numbers centred at the foot, arabic from page 1.
 
-Why 13 pt and not 12 pt: EB Garamond is the only serif face vendored in `fonts/`. At 13 pt its x-height is about that of Times New Roman at 12 pt, which is the exemplar's face and size (measured from text-box heights on the exemplar's body: about 13.3 pt line boxes). Not a rule; a visual match to the exemplar. The Mannon exemplar in the motion-brief folder measures about 14 pt Times.
+Why EB Garamond: the local rules name no face, so the court-named-face rows of `docs/FONTS.md` do not apply and the template keeps EB Garamond. The exemplar is set in Times New Roman, but the rules do not require Times, and any proportional serif is allowed. A metric-compatible Times substitute is vendored (`fonts/liberation-serif/`, "Liberation Serif"); it is not used here.
+
+Why 13 pt and not 12 pt: at 13 pt the EB Garamond x-height is about that of Times New Roman at 12 pt, which is the exemplar's face and size (measured from text-box heights on the exemplar's body: about 13.3 pt line boxes). Not a rule; a visual match to the exemplar. The Mannon exemplar in the motion-brief folder measures about 14 pt Times.
 
 ## Markdown contract (for samples)
 
@@ -56,7 +59,7 @@ Why 13 pt and not 12 pt: EB Garamond is the only serif face vendored in `fonts/`
 ## Known gaps and open choices
 
 1. **Local rules text is from December 2022.** The 2026 local rules PDF (`DC-Local_Rules-072026.pdf`) returned HTTP 404 to WebFetch from this box, and courtrules.net returned 403. A later amendment that adds a form-of-papers rule would not be seen here. **Needs a check by David or the clerk's current local rules before this is treated as complete.**
-2. **No mandated typeface, size or spacing in the local rules.** The choices above are conventions from the exemplar (Times New Roman, double spaced). If a judge's standing order requires a particular face, the EB Garamond choice would need changing; there is no vendored Times.
+2. **No mandated typeface, size or spacing in the local rules.** The choices above are conventions from the exemplar (Times New Roman, double spaced). If a judge's standing order requires Times New Roman, the face would change to "Liberation Serif" (`docs/FONTS.md`), and the page count and line breaks would need a re-render and check.
 3. **Excerpt, not the whole filing.** The sample transcribes: the introduction (paragraphs 1 to 3), jurisdiction and venue (4 to 7), the parties (8 and 9, the Mosaic paragraph only), the start of the factual allegations (10 and 11), the statute of limitations (12 to 15), class allegations (16 to 24, the class definition, the exclusions and the Rule 23 elements through predominance), Count 1 (25 to 28) and the prayer and jury demand (29). Omitted: most factual allegations, the other defendants' paragraphs, the superiority paragraph (145), Counts 2 and up. The 60-page filing is 60 pages; the render is 10 pages, within the 8 to 14 target for an excerpt of this kind.
 4. **Footnotes dropped.** The exemplar has footnote 1 (defining "Defendants") on paragraph 1, and footnotes 2 to 4 (sources) on paragraphs 23 and 24. The template does not support footnotes; the sample omits the footnote text and the footnote numbers, so the overlay shows those words as missing.
 5. **Paragraph numbers differ.** The exemplar's paragraph numbers are not reproduced; the template numbers from 1. The jury demand is paragraph 29 here, 174 in the exemplar.
