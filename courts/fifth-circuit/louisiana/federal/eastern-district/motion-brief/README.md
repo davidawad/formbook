@@ -8,9 +8,10 @@ Folder: `courts/fifth-circuit/louisiana/federal/eastern-district/motion-brief/`.
 | exemplar | yes: `exemplars/FILED-EXAMPLE-walker-2-26-cv-00726-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-walker-motion-brief.md` (the whole memorandum, 9 pages in the filing) |
 | render | ok: `samples/OUTPUT-walker-motion-brief.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-walker-motion-brief.pdf` and `OVERLAY-walker-motion-brief.txt` (page map) |
+| overlay | ok: `samples/OVERLAY-walker-motion-brief.pdf` and `OVERLAY-walker-motion-brief.txt` (page map; re-run 2026-10-14 against a copy of the exemplar fetched from the URL in `exemplars/SOURCE.md`, not committed) |
 | page limit | LR 7.7 (25 pages) is enforced by the build: a 27-page test memorandum fails with the rule's message (checked 2026-10-14) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed in its final state) |
+| typeface | Rule names no face (LR 10.1 "standard font"). EB Garamond kept, per `docs/FONTS.md` ("No face named"). Not metric-compatible with the exemplar's Times New Roman; see known gap 1. |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed in its final state; re-checked 2026-10-14 after the fonts pass, no change to the template) |
 
 ## Governing rules
 
@@ -79,7 +80,7 @@ Our pages 4 to 8 pair with filed pages 5 to 9, so filed page 4 is not paired wit
 
 ## Known gaps and open choices
 
-1. **Font.** Same as the complaint: LR 10.1 requires a "standard font" and does not name one. EB Garamond is the only vendored serif face; the filed exemplar is Times New Roman 12 pt. **Question for David:** vendor a Times-metric font? (`fonts/` is shared and was not edited.)
+1. **Font.** Same as the complaint: LR 10.1 requires a "standard font" and names no face, so `docs/FONTS.md` ("No face named") keeps EB Garamond. The filed exemplar is Times New Roman 12 pt. Liberation Serif is vendored and metric-compatible with Times New Roman, so the switch is available. **Question for David:** keep EB Garamond (current), or switch this doc type to Liberation Serif?
 2. **Point size.** LR 10.1 sets none; 12 pt, as in the exemplar.
 3. **One exemplar; no second filer found.** A second text-based E.D. La. Rule 12(b) memorandum with a downloadable PDF was not found in the RECAP search (`type=rd`, `court=laed`, filed from 2026-01-01, "memorandum in support of motion to dismiss"). The Lycee Francais memorandum (2:26-cv-00946, Doc. 5-1) was seen but is marked "FILED IN ERROR SEE DOC. 6" on the docket, so it was not used. Tier 2 is judged against one filer. Options: a second search for an E.D. La. memorandum, or accept the single filer.
 4. **"VERSUS".** The filed memorandum joins the parties with "VERSUS"; the complaint exemplar uses "v.". Neither LR 10.1 nor FRCP 10(a) sets the word. Each doc type follows its exemplar; recorded as accepted.
