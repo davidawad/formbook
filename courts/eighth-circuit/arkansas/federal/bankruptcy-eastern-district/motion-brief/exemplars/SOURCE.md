@@ -1,26 +1,24 @@
 # Exemplars: motion with memorandum (areb, Eastern District of Arkansas)
 
-**BLOCKED: no exemplar.** No filed motion or brief from this court was found, so no `FILED-EXAMPLE-*.pdf` is saved here. The sample in `samples/INPUT-generic-motion-brief.md` is synthetic, and the overlay cannot run.
+Exemplar saved: `FILED-EXAMPLE-stewart-3-23-ap-01057-motion-brief.pdf` (8 pages, the whole of RECAP document 5, copied as filed).
 
-Searches tried, 2026-10-14:
-
-| Search / source | Result |
-|---|---|
-| WebSearch (standard): "Eastern District of Arkansas" bankruptcy motion memorandum brief pdf, "Case No.", "Adv. No.", Little Rock | Docket calendars, case-summary pages (inforuptcy.com), a fee schedule, and one opinion (*In re Living Hope Southeast*). No motion or brief. |
-| WebSearch (extended): Local Bankruptcy Rules 9013 motion memorandum brief requirements | No Eastern District bankruptcy Rule 9013 text. Returned district-court Local Rule 7.2 (civil, E.D. Ark.), which is not a bankruptcy rule. |
-| WebSearch (standard): arb.uscourts.gov local rules, 9013 | Returned other districts' 9013-1 rules (Tennessee, Kentucky, Louisiana). Not Arkansas. |
-| `areb.uscourts.gov/local-rules` and the complete set `LocalRules.pdf` (17 pp.) | Fetched and read in full. It has no Rule 9013-1 and no form-of-papers rule. See `../README.md`. |
-| `courtrules.net` (local rules listing) | Cloudflare challenge (HTTP 403 / challenge page); not readable from this box. |
-| CourtListener (`courtlistener.com`, RECAP) | Not reachable from this box. |
-| PACER (`pacer.uscourts.gov/file-case/court-cmecf-lookup/court/AREBK`) | Requires a login; not searched. |
-
-To settle this: pull a filed motion with supporting brief from the AREB docket on PACER or RECAP, save it here as `FILED-EXAMPLE-<short-case>-<docket>-motion-brief.pdf`, and record the filer, date filed and URL below.
+The filing is a motion to dismiss an adversary proceeding. It contains the motion (numbered grounds, WHEREFORE clause), the argument and authorities that serve as the memorandum, the service argument, a signature block and a certificate of service. A separately filed brief in support was looked for in this court's RECAP results and not found as an available PDF, so this is the motion with its memorandum in one document.
 
 | Field | Value |
 |---|---|
-| Exemplar file | none |
-| URL fetched from | n/a |
-| Case name / docket no. | n/a |
-| Filer | n/a |
-| Date filed | n/a |
-| Date fetched | n/a |
+| Exemplar file | `FILED-EXAMPLE-stewart-3-23-ap-01057-motion-brief.pdf` |
+| URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.areb.304198/gov.uscourts.areb.304198.5.0.pdf (RECAP doc 5; docket page https://www.courtlistener.com/docket/67882634/5/bradford-wayne-stewart-adversary-proceeding/) |
+| Case name / docket no. | *Stewart v. Navient Solutions, LLC*, Adv. No. 3:23-ap-01057, E.D. Ark., Northern Division. Underlying Chapter 11 case No. 3:20-bk-14509. |
+| Filer | Defendants Navient Solutions, LLC and Navient Credit Finance Corporation, by J. Brad Moore, Wetzel and Moore, P.A. |
+| Date filed | 11/13/2023 (Doc 5 header: "Filed: 11/13/23"). |
+| Date fetched | 2026-10-14 |
+| Why this one | Text-based, complete, filed in this court by counsel of record, with an argument section, a WHEREFORE clause and a certificate of service. |
+
+## Search log (2026-10-14)
+
+| Source | Result |
+|---|---|
+| First-pass WebSearch and the court's local rules (see `../README.md`) | No filed motion or brief in this court. |
+| CourtListener REST search, `type=r`, `court=areb` ("brief in support", "memorandum in support", "motion") | Many "Brief in Support" entries exist, but almost none has an available PDF. The available motion PDFs found include Stewart v. Navient (3:23-ap-01057, docs 5, 26 and 33). |
+| Stewart v. Navient, doc 5 (8 pp.) | Text-based. Used. |
+| Stewart v. Navient, docs 26 (NELNET, 7 pp.) and 33 (Keech, 2 pp.) | Not transcribed; same docket and same motion practice. |

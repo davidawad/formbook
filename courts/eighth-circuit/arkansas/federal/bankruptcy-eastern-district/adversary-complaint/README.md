@@ -1,8 +1,8 @@
 # Adversary complaint: U.S. Bankruptcy Court, E.D. Ark. (areb)
 
-**BLOCKED: no exemplar.** No filed adversary complaint from this court was found. The searches tried are recorded in `exemplars/SOURCE.md`. The sample is synthetic and labelled as such. The overlay cannot run without an exemplar PDF.
+Exemplar: a real filed complaint, *Franks et al. v. Watkins*, Adv. No. 4:26-ap-01015 (E.D. Ark., filed 04/17/2026, counsel Lax, Vaughan, Fortson, Rowe & Threet, P.A.). See `exemplars/SOURCE.md`.
 
-Status: template built from the rules; render and page review done (below); overlay not run (no exemplar).
+Status: exemplar saved; transcription rendered; overlay run; every page viewed (Gate 2 below). Open tier-2 items are listed under "Known gaps".
 
 ## What is here
 
@@ -10,19 +10,21 @@ Status: template built from the rules; render and page review done (below); over
 |---|---|
 | `typst/areb-adversary-complaint.typ` | Template: `areb-complaint(meta, md)`. Every number is a named parameter at the top, and each traces to a rule ID or is marked as a convention. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits the frontmatter from the body, calls the template. |
-| `samples/INPUT-generic-adversary-complaint.md` | Synthetic sample (invented names, numbers and dates). Exercises the caption, numbered paragraphs, count headings, prayer and counsel block. |
-| `samples/OUTPUT-generic-adversary-complaint.pdf` | Render of the sample (5 pages). |
-| `exemplars/SOURCE.md` | The exemplar search log. No PDF saved. |
+| `exemplars/FILED-EXAMPLE-watkins-4-26-ap-01015-adversary-complaint.pdf` | The filed document (9 pp.): the B1040 cover sheet and the complaint through its signature. State-court exhibits A and B were removed. |
+| `samples/INPUT-watkins-adversary-complaint.md` | Transcription of the complaint: caption, numbered paragraphs 1-29 under the filed headings, prayer, signature block. Names and text as filed. |
+| `samples/OUTPUT-watkins-adversary-complaint.pdf` | Our render of the transcription (6 pp.). |
+| `samples/OVERLAY-watkins-adversary-complaint.pdf` / `.txt` | Red (ours) over blue (filed) per page; `.txt` is the page map. |
+| `exemplars/SOURCE.md` | Source, filer, dates and the search log. |
 
 Build (from the repo root, with `PATH="$HOME/tb/bin:$PATH"` per the box setup):
 
 ```sh
 D=courts/eighth-circuit/arkansas/federal/bankruptcy-eastern-district/adversary-complaint
-sh tools/render.sh $D samples/INPUT-generic-adversary-complaint.md   # -> samples/OUTPUT-generic-adversary-complaint.pdf
-sh tools/overlay.sh $D generic-adversary-complaint             # fails: no exemplar PDF in exemplars/
+sh tools/render.sh $D samples/INPUT-watkins-adversary-complaint.md     # -> samples/OUTPUT-watkins-adversary-complaint.pdf
+sh tools/overlay.sh $D watkins-adversary-complaint                     # -> samples/OVERLAY-watkins-adversary-complaint.pdf/.txt
 ```
 
-Fonts are the vendored EB Garamond only (`--ignore-system-fonts`); any typst warning fails the render. The overlay tool writes `samples/OVERLAY-<id>.pdf` and `.txt` by its own naming, not `<id>-overlay.pdf`.
+Fonts are the vendored EB Garamond only (`--ignore-system-fonts`); any typst warning fails the render.
 
 ## Governing rules
 
@@ -42,32 +44,62 @@ Verified 2026-10-14 against the sources below. Federal rule text came from the L
 
 Court-specific findings, to be read before editing the template:
 
-- **No local rule covers form of papers.** The complete set (`LocalRules.pdf`, 17 pages) has rules 1001-1, 1020-1, 2015-1, 2072-1, 2090-1, 2090-2, 3015-1, 5001-2, 5005-4, 7033-1, 9015-1 and 9019-1. None sets font, size, margins, spacing or page limits for pleadings. It has no Rule 7001 local rule and no Rule 9013-1 local rule. The layout therefore comes from the federal rules plus conventions, and the tier-2 bar falls to the exemplar, which is missing.
+- **No local rule covers form of papers.** The complete set (`LocalRules.pdf`, 17 pages) has rules 1001-1, 1020-1, 2015-1, 2072-1, 2090-1, 2090-2, 3015-1, 5001-2, 5005-4, 7033-1, 9015-1 and 9019-1. None sets font, size, margins, spacing or page limits for pleadings. It has no Rule 7001 local rule and no Rule 9013-1 local rule. The layout therefore comes from the federal rules plus conventions, and the tier-2 bar falls to the exemplar (`exemplars/FILED-EXAMPLE-watkins-4-26-ap-01015-adversary-complaint.pdf`).
 - **Local Rule 5005-4 is the only court-specific format rule.** It applies to all filings, electronic or not.
 - Proposed orders: Local Rule 9019-1 governs consent orders only. It is not used by this template.
 
 ## What the overlay shows
 
-Not run. The overlay compares our render against a filed exemplar. With no exemplar the page-pairing has nothing to pair against, so the red/blue test cannot show anything yet. Once a filed complaint is saved in `exemplars/`, run the overlay and record the page map in this README.
+`tools/overlay.sh` run 2026-10-14 (`samples/OVERLAY-watkins-adversary-complaint.txt`). Pages are paired by word overlap, so the page numbers below are the filed document's, which includes the cover sheet on pages 1-2.
+
+| Our page | Filed page | Word overlap |
+|---|---|---|
+| 1 | 3 (caption) | 96.0% |
+| 2 | 4 | 78.8% |
+| 3 | 5 | 55.5% |
+| 4 | 7 | 66.1% |
+| 5 | 8 | 86.1% |
+| 6 | 9 (signature) | 78.3% |
+
+The overlap is a pairing aid, not a score. The low pairs are pages where the filed text runs on at different line breaks, so the lines do not register. The render was checked against the filed pages by eye (below).
 
 ## Page review (Gate 2)
 
-Rendered 2026-10-14 at 60 dpi. Every page of `samples/OUTPUT-generic-adversary-complaint.pdf` was viewed.
+Rendered 2026-10-14 at 80 dpi, each page beside its filed page. Every page of `samples/OUTPUT-watkins-adversary-complaint.pdf` was viewed in its final state (6 of 6).
 
 | Page | Result |
 |---|---|
-| 1 | Caption, title, first numbered paragraphs. Pass. |
-| 2 | Parties and facts. Pass. |
-| 3 | Facts continued, sub-headings. Pass. |
-| 4 | Counts I to III headings and paragraphs. Pass. |
-| 5 | Prayer, date, signature line (`s/ COUNSEL EXAMPLE`), counsel block. Pass after the signer line was added (it was missing in the first render). |
+| 1 | Caption, title, preamble, paragraph 1. Pass after the caption fix (justified names had opened gaps). The adversary-number field prints blank as the filing does. |
+| 2 | Parties (paragraphs 2-3), facts A (4-10). Pass. |
+| 3 | Paragraphs 11-18. Pass. |
+| 4 | Paragraphs 19-24, Part IV heading. Pass after the heading fix (`523(A)(6)` had been printed). |
+| 5 | Paragraphs 25-29, Part V prayer, start of the WHEREFORE clause. Pass. |
+| 6 | End of the prayer, `Respectfully submitted`, `s/ Branch T. Fields`, counsel block with phone. Pass after the signer fix (name had been printed in capitals). |
 
-Defects found and fixed during review:
+Defects found in review and fixed:
 
-1. The title was passed through `upper()`, so the statute cite `523(a)(2)(A)` printed as `523(A)(2)(A)`. The title is now printed as written.
-2. The paragraph number ran into its text. Numbered paragraphs now use a first-line indent with the number and text on one line.
-3. The signature block lacked the `s/ NAME` line required for the signer. Added.
-4. Level-1 headings printed larger than the body. Headings now use the body size.
+1. Caption names were justified, so lines like "BRUCE WATKINS, II and HEIDA FARQUE" had wide gaps. The caption is now ragged-right (template).
+2. Level-1 headings went through `upper()`, which printed the statute cite as `523(A)(6)` (the same error as the title fix above). Headings print as written (template; the motion template has the same fix).
+3. The `s/ NAME` line was printed in capitals. It is now printed as written, matching the filing (template).
+4. The debtor names were one entry, which wrapped badly. The transcription now lists the two debtors on separate lines, as the filing does (transcription).
+
+## Known gaps
+
+- **Tier-2 items open, judged minor.**
+  - Statute cites break at the parenthesis (`§ 523(a)` / `(6)`). A non-breaking join would fix it; not done.
+  - The filing indents the first line of every paragraph, including the unnumbered preamble and WHEREFORE clause. The template indents only numbered paragraphs.
+- **Accepted differences from the filing (template conventions).**
+  - Caption label `Adv. Proc. No.` (the filing says `AP NO.`). The number is blank, as on the filing.
+  - Debtor designation prints `Debtors.` where the filing prints `Debtor(s).`
+  - Caption debtor names are centred; the filing left-aligns them under `IN RE:`.
+  - Part headings are set on one line in title case, not as the filing's numeral over the title.
+  - `Respectfully submitted,` and `s/ NAME` follow common practice; the filing reads `By: /s/ NAME`.
+- **Length.** The filed complaint body is 7 pages (PDF pages 3-9); our render is 6 pages. The 8-14 page target was not applied because the filed complaint is shorter than 8 pages. The cover sheet (pages 1-2 of the exemplar) is not generated and is not counted.
+- **Cover sheet not generated.** Official Form B104 (adversary proceeding cover sheet) must accompany the complaint; LR 5005-4 requires it to be complete. The template does not produce it. The exemplar includes the filed B1040 cover sheet, for reference.
+- **Summons not generated.** The summons (the adversary summons form; the form number was not verified) is a separate document, not part of this template.
+- **Privacy redactions not checked.** The filing states Debtors' names and a case number, and no SSN or account numbers appear in the transcription. Filers must redact under Fed. R. Bankr. P. 9037 (not fetched).
+- **Electronic-filing and signature conventions** (`s/ NAME`, `Dated:` placement) follow common practice; they are not verified against the court's ECF procedures (not fetched). The filed complaint has no `Dated:` line, so the sample has none.
+- **Attorney block placement.** LR 5005-4 requires the information on every filing; the template places it under the signature, and the filing does the same. Whether the court wants it at the top of page 1 is unverified.
 
 ## Known gaps
 

@@ -47,6 +47,8 @@
 // ---------------------------------------------------------------------------
 
 #let caption(meta) = {
+  // Caption lines are ragged-right: justified names open gaps between words.
+  set par(justify: false)
   let court = need(meta, "court")
   align(center, stack(
     dir: ttb,
@@ -124,7 +126,7 @@
       spacing: 0.9em,
       [Respectfully submitted,],
       // Signature line as "s/ NAME" (FRBP 9011(a)); the signer's name is printed under it.
-      lines((("s/ " + upper(need(sig, "signer"))),) + need(sig, "lines")),
+      lines((("s/ " + need(sig, "signer")),) + need(sig, "lines")),
     )))
   })
   v(1.5em)
@@ -149,7 +151,8 @@
   set text(font: font-family, size: type-size, lang: "en", fill: black)
   set par(justify: true, leading: body-leading, first-line-indent: 0pt)
 
-  show heading.where(level: 1): it => block(above: 1.2em, below: 1em, width: 100%, align(center, text(size: type-size, weight: "bold", upper(it.body))))
+  // Headings print as written: upper() would turn "523(a)(6)" into "523(A)(6)".
+  show heading.where(level: 1): it => block(above: 1.2em, below: 1em, width: 100%, align(center, text(size: type-size, weight: "bold", it.body)))
   show heading.where(level: 2): it => block(above: 1.1em, below: 0.9em, width: 100%, text(size: type-size, weight: "bold", it.body))
   show heading.where(level: 3): it => block(above: 1em, below: 0.8em, width: 100%, text(size: type-size, style: "italic", it.body))
 

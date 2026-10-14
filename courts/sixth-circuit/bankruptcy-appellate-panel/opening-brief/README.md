@@ -2,28 +2,27 @@
 
 Doc type `opening-brief` of `courts/sixth-circuit/bankruptcy-appellate-panel`. Self-contained: the court-root `typst/` and `samples/` are not touched.
 
-**BLOCKED: no exemplar.** No public, filed opening brief (appellant's brief) from this court was found (see "Searches"). The template is built from the rules below; it has not been checked against a filed brief.
+**Exemplar: yes.** Appellants' Brief, filed 2019-07-31, 38 pages, *In re Chieftain Steel, LLC, et al.*, BAP No. 19-8005 (see "Exemplar" below and `exemplars/SOURCE.md`).
 
 | Gate | Result |
 |---|---|
-| exemplar | no (`exemplars/SOURCE.md`) |
-| render | ok: `sh tools/render.sh courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief samples/INPUT-placeholder.md` ran with typst 0.15.0, produced `samples/OUTPUT-placeholder.pdf`, zero warnings. The sample is a placeholder fixture, not an exemplar transcription. |
-| overlay | fail: `sh tools/overlay.sh courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief placeholder` exits 1 with "no exemplar pdf in exemplars". No `OVERLAY-` file is written. |
-| pages reviewed | see "Page review" (all pages of `samples/OUTPUT-placeholder.pdf`, rasterised with `pdftoppm -r 60`) |
+| exemplar | yes: `exemplars/FILED-EXAMPLE-chieftain-steel-19-8005-opening-brief.pdf` |
+| render | ok: `sh tools/render.sh courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief samples/INPUT-chieftain-steel-19-8005.md` ran with typst 0.15.0 (vendored fonts), produced `samples/OUTPUT-chieftain-steel-19-8005.pdf` (13 pages), zero warnings |
+| overlay | ok: `sh tools/overlay.sh courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief chieftain-steel-19-8005` wrote `samples/OVERLAY-chieftain-steel-19-8005.pdf` (13 pages) and `.txt` |
+| pages reviewed | 13 of 13 rendered pages viewed as PNG (70 dpi); overlay pages viewed as pairs (80 dpi) |
 
 ## Files
 
 | Path | What |
 |---|---|
-| `exemplars/SOURCE.md` | The search record. No filed exemplar. |
-| `samples/INPUT-placeholder.md` | Placeholder fixture (not a filing). Frontmatter per the contract below; body with every section the template requires. |
-| `samples/OUTPUT-placeholder.pdf` | `tools/render.sh` output of the fixture. |
-| `typst/main.typ` | Entry point. Reads `--input sample=...`, splits the frontmatter, calls the template. |
-| `typst/bap6-opening-brief.typ` | The template: `brief-style`, `brief(meta, body)`. Content-agnostic; every number is a named parameter traced to a rule or marked as a style choice. |
+| `exemplars/FILED-EXAMPLE-chieftain-steel-19-8005-opening-brief.pdf` | The filed brief, public, with a text layer. |
+| `exemplars/SOURCE.md` | URL, case, docket, filer, date filed, date fetched, SHA-256. |
+| `samples/INPUT-chieftain-steel-19-8005.md` | Transcription of the filed brief (see "Exemplar"). |
+| `samples/OUTPUT-chieftain-steel-19-8005.pdf` | `tools/render.sh` output. |
+| `samples/OVERLAY-chieftain-steel-19-8005.pdf`, `.txt` | `tools/overlay.sh` output: red = ours, blue = filed, black = both. The `.txt` maps each of our pages to its best-matching filed page. |
+| `typst/main.typ`, `typst/bap6-opening-brief.typ` | Entry point and template. |
 
-Build (from the repo root, toolchain on PATH): `sh tools/render.sh courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief samples/INPUT-placeholder.md`. The render uses only the vendored EB Garamond (`--ignore-system-fonts`); any typst warning fails it.
-
-Note on file names: the brief asks for `samples/<id>-overlay.pdf`; `tools/overlay.sh` writes `samples/OVERLAY-<id>.pdf` and `.txt`, and the tool's names are used here.
+Build (from the repo root, toolchain on PATH): `sh tools/render.sh courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief samples/INPUT-chieftain-steel-19-8005.md`. The render uses only the vendored EB Garamond (`--ignore-system-fonts`); any typst warning fails it.
 
 ## Governing rules
 
@@ -63,37 +62,48 @@ One `.md` file: YAML frontmatter, then the body.
 | `signature` | yes | `signer` and `lines`; printed as "s/ Name" after the body and on each certificate |
 | `date` | no | Under the signature and on the certificate of service |
 | `disclosure` | no | Corporate disclosure statement (FRBP 8012, through 8014(a)(1)); a page before the TOC when given |
-| `oral_argument` | yes for opening and answering | Statement regarding oral argument, after the TOA (LBR 8014-1(b)). Not used for a reply. |
+| `oral_argument` | yes for opening; optional for answering (see Template changes) | Statement regarding oral argument, after the TOA (LBR 8014-1(b)). Not used for a reply. |
 | `authorities` | yes if the body cites any | Registry: key → `kind` (case, constitution, statute, regulation, rule, other), `name` (optional), `cite`, `sort` (optional). A `[text](toa:KEY)` link with no registry entry stops the build; a registry entry never cited stops the build. |
 | `service` | no | `true` adds a certificate of service |
 
 Body: `# Heading` (level 1) sections; `##`, `###`, `####` below. Heading numbers are typed by the author (the template does not number them). Required sections are checked and the build stops when one is missing. `# Addendum` ends the brief: it is rendered after the certificates and is not counted. Footnotes are not supported. Words are counted over the body (headings included, FRBP 8015(g)); the build stops above the limit.
 
-## Overlay
+## Exemplar
 
-Not produced: the overlay compares our render with a filed exemplar, and none exists. When an exemplar is added to `exemplars/`, run `sh tools/overlay.sh courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief <id>`.
+Filed by counsel of record in the case. Appellants' Brief, filed 2019-07-31, 38 pages. *In re Chieftain Steel, LLC, et al.*, BAP No. 19-8005 (appeal from Bankr. W.D. Ky., Originating Case No. 16-10407). Copy: `exemplars/FILED-EXAMPLE-chieftain-steel-19-8005-opening-brief.pdf`; source, dates and hash in `exemplars/SOURCE.md`.
 
-## Searches (2026-10-14)
+Transcription (`samples/INPUT-chieftain-steel-19-8005.md`) covers, in the filed order: the filing's cover, disclosure, oral-argument statement (verbatim), jurisdictional statement, issues, statement of the case (pp. 1–6, abridged), standard of review, summary, the start of the argument and Part I (pp. 7–12, abridged), and the conclusion (p. 17).
 
-Looking for a filed BAP brief of this type. Each search below returned no filed brief from this court:
+Not transcribed: Part II and the rest of Part I (pp. 13–16), the addendum (pp. 26–38), and the filed table of contents and table of authorities (the template generates both). The filed certificate of service is replaced by the template's own.
 
-1. CourtListener API v4 search, `court=bap6`, `type=r`, `q="brief of appellant"` and `q="appellee's brief"`: 0 results.
-2. CourtListener: the BAP dockets list (`/api/rest/v4/dockets/?court=bap6`) returned HTTP 401; the CourtListener HTML search returned HTTP 403. Not usable from the fetch tool.
-3. Web search (standard and extended) for "Bankruptcy Appellate Panel of the Sixth Circuit" with brief terms: returned the BAP practice guidelines, the local rules, the pro se brief form, BAP clerk letters on Justia, and BAP opinions on GPO and Justia. No appellate briefs.
-4. The Justia and GPO BAP dockets (e.g. ca6 12-8025, 15-8056, 15-8037): clerk letters and opinions only; the Justia docket page returned HTTP 403.
-5. `In re Wedgewood Properties`, No. 24-8007 (BAP, oral argument May 22, 2025, on the ca6 calendar): the calendar lists counsel; no brief or docket was found.
-6. The pro se BAP form (`bap_brief2.pdf`, "B.A.P. Pro Se Appellant's Brief"): a blank fillable form, not a filed brief. Ruled out.
-7. A broad CourtListener RECAP search surfaced district-court bankruptcy appeal briefs (e.g. E.D. Mich. 2:23-cv-10171, "Bankruptcy Brief of Appellant"). Those are appeals to the district court, not the BAP, so they are not exemplars for this court. Ruled out.
+Frontmatter (`caption`, `counsel`, `signature`, `date`, `disclosure`, `oral_argument` where the filing has them) copies the filed cover. The template's own certificate of compliance and certificate of service follow the body.
 
-The next place to look: the BAP's own docket (PACER or the Sixth Circuit's CM/ECF) for a specific BAP case number, or a public record copy from a party. Neither was available here.
+## How the exemplar was found (2026-10-14)
+
+- Web search (standard, then extended) for BAP appellate briefs in this court. The first filed brief in this court that the search returned was the appellants' brief in No. 19-8005, on law.uky.edu.
+- The file names on law.uky.edu follow one pattern, `19-8005 <Document>.pdf`. The other two briefs were fetched by that pattern. Each PDF was checked with `pdfinfo` and `pdftotext`: caption, BAP No., ECF header and filing date match.
+- Ruled out before this: CourtListener API (no response from the sandbox) and HTML search (HTTP 403); Justia dockets (HTTP 403); general BAP results (local rules, practice guidelines, the pro se form, opinions). None gave a filed brief.
+
+## Template changes (this pass)
+
+The overlay and the page renders exposed these. All three templates changed the same way, so they stay in step.
+
+1. **Cover spacing.** The opening cover ran onto a second page (the date line). Gaps tightened: caption stack 1.1em to 0.9em, counsel groups 1.2em to 0.9em, the gap before the date 1.4em to 0.8em. The cover is one page in all three.
+2. **TOC entries.** Dot leaders were a single line, so a long entry that wrapped left its page number on a line of its own. Entries are now a two-column grid with the page number in the right column. The dot leaders are gone, and wrapped lines stay flush left.
+3. **Oral-argument statement.** Required for the opening brief only. The filed appellee's brief in this case has none, so the answering template no longer demands one; it prints the section when the frontmatter has `oral_argument`. The reading of LBR 8014-1(b) is not verified against the rule text (the README's Governing rules say so); David to confirm.
 
 ## Page review (Gate 2)
 
-Every page of `samples/OUTPUT-placeholder.pdf` was rasterised at `pdftoppm -r 60` and viewed. 14 of 14 pages of `samples/OUTPUT-placeholder.pdf`. Defects found and fixed: (1) paragraphs overlapped (paragraph spacing was 0): spacing now equals `body-leading`; (2) body lines were 1.2 times single spacing (leading 0.94em): now `body-leading` 1.95em; (3) the certificate of service's signature block was orphaned on its own page: each certificate is one unbreakable block; (4) "14pt" in the certificate was set in a fallback monospace face (typst's bundled DejaVu Sans Mono): now `str(type-size / 1pt)-point`. Pages 2, 13 and 14 were viewed after all four fixes. Pages 5 to 12 were viewed after fix 2 and before fixes 3 and 4; fixes 3 and 4 change only the certificate pages, and the footers and content of pages 8 to 12 were rechecked with `pdftotext`. Pages 2 to 4 were viewed again in the final render, after fix 2, so their line spacing was checked. Page 1 (cover) uses single spacing, which fix 2 does not change; it was viewed in the render before fixes 1 and 2.
+Every page of `samples/OUTPUT-chieftain-steel-19-8005.pdf` (13 pages) was rasterised at 70 dpi and viewed, one page at a time, after the last template change. The overlay pages were viewed as pairs. Findings:
+
+- **Overlay: cover overflow.** The date line ran onto page 2. Fixed in the template (see Template changes).
+- **Case names not italic.** The certificate of compliance says case names are in italics; the body was not. Fixed in the transcription.
+- **Heading names.** The filing says "JURISDICTIONAL STATEMENT" and "STATEMENT OF ISSUES". The build checks for the names in the template ("Statement of Jurisdiction", "Statement of the Issues"), so the sample uses those.
+- **Pages 2 to 12** were checked for spacing, heading placement and page numbers; no further defect.
+- **ACCEPTED: cover layout.** The filed cover sets the caption and counsel in a different arrangement. Layout style, not a rule requirement.
 
 ## Known gaps
 
-- No exemplar: the layout is not compared with a filed brief. The cover carries no colour (none of the rules read requires one for a BAP brief; not verified against the Sixth Circuit Guide to Electronic Filing, which LBR 8011-1 adopts and which was not read).
 - Table of authorities page references come only from `toa:` links the author places in the body. Nothing checks that every citation is linked.
 - Heading numbers are the author's to type.
 - The one-page limit on the oral-argument statement (LBR 8014-1(b)) is not measured.
@@ -101,5 +111,8 @@ Every page of `samples/OUTPUT-placeholder.pdf` was rasterised at `pdftoppm -r 60
 - The addendum and footnotes are not exercised (no footnotes in the template).
 - The certificate of service wording is ours (CM/ECF convention). It is not taken from a rule text that was read.
 - The rule text was read through the Legal Information Institute page for FRBP 8014 and 8015 (fetched 2026-10-14), which returns a summary, not the official PDF. Check the wording against the official text before relying on a quoted phrase.
+- **One case for all three.** Every exemplar is from BAP No. 19-8005. The opening and reply briefs share a filer group (Dinsmore & Shohl, BGD, Fox, Phoenix); the answering brief is UCB's. The tier-2 standard (two or three filed exemplars from different filers) is not met for any doc type. A second filed brief of each type from another BAP case would meet it.
+- **Abridged transcription.** The sample transcribes part of the filed brief (see "Exemplar"). Filed pages that are not transcribed show as blue-only text in the overlay.
+- **Certificate of compliance.** None of the filed briefs has one. The template's certificate follows FRBP 8015(h) as the README reads it; it is ours, not the exemplar's.
 
 [Formbook index](../../../../README.md) | [Court README](../README.md)
