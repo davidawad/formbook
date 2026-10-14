@@ -8,8 +8,9 @@ Folder: `courts/fourth-circuit/north-carolina/federal/bankruptcy-eastern-distric
 | exemplar | yes: `exemplars/FILED-EXAMPLE-jsmith-barnhill-25-00084-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-barnhill-memo.md`: the whole 12-page memorandum transcribed (caption, headings, body, quotations, signature, certificate of service) |
 | render | ok: `samples/OUTPUT-barnhill-memo.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-barnhill-memo.pdf` and `samples/OVERLAY-barnhill-memo.txt` (page map) |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | rules name no face: EB Garamond kept (`docs/FONTS.md`, "No face named"); no substitute needed. Checked 2026-10-14 against the NCEB Local Rules and Administrative Guide (see Typography). |
+| overlay | ok: `samples/OVERLAY-barnhill-memo.pdf` and `samples/OVERLAY-barnhill-memo.txt` (page map; exemplar copy fetched from CourtListener RECAP on 2026-10-14, 12 pages, matching `exemplars/SOURCE.md`) |
+| pages reviewed | 10 of 10 (fonts pass, 2026-10-14: every page rendered at 70 dpi and viewed after the re-render) |
 
 ## Governing rules
 
@@ -29,6 +30,8 @@ Rules were read from the primary sources on 2026-10-14. The local rules are the 
 | LBR 9014-1(a) | A motion is filed with a notice of motion, a certificate of service and a proposed order. | Not generated: these are separate filings (see Known gaps). |
 
 Typography: none of the local rules, the Administrative Guide or FRBP 9004 sets a typeface, point size, margin or line spacing for a memorandum (checked: the NCEB local rules and the Administrative Guide were searched for "font", "point", "margin", "spacing", "8 1/2"; the only paper-size text is the 8½ × 11 inch scanning rule in the Administrative Guide's electronic-filing section). The template therefore uses the exemplar's settings, which are a 12-point serif, double-spaced, 1-inch margins, page numbers at the foot, and italic case names.
+
+Fonts pass (2026-10-14): the NCEB Administrative Guide's only face wording is in the creditor-matrix instructions (Rule 1007-2, "Twelve (12) pitch Times New Roman and Courier New fonts create good print quality"). That applies to the mailing matrix, not to a memorandum. The Local Rules and the Administrative Guide were fetched in full from the court's "Newest" PDFs and searched for font, typeface, point, margin and spacing terms. No rule names a face for this doc type, so `docs/FONTS.md` ("No face named") keeps EB Garamond. The Liberation Serif substitute is not used.
 
 ## Layout
 
@@ -69,7 +72,7 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body.
 
 ## Known gaps and open choices
 
-1. **Typography is not in the rules.** The 12-point EB Garamond, double spacing and 1-inch margins follow the exemplar (a Times-style serif). EB Garamond has a smaller x-height than Times at 12 pt, so the text looks smaller than the exemplar. A Times-metric font would remove the difference; that is a vendoring decision for David (fonts/ is shared).
+1. **Typography is not in the rules.** The 12-point EB Garamond, double spacing and 1-inch margins follow the exemplar (a Times-style serif). EB Garamond has a smaller x-height than Times at 12 pt, so the text looks smaller than the exemplar. No rule names a face, so the template keeps EB Garamond. Liberation Serif (metric-compatible with Times New Roman) is vendored if David wants the exemplar's look as a tier-2 choice; switching is not required by any rule.
 2. **Only one exemplar** (one filer). The tier-2 bar (2 or 3 filers) is not met. Search: the CourtListener API (`/api/rest/v4/search/`, `court=nceb`, `type=rd`, query "motion to dismiss" memorandum). It returned several memoranda; this one has a text layer. Not collected: a second memorandum from a different filer.
 3. **Not generated:** the motion itself (LBR 7007-1(a) requires one with the memorandum), the notice of motion and the proposed order (LBR 9014-1(a)), and any summons. The template produces the memorandum only.
 4. **Transcription is complete.** The whole 12-page memorandum is in the sample, including the caption, the signature block and the certificate of service. The exemplar's own citation errors (for example "*Id* (citing") are kept as printed.
