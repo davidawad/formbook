@@ -7,8 +7,17 @@ Doc type: **motion with a memorandum of law**, filed in an adversary proceeding 
 | exemplar | yes, 1 filer: `exemplars/FILED-EXAMPLE-kapitus-stanfield-23-02003-motion-brief.pdf` (see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-kapitus-23-02003.md`, the whole filing (motion, memorandum, certificate) |
 | render | ok: `samples/OUTPUT-kapitus-23-02003.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
-| overlay | ok: `samples/OVERLAY-kapitus-23-02003.pdf` and `OVERLAY-kapitus-23-02003.txt` |
-| pages reviewed | 7 of 7, each rendered at 60 dpi and viewed after the last template change (the paragraph-spacing fix, see "Defects found") |
+| overlay | ok: `samples/OVERLAY-kapitus-23-02003.pdf` and `OVERLAY-kapitus-23-02003.txt`, made 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not committed; see gaps 11) |
+| pages reviewed | 7 of 7 re-rendered and viewed 2026-10-14 (fonts pass; the face did not change, see Typeface below) |
+
+## Typeface
+
+| Item | Result |
+|---|---|
+| Face required by the rules | None named. The BLR 5005-1 and 7007-1 text read (search excerpts of courtrules.net) names no typeface; FRBP 9004(a) says "clearly legible" with no face. Subsection (f) of BLR 5005-1 (caption style) was not seen (see gaps 1). |
+| Substitute (`docs/FONTS.md`) | None needed: the "No face named" row, so **EB Garamond** stays. |
+| Fit | n/a (the rules name no face to be metric-compatible with) |
+| Embedded (`pdffonts`) | `EBGaramond-Regular`, `EBGaramond-Bold`, `EBGaramond-Italic` (all embedded, CID Type 0C) |
 
 Not a `court.json` status; nothing here sets `status`. The court-root `README.md` and `court.json` are not touched.
 
@@ -108,3 +117,5 @@ Reviewed pages: 7 of 7.
 9. **The sample is the whole filing** (the motion, memorandum, WHEREFORE, signature and certificate), so the overlay covers all of it.
 10. **Certificate of service optional.** Under Fed. R. Civ. P. 5(d)(1)(B) no certificate is needed for ECF service. The template keeps the certificate as an option because the exemplar has one.
 11. **Local practice not checked:** judge-specific standing orders, and the signature style (`/s/`) beyond the exemplar.
+12. **Exemplar PDF not in the repo.** Only `exemplars/SOURCE.md` is committed. For the 2026-10-14 overlay the RECAP copy was fetched from the URL in `SOURCE.md` into a scratch directory and passed to `tools/overlay.sh` as its third argument. Committing the PDF is a repo decision, not made here.
+13. **BLR 5005-1 subsection (f) and the 2019 PDF not retrieved (2026-10-14).** courtrules.net returns HTTP 403; the court's 2019 local-rules PDF returns an 855-byte error page. The font conclusion rests on the excerpts, which name no face; re-check subsection (f) against the court's PDF.
