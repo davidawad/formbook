@@ -100,11 +100,12 @@
       v(pitch * 0.5)
       line-stack(meta.signature.party)
       v(pitch * 0.5)
-      line-stack(("/s/ " + meta.signature.signer, meta.signature.signer + ",", meta.signature.signer_title))
+      line-stack(("/s/ " + meta.signature.signer, meta.signature.signer, meta.signature.signer_title))
+      // The attorney block sits in the signature column, under the signature (as filed; L.R. 9011(A)).
+      v(pitch)
+      line-stack(meta.signature.attorney)
     },
   )
-  v(pitch)
-  line-stack(meta.signature.attorney)
 })
 
 #let certificate-of-service(meta) = {

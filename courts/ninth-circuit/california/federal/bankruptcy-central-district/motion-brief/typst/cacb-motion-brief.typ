@@ -170,8 +170,6 @@
   [Dated: #meta.date],
   {
     set par(leading: single-leading, spacing: 0pt, justify: false)
-    [Respectfully submitted,]
-    v(pitch * 0.5)
     line-stack(meta.signature.firm)
     v(pitch * 0.5)
     line-stack(("By: /s/ " + meta.signature.signer, upper(meta.signature.signer)) + meta.signature.lines)
@@ -182,14 +180,19 @@
 /// Each blank-line-separated chunk of markdown is one paragraph (or heading, or list). A heading is kept in one
 /// block with the chunk after it, so it never ends a page. Numbering is applied per chunk, not with a `show par`
 /// rule (a show rule that re-wraps paragraph content recurses without end in typst 0.15).
-#let body-chunks(body) = {
+#let body-chunks(meta, body) = {
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
   let pending = []
   let has-pending = false
   for c in chunks {
     let t = c.trim()
     let piece = none
-    if t.starts-with("#") {
+    // Markers from the sample: where the filing has its signature block, or starts a new page.
+    if t == "<!-- signature -->" {
+      piece = signature-block(meta)
+    } else if t == "<!-- pagebreak -->" {
+      piece = pagebreak(weak: true)
+    } else if t.starts-with("#") {
       pending += cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
       has-pending = true
       continue
@@ -225,6 +228,9 @@
   )
   set text(font: font-family, size: type-size, lang: "en")
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
+  // Tables (the listings and the service list) are unruled and single-spaced, as in the filed forms.
+  set table(stroke: none, inset: (x: 4pt, y: 3pt))
+  show table: set par(leading: single-leading)
 
   // Headings. Level 1: a centered section (NOTICE OF MOTION, MEMORANDUM OF POINTS AND AUTHORITIES, ...), which
   // restarts the numbering. Levels 2-5: I., A., 1., a. from the level, counted by the template.
@@ -240,7 +246,9 @@
     letter-count.update(0)
     digit-count.update(0)
     minor-count.update(0)
-    heading-line(text(weight: "bold", context [#numbering("I.", roman-count.get().first()) #it.body]))
+    // Filed form: a blank line, the numeral, then the title on the next line, centered.
+    v(pitch)
+    heading-line(align(center, text(weight: "bold", context [#numbering("I.", roman-count.get().first()) \ #upper(it.body)])))
   }
   show heading.where(level: 3): it => {
     letter-count.step()
@@ -263,7 +271,5 @@
   // Lists are numbered 1., 2., ...; markdown list items are single paragraphs spaced by body-leading.
   set enum(numbering: "1.", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
   set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-  body-chunks(body)
-
-  signature-block(meta)
+  body-chunks(meta, body)
 }
