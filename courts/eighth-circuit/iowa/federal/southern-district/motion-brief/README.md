@@ -9,7 +9,8 @@ Folder: `courts/eighth-circuit/iowa/federal/southern-district/motion-brief/`.
 | sample md | `samples/INPUT-hanfling-brief.md`: a transcription of the cover, the introduction, the factual background (with the privacy-policy block quotation and footnotes 1 to 3), the start of Argument I, the conclusion, and the signature block. Argument I's first paragraphs and Arguments II to IV are not transcribed. |
 | render | ok: `samples/OUTPUT-hanfling-brief.pdf`, 9 pages (cover, TOC, TOA, body pages 1 to 6), typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
 | overlay | ok: `samples/OVERLAY-hanfling-brief.pdf` and `OVERLAY-hanfling-brief.txt` (page map) |
-| pages reviewed | 9 of 9, on the final PDF (sha256 `6ff6a834...`, see the review table below) |
+| typeface | face required by the court: **none** (LR 10(b) has no typeface or point-size rule; checked 2026-10-14 in the PDF text, see Governing rules). Vendored substitute: none needed; **EB Garamond kept** (`docs/FONTS.md`: a court that names no face gets EB Garamond). Metric compatibility: n/a. Tier 2 question on the exemplar's Times New Roman, Known gaps 4. |
+| pages reviewed | 9 of 9, on the final PDF (sha256 `bdd908b4...`, see the review table below) |
 | `tools/check.sh` | not run: a doc-type folder is not a court folder (see Known gaps) |
 
 ## Governing rules
@@ -32,7 +33,7 @@ Fed. R. Civ. P. text is cited by number and was **not fetched in this pass**.
 | IASD-MOT-003 | LR 7(b)(3) | M | The brief is filed as an electronic attachment under the same docket entry as the motion. | Filing practice; not in the template. |
 | IASD-MOT-004 | LR 7(h) | M | A brief may not exceed 20 pages, not counting the TOC, TOA and signature block, unless a different limit is set by the Local Rules or leave is granted. | Not checked by the template (no page counter). The exemplar's body runs 32 pages; see Known gaps 3. |
 | IASD-SIG-001 | LR 11 | M | Under the signature: name, law firm, mailing address, telephone, email; lead counsel identified if more than one lawyer. | `signature-block()`; frontmatter `signature.lines` |
-| IASD-TIER2-001 | none in the Local Rules | C | Typeface and size: none given. The exemplar is Times New Roman 12 pt. | `font-family = "EB Garamond"`, `type-size = 12pt`, `footnote-size = 12pt` (Known gaps 4). |
+| IASD-TIER2-001 | none in the Local Rules (LR 10(b) checked 2026-10-14) | C | Typeface and size: none given. The exemplar is Times New Roman 12 pt. | `font-family = "EB Garamond"`, `type-size = 12pt`, `footnote-size = 12pt` (Known gaps 4). |
 | IASD-TIER2-002 | none | C | Headings: level 1 centered bold capitals; level 2 and below numbered (I., A., 1., a.) with a hanging indent; block quotations single spaced and indented 0.5 inch on both sides. | `heading-num()`, `show heading`, `show quote` |
 | IASD-TIER2-003 | none | C | Front matter numbered in lower-case roman; table of authorities groups (Cases, Statutes, Rules, Other Authorities) with `passim` for an authority on five or more pages. | `toa-section()`, `toa-groups`, `passim-threshold` |
 
@@ -55,7 +56,7 @@ Not produced by this template (separate papers): the motion itself, any proposed
 
 ## The overlay
 
-`samples/OVERLAY-hanfling-brief.pdf`: red = our render, blue = the filed exemplar, black = both agree. Pages are paired by word overlap (`OVERLAY-hanfling-brief.txt`):
+`samples/OVERLAY-hanfling-brief.pdf`: red = our render, blue = the filed exemplar, black = both agree. The filed PDF is not stored in `exemplars/` in this snapshot (only `SOURCE.md`), so the overlay was built against a copy fetched from the URL in `exemplars/SOURCE.md` on 2026-10-14 (40 pages, sha256 `a4e6ad619db6cc47f523b3fd86638097c9832a5386c91fa486b623a66586264a`). Pages are paired by word overlap (`OVERLAY-hanfling-brief.txt`):
 
 | ours | filed | overlap |
 |---|---|---|
@@ -73,7 +74,7 @@ Expected differences: the exemplar's pleading page has an ECF header (`Case 4:26
 
 ## Gate 2 review (every page of the final PDF, rendered at 60 dpi and looked at)
 
-sha256 of the reviewed PDF: `6ff6a83495628f00b8f1ff5c1dfda1e3cf7998c1aa84841eb9d1049c053d3475`.
+sha256 of the reviewed PDF: `bdd908b4e8160476161a897332121e9da8a6ef176f573d15a910c9c248bf2c44`. Re-rendered 2026-10-14 for the fonts pass (no font change: the template keeps EB Garamond); all 9 pages were rendered at 60 dpi and looked at again on this PDF, and the layout matches the rows below. The earlier PDF's hash (`6ff6a834…`) is not reproducible because typst stamps a creation date into each render.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -94,7 +95,7 @@ Every page is recorded above; none is `OPEN`.
 1. **TOC on the first page (LR 10(b)(4)).** The rule says a brief of more than 10 pages "must include, on the first page, a subject matter table of contents." This template puts the TOC on page ii, after the cover (the exemplar does the same). The cover carries the caption, which takes most of the first page. **Question for David:** does the court read "first page" as the first page of the brief (the caption page), in which case the TOC must share page 1 with the caption; or as the first page after the cover, as the exemplar and this template do?
 2. **Oral argument in the conclusion (LR 7(c)).** The caption carries `ORAL ARGUMENT REQUESTED` (from `oral_argument`). The rule also requires it in the conclusion; that is author content, and the template cannot check the wording.
 3. **Page limit (LR 7(h)).** The exemplar's body runs 32 pages (pages 1 to 32, then the signature on page 33). The Local Rules set a 20-page limit for a brief, excluding the TOC, TOA and signature block, unless another limit is set or leave is granted. The exemplar was filed as is; whether leave was granted is not shown in the copy. The template does not count pages. The sample is 6 body pages.
-4. **Typeface.** The Local Rules give no typeface rule. The exemplar is Times New Roman 12 pt (footnotes 12 pt). The only serif in `fonts/` is EB Garamond, which sets smaller at the same size, so the text looks smaller than the exemplar. A Times-metric font would need a shared change to `fonts/` (not done here). Same question as the complaint, Known gaps 2.
+4. **Typeface.** The Local Rules give no typeface rule (checked 2026-10-14 against the Local Rules PDF's text layer; LR 10(b) lists none). So `docs/FONTS.md` rule 3 does not apply and EB Garamond stays. The exemplar is Times New Roman 12 pt (footnotes 12 pt). The only serif in `fonts/` is EB Garamond, which sets smaller at the same size, so the text looks smaller than the exemplar. A Times-metric font would need a shared change to `fonts/` (not done here). Same question as the complaint, Known gaps 2.
 5. **Certificate of service (LR 5(a)).** The exemplar has none (service is by ECF notice). A certificate is required where a paper is served otherwise; LR 5(a) requires the time and manner of service and one of: a written acknowledgment, a certification by a member of the bar, or a declaration under 28 U.S.C. § 1746. Not generated.
 6. **Exemplars: one filer.** EVAL-LOOP tier 2 asks for two or three filers. The search (CourtListener RECAP, `type=r`, `court=iasd`, query "motion to dismiss") found Randolph v. Iowa Health System (4:26-cv-00347), whose PDF is a Central District of Illinois filing (4:26-cv-04110), so it was rejected. Hanfling is the only S.D. Iowa brief used. Tier 2 is therefore **not judged against two filers** for this doc type.
 7. **Sample excerpt.** The sample is the cover, the introduction, the factual background, the start of Argument I (from the paragraph beginning "A plaintiff must plead facts," which is the exemplar's page 7; the paragraphs before it on page 6 are not transcribed), and the conclusion, with the signature. Arguments I (the rest), II, III and IV are not transcribed; the authorities cited only there are not in the TOA. The TOA is therefore a partial list of the sample's authorities, not the exemplar's full TOA.
