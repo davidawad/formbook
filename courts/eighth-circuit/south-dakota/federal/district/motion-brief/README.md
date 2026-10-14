@@ -1,0 +1,95 @@
+# sdd: motion-brief
+
+Doc type: **motion brief** (the brief in support of a motion to dismiss, with its memorandum of law) in the United States District Court for the District of South Dakota (`sdd`, ca8).
+Folder: `courts/eighth-circuit/south-dakota/federal/district/motion-brief/`.
+
+| Item | Status |
+|---|---|
+| exemplar | yes: `exemplars/FILED-EXAMPLE-lone-eagle-5-26-cv-05068-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
+| sample md | `samples/INPUT-lone-eagle-motion-to-dismiss.md` (the full filed text of the exemplar; see below) |
+| render | ok: `samples/OUTPUT-lone-eagle-motion-to-dismiss.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `samples/OVERLAY-lone-eagle-motion-to-dismiss.pdf` and `OVERLAY-lone-eagle-motion-to-dismiss.txt` |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+| tier 2 | not met to the eval-loop standard: one filer so far (see Known gaps) |
+
+File names follow the repo convention used by `tools/render.sh` and `tools/overlay.sh` (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf` and `.txt`), not the `<id>.pdf` and `<id>-overlay.pdf` names in the brief.
+
+## Governing rules
+
+Primary source: D.S.D. Civil Local Rules, the official PDF: https://www.sdd.uscourts.gov/sites/sdd/files/local_rules/12-1-15%20CIVIL%20LOCAL%20RULES%20OF%20PRACTICE.pdf . Fetched and read 2026-10-14. The printed page footers say "12/01/2015", the version date.
+
+Federal rules: Fed. R. Civ. P. 12(b), from https://www.law.cornell.edu/rules/frcp/rule_12 , fetched 2026-10-14 ("Apr. 2, 2024, eff. Dec. 1, 2024"). Rules 8 and 10 apply to the complaint (see `../complaint/README.md`).
+
+| Rule | Requirement (quoted or closely paraphrased from the source) | Where it is in the template |
+|---|---|---|
+| D.S.D. Civ. LR 7.1(B) | "With every motion raising a question of law … the movant must serve and file a brief containing the movant's legal arguments, the authorities in support thereof, and the Federal Rule of Civil Procedure on which the movant relies." | Content of the sample (the brief names Rules 12(b)(1), 12(b)(5) and 12(b)(6) in its Introduction and Conclusion). The template does not check the content. |
+| D.S.D. Civ. LR 7.1(B)(1) | Briefs "must not exceed 25 pages or 12,000 words unless prior approval has been obtained"; a brief over 25 pages "must be accompanied by a certificate by the attorney … that the brief complies with the type-volume limitation". | Not printed: the sample is 8 pages (see Known gaps 5). |
+| D.S.D. Civ. LR 83.4 | "All documents must be on 8 1/2 x 11 inch paper. The text must be double-spaced, but quotations more than two lines long must be indented and single-spaced. Headings and footnotes must be single-spaced. Margins must be at least one inch on all four sides. Fonts must be at least 12-point." | `margin = 1in`; `pitch = 24pt` (double spacing); `type-size = 12pt`; headings and footnotes single-spaced; footnote text at 12 pt. |
+| D.S.D. Civ. LR 10.1(A) | "A pleading or other paper presented for filing must begin with the caption of the case, the title of the document, and the name of the party filing the document." | `cover(meta)`: court title, caption, case number, brief title. |
+| D.S.D. Civ. LR 10.1(B) | Signature, with typed name, address, telephone number and e-mail of the signer "beneath the signature"; not in a header, footer or caption. | `signature-block(meta)`: firm, "By: /s/" and the signer's details below. |
+| D.S.D. Civ. LR 5.1(A)(3) | "In all other instances a certificate of service must be attached to the document identifying the persons served and the manner in which service was accomplished." (CM/ECF notice to the persons served is the exception.) | `certificate-block(meta.certificate_of_service)`: on its own page, with the persons served and the manner (CM/ECF). |
+| D.S.D. Civ. LR 5.1(A)(4) | The filing user's name "must be preceded by a '/ s /'". | `"By: /s/ " + signer`. |
+| Fed. R. Civ. P. 12(b) | "But a party may assert the following defenses by motion: … (1) lack of subject-matter jurisdiction; … (5) insufficient service of process; … (6) failure to state a claim upon which relief can be granted". | Content of the sample (the Introduction names the three defenses). |
+
+Not produced by this template: a table of contents or table of authorities (not required by the LR 7.1 text read above; the 25-page limit is the only length rule quoted). A certificate of compliance under LR 7.1(B)(1) is not printed (the sample is well under 25 pages).
+
+## Layout
+
+- Court title (three centered lines: "IN THE UNITED STATES DISTRICT COURT", "FOR THE DISTRICT OF SOUTH DAKOTA", and the division), then the caption: parties on the left, closed by a right and bottom rule; the case number and the brief title on the right.
+- No pleading paper or line numbers (LR 83.4 does not require them; the exemplar has none).
+- Body double-spaced (24 pt pitch), first-line indent 0.5 in, unnumbered paragraphs. Headings: centered caps (level 1, for INTRODUCTION, BACKGROUND, ARGUMENT, CONCLUSION), bold (level 2, for the argument headings I, II, ...), bold italic (level 3). Each heading is kept with the paragraph after it.
+- Footnotes: single-spaced, 12 pt, separated from the text by a short rule.
+- The signature block is kept on the same page as the last paragraph (the conclusion), so it is never alone on a page.
+- Certificate of service on its own page, after the signature block, with the recipients and the CM/ECF signature.
+- Page number centered at the foot of every page.
+
+## Markdown contract (for samples)
+
+- YAML frontmatter, then the body. Frontmatter fields: `case_number`, `division`, `caption.parties` (list of `{names, designation}`), `brief_title`, `date`, `signature` (`firm` (optional), `signer`, `lines`), and `certificate_of_service` (`date`, `text`, `recipients` (a list of line lists), `signer`).
+- Body chunks separated by blank lines: `#`, `##`, `###` headings; a list; a paragraph (unnumbered).
+- Footnotes: a reference `[^id]` in a paragraph, and a definition chunk `[^id]: text` anywhere in the body. The template removes the definition from the flow and places the footnote at the reference. cmarker 0.1.10 has no footnote support, so the template does this itself; it works in paragraphs only (not in headings, lists or tables).
+- Italic case names: `*...*`. Escape a literal asterisk as `\*` (the sample uses `\*2` for a Westlaw star page).
+
+## Overlay (red/blue test)
+
+`samples/OVERLAY-lone-eagle-motion-to-dismiss.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (see `samples/OVERLAY-lone-eagle-motion-to-dismiss.txt`):
+
+- our p.1 over filed p.1 (82.5% word overlap)
+- our p.2 over filed p.2 (67.5%)
+- our p.3 over filed p.4 (48.7%)
+- our p.4 over filed p.5 (72.8%)
+- our p.5 over filed p.6 (78.5%)
+- our p.6 over filed p.7 (62.5%)
+- our p.7 over filed p.9 (53.3%)
+- our p.8 over filed p.10 (68.2%)
+
+Filed pages 3 and 8 are not paired with any of our pages, because our pages break at different words than the filing does and the word-set match favours the neighbouring pages. The overlay is a diagnostic, not a score.
+
+## Known gaps and open choices
+
+1. **One filer so far.** The brief asks for one exemplar per doc type; EVAL-LOOP's tier 2 asks for two or three filers. Two other available memoranda in support of a motion to dismiss in this court were found and are not downloaded: *Mayday Health v. Rhoden*, 4:26-cv-04096, Doc. 15 (filed by Marty Jackley and Larry Rhoden, 5 pages, RECAP docket 73412271) and *Cura Industries, LLC v. Sunny Makhijani, DPM*, 4:26-cv-04079, Doc. 5 (filed by Sunny Makhijani and My Foot Podiatry PLLC, 5 pages, RECAP docket 73286298). Tier 2 is therefore **not** judged against two or three filers yet. Both are short, and either would be the second filer; the next step is to download one and run the overlay on it.
+2. **Length.** The sample renders to 8 pages; the exemplar is 10 pages. The sample carries the full filed text, so the difference is most likely the typeface and the line spacing (see gap 4); this was not measured line by line.
+3. **Page limit: which version?** LR 7.1(B)(1) on the official PDF (12/01/2015) says 25 pages or 12,000 words. A third-party copy of the rule on courtrules.net says 30 pages. The template follows the official PDF and prints no certificate; if the rule was amended after 2015, the limit needs to be checked against the court's current rules. Not resolved here.
+4. **Font.** EB Garamond is the only font vendored in `fonts/`. The exemplar is Times New Roman. EB Garamond's x-height is smaller, so the text looks smaller at the same 12 pt. The 12-point minimum is met; vendoring a Times-metric font is a repo decision.
+5. **Certificate of compliance (LR 7.1(B)(1)).** Not printed; it is needed only over 25 pages. A longer brief would need it added to the template.
+6. **Caption.** The party column is closed by a right and bottom rule, not the ")" column of the filing. Both are seen in filings; recorded as a tier-2 choice.
+7. **Footnote reference only in paragraphs.** The template's footnote support covers a reference inside a body paragraph. A reference in a heading, list or table is not supported and would render as literal text.
+8. **Redactions.** The plaintiff's street address, telephone and e-mail in the certificate of service are `[redacted]`. Counsel's and the Deputy Attorney General's contact details are kept as filed (public, and they are the filing's signature details). No SSN, birth date or financial-account number appears (LR 5.2).
+9. **Signature date.** The sample uses "June 12, 2026", the filing date in the header and the certificate of service.
+
+## Review of the rendered pages (current PDF)
+
+- Page 1: court title (three lines), the caption with the long party list and the case number and title on the right, the first paragraph, INTRODUCTION heading and the start of its paragraph. Pass.
+- Page 2: the rest of the introduction, BACKGROUND heading, two background paragraphs, the Lakota-language paragraph and the TRO paragraph. No paragraph overlaps another (after the paragraph-spacing fix, below). Pass.
+- Page 3: the TRO sentence, ARGUMENT heading, sub-heading I (bold) with its paragraphs, sub-heading II (standing), citations in italic. Pass.
+- Page 4: the standing paragraphs, sub-heading III (improper service) and the start of its paragraph. Pass.
+- Page 5: the end of III, sub-heading IV (Younger abstention) and the first abstention paragraphs. Pass.
+- Page 6: the abstention paragraphs (categories of state proceedings, Board of Minerals). Pass.
+- Page 7: the end of the abstention argument, CONCLUSION heading, the conclusion paragraph with footnote reference 1, the signature block ("Dated" line and the firm, "By: /s/" and the signer's details on the right), and the footnote text at the foot of the page. Pass.
+- Page 8: CERTIFICATE OF SERVICE on its own page: the statement, the two recipients (the pro se plaintiff with her details redacted; the Deputy Attorney General with her details as filed), and "By: /s/" with the signer. Pass.
+
+Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Layout defect found and fixed during review
+
+The first render had every paragraph's last line overlapped by the next paragraph's first line. The cause was the paragraph spacing: `spacing: 0pt` in the page setup, so the gap after a paragraph was the bare line box, not a double-spaced line. The fix is `spacing: body-leading` (1.35 em) in `sdd-motion-brief.typ` and `sdd-complaint.typ`. The same defect is in any template that sets `spacing: 0pt` on body text with `leading` set; the caption and signature lines keep `spacing: 0pt` on purpose, because they are single-spaced.
