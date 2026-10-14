@@ -1,0 +1,143 @@
+---
+civil_action_no: "3:26-cv-00182"
+judges: ["BAJ", "EWD"]
+caption:
+  - "FIRST HORIZON CORPORATION"
+  - ""
+  - "VERSUS"
+  - ""
+  - "KARL HOEFER and DMMS HOLDINGS, LLC"
+judge: "JUDGE BRIAN A. JACKSON"
+magistrate: "MAGISTRATE JUDGE ERIN WILDER-DOOMES"
+title: "MEMORANDUM IN SUPPORT OF RULE 12(b)(6) MOTION TO DISMISS"
+signature_lines:
+  - "Respectfully submitted,"
+  - ""
+  - "/s/ Thomas M. Flanagan"
+  - "Thomas M. Flanagan, T.A. (#19569)"
+  - "Anders F. Holmgren (#34597)"
+  - "Alixe L. Duplechain (#39167)"
+  - "Jordan B. Redmon (#37272)"
+  - "FLANAGAN PARTNERS LLP"
+  - "201 St. Charles Avenue, Suite 3300"
+  - "New Orleans Louisiana 70170"
+  - "Telephone: (504) 569-0235"
+  - "Facsimile: (504) 592-0251"
+  - "tflanagan@flanaganpartners.com"
+  - "aholmgren@flanaganpartners.com"
+  - "aduplechain@flanaganpartners.com"
+  - "jredmon@flanaganpartners.com"
+  - ""
+  - "/s/ Joelle F. Evans"
+  - "Kyle Schonekas, T.A. (#11817)"
+  - "Joelle F. Evans (#23730)"
+  - "Andrea V. Timpa (#29455)"
+  - "Benjamin O. Flaxenburg (#37682)"
+  - "SCHONEKAS EVANS McGOEY & McEACHIN, LLC"
+  - "909 Poydras Street, Suite 1600"
+  - "New Orleans, Louisiana 70112"
+  - "Telephone: 504-680-6050"
+  - "Facsimile: 504-680-6051"
+  - "kyle@semmlaw.com"
+  - "joelle@semmlaw.com"
+  - "andrea@semmlaw.com"
+  - "benjamin@semmlaw.com"
+  - ""
+  - "Attorneys for defendant, Karl Hoefer"
+  - "Attorneys for defendant, DMMS Holdings, LLC"
+---
+
+Defendants, Karl Hoefer (“Hoefer”) and DMMS Holdings, LLC (“DMMS”), respectfully submit this Memorandum in Support of their Rule 12(b)(6) Motion to Dismiss in response to the Complaint brought against them by plaintiff, First Horizon Corporation (“First Horizon”). As shown herein, the Complaint fails to state any claim and should be dismissed with prejudice.
+
+# INTRODUCTION
+
+This case arises from the alleged breach of non-solicitation provisions by First Horizon’s former employee, Karl Hoefer. After Hoefer left First Horizon’s employment and started a new job, First Horizon sued Hoefer and his new employer, DMMS Holdings, LLC. Seeking damages and injunctive relief, First Horizon has attempted to assert claims for alleged bad faith breach of contract, unfair trade practices, “inducement” of breach of contract, “procurement” of breach of contract, and civil conspiracy. But First Horizon states no plausible claims.
+
+# FACTUAL ALLEGATIONS IN THE COMPLAINT
+
+First Horizon is a Tennessee corporation with its principal place of business in Tennessee. Complaint, Doc. 1, ¶ 1. First Horizon alleges that defendant DMMS was formed by Daryl G. Byrd (“Byrd”), Mark W. Tipton (“Tipton”), Michael J. Brown (“Brown”) and Scott Price (“Price”), none of whom were made defendants. *Id.*, ¶¶ 4-6. First Horizon contends that non-parties, Byrd, Tipton, Brown, and Price, are former executives of IBERIABANK which First Horizon acquired through a merger in 2020. *Id.*, ¶ 5. The Complaint alleges that, at some point after the merger, several non-parties, Byrd, Tipton, Brown, and Price, left First Horizon and formed DMMS. *Id.*, ¶¶ 6, 15. First Horizon alleges that DMMS intends to compete with First Horizon and “has recruited away at least twenty-seven (27) employees of [First Horizon], all of whom were former employees of Iberia” with whom non-parties Byrd, Tipton, Brown, and Price previously worked. *Id.*, ¶¶ 15-17.
+
+First Horizon alleges that defendant Hoefer, a former First Horizon Executive Vice President and Regional President for Louisiana and Texas, “was a key initial recruiting target for Byrd and DMMS.” *Id.*, ¶¶ 18, 29. It alleges that Hoefer resigned his employment with First Horizon on or about December 30, 2025 and began working for DMMS “as a consultant in the role of Senior Executive Vice President.” *Id.*, ¶¶ 18, 30. It alleges that after his resignation, Hoefer became “a key recruiter of [First Horizon] bankers and employees” for DMMS and “brazenly recruited First Horizon employees across Louisiana and Texas at every level of First Horizon’s hierarchy.” *Id.*, ¶¶ 29, 35, 37. The Complaint alleges a purported “scheme” between Hoefer and DMMS wherein Byrd or Tipton contact First Horizon employees and refer them to Hoefer who then attempts to persuade them to leave First Horizon by allegedly offering them generous compensation packages. *Id.*, ¶¶ 36-38, 59.
+
+The crux of First Horizon’s Complaint is that Hoefer is allegedly prohibited under certain agreements (the “Grants”) from directly or indirectly soliciting or hiring First Horizon employees. *Id.*, ¶¶ 20-27, 52; *see also* Exhibits A through E, attached, Docs. 1-1, 1-2, 1-3, 1-4 and 1-5. Neither the allegations of the Complaint, nor the Grants that First Horizon attached to it, reflect the existence of any non-competition agreements. The Complaint contains no facts whatsoever that would give rise to any duty owed by DMMS to First Horizon not to compete with First Horizon or to solicit or hire First Horizon employees.
+
+Notably, First Horizon urges that all “events giving rise to this lawsuit took place in the State of Louisiana.” *Id.*, ¶ 7 (emphasis added). It also alleges that “East Baton Rouge Parish … is a place of proper venue for First Horizon’s claims.” *Id.*, ¶ 13. In fact, most of the specific claims of alleged solicitation by Hoefer of First Horizon employees are alleged to have occurred in Louisiana. *Id.*, ¶ 46 (alleged solicitation of John Everett in Baton Rouge, Louisiana); ¶ 48 (alleged solicitation of Jake Wharton in Baton Rouge, Louisiana); ¶ 50 (alleged solicitation of Kevin Rudge in Baton Rouge, Louisiana); ¶ 51 (alleged solicitation of Brandon Boudreaux in Houma, Louisiana). Conversely, although First Horizon claims Tennessee law applies to two of its purported causes of action, the Complaint contains inadequate allegations connecting Tennessee to this controversy, other than it being the alleged domicile of First Horizon. *Id.*, ¶ 1.
+
+Moreover, other than describing Hoefer’s alleged recruitment efforts as “aggressive[ ]” and “persistent[ ],” the Complaint fails to allege any non-conclusory facts indicating that Hoefer was driven by some personal motive to injure First Horizon or that he acted for any purpose other than furthering the legitimate business interests of DMMS. *Id.*, ¶¶ 39, 46, 48, 50, 51. There are no non-conclusory allegations demonstrating malice, or which rise to the level of immoral, deceptive, fraudulent, or unethical conduct.
+
+# FIRST HORIZON’S ATTEMPTED CAUSES OF ACTION
+
+Based on an alleged run-of-the-mill contract dispute, First Horizon unsuccessfully attempts to assert five claims against its former employee Hoefer and DMMS:
+
+Count I: Bad Faith Breach of Non-Solicitation Agreement is brought against Hoefer under article 1997 of the Louisiana Civil Code. *Id.*, ¶¶ 65-73. In this Count, First Horizon asserts, in a purely conclusory manner, that Hoefer’s alleged breach of the Grants “was intentional, willful, wanton, and in completely reckless disregard for the rights of First Horizon.” *Id.*, ¶ 71. First Horizon contends it is entitled to “statutory relief for damages for the loss it sustained and/or profits it has been deprived of” as a result of the alleged breach. *Id.*, ¶ 70. But it also vaguely contends that it is entitled to injunctive relief for “irreparable harm, including the loss of employees, loss of customer goodwill, and loss of fair competition.” *Id.*, ¶ 72. Notably, the Complaint contains no allegation of a loss of any First Horizon customer, and First Horizon’s other alleged damages do not constitute “irreparable injury for which there is no adequate remedy at law.” *Id.*, ¶ 73. Count I fails to state a claim for bad faith breach of contract or for injunctive relief. It should be dismissed.
+
+Count II: Violation of Louisiana Unfair Trade Practices Act (“LUTPA”) is also brought against Hoefer, alone. *Id.*, ¶¶ 74-86. First Horizon alleges in this attempted claim that Hoefer’s alleged solicitation of First Horizon employees in breach of the Grants “amount[s] to fraud, misrepresentation, deception, breach of fiduciary duty, unscrupulous and unethical conduct” and that his alleged “actions offend public policy and are immoral, unethical, unscrupulous, malicious, and designed to cause substantial injury to First Horizon.” *Id.*, ¶¶ 80, 83. Like Count I, however, these allegations are not supported by any substantive facts and are merely conclusory. Thus, Count II fails to state a claim under LUTPA and should be dismissed.
+
+Count III: Inducement of Breach of Contract is alleged against DMMS, but not Hoefer. *Id.*, ¶¶ 87-97. First Horizon alleges that DMMS improperly “with malice” “induce[d] Hoefer to breach” the Grants and is therefore liable for the alleged damages purportedly caused by the breach. *Id.*, ¶¶ 93-95. First Horizon contends this alleged claim is governed by “Tennessee common law” even though there is not a single factual allegation in the Complaint of any wrongful conduct by DMMS in Tennessee. *Id.*, ¶¶ 88-89, 97. First Horizon puts forth the novel theory that because the Grants between Hoefer and First Horizon, to which DMMS is not a party, purportedly specify Tennessee law, then Tennessee law somehow applies to a claim against DMMS. *Id.*, ¶¶ 88-90. Even if this purported claim were not based solely on conclusory, rather than specific, allegations of fact, it still fails. As discussed below, Louisiana law governs and no claim for “inducement” of a breach of contract is recognized under Louisiana law under the facts presented. Accordingly, Count III should be dismissed as well.
+
+Count IV: Procurement of Breach of Contract in Violation of T.C.A. § 47-50-109 is also alleged against DMMS, but not Hoefer. *Id.*, ¶¶ 98-101. Like Count III, First Horizon contends this purported claim arises under and is governed by Tennessee law. *Id.*, ¶ 99. It is based on the same conclusory allegations as Count III. *Id.*, ¶ 100. As discussed below, Louisiana law governs and First Horizon has not and cannot state a claim for an alleged violation of T.C.A. § 47-50-109 against DMMS. Accordingly, Count IV should also be dismissed.
+
+Count V: Civil Conspiracy is alleged against both Hoefer and DMMS. *Id.*, ¶¶ 102-105. In this Count, First Horizon alleges that Hoefer and DMMS conspired to breach Hoefer’s obligations in the Grants, and engaged “in unfair methods of competition and unfair or deceptive acts or practices in the conduct of their business in violation of LUTPA.” *Id.*, ¶¶ 104-105. This claim also fails. First, as discussed below, Louisiana does not recognize a claim for conspiracy to breach a contract. Second, routine breaches of contract are not actionable as an “unfair trade practice” and the Complaint is devoid of any substantive factual allegations to support a claim for a LUTPA violation. Count V should be dismissed as a result.
+
+First Horizon also requests injunctive relief. *Id.*, ¶¶ 106-116. It seeks to enjoin Hoefer “and any other persons or entities acting on his behalf or in active concert with him (including but not limited to DMMS, Byrd, Tipton, and any other agents or employees of DMMS) from directly or indirectly soliciting, hiring, or encouraging any employee of First Horizon to leave the employment of First Horizon” for the duration of the “Restriction Periods” stated in Hoefer’s Grants. *Id.*, ¶ 115. First Horizon also demands that Hoefer, DMMS, and anyone working with them be prohibited from communicating with any First Horizon employee. *Id.*, prayer, ¶ 1.b. This request for extraordinary relief should be rejected. Because First Horizon states no plausible claims, it is not entitled to injunctive relief.
+
+# LAW AND ARGUMENT
+
+## I. APPLICABLE LEGAL STANDARDS UNDER RULE 12(b)(6).
+
+“A motion to dismiss under Rule 12(b)(6) tests the sufficiency of the complaint against the legal standard set forth in Federal Rule of Civil Procedure 8, which requires ‘a short and plain statement of the claim showing that the pleader is entitled to relief.’” *Jones v. Nexion Health Mgmt.*, No. 25-CV-146, 2025 WL 2797709, at *1 (M.D. La. Sept. 15, 2025) (Jackson, J.) (quoting Fed. R. Civ. P. 8(a)(2)). “To survive a motion to dismiss, a complaint must contain sufficient factual matter, accepted as true, to state a claim to relief that is plausible on its face.” *Id.* (quoting *Ashcroft v. Iqbal*, 556 U.S. 662, 678 (2009) (internal quotation marks omitted)). “[F]acial plausibility’ exists ‘when the plaintiff pleads factual content that allows the court to draw the reasonable inference that the defendant is liable for the misconduct alleged.’” *Id.* (quoting *Iqbal*, 556 U.S. at 678).
+
+“[T]he complaint need not set out ‘detailed factual allegations,’ but something ‘more than labels and conclusions, and a formulaic recitation of the elements of a cause of action’ is required. *Id.* (quoting *Bell Atl. Corp. v. Twombly*, 550 U.S. 544, 555 (2007)). “When conducting its inquiry, the Court accepts all well-pleaded facts as true and views those facts in the light most favorable to the plaintiff.” *Id.* (quotation omitted). “The Court, however, does not accept as true conclusory allegations, unwarranted factual inferences, or legal conclusions.” *Purvis v. Teva Pharms, USA, Inc.*, 901 F. Supp. 2d 716, 719 (M.D. La. 2012) (Jackson, J.) (quotation omitted).
+
+## II. COUNT I FAILS TO STATE A CLAIM FOR BAD FAITH BREACH OF CONTRACT UPON WHICH RELIEF CAN BE GRANTED.
+
+### A. Applicable Legal Standards.
+
+“An obligor in bad faith is liable for all the damages, foreseeable or not, that are a direct consequence of his failure to perform.” La. Civ. Code art. 1997. “An obligor is in bad faith if he intentionally and maliciously fails to perform his obligation.” *River House Partners, LLC v. Grandbridge Real Est. Cap. LLC*, No. 15-CV-58, 2015 WL 6142874, at *3 (M.D. La. Oct. 19, 2015) (Jackson, J.) (quoting La. Civ. Code art. 1997 cmt. (b)) (internal quotation marks omitted). “Under Louisiana law, ‘[b]ad faith is not the mere breach of faith in not complying with a contract, but a designed breach of it from some motive of interest or ill will.’” *Fertel v. Brooks*, 02-0846, p. 15 (La. App. 4 Cir. 9/25/02), 832 So. 2d 297, 306 n.12 (citing *Williams v. Coe*, 417 So. 2d 426, 430 (La. App. 1 Cir. 1982)) (emphasis added). “The term bad faith means more than mere bad judgment or negligence; it implies the conscious doing of a wrong for dishonest or morally questionable motives.” *Id.* (citing *Weysham v. Harney*, 518 So. 2d 1059, 1061 (La. App. 4 Cir. 1987), *writ denied*, 521 So. 2d 1172 (La. 1988)) (emphasis added). “Bad faith is an intentional and malicious failure to perform.” *Volentine v. Raeford Farms of La., L.L.C.*, 48,219 (La. App. 2 Cir. 7/24/13), 121 So. 3d 742, 753, *writ denied*, 13-2493 (La. 1/17/14), 130 So. 3d 948 (emphasis added).
+
+As conceded by First Horizon, bad faith “implies actual or constructive fraud.” *Whitney Bank v. SMI Cos. Glob., Inc.*, 949 F.3d 196, 210 (5th Cir. 2020). Thus, it is not enough to allege an intentional or knowing breach of contract—the pleading must contain specific facts alleging that the breach was driven by malice, spite, ill will, immorality, dishonesty, or fraud. *See, e.g., River House Partners, LLC*, 2015 WL 6142874, at *4 (Jackson, J.) (dismissing bad-faith breach-of-contract claim under Rule 12(b)(6) for failure to plausibly allege that “contractual failings were derived from a conscious doing of wrong for dishonest or morally questionable motives”). Bare allegations of “bad faith” without supporting facts will not suffice. *Claville v. Willis-Knighton Med. Ctr.*, 24-CV-1201, 2025 WL 769664, at *5 (W.D. La. Feb. 21, 2025), *report and recommendation adopted*, 24-CV-1201, 2025 WL 757592 (W.D. La. Mar. 10, 2025). Mere labels and conclusions, unsupported by actual facts, are not enough. *Twombly*, 550 U.S. at 550; *Iqbal*, 556 U.S. at 678.
+
+### B. Count I Should Be Dismissed.
+
+In the Complaint, First Horizon alleges that Hoefer intentionally breached the alleged non-solicitation provisions of the Grants when he allegedly solicited First Horizon employees to work for DMMS. While First Horizon asserts that “Hoefer’s breach of contract was intentional, willful, wanton, and in completely reckless disregard for the rights of First Horizon,” the Complaint contains no specific factual allegations to indicate that Hoefer breached the Grants for an improper purpose—such as malice, spite, ill will, fraud, immorality, or dishonesty.
+
+### 2. First Horizon Has Not Stated a Claim Under Spurney.
+
+For the reasons stated above, Louisiana law, not Tennessee, applies to First Horizon’s claims against DMMS in Counts III and IV. As a result, First Horizon cannot state a cause of action under T.C.A. § 47-50-109 against DMMS. Accordingly, Count IV should be dismissed.
+
+First Horizon’s Count III also fails to state a claim for contractual interference or inducement of a breach under the narrow circumstances of a Spurney. First, DMMS is a limited liability company and the law is clear that a claim for tortious interference with contract “cannot be maintained against a corporate entity defendant.” *Rahman v. Allstate Ins. Co.*, 644 F. Supp. 3d 231, 243 (E.D. La. 2022) (“Louisiana courts and federal courts applying Louisiana law have made clear that claims for tortious interference with contract cannot be maintained against corporate defendants.”). Second, First Horizon has not, and cannot, allege that Hoefer caused DMMS to breach, without justification, a contract between DMMS and First Horizon. There is, in fact, no contract between DMMS and First Horizon. And it is clear from the allegations of the Complaint that whatever Hoefer is alleged to have done in purported breach of his own contracts with First Horizon, his actions were not adverse to the interests of “his corporation,” DMMS. Accordingly, even assuming the facts alleged in the Complaint to be true, First Horizon has not stated a claim under Louisiana law for contractual interference or inducement of a breach of contract. Count III must be dismissed.
+
+## V. COUNT V FAILS TO STATE A CLAIM FOR CIVIL CONSPIRACY UPON WHICH RELIEF CAN BE GRANTED.
+
+### A. Applicable Legal Standards.
+
+First Horizon has failed to state a claim under Louisiana law for civil conspiracy. Under Louisiana law, “[h]e who conspires with another person to commit an intentional or willful act is answerable, in solido, with that person, for the damage caused by such act.” La. Civ. Code art. 2324. Louisiana law is well-settled that “a conspiracy claim under article 2324 will only lie if the underlying act is tortious (and not contractual or quasi-contractual) in nature.” *Louisiana v. Guidry*, 489 F.3d 692, 705 (5th Cir. 2007) (emphasis added). In *Guidry*, the Fifth Circuit held that under article 2324 “Louisiana courts continue to recognize that [the article’s] application is limited to conspiracies involving tortious conduct.” *Id.* at 707 (emphasis added). Where the State’s cause of action was for conspiracy to breach a fiduciary duty, which is a semi-contractual obligation, no cause of action would lie under Louisiana law and the claim was properly dismissed by the district court in *Guidry* as “lacking an essential element – an underlying tort.” *Id.*; *see also Shargian v. Shargian*, 591 F. Supp. 3d 100, 112 (E.D. La. 2022) (where “plaintiff has not alleged a plausible tort claim, he does not have a claim for conspiracy to commit such a tort”).
+
+### B. Count V Should Be Dismissed.
+
+Under Count V, First Horizon alleges that Hoefer and DMMS “conspired” to breach Hoefer’s contractual obligations to First Horizon under the Grants. Doc. 1, ¶¶ 102-105. Louisiana law does not recognize a claim for conspiracy to breach a contract. La. Civ. Code art. 2324; *Guidry*, 489 F.3d at 707. *See also First Fed. Sav. Bank of New Orleans v. GAB Business Services, Inc.*, No. 87-CV-3885, 1987 WL 18163, at *1 (E.D. La. Oct. 1, 1987) (“Louisiana Civil Code Article 2324, which imposes joint liability between a person committing an unlawful act and a party who causes, encourages, or assists in the commission of the act, does not refer to the act of breach of contact.”). Because Louisiana law does not recognize a claim for conspiracy to breach a contract and, that deficiency cannot be cured by amendment, First Horizon’s claim should be dismissed with prejudice.
+
+Moreover, to the extent that First Horizon also alleges that the parties “conspired” to violate LUTPA, the claim fails. As shown in Part III above, the Complaint lacks substantive factual allegations of conduct sufficient to rise to the level of an unfair trade practice. The mere allegation of a breach of contract does not suffice. Further, absent a plausible tort claim, a claim for conspiracy to commit that tort also fails. *Shargian*, 591 F. Supp. 3d at 112. Accordingly, Count V should be dismissed.
+
+## VI. THE REQUEST FOR INJUNCTIVE RELIEF FAILS FOR LACK OF AN UNDERLYING SUBSTANTIVE CLAIM.
+
+### A. Applicable Legal Standards.
+
+“Generally, a request for injunctive relief is not considered an independent ‘cause of action,’ but rather a remedy sought to redress the wrongs alleged in the underlying substantive claims.” *La. Crisis Assistance Ctr. v. Marzano-Lesnevich*, 878 F. Supp. 2d 662, 669 (E.D. La. 2012) (citations omitted). Accordingly, a request for injunctive relief “must” be rejected if a plaintiff’s “underlying claims fail.” *See Am. Biocarbon, LLC v. Keating*, No. 20-CV-259, 2020 WL 7264459, at *7 (M.D. La. Dec. 10, 2020) (Jackson, J.).
+
+### B. First Horizon’s Claim for Injunctive Relief Should Be Dismissed.
+
+Here, because First Horizon fails to state any plausible substantive claims, its request for injunctive relief “must” be rejected. *See id.*
+
+# CONCLUSION
+
+For the foregoing reasons, the Rule 12(b)(6) Motion filed by defendants, Karl Hoefer and DMMS Holdings, LLC, should be granted and the Complaint filed against them by plaintiff, First Horizon Corporation, should be dismissed with prejudice.
+
+[[signature]]
+
+# CERTIFICATE OF SERVICE
+
+I hereby certify that on February 26, 2026, I electronically filed the foregoing with the Clerk of Court by using the CM/ECF system which will send a notice of electronic filing to all counsel of record.
+
+/s/Joelle F. Evans\
+JOELLE F. EVANS
