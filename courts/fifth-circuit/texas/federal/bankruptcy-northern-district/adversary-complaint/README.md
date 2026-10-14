@@ -7,6 +7,7 @@ Exemplar: Prime Asset LLC v. PrimaLend Capital Partners, LP, adversary 26-09001 
 
 | Item | Status |
 |---|---|
+| typeface | face required: none (L.B.R. revised 12/1/2025 and 12/1/16 name no face for complaints). Substitute: none; **EB Garamond** kept (`docs/FONTS.md`, "No face named"). Metric note: none needed. |
 | exemplar | yes: `exemplars/FILED-EXAMPLE-prime-asset-v-primalend-26-09001-adversary-complaint.pdf` (the whole 27-page filing, text layer present) |
 | sample md | `samples/INPUT-prime-asset-v-primalend.md`: a transcription of the caption and counsel block, ¶¶ 1–37, the Count Six to Eight paragraphs, the prayer and the signature. Filing pages 10–24 (¶¶ 38–122, the factual allegations and Counts One to Five) are not transcribed; the sample marks the gap. |
 | render | ok: `tools/render.sh` (typst 0.15.0, vendored EB Garamond only, no warnings) writes `samples/OUTPUT-prime-asset-v-primalend.pdf`, 11 pages |
@@ -28,7 +29,7 @@ Primary sources, fetched 2026-10-14 (the date this folder was checked):
 | L.B.R. 7003-1 | Every adversary proceeding must be accompanied by an adversary proceeding cover sheet. (Same local rules copy.) | Not produced by this template. The cover sheet is a separate filing (see Known gaps). |
 | L.B.R. 7007-2(a) | A brief shall be printed, typewritten, or presented in some other legible form. | Applies to briefs (see `motion-brief`), not to a complaint. |
 
-No font, margin or line-spacing rule for complaints was found in the N.D. Tex. bankruptcy local rules (the copy above). The mailing-matrix type rule (10 to 14 pt, Courier, Times Roman, Helvetica or Orator) is for the matrix in a complex Chapter 11 case and is not applied to the complaint.
+No font, margin or line-spacing rule for complaints was found in the N.D. Tex. bankruptcy local rules (the copy above). The 12/1/2025 revision (read 2026-10-14 from its PDF text) was also checked: L.B.R. 5005-1(d) (form of pleadings: heading, style, caption, numbers and hearing line) names no typeface, so the face is not court-named and the template keeps EB Garamond. The mailing-matrix type rule (10 to 14 pt, Courier, Times Roman, Helvetica or Orator) is for the matrix in a complex Chapter 11 case and is not applied to the complaint.
 
 The local rules copy is dated "Revised 12/1/16". A later revision may exist on the court's site; this run did not find one. Recheck before filing.
 
@@ -56,7 +57,7 @@ The local rules copy is dated "Revised 12/1/16". A later revision may exist on t
 2. **Footnote and ECF header not reproduced.** Footnote 1 of the filing (the debtors' last-four EIN digits and headquarters address) is not transcribed: the markdown contract does not support footnotes. The ECF stamp at the top of each filed page is added by the court's system and is not part of the form. The filer's two-column counsel block is set as one column.
 3. **Adversary cover sheet (L.B.R. 7003-1) and summons.** Not generated. The cover sheet is a separate filing that must accompany the complaint; the N.D. Tex. form is not in the vendored set, and the Southern District's B104 form found in search is not this court's form. Needs a decision.
 4. **Certificates and proposed order.** Not part of a complaint in this template. A certificate of service of the summons may be needed; not in scope.
-5. **Font.** No font rule was found for complaints, so EB Garamond at 12 pt (the only vendored font) is used. It is smaller in apparent size than Times New Roman at 12 pt. Whether the court expects a different font is a question for David.
+5. **Font.** No typeface rule was found for complaints in the 2016 or 2025 local-rules text, so the face is not court-named and EB Garamond at 12 pt is kept (`docs/FONTS.md`, "No face named"). It is smaller in apparent size than Times New Roman at 12 pt. Re-check if the court names a face in a later revision.
 6. **Output PDFs.** `samples/OUTPUT-prime-asset-v-primalend.pdf` and `samples/OVERLAY-prime-asset-v-primalend.pdf` (with `.txt`) are written where the tools put them. Regenerate with `sh tools/render.sh <this-folder> samples/INPUT-prime-asset-v-primalend.md` and `sh tools/overlay.sh <this-folder> prime-asset-v-primalend`.
 7. **Paragraph numbering is not checked for continuity across sections or claim headings.** Numbering is by the template only; a complaint that restarts numbering per claim would need a change.
 8. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and `tools/` is out of scope for this box. The gates were not run.
