@@ -1,18 +1,29 @@
 # Exemplar source: opening-brief, United States Bankruptcy Appellate Panel for the Eighth Circuit (bap8)
 
-**BLOCKED: no exemplar.** No public filed opening-brief from this court was found, so no `FILED-EXAMPLE-*.pdf` is stored here.
+**Exemplar: yes.** `FILED-EXAMPLE-fisette-11-6012-opening-brief.pdf` is a real, public, text-based Brief of Appellant filed in this court. The copy is the full 68-page filing, unmodified.
 
-Searches run on 2026-10-14 (no filed BAP brief found in any result):
+| Field | Value |
+|---|---|
+| URL (fetched) | <https://www.ncbrc.org/wp-content/uploads/Fisette-BAP-8th-Cir-debtor-brief.pdf> (the search result gave the same path over `http://`, which returned HTTP 406 to a default client; the `https://` URL with a browser user agent returned the PDF) |
+| Case | *In re Fisette*; *Fisette v. Keller*. Appeal from the United States Bankruptcy Court for the District of Minnesota, Bankruptcy Case No. 10-32295-DDO |
+| Docket | BAP No. 11-6012 (ECF header: "Appellate Case: 11-6012") |
+| Doc type | Brief of Appellant (opening brief), FRBP 8014(a) |
+| Filer | Michael James Fisette, Debtor-Appellant. Counsel: Craig W. Andresen (Attorney No. 186557). Appellee: Jasmine Z. Keller, Chapter 13 Trustee |
+| Date filed | 2011-04-07 (ECF header "Date Filed: 04/07/2011"; signature dated April 7, 2011) |
+| Date fetched | 2026-10-14 |
+| Text layer | Yes. `pdftotext` extracts the full text; fonts are Times New Roman, not embedded |
+| Pages | 68 (cover, parties, contents, authorities, body pp. 1-27, relevant bankruptcy-court documents p. 28, certificates pp. 29-30, addenda) |
+
+Search log for this exemplar, 2026-10-14:
 
 | # | Tool / query | Result |
 |---|---|---|
-| 1 | WebSearch (standard): "Eighth Circuit Bankruptcy Appellate Panel brief of appellant pdf" | BAP clerk letters on Justia (counsel lists only), an Eighth Circuit judgment on a BAP appeal (No. 11-2938). No brief. |
-| 2 | WebSearch (standard): courtlistener bap8 appellant brief ... recap | Eighth Circuit opinions and BAP rules. No CourtListener brief. |
-| 3 | WebSearch (extended): "B.A.P. 8th Cir." appellant's brief ... 2024 OR 2025 | Older BAP opinions; other circuits' forms. No brief. |
-| 4 | WebSearch (extended): "Bankruptcy Appellate Panel" "Eighth Circuit" "brief of appellant" "BAP No." | Opinions only (e.g., No. 08-6038 opinion). No brief. |
-| 5 | WebSearch (standard): courtlistener docket bap8 "appellant's brief" | Opinions and listing pages. No brief. |
-| 6 | WebFetch: CourtListener search, `court=bap8`, "brief of appellant" | HTTP 403; not retrieved. |
-| 7 | WebSearch (standard): "... 'brief of appellee' OR 'appellee's brief' BAP No." | Clerk letters naming appellee counsel (Nos. 10-6046, 12-6054). No brief text. |
-| 8 | WebSearch (standard): "... 'reply brief' 'BAP No.' pdf filed" | Opinions and the BAP IOPs. No brief. |
+| 1 | WebSearch (standard): "Bankruptcy Appellate Panel for the Eighth Circuit" "brief of appellant" "Fed. R. Bankr. P. 8014" pdf | Surfaced the ncbrc.org copy (BAP No. 11-6012) as a "Brief of Appellant". |
+| 2 | WebFetch/curl of the ncbrc.org URL | HTTP 406 over `http://` with a default client; HTTP 200 PDF over `https://` with a browser user agent. |
+| 3 | Justia docket entries (`cases.justia.com/.../11-6012/811734875/{1,3,4,5,6}.pdf`) | HTTP 403 (blocked from this box). Not used. |
 
-Not checked: PACER (login required; not a public source in this box), the BAP's own docket pages (not reachable from this box). If a filer later supplies a public BAP opening-brief, add it here as `exemplars/FILED-EXAMPLE-<short-case>-<docket>-opening-brief.pdf` with the URL, case name, docket, filer, date filed, and date fetched.
+Searches that did not turn up the other two doc types of this court are in `../../answering-brief/exemplars/SOURCE.md` and `../../reply-brief/exemplars/SOURCE.md`.
+
+Search results that were not used as exemplars: other BAP 8th Cir. opinions and clerk letters (opinions, not briefs).
+
+The eight searches logged before this exemplar was found (the previous version of this file, in git history at the `5303cc0` commit) used the same queries for all three doc types and found no opening brief.

@@ -2,8 +2,8 @@
 
 - Court: `bap8`, United States Bankruptcy Appellate Panel for the Eighth Circuit (`courts/eighth-circuit/bankruptcy-appellate-panel/`). Court-root `typst/` and `samples/` are untouched.
 - Doc type: `reply-brief`. Appellant's reply brief, FRBP 8014(c).
-- **Exemplar: BLOCKED: no exemplar.** No public filed reply brief from this court was found after eight searches, including one aimed at reply briefs (listed in `exemplars/SOURCE.md`). Nothing is stored in `exemplars/`.
-- Template: built from the rules. Render and page review done (Gate 2 below). Overlay not run: there is no exemplar (see Known gaps).
+- **Exemplar: BLOCKED: no exemplar.** No public filed reply brief from this court was found after 20 searches in two passes, plus direct fetch attempts (listed in `exemplars/SOURCE.md`). Nothing is stored in `exemplars/`. The one public BAP brief found (the debtor's opening brief in BAP No. 11-6012) is the opening-brief exemplar.
+- Template: built from the rules. Render (2026-10-14, ok, 9 pages) and full page review done (Gate 2 below). Overlay: fail, no exemplar (see Overlay).
 - Status: rule-driven template plus a synthetic rule-check sample. `court.json` untouched; `status` not set.
 
 ## Files
@@ -14,7 +14,7 @@
 | `typst/bap8-reply-brief.typ` | Template. Parameter block at the top: `doc-kind`, `word-limit` (6,500), `required-sections` (none beyond the tables), `needs-standard-of-review = false`. |
 | `samples/INPUT-synthetic-reply-brief.md` | Markdown contract sample. Placeholder prose and counsel; not a transcription of any filing. |
 | `exemplars/SOURCE.md` | Blocked exemplar search log. |
-| Render output | `sh tools/render.sh courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief samples/INPUT-synthetic-reply-brief.md` writes `samples/synthetic-reply-brief.pdf`. The PDF was then moved to `/work/artifacts/bap8/reply-brief/` (not committed). |
+| Render output | `sh tools/render.sh courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief samples/INPUT-synthetic-reply-brief.md` writes `samples/OUTPUT-synthetic-reply-brief.pdf`; rendered 2026-10-14 (ok, 9 pages, no typst warnings). |
 
 ## Markdown contract (frontmatter)
 
@@ -53,11 +53,11 @@ Every page of the rule-check render was rasterized at 60 dpi (`pdftoppm -r 60`) 
 | 8 | Certificate of Compliance (3); 127 words | OK. |
 | 9 | Certificate of Service (4) | OK. |
 
-Pages reviewed: 9 of 9.
+Pages reviewed: 9 of 9 (all re-viewed 2026-10-14 as PNG at 60 dpi).
 
 ## Overlay
 
-Not run. `tools/overlay.sh` needs `exemplars/*.pdf` and `samples/OUTPUT-<id>.pdf`; neither exists for this folder. Run with the sample id, it exits 1 ("no render"; `ls` error on the missing exemplar).
+Run 2026-10-14: `sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief synthetic-reply-brief` exits 1 ("no exemplar pdf"). No `OVERLAY-` file is written. Status: fail.
 
 ## Known gaps
 
@@ -65,7 +65,7 @@ Not run. `tools/overlay.sh` needs `exemplars/*.pdf` and `samples/OUTPUT-<id>.pdf
 - **No section is mandated.** 8014(c) requires only the tables. The template does not require an argument or a conclusion; the sample includes both as a convention.
 - **Scope of the reply is not checked.** The template does not confirm that the reply answers only matter raised in the appellee's brief.
 - **Overlay tool does not match this layout** (see the opening brief README).
-- **Renders are not in the tree.** The rule-check PDF is at `/work/artifacts/bap8/reply-brief/`.
+- **Renders are in `samples/`** (`OUTPUT-synthetic-reply-brief.pdf`). PNG review copies are in `/work/artifacts/bap8/reply-brief/`.
 - **Word count** comes from the markdown body and is not cross-checked against the PDF text.
 - **Certificate wording** is not verified against Form 417C.
 - **Certifications placement:** before the TOC, by choice.
