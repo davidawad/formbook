@@ -11,7 +11,7 @@ Dates are the date each text was read (2026-10-14). Federal rule text comes from
 | ID | Source | Requirement | Where it lives |
 |---|---|---|---|
 | WVSB-FORM-001 | FRBP 9004(a) (eff. 12/1/2024, verified) | "A petition, pleading, schedule, or other document must be clearly legible." No paper-size rule found. | `typst` page `us-letter` (convention) |
-| WVSB-FORM-002 | None found (FRBP 9004; S.D. W. Va. local rules 2012 ed.) | No typeface or point size is set by rule. EB Garamond, 13 pt, is a style choice (vendored; the only font in `/fonts`). | `font-family`, `type-size` |
+| WVSB-FORM-002 | None found (FRBP 9004; S.D. W. Va. local rules 2012 ed., full text searched 2026-10-14 for typeface, font and point size: none) | No typeface or point size is set by rule, so the template keeps EB Garamond, 13 pt (`docs/FONTS.md`: "No face named"). A style choice. Vendored in `fonts/eb-garamond/`. | `font-family`, `type-size` |
 | WVSB-FORM-003 | None found | Double spacing, as in the exemplar. Convention. | `line-pitch` = 24 pt |
 | WVSB-FORM-004 | None found | 1-inch margins, as in the exemplar. Convention. | `margins` |
 | WVSB-CAP-001 | FRBP 9004(b)(1)-(4) (verified) | Caption states the court's name, the case title, the case number and adversary-proceeding number, and a brief designation of the document. | `court`, `caption`, `case_info`, `title` |
