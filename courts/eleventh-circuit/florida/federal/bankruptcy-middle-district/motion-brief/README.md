@@ -1,0 +1,90 @@
+# flmb: motion with incorporated memorandum
+
+Doc type: **motion** (here a motion to dismiss with an incorporated memorandum of law) in the United States Bankruptcy Court for the Middle District of Florida (`flmb`), Fed. R. Bankr. P. 9013 motion practice.
+Folder: `courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/motion-brief/`.
+
+| Item | Status |
+|---|---|
+| exemplar | yes: `exemplars/FILED-EXAMPLE-sargeant-6-26-ap-00150-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
+| sample md | `samples/INPUT-mac-haik-motion.md`: the full text of the 16-page motion as filed (caption, every section, the footnote, the conclusion, the date and signature block) |
+| render | ok: `samples/OUTPUT-mac-haik-motion.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings |
+| overlay | ok: `samples/OVERLAY-mac-haik-motion.pdf` and `samples/OVERLAY-mac-haik-motion.txt` (page map: 14 of 14 sample pages paired) |
+| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed; see the table at the end) |
+| status in `court.json` | not set (the brief does not ask for it) |
+
+## Governing rules
+
+Verified 2026-10-14 from the sources in the Source column. Local rules are the Court's posted PDFs (`flmb.uscourts.gov/localrules/rules/<n>.pdf`); each rule text was read in full.
+
+| Rule | Requirement | Where it is in the template |
+|---|---|---|
+| Fed. R. Bankr. P. 9013(a) | A request for an order is made by written motion. Source: LII. | The sample is a written motion. |
+| Fed. R. Bankr. P. 9013(b) | A motion must state its grounds with particularity and set forth the relief requested. Source: LII. | Author content (the motion's argument). The template does not check it. |
+| Fed. R. Bankr. P. 9004(b); Fed. R. Civ. P. 10(a) | Caption: court name, case title, case number and adversary number, designation of the document (see the complaint README). Source: LII. | `caption()`, `court-title()`, `full-title()`. |
+| Fed. R. Bankr. P. 7012(b) (as cited in the motion) | Rule 12(b)(6) applies in adversary proceedings. Source: cited in the exemplar; not separately verified. | Author content. |
+| Local Rule 9013-1(a) | A motion requests only one form of relief unless alternative forms are under the same provision. Source: flmb `localrules/rules/9013-1.pdf`. | Author content (the conclusion lists alternatives under §§ 1334(c) and 1412 in one motion). |
+| Local Rule 9013-1(d)-(f) | Emergency motions, expedited consideration and injunctive relief must say so in the title or first page. Source: flmb `localrules/rules/9013-1.pdf`. | Not used by this sample. Only injunctive relief is in `full-title()`; emergency and expedited wording is not implemented. |
+| Local Rule 9004-1(a)-(c) | Caption; the title states the name and designation of the submitting party and a descriptive title; jury demand and injunctive relief wording in the title. Source: flmb `localrules/rules/9004-1.pdf`. | `full-title()`; the sample's title includes the party designation ("Defendant Mac Haik Automotive Group's Motion ..."), as the exemplar does. |
+| Local Rule 7001-1(k)(1) | One form of relief per motion (as above). | Author content. |
+| Local Rule 7001-1(k)(2) | Motions, responses and replies comply with the Court's Style Guide; papers should be double spaced; a legal memorandum where appropriate. Source: flmb `localrules/rules/7001-1.pdf`. | Style Guide format (below); `body-leading`; the memorandum is incorporated in the motion. |
+| Local Rule 7001-1(k)(3) | Absent leave, motions, responses, replies and supporting memoranda must not exceed **ten pages**; proofs of service, exhibits and the signature block are not counted. Source: flmb `localrules/rules/7001-1.pdf`. | **Not enforced.** The exemplar is 16 pages, and the sample renders to 14 (about 13 of text before the signature). Whether leave was granted for the exemplar is not in the record fetched. See open questions. |
+| Local Rule 7001-1(k)(4) | Motions to dismiss (Rule 7012 motions) are served using the negative notice procedure of Local Rule 2002-4, with a legend that gives a 14-day response period and a reply within seven days. Source: flmb `localrules/rules/7001-1.pdf`. | **Not produced.** The filed motion has no negative-notice legend in its text layer, and the legend text (Local Rule 2002-4) was not retrieved. See open questions. |
+| Local Rule 5005-1(d) | Paper: typewritten, single-sided, 8 1/2 by 11 inches, one-inch margins. Source: flmb `localrules/rules/5005-1.pdf`. | `#set page(paper: "us-letter", margin: 1in)`. |
+| Court Style Guide, Part II.A | Times New Roman, 12-point font; one-inch margins; page numbers centered in the footer on every page except the first. Source: flmb `cmecf/documents/styleguide.pdf` (updated 2/3/2014). Applied to motions through Local Rule 7001-1(k)(2). | `font-family`, `type-size`, `margin`, `footer-page()`. The font is a known gap (below). |
+| Style (exemplar, convention) | Double spaced; justified text; numbered paragraphs at a half-inch indent; unnumbered introduction and conclusion; flush-left bold section headings; lettered sub-headings in bold italic. | `body-leading`; `set par(justify: true)`; the `^` marker; `show heading` rules. |
+
+Not produced by this template (separate filings or not verified as required): a certificate of service (the filed motion has none; service is through CM/ECF, and no rule read here requires a certificate for registered users); notices of hearing; proposed orders; the negative-notice legend (above).
+
+## Layout
+
+- Court title (three lines, bold), the caption (as in the complaint: "In re:" block, plaintiff and defendant sides with the adversary number at "v.", party blocks closed by rules), the bold title in capitals, the body, the conclusion, the date ("Dated:") at left and the signature block at right.
+- Body: level 1 headings centered bold capitals (I. INTRODUCTION); level 2 headings bold, flush left (A. Counts ...); level 3 headings bold italic, indented (a. ...); numbered paragraphs from the first numbered section, unnumbered paragraphs marked with `^`; the conclusion as a list numbered 1., 2., ...
+- Footer: page number centered on every page except the first.
+
+## Markdown contract (for samples)
+
+- YAML frontmatter, then the body.
+- Frontmatter: `division`, `in_re`, `case_number`, `chapter`, `caption` (two sides, `names` and `designation`), `adversary_label` (the exemplar's label, "Adversary No."; the default is "Adv. Case No."), `adversary_number`, `title` (in sentence case; the template capitalizes it), `date`, `signature` (`firm` lines, `signer`, `lines`), optional `jury_demand`, `injunctive_relief`.
+- Body: `# Heading` (level 1), `## Heading` (level 2), `### Heading` (level 3). A blank-line-separated paragraph is numbered 1, 2, ... by the template. A paragraph that starts with `^` is unnumbered (the motion's introduction, the unnumbered paragraphs of Section I, the conclusion lead-in). A markdown list is numbered 1., 2., ... Footnotes: `text[^1]` and `[^1]: text`.
+- Do not type paragraph numbers: the template numbers them.
+
+## Known gaps and open choices
+
+1. **Font (tier 1, not met).** Same as the complaint: the Style Guide asks for Times New Roman 12 point; only EB Garamond is vendored, and `fonts/` is shared. **To close:** vendor a Times-metric serif into `fonts/` and change `font-family` in `flmb-motion-brief.typ`.
+2. **Page limit (open question for the filer).** Local Rule 7001-1(k)(3) limits a motion and its memorandum to ten pages absent leave. The filed motion is 16 pages, and the sample renders to 14. The template does not enforce the limit. Whether leave was granted for the filed motion was not checked on the docket. A motion of this length needs leave, or the argument needs to be cut to ten pages of text.
+3. **Negative-notice legend (open question).** A motion to dismiss must be served by negative notice under Local Rule 2002-4 (Local Rule 7001-1(k)(4)), with a legend that gives a 14-day response period. The filed motion's text has no legend, and the legend text was not retrieved, so the template does not produce one. The filing's legend, if any, should come from the Court's Negative Notice List or the filer's CM/ECF event.
+4. **Certificate of service.** The filed motion has none (checked in the text layer). Not produced.
+5. **Italics and underlining.** Case names, signals and "*Id.*" are italic by transcriber's judgement (the text layer carries no italic markup). The filed motion underlines its defined terms (for example "Mac Haik", "Contract"); the template does not reproduce underlining.
+6. **Font of the caption and the heading case.** The filed motion uses Times New Roman in the caption, title and body (`pdffonts`), and mixed-case subheadings; the template follows the same heading case.
+7. **Tools not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, not this doc-type shape; `tools/` is shared and was not changed. The gates were not run; the render, overlay and page review below are the checks run.
+
+## Review of the rendered pages (`samples/OUTPUT-mac-haik-motion.pdf`, 60 dpi, every page viewed)
+
+| Page | Result |
+|---|---|
+| 1 | Court title, caption (In re block; plaintiff; defendants with the adversary number at "v."), bold two-line title, the unnumbered opening paragraph, section I begins, first footnote at the foot. No page number on page 1. Pass. |
+| 2 | Section I (unnumbered paragraphs) to the end of the introduction; no heading at the foot. Pass. |
+| 3 | Section II begins; "A. The Underlying Transaction" (bold, flush left); paragraphs 1 and 2; "B. Prior Proceedings" with paragraph 3. Pass. |
+| 4 | "C. The Instant Complaint" (paragraph 4); section III and paragraph 5; the Standard of Review citations. Pass. |
+| 5 | Section IV and the bold, three-line heading A; paragraphs 6 to 9. Pass. |
+| 6 | Paragraphs 10 to 13 (the jurisdiction argument). Pass. |
+| 7 | Paragraph 14; heading B (two lines); paragraphs 15 to 17 (the dates in the text). Pass. |
+| 8 | Paragraphs 18 to 20; heading C (two lines); paragraph 21 starts. Pass. |
+| 9 | Paragraphs 21 (continued) to 25; heading D; sub-heading a. (bold italic, two lines); paragraph 26. Pass. |
+| 10 | Paragraphs 27 to 30; sub-heading b.; heading E; sub-heading a.; paragraph 31 starts. Pass. |
+| 11 | Paragraphs 32 to 36 (the abstention factors). Pass. |
+| 12 | Paragraph 37; sub-heading b.; paragraphs 38 to 40; sub-heading c. (two lines); paragraphs 41 and 42. Pass. |
+| 13 | Paragraph 42 (continued), paragraphs 43 and 44; section V (the conclusion); items 1 to 5 of the list with hanging indent. Pass. |
+| 14 | Items 6 and 7; "Dated: September 11, 2026" at left; "Respectfully submitted," block at right with the signature, bar number and e-mail addresses; page number 14 at the foot. Pass. |
+
+Overlay (`samples/OVERLAY-mac-haik-motion.txt`): each sample page is paired with the filed page with the most shared words (37% to 84%). The overlay is a diagnostic, not a score.
+
+## How to build
+
+```sh
+export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick
+sh tools/render.sh courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/motion-brief samples/INPUT-mac-haik-motion.md
+sh tools/overlay.sh courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/motion-brief mac-haik-motion
+```
+
+`render.sh` writes `samples/OUTPUT-mac-haik-motion.pdf` and `overlay.sh` writes `samples/OVERLAY-mac-haik-motion.pdf` and `.txt`: the names the tools read and write by default.
