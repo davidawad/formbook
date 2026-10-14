@@ -98,3 +98,7 @@ Word count: the certificate reports 1,199 words (the template's count of the sam
 ## Exemplar errors noted (the sample does not carry them)
 
 Listed in `exemplars/SOURCE.md`: the 2023 signature date, the "359895" Krieger docket in one cite, the Baird entry in the TOA, and OCR damage in the text layer.
+
+## Engines
+
+Same rules and numbers as the typst template (the reference). **latex** (`latex/`, tectonic): EB Garamond 14 pt from `fonts/`, double spacing, one-page cover, TOC and TOA page numbers checked against the body, certificate word count 1,199 (same as typst). Differs: the cover's lower part sits slightly higher than typst's; some lines break differently, so a few TOA page numbers differ by a page from typst; no designation section (typst has none). **docx** (`docx/`): 15 pages against typst's 14; contents run to two pages (typst one); the conclusion splits across pages 5–6 (typst keeps it on one page). Fonts EB Garamond only; word count 1,199 matches. The addendum path is untested (no addendum in the sample). BLOCKED: none; `tools/check.sh` cannot run here (no `checks.yaml`).
