@@ -7,9 +7,9 @@ Folder: `courts/fourth-circuit/west-virginia/federal/southern-district/motion-br
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-castro-2-23-cv-00598-motion-brief.pdf` (1 filer, a state party; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-castro-motion-brief.md` (a portion of the filing: caption, Introduction through Point III, Conclusion, signature; see Known gaps) |
-| render | ok: `samples/OUTPUT-castro-motion-brief.pdf`, 12 pages (caption page plus body numbered 1 to 11), typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-castro-motion-brief.pdf` and `OVERLAY-castro-motion-brief.txt` |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change) |
+| render | ok: `samples/OUTPUT-castro-motion-brief.pdf`, 12 pages (caption page plus body numbered 1 to 11), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; the same page count and the same overlay map as before) |
+| overlay | ok: `samples/OVERLAY-castro-motion-brief.pdf` and `OVERLAY-castro-motion-brief.txt` (re-run 2026-10-14 against `exemplars/FILED-EXAMPLE-castro-2-23-cv-00598-motion-brief.pdf`, restored from the URL in `exemplars/SOURCE.md`; the file was missing from the snapshot, 24 pages, sha256 `e3906afa18128f556017c7baedc36c667ae7404a627c97864a9ba4dd0516b0ae`) |
+| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed on 2026-10-14) |
 
 File names: the tools write `OUTPUT-<id>.pdf` (render) and `OVERLAY-<id>.pdf/.txt` (overlay) by default, so those are the names used here. The brief's `<id>.pdf` and `<id>-overlay.pdf` names were not used, because `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf`.
 
@@ -19,7 +19,7 @@ File names: the tools write `OUTPUT-<id>.pdf` (render) and `OVERLAY-<id>.pdf/.tx
 |---|---|---|
 | LR Civ P 7.1(a)(2) | A memorandum of not more than 20 pages must accompany a motion to dismiss. | Not asserted by the template (see Known gaps). |
 | LR Civ P 7.1(a)(3) | 8½ × 11 inch paper; text double-spaced; quotations of more than two lines may be indented and single-spaced; headings and footnotes may be single-spaced; margins of at least one inch on all four sides; page numbers may sit in the margin. | `page-w`, `page-h`, `margin = 1in`, `body-leading = 1.35em` (24 pt at 12 pt), `single-leading`; quotations and footnotes single-spaced; page number centered in the bottom margin. |
-| LR Civ P 7.1(a)(4) | Proportionally spaced face of 12 point or larger. Garamond is on the presumed-legible list. | `font-family = "EB Garamond"` (vendored, `fonts/eb-garamond/`), `type-size = 12pt`, footnotes at 12 pt. |
+| LR Civ P 7.1(a)(4) | Either a proportionally spaced or monospaced face; a proportionally spaced face must be 12 point or larger; the face must be clearly legible as determined by the judicial officer. Times New Roman, Courier New, Arial, Century Gothic, Garamond, Georgia and Century Schoolbook are presumed legible. No face is named as required. | Typeface row: face required = none (any proportional face at 12 pt or larger; the rule's presumed-legible list includes Garamond). Substitute = none needed; kept `font-family = "EB Garamond"` (vendored, `fonts/eb-garamond/`). Fit: not applicable. `type-size = 12pt`, footnotes at 12 pt. |
 | LR Civ P 7.1(a)(6) | A motion to dismiss is filed as a separate pleading. | The template produces the memorandum only; the motion is a separate document (see Known gaps for the exemplar). |
 | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number and a Rule 7(a) designation. | `caption` (court title, parties, "Civil Action No.", judge) and `brief_title`. |
 | Fed. R. Civ. P. 12(b) | Defenses by motion, including 12(b)(1) and 12(b)(6). | Author content; the template does not check the wording. |
