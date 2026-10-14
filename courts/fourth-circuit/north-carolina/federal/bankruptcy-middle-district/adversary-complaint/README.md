@@ -1,0 +1,83 @@
+# ncmb: adversary-complaint
+
+Doc type: **adversary complaint** (a complaint commencing an adversary proceeding in the United States Bankruptcy Court for the Middle District of North Carolina, `ncmb`). Folder: `courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint/`.
+
+| Item | Status |
+|---|---|
+| exemplar | yes: `exemplars/FILED-EXAMPLE-anderson-novus-24-06026-adversary-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
+| sample md | `samples/INPUT-novus-complaint.md`: caption, title, lead-in, every heading, all 41 numbered paragraphs, the three footnotes, the prayer A to F, the signature block (exhibits not transcribed) |
+| render | ok: `samples/OUTPUT-novus-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no typst warnings |
+| overlay | ok: `samples/OVERLAY-novus-complaint.pdf` and `samples/OVERLAY-novus-complaint.txt` |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+
+File names: the shared `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (and read `OUTPUT-<id>.pdf`), so those names are used rather than `<id>.pdf` and `<id>-overlay.pdf`. `tools/` was not edited.
+
+## Governing rules
+
+Primary sources, read 2026-10-14. Quoted or closely paraphrased; the rule text was read, not summarized from a search result.
+
+| ID | Rule | Requirement | Where it lives |
+|---|---|---|---|
+| NCMB-FORM-001 | Fed. R. Bankr. P. 7010, https://www.law.cornell.edu/rules/frbp/rule_7010 | Fed. R. Civ. P. 10 applies in an adversary proceeding, except that a pleading's caption must substantially conform to the appropriate version of Official Form 416. The caption used is Form 416D (caption for an adversary proceeding other than a complaint filed by a debtor): the trustee is the plaintiff. Form 416D itself was not fetched; the form identification is from a web search summary of the form titles. | caption (`caption` frontmatter, `cover()` and `caption()` in the template) |
+| NCMB-FORM-002 | Fed. R. Bankr. P. 9004(a)-(b), https://www.law.cornell.edu/rules/frbp/rule_9004 | Papers must be "clearly legible" (9004(a)). A document presented for filing must have a caption with the court's name, the case title, the case number and adversary number, and a brief designation of the document (9004(b)). | `caption`, `title`, `court` frontmatter |
+| NCMB-FORM-003 | Fed. R. Civ. P. 10(b), as applied by Fed. R. Bankr. P. 7010 | Each claim in a numbered paragraph, limited as far as practicable to a single set of circumstances. | `allegations()`: each text chunk is one numbered paragraph; headings, lists, quotations and the WHEREFORE lead-in are not numbered |
+| NCMB-CONT-001 | Fed. R. Bankr. P. 7008(a), https://www.law.cornell.edu/rules/frbp/rule_7008 | The jurisdictional allegation must name the case the adversary proceeding relates to (name, number, Code chapter) and the district and division where it is pending. The complaint must state whether the pleader consents to the entry of final orders or judgment by the bankruptcy court. | author content (the sample states the jurisdiction in paragraphs 3 to 5). **Not checked by the template.** See gap 1. |
+| NCMB-SIG-001 | Local Bankruptcy Rules (M.D.N.C.), LR 9011-4, https://www.ncmb.uscourts.gov/sites/default/files/local_rules/Local%20Bankruptcy%20Rules%20-%20NCMB%20%28October%207%2C%202022%29.pdf | Every paper filed by an attorney carries the attorney's state bar number in the signature block; telephone and email should also appear. | `signature` frontmatter, `signature-block()`: `bar` and `email` for each signer and `phone` are required (the build fails if one is missing) |
+| NCMB-LR-001 | Local Bankruptcy Rules, LR 1001-1(c) and (d) | The court may modify the rules in the interest of justice; failure to comply may be sanctioned. | not a template rule |
+
+Rule sources: the local bankruptcy rules text is the copy dated October 7, 2022 (the court's posted PDF). The court's site also lists a September 2025 comment draft, and a set of rules "Effective January 1, 2026" that could not be retrieved (the page returned 404 and the listing gave only a title). **The effective January 2026 text has not been read; this README relies on the 2022 text.** The 2025 draft's LR 7007-1 was read (it concerns motions and briefs, see the motion-brief README). The draft has no LR 9011-4 heading that could be found, so the signature rule could not be compared with it.
+
+Not produced by this template (separate filings that may be required with the complaint): the adversary proceeding cover sheet (Official Form 1040); the summons; the civil cover sheet; the jury demand, if any (LR 9015-1, not read). The complaint has no certificate of service: service is by summons (Fed. R. Bankr. P. 7004).
+
+## Layout
+
+- US Letter, 1 inch margins, page number centered at the foot of every page (the exemplar's pages 1 to 10 are numbered the same way).
+- Caption: court title centered (three lines, one per element); a party column, a ")" column in every row, and a case-number column. The ")" marks run the full height of the caption, as in the exemplar. The caption closes with a rule. The title (`COMPLAINT`) is centered and bold below the rule.
+- Body: double spacing (line pitch 24.0 pt, measured with `pdftotext -bbox-layout` on page 2). Numbered paragraphs: number at a 0.5 inch indent, wrapped lines to the margin (as the exemplar). Headings: level 1 centered bold caps, level 2 centered bold, both kept with the paragraph after them (`sticky`).
+- Lists: a markdown `1.` list is lettered A., B., ... (the prayer); a `-` list is a bulleted list with no marker, indented 1 inch (the (i), (ii), (iii) sub-items of a numbered paragraph).
+- Footnotes: `[^n]` in a paragraph becomes a Typst footnote whose text is `footnotes.n` in the frontmatter.
+- Signature block: "Respectfully submitted this ..." on the left, then the firm, `/s/`, each signer with bar number and email, the address, telephone and role, all in a column at 3.25 inches.
+
+## Markdown contract (for samples)
+
+- YAML frontmatter, then the body. Frontmatter fields: `court` (lines), `caption.left` and `caption.right` (rows; a row is a string or `{t, a}` with `a` = `l`, `c` or `r`), `title`, `lead_in` (the unnumbered lead-in paragraph), `footnotes` (keys "1", "2", ...), `signature` (`dated`, `firm`, `signed_by`, `signers` (`name`, `bar`, `email`), `address`, `phone`, `role`).
+- Body: blank-line-separated chunks. `#` = level 1 heading, `##` = level 2 heading; a paragraph is numbered; `1.` lists are lettered; `-` lists are unnumbered sub-items; a chunk beginning `WHEREFORE` is the unnumbered prayer lead-in; a chunk beginning `>` is a block quotation.
+- Not supported: tables; sub-headings below level 2 are styled but not used by the sample.
+- A hard line break inside a paragraph is written as a backslash at the end of the line (used nowhere now that the sub-items are a list).
+
+## Known gaps and open choices
+
+1. **FRBP 7008(a) consent statement is not checked.** The exemplar has no statement of consent to the entry of final orders or judgment by the bankruptcy judge, which Rule 7008(a) requires a complaint in an adversary proceeding to contain. The template cannot tell whether a sample has it, and the sample does not add it (the filed complaint is transcribed as filed). A complaint drafted from this template must state the consent itself. **This is the most important gap for a real filing.**
+2. **One exemplar.** EVAL-LOOP's tier-2 rule asks for two or three filers. The search (CourtListener RECAP, `court=ncmb`, adversary complaints) turned up two more adversary complaints with downloadable PDFs, both image-only (no text layer): Troxler v. Carvana (23-09001, Doc 1) and Battle/Troxler (26-02036, Doc 1). No OCR tool is installed on this box, so they were not used. Tier 2 is judged against one filer.
+3. **Typeface and size.** The local rules set no typeface, and FRBP 9004(a) requires only that the paper be "clearly legible". The exemplar embeds Century Schoolbook (`pdffonts`; its point size was not measured); this template uses EB Garamond (vendored, the only font in `fonts/`) at 13 pt, because EB Garamond sets smaller than Century Schoolbook at the same size. Visual comparison is in the overlay. The 13 pt is a style choice, not a rule.
+4. **Double spacing and margins.** No rule in the local rules sets line spacing or margins for this court; double spacing matches the exemplar and is a convention choice.
+5. **Case names are italic in the sample.** The exemplar's text layer has no italic markup; italics are a convention choice in the transcription, not a reading of the filing.
+6. **The exhibits are not transcribed.** Exhibit A (the First Agreement) and Exhibit B (the transfers table) are pages 11 to 34 of the filing. The sample stops at the signature block (page 10 of the filing).
+7. **Paragraph numbers.** The template numbers paragraphs from 1 by chunk. The filed complaint also numbers from 1 and the sample reproduces all 41 numbered paragraphs, so the numbers coincide; the sample has no typed numbers.
+
+## Gate 2 review (all 8 pages, rendered at 60 dpi and looked at)
+
+| Page | What it is | Finding |
+|---|---|---|
+| 1 | Court title, caption with the ")" column, title, lead-in, heading "Parties, Jurisdiction and Venue", paragraph 1 | OK. Caption rows align; the title is bold and centered; page number 1 at the foot. |
+| 2 | Paragraphs 2 to 11; headings "General Allegations", "First Agreement"; footnote 1 marker at paragraph 11 | OK. Headings at body size (an earlier build had headings at display size; fixed). |
+| 3 | Paragraphs 12 to 16 (start); footnote 1 text at the foot; heading "Second Agreement" | OK. The heading moves with paragraph 16. |
+| 4 | Paragraphs 16 (end) to 22 (start); headings "Insolvency", "First Claim for Relief" with its sub-heading | OK. The block quotation lead-in (paragraph 22) ends the page; the quotation starts page 5. |
+| 5 | Block quotation; paragraph 23 with its (i), (ii), (iii) sub-items; paragraphs 24 and 25; footnote 2 text at the foot | OK. Sub-items indented 1 inch, as the exemplar. |
+| 6 | Paragraphs 26 to 31, and the first line of 32; heading "Second Claim for Relief" with sub-heading; footnote 3 text at the foot | OK. |
+| 7 | Paragraph 32 (end) to 39; heading "Third Claim for Relief" with sub-heading; the prayer lead-in and item A | OK. Item A wraps and hangs under its text. |
+| 8 | Prayer items B to F; "Respectfully submitted this 5th day of December, 2024"; the signature block (firm, /s/, signer with bar number and email, address, telephone, role) | OK. |
+
+Gate 2 rows: `OK` = viewed and acceptable. No `OPEN` rows. The one accepted difference from the filed exemplar is the typeface (gap 3).
+
+## Render and overlay
+
+```sh
+export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
+sh tools/render.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint samples/INPUT-novus-complaint.md
+sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint novus-complaint
+```
+
+The overlay's page map (`samples/OVERLAY-novus-complaint.txt`) pairs each sample page with the filed page sharing the most words: sample 1 with filed 1 (96%), 2 with 2 (68%), 3 with 4 (56%), 4 with 5 (63%), 5 with 6 (69%), 6 with 7 (73%), 7 with 9 (50%), 8 with 10 (45%). The pairing is coarse: a sample page can pair with a filed page one or two pages away, because the sample does not carry the exhibits and the filed pages are longer in the front half. The overlay is a diagnostic, not a score: the filed exemplar uses a different face and line breaks, so the two layers will not coincide line by line.
+
+See also: [[motion-brief]] (the other doc type in this court), `../../../../../../README.md` for the formbook index.
