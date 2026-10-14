@@ -23,6 +23,14 @@ sh tools/overlay.sh courts/fifth-circuit/court-of-appeals/reply-brief fisher-rep
 
 Typst runs with the vendored fonts only (`--ignore-system-fonts`); any typst warning fails the render. The font is EB Garamond (`fonts/eb-garamond/`), and cmarker 0.1.10 is vendored under `vendor/typst-packages/`. Both are the same choices as the ca5 opening-brief template.
 
+## Typeface (fonts pass, 2026-10-14)
+
+| Court requirement | Face the rules name | Substitute | Fit |
+|---|---|---|---|
+| CA5-FORM-005: proportionally spaced serif, 14 pt text, 12 pt footnotes (FRAP 32(a)(5)-(6); Checklist 2(a), 2(d)) | None. FRAP 32(a)(5)(A)-(B) allows any proportionally spaced face with serifs; Form 6 asks only for the program and font used. The local rule (5th Cir. R. 32.3) text was not fetched. | None needed: EB Garamond (`fonts/eb-garamond/`) kept | n/a (no court-named face; `docs/FONTS.md` "No face named") |
+
+The rules name no face, so the template keeps EB Garamond in typst, latex and docx. The filed exemplar is set in Century Schoolbook; the rules allow it but do not require it, so the difference is a tier-2 visual choice, not a rule failure. Checked on the typst render: `pdffonts` lists only `EBGaramond` (Regular, Bold, Italic) and nothing else is embedded.
+
 ## Governing rules
 
 Verified on 2026-10-14.
