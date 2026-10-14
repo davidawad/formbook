@@ -37,7 +37,7 @@ Verification date: 2026-10-14. Each rule was read from the source named.
 | MLBR Appendix 8, (c) | Body at least 12-point; footnotes at least 10-point; plain roman type (italics or bold for emphasis) | `type-size = 12pt`, `footnote-size = 10pt` (no footnotes in this complaint) | Same. |
 | Division names | Eastern, Central and Western divisions | `division` frontmatter, printed in the caption | The three divisions are listed in the front matter of the MLBR PDF (same source as above). Rule 5001-1 itself was not read. |
 
-Typeface: the only vendored face is EB Garamond (`fonts/eb-garamond/`). Appendix 8(c) requires a plain roman type, so a serif face at 12 pt satisfies it. The filed exemplar is set in Times New Roman, and the template does not reproduce it (the rules leave the face open).
+Typeface (checked 2026-10-14): face required: none. MLBR Appendix 8(c) says "a plain, Roman Type" at 12 pt body and 10 pt footnotes, and names no face. The May 1, 2025 MLBR text and Appendix 8 were searched for Times, Helvetica, Arial, Garamond, Century, Georgia, Courier and "font"; none names a face. Standing orders were not checked. Vendored substitute: none needed; the template keeps **EB Garamond** (`fonts/eb-garamond/`), the "No face named" row of `docs/FONTS.md`. Fit: n/a. The filed exemplar is set in Times New Roman (`pdffonts`), and the template does not reproduce it, since the rules leave the face open.
 
 ## Overlay
 
