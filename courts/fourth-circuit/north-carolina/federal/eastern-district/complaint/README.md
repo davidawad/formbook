@@ -7,6 +7,7 @@ Folder: `courts/fourth-circuit/north-carolina/federal/eastern-district/complaint
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-powell-5-26-cv-00667-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-powell-complaint.md` (a portion of the 49-page filing; see its frontmatter comment) |
+| typeface | no face named by the rule: EB Garamond (vendored default; `docs/FONTS.md`, "No face named"); no substitute applied |
 | render | ok: `samples/OUTPUT-powell-complaint.pdf`, 9 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
 | overlay | ok: `samples/OVERLAY-powell-complaint.pdf` (red = our render, blue = filed page, black = agreement) and `samples/OVERLAY-powell-complaint.txt` (the page map) |
 | pages reviewed | 9 of 9, every page rendered at 60 dpi and viewed on the final render (table below) |
@@ -19,6 +20,7 @@ Primary source: United States District Court, Eastern District of North Carolina
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | LR 10.1(a) | Double-spaced, single-sided, standard letter paper; all typed matter in at least 11-point type; one-inch margin on all sides. | `type-size = 12pt`, `margin = 1in`, `body-leading` (27.6 pt baseline pitch at 12 pt: measured on the render). Footnotes are 12 pt too. |
+| LR 10.1(a) typeface | Names no typeface: "all typed matter appearing in at least 11 point font size". Text checked in the 2023 local rules PDF (`pdftotext`, 2026-10-14). | EB Garamond, the vendored default (`docs/FONTS.md`, "No face named"): no court-named substitute is needed. |
 | LR 10.1(b) | State the court and division. | `court-title()`: "IN THE UNITED STATES DISTRICT COURT / FOR THE EASTERN DISTRICT OF NORTH CAROLINA / <DIVISION> DIVISION"; the division is frontmatter `division`. |
 | LR 10.1(c) | Bear the case number, except for the initial filing. | `case-number-line()`: "No. ______" when `case_number` is absent (a new complaint), otherwise "No. <number>". |
 | LR 10.1(d) | Caption of the case. | `caption()`: one row per frontmatter line, each with a ")" in the next column (the form the rule's own example uses). |
@@ -59,7 +61,7 @@ Not produced by this template (separate papers that the filer may need with the 
 ## Known gaps and open choices
 
 1. **Only one exemplar; tier 2 is not judged against two filers.** Searches, all on 2026-10-14: CourtListener RECAP search (`type=r`, `court=nced`, `filed_after=2026-01-01`, queries "complaint" and "motion to dismiss" memorandum); the nced local rules (2023 PDF); a web search for EDNC complaints. The six most recent EDNC complaints in the results (filed 2026-10-08 to 2026-10-13) had no available PDF (`is_available: false`). Powell v. N.C. DOT (5:26-cv-00667, filed 2026-09-12, counsel-filed, text layer) is the one available complaint found. No second filer was downloaded, so tier 2 (two or three filers) is not met.
-2. **Font.** LR 10.1(a) requires at least 11 point; this template uses 12 pt EB Garamond, the only text face vendored in `fonts/`. The filed exemplar is Century Schoolbook. EB Garamond has a smaller x-height at 12 pt, so the text looks smaller than the exemplar (the same choice as the N.D. Cal. templates). A vendored Century Schoolbook or Times-metric face would remove the difference; that is a question for David (fonts are shared, and the brief bars editing them).
+2. **Font (ACCEPTED).** LR 10.1(a) requires at least 11 point and names no typeface, so the template keeps EB Garamond at 12 pt, as `docs/FONTS.md` directs for a court that names no face. The filed exemplar is Century Schoolbook: that is one filer's choice (tier 3), not a court requirement, so TeX Gyre Schola is not substituted. EB Garamond has a smaller x-height at 12 pt, so the text looks smaller than the exemplar. Accepted under tier 2: the rule sets the size, not the face.
 3. **Jury demand paragraph is numbered.** The exemplar's "JURY DEMAND" paragraph is unnumbered. The template numbers every text paragraph except a WHEREFORE clause, so the demand is numbered 39. Rule 10(b) is satisfied either way; this is a tier-2 difference, accepted.
 4. **Caption lines are one per line.** The exemplar's caption wraps party names; the sample reflows them into the caption lines. The template asserts that each line fits, so a longer line fails the build with a message rather than misaligning the ")" column.
 5. **Paragraph numbers in the sample run from 1**, not the filed numbers (the sample is a portion; paragraphs 17, 21 and 24 of the filing, which hold a quotation and bulleted lists, are omitted).
