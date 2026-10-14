@@ -276,7 +276,7 @@
     hyphenate: false, fallback: false,
   )
   set par(
-    leading: body-leading, spacing: 0pt,
+    leading: body-leading, spacing: body-leading,   // a paragraph break keeps the 24 pt pitch: without it the next paragraph overprints the last line (measured)
     first-line-indent: (amount: para-indent, all: true), justify: false,
   )
   // The numbering function is what steps the heading counter; the labels are drawn by the show rule below.
