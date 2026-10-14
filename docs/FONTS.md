@@ -66,15 +66,15 @@ The Typst name is exactly what a template passes to `font:`; the first five rows
 | Century Schoolbook, New Century Schoolbook, "Century family" | `TeX Gyre Schola` | `tex-gyre-schola/` | GUST FL | Metric-compatible with the Adobe base-35 New Century Schoolbook AFMs |
 | Century Expanded | `TeX Gyre Schola` | `tex-gyre-schola/` | GUST FL | Visual only |
 | Georgia | `Gelasio` | `gelasio/` | SIL OFL 1.1 | Metric-compatible (designed as a Georgia match) |
-| Arial | `Liberation Sans` | `liberation-sans/` | SIL OFL 1.1 | Metric-compatible |
-| Helvetica | `TeX Gyre Heros` | `tex-gyre-heros/` | GUST FL | Visual (Helvetica clone) |
+| Arial | `Liberation Sans` (metric-compatible choice; do not use Heros for Arial, it is not guaranteed Arial-metric) | `liberation-sans/` | SIL OFL 1.1 | Metric-compatible |
+| Helvetica | `TeX Gyre Heros` (Helvetica only) | `tex-gyre-heros/` | GUST FL | Visual (Helvetica clone) |
 | Courier New | `Liberation Mono` | `liberation-mono/` | SIL OFL 1.1 | Metric-compatible |
 | Courier | `TeX Gyre Cursor` | `tex-gyre-cursor/` | GUST FL | Visual (Courier clone) |
 | Calibri | `Carlito` | `carlito/` | SIL OFL 1.1 | Metric-compatible |
 | Cambria | `Caladea` | `caladea/` | SIL OFL 1.1 or Apache 2.0 (per upstream; check the folder) | Metric-compatible |
 | Book Antiqua, Palatino, Palatino Linotype | `TeX Gyre Pagella` | `tex-gyre-pagella/` | GUST FL | Visual only |
 | Bookman, Bookman Old Style | `TeX Gyre Bonum` | `tex-gyre-bonum/` | GUST FL | Visual only |
-| Tahoma | See `fonts/TAHOMA-NOTE.md` or the substitute folder added by fb-595.7 | n/a here | n/a | Per that note |
+| Tahoma | `DejaVu Sans` | `dejavu-sans/` | Bitstream Vera / DejaVu licence (check the folder) | Visual fallback only; NOT metric-compatible, so pagination may differ. See `fonts/TAHOMA-NOTE.md` |
 | Equity (Butterick) | `Liberation Serif` (alternate `TeX Gyre Termes`) | not vendorable | commercial | Visual only; see below |
 | Garamond | `EB Garamond` | `eb-garamond/` | SIL OFL 1.1 | Visual only |
 | No face named | `EB Garamond` | `eb-garamond/` | SIL OFL 1.1 | n/a |
