@@ -18,6 +18,8 @@
 - [ ] overlay PDF present (`samples/*-overlay.pdf`)
 - [ ] a review file in `reviews/`
 
+Typeface: none required by M.D.N.C. LR 7.1(a) (13-pt proportional floor; no face named), so EB Garamond stays in both doc types (`docs/FONTS.md`, "No face named"). Renders are vendored-only.
+
 Engines: typst `—`, latex `—`, docx `—`.
 
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
