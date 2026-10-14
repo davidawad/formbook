@@ -7,8 +7,17 @@ Doc type: **adversary complaint** in an adversary proceeding in the United State
 | exemplar | yes, 1 filer: `exemplars/FILED-EXAMPLE-gate-truckin-fletcher-25-05046-adversary-complaint.pdf` (see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-fletcher-25-05046.md`, the whole filing (caption, 38 numbered paragraphs, prayer, signature, certificate) |
 | render | ok: `samples/OUTPUT-fletcher-25-05046.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
-| overlay | ok: `samples/OVERLAY-fletcher-25-05046.pdf` and `OVERLAY-fletcher-25-05046.txt` |
-| pages reviewed | 6 of 6 after the paragraph-break fix (every page rendered at 60 dpi and viewed); after the last change (one glyph in the sample), page 3 re-viewed |
+| overlay | ok: `samples/OVERLAY-fletcher-25-05046.pdf` and `OVERLAY-fletcher-25-05046.txt`, made 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not committed; see gaps 11) |
+| pages reviewed | 6 of 6 re-rendered and viewed 2026-10-14 (fonts pass; the face did not change, see Typeface below) |
+
+## Typeface
+
+| Item | Result |
+|---|---|
+| Face required by the rules | None named. The BLR 5005-1 text read (search excerpts of courtrules.net) names no typeface; FRBP 9004(a) says "clearly legible" with no face. Subsection (f) of BLR 5005-1 (caption style) was not seen (see gaps 1). |
+| Substitute (`docs/FONTS.md`) | None needed: the "No face named" row, so **EB Garamond** stays. |
+| Fit | n/a (the rules name no face to be metric-compatible with) |
+| Embedded (`pdffonts`) | `EBGaramond-Regular`, `EBGaramond-Bold` (both embedded, CID Type 0C) |
 
 Not a `court.json` status; nothing here sets `status`. The court-root `README.md` and `court.json` are not touched.
 
@@ -100,3 +109,5 @@ Reviewed pages: 6 of 6.
 8. **Not generated:** the adversary cover sheet, the summons, the civil cover sheet. Separate filings.
 9. **Filing stamp area.** Kept for paper filing (BLR 5005-1, secondary); ECF copies do not need it.
 10. **Local practice not checked:** judge-specific standing orders, and the 2024 amendments to Rules 7008 and 7010 (restyling only, per the committee notes).
+11. **Exemplar PDF not in the repo.** Only `exemplars/SOURCE.md` is committed. For the 2026-10-14 overlay the RECAP copy was fetched from the URL in `SOURCE.md` into a scratch directory and passed to `tools/overlay.sh` as its third argument. Committing the PDF is a repo decision, not made here.
+12. **BLR 5005-1 subsection (f) and the 2019 PDF not retrieved (2026-10-14).** courtrules.net returns HTTP 403; the court's 2019 local-rules PDF returns an 855-byte error page. The font conclusion rests on the excerpts, which name no face; re-check subsection (f) against the court's PDF.
