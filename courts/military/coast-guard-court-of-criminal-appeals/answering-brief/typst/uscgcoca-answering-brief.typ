@@ -40,16 +40,17 @@
   set text(font: typeface, size: body-size)
   set par(justify: false, first-line-indent: 0pt, leading: body-leading, spacing: body-leading)
 
-  show heading.where(level: 1): it => {
-    set par(leading: single-leading)
-    align(center, text(weight: "bold", it.body))
-    v(body-leading)
-  }
-  show heading.where(level: 2): it => {
-    set par(leading: single-leading)
-    text(weight: "bold", it.body)
-    v(body-leading)
-  }
+  // sticky: a heading never ends a page, so it stays with the text that follows it.
+  show heading.where(level: 1): it => block(sticky: true, width: 100%)[
+    #set par(leading: single-leading)
+    #align(center, text(weight: "bold", it.body))
+    #v(body-leading)
+  ]
+  show heading.where(level: 2): it => block(sticky: true, width: 100%)[
+    #set par(leading: single-leading)
+    #text(weight: "bold", it.body)
+    #v(body-leading)
+  ]
 
   caption-block(meta)
   v(1.2em)
