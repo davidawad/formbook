@@ -44,7 +44,7 @@
 }
 
 // ---------------------------------------------------------------------------
-// Caption (COB-FIRST-001: FRBP 7010 and Official Form 416)
+// Caption (COB-CAPTION-001: FRBP 7010 and Official Form 416D, the adversary caption)
 // ---------------------------------------------------------------------------
 
 #let court-title(meta) = {
@@ -128,24 +128,39 @@
   [This proceeding is #kind under 28 U.S.C. § 157. #verdict]
 }
 
+/// Numbered paragraph k carrying the consent statement (FRBP 7008(a)).
+#let consent-para(k, meta) = par(first-line-indent: 0pt)[#h(para-indent) #str(k).#h(para-indent) #consent-text(meta)]
+
 // ---------------------------------------------------------------------------
 // Signature block (no local rule cited for the form; see ../README.md)
 // ---------------------------------------------------------------------------
 
+// One signatory: firm, mark and signer, address lines. `also` in the frontmatter adds further
+// signatories (a complaint filed by two firms, as in the Golec exemplar), each below the first.
+#let sig-column(sig) = {
+  let mark = sig.at("mark", default: "/s/")
+  for l in sig.at("firm", default: ()) { inl(l); linebreak() }
+  v(line-pitch * 0.5)
+  // "/s/" sits on the name's line; any other mark (a handwritten signature, "By:") gets its own line.
+  if mark == "/s/" or mark.starts-with("By: /s/") { [#mark #sig.signer] } else { [#mark]; linebreak(); [#sig.signer] }
+  linebreak()
+  for l in sig.at("lines", default: ()) { inl(l); linebreak() }
+}
+
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  let mark = sig.at("mark", default: "/s/")
   block(breakable: false, above: line-pitch, {
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
     grid(columns: (1fr, 3.2in), [Dated: #need(meta, "date")], {
-      [Respectfully submitted,]
-      v(line-pitch * 0.5)
-      for l in sig.at("firm", default: ()) { inl(l); linebreak() }
-      v(line-pitch * 0.5)
-      // "/s/" sits on the name's line; any other mark (a handwritten signature) gets its own line.
-      if mark == "/s/" { [#mark #sig.signer] } else { [#mark]; linebreak(); [#sig.signer] }
-      linebreak()
-      for l in sig.at("lines", default: ()) { inl(l); linebreak() }
+      if sig.at("lead", default: true) {
+        [Respectfully submitted,]
+        v(line-pitch * 0.5)
+      }
+      sig-column(sig)
+      for extra in sig.at("also", default: ()) {
+        v(line-pitch)
+        sig-column(extra)
+      }
     })
   })
 }
@@ -212,16 +227,29 @@
   caption(meta)
   title-block(meta)
 
-  // ---- the statement required by FRBP 7008(a), as the first numbered paragraph ----
+  // ---- the statement required by FRBP 7008(a) is numbered paragraph 1 (placed in the loop below) ----
   let n = 0
-  n += 1
-  par(first-line-indent: 0pt)[#h(para-indent) #str(n).#h(para-indent) #consent-text(meta)]
+  let consent-done = false
 
   // ---- body blocks: headings, lists and numbered paragraphs ----
   let blocks = md.split(regex("\n\\s*\n")).map(s => s.trim()).filter(s => s != "")
   for blk in blocks {
+    // The FRBP 7008(a) statement is paragraph 1. It follows the unnumbered opening paragraphs
+    // ("Plaintiffs ... state and allege as follows") and comes before the first numbered paragraph.
+    if not consent-done and not blk.starts-with("+") {
+      consent-done = true
+      n += 1
+      consent-para(n, meta)
+    }
     if blk.starts-with("#") {
       cmarker.render(blk, raw-typst: false, smart-punctuation: true)
+    } else if blk.starts-with("%") {
+      // Centered, single-spaced, unnumbered lines (claim sub-captions). One line per source line.
+      set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+      align(center, blk.slice(1).split("\n").map(l => inl(l.trim())).join(linebreak()))
+    } else if blk.starts-with("+") {
+      // Unnumbered body paragraph (the opening "Plaintiffs ... state as follows", prayer items).
+      par(first-line-indent: 0pt, [#h(para-indent) #inl(blk.slice(1).trim())])
     } else if blk.starts-with("- ") or blk.match(regex("^\\d+\\. ")) != none {
       cmarker.render(blk, raw-typst: false, smart-punctuation: true)
     } else if blk.starts-with(">") {
@@ -230,6 +258,11 @@
       n += 1
       par(first-line-indent: 0pt, [#h(para-indent) #str(n).#h(para-indent) #inl(blk)])
     }
+  }
+
+  if not consent-done {
+    n += 1
+    consent-para(n, meta)
   }
 
   signature-block(meta)
