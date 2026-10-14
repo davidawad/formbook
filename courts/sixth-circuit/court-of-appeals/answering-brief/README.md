@@ -1,0 +1,100 @@
+# Court of Appeals for the Sixth Circuit: answering brief (appellee's brief)
+
+Folder: `courts/sixth-circuit/court-of-appeals/answering-brief/`. Status: **template and one sample; not a complete tier-1/tier-2 pass** (see Known gaps). This is a standalone doc-type folder; the court root's `typst/` and `samples/` are not touched.
+
+| Path | What |
+|---|---|
+| `exemplars/FILED-EXAMPLE-bruneau-23-1761-answering-brief.pdf` | The filed exemplar: Brief of Defendants-Appellees Midland County and Gladwin County, 6th Cir. No. 23-1761, Doc. 40, filed 2024-01-31. 56 pp., text layer present. |
+| `exemplars/SOURCE.md` | Where it came from, who filed it, and the errors seen in it. |
+| `samples/bruneau-answering-brief.md` | Markdown transcription (a portion, see its header). Markdown contract below. |
+| `samples/bruneau-answering-brief.pdf` | Render of the sample: 14 pages. |
+| `samples/bruneau-answering-brief-overlay.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). Page map below. |
+| `typst/main.typ` | Entry point. Reads `--input sample=...`, splits frontmatter, calls the template. |
+| `typst/ca6-answering-brief.typ` | The template `ca6-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or cites a rule. |
+
+Build (from the repo root; the same commands for any sample):
+
+```sh
+export PATH="$HOME/tb/bin:$PATH"
+sh tools/render.sh courts/sixth-circuit/court-of-appeals/answering-brief samples/bruneau-answering-brief.md
+sh tools/overlay.sh courts/sixth-circuit/court-of-appeals/answering-brief bruneau-answering-brief
+```
+
+Fonts are the vendored EB Garamond (`fonts/eb-garamond/`); `--ignore-system-fonts`; any typst warning fails the render. `pdffonts` on the sample shows only `EBGaramond-*` faces.
+
+## Governing rules
+
+Verified for this doc type on 2026-10-14. "Court" means the Sixth Circuit's own publication; "text" means the rule text as fetched.
+
+| ID | Requirement | Source | Verified | Where it is in the template |
+|---|---|---|---|---|
+| CA6-COVER-001 | Cover: "United States Court of Appeals for the Sixth Circuit", case number, case title, nature of proceeding and court below, brief title identifying the party, counsel name/address/telephone | FRAP 32(a)(2); [Court's Briefs Checklist, Part I](https://www.ca6.uscourts.gov/sites/ca6/files/documents/rules_procedures/Briefs%20Checklist.pdf) | Checklist text; FRAP 32(a)(2) by the Checklist citation | `cover-body()` |
+| CA6-COVER-002 | Oral argument: the cover says "ORAL ARGUMENT REQUESTED" only when the brief contains the statement | 6 Cir. R. 34(a); Checklist Part V | Checklist text (the 6 Cir. R. 34(a) text itself: not fetched) | `oral_argument` key; panics if the statement heading is missing |
+| CA6-FORM-001 | Order of components: cover, corporate disclosure, TOC, TOA, oral-argument statement, jurisdiction, issues, case, summary, argument, conclusion, certificates, addendum | FRAP 28(a); Checklist Parts II-XIV | Checklist text; FRAP 28(a) by citation | Assembly order in `ca6-brief()` |
+| CA6-FORM-002 | Margins at least one inch on all four sides; page numbers may sit in the margin, no text there | FRAP 32(a)(4) | Yes (LII, `rule_32`) | `page-margin = 1in` |
+| CA6-FORM-003 | Text double-spaced; quotations over two lines and headings and footnotes may be single-spaced | FRAP 32(a)(4) | Yes (LII) | `body-leading`; `single-leading` |
+| CA6-FORM-004 | Proportionally spaced serif face, 14-point or larger; case names italic | FRAP 32(a)(5)(A), (a)(6) | Yes (LII) | `type-size = 14pt`, `font-family` |
+| CA6-LEN-001 | Principal brief: 13,000 words (30 pages); cross-appeal appellee brief 15,300 words; reply 6,500 words; cross-appeal appellee reply 6,500 words | FRAP 32(a)(7)(A), (B)(i)-(ii); FRAP 28.1(e)(2)(B)(i), (C); Checklist "Length of briefs" | Yes (LII, `rule_32` and `rule_28.1`; the 6,500 figure for the cross-appeal reply is half of 13,000 under 28.1(e)(2)(C)) | `word-limits`; panic when the body exceeds the basis |
+| CA6-LEN-002 | Words excluded: cover, disclosure, TOC, TOA, addendum, certificates, signature block and other items listed in FRAP 32(f). The oral-argument statement is counted (Checklist, Part V: "included in the applicable page and/or word counts") | FRAP 32(f); Checklist Part V | FRAP 32(f) by citation; the Checklist's statement that the argument statement counts | `count-words(body-md)` counts everything before the addendum, so the generated parts are never counted |
+| CA6-CERT-001 | Certificate of compliance: the attorney certifies the type-volume limit and states the word count | FRAP 32(g)(1) | Yes (LII) | `certificate-of-compliance()` |
+| CA6-CERT-002 | Certificate of service, required when not served through CM/ECF alone; date served; parties; manner; signature | FRAP 25(d); Checklist Part XIII | Checklist text | `certificate-of-service()` (always generated; `service.date` required) |
+| CA6-DISC-001 | Corporate disclosure statement (6 Cir. R. 26.1) filed with the brief, immediately before the TOC. Government entities and political subdivisions are exempt from the disclosure duty in 26.1(a); the exemplar's filer filed anyway | 6 Cir. R. 26.1 (text quoted in the exemplar's Form 6CA-1 attachment); FRAP 26.1 | The rule text is taken from the attachment to the exemplar, not from the court's site | `disclosure-page()`; reproduces the two answers of Form 6CA-1 only |
+| CA6-SIG-001 | Filing attorney's signature "s/ Name" (6 Cir. R. 25(d)(1)) | Checklist Part II-XI | Checklist text | `signature-lines()` |
+| CA6-CONT-012 | Heading numbering: Argument point headings I., II.; sub-headings A., B.; then 1., a. | Court's practice as shown in the exemplar; no rule text | Exemplar only | `heading-label()` |
+| CA6-REC-001 | Record citations: "RE" or "R." with docket entry and Page ID range; the designation of record documents is an addendum | 6 Cir. R. 28(a)(1), 28(b)(1)(A)(i); Checklist "Citations to the Record" and XIV | Checklist text; 6 Cir. R. 28 by the Checklist citation | Addendum (`# Addendum`), numbered Add-1, ... |
+
+Not generated, on purpose: a disclosure form that the clerk requires (only its two answers are reproduced; **Form 6CA-1 itself is what gets filed**); a statement of related cases (the Sixth Circuit has none in the Checklist); a colored cover (electronic filing does not need one).
+
+## Markdown contract
+
+Same contract as the ca9 `README.extra.md`, with these differences:
+
+- Frontmatter `preliminary_sections: N`: the first N level-1 sections are numbered in roman with the front matter (in the exemplar these are the oral-argument statement, jurisdiction and issues; the counter-statement starts at page 1).
+- Frontmatter `oral_argument: true`: the cover says "ORAL ARGUMENT REQUESTED". The template panics unless the body has a level-1 heading containing "oral argument".
+- Frontmatter `disclosure: {party, subsidiary, financial_interest}`: the disclosure page. Omit for a government party.
+- Frontmatter `caption` sides may carry `continues: true` to suppress the "v." before that side (the exemplar prints "v." once, between the plaintiffs and the defendants).
+- Frontmatter `service: {date, unregistered}` is required.
+- `word_limit_basis`: `standard`, `cross-appeal`, `reply`, or `cross-appeal-reply`.
+- No `related_cases`, `limit`, `manual_image_words`, or Form 8 keys (Ninth Circuit only).
+- Body, citations (`[text](toa:key)`), footnotes, block quotations, lists, escaping: as in the ca9 contract.
+
+## Overlay (`samples/bruneau-answering-brief-overlay.pdf`)
+
+Red = our render, blue = the filed exemplar, black = both. The map (`-overlay.txt`) pairs each sample page with the exemplar page sharing the most words. The sample is a portion, and some paragraphs are condensed, so body pages overlap only partly (word overlap 22-56%); the cover, disclosure, TOC and certificate pages overlap more (cover 92%, conclusion 81%). Read the overlay for layout (margins, cover, TOC position, heading placement) and not for text identity.
+
+## Page review (Gate 2, all 14 pages rendered at 60 dpi and read)
+
+| Page (sample) | Filed page | What was checked | Finding |
+|---|---|---|---|
+| 1 cover | 1 | caption, title, oral-argument line, counsel block fit on one page | Fixed: counsel column was too narrow ("P.L.C." broke off); now 40% indent. OK. |
+| 2 disclosure | 2-3 (form) | heading, two answers | OK. Form 6CA-1 is the real filing. |
+| 3 TOC | 4 | page numbers vs. rendered pages (I. p.2, II. p.3, II.B p.4, III p.4, Conclusion p.6) | OK; numbers match the render. |
+| 4-5 TOA | 5-7 | all 15 entries, pages, statutes/rules groups | OK. Two pages; the second has only the last 3 entries. |
+| 6 prelim (iii-iv) | 6-8 | oral-argument statement, jurisdiction, issues | OK. Roman numbering continues from the TOA. |
+| 7 counter-statement p.1 | 11 | double spacing, italics for case names, *Krieger, at \*2* | OK. |
+| 8 p.2 | 12-13 | summary, I. heading, Rule 56 cites | OK. |
+| 9 p.3 | 14-15 | II. and II.A. headings; point headings in small caps | OK. |
+| 10 p.4 | 16-17 | II.B., III. headings; Id. short form | OK. |
+| 11 p.5 | 18-19 | Pumpelly, Cress emphasis, Ridgeline | OK. Blank space at the foot: the Conclusion heading moved to the next page with its text (intended, keep-with-next). |
+| 12 p.6 | 53 | conclusion; signature block kept with the last paragraph | OK. |
+| 13 p.7 | 54 | certificate of compliance | Fixed: the word "14pt" printed in the monospace fallback font (typst prints length values as DejaVu Sans Mono). Now printed as "14-point". OK. |
+| 14 p.8 | 54 | certificate of service | Fixed: its signature had split from the certificate onto its own page; the certificate is now one unbreakable block. OK. |
+
+Pages reviewed: 14 of 14.
+
+Word count: the certificate reports 1,199 words (the template's count of the sample body, everything before the addendum). An independent `wc`-style count of the markdown with link targets removed gives 1,175; the difference is punctuation-only tokens and list numerals. Both are far under 13,000. The certificate cites FRAP 32(a)(7)(B)(i) and FRAP 32(f).
+
+## Known gaps
+
+- **Tier 2 needs a second filer.** Only one Sixth Circuit answering brief was found in this box (Midland/Gladwin). `exemplar=yes` here means one exemplar. The Checklist and two briefing letters were the only other court documents found.
+- **6 Cir. R. 32 text not verified.** The court's local rules PDF returned 404 at the URL tried. The exemplar cites "6th Cir. R. 32(a)(7)(B)" and "32(a)(7)(B)(iii)" for the type-volume certificate; the template cites FRAP 32(g) and 28.1 instead, which are verified. Whether the Sixth Circuit adds local exclusions to FRAP 32(f) (the Checklist points to 6 Cir. R. 32(b)) is open.
+- **Form 6CA-1 is not reproduced.** The template prints only the answers. The clerk's form is still a separate filing.
+- **Certificate wording is FRAP-based**, not the Sixth Circuit's own form text. It cites no local rule.
+- **Sample is a portion.** About 1,200 words of the 9,969-word filed brief (and the record designation, which the template supports as an addendum but which is not in this sample). The sample is for layout and structure, not for a full text check.
+- **Typeface.** The template sets EB Garamond; the exemplar is Times New Roman. The certificate says EB Garamond, as it must for this render.
+- **No checks yet.** This folder has no `checks.yaml` and no tool gates; the ca9 gate suite is not wired for ca6.
+- **Hyphenation at "14-point".** The certificate breaks the word at its hyphen across two lines. Not changed (a non-breaking hyphen was not tried).
+
+## Exemplar errors noted (the sample does not carry them)
+
+Listed in `exemplars/SOURCE.md`: the 2023 signature date, the "359895" Krieger docket in one cite, the Baird entry in the TOA, and OCR damage in the text layer.
