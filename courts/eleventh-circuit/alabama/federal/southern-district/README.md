@@ -20,6 +20,8 @@
 
 Engines: typst `—`, latex `—`, docx `—`.
 
+Typeface: S.D. Ala. Gen. L.R. 5(a)(2) requires "a plain, Roman style (or similar) font" and names no face, so both doc types keep the vendored EB Garamond (no court-named substitute applies; see `docs/FONTS.md`). The filed exemplars are set in Times New Roman; Liberation Serif is the substitute if that look is wanted.
+
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 
