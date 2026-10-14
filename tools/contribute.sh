@@ -207,11 +207,7 @@ cmd_claim() {
   DT=$(printf '%s' "$U" | jq -r .doctype)
 
   git fetch -q "$REMOTE" "$BASE" 2> /dev/null || true
-  if git rev-parse -q --verify "$REMOTE/$BASE" > /dev/null; then
-    st=$(git show "$REMOTE/$BASE:$CP/$DT/README.md" > /dev/null 2>&1 && echo has-readme || echo none)
-    [ "$st" = none ] || [ "$(git ls-tree -r --name-only "$REMOTE/$BASE" -- "$CP/$DT" | grep -c '/typst/.*\.typ$' || true)" -eq 0 ] ||
-      [ "$(unit_state "$CP" "$DT")" != complete ] || die "$ID is already complete on $REMOTE/$BASE"
-  fi
+  [ "$(unit_state "$CP" "$DT")" != complete ] || die "$ID is already complete in this checkout; git pull and run: sh tools/contribute.sh pick"
   CLAIMED_FILE=$TMP/claimed
   claimed_set > "$CLAIMED_FILE" || true
   if is_claimed "$ID" "$AL"; then
@@ -283,7 +279,7 @@ cmd_brief() {
 
   cat << EOF
 TASK $ID  [$KIND]
-$TITLE for $(printf '%s' "$U" | jq -r .court_name 2> /dev/null || echo "$AL") ($AL, level: $LEVEL)
+$TITLE for $(jq -r --arg a "$AL" '.courts[$a].name' data/index.json) ($AL, level: $LEVEL)
 Folder (your whole change lives here and nowhere else): $FOLDER/
 Doc type means: $WHAT
 
