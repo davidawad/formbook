@@ -7,7 +7,7 @@ Doc type `answering-brief` of court `ca8`. One self-contained folder: exemplar, 
 | Exemplar (filed, text-based PDF) | `exemplars/FILED-EXAMPLE-banks-v-costar-25-3320-answering-brief.pdf` (source: `exemplars/SOURCE.md`) | yes |
 | Sample markdown | `samples/banks-costar-response.md` | yes |
 | Rendered sample | `samples/banks-costar-response.pdf` (14 pages) | render=ok |
-| Overlay (red = ours, blue = filed) | `samples/OVERLAY-banks-costar-response.pdf`, `samples/banks-costar-response-overlay.txt` | overlay=ok |
+| Overlay (red = ours, blue = filed) | `samples/OVERLAY-banks-costar-response.pdf`, `samples/OVERLAY-banks-costar-response.txt` | overlay=ok |
 | Template | `typst/main.typ` (entry), `typst/ca8-answering-brief.typ` | |
 
 Build (from the repo root; the toolchain is typst 0.15.0, poppler, ImageMagick):
