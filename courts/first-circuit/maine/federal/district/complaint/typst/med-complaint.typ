@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // the only font vendored in fonts/ (README.md, known gaps)
+#let font-family = "EB Garamond"        // no face named by D. Me. LR 10(b)(1), so docs/FONTS.md "No face named": EB Garamond (README.md)
 #let type-size = 13pt                   // LR 10(b)(1): 12-point or larger. 13 pt EB Garamond has about the x-height of 12 pt Times, the face in the filed exemplars (README.md)
 #let page-w = 8.5in                     // LR 10(b)(3): 8 1/2 by 11 inches
 #let page-h = 11in
