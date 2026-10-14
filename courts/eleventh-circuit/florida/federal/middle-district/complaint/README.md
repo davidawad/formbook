@@ -7,17 +7,17 @@ Folder: `courts/eleventh-circuit/florida/federal/middle-district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-bracho-cardella-8-26-cv-03113-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-bracho-complaint.md` (the whole 10-page complaint, transcribed from the text layer) |
-| typeface | **BLOCKED: no permitted typeface is vendored.** The template renders in EB Garamond, the only vendored font, as a stand-in. See "Typeface" below. |
-| render | ok: `samples/OUTPUT-bracho-complaint.pdf`, 9 pages, typst 0.15.0, no warnings, vendored font only |
+| typeface | Face required: **Times New Roman** (LR 1.08(b); the filed exemplar is set in Times New Roman). Vendored substitute: **Liberation Serif** (metric-compatible, `docs/FONTS.md`). Metric-compatible. See "Typeface" below. |
+| render | ok: `samples/OUTPUT-bracho-complaint.pdf`, 9 pages (same count as with EB Garamond), typst 0.15.0, no warnings, `pdffonts`: Liberation Serif embedded |
 | overlay | ok: `samples/OVERLAY-bracho-complaint.pdf` and `OVERLAY-bracho-complaint.txt` |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the font change) |
 
 ## Governing rules
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| M.D. Fla. Local Rule 1.08(a) | 8½ × 11 paper; 1-inch margins; page numbers bottom center (none needed on page one); main text at least 13-point and 2.0 double-spaced; indented quotations at least 12-point single-spaced; footnotes at least 11-point single-spaced; typeface Book Antiqua, Calisto MT, Century Schoolbook, Georgia or Palatino. | `page-margin`, footer in `flmd-complaint()`, `type-size`, `body-leading`. Typeface: see "Typeface" (BLOCKED). |
-| M.D. Fla. Local Rule 1.08(b) | Times New Roman permitted if main text is 14-point, indented quotations 13-point, footnotes 12-point. | `type-size = 14pt`, the Times New Roman size for the main text. |
+| M.D. Fla. Local Rule 1.08(a) | 8½ × 11 paper; 1-inch margins; page numbers bottom center (none needed on page one); main text at least 13-point and 2.0 double-spaced; indented quotations at least 12-point single-spaced; footnotes at least 11-point single-spaced; typeface Book Antiqua, Calisto MT, Century Schoolbook, Georgia or Palatino. | `page-margin`, footer in `flmd-complaint()`, `type-size`, `body-leading`. Typeface: see "Typeface" (Times New Roman under 1.08(b)). |
+| M.D. Fla. Local Rule 1.08(b) | Times New Roman permitted if main text is 14-point, indented quotations 13-point, footnotes 12-point. | `font-family = "Liberation Serif"` (the Times New Roman substitute), `type-size = 14pt`. |
 | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number, and a Rule 7(a) designation. | `court-title`, `caption`, `cover`. |
 | Fed. R. Civ. P. 10(b) | Claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | `allegations()`: each text paragraph is numbered; headings and lists are not. |
 | Fed. R. Civ. P. 8(a) | Short and plain statement of jurisdiction, the claim, and the relief sought. | Author content; the template does not check it. |
@@ -30,7 +30,7 @@ Not produced by this template: the civil cover sheet (JS-44); the Local Rule 3.0
 ## Layout
 
 - Court title centered, single-spaced; caption (parties left with a closing rule, `CASE NO.` right); title centered bold.
-- Body double-spaced (2.0 em baseline pitch), 14-point EB Garamond, 1-inch margins.
+- Body double-spaced (2.0 em baseline pitch), 14-point Liberation Serif, 1-inch margins.
 - Headings: level 1 centered bold caps (the sample writes them in caps); level 2 centered bold under it; level 3 bold italic.
 - Numbered paragraphs 1, 2, ... with a 0.5 inch first-line indent. A chunk starting `~ ` is unnumbered (used for the jury demand).
 - Lists are lettered (a), (b), ...
@@ -42,15 +42,23 @@ Not produced by this template: the civil cover sheet (JS-44); the Local Rule 3.0
 - Body: blank-line-separated chunks. A `#` heading; a list (`1.` items, lettered by the template); a `~ ` unnumbered paragraph; any other text is a numbered paragraph.
 - Not supported: tables, footnotes, raw typst. The sample must not put paragraph numbers in the text.
 
-## Typeface: BLOCKED
+## Typeface
 
-Rule 1.08(a) names Book Antiqua, Calisto MT, Century Schoolbook, Georgia and Palatino; 1.08(b) allows Times New Roman at 14-point. The repo vendors only EB Garamond (`fonts/eb-garamond/`), and the brief bars system fonts and edits to `fonts/`. The template therefore uses EB Garamond at 14 pt as a **stand-in**, which is **not** a rule-compliant typeface. The render is a layout check, not a filing-ready document. To finish the doc type, one of these is needed from David: vendor a permitted face (for example Times New Roman metrics or Book Antiqua under its license) into `fonts/`, then set `font-family` in `typst/flmd-complaint.typ`.
+Rule 1.08(a) names Book Antiqua, Calisto MT, Century Schoolbook, Georgia and Palatino; 1.08(b) permits Times New Roman at 14-point main text. The filed exemplar is set in Times New Roman (embedded `TimesNewRomanPSMT`), so the template follows that face.
+
+- Face required: Times New Roman (LR 1.08(b)).
+- Vendored substitute: **Liberation Serif** (`fonts/liberation-serif/`, SIL OFL 1.1), per the `docs/FONTS.md` table. Metric-compatible with Times New Roman.
+- Typst family name: `Liberation Serif`, set in `typst/flmd-complaint.typ` as `font-family`.
+- Size: 14-point main text, 13-point indented quotations, 12-point footnotes (1.08(b)); the template sets the main text at 14 pt.
+- Page count did not change (9 pages before and after), so the substitute does not move the line breaks.
+
+Liberation Serif is a metric-compatible stand-in, not Times New Roman itself. Visually it is very close; a clerk should see no difference in the render.
 
 ## Known gaps and open choices
 
 1. **One exemplar.** The brief asks for one; EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. Other M.D. Fla. complaints found in the same search (not saved): Geneva Farms, LLC v. Harllee Fruit & Vegetable Inc., 8:26-cv-03115; Louis v. Bellair East HCC, 8:26-cv-03110; Battle v. Truist Financial Corp., 8:26-cv-03076. Tier 2 is not judged against two filers yet.
-2. **Typeface and size.** See "Typeface: BLOCKED." The stand-in has a smaller x-height than Times at 14 pt, so it looks smaller than the exemplar.
-3. **Double spacing.** The template uses a 2.0 em baseline pitch on the EB Garamond line box. Word's "double" on Times New Roman is about 2.3 em. This is an approximation; a permitted face with its own metrics would need its leading re-measured.
+2. **Typeface and size.** See "Typeface." The substitute is metric-compatible, so line breaks match the template's previous render; the exemplar's own line breaks are not reproduced by a template.
+3. **Double spacing.** The template uses a 2.0 em baseline pitch (measured 28.1 pt at 14 pt with Liberation Serif, `pdftotext -bbox`). Word's "double" on Times New Roman is about 2.3 em. This is an approximation kept from the EB Garamond version; it was not re-derived from the substitute's line height.
 4. **Footer.** Page numbers are bottom center from page 2 onward (Rule 1.08(a) requires none on page one).
 5. **Lettered list alignment.** The markers (k) and (l) sit slightly left of (a)–(j) in the render. Cosmetic; not fixed.
 6. **Overlay file names.** `tools/overlay.sh` writes `OVERLAY-<id>.pdf` and `.txt`, not `<id>-overlay.pdf` as the brief lists. The tool was not edited (`tools/` is out of scope), so the tool's names are used. The render is `OUTPUT-<id>.pdf`, which `tools/render.sh` also writes by default.
@@ -58,16 +66,18 @@ Rule 1.08(a) names Book Antiqua, Calisto MT, Century Schoolbook, Georgia and Pal
 8. **Excerpt.** The sample is the whole complaint. The e-filing header ("Case 8:26-cv-03113 Document 1 Filed ... Page n of 10") is not transcribed; it is added by the clerk, not by the filer.
 9. **Typographic details not asserted.** Justification (the exemplar is ragged-right in the text layer), the exemplar's use of italics (not visible in the text layer), and FRCP 5.2 redaction (none needed in this sample).
 
-## Review of the rendered pages (current PDF, 60 dpi)
+## Review of the rendered pages (current PDF, 60 dpi, after the Liberation Serif change)
 
-- Page 1: court title single-spaced; caption; title; lead-in with indent; paragraph 1 starts "JURISDICTION AND VENUE". Pass.
-- Page 2: paragraphs 2 to 9; PARTIES heading centered. Pass.
-- Page 3: paragraphs 10 to 12, FACTS heading, paragraph 13. Pass.
-- Page 4: paragraphs 14 to 25, COUNT I and its sub-heading kept with paragraph 22. Pass.
-- Page 5: paragraphs 26 to 31, COUNT II heading. Pass.
-- Page 6: paragraphs 32 to 38, COUNT III heading. Pass.
-- Page 7: paragraphs 39 to 44, STATE LAW CLAIMS, COUNT IV heading. Pass.
-- Page 8: paragraphs 44 to 47, DAMAGES heading, list (a) to (i). Pass.
-- Page 9: list (j) to (l), DEMAND FOR JURY TRIAL (unnumbered), date line, signature block. Pass.
+Every page was rendered with `pdftoppm -r 60`, montaged two per image, and viewed. Result below.
 
-Re-check after the last template change: the caption column was narrowed and the paragraph indent moved to explicit spacing; the full 9 pages were re-rendered and checked as a montage. No overflow, no orphaned headings.
+- Page 1: court title single-spaced; caption; title; lead-in with indent; JURISDICTION AND VENUE; paragraphs 1 and 2. Pass.
+- Page 2: paragraphs 3 to 9; PARTIES heading centered. Pass.
+- Page 3: paragraphs 10 to 12. Pass.
+- Page 4: FACTS heading, paragraphs 13 to 21; COUNT I and its sub-heading with paragraphs 22 to 24. Pass.
+- Page 5: paragraphs 25 to 31; COUNT II heading. Pass.
+- Page 6: paragraphs 32 to 37; COUNT III heading with paragraphs 34 to 37. Pass.
+- Page 7: paragraphs 38 to 43; STATE LAW CLAIMS, COUNT IV heading. Pass.
+- Page 8: paragraphs 44 to 47, DAMAGES heading, list (a) to (e). Pass.
+- Page 9: list (f) to (l), DEMAND FOR JURY TRIAL (unnumbered), date line, signature block. Pass.
+
+No overflow, no orphaned headings. Caption, headings and signature block are as before the font change.
