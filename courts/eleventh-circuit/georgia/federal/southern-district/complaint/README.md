@@ -9,7 +9,8 @@ Folder: `courts/eleventh-circuit/georgia/federal/southern-district/complaint/`.
 | sample md | `samples/INPUT-atlantic-casualty-complaint.md`: full text of the 15-page complaint (caption, paragraphs 1 to 47, prayer, signature). Exhibits A to E are not transcribed. |
 | render | ok: `samples/OUTPUT-atlantic-casualty-complaint.pdf`, 8 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings |
 | overlay | ok: `samples/OVERLAY-atlantic-casualty-complaint.pdf` and `samples/OVERLAY-atlantic-casualty-complaint.txt` (page map) |
-| pages reviewed | 8 of 8 (every page rasterized at 60 dpi and viewed; page 1 was last viewed before the last body edits, which do not touch it) |
+| typeface | face required: none named by the S.D. Ga. rules (LR 5.4, LR 10.1, LR 83.6; text checked 2026-10-14). Substitute: none; EB Garamond kept, since the court names no face (`docs/FONTS.md`). Fit: n/a |
+| pages reviewed | 8 of 8 (re-rendered and every page rasterized at 70 dpi and viewed on 2026-10-14) |
 
 File names: the brief asked for `samples/<id>.md`, `samples/<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` read and write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` by default, so the tool names are used. `tools/` was not edited.
 
@@ -33,7 +34,7 @@ Not verified in this pass: FRCP 8(a) (the template does not check its content); 
 ### Currency of the local rules (for David to confirm)
 
 - The text above is the **June 2016** printable local rules. The court's website publishes a Notice of Opportunity for Comment (dated 2026-03-23) on proposed amendments with a comment period ending 2026-04-22. The proposed text (`SDGA_2026_Local_Rule_Proposed.pdf`) has a blank effective date. It was read but not confirmed as adopted. Its LR Civ. 3A (civil cover sheet) and LR Civ. 7 (brief length: 25 pages handwritten, 6,500 words typed) differ from the 2016 text; nothing in the complaint template depends on those.
-- No S.D. Ga. rule found sets a typeface, type size, or margins. The 2016 text has none; the proposed text has none in the parts read. The template uses EB Garamond at 12 pt and 1-inch margins, the usual practice and what the exemplar's filer uses: the exemplar is set in Times New Roman (`pdffonts`), which EB Garamond approximates; EB Garamond has a smaller x-height at 12 pt, so the text looks smaller than the exemplar. These values are choices, not rule-driven, and they are recorded as such in `typst/gasd-complaint.typ`.
+- No S.D. Ga. rule sets a typeface, type size, or margins. Checked 2026-10-14 against the 2016 text (extracted with `pdftotext`): LR 5.4 sets paper size only, LR 10.1 says "double-spaced, be numbered on each page", and LR 83.6 concerns attorney appearance. The proposed text has none in the parts read. The template uses EB Garamond at 12 pt and 1-inch margins, the usual practice and what the exemplar's filer uses: the exemplar is set in Times New Roman (`pdffonts`), which EB Garamond approximates; EB Garamond has a smaller x-height at 12 pt, so the text looks smaller than the exemplar. These values are choices, not rule-driven, and they are recorded as such in `typst/gasd-complaint.typ`.
 
 ## Layout
 
