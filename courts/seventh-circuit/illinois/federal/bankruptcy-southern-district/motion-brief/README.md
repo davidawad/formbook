@@ -2,7 +2,7 @@
 
 Doc type: **brief in support of a motion** (here, a brief supporting a motion to dismiss an adversary complaint, the case L.R. 9013-5(A) names). Court: United States Bankruptcy Court for the Southern District of Illinois (ilsb). Folder: `courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief/`.
 
-Status: **BLOCKED: no exemplar.** exemplar=no, render=ok (fictional sample), overlay=fail (no exemplar PDF to overlay against), pages reviewed 4 of 4 (the fictional sample, final render). The template is built from the rules. No `court.json` status is set here; nothing in this folder sets `status`.
+Status: exemplar=yes (one filed exemplar, Gargula v. Deighan Law LLC, Adv. 20-06018, Doc 15-1, a memorandum in support of a motion; see `exemplars/SOURCE.md`), render=ok (`samples/OUTPUT-gargula-motion-brief.pdf`, 10 pages), overlay=ok (`samples/OVERLAY-gargula-motion-brief.pdf`, `.txt` page map), pages reviewed 10 of 10 (every page rendered at 70 dpi and looked at). Open: a second filer for the tier-2 comparison (see `exemplars/SOURCE.md`). No `court.json` status is set here; nothing in this folder sets `status`.
 
 ## Governing rules
 
@@ -26,13 +26,13 @@ Not generated, on purpose: the motion itself (a separate document); a proposed o
 
 ## Exemplar
 
-**None found.** See `exemplars/SOURCE.md` for the searches (CourtListener RECAP search with the `is_available` check, web search, the court's own documents). Every brief in support of a motion found in S.D. Ill. dockets is listed as an attachment or docket entry with no RECAP copy. The rules and court guides do not settle the layout, so the template follows the caption and signature rules above and the adversary complaint folder's conventions.
+**One filed exemplar:** `exemplars/FILED-EXAMPLE-gargula-deighan-20-06018-motion-brief.pdf`, the memorandum in support of the defendants' motion to withdraw the reference (Adv. 20-06018, Doc 15-1, filed 04/12/21), from CourtListener RECAP. It is a brief supporting a motion, the doc type here. Its caption is not on the attachment's first page; the sample's caption is copied from the same adversary's Doc 18. The filing has no certificate of service. Full provenance, the searches and the gaps are in `exemplars/SOURCE.md`.
 
-BLOCKED: no exemplar. A text-based, public copy of a brief in support of a motion to dismiss in an S.D. Ill. adversary proceeding is needed (for example, Gargula v. Deighan Law LLC, Adv. No. 20-03052-lkg, Doc 5, attachment 1, from PACER). A second filer is needed for the tier-2 check.
+Tier 2 wants two or three filers; one is saved. The second candidate (Naumann, 09-32092, Doc 35, a brief supporting an objection to confirmation) is in `exemplars/SOURCE.md`, not saved.
 
 ## Sample
 
-- `samples/INPUT-generic-motion-brief.md` is **fictional**. It was written from the rules alone to exercise every part of the template: the caption, the separate-brief title, headings at three levels, a block quotation, a footnote, a bulleted list, the signature and attorney blocks, and the certificate of service. Names, numbers and dates are invented. It is not a transcription and not a visual reference for an S.D. Ill. brief.
+- `samples/INPUT-gargula-motion-brief.md` is a **transcription** of the filed exemplar: pages 1 to 10 (through Argument V.A.3), then the Conclusion and signature (pages 19 and 20). The middle of the filing (V.A.4 to V.C) is omitted, and the sample says so in a visible note. Caption fields are from the same adversary's Doc 18 (see `exemplars/SOURCE.md`). The earlier fictional sample (`INPUT-generic-motion-brief.md`) was removed.
 - Frontmatter fields: `title`, `division`, `debtors`, `debtor_designation`, `bankruptcy_case_no`, `chapter`, `adversary_no`, `caption.parties`, `date`, `signature` (`party`, `signer`, `signer_title`, `attorney`), `service` (`statement`, `parties`, `signature`).
 - Body markdown: `# Heading` centered bold capitals; `## Heading` centered bold; `### Heading` bold, left. The author types any numbering (I., A., 1.). Paragraphs are not numbered and have a first-line indent. `> text` is a single-spaced block quotation. `- item` is a bullet list. `text[^key]` and `[^key]: text` make a footnote.
 
@@ -40,33 +40,42 @@ BLOCKED: no exemplar. A text-based, public copy of a brief in support of a motio
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief samples/INPUT-generic-motion-brief.md
+sh tools/render.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief samples/INPUT-gargula-motion-brief.md
+sh tools/overlay.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief gargula-motion-brief
 ```
 
 - `typst/main.typ` is the entry point; `typst/ilsb-motion-brief.typ` is the template (EB Garamond, vendored; `--ignore-system-fonts`; any typst warning fails). The render compiled with no warnings.
-- `samples/OUTPUT-generic-motion-brief.pdf`: 4 pages. `pdffonts`: EBGaramond-Regular and -Bold, embedded.
-- No overlay: `tools/overlay.sh` compares against an exemplar PDF in `exemplars/`, and there is none. It was not run.
+- `samples/OUTPUT-gargula-motion-brief.pdf`: 10 pages. The overlay pairs sample pages 1 to 9 with filed pages 1 to 9 and sample page 10 with filed page 19 (word overlap 56% to 86%; 31% for page 10, where the filed conclusion follows omitted text).
+- `samples/OVERLAY-gargula-motion-brief.pdf` (red = render, blue = filed exemplar, black = both) and `OVERLAY-gargula-motion-brief.txt` (page map).
 
-Naming: `tools/render.sh` writes `samples/OUTPUT-<id>.pdf` (the repo's tool name), not the `<id>.pdf` name in the brief. The tools were not edited.
+Naming: `tools/render.sh` writes `samples/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `samples/OVERLAY-<id>.pdf` and `.txt` (the repo's tool names). The tools were not edited.
 
-## Visual review (Gate 2, all 4 pages rendered at 60 dpi and looked at, final render)
+## Visual review (Gate 2: every page rendered at 70 dpi and looked at)
+
+Pages 1 to 9 were viewed in the render before the signature fix and are unchanged by it. Page 10 was viewed in the render before and after the fix.
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Court title, caption, title of the brief, Introduction, Background A, footnote 1 at foot | OK. Footnote renders at the foot of its page (it did not, in an earlier render, because footnote definitions were rendered apart from the paragraph that cites them; fixed). |
-| 2 | Background A (continued), B, Argument I with a block quotation and II with a bullet list, Conclusion | OK. Heading sizes and levels as in the frontmatter. |
-| 3 | Signature block alone on the page | Acceptable but not ideal: the Conclusion sits on page 2 and the signature block (not breakable) moves to page 3. Not fixed. A convention choice (see gaps). |
-| 4 | Certificate of service | OK. |
+| 1 | Court title, caption (copied from Doc 18), title, Overview; footnotes 1 and 2 | Caption is template-only: the filed attachment has none (see SOURCE.md). Typeface differs (EB Garamond, not Times). Footnote 1 is attached to the first sentence, not the title. Otherwise OK. |
+| 2 | Overview (continued), Procedural Posture; footnotes 3 to 5 | OK. Footnote numbering matches the filing. |
+| 3 | Procedural Posture (continued), Part III; footnotes 6 to 14 | OK. |
+| 4 | Part III (continued); footnotes 15 to 22 | OK. |
+| 5 | Part III (continued), Part IV starts on page 6; footnotes 23 to 28 | OK. |
+| 6 | Part IV (Legal Standard) | OK. |
+| 7 | Argument V.A and A.1; block quotation (Dimick) | The paragraph after the block quotation (the Dimick citation) takes a first-line indent; in the filing it is flush left, as a continuation. Markup has no "continuation" paragraph. Accepted. |
+| 8 | Block quotation (Granfinanciera test); A.2 | Same as page 7 for the paragraph after the quotation. Otherwise OK. |
+| 9 | A.2 (continued), A.3; footnote 29 | OK. The transcription note (italic, before the Conclusion) is on page 10. |
+| 10 | Transcription note; Conclusion; signature | **Fixed.** Before: the attorney block sat full-width at left, and the signer line had a stray comma ("Mark T. Lavery,"). After: the attorney block sits in the signature column under the signature, as in the filing, and the comma is gone (`typst/ilsb-motion-brief.typ`, `signature-block`). Also OK: the Armgardt block follows the Lavery block with a gap. |
 
-Reviewed pages: 4 of 4.
+Reviewed pages: 10 of 10.
 
 ## Known gaps and open choices
 
-1. **BLOCKED: no exemplar.** See above. Overlay not run. Tier-2 review not possible.
+1. **One exemplar, not two.** Tier 2 (a clerk's conventions, judged against two or three filers) needs a second filer; see `exemplars/SOURCE.md` for the candidate not saved. The caption of the exemplar is not in the filing (copied from the same adversary's Doc 18). The filing has no certificate of service, so the sample does not test that block.
 2. **Typeface, type size, margins.** No S.D. Ill. rule names them. EB Garamond 12 pt, 1-inch margins and double spacing are style choices, the same as the adversary complaint folder.
 3. **20-page limit (L.R. 9013-5(F)).** Not counted. The author must check the length, excluding the signature page and attachments.
 4. **Citations (L.R. 9013-5(D)).** The rule requires citations to the authorities relied on. The template does not check them. Authorities are the author's.
-5. **Signature alone on a page** (page 3 of the sample). The signature block is kept whole, so it can move to a page of its own. Keeping the last paragraph with it would fix this; not done.
+5. **Signature alone on a page.** The signature block is kept whole, so it can move to a page of its own. The filed exemplar's Conclusion and signature fall on pages 19 and 20 of its own paging; in the sample they sit on one page with the Conclusion. Keeping the last paragraph with the block would still prevent a stranded block; not done.
 6. **Certificate of service.** Generated only when `service:` is in the frontmatter. The statement and recipients are the author's text. L.R. 9013-2(A) requires it for papers under Rules 9013 and 9014; the template does not check that the certificate is present for a given filing.
 7. **Motion and proposed order** are separate filings and not produced (L.R. 9013-1(A), 9013-4).
 8. **Tables of contents and authorities** are not generated (no rule requires them for an S.D. Ill. brief).
