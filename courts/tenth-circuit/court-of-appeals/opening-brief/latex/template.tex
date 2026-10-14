@@ -1,0 +1,288 @@
+% U.S. Court of Appeals for the Tenth Circuit: appellant's opening brief (LaTeX engine).
+% Matches typst/ca10-opening-brief.typ. Built by tools/render-latex.sh: pandoc --template with the
+% variable fontdir, the filter ca10-opening-brief.lua, then tectonic (two passes resolve the TOC and TOA).
+% Rule IDs (CA10-...) are in ../README.md, "Governing rules".
+\documentclass[12pt,letterpaper]{article}
+\makeatletter
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage{enumitem}
+
+% ---- type: EB Garamond from the vendored fonts only (CA10-FORM-002) ----
+\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf, UprightFont=EBGaramond-Regular, BoldFont=EBGaramond-Bold,
+  ItalicFont=EBGaramond-Italic, BoldItalicFont=EBGaramond-BoldItalic]{EBGaramond-Regular}
+
+% 14-point everywhere, double spaced (CA10-FORM-001); the line pitch matches the typst template.
+\renewcommand\normalsize{\@setfontsize\normalsize{14pt}{31.43pt}}
+\renewcommand\footnotesize{\@setfontsize\footnotesize{14pt}{20pt}}
+\renewcommand\small{\@setfontsize\small{14pt}{20pt}}
+\renewcommand\large{\@setfontsize\large{14pt}{31.43pt}}
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0.94em}
+\setlength{\footnotesep}{0.5em}
+\setlength{\skip\footins}{0.9em}
+\raggedright
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\sloppy
+\renewcommand{\footnoterule}{\kern-0.3em\hrule width 30\textwidth height 0.5pt\kern0.4em}
+\long\def\@makefntext#1{\noindent\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\pandocbounded}[1]{#1}
+
+% ---- block quotations: indented 0.5 in both sides, single spaced ----
+\renewenvironment{quote}{\par\begingroup\leftskip=0.5in\rightskip=0.5in\parindent=0pt
+  \fontsize{14pt}{20pt}\selectfont\addvspace{0.9em}}{\par\addvspace{0.9em}\endgroup}
+
+% ---- headings (typst style-heading) ----
+\newlength{\ctentab}\setlength{\ctentab}{0.5in}
+\newcommand{\ctendots}{\nobreak\dotfill\nobreak\hspace{0.3em}}
+
+% Section (level 1): bold capitals, centred, 1.15 x body size.
+\newcommand{\ctensection}[2]{%
+  \par\needspace{4\baselineskip}\addvspace{1.5em}%
+  \begingroup\centering\bfseries\fontsize{16.1pt}{19pt}\selectfont\MakeUppercase{#1}\par\endgroup
+  \addcontentsline{toc}{ctenha}{\ctentocline{0}{}{#2}}%
+  \nopagebreak\addvspace{1.1em}\nopagebreak}
+
+% Argument point (level 2 in the Argument): bold small capitals, centred.
+\newcommand{\ctenpoint}[3]{%
+  \par\needspace{4\baselineskip}\addvspace{1.2em}%
+  \begingroup\centering\bfseries\addfontfeature{Letters=SmallCaps}#1~#2\par\endgroup
+  \addcontentsline{toc}{ctenhb}{\ctentocline{0}{#1}{#3}}%
+  \nopagebreak\addvspace{1em}\nopagebreak}
+
+% Sub-heading: label in a 0.5 in box at its indent, text hangs under the text.
+% #1 level, #2 indent in inches, #3 label, #4 text, #5 plain text for the TOC, #6 style.
+\newcommand{\ctensub}[6]{%
+  \par\needspace{3\baselineskip}\addvspace{1.1em}\noindent
+  \begingroup#6\hangindent=\dimexpr#2in+\ctentab\relax\hangafter=1\relax
+  \hspace*{#2in}\makebox[\ctentab][l]{#3}#4\par\endgroup
+  \addcontentsline{toc}{ctenh#1}{\ctentocline{#2}{#3}{#5}}%
+  \nopagebreak\addvspace{0.9em}\nopagebreak}
+
+% TOC lines: label and title with the label's indent. (\ctentocline arguments: indent, label, title.)
+\newcommand{\ctentocline}[3]{\hspace*{#1in}\makebox[\ctentab][l]{#2}#3}
+
+
+% Table of contents lines: \addcontentsline{toc}{ctenhN}{...} reaches \l@ctenhN with the entry and its page.
+\newcommand*\l@ctenha[2]{\par\addvspace{0.6em}\noindent{\bfseries#1}\ctendots#2\par}
+\newcommand*\l@ctenhb[2]{\par\addvspace{0.35em}\noindent#1\ctendots#2\par}
+\newcommand*\l@ctenhc[2]{\par\addvspace{0.35em}\noindent#1\ctendots#2\par}
+\newcommand*\l@ctenhd[2]{\par\addvspace{0.35em}\noindent#1\ctendots#2\par}
+\newcommand*\l@ctenhe[2]{\par\addvspace{0.35em}\noindent#1\ctendots#2\par}
+% Front-matter and back-matter titles printed by the template (not in the body markdown).
+\newcommand{\ctentitle}[1]{%
+  \par\needspace{4\baselineskip}\addvspace{1.5em}%
+  \begingroup\centering\bfseries\fontsize{16.1pt}{19pt}\selectfont\MakeUppercase{#1}\par\endgroup
+  \nopagebreak\addvspace{1.1em}\nopagebreak}
+\newcommand{\ctenlistedtitle}[1]{%
+  \ctentitle{#1}\addcontentsline{toc}{ctenha}{\ctentocline{0}{}{#1}}}
+
+% ---- table of authorities (typst toa-section) ----
+\newcount\cteni
+\newcount\ctencnt
+\newcommand{\ctentoagroup}[2]{%
+  \par\needspace{3\baselineskip}\ifnum#2=1 \addvspace{1em}\else\addvspace{1.4em}\fi
+  \noindent\textbf{#1}\ifnum#2=1 \hfill\underline{\textbf{Page(s)}}\fi\par\nobreak\addvspace{0.2em}\nobreak}
+\newcommand{\ctentoaentry}[4]{%
+  \par\needspace{3\baselineskip}\addvspace{0.7em}\noindent\begingroup\hangindent=0.35in\hangafter=1\relax
+  \def\ctenname{#1}%
+  \ifx\ctenname\@empty\else#1,\\\fi
+  #2\ \ctendots\ctenpages{#3}{#4}\par\endgroup}
+% Pages of one authority: the label of each citation, in order, duplicates on one page merged;
+% "passim" from seven pages on (typst passim-threshold).
+\newcommand{\ctenpages}[2]{%
+  \cteni=1 \ctencnt=0 \def\ctenlist{}\def\ctenprev{}%
+  \ctenwalk{#1}{#2}%
+  \ifnum\ctencnt<7 \ctenlist\else\emph{passim}\fi}
+\newcommand{\ctenwalk}[2]{%
+  \ifnum\cteni>#2\relax\else
+    \protected@edef\ctencur{\pageref{cten-toa-#1-\the\cteni}}%
+    \ifx\ctencur\ctenprev\else
+      \ifnum\ctencnt=0 \protected@edef\ctenlist{\ctencur}\else\protected@edef\ctenlist{\ctenlist, \ctencur}\fi
+      \advance\ctencnt by 1
+      \protected@edef\ctenprev{\ctencur}%
+    \fi
+    \advance\cteni by 1
+    \ctenwalk{#1}{#2}%
+  \fi}
+
+% ---- cover (typst cover; FRAP 32(a)(2); 10th Cir. R. 28.2(C)(1)-(2)) ----
+\newcommand{\ctendoublerule}{\par\nointerlineskip\noindent\vbox{\hbox{\rule{\textwidth}{1.6pt}}\kern2.5pt\hbox{\rule{\textwidth}{0.5pt}}}\par\nointerlineskip}
+\newcommand{\ctenshortrule}{\par\nointerlineskip\noindent\hbox to\textwidth{\hfill\rule{2in}{0.7pt}\hfill}\par\nointerlineskip}
+\newenvironment{ctencenter}{\par\centering}{\par}
+\newcommand{\ctengap}{0.3em}
+
+\newcommand{\ctenattachment}[2]{%
+  \par\needspace{2\baselineskip}\addvspace{0.7em}\noindent\begingroup\hangindent=0.35in\hangafter=1\relax
+  #1\ \ctendots Attachment #2\par\endgroup}
+% Table of authorities entry and the groups: written by the Lua filter as \ctentoagroup / \ctentoaentry.
+
+\makeatother
+\begin{document}
+\thispagestyle{empty}
+\begingroup\fontsize{14pt}{20pt}\selectfont\setlength{\parskip}{0pt}
+\begin{ctencenter}\textbf{No. $case_number$}\end{ctencenter}
+\vspace{\ctengap}
+\ctendoublerule
+\vspace{\ctengap}
+\begin{ctencenter}
+\textbf{IN THE UNITED STATES COURT OF APPEALS\\ FOR THE TENTH CIRCUIT}
+\end{ctencenter}
+\vspace{\ctengap}
+\ctenshortrule
+\vspace{\ctengap}
+\begin{ctencenter}
+$for(caption)$
+$for(caption.names)$$caption.names$\\
+$endfor$
+\hspace*{0.5\textwidth}\parbox[t]{0.5\textwidth}{\raggedright $caption.designation$}
+$sep$\\[0.5em]v.\\[0.5em]
+$endfor$
+\end{ctencenter}
+\vspace{\ctengap}
+\ctenshortrule
+\vspace{\ctengap}
+\begin{ctencenter}
+$proceeding$\par
+$judge$\\
+Case No. $district_court_case$
+\end{ctencenter}
+\vspace{\ctengap}
+\ctenshortrule
+\vspace{\ctengap}
+\begin{ctencenter}
+\textbf{\MakeUppercase{$brief_title$}}
+\end{ctencenter}
+\vspace{\ctengap}
+\ctenshortrule
+\vspace{\ctengap}
+\begin{flushleft}
+\hspace*{0.5\textwidth}\begin{minipage}[t]{0.5\textwidth}\raggedright
+$for(counsel)$
+$for(counsel.names)$
+$counsel.names$\\
+$endfor$
+$for(counsel.lines)$
+\hspace*{0.5em}\emph{$counsel.lines$}\\
+$endfor$
+\vspace{0.2em}
+$endfor$
+\end{minipage}
+\end{flushleft}
+\vspace{\ctengap}
+\begin{ctencenter}
+\textbf{$if(oral_requested)$ORAL ARGUMENT REQUESTED$else$ORAL ARGUMENT NOT REQUESTED$endif$}
+\end{ctencenter}
+\ctendoublerule
+\endgroup
+
+% ---- front matter: contents, authorities, prior appeals (lowercase roman, cover unnumbered) ----
+\clearpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+\pagestyle{fancy}
+\begin{ctencenter}\bfseries\fontsize{16.1pt}{19pt}\selectfont TABLE OF CONTENTS\par\end{ctencenter}
+\nopagebreak\addvspace{0.2em}
+\begin{flushright}\underline{\textbf{Page}}\end{flushright}
+\nopagebreak
+\makeatletter\@starttoc{toc}\makeatother
+\clearpage
+\ctenlistedtitle{TABLE OF AUTHORITIES}
+$toa$
+\clearpage
+\ctenlistedtitle{STATEMENT OF PRIOR OR RELATED APPEALS}
+\noindent $prior_appeals$
+
+% ---- body (arabic from 1) ----
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+$body$
+
+% ---- signature block (typst signature-block) ----
+\par\needspace{8\baselineskip}\addvspace{1.4em}\noindent
+\begingroup\raggedright
+\hspace*{0.5\textwidth}\begin{minipage}[t]{0.5\textwidth}
+Respectfully submitted,\par
+\vspace{1.2em}
+/s/ $signature.signer$\\
+$signature.signer$\\
+$for(signature.lines)$
+\hspace*{0.5em}\emph{$signature.lines$}\\
+$endfor$
+\end{minipage}
+\endgroup
+$if(date)$\par\vspace{0.8em}\noindent Dated: $date$\par$endif$
+
+% ---- statement in support of oral argument (10th Cir. R. 28.2(C)(2)) ----
+$if(oral_requested)$
+\clearpage
+\ctenlistedtitle{STATEMENT IN SUPPORT OF ORAL ARGUMENT}
+\noindent $oral_argument_statement$
+$endif$
+
+% ---- certificate of compliance (FRAP 32(g)(1)) ----
+\clearpage
+\ctenlistedtitle{CERTIFICATE OF COMPLIANCE}
+\noindent This brief complies with the type-volume limitation of Federal Rule of Appellate Procedure 32(a)(7)(B), because it contains $words$ words, which is no more than the $word_limit$ words permitted for a principal brief, excluding the parts of the brief exempted by Federal Rule of Appellate Procedure 32(f).
+
+\noindent The brief also complies with the typeface requirements of Federal Rule of Appellate Procedure 32(a)(5) and the type style requirements of Federal Rule of Appellate Procedure 32(a)(6), because it has been prepared in a proportionally spaced typeface, EB Garamond, in 14-point type.
+\par\needspace{8\baselineskip}\addvspace{1.6em}
+\hspace*{0.5\textwidth}\begin{minipage}[t]{0.5\textwidth}
+/s/ $signature.signer$\\
+$signature.signer$\\
+$for(signature.lines)$
+\emph{$signature.lines$}\\
+$endfor$
+$date$
+\end{minipage}
+
+% ---- certificate of digital submission and certificate of service (FRAP 25(a)(5), 25(d); 10th Cir. R. 25.4, 25.5) ----
+\clearpage
+\ctenlistedtitle{CERTIFICATE OF DIGITAL SUBMISSION}
+\noindent I hereby certify that with respect to the foregoing:
+\begin{enumerate}[label=(\arabic*), leftmargin=1.6em, itemsep=0.8em, parsep=0pt, topsep=0.8em]
+\item all required privacy redactions have been made per Fed. R. App. P. 25(a)(5) and 10th Cir. R. 25.5;
+\item that this document is a native PDF document;
+\item that the ECF submission is an exact copy of those documents;
+\item the digital submission has been scanned for viruses with the most recent version of a commercial virus scanning program, $digital_submission.scanner$, last updated on $digital_submission.updated$; and
+\item according to the program, this document is free of viruses.
+\end{enumerate}
+\par\needspace{8\baselineskip}\addvspace{1.6em}
+\hspace*{0.5\textwidth}\begin{minipage}[t]{0.5\textwidth}
+/s/ $signature.signer$\\
+$signature.signer$\\
+$for(signature.lines)$
+\emph{$signature.lines$}\\
+$endfor$
+\end{minipage}
+
+\ctenlistedtitle{CERTIFICATE OF SERVICE}
+\noindent I hereby certify that on $date$, pursuant to Fed. R. App. P. 25 and 10th Cir. R. 25.4, I electronically filed the foregoing using the Court’s CM/ECF system, which in turn caused electronic notifications of such filing to be sent to all counsel of record.
+\par\needspace{8\baselineskip}\addvspace{1.6em}
+\hspace*{0.5\textwidth}\begin{minipage}[t]{0.5\textwidth}
+/s/ $signature.signer$\\
+$signature.signer$\\
+$for(signature.lines)$
+\emph{$signature.lines$}\\
+$endfor$
+$date$
+\end{minipage}
+
+% ---- index of attachments (10th Cir. R. 28.2(C)(5)) ----
+\clearpage
+\ctenlistedtitle{INDEX OF ATTACHMENTS}
+$attachments_tex$
+
+\end{document}
