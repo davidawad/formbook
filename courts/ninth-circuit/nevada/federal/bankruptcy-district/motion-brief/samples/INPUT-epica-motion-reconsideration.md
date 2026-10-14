@@ -133,6 +133,8 @@ If the Petitioning Creditors had notice that the Court would apply a Rule 12(b)(
 
 For the foregoing reasons, Devdend respectfully requests that this Court grant this Motion and vacate the portion of the Memorandum Decision granting summary judgment on the issue of Devdend's qualifications as a petitioning creditor; and for such other proper relief.
 
+[signature]
+
 # CERTIFICATE OF SERVICE
 
 On July 16, 2026, the foregoing document was served via ECF automated system to all parties registered with ECF in this case on the date and time I filed the document with the Court's ECF system.
@@ -140,9 +142,7 @@ On July 16, 2026, the foregoing document was served via ECF automated system to 
 I declare under penalty of perjury that the foregoing is true and correct.
 
 [sig] Dated July 16, 2026.
-
 [sig] /s/ Norma Guariglia
-
 [sig] Norma Guariglia
 
 [^1]: Because of the related nature of the cases, the combined hearing on relevant matters, and the similarities in the Memorandum Decision entered in each case, an almost identical motion was filed in the related case of Epica International, Inc., Case No. 26-50580-gs ("Epica"). References in this motion to "Petitioning Creditors" refers to Devdend LLC, Advanced Imaging, LLC, Sanjeev Kaila, M.D., e-Possible, Inc., South Florida Veterinary Medical Services, LLC, Mobile Pet Imaging, LLC, Texas Avian & Exotic Hospital, PLLC, and Laurel Oaks Veterinary Center LLC.

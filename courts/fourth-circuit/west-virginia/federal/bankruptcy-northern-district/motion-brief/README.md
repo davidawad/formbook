@@ -2,60 +2,121 @@
 
 Doc type: **motion with memorandum of law** in an adversary proceeding (FRBP 9013; LBR 9013-1(b)). Court: United States Bankruptcy Court for the Northern District of West Virginia. Folder: `courts/fourth-circuit/west-virginia/federal/bankruptcy-northern-district/motion-brief/`.
 
-**BLOCKED: no exemplar.** No filed motion with memorandum from this court was found after the searches listed in `exemplars/SOURCE.md`. The template is built from the rules below, and the sample is fictional. The overlay cannot run without an exemplar PDF.
+Status: exemplar=yes (one filer), render=ok (typst, no warnings, both samples), overlay=ok (`tools/overlay.sh` exit 0, 11 pages paired), pages reviewed 15 (every page of both renders, rendered at 70 dpi as PNG and viewed). Nothing here sets `status` in `court.json`.
 
-Status: exemplar=no, render=ok (typst, no warnings), overlay=fail (`tools/overlay.sh` exits 1: "no exemplar pdf"), pages reviewed 4 of 4 (rendered at 60 dpi and viewed). Nothing here sets `status` in `court.json`.
+Tier 2 is **not** closed: one filer is not the 2-3 the eval loop asks for, and the open findings are listed under "Known gaps". Nothing in this folder is marked done.
 
 ## Governing rules
 
-Dates: rules text fetched and read 2026-10-14. "Local rules" means the N.D. W. Va. Local Bankruptcy Rules text, which is the November 21, 2003 version (the only copy the court publishes that could be retrieved). It may have been amended since, and no current text was found.
+Verified this pass against the court's own local rules PDF, `https://www.wvnb.uscourts.gov/sites/wvnb/files/local_rules/Local%20Rules.pdf` (146 pp.; cover reads "Effective Date: November 21.2003"; fetched 2026-10-14). That PDF is the only copy of the N.D. W. Va. local bankruptcy rules this pass could retrieve. It may have been amended since; the court's current text was not found.
+
+FRBP 9013 and the Federal Rules are cited from their public texts (Cornell LII, fetched 2026-10-14, carried over from the earlier pass; not re-fetched this pass).
 
 | ID | Rule | Requirement | Source (URL) | Where it lives in the template |
 |---|---|---|---|---|
-| WVNB-MOT-001 | FRBP 9013 | A request for an order is made by written motion. The motion states its grounds with particularity and sets forth the relief requested. | https://www.law.cornell.edu/rules/frbp/rule_9013 (fetched 2026-10-14; eff. Dec. 1, 2024) | Title; "Relief Requested" section (sample). The template does not check grounds. |
-| WVNB-MOT-002 | LBR 9013-1(b) | Motions in adversary proceedings are governed principally by FRCP 5 and 7 and by FRBP 7005 and 7007. | local rules p. 59 (2003 text) | Whole template. FRBP 7005 and 7007 text not fetched. |
-| WVNB-MOT-003 | LBR 9013-1(c)(2)(B) | Negative notice: "...an order may be entered granting the relief sought unless a specific written objection is filed within ____ days of the date of the mailing of this notice." | local rules pp. 59–60 (2003 text; Appendix G-2) | Boxed notice on page 1; days and date come from the sample. The 21-day figure in the sample is illustrative, not checked against the rules for this motion type. |
-| WVNB-MOT-004 | LBR 9013-1(c)(2)(C) | Some motion types must carry a movant-prepared notice with a fixed negative-notice period (e.g. motion to avoid lien, 20 days, LBR 4003-2). | local rules pp. 59–60 (2003 text) | **Not generated.** The template prints whatever notice the sample gives. Known gap for those types. |
-| WVNB-MOT-005 | LBR 9013-1(c)(1) | A proposed order accompanies a motion when appropriate, without the firm name. | local rules p. 59 (2003 text) | **Not generated.** Known gap. |
-| WVNB-MOT-006 | LBR 9013-1(c)(3); LBR 5005-4.10 | A certificate of service is used when required; the notice rules do not replace service on interested parties; if the whole creditor body is served, the certificate may say so. | local rules pp. 60 (2003 text) | `certificate-of-service()` on its own page, from frontmatter `service`. The "mailing matrix" wording is not generated; the sample writes its own list. |
-| WVNB-MOT-007 | FRCP 10(a) and FRBP 9004(b), FRBP 7010 | Caption, as for the complaint. | see `adversary-complaint/README.md` | `court-caption()`. |
-| WVNB-FMT-001 | LBR 9004-1 (search-result excerpt only, not verified) | Font not less than 10 pt; spacing not more than double and not less than single; (excerpt also gives a 25-page limit for motions, briefs and memoranda). | https://www.courtrules.net/courts/federal/bankruptcy-northern-district-west-virginia/local-rules/7166 (HTTP 403; excerpt from a search result) | `type-size = 12pt`; `body-leading = 0.85em`; `page-limit = 25` documented but **not enforced** (no page counter). **Unverified; check the court's current text.** |
-| WVNB-FMT-002 | Paper, margins, page numbers | Not stated in the LBR text read. | none | 8½ × 11 in, 1 in margins, page-number footer: convention, not a rule. |
+| WVNB-MOT-001 | FRBP 9013 | A request for an order is made by written motion, stating grounds with particularity and the relief sought. | https://www.law.cornell.edu/rules/frbp/rule_9013 | Title; relief paragraph (sample). The template does not check grounds. |
+| WVNB-MOT-002 | LBR 9013-1(b) | Motion and application practice in adversary proceedings is governed principally by FRCP 5 and 7 and by FRBP 7005 and 7007. **Verified** (2003 text). | local rules PDF, LBR 9013-1 (p. 58-59) | Whole template. |
+| WVNB-MOT-003 | LBR 9013-1(c)(2)(B) | Negative notice: "...an order may be entered granting the relief sought unless a specific written objection is filed within ____(__) days of the date of the mailing of this notice." **Verified** (2003 text; Appendix G-2). | local rules PDF, LBR 9013-1(c)(2)(B) (p. 59) | Boxed notice, printed only when the sample gives one (`notice`). The filed exemplar has none, so the transcription omits it. |
+| WVNB-MOT-004 | LBR 9013-1(c)(2)(C) | A movant must prepare a notice for some motion types, with a fixed negative-notice period (e.g. compromise, sale, free-and-clear sale: 20 days). **Verified** (2003 text). | local rules PDF, LBR 9013-1(c)(2)(C) (pp. 59-60) | **Not generated.** The template prints whatever notice the sample gives. Known gap. |
+| WVNB-MOT-005 | LBR 9013-1(c)(1) | A proposed order accompanies the motion "in appropriate circumstances", and should not bear the firm name. **Verified** (2003 text). | local rules PDF, LBR 9013-1(c)(1) (p. 59) | **Not generated.** Known gap. |
+| WVNB-MOT-006 | LBR 9013-1(c)(3); LBR 5005-4.10 | Certificate of service; notice rules do not replace service on interested parties. Referenced, not re-read in full this pass. | local rules PDF, LBR 9013-1(c)(3), LBR 5005-4.10 | `certificate-of-service()` on its own page. Parties come from `service.parties` when given; `service.text` prints the certificate sentence as filed. |
+| WVNB-MOT-007 | LBR 9004-2(a); FRCP 10(a); FRBP 9004(b), 7010 | Style of an adversary pleading "shall comply with Official Form 16C". **Verified** (2003 text). Form 16C is not in this folder; the caption layout is the complaint's (`../adversary-complaint/`). | local rules PDF, LBR 9004-2(a) (p. 57) | `court-caption()`. |
+| WVNB-FMT-001 | LBR 9004-1 (font, spacing, page limit) | **Not in the 2003 text.** The 10-point minimum, the single-to-double spacing range and the 25-page limit came from a third-party search excerpt (courtrules.net, HTTP 403 on fetch). Unverified. | none verified | `type-size = 12pt`; `body-leading = 0.85em`; `page-limit = 25` documented, **not enforced**. Check the court's current LBR text before relying on any of it. |
+| WVNB-FMT-002 | LBR 5005-3 (size of papers) | Letter size (8½ × 11 in) for all pages including attachments; no two-sided pages; no stapling or fastening except removable clips; no carbon copies; no tabbed exhibits. **Verified** (2003 text). Margins are not stated. | local rules PDF, LBR 5005-3 (p. 34) | Letter paper. 1 in margins and a page-number footer: convention, not a rule. |
 
 ## Table of contents and table of authorities (not generated)
 
-The N.D. W. Va. text read does not require them for a bankruptcy motion. The template does not generate either. The `cand` template does, under its own rules; that is not carried over.
+The 2003 text read does not require either for a bankruptcy motion. The template does not generate either.
+
+## Template changes this pass
+
+The earlier template required a chapter line, a counsel block at top, and a fixed certificate sentence. The filed exemplar has no chapter line, puts counsel only in its signature block, and certifies service in one sentence with no parties list. The changes below keep the fixed layouts and make only those items optional:
+
+- `chapter` is printed only when the sample gives it (`court-caption`).
+- `counsel` (top-left block) is printed only when the sample gives it.
+- `signature.parties` adds party lines above "s/" (e.g. "DAVID A. LEVINE / INDECO UNION / By Counsel").
+- `service.text` prints the certificate sentence as given; otherwise the template builds it from `date` and `method`, as before.
+- `service.parties` is optional; the list is printed only when given.
+- Level-1 and level-2 headings are set to the body size. The default heading size (1.4 em) leaked through the show rule.
+
+The fictional sample (`samples/INPUT-example-motion-brief.md`) renders unchanged except for the heading size.
 
 ## Fonts and layout
 
-- EB Garamond from `fonts/eb-garamond/` (vendored; the only font used).
-- 12 pt body, 10 pt footnotes and footer. First-line indent 0.5 in; headings: centered capitals (sections) and bold centered (subsections). Headings are typed by the author; the template does not number them.
-- Caption: same two-column table as the complaint. Motion docket number shown when given.
-- Notice box: bordered block on page 1, before the body.
-- Signature block; then a page break; then a certificate of service.
+- EB Garamond from `fonts/eb-garamond/` (vendored; the only font used). The filed exemplar uses Times New Roman. Vendored fonts only, so the difference stays.
+- 12 pt body, 10 pt footnotes and footer. First-line indent 0.5 in. Level-1 headings centered caps; level-2 centered bold; level-3 left bold.
+- Caption: two-column table as the complaint. Negative-notice box only when given.
+- Signature block, then (for the transcribed sample) the certificate on its own page.
 
-## What the sample shows
+## What the samples show
 
-`samples/INPUT-example-motion-brief.md` is fictional: a motion by a transferee to dismiss Counts I and II of the sample complaint under FRCP 12(b)(6), made applicable by FRBP 7012(b). It has a relief section, background, standard of review, four argument headings, a conclusion, a signature, and a certificate of service listing three parties.
+**`samples/INPUT-sheehan-motion-to-dismiss.md`** is a verbatim transcription of the exemplar: the motion (ECF 8) and the memorandum (ECF 8-1), in filing order. It has the caption, the relief paragraph, the memorandum's introduction, factual allegations (with a block quote and a second block quote), argument I-III with subsections A-D, a conclusion, a signature block with party lines, four footnotes and a certificate of service. Its render is 11 pages, with footnotes and italics.
 
-Render: `sh tools/render.sh <this-dir> samples/INPUT-example-motion-brief.md` produced `samples/OUTPUT-example-motion-brief.pdf`, 4 pages, embedded fonts EBGaramond-Regular, -Bold and -Italic only, no typst warnings.
+**`samples/INPUT-example-motion-brief.md`** is **fictional** and was kept from the earlier pass: a transferee's motion to dismiss Counts I and II under FRCP 12(b)(6). It exercises the template's negative-notice box, a counsel block at top and a certificate listing parties; the filed exemplar has none of these. Its render is 4 pages. Its authorities (*Iqbal*, *Twombly*) are real, but their reporter and pin cites were written from memory and not checked.
 
-The file names differ from the brief's naming on purpose. `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` reads that name and writes `OVERLAY-<id>.pdf` and `.txt`. The sample is `samples/<id>.md` as specified.
+File names: `tools/render.sh` writes `OUTPUT-<id>.pdf`; `tools/overlay.sh` reads that name and writes `OVERLAY-<id>.pdf` and `.txt`. The transcription's id is `sheehan-motion-to-dismiss`.
 
-## Page review (Gate 2 record, 60 dpi, every page viewed)
+Render: `sh tools/render.sh <this-dir> samples/INPUT-sheehan-motion-to-dismiss.md` → `OUTPUT-sheehan-motion-to-dismiss.pdf`, 11 pages, embedded EB Garamond only, no warnings. The fictional sample rendered to `OUTPUT-example-motion-brief.pdf`, 4 pages, the same way.
+
+## Overlay
+
+`sh tools/overlay.sh <this-dir> sheehan-motion-to-dismiss` → `samples/OVERLAY-sheehan-motion-to-dismiss.pdf` (11 pages) and `.txt` (page map). Red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words, not index.
+
+Page map (from the `.txt`):
+
+Filed page N (N ≥ 4) is memorandum page N−3; the memorandum starts at filed p. 4.
+
+| Our page | Filed page | Word overlap | What our page holds |
+|---|---|---|---|
+| 1 | 1 | 50% | Motion caption and relief paragraph; memorandum title, introduction |
+| 2 | 6 | 55% | Facts: Employment Agreement, arbitration clause |
+| 3 | 7 | 72% | Facts: block quote 2, Zydeco presentation |
+| 4 | 8 | 72% | Facts (APL, Indeco, SEC filing); Argument I begins |
+| 5 | 10 | 66% | Argument I (arbitration and forum selection) |
+| 6 | 11 | 61% | Argument I (end), II. Standing |
+| 7 | 13 | 65% | Argument III, A, B (contract; fraud begins) |
+| 8 | 14 | 50% | Argument III.B (end), C |
+| 9 | 16 | 65% | Argument III.C, D (conspiracy) |
+| 10 | 18 | 51% | Conclusion and signature. The overlay pairs this with the filed certificate page, which repeats the signature block; the filed conclusion is on p. 17 |
+| 11 | 3 | 94% | Certificate of service. Pairs with the motion's own certificate (filed p. 3); the memorandum's certificate is filed p. 18 |
+
+The overlap is modest (50-72%) for a transcription, and the page layouts differ (font, leading, the filer's ECF header and footer). The pairing is a diagnostic, not a score. The page-11 match is the strongest, because the certificate's wording and parties line up.
+
+## Page review (Gate 2 record, 70 dpi PNG, every page viewed)
+
+Sheehan transcription (11 pages):
 
 | Page | What it is | Finding |
 |---|---|---|
-| 1 | Counsel block, caption, title, notice box, first paragraph | OK. The notice box has a single border and sits between the caption and the body. |
-| 2 | Relief requested, background, standard of review, argument headings | OK. Subsection headings are bold centered and sticky. |
-| 3 | Argument (end), conclusion, signature | OK. |
-| 4 | Certificate of service | OK. Parties listed one per block; signature block right. |
+| 1 | Caption, relief paragraph, memorandum title, introduction | OK after the heading fix. The memorandum title and "INTRODUCTION" are at body size. The caption box reads "In re: GEOSTELLAR, INC., Debtor." (the template's form; the filing's caption has no "Debtor." line). |
+| 2 | Factual allegations, block quote 1, footnote 1 | OK after the heading fix. |
+| 3 | Block quote 1 (end), second contract, block quote 2 | OK. |
+| 4 | Facts (APL, Indeco, SEC document) | OK. |
+| 5 | Argument heading, I, footnote 2 | OK after the heading fix. |
+| 6 | Argument I (end), II. Standing, footnote 3 | OK after the heading fix. |
+| 7 | III. Failure to State a Claim, A, B | OK after the heading fix. |
+| 8 | B (continued), footnote 4 | OK. |
+| 9 | C, D, footnote 5 | OK. |
+| 10 | Conclusion, dated line, signature block with party lines | OK after the heading fix. |
+| 11 | Certificate of service and its signature | OK. |
 
-## Known gaps
+Pages 3, 4, 8, 9 and 11 were viewed on the render before the heading fix. The fix touched only level-1 and level-2 headings; those five pages have no level-1 or level-2 heading (page 9 has only level-3 headings, which the fix does not change). Pages 1, 2, 5, 6, 7 and 10 were viewed again after the fix.
 
-- **Proposed order** (LBR 9013-1(c)(1)) and **movant-prepared notices** for the fixed-period motion types (LBR 9013-1(c)(2)(C)) are not generated.
-- **Page limit** (25 pages, from the unverified 9004-1 excerpt) is documented but not counted.
-- **Local rule text** is from 2003, and the 9004-1 excerpt is unverified.
-- **Authorities** in the sample: *Iqbal* and *Twombly* are real cases, with reporter and pin cites from memory, not checked. Statute and rule cites in the sample (11 U.S.C. §§ 544, 548, 550; FRCP 15 and FRBP 7015) were not fetched.
-- The 21-day negative-notice period in the sample is illustrative. Its correct period depends on the motion type, which the template does not decide.
-- No exemplar, so no tier-2 comparison with a filed motion was possible.
+Fictional sample (4 pages), all viewed after the template changes: page 1 counsel block, caption, notice box, relief paragraph; page 2 relief, background, standard of review, argument headings; page 3 argument end, conclusion, signature; page 4 certificate listing three parties.
+
+## Known gaps (tier-2 findings, OPEN)
+
+Ordered by page. None blocks render or overlay; all are for the eval loop's tier-2 pass.
+
+- **Pages 1-10, line spacing and length.** The filed memorandum is set in Times New Roman at roughly double spacing (about 28 text lines a page; estimated from the text layout, not measured; 19 pp. in total). Our render is 11 pp. at `body-leading = 0.85em`. The local-rules text read has no spacing rule, so this is a convention choice, not a rule. Whether the court's current text sets a range is not verified (see WVNB-FMT-001).
+- **Page 1, font.** EB Garamond (vendored) against the filed Times New Roman. Vendored fonts only; left as is.
+- **Page 1, caption labels.** The template prints "Case No." and "Adv. Pro. No."; the filed caption prints "BK. NO." and "Civil No.". The template's labels are generic and were not changed.
+- **Page 1, debtor line.** The template adds "Debtor." under the debtor name; the filed caption does not.
+- **Page 1, combined document.** The filing is two documents (motion, memorandum), each with its own caption. The transcription keeps one caption and runs the memorandum after the motion. The filed memorandum's own caption page is not reproduced.
+- **Page 10, signature.** The party lines ("DAVID A. LEVINE / INDECO UNION / By Counsel") come from the sample's `signature.parties`, not from a rule. The template's "Respectfully submitted" and the firm lines match the filing.
+- **Page 11, certificate.** The filed sentence is printed from `service.text`, so the template's generated certificate sentence and the parties list are not exercised by this sample; the fictional sample exercises them.
+- **Negative notice and proposed order.** The filing has neither. The template does not generate the movant-prepared notices for fixed-period motion types (LBR 9013-1(c)(2)(C)) or the proposed order (LBR 9013-1(c)(1)). Known gaps.
+- **Page limit.** The 25-page limit (WVNB-FMT-001) is documented but not counted, and its source is unverified.
+- **Filer's text.** The transcription keeps the filer's own typos and any irregular citations ("failed to alleged", "MARTING"). The authorities in both samples were not checked. The exemplar's cites are the filer's, not ours.
+- **Tier-2 exemplars.** Only one filer (Sheehan v. Levine, 2019). The eval loop wants two or three filers. Candidates are listed in `exemplars/SOURCE.md`; the best is the 2026 Storj Labs memorandum (ECF 131), which is a standalone memorandum and would need its own transcription.
+- **Currency.** The local rules text is the 2003 edition. The court's current text was not found.

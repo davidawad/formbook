@@ -13,7 +13,7 @@
 
 #let font-family = "EB Garamond"        // vendored in fonts/; the only font typst can see (tools/render.sh)
 #let type-size = 12pt                   // style choice: N.D. Ala. local rules set no type size (see ../README.md)
-#let body-leading = 0.9em               // gap between body lines; tuned so the body is double-spaced (~24 pt pitch)
+#let body-leading = 1.0em               // gap between body lines; with glyph-bounds line boxes (see text edges below) the body is double-spaced (~24 pt pitch)
 #let single-leading = 0.4em             // caption, counsel block, headings, signature block
 #let para-indent = 0.5in                // first-line indent of text paragraphs
 #let number-width = 0.5in               // width of the paragraph-number box that follows the indent
@@ -21,6 +21,7 @@
 #let caption-left = 3.35in              // width of the caption column that holds the party names
 #let caption-mid = 0.4in                // width of the ")" column
 #let sig-indent = 3.25in                // signature block starts this far in (right half of the page)
+#let para-gap = 0.9em                  // space after each body paragraph; each paragraph is a block so its first line cannot collide with the previous one
 
 // ---------------------------------------------------------------------------
 // Small helpers
@@ -52,9 +53,15 @@
 #let caption-row(l, r) = grid(
   columns: (caption-left, caption-mid, 1fr),
   align: (left + top, center + top, left + top),
-  pad(left: if l.match(designation-re) != none { designation-indent } else { 0pt }, inl(l)),
+  {
+    set par(leading: single-leading)
+    pad(left: if l.match(designation-re) != none { designation-indent } else { 0pt }, inl(l))
+  },
   [)],
-  inl(r),
+  {
+    set par(leading: single-leading)
+    inl(r)
+  },
 )
 
 /// A caption block: `left` lines and `right` lines are paired row by row; the ")" column runs down
@@ -76,6 +83,7 @@
 // ---------------------------------------------------------------------------
 
 #let signature-block(sig) = block(breakable: false)[
+  #set par(leading: single-leading)
   #v(1.2em)
   #grid(columns: (sig-indent, 1fr), [Dated: #sig.date], [])
   #v(0.9em)
@@ -107,7 +115,9 @@
     margin: (top: 1in, bottom: 1in, left: 1in, right: 1in),
     footer: context align(center, text(size: 11pt, counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
+  // Glyph-bounds line boxes: EB Garamond's default line box is shorter than its glyphs, so stacked
+  // caption rows collide without them.
+  set text(font: font-family, size: type-size, lang: "en", top-edge: "bounds", bottom-edge: "bounds")
   set par(leading: body-leading, justify: false, spacing: 0pt)
   show heading: it => block(above: 1.1em, below: 0.9em, sticky: true, width: 100%, align(
     center,
@@ -116,8 +126,7 @@
 
   // Court title, centered, one line per entry (Fed. R. Bankr. P. 9004(b): caption).
   for l in need(meta, "court") {
-    align(center, upper(l))
-    linebreak()
+    block(width: 100%, below: single-leading, align(center, upper(l)))
   }
   v(1.6em)
 
@@ -143,14 +152,14 @@
 
     // Lead-in: the sentence that opens the complaint, not numbered.
     if "lead_in" in meta {
-      block(above: 0.4em, below: 0.4em, par(first-line-indent: para-indent, inl(meta.lead_in)))
+      block(width: 100%, above: 0.4em, below: para-gap)[#h(para-indent)#inl(meta.lead_in)]
     }
 
     // Consent statement (Fed. R. Bankr. P. 7008(a)): the first numbered allegation.
     let n = 0
     if "consent" in meta {
       n += 1
-      par(first-line-indent: 0pt, [#h(para-indent)#box(width: number-width)[#n.]#inl(meta.consent)])
+      block(width: 100%, below: para-gap)[#h(para-indent)#box(width: number-width)[#n.]#inl(meta.consent)]
     }
 
     for b in grouped {
@@ -158,10 +167,10 @@
         let lvl = b.match(regex("^#+")).text.len()
         heading(level: lvl, numbering: none, outlined: false)[#inl(b.slice(lvl).trim())]
       } else if b.starts-with("WHEREFORE") {
-        par(first-line-indent: para-indent, inl(b))
+        block(width: 100%, below: para-gap)[#h(para-indent)#inl(b)]
       } else {
         n += 1
-        par(first-line-indent: 0pt, [#h(para-indent)#box(width: number-width)[#n.]#inl(b)])
+        block(width: 100%, below: para-gap)[#h(para-indent)#box(width: number-width)[#n.]#inl(b)]
       }
     }
   }
