@@ -6,7 +6,7 @@ Every template compiles with the vendored fonts in `fonts/` and nothing else. A 
 
 1. **Vendored only.** Only fonts with an open licence that permits redistribution live in `fonts/`, each family in its own folder with its licence text beside the files.
 2. **System fonts are never used.** Typst runs as `typst compile --font-path fonts --ignore-system-fonts` (`tools/render.sh`, `tools/render-latex.sh`, and the docx path). A missing font is an error, not a silent fallback. Any typst warning fails the render.
-3. **Court-named faces map to a free equivalent** (table below). A court that names no face gets EB Garamond.
+3. **Court-named faces map to a free equivalent** (substitution table below). A template whose court rules name a face uses that face's substitute, never EB Garamond. Only a court that names no face gets EB Garamond.
 4. **The embedded font names are asserted** (`pdffonts`, per `docs/EVAL-LOOP.md` R3). A template that embeds anything outside the family it declares is meant to fail Gate 1.
 5. **No font is modified.** Renaming and reserved-name clauses in the licences only bite on modified versions; none are made here.
 
@@ -17,8 +17,13 @@ Every template compiles with the vendored fonts in `fonts/` and nothing else. A 
 | `fonts/eb-garamond/` | Regular, Italic, Bold, BoldItalic (`.otf`) | SIL OFL 1.1 (`OFL.txt`) | EB Garamond, Octavio Pardo et al. | Default text face; Garamond requirements |
 | `fonts/liberation-serif/` | Regular, Italic, Bold, BoldItalic (`.ttf`) | SIL OFL 1.1 (`OFL.txt`) | Liberation Fonts 2.1.5, <https://github.com/liberationfonts/liberation-fonts> (Google, Red Hat) | Times New Roman requirements |
 | `fonts/tex-gyre-schola/` | Regular, Italic, Bold, BoldItalic (`.otf`) | GUST Font License, an LPPL-equivalent (`GUST-FONT-LICENSE.txt`) | TeX Gyre Schola 2.609 (31 Mar 2026), GUST e-foundry, <https://www.gust.org.pl/projects/e-foundry/tex-gyre/schola> | Century Schoolbook requirements |
+| `fonts/tex-gyre-termes/` | Regular, Italic, Bold, BoldItalic (`.otf`) | GUST Font License (`GUST-FONT-LICENSE.txt`) | TeX Gyre Termes 2.609, GUST e-foundry, <https://www.gust.org.pl/projects/e-foundry/tex-gyre/termes> | Times alternate |
+| `fonts/tex-gyre-pagella/` | Regular, Italic, Bold, BoldItalic (`.otf`) | GUST Font License | TeX Gyre Pagella 2.609, <https://www.gust.org.pl/projects/e-foundry/tex-gyre/pagella> | Palatino / Book Antiqua requirements |
+| `fonts/tex-gyre-bonum/` | Regular, Italic, Bold, BoldItalic (`.otf`) | GUST Font License | TeX Gyre Bonum 2.609, <https://www.gust.org.pl/projects/e-foundry/tex-gyre/bonum> | Bookman requirements |
 
-All three are free to use, modify and redistribute, including in a distribution that also carries GPL v3 code. The fonts stay under their own licences; each licence text sits next to the files it covers. The repository's own licence is still `TBD` in `README.md`, so this note does not settle the repo licence.
+Other families (Liberation Sans/Mono, TeX Gyre Heros/Cursor, Carlito, Caladea, Gelasio, a Tahoma stand-in) are vendored by sibling changes under fb-595.7; their folders carry their own `SOURCE.md`. Each folder's `SOURCE.md` records URL and SHA-256.
+
+All the vendored families are free to use, modify and redistribute, including in a distribution that also carries GPL v3 code. The fonts stay under their own licences; each licence text sits next to the files it covers. The repository's own licence is still `TBD` in `README.md`, so this note does not settle the repo licence.
 
 ### Provenance and checksums
 
@@ -41,14 +46,57 @@ Court requirement → vendored family. The rule column is the primary source for
 |---|---|---|---|
 | Century family, 12-pt, booklet format (SCOTUS) | Rules of the Supreme Court of the United States, Rule 33.1(b), <https://www.law.cornell.edu/rules/supct/rule_33> (text: "typeset in Century family (e.g., Century Expanded, New Century Schoolbook, or Century Schoolbook) 12-point type") | **TeX Gyre Schola** | Upstream README: glyph widths are consistent with the Adobe base-35 New Century Schoolbook AFMs (`ncr`, `ncb`, `nci`, `ncbi`). A real Century Schoolbook clone, not the original font. |
 | Century Schoolbook / New Century Schoolbook (named by a court) | Court rule | **TeX Gyre Schola** | As above. |
-| Century Expanded (named by a court) | Court rule | Not vendored. The upstream README documents Schola as a Century Schoolbook replacement, not Century Expanded; a court that names only Century Expanded needs a decision before a template is written. | — |
+| Century Expanded (named by a court) | Court rule | **TeX Gyre Schola** (visual stand-in) | Visual only. See "Century Expanded" below. |
 | Times New Roman, 14-pt, proportional (PTAB) | 37 C.F.R. § 42.6(a)(2)(ii), <https://www.law.cornell.edu/cfr/text/37/42.6> ("14-point, Times New Roman proportional font, with normal spacing, must be used") | **Liberation Serif** | Upstream README: the family "aims to provide document layout compatibility" with Times New Roman. Designed as a metric-compatible substitute; not checked here against a Times New Roman file, since none is on this box. |
 | Times / Times New Roman (named by a court, any other rule) | Court rule | **Liberation Serif** | As above. |
 | Garamond (named by a court) | Court rule | **EB Garamond** | Not metric-compatible with any commercial Garamond. Line breaks, page count and length limits will differ from a filing set in a commercial Garamond; check the length gate against the rule's limit, not against a filed sample. |
-| Palatino / Book Antiqua (named by a court) | Court rule | Not vendored yet. The planned substitute is TeX Gyre Pagella; it is a follow-up, not part of this change. | — |
+| Palatino / Book Antiqua (named by a court) | Court rule | **TeX Gyre Pagella** | Visual only. |
 | No face named (the usual case) | — | **EB Garamond** | — |
 
 A court's rule text decides the requirement; this table only says which vendored family stands in. If a rule names a face not in the table, add a row here in the same change as the template, with the rule cited.
+
+### Full substitution table
+
+The Typst name is exactly what a template passes to `font:`; the first five rows' names were read from the font files with `fc-scan`. Folders for other agents' families are given by their expected upstream names; confirm with `fc-scan` when they land.
+
+| Court-named face | Substitute (Typst family name) | Folder under `fonts/` | Licence | Fit |
+|---|---|---|---|---|
+| Times New Roman, Times | `Liberation Serif` (primary) | `liberation-serif/` | SIL OFL 1.1 | Metric-compatible |
+| Times New Roman, Times (alternate) | `TeX Gyre Termes` | `tex-gyre-termes/` | GUST FL | Visual (Times clone, URW Nimbus Roman lineage) |
+| Century Schoolbook, New Century Schoolbook, "Century family" | `TeX Gyre Schola` | `tex-gyre-schola/` | GUST FL | Metric-compatible with the Adobe base-35 New Century Schoolbook AFMs |
+| Century Expanded | `TeX Gyre Schola` | `tex-gyre-schola/` | GUST FL | Visual only |
+| Georgia | `Gelasio` | `gelasio/` | SIL OFL 1.1 | Metric-compatible (designed as a Georgia match) |
+| Arial | `Liberation Sans` (metric-compatible choice; do not use Heros for Arial, it is not guaranteed Arial-metric) | `liberation-sans/` | SIL OFL 1.1 | Metric-compatible |
+| Helvetica | `TeX Gyre Heros` (Helvetica only) | `tex-gyre-heros/` | GUST FL | Visual (Helvetica clone) |
+| Courier New | `Liberation Mono` | `liberation-mono/` | SIL OFL 1.1 | Metric-compatible |
+| Courier | `TeX Gyre Cursor` | `tex-gyre-cursor/` | GUST FL | Visual (Courier clone) |
+| Calibri | `Carlito` | `carlito/` | SIL OFL 1.1 | Metric-compatible |
+| Cambria | `Caladea` | `caladea/` | SIL OFL 1.1 or Apache 2.0 (per upstream; check the folder) | Metric-compatible |
+| Book Antiqua, Palatino, Palatino Linotype | `TeX Gyre Pagella` | `tex-gyre-pagella/` | GUST FL | Visual only |
+| Bookman, Bookman Old Style | `TeX Gyre Bonum` | `tex-gyre-bonum/` | GUST FL | Visual only |
+| Tahoma | `DejaVu Sans` | `dejavu-sans/` | Bitstream Vera / DejaVu licence (check the folder) | Visual fallback only; NOT metric-compatible, so pagination may differ. See `fonts/TAHOMA-NOTE.md` |
+| Equity (Butterick) | `Liberation Serif` (alternate `TeX Gyre Termes`) | not vendorable | commercial | Visual only; see below |
+| Garamond | `EB Garamond` | `eb-garamond/` | SIL OFL 1.1 | Visual only |
+| No face named | `EB Garamond` | `eb-garamond/` | SIL OFL 1.1 | n/a |
+
+### Century Expanded
+
+Not vendored. Century Expanded (Morris Fuller Benton, ATF, 1900s) is a commercial typeface in current digital form; no free font of that exact name exists. Candidates checked:
+
+- TeX Gyre Schola: a Century Schoolbook clone (GUST FL, redistributable). Century Schoolbook is Benton's descendant of Century Expanded, so it is the nearest lineage; it is visually close but not identical (Schoolbook is a sturdier text-school redraw). Chosen stand-in.
+- URW C059 (urw-base35, ArtifexSoftware, <https://github.com/ArtifexSoftware/urw-base35-fonts>): also a Century Schoolbook clone, licensed AGPL-3.0 with a PostScript/PDF-embedding exception per Debian's copyright file (<https://doc.duckcorp.org/cgi-bin/dwww/usr/share/doc/fonts-urw-base35/copyright>). AGPL-3.0 may be combined with GPL v3 (AGPL section 13), so it is likely vendorable, but it is the same design as Schola, adds nothing, and brings a second copyleft licence. Not vendored.
+- Academico (OFL, Century-derived per a forum report, <https://forums.steinberg.net/t/academico-open-font-license/114847>): no verified upstream repository or licence file found. Not vendored.
+- Libre Baskerville, Merriweather (OFL): different designs. Not Century.
+
+SCOTUS Rule 33.1(b) lists "New Century Schoolbook" and "Century Schoolbook" alongside Century Expanded, so Schola satisfies the rule's own text. A court naming only Century Expanded is a visual-only substitution.
+
+### Equity
+
+Not vendorable. Equity (Matthew Butterick, MB Type) is commercial and licensed per purchase; its licence does not allow redistributing the font files in a public repo (<https://mbtype.com/>; licence text not independently read here, so confirm before relying on this). Stand-in: Liberation Serif, alternate TeX Gyre Termes. Butterick describes Equity as fitting about as many words per page as Times New Roman, so a Times-metric face is the safer fit for page and length limits; it is visual-only, and the result will not look like Equity. A filer who owns Equity can set it by hand outside this repo.
+
+### Finding which face a court requires
+
+Check the court's `rules.md` (or the `README.md` "Typeface" row) in its folder under `courts/`, and the cited rule text. Then use that face's substitute from the table. Templates must use the substitute of the court-named face, not EB Garamond, wherever the rules name one. If a rule names a face missing from the table, add a row in the same change.
 
 ## Proving a family works
 
@@ -57,6 +105,7 @@ Each new family has a one-page typst test under `fonts/tests/`. It exercises reg
 ```sh
 typst compile --font-path fonts --ignore-system-fonts fonts/tests/liberation-serif.typ out/liberation-serif.pdf
 typst compile --font-path fonts --ignore-system-fonts fonts/tests/tex-gyre-schola.typ out/tex-gyre-schola.pdf
+# likewise tex-gyre-termes, tex-gyre-pagella, tex-gyre-bonum
 pdffonts out/liberation-serif.pdf
 pdffonts out/tex-gyre-schola.pdf
 ```
@@ -67,5 +116,8 @@ pdffonts out/tex-gyre-schola.pdf
 |---|---|
 | `liberation-serif.typ` | `LiberationSerif`, `LiberationSerif-Bold`, `LiberationSerif-Italic`, `LiberationSerif-BoldItalic` (CID TrueType, all embedded) |
 | `tex-gyre-schola.typ` | `TeXGyreSchola-Regular`, `TeXGyreSchola-Bold`, `TeXGyreSchola-Italic`, `TeXGyreSchola-BoldItalic` (CID Type 0C, all embedded) |
+| `tex-gyre-termes.typ` | `TeXGyreTermes-Regular`, `-Bold`, `-Italic`, `-BoldItalic` (CID Type 0C, embedded) |
+| `tex-gyre-pagella.typ` | `TeXGyrePagella-Regular`, `-Bold`, `-Italic`, `-BoldItalic` (CID Type 0C, embedded) |
+| `tex-gyre-bonum.typ` | `TeXGyreBonum-Regular`, `-Bold`, `-Italic`, `-BoldItalic` (CID Type 0C, embedded) |
 
-Both tests compiled with exit 0 and an empty stderr under the flags above, on typst 0.15.0.
+All tests compiled with exit 0 and an empty stderr under the flags above, on typst 0.15.0 (Termes, Pagella, Bonum checked 2026-10-14).
