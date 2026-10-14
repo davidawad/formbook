@@ -4,7 +4,7 @@
 - Doc type: `answering-brief`. Brief of Appellee (FRAP 28(b)); one self-contained folder, no shared files.
 - Exemplar: `exemplars/FILED-EXAMPLE-griffin-23-1668-answering-brief.pdf` (*Griffin v. Massachusetts Department of Revenue*, No. 23-1668, filed 2024-01-02; provenance in `exemplars/SOURCE.md`).
 - Sample: `samples/INPUT-griffin-answering-brief.md` (excerpt of the filed brief; see Known gaps).
-- Status: template built; render, overlay and page review done (pages below). Not reviewed by a human; `court.json` untouched.
+- Status: template built; render and page review re-done 2026-10-14 (pages below). Overlay PDF not regenerated this run (see Overlay). Not reviewed by a human; `court.json` untouched.
 
 ## Files
 
@@ -27,6 +27,7 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 | FRAP 28(a)(1)-(3), (7), (8), (10) | Disclosure statement (if Rule 26.1 applies); TOC; TOA; summary; argument; certificate of compliance (p. 56-57) | `disclosure` field; TOC; TOA; summary; argument; `certificate-of-compliance` |
 | FRAP 32(a)(2)(A)-(F) | Cover contents (rulebook pp. 67-68) | `cover-body` |
 | FRAP 32(a)(4)-(6) | 8½ × 11; double-spaced, quotations single-spaced; margins at least 1 inch; 14-point or larger proportional serif; plain roman, case names italic (p. 68) | page, text, quotation, and footnote styles |
+| FRAP 32(a)(5) (typeface) | Rule names no face: a proportionally spaced serif face, 14 pt or larger. No 1st Cir. local rule names a face (rulebook text read 2026-10-14). Court-named face: none | `font-family = "EB Garamond"` (kept, per `docs/FONTS.md` "No face named"); no substitute needed |
 | FRAP 32(a)(7)(A), (B)(i) | Principal brief: 13,000 words (p. 68-69). An appellee's principal and response brief is a principal brief under FRAP 32(a)(7)(B)(i) | `word-limit = 13000` |
 | FRAP 32(f) | Excluded from the count: cover, disclosure, TOC, TOA, oral-argument statement, addendum with statutes, certificate, signature block (pp. 69-70) | `strip-oral-argument`; markdown body only |
 | FRAP 32(g)(1)-(2); Form 6 | Certificate of compliance, Form 6 wording (rulebook p. 113) | `certificate-of-compliance` |
@@ -36,6 +37,8 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 | Checklist for Briefs, ca1 (rev. 3/22; secondary) | Footnotes the same size as the body text; disk rule (1st Cir. R. 32.0) only for paper | footnotes at 14 pt; no disk rule |
 
 ## Overlay
+
+This run (2026-10-14): `tools/overlay.sh` could not write the PDF, because `exemplars/FILED-EXAMPLE-griffin-23-1668-answering-brief.pdf` is not in this checkout (`exemplars/` holds only `SOURCE.md`). The `.txt` page map is unchanged from the earlier run, and the pairings below are from that run.
 
 `samples/OVERLAY-griffin-answering-brief.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only. Pairings from the last run:
 
@@ -62,7 +65,7 @@ Every page of `OUTPUT-griffin-answering-brief.pdf` was rendered at 60 dpi and vi
 | 9 | Certificate of compliance (Form 6 wording) | OK. Word count from the markdown (1,012). Certificate of service comma fixed on re-render. |
 | 10 | Certificate of service | OK. |
 
-Tier-2 findings (ACCEPTED): the typeface is EB Garamond where the filed brief uses Times New Roman (FRAP 32(a)(5) allows any proportional serif of 14 pt or more; EB Garamond is the only serif family vendored). No other tier-2 finding is open on these ten pages.
+Tier-2 findings (ACCEPTED): the typeface is EB Garamond where the filed brief uses Times New Roman (the rule names no face, so EB Garamond stays; see `docs/FONTS.md`). No other tier-2 finding is open on these ten pages.
 
 ## Known gaps
 
@@ -73,7 +76,7 @@ Tier-2 findings (ACCEPTED): the typeface is EB Garamond where the filed brief us
 5. The table of authorities is built only from `toa:` links. Every citation the filer wants listed must be linked. A link inside a heading is refused.
 6. The template does not require a standard-of-review statement from an appellee (FRAP 28(b)(4)); when one is given, it is ordinary argument text. The sample includes one (Argument I.A).
 7. The oral-argument section is excluded from the word count by heading match, a heuristic.
-8. Only the vendored EB Garamond is available. No Times New Roman is vendored (`fonts/` is shared and not edited here).
+8. Typeface: EB Garamond is kept because the rulebook names no face. A filer who wants Times New Roman would use Liberation Serif (`docs/FONTS.md`); that would be a style choice, not a rule requirement.
 
 ## Engines
 
