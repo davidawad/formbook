@@ -1,0 +1,78 @@
+# vid: motion brief
+
+Doc type: **motion brief**, a memorandum of law in support of a motion to dismiss under Fed. R. Civ. P. 12(b)(6), in the District Court of the Virgin Islands (`vid`, Division of St. Croix, and the other divisions by frontmatter). Folder: `courts/third-circuit/virgin-islands/federal/district/motion-brief/`.
+
+| Item | Status |
+|---|---|
+| exemplar | yes: `exemplars/FILED-EXAMPLE-wooten-1-23-cv-00012-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
+| sample md | `samples/INPUT-wooten-motion-brief.md` (the whole memorandum: caption, introduction, legal standard, argument, conclusion, signature, certificate of service) |
+| render | ok: `samples/OUTPUT-wooten-motion-brief.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `samples/OVERLAY-wooten-motion-brief.pdf` and `OVERLAY-wooten-motion-brief.txt` |
+| pages reviewed | 9 of 9 (each page rendered at 70 dpi and viewed; see the review record below) |
+
+## Governing rules
+
+Court: District Court of the Virgin Islands. The local rules (LRCi) have two sources, and they do not agree on every point; the FRCP text is from Cornell.
+
+| ID | Rule | Requirement | Source (fetched 2026-10-14) | Where it lives |
+|---|---|---|---|---|
+| VI-FORM-001 | LRCi 5.1(a) | All papers double-spaced except quoted material; each page numbered consecutively; 8½ × 11-inch white paper. | VID LRCi PDF, https://www.vid.uscourts.gov/sites/vid/files/local_rules/VID_LRCi_042911.pdf (a July 2011 compilation; the court's current version was not confirmed) | `vid-motion-brief.typ`: `margin`, `body-leading`, page numbering |
+| VI-FORM-002 | LRCi 5.1 (type and margins) | At least 12-point type; at least one-inch margins; footnotes may be 10-point and single-spaced. | Not in the 2011 PDF. Search excerpt of the current LRCi text at courtrules.net (https://www.courtrules.net/courts/federal/district-virgin-islands/local-rules/10791); the page returned HTTP 403, so this is an excerpt, not a read page | `type-size = 12pt`, `margin = 1in`. No footnotes in this exemplar or the template. |
+| VI-CONT-001 | LRCi 7.1(c) | A motion is accompanied by a brief stating the reasons and the citation of authorities. | VID LRCi PDF (as above) | The memorandum itself. The notice of motion is a separate filing (see Known gaps 3). |
+| VI-CONT-002 | LRCi 7.1(d) | No document may exceed 20 pages without leave (2011 text). | VID LRCi PDF (as above) | Not checked by the template. The sample is 9 pages. |
+| VI-CONT-003 | LRCi 7.1 (current) | Over 20 substantive pages needs a word-count certificate of compliance. | courtrules.net excerpt (as above) | Not produced. Not needed at this length. |
+| FRCP-10(a) | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number, and a Rule 7(a) designation. | https://www.law.cornell.edu/rules/frcp/rule_10 | `court-header`, `caption`, `title` |
+| FRCP-12(b)(6) | Fed. R. Civ. P. 12(b)(6) | Failure to state a claim is a defense that may be raised by motion. | https://www.law.cornell.edu/rules/frcp/rule_12 | Author content (the memorandum's argument). The template does not check the citations. |
+
+Not produced by this template (separate filings): the notice of motion, the proposed order, declarations, and the exhibits (the Wooten filing attaches its exhibits as separate documents: ECF 14 cites Exhibits 1–5).
+
+## Layout
+
+- Court name and division, centered, on the first page (`IN THE DISTRICT COURT OF THE VIRGIN ISLANDS` is the template's constant; the division comes from the frontmatter).
+- Caption: parties on the left, closed by a rule on the right and bottom; the number label (`number_label`, here "Case No.") and case number on the right. The template inserts "v." between parties.
+- Title centered and bold.
+- Body: paragraphs are not numbered (a memorandum), with a first-line indent. `# Heading` is a centered bold section; `## ` is a bold left heading (the argument's roman-numeral points); `### ` is bold italic (the lettered sub-points). A list sticks to what follows it.
+- Signature block after the conclusion, as filed: date at left; firm, `/s/` signer and counsel lines at right, single-spaced; unbreakable.
+- Certificate of service (frontmatter `certificate`): heading, text, and a right-aligned `/s/` line, after the signature, as filed.
+
+## Markdown contract (for samples)
+
+- YAML frontmatter, then the body, the same shape as the CAND motion contract (`courts/ninth-circuit/california/federal/northern-district/motion-brief/`). The ca9 appellate contract does not apply.
+- Frontmatter: `title`, `division`, `number_label`, `case_number`, `caption` (list of `{names, designation}`), `signature` (`date`, `preamble`, `signer`, `lines`), `certificate` (`title`, `text`, `signer`).
+- Body: paragraphs, `# `/`## `/`### ` headings, `> ` quotations, lists. Case names in `*italics*`. Escape a literal `*` (as in `at \*2`) so it is not read as italics.
+- Not supported: footnotes, tables, raw typst, a table of contents or table of authorities (the exemplar has neither, and the 2011 LRCi text asks for neither; the current text was not confirmed).
+
+## Overlay
+
+`samples/OVERLAY-wooten-motion-brief.pdf` and `.txt` are the red/blue test: red is our render, blue is the filed exemplar, black is both agreeing. The pairing is by word overlap, not by index, and the page map is in the `.txt`. Pairs: ours p.1 ↔ filed p.1 (73.0%), p.2 ↔ p.2 (64.7%), p.3 ↔ p.4 (55.0%), p.4 ↔ p.5 (78.1%), p.5 ↔ p.6 (87.6%), p.6 ↔ p.7 (85.3%), p.7 ↔ p.8 (67.1%), p.8 ↔ p.10 (53.7%), p.9 ↔ p.11 (88.4%). The filed copy has a 10-page memorandum and a certificate on page 11. Our page 8 (the conclusion and signature) pairs with filed page 10, the page that carries the conclusion. The overlay is a diagnostic, not a score: the exemplar uses Times, and the render uses EB Garamond, so the text lines will not coincide.
+
+## Known gaps and open choices
+
+1. **One exemplar.** LRCi tier 2 asks for two or three filers. Port Hamilton Refining & Transportation v. Limetree Bay Terminals, 1:24-cv-00004, ECF 17 (a 10-page memorandum in support of a 12(b)(6) motion to dismiss a counterclaim, filed May 30, 2024; RECAP `gov.uscourts.vid.39844.17.0.pdf`) and Appleton v. Saintnals, LLC, 1:25-cv-00032, ECF 14 (7 pages) were also found with storage. Neither was saved, because the brief asks for one exemplar per doc type. Tier 2 is therefore **not** judged against two filers yet.
+2. **Font.** The VI template uses EB Garamond, the only vendored face; the exemplar is in Times. The 12-point minimum is met. Whether the court expects a Times-metric face is a question for David (see the complaint README, gap 2).
+3. **Notice of motion.** The Wooten filing has a separate motion (ECF 13). Only the memorandum is templated. A notice of motion and a proposed order are separate filings and are not produced.
+4. **Caption form.** The complaint template prints "IN THE DISTRICT COURT OF THE VIRGIN ISLANDS"; the Wooten memorandum prints "DISTRICT COURT OF THE VIRGIN ISLANDS" without "IN THE". Both are seen in D.V.I. filings; the complaint's form is used for both templates and recorded as ACCEPTED for tier 2.
+5. **Typos kept as filed.** The exemplar's text has errors that the transcription keeps, so the sample matches the filing: "Ashcroft v. Igbal", "plausible of on its face", "Fowler v. UpMC Shadyside, 578 F. 3d 203 (3rd Cir. 2009)" with no pin cite, "Buck, 452 F. 3d 256, 260 (3d Cir. 2006)" cited without the case name, and the repeated "Mutual Aid Agreement is attached" construction. These are the author's text, not template defects.
+6. **Italics.** The exemplar's text layer has no italic markup, so case names are italic in the sample as the convention requires. Not checked against the exemplar's typeface.
+7. **Page limit.** LRCi 7.1(d) (20 pages, 2011 text) is not checked; the sample is 9 pages.
+8. **Exhibits.** The exhibits (Exhibit 1 to Exhibit 5, and Composite Exhibit 4) are referenced by the memorandum and are not templated.
+9. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review below is the Gate 2 equivalent.
+10. **Overlay names.** As for the complaint: the tool's `OUTPUT-`/`OVERLAY-` names are renamed to the brief's names after the run.
+
+## Review record (Gate 2 equivalent: every page rendered at 70 dpi and viewed)
+
+| Page | What it is | Finding |
+|---|---|---|
+| 1 | Court name, division, caption, title, the opening paragraph, INTRODUCTION | OK. |
+| 2 | LEGAL STANDARD, ARGUMENT, heading I. (four bold lines), heading A. | OK. Headings keep with the text after them. |
+| 3 | Body of Argument I.A. (LBR Services Agreement, Sale Order) | OK. |
+| 4 | Heading B. (two lines), Argument I.B. | OK. |
+| 5 | Heading C. (two lines), Argument I.C., heading II. and its A. | OK. The bold two-line headings do not collide with the text. |
+| 6 | Argument II.A., heading II.B. | OK. |
+| 7 | Argument II.B., heading II.C. (three lines), the start of the duplicative-claims argument | OK. |
+| 8 | End of II.C, CONCLUSION, the signature block (Dated, firm, `/s/`, counsel lines) | OK after the change that moved the certificate below the signature. The signature is with the conclusion, not alone. |
+| 9 | CERTIFICATE OF SERVICE and its `/s/` line | OK. |
+
+Defects found during the review and fixed: (a) the caption repeated "v." as a party (fixed: the template inserts it); (b) a `~` marker was printed as text (fixed: removed); (c) the signature stood alone on the last page, after the certificate (fixed: the certificate moved to frontmatter and renders after the signature, as filed).
+
+[Formbook index](../../../../../../README.md)
