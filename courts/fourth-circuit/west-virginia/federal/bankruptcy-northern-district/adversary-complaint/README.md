@@ -4,7 +4,7 @@ Doc type: **adversary complaint** initiating an adversary proceeding (FRBP 7001 
 
 **BLOCKED: no exemplar.** No filed complaint from this court was found after the searches listed in `exemplars/SOURCE.md`. The template is built from the rules below, and the sample is fictional. The overlay cannot run without an exemplar PDF.
 
-Status: exemplar=no, render=ok (typst, no warnings), overlay=fail (`tools/overlay.sh` exits 1: "no exemplar pdf"), pages reviewed 5 of 5 (rendered at 60 dpi and viewed). Nothing here sets `status` in `court.json`.
+Status: exemplar=no, render=ok (typst, no warnings, EB Garamond embedded, re-rendered 2026-10-14 for the fonts pass), overlay=fail (`tools/overlay.sh` exits 1: "no exemplar pdf"), pages reviewed 5 of 5 (rendered at 60 dpi and viewed on 2026-10-14). Nothing here sets `status` in `court.json`.
 
 ## Governing rules
 
@@ -28,7 +28,7 @@ The 2003 LBR 9004-2(a) cites "Official Form 16C". FRBP 7010 (2024) refers to the
 
 ## Fonts and layout (what is decided, and why)
 
-- EB Garamond from `fonts/eb-garamond/` (vendored; the only font used). Other typefaces are not available to the build.
+- **Typeface (fonts pass, 2026-10-14):** face required by the court's rules = **none named** (the 2003 LBR text has no font term; the LBR 9004-1 mirror gives only a 10-point minimum and spacing range). No court-named substitute applies, so the template keeps **EB Garamond** (`fonts/eb-garamond/`, vendored; the only font used).
 - 12 pt body, 10 pt footer. Numbered paragraphs use a 0.5 in first-line indent with a hanging number.
 - Caption: a two-column table. The left cell has a right rule and a bottom rule; the right cell has the chapter, case number, judge and adversary number. No forced line breaks: the court and party lines are separate content.
 - Signature block: "Respectfully submitted", the signer name in bold with "s/", and the lines from frontmatter.

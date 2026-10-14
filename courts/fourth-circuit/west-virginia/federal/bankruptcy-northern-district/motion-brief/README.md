@@ -2,7 +2,7 @@
 
 Doc type: **motion with memorandum of law** in an adversary proceeding (FRBP 9013; LBR 9013-1(b)). Court: United States Bankruptcy Court for the Northern District of West Virginia. Folder: `courts/fourth-circuit/west-virginia/federal/bankruptcy-northern-district/motion-brief/`.
 
-Status: exemplar=yes (one filer), render=ok (typst, no warnings, both samples), overlay=ok (`tools/overlay.sh` exit 0, 11 pages paired), pages reviewed 15 (every page of both renders, rendered at 70 dpi as PNG and viewed). Nothing here sets `status` in `court.json`.
+Status: exemplar=yes (one filer; the exemplar PDF itself is not in this snapshot, see SOURCE.md), render=ok (typst, no warnings, EB Garamond embedded, re-rendered 2026-10-14 for the fonts pass), overlay=fail this pass (`tools/overlay.sh` exits 1: "no exemplar pdf"; the earlier `samples/OVERLAY-sheehan-motion-to-dismiss.txt` is from an earlier pass and was not regenerated), pages reviewed 15 (every page of the three renders, 60 dpi PNG, viewed on 2026-10-14). Nothing here sets `status` in `court.json`.
 
 Tier 2 is **not** closed: one filer is not the 2-3 the eval loop asks for, and the open findings are listed under "Known gaps". Nothing in this folder is marked done.
 
@@ -43,7 +43,7 @@ The fictional sample (`samples/INPUT-example-motion-brief.md`) renders unchanged
 
 ## Fonts and layout
 
-- EB Garamond from `fonts/eb-garamond/` (vendored; the only font used). The filed exemplar uses Times New Roman. Vendored fonts only, so the difference stays.
+- **Typeface (fonts pass, 2026-10-14):** face required by the court's rules = **none named**. The 2003 local rules text (LBR 5005-3, 9004-2; no LBR 9004-1 in it) names no typeface; a courtrules.net mirror of LBR 9004-1 gives only a 10-point minimum and a single-to-double spacing range, and a search found no other source naming a face. Per `docs/FONTS.md`, no court-named substitute applies, so the template keeps **EB Garamond** (`fonts/eb-garamond/`, vendored; the only font used). The filed exemplar uses Times New Roman; that is convention, not a rule, so the difference stays.
 - 12 pt body, 10 pt footnotes and footer. First-line indent 0.5 in. Level-1 headings centered caps; level-2 centered bold; level-3 left bold.
 - Caption: two-column table as the complaint. Negative-notice box only when given.
 - Signature block, then (for the transcribed sample) the certificate on its own page.
