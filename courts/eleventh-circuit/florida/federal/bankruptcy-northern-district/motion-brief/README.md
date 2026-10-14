@@ -1,0 +1,45 @@
+# Motion with incorporated memorandum of law, U.S. Bankruptcy Court, N.D. Florida (flnb)
+
+Template for a motion in an adversary proceeding with its memorandum of law in the same document. Engine: typst (`typst/`). Court folder for the tools: this directory.
+
+## Rules applied (primary sources)
+
+Verified 2026-10-14 against the Local Rules of the U.S. Bankruptcy Court, N.D. Fla. (effective Feb. 26, 2024; `https://www.flnb.uscourts.gov/sites/flnb/files/local_rules_02-26-2024.pdf`) and the Local Rules of the U.S. District Court, N.D. Fla. (PDF `https://www.flnd.uscourts.gov/sites/flnd/files/local_rules/local_rules_0.pdf`, stated effective Nov. 24, 2015).
+
+| Requirement | Source | Template |
+|---|---|---|
+| District Local Rules apply in all bankruptcy cases, adversary proceedings included | Bankr. N.D. Fla. LBR 1001-1(B)-(C) | Pulls the district format and length rules in |
+| Caption; title states the party's designation, the paper's contents, and "MEMORANDUM" if the paper contains one | LBR 9004-1(A) | Title from frontmatter; the memorandum is named in the title |
+| One claim per motion; conferral statement; "Agreed"/"Consent" in the title if consented | LBR 9013-1(A)(1)-(2) | One claim (dismissal as to GCS); conferral certificate under its own heading |
+| Memorandum of law or citation of authority served and filed with every motion in an adversary proceeding | LBR 9013-1(B); LBR 7007-1 | "MEMORANDUM OF LAW" section in the same document |
+| Length limits of the District Local Rules | LBR 9013-1(D) | District LR 7.1(F) below |
+| 14-point font or larger; double spaced; one-inch margins; pages numbered; case style, then heading | District LR 5.1(B)-(C) | 14 pt; double-spaced; 1 in margins; centred page number |
+| Attorney signature block: signature, typed name, bar number, street and email addresses, telephone; identify the party | District LR 5.1(D) | Signature block from frontmatter, after the WHEREFORE paragraph |
+| Certificate of service with date and method | District LR 5.1(F) | Certificate in the body, after the word-count certificate |
+| Conferral certificate under a separate heading | District LR 7.1(C) | Certificate under its own heading before WHEREFORE |
+| Memorandum limit 8,000 words; certificate stating the word count (case style, signature block, certificate of service excluded; motion words count only if the motion exceeds 500) | District LR 7.1(F) | The template counts the memorandum words from the body and writes the count into the certificate (`{{MEMO_WORDS}}`); it stops rendering if the count exceeds 8,000 |
+
+Footnotes are placed as typst footnotes in the paragraph that cites them (cmarker 0.1.10 does not render markdown footnotes, so the template does it).
+
+No case-specific text, coordinates or forced line breaks are in the template: the caption, title, signature lines and all text come from the sample.
+
+## What the overlay shows
+
+Sample: `samples/INPUT-rooks.md` (transcription of the filed motion, 4 pages, Doc 40 of Adv. Pro. No. 16-04003-KKS). Render: `samples/OUTPUT-rooks.pdf` (5 pages). Overlay: `samples/OVERLAY-rooks.pdf` (red = our render, blue = filed exemplar, black = both) with page map `samples/OVERLAY-rooks.txt`.
+
+- Layout matches the filing's order: caption, title, numbered paragraphs, memorandum, conferral certificate, WHEREFORE, signature, certificate of service, footnote 1 at the foot of its page.
+- Pagination: the render is 5 pages against 4 in the filing (the 14-point face and the added word-count certificate). Overlay word overlap per page: p1 76%, p2 46%, p3 48%, p4 54%, p5 85% (pairing by shared words; the drift reflects the extra page, not a rule failure).
+- Fonts: the filing is Times New Roman; EB Garamond is used (see gaps).
+
+## Gaps
+
+- **Font face.** EB Garamond at 14 pt, not Times New Roman (no Times-metric face is vendored).
+- **Added certificate of word count.** LBR/LR 7.1(F) requires it; the 2016 filing has none. The template adds it (with the computed count).
+- **Title.** The filing's title has no "memorandum" words; the template adds "AND INCORPORATED MEMORANDUM OF LAW" as LBR 9004-1(A) requires for a paper containing a memorandum.
+- **Conferral heading** is transcribed as filed ("PER LOC. R. 7007-1"). Current practice cites LBR 9013-1(A)(2); the filed citation is kept because it is the exemplar's text.
+- **Filing typo kept.** The filed caption reads "Case No.. 16-40025-KKS" (two periods); the transcription uses one.
+- **Page length.** This exemplar is 4 pages, below the 8-14 page target in the brief, because it is the only flnb motion-with-memorandum with a stored PDF that was located. The template has no page-length check; LR 7.1(F) is the word limit.
+- **Second filer not located.** No second flnb motion-brief PDF with an incorporated memorandum was found with a stored PDF.
+- **Pages reviewed.** All five rendered pages were viewed as PNG (montages at 70 dpi: pages 1-3, then 4-5).
+
+[Court index](../README.md)
