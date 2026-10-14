@@ -6,6 +6,7 @@
 | `checks.yaml` | The eval-loop contract: samples, parameters, and one check per requirement ID. See [`docs/EVAL-LOOP.md`](../../../docs/EVAL-LOOP.md). |
 | `typst/ca9-brief.typ` | The template: `ca9-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
+| `latex/template.tex`, `latex/ca9.lua`, `latex/render.sh` | The LaTeX engine: pandoc reads the same markdown through `ca9.lua` (Argument flags, citations, table of authorities, certificate counts), `template.tex` lays it out, and `render.sh` runs tectonic until the contents and authorities are settled. |
 | `samples/sweet-opening-brief.{md,pdf}` | Transcribed from the exemplar for visual comparison (a portion of the brief, not all of it). |
 | `samples/generic-opening-brief.{md,pdf}` | Fictional, structurally different: the generalization sample. |
 | `reviews/` | Recorded visual reviews (Gate 2). |
