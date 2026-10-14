@@ -19,7 +19,7 @@ Verified 2026-10-14. Primary text where marked; the rest is secondary.
 |---|---|---|---|
 | CA8-FORM-002 | Margins at least one inch on all four sides | FRAP 32(a)(4), https://www.law.cornell.edu/rules/frap/rule_32 (fetched 2026-10-14) | `page-margin = 1in` |
 | CA8-FORM-003 | Text double-spaced; quotations over two lines may be indented and single-spaced; headings and footnotes may be single-spaced | FRAP 32(a)(4) (same) | `body-leading`; quotations, headings, footnotes single-spaced |
-| CA8-FORM-004 | Proportionally spaced serif face, 14-point or larger | FRAP 32(a)(5)(A) (same) | EB Garamond (vendored, OFL) at 14 pt everywhere, including footnotes |
+| CA8-FORM-004 | Proportionally spaced serif face, 14-point or larger | FRAP 32(a)(5)(A) (same) | EB Garamond (vendored, OFL) at 14 pt everywhere, including footnotes. Typeface: the rule names no face, so EB Garamond stays (`docs/FONTS.md`, "No face named"; no metric substitute applies). |
 | CA8-LIMIT-001 | Reply brief no more than half the principal-brief type volume: 6,500 words | FRAP 32(a)(7)(B)(ii) (same); the principal figure 13,000 (FRAP 32(a)(7)(B)(i)) | `word-limit = 6500`; the build fails above it. The 8th Cir. local principal limit (R. 28A(i)) was not retrieved, so it is not used. |
 | CA8-COVER-001 | Cover: case number centered at top; court; case title; nature of the proceeding and court below; brief title identifying the party; counsel name, office address, telephone | FRAP 32(a)(2)(A)-(F) (same) | Cover body; the phone number is part of each counsel block's `lines` |
 | CA8-COVER-002 | Reply cover colour gray | FRAP 32(a)(2) (same) | **Not produced**: paper copies only. The electronic PDF has a plain cover. |

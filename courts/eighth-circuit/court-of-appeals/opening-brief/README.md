@@ -25,7 +25,7 @@ Verified against primary text on 2026-10-14:
 | Rule | Requirement | Where the template uses it |
 |---|---|---|
 | FRAP 32(a)(4) | Double-spaced; block quotations over two lines may be single-spaced; margins at least one inch on all four sides. Cornell LII text, <https://www.law.cornell.edu/rules/frap/rule_32> (amendments through Dec. 1, 2019; 2024 note). | `page-margin = 1in`, `body-leading`, quotation style |
-| FRAP 32(a)(5)(A) | Proportionally spaced typeface must have serifs (sans-serif allowed only in headings and captions); 14-point or larger. Cornell LII text as above; the 14-point figure is also in the Clerk's pointers (below). | `type-size = 14pt`, EB Garamond (serif) everywhere, footnotes included |
+| FRAP 32(a)(5)(A) | Proportionally spaced typeface must have serifs (sans-serif allowed only in headings and captions); 14-point or larger. Cornell LII text as above; the 14-point figure is also in the Clerk's pointers (below). | `type-size = 14pt`, EB Garamond (serif) everywhere, footnotes included. Typeface: the rule names no face, so EB Garamond stays (`docs/FONTS.md`, "No face named"; no metric substitute applies). |
 | FRAP 32(a)(6) | Plain roman; italics or boldface for emphasis. Cornell LII text as above. | Markdown emphasis; the template does not guess case names |
 | FRAP 32(a)(7)(B)(i) | Principal brief: 13,000 words. Cornell LII text as above. | `word-limit = 13000` (the count excludes FRAP 32(f) items) |
 | FRAP 32(f) | Excluded from the count: cover, disclosure statement, TOC, table of citations, statement regarding oral argument, addendum with statutes and rules, certificate of counsel, signature block, proof of service. Cornell LII text as above. | `strip-oral-argument`; the rest is outside the body |
