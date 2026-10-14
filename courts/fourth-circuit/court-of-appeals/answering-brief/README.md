@@ -117,3 +117,20 @@ Defects found in review and fixed:
 - **"prima facia"** in the source (Section II.A) is the filer's spelling and is kept as transcribed.
 - **Typst page numbers in the TOC and TOA** are for this excerpt; they do not match the exemplar's page numbers, which belong to the full brief.
 - **No check gate.** This folder has no `checks.yaml` and no `tools/check.sh` gate of its own; it is a structure and rendering check.
+
+## Engines
+
+Three renderings of the same markdown (`samples/INPUT-chapman-answering-brief.md`). The typst template is the reference.
+
+**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-chapman-answering-brief.latex.pdf`, 12 pages, every page rendered and compared with the typst output. Matches: EB Garamond only (14 pt text and footnotes), double spacing at the typst pitch, 1-inch margins, the cover with judge and date/party line, the FRAP 26.1 disclosure statement (seven yes/no answers), contents and authorities (the authorities list is built from the `toa:` links), Argument point headings in small capitals, centred, and the Argument-only numbering, the certificate of compliance (1,734 words, the same as typst's count) and the certificate of service on the same page as the compliance certificate when it fits. Differs: the cover is tighter (fixed gap); body paragraph and heading spacing differ slightly, so page breaks and folios differ from typst; the disclosure boxes are drawn rather than glyphs. Not checked by `check.sh` (no `checks.yaml` in this court).
+
+**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `samples/OUTPUT-chapman-answering-brief.docx` is written; the `.docx.pdf` is not (see BLOCKED). Styles and sections as in the opening brief. Contents and authorities are Word fields; the TA fields sit after each citation. Certificate word count 1,734.
+
+BLOCKED (docx):
+- All gates on the `.docx.pdf`: no LibreOffice on this box (see the opening brief's README, Engines, for what was tried).
+- Contents and authorities page numbers: Word fills them on update; LibreOffice does not honour TA/TOA fields (docs/DOCX.md).
+- Argument point headings are hanging like the other sub-headings, not centred small capitals (a heading style cannot vary per paragraph here).
+- The disclosure boxes are the text `[X]` / `[  ]`.
+- The cover's rules and caption positions are paragraph borders and indents, approximated.
+- The compliance and service certificates may fall on different pages from typst: the service certificate's position depends on the flow.
+- Opened in neither Word nor LibreOffice: well-formed XML only.
