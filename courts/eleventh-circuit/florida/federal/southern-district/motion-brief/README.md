@@ -9,7 +9,7 @@ Folder: `courts/eleventh-circuit/florida/federal/southern-district/motion-brief/
 | sample md | `samples/INPUT-slack-motion-brief.md` (the exemplar's full text: 10 pages of motion and memorandum, the signature block and the certificate of service) |
 | render | ok: `samples/OUTPUT-slack-motion-brief.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh ... samples/INPUT-slack-motion-brief.md`) |
 | overlay | ok: `samples/OVERLAY-slack-motion-brief.pdf` and `samples/OVERLAY-slack-motion-brief.txt` (`sh tools/overlay.sh ... slack-motion-brief`) |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass re-render; template unchanged) |
 
 File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `OVERLAY-<id>.pdf` and `.txt`.
 
@@ -23,6 +23,7 @@ Primary source: S.D. Fla. Local Rules, revised effective 1 December 2025, from h
 | L.R. 5.1(a)(4) | 1 inch margins on top, bottom and each side. | `margin = 1in`. |
 | L.R. 5.1(a)(4) | Not less than 1½ spaces between lines (quotations of 50 words or more and footnotes may be single-spaced). | `body-leading = 1.65em`: 27.6 pt pitch at 12 pt (double, following the exemplar). Footnotes are single-spaced (`single-leading`). |
 | L.R. 5.1(a)(4) | Fonts no smaller than 12 point, footnotes and quotations included. | `type-size = 12pt`; footnote entries set to `type-size`. |
+| L.R. 5.1(a)(4) (typeface) | No typeface is named. The rule text (read 2026-10-14) sets only the 12-point minimum, so no court-named face applies: face required = none. | `font-family = "EB Garamond"`, the "No face named" row of `docs/FONTS.md`. Visual only against the exemplar's Times New Roman; no metric-compatible substitute is needed. |
 | L.R. 5.1(a)(4) | Paginated consecutively at the bottom center of each page. | `footer-page-number()`. |
 | L.R. 5.1(a)(5)(A)–(D) | Court name, docket line with the judges' last names, the style on the left, the title, all as in the complaint README. | `court-title()`, `caption()`, `style-block()`. The docket line (`case_number`) carries the judges' names: `26-cv-25201-BLOOM/Elfenbein`. |
 | L.R. 5.1(a)(6) | Signature block: name, street address, telephone, e-mail and bar number of each counsel. | `signature-block()`. |
@@ -50,7 +51,7 @@ Primary source: S.D. Fla. Local Rules, revised effective 1 December 2025, from h
 ## Known gaps and open choices
 
 1. **One exemplar.** The brief asks for one exemplar per doc type. The tier-2 rule (2 or 3 filers from different filers) is not met for this doc type.
-2. **Font.** As in the complaint README: EB Garamond (the only vendored face), 12 pt; the exemplar's Times New Roman looks larger.
+2. **Font.** L.R. 5.1(a)(4) names no typeface (checked 2026-10-14), so EB Garamond stays, per `docs/FONTS.md`, at 12 pt. The exemplar's Times New Roman looks larger; a Times-metric face would be a choice for David, not a rule point.
 3. **Case names not italic.** The exemplar text layer has no italics, so the sample has roman case names. Bluebook italics would be a tier-2 presentation choice, not a rule requirement.
 4. **Page 3 gap.** The ARGUMENT heading, point I and sub-point a are kept with the first paragraph of text, so page 3 ends a third of a page early. This is the "heading never ends a page" rule, not an error; the exemplar breaks differently.
 5. **Overlay pairing.** Pages are paired by text: sample page 5 pairs with exemplar page 4, and sample page 12 (the certificate) with exemplar page 11, because the sample's page breaks differ. The overlay is a diagnostic, not a score.
@@ -59,7 +60,7 @@ Primary source: S.D. Fla. Local Rules, revised effective 1 December 2025, from h
 
 ## Review of the rendered pages (12 of 12)
 
-Each page was rendered at 60 dpi and viewed after the last template change.
+Each page was rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass re-render (no template change).
 
 - Page 1: court title, division, docket line, style with "/", title in bold capitals, the opening paragraph, heading PRELIMINARY STATEMENT. Footer page number. Pass.
 - Page 2: the rest of the Preliminary Statement; STANDARD OF REVIEW; footnote 1 at the foot of the page, 12 point. Pass.
