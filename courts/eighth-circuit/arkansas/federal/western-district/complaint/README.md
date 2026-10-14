@@ -7,9 +7,10 @@ Folder: `courts/eighth-circuit/arkansas/federal/western-district/complaint/` (se
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-little-5-26-cv-05256-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-little-complaint.md` (the whole 10-page filing, transcribed; paragraph numbers are the template's) |
-| render | ok: `samples/OUTPUT-little-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-little-complaint.pdf` and `OVERLAY-little-complaint.txt` |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none**. LR 5.5(a) says "type not less than elite" and names no face (searched the consolidated local rules, 66 pp., 2026-10-14). Vendored substitute: **not needed**; kept **EB Garamond** (`fonts/eb-garamond/`), as the fonts policy allows for a court that names no face. Metric class: n/a. The filed exemplar is Times New Roman with Century Schoolbook headings (tier 2, not chased; see gap 1). |
+| render | ok (re-rendered 2026-10-14): `samples/OUTPUT-little-complaint.pdf`, 9 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings; `pdffonts`: EBGaramond Regular/Bold/Italic only |
+| overlay | ok (regenerated 2026-10-14): `samples/OVERLAY-little-complaint.pdf` and `OVERLAY-little-complaint.txt`, against the filed exemplar re-fetched from the URL in `exemplars/SOURCE.md` (the PDF is not committed in this tree; see gap 10) |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on 2026-10-14) |
 
 File names follow the repo's roles (`INPUT-`, `OUTPUT-`, `OVERLAY-`) because `tools/render.sh` and `tools/overlay.sh` read and write those names.
 
@@ -70,7 +71,7 @@ Bugs found and fixed during review (kept here so the next change does not reintr
 
 ## Known gaps and open choices
 
-1. **Font and "elite".** LR 5.5(a) says "type not less than elite". Elite is a 12-characters-per-inch typewriter pitch; for a proportional face the usual reading is a 12-point type size. The template uses EB Garamond at 12 pt (the only font vendored in `fonts/`). EB Garamond sets smaller than Times New Roman at the same size; the exemplar is Times. A Times-metric vendored face would remove the difference. **Needs David's call** if the court's clerk reads "elite" as a pitch limit for proportional type.
+1. **Font and "elite".** LR 5.5(a) says "type not less than elite" and names no typeface, so the fonts policy (`docs/FONTS.md`) keeps EB Garamond here; no substitute is substituted. Elite is a 12-characters-per-inch typewriter pitch; for a proportional face the usual reading is a 12-point type size. The template uses EB Garamond at 12 pt. EB Garamond sets smaller than Times New Roman at the same size; the filed exemplar is Times New Roman (body) with Century Schoolbook (headings). Choosing Liberation Serif or TeX Gyre Schola would be a tier-2 convention choice, not a rule requirement, so it is not made here. **Needs David's call** if the clerk reads "elite" as a pitch limit for proportional type, or if the court wants the exemplar's faces.
 2. **One exemplar.** Tier 2 asks for 2 or 3 filers; only Little v. Church & Dwight is saved. Other complaints found (Sullivan v. Goodyear, Kiefer Sage v. Pro-Gard, Saeidi) are listed in `exemplars/SOURCE.md`. Tier 2 is therefore judged against one filer.
 3. **Class actions.** LR 23.1 requires the caption legend "Complaint - Class Action" and a "Class Action Allegations" paragraph. Not implemented: no `legend` field exists yet. Add it to the template before using it for a class complaint.
 4. **Jury demand.** The exemplar demands a jury inside the prayer (item d). The template adds no separate jury-demand caption line. Fed. R. Civ. P. 38(b) requires only a demand in a pleading, which the prayer provides; no W.D. Ark. local rule was found that sets a separate form (LR 5.5 and the consolidated rules were read).
@@ -79,3 +80,4 @@ Bugs found and fixed during review (kept here so the next change does not reintr
 7. **Exemplar typos transcribed as printed**: "FAYETTEVILLE DIVISON" and "distribute and cleaner" (paragraphs 3 and 17), and a missing final period in paragraph 12. The sample keeps them so the overlay compares like with like.
 8. **Not checked by the template**: the 14-day deadline (LR 7.2(b)) and the rules on separate filings. The template produces the complaint only.
 9. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at the court root; this doc-type folder is not that shape, and the brief forbids editing `tools/`. The Gate 2 table above is the review for this doc type.
+10. **Exemplar PDF not in the tree.** `exemplars/SOURCE.md` records the CourtListener URL, but the `FILED-EXAMPLE-*.pdf` file was never committed (the exemplar row above said it was). On 2026-10-14 it was re-fetched from that URL into a scratch directory (`/work/artifacts/arwd-exemplars/`), not the repo, and used for the overlay. Commit it to `exemplars/` if the repo is to rebuild the overlay offline.

@@ -8,8 +8,9 @@ Folder: `courts/eighth-circuit/iowa/federal/northern-district/motion-brief/`.
 | exemplar | yes: `exemplars/FILED-EXAMPLE-gharavi-schwab-6-25-cv-02074-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-gharavi-motion-brief.md`: the complete memorandum (caption, table of contents, Introduction, Relevant Allegations, Legal Standard, Argument a to e, Conclusion, signature, proof of service) |
 | render | ok: `samples/OUTPUT-gharavi-motion-brief.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-gharavi-motion-brief.pdf` and `.txt` (`tools/overlay.sh`) |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | no face required by the court's rules (LR 10 names none; checked 2026-10-14). EB Garamond 12 pt stays; no vendored substitute applies. See the Governing rules table. |
+| overlay | ok: `samples/OVERLAY-gharavi-motion-brief.pdf` and `.txt` (`tools/overlay.sh`, exemplar passed explicitly). The exemplar PDF is not committed in this snapshot; the overlay used the RECAP copy at the URL in `exemplars/SOURCE.md` (17 pages). |
+| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed in the typeface pass, 2026-10-14) |
 
 ## Governing rules
 
@@ -21,6 +22,7 @@ Primary sources, fetched 2026-10-14:
 | N.D. Iowa LR 7(d) | The moving party's brief states the grounds for the motion and cites the authorities. | Content; the template does not check it. |
 | N.D. Iowa LR 7(h) | Brief length: 20 pages, not counting the table of contents, table of authorities and signature block. | Not enforced; the sample body is about 10 pages in this render. A longer brief needs leave under LR 7(h). |
 | N.D. Iowa LR 10(a) | 8 1/2 x 11 inch paper. Source: https://www.iand.uscourts.gov/sites/iand/files/Local%20Rules%208.1.2020%20edits.%20clean.pdf (Local Rules, "Revised August 1, 2020", effective December 1, 2020; the posted copy is the version checked). | `page-w`, `page-h`. |
+| N.D. Iowa LR 10 (typeface, point size) | Names no typeface and no point size. Checked against the full text of the same Local Rules copy (2026-10-14): no provision mentions a font, typeface or type size. | `font-family = "EB Garamond"`, `type-size = 12pt`: the "No face named" row of `docs/FONTS.md`. |
 | N.D. Iowa LR 10(b)(1) | Double spaced. | `pitch = 24pt`, `body-leading = 1.35em`; paragraphs and headings are rounded to whole 24 pt lines (`on-grid`). |
 | N.D. Iowa LR 10(b)(2) | One side of the page. | Single-sided PDF. |
 | N.D. Iowa LR 10(b)(3) | Top margin of at least 1 inch. | `margin = 1in` on all sides. |
@@ -49,7 +51,7 @@ Primary sources, fetched 2026-10-14:
 ## Known gaps and open choices
 
 1. **Only one exemplar.** Tier 2 asks for 2 or 3 filers. The search (CourtListener RECAP, `court=iand`) found other N.D. Iowa motion-to-dismiss filings (Hane v. Linn County, 1:25-cv-00090; Close v. City of Bellevue, 2:24-cv-01012; Foster v. Sioux City, 5:25-cv-04024), but no brief for them was returned, so none was saved or checked. Tier 2 is therefore **not** judged against two filers yet.
-2. **Typeface and size.** The N.D. Iowa Local Rules text (LR 10) names no typeface and no point size, so the template uses EB Garamond 12 pt, the only serif vendored in `fonts/`. The exemplar is Segoe UI and Calibri, a Word default, not a court requirement; the size difference is therefore not a rule difference. Whether the court wants a larger apparent size is a question for David.
+2. **Typeface and size.** The N.D. Iowa Local Rules text names no typeface and no point size (re-checked 2026-10-14 against the full text, not only LR 10), so the template uses EB Garamond 12 pt under the "No face named" row of `docs/FONTS.md`; no substitute was switched in. The exemplar is Segoe UI and Calibri, a Word default, not a court requirement; the size difference is therefore not a rule difference. Whether the court wants a larger apparent size is a question for David.
 3. **Images in the sample.** The social-media posts in Relevant Allegations 3, 5 and 6 are images in the exemplar; their text is not in the text layer. The sample marks them as `[Image of the post; not in the text layer.]`. The overlay therefore differs on those lines.
 4. **Exhibit citations** (Ct. Dkt. 1 at pages, Exhibit A and B) are the filer's; the sample does not include the complaint's exhibits.
 5. **Citation errors in the exemplar.** The filed memorandum contains citation errors (for example, "Hoffman v. Clark, 975 N.W.2d 656 (Iowa 2022)" is cited with no pinpoint, and "Mayfield v. Missouri House of Representatives" (8th Cir.) is introduced as an "Iowa courts" holding). The sample transcribes them as filed; the template does not check citations. Citation checking is for the filing attorney.

@@ -7,9 +7,10 @@ Folder: `courts/eighth-circuit/arkansas/federal/western-district/motion-brief/` 
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-gasper-3-26-cv-03048-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-gasper-motion-brief.md` (the whole 11-page brief, transcribed) |
-| render | ok: `samples/OUTPUT-gasper-motion-brief.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-gasper-motion-brief.pdf` and `OVERLAY-gasper-motion-brief.txt` |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none**. LR 5.5(a) says "type not less than elite" and names no face (searched the consolidated local rules, 66 pp., 2026-10-14). Vendored substitute: **not needed**; kept **EB Garamond** (`fonts/eb-garamond/`), as the fonts policy allows for a court that names no face. Metric class: n/a. The filed exemplar is Times New Roman (tier 2, not chased; see gap 2). |
+| render | ok (re-rendered 2026-10-14): `samples/OUTPUT-gasper-motion-brief.pdf`, 10 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings; `pdffonts`: EBGaramond Regular/Bold/Italic only |
+| overlay | ok (regenerated 2026-10-14): `samples/OVERLAY-gasper-motion-brief.pdf` and `OVERLAY-gasper-motion-brief.txt`, against the filed exemplar re-fetched from the URL in `exemplars/SOURCE.md` (the PDF is not committed in this tree; see gap 10) |
+| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-14) |
 
 File names follow the repo's roles (`INPUT-`, `OUTPUT-`, `OVERLAY-`) because `tools/render.sh` and `tools/overlay.sh` read and write those names.
 
@@ -76,7 +77,7 @@ Not produced by this template: the motion, a proposed order, declarations and ex
 ## Known gaps and open choices
 
 1. **One exemplar.** Tier 2 asks for 2 or 3 filers; only Gasper v. Bruce is saved. Other memorandum briefs found (E3 Tax in *Zrazhevskiy*; American Express and Ally in *Page v. TransUnion*; King and River Valley in *Landis*) are listed in `exemplars/SOURCE.md`. Their RECAP main documents have no page counts, so they were not downloaded.
-2. **Character pitch.** LR 5.5(a) "type not less than elite" is read as a 12-point type size for a proportional face (as in the complaint). EB Garamond is the vendored face; it sets smaller than Times New Roman at the same size. **Needs David's call** on the reading, as for the complaint.
+2. **Character pitch and typeface.** LR 5.5(a) "type not less than elite" is read as a 12-point type size for a proportional face (as in the complaint). It names no typeface, so the fonts policy keeps EB Garamond; no substitute is substituted. EB Garamond sets smaller than Times New Roman at the same size; the filed exemplar is Times New Roman. Liberation Serif would be a tier-2 convention choice, not made here. **Needs David's call** on the reading, as for the complaint.
 3. **Motion not produced.** LR 7.2(e) requires the motion in a separate pleading. This template produces the brief only. A motion template and a proposed order would be separate doc types.
 4. **No page limit enforced.** No limit appears in the local rules read. The brief is 10 pages rendered; a judge's order could set a limit.
 5. **No table of contents or authorities.** Not required by the local rules read; the exemplar (11 pages) has none. A brief of this length does not need them here; a longer brief might.
@@ -84,3 +85,4 @@ Not produced by this template: the motion, a proposed order, declarations and ex
 7. **Italics are the transcriber's.** The text layer has no italic markup; the case names, *Id.* and *See* are italicized by standard citation form (the exemplar embeds Times Italic).
 8. **Certificate of service is conditional.** Rendered only when the frontmatter has `certificate`, because Fed. R. Civ. P. 5(d)(1)(B) does not require one for ECF service.
 9. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at the court root; this doc-type folder is not that shape, and the brief forbids editing `tools/`. The Gate 2 table above is the review for this doc type.
+10. **Exemplar PDF not in the tree.** `exemplars/SOURCE.md` records the CourtListener URL, but the `FILED-EXAMPLE-*.pdf` file was never committed (the exemplar row above said it was). On 2026-10-14 it was re-fetched from that URL into a scratch directory (`/work/artifacts/arwd-exemplars/`), not the repo, and used for the overlay. Commit it to `exemplars/` if the repo is to rebuild the overlay offline.

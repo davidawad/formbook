@@ -6,9 +6,10 @@ Doc type: **adversary complaint** (a complaint in an adversary proceeding, FRBP 
 |---|---|
 | exemplar | yes, 2 filers: `exemplars/FILED-EXAMPLE-hanrahan-comstar-25-09028-adversary-complaint.pdf` (6 pp.) and `exemplars/FILED-EXAMPLE-childers-roche-25-09079-adversary-complaint.pdf` (4 pp.). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-hanrahan-comstar.md` (5 rendered pages; transcribes the whole filing) and `samples/INPUT-childers-roche.md` (4 rendered pages; transcribes the whole filing) |
-| render | ok: `samples/OUTPUT-hanrahan-comstar.pdf` (5 pp.) and `samples/OUTPUT-childers-roche.pdf` (4 pp.), typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-hanrahan-comstar.pdf` and `.txt`; `samples/OVERLAY-childers-roche.pdf` and `.txt` |
-| pages reviewed | 9 of 9 rendered sample pages (5 + 4), each rendered at 60 dpi and viewed after the last template change |
+| typeface | face required: none (no N.D. Iowa or FRBP rule names one; checked 2026-10-14 against the 2024 Local Rules PDF, Rules 5005-1 and 9004-1 and a full-text search for font, typeface and point size). Substitute: none needed. Font kept: **EB Garamond** (vendored). Not metric-compatible with any court-named face, because none is named. |
+| render | ok: `samples/OUTPUT-hanrahan-comstar.pdf` (5 pp.) and `samples/OUTPUT-childers-roche.pdf` (4 pp.), re-rendered 2026-10-14 with `tools/render.sh` (typst 0.15.0, vendored fonts only, exit 0, no warnings); `pdffonts` shows EB Garamond only, embedded |
+| overlay | **not regenerated 2026-10-14: fail.** `tools/overlay.sh` needs the filed exemplar PDFs, and `exemplars/` holds only `SOURCE.md` in this snapshot (no PDF on the box, none in git history). The `OVERLAY-*.txt` maps are from an earlier run and were not rebuilt. |
+| pages reviewed | 9 of 9 rendered sample pages (5 + 4), each rendered at 60 dpi and viewed on 2026-10-14 after the font pass (the font did not change; this is the re-check) |
 | check.sh | not run: `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder has neither (see gap 9). Not a stamp. |
 
 ## Governing rules
@@ -68,7 +69,7 @@ Every sample page was rendered at 60 dpi and looked at, after the last template 
 
 ## Known gaps and open choices
 
-1. **No font or size rule.** Nothing in the N.D. Iowa or FRBP text names a font or type size. The template uses EB Garamond (the only vendored family) at 13 pt, because EB Garamond at 12 pt sets visibly smaller than the exemplars' Times. Choice, not a rule. Recorded as ACCEPTED.
+1. **No font or size rule.** Nothing in the N.D. Iowa or FRBP text names a font or type size (checked 2026-10-14: 2024 Local Rules PDF, Rules 5005-1 and 9004-1 and a full-text search; no face, no point size). So the template keeps EB Garamond, as `docs/FONTS.md` rule 3 requires for a court that names no face. It is set at 13 pt, because EB Garamond at 12 pt sets visibly smaller than the exemplars' Times. Size is a choice, not a rule. Recorded as ACCEPTED.
 2. **Official Form 416 not fetched.** FRBP 7010 requires a caption that "substantially conform[s] to the appropriate version of Form 416". The template follows the caption the two exemplars use (court name on two lines, party block on the left, chapter, case number, adversary number and title on the right). The Official Form 416A text itself was not fetched, so this is a conformance by comparison with the exemplars, not against the form.
 3. **FAX line.** The current N.D. Iowa L.R. 9010-1(b) (Part 9) requires a business FAX number under the signature. Hanrahan's filed copy (May 2025) has none, and the 2022 compilation did not require one. The template requires the `fax` field; the Hanrahan sample shows the placeholder "[not on the filed copy]" rather than a made-up number. This is a discrepancy between the exemplar and the current rule that David should know about: either the rule changed after the filing or the filer did not comply.
 4. **Consent statement is a keyword check.** FRBP 7008(a) requires a statement of consent to final orders. The template asserts that the body contains the word "consent". That catches an omission, but not a wrong statement (for example, "does not consent" with a core-proceeding claim). The sample text is the filer's own.

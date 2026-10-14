@@ -1,6 +1,6 @@
 # PTAB patent owner response (inter partes review): rules
 
-Alias `ptab`. Scope: the patent owner response to a petition for inter partes review (37 C.F.R. § 42.120), filed in a PTAB trial. Verified against primary sources on 2026-10-14. **Partial:** only the tier-1 (mandated) format and length rules are recorded here. Tier-2 conventions are blocked on exemplars (see the bottom of this file).
+Alias `ptab`. Scope: the patent owner response to a petition for inter partes review (37 C.F.R. § 42.120), filed in a PTAB trial. Verified against primary sources on 2026-10-14. **Partial:** only the tier-1 (mandated) format and length rules are recorded here. Tier-2 conventions await a second exemplar from a different filer (see the bottom of this file).
 
 ## Sources
 
@@ -33,8 +33,8 @@ Not verified here, and therefore not written as requirements: page numbering, th
 1. **No page-numbering or caption rule** appears in § 42.6(a). Both are open choices, so they fall to Gate 2 and convention (`C`).
 2. **Word limit is the petition's.** § 42.24(b) ties the response limit to the petition's count, so a PGR or CBM response would be 18,700 words, not 14,000. The template must branch on proceeding type.
 
-## Exemplars: blocked
+## Exemplars: one found, tier 2 open
 
-Tier 2 cannot be judged. The search on 2026-10-14 found only docket listings on third-party aggregators (Patexia, DocketAlarm). Their listings name patent owner responses, but the PDFs are not freely downloadable, and no official ptab.uspto.gov PDF was reachable. The brief for this unit asked for a public exemplar from PTAB E2E or CourtListener. That was not found. Per CLAUDE.md, a court with fewer than 2 exemplars from different filers cannot finish tier 2.
+Patent owner response: one filed response is in hand, Swarm Technology (patent owner) in IPR2021-01445, 65 pages, text-based, from the PTAB Litigation Blog's copy (see `patent-owner-response/exemplars/SOURCE.md`). The sample and the overlay use it. A second filer's response was not found: ptab.uspto.gov and ptacts.uspto.gov were not reachable from the build box, CourtListener RECAP holds no stored full response, and the searches recorded in `patent-owner-response/exemplars/SOURCE.md` turned up no other. Per `docs/EVAL-LOOP.md`, a court with fewer than 2 exemplars from different filers cannot finish tier 2, so the doc type is not a pass on tier 2.
 
-**BLOCKED: which public patent owner response PDF from ptab.uspto.gov (or another public source) should serve as the two exemplars from different filers?**
+Open question for the maintainer: which second public patent owner response (different filer) should be the tier-2 comparison? Until one is added, the tier-2 items in `patent-owner-response/README.md` stay OPEN.

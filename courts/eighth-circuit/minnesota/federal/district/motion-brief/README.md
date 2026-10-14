@@ -39,7 +39,7 @@ Not verified: the ECF Electronic Case Filing Procedures Guide (the PDF requireme
 
 ## Layout choices (tier 2, from the rules' gaps and the exemplar)
 
-- Typeface: EB Garamond (the only typeface vendored in `fonts/`). LR 7.1 sets size, not face. The exemplar is Times New Roman (not embedded in the RECAP copy). This is an open choice, recorded here, not a rule.
+- Typeface: EB Garamond. D. Minn. LR 7.1(h)(1) (complete set, PDF dated June 10, 2026, text checked 2026-10-14) names no face: it sets the size (13 point), and LR 7.1(f)(1)(A) distinguishes only proportional from monospaced fonts. No court-named substitute applies, so EB Garamond is kept (`docs/FONTS.md`, rule 3). The exemplar is Times New Roman (not embedded in the RECAP copy); that is one filer's choice, not a rule.
 - Double spacing is 2.3 em in EB Garamond: 0.65 em natural line plus 1.65 em leading (two 1.15 em lines, the usual Word "double" for a 13-point face). Measured pitch in our render: 29.9 pt, the same pitch the exemplar shows at 13 pt.
 - Margins: 1 inch on all sides (the 6 1/2 by 9 inch area of LR 7.1(h)(1)). Page numbers sit in the bottom margin, centred.
 - Caption: court name centred and bold; party box with rules above and below the party column; right column: file number, bold title in capitals, "Fed. R. Civ. P. 12(b)(6)" right-aligned. The exemplar's ECF header (the "CASE ... Doc. 37 Filed ... Page x of y" line) is added by the court's system and is not reproduced.
@@ -106,6 +106,8 @@ Every page of the current PDF was rendered at 60 dpi and viewed. Pages were comp
 - Round 1: the caption's designation line was justified and stretched. Fixed: caption paragraphs are not justified.
 - Round 2 (final render): pages 1 to 13 reviewed again. Page 1 (caption, title, first paragraphs): PASS. Pages 2 to 11 (body, headings A to E, footnotes 1 and 2 at 13 point): PASS. Page 12 (conclusion, signature block): PASS. Page 13 (certificate of compliance): PASS.
 - Level-3 headings ("A.", "D.", ...) use a hanging indent (the exemplar has a tab at the same place): ACCEPTED, tier 2 choice.
+
+- Fonts pass (fb-595.7.5.13): font list checked against LR 7.1(h)(1), no face named, so EB Garamond kept (no change to the template). Re-rendered with `tools/render.sh` (exit 0, no warnings, 13 pages); `pdffonts`: EB Garamond Regular, Bold and Italic embedded only. Overlay re-run against the exemplar (`exemplars/FILED-EXAMPLE-adams-v-innes-26-cv-02415-motion-brief.pdf`, 13 pages, fetched from the URL in `exemplars/SOURCE.md`). Every page of the new render viewed again: PASS.
 
 Pages reviewed: 13 of 13.
 
