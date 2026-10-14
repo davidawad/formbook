@@ -10,9 +10,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"   // Style Guide II.A asks for Times New Roman 12 point; no Times-metric face is vendored (README, Known gaps)
+#let font-family = "Liberation Serif"   // Style Guide II.A asks for Times New Roman 12 point; Liberation Serif is the metric-compatible substitute (docs/FONTS.md)
 #let type-size = 12pt              // Style Guide II.A: 12-point font
-#let body-leading = 1.35em         // double spacing: 24 pt baseline pitch at 12 pt in EB Garamond (README)
+#let body-leading = 1.35em         // double spacing: 24 pt baseline pitch at 12 pt in Liberation Serif (README)
 #let single-leading = 0.5em        // counsel, caption, signature block, tables
 #let para-indent = 0.5in           // first-line indent of numbered and unnumbered paragraphs
 #let margin = 1in                  // Style Guide II.A; Local Rule 5005-1(d): one-inch margins on 8 1/2 x 11 paper
@@ -113,7 +113,7 @@
 // Signature block (Fed. R. Civ. P. 11(a) as applied; Local Rule 9004-1)
 // ---------------------------------------------------------------------------
 
-#let signature-block(meta) = block(breakable: false, width: 100%, {
+#let signature-block(meta) = block(breakable: false, width: 100%, above: body-leading, {
   set par(leading: single-leading, justify: false)
   grid(
     columns: (1fr, 3.1in),
@@ -136,43 +136,74 @@
 // in the sample (the reservation of rights, the prayer for relief); lists are lettered a., b., ...
 // ---------------------------------------------------------------------------
 
-#let body-chunks(body, para-counter, defs) = {
-  let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
-  for c in chunks {
-    let t = c.trim()
-    if not t.starts-with("[^") {
-      if t.starts-with("#") {
-        cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-      } else if t.starts-with("|") {
-        // A table (the transfer chart): unruled, centered, single-spaced.
-        block(width: 100%, breakable: false, align(center, {
-          set par(leading: single-leading, justify: false)
-          set table(stroke: none, inset: (x: 10pt, y: 3pt))
-          cmarker.render(t, raw-typst: false, smart-punctuation: true)
-        }))
-      } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
-        // A list may break across pages.
-        block(width: 100%, {
-          set par(leading: body-leading, justify: true)
-          set enum(numbering: "1.", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-          set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-          cmarker.render(with-notes(t, defs), raw-typst: false, smart-punctuation: true, h1-level: 1)
-          v(body-leading)
+// A markdown list (`1.`, `2.`, ...). Lists are lettered a., b. only in the complaint; here the numbers are kept.
+#let list-block(src, defs) = block(width: 100%, {
+  set par(leading: body-leading, justify: true)
+  set enum(numbering: "1.", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
+  set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
+  cmarker.render(with-notes(src, defs), raw-typst: false, smart-punctuation: true, h1-level: 1)
+  v(body-leading)
+})
+
+// `tail` is the signature block. When the body ends with a list (the conclusion), the headings and
+// lead-ins just before it flow into the list, and the last list item is set with the signature block as
+// one unbreakable block, so the signature never stands alone on a page.
+#let body-chunks(body, para-counter, defs, tail) = {
+  // Footnote definitions are not body blocks.
+  let blocks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim())
+    .filter(c => c != "" and not c.starts-with("[^"))
+  let list-rx = regex("^(\\d+\\.|[-*+])[ \\t]")
+  let lead-rx = regex("^(#|\\^)")
+  let n = blocks.len()
+  let closes-with-list = n > 0 and blocks.last().starts-with(list-rx)
+  // The run that joins the final list: after the last block that is neither a heading nor a lead-in.
+  let breaks = range(n - 1).filter(k => not blocks.at(k).starts-with(lead-rx))
+  let run-start = if breaks.len() > 0 { breaks.last() + 1 } else { 0 }
+  let consumed = false
+  let pending = ()
+  for (i, t) in blocks.enumerate() {
+    let joins = closes-with-list and i >= run-start
+    if t.starts-with("#") {
+      let heading = cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
+      if joins { pending = pending + (heading,) } else { heading }
+    } else if t.starts-with("|") {
+      // A table (the transfer chart): unruled, centered, single-spaced.
+      block(width: 100%, breakable: false, align(center, {
+        set par(leading: single-leading, justify: false)
+        set table(stroke: none, inset: (x: 10pt, y: 3pt))
+        cmarker.render(t, raw-typst: false, smart-punctuation: true)
+      }))
+    } else if t.starts-with(list-rx) {
+      if joins {
+        // The conclusion: its items before the last flow; the last item is kept with the signature block.
+        consumed = true
+        let parts = t.split("\n").map(l => l.trim()).filter(l => l != "")
+        for p in pending { p; parbreak() }
+        if parts.len() > 1 { list-block(parts.slice(0, -1).join("\n"), defs) }
+        block(width: 100%, breakable: false, {
+          list-block(parts.last(), defs)
+          tail
         })
-      } else if t.starts-with("^") {
+      } else {
+        // A list may break across pages.
+        list-block(t, defs)
+      }
+    } else if t.starts-with("^") {
+      let lead = {
         h(para-indent)
         inl(with-notes(t.slice(1).trim(), defs))
-        parbreak()
-      } else {
-        para-counter.step()
-        h(para-indent)
-        context para-counter.display()
-        h(0.3in)
-        inl(with-notes(t, defs))
-        parbreak()
       }
+      if joins { pending = pending + (lead,) } else { lead; parbreak() }
+    } else {
+      para-counter.step()
+      h(para-indent)
+      context para-counter.display()
+      h(0.3in)
+      inl(with-notes(t, defs))
+      parbreak()
     }
   }
+  if not consumed { tail }
 }
 
 // ---------------------------------------------------------------------------
@@ -207,8 +238,5 @@
   align(center, block(width: 100%, text(weight: "bold", full-title(meta))))
   v(body-leading)
 
-  body-chunks(body, para-counter, defs)
-
-  v(body-leading)
-  signature-block(meta)
+  body-chunks(body, para-counter, defs, signature-block(meta))
 }

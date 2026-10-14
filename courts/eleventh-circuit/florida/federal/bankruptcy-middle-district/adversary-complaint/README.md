@@ -5,9 +5,10 @@ Folder: `courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/adve
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-one-fat-frog-6-26-ap-00095-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
+| exemplar | yes: `exemplars/FILED-EXAMPLE-one-fat-frog-6-26-ap-00095-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`; SHA-256 checked against `SOURCE.md`) |
 | sample md | `samples/INPUT-budgen-complaint.md`: the full text of the 12-page filing (every paragraph, both footnotes, the transfer table, the prayers, the signature block) |
-| render | ok: `samples/OUTPUT-budgen-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings |
+| typeface | required: Times New Roman, 12 point (Style Guide II.A). Template: **Liberation Serif**, the metric-compatible substitute in `docs/FONTS.md`. Embedded: `LiberationSerif` family only (`pdffonts`). |
+| render | ok: `samples/OUTPUT-budgen-complaint.pdf`, 10 pages, typst 0.15.0, vendored Liberation Serif only, no typst warnings |
 | overlay | ok: `samples/OVERLAY-budgen-complaint.pdf` and `samples/OVERLAY-budgen-complaint.txt` (page map: 10 of 10 sample pages paired) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; see the table at the end) |
 | status in `court.json` | not set (the brief does not ask for it) |
@@ -28,7 +29,7 @@ Verified 2026-10-14 from the sources in the Source column. Local rules are the C
 | Local Rule 7001-1(b), 9004-1(c) | Injunctive relief: the title includes "Injunctive Relief Sought". | `full-title()` adds it when `injunctive_relief: true`. Not used by this sample. |
 | Local Rule 7001-1(c)-(f) | Service of the summons, complaint and a copy of the rule within seven days; service on all defendants within 28 days; default by 60 days. Source: flmb `localrules/rules/7001-1.pdf`. | Not a form requirement; not produced here. |
 | Local Rule 5005-1(d) | Paper: typewritten, single-sided, 8 1/2 by 11 inches, one-inch margins. Source: flmb `localrules/rules/5005-1.pdf`. | `#set page(paper: "us-letter", margin: 1in)`. |
-| Court Style Guide, Part II.A (Whole Document) | Times New Roman, 12-point font; one-inch margins on 8 1/2 by 11 inch paper; page numbers centered in the footer on every page except the first. Source: flmb `cmecf/documents/styleguide.pdf` (updated 2/3/2014). The Style Guide states this under its order format. Local Rule 7001-1(k)(2) applies the Style Guide to motions; this template applies the same whole-document format to the complaint, which is the reading taken here (the Style Guide does not say whether it covers complaints). | `font-family`, `type-size`, `margin`, `footer-page()`. The font is a known gap (below). |
+| Court Style Guide, Part II.A (Whole Document) | Times New Roman, 12-point font; one-inch margins on 8 1/2 by 11 inch paper; page numbers centered in the footer on every page except the first. Source: flmb `cmecf/documents/styleguide.pdf` (updated 2/3/2014). The Style Guide states this under its order format. Local Rule 7001-1(k)(2) applies the Style Guide to motions; this template applies the same whole-document format to the complaint, which is the reading taken here (the Style Guide does not say whether it covers complaints). | `font-family` (Liberation Serif, the substitute for Times New Roman; `docs/FONTS.md`), `type-size`, `margin`, `footer-page()`. |
 | Style (exemplar, convention) | Double spaced body; justified text; numbered paragraphs at a half-inch indent; lettered sub-items and prayers. | `body-leading = 1.35em` (24 pt pitch at 12 pt, measured in the render); `set par(justify: true)`; `set enum(numbering: "a.")`. |
 
 Not produced by this template (separate filings, not part of the pleading): the adversary cover sheet, the summons, the proof of service required by Local Rule 7001-1(d), the corporate ownership statement, and the filing fee receipt. Not verified whether each is required with this complaint; the Court's filing checklist should be checked.
@@ -50,7 +51,7 @@ Not produced by this template (separate filings, not part of the pleading): the 
 
 ## Known gaps and open choices
 
-1. **Font (tier 1, not met).** The Style Guide asks for Times New Roman, 12 point. The only fonts vendored in `fonts/` are EB Garamond, and `fonts/` is a shared directory this work may not change. The template uses EB Garamond at 12 point, so the typeface differs from the mandated one and the page count differs (10 pages here, 12 in the filing; EB Garamond sets narrower than Times). **To close:** vendor a Times-metric serif (for example a Liberation Serif build) into `fonts/` and change `font-family` in `flmb-adversary-complaint.typ`. Nothing else in the template depends on the face.
+1. **Font (closed; metric-compatible substitute).** The Style Guide names Times New Roman, 12 point. The template now sets Liberation Serif at 12 point (`fonts/liberation-serif/`, SIL OFL 1.1), the substitute `docs/FONTS.md` gives for Times New Roman; the page count is 10 here against 12 in the filing. Liberation Serif is designed to be metric-compatible with Times New Roman; it has not been checked against a Times New Roman file, since none is on this box (`docs/FONTS.md`).
 2. **Title and party designation (open question for the filer).** Local Rule 9004-1(a) asks that the title "state in the title the name and designation of the party" submitting the paper. The filed title ("Complaint to Avoid and Recover Fraudulent Transfers") does not name the Trustee; the designation appears in the first paragraph and the caption. The sample keeps the filed title. Whether the title must carry the designation is a reading question, not settled here.
 3. **Numbering of the filing (exemplar defect, not a template defect).** The filed complaint numbers its jurisdiction paragraphs "1" and "1", so every later paragraph of the filing is one lower than the template's continuous numbering. The filing's own cross-references ("paragraphs 1 through 25") therefore point one paragraph short of the template's numbers. The template numbers continuously (Rule 10(b)).
 4. **Italics.** Case names and "In re" are italic in the sample by transcriber's judgement; the exemplar's text layer does not carry italic markup. Defined terms are underlined in the motion exemplar, not in the complaint; the template does not reproduce underlining.
@@ -62,20 +63,22 @@ Not produced by this template (separate filings, not part of the pleading): the 
 
 ## Review of the rendered pages (`samples/OUTPUT-budgen-complaint.pdf`, 60 dpi, every page viewed)
 
+Viewed on the Liberation Serif render (the current `OUTPUT`).
+
 | Page | Result |
 |---|---|
-| 1 | Court title, caption (In re block with case number and chapter; plaintiff and defendant with the adversary number at "v."), bold title, lead-in, paragraphs 1 to 4 with the first footnote. No page number on page 1. Pass. |
-| 2 | Paragraphs 5 to 13, the "THE PARTIES" and "FACTUAL BACKGROUND" headings, the sub-headings, the second footnote at the foot. Pass. |
-| 3 | Paragraphs 14 to 24; the transfer table centered without rules; the "Debtor's Creditors" heading. Pass. |
-| 4 | Paragraphs 25 to 31; the Count 1 heading (three lines, centered); lettered items a to d. Pass. |
-| 5 | Items e to h; paragraphs 32 to 35; the WHEREFORE paragraph unnumbered. Pass. |
+| 1 | Court title, caption (In re block with case number and chapter; plaintiff and defendant with the adversary number at "v."), bold title, lead-in, the "NATURE OF ADVERSARY PROCEEDING" and "JURISDICTION AND VENUE" headings, paragraphs 1 to 4. No page number on page 1. Pass. |
+| 2 | Paragraphs 5 to 13, the "THE PARTIES" and "FACTUAL BACKGROUND" headings, the sub-headings, the two footnotes at the foot. Pass. |
+| 3 | Paragraphs 14 to 23; the transfer table centered without rules; the "The Debtor's Creditors" heading. Pass. |
+| 4 | Paragraphs 24 to 31; the Count 1 heading (three lines, centered); lettered items a to c. Pass. |
+| 5 | Items d to h; paragraphs 32 to 35; the WHEREFORE paragraph unnumbered. Pass. |
 | 6 | Count 2 heading; paragraphs 36 to 46. Pass. |
-| 7 | Paragraphs 47 to 55; the Count 3 heading; the first lettered item of paragraph 55 at the foot. Pass. |
-| 8 | Items b and c of paragraph 55; paragraphs 56 to 62; the Count 4 heading. Pass. |
-| 9 | Paragraphs 63 to 67; the WHEREFORE with lettered items a to e (the prayer list breaks cleanly). Pass. |
+| 7 | Paragraphs 47 to 55; the Count 3 heading; the lead of paragraph 55 at the foot. Pass. |
+| 8 | Items a to c of paragraph 55; paragraphs 56 to 61; the Count 4 heading. Pass. |
+| 9 | Paragraphs 62 to 67; the WHEREFORE with lettered items a to e. Pass. |
 | 10 | Reservation of rights (unnumbered), the signature block at right, page number 10. No heading is left at a page foot. Pass. |
 
-Overlay (`samples/OVERLAY-budgen-complaint.txt`): the word-overlap pairing matches each sample page to the filed page with the most shared words (52% to 81%); pages 3 to 10 pair with a later filed page, as expected because the filing's cover and counts take more room in Times. The overlay is a diagnostic, not a score.
+Overlay (`samples/OVERLAY-budgen-complaint.txt`): the word-overlap pairing matches each sample page to the filed page with the most shared words (47% to 82%); pages 4 to 10 pair with a later filed page, as expected because the filing's cover and counts take more room in Times. The overlay is a diagnostic, not a score.
 
 ## How to build
 
