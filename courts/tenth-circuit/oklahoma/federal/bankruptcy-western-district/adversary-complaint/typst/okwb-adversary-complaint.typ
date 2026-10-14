@@ -12,7 +12,7 @@
 #let font-family = "EB Garamond"        // LR 9004-1.A: a standard font; EB Garamond is the vendored one (README: gaps)
 #let type-size = 12pt                   // LR 9004-1.A: no less than 12 point, footnotes included
 #let page-margin = 1in                  // LR 9004-1.A: margins no less than one inch
-#let body-leading = 1.35em              // LR 9004-1.A: double spaced; 0.65em line box + 1.35em = 2em = 24 pt pitch at 12 pt
+#let body-leading = 0.695em             // LR 9004-1.A: double spaced; 1.305em line box (ascender to descender) + 0.695em = 24 pt pitch at 12 pt
 #let single-leading = 0.5em             // caption, headings that wrap, signature block (single spaced)
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.3in               // party column of the caption
@@ -33,10 +33,10 @@
 #let inl(s) = if s.trim() == "" { [] } else { cmarker.render(s, raw-typst: false, smart-punctuation: true) }
 
 /// Fill whole double-spaced lines so whatever follows stays on the 24 pt grid.
-#let on-grid(c) = context {
-  let h = measure(width: 100%, c).height
+#let on-grid(c) = layout(size => {
+  let h = measure(width: size.width, c).height
   block(width: 100%, height: calc.ceil(h / 24pt) * 24pt, above: 0pt, below: 0pt, c)
-}
+})
 
 // ---------------------------------------------------------------------------
 // Cover: court title, caption, document title
@@ -100,6 +100,12 @@
 
 #let letter(i) = "(" + str.from-unicode(96 + i) + ")"
 
+/// Headings are capitals, but a statute cited after "§" keeps its lowercase subsections: 523(a)(2)(A), not 523(A).
+#let heading-caps(t) = {
+  let parts = t.split("§")
+  if parts.len() == 1 { upper(t) } else { upper(parts.first()) + "§" + parts.slice(1).join("§") }
+}
+
 #let allegations(body) = {
   // Blank-line chunks; a footnote definition chunk joins the chunk before it.
   let raw = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim()).filter(c => c != "")
@@ -116,7 +122,7 @@
     if t.starts-with("#") {
       // A heading is a single centered line, kept with the chunk after it (it never ends a page).
       block(width: 100%, sticky: true, above: body-leading, below: 0pt,
-        align(center, text(weight: "bold", upper(t.trim("#").trim()))))
+        align(center, text(weight: "bold", heading-caps(t.trim("#").trim()))))
     } else if t.starts-with("- ") {
       let items = list-items(t)
       set par(leading: body-leading)
@@ -167,7 +173,7 @@
     margin: page-margin,
     footer: context align(center, text(size: type-size, counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en")
+  set text(font: font-family, size: type-size, lang: "en", top-edge: "ascender", bottom-edge: "descender")
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
 
   cover(meta)
