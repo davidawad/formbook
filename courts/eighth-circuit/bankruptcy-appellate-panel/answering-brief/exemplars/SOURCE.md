@@ -1,8 +1,10 @@
 # Exemplar source: answering-brief, United States Bankruptcy Appellate Panel for the Eighth Circuit (bap8)
 
-**BLOCKED: no exemplar.** No public filed answering-brief from this court was found, so no `FILED-EXAMPLE-*.pdf` is stored here.
+**BLOCKED: no exemplar.** No public filed appellee's (answering) brief from this court was found in two passes of searching, so no `FILED-EXAMPLE-*.pdf` is stored here.
 
-Searches run on 2026-10-14 (no filed BAP brief found in any result):
+The Brief of Appellant in BAP No. 11-6012 (*In re Fisette*) is the one public filed BAP brief found; it is the opening-brief exemplar (`../../opening-brief/exemplars/`). Its trustee-appellee brief was searched for and not found (pass 2, row 7-11 below).
+
+## Pass 1, 2026-10-14 (eight searches)
 
 | # | Tool / query | Result |
 |---|---|---|
@@ -15,4 +17,25 @@ Searches run on 2026-10-14 (no filed BAP brief found in any result):
 | 7 | WebSearch (standard): "... 'brief of appellee' OR 'appellee's brief' BAP No." | Clerk letters naming appellee counsel (Nos. 10-6046, 12-6054). No brief text. |
 | 8 | WebSearch (standard): "... 'reply brief' 'BAP No.' pdf filed" | Opinions and the BAP IOPs. No brief. |
 
-Not checked: PACER (login required; not a public source in this box), the BAP's own docket pages (not reachable from this box). If a filer later supplies a public BAP answering-brief, add it here as `exemplars/FILED-EXAMPLE-<short-case>-<docket>-answering-brief.pdf` with the URL, case name, docket, filer, date filed, and date fetched.
+## Pass 2, 2026-10-14 (twelve searches, three direct fetch attempts)
+
+| # | Tool / query | Result |
+|---|---|---|
+| 1 | WebSearch (standard): "Bankruptcy Appellate Panel for the Eighth Circuit" "brief of appellant" "Fed. R. Bankr. P. 8014" pdf | Found the Fisette opening brief (`../../opening-brief/exemplars/SOURCE.md`). No appellee brief. |
+| 2 | WebSearch (standard): "B.A.P. No." "Eighth Circuit" "appellee's brief" bankruptcy appeal pdf "Table of Authorities" | Eighth Circuit and BAP opinions; clerk letters. No appellee brief. |
+| 3 | WebSearch (standard): courtlistener recap "BAP" "8th Cir." ... "reply brief of appellant" | Federal rules and general brief checklists. No RECAP brief. |
+| 4 | WebSearch (standard): ecf.ca8.uscourts.gov newbap briefs appellant appellee pdf | BAP operating procedures and brief checklists. No BAP party brief. |
+| 5 | WebSearch (extended): "Bankruptcy Appellate Panel" "Eighth Circuit" "BRIEF OF APPELLEE" OR "APPELLANT'S BRIEF" storage.courtlistener.com | BAP local rules, standing order, opinions. No RECAP brief. |
+| 6 | WebSearch (extended): bankruptcy appellate panel 8th circuit appellant brief attached exhibit ... "Statement of Jurisdiction" | Surfaced the Fisette debtor brief (row 1 of the opening log). No appellee brief. |
+| 7 | WebSearch (standard): Fisette Keller BAP 11-6012 brief of appellee trustee pdf | Clerk letter on Justia (counsel: Margaret Culp for appellee). No brief text. |
+| 8 | WebSearch (standard): Fisette 11-6012 "reply brief" BAP Eighth Circuit Andresen | Case history (455 B.R. 177; 695 F.3d 803). No reply brief. |
+| 9 | WebSearch (standard): ncbrc.org BAP 8th Cir brief appellee OR "reply brief" pdf | Rules and checklists. Nothing from ncbrc.org beyond the Fisette debtor brief. |
+| 10 | WebSearch (extended): "UNITED STATES BANKRUPTCY APPELLATE PANEL" "FOR THE EIGHTH CIRCUIT" "BRIEF OF APPELLEE" "Trustee-Appellee" pdf | BAP opinions only. |
+| 11 | WebSearch (extended): "Culp" "Fisette" "Brief of Appellee" ... | Opinions (CourtListener opinion pages). No appellee brief. |
+| 12 | WebSearch (standard): BAP "reply brief" "Reply Brief of Appellant" ... 2012 OR 2013 OR 2014 | Clerk letters (Justia), opinions. No reply brief. |
+| fetch a | curl, Justia docket entries for 11-6012 (`cases.justia.com/.../811734875/{1,3,4,5,6}.pdf`) and the Justia docket page | HTTP 403 from this box. Not retrieved. |
+| fetch b | ncbrc.org Fisette brief, `http://` with a default client, then `https://` with a browser user agent | HTTP 406 over `http://`; HTTP 200 PDF over `https://`. The debtor's opening brief, not an appellee brief. |
+
+Not checked: PACER (login required; not a public source in this box); the BAP's own docket pages (not reachable from this box); a RECAP-hosted trustee brief in the Fisette case (Justia blocked, no alternate host found).
+
+If a filer later supplies a public BAP appellee's brief, add it here as `exemplars/FILED-EXAMPLE-<short-case>-<docket>-answering-brief.pdf` with the URL, case name, docket, filer, date filed, and date fetched.

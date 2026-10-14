@@ -14,7 +14,7 @@
 #let doc-kind = "opening-brief"              // FRBP 8014(a): appellant's brief
 #let word-limit = 13000                      // FRBP 8015(a)(7)(B)(i): principal brief. Reply: half (8015(a)(7)(B)(ii)).
 #let required-sections = (                   // FRBP 8014(a)(4)-(9), in this order (regexes on lowercased titles).
-  "^statement of (the )?jurisdiction",
+  "^(statement of (the )?)?jurisdiction",
   "^(statement of (the )?)?issues",
   "^statement of (the )?case",
   "^summary of (the )?argument",
