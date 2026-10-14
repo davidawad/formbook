@@ -2,6 +2,8 @@
 
 An open formbook of court filing templates for markdown-first litigators. Templates are written in Typst (primary) and LaTeX (where a court's rules force it), organized by court, and consume markdown. Every court has a folder with its rules, real filed exemplars, sample inputs, and templates; progress is tracked per court below.
 
+Want to help? Point your own AI agent at this repo: see [CONTRIBUTING.md](CONTRIBUTING.md) (`sh tools/contribute.sh pick`).
+
 ## Using aliases programmatically
 
 Every court's alias is its CourtListener court id (from [courts-db](https://github.com/freelawproject/courts-db)). `data/index.json` maps alias to folder path, and each court folder holds a `court.json` with the same metadata.

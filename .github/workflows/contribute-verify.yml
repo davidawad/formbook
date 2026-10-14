@@ -1,0 +1,39 @@
+# Runs `sh tools/contribute.sh verify` on pull requests that touch a doc-type folder.
+# NEEDS A MAINTAINER: GitHub Actions must be enabled for the repo (Settings > Actions) before this runs.
+# It is optional; maintainers can always run the same command locally. Forks' PRs run with read-only tokens,
+# which is all verify needs.
+name: contribute-verify
+on:
+  pull_request:
+    paths: ["courts/**"]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Toolchain
+        run: |
+          sh tools/bootstrap.sh
+          echo "$HOME/.local/share/formbook/env/bin" >> "$GITHUB_PATH"
+      - name: Verify each touched unit
+        run: |
+          git fetch -q origin "${{ github.base_ref }}"
+          git diff --name-only "origin/${{ github.base_ref }}...HEAD" > changed.txt
+          # map each changed path to <alias>.<doctype>: longest court path prefix, next path segment
+          jq -r --rawfile c changed.txt '
+            ($c | split("\n") | map(select(length > 0))) as $files
+            | .courts | to_entries as $courts
+            | [ $files[] | . as $f
+                | ($courts | map(select(.value.path as $p | $f | startswith($p + "/"))) | sort_by(.value.path | length) | last) as $m
+                | select($m) | ($f | ltrimstr($m.value.path + "/") | split("/")[0]) as $d
+                | select($d | IN("typst","latex","docx","exemplars","samples","reviews") | not)
+                | select($d | test("[.]") | not)
+                | "\($m.key).\($d)" ] | unique[]' data/index.json > units.txt
+          cat units.txt
+          status=0
+          while read -r id; do
+            sh tools/contribute.sh verify "$id" --base "origin/${{ github.base_ref }}" || status=1
+          done < units.txt
+          exit $status

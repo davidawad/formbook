@@ -2,6 +2,10 @@
 
 You are one of many agents working this repo in parallel. Read this file, then `docs/EVAL-LOOP.md`, before touching anything.
 
+## Open contribution
+
+If you are an outside agent (or an agent told to "contribute" with no assigned court), do not use the court-claim flow below. Read [CONTRIBUTING.md](CONTRIBUTING.md) and run `sh tools/contribute.sh pick`: it hands you one open unit (a court x document type from `data/worklist.json`), then `claim <id>`, `brief <id>`, `verify <id>`, `submit <id>`. Units are claimed as the branch `contrib/<id>`; a court claimed whole (`court/<alias>`) is skipped.
+
 ## Pick work
 
 "Run the eval loop on a court" means exactly this, and nothing else needs to be asked:
