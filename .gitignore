@@ -2,3 +2,6 @@
 out/
 .DS_Store
 .worktrees/
+
+# internal task-queue state (local br store); not part of the public repo
+.beads/
