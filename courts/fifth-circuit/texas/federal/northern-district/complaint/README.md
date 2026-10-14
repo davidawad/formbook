@@ -7,9 +7,10 @@ Folder: `courts/fifth-circuit/texas/federal/northern-district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-lilly-v-brown-3-26-cv-03514-complaint.pdf` (Eli Lilly, non-class complaint); second filer `exemplars/FILED-EXAMPLE-burkes-bsw-3-26-cv-03570-complaint.pdf` (Burkes, class complaint). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-lilly-complaint.md` (a portion of the 35-page filing: caption, sections I to III of the general allegations, cause of action 1, prayer, jury demand, signature) |
-| render | ok: `samples/OUTPUT-lilly-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-lilly-complaint.pdf` and `samples/OVERLAY-lilly-complaint.txt` (page map) |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (LR 7.2 sets the size, 12 pt or larger; LR 10.1 names no face) -> vendored substitute: EB Garamond (the default, `fonts/eb-garamond/`) -> fit: n/a, no court-named face to match. The filed exemplars use Times New Roman; see Known gaps 2. |
+| render | ok: `samples/OUTPUT-lilly-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; `pdffonts` shows EBGaramond-Regular and EBGaramond-Bold embedded) |
+| overlay | ok: `samples/OVERLAY-lilly-complaint.pdf` and `samples/OVERLAY-lilly-complaint.txt` (page map; regenerated 2026-10-14 against the Lilly exemplar fetched from the URL in `exemplars/SOURCE.md`; the exemplar PDF is not committed) |
+| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-14 after the re-render) |
 | file names | the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (the names `tools/render.sh` and `tools/overlay.sh` use); the brief's `<id>.pdf` and `<id>-overlay.pdf` were not used, to keep the tools unchanged |
 
 ## Governing rules
@@ -45,7 +46,7 @@ Red is our render, blue is the filed exemplar, black is where they agree. The pa
 ## Known gaps and open choices
 
 1. **Rules not read from primary source.** See the table above. The FRCP and LR 10.1 text came from search excerpts, not the court's site. A reading of the full rules is needed.
-2. **Typeface.** The filed exemplars use Times New Roman (system font, not vendored). `fonts/` vendors only EB Garamond, so EB Garamond is used. It has a smaller x-height than Times at 12 pt, so the text looks smaller than the exemplar. A vendored Times-metric font (in `fonts/`, a shared directory this task may not change) would remove the difference.
+2. **Typeface (tier 2, open choice).** N.D. Tex. LR 7.2 and LR 10.1 name a size and no face (found by search, not read from the court's full text), so the rules do not require Times New Roman and the template keeps EB Garamond, per `docs/FONTS.md`. The filed exemplars use Times New Roman (system font). EB Garamond has a smaller x-height than Times at 12 pt, so the text looks smaller than the exemplar. Switching to `Liberation Serif` (the Times New Roman substitute in `fonts/liberation-serif/`) would close the gap; that is a choice for the court's convention, not for the rules, and is left to the reviewer.
 3. **Certificate of interested persons and cover sheet (LR 3.1).** Not produced by this template. A complaint filed without them is deficient under LR 3.1; they must be filed with the complaint.
 4. **Jury demand is numbered.** In the filed exemplar the jury demand is an unnumbered paragraph under its heading. The template numbers every body paragraph, so the jury demand comes out as paragraph 44. Tier 2; open.
 5. **Prayer items** are numbered `1.` to `7.`. The filed exemplar letters the sub-items of item 1 (i, ii, iii, ...); the sample omits them, and the template has no sub-item form. Tier 2; open.

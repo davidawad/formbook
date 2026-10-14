@@ -20,6 +20,7 @@ Local rules text: the court's "Local Bankruptcy Rules" compilation (PRLBRs-2013,
 | LBR 5005-4(b)(2)(C)(ii) | The electronic signature is the filer's name preceded by "/s/". | `signature-block()`: prints "/s/ " before the signer. |
 | LBR 9013-3(a) (2013 compilation) | The certificate of service states how and when service was made, names and addresses of all persons served, and the name and address of the person certifying. | `certificate-of-service()`: the frontmatter `certificate` text. Not generated from a list of parties. See gap 4. |
 | FRBP 9004(b) (https://www.law.cornell.edu/rules/frbp/rule_9004, fetched 2026-10-14) | A document's caption sets out the court, the case title, the case and adversary numbers, and a designation of the document. | `caption()` and `cover()`. |
+| Typeface (fonts pass, 2026-10-14) | Face required: **none named** in the PR bankruptcy LBRs (2013 compilation and GO 18-02; no typeface or size clause found). LBR 1001-1(b) falls back to the District Court's local civil rules for matters not covered; their Local Rule 10 text was not retrieved, so this is OPEN. Vendored substitute: **none needed**; keeps **EB Garamond** (`docs/FONTS.md`, "No face named"). Metric fit: n/a. | `font-family` in `prb-motion-brief.typ`. |
 
 ## What the overlay shows
 

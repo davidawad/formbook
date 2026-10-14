@@ -49,7 +49,7 @@ The court's own local rules are the N.D. and S.D. Mississippi Local Uniform Civi
 ## Known gaps and open choices
 
 1. **One exemplar.** Tier 2 is not yet judged against two or three filers. The search (CourtListener RECAP, `court=msnd`, complaints filed 2025-08 to 2026-07) also found *Fulmer v. EZ Auto, Inc.* (3:26-cv-00121, 11 pp), whose text layer stops after page 1, and *Smith v. Southern Bancorp Bank* (3:26-cv-00038, 15 pp), not downloaded further. See `exemplars/SOURCE.md`.
-2. **Font.** The rule names no complaint typeface. The vendored serif is EB Garamond (the only font in `fonts/`); the exemplar is Times New Roman. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the filed page. The 12-point size is kept; a Times-metric font would remove the difference.
+2. **Font.** The rule names no complaint typeface, so `docs/FONTS.md` keeps EB Garamond (no court-named face, no substitute). The exemplar is Times New Roman. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the filed page. The 12-point size is kept; a Times-metric font would remove the difference.
 3. **Figures.** The exemplar's comparison figures (paragraphs 15 and 17) are noted in the sample, not reproduced. The overlay therefore pairs sample page 4 with exemplar page 11, a figure page with little text.
 4. **Paragraph numbers.** The sample's numbers are the template's (1 to 40), which match the exemplar's numbering. The exhibits are not reproduced.
 5. **Caption style.** The party column is closed by a rule at right and bottom, not the ")" column some filers use. Recorded as a layout choice; both styles appear in this district's filings.

@@ -7,9 +7,10 @@ Folder: `courts/first-circuit/new-hampshire/federal/bankruptcy-district/motion-b
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-old-cold-15-11400-motion-brief.pdf` (one filer, see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-old-cold-motion-brief.md`: the full memorandum (introduction, factual background, argument with sub-sections A and B and their sub-headings i to iv, conclusion), eight footnotes, the signature block and the certificate of service text; the service list is not transcribed (gap 5) |
-| render | ok: `samples/OUTPUT-old-cold-motion-brief.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-old-cold-motion-brief.pdf` and `samples/OVERLAY-old-cold-motion-brief.txt` |
-| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed on the final render) |
+| typeface | face required: none (no NH local rule names a typeface; see gap 1). Font used: EB Garamond (vendored, the court-names-no-face default in `docs/FONTS.md`). Not a substitution: nothing to match. |
+| render | ok: `samples/OUTPUT-old-cold-motion-brief.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EB Garamond Regular, Bold and BoldItalic embedded), no warnings (`tools/render.sh`, re-run 2026-10-14) |
+| overlay | ok: `samples/OVERLAY-old-cold-motion-brief.pdf` and `samples/OVERLAY-old-cold-motion-brief.txt` (re-run 2026-10-14). The filed PDF is not in this checkout (`exemplars/` holds only `SOURCE.md`); the overlay was run against the copy fetched from the URL in `exemplars/SOURCE.md` (15 pages, matching the record) |
+| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed on the 2026-10-14 re-render; no template change, so the review matches the earlier one) |
 
 File names follow the tools' contract (`render.sh` writes `OUTPUT-<id>.pdf`, `overlay.sh` reads it and writes `OVERLAY-<id>.pdf`/`.txt`), not the bare `<id>.md` / `<id>.pdf` names in the task brief.
 
@@ -64,7 +65,7 @@ The overlay is a diagnostic, not a score. The lower overlaps on pages 10 to 14 a
 
 ## Known gaps and open choices
 
-1. **Typeface.** No NH local rule or FRBP 9004 text found sets a typeface or size for memoranda. The template uses EB Garamond 12 pt, the only vendored font; the exemplar is Times New Roman. Whether a Times-metric font is wanted is a question for David (it would need a vendored font, which is outside this box's scope).
+1. **Typeface.** Checked 2026-10-14 against the text of the court's combined local rules (file dated 2025-04-01): no rule names a typeface, a font size or a line spacing for filed papers. The only font wording is LBR 1007-2(b)(2), "Use legible font", which covers creditor matrices. The court names no face, so the template keeps EB Garamond 12 pt, the `docs/FONTS.md` default. The exemplar is Times New Roman, but that is the filer's choice, not a rule. A Times-metric substitute (Liberation Serif) would be a style choice, not a rule requirement.
 2. **Proposed order and notice of hearing.** LBR 7101(c) and LBR 7102(b)(3) require a proposed order (entitled "Order", LBF 9072-1 form) and a notice of hearing with the motion. Neither is produced by this template; both are separate documents.
 3. **Motion and memorandum are separate filings.** LBR 7102(a)(1) requires motions to be filed separately from other pleadings. This template produces the memorandum; a standalone motion would reuse the same template with a shorter body. The exemplar is a standalone memorandum.
 4. **Page limit not enforced.** LBR 7102(b)(2) caps memoranda at 15 pages (nondispositive) or 25 pages (dispositive). The template does not count pages. The sample renders at 14 pages, within the 15-page limit for a nondispositive motion. The exemplar is 15 pages.
