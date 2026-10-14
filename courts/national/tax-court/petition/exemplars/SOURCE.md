@@ -12,6 +12,20 @@ Searched 2026-10-14:
 | Court's own Appendix I (https://www.ustaxcourt.gov/resources/ropp/Appendix_I.pdf) | HTTP error page, not a PDF. Form 1 text taken from the complete rules PDF instead (see the README). |
 | DAWSON public docket search | Not reachable from this box; filings there are not public by default. |
 
-Next step if an exemplar is wanted: a named Tax Court docket number whose petition is public (for example, one attached to an opinion or a public filing), then download it into `exemplars/` and record it here (filer, case, docket, date filed, URL, date retrieved).
+Second search pass, 2026-10-14 (appendices and exhibits, where filed petitions get reproduced):
+
+| Search or source | Result |
+|---|---|
+| WebSearch (extended): courtlistener storage / complaint exhibits, "United States Tax Court" PETITION caption | No CourtListener-hosted petition. Blank forms only. |
+| WebSearch (extended): court of appeals appendix, Tax Court petition with assignments of error | No Form 1 deficiency petition in any appendix surfaced. |
+| WebSearch (extended): supremecourt.gov DocketPDF appendices with Tax Court petitions | Several candidates, downloaded and checked (see below). |
+| Tax Notes "Meta Petitions Tax Court" and "Electronically Filed Tax Court Petition" | HTTP 403 from this box, not read. |
+| Coca-Cola (Docket for 2007-09 years), Medtronic, Amazon, Altera | SEC filings and commentary only; no petition text. |
+
+**Closest real filed petition found, not used.** *Boechler, P.C. v. Commissioner*, Tax Court No. 18578-17L (collection due process, a lien/levy case), petition filed 09/01/2017 by Petitioner Boechler, P.C. It is reproduced at JA-31 to JA-34 of the Joint Appendix in *Boechler, P.C. v. Commissioner*, No. 20-1472 (U.S.), filed 2021-11-15: https://www.supremecourt.gov/DocketPDF/20/20-1472/199964/20211115155049927_2021-11-15%20Boechler%20No.%2020-1472%20Joint%20Appendix.pdf (fetched 2026-10-14). It is the Court's simplified **Form 2** ("Petition": check-box notice, date of notice, year, reasons and facts), not the Rule 34(b) Form 1 deficiency petition this template models (no notice of deficiency, no lettered assignments of error, no deficiency amount). Transcribing it would fit the template to a different pleading, so it is not saved as `FILED-EXAMPLE-*`. Re-open this if the user wants a CDP-type petition exemplar instead.
+
+Checked and not petitions (Tax Court opinions, orders or decisions reproduced in appendices): *Diebold Foundation* / *Salus Mundi* appendix (No. 18-1069, 2nd Cir.); *Battat* cert petition appendix (No. 25-719, Tax Court orders, 17784-12); *Francis* (No. 19-175); *Sanders* (No. 25-28, Tax Court memo and order, 14986-19); *Sanders* cert petition (No. 20-5444).
+
+Next step if an exemplar is wanted: a named Tax Court docket number whose deficiency petition is public (an attachment to a district-court complaint, an appellate appendix, or a public-interest filing), then download it into `exemplars/` and record it here (filer, case, docket, date filed, URL, date retrieved).
 
 Retrieved and not used (not filed documents): `Complete-Rules-of-Practice-and-Procedure.pdf` (https://ustaxcourt.gov/files/documents/Complete-Rules-of-Practice-and-Procedure.pdf, "as amended through August 2024"); `Rule-23_Amended_03202023.pdf` (https://www.ustaxcourt.gov/resources/ropp/Rule-23_Amended_03202023.pdf).
