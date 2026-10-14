@@ -1,24 +1,18 @@
 # Exemplars: adversary-complaint (txnb)
 
-BLOCKED: no exemplar. No filed adversary complaint from the U.S. Bankruptcy Court for the Northern District of Texas was found or downloaded, so there is no `FILED-EXAMPLE-*.pdf` in this folder.
+## FILED-EXAMPLE-prime-asset-v-primalend-26-09001-adversary-complaint.pdf
 
-Date of search: 2026-10-14. Public court records only.
+| Field | Value |
+|---|---|
+| Court | United States Bankruptcy Court, N.D. Texas, Fort Worth Division |
+| Case | In re PrimaLend Capital Partners, LP, et al., Case No. 25-90013 (MXM) (jointly administered); Prime Asset LLC v. PrimaLend Capital Partners, LP, et al., adversary 26-09001 |
+| Document | Adversary complaint, Doc 1, 27 pages (text layer present) |
+| Adversary number | The filed caption leaves it blank ("Adv. Pro. No. 26-[ ]"). `26-09001` is the adversary docket number from the ECF header ("Case 26-09001-mxm"). |
+| Filer | Prime Asset LLC, plaintiff, by McDermott Will & Schulte LLP (Marcus A. Helt; Charles R. Gibbs; Julia M. Beskin and Steven Z. Szanzer, admitted pro hac vice) |
+| Date filed | January 7, 2026 (ECF stamp "Filed 01/07/26") |
+| Date fetched | 2026-10-14 |
+| URL (docket) | https://www.courtlistener.com/docket/72117491/1/prime-asset-llc-v-primalend-capital-partners-lp/ |
+| URL (PDF) | https://storage.courtlistener.com/recap/gov.uscourts.txnb.537491/gov.uscourts.txnb.537491.1.0.pdf |
+| Found by | CourtListener search, `court=txnb`, `type=r`, "adversary complaint", run 2026-10-14 (HTTP 200 this run; the earlier notes that the API timed out and returned 403 no longer hold). |
 
-## Searches tried
-
-| # | Route | Result |
-|---|---|---|
-| 1 | CourtListener REST API, `type=r`, `court=txnb`, query "adversary complaint" (curl) | Timed out after 20 s, no response. |
-| 2 | CourtListener web search, `court=txnb`, `type=r` (WebFetch) | HTTP 403 Forbidden. |
-| 3 | Web search: txnb adversary proceeding complaint, courtlistener | Court hearing calendars, the N.D. Tex. local rules, the BTXN105 pro hac vice form, General Order 2015-01. No complaint PDF. |
-| 4 | Web search: Highland Capital 19-34054 adversary complaint PDF | Court opinions (adversaries 21-03067, 21-03003/-03005/-03006/-03007, 22-03052, 25-03055) and calendars. The opinions are not complaints. No complaint PDF. |
-| 5 | Web search: govinfo USCOURTS-txnb bankruptcy adversary complaint | No govinfo bankruptcy filings for txnb. Results were other districts' forms and court pages. |
-| 6 | Web search (extended): N.D. Tex. bankruptcy adversary complaint, Dallas Division | Only a govinfo district-court complaint (txnd, 3:22-cv-02170, not a bankruptcy adversary) and the N.D. Tex. local rules. |
-| 7 | Web search: Highland Capital Kroll claims-agent docket, "Original Complaint" | No Kroll docket page or complaint PDF. Justia shows an appellate docket (3:20-cv-3390) with metadata only. |
-| 8 | Web search: adversary motion to dismiss brief, N.D. Tex. bankruptcy | Judge's hearing calendars list motions to dismiss adversary proceedings (e.g. 25-03049, 25-03115, 21-03033). No brief text. |
-
-Not tried: PACER/CM-ADV (login required; not public access in this box), direct requests to the court's own docket search (not reachable from this box), state e-filing brief banks (not applicable to federal bankruptcy).
-
-## What would settle it
-
-A filed adversary complaint in an N.D. Tex. bankruptcy adversary (any division), as a text-based PDF from CourtListener RECAP, the court's docket, or a party's public exhibit. Once one is found, save it here as `FILED-EXAMPLE-<short-case>-<adv-no>-adversary-complaint.pdf`, add its row to this file, and transcribe a sample into `samples/`.
+The exemplar file is the whole filing as downloaded. The sample transcribes part of it (see `samples/INPUT-prime-asset-v-primalend.md` and the README).

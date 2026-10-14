@@ -155,17 +155,17 @@
   // Headings: level 1 is a centered section; level 2 a bold sub-heading; level 3 bold italic.
   show heading.where(level: 1): it => {
     v(24pt, weak: true)
-    align(center, text(weight: "bold", upper(it.body)))
+    block(sticky: true, width: 100%, align(center, text(weight: "bold", it.body)))
     v(12pt, weak: true)
   }
   show heading.where(level: 2): it => {
     v(12pt, weak: true)
-    text(weight: "bold", it.body)
+    block(sticky: true, text(weight: "bold", it.body))
     v(12pt, weak: true)
   }
   show heading.where(level: 3): it => {
     v(12pt, weak: true)
-    text(weight: "bold", style: "italic", it.body)
+    block(sticky: true, text(weight: "bold", style: "italic", it.body))
     v(12pt, weak: true)
   }
 

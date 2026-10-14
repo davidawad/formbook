@@ -155,20 +155,21 @@
   set text(font: font-family, size: type-size, lang: "en")
   set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
 
-  // Headings: level 1 is a centered section; level 2 a bold sub-heading; level 3 bold italic.
+  // Headings: level 1 is a centered bold section, set as written (no case change: upper() would turn
+  // subsection letters in citations, "§ 523(a)(4)", into "(A)"); level 2 a bold sub-heading; level 3 bold italic.
   show heading.where(level: 1): it => {
     v(24pt, weak: true)
-    align(center, text(weight: "bold", upper(it.body)))
+    block(sticky: true, width: 100%, align(center, text(weight: "bold", it.body)))
     v(12pt, weak: true)
   }
   show heading.where(level: 2): it => {
     v(12pt, weak: true)
-    text(weight: "bold", it.body)
+    block(sticky: true, text(weight: "bold", it.body))
     v(12pt, weak: true)
   }
   show heading.where(level: 3): it => {
     v(12pt, weak: true)
-    text(weight: "bold", style: "italic", it.body)
+    block(sticky: true, text(weight: "bold", style: "italic", it.body))
     v(12pt, weak: true)
   }
 

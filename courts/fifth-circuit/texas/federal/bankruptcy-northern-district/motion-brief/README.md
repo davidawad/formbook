@@ -3,15 +3,15 @@
 Doc type: **motion with brief in support** in the United States Bankruptcy Court for the Northern District of Texas (`txnb`), filed in an adversary proceeding (for example, a motion to dismiss).
 Folder: `courts/fifth-circuit/texas/federal/bankruptcy-northern-district/motion-brief/`.
 
-BLOCKED: no exemplar. No filed motion or brief from this court could be found or downloaded (searches listed in `exemplars/SOURCE.md`). The template is built from the rules below; the layout choices the rules leave open are conventions, not checked against a filing.
+Exemplar: Shook adversary 26-03089 (Bankr. N.D. Tex., Dallas Division), Doc 9, "Defendants' Brief and Partial Motion to Dismiss," filed October 9, 2026. Source and URLs in `exemplars/SOURCE.md`.
 
 | Item | Status |
 |---|---|
-| exemplar | no (`BLOCKED: no exemplar`; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-synthetic-motion-brief.md`: a SYNTHETIC test fixture, not a transcription of a filing. It exists only to exercise the template. |
-| render | ok on the synthetic fixture: `tools/render.sh` ran with typst 0.15.0, vendored EB Garamond only, no warnings. The PDF is `samples/OUTPUT-synthetic-motion-brief.pdf` (kept out of git, see Known gaps). |
-| overlay | fail: `tools/overlay.sh` exits 1 with "no exemplar pdf in exemplars". There is nothing to overlay against. |
-| pages reviewed | 4 of 4 (synthetic render, every page rendered at 60 dpi and viewed after the last template change) |
+| exemplar | yes: `exemplars/FILED-EXAMPLE-ruxton-v-shook-26-03089-motion-brief.pdf` (the whole 9-page filing, text layer present) |
+| sample md | `samples/INPUT-ruxton-v-shook.md`: a transcription of the whole filing: caption, counsel block, the body (sections I to IX), the signature, the certificate of conference and the certificate of service |
+| render | ok: `tools/render.sh` (typst 0.15.0, vendored EB Garamond only, no warnings) writes `samples/OUTPUT-ruxton-v-shook.pdf`, 8 pages |
+| overlay | ok: `tools/overlay.sh` writes `samples/OVERLAY-ruxton-v-shook.pdf` and `.txt`; every rendered page is paired with a filed page (see the page map in the `.txt`) |
+| pages reviewed | 8 of 8 (every page of the final render rasterized at 80 dpi and viewed after the last template change) |
 
 ## Governing rules
 
@@ -42,7 +42,7 @@ The local rules copy is dated "Revised 12/1/16". A later revision may exist on t
 - Court title centered and bold: UNITED STATES BANKRUPTCY COURT / NORTHERN DISTRICT OF TEXAS / DIVISION.
 - Form 416 caption (same as the adversary-complaint folder): debtor above the adversary parties on the left; chapter, case number and adversary number on the right.
 - Title centered and bold, then the body.
-- Body double-spaced (about 24 pt pitch at 12 pt, a convention), paragraphs unnumbered and first-line indented 0.5 in. Headings: level 1 centered bold caps; level 2 bold; level 3 bold italic.
+- Body double-spaced (about 24 pt pitch at 12 pt, a convention), paragraphs unnumbered and first-line indented 0.5 in. Headings are set as written: level 1 centered bold (the template does not change their case, because `upper()` turned citation letters such as "(a)" into "(A)"); level 2 bold; level 3 bold italic. Headings keep with the paragraph that follows.
 - Lists numbered 1., 2., ... as written (relief items).
 - Table of contents on its own page, after the cover, when `toc: true`.
 - Signature block, then the certificate of conference and the certificate of service when given. Each certificate is kept on one page with its heading.
@@ -56,21 +56,27 @@ The local rules copy is dated "Revised 12/1/16". A later revision may exist on t
 
 ## Known gaps and open choices
 
-1. **No exemplar (blocking for tier 2).** The brief asks for a filed exemplar; none was found (see `exemplars/SOURCE.md`). Spacing, caption detail, counsel placement and the certificate wording are unchecked against a filing. Tier 2 cannot be judged. The overlay cannot run.
-2. **Synthetic fixture.** `samples/INPUT-synthetic-motion-brief.md` is a placeholder test document, not an exemplar. Its render is for template testing only.
+1. **Paragraph numbers (OPEN, a clerk-convention question for David).** The exemplar numbers its body paragraphs 1 to 13; the template's motion convention is unnumbered paragraphs (the complaint template numbers them). The rules reviewed here do not require numbers in a motion, and the exemplar is one filer, so the template is not changed. Decide whether motions should be numbered.
+2. **Table of contents not generated for this exemplar.** The exemplar is 9 pages and has no table of contents; L.B.R. 7007-2(d) applies only to a brief over 10 pages, so the sample sets `toc: false`.
 3. **Table of authorities not generated.** L.B.R. 7007-2(d)(2) requires one for a brief over 10 pages. Generating page references needs a citation-tagging step in the sample, which is not built. A brief over 10 pages cannot be filed from this template without it.
 4. **Page limit not enforced.** L.B.R. 7007-2(c) allows 25 pages, excluding the table of contents and authorities. The template does not count body pages or fail the build past 25.
 5. **Proposed order not generated.** L.B.R. 7007-1(c) requires it as a separate exhibit. It is a separate document, to be drafted separately.
 6. **Certificate of conference.** L.B.R. 7007-1(a) exempts motions to dismiss from the conference requirement. The template writes a certificate only when the frontmatter gives one, so a motion to dismiss can omit it.
 7. **Font.** No font rule was found for motions, so EB Garamond at 12 pt (the only vendored font) is used. It is smaller in apparent size than Times New Roman at 12 pt.
-8. **Output PDFs are not committed.** Following the snapshot's rule against PDFs in the repo, `OUTPUT-synthetic-motion-brief.pdf` was moved to `/work/artifacts/` after review. Rerun `sh tools/render.sh <this-folder> samples/INPUT-synthetic-motion-brief.md` to regenerate it.
+8. **Output PDFs.** `samples/OUTPUT-ruxton-v-shook.pdf` and `samples/OVERLAY-ruxton-v-shook.pdf` (with `.txt`) are written where the tools put them. Regenerate with `sh tools/render.sh <this-folder> samples/INPUT-ruxton-v-shook.md` and `sh tools/overlay.sh <this-folder> ruxton-v-shook`.
 9. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and `tools/` is out of scope for this box. The gates were not run.
+10. **Signature block.** The template prints "Respectfully submitted," above the firm name; the filing's block is the same in substance. The filing's certificate of conference is written in the template's single-spaced certificate style.
 
-## Review of the rendered pages (synthetic fixture, final template)
+## Review of the rendered pages (Ruxton transcription, final template, 8 pages)
 
-- Page 1: counsel block; court title; Form 416 caption; the title "DEFENDANT'S MOTION TO DISMISS AND BRIEF IN SUPPORT" centered. No overlap. Pass.
-- Page 2: table of contents from the headings (the first heading is the fixture's own title, "Synthetic fixture", which the fixture adds; a real brief would not carry it). Page numbers are shown; all the headings fall on page 3 in this fixture. Pass.
-- Page 3: body paragraphs indented and double-spaced; headings centered bold caps and bold sub-headings; relief list numbered; the signature block; the certificate of conference with the signer's "/s/" line. Pass.
-- Page 4: the certificate of service, kept together on its own page because it did not fit on page 3. Pass.
+- Page 1: counsel block; court title; Form 416 style caption; the title centered; the intro paragraph. Pass.
+- Pages 2–3: sections II to IV; headings bold and centered, as written; citations keep their case (for example "§ 523(a)(4)"). Pass.
+- Page 4: section V; "V. Count II: § 523(a)(4) fiduciary theory" keeps its lowercase letters. Pass.
+- Page 5: section VI; "VI. Counts V–VII: § 727(a)(3), (2), and (4)" keeps its lowercase letters. Pass.
+- Page 6: section VII, starting the page with its heading and paragraph (the first render left the heading alone at the foot of page 5, so headings were made sticky), and the start of VIII. Pass.
+- Page 7: the rest of VIII, section IX, the date, the signature block. Pass.
+- Page 8: the certificate of conference and the certificate of service, each with the "/s/" line. Pass.
+- Overlay: the filed pages differ from ours in the places listed in Known gaps (paragraph numbers, the ECF header, the filing's own headings). The word-overlap scores (53–90%) are a pairing aid, not a grade.
+- Fixed in this pass: level-1 headings no longer pass through `upper()`; headings are kept with the following paragraph; the transcription no longer repeats "Respectfully submitted," and no longer shows a stray "[unnumbered]" marker.
 
 [Formbook index](../../../../../../README.md) | [Court README](../README.md)

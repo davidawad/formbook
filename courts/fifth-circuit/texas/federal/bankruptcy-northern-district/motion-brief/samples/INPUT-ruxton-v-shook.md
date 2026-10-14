@@ -1,0 +1,83 @@
+---
+caption:
+  debtor: "Joshua Lee Shook and Jessica Lynn Shook"
+  parties:
+    - names: ["Robert Ruxton III, Margaret Ruxton, and Garage Candy Autos, LLC"]
+      designation: "Plaintiffs"
+    - names: ["Joshua Lee Shook and Jessica Lynn Shook"]
+      designation: "Defendants"
+chapter: 7
+case_number: "26-32515-swe7"
+adversary_number: "26-03089-swe"
+division: "Dallas Division"
+title: "DEFENDANTS' BRIEF AND PARTIAL MOTION TO DISMISS UNDER RULE 12(b)(6), ALTERNATIVE REQUEST FOR MORE DEFINITE STATEMENT UNDER RULE 12(e), AND UNOPPOSED MOTION TO QUASH SERVICE UNDER RULE 12(B)(5)"
+toc: false
+counsel:
+  - "Clayton L. Everett, Texas State Bar No. 24065212"
+  - "NORRED LAW, PLLC"
+  - "515 E. Border Street"
+  - "Arlington, Texas 76010"
+  - "Phone: (817) 704-3984"
+  - "clayton@norredlaw.com"
+  - "*Counsel for Defendants*"
+date: "October 9, 2026"
+signature:
+  firm:
+    - "NORRED LAW, PLLC"
+  signer: "Clayton L. Everett"
+  lines:
+    - "Texas State Bar No. 24065212"
+    - "clayton@norredlaw.com"
+    - "515 E. Border St."
+    - "Arlington, Texas 76010"
+    - "O 817-704-3984, F. 817-524-6686"
+    - "Counsel for Defendants"
+certificate_conference: "[noindent] Under L.B.R. 7007-1(a), no conference is required for the motion to dismiss. On October 9, 2026, I conferred by email with Kevin J. McDonnell, counsel for Plaintiffs, regarding the requests to quash service and for a more definite statement.\n\nQuash service: Plaintiffs do not oppose quashing service and have agreed to re-serve the summons, complaint, and the Court's order on both Defendants and on Defendants' counsel in compliance with Fed. R. Bankr. P. 7004(b)(9) and (g).\n\nMore definite statement: Plaintiffs oppose. Agreement could not be reached because Plaintiffs contend the complaint identifies the parties, the transaction, the amounts, and the statutory grounds for each count, and gives Defendants fair notice of the claims. Defendants contend that Counts II, III, and V–VII do not meet Rule 9(b)'s particularity requirement."
+certificate_service: "[noindent] I hereby certify that on October 9, 2026, a true and correct copy of the foregoing document was served upon all parties entitled to notice through the ECF system.\n\nVia CM/ECF to Counsel for Plaintiffs:\nKevin J. McDonnell, McDonnell Coates, LLP, 215 W. 2nd St., Waxahachie, TX 75165, and via email: kmcdonnell@simplified.services"
+---
+
+Defendants move under Fed. R. Bankr. P. 7009 and 7012 and Fed. R. Civ. P. 9(b), 12(b)(5), 12(b)(6), and, alternatively, 12(e), to dismiss specified claims and quash deficient service. This is a targeted motion; Defendants do not ask the Court to adjudicate disputed merits facts or to dismiss Joshua's § 523(a)(2)(A) claim merely because the state judgment may lack issue-preclusive effect.
+
+# I. Relevant allegations and service record
+
+The complaint alleges a May-June 2024 investment of $460,000; a May 4, 2026 state-court judgment against Joshua and two LLCs, but not Jessica; and a collective $460,000 damages award on contract, fraud, fiduciary-duty, and theft theories. Compl. ¶¶ 14–32. It pleads § 523(a)(2)(A) against Joshua (Count I) and Jessica (Count III), § 523(a)(4) (Count II), and § 727(a)(5), (3), (2), and (4) against Joshua (Counts IV–VII).
+
+The summonses issued September 9, 2026, and the filed returns (Adv. Docs. 6–7) reflect mailing only to 2108 W. Sherman Road, Aubrey. On July 6, 2026, Defendants filed a notice designating 3530 S. Echo Trail, Plano, Texas 75023, which was served on Plaintiffs' counsel. Main Case Doc. 19. The returns do not reflect service on Defendants' counsel as required by Fed. R. Bankr. P. 7004(g).
+
+# II. Service: Rule 12(b)(5); alternative request to quash
+
+Plaintiffs do not oppose quashing the existing service and have agreed to re-serve the summons, complaint, and the Court's order on both Defendants in compliance with Rule 7004(b)(9) and (g). Defendants therefore request that the Court quash service and direct Plaintiffs to obtain an alias summons and re-serve Defendants at the address designated in Main Case Doc. 19, and Defendants' counsel of record, within 14 days of the Court's order. Defendants preserve their Rule 12(b)(5) defense pending completion of proper service. Fed. R. Civ. P. 12(h)(1).
+
+# III. Governing pleading standards
+
+Rule 12(b)(6) requires sufficient factual allegations to state a plausible claim; labels and element recitations are insufficient. Ashcroft v. Iqbal, 556 U.S. 662, 678 (2009); Bell Atl. Corp. v. Twombly, 550 U.S. 544, 570 (2007). Fraud-based theories must also identify the circumstances of fraud with particularity under Rule 9(b), although intent may be alleged generally. The Court accepts well-pleaded facts, not legal conclusions, and may consider exhibits attached to the complaint. To the extent Plaintiffs contend the complaint gives fair notice, fair notice is the Rule 8 standard. Counts V–VII sound in fraud and must meet Rule 9(b)'s particularity requirement, and Counts V and VII rest on "information and belief" allegations that identify no missing record, false statement, or omitted asset. Compl. ¶¶ 76–77, 88–90.
+
+# IV. Count III: no plausible debt owed by Jessica
+
+The complaint concedes Jessica was not a defendant to the state-court judgment. Compl. ¶¶ 32, 61. It alleges that she was a member/manager of Lazy S Enterprises, LLC, signed an assumed-name certificate, and had signature authority on a business bank account. Id. ¶¶ 10–13, 20–22, 40, 62–67. It does not identify a misrepresentation Jessica made to Plaintiffs, a personal undertaking to repay them, a particular fraudulent act she authorized, or facts establishing that Joshua was Jessica's agent or partner in an enterprise exposing Jessica personally to his tort liability. The conclusory statement that she "received a benefit" (¶ 65) identifies neither the benefit nor its source. The complaint alleges that the oral contract was made with Joshua "individually and as agent of Lazy S Enterprises and Hammertime Enterprise Motorsports, LLC." Compl. ¶ 14. It does not allege that Joshua acted as Jessica's agent. Plaintiffs' own exhibits show Jessica as the LLC's member (Exs. 1–2), and Exhibit 3's April 15, 2024 certificate bears only a typed electronic-filing name.
+
+Bartenwerfer v. Buckley, 598 U.S. 69 (2023), does not dispense with antecedent liability: § 523(a)(2)(A) takes a debt as it finds it, and the fraud of an agent or partner may be imputed only where applicable nonbankruptcy law imposes liability. The Supreme Court expressly recognized that limited-liability entities ordinarily shield their members from entity debt. Id. at 82 ("businesses can also organize as limited liability entities, which insulate individuals from personal exposure to the business's debts"). Plaintiffs allege no viable exception to that principle or other state-law theory making Jessica personally liable. Because § 523 excepts a debtor's debt from discharge rather than creating one, Count III should be dismissed without prejudice to a properly pleaded basis of liability, if any. Under Texas law, "a member or manager is not liable for a debt, obligation, or liability of a limited liability company, including a debt, obligation, or liability under a judgment, decree, or order of a court," absent a company-agreement provision to the contrary. Tex. Bus. Orgs. Code § 101.114. Disregarding the entity to impose an LLC's contractual or contract-related obligation on a member requires pleading and proof of actual fraud perpetrated primarily for the member's direct personal benefit. Id. §§ 21.223(b), 101.002. A corporate agent is personally liable for fraud only when the agent personally participates in it. See Miller v. Keyser, 90 S.W.3d 712, 717 (Tex. 2002). The complaint alleges no such participation by Jessica. And In re Luce, 960 F.2d 1277 (5th Cir. 1992), on which Plaintiffs rely (Compl. ¶ 66), concerned partners, who are personally liable for partnership obligations. The complaint alleges no partnership. Agency imputation runs from Joshua to his alleged principals, Lazy S and Motorsports, not through the LLC to its member. Although Count III is captioned under § 523(a)(2)(A), ¶ 67 and Prayer ¶ C also assert § 523(a)(4) against Jessica based solely on her relationship with an entity found liable for breach of fiduciary duty. That theory fails for the same reasons. No fiduciary finding was made against Jessica, and no trust relationship between Jessica and Plaintiffs is alleged. It should be dismissed with the rest of Count III.
+
+# V. Count II: § 523(a)(4) fiduciary theory
+
+A state-law finding of breach of fiduciary duty does not automatically establish "fiduciary capacity" under § 523(a)(4). The federal requirement ordinarily concerns an express or technical trust existing before the alleged wrong, rather than a fiduciary obligation arising only from confidence, an investment relationship, or misconduct. See In re Tran, 151 F.3d 339, 342 (5th Cir. 1998); In re Bennett, 989 F.2d 779, 784–85 (5th Cir. 1993). The complaint identifies no trust instrument, trust res held by either debtor in a qualifying fiduciary capacity, preexisting trust duties, or applicable statutory trust. Compl. ¶¶ 51–58. Its general reference to "other conduct within the scope" of § 523(a)(4) does not identify acts constituting embezzlement or larceny. The Court should dismiss Count II's fiduciary-capacity theory and require repleading of any embezzlement or larceny theory with the relevant factual conduct identified. This request does not challenge the validity of the state-court fiduciary-duty judgment. Bennett found fiduciary capacity only because the debtor controlled the general partner of a limited partnership in which the creditors already held interests. That trust relationship existed before the wrong. Here, Plaintiffs allege they never received the promised interest in Motorsports. Compl. ¶¶ 15, 19. Nor does Count II invoke the Texas Theft Liability Act finding. Even if it did, a TTLA judgment does not establish the federal elements of embezzlement, which requires fraudulent appropriation of property lawfully entrusted, or larceny, which requires a wrongful taking at the outset. See In re Miller, 156 F.3d 598, 602–03 (5th Cir. 1998) and Huntington Nat'l Bank v. Aman (In re Aman), 498 B.R. 592 (Bankr. N.D. Va. 2013). The state-court order makes no finding on which statutory theft theory applied.
+
+# VI. Counts V–VII: § 727(a)(3), (2), and (4)
+
+Count V (§ 727(a)(3)) asserts "upon information and belief" that Joshua concealed, destroyed, or failed to preserve records, but identifies no missing category of records, deficient accounting system, request for records, or particular inability to ascertain his financial affairs. Compl. ¶¶ 74–79. A creditor's failure to receive a voluntary accounting is not itself a pleaded failure to keep records.
+
+Count VI (§ 727(a)(2)) does not identify a particular transfer, concealment, asset, recipient, date, or act within the statutory one-year prepetition period or after the petition. Indeed, ¶ 82 says those details are to be developed in discovery. Compl. ¶¶ 80–85. The conclusory intent allegation does not substitute for facts supporting the proscribed act and timing. The only asset the complaint identifies, the Investment Funds, was received in May–June 2024, roughly two years before the June 4, 2026 petition. That is outside § 727(a)(2)(A)'s one-year window. The complaint does not plead a continuing-concealment theory. Cf. In re Olivier, 819 F.2d 550 (5th Cir. 1987). The § 341 testimony about the Hammertime Enterprise Roofing account (Compl. ¶ 40) does not fill the gap. Count VI does not rely on it. The complaint does not allege those funds were property of the debtor or the estate; to the contrary, it identifies Hammertime Enterprise Roofing as an LLC and an assumed name of Lazy S, a separate debtor (¶ 35). And it alleges no transfer, recipient, or facts showing intent. Because § 727(a)(2) sounds in fraud, Rule 9(b) applies. See Benchmark Elecs., Inc. v. J.M. Huber Corp., 343 F.3d 719, 724 (5th Cir. 2003) (Rule 9(b) requires the "who, what, when, where, and how").
+
+Count VII (§ 727(a)(4)) alleges false oaths and omissions "upon information and belief," without identifying a specific schedule entry, statement, or testimony that was false, its actual falsity, or facts supporting knowing fraudulent intent. Compl. ¶¶ 86–92. The incorporated allegations identify certain § 341 testimony but do not allege which specific statement was false or why. Dismissal or a more definite statement is appropriate. Rule 9(b) independently applies insofar as the count asserts fraudulent false oaths. The complaint never alleges that the § 341 testimony recited in ¶¶ 37–40 was false. It recites that testimony only as background.
+
+# VII. Count IV and Count I: limits of this motion
+
+Defendants do not seek dismissal of Count IV (§ 727(a)(5)) at this stage. The complaint identifies the $460,000 investment and alleges the debtor has not explained its disposition, which may be sufficient to warrant factual development even though the money was received roughly two years prepetition. Nor do Defendants seek dismissal of Joshua's underlying § 523(a)(2)(A) claim: the complaint pleads an identified transaction and allegedly false representations. Defendants preserve all defenses to issue preclusion, justifiable reliance, causation, and the amount or components of any nondischargeable debt. These defenses include whether the $2,747.23 vehicle-repair award constitutes money "obtained by" fraud, and whether a summary-judgment order that contains no findings on representation, reliance, or intent, and that bears a hand-struck, initialed paragraph (Adv. Doc. 1 at 33), actually and necessarily decided the § 523(a)(2)(A) elements. The state-court order awards a single $460,000 sum "for actual damages caused by Defendants' breach of contract, fraud, breach of fiduciary duty, and theft under the Texas Theft Liability Act." It recites only that the court considered "the motion, record, summary judgment evidence, and any arguments of counsel." Adv. Doc. 1 at 32–33. Where a judgment rests on alternative grounds, any one of which would independently support it, the judgment is not conclusive as to any single ground. Eagle Props., Ltd. v. Scharbauer, 807 S.W.2d 714, 722 (Tex. 1990). In that case the bankruptcy court must determine dischargeability and apportion damages itself. In re Schwager, 121 F.3d 177, 184 (5th Cir. 1997). Preclusion also requires "specific, subordinate, factual findings on the identical dischargeability issue." In re Dennis, 25 F.3d 274, 278 (5th Cir. 1994). See also AA Reconditioning, LLC v. Khan (In re Khan), Adv. No. 26-3024, ECF No. 22, at 7–11 (Bankr. S.D. Tex. June 26, 2026) (holding that a state-court summary judgment awarding one sum for breach of contract, fraud, and unjust enrichment did not preclude relitigation of actual fraud, because the fraud findings were not essential and the judgment lacked specific findings on the § 523(a)(2)(A) elements, including justifiable reliance).
+
+# VIII. Alternative relief and responsive pleading
+
+If the Court finds that any challenged claim could be cured, Defendants request dismissal with leave to amend or, alternatively, an order under Rule 12(e) identifying the specific deficiencies to be cured. Defendants further request application of the responsive-pleading timetable prescribed by Fed. R. Civ. P. 12(a)(4), as incorporated by Fed. R. Bankr. P. 7012, unless otherwise ordered. Defendants do not seek a stay of the existing scheduling order by implication. Any leave to amend should be limited to curing the pleaded claims. The deadline to object to discharge or dischargeability expired September 14, 2026. Fed. R. Bankr. P. 4004(a), 4007(c). No § 727 claim is asserted against Jessica, and any new claim must relate back under Fed. R. Civ. P. 15(c), as incorporated by Rule 7015, or it is untimely.
+
+# IX. Prayer
+
+Defendants request that the Court: (1) quash service, as Plaintiffs do not oppose, and direct Plaintiffs to obtain an alias summons and re-serve Defendants at the address designated in Main Case Doc. 19, and Defendants' counsel of record, within 14 days; (2) dismiss Count III as to Jessica, including the § 523(a)(4) theory asserted in ¶ 67 and Prayer ¶ C; (3) dismiss Count II's fiduciary-capacity theory and any unpleaded embezzlement or larceny theory; (4) dismiss Counts V, VI, and VII as to Joshua; (5) alternatively require a more definite statement or grant leave to amend only the deficient claims; and (6) grant such further relief as is just. Defendants do not request dismissal of Count I or Count IV.

@@ -1,24 +1,19 @@
 # Exemplars: motion-brief (txnb)
 
-BLOCKED: no exemplar. No filed motion or brief from the U.S. Bankruptcy Court for the Northern District of Texas was found or downloaded, so there is no `FILED-EXAMPLE-*.pdf` in this folder.
+## FILED-EXAMPLE-ruxton-v-shook-26-03089-motion-brief.pdf
 
-Date of search: 2026-10-14. Public court records only.
+| Field | Value |
+|---|---|
+| Court | United States Bankruptcy Court, N.D. Texas, Dallas Division |
+| Case | In re Joshua Lee Shook and Jessica Lynn Shook, Case No. 26-32515-swe7 (Chapter 7); Robert Ruxton III, Margaret Ruxton, and Garage Candy Autos, LLC v. Shook, adversary 26-03089-swe |
+| Document | Adversary Doc 9, 9 pages (text layer present): "Defendants' Brief and Partial Motion to Dismiss under Rule 12(b)(6), Alternative Request for More Definite Statement under Rule 12(e), and Unopposed Motion to Quash Service under Rule 12(b)(5)", with the certificate of conference and the certificate of service. A motion and brief in one document. |
+| Filer | Defendants Joshua Lee Shook and Jessica Lynn Shook, by Norred Law, PLLC (Clayton L. Everett) |
+| Date filed | October 9, 2026 (ECF stamp "Filed 10/09/26") |
+| Date fetched | 2026-10-14 |
+| URL (docket) | https://www.courtlistener.com/docket/74758171/9/ruxton-v-shook/ |
+| URL (PDF) | https://storage.courtlistener.com/recap/gov.uscourts.txnb.547118/gov.uscourts.txnb.547118.9.0.pdf |
+| Found by | CourtListener search, `court=txnb`, `type=r`, "motion to dismiss" brief, run 2026-10-14 (HTTP 200). |
 
-## Searches tried
+The exemplar file is the whole filing as downloaded. The sample transcribes all of it (see `samples/INPUT-ruxton-v-shook.md`).
 
-| # | Route | Result |
-|---|---|---|
-| 1 | CourtListener REST API, `type=r`, `court=txnb`, query "adversary complaint" (curl) | Timed out after 20 s, no response. |
-| 2 | CourtListener web search, `court=txnb`, `type=r` (WebFetch) | HTTP 403 Forbidden. |
-| 3 | Web search: txnb adversary proceeding complaint, courtlistener | Court hearing calendars, the N.D. Tex. local rules, the BTXN105 pro hac vice form, General Order 2015-01. No complaint PDF. |
-| 4 | Web search: Highland Capital 19-34054 adversary complaint PDF | Court opinions (adversaries 21-03067, 21-03003/-03005/-03006/-03007, 22-03052, 25-03055) and calendars. The opinions are not complaints. No complaint PDF. |
-| 5 | Web search: govinfo USCOURTS-txnb bankruptcy adversary complaint | No govinfo bankruptcy filings for txnb. Results were other districts' forms and court pages. |
-| 6 | Web search (extended): N.D. Tex. bankruptcy adversary complaint, Dallas Division | Only a govinfo district-court complaint (txnd, 3:22-cv-02170, not a bankruptcy adversary) and the N.D. Tex. local rules. |
-| 7 | Web search: Highland Capital Kroll claims-agent docket, "Original Complaint" | No Kroll docket page or complaint PDF. Justia shows an appellate docket (3:20-cv-3390) with metadata only. |
-| 8 | Web search: adversary motion to dismiss brief, N.D. Tex. bankruptcy | Judge's hearing calendars list motions to dismiss adversary proceedings (e.g. 25-03049, 25-03115, 21-03033). No brief text. |
-
-Not tried: PACER/CM-ADV (login required; not public access in this box), direct requests to the court's own docket search (not reachable from this box), state e-filing brief banks (not applicable to federal bankruptcy).
-
-## What would settle it
-
-A filed adversary complaint in an N.D. Tex. bankruptcy adversary (any division), as a text-based PDF from CourtListener RECAP, the court's docket, or a party's public exhibit. Once one is found, save it here as `FILED-EXAMPLE-<short-case>-<adv-no>-motion-brief.pdf`, add its row to this file, and transcribe a sample into `samples/`.
+A second candidate from the same search, Abri Care Group LLC v. Gutnicki (adversary 26-03007, Doc 11, a 21-page brief in support of a motion to dismiss), was not used: this exemplar is a combined motion and brief, which matches the template's "motion and brief in support" form.
