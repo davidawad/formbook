@@ -13,4 +13,6 @@
 | SHA-256 | `d6ca51729f5f86ea95d8f7b58d16b5fce71552a97de1de70f521f796ed225db0` |
 | Public record | Yes. RECAP entry for a public filing in a non-sealed case. Redaction is the filer's own (no SSN, TIN or account numbers appear in the text). |
 
+Restored 2026-10-14 by re-downloading the URL above on the fonts-pass box: the PDF was missing from the snapshot. The download's SHA-256 matches the value in the table.
+
 Only one filer is used. The complaint type has no second exemplar in this pass; the second filer for the tier-2 comparison is a gap recorded in `README.md`.
