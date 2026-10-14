@@ -9,7 +9,7 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-western-district/motion-b
 | sample md | `samples/INPUT-oakes-motion.md` (a portion of the 21-page filing, see Known gaps) |
 | render | ok: `samples/OUTPUT-oakes-motion.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-oakes-motion.pdf` and `OVERLAY-oakes-motion.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and all 8 pages viewed again on 2026-10-14, font unchanged) |
 
 File names follow the tools, not the brief's `<id>.md` shorthand: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf`, and the overlay `OVERLAY-<id>.pdf/.txt` (see `tools/overlay.sh`).
 
@@ -21,6 +21,7 @@ File names follow the tools, not the brief's `<id>.md` shorthand: the sample is 
 | W.D. Tex. L.R. 9014-1(a) | Negative-notice form language, conspicuous, bold, at least 12 pt, placed immediately below the caption and before the body of the pleading. The six sentences are: "This pleading requests relief that may be adverse to your interests."; "If no timely response is filed within 21 days from the date of service, the relief requested herein may be granted without a hearing being held."; "A timely filed response is necessary for a hearing to be held."; "Any response must be timely filed with the United States Bankruptcy Clerk, Western District of Texas, [Clerk's office mailing address]."; "If a timely response is filed, the Court will then set a hearing on the Motion, and you will be provided with notice of the date, time, and place of the hearing."; "If you do not attend the hearing, the Court may decide that you do not oppose the Motion." | `negative-notice(meta)` and `negative-notice-block()`: bold, 12 pt, directly below the caption; the Clerk's address comes from the sample's `clerk_address`. | Fetched from https://www.txwb.uscourts.gov/l-rule-9014-1-contested-matters on 2026-10-14 (WebFetch; six sentences quoted separately). The page carries no revision date. |
 | W.D. Tex. L.R. 9014-1 (other) | Responses must admit or deny each allegation; a reply is due 7 days after the response; motions for expedited hearing are separate pleadings with a proposed order; exclusions from the negative notice (matters without a hearing, matters under the Code, shortened timeframe). | Not generated. | Summarized from the same page (WebFetch). |
 | Fed. R. Bankr. P. 9004(a) | A petition, pleading, schedule or other document must be clearly legible; common abbreviations are acceptable. | Typography: 12 pt EB Garamond, one-inch margins, double spacing. | Fetched from https://www.law.cornell.edu/rules/frbp/rule_9004 on 2026-10-14. The rule sets no point size, margin or spacing. |
+| Typeface (court-named face) | None named. FRBP 9004(a) and W.D. Tex. L.R. 9004 set no typeface, size, margin or spacing. The one face list in the local rules (Courier, Times Roman, Helvetica, Orator) governs the mailing matrix in complex Chapter 11 cases, not pleadings. L.R. 9014-1(a) sets bold, at least 12 pt, for the negative notice only. | EB Garamond kept (docs/FONTS.md, "No face named"). Typeface row: no face required, no substitute. | Local rules text read from the 2014 redline on txwb.uscourts.gov, fetched 2026-10-14 (see Known gaps 12). |
 
 Not produced by this template: a separate memorandum of points and authorities (the exemplar's argument is incorporated in the motion's numbered paragraphs, and no txwb rule requiring a separate memorandum was found; see Known gaps); a proposed order (a separate filing); the notice of hearing (a separate filing, set by the Court after a timely response).
 
@@ -72,12 +73,15 @@ Not produced by this template: a separate memorandum of points and authorities (
 5. **Separate memorandum not produced.** The brief names "motion with memorandum", but the exemplar is a motion with incorporated argument (numbered paragraphs, no separate memorandum). No W.D. Tex. rule requiring a separate memorandum was located (not searched exhaustively). If the court requires one, the template needs a second document type.
 6. **FRBP 9013 text not fetched.** The rule number is from the task brief; the rule's text was not read in this run.
 7. **Italics.** The text layer has no italic markup, so the case names and "Id." are roman. The template italicizes `*...*`.
-8. **Font.** EB Garamond (vendored, the only font in `fonts/`), not Times New Roman. At 12 pt EB Garamond sets smaller than Times.
+8. **Font.** EB Garamond (vendored; `docs/FONTS.md` "No face named"), not Times New Roman. The rules name no face (see Governing rules, Typeface), so no substitute is used. At 12 pt EB Garamond sets smaller than Times; that is a visual difference from the filed copy, not a rule requirement.
 9. **Spacing and margins are conventions.** Rule 9004(a) sets none; the layout follows the exemplar (double spacing, one-inch margins).
 10. **One exemplar.** Tier-2 comparison needs two or three filers; only this one is saved. Other txwb motions are listed in `exemplars/SOURCE.md`.
 11. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape. Render and overlay were run; the visual review above is the Gate 2 equivalent.
+12. **Local rules checked, one edition.** The W.D. Tex. local rules were read from the 2014 redline on txwb.uscourts.gov (fetched 2026-10-14). L.R. 9004 has no typeface rule for pleadings. The redline may be older than the current rules; the current text is not checked.
 
 ## Searches and sources
+
+- Overlay (2026-10-14): the exemplar PDF is not committed to the repo (no `exemplars/*.pdf` in any court folder). It was downloaded from the URL in `exemplars/SOURCE.md` to `/work/artifacts/txwb-rules/exemplars/minns-motion.pdf` and passed as the third argument of `tools/overlay.sh`.
 
 - Exemplar and other motions: see `exemplars/SOURCE.md`.
 - L.R. 9014-1(a): https://www.txwb.uscourts.gov/l-rule-9014-1-contested-matters (WebFetch, 2026-10-14; the page carries no revision date). A courtrules.net copy exists at https://www.courtrules.net/courts/federal/bankruptcy-western-district-texas/local-rules/l-rule-9014-1.
