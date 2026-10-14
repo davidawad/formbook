@@ -82,7 +82,7 @@ OPEN: none in the template.
 3. **Oral argument statement.** LR Cv 7(c) requires the statement in motions and responses. The exemplar memorandum has none (the motion carries it). The template prints the statement from `oral_argument`. The sample's value ("not requested") is a placeholder, not a fact from the exemplar.
 4. **Page limit.** No page limit was found in the text of LR Cv 7 or LR Cv 5 as posted. Individual judges' practices were not checked. The template has no page check. The sample is 14 pages, the same as the exemplar.
 5. **Caption rule.** The party column is closed by a rule; the exemplar uses a ")" column. Recorded as a tier-2 choice.
-6. **Font.** EB Garamond, as in the complaint; it sets smaller than the exemplar's Times at the same size.
+6. **Font.** LR Cv 5(a)(3) names no typeface (same check as the complaint, 2026-10-14), so EB Garamond is kept per `docs/FONTS.md`; it sets smaller than the exemplar's Times at the same size.
 7. **Case names.** Not italicized in the sample (no italic markup in the text layer). A tier-2 gap for filers' italics; the template renders italics when they are marked.
 8. **Verbatim errors kept.** The exemplar's "Id..", "form the ECF system", "Respectfully submitted by," and "2018WL" spacing are transcribed as filed.
 9. **Certificate on its own page.** The certificate of service falls on page 14 by itself. The exemplar carries it on its last page with the end of the conclusion; the template starts it on the page the signature leaves.

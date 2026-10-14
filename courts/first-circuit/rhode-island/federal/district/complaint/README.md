@@ -68,7 +68,7 @@ OPEN: none.
 
 1. **One exemplar.** Tier 2 in EVAL-LOOP asks for 2 or 3 filers. The search found Melo v. Lifespan (1:26-cv-00539) and Gifford v. Beacon Mutual (1:26-cv-00340), both complaints in this court. They were not downloaded for layout comparison. Tier-2 conventions here are therefore judged against one filer only.
 2. **Caption rule.** The party column is closed by a rule, not the ")" column the other exemplar uses. Both appear in D.R.I. filings; recorded as a tier-2 choice.
-3. **Font.** EB Garamond is the only vendored serif. LR Cv 5(a)(3) names no typeface. EB Garamond sets smaller than Times at the same point size, so the text looks lighter than the exemplar. The 12-point minimum is met.
+3. **Font.** LR Cv 5(a)(3) names no typeface (checked 2026-10-14 against the full text of the D.R.I. Local Rules, "Approved Dec 2024 Rules": the only font wording is "at least 12-point font"), so per `docs/FONTS.md` the template keeps EB Garamond (no substitute needed). EB Garamond sets smaller than Times at the same point size, so the text looks lighter than the exemplar. The 12-point minimum is met.
 4. **Not produced:** civil cover sheet (LR Cv 5(b)), Rule 7.1 disclosure statement, summons. Separate filings.
 5. **Date line.** The exemplar's text layer has no date for the signature. The template prints "Dated:" only when the sample gives one, so the sample has none.
 6. **File names.** `tools/render.sh` and `tools/overlay.sh` read and write `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (CLAUDE.md "File roles"). The brief's `<id>.md` and `<id>-overlay.pdf` names are not what the tools read, so the repo convention is used.
