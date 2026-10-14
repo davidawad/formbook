@@ -36,7 +36,7 @@ Typst plus poppler is enough to render and look at pages. `tools/check.sh` also 
    sh skills/formbook/scripts/new-filing.sh cand complaint ./my-filing
    ```
    This copies the doc type's `samples/INPUT-*.md` to `./my-filing/filing.md` and prints the render command. Read the doc type's `README.md` (rules table, "Markdown contract", known gaps) and `reference/input-contract.md` before editing.
-3. **Fill in the markdown.** Replace every frontmatter value and all body text; the sample is a real filing excerpt, so leave none of its parties, facts or cites behind. Rules of thumb: frontmatter holds metadata only (case number, parties, counsel, title, date, signature, authorities); the body holds headings and prose; do not type heading numbers, paragraph numbers, the TOC, TOA, certificates or signature block (the template generates them); no tables, images, raw HTML or raw Typst.
+3. **Fill in the markdown.** Replace every frontmatter value and all body text; the sample is a real filing excerpt, so leave none of its parties, facts or cites behind. Rules of thumb: frontmatter holds metadata only (case number, parties, counsel, title, date, signature, authorities); the body holds headings and prose; do not type paragraph numbers (complaints), the TOC, TOA, certificates or signature block (the template generates them); heading numbers are automatic in appellate briefs but typed by you in the NY motion-brief (check the doc type's README); no tables, images, raw HTML or raw Typst.
 4. **Render.**
    ```sh
    sh skills/formbook/scripts/render-filing.sh <doctype-dir> ./my-filing/filing.md ./my-filing/filing.pdf
