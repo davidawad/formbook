@@ -5,7 +5,7 @@
 - Exemplar: **BLOCKED: no exemplar.** No public ACCA Government answer found; searches listed in `exemplars/SOURCE.md`.
 - Sample: `samples/INPUT-fictional-answering-brief.md`. **FICTIONAL** structural fixture (invented names, docket, record cites and holdings), not a transcription of a filing.
 - Template: `typst/acca-answering-brief.typ` (entry `typst/main.typ`). Copied from `../opening-brief/typst/`; the differences are the title, the `doc-kind`, and the certificate recipient.
-- Status: template built and rendered (5 pages, 0 typst warnings). Overlay: **fail** (no exemplar to pair). Page review: done (5 of 5, below). Tier-1 is **not asserted** (the ACCA form rule was not retrieved; see Known gaps 1-2). One OPEN tier-2 finding (signature block alone on page 4). `court.json` untouched.
+- Status: template built and rendered (5 pages, 0 typst warnings; re-rendered 2026-10-14, unit acca-32.22). Overlay: **fail** (no exemplar to pair). Page review: done (5 of 5, below; all 5 re-viewed on 2026-10-14). The second exemplar search also found nothing (`exemplars/SOURCE.md`, "Second pass"). Tier-1 is **not asserted** (the ACCA form rule was not retrieved; see Known gaps 1-2). One OPEN tier-2 finding (signature block alone on page 4). `court.json` untouched.
 
 ## Files
 
