@@ -10,6 +10,7 @@ Folder: `courts/eighth-circuit/nebraska/federal/district/motion-brief/`.
 | render | ok: `samples/OUTPUT-sandoval-motion-brief.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-sandoval-motion-brief.pdf` and `OVERLAY-sandoval-motion-brief.txt` (page map) |
 | pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed in the final state) |
+| typeface | face required: none (NECivR names no typeface). Substitute: none; EB Garamond kept (no-face default, `docs/FONTS.md`). Fit: n/a. Exemplar is Times New Roman, a filer's choice (see Known gaps, 1). |
 | tier 2 | not yet judged against 2 or 3 filers: one exemplar only (see Known gaps, 2) |
 
 ## Governing rules
@@ -57,7 +58,7 @@ Checked on 2026-10-14. NECivR 12.1 (a motion to dismiss suspends the time to ans
 
 ## Known gaps and open choices
 
-1. **Font.** The District's rules name no font. The exemplar is Times New Roman; the only vendored serif is EB Garamond, whose x-height is smaller, so the text looks smaller than the exemplar at 12 pt. A Times-metric font in `fonts/` would remove the difference; that is a shared-tree change for David.
+1. **Font.** The District's rules name no font: NECivR 7.1 and 10.1 in the 2022 text (`NECivR.2022.pdf`, read 2026-10-14) contain no typeface, type-size or spacing rule beyond 10.1(b)(1)'s paper size and top margin. `docs/FONTS.md` says a court that names no face keeps EB Garamond, so the template does. The exemplar is Times New Roman, which is the filer's choice, not a rule; Liberation Serif (metric-compatible with Times New Roman) is vendored but is not used, because no rule calls for it. The text looks smaller than the exemplar at 12 pt because of EB Garamond's smaller x-height.
 2. **One exemplar.** Tier 2 asks for 2 or 3 filers. Hingorani v. Board of Regents, No. 4:26-cv-03157 (27 pp., Century Schoolbook, table of contents) is the likely second filer; it is listed in `exemplars/SOURCE.md` but not saved, per the one-exemplar rule.
 3. **Second signer.** The exemplar has two signers (Justin P. Smith, #28283, and Matthew G. Dunning, #20057). The template takes one signer; Dunning is omitted from the sample's signature blocks.
 4. **Case names are roman.** The exemplar's text layer has italic runs for case names (its PDF embeds an italic face), but the transcription does not mark them. The template supports `*...*`.

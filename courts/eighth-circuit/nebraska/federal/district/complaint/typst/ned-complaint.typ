@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no D. Neb. font rule; EB Garamond is the only vendored serif (README.md)
+#let font-family = "EB Garamond"        // no face named by NECivR (checked 2026-10-14), so docs/FONTS.md keeps EB Garamond (README.md)
 #let type-size = 12pt
 #let pitch = 24pt                       // double-spaced baseline pitch (the body grid, a convention)
 #let page-w = 8.5in                     // NECivR 10.1(b)(1): 8 1/2 by 11 inch paper (paper filings)
