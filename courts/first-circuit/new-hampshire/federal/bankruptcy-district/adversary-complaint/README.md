@@ -7,9 +7,10 @@ Folder: `courts/first-circuit/new-hampshire/federal/bankruptcy-district/adversar
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-smith-pj-currier-24-01019-adversary-complaint.pdf` (one filer, see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-smith-adversary-complaint.md`: the full complaint (introduction through reservation of rights, all four counts, paragraphs 1 to 40), signature block; no certificate of service (an initiating complaint has none, LBR 7103) |
-| render | ok: `samples/OUTPUT-smith-adversary-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-smith-adversary-complaint.pdf` and `samples/OVERLAY-smith-adversary-complaint.txt` |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on the final render) |
+| typeface | face required: none (no NH local rule names a typeface; see gap 1). Font used: EB Garamond (vendored, the court-names-no-face default in `docs/FONTS.md`). Not a substitution: nothing to match. |
+| render | ok: `samples/OUTPUT-smith-adversary-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EB Garamond Regular and Bold embedded), no warnings (`tools/render.sh`, re-run 2026-10-14) |
+| overlay | ok: `samples/OVERLAY-smith-adversary-complaint.pdf` and `samples/OVERLAY-smith-adversary-complaint.txt` (re-run 2026-10-14). The filed PDF is not in this checkout (`exemplars/` holds only `SOURCE.md`); the overlay was run against the copy fetched from the URL in `exemplars/SOURCE.md` (9 pages, matching the record) |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on the 2026-10-14 re-render; no template change, so the review matches the earlier one) |
 
 File names follow the tools' contract (`render.sh` writes `OUTPUT-<id>.pdf`, `overlay.sh` reads it and writes `OVERLAY-<id>.pdf`/`.txt`), not the bare `<id>.md` / `<id>.pdf` names in the task brief.
 
@@ -58,7 +59,7 @@ The overlay is a diagnostic, not a score. The lower overlaps are the expected on
 
 ## Known gaps and open choices
 
-1. **Typeface.** No NH local rule or FRBP 9004 text found sets a typeface or size for adversary complaints (the only LBR font rule, LBR 1007-2(b)(2), covers creditor matrices). The template uses EB Garamond 12 pt, the only vendored font; the exemplar is Times New Roman. Whether a Times-metric font is wanted is a question for David (it would need a vendored font, which is outside this box's scope).
+1. **Typeface.** Checked 2026-10-14 against the text of the court's combined local rules (file dated 2025-04-01): no rule names a typeface, a font size or a line spacing for filed papers. The only font wording is LBR 1007-2(b)(2), "Use legible font", which covers creditor matrices. The court names no face, so the template keeps EB Garamond 12 pt, the `docs/FONTS.md` default. The exemplar is Times New Roman, but that is the filer's choice, not a rule. A Times-metric substitute (Liberation Serif) would be a style choice, not a rule requirement.
 2. **Only one exemplar.** The brief asks for one exemplar per doc type. Tier-2 review (EVAL-LOOP) would want two or three filers; this pass has one. CourtListener RECAP lists other NH adversary complaints with downloadable PDFs (for example Goodman v. U.S. Bank, 25-01034, 4 pages; Seacoast Powersports v. Hemstreet, 25-01004), but they were not downloaded for this pass.
 3. **Cover sheet and summons.** LBR 7003-1 requires the adversary cover sheet as an attachment, and the summons is issued by the clerk under LBR 7004-2. Neither is produced by this template; both are separate documents.
 4. **Count sub-titles.** Count sub-titles in the exemplar are in parentheses and are transcribed as `##` headings; the template does not enforce that wording.
