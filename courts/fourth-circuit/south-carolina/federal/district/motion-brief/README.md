@@ -6,17 +6,17 @@ Doc type **motion-brief**: the memorandum in support of a Rule 12(b) motion to d
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-cobb-v-charleston-county-school-district-2-25-cv-08752-motion-brief.pdf` (1 filer: defendant's counsel; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-cobb-motion-brief.md` (the full 7-page memorandum transcribed: caption, cover title, Introduction, Legal Standard, Argument with block quotation, Conclusion, footnote 1, signature block) |
-| render | ok: `samples/OUTPUT-cobb-motion-brief.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `samples/OUTPUT-cobb-motion-brief.pdf`, 6 pages, typst 0.15.0, vendored Liberation Serif only (embedded per `pdffonts`), no warnings |
 | overlay | ok: `samples/OVERLAY-cobb-motion-brief.pdf` and `samples/OVERLAY-cobb-motion-brief.txt` |
 | pages reviewed | 6 of 6 (every page rendered at 60 dpi and viewed after the last template change) |
-| tier-1 font (L.R. 1.05(B)) | **BLOCKED**: Times New Roman, Arial or Courier New is required; only EB Garamond is vendored (see Known gaps) |
+| tier-1 font (L.R. 1.05(B)) | Met: Times New Roman (one of the three faces the rule names) set as its metric-compatible substitute **Liberation Serif** (see Known gaps) |
 
 ## Governing rules
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | D.S.C. Local Civ. Rule 1.05(A) | Minimum one-inch margins on all sides. | `margin` in `typst/scd-motion-brief.typ` |
-| D.S.C. Local Civ. Rule 1.05(B) | Times New Roman, Arial or Courier New. | `font-family` (currently EB Garamond; BLOCKED) |
+| D.S.C. Local Civ. Rule 1.05(B) | Times New Roman, Arial or Courier New. | `font-family` = `"Liberation Serif"` (Times New Roman substitute, `docs/FONTS.md`) |
 | D.S.C. Local Civ. Rule 1.05(C) | Minimum 12-point type for caption, text and footnotes. | `type-size` (footnote is set in the same size) |
 | D.S.C. Local Civ. Rule 1.05(D) | Only page numbers and document identification may be in margins or smaller than 12 pt. | page number only, centered at the foot |
 | D.S.C. Local Civ. Rule 1.05(E) | Double space text, except indented quotations and footnotes. | `double-leading` (about 27 pt pitch at 12 pt); block quotation single-spaced and indented |
@@ -46,7 +46,7 @@ File names follow the tools (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.pdf
 
 ## What the overlay shows
 
-Red is our render, blue is the filed exemplar, black is where they agree. The page map in `OVERLAY-cobb-motion-brief.txt` pairs our pages 1 to 6 with filed pages 1, 2, 3, 4, 6, 6. Word overlap is 43% to 95% per page. Pages 1 and 2 match most closely (95% and 83%). Pages 5 and 6 match least (49% and 43%): the filed page 5 is not one-to-one with our page 5, and our page 6 pairs with the filed page 6 only in part, because the filed memorandum runs to 7 pages and our render runs to 6. The overlay is a diagnostic for layout and structure, not a score.
+Red is our render, blue is the filed exemplar, black is where they agree. The page map in `OVERLAY-cobb-motion-brief.txt` pairs our pages 1 to 6 one-to-one with filed pages 1 to 6. Word overlap is 62% to 95% per page. Pages 1 and 2 match most closely (95% and 87%). Pages 4 to 6 match least (67%, 62% and 64%): the filed memorandum runs to 7 pages and our render runs to 6, so the page breaks do not line up after page 3. The filed exemplar is set in Times New Roman (`pdffonts`), the face Liberation Serif substitutes for. The overlay is a diagnostic for layout and structure, not a score.
 
 ## Visual review (Gate 2)
 
@@ -60,11 +60,13 @@ Pages 1 through 6 were rendered at 60 dpi and viewed. Findings during review, al
 | 2 and others | Subsection headings (I., II.) sat tight against the preceding paragraph. | Level-3 space above raised to 1em. |
 | 6 | Signature block: the firm name, the attorney list and the place and date are all on the last page. | none needed; the firm and "ATTORNEYS FOR DEFENDANT" line set in the same column as the signers |
 
+Font change (EB Garamond to Liberation Serif, 2026-10-14): all 6 pages re-rendered and viewed at 60 dpi; page count unchanged; no new layout findings.
+
 Open findings: none for layout. The exemplar's own typographical quirks are reproduced as filed, not corrected: the Introduction reads `False Claims Act “FCA”)` with no opening parenthesis, and the *Ahumada* citation has no closing parenthesis. Both are transcribed as written.
 
 ## Known gaps
 
-1. **BLOCKED: font (L.R. 1.05(B)).** The rule requires Times New Roman, Arial or Courier New. `fonts/` vendors only EB Garamond, the render uses `--ignore-system-fonts` (so a system Times New Roman would fail to compile, not silently substitute), and `fonts/` is a shared path this box must not edit. The template therefore renders in EB Garamond and tier-1 font compliance is **not met**. A decision for David: vendor a metric-compatible Times New Roman substitute (for example Liberation Serif) into `fonts/`, then change `font-family` in `typst/scd-motion-brief.typ`. This is the only blocker on this doc type, and the same blocker as `complaint`.
+1. **Font (L.R. 1.05(B)): resolved.** The rule names Times New Roman, Arial or Courier New. This template sets Times New Roman, using `Liberation Serif` (SIL OFL 1.1, vendored in `fonts/liberation-serif/`, metric-compatible per `docs/FONTS.md`). Arial and Courier New were not chosen. The page count is unchanged by the switch (6 pages, from the EB Garamond baseline). The render uses `--ignore-system-fonts`, so no system font can stand in for it.
 2. **One exemplar, one filer.** Tier 2 is judged against one filed memorandum (defendant's counsel, Saxton & Stump, Charleston Division), not the 2 or 3 the eval loop asks for.
 3. **Page limit not enforced.** L.R. 7.05(B)(1) caps an initial brief at 35 double-spaced pages; the template does not count pages. The sample is far under the cap.
 4. **Not checked by the court tools.** This folder has no `checks.yaml`, so `tools/check.sh` has not been run here. The render has no typst warnings (`tools/render.sh` fails on warnings).
