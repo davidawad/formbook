@@ -47,4 +47,6 @@ If you are blocked on a decision only David can make (scope, license, which exem
 
 ## Setup
 
-Dependencies: typst, poppler (`pdfinfo pdffonts pdftotext pdftohtml pdfimages pdftoppm`), gawk, jq, yq (mikefarah), bend, `br` (beads_rust); latex engine: pandoc, tectonic or xelatex; docx engine: pandoc, LibreOffice (`soffice`). Fonts and the cmarker typst package are vendored; nothing is fetched at build time.
+Run `sh tools/bootstrap.sh` once per box. It needs no root: micromamba and conda-forge install typst (pinned 0.15.0), poppler, imagemagick, gawk, jq, go-yq, pandoc and tectonic into `~/.local/share/formbook/env`. It prints every tool's version and exits non-zero if one is missing or wrong. Then put the toolchain on PATH: `export PATH="$HOME/.local/share/formbook/env/bin:$PATH"`. Rerunning is safe.
+
+Dependencies: typst, poppler (`pdfinfo pdffonts pdftotext pdftohtml pdfimages pdftoppm`), gawk, jq, yq (mikefarah), bend, `br` (beads_rust); latex engine: pandoc, tectonic or xelatex; docx engine: pandoc, LibreOffice (`soffice`). The bootstrap does not install bend, `br`, or LibreOffice: conda-forge has no LibreOffice package, so the docx engine needs `soffice` installed another way. Fonts and the cmarker typst package are vendored; nothing is fetched at build time.
