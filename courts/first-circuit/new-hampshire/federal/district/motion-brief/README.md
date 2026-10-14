@@ -9,7 +9,8 @@ Folder: `courts/first-circuit/new-hampshire/federal/district/motion-brief/`.
 | sample md | `samples/INPUT-jonas-motion-brief.md`: pages 1 to 13 and 22 to 25 of the 25-page filing, transcribed from the text layer (pages 14 to 21 and the footnotes are not transcribed; see Known gaps) |
 | render | ok: `samples/OUTPUT-jonas-motion-brief.pdf`, 18 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-jonas-motion-brief.pdf` and `OVERLAY-jonas-motion-brief.txt` |
-| pages reviewed | 18 of 18 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | Rule names no face (LR 5.1(a): "a proportionately spaced font ... no less than twelve (12) point"; no typeface named in the section). Vendored substitute: none needed. Kept **EB Garamond** (`fonts/eb-garamond/`). Not metric-compatible with the filing's Times New Roman; not chased (tier 3). |
+| pages reviewed | 18 of 18 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-14 with no template change) |
 
 ## Governing rules
 
@@ -55,7 +56,7 @@ Note on the certificate: the filing's certificate states only the ECF manner and
 1. **One exemplar, one filer.** EVAL-LOOP's tier-2 rule asks for two or three filers. The search (CourtListener RECAP, `type=rd`, `court=nhd`, `q="motion to dismiss" memorandum`, newest first, 2026-10-14) returned, on its first page of results with a stored PDF, this filing and a court opinion (not a filing). Later pages were not checked. Tier 2 is therefore **not** judged against two filers.
 2. **Partial transcription.** The filing is 25 pages. The sample has pages 1 to 13 and 22 to 25 (the caption and the Background, Standard of Review, Argument I.A to I.C, the Eleventh Amendment discussion's last paragraphs, Argument III, Conclusion, the signature block and the certificate). Pages 14 to 21 are omitted, which removes the heading `II.` and its text. The rendered sample is 18 pages, above the 8 to 14 page target, because the body text of pages 1 to 13 is double spaced at 27.6 pt; trimming the transcription would drop the structure the overlay compares.
 3. **Footnotes.** The filing has footnotes 1 and 2 (on pages 2 and 9). The markdown contract has no footnotes, so their text is absent.
-4. **Font.** The filing is Times New Roman; this template uses EB Garamond, the only text font vendored in `fonts/`. At 12 pt EB Garamond has a smaller x-height, so the text looks smaller than the exemplar. The 12-point minimum is met. A vendored Times-metric font would remove the difference; that is a question for David.
+4. **Font.** The filing is Times New Roman, but the rule does not require it: LR 5.1(a) names no typeface, so the fonts policy (`docs/FONTS.md`, rule 3) keeps EB Garamond. At 12 pt EB Garamond has a smaller x-height, so the text looks smaller than the exemplar. The 12-point minimum is met. Matching the filer's Times would be tier 3 and is not chased.
 5. **Certificate of service.** Printed as filed (ECF manner, signer, no date and no address). See the note under Governing rules: LR 5.1(d) requires more for conventional service.
 6. **Signature and date.** The date line is in the frontmatter (`signature.date`). The template does not check the date or the signer.
 7. **Judge initials suffix (LR 5.1(c)).** `case_number` is printed as given (`Civil No. 26-cv-600-LM-TSM`). The template does not add the suffix.

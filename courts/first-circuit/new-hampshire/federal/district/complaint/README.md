@@ -9,7 +9,8 @@ Folder: `courts/first-circuit/new-hampshire/federal/district/complaint/`.
 | sample md | `samples/INPUT-nicholas-complaint.md`: the whole 14-page complaint, transcribed from the text layer |
 | render | ok: `samples/OUTPUT-nicholas-complaint.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-nicholas-complaint.pdf` and `OVERLAY-nicholas-complaint.txt` |
-| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | Rule names no face (LR 5.1(a): "a proportionately spaced font ... no less than twelve (12) point"; no typeface named in the section). Vendored substitute: none needed. Kept **EB Garamond** (`fonts/eb-garamond/`). Not metric-compatible with the filing's Times New Roman; not chased (tier 3). |
+| pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-14 with no template change) |
 
 ## Governing rules
 
@@ -50,7 +51,7 @@ Not produced (separate filings): the civil cover sheet (LR 3.1(b)); the summons 
 ## Known gaps and open choices
 
 1. **One exemplar, not 2 or 3 filers.** EVAL-LOOP's tier-2 rule asks for two or three filers. The search (CourtListener RECAP, `type=rd`, `court=nhd`, `q=complaint`, newest first, 2026-10-14) returned 20 hits on its first page; only this one had a stored PDF, with a text layer and attorney counsel. The other hits had no stored PDF. Later pages were not checked. Tier 2 is therefore **not** judged against two filers.
-2. **Font.** The filing is Times New Roman; this template uses EB Garamond, the only text font vendored in `fonts/`. At 12 pt EB Garamond has a smaller x-height, so the text looks smaller than the exemplar. The 12-point minimum is met. A vendored Times-metric font would remove the difference; that is a question for David.
+2. **Font.** The filing is Times New Roman, but the rule does not require it: LR 5.1(a) names no typeface, so the fonts policy (`docs/FONTS.md`, rule 3) keeps EB Garamond. At 12 pt EB Garamond has a smaller x-height, so the text looks smaller than the exemplar. The 12-point minimum is met. Matching the filer's Times would be tier 3 and is not chased.
 3. **Double spacing.** Measured in EB Garamond: its line box is 0.65 em, and `1.65em` leading gives a 27.6 pt pitch, the same as Times 12 pt double spaced (2 x 13.8 pt). The render is 14 pages, the same page count as the filing.
 4. **Footnotes are not transcribed.** The filing has footnotes 1 and 2 (pp. 1 and 4). The markdown contract has no footnotes, so their text is absent from the sample and the overlay shows the difference.
 5. **Lettering of the prayer items.** The filing letters the prayer A to D; the template letters every list (a), (b), .... Tier 2, minor; recorded as ACCEPTED.
