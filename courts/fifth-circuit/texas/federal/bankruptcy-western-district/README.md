@@ -23,6 +23,15 @@ Engines: typst `—`, latex `—`, docx `—`.
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 
+## Typeface
+
+Checked 2026-10-14 against FRBP 9004(a) and the W.D. Tex. local rules (2014 redline on txwb.uscourts.gov; see the doc-type READMEs). No rule names a face for pleadings, so no substitute is used and each template keeps EB Garamond (`docs/FONTS.md`, "No face named").
+
+| Doc type | Face required by rule | Vendored substitute | Typeface used |
+|---|---|---|---|
+| `adversary-complaint` | none | none needed | EB Garamond |
+| `motion-brief` | none | none needed | EB Garamond |
+
 ## Folders
 
 - `typst/` Typst template (primary)

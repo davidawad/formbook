@@ -9,7 +9,7 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-western-district/adversar
 | sample md | `samples/INPUT-osherow-complaint.md` (a portion of the 14-page filing, see Known gaps) |
 | render | ok: `samples/OUTPUT-osherow-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-osherow-complaint.pdf` and `OVERLAY-osherow-complaint.txt` |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and all 9 pages viewed again on 2026-10-14, font unchanged) |
 
 File names follow the tools, not the brief's `<id>.md` shorthand: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf` (the default of `tools/render.sh`), and the overlay `OVERLAY-<id>.pdf/.txt` (the default of `tools/overlay.sh`, which reads `OUTPUT-<id>.pdf`).
 
@@ -22,6 +22,7 @@ File names follow the tools, not the brief's `<id>.md` shorthand: the sample is 
 | Fed. R. Civ. P. 10(a) (via 7010) | Caption: court name, title, file number, and the Rule 7(a) designation. | As above; the designation is the party designation (Plaintiff / Defendant). | Via the 7010 summary above. |
 | Fed. R. Civ. P. 10(b) (via 7010) | Claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | Each body paragraph is numbered by the template (`allegations()`); headings and the prayer list are not. | Rule text not fetched in this run. |
 | Fed. R. Bankr. P. 9004(a) | A petition, pleading, schedule or other document must be clearly legible; common abbreviations are acceptable. | Typography: 12 pt EB Garamond, one-inch margins, double spacing. | Fetched from https://www.law.cornell.edu/rules/frbp/rule_9004 on 2026-10-14. The rule sets no point size, margin or spacing. |
+| Typeface (court-named face) | None named. FRBP 9004(a) and W.D. Tex. L.R. 9004 set no typeface, size, margin or spacing. The one face list in the local rules (Courier, Times Roman, Helvetica, Orator) governs the mailing matrix in complex Chapter 11 cases, not pleadings. | EB Garamond kept (docs/FONTS.md, "No face named"). Typeface row: no face required, no substitute. | Local rules text read from the 2014 redline on txwb.uscourts.gov, fetched 2026-10-14 (see Known gaps 6). |
 | W.D. Tex. local bankruptcy rules | No adversary-complaint format rule was located. L.R. 9014-1(a) (negative-notice form language) governs motions, not complaints, and is used only in the motion-brief folder. | Not used here. | Searched; see Known gaps. |
 
 Not produced by this template (separate filings with the complaint, not part of the pleading): the adversary proceeding cover sheet (Official Form 104; the RECAP docket of another txwb adversary shows it attached as Exhibit A to the complaint, rule not verified); the summons; a corporate disclosure statement where required.
@@ -69,15 +70,17 @@ Not produced by this template (separate filings with the complaint, not part of 
 1. **Partial transcription.** The sample transcribes the opening paragraph, the introduction, the parties, jurisdiction, the factual background (filing paragraphs 9 to 28 in condensed form; filing paragraphs 7 and 8 were not captured), counts I and II in full, the first paragraphs of counts III to IX (several counts are shorter than the filing), the prayer for relief and the signature block. The template numbers its paragraphs from 1, so the numbers do not match the filing.
 2. **WHEREFORE paragraph is numbered.** In the filing the request for relief opens with an unnumbered WHEREFORE paragraph. The template numbers every blank-line-separated paragraph, so the WHEREFORE paragraph is numbered (58). A fix needs a sample marker for an unnumbered paragraph; not added.
 3. **Prayer list separated from its lead-in.** The WHEREFORE paragraph ends page 7 and the lettered list starts page 8. The heading and the lead-in are not kept with the first item of a list (a list may break across pages by design).
-4. **Font.** EB Garamond (vendored, the only font in `fonts/`), not Times New Roman. The exemplar is in a Times-like face; at 12 pt EB Garamond sets smaller. Whether the court wants a Times metric face is a question for David.
+4. **Font.** EB Garamond (vendored; `docs/FONTS.md` "No face named"), not Times New Roman. The rules name no face (see Governing rules, Typeface), so no substitute is used. The exemplar is in a Times-like face; at 12 pt EB Garamond sets smaller. That is a visual difference from the filed copy, not a rule requirement.
 5. **Spacing and margins are conventions.** Neither Rule 7010 nor Rule 9004(a) sets them, and no W.D. Tex. adversary-complaint rule was found. Double spacing and one-inch margins follow the exemplar's layout.
-6. **Local rules not verified.** The W.D. Tex. local bankruptcy rules text was searched for (WebSearch found L.R. 9014-1 and the court's pages, not an adversary-complaint format rule). A local adversary-complaint form rule may exist; it is not checked here.
+6. **Local rules checked, one edition.** The W.D. Tex. local bankruptcy rules were read from the 2014 redline on txwb.uscourts.gov (fetched 2026-10-14; text extracted with `pdftotext`). No adversary-complaint format rule and no typeface rule for pleadings appears in it. The courtrules.net copy returned HTTP 403, and the redline may be older than the current rules, so the current text is not checked.
 7. **Caption without a § column.** The exemplar uses the IN RE block and a plain party block with no § column; another txwb complaint (Lowe, see SOURCE.md) uses a § column. The template follows the exemplar; both forms appear in the court.
 8. **Second exemplar not saved.** Lowe v. Neugebauer (San Antonio Division, 19 pp.) is a second filer for tier-2 comparison and is not in `exemplars/`; see SOURCE.md.
 9. **No cover sheet, summons or disclosure statement** (see Governing rules).
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape. Render and overlay were run; the visual review above is the Gate 2 equivalent.
 
 ## Searches and sources
+
+- Overlay (2026-10-14): the exemplar PDF is not committed to the repo (no `exemplars/*.pdf` in any court folder). It was downloaded from the URL in `exemplars/SOURCE.md` to `/work/artifacts/txwb-rules/exemplars/osherow-complaint.pdf` and passed as the third argument of `tools/overlay.sh`.
 
 - Exemplar and other complaints: see `exemplars/SOURCE.md`.
 - Rule text: FRBP 7010 and 9004(a) from Cornell LII, fetched 2026-10-14; W.D. Tex. L.R. 9014-1 from https://www.txwb.uscourts.gov/l-rule-9014-1-contested-matters (via WebFetch, 2026-10-14; the page was summarized, not quoted in full).
