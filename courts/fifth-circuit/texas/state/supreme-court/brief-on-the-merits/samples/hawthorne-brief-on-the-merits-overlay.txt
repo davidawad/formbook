@@ -1,0 +1,3 @@
+ours p.1  filed p.1  word-overlap 27.4%
+ours p.2  filed p.2  word-overlap 18.1%
+ours p.3  filed p.2  word-overlap 15.7%
