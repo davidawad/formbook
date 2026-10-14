@@ -106,3 +106,16 @@ Every page of `OUTPUT-in-re-grand-jury.pdf` was rendered at 60 dpi and looked at
 
 - Respondent's brief (Rule 24.2) and reply brief (Rule 24.4): different cover colors and word limits (chart); not built.
 - Amicus briefs (Rule 37), appendices, and the 8 1/2 by 11 format (Rule 33.2).
+
+## Engines
+
+Engine status (this box): typst `ok` (unchanged); latex `ok`: `samples/OUTPUT-in-re-grand-jury.latex.pdf`, 16 pages; docx `ok` with BLOCKED items: `samples/OUTPUT-in-re-grand-jury.docx` and `.docx.pdf` (LibreOffice 26.8 conversion), 14 pages.
+
+- **latex/** (`template.tex`, `brief.lua`): same booklet geometry and type as the amicus latex. The cover, questions presented and parties pages, TOC, TOA, headings and certificate are built in `brief.lua`. Citations are the body's `toa:<key>` links; each gets a label, and the TOA lists its pages once each. Fonts: EB Garamond via `fontdir` (stand-in).
+- **What differs from typst:** the LaTeX render is 16 pages to typst's 13; the front matter runs longer. Point headings keep the numerals written in the sample.
+- **docx/** (`reference.docx`, `brief.lua`): page setup and styles as in the amicus docx; the cover, front pages, headings and certificate are raw WordprocessingML.
+- **docx BLOCKED items** (see `docs/DOCX.md`):
+  - TOC and TOA: BLOCKED. No page numbers (no field results).
+  - Footer page numbers: BLOCKED. No PAGE field in the reference.
+  - Typeface: BLOCKED (Century-family gap; EB Garamond stand-in).
+  - Certificate word count: a count of the sample body, not Word's.

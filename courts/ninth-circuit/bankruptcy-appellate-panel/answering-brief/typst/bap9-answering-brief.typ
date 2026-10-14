@@ -28,10 +28,11 @@
   // BAP-CONTENT-001: FRBP 8014(b). The appellee's brief meets the same requirements as the opening brief,
   // except that the statements of jurisdiction, of issues and standards of review, and of the case need not be
   // included. The summary, argument and conclusion (FRBP 8014(a)(6)-(7)) remain required.
+  // Each entry is a requirement with the titles a brief may use (see the opening-brief template).
   required: (
-    "Summary of Argument",
-    "Argument",
-    "Conclusion",
+    ("Summary of Argument", "Summary of the Argument"),
+    ("Argument",),
+    ("Conclusion",),
   ),
   // BAP-LENGTH-001: FRBP 8015(a)(7): 30 pages, or the type-volume limit of 8015(a)(7)(B).
   word-limit: 13000,
@@ -257,9 +258,10 @@
   let authorities = meta.at("authorities", default: none)
 
   // ---- required sections (BAP-CONTENT-001) ----
-  for h in doc.required {
-    if md.match(regex("(?m)^#[ \t]+" + h + "[ \t]*$")) == none {
-      panic("bap9-" + doc.kind + ": the brief has no level-1 heading `" + h + "` (FRBP 8014(a))")
+  for titles in doc.required {
+    let found = titles.any(h => md.match(regex("(?m)^#[ \t]+" + h + "[ \t]*$")) != none)
+    if not found {
+      panic("bap9-" + doc.kind + ": the brief has no level-1 heading `" + titles.join("` or `") + "` (FRBP 8014(a))")
     }
   }
 
@@ -305,16 +307,23 @@
   show regex("[§¶] \\S+"): it => box(it)
   // Headings: level 1 are the brief's sections (centered, bold); level 2 are argument headings (bold, left);
   // level 3 are the sub-headings under them (bold, left, hanging).
-  show heading: it => {
+  // Each level has its own rule: a generic `show heading` rule ahead of these returned the heading unchanged.
+  // Level 1 needs the explicit width: without it the block shrinks and `align(center)` does not center.
+  show heading.where(level: 1): it => block(width: 100%, above: 1.2em, below: 1.1em, breakable: false, {
     set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
     set text(size: type-size, weight: "bold")
-    it
-  }
-  show heading.where(level: 1): it => block(above: 1.2em, below: 1.1em, breakable: false, align(center, it.body))
-  show heading.where(level: 2): it => block(above: 1em, below: 0.9em, breakable: false,
-    par(first-line-indent: 0pt, hanging-indent: 0.5in, leading: single-leading, it.body))
-  show heading.where(level: 3): it => block(above: 0.9em, below: 0.8em, breakable: false,
-    par(first-line-indent: 0pt, hanging-indent: 0.5in, leading: single-leading, it.body))
+    align(center, it.body)
+  })
+  show heading.where(level: 2): it => block(above: 1em, below: 0.9em, breakable: false, {
+    set par(first-line-indent: 0pt, hanging-indent: 0.5in, leading: single-leading, justify: false)
+    set text(size: type-size, weight: "bold")
+    it.body
+  })
+  show heading.where(level: 3): it => block(above: 0.9em, below: 0.8em, breakable: false, {
+    set par(first-line-indent: 0pt, hanging-indent: 0.5in, leading: single-leading, justify: false)
+    set text(size: type-size, weight: "bold")
+    it.body
+  })
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {
       [#it.body#metadata(it.dest.slice(4))<toa-hit>]

@@ -19,7 +19,7 @@ Same structure and same UNVERIFIED parameters as the opening-brief template (EB 
 | `samples/INPUT-smoke.md` | Placeholder sample, template structure only. **Not** transcribed from an exemplar. |
 | `samples/OUTPUT-smoke.pdf` | `sh tools/render.sh courts/military/coast-guard-court-of-criminal-appeals/answering-brief samples/INPUT-smoke.md`. Exit 0, no typst warnings, 3 pages. |
 
-Pages reviewed (rasterized at 60 dpi and viewed): 3 of 3.
+Pages reviewed (rasterized at 60 dpi and viewed, 2026-10-14, after the heading fix): 3 of 3 (`OUTPUT-smoke.pdf` pp. 1-3, re-rendered).
 
 ## Overlay
 
@@ -27,7 +27,7 @@ Pages reviewed (rasterized at 60 dpi and viewed): 3 of 3.
 
 ## Findings from the page review
 
-- Page 1 ends with the "I. ..." heading, and its sub-headings flow to page 2. The same keep-with-next issue as the opening brief applies to level-1 headings.
+- Level-1 and level-2 headings are now `block(sticky: true)` (same fix as the opening brief). Page 1 now ends with "I. ..." and its "A. Standard of review" sub-heading, and only "B. Argument" flows to page 2. Level-3 headings are not sticky; the template has no level-3 show rule. Left as is: placeholder text, and the layout is unverified.
 - Sample text is placeholder throughout; the layout proves structure only.
 - Cover: none; the case block and caption open page 1 (App. B has no cover sheet).
 
@@ -37,4 +37,4 @@ Pages reviewed (rasterized at 60 dpi and viewed): 3 of 3.
 - **Rules unreadable** (see Governing rules). Every UNVERIFIED value is a placeholder.
 - **Name mismatch.** The court's own label is "Government Answer", not "answering brief". The folder name follows the brief.
 
-BLOCKED: no exemplar (CGCCA government answer). Needs a public copy from the uscg.mil briefs index or the Navy JAG court-filings link, and the JRAP text, before tier-1 work can start.
+BLOCKED: no public exemplar (CGCCA government answer). Two search passes on 2026-10-14 (listed in `exemplars/SOURCE.md`, with the opening-brief trail) found no filed CGCCA government answer. CourtListener returned 0 results for this court; the uscg.mil pages returned HTTP 403; the Navy JAG filings table is empty in the fetched capture. Needs a public copy from the uscg.mil Appellate Briefs index or the Navy JAG filings table, and the JRAP text, before tier-1 work can start.

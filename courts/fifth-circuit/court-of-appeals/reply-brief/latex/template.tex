@@ -1,0 +1,81 @@
+% Fifth Circuit principal brief, LaTeX engine (tools/render-latex.sh, pandoc --template).
+% Form (CA5-FORM-*, CA5-LEN-*): 8.5 x 11 in, 1 in margins, EB Garamond 14 pt text, 12 pt footnotes,
+% double spacing for text, single spacing for headings, quotations, footnotes, tables and certificates.
+% The body is produced by ca5-brief.lua (cover, front statements, TOC, TOA, body, certificates); this file
+% holds the page setup, the fonts, and the macros those blocks call. No case-specific text lives here.
+\documentclass[letterpaper,14pt]{extarticle}
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec}
+% Vendored fonts only (no system fonts): the renderer passes the pandoc variable fontdir.
+\setmainfont{EBGaramond-Regular}[Path=$fontdir$eb-garamond/, Extension=.otf, BoldFont=EBGaramond-Bold,
+  ItalicFont=EBGaramond-Italic, BoldItalicFont=EBGaramond-BoldItalic]
+\usepackage[hidelinks,bookmarks=false]{hyperref}
+\usepackage{xcolor}
+
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+
+% Two line pitches: double (30.8 pt, about 2.2 x the type size) for text, single (17 pt) for the rest.
+\newcommand{\dblspace}{\fontsize{14}{30.8}\selectfont}
+\newcommand{\sglspace}{\fontsize{14}{17}\selectfont}
+\renewcommand{\normalsize}{\dblspace}
+\renewcommand{\footnotesize}{\fontsize{12}{14}\selectfont}
+\AtBeginDocument{\dblspace}
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setlength{\footnotesep}{0.5em}
+
+\renewenvironment{quote}{\par\begingroup\sglspace\leftskip=0.5in\rightskip=0.5in\parindent=0pt\par\vspace{0.4em}}{\par\vspace{0.4em}\endgroup}
+
+\makeatletter
+% ---- headings (ca5-brief.lua computes the labels; these set the style and the TOC entry) ----
+% Front headings (certificate of interested persons, oral argument statement): not in the TOC.
+\newcommand{\brfront}[1]{\par\begingroup\sglspace\begin{center}\bfseries\MakeUppercase{#1}\end{center}\par\endgroup\nopagebreak\vspace{0.6em}\par\noindent}
+% Level 1: centered, bold capitals, in the TOC without a label.
+\newcommand{\brone}[1]{\par\vspace{1.1em}\begingroup\sglspace\begin{center}\bfseries\MakeUppercase{#1}\end{center}\par\endgroup
+  \addcontentsline{toc}{brone}{\protect\MakeUppercase{#1}}\nopagebreak\vspace{0.6em}\par\noindent}
+% Argument point heading (level 2 in the Argument): centered, bold small capitals, roman label.
+\newcommand{\brargtwo}[2]{\par\vspace{1.1em}\begingroup\sglspace\begin{center}\bfseries\scshape #1\ #2\end{center}\par\endgroup
+  \addcontentsline{toc}{brargtwo}{\protect\numberline{#1}#2}\nopagebreak\vspace{0.6em}\par\noindent}
+% Sub-headings: label in a 0.5 in box at indent #1, title hangs under itself. #2 label, #3 title, #4 font switch.
+\newcommand{\brsubgen}[4]{\par\vspace{1em}\begingroup\sglspace\noindent
+  \hangindent=\dimexpr #1+0.5in\relax\hangafter=1 \hspace*{#1}\makebox[0.5in][l]{#4 #2}#4 #3\par\endgroup
+  \addcontentsline{toc}{brsub}{\protect\hspace*{#1}\protect\numberline{#2}#3}\nopagebreak\vspace{0.6em}\par\noindent}
+\newcommand{\brsub}[3]{\brsubgen{#1}{#2}{#3}{\bfseries}}
+\newcommand{\brsubi}[3]{\brsubgen{#1}{#2}{#3}{\bfseries\itshape}}
+
+% ---- table of contents (entries written by \addcontentsline; read by \@starttoc) ----
+\newcommand*{\l@brone}[2]{\vspace{0.6em}\@dottedtocline{1}{0in}{0in}{#1}{#2}}
+\newcommand*{\l@brargtwo}[2]{\vspace{0.6em}\@dottedtocline{2}{0in}{0.5in}{#1}{#2}}
+\newcommand*{\l@brsub}[2]{\vspace{0.6em}\@dottedtocline{2}{0in}{0.5in}{#1}{#2}}
+\newcommand{\brtoc}{\par\begingroup\sglspace
+  \begin{center}\bfseries TABLE OF CONTENTS\end{center}\vspace{0.4in}\par
+  \@starttoc{toc}\endgroup}
+
+% ---- table of authorities ----
+% \toacite{key}{text} marks a citation: its page goes to the aux file; the next run reads it back.
+% A key cited on passim-threshold pages or more prints "passim" (7, CA5 convention in the typst template).
+\newcommand{\toaref}[2]{\@ifundefined{toalast@#1}{%
+    \expandafter\gdef\csname toalast@#1\endcsname{#2}%
+    \expandafter\gdef\csname toa@#1\endcsname{#2}%
+    \expandafter\newcount\csname toan@#1\endcsname
+    \global\advance\csname toan@#1\endcsname by 1 }{%
+  \ifnum\csname toalast@#1\endcsname=#2 \else
+    \expandafter\gdef\csname toalast@#1\endcsname{#2}%
+    \expandafter\xdef\csname toa@#1\endcsname{\csname toa@#1\endcsname, #2}%
+    \global\advance\csname toan@#1\endcsname by 1 \fi}}
+\newcommand{\toacite}[2]{#2\protected@write\@auxout{}{\string\toaref{#1}{\thepage}}}
+\newcommand{\toapages}[1]{\@ifundefined{toan@#1}{}{%
+  \ifnum\csname toan@#1\endcsname>6 \emph{passim}\else\csname toa@#1\endcsname\fi}}
+\newcommand{\brtoagroup}[3]{\par\vspace{#2}\noindent\textbf{#1}\hfill\textbf{\underline{#3}}\par\nopagebreak}
+\newcommand{\brtoaentry}[2]{\par\begingroup\sglspace\noindent\hangindent=0.35in\hangafter=1
+  #1\ \dotfill\ \toapages{#2}\par\endgroup\vspace{0.7em}}
+\makeatother
+
+\pagestyle{plain}
+
+\begin{document}
+$body$
+\end{document}

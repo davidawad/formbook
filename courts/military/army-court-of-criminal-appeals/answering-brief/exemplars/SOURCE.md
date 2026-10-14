@@ -12,4 +12,17 @@
 | Date fetched | 2026-10-14 (search only) |
 | Public record | n/a |
 
+## Second pass (2026-10-14, unit acca-32.22)
+
+Searches run on this pass, all for an ACCA-filed Government answer. None produced one.
+
+- WebSearch (extended): "Army Court of Criminal Appeals" "brief on behalf of the United States" courtlistener recap. Returned CAAF briefs and the JAGCNet ACCA rules page only.
+- WebSearch: "ARMY" "BRIEF ON BEHALF OF APPELLEE" / "brief on behalf of the United States" "Court of Criminal Appeals" pdf 2024-2025. Returned CAAF appellee briefs (Forrest 25-0081, Abdullah 25-0070, Davis 24-0152), all filed at CAAF.
+- WebSearch (extended): "IN THE UNITED STATES ARMY COURT OF CRIMINAL APPEALS" "BRIEF ON BEHALF OF THE UNITED STATES" "Government Appellate Division" pdf. Returned CAAF briefs and AFCCA filings only.
+- WebFetch: CourtListener search (`court=acca`, phrase "brief on behalf of appellant"). HTTP 403; no results read.
+
+Rejected near-misses (not ACCA filings, so not used): CAAF Government answers in Army cases (Forrest 25-0081, Abdullah 25-0070, Davis 24-0152, Steele 22-0254, Scott 19-0365, Long 21-0085, Givens 21-0086, Ellis 25-0197). Air Force CCA filings on afcca.law.af.mil (ACM dockets). The protectourdefenders amicus brief in ACCA (Pritchard), which is an amicus, not an answer.
+
+Result: still no ACCA-filed Government answer. The rules-only template stays. Overlay cannot run.
+
 To unblock: a public ACCA Government answer (CourtListener RECAP, the court's own site, or a public brief bank). The title and cover can then be checked against a real filing.

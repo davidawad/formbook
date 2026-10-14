@@ -6,6 +6,8 @@ Doc type: **motion** with a memorandum in support (FRBP 9013; KYEB LBR 9013-1). 
 
 Status: exemplar=no, render=ok (fictional test sample only), overlay=fail (no exemplar to compare against), pages reviewed 3 of 3 (fictional sample). Nothing here sets `court.json` status.
 
+Re-run 2026-10-14 (fb-595.32.8): a second search pass (listed in `exemplars/SOURCE.md`) still found no public, text-based motion with a memorandum from this court. The Epiq Cambrian document (docId 3867825) is a confirmation order, not a motion, so it is not used. `tools/render.sh` re-rendered `samples/OUTPUT-generic-motion-brief.pdf` (3 pages, exit 0); `tools/overlay.sh` exited 1 with "no exemplar pdf", as expected. All 3 pages were viewed as PNG at 60 dpi. The template and the fictional sample are unchanged.
+
 ## Governing rules
 
 Verified 2026-10-14 against Cornell LII (federal rules, amendments effective Dec. 1, 2024) and the court's local rules PDF (`KYEB 120124 Local Rules`) and APM (`APM effective November 2016`, revision 3.31.26).

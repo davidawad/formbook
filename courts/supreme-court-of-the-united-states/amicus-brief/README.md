@@ -103,3 +103,17 @@ Defects found and fixed in review:
 7. **Excerpt, not whole brief.** The sample transcribes the parts above. The TOC, TOA, and certificate reflect the excerpt. A full transcription would add pages; the template is built for 8-14 pages with the full body.
 
 [Formbook index](../../../README.md) | [Court README](../README.md)
+
+## Engines
+
+Engine status (this box): typst `ok` (unchanged); latex `ok`: `samples/OUTPUT-nssf-amicus-brief.latex.pdf`, 13 pages; docx `ok` with BLOCKED items: `samples/OUTPUT-nssf-amicus-brief.docx` and `.docx.pdf` (LibreOffice 26.8 conversion), 10 pages. Neither engine has a checks.yaml gate run yet.
+
+- **latex/** (`template.tex`, `brief.lua`): booklet page 6 1/8 by 9 1/4 in., text field 4 1/8 by 7 1/8 in., 12-point type on 14-point baselines, 10/12-point notes, cover, roman TOC and TOA, arabic body, signature, certificate. The TOA page list is generated from `\label`s on each citation (Lua filter), with each page printed once and "passim" at six or more pages. Fonts: EB Garamond from `fonts/eb-garamond` via `fontdir` (stand-in, as in typst).
+- **What differs from typst:** the LaTeX render is 13 pages to typst's 11 (the TOC and TOA each run longer). The docx cover and certificate are plainer than the typst cover.
+- **docx/** (`reference.docx`, `brief.lua`): page setup, EB Garamond 12-point, 14-point exact leading, 0.4-in first-line indent and 10-point footnotes are in `reference.docx`; the cover, headings, lists, signature and certificate are raw WordprocessingML from `brief.lua`.
+- **docx BLOCKED items** (see `docs/DOCX.md`):
+  - TOC and TOA: BLOCKED. The lists give headings and authorities without page numbers; there is no TOC/TOA field result, so the page-number checks cannot pass.
+  - Footer page numbers: BLOCKED. The reference has no footer with a PAGE field, so the roman and arabic numbering is not built.
+  - Typeface: BLOCKED (the same Century-family gap as typst; EB Garamond is a stand-in).
+  - Certificate word count: computed from the sample body, not from Word.
+  - Word and LibreOffice may paginate differently; the PDF is the LibreOffice conversion.

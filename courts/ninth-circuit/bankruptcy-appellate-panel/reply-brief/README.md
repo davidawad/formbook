@@ -4,11 +4,13 @@
 - Template: `typst/bap9-reply-brief.typ` (entry `typst/main.typ`)
 - Sample: `samples/INPUT-fictional-reply-brief.md`, rendered to `samples/OUTPUT-fictional-reply-brief.pdf`
 - Status of this doc type:
-  - **BLOCKED: no exemplar.** No filed reply brief from this court was found (see "Exemplar search" in `../opening-brief/README.md`, which covers the same search for all three doc types). `exemplars/` is empty, so the overlay cannot run.
+  - **BLOCKED: no public exemplar.** No filed reply brief from this court was found, after the searches listed in `exemplars/SOURCE.md` (and the Meridian case searches in `../opening-brief/README.md`). `exemplars/` is empty, so the overlay cannot run.
   - Template built from the rules only. The reply-specific content rules are a **gap** (see below).
   - The sample is **fictional** (case, parties, counsel and record cites are invented).
 
 Summary line for the PM: `exemplar=no render=ok overlay=fail pages_reviewed=6`
+
+The reply has no exemplar, so the reply's own layout is checked only against the rules (see the gap below).
 
 ## Governing rules
 
@@ -29,7 +31,7 @@ FRBP 8014(a) and (b) and the manual's §VIII.5 set out contents for the opening 
 
 ## Template
 
-`typst/bap9-reply-brief.typ` is the opening-brief template with its per-type settings block changed (`kind`, `title`, `required`, `word-limit`, `certs`). The shared layout code is identical to the opening brief's.
+`typst/bap9-reply-brief.typ` is the opening-brief template with its per-type settings block changed (`kind`, `title`, `required`, `word-limit`, `certs`). The shared layout code is identical to the opening brief's, including the two fixes made when the opening brief was checked against its exemplar (see `../opening-brief/README.md`, "Template changes from the overlay"): the required-heading check accepts any title per requirement, and each heading level has its own show rule with level 1 centered.
 
 - Leading: 1.3em, which gives the 36.5 pt double-spaced line pitch measured on the opening-brief render.
 - Table of contents: printed for the reply. Table of authorities: printed only when the sample's frontmatter gives an `authorities` registry (the reply sample does).
@@ -46,12 +48,12 @@ File naming follows the tools (`INPUT-` / `OUTPUT-` / `OVERLAY-`), as in the ope
 
 ## Gate 2 review (every page rendered and viewed, 60 dpi)
 
-Pages: 6 PDF pages: cover (p1), table of contents (p2), table of authorities (p3), body (p4-p5, numbered 1-2), certificates (p6).
+Pages: 6 PDF pages: cover (p1), table of contents (p2, roman i), table of authorities (p3, roman ii), body (p4-p5, numbered 1-2), certificates (p6, numbered 3).
 
 - p1 cover: fits on one page; the title reads "APPELLANT'S REPLY BRIEF".
-- p2 TOC: entries and page numbers match the body pages.
+- p2 TOC: entries and page numbers match the body pages (Argument 1; I 1; II 1; III 2; Conclusion 2).
 - p3 TOA: "Law v. Siegel" lists 2; "11 U.S.C. § 548" lists 1. The sample cites § 544 only in headings, not in a linked citation, so it is not listed; that is correct behaviour for an unlinked mention, and a citation in the body would be listed once linked.
-- p4-p5 body: double-spaced; headings as in the opening brief. The conclusion and signature are on body page 2.
+- p4-p5 body: double-spaced; level-1 headings centered and bold (fixed in this pass; they were left-aligned before). The conclusion and signature are on body page 2.
 - p6 certificates: compliance (word count 344, from the body) and service, on one page.
 
 Open items, accepted: none beyond the content gap above.

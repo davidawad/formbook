@@ -30,7 +30,7 @@ Everything in the template that is marked `UNVERIFIED` must be replaced from the
 | `samples/INPUT-smoke.md` | Placeholder sample. It exercises the template structure only. It is **not** transcribed from an exemplar and must not be treated as one. |
 | `samples/OUTPUT-smoke.pdf` | Render of `INPUT-smoke.md`. `sh tools/render.sh courts/military/coast-guard-court-of-criminal-appeals/opening-brief samples/INPUT-smoke.md`. Exit 0, no typst warnings, 3 pages, EB Garamond embedded. |
 
-Pages reviewed (rasterized at 60 dpi and viewed): 3 of 3 (`OUTPUT-smoke.pdf` pp. 1-3).
+Pages reviewed (rasterized at 60 dpi and viewed, 2026-10-14, after the heading fix): 3 of 3 (`OUTPUT-smoke.pdf` pp. 1-3, re-rendered).
 
 ## Overlay
 
@@ -38,7 +38,7 @@ Pages reviewed (rasterized at 60 dpi and viewed): 3 of 3 (`OUTPUT-smoke.pdf` pp.
 
 ## Findings from the page review
 
-1. **Orphaned heading at the foot of page 1.** "Errors and Argument" sits alone at the bottom of page 1 while its first sub-heading lands on page 2. Typst's default keep-with-next did not hold it. Fix: add `keep-with-next` to level-1 headings or move the heading into a `block(breakable: false)` with the next heading. Not fixed in this pass; it is a placeholder-level defect and the spacing rules are unverified.
+1. **Orphaned heading at the foot of page 1. Fixed.** "Errors and Argument" sat alone at the bottom of page 1 while its first sub-heading landed on page 2. The level-1 and level-2 heading show rules now return `block(sticky: true)`, so a heading stays with the block after it. Re-rendered and viewed: "Errors and Argument" moves to page 2 with its content.
 2. The body text is placeholder content, so the page layout proves only that the structure compiles and the pieces appear in order. It says nothing about the rule-driven layout.
 3. The heading styles (level 3 "A. Standard of review" in bold, level 2 in bold) are a convention choice, not from a rule. UNVERIFIED.
 
@@ -56,4 +56,4 @@ Pages reviewed (rasterized at 60 dpi and viewed): 3 of 3 (`OUTPUT-smoke.pdf` pp.
 
 See `exemplars/SOURCE.md`.
 
-BLOCKED: no exemplar (CGCCA opening brief). Needs a public copy from the uscg.mil Appellate Briefs index or the Navy JAG court-filings link, and the JRAP text (uscg.mil PDF, or its 2024 JRAP successor), before tier-1 work can start.
+BLOCKED: no public exemplar (CGCCA opening brief). Two search passes on 2026-10-14 (about 15 searches and fetches, listed in `exemplars/SOURCE.md`) found no filed CGCCA appellant's brief. CourtListener returned 0 results for this court; the uscg.mil index, orders page and CourtListener web search returned HTTP 403; the Navy JAG filings table is empty in the fetched capture. A CAAF brief in a Coast Guard case (Lopez, 24-0226/CG) was found and not used: it was filed in the wrong court. Needs a public copy from the uscg.mil Appellate Briefs index or the Navy JAG filings table, and the JRAP text, before tier-1 work can start.

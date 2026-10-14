@@ -259,7 +259,17 @@
       pending += cmarker.render(with-notes(t), raw-typst: false, smart-punctuation: true, h1-level: 1)
       has-pending = true
     } else {
-      let piece = if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
+      let piece = if t.starts-with("|") {
+        // A markdown table is one unbreakable block, single-spaced at footnote size (as the filed tables).
+        // Its height is not a multiple of the pitch, so the text after it starts one line down.
+        block(breakable: false, width: text-width, {
+          set text(size: footnote-size)
+          set par(leading: single-leading)
+          set table(inset: (x: 4pt, y: 3pt), stroke: 0.5pt)
+          cmarker.render(with-notes(t), raw-typst: false, smart-punctuation: true, h1-level: 1)
+          v(body-leading)
+        })
+      } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
         // A list may break across pages; each item fills whole lines.
         {
           set par(leading: body-leading)

@@ -13,6 +13,25 @@ Date of searches: 2026-10-14.
 | *Hurrell-Harring v. State of New York*, Reply Brief for Plaintiffs-Appellants, Court of Appeals, 2010 | <https://www.nyclu.org/uploads/2008/05/Reply-Brief-for-Plaintiffs-Appellants.pdf> | Wrong court and wrong doc type (reply). |
 | NYLS Digital Commons, `maynard_briefs` (1971 First Department brief) | <https://digitalcommons.nyls.edu/maynard_briefs> | Defendant-appellant brief, not an answering brief; not downloaded. |
 
+## Second search pass, 2026-10-14 (fb-595.32.2)
+
+**Candidate found, not saved.** A First Department brief matches the doc type and court:
+
+| Document | URL | Why not saved |
+|---|---|---|
+| *Fuks v. Rakia Associates* (App Div 1st Dept, App Nos. 2023-02618, 2023-02621, 2023-06798, 2024-00643; appealed from Supreme Court, New York County), "Brief for Plaintiff-Respondent," Catafago Fini LLP, filed 2024-04-17 (2024 NY Slip Op 03327, 228 AD3d 501) | <https://www.nybusinessdivorce.com/wp-content/uploads/sites/936/2024/08/2024-04-17-Respondents-Brief.pdf> | Host returns HTTP 403 to curl (with browser headers and referer; an HTML page was saved instead of a PDF) and to WebFetch. Search snippets show a cover and a table of authorities, but the body was not read. Retry from another copy (NYSCEF, the filer, or the Department clerk); the sibling defendants' briefs on the same host (2024-02-13 Appellants Brief, 2024-05-03 Reply Brief) are not answering briefs. |
+
+Other searches in this pass (no App Div answering brief returned):
+
+1. Web: "Brief for Defendant-Respondent" Second Department with printing specifications. Returned AD2 forms and instructions only.
+2. Web: "Brief for Respondent" Fourth Department with table of authorities. Returned Fourth Department decision PDFs only.
+3. Web: "Brief for Plaintiff-Respondent" First or Third Department, NYSCEF. Returned the Fuks candidate above and First Department calendars.
+4. Web (extended): "Brief for Defendant-Respondent" First Department with index number and printing specifications, 2023–2025. Returned AD2 respondent instructions and a Buffalo CLE packet.
+5. Web: respondent's brief in any Judicial Department on courtlistener, justia or scribd. Returned California and New Jersey filings and Fourth Department decisions.
+6. Web: Fuks case numbers with "respondent" and Catafago. Returned the same host only.
+7. Web: trellis.law briefs with the App Div and index number. No trellis.law hits.
+8. CourtListener API, RECAP, `court=nyappdiv`, "brief for defendant-respondent": zero results. nycourts.gov (Fourth Department clerk) returned HTTP 403.
+
 ## Searches tried (no answering brief found)
 
 1. Web search: Fourth Department "brief for respondent" PDFs, 2024 (standard). Returned only Fourth Department motion decisions on assigned counsel, not briefs.

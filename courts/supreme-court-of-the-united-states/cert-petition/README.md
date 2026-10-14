@@ -92,3 +92,10 @@ Re-check after the last edit (proceeding line size, 10 to 11 point): only page 1
 7. **Word count.** `count-words` is a markdown token count, not a word-processor count; it has not been cross-checked against the PDF text.
 8. **Exemplar provenance.** The exemplar is a copy from a law-firm site; the docket number is confirmed on supremecourt.gov, but the Court's own DocketPDF copy was not found (see `exemplars/SOURCE.md`).
 9. **Exemplar age.** The exemplar is from 2015, before the 2019 booklet and word-limit changes that the template follows. The current rules were read directly from the 2026 PDF; the exemplar only settles layout details the rules leave open.
+
+## Engines
+
+Engine status (this box): typst `fail` (unchanged: the Century-family typeface is not vendored). latex: not built; docx: not built. Both are blocked on the same decision, below.
+
+- Not built: `latex/` and `docx/`. Building either against EB Garamond would repeat the stand-in this doc type may not use (see Blockers). Once David vendors a Century-family face and names it, the typst `typeface` and the latex and docx font names change together, and both engines are built from the same parameters.
+- docx BLOCKED: typeface (Rule 33.1(b)), listed as the blocker above; the cover and TOC/TOA BLOCKED items are the same as the amicus and merits docx.

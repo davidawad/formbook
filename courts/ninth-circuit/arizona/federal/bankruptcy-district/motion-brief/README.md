@@ -2,24 +2,26 @@
 
 Doc type: **motion** (FRBP 9013) with the memorandum of points and authorities that LRBP 9013-1(a) requires, in the United States Bankruptcy Court for the District of Arizona (`arb`, Ninth Circuit). Folder: `courts/ninth-circuit/arizona/federal/bankruptcy-district/motion-brief/`. The same folder serves a motion in an adversary proceeding (dual caption) and a contested matter in the main case (single caption).
 
-**BLOCKED: no exemplar.** No public filed motion from this court was found after the searches listed in `exemplars/SOURCE.md`. The template is built from the rules. The sample is fictional (`samples/INPUT-generic-motion.md`), not transcribed from a filing, so this folder has no tier-2 evidence against a real filer.
+**Exemplar: yes.** A filed motion with memorandum from this court, Doc 762 in the *Titan Solar* jointly administered case (2:24-bk-04978-MCW), is saved as `exemplars/FILED-EXAMPLE-titan-solar-24-bk-04978-motion-brief.pdf`. Provenance is in `exemplars/SOURCE.md`. The sample is a transcription of it (`samples/INPUT-titan-motion.md`).
 
 | Item | Status |
 |---|---|
-| exemplar | no (`exemplars/SOURCE.md`: BLOCKED) |
-| sample md | `samples/INPUT-generic-motion.md` (fictional, generic; 5 rendered pages) |
-| render | ok: `samples/OUTPUT-generic-motion.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings |
-| overlay | fail: `tools/overlay.sh` needs `exemplars/*.pdf` and there is none, so it exits 1 and writes nothing |
-| pages reviewed | 5 of 5 (every page rasterised at 60 dpi and viewed, after the last template change) |
+| exemplar | yes: `exemplars/FILED-EXAMPLE-titan-solar-24-bk-04978-motion-brief.pdf` (Doc 762, filed 10/23/25, 11 pages, one filer; `exemplars/SOURCE.md`) |
+| sample md | `samples/INPUT-titan-motion.md` (transcription of pp. 1–9 of the exemplar: caption, numbered factual paragraphs, two tables, footnotes 1–10, memorandum argument, prayer, joinder and signature blocks; Exhibit A not transcribed) |
+| render | ok: `samples/OUTPUT-titan-motion.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings. Command: `sh tools/render.sh … samples/INPUT-titan-motion.md` exit 0 |
+| overlay | ok: `samples/OVERLAY-titan-motion.pdf` and `.txt` (page map: ours p.1–4 pair with filed p.1–4, word overlap 74%–89%; ours p.5–8 pair with filed p.5, 7, 8, 9, overlap 44%–65%; filed p.6 is unpaired, the page holding the table sits between them). Command: `sh tools/overlay.sh … titan-motion` exit 0 |
+| pages reviewed | 8 of 8 (every page of the OUTPUT rasterised at 110 dpi and viewed in its final state) |
 
-Note on file names: the brief asked for `samples/<id>.pdf` and `samples/<id>-overlay.pdf`. The shared tools write `samples/OUTPUT-<id>.pdf` and `samples/OVERLAY-<id>.pdf`/`.txt`, and `overlay.sh` reads `OUTPUT-<id>.pdf`. The tools were not changed, so this folder follows the tools' names.
+Note on file names: the tools default to `samples/OUTPUT-<id>.pdf` and `samples/OVERLAY-<id>.pdf`/`.txt`, and `overlay.sh` reads `OUTPUT-<id>.pdf`. The sample id changed from `generic-motion` to `titan-motion`, and the fictional `samples/INPUT-generic-motion.md` was replaced by the transcription. The shared tools were not changed.
 
 ## Governing rules
+
+Each rule is quoted or closely paraphrased from the cited source. The date is the date it was read.
 
 | ID | Rule | Requirement | Source and date verified | Where it lives |
 |---|---|---|---|---|
 | ARB-MOT-001 | FRBP 9013(a), (b) | A request for an order must be made by written motion unless an application is authorized or the request is made during a hearing. "A motion must state its grounds with particularity and set forth the relief or order requested." | Cornell LII https://www.law.cornell.edu/rules/frbp/rule_9013 (fetched 2026-10-14). | The opening paragraph and the `relief` line in the caption; the body is author-written |
-| ARB-MOT-002 | LRBP 9013-1(a) | "All motions, unless made in open Court, must include a memorandum setting forth the supporting authorities." | Court rule page https://www.azb.uscourts.gov/rule-9013-1 (WebFetch, 2026-10-14). The rule text was given as a summary with this quotation. | The sample's "Memorandum of Points and Authorities" section; the template does not check its presence |
+| ARB-MOT-002 | LRBP 9013-1(a) | "All motions, unless made in open Court, must include a memorandum setting forth the supporting authorities." | Court rule page https://www.azb.uscourts.gov/rule-9013-1 (WebFetch, 2026-10-14). The rule text was given as a summary with this quotation. The exemplar follows it: "MEMORANDUM OF POINTS AND AUTHORITIES" inside the motion (exemplar p.1). | The sample's "Memorandum of Points and Authorities" section; the template does not check its presence |
 | ARB-MOT-003 | LRBP 9013-1(b) | A motion, response or reply and its supporting memoranda "must not exceed fifteen (15) pages exclusive of attachments," unless the court orders otherwise. | Same. | `page-limit = 15`; the template fails the build past 15 pages (checked, see the record below) |
 | ARB-MOT-004 | LRBP 9013-1(e), (i), (k) | Ex parte or unopposed motions must be accompanied by a form of order; accelerated hearings are a separate motion; the movant gives notice of the hearing (date, time, place, relief, response deadline) and files a certificate or affidavit of service. | Same (WebFetch summary, 2026-10-14). | Not generated. The notice and certificate are author-written (see gap 5). |
 | ARB-FORM-001 | LRBP 9004-1(g) | Papers on 8½ × 11 inch paper; left margin at least 1½ inches, right margin at least ½ inch; number-lined pleading paper, no more than 28 lines per page; double-spaced except footnotes and indented quotations. | Court rule page https://www.azb.uscourts.gov/rule-9004-1 (WebFetch, 2026-10-14). The Local Rules PDF (effective June 1, 2026) was located but could not be downloaded from this box. | `page-w`, `page-h`, `left-margin`, `right-margin`, `lines-per-page`, `pitch`, `line-numbers()` |
@@ -34,7 +36,9 @@ Note on file names: the brief asked for `samples/<id>.pdf` and `samples/<id>-ove
 
 Authorities cited in the sample (Bankruptcy Code §§ 547, 548, 550; *Twombly*; *Iqbal*; Fed. R. Bankr. P. 7012(b)) are written for the structure of the sample. They were not checked against the reporters or the Code in this session, and the sample is not a filing. Do not copy them into a real filing without checking.
 
-Not produced: certificate of service (LRBP 9013-1(k); author-written when needed), notice of hearing (author-written), proposed order (LRBP 9013-1(e)), table of contents and table of authorities (no rule read here requires them; see gap 4), and the attachments that LRBP 9013-1 excludes from the page count.
+The sample now transcribes a real motion (`samples/INPUT-titan-motion.md`); its authorities are the exemplar's own (*A & C Properties*, *Woodson*, *Schmitt*, *Newman v. Stein*, *Pennsylvania Truck Lines*, *Planned Protective Services*). They are transcribed as filed and were not re-verified here.
+
+Not produced: certificate of service (LRBP 9013-1(k); author-written when needed), notice of hearing (author-written; the exemplar's own notice is a separate filing, Doc 765 in the same case), proposed order (LRBP 9013-1(e)), table of contents and table of authorities (no rule read here requires them; see gap 4), and the attachments that LRBP 9013-1 excludes from the page count (the exemplar's Exhibit A).
 
 ## Layout
 
@@ -43,42 +47,54 @@ Not produced: certificate of service (LRBP 9013-1(k); author-written when needed
 - Filer block single-spaced from line 1 (LRBP 9004-1(a)); the court title is on line 8 (convention).
 - Caption: a debtor row (in re, names, Debtor; chapter and case number) and, in an adversary, a parties row (plaintiffs and defendants, adversary number, title, relief, hearing). Without an adversary, one caption row with the title, relief and hearing on the right.
 - Headings: level 1 is a centred bold capital section (MEMORANDUM OF POINTS AND AUTHORITIES); levels 2 to 5 are numbered I., A., 1., a. with a hanging label. Level 2 is the section; the number is typed by the template, not by the author.
-- Body paragraphs double-spaced with a 0.5-inch first-line indent; paragraphs are not numbered (motions are not pleadings under FRCP 10(b)). Lists are numbered 1., 2., ...
+- Body paragraphs double-spaced with a 0.5-inch first-line indent; paragraphs are not numbered by the template. Lists are numbered 1., 2., ... (or bulleted with `-`).
+- Markdown tables are set in their own unbreakable block, single-spaced at 12 point, with thin rules (`typst/arb-motion-brief.typ`, the `"|"` branch of `body-chunks`). The text after a table starts one line below it.
 - A heading stays with the paragraph after it. The last body chunk, the signature block and any certificate are kept together, so a signature never stands alone on a page.
-- Footnotes: 12 point, single-spaced; each footnote definition is rendered with the paragraph that refers to it.
+- Footnotes: 12 point, single-spaced; each footnote definition is rendered with the paragraph that refers to it. A footnote reference is allowed inside a table cell.
 - Footer: page number, the title in capitals, and `ADV. NO.` (adversary) or `CASE NO.` (main case).
 
 ## Markdown contract (for samples)
 
-- YAML frontmatter, then the body. The body is blank-line-separated chunks: `#` (level 1, centred bold capitals), `##` to `#####` (numbered headings), a list, or a paragraph.
+- YAML frontmatter, then the body. The body is blank-line-separated chunks: `#` (level 1, centred bold capitals), `##` to `#####` (numbered headings), a list, a table (`|` rows), a block quote, or a paragraph.
 - Frontmatter: `filer` (list of lines, from line 1), `debtor` (`names`, `chapter`, `case_number`), `adversary_number` (optional; if given, `parties` is required), `parties` (list of `{names, designation}`), `title`, `relief`, `hearing` (optional `{date, time, place}`), `footer_title`, `date`, `signature` (`signer`, `lines`).
-- Do not type numbers into headings or the text: the template numbers headings from their level and lists from 1.
-- Footnotes: `text[^key]` in the paragraph and `[^key]: text` anywhere in the body.
+- Do not type numbers into headings or the text: the template numbers headings from their level and lists from 1. A paragraph that the filer numbered in the text (for example "1. David A. Birdsell …") is written with the number escaped (`1\.`) so it stays a paragraph, as filed.
+- Footnotes: `text[^key]` in the paragraph (or a table cell) and `[^key]: text` anywhere in the body.
 
 ## Known gaps and open choices
 
-1. **No exemplar.** Tier 2 (conventions a clerk expects) is not judged against any filed Arizona motion. Everything here is from the rules, not from a filing.
-2. **Font size.** 13-point EB Garamond is the only vendored proportional font. The apparent size is smaller than Times New Roman at 13 point, which is the usual Arizona choice. The 13-point minimum is met.
-3. **Court title on line 8.** Convention. LRBP 9004-1(a) fixes line 1 for the filer block and says nothing about the title's line.
+1. **One exemplar, one filer.** The bar for tier 2 is two or three filed exemplars from different filers. Only one motion was found (the Titan trustees' Doc 762, from Nach, Rodgers, Hilkert & Santilli and its co-trustee counsel). A motion from another Arizona filer is still open. Tier 2 is judged here against this one filing.
+2. **Font size.** 13-point EB Garamond is the only vendored proportional font. The filed exemplar is Times New Roman. EB Garamond sets smaller at the same size. The 13-point minimum is met; the apparent size is smaller than the exemplar's.
+3. **Exhibit A not transcribed.** The exemplar's pp. 10–11 are the allocation table (Exhibit A, 23 rows). The sample transcribes the body, including the two summary tables (Shared Assets, Shared Costs), and stops at the signature page. The overlay therefore shows the exemplar's pp. 10–11 with no match.
 4. **No table of contents or table of authorities.** The rules read here do not require them for a motion in this court. A longer memorandum may need them by the judge's practice; the template does not generate them.
 5. **Notice of hearing and certificate of service are not generated.** LRBP 9013-1(k) (summarised from the court's rule page, not quoted) requires notice of the hearing and a certificate or affidavit of service; the author writes them in the body.
 6. **Page limit counts the whole document.** The 15-page limit excludes attachments, which the template does not separate. A motion that carries attachments in the same PDF would be counted with them. Attachments belong in separate filings.
-7. **Keep-with-next gaps.** Headings and a last body block are kept together, so a page can end several lines early (pages 2 to 4 of the sample end with 4 to 6 blank numbered lines). This is the cost of never leaving a heading at the foot of a page. Not fixed.
-8. **Footer size.** 11 point, as in the complaint. The 13-point minimum is written for text.
-9. **Dual caption layout.** Closed by a rule on the right and bottom of the party column, not a column of ")" marks. Form 416A's exact layout is not part of this doc type's rules.
-10. **FRBP 7012(b) and 9015 are cited from memory** in the sample (7012(b) in the text, not checked here). The template does not cite them.
-11. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at its root, and this doc-type folder has neither. The brief forbids touching `tools/`. The render, the page review and the page-limit mutation test below stand in for them.
+7. **Keep-with-next gaps.** Headings and a last body block are kept together, and a table is unbreakable, so a page can end several lines early. In the exemplar transcription, page 3 ends about five lines early because the Shared Assets table moves to page 4. This is the cost of never leaving a heading or a table split from its label. Not fixed.
+8. **Footer size and wrap.** 11 point, as in the complaint. The 13-point minimum is written for text; the footer is identification (convention, flagged). A title longer than the left footer column wraps (the `footer_title` in the sample was shortened to "Trustee's stipulated motion" for this reason).
+9. **Bulleted lists are set as numbers.** The filed estate lists use bullets; the template numbers `-` items 1., 2., and so on. Content is faithful; the glyph is not.
+10. **Block quote spacing.** The Rule 9019(a) quotation is set as a block quote with extra space above and below, not on the numbered-line grid. Not fixed.
+11. **Signature order.** The template prints one signature block at the end (`Dated`, `Respectfully submitted`, the signer). The exemplar has joinder signatures from three other trustees' counsel before the lead counsel's. The sample keeps the joinders in the body and the lead counsel in the template block, so the lead counsel's signature comes last. Not fixed.
+12. **Dual caption layout.** Closed by a rule on the right and bottom of the party column, not a column of ")" marks. Form 416A's exact layout is not part of this doc type's rules.
+13. **FRBP 7012(b) and 9015 are cited from memory** in the fictional sample of earlier versions; the transcription does not cite them. The template does not cite them.
+14. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at its root, and this doc-type folder has neither. The brief forbids touching `tools/`. The render, the overlay, the page review and the page-limit mutation test below stand in for them.
 
 ## Render and review record
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env, see the brief)
-sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/motion-brief samples/INPUT-generic-motion.md
-sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/motion-brief generic-motion   # exits 1: no exemplar
+sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/motion-brief samples/INPUT-titan-motion.md
+sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/motion-brief titan-motion
 ```
 
-- Render: exit 0, no typst warnings, 5 pages (letter). Fonts embedded: EBGaramond-Regular, -Italic, -Bold.
-- Baseline pitch on body pages: 24.0 pt (as for the complaint; the same leading and grid).
-- Page-limit mutation test: a temporary 27-page sample (padded by repeated paragraphs, then deleted) fails the build with "27 pages; LRBP 9013-1(b) allows 15". The 5-page sample passes.
-- Page review (60 dpi, all 5 pages, after the footnote fix): p.1 filer block, court title, dual caption with the hearing: pass. p.2 memorandum heading, Introduction, Background, footnote 1 at foot of page (12 point, single-spaced): pass. p.3 Legal Standard, Argument A and A.1 with the 7008(a) paragraph: pass; gap of 6 lines at foot (gap 7). p.4 A.2, B, B.1, B.2 with the paragraphs: pass; gap of 4 lines at foot (gap 7). p.5 Conclusion with the numbered relief list and the signature block: pass.
-- Overlay: not run against a filing (no exemplar); `overlay=fail`.
+- Render: exit 0, no typst warnings, 8 pages (letter). Fonts embedded: EBGaramond-Regular, -Italic, -Bold.
+- Overlay: exit 0; `samples/OVERLAY-titan-motion.pdf`. Pairing by word overlap, from `OVERLAY-titan-motion.txt`: sample pp. 1–4 to filed pp. 1–4 (74–89%); sample pp. 5–8 to filed pp. 5, 7, 8, 9 (44–65%). The lower overlap from p.5 is the pagination difference, not a missing passage: the sample reaches the signature page one page before the filing does.
+- Page-limit mutation test (from the earlier fictional-sample review, template unchanged in this respect): a temporary 27-page sample fails the build with "27 pages; LRBP 9013-1(b) allows 15". The 8-page sample passes.
+- Page review (110 dpi, all 8 pages, final state):
+  - p.1 filer block, court title, caption with the relief line, opening paragraph, memorandum heading, "I. Factual Background", paragraph 1 with its list to follow: pass.
+  - p.2 estate lists for the Birdsell, Reaves and Mason estates, and paragraph 4: pass (bullets are numbered; gap 9).
+  - p.3 paragraphs 5–11; the Shared Assets table moves to p.4, leaving about five lines blank (gap 7): pass with gap.
+  - p.4 Shared Assets table, Shared Costs table (19 rows, total $211,738.14), paragraph 13, footnotes 2 and 3: pass. The footnote 2 reference is inside a table cell.
+  - p.5 Settlement Proposal (II), paragraph 14 with items a and i–iv, footnotes 4–7: pass.
+  - p.6 item v and items b and c, footnotes 8–10: pass.
+  - p.7 Legal Argument (III), Rule 9019(a) block quote (gap 10), the four-factor test, the Newman citation: pass.
+  - p.8 the balance of the argument, WHEREFORE list A–C, RESPECTFULLY SUBMITTED, joinder blocks, and the template's Dated/Respectfully-submitted block: pass.
+- Table rendering was a defect before this pass: the template placed a table in the on-grid paragraph path, and the table overlapped the following text ("TOTAL" row over paragraph 12). Fixed by the unbreakable table block described under Layout.

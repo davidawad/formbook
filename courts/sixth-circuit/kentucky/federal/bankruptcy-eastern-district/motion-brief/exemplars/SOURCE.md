@@ -11,6 +11,19 @@ BLOCKED: no exemplar. No filed motion with a supporting memorandum from this cou
 - CourtListener (search API and website): HTTP 403 to this box.
 - PacerMonitor docket pages for Edwards v. Saylor (24-ap-06054) and Spradlin v. 3D Dycus (16-ap-01033): docket text only, no document links.
 
+Second pass (2026-10-14, same day), aimed at other angles:
+
+- WebSearch (standard) "motion for relief from stay" memorandum: only docket pages (InfoRuptcy) and reported opinions (In re Mason, 514 B.R. 852, Bankr. E.D. Ky. 2014, which cites Docs. 58 and 75 but is an opinion, not the filings).
+- WebSearch (standard) sale free and clear with memorandum (Lexington, London, Covington): docket pages and the In re Scott opinion; no motion PDF.
+- WebSearch (standard) CourtListener RECAP with the court name: no RECAP documents returned.
+- WebSearch (extended) Cambrian 19-51200 with "Lexington Division" and "in support": govinfo opinions and orders only (USCOURTS-kyeb-5_19-bk-51200, USCOURTS-kyeb-5_23-ap-05036).
+- WebFetch Epiq docId 3867825 (Cambrian, Doc 1542): a 73-page order confirming the third amended plan, dated 02/16/2021. Text-based, but it is an order, not a motion.
+- WebSearch (standard) Cambrian Key-Way motion to compel (Nov. 2021): no Epiq PDF of the motion found.
+- WebSearch (standard) Americore 19-61608 motion memorandum: docket listing and news coverage only (Becker's Hospital Review).
+- Justia (cases.justia.com, Sixth Circuit 09-8062): served a Cloudflare challenge page to this box, not a PDF. Not usable.
+- WebSearch (standard) Sixth Circuit appendix with "Bk. No." motion and memorandum: BAP calendars and judgments; no appendix PDF.
+- WebSearch (standard) justia / "Bankr. E.D. Ky." memorandum exhibit: court rules and location pages only.
+
 Not tried: PACER (requires an account and fees; not used by this box), and the court's own CM/ECF document viewer (login required).
 
 ## What would unblock this

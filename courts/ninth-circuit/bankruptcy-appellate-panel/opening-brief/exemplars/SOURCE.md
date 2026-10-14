@@ -1,14 +1,15 @@
 # Exemplars: bap9 opening-brief
 
-**No exemplar found (2026-10-14).** This folder holds no filed PDF. The overlay cannot run (`tools/overlay.sh` exits 1: "no exemplar pdf").
+## FILED-EXAMPLE-meridian-SC-16-1227-opening-brief.pdf
 
-Searches tried, all without a BAP filing of this type:
-
-- CourtListener REST (`https://www.courtlistener.com/api/rest/v4/search/?type=r&court=bap9`): `q=brief`, `q="opening brief"`: 0 results. The bap9 court has no RECAP documents in the index.
-- CourtListener REST, unfiltered phrase searches: `"Appellant's Opening Brief" "Bankruptcy Appellate Panel"`, `"Appellee's Answering Brief" "BAP No"`, `"Reply Brief" "Bankruptcy Appellate Panel"`. Results were other courts only (ca9, cand, caed, orb, cacb). Some requests were throttled and retried.
-- Web search (standard and extended): BAP rules and manual; "Ninth Circuit Bankruptcy Appellate Panel appellant's opening brief pdf"; "courtlistener bap9 opening brief"; "\"Bankruptcy Appellate Panel of the Ninth Circuit\" \"Appellant's Opening Brief\" pdf". Results: the BAP Litigants Manual (Rev'd 01/26), the 2024 manual, a 2020 published memorandum (caption form only), a 2017 BAP-dismissal memorandum. No brief.
-- Not checked: www.bap9.uscourts.gov filings pages; PACER (not accessible from this box).
-
-If a filing is found later, add the PDF as `exemplars/FILED-EXAMPLE-<short-case>-<docket>-opening-brief.pdf` and fill in this file with: URL fetched from, case name, docket number, filer, date filed, date fetched.
-
-Status: BLOCKED: no exemplar.
+- URL: https://www.cacttc.org/assets/documents/3%20-%20meridian%20appellants%20bap%20brief.pdf (hosted by the California Association of County Treasurers and Tax Collectors)
+- Court: United States Bankruptcy Appellate Panel of the Ninth Circuit
+- Case: *County of Imperial Treasurer-Tax Collector v. Stadtmueller (In re RW Meridian LLC)*
+- Docket: BAP No. SC-16-1227; Chapter 7 Bankruptcy Case No. 16-00629-MM7 (Bankr. S.D. Cal.)
+- Document: Appellant's Opening Brief (41 PDF pages)
+- Filer: County of Imperial Treasurer-Tax Collector (appellant). Counsel: Laurel Lee Hyde, Schwartz Hyde & Sullivan, LLP (San Diego).
+- Date filed: October 7, 2016 (dated on the brief; the certificate of service states it was filed electronically through CM/ECF that day)
+- Date fetched: 2026-10-14
+- Format: a scan. Each page is a 200 ppi JBIG2 image with an invisible OCR text layer (Courier, not embedded). Text extraction works and drives the overlay's page pairing, but the OCR has errors (for example "Traclat Gt~t" for "Tracht Gut"). The transcription corrects the errors it could see on the page images.
+- Why this one: it is a party's appellant's opening brief from this court, public, with its text layer. Other searches for an answering brief or a reply brief in this case, and for other BAP9 briefs, found nothing (see `../README.md`).
+- Used for: the transcription `samples/INPUT-meridian-opening-brief.md` (cover, front matter, body excerpt, conclusion, signature and certificates), the overlay `samples/OVERLAY-meridian-opening-brief.pdf`.

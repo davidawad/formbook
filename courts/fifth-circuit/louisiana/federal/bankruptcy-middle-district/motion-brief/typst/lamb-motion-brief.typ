@@ -107,6 +107,9 @@
 #let signature(meta) = {
   let sig = need(meta, "signature")
   let contact = need(meta, "contact")
+  // The address is one string, or a list of lines when the filed block breaks it.
+  let addr = need(contact, "address")
+  let addr-lines = if type(addr) == array { addr } else { (addr,) }
   set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
   block(width: 100%, sticky: true, above: body-leading)[
     #grid(
@@ -121,7 +124,9 @@
           #block[#emph(line)]
         ]
         #v(single-leading)
-        #block[#emph(need(contact, "address"))]
+        #for line in addr-lines [
+          #block[#emph(line)]
+        ]
         #block[#emph("Telephone: " + need(contact, "phone"))]
         #block[#emph("Email: " + need(contact, "email"))]
       ],
@@ -186,6 +191,8 @@
     set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.5em)
     it
   }
+  // Tables (the Material Terms table) are single-spaced, as filed; the cell text keeps 12 pt.
+  show table: set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
 
   // ---- first page: caption, title, notice ----
   caption(meta)

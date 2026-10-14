@@ -7,9 +7,9 @@ Folder: `courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/adver
 |---|---|
 | exemplar | **no**: `BLOCKED: no exemplar`. No filed M.D. La. adversary complaint found. Searches are in `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-adversary-complaint-sample.md`: **fictitious**, built from the rules, not transcribed from a filing. |
-| render | ok: `samples/OUTPUT-adversary-complaint-sample.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | **fail**: `sh tools/overlay.sh` exits 1 with "no exemplar pdf in exemplars" (no filed exemplar exists). No `OVERLAY-*` file is written. |
-| pages reviewed | 6 of 6 (every page rendered at 60 dpi and viewed after the last template change) |
+| render | ok (re-run 2026-10-14): `sh tools/render.sh` exit 0, `samples/OUTPUT-adversary-complaint-sample.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | **fail** (re-run 2026-10-14): `sh tools/overlay.sh` exits 1 with "no exemplar pdf in exemplars" (no filed exemplar exists). No `OVERLAY-*` file is written. |
+| pages reviewed | 6 of 6 (every page viewed as PNG at 100 dpi on 2026-10-14, before the last change). The last change set two straight apostrophes in sub-headings to curly ones (glyphs only, no layout change): "The Trustee's Demand" (page 4) was re-viewed as PNG after the change, and "The Debtor's Financial Condition" (page 3) was confirmed by text extraction. |
 
 File names. The brief asks for `samples/<id>.md`, `samples/<id>.pdf` and `<id>-overlay.pdf`. The repo tools read and write `samples/OUTPUT-<id>.pdf` and `samples/OVERLAY-<id>.pdf/.txt`, and `tools/` is not to be edited, so the tool names are used.
 
