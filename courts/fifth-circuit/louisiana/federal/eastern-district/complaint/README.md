@@ -8,8 +8,9 @@ Folder: `courts/fifth-circuit/louisiana/federal/eastern-district/complaint/`.
 | exemplar | yes: `exemplars/FILED-EXAMPLE-buckles-2-26-cv-01954-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-buckles-complaint.md` (a portion of the 21-page filing; see known gap 7) |
 | render | ok: `samples/OUTPUT-buckles-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-buckles-complaint.pdf` and `OVERLAY-buckles-complaint.txt` (page map) |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed in its final state) |
+| overlay | ok: `samples/OVERLAY-buckles-complaint.pdf` and `OVERLAY-buckles-complaint.txt` (page map; re-run 2026-10-14 against a copy of the exemplar fetched from the URL in `exemplars/SOURCE.md`, not committed) |
+| typeface | Rule names no face (LR 10.1 "standard font"). EB Garamond kept, per `docs/FONTS.md` ("No face named"). Not metric-compatible with the exemplar's Times New Roman; see known gap 1. |
+| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed in its final state; re-checked 2026-10-14 after the fonts pass, no change to the template) |
 
 ## Governing rules
 
@@ -79,7 +80,7 @@ The pairing is loose after page 3 because the sample skips filed pages (the brea
 
 ## Known gaps and open choices
 
-1. **Font.** LR 10.1 requires a "standard font" and does not name one. The only font vendored in `fonts/` is EB Garamond (no Times or Century Schoolbook is vendored; `fonts/` is shared and was not edited). The filed exemplar is Times New Roman 12 pt. EB Garamond at 12 pt has a smaller x-height than Times, so the text looks smaller than the exemplar. The 12 pt size satisfies the rules' "standard font" requirement as far as the rule goes. **Question for David:** should a Times-metric font be vendored? Until then this is a tier-2 difference.
+1. **Font.** LR 10.1 requires a "standard font" and names no face. Under `docs/FONTS.md` ("No face named"), the template keeps EB Garamond. The filed exemplar is Times New Roman 12 pt, a filer's choice the rule does not require. Liberation Serif (metric-compatible with Times New Roman) is vendored, so the switch is available. EB Garamond at 12 pt has a smaller x-height than Times, so the text looks smaller than the exemplar. The 12 pt size satisfies the rules' "standard font" requirement as far as the rule goes. **Question for David:** keep EB Garamond (current), or switch this doc type to Liberation Serif to match the exemplar's look? Until then this is a tier-2 difference.
 2. **Point size.** LR 10.1 sets no point size. 12 pt is used, as in the exemplar.
 3. **One exemplar.** The brief asks for one exemplar per doc type. A second E.D. La. complaint, *Rivers-Roberts v. Hurricane Message, LLC*, No. 2:26-cv-01259 (Doc. 1, filed 2026-06-11, 26 pages, text layer present), was checked and not saved: the file is 67 MB, over the snapshot size limit. Tier 2 is therefore judged against one filer. The Rivers-Roberts caption has no Section or magistrate line, which is one more data point on the caption (gap 4).
 4. **Caption fields.** LR 10.1 requires the Section and the judge and magistrate. The exemplar shows neither a Section line nor a magistrate line. The template draws labelled blanks for an unassigned case, as LR 10.1 asks, so the tier-2 difference from the exemplar is a deliberate choice.
