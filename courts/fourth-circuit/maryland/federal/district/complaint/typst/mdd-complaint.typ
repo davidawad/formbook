@@ -11,13 +11,13 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // LR-102.2.b: Times New Roman or larger typeface. Vendored in /fonts; see ../README.md.
-#let type-size = 13pt                   // LR-102.2.b: at least 12 pt text. 13 pt EB Garamond matches TNR 12 pt cap height (README).
-#let footnote-size = 11pt               // LR-102.2.b: at least 10 pt footnotes (same equivalence, README).
+#let font-family = "Liberation Serif"   // LR-102.2.b: Times New Roman or larger typeface. Metric-compatible substitute, vendored in /fonts (docs/FONTS.md).
+#let type-size = 12pt                   // LR-102.2.b: at least 12 pt text (Times New Roman 12 pt).
+#let footnote-size = 10pt               // LR-102.2.b: at least 10 pt footnotes.
 #let num-size = 12pt                    // page numbers: not text under LR-102.2.b
 #let line-pitch = 27.6pt                // LR-102.2.b: double-spaced = 2 x 1.15 x 12 pt (Times New Roman 12 pt, double in Word)
-#let body-leading = 1.47em              // 0.65 em natural line + 1.47 em leading = 2.12 em = line-pitch at 13 pt (pdftotext -bbox check)
-#let single-leading = 0.5em             // 0.65 em natural line + 0.5 em = 1.15 em: single spacing (Times New Roman 12 pt single)
+#let body-leading = 1.645em             // 0.655 em natural line + 1.645 em leading = 2.30 em = line-pitch at 12 pt (pdftotext -bbox check, Liberation Serif)
+#let single-leading = 0.5em             // 0.655 em natural line + 0.5 em = 1.155 em: single spacing (Times New Roman 12 pt single, 1.15 em)
 #let margin = 1in                       // LR-102.2.b: one-inch margin on all sides
 #let margins = (top: margin, bottom: margin, left: margin, right: margin)
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
@@ -196,7 +196,7 @@
   // ---- document-wide settings ----
   set page(paper: "us-letter", margin: margins, numbering: "1", footer: page-footer)
   set document(title: need(meta, "brief_title"), author: need(meta, "signature").name)
-  // Line box: EB Garamond's natural line is 0.65 em (no top-edge/bottom-edge override, which would enlarge it).
+  // Line box: Liberation Serif's natural line is 0.655 em (no top-edge/bottom-edge override, which would enlarge it).
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
