@@ -1,8 +1,8 @@
 // Adversary complaint for the United States Bankruptcy Court, District of Nevada (nvb).
-// Rules (quoted in ../README.md): LBR 9004(a)-(c) and (g) (form: 8 1/2 by 11, double-spaced, every line
+// Rules (quoted in ../README.md): LR 9004(a)-(c) and (g) (form: 8 1/2 by 11, double-spaced, every line
 // numbered, 12 point or larger, consecutive page numbers, title page 1 1/2 inches from the top, attorney
-// identification, "/s/" signatures); LBR 7010(b) (caption includes the adversary proceeding); FRBP 7008(a)
-// and LBR 7008 (jurisdiction and consent statements); FRBP 7010 (form per Fed. R. Civ. P. 10: numbered
+// identification, "/s/" signatures); LR 7010(b) (caption includes the adversary proceeding); FRBP 7008(a)
+// and LR 7008 (jurisdiction and consent statements); FRBP 7010 (form per Fed. R. Civ. P. 10: numbered
 // paragraphs, separate claims). Content-agnostic: every case word comes from the sample's frontmatter.
 #import "@preview/cmarker:0.1.10"
 
@@ -10,24 +10,24 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // LBR 9004(b): proportional font; vendored in fonts/
-#let type-size = 13pt                     // LBR 9004(b): at least 12 point. 13 pt is a style choice (EB Garamond sets smaller than Times at 12); see ../README.md.
-#let pitch = 24pt                         // LBR 9004(a)(1): double-spaced; the numbered lines are this pitch
-#let lines-per-page = 28                  // LBR 9004(a)(1): each printed line numbered in the left margin, 28 to a page
-#let page-w = 8.5in                       // LBR 9004(a)(1): 8 1/2 by 11 inch paper
+#let font-family = "EB Garamond"          // LR 9004(b): proportional font; vendored in fonts/
+#let type-size = 13pt                     // LR 9004(b): at least 12 point. 13 pt is a style choice (EB Garamond sets smaller than Times at 12); see ../README.md.
+#let pitch = 24pt                         // LR 9004(a): double-spaced; the numbered lines are this pitch
+#let lines-per-page = 28                  // LR 9004(a): each printed line numbered in the left margin, 28 to a page
+#let page-w = 8.5in                       // LR 9004(a): 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let top-margin = 72pt                    // line 1 sits on the top margin
 #let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the page number
 #let left-margin = 1.5in                  // room for the line numbers
 #let right-margin = 0.75in
 #let text-width = page-w - left-margin - right-margin
-#let title-page-lines = 2                 // LBR 9004(a)(2)(B): the title page begins 1 1/2 in from the top; line 3 is 1 in + 48 pt = 1.67 in
+#let title-page-lines = 2                 // LR 9004(a): the title page begins 1 1/2 in from the top; line 3 is 1 in + 48 pt = 1.67 in
 #let body-leading = 15.55pt               // the gap that makes a line of 13 pt EB Garamond (line box 0.65em) a 24 pt pitch; measured in ../README.md
-#let single-leading = 6.5pt                // counsel block, caption, signature block, quotations: single-spaced (LBR 9004(a)(2)(A) exempts the caption and attorney identification)
+#let single-leading = 6.5pt                // counsel block, caption, signature block, quotations: single-spaced (LR 9004(a) exempts the caption and attorney identification)
 #let para-indent = 0.5in                  // first-line indent of numbered paragraphs
 #let caption-left = 3.2in                 // width of the party column of the caption
 #let label-width = 0.5in                  // hanging width for list labels (a., (b) ...)
-#let footer-size = 12pt                   // LBR 9004(b): page numbers, printed consecutively
+#let footer-size = 12pt                   // LR 9004(b): page numbers, printed consecutively
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -66,7 +66,7 @@
 // Page furniture
 // ---------------------------------------------------------------------------
 
-/// Numbers 1 to 28 down the left margin, one per numbered line (LBR 9004(a)(1)).
+/// Numbers 1 to 28 down the left margin, one per numbered line (LR 9004(a)).
 #let line-numbers() = {
   for i in range(1, lines-per-page + 1) {
     place(top + left, dx: 0pt, dy: top-margin + (i - 1) * pitch,
@@ -79,7 +79,7 @@
 #let pleading-rule() = place(top + left, dx: left-margin - 0.2in,
   line(start: (0pt, 0pt), end: (0pt, page-h), stroke: 0.75pt))
 
-/// Consecutive page numbers, centered below the 28th line (LBR 9004(b)).
+/// Consecutive page numbers, centered below the 28th line (LR 9004(b)).
 #let page-number() = place(top + left, dx: left-margin,
   dy: top-margin + lines-per-page * pitch + 8pt,
   block(width: text-width, align(center, text(size: footer-size, context counter(page).display()))))
@@ -88,7 +88,7 @@
 // Cover: attorney identification, court title, caption
 // ---------------------------------------------------------------------------
 
-/// The attorney identification: one column per counsel group (LBR 9004(g)(1)). Single-spaced.
+/// The attorney identification: one column per counsel group (LR 9004(g)). Single-spaced.
 #let counsel-block(meta) = {
   let groups = need(meta, "counsel")
   let n = groups.len()
@@ -99,13 +99,13 @@
   ))
 }
 
-/// Court title (LBR 9004(g)(2)): the title is the same on every case caption of this court.
+/// Court title (LR 9004(g)): the title is the same on every case caption of this court.
 #let court-title() = {
   on-grid(align(center, text(weight: "bold", "UNITED STATES BANKRUPTCY COURT")))
   on-grid(align(center, text(weight: "bold", "DISTRICT OF NEVADA")))
 }
 
-/// The caption (LBR 7010(b)): the debtor and the adversary parties on the left, the case number,
+/// The caption (LR 7010(b)): the debtor and the adversary parties on the left, the case number,
 /// adversary number and title of the paper on the right.
 #let caption(meta) = {
   let debtor = need(meta, "debtor")
@@ -163,7 +163,7 @@
   v(body-leading)
 })
 
-/// A heading: one or more double-spaced lines, kept with the item after it (LBR 9004(a)(1) does not
+/// A heading: one or more double-spaced lines, kept with the item after it (LR 9004(a) does not
 /// exempt headings). Level 1 is a centered section (bold capitals); level 2 a centered bold sub-heading.
 #let heading-item(level, text-md) = {
   let lab = text-md.match(regex("^([A-Z0-9]+\\.)\\s+(.*)$"))
@@ -182,7 +182,7 @@
   })
 }
 
-/// A block quotation: indented on both sides, single-spaced (LBR 9004(a)(2)(A) exempts quotations).
+/// A block quotation: indented on both sides, single-spaced (LR 9004(a) exempts quotations).
 #let quote-item(t) = {
   let text-md = t.split("\n").map(l => l.trim().trim(">").trim()).filter(l => l != "").join("\n\n")
   on-grid(width: text-width - 1in, pad(left: 0.5in, right: 0.5in, {
@@ -262,7 +262,7 @@
 }
 
 // ---------------------------------------------------------------------------
-// Signature (LBR 9004(c)): the signer's name typed under "/s/ Name" in the signature space.
+// Signature (LR 9004(c)): the signer's name typed under "/s/ Name" in the signature space.
 // ---------------------------------------------------------------------------
 
 #let signature-block(meta) = {
