@@ -2,7 +2,7 @@
 
 A motion for judgment on the administrative record (RCFC 52.1(c)) with its memorandum of law, the form used in bid protests. This folder is one self-contained doc type under the court (`uscfc`). The court-root `typst/` and `samples/` are not touched.
 
-Status: **exemplar = yes**, **render = ok**, **overlay = ok**. The brief is a full-depth form; the sample is an excerpt of a 72-page memorandum (13 rendered pages). Not a complete reproduction of the filing.
+Status: **exemplar = yes** (the PDF is not in `exemplars/` on the 2026-10-14 fonts-pass box; see Exemplar below), **typeface = EB Garamond, kept** (the rules name no face; see Decisions), **render = ok** (re-rendered 2026-10-14, 13 pages, EB Garamond only, 13 of 13 pages viewed at 50 dpi), **overlay = fail on this box** (`tools/overlay.sh` needs `exemplars/*.pdf` and the OCR text-layer copy, neither present; the committed `OVERLAY-oracle-memorandum.*` were not rewritten). The brief is a full-depth form; the sample is an excerpt of a 72-page memorandum (13 rendered pages). Not a complete reproduction of the filing.
 
 ## Layout
 
@@ -78,7 +78,7 @@ Body:
 
 ## Decisions
 
-**Font: EB Garamond at 12 point.** The only serif face vendored here is EB Garamond (the same family ca9 uses). The filed exemplar is set in Times New Roman. RCFC 5.5(c)(2) sets the minimum by point size, and 12 point EB Garamond meets it, but it looks smaller than 12 point Times. The clerk-visible difference is in the overlay. A vendored Times-metric face would close the gap; none is in `fonts/`, and this box does not add fonts.
+**Font: EB Garamond at 12 point.** RCFC 5.5(c)(2) sets only the minimum type size (12 point) and names no typeface; the whole rules PDF (as amended July 27, 2026) was searched and names none. Per `docs/FONTS.md`, a court that names no face keeps EB Garamond. The filed exemplar is set in Times New Roman, which the rules do not require. `fonts/liberation-serif/` (the Times New Roman substitute) is vendored, but using it would be a convention choice, not a rule requirement, so it is not applied. 12 point EB Garamond looks smaller than 12 point Times; the difference is visible in the overlay.
 
 **Double spacing.** `body-leading = 0.9em` was chosen by eye for a double-spaced look at 12 point. The pitch was not measured against the exemplar.
 
@@ -137,7 +137,7 @@ After fixes 2-4 the re-render was checked by text extraction (pp. 1, 10, and the
 - **The sample is an excerpt.** It covers the Introduction, Questions Presented, parts of the Statement of Facts (A-B), the jurisdiction section, part of Argument A, and the conclusion. The TOC and TOA list only what the excerpt contains. The exemplar's Argument (Parts V-VI), its Argument headings, and its full TOA are not reproduced.
 - **Overlay pairing for scanned exemplar pages** depends on the OCR text-layer copy outside the repo. If that copy is regenerated, the overlay must be regenerated.
 - **The page limit** is enforced on our render, but the sample is short, so the check is not exercised near the limit.
-- **Font.** See Decisions: 12 point EB Garamond, not Times New Roman.
+- **Font.** See Decisions: 12 point EB Garamond, kept because the rules name no face; Liberation Serif is vendored but not applied.
 - **Single exemplar.** One filing from one filer. The brief asks for one exemplar per doc type; for tier-2 conventions the usual practice is two or three filers, which this box did not find (CourtListener's motion PDFs for uscfc are mostly opinions; docket pages and docket-entry API need auth).
 
 ## Search log
