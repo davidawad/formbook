@@ -9,7 +9,8 @@ Folder: `courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/moti
 | sample md | `samples/INPUT-crosby-msj-memo.md` (the memorandum's caption, title, background, argument, conclusion, signature and certificate; the 28-page exemplar is abridged in its argument, see gap 8) |
 | render | ok: `samples/OUTPUT-crosby-msj-memo.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-crosby-msj-memo.pdf` and `samples/OVERLAY-crosby-msj-memo.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | EB Garamond, 12 pt. No rule names a face, so `docs/FONTS.md` "No face named" applies and the template keeps EB Garamond (gap 2) |
+| pages reviewed | 8 of 8 (re-rendered and every page viewed at 60 dpi on 2026-10-14, fonts pass; output unchanged) |
 | BLOCKED | none |
 
 File names: the brief's `samples/<id>.md` and `samples/<id>-overlay.pdf` are written as `INPUT-<id>.md` and `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default (CLAUDE.md, "File roles are in the name").
@@ -27,6 +28,7 @@ Primary sources, fetched 2026-10-14.
 | Fed. R. Bankr. P. 9004(b) | A filed document must include a caption covering the court's name, the case's title, the case number (and adversary-proceeding number, if applicable), and a brief designation of the document's character. | `caption()`: court title, parties with designations (DEBTORS, PLAINTIFFS, DEFENDANTS), case information (case number, chapter, complex-case and section lines, adversary number); `title`. |
 | Fed. R. Bankr. P. 7056 | Summary judgment in adversary proceedings: Fed. R. Civ. P. 56 applies. Cited in the exemplar's text; not separately fetched for this pass. | Not template text (the sample quotes the exemplar's text; the rule itself is not reproduced). |
 | E.D. La. Local Rules, general | No rule on paper size, typeface, margins, line spacing, page limits or cover pages was found in the 2013 Local Rules (text searched for "font", "point", "margin", "spac", "page limit", "paper", "pleading"). | Typography is a convention, see gap 2. |
+| E.D. La. Clerk's Notes, "Font Size" (copy retrieved 2026-10-14: https://www.laeb.uscourts.gov/sites/laeb/files/ClerksNotes704.pdf; undated), citing LBR 5005-3 | Motions, applications, memoranda and judgments/orders "must be typed or written in a size format that is sufficient to read without difficulty." Names no face. LBR 5005-3 is not in the 2013 Local Rules copy, so its current text was not read. | Vendored EB Garamond at 12 pt (gap 2). |
 
 Not produced by this template: the ECF header line ("Case 26-10678 Doc 414-1 Filed 05/15/26 ..."), which the court's system adds on filing; the motion itself (the notice of motion and the Rule 9013 motion are separate documents with their own captions); the proposed order (Local Rule 9013-3 governs its contents); the statement of uncontested material facts and exhibits (Exs. 1-7 in the exemplar).
 
@@ -75,7 +77,7 @@ What the overlay shows, as a diagnostic (not a score): the sample's pages 1-2 pa
 ## Known gaps and open choices
 
 1. **One exemplar; tier 2 needs 2 or 3 filers.** The brief asks for one exemplar per doc type. CourtListener lists other E.D. La. motions with memorandum attachments (*Rivera-Fulton, Trustee v. Patriot Marine Services*, Adv. 24-01075, motion for partial summary judgment; Markel's motion to dismiss in *Babin v. Crescent*, Adv. 24-01028), but their attachments have no RECAP file, so they could not be downloaded. The exemplar used here is the Meged/Dependance/Reliance memorandum; no other filer's memorandum is saved. Tier 2 is therefore **not** judged against 2 or 3 filers yet.
-2. **Font.** No E.D. La. rule names a typeface, and the exemplar is Times New Roman. The vendored serif is EB Garamond, a smaller face than Times at 12 pt, so the text looks smaller. Whether a larger apparent size is wanted is a question for David.
+2. **Font: no face required; EB Garamond kept.** The 2013 Local Rules and the Clerk's Notes (LBR 5005-3, a size-and-legibility rule) name no typeface, so `docs/FONTS.md` "No face named" applies and the template keeps EB Garamond. The filed exemplar is Times New Roman, but the exemplar only settles what the rules leave open. EB Garamond at 12 pt reads smaller than Times at 12 pt, so the overlay text looks smaller. Whether tier 2 wants a Times-metric face (`Liberation Serif`, metric-compatible) is a question for David. If the current LBR 5005-3 text names a face, switch the font list to the `docs/FONTS.md` substitute.
 3. **Caption column.** The exemplar uses a § column; the template uses a rule at the column's right edge (the form used in cand). Both are seen in practice; recorded as a convention.
 4. **Caption footnote.** The exemplar's caption carries footnote 1 (the joint-administration order for lead case 25-10678 and the three related cases). Footnotes are supported in body text only, so the sample omits it. The caption text is otherwise complete, including the full defendants list.
 5. **Not generated:** ECF header, the motion and notice, the proposed order, statement of uncontested facts, exhibits (see Governing rules).
