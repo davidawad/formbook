@@ -7,9 +7,10 @@ Folder: `courts/eleventh-circuit/alabama/federal/southern-district/motion-brief/
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-jackson-v-shell-22-cv-478-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-shell-motion-brief.md` (caption, title, introduction, factual background, argument I to IV, V (partly), VI, conclusion, signature, certificate of service added by us; several passages elided, see Known gaps) |
-| render | ok: `samples/OUTPUT-shell-motion-brief.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-shell-motion-brief.pdf` and `OVERLAY-shell-motion-brief.txt` (`tools/overlay.sh`) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last change) |
+| typeface | face required: none (S.D. Ala. Gen. L.R. 5(a)(2) asks for "a plain, Roman style (or similar) font"; no face is named). Substitute: **EB Garamond** (kept, as the brief's rule for courts that name no face). Fit: n/a. See Known gaps 1. |
+| render | ok: `samples/OUTPUT-shell-motion-brief.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings; re-rendered 2026-10-14, `pdffonts` shows `EBGaramond-Regular`, `-Bold`, `-Italic` embedded (no other face) |
+| overlay | ok: `samples/OVERLAY-shell-motion-brief.pdf` and `OVERLAY-shell-motion-brief.txt` (`tools/overlay.sh`), re-run 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not stored in the folder; see `exemplars/SOURCE.md`) |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed on 2026-10-14, after the typeface check) |
 
 File names follow the repo's tools (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`); `<id>` is `shell-motion-brief`.
 
@@ -20,7 +21,7 @@ Primary source: S.D. Ala. Local Rules (Order Promulgating Local Rules, "Effectiv
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | S.D. Ala. Gen. L.R. 5(a)(1) | 8½ × 11 paper; double-spaced text (quotations of more than two lines may be single-spaced); headings and footnotes may be single-spaced; margins of at least 1 inch on all four sides; page numbers only in the margins. | `margin = 1in`, `body-leading`, `single-leading` for block quotes, headings, signature and certificate; footer page number in the bottom margin. |
-| S.D. Ala. Gen. L.R. 5(a)(2) | Plain roman font; case names italic or underlined; 12 point or larger, footnotes included. | `font-family = "EB Garamond"`, `type-size = 12pt`; case names italic from `*...*`. See Known gaps 1. |
+| S.D. Ala. Gen. L.R. 5(a)(2) | "A plain, Roman style (or similar) font"; case names italic or underlined; 12 point or larger, footnotes included. Names no typeface. | `font-family = "EB Garamond"` (kept: any plain roman face satisfies the rule), `type-size = 12pt`; case names italic from `*...*`. See Known gaps 1. |
 | S.D. Ala. Gen. L.R. 5(a)(3) | Signature line, with the typed name, address and telephone of every attorney of record directly beneath. | `signature-block()`. |
 | S.D. Ala. Civ. L.R. 7(a) | Every motion must state the statute, rule, or legal or equitable principle under which it is made. | Not checked by the template. The sample states the rule in its introduction and in section VI (Rule 12(e)); the Rule 12(b)(6) basis appears in the argument, not in a separate statement. |
 | S.D. Ala. Civ. L.R. 7(b) | A Rule 12(b) motion must be supported by a brief; the brief may be included within the body of the motion. | The document is the brief; the title says "Memorandum of Law in Support of Its Motion". |
@@ -70,7 +71,7 @@ The pairing is not in order because the sample elides the exemplar's pages 8 to 
 
 ## Known gaps and open choices
 
-1. **Font.** Same as the complaint: the exemplar uses Times New Roman (not vendored); the template uses EB Garamond, a roman face at 12 point (see `../complaint/README.md`, gap 1).
+1. **Font.** Same as the complaint: the rule names no typeface, so EB Garamond stays (see `../complaint/README.md`, gap 1). The exemplar is set in Times New Roman; Liberation Serif would be its substitute if David wants the filed look.
 2. **One exemplar.** A second motion from a different filer (e.g. *Geovera v. DNB Investments*, 1:24-cv-00003-JB-M, see `exemplars/SOURCE.md`) would be needed for a tier-2 judgment against 2 or 3 filers.
 3. **Footnotes.** The filed memorandum has footnotes (markers 1, 2, 4 and 5 appear in the pages we read; 3 was not read). The sample omits the markers and footnote text. Footnote numbering and sizing were not tested; a footnote in a new sample would need a template check.
 4. **Elided text.** The sample transcribes the introduction, the factual background through the transfer and Facebook allegations, argument I, the opening paragraphs of II (with sub-heading A and its first paragraph), III and IV, the opening and closing of V, all of VI, the conclusion and the signature. Everything else in the filed memorandum is not transcribed, including sub-sections IV.A to IV.E and most of V. Each elision inside a transcribed section is marked with "…". Nothing in the sample is a paraphrase of the filed text, but the sample is not a full copy of the memorandum.

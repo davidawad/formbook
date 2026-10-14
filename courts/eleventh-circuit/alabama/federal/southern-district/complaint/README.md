@@ -7,9 +7,10 @@ Folder: `courts/eleventh-circuit/alabama/federal/southern-district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-frankenmuth-1-26-cv-228-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-frankenmuth-complaint.md` (the complaint's caption, body, four counts, prayer, jury waiver and signature; the service list on the exemplar's last page is not transcribed) |
-| render | ok: `samples/OUTPUT-frankenmuth-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-frankenmuth-complaint.pdf` and `OVERLAY-frankenmuth-complaint.txt` (`tools/overlay.sh`) |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (S.D. Ala. Gen. L.R. 5(a)(2) asks for "a plain, Roman style (or similar) font"; no face is named). Substitute: **EB Garamond** (kept, as the brief's rule for courts that name no face). Fit: n/a. See Known gaps 1. |
+| render | ok: `samples/OUTPUT-frankenmuth-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings; re-rendered 2026-10-14, `pdffonts` shows `EBGaramond-Regular`, `-Bold`, `-Italic` embedded (no other face) |
+| overlay | ok: `samples/OVERLAY-frankenmuth-complaint.pdf` and `OVERLAY-frankenmuth-complaint.txt` (`tools/overlay.sh`), re-run 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not stored in the folder; see `exemplars/SOURCE.md`) |
+| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed on 2026-10-14, after the typeface check) |
 
 File names follow the repo's tools, not the brief's shorthand: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf` (`tools/render.sh` writes it), the overlay `OVERLAY-<id>.pdf` and `.txt` (`tools/overlay.sh` writes them). `<id>` is `frankenmuth-complaint`.
 
@@ -20,7 +21,7 @@ Primary source: S.D. Ala. Local Rules (Order Promulgating Local Rules, "Effectiv
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | S.D. Ala. Gen. L.R. 5(a)(1) | 8½ × 11 paper; text double-spaced (quotations of more than two lines may be single-spaced); headings and footnotes may be single-spaced; margins of at least 1 inch on all four sides; page numbers only in the margins. | `margin = 1in`, `body-leading` (double), `single-leading` for block quotes and the signature, footer page number in the bottom margin. |
-| S.D. Ala. Gen. L.R. 5(a)(2) | Plain roman (or similar) font; italics or boldface for emphasis; case names italic or underlined; 12 point or larger, footnotes included. | `font-family = "EB Garamond"`, `type-size = 12pt` (footer too); case names italic from `*...*` in the sample. See Known gaps 1. |
+| S.D. Ala. Gen. L.R. 5(a)(2) | "A plain, Roman style (or similar) font", italics or boldface for emphasis; case names italic or underlined; 12 point or larger, footnotes included. Names no typeface. | `font-family = "EB Garamond"` (kept: the rule allows any plain roman face, so no court-named substitute applies), `type-size = 12pt` (footer too); case names italic from `*...*` in the sample. See Known gaps 1. |
 | S.D. Ala. Gen. L.R. 5(a)(3) | Signature line, with the typed name, address and telephone of every attorney of record directly beneath. | `signature-block()`: one block per attorney from `signature.blocks`. |
 | S.D. Ala. Civ. L.R. 10(a) | Claims or defenses in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | `allegations()`: each prose paragraph is numbered 1, 2, ...; headings, lists, block quotes and bracketed record cites are not. |
 | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number, and a Rule 7(a) designation. Fetched https://www.law.cornell.edu/rules/frcp/rule_10 on 2026-10-14. | `court-title()`, `caption()` (civil action number on the middle line), `brief_title`. |
@@ -73,7 +74,7 @@ The word-overlap figures are 50 to 79 percent. The low figures come from differe
 
 ## Known gaps and open choices
 
-1. **Font.** The rule requires a plain roman style font. The exemplar uses Times New Roman, which is not vendored. The template uses EB Garamond (vendored, the only font in `fonts/`), which is a roman face at 12 point. EB Garamond's x-height is smaller than Times', so the text looks slightly smaller than the exemplar. Whether David wants a Times-metric font vendored is an open question; the S.D. Ala. rule does not name a typeface.
+1. **Font.** The rule requires "a plain, Roman style (or similar) font" and names no typeface, so the court-named-face rule (`docs/FONTS.md`) does not apply and the template keeps EB Garamond. The filed exemplar is set in Times New Roman; its substitute would be **Liberation Serif** (metric-compatible), a one-line change to `font-family` in `typst/alsd-complaint.typ` if David wants the filed look. That choice is left open: the rule does not require Times, and the exemplar is one filer's style (tier 3). EB Garamond's x-height is smaller than Times', so the text looks slightly smaller than the exemplar.
 2. **One exemplar.** The brief asks for one filed exemplar per doc type. A second complaint from a different filer (see `exemplars/SOURCE.md`) would be needed to judge tier 2 against 2 or 3 filers.
 3. **Signature page.** The signature block lands alone on page 11 because the transcription ends on a full page. The filed exemplar does not do this: its page 14 carries the jury waiver paragraph above the signature block. The template keeps the signature block unbreakable and does not pull body text onto its page. A clerk may still want at least a few lines of text on the signature page; this is a tier-2 open item, recorded as OPEN.
 4. **Caption layout.** The exemplar uses no ")" column; the template uses one (a common S.D. Ala. form, and the one in the Chapa complaint). The column is a convention choice, recorded as ACCEPTED.
