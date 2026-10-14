@@ -8,8 +8,9 @@ Folder: `courts/fourth-circuit/virginia/federal/eastern-district/motion-brief/`.
 | exemplar | yes: `exemplars/FILED-EXAMPLE-keppel-4-26-cv-00112-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-keppel-motion-brief.md` (abridged transcription of the 12-page memorandum; see Known gaps) |
 | render | ok: `samples/OUTPUT-keppel-motion-brief.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-keppel-motion-brief.pdf` and `OVERLAY-keppel-motion-brief.txt` (page map) |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template and sample change, 2026-10-14) |
+| typeface | Rule names no face: L.R. 7(F)(3) says "12 point Roman style or 10 pitch Courier style". Any proportional serif is allowed, so the template keeps EB Garamond (`docs/FONTS.md`: no court-named face). Metric note: none needed. Font re-checked 2026-10-14 (`pdffonts`: EB Garamond only). |
+| overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF, and `exemplars/` holds only `SOURCE.md` (the PDF is not in this snapshot). Old `OVERLAY-keppel-motion-brief.txt` is from an earlier run and is not current. |
+| pages reviewed | 9 of 9 (re-rendered 2026-10-14; every page rasterized at 70 dpi and viewed) |
 
 ## Governing rules
 
@@ -57,7 +58,7 @@ Notes on what the rules do not say:
 
 1. **Tier 2 is judged against one filer only.** The brief and EVAL-LOOP ask for 2 or 3 filers. Found and not saved: *Ballentine v. Hall*, No. 1:26-cv-02331-RDA-IDD (E.D. Va., Alexandria), Document 11, 17 pages, filed 2026-08-12, the National Center for Missing & Exploited Children's memorandum in support of its motion to dismiss (see `exemplars/SOURCE.md`). It was not saved because the overlay pairs against the first file in `exemplars/`, which would then be Ballentine for the sample's Keppel text. Recorded as an open gap for David.
 2. **The sample is abridged.** Marked in the sample where it matters: the block quotations from *Cory* and *Baldwin* are omitted (marked "[Block quotations ... omitted from this transcription.]"); the *Sloane*, *Harless*, and *Cretella* citations are omitted (marked); the Goulmamine discussion is reduced to its first citation; the Thompson and McGuire discussion is not transcribed; Background paragraphs are partial; Argument II's and III's paragraphs are transcribed as read. Footnotes 1 and 2 of the filing are not transcribed. The template sets footnote text to 12 point, but the markdown contract has no footnote syntax yet, so footnotes are not tested.
-3. **Font.** Tier 1 asks for a 12 point Roman face. The template uses EB Garamond, the only family vendored in `fonts/`. The exemplar is Times-style. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the exemplar. The point size meets the rule; the apparent size does not. Recorded as ACCEPTED (no font was added, and `fonts/` is out of scope).
+3. **Font.** Tier 1 asks for a 12 point Roman face. The rule names no face ("Roman style"), so `docs/FONTS.md` keeps EB Garamond. The exemplar is Times-style. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the exemplar. The point size meets the rule; the apparent size does not. Open question for David: if "Roman style" is read as Times New Roman, the substitute is Liberation Serif (metric-compatible, `docs/FONTS.md`) and the template should switch. Not switched here, because the rule does not name Times (recorded as ACCEPTED).
 4. **Signature mark.** The exemplar's "/s/" line is transcribed as "/s/ Kristina H. Vaquera", as the filing shows it.
 5. **30-page cap: tested.** The cap is a template assertion. It was exercised with a throwaway 420-paragraph draft (33 pages): the build failed with "33 pages exceed the 30-page limit of Local Civil Rule 7(F)(3)". The throwaway file was deleted. The rendered sample is 9 pages, so the assertion does not fire on it.
 6. **Keep-together.** The conclusion and the signature move to the next page together when they do not fit (the sample's conclusion moved to page 8 for that reason, leaving page 7 with white space below Argument IV).
