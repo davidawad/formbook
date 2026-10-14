@@ -11,7 +11,7 @@ Doc type: motion with memorandum of authorities, United States Bankruptcy Court,
 - Filer: AP Defendants, by counsel Bush Kornfeld LLP (Jason Edward Wax; the caption block of the filing identifies the firm)
 - Date filed: 2025-02-19 (stamp "Filed 02/19/25" on every page)
 - Fetched from: https://storage.courtlistener.com/recap/gov.uscourts.waeb.216817/gov.uscourts.waeb.216817.14.0.pdf (CourtListener RECAP; docket page https://www.courtlistener.com/docket/69601531/1-min-llc-adversary-proceeding/)
-- Date fetched: 2026-10-14
+- Date fetched: 2026-10-14 (re-downloaded into this checkout from the URL above: HTTP 200, 919,559 bytes, 42 pages; sha256 `990f5dc64bed0b2a7af5599160a62f9bf7b17814993a8aba3f7be02aa895e39d`)
 - Text layer: yes. Fonts embedded: Times New Roman Bold (TrueType); Times Roman, Times Bold, Times Italic and Helvetica Bold Oblique are non-embedded base-14 references.
 - Public court record (RECAP). Used as a visual and structural reference only.
 
