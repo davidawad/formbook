@@ -5,15 +5,15 @@ Doc type `answering-brief` of court `ca8`. One self-contained folder: exemplar, 
 | Item | Path | Status |
 |---|---|---|
 | Exemplar (filed, text-based PDF) | `exemplars/FILED-EXAMPLE-banks-v-costar-25-3320-answering-brief.pdf` (source: `exemplars/SOURCE.md`) | yes |
-| Sample markdown | `samples/banks-costar-response.md` | yes |
-| Rendered sample | `samples/banks-costar-response.pdf` (14 pages) | render=ok |
+| Sample markdown | `samples/INPUT-banks-costar-response.md` | yes |
+| Rendered sample | `samples/OUTPUT-banks-costar-response.pdf` (14 pages) | render=ok |
 | Overlay (red = ours, blue = filed) | `samples/OVERLAY-banks-costar-response.pdf`, `samples/OVERLAY-banks-costar-response.txt` | overlay=ok |
 | Template | `typst/main.typ` (entry), `typst/ca8-answering-brief.typ` | |
 
 Build (from the repo root; the toolchain is typst 0.15.0, poppler, ImageMagick):
 
 ```sh
-sh tools/render.sh courts/eighth-circuit/court-of-appeals/answering-brief samples/banks-costar-response.md
+sh tools/render.sh courts/eighth-circuit/court-of-appeals/answering-brief samples/INPUT-banks-costar-response.md
 sh tools/overlay.sh courts/eighth-circuit/court-of-appeals/answering-brief banks-costar-response
 ```
 
@@ -46,7 +46,7 @@ Tier 2 (conventions) is judged against the exemplar only: cover arrangement, hea
 
 ## Markdown contract
 
-One `.md` file: YAML frontmatter, then the body. The template builds the cover, front matter, TOC, TOA, signature block and both certificates. Full field list in the frontmatter of `samples/banks-costar-response.md`. Required: `case_number`, `caption`, `proceeding`, `brief_title`, `counsel`, `phone`, `signature`, `date`, `virus_check`, `summary`, `authorities` (when the body cites any). Optional: `judge`, `district_court_case`, `disclosure` (omit when the party is not a nongovernmental corporation).
+One `.md` file: YAML frontmatter, then the body. The template builds the cover, front matter, TOC, TOA, signature block and both certificates. Full field list in the frontmatter of `samples/INPUT-banks-costar-response.md`. Required: `case_number`, `caption`, `proceeding`, `brief_title`, `counsel`, `phone`, `signature`, `date`, `virus_check`, `summary`, `authorities` (when the body cites any). Optional: `judge`, `district_court_case`, `disclosure` (omit when the party is not a nongovernmental corporation).
 
 - Headings: `# Heading` is a centered bold section (Statement, Argument, Conclusion). Argument point headings are numbered automatically (I., A., 1., a.); do not type the numbers. Level 2 outside the Argument is A., level 3 is 1., and so on.
 - Citations: `[*Case v. Name*, 1 F.4th 2 (8th Cir. 2026)](toa:key)`. Every `toa:` key must be in `authorities:`, or the build stops. Each link is recorded with the page it starts on for the TOA.

@@ -16,13 +16,13 @@ The markdown file begins with YAML frontmatter: `case_number`, `style_petitioner
 Build from the repository root:
 
 ```sh
-sh tools/render.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/petition-for-discretionary-review samples/ukw-pdr.md
+sh tools/render.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/petition-for-discretionary-review samples/INPUT-ukw-pdr.md
 sh tools/overlay.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/petition-for-discretionary-review ukw-pdr
 ```
 
 ## Overlay and page review
 
-The red/blue overlay is `samples/ukw-pdr-overlay.pdf`; its page map is `samples/ukw-pdr-overlay.txt`. The sample uses the filed petition's cover, opening case identity, table headings and representative petition sections. The five rendered pages were rendered at 60 dpi and reviewed on October 14, 2026.
+The red/blue overlay is `samples/OVERLAY-ukw-pdr.pdf`; its page map is `samples/OVERLAY-ukw-pdr.txt`. The sample uses the filed petition's cover, opening case identity, table headings and representative petition sections. The five rendered pages were rendered at 60 dpi and reviewed on October 14, 2026.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|

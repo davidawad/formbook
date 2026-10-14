@@ -9,7 +9,7 @@ Status: exemplar=yes, sample=yes (one), typst render=ok, overlay=ok. Three-engin
 From the repo root, with typst 0.15.0 on PATH (`render.sh` runs typst with `--ignore-system-fonts`, the vendored fonts only, and treats any warning as failure):
 
 ```sh
-sh tools/render.sh courts/third-circuit/court-of-appeals/opening-brief samples/tresslar-opening-brief.md   # -> samples/tresslar-opening-brief.pdf
+sh tools/render.sh courts/third-circuit/court-of-appeals/opening-brief samples/INPUT-tresslar-opening-brief.md   # -> samples/OUTPUT-tresslar-opening-brief.pdf
 sh tools/overlay.sh courts/third-circuit/court-of-appeals/opening-brief tresslar-opening-brief            # -> -overlay.pdf and -overlay.txt
 ```
 
@@ -81,7 +81,7 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body. The t
 
 Body: `# Heading` is a section. Required: `# Statement of the Case`, a heading containing `Standard of Review`, `# Argument`, `# Conclusion`. Sub-headings are numbered automatically: do not type "A." or "I." in a heading (the sample had this error and the TOC showed "A. A."). Citations link to the registry as `[*Flora v. County of Luzerne*, 776 F.3d 169 (3d Cir. 2015)](toa:flora)`. Footnotes use `[^key]`. Block quotations use `>`.
 
-## Overlay (`samples/tresslar-opening-brief-overlay.pdf`)
+## Overlay (`samples/OVERLAY-tresslar-opening-brief.pdf`)
 
 Red = our render, blue = the filed exemplar, black = both (`tools/overlay.sh`, pages paired by word overlap).
 
@@ -89,7 +89,7 @@ What it shows, and what it does not. Cover and front matter line up well: page 1
 
 ## Review (Gate 2 record)
 
-Every page of `samples/tresslar-opening-brief.pdf` (18 pages, PDF page numbers below; printed folios are 1-10 for PDF pages 5-14 and i-iv for PDF pages 2-4) was rendered to PNG at 60 dpi and looked at in the first pass. Findings and what was done:
+Every page of `samples/OUTPUT-tresslar-opening-brief.pdf` (18 pages, PDF page numbers below; printed folios are 1-10 for PDF pages 5-14 and i-iv for PDF pages 2-4) was rendered to PNG at 60 dpi and looked at in the first pass. Findings and what was done:
 
 | PDF page | Finding | Action |
 |---|---|---|

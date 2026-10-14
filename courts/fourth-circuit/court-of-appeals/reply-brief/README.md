@@ -9,9 +9,9 @@ Status: exemplar found, template and sample render; overlay generated; every ren
 |---|---|
 | `exemplars/FILED-EXAMPLE-dnc-de-luca-26-1532-reply-brief.pdf` | The filed exemplar: *Democracy North Carolina v. De Luca*, No. 26-1532, Reply Brief of Appellants (36 pages, Doc. 34, filed 08/13/2026). Text-based PDF. |
 | `exemplars/SOURCE.md` | URL fetched from, case, docket, filer, dates. |
-| `samples/de-luca-reply-brief.md` | Markdown transcription of an excerpt of the exemplar (see "Known gaps"). Frontmatter + body, per the markdown contract below. |
-| `samples/de-luca-reply-brief.pdf` | `sh tools/render.sh courts/fourth-circuit/court-of-appeals/reply-brief samples/de-luca-reply-brief.md` (10 pages). |
-| `samples/de-luca-reply-brief-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/reply-brief de-luca-reply-brief` (red = ours, blue = filed, black = both). |
+| `samples/INPUT-de-luca-reply-brief.md` | Markdown transcription of an excerpt of the exemplar (see "Known gaps"). Frontmatter + body, per the markdown contract below. |
+| `samples/OUTPUT-de-luca-reply-brief.pdf` | `sh tools/render.sh courts/fourth-circuit/court-of-appeals/reply-brief samples/INPUT-de-luca-reply-brief.md` (10 pages). |
+| `samples/OVERLAY-de-luca-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/reply-brief de-luca-reply-brief` (red = ours, blue = filed, black = both). |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca4-reply-brief.typ` | The template: `ca4-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. Structure copied from `courts/ninth-circuit/court-of-appeals/typst/ca9-brief.typ`; the numbers, cover, certificates and related-cases section are the Fourth Circuit's. |
 
@@ -19,7 +19,7 @@ Build and check (from the repo root):
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/fourth-circuit/court-of-appeals/reply-brief samples/de-luca-reply-brief.md
+sh tools/render.sh courts/fourth-circuit/court-of-appeals/reply-brief samples/INPUT-de-luca-reply-brief.md
 sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/reply-brief de-luca-reply-brief
 ```
 
@@ -86,7 +86,7 @@ Body: `# Heading` is a section (bold, capitals, centered). `## ` is a point head
 
 ## What the overlay shows
 
-`samples/de-luca-reply-brief-overlay.txt` pairs each of our pages with the filed page that shares the most words:
+`samples/OVERLAY-de-luca-reply-brief.txt` pairs each of our pages with the filed page that shares the most words:
 
 ```
 ours p.1  filed p.1   word-overlap 39.2%   (cover)

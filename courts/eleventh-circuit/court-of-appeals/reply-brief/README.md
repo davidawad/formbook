@@ -5,9 +5,9 @@ Status of this doc type: **exemplar found, template built, render and overlay ru
 | Path | What |
 |---|---|
 | `exemplars/FILED-EXAMPLE-jg-v-northfield-25-12276-reply-brief.pdf` | The filed reply (ECF Doc. 23, 14 pp., text layer present). Provenance in `exemplars/SOURCE.md`. |
-| `samples/jg-v-northfield-reply-brief.md` | Transcription of the whole reply: cover, every heading, all argument, conclusion, signature, certificates. Frontmatter holds the cover, counsel, authorities. |
-| `samples/jg-v-northfield-reply-brief.pdf` | `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief samples/jg-v-northfield-reply-brief.md` (14 pp.) |
-| `samples/jg-v-northfield-reply-brief-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/reply-brief jg-v-northfield-reply-brief` (red = ours, blue = filed, black = agree). |
+| `samples/INPUT-jg-v-northfield-reply-brief.md` | Transcription of the whole reply: cover, every heading, all argument, conclusion, signature, certificates. Frontmatter holds the cover, counsel, authorities. |
+| `samples/OUTPUT-jg-v-northfield-reply-brief.pdf` | `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief samples/INPUT-jg-v-northfield-reply-brief.md` (14 pp.) |
+| `samples/OVERLAY-jg-v-northfield-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/reply-brief jg-v-northfield-reply-brief` (red = ours, blue = filed, black = agree). |
 | `typst/main.typ` | Entry point: reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca11-reply-brief.typ` | The template `ca11-reply-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
 
@@ -47,7 +47,7 @@ A sample is one `.md` file: a YAML frontmatter block (metadata), then the body. 
 
 ## Overlay (the red/blue test)
 
-`samples/jg-v-northfield-reply-brief-overlay.pdf`, 14 pages, pages paired by word overlap with the filed exemplar (`-overlay.txt`):
+`samples/OVERLAY-jg-v-northfield-reply-brief.pdf`, 14 pages, pages paired by word overlap with the filed exemplar (`-overlay.txt`):
 
 | ours | filed | word-overlap |
 |---|---|---|
@@ -100,7 +100,7 @@ Pages reviewed: 14 of 14. Every page was rendered and viewed.
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief samples/jg-v-northfield-reply-brief.md
+sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief samples/INPUT-jg-v-northfield-reply-brief.md
 sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/reply-brief jg-v-northfield-reply-brief
-pdftoppm -r 60 -png courts/eleventh-circuit/court-of-appeals/reply-brief/samples/jg-v-northfield-reply-brief.pdf /tmp/pages/p
+pdftoppm -r 60 -png courts/eleventh-circuit/court-of-appeals/reply-brief/samples/OUTPUT-jg-v-northfield-reply-brief.pdf /tmp/pages/p
 ```

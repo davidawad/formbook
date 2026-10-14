@@ -27,15 +27,15 @@ Note on CA2-CONV-003: FRAP 32(a)(2) puts a color on the cover of paper copies. T
 |---|---|
 | `typst/ca2-opening-brief.typ` | Template: `ca2-opening-brief(meta, md)`. Adapted from the ca9 template's structure; every number is a named parameter at the top and traces to a rule above. |
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...`. |
-| `samples/munafo-opening-brief.md` | Transcribed from the exemplar: cover, tables, jurisdiction, issues, statement of the case, summary, most of Argument I, the start of Argument II, conclusion, certificates. A portion of the brief, not the whole (see Gaps). |
-| `samples/munafo-opening-brief.pdf` | Render (19 pages). |
-| `samples/munafo-opening-brief-overlay.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). |
+| `samples/INPUT-munafo-opening-brief.md` | Transcribed from the exemplar: cover, tables, jurisdiction, issues, statement of the case, summary, most of Argument I, the start of Argument II, conclusion, certificates. A portion of the brief, not the whole (see Gaps). |
+| `samples/OUTPUT-munafo-opening-brief.pdf` | Render (19 pages). |
+| `samples/OVERLAY-munafo-opening-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). |
 | `exemplars/` | The filed exemplar and `SOURCE.md`. |
 
 Build (from the repo root, with the toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/second-circuit/court-of-appeals/opening-brief samples/munafo-opening-brief.md
+sh tools/render.sh courts/second-circuit/court-of-appeals/opening-brief samples/INPUT-munafo-opening-brief.md
 sh tools/overlay.sh courts/second-circuit/court-of-appeals/opening-brief munafo-opening-brief
 ```
 
@@ -50,11 +50,11 @@ Render output has no typst warnings; fonts are the vendored EB Garamond only.
 
 ## Overlay (what it shows)
 
-`samples/munafo-opening-brief-overlay.pdf`: red is our render, blue is the filed exemplar, black is agreement. Pages are paired by text (`-overlay.txt`). The word-overlap figures are a diagnostic, not a score. Largest differences are where the transcription is abridged (sample page 5 vs filed page 5 at 13%: the sample's block-quote page against a different filed page) and the tables, whose pagination differs from the filed TOA. These are tier 3 (exemplar pagination and leading), not template defects.
+`samples/OVERLAY-munafo-opening-brief.pdf`: red is our render, blue is the filed exemplar, black is agreement. Pages are paired by text (`-overlay.txt`). The word-overlap figures are a diagnostic, not a score. Largest differences are where the transcription is abridged (sample page 5 vs filed page 5 at 13%: the sample's block-quote page against a different filed page) and the tables, whose pagination differs from the filed TOA. These are tier 3 (exemplar pagination and leading), not template defects.
 
 ## Page review (Gate 2 equivalent, this doc type)
 
-Final render of `munafo-opening-brief.pdf`, 19 pages, every page rasterized at 60 dpi and viewed:
+Final render of `OUTPUT-munafo-opening-brief.pdf`, 19 pages, every page rasterized at 60 dpi and viewed:
 
 | PDF page (label) | Content | Finding |
 |---|---|---|

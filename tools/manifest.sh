@@ -4,10 +4,10 @@
 # manual = court.json status (the only human-set field); flags = eight characters, in order:
 #   1 rules.md present (0/1)
 #   2 number of exemplars/*.pdf (0-9, capped)
-#   3 number of samples/*.md (0-9, capped)
+#   3 number of samples/*.md, i.e. INPUT-*.md (0-9, capped)
 #   4 typst engine state   5 latex engine state   6 docx engine state
 #       0 = no template or no rendered PDF, 1 = built (template + rendered PDF), 2 = pass (valid stamp)
-#   7 overlay PDF present (samples/*-overlay.pdf)
+#   7 overlay PDF present (samples/OVERLAY-*.pdf)
 #   8 review file present (reviews/*.md)
 # A stamp samples/.check-<engine>.txt (written by tools/check.sh on a full green run) is valid only while its
 # first line is PASS and every "sha256  path" line still matches the file on disk.
@@ -29,14 +29,14 @@ has_template() {
   for f in "$1"/*; do [ -e "$f" ] && return 0; done
   return 1
 }
-# rendered PDFs of an engine in court dir $1: typst = every samples/*.pdf that is not another engine's or an overlay
+# rendered PDFs of an engine in court dir $1: typst = every samples/OUTPUT-*.pdf that is not another engine's
 pdfs() {
   case $2 in
-    typst) for f in "$1"/samples/*.pdf; do
-      case $f in *.latex.pdf | *.docx.pdf | *-overlay.pdf) ;; *) [ -e "$f" ] && echo "$f" ;; esac
+    typst) for f in "$1"/samples/OUTPUT-*.pdf; do
+      case $f in *.latex.pdf | *.docx.pdf) ;; *) [ -e "$f" ] && echo "$f" ;; esac
     done ;;
-    latex) for f in "$1"/samples/*.latex.pdf; do [ -e "$f" ] && echo "$f"; done ;;
-    docx) for f in "$1"/samples/*.docx.pdf; do [ -e "$f" ] && echo "$f"; done ;;
+    latex) for f in "$1"/samples/OUTPUT-*.latex.pdf; do [ -e "$f" ] && echo "$f"; done ;;
+    docx) for f in "$1"/samples/OUTPUT-*.docx.pdf; do [ -e "$f" ] && echo "$f"; done ;;
   esac
 }
 stamp_valid() { # $1 court dir, $2 engine
@@ -69,7 +69,7 @@ ORDER=$(jq -r '.courts | to_entries | to_entries[] | "\(.key)|\(.value.key)|\(.v
 find courts -name court.json | while IFS= read -r cj; do
   d=$(dirname "$cj")
   meta=$(jq -r '[.alias, .level, (.name | gsub("[|\n]"; " ")), .path, (.status // "todo")] | join("|")' "$cj")
-  flags="$(has_file "$d/rules.md")$(count "$d"/exemplars/*.pdf)$(count "$d"/samples/*.md)$(engine_state "$d" typst)$(engine_state "$d" latex)$(engine_state "$d" docx)$(count "$d"/samples/*-overlay.pdf | sed 's/[2-9]/1/')$(count "$d"/reviews/*.md | sed 's/[2-9]/1/')"
+  flags="$(has_file "$d/rules.md")$(count "$d"/exemplars/*.pdf)$(count "$d"/samples/*.md)$(engine_state "$d" typst)$(engine_state "$d" latex)$(engine_state "$d" docx)$(count "$d"/samples/OVERLAY-*.pdf | sed 's/[2-9]/1/')$(count "$d"/reviews/*.md | sed 's/[2-9]/1/')"
   printf '%s|%s\n' "$meta" "$flags"
 done | awk -F'|' -v OFS='|' -v order="$ORDER" '
   BEGIN { n = split(order, ls, "\n"); for (i = 1; i <= n; i++) { split(ls[i], a, "|"); o[a[2]] = a[1]; g[a[2]] = a[3] } }

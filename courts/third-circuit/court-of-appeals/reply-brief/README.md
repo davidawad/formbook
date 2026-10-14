@@ -6,15 +6,15 @@ Rule-driven typst form for an appellant's reply brief (FRAP 28(c)). Rule texts w
 |---|---|
 | `typst/ca3-reply-brief.typ` | The template: `ca3-reply-brief(meta, md)`. Content-agnostic; the numbers are named parameters at the top. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
-| `samples/afp-reply-brief.md` | Transcription of the filed exemplar (cover data, TOA, Introduction, part of Argument I.A.1, Conclusion, signature). A portion of the real brief, not all of it. |
-| `samples/afp-reply-brief.pdf` | `sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief samples/afp-reply-brief.md`. 9 pages. |
-| `samples/afp-reply-brief-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/third-circuit/court-of-appeals/reply-brief afp-reply-brief`. Red = ours, blue = filed, black = both. |
+| `samples/INPUT-afp-reply-brief.md` | Transcription of the filed exemplar (cover data, TOA, Introduction, part of Argument I.A.1, Conclusion, signature). A portion of the real brief, not all of it. |
+| `samples/OUTPUT-afp-reply-brief.pdf` | `sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief samples/INPUT-afp-reply-brief.md`. 9 pages. |
+| `samples/OVERLAY-afp-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/third-circuit/court-of-appeals/reply-brief afp-reply-brief`. Red = ours, blue = filed, black = both. |
 | `exemplars/FILED-EXAMPLE-afp-26-2469-reply-brief.pdf`, `exemplars/SOURCE.md` | The filed reply brief (AFP, 3d Cir. 26-2469, Dkt. 30) and its provenance. |
 
 Build (from the repo root, with the toolchain on `PATH`):
 
 ```sh
-sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief samples/afp-reply-brief.md
+sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief samples/INPUT-afp-reply-brief.md
 sh tools/overlay.sh courts/third-circuit/court-of-appeals/reply-brief afp-reply-brief
 ```
 

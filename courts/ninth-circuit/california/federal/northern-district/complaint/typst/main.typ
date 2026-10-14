@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "cand-complaint.typ": cand-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/superhuman-complaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-superhuman-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #cand-complaint(meta, body)

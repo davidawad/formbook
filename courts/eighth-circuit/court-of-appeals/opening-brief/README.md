@@ -3,8 +3,8 @@
 - Court: `ca8`, United States Court of Appeals for the Eighth Circuit (`courts/eighth-circuit/court-of-appeals/`)
 - Doc type: `opening-brief`. Brief of Appellant (FRAP 28(a)); one self-contained folder. The court-root `typst/` and `samples/` (the ca8 court's own stubs) are untouched.
 - Exemplar: `exemplars/FILED-EXAMPLE-wolters-26-2459-opening-brief.pdf` (*Wolters v. Sweepsteaks Limited d/b/a Stake.us*, No. 26-2459, filed 2026-09-11; provenance in `exemplars/SOURCE.md`).
-- Sample: `samples/wolters-opening-brief.md`: a transcription of the filed brief's cover, summary, disclosure, jurisdiction, issues, part of the statement of the case, part of the argument, conclusion, signature and certificates. It is an excerpt, not the whole brief (see Known gaps).
-- Render: `samples/wolters-opening-brief.pdf`, 15 pages.
+- Sample: `samples/INPUT-wolters-opening-brief.md`: a transcription of the filed brief's cover, summary, disclosure, jurisdiction, issues, part of the statement of the case, part of the argument, conclusion, signature and certificates. It is an excerpt, not the whole brief (see Known gaps).
+- Render: `samples/OUTPUT-wolters-opening-brief.pdf`, 15 pages.
 - Status: template built; render, overlay and page review done (below). Not reviewed by a human. `court.json` untouched.
 
 ## Files
@@ -13,9 +13,9 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `ca8-brief`. |
 | `typst/ca8-opening-brief.typ` | Template. Parameter block at the top: `doc-kind`, `word-limit` (13,000), `required-sections`, `needs-standard-of-review`, `addendum = "separate"`. |
-| `samples/wolters-opening-brief.md` | Markdown contract sample (frontmatter + body). |
-| `samples/wolters-opening-brief.pdf` | `sh tools/render.sh courts/eighth-circuit/court-of-appeals/opening-brief samples/wolters-opening-brief.md` (15 pages, EB Garamond only). |
-| `samples/wolters-opening-brief-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eighth-circuit/court-of-appeals/opening-brief wolters-opening-brief` (red = ours, blue = filed, black = both agree). |
+| `samples/INPUT-wolters-opening-brief.md` | Markdown contract sample (frontmatter + body). |
+| `samples/OUTPUT-wolters-opening-brief.pdf` | `sh tools/render.sh courts/eighth-circuit/court-of-appeals/opening-brief samples/INPUT-wolters-opening-brief.md` (15 pages, EB Garamond only). |
+| `samples/OVERLAY-wolters-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eighth-circuit/court-of-appeals/opening-brief wolters-opening-brief` (red = ours, blue = filed, black = both agree). |
 | `exemplars/` | The filed exemplar and `SOURCE.md`. |
 
 ## Governing rules
@@ -44,7 +44,7 @@ Not verified and not produced: the cover colour (FRAP 32(a)(2) and any circuit r
 
 ## Overlay
 
-`samples/wolters-opening-brief-overlay.pdf` puts our render (red) over the best-matching filed page (blue). Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses):
+`samples/OVERLAY-wolters-opening-brief.pdf` puts our render (red) over the best-matching filed page (blue). Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses):
 
 - Sample p.1 ↔ filed p.1 (88%), p.2 ↔ p.2 (93%): cover and summary.
 - p.3 ↔ p.3 (64%), p.4 ↔ p.4 (45%), p.5 ↔ p.5 (34%): disclosure page, table of contents, first table-of-authorities page. Our TOC and TOA are generated, so the word sets differ from the filed pages; expected.
@@ -59,7 +59,7 @@ Not verified and not produced: the cover colour (FRAP 32(a)(2) and any circuit r
 
 ## Page review (Gate 2)
 
-Every page of `wolters-opening-brief.pdf` was rendered at 60 dpi and viewed (15 of 15) on the last render. Typst printed no warnings. Fonts embedded: EB Garamond (Regular, Bold, Italic) only.
+Every page of `OUTPUT-wolters-opening-brief.pdf` was rendered at 60 dpi and viewed (15 of 15) on the last render. Typst printed no warnings. Fonts embedded: EB Garamond (Regular, Bold, Italic) only.
 
 | Page | Content | Result |
 |---|---|---|

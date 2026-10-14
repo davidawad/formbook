@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "cand-motion-brief.typ": cand-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/tsi-akim-maidu-motion-to-dismiss.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-tsi-akim-maidu-motion-to-dismiss.md"))
 #let (meta, body) = split-frontmatter(src)
 #cand-motion-brief(meta, body)

@@ -6,9 +6,9 @@ Folder: `courts/sixth-circuit/court-of-appeals/answering-brief/`. Status: **temp
 |---|---|
 | `exemplars/FILED-EXAMPLE-bruneau-23-1761-answering-brief.pdf` | The filed exemplar: Brief of Defendants-Appellees Midland County and Gladwin County, 6th Cir. No. 23-1761, Doc. 40, filed 2024-01-31. 56 pp., text layer present. |
 | `exemplars/SOURCE.md` | Where it came from, who filed it, and the errors seen in it. |
-| `samples/bruneau-answering-brief.md` | Markdown transcription (a portion, see its header). Markdown contract below. |
-| `samples/bruneau-answering-brief.pdf` | Render of the sample: 14 pages. |
-| `samples/bruneau-answering-brief-overlay.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). Page map below. |
+| `samples/INPUT-bruneau-answering-brief.md` | Markdown transcription (a portion, see its header). Markdown contract below. |
+| `samples/OUTPUT-bruneau-answering-brief.pdf` | Render of the sample: 14 pages. |
+| `samples/OVERLAY-bruneau-answering-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). Page map below. |
 | `typst/main.typ` | Entry point. Reads `--input sample=...`, splits frontmatter, calls the template. |
 | `typst/ca6-answering-brief.typ` | The template `ca6-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or cites a rule. |
 
@@ -16,7 +16,7 @@ Build (from the repo root; the same commands for any sample):
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
-sh tools/render.sh courts/sixth-circuit/court-of-appeals/answering-brief samples/bruneau-answering-brief.md
+sh tools/render.sh courts/sixth-circuit/court-of-appeals/answering-brief samples/INPUT-bruneau-answering-brief.md
 sh tools/overlay.sh courts/sixth-circuit/court-of-appeals/answering-brief bruneau-answering-brief
 ```
 
@@ -58,7 +58,7 @@ Same contract as the ca9 `README.extra.md`, with these differences:
 - No `related_cases`, `limit`, `manual_image_words`, or Form 8 keys (Ninth Circuit only).
 - Body, citations (`[text](toa:key)`), footnotes, block quotations, lists, escaping: as in the ca9 contract.
 
-## Overlay (`samples/bruneau-answering-brief-overlay.pdf`)
+## Overlay (`samples/OVERLAY-bruneau-answering-brief.pdf`)
 
 Red = our render, blue = the filed exemplar, black = both. The map (`-overlay.txt`) pairs each sample page with the exemplar page sharing the most words. The sample is a portion, and some paragraphs are condensed, so body pages overlap only partly (word overlap 22-56%); the cover, disclosure, TOC and certificate pages overlap more (cover 92%, conclusion 81%). Read the overlay for layout (margins, cover, TOC position, heading placement) and not for text identity.
 

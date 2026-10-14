@@ -6,9 +6,9 @@ Doc type: the appellee's principal brief, which the Fifth Circuit calls the "Bri
 Status of this doc type:
 
 - exemplar: yes (one filed brief, see `exemplars/SOURCE.md`)
-- sample: `samples/dawes-answering-brief.md` (a transcribed portion, 14 rendered pages)
-- render: ok (`sh tools/render.sh courts/fifth-circuit/court-of-appeals/answering-brief samples/dawes-answering-brief.md`, no typst warnings)
-- overlay: ok (`samples/dawes-answering-brief-overlay.pdf`, `-overlay.txt`)
+- sample: `samples/INPUT-dawes-answering-brief.md` (a transcribed portion, 14 rendered pages)
+- render: ok (`sh tools/render.sh courts/fifth-circuit/court-of-appeals/answering-brief samples/INPUT-dawes-answering-brief.md`, no typst warnings)
+- overlay: ok (`samples/OVERLAY-dawes-answering-brief.pdf`, `-overlay.txt`)
 - pages reviewed: 14 of 14 rendered (every page rasterized at 60 dpi and looked at; see the review log)
 
 Not done: the tier-1 open questions under "Open questions" below. The template does not emit a red cover, and I could not confirm two local-rule points from primary text.
@@ -46,9 +46,9 @@ Word limit in the sample: 1,333 words, counted by the template from the sample m
 | `exemplars/SOURCE.md` | Where it came from, the docket, the filer, the date filed and fetched. |
 | `typst/main.typ` | Entry point. Reads `--input sample=...` and calls the template. |
 | `typst/ca5-answering-brief.typ` | The template, `ca5-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top, each tied to a rule ID above. |
-| `samples/dawes-answering-brief.md` | Markdown for the exemplar: frontmatter (cover, counsel, certificates, authorities) and a portion of the body. |
-| `samples/dawes-answering-brief.pdf` | Render of the sample, 14 pages. |
-| `samples/dawes-answering-brief-overlay.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map. |
+| `samples/INPUT-dawes-answering-brief.md` | Markdown for the exemplar: frontmatter (cover, counsel, certificates, authorities) and a portion of the body. |
+| `samples/OUTPUT-dawes-answering-brief.pdf` | Render of the sample, 14 pages. |
+| `samples/OVERLAY-dawes-answering-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map. |
 
 ## Markdown contract (differences from ca9)
 
@@ -68,7 +68,7 @@ The schema follows `courts/ninth-circuit/court-of-appeals/README.extra.md`, with
 - red: our render only; blue: the filed exemplar only; black: both agree.
 - Pages are paired by word overlap, not by index, so a partial transcription still lines up with the pages it came from.
 
-Map (from `dawes-answering-brief-overlay.txt`):
+Map (from `OVERLAY-dawes-answering-brief.txt`):
 
 | Ours | Filed | Word overlap | Note |
 |---|---|---|---|

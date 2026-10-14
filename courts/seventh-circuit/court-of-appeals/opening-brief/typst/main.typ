@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ca7-opening-brief.typ": ca7-opening-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/torres-opening-brief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-torres-opening-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ca7-opening-brief(meta, body)

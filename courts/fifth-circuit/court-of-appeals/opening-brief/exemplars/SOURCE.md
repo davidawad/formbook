@@ -14,4 +14,4 @@
 | Text layer | Yes (`pdftotext` returns text; fonts CenturySchoolbook and Aptos embedded) |
 | Public record | Yes: a public docket filing on PACER/CM-ECF, reproduced through RECAP |
 
-Used for: the cover, certificate of interested persons, oral-argument statement, table of contents and table of authorities structure, the statement of jurisdiction, issues, case, summary and the opening of the argument, the conclusion, signature, certificate of service and certificate of compliance (transcribed in `../samples/candel-opening-brief.md`).
+Used for: the cover, certificate of interested persons, oral-argument statement, table of contents and table of authorities structure, the statement of jurisdiction, issues, case, summary and the opening of the argument, the conclusion, signature, certificate of service and certificate of compliance (transcribed in `../samples/INPUT-candel-opening-brief.md`).

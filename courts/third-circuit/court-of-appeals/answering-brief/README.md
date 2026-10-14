@@ -5,9 +5,9 @@ One self-contained folder for one document type. Built by fb-595.28.19 from one 
 | Path | What |
 |---|---|
 | `exemplars/FILED-EXAMPLE-binder-v-coldwell-banker-24-1997-answering-brief.pdf` | The filed exemplar (appellee brief, 30 pp., text layer). Provenance in `exemplars/SOURCE.md`. |
-| `samples/binder-answering-brief.md` | Markdown transcription of a portion of the exemplar (cover, disclosure, headings, tables, jurisdiction, issue, statement of the case, standard of review, most of Argument I, part of II and III, conclusion, signature, certificates). Frontmatter follows the ca9 contract plus one new field, `disclosure`. |
-| `samples/binder-answering-brief.pdf` | `sh tools/render.sh courts/third-circuit/court-of-appeals/answering-brief samples/binder-answering-brief.md` |
-| `samples/binder-answering-brief-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/third-circuit/court-of-appeals/answering-brief binder-answering-brief` (red = ours, blue = filed, black = both). |
+| `samples/INPUT-binder-answering-brief.md` | Markdown transcription of a portion of the exemplar (cover, disclosure, headings, tables, jurisdiction, issue, statement of the case, standard of review, most of Argument I, part of II and III, conclusion, signature, certificates). Frontmatter follows the ca9 contract plus one new field, `disclosure`. |
+| `samples/OUTPUT-binder-answering-brief.pdf` | `sh tools/render.sh courts/third-circuit/court-of-appeals/answering-brief samples/INPUT-binder-answering-brief.md` |
+| `samples/OVERLAY-binder-answering-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/third-circuit/court-of-appeals/answering-brief binder-answering-brief` (red = ours, blue = filed, black = both). |
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...`. |
 | `typst/ca3-answering-brief.typ` | The template: `ca3-answering-brief(meta, md)`. Content-agnostic; no case text, no coordinates from the exemplar, no forced line breaks. |
 
@@ -35,7 +35,7 @@ Sources are the FRAP text as published by LII (fetched 2026-10-14) and the Third
 
 ## What the overlay shows
 
-The overlay pairs each sample page with the filed page sharing the most words, so a partial transcription still lines up. The word-overlap per page is in `samples/binder-answering-brief-overlay.txt`.
+The overlay pairs each sample page with the filed page sharing the most words, so a partial transcription still lines up. The word-overlap per page is in `samples/OVERLAY-binder-answering-brief.txt`.
 
 - Cover, disclosure, first table page: 68% to 87% word overlap with the filed pages 1 to 3. Table of authorities (ours p. 4): 45%. The layout is the same family: caption centered, short rules, counsel block at the bottom, roman page numbers.
 - Argument and statement pages: 40% to 69% word overlap. The gap is expected: the sample is a portion, its page breaks come from the template, and the filed brief runs to 30 pages.
@@ -76,7 +76,7 @@ The sample is 2,421 words of the exemplar's 4,185; the body is 11 pages, within 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq
 cd /work/repo
-sh tools/render.sh courts/third-circuit/court-of-appeals/answering-brief samples/binder-answering-brief.md
+sh tools/render.sh courts/third-circuit/court-of-appeals/answering-brief samples/INPUT-binder-answering-brief.md
 sh tools/overlay.sh courts/third-circuit/court-of-appeals/answering-brief binder-answering-brief
 ```
 

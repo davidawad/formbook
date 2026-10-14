@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ca11-answering-brief.typ": ca11-answering-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/naacp-v-byrd-25-12813.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-naacp-v-byrd-25-12813.md"))
 #let (meta, body) = split-frontmatter(src)
 #ca11-answering-brief(meta, body)

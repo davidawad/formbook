@@ -7,15 +7,15 @@ Court: `ca7` (U.S. Court of Appeals for the Seventh Circuit). Doc type: `opening
 | Item | Result |
 |---|---|
 | Exemplar | yes: `exemplars/FILED-EXAMPLE-torres-22-2830-opening-brief.pdf` (see `exemplars/SOURCE.md`) |
-| Sample | `samples/torres-opening-brief.md` (cover, counsel, TOC, TOA, body excerpt, conclusion, signature, certificates) |
-| Render | ok: `sh tools/render.sh courts/seventh-circuit/court-of-appeals/opening-brief samples/torres-opening-brief.md` gives 14 pages, vendored fonts only, no typst warnings |
-| Overlay | ok: `sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/opening-brief torres-opening-brief` writes `samples/torres-opening-brief-overlay.pdf` (14 pages) and `-overlay.txt` |
+| Sample | `samples/INPUT-torres-opening-brief.md` (cover, counsel, TOC, TOA, body excerpt, conclusion, signature, certificates) |
+| Render | ok: `sh tools/render.sh courts/seventh-circuit/court-of-appeals/opening-brief samples/INPUT-torres-opening-brief.md` gives 14 pages, vendored fonts only, no typst warnings |
+| Overlay | ok: `sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/opening-brief torres-opening-brief` writes `samples/OVERLAY-torres-opening-brief.pdf` (14 pages) and `-overlay.txt` |
 | Pages reviewed | 14 of 14 (every page rendered at `pdftoppm -r 60` and viewed; see "Visual review") |
 
 Build and check, from the repo root (typst 0.15.0; `PATH` must include the micromamba env):
 
 ```sh
-sh tools/render.sh courts/seventh-circuit/court-of-appeals/opening-brief samples/torres-opening-brief.md
+sh tools/render.sh courts/seventh-circuit/court-of-appeals/opening-brief samples/INPUT-torres-opening-brief.md
 sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/opening-brief torres-opening-brief
 ```
 
@@ -78,7 +78,7 @@ Open tier-2 items (left open, not papered over):
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls the template. |
 | `typst/ca7-opening-brief.typ` | The template: `ca7-opening-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
-| `samples/torres-opening-brief.md` | The sample markdown (frontmatter + body). |
-| `samples/torres-opening-brief.pdf` | The render (14 pages). |
-| `samples/torres-opening-brief-overlay.pdf`, `-overlay.txt` | The red/blue overlay against the exemplar, and its page map. |
+| `samples/INPUT-torres-opening-brief.md` | The sample markdown (frontmatter + body). |
+| `samples/OUTPUT-torres-opening-brief.pdf` | The render (14 pages). |
+| `samples/OVERLAY-torres-opening-brief.pdf`, `-overlay.txt` | The red/blue overlay against the exemplar, and its page map. |
 | `exemplars/FILED-EXAMPLE-torres-22-2830-opening-brief.pdf`, `exemplars/SOURCE.md` | The filed exemplar and its source record. |

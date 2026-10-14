@@ -14,7 +14,7 @@ One self-contained folder for one document type of the Fourth Circuit. Built for
 Build and check, from the repo root (the toolchain must be on `PATH`):
 
 ```sh
-sh tools/render.sh courts/fourth-circuit/court-of-appeals/answering-brief samples/chapman-answering-brief.md   # -> samples/chapman-answering-brief.pdf
+sh tools/render.sh courts/fourth-circuit/court-of-appeals/answering-brief samples/INPUT-chapman-answering-brief.md   # -> samples/OUTPUT-chapman-answering-brief.pdf
 sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/answering-brief chapman-answering-brief            # -> samples/...-overlay.pdf and -overlay.txt
 ```
 
@@ -75,7 +75,7 @@ Body: as ca9, with these template-specific rules.
 
 ## What the overlay shows
 
-`overlay.sh` pairs each sample page with the exemplar page sharing the most words, then draws the sample in red and the filed page in blue (black where they agree). Read `samples/chapman-answering-brief-overlay.txt` for the pairs.
+`overlay.sh` pairs each sample page with the exemplar page sharing the most words, then draws the sample in red and the filed page in blue (black where they agree). Read `samples/OVERLAY-chapman-answering-brief.txt` for the pairs.
 
 | Sample page | Paired exemplar page | Read |
 |---|---|---|
@@ -89,7 +89,7 @@ Body: as ca9, with these template-specific rules.
 | 13 Conclusion and signature | 1 (**wrong**) | The pairing picks the cover because the signature block repeats cover words; the filed conclusion is p. 44. A text-pairing limit of `overlay.sh`, not a layout fault. Read this page against exemplar p. 44 by hand. |
 | 14 certificates | 45 | Correct. |
 
-Overlay: `samples/chapman-answering-brief-overlay.pdf` (14 pages). Visual check: pages 6 and 13 of the overlay were viewed; the red and blue lines are offset by the difference in line pitch and typeface, which is expected from a different typeface, not a layout fault.
+Overlay: `samples/OVERLAY-chapman-answering-brief.pdf` (14 pages). Visual check: pages 6 and 13 of the overlay were viewed; the red and blue lines are offset by the difference in line pitch and typeface, which is expected from a different typeface, not a layout fault.
 
 ## Pages reviewed
 

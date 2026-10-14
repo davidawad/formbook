@@ -5,9 +5,9 @@ Doc type `opening-brief` for the California Courts of Appeal (`court.json` alias
 | Path | What |
 |---|---|
 | `exemplars/FILED-EXAMPLE-kirk-v-city-of-morgan-hill-H048745-opening-brief.pdf` | Filed appellant's opening brief, Sixth District, 40 pages, text layer present. Source and filer in `exemplars/SOURCE.md`. |
-| `samples/kirk-opening-brief.md` | Transcription of a portion of the exemplar (cover, tables, statements, part of the argument, conclusion, certificates). Frontmatter carries the cover, counsel, signature, service and authorities. |
-| `samples/kirk-opening-brief.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/courts-of-appeal/opening-brief samples/kirk-opening-brief.md`. 14 pages, EB Garamond only. |
-| `samples/kirk-opening-brief-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/california/state/courts-of-appeal/opening-brief kirk-opening-brief`. Red = ours, blue = filed, black = both. |
+| `samples/INPUT-kirk-opening-brief.md` | Transcription of a portion of the exemplar (cover, tables, statements, part of the argument, conclusion, certificates). Frontmatter carries the cover, counsel, signature, service and authorities. |
+| `samples/OUTPUT-kirk-opening-brief.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/courts-of-appeal/opening-brief samples/INPUT-kirk-opening-brief.md`. 14 pages, EB Garamond only. |
+| `samples/OVERLAY-kirk-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/california/state/courts-of-appeal/opening-brief kirk-opening-brief`. Red = ours, blue = filed, black = both. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
 | `typst/calctapp-opening-brief.typ` | The template: `calctapp-opening-brief(meta, md)`. Parameters at the top; each traces to a rule or is a style choice. |
 
@@ -42,7 +42,7 @@ Rule numbers marked "as summarized" or "not fetched" are not confirmed against t
 - **Font.** Century Schoolbook is the preferred face under Rule 8.74(b)(1), and it is not vendored. Adding a font is outside this unit (`fonts/` is shared), so EB Garamond stands in, and the render is checked for the 13 pt size and the embedded font names only.
 - **Heading scheme.** Roman, A, 1, a is used both in the statements and in the argument, matching the exemplar's table of contents. The exemplar's point headings are bold and hang under the label, which the template does too.
 
-## Gate 2: visual review of `samples/kirk-opening-brief.pdf`
+## Gate 2: visual review of `samples/OUTPUT-kirk-opening-brief.pdf`
 
 Reviewed 2026-10-14 at 60 dpi, every page, against the exemplar pages the overlay pairs them with. The sha256 of the PDF reviewed is `d080562998b92f3d…` (first 16 hex digits). Later re-renders change the hash only through the embedded creation timestamp: the extracted text is identical across renders (checked with `pdftotext -layout`), so the review stands.
 

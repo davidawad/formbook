@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "calsuperct-motion-brief.typ": calsuperct-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/aclu-fresno-motion-brief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-aclu-fresno-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #calsuperct-motion-brief(meta, body)

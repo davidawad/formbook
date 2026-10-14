@@ -30,7 +30,7 @@ Both exemplars are public court records: documents filed on the docket of the U.
 | Date fetched | 2026-10-14 |
 | Text layer | yes (Palatino) |
 
-The Alisigwe brief is kept for comparison of conventions (table of contents, point headings, certificate). It is not overlaid: the overlay (`samples/lowe-reply-brief-overlay.pdf`) is against the Lowe exemplar, which is the one transcribed in `samples/`.
+The Alisigwe brief is kept for comparison of conventions (table of contents, point headings, certificate). It is not overlaid: the overlay (`samples/OVERLAY-lowe-reply-brief.pdf`) is against the Lowe exemplar, which is the one transcribed in `samples/`.
 
 ## Other sources tried
 

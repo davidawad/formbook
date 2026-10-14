@@ -34,9 +34,9 @@ its rules.
 |---|---|
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits the frontmatter, calls the template. |
 | `typst/ca7-reply-brief.typ` | The template: `ca7-reply-brief(meta, md)`. Content-agnostic. Every number is a named parameter at the top and traces to a rule ID above. |
-| `samples/act-now-reply-brief.md` | Markdown transcribed from the primary exemplar (cover, the body through Point II.A, the conclusion, the certificate metadata). A portion, not the whole brief. |
-| `samples/act-now-reply-brief.pdf` | `sh tools/render.sh courts/seventh-circuit/court-of-appeals/reply-brief samples/act-now-reply-brief.md`. 12 pages. |
-| `samples/act-now-reply-brief-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/reply-brief act-now-reply-brief`. Red = ours, blue = filed, black = both. |
+| `samples/INPUT-act-now-reply-brief.md` | Markdown transcribed from the primary exemplar (cover, the body through Point II.A, the conclusion, the certificate metadata). A portion, not the whole brief. |
+| `samples/OUTPUT-act-now-reply-brief.pdf` | `sh tools/render.sh courts/seventh-circuit/court-of-appeals/reply-brief samples/INPUT-act-now-reply-brief.md`. 12 pages. |
+| `samples/OVERLAY-act-now-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/reply-brief act-now-reply-brief`. Red = ours, blue = filed, black = both. |
 | `exemplars/FILED-EXAMPLE-act-now-v-doe-26-2473-reply-brief.pdf` | Primary exemplar: the whole 19-page reply brief, 26-2473. |
 | `exemplars/FILED-EXAMPLE-d-ambrosio-25-2231-reply-brief.pdf` | Second filer, for the tier-2 cross-check: a motion (pp. 1-3) with the reply brief attached (pp. 4-17). |
 | `exemplars/SOURCE.md` | Filer, case, docket, date filed, URL, date fetched, for both. |
@@ -45,7 +45,7 @@ Build, from the repo root:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (see the setup note in the PR)
-sh tools/render.sh courts/seventh-circuit/court-of-appeals/reply-brief samples/act-now-reply-brief.md
+sh tools/render.sh courts/seventh-circuit/court-of-appeals/reply-brief samples/INPUT-act-now-reply-brief.md
 sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/reply-brief act-now-reply-brief
 ```
 
@@ -77,7 +77,7 @@ included; the cover, TOC, TOA and certificates are not.
 
 ## Visual review (Gate 2 by eye)
 
-All 12 pages of `act-now-reply-brief.pdf` were rasterized at 60 dpi and viewed. Pages 9-10 were re-viewed after the
+All 12 pages of `OUTPUT-act-now-reply-brief.pdf` were rasterized at 60 dpi and viewed. Pages 9-10 were re-viewed after the
 signature-block fix.
 
 | PDF page | Printed page | Content | Finding |
@@ -99,7 +99,7 @@ Pages reviewed: 12 of 12.
 
 ## Overlay (diagnostic, not a score)
 
-`samples/act-now-reply-brief-overlay.txt`: each of our pages is paired with the filed page sharing most words (the tool's
+`samples/OVERLAY-act-now-reply-brief.txt`: each of our pages is paired with the filed page sharing most words (the tool's
 pairing, not a verified alignment). Lowest word overlap: ours p.3 (TOA, 36%: the filed TOA lists more authorities than the
 transcribed portion), ours p.10 (conclusion and signature, 38%: paired with filed p.17, which is outside the transcribed
 portion), ours p.11 (certificate, 46%: different certificate wording). These reflect what the sample omits or words

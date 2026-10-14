@@ -47,7 +47,7 @@ A court is `up for review` when `rules.md` is present and the typst engine passe
 Build and check (from the repo root):
 
 ```sh
-sh tools/render.sh courts/ninth-circuit/court-of-appeals samples/generic-opening-brief.md   # -> samples/generic-opening-brief.pdf
+sh tools/render.sh courts/ninth-circuit/court-of-appeals samples/INPUT-generic-opening-brief.md   # -> samples/OUTPUT-generic-opening-brief.pdf
 sh tools/check.sh courts/ninth-circuit/court-of-appeals                                     # gates 0-3
 sh tools/check-selftest.sh courts/ninth-circuit/court-of-appeals                            # does the checker catch breakage?
 ```

@@ -8,16 +8,16 @@ Template for the reply brief of an appellant in the U.S. Court of Appeals for th
 |---|---|
 | `exemplars/FILED-EXAMPLE-fisher-26-10536-reply-brief.pdf` | Filed exemplar: Reply of Plaintiff-Appellant Ellen Mae Fisher, *Fisher v. Texas Tech University Regents*, No. 26-10536 (5th Cir.), filed 2026-08-17, 37 pages, text layer present. |
 | `exemplars/SOURCE.md` | Where the exemplar came from, the docket number, the filer, the date filed and the date fetched. |
-| `samples/fisher-reply-brief.md` | Markdown transcription of an excerpt of the exemplar: front matter, the procedural background, Argument point A, the conclusion, the signature, the certificate of compliance and the certificate of service. Follows the markdown contract of the ninth-circuit sample (frontmatter, `# Heading` sections, `toa:` citation links, `[^n]` footnotes). |
-| `samples/fisher-reply-brief.pdf` | Render of the sample (10 pages). |
-| `samples/fisher-reply-brief-overlay.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map from `tools/overlay.sh`. |
+| `samples/INPUT-fisher-reply-brief.md` | Markdown transcription of an excerpt of the exemplar: front matter, the procedural background, Argument point A, the conclusion, the signature, the certificate of compliance and the certificate of service. Follows the markdown contract of the ninth-circuit sample (frontmatter, `# Heading` sections, `toa:` citation links, `[^n]` footnotes). |
+| `samples/OUTPUT-fisher-reply-brief.pdf` | Render of the sample (10 pages). |
+| `samples/OVERLAY-fisher-reply-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map from `tools/overlay.sh`. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca5-reply-brief.typ` | The template: `ca5-reply-brief(meta, md)`. |
 
 Build (from the repo root, with typst 0.15.0 on PATH):
 
 ```sh
-sh tools/render.sh courts/fifth-circuit/court-of-appeals/reply-brief samples/fisher-reply-brief.md
+sh tools/render.sh courts/fifth-circuit/court-of-appeals/reply-brief samples/INPUT-fisher-reply-brief.md
 sh tools/overlay.sh courts/fifth-circuit/court-of-appeals/reply-brief fisher-reply-brief
 ```
 
@@ -60,7 +60,7 @@ Verified on 2026-10-14.
 
 ## What the overlay shows
 
-`samples/fisher-reply-brief-overlay.txt` maps each of the 10 sample pages to the exemplar page sharing the most words:
+`samples/OVERLAY-fisher-reply-brief.txt` maps each of the 10 sample pages to the exemplar page sharing the most words:
 
 | Sample page | Content | Best exemplar page | Word overlap |
 |---|---|---|---|
@@ -114,6 +114,6 @@ Defects found and fixed during the review: none needed a change to the template 
 ## Status
 
 - exemplar: yes (`exemplars/FILED-EXAMPLE-fisher-26-10536-reply-brief.pdf`)
-- render: ok (`samples/fisher-reply-brief.pdf`, 10 pages, no typst warnings)
-- overlay: ok (`samples/fisher-reply-brief-overlay.pdf`, page map in `-overlay.txt`)
+- render: ok (`samples/OUTPUT-fisher-reply-brief.pdf`, 10 pages, no typst warnings)
+- overlay: ok (`samples/OVERLAY-fisher-reply-brief.pdf`, page map in `-overlay.txt`)
 - pages reviewed: 10 of 10

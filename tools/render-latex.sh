@@ -1,7 +1,7 @@
 #!/bin/sh
 # Render one sample to PDF with the court's LaTeX template (engine "latex").
 # Usage: tools/render-latex.sh <court-dir> <sample.md, relative to the court dir> [out.pdf]
-# Default out: <court>/samples/<id>.latex.pdf
+# Default out: <court>/samples/OUTPUT-<id>.latex.pdf (input samples/INPUT-<id>.md)
 #
 # Contract (docs/EVAL-LOOP.md, "Engines"):
 #   <court>/latex/render.sh     if present, it owns the build: sh render.sh <court-dir> <sample.md> <out.pdf>
@@ -14,7 +14,7 @@ set -eu
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
-OUT=${3:-$COURT/samples/$(basename "$SAMPLE" .md).latex.pdf}
+OUT=${3:-$COURT/samples/OUTPUT-$(basename "$SAMPLE" .md | sed 's/^INPUT-//').latex.pdf}
 L="$COURT/latex"
 if [ -f "$L/render.sh" ]; then
   sh "$L/render.sh" "$COURT" "$SAMPLE" "$OUT" >&2 || exit 1

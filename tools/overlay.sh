@@ -8,15 +8,16 @@
 # lines up with the pages it came from.
 #
 # usage: tools/overlay.sh <court-dir> <sample-id> [exemplar.pdf]
-# writes: <court-dir>/samples/<sample-id>-overlay.pdf and -overlay.txt (page map)
+# reads:  <court-dir>/samples/OUTPUT-<sample-id>.pdf (our render)
+# writes: <court-dir>/samples/OVERLAY-<sample-id>.pdf and OVERLAY-<sample-id>.txt (page map)
 set -eu
 
 dir=$1
 id=$2
-ours=$dir/samples/$id.pdf
+ours=$dir/samples/OUTPUT-$id.pdf
 ref=${3:-$(ls "$dir"/exemplars/*.pdf | head -1)}
-out=$dir/samples/$id-overlay.pdf
-map=$dir/samples/$id-overlay.txt
+out=$dir/samples/OVERLAY-$id.pdf
+map=$dir/samples/OVERLAY-$id.txt
 dpi=100
 label_font=$(dirname "$0")/../fonts/eb-garamond/EBGaramond-Regular.otf
 

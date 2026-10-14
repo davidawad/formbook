@@ -6,16 +6,16 @@ Doc type `opening-brief` of court `ny` (folder: `courts/second-circuit/new-york/
 |---|---|
 | `exemplars/FILED-EXAMPLE-people-v-trump-entrepreneur-apl-2016-00115-opening-brief.pdf` | Real filed brief (Respondents-Appellants, APL-2016-00115), text layer present |
 | `exemplars/SOURCE.md` | URL fetched, case, docket, filer, date signed, date fetched, why this exemplar, its limits |
-| `samples/tei-opening-brief.md` | Markdown transcription of the exemplar (a portion; see below) |
-| `samples/tei-opening-brief.pdf` | `sh tools/render.sh … samples/tei-opening-brief.md` (14 pages) |
-| `samples/tei-opening-brief-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh … tei-opening-brief` (red = our render, blue = filed exemplar page, black = both) |
+| `samples/INPUT-tei-opening-brief.md` | Markdown transcription of the exemplar (a portion; see below) |
+| `samples/OUTPUT-tei-opening-brief.pdf` | `sh tools/render.sh … samples/INPUT-tei-opening-brief.md` (14 pages) |
+| `samples/OVERLAY-tei-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh … tei-opening-brief` (red = our render, blue = filed exemplar page, black = both) |
 | `typst/main.typ` | Entry point (reads the sample named by `--input sample=`) |
 | `typst/ny-opening-brief.typ` | The template, `ny-opening-brief(meta, md)`. Structure copied from `courts/ninth-circuit/court-of-appeals/typst/`; numbers and rules are NY's |
 
 Build (from the repo root, toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/second-circuit/new-york/state/court-of-appeals/opening-brief samples/tei-opening-brief.md
+sh tools/render.sh courts/second-circuit/new-york/state/court-of-appeals/opening-brief samples/INPUT-tei-opening-brief.md
 sh tools/overlay.sh courts/second-circuit/new-york/state/court-of-appeals/opening-brief tei-opening-brief
 ```
 
@@ -43,7 +43,7 @@ Rules not ruled by the sources above, decided by the template (convention, not r
 
 ## What the overlay shows
 
-`samples/tei-opening-brief-overlay.txt` pairs each of our 14 pages with the filed page of most shared words:
+`samples/OVERLAY-tei-opening-brief.txt` pairs each of our 14 pages with the filed page of most shared words:
 
 | Ours | Filed page | Word overlap |
 |---|---|---|

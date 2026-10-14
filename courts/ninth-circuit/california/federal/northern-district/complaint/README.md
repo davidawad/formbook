@@ -6,9 +6,9 @@ Folder: `courts/ninth-circuit/california/federal/northern-district/complaint/`.
 | Item | Status |
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-superhuman-3-26-cv-11711-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/superhuman-complaint.md` (a portion of the filing, see below) |
-| render | ok: `samples/superhuman-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/superhuman-complaint-overlay.pdf` and `-overlay.txt` |
+| sample md | `samples/INPUT-superhuman-complaint.md` (a portion of the filing, see below) |
+| render | ok: `samples/OUTPUT-superhuman-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `samples/OVERLAY-superhuman-complaint.pdf` and `-overlay.txt` |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
 
 ## Governing rules

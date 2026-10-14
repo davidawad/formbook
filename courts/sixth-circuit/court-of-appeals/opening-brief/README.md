@@ -6,9 +6,9 @@ Doc type `opening-brief` of `courts/sixth-circuit/court-of-appeals`. Self-contai
 |---|---|
 | `exemplars/FILED-EXAMPLE-netchoice-v-skrmetti-25-5660-opening-brief.pdf` | Real filed Sixth Circuit appellant's brief (text-based PDF, 90 pp.). |
 | `exemplars/SOURCE.md` | URL fetched, case, docket, filer, date filed, date fetched. |
-| `samples/netchoice-opening-brief.md` | Markdown transcription (excerpt) of the exemplar: frontmatter (cover, disclosure, oral-argument statement, designation, authorities) and body. |
-| `samples/netchoice-opening-brief.pdf` | `sh tools/render.sh courts/sixth-circuit/court-of-appeals/opening-brief samples/netchoice-opening-brief.md` |
-| `samples/netchoice-opening-brief-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/sixth-circuit/court-of-appeals/opening-brief netchoice-opening-brief` |
+| `samples/INPUT-netchoice-opening-brief.md` | Markdown transcription (excerpt) of the exemplar: frontmatter (cover, disclosure, oral-argument statement, designation, authorities) and body. |
+| `samples/OUTPUT-netchoice-opening-brief.pdf` | `sh tools/render.sh courts/sixth-circuit/court-of-appeals/opening-brief samples/INPUT-netchoice-opening-brief.md` |
+| `samples/OVERLAY-netchoice-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/sixth-circuit/court-of-appeals/opening-brief netchoice-opening-brief` |
 | `typst/main.typ` | Entry point; reads `--input sample=...`. |
 | `typst/ca6-opening-brief.typ` | Template `ca6-brief(meta, md)`. Content-agnostic; the numbers are named parameters traced to the rules. |
 
@@ -54,7 +54,7 @@ Body: `# Heading` sections (Introduction optional; then Statement of Jurisdictio
 
 ## Overlay
 
-`samples/netchoice-opening-brief-overlay.pdf` puts our render (red) over the filed page it best matches (blue); black is agreement. Pages are paired by word overlap, not by index. The map (`-overlay.txt`):
+`samples/OVERLAY-netchoice-opening-brief.pdf` puts our render (red) over the filed page it best matches (blue); black is agreement. Pages are paired by word overlap, not by index. The map (`-overlay.txt`):
 
 - pp. 1–3 (cover, disclosure, TOC) pair with filed pp. 1–3, with word overlap 98%, 90%, 61%. The disclosure text is the same in both; the TOC's differences are the sample's own page numbers.
 - pp. 4–5 (TOA) pair with filed TOA pages 10–11 at 26% and 21%. This is expected: the filed TOA runs seven pages (filed pp. 6–12); ours lists only the authorities the excerpt cites.
@@ -65,7 +65,7 @@ Font difference: the exemplar is Palatino Linotype; the template is EB Garamond 
 
 ## Page review (Gate 2)
 
-All 18 pages of `samples/netchoice-opening-brief.pdf` were rasterised at `pdftoppm -r 60` and viewed. Findings and their fixes:
+All 18 pages of `samples/OUTPUT-netchoice-opening-brief.pdf` were rasterised at `pdftoppm -r 60` and viewed. Findings and their fixes:
 
 | Page (printed) | Finding | Fix |
 |---|---|---|

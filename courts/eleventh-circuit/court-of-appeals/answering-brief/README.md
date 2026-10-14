@@ -81,17 +81,17 @@ Body: `# Heading` is a section (bold, capitals, centered). Sub-headings are numb
 From the repo root, with `export PATH="$HOME/tb/bin:$PATH"` (typst 0.15.0, poppler, ImageMagick, gawk, jq):
 
 ```sh
-sh tools/render.sh courts/eleventh-circuit/court-of-appeals/answering-brief samples/naacp-v-byrd-25-12813.md
+sh tools/render.sh courts/eleventh-circuit/court-of-appeals/answering-brief samples/INPUT-naacp-v-byrd-25-12813.md
 sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/answering-brief naacp-v-byrd-25-12813
 ```
 
-Render result: `samples/naacp-v-byrd-25-12813.pdf`, 14 pages, no typst warnings, embedded fonts only EB Garamond Regular, Italic and Bold.
+Render result: `samples/OUTPUT-naacp-v-byrd-25-12813.pdf`, 14 pages, no typst warnings, embedded fonts only EB Garamond Regular, Italic and Bold.
 
 Word count: 1,428 by the template; 1,428 by an independent `awk` count of the markdown body (same exclusions).
 
 ## Overlay (the red/blue test)
 
-`samples/naacp-v-byrd-25-12813-overlay.pdf`: red = our render only, blue = the exemplar only, black = both agree. Pages are paired by word overlap (`samples/naacp-v-byrd-25-12813-overlay.txt`):
+`samples/OVERLAY-naacp-v-byrd-25-12813.pdf`: red = our render only, blue = the exemplar only, black = both agree. Pages are paired by word overlap (`samples/OVERLAY-naacp-v-byrd-25-12813.txt`):
 
 | ours | filed | word overlap |
 |---|---|---|

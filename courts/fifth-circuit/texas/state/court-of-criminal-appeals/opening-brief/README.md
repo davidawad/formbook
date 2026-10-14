@@ -17,13 +17,13 @@ The markdown file begins with YAML frontmatter: `case_number`, `style_petitioner
 Build from the repository root:
 
 ```sh
-sh tools/render.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/opening-brief samples/becerra-merits.md
+sh tools/render.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/opening-brief samples/INPUT-becerra-merits.md
 sh tools/overlay.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/opening-brief becerra-merits
 ```
 
 ## Overlay and page review
 
-The red/blue overlay is `samples/becerra-merits-overlay.pdf`; its page map is `samples/becerra-merits-overlay.txt`. The sample uses the filed brief's cover, front matter, table headings, and representative argument and certificate sections. The five rendered pages were rendered at 60 dpi and reviewed on October 14, 2026.
+The red/blue overlay is `samples/OVERLAY-becerra-merits.pdf`; its page map is `samples/OVERLAY-becerra-merits.txt`. The sample uses the filed brief's cover, front matter, table headings, and representative argument and certificate sections. The five rendered pages were rendered at 60 dpi and reviewed on October 14, 2026.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|

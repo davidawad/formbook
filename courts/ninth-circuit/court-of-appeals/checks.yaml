@@ -18,12 +18,12 @@ font:
 
 samples:
   - id: sweet
-    md: samples/sweet-opening-brief.md
-    pdf: samples/sweet-opening-brief.pdf
+    md: samples/INPUT-sweet-opening-brief.md
+    pdf: samples/OUTPUT-sweet-opening-brief.pdf
     exemplar: exemplars/FILED-EXAMPLE-sweet-v-mcmahon-26-1136-opening-brief.pdf
   - id: generic
-    md: samples/generic-opening-brief.md
-    pdf: samples/generic-opening-brief.pdf
+    md: samples/INPUT-generic-opening-brief.md
+    pdf: samples/OUTPUT-generic-opening-brief.pdf
     exemplar: exemplars/FILED-EXAMPLE-sweet-v-mcmahon-26-1136-opening-brief.pdf
 
 # Numbers the checks use. Each is a rule or a stated tolerance, never a measurement off the exemplar.

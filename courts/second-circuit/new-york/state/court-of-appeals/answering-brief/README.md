@@ -5,7 +5,7 @@ Status: **BLOCKED: no exemplar.** No filed New York Court of Appeals answering b
 | Gate | Result |
 |---|---|
 | exemplar | no (none found) |
-| render | ok (`sh tools/render.sh … samples/ny-answering-brief-sample.md`, 12 pages, vendored EB Garamond only, no typst warnings) |
+| render | ok (`sh tools/render.sh … samples/INPUT-ny-answering-brief-sample.md`, 12 pages, vendored EB Garamond only, no typst warnings) |
 | overlay | fail (`sh tools/overlay.sh` exits 1: `no exemplar pdf in …/exemplars`) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; pages 7, 12 and 5, 6, 8–11 re-viewed after the fixes below) |
 
@@ -36,8 +36,8 @@ Rule dates: none verified. The Justia copy is current only through September 202
 
 - `typst/main.typ`: entrypoint (reads `sample=` from `--input`).
 - `typst/ny-answering-brief.typ`: template. Structure copied from `courts/ninth-circuit/court-of-appeals/typst/`; the numbers, rules and certificate wording are New York's (not the ca9 ones).
-- `samples/ny-answering-brief-sample.md`: rule-built sample. Frontmatter schema below.
-- `samples/ny-answering-brief-sample.pdf`: render output (12 pages).
+- `samples/INPUT-ny-answering-brief-sample.md`: rule-built sample. Frontmatter schema below.
+- `samples/OUTPUT-ny-answering-brief-sample.pdf`: render output (12 pages).
 - `samples/ny-answering-brief-sample-overlay.*`: **not produced** (overlay failed, see above).
 - `exemplars/SOURCE.md`: search record.
 

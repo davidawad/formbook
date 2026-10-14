@@ -9,14 +9,14 @@ Folder layout: one self-contained folder per doc type, so this folder holds its 
 | `exemplars/SOURCE.md` | Where it came from, who filed it, dates, and what it shows. |
 | `typst/ca2-answering-brief.typ` | The template: `ca2-answering-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
-| `samples/finkelman-answering-brief.md` | Transcription of the exemplar: cover, counterstatement, summary, standard of review, part of Argument I.A, conclusion, signature, certificates. A portion, not the whole brief. |
-| `samples/finkelman-answering-brief.pdf` | Render of the sample (12 pages). |
-| `samples/finkelman-answering-brief-overlay.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). |
+| `samples/INPUT-finkelman-answering-brief.md` | Transcription of the exemplar: cover, counterstatement, summary, standard of review, part of Argument I.A, conclusion, signature, certificates. A portion, not the whole brief. |
+| `samples/OUTPUT-finkelman-answering-brief.pdf` | Render of the sample (12 pages). |
+| `samples/OVERLAY-finkelman-answering-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). |
 
 Build (from the repo root, with the toolchain on `PATH`):
 
 ```sh
-sh tools/render.sh courts/second-circuit/court-of-appeals/answering-brief samples/finkelman-answering-brief.md
+sh tools/render.sh courts/second-circuit/court-of-appeals/answering-brief samples/INPUT-finkelman-answering-brief.md
 sh tools/overlay.sh courts/second-circuit/court-of-appeals/answering-brief finkelman-answering-brief
 ```
 
@@ -55,7 +55,7 @@ All text below was fetched from the court's site on 2026-10-14 unless marked oth
 
 ## What the overlay shows
 
-`samples/finkelman-answering-brief-overlay.pdf`: each page of our render (red) on top of the exemplar page it matches best by word overlap (blue). Black is where both agree. The page map is in `-overlay.txt`.
+`samples/OVERLAY-finkelman-answering-brief.pdf`: each page of our render (red) on top of the exemplar page it matches best by word overlap (blue). Black is where both agree. The page map is in `-overlay.txt`.
 
 - Cover, Jurisdictional Statement, Counterstatement, Summary, Standard of Review, Argument I, Conclusion: the match is 73–92% word overlap.
 - TOC and TOA pages (ours p. i–ii) match the exemplar's TOC/TOA poorly (35% and 18%). That is expected: the sample's TOC and TOA are generated from the sample's headings and links, and it covers different pages of the filed brief. The overlay is a diagnostic, not a score.

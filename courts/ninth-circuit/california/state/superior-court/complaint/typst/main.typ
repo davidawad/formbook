@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "calsuperct-complaint.typ": calsuperct-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/sweetwater-complaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-sweetwater-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #calsuperct-complaint(meta, body)

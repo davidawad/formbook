@@ -5,9 +5,9 @@ Doc-type folder for the Eleventh Circuit, `opening-brief` (one self-contained fo
 | Item | Status |
 |---|---|
 | Exemplar | yes: `exemplars/FILED-EXAMPLE-hill-v-clayton-county-23-12884-opening-brief.pdf` (see `exemplars/SOURCE.md`) |
-| Sample markdown | `samples/hill-opening-brief.md`, a partial transcription of the exemplar (cover, CIP, oral argument, jurisdiction, issues, case, argument II.A/II.B, conclusion, certificates) |
-| Render | ok: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief samples/hill-opening-brief.md` gives 16 pages, no typst warnings |
-| Overlay | ok: `samples/hill-opening-brief-overlay.pdf` and `-overlay.txt` |
+| Sample markdown | `samples/INPUT-hill-opening-brief.md`, a partial transcription of the exemplar (cover, CIP, oral argument, jurisdiction, issues, case, argument II.A/II.B, conclusion, certificates) |
+| Render | ok: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief samples/INPUT-hill-opening-brief.md` gives 16 pages, no typst warnings |
+| Overlay | ok: `samples/OVERLAY-hill-opening-brief.pdf` and `-overlay.txt` |
 | Pages reviewed | 16 of 16 (`pdftoppm -r 60`, each page viewed) |
 | Tier 1 gates | not built (no `checks.yaml` for this doc type); the form rules below are implemented in the template and checked by review only |
 | Status | not set. `court.json` is not used here |
@@ -53,7 +53,7 @@ Not verified: the full text of 11th Cir. R. 26.1-1 (the CIP form is at https://w
 
 The body: `#` sections (Statement Regarding Adoption, Jurisdictional Statement, Statement of the Issues, Statement of the Case, Summary of the Argument, Argument, Conclusion). Under Argument, `##` is a centered point heading (I., II.), `###` is A., `####` is 1. Elsewhere `##` is A., `###` is 1. Cite an authority as `[*Case v. Case*, cite](toa:KEY)`; `toa*:KEY` marks a primary citation.
 
-## Overlay (`samples/hill-opening-brief-overlay.txt`)
+## Overlay (`samples/OVERLAY-hill-opening-brief.txt`)
 
 The overlay pairs each of our pages with the filed page sharing the most words. Pages 1-5 (cover, CIP, oral argument, TOC) pair with the same-numbered exemplar pages, with 58-85% word overlap. Body pages (ours 6-16) pair with exemplar pages 15-43 at 31-77% overlap, because the sample is a partial transcription that starts at the Jurisdictional Statement. Overlay page 8 (our TOA) pairs with exemplar page 2 at 1.4%; that is a pairing artifact, because the Table of Citations has no counterpart in the exemplar's first pages, not a content match. The overlay is a diagnostic, not a score.
 
@@ -100,6 +100,6 @@ Defects found during review and fixed in this pass: the signature block stood al
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst, poppler, imagemagick, gawk, jq (micromamba, conda-forge)
-sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief samples/hill-opening-brief.md
+sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief samples/INPUT-hill-opening-brief.md
 sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/opening-brief hill-opening-brief
 ```

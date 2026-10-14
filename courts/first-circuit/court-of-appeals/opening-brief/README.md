@@ -3,7 +3,7 @@
 - Court: `ca1`, Court of Appeals for the First Circuit (`courts/first-circuit/court-of-appeals/`)
 - Doc type: `opening-brief`. Brief of Appellant (FRAP 28(a)); one self-contained folder, no shared files.
 - Exemplar: `exemplars/FILED-EXAMPLE-figueroa-24-1311-opening-brief.pdf` (*United States v. Figueroa*, No. 24-1311, filed 2025-03-17; provenance in `exemplars/SOURCE.md`).
-- Sample: `samples/figueroa-opening-brief.md` (excerpt of the filed brief; see Known gaps).
+- Sample: `samples/INPUT-figueroa-opening-brief.md` (excerpt of the filed brief; see Known gaps).
 - Status: template built; render, overlay and page review done (pages below). Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,9 +12,9 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `ca1-brief`. |
 | `typst/ca1-opening-brief.typ` | Template. Parameter block at the top: `doc-kind`, `word-limit` (13,000), `required-sections` (FRAP 28(a)(4)-(9) order), `needs-standard-of-review`, `addendum = "required"`. |
-| `samples/figueroa-opening-brief.md` | Markdown contract sample (frontmatter + body). |
-| `samples/figueroa-opening-brief.pdf` | `sh tools/render.sh courts/first-circuit/court-of-appeals/opening-brief samples/figueroa-opening-brief.md` (14 pages). |
-| `samples/figueroa-opening-brief-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/first-circuit/court-of-appeals/opening-brief figueroa-opening-brief` (red = ours, blue = filed, black = agree). |
+| `samples/INPUT-figueroa-opening-brief.md` | Markdown contract sample (frontmatter + body). |
+| `samples/OUTPUT-figueroa-opening-brief.pdf` | `sh tools/render.sh courts/first-circuit/court-of-appeals/opening-brief samples/INPUT-figueroa-opening-brief.md` (14 pages). |
+| `samples/OVERLAY-figueroa-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/first-circuit/court-of-appeals/opening-brief figueroa-opening-brief` (red = ours, blue = filed, black = agree). |
 | `exemplars/` | The filed exemplar and `SOURCE.md`. |
 
 ## Governing rules
@@ -39,7 +39,7 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 
 ## Overlay
 
-`samples/figueroa-opening-brief-overlay.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses):
+`samples/OVERLAY-figueroa-opening-brief.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses):
 
 - Sample p.1 ↔ filed p.1 (89%), p.2 ↔ p.2 (57%): cover and TOC line up.
 - p.3 ↔ p.6 (22%): the TOA is a different layout from the filed TOA page; expected.
@@ -50,7 +50,7 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 
 ## Page review (Gate 2)
 
-Every page of `figueroa-opening-brief.pdf` was rendered at 60 dpi and viewed (14 of 14). Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-figueroa-opening-brief.pdf` was rendered at 60 dpi and viewed (14 of 14). Typst printed no warnings. Fonts embedded: EB Garamond only.
 
 | Page | Content | Result |
 |---|---|---|

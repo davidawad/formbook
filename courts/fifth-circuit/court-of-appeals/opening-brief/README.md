@@ -8,16 +8,16 @@ Template for the principal brief of an appellant in the U.S. Court of Appeals fo
 |---|---|
 | `exemplars/FILED-EXAMPLE-candel-25-20366-opening-brief.pdf` | Filed exemplar: Brief of Appellant, *Candel & Partners SAS v. ExxonMobil Corp.*, No. 25-20366 (5th Cir.), filed 2025-11-03, 59 pages, text layer present. |
 | `exemplars/SOURCE.md` | Where the exemplar came from, the docket number, the filer, the date filed and the date fetched. |
-| `samples/candel-opening-brief.md` | Markdown transcription of the exemplar: front matter, the sections of the brief, footnotes, the conclusion and both certificates. Follows the markdown contract of the ninth-circuit sample (frontmatter, `# Heading` sections, `toa:` citation links, `[^n]` footnotes). |
-| `samples/candel-opening-brief.pdf` | Render of the sample (14 pages). |
-| `samples/candel-opening-brief-overlay.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map from `tools/overlay.sh`. |
+| `samples/INPUT-candel-opening-brief.md` | Markdown transcription of the exemplar: front matter, the sections of the brief, footnotes, the conclusion and both certificates. Follows the markdown contract of the ninth-circuit sample (frontmatter, `# Heading` sections, `toa:` citation links, `[^n]` footnotes). |
+| `samples/OUTPUT-candel-opening-brief.pdf` | Render of the sample (14 pages). |
+| `samples/OVERLAY-candel-opening-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map from `tools/overlay.sh`. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca5-opening-brief.typ` | The template: `ca5-opening-brief(meta, md)`. |
 
 Build (from the repo root, with typst 0.15.0 on PATH):
 
 ```sh
-sh tools/render.sh courts/fifth-circuit/court-of-appeals/opening-brief samples/candel-opening-brief.md
+sh tools/render.sh courts/fifth-circuit/court-of-appeals/opening-brief samples/INPUT-candel-opening-brief.md
 sh tools/overlay.sh courts/fifth-circuit/court-of-appeals/opening-brief candel-opening-brief exemplars/FILED-EXAMPLE-candel-25-20366-opening-brief.pdf
 ```
 
@@ -53,7 +53,7 @@ Rules were checked against the court's checklist (dated September 2024) on 2026-
 
 ## What the overlay shows
 
-`samples/candel-opening-brief-overlay.txt` maps each of the 14 sample pages to the exemplar page sharing the most words:
+`samples/OVERLAY-candel-opening-brief.txt` maps each of the 14 sample pages to the exemplar page sharing the most words:
 
 | Sample page | Content | Best exemplar page | Word overlap |
 |---|---|---|---|
@@ -106,6 +106,6 @@ Defects found and fixed during the review:
 ## Status
 
 - exemplar: yes (`exemplars/FILED-EXAMPLE-candel-25-20366-opening-brief.pdf`)
-- render: ok (`samples/candel-opening-brief.pdf`, 14 pages, no typst warnings)
-- overlay: ok (`samples/candel-opening-brief-overlay.pdf`, page map in `-overlay.txt`)
+- render: ok (`samples/OUTPUT-candel-opening-brief.pdf`, 14 pages, no typst warnings)
+- overlay: ok (`samples/OVERLAY-candel-opening-brief.pdf`, page map in `-overlay.txt`)
 - pages reviewed: 14 of 14

@@ -7,9 +7,9 @@ Doc type `opening-brief` for the U.S. Court of Appeals for the Fourth Circuit (c
 | Item | Result |
 |---|---|
 | Exemplar | yes: filed Opening Brief of Appellant, *NetChoice v. Jones*, No. 26-1252, filed 04/15/2026 (see `exemplars/SOURCE.md`) |
-| Sample | `samples/netchoice-opening-brief.md`: 14 rendered pages, excerpted from a 66-page filed brief |
-| Render | ok: `sh tools/render.sh courts/fourth-circuit/court-of-appeals/opening-brief samples/netchoice-opening-brief.md`; exit 0, no typst warnings, embedded fonts are EB Garamond only |
-| Overlay | ok: `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/opening-brief netchoice-opening-brief`; wrote `samples/netchoice-opening-brief-overlay.pdf` and `-overlay.txt` |
+| Sample | `samples/INPUT-netchoice-opening-brief.md`: 14 rendered pages, excerpted from a 66-page filed brief |
+| Render | ok: `sh tools/render.sh courts/fourth-circuit/court-of-appeals/opening-brief samples/INPUT-netchoice-opening-brief.md`; exit 0, no typst warnings, embedded fonts are EB Garamond only |
+| Overlay | ok: `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/opening-brief netchoice-opening-brief`; wrote `samples/OVERLAY-netchoice-opening-brief.pdf` and `-overlay.txt` |
 | Pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed; the cover was re-rendered and viewed again after its counsel lines were shortened) |
 | Gate 2 | open: the font (below) |
 
@@ -65,11 +65,11 @@ Same shape as the Ninth Circuit's contract (see `courts/ninth-circuit/court-of-a
 
 ## Overlay map
 
-From `samples/netchoice-opening-brief-overlay.txt`: our pages 1–14 paired with the filed pages named there. Red is our render, blue the filed page, black where both agree. The overlay is a diagnostic: it shows where the layout diverges, not a score.
+From `samples/OVERLAY-netchoice-opening-brief.txt`: our pages 1–14 paired with the filed pages named there. Red is our render, blue the filed page, black where both agree. The overlay is a diagnostic: it shows where the layout diverges, not a score.
 
 ## Page review (Gate 2 input)
 
-Every page of `samples/netchoice-opening-brief.pdf` was rendered at 60 dpi and viewed. Folios are the printed ones.
+Every page of `samples/OUTPUT-netchoice-opening-brief.pdf` was rendered at 60 dpi and viewed. Folios are the printed ones.
 
 | PDF page | Folio | Content | Finding |
 |---|---|---|---|

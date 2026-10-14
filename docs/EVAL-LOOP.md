@@ -76,7 +76,7 @@ Anything the rules leave open is **not** asserted mechanically; it goes to Gate 
 
 ### Gate 2: visual review
 
-1. Render every page: `pdftoppm -r 100 -png sample.pdf out/p`. For the sample transcribed from the exemplar, also run `tools/overlay.sh <court-dir> <sample-id>`: it writes `samples/<sample-id>-overlay.pdf` (red = ours, blue = filed, black = both agree; pages paired by text) and commit it, so anyone can see the difference at a glance.
+1. Render every page: `pdftoppm -r 100 -png sample.pdf out/p`. For the sample transcribed from the exemplar, also run `tools/overlay.sh <court-dir> <sample-id>`: it reads `samples/OUTPUT-<sample-id>.pdf` and writes `samples/OVERLAY-<sample-id>.pdf` (red = ours, blue = filed, black = both agree; pages paired by text) and commit it, so anyone can see the difference at a glance.
 2. View every page (not a sample, not page 1) next to the corresponding exemplar page. The exemplar settles only what the rules leave open: cover layout, heading styles, TOC/TOA style.
 3. Record a row per page in `reviews/YYYY-MM-DD.md`:
 

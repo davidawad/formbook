@@ -3,7 +3,7 @@
 - Court: `ca1`, Court of Appeals for the First Circuit (`courts/first-circuit/court-of-appeals/`)
 - Doc type: `answering-brief`. Brief of Appellee (FRAP 28(b)); one self-contained folder, no shared files.
 - Exemplar: `exemplars/FILED-EXAMPLE-griffin-23-1668-answering-brief.pdf` (*Griffin v. Massachusetts Department of Revenue*, No. 23-1668, filed 2024-01-02; provenance in `exemplars/SOURCE.md`).
-- Sample: `samples/griffin-answering-brief.md` (excerpt of the filed brief; see Known gaps).
+- Sample: `samples/INPUT-griffin-answering-brief.md` (excerpt of the filed brief; see Known gaps).
 - Status: template built; render, overlay and page review done (pages below). Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,9 +12,9 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `ca1-brief`. |
 | `typst/ca1-answering-brief.typ` | Template; the same code as the opening-brief template with its parameter block set for an appellee's brief: `word-limit = 13000`, `required-sections` = summary and argument (FRAP 28(b)), `needs-standard-of-review = false`, `addendum = "optional"`. |
-| `samples/griffin-answering-brief.md` | Markdown contract sample (frontmatter + body). |
-| `samples/griffin-answering-brief.pdf` | `sh tools/render.sh courts/first-circuit/court-of-appeals/answering-brief samples/griffin-answering-brief.md` (10 pages). |
-| `samples/griffin-answering-brief-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/first-circuit/court-of-appeals/answering-brief griffin-answering-brief`. |
+| `samples/INPUT-griffin-answering-brief.md` | Markdown contract sample (frontmatter + body). |
+| `samples/OUTPUT-griffin-answering-brief.pdf` | `sh tools/render.sh courts/first-circuit/court-of-appeals/answering-brief samples/INPUT-griffin-answering-brief.md` (10 pages). |
+| `samples/OVERLAY-griffin-answering-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/first-circuit/court-of-appeals/answering-brief griffin-answering-brief`. |
 | `exemplars/` | The filed exemplar and `SOURCE.md`. |
 
 ## Governing rules
@@ -37,7 +37,7 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 
 ## Overlay
 
-`samples/griffin-answering-brief-overlay.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only. Pairings from the last run:
+`samples/OVERLAY-griffin-answering-brief.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only. Pairings from the last run:
 
 - p.1 ↔ filed p.1 (83%), p.2 ↔ p.2 (39%), p.3 ↔ p.3 (24%): cover, TOC, TOA.
 - p.4 ↔ p.6 (100%), p.5 ↔ p.7 (97%): statement of the issues, statement of the case, and the facts (the word sets nearly coincide).
@@ -47,7 +47,7 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 
 ## Page review (Gate 2)
 
-Every page of `griffin-answering-brief.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-griffin-answering-brief.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond only.
 
 | Page | Content | Result |
 |---|---|---|

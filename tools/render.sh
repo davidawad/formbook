@@ -23,7 +23,7 @@ case $ENGINE in
 esac
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
-OUT=${3:-$COURT/samples/$(basename "$SAMPLE" .md).pdf}
+OUT=${3:-$COURT/samples/OUTPUT-$(basename "$SAMPLE" .md | sed 's/^INPUT-//').pdf}
 LOG=$(mktemp)
 typst compile --root "$COURT" \
   --font-path "$ROOT/fonts" --ignore-system-fonts \

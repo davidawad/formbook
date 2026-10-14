@@ -5,9 +5,9 @@ Self-contained folder for one document type of the Court of Appeals for the Sixt
 | Item | State |
 |---|---|
 | Exemplar (filed, text-based) | yes: `exemplars/FILED-EXAMPLE-smith-v-pam-transport-24-5549-reply-brief.pdf` (see `exemplars/SOURCE.md`) |
-| Sample markdown | `samples/smith-reply-brief.md` (a portion: cover, tables, Introduction, Argument point I to the printed page 7 paragraph, Conclusion, signatures, certificates) |
-| Render | `sh tools/render.sh courts/sixth-circuit/court-of-appeals/reply-brief samples/smith-reply-brief.md` → 12 pages, no typst warnings |
-| Overlay | `samples/smith-reply-brief-overlay.pdf` and `-overlay.txt` (`tools/overlay.sh`, against the exemplar) |
+| Sample markdown | `samples/INPUT-smith-reply-brief.md` (a portion: cover, tables, Introduction, Argument point I to the printed page 7 paragraph, Conclusion, signatures, certificates) |
+| Render | `sh tools/render.sh courts/sixth-circuit/court-of-appeals/reply-brief samples/INPUT-smith-reply-brief.md` → 12 pages, no typst warnings |
+| Overlay | `samples/OVERLAY-smith-reply-brief.pdf` and `-overlay.txt` (`tools/overlay.sh`, against the exemplar) |
 | Pages reviewed | 12 of 12, each rendered at `pdftoppm -r 60` and looked at, in the final state |
 | Known gaps | see "Known gaps and open findings" below |
 
@@ -46,8 +46,8 @@ FRAP 32(g)(2) names Form 6 as an acceptable certificate; this template follows t
 
 - `typst/main.typ`: entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template.
 - `typst/ca6-reply-brief.typ`: the template, `ca6-reply-brief(meta, md)`. Content-agnostic: every number is a named parameter at the top and traces to a rule (or is a style choice noted as such). No case-specific text, no coordinates taken from the exemplar, no forced line breaks.
-- `samples/smith-reply-brief.md`: the sample, transcribed from the exemplar.
-- `samples/smith-reply-brief.pdf`, `-overlay.pdf`, `-overlay.txt`: render and overlay.
+- `samples/INPUT-smith-reply-brief.md`: the sample, transcribed from the exemplar.
+- `samples/OUTPUT-smith-reply-brief.pdf`, `-overlay.pdf`, `-overlay.txt`: render and overlay.
 - `exemplars/`: the filed PDF and `SOURCE.md`.
 
 ## Markdown contract
@@ -86,7 +86,7 @@ Body:
 
 ## Overlay
 
-`samples/smith-reply-brief-overlay.txt` is the page map (`tools/overlay.sh` pairs each sample page with the exemplar page sharing the most words):
+`samples/OVERLAY-smith-reply-brief.txt` is the page map (`tools/overlay.sh` pairs each sample page with the exemplar page sharing the most words):
 
 | Sample page | Exemplar page | Word overlap |
 |---|---|---|

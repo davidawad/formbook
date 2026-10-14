@@ -33,7 +33,7 @@ Not used, and why: Civil L.R. 7-2(c) (proposed order) and 7-5 (declarations) are
 
 ## Sample
 
-- `samples/tsi-akim-maidu-motion-to-dismiss.md` is a transcription of the exemplar: caption and counsel block, notice of motion, relief sought, issues, the memorandum's introduction, facts, Argument III.A (venue) and III.B.1 (legal standard), the conclusion, and the signature block. Footnotes 1 and 2 are included.
+- `samples/INPUT-tsi-akim-maidu-motion-to-dismiss.md` is a transcription of the exemplar: caption and counsel block, notice of motion, relief sought, issues, the memorandum's introduction, facts, Argument III.A (venue) and III.B.1 (legal standard), the conclusion, and the signature block. Footnotes 1 and 2 are included.
 - It stops after III.B.1. Argument III.B.2-4 (sovereign immunity, agency failure to act, statute of limitations) are not transcribed, to keep the render within the 8-14 page target. The exemplar's pages 9-12 of the memorandum are therefore absent; the overlay shows this.
 - Frontmatter follows the ca9 contract in shape (`authorities:` registry, `toa:KEY` links, footnotes, `#` headings) with the N.D. Cal. fields (`court`, `counsel`, `caption`, `hearing`, `footer_title`). Headings are numbered by the template (I., A., 1., a.); the sample types no numbers.
 
@@ -41,12 +41,12 @@ Not used, and why: Civil L.R. 7-2(c) (proposed order) and 7-5 (declarations) are
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/ninth-circuit/california/federal/northern-district/motion-brief samples/tsi-akim-maidu-motion-to-dismiss.md
+sh tools/render.sh courts/ninth-circuit/california/federal/northern-district/motion-brief samples/INPUT-tsi-akim-maidu-motion-to-dismiss.md
 sh tools/overlay.sh courts/ninth-circuit/california/federal/northern-district/motion-brief tsi-akim-maidu-motion-to-dismiss
 ```
 
-- `samples/tsi-akim-maidu-motion-to-dismiss.pdf`: 12 pages. Typst compiled with no warnings (`render.sh` fails on any warning). Only vendored fonts: `pdffonts` shows EBGaramond-Regular, -Italic, -Bold, embedded.
-- `samples/tsi-akim-maidu-motion-to-dismiss-overlay.pdf` and `-overlay.txt`: red = our render, blue = exemplar, black = both. The page map pairs pages by word overlap, which is coarse: ours p.1-3 ↔ filed p.1-3, ours p.5-7 ↔ filed p.6-8, ours p.12 ↔ filed p.17 (the signature page, which is the last body page of the exemplar). The overlay is a diagnostic, not a score: the exemplar uses the pleading form (line numbers down the left margin, Times) and the render does not, so the two layers will not coincide on text lines.
+- `samples/OUTPUT-tsi-akim-maidu-motion-to-dismiss.pdf`: 12 pages. Typst compiled with no warnings (`render.sh` fails on any warning). Only vendored fonts: `pdffonts` shows EBGaramond-Regular, -Italic, -Bold, embedded.
+- `samples/OVERLAY-tsi-akim-maidu-motion-to-dismiss.pdf` and `-overlay.txt`: red = our render, blue = exemplar, black = both. The page map pairs pages by word overlap, which is coarse: ours p.1-3 ↔ filed p.1-3, ours p.5-7 ↔ filed p.6-8, ours p.12 ↔ filed p.17 (the signature page, which is the last body page of the exemplar). The overlay is a diagnostic, not a score: the exemplar uses the pleading form (line numbers down the left margin, Times) and the render does not, so the two layers will not coincide on text lines.
 
 ## Visual review (Gate 2 record, all 12 pages, rendered at 60 dpi and looked at)
 

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ca2-opening-brief.typ": ca2-opening-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/munafo-opening-brief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-munafo-opening-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ca2-opening-brief(meta, body)

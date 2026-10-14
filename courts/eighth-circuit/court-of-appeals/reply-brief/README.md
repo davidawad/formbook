@@ -5,9 +5,9 @@ Doc type `reply-brief` for court `ca8` (folder `courts/eighth-circuit/court-of-a
 | Path | What |
 |---|---|
 | `exemplars/FILED-EXAMPLE-delgado-midland-24-1786-reply-brief.pdf` | Real filed reply brief, 8th Cir. No. 24-1786 (19 pp.). Provenance in `exemplars/SOURCE.md`. |
-| `samples/delgado-midland.md` | Transcription of that brief (frontmatter = cover, counsel, signature, certificates, authorities; body = argument, conclusion, footnotes). |
-| `samples/delgado-midland.pdf` | `sh tools/render.sh courts/eighth-circuit/court-of-appeals/reply-brief samples/delgado-midland.md` (18 pages). |
-| `samples/delgado-midland-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eighth-circuit/court-of-appeals/reply-brief delgado-midland` (red = ours, blue = filed, black = both). |
+| `samples/INPUT-delgado-midland.md` | Transcription of that brief (frontmatter = cover, counsel, signature, certificates, authorities; body = argument, conclusion, footnotes). |
+| `samples/OUTPUT-delgado-midland.pdf` | `sh tools/render.sh courts/eighth-circuit/court-of-appeals/reply-brief samples/INPUT-delgado-midland.md` (18 pages). |
+| `samples/OVERLAY-delgado-midland.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eighth-circuit/court-of-appeals/reply-brief delgado-midland` (red = ours, blue = filed, black = both). |
 | `typst/main.typ` | Entry point: reads the sample named by `--input sample=...`. |
 | `typst/ca8-reply-brief.typ` | Template `ca8-reply-brief(meta, md)`. Content-agnostic; the numbers are named parameters at the top. |
 
@@ -50,7 +50,7 @@ Body: `# Heading` is a section (centered); `##` A.; `###` 1.; `####` a.; `#####`
 
 ## What the overlay shows
 
-`samples/delgado-midland-overlay.pdf` puts our render (red) over the filed brief (blue), page by page. Pages are paired by word overlap (`-overlay.txt`), not by index. The pairing scores run 40% to 100% (page 1: 100%, page 2: 90%, page 17: 40%). The differences are layout, not content:
+`samples/OVERLAY-delgado-midland.pdf` puts our render (red) over the filed brief (blue), page by page. Pages are paired by word overlap (`-overlay.txt`), not by index. The pairing scores run 40% to 100% (page 1: 100%, page 2: 90%, page 17: 40%). The differences are layout, not content:
 
 - The filed brief is Word output in Georgia; ours is EB Garamond with typst's line breaking, so lines and page breaks fall differently and the pages do not coincide.
 - Pages 1-2 (cover, contents) overlay closely. Our TOA runs 3 pages (ii-iv) against the filed 2; the page numbers in the TOA and TOC therefore differ from the filed ones.
@@ -58,7 +58,7 @@ Body: `# Heading` is a section (centered); `##` A.; `###` 1.; `####` a.; `#####`
 
 ## Pages reviewed (Gate 2)
 
-All 18 pages of `samples/delgado-midland.pdf` were rasterized at 60 dpi (`pdftoppm -r 60`) and viewed. Findings and fixes made:
+All 18 pages of `samples/OUTPUT-delgado-midland.pdf` were rasterized at 60 dpi (`pdftoppm -r 60`) and viewed. Findings and fixes made:
 
 | Page (PDF) | Finding | Result |
 |---|---|---|

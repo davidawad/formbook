@@ -3,7 +3,7 @@
 - Court: `ca1`, Court of Appeals for the First Circuit (`courts/first-circuit/court-of-appeals/`)
 - Doc type: `reply-brief`. Reply Brief of Appellant (FRAP 28(c)); one self-contained folder, no shared files.
 - Exemplar: `exemplars/FILED-EXAMPLE-warner-24-1414-reply-brief.pdf` (*Warner v. DeJoy*, No. 24-1414, filed 2024-10-09; provenance in `exemplars/SOURCE.md`).
-- Sample: `samples/warner-reply-brief.md` (excerpt of the filed brief; see Known gaps).
+- Sample: `samples/INPUT-warner-reply-brief.md` (excerpt of the filed brief; see Known gaps).
 - Status: template built; render, overlay and page review done (pages below). Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,9 +12,9 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `ca1-brief`. |
 | `typst/ca1-reply-brief.typ` | Template; the same code as the opening-brief template with its parameter block set for a reply: `word-limit = 6500`, `required-sections = ()` (FRAP 28(c)), `needs-standard-of-review = false`, `addendum = "optional"`. A "Reply Argument" heading gets the same roman-numeral point scheme as "Argument". |
-| `samples/warner-reply-brief.md` | Markdown contract sample (frontmatter + body). |
-| `samples/warner-reply-brief.pdf` | `sh tools/render.sh courts/first-circuit/court-of-appeals/reply-brief samples/warner-reply-brief.md` (10 pages). |
-| `samples/warner-reply-brief-overlay.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/first-circuit/court-of-appeals/reply-brief warner-reply-brief`. |
+| `samples/INPUT-warner-reply-brief.md` | Markdown contract sample (frontmatter + body). |
+| `samples/OUTPUT-warner-reply-brief.pdf` | `sh tools/render.sh courts/first-circuit/court-of-appeals/reply-brief samples/INPUT-warner-reply-brief.md` (10 pages). |
+| `samples/OVERLAY-warner-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/first-circuit/court-of-appeals/reply-brief warner-reply-brief`. |
 | `exemplars/` | The filed exemplar and `SOURCE.md`. |
 
 ## Governing rules
@@ -36,7 +36,7 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 
 ## Overlay
 
-`samples/warner-reply-brief-overlay.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only. Pairings from the last run:
+`samples/OVERLAY-warner-reply-brief.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only. Pairings from the last run:
 
 - p.1 ↔ filed p.1 (80%), p.2 ↔ p.2 (55%), p.3 ↔ p.3 (20%): cover, TOC, and TOA (the sample's TOA has two cases; the filed TOA lists many).
 - p.4 ↔ p.5 (85%), p.5 ↔ p.6 (85%): introduction and reply argument; point I.
@@ -46,7 +46,7 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 
 ## Page review (Gate 2)
 
-Every page of `warner-reply-brief.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-warner-reply-brief.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond only.
 
 | Page | Content | Result |
 |---|---|---|

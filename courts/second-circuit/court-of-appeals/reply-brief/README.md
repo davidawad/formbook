@@ -9,9 +9,9 @@ This folder is self-contained. The court's rules (below) decide the layout; the 
 | `exemplars/FILED-EXAMPLE-lowe-moneylion-26-655-reply-brief.pdf` | Primary exemplar: reply brief of defendant-appellant MoneyLion, 2d Cir. No. 26-655, filed 2026-09-10 by counsel. 45 pages, text layer. |
 | `exemplars/FILED-EXAMPLE-alisigwe-24-960-reply-brief.pdf` | Second filer, for conventions only (criminal reply, Federal Defenders of New York). Not transcribed, not overlaid. |
 | `exemplars/SOURCE.md` | URL fetched from, case, docket, filer, date filed, date fetched, for both. |
-| `samples/lowe-reply-brief.md` | Transcription of the Lowe exemplar: cover, tables, Introduction, Argument Points I and II.A, Conclusion, signature, certificates. A portion (about 1,600 of the brief's 6,994 words). |
-| `samples/lowe-reply-brief.pdf` | Render of the sample (14 pages). |
-| `samples/lowe-reply-brief-overlay.pdf`, `.txt` | Red/blue overlay of the render on the Lowe exemplar, and the page map. |
+| `samples/INPUT-lowe-reply-brief.md` | Transcription of the Lowe exemplar: cover, tables, Introduction, Argument Points I and II.A, Conclusion, signature, certificates. A portion (about 1,600 of the brief's 6,994 words). |
+| `samples/OUTPUT-lowe-reply-brief.pdf` | Render of the sample (14 pages). |
+| `samples/OVERLAY-lowe-reply-brief.pdf`, `.txt` | Red/blue overlay of the render on the Lowe exemplar, and the page map. |
 | `typst/main.typ` | Entry point; reads `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca2-reply-brief.typ` | The template: `ca2-reply-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
 
@@ -70,7 +70,7 @@ There is no `word_limit_basis`, no addendum, no related-cases statement, no Form
 From the repo root (`PATH` must include the toolchain):
 
 ```sh
-sh tools/render.sh courts/second-circuit/court-of-appeals/reply-brief samples/lowe-reply-brief.md
+sh tools/render.sh courts/second-circuit/court-of-appeals/reply-brief samples/INPUT-lowe-reply-brief.md
 sh tools/overlay.sh courts/second-circuit/court-of-appeals/reply-brief lowe-reply-brief \
   "$PWD/courts/second-circuit/court-of-appeals/reply-brief/exemplars/FILED-EXAMPLE-lowe-moneylion-26-655-reply-brief.pdf"
 ```
@@ -83,7 +83,7 @@ Render result: `typst compile` with vendored EB Garamond and vendored cmarker 0.
 
 ## Overlay (what it shows)
 
-Red is our render; blue is the filed exemplar; black is where they agree. Pages are paired by word overlap, not index (`samples/lowe-reply-brief-overlay.txt`):
+Red is our render; blue is the filed exemplar; black is where they agree. Pages are paired by word overlap, not index (`samples/OVERLAY-lowe-reply-brief.txt`):
 
 | Our page | Filed page | Word overlap | Note |
 |---|---|---|---|
@@ -99,7 +99,7 @@ The overlay is a diagnostic, not a score. It is a word-overlap pairing; it does 
 
 ## Page review
 
-All 14 pages of `samples/lowe-reply-brief.pdf` were rendered at `pdftoppm -r 60` and looked at. Physical page numbers: 1 cover; 2-4 contents and authorities; 5-12 body (body pages 1-8); 13-14 certificates.
+All 14 pages of `samples/OUTPUT-lowe-reply-brief.pdf` were rendered at `pdftoppm -r 60` and looked at. Physical page numbers: 1 cover; 2-4 contents and authorities; 5-12 body (body pages 1-8); 13-14 certificates.
 
 | Physical page | Finding | Action |
 |---|---|---|

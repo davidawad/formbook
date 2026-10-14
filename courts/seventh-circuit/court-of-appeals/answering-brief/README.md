@@ -9,9 +9,9 @@ Status: exemplar = yes; render = ok; overlay = ok; pages reviewed = 14 of 14. No
 | Path | What |
 |---|---|
 | `exemplars/FILED-EXAMPLE-craig-v-city-of-richmond-26-1864-answering-brief.pdf` | Filed Brief of Appellees, *Craig v. City of Richmond*, No. 26-1864 (7th Cir.), May 21, 2026. Provenance in `exemplars/SOURCE.md`. |
-| `samples/craig-answering-brief.md` | Transcription of that brief (partial, see "Known gaps"). Frontmatter = cover, caption, counsel, signature, service list, authorities. |
-| `samples/craig-answering-brief.pdf` | Render, 14 pages. |
-| `samples/craig-answering-brief-overlay.pdf`, `.txt` | Red/blue overlay against the exemplar, and the page map. |
+| `samples/INPUT-craig-answering-brief.md` | Transcription of that brief (partial, see "Known gaps"). Frontmatter = cover, caption, counsel, signature, service list, authorities. |
+| `samples/OUTPUT-craig-answering-brief.pdf` | Render, 14 pages. |
+| `samples/OVERLAY-craig-answering-brief.pdf`, `.txt` | Red/blue overlay against the exemplar, and the page map. |
 | `typst/ca7-answering-brief.typ` | The template: `ca7-brief(meta, md)`. Content-agnostic. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
 
@@ -19,7 +19,7 @@ Status: exemplar = yes; render = ok; overlay = ok; pages reviewed = 14 of 14. No
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # micromamba env: typst 0.15.0, poppler, imagemagick, gawk, jq
-sh tools/render.sh courts/seventh-circuit/court-of-appeals/answering-brief samples/craig-answering-brief.md
+sh tools/render.sh courts/seventh-circuit/court-of-appeals/answering-brief samples/INPUT-craig-answering-brief.md
 sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/answering-brief craig-answering-brief
 ```
 
@@ -74,7 +74,7 @@ The rules for this doc type were checked as follows:
 
 ## Pages reviewed (Gate 2)
 
-All 14 pages of `samples/craig-answering-brief.pdf` were rasterized at 60 dpi (`pdftoppm -r 60`) and looked at:
+All 14 pages of `samples/OUTPUT-craig-answering-brief.pdf` were rasterized at 60 dpi (`pdftoppm -r 60`) and looked at:
 
 PDF page (printed folio) and what it shows:
 
