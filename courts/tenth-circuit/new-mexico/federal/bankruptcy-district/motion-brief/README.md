@@ -9,7 +9,7 @@ Folder: `courts/tenth-circuit/new-mexico/federal/bankruptcy-district/motion-brie
 |---|---|
 | exemplar | **no** (`BLOCKED: no exemplar`; see `exemplars/SOURCE.md` and "Searches tried" below) |
 | sample md | `samples/INPUT-fictional-motion-brief.md`: FICTIONAL, structure test only (placeholder names, placeholder text). Not a transcription. |
-| render | ok: `samples/OUTPUT-fictional-motion-brief.pdf`, 3 pages, letter, EB Garamond only, no typst warnings |
+| render | ok (re-run 2026-10-14 with `sh tools/render.sh <dir> samples/INPUT-fictional-motion-brief.md`): `samples/OUTPUT-fictional-motion-brief.pdf`, 3 pages, letter, EB Garamond only, no typst warnings |
 | overlay | **fail**: `sh tools/overlay.sh <dir> fictional-motion-brief` exits 1, "no exemplar pdf in .../exemplars". Expected: there is no filed exemplar to overlay. |
 | pages reviewed | 3 of 3 (every page of the current render at 60 dpi, viewed) |
 | check.sh / selftest | not run (same reason as the adversary-complaint folder) |
@@ -72,5 +72,11 @@ CourtListener REST API (`api/rest/v4/search`, `type=r`, `court=nmb`), read throu
 Direct storage downloads (`storage.courtlistener.com/recap/gov.uscourts.nmb.<id>/...`):
 - Montoya v. Goldstein (168297) Docs 8 and 9: not PDFs (an XML error page).
 - Johnson v. Marker (173562) Docs 6 and 16: not PDFs (an XML error page).
+
+Second pass (2026-10-14, same day, brief `fb-595.32.16`):
+- WebSearch, standard and extended (about 14 queries): "Bankr. D.N.M." / "Bankruptcy Court for the District of New Mexico" with "memorandum in support", "memorandum brief", "motion to dismiss", "motion for summary judgment", "Adv. Pro. No."; Justia, DocketBird, PacerMonitor, Inforuptcy, Scribd, DocumentCloud, Casetext and Tenth Circuit appendix terms; Vaughan Co. Realtors (Wagner trustee) adversary briefs. Results were court opinions, local rules, or other districts' papers only.
+- GovInfo `USCOURTS-nmb-1_*` packages downloaded and read (text layer, `pdftotext`): 04-ap-01159-0 (30 pp, carries a "PACER Cover Sheet for Electronically Filed Documents", but the filed document is the court's Memorandum Opinion, Doc 36), 06-ap-01078-0, 08-ap-01065-0, 09-ap-01093-0, 10-ap-01166-0, 10-ap-01200-1, 11-ap-01227-0, 12-ap-01110-1, 12-bk-12457-1, 13-ap-01069-0, 20-ap-01070-7, 24-bk-10185-0. All are opinions; none includes a party's motion or memorandum.
+- CourtListener REST API (`api/rest/v4/search`, `type=r`, `court=nmb`): HTTP 429, `Retry-After` about 6.3 hours, so this pass could not query it again.
+- inforuptcy.com docket page: HTTP 403.
 
 What would settle it: a PACER copy (or a CourtListener RECAP upload by a user with access) of one of the motions above, with a text layer, saved as `exemplars/FILED-EXAMPLE-<case>-<docket>-motion-brief.pdf` and recorded in `exemplars/SOURCE.md`. Then re-run the overlay.
