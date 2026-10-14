@@ -46,6 +46,12 @@
   // Rule 9004-2(a)(1)-(5): full debtor name, EIN, last four of SSN/TIN, names used (aka / fka)
   rows.push(([In re:], [Bankr. No. #meta.bankr_no]))
   rows.push(([], [Chapter #meta.chapter]))
+  // Optional (convention, not a rule): the assigned judge and the hearing on the motion, in the right column
+  if "judge" in meta { rows.push(([], [Hon. #meta.judge])) }
+  if "hearing" in meta {
+    rows.push(([], []))
+    for line in meta.hearing { rows.push(([], [#line])) }
+  }
   rows.push(([], []))
   for d in debtors {
     rows.push((inl(d.name), []))
@@ -169,7 +175,7 @@
   v(para-gap)
 
   let chunks = md.replace("\r", "").split("\n\n").map(s => s.trim()).filter(s => s != "")
-  for c in chunks {
+  let chunk(c) = {
     if c.starts-with("# ") {
       block(width: 100%, above: 1.5em, below: para-gap, sticky: true, align(center, text(weight: "bold", inl(c.slice(2)))))
     } else if c.starts-with("## ") {
@@ -180,6 +186,18 @@
       block(width: 100%, [#h(para-indent) #inl(c)])
     }
   }
-  signature(meta.signature)
+  // Convention: a signature never stands alone on a page. When the body ends in a paragraph, that paragraph
+  // is kept in the same unbreakable block as the signature block.
+  let is-para(c) = not (c.starts-with("#") or c.starts-with("1. ") or c.starts-with("- "))
+  if chunks.len() > 0 and is-para(chunks.last()) {
+    for c in chunks.slice(0, -1) { chunk(c) }
+    block(width: 100%, breakable: false, [
+      #h(para-indent) #inl(chunks.last())
+      #signature(meta.signature)
+    ])
+  } else {
+    for c in chunks { chunk(c) }
+    signature(meta.signature)
+  }
   if "certificate" in meta { certificate(meta.certificate) }
 }

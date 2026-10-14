@@ -3,15 +3,15 @@
 Doc type: **motion with memorandum** (FRBP 9013; motions in adversary proceedings under FRBP 7007 and Bankr. D.S.D. R. 7007-1) in the United States Bankruptcy Court for the District of South Dakota (`sdb`).
 Folder: `courts/eighth-circuit/south-dakota/federal/bankruptcy-district/motion-brief/`.
 
-BLOCKED: no exemplar. No text-layer filed motion with a memorandum from this court was found after the searches logged in `exemplars/SOURCE.md`. The template is built from the rules below and tested on a fictional sample. Nothing here is judged against a filing (tier 2 is not judged).
+Exemplar: one real, text-layer filed memorandum in support of a motion, from this court (*In re Northern Beef Packers Limited Partnership*, Bankr. No. 13-10118, Doc 134, filed 08/07/2013, filed by the lender agent). The sample is a transcription of it. The template's tier-2 layout is judged against that one filer (see `exemplars/SOURCE.md` for the choice, the searches, and the limits of the match).
 
 | Item | Status |
 |---|---|
-| exemplar | no (see `exemplars/SOURCE.md`: searches, and why each candidate was not usable) |
-| sample md | `samples/INPUT-fictional-stay-relief.md`: FICTIONAL main-case motion for relief from stay with a memorandum. Not a transcription; invented names and numbers. |
-| render | ok: `samples/OUTPUT-fictional-stay-relief.pdf` (2 pages), `tools/render.sh`, vendored EB Garamond only (pdffonts: EBGaramond-Regular and -Bold, embedded), zero typst warnings. |
-| overlay | **fail**: `tools/overlay.sh` exits 1, "no exemplar pdf in …/exemplars". No overlay PDF exists, because there is no filed document to overlay. |
-| pages reviewed | 2 of 2 of `OUTPUT-fictional-stay-relief.pdf`, each rasterized at 60 dpi and viewed after the last change. |
+| exemplar | yes: `exemplars/FILED-EXAMPLE-northern-beef-packers-13-10118-motion-brief.pdf` (15 pages, one filer), sourced in `exemplars/SOURCE.md` |
+| sample md | `samples/INPUT-northern-beef-packers.md`: transcription of the whole filing (caption, title, body, footnotes 1 to 3, conclusion, signature). TIN shown as last four digits. |
+| render | ok: `samples/OUTPUT-northern-beef-packers.pdf` (9 pages), `tools/render.sh`, vendored EB Garamond only, zero typst warnings. |
+| overlay | ok: `samples/OVERLAY-northern-beef-packers.pdf` and `.txt` (`tools/overlay.sh`); page pairing by text: ours 1-9 with filed 1, 2, 5, 7, 8, 10, 12, 14, 15. |
+| pages reviewed | 9 of 9 of `OUTPUT-northern-beef-packers.pdf`, each rasterized at 70 dpi and viewed in its final state. |
 
 ## Governing rules
 
@@ -59,36 +59,50 @@ Markdown contract (frontmatter; the body is blank-line-separated chunks):
 - `signature`: `{date, signer, firm (lines), role}`.
 - `certificate` (optional): `{text, signer, firm}`.
 - Body: `# Heading` (centered bold); `## Heading` (bold, left); other chunks are unnumbered body paragraphs (first-line indent 0.5 inch); a chunk starting `1. ` is a list.
-- Not supported: tables, footnotes, raw typst.
+- `judge` (optional): printed as `Hon. <judge>` in the caption's right column under `Chapter`. `hearing` (optional list of lines): printed under it (e.g. `Hearing Date:`, `Hearing Time:`). Convention (tier 2), not a rule.
+- Not supported: tables, footnotes, raw typst. A footnote in the source is printed as its own paragraph directly after the paragraph that carries its marker (the transcription does this).
 
 ## Layout
 
 - Letter size; margins 1 inch on every side; body 12 pt EB Garamond, single spaced (0.5 em leading), 12 pt between paragraphs, first-line indent 0.5 inch.
 - Caption: three-column grid, as in the adversary-complaint folder.
+- Signature: a final body paragraph is kept in the same unbreakable block as the signature block, so the signature never stands alone on a page (convention; found by the overlay review of the transcription).
 - Footer: page number, 10 pt, centered.
 
 ## Gate 2 review (current PDF)
 
-sha256 of `samples/OUTPUT-fictional-stay-relief.pdf`: `066321b25eb529fe7ca787867e8b6dd1dad7a2298cb6daad80e8424b23b863aa`
+sha256 of `samples/OUTPUT-northern-beef-packers.pdf`: `21796d03229375ec9b9bea8da24452a904725ae6596dd6e7b8005f0846133b61`
 
-There is no exemplar, so no row compares a page with a filed page. The rows check the page against the rules above.
+Pairing from `samples/OVERLAY-northern-beef-packers.txt` (by text): ours 1 = filed 1; ours 2 = filed 2; ours 3 = filed 5; ours 4 = filed 7; ours 5 = filed 8; ours 6 = filed 10; ours 7 = filed 12; ours 8 = filed 14; ours 9 = filed 15. Word overlap per page: 89%, 56%, 54%, 53%, 63%, 67%, 53%, 72%, 62%. Word overlap is low on most pages because our render is single spaced and the filing is double spaced, so the same words sit on fewer, longer pages; it is a pairing aid, not a score.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
-| 1 | none (rules: R. 9004-1(a)(1), 9004-2, 9013(b)) | Caption: court name, `In re:`, debtor name, SSN last four, `aka` line, `Debtor.` right-aligned, `Bankr. No.`, `Chapter 13`; no adversary block (main case). Title centered bold, wraps to "SUPPORT" on line 2 (a one-word line). Opening sentence states movant, relief and basis. Headings: MEMORANDUM centered; I. Facts and II. Argument left bold; a numbered list in the argument; III. Conclusion. Margins and type size as set. | PASS for the rule items. ACCEPTED: the one-word second title line is a typesetting result of the title's length, not a defect the rules set; a shorter title or a longer line length is the author's choice. |
-| 2 | none | `DATED January 1, 2001.`, signature block at the middle of the page, `CERTIFICATE OF SERVICE` centered bold, the certificate text and its signature. The page holds only the signature and the certificate; no body text is split. | PASS |
+| 1 | filed p.1 | Caption matches: court name, `In re:`, debtor, TIN last four, `Bankr. No. 13-10118`, `Chapter 11`, `Hon.`, hearing date and time. Title centered bold, seven lines. The generated opening sentence (movant, relief, basis, from the frontmatter, FRBP 9013(b)) is not in the filing, which opens "hereby submits this Memorandum in Support". | PASS for the caption. ACCEPTED: the opening sentence is a rule-driven template element and differs from this filing. |
+| 2 | filed p.2 | Preliminary statement and background; `#` headings centered bold. First-line indent comparable. The paragraph gap and line spacing differ (filing is double spaced: see OPEN below). The filing's headings are bold small caps with an underline; the template's are bold caps. | PASS for structure. ACCEPTED: heading style (one filer; not a rule). |
+| 3 | filed p.5 | Section headings `##` numbered with a bold run-in title; the body and the citation string set in the template's own justification (left, unjustified, as in the filing). | PASS |
+| 4 | filed p.7 | Footnote 1 printed as its own paragraph after its paragraph, with a superscript number. The filing sets it at the foot of the page. | ACCEPTED: the template has no footnote support; the transcription places the note after its paragraph. |
+| 5 | filed p.8 | Footnote 2 and point 3 (fee) and point 4 (interest rate); the numbers, amounts and dates match the filing. | PASS |
+| 6 | filed p.10 | Footnote 3 after its paragraph; point 5 (`¶ 20(D)`) and point 6 (`¶ 20(E)`), numbers and headings as in the filing. | PASS |
+| 7 | filed p.12 | Points 7 to 11. | PASS |
+| 8 | filed p.14 | Points 12 to 14 and `CONCLUSION` centered bold, with the WHEREFORE paragraph. The page ends after the conclusion, and the signature moves to page 9 with it (the overlay review found the signature alone on a page; fixed in the template). | PASS |
+| 9 | filed p.15 | Conclusion, the date line, signature block at about the middle of the page (the filing's block starts at about the same position as ours), signer, firm, pro hac vice counsel block. Differences in wording: the filing has `Dated: August 7, 2013.` and `Respectfully submitted,` with the entity name `WHITE OAK GLOBAL ADVISORS, LLC` and `By /s/`; the template prints `DATED <date>.` and `/s/ <signer>`, with the role line carrying the party. | PASS for position and content. ACCEPTED: the template's signature wording (the role line names the party). |
+
+Also compared (tier 2, not in the table): the filing's CM/ECF header (`Case: 13-10118 Document: 134 Filed: 08/07/13 Page n of 15`, blue, top of each page) is generated by the court's system on filing, not by the filer's template, so the template does not print it. ACCEPTED.
+
+OPEN (tier 2, decision for David): **line spacing.** The filing is double spaced (checked on page 3 of the PDF). The template is single spaced by a stated choice (README "Layout"). The local rules (Bankr. D.S.D. R. 9004-1 and the full June 2024 text, searched for "spacing" and "double") set no spacing or font size, so double spacing is one filer's choice, not a rule, and one exemplar cannot establish it as a clerk's convention. Changing it would make the render about 15 pages (the filing's length) instead of 9. Not changed here.
 
 ## Known gaps and open choices
 
-1. **No exemplar, so tier 2 is not judged.** Layout conventions for motions (title placement, memorandum headings, certificate placement, prayer style, the lead-in sentence) are the template's own choices, not checked against a filing. This is the main gap. The BLOCKED note above is the record.
-2. **No local Rule 9013 exists.** The brief says "per this court's local bankruptcy rules" for FRBP 9013. The court's June 2024 rules have no Rule 9013. The template follows the rules that do exist (9004-1, 9004-2, 7010-2, 7007-1, 9014-4, 7056-1).
-3. **Brief not required.** Bankr. D.S.D. R. 9004-1(f) says a party need not submit a brief with a motion unless a rule or order directs one. Summary judgment (R. 7056-1(b)) is the directed case. The template does not know the motion type; the author decides whether to attach a separate brief.
-4. **Font size.** No local rule sets a size. 12 pt EB Garamond (the only font vendored) is a choice, not a rule.
-5. **Caption for an adversary motion** shares its code with `../adversary-complaint/`; the adversary branch is exercised by the code path but not by a sample (the only sample is a main-case motion). A second sample with `adversary_no` would be the test.
-6. **Certificate of service.** Its wording (CM/ECF notice, mail to the debtor and the debtor's attorney) is conventional text in the sample, not a rule. Local rules and FRBP 9013 do not prescribe it.
-7. **Fictional sample.** The sample's legal content (the stay-relief standard, the 4001(a)(3) waiver) is illustrative and not a legal opinion; a real motion has its own authorities.
-8. **Check tooling not run.** As in the adversary folder, `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this folder is a doc-type folder. The overlay failed (no exemplar).
+1. **One filer for tier 2.** The exemplar is one memorandum from one lender's counsel. Layout conventions (double spacing, signature position, title placement, the opening sentence) are judged against that filing alone; tier 3 (matching this filer exactly) is not chased.
+2. **Memorandum, not motion.** The filing is a memorandum in support of the debtor's motion (Doc 45); the motion itself is not on RECAP. The template's opening sentence is generated from the frontmatter and does not appear in the filing.
+3. **No local Rule 9013 exists.** The brief says "per this court's local bankruptcy rules" for FRBP 9013. The court's June 2024 rules have no Rule 9013. The template follows the rules that do exist (9004-1, 9004-2, 7010-2, 7007-1, 9014-4, 7056-1).
+4. **Brief not required.** Bankr. D.S.D. R. 9004-1(f) says a party need not submit a brief with a motion unless a rule or order directs one. Summary judgment (R. 7056-1(b)) is the directed case. The template does not know the motion type; the author decides whether to attach a separate brief.
+5. **Font size and spacing.** No local rule sets a size or spacing. 12 pt single-spaced EB Garamond (the only font vendored) is a choice, not a rule. See the OPEN spacing row above.
+6. **Caption for an adversary motion** shares its code with `../adversary-complaint/`; the adversary branch is exercised by the code path but not by a sample (the only sample is a main-case motion). A second sample with `adversary_no` would be the test.
+7. **Certificate of service.** Its wording is conventional text, not a rule. The filing's certificate is docket Attachment 1, not in the PDF, so this transcription has none.
+8. **Check tooling not run.** As in the adversary folder, `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this folder is a doc-type folder.
 
 ## Loop log
 
-- Iteration 1: built the template from the rules; rendered the fictional sample. The caption, the opening sentence and both pages rendered without warnings.
+- Iteration 1: built the template from the rules; rendered a fictional main-case sample. Exemplar search: no usable filing found; BLOCKED.
+- Iteration 2 (2026-10-14): new CourtListener search (sdb, RECAP) found *Northern Beef Packers*, Doc 134, a 15-page text-layer memorandum in support of a debtor's motion. Added the judge and hearing lines to the caption (optional frontmatter). Transcribed the filing as `samples/INPUT-northern-beef-packers.md` (replacing the fictional sample). Rendered (9 pages), overlaid, and viewed all 9 pages. Fixed one defect the overlay review exposed: the signature block stood alone on page 9; a final body paragraph now stays with the signature block.
