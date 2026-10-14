@@ -7,7 +7,7 @@ Doc type `answering-brief` of court `ca8`. One self-contained folder: exemplar, 
 | Exemplar (filed, text-based PDF) | `exemplars/FILED-EXAMPLE-banks-v-costar-25-3320-answering-brief.pdf` (source: `exemplars/SOURCE.md`) | yes |
 | Sample markdown | `samples/banks-costar-response.md` | yes |
 | Rendered sample | `samples/banks-costar-response.pdf` (14 pages) | render=ok |
-| Overlay (red = ours, blue = filed) | `samples/banks-costar-response-overlay.pdf`, `samples/banks-costar-response-overlay.txt` | overlay=ok |
+| Overlay (red = ours, blue = filed) | `samples/OVERLAY-banks-costar-response.pdf`, `samples/banks-costar-response-overlay.txt` | overlay=ok |
 | Template | `typst/main.typ` (entry), `typst/ca8-answering-brief.typ` | |
 
 Build (from the repo root; the toolchain is typst 0.15.0, poppler, ImageMagick):
@@ -56,7 +56,7 @@ One `.md` file: YAML frontmatter, then the body. The template builds the cover, 
 
 ## What the overlay shows
 
-`samples/banks-costar-response-overlay.pdf` puts our render (red) over the filed exemplar page (blue), pages paired by word overlap; black is where both agree. The page map is in `-overlay.txt`. It is a diagnostic, not a score: the sample is a portion of a 58-page brief, so the pages after the first few pair with the exemplar's pages where the same text appears, and where a page has no counterpart the red stands alone. Overlap by page: cover 98%, summary 100%, disclosure 83%, TOC 52% (different entries and page numbers), TOA 29% and 16% (the sample cites a subset), body 50-76%, conclusion 30%, certificates 85-100%.
+`samples/OVERLAY-banks-costar-response.pdf` puts our render (red) over the filed exemplar page (blue), pages paired by word overlap; black is where both agree. The page map is in `-overlay.txt`. It is a diagnostic, not a score: the sample is a portion of a 58-page brief, so the pages after the first few pair with the exemplar's pages where the same text appears, and where a page has no counterpart the red stands alone. Overlap by page: cover 98%, summary 100%, disclosure 83%, TOC 52% (different entries and page numbers), TOA 29% and 16% (the sample cites a subset), body 50-76%, conclusion 30%, certificates 85-100%.
 
 ## Render review (Gate 2 equivalent, recorded by hand)
 
