@@ -67,7 +67,7 @@ On March 10, 2026, the Debtor also paid $142,500 in cash to Mr. Sample, which wa
 
 The Transfers were made within two years before the petition date. The petition commenced this case on May 22, 2026 (the "Petition Date").
 
-## The Debtor's Financial Condition
+## The Debtor’s Financial Condition
 
 When the Property Transfer was made, the Debtor was insolvent or became insolvent as a result of it. Its liabilities exceeded the fair value of its assets, and it was generally not paying its debts as they came due.
 
@@ -87,7 +87,7 @@ Neither Transfer was disclosed to the Debtor's unsecured creditors before the Pe
 
 After the Transfers, the Debtor retained no material assets other than the cash in its operating account, which was itself subject to a restraint by the secured lender.
 
-## The Trustee's Demand
+## The Trustee’s Demand
 
 On June 2, 2026, the Trustee sent a written demand to Transferee and to Mr. Sample requesting that each return the Transfers to the estate and provide an accounting of the Property's rents and proceeds since March 5, 2026.
 
