@@ -14,3 +14,7 @@ Sources:
 - https://github.com/wine-mirror/wine/blob/master/fonts/tahoma.sfd (copyright and LGPL text in name table)
 - https://github.com/wine-mirror/wine/tree/master/fonts
 - https://dejavu-fonts.github.io/License.html
+
+## Decision (team lead, fb-595.7.3 follow-up)
+
+Use DejaVu Sans as a labelled, non-metric visual fallback for Tahoma. The repo must render with vendored fonts only, so it cannot require a licensed Tahoma. Vendored in `fonts/dejavu-sans/` (see its `README.md`, `SOURCE.md`). Pagination may differ from real Tahoma.
