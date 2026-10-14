@@ -35,7 +35,8 @@ Not verified: the ECF Electronic Case Filing Procedures Guide (PDF requirements 
 
 ## Layout choices (tier 2)
 
-- Typeface and size: EB Garamond (the only typeface vendored in `fonts/`), 13 point, double-spaced (2.3 em; measured pitch 29.9 pt in our render). The exemplar is Times New Roman at 13 point with the same pitch (measured from the filed PDF's line spacing). Choosing 13 point matches the memorandum template in this court; it is a tier-2 choice, not a rule.
+- Typeface: EB Garamond. D. Minn. LR 7.1(h)(1) (complete set, PDF dated June 10, 2026, text checked 2026-10-14) sets a 13-point size and names no face, so no court-named substitute applies and EB Garamond is kept (`docs/FONTS.md`, rule 3). The exemplar's Times New Roman is one filer's choice, not a requirement.
+- Size and spacing: 13 point, double-spaced (2.3 em; measured pitch 29.9 pt in our render). The exemplar is Times New Roman at 13 point with the same pitch (measured from the filed PDF's line spacing). Choosing 13 point matches the memorandum template in this court; it is a tier-2 choice, not a rule.
 - Margins: 1 inch on all sides; page numbers centred in the bottom margin (LR 5.2(a)).
 - Caption: court name centred and bold; party box with rules above and below the party column; right column: "Civil No. ____" (the clerk fills the file number; a complaint has none until filed), then the bold title in capitals. The exemplar's caption matches this structure.
 - Lead-in paragraph (unnumbered) before the first heading, from the frontmatter `lead_in`.
@@ -97,6 +98,8 @@ Every page of the current PDF was rendered at 60 dpi and viewed. Pages were comp
 - Round 1 fix (transcription): paragraph 12's exhibit citation read "(See Ex. C, Norton TORQ Instructions;" in the sample; corrected to the exemplar's "(See Ex. C; Norton TORQ Instructions;". Re-rendered (still 13 pages).
 - Final review, pages 1 to 13 on the current PDF: page 1 (court name, caption, lead-in, PARTIES, paragraphs 1 to 3): PASS. Page 2 (paragraphs 4 to 7, JURISDICTION AND VENUE, PATENTS-IN-SUIT): PASS. Page 3 (paragraphs 8 to 12, COUNT I heading and sub-heading): PASS. Page 4 (paragraphs 12 to 15, indirect-infringement sub-heading): PASS. Page 5 (paragraphs 15 to 16): PASS. Page 6 (paragraphs 16 to 18): PASS. Page 7 (paragraphs 19 to 21): PASS. Page 8 (paragraphs 21 to 26, COUNT II): PASS. Page 9 (paragraphs 26 to 28): PASS. Page 10 (paragraphs 28 to 30): PASS. Page 11 (paragraphs 31 to 34, the 271(c) sub-heading at the top): PASS. Page 12 (paragraphs 34 to 36, DEMAND, PRAYER, items A and B): PASS. Page 13 (prayer items C to E, date, signature block): PASS.
 - Page 1 has a few lines of white space at the foot: the heading "JURISDICTION AND VENUE" is kept with its first paragraph, which does not fit. ACCEPTED: keep-with-next is the intended behaviour.
+
+- Fonts pass (fb-595.7.5.13): font list checked against the rule, no face named, so EB Garamond kept (no change to the template). Re-rendered with `tools/render.sh` (exit 0, no warnings, 13 pages); `pdffonts`: EB Garamond Regular and Bold embedded only. Overlay re-run against the exemplar (`exemplars/FILED-EXAMPLE-3m-v-saint-gobain-14-cv-00128-complaint.pdf`, 14 pages, fetched from the URL in `exemplars/SOURCE.md`). Every page of the new render viewed again: PASS.
 
 Pages reviewed: 13 of 13.
 
