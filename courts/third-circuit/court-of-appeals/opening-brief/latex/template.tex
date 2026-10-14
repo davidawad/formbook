@@ -1,0 +1,134 @@
+% U.S. Court of Appeals for the Third Circuit: brief (LaTeX engine), one template for each doc type.
+% The same form as typst/ca3-*.typ (FRAP 32(a); L.A.R. 32.1, 32.2). pandoc writes the markdown body;
+% ca3.lua turns the frontmatter and every heading into the cover, the tables, the certificates and
+% raw LaTeX calls to the macros below. Built by tools/render-latex.sh (tectonic; two passes, because
+% the tables of contents and authorities are read from the aux file of the previous pass).
+% Fonts: the vendored EB Garamond only (fontdir); nothing from the system.
+\documentclass[14pt,letterpaper]{extarticle}
+\usepackage{fontspec}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{etoolbox}
+\usepackage{needspace}
+\usepackage{enumitem}
+\usepackage{longtable,booktabs,array}
+\usepackage{xcolor}
+
+\setmainfont[Path=$fontdir$eb-garamond/,Extension=.otf,UprightFont=*-Regular,BoldFont=*-Bold,ItalicFont=*-Italic,BoldItalicFont=*-BoldItalic]{EBGaramond}
+
+\hypersetup{colorlinks=false,pdfborder={0 0 0}}
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\raggedright
+\sloppy
+\setlist{nosep}
+
+% Double spacing (FRAP 32(a)(4)) at 14 point. Single spacing for headings, quotations, footnotes,
+% the tables and the signature blocks.
+\newcommand{\cadouble}{\fontsize{14}{31}\selectfont}
+\newcommand{\casingle}{\fontsize{14}{17}\selectfont}
+\AtBeginDocument{\cadouble}
+\renewcommand{\normalsize}{\cadouble}
+\renewcommand{\footnotesize}{\casingle}
+
+% Footnotes: 14 point, single spaced (L.A.R. 32.2(a)); a rule of 30% of the line; the number, a space, the note.
+\setlength{\footnotesep}{0.9em}
+\renewcommand{\footnoterule}{\kern -3pt \hrule width 0.3\linewidth height 0.5pt \kern 2.6pt}
+\makeatletter
+\renewcommand{\@makefntext}[1]{\noindent\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
+\makeatother
+
+% Block quotations: single spaced, indented half an inch on each side.
+\renewenvironment{quote}{\begin{list}{}{\leftmargin=0.5in \rightmargin=0.5in \topsep=0.9em \itemsep=0pt \parsep=0pt}\item\relax\casingle\ignorespaces}{\end{list}}
+
+\makeatletter
+% ---- Headings. ca3.lua computes each printed label and indent, and emits:
+%      \cahead{level}{indent}{label}{title}  indent = half inches of the label column from the margin
+%      \capoint{label}{title}                the centered point heading of an Argument (level 2)
+%      \caheadplain{title}                   a heading that is neither numbered nor in the contents
+\newcommand{\cahang}[3]{%
+  \noindent\hspace*{#1}\makebox[0.5in][l]{#2}%
+  \begin{minipage}[t]{\dimexpr\linewidth-#1-0.5in\relax}\raggedright #3\end{minipage}\par}
+\newcommand{\cahead}[4]{%
+  \ifnum#1=1\relax
+    \par\addvspace{1.5em}%
+    \begingroup\casingle\centering\textbf{\MakeUppercase{#4}}\par\endgroup
+    \addvspace{1.1em}\nopagebreak%
+  \else
+    \par\addvspace{1.1em}%
+    \begingroup\casingle
+    \ifnum#1>3\relax
+      \cahang{\dimexpr0.5in*#2\relax}{\textbf{\textit{#3}}}{\textbf{\textit{#4}}}%
+    \else
+      \cahang{\dimexpr0.5in*#2\relax}{\textbf{#3}}{\textbf{#4}}%
+    \fi
+    \endgroup
+    \addvspace{0.9em}\nopagebreak%
+  \fi
+  \protected@write\@auxout{}{\string\tocentry{#1}{#2}{#3}{#4}{\thepage}}%
+}
+\newcommand{\capoint}[2]{%
+  \par\addvspace{1.2em}\needspace{4\baselineskip}%
+  \begingroup\casingle\centering\textbf{\textsc{#1\ #2}}\par\endgroup
+  \addvspace{1em}%
+  \protected@write\@auxout{}{\string\tocentry{2}{0}{#1}{#2}{\thepage}}%
+}
+\newcommand{\caheadplain}[1]{%
+  \par\addvspace{1.5em}\needspace{4\baselineskip}%
+  \begingroup\casingle\centering\textbf{\MakeUppercase{#1}}\par\endgroup\addvspace{1.1em}}
+
+% ---- Table of contents. Entries are written to the aux file by the headings, read on the next pass.
+\newcommand{\toc@list}{}
+\newcommand{\tocentry}[5]{\g@addto@macro\toc@list{\tocitem{#1}{#2}{#3}{#4}{#5}}}
+\newcommand{\tocitem}[5]{%
+  \ifnum#1=1\relax
+    \par\addvspace{0.6em}\casingle\noindent\MakeUppercase{#4}\ \dotfill\ #5\par
+  \else
+    \par\addvspace{0.35em}\casingle
+    \cahang{\dimexpr0.5in*#2\relax}{#3}{#4\ \dotfill\ #5}%
+  \fi}
+\newcommand{\tocprint}{\toc@list}
+
+% ---- Table of authorities. \toahit writes one entry per citation; the next pass reads them back.
+\newcommand{\toahit}[1]{\protected@write\@auxout{}{\string\toaentry{#1}{\thepage}}}
+\newcommand{\toaentry}[2]{%
+  \@ifundefined{toa@n@#1}{%
+    \expandafter\gdef\csname toa@n@#1\endcsname{0}%
+    \expandafter\gdef\csname toa@p@#1\endcsname{}%
+    \expandafter\gdef\csname toa@last@#1\endcsname{}}{}%
+  \expandafter\xdef\csname toa@n@#1\endcsname{\the\numexpr\csname toa@n@#1\endcsname+1\relax}%
+  \def\toa@cur{#2}%
+  \expandafter\ifx\csname toa@last@#1\endcsname\toa@cur\relax\else
+    \expandafter\ifx\csname toa@p@#1\endcsname\empty
+      \expandafter\gdef\csname toa@p@#1\endcsname{#2}%
+    \else
+      \expandafter\g@addto@macro\csname toa@p@#1\endcsname{, #2}%
+    \fi
+    \expandafter\gdef\csname toa@last@#1\endcsname{#2}%
+  \fi}
+\newcommand{\toacount}[1]{\@ifundefined{toa@n@#1}{0}{\csname toa@n@#1\endcsname}}
+\newcommand{\toapages}[1]{\ifnum\toacount{#1}>6\relax\emph{passim}\else\csname toa@p@#1\endcsname\fi}
+% A group heading (with "Page(s)" on the first group) prints when one of its authorities was cited.
+\newcommand{\toagroup}[3]{%
+  \gdef\toa@any{0}%
+  \@for\toa@k:=#2\do{\ifnum\toacount{\toa@k}>0\relax\gdef\toa@any{1}\fi}%
+  \ifnum\toa@any=1\relax
+    \par\addvspace{1.4em}\casingle\noindent\textbf{#1}%
+    \ifnum#3=1\relax\hfill\textbf{\underline{Page(s)}}\fi\par
+  \fi}
+% An authority prints when it was cited.
+\newcommand{\toaitem}[3]{%
+  \ifnum\toacount{#1}>0\relax
+    \par\addvspace{0.7em}\casingle
+    \begin{minipage}[t]{\linewidth}\raggedright\hangindent=0.35in\hangafter=1\noindent #2\ \dotfill\ \toapages{#1}\end{minipage}\par
+  \fi}
+
+% ---- Signature blocks: single spaced, on the right half of the page, kept together.
+\newcommand{\sigblock}[1]{%
+  {\Needspace{6\baselineskip}\par\addvspace{1.4em}\casingle
+  \hspace*{0.5\linewidth}\begin{minipage}[t]{0.5\linewidth}\raggedright #1\end{minipage}\par}}
+\makeatother
+
+\begin{document}
+$body$
+\end{document}
