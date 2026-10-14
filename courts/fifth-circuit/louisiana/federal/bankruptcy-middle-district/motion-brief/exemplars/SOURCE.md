@@ -12,6 +12,7 @@ Exemplar: `FILED-EXAMPLE-kologik-24-10311-motion-brief.pdf`, pages 1-19 of 42 (u
 | Filer | Debtors Kologik, LLC; Kologik Capital, LLC; Kologik Capital II, LLC, by proposed counsel Kelly Hart Pitre (Louis M. Phillips, #10505; second block: Erin K. Arnold, Amelia L. Hurt, New Orleans) |
 | Date filed | 04/23/2024 (ECF stamp "Filed 04/23/24 Entered 04/23/24 15:48:16") |
 | Date fetched | 2026-10-14 |
+| Local file | `FILED-EXAMPLE-kologik-24-10311-motion-brief.pdf`: pages 1-19 extracted from the 42-page fetched PDF (`pdfseparate` and `pdfunite`, no page changed). SHA-256 of the fetched 42-page file `d2716b3cb128a8982a2b30996b702ac405ac04af323a8b1d84f87b4b445fe909`; of the 19-page file `c17a354c04d90297db846271de08a2ca3855b99098336d6735e8aecae1b5e116`. Restored 2026-10-14: the PDF was missing from the tree, so the overlay could not run. |
 | Pages kept | 1-19 (the motion, its Basis for Relief, Conclusion and signature). Pages 20-42 of Doc. 8 (the proposed Interim Order and Final Order) are not in the exemplar. |
 | Text | Text-based PDF (`pdftotext` extracts the full text). |
 
