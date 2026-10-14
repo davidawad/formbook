@@ -7,9 +7,9 @@ Folder: `courts/fourth-circuit/west-virginia/federal/southern-district/complaint
 |---|---|
 | exemplar | yes, with limits: `exemplars/FILED-EXAMPLE-castro-2-23-cv-00598-complaint.pdf` (35 pages, **image-only**, filed **pro se**; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-castro-complaint.md` (a portion: caption, opening, Sections I and II, Injunctive Relief, signature, verification; see Known gaps) |
-| render | ok: `samples/OUTPUT-castro-complaint.pdf`, 9 pages (caption page, table of contents, body numbered 1 to 6 with the signature, verification), typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ran, produced `samples/OVERLAY-castro-complaint.pdf` and `.txt`; **not a meaningful comparison**: the exemplar has no text layer, so every page pairs at 0 to 2.6% word overlap (see Overlay) |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| render | ok: `samples/OUTPUT-castro-complaint.pdf`, 9 pages (caption page, table of contents, body numbered 1 to 6 with the signature, verification), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14) |
+| overlay | ran 2026-10-14, produced `samples/OVERLAY-castro-complaint.pdf` and `.txt`; **not a meaningful comparison**: the exemplar has no text layer, so every page pairs at 0 to 2.6% word overlap (see Overlay). The exemplar was restored from the URL in `exemplars/SOURCE.md` (35 pages, sha256 `a84eea9daf59bafce0ed8d23b8bb33771f6f79f0bee02deccaf1de4c95ee62f0`) because it was missing from the snapshot |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on 2026-10-14) |
 
 File names: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt`, so those names are used (see the motion-brief README for the same note).
 
@@ -69,7 +69,7 @@ The first render showed the heading text and numbers larger than the body and th
 4. **Table of contents is generated.** The filed table of contents runs to the depth of its headings (about 4 pages); the template's TOC is generated from the sample's headings only.
 5. **Caption addresses.** The filed caption gives the parties' addresses; the template prints whatever `names` lines the sample gives. A filing without addresses prints none.
 6. **Not produced:** the civil docket cover sheet (LR Civ P 3.4(a)); a summons; a disclosure statement. The verification is included because the filed complaint has one; a complaint need not be verified.
-7. **Typeface.** EB Garamond, as in the memorandum template (see that README).
+7. **Typeface.** EB Garamond, as in the memorandum template (see that README). No local rule names a face for a complaint, so no substitute is used; the memorandum's rule (LR Civ P 7.1(a)(4)) requires no particular face either, so EB Garamond is kept as a choice, not a court requirement.
 8. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at the court root, and this doc-type folder is not that shape. The brief forbids editing `tools/`, so the gates were not run.
 
 ## Searches tried (exemplar)

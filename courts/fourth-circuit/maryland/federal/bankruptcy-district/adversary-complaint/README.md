@@ -18,6 +18,7 @@ File names follow the repo's role convention (`INPUT-` for markdown, `OUTPUT-` f
 | Source | Requirement | Where it is in the template |
 |---|---|---|
 | Local Bankruptcy Rule 9004-1 (Ver. 25.01, Dec. 1, 2025, printed p. 66), https://www.mdb.uscourts.gov/files/localrules.pdf, fetched 2026-10-14 | Papers filed by an attorney: legible; at least a one-inch margin on each side; 12-point or larger type for text, 10-point or larger for footnotes. | `page-margin = 1in`, `type-size = 12pt`; footer also 12 pt (no footnotes in the template). |
+| Local Bankruptcy Rule 9004-1, text checked 2026-10-14 in the PDF of the same URL (p. 66) | Typeface: none named. The rule requires "12 point or larger font for text", and names no face. | `font-family = "EB Garamond"` kept (see Known gaps, item 2). |
 | Fed. R. Bankr. P. 9004(a), (b), https://www.law.cornell.edu/rules/frbp/rule_9004, fetched 2026-10-14 | (a) clearly legible. (b) caption: court's name; the case's title; case number and, if appropriate, adversary-proceeding number; a brief designation of the document's character. | `caption` (court lines, party block, case number, adversary number) and the title line. |
 | Local Rule 9013-1(a) (p. 76) | Caption with the court's name, the case name, the case number, the chapter, and a descriptive title; in an adversary, the names of the plaintiff and the defendant. | `caption.in_re`, `caption.parties`, `chapter`, `title`. |
 | Fed. R. Civ. P. 10(a), (b) (made applicable to adversary pleadings by Fed. R. Bankr. P. 7010), https://www.law.cornell.edu/rules/frcp/rule_10, fetched 2026-10-14 | (a) caption with the court's name, a title, a file number and a Rule 7(a) designation. (b) claims in numbered paragraphs. | Allegations numbered by the template (`allegations()`); the caption as above. |
@@ -61,7 +62,7 @@ Paragraph numbers are not transcribed: the template numbers the allegations. The
 ## Known gaps and open choices
 
 1. **Only one exemplar; tier 2 is not met.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search (CourtListener RECAP, `court=mdb`, `type=r`, adversary complaints) also found Roman Catholic Archbishop of Baltimore (Adv. 26-00041, Official Committee of Unsecured Creditors, 16 pp., counsel Richard L. Costella) and Hughes Construction Management, Inc. v. Marrero Astacio (Adv. 26-00115, 18 pp.). Neither was saved, because the brief asks for one exemplar per doc type. A second filer should be collected before this doc type is judged against tier 2.
-2. **Font.** The exemplar is Times New Roman. The only vendored font is EB Garamond, which has a smaller x-height at 12 pt, so the text looks smaller than the exemplar. The 12-point minimum is met. A Times-metric vendored font would remove the difference; that is a question for David.
+2. **Typeface: no court-named face; EB Garamond kept.** Local Rule 9004-1 requires 12-point or larger font and names no typeface, and Fed. R. Bankr. P. 9004 names none either. Per `docs/FONTS.md` ("No face named" row), the template keeps EB Garamond. The exemplar is in Times New Roman, which is the filer's choice, not a rule. The difference is visual only: EB Garamond has a smaller x-height at 12 pt, so the text looks smaller than the exemplar. Substitute: none (`EB Garamond` is the vendored face).
 3. **Caption style.** The exemplar uses a ")" column, and the template follows it. The motion-brief exemplar in the same court uses an asterisk column; both are seen in this court. Recorded as ACCEPTED.
 4. **Double spacing is a convention, not a rule.** Local Rule 9004-1 sets no line spacing; the exemplar is double-spaced, and the template follows it.
 5. **Certificate of service.** None is required for the complaint itself; service is by summons (see the table above). None is produced.
@@ -69,7 +70,7 @@ Paragraph numbers are not transcribed: the template numbers the allegations. The
 
 ## Overlay
 
-`samples/OVERLAY-kapitus-complaint.pdf` is the red/blue comparison: red is our render, blue is the filed exemplar. Pages are paired by shared words (`tools/overlay.sh`); the word overlap per page is 52%-88%, and the page map is in `OVERLAY-kapitus-complaint.txt`. Because the sample is abridged and the template is in EB Garamond, the overlay shows the difference in font and in the omitted Count III. It is a diagnostic, not a score.
+`samples/OVERLAY-kapitus-complaint.pdf` is the red/blue comparison: red is our render, blue is the filed exemplar. Pages are paired by shared words (`tools/overlay.sh`); the word overlap per page is 57%-94%, and the page map is in `OVERLAY-kapitus-complaint.txt`. The overlay was built against the filed exemplar fetched from the SOURCE.md URL (the PDF is not in this snapshot). Because the sample is abridged and the template is in EB Garamond, the overlay shows the difference in font and in the omitted Count III. It is a diagnostic, not a score.
 
 ## Review of the rendered pages (Gate 2 rows)
 

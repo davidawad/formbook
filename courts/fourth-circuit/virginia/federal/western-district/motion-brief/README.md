@@ -136,7 +136,7 @@ Azimi sample (9 pages):
 
 ## Known gaps and choices
 
-1. **Typeface.** Only EB Garamond is vendored in `fonts/`; the exemplars are Times New Roman (pdffonts on both). EB Garamond at 13 pt is used so its x-height is close to Times at 12 pt. That size is a judgment, not a rule (see the complaint README).
+1. **Typeface.** Face required: none. The W.D. Va. Local Civil Rules name no typeface, font size, or spacing rule (checked in full; see the complaint README), so EB Garamond stays. The exemplars are Times New Roman (pdffonts on both); that is a filer's habit, not a rule. EB Garamond at 13 pt is used so its x-height is close to Times at 12 pt. That size is a judgment, not a rule (see the complaint README).
 2. **Portion (Fitch).** The Argument's section 1 is cut to its heading and a note (its parts 1(a) to 1(c) are not transcribed); footnotes 10 to 13 and 20 are not transcribed. Footnote numbers are assigned by typst in order, so the filed footnote 21 renders as 10. Footnote 4 is placed at the sentence it follows in the text layer; the placement was reconstructed from the text layer and is approximate.
 3. **Heading numbers.** The template's sub-headings are arabic and letter (Fitch). The Azimi memorandum uses roman numerals for its points, which renders as "1." in our template: a style of one filer, so tier 3. Accepted.
 4. **Case names.** Roman in the sample (the text layer carries no italics), the same as the complaint and the cand samples. The template italicises `*...*` when a sample marks it.

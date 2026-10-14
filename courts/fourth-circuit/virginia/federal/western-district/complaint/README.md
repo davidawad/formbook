@@ -96,7 +96,7 @@ The overlay is a diagnostic, not a score. It shows the difference in position, n
 
 ## Known gaps and choices
 
-1. **Typeface.** Only EB Garamond is vendored in `fonts/`, and the rules set no typeface for pleadings. The exemplars are Times New Roman (pdffonts on the Extreme Driver exemplar shows Times-family faces). EB Garamond at 13 pt is used so its x-height is close to Times at 12 pt; the 13 pt value is a judgment, not a rule. A Times-metric font would remove the difference; that is a question for David and a change to the shared `fonts/`.
+1. **Typeface.** Face required: none. The W.D. Va. Local Civil Rules (`local_rules.pdf` on vawd.uscourts.gov, file created 2025-10-24; full text searched) name no typeface, font size, or spacing rule, so EB Garamond stays (font `EB Garamond`, no vendored substitute needed). The exemplars are Times New Roman (pdffonts on the Extreme Driver exemplar shows Times-family faces); that is a filer's habit, not a rule. EB Garamond at 13 pt is used so its x-height is close to Times at 12 pt; the 13 pt value is a judgment, not a rule.
 2. **Second filer, not transcribed.** Moler is the second exemplar (tier 2). Only its caption style is used here (the ")" caption, now tested with a temporary sample that was not committed, and one page of it rendered cleanly). The Moler complaint is not transcribed and not overlaid.
 3. **No exhibits, cover sheet, Rule 7.1 statement, or summons** are produced (see above).
 4. **Footer.** The page number only. The exemplars print the ECF header line (court's stamp), which is not reproduced; it is added by the clerk when the PDF is filed.

@@ -10,7 +10,8 @@ Folder: `courts/fourth-circuit/north-carolina/federal/western-district/motion-br
 | sample md | `samples/INPUT-noble-motion-brief.md`: a portion of the memorandum (caption, opening, statement of the case, part of the facts, standard of review, arguments I to IV in part, conclusion, signature, AI certification, certificate of service) |
 | render | ok: `samples/OUTPUT-noble-motion-brief.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | overlay | ok: `samples/OVERLAY-noble-motion-brief.pdf` and `samples/OVERLAY-noble-motion-brief.txt` (`tools/overlay.sh`) |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none named (LCvR 7.1(d) sets a 12-point minimum only; a judge's standing order may set a face). Substitute: none; **EB Garamond kept** per `docs/FONTS.md` ("No face named"). Metric-compatible: n/a. |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-checked 2026-10-14 with the font pass, no template change) |
 
 File names follow the tools' defaults (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`) rather than the
 `<id>.md` / `<id>-overlay.pdf` names in the task brief, because `tools/render.sh` and `tools/overlay.sh` read and write
@@ -34,7 +35,7 @@ certification's two parts. They do not quote the order.
 
 ## Layout
 
-- US Letter, one-inch margins on all four sides, 12 pt EB Garamond (vendored in `fonts/`, the only family vendored).
+- US Letter, one-inch margins on all four sides, 12 pt EB Garamond (vendored in `fonts/`; no face is named by the rules, so it stays per `docs/FONTS.md`).
 - First page: the court title (UNITED STATES DISTRICT COURT / FOR THE WESTERN DISTRICT OF NORTH CAROLINA / the division),
   then a caption: the party column with one line per row, a ")" column the same height, and the right column with
   "Civil Action No." and the title lines.
@@ -87,7 +88,7 @@ do not measure quality.
 3. **Page limit.** LCvR 7.1(d) sets 25 pages for "any brief" and does not say which pages count. The template does not
    count pages; the filed exemplar is 25 pages including the signature and the certificate of service. Per-judge
    standing orders can change the limit.
-4. **Font.** Same as the complaint: EB Garamond at 12 pt, the only vendored family; the exemplar uses Times New Roman,
+4. **Font.** Same as the complaint: no face is named (LCvR 7.1(d)), so EB Garamond at 12 pt stays per `docs/FONTS.md`; the exemplar uses Times New Roman,
    which looks larger at 12 pt. A Times-metric font would remove the difference; a decision for David.
 5. **Footnotes.** The exemplar has footnote 1 (exhibits). The markdown contract has no footnotes, so the sample omits
    it and the template cannot print one.

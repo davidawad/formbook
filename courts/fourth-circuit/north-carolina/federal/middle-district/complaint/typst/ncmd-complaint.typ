@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // NCMD-FORM-002: proportional font (vendored in /fonts; the rule's Times-type examples are not vendored)
+#let font-family = "EB Garamond"         // NCMD-FORM-002: proportional font; the rule names no face, so EB Garamond stays (docs/FONTS.md "No face named")
 #let type-size = 13pt                    // NCMD-FORM-002: proportional font "no smaller than 13 point" (LR 7.1(a))
 #let lines-per-page = 27                 // NCMD-FORM-003: "no more than 27 lines of regularly spaced text on a page" (LR 7.1(a))
 #let pitch = 23pt                        // one double-spaced line; 27 x 23 pt = 621 pt, inside the 630 pt text height (see README.md)

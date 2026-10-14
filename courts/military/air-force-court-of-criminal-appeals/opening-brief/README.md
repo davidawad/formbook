@@ -6,7 +6,7 @@
   - `FILED-EXAMPLE-douglas-40324-opening-brief.pdf` (*United States v. Douglas*, ACM 40324 (f rev), filed 26 April 2024, Maj Bruha). Full brief and certificate. Primary: the overlay defaults to it.
   - `FILED-EXAMPLE-howard-40478-opening-brief.pdf` (*United States v. Howard*, ACM 40478 (f rev), filed 29 September 2024, Maj Blyth). Front matter (cover, TOC, TOA), assignments of error, start of the statement of facts, certificate. The only one of the two with a TOC and TOA.
 - Samples: `samples/INPUT-douglas-opening-brief.md` (full transcription, 13 pages rendered) and `samples/INPUT-howard-opening-brief.md` (excerpt, 7 pages rendered; `excerpt: true`).
-- Status: template built; render, overlay and page review done for both samples (below). Not reviewed by a human. `court.json` and the court root are untouched.
+- Status: template built; render, overlay and page review done for both samples (below). Fonts pass, 2026-10-14: the typeface stays EB Garamond (Known gaps, 1); both renders and both overlays re-run; every page re-viewed. The `FILED-EXAMPLE-*.pdf` files named above are not in this snapshot, so the overlays were run against extracts of the page ranges `exemplars/SOURCE.md` cites, fetched from the URLs there and kept outside the repo. Not reviewed by a human. `court.json` and the court root are untouched.
 
 ## Files
 
@@ -28,7 +28,7 @@ Primary source: *United States Air Force Court of Criminal Appeals Rules of Prac
 
 | Rule | Requirement | Where the template uses it |
 |---|---|---|
-| AFCCA R. 17.1(a) (p. 18) | "All appellate filings, excluding attachments, shall appear in proportional 12-point type—e.g., Times New Roman or Century Schoolbook—typed and double-spaced"; one side of 8.5 × 11 white paper; margins at least one inch on all four sides; no embedded images | `type-size = 12pt`, `body-leading` (double spacing), `page-margin = 1in`, letter paper. The typeface is EB Garamond (see Known gaps). |
+| AFCCA R. 17.1(a) (p. 18) | "All appellate filings, excluding attachments, shall appear in proportional 12-point type—e.g., Times New Roman or Century Schoolbook—typed and double-spaced"; one side of 8.5 × 11 white paper; margins at least one inch on all four sides; no embedded images | `type-size = 12pt`, `body-leading` (double spacing), `page-margin = 1in`, letter paper. Typeface: no face is required (the rule's Times New Roman and Century Schoolbook are examples, "e.g."; any proportional type is allowed), so the template keeps EB Garamond, the vendored default (Known gaps, 1). |
 | AFCCA R. 17.1(a) (p. 18) | Citations conform to the AFCCA Citation Guide and the Bluebook (Bluebook controls) | Not checked; the template does not format citations |
 | AFCCA R. 17.1(b)-(f) (p. 18-19) | E-filing: PDF conversion, email subject line, narrative block, file naming, service certification | Outside the document; not generated (see Known gaps) |
 | AFCCA R. 17.2(c) (p. 19) | PII and sensitive information: redaction per the JAJM Redaction Guide | Outside the template. The transcriptions are of redacted public filings. |
@@ -62,7 +62,7 @@ Diagnostic only, not a score. Reading the Howard exemplar makes poppler print "x
 
 ## Page review (Gate 2)
 
-Every page of both `OUTPUT-*.pdf` files was rendered at 60 dpi and viewed. Typst printed no warnings. Fonts embedded: EB Garamond only (Regular, Italic, Bold, Bold Italic).
+Every page of both `OUTPUT-*.pdf` files was rendered at 60 dpi and viewed. Typst printed no warnings. Fonts embedded: EB Garamond only (Regular, Italic, Bold, Bold Italic). Re-checked in the fonts pass on 2026-10-14: the render and the page count (13 and 7) are unchanged; every page was re-rendered at 70 dpi and viewed, and the OK/ACCEPTED rows below still hold.
 
 **`douglas-opening-brief`, 13 of 13 pages:**
 
@@ -98,7 +98,7 @@ Tier-2 findings (OPEN or ACCEPTED): typeface (EB Garamond at 12 pt, see Known ga
 
 ## Known gaps
 
-1. **Typeface.** R. 17.1(a) names Times New Roman and Century Schoolbook as examples of proportional type and requires 12 pt. Neither is vendored (`fonts/` holds only EB Garamond, and `fonts/` is shared, not edited here). The template sets EB Garamond at 12 pt. EB Garamond has a smaller x-height than the two example faces, so the text looks smaller on the page than the filing. A human should decide whether to add a Times-metric face to `fonts/`.
+1. **Typeface.** R. 17.1(a) asks for "proportional 12-point type—e.g., Times New Roman or Century Schoolbook". The two faces are examples, and any proportional type is allowed, so no court-named face is required; the template keeps EB Garamond at 12 pt. The vendored substitute for Times New Roman, if David decides the filing convention should be matched, is Liberation Serif (`fonts/liberation-serif/`, metric-compatible); the change is one line, `font-family` in `typst/afcca-opening-brief.typ`, and is not made here. EB Garamond has a smaller x-height than the two example faces, so the text looks smaller on the page than the filing; this is a tier-2 point, not a tier-1 one.
 2. **Grostefon issues (R. 18.2).** The template does not produce the Appendix A for Grostefon issues. A brief with Grostefon issues must file that appendix separately.
 3. **E-filing wrapper (R. 17.1(b)-(d)).** The email subject line, the narrative block and the PDF naming are not generated. They are outside the document.
 4. **Index is authored, not computed.** The template draws the TOC and the TOA only when `index: true`. The page-limit check panics when a body runs over 30 pages without it, so a brief cannot silently miss the index. A brief over 30 pages whose body is under 30 pages cannot be detected.

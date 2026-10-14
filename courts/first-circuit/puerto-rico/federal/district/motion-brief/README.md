@@ -9,6 +9,7 @@ Doc type folder for a Rule 12(b) motion to dismiss with the memorandum of law in
 | Render | `samples/OUTPUT-franklin-memorandum.pdf`, **10 pages** (cover, TOC `i`, TOA `ii`, body 1–7), no typst warnings (`sh tools/render.sh courts/first-circuit/puerto-rico/federal/district/motion-brief samples/INPUT-franklin-memorandum.md`) |
 | Overlay | `samples/OVERLAY-franklin-memorandum.pdf` and `.txt` (`sh tools/overlay.sh courts/first-circuit/puerto-rico/federal/district/motion-brief franklin-memorandum`) |
 | Pages reviewed | 10 of 10 (rendered at 60 dpi and looked at; headings re-checked on the final render) |
+| Typeface | face required by the rules: **none named** (L.Civ.R. 7 sets a point size, 12 pt for a proportional font; secondary read, see below) → substitute: **EB Garamond** (no face named, `docs/FONTS.md`) → metric-compatible: n/a, visual only. The exemplar is set in Times New Roman, but an exemplar does not set a rule. Font list unchanged in `typst/prd-motion-brief.typ`. |
 
 Names: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt`, the names `tools/render.sh` and `tools/overlay.sh` read and write. The brief's `<id>.pdf` and `<id>-overlay.pdf` are the same files under those names.
 
@@ -57,7 +58,7 @@ Reading the overlay: the filed PDF is a motion (ECF 10, three pages) followed by
 
 - **Exemplar search**: one D.P.R. motion with a memorandum was found as a text-based public PDF (via a law-firm host, Mintz; the ECF copy is not on CourtListener in this build box). The exemplar is from the Commonwealth's counsel, with a multi-party caption. Searched: CourtListener and RECAP (no reachable storage path); Clearinghouse (403 from the build box); Justia dockets (no documents); D.P.R. local-rule compilations (not reachable at the primary URL).
 - **Local rules not read at primary**: as in the complaint README. The page limit, the table-of-contents trigger and the form of the memorandum's cover are not confirmed against the court's PDF, and the page limit is not implemented.
-- **Font**: the exemplar is Times New Roman; only EB Garamond is vendored, so 12-point EB Garamond is used (it sets visibly smaller than 12-point Times).
+- **Font**: the exemplar is Times New Roman, but no D.P.R. rule read names a face, so EB Garamond stays (`docs/FONTS.md`, "No face named"). It sets visibly smaller than 12-point Times. If the primary L.Civ.R. 7 is found to name Times New Roman, switch the font list to `Liberation Serif` (the substitute in `docs/FONTS.md`) and re-check the page count.
 - **Authorities**: the TOA is built from `toa:` links only. A cite written as plain text (for example *Hanover Nat'l Bank v. Moyses* in footnote 2, *Neblett v. Carpenter*, *Doty v. Love*, *FDIC v. Torrefación Café Cialitos*) does not appear in the TOA. A complete table needs every cite linked. The sample does not link them because the transcription is partial.
 - **Not transcribed**: Argument II.B after its second paragraph; Arguments III–V; footnotes after footnote 2; the memorandum's TOA entries for authorities not in the sample. The sample's page count (10) is therefore below the exemplar's (37 with the motion).
 - **Short citations**: the template does not check that a short cite's page is correct; that is the author's job.

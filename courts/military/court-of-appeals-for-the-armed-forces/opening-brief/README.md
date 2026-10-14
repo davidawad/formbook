@@ -80,7 +80,7 @@ Overall visual result: the cover fits one page; the index and the table of autho
 ## Findings about the exemplar (not the template)
 
 - **Pinkerton lists the Summary of Argument before the Statement of Facts.** Rule 24(a) lists the Statement of Facts first. The template follows Rule 24(a); the sample is reordered to match it. The transcription therefore differs from the filed order on purpose.
-- **Pinkerton's certificate says Times New Roman.** Rule 37(a) names Times New Roman as an example of proportional type, not as a requirement. The filings use Century Schoolbook (Muller, and Cooper in the supplement folder), Times New Roman (Pinkerton) and a Times-style face (Hernandez, in the supplement folder). The template uses EB Garamond, the only proportional serif vendored in `fonts/` (shared). Font choice is tier 2 and does not change a mandated requirement.
+- **Typeface (CAAF-BRF-006): face=none named, font=EB Garamond.** Rule 37(a) requires "proportional type, e.g., Times New Roman, in fourteen-point type". The "e.g." makes Times New Roman an example, not a requirement, so the rule names no face and any proportional type complies. Per `docs/FONTS.md` ("No face named" row) the template keeps EB Garamond. Pinkerton's certificate says Times New Roman, and the other filings use Century Schoolbook and a Times-style face; font choice is tier 2 and does not change a mandated requirement. Page count is unchanged by this review (no font change; 15 pages rendered).
 
 ## Known gaps
 

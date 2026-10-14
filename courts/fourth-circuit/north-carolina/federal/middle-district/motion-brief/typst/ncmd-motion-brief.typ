@@ -13,7 +13,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // NCMD-FORM-002: proportional font (vendored in /fonts; the rule's Times-type examples are not vendored)
+#let font-family = "EB Garamond"         // NCMD-FORM-002: proportional font; the rule names no face, so EB Garamond stays (docs/FONTS.md "No face named")
 #let type-size = 13pt                    // NCMD-FORM-002: proportional font "no smaller than 13 point" (LR 7.1(a)); footnotes included
 #let pitch = 23pt                        // NCMD-FORM-003: one double-spaced line; 27 x 23 pt = 621 pt, inside the 630 pt text height (see README.md)
 #let body-leading = 0.464em              // EB Garamond natural line height at 13 pt is 16.97 pt (measured); 16.97 + 0.464em (6.03 pt) = 23.0 pt pitch
