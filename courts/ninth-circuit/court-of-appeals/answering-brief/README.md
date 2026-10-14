@@ -87,3 +87,27 @@ Fixes made during review:
 - **No related-cases statement** in the sample: the exemplar has none, and Circuit Rule 28-2.6 does not require one from the appellee unless the appellant omitted a related case.
 - **Cover colour** is not produced (paper copies only; Circuit Rule 25-5(c)).
 - **One filer only.** The exemplar search (CourtListener RECAP, which allows 5 queries a minute to anonymous callers) found this filing directly. A second filer's answering brief, for the convention check that the eval loop wants, has not been compared; the cover and tables are compared against this one filing only.
+
+## Engines
+
+The same markdown renders through three engines. Typst (`typst/`) is the reference; the LaTeX and DOCX engines were built to its form and checked against it page by page.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-newsom-answering-brief.pdf` (14 pp) | reference |
+| latex | `OUTPUT-newsom-answering-brief.latex.pdf` (14 pp) | ok: rendered, every page compared with the typst page |
+| docx | `OUTPUT-newsom-answering-brief.docx`; no `.docx.pdf` | BLOCKED: no LibreOffice on this box (below) |
+
+```sh
+sh tools/render.sh --engine latex courts/ninth-circuit/court-of-appeals/answering-brief samples/INPUT-newsom-answering-brief.md
+sh tools/render.sh --engine docx  courts/ninth-circuit/court-of-appeals/answering-brief samples/INPUT-newsom-answering-brief.md
+```
+
+**latex** (`latex/template.tex`, `latex/ca9.lua`, `latex/render.sh`). This is the reply-brief LaTeX engine (see `../reply-brief/README.md`, "Engines") with the answering limits: `ca9.lua` checks the 14,000-word limit of Circuit Rule 32-1(a) and lists five heading levels in the table of contents, as the typst answering template does. `render.sh` owns the build: pandoc writes the `.tex`, then tectonic compiles it twice so the tables take their page numbers from the first pass. Fonts come only from `fonts/eb-garamond`; the PDF embeds the four EB Garamond faces and nothing else, on US Letter.
+
+- *Matches typst:* the same form elements as the reply brief, with the same page for every heading, the Introduction, Jurisdiction, Statement and its "A. Legal Background", Summary of Argument, Argument with all five levels, Conclusion and certificate. The table of authorities (groups, page lists, the statute and the other authorities) matches. The certificate's word count, 2,213, is the same as typst's.
+- *Differs:* body lines break at slightly different words, so a few pages begin a line or two apart from typst's; the page count is the same. The signature block sits at half the text width, where typst's sits at about 40%. The cover spacing is fixed rather than fitted. The deepest table-of-contents entry wraps its title in the same place as typst.
+- *Not exercised by this sample:* a related-cases statement (the sample has none; the template emits one only when the metadata has `related_cases`), the Certificate of Service, the addendum, and "passim". These were checked on the synthetic sample used for the reply brief.
+- *Gates:* `tools/check.sh` does not apply to this folder (no `checks.yaml` or `court.json`). The review is by eye: all 14 pages of the LaTeX PDF were rendered at 60 dpi and set beside the typst page.
+
+**docx** (`docx/reference.docx`, `docx/ca9.lua`, `docx/make-reference.sh`). **BLOCKED.** The reasons are the reply brief's (`../reply-brief/README.md`, "Engines"): no `soffice` on this box, so no `.docx.pdf` and no gate on the docx. The `.docx` is delivered as a valid zip with well-formed XML. The BLOCKED check IDs are the same as for the reply brief, with one difference: the related-cases statement is not in the sample, so CA9-CERT-003 is not exercised. CA9-COVER-001 to -007, CA9-CONT-001, CA9-CONT-002, CA9-CERT-001 and -004, CA9-ADD-001, CA9-FORM-008 and CA9-CONT-012 are not built for docx.

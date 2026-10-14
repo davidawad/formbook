@@ -78,3 +78,32 @@ Defects found in the review and fixed: an Argument sub-heading was typed at leve
 - **Cross-appeal replies** (FRAP 28.1(c)(4), Cir. R. 28.1-1(d)) and the appellant's response-and-reply brief (FRAP 28.1(c)(3), 14,000 words) are different filings. They are not built here.
 - **Sample is a portion** (point I.A, introduction, conclusion and certificates). The filed reply is 6,998 counted words in 24 body pages; the exemplar's own introduction stops mid-sentence and the errata notice (DktEntry 31) adds two missing words to it. The sample keeps the filed text, including that.
 - **Not run:** `tools/check.sh`, `checks.yaml` and `court.json` are the eval-loop contract for the principal brief and do not apply to this folder. The gates in `../rules.md` are not machine-checked here.
+
+## Engines
+
+The same markdown renders through three engines. Typst (`typst/`) is the reference; the LaTeX and DOCX engines were built to its form and checked against it page by page.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-bl-productions-reply-brief.pdf` (13 pp) | reference |
+| latex | `OUTPUT-bl-productions-reply-brief.latex.pdf` (13 pp) | ok: rendered, every page compared with the typst page |
+| docx | `OUTPUT-bl-productions-reply-brief.docx`; no `.docx.pdf` | BLOCKED: no LibreOffice on this box (below) |
+
+```sh
+sh tools/render.sh --engine latex courts/ninth-circuit/court-of-appeals/reply-brief samples/INPUT-bl-productions-reply-brief.md
+sh tools/render.sh --engine docx  courts/ninth-circuit/court-of-appeals/reply-brief samples/INPUT-bl-productions-reply-brief.md
+```
+
+**latex** (`latex/template.tex`, `latex/ca9.lua`, `latex/render.sh`). `render.sh` owns the build: pandoc writes the `.tex` from the template and the filter, then tectonic compiles it twice, so the table of contents and the table of authorities take their page numbers from the first pass. Fonts come only from `fonts/eb-garamond` (through `fontdir`). The PDF embeds EBGaramond Regular, Italic, Bold and BoldItalic and nothing else, on US Letter.
+
+- *Matches typst:* 14 pt type; double spacing at the typst baseline pitch (31.4 pt); single spacing for headings, quotations, footnotes and the tables; 1-inch margins; the cover (case number, rules, caption with the designations, proceeding and district docket, title, both counsel groups with their telephone numbers); the table of contents and table of authorities with dot leaders and page numbers (groups, sorting, "passim" at seven or more pages); heading labels (I., A., 1., a. in the Argument; A., 1., a., (1) elsewhere); footnotes at 14 pt; block quotations; the signature block kept with the last paragraph; the Statement of Related Cases (Form 17) with its boxes; the Certificate of Compliance (Form 8) with the word count. The count is 1,964 here, the same as typst's. Page numbers: none on the cover, roman in front matter, arabic from 1 in the body.
+- *Differs:* body lines break at slightly different words (TeX and typst use different line-breaking), so some pages start a line or two apart from typst's. Page count and the page of every heading and authority match. The signature block sits at half the text width, where typst's sits at about 40%. The cover spacing is fixed rather than fitted to the page. The dot leaders are drawn with a different spacing.
+- *Not exercised by this sample:* the Certificate of Service (Form 15) with unregistered parties, the addendum (Add-n), "passim", and the five heading levels. These were checked on a synthetic sample kept outside the repo: each compiled and laid out as intended. The Statement of Related Cases with a pending case is exercised.
+- *Gates:* `tools/check.sh` does not apply to this folder (no `checks.yaml` or `court.json`; see "Not run" above), so no gate was run. The review is by eye: all 13 pages of the LaTeX PDF were rendered at 60 dpi and set beside the typst page.
+
+**docx** (`docx/reference.docx`, `docx/ca9.lua`, `docx/make-reference.sh`). **BLOCKED.**
+
+- *Why:* `soffice` is not installed on this box and conda-forge has no LibreOffice package (`micromamba search` finds none), and there is no root to install it another way. The `.docx.pdf` is therefore not produced and no Gate 0 to 3 check runs on the docx. `tools/render-docx.sh` also needs `unzip`, which `tools/bootstrap.sh` does not install; it was added to the toolchain prefix from conda-forge.
+- *Delivered:* `samples/OUTPUT-bl-productions-reply-brief.docx`. It is a valid zip with well-formed XML (checked by `render-docx.sh`). It has the reference's styles (EB Garamond 14 pt, double-spaced body with a half-inch first-line indent, single-spaced headings, footnotes and block quotations, letter page, 1-inch margins, a centered page-number footer) and the heading labels. It has not been opened in Word or LibreOffice, so the no-repair check is not done.
+- *BLOCKED check IDs (not built for docx, a missing feature, not a Word limit):* CA9-COVER-001 to -007 (no cover; the caption is a table in Word, and the cover is not built); CA9-CONT-001 (no table of contents field); CA9-CONT-002 (no table of authorities: TA/TOA fields are not written, and LibreOffice does not honor them, see `docs/DOCX.md`); CA9-CERT-001, -003 and -004 (the certificates are not built); CA9-ADD-001 (the addendum is not numbered Add-n); CA9-FORM-008 (the footer counts arabic from the cover, with no roman front matter); CA9-CONT-012 (the labels are typed text, not Word list numbering, and are not measured on a PDF). Every Gate 1 and Gate 2 check is unmeasured for the docx for lack of a PDF.
+- *Rebuild the reference:* `sh docx/make-reference.sh` (from pandoc's default reference document; needs `perl`, `unzip`, `zip` and `xmllint`).
