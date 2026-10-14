@@ -4,7 +4,8 @@
 - Doc type: `cert-petition`. Petition for a writ of certiorari in booklet format (Rules 14, 33.1, 34). One self-contained folder, no shared files.
 - Exemplar: `exemplars/FILED-EXAMPLE-fisher-14-981-cert-petition.pdf` (*Fisher v. University of Texas at Austin*, No. 14-981, filed 2015-02-10; provenance in `exemplars/SOURCE.md`).
 - Sample: `samples/INPUT-fisher-cert-petition.md`, an excerpt of the filed petition (see Known gaps).
-- Status: **render = FAIL (blocker: the required typeface is not vendored)**. Template, sample and rules are in place; the layout was checked on a scratch render with a stand-in face. `court.json` untouched.
+- Status: **render = FAIL (blocker: the required typeface is not vendored)**; **overlay = not produced** (needs the render). Template, sample and rules are in place; the layout was checked on a scratch render with a stand-in face. `court.json` untouched.
+- Exemplar re-fetched 2026-10-14 from the URL in `exemplars/SOURCE.md`: 374 pages, the same file as recorded (CenturyExpandedBT embedded, text layer present).
 
 ## Blockers
 
