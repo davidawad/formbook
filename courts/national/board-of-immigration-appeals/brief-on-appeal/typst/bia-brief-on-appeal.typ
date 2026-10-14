@@ -29,9 +29,12 @@
   set page(
     paper: "us-letter",
     margin: margin,
+    // Body numbering starts at the Introduction (filed-brief convention, see exemplars/SOURCE.md): the cover (page 1)
+    // and table of contents (page 2) are unnumbered, so the displayed number is the physical page minus 2.
+    numbering: n => str(n - 2),
     footer: context {
-      // Cover (page 1) is unnumbered; ch. 4.6(b) requires pagination, ch. 4.6(c)(2) the A-number at bottom right.
-      if counter(page).get().first() > 1 [
+      // ch. 4.6(b) requires pagination, ch. 4.6(c)(2) the A-number at bottom right.
+      if counter(page).get().first() > 2 [
         #set text(size: 11pt)
         #grid(
           columns: (1fr, 1fr, 1fr),
