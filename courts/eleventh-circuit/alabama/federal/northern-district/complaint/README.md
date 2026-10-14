@@ -4,7 +4,7 @@
 - Doc type: `complaint`. Original complaint, Southern Division; numbered paragraphs, caption, counts, prayer, signature block.
 - Exemplar: `exemplars/FILED-EXAMPLE-sec-2-26-cv-01586-complaint.pdf` (*The Southeastern Conference v. Louisiana State University, et al.*, No. 2:26-cv-01586-ACA, Doc. 1, filed 2026-09-03, 29 pages; provenance in `exemplars/SOURCE.md`). Re-downloaded from CourtListener RECAP on 2026-10-14.
 - Sample: `samples/INPUT-sec-complaint.md` (transcription of selected pages; see Known gaps).
-- Status: template present, render and overlay re-run on 2026-10-14; every page of the render reviewed (10 of 10). Not reviewed by a human; `court.json` untouched.
+- Status: template present, render and overlay re-run on 2026-10-14 (fonts pass: no face named by the court's rules, so EB Garamond stays; see Typeface); every page of the render reviewed (10 of 10). Not reviewed by a human; `court.json` untouched.
 
 ## Files
 
@@ -30,13 +30,23 @@ Primary sources. Rule 10 text was read on 2026-10-14 (Cornell LII); LR 23.1 was 
 | Fed. R. Civ. P. 11(a) (cited, not re-read) | Signature by at least one attorney of record, with address, email and telephone number. <https://www.law.cornell.edu/rules/frcp/rule_11> | `signature` block |
 | N.D. Ala. LR 23.1 | In a class action, the pleading's caption, under the case number, includes the legend "Class Action." Text quoted from the Local Rules PDF below. | optional legend, shown only when the case is a class action (not in the sample) |
 
-The court's Local Rules are at <https://www.alnd.uscourts.gov/local-rules>. The copy read for this README is the PDF linked as "ALND Local Rules" (<https://www.alnd.uscourts.gov/sites/alnd/files/forms/ALND%20Local%20Rules.pdf>). It is undated (PDF metadata: created 2015-12-14), 14 pages, headed "Effective Upon Approval by Circuit Judicial Council". Its text contains no rule on typeface, font size, margins, spacing, page length, or certificates of service for pleadings. Rule text quoted from it:
+The court's Local Rules are at <https://www.alnd.uscourts.gov/local-rules>. The copy read for this README is the 2019 revision, linked there as "ALND Local Rules Revised 12-04-2019" (<https://www.alnd.uscourts.gov/sites/alnd/files/ALND%20Local%20Rules%20Revised%2012-04-2019.pdf>), read 2026-10-14: 14 pages, headed "(Effective December 4, 2019)", PDF modified 2019-12-09. Its text contains no rule on typeface, font size, margins, spacing, page length, or certificates of service for pleadings (checked by text search of the extracted PDF). Rule text quoted from it:
 
 > LR 23.1 Designation of Class Action in the Caption. In any case sought to be maintained as a class action, the complaint, or other pleading, document or other papers asserting a class action, shall include in its caption under the case number, the legend "Class Action."
 
-**Unverified:** the court's Local Rules page says the rules are "as of December 4, 2019" and links a PDF ("ALND Local Rules Revised 12-04-2019"). That PDF could not be retrieved from this box (the site rejected the request), so the 2019 text is not checked here. Rule numbers and the no-layout-rule finding above come from the undated PDF and must be rechecked against the 2019 revision before this template is marked reviewed. Judge's standing orders were not checked.
+Judge's standing orders are not part of the local rules and were not checked for this template (see Typeface below).
 
-Because the local rules set no layout rule, the layout follows the filed exemplar: EB Garamond (the only serif face vendored; no Times New Roman in `fonts/`), 13 pt (the template's stated choice against the exemplar's Times 12 pt; not re-measured this session), double spacing with a 24 pt pitch, 1-inch margins, a caption with a party column and a case-number column, and page numbers at the foot.
+Because the local rules set no layout rule, the layout follows the filed exemplar: 13 pt (the template's stated choice against the exemplar's Times 12 pt; not re-measured this session), double spacing with a 24 pt pitch, 1-inch margins, a caption with a party column and a case-number column, and page numbers at the foot.
+
+## Typeface
+
+| Face required | Vendored substitute | Fit |
+|---|---|---|
+| None. The court's Local Rules (2019) name no typeface, so the template keeps EB Garamond (the court's rules name no face; `docs/FONTS.md` "No face named"). | EB Garamond (`fonts/eb-garamond/`) | n/a |
+
+A single judge's standing order can set a face for that judge's cases. Judge Johnson's Initial Order (Huntsville, `https://www.alnd.uscourts.gov/sites/alnd/files/HNJ%20Initial%20Order%20without%20Rule%2026%20Language.docx`, read 2026-10-14) says "The parties motions and briefs shall be in Times New Roman font and 14-point type", double-spaced. It binds only that judge's cases and is not a court rule, so this template does not follow it. A per-judge variant (Liberation Serif, 14 pt; `docs/FONTS.md` "Times New Roman") would be a separate template and is not built here.
+
+The filed exemplar's body text is Times New Roman (`pdffonts` on the exemplar, 2026-10-14; it also embeds Arial). The overlay compares against it as a visual reference only; that is not a rule, and the layout is not changed to match it.
 
 ## Overlay
 
@@ -86,5 +96,5 @@ Tier-2 findings (OPEN or ACCEPTED):
 2. The sample has no certificate of service. A complaint is served with the summons under Rule 4, so the template has no certificate block; the template does not render one.
 3. The class-action legend (LR 23.1) is supported but not exercised: the sample is not a class action, so the legend is absent from its caption.
 4. Italics of case names are not in the exemplar's text layer and are not transcribed; the sample's case names are plain text.
-5. Only the vendored EB Garamond is available. No Times New Roman or Century Schoolbook is vendored (`fonts/` is shared and not edited here); the typeface is a stated choice, not a rule.
-6. The 2019 local-rules text was not retrieved (see Governing rules).
+5. The typeface is EB Garamond because the court's rules name no face, not because a Times New Roman substitute is missing: `fonts/liberation-serif/` is vendored. The 14-point Times New Roman rule in Judge Johnson's standing order is not applied (see Typeface).
+6. The 2019 local rules are read (see Governing rules); the Rule 8(a) and 11(a) text is still not re-read this session.
