@@ -1,0 +1,88 @@
+# Second Circuit, answering (appellee's) brief
+
+Court: United States Court of Appeals for the Second Circuit (`ca2`). Doc type: `answering-brief`.
+Folder layout: one self-contained folder per doc type, so this folder holds its own `typst/`, `samples/`, `exemplars/`.
+
+| Path | What |
+|---|---|
+| `exemplars/FILED-EXAMPLE-rapaport-25-2247-answering-brief.pdf` | A real filed brief for appellee (Second Circuit No. 25-2247), text layer present. |
+| `exemplars/SOURCE.md` | Where it came from, who filed it, dates, and what it shows. |
+| `typst/ca2-answering-brief.typ` | The template: `ca2-answering-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
+| `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
+| `samples/finkelman-answering-brief.md` | Transcription of the exemplar: cover, counterstatement, summary, standard of review, part of Argument I.A, conclusion, signature, certificates. A portion, not the whole brief. |
+| `samples/finkelman-answering-brief.pdf` | Render of the sample (12 pages). |
+| `samples/finkelman-answering-brief-overlay.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). |
+
+Build (from the repo root, with the toolchain on `PATH`):
+
+```sh
+sh tools/render.sh courts/second-circuit/court-of-appeals/answering-brief samples/finkelman-answering-brief.md
+sh tools/overlay.sh courts/second-circuit/court-of-appeals/answering-brief finkelman-answering-brief
+```
+
+Typst is run by `tools/render.sh` with `--ignore-system-fonts`, the vendored `fonts/`, and `vendor/typst-packages` (cmarker). Any typst warning fails the build.
+
+## Markdown contract
+
+Same as the Ninth Circuit template (`courts/ninth-circuit/court-of-appeals/README.extra.md`), with these differences:
+
+- Frontmatter: `case_number`, `caption` (two sides, `names` and `designation`), `proceeding`, `brief_title`, `counsel`, `phone`, `signature` are required. `district_court_case` and `judge` print as `Case No. X (JUDGE)`. `date` and `city` print under the signature block. `service: {certificate: true, method: "ACMS"}` adds the certificate of service. `authorities` is the table-of-authorities registry, as in ca9.
+- Body: `# Heading` (level 1) is a section. The sections of an appellee's brief are, in order: Jurisdictional Statement (optional, FRAP 28(b)(1)), Counterstatement of Issues Presented for Review (optional, 28(b)(2)), Counterstatement of the Case (optional, 28(b)(3)), Summary of the Argument (required, 28(a)(7) via 28(b)), Argument (required, 28(a)(8) via 28(b)), Conclusion (required, 28(a)(9) via 28(b)). The template does not refuse a brief that omits the optional sections; it does not check the required ones either. That check is a gap (see below).
+- Under `# Argument`, level 2 is a centered point heading (I., II.), level 3 is A., level 4 is 1., level 5 is a. Elsewhere level 2 is A., level 3 is 1.
+- Footnotes, block quotes, italics for case names, and `toa:KEY` links work as in ca9.
+- Word limit: the template refuses a body over 13,000 words (see "Rules").
+
+## Rules
+
+All text below was fetched from the court's site on 2026-10-14 unless marked otherwise.
+
+| Requirement | Source | Verified | Where in the template |
+|---|---|---|---|
+| Appellee's brief content: conforms to FRAP 28(a)(1)–(8) and (10), except that jurisdictional statement, statement of issues, statement of case and standard of review need not appear unless the appellee is dissatisfied with the appellant's statement. | FRAP 28(b), https://ww3.ca2.uscourts.gov/clerk/case_filing/rules/title7/rule_28.html | 2026-10-14 | section list above; not enforced |
+| Cover: case number centered at top; name of court; title of the case; nature of the proceeding and court below; title of the brief identifying the party; counsel's name, office address, telephone. | FRAP 32(a)(2)(A)–(F), https://ww3.ca2.uscourts.gov/clerk/case_filing/rules/title7/rule_32.html | 2026-10-14 | `cover-body` (CA2-COVER-001..) |
+| Cover color: appellant blue, appellee red (unrepresented parties exempt). | FRAP 32(a)(2); the court's civil-case brief page, https://www.ca2.uscourts.gov/clerk/case_filing/appealing_a_case/civil_case/brief_and_appendix.html | 2026-10-14 | **not drawn** (see gaps) |
+| Caption on covers must match the court's "official caption". | Same court page | 2026-10-14 | caption layout; "– v. –" between sides |
+| Paper 8½ × 11; double spacing (quotations over two lines may be single-spaced; headings and footnotes single-spaced); margins at least 1 inch on all four sides. | FRAP 32(a)(4) | 2026-10-14 | `page-margin = 1in`, `body-leading` |
+| Proportionally spaced serif face, 14-point or larger (sans only in headings and captions). | FRAP 32(a)(5)(A); the court's page: "Times New Roman must be 14-point or larger" | 2026-10-14 | `type-size = 14pt`, `font-family = "EB Garamond"`; checked by `pdffonts` |
+| Plain roman type style; case names italicized or underlined. | FRAP 32(a)(6) | 2026-10-14 | cmarker italics |
+| Length: principal brief not over 30 pages, unless it is within the type-volume limit; type-volume: no more than 13,000 words (reply: half). | FRAP 32(a)(7)(A)–(B)(i)–(ii) | 2026-10-14 | `type-volume-limit = 13000`; the template panics above it |
+| Length conflict: the court's civil-case page says a principal brief "must not exceed 30 pages or 14,000 words" and cites Local Rule 32.1 (not fetched). | Court's civil-case brief page | 2026-10-14 | the stricter FRAP figure is used |
+| Excluded from the count: cover, disclosure statement, TOC, TOA, oral-argument statement, addendum, certificates, signature block, proof of service. Headings, footnotes and quotations are counted. | FRAP 32(f) | 2026-10-14 | `count-words` on the body only |
+| Certificate of compliance, Form 6 wording (type-volume and typeface). | FRAP 32(g), form in the Appendix of Forms | 2026-10-14 (rule); Form 6 wording taken from the exemplar's certificate | `certificate-of-compliance` |
+| Addendum of statutes, rules, regulations: in the brief's addendum at the end. | FRAP 28(f) | 2026-10-14 | `# Addendum` handling (Add-1 pages) |
+| Corporate disclosure statement, if required. | FRAP 28(a)(1), 26.1 | 2026-10-14 (28(a)(1) text) | not generated (see gaps) |
+| Certificate of service. | FRAP 25(d) | not fetched; standard wording taken from the exemplar | `certificate-of-service` (optional) |
+
+## What the overlay shows
+
+`samples/finkelman-answering-brief-overlay.pdf`: each page of our render (red) on top of the exemplar page it matches best by word overlap (blue). Black is where both agree. The page map is in `-overlay.txt`.
+
+- Cover, Jurisdictional Statement, Counterstatement, Summary, Standard of Review, Argument I, Conclusion: the match is 73–92% word overlap.
+- TOC and TOA pages (ours p. i–ii) match the exemplar's TOC/TOA poorly (35% and 18%). That is expected: the sample's TOC and TOA are generated from the sample's headings and links, and it covers different pages of the filed brief. The overlay is a diagnostic, not a score.
+- Certificate pages (ours p. 11–12) match the exemplar's certificate pages (filed p. 59–60) at about 45%: the wording differs by design (the sample's count, the template's typeface statement).
+
+## Review (Gate: every page rendered and looked at)
+
+Rendered at `pdftoppm -r 60` and read page by page: 12 of 12 pages reviewed.
+
+| Ours | What was checked | Finding | Fixed |
+|---|---|---|---|
+| 1 (cover) | caption, court name, proceeding, brief title, counsel block | Counsel block wrapped the firm name at 50% indent. | Yes: indent 35% (cover and signature). |
+| 2 (TOC) | entries, leaders, page numbers | The long "A." entry squeezed its dot leader to one dot and wrapped the page number. | Yes: leader gap 0.5em, page box 2em. Now one line with dots. |
+| 3 (TOA) | groups, sort order, page list | Fine. | No change. |
+| 4–9 (body, pp. 1–6) | headings, footnotes, italics, quotations, double spacing | Fine. Footnotes at 14pt. Point heading centered, small caps. | No change. |
+| 10 (conclusion, signature) | signature block, "Dated" line | Firm name no longer wraps. | Yes (with page 1). |
+| 11 (certificate of compliance) | Form 6 wording | Fine. The word count is the sample's count (1,428), not the filed brief's. | No change. |
+| 12 (certificate of service) | wording, signature | Fine. | No change. |
+
+## Known gaps
+
+1. **Cover color is not drawn.** FRAP 32(a)(2) requires a red cover for an appellee's paper copies. The ECF exemplar is uncolored, and the template prints black on white. A paper copy needs red card stock; the PDF does not carry the color.
+2. **No corporate disclosure statement.** FRAP 26.1 disclosure is required for a nongovernmental corporate party. The template does not generate one. The exemplar has none (individual filer).
+3. **No statement regarding oral argument.** The exemplar has none. The template does not generate one.
+4. **Required sections are not checked.** The template does not refuse a brief missing Summary of the Argument, Argument, or Conclusion. A check belongs in `ca2-answering-brief` before the body is rendered.
+5. **Word limit conflict.** The court's page says 14,000 words; FRAP 32(a)(7)(B)(i) says 13,000. The template enforces 13,000.
+6. **Typeface.** The exemplar is Times New Roman. The template uses the vendored EB Garamond (the only font in `fonts/`), at 14 pt, which satisfies FRAP 32(a)(5)(A). The certificate says "Typst in 14-point EB Garamond" (the program that set the type), not Word.
+7. **Sample is a portion.** The sample transcribes the cover, counterstatement, summary, standard of review, part of Argument I.A, the conclusion, and both certificates. It ends mid-sentence on the exemplar's page 22 and says so. It is not the filed brief's full 48 pages.
+8. **Local Rule 32.1 not fetched.** The court's page cites Local Rule 32.1 and 25.1 without giving their text. The template relies on FRAP 32 and the court's summary.
+9. **Counsel lines.** The role line ("Counsel for the Defendant-Appellee ...") prints after the email, where the exemplar prints the telephone number before it.
