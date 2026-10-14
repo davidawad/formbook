@@ -6,15 +6,16 @@ Doc type: **motion brief**: a brief or memorandum of law in support of a written
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-eastwood-bryant-25-02009-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`). It is a brief in support of a summary judgment motion, not a 9013-1 motion memorandum; see gap 1. |
 | sample md | `samples/INPUT-eastwood-msj-brief.md`: caption, title, introduction, Nature of the Matter, the Statement of Undisputed Facts I to VII with footnotes 1 and 2, the Conclusion, the signature block and the certificate of service. The Argument is not transcribed (gap 2). |
-| render | ok: `samples/OUTPUT-eastwood-msj-brief.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no typst warnings |
-| overlay | ok: `samples/OVERLAY-eastwood-msj-brief.pdf` and `samples/OVERLAY-eastwood-msj-brief.txt` |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none. The 2022 local rules, the 2025 comment draft and the 2026 rules (`Local Rules 1.1.26.pdf`) name no typeface, point size or spacing (read 2026-10-14). Substitute: none needed; the template keeps EB Garamond, the "No face named" row of `docs/FONTS.md`. See gap 6. |
+| render | ok (re-rendered 2026-10-14): `samples/OUTPUT-eastwood-msj-brief.pdf`, 11 pages, typst 0.15.0, `tools/render.sh` (vendored fonts only, zero typst warnings); `pdffonts`: EB Garamond Regular, Bold and Italic embedded |
+| overlay | ok (re-run 2026-10-14): `samples/OVERLAY-eastwood-msj-brief.pdf` and `samples/OVERLAY-eastwood-msj-brief.txt`. The filed exemplar is not committed, so it is passed as the third argument (see Render and overlay) |
+| pages reviewed | 11 of 11 (2026-10-14: every page rendered at 80 dpi with `pdftoppm` and viewed) |
 
 File names: the shared `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so those names are used rather than `<id>.pdf` and `<id>-overlay.pdf`. `tools/` was not edited.
 
 ## Governing rules
 
-Primary sources, read 2026-10-14. The local rules are the copy dated October 7, 2022 (court PDF: https://www.ncmb.uscourts.gov/sites/default/files/local_rules/Local%20Bankruptcy%20Rules%20-%20NCMB%20%28October%207%2C%202022%29.pdf). The court's September 2025 comment draft (https://www.ncmb.uscourts.gov/sites/default/files/Local%20Rules%20for%20Comment%209.2.25.pdf) was also read; where the draft differs it is noted as a draft. **The rules "Effective January 1, 2026" were not retrievable** (see gap 4).
+Primary sources, read 2026-10-14. The local rules are the copy dated October 7, 2022 (court PDF: https://www.ncmb.uscourts.gov/sites/default/files/local_rules/Local%20Bankruptcy%20Rules%20-%20NCMB%20%28October%207%2C%202022%29.pdf). The court's September 2025 comment draft (https://www.ncmb.uscourts.gov/sites/default/files/Local%20Rules%20for%20Comment%209.2.25.pdf) was also read; where the draft differs it is noted as a draft. The 2026 text, `Local Rules 1.1.26.pdf` (https://www.ncmb.uscourts.gov/sites/default/files/local_rules/Local%20Rules%201.1.26.pdf), was read on 2026-10-14 (see gap 4).
 
 | ID | Rule | Requirement | Where it lives |
 |---|---|---|---|
@@ -52,14 +53,14 @@ Not used and why: Fed. R. Bankr. P. 7056 (summary judgment in an adversary proce
 1. **The exemplar is a brief in support of a summary judgment motion, not a 9013-1 motion memorandum.** The exemplar is a filed brief in an adversary proceeding, filed with ECF 31 (the motion) under Rule 7056 and LR 7007-1(c). The template serves both the adversary brief and the contested-matter memorandum (LR 9013-1(e)), which share the same form. Only one exemplar was found (see gap 7).
 2. **The Argument is not transcribed.** The sample covers the caption, the introduction, Nature of the Matter, Statement of Undisputed Facts I to VII (filed pages 1 to 9), then the Conclusion, the signature block and the certificate of service (filed pages 25 to 27). The Argument (filed pages 10 to 25, except the last paragraph of the Argument on filed page 25) is omitted. The sample therefore goes from Section VII straight to the Conclusion; the overlay shows this.
 3. **Page and word limits are not enforced.** LR 7007-1(c) (2022 text) limits the brief to 20 pages. The filed brief is 27 pages including the caption, the signature block and the certificate of service. Either leave of court was given or the limit does not count those pages; the docket was not checked. The 2025 draft's 6,250-word limit for electronically prepared briefs would be counted by word, not page, and is not enforced by the template. **For David:** which limit governs (the 2022 text, the 2025 draft, or the January 2026 text) needs to be decided before the template is treated as complete.
-4. **Effective January 2026 local rules not read.** The court's news archive lists "Local Rules Effective January 1, 2026" (title only). `https://www.ncmb.uscourts.gov/local-rules` returned 404; `https://www.ncmb.uscourts.gov/local-rules-and-orders` and its `/local-rules` subpage returned pages with no rules PDF links; the news node pages linked only the September 2025 comment draft. The effective text is the open question in gaps 3 and 5.
+4. **Effective January 2026 local rules: read in part.** The court's news archive lists "Local Rules Effective January 1, 2026". Earlier fetches of the court's site found no PDF link for it. On 2026-10-14 a search found the posted PDF, `Local Rules 1.1.26.pdf` (45 pages), and its text was extracted with `pdftotext`. Its LR 7007-1(c)(2) matches the 2025 draft: a 6,250-word limit for electronically prepared briefs and a 20-page limit for handwritten ones. It contains no typeface, point-size or spacing rule. Its LR 7056-1 was not compared in full, so gap 5 is still open against the 2026 text.
 5. **Separate statement of undisputed facts.** The 2025 draft's LR 7056-1(b) requires a separate "Statement of Undisputed Material Facts" in numbered paragraphs. The exemplar's facts are inside the brief, in sections I to VII, not numbered paragraphs. If the draft text takes effect, a motion for summary judgment needs that separate statement, which this template does not produce. The 2022 text's LR 7056-1 was not read at this level.
-6. **Typeface and size.** The local rules set no typeface. The exemplar embeds Times New Roman (`pdffonts`; its point size was not measured). This template uses EB Garamond (vendored, the only font in `fonts/`) at 13 pt, because EB Garamond sets smaller at the same size. Visual comparison is in the overlay. The 13 pt is a style choice, not a rule.
+6. **Typeface and size.** No rule names a typeface, so `docs/FONTS.md` ("No face named") keeps EB Garamond (vendored; no substitute to switch to). The 2022 text, the 2025 draft and the 2026 text were searched for font, typeface, point and spacing terms and none was found. The exemplar embeds Times New Roman (`pdffonts`; its point size was not measured); that is the filer's choice, not a rule. This template uses EB Garamond at 13 pt, because EB Garamond sets smaller at the same size. Visual comparison is in the overlay. The 13 pt is a style choice, not a rule.
 7. **One exemplar.** EVAL-LOOP's tier-2 rule asks for two or three filers. Other NCMB motions found and not used: Eastwood's motion to disqualify (25-02009 Doc 49, 8 pages, pro se, image-only); Cournoyer v. Schamens (24-02010 Doc 10, motion to dismiss, image-only); Freeland v. U.S. Bank (26-02001) and Reid v. Assurant (25-02023), whose motions are only in RECAP as orders. No OCR tool is installed on this box. Tier 2 is judged against one filer.
 8. **Certificate of service is produced in full.** The exemplar's certificate lists recipients by name and address, with the method of delivery. LR 9004-1 requires the same items.
 9. **Overlay pairing.** The overlay pairs pages by word overlap. Pages 1 to 3 pair with their filed pages; later pairs can be one page off because the sample has no argument pages and the filed brief has different page breaks. The overlay is a diagnostic, not a score.
 
-## Gate 2 review (all 11 pages, rendered at 60 dpi and looked at)
+## Gate 2 review (all 11 pages, rendered at 80 dpi and looked at, 2026-10-14)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -82,8 +83,10 @@ Gate 2 rows: `OK` = viewed and acceptable. Open items: gaps 3, 4 and 5 (the rule
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
 sh tools/render.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief samples/INPUT-eastwood-msj-brief.md
-sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief eastwood-msj-brief
+sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief eastwood-msj-brief <path-to>/FILED-EXAMPLE-eastwood-bryant-25-02009-motion-brief.pdf
 ```
+
+`exemplars/` holds `SOURCE.md` only: the filed PDF is not committed. Fetch it from the URL in `exemplars/SOURCE.md` into a directory outside the repo and pass it as the third argument, because `overlay.sh` otherwise takes the first PDF in `exemplars/`.
 
 The overlay's page map (`samples/OVERLAY-eastwood-msj-brief.txt`) pairs sample pages 1 to 9 with filed pages 1 to 10 (word overlap 32% to 89%), and sample pages 10 and 11 with filed pages 26 and 27 (79% and 96%): the conclusion, signature and certificate are the same text in both. The gap in the middle (filed pages 11 to 25) is the Argument, which is not transcribed.
 

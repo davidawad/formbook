@@ -6,9 +6,10 @@ Doc type: **adversary complaint** (a complaint commencing an adversary proceedin
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-anderson-novus-24-06026-adversary-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-novus-complaint.md`: caption, title, lead-in, every heading, all 41 numbered paragraphs, the three footnotes, the prayer A to F, the signature block (exhibits not transcribed) |
-| render | ok: `samples/OUTPUT-novus-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no typst warnings |
-| overlay | ok: `samples/OVERLAY-novus-complaint.pdf` and `samples/OVERLAY-novus-complaint.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none. The 2022 local rules, the 2025 comment draft and the 2026 rules (`Local Rules 1.1.26.pdf`) name no typeface, point size or spacing (read 2026-10-14); FRBP 9004(a) requires only "clearly legible". Substitute: none needed; the template keeps EB Garamond, the "No face named" row of `docs/FONTS.md`. See gap 3. |
+| render | ok (re-rendered 2026-10-14): `samples/OUTPUT-novus-complaint.pdf`, 8 pages, typst 0.15.0, `tools/render.sh` (vendored fonts only, zero typst warnings); `pdffonts`: EB Garamond Regular, Bold and Italic embedded |
+| overlay | ok (re-run 2026-10-14): `samples/OVERLAY-novus-complaint.pdf` and `samples/OVERLAY-novus-complaint.txt`. The filed exemplar is not committed, so it is passed as the third argument (see Render and overlay) |
+| pages reviewed | 8 of 8 (2026-10-14: every page rendered at 80 dpi with `pdftoppm` and viewed) |
 
 File names: the shared `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (and read `OUTPUT-<id>.pdf`), so those names are used rather than `<id>.pdf` and `<id>-overlay.pdf`. `tools/` was not edited.
 
@@ -25,7 +26,7 @@ Primary sources, read 2026-10-14. Quoted or closely paraphrased; the rule text w
 | NCMB-SIG-001 | Local Bankruptcy Rules (M.D.N.C.), LR 9011-4, https://www.ncmb.uscourts.gov/sites/default/files/local_rules/Local%20Bankruptcy%20Rules%20-%20NCMB%20%28October%207%2C%202022%29.pdf | Every paper filed by an attorney carries the attorney's state bar number in the signature block; telephone and email should also appear. | `signature` frontmatter, `signature-block()`: `bar` and `email` for each signer and `phone` are required (the build fails if one is missing) |
 | NCMB-LR-001 | Local Bankruptcy Rules, LR 1001-1(c) and (d) | The court may modify the rules in the interest of justice; failure to comply may be sanctioned. | not a template rule |
 
-Rule sources: the local bankruptcy rules text is the copy dated October 7, 2022 (the court's posted PDF). The court's site also lists a September 2025 comment draft, and a set of rules "Effective January 1, 2026" that could not be retrieved (the page returned 404 and the listing gave only a title). **The effective January 2026 text has not been read; this README relies on the 2022 text.** The 2025 draft's LR 7007-1 was read (it concerns motions and briefs, see the motion-brief README). The draft has no LR 9011-4 heading that could be found, so the signature rule could not be compared with it.
+Rule sources: the local bankruptcy rules text is the copy dated October 7, 2022 (the court's posted PDF). The court's site also lists a September 2025 comment draft, and a set of rules "Effective January 1, 2026", which was found as `Local Rules 1.1.26.pdf` on 2026-10-14 and read for the points above. **The 2026 text was not read in full; this README's LR 9011-4 and FRBP points rest on the 2022 text.** The 2025 draft's LR 7007-1 was read (it concerns motions and briefs, see the motion-brief README). The draft has no LR 9011-4 heading that could be found, so the signature rule could not be compared with it. The 2026 text (`Local Rules 1.1.26.pdf`, https://www.ncmb.uscourts.gov/sites/default/files/local_rules/Local%20Rules%201.1.26.pdf) was read for typeface and format terms on 2026-10-14: none found.
 
 Not produced by this template (separate filings that may be required with the complaint): the adversary proceeding cover sheet (Official Form 1040); the summons; the civil cover sheet; the jury demand, if any (LR 9015-1, not read). The complaint has no certificate of service: service is by summons (Fed. R. Bankr. P. 7004).
 
@@ -49,13 +50,13 @@ Not produced by this template (separate filings that may be required with the co
 
 1. **FRBP 7008(a) consent statement is not checked.** The exemplar has no statement of consent to the entry of final orders or judgment by the bankruptcy judge, which Rule 7008(a) requires a complaint in an adversary proceeding to contain. The template cannot tell whether a sample has it, and the sample does not add it (the filed complaint is transcribed as filed). A complaint drafted from this template must state the consent itself. **This is the most important gap for a real filing.**
 2. **One exemplar.** EVAL-LOOP's tier-2 rule asks for two or three filers. The search (CourtListener RECAP, `court=ncmb`, adversary complaints) turned up two more adversary complaints with downloadable PDFs, both image-only (no text layer): Troxler v. Carvana (23-09001, Doc 1) and Battle/Troxler (26-02036, Doc 1). No OCR tool is installed on this box, so they were not used. Tier 2 is judged against one filer.
-3. **Typeface and size.** The local rules set no typeface, and FRBP 9004(a) requires only that the paper be "clearly legible". The exemplar embeds Century Schoolbook (`pdffonts`; its point size was not measured); this template uses EB Garamond (vendored, the only font in `fonts/`) at 13 pt, because EB Garamond sets smaller than Century Schoolbook at the same size. Visual comparison is in the overlay. The 13 pt is a style choice, not a rule.
+3. **Typeface and size.** No rule names a typeface (the 2022 text, the 2025 draft and the 2026 text were searched), and FRBP 9004(a) requires only that the paper be "clearly legible". So `docs/FONTS.md` ("No face named") keeps EB Garamond; there is no substitute to switch to. The exemplar embeds Century Schoolbook (`pdffonts`; its point size was not measured); that is the filer's choice, not a rule. This template uses EB Garamond at 13 pt, because EB Garamond sets smaller than Century Schoolbook at the same size. Visual comparison is in the overlay. The 13 pt is a style choice, not a rule.
 4. **Double spacing and margins.** No rule in the local rules sets line spacing or margins for this court; double spacing matches the exemplar and is a convention choice.
 5. **Case names are italic in the sample.** The exemplar's text layer has no italic markup; italics are a convention choice in the transcription, not a reading of the filing.
 6. **The exhibits are not transcribed.** Exhibit A (the First Agreement) and Exhibit B (the transfers table) are pages 11 to 34 of the filing. The sample stops at the signature block (page 10 of the filing).
 7. **Paragraph numbers.** The template numbers paragraphs from 1 by chunk. The filed complaint also numbers from 1 and the sample reproduces all 41 numbered paragraphs, so the numbers coincide; the sample has no typed numbers.
 
-## Gate 2 review (all 8 pages, rendered at 60 dpi and looked at)
+## Gate 2 review (all 8 pages, rendered at 80 dpi and looked at, 2026-10-14)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -75,8 +76,10 @@ Gate 2 rows: `OK` = viewed and acceptable. No `OPEN` rows. The one accepted diff
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
 sh tools/render.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint samples/INPUT-novus-complaint.md
-sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint novus-complaint
+sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint novus-complaint <path-to>/FILED-EXAMPLE-anderson-novus-24-06026-adversary-complaint.pdf
 ```
+
+`exemplars/` holds `SOURCE.md` only: the filed PDF is not committed. Fetch it from the URL in `exemplars/SOURCE.md` into a directory outside the repo and pass it as the third argument, because `overlay.sh` otherwise takes the first PDF in `exemplars/`.
 
 The overlay's page map (`samples/OVERLAY-novus-complaint.txt`) pairs each sample page with the filed page sharing the most words: sample 1 with filed 1 (96%), 2 with 2 (68%), 3 with 4 (56%), 4 with 5 (63%), 5 with 6 (69%), 6 with 7 (73%), 7 with 9 (50%), 8 with 10 (45%). The pairing is coarse: a sample page can pair with a filed page one or two pages away, because the sample does not carry the exhibits and the filed pages are longer in the front half. The overlay is a diagnostic, not a score: the filed exemplar uses a different face and line breaks, so the two layers will not coincide line by line.
 
