@@ -51,6 +51,9 @@
 /// A heading: kept with the paragraph after it, so a heading never ends a page.
 #let heading-block(c) = block(width: text-width, sticky: true, above: 0pt, below: 0pt, on-grid(c))
 
+/// A section sign never ends a line: "§ 9-406" is one unbreakable unit.
+#let nbsp-sections(s) = s.replace(regex("§ "), "§\u{00A0}")
+
 // ---------------------------------------------------------------------------
 // Page furniture
 // ---------------------------------------------------------------------------
@@ -183,7 +186,7 @@
   let pending = []
   let has-pending = false
   for c in chunks {
-    let t = c.trim()
+    let t = nbsp-sections(c.trim())
     if t.starts-with("#") {
       pending += cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
       has-pending = true
