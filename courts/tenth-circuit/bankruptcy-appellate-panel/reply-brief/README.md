@@ -2,7 +2,7 @@
 
 - Court: `bap10`, United States Bankruptcy Appellate Panel of the Tenth Circuit (`courts/tenth-circuit/bankruptcy-appellate-panel/`)
 - Doc type: `reply-brief`. Rule basis: Fed. R. Bankr. P. Part VIII and 10th Cir. BAP Local Rules (see Governing rules).
-- Exemplar: **none**. BLOCKED: no exemplar. Searched WebSearch (standard and extended), CourtListener (WebFetch returned HTTP 403), Justia dockets; only the court's own pro se guide sample brief was found (not a filing; it has no reply brief). Searches are recorded in exemplars/SOURCE.md.
+- Exemplar: **none**. BLOCKED: no exemplar. Searched WebSearch (standard and extended), the CourtListener API (`court=bap10` RECAP: 0 documents; opinions only), Tenth Circuit RECAP (BAP-origin appeals are ca10 filings, not BAP filings), Justia dockets; only the court's own pro se guide sample brief was found (not a filing; it has no reply brief). Searches are recorded in exemplars/SOURCE.md.
 - Render: `samples/OUTPUT-generic-reply-brief.pdf` (typst, vendored EB Garamond only). Overlay: **fail**, no exemplar PDF (`tools/overlay.sh` exits 1: "no exemplar pdf in exemplars").
 - Sample: `samples/INPUT-generic-reply-brief.md`. Fictional parties, real rule citations. It is a generic sample built to exercise the template, not a transcription of any filing.
 - Status: template built and rendered; every page reviewed (see Page review). Not reviewed by a human; `court.json` untouched (status not set).

@@ -2,7 +2,7 @@
 
 - Court: `bap10`, United States Bankruptcy Appellate Panel of the Tenth Circuit (`courts/tenth-circuit/bankruptcy-appellate-panel/`)
 - Doc type: `opening-brief`. Rule basis: Fed. R. Bankr. P. Part VIII and 10th Cir. BAP Local Rules (see Governing rules).
-- Exemplar: **none**. BLOCKED: no exemplar. Searched WebSearch (standard and extended), CourtListener (WebFetch returned HTTP 403), Justia dockets; only the court's own pro se guide sample brief was found (not a filing). Searches are recorded in exemplars/SOURCE.md.
+- Exemplar: **none**. BLOCKED: no exemplar. Searched WebSearch (standard and extended), the CourtListener API (`court=bap10` RECAP: 0 documents; opinions only), Tenth Circuit RECAP (BAP-origin appeals are ca10 filings, not BAP filings), Justia dockets; only the court's own pro se guide sample brief was found (not a filing). Searches are recorded in exemplars/SOURCE.md.
 - Render: `samples/OUTPUT-generic-opening-brief.pdf` (typst, vendored EB Garamond only). Overlay: **fail**, no exemplar PDF (`tools/overlay.sh` exits 1: "no exemplar pdf in exemplars").
 - Sample: `samples/INPUT-generic-opening-brief.md`. Fictional parties, real rule citations. It is a generic sample built to exercise the template, not a transcription of any filing.
 - Status: template built and rendered; every page reviewed (see Page review). Not reviewed by a human; `court.json` untouched (status not set).
@@ -67,7 +67,7 @@ Every page of `OUTPUT-generic-opening-brief.pdf` was rendered at 60 dpi and view
 | 7 | Argument I.A (a.), I.B., II. point heading | OK. |
 | 8 | Argument II (continued), III. point heading | ACCEPTED: the lower half is blank because the last paragraph is kept with the signature block (same rule as ca1 and ca9). |
 | 9 | Conclusion; signature block | OK. |
-| 10 | Certificate of compliance (word count 1,021, rule wording, checkbox) | OK. |
+| 10 | Certificate of compliance (word count 1,011, rule wording, checkbox) | OK. |
 | 11 | Statement of related cases (last page, L.R. 8014-1) | OK. |
 
 Tier-2 findings (OPEN or ACCEPTED): p.8 ACCEPTED (above). The point headings are centered small caps in the Argument, matching ca1. TOC leaders on a line that is nearly full can be a single dot; ACCEPTED (see Known gaps).
