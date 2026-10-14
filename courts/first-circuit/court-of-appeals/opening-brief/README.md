@@ -4,7 +4,7 @@
 - Doc type: `opening-brief`. Brief of Appellant (FRAP 28(a)); one self-contained folder, no shared files.
 - Exemplar: `exemplars/FILED-EXAMPLE-figueroa-24-1311-opening-brief.pdf` (*United States v. Figueroa*, No. 24-1311, filed 2025-03-17; provenance in `exemplars/SOURCE.md`).
 - Sample: `samples/INPUT-figueroa-opening-brief.md` (excerpt of the filed brief; see Known gaps).
-- Status: template built; render, overlay and page review done (pages below). Not reviewed by a human; `court.json` untouched.
+- Status: template built; render and page review re-done 2026-10-14 (pages below). Overlay PDF not regenerated this run (see Overlay). Not reviewed by a human; `court.json` untouched.
 
 ## Files
 
@@ -26,6 +26,7 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 | FRAP 32(a)(2)(A)-(F) | Cover: case number centered at top; name of the court; title of the case; nature of the proceeding and court below; title of the brief; counsel's name, address, telephone (rulebook pp. 67-68) | `cover-body` |
 | FRAP 32(a)(4) | 8½ × 11; double-spaced; quotations over two lines may be indented and single-spaced; headings and footnotes may be single-spaced; margins at least 1 inch (p. 68) | `page`, `body-leading`, `page-margin`, quotation and footnote styles |
 | FRAP 32(a)(5)(A) | Proportionally spaced serif face, 14-point or larger (p. 68) | `type-size = 14pt` for body, headings, footnotes (`show footnote.entry`) |
+| FRAP 32(a)(5) (typeface) | Rule names no face: a proportionally spaced serif face, 14 pt or larger. No 1st Cir. local rule names a face (rulebook text read 2026-10-14). Court-named face: none | `font-family = "EB Garamond"` (kept, per `docs/FONTS.md` "No face named"); no substitute needed |
 | FRAP 32(a)(6) | Plain roman; italics or boldface for emphasis; case names italicized (p. 68) | markdown emphasis; the template does not guess case names |
 | FRAP 32(a)(7)(A), (B)(i) | Principal brief: 30 pages or 13,000 words (p. 68-69) | `word-limit = 13000`; panic when exceeded |
 | FRAP 32(f) | Excluded from the count: cover, disclosure, TOC, TOA, oral-argument statement, addendum with statutes, certificate, signature block, proof of service (pp. 69-70) | `strip-oral-argument` (headings matching "oral argument"); the rest is outside the markdown body |
@@ -38,6 +39,8 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 | Checklist for Briefs, ca1 (rev. 3/22; secondary) | Footnotes must be the same size as the body text; 1st Cir. R. 32.0 is a disk rule that applies only to paper filings | footnotes at 14 pt; no disk rule |
 
 ## Overlay
+
+This run (2026-10-14): `tools/overlay.sh` could not write the PDF, because `exemplars/FILED-EXAMPLE-figueroa-24-1311-opening-brief.pdf` is not in this checkout (`exemplars/` holds only `SOURCE.md`). The `.txt` page map is unchanged from the earlier run, and the pairings below are from that run.
 
 `samples/OVERLAY-figueroa-opening-brief.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses):
 
@@ -69,7 +72,7 @@ Every page of `OUTPUT-figueroa-opening-brief.pdf` was rendered at 60 dpi and vie
 | 13 | Addendum; its table of contents (Add-1) | OK. |
 | 14 | Addendum entry (placeholder) | ACCEPTED: sample limit; the filed addendum is scanned, see Known gaps. |
 
-Tier-2 findings (OPEN or ACCEPTED): the Argument starts on a new page after the summary (sticky heading block, p. 8); the statement of facts uses A./1. where the filed brief uses roman numerals (the rules leave the numbering open); the typeface is EB Garamond where the filed brief uses Century Schoolbook (FRAP 32(a)(5) allows any proportional serif of 14 pt or more; EB Garamond is the only serif family vendored).
+Tier-2 findings (OPEN or ACCEPTED): the Argument starts on a new page after the summary (sticky heading block, p. 8); the statement of facts uses A./1. where the filed brief uses roman numerals (the rules leave the numbering open); the typeface is EB Garamond where the filed brief uses Century Schoolbook (the rule names no face, so EB Garamond stays; see `docs/FONTS.md`).
 
 ## Known gaps
 
@@ -82,7 +85,7 @@ Tier-2 findings (OPEN or ACCEPTED): the Argument starts on a new page after the 
 7. The oral-argument section is excluded from the word count by matching its heading text ("oral argument"). That is a heuristic: a differently titled statement would be counted.
 8. The standard-of-review check (FRAP 28(a)(8)(B)) is a heuristic: it passes if the body says "standard of review" or any heading contains "standard".
 9. The certificate of service is generic CM/ECF wording; it does not list unregistered recipients unless `service.unregistered` is given.
-10. Only the vendored EB Garamond is available. No Century Schoolbook or Times New Roman is vendored (`fonts/` is shared and not edited here).
+10. Typeface: EB Garamond is kept because the rulebook names no face. A filer who wants Century Schoolbook would use TeX Gyre Schola (`docs/FONTS.md`); that would be a style choice, not a rule requirement.
 
 ## Engines
 
