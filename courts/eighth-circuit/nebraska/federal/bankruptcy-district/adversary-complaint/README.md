@@ -9,6 +9,7 @@ Folder: `courts/eighth-circuit/nebraska/federal/bankruptcy-district/adversary-co
 | sample md | `samples/INPUT-interbake-adversary-complaint.md` (the whole complaint body and the caption, the signature block, the prayer; the exemplar's footnote 1 is not transcribed, see Known gaps) |
 | render | ok: `samples/OUTPUT-interbake-adversary-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-interbake-adversary-complaint.pdf` and `OVERLAY-interbake-adversary-complaint.txt` (page map) |
+| typeface | no face required by the rules (checked 2026-10-14, see Decisions); EB Garamond kept, no substitute from `docs/FONTS.md` applies |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last change; see the review section) |
 | tier 1 (rule-mandated) | see the rules table: each row is in the template, and the one the exemplar misses (FRBP 7008(a) consent statement) is asserted by the template |
 
@@ -63,7 +64,7 @@ Body: `# SECTION` (level 1), `## Subheading` (level 2), blank-line-separated par
 ## Decisions
 
 - **Consent sentence (FRBP 7008(a)).** The exemplar does not state whether the plaintiff consents to final orders, and the rule requires it. The sample adds one sentence in the jurisdiction section, right after the core-proceeding paragraph: "Plaintiff [does / does not] consent to the entry of final orders or judgment by the Court." The bracket is an unfilled choice for the filer, not a legal position; the template refuses to build a complaint that lacks the statement. This is the only sentence in the sample that is not in the exemplar, and it adds one numbered paragraph, so paragraphs 6 to 39 of the sample are one number higher than the exemplar's (5 to 38).
-- **Font: EB Garamond at 13 pt.** The exemplar is Times New Roman, 12 pt. Only EB Garamond is vendored, and at 12 pt it reads smaller than Times, so 13 pt matches the apparent size. No Nebraska rule sets a font or a size (FRBP 9004(a) requires legibility only).
+- **Font: EB Garamond at 13 pt.** The exemplar is Times New Roman, 12 pt. Only EB Garamond is vendored, and at 12 pt it reads smaller than Times, so 13 pt matches the apparent size. No rule sets a face or a size: on 2026-10-14 the 2026 FINAL AMENDED local rules (35 pages, text extracted with poppler: no typeface, font or point-size term), NECivR 7.1 (no font term) and FRBP 9004(a) (legibility only) were checked. The exemplar's Times New Roman is the filer's choice, not a rule, so `docs/FONTS.md` ("No face named" → EB Garamond) applies and the face stays EB Garamond.
 - **Margins and spacing: 1 inch, double.** No rule in the fetched local rules sets margins or line spacing for adversary complaints. The exemplar is double spaced with 1-inch margins; the template matches that.
 - **No pleading paper.** The N.D. Cal. complaint template uses numbered lines (a California rule, Civil L.R. 3-4). Nebraska has no such rule, and the exemplar has none.
 - **Counsel block at the signature, not at the top.** The exemplar puts counsel at the signature. Nebraska has no upper-left counsel rule in the fetched text.

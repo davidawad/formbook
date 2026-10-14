@@ -8,6 +8,7 @@ Exemplar: one real, text-layer filed memorandum in support of a motion, from thi
 | Item | Status |
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-northern-beef-packers-13-10118-motion-brief.pdf` (15 pages, one filer), sourced in `exemplars/SOURCE.md` |
+| typeface | **No face required; EB Garamond kept.** Bankr. D.S.D. R. 9004-1(a)(1) (June 2024 local rules, text checked with `pdftotext`) requires "one simple font" and names no face. The only face named in the local rules is Appendix 1F's creditor-mailing-list bullet ("Universal, Times New Roman, or Courier"), which governs the mailing list, not this document. So no substitute from `docs/FONTS.md` is needed: the template keeps EB Garamond (the "No face named" row). Fit: n/a. Re-checked 2026-10-14 (fonts pass, `fb-595.7.5.21`). |
 | sample md | `samples/INPUT-northern-beef-packers.md`: transcription of the whole filing (caption, title, body, footnotes 1 to 3, conclusion, signature). TIN shown as last four digits. |
 | render | ok: `samples/OUTPUT-northern-beef-packers.pdf` (9 pages), `tools/render.sh`, vendored EB Garamond only, zero typst warnings. |
 | overlay | ok: `samples/OVERLAY-northern-beef-packers.pdf` and `.txt` (`tools/overlay.sh`); page pairing by text: ours 1-9 with filed 1, 2, 5, 7, 8, 10, 12, 14, 15. |
@@ -71,7 +72,7 @@ Markdown contract (frontmatter; the body is blank-line-separated chunks):
 
 ## Gate 2 review (current PDF)
 
-sha256 of `samples/OUTPUT-northern-beef-packers.pdf`: `21796d03229375ec9b9bea8da24452a904725ae6596dd6e7b8005f0846133b61`
+sha256 of `samples/OUTPUT-northern-beef-packers.pdf`: `0b8b3bd9f562430aab94944bf4b76e66a392d2e833943f1f6ab3831fbcab1148` (re-rendered and re-reviewed 2026-10-14; 9 pages, same content; the bytes differ from the earlier render only in the PDF's timestamps)
 
 Pairing from `samples/OVERLAY-northern-beef-packers.txt` (by text): ours 1 = filed 1; ours 2 = filed 2; ours 3 = filed 5; ours 4 = filed 7; ours 5 = filed 8; ours 6 = filed 10; ours 7 = filed 12; ours 8 = filed 14; ours 9 = filed 15. Word overlap per page: 89%, 56%, 54%, 53%, 63%, 67%, 53%, 72%, 62%. Word overlap is low on most pages because our render is single spaced and the filing is double spaced, so the same words sit on fewer, longer pages; it is a pairing aid, not a score.
 

@@ -9,7 +9,8 @@ Folder: `courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/adve
 | sample md | `samples/INPUT-babin-crescent-complaint.md` (a portion of the complaint: caption, lead-in, jurisdiction, parties, background, Counts I, II and X, prayer, signature; see gap 9) |
 | render | ok: `samples/OUTPUT-babin-crescent-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-babin-crescent-complaint.pdf` and `samples/OVERLAY-babin-crescent-complaint.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | EB Garamond, 12 pt. No rule names a face, so `docs/FONTS.md` "No face named" applies and the template keeps EB Garamond (gap 2) |
+| pages reviewed | 8 of 8 (re-rendered and every page viewed at 60 dpi on 2026-10-14, fonts pass; output unchanged) |
 | BLOCKED | none |
 
 File names: the brief's `samples/<id>.md` and `samples/<id>-overlay.pdf` are written as `INPUT-<id>.md` and `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default (CLAUDE.md, "File roles are in the name").
@@ -28,6 +29,7 @@ Primary sources, fetched 2026-10-14 (LII text for the federal rules; the court's
 | Fed. R. Bankr. P. 9004(b) | Caption: court name, case title, case number (and adversary number), and a brief designation of the document. | As 10(a) above. |
 | E.D. La. Local Rules, Part VII (adversary proceedings), 7004-1 | Summons issued under the Administrative Procedures Manual; plaintiff serves the summons and complaint. Rule 7004-1 concerns service, not the complaint's form. https://www.laeb.uscourts.gov/sites/laeb/files/local_rules/LocalRules050113.pdf (rules adopted May 1, 2013) | Not template text. |
 | E.D. La. Local Rules, general | No rule on paper size, typeface, margins, line spacing or cover pages for pleadings was found in the 2013 Local Rules (text searched for "pleading", "paper", "font", "point", "margin", "spac", "caption"; only Local Forms, Rule G, bear on form: a deviation from a Local Form is set in bold 12-point type). | Typography is a convention, see gap 2. |
+| E.D. La. Clerk's Notes, "Font Size" (copy retrieved 2026-10-14: https://www.laeb.uscourts.gov/sites/laeb/files/ClerksNotes704.pdf; undated), citing LBR 5005-3 | Motions, applications, memoranda and judgments/orders "must be typed or written in a size format that is sufficient to read without difficulty." Names no face. LBR 5005-3 is not in the 2013 Local Rules copy, so its current text was not read. | Vendored EB Garamond at 12 pt (gap 2). |
 
 Not produced by this template (separate filings or court-generated, not part of the complaint body):
 - Adversary Proceeding Cover Sheet, Official Form 1040 (the exemplar's pp. 1-2; CM/ECF captures it at e-filing). Filed with the complaint; not generated.
@@ -81,7 +83,7 @@ What the overlay shows, as a diagnostic (not a score):
 ## Known gaps and open choices
 
 1. **One exemplar; tier 2 needs 2 or 3 filers.** The brief asks for one exemplar per doc type. A second adversary complaint was found and checked for text (Crosby Tugs v. Pelican Marine, Adv. 26-01083, 6 pages, filed 2026-10-12; RECAP `gov.uscourts.laeb.211046.1.0.pdf`), and a third (Brown v. Burmaster, Adv. 23-01032, 5 pages, `gov.uscourts.laeb.202033.1.0.pdf`). Neither is saved. Tier 2 is therefore **not** judged against 2 or 3 filers yet.
-2. **Font.** No E.D. La. rule names a typeface, and the exemplar is Times New Roman. The vendored serif is EB Garamond (the only one in `fonts/`). It is a smaller face than Times at 12 pt, so the text looks smaller. Whether a larger apparent size is wanted is a question for David (a Times-metric font would remove the difference).
+2. **Font: no face required; EB Garamond kept.** The 2013 Local Rules and the Clerk's Notes (LBR 5005-3, a size-and-legibility rule) name no typeface, so `docs/FONTS.md` "No face named" applies and the template keeps EB Garamond. The filed exemplar is Times New Roman, but the exemplar only settles what the rules leave open. EB Garamond at 12 pt reads smaller than Times at 12 pt, so the overlay text looks smaller. Whether tier 2 wants a Times-metric face (`Liberation Serif`, metric-compatible) is a question for David. If the current LBR 5005-3 text names a face, switch the font list to the `docs/FONTS.md` substitute.
 3. **Caption column.** The exemplar closes its party column with asterisks; the template uses a rule at the column's right edge (the form used in cand). Both are seen in practice; recorded as a convention.
 4. **Signature block alone on a page** (page 8 of the sample). The signature block does not break and moves whole to the next page when the prayer ends near the foot of page 7. The real filing keeps the signature with the prayer; a template fix would keep the last prayer item with the signature. Not fixed in this pass.
 5. **Not generated:** Official Form 1040 cover sheet, CM/ECF header, summons, civil cover sheet, Rule 7.1 statement, exhibits (see Governing rules).

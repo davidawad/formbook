@@ -9,7 +9,8 @@ Folder: `courts/eleventh-circuit/georgia/federal/middle-district/motion-brief/`.
 | sample md | `samples/INPUT-brooks-motion-brief.md` (the whole 9-page brief, transcribed; see Known gaps) |
 | render | ok: `samples/OUTPUT-brooks-motion-brief.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-brooks-motion-brief.pdf` and `OVERLAY-brooks-motion-brief.txt` |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none** (M.D. Ga. Local Rules name no typeface); font: **EB Garamond** (vendored, kept per `docs/FONTS.md`, "No face named"); not a substitution, so no metric question arises |
+| pages reviewed | 9 of 9 (re-rendered 2026-10-14 with no template change; every page rendered at 60 dpi and viewed) |
 
 ## Governing rules
 
@@ -21,6 +22,7 @@ Each rule was read from its source on 2026-10-14.
 | M.D. Ga. L.R. 7.2 | Response within 21 days after service of the movant's motion and brief. Same source. | Not a layout rule; not templated. |
 | M.D. Ga. L.R. 7.3 | Reply within 14 days after service of the response. Same source. | Not templated. |
 | M.D. Ga. L.R. 7.4 | Briefs in support of or in response to a motion are limited to **20 pages**; the movant's reply to 10 pages; an extension must be requested by written motion at least five days before the deadline. Same source. | **Not enforced:** the template has no page counter (the exemplar is 9 pages). |
+| M.D. Ga. Local Rules (typeface) | No typeface, point size or spacing rule in the consolidated text (PDF dated 3-7-22, read 2026-10-14; LR 7.1 is not a formatting rule). Face required: **none**. | Font: **EB Garamond** (`docs/FONTS.md`, "No face named"), 13 pt. The exemplar's Times New Roman is a filer's choice, not a rule. |
 | M.D. Ga. L.R. 83.1.2(B) | State Bar of Georgia number on the signature page of each pleading. Same source. | `signature.signers` (each attorney's Georgia Bar No. line). |
 | M.D. Ga. L.R. 83.1.2(A) | Lead counsel's name, address and telephone on the signature page of the **first pleading**. Same source. | Optional `signature.lead_counsel` line. A brief is not the first pleading, so the exemplar and the sample omit it. |
 | M.D. Ga. L.R. 5.4(A) | Redaction of SSNs, taxpayer IDs, birth dates, minors' names, financial account numbers (filer's duty). Same source. | **Not checked by the template.** |
@@ -77,8 +79,8 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/moti
 ## Known gaps and open choices
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers from different sources. Not collected for this doc type. The M.D. Ga. search (CourtListener RECAP, `court=gamd`, `type=r`, "motion to dismiss memorandum", filed 2015-2021, filtered to stored PDFs) also found Sims v. Evans (5:15-cv-285, brief in Calibri, 8 pages), Zavala v. Ward (5:19-cv-383, memorandum 4 pages), and Thrower v. Matrix Warranty (3:19-cv-66, motion 4 pages; memorandum not separately saved). **Tier 2 is therefore not judged against two filers.**
-2. **Font.** Times New Roman is not vendored (only EB Garamond is in `fonts/`). The template sets **EB Garamond at 13 pt** against the exemplar's 12-pt Times, because EB Garamond sets smaller at the same size; the 13 pt choice is a judgment call for David.
-3. **M.D. Ga. typeface and margin rule.** None found in the 2022 consolidated Local Rules text. The layout follows the exemplar, as the brief says. The consolidated text is dated 3-7-22; the current text was not confirmed.
+2. **Font.** The court names no face, so the template keeps **EB Garamond at 13 pt** (`docs/FONTS.md`, "No face named"). The exemplar is 12-pt Times New Roman, a filer's choice. EB Garamond sets smaller at the same size, so 13 pt is a judgment call for David. Liberation Serif (Times New Roman's metric-compatible substitute) is vendored; switching is a template change not made here.
+3. **M.D. Ga. typeface and margin rule.** None found in the consolidated Local Rules text (PDF dated 3-7-22, fetched and text-extracted 2026-10-14). The layout follows the exemplar, as the brief says. The current text was not confirmed beyond that version.
 4. **Page limit (L.R. 7.4, 20 pages).** Not enforced by the template (no page counter). The sample is 9 pages.
 5. **Judge's standing orders** were not checked.
 6. **The motion is not templated.** The exemplar's ECF entry 10 (the motion) is separate; a complete filing needs the motion as its own document.
@@ -88,3 +90,4 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/moti
 10. **Lead counsel** (L.R. 83.1.2(A)) is optional and absent here, because a brief is not the first pleading; the rule text read above supports that reading.
 11. **Overlay pairing.** Our pages 8 and 9 pair with the filed pages 9 and 8 (the two signature blocks are split across them in the render and in the filing).
 12. **Not run:** `tools/check.sh` and `tools/check-selftest.sh` (see the complaint README, gap 10: same folder shape, and the brief forbids editing `tools/`).
+13. **Exemplar PDF not in the folder.** Only `exemplars/SOURCE.md` is committed. The 2026-10-14 overlay was run with the PDF fetched from the URL in SOURCE.md (9 pages, "Filed 06/10/16" header checked) and passed as the third argument of `tools/overlay.sh`, not saved in the repo.

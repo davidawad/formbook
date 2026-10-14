@@ -4,7 +4,7 @@
 - Doc type: `motion-brief`. The memorandum that accompanies a Rule 12(b) motion, with a table of contents and a table of authorities, the body, the signature block and a certificate of service.
 - Exemplar: `exemplars/FILED-EXAMPLE-sec-2-26-cv-01586-motion-brief.pdf` (*The Southeastern Conference v. Rousse, et al.*, No. 2:26-cv-01586-ACA, Doc. 27-1, filed 2026-09-25, 33 pages; provenance in `exemplars/SOURCE.md`). Re-downloaded from CourtListener RECAP on 2026-10-14. The companion motion (Doc. 27) is a separate filing and is not part of this exemplar.
 - Sample: `samples/INPUT-sec-motion-brief.md` (excerpt of the memorandum; see Known gaps).
-- Status: template present, render and overlay re-run on 2026-10-14, one layout defect fixed (below); every page of the render reviewed (10 of 10). Not reviewed by a human; `court.json` untouched.
+- Status: template present, render and overlay re-run on 2026-10-14 (fonts pass: no face named by the court's rules, so EB Garamond stays; see Typeface), one layout defect fixed (below); every page of the render reviewed (10 of 10). Not reviewed by a human; `court.json` untouched.
 
 ## Files
 
@@ -37,7 +37,19 @@ The court's Local Rules are at <https://www.alnd.uscourts.gov/local-rules>. The 
 
 Its text contains no rule on typeface, font size, margins, spacing, page length or word limit for briefs, or a certificate-of-service requirement. The layout therefore follows the filed exemplar.
 
-**Unverified:** the court's Local Rules page says the rules are "as of December 4, 2019" and links a PDF ("ALND Local Rules Revised 12-04-2019"). That PDF could not be retrieved from this box (the site rejected the request), so the 2019 text is not checked here. The template header cites "rev. Dec. 4, 2019"; that date comes from the court's page, not from the PDF text. Judge's standing orders (which may set page or typeface rules) were not checked.
+The copy read is the 2019 revision (`ALND Local Rules Revised 12-04-2019`, <https://www.alnd.uscourts.gov/sites/alnd/files/ALND%20Local%20Rules%20Revised%2012-04-2019.pdf>), read 2026-10-14: headed "(Effective December 4, 2019)", PDF modified 2019-12-09. The LR 5.5 and 5.6 text above matches it. The template header cites "rev. Dec. 4, 2019", which is the same revision.
+
+Judge's standing orders are not local rules and are not applied here (see Typeface for one that names a face). Page limits in a judge's order are not checked for this template.
+
+## Typeface
+
+| Face required | Vendored substitute | Fit |
+|---|---|---|
+| None. The court's Local Rules (2019) name no typeface, so the template keeps EB Garamond (`docs/FONTS.md` "No face named"). | EB Garamond (`fonts/eb-garamond/`) | n/a |
+
+A single judge's standing order can set a face for that judge's cases. Judge Johnson's Initial Order (Huntsville, `https://www.alnd.uscourts.gov/sites/alnd/files/HNJ%20Initial%20Order%20without%20Rule%2026%20Language.docx`, read 2026-10-14) says "The parties motions and briefs shall be in Times New Roman font and 14-point type", double-spaced, with footnotes in 12 pt. It binds only that judge's cases and is not a court rule, so this template does not follow it. A per-judge variant (Liberation Serif, 14 pt; `docs/FONTS.md` "Times New Roman") would be a separate template and is not built here.
+
+The filed exemplar's body text is Times New Roman (`pdffonts` on the exemplar, 2026-10-14). The overlay compares against it as a visual reference only; that is not a rule, and the layout is not changed to match it.
 
 ## Layout defect found and fixed in this pass
 
@@ -91,5 +103,5 @@ Tier-2 findings (OPEN or ACCEPTED):
 3. The page references in the TOA are computed by the template from the body's pages, not copied from the filed exemplar.
 4. The judge's standing order, which may set page, typeface or word limits for briefs, was not checked. The template sets no length limit.
 5. The certificate of service is the CM/ECF wording of the sample; it does not list unregistered recipients.
-6. Only the vendored EB Garamond is available. No Times New Roman or Century Schoolbook is vendored (`fonts/` is shared and not edited here); the typeface is a stated choice, not a rule.
-7. The 2019 local-rules text was not retrieved (see Governing rules).
+6. The typeface is EB Garamond because the court's rules name no face, not because a Times New Roman substitute is missing: `fonts/liberation-serif/` is vendored. The 14-point Times New Roman rule in Judge Johnson's standing order is not applied (see Typeface).
+7. The 2019 local rules are read (see Governing rules).

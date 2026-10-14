@@ -9,7 +9,8 @@ Folder: `courts/eleventh-circuit/georgia/federal/middle-district/complaint/`.
 | sample md | `samples/INPUT-solen-complaint.md` (a portion of the 21-page filing, see Known gaps) |
 | render | ok: `samples/OUTPUT-solen-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-solen-complaint.pdf` and `OVERLAY-solen-complaint.txt` |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none** (M.D. Ga. Local Rules name no typeface); font: **EB Garamond** (vendored, kept per `docs/FONTS.md`, "No face named"); not a substitution, so no metric question arises |
+| pages reviewed | 10 of 10 (re-rendered 2026-10-14 with no template change; every page rendered at 60 dpi and viewed) |
 
 ## Governing rules
 
@@ -23,6 +24,7 @@ Each rule was read from its source on 2026-10-14. Sources and the text relied on
 | Fed. R. Civ. P. 10(c) | Exhibits are part of the pleading. Same source. | Not templated (no exhibit section). |
 | Fed. R. Civ. P. 5(d)(1)(B) | No certificate of service is required for a paper served through the court's e-filing system. https://www.law.cornell.edu/rules/frcp/rule_5, fetched 2026-10-14. | No certificate is generated. The exemplar has none. |
 | M.D. Ga. L.R. 83.1.2(A) | Lead counsel's name, address and telephone number on the signature page of the first pleading. Local Rules, consolidated text (PDF dated 3-7-22), https://www.gamd.uscourts.gov/sites/gamd/files/Local_Rules_3-7-22.pdf, read 2026-10-14. | Signature block: "Lead Counsel:" line, with the address block under it. **The exemplar has no lead-counsel label**; the template follows the rule, so this differs from the exemplar on purpose. |
+| M.D. Ga. Local Rules (typeface) | No typeface, point size or spacing rule in the consolidated text (PDF dated 3-7-22, read 2026-10-14; LR 5.1 and 7.1 are not formatting rules). Face required: **none**. | Font: **EB Garamond** (`docs/FONTS.md`, "No face named"), 14 pt. The exemplar's Times New Roman is a filer's choice, not a rule. |
 | M.D. Ga. L.R. 83.1.2(B) | State Bar of Georgia number on the signature page of each pleading. Same source. | `signature.signers` (each attorney's Georgia Bar No. line). |
 | M.D. Ga. L.R. 87.1-87.3 | A nongovernmental corporate party files a corporate disclosure statement with its initial pleading; a party asserting diversity files a jurisdictional statement (state of incorporation and principal place of business; LLC members' citizenship). Same source. | **Not templated.** A separate filing; flagged for any corporate plaintiff. |
 | M.D. Ga. L.R. 5.4(A) | Redaction: SSN and taxpayer ID to last four digits, birth year only, minors' initials, financial account numbers to last four digits (the filer's duty). Same source. | **Not checked by the template.** Author's responsibility. |
@@ -78,8 +80,8 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/comp
 ## Known gaps and open choices
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers from different sources. Other M.D. Ga. complaints with stored RECAP PDFs were found (Nulph v. Houston Healthcare System, 5:21-cv-00423, 26 pages, Times New Roman, counsel filing; Mack v. Old Dominion Freight Lines, 5:21-cv-00118, 9 pages) but not saved, because the brief asks for one exemplar per doc type. **Tier 2 is therefore not judged against two filers.**
-2. **Font.** Times New Roman is not vendored (only EB Garamond is in `fonts/`), so the template sets **EB Garamond at 14 pt**, the exemplar's point size in Times. EB Garamond has a smaller x-height, so the text looks smaller than the exemplar. The choice of size is a tier-2 call; David may prefer a Times-metric vendored font.
-3. **M.D. Ga. typeface and margin rule.** None found in the 2022 consolidated Local Rules text (it contains no typeface, font-size, margin or spacing requirement). The layout therefore follows the exemplar, as the brief says. The consolidated text is dated 3-7-22; an amending order (3.8.22) exists and the current text was not confirmed. A later rule would override this layout.
+2. **Font.** The court names no face, so the template keeps **EB Garamond at 14 pt** (`docs/FONTS.md`, "No face named"). The exemplar is 14-pt Times New Roman; that is the filer's choice, not a rule. EB Garamond has a smaller x-height, so the text looks smaller than the exemplar. Liberation Serif (Times New Roman's metric-compatible substitute) is vendored; David may choose it for the tier-2 look, which is a template change not made here.
+3. **M.D. Ga. typeface and margin rule.** None found in the consolidated Local Rules text (PDF dated 3-7-22, fetched and text-extracted 2026-10-14; it contains no typeface, font-size, margin or spacing requirement). The layout therefore follows the exemplar, as the brief says. An amending order (3.8.22) exists and the current text was not confirmed. A later rule would override this layout.
 4. **Judge's standing orders** (Judge Self in the exemplar; any judge may impose form rules) were not checked.
 5. **Sample is a portion of the filing.** The sample carries ¶ 1-35, the prayer and the signature. Counts II and III (filed ¶ 36-86) are not transcribed, and the sample's paragraph numbers run from 1 (the template numbers them). The filed cross-reference "paragraphs 9-33" is kept as filed, so it does not match the sample's numbering.
 6. **Filed spelling is kept** ("impaiment", "Hopebridge, LLC's") so the sample matches the filing; the template does not correct it.
@@ -89,3 +91,4 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/comp
 10. **Not run:** `tools/check.sh` and `tools/check-selftest.sh` were not run. They expect a court-level folder with `court.json` and `rules.md`; this doc-type folder is in the one-folder-per-doc-type layout the brief sets, and the brief forbids editing `tools/`.
 11. **Lead counsel line** is a rule-driven addition the exemplar does not have (see the rules table).
 12. **Outside the template:** the corporate disclosure (L.R. 87), the civil cover sheet, the summons, and the redaction check (L.R. 5.4) are the filer's separate steps.
+13. **Exemplar PDF not in the folder.** Only `exemplars/SOURCE.md` is committed. The 2026-10-14 overlay was run with the PDF fetched from the URL in SOURCE.md (21 pages, "Filed 06/15/21" header checked) and passed as the third argument of `tools/overlay.sh`, not saved in the repo.

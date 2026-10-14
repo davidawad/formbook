@@ -4,7 +4,7 @@
 - Doc type: `adversary-complaint`. Complaint commencing an adversary proceeding (Fed. R. Bankr. P. 7001). Self-contained folder: no shared files.
 - Exemplar: `exemplars/FILED-EXAMPLE-hester-23-01002-complaint.pdf` (*Hester v. U.S. Department of Education*, Adv. No. 23-01002, filed 2023-01-06; provenance in `exemplars/SOURCE.md`). One exemplar only; see Known gaps.
 - Sample: `samples/INPUT-hester-complaint.md` (transcription of the filed complaint, 6 pages). `samples/INPUT-generic-adversary-complaint.md` is a fictional template smoke test, not a transcription.
-- Status: template and README complete; render, overlay and page review done for the Hester sample (6 of 6 pages). Typst engine only. `court.json` untouched.
+- Status: template and README complete; render, overlay and page review done for the Hester sample (6 of 6 pages). Typst engine only. `court.json` untouched. Fonts pass (2026-10-14): no face named by the court's rules, so EB Garamond is kept; re-rendered and re-reviewed (see Typeface row under Governing rules).
 
 ## Files
 
@@ -30,8 +30,11 @@ Verified on 2026-10-14 unless noted.
 | Fed. R. Civ. P. 10(b) (applies via Rule 7010; not re-verified this session) | Numbered paragraphs, each limited as far as practicable to a single set of circumstances. | `enum` show rule: numbered paragraphs run continuously through the complaint. |
 | Fed. R. Bankr. P. 7001, 9004(a)-(b) | Adversary proceeding; legibility and caption. | Cited in the template comment. Not re-verified this session. |
 | S.D. Ala. LBR 7026-1, "Discovery - Required Disclosures" (<https://www.alsb.uscourts.gov/sites/alsb/files/LocalRules_0.pdf>; the copy on the site is marked "Effective Date: December 1, 2009", read 2026-10-14) | Every complaint must state whether the pleader stipulates that Fed. R. Civ. P. 26(a)(1) will not apply. A complaint without the statement is construed as a stipulation that Rule 26(a)(1) will not apply. | Required `stipulation-26-1` field, rendered before the signature block. |
+| S.D. Ala. LBR, full copy (14 pp., same source, read 2026-10-14) | No typeface is named. A text search of the whole copy for font, typeface, point size, margin, spacing and paper finds no requirement for pleadings. | Typeface: no face required, so the template keeps EB Garamond (`docs/FONTS.md`, "No face named"). Size, margins and spacing are convention choices. |
 
-The same S.D. Ala. local rules copy contains no font, margin, spacing or paper-size requirement for complaints (grep for font, margin, spacing, format found none). Those values are convention choices, not rule values. The template header previously said the local rules were "dated 08/07/2023"; that date is not supported by the copy read on 2026-10-14 (effective December 1, 2009). Whether a newer local rules set exists is not verified.
+The same S.D. Ala. local rules copy contains no font, margin, spacing or paper-size requirement for complaints (grep for font, margin, spacing, format found none). Those values are convention choices, not rule values.
+
+**Typeface row (fonts pass, 2026-10-14):** face required: none. Vendored substitute: EB Garamond (the no-face default; no court-named face to substitute). Metric-compatible: n/a. Visual-only: n/a. Engines: typst only; this folder has no `latex/` or `docx/` engine to update. The template header previously said the local rules were "dated 08/07/2023"; that date is not supported by the copy read on 2026-10-14 (effective December 1, 2009). Whether a newer local rules set exists is not verified.
 
 ## Overlay
 

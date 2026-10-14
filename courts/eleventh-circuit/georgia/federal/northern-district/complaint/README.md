@@ -3,13 +3,13 @@
 Doc type: **complaint** in the United States District Court for the Northern District of Georgia (`gand`).
 Folder: `courts/eleventh-circuit/georgia/federal/northern-district/complaint/`.
 
-**BLOCKED (tier 1): font.** LR 5.1(C) requires Times New Roman (at least 14 point), Courier New (at least 12), Century Schoolbook (at least 13) or Book Antiqua (at least 13). None of these is vendored in `fonts/`, and the render may use only vendored fonts. The template therefore sets the body in **EB Garamond 14 pt as a stand-in**. The size meets the rule, but the face does not, so the PDF is not LR 5.1(C)-compliant until a permitted font is vendored. Fixing it is one parameter (`font-name` / `font-family` in `typst/gand-complaint.typ`) plus vendoring the font, and that touches shared `fonts/`, which this doc type may not edit.
+**Typeface (tier 1): resolved.** LR 5.1(C) permits Times New Roman (at least 14 point), Courier New (at least 12), Century Schoolbook (at least 13) or Book Antiqua (at least 13). The template uses the first listed face, Times New Roman 14 pt, and renders it with its substitute **Liberation Serif** (metric-compatible, per `docs/FONTS.md`; vendored, SIL OFL). The font is one parameter (`font-name` / `font-family` in `typst/gand-complaint.typ`). The leading is set to 1.645em so the baseline pitch stays at 32.2 pt, the pitch the EB Garamond build had. The earlier EB Garamond build was not Times-metric, so the page count moved from 12 to 13 pages on the same sample; the page count is now a Times-metric result.
 
 | Item | Status |
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-serveco-4-26-cv-00299-complaint.pdf` (primary, 30 pages, counsel-filed); second filer `exemplars/FILED-EXAMPLE-washington-4-26-cv-00302-complaint.pdf` (22 pages, counsel-filed). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-serveco-complaint.md` (a portion of the Serveco complaint; see Sample below) |
-| render | ok: `samples/OUTPUT-serveco-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings. sha256 `768fa70f9b1adc0ec253a209c0bcd52d459f4be0767afa61083aba1cf42f6d9a`. |
+| render | ok: `samples/OUTPUT-serveco-complaint.pdf`, 13 pages, typst 0.15.0, vendored fonts only (`pdffonts`: LiberationSerif and LiberationSerif-Bold embedded), no typst warnings. sha256 `685b8a7ee217f80058a3bcd9705e7f0684a0c53ae3226e2da4e75642b45604fb`. |
 | overlay | ok: `samples/OVERLAY-serveco-complaint.pdf` and `OVERLAY-serveco-complaint.txt` |
 | pages reviewed | 12 of 12, each rendered at 60 dpi and viewed in the final PDF |
 
@@ -23,7 +23,7 @@ M = mandated by a rule (tier 1). C = convention (tier 2). A = author responsibil
 
 | ID | Rule | Requirement | M/C/A | Where in the template |
 |---|---|---|---|---|
-| GAND-FORM-001 | LR 5.1(C) | Computer documents in Times New Roman at least 14 point (or the other listed fonts and sizes). | M | `font-name`, `type-size`. **BLOCKED**: stand-in font, see top. |
+| GAND-FORM-001 | LR 5.1(C) | Computer documents in Times New Roman at least 14 point (or the other listed fonts and sizes). | M | `font-name` = "Liberation Serif" (substitute for Times New Roman), `type-size` = 14pt. |
 | GAND-FORM-002 | LR 5.1(C) | Double-spaced between lines; footnotes, headings and indented citations may be single-spaced. | M | `body-leading` = 1.65em (32.2 pt baseline pitch, matched to the filed exemplar, Serveco p.2). Headings and the caption are single-spaced. |
 | GAND-FORM-003 | LR 5.1(D) | Top, bottom, left and right margins at least one inch. | M | `margin` = 1in on all four sides. |
 | GAND-FORM-004 | LR 5.1(E) | Pages numbered consecutively at the bottom center. | M | `page-footer()`: arabic numbers, centered in the footer. |
@@ -51,28 +51,30 @@ A transcription of the Serveco complaint (exemplar pp. 1–8, 24–25, 28–30):
 
 The overlay pairs sample pages with exemplar pages by word overlap, which is coarse: ours p.9–10 map to filed p.24 because the sample skips ¶¶ 31–86.
 
-## Gate 2 review (current PDF, all 12 pages rendered at 60 dpi and viewed)
+## Gate 2 review (current PDF, all 13 pages rendered at 60 dpi and viewed, 2026-10-14)
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
-| 1 | exemplar p.1 | Court title, caption (party column with `)` marks, case number, jury demand), title, lead-in, Nature of the Action. Overlap found in an earlier build (caption rows and paragraph lines), fixed: caption lines are fixed-height blocks, paragraph spacing equals the pitch. | PASS |
-| 2 | exemplar p.2 | Double-spaced body, numbered ¶¶ 2–4 on the grid. | PASS |
-| 3 | exemplar p.3 | ¶¶ 5–11, The Parties and Jurisdiction and Venue headings centered bold capitals. | PASS |
-| 4 | exemplar p.4 | ¶¶ 12–14. | PASS |
+| 1 | exemplar p.1 | Court title, caption (party column with `)` marks, case number, jury demand), title, lead-in, NATURE OF THE ACTION heading, ¶ 1. | PASS |
+| 2 | exemplar p.2 | Double-spaced body, ¶¶ 2–4. | PASS |
+| 3 | exemplar p.3 | ¶¶ 5–10; THE PARTIES heading centered bold capitals. | PASS |
+| 4 | exemplar p.4 | JURISDICTION AND VENUE heading; ¶¶ 11–14. | PASS |
 | 5 | exemplar p.5 | ¶¶ 15–18; footnote 1 at the foot of the page, 14 pt single-spaced. | PASS |
 | 6 | exemplar p.6 | ¶¶ 19–21. | PASS |
-| 7 | exemplar p.7 | ¶¶ 22–25; sub-heading "A. ServeCo and Its Business" bold left. | PASS |
-| 8 | exemplar p.8 | ¶¶ 25–30; sub-heading B. | PASS |
-| 9 | exemplar p.24 | COUNT III and its sub-heading centered; ¶¶ 31–33. | PASS |
-| 10 | exemplar p.24–25 | ¶¶ 34–37; PRAYER FOR RELIEF heading, WHEREFORE clause unnumbered. | PASS |
-| 11 | exemplar p.29 | Prayer items A–I lettered with hanging indent. | PASS |
-| 12 | exemplar p.30 | Item I ends; DEMAND FOR JURY TRIAL; unnumbered demand; Dated line; signature block with bar numbers, address, phone and emails. | PASS |
+| 7 | exemplar p.7 | ¶¶ 22–23; FACTUAL BACKGROUND; sub-heading "A. ServeCo and Its Business" bold left. | PASS |
+| 8 | exemplar p.8 | ¶¶ 24–27; sub-heading B. | PASS |
+| 9 | exemplar p.9 | ¶¶ 28–31; COUNT III and its sub-heading centered. The sample skips filed ¶¶ 31–86, so the text does not match the filed page (overlap 62%); the layout does. | PASS |
+| 10 | exemplar p.24 | ¶¶ 32–35. | PASS |
+| 11 | exemplar p.29 | ¶¶ 36–37; PRAYER FOR RELIEF heading, WHEREFORE clause unnumbered; items A–E lettered with hanging indent. | PASS |
+| 12 | exemplar p.30 | Items F–I; DEMAND FOR JURY TRIAL; unnumbered demand. | PASS |
+| 13 | exemplar p.30 | "Dated" line and signature block only (bar numbers, address, telephone, emails). The page has no body text. | OPEN (tier 2, see Known gaps 1a) |
 
 Rows are per the final PDF (sha256 above). The tier-2 comparison is against one filer's layout for the cover; the second filer (Washington) uses the same caption form (`)` column, "IN THE ..." court title) with counsel identification in the signature block on its last page, which matches the template. Its page-by-page layout was not compared.
 
 ## Known gaps and open choices
 
-1. **BLOCKED: font (tier 1).** See the top of this file. The render is EB Garamond 14 pt, not a permitted face. This is the only tier-1 item not met.
+1. **Font (tier 1): resolved, see the top of this file.** The render uses Liberation Serif 14 pt as the Times New Roman substitute. Whether a Times-metric render is accepted as the filed face is for David to confirm, since the filer prepares the brief in Times New Roman itself.
+   - **Orphan signature page (tier 2, OPEN).** Page 13 carries only the "Dated" line and the signature block. A clerk would expect the signature to share a page with the last text of the demand; not fixed here, because that needs a keep-with-next rule in the template.
 2. **Caption line breaks.** The court title is three fixed lines of the court's name, not wrapped text. The party names are split by the sample's frontmatter, not by the template.
 3. **Case number.** Before assignment the template prints a blank number. After assignment, `case_number` must carry the judge suffix (LR 5.1(K)); the template does not check the suffix format.
 4. **Standing orders.** Individual judges' standing orders (for example, the Standing Order Regarding Civil Litigation, which appears in the same RECAP docket listings) may impose more form requirements. They were not read for this doc type.

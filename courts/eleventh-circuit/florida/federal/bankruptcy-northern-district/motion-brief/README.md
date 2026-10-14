@@ -14,6 +14,7 @@ Verified 2026-10-14 against the Local Rules of the U.S. Bankruptcy Court, N.D. F
 | Memorandum of law or citation of authority served and filed with every motion in an adversary proceeding | LBR 9013-1(B); LBR 7007-1 | "MEMORANDUM OF LAW" section in the same document |
 | Length limits of the District Local Rules | LBR 9013-1(D) | District LR 7.1(F) below |
 | 14-point font or larger; double spaced; one-inch margins; pages numbered; case style, then heading | District LR 5.1(B)-(C) | 14 pt; double-spaced; 1 in margins; centred page number |
+| Typeface: none named (LR 5.1 sets the size only) | `docs/FONTS.md`: no face named → EB Garamond | Typeface row: face required = none; font = **EB Garamond** (no substitution, so no metric claim) |
 | Attorney signature block: signature, typed name, bar number, street and email addresses, telephone; identify the party | District LR 5.1(D) | Signature block from frontmatter, after the WHEREFORE paragraph |
 | Certificate of service with date and method | District LR 5.1(F) | Certificate in the body, after the word-count certificate |
 | Conferral certificate under a separate heading | District LR 7.1(C) | Certificate under its own heading before WHEREFORE |
@@ -29,11 +30,11 @@ Sample: `samples/INPUT-rooks.md` (transcription of the filed motion, 4 pages, Do
 
 - Layout matches the filing's order: caption, title, numbered paragraphs, memorandum, conferral certificate, WHEREFORE, signature, certificate of service, footnote 1 at the foot of its page.
 - Pagination: the render is 5 pages against 4 in the filing (the 14-point face and the added word-count certificate). Overlay word overlap per page: p1 76%, p2 46%, p3 48%, p4 54%, p5 85% (pairing by shared words; the drift reflects the extra page, not a rule failure).
-- Fonts: the filing is Times New Roman; EB Garamond is used (see gaps).
+- Fonts: the filing is Times New Roman; the rule names no face, so EB Garamond is used (see gaps). `pdffonts` on the render: EB Garamond Regular, Bold and Italic, embedded.
 
 ## Gaps
 
-- **Font face.** EB Garamond at 14 pt, not Times New Roman (no Times-metric face is vendored).
+- **Font face (accepted, tier 2).** The local rule requires 14-point, not a face, so `docs/FONTS.md` keeps EB Garamond. The filed exemplar is Times New Roman; the vendored Times substitute is Liberation Serif (metric-compatible). Switching is a choice of the clerk-convention reading, not a rule requirement, so it is not made here.
 - **Added certificate of word count.** LBR/LR 7.1(F) requires it; the 2016 filing has none. The template adds it (with the computed count).
 - **Title.** The filing's title has no "memorandum" words; the template adds "AND INCORPORATED MEMORANDUM OF LAW" as LBR 9004-1(A) requires for a paper containing a memorandum.
 - **Conferral heading** is transcribed as filed ("PER LOC. R. 7007-1"). Current practice cites LBR 9013-1(A)(2); the filed citation is kept because it is the exemplar's text.

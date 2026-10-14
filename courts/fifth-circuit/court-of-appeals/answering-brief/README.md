@@ -13,6 +13,14 @@ Status of this doc type:
 
 Not done: the tier-1 open questions under "Open questions" below. The template does not emit a red cover, and I could not confirm two local-rule points from primary text.
 
+## Typeface (fonts pass, 2026-10-14)
+
+| Court requirement | Face the rules name | Substitute | Fit |
+|---|---|---|---|
+| CA5-FORM-004: proportionally spaced serif, 14 pt or larger; sans serif only in headings and captions (FRAP 32(a)(5)(A)-(B)); CA5-CERT-002 certificate states the face | None. FRAP 32(a)(5) allows any proportionally spaced face with serifs; the certificate asks for the program and font used. | None needed: EB Garamond (`fonts/eb-garamond/`) kept | n/a (no court-named face; `docs/FONTS.md` "No face named") |
+
+The rules name no face, so the template keeps EB Garamond in typst, latex and docx. The filed exemplar is set in Century Schoolbook body text (Arial in headings and captions, per `pdffonts`); the rules allow it but do not require it, so the difference is a tier-2 visual choice, not a rule failure. Checked on the typst render: `pdffonts` lists only `EBGaramond` (Regular, Bold, Italic, BoldItalic) and nothing else is embedded.
+
 ## Governing rules
 
 Verified 2026-10-14. "Primary text" means the rule text was fetched and read; "secondary" means a search summary or a filed exemplar was the only source.

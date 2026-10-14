@@ -9,7 +9,8 @@ Folder: `courts/eleventh-circuit/florida/federal/northern-district/complaint/`.
 | sample md | `samples/INPUT-winton-complaint.md`: the whole 9-page complaint, transcribed (word-diff against the filing: body text identical; differences are caption, title, signature and running headers, which the frontmatter or the template supplies) |
 | render | ok: `samples/OUTPUT-winton-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (pdffonts), no warnings |
 | overlay | ok: `samples/OVERLAY-winton-complaint.pdf` and `OVERLAY-winton-complaint.txt` |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none named** (Loc. R. 5.1(C) says "at least 14-point font"; checked 2026-10-14 against the local rules PDF). Substitute: none; **EB Garamond** kept, as `docs/FONTS.md` "No face named" requires. Not metric-compatible with the exemplar's Times New Roman (known gap 2). |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-checked 2026-10-14 after the fonts pass, same 9 pages, same overlay map) |
 | BLOCKED | none (an exemplar was found) |
 
 ## Governing rules
@@ -74,7 +75,7 @@ Fixed during review: (1) paragraphs ran together on one line (per-paragraph bloc
 ## Known gaps and open choices
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for two or three filers. The search (CourtListener API, `type=r`, `court=flnd`, complaints filed 2026-05 to 2026-10) found recent complaints from other filers (Desantis v. Collection Management Co., 5:26-cv-00278; Adessi v. Bystrom, 5:26-cv-00266; Altitude Property Management v. Unhitched RV Park, 3:26-cv-04969; Langla v. Pfizer, 3:26-cv-04852; Griffin v. Clarity Services, 4:26-cv-00353; Guman v. Beech-Nut, 3:26-cv-03762). None was downloaded and checked beyond the list. Tier 2 is **not** judged against two filers yet.
-2. **Font size and face.** The rule requires 14 point. The exemplar is Times New Roman 14 pt; the template uses EB Garamond 14 pt, the only face vendored in `fonts/` (`fonts/` is shared and was not edited). EB Garamond has a smaller x-height, so the text looks smaller than the exemplar at the same point size. The point size meets the rule; the look is a tier-2 difference. A vendored Times-metric face would remove it: David's call.
+2. **Font size and face.** The rule requires 14 point and names no face. The exemplar is Times New Roman 14 pt, which is the filer's choice; the template uses EB Garamond 14 pt, as `docs/FONTS.md` ("No face named") requires. EB Garamond has a smaller x-height, so the text looks smaller than the exemplar at the same point size. The point size meets the rule; the look is a tier-2 difference, ACCEPTED. A Liberation Serif (Times-metric) template would look closer to the exemplar but is not required by the rule.
 3. **Double spacing read.** The body is double spaced at the exemplar's measured pitch. The caption, the court title, the signature block and the single-line party names are single spaced (customary in N.D. Fla. filings; the rule text does not say). Recorded as an interpretation.
 4. **Caption.** The party column is closed by a rule at its foot (the exemplar has the same closing rule and no ")" column). Florida filings often use a line of underscores ending in "/"; the rule is a tier-2 convention choice, ACCEPTED.
 5. **Footer.** The footer carries only the page number. The ECF header of the filed exemplar is added by the court system and is not reproduced.

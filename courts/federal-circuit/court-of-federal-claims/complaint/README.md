@@ -7,9 +7,10 @@ Doc-type folder for the Court of Federal Claims (`uscfc`), complaint. Self-conta
 | Item | Result |
 |---|---|
 | Exemplar | yes: one filed complaint (Design Build, LLC, No. 1:26-cv-01361, filed 2026-09-15). See `exemplars/SOURCE.md`. |
+| Typeface | Rule names no face (RCFC 5.5(c)(2): text and footnotes no smaller than 12 point). Keeps EB Garamond; no vendored substitute applied. Visual-only comparison to the exemplar's Times New Roman, see Known gaps 1. |
 | Render | ok: `sh tools/render.sh courts/federal-circuit/court-of-federal-claims/complaint samples/INPUT-design-build-llc-26-1361.md`; exit 0, no typst warnings, EB Garamond only (`pdffonts`). 13 pages. |
-| Overlay | ok: `sh tools/overlay.sh courts/federal-circuit/court-of-federal-claims/complaint design-build-llc-26-1361`; wrote `OVERLAY-…pdf` and `OVERLAY-….txt`. |
-| Pages reviewed | 13 of 13. Every page of the final render rasterized at 60 dpi (`pdftoppm -r 60`) and looked at. |
+| Overlay | ok: `sh tools/overlay.sh courts/federal-circuit/court-of-federal-claims/complaint design-build-llc-26-1361`; exit 0, wrote `OVERLAY-…pdf` and `OVERLAY-….txt`. The exemplar PDF was restored from the URL in `exemplars/SOURCE.md` and matches its SHA-256. |
+| Pages reviewed | 13 of 13. Every page of the final render rasterized at 50 dpi (`pdftoppm -r 50`) and looked at, 2026-10-14. |
 | Tier 2 vs. a second filer | not done (one exemplar only). |
 
 ## Governing rules
@@ -71,7 +72,7 @@ The map pairs by text, so it is approximate. Our pages 1–6 pair with exemplar 
 
 ## Known gaps
 
-1. **Typeface.** The shared font directory holds EB Garamond only; there is no vendored Times-metric face, and the exemplar is set in Times New Roman. The template uses EB Garamond at 12 point, which meets the rule's nominal 12-point minimum. EB Garamond has a smaller x-height than Times, so the text looks slightly smaller than the exemplar at the same point size. A Times-metric face would close the gap; adding one is a shared-font change, out of scope for this box.
+1. **Typeface.** RCFC 5.5(c)(2) sets only the minimum type size (12 point) and names no face; a search of the whole rules PDF (as amended July 27, 2026) finds no typeface named. Per `docs/FONTS.md` the template therefore keeps EB Garamond at 12 point. The exemplar is set in Times New Roman, which the rules do not require. `fonts/liberation-serif/` (Liberation Serif, the Times New Roman substitute) is vendored, but applying it here would be a convention choice, not a rule requirement. EB Garamond has a smaller x-height than Times, so the text looks slightly smaller than the exemplar at the same point size; the overlay shows this.
 2. **One exemplar.** Tier 2 (conventions a clerk expects) is judged against two or three filers. Only Design Build, LLC is in hand. A second complaint from another filer (for example one of the individual plaintiffs in the CourtListener results) is needed before tier 2 can be called done.
 3. **Partial transcription.** The sample omits ¶¶ 30–40 and 43–48 of the exemplar.
 4. **Not generated, by design:** the CM/ECF header line (`Case 1:26-cv-… Document 1 Filed … Page x of y`), the receipt-number stamp, the cover sheet (Form 2), and any RCFC 7.1 disclosure statement. These are court-system or separate-filing items.

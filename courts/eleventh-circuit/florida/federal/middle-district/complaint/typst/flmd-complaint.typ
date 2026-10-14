@@ -8,9 +8,9 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"   // STAND-IN, not a Rule 1.08 typeface: see README "Typeface". Only vendored font.
+#let font-family = "Liberation Serif"   // Times New Roman substitute (docs/FONTS.md, metric-compatible); the filed exemplar is Times New Roman, LR 1.08(b).
 #let type-size = 14pt              // FLMD-TYPE-002: main text at least 13-point (1.08(a)); Times New Roman must be 14-point (1.08(b)).
-#let body-leading = 1.35em         // FLMD-TYPE-001: 2.0 double-spaced. EB Garamond's line box is 0.65em, so 1.35em leading is a 2.0em baseline pitch.
+#let body-leading = 1.35em         // FLMD-TYPE-001: 2.0 double-spaced. Measured baseline pitch with Liberation Serif at 14pt is 28.1pt (2.0em), checked with pdftotext -bbox.
 #let single-leading = 0.5em        // FLMD-TYPE-003: indented quotations, caption, counsel and signature blocks are single-spaced.
 #let page-margin = 1in             // FLMD-PAGE-002: 1 inch on all sides.
 #let para-indent = 0.5in           // first-line indent of numbered paragraphs and of unnumbered body text.

@@ -8,8 +8,9 @@ Folder: `courts/fifth-circuit/louisiana/federal/middle-district/complaint/`. Cou
 | exemplar | yes: `exemplars/FILED-EXAMPLE-parker-3-25-cv-01162-complaint.pdf` (one counsel-filed complaint; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-parker-complaint.md` (the whole 5-page filing, transcribed) |
 | render | ok: `samples/OUTPUT-parker-complaint.pdf`, 5 pages, `tools/render.sh`, typst 0.15.0, vendored EB Garamond only, no typst warnings |
-| overlay | ok: `samples/OVERLAY-parker-complaint.pdf` and `samples/OVERLAY-parker-complaint.txt` (`tools/overlay.sh`, page map below) |
-| pages reviewed | 5 of 5 (every page rendered at 60 dpi and viewed after the last template change) |
+| overlay | ok: `samples/OVERLAY-parker-complaint.pdf` and `samples/OVERLAY-parker-complaint.txt` (`tools/overlay.sh`, page map below). The exemplar PDF is not in this snapshot; the overlay ran against a fresh copy from the CourtListener URL in `exemplars/SOURCE.md` (5 pages, Document 1, 12/31/25 stamp, checked) |
+| typeface | face required: **none** (LR 10(a)(1): "standard 12-point typeface"). Font kept: **EB Garamond** (no substitute: the rule names no face). Fit: n/a. See Known gaps 2 |
+| pages reviewed | 5 of 5 (every page rendered at 60 dpi and viewed after the last template change; re-checked on the fonts pass, 2026-10-14, no change to the template) |
 | gates | `tools/check.sh` and `tools/check-selftest.sh` not run: they expect a court folder with `court.json` and `rules.md`, and the brief forbids touching `tools/`. No `court.json` or stamp written. |
 
 File names: the brief names `samples/<id>.md` and `samples/<id>-overlay.pdf`. The tools use `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (CLAUDE.md: "The tools read and write these names by default"), so the tool names are used.
@@ -78,7 +79,7 @@ Tier-2 conventions (judged against the one exemplar available; see Known gaps): 
 ## Known gaps and open choices
 
 1. **One exemplar only.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The RECAP search (`court=lamd`, document search for "COMPLAINT", many queries) found one counsel-filed complaint with a PDF: Parker (this exemplar). `Verdin` (3:25-cv-00658, amended complaint, Document 43, 12 pages, Arial) has no counsel named on the docket entry; it was not saved. The CourtListener API rate limit (5 requests/minute) cut the search short. Tier 2 is therefore **not** judged against two filers for this doc type. A second counsel-filed MDLA complaint should be sought before the doc type is called done.
-2. **Font.** LR 10(a)(1) requires "standard" 12-point type. The exemplar is Times New Roman. The only serif vendored in `fonts/` is EB Garamond, which at 12 pt has a smaller x-height, so the text looks smaller than the exemplar. The point size meets the rule; a Times-metric font would remove the difference. Question for David: vendor a Times-metric font, or accept EB Garamond (as the ca9 templates do).
+2. **Font (resolved on the fonts pass, 2026-10-14).** LR 10(a)(1) requires "standard 12-point typeface" (checked in the 2022 Local Rules PDF with `pdftotext -layout`, LR 10(a)(1)); it names no face, so `docs/FONTS.md` gives no substitute and the template keeps EB Garamond. The filed exemplar is Times New Roman, a filer's choice that the rule does not require; that difference is tier 3 and is not chased. EB Garamond at 12 pt has a smaller x-height than Times, so the text looks smaller than the exemplar; the point size meets the rule. `pdffonts` on the render: EB Garamond Regular and Bold only, embedded.
 3. **Second structurally different sample not made.** EVAL-LOOP Gate 3 asks for a second, fictional sample. The brief asks for one transcription per doc type; not done.
 4. **Certificate of interested persons (LR 7.1, LR 10(a)(4)).** Required with the complaint; not produced by this template (separate filing).
 5. **Judge initials.** The sample carries `SDD`/`EWD` as the allotted initials. The exemplar header shows them; the caption in the exemplar leaves the JUDGE lines blank. The template prints the judge lines only when the frontmatter gives them.

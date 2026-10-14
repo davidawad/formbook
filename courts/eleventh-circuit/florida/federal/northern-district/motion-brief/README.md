@@ -9,7 +9,8 @@ Folder: `courts/eleventh-circuit/florida/federal/northern-district/motion-brief/
 | sample md | `samples/INPUT-kinsale-motion.md`: the whole 12-page motion and memorandum, transcribed (word-diff against the filing: body text identical; differences are caption, title, signature and running headers) |
 | render | ok: `samples/OUTPUT-kinsale-motion.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (pdffonts), no warnings |
 | overlay | ok: `samples/OVERLAY-kinsale-motion.pdf` and `OVERLAY-kinsale-motion.txt` |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none named** (Loc. R. 5.1(C) says "at least 14-point font"; checked 2026-10-14 against the local rules PDF). Substitute: none; **EB Garamond** kept, as `docs/FONTS.md` "No face named" requires. Not metric-compatible with the exemplar's Times New Roman (known gap 2). |
+| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change; re-checked 2026-10-14 after the fonts pass, same 12 pages, same overlay map) |
 | BLOCKED | none (an exemplar was found) |
 
 ## Governing rules
@@ -77,7 +78,7 @@ Fixed during review: (1) the signature block moved before the certificate of ser
 ## Known gaps and open choices
 
 1. **Only one exemplar.** Tier 2 asks for two or three filers. The CourtListener API search (`type=r`, `court=flnd`, "motion to dismiss", filed 2026-04 to 2026-10) found other N.D. Fla. motions: Howard v. Huhman, 4:26-cv-00161 (ECF 41, 17 pp.); Joshi v. OpenAI Foundation, 4:26-cv-00222 (ECF 33 and 42); Canup v. Aylstock, 3:26-cv-03359 (ECF 79, 37 pp.). Howard was downloaded and checked for text (Times New Roman 14 pt, 17 pp.) and not saved. Tier 2 is **not** judged against two filers yet.
-2. **Font size and face.** The rule requires 14 point. The exemplar is Times New Roman 14 pt; the template uses EB Garamond 14 pt, the only face vendored in `fonts/` (`fonts/` is shared and was not edited). EB Garamond has a smaller x-height, so the text looks smaller at the same point size. A vendored Times-metric face would remove it: David's call.
+2. **Font size and face.** The rule requires 14 point and names no face. The exemplar is Times New Roman 14 pt, which is the filer's choice; the template uses EB Garamond 14 pt, as `docs/FONTS.md` ("No face named") requires. EB Garamond has a smaller x-height, so the text looks smaller at the same point size. The point size meets the rule; the look is a tier-2 difference, ACCEPTED. A Liberation Serif (Times-metric) template would look closer to the exemplar but is not required by the rule.
 3. **Telephone number in the signature block.** Loc. R. 5.1(D) asks for a telephone number. The filed exemplar has none (its signature block gives the firm's PO box and email only). The sample transcribes the filing, so it has none; the template renders whatever the frontmatter gives and does not check for it. A filing built from this template should add one.
 4. **Word count method.** See "Word count" above: the sample's count is 2,308; the filing's stated count is 2,286. The certificate states the sample's count.
 5. **Double spacing read.** The body is double spaced at the exemplar's measured pitch. The caption, the court title, the signature block and the single-line party names are single spaced, as is customary. Recorded as an interpretation.
