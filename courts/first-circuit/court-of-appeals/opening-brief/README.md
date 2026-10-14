@@ -83,3 +83,29 @@ Tier-2 findings (OPEN or ACCEPTED): the Argument starts on a new page after the 
 8. The standard-of-review check (FRAP 28(a)(8)(B)) is a heuristic: it passes if the body says "standard of review" or any heading contains "standard".
 9. The certificate of service is generic CM/ECF wording; it does not list unregistered recipients unless `service.unregistered` is given.
 10. Only the vendored EB Garamond is available. No Century Schoolbook or Times New Roman is vendored (`fonts/` is shared and not edited here).
+
+## Engines
+
+The typst template is the reference. The same sample is rendered in two more engines; each has its own output in `samples/`.
+
+| Engine | Folder | Output | Status |
+|---|---|---|---|
+| typst (primary) | `typst/` | `samples/OUTPUT-figueroa-opening-brief.pdf` (14 pages) | unchanged |
+| latex | `latex/` (`template.tex` + `ca1.lua`, tectonic) | `samples/OUTPUT-figueroa-opening-brief.latex.pdf` (13 pages) | renders; checked by eye, see below |
+| docx | `docx/` (`reference.docx` + `ca1.lua`, pandoc) | `samples/OUTPUT-figueroa-opening-brief.docx` | builds and validates; `.docx.pdf` BLOCKED (no LibreOffice) |
+
+**LaTeX matches** (tier 1): EB Garamond 14 pt from `fonts/` only (`fontdir`), body double-spaced at the typst pitch (31.5 pt), 1 inch margins, footnotes 14 pt, roman front matter, arabic body, the cover (FRAP 32(a)(2)), the TOC and TOA with page numbers from the aux file, the certificates (Form 6 wording and the word count, 1159 words, equal to typst), the signature and the addendum with `Add-N` pages. The addendum is required (1st Cir. R. 28.0(a)(1)) and is present in the sample.
+
+**LaTeX differs** (tier 2): the body breaks lines and pages a little differently, so the sample is 13 pages against typst's 14. The sub-heading paragraphs keep with the text below them by `\nobreak` only (`needspace` misfired in this box). The signature block is not kept with the last paragraph. Tectonic fetches TeX packages on its first run (cached afterwards).
+
+**DOCX** (`samples/OUTPUT-figueroa-opening-brief.docx`): the word count is 1159, equal to typst. The cover, certificates and signature use the custom styles in `reference.docx`; the sections give roman front matter, arabic body and (addendum briefs) `Add-N`.
+
+BLOCKED (docx):
+- `docx.pdf` checks (every gate on the LibreOffice PDF): BLOCKED, no `soffice` on this box (LibreOffice has no conda-forge package; `docs/DOCX.md`). No `samples/.check-docx.txt` stamp is written.
+- Contents and authorities page numbers: no page numbers are printed. They need a first-pass layout, which needs LibreOffice. The entries list the headings and authorities only.
+- Point headings of the Argument are Heading 2 (left), not centered small capitals.
+- Check boxes are the text "[X]" (EB Garamond has no check-box glyph).
+- Cover rule lines are not drawn in the docx.
+- The `.docx` is not yet opened in Word or LibreOffice (no LibreOffice here), so the no-repair check is not done.
+
+Build: `sh docx/make-reference.sh addendum` once (the output is committed), then `sh tools/render.sh --engine latex|docx <court-dir> samples/INPUT-figueroa-opening-brief.md`. The docx command exits non-zero at the LibreOffice step after writing the `.docx`.

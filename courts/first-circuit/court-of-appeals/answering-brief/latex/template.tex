@@ -1,0 +1,114 @@
+% LaTeX template for the First Circuit brief (engine "latex"). Mirrors ../typst/ca1-opening-brief.typ:
+% the same form (FRAP 32(a)): EB Garamond 14 pt, double-spaced body, 1 inch margins, roman front matter,
+% arabic body, Add-N addendum. The content (cover, TOC, TOA, certificates, headings) is built by ca1.lua
+% from the markdown and its frontmatter; this file only holds the page layout and the macros it calls.
+\documentclass[14pt,letterpaper]{extarticle}
+\usepackage{fontspec}
+% Vendored EB Garamond only (fontdir is passed by tools/render-latex.sh). No system fonts.
+\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf, UprightFont=EBGaramond-Regular, ItalicFont=EBGaramond-Italic,
+  BoldFont=EBGaramond-Bold, BoldItalicFont=EBGaramond-BoldItalic, Ligatures=TeX]{EBGaramond-Regular}
+\usepackage[letterpaper,margin=1in,footskip=0.5in]{geometry}   % FRAP 32(a)(4)
+\usepackage{indentfirst}     % every paragraph is indented, including the first after a heading
+\usepackage{needspace}
+\usepackage{longtable,booktabs}
+\usepackage{tikz}            % check boxes of the certificates (drawn, no glyph needed)
+\providecommand{\href}[2]{#2}
+\providecommand{\url}[1]{\texttt{#1}}
+\usepackage{etoolbox}
+\raggedright                 % typst: justify: false
+\hyphenpenalty=10000 \exhyphenpenalty=10000   % typst: hyphenate: false
+\setlength{\parindent}{0.5in}  % typst: para-indent
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{0pt}
+\pagestyle{plain}
+\makeatletter
+\AtBeginDocument{%
+  \renewcommand\normalsize{\@setfontsize\normalsize{14pt}{31.5pt}}%   double spacing (typst body-leading, 31.4 bp pitch)
+  \normalsize
+}
+\renewcommand\footnotesize{\@setfontsize\footnotesize{14pt}{16pt}}   % FRAP 32(a)(5)(A): footnotes 14 pt too
+\renewcommand\footnoterule{\kern-3pt\hrule width 0.3\textwidth height 0.5pt\kern2.6pt}
+\setlength{\footnotesep}{0.5em}
+\renewcommand\@makefntext[1]{\noindent\setlength{\parindent}{0pt}\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
+\renewenvironment{quote}{%
+  \par\begingroup\leftskip=0.5in\rightskip=0.5in\parindent=0pt
+  \fontsize{14pt}{16pt}\selectfont\vspace{1em}%
+}{\par\vspace{1em}\endgroup}
+\providecommand\tightlist{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% ---- Headings (typst style-heading) ----
+\newcommand{\caonesingle}{\fontsize{14pt}{16pt}\selectfont}
+% One TOC/TOA line: the entry text (wrapped lines hang under the title), dot leader, page.
+\newcommand{\caonetocentry}[3]{\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\hspace*{#1}\makebox[0.5in][l]{#2}#3}
+\newcommand\l@caonetoc[2]{\par\addvspace{0.4em}\begingroup\caonesingle\setlength{\parfillskip}{0pt}\noindent#1\nobreak\ %
+  \leaders\hbox{.\hspace{0.16em}}\hfill\nobreak\hbox to 2.6em{\hfill#2}\par\endgroup}
+% Section heading (level 1): centered, bold, capitals. Listed in the TOC unless the caller says otherwise.
+\newcommand{\caonesec}[1]{%
+  \par\addvspace{21pt}%
+  \addcontentsline{toc}{caonetoc}{\caonetocentry{0pt}{}{\uppercase{#1}}}%
+  \begingroup\centering\fontsize{16.1pt}{19pt}\selectfont\bfseries\MakeUppercase{#1}\par\endgroup
+  \nobreak\vspace{15pt}\par\nobreak}
+\newcommand{\caonesecnotoc}[1]{%
+  \par\addvspace{21pt}%
+  \begingroup\centering\fontsize{16.1pt}{19pt}\selectfont\bfseries\MakeUppercase{#1}\par\endgroup
+  \nobreak\vspace{15pt}\par\nobreak}
+% Point heading in the Argument (level 2): centered, bold small capitals, with its numeral.
+\newcommand{\caonepoint}[2]{%
+  \par\addvspace{16.8pt}%
+  \addcontentsline{toc}{caonetoc}{\caonetocentry{0pt}{#1}{#2}}%
+  \begingroup\caonesingle\centering\bfseries\addfontfeature{Letters=SmallCaps}#1\ #2\par\endgroup
+  \nobreak\vspace{14pt}\par\nobreak}
+% Sub-heading (levels 2-5 outside the point headings): label in a 0.5 in box, text hangs under it.
+% Args: indent, label, title, level. Levels 4 and 5 are bold italic; levels 4-5 are not in the TOC.
+\newcommand{\caonesub}[4]{%
+  \par\addvspace{1.1em}%
+  \ifnum#4<5 \addcontentsline{toc}{caonetoc}{\caonetocentry{#1}{#2}{#3}}\fi
+  \begingroup\caonesingle\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\noindent\hspace*{#1}%
+  \ifnum#4>3 \itshape\fi\bfseries
+  \makebox[0.5in][l]{#2}#3\par\endgroup
+  \nobreak\vspace{0.9em}\par\nobreak}
+% Unnumbered sub-heading in the addendum: bold, left. Its label records the page for the addendum's contents.
+\newcommand{\caoneaddsub}[2]{%
+  \par\addvspace{1.2em}\label{#2}%
+  \begingroup\caonesingle\noindent\bfseries#1\par\endgroup\nobreak\vspace{0.9em}\par\nobreak}
+
+% ---- Table of contents and of authorities ----
+\newcommand{\caonetocprint}{\@starttoc{toc}}
+% One line of the addendum's contents, its page from the label (\pageref, so LaTeX reruns it).
+\newcommand{\caoneaddtocline}[2]{\l@caonetoc{\caonetocentry{0pt}{}{#1}}{\pageref{#2}}}
+% Citation: the text, plus a record of its page in the aux file (read on the next pass).
+\newcommand{\toahit}[2]{#2\protected@write\@auxout{}{\string\caonetoaref{#1}{\thepage}}}
+\newcommand{\caonetoaref}[2]{%
+  \@ifundefined{caonetoaseen@#1@#2}{%
+    \expandafter\gdef\csname caonetoaseen@#1@#2\endcsname{}%
+    \@ifundefined{caonetoapl@#1}{%
+      \expandafter\gdef\csname caonetoapl@#1\endcsname{#2}%
+      \expandafter\gdef\csname caonetoan@#1\endcsname{1}%
+    }{%
+      \expandafter\xdef\csname caonetoapl@#1\endcsname{\csname caonetoapl@#1\endcsname, #2}%
+      \expandafter\xdef\csname caonetoan@#1\endcsname{\number\numexpr\csname caonetoan@#1\endcsname+1\relax}%
+    }%
+  }{}}
+% Page list for one authority: "passim" at seven pages or more (typst passim-threshold).
+\newcommand{\caonetoapages}[1]{%
+  \@ifundefined{caonetoan@#1}{}{%
+    \ifnum\csname caonetoan@#1\endcsname>6 \emph{passim}\else\csname caonetoapl@#1\endcsname\fi}}
+\newcommand{\caonetoaentry}[2]{% display text, key
+  \par\addvspace{0.7em}\begingroup\caonesingle\noindent\hangindent=0.35in\hangafter=1 #1\ %
+  \leaders\hbox{.\hspace{0.16em}}\hfill\ \caonetoapages{#2}\par\endgroup}
+\newcommand{\caonetoahead}[1]{\par\addvspace{1em}\noindent\textbf{#1}\par\nobreak}
+\newcommand{\caonetoaheadpages}[1]{\par\addvspace{1em}\noindent\textbf{#1}\hfill\textbf{\underline{Page(s)}}\par\nobreak}
+
+% ---- Cover (FRAP 32(a)(2)) ----
+\newcommand{\caonedoublerule}{\par\noindent\rule{\textwidth}{1.6pt}\par\vspace{2.5pt}\noindent\rule{\textwidth}{0.5pt}\par}
+\newcommand{\caoneshortrule}{\par\begin{center}\rule{2in}{0.7pt}\end{center}\par}
+\newcommand{\caonecheckbox}[1]{%
+  \begin{tikzpicture}[baseline=-0.55ex,line width=0.7pt]
+    \draw (0,0) rectangle (0.72em,0.72em);
+    \ifnum#1=1 \draw (0,0) -- (0.72em,0.72em) (0,0.72em) -- (0.72em,0);\fi
+  \end{tikzpicture}}
+
+\makeatother
+\begin{document}
+$body$
+\end{document}
