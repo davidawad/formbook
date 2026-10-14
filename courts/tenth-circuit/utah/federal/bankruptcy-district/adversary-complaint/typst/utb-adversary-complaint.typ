@@ -46,7 +46,9 @@
 }
 
 /// Headings are blocks kept with the text after them.
-#let heading-block(c) = block(width: text-width, above: pitch, below: 0.5em, sticky: true, c)
+// Typst adds leading only between lines, so `below` restores the trailing leading and keeps the next line on the
+// 24 pt pitch (without it, each paragraph's first line lands on the previous paragraph's last line).
+#let heading-block(c) = block(width: text-width, above: pitch, below: body-leading, sticky: true, c)
 
 /// A lettered prayer item: the letter sits at the paragraph indent, the text hangs to its right.
 #let lettered-item(label, rest) = {
@@ -154,32 +156,36 @@
         v(body-leading)
       })
     } else if t.match(regex("^[A-Z]\\.[ \\t]")) != none {
-      piece = block(width: text-width, above: 0pt, below: 0pt, lettered-item(t.at(0) + ".", t.slice(3)))
+      piece = block(width: text-width, above: 0pt, below: body-leading, lettered-item(t.at(0) + ".", t.slice(3)))
     } else if t.starts-with("WHEREFORE") or not seen-heading {
       // The prayer's lead-in and the complaint's lead-in are not allegations: they are unnumbered.
-      piece = block(width: text-width, above: 0pt, below: 0pt, {
-        set par(leading: body-leading, first-line-indent: para-indent)
+      piece = block(width: text-width, above: 0pt, below: body-leading, {
+        set par(leading: body-leading, first-line-indent: 0pt)
+        h(para-indent)
         md(t)
       })
     } else {
       // The number is placed at the first line, not typed inline: a paragraph nested in the same line
-      // would measure as one line high and overlap the paragraph after it.
+      // would measure as one line high and overlap the paragraph after it. The first-line indent is a
+      // leading space: cmarker's paragraphs do not take the par setting.
       n += 1
-      piece = block(width: text-width, above: 0pt, below: 0pt, {
+      piece = block(width: text-width, above: 0pt, below: body-leading, {
         place(top + left, dx: para-indent, [#n])
-        set par(leading: body-leading, first-line-indent: para-indent + 0.4in)
+        set par(leading: body-leading, first-line-indent: 0pt)
+        h(para-indent + 0.4in)
         md(t)
       })
     }
     if has-pending {
-      block(breakable: false, width: text-width, { pending; piece })
+      // The group's bottom gap is on the group: a container drops the spacing of its last child.
+      block(breakable: false, width: text-width, below: body-leading, { pending; piece })
     } else {
       piece
     }
     pending = []
     has-pending = false
   }
-  if pending != [] { block(breakable: false, width: text-width, pending) }
+  if pending != [] { block(breakable: false, width: text-width, below: body-leading, pending) }
 }
 
 // ---------------------------------------------------------------------------
@@ -205,8 +211,8 @@
 /// Verification (28 U.S.C. § 1746 declaration), when the complaint is verified.
 #let verification-block(meta) = if "verification" in meta and meta.verification != none {
   let vm = meta.verification
-  block(width: text-width, breakable: false, {
-    heading-block(align(center, text(weight: "bold", "VERIFICATION")))
+  block(width: text-width, breakable: false, above: pitch, {
+    block(below: body-leading, align(center, text(weight: "bold", "VERIFICATION")))
     set par(leading: body-leading, first-line-indent: para-indent)
     [I, #(vm.declarant), declare under penalty of perjury under the laws of the United States of America that I am #(vm.title) of #(vm.entity), that I have read the foregoing #(meta.title), and that the factual allegations in it are true and correct to the best of my knowledge, information, and belief.]
     v(pitch)
