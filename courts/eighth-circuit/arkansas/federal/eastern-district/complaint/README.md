@@ -7,7 +7,8 @@ Doc type: **complaint** in the United States District Court for the Eastern Dist
 | exemplar | yes: `exemplars/FILED-EXAMPLE-hess-equifax-3-26-cv-00016-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-hess-equifax.md` (the whole complaint, 89 numbered paragraphs, prayer, signature; OCR typos corrected, see gap 9) |
 | render | ok: `samples/OUTPUT-hess-equifax.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-hess-equifax.pdf` and `OVERLAY-hess-equifax.txt` |
+| typeface | face required: **none** (E.D. Ark. LR 5.5(a) sets a type-size minimum, "elite", and names no face) → **EB Garamond** kept (no substitute needed; visual-only for any Times expectation) |
+| overlay | not regenerated on 2026-10-14: the filed exemplar PDF is absent from this snapshot (only `exemplars/SOURCE.md` is tracked), so `overlay.sh` exits 1. `samples/OVERLAY-hess-equifax.txt` is from the earlier run. |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed; pages 1 to 8 before the signature-block fix, page 9 after it) |
 
 ## Governing rules

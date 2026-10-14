@@ -7,7 +7,8 @@ Doc type: **motion-brief**, the brief in support of a Rule 12(b)(6) motion to di
 | exemplar | yes: `exemplars/FILED-EXAMPLE-campbell-ensurety-4-26-cv-00387-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-campbell-motion-brief.md` (the whole brief: caption, introduction, facts with a table, standard of review, argument A to C with a block quotation, conclusion, signature) |
 | render | ok: `samples/OUTPUT-campbell-motion-brief.pdf`, 7 pages (the exemplar is 8), typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-campbell-motion-brief.pdf` and `OVERLAY-campbell-motion-brief.txt` |
+| typeface | face required: **none** (E.D. Ark. LR 5.5(a) sets a type-size minimum, "elite", and names no face) → **EB Garamond** kept (no substitute needed; visual-only for any Times expectation) |
+| overlay | not regenerated on 2026-10-14: the filed exemplar PDF is absent from this snapshot (only `exemplars/SOURCE.md` is tracked), so `overlay.sh` exits 1. `samples/OVERLAY-campbell-motion-brief.txt` is from the earlier run. |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed in its final state) |
 
 ## Governing rules
