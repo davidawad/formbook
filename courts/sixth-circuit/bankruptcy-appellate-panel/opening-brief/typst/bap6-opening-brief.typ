@@ -23,7 +23,7 @@
 #let para-indent = 0.5in
 #let passim-threshold = 7                  // an authority cited on this many pages or more prints "passim" (style)
 #let word-limit = if doc-type == "reply" { 6500 } else { 13000 }   // FRBP 8015(a)(7)(B)(i)-(ii)
-#let oral-argument-required = doc-type != "reply"                  // FRBP 8019(a); LBR 8014-1(b)
+#let oral-argument-required = doc-type == "opening"                  // FRBP 8019(a); LBR 8014-1(b). The filed appellee brief (19-8005) has none, so it is optional there.
 #let required-sections = if doc-type == "opening" {
   ("Statement of Jurisdiction", "Statement of the Issues", "Statement of the Case", "Summary of Argument", "Argument", "Conclusion")
 } else if doc-type == "answering" {
@@ -154,7 +154,7 @@
     lines = lines + ((stack(dir: ttb, spacing: single-leading, ..names, inl(side.designation))),)
     if side != meta.caption.last() { lines = lines + ([v.],) }
   }
-  #stack(dir: ttb, spacing: 1.1em, ..lines)
+  #stack(dir: ttb, spacing: 0.9em, ..lines)
   #v(1.4em)
   #inl(meta.proceeding)
   #v(1.4em)
@@ -163,10 +163,10 @@
   #for group in meta.counsel {
     let rows = group.names.map(n => inl(n)) + group.lines.map(l => inl(l))
     stack(dir: ttb, spacing: single-leading, ..rows)
-    v(1.2em)
+    v(0.9em)
   }
   #stack(dir: ttb, spacing: single-leading, ..(meta.phone,).map(p => [#p]))
-  #v(1.4em)
+  #v(0.8em)
   #meta.at("date", default: "")
 ]
 
@@ -179,8 +179,8 @@
   for head in query(heading.where(outlined: true)) {
     let indent = if head.level == 1 { 0pt } else { 1.5em * (head.level - 1) }
     block(above: 0.5em, below: 0.5em, width: 100%)[
-      #set par(leading: single-leading, first-line-indent: 0pt)
-      #h(indent)#head.body #box(width: 1fr, repeat[.]) #printed-page(head.location())
+      #set par(leading: single-leading, first-line-indent: 0pt, hanging-indent: 1.5em)
+      #grid(columns: (1fr, auto), column-gutter: 0.5em, [#h(indent)#head.body], [#printed-page(head.location())])
     ]
   }
 }
@@ -263,7 +263,7 @@
   heading(level: 1)[Table of Authorities]
   toa-section(auths)
   pagebreak()
-  if oral-argument-required {
+  if "oral_argument" in meta {
     heading(level: 1)[Statement Regarding Oral Argument]
     inl(meta.oral_argument)
     pagebreak()
