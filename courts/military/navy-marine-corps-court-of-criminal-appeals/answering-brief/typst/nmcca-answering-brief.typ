@@ -113,7 +113,7 @@
 }
 
 // ---------------------------------------------------------------------------
-// Signature block and certificate (Appendix I; NMCCA-FORM-008, NMCCA-FORM-009)
+// Signature block and certificate (Appendix I; NMCCA-CONT-007, NMCCA-CONT-008)
 // ---------------------------------------------------------------------------
 
 #let signature-block(meta) = block(breakable: false, width: 100%)[
