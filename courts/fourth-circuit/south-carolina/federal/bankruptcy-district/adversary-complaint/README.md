@@ -9,7 +9,8 @@ Folder: `courts/fourth-circuit/south-carolina/federal/bankruptcy-district/advers
 | sample md | `samples/INPUT-haigler-joye.md`: the whole 9-page filing transcribed (caption, jurisdiction, 50 numbered allegations, three causes of action, prayer, signature) |
 | render | ok: `samples/OUTPUT-haigler-joye.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> samples/INPUT-haigler-joye.md`) |
 | overlay | ok: `samples/OVERLAY-haigler-joye.pdf` and `samples/OVERLAY-haigler-joye.txt` (`sh tools/overlay.sh <this-dir> haigler-joye`) |
-| pages reviewed | 8 of 8 (every page rasterized at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none** (the FRBP cited below and the SC LBR name no typeface; the exemplar's Times New Roman is a filer's choice, which the rules do not require). Vendored substitute: **EB Garamond** (kept, no court face). Fit: n/a. Re-checked 2026-10-14 in the fonts pass: `pdffonts` shows only EB Garamond embedded. The SC LBR PDF could not be read through WebFetch that day, so its no-typeface reading rests on the earlier 2026-10-14 fetch recorded in the Governing rules table below, not on a re-read. |
+| pages reviewed | 8 of 8 (every page rasterized at 60 dpi and viewed after the last template change; re-viewed 2026-10-14 in the fonts pass) |
 
 File names: the brief asked for `samples/<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. The sample is `<id>.md` as asked. The render and overlay use the names `tools/render.sh` and `tools/overlay.sh` write (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`); `overlay.sh` reads `OUTPUT-<id>.pdf` by name and cannot be pointed elsewhere.
 

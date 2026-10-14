@@ -9,7 +9,8 @@ Folder: `courts/fourth-circuit/south-carolina/federal/bankruptcy-district/motion
 | sample md | `samples/INPUT-ard-zeidmans.md`: the whole 8-page filing transcribed (SC LBR 7012-1 notice, caption, motion, facts, argument with A./B. and 1./2. sub-headings, footnote 1, conclusion, signature) |
 | render | ok: `samples/OUTPUT-ard-zeidmans.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> samples/INPUT-ard-zeidmans.md`) |
 | overlay | ok: `samples/OVERLAY-ard-zeidmans.pdf` and `samples/OVERLAY-ard-zeidmans.txt` (`sh tools/overlay.sh <this-dir> ard-zeidmans`) |
-| pages reviewed | 8 of 8 (every page rasterized at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none** (the FRBP and the SC LBR cited below name no typeface; the exemplar's Times New Roman is a filer's choice, which the rules do not require). Vendored substitute: **EB Garamond** (kept, no court face). Fit: n/a. Re-checked 2026-10-14 in the fonts pass: `pdffonts` shows only EB Garamond embedded. The SC LBR PDF could not be read through WebFetch that day, so its no-typeface reading rests on the 2026-10-14 fetch recorded below, not on a re-read. |
+| pages reviewed | 8 of 8 (every page rasterized at 60 dpi and viewed after the last template change; re-viewed 2026-10-14 in the fonts pass) |
 
 File names: as in `adversary-complaint/README.md` (the sample is `<id>.md` as the brief asked; the render and overlay use `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`, which `tools/overlay.sh` requires).
 
