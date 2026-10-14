@@ -9,7 +9,8 @@ Folder: `courts/fourth-circuit/north-carolina/federal/western-district/complaint
 | sample md | `samples/INPUT-bell-complaint.md`: a portion of the filing (caption, lead-in, intro, parties, jurisdiction, facts, claims 1 and 2, prayer, jury demand, signature) |
 | render | ok: `samples/OUTPUT-bell-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | overlay | ok: `samples/OVERLAY-bell-complaint.pdf` and `samples/OVERLAY-bell-complaint.txt` (`tools/overlay.sh`) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none named (LCvR 7.1(d) sets a 12-point minimum only; a judge's standing order may set a face). Substitute: none; **EB Garamond kept** per `docs/FONTS.md` ("No face named"). Metric-compatible: n/a. |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change; re-checked 2026-10-14 with the font pass, no template change) |
 
 File names follow the tools' defaults (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`) rather than the
 `<id>.md` / `<id>-overlay.pdf` names in the task brief, because `tools/render.sh` and `tools/overlay.sh` read and write
@@ -31,7 +32,7 @@ orders can change the font, spacing and page limits for a given judge, and LCvR 
 
 ## Layout
 
-- US Letter, one-inch margins on all four sides, 12 pt EB Garamond (vendored in `fonts/`, the only family vendored).
+- US Letter, one-inch margins on all four sides, 12 pt EB Garamond (vendored in `fonts/`; no face is named by the rules, so it stays per `docs/FONTS.md`).
 - First page: the court title (three bold centered lines, the last one the division when the sample gives one), then a
   caption: the party column with one line per row, a ")" column the same height as the party column, and the right
   column with "Civil Action No." and the title. A "JURY TRIAL DEMANDED" line sits under the title when the sample asks.
@@ -73,7 +74,7 @@ numbers do not measure quality.
    three from different filers. The RECAP search also listed *McMillan v. Pluri Potent Partnership, LLC* (WDNC ECF 1,
    11 pages, described as "COMPLAINT ... with Jury Demand") as a candidate; it was not downloaded or read. Tier 2 is
    therefore **not** judged against two filers.
-2. **Font.** The rules name no font. EB Garamond is the only vendored family in `fonts/`; at 12 pt it has a smaller
+2. **Font.** The rules name no face (LCvR 7.1(d) gives a size only). EB Garamond is the face per `docs/FONTS.md`; at 12 pt it has a smaller
    x-height than the Times New Roman set in the exemplar, so the text looks smaller. The 12-point minimum is met. A
    Times-metric font would remove the difference; that is a decision for David, not a template change.
 3. **Pleading paper.** WDNC's rules do not require numbered line pleading paper, and the exemplar has none. The
