@@ -6,7 +6,7 @@
   - `FILED-EXAMPLE-douglas-40324-answering-brief.pdf` (*United States v. Douglas*, ACM 40324 (f rev), 3 June 2024, Government Trial and Appellate Operations Division, signed by Mary Ellen Payne). The whole answer. Primary: the overlay defaults to it.
   - `FILED-EXAMPLE-howard-40478-answering-brief.pdf` (*United States v. Howard*, ACM 40478 (f rev), 29 October 2024, GTAOD: G. Matt Osborn, Mary Ellen Payne, Matthew D. Talcott). The cover, index, table of authorities, issues presented and start of the statement of the case.
 - Samples: `samples/INPUT-douglas-answering-brief.md` (full transcription, 10 pages rendered) and `samples/INPUT-howard-answering-brief.md` (excerpt, 3 pages rendered; `excerpt: true`).
-- Status: template built; render, overlay and page review done for both samples (below). Not reviewed by a human. `court.json` and the court root are untouched.
+- Status: template built; render, overlay and page review done for both samples (below). Fonts pass, 2026-10-14: the typeface stays EB Garamond (Known gaps, 1); both renders and both overlays re-run; every page re-viewed. The `FILED-EXAMPLE-*.pdf` files named above are not in this snapshot, so the overlays were run against extracts of the page ranges `exemplars/SOURCE.md` cites, fetched from the URLs there and kept outside the repo. Not reviewed by a human. `court.json` and the court root are untouched.
 
 ## Files
 
@@ -29,7 +29,7 @@ Primary source: *United States Air Force Court of Criminal Appeals Rules of Prac
 | Rule | Requirement | Where the template uses it |
 |---|---|---|
 | AFCCA R. 18.3 (p. 23) | Answer briefs follow the same format as assignments of error and respond separately to each assigned error; answers may adopt the appellant's statement of the case and add facts | `required-sections` (issues presented or assignments of error; statement of the case; argument) in order; `Issues Presented` is the answer's heading for the assignments |
-| AFCCA R. 17.1(a) (p. 18) | 12-point proportional type; double-spaced; one side of 8.5 × 11; margins at least one inch | `type-size = 12pt`, `body-leading`, `page-margin = 1in`. Typeface: EB Garamond (see Known gaps). |
+| AFCCA R. 17.1(a) (p. 18) | 12-point proportional type; double-spaced; one side of 8.5 × 11; margins at least one inch | `type-size = 12pt`, `body-leading`, `page-margin = 1in`. Typeface: no face is required (the rule's Times New Roman and Century Schoolbook are examples, "e.g."; any proportional type is allowed), so the template keeps EB Garamond, the vendored default (Known gaps, 1). |
 | AFCCA R. 17.3 (p. 20) | 50-page limit, excluding indices, attachments and appendices | `page-limit = 50`, the end-of-brief check |
 | AFCCA R. 18.1 (p. 22) | Subject index and table of authorities for briefs over 30 pages | `index: true` draws the TOC and the TOA; the check panics over 30 pages without it |
 | AFCCA R. 17.1(b)-(f), 17.2(c) (pp. 18-19) | E-filing wrapper, PII redaction | Outside the document (see Known gaps) |
@@ -49,7 +49,7 @@ Diagnostic only, not a score. Reading the Howard exemplar makes poppler print "x
 
 ## Page review (Gate 2)
 
-Every page of both `OUTPUT-*.pdf` files was rendered at 60 dpi and viewed. Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of both `OUTPUT-*.pdf` files was rendered at 60 dpi and viewed. Typst printed no warnings. Fonts embedded: EB Garamond only. Re-checked in the fonts pass on 2026-10-14: the render and the page count (10 and 3) are unchanged; every page was re-rendered at 70 dpi and viewed, and the OK/ACCEPTED rows below still hold.
 
 **`douglas-answering-brief`, 10 of 10 pages:**
 
@@ -78,7 +78,7 @@ Tier-2 findings (OPEN or ACCEPTED): typeface (see Known gaps); the excerpt sampl
 
 ## Known gaps
 
-1. **Typeface.** The same as the opening-brief folder: R. 17.1(a) names Times New Roman and Century Schoolbook as examples and requires 12 pt; neither is vendored (`fonts/` is shared and holds only EB Garamond). The template uses EB Garamond at 12 pt, which reads smaller than the filing's faces.
+1. **Typeface.** The same as the opening-brief folder: R. 17.1(a) asks for proportional 12-point type, with Times New Roman and Century Schoolbook as examples ("e.g."), and allows any proportional type, so no court-named face is required; the template keeps EB Garamond at 12 pt. The metric-compatible Times New Roman substitute is Liberation Serif (`fonts/liberation-serif/`); switching is one line, `font-family` in `typst/afcca-answering-brief.typ`, and is not made here. EB Garamond reads smaller than the filing's faces; this is a tier-2 point.
 2. **Each assignment answered (R. 18.3).** The template checks the section order and the standard of review, not that each assignment of error has its own answer. A reviewer must check that.
 3. **E-filing wrapper (R. 17.1(b)-(d)).** The subject line, the narrative block and the PDF naming are not generated.
 4. **Index is authored, not computed.** The same as the opening-brief folder: `index: true` draws the TOC and TOA; the check panics over 30 pages without it; a body under 30 pages with an index is not detected as a mismatch.
