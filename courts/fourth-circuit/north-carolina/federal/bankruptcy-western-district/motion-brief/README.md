@@ -20,6 +20,8 @@ All text read 2026-10-14. Federal rules: Legal Information Institute (LII) pages
 
 Paper size: the local rules are silent (checked). Letter is used. Not a rule.
 
+Typeface: face required by the rules: **none**. LR 9013-2(a) says only "the font size is a minimum of 12 point"; no face name appears anywhere in the Sept 2021 local rules text (checked 2026-10-14). Substitute: none needed, so the template keeps **EB Garamond** (`docs/FONTS.md`: a court that names no face keeps EB Garamond). Fit: n/a. The faces in the filed exemplar (Helvetica and Courier-Bold, not embedded) are exemplar evidence, not a rule.
+
 ## Exemplar
 
 - `exemplars/FILED-EXAMPLE-hayes-applied-machinery-25-03091-motion-brief.pdf`: Motion of Hyatt Corporation to Dismiss First Amended Complaint for Failure to State a Claim (Rule 12(b)(6)), with the Notice of Hearing, *Cole Hayes, Chapter 7 Trustee v. Hyatt Corporation, et al.*, Adv. No. 25-03091 (Bankr. W.D.N.C., Charlotte Division), Doc 28, filed November 13, 2025, by Hyatt Corporation. 11 pages: pp. 1-9 motion with memorandum, pp. 10-11 notice of hearing with its own caption and signature.
@@ -68,7 +70,7 @@ sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-west
 4. **Certificate of service has placeholders.** LR 9013-1(c) requires names and addresses. The exemplar has no certificate, and the trustee and Bankruptcy Administrator addresses are not in it. The sample says "[address to be added by counsel]". The certificate does not meet LR 9013-1(c) until those addresses are supplied; the template enforces nothing here, so the frontmatter must be completed before filing.
 5. **Page limit (LR 9013-2(a), 25 pages)** is not counted by the template. The sample's memorandum runs pp. 1-7.
 6. **Notice of hearing wording.** Transcribed as filed; it refers to the "Complaint" (the original), while the motion is directed to the First Amended Complaint. The template does not check this.
-7. **Typeface and spacing.** The exemplar's typeface cannot be read from the PDF (not embedded). The template uses EB Garamond (vendored, OFL) at 12 point, double-spaced, one-inch margins, per LR 9013-2(a). EB Garamond sets smaller than Times at the same size, so the page can look smaller than a Times exemplar; the rule's floor is point size. A typeface choice for David.
+7. **Typeface and spacing.** The rules name no face (see Governing rules), so the template keeps EB Garamond (vendored, OFL) at 12 point, double-spaced, one-inch margins, per LR 9013-2(a). The exemplar's faces (Helvetica and Courier-Bold, per `pdffonts`, not embedded) are not the body face, so they are not a rule. EB Garamond sets smaller than Times at the same size, so the page can look smaller than a Times-style exemplar; the rule's floor is point size. A typeface choice for David.
 8. **ECF header** ("Case 25-03091 Doc 28 Filed ...") is added by CM/ECF and not reproduced.
 9. **Exemplar slips** are transcribed as filed (see the Sample section).
 10. **Local rules currency.** The Sept 2021 PDF is the latest I could find; not checked for a later version.
