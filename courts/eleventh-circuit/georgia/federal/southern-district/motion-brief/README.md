@@ -9,7 +9,8 @@ Folder: `courts/eleventh-circuit/georgia/federal/southern-district/motion-brief/
 | sample md | `samples/INPUT-harper-memorandum-mtd.md`: caption, Introduction, Statement of Facts, Argument A to I (all headings; paragraphs abbreviated in part, see Known gaps), Conclusion, signature, certificate of service |
 | render | ok: `samples/OUTPUT-harper-memorandum-mtd.pdf`, 11 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings |
 | overlay | ok: `samples/OVERLAY-harper-memorandum-mtd.pdf` and `samples/OVERLAY-harper-memorandum-mtd.txt` (page map) |
-| pages reviewed | 11 of 11 (every page rasterized at 60 dpi and viewed after the last template change) |
+| typeface | face required: none named by the S.D. Ga. rules (LR 5.4, LR 10.1, LR 83.6; text checked 2026-10-14). Substitute: none; EB Garamond kept, since the court names no face (`docs/FONTS.md`). Fit: n/a |
+| pages reviewed | 11 of 11 (re-rendered and every page rasterized at 70 dpi and viewed on 2026-10-14) |
 
 File names: as in the complaint folder, the tools' default names (`OUTPUT-`, `OVERLAY-`) are used in place of the brief's `<id>.pdf` and `<id>-overlay.pdf`.
 
@@ -29,7 +30,7 @@ File names: as in the complaint folder, the tools' default names (`OUTPUT-`, `OV
 ### Currency of the local rules (for David to confirm)
 
 - The text above is the **June 2016** printable local rules. The court's proposed 2026 revision (`SDGA_2026_Local_Rule_Proposed.pdf`; notice dated 2026-03-23; comment period ended 2026-04-22; effective date blank) would change LR Civ. 7(e): a combined motion and brief "shall not exceed 6,500 words" when typed, and 25 pages when handwritten. The 2016 text (26 pages, inclusive of the certificate) is the one in force unless the revision has been adopted; this was not confirmed.
-- No S.D. Ga. rule found sets a typeface, type size, or margins. The template uses EB Garamond at 12 pt and 1-inch margins, the usual practice; these are choices, recorded in `typst/gasd-motion-brief.typ`. The exemplar is in Times New Roman (`pdffonts`).
+- No S.D. Ga. rule sets a typeface, type size, or margins. Checked 2026-10-14 against the 2016 text (extracted with `pdftotext`): LR 5.4 sets paper size only, LR 10.1 says "double-spaced, be numbered on each page", and LR 83.6 concerns attorney appearance. The template uses EB Garamond at 12 pt and 1-inch margins, the usual practice; these are choices, recorded in `typst/gasd-motion-brief.typ`. The exemplar is in Times New Roman (`pdffonts`).
 
 ## Layout
 
