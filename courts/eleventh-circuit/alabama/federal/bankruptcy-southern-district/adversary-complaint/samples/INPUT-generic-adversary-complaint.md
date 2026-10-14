@@ -24,6 +24,7 @@ signature:
     - "Telephone (000) 000-0000 | counsel@example.com"
     - "*Attorney for Plaintiff*"
 date: "October 14, 2026"
+stipulation-26-1: "Under Local Bankruptcy Rule 7026-1, Plaintiff does not stipulate that Fed. R. Civ. P. 26(a)(1) will not apply to this adversary proceeding."
 ---
 
 This is a generic, fictional sample. The names, numbers and facts are invented to exercise the template; they describe no real case. It is not a transcription of a filed document.

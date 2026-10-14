@@ -1,10 +1,11 @@
 // U.S. Bankruptcy Court, S.D. Alabama: adversary complaint.
 //
 // Rule-driven and content-agnostic. Requirement IDs (ALSB-...) refer to ../README.md, which records the
-// rule text and the date verified. Governing rules: Fed. R. Bankr. P. 7001 (adversary proceeding), 7010
-// (Fed. R. Civ. P. 10 applies; caption must substantially conform to Official Form 416A), 9004(a)-(b)
-// (legibility, caption). The S.D. Ala. Local Bankruptcy Rules (dated 08/07/2023) set no format for complaints.
-// Font, size, margins and spacing are convention choices (see ../README.md). No case-specific text, no
+// rule text and the date verified. Governing rules: Fed. R. Bankr. P. 7001 (adversary proceeding), 7008(a)
+// (statement of consent to final orders), 7010 (Fed. R. Civ. P. 10 applies; caption must substantially conform
+// to Official Form 416), 9004(a)-(b) (legibility, caption). S.D. Ala. LBR 7026-1 (Rule 26(a)(1) statement in
+// every complaint). The S.D. Ala. Local Bankruptcy Rules (effective December 1, 2009) set no font or layout
+// format for complaints. Font, size, margins and spacing are convention choices (see ../README.md). No case-specific text, no
 // coordinates measured off an exemplar, no forced line breaks. The markdown body is rendered by cmarker;
 // the metadata comes from the YAML frontmatter of the same file (schema: ../README.md).
 
@@ -47,7 +48,10 @@
 
 /// One party group: the names, one per line, then the designation ("Plaintiff," and so on).
 #let party(p) = {
-  for n in p.names { block(above: 0pt, below: 0pt, inl(n)) }
+  block(above: 0pt, below: 0pt, {
+    set par(leading: single-leading, first-line-indent: 0pt)
+    for n in p.names { text(inl(n)) + linebreak() }
+  })
   h(0.3in)
   block(above: 0.2em, below: 0.7em, p.designation)
 }
@@ -94,8 +98,9 @@
       [
         Respectfully submitted,
         #v(1.2em)
-        #block(above: 0pt, below: 0pt, [/s/ #sig.signer])
-        #for l in sig.lines { block(above: 0pt, below: 0pt, text(size: 0.92em, inl(l))) }
+        #set par(leading: single-leading, first-line-indent: 0pt)
+        /s/ #sig.signer \
+        #for l in sig.lines { text(size: 0.92em, inl(l)) + linebreak() }
       ],
     )
   })
@@ -130,5 +135,12 @@
 
   caption(meta)
   cmarker.render(body, raw-typst: false, smart-punctuation: true)
+  // LBR 7026-1: the complaint must state whether the pleader stipulates that Fed. R. Civ. P. 26(a)(1) will not apply.
+  block(above: 1em, below: 0pt, width: 100%, [#h(para-indent) #inl(need(meta, "stipulation-26-1"))])
   signature-block(meta)
+  // Optional certificate of service (markdown), after the signature block as filed.
+  if "certificate-of-service" in meta {
+    v(1.2em)
+    cmarker.render(meta.at("certificate-of-service"), raw-typst: false, smart-punctuation: true)
+  }
 }
