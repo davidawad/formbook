@@ -93,11 +93,11 @@
 // ---------------------------------------------------------------------------
 
 /// A numbered allegation (Fed. R. Civ. P. 10(b)): the template numbers them; the sample does not.
-#let numbered(c) = context {
-  if num-on.get() {
-    para-n.step()
+#let numbered(c) = {
+  para-n.step()
+  context if num-on.get() {
     par(first-line-indent: 0pt)[
-      #h(para-indent) #para-n.display()#h(0.25in)#inl(c)
+      #h(para-indent) #context para-n.display()#h(0.25in)#inl(c)
     ]
   } else {
     par(first-line-indent: 0pt)[#h(para-indent) #inl(c)]
