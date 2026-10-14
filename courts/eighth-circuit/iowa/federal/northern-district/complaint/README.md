@@ -8,8 +8,9 @@ Folder: `courts/eighth-circuit/iowa/federal/northern-district/complaint/`.
 | exemplar | yes: `exemplars/FILED-EXAMPLE-iowa-rotocast-fuse-2-26-cv-01019-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-iowa-rotocast-complaint.md`: the complete complaint (caption, 49 paragraphs, three counts, prayer, jury demand, signature block) |
 | render | ok: `samples/OUTPUT-iowa-rotocast-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-iowa-rotocast-complaint.pdf` and `.txt` (`tools/overlay.sh`) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | no face required by the court's rules (LR 10 names none; checked 2026-10-14). EB Garamond 12 pt stays; no vendored substitute applies. See the Governing rules table. |
+| overlay | ok: `samples/OVERLAY-iowa-rotocast-complaint.pdf` and `.txt` (`tools/overlay.sh`, exemplar passed explicitly). The exemplar PDF is not committed in this snapshot; the overlay used the RECAP copy at the URL in `exemplars/SOURCE.md` (9 pages). |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed in the typeface pass, 2026-10-14) |
 
 ## Governing rules
 
@@ -18,6 +19,7 @@ Primary sources, fetched 2026-10-14:
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | N.D. Iowa LR 10(a) | 8 1/2 x 11 inch paper. Source: https://www.iand.uscourts.gov/sites/iand/files/Local%20Rules%208.1.2020%20edits.%20clean.pdf (Local Rules, "Revised August 1, 2020", effective December 1, 2020; the posted copy is the version checked). | `page-w`, `page-h`. |
+| N.D. Iowa LR 10 (typeface, point size) | Names no typeface and no point size. Checked against the full text of the same Local Rules copy (2026-10-14): no provision mentions a font, typeface or type size. | `font-family = "EB Garamond"`, `type-size = 12pt`: the "No face named" row of `docs/FONTS.md`. |
 | N.D. Iowa LR 10(b)(1) | Double spaced. | `pitch = 24pt`, `body-leading = 1.35em`; every paragraph and heading is rounded to whole 24 pt lines (`on-grid`). |
 | N.D. Iowa LR 10(b)(2) | Printed on one side only. | Single-sided PDF. |
 | N.D. Iowa LR 10(b)(3) | Top margin of at least 1 inch. | `margin = 1in` on all sides. |
@@ -50,7 +52,7 @@ Not produced by this template (separate filings): the civil cover sheet (JS-44);
 ## Known gaps and open choices
 
 1. **Only one exemplar.** Tier 2 asks for 2 or 3 filers. The search (CourtListener RECAP, `court=iand`, complaints filed 2026-04 to 2026-10) also found Kinetiq, Inc. v. CCR Media, LLC (1:26-cv-00162, 29 pages, verified complaint with exhibits, RECAP doc gov.uscourts.iand.71680.1.0.pdf) and Vohs v. Canpotex (1:26-cv-00101, complaint with jury demand; text not checked). Those were not saved, because the brief asks for one exemplar per doc type. Tier 2 is therefore **not** judged against two filers yet.
-2. **Typeface and size.** The N.D. Iowa Local Rules text (LR 10) names no typeface and no point size, so the template uses EB Garamond 12 pt, the only serif vendored in `fonts/`. The exemplar is Times-metric (Times Roman embedded), so EB Garamond looks smaller at 12 pt. Whether the court wants a larger apparent size is a question for David; a vendored Times-metric font would remove the difference.
+2. **Typeface and size.** The N.D. Iowa Local Rules text names no typeface and no point size (re-checked 2026-10-14 against the full text, not only LR 10), so the template uses EB Garamond 12 pt under the "No face named" row of `docs/FONTS.md`; no substitute was switched in. The exemplar is Times-metric (Times Roman embedded), so EB Garamond looks smaller at 12 pt. Whether the court wants a larger apparent size is a question for David; a vendored Times-metric font would remove the difference.
 3. **Caption.** The party column is closed by a column of `)` marks, as in the exemplar. The exemplar's caption has the party names in the left column and the case number on the right; the template reproduces that structure without measuring coordinates.
 4. **Sub-items inside a paragraph.** The exemplar's paragraph 31 lists prior-art items (a) to (f) as separate indented lines inside one numbered paragraph. The sample runs them on as one paragraph, so the paragraph numbers match the exemplar (1 to 49) but the indentation of the sub-items does not.
 5. **Exhibits and attachments** are referred to by letter in the text but not included in the sample (they are not part of the complaint's text layer).
