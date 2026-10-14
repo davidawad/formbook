@@ -9,6 +9,7 @@ Folder: `courts/eighth-circuit/nebraska/federal/bankruptcy-district/motion-brief
 | sample md | `samples/INPUT-zuhlke-motion-brief.md` (the whole brief: caption, intro, sections I to IV with subsections A to F, signature, and the certificate's wording in frontmatter) |
 | render | ok: `samples/OUTPUT-zuhlke-motion-brief.pdf`, 11 pages (the exemplar's 9, plus the certificate on its own page), typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-zuhlke-motion-brief.pdf` and `OVERLAY-zuhlke-motion-brief.txt` (page map) |
+| typeface | no face required by the rules (checked 2026-10-14, see Decisions); EB Garamond kept, no substitute from `docs/FONTS.md` applies |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last change; see the review section) |
 
 ## Governing rules
@@ -67,7 +68,7 @@ Body: `## SECTION` (roman), `### Subsection` (letter), blank-line-separated para
 - **The filer's typo is kept.** The caption reads "TRUSTEEE" (the exemplar's own spelling). The sample transcribes the filing as it was filed.
 - **Declarations cited by paragraph.** The exemplar cites declarations with "Doc. 120 at ¶3". LR 7007-1(E) asks for a page number; the paragraph form is what the exemplar uses. The sample keeps the exemplar's citations. A clerk may ask for page numbers; this is a tier-2 point, not a template rule.
 - **Certificate on its own page.** The exemplar puts its certificate on page 9 after the signature. The template starts the certificate on a new page; the rules do not fix the position.
-- **Font, margins, spacing:** as in the adversary-complaint template (EB Garamond 13 pt, 1 inch, double), for the same reasons; see `../adversary-complaint/README.md`.
+- **Font, margins, spacing:** as in the adversary-complaint template (EB Garamond 13 pt, 1 inch, double), for the same reasons; see `../adversary-complaint/README.md`. The typeface check (2026-10-14) covered the same texts: the local rules and NECivR 7.1 name no face or size, so no court-named substitute applies.
 
 ## Known gaps and open questions
 
