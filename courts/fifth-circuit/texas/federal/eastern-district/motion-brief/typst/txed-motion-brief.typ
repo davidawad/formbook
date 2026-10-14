@@ -38,8 +38,13 @@
 /// Inline markdown (for names with *et al.*, etc.).
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
-/// One single-spaced line: a block of exactly one single pitch, so lines stack on a fixed pitch.
-#let sline(c) = block(width: 100%, height: single-pitch, above: 0pt, below: 0pt, c)
+/// One single-spaced line (or wrapped lines): one single pitch per line, so lines stack on a fixed pitch.
+/// A name that wraps grows the block by one pitch per extra line instead of overprinting the next line.
+#let sline(c) = block(width: 100%, above: 0pt, below: 0pt, {
+  set par(leading: single-leading, spacing: 0pt, first-line-indent: 0pt)
+  c
+  v(single-leading)
+})
 
 // ---------------------------------------------------------------------------
 // Cover: court (line 1 onward), caption, title of the paper
@@ -140,7 +145,8 @@
 
 #let txed-motion-brief(meta, body) = {
   // CV-7(a)(1): a case dispositive motion states the issues to be decided by the court.
-  if not lower(body).contains("statement of the issue") {
+  // An excerpt sample (frontmatter `excerpt: true`) is a transcription of part of a filing; its check is skipped.
+  if not meta.at("excerpt", default: false) and not lower(body).contains("statement of the issue") {
     panic("txed-motion-brief: CV-7(a)(1) requires a statement of the issues to be decided (a level-1 heading 'Statement of the Issue(s)')")
   }
 
