@@ -1,0 +1,104 @@
+% Supreme Court of the United States: amicus curiae brief (booklet format), LaTeX engine.
+% Same rule parameters as typst/scotus-amicus-brief-amicus-brief.typ (Rules 33.1, 34, 37).
+% The body and every front-matter block are produced by latex/brief.lua as raw LaTeX; this file
+% holds the page, type and macro definitions. Pandoc variable fontdir: the vendored fonts directory.
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+% Rule 33.1(b): Century family is required; EB Garamond is the stand-in (see ../README.md, Known gaps).
+\setmainfont{EBGaramond}[Path=$fontdir$eb-garamond/, Extension=.otf, UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\usepackage[paperwidth=6.125in,paperheight=9.25in,left=1in,right=1in,top=1in,bottom=1.125in,footskip=0.45in]{geometry}
+\usepackage{changepage}
+\usepackage{setspace}
+\usepackage[hidelinks,breaklinks]{hyperref}
+\usepackage{microtype}
+\usepackage{etoolbox}
+\usepackage{ragged2e}
+\usepackage{needspace}
+\makeatletter
+
+% Rule 33.1(b): 12-point type, 14-point baselines (2 points of leading); notes 10/12.
+\renewcommand{\normalsize}{\fontsize{12pt}{14pt}\selectfont}
+\setlength{\parindent}{0.4in}
+\setlength{\parskip}{1em}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\pagestyle{plain}
+\raggedbottom
+\sloppy
+\renewcommand{\footnotesize}{\fontsize{10pt}{12pt}\selectfont}
+\setlength{\footnotesep}{0.5em}
+\setlength{\skip\footins}{1.2em}
+\renewcommand{\footnoterule}{\kern -3pt \hrule width 0.9in \kern 2pt}
+\setcounter{secnumdepth}{0}
+\setcounter{tocdepth}{0}
+
+% Notes: superscript marks in the text, flush numbers in the note area.
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\renewcommand\@makefntext[1]{\parindent 1em\noindent\hb@xt@1.8em{\hss\@makefnmark\ }#1}
+
+% Block quotations over 50 words are indented on both sides (Rule 33.1(b)).
+\renewenvironment{quote}{\begin{adjustwidth}{0.4in}{0.4in}\noindent\ignorespaces}{\end{adjustwidth}}
+
+% Lists (pandoc tight lists) keep the body leading.
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Front matter (roman) and body (arabic restarting at 1). Page numbers are centred in the footer.
+\pagenumbering{arabic}
+\def\scotus@pagefooter{\hfill\thepage\hfill}
+
+\makeatletter
+% Headings. Section: centred bold capitals. Points: label in a hanging box; the text hangs under the text.
+\newcommand{\scotussection}[1]{%
+  \par\addvspace{1.4em}\needspace{4\baselineskip}%
+  \begin{center}\textbf{\MakeUppercase{#1}}\end{center}\par\nopagebreak\addvspace{0.2em}\nopagebreak\noindent}
+\newcommand{\scotuspoint}[3]{%
+  % #1 indent, #2 printed label, #3 text
+  \par\addvspace{0.9em}\needspace{3\baselineskip}%
+  {\leftskip=#1\relax\hangindent=0.4in\hangafter=1\relax
+   \makebox[0.4in][l]{\textbf{#2}}\textbf{#3}\par}\nopagebreak\addvspace{0.3em}\nopagebreak\noindent}
+
+% Table of contents lines (Rule 34.2). #1 indent, #2 label, #3 title, #4 page.
+\newcommand{\tocsection}[2]{%
+  \noindent\hangindent=0.4in\hangafter=1\relax\MakeUppercase{#1}\ \dotfill\ #2\par\vspace{0.5em}}
+\newcommand{\tocpoint}[4]{%
+  \noindent{\leftskip=#1\relax\hangindent=0.4in\hangafter=1\relax
+   \makebox[0.4in][l]{#2}#3\ \dotfill\ #4\par}\vspace{0.5em}}
+% Table of authorities lines: #1 entry, #2 pages.
+\newcommand{\toaline}[2]{%
+  \noindent\hangindent=0.4in\hangafter=1\relax #1\ \dotfill\ #2\par\vspace{0.6em}}
+\newcommand{\toaheading}[1]{\par\addvspace{1.1em}\needspace{3\baselineskip}\noindent\textbf{#1}\par\vspace{0.7em}}
+
+% Pages of one authority: #1 its citation labels (comma list, in document order, so the pages come out in
+% order and a repeated page is always the last one printed). Six or more pages print "passim"
+% (passim-threshold in the typst template).
+\newcounter{toapages}
+\def\toalast{-1}
+\def\toaout{}
+\def\toapageone#1{%
+  \@ifundefined{r@#1}{\def\toapg{0}}{\edef\toapg{\getpagerefnumber{#1}}}%
+  \ifnum\toapg=\toalast\else
+    \ifx\toaout\empty\edef\toaout{\toapg}\else\edef\toaout{\toaout, \toapg}\fi
+    \stepcounter{toapages}%
+    \xdef\toalast{\toapg}%
+  \fi}
+\def\toapagesloop#1,{%
+  \ifx\relax#1\else
+    \toapageone{#1}%
+    \expandafter\toapagesloop
+  \fi}
+\newcommand{\toapages}[1]{%
+  \setcounter{toapages}{0}%
+  \def\toalast{-1}%
+  \def\toaout{}%
+  \toapagesloop#1,\relax,%
+  \ifnum\value{toapages}>5 passim\else\toaout\fi}
+% Zero-width label on a citation: its page is the page of the citation.
+\newcommand{\toacite}[1]{\label{#1}}
+% Cover (Rule 34.1): the blocks of the cover are composed by brief.lua.
+\newenvironment{scotuscover}{\begin{center}\ignorespaces}{\end{center}}
+
+\makeatother
+\raggedright
+\begin{document}
+$body$
+\end{document}
