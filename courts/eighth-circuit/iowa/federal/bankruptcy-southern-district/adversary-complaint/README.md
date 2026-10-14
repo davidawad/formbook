@@ -22,7 +22,7 @@ There is **no local rule** for this court's typography, page limits or pleading 
 |---|---|---|---|---|
 | Fed. R. Bankr. P. 7010 | Fed. R. Civ. P. 10 applies in an adversary proceeding; the caption must substantially conform to Official Form 416D. | M | `caption()` (court name, debtor, plaintiff, defendant, Case No., Chapter, Adv. Proc. No.) | https://www.law.cornell.edu/rules/frbp/rule_7010 (as amended eff. 2024-12-01), verified 2026-10-14 |
 | Fed. R. Bankr. P. 7008 | The allegation of jurisdiction names the case (name, number, Code chapter), the district and the division; a complaint must state whether the pleader consents to final orders or judgment by the bankruptcy court. | M | Numbered ¶¶ 1 and 2 are generated from `chapter`, `debtors`, `case_number`, `division` and `final_orders_consent`; the template asserts the two fields exist. | https://www.law.cornell.edu/rules/frbp/rule_7008 (eff. 2024-12-01), verified 2026-10-14 |
-| Fed. R. Bankr. P. 9004(a) | Documents must be legible; commonly used abbreviations are acceptable. | M | Text is Times-metric serif, 12 pt, black (`type-size`); no typeface is required. | https://www.law.cornell.edu/rules/frbp/rule_9004 (eff. 2024-12-01), verified 2026-10-14 |
+| Fed. R. Bankr. P. 9004(a) | Documents must be legible; commonly used abbreviations are acceptable. | M | Text is EB Garamond, 12 pt, black (`type-size`); no typeface is required (see Typeface below). | https://www.law.cornell.edu/rules/frbp/rule_9004 (eff. 2024-12-01), verified 2026-10-14 |
 | Fed. R. Bankr. P. 9004(b) | Caption: court name, case title, case number and adversary number if any, and a brief designation of the document. | M | `caption()`, `brief_title`. | same |
 | Fed. R. Civ. P. 10(a) (via 7010) | Caption with the court's name, a title, a file number, and a Rule 7(a) designation. | M | `caption()`; the title line is `brief_title`. | https://www.law.cornell.edu/rules/frcp/rule_10 (as amended eff. 2007-12-01), verified 2026-10-14 |
 | Fed. R. Civ. P. 10(b) (via 7010) | Claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | M | Each paragraph of the body is numbered by the template (`body-content()`); headings, the WHEREFORE paragraph, tables, quotations and the list are not. | same |
@@ -32,6 +32,14 @@ There is **no local rule** for this court's typography, page limits or pleading 
 | Fed. R. Bankr. P. 9037 / Fed. R. Civ. P. 5.2 | Redaction of social security numbers, taxpayer ID numbers, birth dates, and minors' names; the filer's responsibility. | A | Not checked. The sample uses names only. | not re-verified this pass |
 
 Not produced here: the summons (Official Form 287 or the court's summons form), the cover sheet, the filing fee, the exhibits (the exemplar's Exhibits A to O are not in this folder), and any separate jury demand (none is made in the exemplar).
+
+## Typeface
+
+| Item | Value |
+|---|---|
+| Face required | none. No local rule (abolished 2003-08-04, General Order 2003-1) and no FRBP or FRCP text names a typeface; FRBP 9004(a) asks only for legibility. |
+| Vendored substitute | not applicable: no face is named, so the template keeps **EB Garamond** (`fonts/eb-garamond/`, SIL OFL 1.1), per `docs/FONTS.md` ("No face named"). |
+| Metric fit | n/a (not a substitute). Page count (5) and line breaks are EB Garamond's, not Times New Roman's as in the exemplar. |
 
 ## Markdown contract (for samples)
 
@@ -70,7 +78,7 @@ Current PDF: `samples/OUTPUT-sturm-complaint.pdf`, 5 pages, rendered after the l
 ## Known gaps and open choices
 
 1. **One exemplar.** EVAL-LOOP asks for 2 or 3 filers for tier 2. The CourtListener search (`court=iasb`, `type=r`, 2026-10-14) found several adversary complaints (e.g. Taylor Builders v. DeBoth, 26-30006; Christenson Revocable Living Trust v. DeBoth, 26-30007; Smith v. Schappert, 25-30006; Smith v. Neely, 26-30017) with no downloadable document 1 (`is_available: false`), and Lindsay Sturm adversary 25-30032 (scanned, no text layer). Tier 2 is therefore **not** judged against two filers. It is judged against one.
-2. **Typeface and size.** No rule mandates either. EB Garamond at 12 pt is the only serif vendored in `fonts/`; the exemplar is Times New Roman. Recorded as a choice, not a defect. If the court or David prefer Times-metric output, a Times-compatible font must be vendored (not done here: `fonts/` is not ours to change).
+2. **Typeface and size.** No rule mandates either. No rule names a face, so EB Garamond at 12 pt stays (see Typeface); the exemplar is Times New Roman. Recorded as a choice, not a defect. A Times-metric substitute (`Liberation Serif`) is vendored and could be used if David prefers the exemplar's metrics; not switched here, because the rules do not call for it.
 3. **Consent sentence (FRBP 7008).** The exemplar complaint has no consent statement; the rule requires one. The template takes it from the frontmatter and the sample's sentence is a placeholder: the author chooses the wording. This is a finding about the exemplar (a tier-1 gap in the filed document), not something the template can decide.
 4. **Division (FRBP 7008).** The exemplar's jurisdiction paragraphs do not name the case number or the division; the division (Central) is on the cover sheet only. The template generates a case-reference paragraph from the case fields, so the rule's content is present in every render. The sample's `division` value comes from the cover sheet, not the complaint text.
 5. **Adversary number.** The filed copy's "Adversary Case No." is blank (the clerk assigns the number on filing). The template prints a blank line when `adv_number` is empty, and the sample leaves it blank.
