@@ -7,17 +7,18 @@ A respondent's brief on appeal to the Board. The template was built from the rul
 | Item | Result |
 |---|---|
 | Exemplar | yes: `exemplars/FILED-EXAMPLE-AB-redacted-brief-on-appeal.pdf` (*Matter of A-B-*, respondent's brief filed 2019-12-16; public copy, docket redacted). Source and rejected candidates in [`exemplars/SOURCE.md`](exemplars/SOURCE.md). |
-| Render | ok: `samples/OUTPUT-AB-2019-12-16.pdf`, 12 pages. `sh tools/render.sh` exited 0 with no typst warnings. |
-| Overlay | ok: `samples/OVERLAY-AB-2019-12-16.pdf` and `.txt`. `sh tools/overlay.sh` wrote both. Pairs: our pp. 1–11 with filed pp. 1, 2, 4, 5, 6, 8, 9, 10, 11, 12, 51. Our p. 12 (certificate) has no filed counterpart. |
-| Pages reviewed | 12 of 12. First pass at 50 dpi, one page at a time. After the numbering change, re-checked as 60 dpi montages of all 12 pages. |
+| Typeface | Times New Roman (preferred, ch. 3.3(c)(7)) → **Liberation Serif** (vendored, metric-compatible; `docs/FONTS.md`). Embedded per `pdffonts`: LiberationSerif Regular, Bold, Italic. No EB Garamond. |
+| Render | ok: `samples/OUTPUT-AB-2019-12-16.pdf`, 13 pages (was 12 in EB Garamond: the body grew from 9 to 10 pages, certificate now p. 13). `sh tools/render.sh` exited 0 with no typst warnings. |
+| Overlay | ok: `samples/OVERLAY-AB-2019-12-16.pdf` and `.txt`. `sh tools/overlay.sh` wrote both. Pairs: our pp. 1–12 with filed pp. 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 52. Our p. 13 (certificate) has no filed counterpart. |
+| Pages reviewed | 13 of 13, each page rendered to PNG at 60 dpi and looked at after the font change. |
 
 ## What the overlay found, and what changed
 
 1. **Body numbering.** The filed brief numbers the Introduction as page 1, with the cover and table of contents unnumbered. The template numbered the Introduction 3. Fixed in `typst/bia-brief-on-appeal.typ`: `numbering: n => str(n - 2)`, and the footer shows only from the Introduction. The table of contents now lists body page numbers.
-2. **Certificate of service.** The filed copy has no certificate page (its last page is blank). The template still draws one from the sample's `service` fields, so our page 12 has no counterpart. This is kept: a rule-based certificate is required, and the filed copy may have lost its certificate in the public redaction. The sample's service fields are placeholders.
+2. **Certificate of service.** The filed copy has no certificate page (its last page is blank). The template still draws one from the sample's `service` fields, so our page 13 has no counterpart. This is kept: a rule-based certificate is required, and the filed copy may have lost its certificate in the public redaction. The sample's service fields are placeholders.
 3. **Cover counsel block.** The filed cover lists all counsel at the top. The template puts the filer block at the top (one name and address, the Manual's rule) and the counsel block at the bottom. Kept: it follows the Manual, and the filed layout is one exemplar's convention.
 4. **Caption.** The filed caption uses a `)` column. The template uses plain "In the Matter of" text. Kept: a convention, not a rule.
-5. **Section breaks.** Our body breaks at different points from the filed one. This comes from the font (below), not from the template.
+5. **Section breaks.** Our body breaks at different points from the filed one. This comes from the font (see Known gaps, item 3), not from the template.
 
 ## Governing rules
 
@@ -32,7 +33,7 @@ Verified 2026-10-14. Sources:
 | Paginated | Manual ch. 4.6(b) | footer, page number centred; cover and TOC unnumbered; body numbering starts at the Introduction (matches the filed exemplar) |
 | A-number on the cover and at bottom right of each later page | Manual ch. 4.6(c)(2) | footer right, `A#<a_number>`. The filed public copy shows no A-number on its body pages (redacted), so this is not checked against the exemplar. |
 | Cover page with caption: filer name and address, title, respondent name as on charging document, A-number, type of proceeding; special circumstances (e.g. DETAINED) prominent, top right | Manual ch. 3.3(c)(6), App. E; ch. 4.6(c)(3) | cover block, `custody` box top right |
-| Fonts: "Times New Roman 12 point" preferred; proportionally spaced and monospaced both acceptable; double-spaced text preferred; single-spaced footnotes preferred | Manual ch. 3.3(c)(7) | `body-size = 12pt`; `body-leading = 1.74em` (double-spaced); see Known gaps for the font |
+| Fonts: "Times New Roman 12 point" preferred; proportionally spaced and monospaced both acceptable; double-spaced text preferred; single-spaced footnotes preferred | Manual ch. 3.3(c)(7) | `body-font = "Liberation Serif"` (substitute, `docs/FONTS.md`); `body-size = 12pt`; `body-leading = 1.74em` (double-spaced). Times is the preferred face, not a required one, so the substitute is a faithful match, not a deviation. |
 | Paper: standard 8½ × 11 | Manual ch. 3.3(c)(4) | `paper: "us-letter"` |
 | Contents: facts and procedural history, issues, standard of review, summary of argument, argument, conclusion | Manual ch. 4.6(c)(4) | sample uses these headings, in the filed order |
 | Party names: "respondent" for the noncitizen in removal proceedings | Manual ch. 4.6(c)(5) | sample uses "Respondent" |
@@ -43,7 +44,7 @@ Verified 2026-10-14. Sources:
 
 1. **One exemplar.** The task asked for one. A second filer's brief would help tier-2 judgment. Not searched beyond the queries in `exemplars/SOURCE.md`.
 2. **Transcription is partial.** The sample transcribes the Introduction through the Request for Oral Argument (filed pp. 1–9) and the Conclusion and signature (filed pp. 48–49). The Argument (filed pp. 10–47) is marked as omitted. The overlay pairs the transcribed pages only.
-3. **Font.** The Manual prefers Times New Roman 12 point. Only EB Garamond is vendored (`fonts/eb-garamond`), and `fonts/` is shared, so a Times-metric face was not added. EB Garamond at 12 pt reads smaller than Times 12 pt, so line breaks and page breaks differ from the filed copy. Adding a Times-metric font is a shared-folder change for David.
+3. **Font.** The Manual prefers Times New Roman 12 point. The template uses its vendored substitute, Liberation Serif (`fonts/liberation-serif`), which is metric-compatible with Times New Roman per `docs/FONTS.md`. It is not checked against a Times New Roman file, since none is on this box. The switch from EB Garamond lengthened the body by one page (9 → 10 body pages), so line and page breaks now track the filed copy more closely (overlay word overlap on body pages rose, e.g. filed p. 4 vs. ours p. 3: 79.8% → 90.7%).
 4. **Margins.** The Manual sets no margin figure. 1-inch margins are a convention, not a rule.
 5. **Table of citations.** Not generated. Only the table of contents is built (from the headings). A brief with citations needs a table of authorities; the Manual excludes it from the page count.
 6. **Two-hole punch.** Manual ch. 3.3(c)(8) asks for paper briefs pre-punched at the top, centred, 2¾ in apart. The template does not add punch holes. This matters only for paper filing.
