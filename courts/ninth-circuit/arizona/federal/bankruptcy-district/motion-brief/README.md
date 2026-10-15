@@ -99,3 +99,24 @@ sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/mot
   - p.7 Legal Argument (III), Rule 9019(a) block quote (gap 10), the four-factor test, the Newman citation: pass.
   - p.8 the balance of the argument, WHEREFORE list A–C, RESPECTFULLY SUBMITTED, joinder blocks, and the template's Dated/Respectfully-submitted block: pass.
 - Table rendering was a defect before this pass: the template placed a table in the on-grid paragraph path, and the table overlapped the following text ("TOTAL" row over paragraph 12). Fixed by the unbreakable table block described under Layout.
+
+## Engines
+
+DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `arb-motion.lua` builds the filer block, the caption (one caption in the main case, a dual caption in an adversary), the headings with their labels, lists and tables; `render.sh` runs pandoc with `-fancy_lists` (the sample's `a.` and `i.` labels stay as typed text, as in typst) and fills the footer). Rendered: `samples/OUTPUT-titan-motion.docx` and `samples/OUTPUT-titan-motion.docx.pdf` (LibreOffice 26.2 conversion, 9 pages). `pdffonts`: EB Garamond Regular, Bold and Italic only.
+
+Matches the typst form (every page of the `.docx.pdf` rendered at 60 dpi and viewed: pages 1 to 9 of 9):
+- Letter paper; margins and the 28 pleading lines as in `arb-motion.typ`, with the numbers in one header text box and the rules from `pgBorders`.
+- EB Garamond 13 pt, 24 pt line pitch. Filer block on lines 1 to 7, court title on line 8, caption with the rules, the title and relief beside the case number.
+- Headings: level 1 centred capitals at 18 pt; level 2 with the label hung at the margin ("I.") at 15.5 pt; level 3 with the label at 0.5 in ("A.").
+- Lists keep the sample's labels (bullets; `a.`, `i.`, `1.`) with hanging indents. Markdown tables have a full grid at 12 pt, their columns sized to their content, so figures do not wrap.
+- Footnotes 12 pt single. Footer: page number, the title in capitals, `CASE NO.` and the number. The last body paragraph is kept with the signature block.
+
+Differs from the typst form:
+- Pagination: 9 pages here against 8 in typst (the extra page is the prayer and joinder, which the renderer lays out with the signature on page 9).
+- Block quotations: the spacing above and below is approximate (typst's quote is set on its own lines with a different leading).
+- The table column widths come from a per-character model measured on the typst render; a font metric that differs in Word can still wrap a figure.
+- Not opened in Word (no Word here). The header text box and page borders are verified in LibreOffice only.
+
+BLOCKED: none. The tier-2 items are the ones above; the exemplar is a single filer (see `exemplars/SOURCE.md`).
+
+`tools/check.sh` cannot run on this folder: it needs `court.json` and `checks.yaml` at the court root, and neither is in the doc-type folder. The render and page review above stand in for it.

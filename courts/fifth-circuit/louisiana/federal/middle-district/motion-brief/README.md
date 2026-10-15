@@ -116,3 +116,14 @@ Open for the tier-2 decision: the side-by-side counsel columns (First Horizon) a
 7. **Heading styles** (level 2 bold at left; level 3 bold indented ½ inch) are the template's choice. The First Horizon headings may carry an underline; that was not confirmed at 60 dpi and the template does not underline. Tier-2 open choice for David.
 8. **Ragged right.** Justification not read from the exemplar.
 9. **Gate scripts not run** (`tools/check.sh` needs `court.json` and `rules.md`, which this doc-type folder does not have). The Gate 2 table above is the review record.
+
+## Engines
+
+### docx (`docx/`)
+
+Files: `docx/reference.docx` (built by `sh docx/build-reference.sh <out.docx>`) and `docx/lamd-motion-brief.lua` (the cover, caption table, title, signature block at the `[[signature]]` marker, the `/s/` lines in the signature column and the block quotes, built as `typst/lamd-motion-brief.typ` does). `tools/render.sh --engine docx` writes `samples/OUTPUT-first-horizon-motion-to-dismiss.docx` and `.docx.pdf` (LibreOffice 26.2, headless). Word was not run here.
+
+- Matches the typst form: EB Garamond 12 pt, Regular, Bold and Italic (`pdffonts` on the `.docx.pdf`: embedded, no theme or system face in the Latin text), exact 24 pt line pitch, double spaced body with a 0.5 in first-line indent and no space between paragraphs (as the typst render), 1 in margins, letter, centered PAGE number 0.6 in from the bottom edge, caption and title as in typst, section headings as typst (centered caps, bold left, bold indented), the signature block single spaced at 2.5 in with the conclusion kept on its page, the certificate after it. 11 pages, as the typst render.
+- Differs from typst: the typst headings have 6.5 pt of space above and below; the docx headings have none. With that space LibreOffice paginates this sample to 12 pages (one body line fewer per page), so the space was dropped to keep the 11-page pagination. Headings sit tight to the text. The block quotes are single spaced at 1 in on both sides as in typst (none in the sample). Footnotes are not in the sample and not in the template (same as the typst folder).
+- BLOCKED: none known for tier 1 (font, size, spacing, margins, page numbers, caption, headings, signature block). The 25-page limit (LR 7(g)) is not measured by the template in either engine.
+- Gates: `tools/check.sh <court-dir> --engine docx` could not run on this folder (it needs `court.json` and `checks.yaml` at the court root; this snapshot has no `checks.yaml`). Gate results are not recorded here; the page review is in the PR description.

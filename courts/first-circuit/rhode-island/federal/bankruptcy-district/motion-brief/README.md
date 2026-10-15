@@ -95,4 +95,27 @@ Every page of the sample was rendered at 60 dpi and viewed after the last templa
 | 8 | Conclusion, memorandum signature block, "Of Counsel" lines kept with it. | Pass. |
 | 9 | Certificate of service: date, recipients, `/s/` signer. | Pass. |
 
+## Engines
+
+**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, which names every font so no theme font falls back to Aptos or Calibri) and `docx/rib-motion-brief.lua` (caption, unnumbered paragraphs, "1." lists, response language, signature blocks, memorandum part, certificate of service, all from the frontmatter and the `---` separator). Render: `sh tools/render.sh --engine docx motion-brief samples/INPUT-<id>.md`.
+
+Matches the typst output (every page of `samples/OUTPUT-hidalgo-astrue.docx.pdf` was viewed, side by side with `samples/OUTPUT-hidalgo-astrue.pdf`):
+
+- EB Garamond 12 pt, footnotes 10 pt (single spaced, at the foot of the page), page number 11 pt centered; letter paper, 1 in margins. `pdffonts` shows only EB Garamond, embedded.
+- Double spacing is exact 24 pt lines; single spacing (caption, response language, quotations, signature, certificate) is exact 13.8 pt, the pitch measured on the typst output.
+- The motion is unnumbered; "1." lists hang with the text at 1.05 in; block quotations are single spaced and indented.
+- Caption and title repeated at the start of the memorandum, which starts on a new page; the certificate of service starts on a new page.
+- Response-time language (LBR 1005-1(d)(1)), single spaced, kept with the signature block.
+- Signature blocks: the case line, "Respectfully submitted", signer, firm, RI Bar No., address; the memorandum's block also carries the "Of Counsel" lines. The certificate's signer lines are right-aligned, as in typst.
+- Page count: 9 pages (typst 9).
+
+Differs from the typst output (not fixed):
+
+- The first line of each page sits about 10 pt lower in the docx (exact-height lines place text lower than typst); the line pitch is the same.
+- A single-line heading is about 7 pt further above the next paragraph than in typst.
+- Some lines break at different words (LibreOffice and typst line-breaking differ slightly), so the response language and some memorandum paragraphs run to one line more or fewer. The page count is the same.
+- Paragraph text is not justified in either engine.
+
+BLOCKED: none. Checked with LibreOffice 26.2 only: the `.docx` converts with no error, but Word was not available, so opening in Word without a repair prompt is not verified. Footnotes are native Word footnotes (pandoc). The `---` separator is read as the memorandum break; a document with no separator has no memorandum part.
+
 [Formbook index](../../../../../../README.md) | [Status table](../../../../../../STATUS.md)

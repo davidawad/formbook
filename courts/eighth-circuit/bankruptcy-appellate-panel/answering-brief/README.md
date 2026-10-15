@@ -73,3 +73,11 @@ Run 2026-10-15 (also 2026-10-14): `sh tools/overlay.sh courts/eighth-circuit/ban
 - **Certificate wording** is not verified against Form 417C.
 - **Certifications placement:** before the TOC, by choice.
 - **Cover color:** none (FRBP 8015 has no cover-color rule).
+
+## Engines
+
+**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `front.jq`, `brief.lua`, `render.sh`). `samples/OUTPUT-synthetic-answering-brief.docx` and `.docx.pdf` (LibreOffice). 9 pages, the same count as typst for this sample. `pdffonts` on the PDF: only EB Garamond embedded.
+
+- Matches typst: the same form as the opening brief (font, size, spacing, margins, cover, contents, authorities, certificates, page numbering). The certificate of compliance word count is 195, the same as typst.
+- Differs: the certificate checkbox is the text `[X]`, not a drawn box; contents and authorities are build-time text with page numbers measured on the LibreOffice PDF, not Word fields; headings are paragraph styles with outline levels.
+- BLOCKED: none for this engine. `tools/check.sh --engine docx` has not been run for this folder: it needs `court.json` and `checks.yaml`, which this folder does not have.

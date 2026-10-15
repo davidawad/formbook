@@ -127,3 +127,12 @@ Unchanged from 2026-10-14 (the earlier pass above, sha256 `89edd40d...` of the o
 - No footnotes or tables in the template (not used in a petition; cmarker would render them, untested).
 - The mechanical gates of `tools/check.sh` (`checks.yaml`) were not written for this doc type. Checks run by hand here: render (no warnings), font names (`pdffonts`: EB Garamond only), margins (bounding boxes), line pitch (bounding boxes), and the Gate 2 review above.
 - Not checked: Word or LibreOffice output (not a court-required engine for this doc type in this task).
+
+## Engines
+
+**docx** (`docx/reference.docx` from `docx/build-reference.sh`, and `docx/tax-petition.lua`). Output: `samples/OUTPUT-generic-petition.docx` and `samples/OUTPUT-generic-petition.docx.pdf` (LibreOffice conversion, 3 pages).
+
+- Matches the typst output: EB Garamond 14 pt throughout (`pdffonts` shows only EBGaramond-Regular and EBGaramond-Bold); letter, 1 in side margins, 1 in top and bottom; double spacing as exact 24.1 pt lines and single as exact 14.7 pt; 0.5 in first-line indent; caption with the ")" column and "Docket No."; centered bold headings; signature block with the rule above the name; centered page number. Page breaks are the same as the typst render (6(d) ends page 2, 6(e) starts page 3). Word text of both renders matches.
+- Differs: the caption, title and signature block are built by the filter as borderless tables, so their positions differ from typst by a few points. The page number sits at the footer distance (0.75 in), not at typst's exact 55.8 pt from the edge.
+- Pages reviewed: 1-3 of 3 (`.docx.pdf`), at 60 dpi.
+- BLOCKED: none. `tools/check.sh --engine docx` cannot run yet: `checks.yaml` is not in the court folder. The docx was checked by hand (fonts, word text, page images); Word itself was not available, so the file was opened in LibreOffice only.

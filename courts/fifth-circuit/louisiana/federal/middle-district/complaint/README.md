@@ -86,3 +86,14 @@ Tier-2 conventions (judged against the one exemplar available; see Known gaps): 
 6. **Jury demand.** Not in the template (the rule for it is Fed. R. Civ. P. 38, not an LR 10 form rule). The sample has none; a complaint with a jury demand would need the line added by the author.
 7. **Paragraph text is ragged-right.** Justification not read from the exemplar.
 8. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` need `court.json` and `rules.md` in the court folder; this doc-type folder has neither. The Gate 2 table above is the review record.
+
+## Engines
+
+### docx (`docx/`)
+
+Files: `docx/reference.docx` (built by `sh docx/build-reference.sh <out.docx>`) and `docx/lamd-complaint.lua` (the cover, caption table, numbered paragraphs, prayer list and signature block, built from the sample's frontmatter as `typst/lamd-complaint.typ` does). `tools/render.sh --engine docx` writes `samples/OUTPUT-parker-complaint.docx` and `samples/OUTPUT-parker-complaint.docx.pdf` (LibreOffice 26.2, headless). Word was not run here.
+
+- Matches the typst form: EB Garamond 12 pt in every body, heading and caption style (`pdffonts` on the `.docx.pdf`: EB Garamond Regular and Bold, embedded; no theme or system face in the Latin text), exact 24 pt line pitch, 1 in margins, letter, centered PAGE number 0.6 in from the bottom edge, court name, caption (party column, `CIVIL ACTION NO.` with judge initials), bold centered title, centered caps section headings, centered bold count headings, bold left sub-headings, first-line indent, numbered paragraphs, the prayer list kept with the signature block. 5 pages, as the typst render.
+- Differs from typst: the paragraph numbers and bullets are typed text (`1.` then a tab), not Word auto-numbering, so Word does not renumber them if paragraphs are inserted; the caption is a borderless table; in LibreOffice an exact 24 pt line places the extra leading above the glyphs, so the first line of each page sits lower than in the typst render (about 11 pt by `pdftotext -bbox`). Pagination of the 5-page sample matches; Word may paginate differently (`docs/DOCX.md`).
+- BLOCKED: none known for tier 1 (font, size, spacing, margins, page numbers, caption, headings).
+- Gates: `tools/check.sh <court-dir> --engine docx` could not run on this folder: it reads `court.json` and `checks.yaml` at the court root, and this snapshot has no `checks.yaml`. Gate results are therefore not recorded here; the page review is in the PR description.

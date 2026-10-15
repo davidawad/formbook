@@ -72,3 +72,11 @@ Not produced by this template (separate filings that may be required with the fi
 - Page 6: paragraphs 27 to 32; heading III. Pass.
 - Page 7: paragraphs 33 to 38; heading IV; COUNT I and its subtitle; PRAYER FOR RELIEF heading with its WHEREFORE line kept with the prayer items (moved to page 8 with them). Pass.
 - Page 8: prayer items A to D (indented letters), JURY TRIAL DEMAND (unnumbered), signature block single-spaced at the right. Pass.
+
+## Engines
+
+**docx** (`docx/`; `samples/OUTPUT-schott-complaint.docx` and `samples/OUTPUT-schott-complaint.docx.pdf`, the LibreOffice conversion that was checked). Files: `reference.docx` (from `docx/build-reference.sh`: EB Garamond 13 pt set in the styles and the theme, exact 26 pt line pitch, Letter, 1-inch margins, centered PAGE field); `txsd.lua` (court title, box caption, title, numbered paragraphs, lettered items, signature block and certificates, all read from the sample; `NUMBERED = true` here); `render.sh` (the two-pass wrapper that `tools/render-docx.sh` calls).
+
+- Matches the typst form: only EB Garamond is embedded (`pdffonts`); 13 pt; 1-inch margins on Letter; double spacing (26 pt pitch) with paragraphs at the same pitch as typst; numbered paragraphs with a 0.5-inch first line; lettered items at 1 inch; prayer letters at 0.5 inch with text at 1.25 inch; signature block at 3.25 inch; page number centered at the foot. 8 pages, as typst.
+- Differs (not blocking): (1) LibreOffice places the extra leading of an exact line above the glyphs; typst places it below. Text sits about 11 to 13 pt lower on each page; line pitch and margins are the same. Word was not run. (2) Lettered items are 26 pt apart (typst 21.5 pt); an exact 26 pt line cannot give a smaller gap. (3) Some lines break at a different word from typst (1,905 words against 1,904). (4) The caption's first line is about 3 pt lower than typst's.
+- BLOCKED: none. `tools/check.sh` cannot run on this folder (it needs `court.json` and `checks.yaml`); the render and this page review are the evidence.

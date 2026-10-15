@@ -106,3 +106,20 @@ Overlay: `OVERLAY-miles-opening-brief.txt` pairs each sample page with the filed
 1. **Issues format.** Rule 18.1(b)(2) says UPPER CASE; Appendix I shows bold italic sentence case. The template follows whatever the sample writes, so the choice is the sample's, not the template's. Which governs?
 2. **Index of Brief.** Rule 18.1(b)(1) requires a table of cases and authorities for briefs over 10,000 words. Should the template generate it, or should it stay a sample-only concern?
 3. **Font.** Rule 17(c) allows any 14-point proportional type, so EB Garamond (current) conforms. Switch to a Times-metric face (`Liberation Serif`, vendored) by preference, or keep EB Garamond?
+
+## Engines
+
+### docx (`docx/`)
+
+Files: `docx/reference.docx` (built by `sh docx/build-reference.sh reference.docx`: EB Garamond 14 pt with the font named explicitly in the styles and theme, exact 33.6 pt body spacing, exact 16.8 pt single spacing, 0.5 in first-line indent, letter page, 1 in margins, centred PAGE footer), `docx/nmcca.lua` (cover, caption, index, signature block and certificate; heading labels per NMCCA-CONT-004), `docx/render.sh` (two layout passes so the index page numbers come from the PDF). Render: `sh tools/render.sh --engine docx <this-folder> samples/INPUT-miles-opening-brief.md`.
+
+Matches the typst output: the typeface (`pdffonts` on `OUTPUT-miles-opening-brief.docx.pdf`: EBGaramond Regular, Italic, Bold, BoldItalic, all embedded; no Noto, Aptos or Calibri), the 14 pt size of body, footnotes and headings, the line pitch (33.6 pt body, 16.8 pt single, measured on both PDFs), the cover layout and its 2 in bottom margin (the counsel block sits at the foot of the cover), the index on its own page numbered "ii" (cover counted, not printed), the body numbered from 1, the Argument labels (I., A., 1., a.) with hanging indents and bold italic Argument points, the signature block, and the certificate on its own page.
+
+Differs from the typst output:
+
+- Line placement. Word and LibreOffice place exact-spaced text at the bottom of its line box, so the space of a double line sits above each line, not between lines as typst sets it. Measured on body page 1 of both PDFs: the first line sits 3.7 pt lower than in typst and the first line after a heading 8 pt lower; that offset holds down the page, so line and page breaks shift slightly. The sample is 13 pages in docx against 12 in typst (9 against 8 for the answering brief), and the conclusion with the signature block moves to its own page in the docx (body page 10) where typst keeps it on page 9. Nothing in the rules fixes the length; the word limit is not measured here.
+- Index page numbers are static text, filled in by `render.sh` from a first layout pass (not a TOC field). If the brief is edited in Word, the index does not update; re-render instead. Pass 2 must lay out to the same pages or `render.sh` fails.
+- The counsel block is a frame placed at its page position (the typst `v(1fr)` equivalent). It does not reflow with the text above it.
+- Word has not been used to open the file here (LibreOffice only). Word may paginate slightly differently.
+
+BLOCKED (docx): none for this sample. The check IDs cannot be run yet: this court has no `checks.yaml` (`sh tools/check.sh --engine docx` stops at once with "open .../checks.yaml: no such file"), so the Gate 1 results are not reported here. The table of authorities (NMCCA-CONT-002) is not generated in any engine; that is a known gap, not a docx limit.

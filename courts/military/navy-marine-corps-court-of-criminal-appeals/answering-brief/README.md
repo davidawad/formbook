@@ -91,3 +91,15 @@ Overlay: not produced. `sh tools/overlay.sh` exits 1 on 2026-10-15 (and on 2026-
 
 1. **An NMCCA answer exemplar.** Is there a filed NMCCA answer brief to use? Without one, the template is rule-driven only.
 2. **Standard of Review style.** Bare bold (as the opening brief) or italic (current)?
+
+## Engines
+
+### docx (`docx/`)
+
+Files: `docx/reference.docx` (built by `sh docx/build-reference.sh reference.docx`: the same reference as the opening brief, EB Garamond 14 pt named in the styles and theme, exact 33.6 pt body and 16.8 pt single spacing, 1 in margins, centred PAGE footer), `docx/nmcca.lua`, `docx/render.sh` (two layout passes for the index page numbers). Render: `sh tools/render.sh --engine docx <this-folder> samples/INPUT-answering-brief.md`.
+
+Matches the typst output: typeface (`pdffonts` on `OUTPUT-answering-brief.docx.pdf`: EBGaramond Regular, Italic, Bold, BoldItalic, all embedded), sizes and line pitch, cover and caption, index on its own page numbered "ii", body from 1, Argument labels and italics, signature block, certificate.
+
+Differs from the typst output: the same exact-spacing placement as the opening brief (first lines sit a few points lower than in typst), 9 pages in docx against 8 in typst, and the index page numbers are static text from a first layout pass. The sample is synthetic (placeholders), so the layout is checked, not any filed brief. Word has not been used here (LibreOffice only).
+
+BLOCKED (docx): none for this sample. The check IDs cannot be run: this court has no `checks.yaml`, so `sh tools/check.sh --engine docx` stops with "open .../checks.yaml: no such file". Gate 1 is not reported here.

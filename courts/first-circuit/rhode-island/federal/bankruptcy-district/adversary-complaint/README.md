@@ -84,4 +84,26 @@ Every page of both samples was rendered at 50-60 dpi and viewed after the last t
 | U.S. Trustee | 6 | Numbered 57-67. Pass. |
 | U.S. Trustee | 7 | CLAIMS FOR RELIEF, COUNT I, numbered 68-71, WHEREFORE list, signature block. Pass. |
 
+## Engines
+
+**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, which names every font, so no theme font falls back to Aptos or Calibri) and `docx/rib-adversary-complaint.lua` (caption table, numbered paragraphs, lettered lists, signature block, built from the frontmatter). Render: `sh tools/render.sh --engine docx adversary-complaint samples/INPUT-<id>.md`.
+
+Matches the typst output (every page of both samples was viewed, side by side with `samples/OUTPUT-<id>.pdf`):
+
+- EB Garamond 12 pt, footnotes 10 pt, page number 11 pt centered; letter paper, 1 in margins. `pdffonts` shows only EB Garamond, embedded.
+- Double spacing is exact 24 pt lines and single spacing is exact 13.8 pt, the pitch measured on the typst output. Numbered paragraphs (1., 2., ...) have a 0.5 in first-line indent and text at 0.92 in; WHEREFORE paragraphs are unnumbered; lettered lists (a), (b) hang; block quotations are single spaced, indented 0.75 in left and 0.5 in right.
+- Court title, caption (rule under and to the right of the party block; chapter and case numbers on the right), title in bold capitals. Headings: level 1 centered bold capitals, level 2 centered bold, level 3 centered bold italic.
+- Signature block (case line, date, "Respectfully submitted", signer, firm, RI Bar No., address) is kept together.
+- Page counts: `pisaturo-sunflower` 9 pages (typst 9), `ustrustee-ziegelmayer` 7 pages (typst 7).
+
+Differs from the typst output (not fixed):
+
+- The first line of each page sits about 10 pt lower in the docx. An exact-height line places its text lower than typst does; the line pitch is the same.
+- A single-line heading is about 7 pt further above the next paragraph than in typst.
+- Caption rows and the "Debtor." line are within about 3 pt of typst.
+- Paragraph numbers and list labels are typed labels with tab stops, not Word automatic numbering, so they do not renumber when a paragraph is inserted.
+- Pisaturo: a page break falls in the middle of list item (c) on page 8 (typst keeps it on page 8). The page count is the same.
+
+BLOCKED: none. Checked with LibreOffice 26.2 only: the `.docx` converts with no error, but Word was not available, so opening in Word without a repair prompt is not verified. Checks against `docs/DOCX.md` limits: no TOC, TOA, line numbering or tables outside the caption and signature.
+
 [Formbook index](../../../../../../README.md) | [Status table](../../../../../../STATUS.md)
