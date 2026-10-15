@@ -79,6 +79,21 @@ The map pairs by text, so it is approximate. Our pages 1–6 pair with exemplar 
 5. **Caption.** The exemplar prints a "26-1361 C" file number and a blank judge line. This template prints the file number only when the sample supplies one, and always prints a blank judge line.
 6. **Sealed or redacted filings** (RCFC 5.2, 9(m)) are the filer's job; the template has no sealed-filing mode.
 
+## Engines
+
+The docx engine is `docx/` (`make-reference.sh` builds `reference.docx`; `uscfc-complaint.lua` adds the caption, the signature block, the certificate and the prayer-list indents). Render: `sh tools/render.sh --engine docx courts/federal-circuit/court-of-federal-claims/complaint samples/INPUT-design-build-llc-26-1361.md` writes `samples/OUTPUT-design-build-llc-26-1361.docx` and its LibreOffice PDF (LibreOffice 26.8.1; on the render box `fonts/eb-garamond` was linked into fontconfig, see docs/DOCX.md).
+
+| Matches the typst render | Differs from it |
+|---|---|
+| EB Garamond 12 pt throughout; footnotes 12 pt single-spaced; block quotes single-spaced (RCFC 5.5(c)(2), (c)(4)) | Pages: the docx runs 14 pages, the typst render 13. Each page holds the same 22 double-spaced lines (27.6 pt pitch, measured on both), but LibreOffice places exact-spaced lines about 14 pt lower and the heading and caption spacing is set by eye, so the text drifts. |
+| Letter, 1-inch margins (RCFC 5.5(c)(1)(A), (c)(3)) | The signature block is alone on page 13 in the docx (kept whole, as typst keeps it); typst fits it under the prayer on page 12. |
+| Arabic page number at bottom centre on every page, the caption page included (RCFC 5.5(c)(6)) | Heading spacing is approximate (the typst gap between a level-2 and a level-3 heading is larger than the docx gap). |
+| Caption: court name, optional BID PROTEST line, parties with designations, file number or blank line, judge line (RCFC 10(a), 5.5(g)-(h)) | Word may paginate slightly differently from LibreOffice (docs/DOCX.md); the page numbers above are LibreOffice's. |
+| Centred bold capital level-2 headings; bold left level-3 headings; prayer items a., i. at the typst indents | The auto-numbered prayer letters of the sample are typed text, as in typst. |
+| Signature block: Dated, Respectfully submitted, `/s/`, name, contact lines (RCFC 5.5(d)-(f)); certificate of service on its own page | |
+
+**docx BLOCKED:** `tools/check.sh <court> --engine docx` cannot run for this court yet: the court root has no `court.json`, `checks.yaml` or `rules.md`, so Gates 1 and 2 have nothing to check against. This is a court-level gap, not a docx check failure, and it is not fixed in this folder. The gates themselves were not run. Pages reviewed: all 14 pages of the docx PDF, rasterized at 60 dpi and viewed, 2026-10-15.
+
 ## Build and check (from the repo root)
 
 ```sh
