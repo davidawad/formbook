@@ -63,3 +63,25 @@ Word overlap per page (rendered page vs filed page): p1 77%, p2 86%, p3 77%, p4 
 8. **Case names** are not italic in the sample: the text layer of the exemplar has no italic markup, so the transcription is roman. The template italicizes `*...*` markdown.
 9. **Output file names.** `tools/render.sh` writes `samples/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `samples/OVERLAY-<id>.pdf` and `.txt` (the repo's naming rule; the overlay tool reads `OUTPUT-<id>.pdf` by name). The brief's `<id>.pdf` and `<id>-overlay.pdf` names do not match the tools, so the tools' names are used.
 10. **Judge line.** The Ironleaf complaint has no judge assigned; the template prints the judge's name on line 1 only when the frontmatter gives one.
+
+## Engines
+
+**docx** (`docx/`; `samples/OUTPUT-ironleaf-complaint.docx` and `.docx.pdf`, the LibreOffice conversion). Built by `docx/build-reference.sh` (reference.docx with the styles, the header with the 27 line numbers and the pleading rules, and a footer placeholder), `docx/complaint.lua` (cover, caption, numbered allegations, prayer and signature block as OpenXML) and `docx/render.sh` (pandoc reads the sample as CommonMark, as cmarker does; the bottom notation is written from the frontmatter).
+
+Matches the typst output (checked on the rendered pages, not by a gate):
+- Letter page; 1 in top and bottom margins, 1.5 in left, 1 in right; 27 numbered lines at exact 24 pt, so body text sits on the numbers.
+- EB Garamond only: `pdffonts` shows EBGaramond Regular and Bold, embedded; no fallback face.
+- Lines 1 to 6 blank, court title on lines 7 to 9, caption table with a right and bottom rule, "JURY TRIAL DEMANDED" at right.
+- Double rule at the left and single rule at the right, full page height (lines anchored to the page).
+- Bottom notation on every page: title and case number with the page number at left, the firm block at right.
+- Numbered paragraphs typed 1 to N; prayer items hang at 0.9 in; the signature block at 3.2 in.
+
+Differs from the typst output (tier 2 at most):
+- Keep with next: a heading stays with the first line of the following paragraph (Word); typst keeps it with the whole paragraph. The page breaks differ from page 2 on (the docx p.2 starts mid-paragraph 1; typst p.2 starts at "THE PARTIES"). Both are 10 pages.
+- The caption title and notes are single spaced (about 13.8 pt); typst sets them at the body pitch.
+- Caption and signature rows are sized to whole numbered lines by estimate; a longer party name than estimated would move the lines below it off the grid.
+- Only the LibreOffice PDF was checked; Word was not available.
+
+Pages reviewed: docx.pdf 10 of 10, every page rendered at 60 dpi and viewed in its final state.
+
+BLOCKED: check.sh (no check IDs yet): `tools/check.sh` cannot run on this folder. It reads `<court>/court.json` and `<court>/checks.yaml`; the western-district court folder has neither checks.yaml nor a docx check set, so Gates 0 to 3 were not run on the docx. Needs the court-level checks.yaml (outside this unit).

@@ -69,3 +69,26 @@ Pairing and word overlap: our p1 to filed p1 (96%), p2 to p2 (98%), p3 to p10 (9
 8. **No firm block in the footer** for this sample: the filing carries none. The template prints one when `footer_firm` is given.
 9. **Output file names.** As in the complaint README, gap 9: `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt` are the tools' names, not the brief's `<id>.pdf` and `<id>-overlay.pdf`.
 10. **Caption.** Party column closed by a rule (right and bottom), as in the complaint; accepted.
+
+## Engines
+
+**docx** (`docx/`; `samples/OUTPUT-hoffman-motion-to-dismiss.docx` and `.docx.pdf`, the LibreOffice conversion). Built by `docx/build-reference.sh` (reference.docx with the styles, the header with the 27 line numbers and the pleading rules, and a footer placeholder), `docx/motion-brief.lua` (cover, caption, table of contents, body, word-count certificate, signature block and certificate of service as OpenXML) and `docx/render.sh` (pandoc reads the sample as CommonMark, as cmarker does, so a Westlaw star page such as "*2" stays literal; the bottom notation is written from the frontmatter).
+
+Matches the typst output (checked on the rendered pages, not by a gate):
+- Letter page; 1 in top and bottom margins, 1.5 in left, 1 in right; 27 numbered lines at exact 24 pt.
+- EB Garamond only: `pdffonts` shows EBGaramond Regular and Bold, embedded; no fallback face.
+- Judge's name on line 1 at right; lines 1 to 6 blank; court title on lines 7 to 9; caption with the noting data and the bold title at right; the party block closed by a right and bottom rule.
+- Table of contents as a two-column table: "I." entries at 0.5 in, "A." entries at 1 in, the "Page" header at right; the TOC and the introduction start on new pages (`page_breaks`).
+- Headings: level 1 centered bold caps; level 2 bold with a hanging indent; level 3 bold italic.
+- Word-count certificate after the conclusion (LCR 7(e)(6)); signature block; certificate of service on its own page last.
+- Bottom notation on every page: title and case number with the page number at left; no firm block (the sample gives none).
+
+Differs from the typst output (tier 2 at most):
+- Table of contents page numbers are typed from the sample, as in typst. They do not match the footer count, which starts at the cover (page 1): the sample lists INTRODUCTION at page 1 and the rendered introduction is on page 3 (same in typst; see the README gaps, item 3).
+- The title in the caption wraps to four lines (typst: three); the caption title and notes are single spaced.
+- Keep with next: a heading stays with the first line of the following paragraph (Word); typst keeps it with the whole paragraph.
+- Only the LibreOffice PDF was checked; Word was not available.
+
+Pages reviewed: docx.pdf 12 of 12, every page rendered at 60 dpi and viewed in its final state.
+
+BLOCKED: check.sh (no check IDs yet): `tools/check.sh` cannot run on this folder. It reads `<court>/court.json` and `<court>/checks.yaml`; the western-district court folder has neither checks.yaml nor a docx check set, so Gates 0 to 3 were not run on the docx. Needs the court-level checks.yaml (outside this unit).
