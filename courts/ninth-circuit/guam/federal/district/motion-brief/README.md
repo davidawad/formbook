@@ -81,3 +81,33 @@ Rendered at 60 dpi, every page viewed, after the last template change:
 - Page 11: CERTIFICATE OF SERVICE on its own page; the two addresses single-spaced; the signature block again. **Pass.**
 
 Tier 2 is **not** judged (one filer only; see gap 1). OPEN items for tier 2: the second exemplar (gap 1), the footnotes (gap 3), the typeface (gap 4).
+
+## Engines
+
+### docx (pandoc; `docx/`)
+
+Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once and committed) and `docx/gud.lua` (cover, caption, addresses, signature blocks at each `<!-- signature -->` marker and at the end, the page break before CERTIFICATE; body text and headings stay pandoc's). `sh tools/render.sh --engine docx` writes `samples/OUTPUT-leon-guerrero-memorandum.docx`.
+
+Set in `styles.xml` and `sectPr`, **not rendered** (no LibreOffice on the build box, so no page of the docx has been looked at):
+
+- EB Garamond 12 pt, black, in every style; exact 24 pt line pitch (double); 16.2 pt after each body paragraph (the typst `body-leading` gap).
+- Body text: 0.5 in first-line indent. Headings: bold; level 1 centred; 24 pt above; kept with the next paragraph.
+- Counsel, caption, addresses and signature: custom style `GudSingle`, exact 13.8 pt. Lettered items: style `GudList`.
+- Footnotes: single spaced, 12 pt.
+- US Letter; 1 in margins; centred PAGE field in the footer.
+- Court title: 3 in from the top edge, from the counsel line count (one line each).
+- Paragraphs are not numbered (GNLR sets no numbering for a motion; the typst template does not number them either).
+
+Differences from typst (judged in the XML only):
+
+- The caption is a borderless three-column table (3.25 in, 0.25 in gutter, 3.0 in), not a grid.
+- The court-title position counts counsel paragraphs, not wrapped lines; a counsel line that wraps in Word moves the title lower than 3 in (allowed by GNLR 5.1(b), but not the typst position). The sample's ten-line counsel block has one line that wraps at 3.25 in.
+- The CERTIFICATE page break is an empty 1 pt paragraph at the top of the new page.
+- Pagination, widow control and the footer position are Word's and not checked.
+
+BLOCKED (docx engine):
+
+- `docx.pdf` gates 0 to 3: BLOCKED, `soffice` (LibreOffice) is not installed on the build box, so `tools/render-docx.sh` stops after writing the `.docx` and no `.docx.pdf` exists.
+- docx visual review: pages reviewed = 0. The typst output was rendered and viewed as the reference only.
+- Word repair prompt: not checked (no Word). The `.docx` is a valid zip and every XML part is well-formed (`unzip -tq`, `xmllint --noout`).
+- TOC, TOA, cross-references: none in this doc type. Line numbering: not required by GNLR 5.1.
