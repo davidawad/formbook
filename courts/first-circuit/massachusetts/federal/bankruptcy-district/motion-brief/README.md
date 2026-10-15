@@ -83,3 +83,11 @@ Tier-2 findings (OPEN or ACCEPTED): the two ACCEPTED rows above (footnote split 
 7. **The 9013(b) check is a stand-in.** The `assert` looks for the phrase "respectfully requests". A motion that states the relief another way fails the build even though the rule is met. The check should be replaced when a better test exists.
 8. **Certificate of service text** is the filer's, not the template's. MLBR 9013-3(c) lists what the certificate must state; the template does not check those elements.
 9. **Searches tried (for the record):** CourtListener RECAP search (`type=rd`, `court=mab`, "memorandum of law" "motion", available only), which returned Adv. 26-04027 Doc. 6 (this motion), its Doc. 8 notice of hearing and the Doc. 6 proposed-order attachment, among others. This motion was chosen because it is a full motion with argument in one document, has a text layer, and is in the same court.
+
+## Engines
+
+Typst is the primary engine. The DOCX engine (`docx/`: `reference.docx` from `build-reference.sh`, `mab.lua` for the cover, caption, "Dated" signature table, single-spaced service list and numbering, `render.sh` for the section, footers and numbering part) is checked on the LibreOffice PDF of the `.docx`, as `docs/DOCX.md` describes.
+
+- **Matches the typst output:** 12 pages in both; EB Garamond 12 pt body (embedded in the docx PDF); exact 24 pt line pitch; 0.5 in first-line indent; 1 in margins on Letter; 10 pt footnotes; the caption with the right and bottom rules; numbered paragraphs 1 to 27 with the certificate and service list unnumbered; "Dated" at the left and the signature groups at 3.0 in, kept together; the service list single-spaced, flush left, in one column; page numbers from page 2.
+- **Differs (tier 2, not tier 1):** the bullet markers use Word's default symbol font (OpenSymbol, embedded) where typst uses a plain bullet; the tables carry Word's default rules; a footnote's break across pages can fall elsewhere than in typst. Word may paginate differently from LibreOffice.
+- **DOCX BLOCKED items:** none for this doc type. Not run in this box: `sh tools/check.sh <dir> --engine docx` (the gates were not executed here), and opening the `.docx` in Microsoft Word (only LibreOffice 26.8.1 was available).
