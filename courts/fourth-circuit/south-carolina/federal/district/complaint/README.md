@@ -73,3 +73,27 @@ Open findings: none for layout. The caption's single-spaced block uses stacked l
 ## Exemplar search (for the record)
 
 CourtListener search API, `court=scd`, `type=rd`, query `"COMPLAINT against" "Title VII"`, filed after 2024-01-01, `is_available=true`. Candidates downloaded; page 1 text checked for each: Miller v. Waffle House (10 pp., selected; counsel-filed, text-based, standard caption), Snider v. Mercedes-Benz Vans (8 pp.; caption not in the standard D.S.C. form), Dover v. Charleston County School District (12 pp.; not read past page 1), Brown v. Georgetown Hospital System (15 pp., Florence Division; not read past page 1). Selection criteria: counsel-filed, text-based PDF, 8 to 14 pages, standard caption.
+
+## Engines
+
+typst (`typst/`) is the reference. The docx engine (`docx/`) was built to its form and every page was compared with the typst page.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-miller-complaint.pdf` (8 pp.) | reference |
+| docx | `OUTPUT-miller-complaint.docx` and `OUTPUT-miller-complaint.docx.pdf` (9 pp.) | ok: LibreOffice converts it without error; all 9 pages of the `.docx.pdf` viewed at 60 dpi, set beside the typst pages |
+
+```sh
+sh tools/render.sh --engine docx courts/fourth-circuit/south-carolina/federal/district/complaint samples/INPUT-miller-complaint.md
+sh docx/make-reference.sh     # rebuilds docx/reference.docx (run from the doc-type folder)
+```
+
+- *Build:* `docx/reference.docx` (styles, US Letter, 1-inch margins, centered PAGE field in the footer; from pandoc's default reference document) and `docx/scd-complaint.lua`, which writes the court heading, caption table, document title and signature table from the frontmatter. No `render.sh`, no `checks.yaml`.
+- *Font:* declared as Times New Roman (the face L.R. 1.05(B) names; the typst template sets its metric-compatible substitute). In this box's LibreOffice, `fc-match` maps Times New Roman to Liberation Serif, and `pdffonts` shows only LiberationSerif.
+- *Matches typst:* 12 pt type; 1-inch margins; page number centered at the foot; court heading in capitals; the caption (parties with their indents, the column of ")" marks, CASE NO.) at the typst row pitch (about 18.7 pt); the title; headings (levels 1 and 2 bold, centered, capitals; level 3 bold, centered); half-inch first-line indent on body paragraphs; the signature block.
+- *Differs:*
+  - Body pitch: Word's double (2.0 times the 13.8 pt single line, 27.6 pt) against typst's 27.06 pt. The difference adds up to about a line a page, so the docx runs to 9 pages against typst's 8 and page breaks differ from page 2 on. The complaint has no page limit. Double spacing is kept at Word's definition rather than set to an exact 27.06 pt.
+  - Single lines (court heading, signature block) are Word's 13.8 pt; typst's are tighter (about 10 pt for the court heading). The docx reads more openly.
+  - Page 2 of the docx keeps "STATEMENT OF FACTS" with paragraph 9 and moves them to page 3; typst keeps the heading at the foot of page 2.
+- *Not verified:* opening in Microsoft Word (no Word on this box). The `.docx` is a valid zip with well-formed XML parts (`unzip -tq`, `xmllint --noout`), and LibreOffice converts it without a conversion error.
+- *BLOCKED:* none. This court has no `checks.yaml`, so no check ID was run against the docx; the review is by eye.
