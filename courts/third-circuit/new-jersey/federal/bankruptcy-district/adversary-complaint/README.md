@@ -69,3 +69,11 @@ Not produced by this template (separate filings): the adversary cover sheet (LBR
 - Page 8: item (d), "Dated: October 12, 2026", the signature block with the firm and "/s/" line. Pass.
 
 Overlay (`OVERLAY-supor-adversary-complaint.txt`): pages 1 to 5 pair with the same exemplar pages (word overlap 64 to 84 percent). Pages 6 to 8 pair with exemplar pages 32 to 34 because the sample's paragraphs 198 to 214 sit at the end of the filing. The overlay is a diagnostic, not a score.
+
+## Engines
+
+- **typst** (primary, `typst/`): the reference for the form.
+- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/njb.lua`): pandoc on `reference.docx`. Matches the typst template: EB Garamond 14 pt, exact 25.2 pt line pitch and 9.8 pt paragraph gap (both measured on the typst output, not on a filed PDF), 0.5 in first-line indent, 1 in margins on letter paper, 12 pt centered page number in the footer, the cover (counsel block, court name, LBR 9004-1 note, caption tables with the right and bottom rules, title, page break before the body), body paragraphs numbered 1 to n, prayer items lettered (a) to (d), bracketed notes centered and italic, signature block in a borderless table.
+- Differs from typst: paragraph numbers and prayer letters are typed text written by the filter, not Word numbering (a paragraph inserted in Word does not renumber the rest); cover and signature text is plain (italics in the frontmatter are dropped there); caption and signature rules are Word table borders, which Word and LibreOffice draw slightly differently; line breaks and page numbers may differ in Word from the typst pages.
+- Not built on the docx: no TOC or TOA (none in this template).
+- BLOCKED: LibreOffice (`soffice`) is not installed in the build box, so `samples/OUTPUT-supor-adversary-complaint.docx.pdf` cannot be produced, and the Gate 0 CONTENT, Gate 1 RULES, Gate 2 VISUAL REVIEW and Gate 3 GENERALIZATION checks cannot be run on it. No `checks.yaml` exists for `njb` yet, so there are no check IDs to list. Reason for every item: LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked. The `.docx` passes the zip and XML well-formedness checks; it has not been rendered or viewed.
