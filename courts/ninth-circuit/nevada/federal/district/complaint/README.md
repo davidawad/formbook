@@ -7,9 +7,10 @@ Folder: `courts/ninth-circuit/nevada/federal/district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-williams-2-26-cv-00801-complaint.pdf` (one filer, see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-williams-complaint.md` (the whole 14-page complaint, transcribed) |
-| render | ok: `samples/OUTPUT-williams-complaint.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-williams-complaint.pdf` and `.txt` (pairing by word overlap; see below) |
-| pages reviewed | 14 of 14 (every page rasterized at 60 dpi and viewed after the last template change; p.9 and p.12 re-checked after the heading-spacing change) |
+| typeface | face required: **none** (LR IA 10-1(a)(3) sets size only: "Text must be size 12 font or larger"; read 2026-10-15 from the court's 2020 local rules PDF). Substitute: none needed; **EB Garamond** kept (no-face default, `docs/FONTS.md`). Fit: n/a. Embedded: EBGaramond Regular, Bold, Italic, BoldItalic (`pdffonts`). |
+| render | ok: `samples/OUTPUT-williams-complaint.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| overlay | ok: `samples/OVERLAY-williams-complaint.pdf` and `.txt` (pairing by word overlap; see below; re-run 2026-10-15) |
+| pages reviewed | 14 of 14 (every page rasterized at 60 dpi and viewed on 2026-10-15; p.9 and p.12 re-checked after the heading-spacing change) |
 | BLOCKED | none. Tier-2 coverage is short of the eval loop's "two or three filers" (see Known gaps 1). |
 
 ## Governing rules
@@ -87,7 +88,7 @@ Naming: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`, with th
 ## Known gaps and open choices
 
 1. **One filer only.** The eval loop asks for two or three exemplars from different filers before tier 2 is judged. Searches (CourtListener RECAP API, `type=r`, `court=nvd`, complaints filed 2025-06 to 2026-10): Ward v. Tesla (2:26-cv-00800, 17 pp.) and Nguyen v. Wynn (2:26-cv-00176, 19 pp.) were downloaded and checked for a text layer, but they have the same filer (Greenberg Gross); Villanueva v. Tesla (3:25-cv-00678, 26 pp.) and Vanlake v. Breakthru (2:26-cv-00921, 15 pp.) were found but not downloaded. Tier 2 is therefore **not** judged against a second filer yet.
-2. **Type size.** The rule requires 12 pt or larger (LR IA 10-1(a)(3)). Body text is 13 pt EB Garamond (the only serif face vendored), chosen so it reads at about the size of the exemplar's 12 pt Times New Roman. EB Garamond at 12 pt would be the minimum-compliant alternative. A reader may prefer 12 pt; it is a choice, not a rule breach.
+2. **Type size.** The rule requires 12 pt or larger (LR IA 10-1(a)(3)). Body text is 13 pt EB Garamond (the rule names no face, so EB Garamond stays; see the typeface row), chosen so it reads at about the size of the exemplar's 12 pt Times New Roman. EB Garamond at 12 pt would be the minimum-compliant alternative. A reader may prefer 12 pt; it is a choice, not a rule breach.
 3. **Line pitch.** The exemplar uses a 24 pt grid, so its 28th line sits at about 10.3 in, which breaches the one-inch bottom margin (LR IA 10-1(a)(6)). This template fits the 28 lines between the one-inch margins (pitch 23.14 pt), which keeps the margins compliant and still gives double-spaced lines at this type size. **This departs from the exemplar's grid; David should confirm the reading.**
 4. **JURY DEMAND wording.** LR 38-1 says "JURY DEMAND" directly below the title. The exemplar wrote "DEMAND FOR JURY TRIAL" in the caption. This template follows the rule text. The body still ends with a separate "DEMAND FOR JURY TRIAL" section, as in the exemplar.
 5. **Claims summary in the caption.** The exemplar lists its seven claims in the caption's right column. This template reproduces that when the sample supplies `summary`; the rules do not require it.
