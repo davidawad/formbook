@@ -78,7 +78,7 @@ Pages reviewed: 14 of 14.
 
 ## Known gaps and open choices
 
-1. **Typeface (KYEB-FORM-001).** Both exemplars are set in Times. Times is not in `fonts/` (only EB Garamond is vendored), and system fonts are banned by the eval loop. EB Garamond at 13 pt is used, as in the CAND folders. A Times-metric font (for example TeX Gyre Termes, under OFL) would match the exemplars, but adding a vendored font is a shared change to `fonts/`, which this task does not allow. **Needs David's call** whether to vendor one.
+1. **Typeface (KYEB-FORM-001).** No face is named by a rule, and `docs/FONTS.md` says a court that names none keeps EB Garamond (fonts pass, 2026-10-15). The template stays EB Garamond 13 pt. Both exemplars are set in Times, and `fonts/liberation-serif/` (the Times substitute, metric-compatible) is vendored, so switching `font-family` to `"Liberation Serif"` is a one-line change if David prefers to match the exemplars. That is a style choice, not a rule, and is left open. **Needs David's call.**
 2. **Pleading paper.** Neither exemplar uses numbered pleading lines; no E.D. Ky. rule requires them in this court (LR 5.1 is not in the APM list). Not drawn.
 3. **Adversary cover sheet (Official Form 1040).** Not verified in this session. If FRBP 7003 or the APM requires it with the complaint, the filing needs it separately. Not generated.
 4. **Summons (FRBP 7004; Official Form 2600 series).** Issued separately; not generated.

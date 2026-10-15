@@ -68,7 +68,7 @@ Pages reviewed: 3 of 3 (fictional sample).
 ## Known gaps and open choices
 
 1. **No exemplar (BLOCKED).** Every layout choice above that a clerk would expect to see (heading style, hearing-block wording, certificate wording, sub-heading spacing) is a convention unconfirmed by a filing. See `exemplars/SOURCE.md` for the searches and what would unblock it.
-2. **Typeface.** EB Garamond at 13 pt, not Times (as in the adversary-complaint folder; see that README, gap 1). Only EB Garamond is vendored.
+2. **Typeface.** No face named by a rule (KYEB-FORM-001), so EB Garamond at 13 pt stays, per `docs/FONTS.md` (fonts pass, 2026-10-15). Times (`Liberation Serif`) is vendored; see the adversary-complaint README, gap 1, for the open choice.
 3. **Hearing wording.** LBR 9014-1 requires the date, time and location; the labels "Hearing:", "Time:", "Place:", "Objections due:" are the template's own. Not checked against a filing.
 4. **Proposed order.** Required by LBR 9013-1(d); not generated. The APM (§ XVIII) governs how it is attached.
 5. **Certificate of service.** Printed only when `certificate_of_service` is given. The FRBP 9014(b) requirement is for service, not a particular certificate form; the wording in the test sample is the template's sample, not a form.
