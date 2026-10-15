@@ -68,3 +68,12 @@ Not produced by this template (separate filings that may be required with the fi
 - Page 12: the end of ¶ 51 only; the page ends early because the conclusion and ¶ 52 stay with the signature block. Pass.
 - Page 13: Conclusion and Request for Relief heading; ¶ 52; the signature block (Dated; Respectfully submitted; two signing blocks). Pass.
 - Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Engines
+
+docx (`docx/`): `build-reference.sh` writes `reference.docx` (styles, footer page number); `complaint.lua` builds the caption, numbered paragraphs, lettered lists and signature block from the sample; `render.sh` runs pandoc, then writes the caption rules and keeps table rows whole. Output: `samples/OUTPUT-camp-mystic.docx` and `.docx.pdf` (LibreOffice, 13 pages; typst is 13 pages).
+
+- Matches the typst form: EB Garamond 12 pt; body double spaced as an exact 24 pt line; 1 in margins, letter; 0.5 in first-line indent; numbered paragraphs; headings (centered bold for levels 1 and 2, bold left for level 3); the two-column caption with the right and bottom rules and the case numbers at right; centered page number; footnote text 10 pt (typst measures about 10.2 pt); single-spaced lines at the typst pitch (13.8 pt); signature block kept whole.
+- Differs, and why: the paragraph numbers are typed with a tab, not Word auto-numbering (the numbers are the sample's own); the caption rules are cell borders added by `docx/render.sh`, because pandoc cannot write cell borders and LibreOffice does not draw paragraph borders in a table cell; LibreOffice places exact-line text about 3 pt lower than typst, so a page can hold one line less and a break can fall differently (page counts match on this sample).
+- Opened and converted with LibreOffice only; Word was not checked.
+- BLOCKED: none.
