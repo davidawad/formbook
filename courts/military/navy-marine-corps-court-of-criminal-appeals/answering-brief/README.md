@@ -4,6 +4,8 @@ Court: U.S. Navy-Marine Corps Court of Criminal Appeals (`nmcca`). Doc type: ans
 
 ## Status
 
+**BLOCKED: no exemplar.** No public filed NMCCA answer (government brief answering an appellant's assignments of error) was found after a real search on 2026-10-15 (trail in `exemplars/SOURCE.md`). Without one, the sample cannot be rewritten to a real structure and the overlay cannot run. The template and sample below are unchanged from 2026-10-14 and remain synthetic.
+
 - Template: built and rendered. Typst only (`typst/`). `latex/` and `docx/` are not in this folder.
 - Exemplar: **none**. No public filed NMCCA answer was found (search trail in `exemplars/SOURCE.md`). The template follows the rules and the appellant's format, not a filed answer.
 - Sample: `samples/INPUT-answering-brief.md` is **synthetic**. Names, numbers, dates and citations are placeholders in brackets, and the issues and argument are generic. It is not a transcription of any filed brief, so it does not show what a real NMCCA answer looks like.
@@ -71,7 +73,9 @@ Every page of `OUTPUT-answering-brief.pdf` (8 pages) was rendered at 60 dpi (`pd
 | 7 | Point II discussion, conclusion, signature block (body p. 5) | The conclusion ends and the signature block sits with it on the same page. OK. |
 | 8 | Certificate of filing and service (body p. 6) | Own page, numbered. The service line reads "Appellate Defense Division, Navy-Marine Corps Appellate Review Activity on [date of filing]." OK. |
 
-Overlay: not produced. `sh tools/overlay.sh` exits 1 on 2026-10-14 ("no exemplar pdf"): no filed NMCCA answer exists to compare against (see Status and `exemplars/SOURCE.md`). Opening-brief exemplar is not a substitute, since it is a different document type.
+Re-rendered and re-reviewed 2026-10-15: `sh tools/render.sh` exit 0, 8 pages, fonts are EB Garamond only. All 8 pages were rasterized (`pdftoppm -r 60`) and viewed. The table above still holds; PDF pages 3-7 are body pages 1-5 and PDF page 8 is the certificate (page 6).
+
+Overlay: not produced. `sh tools/overlay.sh` exits 1 on 2026-10-15 (and on 2026-10-14) ("no exemplar pdf"): no filed NMCCA answer exists to compare against (see Status and `exemplars/SOURCE.md`). Opening-brief exemplar is not a substitute, since it is a different document type.
 
 ## Known gaps
 
