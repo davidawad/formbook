@@ -80,3 +80,11 @@ Page limits: the 2025 local rules set none for district-court motions (the only 
 - Page 8: signature block (Respectfully submitted, both signers, Attorneys for Defendants); CERTIFICATE OF SERVICE with the pro se party block and the Legal Secretary's `/s/` line. Pass.
 
 Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Engines
+
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `cod.lua` sets the caption, section numbers, the certificates and the signature block). `sh tools/render.sh --engine docx courts/tenth-circuit/colorado/federal/district/motion-brief samples/INPUT-sussman-motion-to-dismiss.md` writes `OUTPUT-sussman-motion-to-dismiss.docx` and `OUTPUT-sussman-motion-to-dismiss.docx.pdf` (LibreOffice 26.8.1; `pdffonts`: EB Garamond only, embedded).
+
+- Matches the typst output: 8 pages, the same as typst. Letter paper; margins as the complaint; 12 pt EB Garamond with 24 pt exact line pitch; caption and title as the complaint; section headings numbered by the template (I. centred caps; A., 1. with a hanging number, as typst); the conferral certificate and the certificate of service (centred bold headings, the party block indented and single spaced); footnotes at 12 pt, single spaced, with superscript references; the block quotation single spaced and indented one inch each side; centred page number in the footer.
+- Differs: (a) pagination. Same cause as the complaint: about one line less per page in LibreOffice, so page breaks fall one or two lines earlier (for example page 4 starts with "Plaintiff brings various claims", page 7 starts with "Plaintiff asserts that the deputies"); the page count is the same. Word may break pages differently again. (b) Footnote separator and number spacing are LibreOffice's defaults, not typst's; they look the same at 60 dpi.
+- BLOCKED: none. `sh tools/check.sh courts/tenth-circuit/colorado/federal/district --engine docx` cannot run for this court yet: no `checks.yaml` or `rules.md` in the court folder, so no check ID is assessed for the docx engine. This is a gap in the court folder, not a docx failure.
