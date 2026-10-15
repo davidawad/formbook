@@ -81,3 +81,26 @@ The pairing is not in order because the sample elides the exemplar's pages 8 to 
 8. **Rule 7(a) statement.** The template does not check that the motion states its rule. The sample does so in its introduction and section VI.
 9. **Page limit.** CivLR 7(e)'s 30-page limit is not checked by the template.
 10. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
+
+## Engines
+
+The typst template is the reference. The docx engine is `docx/reference.docx` (built by `docx/make-reference.sh`) with the Lua filter `docx/alsd-motion-brief.lua`; it renders with `sh tools/render.sh --engine docx <this folder> samples/INPUT-shell-motion-brief.md`, which writes `samples/OUTPUT-shell-motion-brief.docx` and `samples/OUTPUT-shell-motion-brief.docx.pdf` (LibreOffice 26.8.0.3 converts the file; 8 pages, the same count as the typst render). The fonts must be installed for LibreOffice: EB Garamond from `fonts/eb-garamond/`; `pdffonts` shows only the EB Garamond faces.
+
+| Element | Typst | DOCX |
+|---|---|---|
+| Paper, margins, font, size | Letter, 1 in, EB Garamond 12 pt | same (in `reference.docx`) |
+| Body spacing | 24 pt pitch, paragraphs indented 0.5 in | exact 24 pt, first line indented 0.5 in |
+| Caption and cover | a grid with a ")" column; "Civil Action No." on the middle row | a borderless table with the same rows and columns |
+| Headings | level 1 centered caps, 1.4 em; level 2 bold with a hanging indent, 1.2 em; level 3 bold, 1 em | level 1 centered caps, 17 pt; level 2 bold with the same hanging indent, 14.5 pt; level 3 bold, 12 pt (rounded to half points) |
+| Bullets and lettered lists | bullet at 0.5 in, text at 0.9 in | the same measures |
+| Block quotes | single-spaced, indented 0.5 in both sides | the same |
+| Signature block and certificate of service | signature at 3.0 in; certificate kept together | the same measures; certificate kept together |
+| Page numbers | centered, bottom margin | centered, bottom margin (a PAGE field) |
+
+What differs:
+
+- Line breaks: some lines break a word earlier or later than the typst render (the second line of the brief title, for one), so text is not in the same place on every line.
+- The CONCLUSION heading and its paragraph move to page 8 in the DOCX, with the signature block and the certificate of service; the typst render keeps them on page 7. The signature block and certificate are on the last page in both engines (open item 6 above).
+- The space between the title of the paper and the first heading is set by measurement of the typst render (a blank line of 16.2 pt in `alsd-motion-brief.lua`), not by a rule.
+
+DOCX BLOCKED items: none. This folder has no `checks.yaml`, so `tools/check.sh --engine docx` does not run here; the docx PDF was reviewed page by page instead (every page of `OUTPUT-shell-motion-brief.docx.pdf`, against the typst render). The `.docx` was converted by LibreOffice without error but was not opened in Microsoft Word, so the Word repair check is not done.
