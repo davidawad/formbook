@@ -57,7 +57,7 @@ Known gaps: the form in the sample order is a 2000-era layout with placeholder v
 - **Open choice (flagged):** the form fields are single-spaced. Rule 23(d)(2) requires double spacing "between each line of text", and it is not settled whether a labeled form field or a table cell is "text" for that purpose. The template follows the Court's form, which is single-spaced. If the Court reads the rule to cover the fields, change `field`, `form-block` and the tables to `double-leading`; the page count grows.
 - **Signature block.** As in the petition: the date, a rule above the name, the bar number and contact lines. Kept on one page.
 - **Page numbers.** Centered at the foot of each page on the 3/4-inch line (see Margins).
-- **Typeface.** EB Garamond at 14 pt, the only vendored serif.
+- **Typeface.** EB Garamond at 14 pt. Rule 23(d)(2) requires one consistent typeface, 14-point proportional (or 12-point nonproportional); it names no face as a requirement (its examples, Times New Roman and Century Schoolbook, are introduced by "e.g." in the petition's copy of the rule). Any proportional face therefore meets the rule, so the template keeps EB Garamond. The vendored substitutes are in `docs/FONTS.md`; switch only if the Court or the trial judge asks for another face. Face required: no. Font: EB Garamond.
 
 ## Calibration
 
@@ -71,7 +71,7 @@ The page number is placed with `page(foreground: place(bottom + center, dy: -foo
 
 ## Gate 2: visual review of the current PDF
 
-Reviewed 2026-10-14. sha256 of `samples/OUTPUT-generic-pretrial-memorandum.pdf`: `2e18bf2ff792454ecd17fa6687fe4f8b46977af8fef7e99c0d3130599d5b65a6`. Every page was rendered at 60 dpi and looked at. There is no exemplar, so the pages are compared with the form's fields and the rules.
+Reviewed 2026-10-14. sha256 of `samples/OUTPUT-generic-pretrial-memorandum.pdf`: `bb43d4cc3e1bf22125147e73386e4e48aebd331ed683c126ea054c28b89c8271` (re-rendered 2026-10-14 for the fonts pass; the face is unchanged, and the pages were looked at again). Every page was rendered at 60 dpi and looked at. There is no exemplar, so the pages are compared with the form's fields and the rules.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
