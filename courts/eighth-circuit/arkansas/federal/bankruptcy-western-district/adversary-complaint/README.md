@@ -90,6 +90,17 @@ Every page was rendered at 60 dpi (`pdftoppm -r 60`). A bounding-box scan (`pdft
 
 Gate 2 rows: pages 1 to 9 pass; no OPEN rows for layout. Tier-2 findings (conventions a clerk expects) are the gaps above: font and line length (gap 2), caption form (gap 3), the second filer (gap 4), and the local rules (gap 1).
 
+## Engines
+
+| Engine | Output | What matches the typst template | What differs |
+|---|---|---|---|
+| typst (primary) | `samples/OUTPUT-rice-trustee-complaint.pdf` | (the reference) | (the reference) |
+| docx | `samples/OUTPUT-rice-trustee-complaint.docx`, `.docx.pdf` (LibreOffice) | 9 pages, as typst; US Letter; 1 in margins; EB Garamond 13 pt (embedded in the PDF); exact 24 pt double spacing; 0.5 in first-line indent; court title; caption as a borderless table (debtor and parties left, case numbers right, 0.2 in gutter); centred bold capitals section headings kept with the next paragraph; numbered paragraphs 1, 2, ...; the prayer kept with the signature block; `- n -` footer | the text after a paragraph number starts at a tab stop at 1.0 in (typst: 0.3 in after the number, so the start moves with the width of the number); the gaps between caption groups are paragraph spacing of the same size, not blank lines |
+
+docx: all 9 pages of `OUTPUT-rice-trustee-complaint.docx.pdf` were rendered at 60 dpi and compared with the typst pages (side by side). Gate result: no BLOCKED items. `tools/check.sh` was not run for the docx engine: the checks are per court folder (see the court README), so this doc type has no stamp. Word was not available to open the file: it must be opened in Word once to confirm there is no repair prompt, and the reader needs EB Garamond installed, or Word substitutes a font silently (`docs/DOCX.md`).
+
+Source: `docx/build-reference.sh` builds `docx/reference.docx` (run it from `docx/`: `sh build-reference.sh reference.docx`); `docx/arwb-adversary-complaint.lua` lays out the markdown contract. Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-rice-trustee-complaint.md`.
+
 ## Commands
 
 ```sh

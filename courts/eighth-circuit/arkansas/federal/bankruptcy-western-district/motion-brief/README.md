@@ -77,6 +77,17 @@ Every page was rendered at 60 dpi (`pdftoppm -r 60`) and viewed after the last t
 
 Gate 2 rows: pages 1 to 8 pass for layout. Tier-2 findings (conventions a clerk expects): the font and line length (gap 3), the local rule on briefs (gap 1), and the table of contents question (gap 2). The filer's typos are transcribed, not corrected (gap 6).
 
+## Engines
+
+| Engine | Output | What matches the typst template | What differs |
+|---|---|---|---|
+| typst (primary) | `samples/OUTPUT-lowry-stay-brief.pdf` | (the reference) | (the reference) |
+| docx | `samples/OUTPUT-lowry-stay-brief.docx`, `.docx.pdf` (LibreOffice) | US Letter; 1 in margins; EB Garamond 13 pt (embedded in the PDF); exact 24 pt double spacing; 0.5 in first-line indent; bold court title; caption as a borderless table (debtor left, case number and chapter right); bold capitals title; argument headings I., A., 1., a. with a hanging label; the factor lists (1), (2), ...; single-spaced signature block at 3.25 in; the certificate of service; a plain centred page number | 9 pages, typst 8: the conclusion keeps with the signature block (a signature is never alone at the top of a page), and the certificate of service stays together as one block, so the last page starts later; the text of a factor item starts at 1.0 in on every line (typst puts the first line's text at about 1.25 in); the gaps before the signature and the certificate are paragraph spacing |
+
+docx: all 9 pages of `OUTPUT-lowry-stay-brief.docx.pdf` were rendered at 60 dpi and compared with the typst pages (side by side and as a grid). Gate result: no BLOCKED items. `tools/check.sh` was not run for the docx engine (no stamp; see the court README). Word was not available: open the `.docx` in Word once to confirm there is no repair prompt, and install EB Garamond on the reader's machine, or Word substitutes a font silently (`docs/DOCX.md`).
+
+Source: `docx/build-reference.sh` builds `docx/reference.docx` (run it from `docx/`: `sh build-reference.sh reference.docx`); `docx/arwb-motion-brief.lua` lays out the markdown contract. Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-lowry-stay-brief.md`.
+
 ## Commands
 
 ```sh
