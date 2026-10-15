@@ -81,3 +81,11 @@ Compared with the exemplar page that the overlay pairs with each page (`OVERLAY-
 | 9 | exemplar p.17 (overlay pair) | Prayer items B. to G. in the label column; "Dated" line; signature block at right, "By: /s/" line; page number. Nothing spills. | PASS |
 
 Overlay (word-overlap pairing, not a score): page 3 pairs with the lowest overlap (33.7%). The sample is a selection of passages, so its paragraphs and the exemplar's page 3 share fewer words; this is expected and is tier 3, not a defect. The overlay is a diagnostic, not a score.
+
+## Engines
+
+DOCX (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond 12 pt, exact 24 pt body spacing, 0.5 in first-line indent, 1 in margins, centered PAGE footer); `nyed-complaint.lua` builds the counsel block, caption table, title, numbered paragraphs (number at 0.5 in, tab to 1 in), prayer letters, and signature block. Samples: `samples/OUTPUT-blade-complaint.docx` and `.docx.pdf` (LibreOffice conversion, no errors; opened in LibreOffice, not Word).
+
+- Matches the typst output: font and size, 24 pt double spacing, margins, caption layout and rules, heading styles, numbering positions, prayer indents, signature block, page-number footer. Pages reviewed: 10 of 10 (`docx-01` to `docx-10` at 60 dpi, compared with the typst pages).
+- Differs: 10 pages in docx, 9 in typst. Line breaks and per-page line counts differ between LibreOffice and typst (docx pages carry 25 to 28 text lines, typst 28 to 30); the mandated line pitch is the same in both. Paragraph numbers are typed text, not a Word list, so a paragraph inserted in Word must be renumbered by hand.
+- BLOCKED: `tools/check.sh <doc-dir> --engine docx` cannot run on this folder (exit 2): it needs `court.json` and `checks.yaml` at the court root, and neither exists for a doc-type folder. No gate has passed for the docx engine; the `.docx.pdf` was reviewed by eye only.
