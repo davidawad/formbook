@@ -83,3 +83,11 @@ Not produced by this template: the motion itself (a separate document), any prop
 - Page 9: "CERTIFICATE OF SERVICE" centered; certificate paragraph; the three service entries single-spaced; the certificate signer line (no opening line). Pass.
 
 Gate 2 rows are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Engines
+
+docx: `docx/build-reference.sh` (builds `docx/reference.docx`) and `docx/tnmd.lua` (caption, signature, certificate of service, prayer lettering, footnotes). Output: `samples/OUTPUT-veris-motion-brief.docx` and `samples/OUTPUT-veris-motion-brief.docx.pdf` (LibreOffice 26.8.1 conversion). Typst output for comparison: `samples/OUTPUT-veris-motion-brief.pdf`. The docx is 10 pages; the typst output is 9. Every page of both was rasterized at 60 dpi and viewed (docx pages 1 to 7 before the last two changes, which only moved the signature and certificate; pages 8 to 10 after).
+
+- Matches typst: letter paper, one-inch margins, EB Garamond 13 pt (embedded), double spacing as an exact 27.6 pt pitch, single spacing at 15 pt for the caption, headings, footnotes and signature, centered page number (TNMD-FORM-001 to 004). Caption with the ")" column and the judge lines on the right; the title block; footnotes single-spaced at 13 pt; headings (centered level 1, flush-left level 2, indented level 3) at the typst default sizes; the signature block at 3.25 in; the certificate of service entries, kept together, with the signer block that has no opening line.
+- Differs: the docx runs one page longer (10 against 9). Exact line spacing in Word and LibreOffice puts each line's text about 12 pt lower in its line box than typst, so each page holds about one line less; the line pitch is identical. Headings keep with the text after them, which moves a few lines. The ")" column is one ")" per estimated caption line, as in the complaint. The page-count difference is a renderer effect, not a rule (LR 7.01(a)(2) allows 25 pages).
+- BLOCKED: none for the docx. `tools/check.sh` cannot run on this folder (no `court.json` or `checks.yaml`); the docx gate was not run. Word was not available; the file was checked with `unzip -t`, `xmllint` and the LibreOffice conversion only.

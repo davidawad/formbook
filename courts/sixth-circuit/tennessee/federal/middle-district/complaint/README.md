@@ -81,3 +81,11 @@ Not produced by this template (separate filings, not part of the complaint): the
 - Page 13: "DEMAND FOR JURY TRIAL" heading and the signature block (right half, single-spaced, "/s/" line and the counsel lines). The block did not fit on page 12 and moved with its heading. Pass.
 
 Gate 2 rows are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Engines
+
+docx: `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc's default reference) and `docx/tnmd.lua` (caption, signature, numbering). Output: `samples/OUTPUT-doge-complaint.docx` and `samples/OUTPUT-doge-complaint.docx.pdf` (LibreOffice 26.8.1 conversion). Typst output for comparison: `samples/OUTPUT-doge-complaint.pdf`. Both are 13 pages. Every page of both was rasterized at 60 dpi and viewed.
+
+- Matches typst: letter paper, one-inch margins, EB Garamond 13 pt (the PDF embeds only EB Garamond Regular and Bold), double spacing as an exact 27.6 pt line pitch, single spacing at 15 pt for the court heading, caption, headings and signature, centered page number at the foot (TNMD-FORM-001 to 004). Caption: court lines, party column with a ")" column, "Case No." and "JURY DEMAND" on the right. Title, numbered paragraphs 1 to 61, stacked count headings, lettered prayer items A to H, and the signature block at 3.25 in, kept together with the heading before it. Heading sizes follow the typst default (1.4 em and 1.2 em).
+- Differs (tier 2, or a renderer effect): the ")" column gets one ")" per estimated caption line (typst measures the wrap); recount if the names change. The paragraph text after the number starts at 1.2 in (typst: 0.5 in gap after the number); the number itself is at 0.5 in in both. Exact line spacing in Word and LibreOffice puts each line's text about 12 pt lower in its line box than typst; the line pitch is identical.
+- BLOCKED: none for the docx. `tools/check.sh` cannot run on this folder (it has no `court.json` or `checks.yaml`); the docx gate was not run. Word was not available; the file was checked with `unzip -t`, `xmllint` and the LibreOffice conversion only.
