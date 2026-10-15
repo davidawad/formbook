@@ -69,3 +69,24 @@ Defects found and fixed during this review (the template at the time of the fina
 - Paragraph spacing: between paragraphs typst applies `spacing`, not `leading`; `spacing` is now the double pitch.
 
 [Formbook index](../../../../../README.md)
+
+## Engines
+
+Built 2026-10-15 with `docx/build-reference.sh`, `docx/mied-complaint.lua` and tools/render.sh --engine docx (pandoc 3.6.4).
+
+**docx: BLOCKED (not passed).** `samples/OUTPUT-music-laa-complaint.docx` is written and valid (no duplicate zip entries, every XML part well formed). The `.docx.pdf` step did not run: LibreOffice (`soffice`) is not installed on this box, so `tools/render-docx.sh` exits 1 at the conversion. The docx.pdf checks (Gates 0 to 3 on the LibreOffice PDF) and the page-by-page visual review are BLOCKED, and no `samples/.check-docx.txt` stamp is written. Pages reviewed: 0.
+
+What the docx matches, as set in `docx/reference.docx` and the filter (checked in the XML, not on a page):
+- US Letter, 1 in margins on all sides (`w:pgSz`, `w:pgMar`), the same as the typst template.
+- Body font EB Garamond (the vendored family; `w:docDefaults` and the styles), 14 pt (`w:sz 28`), footers 12 pt; the typst PDF embeds EBGaramond Regular, Bold and BoldItalic only.
+- Double pitch: body text is exact 644 twips (32.2 pt, the typst 2.3 em), first-line indent 0.5 in; numbered paragraphs ("n." and an em space) at the indent; prayer items lettered "A." with a hanging indent.
+- Headings: level 1 centered bold caps, level 2 centered bold, level 3 centered italic (`Heading1` to `Heading3`, keep-with-next).
+- Caption: court title in three bold caps lines, party block with right and bottom rules, case number and judge at right, title centered bold; signature block at 3.2 in, single spaced.
+- Page number centered in the footer (PAGE field, cached result 1).
+
+Differences from typst (not verified on a page):
+- Single spacing is Word's font-metric single line (`w:line 240 auto`), not typst's 1.15 em pitch; line breaks and the page count may differ by a line or a page. The docx page count is unmeasured (12 pages in the typst PDF).
+- The caption rules are cell borders in a table (see docs/DOCX.md, "Cover pages and caption boxes").
+- No pleading line numbers and no TOC or TOA on this doc type, so no field check applies.
+
+Word limits (docs/DOCX.md): none of the Word-native fields apply to the complaint. The docx is delivered BLOCKED for `docx.pdf` and Gate 2 (page review) only, because LibreOffice is missing.

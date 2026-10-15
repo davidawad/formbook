@@ -71,3 +71,28 @@ Defects found and fixed during this review:
 - `context` and separate content pieces misplaced lines; the body is rendered as one markdown string per section.
 
 [Formbook index](../../../../../README.md)
+
+## Engines
+
+Built 2026-10-15 with `docx/build-reference.sh`, `docx/mied-motion-brief.lua`, and `docx/render.sh` (the court's own build: it maps the section footers to the ids pandoc writes), run by tools/render.sh --engine docx (pandoc 3.6.4).
+
+**docx: BLOCKED (not passed).** `samples/OUTPUT-soboleski-motion-brief.docx` is written and valid (no duplicate zip entries, every XML part well formed). The `.docx.pdf` step did not run: LibreOffice (`soffice`) is not installed on this box, so `tools/render-docx.sh` exits 1 at the conversion. The docx.pdf checks and the page-by-page visual review are BLOCKED, and no `samples/.check-docx.txt` stamp is written. Pages reviewed: 0.
+
+Blocked items, by check area (docs/DOCX.md):
+- docx.pdf / page review: soffice not installed on this box.
+- Table of contents (the body headings): the contents is a TOC field over the heading styles. Its cached result lists the entries without page numbers; the page numbers appear only when the field is updated. `settings.xml` sets `updateFields`, so Word asks to update on open (accept it); LibreOffice needs an update on load. Page numbers in the contents are not verified in this box.
+- Table of authorities: none on this doc type; the front matter lists the authorities as a bulleted list, as in the sample (the template has no TOA either).
+- Pagination: Word and LibreOffice may break lines differently, so a page-number reference in the contents may be off by a page in Word.
+
+What the docx matches, as set in `docx/reference.docx` and the filter (checked in the XML, not on a page):
+- Sections as in the typst template: motion (arabic from 1), brief cover (unnumbered, the empty footer `footer2.xml`), front matter (lowercase roman), body and certificate (arabic from 1). Four `w:sectPr` blocks; the footers are named by relationship id after `docx/render.sh` maps the placeholders.
+- US Letter, 1 in margins on all sides; EB Garamond 14 pt (vendored family); body exact 644 twips (32.2 pt = 2.3 em, the typst double pitch) with a 0.5 in first-line indent; block quotations single spaced and indented 0.5 in on both sides; footers 12 pt.
+- Headings: level 1 centered bold caps; level 2 bold flush left; level 3 bold indented 0.5 in. Motion and front-matter headings use styles with no outline level, so they are not in the contents; the certificate starts on a new page.
+- Caption on both covers: court title, party block with right and bottom rules, case number and judges at right, the title bold centered.
+
+Differences from typst (not verified on a page):
+- Single spacing is Word's font-metric single line (`w:line 240 auto`), not typst's 1.15 em pitch; the typst PDF is 15 pages (motion 2, brief cover 1, front matter 3, body 9). The docx page count is unmeasured.
+- The caption rules are cell borders in a table; judge the LibreOffice PDF when it can be made (docs/DOCX.md, "Cover pages and caption boxes").
+- The issues list and the authorities use hanging-indent paragraphs, not the typst list engine; their spacing is judged on the PDF only.
+
+Not reviewed: the .docx has not been opened in Word or LibreOffice (no repair prompt check possible here).
