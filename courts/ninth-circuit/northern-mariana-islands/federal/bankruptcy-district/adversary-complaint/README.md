@@ -112,3 +112,14 @@ Re-searched with CourtListener's REST API v4 (anonymous, throttled to 5/min; no 
 Result: still no public, text-based adversary complaint from this court. The one live lead is the Cabrera adversary (1:26-ap-00001, filed 2026-01-20): its docket exists, but no document is in the RECAP index, and the storage path needs a `pacer_case_id` this anonymous API does not return. Next step: an authenticated CourtListener (or PACER) pull of `1:26-ap-00001` doc 1, or a Cabrera docket from a box that can reach it.
 
 Re-verified this session: `sh tools/render.sh` exit 0, `samples/OUTPUT-synthetic-complaint.pdf`, 3 pages, EB Garamond only (`pdffonts`). All 3 pages rasterized at 60 dpi (`pdftoppm -r 60`) and viewed: page 1 caption and title, page 2 paragraphs 1 to 11 and sub-heading, page 3 claim, prayer, jury demand and signature. No template change. `sh tools/overlay.sh <dir>` exit 2 (`parameter not set`, no exemplar PDF). The overlay stays not produced.
+## Engines
+
+- **typst** (primary): `typst/`, as above.
+- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 13 pt, exact 24 pt line spacing, 0.5 in first-line indent, letter, margins 1.5 in top and bottom, 1.3 in left, 1 in right, pleading rules as page borders, line numbers 1 to 24 restarting each page, page number centered in the footer). `docx/nmib-adversary-complaint.lua` writes the cover, the Form 416D caption table, the numbered allegations (the "::" lead-in is unnumbered) and the signature block. Built 2026-10-15: `samples/OUTPUT-synthetic-complaint.docx` written by `tools/render.sh --engine docx`; `unzip -tq` OK; every XML part `xmllint --noout` OK.
+- **Matches the typst form:** typeface and size, double spacing, indents, margins, pleading rules, numbers 1 to 24, page number, numbered paragraphs, caption layout (a table with a right and bottom rule), title and signature.
+- **Differs from the typst form:**
+  - Word's line numbering skips tables, so the caption and signature table rows carry no line numbers (typst numbers every line).
+  - The counsel block and the caption are single spaced, so they are not on the 24-point grid, and Word numbers each single-spaced line.
+  - The typst footer also prints the footer title and the case number. The docx footer comes from `reference.docx` and carries only the page number, because the case number is case-specific and the footer is static.
+  - Word and LibreOffice paginate differently; the page where a line falls may differ.
+- **BLOCKED (docx.pdf gates 0 and 1, and the page review):** LibreOffice (`soffice`) is not installed on this box, so `samples/OUTPUT-synthetic-complaint.docx.pdf` was not made and no page of the `.docx` was viewed. The `.docx` was not opened in Word either. Checks that cannot pass by construction: the footer case-number line, and line numbers on the caption and signature tables.
