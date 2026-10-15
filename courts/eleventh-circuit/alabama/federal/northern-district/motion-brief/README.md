@@ -96,6 +96,34 @@ Tier-2 findings (OPEN or ACCEPTED):
 - ACCEPTED, p.8 (body 5): Argument I.B, I.C and II to IV are in the sample as headings only; the text under them is not transcribed (see Known gaps). The render shows the headings, not the argument.
 - OPEN, p.9 (body 6): the signature blocks start on a new page, after the conclusion ends on p.8; the filed exemplar's page placement was not compared line by line.
 
+## Engines
+
+The docx engine (`docx/`: `make-reference.sh` builds `reference.docx`; `alnd-motion-brief.lua` builds the cover, the contents, the authorities, the body's heading labels, the signature block and the certificate; `render.sh` runs two passes, see below) renders `samples/OUTPUT-sec-motion-brief.docx` and `.docx.pdf` (the LibreOffice conversion). Every page of the `.docx.pdf` (10 of 10) was rasterized (`pdftoppm -r 60`) and compared with the typst render of the same sample.
+
+Two passes for the contents and the authorities: pass 1 writes the heading texts and the citation texts; LibreOffice renders it; `pdftotext` finds the body page of each (`pages.awk`: a heading or citation is found on the page where it starts, also when it runs on into the next page); pass 2 writes the page numbers into the contents and the authorities. The body pages are the same in both passes, which the contents page numbers were checked against.
+
+| Item | typst (primary) | docx |
+|---|---|---|
+| Typeface, spacing, margins | EB Garamond 13 pt, 24 pt pitch, 1 in margins | same |
+| Cover | court, caption with the civil action number, title; no page number | same |
+| Contents and authorities | roman i, ii; dot leaders; `passim` from 7 pages | same; the contents page numbers match the headings' pages in the PDF |
+| Body | arabic from 1; heading labels I., A., 1., a. | same, labels as text with a hanging indent |
+| Signature block | date, two firms side by side, the lines below | same, kept together with the date |
+| Certificate of service | own page; text, date and signature | same; the date and signature are at the left margin, as the typst render has them |
+
+What differs:
+
+- Headings: the typst template sets no size for its headings, so they take typst's default heading size: the level 1 glyph box measures 23.8 pt against 17.0 pt for body text (about 1.4 times, `pdftotext -bbox`). The docx keeps 13 pt bold for every heading. If the larger size is wanted, the typst template needs a size and the docx reference needs the same value.
+- Certificate: the typst template places the date and signature on the right (`h(1fr)`), but the typst render has them at the left margin. The docx follows the render, not the intent; the right-hand placement is a question for the typst template.
+- Pagination: LibreOffice breaks lines at different points, so some headings move a page (for example "II. The SEC Turns to Federal Court." is on body page 3 in the docx and page 2 in typst). The docx contents gives the docx page, which is the one a reader of the docx sees.
+- Word was not available. The `.docx` was not opened interactively; a headless LibreOffice conversion cannot show a repair prompt.
+
+docx BLOCKED items:
+
+- `BLOCKED: TA/TOA fields (docs/DOCX.md, "Use the Word-native feature"): the authorities are typed entries with the page numbers of the first pass, not TOA fields. LibreOffice does not evaluate TA/TOA fields; Word would not update them either. A body edit needs a re-render (sh docx/render.sh) for the numbers to follow.`
+- `BLOCKED: TOC field update: the contents is a TOC field whose cached result holds the first-pass page numbers. LibreOffice does not update it on load, so the numbers are right only for the LibreOffice layout (docs/DOCX.md, "Known limits"); Word may paginate slightly differently.`
+- `BLOCKED: tools/check.sh --engine docx: not run, because the court folder has no checks.yaml yet.`
+
 ## Known gaps
 
 1. The sample is an excerpt of the 33-page memorandum. It transcribes the cover, TOC, TOA, the introduction, the background (I in part, II in part), Argument I.A (in part), the conclusion, the signature block and the certificate of service. Argument I.B and I.C, and Arguments II to IV, are headings only; their text is not transcribed. Footnotes are not transcribed.
