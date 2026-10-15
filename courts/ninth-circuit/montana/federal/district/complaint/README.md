@@ -21,6 +21,7 @@ Federal Rules: Fed. R. Civ. P. 8(a), 10(a)-(b), 11(a), read from the Cornell LII
 | MT-FORM-002 | L.R. 1.5(a)(2) | Typewritten in **14-point** font, double-spaced except quoted material and footnotes. | `type-size = 14pt`; `line-pitch = 32pt`; footnotes at 14 pt |
 | MT-FORM-003 | L.R. 1.5(a)(2) | Double-spacing: 32 pt baseline pitch at 14 pt (measured, see Sample). | `line-pitch`, `body-leading`, `gap` |
 | MT-FORM-004 | L.R. 1.5(a)(3) | Consecutively numbered at the bottom of each page. The cover is page 1. | `footer` of the page |
+| MT-FONT-001 | L.R. 1.5(a)(2) (2025 text read 2026-10-15: "typewritten in 14-point font size") | **No typeface is named.** Face required: none. Font: EB Garamond (vendored, OFL), kept; no court-named substitute applies. Metric-compatibility: n/a. | `font-family` in `typst/mtd-complaint.typ` |
 | MT-CAP-001 | L.R. 1.5(a)(4) and Appendix C, Form A | Counsel block at upper left; court title "IN THE UNITED STATES DISTRICT COURT / FOR THE DISTRICT OF MONTANA / [division]"; caption with the party names, "Plaintiffs," "v.", "Defendant."; case number and document title on the right. | `counsel-block`, `court-title`, `caption-table` |
 | MT-DIV-001 | L.R. 1.2 (divisions) | The division name is printed under the court title (here MISSOULA DIVISION, from the frontmatter). | `court-title` |
 | MT-JURY-001 | L.R. 38.1 | A pleading that carries a jury demand must say so in its title. The template fails the build if `jury_demand: true` and the title does not contain "JURY TRIAL". | `mtd-complaint` assertion |
@@ -90,7 +91,7 @@ Reviewed pages: 9 of 9.
 
 ## Known gaps and open choices
 
-1. **Font.** EB Garamond (vendored, OFL) at 14 pt, not Times New Roman as in the exemplar. The rules require 14-point type but do not name a face, and EB Garamond is the only vendored face (system fonts are banned). Style choice: noted for David.
+1. **Font.** EB Garamond (vendored, OFL) at 14 pt, not Times New Roman as in the exemplar. The rules require 14-point type and name no face (checked in the 2025 text on 2026-10-15), so the court-named-face substitution (`docs/FONTS.md`) does not apply and the default face stays. If David prefers the exemplar's look, the vendored Times substitute is Liberation Serif (`font-family` change only; line counts would need a re-check). Style choice: noted for David.
 2. **Tier-2 exemplars.** One exemplar only (the complaint in *Free Speech Coalition v. Knudsen*). The eval loop asks for two or three from different filers before tier 2 is judged. Searched without success for a second public D. Mont. complaint in a text-based PDF (see `exemplars/SOURCE.md`).
 3. **Partial sample.** Paragraphs 17–102 and Counts 1–5 are not transcribed (see Sample). The sample ends at the prayer and signature from the exemplar's last pages.
 4. **Counsel layout.** Two columns (as the exemplar sets it), not the single column of Form A. Substantial compliance with Appendix C is the rule's standard; the two-column layout was chosen so the cover fits on page 1.
