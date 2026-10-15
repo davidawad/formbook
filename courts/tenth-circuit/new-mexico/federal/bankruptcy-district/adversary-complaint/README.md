@@ -79,3 +79,13 @@ Compared with the filed exemplar (10 pages).
 | 9 | exemplar p.9 | Paragraphs 50 to 54; third claim heading; WHEREFORE paragraph; signature block at the right half with the `By:` line; e-mail placeholder. | PASS (placeholder, Known gaps 4) |
 
 Gate 2 rows are recorded here, not in `reviews/`, because this doc type has no court-level `reviews/` folder.
+
+## Engines
+
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `nmb-filter.lua` builds the caption, numbered paragraphs, lettered sub-items, signature and certificate from the frontmatter). Output: `samples/OUTPUT-<id>.docx` (produced and zip/XML-validated; see the render check below).
+
+- Matches the typst form: EB Garamond 12 pt; exact 24 pt (double) line spacing; letter paper, 1 in margins; numbered paragraphs with a 0.5 in first-line indent and renumbered by the filter; lettered sub-items with a hanging indent; 15 pt single-spaced block quotations indented 0.75 in each side; caption table (court, debtor block, case number, party block with right and bottom rule, adversary number, title); signature block at 3.25 in; footnotes 10 pt; footer "Page X of Y" (PAGE and NUMPAGES fields).
+- Differs: the typst footer's left-hand title is not in the docx footer, because the footer is part of the reference and the title is case text from the frontmatter (a `render.sh` could add it; not done). Table borders, the "By:" leader line (tab leader, not a 2.6 in rule) and pagination differ between Word and LibreOffice. Word substitutes silently if EB Garamond is not installed on the machine that opens the file (`docs/FONTS.md`).
+- No TOC or TOA in these forms, so no field-update caveat applies.
+- Validation run here: `sh docx/build-reference.sh reference.docx` (unzip -tq and xmllint on every XML part: no errors); `sh tools/render.sh --engine docx` wrote the `.docx` and passed the zip and XML-well-formedness checks, then stopped at the soffice step.
+- BLOCKED (docx.pdf gates 0 and 1, and the visual check of every page): LibreOffice (`soffice`) is not installed on this box, so no `samples/OUTPUT-<id>.docx.pdf` exists and no docx page was rendered or looked at. `tools/check.sh --engine docx` cannot pass until it is run where soffice exists. Not claimed as passed.
