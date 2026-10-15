@@ -81,3 +81,18 @@ Rendered with `pdftoppm -r 60` and viewed page by page.
 - Page 11: items G to I, "Dated", "Respectfully submitted,", the signature line, and the counsel block (name with D.C. Bar number, firm, address, telephone, email, role). No spill onto a page without text. Pass.
 
 Defects found during review and fixed in the template (before the final render): paragraph lines overlapping the previous paragraph (the typst leading is between lines only, so a block ends one leading short; fixed by a block gap equal to the body leading); headings overlapping the lead-in (same cause).
+
+## Engines
+
+The typst template (`typst/`) is the reference. The docx engine is `docx/` (`reference.docx` from `make-reference.sh`, and `complaint.lua`), rendered by `sh tools/render.sh --engine docx complaint samples/INPUT-terre-du-soleil-complaint.md` into `samples/OUTPUT-terre-du-soleil-complaint.docx` and `samples/OUTPUT-terre-du-soleil-complaint.docx.pdf` (the PDF is LibreOffice 26.8.1.1; the vendored EB Garamond is installed for it). The docx.pdf is 12 pages; every page was rendered at 60 dpi and compared with the typst render (11 pages).
+
+- **What matches the rules:** US Letter, 1-inch margins; 12-point EB Garamond throughout (headings and the caption too, LCvR 5.1(d)); double spacing at an exact 24-pt pitch; the caption (party block closed by a rule on the right and bottom, "Civil Action No.", the title, the jury line when set); numbered paragraphs (Fed. R. Civ. P. 10(b)); lettered prayer items; the signature block; a centered arabic page number on every page, page 1 included.
+- **What differs from typst, and why:**
+  - Headings are 12 pt in the docx. The typst headings come out at its default heading size (about 17 pt), which is larger than the 12-point type LCvR 5.1(d) asks for. The docx keeps to 12 pt; the typst size is for David to decide.
+  - First-line indent: this README's layout says numbered paragraphs and the lead-in are indented 0.5 inch, and the docx does that (the number, then a tab to 1.0 inch). The typst render does not show the indent (its numbers sit at the margin). Typst's `par(first-line-indent)` is lost inside the numbered block; that is a typst finding, not changed here.
+  - Prayer items: the docx letters A to I with the marker at 0.5 inch and the text at 1.05 inch, and 16 pt between items (the typst enum spacing). The last item stays with the signature block, so the signature never stands alone.
+  - Length: 12 pages to typst's 11, because of the prayer spacing and the indent. Pagination differs by renderer (see `docs/DOCX.md`); no page break is forced.
+  - The caption's first line sits about 0.2 inch lower in the docx (exact line spacing puts the text lower in its line box). Same geometry otherwise.
+- **docx BLOCKED items:** none. The docx is delivered complete for this doc type.
+- **Not verified:** the `.docx` has not been opened in Microsoft Word (none here). It converts without error in LibreOffice and its XML parts are well formed. The font is named, not embedded: a reader without EB Garamond installed gets a substitute (`docs/DOCX.md`, Fonts).
+- **Gates:** `tools/check.sh` was not run for this folder (the folder has no `rules.md`, so it is not the gate shape; see Known gaps 10 above, which applies here too).

@@ -83,3 +83,35 @@ The pairing is partial: the exemplar is a 7-page form whose entries sit on pages
 - Page 3: the unnumbered certification paragraph and the signature block (line, name, pro se label, address, telephone, e-mail), kept together and not orphaned. Pass.
 
 Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Engines
+
+Typst is the primary engine (`typst/`). The DOCX engine is `docx/`: pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`) and the filter `docx/sdd-complaint.lua`. Its output is `samples/OUTPUT-knosp-complaint.docx`; the LibreOffice PDF of it (`OUTPUT-knosp-complaint.docx.pdf`) was not produced (see BLOCKED).
+
+What the docx follows from the same rules as the typst template (checked in the style and section XML, not on a render):
+
+| Form item (LR 83.4 and the typst template) | DOCX |
+|---|---|
+| EB Garamond 12 pt, every style | `reference.docx`: every style sets EB Garamond, 12 pt |
+| Double spacing, 24 pt pitch | body text: exact 24 pt line (`BodyText`, `FirstParagraph`) |
+| Headings, tables, footnotes, caption, signature: single | `Heading1`-`3`, `Table`, `FootnoteText`, `Single`, `Compact` at single spacing |
+| Margins 1 in, US Letter | `w:pgMar` 1440 twips on all four sides; `w:pgSz` letter |
+| 0.5 in first-line indent | `BodyText` first-line indent 720 twips |
+| Numbered paragraphs (Fed. R. Civ. P. 10(b)) | "N." then a tab to 0.94 in; `~` marks an unnumbered paragraph (the certification) |
+| Caption: parties left, rule on the right and bottom | a 3-column table, 3.25 in party column, cell borders |
+| Signature block at the end, kept with the last paragraph | `Dated` and the signature table; last paragraph in `BodyKeep` (keep with next) |
+| Page number, centered, in the bottom margin | PAGE field in the footer (`w:footer` 60 pt from the bottom edge) |
+
+Differences and open items:
+
+- **Pagination is not checked.** The docx was never rendered or viewed, so no line break, page break or page number of the docx is verified. Word and LibreOffice may paginate it differently from the typst PDF.
+- **Page number position** is set in the footer distance, not copied from the typst PDF; it sits in the bottom margin, as in typst.
+- **Footnotes**: none in this doc type.
+- **Lists**: none in the sample; a docx list would be single-spaced (`Compact`), where typst double-spaces it.
+- **Pro se line**: a bottom-bordered paragraph 3.2 in wide stands in for the typst signature rule.
+- **Title block**: the docx omits pandoc's title block (`doc.meta` is cleared), so the date and the other frontmatter appear only where the template puts them.
+
+docx BLOCKED items:
+
+- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF of `OUTPUT-knosp-complaint.docx`): **BLOCKED**. LibreOffice is not on conda-forge and apt needs root. The Debian trixie LibreOffice 25.2.3 debs, extracted without root into a private prefix, abort at UNO bootstrap (`terminate called after throwing an instance of 'com::sun::star::uno::RuntimeException'`, also for `soffice --version`); the cause was not found. No `.docx.pdf` exists, so no docx Gate 0 to 3 result and no docx page was reviewed.
+- Word: the `.docx` was not opened in Word (not available here), so the "opens without a repair prompt" check is not done. The package parts are well-formed XML (`xmllint`).

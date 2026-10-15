@@ -82,3 +82,17 @@ Rendered with `pdftoppm -r 60` and viewed page by page. Page numbers below are t
 - PDF 14 (body 12): "CONCLUSION" centered bold, its paragraph, "Dated", "Respectfully submitted," firm name, signature line, /s/ line, and both signer blocks. The conclusion and the signature are on the same page. Pass.
 
 Defects found during review and fixed in the template: body paragraphs had no first-line indent (the indent set on `par` did not reach the cmarker output; the indent is now an inline space); a signature block stood alone on a page (the last paragraph is now kept with it).
+
+## Engines
+
+The typst template (`typst/`) is the reference. The docx engine is `docx/` (`reference.docx` from `make-reference.sh`, `motion-brief.lua`, and `render.sh`, which owns the build), rendered by `sh tools/render.sh --engine docx motion-brief samples/INPUT-estrada-motion-to-dismiss.md` into `samples/OUTPUT-estrada-motion-to-dismiss.docx` and `samples/OUTPUT-estrada-motion-to-dismiss.docx.pdf` (LibreOffice 26.8.1.1; the vendored EB Garamond installed for it). The docx.pdf is 14 pages, the same count as the typst render; every page was rendered at 60 dpi and compared with the typst render.
+
+- **What matches the rules:** US Letter, 1-inch margins; 12-point EB Garamond; double spacing at an exact 24-pt pitch; the caption page with no page number; the contents on a page numbered in lower-case roman; the body numbered in arabic from 1; the caption and the title below it; first-line indented paragraphs; block quotations indented 0.5 inch from both margins; a heading that stays with the text after it; the last paragraph kept with the signature block, and the signature block laid out as in typst (Dated, Respectfully submitted, the firm, the `/s/` line and each signer's block).
+- **What differs from typst, and why:**
+  - Headings are 12 pt in the docx; the typst headings come out at its default heading size (about 17 pt), larger than the 12-point type LCvR 5.1(d) asks for. As for the complaint, this is for David to decide on the typst side.
+  - Contents: the docx lists each heading with dot leaders and a page number. The entries are typed text from the LibreOffice layout of a first pass (`render.sh` writes the numbers, then checks that the second pass lays out to the same pages), not a TOC field, so Word's "Update field" does not refresh them. Re-run `sh docx/render.sh` after any edit to the body. The entries are set more tightly than typst's.
+  - Body pagination: the same 12 body pages, but line breaks differ, so some headings fall on a different page (for example "ALLEGED FACTS AND PROCEDURAL BACKGROUND" is on body page 1 in the docx, page 2 in typst). The contents numbers follow the docx layout.
+  - No table of authorities: the template does not generate one either, so the docx matches typst here (see Known gaps 3).
+- **docx BLOCKED items:** none. The contents page numbers are computed from LibreOffice's layout; Word may paginate a line or two differently and so may place a heading one page off in the contents (`docs/DOCX.md`, Known limits). The docx has not been opened in Microsoft Word (none here).
+- **Not verified:** Word; the font is named, not embedded (`docs/DOCX.md`, Fonts).
+- **Gates:** `tools/check.sh` was not run for this folder (no `rules.md`; not the gate shape; see Known gaps 11 above, which applies here too).

@@ -89,3 +89,11 @@ sh tools/overlay.sh courts/eleventh-circuit/florida/federal/bankruptcy-middle-di
 ```
 
 `render.sh` writes `samples/OUTPUT-budgen-complaint.pdf` and `overlay.sh` writes `samples/OVERLAY-budgen-complaint.pdf` and `.txt`: the names the tools read and write by default.
+
+## Engines
+
+- **typst** (primary): unchanged; see the sections above.
+- **docx** (`docx/`): pandoc, `docx/reference.docx` (built by `sh docx/build-reference.sh` from `docx/parts/`: styles, numbering, footer) and `docx/flmb-pleading.lua`. Output: `samples/OUTPUT-budgen-complaint.docx`.
+  - Matches typst: Letter, one-inch margins; 12 point body with exact 24 pt double spacing; numbered paragraphs (bare numbers) and `^` unnumbered paragraphs; court title, caption (slash rule), and signature block built from the frontmatter; level 1 to 3 headings centred (as the complaint template sets them); lists lettered `a.`; footnotes at 12 point, single spaced; page numbers centered from page 2 (first-page footer empty).
+  - Differs: the declared font is Times New Roman (the Style Guide's face); typst uses the Liberation Serif substitute. Caption and signature are two-column tables whose widths are fractions (pandoc writes them against its own base width; Word scales them, not verified). The caption rule is a paragraph border with a tab for the slash, not a drawn line. Lists take one of ten `Pleading List n` styles, so an eleventh ordered list in one sample fails the build. The signature block is not kept with a preceding list (the complaint's body ends in a paragraph, as in typst).
+  - docx BLOCKED: `docx.pdf` gates (Gate 0 and 1 on `samples/OUTPUT-budgen-complaint.docx.pdf`, and the page review). LibreOffice is not installable from conda-forge; Debian packages extracted without root segfault at startup on this box. Pages reviewed: 0 of 0 (no `.docx.pdf` exists). The font-name proof cannot pass as written: the LibreOffice PDF would show the metric substitute, not Times New Roman. `tools/check.sh --engine docx` expects a court folder (`court.json`, `rules.md`) and was not run.

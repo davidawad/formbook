@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:docDefaults>
+    <w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/><w:lang w:val="en-US" w:eastAsia="en-US" w:bidi="ar-SA"/></w:rPr></w:rPrDefault>
+    <w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault>
+  </w:docDefaults>
+  <w:latentStyles w:defLockedState="0" w:defUIPriority="99" w:defSemiHidden="0" w:defUnhideWhenUsed="0" w:defQFormat="0" w:count="276"/>
+  <w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/>
+    <w:pPr><w:widowControl/><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/></w:pPr></w:style>
+  <w:style w:type="character" w:default="1" w:styleId="DefaultParagraphFont"><w:name w:val="Default Paragraph Font"/><w:uiPriority w:val="1"/><w:semiHidden/><w:unhideWhenUsed/></w:style>
+  <w:style w:type="table" w:default="1" w:styleId="TableNormal"><w:name w:val="Normal Table"/><w:semiHidden/><w:unhideWhenUsed/><w:tblPr><w:tblInd w:w="0" w:type="dxa"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr></w:style>
+  <w:style w:type="numbering" w:default="1" w:styleId="NoList"><w:name w:val="No List"/><w:uiPriority w:val="99"/><w:semiHidden/><w:unhideWhenUsed/></w:style>
+
+  <!-- Body text: double spaced (exact 24 pt), justified (typst: set par(leading: body-leading, justify: true)) -->
+  <w:style w:type="paragraph" w:styleId="BodyText"><w:name w:val="Body Text"/><w:basedOn w:val="Normal"/><w:link w:val="BodyTextChar"/><w:qFormat/><w:pPr><w:jc w:val="both"/></w:pPr></w:style>
+  <w:style w:type="character" w:customStyle="1" w:styleId="BodyTextChar"><w:name w:val="Body Text Char"/><w:basedOn w:val="DefaultParagraphFont"/><w:link w:val="BodyText"/></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="FirstParagraph"><w:name w:val="First Paragraph"/><w:basedOn w:val="BodyText"/><w:next w:val="BodyText"/><w:qFormat/></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="Compact"><w:name w:val="Compact"/><w:basedOn w:val="BodyText"/><w:qFormat/></w:style>
+
+  <!-- Numbered paragraphs (typst: number, 0.3 in, text; the number is bare). Numbering is part numId 50 -->
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraph"><w:name w:val="Numbered Paragraph"/><w:basedOn w:val="BodyText"/><w:qFormat/>
+    <w:pPr><w:numPr><w:ilvl w:val="0"/><w:numId w:val="50"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="UnnumberedParagraph"><w:name w:val="Unnumbered Paragraph"/><w:basedOn w:val="BodyText"/><w:qFormat/>
+    <w:pPr><w:ind w:firstLine="720"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList1"><w:name w:val="Pleading List 1"/><w:basedOn w:val="BodyText"/><w:pPr><w:numPr><w:ilvl w:val="0"/><w:numId w:val="61"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList2"><w:name w:val="Pleading List 2"/><w:basedOn w:val="BodyText"/><w:pPr><w:numPr><w:ilvl w:val="0"/><w:numId w:val="62"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList3"><w:name w:val="Pleading List 3"/><w:basedOn w:val="BodyText"/><w:pPr><w:numPr><w:ilvl w:val="0"/><w:numId w:val="63"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList4"><w:name w:val="Pleading List 4"/><w:basedOn w:val="BodyText"/><w:pPr><w:numPr><w:ilvl w:val="0"/><w:numId w:val="64"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList5"><w:name w:val="Pleading List 5"/><w:basedOn w:val="BodyText"/><w:pPr><w:numPr><w:ilvl w:val="0"/><w:numId w:val="65"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList6"><w:name w:val="Pleading List 6"/><w:basedOn w:val="BodyText"/><w:pPr><w:numPr><w:ilvl w:val="0"/><w:numId w:val="66"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList7"><w:name w:val="Pleading List 7"/><w:basedOn w:val="BodyText"/><w:pPr><w:numPr><w:ilvl w:val="0"/><w:numId w:val="67"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList8"><w:name w:val="Pleading List 8"/><w:basedOn w:val="BodyText"/><w:pPr><w:numPr><w:ilvl w:val="0"/><w:numId w:val="68"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList9"><w:name w:val="Pleading List 9"/><w:basedOn w:val="BodyText"/><w:pPr><w:numPr><w:ilvl w:val="0"/><w:numId w:val="69"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList10"><w:name w:val="Pleading List 10"/><w:basedOn w:val="BodyText"/><w:pPr><w:numPr><w:ilvl w:val="0"/><w:numId w:val="70"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList1End"><w:name w:val="Pleading List 1 End"/><w:basedOn w:val="BodyText"/><w:pPr><w:keepNext/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="61"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList2End"><w:name w:val="Pleading List 2 End"/><w:basedOn w:val="BodyText"/><w:pPr><w:keepNext/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="62"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList3End"><w:name w:val="Pleading List 3 End"/><w:basedOn w:val="BodyText"/><w:pPr><w:keepNext/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="63"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList4End"><w:name w:val="Pleading List 4 End"/><w:basedOn w:val="BodyText"/><w:pPr><w:keepNext/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="64"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList5End"><w:name w:val="Pleading List 5 End"/><w:basedOn w:val="BodyText"/><w:pPr><w:keepNext/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="65"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList6End"><w:name w:val="Pleading List 6 End"/><w:basedOn w:val="BodyText"/><w:pPr><w:keepNext/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="66"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList7End"><w:name w:val="Pleading List 7 End"/><w:basedOn w:val="BodyText"/><w:pPr><w:keepNext/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="67"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList8End"><w:name w:val="Pleading List 8 End"/><w:basedOn w:val="BodyText"/><w:pPr><w:keepNext/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="68"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList9End"><w:name w:val="Pleading List 9 End"/><w:basedOn w:val="BodyText"/><w:pPr><w:keepNext/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="69"/></w:numPr></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingList10End"><w:name w:val="Pleading List 10 End"/><w:basedOn w:val="BodyText"/><w:pPr><w:keepNext/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="70"/></w:numPr></w:pPr></w:style>
+
+  <!-- Single-spaced blocks: caption, counsel, signature, footnotes, tables (typst: single-leading) -->
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingSingle"><w:name w:val="Pleading Single"/><w:basedOn w:val="Normal"/><w:qFormat/>
+    <w:pPr><w:spacing w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingCourtTitle"><w:name w:val="Pleading Court Title"/><w:basedOn w:val="PleadingSingle"/><w:qFormat/>
+    <w:pPr><w:jc w:val="center"/></w:pPr><w:rPr><w:b/></w:rPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingCaption"><w:name w:val="Pleading Caption"/><w:basedOn w:val="PleadingSingle"/><w:qFormat/>
+    <w:pPr><w:ind w:right="288"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingCaptionIndent"><w:name w:val="Pleading Caption Indent"/><w:basedOn w:val="PleadingCaption"/><w:qFormat/>
+    <w:pPr><w:ind w:left="720" w:right="288"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingRule"><w:name w:val="Pleading Rule"/><w:basedOn w:val="PleadingSingle"/><w:qFormat/>
+    <w:pPr><w:pBdr><w:bottom w:val="single" w:sz="6" w:space="0" w:color="000000"/></w:pBdr><w:tabs><w:tab w:val="left" w:pos="4608"/></w:tabs><w:ind w:right="576"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingSpacer"><w:name w:val="Pleading Spacer"/><w:basedOn w:val="Normal"/><w:qFormat/></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingHalfSpacer"><w:name w:val="Pleading Half Spacer"/><w:basedOn w:val="PleadingSingle"/><w:qFormat/>
+    <w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="exact"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingTitle"><w:name w:val="Pleading Title"/><w:basedOn w:val="Normal"/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:jc w:val="center"/></w:pPr><w:rPr><w:b/></w:rPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingSignature"><w:name w:val="Pleading Signature"/><w:basedOn w:val="PleadingSingle"/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingTableText"><w:name w:val="Pleading Table Text"/><w:basedOn w:val="PleadingSingle"/><w:qFormat/>
+    <w:pPr><w:spacing w:before="54" w:after="54" w:line="240" w:lineRule="auto"/><w:jc w:val="center"/></w:pPr></w:style>
+
+  <!-- Headings: level 1 centred bold capitals; level 2 bold, flush left; level 3 bold italic, indented (typst show rules) -->
+  <w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="480" w:after="0"/><w:jc w:val="center"/><w:outlineLvl w:val="0"/></w:pPr>
+    <w:rPr><w:b/><w:bCs/><w:caps/></w:rPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="480" w:after="0"/><w:jc w:val="center"/><w:outlineLvl w:val="1"/></w:pPr>
+    <w:rPr><w:b/><w:bCs/></w:rPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Heading3"><w:name w:val="heading 3"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="480" w:after="0"/><w:jc w:val="center"/><w:outlineLvl w:val="2"/></w:pPr>
+    <w:rPr><w:b/><w:bCs/><w:i/><w:iCs/></w:rPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Heading4"><w:name w:val="heading 4"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="480" w:after="0"/><w:outlineLvl w:val="3"/></w:pPr><w:rPr><w:b/><w:bCs/></w:rPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Heading5"><w:name w:val="heading 5"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="480" w:after="0"/><w:outlineLvl w:val="4"/></w:pPr><w:rPr><w:i/><w:iCs/></w:rPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Heading6"><w:name w:val="heading 6"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="480" w:after="0"/><w:outlineLvl w:val="5"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Heading7"><w:name w:val="heading 7"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="480" w:after="0"/><w:outlineLvl w:val="6"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Heading8"><w:name w:val="heading 8"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="480" w:after="0"/><w:outlineLvl w:val="7"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Heading9"><w:name w:val="heading 9"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="480" w:after="0"/><w:outlineLvl w:val="8"/></w:pPr></w:style>
+
+  <!-- Footnotes: 12 pt, single spaced (typst show footnote.entry; footnote leading inherited from single text) -->
+  <w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/><w:basedOn w:val="Normal"/><w:link w:val="FootnoteTextChar"/><w:uiPriority w:val="99"/><w:unhideWhenUsed/>
+    <w:pPr><w:spacing w:line="240" w:lineRule="auto"/><w:jc w:val="both"/></w:pPr><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+  <w:style w:type="character" w:customStyle="1" w:styleId="FootnoteTextChar"><w:name w:val="Footnote Text Char"/><w:basedOn w:val="DefaultParagraphFont"/><w:link w:val="FootnoteText"/><w:uiPriority w:val="99"/><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr></w:style>
+  <w:style w:type="character" w:styleId="FootnoteReference"><w:name w:val="footnote reference"/><w:basedOn w:val="DefaultParagraphFont"/><w:uiPriority w:val="99"/><w:unhideWhenUsed/><w:rPr><w:vertAlign w:val="superscript"/></w:rPr></w:style>
+
+  <w:style w:type="paragraph" w:styleId="Footer"><w:name w:val="footer"/><w:basedOn w:val="Normal"/><w:uiPriority w:val="99"/><w:unhideWhenUsed/>
+    <w:pPr><w:spacing w:line="240" w:lineRule="auto"/><w:jc w:val="center"/></w:pPr></w:style>
+
+  <w:style w:type="paragraph" w:styleId="BlockText"><w:name w:val="Block Text"/><w:basedOn w:val="BodyText"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/>
+    <w:pPr><w:ind w:left="720" w:right="720"/></w:pPr></w:style>
+  <w:style w:type="character" w:styleId="Hyperlink"><w:name w:val="Hyperlink"/><w:basedOn w:val="DefaultParagraphFont"/><w:uiPriority w:val="99"/><w:unhideWhenUsed/><w:rPr><w:color w:val="0000FF"/><w:u w:val="single"/></w:rPr></w:style>
+  <w:style w:type="character" w:styleId="VerbatimChar"><w:name w:val="Verbatim Char"/><w:basedOn w:val="DefaultParagraphFont"/><w:rPr><w:rFonts w:ascii="Liberation Mono" w:hAnsi="Liberation Mono"/></w:rPr></w:style>
+
+  <!-- Tables: no rules (typst: set table(stroke: none)); cell text comes from PleadingTableText -->
+  <w:style w:type="table" w:styleId="Table"><w:name w:val="Table"/><w:basedOn w:val="TableNormal"/><w:uiPriority w:val="59"/>
+    <w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr>
+    <w:tblPr><w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders>
+      <w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr></w:style>
+
+  <w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="10"/><w:qFormat/><w:pPr><w:jc w:val="center"/></w:pPr><w:rPr><w:b/></w:rPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Subtitle"><w:name w:val="Subtitle"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="11"/><w:qFormat/></w:style>
+  <w:style w:type="paragraph" w:styleId="Author"><w:name w:val="Author"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/></w:style>
+  <w:style w:type="paragraph" w:styleId="Date"><w:name w:val="Date"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/></w:style>
+  <w:style w:type="paragraph" w:styleId="Caption"><w:name w:val="caption"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="35"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:spacing w:line="240" w:lineRule="auto"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:styleId="TableCaption"><w:name w:val="Table Caption"/><w:basedOn w:val="Caption"/><w:next w:val="BodyText"/><w:qFormat/></w:style>
+  <w:style w:type="paragraph" w:styleId="Bibliography"><w:name w:val="Bibliography"/><w:basedOn w:val="BodyText"/><w:qFormat/></w:style>
+  <w:style w:type="paragraph" w:styleId="TOCHeading"><w:name w:val="TOC Heading"/><w:basedOn w:val="Heading1"/><w:next w:val="BodyText"/><w:uiPriority w:val="39"/><w:unhideWhenUsed/><w:qFormat/></w:style>
+</w:styles>
