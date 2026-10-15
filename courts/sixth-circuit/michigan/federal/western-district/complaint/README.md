@@ -9,7 +9,8 @@ Folder: `courts/sixth-circuit/michigan/federal/western-district/complaint/`. Sel
 | sample md | `samples/INPUT-google-complaint.md`: a portion of the 42-page filing (7 rendered pages) |
 | render | ok: `samples/OUTPUT-google-complaint.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-google-complaint.pdf` and `samples/OVERLAY-google-complaint.txt` (against the primary exemplar) |
-| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed; see the review below) |
+| typeface | rule names no face (LCivR 10.1 sets size only; checked against the rule text 2026-10-15). Stays EB Garamond (vendored, `fonts/eb-garamond/`); no substitute applies. Embedded: EB Garamond only (`pdffonts`). |
+| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed 2026-10-15; see the review below) |
 
 Build, from the repo root (`PATH` must include the toolchain, see the brief's setup):
 
@@ -26,7 +27,7 @@ Verified 2026-10-14.
 
 | Rule | Requirement | Source | Where in the template |
 |---|---|---|---|
-| LCivR 10.1 (W.D. Mich.) | All documents double spaced, 8 1/2 x 11, one side; type no smaller than 12 point; margins at least one inch. (Electronic filings must be PDF: LCivR 5.7(d)(i), same source.) | Local Civil Rules, as posted: https://www.miwd.uscourts.gov/sites/miwd/files/Local%20Civil%20Rules.pdf (text dated "Updated February 1, 2018"; the court's rules page shows last modified January 1, 2019). | `type-size = 12pt`, `pitch = 24pt`, `margin = 1in`, `body-leading` (typst/miwd-complaint.typ). |
+| LCivR 10.1 (W.D. Mich.) | All documents double spaced, 8 1/2 x 11, one side; type no smaller than 12 point; margins at least one inch. No typeface is named (checked 2026-10-15 against the rule text, extracted with `pdftotext`). (Electronic filings must be PDF: LCivR 5.7(d)(i), same source.) | Local Civil Rules, as posted: https://www.miwd.uscourts.gov/sites/miwd/files/Local%20Civil%20Rules.pdf (text dated "Updated February 1, 2018"; the court's rules page shows last modified January 1, 2019). | `type-size = 12pt`, `pitch = 24pt`, `margin = 1in`, `body-leading` (typst/miwd-complaint.typ). |
 | LCivR 10.3 | Date of signing and the address and telephone number of the signing attorney. | same | `signature` frontmatter (`signer`, `lines`), `date`. |
 | LCivR 5.1 | A civil cover sheet obtained from the Clerk is filed with each new case. | same | Not produced (a separate form). |
 | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number and a Rule 7(a) designation; the complaint's title names all parties. | https://www.law.cornell.edu/rules/frcp/rule_10 (verified 2026-10-14) | `court-title`, `caption`. The Rule 7(a) designation is in the title. |
@@ -67,7 +68,7 @@ Each page was rendered at 60 dpi and viewed. The comparison is with the primary 
 
 Tier-2 items that are open choices and are recorded as accepted:
 
-- **Font.** The exemplars are set in Times New Roman (Google) and Garamond (Cohen). Only EB Garamond is vendored here, so the template uses it. LCivR 10.1 sets the size (12 point) and not the family, so the rule is met. EB Garamond has a smaller x-height than Times, so the text looks smaller on the page than the exemplar. A Times-metric font would remove the difference; whether to vendor one is David's call.
+- **Font (ACCEPTED, fonts pass 2026-10-15).** The exemplars are set in Times New Roman (Google) and Garamond (Cohen). LCivR 10.1 names no typeface, so `docs/FONTS.md` gives no substitute and the template keeps EB Garamond. The Times substitute, Liberation Serif, is vendored, but using it would be a tier-2 style choice, not a rule requirement. EB Garamond has a smaller x-height than Times, so the text looks smaller on the page than the Google exemplar.
 - **Signature.** The Google exemplar signs after the prayer and again after the jury demand. The template prints one signature block, after the jury demand. No rule requires the repeat.
 
 ## Overlay (`samples/OVERLAY-google-complaint.pdf`)
