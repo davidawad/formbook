@@ -79,4 +79,11 @@ Note on the certificate: the filing's certificate states only the ECF manner and
 
 Defects found in review and fixed (kept here so the template does not regress): heading blocks collapsed to zero height and overlapped the text around them (fixed by moving the heading gap into the flow and keeping `below` non-zero); paragraph blocks lost one line of leading between each other (fixed by a trailing one-pitch gap); headings rendered at typst's default heading size (pinned to the body size); the caption's long party names wrapped and broke the ")" column (the names are split into lines in the frontmatter); the signature block's wrapped lines took the double leading (single leading is now set inside the single-spaced line stack).
 
+## Engines
+
+docx (`docx/build-reference.sh` builds `docx/reference.docx`; filter `docx/nhd-motion-brief.lua`): `samples/OUTPUT-jonas-motion-brief.docx` and `OUTPUT-jonas-motion-brief.docx.pdf` (LibreOffice conversion). Matches typst: EB Garamond; exact 27.6 pt body pitch; the three-column caption with the ")" column and the case number on the middle row; the centered caps heading forms; the certificate of service; the signature block. Page count matches (18 and 18). Word was not available; the file was checked with LibreOffice only.
+
+- BLOCKED: pagination from page 1. In typst page 1 ends after "NOW COME ..." and INTRODUCTION starts page 2; the docx starts INTRODUCTION on page 1. The page breaks differ from there on, though the total is the same at 18 pages. Keep-together and keep-with-next behaviour of typst's blocks is not reproduced.
+- The signature block is an all-caps stacked block at the 3.25 in indent in the docx, and a more compact block in typst; both sit on page 17.
+
 [Formbook index](../../../../../../README.md)

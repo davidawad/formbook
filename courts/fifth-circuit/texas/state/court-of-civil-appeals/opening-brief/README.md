@@ -58,3 +58,10 @@ Output: `samples/OUTPUT-opening-brief.pdf`. Review: `reviews/2026-10-15.md`, one
 6. The rule text is from secondary sources (see the table above).
 7. `tools/check.sh` (the gates) was not run for this doc type; the PR-level checks in `docs/EVAL-LOOP.md` are not part of this task. No stamp is written.
 8. Pagination: the cover is unnumbered and the following pages are numbered from the cover as page 1.
+
+## Engines
+
+- **typst** (`typst/`): the reference for the form.
+- **docx** (`docx/render.sh`, `docx/build-reference.sh`, `docx/reference.docx`, `docx/texapp.lua`): `samples/OUTPUT-opening-brief.docx` and `.docx.pdf` (8 pages, LibreOffice). Same page count and the same contents page numbers as typst (3, 3, 3, 3, 4, 5, 5, 5, 6, 6). Matches typst: EB Garamond 14 pt (embedded), 31.5 pt double-spaced body with 0.5 in first-line indent, single-spaced block quotations, 1 in margins, centered page number from page 2 (cover unnumbered), the cover built from the frontmatter, a contents page with page numbers, body lines under 100 characters not indented. Differs: headings in typst render at Typst's default sizes (19.5 pt level 1, 17 pt level 2), and the docx matches those; headings keep more space after them in LibreOffice (about 6 pt); LibreOffice keeps the space above a heading at the top of a page, typst does not. Star paging ("at *21") is escaped in the build so pandoc does not read it as emphasis. Contents page numbers come from a LibreOffice layout (two passes in `docx/render.sh`), not from Word.
+- BLOCKED: tools/check.sh docx gates 0 to 3: not run. The court folder has no `checks.yaml`, `rules.md` or `court.json` at the level `check.sh` reads, so the gates cannot start and no `.check-docx.txt` stamp is written.
+- Word was not available: the `.docx` was opened with LibreOffice only (the PDF conversion succeeded, which is the no-repair proof here); Word was not checked.

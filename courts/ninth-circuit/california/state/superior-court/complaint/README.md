@@ -116,3 +116,33 @@ Every page passes. CRC 2.111 is met on every page.
 9. **Tier-1 checks** are not in `checks.yaml` form for this doc type (the brief did not ask for them). The only mechanical guard is the attorney-block height panic.
 
 [Court folder](../README.md) | [Formbook index](../../../../../../README.md)
+
+## Engines
+
+### docx (built, not rendered here)
+
+Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once) and the Lua filter `docx/calsuperct.lua`. `tools/render.sh --engine docx` writes `samples/OUTPUT-<id>.docx`; the LibreOffice PDF step is BLOCKED on this box (see below).
+
+What the docx sets (in `styles.xml`, `sectPr`, `footer1.xml`, or the filter). Set in styles.xml/sectPr, not rendered:
+
+- Font: Liberation Serif 12 pt in every style; text black.
+- Body: exact 24 pt line spacing, no paragraph spacing, 0.5 in first-line indent. Headings: exact 24 pt, bold; levels 1-2 centered; level 4 bold italic. Footnote Text single-spaced. Block quotes 0.5 in both sides, exact 12 pt.
+- Page: US Letter; top 1 in, bottom 48 pt (28 lines of 24 pt fit), left 1.5 in, right 0.5 in; footer 14.4 pt from the bottom edge.
+- Pleading rules: page borders (double rule 18 pt left of the text, single rule 7 pt right of it). Word line numbering: every line of body text, restarted each page, 0.45 in left of the text.
+- Footer: a printed rule, the PAGE field at 12 pt, then the SUBJECT field at 10 pt. The filter copies `footer_title` into the document subject, so no case text is in the template.
+- First page (filter): attorney block single-spaced from line 1; court title at line 8 (space computed from the number of attorney lines); caption as a borderless table, 3.6 in left cell with bottom and right rules, 2.9 in right cell. Leading spaces in `caption.left` are read from the sample's raw frontmatter (Pandoc drops them) and become 60 twips per space, as in the typst template.
+- Signature block at 3.1 in; the "By:" line is a tab with an underscore leader.
+
+Differs from typst:
+
+- Line numbers are Word's, not drawn: Word numbers the body paragraphs (including the attorney block lines) and skips the caption table, so 1-28 may not line up with the typst grid. Typst draws 28 fixed numbers in the margin.
+- Rules are page borders spanning the text area, not the full-height drawn lines of the typst template.
+- Caption cell padding and the gaps between caption groups are approximate.
+- The footer subject depends on the application updating fields (SUBJECT).
+- Pagination follows Word or LibreOffice, not typst.
+
+BLOCKED:
+
+- docx.pdf gates 0-3: BLOCKED. soffice is not installed on the build box, so no LibreOffice PDF exists and no docx page was viewed (pages_reviewed = 0 for docx).
+- Pleading line numbers on 28 lines per page (CRC 2.108): BLOCKED, as above, until a LibreOffice render confirms the numbering.
+- Footer SUBJECT field (CRC 2.110 title on every page): BLOCKED until a LibreOffice render shows the title.

@@ -82,3 +82,26 @@ Reviewed pages: 10 of 10.
 10. **Certificates.** None generated (see Governing rules).
 11. **Heading numbering.** Numbering is done by the template from heading level (I., A., 1., a.), not typed by the author; the TOC and TOA follow the same numbers.
 12. **Argument headings** and sub-headings are sentence case as in the exemplar; the template does not re-case them.
+
+## Engines
+
+Docx engine: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/cand.lua` (cover, caption, case number, title, signature block; the body is pandoc's). Sample build: `samples/OUTPUT-tsi-akim-maidu-motion-to-dismiss.docx` (valid zip, every XML part well-formed). Not rendered: no LibreOffice on the build box, so **pages reviewed = 0**. `make-reference.sh` needs `unzip` and `zip`, which the build box lacks; it was run with a stand-in built on libzip's `ziptool` (outside the repo).
+
+What the docx sets (in `styles.xml`, `document.xml` and the footer part; not rendered):
+- Liberation Serif 12 pt in the document defaults, black text; footnotes 12 pt, single spaced.
+- Exact 24 pt line pitch for body, headings and list items, no space before or after; body first-line indent 0.5 in; headings 1 and 2 centred bold, heading 3 bold italic.
+- US Letter with 1 in margins on all four sides; no line numbers (the typst template draws none).
+- Footer: centred PAGE field, 11 pt.
+
+What differs from the typst template:
+- Table of contents and table of authorities are not generated. The typst template builds them from the headings and the `toa:` links and `authorities` registry; pandoc writes neither, so the docx has no TOC or TOA pages.
+- The caption is paragraphs, not a bordered box.
+- The footer has the page number only (see BLOCKED).
+- Pagination follows Word, not typst; no line-count check is made.
+
+BLOCKED:
+- docx.pdf gates 0 to 3 (`tools/check.sh --engine docx`): BLOCKED, no `soffice` on the build box (reason: LibreOffice not installed). No `.docx.pdf` was written.
+- Table of contents (`TOC`) and table of authorities (`TOA`) pages: not produced; the docx cannot pass the TOC/TOA checks. A TOC/TOA generator in the filter would be a new piece of work.
+- Cover hearing block (date, time, place, judge, from `hearing:`): not produced.
+- Footer title and case number on each page: not produced (case text; needs a per-case step).
+- Caption rules (typst's box): not reproduced.

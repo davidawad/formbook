@@ -69,3 +69,14 @@ Open choices, recorded here so the reviewer can see them:
 - **Word count** is computed from the markdown by the template; the number printed on the certificate is that computed count, not a count from a word processor. The exemplar's certificate says "Microsoft Word"; the template prints the `word_processor` field from the frontmatter.
 - **Cover caption**: a long party name or a long review line may wrap; the cover is one page and the template refuses to build if it cannot fit (`cover`), so a very long caption must be shortened in the frontmatter.
 - The template has no checks yet (`checks.yaml` is not written). The gate stamps and the selftest belong to the court-level eval loop, not this box.
+
+## Engines
+
+**docx** (`docx/make-reference.sh` builds `docx/reference.docx`; `docx/cal.lua` writes the cover from the frontmatter; `tools/render.sh --engine docx`).
+
+- Set in styles.xml and sectPr, not rendered (no LibreOffice on the build box): font TeX Gyre Schola 13 pt throughout, footnotes included; body 1.5 spaced (`w:line="360"`, auto) with 0.5 in first-line indent and 170 twips after; headings single spaced, bold, Heading 1 centred and capitalised; footnotes single spaced; US Letter, 1.5 in left and right, 1 in top and bottom; arabic PAGE field centred in the footer, none on the cover (`titlePg`).
+- Differs from typst: TOC and TOA are not generated (typst builds them from headings with computed page numbers); the caption is paragraphs, not the ruled table; no line numbering (none required here). Line spacing is "auto" multiples, not exact points. Font name is the vendored Schola (the rule-named Century Schoolbook is metric-compatible; swap the name if the filer's machine has it).
+- `pages_reviewed` for docx: 0. The `.docx` was validated (zip, well-formed XML parts); `OUTPUT-<id>.docx.pdf` was not made.
+- BLOCKED: `docx.pdf` gates 0 to 3: no LibreOffice (`soffice`) on the build box, so no PDF was rendered or checked.
+- BLOCKED: TOC and TOA check IDs: no TOC/TOA fields or generated entries in the docx; the typst TOC/TOA pages are not reproduced.
+- Pagination in Word may differ from typst (line breaking, footnote placement), so the footer page numbers and any page-referenced text may be off by a page in Word.

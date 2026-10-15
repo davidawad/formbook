@@ -80,3 +80,13 @@ Reviewed pages: 8 of 8. Pages 2-3 were looked at in the first render; the later 
 8. **Exhibits and attachments** (A-C) are not generated or transcribed.
 9. **Service list** is flattened (see Sample). Mailing-matrix attachment requirements (LBR 9013-1(e)(2)) are not checked.
 10. **Page-count and paragraph numbering** are typed in the sample (`1\.`) and not checked by the template.
+
+## Engines
+
+The docx engine is in `docx/`: `make-reference.sh` builds `docx/reference.docx` (run once; committed), and `docx/mtb.lua` writes the first-page blocks, the signature, the notice of opportunity to respond (LBR 9013-1(f), with `response_days` from the frontmatter) and the certificate of service from the sample's frontmatter. The body is pandoc's.
+
+- **Set in styles.xml, sectPr and footer1.xml (not rendered here):** EB Garamond 13 pt (MTB-FORM-002); body lines exact 24 pt, double (MTB-FORM-003); first-line indent 0.5 in and no space between paragraphs; headings centered, bold, capitals; block quotes and footnotes single-spaced; US Letter with 1 in margins (MTB-FORM-004); centered PAGE field in the footer (MTB-FORM-005).
+- **Built in XML by the filter, not rendered:** counsel block, court title, caption table (party column with right and bottom rules), title, signature table, the bordered notice box (paragraph borders), certificate of service. The Date, Time and Location lines of the notice are blank, as in the typst template.
+- **Differs from typst:** line breaks, table row heights and the notice box edges are Word's and LibreOffice's, not typst's. The caption cell padding is approximated in twips. Pandoc's paragraph handling (smart quotes, the list in the body, footnotes) differs from cmarker's. Page count is not verified.
+- **BLOCKED (docx.pdf gates 0-3):** LibreOffice (`soffice`) is not installed on the build box, so no `OUTPUT-mohler-trustee-sale-motion.docx.pdf` was made and no docx page was looked at (pages reviewed for docx: 0). The `.docx` itself was checked as a valid zip with well-formed XML parts only.
+- **Not applicable to this doc type:** no table of contents or table of authorities, so no field-update limit applies.

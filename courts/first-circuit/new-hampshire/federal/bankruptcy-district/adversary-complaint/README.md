@@ -83,3 +83,12 @@ The overlay is a diagnostic, not a score. The lower overlaps are the expected on
 No findings were recorded in `reviews/` (this doc type has no `reviews/` folder). The Gate 2 record for this doc type is this section.
 
 [Formbook index](../../../../../../README.md) | [Bankruptcy court README](../README.md)
+
+## Engines
+
+docx (`docx/`: `build-reference.sh`, `reference.docx`, `nhb.lua`; output `samples/OUTPUT-smith-adversary-complaint.docx` and `.docx.pdf`, LibreOffice PDF, 9 pages, EB Garamond only):
+
+- Matches the typst form: EB Garamond 12 pt; body at an exact 27.6 pt line pitch (measured on the typst PDF); 0.5 in first-line indent; 6 pt after each paragraph; letter paper, 1 in margins; centered PAGE number; court lines at the typst's 10.8 pt pitch; the two caption tables with right and bottom rules; numbered paragraphs 1 to 40 with unnumbered INTRODUCTION, RESERVATION OF RIGHTS and WHEREFORE paragraphs; lettered sub-items indented; the signature block kept with the last paragraph. Page count 9 = 9.
+- Differs: line breaking in LibreOffice moves a line or two per page, so page 2 begins with paragraph 2 where the typst page 2 begins with the JURISDICTION heading. "TIMOTHY P. SMITH, CHAPTER 7 TRUSTEE" wraps in the signature block (the typst block does not). The blank adversary number is a tab with an underscore leader, not a drawn rule. The transfer schedule is flattened, as in the typst form.
+- BLOCKED items: none.
+- Opened with LibreOffice only (the PDF conversion is the no-repair proof); Word was not checked.

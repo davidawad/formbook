@@ -43,3 +43,16 @@ The filed pages between 11 and 24 (the body that holds Counts II and III) are no
 - Page 1: caption (court, debtor, parties, case number, chapter, adversary blank), title, "COME NOW" lead-in, paragraphs 1-3 start. Pass.
 - Pages 2-8 (our render): headings, numbered paragraphs, Count I and Count IV headings, prayer letters A-F, signature block on page 8 with "Respectfully submitted" and the date. Pass as layout. OPEN on content: the missing Counts II and III (gap 1), and the signature-block lines (gap 2).
 - All 8 pages were rasterized and viewed (render and overlay).
+
+## Engines
+
+docx: `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt double pitch, 13.8 pt single lines, 0.5 in first-line indent, 1 in margins, PAGE field in the footer); `docx/prb-complaint.lua` builds the caption table, the numbered paragraphs, the lettered prayer and the signature block from the frontmatter. Checked on `samples/OUTPUT-organic-power-complaint.docx.pdf` (LibreOffice). Opened with LibreOffice only; Word was not checked.
+
+Matches the typst form (measured on the PDFs): US Letter, one-inch margins, EB Garamond 12 pt, body line pitch 24.0 pt and single-line pitch 13.8 pt in both, 8 pages in both, caption, title and lead-in positions within about 1 pt, numbers then a tab at 1 in, lettered prayer, footer page number, `/s/` signature block.
+
+Differs:
+- LibreOffice breaks some lines at other words than typst (glyph advance and no justification), so the same text falls on a different line on most pages; the page count is the same.
+- The typst signature block stands alone on page 8; the docx keeps "Respectfully submitted" with prayer items E and F on page 8 (keep-with-next), so page 8 is laid out differently on purpose.
+- Prayer items have a 16 pt gap after each item in both; the docx spacing reads slightly looser.
+
+BLOCKED: none.

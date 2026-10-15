@@ -44,3 +44,17 @@ Local rules text: the court's "Local Bankruptcy Rules" compilation (PRLBRs-2013,
 - Pages 2-7: body paragraphs, footnotes 2-5 on the pages where they are marked, headings I-VII (sub-point "a. V. Conclusion" in bold italic), the § 524(a) and *Morales* block quotations, the WHEREFORE paragraph. Pass as layout; the 524(a) line breaks are gap 2.
 - Page 8: the NOTICE (rule text, 14 days), the certificate of service, "Respectfully submitted," the date and the signature block. Pass as layout; the period and signature lines are gaps 1 and 3.
 - All 8 pages were rasterized and viewed individually (render), and the overlay was viewed page by page.
+
+## Engines
+
+docx: `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt double pitch, 13.8 pt single lines, 0.5 in first-line indent, footnotes 12 pt single, block quotations single and indented 0.5 in both sides, 1 in margins, PAGE field in the footer); `docx/prb-motion-brief.lua` builds the caption table, the title, the lead-in, the response-time NOTICE, the certificate of service (when the frontmatter has one) and the signature block. Headings, paragraphs and footnotes are pandoc's native Word elements. Checked on `samples/OUTPUT-perez-cruz-msj.docx.pdf` and `samples/OUTPUT-perez-cruz-osj.docx.pdf` (LibreOffice). Opened with LibreOffice only; Word was not checked.
+
+Matches the typst form (measured on the PDFs): US Letter, one-inch margins, EB Garamond 12 pt, body line pitch 24.0 pt and single-line pitch 13.8 pt in both, page counts 8 = 8 (msj) and 9 = 9 (osj), caption, bold capital level-1 headings, italic level-3 sub-point, footnote numbering, block quotations, the NOTICE and certificate, `/s/` signature block.
+
+Differs:
+- LibreOffice breaks some lines at other words than typst, so page breaks fall at different sentences; the page counts match.
+- The osj sample's body already contains "NOTICE OF RESPONSE TIME" and a "(single)" certificate paragraph, and the template adds its own NOTICE from the frontmatter (default 14 days, as typst does). The osj therefore shows two notices in both engines. This is a sample issue for David to decide (remove the body notice or set the frontmatter), not a template fix.
+- In the osj, typst ends page 8 with the template NOTICE and puts the signature block alone on page 9; the docx keeps the NOTICE with the signature block on page 9 (keep-with-next).
+- A block quotation in the osj moves whole to page 5 in the docx; typst splits it across pages 4 and 5.
+
+BLOCKED: none.

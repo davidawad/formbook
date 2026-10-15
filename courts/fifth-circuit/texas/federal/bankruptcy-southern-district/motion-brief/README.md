@@ -71,3 +71,12 @@ As the adversary-complaint template: US Letter, 1 inch margins (a convention), E
 - Page 11: the rest of the WHEREFORE clause; Dated; Respectfully submitted; three signing blocks, separated by `-and-`. Pass.
 - Page 12: CERTIFICATE OF SERVICE with the ECF wording and the signer. Pass.
 - Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Engines
+
+docx (`docx/`): `build-reference.sh` writes `reference.docx` (styles, footer page number); `motion.lua` builds the caption, the BLR 9013-1 notices, numbered paragraphs, lettered lists, the signature block and the certificate of service from the sample; `render.sh` runs pandoc, then writes the caption rules and keeps table rows whole. Output: `samples/OUTPUT-cmg-funding.docx` and `.docx.pdf` (LibreOffice, 12 pages; typst is 12 pages).
+
+- Matches the typst form: EB Garamond 12 pt; body double spaced as an exact 24 pt line; 1 in margins, letter; 0.5 in first-line indent; numbered paragraphs; headings (centered bold for levels 1 and 2, bold left for level 3); the two-column caption with the right and bottom rules and the case numbers at right; the BLR 9013-1(b) and (i) notice text, verbatim; the emergency and hearing lines when the sample has them; the certificate of service; centered page number; footnote text 10 pt (typst measures about 10.2 pt); single-spaced lines at the typst pitch (13.8 pt); signature block kept whole.
+- Differs, and why: the paragraph numbers are typed with a tab, not Word auto-numbering (the numbers are the sample's own); the caption rules are cell borders added by `docx/render.sh`, because pandoc cannot write cell borders and LibreOffice does not draw paragraph borders in a table cell; LibreOffice places exact-line text about 3 pt lower than typst, so a page can hold one line less and a break can fall differently (page counts match on this sample).
+- Opened and converted with LibreOffice only; Word was not checked.
+- BLOCKED: none.

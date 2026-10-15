@@ -62,3 +62,28 @@ The overlay is diagnostic (tier 3), not a score. Filed pages the sample does not
 5. **One filer only.** Tier 2 is judged against one exemplar (Dane S. Field, Chapter 7 Trustee, Adv. 18-90035, Dkt. 19). Per `exemplars/SOURCE.md` a second D. Haw. filing was not found in the search. Tier 2 cannot be fully judged; this is stated, not hidden.
 
 [Court README](../README.md)
+
+## Engines
+
+The docx engine is `docx/make-reference.sh` (builds `docx/reference.docx`) and `docx/hib-motion-brief.lua` (cover, caption, heading labels and signature). The line "Engines: typst only" above predates this section. Build: `sh tools/render.sh --engine docx <this folder> samples/INPUT-field-rolloffs-motion-brief.md`, which writes `samples/OUTPUT-field-rolloffs-motion-brief.docx`.
+
+What the docx sets (in `styles.xml` and `sectPr`; set, not rendered):
+
+- Font EB Garamond everywhere, 14 pt for body, headings and footnotes (HIB-FORM-002; LBR 9004-1(b)(1)).
+- Body double-spaced (`w:line` 480, auto) with a 0.5 in first-line indent. Block quotations and footnotes single-spaced. Level 1 headings centered, bold, all caps. Levels 2 to 5 bold, single-spaced, with the label at (level - 2) x 0.5 in and the text on a 0.5 in hanging indent.
+- Heading labels (I., A., 1., a.) are typed text followed by a tab, added by the Lua filter, as the typst heading show rule does. They are not Word list numbering, so they do not renumber if a heading is moved.
+- US Letter, 1 in margins (HIB-FORM-004). Centered PAGE field; the first page has an empty footer (`titlePg`).
+- Cover: counsel block, court name, caption table with the adversary number and brief title on the right, and the noticed hearing (date, time, place, judge, LBR 9013-1(c)(1)) opposite the remaining parties. Signature block in a DATED / signatures table.
+
+What differs from typst:
+
+- No table of contents and no table of authorities. The typst template builds both from the headings and the `toa:` links (LBR 9013-2(b)). The docx has neither: the TOC and TOA pages, their roman page numbers, and the body restart at page 1 are missing. The docx page count includes the cover.
+- Line pitch: as in the adversary-complaint README (Word's double is about 2.6 em, typst 2.3 em). The docx runs longer.
+- The blank-line height is approximated (367 twips, 1.31 em at 14 pt).
+- Page breaks and footnote placement follow Word and LibreOffice, not typst.
+
+BLOCKED:
+
+- docx.pdf Gates 0 to 3 (`check.sh --engine docx`): BLOCKED, reason: LibreOffice (`soffice`) is not installed on the build box, so no `OUTPUT-*.docx.pdf` exists and no page was rendered or viewed. pages_reviewed for docx = 0. The `.docx` is a valid zip with well-formed XML parts (checked with `xmllint`).
+- LBR 9013-2(b) (table of contents and table of authorities): BLOCKED. The docx has no TOC or TOA; generating them with page numbers needs a first-pass layout, which needs the PDF renderer that this box lacks.
+- Font check: as in the adversary-complaint README (EB Garamond must be installed where the file is opened).

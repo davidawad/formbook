@@ -87,3 +87,12 @@ Every page rendered at 60 dpi and viewed.
 - Paragraph spacing was set to the leading in both templates after the complaint review showed overlapping numbered paragraphs. This template was rendered after that fix and checked for the same defect (none).
 - The last paragraph was joined to the signature block after the signature stood alone on a page.
 - Level 3 headings went from bold italic to underlined after the exemplar was checked (bold italic is not the filing's style).
+
+## Engines
+
+docx: `docx/build-reference.sh` builds `docx/reference.docx`; `docx/med-motion-brief.lua` builds the caption, title, signature block and certificate of service (certificate only when the sample has one). Output: `samples/OUTPUT-ngiramahoro-motion-to-dismiss.docx` and `.docx.pdf` (LibreOffice). Opened and converted with LibreOffice only; Word was not checked.
+
+- Matches typst (every page of both PDFs rendered at 60 dpi and viewed): EB Garamond 13 pt (embedded); double spacing as exact 27.6 pt lines with no paragraph gap; 0.5 in first-line indent; caption, and the title in bold capitals double-spaced as in typst; H1 centered bold capitals, H2 bold at the left with a hanging indent, H3 underlined at the left; single-spaced block quotes; 11 pt single-spaced footnotes; signature block kept with the last paragraph; letter, 1-inch margins; centered page number.
+- Certificate of service: tested with a temporary copy of the sample that carried a certificate (rendered through the same filter, 11 pages, not committed). The committed sample has none.
+- Differs: footnote separator is pandoc's default separator line, shorter than the 2.5 inch rule typst draws; the "Civil Action No." label sits above its blank rule when the case number is blank (typst: one line), as in the complaint.
+- BLOCKED: lines per page: the same exact 27.6 pt limit as the complaint (23 lines per page against typst's 24, because typst's first line on each page overhangs the top margin by about 4.6 pt). Page breaks match typst on pages 1 to 3 and differ from page 4 on; the conclusion and signature move to page 10 in both.

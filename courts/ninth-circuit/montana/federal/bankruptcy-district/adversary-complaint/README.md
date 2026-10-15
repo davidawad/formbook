@@ -74,3 +74,13 @@ Reviewed pages: 4 of 4.
 8. **Separate papers** (cover sheet, summons, fee, proposed summons) are not generated.
 9. **LBR version.** The exemplar was filed under the earlier local rules; the rule text here is the December 1, 2025 version.
 10. **Fed. R. Civ. P. 10** is applied through FRBP 7010 from its standard form; the full text of Rule 10 was not fetched.
+
+## Engines
+
+The docx engine is in `docx/`: `make-reference.sh` builds `docx/reference.docx` (run once; committed), and `docx/mtb.lua` writes the first-page blocks, the signature and the certificate of mailing from the sample's frontmatter. The body is pandoc's.
+
+- **Set in styles.xml, sectPr and footer1.xml (not rendered here):** EB Garamond 13 pt (MTB-FORM-002); body lines exact 24 pt, double (MTB-FORM-003); first-line indent 0.5 in and no space between paragraphs; headings centered, bold, capitals; block quotes and footnotes single-spaced; US Letter with 1 in margins (MTB-FORM-004); centered PAGE field in the footer (MTB-FORM-005).
+- **Built in XML by the filter, not rendered:** counsel block, court title, caption table (party column with right and bottom rules), title, signature table, certificate of mailing.
+- **Differs from typst:** line breaks and table row heights are Word's and LibreOffice's, not typst's. The caption cell padding is approximated in twips. Pandoc's paragraph handling (smart quotes, list items) differs from cmarker's. Page count is not verified.
+- **BLOCKED (docx.pdf gates 0-3):** LibreOffice (`soffice`) is not installed on the build box, so no `OUTPUT-bache-noble-complaint.docx.pdf` was made and no docx page was looked at (pages reviewed for docx: 0). The `.docx` itself was checked as a valid zip with well-formed XML parts only.
+- **Not applicable to this doc type:** no table of contents or table of authorities, so no field-update limit applies.

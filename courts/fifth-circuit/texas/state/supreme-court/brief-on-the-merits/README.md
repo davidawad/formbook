@@ -33,3 +33,17 @@ Three filed merits briefs from three filers, listed with URLs in `exemplars/SOUR
 - Appendix and electronic-filing PDF requirements are not implemented.
 
 [Formbook index](../../../../../../README.md)
+
+## Engines
+
+**docx** (`docx/`: `render.sh` runs two pandoc passes, `tex.lua` is the filter, `reference.docx` comes from `build-reference.sh`). Checked on the LibreOffice PDF (`samples/OUTPUT-hawthorne-brief-on-the-merits.docx.pdf`). The `.docx` opened in LibreOffice without a repair prompt; Word was not available and not checked. `checks.yaml` and `rules.md` do not exist yet, so `tools/check.sh --engine docx` cannot run.
+
+Matches the typst form: Liberation Serif 14 pt; exact 32.2 pt double and 16.2 pt single line pitch (same as typst, measured with `pdftotext -bbox`); 1 in margins on letter; cover unnumbered and without a footer; front matter in lower roman from ii; body in arabic from 1; cover lead-counsel block at the bottom margin; the contents with dot leaders and page numbers from the layout (PAGEREF fields, filled from a first pass); the index of authorities from the frontmatter page numbers; word count on the markdown source with the typst rules (1,148 words here, limit 15,000). The contents page numbers equal typst's on this sample. Page count: 12 in both.
+
+Differs:
+- Justified lines: typst shrinks word spaces when it justifies, Word and LibreOffice do not, so the docx fits fewer words on some lines. Body lines per page are 19 vs 20 (page 5), 20 vs 21 (page 7) and 21 vs 20 (page 11) in the docx vs typst; the last page is longer in the docx (14 vs 10 lines).
+- Space above headings: typst drops it at the top of a page. The docx puts it on the paragraph before each heading (style `BodyBeforeHeading`), so a heading at a page top sits at the margin as in typst.
+- Headings are 16 pt bold (H1 centered, H2 flush left), as the typst headings render.
+- Table of authorities: page numbers are typed in the frontmatter as in typst; no TOA field.
+
+BLOCKED: tier-1 pagination (body line counts per page): the docx wraps justified lines differently from typst on pages 5, 7, 11 and 12 (renderer difference in word spacing; see `docs/DOCX.md`, "Pagination differs by renderer"). Page count and contents page numbers still match typst on this sample.

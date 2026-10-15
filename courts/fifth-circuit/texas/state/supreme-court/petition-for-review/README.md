@@ -33,3 +33,17 @@ Three filed petitions from three filers, listed with URLs in `exemplars/SOURCE.m
 - Appendix and electronic-filing PDF requirements (searchable text, bookmarks, size cap) are not implemented.
 
 [Formbook index](../../../../../../README.md)
+
+## Engines
+
+**docx** (`docx/`: `render.sh` runs two pandoc passes, `tex.lua` is the filter, `reference.docx` comes from `build-reference.sh`). Checked on the LibreOffice PDF (`samples/OUTPUT-hawthorne-petition-for-review.docx.pdf`). The `.docx` opened in LibreOffice without a repair prompt; Word was not available and not checked. `checks.yaml` and `rules.md` do not exist yet, so `tools/check.sh --engine docx` cannot run.
+
+Matches the typst form: Liberation Serif 14 pt; exact 32.2 pt double and 16.2 pt single line pitch (same as typst); 1 in margins on letter; cover unnumbered and without a footer; front matter in lower roman from ii; body in arabic from 1; cover lead-counsel block at the bottom margin; the contents with dot leaders and page numbers from the layout (PAGEREF fields, filled from a first pass); the index of authorities from the frontmatter page numbers; word count on the markdown source with the typst rules (656 words here, limit 4,500). Page count: 10 in both.
+
+Differs:
+- Justified lines: typst shrinks word spaces when it justifies, Word and LibreOffice do not, so the docx fits fewer words on some lines. Body lines per page are 19 vs 20 (page 5), 19 vs 20 (page 6), 18 vs 20 (page 7) and 19 vs 21 (page 8) in the docx vs typst, so the docx runs about one page later from the statement of the case on.
+- Space above headings: typst drops it at the top of a page. The docx puts it on the paragraph before each heading (style `BodyBeforeHeading`).
+- Headings are 16 pt bold (H1 centered, H2 flush left), as the typst headings render.
+- Table of authorities: page numbers are typed in the frontmatter as in typst; no TOA field.
+
+BLOCKED: tier-1 pagination (body line counts per page): the docx wraps justified lines differently from typst on pages 5 to 8, so the contents labels for ISSUE PRESENTED (docx 3, typst 2), B. F.M.V.'s Detention and Magistration (docx 5, typst 4) and C. Trial and Disposition (docx 6, typst 5) are one page later than typst. Renderer difference in word spacing (see `docs/DOCX.md`, "Pagination differs by renderer"); the contents follow the docx layout. Total pages match (10).

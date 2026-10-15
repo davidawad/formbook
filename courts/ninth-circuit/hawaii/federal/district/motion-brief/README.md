@@ -85,3 +85,17 @@ Convention (tier 2; from the exemplar): the certificate of service in the captio
 - Clearinghouse (`clearinghouse.net`): HTTP 403 to this box.
 - stateimpactcenter.org PDFs (the Hawai‘i motion in the *Cruise Lines v. Suganuma* case): HTTP 403.
 - Found and used: *United States v. State of Hawai‘i*, 1:25-cv-00179 (Document 22 and 22-1), the State's Rule 12(c) motion and memorandum, from the Climate Litigation Database's copy (`cdn.climatepolicyradar.org`).
+
+## Engines
+
+### docx (`docx/`)
+
+- Built by `docx/make-reference.sh` (writes `docx/reference.docx`) and `docx/hid.lua` (pandoc filter). `sh tools/render.sh --engine docx <this folder> samples/INPUT-us-v-hawaii-motion-brief.md` writes `samples/OUTPUT-us-v-hawaii-motion-brief.docx`.
+- Set in styles.xml, sectPr and footer1.xml (not rendered here): Liberation Serif 14 pt throughout (footnotes too); body at exact 32.3 pt line pitch with 0.5 in first-line indent; headings bold, single-spaced (level 1 "I.", level 2 "A.", level 3 "1.", hanging 0.5 in); counsel block 12 pt single-spaced; US Letter with 1 in margins; centered "- n -" footer (PAGE field).
+- Written by the filter: counsel block and caption box as tables (rule at the right and bottom of the parties box), with "No.", the upper-case title and "Judge:" at the right; the motion paragraphs (unnumbered) and their dated line and signature; a page break, then "MEMORANDUM IN SUPPORT OF MOTION"; memorandum headings numbered I., A., 1.; the signature at the end of the memorandum; the certificate of service on its own page (when `service.certificate` is true). Footnotes and block quotations are pandoc's.
+- Differs from typst: one page-number section, so the typst roman front matter (i, ii) and the arabic restart at 1 are not reproduced; table cell metrics are Word's; line and page breaks may differ in Word.
+- Typeface: the typst template uses Liberation Serif (the vendored metric substitute for Times New Roman, LR 10.2(a)(2)); the docx names the same face. A filer's Word without Liberation Serif substitutes silently. Open question for David: name "Times New Roman" in the docx (the court's face) instead.
+- Not rendered: nothing in the `.docx` was looked at. `pages_reviewed` for docx = 0.
+- BLOCKED (docx.pdf gates 0 to 3): `soffice` is not installed on the build box, so no `OUTPUT-us-v-hawaii-motion-brief.docx.pdf` exists.
+- BLOCKED (TOC and TOA, LR 7.4(f)): the docx writes neither the table of contents nor the table of authorities; the typst template has both. A Word TOC field would be empty until updated, and the TOA needs citation fields or a filter that writes the table and its page numbers from a first pass (see `docs/DOCX.md`).
+- BLOCKED (LR 7.4(b) and (e)): the word-limit path and the certificate of compliance are not implemented in the docx; the sample is 9 pages and needs no certificate. A memorandum over 25 pages must not be filed from the docx until this is done.

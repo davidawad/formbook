@@ -49,3 +49,14 @@ Page 1 aligns on the counsel block, caption, and title. The filed brief's last p
 - The filed brief has no separate memorandum, table of contents, or exhibit index; the template has none.
 - Page 7 holds only the DATED line and the firm block (see above). The template has no rule that keeps the closing paragraphs with the signature; the filed brief's page 9 does.
 - Second filer: not collected. Tier 2 would be judged against 2 or 3 filers. Other candidates checked and not used are listed in `exemplars/SOURCE.md`.
+
+## Engines
+
+### docx (`docx/`)
+
+- Set in `docx/reference.docx` (built by `docx/make-reference.sh`) and read by `docx/idb.lua`. Set in styles.xml/sectPr, not rendered: EB Garamond 13 pt in every style; body and numbered paragraphs double spaced (line 480 auto) with 0.6 em (156 twips) after; US Letter, 1 in margins; headings centered bold (levels 1 and 2) or bold at the left (level 3), single spaced; a centered PAGE field at 11 pt in the footer; block quotes single spaced, indented 0.75 in left and 0.5 in right.
+- Written by the filter, not rendered here: counsel block single spaced at the top margin; court heading (two lines); caption as a two-column table with a 0.75 pt vertical rule; title in caps; lead-in and numbered paragraphs with a first-line indent, numbers typed with a tab (not Word list numbering); lettered items `(a)`; the dated line and signature block at 3.0 in; numbering stops after the PRAYER and CERTIFICATE OF SERVICE headings.
+- Differs from typst: line breaks and page count come from Word or LibreOffice, not from typst's leading (0.85 em); the typed numbers do not renumber when a paragraph is inserted; the caption rule is a table border, not a line.
+- Not yet checked: no page of the docx has been rendered or looked at (pages_reviewed = 0).
+- BLOCKED (docx.pdf gates 0 to 3): LibreOffice (`soffice`) is not installed on the build box, so no `.docx.pdf` exists and the gates cannot run. The `.docx` itself is written and validated (zip and well-formed XML parts only).
+- BLOCKED (no TOC or TOA in this doc type): nothing to populate.

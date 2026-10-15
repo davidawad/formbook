@@ -71,3 +71,16 @@ Convention (tier 2; from the exemplar, not a rule): page number centered in the 
 - Justia dockets and cases (`cases.justia.com`, `dockets.justia.com`): HTTP 403 to this box.
 - stateimpactcenter.org and inversecondemnation.com PDFs: HTTP 403.
 - The DOJ complaint in *United States v. State of Hawaii*, 1:25-cv-00179 (Clearinghouse doc 159777): not reached (403).
+
+## Engines
+
+### docx (`docx/`)
+
+- Built by `docx/make-reference.sh` (writes `docx/reference.docx`) and `docx/hid.lua` (pandoc filter). `sh tools/render.sh --engine docx <this folder> samples/INPUT-sffa-complaint.md` writes `samples/OUTPUT-sffa-complaint.docx`.
+- Set in styles.xml, sectPr and footer1.xml (not rendered here): EB Garamond 14 pt throughout; body at exact 32.2 pt line pitch with 0.5 in first-line indent; headings bold, single-spaced (level 1 capitals, left; level 2 hanging "I."); counsel block 11 pt single-spaced; US Letter with 1 in margins; centered "- n -" footer (PAGE field).
+- Written by the filter: counsel block and caption box as tables (rule at the right and bottom of the parties box); allegations numbered 1, 2, ... and roman headings; prayer lettered a., b., ...; WHEREFORE paragraph unnumbered; dated line and signature blocks at the right.
+- Differs from typst: table cell and border metrics are Word's; no judge initials in the sample; no typst-side tracking, kerning or hyphenation controls. Line breaks and page breaks may differ in Word.
+- Font: EB Garamond must be installed on the machine that opens the file, or Word substitutes silently.
+- Not rendered: nothing in the `.docx` was looked at. `pages_reviewed` for docx = 0.
+- BLOCKED (docx.pdf gates 0 to 3): `soffice` is not installed on the build box (no LibreOffice package on conda-forge), so no `OUTPUT-sffa-complaint.docx.pdf` exists.
+- No TOC or TOA in the complaint (LR 7.4(f) does not apply), so no field-result BLOCKED item.
