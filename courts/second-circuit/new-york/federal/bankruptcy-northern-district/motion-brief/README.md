@@ -101,3 +101,21 @@ govern and the template keeps its rule-based form.
 9. **No gate checks.** There is no `checks.yaml` for this doc type, so `tools/check.sh` is not wired here and no stamp
    exists. Gates 0 and 1 are not run.
 10. **Typeface.** LBR 9004-1 sets a minimum size, not a typeface. EB Garamond is our choice, vendored in `fonts/`.
+
+## Engines
+
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` with the same styles as the complaint (EB Garamond
+12 pt, exact 24 pt body lines, 13.8 pt single lines for the caption, block quotations and signature, 1 in margins, letter,
+centred PAGE field); `docx/nynb-motion-brief.lua` builds the cover (chambers legend when given, counsel, court title,
+bankruptcy and adversary captions, title), the body (headings and block quotations from the reference styles), the
+signature block and the certificate of service. Output: `samples/OUTPUT-motion-brief.docx` and `.docx.pdf`
+(LibreOffice). The `.docx` converts in LibreOffice with no error; the zip and XML parts are well formed.
+
+- Matches the typst output: font and size, line pitch, margins, page numbers, caption layout and rules, headings
+  (centred, flush left bold, bold italic), block quotation, the signature block before the affidavit of service, the
+  affidavit. Page count 7 = 7; all 7 pages of the `.docx.pdf` were viewed beside the typst page.
+- Differs: line breaks fall on other words, so text moves a line or two between pages. The caption right inset is 6 pt
+  (typst: 10 pt), so the debtor line "HIGHGATE LTC MANAGEMENT, LLC, et al.," stays on one line as in typst; the rule is
+  where typst puts it. The caption rules are table borders.
+- BLOCKED: `docx`: no `checks.yaml` exists for this doc type, so `tools/check.sh --engine docx` cannot run (exit 2,
+  "no such file"). No gate has been run on the docx; the `.docx.pdf` has not been checked against the rules.
