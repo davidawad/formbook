@@ -82,3 +82,11 @@ Red is our render, blue is the filed page, black is where they agree. The overla
 8. **Sample is partial.** The sample transcribes pages 1 to 7 of the 33-page filing in part (see the frontmatter comment). Filed paragraphs 40 to 54 and 58 to 75 and the second to eighth causes of action are not transcribed, so the sample is 8 pages against a 33-page exemplar.
 9. **Italics.** The text layer of the exemplar carries no italic markup, so case names and "i.e." are roman in the sample. The template italicizes `*...*` markdown, so future samples can carry italics.
 10. **Rule 8 and Rule 38 text** were not fetched in this run (see the table); the template does not depend on their wording.
+
+## Engines
+
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx`, `cacd-complaint.lua` is the filter, `render.sh` fills the footer from the sample). Checked with LibreOffice only; Word was not available. Render: `sh tools/render.sh --engine docx complaint samples/INPUT-alarcon-complaint.md`, which gives `OUTPUT-alarcon-complaint.docx` and `.docx.pdf` (8 pages, all viewed).
+
+- Matches the typst output: EB Garamond 14 pt; exact 24 pt line pitch on the 28-line grid; letter size, 1 in top margin; 28 line numbers 1 to 28 on every page (a page-anchored text box in the header); pleading rules (page borders); counsel block single spaced from line 1 with the court title on line 11 in the sample; caption with the party column's right and bottom rules; numbered allegations; headings centered or bold italic; signature block kept together on one page; footer with page number, title and case number.
+- Differs: the pleading rules are page borders around the text area, not full-height lines. The caption and signature block are tables. A title too long for its footer cell wraps to two lines. `-` list items render as bullets, which is what the typst template's `list` produces; the contract text above says lettered (a), (b), which the typst code does not do for `-` items.
+- BLOCKED: `sh tools/check.sh <court-dir> --engine docx` cannot run in this folder: it needs `court.json` and `checks.yaml` beside `typst/`, and neither exists (not created here). No check IDs exist yet, so no check result is claimed.
