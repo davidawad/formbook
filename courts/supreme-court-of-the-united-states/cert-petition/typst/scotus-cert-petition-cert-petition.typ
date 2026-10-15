@@ -12,7 +12,7 @@
 
 #let doc-kind = "cert-petition"
 #let word-limit = 9000                      // Rule 33.1(g)(i): petition for a writ of certiorari, booklet format
-#let typeface = "New Century Schoolbook"    // Rule 33.1(b): Century family. NOT VENDORED in fonts/: see README "Blockers".
+#let typeface = "TeX Gyre Schola"           // Rule 33.1(b): Century family (URW Century Schoolbook clone), vendored in fonts/tex-gyre-schola/.
 #let type-size = 12pt                       // Rule 33.1(b): Century 12-point type
 #let footnote-size = 10pt                   // Rule 33.1(b): footnotes 10-point
 #let cover-size = 11pt                      // Rule 34.1(g): not smaller than 11-point (identification of counsel may be smaller)

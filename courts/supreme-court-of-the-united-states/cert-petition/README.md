@@ -3,15 +3,23 @@
 - Court: `scotus`, Supreme Court of the United States (`courts/supreme-court-of-the-united-states/`)
 - Doc type: `cert-petition`. Petition for a writ of certiorari in booklet format (Rules 14, 33.1, 34). One self-contained folder, no shared files.
 - Exemplar: `exemplars/FILED-EXAMPLE-fisher-14-981-cert-petition.pdf` (*Fisher v. University of Texas at Austin*, No. 14-981, filed 2015-02-10; provenance in `exemplars/SOURCE.md`).
-- Sample: `samples/INPUT-fisher-cert-petition.md`, an excerpt of the filed petition (see Known gaps).
-- Status: **render = FAIL (blocker: the required typeface is not vendored)**; **overlay = not produced** (needs the render). Template, sample and rules are in place; the layout was checked on a scratch render with a stand-in face. `court.json` untouched.
-- Exemplar re-fetched 2026-10-14 from the URL in `exemplars/SOURCE.md`: 374 pages, the same file as recorded (CenturyExpandedBT embedded, text layer present).
+- Sample: `samples/INPUT-fisher-cert-petition.md`, a transcription of the filed petition's cover, front pages, opening, Statement A and Part III, with signature and certificate (see Known gaps, 2).
+
+## Status
+
+| Item | Result |
+|---|---|
+| Exemplar | yes: `exemplars/FILED-EXAMPLE-fisher-14-981-cert-petition.pdf` (re-downloaded 2026-10-14 from the URL in `SOURCE.md`; 374 pages, the first 43 are the petition) |
+| Sample | `samples/INPUT-fisher-cert-petition.md` (kept from the earlier pass; excerpt, 14 rendered pages) |
+| Render | ok: `sh tools/render.sh courts/supreme-court-of-the-united-states/cert-petition samples/INPUT-fisher-cert-petition.md` writes `samples/OUTPUT-fisher-cert-petition.pdf` (14 pages, no typst warnings, Century-family face embedded) |
+| Overlay | ok: `sh tools/overlay.sh courts/supreme-court-of-the-united-states/cert-petition fisher-cert-petition` writes `samples/OVERLAY-fisher-cert-petition.pdf` and `.txt` (14 pages) |
+| Pages reviewed | 14 of 14 (every page of the render rasterized with `pdftoppm -r 70` and viewed as PNG) |
+| Typeface | TeX Gyre Schola (Century Schoolbook clone, GUST licence), vendored in `fonts/tex-gyre-schola/` (earlier blocker resolved: the face was already vendored) |
+| Open | Tier-2 items in the Gate 2 table below. `court.json` untouched. latex and docx engines not built. |
 
 ## Blockers
 
-BLOCKED: the required Century-family typeface is not vendored. Rule 33.1(b) requires the text in a Century family face (Century Expanded, New Century Schoolbook, or Century Schoolbook) at 12 point. `fonts/` holds only EB Garamond, and this doc type may not use it. The template names `New Century Schoolbook` (`typeface` in `typst/scotus-cert-petition-cert-petition.typ`), so `tools/render.sh` fails with `unknown font family` (a typst warning, which the tool treats as failure). That is the intended behaviour: no fallback.
-
-Decision needed (David): vendor a Century-family face into `fonts/` under its licence (for example TeX Gyre Schola under the GUST Font License, or a URW Century Schoolbook clone), then set `typeface` to its family name. `fonts/` is shared, so this folder does not edit it.
+None for typst. The typeface blocker recorded in the earlier pass was wrong: `fonts/tex-gyre-schola/` is vendored (`texgyreschola-regular.otf` and bold/italic). TeX Gyre Schola is based on the URW Century Schoolbook L, so it is the Century family that Rule 33.1(b) names. The template now sets `typeface = "TeX Gyre Schola"`; no fallback is used (the render uses `--ignore-system-fonts`).
 
 ## Files
 
@@ -20,11 +28,11 @@ Decision needed (David): vendor a Century-family face into `fonts/` under its li
 | `typst/main.typ` | Entry point; reads `--input sample=...`, calls `scotus-cert-petition`. |
 | `typst/scotus-cert-petition-cert-petition.typ` | Template. Parameter block at the top: `word-limit` (9,000), `typeface`, sizes, leading, the 6 1/8 x 9 1/4 inch booklet page and its margins. |
 | `samples/INPUT-fisher-cert-petition.md` | Markdown sample: frontmatter (cover, counsel, authorities) plus body. |
-| `samples/OUTPUT-fisher-cert-petition.pdf` | Not produced in-tree: the render fails (see Blockers). |
-| `samples/OVERLAY-fisher-cert-petition.pdf`, `.txt` | Not produced in-tree (needs the render). A scratch overlay exists in `/work/artifacts/cert-petition/` for diagnosis only. |
+| `samples/OUTPUT-fisher-cert-petition.pdf` | Our render (14 pages). |
+| `samples/OVERLAY-fisher-cert-petition.pdf`, `.txt` | Red/blue comparison against the filed exemplar and the page map. |
 | `exemplars/` | The filed exemplar and `SOURCE.md`. |
 
-Build (from the repo root, with `PATH` set to the toolchain):
+Build (from the repo root, with the toolchain on `PATH`):
 
 ```sh
 sh tools/render.sh courts/supreme-court-of-the-united-states/cert-petition samples/INPUT-fisher-cert-petition.md
@@ -39,7 +47,7 @@ Primary source: *Rules of the Supreme Court of the United States*, effective Mar
 
 | Rule | Requirement | Where the template uses it |
 |---|---|---|
-| Rule 33.1(a), (b) | Booklet format, 6 1/8 x 9 1/4 in. Century family 12-point type, 2-point or more leading; footnotes 10-point; quotations over 50 words indented; text on both sides | `page-width`, `page-height`, `typeface` (BLOCKED, see above), `type-size`, `leading-pitch`, `footnote-size`, `quote-indent` |
+| Rule 33.1(a), (b) | Booklet format, 6 1/8 x 9 1/4 in. Century family 12-point type, 2-point or more leading; footnotes 10-point; quotations over 50 words indented; text on both sides | `page-width`, `page-height`, `typeface` (TeX Gyre Schola), `type-size`, `leading-pitch`, `footnote-size`, `quote-indent` |
 | Rule 33.1(c) | Opaque paper; margins at least 3/4 in.; text field (including footnotes) no larger than 4 1/8 x 7 1/8 in. | `margin-x = 1in`, `margin-y = 1.0625in`: text field exactly 4.125 x 7.125 in |
 | Rule 33.1(d) | Word limits exclude questions presented, parties and disclosure statement, TOC, TOA, counsel listing, appendix; footnotes counted | `count-words` on the body only (the front pages and the signature block are not in the body) |
 | Rule 33.1(g)(i) | Petition for a writ of certiorari: 9,000 words | `word-limit = 9000`; the build panics above it |
@@ -56,47 +64,41 @@ Primary source: *Rules of the Supreme Court of the United States*, effective Mar
 
 ## Overlay
 
-The overlay pairs each page of our render with the best-matching filed page by word overlap. It is diagnostic, not a score. It cannot run in-tree until the typeface is vendored. The scratch overlay (EB Garamond stand-in, so not compliant) paired our cover with the filed cover (85%), our Questions Presented with the filed one (93%), the parties page (100%), the TOC (38%, layout differs), the body (85% on the first body page). The signature block and certificate have no filed counterpart in the excerpt.
+`samples/OVERLAY-fisher-cert-petition.pdf` pairs each page of our render with the best-matching filed page by word overlap (`samples/OVERLAY-fisher-cert-petition.txt` is the page map). It is diagnostic, not a score. Pairing (ours to filed): cover 1 to 1 (84%), Questions Presented 2 to 2 (93%), parties 3 to 3 (100%), TOC 4 to 4 (38%: our TOC is a generated list, the filed page is laid out differently), TOA 5 to 8 (30%: low overlap, not a check), the body 6 to 11, 7 to 12, 8 to 13, 9 to 14 (100%, 100%, 97%, 82%), the Part III pages 10 to 41, 11 to 42, 12 to 43 (68%, 70%, 44%: the best matches fall in the filed petition's last pages, so the pairing is approximate), the signature page 13 to filed 1 (65%: the filed cover shares the counsel names), and the certificate 14 to filed 4 (21%: low overlap, no certificate match).
 
 ## Page review (Gate 2)
 
-Scratch render, 13 pages (`/work/artifacts/cert-petition/scratch-ebgaramond.pdf`): every page rendered at 60 dpi and viewed (13 of 13). Stand-in face: EB Garamond, not the required Century family, so the review checks layout and pagination only, not typeface. Cover re-viewed after the 10-point to 11-point fix (pagination unchanged). Line pitch measured in both files: 14.0 points on the body, the same as the exemplar (12-point type, 2-point leading).
+Render with TeX Gyre Schola, 14 pages (`samples/OUTPUT-fisher-cert-petition.pdf`). Each page rasterized with `pdftoppm -r 70` and viewed.
 
 | Page | Content | Result |
 |---|---|---|
-| 1 | Cover (docket, caption, proceeding, title, counsel) | OK. Fits one page at 11 point; counsel block in two columns, no overlap. |
-| 2 | Questions presented alone | OK. |
-| 3 | Parties to the proceeding and Rule 29.6 statement | OK. Heading wraps to two lines. |
-| 4 | Table of contents | OK. Front-matter page numbers roman, body arabic, both from the document. |
-| 5 | Table of authorities | OK. Every page listed; cases, constitutional provisions, statutes in order. |
-| 6 | Petition for a Writ of Certiorari, opening paragraphs | OK. |
-| 7 | Opinions Below; Jurisdiction; Constitutional Provision Involved (intro line) | OK. |
-| 8 | Block quotation (indented); Statement of the Case, A. | OK. The block quotation starts on page 8 while its introductory line is on page 7: ACCEPTED (the layout has no keep-with-next on that line). |
-| 9 | Statement, A. (continued); excerpt note; Reasons for Granting the Petition, III. | OK. |
-| 10 | Part III (continued) | OK. |
-| 11 | Part III (continued); Conclusion | OK. |
-| 12 | Signature block alone on a page | ACCEPTED: the block (about 4 in.) does not fit under the conclusion, so it is kept together on the next page. |
-| 13 | Certificate of compliance | OK. Word count 1,616 is the count of this excerpt, not of a complete petition. |
+| 1 (cover) | Cover (docket, caption, proceeding, title, counsel) | OK. Fits one page; counsel block in two columns, no overlap. |
+| 2 (label i) | Questions presented alone | OK. |
+| 3 (label ii) | Parties to the proceeding and Rule 29.6 statement | OPEN (cosmetic): the centred two-line heading is set with wide word spacing. Not fixed. |
+| 4 (label iii) | Table of contents | OK. Front-matter page numbers roman, body arabic, both from the document. |
+| 5 (label iv) | Table of authorities | OK. Every page listed; cases, constitutional provisions, statutes in order. |
+| 6 (label 1) | Petition for a Writ of Certiorari, opening paragraphs | OK. |
+| 7 (label 2) | Opinions Below | OK. |
+| 8 (label 3) | Jurisdiction; Constitutional Provision Involved (block quotation); Statement A | OK. Quotation on the same page as its introductory line. |
+| 9 (label 4) | Statement A (continued); excerpt note | OK. |
+| 10 (label 5) | Reasons for Granting the Petition, III. | OK. |
+| 11 (label 6) | Part III (continued) | OK. |
+| 12 (label 7) | Part III (continued); Conclusion | OK. |
+| 13 (label 8) | Signature block alone on a page | ACCEPTED: the block (about 4 in.) does not fit under the conclusion, so it is kept together on the next page. |
+| 14 (unnumbered) | Certificate of compliance | OK. Word count 1,616 is the count of this excerpt, not of a complete petition. |
 
-Tier-2 findings: the signature block sits alone on page 12 (ACCEPTED, above); the block quotation's introductory line is separated from it on page 7 (ACCEPTED, above). Cover proceeding line wraps to three lines; a long proceeding line may wrap (ACCEPTED).
+Tier-2 findings: the signature block sits alone on page 12 (ACCEPTED, above); the parties heading word spacing on page 3 (OPEN, cosmetic). The block quotation now sits on the same page as its introductory line (render page 8; the earlier scratch render split them).
 
-Re-check after the last edit (proceeding line size, 10 to 11 point): only page 1 changed; the page openings of pages 2-13 were compared and are unchanged in pagination.
+Page numbers: the table numbers the 14 PDF pages in order. The cover (PDF page 1) is unnumbered; front matter is labelled i-iv; the body is labelled 1-7 with the signature block on the page labelled 8; the certificate is unnumbered.
 
 ## Known gaps
 
-1. **Typeface (BLOCKED).** See Blockers. Nothing else can make the render pass.
-2. **Excerpt.** The sample transcribes the cover, the questions presented, the parties, the opening, Opinions Below, Jurisdiction, the constitutional provision, Statement A, and Part III with the conclusion. Pages 5 through 30 are omitted and marked in the sample. The certificate count (1,616) is the excerpt's count.
-3. **Appendix.** Rule 14.1(i) appendix and Rule 34.4 appendix TOC are not generated.
-4. **Stock ticker symbols.** Rule 14.1(b)(i) (2026) requires them where a party has one. The template does not check for them.
-5. **Footnotes.** The template styles footnotes at 10 point with 2-point leading, but the excerpt has none, so that path has not been rendered or reviewed.
-6. **Cover colour and paper copies.** Rule 33.1(e) cover colour (white for a petition) and paper-copy binding are not produced; the PDF is plain white. Forty paper copies (Rule 33.1(f)) are not produced.
-7. **Word count.** `count-words` is a markdown token count, not a word-processor count; it has not been cross-checked against the PDF text.
-8. **Exemplar provenance.** The exemplar is a copy from a law-firm site; the docket number is confirmed on supremecourt.gov, but the Court's own DocketPDF copy was not found (see `exemplars/SOURCE.md`).
-9. **Exemplar age.** The exemplar is from 2015, before the 2019 booklet and word-limit changes that the template follows. The current rules were read directly from the 2026 PDF; the exemplar only settles layout details the rules leave open.
-
-## Engines
-
-Engine status (this box): typst `fail` (unchanged: the Century-family typeface is not vendored). latex: not built; docx: not built. Both are blocked on the same decision, below.
-
-- Not built: `latex/` and `docx/`. Building either against EB Garamond would repeat the stand-in this doc type may not use (see Blockers). Once David vendors a Century-family face and names it, the typst `typeface` and the latex and docx font names change together, and both engines are built from the same parameters.
-- docx BLOCKED: typeface (Rule 33.1(b)), listed as the blocker above; the cover and TOC/TOA BLOCKED items are the same as the amicus and merits docx.
+1. **Excerpt.** The sample transcribes the cover, the questions presented, the parties, the opening, Opinions Below, Jurisdiction, the constitutional provision, Statement A, and Part III with the conclusion. Pages 5 through 30 of the filed petition are omitted and marked in the sample. The certificate count (1,616) is the excerpt's count, not a complete petition's count.
+2. **Appendix.** Rule 14.1(i) appendix and Rule 34.4 appendix TOC are not generated.
+3. **Stock ticker symbols.** Rule 14.1(b)(i) (2026) requires them where a party has one. The template does not check for them.
+4. **Footnotes.** The template styles footnotes at 10 point with 2-point leading, but the excerpt has none, so that path has not been rendered or reviewed.
+5. **Cover colour and paper copies.** Rule 33.1(e) cover colour (white for a petition) and paper-copy binding are not produced; the PDF is plain white. Forty paper copies (Rule 33.1(f)) are not produced.
+6. **Word count.** `count-words` is a markdown token count, not a word-processor count; it has not been cross-checked against the PDF text.
+7. **Exemplar provenance.** The exemplar is a copy from a law-firm site; the docket number is confirmed on supremecourt.gov, but the Court's own DocketPDF copy was not found (see `exemplars/SOURCE.md`).
+8. **Exemplar age.** The exemplar is from 2015, before the 2019 booklet and word-limit changes that the template follows. The current rules were read directly from the 2026 PDF; the exemplar only settles layout details the rules leave open.
+9. **Engines.** `latex/` and `docx/` are not built for this doc type. Only typst is in scope for this pass.

@@ -1,12 +1,12 @@
-% Fourth Circuit brief, LaTeX engine. Matches typst/ca4-opening-brief.typ (the reference): EB Garamond 14 pt,
+% Fourth Circuit brief, LaTeX engine. Matches typst/ca4-opening-brief.typ (the reference): TeX Gyre Schola 14 pt,
 % double spacing (baseline 31.43 pt), 1-inch margins, left-aligned, 0.5-inch paragraph indent, roman folios for the
 % front matter and arabic from the body. Everything that depends on the frontmatter is written by ca4.lua as raw LaTeX.
 % Fonts come only from the vendored directory (the fontdir variable); fontspec does not fall back to a system font.
 \documentclass[12pt,letterpaper]{article}
 \usepackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf, UprightFont=EBGaramond-Regular, BoldFont=EBGaramond-Bold,
-  ItalicFont=EBGaramond-Italic, BoldItalicFont=EBGaramond-BoldItalic]{EBGaramond}
+\setmainfont[Path=$fontdir$tex-gyre-schola/, Extension=.otf, UprightFont=texgyreschola-regular, BoldFont=texgyreschola-bold,
+  ItalicFont=texgyreschola-italic, BoldItalicFont=texgyreschola-bolditalic]{TeXGyreSchola}
 \usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{indentfirst}
 \usepackage{needspace}

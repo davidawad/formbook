@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // CA4-FORM-004: serif, proportional. Vendored in /fonts.
+#let font-family = "Liberation Serif"     // CA4-FORM-004: serif, proportional. Times New Roman (court's preferred typefaces; exemplar): substitute per docs/FONTS.md.
 #let type-size = 14pt                      // CA4-FORM-004: 14-point or larger, everywhere.
 #let body-leading = 0.94em                 // CA4-FORM-003: with the metric-aligned line box below this
                                            // gives a baseline pitch of about 2.2 x type size (double spacing).
@@ -204,7 +204,7 @@
       title
       h(0.8em)
       dot-leader
-      box(width: 2.6em, align(right, it.page()))
+      box(it.page())
     })))
 }
 

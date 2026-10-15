@@ -8,10 +8,10 @@ Doc type `opening-brief` for the U.S. Court of Appeals for the Fourth Circuit (c
 |---|---|
 | Exemplar | yes: filed Opening Brief of Appellant, *NetChoice v. Jones*, No. 26-1252, filed 04/15/2026 (see `exemplars/SOURCE.md`) |
 | Sample | `samples/INPUT-netchoice-opening-brief.md`: 14 rendered pages, excerpted from a 66-page filed brief |
-| Render | ok: `sh tools/render.sh courts/fourth-circuit/court-of-appeals/opening-brief samples/INPUT-netchoice-opening-brief.md`; exit 0, no typst warnings, embedded fonts are EB Garamond only |
-| Overlay | ok: `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/opening-brief netchoice-opening-brief`; wrote `samples/OVERLAY-netchoice-opening-brief.pdf` and `-overlay.txt` |
-| Pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed; the cover was re-rendered and viewed again after its counsel lines were shortened) |
-| Gate 2 | open: the font (below) |
+| Render | ok: `sh tools/render.sh courts/fourth-circuit/court-of-appeals/opening-brief samples/INPUT-netchoice-opening-brief.md`; exit 0, no typst warnings, embedded fonts are TeX Gyre Schola only (`pdffonts`) |
+| Overlay | ok: `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/opening-brief netchoice-opening-brief`; wrote `samples/OVERLAY-netchoice-opening-brief.pdf` and `.txt` |
+| Pages reviewed | 13 of 13 typst pages (every page rendered at 60 dpi and viewed after the font change; the TOC was viewed again after the page-number fix). 16 of 16 LaTeX pages viewed (see Engines). |
+| Gate 2 | open: none in the typst render. The typeface gap is closed (see Typeface). LaTeX layout items are under Engines. |
 
 ## Governing rules
 
@@ -33,11 +33,19 @@ Rule text was fetched on 2026-10-14. Where a page was a summary rather than verb
 
 Local Rule 32 (https://www.ca4.uscourts.gov/rules/Rule32.html) was fetched on 2026-10-14. It covers appendices, length (it defers to FRAP 32(a)(7)) and correction of briefs; it has no typeface or cover rules of its own. The page returned a summary, not verbatim text.
 
+## Typeface
+
+| Face the court names | Vendored substitute (Typst name) | Fit | Used by |
+|---|---|---|---|
+| Century Schoolbook (court's notice of preferred typefaces, Dec. 9, 2024; the filed exemplar is set in it) | TeX Gyre Schola (`TeX Gyre Schola`) | Metric-compatible with the Adobe base-35 New Century Schoolbook AFMs (`docs/FONTS.md`) | typst, LaTeX, docx |
+
+The FRAP names no face, only a proportional serif, which EB Garamond also meets. The notice is not a rule, but it names Times New Roman, Century Schoolbook or Georgia and "discourages the use of Garamond", so the template follows it. Century Schoolbook is chosen over Times New Roman (answering and reply briefs) because it is the face of this court's filed exemplar. The page count moved from 14 to 13 pages with the change (EB Garamond to Schola).
+
 ## What the template does
 
 `typst/ca4-opening-brief.typ` (entry point `typst/main.typ`) is driven by the FRAP numbers above and by the parameters at its head:
 
-- Font: EB Garamond (the only vendored serif face), 14 pt everywhere, double-spaced with a 0.94 em body leading, 1-inch margins.
+- Font: TeX Gyre Schola (see Typeface), 14 pt everywhere, double-spaced with a 0.94 em body leading, 1-inch margins.
 - Cover: one page; the spacing between its parts shrinks to fit, the type size never does. A cover that cannot fit is an error.
 - Front matter: TOC and TOA with lower-roman folios; the TOA is built from `toa:` links in the body. TOA entry spacing is 0.5 em.
 - Body: arabic folios from 1. Headings are numbered by the template (I./A./1./a. in the Argument; A./1./a./(1) elsewhere). The signature block follows the last section and stays with the last paragraph.
@@ -55,7 +63,7 @@ Same shape as the Ninth Circuit's contract (see `courts/ninth-circuit/court-of-a
 
 ## Known gaps
 
-1. **Typeface (open; needs David).** The only vendored serif is EB Garamond. FRAP 32(a)(5) accepts it, but the court's December 2024 notice prefers Times New Roman, Century Schoolbook or Georgia and says it "discourages the use of Garamond," and the filed exemplar is in Century Schoolbook. Adding a font means changing the shared `fonts/` folder, which this box does not edit. Until a font is vendored, the sample is compliant with FRAP but not with the court's stated preference. This is the one tier-2 item left open.
+1. **Typeface: closed in the fonts pass.** Set in TeX Gyre Schola (Century Schoolbook), per the court's notice and the exemplar. Before, EB Garamond was used, which FRAP accepts but the notice discourages. Not a tier-1 item.
 2. **Cover colour.** Not produced: the template is paper-agnostic. The appellant's paper cover is blue under FRAP 32(a)(2); the electronic cover may be white.
 3. **Disclosure statement.** Not generated. The exemplar (a government party) has none. A private appellant would need one, filed under FRAP 26.1 / Local Rule 26.1 and included in the brief (the court's requirements page).
 4. **Excerpt only.** The sample is 14 pages of a 66-page filed brief. It omits brief pages 7–17 (Statement Parts B–G), 22–52 (Argument II.A.2 to II.C.3), and some of the Summary and Introduction paragraphs (each marked in the sample). The TOA lists only the authorities cited in the excerpt. The 1,523-word certificate count is the excerpt's, not the filed brief's 10,452.
@@ -65,28 +73,27 @@ Same shape as the Ninth Circuit's contract (see `courts/ninth-circuit/court-of-a
 
 ## Overlay map
 
-From `samples/OVERLAY-netchoice-opening-brief.txt`: our pages 1–14 paired with the filed pages named there. Red is our render, blue the filed page, black where both agree. The overlay is a diagnostic: it shows where the layout diverges, not a score.
+From `samples/OVERLAY-netchoice-opening-brief.txt`: our pages 1–13 paired with the filed pages named there (after the font change: ours p.4 with filed p.10, ours p.5 with filed p.13, ours p.10 with filed p.62; the excerpt pairs weakly, as before). Red is our render, blue the filed page, black where both agree. The overlay is a diagnostic: it shows where the layout diverges, not a score.
 
 ## Page review (Gate 2 input)
 
-Every page of `samples/OUTPUT-netchoice-opening-brief.pdf` was rendered at 60 dpi and viewed. Folios are the printed ones.
+Every page of `samples/OUTPUT-netchoice-opening-brief.pdf` was rendered at 60 dpi and viewed after the font change. Folios are the printed ones.
 
 | PDF page | Folio | Content | Finding |
 |---|---|---|---|
-| 1 | none | Cover | Fits one page. Counsel wraps in the narrow column (see gap 5). Re-rendered after shortening lines. |
-| 2 | i | Table of contents | Entries, folios and indent correct. The Table of Authorities entry lists folio ii. |
-| 3 | ii | Table of authorities | One page after reducing entry spacing from 0.7 em to 0.5 em; before, one line spilled onto an extra page. |
+| 1 | none | Cover | Fits one page. Counsel wraps in the narrow column (see gap 5). |
+| 2 | i | Table of contents | Entries, folios and indent correct. The two deepest entries (II.A, II.A.1) wrapped their folio onto a new line under the wider face; fixed by setting the folio at its content width. |
+| 3 | ii | Table of authorities | One page. |
 | 4 | 1 | Introduction | Body double-spaced; excerpt marker shown. |
-| 5 | 2 | Issues, jurisdictional statement | Numbered issues render as a list. Fine. |
-| 6 | 3 | Statement A, standard of review | Heading and subheading hang correctly. Excerpt marker shown. |
-| 7 | 4 | Summary of argument | Case names italic. Excerpt marker shown. |
+| 5 | 2 | Issues, jurisdictional statement, Statement A | Numbered issues render as a list. |
+| 6 | 3 | Statement A (cont.), standard of review, summary | Heading and subheading hang correctly. |
+| 7 | 4 | Summary of argument | Case names italic. |
 | 8 | 5 | Summary (cont.), Argument I | Point heading hangs under its numeral. |
 | 9 | 6 | Argument I–II.A.1 | Sub-heading levels A./1. correct, italic at level 4. |
-| 10 | 7 | Argument excerpt, III | Excerpt marker; TOA-linked citations correct. |
-| 11 | 8 | Conclusion | Conclusion page ends with white space, as the exemplar does. |
-| 12 | 9 | Request for oral argument, signature | Signature block stays with the request paragraph. |
-| 13 | 10 | Certificate of compliance | Word count is the excerpt's (1,523). |
-| 14 | 11 | Certificate of service | Matches the exemplar's CM/ECF wording. |
+| 10 | 7 | Argument II.A.1, III, conclusion | Excerpt marker; TOA-linked citations correct. |
+| 11 | 8 | Request for oral argument, signature | Signature block stays with the request paragraph. |
+| 12 | 9 | Certificate of compliance | Word count is the excerpt's (1,523). |
+| 13 | 10 | Certificate of service | Matches the exemplar's CM/ECF wording. |
 
 ## Exemplar search, for the record
 
@@ -96,9 +103,9 @@ Searches (2026-10-14): CourtListener and RECAP for 4th Cir. opening briefs; the 
 
 Three renderings of the same markdown (`samples/INPUT-netchoice-opening-brief.md`). The typst template is the reference.
 
-**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-netchoice-opening-brief.latex.pdf`, 14 pages, rendered and reviewed page by page against the typst output. Matches: EB Garamond only (vendored, 14 pt text and footnotes), body double-spaced at the typst pitch (31.43 pt), 1-inch margins, 0.5-inch first-line indent, roman folios for the cover-less front matter and arabic from the body, the cover on one page with counsel in the right half, contents and authorities built from the frontmatter and the `toa:` links (passim from seven pages), the signature block kept with the last paragraph, and the certificate of compliance word count (1,523, the same as typst's count). Differs: the cover's spacing is a fixed gap (typst scales the gap to fit the page); paragraph and heading spacing differ slightly, so body page breaks and the folios in the contents and authorities differ from typst by a line or two per page. Not checked by `check.sh` (no `checks.yaml` in this court).
+**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-netchoice-opening-brief.latex.pdf`, 16 pages (14 before the font change to Schola), every page rendered at 50 dpi and viewed. Layout items the font change exposed, not fixed here: the last Table of Authorities line ("Va. Code § 59.1-584") falls alone onto page iii, and the "REQUEST FOR ORAL ARGUMENT" heading sits at the foot of page 9 with its text on page 10. Matches: TeX Gyre Schola only (vendored, 14 pt text and footnotes), body double-spaced at the typst pitch (31.43 pt), 1-inch margins, 0.5-inch first-line indent, roman folios for the cover-less front matter and arabic from the body, the cover on one page with counsel in the right half, contents and authorities built from the frontmatter and the `toa:` links (passim from seven pages), the signature block kept with the last paragraph, and the certificate of compliance word count (1,523, the same as typst's count). Differs: the cover's spacing is a fixed gap (typst scales the gap to fit the page); paragraph and heading spacing differ slightly, so body page breaks and the folios in the contents and authorities differ from typst by a line or two per page. Not checked by `check.sh` (no `checks.yaml` in this court).
 
-**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `samples/OUTPUT-netchoice-opening-brief.docx` is written; the `.docx.pdf` is not, because LibreOffice is not installed (see BLOCKED). Matches in the styles: EB Garamond 14 pt, body at 31.43 pt exact, 0.5-inch first-line indent, single-spaced headings and block quotations, 1-inch margins, three sections (cover without folio, front matter in roman, body in arabic). The contents and the table of authorities are Word fields (`TOC`, `TA` on each citation, `TOA` per category). Certificate word count 1,523.
+**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `samples/OUTPUT-netchoice-opening-brief.docx` is written; the `.docx.pdf` is not, because LibreOffice is not installed (see BLOCKED). Matches in the styles: TeX Gyre Schola 14 pt, body at 31.43 pt exact, 0.5-inch first-line indent, single-spaced headings and block quotations, 1-inch margins, three sections (cover without folio, front matter in roman, body in arabic). The contents and the table of authorities are Word fields (`TOC`, `TA` on each citation, `TOA` per category). Certificate word count 1,523.
 
 BLOCKED (docx):
 - All gates on `samples/OUTPUT-netchoice-opening-brief.docx.pdf`: LibreOffice (`soffice`) is not on this box and conda-forge has no package. A Debian `libreoffice-writer-nogui` 25.2.3 was unpacked without root under `~/apt-lo` and its `soffice.bin` segfaulted at start-up; not resolved.

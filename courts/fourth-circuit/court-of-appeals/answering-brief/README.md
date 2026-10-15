@@ -18,7 +18,7 @@ sh tools/render.sh courts/fourth-circuit/court-of-appeals/answering-brief sample
 sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/answering-brief chapman-answering-brief            # -> samples/...-overlay.pdf and -overlay.txt
 ```
 
-Typst runs as `typst compile --root <court-dir> --font-path fonts --ignore-system-fonts --package-cache-path vendor/typst-packages --input sample=samples/NAME.md typst/main.typ out.pdf`. The font (EB Garamond, OFL) and the cmarker package are vendored; a warning fails the build (`tools/render.sh`).
+Typst runs as `typst compile --root <court-dir> --font-path fonts --ignore-system-fonts --package-cache-path vendor/typst-packages --input sample=samples/NAME.md typst/main.typ out.pdf`. The font (Liberation Serif, OFL) and the cmarker package are vendored; a warning fails the build (`tools/render.sh`).
 
 ## Governing rules
 
@@ -37,10 +37,18 @@ The form is set by the Federal Rules of Appellate Procedure; the Fourth Circuit'
 | CA4-CONT-002 | Conclusion: a short conclusion stating the relief sought. FRAP 28(b) does not list 28(a)(9) among the appellee's requirements, but the template includes a Conclusion and the filed exemplar has one. Kept as a convention. | FRAP 28(a)(9), 28(b); exemplar p. 36. | 2026-10-14 | convention |
 | CA4-CONT-012 | Argument sub-headings numbered I., A., 1., a.; the Statement of the Case sub-headings are unnumbered bold lines (as in the exemplar's table of contents). | Exemplar pp. ii–iii, 1–9. | 2026-10-14 | convention |
 | CA4-CERT-001 | Certificate of compliance: type-volume statement (word count, excluding FRAP 32(f) parts) and typeface statement (FRAP 32(a)(5), 32(a)(6)). The word count is computed from the markdown body. | FRAP 28(a)(10), 32(g)(1), read as cross-referenced in FRAP 28 (2026-10-14). The exclusions of FRAP 32(f) were **not** re-read; the template and sample follow the exemplar's wording. | partly | court-mandated |
-| CA4-CERT-002 | Certificate of compliance, typeface statement names the typeface (`EB Garamond`, vendored). | Exemplar p. 37 gives the form; the typeface line is ours. | — | author |
+| CA4-CERT-002 | Certificate of compliance, typeface statement names the typeface (`Liberation Serif`, vendored; the substitute for Times New Roman). | Exemplar p. 37 gives the form; the typeface line is ours. | — | author |
 | CA4-CERT-003 | Certificate of service: date, the document served, and a signature. Shown only when `service.certificate: true`. Placed on the same page as the certificate of compliance when it fits (as in the exemplar). | FRAP 25(d) (the proof-of-service rule; cited from the FRAP committee notes, the text of Rule 25(d) was **not** re-read). | partly | court-mandated |
 
 Rules not checked and therefore not claimed: the Fourth Circuit's Appendix Pagination & Brief Citation Guide (record cites are written as in the exemplar); FRAP 32.1; the Fourth Circuit's local rules on electronic filing of paper copies.
+
+## Typeface
+
+| Face the court names | Vendored substitute (Typst name) | Fit | Used by |
+|---|---|---|---|
+| Times New Roman (court's notice of preferred typefaces, Dec. 9, 2024, https://www.ca4.uscourts.gov/news-announcements/2024/12/09/preferred-typefaces-for-briefs; the filed exemplar is set in it) | Liberation Serif (`Liberation Serif`) | Metric-compatible with Times New Roman (`docs/FONTS.md`) | typst, LaTeX, docx |
+
+FRAP 32(a)(5) names no face. The notice is not a rule, but it prefers Times New Roman, Century Schoolbook or Georgia and "discourages the use of Garamond", so the template follows it. The earlier EB Garamond setting is replaced. The overlay and page count now compare a Times-metric face with the exemplar: 14 pages before the change, 13 after.
 
 ## Markdown contract
 
@@ -79,31 +87,31 @@ Body: as ca9, with these template-specific rules.
 
 | Sample page | Paired exemplar page | Read |
 |---|---|---|
-| 1 cover | 1 | Correct pairing. Layout matches the filed cover's order; the filed cover uses rules of different length and underscores. |
+| 1 cover | 1 (96%) | Correct pairing. |
 | 2 disclosure | 3 (41%) | Partial match, as expected: the filed disclosure form spans pp. 2–3 and the sample's disclosure is one page. |
-| 3 TOC | 4 | Correct. |
-| 4–5 TOA | 6, 8 | Correct. Authorities list differs from the exemplar: see known gaps (Burlington). |
-| 6–8 Questions Presented, Statement of the Case | 9, 10, 11 | Correct pairing. Line positions differ (EB Garamond is set on a different line pitch from the filed Times New Roman); words agree. |
-| 9–10 Procedural History, Summary | 20, 22 | Correct. |
-| 11–12 Argument I, II, II.A | 24, 26 | Correct. |
-| 13 Conclusion and signature | 1 (**wrong**) | The pairing picks the cover because the signature block repeats cover words; the filed conclusion is p. 44. A text-pairing limit of `overlay.sh`, not a layout fault. Read this page against exemplar p. 44 by hand. |
-| 14 certificates | 45 | Correct. |
+| 3 TOC | 4 (70%) | Correct. |
+| 4 TOA | 6 (29%) | Weak: the TOA lists fewer authorities than the exemplar's; see known gaps (Burlington). |
+| 5 TOA overflow (`Rules:`, page iii) | 8 (2%) | A single TOA line on its own page; pairing is meaningless here. See known gaps. |
+| 6–7 Questions Presented, Statement of the Case | 9 (81%), 10 (51%) | Correct pairing. |
+| 8 Statement (cont.), Procedural History | 12 (41%) | Partial; the excerpt's pages follow the filed brief's Statement. |
+| 9–10 Summary, Argument | 22 (58%), 24 (87%) | Correct. |
+| 11 Argument II.A | 26 (56%) | Correct. |
+| 12 Conclusion and signature | 1 (34%, **wrong**) | The pairing picks the cover because the signature block repeats cover words; the filed conclusion is p. 44. A text-pairing limit of `overlay.sh`, not a layout fault. Read this page against exemplar p. 44 by hand. |
+| 13 certificates | 45 (68%) | Correct. |
 
-Overlay: `samples/OVERLAY-chapman-answering-brief.pdf` (14 pages). Visual check: pages 6 and 13 of the overlay were viewed; the red and blue lines are offset by the difference in line pitch and typeface, which is expected from a different typeface, not a layout fault.
+Overlay: `samples/OVERLAY-chapman-answering-brief.pdf` (13 pages), regenerated after the font change. The overlay PDF was not viewed in this pass; the page map `.txt` was read.
 
 ## Pages reviewed
 
-The sample PDF was rendered to PNG at 60 dpi (`pdftoppm -r 60`) and every page was viewed.
+The sample PDF was rendered to PNG at 60 dpi (`pdftoppm -r 60`) and every page was viewed after the font change. The TOC page was viewed again after the page-number change.
 
-- Pages 1–13: viewed on the first render (15 pages at that point).
-- Page 14: re-rendered and viewed after two fixes (below). Pages 1–13 were byte-identical across the two renders (compared by `cmp`), so the first review still holds for them.
+Count: **13 of 13 pages reviewed** (typst).
 
-Count: **14 of 14 pages reviewed**.
-
-Defects found in review and fixed:
+Earlier defects found in review and fixed (still in place):
 
 - The two certificate-of-compliance items ran together as one paragraph. Fixed with a paragraph break.
-- The certificate of service was on its own page (15 pages in total). It now follows the compliance certificate on the same page, as in the exemplar. 14 pages total.
+- The certificate of service was on its own page. It now follows the compliance certificate on the same page, as in the exemplar.
+- In the font pass, the TOC page numbers were in a fixed-width box, and under the wider opening and reply faces the deeper entries' numbers dropped to a new line. The box now takes the number's own width, in all three templates (the answering TOC did not wrap either way).
 
 ## Known gaps
 
@@ -112,7 +120,8 @@ Defects found in review and fixed:
 - **Disclosure statement reproduces the questions and answers only.** The form's bullet instructions are not reproduced. The answers are all "NO" (checked on the exemplar at higher resolution for items 1–3; items 4–7 are the same in the extracted text).
 - **Authorities differ from the exemplar.** The sample's table of authorities lists *Burlington Northern & Santa Fe Railway Co. v. White*, which the sample's Von Gunten parenthetical cites. The exemplar's own table omits it. FRAP 28(a)(3) requires every cited authority, so the sample lists it.
 - **Excerpt, not the whole brief.** The sample transcribes about 1,734 words of 9,350. Pages of the filed argument (II.A.1 onward, II.B, III, the footnotes after note 1) are not in the sample. Its TOA lists only the authorities of the transcribed part.
-- **Typeface.** EB Garamond, not Times New Roman. The certificate names the typeface honestly. FRAP 32(a)(5) is met at 14 pt.
+- **Typeface.** Liberation Serif, the metric-compatible substitute for Times New Roman (the court's notice and the exemplar's face). Visual match is close but not identical to the filed Times New Roman. The certificate names the typeface. FRAP 32(a)(5) is met at 14 pt.
+- **Table of authorities overflow.** The TOA runs onto a third page with one entry (`Rules:` / Fed. R. Civ. P. 56) alone on page iii. The same happens in the LaTeX engine with the Statutes list too. A spacing change would pull it back; not made here, because it is a pagination choice for the whole TOA, not a font fault.
 - **Word count** is computed from the markdown (headings, text, footnotes, quotations; not the cover, tables or signature). It is not a Word count, and for this excerpt it is not the filed count.
 - **"prima facia"** in the source (Section II.A) is the filer's spelling and is kept as transcribed.
 - **Typst page numbers in the TOC and TOA** are for this excerpt; they do not match the exemplar's page numbers, which belong to the full brief.
@@ -122,7 +131,7 @@ Defects found in review and fixed:
 
 Three renderings of the same markdown (`samples/INPUT-chapman-answering-brief.md`). The typst template is the reference.
 
-**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-chapman-answering-brief.latex.pdf`, 12 pages, every page rendered and compared with the typst output. Matches: EB Garamond only (14 pt text and footnotes), double spacing at the typst pitch, 1-inch margins, the cover with judge and date/party line, the FRAP 26.1 disclosure statement (seven yes/no answers), contents and authorities (the authorities list is built from the `toa:` links), Argument point headings in small capitals, centred, and the Argument-only numbering, the certificate of compliance (1,734 words, the same as typst's count) and the certificate of service on the same page as the compliance certificate when it fits. Differs: the cover is tighter (fixed gap); body paragraph and heading spacing differ slightly, so page breaks and folios differ from typst; the disclosure boxes are drawn rather than glyphs. Not checked by `check.sh` (no `checks.yaml` in this court).
+**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-chapman-answering-brief.latex.pdf`, 14 pages (12 before the font change), every page rendered at 50 dpi and viewed. Layout items the font change exposed, not fixed here: the Statutes and Rules lists of the TOA fall onto page iii, and the "CONCLUSION" heading sits at the foot of page 7 with its text on page 8. Matches: Liberation Serif only (14 pt text and footnotes), double spacing at the typst pitch, 1-inch margins, the cover with judge and date/party line, the FRAP 26.1 disclosure statement (seven yes/no answers), contents and authorities (the authorities list is built from the `toa:` links), Argument point headings in small capitals, centred, and the Argument-only numbering, the certificate of compliance (1,734 words, the same as typst's count) and the certificate of service on the same page as the compliance certificate when it fits. Differs: the cover is tighter (fixed gap); body paragraph and heading spacing differ slightly, so page breaks and folios differ from typst; the disclosure boxes are drawn rather than glyphs. Not checked by `check.sh` (no `checks.yaml` in this court).
 
 **docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `samples/OUTPUT-chapman-answering-brief.docx` is written; the `.docx.pdf` is not (see BLOCKED). Styles and sections as in the opening brief. Contents and authorities are Word fields; the TA fields sit after each citation. Certificate word count 1,734.
 
