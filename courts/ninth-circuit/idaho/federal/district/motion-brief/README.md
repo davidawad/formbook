@@ -113,3 +113,23 @@ Every page of `OUTPUT-tarbell-motion-brief.pdf` was rendered at 60 dpi and viewe
 6. **Footers** are 12 pt, the same size as the text, to satisfy "all text" in LR 5.2(a).
 7. **Caption position.** The caption starts at four inches when the counsel block is short enough; with two long counsel groups it sits lower (the rule's exception).
 8. **Second and third exemplars** (Anderson, Robinson) are saved and checked on page 1 only; their text is not used in the sample.
+
+## Engines
+
+Docx engine (`docx/`): `make-reference.sh` builds `docx/reference.docx` (run once; it unpacks in a temp dir), `idd.lua` writes the cover, the signature block and the certificate of service. Output: `samples/OUTPUT-tarbell-motion-brief.docx`.
+
+What the docx sets (in styles.xml, sectPr and footer1.xml; set, not rendered: no LibreOffice on the build box):
+- Page: US Letter, 1 inch margins, footer 0.4 inch from the bottom edge.
+- Font: EB Garamond 12 pt everywhere, footer page number included.
+- Body: exact 24 pt line (double), first-line indent 0.5 inch, no space before or after. Headings: exact 24 pt, bold; level 1 centered caps, level 2 centered bold, level 3 bold left; keep with next.
+- Cover: counsel single-spaced; court title bold, centered; caption as a borderless table whose left cell is ruled on the right and bottom; case number, title and the "[Doc. 26]" docket line in the right cell.
+- Footnotes: native footnotes, 12 pt, single-spaced.
+- Signature: "Dated:" and "Respectfully submitted," in a borderless two-column table.
+- Certificate of service: starts on a new page (page break), heading in the Heading 1 style, text double-spaced, signature in the right column.
+
+What differs from the typst form:
+- Footer: page number only, left-aligned. The typst footer "N - TITLE" needs the case title, which is case-specific, so it is not in the template. Tier 2, OPEN.
+- Caption position and caption rule: as for the complaint; the 4-inch caption position is approximate and not measured.
+- Body: pandoc's paragraphs; no numbering (the memorandum has none).
+
+BLOCKED (docx.pdf gates 0 to 3): `tools/render-docx.sh` writes the `.docx`, then fails at `soffice` because LibreOffice is not installed on the build box. No docx page was rendered or looked at: pages reviewed for docx = 0. The `.docx` was checked only as a valid zip with well-formed XML parts (xmllint); it was not opened in Word or LibreOffice.

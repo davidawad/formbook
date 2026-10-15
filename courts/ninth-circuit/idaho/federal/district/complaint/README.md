@@ -109,3 +109,23 @@ Compared with `FILED-EXAMPLE-tarazona-castro-…` and `FILED-EXAMPLE-wilcox-…`
 6. **Footers** are 12 pt, the same size as the text, to satisfy "all text" in LR 5.2(a).
 7. **Caption position.** The caption starts at four inches when the counsel block is short enough. The Tarazona counsel block is long, so the caption sits lower (the rule's exception). The template does not warn when the counsel block pushes the caption down.
 8. **Court title, e-mail and fax** are rendered as the frontmatter gives them; the template does not reformat them.
+
+## Engines
+
+Docx engine (`docx/`): `make-reference.sh` builds `docx/reference.docx` (run once; it unpacks in a temp dir), `idd.lua` writes the cover, the numbered paragraphs, the lettered prayer items and the signature block. Output: `samples/OUTPUT-tarazona-castro-complaint.docx`.
+
+What the docx sets (in styles.xml, sectPr and footer1.xml; set, not rendered: no LibreOffice on the build box):
+- Page: US Letter, 1 inch margins, footer 0.4 inch from the bottom edge.
+- Font: EB Garamond 12 pt everywhere, footer page number included.
+- Body: exact 24 pt line (double), first-line indent 0.5 inch, no space before or after. Headings: exact 24 pt, bold; level 1 centered caps, level 2 centered bold, level 3 bold left; keep with next.
+- Cover: counsel single-spaced; court title bold, centered; caption as a borderless table whose left cell is ruled on the right and bottom; case number, title and "DEMAND FOR JURY TRIAL" in the right cell; signature block as a borderless two-column table.
+- Footnotes: 12 pt, single-spaced (none in this sample).
+- Numbering: the filter writes "1.", "2." ... as text plus a tab (not a Word list), and "(a)" ... for the prayer list.
+
+What differs from the typst form:
+- Footer: page number only, left-aligned. The typst footer "N - TITLE" needs the case title, which is case-specific, so it is not in the template. Tier 2, OPEN.
+- Caption position: the typst caption starts at 4 inches (or below a long counsel block). The docx uses empty paragraphs between blocks, so the caption position is approximate and not measured.
+- Caption rule: a table border, drawn the same way as the typst rule; its exact length and offset are not checked.
+- Paragraph numbers are text, so they do not renumber if a paragraph is inserted by hand.
+
+BLOCKED (docx.pdf gates 0 to 3): `tools/render-docx.sh` writes the `.docx`, then fails at `soffice` because LibreOffice is not installed on the build box (no `soffice` on this machine; conda-forge has none). No docx page was rendered or looked at: pages reviewed for docx = 0. The `.docx` was checked only as a valid zip with well-formed XML parts (xmllint); it was not opened in Word or LibreOffice, so "opens without a repair prompt" is unverified.
