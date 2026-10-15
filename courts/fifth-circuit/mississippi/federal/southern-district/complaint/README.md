@@ -77,3 +77,11 @@ Sources, fetched 2026-10-14:
 - Page 10: prayer items b. to f.; signature block on the right half: "Respectfully submitted," "/s/ Marshall Goff", counsel block, "Facsimile: None", e-mail, "ATTORNEY FOR PLAINTIFF". Pass (the page was viewed after the last template change).
 
 Overlay: the overlay pairs each page of our render with the exemplar page sharing the most words. The word overlap runs from 49% (page 6) to 95% (page 1), with the caption and opening pages matching best. The overlay is a diagnostic, not a score: differences are expected at the caption (font and wrapping) and in the paragraph layout (a 13 pt face wraps lines differently from Times 12 pt).
+
+## Engines
+
+- **docx** (`docx/reference.docx`, built by `docx/build-reference.sh`; filter `docx/mssd-complaint.lua`). Samples: `samples/OUTPUT-mariano-complaint.docx` and `.docx.pdf` (10 pages, the same as typst). Checked by hand: the LibreOffice PDF was viewed page by page (10 of 10) against the typst render (10 of 10). Opened with LibreOffice only: the conversion succeeds and the parts are well-formed XML; Word was not available and was not checked.
+- Matches typst: EB Garamond 13 pt (embedded in the PDF, no other face), US Letter, 1 in margins, exact 27.6 pt double spacing (the typst pitch is 27.56 pt), 0.5 in first-line indent, single-spaced court title, caption, headings and signature block (exact 11.7 pt, the typst pitch), the caption table with "CIVIL ACTION NO." on the right, centered bold caps section headings, centered bold count headings, the page number centered in the footer, lettered lists a., b., ... with a hanging indent, the signature block at 3 in.
+- Differs, and why: (1) Paragraph numbers 1 to 56 and list letters are typed text followed by a tab to a style tab stop. pandoc drops the numbering part of a reference.docx, so Word auto-numbering is not available; inserting a paragraph does not renumber the ones after it. (2) Pagination: LibreOffice puts exact-spacing leading above the text, so a page holds 23 double-spaced lines where typst holds 24. The page count matches here (10), but page breaks fall elsewhere; Word may differ again.
+- BLOCKED: none.
+- `tools/check.sh` was not run on this folder: it needs the court's `court.json` and `checks.yaml`, which this doc-type folder does not have.
