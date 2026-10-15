@@ -1,0 +1,464 @@
+% U.S. Court of Appeals for the Federal Circuit: opening brief (principal brief of the appellant), LaTeX engine.
+%
+% Rule-driven and content-agnostic, the same layout as ../typst/cafc-opening-brief.typ (the reference for this
+% court). No case-specific text, no coordinates measured off any filed brief, no forced line breaks. Built by
+% latex/render.sh: pandoc reads the markdown with cafc.lua (the same directory), this template is compiled with
+% tectonic, and the contents and authorities are written to the aux file and read back on the next pass.
+%
+% Pandoc variables: fontdir and body_pitch (set by render.sh), the frontmatter fields, words_fmt, toa, addendum,
+% keep_signature (set by cafc.lua).
+\documentclass[letterpaper,12pt]{article}
+\usepackage{fontspec}
+% FRAP 32(a)(4): at least one inch on all four sides. The page number sits in the footer below the margin.
+\usepackage[letterpaper,left=1in,right=1in,top=1in,bottom=1in,headheight=0pt,headsep=0pt,footskip=33bp]{geometry}
+\usepackage{needspace}
+\usepackage{changepage}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref} % bookmarks are written by \ca@bookmark
+\makeatletter
+
+% ---------------------------------------------------------------------------
+% Parameters: the only numbers in this file, each traces to the typst template's parameters
+% ---------------------------------------------------------------------------
+
+% FRAP 32(a)(5)(A): a proportionally spaced serif face, 14 point or larger. Vendored in fonts/eb-garamond/.
+\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf,
+  UprightFont=EBGaramond-Regular, BoldFont=EBGaramond-Bold,
+  ItalicFont=EBGaramond-Italic, BoldItalicFont=EBGaramond-BoldItalic,
+  Ligatures=TeX]{EBGaramond-Regular}
+
+% Sizes are in big points (bp, the unit of the PDF's coordinates; typst's pt is the same unit).
+% Body: 14 pt with double spacing (FRAP 32(a)(4)): the baseline pitch is body_pitch (31.43 bp for 0.94em).
+% Single spacing (headings, quotations, footnotes, contents, authorities, certificates): 19.95 bp pitch.
+\newcommand\ca@type{\fontsize{14bp}{$body_pitch$}\selectfont}
+\newcommand\ca@single{\fontsize{14bp}{19.95bp}\selectfont}
+\newlength\ca@half \setlength{\ca@half}{0.5in}          % para-indent and heading tab (0.5 in)
+
+% Hyphenation off: a word must come out of the PDF whole.
+\lefthyphenmin=100
+\righthyphenmin=100
+\tolerance=2000
+\clubpenalty=0
+\widowpenalty=0
+\displaywidowpenalty=0
+\hbadness=10000
+\raggedright
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{0pt}
+\setlength{\headheight}{0pt}
+\pagestyle{plain}
+
+% Lists and the pandoc helpers the writer may emit.
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\pandocbounded}[1]{#1}
+\setlist{itemsep=0pt, parsep=0pt, topsep=0pt, leftmargin=0.5in, labelsep=0.5em}
+
+% Footnotes: 14 pt, single-spaced, the number superscript then a thin space.
+\renewcommand\footnotesize{\ca@single}
+\setlength{\footnotesep}{7bp}
+\setlength{\skip\footins}{12.6bp}
+\renewcommand\footnoterule{\kern-3pt\hrule width 0.3\textwidth height 0.5pt\kern 2.6pt}
+\renewcommand\@makefntext[1]{\noindent\textsuperscript{\@thefnmark}\hskip 0.25em #1}
+
+% Block quotations: indented 0.5 in both sides, single-spaced.
+\renewenvironment{quote}{%
+  \par\addvspace{\baselineskip}%
+  \begin{adjustwidth}{\ca@half}{\ca@half}\ca@single\setlength{\parindent}{0pt}%
+}{%
+  \end{adjustwidth}\par\addvspace{\baselineskip}%
+}
+
+% ---------------------------------------------------------------------------
+% Counters and the heading system (Argument labels: I. / A. / 1. / a.; elsewhere A. / 1. / a. / (1))
+% ---------------------------------------------------------------------------
+\newcounter{caone}
+\newcounter{catwo}[caone]
+\newcounter{cathree}[catwo]
+\newcounter{cafour}[cathree]
+\newcounter{cafive}[cafour]
+\newcounter{caseq}
+\newif\ifca@inarg
+\newif\ifca@inadd
+\def\ca@argtrue{\global\ca@inargtrue}  % global: a minipage or a samepage group is a group
+\def\ca@argfalse{\global\ca@inargfalse}
+\def\ca@addtrue{\global\ca@inaddtrue}
+
+% The label of a numbered heading of level #1.
+\newcommand\ca@labelof[1]{%
+  \ifca@inarg
+    \ifcase#1 \or \or \Roman{catwo}. \or \Alph{cathree}. \or \arabic{cafour}. \or \alph{cafive}. \fi
+  \else
+    \ifcase#1 \or \or \Alph{catwo}. \or \arabic{cathree}. \or \alph{cafour}. \or (\arabic{cafive}) \fi
+  \fi}
+
+% The separator between a contents entry's label and its title: robust, so it reaches the aux file as a token.
+\DeclareRobustCommand\ca@sep{}
+
+% ---- bookmarks, anchors ---------------------------------------------------
+\newcommand\ca@bookmark[2]{%
+  \stepcounter{caseq}%
+  \hypertarget{ca.\arabic{caseq}}{}%
+  \pdfbookmark[#1]{#2}{ca.\arabic{caseq}}%
+}
+
+% ---- level 1: section headings, bold capitals, centered --------------------------------------------------
+% #1 title, #2 the contents entry. The title is set at 1.15 times the type size, as in the typst template.
+\newcommand\ca@sechead[2]{%
+  \ca@bookmark{1}{#1}%
+  \needspace{120bp}\par\vspace{21bp}%
+  \begingroup\interlinepenalty=10000\centering\fontsize{16.1bp}{19.95bp}\selectfont\bfseries\leavevmode#2\MakeUppercase{#1}\par\endgroup%
+  \nopagebreak\addvspace{15.4bp}\nobreak}
+
+% ---- level 2 in the Argument: centered point heading, bold small capitals -----
+\newcommand\ca@pointhead[3]{% #1 label, #2 title, #3 the contents entry
+  \needspace{50bp}\par\vspace{16.8bp}%
+  \begingroup\interlinepenalty=10000\centering\ca@single\bfseries\addfontfeature{Letters=SmallCaps}\leavevmode#3#1 #2\par\endgroup%
+  \nopagebreak\addvspace{14bp}\nobreak}
+
+% ---- sub-headings: label in a box at indent #1; the title hangs under the text ------------------
+\newcommand\ca@subhead[5]{% #1 indent, #2 label width, #3 label, #4 title (already styled), #5 the contents entry
+  \needspace{50bp}\par\vspace{15.4bp}%
+  \begingroup\interlinepenalty=10000\noindent\ca@single\hangindent=\dimexpr#1+#2\relax\hangafter=1\relax
+  \hskip#1\relax#5\makebox[#2][l]{#3}#4\par\endgroup
+  \nopagebreak\addvspace{12.6bp}\nobreak}
+
+\newcommand\ca@hone[1]{%
+  \stepcounter{caone}%
+  \protected@edef\ca@tmp{\protect\ca@sep #1}%
+  \ca@sechead{#1}{\ca@tocwrite{toc}{tocone}{\ca@tmp}}}
+\newcommand\ca@htwo[1]{%
+  \stepcounter{catwo}%
+  \protected@edef\ca@tmp{\ca@labelof{2}\protect\ca@sep #1}%
+  \ifca@inarg
+    \ca@pointhead{\ca@labelof{2}}{#1}{\ca@tocwrite{toc}{tocATwo}{\ca@tmp}}%
+  \else
+    \ca@subhead{\ca@half}{\ca@half}{\ca@labelof{2}}{\textbf{#1}}{\ca@tocwrite{toc}{tocOTwo}{\ca@tmp}}%
+  \fi}
+\newcommand\ca@hthree[1]{%
+  \stepcounter{cathree}%
+  \protected@edef\ca@tmp{\ca@labelof{3}\protect\ca@sep #1}%
+  \ifca@inarg
+    \ca@subhead{\ca@half}{\ca@half}{\ca@labelof{3}}{\textbf{#1}}{\ca@tocwrite{toc}{tocAThree}{\ca@tmp}}%
+  \else
+    \ca@subhead{2\ca@half}{\ca@half}{\ca@labelof{3}}{\textbf{#1}}{\ca@tocwrite{toc}{tocOThree}{\ca@tmp}}%
+  \fi}
+\newcommand\ca@hfour[1]{%
+  \stepcounter{cafour}%
+  \protected@edef\ca@tmp{\ca@labelof{4}\protect\ca@sep #1}%
+  \ifca@inarg
+    \ca@subhead{2\ca@half}{\ca@half}{\ca@labelof{4}}{\textbf{\emph{#1}}}{\ca@tocwrite{toc}{tocAFour}{\ca@tmp}}%
+  \else
+    \ca@subhead{3\ca@half}{\ca@half}{\ca@labelof{4}}{\textbf{\emph{#1}}}{\ca@tocwrite{toc}{tocOFour}{\ca@tmp}}%
+  \fi}
+\newcommand\ca@hfive[1]{%
+  \stepcounter{cafive}%
+  \ifca@inarg
+    \ca@subhead{3\ca@half}{\ca@half}{\ca@labelof{5}}{\textbf{\emph{#1}}}{}%
+  \else
+    \ca@subhead{4\ca@half}{\ca@half}{\ca@labelof{5}}{\textbf{\emph{#1}}}{}%
+  \fi}
+
+% Addendum headings are unnumbered, bold, at the margin, and listed in the addendum's own contents.
+\newcommand\ca@addhead[2]{%
+  \ifnum#1=2
+    \protected@edef\ca@tmp{\protect\ca@sep #2}%
+    \ca@subhead{0pt}{0pt}{}{\textbf{#2}}{\ca@tocwrite{add}{tocAdd}{\ca@tmp}}%
+  \else
+    \ca@subhead{0pt}{0pt}{}{\textbf{#2}}{}%
+  \fi}
+
+\newcommand\ca@head[2]{%
+  \par%
+  \ifca@inadd \ca@addhead{#1}{#2}\else
+    \ifcase#1 \or \ca@hone{#2}\or \ca@htwo{#2}\or \ca@hthree{#2}\or \ca@hfour{#2}\or \ca@hfive{#2}\fi
+  \fi}
+% Pandoc labels every heading. The brief has no cross-references, so labels are dropped.
+\renewcommand\label[1]{}
+\renewcommand\section[1]{\ca@head{1}{#1}}
+\renewcommand\subsection[1]{\ca@head{2}{#1}}
+\renewcommand\subsubsection[1]{\ca@head{3}{#1}}
+\renewcommand\paragraph[1]{\ca@head{4}{#1}}
+\renewcommand\subparagraph[1]{\ca@head{5}{#1}}
+
+% ---- contents data: written to the aux file, read back in the next pass ----------------------------
+% The page of each entry is only known when the page ships out, so the entries go to the aux file (as the
+% table of authorities does): when they change, the next pass is run and the contents are right.
+\newcommand\ca@tocwrite[3]{% #1 list (toc or add), #2 entry kind, #3 entry text
+  \protected@write\@auxout{}{\string\ca@tocaux{#1}{#2}{#3}{\thepage}}}
+\newcommand\ca@tocaux[4]{%
+  \expandafter\g@addto@macro\csname ca@items@#1\endcsname{\ca@tocentryraw{#2}{#3}{#4}}}
+\newcommand\ca@tocentryraw[3]{\csname l@#1\endcsname{#2}{#3}}
+\newcommand\ca@printtoc[1]{\csname ca@items@#1\endcsname}
+\expandafter\def\csname ca@items@toc\endcsname{}
+\expandafter\def\csname ca@items@add\endcsname{}
+
+% ---- contents: one entry per heading; dot leaders; the page on the last line; wrapped lines hang --------
+% #1 indent of the entry, #2 width of the label box, #3 label, #4 title, #5 page.
+\newcommand\ca@tocline[5]{%
+  \begingroup\par\addvspace{0.35\baselineskip}%
+  \noindent\hangindent=\dimexpr#1+#2\relax\hangafter=1\relax
+  \rightskip=\ca@rtoc\parfillskip=\ca@ptoc
+  \hskip#1\relax\makebox[#2][l]{#3}#4\nobreak\ %
+  \leaders\hbox to 0.4em{\hss.\hss}\hskip 2.5em plus 1fill\hbox to \ca@pnumtoc{\hss#5}\par\endgroup}
+% The entry's text is "label\ca@sep title" and its page follows: split it, then set the line.
+\def\ca@tocsplit#1#2#3\ca@sep#4\ca@end#5{\ca@tocline{#1}{#2}{#3}{#4}{#5}}
+\def\ca@tocsplitU#1#2#3\ca@sep#4\ca@end#5{\ca@tocline{#1}{#2}{#3}{\MakeUppercase{#4}}{#5}}
+\newcommand*\l@tocone[2]{\ca@tocsplitU{0pt}{0pt}#1\ca@end{#2}}
+\newcommand*\l@tocOTwo[2]{\ca@tocsplit{\ca@half}{\ca@half}#1\ca@end{#2}}
+\newcommand*\l@tocOThree[2]{\ca@tocsplit{2\ca@half}{\ca@half}#1\ca@end{#2}}
+\newcommand*\l@tocOFour[2]{\ca@tocsplit{3\ca@half}{\ca@half}#1\ca@end{#2}}
+\newcommand*\l@tocATwo[2]{\ca@tocsplit{0pt}{\ca@half}#1\ca@end{#2}}
+\newcommand*\l@tocAThree[2]{\ca@tocsplit{\ca@half}{\ca@half}#1\ca@end{#2}}
+\newcommand*\l@tocAFour[2]{\ca@tocsplit{2\ca@half}{\ca@half}#1\ca@end{#2}}
+\newcommand*\l@tocAdd[2]{\ca@tocsplit{0pt}{0pt}#1\ca@end{#2}}
+
+% ---------------------------------------------------------------------------
+% Table of authorities (page numbers are written to the aux file where each citation starts, then read back)
+% ---------------------------------------------------------------------------
+\newcommand\ca@pagesep{, }
+\ExplSyntaxOn
+\cs_new_protected:Npn \ca@toaentry #1 #2
+  {
+    \seq_if_exist:cF { g_ca_toa_#1_seq } { \seq_new:c { g_ca_toa_#1_seq } }
+    \seq_if_in:cnF { g_ca_toa_#1_seq } { #2 }
+      { \seq_gput_right:cn { g_ca_toa_#1_seq } { #2 } }
+  }
+\cs_new:Npn \ca@toapages #1
+  {
+    \seq_if_exist:cTF { g_ca_toa_#1_seq }
+      {
+        \int_compare:nNnTF { \seq_count:c { g_ca_toa_#1_seq } } > { 6 }
+          { \emph{passim} }
+          { \seq_use:cn { g_ca_toa_#1_seq } { \ca@pagesep } }
+      }
+      { }
+  }
+\ExplSyntaxOff
+
+% A citation: the write sits before the cited text, so the page is where the citation begins.
+\newcommand\ca@toahit[1]{\protected@write\@auxout{}{\string\ca@toaentry{#1}{\thepage}}}
+\newcommand\ca@toacite[2]{\ca@toahit{#1}#2}
+\newcommand\ca@toagroup[1]{\par\addvspace{1.4\baselineskip}\noindent\textbf{#1}\par\nopagebreak} % the label stays with its first entry
+\newcommand\ca@toagroupfirst[1]{\par\noindent\textbf{#1}\hfill\underline{\textbf{Page(s)}}\par\nobreak}
+\newcommand\ca@toaline[2]{%
+  \begingroup\par\addvspace{0.7\baselineskip}\noindent\hangindent=0.35in\hangafter=1\relax
+  \rightskip=\ca@rtoa\parfillskip=\ca@ptoa
+  #2\nobreak\ \leaders\hbox to 0.4em{\hss.\hss}\hskip 2.5em plus 1fill\hbox to \ca@pnumtoa{\hss\ca@toapages{#1}}\par\endgroup}
+
+% ---------------------------------------------------------------------------
+% Cover (FRAP 32(a)(2); Fed. Cir. R. 32(a)(1): the clerk's official caption)
+% ---------------------------------------------------------------------------
+\newcommand\ca@dblrule{\par\noindent\rule{\linewidth}{1.6pt}\par\vspace{2.5pt}\noindent\rule{\linewidth}{0.5pt}\par}
+\newcommand\ca@shortrule{\par\begingroup\centering\rule{2in}{0.7pt}\par\endgroup}
+\def\ca@bodyendpage{0}
+\newlength\ca@pnumtoc \setlength{\ca@pnumtoc}{36bp}  % contents: page numbers in 36 bp
+\newlength\ca@pnumtoa \setlength{\ca@pnumtoa}{56bp}  % authorities: lists such as 1, 4, 6, 8, 9
+% The right skip of an entry: its page numbers sit in the last 36 bp (contents) or 56 bp (authorities) of the line.
+\newskip\ca@rtoc \ca@rtoc=36bp plus 1fil
+\newskip\ca@ptoc \ca@ptoc=-36bp
+\newskip\ca@rtoa \ca@rtoa=56bp plus 1fil
+\newskip\ca@ptoa \ca@ptoa=-56bp
+
+% The cover's gaps are stretchable: the cover is one page whatever the length of the counsel and party lines.
+\newcommand\ca@cgap{\vskip 0pt plus 1fill minus 14bp}
+
+% ---------------------------------------------------------------------------
+% Front matter pieces (certificate of interest, related cases) and the signature blocks
+% ---------------------------------------------------------------------------
+% A front-matter heading: a level-1 section, listed in the contents.
+\newcommand\ca@front[1]{\ca@sechead{#1}{\ca@tocwrite{toc}{tocone}{\ca@sep #1}}}
+
+% A numbered item of a certificate: hangs 0.5 in, 0.9 line above.
+\newcommand\ca@item[2]{% #1 number, #2 text
+  \par\addvspace{0.9\baselineskip}\noindent\hangindent=0.5in\hangafter=1\relax
+  #1.\hskip0.2em #2\par}
+
+% A signature line of a certificate filed by counsel (Form 9 style): "Is/" then the name, the date.
+\newcommand\ca@certsig[2]{% #1 prefix, #2 signer
+  \par\nobreak\addvspace{1.6\baselineskip}\nobreak
+  \begin{flushleft}\hspace*{0.5\linewidth}\begin{minipage}[t]{0.5\linewidth}\raggedright
+  #1 #2\par\MakeUppercase{#2}\par
+  $if(date)$\addvspace{0.8\baselineskip}$date$\par$endif$
+  \end{minipage}\end{flushleft}}
+
+% ---------------------------------------------------------------------------
+% The document
+% ---------------------------------------------------------------------------
+\begin{document}
+
+% ---- cover: one page, no number -------------------------------------------------------------------------
+\thispagestyle{empty}
+\begingroup\ca@single\centering
+\ca@cgap
+\bfseries $case_number$\par
+\ca@cgap
+\ca@dblrule
+\ca@cgap
+\bfseries UNITED STATES COURT OF APPEALS FOR THE FEDERAL CIRCUIT\par
+\ca@cgap
+\ca@shortrule
+\ca@cgap
+\mdseries
+$for(caption)$
+$for(caption.names)$$caption.names$\par
+$endfor$
+\hspace*{0.5\linewidth}\begin{minipage}[t]{0.5\linewidth}\raggedright $caption.designation$\end{minipage}\par
+$sep$\ca@cgap v.\ca@cgap\par
+$endfor$
+\ca@cgap
+\ca@shortrule
+\ca@cgap
+$proceeding$\par
+\ca@cgap
+\ca@shortrule
+\ca@cgap
+\bfseries\MakeUppercase{$brief_title$}\par
+\mdseries
+\ca@cgap
+\ca@shortrule
+\ca@cgap
+\endgroup
+\begin{flushleft}\hspace*{0.5\linewidth}\begin{minipage}[t]{0.5\linewidth}\raggedright\ca@single
+$for(counsel)$
+$for(counsel.names)$$counsel.names$\par
+$endfor$
+$for(counsel.lines)$\hspace*{0.5em}\emph{$counsel.lines$}\par
+$endfor$
+$sep$\vspace{0.5\baselineskip}
+$endfor$
+\hspace*{0.5em}\emph{$phone$}\par
+\end{minipage}\end{flushleft}
+\ca@cgap
+\ca@dblrule
+\clearpage
+
+% ---- front matter: lower-case roman, the cover unnumbered ----
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+% Certificate of interest (Fed. Cir. R. 47.4; Form 9)
+\ca@single
+\ca@front{Certificate of Interest}
+\ca@single\setlength{\parindent}{0pt}
+\noindent Counsel for $interest_for$ certifies the following:\par
+\ca@item{1}{The full name of every party or amicus represented by me is: $interest.represented$.}
+\ca@item{2}{The name of the real party in interest represented by me is: $interest.real_party$.}
+\ca@item{3}{All parent corporations and any publicly held companies that own 10 percent of the stock of a party or amicus curiae represented by me are: $interest.parents$.}
+\ca@item{4}{The names of all law firms and the partners and associates that (a) appeared for the entities in the originating court or agency or (b) are expected to appear in this court for the entities not including those who have already entered an appearance in this court: $interest.other_counsel$.}
+\ca@item{5}{$if(related_cases.cases)$Related or prior cases meeting the criteria under Fed. Cir. R. 47.5(a) are listed in the Statement of Related Cases.$else$I am unaware of any cases pending in this or any other court or agency that meet the criteria under Fed. Cir. R. 47.5(a). I am unaware of any cases pending that will directly affect or be directly affected by this court's decision in the pending appeal.$endif$}
+\ca@certsig{Is/}{$signature.signer$}
+\clearpage
+
+% Table of contents: the brief's own headings, the front matter, and the addendum's entry (Add-1)
+\ca@single
+\begin{center}\bfseries TABLE OF CONTENTS\par\end{center}
+\ca@tocwrite{toc}{tocone}{\ca@sep Table of Contents}
+\begin{flushright}\underline{\bfseries Page}\par\end{flushright}
+\ca@printtoc{toc}
+\clearpage
+
+% Table of authorities
+\ca@single
+\ca@tocwrite{toc}{tocone}{\ca@sep Table of Authorities}
+\begin{center}\bfseries TABLE OF AUTHORITIES\par\end{center}
+$toa$
+\clearpage
+
+% Statement of related cases (Fed. Cir. R. 28(a)(4), 47.5)
+\ca@single
+\ca@front{Statement of Related Cases}
+\ca@single
+\noindent Pursuant to Federal Circuit Rules 28(a)(4) and 47.5, counsel for $interest_for$ certifies:\par
+$if(related_cases.cases)$
+$for(related_cases.cases)$
+\ca@item{$related_cases.cases.index$}{$related_cases.cases$}
+$endfor$
+$else$
+\ca@item{1}{I am unaware of any other appeal in or from the same civil action or proceeding in the originating tribunal that was previously before this or any other appellate court.}
+\ca@item{2}{I am unaware of any case pending in this or any other tribunal that will directly affect or be directly affected by this court's decision in the pending case.}
+$endif$
+\ca@certsig{Is/}{$signature.signer$}
+
+% ---- the brief: Arabic from 1 ----
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\ca@type
+\raggedright
+\setlength{\parindent}{0.5in}
+$body$
+
+% The signature block follows the conclusion; the last paragraph of the brief stays with it (cafc.lua).
+\par\nobreak\addvspace{1.4\baselineskip}\nobreak
+\ca@single
+\begin{flushleft}\hspace*{0.5\linewidth}\begin{minipage}[t]{0.5\linewidth}\raggedright
+Respectfully submitted,\par\vspace{1.2\baselineskip}
+/s/ $signature.signer$\par
+\MakeUppercase{$signature.signer$}\par
+$for(signature.lines)$\hspace*{0.5em}\emph{$signature.lines$}\par
+$endfor$
+\end{minipage}\end{flushleft}
+$if(date)$\vspace{0.8\baselineskip}\noindent $date$\par$endif$
+$if(keep_signature)$\end{minipage}$endif$
+\protected@write\@auxout{}{\string\gdef\string\ca@bodyendpage{\thepage}}
+
+% ---- addendum (Fed. Cir. R. 28(a)(11), 28(c)): Add-1, Add-2, ...; its own contents of level-2 headings ----
+$if(addendum)$
+\clearpage
+\renewcommand\thepage{Add-\arabic{page}}
+\setcounter{page}{1}
+\ca@addtrue
+\ca@single
+\ca@front{Addendum}
+\ca@single
+\begin{center}\bfseries TABLE OF CONTENTS\par\end{center}
+\ca@printtoc{add}
+\clearpage
+\ca@type
+$addendum$
+$endif$
+
+% ---- certificates (Fed. Cir. R. 28(a)(12)): arabic pagination continues from the body ----
+\clearpage
+\renewcommand\thepage{\arabic{page}}
+\global\ca@inaddfalse
+\setcounter{page}{\numexpr\ca@bodyendpage+1\relax}
+\ca@single
+\ca@sechead{Certificate of Compliance with Type-Volume Limitations}{}
+\ca@single
+\noindent Case Number: $case_number$\par
+\noindent Short Case Caption: $short_caption$\par
+\addvspace{\baselineskip}
+\noindent The foregoing filing complies with the relevant type-volume limitation of the Federal Rules of Appellate Procedure and Federal Circuit Rules because it meets one of the following:\par
+\addvspace{0.8\baselineskip}
+\begin{adjustwidth}{1.6em}{0pt}\noindent \fbox{\rule{0pt}{0.72em}\hspace{0.72em}\makebox[0pt]{\hspace{0.1em}\textbf{X}}}\hspace{0.6em}the filing has been prepared using a proportionally-spaced typeface and includes $words_fmt$ words.\par\end{adjustwidth}
+\addvspace{0.8\baselineskip}
+\begin{adjustwidth}{1.6em}{0pt}\noindent \fbox{\rule{0pt}{0.72em}\hspace{0.72em}}\hspace{0.6em}the filing has been prepared using a monospaced typeface and includes \rule{2.5em}{0.4pt} lines of text.\par\end{adjustwidth}
+\addvspace{0.8\baselineskip}
+\begin{adjustwidth}{1.6em}{0pt}\noindent \fbox{\rule{0pt}{0.72em}\hspace{0.72em}}\hspace{0.6em}the filing contains \rule{2.5em}{0.4pt} pages / \rule{2.5em}{0.4pt} words / \rule{2.5em}{0.4pt} lines of text, which does not exceed the maximum authorized by this court's order (ECF No. \rule{2.5em}{0.4pt}).\par\end{adjustwidth}
+\par\nobreak\addvspace{1.6\baselineskip}\nobreak
+\noindent Date: $date$\par
+\noindent Signature: /s/ $signature.signer$\par
+\noindent Name: \MakeUppercase{$signature.signer$}\par
+
+% ---- certificate of service (Form 30), only when service.certificate is true ----
+$if(service.certificate)$
+\clearpage
+\ca@single
+\ca@sechead{Certificate of Service}{}
+\ca@single
+\noindent I hereby certify under penalty of perjury that on $date$, a copy of the foregoing ``$brief_title$'' was filed electronically and served via the Court's ECF system.\par
+$if(service.unregistered)$
+\addvspace{\baselineskip}
+\noindent I further certify that on the same date I served the foregoing by U.S. Mail on the following persons, who are not registered for electronic filing:\par
+$for(service.unregistered)$
+\begin{adjustwidth}{0.5in}{0pt}$service.unregistered.name$, $service.unregistered.address$\end{adjustwidth}\addvspace{0.7\baselineskip}
+$endfor$
+$endif$
+\ca@certsig{Is/}{$signature.signer$}
+$endif$
+
+\end{document}

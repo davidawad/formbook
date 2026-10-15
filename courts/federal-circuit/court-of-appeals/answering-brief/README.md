@@ -71,3 +71,29 @@ Pages 6 and 7 were the ones that moved when the leading changed; they were re-ch
 ## Rendering
 
 Typst 0.15.0, EB Garamond (vendored in `fonts/eb-garamond/`), cmarker 0.1.10 (vendored in `vendor/typst-packages/`). `tools/render.sh` runs with `--ignore-system-fonts`; the build emitted no warnings.
+
+## Engines
+
+The typst template is the reference. The LaTeX and docx engines are built from the same markdown contract (`docs/EVAL-LOOP.md`, "Engines").
+
+| Engine | Files | Output (`samples/`) | Pages |
+|---|---|---|---|
+| typst (reference) | `typst/` | `OUTPUT-ablynx-answering-brief.pdf` | 13 |
+| latex | `latex/template.tex`, `latex/cafc.lua`, `latex/render.sh` (tectonic) | `OUTPUT-ablynx-answering-brief.latex.pdf` | 14 |
+| docx | `docx/reference.docx` (`docx/make-reference.sh`, `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-ablynx-answering-brief.docx` and `.docx.pdf` | 14 |
+
+**Matches the typst layout:** 14 pt EB Garamond, double spacing at the typst pitch (32.13 pt, 0.99em leading); 1 in margins; the cover; contents and authorities with page numbers; the Roman section headings (I. to V.) hanging at the margin with the A./1. sub-headings; the statement of related cases; the certificate of compliance with the signature under it; the certificate of service; the footers (roman then arabic).
+
+**Differs from the typst layout:**
+
+- One page longer in both engines (14 against 13). The extra page comes from the body's line breaks, so the sub-headings fall a few lines later than in typst.
+- latex: the signature block is kept with the last paragraph of the conclusion, so the conclusion's text and the signature are on consecutive pages, but the signature block itself starts a page of its own (page 9). Typst keeps the tail of the brief with the signature on the same page.
+- docx: the contents and authorities are static text, numbered from the LibreOffice render (see the opening brief's Engines note for the limits: TA fields, Word pagination, `Id.` citations).
+- docx word counts use pandoc's tokenization, so they can differ from typst by a few words (opening brief: 2,481 against typst's 2,484).
+
+**docx items not verified:** not opened in Word; converted with LibreOffice only.
+
+**Status:** latex render ok; docx render ok. No gate was run (no `checks.yaml` or `check.sh` for this court in this snapshot). The page review is visual.
+
+**Pages viewed:** all 14 pages of the latex render and all 14 of the docx render, at 30 to 40 dpi, in the final state.
+
