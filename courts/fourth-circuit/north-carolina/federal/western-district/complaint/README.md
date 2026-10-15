@@ -111,3 +111,12 @@ Each page was rendered at 60 dpi and viewed after the last template change.
 - Page 8: date, "Respectfully submitted," and the two firm blocks (signer's "By: /s/" line; co-counsel with no "By"). Pass.
 
 Gate 2 rows for these pages are recorded here (this doc type has no `reviews/` folder).
+
+## Engines
+
+**docx** (`docx/reference.docx` built by `docx/make-reference.sh`; `docx/complaint.lua` builds the caption, the numbering, the prayer letters and the signature block). Output: `samples/OUTPUT-bell-complaint.docx` and `samples/OUTPUT-bell-complaint.docx.pdf` (LibreOffice, 8 pages, the same page count as typst). Checked by eye, not by `tools/check.sh` (this court has no `checks.yaml` yet). Not opened in Word; `unzip -tq` and `xmllint` pass on every XML part, and LibreOffice converted it without error.
+
+- *Matches typst:* EB Garamond 12 pt (the PDF embeds EB Garamond Regular and Bold only); US Letter with one-inch margins; double-spaced body at the same 27.6 pt pitch and single lines at 13.8 pt (`pdftotext -bbox`: body and caption pitches equal in both PDFs); the caption top at the same place (109 pt from the page top); the caption (party column, ")" column, right column with "Civil Action No.:", the bold title and the jury legend); the court title; the lead-in; allegations numbered 1 to 34 with the same first-line indent; the prayer lettered A. to K.; the jury demand; the signature block at the right half, with "Dated:", "Respectfully submitted," and "By: /s/" for the signer; a centered page number on every page.
+- *Differs (tier 2):* line breaks differ from typst's in places (LibreOffice and typst break lines differently), so some page breaks fall at other lines and the signature block moves to page 8 in both, with the jury demand on page 7 in typst and on page 8 in docx. Section headings are 17 pt and sub-headings 14.5 pt to approximate typst's default heading sizes (typst sets them at 1.4 and 1.2 em); the space around a heading is within a few points of typst's but not identical. Numbers are followed by a tab to the one-inch stop, not typst's 0.3 in gap. The quoted `>` chunks are set with the first-line indent, as in typst. Word may substitute a font if EB Garamond is not installed on the reader's machine.
+- *Pages reviewed:* docx pages 1 to 8 of `OUTPUT-bell-complaint.docx.pdf` (all 8), and typst pages 1 to 8 of the typst render (all 8), at 60 dpi.
+- *BLOCKED:* none. The complaint has no table of contents or table of authorities, so no field is needed; the caption table has no visible borders in LibreOffice.

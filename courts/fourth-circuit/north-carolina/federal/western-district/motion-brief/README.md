@@ -120,3 +120,12 @@ Each page was rendered at 60 dpi and viewed after the last template change.
 - Page 9: remaining counsel block, date line and signature block. Pass.
 
 Gate 2 rows for these pages are recorded here (this doc type has no `reviews/` folder).
+
+## Engines
+
+**docx** (`docx/reference.docx` built by `docx/make-reference.sh`; `docx/motion-brief.lua` builds the caption, the signature blocks, the AI certification and the certificate of service). Output: `samples/OUTPUT-noble-motion-brief.docx` and `samples/OUTPUT-noble-motion-brief.docx.pdf` (LibreOffice, 9 pages, the same page count as typst). Checked by eye, not by `tools/check.sh` (this court has no `checks.yaml` yet). Not opened in Word; `unzip -tq` and `xmllint` pass on every XML part, and LibreOffice converted it without error.
+
+- *Matches typst:* EB Garamond 12 pt (the PDF embeds EB Garamond Regular, Bold and Italic only); US Letter with one-inch margins; double-spaced body at the 27.6 pt pitch and single lines at 13.8 pt; the court title with the division; the caption with the ")" column at 3.0 in and the right column at 3.5 in, with "Civil Action No. 5:26-CV-6", the bold title lines wrapping as in typst; the first paragraph 24 pt below the caption; unnumbered body paragraphs with a half-inch first-line indent; the centered section headings and left argument headings (I., II., ... with the bold and bold italic levels); the date line and the firm blocks at 3.0 in, with "By: /s/" for the signer; the AI certification with the standing order's wording; the certificate of service with each counsel block; a centered page number on every page.
+- *Differs (tier 2):* line breaks differ from typst's in places, so the page breaks fall at other lines: the heading "II." moves from page 4 (typst) to page 5 (docx), and the certificate of service starts at the foot of page 8 in both but breaks differently across pages 8 and 9. Section headings are 17 pt and argument headings 14.5 pt to approximate typst's default heading sizes; the space around a heading is within a few points of typst's. Typst sets the AI certification heading on two lines; the docx sets it on one. Word may substitute a font if EB Garamond is not installed on the reader's machine.
+- *Pages reviewed:* docx pages 1 to 9 of `OUTPUT-noble-motion-brief.docx.pdf` (all 9), and typst pages 1 to 9 of the typst render (all 9), at 60 dpi.
+- *BLOCKED:* none. The memorandum has no footnotes, table of contents or table of authorities in the template, so no field or footnote is needed.
