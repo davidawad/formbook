@@ -88,3 +88,11 @@ Every page rendered at 60 dpi and viewed after the last template change.
 - Paragraph spacing was set to the leading after overlapping numbered paragraphs were found on pages 2 to 4 (fixed and re-reviewed).
 - Pitch went from 24 pt (the first pass, copied from the pleading-paper template) to 27.6 pt, the pitch measured on the filed exemplars (`pdftotext -bbox`).
 - Body size went from 12 pt to 13 pt (before the paragraph-spacing fix, which added length; see Known gaps 1). Final: 9 pages against the filing's 11.
+
+## Engines
+
+docx: `docx/build-reference.sh` builds `docx/reference.docx` (pandoc default, restyled); `docx/med-complaint.lua` builds the caption, signature block and lettered prayer. Output: `samples/OUTPUT-taco-barr-complaint.docx` and `.docx.pdf` (LibreOffice). Opened and converted with LibreOffice only; Word was not checked.
+
+- Matches typst (every page of both PDFs rendered at 60 dpi and viewed): EB Garamond 13 pt (embedded, `pdffonts` shows EBGaramond Regular and Bold); double spacing as exact 27.6 pt lines with no paragraph gap; 0.5 in first-line indent; paragraphs numbered by a Word list (1., 2., ...), `~` paragraphs unnumbered; single-spaced caption with the party block closed by a rule at right and bottom; court name; bold capitals title; prayer lettered A. to E. with a hanging indent; headings kept with the next line; single-spaced block quote; signature block ("Dated", "/s/"), kept with the jury demand; letter, 1-inch margins; centered page number.
+- Differs: the "Civil Action No." label sits on its own line above the blank rule when the case number is blank (typst puts label and rule on one line); a filled case number is on one line.
+- BLOCKED: lines per page: exact 27.6 pt lines fill 23 lines in the 648 pt body (648 / 27.6 = 23.5). Typst fits 24 because its first line on each page sits about 4.6 pt above the top margin, which exact spacing does not reproduce without changing the pitch or the margins. The docx runs to 10 pages against typst's 9. Pitch and margins kept.
