@@ -4,8 +4,9 @@ Doc-type folder for a motion with its grounds in numbered paragraphs (a conteste
 
 - Exemplar: **none** (see `exemplars/SOURCE.md`).
 - Sample: `samples/INPUT-synthetic-stay-motion.md`. **Synthetic**: not transcribed from a filing. Every party, number and date is invented, and placeholders are bracketed.
-- Render: `samples/OUTPUT-synthetic-stay-motion.pdf` (3 pages) via `sh tools/render.sh <this-dir> samples/INPUT-synthetic-stay-motion.md`.
-- Overlay: **not produced.** `sh tools/overlay.sh <this-dir> synthetic-stay-motion` exits 1 ("no exemplar pdf"). There is nothing to overlay against.
+- Render: `samples/OUTPUT-synthetic-stay-motion.pdf` (5 pages, EB Garamond embedded, no typst warnings) via `sh tools/render.sh <this-dir> samples/INPUT-synthetic-stay-motion.md`. **render=ok** (2026-10-15).
+- Overlay: **fail**, not produced. `sh tools/overlay.sh <this-dir> synthetic-stay-motion` exits 1 ("no exemplar pdf in exemplars"). There is nothing to overlay against, so tier 2 cannot be judged.
+- Depth: the sample was extended from the 3-page stub to 5 pages with the structure a motion needs (caption, `#` and `##` headings, numbered runs 1-22, a block quotation, prayer, signature block, certificate on its own page). **Below the 8-14 page target.** The target assumes a real exemplar of that length. No exemplar exists, and padding a synthetic sample with invented text would test nothing.
 
 ## Rules (requirement IDs)
 
@@ -25,9 +26,27 @@ Verified 2026-10-14 from the primary text. Kind: **M** mandated by a rule, **C**
 
 Nothing. There is no exemplar, so no overlay is produced.
 
+## Template changes in the depth pass
+
+- `##` lines render as bold, left-aligned subheadings kept with the paragraph after them. Before this, every `#` line was a centred level-1 heading, so the sample's `## A. ...` subheadings would have looked like Roman-numeral sections.
+
 ## Gate 2 review
 
-All three pages of `samples/OUTPUT-synthetic-stay-motion.pdf` were rendered at 80 dpi and viewed. The caption, the centred Roman-numeral headings, the numbered grounds, the prayer, the signature block and the certificate of service page look as the template intends. No row is recorded against a filed exemplar, because there is none. This is a visual check of the template, not a tier-2 review.
+Depth pass, 2026-10-15: every page of `samples/OUTPUT-synthetic-stay-motion.pdf` (5 pages) was rendered at 60 dpi and viewed. Page 1 caption and first headings, page 2 numbered runs and subheadings, page 3 the block quotation and section IV, page 4 section V, the prayer and the signature block (checked again after the telephone placeholder fix), page 5 the certificate on its own page. The sample's own telephone placeholder had been parsed as emphasis (`___`) and printed as `[(__) -]`; it now reads `[TELEPHONE]`. The template renders the markdown, so the sample text is the thing to fix, not the template.
+
+No row is recorded against a filed exemplar, because there is none. This is a visual check of the template, not a tier-2 review.
+
+Known render behaviour, not yet judged against a filing: the certificate of service is a single paragraph with no signature line; the caption's left box and the right column are set from the template's own widths.
+
+## Exemplar searches (depth pass, 2026-10-15)
+
+Not found. Tried after `exemplars/SOURCE.md` (2026-10-14):
+
+- WebSearch (standard): `"Middle District of Alabama" bankruptcy "motion for relief from stay" courtlistener almb`. Returned hearing calendars on almb.uscourts.gov only.
+- WebSearch (standard): `"Bankr. M.D. Ala." motion for relief from automatic stay "Exhibit A"`. Returned LR 4001-1 text (courtrules.net) and form templates, no filed motion.
+- WebSearch (extended): almb motion for relief from stay filed document, Northern Division, 2024-2025. Returned govinfo published opinions (for example 24-80619, 20-30619, 25-30256 consent order) and the court's local-forms page. Opinions and orders are not the motions. The consent order in 25-30256 (Doc. 1618) is an order, not a movant's filing. The govinfo opinions cite the motions but are not the motions.
+
+**BLOCKED: no exemplar.** A filed almb motion for relief from stay would close the gap: find its RECAP docket by case number (e.g. 25-30256, 24-80619), save `exemplars/FILED-EXAMPLE-<name>-motion.pdf`, transcribe it into `samples/INPUT-<id>.md`, then run the overlay.
 
 ## Gaps
 

@@ -147,7 +147,10 @@
   let blocks = md.trim().split("\n\n")
   for b in blocks.slice(0, -1) {
     let t = b.trim()
-    if t.starts-with("#") {
+    if t.starts-with("##") {
+      // Subheading (e.g. "A. The Debtor"): bold, left-aligned, kept with the paragraph that follows.
+      block(width: 100%, above: line-pitch * 0.5, below: line-pitch * 0.5, sticky: true, strong(t.trim("#").trim()))
+    } else if t.starts-with("#") {
       heading(level: 1, t.trim("#").trim())
     } else {
       let a = numbered(t)
