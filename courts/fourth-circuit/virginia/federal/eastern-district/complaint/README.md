@@ -77,3 +77,12 @@ Not produced by this template (separate filings that may be required with a firs
 - Page 6: paragraphs 31 to 38, COUNT ONE and COUNT TWO centered bold. Pass.
 - Page 7: paragraphs 39 to 43, COUNT THREE, PRAYER FOR RELIEF, WHEREFORE paragraph (unnumbered), items A to D. Pass.
 - Page 8: items E to H, "Dated:" line, "By:" line, counsel block single-spaced. Pass.
+
+## Engines
+
+DOCX (`docx/`): `reference.docx` from `docx/build-reference.sh`, filter `docx/vaed-complaint.lua`. Output `samples/OUTPUT-tamaris-complaint.docx` and `.docx.pdf` (LibreOffice conversion). Pages reviewed: 8 of 8 in the docx PDF and 8 of 8 in the typst PDF, at 60 dpi.
+
+- Matches the typst form: EB Garamond 12 pt only (`pdffonts`); letter, 1 in margins; body at an exact 24 pt pitch; 0.5 in first-line indent; caption party box with four rules and the case number at right; numbered allegations; lettered prayer items with a hanging indent; signature block single-spaced at 3.25 in and kept together; centered PAGE number at 12 pt. Page breaks fall in the same places on all 8 pages.
+- Differs: the court heading is single-spaced (13.8 pt) in the docx. The typst court heading renders at about 23 pt pitch, although its comment says single, so the typst caption sits lower on page 1. The number-to-text gap is a tab stop at 1 in (typst: 0.25 in after the number). LibreOffice breaks a line after the hyphen in "1-8" where typst does not.
+- Not verified: Word. The file was converted by LibreOffice 26.8 and was not opened in Word, so the no-repair-prompt check is not done.
+- BLOCKED: `tools/check.sh --engine docx` (all gates) cannot run on this folder: it exits 2 because the court folder has no `checks.yaml` and no rules file (`court.json` is at the court level). No gate result and no stamp.
