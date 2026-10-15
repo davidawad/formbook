@@ -7,9 +7,10 @@ Folder: `courts/ninth-circuit/idaho/federal/district/motion-brief/` (self-contai
 |---|---|
 | exemplar | yes: three filings, `exemplars/FILED-EXAMPLE-tarbell-group-1-25-cv-00144-motion-brief.pdf` (primary; transcribed and used for the overlay), `…-anderson-2-24-cv-00341-motion-brief.pdf`, `…-robinson-1-24-cv-00306-motion-brief.pdf`. See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-tarbell-motion-brief.md` (the full text of the 14-page memorandum, with its footnotes, headings and signature; the certificate of service is in frontmatter; see Known gaps) |
-| render | ok: `samples/OUTPUT-tarbell-motion-brief.pdf`, 11 pages, letter, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-tarbell-motion-brief.pdf` and `samples/OVERLAY-tarbell-motion-brief.txt` |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (LR 5.2(a) sets only a 12-point minimum; LR 7.1(a)(2) names no face; checked on the Court's site 2026-10-15). Substitute: none needed; EB Garamond kept. Fit: n/a. |
+| render | ok: `samples/OUTPUT-tarbell-motion-brief.pdf`, 11 pages, letter, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold embedded only, no warnings |
+| overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF (`exemplars/FILED-EXAMPLE-tarbell-group-…pdf`), which is not in this snapshot (`exemplars/` holds only `SOURCE.md`). The `.txt` page map is from the earlier run and is stale against this render; regenerate once the exemplar is restored. |
+| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed on the 2026-10-15 re-render; no template change since the last review) |
 
 ## Commands
 
@@ -104,7 +105,7 @@ Every page of `OUTPUT-tarbell-motion-brief.pdf` was rendered at 60 dpi and viewe
 
 ## Known gaps and open choices
 
-1. **Font (OPEN).** Only EB Garamond is vendored under `fonts/`. Times New Roman and Century Schoolbook are not vendored and system fonts are banned. EB Garamond at 12 pt meets the rule's point size, but it looks smaller than the exemplars. Whether to vendor a Times-metric or Century-metric font is a decision for David.
+1. **Font (rule-level answer; visual difference remains).** LR 5.2(a) and LR 7.1(a)(2) name no typeface, so the template keeps EB Garamond, per `docs/FONTS.md`. EB Garamond at 12 pt meets the rule's point size, but it looks smaller than the Times and Century exemplars. Those exemplars are a convention, not a requirement; switching to a Times or Century substitute would be a tier-2 choice for David.
 2. **Block quotation omitted from the transcription.** The Tarbell exemplar quotes the audit's Note N in a block quotation on page 9. The quotation is not in the text layer of the PDF, so the sample carries a bracketed note in its place (`[Block quotation from Note N of the audit is not in the text layer of the filing and is not transcribed.]`). The template does not produce that quotation; the note is in the sample, not the template.
 3. **20-page cap not enforced.** LR 7.1(a)(2) caps the memorandum at twenty pages. The template does not count pages or warn; the sample is 11 pages.
 4. **Footnotes.** Footnote references work in paragraphs and bullet items. They do not work inside headings or block quotations (none used). Footnote text supports the same markdown as the body.

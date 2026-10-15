@@ -7,9 +7,10 @@ Folder: `courts/ninth-circuit/idaho/federal/district/complaint/` (self-contained
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-tarazona-castro-1-26-cv-00521-complaint.pdf` (primary) and `exemplars/FILED-EXAMPLE-wilcox-1-26-cv-00443-complaint.pdf` (second filer). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-tarazona-castro-complaint.md` (excerpts of the 19-page filing; the parties, the facts, Counts I to III, the prayer, the jury demand and the signature; see Known gaps) |
-| render | ok: `samples/OUTPUT-tarazona-castro-complaint.pdf`, 9 pages, letter, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-tarazona-castro-complaint.pdf` and `samples/OVERLAY-tarazona-castro-complaint.txt` |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (LR 5.2(a) sets only a 12-point minimum; checked on the Court's site 2026-10-15). Substitute: none needed; EB Garamond kept. Fit: n/a. |
+| render | ok: `samples/OUTPUT-tarazona-castro-complaint.pdf`, 9 pages, letter, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold embedded only, no warnings |
+| overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF (`exemplars/FILED-EXAMPLE-tarazona-castro-…pdf`), which is not in this snapshot (`exemplars/` holds only `SOURCE.md`). The `.txt` page map and the `.pdf` from the earlier run are stale against this render; regenerate once the exemplar is restored. |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on the 2026-10-15 re-render; no template change since the last review) |
 
 ## Commands
 
@@ -100,7 +101,7 @@ Compared with `FILED-EXAMPLE-tarazona-castro-…` and `FILED-EXAMPLE-wilcox-…`
 
 ## Known gaps and open choices
 
-1. **Font (OPEN).** Only EB Garamond is vendored under `fonts/`. Times New Roman is not vendored and system fonts are banned. EB Garamond at 12 pt meets the rule's point size, but it looks smaller than the Times-style exemplars. Whether to vendor a Times-metric font is a decision for David.
+1. **Font (rule-level answer; visual difference remains).** LR 5.2(a) names no typeface, so the template keeps EB Garamond, per `docs/FONTS.md`. EB Garamond at 12 pt meets the rule's point size, but it looks smaller than the Times-style exemplars. Those exemplars are a convention, not a requirement; switching to Liberation Serif would be a tier-2 choice for David.
 2. **Counsel block content (not checked).** LR 5.2(b) lists seven items (name, e-mail, State Bar number, office address, telephone, fax, party represented). The template renders what the frontmatter lists and does not check that each item is there.
 3. **Sample is an excerpt.** The sample carries the sections of the 19-page exemplar in condensed form: the Nature of the Action, Jurisdiction and Venue, Parties, the facts, the FLSA and Rule 23 allegations, Counts I to III, the prayer, the jury demand and the signature. Counts IV to VI and the rest of the class allegations are not transcribed. The sample's paragraphs are numbered 1 to 76 by the template; the filed paragraph numbers differ. The rendered sample is 9 pages.
 4. **Second exemplar not transcribed.** The Wilcox complaint is saved and checked for layout on page 1 only; its content is not in the sample.
