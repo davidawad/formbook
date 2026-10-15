@@ -112,3 +112,11 @@ What the overlay shows: our text and the filing's text share words and paragraph
 - **Certifications placement:** before the TOC, by choice (see the rules table).
 - **Disclosure statement:** rendered only when `disclosure` is given. The filing has no disclosure statement, so none is given.
 - **Trustee's brief and the reply** in this case were not found (Justia is blocked from this box). See `../answering-brief/exemplars/SOURCE.md` and `../reply-brief/exemplars/SOURCE.md`.
+
+## Engines
+
+**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `front.jq`, `brief.lua`, `render.sh`). `samples/OUTPUT-fisette-11-6012.docx` and `.docx.pdf` (LibreOffice). 19 pages, the same count as typst for this sample. `pdffonts` on the PDF: only EB Garamond (Regular, Bold, Italic) embedded.
+
+- Matches typst: EB Garamond 14 pt throughout (headings, footnotes, cover, contents, authorities); US Letter, 1 in margins; double spacing at 31.45 pt exact (typst 31.43 pt); 0.5 in first-line indent; single-spaced 14 pt footnotes and block quotations; section headings bold and centered; point headings bold small caps with roman labels; sub-heading labels hang at the typst positions; cover with the same parts in the same order; page numbers lower-roman on the front matter and arabic from body page 1, none on the cover; contents and authorities with dot leaders; the last body paragraph kept with the signature block. Contents page numbers match typst for this sample.
+- Differs: the checkbox in the certificate of compliance is the text `[X]`, not a drawn box. Contents and authorities are text written at build time, not Word TOC/TA fields, so they do not update in Word; their page numbers are measured on the LibreOffice PDF. Headings are paragraph styles with outline levels, not Heading styles. The word count in the certificate comes from pandoc's plain text: 2,643 here, typst counts 2,642.
+- BLOCKED: none for this engine. The gates have not been run through `tools/check.sh --engine docx`: that stops before the first gate because this folder has no `court.json` and no `checks.yaml`.
