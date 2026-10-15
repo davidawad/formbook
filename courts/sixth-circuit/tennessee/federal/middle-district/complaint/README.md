@@ -9,7 +9,8 @@ Folder: `courts/sixth-circuit/tennessee/federal/middle-district/complaint/` (sel
 | sample md | `samples/INPUT-doge-complaint.md` (the whole 12-page filing, transcribed from its text layer; exhibits not included) |
 | render | ok: `samples/OUTPUT-doge-complaint.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-doge-complaint.pdf` and `samples/OVERLAY-doge-complaint.txt` (exemplar pages 1 to 12, sample page 13 paired with exemplar page 12) |
-| pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none. LR 7.03(a) requires "at least 12-point font" and names no face, so the court-named-face substitute does not apply. Stays EB Garamond (vendored, visual only), per `docs/FONTS.md` ("No face named"). |
+| pages reviewed | 13 of 13 (re-rendered 2026-10-15 with vendored fonts only, zero warnings; every page rendered at 60 dpi and viewed) |
 | tier 1 | not gated: `tools/check.sh` expects a court folder with `court.json` and `rules.md`, which this doc-type folder is not, and the brief forbids touching `tools/`. The rule rows below are the tier-1 record. |
 
 ## Governing rules

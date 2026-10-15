@@ -9,7 +9,8 @@ Folder: `courts/sixth-circuit/tennessee/federal/middle-district/motion-brief/` (
 | sample md | `samples/INPUT-veris-motion-brief.md`: excerpt of the 27-page memorandum (pages 1 to 5, the start of Section IV and IV.B, and pages 26 to 27). Pages 6 to 10 and 13 to 25 are not transcribed; see Known gaps 3. |
 | render | ok: `samples/OUTPUT-veris-motion-brief.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-veris-motion-brief.pdf` and `samples/OVERLAY-veris-motion-brief.txt` (sample page 6 pairs with exemplar page 5 and page 7 with exemplar page 12, because the transcription skips pages) |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none. LR 7.03(a) (applies to LCrR 57.01 too) requires "at least 12-point font" and names no face, so the court-named-face substitute does not apply. Stays EB Garamond (vendored, visual only), per `docs/FONTS.md` ("No face named"). |
+| pages reviewed | 9 of 9 (re-rendered 2026-10-15 with vendored fonts only, zero warnings; every page rendered at 60 dpi and viewed) |
 | tier 1 | not gated: `tools/check.sh` expects a court folder with `court.json` and `rules.md`, which this doc-type folder is not, and the brief forbids touching `tools/`. The rule rows below are the tier-1 record. |
 
 ## Governing rules
