@@ -104,4 +104,28 @@ Our pages 4 to 8 pair with filed pages 5 to 9, so filed page 4 is not paired wit
 | 7 | Argument D ending (*Brooks*, *D.L. Markham*); "Conclusion" (centered bold); "Respectfully submitted," with the counsel group single spaced, firm and email lines. | Pass. |
 | 8 | CERTIFICATE OF SERVICE (centered bold), the service sentence, "This 28th day of September, 2026.", and the `/s/` line on the right. | Pass. |
 
+## Engines
+
+Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default, `laed-motion-brief.lua` is the filter, and `render.sh` runs pandoc (`tools/render-docx.sh` calls it). Output: `samples/OUTPUT-walker-motion-brief.docx`. The LibreOffice PDF, `samples/OUTPUT-walker-motion-brief.docx.pdf`, was not produced (see BLOCKED).
+
+| Engine | Status |
+|---|---|
+| typst | the render above; tier-1 form per LR 10.1, LR 7.7 guard |
+| latex | not built |
+| docx | `.docx` built; read back with pandoc and every XML part well-formed. `.docx.pdf` BLOCKED. Not viewed. |
+
+**What the DOCX form sets** (from the reference and the filter; no page has been looked at): letter page, 1 in margins; EB Garamond 12 pt, the same vendored face as typst; 24 pt exact line pitch (double spacing); 0.5 in first-line indent; page number centered 0.6 in from the bottom edge, none on page 1; the caption as a borderless table, the party column closed by a right and a bottom rule, VERSUS between the sides, the case fields as label-over-value on the right; title bold and centered; headings centered bold, bold and bold italic; body paragraphs not numbered; lettered items with a hanging indent; single-spaced block quotations indented 0.5 in on each side; the signature block with "Dated" (when the sample gives a date) on the left and "Respectfully submitted," at 3 in; the certificate of service when `service` is given.
+
+**Differences and open checks**
+
+- No page of the `.docx` has been rendered or compared with the typst pages (0 of 8 reviewed). The spacing around the caption, the quotations and the signature block is set from the typst values and not tuned against a render.
+- The typst build stops with an error when the memorandum passes 25 pages (LR 7.7). The docx has no such guard: its page count must be read from the LibreOffice PDF, and it is not checked yet.
+- Word and LibreOffice may paginate differently (DOCX.md, "Known limits"). The page count and the page numbers must be checked in the LibreOffice PDF.
+
+**docx BLOCKED items**
+
+- `docx.pdf`, Gates 0 and 1, the LR 7.7 page count and the page review: BLOCKED. The LibreOffice 25.2 build unpacked from Debian trixie debs (no root here) aborts at startup with `com::sun::star::uno::DeploymentException`: the extracted packages have no `libdeploymentlo.so`. No PDF was produced, so no check ran. Unblock: install LibreOffice so it runs on this box, then `sh tools/render.sh --engine docx <this folder> samples/INPUT-walker-motion-brief.md`.
+- `tools/check.sh --engine docx`: not run. It needs `court.json` and `rules.md` in the folder (known gap 9). The check stamp `samples/.check-docx.txt` was not written.
+- The LibreOffice conversion needs EB Garamond visible to fontconfig (DOCX.md, "Fonts").
+
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)

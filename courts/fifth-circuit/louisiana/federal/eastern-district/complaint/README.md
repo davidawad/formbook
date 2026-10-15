@@ -107,4 +107,28 @@ The pairing is loose after page 3 because the sample skips filed pages (the brea
 | 9 | Paragraphs 45 to 49; PRAYER FOR RELIEF heading; unnumbered "WHEREFORE" lead-in; prayer items A to C. | Pass. |
 | 10 | Prayer items D to I; DEMAND FOR JURY TRIAL (unnumbered); "Dated" on the left and "Respectfully submitted," on the right; signature groups single spaced; firm name on one line. | Pass. |
 
+## Engines
+
+Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default, `laed-complaint.lua` is the filter, and `render.sh` runs pandoc (`tools/render-docx.sh` calls it). Output: `samples/OUTPUT-buckles-complaint.docx`. The LibreOffice PDF, `samples/OUTPUT-buckles-complaint.docx.pdf`, was not produced (see BLOCKED).
+
+| Engine | Status |
+|---|---|
+| typst | the render above; tier-1 form per LR 10.1 |
+| latex | not built |
+| docx | `.docx` built; read back with pandoc and every XML part well-formed. `.docx.pdf` BLOCKED. Not viewed. |
+
+**What the DOCX form sets** (from the reference and the filter; no page has been looked at): letter page, 1 in margins; EB Garamond 12 pt, the same vendored face as typst; 24 pt exact line pitch (double spacing); 0.5 in first-line indent; page number centered 0.6 in from the bottom edge, none on page 1; the caption as a borderless table, the party column closed by a right and a bottom rule, the case fields on the right; title bold and centered; headings centered bold, bold and bold italic; numbered paragraphs, with the number typed as text as typst does; unnumbered `!` paragraphs; lettered items with a hanging indent; single-spaced block quotations indented 0.5 in on each side; the signature block with "Dated" on the left and "Respectfully submitted," at 3 in.
+
+**Differences and open checks**
+
+- No page of the `.docx` has been rendered or compared with the typst pages (0 of 10 reviewed). The spacing around the caption, the quotations and the signature block is set from the typst values and not tuned against a render.
+- A paragraph number is followed by a tab to the next default tab stop (1.0 in). Typst puts the text 0.25 in after the number, so the text can start a few points to the right of the typst position.
+- Word and LibreOffice may paginate differently (DOCX.md, "Known limits"). The page count and the page numbers must be checked in the LibreOffice PDF.
+
+**docx BLOCKED items**
+
+- `docx.pdf`, Gates 0 and 1 and the page review: BLOCKED. The LibreOffice 25.2 build unpacked from Debian trixie debs (no root here) aborts at startup with `com::sun::star::uno::DeploymentException`: the extracted packages have no `libdeploymentlo.so`. No PDF was produced, so no check ran. Unblock: install LibreOffice so it runs on this box, then `sh tools/render.sh --engine docx <this folder> samples/INPUT-buckles-complaint.md`.
+- `tools/check.sh --engine docx`: not run. It needs `court.json` and `rules.md` in the folder (known gap 9). The check stamp `samples/.check-docx.txt` was not written.
+- The LibreOffice conversion needs EB Garamond visible to fontconfig. `fonts/eb-garamond/` is vendored for typst; install it for the user running the check (DOCX.md, "Fonts").
+
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
