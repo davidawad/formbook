@@ -95,3 +95,12 @@ The overlay is a diagnostic, not a score. The lower overlaps on pages 10 to 14 a
 No findings were recorded in `reviews/` (this doc type has no `reviews/` folder). The Gate 2 record for this doc type is this section.
 
 [Formbook index](../../../../../../README.md) | [Bankruptcy court README](../README.md)
+
+## Engines
+
+docx (`docx/`: `build-reference.sh`, `reference.docx`, `nhb.lua`; output `samples/OUTPUT-old-cold-motion-brief.docx` and `.docx.pdf`, LibreOffice PDF, 15 pages, EB Garamond only):
+
+- Matches the typst form: EB Garamond 12 pt; body at an exact 27.6 pt line pitch; 0.5 in first-line indent with no space between paragraphs (as the typst renders); single-spaced block quotes at 13.8 pt; footnotes 10 pt at an 11.5 pt pitch; `###` headings bold italic, `##` headings bold with a hanging indent; the caption, title, conclusion and certificate of service; the signature blocks kept with the text before them; the memorandum unnumbered (as the typst); PAGE number centered in the footer.
+- Differs: LibreOffice line breaks drift by a few lines per page against the typst PDF (footnote and block-quote lines are the largest source), so the CONCLUSION block (kept with its signature) moves to page 14 and the certificate of service moves whole to page 15 (the typst has 14 pages with the certificate split between pages 13 and 14). The certificate is kept as one unit rather than split.
+- BLOCKED: page count (typst 14, docx 15): the LibreOffice pagination above; no Word limit is involved, and the template has no forced break. Not fixed.
+- Opened with LibreOffice only (the PDF conversion is the no-repair proof); Word was not checked.
