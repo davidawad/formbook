@@ -9,7 +9,7 @@ Folder: `courts/second-circuit/vermont/federal/bankruptcy-district/motion-brief/
 | sample md | `samples/INPUT-diocese-motion-brief.md` (the filed motion, transcribed in full: caption, all 20 numbered paragraphs, the block quotation, the argument headings, the signature block) |
 | render | ok: `samples/OUTPUT-diocese-motion-brief.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-diocese-motion-brief.pdf` and `OVERLAY-diocese-motion-brief.txt` (page map from `tools/overlay.sh`; pages paired one to one) |
-| pages reviewed | 9 of 9 (each page rendered at 60 dpi and viewed; see the review below) |
+| pages reviewed | 9 of 9 (each page rendered at 60 dpi and viewed; see the review below; re-rendered and all 9 pages viewed again 2026-10-15, no font change) |
 
 ## Governing rules
 
@@ -19,6 +19,8 @@ Primary sources, fetched 2026-10-14. The local rules are the Local Bankruptcy Ru
 |---|---|---|
 | Fed. R. Bankr. P. 9013 (https://www.law.cornell.edu/rules/frbp/rule_9013, fetched 2026-10-14; amended effective 2024-12-01) | (a) a request for an order is made by written motion unless the rule says otherwise; (b) a motion states its grounds with particularity and sets out the relief requested. | Content, not template. The sample states the grounds (Rules 12(b)(6), 7012; 28 U.S.C. §§ 157, 1334) and the relief in the first paragraphs. |
 | Fed. R. Bankr. P. 9004(a), (b) (https://www.law.cornell.edu/rules/frbp/rule_9004, fetched 2026-10-14) | Legible; caption with the court's name, the case title, the case number and any adversary number, and a brief designation of the document. | `caption()` and the `title` frontmatter field. |
+| D. Vt. LBR 10(a)(4) (format of filings; the 2024 edition's Vt. LBR 5005-1(a) cross-refers to it; read 2026-10-15, see gap 1) | No less than 12 point font. No typeface named. | 12 pt body (`type-size`). |
+| Typeface | Vt. LBR 1007-3(c)(1) names Arial, CG Times, Courier and Times New Roman, for master mailing lists only. No rule names a face for filings. | Vendored EB Garamond kept, as `docs/FONTS.md` requires for a court that names no face. See gap 2. |
 | Vt. LBR 9013-1(a)(1) to (3) (court's local rules, 11.30.21 edition, see gap 1) | Motion states with particularity the law (by title and section) and the procedure (by rule); clearly describes all relief requested; includes a brief summary of the facts. | Content. The sample's paragraphs 3 to 6 and the argument follow the rule's form; the template does not check them. |
 | Vt. LBR 9013-1(b) | The motion certifies consultation with opposing counsel before filing (or asks for a waiver). | Not in the template: the exemplar does not have it (finding, see gap 4). |
 | Vt. LBR 9013-1(f)(1) | A stipulated motion includes the word "stipulated" in its title and a statement of consent in the body. | `stipulated: true` in the frontmatter makes the template fail unless the title contains "stipulated" (VT-MB-001; mutant tested). |
@@ -63,8 +65,8 @@ Defects found and fixed during the review: the introduction was numbered (two pa
 
 ## Known gaps and open choices
 
-1. **Rules edition.** As in the adversary-complaint README: the local rules text is the 11.30.21 edition; the 2024 edition the court lists was not retrieved. Recheck before release.
-2. **Typeface and size.** Same as the adversary complaint: EB Garamond 12 pt (vendored); the exemplar is Times New Roman 12 pt.
+1. **Rules edition.** The 9013 text above is the 11.30.21 edition and has not been checked against the 2024 edition. The 2024 edition's Vt. LBR 5005-1(a) defers format to D. Vt. LBR 10(a) (read 2026-10-15, from a copy with a 2018 print date; the 4/1/2025 edition was not read). See gap 1 in the adversary-complaint README. Recheck before release.
+2. **Typeface and size.** Same as the adversary complaint (gap 3 there): no rule names a face for filings, so EB Garamond 12 pt (vendored) stays; the exemplar is Times New Roman 12 pt.
 3. **Footnotes.** A footnote is printed as a single-spaced indented block after its paragraph, not at the foot of the page. The template has no footnote mechanism; the exemplar's footnote 1 is reproduced in that form.
 4. **Findings against the filing (recorded, not corrected in the sample).** (a) No consultation certificate under LBR 9013-1(b) appears in the text layer of the filing. (b) The title names no memorandum, and the filing contains argument in the same document; under LBR 9013-5(a) a combined document must name both in the caption and the docket entry (the docket text reads "Motion to Dismiss Adversary Proceeding"). The sample therefore does not set `memorandum: true`. (c) The caption names 92 defendants, which takes two and a half pages; the rule does not limit caption length, so this is a layout cost, not a defect.
 5. **Italics and case names.** The filed text's italics are not visible in the text layer, so case names are roman in the sample.

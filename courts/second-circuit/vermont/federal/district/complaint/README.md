@@ -23,6 +23,7 @@ Federal rules: Fed. R. Civ. P. 5(d)(1)(B), 8(a), 10(a), 10(b) and 38(b), fetched
 |---|---|---|
 | D. Vt. L.R. 10(a)(1) | 8 1/2 x 11 inch paper. | `paper: "us-letter"` |
 | L.R. 10(a)(2) | Plainly legible. | Vendored font, no fallback (render only via `tools/render.sh`). |
+| Typeface (L.R. 10(a) names none) | Face required by the rule: **none** (L.R. 10(a)(2) asks for "plainly legible" type and (a)(4) for 12 point or more; no face is named). Vendored substitute: **none needed**; EB Garamond is kept under `docs/FONTS.md` ("No face named"). Metric fit: n/a. | `font-family = "EB Garamond"` |
 | L.R. 10(a)(3) | At least 1 inch margins. | `page-margin = 1in` on all four sides. |
 | L.R. 10(a)(4) | No less than 12 point font. | `type-size = 13pt` (see Known gaps 2). Footnotes at the same size. |
 | L.R. 10(a)(5) | Consecutively numbered. | Footer page number, arabic, centered (`counter(page)`). |
@@ -58,7 +59,7 @@ Not produced by this template (separate filings that go with a first filing): th
 ## Known gaps and open choices
 
 1. **One exemplar, one filer.** The EVAL-LOOP tier-2 standard asks for two or three filers. The search (CourtListener RECAP API, `type=r`, `court=vtd`, `available_only=on`, query "complaint", sorted by filing date) also found *United States v. State of Vermont*, No. 2:26-cv-00272 (filed 2026-08-10 by the United States; 18 pages; Times New Roman; text layer present). It was downloaded to a scratch directory and not saved, because the brief asks for one exemplar per doc type. Tier 2 is judged against one filer here.
-2. **Type size and font.** The rule's minimum is 12 point. The template uses 13 pt EB Garamond, the only serif vendored in `fonts/`, so the apparent size matches the filed exemplar's Times New Roman at 12 pt (EB Garamond has a smaller x-height). A vendored Times-metric font would remove the choice; that is a question for David, not a rule defect.
+2. **Type size and font.** The rule's minimum is 12 point, and it names no face. The template uses 13 pt EB Garamond, which `docs/FONTS.md` keeps for a court that names no face; the apparent size matches the filed exemplar's Times New Roman at 12 pt (EB Garamond has a smaller x-height). The filed exemplar is set in Times New Roman, and the vendored `Liberation Serif` is metric-compatible with it, so a switch is possible. Whether to switch to match the filers' convention is a question for David, not a rule defect.
 3. **Sample length.** The sample is the whole filing, 12 rendered pages against the exemplar's 11 (the exemplar is set with a larger line count per page). Target 8 to 14 pages: met.
 4. **Signature on its own page.** On page 12 the date line and the signature block sit alone, because the block is kept together and does not fit on page 11 under the last prayer item. A filer would often do the same; the template does not keep the last prayer item with the signature. Accepted for now.
 5. **Italics.** The text layer has no italic markup, so case names are transcribed in roman. The template supports `*...*` italics, so a future sample can carry them.

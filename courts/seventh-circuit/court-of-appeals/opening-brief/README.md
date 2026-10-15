@@ -8,9 +8,10 @@ Court: `ca7` (U.S. Court of Appeals for the Seventh Circuit). Doc type: `opening
 |---|---|
 | Exemplar | yes: `exemplars/FILED-EXAMPLE-torres-22-2830-opening-brief.pdf` (see `exemplars/SOURCE.md`) |
 | Sample | `samples/INPUT-torres-opening-brief.md` (cover, counsel, TOC, TOA, body excerpt, conclusion, signature, certificates) |
-| Render | ok: `sh tools/render.sh courts/seventh-circuit/court-of-appeals/opening-brief samples/INPUT-torres-opening-brief.md` gives 14 pages, vendored fonts only, no typst warnings |
-| Overlay | ok: `sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/opening-brief torres-opening-brief` writes `samples/OVERLAY-torres-opening-brief.pdf` (14 pages) and `-overlay.txt` |
-| Pages reviewed | 14 of 14 (every page rendered at `pdftoppm -r 60` and viewed; see "Visual review") |
+| Typeface | None named by the rules (FRAP 32(a)(5)(A); Cir. R. 32(b)). Font: EB Garamond, vendored, kept (fonts pass, 2026-10-15; see the court `README.md` "Typeface"). `pdffonts`: only `EBGaramond` Regular, Bold, Italic, all embedded. |
+| Render | ok (fonts pass, 2026-10-15): `sh tools/render.sh courts/seventh-circuit/court-of-appeals/opening-brief samples/INPUT-torres-opening-brief.md` gives 14 pages, vendored fonts only, no typst warnings |
+| Overlay | **fail**: `sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/opening-brief torres-opening-brief` exits 1 with "no exemplar pdf": `exemplars/` holds only `SOURCE.md`; the filed PDF is not in this snapshot. The committed `samples/OVERLAY-torres-opening-brief.txt` is from an earlier run and was not regenerated. |
+| Pages reviewed | 14 of 14 in the fonts pass (`OUTPUT` rasterized at `pdftoppm -r 70` and viewed; see "Visual review") |
 
 Build and check, from the repo root (typst 0.15.0; `PATH` must include the micromamba env):
 
@@ -69,7 +70,8 @@ Open tier-2 items (left open, not papered over):
 - Body excerpt: the sample transcribes the cover, TOC and TOA material, Jurisdictional Statement, Issue, Introduction (two paragraphs), Statement of the Case (I.A-B in part, II), Summary of Argument, Standard of Review, the start of the Argument (I, I.A.1, I.A.2 opening) and the Conclusion. The middle of the brief (I.A.3 through I.B.2) is not transcribed; the TOC and TOA show only the transcribed headings.
 - Second exemplar: a second filer is needed for the tier-2 check (2-3 exemplars from different filers). The candidate `Agofsky v. Baysore`, No. 24-1067, entry 7 (Federal Community Defender; 87 pages; text layer) was found on CourtListener and is recorded in `exemplars/SOURCE.md`, but it is not yet saved or transcribed.
 - Circuit Rule 30 short appendix: not produced.
-- Fonts: EB Garamond is the vendored serif. The exemplar uses Times New Roman; the template does not match it glyph-for-glyph (tier 3, not chased).
+- Fonts: EB Garamond is kept. The exemplar uses Times New Roman, but the rules name no face (see the court `README.md` "Typeface"), so Liberation Serif is not substituted; matching the filer's face is tier 3, not chased.
+- Table of contents (PDF page 2, folio i): the entry "B. Mr. Torres is confined in a moldy, contaminated cell for three months" wraps and its page number "3" drops to a second line under the leaders. Found in the fonts pass; not fixed there (a template layout change, outside the fonts pass). OPEN.
 - The rules PDF is "current as of December 1, 2025". The exemplar was filed in March 2024, under the earlier version of the circuit rules. Where the two differ, the current text governs; no difference was found for the rules used here.
 
 ## Files
