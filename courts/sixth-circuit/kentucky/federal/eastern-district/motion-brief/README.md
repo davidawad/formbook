@@ -96,4 +96,13 @@ Render line pitch: 24.0 pt on every body line (measured with `pdftotext -bbox-la
 
 A layout defect found and fixed during the build: with `spacing: 0pt` between paragraphs, typst leaves no leading between paragraphs, so each new paragraph sat 7.8 pt under the last line of the one before it. The template sets paragraph spacing to the body leading (1.35 em, 16.2 pt), which restores the 24 pt pitch.
 
+## Engines
+
+DOCX engine (`docx/build-reference.sh` builds `docx/reference.docx`; `docx/kyed-motion-brief.lua` builds the caption, the keep-together of the conclusion with the signature block, the signature line and the certificate). Checked structurally only (see below).
+
+- **Matches the typst form (reference settings):** US Letter; 1 in margins on all sides (`w:pgMar` 1440); EB Garamond (vendored) at 12 pt in the document defaults and every style used; body text at an exact 24 pt line pitch with a 0.5 in first-line indent; block quotation single spaced, 0.75 in each side; headings: centered caps (level 1), bold hanging at 0.5 in (level 2), bold indented (level 3), bold italic indented (level 4); footnotes are pandoc's native footnotes at 12 pt, single spaced; centered 12 pt page number in the footer; "Dated:" at the margin and "Respectfully submitted," at a 3.4 in tab stop; the conclusion keeps with the signature block (`keepNext`); the certificate of service starts on a new page, its service blocks single spaced.
+- **Differs from typst:** the footnote separator is pandoc's default rule, not typst's 30% rule; the certificate service blocks use single spacing from the font metrics, not typst's added leading (about 13.8 pt per line in the typst render); pagination is not measured (typst gives 11 pages for `samples/OUTPUT-seitz-discord-memo.pdf`; the docx page count is unknown). No table of contents or table of authorities is produced (see the rules table).
+- **BLOCKED:** `docx=blocked`. `docx.pdf` / page review: `soffice` (LibreOffice) is not installed on this box, so `samples/OUTPUT-seitz-discord-memo.docx.pdf` was not produced and no page was rendered or viewed (`pages_reviewed=0`). Font embedding and substitution in LibreOffice, and the no-repair-prompt check in Word and LibreOffice, are not verified.
+
+
 Links: [District Court index for kyed](../README.md) | [Doc type: complaint](../complaint/README.md)
