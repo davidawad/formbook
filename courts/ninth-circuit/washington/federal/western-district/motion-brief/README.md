@@ -10,6 +10,7 @@ Folder: `courts/ninth-circuit/washington/federal/western-district/motion-brief/`
 | render | ok: `samples/OUTPUT-hoffman-motion-to-dismiss.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings. |
 | overlay | ok: `samples/OVERLAY-hoffman-motion-to-dismiss.pdf` and `samples/OVERLAY-hoffman-motion-to-dismiss.txt`. |
 | pages reviewed | 12 of 12: every page rendered at 60 dpi and viewed in its final state. |
+| typeface | Face required: **none**. LCR 10(e)(1) requires "a proportionally spaced font" and names no face, so no substitute is needed and EB Garamond is kept (`FONTS.md`: no face named). Checked against the rule text, 2026-10-15. Metric fit: n/a. The filed motion embeds Times New Roman (tier-2 question, gap 6). |
 
 ## Governing rules
 
@@ -63,7 +64,7 @@ Pairing and word overlap: our p1 to filed p1 (96%), p2 to p2 (98%), p3 to p10 (9
 3. **Page numbering.** The filing numbers its front matter (table of contents and authorities) in roman numerals and starts the arabic count at the introduction. The template numbers every page in arabic from the cover. Matching the filing would need a page-numbering rule keyed to the section starts; not done.
 4. **Footnotes** are not supported in the sample. The filing has footnotes (1, 2 and 4 in the argument), set at 10 pt by LCR 10(e)(1); the template has no footnote rule.
 5. **Table of contents** rows are single-spaced with a 12 pt gap, rounded to the grid; the filing uses dot leaders, which the template does not draw.
-6. **Font.** EB Garamond is the only font vendored in `fonts/`; it reads smaller than the Times New Roman of the filing at 12 pt. Same open question for David as in the complaint README.
+6. **Font.** LCR 10(e)(1) names no face, so EB Garamond is kept (see the typeface row). It reads smaller than the Times New Roman of the filing at 12 pt. Same tier-2 question for David as in the complaint README, gap 1.
 7. **Footer type size.** 10 pt (title) and 9 pt (firm block); see the complaint README, gap 2.
 8. **No firm block in the footer** for this sample: the filing carries none. The template prints one when `footer_firm` is given.
 9. **Output file names.** As in the complaint README, gap 9: `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt` are the tools' names, not the brief's `<id>.pdf` and `<id>-overlay.pdf`.
