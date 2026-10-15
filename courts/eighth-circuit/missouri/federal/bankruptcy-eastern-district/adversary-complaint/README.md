@@ -93,3 +93,38 @@ Layout findings fixed during this review (not in the final render): paragraphs o
 - CourtListener REST search (`https://www.courtlistener.com/api/rest/v4/search/?type=r&court=moeb&q=…`), queries: "adversary complaint"; with paging; then per-result RECAP PDF lookup. Usable complaints found: Riske v. Dempster, 25-04038 (8 pages, 2025-06-16; **saved**); 23andMe Holding Co. v. J.R., 25-04011 (25 pages, 2025-04-14; Carmody MacDonald PC; text layer yes; **not saved**, checked for structure and the consent paragraph); Jimmie Lee Brown, 19-04194 (3 pages, Casamatta complaint); Bernard Steven Hooks, 22-04032 (3 pages). Morrell adversary 25-04009 (corrected complaint, 8 pages) was in the results and not downloaded.
 - Second and third filers for tier 2 (CLAUDE.md asks for 2 or 3): 23andMe 25-04011 is one; a second one from a different filer would be needed for a full tier-2 judgment. The brief asks for one exemplar per doc type, so only one is saved.
 - The court's own site (https://www.moeb.uscourts.gov/) is blocked from this box for direct downloads; the local rules were read through WebFetch.
+
+## Engines
+
+Three engines from one markdown contract. typst is the primary template and is unchanged here. This section covers the docx engine (`docx/`), added with the DOCX export (fb-595.23.14).
+
+| Engine | Folder | Output for `riske-dempster` | Status |
+|---|---|---|---|
+| typst (primary) | `typst/` | `samples/OUTPUT-riske-dempster.pdf` (not in the snapshot; `tools/render.sh`) | unchanged |
+| docx | `docx/` | `samples/OUTPUT-riske-dempster.docx`, `samples/OUTPUT-riske-dempster.docx.pdf` | rendered by LibreOffice; all 6 pages rendered at 60 dpi and viewed |
+
+Build: `sh docx/make-reference.sh <absolute path>/docx/reference.docx` rebuilds the reference (pandoc's default reference, edited for the court's form). `sh tools/render.sh --engine docx <court-dir> samples/INPUT-riske-dempster.md` writes the `.docx` and the LibreOffice PDF. `docx/moeb-adversary-complaint.lua` builds the caption table, the numbered paragraphs, the consent sentence, the signature block and the certificate (if the sample has one).
+
+LibreOffice here is 26.8.1, unpacked from the document-foundation Linux tarball (conda-forge has no LibreOffice). The vendored EB Garamond is installed for the user running LibreOffice (`docs/DOCX.md`), so the PDF embeds only EB Garamond.
+
+**Matches typst** (measured on page 1 of both PDFs with `pdftotext -bbox`, and read on every page):
+
+- US Letter, 1 in margins, arabic page number centred at the foot, 12 pt including the footer.
+- EB Garamond 12 pt throughout. Body lines at 27.6 pt (double), caption, signature block and served entries at 13.8 pt (single).
+- Caption: a table, the debtor and parties left with a rule on the right and bottom, the case block right, court name centred and bold.
+- Numbered paragraphs: first line at 0.5 in, the number, then the text at a fixed tab stop. `%` paragraphs unnumbered, `%%` centred.
+- Heading 1 centred bold caps, Heading 2 centred bold, both kept with the next paragraph.
+- `{{consent}}` becomes the FRBP 7008(a) sentence, or the bold placeholder when the sample has no `consent`.
+- No break after "U.S.C." or before and after "§".
+- The signature block and the last paragraph stay together, as in typst.
+
+**Differs from typst** (not tier-1):
+
+- Two-digit paragraph numbers: typst starts the text after the number plus 0.5 in, so it sits about 6 pt further right than the docx, which uses one tab stop for every number.
+- Heading 1 is 17 pt in the docx, 16.8 pt in typst. The caption title sits within 1 pt of typst; the lead-in after it is about 7 pt lower in the docx (LibreOffice places exact-height lines differently).
+- Widow/orphan control is off, as in typst. Pagination is still close but not identical: page 1 ends after ¶ 5 in the docx and after ¶ 6 in typst; both are 6 pages.
+- Not opened in Microsoft Word (not available here). LibreOffice opens and converts the file; the renderer checks the parts are well-formed XML. Word may paginate slightly differently.
+
+**docx BLOCKED items:** none for the layout. The gate runner (`tools/check.sh --engine docx`) is not run: this court folder has no `rules.md`, `checks.yaml` or `reviews/` yet, so MOEB-AC-001 to 010 are checked by hand on the docx PDF, not by the gate. BLOCKED: gate runner, gates 0 to 3 on docx, no `checks.yaml` in the court folder yet.
+
+**Source issue (not changed):** `samples/INPUT-riske-dempster.md` writes "11 U.S.C § 550" (no period after "C") in the Count III WHEREFORE clause. Both engines reproduce it as written.
