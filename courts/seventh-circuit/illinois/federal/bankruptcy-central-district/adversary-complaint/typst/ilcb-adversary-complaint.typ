@@ -16,7 +16,7 @@
 // ---------------------------------------------------------------------------
 
 #let court-lines = ("UNITED STATES BANKRUPTCY COURT", "CENTRAL DISTRICT OF ILLINOIS")  // FRBP 7010, Form 416
-#let font-family = "EB Garamond"          // vendored in /fonts (the only serif face there)
+#let font-family = "EB Garamond"          // vendored in /fonts; no court rule names a face (README, ILCB-TYPE-1)
 #let type-size = 13pt                      // no CDIL typography rule (FRBP 9004(a): legible only).
                                            // 13 pt EB Garamond has the x-height of 12 pt Times, the
                                            // face and size the exemplars use (see README, gaps).

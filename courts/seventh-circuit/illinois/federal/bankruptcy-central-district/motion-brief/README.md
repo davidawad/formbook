@@ -37,7 +37,7 @@ Verified 2026-10-14. "M" is mandated by a rule, "C" is the court's own conventio
 | ILCB-7010-1 | M | Caption conforms to Form 416 (Civil Rule 10 applies in an adversary proceeding). | FRBP 7010, https://www.law.cornell.edu/rules/frbp/rule_7010 (verified 2026-10-14) | Court name fixed in the template; the parties and case lines are data. |
 | ILCB-SVC-1 | C | A signed certificate of service must be included or filed with every document required to be served. It must include the full name of each party served, identify the document served, and include the case caption. | Bankruptcy Practice Guide, service section, https://www.ilcb.uscourts.gov/sites/ilcb/files/Bankr%20Practice%20Guide%2012.1.25%20rule%20restyling.pdf (Dec. 1, 2025; verified 2026-10-14) | `service` in the frontmatter prints the certificate with the document title and the recipients. The caption is on the first page. |
 | ILCB-SIG-1 | C | Electronic signature: "/s/" followed by the typed name. | Bankruptcy Practice Guide, "Signature Requirements" (same URL) | `By: /s/ <signer>` and `/s/ <signer>` on the certificate. |
-| ILCB-TYPE-1 | T | Typography: 13 pt EB Garamond, double spacing, 1 in margins, centered page number, single-spaced block quotations and footnotes. No CDIL typography rule exists; see Gaps. | Tier 2, from the exemplars (measured on body pages: 27.6 pt line pitch; Times or Arial; 1 in margins; block quotations single-spaced) | `type-size`, `body-leading`, `page-margin` at the top of the template. |
+| ILCB-TYPE-1 | T | Typography: 13 pt EB Garamond, double spacing, 1 in margins, centered page number, single-spaced block quotations and footnotes. No CDIL typography rule exists; see Gaps. **Typeface (fonts pass, 2026-10-15): face required by rule = none; substitute = EB Garamond (kept, per `docs/FONTS.md` "No face named"); metric-compatible = n/a.** The Bankruptcy Practice Guide's only "FONT" line is for the Mailing Matrix in computer-readable form ("Do not use script-style fonts"), not for pleadings; the local rules name no face. | Tier 2, from the exemplars (measured on body pages: 27.6 pt line pitch; Times or Arial; 1 in margins; block quotations single-spaced) | `type-size`, `body-leading`, `page-margin` at the top of the template. |
 
 ## Markdown contract
 
@@ -70,9 +70,11 @@ Defects found and fixed during review:
 
 Pages reviewed: 14 of 14.
 
+Fonts pass, 2026-10-15: no court rule names a face, so the face stays EB Garamond (`pdffonts` on the new render: EBGaramond Regular, Bold, Italic, BoldItalic). Re-rendered with zero typst warnings and the overlay regenerated. Every page (1 to 14) was viewed at 60 dpi on the render made before the comment-only template edit; the final render has the same 14 pages and fonts.
+
 ## Gaps
 
-- No CDIL typography rule exists (the local rules set none for motions). Face, size, spacing and margins are tier 2, from the exemplars. The Walmart exemplar uses Times, the Menard exemplar Arial; the template uses EB Garamond 13 pt because it is the only serif face vendored here (see the adversary README).
+- No CDIL typography rule exists (the local rules set none for motions). Face, size, spacing and margins are tier 2, from the exemplars. The Walmart exemplar uses Times, the Menard exemplar Arial; the template uses EB Garamond 13 pt because no court rule names a face (the vendored default, per `docs/FONTS.md`; see the adversary README).
 - Only the memorandum is templated, not the motion paper itself (the notice of motion, the motion text, and the hearing notice). No exemplar of a standalone motion was found in CourtListener for this court; the Walmart and Menard exemplars are memoranda. The template prints whatever body the markdown carries.
 - No table of contents or table of authorities: neither exemplar has one, and the local rules set no requirement. Page limits: none set by the local rules; none are enforced.
 - The proposed order is a separate PDF. The Practice Guide sets its format (8.5 x 11 page size, a 4-inch top margin on page 1, no judge signature line, uploaded as a PDF). That is not in this template.
