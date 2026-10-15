@@ -32,3 +32,17 @@ Still no filed adversary complaint from this court. The searches below were run 
 - CourtListener RECAP (`courtlistener.com/?type=r&court=arb`) and Justia dockets (`dockets.justia.com/browse/state-arizona`): HTTP 403 from this box.
 
 What would settle it: the complaint in *Birdsell v. Williams*, 2:25-ap-00115-MCW, from PACER or from the trustees' counsel (Nach, Rodgers, Hilkert & Santilli, which posted the motions); or a RECAP copy from `storage.courtlistener.com/recap/gov.uscourts.arb.<docket>/` once the CourtListener block lifts.
+
+## Third search pass (2026-10-15, bead fb-595.20.8)
+
+Still no filed `arb` adversary complaint. The CourtListener API is not reachable without a key: `GET /api/rest/v4/dockets/?court=arb` returns HTTP 401 from this box, and no `COURTLISTENER_API_KEY` is set in the environment or config. Anonymous access was throttled on 2026-10-14. Searches run on 2026-10-15:
+
+- WebSearch (standard): "storage.courtlistener.com gov.uscourts.arb adversary complaint pdf". Results were other districts' adversary forms and local rules (Oregon, Ohio N.D., New Jersey, Delaware, Pennsylvania, Texas S.D.). No Arizona complaint.
+- WebSearch (standard): "District of Arizona" bankruptcy adversary proceeding complaint, "Adv. No.", 547/548/550. Results were Arizona opinions (`2-22-ap-00048-DPC`, `azb_live.2.13.ap.486`, `azb_live.2.19.ap.218`), the Titan Solar motion (Doc 759, already recorded above), and inforuptcy docket pages (Starr Pass 4:19-bk-08137; PM and M Electric 2:24-bk-04978; Tire Mart 0:19-bk-03230). Docket text only.
+- WebSearch (standard): Arizona adversary complaint with "Plaintiff" and "Defendant" caption. Results were the court's Glossary of events, Court Forms page, and form-seller pages (uslegalforms.com, formsworkflow.com). Not filings.
+- WebSearch (extended): filed AZ adversary complaint on CourtListener RECAP, Justia, or DocumentCloud. Results were the 2026 Local Rules (`Local Rules FINAL AMENDED - Dec 1 2025.pdf`, read for the rule, not an exemplar), the Titan motion, the Adversary Handout for Pro Se, and general treatises. No complaint text.
+- Direct probes: `storage.courtlistener.com/` and `govinfo.gov` returned HTTP 200, but neither can be enumerated by court without a docket number. `courtlistener.com/?type=r&court=arb` returned HTTP 403.
+
+Not tried: a CourtListener API key (none on this box; the brief's "needs API key" step cannot be done without one), and PACER (no account). Both would settle it: a RECAP complaint from `arb` adversary 2:25-ap-00115 (*Birdsell v. Williams*) or any other 2:24-ap/2:25-ap/2:26-ap complaint.
+
+Date fetched: 2026-10-15.
