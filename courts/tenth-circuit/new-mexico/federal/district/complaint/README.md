@@ -94,3 +94,11 @@ Measured: body line pitch 24.00 pt; 100 characters per full 6.5 in line (about 1
 12. **Headings must fit the layout.** Headings wrap and are kept with the paragraph after them; no heading is forced onto one line.
 
 [Formbook index](../../../../../../README.md)
+
+## Engines
+
+DOCX (`docx/`): `reference.docx` is built by `docx/build-reference.sh` from pandoc's default reference. It matches the typst form on the same points: EB Garamond 12 pt, 24 pt exact line pitch for the body, 0.5 in first-line indent, top margin 1.5 in and 1 in elsewhere, letter page, bold centered capitals for level 1 and 2 headings, bold italic for level 3, centered PAGE number 0.45 in from the bottom edge, single lines at exact 13.8 pt for the caption and signature block. `docx/nmd.lua` builds the cover (court, caption table with ")" marks, case number, title), the lead-in, the numbered allegations, lettered list items and the signature block from the sample frontmatter.
+
+What differs: allegation numbers are typed text followed by a tab, not Word list numbering (a Word edit does not renumber them); the caption and signature block are borderless tables, which Word and LibreOffice may space slightly differently; footnotes are 12 pt single-spaced (the typst template sets no footnote style, so none is verified against it).
+
+BLOCKED (docx): `docx.pdf` is not produced because `soffice` (LibreOffice) is not installed on this box, so Gates 0 and 1 cannot run on the rendered PDF; the visual review of the docx pages has not been done (no docx page viewed); the open-without-repair check in Word and LibreOffice has not been done. The `.docx` itself passes `unzip -tq` and the well-formedness check of every XML part.
