@@ -92,3 +92,14 @@ File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf`, and `to
 8. **One exemplar.** The eval-loop tier-2 rule asks for two or three filers. The other innb motion candidates were read and not saved: Homman v. Schwartz (adv. 22-03010, Doc 4, 2-page motion for remand), Rudecki v. Price (adv. 11-03033, Doc 4, 5-page brief for a TRO, 2011), Homann v. One Advantage (adv. 22-03017, Doc 13, 4-page brief for default judgment). None is a combined motion with memorandum.
 9. **Dated line.** The exemplar's "Dated:" line sits left of "Respectfully submitted,"; the template does the same (convention).
 10. **Footnote 2 position.** The marker is placed after "§§ 105" (the superscript reads as "1052" in the text layer). Placement was taken from the glyph coordinates, not from the rule.
+
+## Engines
+
+DOCX engine (`docx/`): `reference.docx` built by `docx/build-reference.sh`, filter `docx/innb.lua`. Output `samples/OUTPUT-river-terrace-motion-brief.docx`.
+
+- Matches the typst form: EB Garamond 13 pt body; exact 24 pt line pitch; 0.5 in first-line indent; US Letter with 1 in margins; single-spaced caption, block quotations, signature and footnote text; centred page number (11 pt) in the footer; court title, debtor block, title (one line per entry), headings as written (centred caps for level 1, bold left for level 2), native footnotes, block quotations indented 0.5 in on both sides, and the lettered list of the Bid Procedures written back as "a." to "d." paragraphs; the signature block ("Dated:" at left, signature at right) in one unbreakable row. No numbered paragraphs, as in the typst form.
+- Differs or unverified: the debtor block rule and cell paddings are approximations of the typst stroke and inset values and have not been compared on a page. Single spacing is Word's "single", not typst's 0.2 em leading. Footnote numbering is Word's (continuous). The signature block does not carry the last paragraph to the next page (same open item as typst, page 13 of the typst render); it is not fixed here. The font must be installed on the machine that opens the file.
+- BLOCKED: the docx.pdf (LibreOffice render) is not produced: `soffice` is not installed on this box, so `tools/render.sh --engine docx` stops after writing the `.docx`. Gates 0 and 1 for the docx engine (`tools/check.sh --engine docx`) therefore cannot run.
+- BLOCKED: no page review. 0 pages of the docx were rendered or viewed.
+- Not applicable: no table of contents or table of authorities in this form (the typst form has none; B-7007-1(b) is not checked, see the typst gaps above), so no field update is needed.
+- The `.docx` was validated only as a zip with well-formed XML parts. It has not been opened in Word or LibreOffice.
