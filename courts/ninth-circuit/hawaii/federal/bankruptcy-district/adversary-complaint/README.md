@@ -64,3 +64,27 @@ LBR 7016-1(b) (scheduling conference on filing of a complaint) also applies to t
 6. **Typeface.** The local rules name no typeface (HIB-ADV-FONT-001), so the template keeps EB Garamond (vendored), as `docs/FONTS.md` prescribes for a court that names no face. The exemplar is Calibri (one filer; tier 3).
 
 [Court README](../README.md)
+
+## Engines
+
+The docx engine is `docx/make-reference.sh` (builds `docx/reference.docx`) and `docx/hib-adversary-complaint.lua` (cover, caption and signature). The line "Engines: typst only" above predates this section. Build: `sh tools/render.sh --engine docx <this folder> samples/INPUT-hawaii-brewery-adversary-complaint.md`, which writes `samples/OUTPUT-hawaii-brewery-adversary-complaint.docx`. The sample used is `INPUT-hawaii-brewery-adversary-complaint.md`, the one named by the typst OUTPUT naming above.
+
+What the docx sets (in `styles.xml` and `sectPr`; set, not rendered):
+
+- Font EB Garamond everywhere (docDefaults and each style), 12 pt (HIB-ADV-FONT-001, HIB-ADV-FORM-002).
+- Body text double-spaced (`w:line` 480, auto) with a 0.5 in first-line indent. Block quotations single-spaced, 0.25 in inset each side, as in the typst template. Footnotes single-spaced, 12 pt. Headings centered and bold, single-spaced, one blank line above and below.
+- US Letter, 1 in margins (HIB-ADV-FORM-004). Centered PAGE field in the footer; the first page has an empty footer (`titlePg`), as in the typst template.
+- Counsel block, court name, caption table, title, and the DATED / signature table are paragraphs in the custom styles CounselBlock, CourtTitle, CaptionText and SignatureBlock, built by the Lua filter (raw OOXML tables with the party-column rule).
+
+What differs from typst:
+
+- Line pitch. Word's "double" is two single lines of EB Garamond (about 2.6 em); typst uses 2.3 em. The docx therefore runs longer than the typst PDF. Not measured.
+- The blank-line height is approximated (314 twips, 1.31 em at 12 pt).
+- Word lays out the caption table, footnote separator and tab stops by its own rules.
+- The cover sheet (LBR 7003-1, gap 1) is not rendered, in the docx as in the typst.
+- Page numbers are fields, so Word and LibreOffice may not agree on page breaks.
+
+BLOCKED:
+
+- docx.pdf Gates 0 to 3 (`check.sh --engine docx`): BLOCKED, reason: LibreOffice (`soffice`) is not installed on the build box, so no `OUTPUT-*.docx.pdf` exists and no page was rendered or viewed. pages_reviewed for docx = 0. The `.docx` is valid zip with well-formed XML parts (checked with `xmllint`), and it contains the footers.
+- Font check: Word substitutes silently if EB Garamond is not installed on the machine that opens the file (docs/DOCX.md). Not a gate here; noted for the PR.
