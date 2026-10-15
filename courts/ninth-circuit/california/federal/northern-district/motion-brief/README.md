@@ -2,7 +2,9 @@
 
 Doc type: **motion** (notice of motion with memorandum of points and authorities, one filed document). Court: United States District Court for the Northern District of California. Folder: `courts/ninth-circuit/california/federal/northern-district/motion-brief/`.
 
-Status: exemplar=yes, render=ok, overlay=ok, pages reviewed 12 of 12. Not a court-level `court.json` status; nothing here sets `status`.
+Status: exemplar=listed in `exemplars/SOURCE.md` but the PDF is **not in this snapshot**; render=ok (Liberation Serif, 10 pages); overlay=fail (no exemplar PDF, `tools/overlay.sh` exits 1); pages reviewed 10 of 10 after the font change. Not a court-level `court.json` status; nothing here sets `status`.
+
+Typeface: Civil L.R. 3-4(c)(2)(A)-(B) names Times New Roman and Century Schoolbook as examples of a standard proportional font. The template uses **Liberation Serif** (vendored Times New Roman substitute, metric-compatible, `docs/FONTS.md`) at 12 pt, replacing EB Garamond at 13 pt. The filed exemplar is Times.
 
 ## Governing rules
 
@@ -11,7 +13,7 @@ Source: N.D. Cal. Civil Local Rules, full text (PDF, "Effective October 2, 2026"
 | ID | Rule | Requirement | Where it lives |
 |---|---|---|---|
 | CAND-FORM-001 | Civil L.R. 3-4(c)(1) | 8½ × 11 inch white paper. Numbered lines apply to **manual** filing only (see gaps). | `typst/cand-motion-brief.typ` (paper) |
-| CAND-FORM-002 | Civil L.R. 3-4(c)(2)(A)-(B) | Standard proportionally spaced font (e.g. Times New Roman or Century Schoolbook), 12 point or larger, footnotes and quotations included, unless a judge's standing order says otherwise. | `type-size`, `font-family` |
+| CAND-FORM-002 | Civil L.R. 3-4(c)(2)(A)-(B) | Standard proportionally spaced font (e.g. Times New Roman or Century Schoolbook), 12 point or larger, footnotes and quotations included, unless a judge's standing order says otherwise. | `type-size` = 12 pt, `font-family` = "Liberation Serif" (Times New Roman substitute) |
 | CAND-FORM-003 | Civil L.R. 3-4(c)(2) | Text on one side, double-spaced, no more than 28 lines per page, except counsel identification, title of the case, footnotes and quotations. | `line-pitch` = 24 pt, `body-leading` |
 | CAND-FORM-004 | Civil L.R. 3-4(c)(2)(C) | "Spaced no more than 10 characters per horizontal inch." See open question 1. | not enforced |
 | CAND-FORM-005 | Civil L.R. 3-4(c)(3) | Footer on each page with the paper's title, and once a case number is assigned, the case number. | `running-footer` |
@@ -45,38 +47,36 @@ sh tools/render.sh courts/ninth-circuit/california/federal/northern-district/mot
 sh tools/overlay.sh courts/ninth-circuit/california/federal/northern-district/motion-brief tsi-akim-maidu-motion-to-dismiss
 ```
 
-- `samples/OUTPUT-tsi-akim-maidu-motion-to-dismiss.pdf`: 12 pages. Typst compiled with no warnings (`render.sh` fails on any warning). Only vendored fonts: `pdffonts` shows EBGaramond-Regular, -Italic, -Bold, embedded.
-- `samples/OVERLAY-tsi-akim-maidu-motion-to-dismiss.pdf` and `-overlay.txt`: red = our render, blue = exemplar, black = both. The page map pairs pages by word overlap, which is coarse: ours p.1-3 ↔ filed p.1-3, ours p.5-7 ↔ filed p.6-8, ours p.12 ↔ filed p.17 (the signature page, which is the last body page of the exemplar). The overlay is a diagnostic, not a score: the exemplar uses the pleading form (line numbers down the left margin, Times) and the render does not, so the two layers will not coincide on text lines.
+- `samples/OUTPUT-tsi-akim-maidu-motion-to-dismiss.pdf`: 10 pages (was 12 in EB Garamond at 13 pt). Typst compiled with no warnings (`render.sh` fails on any warning). Only vendored fonts: `pdffonts` shows LiberationSerif, -Italic, -Bold, embedded. Body line pitch measured at 24.0 pt with `pdftotext -bbox-layout` (`body-leading` retuned from 0.54em to 1.09em for the new face).
+- Overlay: **not generated**. `exemplars/` has no PDF in this snapshot, so `tools/overlay.sh` exits 1. `samples/OVERLAY-tsi-akim-maidu-motion-to-dismiss.txt` is the stale page map from the EB Garamond render and does not match the current render; it should be regenerated once the exemplar PDF is restored.
 
-## Visual review (Gate 2 record, all 12 pages, rendered at 60 dpi and looked at)
+## Visual review (all 10 pages of the Liberation Serif render, rendered at 70 dpi and looked at)
 
-| Page | What it is | Finding |
-|---|---|---|
-| 1 | Cover: counsel block, court title, caption, title, hearing | OK. Hearing lines aligned after the fix (a stray leading space before "Hon. Laurel Beeler" was fixed). Caption border drawn as a left-and-bottom rule. |
-| 2 | TOC (roman i) | OK after fixing a wrapped entry that pushed its page number onto a new line (page number now sits in its own column). |
-| 3 | TOA (ii), cases and statutes | OK. Entries are left-aligned with dot leaders, page numbers right-aligned. |
-| 4 | TOA (iii) | OK. Last entry, "Other Authorities", on this page. |
-| 5 | Body 1: notice of motion, relief sought (begins) | OK. Double-spaced, footnote 1 at foot of page. The relief paragraph runs over to page 6. |
-| 6 | Body 2: relief, issues, memorandum start, introduction | OK. The issues list is numbered with escaped markers (`1\.`). |
-| 7 | Body 3: introduction, facts | OK. Italic *Id.* and *See* throughout. |
-| 8 | Body 4: facts end; blank space at foot (the Argument heading moves to the next page with its first sub-heading) | Acceptable: heading kept with text. |
-| 9 | Body 5: Argument III.A, legal standard, sub-heading 2 | OK. Hanging sub-heading labels correct (III., A., 1., 2.). |
-| 10 | Body 6: III.A.2-3, footnote 2 (caed.uscourts.gov) | OK. Footnote 2 at 13 pt. |
-| 11 | Body 7: III.B and B.1 | OK. |
-| 12 | Body 8: conclusion and signature | OK. Signature block: "Dated" left, "Respectfully submitted" right, "/s/" line. |
+| PDF page | Printed page | What it is | Finding |
+|---|---|---|---|
+| 1 | cover | Counsel block, court title, caption, title, hearing | OK. Font change only; no layout change on this page. |
+| 2 | i | TOC | OK. Page numbers in their own column. |
+| 3 | ii | TOA, cases and statutes | OK. Dot leaders; page numbers right-aligned. |
+| 4 | 1 | Notice of motion, relief sought; footnote 1 at foot | OK. Double-spaced at 24 pt pitch. |
+| 5 | 2 | Issues to be decided, memorandum, introduction | OPEN (not changed in this font pass): the three numbered issues are set single-spaced (about 17 pt pitch), not double-spaced like the rest. Civil L.R. 3-4(c)(2) exempts only quotations and footnotes. |
+| 6 | 3 | Introduction end, factual background | OK. Paragraphs run on without a blank line between them (first-line indent only), as in the exemplar. |
+| 7 | 4 | Argument III, III.A, legal standard, sub-heading 2 | OK. Hanging sub-heading labels correct. |
+| 8 | 5 | III.A.2-3, footnote 2 (caed.uscourts.gov) | OK. Footnote at foot of page. |
+| 9 | 6 | III.A.3, III.B and B.1, legal standard | OK. |
+| 10 | 7 | Conclusion and signature | OK. "Dated" left, "Respectfully submitted" right, "/s/" line. |
 
-Reviewed pages: 12 of 12.
+Reviewed pages: 10 of 10.
 
 ## Known gaps and open choices
 
 1. **Characters per inch (CAND-FORM-004).** Civil L.R. 3-4(c)(2)(C) says "spaced no more than 10 characters per horizontal inch." For a proportional font, 12-point Times New Roman runs at roughly 14-15 characters per inch (my estimate, not measured), so read literally the rule cannot be met by a proportional font at 12 pt. My reading: the cap is for fixed-pitch fonts (Courier at 12 pt is 10 cpi). Not enforced. **Needs David's call** (or the court's answer) before this template is treated as complete.
 2. **Numbered lines (CAND-FORM-001).** Civil L.R. 3-4(c)(1) requires numbered lines on paper for manual filing. The exemplar (an ECF filing) carries pleading-paper line numbers; this render does not. Not drawn: the template targets the electronic PDF. A pleading-paper variant would need a 28-line grid and a line-number margin.
-3. **Font.** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. The rule's examples are "e.g.," and EB Garamond is proportionally spaced. 13 pt rather than 12 pt because Garamond sets smaller at the same size. Both are choices; the exemplar is Times.
+3. **Font.** Liberation Serif (vendored, OFL) at 12 pt, the Times New Roman substitute named in `docs/FONTS.md`. The rule's examples are "e.g.," so EB Garamond (the previous face, at 13 pt) would also have met the rule's wording; the filed exemplar is Times, so the substitute was chosen. Reading choice: revert `font-family` and `type-size` in `typst/cand-motion-brief.typ` if David prefers EB Garamond.
 4. **Lines per page.** 24 pt pitch, 1 inch top and bottom margins: 27 double-spaced lines fit per body page. Checked with `pdftotext -bbox-layout`: pitch 24.0 pt on every body page. Footnotes and quotations are exempt from double spacing under 3-4(c)(2). Headings are single-spaced too, but the rule does not exempt headings: that is a convention choice, flagged here.
 4a. **Court title position (CAND-FIRST-002).** The rule starts the court title on line 8 "except where additional space is required for counsel identification." Here the counsel block runs past seven lines, so the court title follows it with one line of space rather than sitting on line 8 exactly.
 5. **Footer size.** 11 pt. The rule's type-size floor applies to text, footnotes and quotations; the footer is the paper identification.
 6. **Judge standing orders** can change the form (3-4(c)(2) says "unless a Judge's standing order ... requires otherwise"). Not reflected.
-7. **Page limit (CAND-CONT-002).** The template does not count pages. The sample is 12 pages; the 25-page limit is for the author.
+7. **Page limit (CAND-CONT-002).** The template does not count pages. The sample renders to 10 pages; the 25-page limit is for the author.
 8. **Tier 2 exemplars.** One exemplar only. The eval loop asks for two or three from different filers before tier 2 is judged. Not done. Searches tried are in `exemplars/SOURCE.md`.
 9. **Partial sample.** Argument III.B.2-4 not transcribed (see Sample).
 10. **Certificates.** None generated (see Governing rules).

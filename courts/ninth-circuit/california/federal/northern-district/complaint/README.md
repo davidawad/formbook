@@ -5,11 +5,13 @@ Folder: `courts/ninth-circuit/california/federal/northern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-superhuman-3-26-cv-11711-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
+| exemplar | listed in `exemplars/SOURCE.md` (1 filer), but the PDF is **not in this snapshot**: `exemplars/` holds only `SOURCE.md` |
 | sample md | `samples/INPUT-superhuman-complaint.md` (a portion of the filing, see below) |
-| render | ok: `samples/OUTPUT-superhuman-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-superhuman-complaint.pdf` and `-overlay.txt` |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
+| render | ok: `samples/OUTPUT-superhuman-complaint.pdf`, 10 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Bold embedded), no warnings |
+| overlay | **fail**: `tools/overlay.sh` exits 1 ("no exemplar pdf in exemplars/"). `samples/OVERLAY-superhuman-complaint.txt` is the stale page map from the EB Garamond render; no `.pdf` overlay exists |
+| pages reviewed | 10 of 10 (every page rendered at 70 dpi and viewed after the font change) |
+
+Typeface: Civil L.R. 3-4(c)(2)(A) names Times New Roman and Century Schoolbook as examples of a standard proportional font. The template uses **Liberation Serif**, the vendored metric-compatible Times New Roman substitute (`docs/FONTS.md`), at 12 pt. The filed exemplar is Times. Page count is unchanged from the EB Garamond render (10 pages).
 
 ## Governing rules
 
@@ -22,7 +24,7 @@ Primary source: N.D. Cal. Civil Local Rules, fetched 2026-10-14 from https://www
 | Civil L.R. 3-4(a)(5) | "Class Action" legend under the title, if the complaint is a class action. | `legend` frontmatter (not used by the sample; the sample is not a class action). |
 | Civil L.R. 3-4(c)(1) | 8½ × 11 inch white paper with numbered lines. | `page-w`, `page-h`, `line-numbers()`. |
 | Civil L.R. 3-4(c)(2) | Text double-spaced, no more than 28 lines per page, except counsel block, title, footnotes and quotations. | `pitch = 24pt`, `lines-per-page = 28`, `body-leading = 1.35em` (24 pt baseline pitch at 12 pt). |
-| Civil L.R. 3-4(c)(2)(A) | Standard proportionally spaced font (e.g. Times New Roman or Century Schoolbook). | `font-family = "EB Garamond"`, vendored in `fonts/` (see Known gaps). |
+| Civil L.R. 3-4(c)(2)(A) | Standard proportionally spaced font (e.g. Times New Roman or Century Schoolbook). | `font-family = "Liberation Serif"` (Times New Roman substitute, metric-compatible; see Typeface above and Known gaps). |
 | Civil L.R. 3-4(c)(2)(B) | 12-point type or larger. | `type-size = 12pt`, everywhere including footer (10 pt, see Known gaps). |
 | Civil L.R. 3-4(c)(2)(C) | No more than 10 characters per horizontal inch. | Not asserted (see Known gaps). |
 | Civil L.R. 3-4(c)(3) | Footer on each page with the paper's title, and the case number once assigned. | `footer-block` (title from `footer_title`, `CASE NO.` from `case_number`). |
@@ -52,7 +54,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 ## Known gaps and open choices
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search (CourtListener RECAP, `type=r`, `court=cand`, complaints filed 2026-10-02 to 2026-10-13) also found Saflor v. Every, Inc. (3:26-cv-11467, 10 pages, Times New Roman, pleading paper, counsel Clapp) and SK hynix Inc. v. Longhorn IP LLC (3:26-cv-11609, 35 pages). Those were downloaded and checked for text and format but not saved, because the brief asks for one exemplar per doc type. Tier 2 is therefore **not** judged against two filers yet.
-2. **Font.** The rule names Times New Roman or Century Schoolbook as examples; this template uses EB Garamond (vendored, the only font vendored in `fonts/`). EB Garamond at 12 pt has a smaller x-height than Times at 12 pt, so the text looks smaller than the exemplar. The 12-point minimum is met; whether the court wants a larger apparent size is a question for David (a vendored Times-metric font would remove the difference).
+2. **Font.** The rule names Times New Roman and Century Schoolbook as examples of a standard proportional font. The template uses Liberation Serif (Times New Roman substitute, metric-compatible), replacing EB Garamond, because the filed exemplar is Times and `docs/FONTS.md` maps a named face to its substitute. Reading choice: the rule's text ("standard proportionally spaced font", "e.g.") would also allow EB Garamond; if David prefers that, revert `font-family` in `typst/cand-complaint.typ`.
 3. **Characters per inch (Civil L.R. 3-4(c)(2)(C)).** Not asserted. The rule is written as a pitch limit (10 cpi), which reads as the monospace case; the exemplar is proportional Times 12 pt. Taking the rule to apply to proportional text would require a different font size and is a reading question, not a template defect.
 4. **Footer type size.** The footer is 10 pt; the rule's 12-point requirement is written for "text", and footers are not text in the rule's terms (3-4(c)(3)). Logged as an interpretation.
 5. **Caption.** The party column is closed by a rule (right and bottom) rather than a column of ")" marks used in the exemplar. This is a tier-2 convention choice (both are seen in N.D. Cal. filings); recorded as ACCEPTED.

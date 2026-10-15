@@ -12,10 +12,10 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // CAND-FORM-002: standard, proportionally spaced font. Vendored in /fonts.
-#let type-size = 13pt                    // CAND-FORM-002: 12 point or larger, footnotes and quotations too. 13 pt is a style choice (EB Garamond is smaller than Times at the same point size); see ../README.md.
+#let font-family = "Liberation Serif"    // CAND-FORM-002: standard, proportionally spaced font; the rule's example is Times New Roman, substituted by its metric-compatible vendored clone (docs/FONTS.md).
+#let type-size = 12pt                    // CAND-FORM-002: 12 point or larger, footnotes and quotations too.
 #let line-pitch = 24pt                   // CAND-FORM-003: double spacing. With the margins below, 27 lines fit (limit 28).
-#let body-leading = 0.54em               // gap between lines of body text; tuned so the line pitch is line-pitch.
+#let body-leading = 1.09em               // gap between lines of body text; tuned so the line pitch is line-pitch (Liberation Serif at 12 pt: 10.9 pt line box + 13.1 pt leading = 24 pt, measured).
 #let single-leading = 0.2em              // counsel block, captions, headings, footnotes, tables of contents and authorities.
 #let page-margin-top = 1in
 #let page-margin-bottom = 1in
