@@ -15,3 +15,18 @@
 | Rules source | https://www.bap10.uscourts.gov/sites/bap10/files/clerk/Bankruptcy%20Rule%20and%20BAP%20Local%20Rules%20%28eff.%201.1.2026%29.pdf (BAP Local Rules, Part VIII, eff. 1.1.2026). Fetched 2026-10-14; text extracted with `pdftotext`. |
 
 Next step for a human: a BAP appellate brief can be requested from the BAP Clerk, or found in a PACER/CM-ECF docket for a known BAP number if the appellant filed one there. When one is found, store it as `exemplars/FILED-EXAMPLE-<short-case>-<bap-no>-opening-brief.pdf`, fill in this table, and re-run the overlay.
+
+## Re-check 2026-10-15 (opening brief, same search)
+
+Still **BLOCKED: no public exemplar**. Each row below was run on 2026-10-15 from this box.
+
+| Source | Result |
+|---|---|
+| CourtListener API, paced (no API key is configured on this box; anonymous calls returned HTTP 429 with `retry-after` about 30 s, so each call waited and was retried) | `type=r&court=bap10&q=appellee`: HTTP 200, `count: 0`. `type=d&court=bap10`: HTTP 200, `count: 0`. `type=o&court=bap10&q=brief`: HTTP 200, `count: 390`, all BAP opinions (e.g. *In re Williams*, BAP No. CO-10-020), none a brief. The 429 gaps recorded above are closed: the zero RECAP counts are real results, not throttling. |
+| WebSearch, standard (3 queries) and extended (1 query) | Appellant's, appellee's and reply briefs of the Tenth Circuit BAP, with BAP No. prefixes. Results: BAP opinions (e.g. *In re Amy Liebl Darter, MD, PC*, BAP No. WO-25-6), the court's sample brief, Form 417C, and a govinfo BAP docket sheet (11-57; a docket, not a brief). No filed brief. |
+| WebFetch, https://www.bap10.uscourts.gov/filing/briefs (the BAP's Briefs page) | Posted documents: the court-authored sample brief and appendix (Pro Se Guide), Form 417C, Brief Writing Tips, and the Appendix Checklist. The page states that no real filed brief is posted. |
+| WebFetch, https://www.bap10.uscourts.gov/node/128 | Links only to `/filing/briefs` and the notice-of-appeal form. No filed brief. |
+
+The court-authored sample is still **not** an exemplar: it is a template, not a filing.
+
+Render and overlay on the same date: `tools/render.sh` exit 0, no typst warnings, 11 pages. Output in `/work/artifacts/bap10/`, not `samples/`. The snapshot has no PDFs, so no existing `samples/` PDF was regenerated. `tools/overlay.sh` exit 1 (no OUTPUT in `samples/`; no exemplar exists either).

@@ -96,3 +96,10 @@ On the first render the TOC repeated the heading numbers ("I. I. ...") and a lon
 
     sh tools/render.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief samples/INPUT-generic-opening-brief.md
     sh tools/overlay.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief generic-opening-brief   # fails until an exemplar exists
+
+## Re-check 2026-10-15
+
+- Exemplar: still **none** (BLOCKED: no exemplar). The searches of 2026-10-15 are logged at the end of `exemplars/SOURCE.md`. The BAP's own Briefs page posts no filed brief, only court-authored samples and forms.
+- Render: `sh tools/render.sh` exit 0, no typst warnings, 11 pages. The output is `/work/artifacts/bap10/OUTPUT-generic-opening-brief.pdf`, not `samples/`: the snapshot carries no PDFs, so the existing `samples/` names were not regenerated.
+- Overlay: `sh tools/overlay.sh` exit 1. It finds no OUTPUT in `samples/`, and there is no exemplar to overlay even if there were. Not produced.
+- Pages reviewed: 11 of 11. Every page was rasterised at 60 dpi and viewed on 2026-10-15. The Page review table above matches that render. No template change was made: with no exemplar, no open choice can be settled.
