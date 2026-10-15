@@ -59,3 +59,12 @@ Pages reviewed (rasterized at 60 dpi and viewed, 2026-10-14, after the heading f
 See `exemplars/SOURCE.md`.
 
 BLOCKED: no public exemplar (CGCCA opening brief). Two search passes on 2026-10-14 (about 15 searches and fetches, listed in `exemplars/SOURCE.md`) found no filed CGCCA appellant's brief. CourtListener returned 0 results for this court; the uscg.mil index, orders page and CourtListener web search returned HTTP 403; the Navy JAG filings table is empty in the fetched capture. A CAAF brief in a Coast Guard case (Lopez, 24-0226/CG) was found and not used: it was filed in the wrong court. Needs a public copy from the uscg.mil Appellate Briefs index or the Navy JAG filings table, and the JRAP text, before tier-1 work can start.
+
+## Engines
+
+Docx (`docx/`, `samples/OUTPUT-smoke.docx`, `samples/OUTPUT-smoke.docx.pdf`; built by `docx/build-reference.sh`, filter `docx/uscgcoca.lua`). Rendered and checked on the smoke sample only, 3 pages, all 3 pages looked at.
+
+- **Matches the typst form:** EB Garamond 12 pt (`pdffonts`: only EBGaramond Regular, Bold, Italic embedded); letter; 1 in margins; body lines at the typst pitch (23.4 pt, exact); the caption, title, proceeding, counsel block (italic rank lines), the rule-and-signer signature block (3.2 in), and the certificate on a new page; page number centered from 1. Pagination matches the typst render (same three page breaks).
+- **Differs:** LibreOffice places text inside an exact-height line lower than typst does, so the first line of page 1 sits about 10 pt lower, and a few lines after a single-spaced heading are off by up to about 5 pt. Heading sizes are rounded to half points (H1 17 pt for typst's 16.8 pt; H2 14.5 pt for 14.4 pt). Word may paginate differently (docs/DOCX.md).
+- **Not in the typst template:** footnote text is set to 10 pt in the reference (not measured against typst; the smoke sample has no footnotes).
+- **BLOCKED:** nothing in the typst form is blocked. `tools/check.sh` cannot run on this doc-type folder (no `checks.yaml` or `court.json` at this level), so no docx stamp is written.
