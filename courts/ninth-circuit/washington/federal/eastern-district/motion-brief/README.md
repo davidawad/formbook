@@ -10,7 +10,8 @@ Folder: `courts/ninth-circuit/washington/federal/eastern-district/motion-brief/`
 | sample md | `samples/INPUT-hartsock-motion-to-dismiss.md` (an excerpt, 11 rendered pages; see below) |
 | render | ok: `samples/OUTPUT-hartsock-motion-to-dismiss.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-hartsock-motion-to-dismiss.pdf` and `OVERLAY-hartsock-motion-to-dismiss.txt` |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; pages 2 to 9 and 11 after the last footer change, as a contact sheet) |
+| typeface | face required: none named by LCivR 10(d) (serif or traditional Roman; proportionately spaced, 14 pt or more; or monospaced). Vendored substitute: not needed, EB Garamond kept (any proportional serif meets the rule). Fit: n/a. Font list: `EB Garamond`, embedded (`pdffonts`). |
+| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; pages 2 to 9 and 11 after the last footer change, as a contact sheet; all 11 again on the fonts pass) |
 
 File names follow the tools (`INPUT-`, `OUTPUT-`, `OVERLAY-`, which `tools/overlay.sh` reads and writes), not the
 `<id>.pdf` / `<id>-overlay.pdf` names in the brief.
@@ -90,5 +91,5 @@ The overlay is a diagnostic, not a score. The sample pairs with the filed pages 
 5. **Footer title.** The footer uses the abbreviated title "BATTELLE'S MOTION TO DISMISS - n" (LCivR 10(a)(1)(E) allows an abbreviated title). The full title wraps to two lines at 14 pt in the 6.4 in text width.
 6. **Hearing.** The caption shows the date and "Without Oral Argument" (the exemplar's form). LCivR 7(i)(1) also asks for a time and place where argument is set; none is shown because none is set.
 7. **Page limit and timing.** LCivR 7(f)(1) (20 pages for a dispositive motion) and LCivR 7(i)(2)(B) (50 days) are not checked by the template. Author responsibility.
-8. **Typeface.** EB Garamond at 14 pt has a smaller x-height than Times at 14 pt (see the complaint README, gap 2).
+8. **Typeface.** LCivR 10(d) names no face (serif or traditional Roman, proportionate at 14 pt or more), so EB Garamond stays; no `docs/FONTS.md` substitute applies. EB Garamond at 14 pt has a smaller x-height than Times at 14 pt (see the complaint README, gap 2).
 9. **Check scripts not run.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. Render, overlay and the page review above are the checks for this doc type.
