@@ -7,9 +7,10 @@ Folder: `courts/sixth-circuit/tennessee/federal/eastern-district/motion-brief/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-brockington-sweet-emmaline-1-26-cv-00065-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-brockington-motion-brief.md` (the whole memorandum, footnotes included) |
-| render | ok: `samples/OUTPUT-brockington-motion-brief.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-brockington-motion-brief.pdf` and `OVERLAY-brockington-motion-brief.txt` (page map) |
-| pages reviewed | 8 of 8 (every page rasterized at 60 dpi and viewed after the last template change) |
+| render | ok (re-run 2026-10-15): `samples/OUTPUT-brockington-motion-brief.pdf`, 8 pages, typst 0.15.0, `tools/render.sh` with vendored fonts only, no warnings; `pdffonts`: EB Garamond Regular, Bold and Italic embedded |
+| overlay | ok (re-run 2026-10-15): `samples/OVERLAY-brockington-motion-brief.pdf` and `OVERLAY-brockington-motion-brief.txt` (page map) |
+| pages reviewed | 8 of 8 (re-rendered and re-viewed 2026-10-15 at 60 dpi) |
+| typeface | face required: none (LR 5.1) → EB Garamond kept (no substitute) → visual only for the exemplar's Times-like face |
 
 ## Governing rules
 
@@ -42,7 +43,7 @@ Folder: `courts/sixth-circuit/tennessee/federal/eastern-district/motion-brief/`.
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for two or three filers. The search (CourtListener RECAP through the API, `court=tned`, memoranda supporting motions to dismiss) found ABC IP, LLC v. Hoffman, No. 1:25-cv-00389 (E.D. Tenn., a memorandum in support of a Rule 12(b)(6) motion, 23 pages, available on RECAP) as a candidate; it was not downloaded in this pass. Tier 2 is therefore **not** judged against two filers yet.
 2. **Motion not produced.** A Rule 12(b) motion is a separate filing (Fed. R. Civ. P. 7(b)(1)). This template produces the memorandum only. The exemplar's motion (Document 10) is not in this folder.
-3. **Typeface.** LR 5.1 names no typeface, only the 12-point minimum. EB Garamond at 12 pt (the only vendored font) has a smaller x-height than the Times New Roman-like face in the exemplar, so the text looks smaller. The same choice is recorded in the complaint README and in ca9's templates. A vendored Times-metric font would remove the difference.
+3. **Typeface.** Face required: none. LR 5.1 names no typeface, only the 12-point minimum (checked 2026-10-15 against the Local Rules PDF and a courtrules.net reproduction of LR 5.1). Substitute: none needed, so EB Garamond stays per `docs/FONTS.md` ("No face named"). EB Garamond at 12 pt has a smaller x-height than the Times New Roman-like face in the exemplar, so the text looks smaller; Liberation Serif would match the exemplar's face, but the rule does not require it, and the exemplar's face is not the test. The same choice is recorded in the complaint README and in ca9's templates. A vendored Times-metric font would remove the difference.
 4. **Page limit (LR 7.1(b)).** The template does not count pages. The sample is 8 pages, under 25.
 5. **Caption convention.** The party column is closed by a rule (right and bottom). The exemplar's caption rule style is not verified from its text layer, so this is recorded as a tier-2 choice (ACCEPTED), not as a match.
 6. **Signature block and certificate on page 8.** The signature block does not break across pages (`breakable: false`), so the sample's signature and certificate fall on page 8 with no body text there. The exemplar's signature also sits on its own page. Recorded as a tier-2 layout note; not a defect.

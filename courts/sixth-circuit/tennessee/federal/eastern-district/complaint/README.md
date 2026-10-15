@@ -7,9 +7,10 @@ Folder: `courts/sixth-circuit/tennessee/federal/eastern-district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-simpson-experian-1-26-cv-00138-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-simpson-complaint.md` (the whole filing's text, with partly illegible paragraphs marked) |
-| render | ok: `samples/OUTPUT-simpson-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-simpson-complaint.pdf` and `OVERLAY-simpson-complaint.txt` (page map) |
-| pages reviewed | 10 of 10 (every page rasterized at 60 dpi and viewed; the spacing defect found on the first pass is fixed and re-checked) |
+| render | ok (re-run 2026-10-15): `samples/OUTPUT-simpson-complaint.pdf`, 10 pages, typst 0.15.0, `tools/render.sh` with vendored fonts only, no warnings; `pdffonts`: EB Garamond Regular and Bold embedded |
+| overlay | ok (re-run 2026-10-15): `samples/OVERLAY-simpson-complaint.pdf` and `OVERLAY-simpson-complaint.txt` (page map) |
+| pages reviewed | 10 of 10 (re-rendered and re-viewed 2026-10-15 at 60 dpi; the spacing defect found on the first pass is fixed and re-checked) |
+| typeface | face required: none (LR 5.1) → EB Garamond kept (no substitute) → visual only for the exemplar's Times-like face |
 
 ## Governing rules
 
@@ -43,7 +44,7 @@ Rules checked and not applicable to the complaint: LR 7.1(b), the 25-page limit 
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for two or three filers. The search (CourtListener RECAP through the API, `court=tned`, complaints filed 2026-06 to 2026-09) found Blitchington v. Portfolio Recovery Associates, LLC, No. 1:26-cv-00274 (13 pages, filed 2026-09-24) as a candidate; it was not downloaded in this pass. Tier 2 is therefore **not** judged against two filers yet.
 2. **BPR number (LR 5.1).** The exemplar filer is pro hac vice, and its signature block shows no Tennessee BPR number. The template reserves a `bpr` line, but the sample leaves it out, because the exemplar does not show one. Whether a pro hac vice complaint must carry local counsel's BPR number is a question for David (the filing would need local counsel's name and number).
-3. **Typeface.** LR 5.1 names no typeface, only the 12-point minimum. EB Garamond at 12 pt (the only vendored font) has a smaller x-height than the Times New Roman of the exemplar, so the text looks smaller. ca9's complaint template records the same choice. A vendored Times-metric font would remove the difference.
+3. **Typeface.** Face required: none. LR 5.1 names no typeface, only the 12-point minimum (checked 2026-10-15 against the Local Rules PDF and a courtrules.net reproduction of LR 5.1). Substitute: none needed, so EB Garamond stays per `docs/FONTS.md` ("No face named"). EB Garamond at 12 pt has a smaller x-height than the Times New Roman of the exemplar, so the text looks smaller; Liberation Serif would match the exemplar's face, but the rule does not require it, and the exemplar's face is not the test. ca9's complaint template records the same choice. A vendored Times-metric font would remove the difference.
 4. **Civil cover sheet (LR 3.1, JS-44).** Not produced here. It is a separate form and must accompany the complaint.
 5. **Caption convention.** The party column is closed by a rule (right and bottom) rather than a column of ")" marks. The exemplar's caption rule style is not verified from its text layer, so this is recorded as a tier-2 choice (ACCEPTED), not as a match.
 6. **Division.** The exemplar's caption has no division line, although LR 3.1.2 requires filing in a division. The template takes a `division` line when a filing names one; the sample does not.

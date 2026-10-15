@@ -11,6 +11,7 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/moti
 | overlay | ok: `samples/OVERLAY-kenney-motion-memorandum.pdf` and `samples/OVERLAY-kenney-motion-memorandum.txt` |
 | pages reviewed | 6 of 6 (every page of the final render rasterized at 60 dpi and viewed) |
 | tier 2 | not met: one filer only (see Known gaps 1) |
+| typeface | face required by the rules: none (Known gaps 4) -> vendored substitute: none needed, EB Garamond kept per `docs/FONTS.md` ("No face named") -> not applicable |
 
 Commands (from the repo root, with `export PATH="$HOME/tb/bin:$PATH"`):
 
