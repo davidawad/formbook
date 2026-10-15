@@ -61,3 +61,14 @@ Frontmatter: `case_number`, `caption` (two sides: `names`, `designation`), `proc
 - efast.gaappeals.us 2009 and 2010 court rule PDFs: HTTP 404 / blocked.
 - Web search (standard and extended): typeface, Rule 24, Rules 22/23/25. Snippets only; one source for Rule 2(3).
 - Exemplar: CourtListener REST search for "Court of Appeals of Georgia" with "brief of appellant": 10 results, none a Georgia Court of Appeals brief (N.D. Ga., S.D. Ga., M.D. Ga., 11th Cir., D. Del., etc.). Web search for public Georgia Court of Appeals brief PDFs: only efast seminar papers and a 2025 clerk's order.
+
+## Engines
+
+docx (`docx/`: `reference.docx` from `make-reference.sh`, `gactapp-brief.lua`, `render.sh`; LibreOffice PDF is the checked copy).
+
+- Matches the typst form: Liberation Serif 14 pt throughout; 1-inch margins, Letter; body double-spaced (Word "double"); half-inch first-line indent, none after headings; headings centred caps (level 1), bold (level 2), bold italic (level 3); block quotations indented both sides and single-spaced; cover with no page number; contents on a lower-roman page; body numbered from 1 at the bottom centre; signature block at 3.2 in.
+- Contents is a TOC field with cached entries; page numbers come from a first LibreOffice pass (`docx/render.sh`), so Word may show a different page after updating fields.
+- Differs: the typst body leading measures about 24.6 pt (pitch of the render), below true double spacing (about 32 pt for this face). The docx uses true double spacing, so it runs longer (opening brief: typst 7 pages, docx 9). This is a typst finding for the typst template, not changed here.
+- Footnotes: the typst brief template sets no footnote rule; the docx uses 14 pt single-spaced footnotes (the form's stated 14 pt). No sample has footnotes.
+- BLOCKED: none for this doc type. `sh tools/check.sh --engine docx` was not run (no gate run in this bead; the .docx.pdf is rendered and every page was viewed at 60 dpi).
+- Opened and rendered with LibreOffice only; not opened in Word.
