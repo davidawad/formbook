@@ -86,3 +86,13 @@ Compared with the Force exemplar (the overlay pair) and, for the caption and TOC
 | 10 (7) | Force p.47 (overlay pair; certificate of service) | CERTIFICATE OF SERVICE on its own page with the signature block. | PASS |
 
 Overlay: pages pair with the Force pages listed in `OVERLAY-force-memorandum.txt` (word overlap 20 to 73%). The overlay is a diagnostic, not a score; the differences are the omitted passages and the font.
+
+## Engines
+
+DOCX (`docx/`): `build-reference.sh` builds `reference.docx` (three sections: cover without a number, front matter in roman, body in arabic from 1; EB Garamond 12 pt; 10 pt footnotes; exact 24 pt body spacing; headings with hanging labels; 1 in margins). `nyed-motion-brief.lua` builds the cover, the TOC, the TOA, the signature block, the certificate of compliance (word count from the markdown) and the certificate of service. `render.sh` makes two passes: it lays the body out, reads the page of each heading and each cited authority from the LibreOffice PDF, and writes those numbers into the TOC and TOA. Samples: `samples/OUTPUT-force-memorandum.docx` and `.docx.pdf` (LibreOffice conversion, no errors; opened in LibreOffice, not Word).
+
+- Matches the typst output: 10 pages (cover, TOC, TOA, body 1 to 6, certificate of service), the cover layout, caption rules, section numbering, TOC with dot leaders and levels, TOA grouped with dot leaders, body spacing and indents, footnote size, signature and certificates, word count (1792). Pages reviewed: 10 of 10 (`docx-01` to `docx-10` at 60 dpi).
+- Differs: body page breaks follow LibreOffice, so some TOA page numbers differ from the typst TOA (for example Waldman p. 3 in docx, p. 2 in typst; 18 U.S.C. § 2334(a) p. 4, typst p. 3). The docx numbers are the ones found in the docx PDF.
+- TOC and TOA page numbers are typed text, not Word fields. If the brief is edited in Word, or Word paginates differently, the numbers must be regenerated with `render.sh`; they are not updated by Word. A TOA page is found by the first word of a case name (or the last token of a rule or statute cite), so a common word can over-count; compare with the typst TOA before accepting a new list.
+- The counsel block on the cover sits at a fixed distance below the title (an exact-height spacer, not anchored to the page bottom); a caption that wraps differently in Word moves it.
+- BLOCKED: `tools/check.sh <doc-dir> --engine docx` cannot run on this folder (exit 2): it needs `court.json` and `checks.yaml` at the court root, and neither exists for a doc-type folder. No gate has passed for the docx engine; the `.docx.pdf` was reviewed by eye only.

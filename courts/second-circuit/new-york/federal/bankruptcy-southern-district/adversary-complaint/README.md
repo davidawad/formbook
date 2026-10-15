@@ -99,3 +99,25 @@ Open in the render: none that is visible at this resolution. The overlay is not 
 
 Not blocked for the adversary complaint. The verification gaps above (FRCP 10(b) text not fetched; SDNY Civil Rule 11.1 not
 retrieved) are recorded, and they bear on tier 1 (numbered paragraphs, typography) and should be checked before landing.
+
+## Engines
+
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 27.6 pt double spacing, exact
+13.8 pt single spacing for the counsel block, caption, signature and footnotes at 11 pt, 1 in margins, letter, PAGE footer);
+`docx/nysb-adversary-complaint.lua` builds the cover (counsel, court title, Form 416D caption as a table with a right and a bottom
+rule, title), a section break (no page number on the cover, body from 1), numbered paragraphs, lettered (a) to (g) prayer items,
+and the signature block, which keeps with the last item. Rendered with `tools/render.sh --engine docx`: 11 pages, all 11 viewed
+side by side with the typst reference (`/work/artifacts/nysb/adversary-complaint/pair-NN.png`).
+
+- Matches typst: type face and size, double and single spacing, margins, cover layout (one page), the body restart at 1, the
+  paragraph numbering, the heading sizes (level 1 at 17 pt, level 2 at 14.5 pt, as typst's default heading sizes), page breaks
+  within about one line of the typst pages.
+- Differs: headings and paragraph labels (A., 1.) are typed text, not Word numbering; the caption rules are paragraph borders
+  inside the caption table (LibreOffice draws them at the same places as the typst rules); line-level pagination can differ by a
+  line from Word.
+- Body footnotes: the typst render prints no text for the body footnotes (`[^2]`, `[^3]` of the Celsius sample): the typst
+  template drops footnote definitions. The docx prints them. This is a typst defect, not a docx difference.
+- The `.docx` opens in LibreOffice with no repair prompt (the conversion ran without errors; `unzip -t` and `xmllint` pass on the parts).
+- BLOCKED, docx gates not run: `tools/check.sh` needs `court.json` and `checks.yaml` in the court root (for Gate 1) and the
+  court root has no `checks.yaml` (and no `rules.md`), so no docx check ID could be run and no stamp was written. Gate 2 for
+  docx is not recorded.

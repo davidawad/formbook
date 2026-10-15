@@ -83,3 +83,10 @@ Each page was rendered and viewed after the last template change (the count-head
 - p.12: items g and h; JURY TRIAL DEMANDED; "Dated: October 7, 2026"; signature block (Respectfully submitted, firm, s/ line, attorneys with PA ID numbers, counsel line, address, telephone). PASS.
 
 Earlier review passes found and fixed: paragraphs running into one another (blocks were inline), headings overlapping text (block spacing equal to text height rather than the 26 pt pitch), caption rows overlapping, and a statute line that had been numbered as paragraph 39. Those are fixed in the current render.
+
+## Engines
+
+- **typst** (primary, `typst/`): the reference for the court's form.
+- **docx** (`docx/reference.docx`, `docx/pawd.lua`, `docx/build-reference.sh`; sample `samples/OUTPUT-cragle-complaint.docx`): built with pandoc 3.6.4 on the reference. Matches the typst template: EB Garamond 13 pt, exact 26 pt (double) line pitch, 1 in margins on US Letter, 0.5 in first-line indent, paragraphs numbered 1 to 46 by the filter (number, tab, text), counts and sections centered in bold, sub-heads flush left, lettered prayer items with a hanging letter, the court heading, the caption (a borderless table: parties, ")" column, case number and jury demand in the right column), the title, the "Dated:" line and the signature block at 3 in, page number centered in the footer.
+- Differences from typst: the caption rows are spaced by the table, not the typst grid (a few points per row differ); paragraph numbers and lettered items are typed text, not Word lists; the page number is the PAGE field, which needs no update.
+- **BLOCKED** (docx): no `checks.yaml` exists for this court, so no gate check ID can be listed. Every check measured on `samples/OUTPUT-cragle-complaint.docx.pdf` is BLOCKED with the reason "LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked". The `.docx` passes the package checks run here (ziptool reads every entry, xmllint on every XML part, no duplicate style ids); it was not opened in Word or LibreOffice.

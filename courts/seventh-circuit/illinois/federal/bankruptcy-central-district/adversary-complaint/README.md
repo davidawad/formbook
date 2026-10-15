@@ -81,3 +81,11 @@ Fonts pass, 2026-10-15: no court rule names a face, so the face stays EB Garamon
 - Exhibits, the summons, and the civil cover sheet are not templated. The exemplars attach exhibits by reference only.
 - The CM/ECF header ("Case ... Doc 1 Filed ...") is added by the court system, not by the template.
 - Only one exemplar was used for the overlay. The second (Erickson, 3 pages) was checked by reading its text for the caption and signature; it was not overlaid.
+
+## Engines
+
+- **typst** (primary): unchanged by the docx work. The typst render of the sample is 10 pages.
+- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` (pandoc's default reference, restyled: EB Garamond 13 pt, exact 28.4 pt body pitch, 0.5 in first-line indent, Letter with 1 in margins, centered PAGE footer, custom styles for the caption, title, signature and counsel lines). `docx/ilcb-adversary-complaint.lua` writes the court heading, the caption (a borderless three-column table), the title and the signature block. Rendered with `tools/render.sh --engine docx`: `samples/OUTPUT-i80-adversary-complaint.docx` and `.docx.pdf` (10 pages). Converted by LibreOffice (`soffice --headless`) with no error and no repair; the zip and every XML part validate. Not opened in Word.
+- **Matches typst**: typeface and size, line pitch, first-line indent, no space between body paragraphs, margins, page-number position, caption layout, title, numbered paragraphs, the "(i)" sub-paragraphs (printed as typed, not as Word lists), the signature block with the last paragraph kept with it, and the counsel lines. Pages 1 to 10 viewed at 60 dpi against the typst render (10 of 10).
+- **Differs (tier 2)**: level-1 headings (INTRODUCTION and the other `#` sections) are centered bold 13 pt in the docx, as the template's own comment says. The typst render prints them left-aligned and larger (about 18 pt). The docx headings are not made larger. Exact line spacing puts the first line of each page slightly lower than the typst render. No table of contents, table of authorities or CM/ECF header, as in typst.
+- **docx BLOCKED**: `sh tools/check.sh <this folder> --engine docx` cannot run. It exits 2 because this folder has no `court.json` and no `checks.yaml`, so no check ID ran and no `.check-docx.txt` stamp was written. Not a pass.

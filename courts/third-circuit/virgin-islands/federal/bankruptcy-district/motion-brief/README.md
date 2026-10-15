@@ -102,4 +102,22 @@ Open findings (Gate 2):
 
 - 2026-10-14: exemplar found (CourtListener RECAP, Adv. 3:21-ap-03001, ECF 23); excerpt transcribed; template built; render ok (no typst warnings); overlay ok; all 8 pages reviewed. Fixes listed above.
 
+## Engines
+
+`docx/` (pandoc 3.6.4, `reference.docx` from `docx/build-reference.sh`, cover, table of contents, heading labels and signature in `docx/vib.lua`). Built from the court folder:
+
+```sh
+sh motion-brief/docx/build-reference.sh motion-brief/docx/reference.docx
+pandoc --from markdown+smart --to docx --reference-doc=motion-brief/docx/reference.docx \
+  --lua-filter=motion-brief/docx/vib.lua motion-brief/samples/INPUT-prosser-motion-to-dismiss.md \
+  -o motion-brief/samples/OUTPUT-prosser-motion-to-dismiss.docx
+```
+
+- **Matches the typst template:** EB Garamond 13 pt; every line at the 19.5 pt pitch measured on the typst render; 1 in margins on US Letter; 0.5 in first-line indent; footnotes at 13 pt; the cover (court header, caption with the Form 416 rules, title, counsel blocks at 2.3 in) on its own page; a table-of-contents page; level 1 headings centered, bold, capitals; levels 2 to 5 hanging at 0.5 in steps with the labels I., A., 1., a. typed by the filter (the author types none); the signature block (Dated, "Respectfully submitted," the counsel groups with "- and –"); footer "Page n of N".
+- **Differs (pandoc and Word limits):** the footer carries no short title; the table of contents is a TOC field (see BLOCKED); the caption row padding is approximate; pandoc's metadata title and date are not written into the body and the document title property is empty; pagination can differ in Word.
+- **Not checked here:** the docx has not been opened in Word or LibreOffice (LibreOffice is not installed in the build box). The `.docx` is a valid zip (ziptool reads every entry) and every XML part is well formed (xmllint). The text of the sample is in the docx, in order (checked word by word against the markdown body).
+- **BLOCKED (TOC page numbers):** the TOC field is empty until Word or LibreOffice updates fields, and the page numbers cannot be computed without a rendered PDF. The typst TOC shows them; the docx TOC does not, until updated. A `.docx.pdf` cannot be made here, so this cannot be checked.
+- **BLOCKED (docx.pdf):** this court folder has no checks file (no `checks.yaml`), so no gate check ID is readable. The requirement IDs of `README.md` (VIB-MB-CAPTION, VIB-MB-TITLE, VIB-MB-GROUNDS, VIB-MB-PROPOSED, VIB-MB-LENGTH, VIB-MB-FONT, VIB-MB-PAGE, VIB-MB-SPACING, VIB-MB-HEADINGS, VIB-MB-SIGNATURE) and the TOC page numbers are all measured on the `.docx.pdf`, so all are BLOCKED with the reason: LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked.
+- **Finding for the template (tier 2, not changed here):** the typst body pitch is 19.5 pt, about 1.5 times the 13 pt type size, not the double spacing the README calls it. The docx copies the measured typst pitch. The 20-page limit of LBR 7008-1(C) is not measured in either engine.
+
 [Formbook index](../../../../../../README.md)

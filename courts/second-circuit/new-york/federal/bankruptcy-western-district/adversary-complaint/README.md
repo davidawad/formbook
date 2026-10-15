@@ -102,3 +102,11 @@ sh tools/overlay.sh $D wallach-rothstein-complaint
 ```
 
 File names follow the tools and CLAUDE.md contract (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the brief's `<id>.md` and `<id>-overlay.pdf` (the tools read and write the prefixed names).
+
+## Engines
+
+docx (`docx/`): `build-reference.sh` (styles, footer, page setup into `reference.docx`), `nywb-adversary-complaint.lua` (cover, caption, numbered allegations, prayer, signature), `render.sh` (pandoc, then the court's styles, footer and section restored into the package). Output: `samples/OUTPUT-wallach-rothstein-complaint.docx` and `.docx.pdf` (LibreOffice conversion, 8 pages, letter). The `.docx` converts in LibreOffice without error or repair prompt (checked 2026-10-15); not opened in Word.
+
+- Matches the typst output: letter paper, one-inch margins, EB Garamond 12 pt embedded (LibreOffice finds it from the user's font directory), 27.6 pt exact double spacing, 0.5 in first-line indent, numbered allegations at the same numbers, the caption grid (debtor, adversary parties, right rule and bottom rule, case number, chapter, judge, adversary number, bold title), block quotations, the lettered prayer, the signature block, page number centered from page 1. Page starts agree with typst for pages 1 to 4; by page 8 the docx is within two paragraphs of the typst page (typst p.8 starts at the prayer; docx p.8 also starts at the prayer).
+- Differs: headings are set at 12 pt bold (typst's heading elements are larger by default; the size is not a rule of the court). Caption row spacing is approximate (typst's stack spacing is reproduced with exact-height rows). Word may paginate differently.
+- Not run: `tools/check.sh <doc-type-folder> --engine docx` cannot run in this folder: it needs `court.json`, `checks.yaml` and `rules.md` at the court root, and the court root has no `checks.yaml` or `rules.md`. Gates 0 and 1 are therefore not verified for docx; Gate 2 is the page review above. No BLOCKED check IDs were recorded because no check ran.

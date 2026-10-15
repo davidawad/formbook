@@ -95,3 +95,20 @@ keeps the template's rule-based form. Layout choices the rules leave open are th
 - **Footnotes are not exercised** by the sample. The rule (12-point, single-spaced allowed) is stated but no footnote is
   rendered, so the footnote style is untested.
 - **Typeface.** LBR 9004-1 sets a minimum size, not a typeface. EB Garamond is our choice, vendored in `fonts/`.
+
+## Engines
+
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt body lines,
+13.8 pt single lines, 1 in margins, letter, PAGE field centred in the footer); `docx/nynb-adversary-complaint.lua` builds
+the cover, the two caption tables, the numbered paragraphs, the prayer and the signature block. Output:
+`samples/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice). The `.docx` converts in LibreOffice with no
+error; the zip and XML parts are well formed.
+
+- Matches the typst output: font and size, line pitch, margins, page numbers, caption layout and rules, the numbering
+  1 to 37, the prayer (a) to (e) with the last item kept with the signature, the signature block. Page count 6 = 6;
+  each of the 6 pages of the `.docx.pdf` was viewed beside the typst page.
+- Differs: line breaks fall on other words (Word and LibreOffice set text differently from typst), so a line or two
+  moves between pages. Numbers are typed with a tab (text starts at
+  1 in); typst sets them with a fixed gap. The caption rules are table borders.
+- BLOCKED: `docx`: no `checks.yaml` exists for this doc type, so `tools/check.sh --engine docx` cannot run (exit 2,
+  "no such file"). No gate has been run on the docx; the `.docx.pdf` has not been checked against the rules.

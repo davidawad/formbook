@@ -86,3 +86,12 @@ sh tools/overlay.sh courts/second-circuit/new-york/federal/western-district/moti
 ```
 
 `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` reads it and writes `OVERLAY-<id>.pdf/.txt`. This folder keeps the names in the brief, so after the overlay run: `mv samples/OUTPUT-<id>.pdf samples/<id>.pdf`, `mv samples/OVERLAY-<id>.pdf samples/<id>-overlay.pdf`, `mv samples/OVERLAY-<id>.txt samples/<id>-overlay.txt`.
+
+## Engines
+
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond, exact 24 pt body pitch, 15.6 pt single lines, headings at 17, 14.5 and 12 pt, three footers: none on the cover, lower roman on the table of contents, arabic from 1 on the body); `docx/nywd-motion-brief.lua` builds the cover, the table of contents (a TOC field with cached entries and dot leaders), the numbered headings (I., II., A.), the block quotations and the signature block; `docx/render.sh` runs two passes so that the table of contents shows page numbers: pass 1 is converted to PDF, each heading is found on its page, and pass 2 writes the `.docx`. Output: `samples/OUTPUT-kerrick-motion-brief.docx` and `samples/OUTPUT-kerrick-motion-brief.docx.pdf` (LibreOffice; converts with no error; 13 pages).
+
+- Matches typst: the 13-page layout, cover contents, the table of contents entries and their page numbers (all 16 match the typst render), roman and arabic numbering, heading sizes per level, body pitch, block quotation, signature block.
+- Differs: the table of contents is a Word TOC field whose page numbers were computed from the LibreOffice PDF; Word may paginate slightly differently, and an update of the field in Word would regenerate the entries from the headings. A heading's label is followed by a tab (text aligned at 0.5 in for level 2 and 1 in for level 3); typst leaves a small gap. The cover's counsel block and the space above the signature block differ by a few points. No table of authorities (as in typst; see Known gaps).
+- Pages looked at: all 13 pages of `samples/OUTPUT-kerrick-motion-brief.docx.pdf`, side by side with the typst render at 60 dpi.
+- BLOCKED: `tools/check.sh --engine docx` cannot run for this folder: there is no `checks.yaml` (and no `court.json` at the doc-type level), so every Gate 0 to 3 check ID is BLOCKED, not passed. No stamp is written.

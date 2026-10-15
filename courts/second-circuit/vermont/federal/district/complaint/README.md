@@ -83,3 +83,11 @@ Not produced by this template (separate filings that go with a first filing): th
 - Page 12: signature block: the date line, `By: /s/ James M. Diaz`, both counsel blocks, "Counsel for Plaintiff Henry Bonges". Pass (see Known gaps 4).
 
 Pages reviewed: 12 of 12.
+
+## Engines
+
+DOCX engine (`docx/`: `build-reference.sh` makes `reference.docx`; `vtd-complaint.lua` is the filter). The render is `samples/OUTPUT-bonges-complaint.docx` and `samples/OUTPUT-bonges-complaint.docx.pdf` (LibreOffice conversion, no errors). The `.docx.pdf` has 12 pages; all 12 were viewed side by side with the typst render at 60 dpi.
+
+- Matches the typst output: letter paper, 1 in margins; EB Garamond 13 pt (no theme font); body text at an exact 26 pt pitch (double); caption, counsel and signature lines at an exact 15 pt pitch; the caption as a table with the party column closed by a right and a bottom rule, the blank caption rows at 6.5 pt as in the typst line stack; the court title; headings (centered bold capitals, centered bold, bold italic at the margin) with 17.5 pt above and none below; numbered paragraphs 1 to 84, numbered by the filter (0.5 in indent); the unnumbered WHEREFORE clause; the prayer lettered A. to E. with a hanging indent; the signature block at 2.9 in, kept together; a centered arabic page number in the footer. The text of the `.docx.pdf` matches the typst PDF word for word (checked with `pdftotext`; the only differences are reading order in the caption).
+- Differs: the docx runs the prayer list onto page 12 (the WHEREFORE clause ends page 11), so the signature block shares page 12 with the prayer; typst keeps the prayer on page 11 and the signature alone on page 12. The docx caption's right column is a few points taller (exact line spacing puts the leading inside the last title line). Word may paginate differently from LibreOffice.
+- BLOCKED: `tools/check.sh <this folder> --engine docx` cannot run. It reads `court.json` from the folder it checks, and it needs a `checks.yaml` for Gate 1; neither exists here, and the court folder has no `checks.yaml`. So every Gate 1 check ID is not run and the docx is BLOCKED until `vtd` has a `checks.yaml`. Gate 0 (content) was compared by hand with `pdftotext`, not by the gate. Gate 2 review rows are not written here; the page review above is the only visual check.

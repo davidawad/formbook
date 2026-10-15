@@ -80,3 +80,12 @@ Pages reviewed: 9 of 9.
 - The signature block was alone on the last page, and the WHEREFORE lead-in was separated from its items. Fixed by keeping the last chunk with the signature in one unbreakable block and making the WHEREFORE lead-in sticky.
 
 [Court index](../README.md) | [Formbook index](../../../../../../README.md)
+
+## Engines
+
+docx (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (pandoc default, styles replaced, footer with a centred page number, letter page with 1 in margins); `docx/nyeb-adversary-complaint.lua` builds the cover, caption, numbered allegations, prayer and signature. `tools/render.sh --engine docx` uses the default path of `tools/render-docx.sh`. Output: `samples/OUTPUT-toyvation-adversary-complaint.docx` and `.docx.pdf` (LibreOffice, 9 pages). Reviewed: 9 of 9 pages of the `.docx.pdf`, against the typst render (9 pages) at 60 dpi. LibreOffice converts the file with no error; `pdffonts` shows EB Garamond embedded.
+
+- **Matches typst:** letter paper, 1 in margins; EB Garamond 12 pt; body on a 24 pt pitch with a 0.5 in first-line indent; caption with the rules, the `In re` / `Case No.` / `Chapter` block, the adversary block with `Adv. Pro. No.` and the title; numbered allegations (number at 0.5 in, text at 1 in, wrapped lines back at 1 in); unnumbered lead-in; prayer lettered (a) to (e); WHEREFORE kept with the prayer; signature block kept with the last prayer item; centred page number.
+- **Differs:** paragraph numbers and prayer letters are typed text followed by a tab, not Word list numbering, so they do not renumber if a paragraph is added in Word. Exact line spacing puts glyphs a few points lower than typst's line box, so lines on a page sit up to about 5 pt lower, and page breaks differ (in the docx, prayer item (d) ends page 8 and (e) moves with the signature to page 9). The title is in the caption only: it is not written to the document properties.
+- **docx BLOCKED (not run):** `tools/check.sh <doc-type-dir> --engine docx` (Gates 0 to 3) cannot run for this folder. It reads `court.json` and `checks.yaml` at the court root, and this court has no `checks.yaml` yet. No `samples/.check-docx.txt` stamp is written. The page review above and the font and page-size checks stand in for Gate 2 only; they are not a Gate 1 pass.
+- **Not checked in Word:** no Word is available here. The file was opened and converted in LibreOffice.

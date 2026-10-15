@@ -101,4 +101,21 @@ Open findings (Gate 2):
 
 - 2026-10-14: exemplar found (CourtListener RECAP, Adv. 09-03071, ECF 35); sample transcribed; template built; render ok (no typst warnings); overlay ok; all 10 pages reviewed. Fixes listed above.
 
+## Engines
+
+`docx/` (pandoc 3.6.4, `reference.docx` from `docx/build-reference.sh`, cover and numbering in `docx/vib.lua`). Built from the court folder:
+
+```sh
+sh adversary-complaint/docx/build-reference.sh adversary-complaint/docx/reference.docx
+pandoc --from markdown+smart --to docx --reference-doc=adversary-complaint/docx/reference.docx \
+  --lua-filter=adversary-complaint/docx/vib.lua adversary-complaint/samples/INPUT-springel-first-amended.md \
+  -o adversary-complaint/samples/OUTPUT-springel-first-amended.docx
+```
+
+- **Matches the typst template:** EB Garamond 13 pt; every line (body, caption, signature) at the 19.5 pt pitch that the typst render measures; 1 in margins on US Letter; 0.5 in first-line indent; footnotes at 13 pt; numbered paragraphs 1 to 66 from one counter through the document (the typed numbers are not used, as in the template); centered bold headings; the court header, the caption table with the Form 416 rules (box around the debtor and parties, vertical rule between the columns), the title, the "Dated:" line and the counsel groups separated by "- and –"; footer "Page n of N".
+- **Differs (pandoc and Word limits):** the footer carries no short title (a reference footer cannot take per-document text in pandoc); the caption row padding is approximate; pandoc's metadata title and date are not written into the body (the cover has them) and the document title property is empty; pagination can differ in Word.
+- **Not checked here:** the docx has not been opened in Word or LibreOffice (LibreOffice is not installed in the build box). The `.docx` is a valid zip (ziptool reads every entry) and every XML part is well formed (xmllint).
+- **BLOCKED (docx.pdf):** this court folder has no checks file (no `checks.yaml`), so no gate check ID is readable. The requirement IDs of `README.md` (VIB-AC-CAPTION, VIB-AC-NUMBER, VIB-AC-FONT, VIB-AC-PAGE, VIB-AC-JURIS, VIB-AC-SIGNATURE, VIB-AC-SPACING) are all measured on the `.docx.pdf`, so all are BLOCKED with the reason: LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked.
+- **Finding for the template (tier 2, not changed here):** the typst body pitch is 19.5 pt, about 1.5 times the 13 pt type size, not the double spacing the template comment and VIB-AC-SPACING describe. The docx copies the measured typst pitch so the two match. Whether to double it is a decision for the template owner.
+
 [Formbook index](../../../../../../README.md)

@@ -76,3 +76,12 @@ Defects found and fixed during the review: the introduction was numbered (two pa
 9. **Tier 2.** One filer in `exemplars/`; the tier-2 check against two or three filers is not done.
 10. **No check gates were run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape. This file is the Gate 2 record instead.
 11. **Tool naming.** As in the adversary-complaint README: `tools/overlay.sh` writes `OVERLAY-<id>.*`, and render output is `OUTPUT-<id>.pdf`.
+
+## Engines
+
+docx (`docx/`: `build-reference.sh` builds `reference.docx`; `vtb.lua` writes the caption table, the numbering (first 2 paragraphs unnumbered, as the frontmatter says), the quotations, the lettered items and the signature). Render: `samples/OUTPUT-diocese-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion, EB Garamond embedded, 10 pages; all 10 pages viewed beside the typst render, `/work/artifacts/vtb/motion-brief/`). The `.docx` converts in LibreOffice with no error.
+
+- Matches the typst output: letter page, 1 in margins, EB Garamond 12 pt, body at the typst 2.0 pitch (exact 27.84 pt), single-spaced caption, footnote-style quotation and signature, 0.5 in first-line indent, centered bold headings, bold italic left argument headings, centered page number, the caption table with its rules.
+- Differs: the docx is 10 pages, the typst render is 9. The caption (defendant list) runs over three pages in both, but line breaks follow LibreOffice's EB Garamond metrics, so the body is about one-third of a page longer and the conclusion and signature block move to page 10. The last body paragraph is kept with the signature block (Word-native keep-with-next); typst does not do this. Heading spacing is approximated from the typst `above`/`below` values.
+- The defendants are printed without a trailing `;`, as typst prints them (the typst template's `#dn;` is read as code, so the semicolon is dropped there too; see the adversary-complaint Engines note). Lead to decide whether the typst template should print it.
+- docx BLOCKED: `tools/check.sh --engine docx` does not run for this doc-type folder. It exits before any gate: the folder has no `court.json` and no `checks.yaml` (no check IDs exist to fail). Gates 0 to 3 are therefore not run for docx; the page review above is the only docx Gate 2 evidence.

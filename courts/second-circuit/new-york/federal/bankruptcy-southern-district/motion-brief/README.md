@@ -108,3 +108,23 @@ pattern, which here is empty, and a pattern cannot depend on the enclosing secti
 
 Not blocked for the motion memorandum. The verification gap on type size and spacing (SDNY Civil Rule 11.1 and the judges'
 chambers rules were not retrieved) bears on tier 1 and should be checked before landing.
+
+## Engines
+
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` (the same styles as the complaint: EB Garamond 12 pt,
+exact 27.6 pt double spacing, single spacing for the cover, caption and signature, 11 pt footnotes, 1 in margins, letter, PAGE
+footer). `docx/nysb-motion-brief.lua` builds the cover (counsel, court, caption with "v.", title), the contents page, the
+memorandum (numbered paragraphs; level-2 headings I. under ARGUMENT and A. elsewhere; level-3 A. under ARGUMENT and 1. elsewhere),
+and the signature block. `docx/render.sh` makes two passes: pass 1 finds the page of each heading in the LibreOffice PDF, pass 2
+writes the contents page numbers. Sections: cover (no number), contents (roman from i), body (arabic from 1). Rendered with
+`tools/render.sh --engine docx`: 10 pages, all 10 viewed side by side with the typst reference
+(`/work/artifacts/nysb/motion-brief/pair-NN.png`).
+
+- Matches typst: the cover, the caption with "v.", the section numbering, the body paragraph numbering, the heading sizes and
+  labels, the contents page numbers (checked against the body footers: 1, 4, 5, 7, 8), footnote numbering.
+- Differs: the contents page has the heading labels (I., A.), which the typst outline omits; the contents heading is 12 pt bold
+  (typst's is larger); the contents page numbers are LibreOffice's pagination, and Word may paginate a line or two differently, so
+  a TOC update in Word may move an entry by a page. Pass 2 is not a field update: the entries are written text.
+- The `.docx` opens in LibreOffice with no repair prompt (the conversion ran without errors; `unzip -t` and `xmllint` pass on the parts).
+- BLOCKED, docx gates not run: as for the complaint, `tools/check.sh` cannot run because the court root has no `checks.yaml`
+  (and no `rules.md`). No docx check ID could be run and no stamp was written. Gate 2 for docx is not recorded.

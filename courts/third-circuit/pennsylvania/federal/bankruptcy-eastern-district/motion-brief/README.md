@@ -21,6 +21,15 @@ sh tools/overlay.sh $D henry-memorandum $D/exemplars/FILED-EXAMPLE-henry-26-0010
 
 File names follow the tools (`INPUT-`, `OUTPUT-`, `OVERLAY-`), as in `adversary-complaint/README.md`.
 
+## Engines
+
+- **typst** (primary, `typst/`): the reference for the form.
+- **latex**: not built for this doc type yet (`latex/` is empty).
+- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/paeb.lua`): pandoc on a reference.docx built from pandoc's default (EB Garamond 12 pt, exact 24 pt line pitch, no space between paragraphs, 0.5 in first-line indent, 1 in margins on letter paper, centered PAGE footer). Build: `sh docx/build-reference.sh docx/reference.docx`, then from the court folder `pandoc --from markdown+smart --to docx --reference-doc=<D>/docx/reference.docx --lua-filter=<D>/docx/paeb.lua <D>/samples/INPUT-<id>.md -o <D>/samples/OUTPUT-<id>.docx`.
+  - Matches the typst template: the two-line bold court title; the caption as a borderless three-column table (party names, colons, `Chapter` / `Case No.` / `Adv. Proc. No.`) with the 1.2 in designation indent; the title in bold, centered; the lead-in with a first-line indent; the optional consent statement (`consent:` frontmatter) after the lead-in; memorandum paragraphs unnumbered; block quotes flush left; bold capitals flush-left level-1 headings and bold flush-left level-2 and level-3 headings kept with the text after them; the signature block (Dated at left; firm, `By: /s/` and the lines at right) with the last paragraph kept on its page; the optional certificate of service kept on one page.
+  - Differs from typst (pandoc and Word limits, not chosen): the caption and signature are Word tables, so their borders and cell padding are Word's; the heading spacing is 6 pt before and after the heading line; footnotes are at body size because the typst template sets no footnote size (no sample has a footnote); line breaks and page breaks follow Word's layout, so the page count of the typst render (8 pages for the Henry sample) is not reproduced.
+  - Checks: the docx passes the zip and XML checks only (every zip entry reads, every XML part is well formed). No `checks.yaml` exists for this court, so there is no list of gate check IDs to read. BLOCKED: every gate check on `samples/OUTPUT-<id>.docx.pdf` (the Gate 0 to 3 checks, none readable here): LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
+
 ## Governing rules
 
 Each rule was fetched on 2026-10-14. The PAEB rules are the "PAEB Local Rules" PDF dated 2025-12-01, from https://www.paeb.uscourts.gov/sites/paeb/files/PAEB%20Local%20Rules%20-2025-12-01%20Final.pdf (its page numbers are those printed on it).

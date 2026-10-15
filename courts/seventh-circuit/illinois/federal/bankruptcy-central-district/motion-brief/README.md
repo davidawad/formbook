@@ -82,3 +82,11 @@ Fonts pass, 2026-10-15: no court rule names a face, so the face stays EB Garamon
 - FRBP 7012 was not fetched; the rule is cited as the exemplars cite it.
 - The CM/ECF header ("Case ... Doc ... Filed ...") is added by the court system on filing, not by the template.
 - The second exemplar (Walmart, Sandberg Phoenix, 11 pages) was read as text for the caption, heading and signature pattern. It was not overlaid.
+
+## Engines
+
+- **typst** (primary): unchanged by the docx work. The typst render of the sample is 14 pages.
+- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` (same reference as the adversary complaint: EB Garamond 13 pt, exact 28.4 pt body pitch, 0.5 in first-line indent, single-spaced 11 pt footnotes and block quotations, Letter with 1 in margins, centered PAGE footer, custom styles for the caption, title, signature, counsel and certificate of service). `docx/ilcb-motion-brief.lua` writes the court heading, the caption table, the title, the signature block and the certificate of service. Rendered with `tools/render.sh --engine docx`: `samples/OUTPUT-reinbold-menard-motion-brief.docx` and `.docx.pdf` (15 pages). Converted by LibreOffice (`soffice --headless`) with no error and no repair; the zip and every XML part validate. Not opened in Word.
+- **Matches typst**: typeface and size, line pitch, first-line indent, no space between body paragraphs, margins, page numbers, caption, title, headings I to IV and A/B and i/ii levels, footnote and block-quote formatting, the signature block, counsel lines, and the certificate of service text. Pages 1 to 15 viewed at 60 dpi against the typst render (15 of 15).
+- **Differs (tier 2)**: level-1 headings are centered bold 13 pt in the docx; the typst render prints them left-aligned and larger (about 18 pt). Exact line spacing puts the first line of each page slightly lower than typst. The docx runs one page longer (15 against 14): the chain of keep-with-next from the last WHEREFORE paragraph through the signature and counsel block leaves the certificate of service alone on page 15, where typst fits it on page 14.
+- **docx BLOCKED**: `sh tools/check.sh <this folder> --engine docx` cannot run. It exits 2 because this folder has no `court.json` and no `checks.yaml`, so no check ID ran and no `.check-docx.txt` stamp was written. Not a pass.
