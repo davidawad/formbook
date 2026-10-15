@@ -21,6 +21,7 @@ The tools name outputs `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (the court-wide 
 | render | ok: `samples/OUTPUT-salesforce-ipr.pdf`, 14 pages, Liberation Serif embedded, no typst warnings |
 | overlay | ok: `samples/OVERLAY-salesforce-ipr.pdf` and `.txt`, against the Salesforce exemplar |
 | pages reviewed | 14 (every page of the render viewed as PNG at 70 dpi) |
+| typeface | face required: Times New Roman, 14-pt (§ 42.6(a)(2)(ii)) → vendored substitute: `Liberation Serif` (`fonts/liberation-serif`, metric-compatible, per `docs/FONTS.md`) → embedded: LiberationSerif only (`pdffonts`) |
 
 ## Layout
 

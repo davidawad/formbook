@@ -15,6 +15,7 @@ sh tools/overlay.sh courts/federal-circuit/patent-trial-and-appeal-board/patent-
 | render | ok: `samples/OUTPUT-juniper-ipr.pdf`, 13 pages, Liberation Serif embedded, no typst warnings |
 | overlay | ok: `samples/OVERLAY-juniper-ipr.pdf` and `.txt`, against the Swarm exemplar (passed explicitly) |
 | pages reviewed | 13 (every page of the render viewed as PNG at 70 dpi) |
+| typeface | face required: Times New Roman, 14-pt (§ 42.6(a)(2)(ii)) → vendored substitute: `Liberation Serif` (`fonts/liberation-serif`, metric-compatible, per `docs/FONTS.md`) → embedded: LiberationSerif only (`pdffonts`) |
 
 ## Layout
 
