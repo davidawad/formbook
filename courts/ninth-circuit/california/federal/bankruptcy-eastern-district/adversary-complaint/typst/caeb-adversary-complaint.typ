@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LBR 9004-2(a)(4) names Times-type faces; EB Garamond is the only vendored serif (README, gap 2)
+#let font-family = "Liberation Serif"   // LBR 9004-2(a)(4) names Times New Roman; Liberation Serif is its metric-compatible substitute (docs/FONTS.md)
 #let type-size = 13pt                   // LBR 9004-2(a)(4): not less than 12 and not more than 14 point
 #let pitch = 24pt                       // LBR 9004-2(a)(2), (b)(1): numbered lines, double spaced
 #let lines-per-page = 28                // the pleading form used by the exemplar and by CAND; the LBR sets no count
