@@ -80,3 +80,29 @@ Each page was rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass 
 - `sh tools/render.sh` exit 0, no typst warnings.
 - `sh tools/overlay.sh` wrote the overlay and the page map.
 - `sh tools/check.sh` and `tools/check-selftest.sh` were not run for the same reason as the complaint README.
+
+## Engines
+
+- typst (primary): `typst/`, `samples/OUTPUT-slack-motion-brief.pdf`, 12 pages.
+- docx: `docx/make-reference.sh` builds `docx/reference.docx`; `docx/flsd.lua` builds the caption, the signature block and the certificate of service; `docx/render.sh` writes the `.docx` (it escapes Westlaw star paging before pandoc reads the sample, see below). Written by `sh tools/render.sh --engine docx <this folder> samples/INPUT-slack-motion-brief.md`: `samples/OUTPUT-slack-motion-brief.docx` and `samples/OUTPUT-slack-motion-brief.docx.pdf` (LibreOffice 26.8.1, headless). 12 pages. Pandoc 3.12.1.
+- latex: not built for this doc type.
+
+What matches typst (every page of the `.docx.pdf` rendered at 60 dpi and compared with the typst page, 2026-10-15): letter paper; 1 in margins; EB Garamond 12 pt throughout, with footnotes at 12 pt single-spaced; body text double-spaced at an exact 27.6 pt pitch with a 0.5 in first-line indent; the caption (court name, division, centered docket line with the judges' names, style at the left in a 3.25 in column, the "/" closer, centered bold title); unnumbered body; footnotes as Word footnotes; level-1 headings centered bold capitals, level-2 bold at the left, level-3 bold at 0.5 in; the signature block at 3.5 in; the certificate of service with its service list; the page number centered at the bottom from page 1. Citations keep the Westlaw star paging ("at \*8") and the italic signals as the typst render shows them.
+
+What differs from typst:
+
+- Title: the title lines are single-spaced (exact 13.8 pt) in docx, like the other caption lines. Typst sets them at the body pitch (27.6 pt) because the title inherits the document's leading. Whether L.R. 5.1(a)(4)'s 1½-space floor reaches a caption is not decided here; the single spacing follows the caption convention in the typst template, and David should choose.
+- Headings: all at 12 pt bold in docx; typst's level-2 and level-3 headings (and level 1) render at typst's default heading size, larger than 12 pt. See the complaint README.
+- Signature block and certificate: typst indents the first line of "Dated", "Respectfully submitted," and the "s/" lines by 0.5 in. The docx sets them flush.
+- Pagination, 12 pages in both:
+  - Page 1: in docx the first paragraph (with footnote 1) moves to page 2 with the PRELIMINARY STATEMENT heading, leaving about two inches blank at the foot of page 1. Typst splits that paragraph across pages 1 and 2. LibreOffice keeps the footnote reference line with the footnote, which does not fit on page 1.
+  - Page 10: in docx the CONCLUSION heading moves to page 11 with its paragraphs; typst keeps it on page 10.
+  - The signature block (page 11) and the certificate (page 12) fall on the same pages as typst.
+- Star paging: pandoc reads a pair of Westlaw asterisks (`at *8 ... at *2`) as italic markup and drops them. `docx/render.sh` escapes an asterisk followed by a digit (or a space and a digit) before pandoc reads the sample, so the asterisks print as typst prints them. Real emphasis (`*Id.*`, `*see generally*`) is not touched.
+- Font: EB Garamond must be installed on the machine that opens or renders the `.docx`; see the complaint README.
+
+docx BLOCKED items:
+
+- No layout item is blocked. The pagination differences above are LibreOffice's, not the template's: they do not change the text, the form or the page count.
+- The repo gates were not run on this folder, for the reason in the Validation section. Gate 0 (every word of the markdown in the `.docx.pdf`) and Gate 1 (fonts) were not run.
+- Word was not available: the `.docx` has been converted by LibreOffice with no error, but it has not been opened in Word.
