@@ -9,7 +9,7 @@ Folder: `courts/seventh-circuit/illinois/federal/central-district/complaint/`.
 | sample md | `samples/INPUT-thomas-complaint.md` (the whole complaint, transcribed; slurs and profanity bracketed) |
 | render | ok: `samples/OUTPUT-thomas-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-thomas-complaint.pdf` and `OVERLAY-thomas-complaint.txt` |
-| pages reviewed | 12 of 12, every page rendered at 60 dpi and viewed in its final state |
+| pages reviewed | 12 of 12, every page rendered at 60 dpi and viewed in its final state; re-rendered and re-viewed 2026-10-15 in the fonts pass (no font change) |
 
 ## Governing rules
 
@@ -21,6 +21,7 @@ Federal rules: Fed. R. Civ. P. 8(a), 10(a), 10(b), fetched 2026-10-14 from https
 | CDIL LR 5.1(A) | 8½ × 11 paper, about one-inch margins, pages numbered. | `page-margin`, `page-footer()` (centered page number on every page). |
 | CDIL LR 5.1(B)(1) | Double-spaced lines. | `body-leading = 1.35em`: 0.65em line box + 1.35em = 2.0em = 24 pt at 12 pt (double spacing). Each paragraph block adds one trailing leading so the pitch holds across paragraph boundaries. |
 | CDIL LR 5.1(B)(2) | Body text 12- or 14-point; plain roman style. | `type-size = 12pt`, EB Garamond Regular and Bold only (no italics in the body). |
+| CDIL LR 5.1(B)(2), typeface | Names no face; requires only a plain, roman style. | Face required: none. Vendored substitute: none, so EB Garamond stays (`docs/FONTS.md`, "No face named"). Metric fit: n/a. |
 | CDIL LR 40.1(E)(1) | Caption identifies the division. | `court-title()` line 3 from frontmatter `division`; the template asserts it is present. |
 | CDIL LR 38.1 | Complaint marks "Equitable relief is sought" if it prays for equitable relief; a jury demand puts "and demand for jury trial" in the title. | Title check: `ilcd-complaint()` asserts the title contains "and demand for jury trial" when `jury_demand: true`. `equitable_relief: true` prints the marking under the title (not set in the sample; see gap 5). |
 | CDIL LR 5.11(A)(2) | Signatures as "s/name". | `signature-block()`: "/s/ Name". |
@@ -49,7 +50,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 ## Known gaps and open choices
 
 1. **One exemplar.** The brief asks for one exemplar per doc type. CourtListener RECAP (court `ilcd`, complaints filed 2026-01 to 2026-10) also has Beaman v. Bunn Commercial LP (3:26-cv-03240, 27 pages), Nieme v. Bunn Commercial LP (3:26-cv-03241), Pharmaceutical Care Management Association v. Gillespie (3:26-cv-03200, 18 pages) and Karpowski v. Reddit Inc (1:26-cv-01226). They were seen in the search results and not downloaded. Tier 2 (2 or 3 filers) is not yet judged against more than one filer.
-2. **Font size and face.** Body text is 12 pt EB Garamond, the only vendored face. EB Garamond has a smaller x-height than the filing's Times New Roman at 12 pt, so the text looks smaller. LR 5.1(B)(2) allows 14 pt; whether David wants 14 pt is a choice this template does not make.
+2. **Font size and face.** Body text is 12 pt EB Garamond. LR 5.1(B)(2) names no face (see the typeface row above), so the face stays. EB Garamond has a smaller x-height than the filing's Times New Roman at 12 pt, so the text looks smaller. LR 5.1(B)(2) allows 14 pt; whether David wants 14 pt is a choice this template does not make.
 3. **Title of the filing.** The filing's cover title is "COMPLAINT", without the words LR 38.1 requires for a jury demand. The sample uses "COMPLAINT AND DEMAND FOR JURY TRIAL" and says so in its header comment. The filing is a rule deviation, not a template choice.
 4. **Signature date line.** The filing says "Dated this 30th day of June, 2026." The template prints "Dated: June 30, 2026." Form choice, not a rule point.
 5. **Equitable relief marking (LR 38.1).** The prayer seeks back pay, front pay, compensatory and punitive damages, fees and costs; the filing carries no "Equitable relief is sought" marking. The template supports the marking through `equitable_relief: true`, which the sample does not set. Whether front pay makes the marking necessary is a question for counsel, not the template.

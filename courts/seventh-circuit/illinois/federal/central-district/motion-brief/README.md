@@ -9,7 +9,7 @@ Folder: `courts/seventh-circuit/illinois/federal/central-district/motion-brief/`
 | sample md | `samples/INPUT-ives-memorandum.md` (a portion of the memorandum: cover, introduction, background, legal standard, the opening of Points I to III, conclusion, signature, certificate) |
 | render | ok: `samples/OUTPUT-ives-memorandum.pdf`, 9 pages (cover, contents i, authorities ii, body 1 to 5, certificate 6), typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-ives-memorandum.pdf` and `OVERLAY-ives-memorandum.txt` |
-| pages reviewed | 9 of 9, every page rendered at 60 dpi and viewed. The conclusion was moved onto the signature page after pages 1 to 7 were viewed; those pages are unchanged by the move. |
+| pages reviewed | 9 of 9, every page rendered at 60 dpi and viewed. The conclusion was moved onto the signature page after pages 1 to 7 were viewed; those pages are unchanged by the move. Re-rendered and re-viewed 2026-10-15 in the fonts pass (no font change); that pass found gap 10 on page 5, which the earlier review had passed. |
 
 ## Governing rules
 
@@ -21,6 +21,7 @@ Federal rule: Fed. R. Civ. P. 12(b), fetched 2026-10-14 from https://www.law.cor
 | CDIL LR 5.1(A) | 8½ × 11 paper, about one-inch margins, pages numbered. | `page-margin`; `numbering` set per part (none on the cover, roman in the front matter, arabic in the body). |
 | CDIL LR 5.1(B)(1) | Double-spaced lines. | `body-leading = 1.35em` (24 pt at 12 pt); `spacing: body-leading` on body paragraphs so the pitch across a paragraph break is the same as within one. |
 | CDIL LR 5.1(B)(2) | Body text 12- or 14-point, footnotes 10-point or larger, plain roman style. | `type-size = 12pt`; `footnote-size = 10pt`; EB Garamond Regular and Bold; italics only for case names and signals. |
+| CDIL LR 5.1(B)(2), typeface | Names no face; requires only a plain, roman style. | Face required: none. Vendored substitute: none, so EB Garamond stays (`docs/FONTS.md`, "No face named"). Metric fit: n/a. |
 | CDIL LR 7.1(B)(1) | The memorandum identifies the rule under which the motion is filed. | Not checked by the template. The sample's title names "Rules 12(b)(1) and 12(b)(6)". |
 | CDIL LR 7.1(B)(4)(a) | Double-spaced memorandum of no more than 15 pages, unless it complies with the type-volume limit. | Not checked by the template (see gap 4). |
 | CDIL LR 7.1(B)(4)(b)(1), (c), (d) | Type-volume limit of 7,000 words (headings, footnotes and quotations count); a certificate of compliance stating the count. | `word-count()` counts the body markdown; `certificate()` prints the count when frontmatter `type_volume: true` (see gap 4). |
@@ -54,9 +55,10 @@ Federal rule: Fed. R. Civ. P. 12(b), fetched 2026-10-14 from https://www.law.cor
 4. **Word and page limits are not enforced.** The template's word count is an approximation of the word processor's count and is not the filer's certified count: the sample's certificate reads 1,771 words, which is the count of the transcribed portion, not the filed memorandum's 6,810. LR 7.1(B)(4)(c) lets the certificate rely on the word-processing count, so the filer must confirm the number before filing. The 15-page limit (LR 7.1(B)(4)(a)) is not checked: a memorandum over 15 pages needs the certificate; under 15 pages it does not. The template prints the certificate only when `type_volume: true`.
 5. **No certificate of service.** The filing has none (CM/ECF generates notice). The template has no service certificate; whether the court wants one is not established here.
 6. **Cover layout.** The cover counsel block sits in the right half of the page, as in the filing. The caption uses ")" marks (the same style as the complaint folder), where the filing uses a block caption. Accepted as the convention for this filing.
-7. **Font.** EB Garamond at 12 pt, the only vendored face; it looks smaller than the filing's Times New Roman at 12 pt. LR 5.1(B)(2) allows 14 pt; not decided here.
+7. **Font.** EB Garamond at 12 pt. LR 5.1(B)(2) names no face (see the typeface row above), so the face stays; it looks smaller than the filing's Times New Roman at 12 pt. LR 5.1(B)(2) allows 14 pt; not decided here.
 8. **The motion itself and the proposed order** are separate filings and are not produced. Rule 7.1(B)(1) requires the memorandum to identify the rule under which the motion is filed; the template does not check that the title does.
 9. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, which this doc-type folder is not, and the brief does not ask for them. Render and overlay were run and the review below is the Gate 2 equivalent for this doc type.
+10. **Footnote 1 prints as raw text (open, template defect; not a font issue).** The sample's footnote reference (`[^fn1]`, in the introduction's background section) and its definition (`[^fn1]: ...`, after `# CONCLUSION`) fall on opposite sides of the split at `"\n# CONCLUSION\n"` in `typst/ilcd-motion-brief.typ` (the conclusion and signature block are rendered as a second `cmarker.render` call). The reference renders as the literal text `[^fn1]` on body page 2 and the footnote is not printed. Fix: render the footnote definitions with the part that holds the reference, or move them ahead of the split. Not fixed in the fonts pass.
 
 ## Review of the rendered pages (final state)
 
@@ -68,7 +70,7 @@ The page column is the PDF page, with the body page number in parentheses where 
 | 2 (contents, i) | Level 1 to 3 entries with dot leaders and page numbers; wrapped level 2 entries align under the text. | pass |
 | 3 (authorities, ii) | Cases (italic names), Constitutional Provisions, Statutes; page references come from the body's links ("2, 4" for the statute cited on body pages 2 and 4). | pass |
 | 4 (body 1) | INTRODUCTION and the start of BACKGROUND A; double-spaced paragraphs, no overlap at paragraph breaks. | pass |
-| 5 (body 2) | Rest of A. Legal Background; footnote 1 at 10-point at the foot of the page; B. Procedural History. | pass |
+| 5 (body 2) | Rest of A. Legal Background; the footnote 1 reference prints as raw `[^fn1]` and no footnote text is printed (gap 10); B. Procedural History. | OPEN (gap 10) |
 | 6 (body 3) | LEGAL STANDARD; ARGUMENT and the start of Point I. | pass |
 | 7 (body 4) | Rest of Point I; Point II heading with hanging indent and its opening paragraph. | OPEN (minor, gap 3) |
 | 8 (body 5) | Point III heading with hanging indent (gap 3); CONCLUSION; "Dated" line, "Respectfully submitted," firm, "/s/" name and typed block, on one page. | pass (gap 3 applies) |
