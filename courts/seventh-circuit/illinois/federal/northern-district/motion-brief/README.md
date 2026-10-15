@@ -82,3 +82,13 @@ CourtListener RECAP (`type=r`, `court=ilnd`, "memorandum in support of motion to
 - Page 8 (page "7"): sub-heading "1." (two lines, bold, indented); paragraphs; the page ends mid-paragraph. Pass.
 - Page 9 (page "8"): the end of Argument I.B; the omission note (italic, indented); CONCLUSION; signature block (Dated, Respectfully submitted, party, "By: /s/", "One of Their Attorneys"). Pass.
 - Page 10 (page "9"): CERTIFICATE OF SERVICE on its own page; text double-spaced; signature right column. Pass.
+
+## Engines
+
+**docx** (`docx/build-reference.sh` builds `docx/reference.docx`; `docx/ilnd.lua` is the filter; `samples/OUTPUT-tahboub-motion-brief.docx` is the output of `tools/render.sh --engine docx`).
+
+- Matches the typst form: EB Garamond 12 pt body; exact 27.6 pt (double) body lines; first-line indent 0.5 in, justified; headings single-spaced with one double line above and below (level 1 centered capitals, level 2 bold flush left, levels 3 and 4 bold indented 0.5 in); block quotations single-spaced and indented; footnotes 11 pt single; US Letter with 1 in margins.
+- The cover is its own section with no footer; the body starts a new section and numbers its pages from 1, as the typst template does.
+- Differs or unverified: the caption (a table with a column of ")" marks) and the counsel block are not checked against the typst layout; the counsel block follows the title instead of sitting at the foot of the cover (the typst template pushes it down with v(1fr)); the signature block is a borderless table; the certificate of service is on its own page, as in the typst template.
+- The template has no table of contents or table of authorities, as in the typst template (LR 7.1 gap, see Known gaps).
+- BLOCKED: `OUTPUT-tahboub-motion-brief.docx.pdf` is not produced because `soffice` is not installed on this box, so `tools/check.sh --engine docx` (Gates 0 to 3 on the .docx.pdf) cannot run. No page has been rendered or reviewed for the docx engine (pages reviewed: 0). The check that the .docx opens in Word and LibreOffice without a repair prompt is not done. What was verified: the .docx is a valid zip and every XML part is well formed; the text reads back in the right order (pandoc readback).
