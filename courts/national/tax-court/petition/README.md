@@ -67,7 +67,7 @@ Known rule version gap: the compilation is "as amended through August 2024" and 
 - **Body.** Numbered paragraphs typed by the author (`1\.`), indented. Lettered subparagraphs typed by the author as `(a)`. Headings (`#`) are bold and centered. Paragraphs are double-spaced with a first-line indent of 0.5 inch, and the first paragraph after a heading is indented too.
 - **Signature block.** Right half of the page, the rule above the name, then the bar number and contact lines. It is kept on one page (not split).
 - **Page numbers.** Centered at the foot of each page, on the 3/4-inch line (see Margins).
-- **Typeface.** EB Garamond at 14 pt, the only vendored serif. Rule 23(d)(2) allows 14-point proportional type; the rule's examples (Times, Century Schoolbook) are not vendored and are not needed.
+- **Typeface.** EB Garamond at 14 pt. Rule 23(d)(2) requires one consistent typeface, 14-point proportional (or 12-point nonproportional); it names no face as a requirement, and its examples are introduced by "e.g." (Times New Roman, Century Schoolbook). Any proportional face therefore meets the rule, so the template keeps EB Garamond. The vendored substitutes for the examples are Liberation Serif (Times New Roman) and TeX Gyre Schola (Century Schoolbook) in `docs/FONTS.md`; switch to one only if a court or the Clerk asks for that face. Face required: no. Font: EB Garamond. Render: metric-independent (no change of face, so no line-count change).
 
 ## Calibration
 
@@ -83,7 +83,7 @@ The page number is not typst's `footer`. In typst 0.15 the footer's position did
 
 ## Gate 2: visual review of the current PDF
 
-Reviewed 2026-10-14. sha256 of `samples/OUTPUT-generic-petition.pdf`: `d4dd59aab768151e776c78233d74879ecd0347b98a83137ac49cd9a32079cde8`. Every page was rendered at 60 dpi and looked at. Page 1 is compared with the rules, since there is no exemplar.
+Reviewed 2026-10-14. sha256 of `samples/OUTPUT-generic-petition.pdf`: `89edd40d9cbfd0c4eeebb68d212b2dbb2702b5004a1baf9c1fc089a0a7c69e2c` (re-rendered 2026-10-14 for the fonts pass; the face is unchanged, and the pages were looked at again). Every page was rendered at 60 dpi and looked at. Page 1 is compared with the rules, since there is no exemplar.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
