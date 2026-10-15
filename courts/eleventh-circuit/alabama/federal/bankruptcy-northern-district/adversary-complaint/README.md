@@ -62,3 +62,21 @@ The template was present on master, but its render was broken, so it was changed
 - **No e-filing rules.** The court's CM/ECF filing requirements are not encoded (only the physical layout is).
 
 [Court index](../README.md) | [Formbook index](../../../../../../README.md)
+
+## Engines
+
+- **typst** (primary): `typst/`, `samples/OUTPUT-bci-capital-montalbano.pdf` (6 pages).
+- **docx**: `docx/` (`make-reference.sh` builds `reference.docx`; `alnb.lua` adds the court title, caption table, numbered allegations, consent statement and signature block). Output `samples/OUTPUT-bci-capital-montalbano.docx` and `.docx.pdf` (LibreOffice conversion, 7 pages, every page rendered and looked at).
+- **latex**: not built for this doc type.
+
+What matches the typst form (12 pt EB Garamond, 1-inch margins, letter, 24 pt exact body leading, half-inch first-line indent, numbered allegations with the consent statement as paragraph 1, centered headings, centered page-number footer, single-spaced caption/court title/signature block, the ")" column of the caption, footnotes).
+
+What differs:
+- Pagination: 7 pages in the docx PDF against 6 in typst. Caption rows and the signature block take more space in Word-native tables and paragraphs; the page count is measured on the LibreOffice PDF (`docs/DOCX.md`).
+- Footnote text is 10 pt single-spaced; the typst footnote size is not set in the template, so it is not compared exactly.
+- The caption ")" column is a table column, so a wrapped party line repeats the ")" on each of its rows, as in typst; the table border is off by the reference's Table style.
+
+docx BLOCKED (not run; no fake PASS):
+- Gate 0-3 (`sh tools/check.sh <court> --engine docx`): BLOCKED. This court has no `checks.yaml` (Gate 1) and no `reviews/` file (Gate 2), so `check.sh` exits 2 before measuring anything. These belong to the court's eval-loop work, not to this engine.
+- Word: the `.docx` is not opened in Word; only the LibreOffice PDF was checked.
+- Tooling: `tools/render-docx.sh` runs LibreOffice on a fresh profile per call, and LibreOffice exits 81 on the first conversion of a fresh profile. Rendering here used a retrying wrapper (outside the repo). Not a template fault.

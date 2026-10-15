@@ -60,3 +60,21 @@ Known differences that are not template faults:
 - **No e-filing rules.** The court's CM/ECF filing requirements are not encoded (only the physical layout is).
 
 [Court index](../README.md) | [Formbook index](../../../../../../README.md)
+
+## Engines
+
+- **typst** (primary): `typst/`, `samples/OUTPUT-dombrowski-motion-brief.pdf` (9 pages).
+- **docx**: `docx/` (`make-reference.sh` builds `reference.docx`; `alnb.lua` adds the court title, caption table, title, signature block and certificate of service with the served parties). Output `samples/OUTPUT-dombrowski-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion, 10 pages, every page rendered and looked at).
+- **latex**: not built for this doc type.
+
+What matches the typst form (12 pt EB Garamond, 1-inch margins, letter, 24 pt exact body leading, half-inch first-line indent, unnumbered paragraphs, centered Roman-numeral headings and flush-left lettered headings with a 0.5-inch indent, footnotes, single-spaced caption and signature block, the certificate of service heading, centered page-number footer).
+
+What differs:
+- Pagination: 10 pages in the docx PDF against 9 in typst; the certificate's served-party list breaks across a page in the docx PDF. Measured on the LibreOffice PDF (`docs/DOCX.md`).
+- Footnote text is 10 pt single-spaced; the typst footnote size is not set in the template, so it is not compared exactly.
+- Italics from the body markdown are carried by pandoc; the caption and signature are plain text.
+
+docx BLOCKED (not run; no fake PASS):
+- Gate 0-3 (`sh tools/check.sh <court> --engine docx`): BLOCKED. This court has no `checks.yaml` (Gate 1) and no `reviews/` file (Gate 2), so `check.sh` exits 2 before measuring anything.
+- Word: the `.docx` is not opened in Word; only the LibreOffice PDF was checked.
+- Tooling: `tools/render-docx.sh` runs LibreOffice on a fresh profile per call, and LibreOffice exits 81 on the first conversion of a fresh profile. Rendering here used a retrying wrapper (outside the repo). Not a template fault.
