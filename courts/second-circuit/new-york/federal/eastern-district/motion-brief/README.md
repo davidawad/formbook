@@ -7,9 +7,9 @@ Folder: `courts/second-circuit/new-york/federal/eastern-district/motion-brief/` 
 |---|---|
 | exemplar | yes, two filers: `exemplars/FILED-EXAMPLE-force-1-20-cv-02578-memorandum.pdf` (Ropes & Gray for Qatar National Bank, 47 pp.) and `exemplars/FILED-EXAMPLE-saldarriaga-1-20-cv-03529-memorandum.pdf` (counsel for a Florida state official, 34 pp.). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-force-memorandum.md`: selected passages of the Force memorandum (preliminary statement, Argument I.A to I.C, II, conclusion, certificate of service), with the template's frontmatter. |
-| render | ok: `samples/OUTPUT-force-memorandum.pdf`, 10 pages (cover, TOC, TOA, body 1 to 7), typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`). |
-| overlay | ok: `samples/OVERLAY-force-memorandum.pdf` (red = ours, blue = filed) and `samples/OVERLAY-force-memorandum.txt` (page map). The overlay reads the first exemplar in name order (Force). |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; the PDF was re-rendered after the last template change and the new page images match the reviewed ones). |
+| render | ok: `samples/OUTPUT-force-memorandum.pdf`, 10 pages (cover, TOC, TOA, body 1 to 7), typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`). Re-rendered 2026-10-15; `pdffonts` shows only EB Garamond (Regular, Italic, Bold), all embedded. |
+| overlay | ok: `samples/OVERLAY-force-memorandum.pdf` (red = ours, blue = filed) and `samples/OVERLAY-force-memorandum.txt` (page map). The overlay reads the first exemplar in name order (Force). Regenerated 2026-10-15 from `exemplars/FILED-EXAMPLE-force-1-20-cv-02578-memorandum.pdf` (47 pages, restored from the URL in `exemplars/SOURCE.md`). |
+| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; the PDF was re-rendered after the last template change and the new page images match the reviewed ones; all 10 re-viewed 2026-10-15). |
 | word count | 1792 words by the template's count (see Known gaps 1). |
 | tier-2 exemplars | 2 filers (EVAL-LOOP minimum). |
 
@@ -32,6 +32,9 @@ Verified 2026-10-14 against the joint EDNY/SDNY Local Civil Rules, "As Amended",
 | Fed. R. Civ. P. 10(a) (caption) | Applies to pleadings. | Not a rule for a memorandum; the caption follows the exemplars' practice (convention, `C`). |
 | Fed. R. Civ. P. 12(b)(2), (5), (6) | The defenses the Force memorandum raises. | Content, cited by the author. |
 | Local Civil Rule 11.1 | Form of papers. | Marked "[Withdrawn]" in the 2026 joint rules. |
+| Local Civil Rule 7.1(b), lead-in (same, text read 2026-10-15) | "The typeface, margins, and spacing of all documents presented for filing must meet the following requirements". The rule names no typeface; its only typeface requirement is the 12-point minimum in (b)(1). | Face: **none named**, so the template keeps **EB Garamond** (`docs/FONTS.md`, "No face named"). See Typeface row below. |
+
+Typeface (fonts pass, 2026-10-15): face required = none (LCR 7.1(b) names no face; the 12-point minimum is the only type-size rule). Substitute = EB Garamond (the default, not a stand-in). Fit = n/a. The judge's individual practices, not retrieved, could name a face; if one does, change `font-family` in `typst/nyed-motion-brief.typ` to that face's substitute from `docs/FONTS.md`.
 
 Conventions the rules do not dictate (tier 2, `C`): cover page with caption and title, TOC and TOA with dot leaders and roman page numbers for front matter, body numbered from 1, passim for an authority cited on seven or more pages, signature block at the end of the text, certificate of service on its own page. Both exemplars show the cover, the caption and a TOC with dot leaders; the Force exemplar also has a TOA. Neither exemplar has a word-count certificate.
 
@@ -57,7 +60,7 @@ Not retrieved, so not asserted: Fed. R. Civ. P. 5(b) (the certificate of service
 ## Known gaps and open choices
 
 1. **Word count is the template's, not Word's.** The count is whitespace tokens containing a letter or digit, from the body markdown with link targets, footnote marks and markdown symbols removed. It counts headings and footnotes, as the rule does, but Word's count can differ (hyphenated words, numbers, "§" and "¶" tokens). LCR 7.1(c) lets the preparer rely on the word-processing program, so the certificate states the template's count and says that it must be confirmed. **Open: David to decide whether the certificate should show the template count or be left for the attorney to fill in.**
-2. **Font.** Only EB Garamond is vendored. The exemplars are Times New Roman. EB Garamond at 12 pt looks smaller; the rule's 12-point minimum is met.
+2. **Font (kept EB Garamond; tier 2, open).** LCR 7.1(b) names no typeface, so `docs/FONTS.md` keeps EB Garamond for this doc type. The two filed exemplars are set in Times New Roman, and a filer's choice of face is not a rule. EB Garamond at 12 pt looks smaller than Times New Roman; the rule's 12-point minimum is met. A Times-metric substitute (`Liberation Serif`) would match the exemplars' look, but it is a tier-2 choice for David, not a court requirement. **Open: David to decide.**
 3. **Two exemplars predate the 2025 word-limit rule.** Both are page-limited filings. Their TOC and TOA styles are compared; their length is not (the template applies the 8,750-word limit).
 4. **Overlay is against the Force exemplar only.** `tools/overlay.sh` reads the first exemplar in name order. The Saldarriaga memorandum is compared by hand (see the review below); the page map is in the `.txt`.
 5. **Caption.** The party block is closed by a rule above and below, as in the Force exemplar; the Saldarriaga exemplar closes the block with a rule and "/". Both put the case number at right. Both are seen across the two filers, so the template follows the shared structure and the rule style is a tier-2 choice (`ACCEPTED`).
