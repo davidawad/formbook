@@ -12,6 +12,8 @@ Doc type `opening-brief` of `courts/sixth-circuit/court-of-appeals`. Self-contai
 | `typst/main.typ` | Entry point; reads `--input sample=...`. |
 | `typst/ca6-opening-brief.typ` | Template `ca6-brief(meta, md)`. Content-agnostic; the numbers are named parameters traced to the rules. |
 
+Typeface: no face named, so EB Garamond stays. FRAP 32(a)(5)(A) and (a)(6) require a proportionally spaced serif at 14 pt and name no face; the Sixth Circuit Briefs Checklist ("Typefaces") gives "such as Times New Roman" as an example only. The template uses the vendored EB Garamond (`fonts/eb-garamond/`), per `docs/FONTS.md`. The exemplar's Palatino is a visual comparison only.
+
 Build (from the repo root, with the toolchain on PATH): the render uses only the vendored EB Garamond (`--ignore-system-fonts`), and any typst warning fails the build.
 
 ## Governing rules
