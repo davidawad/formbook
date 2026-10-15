@@ -93,3 +93,14 @@ Overall visual result: the cover fits one page; the index and the table of autho
 - **Sample is an excerpt.** See Layout. The Argument is cut off after point I, sub-heading B, path 1; paths 2 and beyond, point I.C and D, are not transcribed. The sample is a structural and visual reference.
 - **No mechanical checks.** This doc type has no `checks.yaml` and no pass stamp; `tools/check.sh` does not run on it. Requirements above are checked by reading the render.
 - **Rule currency.** Checked against the September 26, 2025 amended-through rules only.
+
+## Engines
+
+**typst** (`typst/`, primary; the reference for the form) and **docx** (`docx/`). No LaTeX engine.
+
+**docx** (`docx/`): `sh docx/render.sh` (called by `tools/render-docx.sh`) runs pandoc with `docx/armfor.lua` on `docx/reference.docx`. `docx/build-reference.sh` builds the reference (EB Garamond styles, footer page numbers; byte-identical across runs). The index and the table of authorities print body page numbers, so the render runs three passes: a first render to PDF, a search of the body pages for each heading and authority link, a final render, and a second search that must give the same pages.
+
+- Matches the typst form: EB Garamond 14 pt throughout (footnotes 14 pt, single-spaced); body lines exact 31.4 pt (double) with a 0.5 in first-line indent; letter paper, 1 in margins; the cover (caption, title, dockets, counsel block at the foot of the text area); index and table in roman numerals; the body from page 1, with the Argument numbering (I., A., 1., a.) and hanging headings; the signature kept with the last paragraph; certificates of compliance and of filing and service.
+- Differs: line and page breaks are LibreOffice's (the PDF that is checked), not typst's, so the page numbers in the index and the table are those of the LibreOffice PDF; Word may paginate differently. The certificate's word count is counted from the docx text (1819); the typst render counts the markdown (1833). The author confirms the figure before filing. The cover's caption spacing is tighter. The first body footnote splits across pages 1 and 2, as in the typst render. The paragraph after the block quotation, "(JA 169).", is indented as a new paragraph in both renders (the filing has it flush; ACCEPTED in the typst Gate 2 table, row 9).
+- Pages reviewed: 15 of 15 (docx PDF), each rendered at 60 dpi and looked at, with the typst pages compared.
+- BLOCKED (gates cannot run, no check IDs run): `sh tools/check.sh <court-dir> --engine docx` exits 2 with `Error: open .../opening-brief/checks.yaml: no such file or directory` (this snapshot has no `checks.yaml` for this court). The `.docx` has not been opened in Microsoft Word (no Word here); LibreOffice opened it and rendered the PDF.

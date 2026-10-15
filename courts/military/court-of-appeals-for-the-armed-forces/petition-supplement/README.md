@@ -86,3 +86,14 @@ Overall visual result: the cover fits one page, the index and authorities are po
 - **Front matter.** The index takes the first roman page and the table of authorities the second. A longer authorities list would take a third roman page; the template does not limit it.
 - **Not implemented.** Sealed material (Rule 35A), classified material (Rule 12), and a motion to file out of time are not part of this template.
 - **Rule currency.** Checked against the Sept. 26, 2025 amended-through rules only (see Governing rules).
+
+## Engines
+
+**typst** (`typst/`, primary; the reference for the form) and **docx** (`docx/`). No LaTeX engine.
+
+**docx** (`docx/`): `sh docx/render.sh` (called by `tools/render-docx.sh`) runs pandoc with `docx/armfor.lua` on `docx/reference.docx`. `docx/build-reference.sh` builds the reference (EB Garamond styles, footer page numbers; byte-identical across runs). The index and the table of authorities print body page numbers, so the render runs three passes: a first render to PDF, a search of the body pages for each heading and authority link, a final render, and a second search that must give the same pages.
+
+- Matches the typst form: EB Garamond 14 pt throughout (footnotes 14 pt, single-spaced); body lines exact 31.4 pt (double) with a 0.5 in first-line indent; letter paper, 1 in margins; the cover (caption, title, dockets, counsel block at the foot of the text area); index and table in roman numerals; the body from page 1, with the numbering of the Issue, Argument and sub-headings and hanging headings; the signature kept with the last paragraph; the certificate of compliance and the certificate of filing and service.
+- Differs: line and page breaks are LibreOffice's (the PDF that is checked), not typst's, so the page numbers in the index and the table are those of the LibreOffice PDF; Word may paginate differently. The certificate's word count is counted from the docx text (1301); the typst render counts the markdown (1303). The author confirms the figure before filing. The cover's caption spacing is tighter. The counsel block sits at the foot of the text area in LibreOffice; Word's placement of the floating table is not checked.
+- Pages reviewed: 12 of 12 (docx PDF), each rendered at 60 dpi and looked at, with the typst pages compared.
+- BLOCKED (gates cannot run, no check IDs run): `sh tools/check.sh <court-dir> --engine docx` exits 2 with `Error: open .../petition-supplement/checks.yaml: no such file or directory` (this snapshot has no `checks.yaml` for this court). The `.docx` has not been opened in Microsoft Word (no Word here); LibreOffice opened it and rendered the PDF.
