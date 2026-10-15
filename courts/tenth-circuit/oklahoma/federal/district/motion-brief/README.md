@@ -80,3 +80,17 @@ File names: `tools/overlay.sh` and `tools/render.sh` write `OVERLAY-<id>.pdf`/`.
 - Page 8: CERTIFICATE OF MAILING on its own page; the served party; the signer. Pass.
 
 Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder). Layout defects found in earlier renders and fixed: paragraphs that could not break across pages (large gaps on pages 2 and 4 of the first render), paragraphs overlapping their neighbours (no trailing leading after a paragraph block), and the heading not kept with its paragraph.
+
+## Engines
+
+### docx (`docx/reference.docx`, `docx/okd-motion-brief.lua`, 2026-10-15)
+
+- Matches the typst form: Letter, 1 in margins; EB Garamond 13 pt throughout; double spacing as one exact 27.5 pt pitch with one blank pitch after each paragraph; 0.5 in first-line indent; centered bold capitals for level-1 headings, bold for level 2, bold italic for level 3; court name lines; caption as a borderless table with the ")" column and `JURY TRIAL DEMANDED` when `jury_demand` is true; title centered in bold capitals; signature block at 3 in; certificate on a new page (page break before the title style), with the served parties flush left and the signer at 3 in; centered page number in the footer at 13 pt. Section and paragraph numbers are typed in the sample, as in typst.
+- Differs: the caption is a table and the caption rows are single-spaced exact lines, so line positions can sit a few points off the typst grid (typst rounds each block to whole pitches; Word does not). The title sits one pitch below the caption rather than on the rounded grid. Ordered lists are typed numbers with a hanging 0.5 in indent, not Word list numbering. The font is named (EB Garamond) but not embedded.
+- The 15-page limit of LCvR7.1(e) (build fails above 15 pages in typst) is not checked for docx: it needs the LibreOffice page count.
+- BLOCKED (not done):
+  - `docx.pdf` (LibreOffice conversion, Gates 0 and 1): `soffice` is not installed on this box and cannot be installed here (no conda-forge package, no root).
+  - Visual review of the docx pages: pages_reviewed=0 (needs the LibreOffice PDF).
+  - Zip integrity step of `tools/render-docx.sh`: `unzip` is not installed, so the command exits 1 after writing `samples/OUTPUT-trupia-motion-to-dismiss.docx` (`unzip: not found`, then `... is not a valid zip`). The parts were checked instead with `ziptool` (17 parts) and `xmllint --noout`: all well formed.
+  - Opening the .docx in Word or LibreOffice without a repair prompt: not done.
+  - `tools/check.sh --engine docx`: not run (needs the `.docx.pdf`).
