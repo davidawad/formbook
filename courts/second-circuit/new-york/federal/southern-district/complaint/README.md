@@ -7,9 +7,10 @@ Folder: `courts/second-circuit/new-york/federal/southern-district/complaint/`. S
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-sacchi-26-cv-08973-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-sacchi-complaint.md` (a partial transcription of the 20-page filing: the caption, most of the allegations, the causes of action it covers, the prayer and the signature; see Sample) |
-| render | ok: `samples/OUTPUT-sacchi-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-sacchi-complaint.pdf` and `OVERLAY-sacchi-complaint.txt` |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and looked at after the last template change) |
+| typeface | face required: **none** (the joint rules name no face; see NYSD-FORM-002). Vendored substitute: **none needed**, EB Garamond kept per `docs/FONTS.md` ("No face named"). Fit: n/a. `pdffonts`: EBGaramond-Regular and -Bold, embedded. |
+| render | ok: `samples/OUTPUT-sacchi-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| overlay | ok: `samples/OVERLAY-sacchi-complaint.pdf` and `OVERLAY-sacchi-complaint.txt` (re-generated 2026-10-15 against `exemplars/FILED-EXAMPLE-sacchi-26-cv-08973-complaint.pdf`, the RECAP copy named in `exemplars/SOURCE.md`) |
+| pages reviewed | 11 of 11 (every page rendered at 60 dpi and looked at, again on 2026-10-15 after the re-render) |
 
 Naming note: the brief asked for `samples/<id>.md` and `<id>-overlay.pdf`. The tools (`tools/render.sh`, `tools/overlay.sh`) and the repo convention use `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so the files follow that. The id is `sacchi-complaint`.
 
@@ -95,7 +96,7 @@ sh tools/overlay.sh courts/second-circuit/new-york/federal/southern-district/com
 ## Known gaps and open choices
 
 1. **One exemplar.** The brief asks for one per doc type. The tier-2 bar (two or three filers) is not met. The CourtListener search found few SDNY complaints with a RECAP copy (most had `is_available: false`); only Sacchi had a usable one. Filers' conventions are therefore judged from one document.
-2. **Typeface.** The joint rules name no typeface, and the exemplar does not set one either: its embedded fonts are Liberation Sans, Courier New and Cambria (`pdffonts`). EB Garamond is the only typeface vendored in `fonts/`. It has a smaller x-height than Times at 12 pt, so the text looks smaller than a Times filing. 12 pt meets the rule. Whether the bench expects a Times-metric face is a question for David.
+2. **Typeface.** The joint rules name no typeface, and the exemplar does not set one either: its embedded fonts are Liberation Sans, Courier New and Cambria (`pdffonts`). Kept as EB Garamond on 2026-10-15 because the court's rules name no face (`docs/FONTS.md`, "No face named"). EB Garamond has a smaller x-height than Times at 12 pt, so the text looks smaller than a Times filing. 12 pt meets the rule. Whether the bench expects a Times-metric face is a question for David. If so, the substitute is Liberation Serif (metric-compatible); the change would be one line (`font-family`) plus a re-render.
 3. **Sample is partial.** Eleven pages of the 20-page filing (see Sample). The overlay's pairs for the omitted sections are weak by design.
 4. **Footnote size.** Footnotes are 12 pt, which the rule allows (10 pt is also allowed). Single-spaced, as the rule permits.
 5. **Caption.** The rules set no caption layout. The exemplar uses a colon column; the template uses a rule on the right and bottom of the party block (the convention used in the CAND complaint template too). ACCEPTED as a convention.

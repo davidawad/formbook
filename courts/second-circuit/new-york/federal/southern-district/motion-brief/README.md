@@ -7,9 +7,10 @@ Folder: `courts/second-circuit/new-york/federal/southern-district/motion-brief/`
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-minerva-26-cv-06789-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-minerva-motion-to-dismiss.md` (full body transcription, corrected from the exemplar's OCR text; see Sample) |
-| render | ok: `samples/OUTPUT-minerva-motion-to-dismiss.pdf`, 18 pages (cover, TOC, TOA, body of 13 pages, certificate), typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-minerva-motion-to-dismiss.pdf` and `.txt` |
-| pages reviewed | 18 of 18 (every page rendered at 60 dpi and looked at after the last template change) |
+| typeface | face required: **none** in the court's rules (the joint rules name no face; see NYSD-FORM-002). One judge's practices name Times New Roman 12 pt (see gaps, item 2). Vendored substitute: **none**, EB Garamond kept per `docs/FONTS.md` ("No face named"). Fit: n/a. `pdffonts`: EBGaramond-Regular, -Italic, -Bold, embedded. |
+| render | ok: `samples/OUTPUT-minerva-motion-to-dismiss.pdf`, 18 pages (cover, TOC, TOA, body of 13 pages, certificate), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| overlay | ok: `samples/OVERLAY-minerva-motion-to-dismiss.pdf` and `.txt` (re-generated 2026-10-15 against `exemplars/FILED-EXAMPLE-minerva-26-cv-06789-motion-brief.pdf`, the RECAP copy named in `exemplars/SOURCE.md`) |
+| pages reviewed | 18 of 18 (every page rendered at 60 dpi and looked at, again on 2026-10-15 after the re-render) |
 
 Naming note: the brief asked for `samples/<id>.md` and `<id>-overlay.pdf`. The tools and repo convention use `INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`, so those names are used. The id is `minerva-motion-to-dismiss`.
 
@@ -99,7 +100,7 @@ Printed page numbers are the body's own (1 to 13); PDF page numbers in brackets.
 ## Known gaps and open choices
 
 1. **One exemplar.** The brief asks for one per doc type. Tier 2 (two or three filers) is not met. A second SDNY memorandum of the same type, *Better Home & Finance Holding Co. v. Garg*, No. 1:26-cv-07025-CM (30 pp., counsel-filed), was downloaded and checked for text but not saved.
-2. **Typeface.** The joint rules name none. The exemplar's certificate cites Judge Caproni's Individual Practice Rule 4(B)(ii) for Times New Roman 12 pt (the exemplar's own embedded font is Times-Roman, not embedded). EB Garamond is the only vendored typeface; at 12 pt it looks smaller than Times. Whether the bench expects Times New Roman is a question for David, and a Times-metric face would close the gap.
+2. **Typeface.** The joint rules name none, so the court-wide template keeps EB Garamond (`docs/FONTS.md`, "No face named"; decided 2026-10-15). The exemplar's certificate cites Judge Caproni's Individual Practice Rule 4(B)(ii) for Times New Roman 12 pt. On 2026-10-15 I checked her published "External Practices in Civil Cases" (March 17, 2025 version, <https://www.nysd.uscourts.gov/sites/default/files/practice_documents/VC%20Caproni%20External%20Practices%20in%20Civil%20Cases%20%282025-03-17%29.pdf>): it requires Times New Roman 12-point and one-inch margins, double spacing, and a word-count certificate. The rule number 4(B)(ii) was not confirmed from the text. That is one judge's rule, not the court's; a template used before other judges cannot follow it. Whether the court template should follow it is a question for David. If so, the substitute is Liberation Serif (metric-compatible), and the change is `font-family` in `typst/nysd-motion-brief.typ` plus the typeface sentence in the certificate. A Times-metric face would also close the length gap. The exemplar's own embedded font is Times-Roman, not embedded.
 3. **Judge's individual practices.** Not in the template and not fetched. The exemplar cites a judge-specific rule for word count and typeface. Individual practices vary by judge; check the assigned judge's rules before filing.
 4. **Word count.** The template cannot count words; it prints the frontmatter value. The sample's 3,546 is a count of the transcription (see Sample). Production use needs the word processor's count.
 5. **Body length.** The body runs 13 pages (the exemplar's body is 12). The brief's 8-to-14 page target is met for the body; the whole render is 18 pages, against 17 for the exemplar, because the cover, TOC, TOA and certificate each take their own page.
