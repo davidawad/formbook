@@ -78,6 +78,18 @@ Defects found and fixed while reviewing:
 - **L.R. 9004-1(d)** (no incorporation by reference) is not enforced by the template.
 - **Page 9 white space** is the cost of keeping the Conclusion with its signature.
 
+## Engines
+
+Word (`docx/`): pandoc with `docx/reference.docx` (built by `docx/make-reference.sh`, from pandoc's default) and `docx/flsb-motion-brief.lua`; `docx/render.sh` writes `samples/OUTPUT-alinia-memorandum.docx`. Run `sh tools/render.sh --engine docx <this dir> samples/INPUT-alinia-memorandum.md`.
+
+What matches the typst output: EB Garamond 12 pt; 1-inch margins on letter paper; double spacing (24 pt exact) for body paragraphs with a half-inch first-line indent; single-spaced caption, block quotations, signature block (indented three inches) and certificates; 10-point footnotes; centered page number; the caption as a borderless table with "Case No.", "Chapter" and "Adv. Case No." labels; centered bold section headings (level 1 in capitals) and kept with the next paragraph; lettered and roman parentheticals at a half-inch left indent; the Certificate of Conferral when `conferral:` is given; the Certificate of Service with its service list.
+
+What differs: the last body paragraph is not kept with the signature block (the typst template does, so a signature never stands alone); the Heading 2 style is left-aligned as in the typst template, but page breaks may differ from the typst PDF; the footnote and block-quote spacing follows the reference styles and may differ by a line from the typst output. The EB Garamond font must be installed on the machine that opens the file.
+
+docx BLOCKED (not verified; see docs/DOCX.md):
+- `docx.pdf` gates (all of `tools/check.sh --engine docx`, which measure the LibreOffice PDF): BLOCKED: LibreOffice (`soffice`) is not installed in this environment and is not in conda-forge, so `samples/OUTPUT-alinia-memorandum.docx.pdf` was not produced and no page was rendered or reviewed. `tools/check.sh` also cannot run here yet (it needs `yq`, `checks.yaml` and `court.json` for this doc type).
+- The `.docx` itself was written and its XML parts are well-formed (`unzip -t`, `xmllint`). It has not been opened in Word or LibreOffice, so "opens without a repair prompt" is unchecked.
+
 ## Status
 
 `court.json` is not touched; status is not set. Shared tools, the root README, `STATUS.md` and `data/` are not edited.

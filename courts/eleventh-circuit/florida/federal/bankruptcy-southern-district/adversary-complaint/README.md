@@ -79,6 +79,18 @@ Defects found and fixed while reviewing:
 - **No certificate of service** is generated, because the exemplar has none.
 - **Gate 2 scope.** Review is by eye at 60 dpi; no automated check of the rule values beyond the typst source.
 
+## Engines
+
+Word (`docx/`): pandoc with `docx/reference.docx` (built by `docx/make-reference.sh`, from pandoc's default) and `docx/flsb-adversary-complaint.lua`; `docx/render.sh` writes `samples/OUTPUT-slott-complaint.docx`. Run `sh tools/render.sh --engine docx <this dir> samples/INPUT-slott-complaint.md`.
+
+What matches the typst output: EB Garamond 12 pt; 1-inch margins on letter paper; double spacing (24 pt exact) for body paragraphs with a half-inch first-line indent; single-spaced caption, title, signature block and block quotations; 10-point footnotes; centered page number; the caption (court, division or blank line, debtor, parties, case and adversary numbers) as a borderless table; paragraph numbers 1 to 28 with the opening paragraph and WHEREFORE unnumbered; lettered items (a)–(f) at a half-inch left indent; headings kept with the next paragraph.
+
+What differs: paragraph numbers and lettered markers are typed text, not Word list numbering; Word's line breaking may differ from the LibreOffice PDF. The EB Garamond font must be installed on the machine that opens the file, or Word substitutes another face.
+
+docx BLOCKED (not verified; see docs/DOCX.md):
+- `docx.pdf` gates (all of `tools/check.sh --engine docx`, which measure the LibreOffice PDF): BLOCKED: LibreOffice (`soffice`) is not installed in this environment and is not in conda-forge, so `samples/OUTPUT-slott-complaint.docx.pdf` was not produced and no page was rendered or reviewed. `tools/check.sh` also cannot run here yet (it needs `yq`, `checks.yaml` and `court.json` for this doc type).
+- The `.docx` itself was written and its XML parts are well-formed (`unzip -t`, `xmllint`). It has not been opened in Word or LibreOffice, so "opens without a repair prompt" is unchecked.
+
 ## Status
 
 `court.json` is not touched; status is not set. Shared tools, the root README, `STATUS.md` and `data/` are not edited.
