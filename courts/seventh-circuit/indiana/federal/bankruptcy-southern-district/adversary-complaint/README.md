@@ -24,7 +24,7 @@ Not used, and why:
 
 ## Layout choices (not rules)
 
-- EB Garamond 12 pt (vendored, OFL). The exemplar is Times New Roman. No local font rule.
+- **Typeface.** Face required by the rules: none. The S.D.Ind. Local Rules (as amended through Dec. 1, 2025; checked 2026-10-15, `Local-Rules.pdf`) name no typeface; B-5005-1(b)(1) requires documents to be "plainly and legibly typewritten, printed, or reproduced". Substitute: none. EB Garamond 12 pt is kept (vendored, OFL), as `docs/FONTS.md` says for a court that names no face. The exemplar is Times New Roman, which the rules do not require.
 - Double spacing at a 27.6 pt baseline pitch: the exemplar's body text measured at 27.6 pt with `pdftotext -bbox-layout`. Set as `body-leading = 1.65em` on the 0.65 em line box (measured, same method as the CAND template).
 - 1 inch margins on all sides. The exemplar's margins are similar.
 - Numbered allegations run continuously from 1 through the whole complaint, across counts, as in the filing; lettered items display `a.`, `b.` (the exemplar's style).
@@ -72,7 +72,7 @@ Reviewed pages: 6 of 6 (final state). Earlier passes found and fixed: line overl
 1. **Tier-2 exemplars.** One exemplar from one filer. The eval loop asks for two or three from different filers. Not done; a second S.D. Ind. bankruptcy adversary complaint would be needed. Searches tried are in `exemplars/SOURCE.md`.
 2. **Form 416.** The caption layout is the exemplar's, checked against Rule 7010's wording. The Official Form 416 text itself was not fetched, so the caption is not checked line by line against the form.
 3. **Corporate Ownership Statement (B-7007-2).** Not generated. Required for the LLC plaintiff in a real filing.
-4. **Font.** EB Garamond at 12 pt, not Times New Roman. No local rule; a layout choice.
+4. **Font.** No face named by the rules (checked 2026-10-15); EB Garamond at 12 pt is kept. Not a Times New Roman template, because the rules do not require one.
 5. **Length.** The exemplar is 7 pages; the render is 6. The 8-14 page target applies to exemplars of that length, so it does not apply here. The sample is the whole filing.
 6. **Quotation spacing.** The statute quotation is single-spaced, as set by the template's quotation block.
 7. **Certificates.** None generated (see the rules table: B-9013-2 does not apply to a Rule 7001 complaint).

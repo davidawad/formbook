@@ -23,7 +23,7 @@ Not used, and why:
 
 ## Layout choices (not rules)
 
-- EB Garamond 12 pt (vendored, OFL). The exemplar is Times New Roman. No local font rule.
+- **Typeface.** Face required by the rules: none. The S.D.Ind. Local Rules (as amended through Dec. 1, 2025; checked 2026-10-15, `Local-Rules.pdf`) name no typeface; B-5005-1(b)(1) requires documents to be "plainly and legibly typewritten, printed, or reproduced". Substitute: none. EB Garamond 12 pt is kept (vendored, OFL), as `docs/FONTS.md` says for a court that names no face. The exemplar is Times New Roman, which the rules do not require.
 - Double spacing at a 27.6 pt baseline pitch, matching the exemplar (measured with `pdftotext -bbox-layout`: 27.6 pt on every body line). `body-leading = 1.65em` on the 0.65 em line box (same method as the CAND template).
 - 1 inch margins on all sides.
 - Headings: section headings in bold, typed by the author with their numbers (I., II., III.), as in the filing; the conclusion centered in capitals; the certificate of service on its own page.
@@ -76,7 +76,7 @@ Reviewed pages: 8 of 8. Pages 2-5 were reviewed on the render before the signatu
 1. **Tier-2 exemplars.** One exemplar, one filer, from 2011. The eval loop asks for two or three filed exemplars from different filers. Not done; a current S.D. Ind. bankruptcy motion with a hosted, text-based PDF would be needed. Searches tried are in `exemplars/SOURCE.md`.
 2. **Case-name italics.** The sample is plain text: case names and signals are not italic. The filing's convention is italic (not checked against the image; the text layer has no italic markup). A tier-2 gap until the sample is marked up.
 3. **Certificate of service form.** B-9013-2(b) requires conformity with the court's form, which was not fetched. The wording is the exemplar's.
-4. **Font.** EB Garamond at 12 pt, not Times New Roman. No local rule; a layout choice.
+4. **Font.** No face named by the rules (checked 2026-10-15); EB Garamond at 12 pt is kept. Not a Times New Roman template, because the rules do not require one.
 5. **Length limits.** B-7007-1's 35-page limit applies only to Rule 12 motions; not checked by the template. This exemplar is 7 pages.
 6. **Rule 9024 and the relief.** The exemplar moves under B.R. 9024 for relief from an order; the template does not check the rule text of Rule 9024 (not fetched).
 7. **Corporate ownership statement (B-7007-2)** does not apply to a non-party bank in a contested matter; not generated.
