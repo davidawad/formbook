@@ -7,15 +7,15 @@ Folder: `courts/tenth-circuit/kansas/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-blatnick-2-26-cv-02480-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-blatnick-motion-brief.md`: the whole memorandum, 11 pages, transcribed (case names and signals italic as the filed copy sets them) |
-| render | ok: `samples/OUTPUT-blatnick-motion-brief.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`); the page-limit check passes (the brief ends on page 10) |
-| overlay | ok: `samples/OVERLAY-blatnick-motion-brief.pdf` and `samples/OVERLAY-blatnick-motion-brief.txt` (`tools/overlay.sh`) |
-| pages reviewed | 11 of 11: every page rendered at 60 dpi and viewed after the last template change |
+| render | ok: `samples/OUTPUT-blatnick-motion-brief.pdf`, 12 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Bold, -Italic), no warnings (`tools/render.sh`); the page-limit check passes (the brief body ends on page 11, the signature block; the certificate is on page 12) |
+| overlay | fail: `tools/overlay.sh` exits 1, "no exemplar pdf": `exemplars/` holds no `FILED-EXAMPLE-*.pdf` in this snapshot. `samples/OVERLAY-blatnick-motion-brief.txt` is left from the EB Garamond render and is stale; no `.pdf` overlay exists |
+| pages reviewed | 12 of 12: every page rendered at 70 dpi and viewed after the Liberation Serif change (fonts pass) |
 
 ## Governing rules
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| D. Kan. R. 5.1(a) | Papers are letter-size, double-spaced, in no less than 12-point (10-point for footnotes), "Times New Roman or similar," uncompressed font. Source: https://www.ksd.uscourts.gov/sites/ksd/files/MASTER%20COPY%20updated%204%2027%2026.pdf (Rules of Practice, "As amended 4/1/26"; text checked 2026-10-14). | `page` (US Letter), `double-leading` (27.6 pt pitch; measured on the render with `pdftotext -bbox`, identical on pages 2 to 10), `type-size` 12 pt, `footnote-size` 12 pt, `font-family` EB Garamond. |
+| D. Kan. R. 5.1(a) | Papers are letter-size, double-spaced, in no less than 12-point (10-point for footnotes), "Times New Roman or similar," uncompressed font. Source: https://www.ksd.uscourts.gov/sites/ksd/files/MASTER%20COPY%20updated%204%2027%2026.pdf (Rules of Practice, "As amended 4/1/26"; text checked 2026-10-14). | `page` (US Letter), `double-leading` (27.6 pt pitch; measured on the render with `pdftotext -bbox`, identical on pages 2 to 10), `type-size` 12 pt, `footnote-size` 12 pt, `font-family` "Liberation Serif" (the docs/FONTS.md substitute for Times New Roman; metric-compatible). |
 | D. Kan. R. 5.1(b) | Signature block: names, addresses, telephone, facsimile and email; attorneys' registration numbers. | `signature-block()` prints the lines the sample gives. Facsimile and registration numbers are author content (not asserted; see Known gaps). |
 | D. Kan. R. 5.1(f) | Certificate of service states the name and address of each person served, the capacity in which served, the manner of service, and the date. | `certificate()`: an assertion stops the build if any recipient lacks a name, address, capacity or manner, or if the date is missing. |
 | D. Kan. R. 7.1(a) | The brief (opening brief or motion) must contain (1) a statement of the specific relief sought, (2) a statement of the nature of the matter, (3) a concise statement of the facts with record references, and (4) the argument, referring to all authorities relied on. Same source. | Two assertions: a level 1 heading naming the facts or background, and a level 1 CONCLUSION heading (the relief). Items (2) and (4) are author content; the template does not check citations. |
@@ -31,6 +31,7 @@ Not produced by this template: a motion (a separate filing; this template is the
 - Body double-spaced at 27.6 pt, with a 0.5-inch first-line indent on every paragraph (including the first after a heading), and 27.6 pt between paragraphs (no extra space).
 - Headings: level 1 centered bold capitals, unnumbered (INTRODUCTION, STATEMENT OF FACTS, ARGUMENTS AND AUTHORITIES, CONCLUSION); level 2 bold, A., B., ... with a hanging letter; level 3 bold, 1., 2., ... (reset under each level 2); level 4 italic, a., b., ... (reset under each level 3). The author types no letters or numbers.
 - Block quotations: single-spaced, indented 0.5 inch on both sides, double-spaced after.
+- Typeface: Liberation Serif, 12 pt. D. Kan. R. 5.1(a) names "Times New Roman or similar"; `docs/FONTS.md` maps Times New Roman to Liberation Serif (metric-compatible). EB Garamond is not used here.
 - Footnotes: 12 pt, single-spaced, with a short rule above them. (No footnotes in the sample; the footnote path is exercised only by a scratch render, see the log.)
 - Signature block: date on the left when given; "Respectfully submitted," and the firm on the right; "/s/" signer; the lines given in the frontmatter, single-spaced; kept on one page.
 - Certificate of service (optional): centered bold capitals; the author's text; each recipient's name, address, capacity and manner; the signer's "/s/" line and name. Kept on one page.
@@ -58,7 +59,7 @@ A sample is one `.md` file: YAML frontmatter, then the body.
 
 ## Known gaps and open choices
 
-1. **Font.** D. Kan. R. 5.1(a) names "Times New Roman or similar." The only vendored font in `fonts/` is EB Garamond (the same choice as the CAND and ca9 templates). EB Garamond has a smaller x-height than Times, so the same 12 pt reads smaller on the page. The render is 11 pages, the same count as the filed copy. Whether a Times-metric face is needed is a question for David.
+1. **Font (resolved by the fonts pass).** D. Kan. R. 5.1(a) names "Times New Roman or similar", so the template uses Liberation Serif, the `docs/FONTS.md` substitute (metric-compatible), in place of EB Garamond. The render grew from 11 to 12 pages: Times-metric lines carry more text than EB Garamond's, so the body now ends on page 11 and the certificate moves to page 12. The body is still within the 15-page limit. The filed copy is not in this snapshot, so the visual match to it was not re-checked.
 2. **Margins.** The D. Kan. rules set no margin. One inch was chosen; the exemplar's margins were not measured (measuring them would be a coordinate-based template, which the rules forbid).
 3. **Page limit.** The assertion counts from the caption through the signature block. A brief that is 15 pages through the signature and has a certificate on page 16 passes; if D. Kan. counts the certificate, the assertion is too lenient by the certificate's pages. The rule does not say which pages count.
 4. **Additions to the certificate.** The filed certificate gives the recipient's name, address and email, and says the copy was "sent via email," but states no capacity. D. Kan. R. 5.1(f)(2) requires the capacity, so the sample adds "Capacity: Plaintiff" (from the caption) and "Manner of service: email" (from the certificate's text). These two lines are the only text not in the filed copy.
@@ -70,21 +71,22 @@ A sample is one `.md` file: YAML frontmatter, then the body.
 10. **Check scripts not run.** As in the complaint, `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json`, `rules.md` and `checks.yaml`; this doc-type folder has none, and the brief forbids editing `tools/`.
 11. **Block quotations and footnotes.** The sample has neither. The paths are exercised by a scratch sample rendered once with a block quotation, a footnote, levels 3 and 4, a list and the certificate (the scratch sample was deleted after the render). The footnote number is set tight to its text (typst 0.15 has no separate number gap for footnote entries).
 
-## Review of the rendered pages (`samples/OUTPUT-blatnick-motion-brief.pdf`, 11 pages)
+## Review of the rendered pages (`samples/OUTPUT-blatnick-motion-brief.pdf`, 12 pages, Liberation Serif)
 
 | Page | Content | Result |
 |---|---|---|
-| 1 | Court name, caption with ")" column, "Case No.", title in two lines, opening paragraph, INTRODUCTION (first two paragraphs) | Pass |
-| 2 | Paragraphs of the introduction; STATEMENT OF FACTS, first two paragraphs | Pass |
-| 3 | Statement of facts (third and fourth paragraphs); ARGUMENTS AND AUTHORITIES; A. STANDARD OF REVIEW | Pass |
-| 4 | Standard of review (end); B. (hanging letter, bold); C. begins | Pass |
-| 5 | C. continued (italic case names, § kept with its number) | Pass |
-| 6 | D. (two-line heading with hanging indent); predicates paragraphs | Pass |
-| 7 | D. (end); E. (two-line heading) | Pass |
-| 8 | E. (end); F. (heading) | Pass |
-| 9 | F. (end); G. (heading); the injunction paragraphs | Pass |
-| 10 | G. (end); CONCLUSION; signature block with "/s/", counsel lines and the italic "Attorneys for Defendant" line | Pass |
-| 11 | CERTIFICATE OF SERVICE: the author's text, the recipient's name, address, capacity and manner, and the "/s/" line | Pass |
+| 1 | Court name, caption with ")" column, "Case No.", title in two lines, opening paragraph, INTRODUCTION (first paragraphs) | Pass |
+| 2 | Introduction (end); STATEMENT OF FACTS, first paragraphs | Pass |
+| 3 | Statement of facts (end); ARGUMENTS AND AUTHORITIES; A. STANDARD OF REVIEW | Pass |
+| 4 | Standard of review (end); B. (hanging letter, bold) | Pass |
+| 5 | C. (two-line heading with hanging indent); italic case names | Pass |
+| 6 | C. (end); D. (two-line heading) | Pass |
+| 7 | D. (end) | Pass |
+| 8 | E. (two-line heading) | Pass |
+| 9 | E. (end); F. (two-line heading) | Pass |
+| 10 | G. (two-line heading); the injunction paragraphs | Pass |
+| 11 | G. (end); CONCLUSION; signature block with "/s/", counsel lines and the italic "Attorneys for Defendant" line | Pass |
+| 12 | CERTIFICATE OF SERVICE: the author's text, the recipient's name, address, capacity and manner, and the "/s/" line | Pass |
 
 Gate 2 rows are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
 

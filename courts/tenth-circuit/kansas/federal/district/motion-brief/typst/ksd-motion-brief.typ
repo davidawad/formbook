@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"     // D. Kan. R. 5.1(a): "Times New Roman or similar"; the vendored serif (README)
+#let font-family = "Liberation Serif"  // D. Kan. R. 5.1(a): "Times New Roman or similar"; docs/FONTS.md substitute (metric-compatible)
 #let type-size = 12pt                // D. Kan. R. 5.1(a): no less than 12-point
 #let footnote-size = 12pt            // D. Kan. R. 5.1(a): 10-point is the floor for footnotes; 12-point is used
 #let margin = 1in                    // not set by the D. Kan. rules: one inch on every side (README)
