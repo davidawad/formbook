@@ -87,3 +87,24 @@ Not produced by this template: a separate memorandum of points and authorities (
 - L.R. 9014-1(a): https://www.txwb.uscourts.gov/l-rule-9014-1-contested-matters (WebFetch, 2026-10-14; the page carries no revision date). A courtrules.net copy exists at https://www.courtrules.net/courts/federal/bankruptcy-western-district-texas/local-rules/l-rule-9014-1.
 - FRBP 9004(a): https://www.law.cornell.edu/rules/frbp/rule_9004 (fetched 2026-10-14).
 - Clerk's office address: WebSearch, 2026-10-14; not confirmed (see Known gaps 1).
+
+## Engines
+
+**docx** (`docx/`): `sh tools/render.sh --engine docx motion-brief samples/INPUT-oakes-motion.md` runs pandoc with `docx/txwb-motion-brief.lua` on `docx/reference.docx`, then LibreOffice (`soffice --headless --convert-to pdf`). `docx/reference.docx` is rebuilt from `docx/reference-parts/` by `sh docx/build-reference.sh`. EB Garamond must be installed for LibreOffice (`fonts/eb-garamond`). Checked on `samples/OUTPUT-oakes-motion.docx.pdf`, 8 of 8 pages rendered at 60 dpi and viewed beside the typst pages.
+
+| Layout | Matches typst | Differs (docx against typst, same sample) |
+|---|---|---|
+| Page count, Letter, 1 in margins, EB Garamond 12 pt (embedded) | 8 pages | none |
+| Line pitch: 24 pt body, 13.8 pt single (exact spacing) | yes, to 0.1 pt in the caption, the negative notice and the signature | none |
+| Caption, negative notice (six bold single-spaced lines, L.R. 9014-1(a)), title, addressee, lead-in | yes | none |
+| Level 1 headings (centred bold), level 2 (centred bold italic, as the typst PDF renders them), level 3 | yes | heading to the paragraph below is about 5 pt larger |
+| Numbered paragraphs (0.5 in first line, text at 1.02 in) and lettered list (a) | yes | numbers 10 and up do not push the text right (fixed tab; typst flows the number) |
+| Signature block (By: /s/, -AND-), certificate of service (two-column list, signer) | yes | none |
+| Footer page number | yes | none |
+
+- **Vertical placement.** Same as the complaint: LibreOffice sets text about 11 pt lower inside exact 24 pt lines (about 3 pt in 13.8 pt lines). Pitch, margins and page breaks agree; the margins are not moved to compensate.
+- **Headings** are 13.8 pt exact lines (8.6 pt lines clip the capitals of the level 1 headings in LibreOffice; rejected). Level 2 is bold italic because the typst output renders it so: its show rule says italic, but the typst PDF embeds BoldItalic on those pages.
+- **Line breaks** fall on different words in a few lines (renderer metrics; both are left-aligned).
+- Word was not available; it may paginate differently (`docs/DOCX.md`).
+
+**docx BLOCKED:** none for the render. The gates (`tools/check.sh --engine docx`) were not run: the court has no `checks.yaml` or `rules.md` yet, so the checker cannot run on it. The evidence here is the render and the page-by-page review, not a stamp.
