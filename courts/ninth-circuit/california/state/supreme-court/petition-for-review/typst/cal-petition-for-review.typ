@@ -12,7 +12,8 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // CAL-FONT-001: proportionally spaced serif (rule 8.74(b)(1)). Vendored in /fonts.
+#let font-family = "TeX Gyre Schola"      // CAL-FONT-001: proportionally spaced serif, Century Schoolbook preferred (rule 8.74(b)(1)). Substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-named = "Century Schoolbook"    // the face the rule names; the certificate states it (Schola is a Century Schoolbook clone).
 #let type-size = 13pt                      // CAL-FONT-002: 13-point or larger, footnotes included (rules 8.204(b)(4), 8.74(b)(1)).
 #let body-leading = 0.94em                 // CAL-SPACE-001: double-spaced text, as the filed exemplar is. Rule 8.204(b)(5) asks for 1.5.
 #let single-leading = 0.12em               // headings, quotations, footnotes, tables, certificates: single-spaced (rule 8.204(b)(5)).
@@ -351,7 +352,7 @@
 #let certificate-of-compliance(meta, words) = {
   heading(level: 1, numbering: none)[Certificate of Compliance]
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
-  [I certify that the attached PETITION FOR REVIEW uses a 13-point #font-family font and contains #group-digits(words) words.]
+  [I certify that the attached PETITION FOR REVIEW uses a 13-point #font-named font and contains #group-digits(words) words.]
   signature-block(meta)
 }
 

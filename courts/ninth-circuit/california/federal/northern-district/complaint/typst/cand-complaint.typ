@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // Civil L.R. 3-4(c)(2)(A): standard proportional font; vendored in fonts/
+#let font-family = "Liberation Serif"   // Civil L.R. 3-4(c)(2)(A): standard proportional font; the rule's example is Times New Roman, substituted by its metric-compatible vendored clone (docs/FONTS.md)
 #let type-size = 12pt                   // Civil L.R. 3-4(c)(2)(B): 12 point type or larger
 #let pitch = 24pt                       // Civil L.R. 3-4(c)(2): double-spaced; the numbered lines are this pitch
 #let lines-per-page = 28                // Civil L.R. 3-4(c)(2): no more than 28 lines per page
@@ -18,7 +18,7 @@
 #let left-margin = 1.5in                // room for the line numbers and the rules
 #let right-margin = 0.75in
 #let text-width = page-w - left-margin - right-margin
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 1.35em leading gives a 24 pt baseline pitch at 12 pt (measured, README.md)
+#let body-leading = 1.35em              // double spacing: 1.35em leading gives a 24 pt baseline pitch at 12 pt in Liberation Serif (measured with pdftotext -bbox-layout, README.md)
 #let single-leading = 0.5em             // single spacing for counsel, caption and signature: about 13.8 pt at 12 pt
 #let para-indent = 0.5in                // first-line indent of numbered allegations
 #let caption-left = 3.2in               // width of the party column of the caption

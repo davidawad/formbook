@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // Rule 8.204(b)(2): any conventional font; a roman serif. Vendored in /fonts.
+#let font-family = "TeX Gyre Schola"      // Rule 8.74(b)(1): proportionally spaced serif, Century Schoolbook preferred; rule 8.204(b)(2) allows any conventional font. Substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 13pt                      // Rule 8.204(b)(4): not smaller than 13-point, footnotes included.
 #let body-leading = 0.65em                 // Rule 8.204(b)(5): lines at least 1-1/2 spaced. Measured on the render (README.md).
 #let single-leading = 0.12em               // headings, block quotations, footnotes, TOC and TOA: single spaced (8.204(b)(5)).
