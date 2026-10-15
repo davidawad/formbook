@@ -7,9 +7,10 @@ Folder: `courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/moti
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-swain-landing-25-10013-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-swain-landing.md`: the whole 7-page motion and memorandum transcribed, plus the notice of motion and fill-in lines the rule requires and the exemplar lacks (gap 1) |
-| render | ok: `samples/OUTPUT-swain-landing.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-swain-landing.pdf` and `OVERLAY-swain-landing.txt` |
-| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (LBR and FRBP checked, see gap 2). Font: EB Garamond (`docs/FONTS.md`: "no face named" row) |
+| render | ok: `samples/OUTPUT-swain-landing.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Bold, Italic, BoldItalic, all embedded), no warnings; re-rendered 2026-10-15 |
+| overlay | ok: `samples/OVERLAY-swain-landing.pdf` and `OVERLAY-swain-landing.txt` (re-run 2026-10-15 against `exemplars/FILED-EXAMPLE-swain-landing-25-10013-motion-brief.pdf`) |
+| pages reviewed | 7 of 7 (every page rendered at 60 dpi to PNG and viewed, 2026-10-15) |
 | check gates | not run: `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this is a doc-type folder, and `tools/` is out of scope for this box |
 
 File names: as in `adversary-complaint/README.md`, the tools' default names are used (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`), and the sample is `INPUT-<id>.md`.
@@ -52,14 +53,14 @@ Not produced: a proposed order, the Exhibit A referred to in the motion (the Fin
 ## Known gaps and open choices
 
 1. **Notice of motion (LBR 9013-1(c)).** The filed exemplar has no notice of motion, no objection deadline and no hearing, although the rule requires one for a motion in an adversary proceeding unless it is filed with a contemporaneous motion under LBR 9013-2. The template generates the notice; the sample leaves the response deadline and the hearing blank (the fill-in lines print as underscores), because the exemplar gives no date and the sample must not invent one. The notice's wording is not Official Form B 420A: it has not been checked against that form. A filer should use the form itself.
-2. **Typeface and size.** As in the complaint README (gap 2): the rules set no typeface or size; EB Garamond 12 pt is used because it is the only vendored font. The exemplar is Times New Roman, 12 pt.
+2. **Typeface and size.** As in the complaint README (gap 2), checked 2026-10-15 against the court's LBR PDF: no rule names a typeface or point size, so the template keeps EB Garamond at 12 pt (`docs/FONTS.md`: a court that names no face keeps EB Garamond). The exemplar is Times New Roman, 12 pt. Switching to Liberation Serif is a choice for David, not a rule requirement.
 3. **One exemplar only.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The CourtListener API search (`type=r&court=dcb`, query "motion to dismiss" adversary) turned up Engelhorn (25-10044), Developer RE1 (25-10037), JPK NewCo (25-10015, entry 20, not checked) and Anglin Consulting (25-10032, entry 43, no PDF). None of those was checked for text and none was saved. The web search for a D.C. Bankruptcy motion found the court's local rules and general orders, not a filing. A second filer is needed for tier 2.
 4. **Caption number.** The exemplar's caption says "Adversary No. 18-00173 MMH" but the ECF header says "Case 25-10013-ELG". The sample keeps the caption number as printed, and records the ECF number in `exemplars/SOURCE.md`.
 5. **Certificate of service wording.** The exemplar's certificate says "Motion and Memorandum in Support of Debtor's Motion to Dismiss", which does not match the filer's own motion. The template's certificate says "the foregoing", so the sample's certificate differs from the exemplar's words on purpose.
 6. **Typed numbering and typos.** The exemplar types its own heading numbers (I., A., 1.), so the template does not number headings. The transcription keeps the filer's wording and typos ("recission", "Similarly state law rescission", "§548(a)(B)(i)", "failure to state a Claim"). Italics for case names are not in the text layer, so the sample is roman (the template italicises `*...*` markup where the sample uses it).
 7. **Overlay.** The sample is the whole motion, so the overlay pairs pages one-to-one (ours p.1 to p.7 with filed p.1 to p.7). The overlay is a diagnostic, not a score.
 
-## Review of the rendered pages (current PDF, all 7 pages viewed at 60 dpi)
+## Review of the rendered pages (re-rendered and viewed 2026-10-15, all 7 pages at 60 dpi)
 
 | Page | Content | Finding |
 |---|---|---|

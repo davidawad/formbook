@@ -7,9 +7,10 @@ Folder: `courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/adve
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-webster-v-square-funding-25-10054-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-square-funding.md`: the whole 13-page complaint transcribed, plus the consent statement the rules require and the exemplar lacks (gap 3) |
-| render | ok: `samples/OUTPUT-square-funding.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-square-funding.pdf` and `OVERLAY-square-funding.txt` |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (LBR and FRBP checked, see gap 2). Font: EB Garamond (`docs/FONTS.md`: "no face named" row) |
+| render | ok: `samples/OUTPUT-square-funding.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Bold, Italic, all embedded), no warnings; re-rendered 2026-10-15 |
+| overlay | ok: `samples/OVERLAY-square-funding.pdf` and `OVERLAY-square-funding.txt` (re-run 2026-10-15 against `exemplars/FILED-EXAMPLE-webster-v-square-funding-25-10054-adversary-complaint.pdf`) |
+| pages reviewed | 12 of 12 (every page rendered at 60 dpi to PNG and viewed, 2026-10-15) |
 | check gates | not run: `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this is a doc-type folder, and `tools/` is out of scope for this box |
 
 File names: the brief asks for `<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` by default, and `overlay.sh` reads `OUTPUT-<id>.pdf`, so the tools' names are used. The sample is `INPUT-<id>.md`, following the file-role names in `CLAUDE.md`.
@@ -54,14 +55,14 @@ Not produced by this template: the adversary cover sheet (Official Form 104), th
 ## Known gaps and open choices
 
 1. **One exemplar only.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers; this doc type has 1. Searches: CourtListener API (`type=r&court=dcb`, query "complaint adversary", ordered by date; the HTML search page returns 403 to WebFetch, the API works). Of the results with PDFs, Akers (17-10012, entry 1, 2017) and Elliot (26-10013, entry 1, 2026) are scans with no body text and were not used. Webster v. CFG Merchant Solutions (25-10055) is the same filer, the same day, the same counsel, so it is not a second filer. Webster v. Jaycee Development (25-10052) is text-based but a different layout (Calibri), and was not saved. A second filer is needed for tier 2.
-2. **Typeface and size.** The rules set no typeface and no point size (checked: FRBP 9004 and LBR 9013-1 are silent). The only font vendored in `fonts/` is EB Garamond, so it is used at 12 pt. The exemplar is Times New Roman 12 pt. EB Garamond sets visibly smaller at the same point size; a vendored Times-metric font would remove the difference. This is a decision for David.
+2. **Typeface and size.** Checked 2026-10-15 against the court's LBR PDF (text layer, searched for font, typeface, point and format terms): no rule names a typeface or a point size. The only format rule is LBR 5005-1(b), which covers pro se papers (letter size, 1-inch margins, "plainly and legibly" typed) and names no face. A court that names no face keeps EB Garamond (`docs/FONTS.md`), so the template stays on EB Garamond at 12 pt. The exemplar is Times New Roman 12 pt. EB Garamond sets visibly smaller at the same point size. Switching to Liberation Serif (metric-compatible with Times New Roman) would be a choice, not a rule requirement; it is left for David.
 3. **Consent statement (assumed value).** The exemplar states no position on final orders, and the rules require one. The sample's `final_orders.consent: consents` is an assumption made to test the template, not a fact from the exemplar. The trustee's actual choice is unknown. The template prints the sentence for either value and refuses any other.
 4. **Exemplar as filed.** The transcription keeps what the filer wrote: the blank adversary number ("Adv. Case No. ____________"), two typographical slips ("time he December 2022 Agreement"; the WHEREFORE paragraph of Count II ends without a period), . The "[Signature on Following Page]" line is a layout note and is not transcribed.
 5. **Page count.** The render is 12 pages; the filed PDF is 13. Both are double-spaced at the same 27.6 pt pitch (measured on the render, page 4: 27.6 pt between body lines). The page difference is not analysed further; the text is complete (all 71 paragraphs are present, numbered 1 to 71 as filed).
 6. **Italics.** The exemplar's case names and "Id." are probably italic, but the text layer carries no italic markup, so the sample is roman. The template italicises `*...*` markup where the sample uses it.
 7. **Overlay.** The sample is the whole complaint, so the overlay map pairs most pages one-to-one (page 6 with filed page 8 and page 9 with filed page 10 show the pagination drift). The overlay is a diagnostic, not a score.
 
-## Review of the rendered pages (current PDF, all 12 pages viewed at 60 dpi)
+## Review of the rendered pages (re-rendered and viewed 2026-10-15, all 12 pages at 60 dpi)
 
 | Page | Content | Finding |
 |---|---|---|
