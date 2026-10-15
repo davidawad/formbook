@@ -160,3 +160,14 @@ Rendered at `pdftoppm -r 60` and looked at, page by page. Page numbers below are
 
 - Exemplar: `exemplars/SOURCE.md` (URL fetched from, case, index no., filer, date filed, date fetched).
 - Rules: the Cornell and search-result sources in the table above, read 2026-10-14.
+
+## Engines
+
+Three engines per doc type: `typst/` (primary), `docx/` and `latex/` (not built here; see the Engines section of the PR). The docx engine is `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc 3.12's default reference), plus `docx/nysupct-motion-brief.lua` (cover, section breaks for the roman and arabic page numbers, TOC field, TOA, signature block, service list, word-count certificate). Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/supreme-court/motion-brief samples/INPUT-valentino.md`.
+
+- **Matches the typst form.** Letter paper; 1 in margins; EB Garamond 12 pt body; double line spacing (`w:line="480"`, auto); 0.5 in first-line indent; footnotes 11 pt single-spaced; the cover unnumbered; front matter (TOC, TOA) in lower-case roman; the body and certificate in arabic from 1; centred bold headings with the typst numbering typed by the author; the word-count certificate for the `filing` clause.
+- **Differs.** Word's "double" is not the typst leading (1.65 em), so the line pitch differs. The counsel block sits at a fixed 2 in below the title, not at the page foot as in typst (the flexible space has no docx equivalent). The word count is the filter's count of the body and its footnotes, not Word's count; the certificate states it, so a counsel must check it against the word processor before signing. The TOC is a TOC field with cached heading entries and no page numbers.
+- **Generated.** `samples/OUTPUT-valentino.docx` (validated: `unzip -tq` passes; all 17 XML parts pass `xmllint --noout`). The word count in this sample is 2,796 (within the 7,000 limit for `filing: in-chief`).
+- **BLOCKED (docx.pdf gates).** LibreOffice (`soffice`) is not installed on the box that built this engine, so no `samples/OUTPUT-valentino.docx.pdf` exists and no page was rendered or reviewed.
+- **BLOCKED (TOC page numbers).** The TOC needs a field update (page numbers are not in the cached result).
+- **BLOCKED (TOA page numbers).** The table of authorities lists each authority with no page numbers: LibreOffice does not honour TA/TOA fields (docs/DOCX.md), so the TOA check IDs cannot pass by construction. The entries and grouping follow the typst form.

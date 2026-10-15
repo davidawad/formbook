@@ -114,3 +114,13 @@ After the fixes, all 9 pages were re-rendered and looked at again (the final ren
 ## Exemplar search (for the record)
 
 Searched (2026-10-14): NYSCEF and nycourts.gov form pages (blank forms only); Justia form pages (blank); a nycourts.gov opinion referencing a 2022 verified complaint (an opinion, not the complaint); the NY Attorney General site (`ag.ny.gov/sites/default/files/tto_complaint.pdf`, found and used). CourtListener was not searched directly: only general web search was used, so a RECAP or other CourtListener copy of a New York Supreme Court complaint may exist and was not checked. The exemplar is a public filing by the NY Attorney General.
+
+## Engines
+
+Three engines per doc type: `typst/` (primary), `docx/` and `latex/` (not built here; see the Engines section of the PR). The docx engine is `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc 3.12's default reference) plus `docx/nysupct-complaint.lua` (caption table, TOC field, signature block, service list, verification page). Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/supreme-court/complaint samples/INPUT-people-v-trump.md`.
+
+- **Matches the typst form.** Letter paper; 1 in margins (22 NYCRR 202.5(a)); EB Garamond 12 pt body (no face named by the rules); double line spacing (`w:line="480"`, auto); 0.5 in first-line indent; footnotes 10 pt single-spaced; centred bold level-1 headings; caption with the bordered party box and `-against-`; centred page number in the footer; verification on its own page.
+- **Differs.** Word's "double" is two times the font's line height, not the typst leading of 1.65 em, so the line pitch will not equal the typst pitch. The caption and signature blocks are tables, whose borders Word and LibreOffice draw slightly differently. The TOC is a TOC field: its cached entries are the headings, without page numbers, until the field is updated.
+- **Generated.** `samples/OUTPUT-people-v-trump.docx` (validated: `unzip -tq` passes; all 17 XML parts pass `xmllint --noout`). Not generated, as in typst: the summons and the NYSCEF legend.
+- **BLOCKED (docx.pdf gates).** LibreOffice (`soffice`) is not installed on the box that built this engine, so no `samples/OUTPUT-people-v-trump.docx.pdf` exists and no page was rendered or reviewed. Gates 0 and 1 on the docx PDF cannot run here.
+- **BLOCKED (TOC page numbers).** The TOC check cannot pass by construction until a LibreOffice field update (or a Word update with `w:updateFields`) fills the page numbers; the cached result carries no pages.
