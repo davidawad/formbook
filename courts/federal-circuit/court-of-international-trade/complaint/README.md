@@ -80,11 +80,34 @@ Every page of `OUTPUT-trek-bicycle.pdf` was rendered at 70 dpi and viewed (9 of 
 | 8 | exemplar p.8 | COUNT V heading and paragraphs 50-52; PRAYER FOR RELIEF heading, lettered list (a)-(h). | PASS |
 | 9 | exemplar p.9-11 | Prayer list (a)-(h) on p.8 as filed. Signature block on its own page 9 with the /s/ line, counsel lines and date; the filed signature block continues to p.11. | PASS |
 
+## Engines
+
+Typst is the primary engine (`typst/`). The docx engine is in `docx/`. There is no `latex/` engine and no `checks.yaml` for this doc type.
+
+### docx
+
+| Path | What |
+|---|---|
+| `docx/make-reference.sh` | Builds `docx/reference.docx` from pandoc's default: EB Garamond 12 pt, 24 pt exact double spacing for body text and list items, single spacing for headings, block quotations and footnotes, letter paper, 1 in margins, a centered PAGE field in the footer. |
+| `docx/cit-complaint.lua` | Pandoc filter: the cover and caption (a borderless table with the ")" column), numbered allegations, lettered list items (a), (b), ..., the signature block. |
+| `samples/OUTPUT-trek-bicycle.docx` | `sh tools/render.sh --engine docx courts/federal-circuit/court-of-international-trade/complaint samples/INPUT-trek-bicycle.md` (writes the `.docx` and the `.docx.pdf`). |
+| `samples/OUTPUT-trek-bicycle.docx.pdf` | LibreOffice 26.8.1 conversion (10 pages). Fonts embedded: EB Garamond only (`pdffonts`). |
+
+**Matches the typst output:** letter paper, 1 in margins, EB Garamond 12 pt, double spacing (24 pt), court name and caption with the ")" column and the court number at right, the title centered, centered bold headings, numbered allegations with the number at 0.5 in, the lettered prayer (a)-(h), the centered page number at the bottom, the `/s/` signature block with the Rule 11(a) lines. Every page of the `.docx.pdf` was rendered at 60 dpi and viewed (10 of 10), and the page text was compared with the typst render (`pdftotext`).
+
+**Differs from the typst output:**
+
+- Length: 10 pages against the typst 9. The line breaks fall differently from page 3 on (the docx page 8 starts at paragraph 40; the typst page 8 starts at paragraph 49), so the signature block is on its own page 10 and the prayer ends on page 9. Length is not mandated for a complaint; the difference is LibreOffice's line breaking, not the form.
+- Paragraph numbers are typed text followed by a tab, not Word list numbering, so the numbers do not renumber if a paragraph is added by hand in Word.
+- Word was not run. The file has no Word repair check; it is valid XML in a zip (`render-docx.sh`), and the `.docx.pdf` is LibreOffice's rendering.
+
+**docx BLOCKED items:** none for this doc type.
+
 ## Known gaps
 
 - **Exemplars: one filer.** Only the Sidley Austin complaint is in `exemplars/`. Tier 2 (house style vs convention) needs 2 or 3 filers; the caption layout and heading underlining above are open until a second filer's complaint is checked. Not judged against one filer.
 - **Caption.** The sample's caption uses a ")" column per line (with `pad` for designations). The filed caption uses horizontal rules and no ")" column. Both satisfy Rule 10(a); which one the clerks prefer is not settled.
 - **Headings.** Filed section headings are underlined; ours are bold only.
 - **Length.** The sample is 9 pages, the filed complaint 11; the sample is an excerpt-length transcription, so the page count is not a measure of compliance.
-- **Engines.** Only the typst engine. No `checks.yaml`, `latex/` or `docx/` for this doc type in this box.
+- **Engines.** Typst and docx (see Engines). No `latex/` engine and no `checks.yaml` for this doc type.
 - **Overlay pairing.** Word-overlap pairing is noisy on the cover (40%) and the signature page (35%); the pairs are given above, not claimed as exact matches.

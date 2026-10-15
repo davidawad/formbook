@@ -98,6 +98,34 @@ Every page of `OUTPUT-bgh-edelstahl.pdf` (12 of 12) was rasterized at 70 dpi wit
 | 11 | filed p.57 | V. CONCLUSION AND PRAYER FOR RELIEF; signature block with date. | PASS |
 | 12 | filed p.58 | Certificate of compliance with the word count from `count-words()` (1,911 for the excerpt); signature block. | PASS |
 
+## Engines
+
+Typst is the primary engine (`typst/`). The docx engine is in `docx/`. There is no `latex/` engine and no `checks.yaml` for this doc type.
+
+### docx
+
+| Path | What |
+|---|---|
+| `docx/make-reference.sh` | Builds `docx/reference.docx` from pandoc's default: EB Garamond 12 pt, 24 pt exact double spacing for body text and list items, single spacing for headings, block quotations and footnotes, letter paper, 1 in margins, a centered PAGE field in the footer. |
+| `docx/cit-motion-brief.lua` | Pandoc filter: the two covers and captions, the motion with its bulleted relief and a WHEREFORE paragraph kept with the signature block, the memorandum body (toa: links as plain text), the counsel block, the signature block, the Chambers word-count certificate. Contents and authorities are placeholders (BLOCKED, below). |
+| `samples/OUTPUT-bgh-edelstahl.docx` | `sh tools/render.sh --engine docx courts/federal-circuit/court-of-international-trade/motion-brief samples/INPUT-bgh-edelstahl.md` (writes the `.docx` and the `.docx.pdf`). |
+| `samples/OUTPUT-bgh-edelstahl.docx.pdf` | LibreOffice 26.8.1 conversion (12 pages, the same count as the typst render). Fonts embedded: EB Garamond only (`pdffonts`). |
+
+**Matches the typst output:** letter paper, 1 in margins, EB Garamond 12 pt, double spacing, both covers (court name, caption, party, title), the counsel block at 3.3 in, the motion and its signature block on pages 1-2, the memorandum body with the same headings (I. centered bold caps, A. bold with a hanging indent), block quotations single spaced and indented 0.5 in on both sides, footnotes at 12 pt, the Chambers certificate and its signature block, the centered page number. Every page of the `.docx.pdf` was rendered at 60 dpi and viewed (12 of 12), and the page text was compared with the typst render (`pdftotext`): the same 12 pages, the same cover, motion, memorandum start, certificate and signature pages; the body breaks at different lines from page 8 on (the typst page 8 starts "considered under this analysis", the docx page 8 starts "(i.e., semifinished)").
+
+**Differs from the typst output:**
+
+- Contents and authorities: the docx has a placeholder page for each, not the table. Both need page numbers from a first render, which this engine does not do.
+- Word count: the certificate prints 1,901 words, the typst engine prints 1,911 for the same body. The docx count is the word count of pandoc's plain-text rendering of the body, less its footnote markers; the typst count is of the markdown source. The two differ by 10 words. The filed certificate must carry the count of the filed document in Word, checked before filing.
+- Citations: the `toa:` links print as plain text in the docx, so no authority is indexed.
+- Word was not run; the `.docx` is valid XML in a zip (`render-docx.sh`), and the `.docx.pdf` is LibreOffice's rendering.
+
+**docx BLOCKED items** (for the PR, in the form `docs/DOCX.md` asks for):
+
+- `BLOCKED: CIT-MOT-003 (Rule 56.2(c)(2), table of contents): not generated in the docx; needs page numbers from a first render (a TOC field with a cached result, filled by a filter from a pass over the LibreOffice PDF). Placeholder page only.`
+- `BLOCKED: CIT-MOT-003 (Rule 56.2(c)(2), table of authorities): not generated in the docx; same two-pass requirement, with the toa links grouped by kind. Placeholder page only.`
+- `BLOCKED: CIT-WORD-003 (Chambers 2(B)(2), word count): the docx count is 1,901 against the typst count of 1,911; to be recounted in Word before the certificate is filed.`
+
 ## Known gaps
 
 - **Exemplar: one filer.** Only the DeKieffer & Horgan filing is in `exemplars/`. Tier 2 needs 2 or 3 filers; the cover layout, TOC/TOA layout and caption are open until a second filer's Rule 56.2 motion is checked. Not judged against one filer.
@@ -109,4 +137,4 @@ Every page of `OUTPUT-bgh-edelstahl.pdf` (12 of 12) was rasterized at 70 dpi wit
 - **Overlay pairing** is by word overlap; the TOC and TOA pairings are weak (30-44%) because the layouts differ, not because the content differs.
 - **Zoomed review.** Pages were viewed at 70 dpi, not zoomed. The TOA and the certificate need a zoomed look before this is final.
 - **Certificate on an excerpt.** The certificate prints 1,911 words, the count of this excerpt; the filed count is 13,834. For a filed brief the number must be the count of the full brief, which the template takes from the full markdown body (the body count is `count-words()`, not a word-processor count; see Chambers 2(B)(1)(c)).
-- **Engines.** Only the typst engine. No `checks.yaml`, `latex/` or `docx/` for this doc type in this box.
+- **Engines.** Typst and docx (see Engines). No `latex/` engine and no `checks.yaml` for this doc type.
