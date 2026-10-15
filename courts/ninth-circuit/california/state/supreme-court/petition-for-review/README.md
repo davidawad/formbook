@@ -118,3 +118,15 @@ The pairing in the current render (TeX Gyre Schola; `-overlay.txt`): sample p.1 
 8. **Tier 2 is not measured.** The template is judged against one exemplar (Quach) plus the second filer's (Hoehn) conventions by eye; the overlay is diagnostic.
 
 [Formbook index](../../../../../../README.md) | [Court root](../README.md)
+
+## Engines
+
+**docx** (`docx/make-reference.sh` builds `docx/reference.docx`; `docx/cal.lua` writes the cover from the frontmatter; `tools/render.sh --engine docx`).
+
+- Set in styles.xml and sectPr, not rendered (no LibreOffice on the build box): font TeX Gyre Schola 13 pt throughout, footnotes included; body double spaced (`w:line="480"`, auto) with 0.5 in first-line indent and 240 twips after; headings single spaced, bold, Heading 1 centred and capitalised; footnotes single spaced; US Letter, 1.5 in left and right, 1 in top and bottom; arabic PAGE field centred in the footer, none on the cover (`titlePg`).
+- Differs from typst: TOC and TOA are not generated (typst builds them from headings with computed page numbers); the cover is paragraphs, not the ruled layout; no bookmarks; no line numbering. Line spacing is "auto" multiples, not exact points. Font name is the vendored Schola (the rule-named Century Schoolbook is metric-compatible; swap the name if the filer's machine has it).
+- `pages_reviewed` for docx: 0. The `.docx` was validated (zip, well-formed XML parts); `OUTPUT-<id>.docx.pdf` was not made.
+- BLOCKED: `docx.pdf` gates 0 to 3: no LibreOffice (`soffice`) on the build box, so no PDF was rendered or checked.
+- BLOCKED: TOC and TOA check IDs: no TOC/TOA fields or generated entries in the docx.
+- BLOCKED: caption and cover layout check IDs: the cover is paragraphs, so the ruled caption layout is not reproduced.
+- Pagination in Word may differ from typst (line breaking, footnote placement), so footer page numbers may be off by a page in Word.
