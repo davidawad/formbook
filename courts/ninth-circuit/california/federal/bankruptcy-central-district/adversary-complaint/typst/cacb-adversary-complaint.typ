@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // Central Guide 9004-1(b)(2)(C): a required typeface list; EB Garamond is vendored (gap, README.md)
+#let font-family = "Liberation Serif"   // Central Guide 9004-1(b)(2)(C): Times New Roman is a listed typeface; Liberation Serif is its metric-compatible substitute (docs/FONTS.md)
 #let type-size = 12pt                   // Central Guide 9004-1(b)(2)(C): not smaller than 12 point (the floor; the filed exemplar is 12 pt)
 #let pitch = 24pt                       // Central Guide 9004-1(b)(2)(F): double-spaced; the numbered lines are this pitch
 #let lines-per-page = 28                // Central Guide 9004-1(b)(2)(B)(i): not more than 28 numbered lines per page
@@ -22,8 +22,8 @@
 #let left-margin = 1.5in                // room for the line numbers and the rules
 #let right-margin = 0.75in
 #let text-width = page-w - left-margin - right-margin
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is about 0.65em, so 1.35em leading makes a 24 pt baseline pitch at 12 pt (measured, README.md)
-#let single-leading = 0.35em            // single spacing: 12 pt pitch at 12 pt type, so two single lines fit each numbered line (counsel, caption)
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is about 0.655em, so 1.345em leading makes a 24 pt baseline pitch at 12 pt (measured, README.md)
+#let single-leading = 0.345em          // single spacing: 12 pt pitch at 12 pt type, so two single lines fit each numbered line (measured, README.md)
 #let para-indent = 0.5in                // first-line indent of numbered allegations
 #let caption-left = 3.3in               // width of the party column of the double caption
 #let counsel-lines = 7                  // Central Guide 9004-1(c)(1)(B): the space between lines 1 and 7 is left for the clerk; the court title starts on line 8
@@ -164,7 +164,8 @@
 // Body and signature
 // ---------------------------------------------------------------------------
 
-#let signature-block(meta) = on-grid(grid(
+// The signature block never splits across pages (a split leaves the last line on a page of its own).
+#let signature-block(meta) = block(breakable: false, width: text-width, on-grid(grid(
   columns: (2.6in, 1fr),
   column-gutter: 0.2in,
   [Dated: #meta.date],
@@ -176,18 +177,25 @@
     v(pitch * 0.5)
     line-stack(("By: /s/ " + meta.signature.signer, upper(meta.signature.signer)) + meta.signature.lines)
   },
-))
+)))
+
+/// Joins a heading (`lead`, or none) and the last piece (`tail`, or none) into one unbreakable block: a heading
+/// never ends a page, and the signature block never stands alone on a page.
+#let kept(lead, piece, tail) = if lead == none and tail == none { piece } else {
+  block(breakable: false, width: text-width, { if lead != none { lead }; piece; if tail != none { tail } })
+}
 
 /// Numbered allegations. Each blank-line-separated chunk of markdown that is neither a heading nor a
 /// list is one numbered paragraph (FRBP 7010 applies Fed. R. Civ. P. 10(b)). Headings and lists are unnumbered.
 /// Numbering is applied per chunk, not with a `show par` rule: a show rule that re-wraps paragraph
-/// content recurses without end in typst 0.15.
-#let allegations(body, para-counter) = {
+/// content recurses without end in typst 0.15. `signature` follows the last chunk and is kept with it.
+#let allegations(body, para-counter, signature) = {
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
+  let tail-of(i) = if i == chunks.len() - 1 { signature } else { none }
   // A heading is kept in one unbreakable block with the chunk after it, so it never ends a page.
   let pending = []
   let has-pending = false
-  for c in chunks {
+  for (i, c) in chunks.enumerate() {
     let t = c.trim()
     if t.starts-with("#") {
       pending += cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
@@ -200,21 +208,13 @@
         cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
         v(body-leading)
       }
-      if has-pending {
-        block(breakable: false, width: text-width, { pending; items })
-      } else {
-        items
-      }
+      kept(if has-pending { pending } else { none }, items, tail-of(i))
       pending = []
       has-pending = false
     } else if t.starts-with("WHEREFORE") {
       // The prayer's lead-in is not a numbered allegation (it is unnumbered in the filed complaint).
       let piece = on-grid({ set par(leading: body-leading); h(para-indent); cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1) })
-      if has-pending {
-        block(breakable: false, width: text-width, { pending; piece })
-      } else {
-        piece
-      }
+      kept(if has-pending { pending } else { none }, piece, tail-of(i))
       pending = []
       has-pending = false
     } else {
@@ -223,16 +223,12 @@
         para-counter.step()
         on-grid({ set par(leading: body-leading); context [#h(para-indent)#(para-counter.display()).#h(0.3in)#cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)] })
       }
-      if has-pending {
-        block(breakable: false, width: text-width, { pending; piece })
-      } else {
-        piece
-      }
+      kept(if has-pending { pending } else { none }, piece, tail-of(i))
       pending = []
       has-pending = false
     }
   }
-  if pending != [] { block(breakable: false, width: text-width, pending) }
+  if pending != [] { block(breakable: false, width: text-width, { pending; signature }) }
 }
 
 #let cacb-adversary-complaint(meta, body) = {
@@ -268,7 +264,5 @@
   // Body: numbered allegations; markdown lists become (a), (b), ...
   set enum(numbering: "1.", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
   set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
-  allegations(body, para-counter)
-
-  signature-block(meta)
+  allegations(body, para-counter, signature-block(meta))
 }
