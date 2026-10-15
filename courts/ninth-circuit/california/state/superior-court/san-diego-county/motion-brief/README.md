@@ -124,3 +124,16 @@ Open tier-2 items (not decided here, because one filer is not a convention):
 - **Notice vs memorandum.** A motion packet has a notice of motion, a memorandum, and often a separate statement and declarations. This template produces one paper.
 - **Latex and docx.** Not built for this doc type.
 - **Exemplar size.** `FILED-EXAMPLE-...pdf` is 6.7 MB (24 pages of an OCR'd scan). The repo carries no other exemplar PDFs; it is kept because the eval loop overlays against the real page.
+- **Notice vs memorandum.** A motion packet has a notice of motion, a memorandum, and often a separate statement and declarations. This template produces one paper; a notice of motion is not a separate template here.
+- **Latex.** Not built for this doc type. **Docx:** see Engines.
+
+## Engines
+
+**typst** is the primary form (above). **docx** (`docx/`) and **latex** (not built) are secondary.
+
+**docx** (`docx/`): the same build as the complaint's (`build-reference.sh`, the same pleading grid, footer and line numbering), with `calsuperct-sandiego-motion-brief.lua` for the first page, the hearing block (Date, Time, Dept., Judge, Action filed, Trial date), the jury line and the signature block. `render.sh` fills the footer title from `footer_title`. Output: `samples/OUTPUT-synthetic-motion-brief.docx`.
+
+- Matches typst: as the complaint, plus the hearing block in the caption.
+- Differs: as the complaint (line numbers skip table rows; page borders span the text area; footnotes single-spaced; attorney row at least 168 pt). No exemplar exists, so there is no tier-2 comparison for Word either.
+- BLOCKED (docx.pdf gates): LibreOffice is not installed, so `samples/OUTPUT-synthetic-motion-brief.docx.pdf` cannot be made; Gates 0-3 on the docx.pdf were not run. No docx page was viewed (`pages_reviewed=0`).
+- BLOCKED by construction: CRC 2.108 consecutive numbering on every line, as in the complaint (table rows on page 1 are not numbered).

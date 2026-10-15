@@ -115,10 +115,26 @@ sh tools/overlay.sh courts/ninth-circuit/california/state/superior-court/san-die
 - **Limited civil amount.** CRC 2.111(9) as fetched says "$10,000". CCP § 85 has since set the limited civil ceiling at $35,000 for cases filed on or after 2024-01-01 (not verified in this run). The template only prints the amount line the filer supplies; the wording is the filer's.
 - **E-filing.** SD LR 2.1.4.1(A) requires serving the SDSC General Order and form CIV-409 with a complaint; not produced here. Bookmarks for exhibits (2.1.4.1(C)) are not implemented: no exhibits are in the sample.
 - **Cover sheet.** The civil case cover sheet (CM-010) and summons are separate forms, not generated.
-- **Latex and docx.** Not built for this doc type.
+- **Latex.** Not built for this doc type. **Docx:** see Engines.
 
 ## Searches
 
 - `People v. Sun Healthcare complaint San Diego Superior Court`: no San Diego filing under that name. Sun Healthcare matters found were in other venues (San Mateo, 2001 and 2005).
 - Found instead: the AG complaint in *People v. Sweetwater Care OpCo, LLC* (25CU033612N), used as the exemplar.
 - San Diego Local Rules, Division II (effective 1/1/2026): the caption rules above. The fetched PDF was read locally with `pdftotext`.
+
+## Engines
+
+**typst** is the primary form (above). **docx** (`docx/`) and **latex** (not built) are secondary.
+
+**docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default (Liberation Serif 12 pt; body lines exact 24 pt; letter; top 1 in, bottom 46 pt, left 1.5 in, right 0.5 in; footer with a printed rule, a PAGE field and the title at 10 pt; line numbers restart each page; page borders as double left and single right rules). `calsuperct-sandiego-complaint.lua` builds the first page (attorney block in a 168 pt row, fee label, court title, caption table with its rules), the jury line and the signature block from the frontmatter. `render.sh` runs pandoc and fills the footer title from `footer_title`. Output: `samples/OUTPUT-sweetwater-complaint.docx`.
+
+- Matches typst: font and size, exact 24 pt grid, margins, attorney block height, court title on line 8, caption layout, footer, signature block.
+- Differs (Word and LibreOffice paginate differently; judge on a render, not on this list):
+  - Line numbers are Word section line numbering. They number text lines only, so the attorney block and caption on page 1 (table rows) carry no numbers, and a page with fewer than 28 text lines shows fewer numbers. Typst always shows 28.
+  - Page borders run the height of the text area, not the full page height.
+  - Footnotes are single-spaced (CRC 2.108(3) allows it); typst double-spaces them.
+  - Caption indents come from the leading spaces in the frontmatter, read from the sample file.
+  - The attorney row is "at least" 168 pt: a longer block grows the row instead of failing as typst does.
+- BLOCKED (docx.pdf gates): LibreOffice is not installed on this box, so `samples/OUTPUT-sweetwater-complaint.docx.pdf` cannot be made and Gates 0-3 on the docx.pdf were not run. No docx page was viewed (`pages_reviewed=0`).
+- BLOCKED by construction: CRC 2.108 consecutive numbering on every line of every page. Table rows (attorney block, caption) are not numbered by Word section numbering, so page 1 lines 1-10 cannot pass without a per-page numbered frame. Not verifiable here.
