@@ -84,4 +84,24 @@ Fixed during review: (1) paragraphs ran together on one line (per-paragraph bloc
 8. **No gate scripts run.** `tools/check.sh` reads a court folder with `court.json` and `checks.yaml`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. Render, overlay and the page review above are the checks run.
 9. **Local rules version.** The local rules fetched on 2026-10-14 are the court's posted PDF (its file metadata gives a November 2015 creation date and the text cites the 2015 revision). A Florida Bar News item reports "major revisions" planned for N.D. Fla. rules; I did not confirm whether any later amendment changed Rules 5.1 or 7.1. David should check the court's current local rules before this is used as the reference.
 
+## Engines
+
+typst (`typst/`) is the reference. The docx engine (`docx/`) follows it; the LaTeX engine is not built for this doc type.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-winton-complaint.pdf` (9 pp) | reference |
+| docx | `OUTPUT-winton-complaint.docx` and `OUTPUT-winton-complaint.docx.pdf` (9 pp) | ok: rendered with LibreOffice 26.8.1; every page compared with the typst page at 60 dpi |
+
+```sh
+sh tools/render.sh --engine docx courts/eleventh-circuit/florida/federal/northern-district/complaint samples/INPUT-winton-complaint.md
+```
+
+`docx/reference.docx` is built by `docx/make-reference.sh` (pandoc's default reference, restyled); `docx/render.sh` runs pandoc on the sample; `docx/flnd-complaint.lua` builds the cover, the numbering, the lists and the signature block. The sample is read as CommonMark with smart punctuation, the reading typst's cmarker gives (pandoc's markdown reader pairs a star page's `*` with a later `*` and adds a no-break space after "No.").
+
+- *Matches typst:* EB Garamond 14 pt everywhere, including the footer (embedded; `pdffonts` shows only EB Garamond); US Letter with 1-inch margins; body double spaced at the 32.2 pt pitch; cover lines at 16 pt; the caption (parties, closing rule, CASE NO., "v." between parties); the title; numbered allegations with the WHEREFORE paragraph unnumbered; roman-numbered list (i. to vi.) with the typst indents; headings in capitals or bold centered, at typst's default sizes (level 1 19.5 pt, level 2 17 pt, level 3 14 pt); signature block (date at left; "Respectfully submitted,"; firm; signer) with typst's gaps; centered page number at the foot. Page count is 9 in both. Lines break at the same words on most lines.
+- *Differs:* some lines break one word earlier or later (LibreOffice and typst shape text differently; DOCX.md "Known limits"), so a page break can fall a line or two apart from typst's. The cover sits about 3 pt lower than typst's. Paragraph numbers 10 and up set their text at the same tab stop as 1 to 9 (1.04 in); typst's gap follows the width of the number.
+- *Not checked:* not opened in Microsoft Word (none on this box). LibreOffice converts it with no warning. The gate scripts were not run: `tools/check.sh` needs `court.json` and `checks.yaml`, which this doc-type folder does not have (see "Gate 2 review" above and known gap 8).
+- *docx BLOCKED items:* none. LibreOffice is not on conda-forge; the official build (26.8.1, from download.documentfoundation.org) was used instead, with its X11 libraries from conda-forge. The `.docx.pdf` checks therefore ran.
+
 [Court README](../README.md) | [Motion-brief README](../motion-brief/README.md)

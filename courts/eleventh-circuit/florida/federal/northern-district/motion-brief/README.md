@@ -87,4 +87,24 @@ Fixed during review: (1) the signature block moved before the certificate of ser
 8. **Local rules version.** The local rules were read from the court's posted PDF (file metadata: created November 2015; the text is the 2015 revision that set the 14-point and 8,000-word rules). A Florida Bar News item reports "major revisions" planned for the N.D. Fla. rules; I did not confirm whether a later amendment changed Rules 5.1 or 7.1. David should check the court's current local rules before this is used as the reference.
 9. **No gate scripts run.** `tools/check.sh` expects a court folder with `court.json` and `checks.yaml`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. Render, overlay and the page review above are the checks run.
 
+## Engines
+
+typst (`typst/`) is the reference. The docx engine (`docx/`) follows it; the LaTeX engine is not built for this doc type.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-kinsale-motion.pdf` (12 pp) | reference |
+| docx | `OUTPUT-kinsale-motion.docx` and `OUTPUT-kinsale-motion.docx.pdf` (12 pp) | ok: rendered with LibreOffice 26.8.1; every page compared with the typst page at 60 dpi |
+
+```sh
+sh tools/render.sh --engine docx courts/eleventh-circuit/florida/federal/northern-district/motion-brief samples/INPUT-kinsale-motion.md
+```
+
+`docx/reference.docx` is built by `docx/make-reference.sh`; `docx/render.sh` runs pandoc on the sample, reading it as CommonMark with smart punctuation (so "at *7" keeps its literal star, as in typst); `docx/flnd-motion-brief.lua` builds the cover, the signature block and its place before the certificate of service.
+
+- *Matches typst:* EB Garamond 14 pt everywhere, including the footer (embedded); US Letter with 1-inch margins; body double spaced at 32.2 pt; the caption and its closing rule; the title; the lead-in; headings: level 1 centered capitals, level 2 bold and flush left (as typst draws it), level 3 bold; italic case names, signals and *Id.*; the signature block before the CERTIFICATE OF SERVICE with typst's gaps; the centered page number.
+- *Differs:* the caption has no "v." between parties, as in the typst template (its comment says the defendants are one side; a clerk may expect "v."; David to decide, and the typst should change with the docx). Level-2 headings: the typst template sets a 0.5 in hanging indent, but typst does not apply it to these lines, so the docx has none either. Lines break at slightly different words, and the page breaks fall a line or two apart from typst's (the lead-in's ninth line moves to page 2 here). The docx has 12 pages as the typst does; the signature block is on page 12 with the certificate, where typst's is on page 11.
+- *Not checked:* not opened in Microsoft Word (none on this box). LibreOffice converts it with no warning. The gate scripts were not run (no `court.json` or `checks.yaml` in this folder; see known gap 9).
+- *docx BLOCKED items:* none. LibreOffice was installed from the official build, as in the complaint's Engines section.
+
 [Court README](../README.md) | [Complaint README](../complaint/README.md)

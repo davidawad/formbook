@@ -84,6 +84,25 @@ Why 13 pt and not 12 pt: at 13 pt the EB Garamond x-height is about that of Time
 | 9 | Items E and F; Jury Trial Demanded, 29 | Pass. |
 | 10 | Signature block (date left, firms right, `/s/`) | Pass. |
 
+## Engines
+
+- **typst** (`typst/`, primary): `samples/OUTPUT-johnson-complaint.pdf`, 10 pages.
+- **docx** (`docx/`): `reference.docx` (styles and page setup, built by `sh docx/build-reference.sh reference.docx`) and `mowd-complaint.lua` (cover, caption, numbered paragraphs, lists, signature block). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-johnson-complaint.md` writes `samples/OUTPUT-johnson-complaint.docx` and `samples/OUTPUT-johnson-complaint.docx.pdf` (LibreOffice 26.8.1; 11 pages). LibreOffice must see `fonts/` (EB Garamond) through fontconfig, or the PDF substitutes a face.
+- **latex**: not built for this doc type (`latex/` is empty).
+
+What matches the typst form (every page of the docx PDF viewed at 60 dpi, next to the typst page):
+- US Letter, 1 in margins; EB Garamond 13 pt, the only font embedded (`pdffonts`); double spacing (26 pt line pitch); 0.5 in first-line indent.
+- Court title, caption (parties left, case number, title and jury legend right), numbered paragraphs 1., 2., ..., headings (level 1 centered caps; level 2 centered bold; level 3 bold, left), block quotation single spaced, lettered lists A., B., ..., the unnumbered WHEREFORE lead-in, signature block in one unbreakable row.
+- Page number centered at the foot, arabic from 1 (on the cover too, as in the typst template).
+
+What differs:
+- Pagination: the sample is 11 pages in docx and 10 in typst. Word's exact line spacing sets the first line about 12 pt lower on each page (first line at 80 pt against 67 pt in the typst render), so about one line less fits on a page. Word may paginate differently again.
+- Signature block: in both renders it is alone on the last page (the jury demand ends the page before it). The docx keeps the signature with the paragraph before it, as the typst block is kept together.
+- Caption and signature lines: the same text and wrapping; the typst single-spaced stacks have no gap between items, and the docx matches that.
+- Footnotes: none (the template has none).
+
+docx BLOCKED items: none for the mandated form. Not checked: Word itself (not installed here). The `.docx` is a valid zip of well-formed XML parts and opens and converts in LibreOffice without a repair prompt.
+
 ## Overlay
 
 `samples/OVERLAY-johnson-complaint.pdf` (red = our render, blue = exemplar, black = both) and `OVERLAY-johnson-complaint.txt` (page map). Pages are paired by word overlap: ours p.1 to p.10 pair with filed p.1, 3, 4, 50, 51, 52, 55, 58, 58, 59. The pairing is coarse because the sample is an excerpt; the exemplar's pleading page layout is not reproduced (no pleading paper), so the lines will not coincide. The overlay is a diagnostic, not a score.
