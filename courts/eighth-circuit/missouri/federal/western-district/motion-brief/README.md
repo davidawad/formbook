@@ -88,6 +88,31 @@ Why 13 pt: at 13 pt the EB Garamond x-height is close to the Mannon exemplar's T
 
 Page numbers: the cover is unnumbered, the contents and authorities are i and ii, and the body is 1 to 5, with the certificate on body page 6 (the TOC gives that page as 6).
 
+## Engines
+
+- **typst** (`typst/`, primary): `samples/OUTPUT-mannon-suggestions.pdf`, 9 pages.
+- **docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh reference.docx`), `mowd-motion-brief.lua` (cover, contents, authorities, headings, body, signature, certificate) and `render.sh`, which owns the build. Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-mannon-suggestions.md` writes `samples/OUTPUT-mannon-suggestions.docx` and `samples/OUTPUT-mannon-suggestions.docx.pdf` (LibreOffice 26.8.1; 10 pages). LibreOffice must see `fonts/` (EB Garamond) through fontconfig.
+- **latex**: not built for this doc type (`latex/` is empty).
+
+Sections (the docx has three, as the typst output has three page-number sequences): the cover with no number; the contents and the authorities in lower-case roman; the body from 1, with the signature block and the certificate of service.
+
+Page numbers in the contents and the authorities are written as text, not as TOC or TOA fields (Word and LibreOffice do not compute TA/TOA fields from a plain docx; see docs/DOCX.md). `render.sh` lays the document out in LibreOffice, finds the page of each heading and of each authority link on the body pages, and writes those numbers. It runs until the numbers do not change, and it fails if a heading or a link is not found on a body page. The contents numbers were also checked by hand against the PDF (I, A, B, C, VIII, certificate: 1, 1, 2, 3, 4, 7). Word does not update them: if Word paginates differently, re-render in LibreOffice rather than editing the numbers.
+
+What matches the typst form (every page of the docx PDF viewed at 60 dpi, next to the typst page):
+- US Letter, 1 in margins; EB Garamond 13 pt, bold and italic faces only (`pdffonts`); double spacing; 0.5 in first-line indent.
+- Cover: court title, division, caption ("vs." between the sides), case number, title centered in bold.
+- Contents and authorities on their own pages, with the same entries, indents, page columns and "passim" rule (seven or more pages).
+- Headings: I., A., 1., a. (the filing's own numbers kept), introduction and certificate unnumbered, centered caps where the typst has them.
+- Italic case names and *Id.*; the signature block and the certificate of service on their own page, the signature kept with the last paragraph of the body.
+
+What differs:
+- Pagination: 10 pages in docx against 9 in typst. The first line of each page sits about 12 pt lower in Word-style exact spacing, so the body has about a line less per page. The numbers above are the LibreOffice layout.
+- Authorities: the docx lists the cited authorities only; the typst template lists every entry of the registry (all sixteen in this sample are cited, so the lists are the same here).
+- Lists (none in this sample): the markdown's numbers are written as text, not Word list numbering.
+- Footnotes: none (the template has none).
+
+docx BLOCKED items: none for the mandated form. Not checked: Word itself (not installed here); the `.docx` is a valid zip of well-formed XML parts and opens and converts in LibreOffice without a repair prompt.
+
 ## Overlay
 
 `samples/OVERLAY-mannon-suggestions.pdf` (red = our render, blue = exemplar, black = both) and `samples/OVERLAY-mannon-suggestions.txt` (page map). Pages are paired by word overlap: ours p.1 to p.9 pair with filed p.1, 3, 4, 7, 8, 9, 20, 21, 22. The pairing is coarse because the sample is an excerpt and the exemplar's pleading-style caption and numbering are not reproduced; read the map with the caveat in gap 11.
