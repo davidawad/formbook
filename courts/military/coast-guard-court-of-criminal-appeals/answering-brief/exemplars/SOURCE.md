@@ -40,3 +40,17 @@ Pass 2 (same day):
 - The uscg.mil CGCCA Appellate Briefs index, from a browser or a box that can reach uscg.mil. It returned HTTP 403 to this box.
 - The Navy JAG Coast Guard filings table, from a browser.
 - A request to the CGCCA clerk or Appellate Government Counsel for a public copy of a redacted government answer.
+
+## Pass 3 (2026-10-15, bead fb-595.20.5)
+
+Routes not tried before:
+
+15. CourtListener API v4 search, `type=r&court=uscgcoca`: **0 results** (re-run). The courts endpoint rejects `q`, and the anonymous limit is 5 requests/min. No CourtListener API key is set on this box.
+16. CourtListener API v4 search, `type=o&court=uscgcoca` (opinions): not completed. Throttled. Retry with a key.
+17. CourtListener unfiltered RECAP search for "Coast Guard Court of Criminal Appeals" with "brief": 53 hits, none from a CGCCA docket. Hits came from district courts, the Trump dockets and the CA11 and CADC dockets.
+18. WebSearch (standard), "Coast Guard Court of Criminal Appeals" "Government Answer" appellee brief pdf: CGCCA opinions on media.defense.gov and the CAAF Lopez brief (near-miss, see below). No CGCCA government answer.
+19. WebSearch (standard), media.defense.gov "Brief on Behalf of the United States": only CGCCA opinions (Butler, Bickle, Johnston, Zrike, Bungert and others).
+20. WebSearch (extended), uscg.mil "Government Answer" PDF: returned the uscg.mil Appellate Briefs index as a result. The index lists "Government Answer" links per case (search snippet: MKSR Goodell, CSC Flores, SN Tucker). Opening the index with WebFetch returned HTTP 403.
+21. curl with a browser user agent: the index, the CGCCA Rules of Appellate Procedure (Rev. 03/25) and a media.defense.gov opinion PDF all returned HTTP 403. The hosts are blocked from this box.
+
+The index in item 20 is the most likely source of a public government answer. It needs a box that can reach uscg.mil. Once a PDF is in hand, it can be filed as `FILED-EXAMPLE-<case>-<docket>-answering-brief.pdf` with a row here.

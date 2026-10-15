@@ -41,3 +41,12 @@ Pass 2 (same day):
 - The uscg.mil CGCCA Appellate Briefs index and Orders page, from a browser or a box that can reach uscg.mil. Both returned HTTP 403 to this box.
 - The Navy JAG Coast Guard filings table, from a browser (the table is populated client-side and was empty in this capture).
 - A request to the CGCCA clerk for a public copy of a redacted appellant's brief.
+
+## Pass 3 (2026-10-15, bead fb-595.20.5)
+
+The same routes as the answering-brief pass 3 (`../../answering-brief/exemplars/SOURCE.md`, items 15 to 21) were run for the opening brief. Results:
+
+- CourtListener API v4, `type=r&court=uscgcoca`: 0 results. Unfiltered RECAP search for "Coast Guard Court of Criminal Appeals" with "brief": no CGCCA docket. Anonymous limit 5/min; no API key on this box.
+- WebSearch (standard), "Brief on Behalf of Appellant" "Assignments of Error" pdf: CAAF Fernandez amicus, 32 CFR 150 App. B, and CGCCA opinions (Ryder, Crawford, King, Naputi, Gogo). No CGCCA appellant's brief.
+- WebSearch (standard), "ASSIGNMENTS OF ERROR" "Appellant" brief Docket 2025: CGCCA opinions Ducker (No. 1508, 22 Jul 2025) and Ray (No. 1498), both on uscg.mil opinion pages. Opinions, not briefs. Older briefs quoted in opinions (Tamayo No. 1425, Coker No. 1188, Gogo No. 1292) are on media.defense.gov as opinions.
+- The uscg.mil Appellate Briefs index lists the CGCCA's filings by case, and the search snippet shows "Assignments of Error" links (see answering-brief pass 3, item 20). Opening it returned HTTP 403, as did the rules PDF and media.defense.gov, even with a browser user agent.
