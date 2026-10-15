@@ -10,7 +10,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a stated choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"      // FRAP 32(a)(5)(A): a serif, proportional face. The Handbook (IX.A.6) discourages Garamond; see README, known gaps.
+#let font-family = "TeX Gyre Schola"  // FRAP 32(a)(5)(A): a serif, proportional face. Handbook IX.A.6 names Century; substitute per docs/FONTS.md (Century Schoolbook -> TeX Gyre Schola).
 #let type-size = 14pt                  // FRAP 32(a)(5)(A): 14-point or larger, everywhere.
 #let body-leading = 1.07em             // FRAP 32(a)(4): double-spaced body. Gives a baseline pitch of about 24 pt at 14 pt, the pitch the filed exemplar uses; a spacing choice, see README.
 #let single-leading = 0.45em           // Single spacing for headings, block quotations, signature and certificate blocks, footnotes, tables. Measured on the render: 0.12em overlapped two-line headings.

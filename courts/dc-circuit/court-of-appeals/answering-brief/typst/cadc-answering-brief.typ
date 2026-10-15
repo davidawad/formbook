@@ -11,8 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // FRAP 32(a)(5): serif, proportional. Vendored in /fonts.
-                                           // See README "Known gaps": the court's Handbook prefers Century/Times.
+#let font-family = "TeX Gyre Schola"      // FRAP 32(a)(5): serif, proportional. Handbook IX.A.6 names Century and Times; Century per the filed exemplar. Substitute per docs/FONTS.md.
 #let type-size = 14pt                      // FRAP 32(a)(5)(A): at least 14-point, footnotes included.
 #let body-leading = 0.94em                 // FRAP 32(a)(4): double-spaced; metric-aligned line box, see README.
 #let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA, certificates: single-spaced.
