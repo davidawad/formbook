@@ -85,3 +85,14 @@ Defects the overlay and the review found during the build: none in the template 
 10. **Core / non-core and consent** (FRBP 7008(a)): generated from `core`. The sample says core under § 157(b)(2)(I) and no consent. The author must choose these per complaint; the template does not decide them.
 11. **Dischargeability deadline** (FRBP 4007(c)) is in the filing's ¶ 27 text, not a rule the template enforces.
 12. **Jurisdiction paragraphs** cite 28 U.S.C. §§ 1334(b), 157(a), (b)(1), and venue §§ 1408, 1409(a). These are not re-fetched this session (see the governing-rules note).
+
+## Engines
+
+**docx** (`docx/reference.docx`, no Lua filter; built from pandoc's default reference by a scratch script).
+
+- Matches the typst form: US Letter, 1 in margins on all sides, EB Garamond 13 pt body, footnote text 13 pt, body and headings on an exact 26 pt (double) line, block quotes and footnotes single spaced, level-1 headings bold capitals, level-2 bold centred, level-3 bold italic, page number centred in the footer. No line numbers or rules (the template has none).
+- Differs: pandoc writes only the markdown body. The caption, the court title block, the generated jurisdiction and venue paragraphs (FRBP 7008(a)), the consent sentence and the signature block are produced by the typst template from the frontmatter and are **not** in the docx. Paragraph numbers follow the markdown (pandoc's own numbering), not the typst counter. The frontmatter `title` appears as pandoc's Title paragraph. This docx is therefore not a filable complaint yet.
+- BLOCKED: `docx.pdf` and Gates 0-1 on the LibreOffice PDF: `soffice` is not installed on this box and cannot be installed here.
+- BLOCKED: visual review of the docx pages: 0 docx pages viewed (only the typst pages were rendered and reviewed).
+- BLOCKED: `tools/render-docx.sh` stops at its `unzip -tq` step because `unzip` is not installed on this box (the failure is reported as "not a valid zip"); the `.docx` itself is written before that step and was checked with libzip `ziptool` and `xmllint` (all 17 XML/rels parts well-formed).
+- Not done: opening the `.docx` in Word or LibreOffice for the no-repair check; the Word pagination of the body.

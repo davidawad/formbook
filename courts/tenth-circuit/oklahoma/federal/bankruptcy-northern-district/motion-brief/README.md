@@ -95,3 +95,14 @@ sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-di
 11. **Bracketed text in the notice:** "[and others who are required to be served]" is reproduced from the local rule's form with its brackets, as the rule prints it. The author deletes the brackets and the words, or keeps them, per the notice's filing.
 12. **Font:** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. 13 pt because EB Garamond sets small at 12; both meet the LBR 9004-1(A) floor. A choice; the court's rule names no font (see Typeface).
 13. **Statute and rule text** not re-fetched (see governing rules): § 522(f)(1)(A), (f)(2)(A), § 101(36), FRBP 4003(d), 9006(f), 9014. Check before this folder is treated as complete.
+
+## Engines
+
+**docx** (`docx/reference.docx`, no Lua filter; built from pandoc's default reference by a scratch script).
+
+- Matches the typst form: US Letter, 1 in margins on all sides, EB Garamond 13 pt body, footnote text 13 pt, body and headings on an exact 26 pt (double) line, block quotes and footnotes single spaced, level-1 headings bold and centred in the case written (not capitals), level-2 bold with a 0.5 in hanging indent, level-3 bold italic with a 0.5 in hanging indent, page number centred in the footer, table cells with a full single-rule grid, single spaced. No line numbers or rules.
+- Differs: pandoc writes only the markdown body. The caption, the court title block, the notice of opportunity for hearing box (LBR 9013-1(B)), the generated response-time paragraph, the signature block and the certificate of service are produced by the typst template from the frontmatter and are **not** in the docx. Tables are pandoc tables, so column widths and cell padding follow pandoc, not the typst grid. Lists use pandoc's numbering, not the typst `(a)` form. This docx is therefore not a filable motion yet.
+- BLOCKED: `docx.pdf` and Gates 0-1 on the LibreOffice PDF: `soffice` is not installed on this box and cannot be installed here.
+- BLOCKED: visual review of the docx pages: 0 docx pages viewed (only the typst pages were rendered and reviewed).
+- BLOCKED: `tools/render-docx.sh` stops at its `unzip -tq` step because `unzip` is not installed on this box (the failure is reported as "not a valid zip"); the `.docx` itself is written before that step and was checked with libzip `ziptool` and `xmllint` (all 17 XML/rels parts well-formed).
+- Not done: opening the `.docx` in Word or LibreOffice for the no-repair check; the Word pagination of the body.
