@@ -102,3 +102,29 @@ Every page is recorded above; none is `OPEN`.
 8. **Tool checks not run.** Same reason as the complaint: `tools/check.sh` expects a court folder.
 9. **File names.** The brief asked for `samples/<id>.md`, `samples/<id>.pdf` and `<id>-overlay.pdf`. The repo's file-role names are used instead: `samples/INPUT-<id>.md` (input), `samples/OUTPUT-<id>.pdf` (render), `samples/OVERLAY-<id>.pdf` and `.txt` (overlay), because `tools/render.sh` and `tools/overlay.sh` read and write those names by default and are shared tools.
 10. **Argument I has no subheadings in the sample**, so the `A.`/`B.` heading levels are not exercised by this sample. They are exercised by the CAND motion template, which is the same heading code.
+
+## Engines
+
+Doc type `motion-brief`, in this folder. The typst template above is the primary engine and is unchanged.
+
+| Engine | State |
+|---|---|
+| typst | `typst/`, as above. |
+| latex | not built in this change (`latex/` has no template for this doc type). |
+| docx | `docx/reference.docx` (built by `docx/make-reference.sh`), `docx/iasd-motion-brief.lua` and `docx/render.sh` (pandoc, then the footer part is wired into the front-matter section). `samples/OUTPUT-hanfling-brief.docx` is written by `tools/render.sh --engine docx`. The `.docx.pdf` is **not produced**: LibreOffice cannot be installed on the box that built this (not on conda-forge, no root), so the LibreOffice-based checks are BLOCKED. Pages reviewed as rendered PDF: 0. |
+
+**docx: what the template sets, from the same parameters as the typst form.** Letter paper, 1-inch margins; EB Garamond 12 pt; body at 24 pt exact line spacing with a half-inch first-line indent; footnotes and block quotations single-spaced at 12 pt (the block quotation indented 0.5 in on both sides); level 1 headings centered bold capitals; levels 2 to 4 bold with a hanging label (`I.`, `A.`, `1.`, typed by the filter, a half inch hanging); the front matter (cover, table of contents, table of authorities) in its own section numbered `i`, `ii`, ..., and the body numbered from 1 at the bottom centre; the cover caption as a borderless table with a right and bottom rule on the party column, the case number, the title, and `ORAL ARGUMENT REQUESTED` when `oral_argument` is true; the table of authorities grouped Cases, Statutes, Rules, Other Authorities, built from the `toa:` links, each authority's name in italics; the signature block with the date at the margin and the lines at 3.45 in. The `.docx` passes the zip and XML checks in `tools/render-docx.sh` and reads back in pandoc with the same text and footnotes. It has **not** been opened in Word or LibreOffice, so "no repair prompt" is unverified.
+
+**docx: what differs, or is not verified.**
+- Pagination and line breaks are **not verified** (no renderer). Word may break lines and paginate differently from the typst PDF. No docx page is compared with the typst OUTPUT.
+- The table of contents and the table of authorities list the headings and authorities but **no page numbers**: the page of each entry is not computed here (see BLOCKED below). The entries end in an empty page column with dot leaders.
+- Headings are labelled by the filter (`I.`, `A.`, `1.`) from the heading order, as the typst template numbers them; a heading style change in Word does not renumber them.
+- Lettered and numbered list items are not used in this brief's sample; `docx/iasd-motion-brief.lua` does not number lists.
+- Fonts: the docx names EB Garamond; it must be installed on the machine that opens the file, or Word substitutes silently (`docs/DOCX.md`).
+- The front-matter footer placeholder is replaced by `docx/render.sh`; a `.docx` built by plain `pandoc` (without that script) has no roman page numbers on the front matter.
+
+**docx: BLOCKED** (`docs/DOCX.md`, "Checking a docx"):
+- `IASD-TOC-001` (LR 10(b)(4), a subject-matter table of contents on the first page): the table of contents has no page numbers, so the check that the entries point at the right pages cannot pass. The placement (page ii, after the cover, as in typst and the exemplar) is the same question as Known gap 1.
+- The table of authorities page numbers, and the `passim` entries (five or more pages): BLOCKED, because a TOA field is not built and the page of each citation is not computed (LibreOffice does not honor the TA/TOA fields, `docs/DOCX.md`).
+- `tools/check.sh --engine docx` (Gates 0 to 3 on `samples/OUTPUT-hanfling-brief.docx.pdf`): BLOCKED, because the `.docx.pdf` cannot be made here (no LibreOffice). No `.check-docx.txt` stamp is written.
+- The page review of the `.docx` in LibreOffice and Word (`docs/DOCX.md`, step 3): BLOCKED for the same reason; no page was looked at.

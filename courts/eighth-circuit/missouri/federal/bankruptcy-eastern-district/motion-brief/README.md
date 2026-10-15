@@ -102,3 +102,39 @@ Layout findings fixed during this review (not in the final render): the first re
 - CourtListener RECAP search (`type=r`) with `recap_documents[].filepath_local` gave storage paths for: QMAXX Products Group (433781) doc 17, **Motion to Abstain, 5 pp., 2020-04-03: saved**; Directory Distributing (400563) doc 36 (memorandum supplement, 14 pp.; the storage object was an HTML error page, so not usable).
 - WebSearch: found a 2009 adversary opinion (govinfo, 09-04213) that quotes a memorandum supporting a motion to dismiss; an opinion, not the filing. Hearing calendars on the court's site (files.moeb.uscourts.gov) list motions but are not filings.
 - The local rules were fetched by curl (the court's site allowed the PDF download from this box on 2026-10-14).
+
+## Engines
+
+Three engines from one markdown contract. typst is the primary template and is unchanged here. This section covers the docx engine (`docx/`), added with the DOCX export (fb-595.23.14).
+
+| Engine | Folder | Output for `qmaxx-abstain` | Status |
+|---|---|---|---|
+| typst (primary) | `typst/` | `samples/OUTPUT-qmaxx-abstain.pdf` (not in the snapshot; `tools/render.sh`) | unchanged |
+| docx | `docx/` | `samples/OUTPUT-qmaxx-abstain.docx`, `samples/OUTPUT-qmaxx-abstain.docx.pdf` | rendered by LibreOffice; all 6 pages rendered at 60 dpi and viewed |
+
+Build: `sh docx/make-reference.sh <absolute path>/docx/reference.docx` rebuilds the reference. `sh tools/render.sh --engine docx <court-dir> samples/INPUT-qmaxx-abstain.md` writes the `.docx` and the LibreOffice PDF. `docx/moeb-motion-brief.lua` builds the caption table, the numbered paragraphs, the signature block and the certificate of service. Footnotes are pandoc's own.
+
+LibreOffice here is 26.8.1, unpacked from the document-foundation Linux tarball (conda-forge has no LibreOffice). The vendored EB Garamond is installed for the user running LibreOffice (`docs/DOCX.md`).
+
+**Matches typst** (measured on page 1 of both PDFs with `pdftotext -bbox`, and read on every page):
+
+- US Letter, 1 in margins, arabic page number centred at the foot, 12 pt including the footer.
+- EB Garamond 12 pt throughout. Body at 27.6 pt (double), caption, signature block and served entries at 13.8 pt (single).
+- Caption: the movant and respondent block left with a rule on the right and bottom; case block right; court name centred and bold; title centred bold caps.
+- Numbered paragraphs, `%` (unnumbered) and `%%` (centred) paragraphs, as in the adversary complaint.
+- Signature block: "Date" at the left, "Respectfully Submitted," and the firm from 3.2 in. The signature stays with the last paragraph; the certificate moves as one block, as in typst.
+- Footer page number; six pages in both, with the certificate on page 6 in both.
+
+**Differs from typst** (not tier-1):
+
+- Two-digit paragraph numbers: typst's text starts about 6 pt further right than the docx, which uses one tab stop for every number (see the adversary complaint README).
+- Footnotes: 10 pt in the docx, about 10.2 pt in typst (typst's footnote size is 0.85 em). Line pitch 11.75 pt against 11.73 pt.
+- Heading 1 is 17 pt in the docx, 16.8 pt in typst. The caption title and the lead-in sit within about 4 pt of typst.
+- Widow/orphan control is off, as in typst. Page 4 ends after the first line of ¶ 10 in the docx and after ¶ 9 in typst.
+- Not opened in Microsoft Word. LibreOffice opens and converts the file; the renderer checks the parts are well-formed XML.
+- The sample has no italics, so the EB Garamond italic face is installed but not exercised by this sample.
+
+**docx BLOCKED items:**
+
+- `samples/INPUT-directory-memorandum.md`: BLOCKED for typst and docx alike. The sample writes footnote markers `[^1]` to `[^n]` but no definitions (no `[^n]: …` lines), so `typst/main.typ` stops with "footnote [^1] has no definition". No `.docx` is produced for it. The sample is not changed here; its footnote text has to come from the filed memorandum.
+- Gate runner (`tools/check.sh --engine docx`): not run, because this court folder has no `rules.md`, `checks.yaml` or `reviews/` yet. BLOCKED: gates 0 to 3 on docx, until those files exist.

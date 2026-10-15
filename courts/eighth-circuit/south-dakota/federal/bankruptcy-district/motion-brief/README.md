@@ -103,6 +103,15 @@ OPEN (tier 2, decision for David): **line spacing.** The filing is double spaced
 7. **Certificate of service.** Its wording is conventional text, not a rule. The filing's certificate is docket Attachment 1, not in the PDF, so this transcription has none.
 8. **Check tooling not run.** As in the adversary folder, `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this folder is a doc-type folder.
 
+## Engines
+
+Typst (`typst/`) is the primary engine and the reference for the court's form. This section covers the docx engine: `docx/reference.docx` (built by `docx/make-reference.sh`) and `docx/sdb-motion-brief.lua`, following `docs/DOCX.md`. Run: `sh tools/render.sh --engine docx motion-brief samples/INPUT-northern-beef-packers.md`.
+
+- **Written:** `samples/OUTPUT-northern-beef-packers.docx` (pandoc, from the same frontmatter and body as the typst render). It is a valid zip of well-formed XML parts; the render then stops at the LibreOffice conversion (see BLOCKED).
+- **Matches the typst form (by construction, not yet by look):** US Letter, 1 inch margins; EB Garamond 12 pt; line pitch 13.8 pt exact (the typst leading, measured on the typst render with `pdftohtml -xml`); 0.5 inch first-line indent on body paragraphs; headings centered bold (`#`) and bold left (`##`); caption as a borderless three-column table with the typst row structure (party, `)` column, numbers), `Bankr. No.`, `Chapter`, `Hon.` and hearing lines, debtor blocks, `Debtor.`/`Debtors.`; the title; the opening sentence (movant, relief, basis); the signature at 3.25 inch with the last paragraph kept with it; the certificate when the frontmatter gives one; a 10 pt centered page number (PAGE field) in the footer; footnotes at 10 pt.
+- **Differs or unverified:** the caption table's borders and row heights, the spacing collapse between paragraphs and blocks (Word adds before and after spacing; typst uses the larger), and the list indentation (pandoc numbering, not typst's) have not been looked at on a page image. The Word-native pagination may differ from typst's; the docx pages cannot be counted here.
+- **BLOCKED (docx.pdf checks, all of `check.sh --engine docx` Gates 0 to 3):** the LibreOffice PDF of the `.docx` cannot be made on this box. `soffice` is not installed; conda-forge has no LibreOffice package; the Debian LibreOffice packages install but fail to start because LibreOffice's internal `libi18nlangtag` and `libjvm*` libraries are not in them. So no `.docx.pdf` exists, no page was rendered or reviewed in the docx engine, and no `.check-docx.txt` stamp is written. Owner: whoever has a box with LibreOffice; rerun `sh tools/render.sh --engine docx` there, then review every page.
+
 ## Loop log
 
 - Iteration 1: built the template from the rules; rendered a fictional main-case sample. Exemplar search: no usable filing found; BLOCKED.

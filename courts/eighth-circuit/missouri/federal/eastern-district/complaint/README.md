@@ -75,3 +75,15 @@ Paragraph cross-references in the sample (for example "paragraphs 1–60" in the
 - Page 10: prayer (c) to (g) with the sub-item omission note, JURY DEMAND heading and paragraph 57, DATED line, signature blocks with bar numbers and contacts, party line in italic. Pass.
 
 Defects found and fixed during review: the first render stacked each block on the one before it (a block's height excluded the trailing leading, so each paragraph overlapped the last line of the one before). Fixed by a `below` gap of one body leading on every body block and a row gutter in the list grid; the page-by-page check above is after that fix.
+
+## Engines
+
+Typst is the primary engine and the reference for the court form. The docx engine follows the same values in Word styles.
+
+- `docx/`: `reference.docx` (pandoc's default with this folder's styles, page setup and footer), `court-form.lua` (the caption table, title, numbered allegations, lettered lists, notes and signature block, read from the sample's frontmatter), and `make-reference.sh` with `reference-src/` (rebuilds `reference.docx`: `sh docx/make-reference.sh complaint`).
+- Matches typst: EB Garamond 12 pt; 8 1/2 by 11 inch pages with 1 inch margins; body double spaced at an exact 24 pt pitch with a 0.5 inch first-line indent; the court name in the 2 inch corner band, so the caption starts 2 inches down; caption with a right and bottom rule on the party column, and the case number and legends at right; allegations numbered by the template (number at 0.5 inch, text after it, wrapped lines to the margin); lettered lists "(a)" at 0.5 inch with text at 1 inch; single-spaced notes; signature block at 3.25 inch with the bar number and contacts under each signature; page number centered in the footer (a `PAGE` field).
+- Differs: line breaks and page breaks are Word's or LibreOffice's, not typst's, so page-by-page comparison is not possible until the `.docx.pdf` exists. The number-to-text gap is a tab stop at 1 inch, not a fixed 0.25 inch space. The caption rule is a table border, which Word and LibreOffice draw slightly differently. Footnotes (none in this sample) are 12 pt and single spaced. The typeface, size and spacing are set in the styles, so a machine without EB Garamond substitutes a font silently (`docs/DOCX.md`).
+- docx BLOCKED (not run; no `.docx.pdf` exists):
+  - Gates 0 to 3 on `samples/OUTPUT-carreaga-complaint.docx.pdf`: BLOCKED. `tools/render-docx.sh` writes the `.docx` and then stops at `soffice`, which is not installed. conda-forge has no LibreOffice package and this box has no root, so there is no LibreOffice here.
+  - Gate 2 (visual review) for the docx: BLOCKED. `pages_reviewed=0`. No page of the `.docx` has been rendered or viewed.
+  - Opens in Word and LibreOffice without a repair prompt: not checked. The `.docx` is a valid zip with well-formed XML parts and reads back through pandoc, which is necessary but not sufficient.
