@@ -146,3 +146,11 @@ Azimi sample (9 pages):
 8. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` read a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. `tools/tracker.sh` was not run. The render and the overlay were run; the review above is the Gate 2 record.
 
 [Vawd court README](../README.md) | [Federal courts README](../../README.md)
+
+## Engines
+
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/vawd-motion-brief.lua` builds the cover, the caption (box or ")" style), the brief title, the numbered headings (1., a., (i)) with a hanging label, the lettered lists, the native footnotes, the signature block, and the certificate of service. Rendered with `sh tools/render.sh --engine docx motion-brief samples/INPUT-<id>-motion-brief.md` (LibreOffice PDFs: `samples/OUTPUT-<id>-motion-brief.docx.pdf`).
+
+- Matches the typst form: EB Garamond 13 pt (embedded), 1 in margins on letter, 27.6 pt double spacing, 0.5 in first-line indent on every paragraph, footnotes at 11 pt single spaced, centered caps section headings, bold numbered sub-headings, block quotations single spaced and indented 0.5 in each side, the signature block at 3.25 in, the certificate of service on its own block, centered page number at 12 pt. The last section is kept with the signature block when it is short (no footnote), as in typst.
+- Differs: pagination of the LibreOffice PDF is longer than typst: azimi 10 pages (typst 9), fitch 12 (typst 12). The last section of azimi moves to the next page with its signature block, leaving page 8 short. Word may paginate differently again.
+- BLOCKED: every gate of `sh tools/check.sh <court-dir> --engine docx` (gates 0 to 3). The court folder has no `checks.yaml` (and no `rules.md`), so check.sh cannot run; `check-selftest.sh` needs the same file and is not run.
