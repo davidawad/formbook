@@ -7,9 +7,10 @@ Folder: `courts/seventh-circuit/illinois/federal/southern-district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-pro-life-action-league-3-26-cv-01087-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-pro-life-complaint.md`: caption, lead-in, paragraphs 1 to 54 of the filing and one unnumbered paragraph, Count I, prayer, signature (see "Sample" below) |
-| render | ok: `samples/OUTPUT-pro-life-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-pro-life-complaint.pdf` and `samples/OVERLAY-pro-life-complaint.txt` |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required by rules: **none** (S.D. Ill. LR 5.1(a) and 7.1(a)(3) set 12-point type and double spacing only; no typeface named). Vendored substitute: **EB Garamond** (kept, because no face is named). Fit: n/a. |
+| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-pro-life-complaint.pdf`, 11 pages, typst 0.15.0, `pdffonts`: EB Garamond only (Regular, Bold, Italic, embedded), no warnings |
+| overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `exemplars/*.pdf`, which is not in this snapshot (only `exemplars/SOURCE.md` is tracked). `samples/OVERLAY-pro-life-complaint.txt` is the earlier output and was not regenerated; no `.pdf` overlay is present. |
+| pages reviewed | 11 of 11 (2026-10-15: every page rendered at 60 dpi and viewed; no template change in that pass) |
 | `check.sh` | not run: the gates expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape (the brief forbids `tools/` edits). Gate 0 and Gate 1 were not run; the review below is the Gate 2 equivalent for this doc type. |
 
 File names: the overlay tool reads and writes `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (its fixed names), so the render and overlay carry those names rather than `<id>.pdf` and `<id>-overlay.pdf`.
@@ -81,7 +82,7 @@ Reviewed pages: 11 of 11.
 ## Known gaps and open choices
 
 1. **One exemplar, one filer.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers from different filers. Searched CourtListener's search API (`court=ilsd`, `type=r`) for complaints filed 2026-07 to 2026-10. Downloaded and checked: Kirby v. Continental Tire (3:26-cv-01028, counsel-filed, 14 pages; no body text in the text layer, only the ECF header, so unusable); Croom v. Brookhart (3:26-cv-01042, pro se, not text-searchable); Pro-Life (used). Not usable: Hoopes v. Chevron (3:26-cv-01414, complaint not in the RECAP cache). Tier 2 is therefore judged against one filer, and the complaint is not yet "up for review" by EVAL-LOOP's standard.
-2. **Font.** The template uses EB Garamond (vendored, OFL) at 12 pt, not Times New Roman. The rule sets 12 pt for briefs; EB Garamond at 12 pt looks smaller than the exemplar's Times at 12 pt. Only EB Garamond is vendored in `fonts/`; a Times-metric font would need a vendored file, which this box may not add.
+2. **Font.** The template uses EB Garamond (vendored, OFL) at 12 pt, not Times New Roman. The local rules name no typeface (LR 5.1(a): "typewritten, printed, or prepared by a clearly legible duplication process"; LR 7.1(a)(3): "12-point font"), so `docs/FONTS.md` keeps EB Garamond. The exemplar is Times New Roman (`exemplars/SOURCE.md`), so a clerk may expect Times; that is a tier-2 convention, not a rule. A Times substitute (Liberation Serif, metric-compatible) is vendored and would switch the font if David decides the convention outweighs the rule. EB Garamond at 12 pt looks smaller than the exemplar's Times at 12 pt.
 3. **Line length and justification.** Body text is left-aligned (ragged right). The exemplar's justification was not determined from the text layer. Tier 2 or 3.
 4. **Caption.** The caption is a ")" column built from a grid; the exemplar's breaks differ (the defendants' name runs onto a second line in the template). No forced line breaks are used.
 5. **Paragraph numbers.** Numbered from 1 for the sample. The filing numbers paragraphs continuously from 1 to 102; a complete transcription would keep them.
