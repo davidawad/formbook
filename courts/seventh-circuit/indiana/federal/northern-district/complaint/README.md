@@ -91,3 +91,12 @@ disclosure statement and any N.D. Ind. filing-fee form. None is part of the plea
 Earlier builds had two defects, both fixed and re-rendered: (a) paragraph blocks did not carry the leading after their last line, so each paragraph ran into the next (fixed: `below: body-leading` on every block); (b) the cover's court lines were set at zero spacing and overlapped (fixed: single spacing); and the signature block once stood alone on page 13 (fixed: kept with the last body chunk).
 
 Overlay: `samples/OVERLAY-blackman-complaint.txt` pairs our pages 1–13 one to one with filed pages 1–13 (word overlap 47–95%; the overlap falls on the later pages because our page breaks drift from the filing's). The overlay is a diagnostic, not a score.
+
+## Engines
+
+DOCX (`docx/`): pandoc on `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx`) with the filter `docx/innd.lua`. Output: `samples/OUTPUT-blackman-complaint.docx`.
+
+- Matches the typst form: EB Garamond 12 pt body, exact 27.6 pt double line pitch, 0.5 in first-line indent, 1 in margins on letter paper, 10 pt single-spaced footnotes, 13.8 pt single lines in the caption and signature, centered page-number footer, numbered paragraphs counted in the filter, "a." lettered lists, "A." prayer items, caption table with a right and bottom rule on the party column.
+- Differs or unverified: paragraph gap (19.8 pt) is set as space-after; the signature block is a table, so it is not kept on one page with the last paragraph as typst does (no keep-with-next); the numbered-paragraph tab stop (1 in) approximates typst's label gap; table border weights and cell padding are not compared against the typst layout.
+- BLOCKED on this box: the `.docx.pdf` (LibreOffice conversion) was not produced because `soffice` is not installed. No page was rendered or reviewed, so no Gate 0/1 result exists for docx. Checked: the `.docx` zip is intact and every XML part is well-formed. Word and LibreOffice open-without-repair is not verified.
+- No table of contents or table of authorities in this doc type, so no field update is needed.
