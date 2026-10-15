@@ -83,3 +83,12 @@ The filed exemplar is set in Times New Roman, but no rule requires it, so the co
 8. **Length.** The exemplar is 3 pages, so the sample is 3 pages; the 8-14 page target applies to longer exemplars and does not apply here.
 9. **One exemplar.** The eval-loop tier 2 rule asks for 2 or 3 filings from different filers. Only one adversary complaint from this court was fetched; the other complaints found (Gebhardt v. Aegis 16-90020; Cook Inlet 17-90028, 17-90059) were not reachable in this run (HTTP 202 throttling). Tier 2 is therefore not judged against a second filer.
 10. **ECF header** (court-generated) is not reproduced.
+
+## Engines
+
+**docx** (`docx/reference.docx` built by `docx/build-reference.sh`; cover, caption, consent and signature built in `docx/akb.lua`; rendered with `tools/render.sh --engine docx`; checked with LibreOffice 26.8 only, Word not available).
+
+- Matches the typst output: letter size, 1 in margins, EB Garamond 12 pt (embedded, vendored face; `pdffonts` shows only EBGaramond-Regular and -Bold), exact 24 pt double spacing for the body and the relief items, single-spaced counsel block, caption, consent and signature block, a centered page number, numbered allegations 1-12 and lettered relief items A.-D. The LibreOffice PDF is 3 pages, as the typst output is. All 3 pages of both were viewed at 60 dpi.
+- Differs: (1) headings are 12 pt bold in docx; the typst headings render larger (typst's default heading size is kept by its show rules), the LBR asks for 12 pt type, so the docx follows the rule. (2) The Table 3.2 grid is about 5.5 in wide (pandoc's default column grid); the typst table is content-width. (3) Caption spacing is within a few points of typst, not identical. (4) Word may paginate differently; the page count is measured on the LibreOffice PDF only.
+- `sh tools/check.sh <doc-dir> --engine docx` does not run on this folder: it needs `court.json`, `checks.yaml` and `reviews/` at the court level, and this folder has none of them (the script exits with errors on `court.json` and `checks.yaml`). No stamp was written. Gates 0-3 are therefore NOT run for docx. BLOCKED: check.sh (all gates, docx): missing court-level `checks.yaml`, `reviews/` and `court.json` in this folder's court.
+- No docx BLOCKED item is known from the render itself; the docx opens in LibreOffice without a repair prompt (the conversion succeeded), Word was not tested.
