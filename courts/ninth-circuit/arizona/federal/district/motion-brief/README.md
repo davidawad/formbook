@@ -6,9 +6,10 @@ Doc type: **motion** (a motion to dismiss, or in the alternative to stay, with i
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-evancho-4-26-cv-00363-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-evancho-mtd.md`: the whole motion, caption to certificate of service (17 pages, as the exemplar) |
-| render | ok: `samples/OUTPUT-evancho-mtd.pdf`, 17 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
-| overlay | ok: `samples/OVERLAY-evancho-mtd.pdf` and `OVERLAY-evancho-mtd.txt` (page map, 17 pages paired 1 to 1) |
-| pages reviewed | 17 of 17 (every page rendered at 60 dpi and viewed; the layout-changing fixes were re-checked on the pages they touched) |
+| typeface | face required: **none** (LRCiv 7.1(b)(1) names a size and a pitch, not a face; see Governing rules) → **EB Garamond** (vendored, OFL; no substitute). Not metric-compatible with Times, so line count is not the Times line count. |
+| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-evancho-mtd.pdf`, 17 pages, typst 0.15.0, `tools/render.sh`, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -BoldItalic embedded), no warnings, exit 0 |
+| overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `exemplars/FILED-EXAMPLE-evancho-4-26-cv-00363-motion-brief.pdf`, which is not in this snapshot (not in git, not on disk). No `OVERLAY-evancho-mtd.pdf` was produced. `OVERLAY-evancho-mtd.txt` is the earlier page map, not regenerated. |
+| pages reviewed | 17 of 17 (re-viewed 2026-10-15 at 60 dpi, every page; no layout change from the render before) |
 
 File names follow the repo's tools: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf`, the overlay `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default.
 
@@ -81,7 +82,7 @@ Defects found in review and fixed (all in `typst/azd-motion.typ`): (1) paragraph
 ## Known gaps and open choices
 
 1. **Only one exemplar.** EVAL-LOOP tier 2 asks for 2 or 3 filers from different sources. Not met for this doc type. Searches tried are in `exemplars/SOURCE.md`.
-2. **Font.** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. It is a proportional font of 13 pt, as the rule requires, but it sets smaller than Times at the same size; the exemplar is Times.
+2. **Font.** LRCiv 7.1(b)(1) names no typeface: "fixed-pitch type size no smaller than ten (10) pitch ... or in a proportional font size no smaller than 13 point" (text read 2026-10-15 from the 2020 master file). So the template keeps EB Garamond (vendored, OFL) at 13 pt, per `docs/FONTS.md` ("No face named"), and does not substitute Liberation Serif for the exemplar's Times New Roman. EB Garamond sets smaller than Times at the same size.
 3. **Page limit (LRCiv 7.2(e)(1)).** The template does not count the 17 pages. The sample is 17 pages with the caption, signature and certificate, the same as the exemplar. The brief's target was 8 to 14 pages; this sample is not cut down, because the exemplar is 17 pages and cutting the memorandum would drop the signature and certificate the brief asks for.
 4. **Memorandum mention on the first page (LRCiv 7.1(a)(3)(C)).** The rule asks for "mention of any notice of motion or affidavits or memorandum in support" in the caption's right column. The exemplar's title does not say "memorandum"; the template does not add it. An author who wants it can add it to `brief_title`.
 5. **LRCiv 12.1(c) certification.** The exemplar (filed 2026-08-18, on a 12(b)(6) motion) has no certification, and the 2020 rule requires one. The template has the optional `certification` slot; the sample does not use it, because the sample is the exemplar, not an edit of it. A filing must include the certification text, which only counsel can write.

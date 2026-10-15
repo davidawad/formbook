@@ -6,9 +6,10 @@ Doc type: **complaint** (original or amended) in the United States District Cour
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-harod-2-26-cv-05215-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-harod-fac.md`: the whole First Amended Complaint, caption to certificate of service |
-| render | ok: `samples/OUTPUT-harod-fac.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
-| overlay | ok: `samples/OVERLAY-harod-fac.pdf` and `OVERLAY-harod-fac.txt` (page map) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; page 8 re-viewed after the signature block fix) |
+| typeface | face required: **none** (LRCiv 7.1(b)(1) names a size and a pitch, not a face; see Governing rules) → **EB Garamond** (vendored, OFL; no substitute). Not metric-compatible with Times, so line count is not the Times line count. |
+| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-harod-fac.pdf`, 8 pages, typst 0.15.0, `tools/render.sh`, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular and -Bold embedded), no warnings, exit 0 |
+| overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `exemplars/FILED-EXAMPLE-harod-2-26-cv-05215-complaint.pdf`, which is not in this snapshot (not in git, not on disk). No `OVERLAY-harod-fac.pdf` was produced. `OVERLAY-harod-fac.txt` is the earlier page map, not regenerated. |
+| pages reviewed | 8 of 8 (re-viewed 2026-10-15 at 60 dpi, every page; no layout change from the render before) |
 
 File names follow the repo's tools: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf`, the overlay `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default.
 
@@ -76,7 +77,7 @@ The overlay page map (ours to filed, by word overlap): p.1→1 (78%), p.2→2, p
 ## Known gaps and open choices
 
 1. **Only one exemplar.** EVAL-LOOP tier 2 asks for 2 or 3 filers from different sources. Not met for this doc type. Searches tried are in `exemplars/SOURCE.md`.
-2. **Font.** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. It is a proportional font of 13 pt, as the rule requires, but it sets smaller than Times at the same size; the exemplar is Times. The vendored fonts are the only ones allowed (no system fonts).
+2. **Font.** LRCiv 7.1(b)(1) names no typeface: "fixed-pitch type size no smaller than ten (10) pitch ... or in a proportional font size no smaller than 13 point" (text read 2026-10-15 from the 2020 master file). So the template keeps EB Garamond (vendored, OFL) at 13 pt, per `docs/FONTS.md` ("No face named"), and does not substitute Liberation Serif for the exemplar's Times New Roman. EB Garamond sets smaller than Times at the same size. The vendored fonts are the only ones allowed (no system fonts).
 3. **Current rule text not verified** (see Governing rules). The 2020 master file is the source; a 2026 amendment would change the numbers here.
 4. **Paragraph numbers differ.** The filed complaint skips paragraphs 46 and 47; the template numbers from 1 to 62 instead of the filed 64. The sample does not carry the filed numbers.
 5. **Headings.** The exemplar underlines "INTRODUCTION" and the template does not; the template bolds headings. Convention choice (tier 2/3), not a rule requirement.
