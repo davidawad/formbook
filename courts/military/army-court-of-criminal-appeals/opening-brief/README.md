@@ -72,3 +72,10 @@ Tier-2 findings (OPEN or ACCEPTED): the cover follows the caption layout of a ty
 6. **Standard of review and prayer are not checked by the template.** App. B requires both in each error. The template does not parse them; they are in the sample only.
 7. **Certificate wording** follows the App. B summary ("mailed or delivered to the Court and to the Government Appellate Division"). Not verbatim.
 8. **No `tools/check.sh` gates run.** The check gates were not part of this unit's brief; the template is not stamped.
+
+## Re-check (2026-10-15, bead fb-595.20.4)
+
+- Render: `sh tools/render.sh` exit 0, 5 pages, no typst warnings. Overlay: `sh tools/overlay.sh` exit 1 ("no exemplar pdf"), so **overlay=fail**.
+- Gate 2: all 5 pages rendered at 60 dpi and viewed. Same result as the 2026-10-14 review; no new findings.
+- Exemplar search: a third pass (see `exemplars/SOURCE.md`, "Third pass") found no ACCA-filed appellant brief. Lead: the Government's Answer and Return in *Lorance v. Hilton* (D. Kan. No. 5:18-cv-03297-JWL, CourtListener docket 14586211, Doc. 13) lists "Attach. H: Brief on Behalf of Appellant to the Army Court of Criminal Appeals". That attachment is not in RECAP storage, so it could not be retrieved.
+- Status: BLOCKED: no exemplar.
