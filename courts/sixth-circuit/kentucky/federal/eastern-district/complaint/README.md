@@ -6,9 +6,10 @@ Doc type: **complaint** in the United States District Court for the Eastern Dist
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-dubya-j-brands-5-26-cv-00359-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-dubya-complaint.md` (the whole complaint: caption, 60 numbered paragraphs, counts, prayer, jury demand, signature) |
-| render | ok: `samples/OUTPUT-dubya-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-dubya-complaint.pdf` and `samples/OVERLAY-dubya-complaint.txt` |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (LR 5.2(a) asks for "at least 12-point proportionately-spaced font"; rule text read 2026-10-15) -> substitute: none, EB Garamond kept (`docs/FONTS.md`, "No face named") -> not applicable |
+| render | ok (re-run 2026-10-15): `samples/OUTPUT-dubya-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EB Garamond Regular and Bold embedded), no warnings |
+| overlay | fail (re-run 2026-10-15): `tools/overlay.sh` exits 1 because `exemplars/FILED-EXAMPLE-*.pdf` is not in this checkout. The `OVERLAY-dubya-complaint.txt` committed earlier was not regenerated; no `OVERLAY-dubya-complaint.pdf` is in `samples/` |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-viewed 2026-10-15 after the re-render, no change) |
 | BLOCKED | none |
 
 File names follow the tools' defaults (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`), which `tools/render.sh` and `tools/overlay.sh` read and write, not the `<id>.pdf` names in the brief.
@@ -20,7 +21,7 @@ Each requirement has a stable ID (KYED-...) used in the template's comments.
 | ID | Rule | Requirement | Where it lives in the template |
 |---|---|---|---|
 | KYED-FORM-001 | E.D. Ky. LR 5.2(a) | 8½ × 11 inch paper; margins of at least one inch on all sides; text double spaced, except block quotes, headings and footnotes. Primary source: the court's amended Civil Rules, August 2026 (`https://www.kyed.uscourts.gov/sites/kyed/files/KY_Amended_Civil_Rules_August_2026.pdf`, linked from `https://www.kyed.uscourts.gov/local-rules`). Read and quoted 2026-10-14. | `margin-all = 1in`, `line-pitch = 24pt`, `paper: "us-letter"`. |
-| KYED-FORM-002 | E.D. Ky. LR 5.2(a) | At least 12-point proportionately spaced font. | `type-size = 12pt`, `font-family = "EB Garamond"` (vendored, the only family in `fonts/`). |
+| KYED-FORM-002 | E.D. Ky. LR 5.2(a) | At least 12-point proportionately spaced font. | `type-size = 12pt`, `font-family = "EB Garamond"` (the rule names no face, so no substitute applies; see the typeface row above). |
 | KYED-FIRST-001 | Fed. R. Civ. P. 10(a) | Every pleading has a caption with the court's name, a title, a file number and a Rule 7(a) designation (here, the title "COMPLAINT"). Source: https://www.law.cornell.edu/rules/frcp/rule_10, read 2026-10-14. | `court-title`, `caption`, `title` frontmatter. |
 | KYED-FIRST-002 | E.D. Ky. LR 3.1 and 3.2 | The division named in the caption ("AT LEXINGTON" in the sample) is the author's choice from the jury-division lists in LR 3.1(a); the template prints the frontmatter lines and does not check the division against the case. | `court` frontmatter. |
 | KYED-CONT-001 | Fed. R. Civ. P. 8(a), 10(b) | Short and plain statement of jurisdiction, claim and demand (8(a)); claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances (10(b)). | Numbered paragraphs: each blank-line-separated chunk of the body is one paragraph, numbered 1, 2, ... by the template. |
@@ -54,7 +55,7 @@ Pleading (line-numbered) paper is not used. LR 5.2 does not call for it, and the
 ## Known gaps and open choices
 
 1. **One exemplar.** The brief asks for one filed document per doc type, and that is what is saved. Tier 2 asks for two or three filers. The search that found the Dubya complaint was CourtListener RECAP (`https://www.courtlistener.com/api/rest/v4/search/?q=complaint&court=kyed&type=r&order_by=dateFiled+desc`, run 2026-10-14). Other complaints in those results: *Travelers Casualty Insurance Co. v. EN V US Hamburg LLC*, 5:26-cv-00353 (no local RECAP copy); *Howarth v. A & A Lawncare & Landscaping*, 2:26-cv-00374 (not checked for format). Tier 2 is therefore **not** judged against two filers.
-2. **Font size.** EB Garamond is the only font vendored in `fonts/`, and the rule's 12-point minimum is met. At 12 pt it sets smaller than the exemplar's Times New Roman, so the text looks smaller and the sample runs 9 pages against the exemplar's 11. A Times-metric font would remove the difference; this is a question for David, not a template fix.
+2. **Font size.** LR 5.2(a) names no typeface, only "at least 12-point proportionately-spaced font" (rule text read from the court's Civil Rules PDF, 2026-10-15). Under `docs/FONTS.md` ("No face named") the template keeps EB Garamond, and the rule's 12-point minimum is met. The exemplar's Times New Roman is one filer's choice, not a rule requirement. At 12 pt Garamond sets smaller than that exemplar, so the text looks smaller and the sample runs 9 pages against the exemplar's 11. Switching to Liberation Serif would be a filer's choice, not a rule requirement; the template does not make it.
 3. **Lettered lists.** The prayer and the sub-items of paragraph 54 are lettered (a), (b), ... by the template. The exemplar letters its prayer A. through I. and its sub-items a) through l). Neither is a rule requirement; the template uses the cand convention.
 4. **Caption layout.** The party column is closed by a rule at the foot and the right side, with "JURY DEMAND" in the right column. The exemplar uses a similar layout with its party names in capitals; the placement is a convention choice.
 5. **Paragraph numbers.** The sample transcribes all 60 numbered paragraphs, and the template numbers them 1 to 60, the same as the filed numbering. Rendered paragraph 60 and the WHEREFORE paragraph were checked in the text layer.
