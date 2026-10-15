@@ -62,4 +62,15 @@ Verified 2026-10-14. Sources:
 - `samples/OUTPUT-AB-2019-12-16.pdf`: render. Command: `sh tools/render.sh courts/national/board-of-immigration-appeals/brief-on-appeal samples/INPUT-AB-2019-12-16.md`.
 - `samples/OVERLAY-AB-2019-12-16.pdf` and `.txt`: overlay and page map. Command: `sh tools/overlay.sh courts/national/board-of-immigration-appeals/brief-on-appeal AB-2019-12-16`.
 
+## Engines
+
+**docx** (`docx/`: `reference.docx` from `build-reference.sh`, `bia.lua`, `render.sh`). Render: `sh tools/render.sh --engine docx <folder> samples/INPUT-AB-2019-12-16.md`. Output: `samples/OUTPUT-AB-2019-12-16.docx` and `.docx.pdf` (LibreOffice). Pages checked: 13 of 13, each rendered at 60 dpi and compared with the typst copy.
+
+- **Matches typst:** Liberation Serif 12 pt; double spacing at an exact 28.75 pt pitch (measured from the typst render); 1 in margins on US letter; first-line indent on body paragraphs, none on the first paragraph after a heading; H1 bold caps, left, 17 pt (typst 1.4 em); footnotes 12 pt, single spaced; footer with the page number centred and `A#` at the right; cover and contents unnumbered; body numbered from the Introduction as page 1; certificate of service on its own page; signature block and counsel block as in typst.
+- **Differs:** the counsel block sits in a frame at the foot of the cover, and its role line ("Counsel for Respondent") sits under it, not beside it at the top right. The custody box is in the top-right table cell, about 0.4 in lower than in typst. Lists are double spaced (typst's list pitch is tighter; the Manual prefers double spacing). Page breaks differ in places (Word and LibreOffice keep-with-next and widow rules), so the body runs to 13 pages in both, with different breaks.
+- **Contents:** a TOC field whose cached result holds the page numbers, filled by `render.sh` in a first pass. Word can refresh it; the numbers shown are those of the LibreOffice PDF.
+- **Footer A-number:** `render.sh` fills the `A#` placeholder from the frontmatter at render time (the same field the typst footer reads).
+- **Not checked:** the `.docx` in Word (no Word here). LibreOffice converts it with no repair prompt.
+- **BLOCKED:** `sh tools/check.sh <folder> --engine docx` exits 2: `Error: open .../checks.yaml: no such file or directory` (and `jq: Could not open file .../court.json` when run on this folder). Gates 1 to 3 cannot run until `checks.yaml` exists for this court.
+
 [Board of Immigration Appeals](../README.md)
