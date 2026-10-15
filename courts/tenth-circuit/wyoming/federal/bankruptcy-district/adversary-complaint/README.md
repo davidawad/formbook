@@ -76,3 +76,15 @@ sh tools/overlay.sh courts/tenth-circuit/wyoming/federal/bankruptcy-district/adv
 8. **Overlay pairing.** Overlay pages pair with the exemplar's pages by shared words, not by position; the overlay is a diagnostic, not a score.
 9. **Local rules version.** The posted PDF is a "FINAL CLEAN COPY 6-19" of the local rules with rules effective July 1, 2012. If the court has issued a newer edition, LBR 9004-1 must be checked against it.
 10. **No tables of contents.** A complaint does not need one; none is generated.
+
+## Engines
+
+**docx** (`docx/reference.docx` + `docx/wyb-adversary-complaint.lua`; output `samples/OUTPUT-miller-complaint.docx`).
+
+- Matches: EB Garamond 13 pt body, 1 in margins, letter paper, exact 26 pt (double) line pitch, 0.5 in first-line indent, bold centered court title, caption table with the party rule and bottom rule and case information on the right, counsel block 11 pt single spaced, page number footer 11 pt centered, footnote text 13 pt.
+- Differs: the filter lays out the cover in a table with plain-text caption values (no inline markdown in caption parties), and the pleading-paper paragraph numbers and lettered prayer items are typed text, not Word list numbering. Heading and signature keep-together uses keepNext, so Word and LibreOffice may break pages differently.
+- BLOCKED: docx.pdf (`soffice` not installed on this box, no root and no conda-forge package), so Gate 0 and Gate 1 are not run on the docx.
+- BLOCKED: `tools/render-docx.sh` zip integrity step: `unzip` is not installed, so `unzip -tq` fails and the command exits 1 after writing the .docx. The XML parts were checked by hand with `xmllint --noout` after unpacking with libzip's `ziptool`; all well-formed.
+- BLOCKED: visual review of the docx pages (no LibreOffice to render them). pages_reviewed for docx: 0.
+- Not done: opening the .docx in Word for a repair-prompt check; the reference.docx was built with `ziptool` edits, not a committed build script.
+- The typst montage review (60 dpi, every page in one strip) was used only to compare the typst layout with the docx styles; it is not a docx review.
