@@ -7,9 +7,10 @@ Folder: `courts/seventh-circuit/wisconsin/federal/western-district/motion-brief/
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-drone-3-26-cv-00539-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-drone-motion-to-dismiss.md` (the whole brief: caption, opening, Parts I and II, conclusion, signature) |
-| render | ok: `samples/OUTPUT-drone-motion-to-dismiss.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-drone-motion-to-dismiss.pdf` and `OVERLAY-drone-motion-to-dismiss.txt` (page map below) |
-| pages reviewed | 7 of 7 rendered at 60 dpi and viewed (see the review section) |
+| typeface | Face required by the rules: **none named** (W.D. Wis. LR list and Briefing Guidelines checked; see "Not verified" below). Vendored substitute: none needed. Font kept: **EB Garamond** (`docs/FONTS.md`, "No face named"). Century substitute `TeX Gyre Schola` is vendored but not used, since no rule asks for Century. |
+| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-drone-motion-to-dismiss.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (pdffonts: EB Garamond Regular, Bold, BoldItalic, all embedded), no warnings |
+| overlay | **not re-run**: the filed exemplar PDF is not in `exemplars/` in this snapshot (only `SOURCE.md`), so `tools/overlay.sh` cannot run. `samples/OVERLAY-drone-motion-to-dismiss.txt` is the page map from an earlier run against the filed PDF; `OVERLAY-drone-motion-to-dismiss.pdf` is not in the snapshot. |
+| pages reviewed | 7 of 7 re-rendered at 60 dpi and viewed 2026-10-15 (see the review section) |
 
 File names: the brief asks for `<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` read and write the role-prefixed names (`INPUT-`, `OUTPUT-`, `OVERLAY-`), so those are used here (see CLAUDE.md, "File roles are in the name").
 
@@ -63,7 +64,7 @@ The overlay is a diagnostic, not a score. The sample is the whole brief, so the 
 ## Known gaps and open choices
 
 1. **W.D. Wis. form rules not located (open question for David).** Font size, margins, spacing and signature placement are conventions matched to the exemplar, not rule citations. The W.D. Wis. page limit for briefs is not checked, and the template has no page counter. A future pass needs the civil local rules (LR 7, LR 10 or their equivalent) or confirmation from the clerk.
-2. **Font and length.** The filed exemplar uses Century Schoolbook; the vendored font is EB Garamond. At 12 pt EB Garamond is narrower, so the sample is 7 pages where the filed brief is 10. The brief's 8-to-14-page target is not met in page count; the content is the whole brief. A Century-Schoolbook-metric font would close this; none is vendored.
+2. **Font and length.** The filed exemplar uses Century Schoolbook, but no rule the template cites names a face, so the template keeps EB Garamond. `TeX Gyre Schola`, a metric-compatible Century Schoolbook substitute, is vendored (`docs/FONTS.md`). At 12 pt EB Garamond is narrower, so the sample is 7 pages where the filed brief is 10. The brief's 8-to-14-page target is not met in page count; the content is the whole brief. Switching to `TeX Gyre Schola` is a filer's choice unless a local rule or the clerk requires Century.
 3. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search (CourtListener RECAP, `court=wiwd`, brief-in-support-of-motion-to-dismiss entries) found 2700 Winter LLC v. Paine (7 pages, Times New Roman, counsel for the City of Superior; text layer present) and Inspired Pursuits LLC v. Paragon Component Systems (8 pages; no text layer). The 2700 Winter brief would be the second filer if collected. Tier 2 is not judged against two filers.
 4. **Caption.** The party column is closed by a right rule and a bottom rule. The exemplar uses a `*` column; this is a convention choice.
 5. **No table of contents or table of authorities.** The brief is under 10 pages and the exemplar has neither. A longer brief would need them; the template does not produce them.
