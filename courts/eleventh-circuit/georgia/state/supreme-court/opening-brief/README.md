@@ -82,3 +82,28 @@ Each rendered page was checked. Defects found and fixed during the review:
 
 - Sister doc types: [answering-brief](../answering-brief/README.md), [reply-brief](../reply-brief/README.md).
 - Fonts: `docs/FONTS.md`.
+
+## Engines
+
+Typst is the primary engine (above). The DOCX engine is `docx/`, the same files as `answering-brief/docx/`: `build-reference.sh` writes `reference.docx`; `ga-brief.lua` builds the cover, TOC, TOA, closing, certificate and the sections; `render.sh` makes two renders so the TOC and TOA numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> samples/INPUT-clark.md`: `samples/OUTPUT-clark.docx` and `samples/OUTPUT-clark.docx.pdf` (LibreOffice 26.8.1).
+
+| | docx | typst |
+|---|---|---|
+| Pages | 15 | 15 |
+| Font | TeX Gyre Schola only | TeX Gyre Schola only |
+| Line pitch, margins, paper | 31.2 pt double, 15.6 pt single, 1 in, letter | same |
+| Cover, caption, counsel | same layout | same |
+| Headings | 18 pt, 15.5 pt and 13 pt, as typst | same |
+| Footnotes | 11 pt, single | same |
+| TOC, TOA | dot leaders, numbers from the docx render | same form |
+
+Checked: every page of `OUTPUT-clark.docx.pdf` was rendered (60 dpi) and set beside the typst page. The cover, TOC, TOA, headings, footnotes and signature grid were read on the page images; line positions were measured with `pdftotext -bbox`.
+
+What differs:
+
+- **Drift.** The run-in headings (see answering-brief) and a few line breaks at the margin make the docx set about two lines fewer per page through the middle of the brief, so the page breaks fall apart from typst's by the Argument. The Argument starts on p. 9 of the docx (p. 8 in typst).
+- **Numbers that differ from typst.** TOC: "II. Argument and Citation to Authorities" and its level-2 entry read 9 (typst 8). TOA: *Atlanta Oculoplastic Surgery v. Nestlehutt* lists 2, 3, 8, 9 (typst also lists 7), and *City of Atlanta v. Watson* reads 10 (typst 9). Every other TOC and TOA number is equal. The numbers agree with the docx's own PDF (checked for each TOC entry), which is what the reader of the docx sees.
+- **Front-matter numbers.** The TOC is `i` in the docx and `ii` in typst (see answering-brief).
+- Word not run (see answering-brief).
+
+BLOCKED: none (see answering-brief).

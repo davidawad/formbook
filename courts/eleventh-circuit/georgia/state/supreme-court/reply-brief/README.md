@@ -59,3 +59,26 @@ Red is our render only, blue is the filed exemplar only, black is both. Pages ar
 ## Related
 
 - [opening-brief](../opening-brief/README.md), [answering-brief](../answering-brief/README.md).
+
+## Engines
+
+Typst is the primary engine (above). The DOCX engine is `docx/`, the same design as `answering-brief/docx/`: `build-reference.sh` writes `reference.docx`; `ga-brief.lua` builds the cover, TOC, TOA, closing, certificate and the sections; `render.sh` makes two renders so the TOC and TOA numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> samples/INPUT-clark.md`: `samples/OUTPUT-clark.docx` and `samples/OUTPUT-clark.docx.pdf` (LibreOffice 26.8.1).
+
+| | docx | typst |
+|---|---|---|
+| Pages | 14 | 14 |
+| Font | TeX Gyre Schola only | TeX Gyre Schola only |
+| Line pitch, margins, paper | 31.2 pt double, 15.6 pt single, 1 in, letter | same |
+| Cover, caption, counsel | same layout | same |
+| TOC, TOA | numbers agree with the typst output on every entry | same |
+| Closing, certificate | same | same |
+
+Checked: every page of `OUTPUT-clark.docx.pdf` was rendered (60 dpi) and set beside the typst page; the TOC and TOA numbers agree with the typst output.
+
+What differs:
+
+- The sample cites `toa:s51-13-1` in the body but has no `authorities:` entry for it. The docx warns on stderr for each such citation and leaves it out of the TOA; typst leaves it out silently. Add the authority to the sample (not done here: `samples/` is an input).
+- Front-matter numbers and Word: see answering-brief.
+- Run-in heading spacing: see answering-brief.
+
+BLOCKED: none (see answering-brief; the TOA item above is a sample issue, not a block).

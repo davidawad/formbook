@@ -56,3 +56,29 @@ Red is our render only, blue is the filed exemplar only, black is both. Pages ar
 ## Related
 
 - [opening-brief](../opening-brief/README.md), [reply-brief](../reply-brief/README.md).
+
+## Engines
+
+Typst is the primary engine (above). The DOCX engine is `docx/`: `build-reference.sh` writes `reference.docx` (TeX Gyre Schola 13 pt, exact line pitches that match the typst render, 1-in margins, letter paper, 11-pt footnotes, the page number in the footer); `ga-brief.lua` builds the cover, table of contents, table of authorities, closing and certificate, and the three sections (cover without folio, roman front matter, arabic body); `render.sh` makes two renders, so the TOC and TOA page numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> samples/INPUT-clark.md`: `samples/OUTPUT-clark.docx` and `samples/OUTPUT-clark.docx.pdf` (LibreOffice 26.8.1, `soffice --headless --convert-to pdf`). It needs pandoc (3.12.1), LibreOffice (`soffice`), poppler (`pdfinfo`, `pdftotext`), perl, zip, unzip and xmllint; the other doc types use the same folder layout.
+
+| | docx | typst |
+|---|---|---|
+| Pages | 12 | 12 |
+| Font | TeX Gyre Schola only (`pdffonts`) | TeX Gyre Schola only |
+| Line pitch | double 31.2 pt, single 15.6 pt, footnotes 13.2 pt | same |
+| Margins, paper | 1 in, letter | same |
+| Cover, caption, counsel | same layout | same |
+| Heading sizes | 18 pt (level 1), 15.5 pt (level 2), 13 pt (level 3) | same |
+| TOC, TOA | dot leaders; every number equals the typst output | same |
+| Closing, certificate | same; the closing is kept on one page | same |
+
+Checked: every page of `OUTPUT-clark.docx.pdf` was rendered (60 dpi) and set beside the typst page; the first body line, the heading spacing and the TOC and TOA numbers were measured with `pdftotext -bbox` and `pdftotext -layout`.
+
+What differs:
+
+- **Run-in headings.** A level-3 heading after body text sits about 7 pt lower in the docx (LibreOffice adds the paragraph gap and the heading's space above; typst takes the larger). Through the middle of the brief the docx sets one or two lines fewer per page than typst, so its page breaks fall a line or two apart.
+- **Front-matter numbers.** Typst counts the cover as page 1, so its TOC is page `ii`; the docx starts the roman numbers at `i` on the TOC. The court's rule decides which is right; the docx follows the usual convention.
+- **Word.** Not run here. The docx opens in LibreOffice without a repair prompt (it was converted). The TOC and TOA numbers are plain text, not fields: Word may paginate differently, and the numbers would then be off by a page. Check them in Word before filing.
+- Fonts: the `.docx` names TeX Gyre Schola, so the court face must be installed where the file is opened (`docs/DOCX.md`).
+
+BLOCKED: none. No check IDs apply to this folder's docx (the gates here are typst's); the differences above are not blocks.
