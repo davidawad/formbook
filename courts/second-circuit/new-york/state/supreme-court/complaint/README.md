@@ -28,7 +28,7 @@ Verified 2026-10-14 (date fetched). "Primary" means the text came from the offic
 
 Conventions (not rules; each is named in the template):
 
-- **Font.** EB Garamond at 12 pt, the only vendored serif (`fonts/eb-garamond`). The exemplar is set in Times New Roman. 12 pt meets 202.5(a).
+- **Font.** Face required: none. 22 NYCRR 202.5(a) and CPLR 2101(a) set a minimum point size and name no typeface, so the template keeps EB Garamond at 12 pt (`fonts/eb-garamond`, the no-face default in `docs/FONTS.md`). Not a Times New Roman substitute: the exemplar is set in Times New Roman, which is a convention, not a rule. 12 pt meets 202.5(a). Typeface is visual-only against the exemplar.
 - **Spacing.** Body leading is tuned so the baseline pitch matches the exemplar's: measured 27.6 pt from both our render and the exemplar (double spacing at 12 pt). The paragraph spacing equals the body leading, so each numbered paragraph advances one line, as in the exemplar.
 - **Margins.** One inch on every side (202.5(a)); the exemplar's left and right text edges fall at the same 72 pt and 540 pt positions. These are the rule values, not coordinates measured off the exemplar.
 - **Caption.** Court and county on the first lines; a bordered party box on the left with `-against-` between the sides; the index number and the title on the right (exemplar layout, generated from the frontmatter).
@@ -107,7 +107,7 @@ After the fixes, all 9 pages were re-rendered and looked at again (the final ren
 - **Official rule text.** 22 NYCRR 202.5 and 202.8-b are cited from a Cornell LII mirror because nycourts.gov returned HTTP 403. Re-check the margins, the 10-pt footnote floor and the word-limit list against the official text.
 - **E-filing.** 202.5-b (NYSCEF) formatting is not implemented beyond producing a text PDF. The NYSCEF legend is not generated.
 - **Caption placement.** The exemplar puts the table of contents on its own pages after the summons. The template puts it on the page after the caption, which is a convention; the exemplar's layout is not copied.
-- **Typeface.** EB Garamond at 12 pt, not Times New Roman. The vendored set has no Times-metric face. Visible difference from the exemplar.
+- **Typeface.** EB Garamond at 12 pt, not Times New Roman. The rules name no face, so no vendored substitute applies (`docs/FONTS.md`: no face named → EB Garamond). Visible difference from the exemplar, which is a convention and not a requirement.
 - **Sample coverage.** The sample is a portion of the 222-page filing (introduction, part of section A, the first cause of action, prayer, signature, verification). Parties (section II), jurisdiction (section III), most of section IV, and the other causes of action are not transcribed. The prayer's missing letter H is in the exemplar itself and is kept as it appears there.
 - **Index number.** The exemplar copy reads "INDEX NO. UNASSIGNED". The index no. 452564/2022 appears in a secondary source only (see `exemplars/SOURCE.md`).
 
