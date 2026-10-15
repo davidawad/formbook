@@ -70,3 +70,38 @@ Not produced by this template, and not checked: a table of authorities listing e
 - Page 8 (body 5): the end of the Wright paragraph, CONCLUSION heading, the conclusion, the date, the firm line, "/s/" signature block with the signer and attorney lines. Pass.
 
 Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Engines
+
+### docx
+
+Built by `docx/make-reference.sh` (writes `docx/reference.docx` from pandoc's default reference) and `docx/casd.lua` (the filter). Sample: `samples/OUTPUT-sager-motion-brief.docx` (zip and XML parts checked with `unzip -t` and `xmllint`; the LibreOffice PDF was not made).
+
+Set in `styles.xml` and `sectPr` only, **not rendered** (no LibreOffice on the build box):
+
+- EB Garamond 14 pt in every style (Normal, Body Text, Heading 1 to 3, Compact, Block Text, Footnote Text), black text.
+- 24 pt exact line spacing on body, heading, list and block text; no space before or after; paragraphs run on without gaps.
+- First-line indent 0.5 in on body paragraphs.
+- Headings: level 1 centered bold; level 2 (`I.`) bold with a 0.5 in hanging indent; level 3 (`A.`) bold italic with a hanging indent at 1 in. The labels are typed text (`I.` plus a tab), written by the filter.
+- US Letter; top 1 in, left 1.5 in, right 0.75 in, bottom 48 pt (so 28 lines of 24 pt fill the text area exactly).
+- Word line numbering (`w:lnNumType`, restart each page), and a double rule at the left and a single rule at the right of the text (`w:pgBorders`).
+- Cover, table of contents and table of authorities start on their own pages (page breaks).
+
+What differs from the typst template:
+
+- No footer: no page number (typst numbers the front matter in roman and the body in arabic), no footer title, no case number.
+- The table of contents is a TOC field with a placeholder line. Word fills it when the field is updated (select all, F9). It has no page numbers until then, and the LibreOffice check (if run later) needs an update on load.
+- The table of authorities is a list grouped by kind (Cases, Rules), with the authorities the body links (`toa:` keys) only, and no page numbers.
+- The caption is paragraphs, not the bordered party box; the case number and the hearing block (date, time, courtroom, judge) sit at the right on their own lines.
+- The counsel block is single spaced but not on the 24 pt grid.
+- Word numbers text lines (`lnNumType`), not a fixed grid of 1 to 28 on every page.
+- Footnote Text is single spaced (a convention, not verified); no footnotes in the sample.
+- The signature block is "Dated:", "Respectfully submitted," the firm, "By: /s/" and the signer, as in the typst template.
+
+BLOCKED for this engine:
+
+- `docx.pdf` gates 0 to 3: BLOCKED, no `soffice` on the build box (LibreOffice is not on conda-forge). The `.docx` is written, not converted.
+- Pages reviewed for docx: 0. No docx page was rendered or looked at. The typst render of the same sample was viewed page by page as the comparison.
+- TOC page numbers and TOA page numbers: BLOCKED (the fields are not populated; the TOA has no page numbers at all). This is the pagination gap in `docs/DOCX.md`.
+- Footer (page number, footer title): not produced (see above).
+- Word fidelity (repair prompt, line-number placement, border offsets): not checked in Word.
