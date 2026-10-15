@@ -78,3 +78,19 @@ Pages 1–11 as reviewed in the final render: cover (1), TOC (2), table of autho
 - Not checked: Fed. R. Bankr. P. 7012(b) and 8002(a) (cited in the exemplar, not templated).
 
 [Court README](../README.md) | [Adversary complaint](../adversary-complaint/README.md)
+
+## Engines
+
+- **typst** (primary, `typst/`): the reference for the form. Rendered sample: `samples/OUTPUT-bumble-bee-motion-brief.pdf`.
+- **latex**: not built (`latex/` is empty).
+- **docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default reference: Times New Roman 12 pt (LR 7007-2(a)(ii)), double spacing (Word "double", line 480 auto), 0.5 in first-line indent on body text, 1 in margins on letter paper, centered PAGE number in the footer, black bold headings (level 3 in capitals), 10 pt single footnotes, and the paragraph styles "Centered", "CenteredBody" and "Single". `docx/deb.lua` builds from the frontmatter the cover (court line, Form 416 caption, title, party designation, date and counsel), the table of contents, the body and the signature block. Build: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/deb.lua samples/INPUT-bumble-bee-motion-brief.md -o samples/OUTPUT-bumble-bee-motion-brief.docx`.
+- **docx: matches** the typst form: page size and margins, the face and size, the first-line indent, the block quotes single-spaced and indented, the caption layout, the centered headings, the page-number footer, footnotes at the end of each page, the table of authorities as typed text (as in typst).
+- **docx: differs**:
+  - Line pitch. The typst body pitch is 24.06 pt for 12 pt type (measured on page 4 of `OUTPUT-bumble-bee-motion-brief.pdf`). Word's double is two line heights of the font, not measured here. The docx will run longer than the typst pages.
+  - Table of contents: a TOC field over levels 1 and 2, with its entries cached but no page numbers. Word or LibreOffice shows the page numbers after the field is updated (select all, F9). The typst contents page carries page numbers.
+  - The date and the counsel block sit at the foot of the cover as two frames anchored to the bottom margin. This is a Word frame placement; it was not checked in LibreOffice.
+  - The table of authorities is typed text with no page numbers, as the typst sample is.
+  - The face is Times New Roman; typst renders the metric-compatible Liberation Serif. A Word user has Times New Roman; a LibreOffice user needs a metric-compatible face for the same line breaks.
+  - The `.docx` has been checked as a zip and as well-formed XML only. It was not opened in Word or LibreOffice (neither is available on the build box).
+- **docx BLOCKED.** The court folder has no `checks.yaml` or `rules.md`, so no gate check ID is readable here. Every gate measured on the LibreOffice PDF (`samples/OUTPUT-bumble-bee-motion-brief.docx.pdf`) is BLOCKED: Gate 0 (content, italics, footnotes), Gate 1 (rule checks, including the TOC page numbers), Gate 2 (page review of the `.docx.pdf`) and Gate 3 (second sample). Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
+- Pages reviewed: typst 12 of 12 (60 dpi). docx: 0 (the `.docx` pages cannot be rendered on this box).

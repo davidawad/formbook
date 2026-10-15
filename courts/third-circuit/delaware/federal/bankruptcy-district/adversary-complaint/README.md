@@ -75,3 +75,19 @@ Layout as reviewed: caption and preamble (1–2), preliminary statement (2–6),
 - **Not checked:** the consent statement's exact form (it is content in the sample; the template does not force it).
 
 [Court README](../README.md) | [Motion brief](../motion-brief/README.md)
+
+## Engines
+
+- **typst** (primary, `typst/`): the reference for the form. Rendered sample: `samples/OUTPUT-zohar-adversary-complaint.pdf`.
+- **latex**: not built (`latex/` is empty).
+- **docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default reference: EB Garamond 12 pt, double spacing (Word "double", line 480 auto), 0.5 in first-line indent on body text, 1 in margins on letter paper, centered PAGE number in the footer, black bold headings, 10 pt single footnotes, and the paragraph styles "Centered", "CenteredBody" and "Single". `docx/deb.lua` builds from the frontmatter the court line, the Form 416 caption (two tables, with the rule at the right and bottom of the party column), the title, the numbered allegations, the centered italic notes, the lettered prayer items and the signature block. Build: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/deb.lua samples/INPUT-zohar-adversary-complaint.md -o samples/OUTPUT-zohar-adversary-complaint.docx`.
+- **docx: matches** the typst form: page size and margins, the face and size, the first-line indent, the paragraph numbering (typed "n." and a tab, as in typst), the caption layout, the centered headings, the italic notes, the page-number footer.
+- **docx: differs**:
+  - Line pitch. The typst body pitch is 24.06 pt for 12 pt type (measured on the motion brief render; the same `body-leading` is used here). Word's double is two line heights of the font, not measured here. The docx will run longer than the typst pages, and no page count is compared.
+  - Paragraph numbers are typed text, not Word list numbering, so they do not renumber if paragraphs are inserted (the typst template works the same way).
+  - Headings have no extra space above and below as the typst `body-leading` gives them; they sit on the double-spaced line.
+  - The caption and the signature block are tables. Table border rendering differs between Word and LibreOffice.
+  - EB Garamond must be installed on the machine that opens the file; Word substitutes silently if it is missing.
+  - The `.docx` has been checked as a zip and as well-formed XML only. It was not opened in Word or LibreOffice (neither is available on the build box).
+- **docx BLOCKED.** The court folder has no `checks.yaml` or `rules.md`, so no gate check ID is readable here. Every gate measured on the LibreOffice PDF (`samples/OUTPUT-zohar-adversary-complaint.docx.pdf`) is BLOCKED: Gate 0 (content, italics, footnotes), Gate 1 (rule checks), Gate 2 (page review of the `.docx.pdf`) and Gate 3 (second sample). Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
+- Pages reviewed: typst 10 of 10 (60 dpi). docx: 0 (the `.docx` pages cannot be rendered on this box).
