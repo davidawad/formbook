@@ -83,4 +83,26 @@ sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-midd
 
 The overlay's page map (`samples/OVERLAY-novus-complaint.txt`) pairs each sample page with the filed page sharing the most words: sample 1 with filed 1 (96%), 2 with 2 (68%), 3 with 4 (56%), 4 with 5 (63%), 5 with 6 (69%), 6 with 7 (73%), 7 with 9 (50%), 8 with 10 (45%). The pairing is coarse: a sample page can pair with a filed page one or two pages away, because the sample does not carry the exhibits and the filed pages are longer in the front half. The overlay is a diagnostic, not a score: the filed exemplar uses a different face and line breaks, so the two layers will not coincide line by line.
 
+## Engines
+
+Typst (`typst/`) is the reference. The docx engine (`docx/`) is checked page by page against it, on the LibreOffice PDF of the `.docx`. This court has no `checks.yaml`, so no gate check IDs apply and there are no BLOCKED docx items.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-novus-complaint.pdf` (8 pp) | reference |
+| docx | `OUTPUT-novus-complaint.docx` and `OUTPUT-novus-complaint.docx.pdf` (9 pp) | ok: rendered with `tools/render.sh --engine docx`; the LibreOffice PDF converted without error; all 9 pages viewed beside the typst pages |
+
+```sh
+sh tools/render.sh --engine docx courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint samples/INPUT-novus-complaint.md
+```
+
+**docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/ncmb-adversary-complaint.lua`). `make-reference.sh` builds the reference from pandoc's default: EB Garamond 13 pt; body at an exact 24 pt line pitch with a 0.5 in first-line indent; headings; footnote and block-quote styles; letter page with 1-inch margins; a centered page number on every page. The Lua filter builds what pandoc does not write: the cover (court lines, a caption table with the ")" column and closing rule, the title), the numbered paragraphs, the lettered prayer, the sub-items, native footnotes whose text is in the frontmatter, and the signature block kept together at 3.25 in.
+
+- *Matches typst:* typeface and size; line pitch (24.0 pt in both PDFs, measured on page 7); the caption; heading levels (centered capitals, centered bold); the unnumbered WHEREFORE paragraph; the (i), (ii), (iii) sub-items; the prayer A. to F.; footnote size; the signature block; page numbers.
+- *Differs:* line and page breaks. The docx is 9 pages against 8. The signature block, with "Respectfully submitted", falls alone on docx page 9; typst keeps it on page 8 under the prayer. Word may break lines differently again. Word counts agree within 5 words (2,296 against 2,291).
+- *Not built:* no certificate, because the complaint has none (the sample has no service frontmatter).
+- *Word:* not opened in Word. `unzip -t` and xmllint pass on every XML part and every style used in the body is defined; LibreOffice converted it without error.
+- *Pages reviewed:* 9 of 9 pages of `OUTPUT-novus-complaint.docx.pdf`, each viewed beside typst page 1 to 8 (page 9 has no typst counterpart).
+
+
 See also: [[motion-brief]] (the other doc type in this court), `../../../../../../README.md` for the formbook index.
