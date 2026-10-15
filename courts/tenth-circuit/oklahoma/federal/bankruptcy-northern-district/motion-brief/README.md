@@ -20,6 +20,10 @@ Dates: the local rules were read from the PDF on the court's site (cover: "Updat
 | OKNB-MOT-008 | LBR 9004-1(C), LBR 9011-1 | Attorney signature block: full name, state bar number, address, email, telephone, fax if any, and the party represented. | `signature-block` (asserts `bar_number`, `telephone`, `email`) |
 | OKNB-MOT-009 | FRBP 4003(d) (not re-fetched) and FRBP 9014 (not re-fetched) | A motion to avoid a lien under 11 U.S.C. § 522(f) is a contested matter under Rule 9014, commenced by motion. | the sample's `# Argument` and `# Relief Requested` text |
 
+## Typeface
+
+LBR 9004-1(A) (court's local rules, "Updated March 21, 2025"; the rule text as quoted on courtrules.net, checked 2026-10-15) requires no less than 12-point font, footnotes included. It names no typeface. Under `docs/FONTS.md` ("No face named"), the template keeps **EB Garamond** (vendored, OFL 1.1). Face required: none. Substitute: none needed (EB Garamond is the default). The exemplar (docket 409, 2025) names Times-Roman (base-14, not embedded, per `pdffonts`); that is the filer's choice, not a rule, and it is not a reason to switch.
+
 ## Exemplar
 
 `exemplars/FILED-EXAMPLE-OKF-24-11060-motion-brief.pdf`: the **amended joint motion** of OKF, LLC (debtor in possession) and the Official Committee of Unsecured Creditors to surcharge under 11 U.S.C. § 506(c) and exclude fees from a secured claim, with the NOTICE OF OPPORTUNITY FOR HEARING, in *In re OKF, LLC*, Case No. 24-11060-T, Chapter 11. Docket 409, entered September 15, 2025. 15 pages, text-based (4,257 words extract). Counsel: Crowe & Dunlevy (Craige, Sokolosky) for the debtor; Bernstein-Burkley (Kallergis) for the committee. Source, searches and rejected candidates (two scanned motions, one Chapter 15 stay motion) are in `exemplars/SOURCE.md`.
@@ -50,7 +54,7 @@ sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-di
 ```
 
 - render: **ok**. `samples/OUTPUT-motion-brief.pdf`, 10 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular, -Bold and -Italic, embedded. No system or fallback font after the backtick fix (a stray backtick had pulled in DejaVu Sans Mono).
-- overlay: **ok**. `samples/OVERLAY-motion-brief.pdf` and `.txt` written. Word overlap per page as the tool reports it: ours p.1 vs filed p.13 51.6%; p.2 65.4%; p.3 54.1%; p.4 51.8%; p.5 53.9%; p.6 vs filed p.10 39.7%; p.7 vs filed p.11 46.7%; p.8 vs filed p.12 43.2%; p.9 vs filed p.12 40.9%; p.10 vs filed p.15 25.0%. The overlay is a diagnostic, not a score. The pairing of pages is the tool's, and the page numbers do not line up one to one because of the omission.
+- overlay: **ok**. The filed PDF is not in this checkout; it was fetched from the RECAP URL in `exemplars/SOURCE.md` to a scratch directory (15 pages, matching the record) and passed to `tools/overlay.sh` as its third argument. `samples/OVERLAY-motion-brief.pdf` and `.txt` written. Word overlap per page as the tool reports it: ours p.1 vs filed p.13 51.6%; p.2 65.4%; p.3 54.1%; p.4 51.8%; p.5 53.9%; p.6 vs filed p.10 39.7%; p.7 vs filed p.11 46.7%; p.8 vs filed p.12 43.2%; p.9 vs filed p.12 40.9%; p.10 vs filed p.15 25.0%. The overlay is a diagnostic, not a score. The pairing of pages is the tool's, and the page numbers do not line up one to one because of the omission.
 
 ## Visual review (Gate 2, all 10 pages rendered at 70 dpi and looked at)
 
@@ -89,5 +93,5 @@ sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-di
 9. **Certificate method:** the template states CM/ECF service in its certificate sentence. The author confirms that every party is registered before using an ECF-only certificate.
 10. **Response period:** `response_days` is the author's calculation (LBR 9013-1(B): 14 days where no period is prescribed, including FRBP 9006(f)'s 3 mailing days; add to a prescribed period unless hand-delivered). The template does not compute it.
 11. **Bracketed text in the notice:** "[and others who are required to be served]" is reproduced from the local rule's form with its brackets, as the rule prints it. The author deletes the brackets and the words, or keeps them, per the notice's filing.
-12. **Font:** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. 13 pt because EB Garamond sets small at 12; both meet the LBR 9004-1(A) floor. A choice, not a court-specified font.
+12. **Font:** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. 13 pt because EB Garamond sets small at 12; both meet the LBR 9004-1(A) floor. A choice; the court's rule names no font (see Typeface).
 13. **Statute and rule text** not re-fetched (see governing rules): § 522(f)(1)(A), (f)(2)(A), § 101(36), FRBP 4003(d), 9006(f), 9014. Check before this folder is treated as complete.

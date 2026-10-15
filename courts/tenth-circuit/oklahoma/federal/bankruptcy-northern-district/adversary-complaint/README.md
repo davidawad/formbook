@@ -22,6 +22,10 @@ Dates: the local rules were read from the PDF on the court's site (version shown
 
 Not used, and why: LBR 7007.1-1 (corporate ownership statement) applies to a corporate party and is a separate form, not part of this document. The prayer and the jury demand are conventions: a jury demand appears only when `jury_demand: true` (FRBP 9015).
 
+## Typeface
+
+LBR 9004-1(A) (court's local rules, "Updated March 21, 2025"; the rule text as quoted on courtrules.net, checked 2026-10-15) requires no less than 12-point font, footnotes included. It names no typeface. Under `docs/FONTS.md` ("No face named"), the template keeps **EB Garamond** (vendored, OFL 1.1). Face required: none. Substitute: none needed (EB Garamond is the default). The 2009 exemplar sets LiberationSans (embedded) with Helvetica and Courier base-14 names (per `pdffonts`); that is the filer's choice, not a rule.
+
 ## Exemplar
 
 `exemplars/FILED-EXAMPLE-Retherford-09-01059-adversary-complaint.pdf`: the complaint in *Atlas Telephone Company, Inc. v. Retherford*, Adv. No. 09-01059-M (Bankr. N.D. Okla., main case 09-01996-M, Chapter 7), filed July 1, 2009 by Mark A. Craige (MorrelSaffaCraige, P.C.) for four plaintiffs. 8 pages, text-based (body text extracts; EB Garamond is not used by the filer; the fonts are embedded LiberationSans and Helvetica). Source, searches, and the candidates rejected (three scanned complaints, a trustee's avoidance complaint, short student-loan complaints) are in `exemplars/SOURCE.md`.
@@ -50,7 +54,7 @@ sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-di
 ```
 
 - render: **ok**. `samples/OUTPUT-adversary-complaint.pdf`, 8 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular and -Bold only, embedded.
-- overlay: **ok**. `samples/OVERLAY-adversary-complaint.pdf` and `.txt` written. Word overlap per page, as the tool reports it: p.1 58.5%, p.2 85.3%, p.3 90.2%, p.4 82.4%, p.5 70.9%, p.6 52.9%, p.7 35.6%, p.8 60.7%. The overlay is a diagnostic, not a score. The lowest pages are 7 (35.6%) and 6 (52.9%); I did not chase the cause in this pass, and I do not claim it is line breaks.
+- overlay: **ok**. The filed PDF is not in this checkout; it was fetched from the RECAP URL in `exemplars/SOURCE.md` to a scratch directory (8 pages, matching the record) and passed to `tools/overlay.sh` as its third argument. `samples/OVERLAY-adversary-complaint.pdf` and `.txt` written. Word overlap per page, as the tool reports it: p.1 58.5%, p.2 85.3%, p.3 90.2%, p.4 82.4%, p.5 70.9%, p.6 52.9%, p.7 35.6%, p.8 60.7%. The overlay is a diagnostic, not a score. The lowest pages are 7 (35.6%) and 6 (52.9%); I did not chase the cause in this pass, and I do not claim it is line breaks.
 
 ## Visual review (Gate 2, all 8 pages rendered at 70 dpi and looked at)
 
@@ -75,7 +79,7 @@ Defects the overlay and the review found during the build: none in the template 
 4. **Adversary cover sheet** (LBR 7003-1) is not generated; it is an Official Form filed with the complaint when the complaint is not filed through ECF.
 5. **Summons** (LBR 7004-2) is issued by the clerk; not generated.
 6. **Certificate of service:** none. A complaint is served with the summons under FRBP 7004; no certificate is in the rules this template reads.
-7. **Font:** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. 13 pt because EB Garamond sets small at 12; both meet the LBR 9004-1(A) floor. This is a choice; no court-specified font was found. The exemplar is in LiberationSans/Helvetica, 2009.
+7. **Font:** EB Garamond (vendored, OFL) at 13 pt, not Times New Roman. 13 pt because EB Garamond sets small at 12; both meet the LBR 9004-1(A) floor. This is a choice; the court's rule names no font (see Typeface). The exemplar is in LiberationSans/Helvetica, 2009.
 8. **Caption layout:** the In re block and party block sit in one left column with a rule, and the case-number column on the right. LBR 9004-2(A) fixes what the caption contains, not its layout. The exemplar's layout is similar.
 9. **Electronic filing:** the court's May 2024 how-to says to print the finished complaint to PDF rather than save the Word file as a PDF, so the document is flattened. The typst output is a flattened PDF.
 10. **Core / non-core and consent** (FRBP 7008(a)): generated from `core`. The sample says core under § 157(b)(2)(I) and no consent. The author must choose these per complaint; the template does not decide them.
