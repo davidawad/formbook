@@ -85,3 +85,20 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body.
 7. **Not generated:** the Adversary Proceeding Cover Sheet, the summons, any disclosure statement, and the exhibits (EXHIBIT 1 to 4 are referred to but not included).
 8. **File names differ from the brief's naming.** The tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, not `<id>.pdf` and `<id>-overlay.pdf`; the names follow the tools (which the brief forbids editing).
 9. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` need the court folder shape (court.json and rules.md at the court root), which this doc-type folder does not have; the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent.
+
+## Engines
+
+**docx** (`docx/`: `make-reference.sh` builds `reference.docx`; `nceb-adversary-complaint.lua` adds the caption, the numbered allegations and the signature block). Outputs: `samples/OUTPUT-jsmith-complaint.docx` and `samples/OUTPUT-jsmith-complaint.docx.pdf` (the LibreOffice PDF, the file checked).
+
+What matches the typst output: letter page, 1-inch margins; EB Garamond 12 pt (embedded as EBGaramond Regular, Bold and Italic); body double-spaced at 24 pt exact; allegations numbered 1 to N at the margin, lettered items indented 0.5 inch; centered court lines, division, caption table with a rule on its right and bottom edges, the case, chapter and adversary lines, centered title; block quotations indented 1 inch both sides and single-spaced, with their lettered list inside the indent; tables single-spaced; signature block at 3 inches with the `s/` signature and the role line kept together; centered page-number footer.
+
+What differs (tier 2, recorded, not changed):
+- The court and division lines and the caption lines are single-spaced (13.8 pt). The typst render leaves about 22 pt between them.
+- Tables: the docx tables have no rules, as the template's `stroke: none` intends. The typst render shows ruled tables, so the template's table override does not reach the tables that cmarker builds. This is a typst-side question for David.
+- Pagination: 9 pages in the docx against 8 in typst. The last prayer item moves to page 9 with the signature block, so the signature is not alone on its page.
+- Heading spacing differs by a few points; table header rows repeat when a table breaks across pages (Word's convention for header rows).
+- Word is not available here, so the `.docx` was not opened in Word. LibreOffice converted it without error. `unzip -t` passes and all 17 XML parts pass `xmllint --noout`.
+
+Pages reviewed: all 9 pages of `samples/OUTPUT-jsmith-complaint.docx.pdf`, each rendered at 60 dpi and viewed after the last change; typst comparison pages 1 to 8 of the typst render (rendered to /tmp, not to `samples/`).
+
+No docx item is BLOCKED. The court folder has no `checks.yaml`, so no check IDs apply to this doc type yet; the page review above is the only check.

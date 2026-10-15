@@ -80,3 +80,20 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body.
 6. **File names differ from the brief's naming.** The tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, not `<id>.pdf` and `<id>-overlay.pdf`; the names follow the tools (which the brief forbids editing).
 7. **Headings.** Level 3 and deeper headings are not styled (none are used).
 8. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` need the court folder shape (court.json and rules.md at the court root), which this doc-type folder does not have; the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent.
+
+## Engines
+
+**docx** (`docx/`: `make-reference.sh` builds `reference.docx`; `nceb-motion-brief.lua` adds the caption with "In re:", the signature block and the certificate of service, and turns a numbered list inside a block quotation into labelled paragraphs). Outputs: `samples/OUTPUT-barnhill-memo.docx` and `samples/OUTPUT-barnhill-memo.docx.pdf` (the LibreOffice PDF, the file checked).
+
+What matches the typst output: letter page, 1-inch margins; EB Garamond 12 pt (embedded as EBGaramond Regular, Bold and Italic); body double-spaced at 24 pt exact with a 0.5-inch first-line indent; level 1 headings centered bold caps; level 2 headings bold, flush left, with a 0.5-inch hanging indent; block quotations indented 1 inch both sides and single-spaced, including the numbered list inside the quotation; caption with the rule on its right and bottom edges and the case, chapter and adversary lines; signature block with the date, "Respectfully submitted," at 3 inches, the `/s/` signers and the role line, kept together; certificate of service on its own page with the served lines indented 1 inch and the signer at 3 inches; centered page-number footer.
+
+What differs (tier 2, recorded, not changed):
+- The court and division lines and the caption party lines are single-spaced (13.8 pt). The typst render leaves about 22 pt between them.
+- Typst keeps the conclusion and the signature block on page 9. In the docx the signature block moves to page 10 as one unit. The docx runs 11 pages against 10 in typst.
+- Numbers in the quotation list are typed labels (not Word numbering), so they stay inside the quotation's indent.
+- The certificate's space before the signer is a little smaller than in typst.
+- Word is not available here, so the `.docx` was not opened in Word. LibreOffice converted it without error. `unzip -t` passes and all 17 XML parts pass `xmllint --noout`.
+
+Pages reviewed: all 11 pages of `samples/OUTPUT-barnhill-memo.docx.pdf`, each rendered at 60 dpi and viewed after the last change; typst comparison pages 1 to 10 of the typst render (rendered to /tmp, not to `samples/`).
+
+No docx item is BLOCKED. The court folder has no `checks.yaml`, so no check IDs apply to this doc type yet; the page review above is the only check.
