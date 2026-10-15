@@ -91,3 +91,17 @@ Not produced by this template (separate filings, may be required with the first 
 - Page 13: the closing paragraph, DATED line with firm, `/s/` signer and names under the line, kept together. Pass.
 - Pages 14 to 16: EXHIBIT 1, a 46-row table with the header row repeated on pages 15 and 16, total row at the foot. Pass.
 - Page 17: EXHIBIT 2, 16 rows and the total. Pass.
+
+## Engines
+
+docx (`docx/`): `reference.docx` (built by `docx/build-reference.sh`), `complaint.lua` (the markdown contract to cover, caption, numbered paragraphs, lettered lists, signature block and exhibits), `render.sh` (pandoc, then the footer title). Render: `sh tools/render.sh --engine docx <this dir> samples/INPUT-icap-adversary-complaint.md` writes `samples/OUTPUT-icap-adversary-complaint.docx` and `samples/OUTPUT-icap-adversary-complaint.docx.pdf` (LibreOffice 26.8; `pdffonts` shows EB Garamond only). Pages: docx 17, typst 17.
+
+What matches the typst output (`typst/`): letter, 1 in margins; EB Garamond 14 pt throughout; body lines on the typst line pitch (31.4 pt, exact spacing); counsel, caption, signature and table lines single-spaced (about 20 pt); footnotes single-spaced as in the typst complaint template; footer `COMPLAINT n`; counsel side by side and the caption with its rules on page 1; court title with the typst blank lines; numbered paragraphs, (a) lists and A. headings; each exhibit on its own page with the header row repeated; signature block after the prayer, kept with the closing paragraph and the date.
+
+What differs (checked page by page, `reviews/docx.md`):
+- Exact line spacing puts the extra leading above each line, so text starts about 11 pt lower on every page than in typst. The pitch is the same, but a full page holds about one body line fewer, so page breaks differ from the typst render on pages 2 to 13. Total length is the same (17 pages).
+- Exhibit tables run the full 6.5 in text width; the typst tables are sized to their content. Column shares are set in `complaint.lua`.
+- "/s/ JASON EDWARD WAX (WSBA #41944)" wraps in LibreOffice inside the 3.5 in signature column; typst keeps it on one line.
+- Word was not run here (no Word on this machine). Word may paginate slightly differently (docs/DOCX.md).
+
+BLOCKED: check.sh gates 0-3: `tools/check.sh <this dir> --engine docx` cannot run on a doc-type folder. It reads `court.json` and `checks.yaml` from the court dir; this folder has neither, and the court folder has `court.json` but no `checks.yaml`. No `samples/.check-docx.txt` is written. The pages were checked by hand (see `reviews/docx.md`), not by the gates.
