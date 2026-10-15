@@ -64,25 +64,41 @@
     align(center, text(weight: "bold", l))
   }
   v(single-leading * 2)
-  grid(
-    columns: (1fr, 1fr),
-    block(width: 100%, [
-      #for l in meta.debtor [#l \ ]
-    ]),
-    align(top + right, [#meta.case_number]),
-  )
-  v(single-leading * 2)
-  grid(
-    columns: (3.4in, 1fr),
-    gutter: 0.25in,
-    block(width: 100%, inset: (right: 0.12in, bottom: 0.12in), stroke: (right: 0.6pt, bottom: 0.6pt), [
-      #for p in meta.parties [
-        #p.names \
-        #p.role \ #v(single-leading)
-      ]
-    ]),
-    align(horizon, [#meta.adv_number]),
-  )
+  // Contested matter in the main case (no adversary parties): the debtor sits in a box and the chapter and case
+  // number sit to its right, as in the filed exemplar (FILED-EXAMPLE, p. 1). Adversary captions keep the parties box.
+  if meta.at("parties", default: ()).len() == 0 {
+    grid(
+      columns: (3.4in, 1fr),
+      gutter: 0.25in,
+      block(width: 100%, inset: 0.12in, stroke: 0.6pt, [
+        #for l in meta.debtor [#l \ ]
+      ]),
+      align(top + right, [
+        #if meta.at("chapter", default: none) != none [#meta.chapter \ ]
+        #meta.case_number
+      ]),
+    )
+  } else {
+    grid(
+      columns: (1fr, 1fr),
+      block(width: 100%, [
+        #for l in meta.debtor [#l \ ]
+      ]),
+      align(top + right, [#meta.case_number]),
+    )
+    v(single-leading * 2)
+    grid(
+      columns: (3.4in, 1fr),
+      gutter: 0.25in,
+      block(width: 100%, inset: (right: 0.12in, bottom: 0.12in), stroke: (right: 0.6pt, bottom: 0.6pt), [
+        #for p in meta.parties [
+          #p.names \
+          #p.role \ #v(single-leading)
+        ]
+      ]),
+      align(horizon, [#meta.adv_number]),
+    )
+  }
   v(single-leading * 2)
   align(center, text(weight: "bold", meta.title))
   v(body-leading)
@@ -132,7 +148,7 @@
   caption(meta)
 
   // Unnumbered lead-in paragraph, from the frontmatter.
-  block(width: 100%, [#h(para-indent) #inl(meta.lead_in)])
+  block(width: 100%, [#h(para-indent) #with-notes(meta.lead_in, meta.footnotes)])
 
   let para = 0
   let letter = 0
@@ -181,11 +197,11 @@
       continue
     }
 
-    // Anything else is an unnumbered paragraph.
-    block(width: 100%, with-notes(t, meta.footnotes))
+    // Anything else is an unnumbered paragraph: first-line indent, as the filed memorandum's introduction and argument.
+    block(width: 100%, [#h(para-indent) #with-notes(t, meta.footnotes)])
   }
 
-  block(width: 100%, [#h(para-indent) #inl(meta.prayer)])
+  block(width: 100%, [#h(para-indent) #with-notes(meta.prayer, meta.footnotes)])
 
   v(body-leading)
   signature(meta.signature)
