@@ -44,6 +44,10 @@ Text read by `pdftotext` on 2026-10-14 (the fetch tool returned the PDF as binar
 
 Because the rules do not give an answer-specific caption, the template follows the appellant's cover (Appendix I), with the United States as appellee and the appellant as appellant.
 
+## Typeface
+
+Same as the opening brief (see `../opening-brief/README.md`, "Typeface"). Rule 17(c) names no face it requires (Times New Roman and Century Schoolbook are examples) and allows any 14-point proportional type, so the template keeps `EB Garamond` (`fonts/eb-garamond/`), with no substitute. Rendered 2026-10-14: 8 pages, no warnings; `pdffonts` lists only EBGaramond faces.
+
 ## What the template is built to check
 
 The template fails the build (with a message) if:
@@ -54,7 +58,7 @@ The template fails the build (with a message) if:
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-answering-brief.pdf` (8 pages) was rendered at 60 dpi (`pdftoppm -r 60`) and looked at after the final edit (the argument-heading fix). Pages 1-8 were all reviewed, and no page was skipped.
+Every page of `OUTPUT-answering-brief.pdf` (8 pages) was rendered at 60 dpi (`pdftoppm -r 60`) and looked at after the final edit (the argument-heading fix). Pages 1-8 were all reviewed, and no page was skipped. Re-reviewed 2026-10-14 after the footnote-size fix: the sample has no footnotes, so the layout did not change.
 
 | PDF page | Content | Finding |
 |---|---|---|
@@ -67,7 +71,7 @@ Every page of `OUTPUT-answering-brief.pdf` (8 pages) was rendered at 60 dpi (`pd
 | 7 | Point II discussion, conclusion, signature block (body p. 5) | The conclusion ends and the signature block sits with it on the same page. OK. |
 | 8 | Certificate of filing and service (body p. 6) | Own page, numbered. The service line reads "Appellate Defense Division, Navy-Marine Corps Appellate Review Activity on [date of filing]." OK. |
 
-Overlay: not produced (see Status).
+Overlay: not produced. `sh tools/overlay.sh` exits 1 on 2026-10-14 ("no exemplar pdf"): no filed NMCCA answer exists to compare against (see Status and `exemplars/SOURCE.md`). Opening-brief exemplar is not a substitute, since it is a different document type.
 
 ## Known gaps
 
@@ -77,7 +81,7 @@ Overlay: not produced (see Status).
 - **Word count** is not computed or checked against the 15,000-word limit (NMCCA-FORM-005; applicability to answers in NMCCA-ANS-003).
 - **Argument point labels** are not repeated in the index.
 - **Standard of Review** under the Argument is styled bold italic, not bare bold (see page 4).
-- **Font.** EB Garamond at 14 pt, as in the opening-brief template (see `../opening-brief/README.md`, "Font").
+- **Font.** See "Typeface" above: EB Garamond at 14 pt, as in the opening-brief template.
 
 ## Open choices (for David)
 
