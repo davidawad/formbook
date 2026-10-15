@@ -6,7 +6,7 @@ Status: exemplar=yes, render=ok, overlay=ok, pages reviewed 11 of 11 (the transc
 
 The exemplar is a filed chapter 7 trustee's motion with a memorandum, *In re James Capital Advisors, Inc.*, 2:23-bk-14820-BB, Doc 48 (Bankr. C.D. Cal., Los Angeles Division, filed August 23, 2023). Its source, filer and search trail are in `exemplars/SOURCE.md`. The sample `samples/INPUT-james-capital-advisors.md` is a **transcription** of that filing in its real order (notice, memorandum, declaration, proof of service). Page 9 of the filing is a rotated scan, read by eye.
 
-The template's layout comes from the rules; the exemplar settles the conventions the rules leave open (section numerals above the titles, unruled tables, a signature block with the firm to the right). The filing uses Times New Roman, and this template uses EB Garamond: see gap 2.
+The template's layout comes from the rules; the exemplar settles the conventions the rules leave open (section numerals above the titles, unruled tables, a signature block with the firm to the right). The filing uses Times New Roman, and this template uses Liberation Serif, its vendored metric-compatible substitute (`docs/FONTS.md`): see gap 2.
 
 ## Governing rules
 
@@ -18,7 +18,7 @@ Sources, read 2026-10-14:
 
 | ID | Rule | Requirement | Where it lives |
 |---|---|---|---|
-| CACB-FORM-001 to -006 | Central Guide 9004-1(b)(2) | Pages 8.5 x 11; numbered margins (a motion is named in (B)(i)), at most 28 lines; typeface at least 12 point; line 1 at least 1 inch from the top; double spacing; page numbers at the bottom. | `page-w/h`, `lines-per-page`, `pitch`, `type-size`, `top-margin`, `footer-block()` |
+| CACB-FORM-001 to -006 | Central Guide 9004-1(b)(2) | Pages 8.5 x 11; numbered margins (a motion is named in (B)(i)), at most 28 lines; typeface at least 12 point; line 1 at least 1 inch from the top; double spacing; page numbers at the bottom. | `page-w/h`, `lines-per-page`, `pitch`, `type-size`, `top-margin`, `footer-block()`. Typeface: Times New Roman is listed, so `font-family` = "Liberation Serif" (`docs/FONTS.md`). |
 | CACB-CAP-001 to -003 | Central Guide 9004-1(c)(1)(A)-(C) | Counsel block on lines 1-7; clerk's space; court title (with the division) centered on or below line 8. | `counsel-block()`, `court-title()` |
 | CACB-CAP-004 | Central Guide 9004-1(c)(1)(E)-(F) | Bankruptcy case number to the right of center, opposite the party names; chapter number immediately below. | `caption()` right column |
 | CACB-CAP-005 | Central Guide 9004-1(c)(1)(H) | Concise title of the document on the first page, below the chapter number or the caption. Where possible, the proponent's name is in the title. | `caption()`, `brief_title` |
@@ -54,10 +54,11 @@ sh tools/render.sh courts/ninth-circuit/california/federal/bankruptcy-central-di
 sh tools/overlay.sh courts/ninth-circuit/california/federal/bankruptcy-central-district/motion-brief james-capital-advisors
 ```
 
-- `samples/OUTPUT-james-capital-advisors.pdf`: 11 pages, the same count as the filing. Typst compiled with no warnings. Fonts: EB Garamond only (vendored).
-- `samples/OVERLAY-james-capital-advisors.pdf` and `.txt` were written. Page pairing by word overlap: notice pages 1-2 at 83% and 89%; memorandum pages 3-6 at 91%, 76%, 68%, 65%; declaration and proof of service pages 7, 9, 10, 11 at 85%, 83%, 33%, 80%. Our page 8 pairs with filed page 2 at 17%: a spurious pairing, since the declaration's second page carries few words. The memorandum's conclusion falls on page 6 here and page 7 in the filing, a pagination shift from the font (gap 2).
+- `samples/OUTPUT-james-capital-advisors.pdf`: 11 pages, the same count as the filing. Typst compiled with no warnings. Fonts: Liberation Serif only (vendored); `pdffonts` shows `LiberationSerif` and `LiberationSerif-Bold`, embedded. The sample has no italic markup, so no italic face is used.
+- Line pitch: `body-leading` 1.345 em and `single-leading` 0.345 em give 24.0 pt and 12.0 pt on the numbered grid, as in the adversary complaint (the leading is set per face because Liberation Serif's line box is 0.655 em).
+- `samples/OVERLAY-james-capital-advisors.pdf` and `.txt` were written. Page pairing by word overlap: notice pages 1-2 at 84% and 92%; memorandum pages 3-6 at 94%, 80%, 75%, 71%; declaration and proof of service pages 7, 9, 10, 11 at 85%, 77%, 41%, 80%. Our page 8 pairs with filed page 2 at 17%: a spurious pairing, since the declaration's second page carries few words. The memorandum's conclusion falls on page 6 here and page 7 in the filing; the sample is a transcription, so this is not established as a template finding.
 
-## Visual review (Gate 2 record, all 11 pages of the transcribed sample, rendered at 70 dpi and looked at, final render)
+## Visual review (Gate 2 record, all 11 pages of the transcribed sample, rendered at 80 dpi and looked at, final render with Liberation Serif)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -80,7 +81,7 @@ Defects found and fixed during review: the footer title clipped at the page edge
 ## Known gaps and open choices
 
 1. **One exemplar, one filer.** The exemplar is a chapter 7 trustee's motion by trustee's counsel (Danning, Gill, Israel & Krasnoff). Tier 2 asks for 2 or 3 filers; a second filed motion with a memorandum from a creditor or debtor (for example, Zions Bancorporation's remand motion, 8:26-ap-01060 Doc 16, 30 pages) is the next addition. See `exemplars/SOURCE.md`.
-2. **Typeface (CACB-FORM-001 to -006). Needs David's call.** The Central Guide lists Arial, Courier, Times New Roman, Helvetica, Geneva and Letter Gothic as the required typefaces. Only EB Garamond is vendored in `fonts/`, and it is not on the list. Same gap as the adversary complaint: see that README, gap 1.
+2. **Typeface (CACB-FORM-001 to -006). Resolved in the fonts pass.** The Central Guide lists Times New Roman among the required typefaces; the template uses Liberation Serif, the vendored metric-compatible substitute (`docs/FONTS.md`). Same decision as the adversary complaint: see that README, gap 1. The sample's page count is 11, the same as the filing.
 3. **Proof of service (LBR 9013-1(e)).** Required with every document under the rule; not generated. A separate form (F 9013-3.1 family) is needed.
 4. **Court-approved notice forms (LBR 9013-1(o), (p), (q)).** If the motion is decided on notice or without a hearing, the court's form must be used (LBR 9009-1(b)(4)). This template makes a free-form notice; it is not those forms.
 5. **Memorandum requirement.** LBR 9013-1(c)(3)(A) exempts sale, use, lease, abandonment, stay-relief and professional-compensation motions from the memorandum unless special circumstances or an order apply. The exemplar's memorandum supports a Rule 9019(b) compromise, which the rule does not list as exempt; the template does not decide when one is needed.

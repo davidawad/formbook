@@ -12,7 +12,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // Central Guide 9004-1(b)(2)(C): a required typeface list; EB Garamond is vendored (gap, README.md)
+#let font-family = "Liberation Serif"   // Central Guide 9004-1(b)(2)(C): Times New Roman is a listed typeface; Liberation Serif is its metric-compatible substitute (docs/FONTS.md)
 #let type-size = 12pt                   // Central Guide 9004-1(b)(2)(C): not smaller than 12 point (the floor)
 #let pitch = 24pt                       // Central Guide 9004-1(b)(2)(F): double-spaced; the numbered lines are this pitch
 #let lines-per-page = 28                // Central Guide 9004-1(b)(2)(B)(i): not more than 28 numbered lines per page
@@ -23,8 +23,8 @@
 #let left-margin = 1.5in                // room for the line numbers and the rules
 #let right-margin = 0.75in
 #let text-width = page-w - left-margin - right-margin
-#let body-leading = 1.35em              // double spacing: 24 pt pitch at 12 pt in EB Garamond (measured, README.md)
-#let single-leading = 0.35em            // single spacing: 12 pt pitch, two single lines per numbered line (counsel, caption, signature)
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is about 0.655em, so 1.345em leading makes a 24 pt baseline pitch at 12 pt (measured, README.md)
+#let single-leading = 0.345em          // single spacing: 12 pt pitch at 12 pt type, so two single lines fit each numbered line (measured, README.md)
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 3.3in               // width of the party column of the caption
 #let counsel-lines = 7                  // Central Guide 9004-1(c)(1)(B): lines 1-7 are left for counsel and the clerk; the court title starts on line 8
