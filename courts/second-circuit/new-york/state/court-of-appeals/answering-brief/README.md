@@ -5,7 +5,8 @@ Status: **BLOCKED: no exemplar.** No filed New York Court of Appeals answering b
 | Gate | Result |
 |---|---|
 | exemplar | no (none found) |
-| render | ok (`sh tools/render.sh … samples/INPUT-ny-answering-brief-sample.md`, 12 pages, vendored EB Garamond only, no typst warnings) |
+| typeface | face required: none (NY-TYPE-001 / 500.1(j): "serifed, proportionally spaced typeface, such as Times Roman"; Times is an example). Vendored substitute: none needed; **EB Garamond kept** (`fonts/eb-garamond`). Fit: n/a. Liberation Serif (Times-metric) is vendored if David wants the Times example applied: set `font-family` and re-render |
+| render | ok (`sh tools/render.sh … samples/INPUT-ny-answering-brief-sample.md`, 12 pages, vendored EB Garamond only, no typst warnings; re-rendered 2026-10-15, pdffonts: EB Garamond Regular/Italic/Bold embedded) |
 | overlay | fail (`sh tools/overlay.sh` exits 1: `no exemplar pdf in …/exemplars`) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; pages 7, 12 and 5, 6, 8–11 re-viewed after the fixes below) |
 
