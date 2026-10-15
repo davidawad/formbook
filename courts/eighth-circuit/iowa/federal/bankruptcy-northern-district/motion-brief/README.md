@@ -72,6 +72,25 @@ Every sample page was rendered at 60 dpi and looked at, after the last template 
 | veroblue-motion | 4 | Facts 17-23. | OK. |
 | veroblue-motion | 5 | Fact 24, the "Based on the foregoing" paragraph, signature block (one signer; the second attorney in the filing is not transcribed, gap 5), CERTIFICATE OF SERVICE with the date placeholder. | OK. |
 
+## Engines
+
+| Engine | Folder | Output in `samples/` | Status |
+|---|---|---|---|
+| typst (primary) | `typst/` | `OUTPUT-<id>.pdf` | unchanged |
+| docx | `docx/` | `OUTPUT-<id>.docx` (both samples written); `OUTPUT-<id>.docx.pdf` not written | `.docx` built; `.docx.pdf` **BLOCKED** (below) |
+| latex | `latex/` | none | not built |
+
+**docx build.** `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference (pandoc 3.12.1 from `tools/bootstrap.sh`). `docx/ianb-motion-brief.lua` builds the caption, the signature block and the certificate of service from the frontmatter (no case text in the filter); it numbers each item of an ordered list (the grounds and facts), restarting the count after every heading, and leaves other paragraphs unnumbered. `#` headings are centered and bold; `##` argument headings are bold and left. Footnotes are pandoc's own. Command: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-<id>.md`. The command writes the `.docx`, then stops because `soffice` is not installed.
+
+**What matches the typst template** (set from the template's values, and the line pitch and footnote size measured on the typst PDF, not from a filed copy): EB Garamond 13 pt; 24.05 pt exact line pitch for body and numbered items; footnotes 11 pt at 12.7 pt single spacing; half-inch first-line indent; 1-inch margins on letter paper; the caption (3.3 in party box with a right rule and a bottom rule; the adversary lines only when `adversary_no` is given); the signature block, with "Dated" only when a date is in the frontmatter; the certificate of service (centered heading, date and manner, italic "/s/" line); a centered "Page X of Y" footer at 10 pt (PAGE and NUMPAGES fields).
+
+**What differs or is not checked.** No docx page has been rendered or looked at, so no visual claim is made for the `.docx`. Word and LibreOffice may paginate differently (line breaks, the caption table's row height, footnote placement). The caption rules are table borders, not the typst stroke. The EB Garamond font must be installed on the machine that opens the file; it is not embedded. The paragraph spacing after each unnumbered paragraph is the typst value (0.6 em), set in the Body Text style.
+
+**docx BLOCKED.** No `checks.yaml` exists for this court, so there are no check IDs. The blocks are these:
+- `OUTPUT-<id>.docx.pdf` (Gates 0 to 3 on the LibreOffice PDF): BLOCKED. LibreOffice cannot be installed on this box: conda-forge has no `libreoffice` package and `soffice` is absent (`tools/bootstrap.sh` reports it MISSING). Neither sample's `.docx.pdf` was produced, so no gate has run on it.
+- Gate 2 for the docx: 0 pages reviewed (no PDF to render; the typst renders are 3 pages for mcquillen-gray-brief and 5 for veroblue-motion).
+- Opening the `.docx` in LibreOffice and Word without a repair prompt: not done (no LibreOffice; no Word).
+
 ## Known gaps and open choices
 
 1. **No complete exemplar.** Neither filing is a motion and its brief in one PDF. The Gray filing is the brief only (its motion is not in RECAP storage). The VeroBlue filing is a motion with its own facts section and no brief. The template covers both shapes: grounds and facts as numbered items, argument under `##` headings. Whether David wants the two shapes merged, or one document per filing, is a question for him; the template produces one document.

@@ -80,6 +80,21 @@ The overlay is a diagnostic, not a score. Its page map (`OVERLAY-hess-equifax.tx
 | 8 | List (e) to (h), ¶ 84 to 89, DEMAND FOR TRIAL BY JURY, PRAYER FOR RELIEF and its lead-in | OK. The prayer lead-in sits at the foot of the page; its list starts on page 9. The heading and lead-in are kept together. Acceptable. |
 | 9 | Prayer items (a) to (h), "Dated", signature block | OK after the fix. The signer's name was printed twice (once under the signature, once in the "By: /s/" line); the template now prints it once. |
 
+## Engines
+
+**typst** (primary): the section above; `samples/OUTPUT-hess-equifax.pdf`, 9 pages, reviewed page by page.
+
+**docx**: `docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt; 24 pt exact double spacing; 0.5 in first-line indent; headings on the same 24 pt grid, level 1 centered bold capitals, level 2 centered bold, level 3 bold italic; 1-inch margins; a centered page-number footer at 11 pt). `docx/complaint.lua` adds what pandoc does not: the court title, the caption table (rules at right and bottom of the party column), the case number and title, numbered paragraphs (1 to 89, a `~ ` paragraph is unnumbered), lettered lists "(a)", the lead-in, and the signature block. Built with `sh tools/render.sh --engine docx <this folder> samples/INPUT-hess-equifax.md`, which writes `samples/OUTPUT-hess-equifax.docx`.
+
+| Item | Result |
+|---|---|
+| The `.docx` opens | Checked as a zip with well-formed XML parts and read back with pandoc (text in order, 89 numbered paragraphs, prayer (a) to (h), signature). Not opened in Word or LibreOffice. |
+| Built to the typst values | Font face and size, double spacing, margins, caption rules, numbering, lettered list, signature block, page number: set in the reference and filter as above. Not compared with the typst pages. |
+| Visual review (Gate 2) | Not done. No page of the docx has been rendered or looked at. |
+| BLOCKED: `docx.pdf` checks | `soffice` could not be installed in the build box (conda-forge has no `libreoffice` package on 2026-10-15), so `samples/OUTPUT-hess-equifax.docx.pdf` was not produced. Gates 0 and 1 and the Gate 2 page review, which docs/DOCX.md measures on the LibreOffice PDF, cannot run. The docx is delivered without them. |
+| Word substitution | The font is EB Garamond (vendored in `fonts/`). Word substitutes silently when the font is not installed on the machine that opens the file. |
+| Caption and signature | Built as tables, so table-border rendering differs between Word and LibreOffice (docs/DOCX.md). Not judged. |
+
 ## Known gaps and open choices
 
 1. **Only one exemplar.** The brief asks for one per doc type; EVAL-LOOP's tier-2 rule asks for two or three filers. Tier 2 is therefore **not** judged against two filers. The second E.D. Ark. complaint is the next pick (see `exemplars/SOURCE.md` for the candidates and the rejected state-court removal attachments).

@@ -67,6 +67,25 @@ Every sample page was rendered at 60 dpi and looked at, after the last template 
 | childers-roche | 3 | Paragraphs 12-14, III. Prayer, WHEREFORE, items (a)-(b). | OK. |
 | childers-roche | 4 | Items (c)-(e), signature block with the date placeholder. | OK. The filed copy has no date line; the placeholder shows that. |
 
+## Engines
+
+| Engine | Folder | Output in `samples/` | Status |
+|---|---|---|---|
+| typst (primary) | `typst/` | `OUTPUT-<id>.pdf` | unchanged |
+| docx | `docx/` | `OUTPUT-<id>.docx` (both samples written); `OUTPUT-<id>.docx.pdf` not written | `.docx` built; `.docx.pdf` **BLOCKED** (below) |
+| latex | `latex/` | none | not built |
+
+**docx build.** `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference (pandoc 3.12.1 from `tools/bootstrap.sh`). `docx/ianb-adversary-complaint.lua` builds the caption and the signature block from the frontmatter (no case text in the filter), numbers the body paragraphs (not those before the first heading, nor those beginning COMES NOW or WHEREFORE), and letters the prayer items. Command: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-<id>.md`. The command writes the `.docx`, then stops because `soffice` is not installed.
+
+**What matches the typst template** (set from the template's values, and the line pitch measured on the typst PDF, not from a filed copy): EB Garamond 13 pt; 24.05 pt exact line pitch for body and prayer items; half-inch first-line indent; 1-inch margins on letter paper; the caption (3.3 in party box with a right rule and a bottom rule; chapter, case number, adversary number and title on the right); numbered paragraphs with a tab to 0.83 in; lettered prayer items with the text at 1 in; the signature block; a centered "Page X of Y" footer at 10 pt (PAGE and NUMPAGES fields).
+
+**What differs or is not checked.** No docx page has been rendered or looked at, so no visual claim is made for the `.docx`. Word and LibreOffice may paginate differently (line breaks, the caption table's row height). The caption rules are table borders, not the typst stroke. The EB Garamond font must be installed on the machine that opens the file; it is not embedded. The footnote and TOC/TOA features are not used (this doc type has none).
+
+**docx BLOCKED.** No `checks.yaml` exists for this court, so there are no check IDs. The blocks are these:
+- `OUTPUT-<id>.docx.pdf` (Gates 0 to 3 on the LibreOffice PDF): BLOCKED. LibreOffice cannot be installed on this box: conda-forge has no `libreoffice` package and `soffice` is absent (`tools/bootstrap.sh` reports it MISSING). Neither sample's `.docx.pdf` was produced, so no gate has run on it.
+- Gate 2 for the docx: 0 pages reviewed (no PDF to render; the typst renders are 5 pages for hanrahan-comstar and 4 for childers-roche).
+- Opening the `.docx` in LibreOffice and Word without a repair prompt: not done (no LibreOffice; no Word).
+
 ## Known gaps and open choices
 
 1. **No font or size rule.** Nothing in the N.D. Iowa or FRBP text names a font or type size (checked 2026-10-14: 2024 Local Rules PDF, Rules 5005-1 and 9004-1 and a full-text search; no face, no point size). So the template keeps EB Garamond, as `docs/FONTS.md` rule 3 requires for a court that names no face. It is set at 13 pt, because EB Garamond at 12 pt sets visibly smaller than the exemplars' Times. Size is a choice, not a rule. Recorded as ACCEPTED.

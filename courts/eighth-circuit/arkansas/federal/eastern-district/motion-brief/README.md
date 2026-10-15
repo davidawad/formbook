@@ -79,6 +79,21 @@ The overlay is a diagnostic, not a score. Its page map pairs pages by word overl
 
 Earlier renders had two defects, both fixed in the template and re-viewed: paragraphs overlapped their predecessor (the paragraph gap was 8 pt, not one line), and the signature block split across pages. Neither appears in the final render.
 
+## Engines
+
+**typst** (primary): the section above; `samples/OUTPUT-campbell-motion-brief.pdf`, 7 pages.
+
+**docx**: `docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt; 24 pt exact double spacing; 0.5 in first-line indent on body paragraphs; headings on the same 24 pt grid: level 1 centered bold capitals, level 2 bold and level 3 bold italic with a 0.5 in hanging indent; table cells single-spaced at 11 pt with a full rule grid; block quotes single-spaced, indented 1 in each side; 1-inch margins; a centered page-number footer at 11 pt). `docx/brief.lua` adds what pandoc does not: the three-line court title, the caption table (rules at right and bottom of the party column), the centered bold title, the roman, lettered and numbered headings (I., A., 1.; a `# ~ ` heading is unnumbered), lists "(1)", and the signature block. Built with `sh tools/render.sh --engine docx <this folder> samples/INPUT-campbell-motion-brief.md`, which writes `samples/OUTPUT-campbell-motion-brief.docx`.
+
+| Item | Result |
+|---|---|
+| The `.docx` opens | Checked as a zip with well-formed XML parts and read back with pandoc (text and heading numbers in order, table, block quote, signature). Not opened in Word or LibreOffice. |
+| Built to the typst values | Font face and size, double spacing, margins, heading levels, table rules, caption rules, page number: set in the reference and filter as above. Not compared with the typst pages. |
+| Visual review (Gate 2) | Not done. No page of the docx has been rendered or looked at. |
+| BLOCKED: `docx.pdf` checks | `soffice` could not be installed in the build box (conda-forge has no `libreoffice` package on 2026-10-15), so `samples/OUTPUT-campbell-motion-brief.docx.pdf` was not produced. Gates 0 and 1 and the Gate 2 page review, which docs/DOCX.md measures on the LibreOffice PDF, cannot run. The docx is delivered without them. |
+| Last paragraph with the signature | The typst template keeps the last paragraph on the signature's page. The docx does not set keep-with-next on that paragraph, so the signature can start a page alone. Not fixed: it is a placement rule, and it can only be judged on the LibreOffice PDF, which is BLOCKED. |
+| Word substitution | The font is EB Garamond (vendored in `fonts/`). Word substitutes silently when the font is not installed on the machine that opens the file. |
+
 ## Known gaps and open choices
 
 1. **Only one exemplar.** The brief asks for one per doc type; EVAL-LOOP's tier-2 rule asks for two or three filers. Tier 2 is therefore **not** judged against two filers. The natural second pick is *Leflar v. HP Inc*, No. 4:22-cv-00690, Doc. 11 (22 pages, HP's memorandum brief), noted in `exemplars/SOURCE.md`.
