@@ -61,4 +61,13 @@ Every page of `samples/OUTPUT-ukw-pdr.pdf` (11 pages) was rendered at 100 dpi an
 - The template does not calculate word limits, verify service recipients, attach the court of appeals opinion, create bookmarks, or check every Rule 68.4 section.
 - The sample is an excerpt, not the complete petition or appendix. No engine other than typst was run, and no automated rule-check suite (`checks.yaml`) exists for this folder.
 
+## Engines
+
+docx (`docx/render.sh`, `docx/reference.docx` built by `docx/build-reference.sh`, filter `docx/pdr.lua`): `samples/OUTPUT-ukw-pdr.docx` and `OUTPUT-ukw-pdr.docx.pdf` were built. The LibreOffice conversion succeeded and the zip and XML checks passed. The template matches the typst form in its settings: EB Garamond 14 pt; exact 32.2 pt double spacing; 0.5 in first-line indent; 1 in margins on letter; 12 pt footnotes; single-spaced headings, cover, signature and address blocks and contents entries; cover unnumbered and body numbered from 1 as a separate Word section. Dot leaders and contents and index page numbers are literal text, as in typst. The exemplar is single-spaced; the template follows TRAP 9.4 as typst does.
+
+Page review (all 12 docx pages against the 11 typst pages, side by side): the sections and order match typst. Differences: the body runs to 11 pages against typst's 10; the last docx page holds only the orphaned "/s/ Sterling Harmon" signature block of the certificate of service, separated from its heading. The table of contents' page numbers are typed text from the sample and do not match the footers in either engine (for example Statement Regarding Oral Argument is listed at 5 and falls on page 3). The font names in the docx PDF were not checked. Word was not available; the file was checked with LibreOffice only.
+
+BLOCKED: docx page count: body 11 pages vs typst 10; last page is an orphaned signature block.
+BLOCKED: contents page numbers do not match the footers (sample text; the same in typst; not fixed here).
+
 [Formbook index](../../../../../../README.md)

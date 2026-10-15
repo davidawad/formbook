@@ -64,4 +64,13 @@ Every page of `samples/OUTPUT-becerra-merits.pdf` (11 pages) was rendered at 100
 - The template does not verify service details, create bookmarks, or check every Rule 38.1 requirement. Confirm case-specific requirements and the applicable length limit before use.
 - The sample is an excerpt, not the complete brief. No engine other than typst was run, and no automated rule-check suite (`checks.yaml`) exists for this folder.
 
+## Engines
+
+docx (`docx/render.sh`, `docx/reference.docx` built by `docx/build-reference.sh`, filter `docx/brief.lua`): `samples/OUTPUT-becerra-merits.docx` and `OUTPUT-becerra-merits.docx.pdf` were built. The LibreOffice conversion succeeded and the zip and XML checks passed. The template matches the typst form in its settings: EB Garamond 14 pt; exact 32.2 pt double spacing; 0.5 in first-line indent; 1 in margins on letter; 12 pt footnotes; single-spaced headings, cover, identity, contents and index; cover unnumbered; front matter in lower-case roman, body from page 1, as separate Word sections. Dot leaders and contents and index page numbers are literal text, as in typst.
+
+Page review (all 12 docx pages against the 11 typst pages, side by side): the front matter, body and certificates are in the same order. Differences: the body runs to 8 pages against typst's 7, because the signature block and the certificate of compliance spill onto body page 8; the body headings and the certificate headings are set smaller than typst's; the front matter's identity and contents layout differs from typst's. The font names in the docx PDF were not checked. Word was not available; the file was checked with LibreOffice only.
+
+BLOCKED: docx page count: body 8 pages vs typst 7 (the certificate of compliance spills onto body page 8).
+BLOCKED: docx headings: body and certificate headings are smaller than typst's (tier 2, not fixed).
+
 [Formbook index](../../../../../../README.md)
