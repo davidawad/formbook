@@ -80,3 +80,29 @@ Defects found during review and fixed in the template: (a) headings came out at 
 ## Review limits
 
 The page review checks the layout of the render. Text fidelity to the exemplar rests on the transcription and the overlay's word pairing; the exemplar's filed page images were not compared pixel by pixel.
+
+## Engines
+
+Two engines are built from the same sample: typst (primary, `typst/`) and docx (`docx/`). This doc type has no latex template yet.
+
+**docx** (`docx/`): `docx/reference.docx` (rebuilt by `sh docx/make-reference.sh`), the Lua filter `docx/msnd-motion-brief.lua`, and `docx/render.sh` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> samples/INPUT-stokes-motion-brief.md`; it writes `samples/OUTPUT-stokes-motion-brief.docx` and `samples/OUTPUT-stokes-motion-brief.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`).
+
+What matches typst, checked on the LibreOffice PDF:
+
+- EB Garamond only (`pdffonts`); text 12 pt; footnotes 11 pt.
+- Body double-spaced at an exact 24 pt; first-line indent 0.5 in; block quotations indented half an inch on both sides and double-spaced; letter paper with 1-inch margins; page number centered at the foot of each page.
+- Court title, caption, title, body, footnotes at the foot of their pages, argument headings (level 2 bold at the left, level 3 bold italic), level 1 headings centered in capitals, and the signature block with the OF COUNSEL block.
+- The signature block (date line, "Respectfully submitted," the signing party and counsel, OF COUNSEL) is kept together with keep-with-next, as typst's signature block is unbreakable.
+- A space before a footnote mark is dropped, as typst does, so a mark never wraps onto a line of its own.
+
+What differs:
+
+- Page count matches (11), but the page breaks do not. The title sits lower under the caption than in typst, and heading keep-with-next moves a few lines; the block quotation falls on a different page. No page break is forced.
+
+docx BLOCKED items:
+
+- No check IDs: this doc type has no `rules.md` or `checks.yaml` (Known gaps, item 8), so `tools/check.sh --engine docx` has nothing to run here. The docx was reviewed by page, not by gate.
+- Font: EB Garamond is vendored as OpenType CFF (`.otf`), which Word cannot embed. A reader without EB Garamond installed sees a substitute (`docs/DOCX.md`, "Fonts"). Not verified in Word.
+- Word: the file was converted by LibreOffice without error but was not opened in Word, so the "no repair prompt" check is not done.
+
+Review of the docx PDF: all 11 pages rendered at 60 dpi and viewed after the last change. Typst pages compared: 1 (caption and first paragraphs) and 11 (signature block).
