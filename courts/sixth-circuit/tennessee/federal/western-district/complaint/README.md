@@ -90,3 +90,11 @@ Each page was rasterized with `pdftoppm -r 60` after the last template change an
 9. **Overlay pairing.** Pages 10 and 13 of the overlay pair with filed pages that share few words (the sample skips parts of the filing); the overlay is a diagnostic, not a score.
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither, and the brief forbids touching `tools/`. Render and overlay were run; the review above is the visual check for this doc type.
 11. **Heading lengths.** Headings are set single-spaced and may wrap; the complaint template does not require one-line headings (unlike the CAND template).
+
+## Engines
+
+DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `tnwd-complaint.lua` sets the caption, numbered allegations, prayer, signature and verifications). Rendered with `sh tools/render.sh --engine docx complaint samples/INPUT-coran-complaint.md` to `samples/OUTPUT-coran-complaint.docx` and `.docx.pdf` (LibreOffice). Reviewed: all 14 pages of the `.docx.pdf` against all 14 pages of the typst output, at 60 dpi.
+
+- Matches typst: Liberation Serif 12 pt throughout (footnotes too); double spacing at 27.6 pt and single at 13.8 pt; one-inch margins; caption and case-number/JURY DEMAND line; court title; title; numbered allegations at ½ inch with the text at the tab; lead-in unnumbered; lettered prayer (a) to (n) at ½ inch; signature block kept together; each verification kept together with its rule; page numbers centred. Page count is 14 in both; the last page (second verification) is the same in both. Body lines sit at the same pitch as typst; from the court title onward every line is about 3.2 pt lower than typst (the court title lines themselves), with no drift down the page.
+- Differs (ACCEPTED, tier 2): the caption's `)` column is a cell rule at the right of the party column; the first court-title line sits about 3 pt lower; LibreOffice breaks some lines differently from typst, so a page holds one or two lines more or fewer on some pages (line counts per page are within three lines of typst); footnote entries are set with a little more space between them.
+- BLOCKED: none. `tools/check.sh --engine docx` cannot run: the court folder has no `checks.yaml` (the gate list), so no check ID was evaluated. See the PR.
