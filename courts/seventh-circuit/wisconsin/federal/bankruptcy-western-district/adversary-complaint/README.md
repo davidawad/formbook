@@ -80,3 +80,13 @@ Reviewed pages: 3 of 3.
 6. **Rule 9011 and 7001(2) text.** Cited from the exemplar and general knowledge, not fetched. Check the verbatim text before a rule-level claim is published.
 7. **Not generated:** cover sheet (Official Form 104), summons, exhibits, certificate of service (none in the exemplar), ECF header.
 8. **Line numbers.** None. The exemplar has none, and bankruptcy pleadings in this court are not on pleading paper in this sample. Not verified against any local practice.
+
+## Engines
+
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/wiwb.lua` lays out the cover, caption, numbered allegations, prayer and signature. Built with `sh tools/render.sh --engine docx <this dir> samples/INPUT-wenzel-complaint.md`, which writes `samples/OUTPUT-wenzel-complaint.docx`.
+
+- **Matches the typst form (by its parameters, not seen on a page):** EB Garamond 12 pt; body lines at 24 pt exact (the typst baseline pitch); first-line indent 0.5 in; allegations numbered 1., 2., ... with the text at 1 in; prayer items (a), (b), ... with a hanging label; level-1 headings bold capitals, centred; caption with a 3.4 in party column, right and bottom rules on it, and "Adversary Case No." at the right; title centred bold; signature block in the right 3.1 in column that does not break across pages; 11 pt centred page number; letter paper, 1 in margins. The court name and "Respectfully submitted," are the template's text, as in the typst form.
+- **Differs or unverified:** the numbers are typed text, not Word list numbering (they do not renumber on edit). The caption rules are table borders, and the "Adversary Case No." and "/s/" blanks are underscores, so their length depends on the font. The title and date metadata are printed once, on the cover and in the signature block (pandoc's own title block is suppressed). Word and LibreOffice may space the caption table differently from typst; not compared.
+- **BLOCKED (docx.pdf and page review):** `soffice` is not installed on this box (no conda package, no root), so `samples/OUTPUT-wenzel-complaint.docx.pdf` was not produced, `tools/check.sh --engine docx` cannot run, and no page was rendered or reviewed (pages reviewed for docx: 0). The render script fails at the soffice step after writing the .docx; the .docx itself is valid (zip and every XML part well-formed).
+- **BLOCKED (not verified):** the .docx has not been opened in Word or LibreOffice (whether it opens without a repair prompt is not confirmed); the font name "EB Garamond" is declared, so the font must be installed for the file to show it; pagination is not measured.
+- **TOC, TOA:** none, because the typst form has none; no field update is needed.

@@ -97,3 +97,12 @@ Not produced by this template (separate filings): the motion itself, the propose
 Earlier builds had two defects, fixed and re-rendered: (a) a space after a footnote marker was lost ("call.’”¹If"), because the inline renderer trims spaces at its edges (fixed: `seg()` restores the space); (b) the same leading defect as the complaint (fixed: `below: body-leading` on every block).
 
 Overlay: `samples/OVERLAY-mcgonigle-motion-brief.txt` pairs our pages 1–13 with filed pages 1–6 and 8–14. Filed page 7 and filed page 15 are not the best match for any page of ours; filed page 15 is the certificate of service, which our page 13 carries. Word overlap 47–87%. The overlay is a diagnostic, not a score.
+
+## Engines
+
+DOCX (`docx/`): pandoc on `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx`) with the filter `docx/innd.lua`. Output: `samples/OUTPUT-mcgonigle-motion-brief.docx`.
+
+- Matches the typst form: EB Garamond 12 pt body, exact 27.6 pt double line pitch, 0.5 in first-line indent, 1 in margins on letter paper, 10 pt single-spaced footnotes, 13.8 pt single lines in the caption and signature, centered page-number footer, headings (level 1 centered caps, level 2 bold, level 3 bold italic), single-spaced block quotes, "1." labelled lists, caption table with a right and bottom rule on the party column, certificate of service after the signature.
+- Differs or unverified: paragraph gap (19.8 pt) is set as space-after; the signature and certificate blocks are tables, so they are not kept on one page with the last paragraph as typst does (no keep-with-next); the list tab stop approximates typst's label gap; table border weights and cell padding are not compared against the typst layout.
+- BLOCKED on this box: the `.docx.pdf` (LibreOffice conversion) was not produced because `soffice` is not installed. No page was rendered or reviewed, so no Gate 0/1 result exists for docx. Checked: the `.docx` zip is intact and every XML part is well-formed. Word and LibreOffice open-without-repair is not verified.
+- No table of contents or table of authorities in this doc type, so no field update is needed.

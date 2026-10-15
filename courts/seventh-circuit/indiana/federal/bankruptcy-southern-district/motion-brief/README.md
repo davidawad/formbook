@@ -81,3 +81,13 @@ Reviewed pages: 8 of 8. Pages 2-5 were reviewed on the render before the signatu
 6. **Rule 9024 and the relief.** The exemplar moves under B.R. 9024 for relief from an order; the template does not check the rule text of Rule 9024 (not fetched).
 7. **Corporate ownership statement (B-7007-2)** does not apply to a non-party bank in a contested matter; not generated.
 8. **Proposed order.** None generated; the exemplar has none.
+
+## Engines
+
+**DOCX** (`docx/`). `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference: EB Garamond 12 pt, exact 27.6 pt (double) line spacing, 0.5 in first-line indent, letter page with 1 in margins, a centered page number in the footer, and single-spaced caption and signature styles. `docx/insb.lua` lays out the cover, the caption table, the date line, the signature block and the certificate of service (on its own page), all from the sample's frontmatter and body. Block quotations are single spaced, indented 1 in left and 0.5 in right; citation lines that start with "Id." or a digit are flush left.
+
+- Matches the typst form, by construction: font and size, double spacing, first-line indent, margins, the page-number footer, the caption, signature and certificate text.
+- Differs or is unverified: the body grid is kept by exact line spacing, not by typst's block rounding, so page breaks may fall differently; the caption rule (0.75 pt, right and bottom) is written as XML and not checked against the typst layout; the signature block is paragraphs indented 3 in, not a table.
+- BLOCKED: docx.pdf checks (Gates 0 and 1 on `samples/OUTPUT-eastern-livestock-motion-set-aside.docx.pdf`): not produced, because `soffice` is not installed on this box. No page was rendered or reviewed (pages reviewed 0).
+- `sh tools/render.sh --engine docx` writes `samples/OUTPUT-eastern-livestock-motion-set-aside.docx`, then fails at the soffice step (expected here). The `.docx` was checked with `unzip -tq` and `xmllint --noout` on every XML part.
+- TOC and TOA: none in this doc type.

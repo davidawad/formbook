@@ -87,3 +87,14 @@ File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf` (it stri
 8. **Italics.** Case names and citations are not italic in the complaint sample (the complaint cites none); the template italicises `*...*` markup.
 9. **Signature block.** No date line (none in the exemplar). `By:` line drawn as a rule, not `/s/`. The block is unbreakable (see page 9 above).
 10. **Page count.** The sample is 9 pages, inside the 8-14 page target the brief set for full-depth samples.
+
+## Engines
+
+DOCX engine (`docx/`): `reference.docx` built by `docx/build-reference.sh`, filter `docx/innb.lua`. Output `samples/OUTPUT-vendramin-henry-adversary-complaint.docx`.
+
+- Matches the typst form: EB Garamond 13 pt body; exact 24 pt line pitch; 0.5 in first-line indent; US Letter with 1 in margins; single-spaced caption, counsel, signature and footnote text; centred page number (11 pt) in the footer; court title, debtor block, parties block with the adversary number, title, lead-in, numbered paragraphs (numbered by the filter, not the sample), lettered sub-items and WHEREFORE unnumbered; signature block in one unbreakable row. Everything case-specific comes from the frontmatter.
+- Differs or unverified: the caption rules and cell paddings are approximations of the typst stroke and inset values and have not been compared on a page. Single spacing is Word's "single", not typst's 0.2 em leading. The "By:" line is underlined spaces, not a drawn line. The signature block does not carry the last paragraph to the next page (same open item as typst, page 9 of the typst render); it is not fixed here. The font must be installed on the machine that opens the file (Word substitutes silently otherwise).
+- BLOCKED: the docx.pdf (LibreOffice render) is not produced: `soffice` is not installed on this box, so `tools/render.sh --engine docx` stops after writing the `.docx` (`tools/render-docx.sh` fails at the soffice step). Gates 0 and 1 for the docx engine (`tools/check.sh --engine docx`) therefore cannot run.
+- BLOCKED: no page review. 0 pages of the docx were rendered or viewed.
+- Not applicable: no table of contents or table of authorities in this form, so no field update is needed.
+- The `.docx` was validated only as a zip with well-formed XML parts. It has not been opened in Word or LibreOffice.

@@ -102,3 +102,11 @@ Reviewed pages: 7 of 7.
 8. **Summons, cover sheet, ECF header** are not generated (see Governing rules).
 9. **Footer.** "Page x of y" is our footer. The exemplar's ECF header is not reproduced.
 10. **Filing-specific fields** (the petition and schedules references, Rule 2016 disclosure) are case text and stay in the sample.
+
+## Engines
+
+- **typst** (primary, `typst/`): the reference for the form.
+- **latex** (`latex/`): see `latex/`; not changed by this section.
+- **docx** (`docx/reference.docx`, `docx/ilsb.lua`, `docx/build-reference.sh`): pandoc on reference.docx, EB Garamond 12 pt, exact 24 pt body line pitch, 0.5 in first-line indent, 1 in margins, letter, "Page x of y" footer (PAGE and NUMPAGES fields). `ilsb.lua` lays out the caption (a table with a right and a bottom rule), court title, title, lead-in, numbered paragraphs (typed by the filter, numbers from 1), prayer items (`A.` with a hanging indent), signature table and attorney block, and the Summary of Exhibits; every case word comes from the frontmatter. Matches the typst form in: font and size, body pitch, margins, indent, paragraph numbering, prayer layout, page-number footer, page order. Differs or is unverified: the single-spacing gaps and the caption and signature table spacing are approximate (Word table and style metrics, not measured against typst); footnote text is 12 pt single-spaced (typst's footnote size was not checked); the numbered paragraph tab stop is the default 0.5 in grid, not the typst 0.3 in gap.
+- docx checks: `samples/OUTPUT-gargula-adversary-complaint.docx` was written and validated (zip test and well-formed XML in every part). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `samples/OUTPUT-gargula-adversary-complaint.docx.pdf` was not produced and the docx Gate 0 to 3 checks (`tools/check.sh --engine docx`) cannot run. No page was rendered or reviewed (pages reviewed 0). The `.docx` has not been opened in Word or LibreOffice.
+- Blocked or unverified docx items: the docx.pdf render and page review (blocked on soffice); cover and caption table borders not verified against the typst layout; the page count and page breaks in Word may differ from typst.

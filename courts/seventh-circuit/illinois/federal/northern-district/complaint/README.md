@@ -82,3 +82,12 @@ Primary sources, fetched 2026-10-14.
 - Page 9: paragraphs 37 to 40. Pass.
 - Page 10: "PRAYER FOR RELIEF" (unnumbered), WHEREFORE paragraph, items (a) to (h) with hanging indents. Pass.
 - Page 11: "DEMAND FOR JURY TRIAL" (unnumbered), its paragraph and the signature block, kept together. Pass.
+
+## Engines
+
+**docx** (`docx/build-reference.sh` builds `docx/reference.docx`; `docx/ilnd.lua` is the filter; `samples/OUTPUT-union-tank-car-complaint.docx` is the output of `tools/render.sh --engine docx`).
+
+- Matches the typst form: EB Garamond 12 pt body; exact 27.6 pt (double) body lines; first-line indent 0.5 in, justified; headings single-spaced with one double line above and below and kept with the next paragraph; front matter and signature lines single (13.8 pt); footnotes 11 pt single; US Letter with 1 in margins; the page number centered in the footer on every page (numbering from 1, as the typst template).
+- Numbered paragraphs 1, 2, ... and prayer items (a), (b), ... are typed text, not Word list numbering.
+- Differs or unverified: the caption box (a table with a rule on its right and bottom) and the signature block (a borderless table) are not checked against the typst layout; the numbers and letters use the default tab stops, not the template's 0.25 in gap; the last body paragraph is kept with the signature block by keep-with-next only.
+- BLOCKED: `OUTPUT-union-tank-car-complaint.docx.pdf` is not produced because `soffice` is not installed on this box, so `tools/check.sh --engine docx` (Gates 0 to 3 on the .docx.pdf) cannot run. No page has been rendered or reviewed for the docx engine (pages reviewed: 0). The check that the .docx opens in Word and LibreOffice without a repair prompt is not done. What was verified: the .docx is a valid zip and every XML part is well formed; the text reads back in the right order (pandoc readback).

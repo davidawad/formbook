@@ -83,3 +83,11 @@ Pages 1 to 7 pair one to one. From page 8 the pairing is one page later: our pag
 - Render 5: the first line of each numbered paragraph sat 17 pt below the previous paragraph instead of 24 pt (paragraph spacing was zero). Paragraph blocks now have `below: body-leading`.
 - Render 6: the paragraph numbers lost their 0.5 in first-line indent. A block-first paragraph did not take `first-line-indent` even with `all: true` (checked in a scratch compile, since removed). The indent and number are now inline text at the start of each paragraph block.
 - Final pass: all 13 pages of the final render viewed; body pitch 24 pt within and between paragraphs (measured on pages 2, 3 and 5); no open defects beyond the Decisions above.
+
+## Engines
+
+DOCX (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default; `ilnb.lua` lays out the cover, caption, numbered paragraphs, prayer and signature). Built with `sh tools/render.sh --engine docx <this dir> samples/INPUT-rmw-complaint.md`.
+
+- **Matches the typst form (in the styles and filter; not checked against a rendered page):** EB Garamond 13 pt; exact 24 pt line pitch; 0.5 in first-line indent; US Letter with 1 in margins; centred 12 pt PAGE number in the footer; level-1 headings centred bold capitals, level-2 bold, level-3 bold italic; numbered body paragraphs; lettered prayer items.
+- **Differs or unverified:** the caption is a two-column table whose party column is ruled on the right and bottom, with widths taken from the typst layout (3.4 in, 0.3 in gutter), but its borders are not verified against the typst layout. The signature block stacks the "Dated" and city lines above the signature column (typst sets them side by side). Footnotes and body text are pandoc's own footnote and paragraph handling. The docx `.docx` was validated (zip and XML well-formed; every `pStyle` defined; one footer relation resolves); it was not opened in Word.
+- **BLOCKED:** `docx.pdf` (`samples/OUTPUT-rmw-complaint.docx.pdf`) is not produced because `soffice` (LibreOffice) is not installed on this box, so `tools/render.sh --engine docx` stops after writing `samples/OUTPUT-rmw-complaint.docx`. Pages reviewed: 0. The docx gates (`tools/check.sh --engine docx`) cannot run. Pagination in Word may differ from LibreOffice.

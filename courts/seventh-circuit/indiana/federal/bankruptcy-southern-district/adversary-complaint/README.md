@@ -78,3 +78,13 @@ Reviewed pages: 6 of 6 (final state). Earlier passes found and fixed: line overl
 7. **Certificates.** None generated (see the rules table: B-9013-2 does not apply to a Rule 7001 complaint).
 8. **Summons and other filings.** Not part of this doc type.
 9. **Paragraph numbering.** The template numbers allegations itself; the sample's filed paragraph numbers are not transcribed, so they do not match the filing's numbers beyond the first paragraphs.
+
+## Engines
+
+**DOCX** (`docx/`). `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference: EB Garamond 12 pt, exact 27.6 pt (double) line spacing, 0.5 in first-line indent, letter page with 1 in margins, a centered page number in the footer, and single-spaced caption and signature styles. `docx/insb.lua` lays out the cover, the two caption tables, the numbered allegations (Rule 10(b)), the lettered items as "a." and "1.", the block quotation and the signature table, all from the sample's frontmatter and body.
+
+- Matches the typst form, by construction: font and size, double spacing, first-line indent, margins, the page-number footer, the caption and signature text.
+- Differs or is unverified: the allegation number is followed by a tab stop at 1 in (typst uses a 0.3 in gap); the body grid is kept by exact line spacing, not by typst's block rounding, so page breaks may fall differently; the caption rule (0.75 pt, right and bottom) and the borderless signature table are written as XML and not checked against the typst layout.
+- BLOCKED: docx.pdf checks (Gates 0 and 1 on `samples/OUTPUT-rabo-bayes-adversary-complaint.docx.pdf`): not produced, because `soffice` is not installed on this box. No page was rendered or reviewed (pages reviewed 0).
+- `sh tools/render.sh --engine docx` writes `samples/OUTPUT-rabo-bayes-adversary-complaint.docx`, then fails at the soffice step (expected here). The `.docx` was checked with `unzip -tq` and `xmllint --noout` on every XML part.
+- TOC and TOA: none in this doc type.

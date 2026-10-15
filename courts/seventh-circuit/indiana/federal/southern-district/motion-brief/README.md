@@ -64,3 +64,13 @@ As for the complaint (`../complaint/README.md`), with these differences: `number
 - Page 6: the Allison paragraph; C.3 heading; the infringement paragraphs. Pass.
 - Page 7: C.4 heading; the common-law paragraphs; CONCLUSION; items (a) and (b). Pass.
 - Page 8: items (c) and (d); date line; signature block. Pass.
+
+## Engines
+
+Typst is the primary engine. The DOCX engine (`docx/`: `build-reference.sh`, `reference.docx`, `insd.lua`) is built and validated; it is not visually checked.
+
+- **Matches the typst form (by construction, not by page review):** EB Garamond 12 pt body; exact 24 pt (double) line pitch with one line between paragraphs; 0.5 in first-line indent on every body paragraph (paragraphs are not numbered); 1 in margins on letter paper; centered bold headings (Heading 1) and left bold headings (Heading 3); single-spaced block quotes indented 0.5 in on both sides; single-spaced caption, court lines, title and signature block (signature indented 3.25 in); centered PAGE footer from page 1.
+- **Differs or unverified:** footnotes are 10 pt single spaced (L.R. 5-1(b)); the typst template has no footnote handling and the sample has none. The lettered conclusion items "(a)" to "(d)" are plain paragraphs, as in typst. The caption table's cell borders are off (none); the caption lines keep their leading spaces as written in the frontmatter. The signature block is kept together with keep-with-next, which approximates `breakable: false`.
+- **Fonts:** EB Garamond is not installed by the build; the machine that opens the file must have it (vendored in `fonts/`).
+- **BLOCKED:** `samples/OUTPUT-uindy-motion-brief.docx.pdf` is not produced (LibreOffice `soffice` is not installed on this box, so `tools/render-docx.sh` stops at the conversion step after writing and validating the `.docx`). No page has been rendered or reviewed for the docx engine (0 pages). The cover and caption table borders are not verified against the typst layout. Gate 0 and 1 for docx are not run.
+- **Build:** `sh docx/build-reference.sh docx/reference.docx`, then `sh tools/render.sh --engine docx <this-dir> samples/INPUT-uindy-motion-brief.md`.

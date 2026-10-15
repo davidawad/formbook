@@ -66,3 +66,13 @@ Not produced by this template: the civil cover sheet, the Rule 7.1 disclosure st
 - Page 5: paragraphs 36 to 43; "THE INSURANCE CONTRACT" heading; the policy quote is single spaced and indented; paragraph numbers continue after the quote. Pass.
 - Page 6: paragraphs 44 to 49; "REQUEST FOR RELIEF"; the unnumbered WHEREFORE paragraph; prayer items 1 to 4. Pass.
 - Page 7: the date line and signature block only (see gap 2). Pass with the note.
+
+## Engines
+
+Typst is the primary engine. The DOCX engine (`docx/`: `build-reference.sh`, `reference.docx`, `insd.lua`) is built and validated; it is not visually checked.
+
+- **Matches the typst form (by construction, not by page review):** EB Garamond 12 pt body; exact 24 pt (double) line pitch with one line between paragraphs; 0.5 in first-line indent; 1 in margins on letter paper; numbered paragraphs 1, 2, ... after the first heading (lead-in and WHEREFORE paragraphs unnumbered); centered bold headings (Heading 1) and a left bold heading (Heading 3); single-spaced block quotes indented 0.5 in on both sides; single-spaced caption, court lines, title and signature block (signature indented 3.25 in); centered PAGE footer from page 1.
+- **Differs or unverified:** footnotes are 10 pt single spaced (L.R. 5-1(b)); the typst template has no footnote handling and the sample has none. Numbered paragraphs use a tab stop at 0.88 in, not the typst 0.25 in gap after the number. The prayer list uses pandoc's list indents, not the typst 0.5 in / 0.4 in. The caption table's cell borders are off (none); the caption lines keep their leading spaces as written in the frontmatter. The signature block is kept together with keep-with-next, which approximates `breakable: false`.
+- **Fonts:** EB Garamond is not installed by the build; the machine that opens the file must have it (vendored in `fonts/`).
+- **BLOCKED:** `samples/OUTPUT-lightning-rod-complaint.docx.pdf` is not produced (LibreOffice `soffice` is not installed on this box, so `tools/render-docx.sh` stops at the conversion step after writing and validating the `.docx`). No page has been rendered or reviewed for the docx engine (0 pages). The cover and caption table borders are not verified against the typst layout. Gate 0 and 1 for docx are not run.
+- **Build:** `sh docx/build-reference.sh docx/reference.docx`, then `sh tools/render.sh --engine docx <this-dir> samples/INPUT-lightning-rod-complaint.md`.
