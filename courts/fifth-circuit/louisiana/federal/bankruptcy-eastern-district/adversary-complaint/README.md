@@ -92,3 +92,13 @@ What the overlay shows, as a diagnostic (not a score):
 8. **Paragraph numbering** is automatic and does not match the filed numbers (the sample numbers from 1).
 9. **Sample is a portion.** The sample transcribes the caption, lead-in, ¶¶ 1-20 (the first sections), Counts I, II and X, and the prayer and signature; it omits ¶¶ 21-25 of the background/H&D section and Counts III-IX, which are not needed to test the form. The rendered length (8 pages) is at the low end of the 8-14 target because the exemplar's complaint is 17 pages with a long factual section.
 10. **Check scripts not run.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
+
+## Engines
+
+docx: `docx/build-reference.sh` writes `docx/reference.docx`; `docx/laeb-complaint.lua` builds the caption, court title, title, signature block, numbered allegations and lettered lists. Rendered with `tools/render.sh --engine docx`.
+
+- Matches the typst form: EB Garamond 12 pt (vendored, embedded), 24 pt exact double spacing with no extra space between paragraphs (measured against the typst line grid), 1 in margins on letter paper, caption with a rule at the party column's right edge, centered bold headings, numbered allegations (number at 0.5 in, text from a tab stop at 0.8 in), lettered lists (a), (b) with a hanging indent, block quotations single spaced and indented 0.5 in on both sides, single-spaced signature block at 3 in, footnotes 10 pt, footer "Page X of Y" at 11 pt (PAGE and NUMPAGES fields).
+- Differs: 8 pages in both. Pages 1 to 3 break a few lines differently (LibreOffice moves the paragraph that carries footnote 1 to page 2; typst keeps two of its lines on page 1), so later pages start at different lines. LibreOffice places exact-spaced lines about 11 pt lower than typst on each page. The numbers and letters are literal text written by the filter, not Word list numbering, so they do not renumber if a paragraph is moved by hand.
+- Checked in LibreOffice only: the .docx converted without error. Word was not available and was not checked.
+
+BLOCKED: none

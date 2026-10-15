@@ -86,3 +86,13 @@ What the overlay shows, as a diagnostic (not a score): the sample's pages 1-2 pa
 8. **Sample is abridged.** The sample transcribes the caption, lead-in, background (A-C), the argument's standard and first subsections, the eight-factor section's opening and the conclusion, the signature and the certificate, from the exemplar's text. It omits the rest of the argument (the exemplar runs to page 27); the omitted text is not needed to test the form. The sample's 8 pages are at the low end of the 8-14 target for an exemplar of this length.
 9. **Signature block on the last page alone** (page 8 of the sample): the conclusion ends on page 7 and the block moves whole to page 8, as in the exemplar's last page. Not a defect; recorded so the next pass knows.
 10. **Check scripts not run.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
+
+## Engines
+
+docx: `docx/build-reference.sh` writes `docx/reference.docx`; `docx/laeb-motion-brief.lua` builds the caption, court title, title, signature block, certificate of service, the heading numbers (I., A., 1.) and the (1), (2) lists. Rendered with `tools/render.sh --engine docx`.
+
+- Matches the typst form: EB Garamond 12 pt (vendored, embedded), 24 pt exact double spacing with no extra space between paragraphs, first-line indent 0.5 in, 1 in margins on letter paper, caption with a rule at the party column's right edge, level-1 headings in bold capitals with a hanging number, level-2 bold, level-3 bold italic (hanging indents as in typst), block quotations single spaced and indented 0.5 in on both sides, signature block at 3 in with "And" between counsel blocks, certificate of service with its own heading and an /s/ line, footnotes 10 pt, footer "Page X of Y" at 11 pt (PAGE and NUMPAGES fields).
+- Differs: 8 pages in both, but the breaks differ. In the .docx the heading "III. CONCLUSION" starts page 8 (typst starts page 8 with the signature block). The cause is the same as in the complaint: LibreOffice places exact-spaced lines about 11 pt lower than typst. A level-2 heading ("B. Accounts Receivable Sold by a Debtor Prepetition Are Not Estate Property") runs on one line in the .docx and wraps in typst. The numbers are literal text written by the filter.
+- Checked in LibreOffice only: the .docx converted without error. Word was not available and was not checked.
+
+BLOCKED: none
