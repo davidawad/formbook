@@ -23,7 +23,7 @@ sh tools/render.sh courts/fourth-circuit/court-of-appeals/reply-brief samples/IN
 sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/reply-brief de-luca-reply-brief
 ```
 
-Typst is run by `tools/render.sh` with `--ignore-system-fonts`, the vendored `fonts/` and `vendor/typst-packages/`; any warning is a failure. The PDF's embedded fonts are EB Garamond only (`pdffonts`).
+Typst is run by `tools/render.sh` with `--ignore-system-fonts`, the vendored `fonts/` and `vendor/typst-packages/`; any warning is a failure. The PDF's embedded fonts are Liberation Serif only (`pdffonts`).
 
 ## Governing rules
 
@@ -40,7 +40,7 @@ The Fourth Circuit's Form 6 (certificate of compliance) page was not retrievable
 |---|---|---|---|
 | CA4-FORM-001 | 8½ × 11 paper; text double-spaced; quotations over two lines may be indented and single-spaced; headings and footnotes single-spaced | FRAP 32(a)(4) | `body-leading`, `single-leading`, `style-heading`, `footnote.entry` |
 | CA4-FORM-002 | Margins at least one inch on all four sides; page numbers may sit in the margin, no text there | FRAP 32(a)(4) | `page-margin = 1in` |
-| CA4-FORM-003 | Typeface: proportionally spaced with serifs (sans-serif allowed in headings and captions) | FRAP 32(a)(5)(A) | `font-family` (EB Garamond, vendored) |
+| CA4-FORM-003 | Typeface: proportionally spaced with serifs (sans-serif allowed in headings and captions) | FRAP 32(a)(5)(A) | `font-family` (Liberation Serif, vendored; the substitute for Times New Roman, see Typeface) |
 | CA4-FORM-004 | Plain roman type; italics or bold for emphasis; case names italicized | FRAP 32(a)(6) | the body is set as written; `*...*` for case names |
 | CA4-FORM-005 | Proportional face 14-point or larger, everywhere (cover, text, footnotes, TOC/TOA, certificates) | FRAP 32(a)(5)(A) | `type-size = 14pt`; the footnote entry is forced to 14 pt (typst's default is 0.85 em) |
 | CA4-LEN-001 | Reply brief: no more than half the principal-brief type-volume, i.e. 6,500 words; a reply brief that complies with the type-volume limit is not also held to the 15-page limit of FRAP 32(a)(7)(A) | FRAP 32(a)(7)(B)(ii) | `reply-word-limit = 6500`; the build panics above it |
@@ -61,6 +61,14 @@ The Fourth Circuit's Form 6 (certificate of compliance) page was not retrievable
 | CA4-ADD-001 | Addendum of statutes, rules or regulations at the end of the brief; may be supplied under separate cover | FRAP 28(f); Local Rule 28(b) | `# Addendum` section, Add-1, Add-2 ... |
 
 Not required by these rules, so not generated: a statement of related cases (the Ninth Circuit's Form 17 is not a Fourth Circuit requirement in the rules above); a disclosure statement (FRAP 26.1 applies to the first brief, not a reply).
+
+## Typeface
+
+| Face the court names | Vendored substitute (Typst name) | Fit | Used by |
+|---|---|---|---|
+| Times New Roman (court's notice of preferred typefaces, Dec. 9, 2024, https://www.ca4.uscourts.gov/news-announcements/2024/12/09/preferred-typefaces-for-briefs; the filed exemplar's certificate states 14-point Times New Roman) | Liberation Serif (`Liberation Serif`) | Metric-compatible with Times New Roman (`docs/FONTS.md`) | typst, LaTeX, docx |
+
+FRAP 32(a)(5)(A) names no face. The notice is not a rule, but it prefers Times New Roman, Century Schoolbook or Georgia and "discourages the use of Garamond", so the template follows it. The earlier EB Garamond setting is replaced. The typst page count stayed at 10.
 
 ## Markdown contract
 
@@ -89,28 +97,28 @@ Body: `# Heading` is a section (bold, capitals, centered). `## ` is a point head
 `samples/OVERLAY-de-luca-reply-brief.txt` pairs each of our pages with the filed page that shares the most words:
 
 ```
-ours p.1  filed p.1   word-overlap 39.2%   (cover)
-ours p.2  filed p.3   35.0%                 (TOC)
-ours p.3  filed p.6   6.0%                  (TOA: the exemplar's TOA is on filed pp. 4-6; ours is a generated list of five cases)
-ours p.4  filed p.7   89.8%                 (Introduction)
-ours p.5  filed p.8   79.8%
-ours p.6  filed p.9   62.7%
-ours p.7  filed p.10  48.4%
-ours p.8  filed p.12  43.6%
-ours p.9  filed p.12  32.5%                 (Argument I.A, footnote 1)
-ours p.10 filed p.36  62.5%                 (certificate of compliance)
+ours p.1  filed p.1   39.2%   (cover)
+ours p.2  filed p.3   35.0%   (TOC)
+ours p.3  filed p.4   22.8%   (TOA: the exemplar's TOA is on filed pp. 4-6; ours is a generated list of five cases)
+ours p.4  filed p.7   71.1%   (Introduction)
+ours p.5  filed p.8   47.1%
+ours p.6  filed p.10  60.8%
+ours p.7  filed p.11  81.4%
+ours p.8  filed p.12  82.9%   (Argument I.A, footnote 1)
+ours p.9  filed p.34  46.1%   (Conclusion and signature)
+ours p.10 filed p.36  62.5%   (certificate of compliance)
 ```
 
-The overlap percentages are word-set Jaccard figures, not a score. Differences are expected where the sample is an excerpt (the filed Argument continues on pages 7-33, which the sample does not transcribe) and where the template generates parts the filed brief lays out differently (TOA, cover counsel block).
+The map was regenerated after the font change (the earlier map had different pairings for pp. 3, 6, 7 and 9). The overlap percentages are word-set Jaccard figures, not a score. Differences are expected where the sample is an excerpt (the filed Argument continues on pages 7-33, which the sample does not transcribe) and where the template generates parts the filed brief lays out differently (TOA, cover counsel block).
 
 ## Pages reviewed (Gate 2 style, rendered with `pdftoppm -r 60` and looked at)
 
-All 10 pages were looked at after the first render; pages 3, 8 and 9 were looked at again after the citation links were added. Recorded findings:
+All 10 pages were looked at after the first render, and again after the font change (Liberation Serif); pages 3, 8 and 9 were also looked at after the citation links were added. Recorded findings:
 
 | Page | Finding | Status |
 |---|---|---|
 | 1 cover | Fits one page; case number, court name, caption, proceeding with case number and judge, title, counsel block all present. Counsel is lead counsel only. | ACCEPTED (see Known gaps) |
-| 2 TOC | Renders; `I.` and `A.` entries indented; page numbers right. A title that ends in a period gets a doubled stop before the leader ("Mailing. ."). | OPEN (minor; see Known gaps) |
+| 2 TOC | Renders; `I.` and `A.` entries indented; page numbers right (after the font change, the folio of the wrapped `I.` entry no longer drops onto a new line). A title that ends in a period gets a doubled stop before the leader ("Mailing. ."). | OPEN (minor; see Known gaps) |
 | 3 TOA | Lists the five authorities cited in the sample, with pages. First version was empty because the sample had no `toa:` links; fixed. | OK |
 | 4 body p.1 | Introduction, double-spaced, 14 pt, first-line indent. | OK |
 | 5 body p.2 | Continues the Introduction; Argument heading. | OK |
@@ -138,13 +146,13 @@ Nothing is `OPEN` that blocks the build. The docx and latex engines were not bui
 
 - The filed exemplar is a text layer PDF with a diagonal watermark-like letter stack ("DEMOCRACY") on each page. It is part of the source scan, not the brief; the overlay's text pairing is unaffected.
 - Used as a visual and structural reference for: cover order, TOC/TOA layout, Argument heading style, signature block, certificate of compliance.
-- The exemplar's certificate of compliance states 14-point Times New Roman; the template uses EB Garamond (vendored), which the rules permit as a proportional serif.
+- The exemplar's certificate of compliance states 14-point Times New Roman; the template uses Liberation Serif (vendored; metric-compatible with Times New Roman, per `docs/FONTS.md`).
 
 ## Engines
 
 Three renderings of the same markdown (`samples/INPUT-de-luca-reply-brief.md`). The typst template is the reference.
 
-**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-de-luca-reply-brief.latex.pdf`, 11 pages, every page rendered and compared with the typst output. Matches: EB Garamond only, double spacing at the typst pitch, 1-inch margins, the cover with the case number and judge line and counsel's telephone number, contents (addendum headings are kept out of the main contents) and authorities, the Form 6 style certificate of compliance (1,334 words, the same as typst's count) with its signature and date line, and the certificate of service on its own page. The addendum's `Add-N` folios are built but the sample has no addendum. Differs: the cover is tighter (fixed gap); body spacing differs slightly, so page breaks and folios differ from typst. Signature: typst's reply `signature-line` writes `s/` with no leading slash; this engine writes `/s/` as the other briefs do. Confirm which is wanted. Not checked by `check.sh` (no `checks.yaml` in this court).
+**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-de-luca-reply-brief.latex.pdf`, 11 pages, every page rendered at 50 dpi and viewed after the font change. Layout item the font change exposed, not fixed here: the "CONCLUSION" heading sits at the foot of page 6 with its text on page 7. Matches: Liberation Serif only, double spacing at the typst pitch, 1-inch margins, the cover with the case number and judge line and counsel's telephone number, contents (addendum headings are kept out of the main contents) and authorities, the Form 6 style certificate of compliance (1,334 words, the same as typst's count) with its signature and date line, and the certificate of service on its own page. The addendum's `Add-N` folios are built but the sample has no addendum. Differs: the cover is tighter (fixed gap); body spacing differs slightly, so page breaks and folios differ from typst. Signature: typst's reply `signature-line` writes `s/` with no leading slash; this engine writes `/s/` as the other briefs do. Confirm which is wanted. Not checked by `check.sh` (no `checks.yaml` in this court).
 
 **docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `samples/OUTPUT-de-luca-reply-brief.docx` is written; the `.docx.pdf` is not (see BLOCKED). Styles and sections as in the opening brief. Contents and authorities are Word fields. Certificate word count 1,334.
 

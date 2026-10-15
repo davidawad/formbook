@@ -336,7 +336,7 @@ local function certificate_compliance(m, words)
       .. ' words, excluding the parts of the brief exempted by Rule 32(f).\\par\\vskip 1em\\noindent'
       .. '2.\\hspace{0.5em}This brief complies with the typeface requirements of Federal Rule of Appellate Procedure 32(a)(5) '
       .. 'and the type style requirements of Rule 32(a)(6) because this brief has been prepared in a proportionally spaced '
-      .. 'typeface, EB Garamond, in fourteen-point type.\\par}' .. signature_only(m)
+      .. 'typeface, Liberation Serif, in fourteen-point type.\\par}' .. signature_only(m)
   else
     body = '{\\singlespacing\\noindent I, ' .. ltx(m.signature.signer) .. ', counsel for ' .. ltx(COUNSEL_FOR or 'the party')
       .. ' and a member of the bar of this Court, certify that the attached reply brief is proportionally spaced, has a typeface of 14 points, and contains '

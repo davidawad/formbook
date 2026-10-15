@@ -364,7 +364,7 @@ local function certificate_compliance(m, words)
       { spacing = spacing(0, 0, 400) })
     out[#out + 1] = body_para(run('2.  This brief complies with the typeface requirements of Federal Rule of Appellate Procedure '
       .. '32(a)(5) and the type style requirements of Rule 32(a)(6) because this brief has been prepared in a proportionally '
-      .. 'spaced typeface, EB Garamond, in fourteen-point type.'), { spacing = spacing(240, 0, 400) })
+      .. 'spaced typeface, Liberation Serif, in fourteen-point type.'), { spacing = spacing(240, 0, 400) })
     out[#out + 1] = signature_only(m)
   else
     out[#out + 1] = body_para(run('I, ' .. plain(m.signature.signer) .. ', counsel for ' .. plain(COUNSEL_FOR or 'the party')
