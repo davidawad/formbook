@@ -36,3 +36,16 @@ Sample: `samples/INPUT-ochlockonee.md` (transcription of the filed complaint, 10
 - **Pages reviewed.** All 9 pages of the final render were viewed as PNG (montages at 70-80 dpi): pages 1, 5, 6 and 9, then pages 2, 3, 4, 7 and 8, after the layout fixes (heading stickiness, caption column).
 
 [Court index](../README.md)
+
+## Engines
+
+Word (`docx/`) is built next to the typst template: `docx/reference.docx` (made by `docx/make-reference.sh`), `docx/flnb-adversary-complaint.lua` (caption, title, signature block), `docx/render.sh` (pandoc with the reference and the filter, lettered sub-items kept as paragraphs). Build: `sh tools/render.sh --engine docx adversary-complaint samples/INPUT-ochlockonee.md` writes `samples/OUTPUT-ochlockonee.docx` and `OUTPUT-ochlockonee.docx.pdf` (LibreOffice 26.8). Checked on the LibreOffice PDF; Word was not available.
+
+- **Matches typst:** EB Garamond 14 pt; 32.2 pt line pitch for body text (the same pitch as the typst render); single 15.4 pt lines in the caption, counsel and signature blocks; 1-inch margins on letter paper; centred page number on every page; caption, title and signature block in the same order and at the same positions (within about 3 pt on page 1); signature block at 45% of the text width, kept with the last paragraph of the body.
+- **Differs from typst (docx is the one that follows the template's own intent; typst/ is not changed here):**
+  - Headings: the template centres and bolds levels 2 and 3 (`show heading`), but the typst render sets them flush left, larger. The docx centres them.
+  - First-line indent: typst does not indent the first paragraph after a heading (its `first-line-indent` skips it); the docx indents every body paragraph.
+  - Pagination: the docx runs 10 pages, the typst render 9 (line breaking and fonts differ between LibreOffice and typst; a page break is not forced).
+  - Signature block: typst keeps the spaces in `By:    /s/`; pandoc collapses them to one.
+- **docx BLOCKED items:** none. No TOC or TOA is in this template. Word itself was not run; the `.docx` is a valid zip of well-formed XML and LibreOffice converts it without a repair prompt.
+- **Pages reviewed (docx.pdf, 10 pages):** every page rendered at 60 dpi and viewed beside the typst page (pages 1 to 10).
