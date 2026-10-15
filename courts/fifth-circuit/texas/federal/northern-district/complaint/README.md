@@ -72,3 +72,34 @@ Each page was rendered at 60 dpi and viewed after the last template change.
 - Page 10: signature block (`Dated: October 8, 2026`; `Respectfully submitted,`; firm; `/s/`; name; bar number; address; telephone; fax; email; role). Pass (see gap 7).
 
 Earlier review rounds found and fixed: court-title and caption lines overlapping (single-spaced stacks had zero gap); numbered paragraphs running together (paragraphs were inline, not blocks); a heading's second line colliding with the next paragraph (missing space below). The overlap bug is recorded as a template rule: a block whose content is a paragraph needs `below: body-leading`, or the next block starts one natural line height (about 0.65em) below it.
+
+## Engines
+
+| Engine | Folder | Output in `samples/` | State |
+|---|---|---|---|
+| typst (primary) | `typst/` | `OUTPUT-lilly-complaint.pdf` | the reference (see the review above) |
+| docx | `docx/` | `OUTPUT-lilly-complaint.docx`, `OUTPUT-lilly-complaint.docx.pdf` | `.docx` built and valid (zip and XML checks pass); `.docx.pdf` BLOCKED |
+
+The docx is built by pandoc (3.6.4) from `docx/reference.docx` and `docx/txnd-complaint.lua`. `reference.docx` is made by `sh docx/make-reference.sh` from `docx/styles.xml`. The cover, the caption, the title, the numbered paragraphs and the signature block are built by the filter from the frontmatter. Command: `sh tools/render.sh --engine docx <court>/complaint samples/INPUT-lilly-complaint.md`.
+
+What follows the typst template, by construction (the styles and the filter carry the typst parameters; no docx page has been seen, so none of this is a visual claim):
+
+- EB Garamond 12 pt; body double-spaced at an exact 24 pt pitch; 0.5 in first-line indent; letter paper with 1 in margins.
+- Caption: one row per party name with a section mark (§) beside it; `CIVIL ACTION NO.` on the middle row; `JURY TRIAL DEMANDED` below it. Court title and title of the paper centered, bold.
+- Body paragraphs numbered `1.`, `2.`, ... (the jury demand is numbered, as in typst); headings level 1 centered bold, level 2 bold with a hanging indent, level 3 centered bold.
+- Signature block at the right: `Dated:` on the left; firm, `/s/`, name, bar number, address and role on the right.
+- Page number centered at the foot of every page, the cover included (as in typst).
+
+What differs or is not checked:
+
+- Prayer items use Word's list indent, not the typst enum indent (0.5 in number, 0.4 in body).
+- Lines in a stack (caption rows, signature lines) are spaced as typst spaces them (6 pt between lines), but the line breaks are Word's, not typst's.
+- No footnotes: the sample has none.
+- No docx page has been rendered or reviewed; Gate 2 for docx is open.
+
+docx BLOCKED items (`check.sh --engine docx` runs its gates on the `.docx.pdf`):
+
+- `docx.pdf` (LibreOffice render, Gates 0 to 3): BLOCKED. LibreOffice 25.2 could not run on the build box: the Debian packages were unpacked into a user directory and `soffice.bin` throws a UNO `RuntimeException` during bootstrap. The cause was not found, so no `.docx.pdf` exists and no gate has run on it.
+- Gate 2 for docx (every page rendered and reviewed): BLOCKED on the same cause. No docx page was rendered or reviewed (the docx page count is not known).
+- Opens in Word and LibreOffice without a repair prompt: not checked (no Word here, LibreOffice does not run).
+- Fonts: EB Garamond must be installed on the machine that opens the file, or Word substitutes a face silently (`docs/DOCX.md`).
