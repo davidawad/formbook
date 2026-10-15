@@ -62,6 +62,29 @@ Frontmatter:
 
 Body: `## SECTION` (roman), `### Subsection` (letter), blank-line-separated paragraphs. Do not type numbers or letters for sections and subsections. Case names: `*Name*` (italic, as the exemplar's italic case names). Footnotes: `text[^key]` with a definition line (rendered at 11 pt; the sample has none).
 
+## Engines
+
+Three engines, one markdown sample (`samples/INPUT-zuhlke-motion-brief.md`). The typst template is the reference for the layout.
+
+| Engine | Files | Status |
+|---|---|---|
+| typst (primary) | `typst/`, `samples/OUTPUT-zuhlke-motion-brief.pdf` | rendered (see above) |
+| latex | none in this folder | not built |
+| docx | `docx/` (`reference.docx`, `nebraskab-motion-brief.lua`, `build-reference.sh`, `render.sh`), `samples/OUTPUT-zuhlke-motion-brief.docx` | `.docx` written; `.docx.pdf` BLOCKED (below) |
+
+**docx, what matches the typst template** (the same values, set as Word styles in `reference.docx`): US Letter, 1 in margins; EB Garamond 13 pt; body double spaced (26 pt exact) with a 0.5 in first-line indent; caption, signature and certificate single spaced (14.3 pt exact); footnotes 11 pt; page number centered in the footer, 11 pt. Caption: the court name; the *In re* block with a rule under it; the parties with "v."; intervenors after them, with no "v."; the case lines and the adversary line on the right, then the title in bold capitals, in a borderless three-column table (3.4 in, 0.25 in gutter, 2.85 in). `##` headings are centered bold, numbered I., II., ... by the filter; `###` headings are bold with a hanging A., B., ... that restart under each section. The signature block is kept on one page. The certificate of service starts on its own page, with the CM/ECF wording of the typst template.
+
+**docx, what differs**:
+- Section numerals and subsection letters are typed text (a tab after the letter), not Word list numbering. They read the same; they do not renumber when a heading is added in Word.
+- The caption rule is a paragraph border under the *In re* block, not a drawn line.
+- `render.sh` widens the caption and signature tables to the 6.5 in text width after pandoc (pandoc writes a 5.5 in grid). Word may still paginate differently from the LibreOffice PDF.
+- The font is named as EB Garamond. A reader without it installed sees a substitute.
+
+**docx BLOCKED**:
+- Every `.docx.pdf` check (Gates 0 to 3, measured on the LibreOffice PDF from `soffice --headless --convert-to pdf`): BLOCKED. LibreOffice is not on conda-forge and could not be installed on the build box (no root). No page of the `.docx` has been rendered or viewed, so no visual claim is made for the docx.
+- The `.docx` is a valid zip (`unzip -t`) and its `word/document.xml` is well-formed (`xmllint`, in `render.sh`). Other parts are not schema-checked, and a Word or LibreOffice open without a repair prompt is not checked.
+- `tools/check.sh` needs a court root (`court.json`, `rules.md`, `checks.yaml`); this doc-type folder has none, so the repo gates do not run on it.
+
 ## Decisions
 
 - **Exemplar is a brief in opposition, not the original motion.** The brief type covers the memorandum that accompanies a motion; LR 7007-1(B) requires such a brief to be filed alongside a motion raising a substantial issue of law. The template takes any body, so the same template serves a motion's supporting brief or a brief in opposition; the caption title carries the difference.

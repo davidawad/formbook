@@ -61,6 +61,29 @@ Frontmatter (all keys read by `caption()` and `signature-block()`):
 
 Body: `# SECTION` (level 1), `## Subheading` (level 2), blank-line-separated paragraphs (numbered), `- item` lists (lettered), and `[^key]` footnotes with their definition. Do not type numbers: the template numbers the allegations. Do not type a heading level deeper than 2. Case names: `*Name*` (italic). The sample uses no italics (the exemplar's text layer has no italic markup).
 
+## Engines
+
+Three engines, one markdown sample (`samples/INPUT-interbake-adversary-complaint.md`). The typst template is the reference for the layout.
+
+| Engine | Files | Status |
+|---|---|---|
+| typst (primary) | `typst/`, `samples/OUTPUT-interbake-adversary-complaint.pdf` | rendered (see above) |
+| latex | none in this folder | not built |
+| docx | `docx/` (`reference.docx`, `nebraskab-adversary-complaint.lua`, `build-reference.sh`, `render.sh`), `samples/OUTPUT-interbake-adversary-complaint.docx` | `.docx` written; `.docx.pdf` BLOCKED (below) |
+
+**docx, what matches the typst template** (the same values, set as Word styles in `reference.docx`): US Letter, 1 in margins; EB Garamond 13 pt; body double spaced (26 pt exact) with a 0.5 in first-line indent; caption, signature and footnotes single spaced (14.3 pt exact); footnotes 11 pt; page number centered in the footer, 11 pt. Caption: the court name, the *In re* block with a rule under it, the parties with "v.", and the chapter, case and adversary lines on the right, in a borderless three-column table (3.4 in, 0.25 in gutter, 2.85 in). Level-1 headings centered bold capitals; level-2 headings centered bold. Allegations numbered 1, 2, ... from the first heading to the prayer; the intro and the prayer unnumbered. Prayer items lettered (a), (b), ... with a hanging indent. The signature block (Dated; Respectfully submitted; each signer) is kept on one page. The FRBP 7008(a) consent check and the § no-break spacing are the same as in the typst template.
+
+**docx, what differs**:
+- Paragraph numbers and prayer letters are typed text (a tab after them), not Word list numbering. They read the same; they do not renumber when a paragraph is added in Word.
+- The caption rule is a paragraph border under the debtor block, not a drawn line.
+- `render.sh` widens the caption and signature tables to the 6.5 in text width after pandoc (pandoc writes a 5.5 in grid). Word may still paginate differently from the LibreOffice PDF.
+- The font is named as EB Garamond. A reader without it installed sees a substitute.
+
+**docx BLOCKED**:
+- Every `.docx.pdf` check (Gates 0 to 3, measured on the LibreOffice PDF from `soffice --headless --convert-to pdf`): BLOCKED. LibreOffice is not on conda-forge and could not be installed on the build box (no root). No page of the `.docx` has been rendered or viewed, so no visual claim is made for the docx.
+- The `.docx` is a valid zip (`unzip -t`) and its `word/document.xml` is well-formed (`xmllint`, in `render.sh`). Other parts are not schema-checked, and a Word or LibreOffice open without a repair prompt is not checked.
+- `tools/check.sh` needs a court root (`court.json`, `rules.md`, `checks.yaml`); this doc-type folder has none, so the repo gates do not run on it.
+
 ## Decisions
 
 - **Consent sentence (FRBP 7008(a)).** The exemplar does not state whether the plaintiff consents to final orders, and the rule requires it. The sample adds one sentence in the jurisdiction section, right after the core-proceeding paragraph: "Plaintiff [does / does not] consent to the entry of final orders or judgment by the Court." The bracket is an unfilled choice for the filer, not a legal position; the template refuses to build a complaint that lacks the statement. This is the only sentence in the sample that is not in the exemplar, and it adds one numbered paragraph, so paragraphs 6 to 39 of the sample are one number higher than the exemplar's (5 to 38).
