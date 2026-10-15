@@ -64,3 +64,11 @@ Not produced by this template (separate filings that may accompany a complaint):
 ## Overlay
 
 `samples/OVERLAY-hood-complaint.pdf`: red is our render, blue is the filed exemplar, black is where both agree. Page pairing (`OVERLAY-hood-complaint.txt`): our pages 1 to 7 pair with filed pages 1, 2, 4, 5, 6, 7, 8. The word overlap per page is 47% to 87%. The pairing is by words, so a page offset is expected where our pagination differs by a line. The overlay is a diagnostic, not a score.
+
+## Engines
+
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 12 pt, exact 24 pt double lines, 13.8 pt single lines, 1 in margins, page number from page 2 through `titlePg`); `docx/tneb-adversary-complaint.lua` builds the cover, caption, numbered allegations, lettered prayer and signature. Rendered with `sh tools/render.sh --engine docx <dir> samples/INPUT-hood-complaint.md` to `samples/OUTPUT-hood-complaint.docx` and `.docx.pdf` (LibreOffice 26.8.1, 7 pages, pdffonts shows EB Garamond only). Every page of both the `.docx.pdf` and the typst output was rasterized at 60 dpi and viewed (7 of 7, 2026-10-15).
+
+- Matches the typst output: letter page, 1 in margins, EB Garamond 12 pt, double-spaced body with a 0.5 in first-line indent, the cover (court, district, caption, title) in the same lines and single-spaced caption, bold centered headings, numbered allegations, lettered prayer, the signature block at 3.25 in kept on one page, the page number centered from page 2 with page 1 unnumbered.
+- Differs (tier 2, not chased): line breaks fall one line apart on some pages (page 3 carries one more line in the docx, so the page 4 break moves); LibreOffice places exact-spacing leading above the text, so the text starts about 11 pt lower on each page (the margin is unchanged); the number-to-text gap is a tab to 1 in, where typst uses 0.3 in after the number; pandoc's smart extension prints curly quotes and dashes where typst prints the sample's straight characters; the cover spacers (3 pt and 22 pt) are tuned to the typst title position, not a rule value.
+- BLOCKED: none. The form has no pleading line numbers, TOC or TOA, so no DOCX.md limit applies. `tools/check.sh --engine docx` cannot pass until the court has `rules.md`, `checks.yaml` and a review file (not part of this unit).
