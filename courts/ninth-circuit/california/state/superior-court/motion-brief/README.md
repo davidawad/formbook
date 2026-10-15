@@ -13,7 +13,7 @@ Verified 2026-10-13 against the Judicial Council rule pages. Quotations are from
 | CRC 2.100-2.119 | Format of papers (scope) | whole document | https://www.courts.ca.gov/cms/rules/index/two/rule2_100 |
 | CRC 2.103 | Papers 8½ × 11 inches; opaque white or unbleached, 20 lb (not e-filed) | page size (`us-letter`) | https://www.courts.ca.gov/cms/rules/index/two/rule2_103 |
 | CRC 2.104 | Font size not smaller than 12 points | `type-size = 12pt` | https://www.courts.ca.gov/cms/rules/index/two/rule2_104 |
-| CRC 2.105 | Font style essentially equivalent to Courier, Times New Roman, or Arial | open, see Known gaps | https://www.courts.ca.gov/cms/rules/index/two/rule2_105 |
+| CRC 2.105 | Font style essentially equivalent to Courier, Times New Roman, or Arial | Times New Roman named; substitute `Liberation Serif` (vendored, metric-compatible; `docs/FONTS.md`). Typeface row: face required → vendored substitute → metric-compatible. See Known gaps 1. | https://www.courts.ca.gov/cms/rules/index/two/rule2_105 |
 | CRC 2.107 | Left margin at least 1 inch; right margin at least ½ inch | `left-margin = 1.5in`, `right-margin = 0.5in` | https://www.courts.ca.gov/cms/rules/index/two/rule2_107 |
 | CRC 2.108 | Lines one-and-one-half or double spaced and numbered consecutively; numbers at the left margin, separated from the text by a space of at least ⅕ inch or a single or double vertical line; at least 3 numbers per vertical inch | double spacing (24 pt pitch), 28 numbers, double rule | https://www.courts.ca.gov/cms/rules/index/two/rule2_108 |
 | CRC 2.109 | Pages numbered consecutively at the bottom, Arabic numerals only, from the first page | footer page number; no roman numerals for the tables | https://www.courts.ca.gov/cms/rules/index/two/rule2_109 |
@@ -76,7 +76,7 @@ sh tools/render.sh courts/ninth-circuit/california/state/superior-court/motion-b
 sh tools/overlay.sh courts/ninth-circuit/california/state/superior-court/motion-brief aclu-fresno-motion-brief
 ```
 
-The render fails on any typst warning. The font is vendored (`fonts/eb-garamond`), and `--ignore-system-fonts` is used. `pdffonts` on the output lists `EBGaramond-Regular`, `EBGaramond-Bold` and `EBGaramond-Italic`, all embedded.
+The render fails on any typst warning. The font is the vendored `Liberation Serif` (`fonts/liberation-serif`), the substitute for Times New Roman, and `--ignore-system-fonts` is used. `pdffonts` on the output lists `LiberationSerif`, `LiberationSerif-Bold` and `LiberationSerif-Italic`, all embedded. The page count is 9 with both EB Garamond and Liberation Serif (checked before and after the switch).
 
 ## Samples and exemplar
 
@@ -85,22 +85,22 @@ The render fails on any typst warning. The font is vendored (`fonts/eb-garamond`
 - `samples/OVERLAY-aclu-fresno-motion-brief.pdf` and `-overlay.txt`: the red/blue overlay against `exemplars/FILED-EXAMPLE-aclu-v-city-of-fresno-24CECG01635-motion-brief.pdf`. Page map from `overlay.sh`:
 
   ```
-  ours p.1  filed p.1   word-overlap 78.5%
-  ours p.2  filed p.2   word-overlap 81.6%
+  ours p.1  filed p.1   word-overlap 80.2%
+  ours p.2  filed p.2   word-overlap 83.2%
   ours p.3  filed p.3   word-overlap 45.5%
   ours p.4  filed p.4   word-overlap 39.3%
-  ours p.5  filed p.7   word-overlap 88.1%
-  ours p.6  filed p.8   word-overlap 45.2%
-  ours p.7  filed p.11  word-overlap 47.1%
-  ours p.8  filed p.12  word-overlap 42.3%
+  ours p.5  filed p.7   word-overlap 90.4%
+  ours p.6  filed p.8   word-overlap 45.7%
+  ours p.7  filed p.11  word-overlap 47.5%
+  ours p.8  filed p.12  word-overlap 46.9%
   ours p.9  filed p.21  word-overlap 61.7%
   ```
 
-  The map is a text-similarity pairing, not a score. The overlay is a diagnostic (tier 3).
+  The map is a text-similarity pairing, not a score. The overlay is a diagnostic (tier 3). The exemplar PDF is not stored in the repo (`exemplars/` holds `SOURCE.md` only); this overlay was run against a copy fetched from the URL in `exemplars/SOURCE.md` on 2026-10-15, kept outside the repo.
 
 - Exemplar and sources: `exemplars/SOURCE.md`. The table of authorities of the exemplar (pages 4-6) lists the authorities used here; the sample's registry matches the exemplar's citations for the authorities it cites.
 
-## Gate 2: page review (sample `aclu-fresno-motion-brief`, 9 pages, `pdftoppm -r 60`)
+## Gate 2: page review (sample `aclu-fresno-motion-brief`, 9 pages, `pdftoppm -r 70`, Liberation Serif)
 
 Each page of the current PDF was rendered and viewed. Compared with the exemplar's corresponding pages: p.1-2 caption and notice, p.3-4 contents and authorities, p.7-12 memorandum, p.21 signature.
 
@@ -120,8 +120,8 @@ Page 9 is the only open row. It is a layout issue (keep the last paragraph with 
 
 ## Known gaps
 
-1. **Font style (CRC 2.105): open.** The only vendored face is EB Garamond (`fonts/eb-garamond`), a Garamond rather than Times New Roman. CRC 2.105 requires a style "essentially equivalent to Courier, Times New Roman, or Arial", so this needs a decision from David: vendor a Times-metric face (for example Tinos, SIL OFL, metric-compatible with Times New Roman) into `fonts/`, or accept EB Garamond. The change is one line in `typst/calsuperct-motion-brief.typ` (`font-family`).
-2. **Page 9 signature orphan** (Gate 2, OPEN). The same limitation is open in the complaint.
+1. **Font style (CRC 2.105): Times New Roman, substituted.** CRC 2.105 allows Courier, Times New Roman, or Arial. The template uses Times New Roman's vendored substitute, `Liberation Serif` (`fonts/liberation-serif`, SIL OFL 1.1, metric-compatible; `docs/FONTS.md`), set in `typst/calsuperct-motion-brief.typ` (`font-family`). Times New Roman was chosen because it is a proportional serif that keeps the template's serif look; the rule allows Courier or Arial equally, and switching to either is a one-line change.
+2. **Page 9 signature orphan** (Gate 2, OPEN). Still open under Liberation Serif: the conclusion fills page 8 and the signature block is alone on page 9. The complaint's equivalent orphan is resolved by the font change.
 3. **Exemplars: one.** The brief asks for one exemplar per doc type. A second filer's motion (the EFF fee motion, Sacramento Superior Court, 34-2022-80004019) is recorded in `exemplars/SOURCE.md` but not stored. Tier-2 choices are therefore judged against one filer.
 4. **Sample is an excerpt.** The memorandum sections not transcribed are not exercised by the template: other authorities, longer footnotes, more headings at each level, and the page-limit guard near 15 pages.
 5. **Second, structurally different sample**: not made.
