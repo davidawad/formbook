@@ -111,6 +111,15 @@ Reviewed after the last change, every page of each PDF, at 60 dpi, next to the e
 7. **No check tooling run** (see File names above).
 8. **Paragraph numbers.** The template numbers from 1 after the lead-in. The Chase exemplar's numbers match (1 to 16). The Richards exemplar's numbering is not transcribed (it is a different sample).
 
+## Engines
+
+Typst (`typst/`) is the primary engine and the reference for the court's form. This section covers the docx engine: `docx/reference.docx` (built by `docx/make-reference.sh`) and `docx/sdb-adversary-complaint.lua`, following `docs/DOCX.md`. Run: `sh tools/render.sh --engine docx adversary-complaint samples/INPUT-chase-abrams.md` (and the same for `INPUT-fictional-joint-debtors.md`).
+
+- **Written:** `samples/OUTPUT-chase-abrams.docx` and `samples/OUTPUT-fictional-joint-debtors.docx` (pandoc, from the same frontmatter and body as the typst renders). Each is a valid zip of well-formed XML parts; the render then stops at the LibreOffice conversion (see BLOCKED).
+- **Matches the typst form (by construction, not yet by look):** US Letter, 1 inch margins; EB Garamond 12 pt; line pitch 13.8 pt exact (the typst leading, measured on the typst render with `pdftohtml -xml`); 0.5 inch first-line indent on numbered allegations; the caption as a borderless three-column table (party, `)` column, numbers) with the debtor block, `Debtor.`/`Debtors.`, `Adv. No.` on the first plaintiff row, `v.`, and the party designations right-aligned; the title; the lead-in paragraph without indent; paragraph numbers from 1, not numbered after the PRAYER heading; the signature at 3.25 inch; a 10 pt centered page number (PAGE field) in the footer.
+- **Differs or unverified:** the same list as the motion's (caption table borders and row heights, Word's spacing between paragraphs, pandoc list indentation) has not been looked at on a page image. The complaint has no keep-with-next on the last paragraph, as in the typst template. A `##` heading is a heading in docx (not numbered); typst would number it. No sample uses `##`.
+- **BLOCKED (docx.pdf checks, all of `check.sh --engine docx` Gates 0 to 3):** the LibreOffice PDF of each `.docx` cannot be made on this box (`soffice` not installed; conda-forge has no LibreOffice; the Debian LibreOffice packages fail to start: LibreOffice's internal `libi18nlangtag` and `libjvm*` libraries are not in them). So no `.docx.pdf` exists, no page was rendered or reviewed in the docx engine, and no `.check-docx.txt` stamp is written. Owner: whoever has a box with LibreOffice; rerun `sh tools/render.sh --engine docx` there, then review every page of both.
+
 ## Loop log
 
 - Iteration 1: first render showed the caption rows overlapping (no row gap), the signature block squeezed to one word per line (the indent was subtracted twice), and the prayer's "WHEREFORE" numbered 17 (the detector looked for PRAYER at the start of the heading; the heading starts with "III."). Fixed: `row-gutter`, signature width, `contains("PRAYER")`. Title nbsp for § 523.
