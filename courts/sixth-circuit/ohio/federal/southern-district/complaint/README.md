@@ -67,3 +67,13 @@ Pages reviewed in the final layout: 1 (caption, parties), 2 (numbered parties an
 - **Paragraph numbers in the transcription are the template's, not the filing's.** Filed paragraph numbers are noted in brackets only where a note replaces text.
 - **The exemplar PDF is 12 MB.** It is committed because the brief asks for it; it may be large for the repository.
 - **CourtListener** blocks HTML docket pages from this box (CloudFront 403) and rate-limits the anonymous search API (5 per minute); the RECAP storage paths came from the search API's `filepath_local` field.
+
+## Engines
+
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default (EB Garamond 12 pt, exact 24 pt double spacing, one-inch margins, centred PAGE footer, heading and paragraph styles). `ohsd.lua` sets the court title, the caption table, the numbered allegations, the prayer, the signature block and the certificate (none here). Render: `samples/OUTPUT-doe-complaint.docx` and `.docx.pdf` (LibreOffice 26.8.1, EB Garamond embedded), 8 pages. Reviewed: all 8 pages of the `.docx.pdf` and all 8 pages of the typst render, at 60 dpi, in the final state.
+
+- Matches typst: letter paper, margins, EB Garamond 12 pt, 24 pt body pitch, the page count (8), the court title and caption (page 1 caption lines within 0.1 pt of the typst baselines), the PARTIES heading and first allegation (within about 1 pt), numbered allegations with a 0.5 in first-line indent and text at 1 in, count headings, the prayer, the signature block, the centred page number.
+- Differs (tier 2, not chased): line breaks differ on most pages (LibreOffice shaping: for example allegation 2 breaks after "sexual-"). Page breaks differ: the docx ends page 2 after allegation 14, and the prayer for relief moves to page 8 whole (kept with its items), where typst keeps it on page 7. Pages 3 and 5 end short because of widow control. The caption spacing constants differ between the complaint and motion-brief `ohsd.lua` (the left column is taller here, the right column in the motion); both are measured against the typst output.
+- Word: not available here. The file converts in LibreOffice with no error; Word may paginate slightly differently (docs/DOCX.md).
+- BLOCKED: none. No table of contents, table of authorities, line numbering or bookmarks are required for this document.
+- Gates: `sh tools/check.sh courts/sixth-circuit/ohio/federal/southern-district --engine docx` exits 2 before any gate runs: `checks.yaml` (and `rules.md`) do not exist yet for this court, so Gates 0 to 3 are not run for docx. Not changed here.
