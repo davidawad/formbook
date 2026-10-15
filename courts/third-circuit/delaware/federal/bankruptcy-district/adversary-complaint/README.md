@@ -2,7 +2,11 @@
 
 Court: United States Bankruptcy Court for the District of Delaware (`deb`). Path: `courts/third-circuit/delaware/federal/bankruptcy-district/adversary-complaint/`.
 
-**Status: BLOCKED on the typeface** (same as `../motion-brief/README.md`). The template renders, the overlay runs, and every page was reviewed. The sample is a partial transcription of the filed complaint, not the whole of it. See "Known gaps".
+**Typeface: EB Garamond (no face named for pleadings).** The template renders with zero typst warnings and all 10 pages were re-reviewed. The overlay **did not run**: the exemplar PDF is not in `exemplars/` on this box (only `SOURCE.md`), so the `OVERLAY-` files are from an earlier render. The sample is a partial transcription of the filed complaint, not the whole of it. See "Known gaps".
+
+## Typeface
+
+Kept at EB Garamond, the no-face default in `docs/FONTS.md`. Checked: LR 7007-2 (Del. Bankr. L.R., saved copy of the 2025 local rules) opens with "This Local Rule applies to motions filed in adversary proceedings", so its Courier New / Times New Roman requirement in (a)(ii) does not reach a complaint. Fed. R. Bankr. P. 7010 and Fed. R. Civ. P. 10 name no face. Re-check if the court issues a pleading-specific typeface rule.
 
 ## Exemplar
 
@@ -50,7 +54,7 @@ Our pages 1–8 pair with the filed pages 2–12 and page 9 (the prayer) with fi
 
 ## Pages reviewed
 
-All 10 rendered pages were rasterised at 60 dpi and viewed. Pages 1, 4 and 9 were viewed in the final render. Pages 6–8 and 10 were viewed in the render just before the WHEREFORE indent fix. Pages 2, 3 and 5 were viewed in an earlier 7-page render, before the parties section was added; their text is unchanged since. The WHEREFORE indent is the only change on the pages viewed later. Fixes made along the way:
+Re-reviewed on the current render (10 pages, EB Garamond, unchanged by the typeface pass): all 10 pages rasterised at 60 dpi and viewed. Earlier review: all 10 pages were rasterised at 60 dpi and viewed. Pages 1, 4 and 9 were viewed in the final render. Pages 6–8 and 10 were viewed in the render just before the WHEREFORE indent fix. Pages 2, 3 and 5 were viewed in an earlier 7-page render, before the parties section was added; their text is unchanged since. The WHEREFORE indent is the only change on the pages viewed later. Fixes made along the way:
 - Paragraph numbering: the prayer's WHEREFORE and its lettered items were numbered as paragraphs. The template now leaves them unnumbered, as the exemplar does.
 - Lettered prayer items were rendered as bullets from a markdown list. They are now plain `a)`–`d)` lines, indented.
 - WHEREFORE paragraph flush with the margin. Fixed with the same first-line indent as the body.
@@ -60,7 +64,8 @@ Layout as reviewed: caption and preamble (1–2), preliminary statement (2–6),
 
 ## Known gaps
 
-- **BLOCKED: typeface.** Same decision as the motion brief: Times New Roman or Courier New is not vendored. Pleadings have no typeface rule of their own in the sample set; the one that names a face (LR 7007-2(a)(ii)) covers briefs. A complaint in this court is likely to be held to the same face, but I have not verified that for pleadings. EB Garamond is a stand-in.
+- **Typeface: none named for pleadings.** See "Typeface". The motion brief uses Liberation Serif for LR 7007-2(a)(ii); that rule is limited to motions, so this complaint stays on EB Garamond.
+- **Overlay not run (exemplar missing).** The overlay section below is from an earlier render. Restore the exemplar PDF to `exemplars/`, then re-run `sh tools/overlay.sh`.
 - **Partial transcription.** The sample covers the caption, the preamble, the preliminary statement (paragraphs 1–13 of the transcription), the first part of section II, section III, the count I lead-in, the prayer, and the signature. Section II's remaining defendants, section IV (factual allegations), and count I's subsections are not transcribed. The omissions are marked in the sample with italic-bracket notes. The complaint runs 80 pages; the sample is 10.
 - **Paragraph numbers do not match the filed complaint.** The filed complaint cross-refers to paragraph 68 (in section II). The sample numbers its paragraphs from 1 in order, so its numbers are not the filed ones. Filing a real complaint from this template would number from the real text.
 - **Redactions.** The public version has redaction gaps (in paragraphs 8 and 9 of the transcription). They are shown as `[REDACTED]`, which is a transcription mark, not a template feature.

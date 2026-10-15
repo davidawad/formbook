@@ -8,8 +8,9 @@ Folder: `courts/tenth-circuit/utah/federal/district/motion-brief/`. Self-contain
 | exemplar | yes: `exemplars/FILED-EXAMPLE-miller-stormont-2-25-cv-00857-motion-brief.pdf` (22 pages, text layer; `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-miller-motion-to-dismiss.md` (abridged transcription of the exemplar, see Known gaps) |
 | render | ok: `samples/OUTPUT-miller-motion-to-dismiss.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-miller-motion-to-dismiss.pdf` and `samples/OVERLAY-miller-motion-to-dismiss.txt` (`tools/overlay.sh`) |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none** (DUCivR 10-1(3) names no typeface; checked against the December 2023 text, 2026-10-15). Substitute: none needed. Font: **EB Garamond** kept (`docs/FONTS.md`: a court naming no face keeps EB Garamond). Not metric-compatible with any Times; not applicable here. |
+| overlay | ok: `samples/OVERLAY-miller-motion-to-dismiss.pdf` and `samples/OVERLAY-miller-motion-to-dismiss.txt` (`tools/overlay.sh`, exemplar passed as the third argument: see Render and overlay) |
+| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-15 in the fonts pass, no change to the template) |
 
 File names. The brief names outputs `<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh`, `tools/overlay.sh` and the court-folder convention (`CLAUDE.md`) name them `INPUT-<id>.md` → `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`. The tools were used as they are; `<id>` is `miller-motion-to-dismiss`.
 
@@ -56,8 +57,10 @@ Not produced by this template: a proposed order (DUCivR 7-1, separate filing), a
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
 sh tools/render.sh courts/tenth-circuit/utah/federal/district/motion-brief samples/INPUT-miller-motion-to-dismiss.md
-sh tools/overlay.sh courts/tenth-circuit/utah/federal/district/motion-brief miller-motion-to-dismiss
+sh tools/overlay.sh courts/tenth-circuit/utah/federal/district/motion-brief miller-motion-to-dismiss /path/to/exemplar.pdf
 ```
+
+The exemplar PDF is not in the checkout (only `exemplars/SOURCE.md` is). On 2026-10-15 the overlay ran against the RECAP copy at the SOURCE.md URL, fetched to a temp directory and passed as the third argument; its page count (22) matches the SOURCE.md. Without the argument, `overlay.sh` looks for `exemplars/*.pdf`.
 
 `OVERLAY-miller-motion-to-dismiss.pdf` is the red/blue test: red = our render, blue = the filed exemplar, black = both. `OVERLAY-miller-motion-to-dismiss.txt` is the page map.
 
@@ -87,7 +90,7 @@ Pages reviewed: 12 of 12.
 1. **Abridged memorandum.** Transcribed: the motion, the introduction and footnote 1, all 14 facts, the first two paragraphs of the legal standard, the whole of I.A and I.B, the start of II.A and II.B, the first two paragraphs of III, III.A's first paragraph and the conclusion. Omitted: the rest of the legal standard (the Iqbal paragraphs and judicial notice), the full II.A paragraph (statutory quotation and *Hoai*), the rest of II.B (*Dauwe*), the rest of III.A (*Whipple*, the notice-of-claim content), and the exemplar's TOA entries those parts cite. The render is 12 pages against the exemplar's 22, within the 8–14 target.
 2. **Page and word limit not tested.** DUCivR 7-1(a)(4)(A)(i) caps a 12(b) motion at 25 pages or 7,750 words. The template does not count pages or words; the sample is 12 pages with only part of the memorandum, so the limit is not exercised. A full brief needs a count before filing.
 3. **Page numbering.** DUCivR 10-1(5) says pages are numbered "consecutively". The template numbers every page 1, 2, 3 … from the caption page, so the TOC and TOA page references are the page numbers printed on the pages. The exemplar uses roman numerals for its front matter (i–vi) and restarts at 1 for the memorandum. Both are readings of the rule; consecutive numbering is the literal one. A judge's standing order could say otherwise.
-4. **Typeface.** As for the complaint: DUCivR 10-1(3) names no typeface; EB Garamond is the only font vendored; 13 pt is used so the visible size is close to Times 12 pt. The exemplar is Times New Roman.
+4. **Typeface.** As for the complaint: DUCivR 10-1(3) names no typeface (checked 2026-10-15), so the template keeps EB Garamond at 13 pt, close to Times 12 pt. The filed exemplar embeds TimesNewRoman, Charter, Cambria and Arial: a filer's choice the rule leaves open. Switching to Liberation Serif (the metric-compatible Times substitute in `fonts/`) would be a tier-2 decision for David.
 5. **TOA completeness.** The TOA is generated from the links in the sample. The exemplar's printed TOA omits *Leverington*, which its text cites; the sample's TOA includes it, because the links make it complete. Authorities cited only in the omitted parts (for example *Dennis v. Sparks*, *Hoai*, *Whipple*) are not in the sample's TOA.
 6. **Judge.** The caption shows "Judge Daphne A. Oberg", as the exemplar does; no magistrate judge line (the exemplar has none).
 7. **Exemplar wording.** The sample keeps the exemplar's wording, including its "barred by the by Younger abstention". One punctuation change: the *Bailey* cite is set as 846 P.2d 1278, 1280 (the filed text has no comma between the page numbers).

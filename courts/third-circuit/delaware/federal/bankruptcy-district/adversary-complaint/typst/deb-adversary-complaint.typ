@@ -10,9 +10,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see ../README.md)
 // ---------------------------------------------------------------------------
-// BLOCKED (see ../README.md, "Known gaps"): no Delaware bankruptcy rule in the sample set names a
-// typeface for pleadings; the local rule that does (LR 7007-2(a)(ii)) covers briefs and names Courier
-// New or Times New Roman. EB Garamond is a stand-in until David vendors a Times-metric font.
+// No typeface is named for pleadings: LR 7007-2 applies only to motions in adversary proceedings, and
+// Fed. R. Bankr. P. 7010 / Fed. R. Civ. P. 10 name none. Kept at EB Garamond (docs/FONTS.md "No face
+// named"). See ../README.md, "Typeface".
 #let font-family = "EB Garamond"
 #let type-size = 12pt
 #let body-leading = 1.35em               // double spacing (measured with EB Garamond, see cand template)

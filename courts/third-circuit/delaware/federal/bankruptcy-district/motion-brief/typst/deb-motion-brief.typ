@@ -9,12 +9,11 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see ../README.md)
 // ---------------------------------------------------------------------------
-// BLOCKED (see ../README.md, "Known gaps"): LR 7007-2(a)(ii) requires Courier New or Times New Roman.
-// Neither is vendored in fonts/, and tools/render.sh loads only fonts/. EB Garamond is a stand-in
-// until David vendors a Times-metric font; the rule text is not met by this value.
-#let font-family = "EB Garamond"
+// LR 7007-2(a)(ii) requires Courier New or Times New Roman. Times New Roman is set through its
+// vendored substitute, Liberation Serif (metric-compatible; docs/FONTS.md).
+#let font-family = "Liberation Serif"
 #let type-size = 12pt                    // LR 7007-2(a)(ii): at least 12-point typeface
-#let body-leading = 1.35em               // LR 7007-2(a)(ii): double-spaced (measured with EB Garamond, see cand template)
+#let body-leading = 1.35em               // LR 7007-2(a)(ii): double-spaced (set in em; was measured with EB Garamond)
 #let single-leading = 0.5em              // single spacing for captions, cover, block quotes, counsel and signature
 #let page-w = 8.5in                      // FRBP 9004 / LR 7007-2: letter-size paper
 #let page-h = 11in

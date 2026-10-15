@@ -18,7 +18,7 @@ sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief samples/INP
 sh tools/overlay.sh courts/third-circuit/court-of-appeals/reply-brief afp-reply-brief
 ```
 
-Typst is run with the vendored EB Garamond only (`--ignore-system-fonts`); any typst warning fails the render.
+Typeface: no face is named by the rule (FRAP 32(a)(5)-(6); L.A.R. 32.1(c), 2011 text, checked 2026-10-15), so the template keeps EB Garamond, the "no face named" substitute in `docs/FONTS.md`. Typst is run with the vendored EB Garamond only (`--ignore-system-fonts`); any typst warning fails the render.
 
 ## Governing rules
 

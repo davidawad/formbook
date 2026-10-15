@@ -4,7 +4,7 @@
 - Doc type: `complaint`. An original complaint with numbered paragraphs, a caption and the attorney information block; no separate certificate (see Governing rules).
 - Exemplar: `exemplars/FILED-EXAMPLE-on-q-financial-1-26-cv-00277-complaint.pdf` (*On Q Financial, LLC v. Jorns & Associates LLC and Justin Ward Jorns*, No. 1:26-cv-00277, filed 2026-09-28, 17 pages; provenance in `exemplars/SOURCE.md`). One filer (plaintiff's counsel). This is one exemplar, not the tier-2 pair of 2 or 3 from different filers; see Known gaps.
 - Sample: `samples/INPUT-onq-complaint.md` (transcription of the complaint from the caption through the prayer for relief, with the signature block in the frontmatter).
-- Status: template and sample present; render, overlay and page review redone 2026-10-14 (below). `court.json` untouched.
+- Status: template and sample present; render, overlay and page review redone 2026-10-14 (below). Fonts pass 2026-10-15: the rule names no face, so the template keeps EB Garamond (see Typeface); render, overlay and all 10 pages re-checked. `court.json` untouched.
 
 ## Files
 
@@ -26,6 +26,14 @@ Primary sources, read 2026-10-14:
 - Fed. R. Civ. P. 5(d)(1)(B): "No certificate of service is required when a paper is served by filing it with the court's electronic-filing system" (<https://www.law.cornell.edu/rules/frcp/rule_5>, fetched 2026-10-14). The complaint template has no certificate of service, so nothing is lost by this rule.
 
 Where the rules leave the layout open (the caption's column widths, the position of the signature block), the template follows the filed exemplar; the one place it does not yet (the party-designation indent) is an open item below.
+
+## Typeface
+
+| Face required by the rule | Rule (primary source) | Vendored substitute | Fit |
+|---|---|---|---|
+| None named. LR 10.1(a) requires only "not less than 12 point font" | D. Wyo. LR 10.1(a), January 2022 edition (see Governing rules) | None needed: EB Garamond is the default (`docs/FONTS.md`, "No face named") | n/a |
+
+The rule names no face, so the template keeps EB Garamond at 13 pt. The filed exemplar uses Times-family type (see the tier-2 finding on p.1). That is a filer's convention, not a rule requirement, so no Liberation Serif substitute is applied here.
 
 ## Overlay
 
@@ -56,7 +64,7 @@ Every page of `OUTPUT-onq-complaint.pdf` was rendered at 60 dpi and viewed (10 o
 Tier-2 findings (OPEN or ACCEPTED):
 
 - p.1 OPEN: the party designations ("Plaintiff,", "Defendants.") sit flush left under the party names. The brief template (`motion-brief/typst/wyd-motion-brief.typ`) indents them one inch, as the Elizondo exemplar does; this complaint template has not been changed to match yet.
-- p.1 ACCEPTED: the typeface is EB Garamond where the filed complaint uses Times-family type (per `exemplars/SOURCE.md`). EB Garamond is the only serif family vendored; LR 10.1(a) requires not less than 12 point, and the template uses 13 pt.
+- p.1 ACCEPTED: the typeface is EB Garamond where the filed complaint uses Times-family type (per `exemplars/SOURCE.md`). The rule names no face (LR 10.1(a): "not less than 12 point font"), so `docs/FONTS.md` gives EB Garamond. A Times-family filer convention would be Liberation Serif, but the choice is not a rule requirement; the template uses 13 pt. Decision for David: whether tier 2 should follow the exemplar's Times family.
 - p.1 ACCEPTED: the attorney block sits above the court name, in two columns. LR 10.1(b) requires the block; its position is the template's.
 - p.10 ACCEPTED: the sample stops at the prayer for relief, so the signature block is built from the frontmatter and placed after the prayer. The filed complaint's signature page was not compared line by line in this pass.
 

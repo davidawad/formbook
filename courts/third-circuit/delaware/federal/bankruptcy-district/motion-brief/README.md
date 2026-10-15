@@ -2,7 +2,7 @@
 
 Court: United States Bankruptcy Court for the District of Delaware (`deb`). Path: `courts/third-circuit/delaware/federal/bankruptcy-district/motion-brief/`.
 
-**Status: BLOCKED on the typeface.** The template renders, the overlay runs, and every page was reviewed, but the rule-mandated font (Times New Roman or Courier New, LR 7007-2(a)(ii)) is not vendored. The template uses EB Garamond as a stand-in and says so in `typst/deb-motion-brief.typ`. See "Known gaps" below. The exemplar is a filed motion memorandum from this court, so the template is built for the adversary-proceeding motion route, not the main-case notice-of-motion route.
+**Status: typeface set (Times New Roman, via the vendored substitute Liberation Serif).** The render succeeds with zero typst warnings and every page (12) was reviewed. The overlay **did not run**: the exemplar PDF is not in `exemplars/` on this box (only `SOURCE.md`), so `OVERLAY-bumble-bee-motion-brief.pdf` was not regenerated and the `.txt` shown below is from the earlier EB Garamond render. See "Known gaps". The exemplar is a filed motion memorandum from this court, so the template is built for the adversary-proceeding motion route, not the main-case notice-of-motion route.
 
 ## Exemplar
 
@@ -15,7 +15,7 @@ Court: United States Bankruptcy Court for the District of Delaware (`deb`). Path
 |---|---|---|
 | Del. Bankr. L.R. 7007-1 | Local Rules (effective Feb. 1, 2025): https://www.deb.uscourts.gov/sites/deb/files/Local_Rules_2025%20%28Clean%29.pdf (fetched and read from the saved copy) | A motion in an adversary proceeding gets no notice of motion; the opening brief is filed with the motion. The template renders a brief, not a notice. |
 | Del. Bankr. L.R. 7007-2(a)(i) | same | Cover shows the caption, the title, the date of filing, the party designation, and counsel (name, address, phone, email, Delaware bar number). The template renders all of these from frontmatter. **Email is not on the exemplar's cover; see gaps.** |
-| Del. Bankr. L.R. 7007-2(a)(ii) | same | Double-spaced; Courier New or Times New Roman; at least 12-point; side margins at least 1 inch. Double spacing and 12 pt and 1 inch margins are implemented. **The typeface is not (BLOCKED).** |
+| Del. Bankr. L.R. 7007-2(a)(ii) | same | Double-spaced; Courier New or Times New Roman; at least 12-point; side margins at least 1 inch. Double spacing, 12 pt, 1 inch margins and the typeface are implemented: Times New Roman is set as its metric-compatible substitute, Liberation Serif (`docs/FONTS.md`). Courier New is not used. |
 | Del. Bankr. L.R. 7007-2(a)(iv) | same | Opening brief at most 30 pages, excluding tables. The sample is 11 pages; the template does not count pages. |
 | Del. Bankr. L.R. 7007-2(b)(i) | same | Contents in order: TOC; TOA; nature and stage; summary of argument; statement of facts; argument; short conclusion. The TOC is generated (see the TOC note below). The order is set by the sample, not enforced. |
 | Del. Bankr. L.R. 9004-1(a) | same | Caption names the debtor, the case number, the judge's initials, and the adversary number. The caption block renders these from frontmatter. |
@@ -29,13 +29,15 @@ The local rules PDF was fetched through the fetch tool, which saved it locally; 
 
 - `typst/main.typ` (entry point), `typst/deb-motion-brief.typ` (template). Parameters at the top of the template, each with its rule.
 - `samples/INPUT-bumble-bee-motion-brief.md`: frontmatter (caption, title, date, counsel, signature blocks) plus the body in markdown. Footnotes use markdown `[^n]`; headings: `#` centred section, `##` argument heading, `###` table of authorities (centred, kept out of the TOC).
-- `samples/OUTPUT-bumble-bee-motion-brief.pdf`: render (11 pages). `samples/OVERLAY-bumble-bee-motion-brief.pdf` and `.txt`: overlay.
+- `samples/OUTPUT-bumble-bee-motion-brief.pdf`: render (12 pages, Liberation Serif embedded; was 11 pages in EB Garamond). `samples/OVERLAY-bumble-bee-motion-brief.pdf` and `.txt`: overlay (not regenerated; see Overlay).
 
 Naming: the brief asks for `samples/<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, and the overlay reads the `OUTPUT-` name. The tool names are used so the overlay runs unmodified.
 
 ## Overlay (red = ours, blue = filed; `OVERLAY-bumble-bee-motion-brief.txt`)
 
-Our page to filed page, by word overlap:
+**Not regenerated.** `tools/overlay.sh` exits 1 here: `exemplars/` has no `FILED-EXAMPLE-*.pdf` (only `SOURCE.md`), and the RECAP download in `SOURCE.md` returned an error page, not a PDF. The table below is from the earlier 11-page EB Garamond render and no longer matches `OUTPUT-bumble-bee-motion-brief.pdf`. Re-run `sh tools/overlay.sh` once the exemplar is in place.
+
+Old page map (EB Garamond, 11 pages), our page to filed page, by word overlap:
 
 | Ours | Filed | Overlap |
 |---|---|---|
@@ -55,7 +57,9 @@ Word overlap is a pairing aid, not a score. The pairing is by shared words, so t
 
 ## Pages reviewed
 
-All 11 rendered pages were rasterised at 60 dpi and viewed. Fixes made along the way:
+Re-reviewed after the typeface change (Liberation Serif, 12 pages): all 12 pages rasterised at 60 dpi and viewed. Cover (1), TOC (2), TOA and nature-and-stage (3), facts (4–6), argument I (7–9), argument II and conclusion (10–11), signature block alone (12). Pagination moved by about a page because Times New Roman at 12 pt is wider than EB Garamond; the TOC page numbers are generated and match the new layout.
+
+Earlier review (EB Garamond, 11 pages). Fixes made along the way:
 - Paragraph overlap: the body used zero paragraph spacing, so the 1.35em leading did not carry across paragraph breaks. Fixed with `spacing: body-leading` in the body styles.
 - The TOC was a paragraph list with no page numbers. Replaced with a generated `outline()` over levels 1–2.
 - A level 2 heading ("I. Plaintiff's Claims ...") ran into the paragraph below it. Fixed with a below-spacing of `body-leading`.
@@ -64,7 +68,8 @@ Pages 1–11 as reviewed in the final render: cover (1), TOC (2), table of autho
 
 ## Known gaps
 
-- **BLOCKED: typeface.** LR 7007-2(a)(ii) requires Courier New or Times New Roman. Neither is in `fonts/`, and `tools/render.sh` loads only `fonts/` with `--ignore-system-fonts`. EB Garamond is the stand-in. The decision needed from David: vendor a Times-metric font (for example, Liberation Serif or TeX Gyre Termes, both under open licences) into `fonts/`, or name another font the court accepts. Until then this template is not rule-compliant on typeface. Changing it is a one-line parameter change, and the page breaks will move.
+- **Typeface: Times New Roman → Liberation Serif (visual and metric check).** LR 7007-2(a)(ii) names Times New Roman, set here through Liberation Serif, the metric-compatible substitute in `docs/FONTS.md`. Metric compatibility is the upstream claim, not checked on this box (no Times New Roman file). The page count rose from 11 to 12 with the change; the rule is the reason, not a defect.
+- **Overlay not run (exemplar missing).** See "Overlay". The exemplar PDF must be restored to `exemplars/` before the overlay can be regenerated.
 - **Counsel email (LR 7007-2(a)(i)).** The exemplar's cover has no email addresses, but the rule requires them. The template renders what the frontmatter gives, so a real filing sample must supply emails. The sample leaves them out because the exemplar does.
 - **TOC.** Generated from levels 1–2, so the TOA is not listed. LR 7007-2(b)(i)(A) asks for a TOC of the body's headings; the TOA heading is a section of its own and is left out. Minor.
 - **TOA.** Typed as text in the sample, not generated from citations. Citations and their page numbers are not checked by the template.
