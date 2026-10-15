@@ -95,4 +95,30 @@ Defects found and fixed during review: (1) paragraphs in the opening block drawn
 8. **Hearing date.** The exemplar states its hearing date in the text (the expedited request, ¶ 143), not in the caption; the template has no hearing line. Not a gap in the rules as read.
 9. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder does not have that shape, and the brief forbids editing `tools/`. The gates were not run. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
 
+## Engines
+
+Typst is the primary engine. This section covers the docx engine (`docx/`): pandoc 3.6.4 with `docx/reference.docx` (the page setup and styles; rebuild with `sh docx/make-reference.sh docx`) and the Lua filter `docx/meb-motion-brief.lua` (the cover, caption, numbered paragraphs, relief, signature and certificate of service). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-mattson-motion-brief.md`.
+
+| Output | Result |
+|---|---|
+| `samples/OUTPUT-mattson-motion-brief.docx` | written; zip and well-formed XML parts pass the `render-docx.sh` integrity check |
+| `samples/OUTPUT-mattson-motion-brief.docx.pdf` | **not produced**: LibreOffice does not start in the build environment (see BLOCKED below) |
+| pages reviewed in the docx PDF | 0 of 11 (there is no PDF to render; the typst pages are the reference) |
+
+**What matches typst** (the same values, set in the reference styles): US Letter with 1 in margins; EB Garamond 12 pt; body lines exactly 24 pt (double spacing); first-line indent 0.5 in; paragraphs numbered 1 to 56 as typed text with a tab (as the typst template does); a list lettered (a), (b) with a hanging indent; the caption as a table with the right and bottom rules of the typst box; the "Relief Requested Without a Hearing" legend when the sample sets it; the title in capitals; level-1 headings centred and kept as typed; the WHEREFORE paragraph and the signature block kept together; the certificate of service on its own page with its service list; the footer "- n -" from a PAGE field.
+
+**What differs, or is not verified:**
+
+- Line and page breaks are Word's, not measured, so the page count may not be typst's 11.
+- Heading spacing is approximated: typst rounds each heading block to whole 24 pt lines, Word uses 12 pt before and after.
+- The caption, signature and certificate fields are set as plain text, so markdown emphasis in them is dropped (the body keeps it).
+- The docx names "EB Garamond" and does not embed it. The font must be installed on the machine that opens the file, or Word substitutes silently.
+- Footnotes are not transcribed in the sample; footnote text inherits 12 pt single spacing from Normal, not checked.
+
+**docx BLOCKED items** (the docx checks run on `samples/OUTPUT-mattson-motion-brief.docx.pdf`):
+
+- `BLOCKED: Gate 0 and Gate 1 (tools/check.sh --engine docx)`: no `.docx.pdf` exists, so the page count, the font names and the content gates cannot run. Cause: LibreOffice 25.2 (Debian trixie packages, unpacked without root) stops at bootstrap with a `DeploymentException`, even for `soffice --version`.
+- `BLOCKED: Gate 2 (page review of the docx PDF)`: no pages reviewed, for the same reason.
+- `BLOCKED: opens in LibreOffice and Word without a repair prompt`: not verified; there is no LibreOffice to open it in.
+
 [Court index](../README.md) | [Formbook index](../../../../../../README.md)

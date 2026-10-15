@@ -83,4 +83,30 @@ Defects found and fixed during review: (1) paragraphs drawn over each other (a b
 9. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder does not have that shape, and the brief forbids editing `tools/`. The gates were not run. Render and overlay were run, and the review above is the Gate 2 equivalent for this doc type.
 10. **Headings must fit the text width.** Headings wrap across lines (the template measures them); no single-line rule is enforced here, unlike the N.D. Cal. template.
 
+## Engines
+
+Typst is the primary engine. This section covers the docx engine (`docx/`): pandoc 3.6.4 with `docx/reference.docx` (the page setup and styles; rebuild with `sh docx/make-reference.sh docx`) and the Lua filter `docx/meb-adversary-complaint.lua` (the cover, caption, numbered paragraphs, relief and signature). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-manhart-adversary-complaint.md`.
+
+| Output | Result |
+|---|---|
+| `samples/OUTPUT-manhart-adversary-complaint.docx` | written; zip and well-formed XML parts pass the `render-docx.sh` integrity check |
+| `samples/OUTPUT-manhart-adversary-complaint.docx.pdf` | **not produced**: LibreOffice does not start in the build environment (see BLOCKED below) |
+| pages reviewed in the docx PDF | 0 of 4 (there is no PDF to render; the typst pages are the reference) |
+
+**What matches typst** (the same values, set in the reference styles): US Letter with 1 in margins; EB Garamond 12 pt; body lines exactly 24 pt (double spacing); first-line indent 0.5 in; paragraphs numbered 1, 2, ... as typed text with a tab (the typst template numbers them the same way, not as an automatic list); the caption as a table with the right and bottom rules of the typst box; the title in capitals; level-1 headings centred in capitals; the WHEREFORE paragraph and the signature block kept together; the footer "- n -" from a PAGE field.
+
+**What differs, or is not verified:**
+
+- Line and page breaks are Word's, not measured, so the page count may not be typst's 4.
+- Heading spacing is approximated: typst rounds each heading block to whole 24 pt lines, Word uses 12 pt before and after.
+- The caption and signature fields are set as plain text, so markdown emphasis in them is dropped (the body keeps it).
+- The docx names "EB Garamond" and does not embed it. The font must be installed on the machine that opens the file, or Word substitutes silently.
+- Footnote text (not in this sample) inherits 12 pt single spacing from Normal; not checked.
+
+**docx BLOCKED items** (the docx checks run on `samples/OUTPUT-manhart-adversary-complaint.docx.pdf`):
+
+- `BLOCKED: Gate 0 and Gate 1 (tools/check.sh --engine docx)`: no `.docx.pdf` exists, so the page count, the font names and the content gates cannot run. Cause: LibreOffice 25.2 (Debian trixie packages, unpacked without root) stops at bootstrap with a `DeploymentException`, even for `soffice --version`.
+- `BLOCKED: Gate 2 (page review of the docx PDF)`: no pages reviewed, for the same reason.
+- `BLOCKED: opens in LibreOffice and Word without a repair prompt`: not verified; there is no LibreOffice to open it in.
+
 [Court index](../README.md) | [Formbook index](../../../../../../README.md)
