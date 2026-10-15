@@ -89,3 +89,15 @@ Not produced by this template: the motion itself (LR 105.1), the proposed order 
 | 11 | CONCLUSION (A., B.), signature block (right half), CERTIFICATE OF SERVICE with signature line | OK. Transcription typo in the sample text, not the template: "Educaiton" (see Known gaps 12). |
 
 Reviewed pages: 11 of 11 (rendered at 70 dpi, viewed as 2×2 montages after the last template change; the montages are in `/work/artifacts/review`, outside the repo).
+
+## Engines
+
+**typst** is the reference (`typst/`, `samples/OUTPUT-hylton-motion-brief.pdf`, 11 pages). **latex**: not built for this doc type. **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/mdd-motion-brief.lua`): built and rendered with LibreOffice (`samples/OUTPUT-hylton-motion-brief.docx`, `samples/OUTPUT-hylton-motion-brief.docx.pdf`, 12 pages).
+
+- *Reviewed:* all 12 pages of the docx PDF at 60 dpi (4 per montage, after the last change), and all 11 typst pages paired beside the docx page at 60 dpi. Pages reviewed: 12 of 12 (docx).
+- *Matches typst (seen on the pages):* the embedded fonts are Liberation Serif regular, bold and italic, as in typst; double spacing at 27.6 pt; 1-inch margins; the cover (court lines, short caption with the first plaintiff and first defendant and the case number, the centered bold title); no page number on page 1, a centered page number from page 2; headings as the template sets them (level 1 centered bold caps, level 2 bold with a hanging indent); footnotes at 10 pt with the rule above them; numbered lists 1., 2., 3. with hanging indent; the signature block in the right half, kept on one page; the certificate of service heading centered and bold.
+- *Differs (tier 2):* pagination. The docx is 12 pages, the typst output 11. The certificate of service sits alone on page 12 because the signature block fills page 11; typst puts the block and the certificate on page 11. Page breaks fall one or two lines apart from typst on most pages (for example, page 7 starts in the middle of Argument B in the docx).
+- *Not verified:* the .docx has not been opened in Word. LibreOffice converted it without error. The zip and XML parts were checked.
+- *Gates:* `tools/check.sh` does not run on this folder (no `court.json`/`rules.md`); the tier-1 items above were checked by eye on the pages.
+- BLOCKED: LR-105.4: the table of contents is not built for docx; `toc: true` makes the build fail with a message. The sample (11 pages in typst) does not need one; a memorandum over fifteen pages cannot be delivered as docx until a TOC is built.
+- *Rebuild:* `sh docx/make-reference.sh`, then `sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/district/motion-brief samples/INPUT-hylton-motion-brief.md`.

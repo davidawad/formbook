@@ -50,3 +50,14 @@ Every page of the render (9 of 9) was rendered to PNG and viewed. The rows are n
 6. **FRBP 9004 is not verified.** The template comment cites FRBP 9004(a) and (b) for the caption; that text was not checked here. The docket control number rule (LBR 9014-1(c)(1)) covers motions and papers for or against them, so an adversary complaint carries none.
 7. **Signatures.** Every signature line is printed with `/s/`, which is correct for ECF filing without a scanned original (LBR 9004-1(c)(1)(A)). A wet-signed filing would need a different line.
 8. **Gate checks.** No `checks.yaml`, `reviews/` or selftest exists for this doc type yet. The rules above are verified by reading the sources, not by a mechanical check.
+
+## Engines
+
+**typst** is the primary engine (unchanged). No typst render exists for the sample (`samples/` has no `OUTPUT-dlp-hronis-complaint.pdf`), so the docx below was compared with the template's parameters and the rules, not with a typst page.
+
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `sh tools/render.sh --engine docx <this folder> samples/INPUT-dlp-hronis-complaint.md` writes `samples/OUTPUT-dlp-hronis-complaint.docx` and `.docx.pdf`. Lua filter: `docx/caeb.lua`.
+
+- Matches typst: Liberation Serif 13 pt; exact 24 pt lines on a 28-line grid; numbers 1 to 28 in a page-anchored text box in the header (not a line-numbering field, so the numbers stay on blank lines too); letter paper; margins 1 in top, 0.667 in bottom, 1.5 in left, 0.75 in right; the pleading rules; caption table with the party box ruled right and bottom; page number bottom center; "Page total" (NUMPAGES) upper left of page 1; page 1 ends at the caption; numbered paragraphs; (a), (b) lists; unnumbered WHEREFORE; headings kept with the next paragraph; signature blocks kept together.
+- Differs: single-spaced lines (counsel, caption, signature) are exact 14 pt, not typst's looser leading, so after a single-spaced block the text can sit between two numbers (visible on page 9). Pleading rules are page borders over the text area, not full-height lines. Lettered items indent slightly differently. Quotations are single spaced at 14 pt.
+- Checked with LibreOffice only (headless PDF conversion, 9 pages, `pdffonts`: Liberation Serif only). Word was not available; the file has not been opened in Word.
+- BLOCKED: `sh tools/check.sh <this folder> --engine docx` cannot run. It exits 2 before any gate: this doc type has no `checks.yaml`, and `check.sh` reads `court.json` from the folder it is given. No stamp is written. Gates 0 to 3 are therefore not measured for docx.

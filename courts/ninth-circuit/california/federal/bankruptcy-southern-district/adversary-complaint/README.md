@@ -88,3 +88,12 @@ Pages 2 to 10 were rendered and looked at before the footer change; the footer c
 8. **Case names are roman in the sample.** The 2009 exemplar text layer has no italic markup; the template italicizes `*...*` if a sample carries it.
 9. **Overlay pairing.** Pages pair coarsely (see Overlay).
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. Render, overlay and page review were run instead.
+
+## Engines
+
+**docx** (`docx/`): `sh tools/render.sh --engine docx courts/ninth-circuit/california/federal/bankruptcy-southern-district/adversary-complaint samples/INPUT-steakhouse-partners-complaint.md` writes `samples/OUTPUT-steakhouse-partners-complaint.docx` and `.docx.pdf` (LibreOffice PDF, 11 pages, EB Garamond embedded). Built by `docx/build-reference.sh` (reference.docx), `docx/render.sh` (sets the footer from the frontmatter) and `docx/casb-adversary-complaint.lua`.
+
+- Matches the typst output in the mandated form: EB Garamond 12 pt, 24 pt line pitch on the body and the numbered lines, 28 line numbers on the grid, double and single pleading rules, the three-line footer (page, title, case number), the counsel block from line 1, the caption, numbered allegations, lettered lists, the signature block.
+- Differs: the numbers are a framed header block and the rules are page borders (double rule 14 pt from the text, single 7 pt from it), not the typst background; the footer and rules are placed by Word/LibreOffice layout, not by coordinates. Checked with LibreOffice only (Word is not available here).
+- No typst `OUTPUT-steakhouse-partners-complaint.pdf` exists in `samples/` in this snapshot, so there is no typst page to compare against; the pages were judged against the typst template.
+- BLOCKED: `tools/check.sh <this folder> --engine docx` exits 2 (`court.json` and `checks.yaml` are missing from this doc-type folder; they are court-level files and were not created). No gate result is claimed. Gate 0 was checked by hand for word presence only (every body word is in the PDF text; only frontmatter keys are absent, as expected).

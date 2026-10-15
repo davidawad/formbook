@@ -91,3 +91,29 @@ Every page was rendered at 60 dpi and viewed. Defects found on the first renders
 | 10 | CONCLUSION paragraph, date, "Respectfully submitted," firm and signer block | Pass. The signature is not alone: the conclusion is on the same page. |
 | 11 | CERTIFICATE OF SERVICE (new page), service list | Pass. |
 | 12 | Last service recipients, "/s/" line and signer name | Pass. Two lines of the certificate spill to this page, as in the exemplar. |
+
+## Engines
+
+The same markdown renders through three engines. Typst (`typst/`) is the reference. Only the docx engine is built in this pass; the latex engine is not built for this doc type.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-engelhorn-memorandum.pdf` (12 pp) | reference |
+| docx | `OUTPUT-engelhorn-memorandum.docx` and `OUTPUT-engelhorn-memorandum.docx.pdf` (12 pp, LibreOffice) | rendered; BLOCKED lines below |
+
+```sh
+sh docx/make-reference.sh     # rebuilds docx/reference.docx from pandoc's default reference document
+sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/bankruptcy-district/motion-brief samples/INPUT-engelhorn-memorandum.md
+```
+
+**docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/mdb-motion-brief.lua`).
+
+- *Matches typst:* EB Garamond 12 pt (the PDF embeds Regular, Bold and Italic only); body double-spaced on a 24 pt exact pitch with a 0.5 in first-line indent; letter page with 1-inch margins; the cover (court lines, division, the caption with its ")" column and the rule under the debtor line, the case number and adversary line on the right, the title in capitals between two rules, the lead-in paragraph); level-1 headings centered, bold, underlined, in capitals; level-2 and level-3 headings bold at the margin; block quotations single-spaced and indented; the signature block at 3 in, with the last section's last paragraph kept with it; the Certificate of Service on a new page after the signature; a centered page number on every page, the cover included.
+- *Differs (tier 2):* body lines break at other words, so the page breaks differ by a few lines. The heading "B. Equitable Remand" and its first paragraph stay on p. 8 in the docx; typst moves both to p. 9 as one block. The certificate's service recipients are spaced about 12 pt apart in the docx, a little tighter than typst. The Tenacity Investment block ends on p. 11 in the docx and on p. 12 in typst; the certificate's signature lines are on p. 12 in both.
+- *Not verified:* the `.docx` has not been opened in Microsoft Word (no Word on this box). LibreOffice converts it without error, and it is a valid zip with well-formed XML parts (`unzip -t`, `xmllint` on every `.xml` and `.rels` part). Word may paginate slightly differently (docs/DOCX.md).
+- *Gate status:* this court folder has no `checks.yaml`, so `tools/check.sh --engine docx` was not run and no pass stamp was written. The review is by eye.
+- *Pages reviewed:* 12 of 12. Every page of `samples/OUTPUT-engelhorn-memorandum.docx.pdf` was rendered at 60 dpi and viewed beside the same page of the typst render, on the final build.
+- *Build notes:* as for the adversary complaint: no `unzip` or `zip` on this box (stand-ins outside the repo), and a one-time `soffice` retry on a fresh profile.
+
+BLOCKED: docx-word-open: not opened in Microsoft Word (not installed on this box); LibreOffice opens and converts the file without error.
+BLOCKED: gates-0-3: no `checks.yaml` in this court folder, so the docx gates (`tools/check.sh --engine docx`) were not run; the Gate 2 review above is by eye.

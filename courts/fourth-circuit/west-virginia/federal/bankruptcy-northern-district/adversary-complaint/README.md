@@ -60,3 +60,12 @@ The file names differ from the brief's naming on purpose. `tools/render.sh` writ
 - **Page limits and paper rules** for complaints are not checked by the template; no rule found.
 - Authorities in the sample (28 U.S.C. §§ 157(b)(2)(F), (H); 11 U.S.C. §§ 544, 548, 550, 502(d)) are statute cites written from memory, not fetched.
 - No exemplar, so no tier-2 comparison with a filed complaint was possible.
+
+## Engines
+
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (run `sh docx/build-reference.sh docx/reference.docx`); `docx/wvnb-adversary-complaint.lua` builds the caption, signature grid and the page break before Schedule 1, and numbers the paragraphs once across the complaint. Rendered by `sh tools/render.sh --engine docx <this-dir> samples/INPUT-<id>.md`; the PDF is the LibreOffice conversion.
+
+- Matches the typst form: EB Garamond 12 pt (checked with `pdffonts`), exact 27.6 pt body line pitch (the typst pitch, measured from the typst PDF), 0.5 in first-line indent, letter, 1 in margins, 10 pt centered page-number footer, level 1 centered capitals, level 2 centered bold, the two-column caption box with its right and bottom rules, the signature grid (Dated at left, signer in the 3.2 in column), and Schedule 1 on its own page after the signature.
+- Differs: the numbered paragraphs follow the template's stated form (number on the first-line indent, text wrapping to the margin). The typst render does not: its numbers sit at the margin with a hanging indent, so the typst PDF and the docx disagree there; `typst/` was not changed. The Schedule table has a full grid in both. The docx runs 5 pages, as typst does, with different line breaks.
+- Reviewed: every page of `OUTPUT-protea-adversary-complaint.docx.pdf` (5), each against the typst page at 60 dpi.
+- BLOCKED: `tools/check.sh --engine docx` cannot run: this snapshot has no `checks.yaml` for this court (exit 2, `Error: open .../checks.yaml: no such file or directory`). No check IDs were authored. Word is not available here; verified by LibreOffice only.

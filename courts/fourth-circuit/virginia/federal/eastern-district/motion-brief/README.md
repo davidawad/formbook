@@ -78,3 +78,13 @@ Notes on what the rules do not say:
 - Page 7: III end, heading IV, IV's paragraphs; white space below because the conclusion moved to page 8 with its signature. Pass.
 - Page 8: CONCLUSION heading and paragraph, "Date:", "Respectfully submitted," party name, "/s/" line, counsel block single-spaced. Pass.
 - Page 9: CERTIFICATE OF SERVICE on its own page, served list, date, signature block repeated. Pass.
+
+## Engines
+
+DOCX (`docx/`): `reference.docx` from `docx/build-reference.sh`, filter `docx/vaed-motion-brief.lua`. Output `samples/OUTPUT-keppel-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion). Pages reviewed: 9 of 9 in the docx PDF (pages 1 to 8 on the first render, page 9 again after a fix to the served list) and 9 of 9 in the typst PDF, at 60 dpi.
+
+- Matches the typst form: EB Garamond 12 pt only (`pdffonts`); letter, 1 in margins; body at an exact 24 pt pitch; 0.5 in first-line indent; caption party box and case number; underlined bold title; headings with hanging labels (level 2 at 0, level 3 at 0.5 in); the last paragraph kept with the signature block; certificate of service on its own page; centered PAGE number at 12 pt. Nine pages in both, with the same page breaks, including the conclusion moving to page 8.
+- Differs: the court heading is single-spaced in the docx (see the complaint's Engines note). The docx's first page holds about two more body lines than typst's for that reason. The served list is followed by the "Date" line slightly closer than in typst. Footnotes: none in the sample; the footnote style is 12 pt single-spaced, not tested. LibreOffice breaks lines after hyphens in some citations where typst does not.
+- The 30-page cap (L.R. 7(F)(3)) is a typst build assertion. The docx has no equivalent; the sample is 9 pages.
+- Not verified: Word (see the complaint note).
+- BLOCKED: `tools/check.sh --engine docx` (all gates) cannot run on this folder: exit 2, because the court folder has no `checks.yaml` and no `court.json` at this level. No gate result and no stamp.

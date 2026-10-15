@@ -77,3 +77,12 @@ Not produced by this template (separate papers, not part of the complaint): the 
 - Page 8: items (c)–(h), "DEMAND FOR JURY TRIAL", the jury demand, the date and the signature block (party, "By Counsel,", "s/ Ryan J. Umina", counsel lines with e-mail and telephone). Pass.
 
 Overlay (`samples/OVERLAY-heston-complaint.txt`): page pairing by shared words against the RECAP copy (36 pages). Pages 1–3 pair with the same filed pages (68.6%, 60.2%, 45.1% word overlap); the rest pair with later filed pages because the sample skips filed paragraphs. The pairing is a diagnostic, not a score.
+
+## Engines
+
+DOCX (`docx/`: `build-reference.sh` builds `reference.docx`; `wvnd-complaint.lua` writes the caption, the numbering and the signature). Output: `samples/OUTPUT-heston-complaint.docx` and `.docx.pdf` (LibreOffice PDF). Pages reviewed: 9 of 9, every page rendered at 60 dpi and viewed.
+
+- Matches the typst form: Liberation Serif 12 pt (`pdffonts`: LiberationSerif only), letter, 1 in margins, body double spaced at an exact 24 pt pitch (measured on both PDFs with `pdftotext -bbox`), 0.5 in first-line indent, caption with the parties left, "v.", the designation indented 1 in, the civil action number and judge at the bottom right, a rule beneath, the title bold and centered, headings centered bold, prayer items (a)–(h) with a hanging indent, the signature block at 3.25 in, page number centered at the foot of each page.
+- Differs: the gap after a paragraph number is a tab stop at 0.85 in (typst: 0.25 in after the number). Pagination differs: the docx runs 9 pages, the typst 8, because the line breaking and the caption spacing differ slightly between Word-style layout and typst. The last paragraph is kept with the signature, so the signature never stands alone on a page.
+- BLOCKED: `sh tools/check.sh <court-dir> --engine docx` cannot run. It exits 2 with `Error: open .../complaint/checks.yaml: no such file or directory` (this snapshot has no `checks.yaml` for this court; not authored here).
+- OPEN (tier 2): the 9-page layout against the typst 8 pages (see above); the Word open test was not run (LibreOffice converts it without error).

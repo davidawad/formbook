@@ -76,3 +76,14 @@ OPEN: none.
 LOG:
 - 2026-10-14: first render, 10 pages, numbered paragraphs overlapping at each break. Cause: blocks had no trailing leading. Fixed.
 - 2026-10-14: pitch changed from 24 pt to 27.6 pt to match the filed exemplars; 11 pages.
+
+## Engines
+
+**typst** is the reference and is unchanged by the docx work.
+
+**docx** (`docx/reference.docx` built by `docx/make-reference.sh`; `docx/rid-complaint.lua` for the cover, the numbered allegations and the signature block). Output: `samples/OUTPUT-nightingale-complaint.docx` and `samples/OUTPUT-nightingale-complaint.docx.pdf` (LibreOffice, 11 pages). Status: converts without error; every page of the docx PDF was viewed at 60 dpi beside the typst page of the same sample (pages_reviewed = 11). Not opened in Microsoft Word (not available here); the file is a valid zip with well-formed XML parts.
+
+- *Matches typst (checked on the LibreOffice PDF):* US Letter, 1-inch margins; EB Garamond 12 pt (the only font embedded); double spacing at exact 27.6 pt; single spacing at 13.8 pt for the caption, headings, counsel and signature blocks; the caption (party column with the rule on the right and below, "C.A. No.", JURY TRIAL DEMANDED); the court title and the title of the paper; allegations numbered 1. to 100. with a first-line indent and the number followed by a tab; the WHEREFORE prayer unnumbered; headings (level 1 and 2 centered, level 2 bold italic, level 3 bold at the left); the signature block in the same column, with "/s/" and bar numbers, kept on one page, and the same gaps as typst (measured on the PDF); page number centered at the bottom of every page, arabic from 1. Every body line starts on the same baseline as typst's, offset by a constant 3 pt.
+- *Differs (tier 2, not blocking):* (a) LibreOffice wraps a few body lines one word differently from typst, so some pages end a line or two earlier or later; the docx PDF has 11 pages as typst does, but COUNT VI begins page 11 in the docx and page 10 in typst. (b) Every line sits about 3 pt lower than in the typst PDF (LibreOffice's baseline for exact line spacing), including the top of page 1. (c) The number of a three-digit allegation (paragraph 100) is followed by a tab stop at 1.9 in in Word, so its text starts 11 pt left of typst's (typst sets 0.3 in after the number). (d) The paragraph numbers are typed labels, not Word list numbering (no visible difference; a list would renumber itself if an allegation were inserted).
+- *BLOCKED:* none. This folder has no `checks.yaml`, so no check IDs exist for the docx; no Gate 1 check was run on the docx. No tier-1 requirement (paper, font size, spacing, margins, page numbers, caption, jury demand, signature block) is blocked in docx.
+- *Pagination:* Word may paginate slightly differently from LibreOffice (see `docs/DOCX.md`).

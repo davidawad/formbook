@@ -84,3 +84,17 @@ Rendered at 60 dpi and viewed page by page.
 - Page 3 of the memorandum: IV. CONCLUSION (paragraph), "Dated: September 4, 2026", firm, "By: /s/ William A. Delgado", the signer's name and the role lines. Pass.
 
 Defects found and fixed during review: the signature block sat alone on a page (fixed by holding the chunk before `---` with it; then the conclusion moved with its signature); the page-number style (roman for the tables, arabic for the memorandum) was checked against the rendered footers.
+
+## Engines
+
+### docx (checked with LibreOffice only; Word is not available here)
+
+- Build: `sh docx/build-reference.sh docx/reference.docx` (styles, the numbered-line header frame, the footer, page borders, the final section); render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-wine-motion-brief.md` writes `samples/OUTPUT-wine-motion-brief.docx` and `.docx.pdf` (8 pages; EB Garamond regular, bold and italic embedded).
+- Pages viewed: all 8 pages of `OUTPUT-wine-motion-brief.docx.pdf` at 60 dpi, in the final build.
+- No typst `OUTPUT` PDF exists in `samples/` for this sample; the comparison is with the typst template source and the README above.
+- Page numbers as in typst: the notice and the cover in arabic from 1; the table of contents and table of authorities in roman (i, ii, iii); the memorandum in arabic from 1. Three sections (`docx/caed-motion-brief.lua`), each with the header and footer of the final section (`docx/fix-sections.pl`).
+- Table of contents: `docx/render.sh` converts the docx once with LibreOffice, finds each memorandum heading's page, writes the numbers into the table, builds again, and fails if a third conversion would move a number. Word may paginate differently; the numbers are the LibreOffice ones.
+- Table of authorities: page references are printed from the `authorities` frontmatter (as in typst), not computed.
+- Keep with signature: the paragraph before each `---` is kept with the signature block, so memorandum IV. CONCLUSION moves to page 3 with its signature (as the typst template does).
+- Differs from typst: the court title sits one numbered line lower on the cover (line 12, typst's README says 11) because the counsel block measures differently; a table-of-authorities entry whose text fills the line shows its page reference straight after the text, with no leader dots; signature blocks (13.8 pt single) sit between numbered lines rather than on them.
+- BLOCKED: `sh tools/check.sh <this folder> --engine docx` cannot run: it reads `court.json`, `checks.yaml` and `reviews/` in the folder, and this folder has none (not created here). Exit 2, no stamp written. Gates 0 to 3 are therefore not run for docx; the pages were checked by eye only.

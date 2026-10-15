@@ -125,3 +125,32 @@ Pages reviewed: 9 of 9 (government 4, Yahoo 5). The last layout change (keeping 
 - The Rules PDF's ModDate is 2014, but the court's own page says the Nov. 1, 2010 rules are current. No later amendment is listed there. If the court amends them, FISC-FILE and FISC-FORM citations need a re-check.
 - Not run: `tools/check.sh`, `tools/check-selftest.sh` and `tools/tracker.sh`. This doc type has no `checks.yaml` or gate scripts, and the brief excludes the tracker. Validation here is the render (no typst warnings), the overlay, and the page review above.
 - Samples are transcriptions of two filed motions, not generalized templates. A third, fictional sample for checking that the template is content-agnostic is not included.
+
+## Engines
+
+### typst (primary)
+
+As above: `typst/fisc-motion-brief.typ`, rendered with `sh tools/render.sh`. Page counts: government sample 4, Yahoo sample 5.
+
+### docx (checked with LibreOffice only)
+
+Build and render:
+
+```sh
+sh docx/build-reference.sh docx/reference.docx    # pandoc default reference, edited (EB Garamond 12 pt, 24 pt body, 15.6 pt single blocks, footer PAGE field)
+sh tools/render.sh --engine docx courts/national/foreign-intelligence-surveillance-court/motion-brief samples/INPUT-<id>.md
+```
+
+Files: `docx/build-reference.sh` (writes `reference.docx`; zips with `ziptool`, since `zip` is not installed here), `docx/reference.docx`, `docx/fisc.lua` (the frontmatter becomes the court heading, caption table, title, signature, clearance, verification and certificate; the body keeps its markdown structure).
+
+Matches the typst output (both samples, every page of both renders viewed at 60 dpi): EB Garamond only (embedded, no system fonts); letter with 1 in margins; body double spaced (exact 24 pt pitch) with a 0.5 in first-line indent, and no indent on the paragraph after a heading or after a block; single blocks at 15.6 pt; caption box with right and bottom rules; bold capitals title; headings bold, numbered I., A., 1.; centered page number; verification and certificate of service each on its own page; 9 pt footnotes. Government sample 4 pages and Yahoo sample 5 pages, as in typst.
+
+Differs:
+- Line breaks and page breaks differ in places (LibreOffice vs typst). On the Yahoo sample, page 2 ends about three lines earlier than the typst page 2, so the text on pages 2-3 breaks at different lines. Not chased.
+- Heading numbers are text written by the filter, not Word list numbering.
+- The caption is a table; Word draws its borders slightly differently from LibreOffice.
+- The signature block is kept together with keepNext chains; this was checked only where it fits one page (both samples).
+- Word was not available: the .docx was converted and looked at with LibreOffice 26.8 only. It was not opened in Word.
+
+BLOCKED (docx):
+- All gates (`tools/check.sh <doc-type-dir> --engine docx`): the script cannot run on this doc-type folder. It reads `court.json` and `checks.yaml` from the folder it is given; this doc type has neither (nor does the court folder), so it exits 2 before any gate runs. Gate 0 (content), Gate 1 (the FISC-* rule checks above) and Gate 2 (review file) are therefore not run for docx. No stamp is written. The docx pages were reviewed by hand, as described above.

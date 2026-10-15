@@ -120,3 +120,12 @@ Ordered by page. None blocks render or overlay; all are for the eval loop's tier
 - **Filer's text.** The transcription keeps the filer's own typos and any irregular citations ("failed to alleged", "MARTING"). The authorities in both samples were not checked. The exemplar's cites are the filer's, not ours.
 - **Tier-2 exemplars.** Only one filer (Sheehan v. Levine, 2019). The eval loop wants two or three filers. Candidates are listed in `exemplars/SOURCE.md`; the best is the 2026 Storj Labs memorandum (ECF 131), which is a standalone memorandum and would need its own transcription.
 - **Currency.** The local rules text is the 2003 edition. The court's current text was not found.
+
+## Engines
+
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (run `sh docx/build-reference.sh docx/reference.docx`); `docx/wvnb-motion-brief.lua` builds the counsel block, caption, negative notice, signature block and certificate of service. Rendered by `sh tools/render.sh --engine docx <this-dir> samples/INPUT-<id>.md`; the PDF is the LibreOffice conversion.
+
+- Matches the typst form: EB Garamond 12 pt (the only face in the PDF, checked with `pdffonts`), exact 18 pt body line pitch (the typst pitch, measured from the typst PDF), 0.5 in first-line indent, letter, 1 in margins, 10 pt centered page-number footer, level 1 centered capitals, level 2 centered bold, level 3 left bold, native footnotes at 10 pt, block quotes indented 1 em on each side, the caption box with its right and bottom rules, the boxed negative notice, the signature in the 3.2 in column, and the certificate of service on its own page.
+- Differs: the single-spaced blocks use exact 11.4 pt; the footnote separator is pandoc's default rule, not the 30% rule of the typst form; the level-1 capitals are typed into the file by the filter; the Sheehan sample runs 12 pages in the docx against 11 in typst (the same pitch, with different line breaks and one heading held to the next page).
+- Reviewed: every page of `OUTPUT-sheehan-motion-to-dismiss.docx.pdf` (12) and `OUTPUT-example-motion-brief.docx.pdf` (4), each against the typst page at 60 dpi.
+- BLOCKED: `tools/check.sh --engine docx` cannot run: this snapshot has no `checks.yaml` for this court (exit 2, `Error: open .../checks.yaml: no such file or directory`). No check IDs were authored. Word is not available here, so the `.docx` is verified only by LibreOffice (converts without error; the XML parts are well-formed); no Word repair check was run.

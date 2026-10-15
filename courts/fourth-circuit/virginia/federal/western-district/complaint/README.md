@@ -105,3 +105,11 @@ The overlay is a diagnostic, not a score. It shows the difference in position, n
 7. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` read a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. `tools/tracker.sh` was not run (the PM regenerates it). The render and the overlay were run; the review above is the Gate 2 record.
 
 [Vawd court README](../README.md) | [Federal courts README](../../README.md)
+
+## Engines
+
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/vawd-complaint.lua` builds the cover, the caption, the numbered allegations, the lettered prayer and the signature block. Rendered with `sh tools/render.sh --engine docx complaint samples/INPUT-extreme-driver-complaint.md` (LibreOffice PDF: `samples/OUTPUT-extreme-driver-complaint.docx.pdf`).
+
+- Matches the typst form: EB Garamond 13 pt (embedded, pdffonts shows EBGaramond only), 1 in margins on letter, 27.6 pt double spacing, 0.5 in first-line indent, centered three-line court title, box caption with the file number opposite, numbered paragraphs (headings and the WHEREFORE clause unnumbered), prayer items a., b., ..., signature block at 3.25 in, centered page number at 12 pt.
+- Differs: the LibreOffice PDF runs 9 pages (typst 8): Word-style keep-with-next on headings and the exact line pitch paginate a little longer. The ")" marks of the parens caption (not used by this sample) are sized from the text length, not measured.
+- BLOCKED: every gate of `sh tools/check.sh <court-dir> --engine docx` (gates 0 to 3). The court folder has no `checks.yaml` (and no `rules.md`), so check.sh cannot run; the court's gate file is not written by this change. `check-selftest.sh` needs the same file and is not run.

@@ -85,3 +85,12 @@ The overlay page map (ours to filed, by word overlap): p.1→1 (78%), p.2→2, p
 7. **Consolidated actions.** LRCiv 7.1(a)(3) requires the affected case numbers under the lead number for a consolidated complaint. Not drawn.
 8. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
 9. **Size and format of the exemplar.** The exemplar is an amended complaint, not an original. The form is the same; the template depends only on the form.
+
+## Engines
+
+**docx** (LibreOffice only; Word was not available, so "opens in Word without a repair prompt" is not verified).
+`docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt, exact 24 pt lines, letter, margins as in the typst template, PAGE field in the footer). `docx/azd-complaint.lua` builds the cover, caption, numbered allegations, lettered relief items, signature and certificate. `sh tools/render.sh --engine docx <this folder> samples/INPUT-harod-fac.md` writes `samples/OUTPUT-harod-fac.docx` and `.docx.pdf`: 8 pages; fonts embedded EBGaramond-Regular and -Bold only.
+
+- Matches typst: body and caption in EB Garamond 13 pt; 28 numbered lines on a 24 pt grid; counsel from line 1; court title on line 7; caption ruled right and below; allegations numbered; pages 1 to 8 viewed at 60 dpi (all 8), and the left pleading rule checked at 150 dpi (double).
+- Differs, and why: (1) the pleading numbers 1 to 28 are a floating text box in the header (Word and LibreOffice place it from the page edge, not from the text); (2) the two pleading rules are page borders around the text area, so they run from the top to the bottom margin, not the full page height as in typst; (3) the caption row height is estimated from the number of wrapped lines, so the grid below it can differ by a line from typst; (4) no typst PDF is in `samples/` for this doc type (`OUTPUT-harod-fac.pdf` is not in this snapshot), so the docx was compared with the typst template and the review above, not with a rendered typst page.
+- BLOCKED: `tools/check.sh <folder> --engine docx` cannot run on a doc-type folder: it reads `court.json` and `checks.yaml` from the folder it is given (exit 2). No stamp is written. Every Gate 1 rule check in `checks.yaml` is therefore not run for docx; the observations above are not a gate result.

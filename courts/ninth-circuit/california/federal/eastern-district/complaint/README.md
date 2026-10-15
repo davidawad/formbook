@@ -90,3 +90,14 @@ Rendered at 60 dpi and viewed page by page.
 - Page 12: JURY DEMAND (unnumbered paragraph), second signature block. Pass.
 
 Defects found and fixed during review: the signer's name printed three times (sample `signature.lines` repeated it; fixed); the footer title wrapped to two lines (shortened to "COMPLAINT; DEMAND FOR JURY TRIAL"; fixed).
+
+## Engines
+
+### docx (checked with LibreOffice only; Word is not available here)
+
+- Build: `sh docx/build-reference.sh docx/reference.docx` (styles, the numbered-line header frame, the footer, page borders); render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-morgan-complaint.md` writes `samples/OUTPUT-morgan-complaint.docx` and `samples/OUTPUT-morgan-complaint.docx.pdf` (12 pages; EB Garamond embedded, no other face).
+- Pages viewed: all 12 pages of `OUTPUT-morgan-complaint.docx.pdf` at 60 dpi, in the final build.
+- No typst `OUTPUT` PDF exists in `samples/` for this sample, so the docx was compared with the typst template source and the rules above, not with a typst render page by page.
+- Matches the typst template: numbers 1 to 28 on every page (a header frame, not Word's line numbering, so blank lines are numbered too); exact 24 pt double spacing; 13.8 pt single spacing for counsel, caption and signature; counsel on lines 1 to 7 and the court title on line 8; the ruled party column of the caption; the footer with the description and the page number on one line; the lead-in on page 2.
+- Differs from typst: the signature blocks (13.8 pt single) sit between numbered lines rather than on them; the pleading rules are page borders around the text area, not lines drawn the full page height; the caption's right column wraps by LibreOffice's line breaking.
+- BLOCKED: `sh tools/check.sh <this folder> --engine docx` cannot run: it reads `court.json`, `checks.yaml` and `reviews/` in the folder, and this folder has none (the court has no `rules.md` yet; not created here). Exit 2, no stamp written. Gates 0 to 3 are therefore not run for docx; the pages were checked by eye only.

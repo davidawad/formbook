@@ -84,3 +84,20 @@ Reviewed pages: 11 of 11, each rendered and looked at. The place() change to the
 9. **Overlay pairing** is coarse at the memorandum signature (see Render and overlay).
 10. **Counsel block.** The sample lists all three firms' counsel on the final page. Rule 3.2(a)(ii) asks for the contact details of the attorney designated to receive service; the template prints every counsel block passed in, so the author chooses which to include.
 11. **Chevrolet Bolt exemplar is a compilation.** Pages 26–387 (schedule, complaints, docket sheets) were left out of `exemplars/` to keep the file size reasonable. The compiled file is still a real filed document for the pages kept.
+
+## Engines
+
+**docx** (`docx/`): built by `docx/render.sh` (pandoc, `docx/jpml.lua`, `docx/reference.docx`; the reference is built by `docx/build-reference.sh`, and `docx/pages.awk` places the table of contents and table of authorities). Checked with LibreOffice only: Word is not available here, so Word pagination is not verified.
+
+What matches the typst output (all 12 docx pages and all 11 typst pages were rendered at 60 dpi and viewed): EB Garamond 12 pt, embedded; letter paper, 1 in margins; body text at exactly 24 pt with a 0.5 in first-line indent; single spacing for the caption, counsel blocks, signature block, headings and footnotes; the motion numbered 1-2, the memorandum cover unnumbered, the table of contents and table of authorities roman (i, ii), the body from 1; the caption, counsel grid, signature block (one unbreakable table row, so it moves whole) and certificate of service; heading labels I., A., 1., a. with hanging indents; native footnotes.
+
+What differs and why:
+- Pagination: the docx is 12 pages (body 1-7) against 11 for typst (body 1-6). LibreOffice breaks lines and footnotes differently, and the certificate of service falls alone on body p. 7 because the signature block fills p. 6.
+- The panel heading on page 1 wraps to two lines in the docx; typst keeps it on one line.
+- Typst sets the memorandum headings larger (its default heading size); the docx keeps the 12 pt size the rules set, for headings too.
+- The (a)-(e) list in the introduction is double spaced with hanging indents in the docx; typst sets it single spaced. The docx follows the rule that text is double spaced (JPML-FORM-003).
+- The table of contents and table of authorities are static text, not TOC/TA fields. Their page numbers come from a first LibreOffice pass (`docx/render.sh`), so they are right for LibreOffice; if the document is edited or opened in Word with different pagination, rerun `docx/render.sh` to regenerate them.
+
+BLOCKED (docx):
+- `sh tools/check.sh <doc-type-dir> --engine docx` does not run: it reads `checks.yaml` and `court.json`, and neither exists for this doc type or in the court folder (no `checks.yaml`, no rules file with check IDs). It exits 2 before any gate runs, so there is no Gate 0 or Gate 1 result and no `.check-docx.txt` stamp. Blocked until the court has a `checks.yaml`.
+- Gate 2 (visual review) is recorded above for the docx as rendered by LibreOffice, not Word.

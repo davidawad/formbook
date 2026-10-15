@@ -103,3 +103,13 @@ Fixes made during this review: the same paragraph-spacing and caption-gutter and
 - **Transcription**: the sample covers the first part of the 49-page brief only (issues, jurisdiction, facts A and B, argument I.A, conclusion). Argument I.B and later, and facts C onward, are not transcribed. Two OCR-garbled items were corrected in transcription: "Al37" → A137 and "Tamak Farm" → Tarnak Farm. The corrected names and cites should be checked against the PDF before any reuse.
 - **Number format**: word count without a thousands separator (page 8).
 - **Overlay default**: the second exemplar sorts first, so `tools/overlay.sh` without the third argument picks the wrong filing for this doc type.
+
+## Engines
+
+**docx** (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default reference, `mc.lua` builds the cover, contents, signature and certificates from the frontmatter). Render: `sh tools/render.sh --engine docx <folder> samples/INPUT-hicks-answering-brief.md` writes `samples/OUTPUT-hicks-answering-brief.docx` and `.docx.pdf` (LibreOffice). Pages reviewed: 10 of 10 (every page of the `.docx.pdf`, each compared with the typst page; the review PNGs are in `/work/artifacts/mc/answering-brief/`, not committed).
+
+- Matches the typst form: Liberation Serif 12 pt (the Times New Roman substitute, `docs/FONTS.md`; `pdffonts` shows only LiberationSerif), 1 in margins, US Letter; caption with the parenthesis column; counsel block; centered bold level-1 headings (17 pt, the size the typst headings render at) and bold hanging level-2/3 headings; footnotes 11 pt; cover and contents unnumbered; body numbered from 1, centered; certificates on their own pages; the signature block kept together.
+- Differs: the word count prints with a thousands separator (13,879), as the filed exemplar does; the typst prints 13879. The issues list "(I)" to "(f)" is a Word numbered list with a hanging indent, not the typst paragraphs. Word may paginate differently from LibreOffice.
+- Typst leading: the typst body renders at a 19.25 pt line pitch (measured), which is not the 25 pt a 12 pt double-spaced line gives in Word. The docx keeps the typst pitch. Whether the rules require true double spacing is unverified (see "Rule basis").
+- BLOCKED: TOC page numbers (the contents field has cached entries without page numbers; a field update in Word or LibreOffice adds them; no second pass is implemented). No check ID exists yet (no `checks.yaml`).
+- BLOCKED: `sh tools/check.sh <folder> --engine docx` exits 2: `Error: open .../checks.yaml: no such file or directory`. Gates 0 to 3 were not run.

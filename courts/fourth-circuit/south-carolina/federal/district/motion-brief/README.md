@@ -75,3 +75,29 @@ Open findings: none for layout. The exemplar's own typographical quirks are repr
 ## Exemplar search (for the record)
 
 CourtListener search API, `court=scd`, `type=rd`, query `"MOTION to Dismiss" "12(b)(6)"`, then `"Memorandum in Support" "Motion to Dismiss"`, filed after 2024-06-01, `is_available=true`. Candidates downloaded: Cobb v. Charleston County School District, memorandum (ECF 24-1, 7 pp., selected: standalone Rule 12(b)(6) memorandum, text-based PDF); Williams/Freedom Mortgage and Musgrave v. Mace turned up only as orders and were not used; SLWP, LLC v. MGoBlue (ECF 11-1, 37 pp., not used: longer than the 8 to 14 page target).
+
+## Engines
+
+typst (`typst/`) is the reference. The docx engine (`docx/`) was built to its form and every page was compared with the typst page.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-cobb-motion-brief.pdf` (6 pp.) | reference |
+| docx | `OUTPUT-cobb-motion-brief.docx` and `OUTPUT-cobb-motion-brief.docx.pdf` (7 pp.) | ok: LibreOffice converts it without error; all 7 pages of the `.docx.pdf` viewed at 60 dpi, set beside the typst pages 1 to 6 |
+
+```sh
+sh tools/render.sh --engine docx courts/fourth-circuit/south-carolina/federal/district/motion-brief samples/INPUT-cobb-motion-brief.md
+sh docx/make-reference.sh     # rebuilds docx/reference.docx (run from the doc-type folder)
+```
+
+- *Build:* `docx/reference.docx` (styles, US Letter, 1-inch margins, centered PAGE field in the footer; from pandoc's default reference document) and `docx/scd-motion-brief.lua`, which writes the court heading, caption table, document title and signature table (location and date; the signing attorneys; the firm) from the frontmatter. Footnotes and the block quotation are pandoc's, styled in the reference. No `render.sh`, no `checks.yaml`.
+- *Font:* declared as Times New Roman (see the complaint's Engines section); LibreOffice here shows LiberationSerif only.
+- *Matches typst:* 12 pt type, footnotes 12 pt; 1-inch margins; page number centered at the foot; the court heading; the caption; the title; headings (levels 1 and 2 bold, centered, capitals; level 3 bold, flush left); half-inch first-line indent; footnote numbering and placement; the signature block.
+- *Differs:*
+  - Body pitch: Word's double (27.6 pt) against typst's 27.06 pt. The memorandum runs to 7 pages against typst's 6. The conclusion and the signature block move together to page 7 (page 6 of the docx ends after the last argument paragraph); typst keeps them on page 6.
+  - The block quotation is single-spaced and indented a half inch on both sides. Typst sets it double-spaced. L.R. 1.05(E) allows indented quotations to be single-spaced, so the docx follows the rule text; the typst form is not wrong, but the two differ here.
+  - The title is centered on two lines. Typst's title wraps with its first line running to the full measure.
+  - Signature block lines are Word's 13.8 pt single; typst's are tighter.
+  - **Typst footnotes are below the rule minimum.** Measured on `OUTPUT-cobb-motion-brief.pdf`, footnote text is about 9 pt tall (glyph box 9.3 pt), against 13.3 pt for the 12-pt docx footnote. L.R. 1.05(C) sets 12 pt for footnotes. The typst template needs its footnote size fixed; it was not changed here.
+- *Not verified:* opening in Microsoft Word (no Word on this box). The `.docx` is a valid zip with well-formed XML parts, and LibreOffice converts it without a conversion error.
+- *BLOCKED:* none. This court has no `checks.yaml`, so no check ID was run against the docx; the review is by eye.

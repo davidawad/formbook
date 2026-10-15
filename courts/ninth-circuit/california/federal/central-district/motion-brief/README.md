@@ -80,3 +80,13 @@ The overlap is a diagnostic, not a score. The sample transcribes portions of the
 9. **Footnotes.** The template styles footnotes (single spaced, 14 pt; L.R. 11-3.6.1) but the sample has none, so the footnote path is untested.
 10. **Hearing details.** The exemplar's notice gives "Courtroom 7B" and "Honorable André Birotte Jr." on the cover; the template prints them as the sample supplies them. Current CACD practice may require a different form of the judicial officer's name; not checked.
 11. **Italics.** The text layer of the exemplar carries no italic markup; the sample italicizes case names from the citation form.
+
+## Engines
+
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx`, `cacd-motion-brief.lua` is the filter, `render.sh` fills the footer from the sample). Checked with LibreOffice only; Word was not available. Render: `sh tools/render.sh --engine docx motion-brief samples/INPUT-backgrid-motion-brief.md`, which gives `OUTPUT-backgrid-motion-brief.docx` and `.docx.pdf` (9 pages, all viewed).
+
+- Matches the typst output: EB Garamond 14 pt; exact 24 pt body pitch on the 28-line grid; numbered lines and pleading rules as in the complaint; cover with no page number and no footer; caption with the hearing lines; notice and memorandum numbered from 1 and the tables in roman (checked in the PDF: i, ii, then 1 to 5); memorandum headings numbered I., II., A. by the filter; certificate of compliance on its own page with the word count.
+- Differs: the pleading rules are page borders around the text area; the tables and signature blocks are tables; the cover's court title sits on line 9 (the typst template's counsel block measures a little differently); bullets for `-` items as above.
+- BLOCKED, TOC and TOA page numbers: the table of contents and table of authorities list every entry with dot leaders but no page numbers. Page numbers need a second pass (render, read the page of each heading and authority from the PDF, write them in, render again); that is not implemented. The check IDs that cover table page numbers do not exist yet.
+- BLOCKED: `sh tools/check.sh <court-dir> --engine docx` cannot run in this folder for the same reason as the complaint (no `court.json` or `checks.yaml`).
+- Not compared: no typst OUTPUT PDF exists for this sample, so page counts and positions were not compared with typst.

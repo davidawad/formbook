@@ -90,4 +90,26 @@ sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-midd
 
 The overlay's page map (`samples/OVERLAY-eastwood-msj-brief.txt`) pairs sample pages 1 to 9 with filed pages 1 to 10 (word overlap 32% to 89%), and sample pages 10 and 11 with filed pages 26 and 27 (79% and 96%): the conclusion, signature and certificate are the same text in both. The gap in the middle (filed pages 11 to 25) is the Argument, which is not transcribed.
 
+## Engines
+
+Typst (`typst/`) is the reference. The docx engine (`docx/`) is checked page by page against it, on the LibreOffice PDF of the `.docx`. This court has no `checks.yaml`, so no gate check IDs apply and there are no BLOCKED docx items.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-eastwood-msj-brief.pdf` (11 pp) | reference |
+| docx | `OUTPUT-eastwood-msj-brief.docx` and `OUTPUT-eastwood-msj-brief.docx.pdf` (11 pp) | ok: rendered with `tools/render.sh --engine docx`; the LibreOffice PDF converted without error; all 11 pages viewed beside the typst pages |
+
+```sh
+sh tools/render.sh --engine docx courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief samples/INPUT-eastwood-msj-brief.md
+```
+
+**docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/ncmb-motion-brief.lua`). `make-reference.sh` builds the reference from pandoc's default: EB Garamond 13 pt; body at an exact 24 pt line pitch with a 0.5 in first-line indent; headings (level 1 centered capitals; levels 2 to 5 bold with a 0.5 in hanging label); single-spaced block quotations and footnotes; letter page with 1-inch margins; a centered page number on every page but the first (`w:titlePg` with an empty first-page footer). The Lua filter builds the caption page (court lines, caption table, title, body on the same page), the heading labels (I., A., 1., a.), the numbered lists (label at 0.5 in, text at 1.125 in), the signature block, and the certificate of service on a new page. Footnotes are pandoc's native footnotes.
+
+- *Matches typst:* typeface and size; line pitch (24.0 pt in both PDFs); the caption; heading labels and their hanging indents; list layout; the signature block at 3.25 in; the certificate of service with recipients and italic methods; no page number on page 1; page numbers centered.
+- *Differs:* line and page breaks. Both PDFs have 11 pages, but the breaks fall at different words, so a page can start at a different heading or sentence (docx page 3 starts at heading II; typst page 3 starts mid-paragraph). The signature block is alone on page 10 in both. Word counts agree within 2 words (2,881 against 2,879).
+- *Not built:* no table of contents or table of authorities (neither the rules nor the exemplar calls for them).
+- *Word:* not opened in Word. `unzip -t` and xmllint pass on every XML part and every style used in the body is defined; LibreOffice converted it without error.
+- *Pages reviewed:* 11 of 11 pages of `OUTPUT-eastwood-msj-brief.docx.pdf`, each viewed beside typst pages 1 to 11.
+
+
 See also: [[adversary-complaint]] (the other doc type in this court).
