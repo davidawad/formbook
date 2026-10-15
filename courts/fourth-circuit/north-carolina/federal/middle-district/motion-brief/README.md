@@ -90,3 +90,13 @@ Reviewed pages: 10 of 10. The cover (page 1), the argument page (5) and the sign
 8. **Motion and proposed order.** The notice of motion (LR 7.3(a), a separate document) and any proposed order are not generated; the proposed-order requirement was not checked in this run.
 9. **Tier 2.** One exemplar only; EVAL-LOOP asks for two or three filers.
 10. **Gate scripts.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither, and the brief forbids editing `tools/`. The gates were not run; render and overlay were run and the review above is the Gate 2 equivalent for this doc type.
+
+## Engines
+
+Checked on the final renders of `samples/OUTPUT-braham-labcorp-brief.docx.pdf` (10 pages, LibreOffice) against `samples/OUTPUT-braham-labcorp-brief.pdf` (typst, 10 pages). Every page of the docx PDF was rendered at 60 dpi and viewed: pages 1 to 10 (cover, table of contents, table of authorities, body pages 1 to 6, certificates). The `.docx` passes `unzip -tq`.
+
+- **docx** (`docx/reference.docx`, `docx/make-reference.sh --brief`, `docx/ncmd-motion-brief.lua`, `docx/render.sh`). Output: `samples/OUTPUT-braham-labcorp-brief.docx` and `.docx.pdf`. Not opened in Word.
+  - *Matches typst:* EB Garamond only (embedded fonts: Regular, Bold, Italic); letter paper and margins as in typst; body on a 23.0 pt pitch; the cover with the caption; a table of contents and a table of authorities with dot leaders and page numbers; front matter in lower roman (i, ii) and the body in arabic from 1; the heading labels I., A., 1.; case names italic in the authorities; the signature blocks for both signers; the certificate of word count and the certificate of service; page count 10, the same as typst.
+  - *Page numbers:* checked against the body. The table of contents and authorities gave the same page for every heading and authority as the text search of the rendered PDF.
+  - *Differs:* the table of contents and table of authorities are paragraphs with page numbers computed from the LibreOffice layout, not TOC or TA fields. Word may paginate differently, and the numbers would then need regenerating. One citation form (the full cite of *Twombly*) was not found on any page. The authority is still listed on page 5 from its short cite, which the render confirmed. The caption table and the spacing of the certificates differ slightly from typst.
+  - *BLOCKED:* none found. This folder has no `checks.yaml`, so no gate ID exists to block; the review above is by eye.

@@ -90,3 +90,13 @@ Reviewed pages: 11 of 11. Pages 1 to 9 were reviewed on the render that carried 
 7. **Single-circumstance rule (FRCP 10(b)).** Not checked by the template; the author must limit each numbered paragraph to one set of circumstances.
 8. **Separate filings.** The civil cover sheet, the corporate disclosure statement (LR 7.7; Rule 7.1) and summonses are not generated (see Governing rules).
 9. **Gate scripts.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither, and the brief forbids editing `tools/`. The gates were not run; render and overlay were run and the review above is the Gate 2 equivalent for this doc type.
+
+## Engines
+
+Checked on the final renders of `samples/OUTPUT-prillaman-complaint.docx.pdf` (12 pages, LibreOffice) against `samples/OUTPUT-prillaman-complaint.pdf` (typst, 11 pages). Every page of both PDFs was rendered at 60 dpi and viewed: docx pages 1 to 12, typst pages 1 to 11.
+
+- **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/ncmd-complaint.lua`, `docx/render.sh`). Output: `samples/OUTPUT-prillaman-complaint.docx` and `.docx.pdf`. The `.docx` passes `unzip -tq` and every XML part is well formed (`xmllint`). LibreOffice converted it without error. Not opened in Word.
+  - *Matches typst:* EB Garamond 13 pt (the PDF embeds only EB Garamond; OpenSymbol is used only for the bullets of the list on page 9); letter paper; top margin 1.25 in and the other margins 1 in; body on a 23.0 pt line pitch (measured); the caption with the party column closed by a right and a bottom rule; numbered allegations 1 to 78 with the prayer unnumbered; the prayer, WHEREFORE line, list and signature block kept together (docx page 12, as typst page 11); the footnote at the foot of its page; page number centred in the footer.
+  - *Differs:* 12 pages against typst's 11. Headings take a little more space, so the page breaks fall earlier (docx page 1 ends in paragraph 4, typst page 1 ends after paragraph 4). The footnote sits on page 6 of the docx and page 5 of typst. Paragraph numbers are typed text with a tab, not Word list numbering. The bullets are a LibreOffice list.
+  - *BLOCKED:* none found. This folder has no `checks.yaml`, so no gate ID exists to block; the review above is by eye.
+
