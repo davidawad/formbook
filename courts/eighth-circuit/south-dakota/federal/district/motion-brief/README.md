@@ -94,3 +94,35 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 ## Layout defect found and fixed during review
 
 The first render had every paragraph's last line overlapped by the next paragraph's first line. The cause was the paragraph spacing: `spacing: 0pt` in the page setup, so the gap after a paragraph was the bare line box, not a double-spaced line. The fix is `spacing: body-leading` (1.35 em) in `sdd-motion-brief.typ` and `sdd-complaint.typ`. The same defect is in any template that sets `spacing: 0pt` on body text with `leading` set; the caption and signature lines keep `spacing: 0pt` on purpose, because they are single-spaced.
+
+## Engines
+
+Typst is the primary engine (`typst/`). The DOCX engine is `docx/`: pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`) and the filter `docx/sdd-motion-brief.lua`. Its output is `samples/OUTPUT-lone-eagle-motion-to-dismiss.docx`; the LibreOffice PDF of it (`OUTPUT-lone-eagle-motion-to-dismiss.docx.pdf`) was not produced (see BLOCKED).
+
+What the docx follows from the same rules as the typst template (checked in the style and section XML, not on a render):
+
+| Form item (LR 83.4 and the typst template) | DOCX |
+|---|---|
+| EB Garamond 12 pt, every style | `reference.docx`: every style sets EB Garamond, 12 pt |
+| Double spacing, 24 pt pitch | body text: exact 24 pt line (`BodyText`, `FirstParagraph`) |
+| Headings, tables, footnotes, caption, signature: single | `Heading1`-`3`, `Table`, `FootnoteText`, `Single`, `Compact` at single spacing |
+| Margins 1 in, US Letter | `w:pgMar` 1440 twips on all four sides; `w:pgSz` letter |
+| 0.5 in first-line indent | `BodyText` first-line indent 720 twips; body paragraphs unnumbered (as typst) |
+| Caption: parties left, rule on the right and bottom | a 3-column table, 3.25 in party column, cell borders |
+| Footnotes at 12 pt, single | native pandoc footnotes in `FootnoteText` (12 pt, single); the separator differs (see below) |
+| Signature block (firm, "By: /s/", details) | a borderless table; the last paragraph in `BodyKeep` (keep with next) |
+| Certificate of service on its own page | `Heading1` with page-break-before, the recipients, and the "By: /s/" block |
+| Page number, centered, in the bottom margin | PAGE field in the footer (`w:footer` 60 pt from the bottom edge) |
+
+Differences and open items:
+
+- **Pagination is not checked.** The docx was never rendered or viewed, so no line break, page break or page number of the docx is verified. Word and LibreOffice may paginate it differently from the typst PDF.
+- **Footnote separator**: pandoc's default separator, not the typst 1.5 in rule.
+- **Page number position** is set in the footer distance, not copied from the typst PDF; it sits in the bottom margin, as in typst.
+- **Title block**: the docx omits pandoc's title block (`doc.meta` is cleared).
+- **Tables** in the body: single-spaced cells with 0.5 pt grid rules, as typst; no header bolding (as typst).
+
+docx BLOCKED items:
+
+- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF of `OUTPUT-lone-eagle-motion-to-dismiss.docx`): **BLOCKED**. LibreOffice is not on conda-forge and apt needs root. The Debian trixie LibreOffice 25.2.3 debs, extracted without root into a private prefix, abort at UNO bootstrap (`terminate called after throwing an instance of 'com::sun::star::uno::RuntimeException'`, also for `soffice --version`); the cause was not found. No `.docx.pdf` exists, so no docx Gate 0 to 3 result and no docx page was reviewed.
+- Word: the `.docx` was not opened in Word (not available here), so the "opens without a repair prompt" check is not done. The package parts are well-formed XML (`xmllint`).
