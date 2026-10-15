@@ -82,5 +82,5 @@ Tier-2 findings (OPEN or ACCEPTED): the cover proceeding wraps to an orphan "202
 10. **Certificate of service** is not generated. Add a proof-of-service block if the filer needs one.
 11. **TOA tracking** records the page where each `toa:` link starts. A citation that starts at the top of a page and continues is still listed on its starting page. Every citation to be listed must be a link, and the template does not detect citations.
 12. **TOC long titles**: a point title that fills its last line can push the page number onto a new line. Shorter titles avoid it; the template does not wrap around the number.
-13. **Font**: only EB Garamond is vendored under `fonts/`. Times New Roman and Century Schoolbook are not available, and no system font is used.
+13. **Font**: no face is named by the rule. 22 NYCRR 1250.8(f)(1) requires "a serifed, proportionally spaced typeface such as Times Roman" (or a serifed monospaced face such as Courier); "such as" is an example, so EB Garamond is kept, as the template's `font-family` sets. Typeface row: face required none named; substitute none; fit n/a. Checked 2026-10-15 against the LII copy. No system font is used.
 14. **Fourth Department e-filing** (22 NYCRR Part 1245) was not checked.
