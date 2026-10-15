@@ -8,8 +8,9 @@ Folder: `courts/sixth-circuit/ohio/federal/bankruptcy-southern-district/adversar
 | exemplar | yes: `exemplars/FILED-EXAMPLE-caudill-2-25-ap-02053-adversary-complaint.pdf` (1 filer, the chapter 7 trustee; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-caudill-pc-infinity.md` (full transcription of the 10-page filing, Exhibit A included) |
 | render | ok: `samples/OUTPUT-caudill-pc-infinity.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular and -Bold, embedded), no warnings |
-| overlay | ok: `samples/OVERLAY-caudill-pc-infinity.pdf` and `OVERLAY-caudill-pc-infinity.txt` (page map below) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | Face required: none. The LBRs name no face for filings (S.D. Ohio LBR 9004-1(b): "at least 10-12 font size"). Substitute: none, EB Garamond kept (checked 2026-10-15 against the LBR PDF). Metric note: not applicable. |
+| overlay | ok: `samples/OVERLAY-caudill-pc-infinity.pdf` and `OVERLAY-caudill-pc-infinity.txt` (page map below). Run 2026-10-15 against the exemplar fetched from the CourtListener URL in `exemplars/SOURCE.md` to `/tmp`; the PDF is not kept in the repo |
+| pages reviewed | 8 of 8 (re-rendered 2026-10-15 with no template change; every page rendered at 60 dpi and viewed) |
 
 ## Governing rules
 
@@ -82,7 +83,7 @@ Earlier defects found and fixed during this review (for the record): overlapping
 1. **One filer only.** The CourtListener search found other S.D. Ohio adversary complaints, but only one with a text PDF in storage; the second search was rate-limited. The brief asks for one exemplar per doc type, so tier 2 is judged against one filer, not two or three.
 2. **Adversary number is blank**, as on the filed copy. The template prints "Adv. Pro. No." with nothing after it; the clerk assigns the number at filing.
 3. **Adversary Proceeding Cover Sheet and summons are not produced** (LBR 7003-1 and the FRBP 7004 summons are separate filings).
-4. **Font.** EB Garamond at 12 pt. The exemplar is sans-serif (Helvetica / Liberation Sans). The LBRs name no typeface and require 10 to 12 point; 12 point is used. This is a tier-2 convention choice, flagged here rather than treated as a rule.
+4. **Font.** EB Garamond at 12 pt. The exemplar is sans-serif (Helvetica / Liberation Sans). The LBRs name no typeface and require 10 to 12 point; 12 point is used. No court-named substitute applies (`docs/FONTS.md`: "no face named" keeps EB Garamond). This is a tier-2 convention choice, flagged here rather than treated as a rule.
 5. **Footnotes are single spaced** at 12 pt. LBR 9004-1(b) asks for double spacing of the filing; footnotes are conventionally single spaced, and the exemplar's footnote is single spaced. The rule does not exempt footnotes by name, so this is a reading, and it is recorded here.
 6. **Exhibit placement.** Exhibit A begins on the page of the signature rather than a new page. The exemplar also has its exhibit on the last page (its page 10) with the signature above it on page 9. Left as is.
 7. **Page count.** 8 pages against the exemplar's 10 (the exemplar carries the ECF header and a separate exhibit page). Inside the depth target for the content transcribed.
