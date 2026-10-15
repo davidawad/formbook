@@ -72,3 +72,30 @@ sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-dis
 8. **Typeface and spacing are style choices**, not rules. EB Garamond (vendored, OFL) at 13 pt; 24 pt double-spaced lines, as the filed exemplar.
 9. **Page numbers** are plain, centered, bottom of page. The filing's ECF header (case number and filing stamp on each page) is system output and is not reproduced.
 10. **Caption wrap.** "ROBERT W. KEATS, CHAPTER 7 TRUSTEE" wraps in the party column (see review, page 1).
+
+## Engines
+
+The docx engine (`docx/`) is built, and its `.docx` renders, but its LibreOffice PDF was not made (see BLOCKED). Build: `sh docx/build-reference.sh docx/reference.docx` (pandoc default reference, styles and footer replaced). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-keats-v-specialized.md`, which writes `samples/OUTPUT-keats-v-specialized.docx` and then fails at the `soffice` step. `docx/render.sh` (called by `tools/render-docx.sh`) runs pandoc with `docx/kywb-adversary-complaint.lua`, puts back the reference's styles and page setup, and checks the zip and XML parts.
+
+What matches the typst form (set in `docx/reference.docx`; read from its XML, not from a rendering):
+
+- Page: US letter, 1 in margins on all sides (`w:pgSz` 12240 x 15840, `w:pgMar` 1440).
+- Font and size: EB Garamond (vendored, `fonts/eb-garamond`), 13 pt (`w:sz` 26) in the body, headings and footnotes; page number 11 pt, centered, in a PAGE field.
+- Spacing: body lines exact 24 pt, first-line indent 0.5 in; headings centered, bold, keep with next; caption, counsel and signature lines single spaced.
+- Caption: court title, debtor block and adversary block; the party cell carries the right and bottom rule as cell borders; title centered and bold.
+- Allegations numbered 1 to 26 by the filter (a paragraph starting `~ ` is not numbered); relief items lettered A. to C. (UpperAlpha).
+- Signature block indented 3 in; each exhibit starts on a new page (`pageBreakBefore`), as a bordered table, amount columns right aligned, total row bold.
+
+What differs from typst:
+
+- Paragraph spacing: on the typst render (7 pages, `/work/artifacts/kywb/adversary-complaint/OUTPUT-keats-v-specialized.pdf`, outside the court folder) the line pitch measured with `pdftotext -bbox` on page 2 is 24 pt within a paragraph and 29 pt between paragraphs. The docx sets no gap between paragraphs, so its paragraph pitch is 24 pt. Which one the court expects is not decided here.
+- Page count: not measured for the docx (no LibreOffice); the typst render is 7 pages.
+- Caption rule and column widths are Word table borders; Word and LibreOffice draw table borders slightly differently.
+- Hyphenation, kerning and ligatures are the application defaults for the docx; they are not asserted.
+
+docx BLOCKED (the checks that run on the `.docx.pdf` cannot run):
+
+- `docx.pdf` and the Gate 0 and Gate 1 checks: `soffice` (LibreOffice) is not installed on this box, so `samples/OUTPUT-keats-v-specialized.docx.pdf` was not produced. Not passed.
+- Gate 2 page review of the docx: no PDF to look at, so no pages reviewed. Not passed.
+- Opening the `.docx` in LibreOffice or Word (no repair prompt): not done. Only the zip, the XML well-formedness and a pandoc read-back were checked.
+- Word limits in `docs/DOCX.md` that apply to this form: none. The form has no table of contents, table of authorities or pleading line numbers.
