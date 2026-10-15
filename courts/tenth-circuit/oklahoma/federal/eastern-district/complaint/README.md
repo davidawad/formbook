@@ -79,3 +79,12 @@ Every page was rendered at 60 dpi and viewed after the last template change. Com
 ## Pass stamp
 
 Not written. `tools/check.sh` cannot run on this folder shape (gap 10).
+
+## Engines
+
+Typst is the primary engine. The DOCX engine is pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`), `docx/complaint.lua` (cover, caption table, numbering, prayer letters, signature block) and `docx/render.sh` (letter page setup and the centered 12 pt page-number footer, which pandoc does not copy from the reference).
+
+- Matches the typst form: EB Garamond 12 pt; body at an exact 24 pt pitch with a 0.5 in first-line indent; 1 in margins; single-spaced caption, headings' second lines, block quotations and signature block; the caption as a borderless table (party column 3.5 in, ")" column, right column for the case number and legends).
+- Differs: Word may paginate differently from typst (line breaking, table row heights); the caption rows use a fixed 13.8 pt height as in typst; the heading "keep with next" and widow control are Word's; no typeface is named by the court, so the same EB Garamond is used (gap 2).
+- DOCX BLOCKED items: `docx.pdf` (the LibreOffice PDF) is not produced: `soffice` is not installed on the box and cannot be installed without root. `tools/render-docx.sh` also fails at its zip-integrity step because `unzip` is not installed, so `samples/OUTPUT-barrick-complaint.docx` is written but the command exits 1 before the PDF step. The XML parts of the written `.docx` were checked with `ziptool` and `xmllint` (17 of 17 well formed). Visual review of the docx pages: not done (no renderer); pages reviewed = 0. Not verified: that the file opens in Word or LibreOffice without a repair prompt.
+- Gate 0/1/2/3 for the docx engine are not run (`tools/check.sh --engine docx` needs the `.docx.pdf`).
