@@ -96,3 +96,19 @@ Red is our render, blue is the filed exemplar, black is where both agree. Pages 
 ## Searches (exemplar)
 
 CourtListener search for W.D. Mich. motions and briefs in support of a motion to dismiss (`court=miwd`, RECAP `type=r`, filed 2024 to 2026). Downloaded and checked for a text layer: Valenzuela (11 pp., text), Coddington (26 pp., text), and Moser (64 pp., Attorney General, set aside because it runs well past the 25-page limit of a single brief). The other search hits were not downloaded. Chosen: Valenzuela (primary) and Coddington (second filer).
+
+## Engines
+
+DOCX (`docx/`): `sh tools/render.sh --engine docx <this folder> samples/INPUT-valenzuela-brief.md` writes `samples/OUTPUT-valenzuela-brief.docx` (pandoc + `docx/reference.docx` from `docx/build-reference.sh` + `docx/miwd-motion-brief.lua`: cover, contents, numbered headings, signature). Three sections: the cover (empty footer), the contents (lower roman), the brief (arabic from 1). The zip has no duplicate entries and every XML part is well formed (checked 2026-10-15). The `.docx.pdf` step did not run: soffice is not installed on this box.
+
+- **Matches the typst reference (set in reference.docx and the filter):** letter paper, 1 in margins, EB Garamond 12 pt (vendored; code styles use vendored Liberation Mono), exact 24 pt body pitch, exact 13.8 pt single lines for the caption, block quotations, footnotes and signature, 0.5 in first-line indent, footnotes 12 pt, heading numbers I., A., 1., a. with hanging indents, the caption with its rule, "ORAL ARGUMENT REQUESTED" at the right of the caption, the title centered below the caption, the signature block kept as one unbreakable row.
+- **Differs from typst:**
+  - Heading numbers are typed text (number, then a tab) inserted by the filter, not Word numbering. The contents list is a TOC field over Heading 1 and 2 with the entries cached and no page numbers; it is marked dirty so Word offers to update it on open. Nothing here fills in the page numbers.
+  - No table of authorities (as in typst, an open gap; see the Known gaps above).
+  - The 25-page limit (LCivR 7.2(b)) is enforced by typst's assert; the docx has no equivalent check. The count of brief pages in the docx is not measured.
+  - Caption rule as a cell border (as in the complaint).
+- **docx BLOCKED items:**
+  - `docx.pdf / page review`: soffice not installed on this box, so no LibreOffice PDF exists and no page was viewed. Every Gate 0 to 3 check that reads the `.docx.pdf` is blocked, and `samples/.check-docx.txt` is not written.
+  - `LCivR 7.2(b)` (25-page limit): cannot be measured on the docx until the LibreOffice PDF exists (BLOCKED for this box).
+  - `TOC page numbers`: the TOC field has no page numbers until Word or LibreOffice updates it (Word/LibreOffice pagination may differ from the typst numbers).
+  - `TOA`: not generated (matches typst; open gap). Word limit: TA/TOA fields are not produced (docs/DOCX.md).
