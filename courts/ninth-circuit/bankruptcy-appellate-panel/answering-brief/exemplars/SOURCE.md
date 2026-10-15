@@ -25,3 +25,6 @@ Still no exemplar. Searches this session:
 - Ruled out: Hujazi v. Wirum (ca9 No. 14-1030, a Ninth Circuit appeal, not the BAP). cacttc.org hosts only the Meridian appellant's opening brief (already in `../../opening-brief/exemplars/`).
 
 Status: BLOCKED: no public exemplar (re-confirmed 2026-10-15).
+## Re-search 2026-10-15 (batch bap9, bead fb-595.20.25 / fb-595.20.26)
+
+Still no exemplar. Searches this pass: CourtListener REST (anonymous, `type=r`): `"answering brief" "BAP No"` (150 hits, all other courts: ca9, nvd, ded); `"Appellee's Answering Brief" Stadtmueller` (0); `"Imperial County" "answering brief" Stadtmueller` (0). Web search (standard): `"Bankruptcy Appellate Panel of the Ninth Circuit" "Appellee's Answering Brief" pdf`: returned the Litigants Manual and Ninth Circuit memoranda only, no brief. Status unchanged: BLOCKED: no public exemplar.

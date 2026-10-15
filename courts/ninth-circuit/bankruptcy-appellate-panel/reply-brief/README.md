@@ -80,3 +80,6 @@ docx (`docx/build-reference.sh` builds `docx/reference.docx` from pandoc's defau
 - BLOCKED, docx.pdf gates (Gates 0 and 1 run on the LibreOffice PDF): no `soffice` on this box, so `tools/render-docx.sh` writes the .docx and fails at the conversion step. No `OUTPUT-<id>.docx.pdf` exists and no page of the .docx has been viewed; pages_reviewed is 0 for the docx engine.
 - BLOCKED, page-number checks: the TOC and TOA page-number checks cannot pass by construction in this engine (no page numbers without a field update and a TOA field that LibreOffice does not honor), until the docx filter writes page numbers from a first pass.
 - The .docx was validated for a valid zip, well-formed XML in every part, three sections with footer references, and every paragraph style defined in styles.xml. It has not been opened in Word or LibreOffice.
+## Render check 2026-10-15
+
+Re-rendered `samples/OUTPUT-fictional-*.pdf` with `sh tools/render.sh` (exit 0, no typst warnings). `sh tools/overlay.sh` exits 1 again: no exemplar pdf. Every page rendered at 60 dpi and viewed: answering-brief 10 of 10, reply-brief 6 of 6. No template changes in this pass. Still BLOCKED on the exemplar; search log appended to `exemplars/SOURCE.md`.

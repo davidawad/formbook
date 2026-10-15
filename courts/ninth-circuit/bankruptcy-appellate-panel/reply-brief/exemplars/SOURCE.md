@@ -25,3 +25,6 @@ Still no exemplar. Searches this session:
 - Ruled out: Hujazi v. Wirum (ca9 No. 14-1030, a Ninth Circuit appeal, not the BAP).
 
 Status: BLOCKED: no public exemplar (re-confirmed 2026-10-15).
+## Re-search 2026-10-15 (batch bap9, bead fb-595.20.25 / fb-595.20.26)
+
+Still no exemplar. Searches this pass: CourtListener REST (anonymous, `type=r`): `"Reply Brief" "Stadtmueller" "BAP"` (6 hits, all district/circuit dockets, none an appellate brief of this court); `"Appellant's Reply Brief" "BAP No"` covered in the earlier pass. Web search (standard): `"Bankruptcy Appellate Panel" Ninth Circuit "Appellant's Reply Brief" BAP No. pdf`: returned the Litigants Manual, BAP rules and memoranda; the only reply brief hit (NCLC, McAdory) is a Ninth Circuit brief, not this court. Status unchanged: BLOCKED: no public exemplar.
