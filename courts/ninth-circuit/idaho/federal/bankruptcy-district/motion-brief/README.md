@@ -16,7 +16,7 @@ The exemplar is a numbered objection with argument (a brief on a motion), not a 
 
 - D. Idaho LBR 5005-1(c), Documents for Filing [v. 3]: http://www.id.uscourts.gov/Content_Fetcher/index.cfml/Bankruptcy_Local_Rule_5005-1_3699.htm?Content_ID=3699
   - Counsel block in the upper left, starting 1 inch from the top, with name, ISB number, email, office address, telephone, facsimile, and the party represented.
-  - Type 12 to 14 point (EB Garamond 13 pt).
+  - Type 12 to 14 point (EB Garamond 13 pt). The rule names no typeface (checked against the rule text, 2026-10-15), so the template keeps EB Garamond; no substitute from `docs/FONTS.md` applies.
   - Caption: court name, "In re:", debtor, "Debtor", case number with judge suffix, chapter, and the designation of the paper.
 - D. Idaho LBR 9014-1, Witness Testimony at Hearings on Contested Matters: http://www.id.uscourts.gov/Content_Fetcher/index.cfml/Bankruptcy_Local_Rule_9014-1_578.htm?Content_ID=578
   - A party who will present witnesses must say so in its pleading or by separate notice filed and served at least 7 days before the hearing. Not a formatting rule; the template does not implement it.

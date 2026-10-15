@@ -18,7 +18,7 @@ Complete doc-type folder: template, sample, exemplar, render, overlay. Court-lev
   - Cites Fed. R. Bankr. P. 7003, 7004, 7007.1, 7010, 9004(b) and Official Form 1040. Rule texts for those were not fetched.
 - D. Idaho LBR 5005-1(c), Documents for Filing [v. 3]: http://www.id.uscourts.gov/Content_Fetcher/index.cfml/Bankruptcy_Local_Rule_5005-1_3699.htm?Content_ID=3699
   - Counsel block in the upper left, starting 1 inch from the top; required items: name, ISB number, email, office address, telephone, facsimile, and the party represented.
-  - Font 12 to 14 point (the template uses EB Garamond 13 pt, the only vendored face).
+  - Font 12 to 14 point. The rule names no typeface (checked against the rule text, 2026-10-15), so the template keeps EB Garamond 13 pt; no substitute from `docs/FONTS.md` applies.
   - Caption: "UNITED STATES BANKRUPTCY COURT" / "DISTRICT OF IDAHO", "In re:", debtor, "Debtor" designation, case number and chapter, designation of the paper.
   - The rule does not address margins beyond the top start, line spacing, footers, or signature blocks. Those come from the filed exemplar and the template's defaults (1-inch margins; page number footer).
 - Fed. R. Civ. P. 10 (cited in the template header as applicable to the caption): numbered allegations. Text not fetched in this pass.
