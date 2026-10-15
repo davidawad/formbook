@@ -7,9 +7,10 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/adve
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-hood-3-18-ap-03008-adversary-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-hood-complaint.md`: the whole filing (8 pages), transcribed from the text layer |
-| render | ok: `samples/OUTPUT-hood-complaint.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-hood-complaint.pdf` and `samples/OVERLAY-hood-complaint.txt` |
-| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (E.D. Tenn. LBR 9004-1(a) names no typeface; checked against the full local rules PDF, 2026-10-15). Font: EB Garamond kept (vendored, `fonts/eb-garamond/`); no court face to substitute. Visual only versus the filed Times New Roman. |
+| render | ok: `samples/OUTPUT-hood-complaint.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings, pdffonts shows EBGaramond only (2026-10-15) |
+| overlay | ok: `samples/OVERLAY-hood-complaint.pdf` and `samples/OVERLAY-hood-complaint.txt` (regenerated 2026-10-15) |
+| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed on 2026-10-15) |
 
 Tools: `sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/adversary-complaint samples/INPUT-hood-complaint.md`, then `sh tools/overlay.sh <same dir> hood-complaint`. Output names follow the repo's file roles (`OUTPUT-`, `OVERLAY-`), not the `<id>-overlay.pdf` names in the brief, because `tools/render.sh` and `tools/overlay.sh` write those names by default.
 

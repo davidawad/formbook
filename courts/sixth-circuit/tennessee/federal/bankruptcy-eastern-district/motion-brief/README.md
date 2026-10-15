@@ -7,9 +7,10 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/moti
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-echo-mav-3-25-bk-31122-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-echo-mav-memorandum.md`: pages 1 to 10 of the filing, the signature block and the certificate of service; argument headings B to E without their bodies (see Known gaps 4) |
-| render | ok: `samples/OUTPUT-echo-mav-memorandum.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-echo-mav-memorandum.pdf` and `samples/OVERLAY-echo-mav-memorandum.txt` |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (E.D. Tenn. LBR 9004-1(a) names no typeface; checked against the full local rules PDF, 2026-10-15). Font: EB Garamond kept (vendored, `fonts/eb-garamond/`); no court face to substitute. Visual only versus the filed Times New Roman. |
+| render | ok: `samples/OUTPUT-echo-mav-memorandum.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings, pdffonts shows EBGaramond only (2026-10-15) |
+| overlay | ok: `samples/OVERLAY-echo-mav-memorandum.pdf` and `samples/OVERLAY-echo-mav-memorandum.txt` (regenerated 2026-10-15) |
+| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-15) |
 
 Tools: `sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/motion-brief samples/INPUT-echo-mav-memorandum.md`, then `sh tools/overlay.sh <same dir> echo-mav-memorandum`.
 
