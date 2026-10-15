@@ -75,3 +75,14 @@ Re-viewed 2026-10-15 at 70 dpi after the re-render (no template change; same EB 
 - Page 5 of the body: paragraph 13, "CONCLUSION", paragraph 14, "RESPECTFULLY SUBMITTED," and the two signature blocks (Green & Sklarz LLC; Pillsbury Winthrop Shaw Pittman LLP), each with its `/s/` line, names with bar numbers, email addresses. The firm name of the second block wraps to two lines. Pass, with the wrap noted.
 
 Overlay: pages pair with the exemplar's pages 1, 2, 5, 6, 8, 10, 12 and 22 by shared words (word overlap 14% to 88%). Page 3 of our render (the table of authorities) pairs poorly (14.5%) because the exemplar's page 5 is body text. The overlay is a diagnostic, not a score.
+
+## Engines
+
+**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `ctb-motion-brief.lua`, `render.sh`, `pagemap.awk`; output `samples/OUTPUT-pillsbury-memorandum.docx` and `samples/OUTPUT-pillsbury-memorandum.docx.pdf`, the LibreOffice conversion):
+
+- Matches the typst output: letter, 1 inch margins; EB Garamond 12 point (embedded, only EB Garamond in `pdffonts`); double spacing at 24 pt; caption box; title; the cover's footer carries "ORAL ARGUMENT REQUESTED" in the lower margin; three sections as in typst (cover without number; table of contents and authorities in lower roman; body from 1); the docket line and page number from page 2 on; numbered paragraphs from the first heading, with lettered items at 0.5 inch and not numbered; centred `#` and bold left `##` headings; the signature blocks side by side.
+- The table of contents page numbers come from a first pass (`render.sh` converts it, finds each heading's page in the PDF text, and checks the second pass gives the same map). The table of authorities uses the frontmatter pages, as typst does.
+- Differs (tier 2, accepted): no blank line between body paragraphs (typst leaves about 16 pt); the table of contents entries are regular weight (typst's are bold); the authorities have no leader dots; the body runs one page longer (6 pages against typst's 5), because the header takes more of the top margin and the signature block moves to its own page. Pages 4 to 9 of the docx PDF are body and signature, and the total is 9 pages against typst's 8.
+- Word has not been run here. The `.docx` was checked only by LibreOffice (converts without error; every XML part well-formed).
+- BLOCKED: `tools/check.sh` (Gates 0 to 3, every check ID): cannot run on this doc-type folder. It reads `court.json` and `checks.yaml` at the court level (`courts/second-circuit/connecticut/federal/bankruptcy-district/`), and this box does not produce those files. No `samples/.check-docx.txt` was written.
+- Pages reviewed: all 9 pages of `OUTPUT-pillsbury-memorandum.docx.pdf` were rendered at 60 dpi and viewed, and compared with all 8 pages of the typst render.

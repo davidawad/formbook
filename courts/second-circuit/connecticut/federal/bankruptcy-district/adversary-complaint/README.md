@@ -69,3 +69,13 @@ Every page rendered at 60 dpi and viewed after the final template change (headin
 - Page 7: paragraphs 40 and 41; PRAYER FOR RELIEF heading; the unnumbered WHEREFORE paragraph; prayer items 1 to 3; the date and place; the signature block (`By: /s/ Patrick R. Linsey`, the signers with bar numbers and emails, the firm, the role). Pass.
 
 Overlay: our pages pair with the exemplar's pages 4 to 12 by shared words (word overlap 52% to 88%). The exemplar's first two pages are the cover sheet, so the pairing starts at its page 4. The overlay is a diagnostic, not a score.
+
+## Engines
+
+**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `ctb-adversary-complaint.lua`, `render.sh`; output `samples/OUTPUT-1stdibs-complaint.docx` and `samples/OUTPUT-1stdibs-complaint.docx.pdf`, the LibreOffice conversion):
+
+- Matches the typst output: letter, 1 inch margins; EB Garamond 12 point (`pdffonts` on the docx PDF shows only EB Garamond, embedded); double spacing at 24 pt; caption box with right and bottom rules; court name, title; numbered paragraphs from the first heading, none under PRAYER FOR RELIEF; centred `#` headings, bold left `##` headings; the docket line in the header and the page number in the footer from page 2 on (page 1 has neither); the signature block.
+- Differs (tier 2, accepted): no blank line between body paragraphs (typst leaves about 16 pt); the prayer's list uses Word's list indentation; the first-page layout runs one line longer, so the docx is 8 pages against typst's 7 (the same content falls on pages 2 to 8).
+- Word has not been run here. The `.docx` was checked only by LibreOffice (converts without error; every XML part well-formed).
+- BLOCKED: `tools/check.sh` (Gates 0 to 3, every check ID): cannot run on this doc-type folder. It reads `court.json` and `checks.yaml` at the court level (`courts/second-circuit/connecticut/federal/bankruptcy-district/`), and this box does not produce those files. No `samples/.check-docx.txt` was written.
+- Pages reviewed: all 8 pages of `OUTPUT-1stdibs-complaint.docx.pdf` were rendered at 60 dpi and viewed, and compared with all 7 pages of the typst render.
