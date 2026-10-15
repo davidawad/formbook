@@ -7,9 +7,10 @@ Court for the Northern District of Indiana (`innd`). Folder: `courts/seventh-cir
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-mcgonigle-1-25-cv-398-motion-brief.pdf` (sampled; 15 pages), plus `exemplars/FILED-EXAMPLE-nowak-3-24-cv-950-motion-brief.pdf` (second filer; 20 pages). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-mcgonigle-motion-brief.md`: the whole memorandum transcribed (caption, I–IV headings with A/B and 1–3 sub-headings, 13 footnotes, one block quotation, conclusion, signature block, certificate of service). |
-| render | ok: `samples/OUTPUT-mcgonigle-motion-brief.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-mcgonigle-motion-brief.pdf` and `OVERLAY-mcgonigle-motion-brief.txt` |
-| pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed on the final build) |
+| typeface | No face named by the rule: EB Garamond (vendored), per `docs/FONTS.md` ("No face named"). Embedded per `pdffonts`: EBGaramond Regular, Bold, Italic, BoldItalic. See Known gaps 1. |
+| render | ok: `samples/OUTPUT-mcgonigle-motion-brief.pdf`, 13 pages, typst 0.15.0, vendored fonts only, no warnings (re-rendered 2026-10-15) |
+| overlay | ok: `samples/OVERLAY-mcgonigle-motion-brief.pdf` and `OVERLAY-mcgonigle-motion-brief.txt` (rebuilt 2026-10-15) |
+| pages reviewed | 13 of 13 (every page rasterized and viewed on the 2026-10-15 build) |
 
 File names follow `CLAUDE.md` and the `tools/` defaults (`INPUT-`, `OUTPUT-`, `OVERLAY-`); see `../complaint/README.md`.
 
@@ -30,6 +31,7 @@ Primary sources. Sources checked on 2026-10-14:
 | L.R. 5-4(a)(2) | 8.5 × 11 inch pages. | `paper: "us-letter"`. |
 | L.R. 5-4(a)(3) | At least 1-inch margins. | `margin = 1in`. |
 | L.R. 5-4(a)(4) | At least 12-point type in the body; at least 10-point in footnotes. | `type-size = 12pt`; `note-size = 10pt` (`show footnote.entry`). |
+| L.R. 5-4(a) (typeface) | No typeface is named. The rule sets only the 12-point and 10-point minimums above. | EB Garamond, the default in `docs/FONTS.md`; see Known gaps 1. |
 | L.R. 5-4(a)(5) | Double spaced, except headings, footnotes and quoted material. | `pitch = 27.6pt`, `body-leading = 1.65em`; headings, footnotes and the block quotation are single spaced or set off by pitch. Body baselines measure 27.6 pt apart. |
 | L.R. 5-4(a)(6) | Consecutively numbered pages. | Centered arabic footer on every page. |
 | L.R. 5-4(a)(7) | A title on the first page. | `paper-title(meta)`: "DEFENDANT MORIARTY GEM CORP.’S MEMORANDUM IN SUPPORT OF ITS MOTION TO DISMISS UNDER RULE 12(b)(6)". |
@@ -66,7 +68,7 @@ Not produced by this template (separate filings): the motion itself, the propose
 
 ## Known gaps and open choices
 
-1. **Font.** EB Garamond (vendored, the only font in `fonts/`) in place of Times New Roman used by the filers. EB Garamond at 12 pt has a smaller x-height than Times, so the text looks smaller than the exemplar. The 12-point minimum is met. A Times-metric font would remove the difference; that is for David to decide (`fonts/` is not mine to change).
+1. **Font.** No typeface is named by N.D. Ind. L.R. 5-4(a) (checked 2026-10-15 against the 2016 local-rules compilation; see Governing rules), so the template keeps EB Garamond, the no-face default in `docs/FONTS.md`. The filers use Times New Roman, but the rules do not require it, so that is a tier-2 difference: EB Garamond at 12 pt has a smaller x-height than Times, and the text looks smaller than the exemplar. The 12-point minimum is met. If the court's current rules name a face, switch to that face's substitute from `docs/FONTS.md` (Liberation Serif for Times New Roman).
 2. **Caption.** A rule-closed party block, not a ")" column. The sampled filer used no column at all; the second exemplar's caption is different again. Recorded as ACCEPTED.
 3. **Heading case.** The sample's level 2 and 3 headings follow the filing's own capitalization (for example "is Not", "did Not", "did not"); the filing is not consistent and the template does not normalize it.
 4. **Quotation citation.** The citation that follows the block quotation (`2003 TCPA Order, 18 FCC Rcd. 14014 ¶ 166 (emphasis added).`) is a continuation paragraph with an indent; in the filing it continues the text flush left. Tier-2 cosmetic difference.
@@ -78,7 +80,7 @@ Not produced by this template (separate filings): the motion itself, the propose
 
 ## Review of the rendered pages (final build)
 
-- Page 1: caption, the title, the Introduction. Footnote 1 at the foot of the page. Pass.
+- Page 1: caption, the title, the Introduction. Footnote 1 at the foot of the page. Pass. As in the complaint, the division line overlapped the second court line in the 2026-10-14 build; fixed in `cover()` (same single-spaced stack) and checked at 110 dpi.
 - Page 2: Introduction (continued), II. STANDARD OF REVIEW, III. heading (two lines), A. heading. Pass.
 - Page 3: A. text, footnotes 2 and 3 at the foot. Pass.
 - Page 4: the end of Section III.A text; footnote 4 begins at the foot (it continues on page 5). Pass.

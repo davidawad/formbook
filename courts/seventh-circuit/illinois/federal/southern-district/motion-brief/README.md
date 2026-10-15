@@ -7,9 +7,10 @@ Folder: `courts/seventh-circuit/illinois/federal/southern-district/motion-brief/
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-shelton-3-26-cv-00213-motion-to-dismiss.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-shelton-motion-to-dismiss.md`: the whole exemplar (caption, motion, brief, conclusion, signature, certificate of service, 12 footnotes) |
-| render | ok: `samples/OUTPUT-shelton-motion-to-dismiss.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-shelton-motion-to-dismiss.pdf` and `.txt` (7 of 7 pages paired) |
-| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required by rules: **none** (S.D. Ill. LR 7.1(a)(3) sets 12-point font; LR 5.1(a) sets paper and spacing; no typeface named). Vendored substitute: **EB Garamond** (kept, because no face is named). Fit: n/a. |
+| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-shelton-motion-to-dismiss.pdf`, 7 pages, typst 0.15.0, `pdffonts`: EB Garamond only (Regular, Bold, Italic, embedded), no warnings |
+| overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `exemplars/*.pdf`, which is not in this snapshot (only `exemplars/SOURCE.md` is tracked). `samples/OVERLAY-shelton-motion-to-dismiss.txt` is the earlier output and was not regenerated; no `.pdf` overlay is present. |
+| pages reviewed | 7 of 7 (2026-10-15: every page rendered at 60 dpi and viewed; no template change in that pass) |
 | `check.sh` | not run: same reason as `../complaint/README.md` (this doc-type folder is not a court folder with `court.json` and `rules.md`). The review below is the Gate 2 equivalent. |
 
 File names: the overlay tool reads and writes `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (its fixed names).
@@ -72,7 +73,7 @@ Reviewed pages: 7 of 7.
 ## Known gaps and open choices
 
 1. **One exemplar, one filer.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search for S.D. Ill. 12(b)(6) motions with a memorandum returned mostly orders and pro se papers. Shelton is the only one found with a complete text layer. Clearinghouse pages (which listed the U.S. v. Illinois motion, 3:25-cv-01691, ECF 18) returned HTTP 403, so that motion was not checked. The tier-2 judgement is against one filer.
-2. **Font.** EB Garamond (vendored, OFL) at 12 pt. The exemplar is Times New Roman, 12 pt. EB Garamond at 12 pt reads smaller than Times at 12 pt; the rule's minimum is met. A Times-metric font would need a vendored file.
+2. **Font.** EB Garamond (vendored, OFL) at 12 pt. The local rules name no typeface (LR 7.1(a)(3) sets "12-point font"), so `docs/FONTS.md` keeps EB Garamond. The exemplar is Times New Roman, 12 pt (`exemplars/SOURCE.md`): a tier-2 convention, not a rule. Liberation Serif (metric-compatible Times substitute) is vendored and would switch the font if David decides the convention outweighs the rule. EB Garamond at 12 pt reads smaller than Times at 12 pt; the rule's minimum is met.
 3. **Signature page without body text.** The conclusion ends page 5 and the signature block (kept together with `breakable: false`) falls to page 6 alone. The exemplar keeps the conclusion and the signature on one page. A fix would keep the last body paragraph with the signature (not done: the markdown body is rendered as one document, and a general keep-with-next for the last paragraph is not implemented). Tier 2; recorded as OPEN, not fixed.
 4. **Certificate spacing.** The recipient list is close to "as follows:" (6 pt). The exemplar's certificate spacing was not measured. Tier 2; ACCEPTED.
 5. **Footer.** The exemplar's footer carries the title and "PAGE n" on each page; the template prints a centered page number only. The rules do not require a footer title; ACCEPTED as tier 3 (filer style).

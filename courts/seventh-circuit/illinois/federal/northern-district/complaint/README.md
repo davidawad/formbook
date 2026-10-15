@@ -9,7 +9,8 @@ Folder: `courts/seventh-circuit/illinois/federal/northern-district/complaint/`.
 | sample md | `samples/INPUT-union-tank-car-complaint.md`: caption, numbered paragraphs 1 to 40 with Count I, prayer, jury demand, signature. Counts II to IX and the rest of the case list in paragraph 19 are not transcribed (see Known gaps). |
 | render | ok: `samples/OUTPUT-union-tank-car-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-union-tank-car-complaint.pdf` and `OVERLAY-union-tank-car-complaint.txt` (page map) |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (N.D. Ill. LR 5.2(e) names no typeface; checked against the consolidated rules text, 2026-10-15). Vendored substitute: not needed; stays **EB Garamond** (the court-named-face rule in `docs/FONTS.md` does not apply). Metric compatibility: n/a. |
+| pages reviewed | 11 of 11 (re-rendered 2026-10-15 and every page rendered at 60 dpi and viewed) |
 
 Build (from the repo root, with the toolchain on `PATH`):
 
@@ -60,7 +61,7 @@ Primary sources, fetched 2026-10-14.
 
 1. **One exemplar, so tier 2 is not judged against two filers.** The brief asks for one exemplar per doc type. The CourtListener RECAP search (`type=r`, `court=ilnd`, recent complaints with downloadable PDFs) also found complaints that were not saved: *Davis v. Klover Holdings Inc.* (docket 74735181, 42 pp), *Harris v. Trapananda Seafarms LLC* (docket 74708265, 80 pp), *Zaragoza v. Taylor Fresh Foods, Inc.* (docket 74686559, 31 pp), *Walker v. Veradigm Inc.* (docket 74763514, 32 pp, class action). Tier 2 for this doc type is therefore judged against this one filing only.
 2. **Sample is a portion.** Paragraphs 1 to 40 and the prayer and jury demand are transcribed from the 33-page filing (captions, Nature of the Action, Parties, Jurisdiction and Venue, UTLX and BWE, the Demand Letter, the Asserted Patents, Count I). Counts II to IX are omitted, and the case list in paragraph 19 is cut to three citations, marked in the text. Paragraph numbers in the sample follow the template (they match the filing for paragraphs 1 to 40).
-3. **Font.** No font is mandated by LR 5.2(e). The exemplar is Times New Roman; the template uses EB Garamond, the only vendored font. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the exemplar's. A vendored Times-metric font would remove the difference; that is a question for David.
+3. **Font.** No font is mandated by LR 5.2(e) (verified: the rule sets paper, line spacing, type size and margins only). The template keeps EB Garamond, per `docs/FONTS.md` (no court-named face, so no substitute). The exemplar is Times New Roman, and EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the exemplar's. This is a visual difference, not a rule difference; switching to Liberation Serif would be a style choice for David, not a conformance fix.
 4. **Attorney identification.** The exemplar shows no attorney code or ARDC number, and the template prints none. Whether N.D. Ill. requires one on filings was not verified in this pass.
 5. **Prayer lettering.** The exemplar letters the prayer A, B, C; the template uses (a), (b), (c) (the pleading convention in this repo's other templates). Recorded as ACCEPTED (tier 2, one filer).
 6. **Caption style.** The exemplar's party column is closed by a rule (box style). Another N.D. Ill. filing reviewed, the memorandum in `../motion-brief/`, uses a column of ")" marks. Both are seen in N.D. Ill. practice; the template follows the box. Recorded as ACCEPTED.

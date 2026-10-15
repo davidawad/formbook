@@ -80,10 +80,10 @@
 }
 
 #let cover(meta) = {
-  stack(dir: ttb, spacing: single-leading, ..meta.court.map(l => align(center, text(weight: "bold", l))))
-  if "division" in meta {
-    align(center, text(weight: "bold", upper(meta.division)))
-  }
+  // Court lines and division in one stack, so the division gets the same single spacing as the court lines.
+  let lines = meta.court.map(l => text(weight: "bold", l))
+  if "division" in meta { lines.push(text(weight: "bold", upper(meta.division))) }
+  stack(dir: ttb, spacing: single-leading, ..lines.map(l => align(center, l)))
   v(pitch)
 }
 

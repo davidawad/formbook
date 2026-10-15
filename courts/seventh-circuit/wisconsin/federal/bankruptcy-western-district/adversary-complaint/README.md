@@ -30,7 +30,7 @@ The court's published local rules page (`https://ecf.wiwb.uscourts.gov/wiwb/Deci
 | Parameter | Value | Basis |
 |---|---|---|
 | Paper | 8½ × 11 in, 1 in margins | Convention (no W.D. Wis. rule found). |
-| Typeface | EB Garamond (vendored, OFL), 12 pt | Convention. Only vendored font; the exemplar is Times. |
+| Typeface | Face required: none. Vendored substitute: none, EB Garamond kept (OFL), 12 pt. Fit: n/a. | No face is named by a rule that governs a complaint. The W.D. Wis. LBR 1007-2 names Arial, Times New Roman or Courier, but only for the creditor matrix of a voluntary petition. Per `docs/FONTS.md` ("No face named"), EB Garamond stays. The exemplar is Times; the template does not follow it. |
 | Line spacing | 24 pt baseline pitch in the body (leading 1.35em, paragraph gap 1.35em; EB Garamond's line box is 0.65em) | Convention, measured on the render with `pdftotext -bbox-layout` (page 2: 24.0 pt between body lines). Not a rule. |
 | Numbered paragraphs | 1., 2., ... with a 0.5 in first-line indent | Fed. R. Civ. P. 10(b). |
 | Caption | Court title centered and bold; party column with a right and bottom rule; "Adversary Case No." to the right, blank line for the clerk unless the sample gives it | Fed. R. Bankr. P. 9004(b); Official Form 416 series (the exact form text was not fetched). |
