@@ -78,3 +78,34 @@ Not generated, on purpose: the notice of hearing (GUB 9073-1), the proposed orde
 | 11 | Senate Report block quotation, III conclusion, CONCLUSION, signature | OK. Signature block on the conclusion page (an earlier layout put it alone on page 12; the spacing before it is now one line). |
 
 Pages reviewed: 11 of 11.
+
+## Engines
+
+### docx (build 2026-10-15, LibreOffice not installed)
+
+Files: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/gub-motion-brief.lua` (cover, caption, signature). Sample output: `samples/OUTPUT-campos-motion-to-dismiss.docx`. Checked: valid zip, every XML part well-formed (xmllint). Not rendered: no page of the docx was looked at (pages_reviewed = 0).
+
+What the XML sets (in `styles.xml`, `sectPr` and the footer part; set, not rendered):
+- EB Garamond 13 pt everywhere; body on an exact 26 pt line pitch (double spacing).
+- Level 1 heading centred and bold; levels 2 and 3 bold, left. Headings have half a line above and below.
+- Footnote Text 11 pt, single spaced (pandoc's footnotes).
+- US Letter with 1 in margins on all four sides; footer distance 0.5 in.
+- Footer: a centred PAGE field (GNLR 5.1(a)).
+- No line numbers and no pleading rules (the typst form draws none).
+- Custom styles: Counsel, Court Title, Caption Block, Signature Block (15 pt exact).
+
+What the filter does (not a style):
+- Cover from the frontmatter: counsel lines, the three court-title lines (the form's text), a spacer that puts the title at least 3 in from the top (computed, not measured), the caption as a two-column table with a bottom and right rule (lead lines, then the parties with "vs." between), the case information on the right, with "With Memorandum in Support" when `memorandum` is true.
+- Signature block: "Respectfully submitted this <date>.", then "/s/" and the signer's name and lines, at the right.
+- The body is pandoc's: the author types paragraph and heading numbers, as in the typst form.
+
+Differs from typst:
+- Level 2 and 3 headings have no 0.5 in hanging indent in the docx (typst has one); the typed letter or number leads them.
+- Heading spacing is half a line above and below, not the typst leading; the cover lines are exact 15 pt, not the typst single leading.
+- The frontmatter `date` is printed through the signature line only; pandoc's own title or date block is suppressed.
+- Pagination is not compared with the typst PDF (no docx page was rendered).
+
+BLOCKED (docx):
+- docx.pdf Gates 0 to 3: BLOCKED, no LibreOffice on the build box (`soffice` is not installed and conda-forge has no package). The `.docx.pdf` was not written; the `.docx` is the only output.
+- The court title at least 3 in from the top (GUB-CMP-002 family, GNLR 5.1(b)): BLOCKED for a measured check; the spacer is computed, not measured.
+- Page-count and cross-reference checks: BLOCKED until a PDF of the docx can be made; the typst PDF is the only measured page count (11 pages).

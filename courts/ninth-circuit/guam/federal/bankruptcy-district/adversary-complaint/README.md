@@ -75,3 +75,36 @@ Official Form 416A (the full caption for a complaint) was not read: `uscourts.go
 | 4 | WHEREFORE, the prayer (a), (b), signing line, signature block | OK. Signature block at right, "/s/" line and typed name below. |
 
 Pages reviewed: 4 of 4.
+
+## Engines
+
+### docx (build 2026-10-15, LibreOffice not installed)
+
+Files: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/gub-adversary-complaint.lua` (cover, caption, numbering, signature). Sample output: `samples/OUTPUT-archbishop-agana-complaint.docx`. Checked: valid zip, every XML part well-formed (xmllint). Not rendered: no page of the docx was looked at (pages_reviewed = 0).
+
+What the XML sets (in `styles.xml`, `sectPr` and the footer part; set, not rendered):
+- EB Garamond 12 pt everywhere; body, headings and numbered paragraphs on an exact 24 pt line pitch (double spacing; 28 lines fill the body area).
+- Body paragraphs 0.5 in first-line indent. Level 1 and 2 headings centred and bold, one numbered line each, level 3 bold left.
+- Footnote Text 11 pt, single spaced.
+- US Letter; top margin 1 in, left 1.5 in, right 0.75 in, bottom 48 pt (the 28 lines end at the bottom margin); footer distance 0.42 in.
+- Double rule at the text's left and a single rule at its right (page borders, offset from text).
+- Word section line numbers 1 to 28, restarting each page (`w:lnNumType`).
+- Footer: a centred PAGE field (GNLR 5.1(a)).
+- Custom styles: Counsel, Court Title, Caption Block, Signature Block (13.8 pt exact), Unnumbered Paragraph, Lettered Item.
+
+What the filter does (not a style):
+- Cover from the frontmatter: counsel lines, the three court-title lines (the form's text), a spacer that puts the title at least 3 in from the top (computed from the counsel line count, not measured), the caption as a two-column table with a bottom and right rule, the case information on the right, then a page break before the body.
+- Paragraphs numbered 1, 2, ... as typed text (number, tab), not Word list numbering; a paragraph starting "§ " is unnumbered. List items are lettered (a), (b) as typed text. Signature block at the right.
+
+Differs from typst:
+- The footer title (`footer_title`) is not drawn. It is case-specific text, and the footer part of the reference must not carry it.
+- Line numbers: Word numbers the text lines that flow in the body, so the single-spaced counsel and caption lines on page 1 are numbered too (more than 28 numbers there), table rows are not numbered, and the last page stops at its last text line. Typst always draws 1 to 28 on every page.
+- The page break before the body is a break run in the paragraph after the caption table; Word may show that paragraph's line at the top of page 2.
+- Typed numbers do not renumber in Word when a paragraph is added; the typst template numbers by itself.
+- The 24 pt pitch and the 0.5 in indent are exact; typst's paragraph gaps (`spacing = 1.35em`) are reproduced only as that pitch.
+
+BLOCKED (docx):
+- docx.pdf Gates 0 to 3: BLOCKED, no LibreOffice on the build box (`soffice` is not installed and conda-forge has no package). The `.docx.pdf` was not written; the `.docx` is the only output.
+- Pleading line numbers (the form's convention, GNLR 5.1 does not require them): BLOCKED for the page-1 count and for numbering across the caption table, as above.
+- The court title at least 3 in from the top (GUB-CMP-002): BLOCKED for a measured check; the spacer is computed, not measured.
+- Page 2 start and footer title (GUB-CMP-001 footer): the page number is set; the footer title is not, by design (see above).
