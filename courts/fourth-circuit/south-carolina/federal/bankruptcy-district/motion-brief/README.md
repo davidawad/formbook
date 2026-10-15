@@ -79,6 +79,24 @@ Footnote 1 (the filer's note on "turned over") renders at the foot of page 4 wit
 
 Gate 2 rows: the review above. There is no `reviews/` folder for this doc type.
 
+## Engines
+
+**docx** (`docx/`; `samples/OUTPUT-ard-zeidmans.docx` and `samples/OUTPUT-ard-zeidmans.docx.pdf`, 8 pages in LibreOffice). `sh docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt; body at a 24 pt exact pitch; single lines at 19.56 pt exact; 1-inch margins; centered PAGE footer at 12 pt). `docx/scb-motion-brief.lua` builds the caption (")" column), the title line, the SC LBR 7012-1 notice page, the facts numbered inside the `numbered_section`, the A./1. headings, the lettered lists, footnotes (native), and the signature block kept with the last two blocks. Render: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-ard-zeidmans.md`.
+
+Matches typst: typeface and size, margins, the 24 pt body pitch, the ")" caption and its rows (17 pt), the title line, the notice page (the notice text runs onto page 2 in the docx, with its signature block there; typst leaves the signature block alone on page 2, as its gap 4 records), facts numbering, A./1. heading labels, the lettered lists, the footnote, block quotations, the centered page number.
+
+Differs:
+- Court title: the docx prints the court name above the caption on the notice page and on the motion (Fed. R. Bankr. P. 9004(b)(1) requires the court's name in the caption). The typst render does not: `motion-part` and `notice-part` in `typst/scb-motion-brief.typ` call only `caption(meta)`, and `court-title` is defined but never called. This is a typst defect for David to decide; `typst/` was not edited.
+- Page breaks: 8 pages in both, but the breaks fall in different places, for the same paragraph-spacing reason as the complaint (typst's paragraph-to-paragraph pitch is about 17 pt; the docx keeps 24 pt).
+- Numbered facts: typst puts the number at 0.5 in and the text 0.93 in from the margin for a one-digit number (measured); the docx uses a 1.00 in tab stop, so one-digit facts sit 0.07 in further right.
+- LibreOffice places the extra leading of exact line spacing above each line, so glyphs sit about 2.5 pt lower than in typst.
+- Certificate of service (SC LBR 9013-3(a)): not generated in either engine (typst gap 3).
+- Word: not opened (no Word on this machine). LibreOffice converted the file without error, and `unzip -tq` and `xmllint --noout` pass on every XML part.
+
+No BLOCKED items. The court folder has no check IDs for this doc type, and no docx-only limit fails a requirement of the form.
+
+Pages reviewed: 8 of 8 of `samples/OUTPUT-ard-zeidmans.docx.pdf`, each viewed at 60 dpi beside the typst render (`/tmp/scb-motion-brief/typst.pdf`, not in the repo), and line positions checked with `pdftotext -bbox-layout`.
+
 ## Reproduce
 
 ```sh

@@ -75,6 +75,22 @@ Numbering check: `pdftotext` on the render gives allegations 1 through 50 in ord
 
 Gate 2 rows: the review above. There is no `reviews/` folder for this doc type.
 
+## Engines
+
+**docx** (`docx/`; `samples/OUTPUT-haigler-joye.docx` and `samples/OUTPUT-haigler-joye.docx.pdf`, 9 pages in LibreOffice). `sh docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt; body at a 24 pt exact pitch; single lines at 19.56 pt exact; 1-inch margins; centered PAGE footer at 12 pt). `docx/scb-adversary-complaint.lua` builds the caption (a table with the rules), the court title, the numbered allegations, the lettered prayer and the signature block, which is kept with the last two blocks. Render: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-haigler-joye.md`.
+
+Matches typst: typeface and size, margins, the 24 pt body pitch, caption layout and text, allegation numbers with wrapped lines flush left, block quotations, headings, the lettered prayer, the signature block and "Dated" line, the centered page number.
+
+Differs:
+- Length: 9 pages in the docx, 8 in typst. Typst applies the leading only between the lines of one paragraph, so paragraph-to-paragraph spacing is about 17 pt there, not the 24 pt pitch the template states. The docx keeps the 24 pt pitch throughout. The typst behaviour is a defect in `typst/` (not edited here); the docx was not made to copy it.
+- Allegation text starts 0.70 in from the margin in the docx (a tab stop). Typst sets it the number plus a 0.5 in gap, so 0.63 in from the margin for one digit and 0.72 in for two (measured with `pdftotext -bbox-layout`).
+- LibreOffice places the extra leading of exact line spacing above each line, so caption and body glyphs sit about 2.5 pt lower than in typst.
+- Word: not opened (no Word on this machine). LibreOffice converted the file without error, and `unzip -tq` and `xmllint --noout` pass on every XML part.
+
+No BLOCKED items. The court folder has no check IDs for this doc type, and no docx-only limit fails a requirement of the form.
+
+Pages reviewed: 9 of 9 of `samples/OUTPUT-haigler-joye.docx.pdf`, each viewed at 60 dpi beside the typst render (`/tmp/scb-adversary-complaint/typst.pdf`, not in the repo), and line positions checked with `pdftotext -bbox-layout`.
+
 ## Reproduce
 
 ```sh
