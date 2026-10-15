@@ -78,3 +78,12 @@ Not produced by this template: the adversary cover sheet, the summons, the notic
 - Page 2: "The statutory predicate" paragraph (unnumbered), BACKGROUND heading, paragraphs 6 to 10, FIRST CLAIM FOR RELIEF heading with its sub-heading kept with paragraph 11. Pass.
 - Page 3: paragraphs 12 to 17; the block quotation of the *RXAR* test, single-spaced and indented, with its citation line; no heading at the foot of a page. Pass.
 - Page 4: paragraphs 18 and 19; WHEREFORE; prayer items A. to D. lettered; the signature block at the right half, with "/s/" and the counsel block. Pass.
+
+## Engines
+
+**docx** (`docx/build-reference.sh` makes `docx/reference.docx`; `docx/tnmb.lua` builds the cover, caption table, signature and numbering; `tools/render.sh --engine docx`, the PDF is the LibreOffice conversion).
+
+- Matches the typst output: 4 pages in both; EB Garamond 12 pt throughout; 8 1/2 x 11 with one-inch margins; double spacing as an exact 24 pt line pitch; 0.5 in first-line indent; numbered allegations (number, tab, text); the caption as a borderless three-column table with the ")" column; the court title and the title lines bold and centered; headings bold and centered at the typst sizes (16.8 pt and 14.4 pt, as the typst render has them); the signature block at 3.25 in; the page number centered at the foot. Reviewed page by page at 60 dpi (4 of 4 pages, docx and typst): every line within about 3 pt of its typst position.
+- Differs (tier 2 or renderer): a few lines break one word differently (for example WHEREFORE item A.); the lettered prayer items are typed as "A." with a tab, not Word list numbering; the first line of each page sits about 3 pt lower than in typst (exact line spacing).
+- Not produced (as in typst): the adversary cover sheet, the summons, the notice of appearance, exhibits.
+- BLOCKED: none for the render. `sh tools/check.sh <court-dir> --engine docx` cannot run in this folder: the court folder has no `checks.yaml` and no `rules.md`, so the gates have nothing to read (not changed here). The docx gates are therefore not run.

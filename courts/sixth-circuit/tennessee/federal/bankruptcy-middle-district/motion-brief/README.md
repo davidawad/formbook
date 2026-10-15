@@ -79,3 +79,12 @@ Primary source: Local Bankruptcy Rules of the United States Bankruptcy Court for
 - Page 5: the remainder of argument A, the *Regions Bank* quotation with footnote 3 inside it (three quotation paragraphs, each its own block, with paragraph gaps), *Id.* citation; the B. sub-heading and the start of argument B; footnote 3 at 12 pt at the foot. Pass.
 - Page 6: argument B, the Koch Refining quotation, the closing paragraph of the argument. White space at the foot, because CONCLUSION and its paragraph are kept together and move to page 7. Pass.
 - Page 7: CONCLUSION, its paragraph, signature block, CERTIFICATE OF SERVICE with the statement and the addressee. Pass.
+
+## Engines
+
+**docx** (`docx/build-reference.sh` makes `docx/reference.docx`; `docx/tnmb.lua` builds the cover, caption table, signature, certificate of service and footnote handling; `tools/render.sh --engine docx`, the PDF is the LibreOffice conversion).
+
+- Matches the typst output: 7 pages in both; EB Garamond 12 pt throughout, footnotes 12 pt; 8 1/2 x 11 with one-inch margins; double spacing as an exact 24 pt pitch; unnumbered body paragraphs with a 0.5 in first-line indent; the caption as a borderless table with the ")" column; the title lines bold and centered; section headings 12 pt bold, centered (level 1) or hanging-indented (level 2); block quotations single spaced and indented 0.5 in from both margins; the signature block at 2.5 in; the certificate of service with the addressee block indented 0.5 in; the page number centered at the foot. Reviewed page by page at 60 dpi (7 of 7 pages, docx and typst): page 1, the signature block and the certificate of service agree with typst to about 1 pt or 3 pt; pages 2 to 6 drift by a few lines after the footnote shift described below.
+- Differs: the footnote on the INTRODUCTION heading is on page 2 in the docx, next to its reference; the typst render sets it at the foot of page 1. Page 1 of the docx therefore has no footnote, and the lines after it shift by a few lines, so some paragraphs break one word differently. Footnote text is single spaced in the docx.
+- Not produced (as in typst): the motion's LBR 9013-1 notice, the proposed order, exhibits.
+- BLOCKED: none for the render. `sh tools/check.sh <court-dir> --engine docx` cannot run in this folder: the court folder has no `checks.yaml` and no `rules.md`, so the gates have nothing to read (not changed here). The docx gates are therefore not run.
