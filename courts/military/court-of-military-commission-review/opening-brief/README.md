@@ -32,7 +32,7 @@ The layout is meant to follow the USCMCR Rules of Practice. I could not read the
 | Requirement used by the template | Value | Source | Status |
 |---|---|---|---|
 | Type-volume (word) limit, principal brief | Not enforced; the certificate prints the word count from the frontmatter | CMCR Rules of Practice, Feb. 3, 2016 (mc.mil PDF), as quoted by a search summary: 14,000 words or 1,300 lines of monospaced text, placed in Rule 15(g) | **Unverified.** The mc.mil PDF returned HTTP 403 to WebFetch and "Access Denied" to curl. The 2013 filing cites "Rule 14(i)" for the same limit. The rule number conflicts between sources. |
-| Typeface and point size | 12 pt; EB Garamond stands in (see "Typeface") | The 2013 filing's certificate: "12-point font and Times New Roman style", citing "Rule 14(e) and (i)"; a 2016 search summary says Times New Roman 12 pt | **Unverified.** The filing also says "monospaced typeface", which contradicts "Times New Roman". |
+| Typeface and point size | 12 pt; Liberation Serif stands in for Times New Roman (see "Typeface") | The 2013 filing's certificate: "12-point font and Times New Roman style", citing "Rule 14(e) and (i)"; a 2016 search summary says Times New Roman 12 pt | **Face: rule text unverified** (the mc.mil PDF is not reachable from the build box). The filing also says "monospaced typeface", which contradicts "Times New Roman". Substitute: metric-compatible (`docs/FONTS.md`). |
 | Spacing | Double-spaced body text | 2016 search summary: "typed or printed, double-spaced, on white paper" | Unverified. |
 | Margins, paper size | 1 in margins, US Letter | Not found | Unverified; chosen to match the exemplar's appearance. |
 | Certificate of compliance and of service | Both generated | The 2013 filing's certificates | Form taken from the exemplar; rule number unverified. |
@@ -54,7 +54,11 @@ Tier 2 calls for two or three exemplars from different filers. Only one opening 
 
 ## Typeface
 
-The filed exemplar is set in Times New Roman (PDF fonts: TimesNewRomanPSMT, TimesNewRomanPS-BoldMT, TimesNewRomanPS-ItalicMT). The rules, as quoted by the filings, call for Times New Roman or a monospaced 12-cpi face. **Neither is vendored** (`fonts/` holds only EB Garamond), and `tools/render.sh` accepts only vendored fonts. The template therefore uses EB Garamond at 12 pt. This does not meet the rule's typeface requirement, and it is the one decision here that only David can make. Options: (a) vendor a Times-metric font (for example Liberation Serif or TeX Gyre Termes, with its license) under `fonts/`, which is a shared change; or (b) accept EB Garamond for CMCR and record it as an accepted deviation. Until then tier 1 is open on typeface.
+**Face required:** Times New Roman, as the filed exemplar is set (PDF fonts: TimesNewRomanPSMT, TimesNewRomanPS-BoldMT, TimesNewRomanPS-ItalicMT) and as its certificate states under "Rule 14(e)". The same certificate also mentions a monospaced 12-cpi option. The primary rule text could not be read: the mc.mil PDF does not resolve from the build box, and a WebSearch of the rule returned only the 2016 summary.
+
+**Font used:** `Liberation Serif` (the Times New Roman substitute in `docs/FONTS.md`, metric-compatible), 12 pt. The template's `body-font` is set to it. Pagination is 13 pages both before and after the switch.
+
+**Still open for tier 1:** the rule text itself. Until someone reads the current CMCR Rules of Practice (Rule 14(e) or its successor), the face is taken from the filings, not from the rule. The monospaced option is not used.
 
 ## Overlay (red/blue)
 
@@ -65,13 +69,13 @@ The filed exemplar is set in Times New Roman (PDF fonts: TimesNewRomanPSMT, Time
 | 1 (cover) | 1 | 97.3% |
 | 2 (contents) | 2 | 88.3% |
 | 3 | 5 | 87.6% |
-| 4 | 6 | 51.3% |
-| 5 | 8 | 59.1% |
+| 4 | 6 | 53.8% |
+| 5 | 8 | 56.9% |
 | 6 | 10 | 77.4% |
-| 7 | 11 | 76.9% |
-| 8 | 13 | 51.0% |
-| 9 | 14 | 70.5% |
-| 10 | 15 | 70.0% |
+| 7 | 11 | 78.0% |
+| 8 | 12 | 51.5% |
+| 9 | 14 | 73.7% |
+| 10 | 15 | 81.6% |
 | 11 | 19 | 36.5% |
 | 12 | 18 | 75.9% |
 | 13 | 19 | 84.2% |
@@ -98,7 +102,7 @@ Fixes made during this review: paragraph spacing was zero, so separate paragraph
 
 ## Known gaps
 
-- **Typeface** (above): EB Garamond stands in for the Times New Roman the rules call for. Open; David's decision.
+- **Typeface** (above): Liberation Serif now stands in for Times New Roman. The face comes from the filings, not the rule text, which is unverified.
 - **Rules unverified** (above): the rule numbers and the 14,000-word, 12-point, double-spacing values are not confirmed against the primary text.
 - **Table of authorities** is not produced. The table of contents is generated. A TOA would need a citation registry like the Ninth Circuit template's.
 - **Word count** is a frontmatter value, not computed from the body.
