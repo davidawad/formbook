@@ -105,3 +105,26 @@ Every page is recorded above; none is `OPEN`.
 8. **Counsel block.** Not at the top of page 1 (as in the exemplar; the Local Rules put it under the signature). A template that needs counsel at the top would be a change; not made.
 9. **Tool checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`. This doc-type folder is not that shape, and `tools/` is shared, so the gates were not run. Render, overlay and the page review above are the Gate 2 record for this doc type.
 10. **Overlay file names.** `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf` and `.txt` (its default names). The overlay is therefore `OVERLAY-white-complaint.pdf`, not `white-complaint-overlay.pdf`; the tool is shared and was not changed.
+
+## Engines
+
+Doc type `complaint`, in this folder. The typst template above is the primary engine and is unchanged.
+
+| Engine | State |
+|---|---|
+| typst | `typst/`, as above. |
+| latex | not built in this change (`latex/` has no template for this doc type). |
+| docx | `docx/reference.docx` (built by `docx/make-reference.sh`) and `docx/iasd-complaint.lua`. `samples/OUTPUT-white-complaint.docx` is written by `tools/render.sh --engine docx`. The `.docx.pdf` is **not produced**: LibreOffice cannot be installed on the box that built this (not on conda-forge, no root), so the LibreOffice-based checks are BLOCKED. Pages reviewed as rendered PDF: 0. |
+
+**docx: what the template sets, from the same parameters as the typst form.** Letter paper, 1-inch margins; EB Garamond 12 pt, the body at 24 pt exact line spacing (double) with a half-inch first-line indent; headings level 1 centered bold capitals, level 2 centered bold, level 3 bold at the margin; the caption as a borderless table with a right and bottom rule on the party column (3.25 in, as typst); the court title and the case number and title as in the typst cover; numbered paragraphs (1., 2., ...) typed by the filter, unnumbered after "Requested Relief" and "Jury Demand"; lettered relief (a), (b), ... with the text at the next tab stop; the signature block at 3.45 in; the filing note at the margin; footer page number centered, arabic from 1. The `.docx` passes the zip and XML checks in `tools/render-docx.sh` and reads back in pandoc with the same text. It has **not** been opened in Word or LibreOffice, so "no repair prompt" is unverified.
+
+**docx: what differs, or is not verified.**
+- Pagination and line breaks are **not verified** (no renderer). Word may break lines and paginate differently from the typst PDF. The page-by-page comparison with the typst OUTPUT is not done for docx.
+- Numbering uses a tab, not the typst gap of 0.25 in: the text starts at the next default tab stop (1.0 in), so a number and its text sit slightly differently from typst.
+- Lettered relief items wrap flush at the margin, as in typst (tier 2).
+- Fonts: the docx names EB Garamond; it must be installed on the machine that opens the file, or Word substitutes silently (`docs/DOCX.md`).
+- No pleading-paper numbering and no certificate, as in typst.
+
+**docx: BLOCKED** (`docs/DOCX.md`, "Checking a docx"):
+- `tools/check.sh --engine docx` (Gates 0 to 3 on `samples/OUTPUT-white-complaint.docx.pdf`): BLOCKED, because the `.docx.pdf` cannot be made here (no LibreOffice). No `.check-docx.txt` stamp is written.
+- The page review of the `.docx` in LibreOffice and Word (`docs/DOCX.md`, step 3): BLOCKED for the same reason; no page was looked at.
