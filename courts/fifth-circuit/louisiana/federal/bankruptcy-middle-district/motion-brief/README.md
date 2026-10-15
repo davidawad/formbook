@@ -116,3 +116,13 @@ Pitch: 24.06 pt on the body lines of page 2 (unchanged from the earlier calibrat
 12. **FRBP 9013 wording.** Quoted from a summarizing fetch (see Governing rules). Check the official text before this template is treated as final.
 13. **Font.** EB Garamond at 12 pt, not Times New Roman. LR 5005-2(b) and LR 9013-5(b) name a size only, no typeface (read from the court's 2022 PDF on 2026-10-14). The Administrative Procedures Manual, which the filing cites for the notice list, was not read, so a face named there is unchecked.
 14. **Overlay pairing.** The overlay pairs pages by word overlap (see Render and overlay); pairs are shown in `samples/OVERLAY-motion-brief-sample.txt`.
+
+## Engines
+
+DOCX (`docx/`: `build-reference.sh`, `reference.docx`, `lamb-motion-brief.lua`; `samples/OUTPUT-motion-brief-sample.docx` is written by `sh tools/render.sh --engine docx`).
+
+- Matches the typst form: EB Garamond 12 pt, exact 24 pt (double) body lines, single-spaced footnotes, block quotations, caption, table cells and signature block; 1 in margins on letter; centred PAGE number in the footer; Form 416 style caption; notice of motion and opportunity for hearing (LR 9013-1(b)(2)) with the same wording; headings centred bold capitals (level 1), bold (level 2), bold italic (level 3).
+- Differs: the "NOTICE" and caption are built by the filter from frontmatter; table cells are single-spaced by a table pass, not by the table style. Footnotes are Word-native footnotes (footnote text 12 pt, single). Pagination follows the renderer (Word and LibreOffice can break lines differently).
+- No TOC or TOA in this form, so no field-update caveat applies.
+- Not run here: no LibreOffice on this box, so no `.docx.pdf` and no page was viewed. `OUTPUT-motion-brief-sample.docx` was validated only as a zip with well-formed XML parts.
+- BLOCKED: docx.pdf gates (tools/check.sh --engine docx, Gates 0-3 on `samples/OUTPUT-motion-brief-sample.docx.pdf`): LibreOffice (`soffice`) is not installed on this box, so no PDF can be made and the stamp `.check-docx.txt` is not written.
