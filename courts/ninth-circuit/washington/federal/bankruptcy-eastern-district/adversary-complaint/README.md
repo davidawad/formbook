@@ -8,8 +8,9 @@ Folder: `courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/adv
 | exemplar | yes: `exemplars/FILED-EXAMPLE-icap-25-80041-adversary-complaint.pdf` (Bush Kornfeld LLP for co-trustees, 2025-09-26) and `exemplars/FILED-EXAMPLE-cle-elum-25-80033-adversary-complaint.pdf` (Stoel Rives LLP for the City of Cle Elum, Chapter 9, 2025-08-13). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-icap-adversary-complaint.md`: caption, paragraphs 1 to 35 (Counts I and II), prayer, signature, Exhibit 1 and Exhibit 2 (full tables). Counts III and IV are not transcribed (see Known gaps). |
 | render | ok: `samples/OUTPUT-icap-adversary-complaint.pdf`, 17 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> samples/INPUT-icap-adversary-complaint.md samples/OUTPUT-icap-adversary-complaint.pdf`). |
-| overlay | ok: `samples/OVERLAY-icap-adversary-complaint.pdf` and `samples/OVERLAY-icap-adversary-complaint.txt` (`tools/overlay.sh` with the iCap exemplar as third argument; see Overlay). |
-| pages reviewed | 17 of 17 (every page rasterized at 60 dpi and viewed after the last template change, 2026-10-14). |
+| overlay | ok: `samples/OVERLAY-icap-adversary-complaint.pdf` and `samples/OVERLAY-icap-adversary-complaint.txt` (`tools/overlay.sh` with the iCap exemplar as third argument, 2026-10-15; see Overlay). The exemplar PDF is not in the checkout; it was fetched from its CourtListener URL in `exemplars/SOURCE.md` into a scratch directory for the run. |
+| pages reviewed | 17 of 17 (2026-10-15: every page rasterized at 70 dpi and viewed as a contact sheet, unchanged font; earlier 60 dpi review 2026-10-14). |
+| typeface | LBR 9004-1(a)(3) names no face; EB Garamond kept (2026-10-15 check of the rule text). See Typeface. |
 
 ## Governing rules
 
@@ -31,6 +32,12 @@ Primary sources, fetched 2026-10-14 (the rule text in each source is quoted from
 | FRBP 9004(a) (https://www.law.cornell.edu/rules/frbp/rule_9004, eff. Dec. 1, 2024) | "A petition, pleading, schedule, or other document must be clearly legible." | Text in EB Garamond, 14 pt, roman; no fallback font (`fallback: false`). |
 
 Not produced by this template (separate filings, may be required with the first filing): the adversary cover sheet (Official Form 1040, LBR 7003-1(a)), the summons, and the disclosure statement.
+
+## Typeface
+
+- Court rule: LBR 9004-1(a)(3) requires "a proportionately spaced typeface of 14 points or more" and roman type. It names no face (checked 2026-10-15 against the text of the Complete Set of Local Rules, dated 2026-07-17 on the court's site).
+- Substitution: none. The rule names no face, so the template keeps EB Garamond (`docs/FONTS.md`, "No face named"). No other typeface is used in the template.
+- Times New Roman in the filed exemplar is the filer's choice, not a rule requirement, and is not copied.
 
 ## Layout
 
@@ -66,7 +73,7 @@ Not produced by this template (separate filings, may be required with the first 
 
 ## Known gaps
 
-1. **Font size look.** Only EB Garamond is vendored. At 14 pt it is visibly smaller than the exemplar's Times at 12 pt, even though the rule's 14-point minimum is met. A vendored Times-metric font would remove the difference; that is a question for David, not a template fix.
+1. **Font size look.** The rule names no face, so EB Garamond at 14 pt is compliant. The exemplar's Times at 12 pt looks larger; that is the filer's choice, not a requirement, so no Times substitute is used (see Typeface).
 2. **Exemplar coverage.** The sample transcribes paragraphs 1 to 35 (Counts I and II), not Counts III and IV (paragraphs 36 to 45 of the filing). The sample's own excerpt note says so. The exemplar is 18 pages and the render is 17; the target of 8 to 14 pages is not met because the sample keeps the full caption, both exhibits and the signature at 14 pt.
 3. **Second filer.** Two filers are saved (iCap and Cle Elum). Only iCap is transcribed and overlaid. Tier 2 (conventions) has not been judged against the Cle Elum caption (a two-column caption with the Chapter 9 case number and a different counsel layout) yet.
 4. **Adversary number.** The iCap filed caption leaves "Adv. Pro. No." blank; the sample takes the number (25-80041-WLH) from the footer of the filed pages. This is sample content, not template content.

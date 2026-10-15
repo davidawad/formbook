@@ -7,9 +7,10 @@ Folder: `courts/second-circuit/connecticut/federal/bankruptcy-district/motion-br
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-despins-pillsbury-24-05014-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-pillsbury-memorandum.md` (cover, table of contents and authorities, preliminary statement, facts, legal standard, the first argument heading and paragraphs 10 to 13, conclusion; footnotes omitted) |
-| render | ok: `samples/OUTPUT-pillsbury-memorandum.pdf`, 8 pages (cover, 2 front-matter pages numbered i and ii, 5 body pages numbered 1 to 5), typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
-| overlay | ok: `samples/OVERLAY-pillsbury-memorandum.pdf` and `OVERLAY-pillsbury-memorandum.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed. PDF pages 1 and 3 were viewed before the last change, which only touches headings; they have none. The other six were viewed after it. See the review below) |
+| typeface | face required: none by the bankruptcy rules (see "Typeface and size" below). Vendored substitute: **EB Garamond** (kept; no court face to substitute). Fit: n/a. The district Arial order is an open question (gap 2 in `../adversary-complaint/README.md`). |
+| render | ok: `samples/OUTPUT-pillsbury-memorandum.pdf`, 8 pages (cover, 2 front-matter pages numbered i and ii, 5 body pages numbered 1 to 5), typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 (re-rendered 2026-10-15; `pdffonts` shows only the three EB Garamond faces, all embedded) |
+| overlay | ok: `samples/OVERLAY-pillsbury-memorandum.pdf` and `OVERLAY-pillsbury-memorandum.txt` (re-run 2026-10-15 against the saved exemplar) |
+| pages reviewed | 8 of 8 (every page rendered at 70 dpi and viewed on 2026-10-15, after the re-render) |
 
 File names follow the repo's convention (`INPUT-` markdown, `OUTPUT-` our render, `OVERLAY-` comparison), because `tools/render.sh` and `tools/overlay.sh` read and write those names.
 
@@ -31,7 +32,7 @@ Read on 2026-10-14. Bankruptcy local rules: the 2025 revision on the court's sit
 | FRBP 7010 (https://www.law.cornell.edu/rules/frbp/rule_7010) | Caption substantially conforms to Official Form 416. | `caption()`. |
 | Local Bankr. R. 9014-1(e), (g) (contested matters, 2025 PDF) | A response to a contested matter is at most 10 pages; a reply at most 5 pages. | Not applicable to an adversary Rule 12 memorandum; noted for a contested-matter version (gap 4). |
 
-Typeface and size: the bankruptcy local rules set no typeface. The district Electronic Filing Order names Arial bold 12 point for district filings (https://ctd.uscourts.gov/sites/default/files/Electronic%20Filing%20Order%2C%20revised%201.17.2018.pdf). See `../adversary-complaint/README.md`, gap 2, which is the same question.
+Typeface and size: no rule that governs this court sets a typeface. Local Bankr. R. 5005-1 (effective March 16, 2026) adopts D. Conn. L. Civ. R. 10, which sets no face. The district Electronic Filing Order (revised 1/17/2018, https://ctd.uscourts.gov/sites/default/files/Electronic%20Filing%20Order%2C%20revised%201.17.2018.pdf) names Arial bold 12 point, but it is one judge's order "in this case", not a bankruptcy rule. The template keeps EB Garamond. See `../adversary-complaint/README.md`, gap 2, which is the same question.
 
 ## Layout
 
@@ -61,6 +62,8 @@ Typeface and size: the bankruptcy local rules set no typeface. The district Elec
 10. **Table of contents weight.** The outline entries come out bold, because typst repeats the heading's show rule in the outline. The exemplar's entries are regular weight. A cosmetic difference, not a rule point; fixing it needs an outline entry show rule in `main.typ`.
 
 ## Review of the rendered pages (`samples/OUTPUT-pillsbury-memorandum.pdf`, 8 pages)
+
+Re-viewed 2026-10-15 at 70 dpi after the re-render (no template change; same EB Garamond layout, same 8 pages). Findings below stand.
 
 - Page 1 (cover, no number): caption; title centred; the legend "ORAL ARGUMENT REQUESTED" in the lower margin. No header or number. Pass.
 - Page i (table of contents): header with the adversary number and judge; "TABLE OF CONTENTS"; the two-level entries with dot leaders and page numbers, the argument sub-heading on two lines; the "Page" label. Entries are bold (gap 10). Pass.

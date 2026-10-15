@@ -28,6 +28,7 @@ The court's 2026 proposed amendments (comment period to September 30, 2026; effe
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | LBR 9004-1(a) | 8-1/2 x 11 inch paper; standard embedded font, 11 or 12 point; double spaced. | `page-w`, `page-h`; `type-size = 12pt`; `pitch = 24pt`; `footer-size = 11pt` (the bottom notation is held to the same 11 point minimum). |
+| Typeface | Face required: none. LBR 9004-1(a) and (b)(4) say "a standard embedded font" and name no face; no other W.D. Wash. local rule names one (checked 2026-10-15 against the same 2023 PDF). | Face: EB Garamond (`font-family` in `typst/wawb-adversary-complaint.typ`), kept because the rule names no face (`docs/FONTS.md`, "No face named"). No vendored substitute applies; fit n/a. Both filed exemplars are Times New Roman; that is filer convention, not a rule. |
 | LBR 9004-1(b)(1) | Numbered paper: line numbers in the left margin. | `line-numbers()`, 28 lines (`lines-per-page`). |
 | LBR 9004-1(b)(2) | Judge's name at the right side of the top of the first page. | `top-block()`: `judge` at the top right. |
 | LBR 9004-1(b)(3) | Bottom of each page: abbreviated title and page number at left; name, address and telephone of the preparing attorney or firm at right. | `footer-block()`: `footer_title` and page number at left; `footer_counsel` at right. |
@@ -81,7 +82,7 @@ The overlay is a diagnostic, not a score. Overlap is lowest on page 1 (54.7%), t
 ## Known gaps and open choices
 
 1. **Two filers.** The primary is Harbor Custom (Polsinelli, 24 pp.); Burdette (K&L Gates, 7 pp.) is the second filer. Both are in `exemplars/` and in SOURCE.md. The brief names one exemplar per doc type; the second is saved for the tier-2 cross-check. The second's caption layout (single left column, "Adv. Proc. No." at right) is not the one the template follows.
-2. **Font.** Rules name a standard embedded font; the template uses EB Garamond (vendored; the only font in `fonts/`). Both exemplars are Times New Roman. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the filing. The 12-point minimum is met.
+2. **Font.** The rule names no face (LBR 9004-1(a): "a standard embedded font"), so EB Garamond stays under `docs/FONTS.md`. Both exemplars are Times New Roman, which is filer convention. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the filing. The 12-point minimum is met.
 3. **Footer type size.** The bottom notation is 11 pt (the minimum the rule allows), not 10 pt as in the N.D. Cal. template, because LBR 9004-1(a) sets 11 or 12 pt for the pleading and carries no footer exception.
 4. **Pleading rules.** The double rule at the left and the single rule at the right are the template's pleading convention (copied from the N.D. Cal. template). The rules do not require them; the exemplar's rules could not be read from the text layer.
 5. **Paragraph numbering.** The template numbers paragraphs 1 to 50 continuously. The filing restarts numbering within each count. A complaint's numbering is the filer's choice under FRCP 10(b) (paragraphs numbered, not in which order); recorded here, not asserted.

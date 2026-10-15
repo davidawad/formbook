@@ -10,6 +10,7 @@ Folder: `courts/ninth-circuit/washington/federal/western-district/complaint/`.
 | render | ok: `samples/OUTPUT-ironleaf-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings. |
 | overlay | ok: `samples/OVERLAY-ironleaf-complaint.pdf` and `samples/OVERLAY-ironleaf-complaint.txt`. |
 | pages reviewed | 10 of 10: every page rendered at 60 dpi and viewed in its final state (footer crop also checked at 150 dpi). |
+| typeface | Face required: **none**. LCR 10(e)(1) requires "a proportionally spaced font" and names no face, so no substitute is needed and EB Garamond is kept (`FONTS.md`: no face named). Checked against the rule text, 2026-10-15. Metric fit: n/a. Both filed exemplars embed Times New Roman (tier-2 question, gap 1). |
 
 ## Governing rules
 
@@ -52,7 +53,7 @@ Word overlap per page (rendered page vs filed page): p1 77%, p2 86%, p3 77%, p4 
 
 ## Known gaps and open choices
 
-1. **Font.** LCR 10(e)(1) requires a proportional font but names none. The only font vendored in `fonts/` is EB Garamond. Its x-height is smaller than Times New Roman's, so the text looks smaller than the filed exemplar at the same 12 pt. Adding a Times-metric font would remove the difference; that is a change to `fonts/`, which this brief does not allow. Open question for David.
+1. **Font.** LCR 10(e)(1) requires a proportional font but names none, so EB Garamond is kept (see the typeface row). Its x-height is smaller than Times New Roman's, and both filed complaints embed Times New Roman, so the text looks smaller than the filed exemplars at the same 12 pt. Liberation Serif (metric-compatible with Times New Roman) would remove the difference, but the rule does not require it: a tier-2 convention call for David.
 2. **Footer type size.** The bottom notation is 10 pt (title) and 9 pt (firm block). LCR 10(e)(1)'s 12-point rule is written for "text", and LCR 10(e)(3) puts the notation in the margin. Logged as an interpretation; the filings use a similar size.
 3. **Character spacing.** No cpi rule for proportional text is in LCR 10(e); none is asserted.
 4. **Long URLs break mid-word** at the line end (e.g. "www.ironleafcap / ital.com", page 3). The sample transcribes the filing's text; typst breaks long unbroken words. Not fixed; harmless to the form.

@@ -7,8 +7,9 @@ Doc type: **motion with memorandum** (a Rule 12 motion to dismiss and the memora
 | exemplar | yes: `exemplars/FILED-EXAMPLE-columbia-veterinary-zoetis-3-26-cv-01863-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-zoetis-rule-12-motion-to-dismiss.md`: complete transcription of the 11-page exemplar, plus the generated certificate of service: 12 rendered pages |
 | render | ok: `samples/OUTPUT-zoetis-rule-12-motion-to-dismiss.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-zoetis-rule-12-motion-to-dismiss.pdf` and `.txt` |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (LR 10-1 text read 2026-10-15 names no typeface; only the 12-pt minimum). Vendored substitute: none needed; **EB Garamond kept** (the rule allows any proportional face). Fit: n/a. Font list unchanged in this pass. |
+| overlay | **fail** this pass: `exemplars/FILED-EXAMPLE-*.pdf` is not in this snapshot, so `tools/overlay.sh` could not run. The `samples/OVERLAY-zoetis-rule-12-motion-to-dismiss.txt` on disk is from an earlier run; no `.pdf` is on disk. |
+| pages reviewed | 12 of 12 this pass (every page rasterized at 60 dpi and viewed after the re-render) |
 | check.sh / check-selftest.sh | not run: they expect a court root with `court.json` and `rules.md`, and this is a doc-type folder; the brief forbids touching `tools/` |
 
 ## Governing rules

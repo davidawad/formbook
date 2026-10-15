@@ -9,7 +9,8 @@ Folder: `courts/ninth-circuit/washington/federal/eastern-district/complaint/`.
 | sample md | `samples/INPUT-plenty-complaint.md` (transcription of all 12 pages; footnotes not transcribed, see gaps) |
 | render | ok: `samples/OUTPUT-plenty-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-plenty-complaint.pdf` and `OVERLAY-plenty-complaint.txt` |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none named by LCivR 10(d) (serif or traditional Roman; proportionately spaced, 14 pt or more; or monospaced). Vendored substitute: not needed, EB Garamond kept (any proportional serif meets the rule). Fit: n/a. Font list: `EB Garamond`, embedded (`pdffonts`). |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change, and again on the fonts pass) |
 
 File names follow the tools (`INPUT-`, `OUTPUT-`, `OVERLAY-`, which `tools/overlay.sh` reads and writes), not the
 `<id>.pdf` / `<id>-overlay.pdf` names in the brief.
@@ -81,7 +82,7 @@ The overlay is a diagnostic, not a score. It shows the filed text runs longer th
 ## Known gaps and open choices
 
 1. **Two filers, two sizes.** The primary exemplar (Plenty) is 14 pt, which matches LCivR 10(d). The second exemplar (Price) measures about 12 pt, so it does not match the rule. The template follows the rule, not the second exemplar. Tier 2 was compared against both filers; the 12-pt filing is not a model for type size.
-2. **Typeface.** EB Garamond is the only vendored serif font (`fonts/`). LCivR 10(d) asks for 14 pt "proportionately spaced" type; EB Garamond at 14 pt has a smaller x-height than Times New Roman at 14 pt, so the page looks smaller than the exemplar. The rule's size is met. A Times-metric font would remove the difference; that needs a vendored font, which is a shared change (not made here).
+2. **Typeface.** LCivR 10(d) names no face: it asks for "serif or traditional Roman typefaces" in "a proportionately spaced typeface of 14 points or more" (or a monospaced face, 10.5 cpi). EB Garamond meets that, so it stays; no `docs/FONTS.md` substitute applies. EB Garamond at 14 pt has a smaller x-height than the filed exemplar's Times New Roman at 14 pt, so the page looks smaller than the exemplar. The rule's size is met. A Times-metric face (`Liberation Serif`, vendored) would remove the difference, but the rule does not require it, so the template is not switched.
 3. **Lines per page.** LCivR 10(d) does not fix a number of lines. The template uses 21 because the primary exemplar does. A different number would move the grid but not break any rule.
 4. **Footer type size.** The footer is 14 pt (LCivR 10(d) names no exception for footers). The exemplar's footer is smaller; the rule governs.
 5. **Footnotes and quotations.** The filed complaint has footnotes (citations to consumer forums); they are not transcribed. Block quotations (paragraph 1 and the consumer reviews in paragraph 26) are run into the text and shortened, marked `[...]`.
