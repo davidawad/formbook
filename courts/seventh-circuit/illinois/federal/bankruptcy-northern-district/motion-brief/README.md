@@ -81,3 +81,11 @@ Pages 1 to 5 pair one to one. From page 6 our pages pair one page later: the fil
 - Render 2: the Honda sample's section headings were in title case; changed to capitals as in the exemplar.
 - Render 3: paragraph spacing was zero, so paragraphs sat 17 pt apart instead of 24 pt; paragraph spacing is now the body leading.
 - Final pass: all 12 pages of the final render viewed; body pitch 24 pt within and between paragraphs (measured on page 2); no open defects beyond the Decisions above.
+
+## Engines
+
+DOCX (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default; `ilnb.lua` lays out the cover, caption, heading labels and signature block). Built with `sh tools/render.sh --engine docx <this dir> samples/INPUT-honda-707-memorandum.md`.
+
+- **Matches the typst form (in the styles and filter; not checked against a rendered page):** EB Garamond 13 pt; exact 24 pt line pitch; 0.5 in first-line indent for body text; US Letter with 1 in margins; centred 12 pt PAGE number in the footer; single-spaced block quotations; headings hang with labels "I.", "A.", "1.", "a." added by the filter as text (not list numbering), bold, not capitalised.
+- **Differs or unverified:** the caption is a two-column table whose party column is ruled on the right and bottom, with widths taken from the typst layout (3.4 in, 0.3 in gutter), but its borders are not verified against the typst layout. The signature block stacks the "Dated" line above the signature column (typst sets them side by side). The 15-page limit (ILNB-LIMIT-001) is asserted by the typst build only; the docx has no page count. The docx was validated (zip and XML well-formed; every `pStyle` defined; one footer relation resolves); it was not opened in Word.
+- **BLOCKED:** `docx.pdf` (`samples/OUTPUT-honda-707-memorandum.docx.pdf`) is not produced because `soffice` (LibreOffice) is not installed on this box, so `tools/render.sh --engine docx` stops after writing `samples/OUTPUT-honda-707-memorandum.docx`. Pages reviewed: 0. The docx gates (`tools/check.sh --engine docx`) cannot run; the 15-page check (ILNB-LIMIT-001) and the page-by-page review are not done. Pagination in Word may differ from LibreOffice.
