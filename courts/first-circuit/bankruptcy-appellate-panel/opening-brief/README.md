@@ -50,3 +50,20 @@ Pages were rasterized at 60 dpi and each was checked on a contact sheet. Defects
 
 - Signature block and "Respectfully submitted" land alone on the last page (answering brief, page 6) when the conclusion ends near the foot of page 5. The template keeps the signature block unbreakable but does not keep it with the conclusion. Accepted for now.
 - The cover, TOC and TOA were checked against the rules only, not against any filed bap1 exemplar.
+
+## Engines
+
+DOCX (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, every font named explicitly, no theme fonts) and `docx/bap1.lua` (cover, disclosure, contents, authorities, oral-argument statement, the body's heading numbers, the related-cases page and the certificate, with the word limit and required sections checked as in the typst template). `tools/render.sh --engine docx` writes `samples/OUTPUT-generic-opening-brief.docx` and its LibreOffice PDF. The body font in the PDF is EB Garamond only; DejaVu Sans appears for the ballot-box glyphs in the related-cases statement.
+
+Matches the typst output (checked on the LibreOffice PDF against `samples/OUTPUT-generic-*.pdf`, every page): EB Garamond 14 pt; body lines at the typst line pitch (22.25 pt exact); US Letter with 1 in margins; 0.5 in first-line indent, not on the first paragraph after a heading or a front title; centered caps level-1 headings at 19.5 pt and centered bold level-2 headings at 17 pt (the typst 1.4 em and 1.2 em heading sizes); bold left level 3 and 4 headings; cover on its own unnumbered section, its lines within a few points of the typst positions; page numbers from page 2 (typst counts the cover as page 1, so the contents page is page 2); footnote text 14 pt.
+
+Differs from the typst output:
+- Pagination: 11 pages in the docx against 10 in typst. The signature block falls alone on page 9 of the docx; in typst it stays on page 8.
+- Heading numbers: the docx prints the level-2 numbers (I., II., ...) in the body as well as in the contents. The typst body omits them (its heading show rule drops the counter), so the body and contents disagree there. Kept as the template intends; David to decide.
+- Certificate word count: docx 1049 against typst 1035. The docx counts the body text with pandoc; the typst count is taken from the cmarker output. The cause is not isolated (on one page the two token lists match apart from the numbers).
+- Not exercised by the samples and not checked: block quotations (exact 15 pt, single-spaced), footnotes (exact 22.25 pt, 14 pt).
+
+BLOCKED (DOCX):
+- FRBP 8014(a)(2), contents page numbers (BAP-FORM-001 contents): the contents is a Word TOC field with cached entries and no page numbers. Word fills them in when fields are updated; the PDF shows no numbers. Measuring them needs a two-pass build (as the eighth circuit does) and is not done here.
+- FRBP 8014(a)(3), table of authorities page numbers: the authorities are listed without pages, and "passim" is not produced. Same cause (TA fields are not honored by LibreOffice; see docs/DOCX.md).
+- `tools/check.sh --engine docx` could not run on this folder: no `checks.yaml` at the court or doc-type level, and `court.json` is looked up in the doc-type folder. No gate result is claimed.
