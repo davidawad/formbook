@@ -90,3 +90,15 @@ Reviewed pages: 14 of 14.
 9. **Page limit not counted.** CV-7(c)(2) sets 20 pages for this motion, excluding caption, signature and certificate. The template does not count; the sample's body is 11 pages.
 10. **Dated line.** The exemplar has no "Dated" line; its certificate carries the filing date ("on 12 June 2026"). The template prints a "Dated" line only if the frontmatter has a `date`, which this sample omits.
 11. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this is a doc-type folder. The brief forbids changes to `tools/`, so the gates were not run here. The render and overlay were run; the review above is the Gate 2 record for this doc type.
+
+## Engines
+
+docx (`docx/`): `render.sh` runs pandoc in two passes with `reference.docx` (built by `build-reference.sh`) and `txwd-motion-brief.lua`, then patches the list definitions pandoc writes. Pass 1 renders the document with LibreOffice and finds each heading's page; pass 2 writes the table of contents with those page numbers. Output: `samples/OUTPUT-lulac-rule-12-motion-to-dismiss.docx` and `.docx.pdf` (LibreOffice). Opened and checked in LibreOffice only; Word was not checked.
+
+- Matches the typst form: EB Garamond 13 pt (embedded: EB Garamond Regular and Bold only), letter with 1 in margins, double spacing (exact 26 pt) and single (exact 15.6 pt) for the caption, headings, block quotations, signature and certificate, the cover title double-spaced, the caption as a borderless table, level 1 headings centred bold and levels 2 and 3 left bold, 0.5 in first-line indent, block quotation indented 0.5 in each side, signature table kept on one page, certificate of service after the signature, centred PAGE number, table of contents on its own page with dot leaders.
+- Differs: LibreOffice draws the glyphs at the bottom of each exact 26 pt line, so a page holds 24 lines (typst 25 to 26); both are 14 pages, with different breaks: in docx the signature block follows the prayer on page 13 and the certificate is on page 14; in typst the prayer is on page 13 and the signature block and certificate are on page 14. Margins are unchanged.
+- Table of contents: page numbers are the LibreOffice pagination from pass 1. Word may paginate a line differently, so a page number may be off by one in Word until the field is updated (`TOC \o "1-3"`, Update Field). The TOC has no hyperlinks.
+- Footnote text is 13 pt, single spaced. The sample has no footnotes, so this is not exercised.
+- No table of authorities in the typst form, so none here.
+- `tools/check.sh` cannot run on a doc-type folder (no `checks.yaml`, `rules.md` or `court.json` here); no gate stamp.
+- BLOCKED: none.

@@ -86,3 +86,13 @@ Reviewed pages: 9 of 9.
 10. **Count headings.** The count sub-title is a centred block of single-spaced lines; the exemplar's count heading is in the same form.
 11. **No certificate.** None is generated (see Governing rules).
 12. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this is a doc-type folder. The brief forbids changes to `tools/`, so the gates were not run here. The render and overlay were run; the review above is the Gate 2 record for this doc type.
+
+## Engines
+
+docx (`docx/`): `render.sh` runs pandoc with `reference.docx` (built by `build-reference.sh`) and `txwd-complaint.lua`, then patches the list definitions pandoc writes. Output: `samples/OUTPUT-lilly-first-amended-complaint.docx` and `.docx.pdf` (LibreOffice). Opened and checked in LibreOffice only; Word was not checked.
+
+- Matches the typst form: EB Garamond 13 pt (embedded: EB Garamond Regular and Bold only), letter with 1 in margins, double spacing as exact 26 pt lines and single as exact 15.6 pt, caption as a borderless table (party column, § column, case column), numbered paragraphs (Word list numbering, numbers at 0.5 in), headings centred bold (level 1 and 2) and left bold (level 3), centred count lines, unnumbered prayer lead-in, signature table kept on one page, centred PAGE number.
+- Differs: LibreOffice draws the glyphs at the bottom of each exact 26 pt line, so the first line of each page sits about 12 pt lower than in typst and a page holds 24 lines (typst 25 to 26). The sample is 10 pages as docx and 9 as typst. Margins are unchanged. Not a tier-1 difference (CV-10 fixes double spacing, not lines per page).
+- Footnote text is 13 pt, single spaced (CV-10(a) minimum). The sample has no footnotes, so this is not exercised.
+- `tools/check.sh` cannot run on a doc-type folder (no `checks.yaml`, `rules.md` or `court.json` here); no gate stamp.
+- BLOCKED: page count (tier 1): docx 10 pages (LibreOffice) vs typst 9. LibreOffice fits 24 double-spaced lines per page where typst fits 25 to 26; not reproduced.
