@@ -8,6 +8,7 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district/motio
 | exemplar | yes: `exemplars/FILED-EXAMPLE-lemeh-no-name-3-25-ap-90071-motion-brief.pdf` (1 filer, the defendant; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-nng-mtd-memo.md`: the full 8-page memorandum with its three footnotes, transcribed from the text layer |
 | render | ok: `samples/OUTPUT-nng-mtd-memo.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| typeface | Rules name no face (LBR 5005-3(a): "All filings shall be clearly legible in 12-point font"). Vendored family: `EB Garamond` (`docs/FONTS.md`, "No face named"). Exemplar is Times New Roman: EB Garamond is visual only against it, not metric-compatible. |
 | overlay | ok: `samples/OVERLAY-nng-mtd-memo.pdf` and `samples/OVERLAY-nng-mtd-memo.txt` (`tools/overlay.sh`) |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -51,7 +52,7 @@ Primary source: Local Bankruptcy Rules of the United States Bankruptcy Court for
 
 ## Known gaps and open choices
 
-1. **Font.** The rules name no font family. The exemplar is Times New Roman. The only serif font vendored in `fonts/` is EB Garamond, the same choice as the other doc types here. EB Garamond at 12 pt has a smaller x-height than Times at 12 pt. The 12-point minimum is met. A Times-metric font would mean changing the shared `fonts/`, which is out of scope for this box.
+1. **Font.** The rules name no font family. The exemplar is Times New Roman. The only serif font vendored in `fonts/` is EB Garamond, the same choice as the other doc types here. EB Garamond at 12 pt has a smaller x-height than Times at 12 pt. The 12-point minimum is met. Liberation Serif (the Times New Roman substitute, metric-compatible, `docs/FONTS.md`) is vendored, but the rules name no face, so the template keeps EB Garamond. Switching to Liberation Serif would be a tier-2 choice to match the exemplar, and is left open.
 2. **One exemplar, one filer.** The brief asks for one exemplar per doc type, so tier 2 (2 or 3 filers) is not met. The companion motion (Doc. 8, 2 pages, same filer) was downloaded and has a text layer but is not saved: the exemplar here is the memorandum, which is the "brief" part of a motion-brief. A second filer for this doc type has not been collected.
 3. **Separate filings not produced.** The motion itself, the LBR 9013-1 Notice (the court's form, with the hearing date, the response deadline and the courtroom), and the proposed order are separate filings under LBR 9013-1 and its Procedures. They are not in this template. The Procedures say the three should be filed as one PDF, with the notice first (unless the size dictates otherwise); a filer must assemble that.
 4. **Certificate attachment.** LBR 9013-3(b) requires a copy of the papers served to be attached to the certificate. The template produces the certificate text and addressees, not the attachment; the attachment is a filing-level step.

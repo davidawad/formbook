@@ -8,6 +8,7 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district/adver
 | exemplar | yes: `exemplars/FILED-EXAMPLE-lemeh-no-name-3-25-ap-90071-adversary-complaint.pdf` (1 filer, the trustee; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-lemeh-no-name.md`: the full 5-page complaint, transcribed from the text layer |
 | render | ok: `samples/OUTPUT-lemeh-no-name.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| typeface | Rules name no face (LBR 5005-3(a): "clearly legible in 12-point font"). Vendored family: `EB Garamond` (`docs/FONTS.md`, "No face named"). Exemplar is Times New Roman: EB Garamond is visual only against it, not metric-compatible. |
 | overlay | ok: `samples/OVERLAY-lemeh-no-name.pdf` and `samples/OVERLAY-lemeh-no-name.txt` (`tools/overlay.sh`) |
 | pages reviewed | 4 of 4 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -52,7 +53,7 @@ Not produced by this template: the adversary cover sheet, the summons, the notic
 
 ## Known gaps and open choices
 
-1. **Font.** The rules name no font family. The exemplar is Times New Roman. The only serif font vendored in `fonts/` is EB Garamond, the same choice as the CAND complaint template. EB Garamond at 12 pt has a smaller x-height than Times at 12 pt, so the text looks smaller than the exemplar. The 12-point minimum is met. Adding a Times-metric font would mean changing the shared `fonts/`, which is out of scope for this box.
+1. **Font.** The rules name no font family. The exemplar is Times New Roman. The only serif font vendored in `fonts/` is EB Garamond, the same choice as the CAND complaint template. EB Garamond at 12 pt has a smaller x-height than Times at 12 pt, so the text looks smaller than the exemplar. The 12-point minimum is met. Liberation Serif (the Times New Roman substitute, metric-compatible, `docs/FONTS.md`) is vendored, but the rules name no face, so the template keeps EB Garamond. Switching to Liberation Serif would be a tier-2 choice to match the exemplar, and is left open.
 2. **One exemplar, one filer.** The brief asks for one exemplar per doc type, so tier 2 (2 or 3 filers) is not met. A second filer exists: *McLemore v. Capital One Auto Finance*, Adv. Proc. 3:24-ap-90091, Doc. 1 (6 pages, text-based, counsel Justin Campbell; https://storage.courtlistener.com/recap/gov.uscourts.tnmb.394442/gov.uscourts.tnmb.394442.1.0.pdf). It was checked for a text layer and not saved.
 3. **Separate filings not produced.** The adversary cover sheet (LBR 7003-1), the summons, and the notice of appearance (LBR 9010-1) are not in this template. The exemplar's cover sheet is attachment 1 on the docket and is not in the exemplar PDF.
 4. **Footer size.** The page number is in the body size (12 pt). The CM/ECF footer is added by the court at filing and is not drawn here; the template leaves room for it (`footer-descent: 0.6in`).
