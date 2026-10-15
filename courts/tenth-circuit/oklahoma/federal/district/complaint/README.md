@@ -7,9 +7,10 @@ Folder: `courts/tenth-circuit/oklahoma/federal/district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-pilf-ziriax-5-26-cv-01440-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-pilf-ziriax-complaint.md` (a portion of the 15-page filing; see below) |
-| render | ok: `samples/OUTPUT-pilf-ziriax-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-pilf-ziriax-complaint.pdf` and `OVERLAY-pilf-ziriax-complaint.txt` (page map) |
-| pages reviewed | 10 of 10 (every page of the final render rasterized at 60 dpi and viewed) |
+| typeface | rule: LCvR7.1(d) names no face (13-point minimum and margins only; read from the rules PDF 2026-10-15). Substitute: none; EB Garamond kept, the no-face case in `docs/FONTS.md`. Fit: n/a (the rules name no face); see gap 3 |
+| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-pilf-ziriax-complaint.pdf`, 10 pages (unchanged), typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold only, embedded; no warnings |
+| overlay | **fail**: not regenerated. `exemplars/` holds only `SOURCE.md` (the filed PDF named there is not in the repo), so `tools/overlay.sh` cannot run. `OVERLAY-pilf-ziriax-complaint.pdf` is absent and the `.txt` is from an earlier render, so it does not match the current OUTPUT |
+| pages reviewed | 10 of 10 on the 2026-10-15 render (every page rasterized at 60 dpi and viewed; no layout change) |
 | tools/check.sh, check-selftest.sh | not run: they expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither shape (the brief forbids editing `tools/`) |
 
 ## Governing rules
@@ -58,7 +59,7 @@ File names: `tools/overlay.sh` and `tools/render.sh` write `OVERLAY-<id>.pdf`/`.
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search (CourtListener RECAP, `okwd`, complaints filed in 2026) found complaint entries with no stored PDF; the one stored complaint found is this one. The second search route (Justia, Clearinghouse) returned 403 to the fetch tool. Tier 2 is therefore **not** judged against two filers yet. A PI motion in the same district (Polston, 5:26-cv-02265-G) was downloaded and checked but is a motion, not a complaint, and was not saved.
 2. **The "okd" folder.** CourtListener lists `okd` as not in use. The live Oklahoma federal courts are `okwd`, `oknd` and `oked`. The templates follow the Western District's local rules (the rules set the folder is built from), and the exemplar is from the Western District. If the folder should be a different district, the rules, the exemplar and the `court:` line change; the template does not. This is a question for David.
-3. **Font.** The rules do not name a face. This template uses EB Garamond (vendored in `fonts/`, the only face the build can use). EB Garamond at 13 pt has a smaller x-height than the exemplar's Times New Roman at 12 pt, so the text looks smaller on the page. The 13-point minimum is met. A vendored Times-metric face would remove the difference (a repo decision, not this folder's).
+3. **Font.** LCvR7.1(d) sets a 13-point minimum and margins; it names no face (checked against the rules PDF, 2026-10-15). Under `docs/FONTS.md` a court that names no face keeps EB Garamond, so this template is unchanged. EB Garamond at 13 pt has a smaller x-height than the exemplar's Times New Roman at 12 pt, so the text looks smaller on the page. The 13-point minimum is met. The exemplar's face is a filer's choice, not a rule: switching to a Times-metric face (`Liberation Serif`, metric-compatible with Times New Roman) would be a change the rules do not require, and is a repo decision, not this folder's.
 4. **Signature block.** It sits with the prayer on page 10 in the final render. If a filer's prayer runs over a page, the signature can stand alone on the next page; the template does not keep the last prayer item with it.
 5. **Paragraph numbers differ.** The sample numbers its allegations from 1 (the template numbers them). The filed numbers are not transcribed for paragraphs 31 to 55, which are not in the sample.
 6. **Portion transcribed.** Pages 8 to 12 of the filing (paragraphs 31 to 55, and the heading of the second count) are not transcribed. The sample goes from filed paragraph 30 straight to filed paragraphs 56 to 59 (sample numbers 31 to 34), so its numbering and the filing's diverge after paragraph 30.

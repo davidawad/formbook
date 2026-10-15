@@ -7,9 +7,10 @@ Folder: `courts/tenth-circuit/oklahoma/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-trupia-5-26-cv-02422-motion-to-dismiss.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-trupia-motion-to-dismiss.md` (the whole 9-page filing, transcribed; see below) |
-| render | ok: `samples/OUTPUT-trupia-motion-to-dismiss.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-trupia-motion-to-dismiss.pdf` and `OVERLAY-trupia-motion-to-dismiss.txt` (page map) |
-| pages reviewed | 8 of 8 (every page of the final render rasterized at 60 dpi and viewed) |
+| typeface | rule: LCvR7.1(d) names no face (13-point minimum and margins only; read from the rules PDF 2026-10-15). Substitute: none; EB Garamond kept, the no-face case in `docs/FONTS.md`. Fit: n/a (the rules name no face); see gap 4 |
+| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-trupia-motion-to-dismiss.pdf`, 8 pages (unchanged), typst 0.15.0, `pdffonts`: EB Garamond Regular, Bold and BoldItalic only, embedded; no warnings |
+| overlay | **fail**: not regenerated. `exemplars/` holds only `SOURCE.md` (the filed PDF named there is not in the repo), so `tools/overlay.sh` cannot run. `OVERLAY-trupia-motion-to-dismiss.pdf` is absent and the `.txt` is from an earlier render, so it does not match the current OUTPUT |
+| pages reviewed | 8 of 8 on the 2026-10-15 render (every page rasterized at 60 dpi and viewed; no layout change) |
 | tools/check.sh, check-selftest.sh | not run: they expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither shape (the brief forbids editing `tools/`) |
 
 ## Governing rules
@@ -60,7 +61,7 @@ File names: `tools/overlay.sh` and `tools/render.sh` write `OVERLAY-<id>.pdf`/`.
 1. **Table of contents and table of authorities are not produced.** LCvR7.1(e) requires both for a brief longer than 15 pages. The template fails the build when a render exceeds 15 pages, rather than delivering such a brief without them. A brief of 15 pages or less needs neither.
 2. **The 25-page limit is not enforced.** The template does not subtract the pages that LCvR7.1(e) excludes (cover, table of contents and table of authorities, signature, certificate, exhibits). Counting that by hand: the body of the sample (up to the signature block) is 7 pages.
 3. **Typed numbers.** Section numbers and statement paragraph numbers are typed in the sample, not generated; the template does not number argument headings. This follows the filing and the ca9 sample's convention for escaped markers.
-4. **Font.** The rules do not name a face. This template uses EB Garamond (vendored in `fonts/`, the only face the build can use). EB Garamond at 13 pt has a smaller x-height than the exemplar's Times New Roman, so the text looks smaller on the page. The 13-point minimum is met; the Times-metric question is a repo decision.
+4. **Font.** LCvR7.1(d) sets a 13-point minimum and margins; it names no face (checked against the rules PDF, 2026-10-15). Under `docs/FONTS.md` a court that names no face keeps EB Garamond, so this template is unchanged. EB Garamond at 13 pt has a smaller x-height than the exemplar's Times New Roman, so the text looks smaller on the page. The 13-point minimum is met. The exemplar's face is a filer's choice, not a rule: switching to a Times-metric face (`Liberation Serif`, metric-compatible with Times New Roman) would be a change the rules do not require, and is a repo decision.
 5. **One exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search (CourtListener RECAP, `okwd`, motions to dismiss filed 2026) found several other motions with stored PDFs (Benne, Loftis, Harris, Shugard); they were not saved because the brief asks for one exemplar per doc type. Tier 2 is therefore **not** judged against two filers yet.
 6. **The "okd" folder.** CourtListener lists `okd` as not in use. The live Oklahoma federal courts are `okwd`, `oknd` and `oked`. The template follows the Western District's local rules, and the exemplar is from the Western District. If the folder should be a different district, the rules and the exemplar change; the template does not. This is a question for David.
 7. **Certificate.** The sample uses a certificate of mailing (the exemplar's), since the filer served a pro se party by mail. A certificate of service through CM/ECF would use the same fields with different text; the template does not select between them.
