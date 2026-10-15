@@ -1,6 +1,6 @@
 # Court of Appeals for the Seventh Circuit: reply brief (`ca7` / `reply-brief`)
 
-Status of this doc type: exemplar yes (2 filers), typst template built, sample rendered, overlay built, every page reviewed.
+Status of this doc type: exemplar yes (2 filers), typst template built, sample rendered (fonts pass, 2026-10-15), overlay **not regenerated** (the filed exemplar PDFs are not in this snapshot; `tools/overlay.sh` exits 1 with "no exemplar pdf"; the committed `.txt` is from an earlier run), every page reviewed (12 of 12 again in the fonts pass). Typeface: none named by the rules; EB Garamond kept (court `README.md`, "Typeface").
 Not wired into the court-level eval loop (no `rules.md`, `checks.yaml` or `check.sh` gates for this folder; see "Known gaps").
 
 ## Governing rules
@@ -95,7 +95,7 @@ signature-block fix.
 | 11 | 8 | Certificate of compliance | Form 6 content; word count computed (2,085). OK. |
 | 12 | 9 | Certificate of service | CM/ECF statement; Cir. R. 31(b) paper copies. OK. |
 
-Pages reviewed: 12 of 12.
+Pages reviewed: 12 of 12. Fonts pass, 2026-10-15: re-rendered (12 pages; `pdffonts`: EB Garamond only, embedded), and all 12 pages rasterized at `pdftoppm -r 70` and viewed again. Nothing changed on the pages.
 
 ## Overlay (diagnostic, not a score)
 
@@ -117,9 +117,11 @@ in the word processor the brief was typed in.
 1. **Gray cover (FRAP 32(a)(2)).** The rule says a reply brief's cover is gray. The template renders the e-filing PDF with a
    white cover, as the exemplar does. The rule text does not limit the color to paper, but whether the court's e-filing PDFs
    carry the gray cover was not verified here. **Open question for David: does the e-filing PDF need the gray cover?**
-2. **Body typeface.** The vendored fonts (`fonts/`) contain EB Garamond only. The exemplar is Times New Roman 12 pt. EB Garamond
-   at 12 pt is rule-compliant (Cir. R. 32(b)) but looks smaller on the page than TNR 12. A Times-metric face is not vendored; not
-   added here (a shared font change belongs to the tools/fonts owners).
+2. **Body typeface.** The exemplar is Times New Roman 12 pt. The rules name no face (FRAP 32(a)(5)(A) requires a proportional serif;
+   Cir. R. 32(b) sets 12 pt body and 11 pt footnotes; read from the rules PDF 2026-10-15), so EB Garamond is kept, as the court
+   `README.md` "Typeface" records. EB Garamond at 12 pt is rule-compliant but looks smaller on the page than TNR 12. Liberation
+   Serif (metric-compatible with Times New Roman) is vendored, but it is not used: the rule does not name Times. Matching the
+   filer's face is tier 3, not chased.
 3. **Court's e-filing header.** The exemplar's top line ("Case: 26-2473 Document: 29 Filed ... Pages: 19") is added by the
    court's system at filing, not by the brief. The template does not reproduce it.
 4. **Disclosure statement.** Not generated: it is a separate attorney filing (Cir. R. 26.1), and the exemplar has none.

@@ -2,7 +2,7 @@
 
 Doc type `answering-brief` of court `ca7` (`courts/seventh-circuit/court-of-appeals/`). This folder is self-contained: its own exemplar, sample, template and rules. The court-root `typst/` and `samples/` are not touched.
 
-Status: exemplar = yes; render = ok; overlay = ok; pages reviewed = 14 of 14. Not verified: the current text of the Seventh Circuit rules (see "Verification status" below).
+Status: exemplar = yes; typeface = none named by the rules, EB Garamond kept (fonts pass, 2026-10-15; see the court `README.md` "Typeface"); render = ok (fonts pass); overlay = **fail** (the filed exemplar PDF is not in this snapshot, so `tools/overlay.sh` exits 1 with "no exemplar pdf"; the committed `.txt` is from an earlier run); pages reviewed = 14 of 14 in the fonts pass. The Seventh Circuit rules were read in the fonts pass (see "Verification status" below).
 
 ## Folder
 
@@ -33,10 +33,10 @@ Requirement IDs are used in comments in `typst/ca7-answering-brief.typ`. "Verifi
 |---|---|---|---|
 | CA7-FORM-002 | 1-inch margins | Convention; the exemplar uses 1 inch | Exemplar layout only |
 | CA7-FORM-003 | Double-spaced text; block quotations, footnotes and headings single-spaced | Fed. R. App. P. 32(a)(4) | Not fetched this session; the exemplar follows it |
-| CA7-FORM-004 | 12-point text | Circuit Rule 32(b) | **Not verified against current text.** Found in the Seventh Circuit typography handbook (`https://www.ca7.uscourts.gov/assets/pdf/type.pdf`, last modified 2018). The Craig certificate cites Cir. R. 32(b) and certifies 12-point Times New Roman. The Carter brief (Nov 2025) is 14 pt. |
-| CA7-FORM-005 | 11-point footnotes | Circuit Rule 32(b) | Same as CA7-FORM-004 |
-| CA7-FORM-006 | Proportional serif face; no condensed type; roman main text | Fed. R. App. P. 32(a)(5)–(6); handbook | Handbook read this session (2018 version); the rule text itself was not fetched |
-| CA7-LEN-001 | Principal brief, 14,000 words, footnotes included, Fed. R. App. P. 32(f) exclusions | Fed. R. App. P. 32(a)(7)(B); Circuit Rule 32(c) | **Not verified.** Secondary summary of *Vermillion v. Corizon Health* (7th Cir. 2018) via `civilprocedureopinions.justia.com`; 2018 Chicago Daily Law Bulletin column. The rule text was not reachable. |
+| CA7-FORM-004 | 12-point text | Circuit Rule 32(b) | **Verified 2026-10-15** against the current rules PDF (p. 89): 12 pt or larger in the body. The Craig certificate cites Cir. R. 32(b) and certifies 12-point Times New Roman. The Carter brief (Nov 2025) is 14 pt. |
+| CA7-FORM-005 | 11-point footnotes | Circuit Rule 32(b) | **Verified 2026-10-15** (same text: 11 pt or larger in footnotes) |
+| CA7-FORM-006 | Proportional serif face; no condensed type; roman main text | Fed. R. App. P. 32(a)(5)–(6); handbook | **Verified 2026-10-15**: FRAP 32(a)(5)(A) (serif, proportional, sans only in headings and captions) and 32(a)(6) (p. 86) in the rules PDF. Names no typeface. |
+| CA7-LEN-001 | Principal brief, 14,000 words, footnotes included, Fed. R. App. P. 32(f) exclusions | Fed. R. App. P. 32(a)(7)(B); Circuit Rule 32(c) | **Verified 2026-10-15** against the rules PDF: Cir. R. 32(c) allows a principal brief of no more than 14,000 words, and a reply of 7,000 (p. 89); FRAP 32(a)(7)(B)(i) (p. 87) says 13,000, which Cir. R. 32(c) replaces. |
 | CA7-CONT-001 | Table of contents and table of authorities | Fed. R. App. P. 28(b) (appellee's brief) | Not fetched this session |
 | CA7-CONT-002 | Appellee's jurisdictional statement, stating whether appellant's jurisdictional summary is complete and correct | Circuit Rule 28(b) | **Verified in substance.** Seventh Circuit order in *Megna v. Musial*, No. 25-2190, Dkt. 27 (Dec. 1, 2025), quotes the rule and requires it of an appellee. |
 | CA7-COVER-001–005 | Cover: case number, court, caption, district court line, title, counsel with office address and telephone, date | Fed. R. App. P. 32(a)(2); the exemplar settles the layout | Exemplar layout only |
@@ -47,7 +47,7 @@ Appellee-specific sections (per Fed. R. App. P. 28(b)): the template does not re
 
 ## Choices the rules leave open
 
-- **Typeface: EB Garamond, the only serif face vendored.** The handbook calls Times and Garamond families less legible than Century and Bookman, and recommends Century. No Century clone is vendored, and the shared `fonts/` folder was not to be edited, so EB Garamond is used. Garamond at 12 pt sets smaller than Times at 12 pt.
+- **Typeface: EB Garamond, kept.** Circuit Rule 32(b) and FRAP 32(a)(5)(A) name no face (read 2026-10-15 from the rules PDF; "Verification status" below). The handbook (guidance, not a rule) recommends Century and calls Times and Garamond less legible. TeX Gyre Schola (Century) is vendored now, so a switch is possible; it is not made here, pending David's decision (court `README.md`, "Typeface"). Garamond at 12 pt sets smaller than Times at 12 pt.
 - **Front matter in lowercase roman, body in arabic from 1.** The exemplar numbers every page in arabic. Roman front matter is a common convention and was kept.
 - **Cover in one piece:** no double rules, no colored cover, and the court line set as ordinary text that wraps on its own. The template has no forced break in literal text. Its `linebreak()` calls only separate lines that come from the frontmatter (address, counsel and signature lines).
 - **Certificates:** the compliance certificate and the service certificate use the exemplar's wording. The service certificate lists the counsel served, from frontmatter `service.counsel`, and prints the signature block as one unbreakable unit.
@@ -56,10 +56,11 @@ Appellee-specific sections (per Fed. R. App. P. 28(b)): the template does not re
 
 The rules for this doc type were checked as follows:
 
-- Not reachable: `https://www.ca7.uscourts.gov/rules/rules.pdf` (404), `courtrules.net` Circuit Rules pages (403).
-- Reachable: the 2018 typography handbook, the CourtListener API, and RECAP PDFs.
+- Reachable 2026-10-15: `https://www.ca7.uscourts.gov/assets/pdf/rules.pdf` (157 pages, "current as of December 1, 2025"), read with `pdftotext`. This is the source for FRAP 32 and Circuit Rule 32 above. `https://www.ca7.uscourts.gov/rules/rules.pdf` (404) and `courtrules.net` (403) were not used.
+- Also reachable: the 2018 typography handbook (guidance, not a rule), the CourtListener API, and RECAP PDFs.
+- Not verified here: FRAP 28(b) (CA7-CONT-001, the appellee's contents rule). The fonts pass did not reread it.
 
-**The 12-point choice (CA7-FORM-004) is the main open verification item.** If the current Circuit Rule 32(b) requires 14-point, change `type-size` and `footnote-size` at the top of `typst/ca7-answering-brief.typ` and re-render. The cover and the certificate text would also need the new size. The 2018 handbook and the Craig certificate support 12-point. The Carter brief uses 14-point, so both sizes have been filed.
+**Verified 2026-10-15:** the current Circuit Rule 32(b) (rules PDF, p. 89) says "A brief is acceptable if proportionally spaced type is 12 points or larger in the body of the brief, and 11 points or larger in footnotes." The 12-point body and 11-point footnote choice therefore stands. The same PDF's FRAP 32(a)(5) (p. 86) names no typeface. The rules PDF was fetched from `https://www.ca7.uscourts.gov/assets/pdf/rules.pdf`; this supersedes the 2018 handbook as the source for size.
 
 ## Known gaps
 
@@ -96,6 +97,8 @@ PDF page (printed folio) and what it shows:
 | 14 | 11 | Certificate of service (signature block) | Signature block moved as one unit. |
 
 Every page was rasterized (`pdftoppm -r 60`) and viewed, first after the template's last substantive change and again after the final edits.
+
+Fonts pass, 2026-10-15: the sample was re-rendered (14 pages, `pdffonts`: EB Garamond only, embedded), and all 14 pages were rasterized at `pdftoppm -r 70` and viewed again. No layout change, since the face did not change. Nothing new was found on the pages. The overlay could not be regenerated: `exemplars/` holds only `SOURCE.md`.
 
 ## Changes made during review
 
