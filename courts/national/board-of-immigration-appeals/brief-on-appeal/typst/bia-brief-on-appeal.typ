@@ -4,6 +4,7 @@
 #import "@preview/cmarker:0.1.10"
 
 // ---- parameters (rule each one traces to: README.md) ----
+#let body-font = "Liberation Serif" // Times New Roman, preferred (ch. 3.3(c)(7)); substitute per docs/FONTS.md
 #let body-size = 12pt
 #let body-leading = 1.74em       // double-spaced text, ch. 3.3(c)(7); measured pitch ~27.6pt at 12pt
 #let margin = 1in                // convention; the manual sets no margin figure
@@ -17,7 +18,7 @@
 
 #let bia-brief(meta, md) = {
   set document(title: meta.title, author: meta.filer.name)
-  set text(font: "EB Garamond", size: body-size, lang: "en")
+  set text(font: body-font, size: body-size, lang: "en")
   set par(justify: false, leading: body-leading, first-line-indent: 0.5in)
   show heading.where(level: 1): it => block(above: 1.2em, below: 1.2em, par(leading: 0.65em, align(center, text(weight: "bold", upper(it.body)))))
   show heading.where(level: 2): it => block(above: 1em, below: 1em, par(leading: 0.65em, text(weight: "bold", it.body)))

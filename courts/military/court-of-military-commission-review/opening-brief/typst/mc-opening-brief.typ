@@ -9,9 +9,10 @@
 #let honorable-line = "TO THE HONORABLE, THE JUDGES OF THE COURT OF MILITARY COMMISSION REVIEW"
 
 // ---- Rule-driven layout (UNVERIFIED against the current Rules of Practice; see README.md) ----
-// Only EB Garamond is vendored. The filed exemplars use Times New Roman, and their certificates
-// also cite a monospaced 12-cpi option; neither face is vendored, so EB Garamond stands in.
-#let body-font = "EB Garamond"
+// The filed exemplars use Times New Roman, and their certificates cite "Rule 14(e)" for it (and
+// a monospaced 12-cpi option). Times New Roman is substituted by Liberation Serif (docs/FONTS.md,
+// metric-compatible). The primary rule text is not yet verified; see ../README.md "Typeface".
+#let body-font = "Liberation Serif"
 #let body-size = 12pt
 #let body-leading = 0.95em    // double-spaced body text
 #let single-leading = 0.5em   // block quotations, headings, captions, cover, signature, certificates

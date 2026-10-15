@@ -7,9 +7,10 @@ Folder: `courts/fourth-circuit/west-virginia/federal/northern-district/motion-br
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-wv-rivers-amsted-1-26-cv-00046-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-amsted-motion-brief.md` (a portion of the 26-page memorandum; see below) |
-| render | ok: `samples/OUTPUT-amsted-motion-brief.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-amsted-motion-brief.pdf` and `samples/OVERLAY-amsted-motion-brief.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | Liberation Serif (vendored; the Times New Roman substitute, metric-compatible), 12 point. LR Civ P 7.02(a) names Times New Roman, Courier New or Arial. Was EB Garamond. |
+| render | ok: `samples/OUTPUT-amsted-motion-brief.pdf`, 8 pages (8 before the font change), typst 0.15.0, vendored Liberation Serif only, `pdffonts`: LiberationSerif, -Bold, -Italic embedded, no warnings |
+| overlay | ok: `samples/OVERLAY-amsted-motion-brief.pdf` and `samples/OVERLAY-amsted-motion-brief.txt`, run against the RECAP copy in `exemplars/SOURCE.md` (the exemplar PDF is not in this checkout, so the tool's default `exemplars/*.pdf` lookup fails; pass the file as the third argument) |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the font change) |
 | page limit | the template asserts the memorandum (everything before the certificate of service) is at most 25 pages (LR Civ P 7.02(a)); the sample is 7 pages before the certificate |
 
 File names follow the repo's file-role convention, which `tools/render.sh` and `tools/overlay.sh` require: `INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf` and `.txt`. The brief's `<id>.md` and `<id>-overlay.pdf` names would have needed changes to the tools, which are out of scope for this box.
@@ -22,7 +23,7 @@ Primary sources: the Local Rules of the Northern District of West Virginia (the 
 |---|---|---|
 | LR Civ P 7.02(a) (2018 compilation, p. 42) | A supporting memorandum of not more than 25 pages, double-spaced; the judge may allow more for good cause. | `page-limit = 25`; the build asserts that the pages before the certificate of service are at most 25 and fails with the page count otherwise. |
 | LR Civ P 7.02(a) | 8½ × 11 paper; one-inch margins on all four sides; page numbers, but no text, in the margins. | `page-w`, `page-h`, `margin = 1in`; the footer is a page number only. The court's ECF header, which the filing system adds, is not produced. |
-| LR Civ P 7.02(a) | Times New Roman, Courier New or Arial; 12 point proportionally spaced (11 point non-proportional). | **Not met: see known gaps.** The template uses EB Garamond at 12 point. |
+| LR Civ P 7.02(a) | Times New Roman, Courier New or Arial; 12 point proportionally spaced (11 point non-proportional). | Met with the vendored substitute for Times New Roman: `font-family = "Liberation Serif"` (`docs/FONTS.md`), 12 point. Not Times New Roman itself, which is not vendored. |
 | LR Civ P 7.02(a) | Footnotes and indented quotations may be single-spaced; footnote text no smaller than 11 point proportional. | `note-size = 11pt`, footnotes and quotations single-spaced. |
 | LR Civ P 12.02 (2018 compilation, p. 50) | A motion to dismiss is designated prominently and filed as a separate pleading. | The memorandum is its own paper with its own title. The motion itself (ECF No. 7 in the exemplar's docket) is a separate document and is not produced here. |
 | LR Gen P 5.06(e) (2018 compilation, pp. 13–14) | A certificate of service "is required for all filings," and "must specify who was served and the manner in which service … was accomplished on each party." | `certificate()`: on its own page with the caption repeated; `served` lists who was served; the manner (CM/ECF) is printed. |
@@ -56,7 +57,7 @@ Primary sources: the Local Rules of the Northern District of West Virginia (the 
 
 ## Known gaps and open choices
 
-1. **Typeface (LR Civ P 7.02(a)). Not met.** The rule requires Times New Roman, Courier New or Arial at 12 point proportional. This repo vendors only EB Garamond, and the brief rules out system fonts and touching `fonts/`. The template uses EB Garamond (the cand templates do the same). **BLOCKED for tier 1, a question for David:** vendor a Times-metric face (for example Liberation Serif, SIL OFL, which is metrically compatible with Times New Roman) into `fonts/`, or accept EB Garamond for N.D. W. Va. memoranda. A memorandum set in EB Garamond does not meet LR Civ P 7.02(a) as written.
+1. **Typeface (LR Civ P 7.02(a)). Met with a substitute.** The rule names Times New Roman, Courier New or Arial at 12 point proportional. The template uses Liberation Serif, the vendored metric-compatible Times New Roman substitute, so the line breaks and page count match a Times New Roman setting. The rule names Times New Roman itself, which is not vendored and is not used. The substitute is a metric-compatible Times-style face, not Times New Roman itself; the filed exemplar is set in Times New Roman. The Liberation Serif line pitch was measured at 24.00 pt (`pdftotext -bbox-layout`) with `body-leading = 1.345em`, which keeps double spacing and the page count (8 pages, unchanged) against the EB Garamond setting.
 2. **Signature block on its own page.** In the render, the "DATED" line and the signature block fall to page 7, after the conclusion on page 6, because the block does not fit on page 6. The template does not keep the last paragraph with the signature (typst has no keep-with-next for paragraphs). Tier 2: ACCEPTED for now, a candidate for a later pass.
 3. **Certificate of service wording.** The exemplar's certificate says the filing was served electronically "to all counsel of record." LR Gen P 5.06(e) asks that the certificate "specify who was served and the manner" of service on each party. The template prints the list given in `served`. The sample lists "Counsel of record for Plaintiffs …" because the plaintiffs' counsel's names do not appear in the exemplar's memorandum text. Whether the court wants names is a question for David; the template accepts any list.
 4. **Page limit counts.** The assertion counts every page before the certificate, including the caption page and the signature pages. The exemplar has 25 pages before its certificate (text through page 23, the signature block on pages 24 and 25), so under this count it sits exactly at the 25 pages the rule allows without leave.
@@ -70,10 +71,10 @@ Primary sources: the Local Rules of the Northern District of West Virginia (the 
 - Page 1: court title, caption (parties with ")" marks; "No. 1:26-cv-00046-TSK" beside "Plaintiffs,"), title, the first paragraph. No overlap. Pass.
 - Page 2: introduction ends; "STATEMENT OF FACTS & PROCEDURAL HISTORY" centered bold underlined; first facts paragraph. Pass.
 - Page 3: facts paragraphs; footnotes 1 to 3 at 11 point, single spaced, separated by a rule; superscript note marks. Pass.
-- Page 4: facts ends; "LEGAL STANDARD" centered; "LEGAL ARGUMENT – 33 U.S.C. § 1365 …" centered bold underlined; "I. Plaintiffs Are Exercising the Executive Power" with a hanging indent. Pass.
-- Page 5: Argument I paragraphs with italic case names and short forms; "II. Plaintiffs' Exercise of Executive Power Violates the Private Nondelegation Doctrine" bold with a hanging indent at the foot of the page, with two body lines after it (the heading is kept with text). Pass.
-- Page 6: Argument II ends; bracketed note for the omitted pages; "CONCLUSION" centered; the conclusion paragraph. The page has white space at the foot (see gap 2). Pass.
-- Page 7: "DATED: August 5, 2026", "Respectfully submitted,", "s/ Peter Raupp", counsel lines with the e-mail and telephone. The page carries only the signature (see gap 2). Pass, with the note.
+- Page 4: facts end; footnote 3 at the foot; "LEGAL STANDARD" centered bold underlined at the foot, with the first Legal Standard paragraph. Pass.
+- Page 5: "LEGAL ARGUMENT – 33 U.S.C. § 1365 …" centered bold underlined; "I. Plaintiffs Are Exercising the Executive Power" with a hanging indent; Argument I paragraphs with italic case names and short forms. Pass.
+- Page 6: the start of "II. Plaintiffs' Exercise of Executive Power Violates the Private Nondelegation Doctrine" (bold, hanging indent) and its paragraphs; bracketed note for the omitted pages; "CONCLUSION" centered; the conclusion paragraph. Pass.
+- Page 7: the end of the conclusion; "DATED: August 5, 2026", "Respectfully submitted,", "s/ Peter Raupp", counsel lines with the e-mail and telephone. The page carries only the closing and signature (see gap 2). Pass, with the note.
 - Page 8: CERTIFICATE OF SERVICE on its own page with the caption repeated; the statement; the served list; "s/ Peter Raupp" and the role line. Pass.
 
-Overlay (`samples/OVERLAY-amsted-motion-brief.txt`): pages 1–4 pair with the same filed pages (94.1%, 83.2%, 65.2%, 47.0% word overlap); page 5 pairs with filed page 6, page 6 and page 7 with filed page 24 (the sample skips filed pages 8 to 22), page 8 with filed page 26 (the certificate). The pairing is a diagnostic, not a score.
+Overlay (`samples/OVERLAY-amsted-motion-brief.txt`): pages 1–5 pair with the same filed pages (95.6%, 85.8%, 79.3%, 68.9%, 50.2% word overlap); page 6 and page 7 pair with filed page 24 (the sample skips filed pages 8 to 22), page 8 with filed page 26 (the certificate). The pairing is a diagnostic, not a score.

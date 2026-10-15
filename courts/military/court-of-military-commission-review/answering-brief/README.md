@@ -1,6 +1,6 @@
 # USCMCR: brief of the appellee (answering brief)
 
-Status for this doc type: exemplar=yes, render=ok, overlay=ok, pages_reviewed=9 (every page of `samples/OUTPUT-hicks-answering-brief.pdf`, viewed after the last render).
+Status for this doc type: exemplar=yes, render=ok, overlay=ok, pages_reviewed=10 (every page of `samples/OUTPUT-hicks-answering-brief.pdf`, viewed after the last render).
 
 **Tier 1 (the rules' mandated form) is NOT verified.** The governing rules text could not be read (see "Rule basis"), and the typeface the rules call for is not vendored (see "Typeface"). Do not treat this template as passing tier 1.
 
@@ -36,7 +36,7 @@ Same as the opening brief (`../opening-brief/README.md`, "Rule basis"). Summary:
 | Requirement used by the template | Value | Status |
 |---|---|---|
 | Type-volume (word) limit | Not enforced; the certificate prints the word count from the frontmatter (13879, the government's figure) | Unverified. Rule number: the 2013 government certificate cites Rule 14(i); a 2016 search summary places the 14,000-word limit in Rule 15(g). |
-| Typeface and point size | 12 pt; EB Garamond stands in | Unverified. The government certificate says "monospaced typeface with 12 characters per inch, Times New Roman font" (Rule 14(e)). Neither face is vendored (see "Typeface"). |
+| Typeface and point size | 12 pt; Liberation Serif stands in for Times New Roman (see "Typeface") | Face: rule text unverified. The government certificate says "monospaced typeface with 12 characters per inch, Times New Roman font" (Rule 14(e)). The substitute is metric-compatible (`docs/FONTS.md`). |
 | Spacing, margins, paper | Double-spaced; 1 in; US Letter | Unverified. |
 | Certificates | Compliance and service, generated | Form taken from the exemplar. |
 
@@ -54,7 +54,7 @@ Searches tried for answering briefs beyond these: the same WebSearch results as 
 
 ## Typeface
 
-The filed government brief is set in Times-Roman and Times-Bold in a Word export, and its certificate cites a monospaced 12-cpi option; neither face is vendored. EB Garamond at 12 pt stands in. Same decision as the opening brief (`../opening-brief/README.md`, "Typeface"): David's to make.
+The filed government brief is set in Times-Roman and Times-Bold in a Word export, and its certificate cites "Rule 14(e)" for Times New Roman and a monospaced 12-cpi option. The template uses `Liberation Serif` at 12 pt, the Times New Roman substitute in `docs/FONTS.md`. The rule text is unverified (see `../opening-brief/README.md`, "Typeface"). Pagination grew from 9 to 10 pages with the switch: Times-metric text is wider than EB Garamond, so the same content takes more lines.
 
 ## Overlay (red/blue)
 
@@ -64,15 +64,16 @@ The filed government brief is set in Times-Roman and Times-Bold in a Word export
 |---|---|---|
 | 1 (cover) | 1 | 88.0% |
 | 2 (contents) | 2 | 17.0% |
-| 3 | 9 | 74.6% |
-| 4 | 11 | 59.6% |
-| 5 | 13 | 63.3% |
-| 6 | 14 | 41.5% |
-| 7 | 21 | 46.5% |
-| 8 | 45 | 84.0% |
-| 9 | 46 | 93.1% |
+| 3 | 9 | 78.5% |
+| 4 | 11 | 67.0% |
+| 5 | 12 | 54.3% |
+| 6 | 14 | 44.8% |
+| 7 | 21 | 41.1% |
+| 8 | 44 | 26.8% |
+| 9 | 45 | 84.0% |
+| 10 | 46 | 93.1% |
 
-The contents page has low overlap because the filed brief's contents are on its own page 1 to 2 and the sample's contents is generated. The sample is an excerpt of the 49-page filed brief, so partial overlap is expected. The filed pages 45 and 46 are the filed certificate and signature pages. The overlay is a diagnostic, not a score.
+The contents page has low overlap because the filed brief's contents are on its own page 1 to 2 and the sample's contents is generated. The sample is an excerpt of the 49-page filed brief, so partial overlap is expected. The filed pages 45 and 46 are the filed certificate and signature pages. Our page 8 (conclusion) pairs with filed page 44 at 26.8%, the lowest overlap in the map; the cause was not investigated. The overlay is a diagnostic, not a score.
 
 ## Page review (Gate 2 stand-in)
 
@@ -83,18 +84,19 @@ Every page of `samples/OUTPUT-hicks-answering-brief.pdf` was rendered at 60 dpi 
 | 1 | Cover, caption, counsel block | Clean. Caption parenthesis column reads correctly. |
 | 2 | Table of contents | Clean. Generated from headings. |
 | 3 | Body p.1: issues presented and brief answers | Clean. Sub-items (a) to (f) are set as indented paragraphs. |
-| 4 | Body p.2: statement of statutory jurisdiction, statement of facts A (begins) | Clean. Footnote 3 reads as a note at the page foot. |
-| 5 | Body p.3: facts A and B (cont.), footnote 4 | Clean. |
-| 6 | Body p.4: facts B (end), argument I and I.A (begins), footnote 5 | Clean. Argument heading and sub-heading styles match the opening brief. |
-| 7 | Body p.5: argument I.A (cont.), conclusion, signature | Clean. Signature block: "Dated", "Respectfully submitted", then "//s//" with the signer, kept together. |
-| 8 | Body p.6: certificate of compliance | **Open (tier 2):** the word count prints "13879" without a thousands separator; the filing prints "13,879". Fix would be a number format in the template. |
-| 9 | Body p.7: certificate of service | Clean. |
+| 4 | Body p.2: statement of statutory jurisdiction, facts A (begins), footnote 2 | Clean. |
+| 5 | Body p.3: facts A (cont.), footnote 3 | Clean. |
+| 6 | Body p.4: facts B, footnote 4 | Clean. |
+| 7 | Body p.5: argument I and I.A, footnote 5 | Clean. Argument heading and sub-heading styles match the opening brief. |
+| 8 | Body p.6: conclusion, signature | Clean. "Dated", "Respectfully submitted", then "//s//" with the signer, kept together. |
+| 9 | Body p.7: certificate of compliance | **Open (tier 2):** the word count prints "13879" without a thousands separator; the filing prints "13,879". Fix would be a number format in the template. |
+| 10 | Body p.8: certificate of service | Clean. |
 
 Fixes made during this review: the same paragraph-spacing and caption-gutter and signature-block fixes as the opening brief (see that README). The answering template's comment header describes the appellee's brief, not the appellant's.
 
 ## Known gaps
 
-- **Typeface** (above): EB Garamond stands in for the Times New Roman the rules call for. Open; David's decision.
+- **Typeface** (above): Liberation Serif now stands in for Times New Roman. The face comes from the filings, not the rule text, which is unverified.
 - **Rules unverified** (above).
 - **Word count** is a frontmatter value (13879), not computed from the body.
 - **Table of authorities** is not produced; the table of contents is generated.

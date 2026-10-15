@@ -21,6 +21,15 @@ Engines: typst `—`, latex `—`, docx `—`.
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 
+## Typeface
+
+| Doc type | Face required by rule | Typst family | Substitute fit |
+|---|---|---|---|
+| `opening-brief` | None: NMCCA Rule 17(c) allows any 14-point proportional type (Times New Roman and Century Schoolbook are examples) | `EB Garamond` | n/a (no court-named face) |
+| `answering-brief` | None (same rule, applies through Rule 18.4(a)) | `EB Garamond` | n/a |
+
+Details and the rule text: `opening-brief/README.md`, "Typeface". No LaTeX or DOCX engine exists in this court's folders yet.
+
 ## Folders
 
 - `typst/` Typst template (primary)

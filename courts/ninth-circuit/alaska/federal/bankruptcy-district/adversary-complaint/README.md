@@ -18,7 +18,7 @@ Sources: the District of Alaska Local Bankruptcy Rules, "LOCAL BANKRUPTCY RULES,
 | AKB-ADV-006 | LBR 9004-1(a)(2) | Margin of at least 1 inch on all four sides. | `margin = 1in` |
 | AKB-ADV-007 | LBR 9004-1(a)(4) | Double-spaced or 1.5-spaced; quotations over 50 words single-spaced and indented. | `body-leading` (24 pt pitch); quote `show` rule |
 | AKB-ADV-008 | LBR 9004-1(a)(5) | Each page numbered at the bottom. | `footer-page` |
-| AKB-ADV-009 | LBR 9004-1(a)(7) | 12-point or 10-pitch type. | `type-size = 12pt` |
+| AKB-ADV-009 | LBR 9004-1(a)(7) | 12-point or 10-pitch type. No typeface is named. | `type-size = 12pt`; `font-family = "EB Garamond"` |
 | AKB-ADV-010 | LBR 9004-1(a)(9) | Names typed beneath signatures. | `signature-block()` (`/s/` line, then the name typed beneath) |
 | AKB-ADV-011 | FRBP 7008(a) (as restyled 2024) | The allegation of jurisdiction names the case, its number and Code chapter, and the district and division. | sample content (Background and jurisdiction paragraphs); not enforced by the template |
 | AKB-ADV-012 | FRBP 7008(a); LBR 7012-1 | The complaint states whether the pleader does or does not consent to entry of final orders or judgment by the Bankruptcy Court. | `consent-block()`: an assertion fails the render when `consent` is missing from the frontmatter |
@@ -71,6 +71,14 @@ Reviewed pages: 3 of 3.
 4. **Summons and cover sheet (AKB-ADV-013).** LBR 7003-1 requires a summons for each defendant, the fee, and, for a conventional filing, Form 1040. These are separate documents and are not generated.
 5. **Caption layout.** An approximation of Official Form 416D (party groups ruled below, "v." between them, numbers beside the parties). Not a reproduction of the form. FRBP 7010 requires "substantially conform".
 6. **Font.** EB Garamond (vendored, OFL) at 12 pt, not Times New Roman as in the exemplar. The LBR floor is 12 pt or 10 pitch; the choice of face is ours.
+
+## Typeface (fonts pass, fb-595.7.5)
+
+| Doc type | Face required by the rules | Vendored substitute (typst family) | Fit | Status |
+|---|---|---|---|---|
+| adversary-complaint | none: LBR 9004-1(a)(7) says "twelve (12) point or ten (10) pitch type" and names no face (text checked 2026-10-14 from the 12/2024 LBR PDF, `pdftotext`) | none; kept EB Garamond (`EB Garamond`, SIL OFL 1.1) | n/a | the exemplar's Times New Roman is the filer's choice, not a rule |
+
+The filed exemplar is set in Times New Roman, but no rule requires it, so the court-named-face substitution (`docs/FONTS.md`) does not apply here. Render check: `pdffonts` on `samples/OUTPUT-battley-furie-complaint.pdf` shows `EBGaramond-Regular` and `EBGaramond-Bold`, embedded, and no other face.
 7. **Paragraph numbering.** The template numbers paragraphs continuously (Fed. R. Civ. P. 10(b)); the filed exemplar numbers by section. The sample's numbers differ from the filing's.
 8. **Length.** The exemplar is 3 pages, so the sample is 3 pages; the 8-14 page target applies to longer exemplars and does not apply here.
 9. **One exemplar.** The eval-loop tier 2 rule asks for 2 or 3 filings from different filers. Only one adversary complaint from this court was fetched; the other complaints found (Gebhardt v. Aegis 16-90020; Cook Inlet 17-90028, 17-90059) were not reachable in this run (HTTP 202 throttling). Tier 2 is therefore not judged against a second filer.
