@@ -3,7 +3,7 @@
 - Court: `bap8`, United States Bankruptcy Appellate Panel for the Eighth Circuit (`courts/eighth-circuit/bankruptcy-appellate-panel/`). Court-root `typst/` and `samples/` are untouched.
 - Doc type: `answering-brief`. Appellee's brief, FRBP 8014(b).
 - **Exemplar: BLOCKED: no exemplar.** No public filed appellee's brief from this court was found after 20 searches in two passes, plus three direct fetch attempts (listed in `exemplars/SOURCE.md`). Nothing is stored in `exemplars/`. The one public BAP brief found (the debtor's opening brief in BAP No. 11-6012) is the opening-brief exemplar.
-- Template: built from the rules. Render (2026-10-14, ok, 9 pages) and full page review done (Gate 2 below). Overlay: fail, no exemplar (see Overlay).
+- Template: built from the rules. Render (2026-10-15, ok, 9 pages) and full page review done (Gate 2 below). Overlay: fail, no exemplar (see Overlay). Exemplar re-searched 2026-10-15 (nine more searches, `exemplars/SOURCE.md` pass 3): still none.
 - Status: rule-driven template plus a synthetic rule-check sample. `court.json` untouched; `status` not set.
 - Typeface: rule names no face (FRBP 8015(a)(5)(A)); kept **EB Garamond**, 14 pt. Re-rendered 2026-10-14 with `tools/render.sh` (zero warnings); `pdffonts`: only EB Garamond embedded. Overlay re-run: fail, no exemplar PDF in `exemplars/`.
 
@@ -55,11 +55,11 @@ Every page of the rule-check render was rasterized at 60 dpi (`pdftoppm -r 60`) 
 | 8 | Certificate of Compliance (3); 195 words | OK. |
 | 9 | Certificate of Service (4) | OK. |
 
-Pages reviewed: 9 of 9 (all re-viewed 2026-10-14 as PNG at 60 dpi).
+Pages reviewed: 9 of 9 (all re-viewed 2026-10-15 as PNG at 60 dpi after a fresh render; rows above unchanged).
 
 ## Overlay
 
-Run 2026-10-14: `sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/answering-brief synthetic-answering-brief` exits 1 ("no exemplar pdf"). No `OVERLAY-` file is written. Status: fail.
+Run 2026-10-15 (also 2026-10-14): `sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/answering-brief synthetic-answering-brief` exits 1 ("no exemplar pdf"). No `OVERLAY-` file is written. Status: fail.
 
 ## Known gaps
 

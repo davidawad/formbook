@@ -38,4 +38,22 @@ The Brief of Appellant in BAP No. 11-6012 (*In re Fisette*) is the one public fi
 
 Not checked: PACER (login required; not a public source in this box); the BAP's own docket pages (not reachable from this box); a RECAP-hosted reply in the Fisette case (Justia blocked, no alternate host found).
 
+## Pass 3, 2026-10-15 (nine searches, CourtListener API probes)
+
+Anonymous CourtListener API: 5 requests/min, no API key on this box, so queries were paced. Results with `court=bap8` came back empty (`count: 0`).
+
+| # | Tool / query | Result |
+|---|---|---|
+| 1 | CourtListener v4 search, `type=r&court=bap8`, `q="reply brief"`, `"brief of appellant"`, `"appellant's reply brief"` | 200, `count: 0` each. No bap8 RECAP document indexed under those terms. |
+| 2 | CourtListener v4 search, `type=r&court=bap8`, no query | `count: 0`. |
+| 3 | CourtListener v4 search, `type=d&court=bap8` | `count: 0`. No bap8 docket indexed. |
+| 4 | CourtListener v4 search, `type=r`, `q="Bankruptcy Appellate Panel" "Eighth Circuit" "brief of appellee"` (no court filter) | 4 hits, none a BAP brief. One ca8 RECAP entry, *Todd Christenson v. Steven Breitenfeldt*, No. 25-6003: a BAP-judge judgment of Jan. 20, 2026, not a brief. Docket page CloudFront-blocked; API needs a token. |
+| 5 | CourtListener v4 search, `type=r`, `q="B.A.P. 8th Cir" "reply brief"` (no court filter) | 273 hits, none a bap8 reply brief. |
+| 6 | WebSearch (standard): BAP "reply brief of appellant" pdf, Eighth Circuit | Eighth Circuit orders, BAP IOPs, *Delta Engineering* (270 F.3d 584). No reply brief. |
+| 7 | WebSearch (standard): "Bankruptcy Appellate Panel" "Eighth Circuit" "reply brief" pdf BAP No. | Clerk letters and opinions. No reply brief. |
+| 8 | WebSearch (extended): ncbrc.org / brief bank, "reply brief", trustee-appellee, "BAP No." | Opinions and a Ninth Circuit BAP order. No reply brief. |
+| 9 | WebSearch (standard): "8th Cir. BAP" reply brief, Rule 8014(c) table of authorities | Rule text and opinions. No reply brief. |
+
+Still not searched: PACER (login); a CourtListener API token (needed for full bap8 docket and document lookups).
+
 If a filer later supplies a public BAP reply brief, add it here as `exemplars/FILED-EXAMPLE-<short-case>-<docket>-reply-brief.pdf` with the URL, case name, docket, filer, date filed, and date fetched.
