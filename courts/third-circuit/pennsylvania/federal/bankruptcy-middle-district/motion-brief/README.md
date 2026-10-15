@@ -71,7 +71,7 @@ Pages reviewed: 7 of 7.
 4. **Adversary-proceeding caption (PAMB-MOT-009).** Not built. A brief in an adversary must carry the complete adversary caption and be substantially compliant with Form 416D. The contested-matter caption here is not that.
 5. **L.B.F. 9004-1 caption.** The contested-matter caption is modeled on the filed exemplar; the form itself was not retrieved.
 6. **Title content (PAMB-MOT-002).** The template requires `title` but does not check that it names the filing party and the relief.
-7. **Font, margins, spacing.** No M.D. Pa. font, margin, or line-spacing rule found. EB Garamond 13 pt, 1 in margins, double-spaced body (24 pt pitch), following the filed copy's look. Convention.
+7. **Font, margins, spacing.** Typeface row: face required = none; substitute = none needed (EB Garamond kept, `docs/FONTS.md` row "No face named"); fit = n/a. Checked 2026-10-15 against the full text of the local rules PDF (no rule on font, typeface, point size, margins or spacing; L.B.R. 9004-1 governs the caption only) and FRBP 9004(a) (legibility only). EB Garamond 13 pt, 1 in margins, double-spaced body (24 pt pitch), following the filed copy's look. Convention.
 8. **Paper size.** US Letter; no rule text found. Convention.
 9. **Tier-2 exemplars.** One exemplar. A second and third from different filers were not found as text-based PDFs. Also examined and not used: the Madeam trustee's Memorandum of Law in Support of Motion to Dismiss (5-22-bk-01575, Doc 33, 7 pages, text layer present), a standalone memorandum from a trustee; it could serve as a second tier-2 reference in a later pass.
 10. **Certificate placeholders.** `represents` is a bracketed placeholder for each served person (the filed certificate does not state it).
