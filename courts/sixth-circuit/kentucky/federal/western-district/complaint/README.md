@@ -45,7 +45,7 @@ Not verified in this pass, and not asserted by the template: Fed. R. Civ. P. 8(a
 
 ## Known gaps and open choices
 
-1. **Font.** LR 5.2(a) asks for a 12-point proportionately spaced font and names no typeface. The exemplars use Times New Roman. This template uses EB Garamond (the only font vendored in `fonts/`). EB Garamond at 12 pt has a smaller x-height than Times at 12 pt, so the text looks smaller than the exemplar. The 12-point minimum is met. A vendored Times-metric font would remove the difference; that is a question for David (same as the N.D. Cal. complaint).
+1. **Typeface.** Face required: none. LR 5.2(a) (JGO 2026-01, re-read 2026-10-15) asks for "at least 12-point proportionately-spaced font" and names no typeface. Substitute: none; EB Garamond stays as the no-face default (`docs/FONTS.md`). Metric-compatible or visual-only: n/a. The exemplars use Times New Roman, and EB Garamond at 12 pt has a smaller x-height than Times at 12 pt, so the text looks smaller than the exemplar. The 12-point minimum is met. `Liberation Serif` (Times-metric) is available if David wants the exemplar look; it is not used here, because no rule requires it.
 2. **Judge initials** after the file number (`3:26-CV-653-RGJ`). This is a convention seen in both filers' captions, not a rule; the template prints whatever `case_number` holds.
 3. **Caption date and signature date.** The exemplar has no date line in the signature block; the template has none.
 4. **Filer's typo kept out of the sample.** The filed caption reads "FOR THE WSTERN DISTRICT OF KENTUCKY"; the sample says "WESTERN" (noted in the sample's frontmatter comment).
