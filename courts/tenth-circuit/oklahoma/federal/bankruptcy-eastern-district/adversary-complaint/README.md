@@ -86,3 +86,14 @@ Both exemplars are on CourtListener RECAP (`court=okeb`), recorded with their SH
 - **Official Form 416D.** The caption is checked against FRBP 7010 and LBR 9004-2. The form text itself was not fetched.
 - **Engines.** Only typst is built. `latex/` and `docx/` are not built for this doc type.
 - **Gate machinery.** No `checks.yaml`, `tools/check.sh` stamp, or `reviews/` entry exists for this doc type. The render, overlay, and page review in this README are the only verification.
+
+## Engines
+
+Docx engine (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.sh reference.docx`) and `docx/okeb-adversary-complaint.lua` (caption as a table with a vertical rule, consecutive numbered allegations, property lists, signature block). It matches the typst form in paper (letter, 1 in margins), type (EB Garamond 12 pt, footnotes included), double spacing (exact 27.6 pt), 0.5 in first-line indent, headings (bold, centered capitals at every level) and the centered page number in the footer.
+
+Differences from typst: Word's line breaking and the caption table's border rendering are not checked; the typst vertical gaps are approximated with paragraph spacing; the typst form's ragged-right body is kept.
+
+BLOCKED (docx engine, `samples/OUTPUT-apache-complaint.docx` is written and valid XML, but the rest cannot run here):
+- `docx.pdf` (Gates 0 and 1 on the LibreOffice PDF): soffice not installed on this box, and LibreOffice cannot be installed here (no conda-forge package, no root). `tools/render-docx.sh` fails at its soffice step.
+- Visual review of the docx pages: BLOCKED for the same reason; pages reviewed: 0.
+- Word open check (no repair prompt): not done, no Word here.

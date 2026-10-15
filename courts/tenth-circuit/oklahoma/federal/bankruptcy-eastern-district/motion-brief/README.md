@@ -70,3 +70,14 @@ These are open. None are blocking for a render, but a clerk would notice some of
 5. **ECF header and footer not reproduced.** The filed PDFs carry the court's "Case … Doc … Filed … Entered … Page x of y" stamp on every page. The court's system applies it at filing; the template does not produce it.
 6. **Brooks mailing list is one paragraph.** The filed certificate lists the debtors' address on its own line. The sample sets it as a paragraph after the certificate's lead-in.
 7. **No `rules.md`, `checks.yaml`, `latex/`, `docx/`, or `court.json` status changes.** These are outside this task. No `tools/check.sh` run, so no gate result is reported.
+
+## Engines
+
+Docx engine (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.sh reference.docx`) and `docx/okeb-motion-brief.lua` (caption as a table with a vertical rule, consecutive numbered paragraphs, property lists, optional counsel block, signature block, optional certificate). It matches the typst form in paper (letter, 1 in margins), type (EB Garamond 12 pt, footnotes included), double spacing (exact 27.6 pt), 0.5 in first-line indent, block quotations (single spaced, indented 0.5 in each side), heading levels (level 1 bold centered capitals, level 2 bold, level 3 bold indented 0.5 in) and the centered page number in the footer.
+
+Differences from typst: Word's line breaking and the caption table's border rendering are not checked; the typst vertical gaps are approximated with paragraph spacing; the body stays ragged right, as in the typst form. A certificate body given as markdown is split into paragraphs at line breaks in the frontmatter.
+
+BLOCKED (docx engine, `samples/OUTPUT-brooks-trustee-brief.docx` and `samples/OUTPUT-gpnb-closing-brief.docx` are written and valid XML, but the rest cannot run here):
+- `docx.pdf` (Gates 0 and 1 on the LibreOffice PDF): soffice not installed on this box, and LibreOffice cannot be installed here (no conda-forge package, no root). `tools/render-docx.sh` fails at its soffice step.
+- Visual review of the docx pages: BLOCKED for the same reason; pages reviewed: 0.
+- Word open check (no repair prompt): not done, no Word here.
