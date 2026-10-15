@@ -155,3 +155,23 @@ Nothing is marked OK without a render and a look.
 7. **Form 6 "word-processing program".** Form 6 asks for the program name and version; the certificate says "set with Typst 0.15.0" because that is the program that set the type.
 8. **Addendum, adoption statement, cross-appeal layout.** Template supports the addendum and the cross-appeal word limit; no sample exercises them, and the adoption statement (CA11-CONT-008) is not generated.
 9. **No gate.** `tools/check.sh` is not wired to this folder: no `checks.yaml`, no `rules.md`, no selftest. The checks above are by reading and by the word count.
+
+## Engines
+
+The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
+outputs are `samples/OUTPUT-naacp-v-byrd-25-12813.latex.pdf`, `.docx` and `.docx.pdf`.
+
+- **latex** (`latex/template.tex`, `latex/ca11.lua`, `latex/render.sh`). Matches: EB Garamond 14 pt, double spacing,
+  one-inch margins, the cover with its double rules, the statement regarding oral argument, the table of contents
+  (single spaced, as typst sets it) and the table of authorities with the capitalised group titles, the Form 6
+  certificate of compliance, the certificate of service when `service.certificate` is set. Differs: line breaks and
+  quotation spacing, so some body paragraphs fall one line apart from typst (14 pages both).
+  The addendum (`Add-n` pages with its own table, the `# Addendum` heading) is written but this sample has none, so it is
+  untested here.
+- **docx** (`docx/reference.docx`, `docx/ca11.lua`, `docx/render.sh`, `docx/make-reference.sh`). The cover, the
+  certificates and the tables are written with explicit formatting; sections carry the roman and arabic footers. Page
+  numbers in the tables come from a first LibreOffice render (no TOC or TOA fields). Differs: the table of
+  authorities' last group runs onto its own page where typst keeps it on one; 14 pages both.
+  BLOCKED: the addendum (`# Addendum`) is not built for docx. `ca11.lua` stops with an error on that heading (its
+  `Add-n` numbering needs a section and a table of its own, not yet written). The sample has no addendum, so the
+  sample builds.

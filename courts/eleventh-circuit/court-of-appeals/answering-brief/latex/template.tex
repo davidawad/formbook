@@ -1,0 +1,280 @@
+% U.S. Court of Appeals for the Eleventh Circuit: appellee's answer brief (FRAP 28, 32; 11th Cir. R. 28-1, 32-3, 32-4).
+% LaTeX engine. The same form as typst/ca11-answering-brief.typ: rule-driven and content-agnostic. Everything printed
+% comes from the markdown frontmatter, the body, or latex/ca11.lua (heading labels, table of citations, word count,
+% addendum). Fonts: only the vendored EB Garamond, through the pandoc variable fontdir (no system fonts).
+% See ../README.md, "Engines".
+\documentclass[14pt,letterpaper]{extarticle}
+\usepackage{fontspec}
+\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf, UprightFont=EBGaramond-Regular, ItalicFont=EBGaramond-Italic,
+  BoldFont=EBGaramond-Bold, BoldItalicFont=EBGaramond-BoldItalic, Ligatures=TeX]{EBGaramond-Regular}
+\usepackage[letterpaper,margin=1in,footskip=0.3in]{geometry}
+\usepackage{etoolbox}      % table-of-citations page lists
+\usepackage[hidelinks,unicode,bookmarks=false]{hyperref}
+\usepackage{xcolor}
+\makeatletter
+
+% ---------------------------------------------------------------------------
+% Page, text and type (FRAP 32(a)(4)-(6); 11th Cir. R. 32-3)
+% ---------------------------------------------------------------------------
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\raggedright
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\pagestyle{plain}
+\newcommand{\cabody}{\fontsize{14pt}{31.43pt}\selectfont}     % double spacing: 2.2 x type size
+\newcommand{\casingle}{\fontsize{14pt}{19.95pt}\selectfont}   % headings, quotations, notes, cover, certificates
+\AtBeginDocument{\cabody\setlength{\parindent}{0.5in}}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Footnotes: 14 point, single spaced (FRAP 32(a)(5)(A)); the marker is superscript.
+\renewcommand{\footnotesize}{\fontsize{14pt}{19.95pt}\selectfont\setlength{\parskip}{0.5em}}
+\renewcommand{\footnoterule}{\kern-3pt{\hrule width 0.3\textwidth height 0.5pt}\kern2.6pt}
+\renewcommand{\@makefntext}[1]{\parindent=0pt\noindent\textsuperscript{\@thefnmark}\hspace{0.25em}#1}
+\setlength{\skip\footins}{1.2em}
+
+% Block quotations: inset half an inch on each side, single spaced.
+\renewenvironment{quote}{\par\addvspace{1em}\begingroup\casingle\leftskip=0.5in\rightskip=0.5in
+  \parindent=0pt\parskip=0.9em\relax}{\par\endgroup\addvspace{1em}}
+
+% ---------------------------------------------------------------------------
+% Headings (typst: style-heading). ca11.lua supplies the label and the entry; these set the form.
+% Typst sets the first line after a block on the natural line height, not the double-spaced one: each block
+% boundary gives back \caleadcut (double-spaced pitch minus natural height) so the gaps are typst's.
+% ---------------------------------------------------------------------------
+\newlength{\caleadcut}\setlength{\caleadcut}{13.13pt}
+% A centered block: #1 space above, #2 space below, #3 text.
+\newcommand{\catitle}[3]{%
+  \vspace{\dimexpr#1-\caleadcut\relax}\par
+  \begingroup\centering\casingle#3\par\endgroup
+  \nopagebreak\vspace{\dimexpr#2-\caleadcut\relax}\par}
+% Section heading (level 1): bold capitals, centered, 1.15 x type size; listed in the table of contents.
+\DeclareRobustCommand{\caHone}[1]{%
+  \catitle{1.5em}{1.1em}{\bfseries\fontsize{16.1pt}{20pt}\selectfont\MakeUppercase{#1}%
+  \addcontentsline{toc}{caLone}{\MakeUppercase{#1}}}}
+% Section heading not listed in any table (Statement Regarding Oral Argument, Addendum).
+\DeclareRobustCommand{\caunnumhone}[1]{%
+  \catitle{1.5em}{1.1em}{\bfseries\fontsize{16.1pt}{20pt}\selectfont\MakeUppercase{#1}}}
+% Sub-heading: label in a half-inch box, text hangs under the text.
+% #1 indent, #2 label, #3 text, #4 TOC style (\relax: not listed), #5 TOC entry.
+\newcommand{\casub}[5]{%
+  \addvspace{\dimexpr1.1em-\caleadcut\relax}\par
+  \begingroup\casingle\noindent\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\relax
+  \hspace*{#1}\makebox[0.5in][l]{#2}#3%
+  \ifx\relax#4\relax\else\addcontentsline{toc}{#4}{#5}\fi\par\endgroup
+  \nopagebreak\addvspace{\dimexpr0.9em-\caleadcut\relax}\par}
+% Unnumbered heading of the addendum (bold, flush left). #1 text, #2 TOC style (\relax: not listed), #3 entry.
+\newcommand{\caunnum}[3]{%
+  \addvspace{\dimexpr1.2em-\caleadcut\relax}\par
+  \begingroup\casingle\noindent\bfseries #1%
+  \ifx\relax#2\relax\else\addcontentsline{add}{#2}{#3}\fi\par\endgroup
+  \nopagebreak\addvspace{\dimexpr0.9em-\caleadcut\relax}\par}
+% Label of a table-of-contents entry: a half-inch box, then the title.
+\DeclareRobustCommand{\calab}[2]{\makebox[0.5in][l]{#1}#2}
+
+% ---------------------------------------------------------------------------
+% Tables of contents (typst: toc-entry). The entries are double spaced; #1 indent, #2 text, #3 page.
+% ---------------------------------------------------------------------------
+\newcommand{\cadots}{\leaders\hbox to 0.16em{\hss.\hss}\hfill}
+\newcommand{\catocline}[3]{%
+  \par\begingroup\casingle\noindent\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\relax
+  \hspace*{#1}#2\nobreak\hspace{0.8em}\nobreak\cadots\nobreak\hbox to 2.2em{\hfill#3}\par\endgroup}
+\def\l@caLone#1#2{\par\addvspace{0.6em}\catocline{0in}{#1}{#2}}
+\def\l@caTzero#1#2{\par\addvspace{0.35em}\catocline{0in}{#1}{#2}}
+\def\l@caTone#1#2{\par\addvspace{0.35em}\catocline{0.5in}{#1}{#2}}
+\def\l@caTtwo#1#2{\par\addvspace{0.35em}\catocline{1in}{#1}{#2}}
+\def\l@caTthree#1#2{\par\addvspace{0.35em}\catocline{1.5in}{#1}{#2}}
+\def\l@caTfour#1#2{\par\addvspace{0.35em}\catocline{2in}{#1}{#2}}
+\def\l@caTfive#1#2{\par\addvspace{0.35em}\catocline{2.5in}{#1}{#2}}
+
+% ---------------------------------------------------------------------------
+% Table of authorities (typst: toa-section). Pages come from the links in the body (aux file), every page is listed.
+% ---------------------------------------------------------------------------
+% A link writes its page and its primary flag (0 here: this brief marks no primary citations) to the aux file.
+\DeclareRobustCommand{\catoahit}[3]{#3\protected@write\@auxout{}{\string\catoaentry{#1}{\thepage}{#2}}}
+% Each (authority, page) pair is kept once, in document order; a primary page is marked with an asterisk.
+\newcommand{\catoaentry}[3]{%
+  \@ifundefined{catoaseen@#1@#2}{%
+    \expandafter\gdef\csname catoaseen@#1@#2\endcsname{}%
+    \@ifundefined{catoa@#1}{%
+      \expandafter\gdef\csname catoa@#1\endcsname{#2}%
+    }{%
+      \expandafter\edef\expandafter\catoatmp\expandafter{\csname catoa@#1\endcsname}%
+      \expandafter\xdef\csname catoa@#1\endcsname{\catoatmp,#2}%
+    }%
+  }{}%
+  \ifnum#3=1 \expandafter\gdef\csname catoastar@#1@#2\endcsname{}\fi}
+% The page list of one authority: "4, 5, *6", from the first pass's aux file (empty before it exists).
+% \catoacur is the authority being listed; \forcsvlist (etoolbox) runs \catoaadd over its pages.
+\newcommand{\catoaadd}[1]{%
+  \ifx\catoaout\@empty\else\g@addto@macro\catoaout{, }\fi
+  \@ifundefined{catoastar@\catoacur @#1}{}{\g@addto@macro\catoaout{*}}%
+  \g@addto@macro\catoaout{#1}}
+\newcommand{\catoapages}[1]{%
+  \@ifundefined{catoa@#1}{}{%
+    \begingroup
+    \gdef\catoacur{#1}\gdef\catoaout{}%
+    \edef\catoalist{\csname catoa@#1\endcsname}%
+    \forcsvlist{\catoaadd}{\catoalist}%
+    \catoaout
+    \endgroup}}
+% A group heading; #2 is 1 for the first group, which carries the "Page(s)" label.
+\newcommand{\catoagroup}[2]{%
+  \par\begingroup\cabody
+  \ifnum#2=1 \addvspace{0.6em}\else \addvspace{1.4em}\fi
+  \noindent\textbf{#1}\ifnum#2=1 \hfill\textbf{\underline{Page(s)}}\fi\par\endgroup
+  \nopagebreak}
+% One authority: #1 name (may be empty; a case name is italic), #2 citation, #3 key.
+\def\catoaempty{}
+\newcommand{\catoarow}[3]{%
+  \par\begingroup\casingle\addvspace{0.7em}\begin{samepage}\hangindent=0.35in\hangafter=1\relax\noindent
+  \ifx#1\catoaempty\else #1,\\\fi
+  #2\hspace{0.8em}\cadots\hspace{0.3em}\catoapages{#3}\par\end{samepage}\endgroup}
+
+% ---------------------------------------------------------------------------
+% Cover rules (11th Cir. R. 28-1(a)): short rules and double rules drawn with no line height.
+% ---------------------------------------------------------------------------
+\newcommand{\cashortrule}{\par\nointerlineskip\vskip 0.6em
+  \hbox to\textwidth{\hss\vrule width 2in height 0.7pt depth 0pt\hss}\nointerlineskip\vskip 0.6em\par}
+\newcommand{\cadoublerule}{\par\nointerlineskip\vskip 0.6em
+  \hrule height 1.6pt width\textwidth\vskip 2.5pt\hrule height 0.5pt width\textwidth\vskip 0.6em\par}
+
+% ---------------------------------------------------------------------------
+% Form signature (typst: form-sig-line): the signature on the left, the date on the right.
+% ---------------------------------------------------------------------------
+\newcommand{\caformsig}[3]{%
+  \par\addvspace{1.6em}\noindent
+  \begin{minipage}[t]{0.45\textwidth}\casingle #1\\ Attorney for #2\end{minipage}\hfill
+  \begin{minipage}[t]{0.45\textwidth}\casingle Dated: #3\end{minipage}\par}
+
+\begin{document}
+
+% ---------------------------------------------------------------------------
+% Cover (FRAP 32(a)(2); 11th Cir. R. 28-1(a)). Page 1, no number.
+% ---------------------------------------------------------------------------
+\thispagestyle{empty}
+\casingle\setlength{\parskip}{0.35em}
+\par\begingroup\centering\textbf{No. $case_number$}\par\endgroup
+\cadoublerule
+\par\begingroup\centering\textbf{IN THE UNITED STATES COURT OF APPEALS\\FOR THE ELEVENTH CIRCUIT}\par\endgroup
+\cashortrule
+$for(caption)$
+\par\begingroup\centering
+$for(caption.names)$$it$\par
+$endfor$
+\endgroup
+\par\noindent\hspace*{0.5\textwidth}$caption.designation$\par
+$sep$
+\par\begingroup\centering v.\par\endgroup
+$endfor$
+\cashortrule
+\par\begingroup\centering
+$proceeding$\par
+$if(district_court_case)$D.C. Docket No. $district_court_case$$if(judge)$; $judge$$endif$\par
+$elseif(judge)$$judge$\par
+$endif$
+\endgroup
+\cashortrule
+\par\begingroup\centering\textbf{\MakeUppercase{$brief_title$}}\par\endgroup
+\cashortrule
+\par\noindent\hspace*{0.5\textwidth}\begin{minipage}[t]{0.5\textwidth}\casingle
+$for(counsel)$
+$for(counsel.names)$$it$\par
+$endfor$
+$for(counsel.lines)$\hspace*{0.5em}\emph{$it$}\par
+$endfor$
+$if(counsel.phone)$\hspace*{0.5em}\emph{$counsel.phone$}\par
+$endif$
+\vspace{0.5em}
+$endfor$
+\end{minipage}\par
+\cadoublerule
+
+% ---------------------------------------------------------------------------
+% Front matter (lowercase roman): oral argument statement, table of contents, table of authorities
+% ---------------------------------------------------------------------------
+\clearpage
+\setlength{\parskip}{0pt}
+\pagenumbering{roman}
+\setcounter{page}{1}
+\caunnumhone{Statement Regarding Oral Argument}
+\begingroup\cabody $oral_argument$\par\endgroup
+
+\clearpage
+\caunnumhone{Table of Contents}
+\begingroup\casingle\hfill\textbf{\underline{Page}}\par\endgroup
+\@starttoc{toc}
+
+\clearpage
+\caunnumhone{Table of Authorities}
+$toa$
+
+% ---------------------------------------------------------------------------
+% Body (arabic from 1)
+% ---------------------------------------------------------------------------
+\clearpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\cabody
+$body$
+
+% The signature block (typst: signature-block). It stays with the last paragraph (samepage).
+\nopagebreak\par\addvspace{1.4em}\noindent\hspace*{0.5\textwidth}
+\begin{minipage}[t]{0.5\textwidth}\casingle
+Respectfully submitted,\\[1.2em]
+s/ $signature.signer$\\
+\MakeUppercase{$signature.signer$}
+$for(signature.lines)$\\
+\hspace*{0.5em}\emph{$it$}
+$endfor$
+\end{minipage}
+$if(date)$\par\addvspace{0.8em}\noindent Dated: $date$\par$endif$
+$if(keep)$\end{samepage}$endif$
+
+% ---------------------------------------------------------------------------
+% Certificate of compliance (FRAP 32(g)(1), Form 6; 11th Cir. R. 32-4; typst: certificate-of-compliance)
+% ---------------------------------------------------------------------------
+\clearpage
+\caunnumhone{Certificate of Compliance}
+\begingroup\casingle\noindent\parindent=0pt\setlength{\parskip}{1em}\relax
+This brief complies with the type-volume limit of Fed. R. App. P. 32(a)(7)(B)$if(cross)$ (as applied by Fed. R. App. P. 28.1(e)(2)(A)(ii))$endif$ because, excluding the parts of the brief exempted by Fed. R. App. P. 32(f) and 11th Cir. R. 32-4, it contains $words$ words$if(manual_image_words)$, including $manual_image_words$ words manually counted in visual images$endif$.\par
+This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because it has been prepared in a proportionally spaced typeface, EB Garamond, 14-point.\par
+\endgroup
+\caformsig{s/ $signature.signer$}{$signature.party$}{$if(date)$$date$$endif$}
+
+% ---------------------------------------------------------------------------
+% Certificate of service (FRAP 25(d); CM/ECF; typst: certificate-of-service): only when service.certificate is set
+% ---------------------------------------------------------------------------
+$if(service.certificate)$
+\clearpage
+\caunnumhone{Certificate of Service}
+\begingroup\casingle\noindent\parindent=0pt\setlength{\parskip}{1em}\relax
+I certify that on $date$, I filed the foregoing document with the Clerk of the Court for the United States Court of Appeals for the Eleventh Circuit through the CM/ECF system, which serves notice of the filing on all registered counsel of record.\par
+$if(service.unregistered)$
+\textbf{Service on Persons Who Are NOT Registered for CM/ECF:}\par
+I certify that I served the foregoing document on this date by hand delivery, mail, third-party commercial carrier, or, having obtained prior consent, by email, to the following persons (list each name and mailing or email address):\par
+$for(service.unregistered)$
+\par\noindent\hspace*{0.5in}$it.name$, $it.address$\par
+$endfor$
+$endif$
+\endgroup
+\caformsig{s/ $signature.signer$}{$signature.party$}{$if(date)$$date$$endif$}
+$endif$
+
+% ---------------------------------------------------------------------------
+% Addendum (11th Cir. R. 32-4): its own numbering, Add-1, Add-2 ...; its table lists the level-2 headings.
+% ---------------------------------------------------------------------------
+$if(addendum)$
+\clearpage
+\setcounter{page}{1}
+\renewcommand{\thepage}{Add-\arabic{page}}
+\caunnumhone{Addendum}
+\catitle{0pt}{0.3em}{\bfseries\fontsize{14pt}{19.95pt}\selectfont Table of Contents}
+\begingroup\casingle\hfill\textbf{\underline{Page}}\par\endgroup
+\@starttoc{add}
+\clearpage
+\cabody
+$addendum$
+$endif$
+
+\end{document}

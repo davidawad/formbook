@@ -99,4 +99,29 @@ Every page of `OUTPUT-rosen-kellogg-reply-brief.pdf` was rendered at 60 dpi (`pd
 - **Filing typos kept.** The sample reproduces the filed text as filed, including "Becasue" in the point C heading and "Underling added" after the complaint quotation. It is a transcription, not an edited brief.
 - **Not produced.** Cover colour, disk and paper-copy rules, the Cir. R. 26.1 disclosure statement, the related-cases statement, and the addendum (none appear in this reply).
 
+## Engines
+
+The typst template is the reference. The LaTeX and DOCX engines are built from the same markdown.
+
+Build commands, from the repo root:
+
+- LaTeX (tectonic; reruns until the contents and authorities settle):
+  `sh courts/dc-circuit/court-of-appeals/reply-brief/latex/render.sh courts/dc-circuit/court-of-appeals/reply-brief samples/INPUT-rosen-kellogg-reply-brief.md courts/dc-circuit/court-of-appeals/reply-brief/samples/OUTPUT-rosen-kellogg-reply-brief.latex.pdf`
+- DOCX (run from the court folder):
+  `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/cadc.lua samples/INPUT-rosen-kellogg-reply-brief.md -o samples/OUTPUT-rosen-kellogg-reply-brief.docx`
+
+**LaTeX matches the typst output (tier 1):** Liberation Serif 14 pt from `fonts/`, 1 in margins, body line pitch 25.9 pt and single 14.2 pt (measured on the typst render; body lines agree within 1 pt), cover in the same order and positions, roman contents and authorities, arabic body from 1, Certificate of Compliance with the template's count (2,175 words, the same count as typst, computed by `render.sh` from the markdown), Certificate of Service, signature block kept with the last paragraph, I. / A. / 1. / a. heading labels under "Argument", 14 pt footnotes.
+
+**LaTeX differs from typst:**
+- The summary paragraph breaks into 13 lines against typst's 14 (one word moves at the end of a line); the rest of the body follows, so the body is 8 pages against typst's 9 and the whole brief is 13 pages against 15 (the table of authorities is one page here against two in typst).
+- Table of authorities: each entry flows as "name, citation" in one paragraph; typst puts the citation on the line after the name.
+- A heading after a heading is about 2.5 pt closer than typst's collapsed space.
+- Contents and authorities page numbers and the Conclusion's page number follow the LaTeX pagination (the build checks that they settle).
+
+**DOCX (BLOCKED):** LibreOffice is not available on this box (`soffice` is not installed; the extracted build fails with a UNO DeploymentException), so no `.docx.pdf` exists. The Gate 0 and Gate 1 checks that run on the `.docx.pdf` are BLOCKED for this reason; the `.docx` itself passes `unzip -tq` and `xmllint --noout` on every XML and rels part. Also BLOCKED or not produced in the `.docx`:
+- Cover, table of contents, table of authorities, Certificate of Compliance and Certificate of Service are not generated (pandoc writes the body only). The word count, the typeface statement and the certificates are therefore not checked in the `.docx`.
+- The 6,500-word reply limit (FRAP 28.1(e)(2)(C)) is checked by the typst and LaTeX engines only.
+- The `.docx` declares Liberation Serif; Word substitutes silently if it is not installed on the machine that opens the file.
+- Heading labels (I., A., 1., a.) are written as text by `docx/cadc.lua`, not as Word numbering; the contents field is not generated.
+
 [Formbook index](../../../../README.md) | [Status table](../../../../STATUS.md)

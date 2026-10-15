@@ -104,3 +104,21 @@ export PATH="$HOME/tb/bin:$PATH"   # typst, poppler, imagemagick, gawk, jq (micr
 sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief samples/INPUT-hill-opening-brief.md
 sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/opening-brief hill-opening-brief
 ```
+
+## Engines
+
+The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
+outputs are `samples/OUTPUT-hill-opening-brief.latex.pdf`, `.docx` and `.docx.pdf`.
+
+- **latex** (`latex/template.tex`, `latex/ca11.lua`, `latex/render.sh`). Matches: EB Garamond 14 pt from `fonts/`,
+  double spacing, one-inch margins, the cover, the C-1 and C-2 pages of the certificate of interested persons,
+  roman front matter, arabic body, the table of contents and table of citations with their pages (from a second
+  LaTeX pass), the asterisks on primary citations, the signature kept with the last paragraph, both certificates.
+  Differs: line breaks and some heading spacing, so body text falls one line apart from typst from about page 12 on; the
+  table pages carry the LaTeX pages.
+- **docx** (`docx/reference.docx`, `docx/ca11.lua`, `docx/render.sh`, `docx/make-reference.sh`). The cover, the
+  certificates and the tables are written with explicit formatting; sections carry the C-, roman and arabic footers.
+  The page numbers in the tables are written text, taken from a first LibreOffice render (no TOC or TOA fields), so
+  Word may paginate differently. Differs: no space before the dot leaders of the tables; the body text runs about
+  as long as typst's, 16 pages both.
+  BLOCKED: none for the build. The docx is checked on its LibreOffice PDF only; Word was not available.

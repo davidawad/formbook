@@ -1,0 +1,292 @@
+% U.S. Court of Appeals for the District of Columbia Circuit: appellee's (answering) brief, LaTeX engine.
+%
+% Built by latex/render.sh: pandoc reads the markdown with the filter cadc.lua (this directory), this template is
+% compiled with tectonic, and the aux and toc files are read back until they settle (the table of contents and the
+% table of authorities carry page numbers). Matches typst/cadc-answering-brief.typ: same parameters, same order of
+% parts, same heading numbering (done in cadc.lua). Content-agnostic: no case-specific text, no coordinates, no
+% forced line breaks.
+% Frontmatter fields: see ../README.md, "Markdown contract".
+\documentclass[14pt,letterpaper]{extarticle}
+\usepackage{fontspec}
+% FRAP 32(a)(4): 1 inch on all four sides.
+\usepackage[letterpaper,left=1in,right=1in,top=1in,bottom=1in,footskip=0.5in,headheight=0pt,headsep=0pt]{geometry}
+\usepackage{enumitem}
+\usepackage{changepage}
+\usepackage[hidelinks]{hyperref}
+\makeatletter
+
+% FRAP 32(a)(5)(A), Circuit Rule 28: 14-point serif. TeX Gyre Schola, vendored in fonts/tex-gyre-schola/.
+% The renderer passes fontdir (the vendored fonts/ directory, trailing slash).
+\setmainfont[Path=$fontdir$tex-gyre-schola/, Extension=.otf,
+  UprightFont=texgyreschola-regular, BoldFont=texgyreschola-bold,
+  ItalicFont=texgyreschola-italic, BoldItalicFont=texgyreschola-bolditalic,
+  Ligatures=TeX]{texgyreschola-regular}
+
+% Line pitch (typst body-leading and single-leading, measured on OUTPUT-wilson.pdf): double-spaced body
+% (FRAP 32(a)(4)); single for headings, quotations, footnotes, contents, certificates.
+\newcommand\dc@double{\fontsize{14pt}{26.4pt}\selectfont}
+\newcommand\dc@single{\fontsize{14pt}{14.83pt}\selectfont}
+\newlength\dc@half \setlength{\dc@half}{0.5in}
+
+% No hyphenation: a word comes out of the PDF whole.
+\lefthyphenmin=100
+\righthyphenmin=100
+\tolerance=2000
+\emergencystretch=0pt
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\hbadness=10000
+\raggedright
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\setlength{\headheight}{0pt}
+\pagestyle{plain}
+% The first baseline of a page sits where typst puts the top of the first line (top edge: ascender).
+\AtBeginDocument{\addtolength\topskip{-3.7pt}}
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\pandocbounded}[1]{#1}
+\setlist{itemsep=0pt, parsep=0pt, topsep=0pt, leftmargin=0.5in, labelsep=0.5em}
+
+% Footnotes: 14 pt, single-spaced (FRAP 32(a)(5), (a)(4)).
+\renewcommand\footnotesize{\dc@single}
+\setlength{\footnotesep}{0.5\baselineskip}
+\setlength{\skip\footins}{0.9\baselineskip}
+\renewcommand\footnoterule{\kern-3pt\hbox to \textwidth{\hspace*{0pt}\rule{0.3\textwidth}{0.5pt}\hss}\kern 2.6pt}
+\renewcommand\@makefntext[1]{\noindent\textsuperscript{\@thefnmark}\hskip 0.25em #1}
+
+% Block quotations: indented 0.5 in on both sides, single-spaced (FRAP 32(a)(4)).
+\renewenvironment{quote}{%
+  \par\addvspace{\baselineskip}%
+  \begin{adjustwidth}{\dc@half}{\dc@half}\dc@single\setlength{\parindent}{0pt}%
+}{%
+  \end{adjustwidth}\par\addvspace{\baselineskip}%
+}
+
+% ---------------------------------------------------------------------------
+% Headings (typst style-heading). Level 1: centered bold capitals. Argument point headings (level 2): centered,
+% bold small capitals. Other sub-headings: label in a fixed box, text hangs under the text; bold (italic below level 3).
+% The labels and the table-of-contents lines are written by cadc.lua.
+% ---------------------------------------------------------------------------
+\newcommand\dc@hone[1]{%
+  \par\addvspace{1.5em}%
+  \begingroup\centering\fontsize{16.1pt}{18pt}\selectfont\bfseries\leavevmode\MakeUppercase{#1}\par\endgroup
+  \nopagebreak\addvspace{0.3em}\nobreak}
+\newcommand\dc@hpoint[2]{%
+  \par\addvspace{1.2em}%
+  \begingroup\centering\dc@single\bfseries\scshape\leavevmode#1~#2\par\endgroup
+  \nopagebreak\addvspace{1em}\nobreak}
+\newcommand\dc@hsub[4]{%
+  \par\addvspace{1.1em}%
+  \begingroup\dc@single\bfseries\ifnum#1>3 \itshape\fi
+  \noindent\hangindent=\dimexpr#2+0.5in\relax\hangafter=1\relax
+  \hskip#2\relax\hbox to 0.5in{#3\hss}#4\par
+  \endgroup
+  \nopagebreak\addvspace{0.9em}\nobreak}
+% Plain bold sub-heading, flush left, unnumbered (addendum).
+\newcommand\dc@hplain[1]{%
+  \par\addvspace{1.1em}%
+  \begingroup\dc@single\bfseries\raggedright#1\par\endgroup
+  \nopagebreak\addvspace{0.9em}\nobreak}
+% A front-matter heading: centered bold capitals; not in the contents (typst: outlined: false).
+\newcommand\dc@fronthead[1]{\dc@hone{#1}}
+
+% ---------------------------------------------------------------------------
+% Table of contents (typst toc-entry): label at its indent, the title hangs half an inch under the text,
+% dot leaders, page on the right. Entries go through the toc file: \dc@toc writes them, \l@dcent reads them.
+% ---------------------------------------------------------------------------
+\newcommand\dc@toc[3]{\addcontentsline{toc}{dcent}{\protect\dc@tocline{#1}{#2}{#3}}}
+\newcommand\dc@adtoc[1]{\addcontentsline{adt}{dcent}{\protect\dc@tocline{0in}{}{#1}}}
+\def\l@dcent#1#2{\def\dc@pg{#2}#1}
+\newskip\dc@rtoa \dc@rtoa=0.9in plus 1fil
+\newskip\dc@ptoa \dc@ptoa=-0.9in
+\protected\def\dc@tocline#1#2#3{%
+  \begingroup\par\addvspace{0.35em}%
+  \noindent\hangindent=\dimexpr#1+0.5in\relax\hangafter=1\relax
+  \rightskip=\dc@rtoa\parfillskip=\dc@ptoa
+  \hskip#1\relax
+  \def\dc@tocnum{#2}%
+  \ifx\dc@tocnum\empty\else\hbox to 0.5in{#2\hss}\fi
+  #3\nobreak\ \leaders\hbox to 0.4em{\hss.\hss}\hskip 2.5em plus 1fill\hbox to 0.9in{\hss\dc@pg}\par\endgroup}
+
+% ---------------------------------------------------------------------------
+% Table of authorities (Circuit Rule 28(a)(2)): every page of each citation; "passim" from seven pages (typst).
+% Pages are written to the aux file where each citation starts, then read back in the next pass.
+% ---------------------------------------------------------------------------
+\ExplSyntaxOn
+\cs_new_protected:Npn \dc@toaentry #1 #2
+  {
+    \seq_if_exist:cF { g_dc_toa_#1_seq } { \seq_new:c { g_dc_toa_#1_seq } }
+    \seq_if_in:cnF { g_dc_toa_#1_seq } { #2 }
+      { \seq_gput_right:cn { g_dc_toa_#1_seq } { #2 } }
+  }
+\cs_new:Npn \dc@toapages #1
+  {
+    \seq_if_exist:cTF { g_dc_toa_#1_seq }
+      {
+        \int_compare:nNnTF { \seq_count:c { g_dc_toa_#1_seq } } > { 6 }
+          { \emph{passim} }
+          { \seq_use:cn { g_dc_toa_#1_seq } { , \c_space_tl } }
+      }
+      { }
+  }
+\ExplSyntaxOff
+\newcommand\dc@toacite[2]{\protected@write\@auxout{}{\string\dc@toaentry{#1}{\thepage}}#2}
+\newcommand\dc@toagroup[2]{%
+  \par\ifnum#2=1 \addvspace{0.7\baselineskip}\else\addvspace{1.4\baselineskip}\fi\noindent\textbf{#1}%
+  \ifnum#2=0 \else\hfill\textbf{\underline{Page(s)}}\fi\par\nobreak}
+\newcommand\dc@toaline[2]{%
+  \begingroup\par\addvspace{0.7\baselineskip}\noindent\hangindent=0.35in\hangafter=1\relax
+  \rightskip=\dc@rtoa\parfillskip=\dc@ptoa
+  #2\nobreak\ \leaders\hbox to 0.4em{\hss.\hss}\hskip 2.5em plus 1fill\hbox to 0.9in{\hss\dc@toapages{#1}}\par\endgroup}
+
+% ---------------------------------------------------------------------------
+% Cover (FRAP 32(a)(2); Circuit Rule 28(a)(8)). Rules as in typst cover-body.
+% ---------------------------------------------------------------------------
+\newcommand\dc@gap{\vspace{0.8em}}
+\newcommand\dc@rule{\par\noindent\makebox[\textwidth][c]{\rule{2in}{0.7pt}}\par}
+\newcommand\dc@dbl{\par\noindent\rule{\textwidth}{1.6pt}\par\vspace{2.5pt}\noindent\rule{\textwidth}{0.5pt}\par}
+
+% Signature block (typst signature-block): "Respectfully submitted," then the /s/ line, the signer in capitals.
+\long\def\dc@sigline#1{\noindent\hspace*{0.5\textwidth}\begin{minipage}[t]{0.5\textwidth}\raggedright #1\end{minipage}\par}
+
+\begin{document}
+
+% ---- cover (page i, not printed) ----
+\pagenumbering{roman}
+\setcounter{page}{1}
+\thispagestyle{empty}
+\dc@single
+$if(oral_argument)$\noindent\textbf{$oral_argument$}\par\vspace{0.6em}$endif$
+{\centering
+\textbf{No.\ $case_number$}\par
+}
+\dc@gap
+\dc@dbl
+\dc@gap
+{\centering
+\textbf{UNITED STATES COURT OF APPEALS\\FOR THE DISTRICT OF COLUMBIA CIRCUIT}\par
+}
+\dc@gap
+\dc@rule
+\dc@gap
+$for(caption)$
+{\centering $for(caption.names)$$caption.names$\par
+$endfor$}
+\noindent\hspace*{0.5\textwidth}$caption.designation$\par
+$sep${\centering\dc@gap v.\dc@gap\par}
+$endfor$
+\dc@gap
+\dc@rule
+\dc@gap
+{\centering
+$proceeding$\par
+$if(district_court_case)$\vspace{0.6em}$district_court_case$$if(judge)$; $judge$$endif$\par$elseif(judge)$\vspace{0.6em}$judge$\par$endif$
+}
+\dc@gap
+\dc@rule
+\dc@gap
+{\centering
+\textbf{\MakeUppercase{$brief_title$}}\par
+}
+\dc@gap
+\dc@rule
+\dc@gap
+% Counsel (FRAP 32(a)(2)(F)): name, office address, telephone number; set at the right half of the page.
+$for(counsel)$
+\noindent\hspace*{0.5\textwidth}\begin{minipage}[t]{0.5\textwidth}\raggedright
+$for(counsel.names)$$counsel.names$\\{}
+$endfor$
+$for(counsel.lines)$\hspace*{0.5em}\emph{$counsel.lines$}\\{}
+$endfor$
+\end{minipage}\par\vspace{0.5em}
+$endfor$
+\dc@gap
+\dc@dbl
+\clearpage
+
+% ---- front matter: lower-case roman, the certificate of parties is page ii (Circuit Rule 28(a)(1)) ----
+\dc@single
+\dc@fronthead{Certificate of Parties, Rulings, and Related Cases}
+\par\setlength{\parskip}{1em}\setlength{\parindent}{0pt}
+$certificate_of_parties$
+$if(statutes_and_regulations)$
+\par\addvspace{1em}
+\dc@fronthead{Statutes and Regulations}
+\par\setlength{\parskip}{1em}
+$statutes_and_regulations$
+$endif$
+\par\setlength{\parskip}{0pt}\setlength{\parindent}{0.5in}
+\clearpage
+
+% ---- contents: "Page" over the page column, then the entries (typst toc-section) ----
+\dc@hone{Table of Contents}
+\dc@single
+\begin{flushright}\textbf{\underline{Page}}\par\end{flushright}
+\@starttoc{toc}
+\clearpage
+
+% ---- table of authorities ----
+\dc@fronthead{Table of Authorities}
+$toa$
+\clearpage
+
+% ---- the brief: Arabic from 1 ----
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\dc@double
+\setlength{\parindent}{0.5in}
+$body$
+
+% Signature block (typst signature-block; kept with the last paragraph).
+\par\nobreak\addvspace{1.4em}\nobreak
+\dc@single
+\noindent\hspace*{0.5\textwidth}\begin{minipage}[t]{0.5\textwidth}\raggedright
+Respectfully submitted,\par\vspace{1.2em}
+/s/ $signature.signer$\\
+\MakeUppercase{$signature.signer$}
+$for(signature.lines)$\\\hspace*{0.5em}\emph{$signature.lines$}
+$endfor$
+\par\end{minipage}\par
+$if(keep_last)$\end{samepage}$endif$
+
+% ---- certificate of compliance (FRAP 32(g)(1), Form 6; typst certificate-of-compliance) ----
+\clearpage
+\dc@fronthead{Certificate of Compliance}
+\dc@single
+\par\setlength{\parskip}{1em}\setlength{\parindent}{0pt}
+I HEREBY CERTIFY pursuant to Fed. R. App. P. 32(g) that this brief contains $words_fmt$ words, excluding the parts of the brief exempted by Fed. R. App. P. 32(f) and D.C. Circuit Rule 32(e)(1), and therefore complies with the type-volume limitation of Fed. R. App. P. 32(a)(7)(B). This brief has been prepared in 14-point TeX Gyre Schola, a proportionally spaced typeface.
+\par\setlength{\parskip}{0pt}\setlength{\parindent}{0.5in}
+\addvspace{1.6em}
+\dc@sigline{/s/ $signature.signer$\\{}\MakeUppercase{$signature.signer$}$if(signature.line1)$\\{}\hspace*{0.5em}\emph{$signature.line1$}$endif$}
+
+% ---- certificate of service (FRAP 25(d); only when service.certificate is true) ----
+$if(service.certificate)$
+\clearpage
+\dc@fronthead{Certificate of Service}
+\dc@single
+\par\setlength{\parskip}{1em}\setlength{\parindent}{0pt}
+I HEREBY CERTIFY that I have caused a copy of the foregoing $service.document$ to be served by electronic means, through the Court’s CM/ECF system, upon $service.served_upon$, on this $service.date$.
+\par\setlength{\parskip}{0pt}\setlength{\parindent}{0.5in}
+\addvspace{1.6em}
+\dc@sigline{/s/ $signature.signer$\\{}\MakeUppercase{$signature.signer$}$if(signature.line1)$\\{}\hspace*{0.5em}\emph{$signature.line1$}$endif$}
+$endif$
+
+% ---- addendum (Circuit Rule 28(a)(5)): after the certificates, excluded from the word count; Add-N pages ----
+$if(addendum)$
+\clearpage
+\renewcommand\thepage{Add-\arabic{page}}
+\setcounter{page}{1}
+\dc@hone{Addendum}
+\addcontentsline{toc}{dcent}{\protect\dc@tocline{0in}{}{ADDENDUM}}
+\dc@single
+\dc@hone{Table of Contents}
+\begin{flushright}\textbf{\underline{Page}}\par\end{flushright}
+\@starttoc{adt}
+\clearpage
+\dc@double
+\setlength{\parindent}{0.5in}
+$addendum$
+$endif$
+\end{document}

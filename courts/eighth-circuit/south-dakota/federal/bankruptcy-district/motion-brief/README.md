@@ -72,7 +72,7 @@ Markdown contract (frontmatter; the body is blank-line-separated chunks):
 
 ## Gate 2 review (current PDF)
 
-sha256 of `samples/OUTPUT-northern-beef-packers.pdf`: `0b8b3bd9f562430aab94944bf4b76e66a392d2e833943f1f6ab3831fbcab1148` (re-rendered and re-reviewed 2026-10-14; 9 pages, same content; the bytes differ from the earlier render only in the PDF's timestamps)
+sha256 of `samples/OUTPUT-northern-beef-packers.pdf`: `d865e31d3bec85be518f1c573fe183b5533201b8fcb915c54e69b5c77afd922b` (re-rendered and re-reviewed 2026-10-15; 9 pages, all 9 viewed as PNG at 60 dpi; same content as the 2026-10-14 render)
 
 Pairing from `samples/OVERLAY-northern-beef-packers.txt` (by text): ours 1 = filed 1; ours 2 = filed 2; ours 3 = filed 5; ours 4 = filed 7; ours 5 = filed 8; ours 6 = filed 10; ours 7 = filed 12; ours 8 = filed 14; ours 9 = filed 15. Word overlap per page: 89%, 56%, 54%, 53%, 63%, 67%, 53%, 72%, 62%. Word overlap is low on most pages because our render is single spaced and the filing is double spaced, so the same words sit on fewer, longer pages; it is a pairing aid, not a score.
 
@@ -107,3 +107,4 @@ OPEN (tier 2, decision for David): **line spacing.** The filing is double spaced
 
 - Iteration 1: built the template from the rules; rendered a fictional main-case sample. Exemplar search: no usable filing found; BLOCKED.
 - Iteration 2 (2026-10-14): new CourtListener search (sdb, RECAP) found *Northern Beef Packers*, Doc 134, a 15-page text-layer memorandum in support of a debtor's motion. Added the judge and hearing lines to the caption (optional frontmatter). Transcribed the filing as `samples/INPUT-northern-beef-packers.md` (replacing the fictional sample). Rendered (9 pages), overlaid, and viewed all 9 pages. Fixed one defect the overlay review exposed: the signature block stood alone on page 9; a final body paragraph now stays with the signature block.
+- Iteration 3 (2026-10-15, depth pass): checked the transcription against the exemplar text layer (`pdftotext` of the 15-page filing): every content word of the filing appears in `samples/INPUT-northern-beef-packers.md` except running headers (`district`, `document`, `united`, `dated`) and words split across line ends (`longterm`, `nondefault`, `openended`, `oversecured`). The transcription already carries the full structure (caption, title, headings, footnotes, conclusion, signature block), so no depth was added. Re-rendered (9 pages, typst, no warnings, EB Garamond only embedded) and re-ran the overlay against the filing fetched to a scratch directory (sha256 matches `SOURCE.md`); viewed pages 1 to 9. No template defect found. OPEN spacing item above is unchanged and is for David to decide.
