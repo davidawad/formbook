@@ -64,3 +64,10 @@ Open items, accepted: none beyond the content gap above.
 - Reply content rules (see the gap section).
 - Official FRBP 8015(a)(7)(B) "half" text and FRBP 8014(c) not read directly.
 - Word count and page count are not checked against the PDF (see the opening-brief README).
+
+## Re-check 2026-10-15 (bead fb-595.20.9)
+
+- Re-searched for an exemplar (CourtListener with `court=bap9`, paced; web search). None found. Searches are logged in `exemplars/SOURCE.md`.
+- Re-rendered `samples/INPUT-fictional-reply-brief.md` with `sh tools/render.sh`: 6 pages, exit 0. Every page rendered at 60 dpi and viewed; layout unchanged from the review above. The PDF was moved to `/work/artifacts/bap9/` and is not committed.
+- `sh tools/overlay.sh` exits 1 (`no exemplar pdf`). Overlay: not produced.
+- Status unchanged: **BLOCKED: no public exemplar.**

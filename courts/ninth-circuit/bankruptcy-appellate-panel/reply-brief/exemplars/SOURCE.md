@@ -14,3 +14,14 @@ Searches tried, all without a BAP appellant's reply brief:
 If a filing is found later, add the PDF as `exemplars/FILED-EXAMPLE-<short-case>-<docket>-reply-brief.pdf` and fill in this file with: URL fetched from, case name, docket number, filer, date filed, date fetched.
 
 Status: BLOCKED: no public exemplar.
+
+## Re-search 2026-10-15 (bead fb-595.20.9)
+
+Still no exemplar. Searches this session:
+
+- CourtListener REST, anonymous (no API token on this box; queries paced at 5/min). With the court filter, `court=bap9`: `type=rd` `q="reply brief"` = 0; `type=rd` `q="answering brief"` = 0; `type=r` `q=brief` = 0.
+- CourtListener `type=rd` `q="SC-16-1227"`: 0; with `"answering"`: 0.
+- Web search (standard, extended): "appellant's reply brief" with BAP number and the Meridian case. Results: BAP memoranda and manuals; the Meridian CSAC amicus motion (SC-16-1227, in support of the appellant; not a reply brief). No reply brief.
+- Ruled out: Hujazi v. Wirum (ca9 No. 14-1030, a Ninth Circuit appeal, not the BAP).
+
+Status: BLOCKED: no public exemplar (re-confirmed 2026-10-15).

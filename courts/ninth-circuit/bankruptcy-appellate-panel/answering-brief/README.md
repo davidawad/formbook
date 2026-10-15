@@ -59,3 +59,10 @@ Pages: cover (p1), table of contents (p2, roman i), table of authorities (p3, ro
 - Excerpts of record appendix, corporate disclosure statement, paper rules: not generated (as in the opening brief).
 - Word count and page count are not checked against the PDF (see the opening-brief README).
 - `tools/check.sh` and `tools/check-selftest.sh` were not run for this doc type in this pass.
+
+## Re-check 2026-10-15 (bead fb-595.20.9)
+
+- Re-searched for an exemplar (CourtListener with `court=bap9`, paced; web search). None found. Searches are logged in `exemplars/SOURCE.md`.
+- Re-rendered `samples/INPUT-fictional-answering-brief.md` with `sh tools/render.sh`: 10 pages, exit 0. Every page rendered at 60 dpi and viewed; layout unchanged from the review above. The PDF was moved to `/work/artifacts/bap9/` and is not committed.
+- `sh tools/overlay.sh` exits 1 (`no exemplar pdf`). Overlay: not produced.
+- Status unchanged: **BLOCKED: no public exemplar.**
