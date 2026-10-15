@@ -38,6 +38,12 @@ The [BAP guide](https://www.bap1.uscourts.gov/sites/bap1/files/BAP_Guide.pdf) §
 - `samples/OUTPUT-generic-reply-brief.pdf`: rendered with `sh tools/render.sh courts/first-circuit/bankruptcy-appellate-panel/reply-brief samples/INPUT-generic-reply-brief.md`. Renders clean (no typst warnings).
 - Overlay: `sh tools/overlay.sh courts/first-circuit/bankruptcy-appellate-panel/reply-brief generic-reply-brief` **fails**: "no exemplar pdf in exemplars/". There is nothing to overlay against, so no OVERLAY files exist.
 
+## Run 2026-10-15 (bap1 exemplar search)
+
+- Exemplar: none (see `exemplars/SOURCE.md`). CourtListener returns 0 bap1 RECAP documents and 0 bap1 dockets; the bap1 filter is throttled (429) on some queries. The status stays BLOCKED.
+- Render: `sh tools/render.sh` on `samples/INPUT-generic-reply-brief.md` exits 0 (6 pages). Overlay: `sh tools/overlay.sh` exits 1, "no exemplar pdf".
+- Pages reviewed this run: 0. The sample was rendered to check the build, not reviewed page by page; the Gate 2 notes below are from the earlier run.
+
 ## Gate 2 review (every page viewed)
 
 Pages were rasterized at 60 dpi and each was checked on a contact sheet. Defects found and fixed in the same pass: cover lines running together (fixed with per-line blocks); paragraphs without first-line indent; signature and certificate blocks running together. Remaining open items:
