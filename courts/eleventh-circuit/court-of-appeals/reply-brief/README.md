@@ -105,3 +105,20 @@ sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief samples/
 sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/reply-brief jg-v-northfield-reply-brief
 pdftoppm -r 60 -png courts/eleventh-circuit/court-of-appeals/reply-brief/samples/OUTPUT-jg-v-northfield-reply-brief.pdf /tmp/pages/p
 ```
+
+## Engines
+
+The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
+outputs are `samples/OUTPUT-jg-v-northfield-reply-brief.latex.pdf`, `.docx` and `.docx.pdf`.
+
+- **latex** (`latex/template.tex`, `latex/ca11.lua`, `latex/render.sh`). Matches: EB Garamond 14 pt, double spacing,
+  one-inch margins, the centered cover, the table of contents (with the Table of Authorities and the certificates
+  listed, as typst lists them) and the table of authorities with the primary citations starred, the two numbered
+  certificates of counsel with the signature blocks. Differs: line breaks and some heading spacing (14 pages both);
+  the heading labels of the Argument follow the same I., A., 1. scheme as typst.
+- **docx** (`docx/reference.docx`, `docx/ca11.lua`, `docx/render.sh`, `docx/make-reference.sh`). The cover, the
+  certificates and the tables are written with explicit formatting; sections carry the roman and arabic footers. The
+  page numbers in the tables are written text from a first LibreOffice render, and the primary-citation stars are set
+  on the pages where a `toa-primary:` link is found. Differs: 15 pages against typst's 14 (the body text breaks
+  earlier in Word's layout).
+  BLOCKED: none for the build; checked on the LibreOffice PDF only.
