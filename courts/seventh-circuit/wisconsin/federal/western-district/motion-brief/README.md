@@ -85,3 +85,32 @@ Each page rendered at 60 dpi and viewed after the last template change.
 - Page 7: "CONCLUSION" centered; final paragraphs; signature block in the right half, left-aligned within it. Pass (after the change from right-aligned lines; see below).
 
 Defects found during review and fixed: (a) the first render stacked blocks on top of each other (the same zero-spacing cause as the complaint; fixed by block spacing equal to the double-spacing leading); (b) the signature block was right-aligned line by line, which wrapped the preamble badly; it is now left-aligned in the right half.
+
+## Engines
+
+**typst** is the primary engine (sections above). **latex**: not built here. **docx**: built, not checked.
+
+Files: `docx/reference.docx` (made by `docx/build-reference.sh <out>`: pandoc plus libzip's `ziptool`, no `zip` or `unzip` needed) and `docx/wiwd-motion-brief.lua` (cover, caption table, lettered lists, signature block in the right half). No case text is in either file.
+
+What matches typst (set in the reference; checked against the source, not a rendered docx):
+- Font: EB Garamond 12 pt, the only vendored face (`docs/FONTS.md`), named in the document defaults and the body, heading and footer styles. Typst's PDF embeds EB Garamond Regular, Bold and BoldItalic only (`pdffonts`, measured).
+- Page: US Letter, 1 in margins on every side (`w:pgSz` 12240 x 15840, `w:pgMar` 1440; measured in the output `.docx`).
+- Line pitch: exact 24 pt for body text, headings and lettered items (the "double" pitch in `wiwd-motion-brief.typ`).
+- First-line indent 0.5 in on body paragraphs; paragraphs are not numbered.
+- Headings: level 1 centered bold caps; level 2 bold at the left margin; level 3 bold italic at the left margin.
+- Signature block: a "Signature" paragraph style indented 2.75 in (typst: pad 2.75 in), `/s/` line, the signer's name, then the lines.
+- Footer: centered `PAGE` field, 11 pt.
+- Typst output for comparison: 7 pages, EB Garamond only (`/work/artifacts/wiwd/motion-brief/OUTPUT-drone-motion-to-dismiss.pdf`, outside the court folder). The `.docx` page count is not measured.
+
+What differs from typst (not verified in a rendered docx):
+- Paragraph gaps: the docx sets no space before or after body paragraphs; `wiwd-motion-brief.typ` sets block spacing equal to the body leading. The gap on the page is not measured.
+- Lettered items are typed `a.` followed by a tab, not Word list numbering.
+- Caption: a Word table, with the right and bottom rules on the left cell. Borders differ between Word and LibreOffice (`docs/DOCX.md`).
+- The cover and signature take plain text from the frontmatter; markdown inside frontmatter values (italics) is not carried.
+- Headings use keep-with-next and keep-lines; that is not checked against a render.
+
+BLOCKED (docx):
+- `docx.pdf` and the page-by-page review: `soffice` (LibreOffice) is not installed on this box and cannot be installed here. Gates 0 and 1 cannot run on `samples/OUTPUT-drone-motion-to-dismiss.docx.pdf`.
+- `tools/render-docx.sh` integrity check: `unzip` is not installed on this box, so the script exits 1 at its zip test, before `soffice`. Checked by hand instead: the `.docx` lists 17 parts and every `.xml` and `.rels` part is well formed (`xmllint`), and pandoc reads its text back in order.
+- TOC and TOA: not produced. The typst template does not produce them and the brief is under 10 pages in the sample.
+- Pleading line numbers: not in the typst template, so not built.

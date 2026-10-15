@@ -95,4 +95,15 @@ The overlay is a diagnostic, not a score: red = our render only, blue = the file
 9. **Not run.** `tools/check.sh` and `tools/check-selftest.sh` (their gates expect a court root with `court.json` and `rules.md`); tools/ is off limits for this box. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
 10. **Italics.** The exemplar's text layer has no italic markup; case names are roman in the sample. The template italicizes `*...*` if a sample uses it.
 
+## Engines
+
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/complaint.lua` writes the cover (counsel, court title, caption table), the numbered paragraphs, the lettered lists and the signature block; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in the footer. Output: `samples/OUTPUT-kliewer-complaint.docx` and `.docx.pdf` (LibreOffice 26.8), 9 pages, all 9 rendered at 60 dpi and viewed (`reviews/docx.md`). The typst output is 8 pages.
+
+- Matches the typst output: letter; one inch on all four sides; EB Garamond 13 pt (embedded in the PDF); double spacing as an exact 24 pt line and single spacing as an exact 13 pt line; counsel block upper left; court title centered; caption with the case number at the page center; title in capitals; DEMAND FOR JURY TRIAL under it; headings at typst's default sizes (level 1 18 pt, level 2 15.5 pt); numbered paragraphs with a 0.5 in indent; lettered (a), (b) lists with a hanging indent; footer "COMPLAINT - n" at 12 pt; DATED and signature block.
+- Differs from typst: paragraph numbers are typed by the filter, not Word auto-numbering (they will not renumber in Word after an edit); the markdown table is full width with rules (typst's is narrower); the docx runs one page longer, so the last prayer item and the signature fall alone on page 9 (kept together on purpose; Gate 2 OPEN row in `reviews/docx.md`); page breaks follow LibreOffice and Word may move a line.
+- Fonts: the PDF is correct only when LibreOffice sees the vendored `fonts/` and no substitute face. This box has no system EB Garamond, so run the render with a `FONTCONFIG_FILE` that lists only the repo's `fonts/` directory.
+- Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML (checked by `render-docx.sh`) and converts in LibreOffice without error; no GUI repair prompt was observed (headless).
+
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and this doc-type folder has neither (it exits 2 before any gate runs), so the gates did not run and `samples/.check-docx.txt` was not written. The Gate 2 record for the docx is `reviews/docx.md`.
+
 [District index](../README.md) | [Formbook index](../../../../../../README.md)

@@ -92,3 +92,30 @@ The overlay is a diagnostic, not a score. It shows the filed text runs longer th
 9. **Not produced.** The civil cover sheet, the summons and any disclosure statement are separate filings. No rule in the local rules text fixes a disclosure form for complaints (LCivR 7.1 is [Reserved]).
 10. **Check scripts not run.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape. The brief forbids touching `tools/`, so the gates were not run. Render, overlay and the page review above are the checks for this doc type.
 11. **Heading length.** A heading must fit on one numbered line (`heading-line` asserts it); the cause sub-heading is split over two `##` lines in the sample for that reason.
+
+## Engines
+
+### docx (`docx/`)
+
+Build and render: `sh docx/build-reference.sh docx/reference.docx` (the reference is generated, so it can be rebuilt), then `sh tools/render.sh --engine docx <this folder> samples/INPUT-plenty-complaint.md`, which writes `samples/OUTPUT-plenty-complaint.docx` and `samples/OUTPUT-plenty-complaint.docx.pdf` (LibreOffice 26.8 conversion; EB Garamond embedded, `pdffonts`). `docx/complaint.lua` lays out the cover, caption and signature block (`docx/pleading.lua`, shared helpers) and numbers the paragraphs; `docx/render.sh` fills the footer title from `footer_title`.
+
+What matches the typst output (checked on the LibreOffice PDF, 9 pages, the same page count and the same first line on every page):
+
+- Letter; 1.1 in left and 1 in right margin; 72 pt top margin; 14 pt EB Garamond (LCivR 10(d)).
+- 21 numbers down the left margin in a header text box, on the same 32 pt grid as the body (every body line is an exact 32 pt line; the first counsel line and the first caption line sit on the numbers' baselines).
+- Double rule at the left of the text and single rule at the right (page borders); footer `TITLE - n`, one line, left aligned.
+- Counsel on lines 1 to 4, court title from line 5, one blank line, caption on lines 9 to 12 with the right rule and bottom rule under the parties (cell borders), case number and title at right.
+- Numbered paragraphs (number, tab to 1 in), headings centered (level 1 caps, level 2 bold), lettered relief list (A. to F.), signature block (DATED, "Respectfully submitted," firm, "/s/" and signer lines) on the grid.
+- Widow and orphan control off, as in the typst output, so the page breaks fall where typst puts them.
+
+What differs (not a rule; tier 2 or 3):
+
+- Word numbers the lines of this document with a header text box, not with Word's line numbering (`w:lnNumType`), because the typst template numbers the page and the numbers must stay on the grid even on lines that are not body text.
+- The pleading rules are page borders that run from the text area, not from the page edge (the typst rules run the full page height).
+- The caption rules are cell borders, so they end at the bottom of the parties (as the typst box does), but a Word table may differ by a fraction of a point.
+- Word may paginate differently from LibreOffice (line breaking and font metrics); the page map above is the LibreOffice PDF's.
+- Tables are not justified; the typst output is not justified either.
+
+Checks: `tools/check.sh` cannot run on a doc-type folder: it reads `<court>/court.json` and `<court>/checks.yaml`, and this folder has neither. The docx PDF was checked by hand instead: every word of the sample is in the PDF (the two exceptions are em-dash joins that `pdftotext` splits), the 9 pages were viewed as PNG (`reviews/docx-review.md`).
+
+BLOCKED: tools/check.sh (all gates, `--engine docx`): the script needs `<court>/court.json` and `<court>/checks.yaml` (`Error: open .../checks.yaml: no such file or directory`), which only exist at court level; no gate ran on this folder, so `samples/.check-docx.txt` is not written.

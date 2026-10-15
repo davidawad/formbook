@@ -84,3 +84,15 @@ sh tools/overlay.sh courts/tenth-circuit/wyoming/federal/bankruptcy-district/mot
 8. **Relief list.** The exemplar's relief items are numbered 1 to 13 and the template prints them as numbered paragraphs (escaped in the sample), not as a list.
 9. **No table of contents.** LBR 9013-2 excludes a table of contents from the page limit, but the rules do not require one for a memorandum, and the exemplar has none; none is generated.
 10. **Local rules version.** The posted PDF is the court's local rules marked "Effective July 1, 2012". If the court has issued a newer edition, LBR 9004-1, 9013-1, 9013-2 and 9013-3 must be checked against it.
+
+## Engines
+
+**docx** (`docx/reference.docx` + `docx/wyb-motion-brief.lua`; output `samples/OUTPUT-tear-drop-memo.docx`).
+
+- Matches: EB Garamond 13 pt body, 1 in margins, letter paper, exact 26 pt (double) line pitch, 0.5 in first-line indent, bold centered court title, caption table with the party rule and bottom rule and case information on the right, counsel block 11 pt single spaced, page number footer 11 pt centered, footnote text 13 pt.
+- Differs: the filter lays out the cover in a table with plain-text caption values (no inline markdown in caption parties), and the pleading-paper paragraph numbers and lettered prayer items are typed text, not Word list numbering. Heading and signature keep-together uses keepNext, so Word and LibreOffice may break pages differently.
+- BLOCKED: docx.pdf (`soffice` not installed on this box, no root and no conda-forge package), so Gate 0 and Gate 1 are not run on the docx.
+- BLOCKED: `tools/render-docx.sh` zip integrity step: `unzip` is not installed, so `unzip -tq` fails and the command exits 1 after writing the .docx. The XML parts were checked by hand with `xmllint --noout` after unpacking with libzip's `ziptool`; all well-formed.
+- BLOCKED: visual review of the docx pages (no LibreOffice to render them). pages_reviewed for docx: 0.
+- Not done: opening the .docx in Word for a repair-prompt check; the reference.docx was built with `ziptool` edits, not a committed build script.
+- The typst montage review (60 dpi, every page in one strip) was used only to compare the typst layout with the docx styles; it is not a docx review.

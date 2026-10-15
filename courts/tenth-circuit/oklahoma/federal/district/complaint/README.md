@@ -82,3 +82,16 @@ File names: `tools/overlay.sh` and `tools/render.sh` write `OVERLAY-<id>.pdf`/`.
 - Page 10: prayer items 4 to 7; `Dated:` and the signature block with the footnote line. Pass.
 
 Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder). Layout defects found in earlier renders and fixed: paragraphs overlapping each other and the headings (the paragraph was a fixed-height grid block with no trailing leading); the court name line set in italics; the lead-in overlapping the first heading; the signature standing alone on a page (fixed by moving the prayer; see gap 4).
+
+## Engines
+
+### docx (`docx/reference.docx`, `docx/okd-complaint.lua`, 2026-10-15)
+
+- Matches the typst form: Letter, 1 in margins; EB Garamond 13 pt throughout; double spacing as one exact 27.5 pt pitch with one blank pitch after each paragraph; 0.5 in first-line indent; centered bold capitals for level-1 headings, bold for level 2, bold italic for level 3; court name lines; caption as a borderless table with the ")" column; allegations numbered by the filter (Rule 10(b)), not by Word's list numbering; prayer items with the number at the margin and the text at 0.5 in; signature block with "Dated:" at left and the signer at 3.8 in; centered page number in the footer at 13 pt.
+- Differs: the cover and signature are tables and the caption rows are single-spaced exact lines, so line positions can sit a few points off the typst grid (typst rounds each block to whole pitches; Word does not). The numbered paragraph gap is a tab stop at 1.0 in, not typst's 0.3 in after the number. The font is named (EB Garamond) but not embedded: Word substitutes a face if it is not installed.
+- BLOCKED (not done):
+  - `docx.pdf` (LibreOffice conversion, Gates 0 and 1): `soffice` is not installed on this box and cannot be installed here (no conda-forge package, no root).
+  - Visual review of the docx pages: pages_reviewed=0 (needs the LibreOffice PDF).
+  - Zip integrity step of `tools/render-docx.sh`: `unzip` is not installed, so the command exits 1 after writing `samples/OUTPUT-pilf-ziriax-complaint.docx` (`unzip: not found`, then `... is not a valid zip`). The parts were checked instead with `ziptool` (17 parts) and `xmllint --noout`: all well formed.
+  - Opening the .docx in Word or LibreOffice without a repair prompt: not done.
+  - `tools/check.sh --engine docx`: not run (needs the `.docx.pdf`).

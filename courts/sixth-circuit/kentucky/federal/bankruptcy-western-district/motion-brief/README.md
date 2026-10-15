@@ -84,3 +84,30 @@ sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-dis
 8. **Paragraph and heading numerals are typed by the author.** A future author must type them; the template does not check that the numbering is consecutive.
 9. **Exemplar caption.** The filed caption carries "Judge Joan A. Lloyd" under the adversary number; the template prints `caption.judge` there when present.
 10. **Page-number format.** "- n -" centered at the bottom, as the filed memorandum (its page 25 reads "- 25 -"). The filing's ECF header is system output and is not reproduced.
+
+## Engines
+
+The docx engine (`docx/`) is built, and its `.docx` renders, but its LibreOffice PDF was not made (see BLOCKED). Build: `sh docx/build-reference.sh docx/reference.docx`. Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-insight-terminal-city-of-oakland.md`, which writes `samples/OUTPUT-insight-terminal-city-of-oakland.docx` and then fails at the `soffice` step. `docx/render.sh` (called by `tools/render-docx.sh`) runs pandoc with `docx/kywb-motion-brief.lua`, puts back the reference's styles and page setup, and checks the zip and XML parts.
+
+What matches the typst form (set in `docx/reference.docx`; read from its XML, not from a rendering):
+
+- Page: US letter, 1 in margins on all sides.
+- Font and size: EB Garamond (vendored), 13 pt in the body, headings and footnotes; footer "- n -" at 11 pt, centered, in a PAGE field.
+- Spacing: body lines exact 24 pt, first-line indent 0.5 in; Heading 1 and 2 centered and bold; Heading 3 hangs 0.5 in; footnote text single spaced at 13 pt.
+- Caption as in the adversary complaint (court, debtor block, adversary block with the number and judge, title).
+- Signing block as a borderless two-column table (Dated on the left, By: /s/ and the counsel groups on the right); certificate of service on its own page (`pageBreakBefore`) with its signing block.
+- Paragraph and heading numerals are typed in the sample and are not added by the filter, as in typst.
+
+What differs from typst:
+
+- Paragraph spacing: on the typst render (10 pages, `/work/artifacts/kywb/motion-brief/OUTPUT-insight-terminal-city-of-oakland.pdf`, outside the court folder) the pitch measured with `pdftotext -bbox` on page 2 is 24 pt within a paragraph and about 17 pt between paragraphs (for example between ¶2 and ¶3). The typst source says double spacing at 24 pt. The docx keeps 24 pt everywhere. The typst gap is a template question; it is not changed here.
+- Footnote and body pagination: not measured for the docx (no LibreOffice); the typst render is 10 pages.
+- Italics: the sample has none (as in typst).
+- Hyphenation, kerning and ligatures: application defaults in the docx; not asserted.
+
+docx BLOCKED (the checks that run on the `.docx.pdf` cannot run):
+
+- `docx.pdf` and the Gate 0 and Gate 1 checks: `soffice` (LibreOffice) is not installed on this box, so `samples/OUTPUT-insight-terminal-city-of-oakland.docx.pdf` was not produced. Not passed.
+- Gate 2 page review of the docx: no PDF to look at, so no pages reviewed. Not passed.
+- Opening the `.docx` in LibreOffice or Word (no repair prompt): not done. Only the zip, the XML well-formedness and a pandoc read-back were checked.
+- Word limits in `docs/DOCX.md` that apply to this form: none. The form has no table of contents, table of authorities or pleading line numbers.

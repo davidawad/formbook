@@ -101,3 +101,14 @@ Naming: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`, with th
 12. **Content not checked.** The template does not check FRCP 8 pleading content (short and plain statement, jurisdiction, demand for relief); those are author-written.
 
 [Parent: nevada/federal/district](../README.md)
+
+## Engines
+
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/complaint.lua` writes the cover and the body; `docx/render.sh` (run by `tools/render-docx.sh`) puts the sample's `footer_title` into the footer. Output: `samples/OUTPUT-williams-complaint.docx` and `.docx.pdf` (LibreOffice 26.8), 14 pages, all 14 rendered at 60 dpi and viewed.
+
+- Matches the typst output: letter; margins 1 in top and bottom, 1.5 in left, 1 in right; EB Garamond 13 pt; 28 numbers on a 462-twip grid, body lines on the numbers (checked on the PDF: body baselines within 0.1 pt of a number); double rule at the left and single at the right (`w:pgBorders`); caption box with the parties, the case number, the title, JURY DEMAND under the title and the claims list; single-spaced counsel and signature block; "-N-" footer with the title; the unnumbered prayer and jury demand.
+- Differs from typst: the 28 numbers sit in a header text box, not section line numbering (`w:lnNumType` skips the caption table, so it would not number every line); paragraph numbers are typed by the filter, not Word auto-numbering; the caption box is sized to its text (the body starts on page 2); page breaks follow LibreOffice, Word may move a line.
+- Fonts: the PDF is correct only when LibreOffice can see the vendored `fonts/` and no substitute face. This box has no system EB Garamond, so run the check with a `FONTCONFIG_FILE` that lists only the repo's `fonts/` directory; otherwise LibreOffice substitutes silently.
+- Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML with every style it uses defined.
+
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and a doc-type folder has neither (this change may not add them), so the gates did not run and `samples/.check-docx.txt` was not written.

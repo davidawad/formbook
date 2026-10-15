@@ -80,3 +80,12 @@ Compared with the exemplar's corresponding pages (exemplar page numbers in the r
 ## Pass stamp
 
 Not written. `tools/check.sh` cannot run on this folder shape (gap 8).
+
+## Engines
+
+Typst is the primary engine. The DOCX engine is pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`), `docx/motion-brief.lua` (boxed caption table, the "I." and "A." heading labels, numbering of the "[numbered]" paragraphs, the date and signature block, and the certificate on a new page) and `docx/render.sh` (letter page setup and the centered 12 pt page-number footer, which pandoc does not copy from the reference).
+
+- Matches the typst form: EB Garamond 12 pt; body at an exact 24 pt pitch with a 0.5 in first-line indent; 1 in margins; single-spaced headings' second lines, block quotations, footnotes and signature block; the caption as a bordered cell beside the case number and judge; the certificate of service on a new page.
+- Differs: Word may paginate differently from typst; the caption box is a table cell border, which Word and LibreOffice draw slightly differently; the TOC and TOA (LCvR 7.1(c), gap 2) are not produced by either engine; the "keep the conclusion with the signature" rule is a Word keep-with-next chain, which LibreOffice may break differently.
+- DOCX BLOCKED items: `docx.pdf` (the LibreOffice PDF) is not produced: `soffice` is not installed on the box and cannot be installed without root. `tools/render-docx.sh` fails at its zip-integrity step because `unzip` is not installed, so `samples/OUTPUT-ffrf-motion-to-dismiss.docx` is written but the command exits 1 before the PDF step. The XML parts of the written `.docx` were checked with `ziptool` and `xmllint` (17 of 17 well formed). Visual review of the docx pages: not done (no renderer); pages reviewed = 0. Not verified: that the file opens in Word or LibreOffice without a repair prompt.
+- Gate 0/1/2/3 for the docx engine are not run (`tools/check.sh --engine docx` needs the `.docx.pdf`).

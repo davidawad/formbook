@@ -93,3 +93,15 @@ Pages reviewed: 9 of 9.
 9. **Sub-heading styling.** The exemplar's sub-headings are bold at the left margin (template: level 3). Its cause-of-action title lines are centred (template: level 2). Both are conventions, not rule text.
 10. **Not checked by the template.** Content requirements of FRCP 8(a) (jurisdiction, claim, demand) and the accuracy of cited statutes. Local-rule compliance of exhibits (DUCivR 10-1 exhibits paragraph) is not generated.
 11. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, which this doc-type folder does not have; the brief forbids editing `tools/`. Render and overlay were run; the review above is the Gate 2 record for this doc type.
+
+## Engines
+
+**docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` (pandoc's reference with the styles, footer and section of `typst/utd-complaint.typ`), and the filter `docx/utd-complaint.lua` (cover with counsel block and caption table, numbering of the allegations, numbered prayer items, signature block). `sh tools/render.sh --engine docx <folder> samples/INPUT-fastre-complaint.md` writes `samples/OUTPUT-fastre-complaint.docx`.
+
+- Matches the typst form: Letter; top margin 1 1/2 in, others 1 in; EB Garamond 13 pt; exact 26 pt line spacing for body text; first-line indent 0.5 in; numbered allegations 1 to 53 (none under the Prayer or Jury Demand headings); headings centred bold capitals (level 1) and centred bold (level 2), left bold (level 3); centred page number on every page; caption table with the rule at the right and bottom; "JURY DEMANDED" under the title; signature block.
+- Differs: the caption and signature are Word tables (border and row heights differ slightly between Word and LibreOffice); allegation numbers are typed text, not a list field (they do not renumber when a paragraph is inserted by hand); the spacing between the number and the text is a tab stop, not the typst gap.
+- Checked on the box: the .docx is a zip whose 17 XML parts are well-formed (`ziptool` + `xmllint`, because `unzip` is not installed).
+- BLOCKED, docx.pdf (Gates 0 to 3 on `samples/OUTPUT-fastre-complaint.docx.pdf`): `soffice` is not installed on this box and cannot be installed here (no conda-forge package, no root), so no LibreOffice PDF was made and `tools/check.sh --engine docx` cannot run.
+- BLOCKED, `tools/render.sh --engine docx` exits 1: the zip-integrity step runs `unzip -tq`, and `unzip` (and `zip`) are not installed on this box. The .docx is written before that step; the render stops there.
+- BLOCKED, visual review of the .docx pages: 0 of 9 pages reviewed (`pages_reviewed=0`); the pages cannot be rendered without LibreOffice. The typst pages were reviewed at 60 dpi (9 of 9) as the reference.
+- Not checked: that the file opens in Word or LibreOffice without a repair prompt (no Word, no LibreOffice on the box).

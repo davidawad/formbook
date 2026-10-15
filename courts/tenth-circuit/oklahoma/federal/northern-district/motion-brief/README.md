@@ -95,3 +95,13 @@ Reviewed pages: 12 of 12.
 10. **Certificate of service.** Required here because one party is served by mail (FRCP 5(d)(1)(B)); not required for a paper served only through ECF. The template includes it when the frontmatter has `certificate`.
 11. **Proposed order, declarations, disclosure statement.** Not produced (see Governing rules).
 12. **Tools gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at the court directory level. This doc-type folder is not that shape, and the brief forbids editing `tools/`. Render and overlay were run; the Gate 2 table above is the review for this doc type.
+
+## Engines
+
+DOCX engine (`docx/`: `reference.docx`, `oknd-motion-brief.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief samples/INPUT-gideon-motion-to-dismiss.md`.
+
+- **Matches the typst form:** EB Garamond 13 pt body and footnotes (footnote text single-spaced), 12 pt centered page number, 1 in margins on letter paper, double-spaced body with 0.5 in first-line indent, the cover (two-line court name, caption with rule, bold centered title), level-1 headings centered bold caps and unnumbered, levels 2-5 labeled I., A., 1., a. with hanging indents, single-spaced block quotations indented 0.5 in both sides, the signature block, and the certificate of service on its own page.
+- **Differs from typst:** line pitch is "double" rather than exactly 24 pt. The caption and signature block are Word tables. Heading labels are typed text. Heading spacing is 12 pt before and after at single line spacing. Word may paginate differently.
+- **Not built (fails loudly):** `toc_toa: true` (indexed TOC and TOA, LCvR7-1(d)) stops the filter with an error. The committed sample is 12 pages and does not use it. Authority links (`toa:KEY`) are written as plain text.
+- **Output:** `samples/OUTPUT-gideon-motion-to-dismiss.docx` is written. `render-docx.sh` then exits 1 (see below).
+- **BLOCKED:** `docx.pdf` (LibreOffice PDF, check gates 0-3): `soffice` is not installed on this box and cannot be installed without root or conda-forge. Visual review of the docx pages: needs the same PDF; 0 docx pages reviewed. `unzip` is not installed, so the zip-integrity step of `tools/render-docx.sh` fails after the `.docx` is written. The XML parts were checked instead with `ziptool` and `xmllint` (15 of 15 well-formed). Opening in Word and LibreOffice without a repair prompt: not done. TOC and TOA: BLOCKED for any brief over 15 pages (see above).

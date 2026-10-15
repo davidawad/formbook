@@ -57,3 +57,17 @@ The overlay compares our render with the Plaza 106 filing (Doc 1, 19 pp.) page b
 4. **Rule text.** The rules in the table above are cited, not re-read. Nothing in this folder is verified against the court's current local-rules text.
 5. **Page count.** Our render is 9 pages; the filing is 19 pages, including the verification and no exhibits. Nine pages is inside the 8–14 target for the body the sample transcribes; it is not the full filing.
 6. **Second exemplar not overlaid.** The Clauson filing (a different filer, with exhibits) is kept as a second exemplar for tier-2 comparison. It is not overlaid here and is not used in the sample.
+
+## Engines
+
+The typst template is the primary form. The DOCX engine is in `docx/` (`reference.docx`, `utb-adversary-complaint.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint samples/INPUT-plaza106-verified-complaint.md`.
+
+**What the docx matches** (the same mandated form as the typst template): EB Garamond 12 pt; exact 24 pt line pitch; 0.5 in first-line indent; letter paper with a 1.5 in top margin and 1 in other margins; centred bold level-1 and level-2 headings; 12 pt single-spaced footnotes; a bottom-centre page number (PAGE field in the footer). The cover is built from the same metadata: counsel block, court title, Form 416D caption (a borderless table with a right and a bottom rule on the party column), title. Numbered allegations: the filter types `1.`, `2.`, ... at 0.5 in with the text at 0.9 in on the first line (a tab stop); the lead-in and the WHEREFORE paragraph are unnumbered; the prayer items `A.`-`H.` hang at 0.9 in. Signature block and verification are borderless tables.
+
+**What differs**: the numbers are typed text, not Word list numbering, so they do not renumber on edit. Word and LibreOffice break lines differently, so the page count of the docx is not the typst page count (the typst render is 9 pages). Table rules are drawn by the application. The EB Garamond font must be installed where the file is opened, or Word substitutes silently. The template has no table of contents or table of authorities.
+
+**BLOCKED for the docx engine** (not done on this box):
+- `docx.pdf` (`samples/OUTPUT-plaza106-verified-complaint.docx.pdf`, the LibreOffice PDF on which Gates 0 and 1 are measured): BLOCKED, `soffice` not installed on the box (no conda-forge package, no root).
+- Zip integrity step of `tools/render-docx.sh` (`unzip -tq`): BLOCKED, `unzip` not installed on the box. `tools/render.sh --engine docx` wrote `samples/OUTPUT-plaza106-verified-complaint.docx` and then exited 1 with `render-docx.sh: unzip: not found` and `not a valid zip`. As a substitute, every XML and rels part was checked with `ziptool` and `xmllint --noout`: all well-formed.
+- Visual review of the docx pages (opened in LibreOffice or Word, no repair prompt): BLOCKED, no LibreOffice and no Word. Pages reviewed: 0. The typst render (9 pages) was reviewed page by page; the docx was not.
+- `sh tools/check.sh <dir> --engine docx` not run to a pass: it needs the `.docx.pdf` (see above), so no `.check-docx.txt` stamp is written.

@@ -77,3 +77,12 @@ Fixes made in this pass, found on page review, before the final render: (1) the 
 7. No cover sheet is produced: LR 7003-1 requires one only for paper filings. A paper version would need a cover sheet as the last page.
 8. The PO-box rule (LR 9004-1.F) is not checked by the template.
 9. No page or word limit was checked for this document type.
+
+## Engines
+
+DOCX (`docx/reference.docx`, `docx/okwb-adversary-complaint.lua`; `sh tools/render.sh --engine docx`):
+
+- Matches the typst form in its styles: letter, 1 in margins, EB Garamond 12 pt throughout (footnotes included), exact 24 pt double spacing, 0.5 in first-line indent on numbered and unnumbered paragraphs, centered bold capitals for headings (text after "§" keeps its case), lettered items with a hanging indent, the caption with the ")" column on every row, a centered PAGE number in the footer, and the signature and "Approved by:" blocks flush right and left as in typst.
+- Differs: paragraph numbers are typed text with a tab, not Word list numbering; the caption is a borderless table (Word and LibreOffice draw it alike, but a reviewer should look); line breaks and page breaks are Word's and may differ from the typst pages (the typst overlay is not comparable page for page); the .docx needs EB Garamond installed on the machine that opens it, or Word substitutes a face silently.
+- BLOCKED, not verified: the `.docx.pdf` conversion (`soffice` is not installed on this box, and it cannot be installed here); the render command's zip check (`unzip` is not installed, so `tools/render-docx.sh` exits 1 after writing `samples/OUTPUT-ruzycki-adversary-complaint.docx`); the visual review of the .docx pages (pages reviewed: 0); opening the .docx in Word or LibreOffice without a repair prompt. The XML parts of the written .docx were checked with `xmllint` (well-formed), and the style IDs used by the body are all defined in the .docx.
+- The reference was made from pandoc's default reference with its styles, section and footer parts edited directly; no build script is kept in `docx/`.

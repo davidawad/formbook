@@ -97,3 +97,14 @@ Gate 2 rows are recorded here, not in `reviews/` (this doc type has no `reviews/
 - Paragraph lines overprinted (each paragraph's last line sat on the next paragraph's first line, because typst adds no leading between blocks). Fixed: each paragraph and list is a block with a gap of one leading below it; the render went from 11 to 14 pages, the filed copy's count.
 - Footnote references printed as literal `[^1]`. Fixed: definitions are attached to each chunk that cites them.
 - Headings rendered larger than the 12 pt body (typst's default heading sizes). Fixed: headings are set at the body size.
+
+## Engines
+
+**docx** (`docx/reference.docx`, `docx/ksd-complaint.lua`): pandoc with the reference and the filter; the caption, numbered paragraphs, lettered lists, headings, signature block and footer page number are Word paragraphs in `Ksd ...` styles. Matches the typst template: Liberation Serif 12 pt, exact 27.6 pt double spacing, letter paper, 1 in margins, 0.5 in first-line indent, centered page number, PRAYER/JURY headings unnumbered.
+
+Differs from typst: no ")" column in the caption (the party lines are stacked and the case number sits below them); no pagination guarantee (Word and LibreOffice may break lines differently); the lead-in and body are the same text as typst.
+
+BLOCKED (docx gates cannot run on this box):
+- `docx.pdf` (LibreOffice conversion): `soffice` is not installed on the box, so `tools/render-docx.sh` stops after writing `samples/OUTPUT-jenkins-complaint.docx`.
+- Visual review of the docx pages: 0 pages reviewed (no docx-rendered page exists here); the typst pages were viewed as the comparison.
+- Page-count check (D. Kan. R. 7.1 does not apply to complaints, but the exemplar's 14 pages): not measured for docx.

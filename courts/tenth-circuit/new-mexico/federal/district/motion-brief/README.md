@@ -97,3 +97,11 @@ Measured: body line pitch 24.00 pt; 100 characters per full 6.5 in line (about 1
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at the court root, and this doc-type folder is not that shape. The brief forbids editing `tools/`, so the gates were not run. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
 
 [Formbook index](../../../../../../README.md)
+
+## Engines
+
+DOCX (`docx/`): `reference.docx` is built by `docx/build-reference.sh` from pandoc's default reference. It matches the typst form on the same points: EB Garamond 12 pt, 24 pt exact line pitch for the body, 0.5 in first-line indent, top margin 1.5 in and 1 in elsewhere, letter page, centered bold capitals for level 1 headings, bold single-spaced hanging headings (0.5 in) for levels 2 and 3, centered PAGE number 0.45 in from the bottom edge. `docx/nmd.lua` builds the cover (court, caption table with ")" marks, case number, title), the body (not numbered), the signature block ("Respectfully submitted," and the attorney blocks) and the certificate of service from the sample frontmatter.
+
+What differs: the caption, signature block and certificate lists are borderless tables or single-spaced paragraphs, which Word and LibreOffice may space slightly differently; footnotes are 12 pt single-spaced (the typst template sets no footnote style, so none is verified against it); the frontmatter `footer_title` is not used, as in the typst template.
+
+BLOCKED (docx): `docx.pdf` is not produced because `soffice` (LibreOffice) is not installed on this box, so Gates 0 and 1 cannot run on the rendered PDF; the visual review of the docx pages has not been done (no docx page viewed); the open-without-repair check in Word and LibreOffice has not been done. The `.docx` itself passes `unzip -tq` and the well-formedness check of every XML part.

@@ -105,3 +105,13 @@ Reviewed pages: 11 of 11.
 8. **Motion not generated.** The motion (ECF 17 in the exemplar's docket) is a separate document (L.R. 7.1(d)(1)(A)).
 9. **Division.** `division` is free text from the frontmatter; the template does not check the five divisions of L.R. 1.2.
 10. **Overlay file names.** The task brief named the overlay `<id>-overlay.pdf`; `tools/overlay.sh` writes `OVERLAY-<id>.pdf` and reads `OUTPUT-<id>.pdf`. The tools win; the names follow them.
+
+## Engines
+
+**docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx` from `reference-styles.xml`), `mtd-motion-brief.lua` (cover, caption, headings I./A./1., TOC and TOA, signature, certificates), `render.sh` and `pages.awk` (two-pass page numbers), `fonts.conf`.
+
+Render: `export FONTCONFIG_FILE=$PWD/docx/fonts.conf`, then `sh tools/render.sh --engine docx <this folder> samples/INPUT-fsc-knudsen-motion-brief.md`. Output: `samples/OUTPUT-fsc-knudsen-motion-brief.docx` and `.docx.pdf` (11 pages). The TOC and TOA page numbers come from the LibreOffice PDF of a first pass (`docx/render.sh` repeats the build until the numbers settle; a heading or authority not found stops the build with a `MISSING` line).
+
+- Matches the typst output: EB Garamond 14 pt; exact 32 pt double spacing; 1 in margins on Letter; roman numbering for the cover, TOC and TOA (i, ii, iii) and arabic from 1 for the memorandum; cover and caption as typst; TOC with dot leaders and page numbers (certificates included); TOA grouped by kind with italic case names, the same page numbers as typst for 13 of 14 authorities (Benavidez: 4, 5 here, 4 in typst, because the argument citation falls on p.5); headings I., A., 1. hanging; signature block; certificate of compliance with the word count (1,330, the same count as typst) and the certificate of service.
+- Differs: pagination is LibreOffice's. The memorandum is 8 pages, as typst, but the ARGUMENT heading moves to p.5 (typst p.4), so the TOC shows ARGUMENT on 5. Exact line spacing puts text about 5 pt lower than typst. The TOC and TOA are written text, not Word fields: they do not renumber in Word after an edit; rerun `docx/render.sh`. Word may paginate differently.
+- BLOCKED: GATE-RUN (`tools/check.sh <this folder> --engine docx`): exits 2 before any gate runs, because this folder has no `court.json` and no `checks.yaml` (the court folder has neither either). No docx gate result is recorded. The rule checks (MT-FORM-001 to MT-SERV-001, including MT-LEN-001, MT-LEN-002 and MT-CERT-001) are therefore not run by the tool; the visual review is in `reviews/2026-10-15-docx.md`.

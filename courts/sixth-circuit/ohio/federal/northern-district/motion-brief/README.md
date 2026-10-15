@@ -97,3 +97,13 @@ Every page was rendered at 60 dpi and viewed. No OPEN rows.
 - Checked and not saved: Krudy (1:25-cv-00339, ECF 12, a combined motion and memorandum) is a scanned image with no text layer. Loops v. Maxill (1:25-cv-02346, ECF 22-1) has a text layer but its Times New Roman is not embedded. Smith v. Schuller (3:26-cv-00606, ECF 10-1, 19 pp) has a text layer but is set in Aptos and Georgia, not a court-typical face.
 
 [Ohio federal index](../../README.md) | [Court folder](../README.md)
+
+## Engines
+
+**docx** (`docx/`): `reference.docx` is built by `docx/build-reference.sh` (pandoc's default, rewritten with sed/perl; zipped and checked with xmllint). `docx/render.sh` owns the build: pandoc with `docx/ohnd-motion-brief.lua` (caption table, title, signature with the firm block, certification of track and page limit), then the reference's styles, page setup and footer are put back.
+
+- Matches typst (set in the reference, from the typst template): EB Garamond 12 pt (`fonts/eb-garamond`); body at an exact 27.6 pt pitch and an exact 13.8 pt single pitch; 0.5 in first-line indent on body paragraphs (the caption, headings and signature are not indented); 1 in margins, letter paper; a centered 12 pt page number; footnote text 12 pt single; the title on a 5.6 in measure; the signature at 2.8 in.
+- Differs from typst: the 1 1/2 in first-page top margin is a 0.5 in spacer paragraph; heading spacing (before and after) is set to the typst values but a Word paragraph does not reproduce typst's exact block placement; the caption ")" column has one ")" per party name, not per wrapped line; the certification and signature are paragraphs at the typst positions, not checked against the render; not measured: the docx page count (the typst render is 14 pages for the Hammill sample).
+- BLOCKED: `docx.pdf` and page review: soffice is not installed on this box (`soffice: not found`), so no LibreOffice PDF exists, Gates 0 to 3 cannot run on the docx, and no docx page was viewed.
+- BLOCKED: `contents: true` (table of contents and table of authorities, L.R. 7.1(f) above 15 pages): not built by the docx engine. The filter stops with an error rather than omit them. TOC/TOA fields need an update step and LibreOffice does not honor TA/TOA the way Word does (docs/DOCX.md).
+- BLOCKED: the L.R. 7.1(f) page-limit assertion (the typst `length-checks`) is not made in the docx: it needs the laid-out page count of the LibreOffice PDF. Check the sample's page count against its track limit once the PDF exists.

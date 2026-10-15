@@ -88,3 +88,18 @@ Red is our render, blue is the filed exemplar (Google), black is where both agre
 ## Searches (exemplar)
 
 CourtListener search for W.D. Mich. complaints (`court=miwd`, RECAP `type=r`, filed 2024 to 2026). Candidates were downloaded and checked for a text layer. Gulley (2009, scanned) and Phifer (2008, no RECAP PDF) were set aside for age. Chosen: Google (42 pp., Times, counsel-drafted) and Cohen (45 pp., Garamond, counsel-drafted).
+
+## Engines
+
+DOCX (`docx/`): `sh tools/render.sh --engine docx <this folder> samples/INPUT-google-complaint.md` writes `samples/OUTPUT-google-complaint.docx` (pandoc + `docx/reference.docx` from `docx/build-reference.sh` + `docx/miwd-complaint.lua`, which builds the cover, caption, counsel block, numbered paragraphs and signature). The zip has no duplicate entries and every XML part is well formed (checked 2026-10-15). The `.docx.pdf` step did not run: soffice is not installed on this box.
+
+- **Matches the typst reference (set in reference.docx and the filter):** letter paper, 1 in margins, EB Garamond 12 pt (vendored; the only font named in the styles), exact 24 pt line pitch for body text, exact 13.8 pt single lines for the caption, counsel and signature, 0.5 in first-line indent, numbered paragraphs 1. onward until the request for relief, lettered items A. onward, headings centered (level 1 bold caps, level 2 bold, level 3 regular), no page number on the cover, centered page number from page 2.
+- **Differs from typst:**
+  - Paragraph numbers and list letters are typed text ("1." followed by a tab), not Word automatic numbering; a number inserted by hand does not renumber the rest. The tab stop is 1 in, so the text gap after a two-digit number is shorter than the typst 0.3 in gap.
+  - The caption rule is a cell border (Word and LibreOffice draw table borders slightly differently).
+  - The last body paragraph is not set to keep with the signature block (typst does); the signature row itself cannot split.
+  - Page-one and page-count measurements (the page count of the typst render is 7; the docx count is not measured).
+- **docx BLOCKED items:**
+  - `docx.pdf / page review`: soffice not installed on this box, so no LibreOffice PDF exists and no page was viewed. Every Gate 0 to 3 check that reads the `.docx.pdf` is blocked, and `samples/.check-docx.txt` is not written.
+  - `docx keep-with-signature`: the last paragraph is not kept with the signature (see above), unverified in LibreOffice.
+- Word limits in `docs/DOCX.md` that do not apply: no TOC, TOA or pleading line numbers in this doc type (LCivR 10.1 sets none).

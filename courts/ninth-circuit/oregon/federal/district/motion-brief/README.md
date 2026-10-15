@@ -100,4 +100,15 @@ The overlay is a diagnostic: red = our render only, blue = the filed exemplar on
 10. **Not run.** `tools/check.sh` and `tools/check-selftest.sh` (as in the CAND note). Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
 11. **Page 10 blank space.** The conclusion and signature are kept together, so page 10 ends after the III. paragraph with about a third of the page blank. Accepted for now (the alternative is a signature page with one line of text).
 
+## Engines
+
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion.lua` writes the cover (counsel, court title, caption table with the legend), the body, the signature block and the certificate of service; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in the footer. Output: `samples/OUTPUT-zoetis-rule-12-motion-to-dismiss.docx` and `.docx.pdf` (LibreOffice 26.8), 12 pages, all 12 rendered at 60 dpi and viewed (`reviews/docx.md`). The typst output is also 12 pages.
+
+- Matches the typst output: letter; one inch on all four sides; EB Garamond 13 pt (embedded in the PDF); double spacing as an exact 24 pt line and single spacing as an exact 13 pt line; counsel block; court title; caption with the case number at the page center and the legend under the title; headings at typst's default sizes (level 1 18 pt centered, level 2 15.5 pt bold and left, level 3 13 pt bold and indented); block quotations single-spaced and indented; footer "Page n - TITLE" at 12 pt; the last paragraph kept with the signature; certificate of service on its own page.
+- Differs from typst: the docx is built from the markdown with Word styles, so line breaks in the signature column and the page breaks follow LibreOffice (Word may move a line); the signature's phone line wraps at the same place as typst. No tables of contents or authorities (as typst).
+- Fonts: the PDF is correct only when LibreOffice sees the vendored `fonts/` and no substitute face. This box has no system EB Garamond, so run the render with a `FONTCONFIG_FILE` that lists only the repo's `fonts/` directory.
+- Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML (checked by `render-docx.sh`) and converts in LibreOffice without error; no GUI repair prompt was observed (headless).
+
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and this doc-type folder has neither (it exits 2 before any gate runs), so the gates did not run and `samples/.check-docx.txt` was not written. The Gate 2 record for the docx is `reviews/docx.md`.
+
 [District index](../README.md) | [Formbook index](../../../../../../README.md)

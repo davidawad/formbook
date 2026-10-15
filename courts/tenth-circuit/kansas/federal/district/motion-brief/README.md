@@ -96,3 +96,14 @@ Gate 2 rows are recorded here, not in `reviews/` (this doc type has no `reviews/
 - Caption and signature lines inherited the first-line indent. Fixed: line stacks set no first-line indent.
 - Line breaks split "§" from its number. Fixed in the sample only: non-breaking spaces after "§" and "¶" (the text is unchanged).
 - A footnote-number gap option was tried and rejected (typst 0.15 has no such parameter for footnote entries).
+
+## Engines
+
+**docx** (`docx/reference.docx`, `docx/ksd-motion-brief.lua`): pandoc with the reference and the filter; the caption, headings (A., 1., a. with hanging indents), block quotations, signature block, footer page number and certificate of service are Word paragraphs in `Ksd ...` styles. Matches the typst template: Liberation Serif 12 pt, exact 27.6 pt double spacing, letter paper, 1 in margins, 0.5 in first-line indent on every body paragraph, centered page number, certificate on the page that follows the signature (no forced page break).
+
+Differs from typst: no ")" column in the caption; the page-limit assertion (15 pages, D. Kan. R. 7.1(d)(3)) is not run for docx, since page counts come from the LibreOffice PDF; Word may paginate differently.
+
+BLOCKED (docx gates cannot run on this box):
+- `docx.pdf` (LibreOffice conversion): `soffice` is not installed on the box, so `tools/render-docx.sh` stops after writing `samples/OUTPUT-blatnick-motion-brief.docx`.
+- Visual review of the docx pages: 0 pages reviewed; the typst pages were viewed as the comparison.
+- Page limit (15 pages through the signature, D. Kan. R. 7.1(d)(3)): not measured for docx.

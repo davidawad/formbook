@@ -43,6 +43,15 @@ Sources were fetched 2026-10-14. The local rules are the court's own PDF ("Local
 - Block quotations are indented 0.5 in and not numbered.
 - Footnotes are supported (`[^key]`); the template inlines each definition into the chunk that cites it.
 
+## Engines
+
+docx (`docx/`): pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`), the Lua filter `docx/miwb-adversary-complaint.lua` (caption, numbered allegations, the generated statements, signing block), and `docx/render.sh`, which puts back the reference styles, page setup and footer that pandoc drops. Built and checked on this box as far as possible: `OUTPUT-spiech-complaint.docx` is written; the zip has no duplicate entries and every XML part is well formed.
+
+- Matches the typst reference (set in the reference, not yet measured on a rendered page): EB Garamond 13 pt throughout; exact 27.6 pt line spacing for body, numbered paragraphs and headings; 0.5 in first-line indent; numbers at 0.5 in with text at 1 in (tab stop); letter size with 1 in margins (12240 x 15840 twips, 1440 margins); headings 1 and 2 centered bold capitals, heading 3 bold at the margin; footnote text 13 pt single spaced; footer "Page n of N" at 11 pt, centered (PAGE and NUMPAGES fields). The typst baseline pitch measures 27.65 pt on page 2 of `/work/artifacts/miwb/adversary-complaint/OUTPUT-spiech-complaint.pdf` (pdftotext bbox), which is the value the docx declares.
+- Differs from typst: the caption rule is a cell border (bottom, and right on the adversary block), not the typst "_____/" slash rule; caption spacing is set in twips, so line positions may differ by a point or two. Numbers on allegations are typed text, not Word automatic numbering, so an inserted paragraph will not renumber the rest. Lettered lists are typed "a." labels with a hanging 0.5 in indent. Page count and line breaks are not measured yet (no rendered docx.pdf).
+- docx BLOCKED (not passed): `docx.pdf` checks (Gates 0, 1 and 2 on the LibreOffice PDF): soffice is not installed on this box (`tools/render-docx.sh` fails at the conversion step after writing the `.docx`). Page review: 0 pages reviewed. Opening the `.docx` in LibreOffice or Word without a repair prompt: not verified. `tools/check.sh --engine docx` also needs `yq`, which is not on this box.
+- Word limits that apply: none of the TOC, TOA or pleading line-number features is used by this document type (see `docs/DOCX.md`). PAGE and NUMPAGES are fields whose cached result is "1"; Word and LibreOffice recompute them on render.
+
 ## Overlay
 
 `samples/OVERLAY-spiech-complaint.pdf` pairs each rendered page with the Spiech exemplar page that shares the most words (`OVERLAY-spiech-complaint.txt`):

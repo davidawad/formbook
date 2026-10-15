@@ -130,3 +130,16 @@ Page 1 pairs with the exemplar's signature page because both carry counsel names
 - Toolchain: typst 0.15.0, poppler 26.09.0 (`pdftoppm`), ImageMagick 7.1.2, installed with micromamba from conda-forge into `$HOME/tb`.
 
 [Court README](../README.md) | [Adversary complaint](../adversary-complaint/README.md) | [Formbook index](../../../../../../README.md)
+
+## Engines
+
+docx (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, double-spaced footnotes as the typst motion template), `motion-brief.lua` (the markdown contract to judge line, cover, caption, numbered paragraphs, lettered lists and the signature blocks), `render.sh` (pandoc, then the footer title). Render: `sh tools/render.sh --engine docx <this dir> samples/INPUT-1min-motion-to-dismiss-memorandum.md` writes `samples/OUTPUT-1min-motion-to-dismiss-memorandum.docx` and `.docx.pdf` (LibreOffice 26.8; `pdffonts` shows EB Garamond only). Pages: docx 14, typst 14.
+
+What matches the typst output (`typst/`): letter, 1 in margins; EB Garamond 14 pt throughout; body lines on the typst line pitch (31.4 pt, exact spacing); footnotes double-spaced; counsel side by side, judge line, court title and caption with its rules on page 1; numbered paragraphs, (a) lists and A. headings; footer `MEMORANDUM ISO MOTION TO DISMISS n`; signature blocks after the conclusion, the date kept with the blocks, the excerpt and conclusion kept together.
+
+What differs (checked page by page, `reviews/docx.md`):
+- Exact line spacing puts the extra leading above each line, so text starts about 11 pt lower on every page than in typst. The pitch is the same, but a full page holds about one body line fewer, so page breaks differ slightly from the typst render (both 14 pages).
+- The caption and the signature block sit a few points off the typst positions (the caption box ends about 20 pt higher).
+- Word was not run here (no Word on this machine). Word may paginate slightly differently (docs/DOCX.md).
+
+BLOCKED: check.sh gates 0-3: `tools/check.sh <this dir> --engine docx` cannot run on a doc-type folder. It reads `court.json` and `checks.yaml` from the court dir; this folder has neither, and the court folder has `court.json` but no `checks.yaml`. No `samples/.check-docx.txt` is written. The pages were checked by hand (see `reviews/docx.md`), not by the gates.

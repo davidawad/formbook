@@ -98,3 +98,17 @@ Pages reviewed: 12 of 12.
 9. **Certificates.** No certificate of service (FRCP 5(d)(1)(B)); no certificate of compliance (not needed under the page limit).
 10. **Signature placement.** The signature block is unbreakable but is not kept with the conclusion paragraph, unlike the complaint's template. The sample's signature sits on the conclusion's page with room to spare; a longer conclusion could leave the block alone on a page.
 11. **Check scripts not run.** As for the complaint: `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; the brief forbids editing `tools/`. Render and overlay were run; the review above is the Gate 2 record.
+
+## Engines
+
+**docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` (pandoc's reference with the styles, footer and section of `typst/utd-motion-brief.typ`), and the filter `docx/utd-motion-brief.lua` (cover with counsel block and caption, heading labels "I." and "A.", numbered and bulleted lists, table of contents and table of authorities, page breaks before the contents and before the memorandum, signature block). `sh tools/render.sh --engine docx <folder> samples/INPUT-miller-motion-to-dismiss.md` writes `samples/OUTPUT-miller-motion-to-dismiss.docx`.
+
+- Matches the typst form: Letter; top margin 1 1/2 in, others 1 in; EB Garamond 13 pt; exact 26 pt line spacing for body text; first-line indent 0.5 in; headings centred bold capitals (level 1), bold with "I." at the margin (level 2), bold with "A." indented half an inch (level 3); lists numbered "1." and bulleted at 0.5 in; footnotes at 13 pt, single spaced; centred page number on every page; caption with the judge; motion, contents, authorities and memorandum in the same order.
+- Differs: the caption and signature are Word tables; the table of contents and table of authorities are written as text (below); the typst page-number column is not reproduced.
+- BLOCKED, TOC page numbers: the table of contents is a TOC field whose cached result lists the headings without page numbers. Page numbers need a field update in Word or LibreOffice, and the cached numbers cannot be known without a rendered layout. Each heading entry is present; no page number is shown.
+- BLOCKED, TOA page numbers: the table of authorities lists the authorities that the body links, grouped and sorted, without page numbers (no TA or TOA fields; LibreOffice does not honor them, see `docs/DOCX.md`). The "passim" rule (7 or more pages) is not applied.
+- Checked on the box: the .docx is a zip whose 17 XML parts are well-formed (`ziptool` + `xmllint`, because `unzip` is not installed).
+- BLOCKED, docx.pdf (Gates 0 to 3 on `samples/OUTPUT-miller-motion-to-dismiss.docx.pdf`): `soffice` is not installed on this box and cannot be installed here, so no LibreOffice PDF was made and `tools/check.sh --engine docx` cannot run.
+- BLOCKED, `tools/render.sh --engine docx` exits 1: the zip-integrity step runs `unzip -tq`, and `unzip` (and `zip`) are not installed on this box. The .docx is written before that step; the render stops there.
+- BLOCKED, visual review of the .docx pages: 0 of 12 pages reviewed (`pages_reviewed=0`); the pages cannot be rendered without LibreOffice. The typst pages were reviewed at 60 dpi (12 of 12) as the reference.
+- Not checked: that the file opens in Word or LibreOffice without a repair prompt (no Word, no LibreOffice on the box).

@@ -101,3 +101,14 @@ The overlay is a diagnostic, not a score. Pages 1 to 3 agree most closely: the n
 8. **Second filer not overlaid.** The Pigida filing (2015) was used for the tier-2 cross-check of the notation, caption and bottom notation. It is not overlaid because its pleading format predates the 2023 rules.
 9. **Gate 2 record.** No `reviews/` file for this doc type. The page review above is the visual check; it is not a recorded Gate 2 review.
 10. **Adversary complaint.** The sibling `adversary-complaint/` folder has no `OUTPUT` or `OVERLAY` PDF and no `README` outputs in `samples/`. Not touched in this change.
+
+## Engines
+
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion-brief.lua` writes the notation, the caption, the body and the signature; `docx/render.sh` (run by `tools/render-docx.sh`) fills the bottom notation from the frontmatter. Output: `samples/OUTPUT-smith-motion-memorandum.docx` and `.docx.pdf` (LibreOffice 26.8), 12 pages; all 12 pages rendered at 60 dpi and viewed (`reviews/docx.md`).
+
+- Matches the typst output: letter; the same margins and 28-line grid as the complaint; EB Garamond 12 pt (`pdffonts`: EBGaramond Regular, Bold, Italic); pleading rules; the notation at the top right (judge, chapter, hearing location, date, time, response date) on lines 1 to 6; the court title; the caption with the debtor block, a ")" column and the case number and title at right, with a rule under the party column; body paragraphs unnumbered with a first-line indent; level 1 headings centered caps, level 2 bold, level 3 italic; block quotations indented 0.5 in both sides and double spaced; lists with bullets at 0.5 in and text at 0.9 in; the "Dated:" paragraph kept whole; bottom notation on every page.
+- Differs from typst: the numbers and the bottom notation are floating text boxes, not body flow; the notation and the caption are table rows with a minimum height in whole grid lines, so the body stays on the grid when a row wraps differently; page breaks follow LibreOffice (both renders are 12 pages, but the certificate and the "Dated:" block fall on different pages); the bullets are typed "•" in a table, not a Word list.
+- Fonts: as for the complaint, run with a `FONTCONFIG_FILE` that lists only the repo's `fonts/` directory.
+- Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML, every style it uses is defined, and the footer placeholders are all filled.
+
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml` at the court level, and a doc-type folder has neither; it exits 2 (`jq: Could not open file .../court.json`), so the gates did not run and `samples/.check-docx.txt` was not written.

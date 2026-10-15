@@ -44,6 +44,15 @@ The local rules have no page limit for briefs in an adversary proceeding and no 
 - Sub-lists are lettered a., b., ...; block quotations are indented 0.5 in; footnotes are supported (`[^key]`).
 - No table of contents and no table of authorities: neither the local rules nor the Cluchey exemplar requires them for a brief of this length. Murtha's brief has none either.
 
+## Engines
+
+docx (`docx/`): pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`), the Lua filter `docx/miwb-motion-brief.lua` (the motion and the brief, each with its caption, the LBR 9004(c) statement, signing blocks, and a section break so the brief's page count restarts), and `docx/render.sh`, which puts back the reference styles, page setup and footer that pandoc drops. Built and checked on this box as far as possible: `OUTPUT-cluchey-motion-brief.docx` is written; the zip has no duplicate entries and every XML part is well formed. The text of the sample is in the docx in order (checked by word sequence, against the markdown and the YAML motion body; only the list numerals differ, as they are lettered).
+
+- Matches the typst reference (set in the reference, not yet measured on a rendered page): EB Garamond 13 pt throughout; exact 27.6 pt line spacing for body, headings and signature spacing; 0.5 in first-line indent; letter size with 1 in margins (12240 x 15840 twips, 1440 margins); headings 1 and 2 centered bold capitals, heading 3 bold at the margin; footnote text 13 pt single spaced; centered page number at 11 pt in the footer, restarting at 1 in the brief (`w:pgNumType w:start="1"` on the final section). The typst baseline pitch measures 27.65 pt on the complaint's body page (`/work/artifacts/miwb/adversary-complaint/OUTPUT-spiech-complaint.pdf`); the motion-and-brief render is `/work/artifacts/miwb/motion-brief/OUTPUT-cluchey-motion-brief.pdf` (7 pages).
+- Differs from typst: the caption rule is a cell border, not the typst "_____/" slash rule; caption spacing is set in twips. Lettered lists are typed "a." labels with a hanging 0.5 in indent. The motion's body is taken from the YAML as the typst template does, so its paragraphs carry the same text. Page count is not measured (no rendered docx.pdf); the typst render of the same sample is 7 pages in total (motion and brief), the comparison for that count.
+- docx BLOCKED (not passed): `docx.pdf` checks (Gates 0, 1 and 2 on the LibreOffice PDF): soffice is not installed on this box (`tools/render-docx.sh` fails at the conversion step after writing the `.docx`). Page review: 0 pages reviewed. Opening the `.docx` in LibreOffice or Word without a repair prompt: not verified. `tools/check.sh --engine docx` also needs `yq`, which is not on this box.
+- Word limits that apply: none of the TOC, TOA or pleading line-number features is used by this document type (see `docs/DOCX.md`). PAGE is a field whose cached result is "1"; Word and LibreOffice recompute it on render.
+
 ## Overlay
 
 `samples/OVERLAY-cluchey-motion-brief.pdf` pairs each rendered page with the Cluchey exemplar page that shares the most words (`OVERLAY-cluchey-motion-brief.txt`):

@@ -93,3 +93,29 @@ The overlay is a diagnostic, not a score. The sample pairs with the filed pages 
 7. **Page limit and timing.** LCivR 7(f)(1) (20 pages for a dispositive motion) and LCivR 7(i)(2)(B) (50 days) are not checked by the template. Author responsibility.
 8. **Typeface.** LCivR 10(d) names no face (serif or traditional Roman, proportionate at 14 pt or more), so EB Garamond stays; no `docs/FONTS.md` substitute applies. EB Garamond at 14 pt has a smaller x-height than Times at 14 pt (see the complaint README, gap 2).
 9. **Check scripts not run.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. Render, overlay and the page review above are the checks for this doc type.
+
+## Engines
+
+### docx (`docx/`)
+
+Build and render: `sh docx/build-reference.sh docx/reference.docx` (the reference is generated), then `sh tools/render.sh --engine docx <this folder> samples/INPUT-hartsock-motion-to-dismiss.md`, which writes `samples/OUTPUT-hartsock-motion-to-dismiss.docx` and `samples/OUTPUT-hartsock-motion-to-dismiss.docx.pdf` (LibreOffice 26.8 conversion; EB Garamond embedded). `docx/motion-brief.lua` lays out the caption (with the hearing notation), the table of contents, the memorandum and the signature block; `docx/pleading.lua` holds the shared helpers. `docx/render.sh` runs two passes: pass 1 writes the headings it finds and their pages come from its PDF; pass 2 writes the table of contents with those pages and must paginate like pass 1.
+
+What matches the typst output (checked on the LibreOffice PDF, 11 pages, the same first line on every page, and the same TOC pages: I 3, II 4, III 6, IV 7, A 7, B 7, V 10, certificate 11):
+
+- Letter; 1.1 in left and 1 in right margin; 72 pt top margin; 14 pt EB Garamond; 21 numbered lines on a 32 pt grid (header text box); exact 32 pt body lines and 16 pt single lines for counsel, caption, signature and TOC.
+- Counsel on lines 1 to 6 or more (padded to whole lines, at least 4 numbered lines), court title, caption on line 11 with the right and bottom rules, case number and bold title at right, "Hearing date" and "Without Oral Argument".
+- Table of contents on its own page (TOC field, cached result, dot leaders, level 2 indented 0.5 in); the memorandum starts on a new page.
+- Headings flush left (level 1 bold caps), paragraphs with a 0.5 in first-line indent, not numbered; the signature block after the conclusion; the certificate of service on its own page after the signature.
+- Double rule at the left, single at the right (page borders); footer `TITLE - n` on every page, sequential numbering.
+- Widow and orphan control on, as in the typst output (the page breaks of the body match on all 11 pages).
+
+What differs (not a rule; tier 2 or 3):
+
+- The table of contents is a Word TOC field with its cached entries; Word shows the cached page numbers until the field is updated (F9). The page numbers are the LibreOffice pagination, and Word may paginate differently; update the field in Word if the pages move.
+- Word numbers the lines with the header text box, not with `w:lnNumType` (see the complaint's Engines note).
+- Word and LibreOffice may break a line differently from the typst output; the page starts above are the LibreOffice PDF's.
+- Table of authorities: not generated, as in the typst output (gap 2 above).
+
+Checks: `tools/check.sh` cannot run on a doc-type folder: it reads `<court>/court.json` and `<court>/checks.yaml`, and this folder has neither. The docx PDF was checked by hand: every word of the sample is in the PDF (the two exceptions are em-dash joins that `pdftotext` splits), all 11 pages were viewed as PNG (`reviews/docx-review.md`).
+
+BLOCKED: tools/check.sh (all gates, `--engine docx`): the script needs `<court>/court.json` and `<court>/checks.yaml` (`Error: open .../checks.yaml: no such file or directory`), which only exist at court level; no gate ran on this folder, so `samples/.check-docx.txt` is not written.

@@ -101,3 +101,13 @@ Reviewed pages: 9 of 9.
 8. **No hearing or word-limit lines.** A complaint has no word limit (L.R. 7.1(d)(2) applies to briefs) and no noticed hearing.
 9. **Division.** `division` is free text from the frontmatter. The template does not check that it is one of the five divisions of L.R. 1.2 (Billings, Butte, Great Falls, Helena, Missoula).
 10. **Overlay file names.** The task brief named the overlay `<id>-overlay.pdf`; `tools/overlay.sh` writes `OVERLAY-<id>.pdf` and reads `OUTPUT-<id>.pdf`. The tools win; the names follow them.
+
+## Engines
+
+**docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx` from `reference-styles.xml`), `mtd-complaint.lua` (cover, caption, numbered paragraphs, prayer letters, signature), `fonts.conf`.
+
+Render: `export FONTCONFIG_FILE=$PWD/docx/fonts.conf` (the LibreOffice conversion must see the vendored EB Garamond; without it LibreOffice substitutes another serif), then `sh tools/render.sh --engine docx <this folder> samples/INPUT-fsc-knudsen-complaint.md`. Output: `samples/OUTPUT-fsc-knudsen-complaint.docx` and `.docx.pdf` (9 pages).
+
+- Matches the typst output: EB Garamond 14 pt; exact 32 pt double spacing; 1 in margins on Letter; page number centred at the foot from the cover; two-column counsel block; court title; caption with a right and bottom rule on the party cell; numbered paragraphs with the number at 0.5 in; prayer items lettered A. to D. at 0.5 in; unnumbered `%` paragraphs; footnotes at 14 pt single-spaced; signature block. Page count: 9, as typst.
+- Differs: pagination is LibreOffice's (prayer item D starts p.9; typst keeps A. to D. on p.8). Exact line spacing puts each text line about 5 to 9 pt lower than typst. Word may paginate differently.
+- BLOCKED: GATE-RUN (`tools/check.sh <this folder> --engine docx`): exits 2 before any gate runs, because this folder has no `court.json` and no `checks.yaml` (the court folder has neither either). No docx gate result is recorded. The rule checks (MT-FORM-001 to MT-SIG-001) are therefore not run by the tool; the visual review is in `reviews/2026-10-15-docx.md`.

@@ -88,3 +88,12 @@ Pages reviewed: 8 of 8.
 6. **Typing errors in the exemplar** (for example "Plaintiffs'" and "Concumer Protection Act") were transcribed as filed. Only the template's text is checked, not the author's.
 7. **Court-specific cover sheet and summons** not generated (see "Governing rules").
 8. **No check script.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc type folder has neither, and the brief forbids editing `tools/`. The render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
+
+## Engines
+
+docx (`docx/`): `build-reference.sh` builds `reference.docx`; `mieb-adversary-complaint.lua` writes the caption, the numbered body and the signature block; `render.sh` assembles the file. Sample `griffin-adversary-complaint` renders to `samples/OUTPUT-griffin-adversary-complaint.docx` (`sh tools/render.sh --engine docx`), a valid zip with no duplicate entries and well-formed XML.
+
+- **Matches the typst template (set in the reference, read from the source of `typst/mieb-adversary-complaint.typ`):** EB Garamond (the vendored family, named `EB Garamond` in the styles) at 14 pt; exact 28 pt line pitch for the body (the pitch the typst README measured); no first-line indent; letter paper; 1 in margins; footer "N of M" centered at 14 pt (PAGE and NUMPAGES fields with cached result); headings centered and bold, kept with the next paragraph; signature block "Dated" left, signer right (4752 / 4608 twips, the typst grid widths).
+- **Differs from typst:** the caption rules are paragraph borders and the two-column caption is a borderless table; single-spaced caption lines use Word's `auto` 240 spacing, not the typst 0.3 em leading, and paragraph spacing is zero in both (the typst gap was not measured against Word). Numbers are typed as text by the filter, as typst does. Typst `#` headings sit one line of space above and below; the docx headings have none (exact 28 pt lines).
+- **Pagination not measured.** The typst render is 8 pages (`pdfinfo`, letter); the docx page count is unknown because the LibreOffice conversion did not run.
+- **docx BLOCKED:** `docx.pdf` and the page-by-page review: `soffice` is not installed on this box, so `samples/OUTPUT-griffin-adversary-complaint.docx.pdf` was not produced and no page was viewed. No Word-native feature is needed for this doc type (no TOC, TOA or pleading line numbers in the rules recorded above), so no other docx check is blocked.

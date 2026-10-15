@@ -90,3 +90,29 @@ Primary sources, fetched 2026-10-14:
 | 9 (body 6) | Rest of B; CONCLUSION | OK. |
 | 10 (signature) | Dated; "Respectfully submitted"; "BY: /s/" and the name with Fed. Bar No.; second signer | OK. The block starts a new page (see Known gaps, item 8). |
 | 11 (certification, page 8 of the memorandum numbering) | CERTIFICATION OF SERVICE; text; right-aligned /s/ signature | OK. |
+
+## Engines
+
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion-brief.lua` writes the cover, the table of contents, the table of authorities, the body (numbered headings, numbered lists, footnotes, block quotations), the signature block and the certification; `docx/render.sh` (run by `tools/render-docx.sh`) makes two passes: the first is converted to PDF, the printed page of each heading and of each authority is found in its text (`pagemap.awk`), and the second pass writes those page numbers into the table of contents and the table of authorities. Output: `samples/OUTPUT-whitfield-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8, `pdffonts`: EBGaramond Regular, Italic and Bold, embedded), 11 pages, the same count as the typst render (cover, TOC i, TOA ii, body 1 to 8).
+
+- Matches the typst output: US Letter; 1 in margins; EB Garamond 12 pt; cover with the court, the caption table (party column ruled right and bottom, case number, date and the title in bold capitals), no page number; roman pages for the contents and the authorities, arabic from 1 in the body; headings level 1 centred and bold capitals, level 2 to 4 with the labels A., 1., a. hanging; body double spaced (27.6 pt pitch, measured on the PDF) with a 0.5 in first-line indent; block quotations single spaced and indented; footnotes at 10 pt; lists numbered 1) and 2); signature block with "BY: /s/" for each signer; certification of service on its own block, flush, with the signer at right; "passim" for an authority on seven or more pages.
+- Differs from typst: the TOC and TOA are written as text (not as Word TOC and TOA fields), with the page numbers of the LibreOffice PDF; Word may paginate a line or two differently and so move a number, and the page numbers are not updated when the document is edited in Word. The TOA page of an authority is found by searching the text of its first 40 characters on each body page (a short form such as "12(b)(6)" is found wherever it appears on a page, which is the same authority in this sample); typst counts the link itself. Body pages 1 to 4 break where typst's do; from body page 5 the docx runs about two lines behind typst (the Gillam quotation ends on body page 5 in the docx, on page 4 in typst). Text sits lower in exact-spaced lines than in typst (see the complaint's Engines note). The oral-argument legend is written in the cover footer (CTD-FIRST-003); the sample has none, so the legend path was not exercised.
+- Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML; every style it uses is defined in `reference.docx`.
+
+Gate 2 review of the docx PDF (11 of 11 pages rendered at 60 dpi and viewed on 2026-10-15; typst pages viewed alongside):
+
+| Page | What it is | Finding |
+|---|---|---|
+| 1 (cover) | Court, caption table, title in capitals; no page number | OK |
+| 2 (i) | TABLE OF CONTENTS: level 1 entries, A. and B. with wrapped titles, page numbers from the PDF | OK |
+| 3 (ii) | TABLE OF AUTHORITIES on one page: Cases, Statutes, Federal Rules, Regulations | OK. Long entries wrap before the page numbers. |
+| 4 (1) | Opening paragraph; PRELIMINARY STATEMENT; items 1) to 3) | OK |
+| 5 (2) | Item 4); LEGAL STANDARDS | OK |
+| 6 (3) | Quotation (Iqbal); Dismissal under 12(b)(1); ARGUMENT; heading A. | OK |
+| 7 (4) | Text of A; the Gillam block quotation; footnote 1 | OK |
+| 8 (5) | Rest of A; footnote 2; heading B. | OK |
+| 9 (6) | Rest of B; Griffin and Dobronski; "For these reasons" | OK |
+| 10 (7) | CONCLUSION; "Dated"; Respectfully submitted; both signers | OK |
+| 11 (8) | CERTIFICATION OF SERVICE; text; signer at right | OK. Heading, text and signer kept together. |
+
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and a doc-type folder has neither (the court folder has `court.json` but no `checks.yaml` or `rules.md` yet), so the gates did not run and `samples/.check-docx.txt` was not written. Gate 0 was checked by hand: every word of the sample is in the PDF except the `--` dash spelling and two words split by a line-end hyphen.

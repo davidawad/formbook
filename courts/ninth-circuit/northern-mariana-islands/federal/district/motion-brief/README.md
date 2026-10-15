@@ -100,3 +100,15 @@ Not produced by this template: the notice of motion (a separate section of ECF 6
 | 9 | IV.1 end, V. Conclusion, date, signature block, footnote 2 at foot | OK. The signature block is with the conclusion; "Respectfully submitted" and the firm are right-aligned. |
 
 Reviewed pages: 9 of 9.
+
+## Engines
+
+**docx** (`docx/`): `reference.docx` (`docx/build-reference.sh`), `docx/nmid-motion-brief.lua` (cover, table of contents, table of authorities, headings with their labels, lettered items, signature block), and `docx/render.sh`, which runs two passes: pass 1 writes the search index and is converted to PDF to find the page of each heading and each authority; pass 2 writes the docx with those page numbers (it fails if pass 2 paginates differently). Output: `samples/OUTPUT-ipi-motion-to-dismiss-memo.docx` and `.docx.pdf` (10 pages; typst is 9).
+
+- Matches typst: US Letter; the same margins and 25-line grid; EB Garamond 12 pt, exact 24 pt double spacing; the cover (counsel, court title, caption with the hearing lines, lead-in); a page break before the table of contents and the table of authorities; heading labels I., 1., a., (1) with hanging indents; footnotes in 12 pt single spacing; signature block; footer.
+- Differs: the table of contents and table of authorities are written as text with dot leaders and page numbers from the first pass, not as TOC/TOA fields (LibreOffice does not honour TA/TOA fields; Word will not update these, so a field update in Word leaves them as they are); page numbers are LibreOffice's pagination, and Word may place a line differently; the conclusion heading, its paragraph and the signature block are kept together, so page 9 ends with a gap and the conclusion starts page 10 (typst fits them on page 9); the pleading rules and the line-number box are as in the complaint; passim is used for an authority on 7 or more pages.
+- Fonts: as in the complaint, LibreOffice needs the vendored EB Garamond visible.
+- Visual review: 10 of 10 pages of `OUTPUT-ipi-motion-to-dismiss-memo.docx.pdf` rendered at 60 dpi and viewed (2026-10-15). Open defects: none. Page 3 (table of authorities) was viewed after the page-number fix; the other pages' text is identical to the reviewed render.
+- `tools/check.sh` cannot run on this folder (same reason as the complaint). No `.check-docx.txt` stamp is written.
+
+BLOCKED: check.sh (all gates, docx): `tools/check.sh <doc-type dir> --engine docx` exits 2 on a doc-type folder (no `court.json` / `checks.yaml` / `rules.md` there); the docx was checked by the visual review above, not by the gates.

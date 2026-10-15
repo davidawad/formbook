@@ -86,3 +86,29 @@ Not produced by this template (separate filings, not part of the complaint): the
 | 9 | Paragraph 54 end; FOURTH and FIFTH CAUSES OF ACTION; paragraphs 55 to 61 | OK. |
 | 10 | Paragraphs 62 to 66; PRAYER FOR RELIEF with the wherefore clause (unnumbered) and items (a) to (f) | OK. Item (d) ends "by the" and (e) begins "Court", as filed. |
 | 11 | Items (g) and (h); DEMAND FOR JURY TRIAL; "Dated" and signature block (/s/, name with bar number, firm, address, phone, e-mail) | OK. Page number shown. |
+
+## Engines
+
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (EB Garamond 12 pt, exact 27.6 pt double-spaced lines, 1 in margins, centred page number from page 2); `docx/complaint.lua` writes the cover (court, caption table with its rules), the numbered paragraphs (typed numbers), the lettered and bulleted lists and the signature block. Output: `samples/OUTPUT-forzano-complaint.docx` and `.docx.pdf` (LibreOffice 26.8, `pdffonts`: EBGaramond Regular and Bold, embedded), 11 pages, the same count as the typst render.
+
+- Matches the typst output: US Letter; 1 in margins; EB Garamond 12 pt; every body line on the 27.6 pt pitch (measured on the PDF: 27.6 pt between body lines, as in typst); no widow control, as in typst, so the page breaks fall where typst's do; caption with the party column ruled right and bottom and the case number, date, title and jury demand at right; unnumbered lead-in, prayer and jury demand; lettered prayer items (a) to (h); bullets in paragraph 19; signature block at the right with "Dated" at left; no page number on page 1.
+- Differs from typst: in Word and LibreOffice an exact-spaced line puts its text lower in the line box than typst does, so the first line of each page (and the court title) sits about 14 pt lower; the paragraph pitch is unchanged. The paragraph number is followed by a tab stop at 1 in, where typst's text position follows the width of the number; the sample's numbers are one or two digits, so the text starts at the same place. Table borders are drawn by Word and by LibreOffice slightly differently; judged on the LibreOffice PDF.
+- Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML; every style it uses is defined in `reference.docx`; `[unnumbered]` markers are removed from the text.
+
+Gate 2 review of the docx PDF (11 of 11 pages rendered at 60 dpi and viewed on 2026-10-15; typst pages viewed alongside):
+
+| Page | What it is | Finding |
+|---|---|---|
+| 1 | Court title, caption (parties, Case No., Date, title), lead-in, paragraphs 1 to 5 | OK. Caption rules right and bottom. Text sits lower in the lines than typst (see above). |
+| 2 | Paragraphs 6 to 15; PARTIES, FACTUAL ALLEGATIONS headings | OK |
+| 3 | Paragraphs 16 to 19 and the first repair bullets | OK |
+| 4 | Repair bullets continue | OK |
+| 5 | Paragraphs 20 to 32; FIRST CAUSE OF ACTION heading and sub-heading | OK |
+| 6 | Paragraphs 31 to 37; the quoted statute as item (a) | OK |
+| 7 | Paragraphs 38 to 44; SECOND CAUSE OF ACTION heading | OK |
+| 8 | Paragraphs 45 to 52; THIRD CAUSE OF ACTION heading | OK |
+| 9 | Paragraphs 53 to 59; FOURTH CAUSE OF ACTION heading | OK |
+| 10 | Paragraphs 60 to 66; FIFTH CAUSE OF ACTION; PRAYER FOR RELIEF with (a) and (b) | OK |
+| 11 | Prayer items (c) to (h); DEMAND FOR JURY TRIAL; "Dated" and the signature block | OK. Page number shown. |
+
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and a doc-type folder has neither (the court folder has `court.json` but no `checks.yaml` or `rules.md` yet), so the gates did not run and `samples/.check-docx.txt` was not written. Gate 0 was checked by hand: every word of the sample is in the PDF except the `[unnumbered]` markers, which are not text.

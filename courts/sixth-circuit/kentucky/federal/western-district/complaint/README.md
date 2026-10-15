@@ -69,3 +69,29 @@ Not verified in this pass, and not asserted by the template: Fed. R. Civ. P. 8(a
 - Page 10: the signature block (Respectfully submitted, By: /s/, attorney lines, "Attorneys for Plaintiffs") does not split; DEMAND FOR JURY TRIAL heading centered; demand sentence; second signature block. Pass.
 
 Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Engines
+
+**docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh reference.docx`), `kywd-complaint.lua` (court title, caption table, paragraph numbers, signature blocks, jury demand), `render.sh` (pandoc, then the reference's styles, page setup and footer are restored into the output). Render: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-lott-complaint.md`. It writes `samples/OUTPUT-lott-complaint.docx` and then stops at the soffice step (see BLOCKED).
+
+What matches typst (set in `reference.docx`):
+- Letter paper, 1 in margins on all four sides (LR 5.2(a)).
+- EB Garamond 12 pt, the only face (vendored). Measured in the typst render: `pdffonts` shows EBGaramond Regular and Bold, embedded; 10 pages.
+- Body: exact 24 pt line pitch. Measured on the typst render with `pdftotext -bbox-layout`: 24.0 pt between body lines, and no extra gap between paragraphs.
+- Single lines (caption, title, court title, signature): exact 13.8 pt. Measured on the typst caption rows and signature lines.
+- Paragraph numbers 1., 2., ... with the text at 0.5 in after the number (tab stop at 1620 twips, from the typst placement of the number). Prayer paragraph "WHEREFORE" unnumbered.
+- Signature block at 3.25 in (4680 twips). Jury demand heading and its own signature block.
+- Footer: bare page number, centered, 12 pt, `PAGE` field with cached result.
+- Headings: level 1 centered bold caps (`caps`), level 2 bold left, level 3 bold italic left; keep with next.
+
+What differs from typst or is not verified:
+- Heading spacing: `before` and `after` are 6 pt in the reference. Not measured against the typst headings (typst uses its own above and below spacing); the difference is a few points per heading, and it is not verified.
+- Prayer list (markdown list): pandoc's own list numbering, so the hanging indent is pandoc's, not the 0.5 in of the typst template. Not measured.
+- Certificate and jury-demand text: plain text (inline markup in them is dropped).
+- Pagination: not measured (there is no LibreOffice PDF of the docx). The page count of the docx is unknown; the typst render is 10 pages.
+
+docx BLOCKED items (no pass claimed):
+- `docx.pdf` and page review (Gates 0 to 3 and the per-page Gate 2 review): soffice is not installed on this box (`/opt/homebrew/bin/soffice: not found`). No LibreOffice PDF exists, so pages reviewed = 0.
+- Open-in-Word and open-in-LibreOffice check (no repair prompt): not done; neither application is on this box. The package check passed: a valid zip, no duplicate entries, every XML part well formed.
+- TOC, TOA and cross-reference fields: none in this template, so no field-update issue (docs/DOCX.md).
+- Pleading line numbers and vertical rules: not required by LR 5.2(a) and not in the typst template; no `w:lnNumType` or page borders are set.
