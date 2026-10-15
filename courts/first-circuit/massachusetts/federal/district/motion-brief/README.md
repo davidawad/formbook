@@ -87,3 +87,13 @@ Defects found in review and fixed (all in `mad-motion-brief.typ`):
 11. **Page 6 gap.** Page 6 ends about a third of the way up the page; Argument II moves to page 7 with its heading. Seen in the fonts pass; not a font effect, and the cause was not investigated.
 
 [Formbook index](../../../../../../README.md) | [District Court, D. Mass.](../README.md)
+
+## Engines
+
+docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond only, 13 pt, 1 in margins, US Letter, page number in the footer, footnotes at 12 pt single). `motion-brief.lua` builds the caption (a two-cell table with the party rule), the court title, the memorandum title, the DATED line and the signature block, and the certificates of service and consultation (when the sample has them), as Word paragraphs in named styles; body paragraphs, headings, quotations and footnotes are pandoc's own, mapped to the reference's styles. Checked on the LibreOffice PDF `samples/OUTPUT-smith-college-motion-to-dismiss.docx.pdf` (every page viewed at 60 dpi, against the typst render). Word was not checked; the `.docx` was opened with LibreOffice only.
+
+Matches the typst form: EB Garamond only; body lines at a 24 pt pitch; headings at the typst sizes (18 pt level 1, 15.5 pt level 2, 13 pt level 3, bold); quotations single-spaced and indented 0.5 in each side; footnotes 12 pt single; the DATED line, the signature block and the certificates kept together; footer page number centered at 12 pt. Justified text is hyphenated (`autoHyphenation`), as typst hyphenates.
+
+Differs: LibreOffice sets the memorandum on 11 pages, typst on 12. The typst render leaves about a quarter of page 4 and nearly half of page 6 blank (its keep-together blocks), which the docx does not; the lines per full page match. Certificate of service: typst puts it on its own page, LibreOffice keeps it with the signature block on page 11.
+
+BLOCKED: page count (tier 1): docx 11 pages (LibreOffice) vs typst 12. Typst's keep-together blocks leave large gaps at the foot of pages 4 and 6 that the docx does not have; the cause is judged, not isolated, so the page count is not reproduced.

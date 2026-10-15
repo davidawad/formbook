@@ -79,3 +79,13 @@ Defects found in review and fixed (all in `mad-complaint.typ`):
 10. **Length.** The sample is the whole 18-page filing; the render is 14 pages, inside the 8 to 14 page target of the brief.
 
 [Formbook index](../../../../../../README.md) | [District Court, D. Mass.](../README.md)
+
+## Engines
+
+docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond only, 13 pt, 1 in margins, US Letter, page number in the footer). `complaint.lua` builds the caption (a two-cell table with the party rule), the title and the signature block as Word paragraphs in named styles, the prayer letters (A to Q) and the jury demand. `render.sh` runs pandoc and adds the Word numbering for the allegations (pandoc drops numbering it does not write). Checked on the LibreOffice PDF `samples/OUTPUT-door-systems-complaint.docx.pdf` (every page viewed at 60 dpi, against the typst render). Word was not checked; the `.docx` was opened with LibreOffice only.
+
+Matches the typst form: EB Garamond only (no fallback face); body lines at a 24 pt pitch; headings at the typst sizes (18 pt level 1, 15.5 pt level 2, bold caps); single lines at 14.3 pt; numbered paragraphs at 0.5 in with the text after the number; prayer letters hanging; jury demand and signature block kept together; footer page number centered at 12 pt. Justified text is hyphenated (`autoHyphenation`), as typst hyphenates. Like the typst render, no space is added between paragraphs or around headings.
+
+Differs: LibreOffice sets the body on 15 pages, typst on 14 (the last page holds only the jury demand and the signature block). The line pitch and the lines per full page match; the extra page builds up over the body (line breaks, hyphenation and the caption and prayer spacing are LibreOffice's, not typst's). Not closed: the cause was not isolated.
+
+BLOCKED: page count (tier 1): docx 15 pages (LibreOffice) vs typst 14; the typst form is not reproduced page for page. A Word render may differ again.
