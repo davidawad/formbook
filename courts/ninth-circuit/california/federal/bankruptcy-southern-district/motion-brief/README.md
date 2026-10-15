@@ -81,3 +81,13 @@ Every page rendered at 60 dpi and looked at.
 5. **Font.** EB Garamond at 12 pt, vendored in `fonts/`. A font choice, not a rule.
 6. **Case names are roman.** The text layer has no italic markup; the template italicizes `*...*` if a sample carries it (not used).
 7. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. Render, overlay and page review were run instead.
+
+## Engines
+
+**docx** (`docx/`): `sh tools/render.sh --engine docx courts/ninth-circuit/california/federal/bankruptcy-southern-district/motion-brief samples/INPUT-stika-alegria-motion-to-dismiss.md` writes `samples/OUTPUT-stika-alegria-motion-to-dismiss.docx` and `.docx.pdf` (LibreOffice PDF, 5 pages, EB Garamond embedded). Built by `docx/build-reference.sh` (reference.docx), `docx/render.sh` (sets the footer from the frontmatter) and `docx/casb-motion-brief.lua`.
+
+- Matches the typst output in the mandated form: EB Garamond 12 pt, 24 pt line pitch, 28 line numbers on the grid, pleading rules, the three-line footer, the counsel block, the caption, first-line indents, headings numbered I., A. as in the typst template, the signature block.
+- Differs: (1) the numbers and rules are built as in the adversary folder (framed header, page borders). (2) A single-spaced block quotation has no grid rounding (typst rounds it to whole numbered lines); the text after a quotation can sit half a line off the numbers (seen on page 4). (3) The heading chain (POINTS AND AUTHORITIES, then the first heading, then its paragraph) moves to page 2 as a unit, leaving lines 22 to 28 of page 1 blank, as in typst. Checked with LibreOffice only.
+- `toc: true` is not built by this engine: the filter stops with an error. BLOCKED: TOC and TOA checks (no table of contents or authorities is produced; the sample has `toc: false`).
+- No typst `OUTPUT-stika-alegria-motion-to-dismiss.pdf` exists in `samples/` in this snapshot, so there is no typst page to compare against.
+- BLOCKED: `tools/check.sh <this folder> --engine docx` exits 2 (`court.json` and `checks.yaml` are missing from this doc-type folder; not created). No gate result is claimed. Gate 0 checked by hand for word presence only (every body word is in the PDF text).
