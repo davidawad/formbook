@@ -20,7 +20,7 @@
 #let footnotes-allowed = false              // Part 1000: "A brief shall contain no footnotes" (secondary source; see README).
 #let required-sections = (                  // 22 NYCRR 1250.8(b)(3)-(5), in this order (regexes on lowercased titles).
   "^statement of (the )?questions",
-  "^statement of (the )?(nature of the )?case",
+  "^statement of (the )?(nature of the )?(case|facts)",  // exemplar heading: "STATEMENT OF FACTS" (see exemplars/SOURCE.md)
   "^argument$",
   "^conclusion$",
 )
@@ -322,11 +322,16 @@
   cover(meta)
   pagebreak()
 
-  set page(numbering: "1", number-align: center + bottom)
+  // Front matter is numbered in lowercase roman from i (TOC, TOA); the body restarts at 1.
+  // The exemplar settles this (see exemplars/SOURCE.md, "What the exemplar shows").
+  counter(page).update(1)
+  set page(numbering: "i", number-align: center + bottom)
   toc-section()
   pagebreak()
   toa-section(authorities)
   pagebreak()
+  counter(page).update(1)
+  set page(numbering: "1", number-align: center + bottom)
 
   // Body: the sample's own sections (cmarker renders the markdown). The conclusion is set in
   // one unbreakable block with the signature, so the signature never stands alone on a page.
