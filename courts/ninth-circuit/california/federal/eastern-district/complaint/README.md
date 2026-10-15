@@ -7,7 +7,8 @@ Folder: `courts/ninth-circuit/california/federal/eastern-district/complaint/` (s
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-morgan-brothers-1-26-cv-07747-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-morgan-complaint.md`: caption, paragraphs 1 to 35 (pages 1 to 11 of the filing), the prayer (1 to 12), signature, jury demand. Paragraphs 36 to 85 and Counts 1 to 8 are not transcribed (see Known gaps) |
-| render | ok: `samples/OUTPUT-morgan-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this folder> samples/INPUT-morgan-complaint.md`) |
+| typeface | face required: none (no E.D. Cal. local rule or Fed. R. Civ. P. 10 names a face). Filed exemplar is Times New Roman, which is not a requirement. Font: **EB Garamond** (kept; `docs/FONTS.md` "No face named"). Metric-compatible: n/a. Visual only: EB Garamond is not Times. |
+| render | ok: `samples/OUTPUT-morgan-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, EBGaramond-Bold embedded), no warnings (`sh tools/render.sh <this folder> samples/INPUT-morgan-complaint.md`) |
 | overlay | ok: `samples/OVERLAY-morgan-complaint.pdf` and `samples/OVERLAY-morgan-complaint.txt` (`sh tools/overlay.sh <this folder> morgan-complaint`) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; pages 1 to 10 were viewed before a footer-title and signature-line fix, and that fix is confined to the footer text and the signature block, which pages 11 and 12 show in their final form) |
 
