@@ -97,6 +97,28 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-
 
 Reviewed pages: 6 of 6.
 
+## Engines
+
+| Engine | Result here | Output |
+|---|---|---|
+| typst (primary, `typst/`) | unchanged by this work | `samples/OUTPUT-fletcher-25-05046.pdf` |
+| docx (`docx/`) | `.docx` built and XML-checked; `.docx.pdf` **not produced** (no LibreOffice in this box), so no page was rendered or reviewed | `samples/OUTPUT-fletcher-25-05046.docx` |
+
+`docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference: EB Garamond 13 pt; body text 1.5 spaced (exact 22.4 pt, the typst pitch); half-inch first-line indent; footnotes 11 pt; letter page, 1-inch margins; centered 11 pt page number. `docx/ganb-adversary-complaint.lua` builds the first page (caption as a borderless table: 3.4 in, 0.3 in ")" column, the rest; 0.4 in gap for the filing stamp; rule; title), numbers the allegations and letters the prayer as typed text (number at ½ in, text at 0.8 in), and builds the signature and certificate blocks in the right half of the page, as the typst template does.
+
+- **Matches (by construction, from the typst parameters):** font, size, line pitch, margins, indent, caption columns, stamp gap, page-number footer, certificate placement.
+- **Differs:** the docx has not been paginated or viewed, so page count and line breaks are unknown. Word and LibreOffice may break lines differently. The title is set with the All Caps property, so "523(a)(2)(A)" stays in the source text; the typst template's `upper()` turns it into "523(A)(2)(A)" (a typst-side defect, not changed here).
+- **docx BLOCKED** (Gate 0 and Gate 1 are measured on the `.docx.pdf`; `docs/DOCX.md`):
+  - BLOCKED: GANB-FORM-001: the `.docx.pdf` cannot be made in this box (conda-forge has no `libreoffice`, and there is no root for a system install), so the stamp-area measurement cannot run.
+  - BLOCKED: GANB-FORM-002: as above (font and size of the PDF).
+  - BLOCKED: GANB-FORM-003: as above (line pitch of the PDF).
+  - BLOCKED: GANB-FORM-005: as above (page-number footer on the PDF).
+  - BLOCKED: GANB-SIG-001: as above (counsel block on the PDF).
+  - BLOCKED: GANB-SIG-002: as above (certificate on the PDF).
+  - BLOCKED: GANB-PRAY-001: as above (lettered prayer on the PDF).
+  - BLOCKED: GANB-RULE-001: as above (caption layout on the PDF).
+  - BLOCKED: GANB-RULE-004: as above (caption and title on the PDF).
+
 ## Known gaps and open choices
 
 1. **Local rule text is secondary.** BLR 5005-1 (format) is read from a search-result excerpt of courtrules.net; the fetch tool and curl return HTTP 403 for that site, and the court's 2019 PDF returns an error page. Official text not checked. **Needs a check of the current BLR 5005-1 against the court's PDF before this template is called complete.**

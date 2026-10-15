@@ -7,6 +7,18 @@ Doc-type folder for the adversary complaint in the United States Bankruptcy Cour
 - Overlay: `samples/OVERLAY-southeastern-stud.pdf` and `samples/OVERLAY-southeastern-stud.txt`.
 - Render: `sh tools/render.sh <this-dir> samples/INPUT-southeastern-stud.md`. Overlay: `sh tools/overlay.sh <this-dir> southeastern-stud`.
 
+## Engines
+
+- **typst** (primary): `typst/`, as above.
+- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`) and `docx/almb-adversary-complaint.lua` (the court title, caption, title, consent block and signature block; the body stays pandoc's). `sh tools/render.sh --engine docx <this-dir> samples/INPUT-southeastern-stud.md` writes `samples/OUTPUT-southeastern-stud.docx`, then stops: `soffice` is not on the build box, so no `samples/OUTPUT-southeastern-stud.docx.pdf` exists.
+- **Matches the typst form** (the reference styles and filter, checked in the `.docx` XML and its text, not by eye): letter with 1-inch margins; EB Garamond 13 pt in every style; body double-spaced at exactly 24 pt with a 0.5 in first-line indent; the caption as a table with a boxed left column and the case number and blank adversary number at right; centered bold level-1 headings in caps; the consent block under the caption; numbered allegations 1 to 33 keep the numbers the markdown gives; the prayer kept with the signature block; the signature block single-spaced and unbreakable; a centered "-N-" page number at 11 pt in the footer.
+- **Differs or is unverified**: (a) no page of the docx has been rendered or viewed, so line breaks, page count, caption box spacing and footer position are not checked against the typst pages; Word and LibreOffice may paginate differently. (b) The blank adversary number is underlined non-breaking spaces, not a drawn line. (c) The numbered allegations are literal numbers in ordinary paragraphs, not Word list numbering. (d) The core document title is empty: the frontmatter is cleared so pandoc does not print a Title paragraph above the caption.
+- **docx BLOCKED** (see `docs/DOCX.md`):
+  - `tools/check.sh --engine docx`, Gates 0 and 1 on the `.docx.pdf`: BLOCKED. `soffice` is not installed and conda-forge has no LibreOffice package. The `.docx` passes the render step's zip and XML checks; the PDF conversion does not run.
+  - Gate 2 on the docx: BLOCKED, same cause. `pages_reviewed=0`.
+  - Opening in LibreOffice and Word without a repair prompt: not performed (neither is installed).
+  - `tools/check.sh` for any engine: BLOCKED for this court. It needs `court.json` and `checks.yaml`, and this court has neither yet.
+
 ## Rules (requirement IDs)
 
 Verified 2026-10-14 from the primary text. Kind: **M** mandated by a rule, **C** convention, **A** author responsibility.

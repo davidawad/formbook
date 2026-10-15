@@ -44,3 +44,19 @@ Sample: `samples/INPUT-rooks.md` (transcription of the filed motion, 4 pages, Do
 - **Pages reviewed.** All five rendered pages were viewed as PNG (montages at 70 dpi: pages 1-3, then 4-5).
 
 [Court index](../README.md)
+
+## Engines
+
+Word (`docx/`) is built next to the typst template: `docx/reference.docx` (made by `docx/make-reference.sh`), `docx/flnb-motion-brief.lua` (caption, title, signature block after the WHEREFORE paragraph, the word count in the certificate), `docx/render.sh` (pandoc with the reference and the filter; native footnotes). Build: `sh tools/render.sh --engine docx motion-brief samples/INPUT-rooks.md` writes `samples/OUTPUT-rooks.docx` and `OUTPUT-rooks.docx.pdf` (LibreOffice 26.8). Checked on the LibreOffice PDF; Word was not available.
+
+- **Matches typst:** EB Garamond 14 pt; 32.2 pt line pitch for body text; single 15.4 pt lines in the caption and signature block; 1-inch margins; centred page number; caption, title, numbered paragraphs, footnote 1 at the foot of its page, signature block after WHEREFORE, certificates in the same order; signature block at 45% of the text width.
+- **Differs from typst (docx follows the template's intent; typst/ is not changed here):**
+  - Headings: the template centres and bolds levels 2 and 3; the typst render sets them flush left. The docx centres them.
+  - First-line indent: typst does not indent the first paragraph after a heading; the docx indents every body paragraph.
+  - Footnote text: the docx uses 14 pt (the typst render's footnote text measures about 12 pt). Whether LR 5.1 reaches footnotes is not checked here; the docx follows the 14-point reading.
+  - Word count: the certificate says 134 words in the docx and 135 in the typst render. The docx count is what the word processor counts for the source text: pandoc reads the sample's `complaint "in` quote as one word (`complaint”in`), which typst reads as two.
+  - Pagination: the docx runs 5 pages, as the typst render does; the page breaks differ (see the overlay for typst).
+  - Signature block: typst keeps the spaces in `By:    /s/` where the sample has them; pandoc collapses them.
+  - Smart quote: pandoc sets the closing quote in `complaint”in` (the sample's own quote pairing); typst sets it differently. Not patched in the filter (it would be case-specific text).
+- **docx BLOCKED items:** none. No TOC or TOA is in this template. Word itself was not run; the `.docx` is a valid zip of well-formed XML and LibreOffice converts it without a repair prompt.
+- **Pages reviewed (docx.pdf, 5 pages):** every page rendered at 60 dpi and viewed beside the typst page (pages 1 to 5).

@@ -60,6 +60,15 @@ Accepted differences in the Gate-2 sense (one line each, no further action):
 - ACCEPTED page 9: the exemplar's own paragraph numbering puts a lettered item at the head of paragraph 33 ("33. j."). The sample keeps it as filed.
 - ACCEPTED page 14: the service address block starts a new page with the signature block, so the signature is never separated from it.
 
+## Engines
+
+- **typst** (primary): `typst/`, unchanged. Renders `samples/OUTPUT-allstate-complaint.pdf` (14 pages).
+- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`), `docx/almd.lua`. Writes `samples/OUTPUT-allstate-complaint.docx` from `samples/INPUT-allstate-complaint.md`. Needs pandoc, unzip, zip, xmllint and perl on PATH, and EB Garamond installed where the file is opened.
+  - Matches the typst values, set in the reference and the filter: EB Garamond 14 pt; US Letter with 1-inch margins; body lines double-spaced at 32.2 pt exact, 0.5 in first-line indent, 23.1 pt between paragraphs; section heads centered and bold, single-spaced at 16.1 pt; the FRCP 10(a) caption as a borderless three-column table (3.4 in, 0.15 in, 2.95 in); the signature block with "/s/", the service note; a centered page number in the footer. Lettered items ("a.") are kept as typed text, as the typst template prints them.
+  - Differs or unknown: none checked on a rendered page yet (see BLOCKED). Word and LibreOffice may break lines and pages differently from typst; the docx has no line numbers, pleading rules or cover page, because the complaint template has none.
+  - Checked so far: the package unzips, every XML part is well formed, and the text reads back in order (`pandoc -f docx -t plain`).
+  - BLOCKED: `BLOCKED: docx.pdf checks (Gates 0 to 3 on samples/OUTPUT-allstate-complaint.docx.pdf): LibreOffice (soffice) cannot be installed on this box. conda-forge has no LibreOffice package, and apt needs root. So no .docx.pdf was made, no page was rendered to PNG, and tools/check.sh --engine docx cannot run. Pages reviewed: 0 of 14.` The .docx must still be opened in LibreOffice and Word, with the result recorded under `## sample allstate-complaint docx` in a review file (none exists in this folder yet).
+
 ## Known gaps
 
 - Only one complaint is transcribed (Allstate). The First Horizon complaint is an exemplar only.

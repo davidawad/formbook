@@ -79,3 +79,28 @@ Tier-2 findings (OPEN or ACCEPTED): pages 5 and 10 (OPEN). The bottom margin is 
 6. The filed notice's "TO:" cross-reference to LBR 9013-3 predates the 2023 renumbering (see the note under Governing rules). It is kept verbatim.
 7. The filed signature block gives no email address. LBR 9011-1(a) requires one in the current rules. The sample's signature lines are kept as filed, so the rendered block omits an email too.
 8. Pages 5 and 10 (OPEN, above).
+
+## Engines
+
+| Engine | Folder | Output in `samples/` | State |
+|---|---|---|---|
+| typst (primary) | `typst/` | `OUTPUT-mend-motion-to-convert.pdf` | template, unchanged by the docx work; no PDF in the snapshot |
+| latex | `latex/` | none | not built |
+| docx | `docx/` | `OUTPUT-mend-motion-to-convert.docx`, `OUTPUT-mend-motion-to-convert.docx.pdf` | built (below) |
+
+The docx build: `sh tools/render.sh --engine docx motion-brief samples/INPUT-mend-motion-to-convert.md`. It runs `docx/render.sh` (pandoc, the Lua filter `docx/mnb-motion-brief.lua`, and `docx/reference.docx`). `docx/make-reference.sh` rebuilds the reference. The PDF is LibreOffice 26.8.1 with the vendored fonts only.
+
+What matches the typst output: letter paper with 1 in margins; EB Garamond 12 pt, embedded and the only font; body double-spaced at a 24 pt line pitch with a half-inch first-line indent; numbered notice paragraphs and unnumbered memorandum paragraphs; the caption (court title, debtor box with 0.75 pt rules, indented "Debtor.", the centred bold title); the notice's signature block with its firm lines and "By: /s/"; the verification and its signature; the memorandum on a new page with its own caption; block quotations single-spaced and indented; lettered lists; centred bold section headings; a centred page number in the footer. The notice runs 8 pages and the memorandum 3, as in typst (11 in both).
+
+What differs:
+- Heading sizes: Word takes half-points, so 17 pt and 14.5 pt where typst uses 16.8 pt and 14.4 pt.
+- Position: the first body line on a page sits about 11 pt lower than typst's, and the first caption line about 3 to 4 pt lower (LibreOffice places exact-spaced lines lower). The top margin is 1 in in both.
+- Typst's folio collisions on pages 5 and 10 (OPEN above) do not occur here: the folio sits below the last line of each page.
+- Block quotations use the spacing measured on typst's render: 13.8 pt lines, 18 pt before the first quoted paragraph, 1.2 pt between quoted paragraphs. The quoted text is indented 0.67 in on each side (typst: 0.5 in plus the quote's own indent).
+- Footnotes: none in this template or sample. Footnote text is set to 10 pt (typst's default measured 10.2 pt); its line spacing is not checked.
+
+docx BLOCKED items:
+- The docx gates do not run yet: this court has no `rules.md` or `checks.yaml`, so `tools/check.sh --engine docx` has no checks to run. Nothing is stamped.
+- Word: not opened (no Word on this box). The renderer checks the zip and the XML parts; LibreOffice converts the file without a repair step.
+
+Page review (docx): all 11 pages of `OUTPUT-mend-motion-to-convert.docx.pdf` were rendered at 60 dpi and viewed against the typst render. No page has an open defect that is not in the list above.

@@ -84,3 +84,26 @@ The word-overlap figures are 50 to 79 percent. The low figures come from differe
 8. **Footnotes.** None in the sample (the filed complaint has none).
 9. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
 10. **Local rules version.** The rules PDF is dated "Effective August 1, 2015". Later amendments, and any judge's standing order, were not checked.
+
+## Engines
+
+The typst template is the reference. The docx engine is `docx/reference.docx` (built by `docx/make-reference.sh`) with the Lua filter `docx/alsd-complaint.lua`; it renders with `sh tools/render.sh --engine docx <this folder> samples/INPUT-frankenmuth-complaint.md`, which writes `samples/OUTPUT-frankenmuth-complaint.docx` and `samples/OUTPUT-frankenmuth-complaint.docx.pdf` (LibreOffice 26.8.0.3 converts the file; 11 pages, the same count as the typst render). The fonts must be installed for LibreOffice: EB Garamond from `fonts/eb-garamond/`; `pdffonts` shows only the three EB Garamond faces.
+
+| Element | Typst | DOCX |
+|---|---|---|
+| Paper, margins, font, size | Letter, 1 in, EB Garamond 12 pt | same (in `reference.docx`) |
+| Body spacing | 24 pt pitch | exact 24 pt |
+| Caption and cover | a grid with a ")" column; "Civil Action No." on the middle row | a borderless table with the same rows and columns |
+| Numbered allegations | number at 0.5 in, text after a 0.2 in gap | number at 0.5 in, tab to 1 in |
+| Headings | 1.4 em (level 1), 1.2 em (level 2), 1 em bold italic (level 3) | 17 pt, 14.5 pt, 12 pt bold italic (the same sizes, rounded to half points) |
+| Lettered lists, block quotes, signature block | (a) at 0.5 in, text at 0.9 in; single-spaced quotes indented 0.5 in both sides; signature at 3.0 in | the same measures |
+| Page numbers | centered, bottom margin | centered, bottom margin (a PAGE field) |
+
+What differs:
+
+- Line breaks: a few lines break a word earlier or later than the typst render (page 5 and others), so text is not in the same place on every line. Each page is the same grid.
+- The first line of text on page 1 sits about 3 pt lower in the DOCX.
+- The numbers of the allegations are followed by a tab, so the text of a numbered paragraph starts about 0.15 in further right than in the typst render.
+- The signature block is alone on the last page in both engines (open item 3 above).
+
+DOCX BLOCKED items: none. This folder has no `checks.yaml`, so `tools/check.sh --engine docx` does not run here; the docx PDF was reviewed page by page instead (every page of `OUTPUT-frankenmuth-complaint.docx.pdf`, against the typst render). The `.docx` was converted by LibreOffice without error but was not opened in Microsoft Word, so the Word repair check is not done.

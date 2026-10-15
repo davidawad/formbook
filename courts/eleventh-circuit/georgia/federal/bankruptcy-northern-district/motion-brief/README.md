@@ -104,6 +104,29 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-
 
 Reviewed pages: 7 of 7.
 
+## Engines
+
+| Engine | Result here | Output |
+|---|---|---|
+| typst (primary, `typst/`) | unchanged by this work | `samples/OUTPUT-kapitus-23-02003.pdf` |
+| docx (`docx/`) | `.docx` built and XML-checked; `.docx.pdf` **not produced** (no LibreOffice in this box), so no page was rendered or reviewed | `samples/OUTPUT-kapitus-23-02003.docx` |
+
+`docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference: EB Garamond 13 pt; body text 1.5 spaced (exact 22.4 pt); half-inch first-line indent; block quotations single-spaced and indented ½ in on each side; footnotes 11 pt; letter page, 1-inch margins; centered 11 pt page number. `docx/ganb-motion-brief.lua` builds the first page (caption as a borderless table: 3.4 in, 0.3 in ")" column, the rest; 0.4 in gap for the filing stamp; rule; title), passes the body through as written (no paragraph numbers, as the typst template), and builds the signature and certificate blocks in the right half of the page. Certificate text keeps the body first-line indent, as the typst template does.
+
+- **Matches (by construction, from the typst parameters):** font, size, line pitch, margins, indent, caption columns, stamp gap, page-number footer, block quotations, certificate placement.
+- **Differs:** the docx has not been paginated or viewed, so page count and line breaks are unknown; Word and LibreOffice may break lines differently. The sample has no footnotes or block quotations, so those styles are set from the template but not exercised. The title is set with the All Caps property, so "523(a)" stays in the source text; the typst template's `upper()` would turn it into "523(A)".
+- **docx BLOCKED** (Gate 0 and Gate 1 are measured on the `.docx.pdf`; `docs/DOCX.md`). The `.docx.pdf` cannot be made in this box (conda-forge has no `libreoffice`; no root), so every row below is BLOCKED until a box with LibreOffice runs the check:
+  - BLOCKED: GANB-FORM-001: stamp-area measurement on the PDF cannot run.
+  - BLOCKED: GANB-FORM-002: font and size on the PDF cannot be checked.
+  - BLOCKED: GANB-FORM-003: line pitch on the PDF cannot be checked.
+  - BLOCKED: GANB-FORM-004: margins on the PDF cannot be checked.
+  - BLOCKED: GANB-FORM-005: page-number footer on the PDF cannot be checked.
+  - BLOCKED: GANB-SIG-001: counsel block on the PDF cannot be checked.
+  - BLOCKED: GANB-CONT-001: memorandum heading on the PDF cannot be checked.
+  - BLOCKED: GANB-CONT-002: certificate of service on the PDF cannot be checked.
+  - BLOCKED: GANB-RULE-001: caption and title on the PDF cannot be checked.
+  - BLOCKED: GANB-RULE-002: caption layout on the PDF cannot be checked.
+
 ## Known gaps and open choices
 
 1. **Local rule text is secondary, not verified against the court's PDF.** BLR 5005-1 and 7007-1 were read through search-result excerpts of courtrules.net. Fetching courtrules.net (both the tool and curl with browser headers) returns HTTP 403, and the court's own 2019 local rules PDF (`ganb.uscourts.gov/sites/default/files/local_rules_effective_9-1-2019.pdf`) returns an error page. The court's current rules may differ from the 2019 text. **Needs someone to check the current BLR 5005-1, 7007-1 and 9013-1 against the court's PDF before this template is called complete.**

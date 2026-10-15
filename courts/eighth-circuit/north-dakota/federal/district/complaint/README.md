@@ -47,6 +47,15 @@ Not produced by this template (separate filings, not part of the complaint, and 
 
 `pdftotext -bbox` on page 2 of the render: lines inside a paragraph are 24.0 pt apart (the baseline pitch), and paragraphs are 24.0 pt apart (each paragraph block carries `below: body-leading`; without it the gap between paragraphs was 7.8 pt). The caption and signature block are single-spaced at about 13.8 pt.
 
+## Engines
+
+| Engine | Status | What matches the typst form | What differs / BLOCKED |
+|---|---|---|---|
+| typst (primary) | as above | the reference | none |
+| docx | `samples/OUTPUT-bitcanary-complaint.docx` and `.docx.pdf` (9 pages, LibreOffice 26.8.1 PDF, EB Garamond embedded per `pdffonts`) | Letter, 1 in margins, EB Garamond 12 pt, body and headings at 24 pt exact (double), caption as a borderless table with the ")" column, numbered allegations, lettered (a), (b) lists, centred PAGE number, signature block kept whole (one unsplittable table row). Checked by rendering all 9 pages to PNG at 60 dpi against the typst pages. | Paragraph flow is LibreOffice's, so page breaks differ from typst (for example, BACKGROUND starts on page 3 in docx, page 2 in typst). Word is not available here: the `.docx` was not opened in Word, so no Word repair-prompt check was run. No gate stamp: `tools/check.sh --engine docx` was not run, because this doc-type folder has no `checks.yaml` or `rules.md` and the gates cannot run here. |
+
+`docx/reference.docx` is built by `docx/make-reference.sh` (pandoc's package, with styles, Letter page setup and footer replaced). The conversion is `docx/ndd-complaint.lua`, applied by `tools/render-docx.sh` with `SOFFICE` pointing at a LibreOffice that can see the vendored fonts (`FONTCONFIG_FILE` naming `fonts/` only). Commands: `sh tools/render.sh --engine docx <complaint-dir> samples/INPUT-bitcanary-complaint.md`.
+
 ## Known gaps and open choices
 
 1. **One exemplar.** Tier 2 asks for two or three filers. The second filer was not collected: the RECAP search turned up Lipps v. City of Fargo (3:26-cv-00294, 35 pages, RECAP PDF found, not downloaded) and Hoefer v. Teigen (1:25-cv-00207, 244 pages, too long). Tier 2 is therefore **not** judged against two filers.

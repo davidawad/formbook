@@ -47,6 +47,15 @@ Primary source: D.N.D. Civil Rules (local rules), "Effective October 6, 2025", h
 
 `pdftotext -bbox` on the render: lines inside a paragraph are 24.0 pt apart, and paragraphs are 24.0 pt apart (each paragraph block carries `below: body-leading`, as in the complaint folder).
 
+## Engines
+
+| Engine | Status | What matches the typst form | What differs / BLOCKED |
+|---|---|---|---|
+| typst (primary) | as above | the reference | none |
+| docx | `samples/OUTPUT-dms-health-motion-to-dismiss.docx` and `.docx.pdf` (10 pages, LibreOffice 26.8.1 PDF, EB Garamond embedded per `pdffonts`; typst is 9) | Letter, 1 in margins, EB Garamond 12 pt, body and headings at 24 pt exact (double), caption as a borderless table with the ")" column, body not numbered, centred PAGE number, headings with the same levels (centred caps, hanging lettered and numbered sub-headings), lettered (a), (b) lists, signature block and certificate of service each kept whole (one unsplittable table row). Checked by rendering all 10 pages to PNG at 60 dpi against the typst pages. | Page breaks are LibreOffice's: the signature block does not fit at the foot of page 8 in docx (it moves to page 9), so the docx runs one page longer than typst. The certificate's text is set as plain text (the sample's certificate has no markdown). Word is not available here: the `.docx` was not opened in Word, so no Word repair-prompt check was run. No gate stamp: `tools/check.sh --engine docx` was not run, because this doc-type folder has no `checks.yaml` or `rules.md`. |
+
+`docx/reference.docx` is built by `docx/make-reference.sh`, and the conversion is `docx/ndd-motion-brief.lua`. The toolchain is as in the complaint's Engines section. Commands: `sh tools/render.sh --engine docx <motion-brief-dir> samples/INPUT-dms-health-motion-to-dismiss.md`.
+
 ## Known gaps and open choices
 
 1. **One exemplar.** Tier 2 asks for two or three filers. The second filer was not collected. Checked and not used: Turtle Mountain v. Jaeger (3:22-cv-00022, ECF 191, a Rule 12(c) memorandum, 21 pages, RECAP PDF); Hoefer v. Teigen (1:25-cv-00207): the motion (ECF 12) has no stored PDF; Christian Employers Alliance v. EEOC (1:25-cv-00007, ECF 52-2): a settlement agreement, not a brief. Tier 2 is therefore **not** judged against two filers.

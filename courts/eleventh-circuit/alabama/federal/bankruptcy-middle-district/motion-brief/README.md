@@ -8,6 +8,18 @@ Doc-type folder for a motion with its grounds in numbered paragraphs (a conteste
 - Overlay: **fail**, not produced. `sh tools/overlay.sh <this-dir> synthetic-stay-motion` exits 1 ("no exemplar pdf in exemplars"). There is nothing to overlay against, so tier 2 cannot be judged.
 - Depth: the sample was extended from the 3-page stub to 5 pages with the structure a motion needs (caption, `#` and `##` headings, numbered runs 1-22, a block quotation, prayer, signature block, certificate on its own page). **Below the 8-14 page target.** The target assumes a real exemplar of that length. No exemplar exists, and padding a synthetic sample with invented text would test nothing.
 
+## Engines
+
+- **typst** (primary): `typst/`, as above.
+- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`) and `docx/almb-motion-brief.lua` (the court title, caption, title, signature block and certificate of service; the body stays pandoc's). `sh tools/render.sh --engine docx <this-dir> samples/INPUT-synthetic-stay-motion.md` writes `samples/OUTPUT-synthetic-stay-motion.docx`, then stops: `soffice` is not on the build box, so no `samples/OUTPUT-synthetic-stay-motion.docx.pdf` exists.
+- **Matches the typst form** (the reference styles and filter, checked in the `.docx` XML and its text, not by eye): letter with 1-inch margins; EB Garamond 13 pt in every style; body double-spaced at exactly 24 pt with a 0.5 in first-line indent; the caption as a table with a boxed left column and the case number and chapter at right, no adversary number; centered bold level-1 headings in caps at 18 pt (the typst heading scale); `##` subheadings bold and left-aligned, kept with the paragraph after; the prayer kept with the signature block; the signature block single-spaced and unbreakable; the certificate of service on its own page; a centered "-N-" page number at 11 pt in the footer.
+- **Differs or is unverified**: (a) no page of the docx has been rendered or viewed, so line breaks, page count, caption box spacing and footer position are not checked against the typst pages; Word and LibreOffice may paginate differently. (b) The block quotation is single-spaced with 0.5 in indents on both sides, set by eye from the typst page; it is not measured. (c) The numbered grounds are literal numbers in ordinary paragraphs, not Word list numbering. (d) The core document title is empty: the frontmatter is cleared so pandoc does not print a Title paragraph above the caption.
+- **docx BLOCKED** (see `docs/DOCX.md`):
+  - `tools/check.sh --engine docx`, Gates 0 and 1 on the `.docx.pdf`: BLOCKED. `soffice` is not installed and conda-forge has no LibreOffice package. The `.docx` passes the render step's zip and XML checks; the PDF conversion does not run.
+  - Gate 2 on the docx: BLOCKED, same cause. `pages_reviewed=0`.
+  - Opening in LibreOffice and Word without a repair prompt: not performed (neither is installed).
+  - `tools/check.sh` for any engine: BLOCKED for this court. It needs `court.json` and `checks.yaml`, and this court has neither yet.
+
 ## Rules (requirement IDs)
 
 Verified 2026-10-14 from the primary text. Kind: **M** mandated by a rule, **C** convention, **A** author responsibility.
