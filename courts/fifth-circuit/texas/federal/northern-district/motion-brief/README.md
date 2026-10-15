@@ -70,3 +70,39 @@ Each page was rendered at 60 dpi and viewed after the last template change.
 - Page 11 (body 8): `Respectfully submitted,`; two signature blocks (`/s/`, name, bar number, firm, address, telephone, email, role). Pass (see gap 5).
 
 Earlier review rounds found and fixed the same defects the complaint had (see the complaint README): the caption and signature lines overlapped (single-spaced stacks needed a gap); the caption's case number wrapped (column widened).
+
+## Engines
+
+| Engine | Folder | Output in `samples/` | State |
+|---|---|---|---|
+| typst (primary) | `typst/` | `OUTPUT-coney-motion-brief.pdf` | the reference (see the review above) |
+| docx | `docx/` | `OUTPUT-coney-motion-brief.docx`, `OUTPUT-coney-motion-brief.docx.pdf` | `.docx` built and valid (zip and XML checks pass); `.docx.pdf` BLOCKED; table page numbers BLOCKED |
+
+The docx is built by pandoc (3.6.4) from `docx/reference.docx` and `docx/txnd-motion-brief.lua`. `docx/render.sh` owns the build: it runs pandoc, then writes the footer's relationship id into the section breaks. `reference.docx` is made by `sh docx/make-reference.sh` from `docx/styles.xml`. Command: `sh tools/render.sh --engine docx <court>/motion-brief samples/INPUT-coney-motion-brief.md`.
+
+Sections: the cover has no page number; the table of contents and the index of authorities are numbered in lower roman from `ii` (as in typst, where the cover is page `i`); the body starts at `1`.
+
+What follows the typst template, by construction (no docx page has been seen, so none of this is a visual claim):
+
+- EB Garamond 12 pt; body double-spaced at an exact 24 pt pitch; 0.5 in first-line indent; letter paper with 1 in margins.
+- Cover: court title on three lines, caption with section marks, title of the brief centered and bold.
+- Headings: level 1 centered bold; level 2 bold with a hanging indent; level 3 bold with a hanging indent. Block quotations single-spaced, indented 0.5 in on both sides. Issues as bullets.
+- Signature blocks at the right half: `Respectfully submitted,` then one block per signer (`/s/`, name, bar number, firm, address, telephone, email, role).
+- Table of contents: a TOC field over the headings, levels 1 to 3.
+- Index of authorities: the frontmatter's list, grouped (Cases, Statutes, Rules), each entry in its own paragraph.
+
+What differs or is not checked:
+
+- The caption wraps a long party name onto two lines; the section mark then sits on the first line only. This is the same in the typst output (checked on page 1 of the typst render), so it is a shared defect of the caption, not a docx one. Not changed here (`typst/` is not in this change).
+- Page numbers in the table of contents and in the index of authorities are not written: BLOCKED (see below). Typst computes them.
+- No "passim" logic in the docx index (typst lists an authority on more than five pages as `passim`).
+- No docx page has been rendered or reviewed; Gate 2 for docx is open.
+
+docx BLOCKED items (`check.sh --engine docx` runs its gates on the `.docx.pdf`):
+
+- `docx.pdf` (LibreOffice render, Gates 0 to 3): BLOCKED. LibreOffice 25.2 could not run on the build box (see the complaint README for the cause). No `.docx.pdf` exists.
+- Gate 2 for docx (every page rendered and reviewed): BLOCKED on the same cause. No docx page was rendered or reviewed (the docx page count is not known).
+- Table of contents page numbers: BLOCKED. The TOC is a field; its cached result lists the headings without numbers. Word and LibreOffice write the numbers only when the field is updated (F9 in Word); the page numbers cannot be computed here without a renderer.
+- Index of authorities page references: BLOCKED. The index lists the authorities without pages; a TOA field would need the same update, and LibreOffice does not honor TA/TOA fields (`docs/DOCX.md`).
+- Opens in Word and LibreOffice without a repair prompt: not checked (no Word here, LibreOffice does not run).
+- Fonts: EB Garamond must be installed on the machine that opens the file, or Word substitutes a face silently (`docs/DOCX.md`).

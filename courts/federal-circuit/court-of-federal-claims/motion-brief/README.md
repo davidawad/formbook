@@ -140,6 +140,23 @@ After fixes 2-4 the re-render was checked by text extraction (pp. 1, 10, and the
 - **Font.** See Decisions: 12 point EB Garamond, kept because the rules name no face; Liberation Serif is vendored but not applied.
 - **Single exemplar.** One filing from one filer. The brief asks for one exemplar per doc type; for tier-2 conventions the usual practice is two or three filers, which this box did not find (CourtListener's motion PDFs for uscfc are mostly opinions; docket pages and docket-entry API need auth).
 
+## Engines
+
+The docx engine is `docx/`: `make-reference.sh` builds `reference.docx` (EB Garamond 12 pt, 26.46 pt exact double spacing as the typst render measures it, 15.6 pt single lines, headings, footnotes, letter page with 1-inch margins); `uscfc-motion-brief.lua` adds the cover, the table of contents and table of authorities, the heading numbers, the signature block and the certificate; `render.sh` owns the build (see below). Render: `sh tools/render.sh --engine docx courts/federal-circuit/court-of-federal-claims/motion-brief samples/INPUT-oracle-memorandum.md` writes `samples/OUTPUT-oracle-memorandum.docx` and its LibreOffice PDF (LibreOffice 26.8.1; the render box links `fonts/eb-garamond` into fontconfig, see docs/DOCX.md).
+
+| Matches the typst render | Differs from it |
+|---|---|
+| Three sections: the cover with no page number, the table of contents and authorities in roman (i, ii), the body in arabic from 1 (RCFC 5.5(c)(6)); the certificate of service is in the body and counts toward the page limit | Body pagination: the docx body is 10 pages, the same as typst, but some lines break differently, so some headings and authority pages differ by one page (typst lists Statement of Facts B on p. 5, the docx on p. 6; sub-heading "1." under Argument A on p. 8 in typst, p. 9 in the docx). The docx numbers are the docx's own. |
+| Caption with BID PROTEST, the parties and their roles, case number and judge; title; counsel side by side; RCFC 5.5(f) contact lines | The cover is laid out with fixed spacing; typst chooses the spacing that fits one page by measuring it. Both fit one page here. |
+| Table of contents with dot leaders; table of authorities grouped Cases, Statutes, Regulations, Rules, Other, with "passim" at seven or more pages | Authority pages are found by the start of each link's text (its first 30 characters) on the body pages; a citation is counted on the page where it starts. Typst finds the links in its own layout. |
+| Headings numbered I., A., 1., a., (1) with hanging indents; the labels are typed text, as the typst template generates them | Word's own heading numbering is not used, so the labels are not list numbers in Word's navigation pane. |
+| Body double spaced, left aligned, first-line indent 0.5 in; block quotes and footnotes single spaced at 12 pt | |
+| Last body paragraph kept with the signature block; signature and contact lines (RCFC 5.5(e)-(f)) | |
+
+**How the page numbers are made.** `render.sh` builds the document once without numbers, reads the PDF to find the body page of each heading and of each authority link, then builds it again with those numbers and checks that measuring that PDF gives the same numbers (at most three builds). The body length is checked against RCFC 5.4(b)(1): 40 pages, or 50 for a cross-motion. Word may paginate slightly differently from LibreOffice; the numbers are LibreOffice's.
+
+**docx BLOCKED:** `tools/check.sh <court> --engine docx` cannot run for this court yet: the court root has no `court.json`, `checks.yaml` or `rules.md`, so Gates 1 and 2 have nothing to check against. This is a court-level gap, not a docx check failure, and it is not fixed in this folder. The gates themselves were not run. Pages reviewed: all 13 pages of the docx PDF, rasterized at 60 dpi and viewed, 2026-10-15.
+
 ## Search log
 
 - CourtListener API v4, `type=rd`, `court=uscfc`, queries for "motion for judgment on the administrative record", "motion to dismiss", "motion for summary judgment": results are overwhelmingly opinions; no motion PDF with an available file other than the Oracle filing was found. Rate limit: 5 requests per minute.

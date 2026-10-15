@@ -76,3 +76,29 @@ Layout defects found during review and fixed in the template (not in the sample)
 ## Review limits
 
 The page review checks the layout of the render. Text fidelity to the exemplar rests on the transcription and on the overlay's word pairing (70–90% on text pages). The filed page images were not compared pixel by pixel, and the figure pages (paragraphs 15 and 17) are noted, not reproduced.
+
+## Engines
+
+Two engines are built from the same sample: typst (primary, `typst/`) and docx (`docx/`). This doc type has no latex template yet.
+
+**docx** (`docx/`): `docx/reference.docx` (rebuilt by `sh docx/make-reference.sh`), the Lua filter `docx/msnd-complaint.lua`, and `docx/render.sh` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> samples/INPUT-haas-complaint.md`; it writes `samples/OUTPUT-haas-complaint.docx` and `samples/OUTPUT-haas-complaint.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`).
+
+What matches typst, checked on the LibreOffice PDF:
+
+- EB Garamond only (`pdffonts`); body 12 pt; footnotes 11 pt.
+- Body double-spaced at an exact 24 pt; first-line indent 0.5 in; letter paper with 1-inch margins; page number centered at the foot of each page.
+- Court title, caption (party column closed by a rule at right and bottom), title, lead-in, numbered paragraphs 1–40 (numbered by the filter), prayer items 1–11 with sub-items a–d on their own lines, JURY DEMAND, and the signature block.
+
+What differs:
+
+- Pagination: 12 pages against typst's 11. The single-spaced lines (caption, signature) are an exact 14 pt, close to typst but not identical, and a heading stays with its next paragraph, so page 1 ends after paragraph 2 with room for about three lines. No page break is forced.
+- Numbered paragraphs: the text starts at a 0.9 in tab stop. Typst places it 0.3 in after the number, which is about 0.92 in for "1." and about 0.99 in for "10.".
+- The title sits lower under the caption than in typst.
+
+docx BLOCKED items:
+
+- No check IDs: this doc type has no `rules.md` or `checks.yaml` (Known gaps, item 8), so `tools/check.sh --engine docx` has nothing to run here. The docx was reviewed by page, not by gate.
+- Font: EB Garamond is vendored as OpenType CFF (`.otf`), which Word cannot embed. A reader without EB Garamond installed sees a substitute (`docs/DOCX.md`, "Fonts"). Not verified in Word.
+- Word: the file was converted by LibreOffice without error but was not opened in Word, so the "no repair prompt" check is not done.
+
+Review of the docx PDF: all 12 pages rendered at 60 dpi and viewed after the last change. Typst pages compared: 1 (caption), 9 (prayer) and 11 (signature).

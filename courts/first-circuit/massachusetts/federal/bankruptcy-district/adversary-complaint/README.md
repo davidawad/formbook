@@ -73,3 +73,11 @@ No OPEN findings on this doc type. The filed document's ECF stamp and the Times 
 8. **Exhibits** are not produced; the exemplar has none.
 9. **Counsel block** on the cover is not produced. The exemplar puts counsel only in the signature block, which is what the template does.
 10. **Searches tried (for the record):** CourtListener RECAP search for `type=rd`, `court=mab`, "complaint adversary proceeding", available-only (returned Adv. 26-01083, Adv. 26-04027, Adv. 26-04024, Adv. 26-01084 and others). The Lassman complaint was chosen as the shortest filing with a text layer whose counsel and form are typical of the district.
+
+## Engines
+
+Typst is the primary engine. The DOCX engine (`docx/`: `reference.docx` from `build-reference.sh`, `mab.lua` for the cover, caption, signature and numbering, `render.sh` for the section, footers and numbering part) is checked on the LibreOffice PDF of the `.docx`, as `docs/DOCX.md` describes.
+
+- **Matches the typst output:** EB Garamond 12 pt body (embedded in the docx PDF); exact 24 pt line pitch; 0.5 in first-line indent; 1 in margins on Letter; caption with the right and bottom rules; numbered allegations from 1 with the prayer and the "Respectfully Submitted" block unnumbered; the signature block at 3.1 in, kept on one page; page numbers from page 2 with an empty first-page footer; headings centered and bold; the transfer table.
+- **Differs (tier 2, not tier 1):** the docx runs to 5 pages where the typst render runs to 4, because the docx signature block moves whole to page 5. The transfer table has Word's default grid rules and sits flush left, where typst has no rules and indents it to the paragraph text. The prayer list uses Word's default list indent. Word may paginate differently from LibreOffice.
+- **DOCX BLOCKED items:** none for this doc type. Not run in this box: `sh tools/check.sh <dir> --engine docx` (the gates were not executed here), and opening the `.docx` in Microsoft Word (only LibreOffice 26.8.1 was available).
