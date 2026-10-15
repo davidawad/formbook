@@ -111,3 +111,12 @@ Used: the AG-posted Trump Entrepreneur Initiative opening brief (see `exemplars/
 - overlay: ok
 - pages reviewed: 14 of 14
 - court.json, `tools/tracker.sh`, STATUS.md, the root README and other courts: not touched.
+
+## Engines
+
+**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 14 pt, body lines exact 31.4 pt, 0.5 in first-line indent, 14 pt single-spaced footnotes, letter page, 1 in margins, centred PAGE footer, empty cover footer). `docx/ny-opening.lua` builds the cover, disclosure, related litigation, contents, authorities, signature, certificates and affidavit from the same frontmatter as the typst template. Sections: cover (no number), front matter (lower roman), body and certificates (arabic from 1). Point headings are numbered I. / A. / 1. / a. as text by the filter. Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/court-of-appeals/opening-brief samples/INPUT-tei-opening-brief.md` writes `samples/OUTPUT-tei-opening-brief.docx`.
+
+- Matches the typst form: typeface, size, double spacing, margins, cover contents and order, front-matter order, the certificate of compliance text, the affidavit blanks. Word count 1,471 on the sample, the same as the typst render (`count-words` rule reproduced).
+- Differs: the table of contents is a TOC field (placeholder text until a field update in Word or LibreOffice); the table of authorities lists the authorities without page numbers; the addendum is numbered 1, 2, ... (typst: Add-1, ...) and has no addendum contents list; the affidavit blanks are typed underscores, not drawn lines; the cover and signature blocks are borderless tables, so their layout is not the typst layout. Pagination is Word's or LibreOffice's, not measured.
+- docx gate status: `.docx` written and validated (`unzip -tq` ok; `xmllint --noout` on all 18 XML and rels parts, no errors). The `.docx.pdf` gates (Gates 0 to 3) are **BLOCKED**: LibreOffice (`soffice`) is not installed on the box that built this, so no `.docx.pdf` was rendered and no page was viewed (pages reviewed: 0).
+- BLOCKED, for the PR: (1) TOC page numbers: a field update is needed before they appear; (2) TOA page numbers: not generated, LibreOffice does not honour TA/TOA fields; (3) addendum page prefix `Add-` and addendum contents: not reproduced in the docx (one footer per section, no prefix); (4) every `.docx.pdf` gate, until a LibreOffice run.
