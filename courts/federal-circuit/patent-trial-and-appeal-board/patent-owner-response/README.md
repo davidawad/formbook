@@ -79,5 +79,39 @@ Tier-2 findings, compared against the Swarm exemplar only (one filer, so none ca
 3. **Transcription is partial**: the sample covers the introduction through the conclusion, omitting the ’004 figure, most of the argument sections (V through VIII), and the exhibit list. The exemplar runs 65 pages. Gate 0 (every word of the sample in the PDF) is not built.
 4. **Tier 2 cannot be finished**: one filer. CLAUDE.md and EVAL-LOOP require two or three filers. The second-filer search is recorded in `exemplars/SOURCE.md`.
 5. **No mechanical checks**: no `checks.yaml` or `tools/check.sh` run for this folder. Gate 1 is not built.
-6. **Latex and docx engines**: not in this brief's scope.
+6. **Latex engine**: not in this brief's scope. The docx engine is in the Engines section below.
 7. **Source provenance**: the exemplar is the copy republished on ptablitigationblog.com, not the PTAB E2E record.
+
+## Engines
+
+| Engine | Folder | State |
+|---|---|---|
+| typst (primary) | `typst/` | rendered and reviewed (above) |
+| docx | `docx/` | `.docx` built (`samples/OUTPUT-juniper-ipr.docx`); `.docx.pdf` BLOCKED; no page reviewed |
+| latex | none | not in this brief |
+
+Build: `sh docx/make-reference.sh docx/reference.docx` rebuilds the reference (committed). `sh tools/render.sh --engine docx courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response samples/INPUT-juniper-ipr.md` writes the `.docx`; its LibreOffice step needs `soffice`.
+
+What matches typst (set in the XML; no rendered page has been seen yet):
+
+- Letter, 1-inch margins, 14-point body, double-spaced body (Word's "double", `w:line="480"`).
+- Cover with no page number and no header; contents in lower-case roman; body numbered from 1; running header "Patent Owner Response, U.S. Patent No. …" on the body pages only, read from the frontmatter.
+- Headings numbered I., A., 1. (one list, numId 901); level 1 centered in capitals.
+- Footnotes 14-point, single spaced; block quotations indented from both margins, 1½ spaced.
+- The conclusion stays on the page of its signature block (keep-with-next).
+- Word-count certificate (the count is checked against 14,000 at build) and certificate of service.
+
+What differs from typst:
+
+- Font: the `.docx` names Times New Roman, the face the rule names. Typst uses Liberation Serif, its vendored stand-in. Where Times New Roman is missing (LibreOffice here), the renderer substitutes Liberation Serif, so the `.docx.pdf` will embed LiberationSerif, not TimesNewRoman.
+- Line pitch and pagination: Word's "double" is not typst's leading, so the page count will differ from the typst 13 pages until a PDF is rendered.
+- Contents: the cached TOC has no page numbers. Word fills them on open (`updateFields`; Word asks to update fields).
+- No title block: pandoc's title and date are suppressed, because the cover prints them.
+- Bullets: pandoc's list formatting, not typst's indent (the bullet item in tier 2 stays OPEN).
+
+docx BLOCKED (list these in the PR):
+
+- Gates 0 to 3 on `samples/OUTPUT-juniper-ipr.docx.pdf`: BLOCKED. The build box has no LibreOffice (`libreoffice` is not on conda-forge, and `soffice` is not installed). So there is no PDF, no stamp and no page review.
+- Contents page numbers: BLOCKED. LibreOffice does not update TOC fields, so a PDF check cannot pass the contents until a renderer fills them.
+- Header and page-number placement on each body page: unverified (needs the PDF).
+- Opens in Word and LibreOffice without a repair prompt: not checked. Every XML part is well-formed (`xmllint`) and pandoc reads the file back, which is necessary, not sufficient (docs/DOCX.md).
