@@ -9,7 +9,7 @@ Source: Rules of the Supreme Court of the United States, adopted February 17, 20
 | Rule | Requirement | Where it lives in the template |
 |---|---|---|
 | 33.1(a) | 6 1/8 by 9 1/4 inch booklet | `booklet-width`, `booklet-height` (441 x 666 pt) |
-| 33.1(b) | Century-family face, 12-point text, 2-point or more leading, 10-point footnotes | `body-size`, `note-size`, `leading-value` (2.5 pt), `font-family` (**see gap 1**) |
+| 33.1(b) | Century-family face, 12-point text, 2-point or more leading, 10-point footnotes | `font-family` = "TeX Gyre Schola" (the vendored Century-family substitute, `docs/FONTS.md`; see gap 1), `body-size` 12 pt, `leading-value` 2 pt on the fixed 1em `line-box` (baseline pitch 14 pt), `note-size` 10 pt |
 | 33.1(c) | Margins at least 3/4 inch; text field, footnotes included, not over 4 1/8 by 7 1/8 inches | `margin-x` 1 in, `margin-top` 1 in, `margin-bottom` 1.125 in: text field exactly 4.125 x 7.125 in; asserted in the template |
 | 33.1(d) | Word limit; limits exclude QP, parties, TOC, TOA, counsel list, appendix; include footnotes | `count-words` counts the body markdown including footnote text; asserted against `word-limit` |
 | 33.1(e) | Cover color: light blue for a petitioner's merits brief (chart) | not rendered: paper-copy color (**see gap 4**) |
@@ -43,11 +43,11 @@ sh tools/render.sh courts/supreme-court-of-the-united-states/merits-brief sample
 sh tools/overlay.sh courts/supreme-court-of-the-united-states/merits-brief in-re-grand-jury
 ```
 
-`render.sh` ran with `--ignore-system-fonts` and produced no typst warnings. Output: `samples/OUTPUT-in-re-grand-jury.pdf`, 13 pages at 441 x 666 pt. Fonts embedded: EBGaramond Regular, Bold, Italic only.
+`render.sh` ran with `--ignore-system-fonts` and produced no typst warnings. Output: `samples/OUTPUT-in-re-grand-jury.pdf`, 16 pages at 441 x 666 pt (13 pages in EB Garamond before the change; the wider Century-family face runs longer). Fonts embedded: TeXGyreSchola Regular, Bold, Italic only (`pdffonts`).
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-in-re-grand-jury-21-1397-merits-brief.pdf`: "Brief for the Petitioner", *In re Grand Jury*, No. 21-1397, filed by the petitioner (counsel of record Daniel B. Levin, Munger, Tolles & Olson LLP). 53 pages. Text layer present. Set in New Century Schoolbook (embedded Type 1C), the Rule 33.1(b) family. Source and fetch record in `exemplars/SOURCE.md`.
+- `exemplars/FILED-EXAMPLE-in-re-grand-jury-21-1397-merits-brief.pdf`: "Brief for the Petitioner", *In re Grand Jury*, No. 21-1397, filed by the petitioner (counsel of record Daniel B. Levin, Munger, Tolles & Olson LLP). 53 pages. Text layer present. Set in New Century Schoolbook (embedded Type 1C), the Rule 33.1(b) family. Source and fetch record in `exemplars/SOURCE.md`. The PDF was re-fetched from the URL in that file on 2026-10-15 (it was missing from the snapshot).
 - Only one filer. A second merits brief (a respondent's, or a different petitioner's) was not located, so the tier-2 comparison is against one exemplar. This is a gap against the two-or-three-filers bar in the tier rules.
 
 Exemplar format facts (for comparison, not copied): the e-filed PDF is US Letter (612 x 792 pt) with the booklet-proportioned text block centered on the page. The template renders the booklet size itself, as Rule 33.1(a) requires.
@@ -62,39 +62,45 @@ ours p.2  filed p.2  100.0%   questions presented
 ours p.3  filed p.3  100.0%   parties / disclosure
 ours p.4  filed p.4   60.4%   TOC (exemplar's TOC is the filed one; ours is generated)
 ours p.5  filed p.8   19.2%   TOA (our TOA lists only the sample's authorities)
-ours p.6  filed p.12  91.6%   Opinions below / jurisdiction / Rule 501
-ours p.7  filed p.13  61.5%   introduction
-ours p.8  filed p.16  53.1%   statement
-ours p.9  filed p.17  60.9%   statement, footnotes
-ours p.10 filed p.19  58.0%   statement, summary
-ours p.11 filed p.24  55.7%   summary, argument I (point heading)
-ours p.12 filed p.1   24.6%   conclusion + signature (no matching filed page: sample ends early)
-ours p.13 filed p.1   23.1%   certificate (no matching filed page)
+ours p.6  filed p.12  76.4%   opinions below / jurisdiction / Rule 501
+ours p.7  filed p.13  61.3%   introduction
+ours p.8  filed p.14  59.1%   introduction (continued)
+ours p.9  filed p.15  58.5%   statement
+ours p.10 filed p.16  74.4%   statement, footnote 2
+ours p.11 filed p.17  58.7%   statement (points 1 and 2)
+ours p.12 filed p.19  83.6%   statement (end)
+ours p.13 filed p.20  36.4%   summary of the argument
+ours p.14 filed p.24  46.0%   argument, point I
+ours p.15 filed p.53  25.9%   conclusion + signature (filed page 53 is the end of the filed brief)
+ours p.16 filed p.1   23.1%   certificate (no matching filed page)
 ```
 
-The overlay is a diagnostic, not a score. The low pairings on pages 5, 12 and 13 are expected: the sample is an excerpt, its TOA covers only the authorities transcribed, and the certificate and signature are generated.
+The overlay is a diagnostic, not a score. The low pairings on pages 5, 15 and 16 are expected: the sample is an excerpt, its TOA covers only the authorities transcribed, and the certificate and signature are generated.
 
 ## Gate 2: page-by-page visual review
 
-Every page of `OUTPUT-in-re-grand-jury.pdf` was rendered at 60 dpi and looked at, after the final change to the template (pages 1-13).
+Every page of `OUTPUT-in-re-grand-jury.pdf` (16 pages, TeX Gyre Schola) was rasterized at 80 dpi and viewed on the final render.
 
-- p.1 cover: docket top, court, caption, proceeding, title, three counsel groups in two columns at the foot. Fits on one page. Accepted.
-- p.2 questions presented: alone on the page, as Rule 24.1(a) requires. Accepted.
-- p.3 parties and disclosure: accepted.
-- p.4 TOC: entries with dot leaders and right-hand page numbers; Question Presented, Parties, Corporate Disclosure, body headings, indented argument point. Fixed in review: entries had printed the page number twice.
-- p.5 TOA: cases, statutes, rules, page lists. Accepted. Its entries reflect only the sample's authorities.
-- p.6 (body 1) Opinions below, Jurisdiction, Federal Rule of Evidence heading, block quotation with list. Fixed in review: the heading hyphenated ("IN-VOLVED") and justified-spread; both now off. Accepted.
+- p.1 cover: docket top, court, caption, proceeding, title, counsel groups in two columns at the foot. One page. Accepted.
+- p.2 questions presented (roman i): alone on the page, as Rule 24.1(a) requires. Accepted.
+- p.3 parties and disclosure (roman ii): accepted.
+- p.4 TOC (roman iii): entries with dot leaders and right-hand page numbers. Accepted.
+- p.5 TOA (roman iv): cases, statutes, rules, page lists. Accepted. Its entries reflect only the sample's authorities.
+- p.6 (body 1) Opinions below, Jurisdiction, Federal Rule of Evidence heading, block quotation with list. Accepted.
 - p.7 (body 2) Introduction, justified body text, first-line indent. Accepted.
-- p.8 (body 3) Statement, citations italic, links; footnote 2 at the foot. Accepted.
-- p.9 (body 4) Statement continues; footnote 2 text. Accepted.
-- p.10 (body 5) Statement end, Summary heading. Accepted.
-- p.11 (body 6) Summary end, Argument heading, point I. heading with hanging indent, Conclusion heading. Accepted.
-- p.12 (body 7) Conclusion, "Respectfully submitted", counsel name block, date. Accepted. Note: the conclusion's last line and the signature share this page.
-- p.13 certificate of compliance (unnumbered, separate page). Accepted for layout; the count is the sample's count (gap 5).
+- p.8 (body 3) Introduction continued. Accepted.
+- p.9 (body 4) Statement, point 1.a, with citations italic and links. Accepted.
+- p.10 (body 5) Statement 1.b and footnote 2. Accepted.
+- p.11 (body 6) Statement 1.c and point 2. Accepted.
+- p.12 (body 7) Statement end, footnote 3. Accepted.
+- p.13 (body 8) Statement point 3 (the Ninth Circuit affirmed), then the Summary of the Argument. Accepted.
+- p.14 (body 9) Argument heading, point I. heading with hanging indent. Accepted.
+- p.15 (body 10) Conclusion, "Respectfully submitted", counsel name block, date. Accepted.
+- p.16 certificate of compliance (separate page). Accepted for layout; the count is the sample's count (gap 5).
 
 ## Open tier-1 gaps (BLOCKED items)
 
-1. **Font: BLOCKED (no Century-family face is vendored).** Rule 33.1(b) requires New Century Schoolbook, Century Schoolbook, or Century Expanded. Only EB Garamond is vendored under `fonts/`, and `fonts/` is out of scope for this box. The template sets EB Garamond as a stand-in, so the typeface does not meet the rule. The fix needs a Century-family font vendored under `fonts/` (for example TeX Gyre Schola or C059, both with redistributable licenses), then `font-family` changes to that family and the README and checks are updated. No other tier-1 item depends on this.
+1. **Font (Rule 33.1(b)): resolved to the substitute.** Rule 33.1(b) requires New Century Schoolbook, Century Schoolbook, or Century Expanded. The template sets `font-family` to TeX Gyre Schola, the Century-family substitute in `docs/FONTS.md` (upstream says it is metric-compatible with New Century Schoolbook). Not checked against a commercial Century file on this box, so line breaks in a filed copy may differ slightly.
 2. **Exemplar count: one filer.** Tier-2 conventions were judged against one filed brief, not two or three. A second exemplar is needed for the tier-2 bar.
 3. **Sample is an excerpt.** The sample carries about 2,270 words of body text (opinions below through the conclusion, with the Summary and the start of Argument I transcribed, the rest omitted), not the full brief. The full brief is about 13,000 words. The TOA lists only the authorities transcribed.
 4. **Cover color (Rule 33.1(e)) not rendered.** Light blue for a petitioner's merits brief, per the chart. It applies to the paper copy; the PDF has no color.
@@ -109,13 +115,13 @@ Every page of `OUTPUT-in-re-grand-jury.pdf` was rendered at 60 dpi and looked at
 
 ## Engines
 
-Engine status (this box): typst `ok` (unchanged); latex `ok`: `samples/OUTPUT-in-re-grand-jury.latex.pdf`, 16 pages; docx `ok` with BLOCKED items: `samples/OUTPUT-in-re-grand-jury.docx` and `.docx.pdf` (LibreOffice 26.8 conversion), 14 pages.
+Engine status (this box, after the font change): typst `ok`, 16 pages; latex `ok`: `samples/OUTPUT-in-re-grand-jury.latex.pdf`, 17 pages, embedded fonts TeX Gyre Schola only (not page-reviewed; the review above is the typst render). docx: `samples/OUTPUT-in-re-grand-jury.docx` regenerated with TeX Gyre Schola; `.docx.pdf` NOT rendered, because `soffice` is not installed on this box.
 
-- **latex/** (`template.tex`, `brief.lua`): same booklet geometry and type as the amicus latex. The cover, questions presented and parties pages, TOC, TOA, headings and certificate are built in `brief.lua`. Citations are the body's `toa:<key>` links; each gets a label, and the TOA lists its pages once each. Fonts: EB Garamond via `fontdir` (stand-in).
-- **What differs from typst:** the LaTeX render is 16 pages to typst's 13; the front matter runs longer. Point headings keep the numerals written in the sample.
-- **docx/** (`reference.docx`, `brief.lua`): page setup and styles as in the amicus docx; the cover, front pages, headings and certificate are raw WordprocessingML.
+- **latex/** (`template.tex`, `brief.lua`): same booklet geometry and type as the amicus latex. The cover, questions presented and parties pages, TOC, TOA, headings and certificate are built in `brief.lua`. Citations are the body's `toa:<key>` links; each gets a label, and the TOA lists its pages once each. Fonts: TeX Gyre Schola via `fontdir` (`\setmainfont{texgyreschola}`).
+- **What differs from typst:** the LaTeX render is 17 pages to typst's 16; the front matter runs longer. Point headings keep the numerals written in the sample.
+- **docx/** (`reference.docx`, `brief.lua`): page setup and styles as in the amicus docx; the styles, including the headings, name TeX Gyre Schola. The cover, front pages, headings and certificate are raw WordprocessingML.
 - **docx BLOCKED items** (see `docs/DOCX.md`):
   - TOC and TOA: BLOCKED. No page numbers (no field results).
   - Footer page numbers: BLOCKED. No PAGE field in the reference.
-  - Typeface: BLOCKED (Century-family gap; EB Garamond stand-in).
+  - Typeface: set in `reference.docx`, but not embedded; a reader without TeX Gyre Schola installed gets a substitute in Word. The LibreOffice PDF is still to be rendered where `soffice` exists.
   - Certificate word count: a count of the sample body, not Word's.

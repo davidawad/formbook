@@ -28,12 +28,14 @@
   margin-x >= margin-min and margin-top >= margin-min and margin-bottom >= margin-min,
   message: "scotus-amicus-brief: Rule 33.1(c) margins must be at least 3/4 inch",
 )
-// Rule 33.1(b): Century family, 12-point, with 2-point or more leading between lines. Typst adds `leading` to the font's own line height (about 0.65em for EB Garamond), so 6.2pt gives a baseline pitch of about 14pt (12 + 2); measured in the PDF, not assumed.
-// STAND-IN FACE: no Century family is vendored under fonts/ (see ../README.md, "Known gaps").
-// Replace this one value with the vendored Century face when it is added.
-#let font-family = "EB Garamond"
+// Rule 33.1(b): Century family, 12-point, with 2-point or more leading between lines.
+// Face: TeX Gyre Schola, the vendored Century-family substitute named in docs/FONTS.md.
+#let font-family = "TeX Gyre Schola"
 #let type-size = 12pt
-#let leading = 6.2pt
+// Line box fixed at 1em (top-edge + bottom-edge), so the baseline pitch is 1em + leading (12 + 2 = 14pt)
+// and does not depend on the face's own ascent and descent. Same as the cert-petition template.
+#let line-box = (top-edge: 0.75em, bottom-edge: -0.25em)
+#let leading = 2pt
 // Rule 33.1(b): footnotes 10-point, with 2-point or more leading.
 #let footnote-size = 10pt
 // Rule 34.1(g): the cover may not be set smaller than 11-point (counsel identification excepted).
@@ -148,7 +150,7 @@
   // (b) the name of this Court
   block(text(size: 1.1em)[In the])
   block(strong(upper[Supreme Court of the United States]))
-  v(0.35in)
+  v(0.25in)
   // (c) the caption
   for (i, side) in need(meta, "caption").enumerate() {
     if i > 0 {
@@ -159,10 +161,10 @@
     for n in side.names { block(inl(n)) }
     block(inl(side.designation))
   }
-  v(0.35in)
+  v(0.25in)
   // (d) the nature of the proceeding and the court below
   block(inl(need(meta, "proceeding")))
-  v(0.35in)
+  v(0.25in)
   // (e) the title of the document; it also identifies the party supported (Rule 37.2, 37.3)
   block(strong(upper(inl(need(meta, "brief_title")))))
   v(1fr)
@@ -279,7 +281,7 @@
     margin: (top: margin-top, bottom: margin-bottom, left: margin-x, right: margin-x),
     numbering: none, footer: none,
   )
-  set text(font: font-family, size: type-size, lang: "en")
+  set text(font: font-family, size: type-size, lang: "en", ..line-box)
   set par(leading: leading, justify: false, first-line-indent: para-indent, spacing: 1em)
   show footnote.entry: it => {
     set par(first-line-indent: 0pt, leading: leading)

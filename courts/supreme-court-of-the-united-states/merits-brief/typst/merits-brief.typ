@@ -8,15 +8,16 @@
 // ---------------------------------------------------------------------------
 
 #let court-name = "Supreme Court of the United States"
-// STAND-IN FONT: Rule 33.1(b) requires a Century-family face (New Century Schoolbook, Century
-// Schoolbook, Century Expanded). No Century face is vendored under fonts/, so EB Garamond is used
-// for layout only. The README records this as an open tier-1 gap.
-#let font-family = "EB Garamond"
+// Rule 33.1(b): Century family (New Century Schoolbook, Century Schoolbook, Century Expanded).
+// docs/FONTS.md maps the Century family to the vendored TeX Gyre Schola (metric-compatible with
+// the Adobe base-35 New Century Schoolbook AFMs).
+#let font-family = "TeX Gyre Schola"
 #let body-size = 12pt                 // Rule 33.1(b): 12-point text
 #let note-size = 10pt                 // Rule 33.1(b): 10-point footnotes
 #let counsel-size = 10pt              // Rule 34.1(g): identification of counsel is exempt from the 11-point floor
 #let min-leading = 2pt                // Rule 33.1(b): at least 2-point leading
-#let leading-value = 2.5pt            // typst's leading is the space added between lines; 2.5pt >= 2pt
+#let leading-value = 2pt              // Rule 33.1(b): 2-point leading; with the 1em line box below, baseline pitch is 14pt
+#let line-box = (top-edge: 0.75em, bottom-edge: -0.25em)  // line box = 1em, so pitch = 1em + leading for any face
 #let booklet-width = 6.125in          // Rule 33.1(a): 6 1/8 by 9 1/4 inch booklet
 #let booklet-height = 9.25in
 #let text-width = 4.125in             // Rule 33.1(c): text field, footnotes included, at most 4 1/8 by 7 1/8 inches
@@ -269,7 +270,7 @@
     margin: (x: margin-x, top: margin-top, bottom: margin-bottom),
     numbering: none,
   )
-  set text(font: font-family, size: body-size, lang: "en", fallback: false)
+  set text(font: font-family, size: body-size, lang: "en", fallback: false, ..line-box)
   set par(justify: true, leading: leading-value, spacing: 0.75em, first-line-indent: para-indent)
 
   show heading.where(level: 1): it => block(above: 1.1em, below: 0.9em, width: 100%, sticky: true,
