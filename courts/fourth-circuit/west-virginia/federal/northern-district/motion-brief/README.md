@@ -78,3 +78,12 @@ Primary sources: the Local Rules of the Northern District of West Virginia (the 
 - Page 8: CERTIFICATE OF SERVICE on its own page with the caption repeated; the statement; the served list; "s/ Peter Raupp" and the role line. Pass.
 
 Overlay (`samples/OVERLAY-amsted-motion-brief.txt`): pages 1–5 pair with the same filed pages (95.6%, 85.8%, 79.3%, 68.9%, 50.2% word overlap); page 6 and page 7 pair with filed page 24 (the sample skips filed pages 8 to 22), page 8 with filed page 26 (the certificate). The pairing is a diagnostic, not a score.
+
+## Engines
+
+DOCX (`docx/`: `build-reference.sh` builds `reference.docx`; `wvnd-motion-brief.lua` writes the caption, the heading numbers, the signature block and the certificate). Output: `samples/OUTPUT-amsted-motion-brief.docx` and `.docx.pdf` (LibreOffice PDF). Pages reviewed: 8 of 8, every page rendered at 60 dpi and viewed.
+
+- Matches the typst form: Liberation Serif 12 pt (`pdffonts`: LiberationSerif only), letter, 1 in margins, body double spaced at an exact 24 pt pitch, 0.5 in first-line indent, the caption with a ")" column (each line an exact 13.8 pt row; the case number beside its row), the brief title bold and centered, level 1 headings centered bold underlined, level 2 headings "I." with a hanging label, signature block at 3.25 in ("DATED:", "Respectfully submitted,", the "s/" line), footnotes native and 11 pt single spaced, page number centered at the foot, the certificate of service on its own page with the caption repeated.
+- Differs: the gap after a heading number is a tab stop (typst: a grid cell). Levels 3 and 4 do not occur in the sample; they are set as hanging labels at 0.5 in and 1 in (typst: grid cells, not checked). Pagination differs slightly (docx memorandum 7 pages, typst 7 pages; the certificate is page 8 in both).
+- BLOCKED: `sh tools/check.sh <court-dir> --engine docx` cannot run. It exits 2 with `Error: open .../motion-brief/checks.yaml: no such file or directory` (no `checks.yaml` for this court in this snapshot; not authored here).
+- The 25-page limit of LR Civ P 7.02(a) is checked by the typst template only; the docx memorandum runs 7 pages on the LibreOffice PDF.
