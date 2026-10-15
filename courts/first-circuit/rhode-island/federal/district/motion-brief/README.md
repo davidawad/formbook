@@ -90,3 +90,14 @@ OPEN: none in the template.
 
 LOG:
 - 2026-10-14: first render, 14 pages; the argument's "1." sub-headings rendered as list items (fixed by escaping), and the lead line was missing from the signature (fixed).
+
+## Engines
+
+**typst** is the reference and is unchanged by the docx work.
+
+**docx** (`docx/reference.docx` built by `docx/make-reference.sh`; `docx/rid-motion-brief.lua` for the cover, the heading labels, the statement on oral argument, the signature block and the certificate of service). Output: `samples/OUTPUT-tablada-motion-brief.docx` and `samples/OUTPUT-tablada-motion-brief.docx.pdf` (LibreOffice, 15 pages; typst is 14). Status: converts without error; every page of the docx PDF was viewed at 60 dpi beside the typst page of the same sample (pages_reviewed = 15). Not opened in Microsoft Word (not available here); the file is a valid zip with well-formed XML parts.
+
+- *Matches typst (checked on the LibreOffice PDF):* US Letter, 1-inch margins; EB Garamond 12 pt (the only font embedded); double spacing at exact 27.6 pt; footnotes 10 pt, single spaced; block quotations indented 0.5 in on both sides, double spaced; the caption and cover; headings with the typst labels (I. INTRODUCTION centered; A. Tablada's Mortgage at the left; level 3 as written, bold); the statement on oral argument; the signature block with "Dated:", "Respectfully submitted by," and the same gaps as typst (measured on the PDF); the certificate of service on its own last page with its signer line; page number centered at the bottom of every page, arabic from 1.
+- *Differs (tier 2, not blocking):* (a) Pagination: the docx has one page more (15 against 14). The text drifts by a line or two per page because LibreOffice wraps some lines differently; the level 3 heading "1." of the Argument moves to page 8 (keep with next), which leaves about six blank lines at the foot of page 7; the conclusion and signature block fall on page 14 in the docx and page 13 in typst. The certificate is alone on page 15 in the docx and on page 14 in typst. (b) Footnote text wraps slightly wider in LibreOffice than in typst (same 10 pt size and line pitch), so footnote lines differ. (c) Every line sits about 3 pt lower than in the typst PDF (same cause as the complaint). (d) Heading labels are typed text, not Word numbering.
+- *BLOCKED:* none. This folder has no `checks.yaml`, so no check IDs exist for the docx; no Gate 1 check was run on the docx. No tier-1 requirement is blocked in docx.
+- *Pagination:* Word may paginate slightly differently from LibreOffice (see `docs/DOCX.md`).
