@@ -20,7 +20,9 @@ sh tools/render.sh courts/sixth-circuit/court-of-appeals/answering-brief samples
 sh tools/overlay.sh courts/sixth-circuit/court-of-appeals/answering-brief bruneau-answering-brief
 ```
 
-Fonts are the vendored EB Garamond (`fonts/eb-garamond/`); `--ignore-system-fonts`; any typst warning fails the render. `pdffonts` on the sample shows only `EBGaramond-*` faces.
+**Typeface: no face named, so EB Garamond stays.** FRAP 32(a)(5)(A) and (a)(6) require a proportionally spaced serif at 14 pt and name no face. The Sixth Circuit Briefs Checklist ("Typefaces") says "a proportionally spaced font at 14 pt. (such as Times New Roman)"; "such as" is an example, not a requirement. So the template uses the vendored EB Garamond (`fonts/eb-garamond/`), as `docs/FONTS.md` provides for a court that names no face. No substitute is needed; the Times New Roman exemplar is a visual comparison only.
+
+Fonts are EB Garamond only; `--ignore-system-fonts`; any typst warning fails the render. `pdffonts` on the sample shows only `EBGaramond-*` faces.
 
 ## Governing rules
 

@@ -7,9 +7,10 @@ Folder: `courts/seventh-circuit/wisconsin/federal/western-district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-olson-3-26-cv-01012-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-olson-complaint.md` (a portion of the 34-page filing: caption, sections I to IV in part, prayer A to F, jury demand, signature) |
-| render | ok: `samples/OUTPUT-olson-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-olson-complaint.pdf` and `OVERLAY-olson-complaint.txt` (page map below) |
-| pages reviewed | 9 of 9 rendered at 60 dpi and viewed (see the review section) |
+| typeface | Face required by the rules: **none named** (W.D. Wis. LR list and Briefing Guidelines checked; see "Not verified" below). Vendored substitute: none needed. Font kept: **EB Garamond** (`docs/FONTS.md`, "No face named"). Times substitute `Liberation Serif` is vendored but not used, since no rule asks for Times. |
+| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-olson-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (pdffonts: EB Garamond Regular, Bold, BoldItalic, all embedded), no warnings |
+| overlay | **not re-run**: the filed exemplar PDF is not in `exemplars/` in this snapshot (only `SOURCE.md`), so `tools/overlay.sh` cannot run. `samples/OVERLAY-olson-complaint.txt` is the page map from an earlier run against the filed PDF; `OVERLAY-olson-complaint.pdf` is not in the snapshot. |
+| pages reviewed | 9 of 9 re-rendered at 60 dpi and viewed 2026-10-15 (see the review section) |
 
 File names: the brief asks for `<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` read and write the role-prefixed names (`INPUT-`, `OUTPUT-`, `OVERLAY-`), so those are used here (see CLAUDE.md, "File roles are in the name").
 
@@ -64,7 +65,7 @@ The overlay is a diagnostic, not a score. Pages 2 to 6 of the sample are paired 
 ## Known gaps and open choices
 
 1. **W.D. Wis. form rules not located (open question for David).** The template's font, size, margins and spacing are conventions matched to the exemplar, not rule citations. A future pass needs the civil local rules (LR 7, LR 10 or their equivalent) or a confirmation from the clerk. Until then the template makes no claim that it complies with a W.D. Wis. form rule.
-2. **Font.** The filed exemplar uses Times New Roman. The vendored font is EB Garamond (the only font in `fonts/`). EB Garamond at 12 pt is narrower and has a smaller x-height, so the sample is shorter than the exemplar at the same page count. A Times-metric font would close this; it is not vendored.
+2. **Font.** The filed exemplar uses Times New Roman, but no rule the template cites names a face, so the template keeps EB Garamond. `Liberation Serif`, the Times-metric substitute, is vendored (`docs/FONTS.md`). EB Garamond at 12 pt is narrower and has a smaller x-height, so the sample is shorter than the exemplar at the same page count. Switching to `Liberation Serif` is a filer's choice unless a local rule or the clerk requires Times.
 3. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search (CourtListener RECAP, `court=wiwd`, complaints filed 2026-10-02 to 2026-10-13) found Iconocare Strategic Branding (3:26-cv-01023, 7 pages, Times New Roman and Calibri, counsel Reimann; too short to show a full complaint) and Sieverding v. Koritzinsky & Karls (3:26-cv-00627, 36 pages, scanned, no text layer). Tier 2 is therefore not judged against two filers.
 4. **Caption.** The party column is closed by a right rule and a bottom rule, not a column of `)` marks. The exemplar uses the same party/case-number split with no column of marks; this is a convention choice.
 5. **Counsel block at the top.** The exemplar puts counsel at the end (signature block). The template follows the exemplar and has no top counsel block. A court that wants the N.D. Cal.-style top block would need the `counsel` field rendered; the field exists but is not rendered.

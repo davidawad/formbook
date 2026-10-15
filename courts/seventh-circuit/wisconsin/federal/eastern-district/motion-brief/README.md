@@ -7,9 +7,9 @@ Folder: `courts/seventh-circuit/wisconsin/federal/eastern-district/motion-brief/
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-nocams-2-26-cv-01863-motion-brief.pdf` (14 pp.; the overlay reference). Second filer: `FILED-EXAMPLE-schmidt-2-26-cv-00611-motion-brief.pdf` (9 pp.). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-nocams-motion-brief.md` (the whole brief, transcribed from the text layer) |
-| render | ok: `samples/OUTPUT-nocams-motion-brief.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-nocams-motion-brief.pdf` and `OVERLAY-nocams-motion-brief.txt` (against the Nocams exemplar) |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed in montage, three montages covering pages 1 to 12, after the last template change) |
+| render | ok (re-run 2026-10-15): `samples/OUTPUT-nocams-motion-brief.pdf`, 12 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular, Bold, Italic, BoldItalic only (embedded), no warnings |
+| overlay | fail (2026-10-15): `tools/overlay.sh` exits 1, `no exemplar pdf in exemplars/`. The filed PDFs are not in this snapshot (`exemplars/` holds `SOURCE.md` only). The earlier `OVERLAY-nocams-motion-brief.*` files are from a run with the PDFs present and are not regenerated |
+| pages reviewed | 12 of 12 (re-rendered 2026-10-15 and each page viewed at 60 dpi in montage) |
 
 ## Governing rules
 
@@ -20,7 +20,7 @@ Federal Rules of Civil Procedure, from the Legal Information Institute (https://
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | General L.R. 5(a)(5) | 8½ × 11 inch paper; double-spaced text; quotations more than two lines long may be indented and single-spaced; headings and footnotes may be single-spaced; margins of at least one inch on all four sides; page numbers may go in the margins. | `margin = 1in`, `body-leading` (24 pt baseline pitch, measured), `single-leading` for caption, headings, block quotations, signature. Page number centered in the bottom margin. Block quotations (markdown `>`) are single-spaced and indented 0.5 in each side. |
-| General L.R. 5(a)(6) | A proportionally spaced face must include serifs (sans-serif allowed in headings and captions) and be 12-point or larger. | `font-family = "EB Garamond"`, `type-size = 12pt`. |
+| General L.R. 5(a)(6) | A proportionally spaced face must include serifs (sans-serif allowed in headings and captions) and be 12-point or larger. No face is named. | `font-family = "EB Garamond"` (serif), `type-size = 12pt` everywhere, including the page number. Typeface: no face named by the rule, so EB Garamond is kept (`docs/FONTS.md`, "No face named"); no substitute is needed. |
 | General L.R. 5(a)(7) | Plain roman type; italics or boldface for emphasis; case names italicized or underlined. | Body is roman; `*...*` in markdown renders italic (`inl`, `md`). The sample italicizes case names; see gap 1. |
 | General L.R. 5(c) | Signature block: `s/ [attorney name]`, attorney name, bar number, attorney for (party), firm, address, telephone, e-mail. | `signature-block()`, one `s/` line per signer. |
 | Civil L.R. 7(a) | A motion must state the rule it is made under and be accompanied by a supporting memorandum (or a certificate that none will be filed). | The brief is the memorandum; the motion itself is a separate document, not produced here. |
@@ -53,7 +53,7 @@ Not produced by this template (separate filings, not part of the brief): the mot
 ## Known gaps and open choices
 
 1. **Case-name italics are not from the exemplar.** General L.R. 5(a)(7) requires case names in italics or underline. The Nocams text layer carries no italic information, so the exemplar's roman case names could not be copied as-is. The sample italicizes case names as the rule requires. The template is rule-driven; the italics come from the sample's markdown, not the template.
-2. **Font.** Same as the complaint: EB Garamond at 12 pt, which has a smaller x-height than the Times New Roman of the exemplars. The 12-point minimum is met. The Times-metric system font is not allowed, and `fonts/` is shared, so it is not changed here.
+2. **Font.** Same as the complaint: the rule names no face, so EB Garamond at 12 pt is kept (`docs/FONTS.md`, "No face named"). Its smaller x-height than the Times New Roman of the exemplars is a visual difference only; the 12-point minimum is met.
 3. **Signature block alone on the last page.** The conclusion ends on page 11 and the whole signature block (unbreakable, `breakable: false`) starts page 12. The exemplar puts its signature block after its last paragraph on the same page, but the pagination differs with the font. Accepted; not forced.
 4. **No table of contents or table of authorities.** E.D. Wis. Civil L.R. 7 does not require one for a brief under 30 pages (the Nocams and Schmidt briefs have none). The template does not generate one.
 5. **Second filer, not overlaid.** `tools/overlay.sh` compares against the first exemplar only (Nocams). Schmidt was checked by reading its layout (caption, roman-numeral headings, conclusion, signature), not by overlay.

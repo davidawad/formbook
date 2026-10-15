@@ -7,9 +7,9 @@ Folder: `courts/seventh-circuit/wisconsin/federal/eastern-district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-taylor-2-26-cv-01900-complaint.pdf` (13 pp., counsel-filed); second filer `FILED-EXAMPLE-testolin-2-26-cv-01895-complaint.pdf` (9 pp., pleading paper). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-taylor-complaint.md` (the whole filing, transcribed from the text layer) |
-| render | ok: `samples/OUTPUT-taylor-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-taylor-complaint.pdf` and `OVERLAY-taylor-complaint.txt` (against the Taylor exemplar) |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
+| render | ok (re-run 2026-10-15): `samples/OUTPUT-taylor-complaint.pdf`, 11 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold only (embedded), no warnings |
+| overlay | fail (2026-10-15): `tools/overlay.sh` exits 1, `no exemplar pdf in exemplars/`. The filed PDFs are not in this snapshot (`exemplars/` holds `SOURCE.md` only). The earlier `OVERLAY-taylor-complaint.*` files are from a run with the PDFs present and are not regenerated |
+| pages reviewed | 11 of 11 (re-rendered 2026-10-15 and each page viewed at 60 dpi in montage) |
 
 ## Governing rules
 
@@ -20,7 +20,7 @@ Federal Rules of Civil Procedure, from the Legal Information Institute (https://
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | General L.R. 5(a)(5) | 8½ × 11 inch paper; double-spaced text, quotations over two lines may be single-spaced; headings and footnotes may be single-spaced; margins of at least one inch on all four sides; page numbers may go in the margins. | `page-w`, `page-h`, `margin = 1in`, `body-leading` (24 pt baseline pitch, measured), `single-leading` for caption, headings, signature. Page number centered in the bottom margin. |
-| General L.R. 5(a)(6) | A proportionally spaced face must include serifs (sans-serif allowed in headings and captions) and be 12-point or larger. | `font-family = "EB Garamond"` (serif), `type-size = 12pt` everywhere, including the page number. |
+| General L.R. 5(a)(6) | A proportionally spaced face must include serifs (sans-serif allowed in headings and captions) and be 12-point or larger. No face is named. | `font-family = "EB Garamond"` (serif), `type-size = 12pt` everywhere, including the page number. Typeface: no face named by the rule, so EB Garamond is kept (`docs/FONTS.md`, "No face named"); no substitute is needed. |
 | General L.R. 5(a)(7) | Plain roman type; italics or boldface for emphasis; case names italicized or underlined. | Body is roman; `*...*` in markdown renders italic (`inl`, `md`). |
 | General L.R. 5(c) | Signature block: `s/ [attorney name]`, attorney name, bar number, attorney for (party), firm, address, telephone, e-mail. | `signature-block()`: "s/ name", name, bar line, role, firm, address lines, "Telephone:", "E-mail:". |
 | Civil L.R. 3(a) | A Civil Cover Sheet (JS 44) must accompany each civil action. | Not produced here (separate filing; see gaps). |
@@ -54,7 +54,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Known gaps and open choices
 
-1. **Font.** General L.R. 5(a)(6)(A) requires a serif face of 12 points or larger. The only font vendored in `fonts/` is EB Garamond. The Times-metric serif on this box is a system font (Liberation Serif), which the rules of this formbook do not allow. EB Garamond at 12 pt has a smaller x-height than Times New Roman at 12 pt, so the render looks smaller than the exemplar and runs 11 pages against the exemplar's 13. The 12-point minimum is met. Whether a vendored Times-metric font is wanted is a question for David (`fonts/` is a shared directory, so it is not changed here).
+1. **Font.** General L.R. 5(a)(6) requires a proportional serif face of 12 points or larger and names no face. EB Garamond is kept, per `docs/FONTS.md` ("No face named"). It has a smaller x-height than Times New Roman at 12 pt, so the render looks smaller than the exemplar and runs 11 pages against the exemplar's 13. The 12-point minimum is met. A Times-metric substitute (Liberation Serif) would be used only if a rule named Times; none does.
 2. **Pleading paper.** The second exemplar (Testolin) uses numbered pleading lines 1 to 28 and a ruled left margin. E.D. Wis. General L.R. 5(a) requires none of that, and the Taylor exemplar and the Schmidt brief do not use it. The template follows Taylor. This is an accepted variant (ACCEPTED, see review below), not a defect.
 3. **Second filer, not overlaid.** `tools/overlay.sh` compares against the first exemplar only (Taylor). Testolin was checked by reading its layout and page-1 and last-page text, not by overlay.
 4. **Caption layout.** The party block is not in a ruled box. Taylor has no box; Testolin's caption is in two columns with a `Complaint for Damages:` block. Both are accepted; the template does not add a case-type legend (Testolin's "Violation of Fair Credit Reporting Act" block), which the rules do not require.

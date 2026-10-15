@@ -77,7 +77,7 @@ Body:
 
 ## Decisions
 
-- **Typeface: EB Garamond at 14 pt.** The exemplar is Times New Roman. Only EB Garamond is vendored (`fonts/`), and the build may not use system fonts, so Garamond is the serif. The rule asks for a proportional serif at 14 pt, and EB Garamond meets it. The overlay therefore shows the glyph difference on every line; it is a face difference, not a layout one.
+- **Typeface: EB Garamond at 14 pt; no face named.** FRAP 32(a)(5)(A) and (a)(6) require a proportionally spaced serif at 14 pt and name no face. The Sixth Circuit Briefs Checklist ("Typefaces") says "a proportionally spaced font at 14 pt. (such as Times New Roman)"; "such as" is an example, not a requirement. So `docs/FONTS.md`'s "no face named" row applies and the template keeps the vendored EB Garamond (`fonts/eb-garamond/`). The exemplar is Times New Roman, so the overlay shows the glyph difference on every line; it is a face difference, not a layout one.
 - **White cover.** FRAP 32(a)(2) calls for gray on a reply. The court's own checklist says colored covers are not required for electronically filed briefs, so the template follows the checklist.
 - **Compliance certificate directly after the signature.** 6 Cir. R. 32(a) says it "must immediately follow the signature at the end of the brief", so there is no page break before it. The Conclusion and its signature are kept together as one block.
 - **Certificate of service optional.** The exemplar has one (a CM/ECF service statement with the unregistered-party text left out); FRAP 25(d)(2) requires one only for service other than through the e-filing system. The sample includes it because the exemplar does.
