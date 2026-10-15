@@ -5,11 +5,12 @@ Folder: `courts/second-circuit/new-york/federal/northern-district/complaint/` (s
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-golub-1-26-cv-01490-complaint.pdf` (1 filer: plaintiff's counsel Capezza Hill, LLP; see `exemplars/SOURCE.md`) |
+| exemplar | yes: `exemplars/FILED-EXAMPLE-golub-1-26-cv-01490-complaint.pdf` (1 filer: plaintiff's counsel Capezza Hill, LLP; see `exemplars/SOURCE.md`; re-fetched from the RECAP URL 2026-10-15, 28 pages) |
 | sample md | `samples/INPUT-golub-complaint.md`: caption and lead-in, preliminary statement, parties, jurisdiction and venue, factual allegations I to V, first cause of action, prayer, jury demand, signature block (filed ¶¶ 1 to 61 and 140 to 149; see Known gaps 5) |
-| render | ok: `samples/OUTPUT-golub-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-golub-complaint.pdf` and `OVERLAY-golub-complaint.txt` (the tools' names; see Known gaps 11) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (L.R. 10.1 names no typeface; checked against the 2025 edition text 2026-10-15). Vendored substitute: none needed; **EB Garamond** (`docs/FONTS.md`, "No face named" row). Fit: n/a. |
+| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-golub-complaint.pdf`, 8 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular, Bold, Italic only, all embedded; no warnings |
+| overlay | ok (re-run 2026-10-15): `samples/OVERLAY-golub-complaint.pdf` and `OVERLAY-golub-complaint.txt` (the tools' names; see Known gaps 11) |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed on 2026-10-15, after the re-render; no template change that day) |
 
 ## Governing rules
 
@@ -20,6 +21,7 @@ Federal rule text: Fed. R. Civ. P. 10(a) and 10(b), <https://www.law.cornell.edu
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | N.D.N.Y. L.R. 10.1(a)(1) | Text, including footnotes, at least 12-point type. | `type-size = 12pt` (all text, caption, signature, footer). |
+| L.R. 10.1 (no typeface) | No face, family or font is named anywhere in L.R. 10.1 or 7.1 (full-text search of the 2025 edition, 2026-10-15). Only "12-point type" in (a)(1). | `font-family = "EB Garamond"`, the "No face named" row of `docs/FONTS.md`. |
 | L.R. 10.1(a)(2) | One-inch margins on all four sides. | `margin = 1in`. |
 | L.R. 10.1(a)(3) | Text in the body double-spaced. | `body-leading = 1.35em` (24 pt baseline pitch at 12 pt; measured in the render). |
 | L.R. 10.1(a)(4) | Block quotations and footnotes may be single-spaced. | `show quote.where(block: true)` and `footnote.entry` at `single-leading`. |
@@ -57,7 +59,7 @@ No page limit applies to complaints in the N.D.N.Y. Local Rules (L.R. 7.1 limits
 1. **One exemplar.** EVAL-LOOP tier 2 asks for 2 or 3 filers. The CourtListener API search (`type=r`, `court=nynd`, complaints filed 2026) returned a number of complaints, most pro se with no text layer or without a clear filer; one further attorney-filed complaint was not collected. Tier 2 is therefore not judged against two filers yet. This is an open item.
 2. **Bar roll numbers.** The filed exemplar's signature block has no bar roll number, but L.R. 10.1(c)(2) requires one. The rule governs. The sample carries `Bar Roll No. [to be supplied]` for each signer, and the template refuses to render without one (checked: render fails with the L.R. 10.1(c)(2) message).
 3. **Second signer's e-mail.** Not in the exemplar's text layer; the sample says `[e-mail to be supplied]`.
-4. **Typeface.** L.R. 10.1 names no typeface and requires only 12 point. The only vendored font is EB Garamond, which at 12 point has a smaller x-height than the exemplar's Times New Roman, so the text looks smaller than the filing. The 12-point minimum is met. Vendoring a Times-metric font would remove the difference; this is a question for David (`fonts/` is shared and was not changed).
+4. **Typeface (settled 2026-10-15).** The rule names no face: L.R. 10.1(a)(1) requires only "a minimum of 12-point type", and a full-text search of the 2025 edition finds no typeface, font or family name anywhere in the rules. `docs/FONTS.md` therefore keeps EB Garamond for a court that names no face. The filed Times New Roman looks larger than EB Garamond at 12 point (smaller x-height), so the render is visually different from the filing. That difference is a choice of stand-in, not a rule defect; switching to Liberation Serif would be a voluntary choice, not something L.R. 10.1 requires.
 5. **Paragraph numbers.** The template numbers paragraphs consecutively. The sample's paragraphs 1 to 61 match the filing's numbers, but the first cause of action (filed ¶¶ 140 to 149) renders as ¶¶ 62 to 71, and its incorporation paragraph says "paragraphs 1 through 123 above" as filed. This is a sample gap (the filing's numbering is not transcribed past ¶ 61), not a template defect.
 6. **Footnote in ¶ 142** (a news link) is not transcribed.
 7. **Alignment.** Body text is ragged right. The exemplar's justification could not be read from its text layer; this is a tier 2 or 3 choice and is not asserted.
