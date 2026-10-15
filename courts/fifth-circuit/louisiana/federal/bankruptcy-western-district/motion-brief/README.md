@@ -72,6 +72,18 @@ sh tools/overlay.sh courts/fifth-circuit/louisiana/federal/bankruptcy-western-di
 
 Fixes made during review: paragraphs overprinted each other (typst adds no leading after a paragraph's last line; paragraph spacing now equals the leading); the two headings "JOINDER AND SUPPORT…" and "PRAYER FOR RELIEF" were written as level 2, but the filing centers them, so the sample now marks them level 1; the caption's DEBTOR line indent.
 
+## Engines
+
+Engines for this doc type: typst (primary, `typst/`) and docx (`docx/`). `latex/` is empty.
+
+### docx
+
+- Build: `sh docx/make-reference.sh` writes `docx/reference.docx` (pandoc's default styles, patched to the typst values: EB Garamond 13 pt, body at 26 pt exact, 0.5 in first-line indent, letter page with 1-inch margins, "- n -" page-number footer). `docx/lawb-motion-brief.lua` builds the cover (court name, caption box, title, rule under the title), the signature block and the certificate (when the frontmatter has one), and letters the lists "a.", "b.". Render: `sh tools/render.sh --engine docx courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief samples/INPUT-new-century-motion-brief.md`, which writes `samples/OUTPUT-new-century-motion-brief.docx`.
+- Matches the typst template, in the markup: EB Garamond 13 pt throughout; body double-spaced (26 pt lines) with a 0.5 in first-line indent on every body paragraph; caption, signature block and footnotes single-spaced (15 pt); 1-inch margins; letter page; centered bold level-1 headings and bold, underlined level-2 headings at the left, each with a blank double line above and below; the caption box with its rules; the signature block at 2.75 in, kept together; the "- n -" page number centered in the footer.
+- Differs, by design or not checked: the list letters are typed text ("a." and a tab), not Word list numbering. The tab stop is fixed at 0.9 in from the margin. The caption box is a Word table with borders, which Word and LibreOffice draw slightly differently. Line and page breaks are the renderer's, so the page count is not known until the PDF is made. The "signature alone on page 8" open item (Known gaps, 2) may or may not reproduce in the docx.
+- **BLOCKED: `.docx.pdf` checks (Gates 0 to 3 on the LibreOffice PDF, and the Gate 2 page review).** `soffice` is not installed on the box that built this: conda-forge has no LibreOffice package and there is no root for apt. `tools/render.sh --engine docx` therefore writes the `.docx` and then fails at `soffice`, so `samples/OUTPUT-new-century-motion-brief.docx.pdf` is not produced. Checked so far: the `.docx` is a valid zip, its XML parts are well-formed, and pandoc reads it back with every word of the sample body in order (the typed list letters and the signature block come from the template). Pages reviewed: 0 of the docx's pages, so no visual claim is made for the docx.
+- Open for Word: the opening machine needs EB Garamond installed, or Word substitutes a font. The vendored `fonts/` copy is for typst only.
+
 ## Known gaps and open choices
 
 1. **One exemplar, and it is a joinder.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers; the brief asks for one per doc type. The filing joins a receiver's motion rather than being a stand-alone motion. Two other W.D. La. memoranda were found: *Global Gaming Legends*, No. 13-01007, doc #116 (a 2013 support brief, 40 pages, only 782 words of text layer) and *Keaty*, No. 05-51007, doc #137 (a 2005 motion with memorandum attached, a scanned image with no text). Neither was used.

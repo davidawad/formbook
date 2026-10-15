@@ -64,6 +64,18 @@ sh tools/overlay.sh courts/fifth-circuit/louisiana/federal/bankruptcy-western-di
 | 6 | RELIEF REQUESTED ¶26–28, WHEREFORE lead-in, prayer items (a)–(b) | OK. |
 | 7 | Prayer items (c)–(d), signature block (firm, "By:" line, four attorneys with bar numbers, address, telephone, telecopier, counsel for plaintiff) | OK. |
 
+## Engines
+
+Engines for this doc type: typst (primary, `typst/`) and docx (`docx/`). `latex/` is empty.
+
+### docx
+
+- Build: `sh docx/make-reference.sh` writes `docx/reference.docx` (pandoc's default styles, patched to the typst values: EB Garamond 13 pt, body at 26 pt exact, 0.5 in first-line indent, letter page with 1-inch margins, page-number footer). `docx/lawb-adversary-complaint.lua` builds the cover, the caption box and the signature block from the frontmatter, types the paragraph numbers and letters the prayer items. Render: `sh tools/render.sh --engine docx courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/adversary-complaint samples/INPUT-andrus-adversary-complaint.md`, which writes `samples/OUTPUT-andrus-adversary-complaint.docx`.
+- Matches the typst template, in the markup: EB Garamond 13 pt throughout; body double-spaced (26 pt lines, the typst pitch); caption, signature block and footnotes single-spaced (15 pt); 1-inch margins; numbered paragraphs with a 0.5 in indent and the text at 1 in; "(a)" items at 0.5 in; centered bold underlined level-1 headings and centered bold level-2 headings, each with a blank double line above and below; the caption's parties-and-numbers divider; the signature block at 3.25 in, kept together; the page number centered in the footer.
+- Differs, by design or not checked: the paragraph numbers are typed text ("1." and a tab), not Word list numbering, so inserting a paragraph does not renumber the rest. The tab stop is fixed at 1 in; typst sets the text a fixed 0.4 in after the number, so the text column moves by a few points for two-digit numbers. The caption rules and the table are Word table borders, which Word and LibreOffice draw slightly differently. Line and page breaks are the renderer's, so the page count is not known until the PDF is made.
+- **BLOCKED: `.docx.pdf` checks (Gates 0 to 3 on the LibreOffice PDF, and the Gate 2 page review).** `soffice` is not installed on the box that built this: conda-forge has no LibreOffice package and there is no root for apt. `tools/render.sh --engine docx` therefore writes the `.docx` and then fails at `soffice`, so `samples/OUTPUT-andrus-adversary-complaint.docx.pdf` is not produced. Checked so far: the `.docx` is a valid zip, its XML parts are well-formed, and pandoc reads it back with every word of the sample body in order (the typed numbers and the signature block come from the template). Pages reviewed: 0 of the docx's pages, so no visual claim is made for the docx.
+- Open for Word: the opening machine needs EB Garamond installed, or Word substitutes a font. The vendored `fonts/` copy is for typst only.
+
 ## Known gaps and open choices
 
 1. **One exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers from different filers; the brief asks for one per doc type. A second W.D. La. adversary complaint (*Andrus v. Island Operating Co.*, Adv. 19-05054, same trustee and counsel) was seen in the search but is the same filer, so it would not satisfy the rule either. Tier 2 is therefore not judged against two filers.
