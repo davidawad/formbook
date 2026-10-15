@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // L.R. 10(a)(4): no less than 12 point; a proportional serif, vendored in fonts/
+#let font-family = "EB Garamond"        // L.R. 10(a)(2), (4): plainly legible, 12 point or more; the rule names no face, so EB Garamond stays (docs/FONTS.md, "No face named"); vendored in fonts/
 #let type-size = 13pt                   // L.R. 10(a)(4) requires 12 point or more; 13 pt is a style choice (EB Garamond's x-height is smaller than Times New Roman's at the same size)
 #let body-leading = 1.35em              // L.R. 10(a)(6): double-spaced. EB Garamond's line box is 0.65em, so 1.35em of leading gives a 2.0em baseline pitch
 #let single-leading = 0.5em             // quotations, caption, counsel and signature: single-spaced (1.15em pitch)
