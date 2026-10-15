@@ -7,9 +7,10 @@ Folder: `courts/seventh-circuit/indiana/federal/northern-district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-blackman-2-26-cv-85-complaint.pdf` (sampled; 13 pages), plus `exemplars/FILED-EXAMPLE-nowak-3-24-cv-950-complaint.pdf` (second filer, 16 pages). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-blackman-complaint.md`: the whole 13-page filing transcribed (caption, headings, 66 numbered paragraphs, lettered subparagraphs, prayer, jury demand, signature). |
-| render | ok: `samples/OUTPUT-blackman-complaint.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-blackman-complaint.pdf` and `OVERLAY-blackman-complaint.txt` |
-| pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed on the final build) |
+| typeface | No face named by the rule: EB Garamond (vendored), per `docs/FONTS.md` ("No face named"). Embedded per `pdffonts`: EBGaramond Regular and Bold. See Known gaps 1. |
+| render | ok: `samples/OUTPUT-blackman-complaint.pdf`, 13 pages, typst 0.15.0, vendored fonts only, no warnings (re-rendered 2026-10-15) |
+| overlay | ok: `samples/OVERLAY-blackman-complaint.pdf` and `OVERLAY-blackman-complaint.txt` (rebuilt 2026-10-15) |
+| pages reviewed | 13 of 13 (every page rasterized and viewed on the 2026-10-15 build) |
 
 File names follow `CLAUDE.md` and the `tools/` defaults (`INPUT-` for the markdown, `OUTPUT-` for our render,
 `OVERLAY-` for the comparison). The brief's shorter names (`<id>.md`, `<id>-overlay.pdf`) would not be read by
@@ -28,6 +29,7 @@ Primary sources. Sources checked on 2026-10-14:
 | L.R. 5-4(a)(2) | 8.5 × 11 inch pages. | `page-w`, `page-h` (`paper: "us-letter"`). |
 | L.R. 5-4(a)(3) | At least 1-inch margins. | `margin = 1in` on all four sides. |
 | L.R. 5-4(a)(4) | At least 12-point type in the body; at least 10-point in footnotes. | `type-size = 12pt`; `note-size = 10pt` for footnotes (no footnotes in this sample). |
+| L.R. 5-4(a) (typeface) | No typeface is named. The rule sets only the 12-point and 10-point minimums above. | EB Garamond, the default in `docs/FONTS.md`; see Known gaps 1. |
 | L.R. 5-4(a)(5) | Double spaced, except headings, footnotes and quoted material. | `pitch = 27.6pt` (two 13.8 pt single lines of 12 pt type); `body-leading = 1.65em`. Headings, caption, counsel and signature are single spaced. Measured on the render: body baselines 27.6 pt apart. |
 | L.R. 5-4(a)(6) | Consecutively numbered pages. | Centered arabic footer on every page, page 1 included. |
 | L.R. 5-4(a)(7) | A title on the first page. | `paper-title(meta)` under the caption: "CLASS ACTION COMPLAINT". |
@@ -61,7 +63,7 @@ disclosure statement and any N.D. Ind. filing-fee form. None is part of the plea
 
 ## Known gaps and open choices
 
-1. **Font.** The template uses EB Garamond, vendored in `fonts/` and the only font in the repo. The filers use Times New Roman. EB Garamond at 12 pt has a smaller x-height than Times at 12 pt, so the text looks smaller than the exemplar. The 12-point minimum is met. A vendored Times-metric font would remove the difference; that is a question for David (`fonts/` is not mine to change).
+1. **Font.** No typeface is named by N.D. Ind. L.R. 5-4(a) (checked 2026-10-15 against the 2016 local-rules compilation; see Governing rules), so the template keeps EB Garamond, the no-face default in `docs/FONTS.md`. The filers use Times New Roman, but the rules do not require it, so that is a tier-2 difference: EB Garamond at 12 pt has a smaller x-height than Times at 12 pt, and the text looks smaller than the exemplar. The 12-point minimum is met. If the court's current rules name a face, switch to that face's substitute from `docs/FONTS.md` (Liberation Serif for Times New Roman).
 2. **Caption.** The party column is closed by a rule instead of the column of ")" marks used by the sampled filer. Both styles appear in N.D. Ind. filings (the second exemplar uses a different caption again); recorded as ACCEPTED.
 3. **Paragraph numbering.** The template numbers from 1 and the sample's numbers are the filed ones. The sampled filing numbers 1–66 with no gaps; the template reproduces this.
 4. **Run-in sub-items.** Paragraph 50 of the filing lists the DCSA purposes as (1)–(3) on separate lines. The sample runs them into the paragraph: the template has no sub-item form for "(1)" lists and the text is unchanged.
@@ -72,7 +74,7 @@ disclosure statement and any N.D. Ind. filing-fee form. None is part of the plea
 
 ## Review of the rendered pages (final build)
 
-- Page 1: court lines, division, caption with party block and case number, `JURY TRIAL DEMANDED`, title, Introduction heading, paragraphs 1–3. Pass.
+- Page 1: court lines, division, caption with party block and case number, `JURY TRIAL DEMANDED`, title, Introduction heading, paragraphs 1–3. Pass. The division line overlapped the second court line in the 2026-10-14 build (it sat outside the stack in `cover()`, with no gap); it is now in the same single-spaced stack and checked at 110 dpi.
 - Page 2: Parties, Jurisdiction and Venue, paragraphs 4–8. Pass.
 - Page 3: Factual Allegations, paragraphs 9–15. Pass.
 - Page 4: "Plaintiff’s Experience" (level 3, bold left), paragraphs 17–24. Pass.
