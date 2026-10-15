@@ -10,13 +10,13 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"   // vendored in fonts/; LR Civ P 7.02(a) names Times New Roman, Courier New or Arial (README, known gaps)
+#let font-family = "Liberation Serif"   // vendored in fonts/liberation-serif (Times New Roman substitute, metric-compatible); LR Civ P 7.02(a) names Times New Roman, Courier New or Arial (README, known gaps)
 #let type-size = 12pt              // LR Civ P 7.02(a): 12 point proportionally spaced type
 #let page-w = 8.5in                // LR Civ P 7.02(a): 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let margin = 1in                  // LR Civ P 7.02(a): one inch on all four sides
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em         // double spacing: EB Garamond's line box is 0.65em, so 1.35em leading gives a 24 pt pitch at 12 pt (README)
+#let body-leading = 1.345em        // double spacing: Liberation Serif's line box is 0.655em, so 1.345em leading gives a 24 pt pitch at 12 pt (measured, pdftotext -bbox)
 #let single-leading = 0.5em        // single spacing for caption, signature and quotations: about 13.8 pt at 12 pt
 #let para-indent = 0.5in           // first-line indent of numbered paragraphs
 #let caption-left = 3.6in          // width of the party column of the caption
