@@ -9,12 +9,13 @@
 
 | Item | Result |
 |---|---|
-| Exemplar | yes: `exemplars/FILED-EXAMPLE-fisher-14-981-cert-petition.pdf` (re-downloaded 2026-10-14 from the URL in `SOURCE.md`; 374 pages, the first 43 are the petition) |
+| Exemplar | yes: `exemplars/FILED-EXAMPLE-fisher-14-981-cert-petition.pdf` (re-downloaded 2026-10-14 from the URL in `SOURCE.md`; 374 pages, the first 43 are the petition; `SOURCE.md` records no checksum; sha256 of the copy in the folder is `0ea2c1627b3fe6d969d3b104e6f49bdf27e78f847ac034b9198d3b49fd71f24a`, fetched again 2026-10-15) |
 | Sample | `samples/INPUT-fisher-cert-petition.md` (kept from the earlier pass; excerpt, 14 rendered pages) |
-| Render | ok: `sh tools/render.sh courts/supreme-court-of-the-united-states/cert-petition samples/INPUT-fisher-cert-petition.md` writes `samples/OUTPUT-fisher-cert-petition.pdf` (14 pages, no typst warnings, Century-family face embedded) |
-| Overlay | ok: `sh tools/overlay.sh courts/supreme-court-of-the-united-states/cert-petition fisher-cert-petition` writes `samples/OVERLAY-fisher-cert-petition.pdf` and `.txt` (14 pages) |
-| Pages reviewed | 14 of 14 (every page of the render rasterized with `pdftoppm -r 70` and viewed as PNG) |
-| Typeface | TeX Gyre Schola (Century Schoolbook clone, GUST licence), vendored in `fonts/tex-gyre-schola/` (earlier blocker resolved: the face was already vendored) |
+| Render | ok (2026-10-15): `sh tools/render.sh courts/supreme-court-of-the-united-states/cert-petition samples/INPUT-fisher-cert-petition.md` writes `samples/OUTPUT-fisher-cert-petition.pdf` (14 pages, exit 0, no typst warnings, `--ignore-system-fonts`) |
+| Fonts | `pdffonts`: TeXGyreSchola-Regular, -Bold, -Italic embedded (CID Type 0C, subset). No EB Garamond or system face in the output. |
+| Overlay | ok (2026-10-15): `sh tools/overlay.sh courts/supreme-court-of-the-united-states/cert-petition fisher-cert-petition` writes `samples/OVERLAY-fisher-cert-petition.pdf` and `.txt` (14 pages) |
+| Pages reviewed | 14 of 14 (2026-10-15: every page of the render rasterized with `pdftoppm -r 70` and viewed as PNG) |
+| Typeface | Required: Century family, Rule 33.1(b). Substitute: **TeX Gyre Schola** (exact Typst family name, from `docs/FONTS.md`), vendored in `fonts/tex-gyre-schola/`. Class: metric-compatible (the upstream README says its glyph widths follow the Adobe New Century Schoolbook AFMs). The overlay shows 100% word overlap on body pages 6 and 7, but that is not a line-break check. No EB Garamond in this template; the overlay label font (a shared tool) is EB Garamond, which is not part of the court output. |
 | Open | Tier-2 items in the Gate 2 table below. `court.json` untouched. latex and docx engines not built. |
 
 ## Blockers
