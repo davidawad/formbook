@@ -20,6 +20,7 @@ Primary source: Local Bankruptcy Rules of the District of Oregon, "LBR.120125 cl
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | LBR 9004-1(a)(1)-(2) | Letter size; type at least 12 pt or 10 cpi; margins at least 1 inch top and bottom, 3/4 inch sides. | `page-w`, `page-h`, `type-size`, `margin-top`, `margin-bottom`, `margin-side`. |
+| LBR 9004-1(a)(1)(B) (typeface) | Type size only; no typeface is named in the local rules (checked 2026-10-15 against the fetched LBR text). | Face required: none. Template face: EB Garamond (vendored; `docs/FONTS.md` "No face named" row). |
 | LBR 9004-1(a)(4)(A) | Body double-spaced. | `leading-double`. |
 | LBR 9004-1(a)(9)(A), (D) | Counsel block single-spaced upper left; title and page number in the lower-left margin. | `lines(meta.counsel)`; `page-footer()`. |
 | LBR 9004-2(c) | Adversary caption (see the complaint README for the layout). | `court-title()`, `caption()`. |
@@ -56,7 +57,7 @@ Not verified in this run: FRCP 60(b) and FRBP 9024, as cited by the exemplar (no
 2. **The sample adds the LBR 9013-1(b)(2) notice.** The exemplar has no notice paragraph. The notice text is the rule's form (no facts), so it is added and the overlay shows it red-only. The exemplar's omission is a deviation from the rule, recorded here, not a template choice.
 3. **No LBR 7007-1(a)(1) prefiling certification.** The exemplar has none. The wording depends on facts (whether and how the parties conferred), so the sample does not add one. A real filing in an adversary proceeding needs it; the template renders it if it is written into the body's first paragraph, but does not check for it.
 4. **Caption wording.** LBR 9004-2(c) uses "Case No."; the exemplar's caption reads "Originating Case No." The template uses the rule's wording.
-5. **Font, footer size, caption approximation** as in the complaint README (EB Garamond; footer at 12 pt; the ")" column is measured, not exact).
+5. **Font, footer size, caption approximation** as in the complaint README (EB Garamond, kept because the local rule names no face; footer at 12 pt; the ")" column is measured, not exact).
 6. **Tool checks.** `tools/check.sh` and `tools/check-selftest.sh` were not run for the same reason as the complaint (the brief forbids touching `tools/`, and this folder is not a court folder). Render and overlay were run; the page review is the Gate 2 equivalent.
 7. **Latex and docx engines** are not built for this doc type (the brief asks for typst only).
 
