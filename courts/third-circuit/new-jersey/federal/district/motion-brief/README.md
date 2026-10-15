@@ -7,9 +7,10 @@ Folder: `courts/third-circuit/new-jersey/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes, two filers: `exemplars/FILED-EXAMPLE-karre-2-26-cv-06421-motion-brief.pdf` (McGuireWoods LLP, primary, 22 pages) and `exemplars/FILED-EXAMPLE-zeines-2-25-cv-13335-motion-brief.pdf` (Freedman Normand Friedland LLP, 13 pages). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-karre-motion-to-dismiss.md`: the cover, the Introduction, Statement of Facts, Legal Standard, Point I, and the Conclusion with signature, transcribed from the Karre memorandum. Points II to IV are omitted and marked in the text. |
-| render | ok: `samples/OUTPUT-karre-motion-to-dismiss.pdf`, 11 pages (cover, table of contents `i`, table of authorities `ii`-`iii`, body 1-7), typst 0.15.0, vendored EB Garamond only, no warnings |
+| typeface | Face required: **Times New Roman 14 pt** as the reference proportional face in L.Civ.R. 7.2(d) ("such as Times New Roman 14"; the rule also allows Courier New 12). Substitute: **Liberation Serif** (vendored; metric-compatible with Times New Roman, see `docs/FONTS.md`). Visual match, not pitch-identical: see Known gaps 1. |
+| render | ok: `samples/OUTPUT-karre-motion-to-dismiss.pdf`, 11 pages (cover, table of contents `i`, table of authorities `ii`-`iii`, body 1-7), typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Italic, -Bold), no warnings |
 | overlay | ok: `samples/OVERLAY-karre-motion-to-dismiss.pdf` and `.txt` (against the Karre exemplar; see below) |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the fonts pass; open items are marked OPEN in the Gate 2 table) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh`: the sample is `INPUT-<id>.md`, with `<id>` = `karre-motion-to-dismiss`.
 
@@ -31,7 +32,7 @@ Primary sources, fetched and read 2026-10-14 (D.N.J. Local Civil Rules, complete
 
 ## Layout
 
-- Letter, 1-inch margins; EB Garamond 14 pt; double spacing at a 28.3 pt pitch; first-line indent 0.5 inch; headings: level 1 centered bold caps (INTRODUCTION, ARGUMENT, CONCLUSION), level 2 numbered "I." with a hanging indent and bold text, level 3 "A.", level 4 "1.".
+- Letter, 1-inch margins; Liberation Serif 14 pt; double spacing at a 28.3 pt pitch (body leading 1.114 em, single-spaced pitch 16.1 pt; both tuned to Liberation Serif's 12.7 pt line height and checked against the Karre exemplar's 28.3 pt and 16.1 pt, measured with `pdftotext -bbox`); first-line indent 0.5 inch; headings: level 1 centered bold caps (INTRODUCTION, ARGUMENT, CONCLUSION), level 2 numbered "I." with a hanging indent and bold text, level 3 "A.", level 4 "1.".
 - Cover (no page number): counsel block top-left, single spaced; court title centered bold caps; caption with the party column closed by a right and a bottom rule; the right column carries the `Civil Action No.`, the judge line when set, and `Motion Day:`; the bold caps title centered under the caption.
 - Contents pages numbered in roman numerals (`i`, `ii`, ...); the body restarts at 1 (L.Civ.R. 7.2(b) does not prescribe the numbering; this is the usual practice in both exemplars).
 - Table of contents: headings with dot leaders and page numbers, produced from the headings. Table of authorities: grouped Cases, Statutes, Rules, Regulations, Other Authorities; case names italic; an authority cited on seven pages or more reads "passim"; page numbers from the `toa:` link locations.
@@ -50,25 +51,25 @@ Primary sources, fetched and read 2026-10-14 (D.N.J. Local Civil Rules, complete
 |---|---|
 | 1 (cover) | Counsel top-left; court title centered bold; caption with party column and rule; `Civil Action No.` and `Motion Day:` on the right; title centered bold below the caption. No page number. Pass. |
 | 2 (contents `i`) | TABLE OF CONTENTS; four top-level entries, the Point I entry, and CONCLUSION; page numbers right-aligned with dot leaders. Pass. |
-| 3 (authorities `ii`) | TABLE OF AUTHORITIES; Cases list in alphabetical order, italic case names, page numbers. Pass. |
+| 3 (authorities `ii`) | TABLE OF AUTHORITIES; Cases list in alphabetical order, italic case names, page numbers. OPEN (TOA-1): the *New Jersey Bank, N.A. v. Bradford Secs. Ops.* entry breaks after its dot leader, so its page number `5` sits alone on the next line. The italic cite nearly fills the line and typst breaks after the leader box; wrapping it in one `box` did not stop the break (tried in the fonts pass, reverted). |
 | 4 (authorities `iii`) | Remaining cases; Statutes and Rules groups, each entry with its page numbers. Pass. |
-| 5 (body 1) | INTRODUCTION centered; double-spaced text with first-line indent; a paragraph with the em dash; citations and the Rule link. Pass. |
-| 6 (body 2) | Paragraphs on the STATEMENT OF FACTS; "See id." italic signals; paragraph spacing unchanged. Pass. |
-| 7 (body 3) | LEGAL STANDARD heading; quotations and "Id." italic; star pages as `*6`. Pass. |
-| 8 (body 4) | ARGUMENT centered; "I." heading with hanging indent and bold text; Point I opening paragraphs. Pass. |
-| 9 (body 5) | Paragraphs with Third Circuit and state citations; case names italic throughout. Pass. |
-| 10 (body 6) | Block quotation single spaced and indented; citation line flush left after it; the omission marker in italics. Pass. |
-| 11 (body 7) | CONCLUSION centered; signature block: dated line, "Respectfully submitted," "/s/" signer, firm and address. Pass. |
+| 5 (body 1) | INTRODUCTION centered; double-spaced text with first-line indent; a paragraph with the em dash; citations and the Rule link. Layout and typeface pass. OPEN (SP-1), shared by pages 5-11: paragraph breaks are tight (see Known gaps 9). |
+| 6 (body 2) | Paragraphs on the STATEMENT OF FACTS; "See id." italic signals; paragraph spacing unchanged. Layout and typeface pass. OPEN (SP-1). |
+| 7 (body 3) | LEGAL STANDARD heading; quotations and "Id." italic; star pages as `*6`. Layout and typeface pass. OPEN (SP-1). |
+| 8 (body 4) | ARGUMENT centered; "I." heading with hanging indent and bold text; Point I opening paragraphs. Layout and typeface pass. OPEN (SP-1). |
+| 9 (body 5) | Paragraphs with Third Circuit and state citations; case names italic throughout. Layout and typeface pass. OPEN (SP-1). |
+| 10 (body 6) | Block quotation single spaced and indented; citation line flush left after it; the omission marker in italics. Layout and typeface pass. OPEN (SP-1). |
+| 11 (body 7) | CONCLUSION centered; signature block: dated line, "Respectfully submitted," "/s/" signer, firm and address. Layout and typeface pass. OPEN (SP-1). |
 
 ## Overlay (`tools/overlay.sh`)
 
-- Against the Karre exemplar (the default, `exemplars/*.pdf | head -1`): our page 1 pairs with filed page 1 (word overlap 84.9%), our pages 2-4 with filed pages 2, 4, 5 (42.8%, 40.4%, 26.7%), our 5-10 with filed 7-13 (80.1%, 57.6%, 47.0%, 67.4%, 77.6%, 81.9%), and our page 11 with filed page 22 (63.6%). The map is by word overlap, so the offsets follow the exemplar's own pagination (its text is a 22-page memorandum; ours is a partial transcription of the same passages).
+- Against the Karre exemplar (the default, `exemplars/*.pdf | head -1`): our page 1 pairs with filed page 1 (word overlap 84.9%), our pages 2-3 with filed pages 2 and 4 (42.8%, 36.3%), our page 4 (table of authorities `iii`) with filed page 5 (1.4%: a list of statute and rule citations shares few words with the filed text), our 5-10 with filed 7, 8, 10, 11, 12, 13 (84.8%, 65.2%, 45.4%, 66.9%, 78.1%, 83.9%), and our page 11 with filed page 22 (63.6%). The fonts pass re-rendered this map with Liberation Serif; the pairing moved only where the wider face changed the pagination. The map is by word overlap, so the offsets follow the exemplar's own pagination (its text is a 22-page memorandum; ours is a partial transcription of the same passages).
 - Against the Zeines exemplar (third argument; run once, then overwritten by the Karre run): overlap 5% to 20%, expected for a different case; diagnostic only.
 - Layout comparison with both exemplars was made by eye from the rasterized cover pages: Zeines puts counsel top-left, the bold court title centered, a caption closed by a right and bottom rule, and the bold title under the caption (matches this template). Karre puts counsel under the title on the cover; L.Civ.R. 10.1(b) allows either placement, and the template follows Zeines.
 
 ## Known gaps and open choices (for David)
 
-1. **Font size and face (L.Civ.R. 7.2(d)).** The rule allows "12-point non-proportional font (such as Courier New 12) or an equivalent 14-point proportional font (such as Times New Roman 14)". The template uses EB Garamond at 14 pt, the only vendored family. EB Garamond at 14 pt looks smaller than Times New Roman at 14 pt, so whether it is "equivalent" is a reading question. The alternatives are: vendor a Times-metric font (removes the question); use 12 pt proportional, which the rule allows with the page limits cut by 25% (our sample is far below either limit); or keep EB Garamond 14 pt and accept the visual difference. Decision needed.
+1. **Font face (L.Civ.R. 7.2(d)), resolved in the fonts pass for David to confirm.** The rule allows "12-point non-proportional font (such as Courier New 12) or an equivalent 14-point proportional font (such as Times New Roman 14)". The rule names Times New Roman as its reference face, so the template now sets **Liberation Serif 14 pt**, the metric-compatible substitute in `docs/FONTS.md`, instead of EB Garamond. The reading is that "such as" names the face the rule has in mind, not a mandate; if David reads it as allowing any equivalent proportional face, EB Garamond 14 pt is the alternative (EB Garamond at 14 pt looks smaller than Times New Roman at 14 pt). Page count is unchanged (11 before and after). The 12-pt option with a 25% page-limit cut is not used.
 2. **Judge's name (L.Civ.R. 10.1(b)).** The rule says the paper bears "the name of the Judge assigned". Both exemplars print only the judge's initials, inside the case number (`WJM-CF`, `JXN-LDW`); neither prints the name on the cover. The template has a `judge` line for the full name; the sample leaves it blank because the name is not in the exemplar and was not invented. Whether initials suffice in practice, or the name is required, is a question for David.
 3. **Party addresses (L.Civ.R. 10.1(a)).** This rule asks for each party's address in the first paragraph of an initial paper. A motion memorandum is not an initial paper, so the template does not require it; noted in case a reader takes the other view.
 4. **Partial transcription.** The sample omits Points II to IV, the rest of Point I, and their citations. The bracketed marker in the body says so. The contents and authorities pages list only the entries in the transcription, not those of the filed memorandum.
@@ -76,5 +77,8 @@ Primary sources, fetched and read 2026-10-14 (D.N.J. Local Civil Rules, complete
 6. **Footnotes.** The footnote style is set (14 pt, single spaced, same size as the text) but no footnote is in the sample, so it is untested.
 7. **Page limit.** The 40-page limit (L.Civ.R. 7.2(b)) is not checked by the template; the sample is far below it.
 8. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json`, `rules.md` and `checks.yaml`; this doc-type folder has none of them and the brief forbids editing `tools/`. The gates were not run; the render, the overlay and the review above are the evidence for this doc type.
+9. **Paragraph breaks are tight (SP-1, open).** The template sets `spacing: 0pt` between paragraphs, so the line pitch at a paragraph break is the line height (12.7 pt here) rather than the 28.3 pt double-space pitch: the first line of each new paragraph nearly touches the line above. Inside paragraphs the pitch is 28.3 pt. The complaint template has the same setting (its paragraph breaks measure 15.7 pt against a 27.6 pt pitch), so this predates the fonts pass. The fix (`spacing` equal to the body leading, which changes pagination in both templates) is a layout decision, not a font change, and is left for a separate change.
+10. **Table-of-authorities wrap (TOA-1, open).** The *New Jersey Bank* entry on page `ii` (PDF page 3) wraps its page number onto its own line. Cause: the italic cite fills the line and typst breaks after the leader box. A single `box` around the leader and the page number did not prevent it. A fix needs a different leader construction or a manual entry layout; not done here.
+11. **Overlay exemplar.** `exemplars/` holds only `SOURCE.md` in this snapshot; the two filed PDFs named there are not committed here, so `tools/overlay.sh` with its default exemplar cannot run. The overlay in this pass was run against the same RECAP files fetched from the URLs in `exemplars/SOURCE.md` (kept outside the repo). The PDFs should be committed as `exemplars/FILED-EXAMPLE-*.pdf` before the overlay can be rerun from the folder.
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)

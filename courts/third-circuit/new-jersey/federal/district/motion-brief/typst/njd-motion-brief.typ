@@ -11,11 +11,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // NJD-FORM-002: a standard proportional serif; the only vendored family in fonts/
+#let font-family = "Liberation Serif"    // NJD-FORM-002: Times New Roman 14 pt is the rule's reference face; Liberation Serif is its metric-compatible substitute (docs/FONTS.md)
 #let type-size = 14pt                    // NJD-FORM-002: 14-point proportional type (L.Civ.R. 7.2(d)); no 25% page-limit reduction applies
 #let pitch = 28.3pt                      // NJD-FORM-003: double spacing, measured in the Karre exemplar (28.3 pt at 14 pt)
-#let body-leading = 0.72em               // gap between lines of body text; tuned so the line pitch is `pitch` (see README.md)
-#let single-leading = 0.2em              // counsel block, caption, headings in the contents pages, block quotations, signature
+#let body-leading = 1.114em              // gap between lines of body text; tuned so the line pitch is `pitch` (Liberation Serif, see README.md)
+#let single-leading = 0.243em            // counsel block, caption, headings in the contents pages, block quotations, signature
 #let margins = (top: 1in, bottom: 1in, x: 1in)   // NJD-FORM-001: L.Civ.R. 7.2(c), margins not less than one inch
 #let para-indent = 0.5in                 // first-line indent of body paragraphs
 #let heading-tab = 0.5in                 // hanging indent of numbered headings

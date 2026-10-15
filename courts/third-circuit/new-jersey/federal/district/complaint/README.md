@@ -7,9 +7,10 @@ Folder: `courts/third-circuit/new-jersey/federal/district/complaint/`.
 |---|---|
 | exemplar | yes, two filers: `exemplars/FILED-EXAMPLE-dgl-group-2-26-cv-13086-complaint.pdf` (Kasowitz LLP, primary) and `exemplars/FILED-EXAMPLE-gomez-2-25-cv-02242-complaint.pdf` (Law Offices of Richard Malagiere). See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-dgl-group-complaint.md` (full transcription of the 12-page DGL complaint, numbering left to the template) |
-| render | ok: `samples/OUTPUT-dgl-group-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| typeface | Face required: **none**. The rules that govern this document (Fed. R. Civ. P. 10, 38; L.Civ.R. 10.1, 11.1, 11.2, 38.1) name no typeface, and L.Civ.R. 7.2(d) governs briefs only. Kept: **EB Garamond** (the default in `docs/FONTS.md`); no substitute applies. Both exemplars use Times New Roman 12 pt, so the look differs (Known gaps 1). |
+| render | ok: `samples/OUTPUT-dgl-group-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Italic, -Bold), no warnings |
 | overlay | ok: `samples/OVERLAY-dgl-group-complaint.pdf` and `.txt` (against the DGL exemplar; see below) |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the fonts pass; the template is unchanged by that pass, the render is the same) |
 
 File names follow the role convention used by `tools/render.sh` and `tools/overlay.sh`: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf`, the overlay `OVERLAY-<id>.pdf` and `.txt`, with `<id>` = `dgl-group-complaint`.
 
@@ -70,11 +71,11 @@ Paragraph count: 36 numbered paragraphs, matching the DGL exemplar's count.
 
 ## Known gaps and open choices
 
-1. **Font.** Both exemplars use Times New Roman 12 pt; the only vendored family is EB Garamond, which is smaller at the same point size. Visually the text reads smaller than the exemplars. The rule text for complaints sets no font (the font rule in L.Civ.R. 7.2(d) is for briefs). Vendoring a Times-metric face would remove the difference; that is a question for David.
+1. **Font (kept for now; question for David).** Both exemplars use Times New Roman 12 pt; EB Garamond is smaller at the same point size, so the text reads smaller than the exemplars. The fonts pass keeps EB Garamond because no governing rule names a face (L.Civ.R. 7.2(d) is for briefs only). Switching to Liberation Serif (the Times New Roman substitute in `docs/FONTS.md`) would match the exemplars visually but would be a choice the rules do not require, so it is left for David.
 2. **Caption rule.** The exemplars differ (DGL: none visible in the text layer; Gomez: a full box). The template closes the party column with a right and a bottom rule. Recorded as ACCEPTED (tier 2, two filers show different caption boxes).
 3. **Title.** L.Civ.R. 38.1 requires the words "and Demand for Jury Trial" in the title when a demand is endorsed. DGL's title is "COMPLAINT" with "JURY TRIAL DEMANDED" in the caption; the template follows the rule and sets the title "Complaint and Demand for Jury Trial". The DGL exemplar may be noncompliant on this point; that is a finding about the exemplar, not a template defect.
 4. **Lead-in.** The lead-in paragraph before paragraph 1 is an unnumbered sentence, identified by its prefix in the sample's frontmatter. A different complaint with a different lead-in needs its own prefix; a missing prefix numbers the lead-in and shifts the numbers.
 5. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json`, `rules.md` and `checks.yaml`; this doc-type folder has none of them and the brief forbids editing `tools/`. The gates were not run; the render, the overlay and the review above are the evidence for this doc type.
-6. **Paragraph spacing.** Paragraphs have no extra space between them (double spacing alone separates them), as in both exemplars.
+6. **Paragraph spacing.** Paragraphs have no extra space between them (double spacing alone separates them), as in both exemplars. Measured in the fonts pass: a paragraph break has a 15.7 pt pitch against 27.6 pt inside paragraphs, from the same `spacing: 0pt` setting as the motion brief's open item (SP-1). It reads acceptably at 60 dpi here; not changed in the fonts pass.
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
