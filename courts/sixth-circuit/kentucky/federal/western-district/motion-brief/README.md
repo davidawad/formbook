@@ -76,3 +76,29 @@ Not verified in this pass and not asserted by the template: the consolidated W.D
 - Page 16: conclusion paragraph; "Respectfully submitted," then "/s/ Carol Schureck Petitt", the attorney block and the counsel line, at 3.25 inch; the block is not split. Pass.
 
 Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Engines
+
+**docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh reference.docx`), `kywd-motion-brief.lua` (court title, caption table, signing block, optional certificate of service), `render.sh` (pandoc, then the reference's styles, page setup and footer are restored into the output). Render: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-zoeller-memorandum.md`. It writes `samples/OUTPUT-zoeller-memorandum.docx` and then stops at the soffice step (see BLOCKED).
+
+What matches typst (set in `reference.docx`):
+- Letter paper, 1 in margins on all four sides (LR 5.2(a)).
+- EB Garamond 12 pt, the only face (vendored). Measured on the typst render: `pdffonts` shows EBGaramond Regular and Bold, embedded; 16 pages.
+- Body: exact 24 pt line pitch, measured on the typst render (24.0 pt between body lines); body paragraphs are not numbered, first-line indent 0.5 in.
+- Single lines (caption, title, signature): exact 13.8 pt, measured on the typst caption rows.
+- Signature block at 3.25 in (4680 twips).
+- Footer: bare page number, centered, 12 pt, `PAGE` field with cached result.
+- Headings: level 1 centered bold caps; level 2 bold left (roman numerals); level 3 bold left (letters), not italic; keep with next.
+
+What differs from typst or is not verified:
+- Case label: `CIVIL ACTION NO.` from `case_label` in the frontmatter (as in typst), on the "vs." row. Same as typst, but the caption column widths come from the table, not a grid; not measured.
+- Heading spacing: `before` and `after` are 6 pt in the reference; not measured against the typst headings.
+- Certificate of service: plain text (inline markup dropped); the sample has none.
+- Pagination: not measured (no LibreOffice PDF of the docx). The typst render is 16 pages.
+
+docx BLOCKED items (no pass claimed):
+- `docx.pdf` and page review (Gates 0 to 3 and the per-page Gate 2 review): soffice is not installed on this box (`/opt/homebrew/bin/soffice: not found`). No LibreOffice PDF exists, so pages reviewed = 0.
+- Open-in-Word and open-in-LibreOffice check (no repair prompt): not done; neither application is on this box. The package check passed: a valid zip, no duplicate entries, every XML part well formed.
+- TOC, TOA and cross-reference fields: none in this template.
+- Pleading line numbers and vertical rules: not required by LR 5.2(a) and not in the typst template; not set.
+- The page limit (LR 7.1(d)) is a content rule and is not checked in the docx.
