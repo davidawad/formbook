@@ -82,6 +82,19 @@ Reviewed pages: 7 of 7.
 8. **Exhibits and proposed orders.** Not produced (separate filings). Exhibits A and B of the exemplar are attachments.
 9. **Caption style.** The ")" column is used. The exemplar uses a "§" column. Both appear in S.D. Ill. filings; the choice is a tier-2 convention and is not asserted by any rule.
 
+## Engines
+
+DOCX (`docx/`; built 2026-10-15, not reviewed):
+
+- Files: `docx/build-reference.sh` (same build as `complaint/docx/`: EB Garamond 12 pt, exact 24 pt line pitch, 0.5 in first-line indent, 1 in margins, letter, footnotes 12 pt single, centered PAGE footer, custom styles), `docx/reference.docx` (committed build output), `docx/ilsd.lua` (cover, caption table, headings labelled I., A., 1. by the filter, signature block, certificate of service, from the frontmatter).
+- Output: `samples/OUTPUT-shelton-motion-to-dismiss.docx`, written by `sh tools/render.sh --engine docx courts/seventh-circuit/illinois/federal/southern-district/motion-brief samples/INPUT-shelton-motion-to-dismiss.md`. The `.docx` opens as a valid zip and every XML part is well-formed (`unzip -tq`, `xmllint --noout`). The footer relationship (`footer1.xml`) and its content type are present.
+- Matches the typst form, by construction (not checked on a render): font and size, double spacing, 0.5 in first-line indent, 1 in margins, centered page number, 12 pt footnotes, heading labels and hanging indents, the signature block at 3.0 in, and the certificate of service on its own page with the recipients from the frontmatter.
+- Differs or unverified: the caption ")" column relies on exact 14 pt caption lines in a borderless table; the spacing around the caption, title, signature and certificate is set by style, not measured against typst. The date line and the certificate's right-aligned signer use a right tab at 6.5 in. The typst signature block is kept together (`breakable: false`); the docx signature paragraphs use keep-with-next, which Word and LibreOffice may honour differently. The open tier-2 finding in this folder (the signature block alone on a page, README "Review") may recur.
+- BLOCKED: `docx.pdf` not produced (`soffice` is not installed on this box, and cannot be installed here). The LibreOffice PDF gates (Gates 0 to 3, `sh tools/check.sh --engine docx`) cannot run. The docx.pdf render and page review are the REMAINING work.
+- Page review (Gate 2 for docx): 0 of 7 pages reviewed.
+- Cover and caption table borders are not verified against the typst layout (the table is set to no borders; the view was not checked).
+- No TOC or TOA: the typst template has none for this doc type either.
+
 ## Commands
 
 ```sh

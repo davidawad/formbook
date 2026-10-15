@@ -91,6 +91,19 @@ Reviewed pages: 11 of 11.
 8. **Documents not produced.** The civil cover sheet (JS-44), the Rule 7.1 disclosure statement (FRCP 7.1; LR 7.1-1), and the summons. Any of these may be required with the first filing.
 9. **Counts and paragraphs beyond the sample.** The sample is a portion (see Sample); a filed complaint with many counts needs the same template, which has no limit on the number of counts or paragraphs.
 
+## Engines
+
+DOCX (`docx/`; built 2026-10-15, not reviewed):
+
+- Files: `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc's default reference: EB Garamond 12 pt, exact 24 pt line pitch, 0.5 in first-line indent, 1 in margins, letter, footnotes 12 pt single, centered PAGE footer, and the custom styles Centered, Single, CaptionLine, SigIndent, PrayerItem, and so on), `docx/reference.docx` (committed build output), `docx/ilsd.lua` (cover, caption table, numbered paragraphs, prayer items and signature block, all from the frontmatter).
+- Output: `samples/OUTPUT-pro-life-complaint.docx`, written by `sh tools/render.sh --engine docx courts/seventh-circuit/illinois/federal/southern-district/complaint samples/INPUT-pro-life-complaint.md`. The `.docx` opens as a valid zip and every XML part is well-formed (`unzip -tq`, `xmllint --noout`). Pandoc resolved the footer relationship (`footer1.xml`) and the content type.
+- Matches the typst form, by construction (not checked on a render): font and size (EB Garamond 12 pt), double spacing, 0.5 in first-line indent, 1 in margins, centered page number, 12 pt footnotes, centered bold headings, prayer items with hanging labels, and the signature block at 3.25 in.
+- Differs or unverified: the caption ")" column relies on exact 14 pt caption lines in a borderless table, and the cover and caption spacing (14 pt lines, 24 pt gaps) is set by style, not measured against typst. Caption names are read as plain text (markdown emphasis in a caption name would be dropped). Paragraph and line breaks, and therefore the page count, may differ in Word.
+- BLOCKED: `docx.pdf` not produced (`soffice` is not installed on this box, and cannot be installed here). The LibreOffice PDF gates (Gates 0 to 3, `sh tools/check.sh --engine docx`) cannot run. The docx.pdf render and page review are the REMAINING work.
+- Page review (Gate 2 for docx): 0 of 11 pages reviewed. Nothing has been looked at in DOCX form.
+- Cover and caption table borders are not verified against the typst layout (the table is set to no borders; the view was not checked).
+- No TOC or TOA: the typst template has none for this doc type either.
+
 ## Commands
 
 ```sh
