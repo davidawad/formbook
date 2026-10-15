@@ -89,3 +89,15 @@ Open, accepted:
 - The certificate of interested entities reproduces the form's wording on page 2. The official APP-008 form must be used in a filing; the template is a layout reference.
 - Not generated: attachments under rule 8.204(d) (10-page cap), a running header, the e-filing stamp, and any second appendix.
 - Front matter numbering: the cover is page 1 (unnumbered), so the certificate of interested entities is page 2, as in the exemplar.
+
+## Engines
+
+Docx engine (`docx/`), built 2026-10-15. `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/calctapp.lua` writes the cover (from the frontmatter) and the signature block; pandoc writes the body. Set in `styles.xml` and `sectPr`, not rendered: EB Garamond 13 pt everywhere, footnotes included; body lines exact 467 twips (23.35 pt, the typst body pitch measured on `/work/artifacts/calctapp/answering-brief.pdf`); first-line indent 0.5 in; headings single-spaced, bold, black; block quotations single-spaced, indented 0.5 in each side; US Letter; 1.5 in left and right, 1 in top and bottom; centered footer PAGE field, none on the cover (`titlePg`). Not set: line numbers (the typst template sets none).
+
+Differs from typst: no certificate of interested entities, table of contents, table of authorities, certificate of compliance or certificate of service; the cover is paragraphs (no rules, no caption grid); the signature block is paragraphs (no "Respectfully submitted" or signature line).
+
+BLOCKED (docx engine, `samples/OUTPUT-brown-respondents-brief.docx`):
+- `docx.pdf` gates 0-3: BLOCKED, reason: `soffice` is not installed on the build box, so `tools/render-docx.sh` stops at the conversion step and no `.docx.pdf` exists. Pages reviewed for docx: 0.
+- Certificate of interested entities: not generated. Reason: not yet written.
+- TOC and TOA: not generated (typst builds both with page numbers). Reason: no TOC/TOA filter yet; LibreOffice does not honor TA/TOA fields (docs/DOCX.md).
+- Certificate of compliance and certificate of service: not generated. Reason: not yet written.
