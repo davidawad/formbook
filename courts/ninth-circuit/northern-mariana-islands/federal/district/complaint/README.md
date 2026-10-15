@@ -91,3 +91,15 @@ Not produced by this template (separate filings, not part of the complaint): the
 | 11 | PRAYER FOR RELIEF heading, WHEREFORE, items (a)-(c), date, signature block | OK after the fixes: signature block no longer splits from the firm name; the signer's name prints once under "/s/" (the earlier "By:" line duplicated it). |
 
 Reviewed pages: 11 of 11.
+
+## Engines
+
+**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`), `docx/nmid-complaint.lua` (cover, numbered paragraphs, lettered prayer items, signature block) and `docx/render.sh` (puts the sample's footer title and case number into the footer; the reference keeps placeholders). Output: `samples/OUTPUT-ewing-first-amended-complaint.docx` and `.docx.pdf` (11 pages, same as typst).
+
+- Matches typst: US Letter; margins 1.5 in top, 1 in bottom (25 lines of 24 pt), 1 in left, 0.5 in right; EB Garamond 12 pt; exact 24 pt double spacing; numbers 1 to 25 in a text box fixed in the left margin (not `w:lnNumType`, which would number the single-spaced cover lines and move with the text); pleading rules as page borders; counsel block, court title, caption table with its right and bottom rule; signature block kept with the last item; footer page number and title.
+- Differs: the pleading rules are page borders, so they run the height of the text area, not the full page height (typst draws full height); widow control is off in the reference to match typst's line fill; a heading and its paragraph move together, so a page can end two lines short (page 1 and page 8 of the sample); the caption and signature tables are a fixed minimum height, so the text under them keeps the 24 pt grid only while their content fits.
+- Fonts: LibreOffice needs the vendored `fonts/eb-garamond` visible (for example `FONTCONFIG_FILE` pointing at a conf that lists it); without it the PDF silently uses a fallback face.
+- Visual review: 11 of 11 pages of `OUTPUT-ewing-first-amended-complaint.docx.pdf` rendered at 60 dpi and viewed (2026-10-15). Open defects: none. Compared with the typst render: page 1 side by side, the rest against the same form (line count per page, heading and signature placement).
+- `tools/check.sh` cannot run on this folder (it reads `court.json` and `checks.yaml`, which exist at court level only, not in `complaint/`). No `.check-docx.txt` stamp is written.
+
+BLOCKED: check.sh (all gates, docx): `tools/check.sh <doc-type dir> --engine docx` exits 2 on a doc-type folder (no `court.json` / `checks.yaml` / `rules.md` there); the docx was checked by the visual review above, not by the gates.
