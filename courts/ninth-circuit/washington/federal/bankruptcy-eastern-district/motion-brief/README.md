@@ -8,8 +8,9 @@ Folder: `courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/mot
 | exemplar | yes: `exemplars/FILED-EXAMPLE-1min-25-80007-motion-to-dismiss-memorandum.pdf` (AP Defendants' memorandum supporting a motion to dismiss, Bush Kornfeld LLP and Eisenhower Carlson PLLC, filed 2025-02-19, 42 pages). One filer only. See `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-1min-motion-to-dismiss-memorandum.md`: caption, opening paragraph, Preliminary Statement, paragraphs 1 to 26 with Factual Background sections A and B, the Conclusion and the signature blocks. Paragraphs 27 to 101 and the Applicable Standards and Argument are not transcribed (see Known gaps). |
 | render | ok: `samples/OUTPUT-1min-motion-to-dismiss-memorandum.pdf`, 14 pages, letter, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> samples/INPUT-1min-motion-to-dismiss-memorandum.md`). |
-| overlay | ok: `samples/OVERLAY-1min-motion-to-dismiss-memorandum.pdf` (14 pages) and `samples/OVERLAY-1min-motion-to-dismiss-memorandum.txt` (page map), from `sh tools/overlay.sh <this dir> 1min-motion-to-dismiss-memorandum`. See Overlay. |
-| pages reviewed | 14 of 14: every rendered page rasterized at 70 dpi and viewed (2026-10-14). Pages 1 to 12 were viewed in the render made after the last change that touches them (the footnote spacing); the later edits start at paragraph 26, and the word count of pages 1 to 12 is the same in the final render. Pages 13 and 14 were viewed in the final render. The overlay was viewed as a 60 dpi contact sheet of all 14 pages. |
+| overlay | ok: `samples/OVERLAY-1min-motion-to-dismiss-memorandum.pdf` (14 pages) and `samples/OVERLAY-1min-motion-to-dismiss-memorandum.txt` (page map), from `sh tools/overlay.sh <this dir> 1min-motion-to-dismiss-memorandum <exemplar>` (2026-10-15). The exemplar PDF is not in the checkout; it was fetched from its CourtListener URL in `exemplars/SOURCE.md` (sha256 matches the recorded value). See Overlay. |
+| pages reviewed | 14 of 14 (2026-10-15: every rendered page rasterized at 70 dpi and viewed as a contact sheet, unchanged font). Earlier review 2026-10-14 at 70 dpi. |
+| typeface | LBR 9004-1(a)(3) names no face; EB Garamond kept (2026-10-15 check of the rule text). See Typeface. |
 
 ## Governing rules
 
@@ -31,6 +32,12 @@ Primary sources, fetched 2026-10-14 (quoted or paraphrased from the fetched text
 | FRBP 9013(a)-(b) (https://www.law.cornell.edu/rules/frbp/rule_9013, as amended Apr. 2, 2024, eff. Dec. 1, 2024) | A request for an order is made by written motion; "a motion must state its grounds with particularity and set forth the relief or order requested"; service within the time of FRBP 9006(d). | Opening paragraphs state the motion and relief (content). Service is a separate certificate (see Known gaps). |
 | FRBP 7012(b) (https://www.law.cornell.edu/rules/frbp/rule_7012, eff. Dec. 1, 2024) | "Fed. R. Civ. P. 12(b)-(i) applies in an adversary proceeding." | Opening paragraph cites Rule 12(b) and FRBP 7012 as the filing does (content). |
 | FRBP 9011(a) (https://www.law.cornell.edu/rules/frbp/rule_9011, eff. Dec. 1, 2024) | Every written motion must be signed by at least one attorney of record in the attorney's individual name; "Each document must state the signer's address and telephone number, if any." | `signature-block()`: each signer block gives the firm, `By /s/` line, the name, and the address and telephone (WAEB-MB-SIG-001). |
+
+## Typeface
+
+- Court rule: LBR 9004-1(a)(3) requires "a proportionately spaced typeface of 14 points or more" and roman type; a monospaced face of no more than 10.5 characters per inch is allowed in a brief. It names no face (checked 2026-10-15 against the text of the Complete Set of Local Rules, dated 2026-07-17 on the court's site).
+- Substitution: none. The rule names no face, so the template keeps EB Garamond (`docs/FONTS.md`, "No face named"). No other typeface is used in the template.
+- Times New Roman in the filed exemplar is the filer's choice, not a rule requirement, and is not copied.
 
 ## Layout
 
@@ -81,6 +88,7 @@ Page 1 pairs with the exemplar's signature page because both carry counsel names
 
 ## Known gaps
 
+0. **Typeface.** The rule names no face, so EB Garamond is kept. The exemplar's Times is the filer's choice (see Typeface).
 1. **Sample is partial.** The sample transcribes paragraphs 1 to 26 and the Factual Background sections A and B. Factual Background section C and paragraphs 27 to 101, the Applicable Standards, and the Argument are not transcribed; the sample says so in an italic note. The render is 14 pages, which is within the 8 to 14 target for a filing this long.
 2. **No table of contents or table of authorities.** The filed memorandum has both (pages i to iv of the filing), and the template does not produce them. Neither LBR 9004-1 nor LBR 9013-1 requires them for a memorandum; a clerk would expect them in a memorandum of this length. OPEN (tier 2): the template does not generate TOC/TOA, and the sample omits them.
 3. **No certificate of service.** The filed memorandum has none in its 42 pages. Service of a motion under FRBP 9013(b) is shown by a separate certificate or declaration, and LBR 2002-1(b)(4) requires a separate affidavit or unsworn declaration of mailing when notice is given under LBR 2002-1. The template has no certificate block.
