@@ -1,39 +1,41 @@
 # Exemplar source: adversary complaint, Bankruptcy Court M.D. La. (lamb)
 
-Status: **BLOCKED: no public exemplar.** No text-based filed adversary complaint from this court was found, so there is no `FILED-EXAMPLE-*.pdf` in this folder and no transcription is based on a filing. The template is built from the rules (see `../README.md`). The sample is fictitious.
+Status: **two filed exemplars**, both public RECAP copies of Doc. 1 (the complaint) from M.D. La. adversary proceedings, both text-based PDFs. Both were downloaded 2026-10-15 from `storage.courtlistener.com` (the RECAP archive behind CourtListener).
 
-Date searched: 2026-10-14 (second pass; the first pass was the same day).
+| File | Adversary | Main case | Filer (counsel) | Filed / entered | Pages | Text layer |
+|---|---|---|---|---|---|---|
+| `FILED-EXAMPLE-hoven-19-01027-adversary-complaint.pdf` | *Pull-A-Part, LLC v. Hoven*, Adv. 19-01027, Doc. 1 | 19-10514 (chapter 7) | Andrew Murrell Law Firm (J. Andrew Murrell) for Pull-A-Part, LLC, plaintiff | Filed 08/13/2019 (entered 08/13/2019 14:26:26) | 5 | yes: Word 2016 export, Calibri and Times, all pages extract |
+| `FILED-EXAMPLE-criss-18-01006-adversary-complaint.pdf` | *Criss v. Criss*, Adv. 18-01006, Doc. 1 | 17-11210 (chapter 7) | Grand Law Firm, LLC (Trenton A. Grand; Robert W. Hoke) for Sinarta Criss, plaintiff | Filed 03/16/2018 (entered 03/16/2018 16:45:52) | 2 | yes: Word 2016 export, Times, all pages extract |
 
-## Sources reached
+Two different filers, as the tier-2 standard asks. Both filings are older than the 2022 local rules this template is built from, so they settle conventions the rules leave open, not compliance with the current rules.
 
-| Source | Result |
+## Where each came from
+
+- Hoven: CourtListener docket `https://www.courtlistener.com/docket/16056753/1/christopher-scott-hoven-adversary-proceeding/` (docket id 16056753, RECAP document id 496354968). PDF: `https://storage.courtlistener.com/recap/gov.uscourts.lamb.67161/gov.uscourts.lamb.67161.1.0.pdf` (`pacer_doc_id` 08606275816). Filer's caption reads "PULL-A-PART LLC, Plaintiff; CHRISTOPHER SCOTT HOVEN, Defendant"; the complaint header reads "Case 19-01027 Doc 1 Filed 08/13/19 Entered 08/13/19 14:26:26 Page 1 of 5".
+- Criss: CourtListener docket `https://www.courtlistener.com/docket/6673138/1/criss-v-criss/` (docket id 6673138, RECAP document id 144293052, the main complaint; the attachments are not used). PDF: `https://storage.courtlistener.com/recap/gov.uscourts.lamb.64943/gov.uscourts.lamb.64943.1.0.pdf` (`pacer_doc_id` not recorded in the search result; the storage path is the one CourtListener lists for document 1). Header: "Case 18-01006 Doc 1 Filed 03/16/18 Entered 03/16/18 16:45:52 Page 1 of 2".
+
+Both documents are public court records as RECAP-uploaded PDFs. Personal identifiers in them (party names, a loan and an address in Criss) are reproduced only in the exemplar PDFs, not in the template or the sample.
+
+## How they were used
+
+- Structure only: an unnumbered opening paragraph before the first numbered allegation (both), numbered allegations (both), an unnumbered WHEREFORE paragraph (both), and a counsel signature block with `/s/` and the firm name (both). Both put the caption in a Form 416 style, with case, chapter and adversary numbers at the right. Neither has section headings, a certificate, a proposed order, a consent statement, or a cover sheet.
+- No text, coordinates or line breaks from either filing is in any template. The sample `samples/INPUT-adversary-complaint-sample.md` is fictitious and only mirrors the structure.
+
+## Searches (2026-10-15)
+
+| Search | Result |
 |---|---|
-| CourtListener, `court=lamb` RECAP search (`https://www.courtlistener.com/api/rest/v4/search/?q=...&court=lamb&type=r`, and the web UI `?q=...&type=r&court=lamb`) | Not reachable from this box: API calls timed out; the web UI returned HTTP 403 (second pass, WebFetch: HTTP 403). |
-| The court's own site, `https://www.lamb.uscourts.gov/` | Direct HTTP requests rejected by a proxy. WebFetch reached the local rules PDF, Standing Order 2026-1, the caption setup form (`Caption Setup Form - AP 08 18 2021.docx`), the blank motion form and the court's opinion PDFs (for example `opinions/2004-09-29_04-1006.pdf`, `opinions/2020-09-22_17-10579.pdf`). No adversary complaint is posted. |
-| govinfo, `USCOURTS-lamb-3_23-ap-01002` (*Foster v. Capital City Credit*, Adv. 23-1002, Doc. 67) | Memorandum opinion after trial, not a complaint. The package has no attachment; its `-1` and `-2` URLs return HTML, not a PDF. |
-| govinfo, `USCOURTS-lamb-3_18-ap-01025` (*Schott v. Massengale*, Adv. 18-1025, Docs. 89-90) | Proposed findings and conclusions and the court's order on the motion to dismiss. Not a complaint. The `-1` URL is the same order (Doc. 90). |
-| govinfo, `USCOURTS-lamd-3_24-cv-00593` (district-court withdrawal of reference, Canseco; the civil action that mentions Kologik) | The URL returns an HTML error page, not a PDF. |
-| `kellyhart.com/pleadings/Filing/10311/PLEADDoc1.pdf` to `PLEADDoc12.pdf` (Kologik, Case 24-10311) | All first-day papers; none is an adversary complaint. (The motion in Doc. 8 is the exemplar for `../../motion-brief/`.) |
-| Justia dockets (`dockets.justia.com/browse/state-louisiana/court-lamb`) | HTTP 403. |
-| inforuptcy.com docket pages (e.g. Informd 3:17-bk-10579 with adversary 18-1025; Kologik 3:24-bk-10311) | Docket summaries only. Direct fetches return HTTP 403; search results show no complaint link. |
-| `https://clearinghouse.net/doc/141139/` (a 2020 memorandum in support of a motion to dismiss) | HTTP 403. Court not confirmed. Not used. |
-| WebSearch, about 16 queries in both passes (adversary complaint, "Adv. Proc. No.", Chapter 7 trustee names Martin A. Schott, Dwayne M. Murray and Samera L. Abide, Kologik adversary, "gov.uscourts.lamb", storage.courtlistener, Justia / Scribd / docs.justia, Sherry Foster) | Returned the court's local rules, Standing Order 2026-1, caption forms, docket pages, opinions (Watson, Adv. 04-1006, a 2004 opinion; Foster and Schott as above), and complaints from other courts (W.D. La., E.D. La., N.D. Tex.). No M.D. La. adversary complaint PDF. |
+| CourtListener REST search, `court=lamb&type=r` (anonymous). 860 RECAP hits for "complaint". Anonymous calls are throttled to 5 per minute, so queries were paced. | Reachable this time, unlike the 2026-10-14 pass. Returned adversary complaints with RECAP PDFs for the candidates below. |
+| Candidates checked (`page_count`, `is_available`, text layer) | **Used:** Hoven 19-01027 Doc 1 (5 pp, text), Criss 18-01006 Doc 1 (2 pp, text). **Rejected, scanned images with no text layer** (words per page: 13, the header only; `pdfimages` shows CCITT page images): Foster v. Capital City Credit, Adv. 23-01002 Doc 1 (24 pp, Southeast Louisiana Legal Services, a motion for sanctions with complaint); Campbell v. AES/Barclays, Adv. 23-01015 Doc 1 (5 pp, NAPS2 scan, 65 words). **Not available** (RECAP entry is not in the archive): Callais v. Worley 18-01021, Worley 20-01008 (Investar), Carey Guglielmo 21-01005, Foster Tommy 20-01025, Barber 20-01022, Rice 20-01047, Selders 19-01002 (Louisiana Workforce Commission), Brown 18-01052 (Tower Credit), Kozar 16-01019/01020, Emery 09-01134, Sterling 12-01070. **Other:** Criss v. Williams 18-01020 Doc 1 (1 pp, text), not used, because a one-page complaint says nothing the two above do not. |
+| Court web site `https://www.lamb.uscourts.gov/` | Reachable from this box. No complaints are posted there; the 2026-10-14 notes stand. |
+| `https://www.courtlistener.com/docket/.../` HTML pages | HTTP 403 to anonymous requests; the storage PDFs are not blocked. |
 
-## Other leads checked and rejected
+## Other leads from the 2026-10-14 pass (still valid)
 
-- *Watson*, Adv. 04-1006 (memorandum opinion, 2004): plaintiffs were two LLCs, and the opinion is about standing. Not a complaint.
-- *Foster*, Adv. 23-1002 (the debtor's own adversary, Doc. 67 memorandum opinion, 14 pp.): opinion only. Its complaint is not published.
-- *Schott*, Adv. 18-1025 (the chapter 7 trustee's first amended complaint is described in the order): the complaint itself is not posted.
-- Kologik's district-court withdrawal of reference (24-cv-00593, dismissed July 1, 2025 per inforuptcy): the withdrawal motion is not available from a public source reachable from this box.
+- Governing text used (not an exemplar): Local Rules of the Bankruptcy Court, M.D. La., amended January 1, 2022 (`https://www.lamb.uscourts.gov/sites/lamb/files/2022_Local_Rules.pdf`); Standing Order 2026-1, cover sheet for adversary proceedings (`https://www.lamb.uscourts.gov/sites/lamb/files/Standing%20Order%202026-1%20adversary%20cover%20sheet.pdf`); Fed. R. Bankr. P. 7008, 7010, 9004 (Cornell LII).
+- Watson (Adv. 04-1006, 2004 memorandum opinion), Foster (Adv. 23-1002, Doc. 67 memorandum opinion), and Schott (Adv. 18-1025 orders) are opinions, not complaints.
 
-Docket aggregators (inforuptcy.com) list adversary numbers for some Baton Rouge cases but show no documents. A complaint from one of those dockets would need PACER or the court's CM/ECF, which this box cannot reach.
+## Limits
 
-## Governing text used instead (not an exemplar)
-
-- Local Rules of the Bankruptcy Court, M.D. La., amended January 1, 2022: https://www.lamb.uscourts.gov/sites/lamb/files/2022_Local_Rules.pdf (fetched 2026-10-14 via WebFetch; the PDF text was extracted with `pdftotext`).
-- Standing Order 2026-1, Cover Sheet for Adversary Proceedings, signed by Judge Michael A. Crawford, Feb. 24, 2026, effective March 1, 2026: https://www.lamb.uscourts.gov/sites/lamb/files/Standing%20Order%202026-1%20adversary%20cover%20sheet.pdf (text extracted with `pdftotext`).
-- Fed. R. Bankr. P. 7008 and 7010, Fed. R. Bankr. P. 9004 (legibility), via https://www.law.cornell.edu/rules/frbp/rule_7008 , rule_7010 , rule_9004 (fetched 2026-10-14).
-
-## To unblock
-
-Get one text-based filed complaint from this court (any adversary, any filer) from PACER, CM/ECF, or RECAP, and save it here as `FILED-EXAMPLE-<short-case>-<adv-no>-adversary-complaint.pdf` with its source recorded in this file. Then transcribe it into `../samples/` and re-run the overlay.
+- Two exemplars from two filers is the number the tier-2 standard asks for. Neither filing is recent. Both predate the 2022 local rules and Standing Order 2026-1, so the template's rule-driven choices (consent statement, the B1040 cover sheet) are not settled by these exemplars and are kept from the rules.
+- Both filings are short (2 and 5 pages). The sample is 4 pages. A longer M.D. La. complaint from the same period was not findable as text.
