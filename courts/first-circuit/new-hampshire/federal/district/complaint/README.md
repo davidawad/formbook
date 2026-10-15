@@ -74,4 +74,11 @@ Not produced (separate filings): the civil cover sheet (LR 3.1(b)); the summons 
 
 Defects found in review and fixed (kept here so the template does not regress): heading blocks collapsed to zero height and overlapped the text around them (fixed by moving the heading gap into the flow and keeping `below` non-zero); paragraph blocks lost one line of leading between each other (fixed by a trailing one-pitch gap); headings rendered at typst's default heading size (pinned to the body size); the WHEREFORE paragraph was numbered (marked `~`).
 
+## Engines
+
+docx (`docx/build-reference.sh` builds `docx/reference.docx`; filter `docx/nhd-complaint.lua`): `samples/OUTPUT-nicholas-complaint.docx` and `OUTPUT-nicholas-complaint.docx.pdf` (LibreOffice conversion). Matches typst: EB Garamond 12 pt; exact 27.6 pt body pitch; 0.5 in first-line indent; the caption; numbered allegations; lettered lists; the signature block at the 3.25 in indent; centered page number. Page count matches (14 and 14). Word was not available; the file was checked with LibreOffice only.
+
+- BLOCKED: prayer lead-in split from its items. In the docx, "WHEREFORE, Plaintiff ... seeks the following relief:" ends page 13 and items (a) to (d) start page 14; typst keeps the lead-in with its items on page 13. Keep-with-next is not applied to this lead-in.
+- Line wraps differ slightly from typst on most pages, and so do some page breaks; the page count is the same.
+
 [Formbook index](../../../../../../README.md)
