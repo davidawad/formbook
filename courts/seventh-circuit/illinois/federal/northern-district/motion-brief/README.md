@@ -9,7 +9,8 @@ Folder: `courts/seventh-circuit/illinois/federal/northern-district/motion-brief/
 | sample md | `samples/INPUT-tahboub-motion-brief.md`: cover, introduction, factual background, legal standard, Argument I.A and I.B (first part), conclusion, signature, certificate of service, footnotes 1 to 6. Arguments II to IV are omitted (see Known gaps). |
 | render | ok: `samples/OUTPUT-tahboub-motion-brief.pdf`, 10 pages (cover plus 9), typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-tahboub-motion-brief.pdf` and `OVERLAY-tahboub-motion-brief.txt` (page map) |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (N.D. Ill. LR 5.2(e) names no typeface; checked 2026-10-15). Vendored substitute: not needed; stays **EB Garamond**. Metric compatibility: n/a. |
+| pages reviewed | 10 of 10 (re-rendered 2026-10-15 and every page rendered at 60 dpi and viewed) |
 
 Build (from the repo root, with the toolchain on `PATH`):
 
@@ -58,7 +59,7 @@ Primary sources, fetched 2026-10-14.
 2. **Notice of motion not produced.** The filed motion (ECF 24 in the exemplar's docket) is a separate document: the notice, the motion, and the judge's presentment requirements (LR 5.3(b)) are not in this template.
 3. **Sample is a portion.** Transcribed from pages 1 to 9 and 19 to 21 of the 21-page filing, with Argument I.B cut after its first two paragraphs, and Arguments II to IV omitted (marked in the text). Typos in the source are carried over ("PURSANT", the certificate's "to be served to be filed"). Two extraction artifacts are corrected: the Iqbal pin cite reads "680–81" and the Lubavitch reporter cite reads "806 816" as printed.
 4. **Exemplar is one filer.** Tier 2 is judged against this one filing only; see the complaint README for the other N.D. Ill. filings found.
-5. **Font.** No font is mandated by LR 5.2(e). The exemplar is Times New Roman; the template uses EB Garamond, the only vendored font. The difference in apparent size is the same as in the complaint.
+5. **Font.** No font is mandated by LR 5.2(e) (verified 2026-10-15; see the complaint README). The template keeps EB Garamond, per `docs/FONTS.md`. The exemplar is Times New Roman; the difference in apparent size is the same as in the complaint, and is visual only.
 6. **Caption style.** This template uses the ")" column (as in the exemplar). The complaint template uses a box; both are seen in N.D. Ill. filings. Recorded as ACCEPTED.
 7. **Counsel block.** The exemplar places the counsel block on the cover and repeats it after the signature; the template prints it on the cover only.
 8. **Untested template features.** Block quotations (`>`), bulleted lists and the level-4 heading are coded but not exercised by a sample; they are not verified.
