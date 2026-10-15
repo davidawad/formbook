@@ -48,6 +48,22 @@ Not produced by this template (separate filings, not part of the complaint): the
 - Body: blank-line-separated chunks. `#` = level 1, `##` = level 2, `###` = level 3 headings (type the heading text in the case the filing uses; level 1 is capitalised by the template). A chunk that is a single line of plain text is a numbered paragraph (do NOT type the number). A chunk that begins `^ ` is unnumbered. A chunk of markdown list items (`1.` ... consecutive lines) is a lettered list. Italics `*...*` for case names and bracketed notes.
 - Not supported: tables, footnotes (none in the exemplar), raw typst, pleading-paper line numbers.
 
+## Engines
+
+The typst template above is the primary engine. The docx engine is in `docx/`; it has no latex engine.
+
+- `docx/build-reference.sh` builds `docx/reference.docx`: EB Garamond 12 pt, double spacing as an exact 27.6 pt line, 0.5 in first-line indent, letter page with 1 in margins, the page number centered 0.4 in from the bottom, and single-spaced styles for the caption, court title and signature. Run `sh docx/build-reference.sh docx/reference.docx` (needs pandoc, zip, unzip and xmllint).
+- `docx/arwd-complaint.lua` turns the same markdown into Word: the court title and caption as borderless tables of exact width, the title in bold capitals, numbered paragraphs (the filter numbers them, as typst does), lettered lists, `^ ` unnumbered paragraphs, headings, and the signature block.
+- `sh tools/render.sh --engine docx <this folder> samples/INPUT-little-complaint.md` writes `samples/OUTPUT-little-complaint.docx`. The `.docx.pdf` step did not run (see BLOCKED below).
+
+**What matches** (checked on the .docx XML and its text, not by eye): font and size, the 27.6 pt line pitch, margins, the first-line indent, the caption and signature table widths, the page-number footer, and the word sequence: every word of `INPUT-little-complaint.md` appears in the .docx in the same order.
+
+**What differs:** Word breaks lines and places page breaks differently from typst, so pagination is not the same. The number is followed by a tab to the 1.0 in stop (typst: 0.3 in after the number). Lettered items hang from 0.5 in with text at 1.0 in (typst's body indent is about 1.07 in). Stacked headings (COUNT I over STRICT LIABILITY) are one "Heading Continued" paragraph, not Word headings. The caption and signature tables hold plain text, so no italics inside them.
+
+**docx BLOCKED** (`docs/DOCX.md`):
+- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF, `tools/check.sh --engine docx`): BLOCKED. LibreOffice did not run on the build box. conda-forge has no libreoffice package; the Debian trixie LibreOffice packages, extracted without root, abort at startup in the UNO bootstrap (DeploymentException). No `.docx.pdf` exists, so **no docx page was rendered or reviewed** (pages reviewed: 0).
+- Word: the .docx was not opened in Word or LibreOffice, so the no-repair-prompt check is not done.
+
 ## What the overlay shows
 
 `samples/OVERLAY-little-complaint.pdf`: red = our render, blue = the filed exemplar, black = both. Pages are paired by word overlap (`OVERLAY-little-complaint.txt`): ours 1-3 ↔ filed 1-3 (84 %, 74 %, 91 %), ours 4 ↔ filed 5 (89 %), ours 5-9 ↔ filed 6-10 (62 % to 91 %). The exemplar is on a 28.9-pt pitch with an ECF header; our render is on 27.6 pt with no header, so text lines do not coincide and the blue ECF header never matches. The overlay is a diagnostic, not a score.

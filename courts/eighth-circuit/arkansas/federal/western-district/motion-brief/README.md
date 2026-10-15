@@ -54,6 +54,22 @@ Not produced by this template: the motion, a proposed order, declarations and ex
 - Body: blank-line-separated chunks. `#` = level 1, `##` = level 2, `###` = level 3 headings. A single-paragraph chunk is an unnumbered body paragraph. A chunk beginning `>` is a block quotation. A chunk of `1.` list items is a list. Italics `*...*` for case names, *Id.*, *See*; an asterisk inside a citation is escaped (`at \*3`).
 - Not supported: tables, a table of contents or authorities (none is required by the local rules read; the exemplar has none), footnotes (none in the exemplar), raw typst.
 
+## Engines
+
+The typst template above is the primary engine. The docx engine is in `docx/`; it has no latex engine.
+
+- `docx/build-reference.sh` builds `docx/reference.docx`: EB Garamond 12 pt, double spacing as an exact 27.6 pt line, 0.5 in first-line indent, letter page with 1 in margins, "Page n of N" centered 0.4 in from the bottom, and single-spaced styles for the caption, court title, closing, signature and certificate, plus the single-spaced block quotation. Run `sh docx/build-reference.sh docx/reference.docx` (needs pandoc, zip, unzip and xmllint).
+- `docx/arwd-motion-brief.lua` turns the same markdown into Word: the court title and caption as borderless tables of exact width, the title in bold, unnumbered body paragraphs, capitalized level-1 headings, block quotations, numbered lists ("1."), the closing and signature block kept with the last paragraph, and the certificate of service when the frontmatter has one.
+- `sh tools/render.sh --engine docx <this folder> samples/INPUT-gasper-motion-brief.md` writes `samples/OUTPUT-gasper-motion-brief.docx`. The `.docx.pdf` step did not run (see BLOCKED below).
+
+**What matches** (checked on the .docx XML and its text, not by eye): font and size, the 27.6 pt line pitch, margins, the first-line indent, the block-quotation indents, the caption and closing table widths, the page-number footer fields, and the word sequence: every word of `INPUT-gasper-motion-brief.md` appears in the .docx in the same order.
+
+**What differs:** Word breaks lines and places page breaks differently from typst, so pagination is not the same, and "Page n of N" is a field that Word and LibreOffice fill in at layout. Numbered items hang from 0.5 in with text at 1.0 in (typst's body indent is about 1.07 in). Stacked headings are one "Heading Continued" paragraph, not Word headings. The caption, closing and certificate tables hold plain text. The certificate heading is a level-1 heading, so Word lists it in the outline.
+
+**docx BLOCKED** (`docs/DOCX.md`):
+- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF, `tools/check.sh --engine docx`): BLOCKED. LibreOffice did not run on the build box. conda-forge has no libreoffice package; the Debian trixie LibreOffice packages, extracted without root, abort at startup in the UNO bootstrap (DeploymentException). No `.docx.pdf` exists, so **no docx page was rendered or reviewed** (pages reviewed: 0).
+- Word: the .docx was not opened in Word or LibreOffice, so the no-repair-prompt check is not done.
+
 ## What the overlay shows
 
 `samples/OVERLAY-gasper-motion-brief.pdf`: red = our render, blue = the filed exemplar, black = both. Pages are paired by word overlap (`OVERLAY-gasper-motion-brief.txt`): ours 1-10 ↔ filed 1-10 in order (98.8 % on page 1, 74.7 % on page 5, 44.5 % on page 9, 60.7 % on page 10). The exemplar is set in Times with its own line breaks and the page breaks fall in different places, so the two layers do not coincide line for line. The overlay is a diagnostic, not a score.
