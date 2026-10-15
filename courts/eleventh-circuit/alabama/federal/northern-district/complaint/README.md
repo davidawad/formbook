@@ -90,6 +90,31 @@ Tier-2 findings (OPEN or ACCEPTED):
 - ACCEPTED, p.8: the Count I heading and its "(Against All Defendants)" legend are set as the transcription gives them; the filed exemplar's heading wording is in the transcription, not re-checked against the PDF page image in this review.
 - OPEN, p.10: the two signature blocks sit side by side in two columns, as in the transcription; the filed exemplar's exact column placement was not compared line by line.
 
+## Engines
+
+The docx engine (`docx/`: `make-reference.sh` builds `reference.docx`, `alnd-complaint.lua` builds the cover, the numbered paragraphs and the signature block) renders `samples/OUTPUT-sec-complaint.docx` and `.docx.pdf` (the LibreOffice conversion). Every page of the `.docx.pdf` (10 of 10) was rasterized (`pdftoppm -r 60`) and compared with the typst render of the same sample.
+
+| Item | typst (primary) | docx |
+|---|---|---|
+| Typeface and size | EB Garamond 13 pt | same; EB Garamond is embedded in the PDF |
+| Body spacing | 24 pt pitch | 24 pt exact |
+| Caption, title, signature block | 15 pt pitch, caption rules | same; the gaps around the caption were measured against the typst render and agree within 4 pt |
+| Numbered paragraphs | number at 0.5 in, text after it, wrapped lines at the margin | same, with tab stops |
+| Lettered prayer items | label at 0.5 in, text at 0.9 in | same, hanging indent |
+| Headings | level 1 bold capitals; levels 2 and 3 bold, centered | same |
+| Page number | centered in the footer | same (PAGE field) |
+
+What differs:
+
+- Pagination: LibreOffice and typst break lines at different points, so a few paragraphs move. Both render 10 pages. The heading "FACTUAL BACKGROUND" moves to page 5 in the docx (it keeps with the next paragraph) where typst keeps it on page 4, and the prayer items start on page 10 where typst keeps them on page 9.
+- The caption and the two-firm signature block are Word tables built from the plain text of their entries, so italics inside them are not kept. The sample has none there.
+- The `.docx` was not opened interactively in Word or LibreOffice (Word is not available here; the LibreOffice check was headless, which cannot show a repair prompt). The file is a well-formed zip with well-formed XML parts (`tools/render-docx.sh`).
+- The docx gates (`tools/check.sh --engine docx`) were not run: this court folder has no `checks.yaml` or `rules.md` yet.
+
+docx BLOCKED items:
+
+- `BLOCKED: tools/check.sh --engine docx: not run, because the court folder has no checks.yaml yet.`
+
 ## Known gaps
 
 1. The sample is a transcription of selected parts of the 29-page exemplar. The frontmatter comment in `INPUT-sec-complaint.md` lists which paragraphs and sections are transcribed; Count II and the pages between are not. The template numbers the allegations itself, so the sample numbers run from 1 and do not match the filed paragraph numbers.

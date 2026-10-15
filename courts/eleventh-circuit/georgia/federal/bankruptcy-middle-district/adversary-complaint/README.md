@@ -93,3 +93,19 @@ Numbering check: the sample's COUNT I begins at ¶63 and COUNT II at ¶81, which
 6. **Adversary number.** The exemplar leaves the adversary number blank (it is assigned by the Clerk). The template shows a blank line when `adversary_number` is empty.
 7. **Case names are roman in the sample.** The exemplar's text layer has no italic markup; the template italicizes `*...*` markdown, so a future sample can italicize case names.
 8. **Overlay naming.** See "Build and check": the tool-fixed names differ from the brief's `<id>-overlay.pdf`.
+
+## Engines
+
+The typst template above is the primary engine. The docx engine is in `docx/`: `reference.docx` (built by `docx/make-reference.sh`), `gamb.lua` (the caption, the title, the numbering of the paragraphs, the "(a)" sub-items, the WHEREFORE and the signature blocks) and `render.sh` (pandoc with `--from markdown+smart-fancy_lists`, so a typed "(a)" stays text). Build and check:
+
+```sh
+sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint samples/INPUT-galardi-complaint.md
+```
+
+This writes `samples/OUTPUT-galardi-complaint.docx` and `samples/OUTPUT-galardi-complaint.docx.pdf` (LibreOffice 26.8, EB Garamond from `fonts/eb-garamond`).
+
+- **Matches the typst render:** EB Garamond 13 pt; letter; 1-inch margins; body double-spaced (24 pt exact) with a half-inch first-line indent; headings centered bold (level 1), bold (level 2), bold italic (level 3); the Form 416D caption as a table with a rule on the right and bottom of the party column; the court lines and title; paragraphs after the first heading numbered 1, 2, ... ; "(a)" sub-items with a hanging label; the WHEREFORE paragraph kept with the signature blocks; a centered page number on every page.
+- **Differs:** the docx PDF is 16 pages against 14 for typst. LibreOffice places the first line of an exact 24 pt line about 6 pt lower than typst, so a page holds about one line fewer. The WHEREFORE and signature chain moves as one, so page 15 holds only ¶ 96. No rule sets a page count here. Word may paginate differently again (docs/DOCX.md). The numbers are typed text, as in the typst template, not Word list numbering.
+- **Not opened in Word.** The `.docx` was checked for well-formed XML parts and unique style IDs; it was opened only in LibreOffice.
+- **Gates:** `tools/check.sh --engine docx` was not run for this folder. It needs `checks.yaml`, `reviews/`, a `court.json` and `yq` (mikefarah), and the court-level files are not in this snapshot. Every page of the `.docx.pdf` was rendered at 60 dpi and viewed against the typst pages (pages 1-16).
+- **docx BLOCKED:** none recorded. Gates 0-3 have not been run, so no check ID is cleared for docx yet.

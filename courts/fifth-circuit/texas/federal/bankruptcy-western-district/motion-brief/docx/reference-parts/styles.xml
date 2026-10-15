@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- txwb adversary complaint, docx engine. Mirrors typst/txwb-adversary-complaint.typ: EB Garamond 12 pt,
+     double spacing = exact 24 pt, single spacing = exact 13.8 pt (measured from the typst PDF), 1 in margins
+     (set in document.xml). Built into ../reference.docx by ../build-reference.sh. -->
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:docDefaults>
+    <w:rPrDefault>
+      <w:rPr>
+        <w:rFonts w:ascii="EB Garamond" w:hAnsi="EB Garamond" w:eastAsia="EB Garamond" w:cs="EB Garamond"/>
+        <w:sz w:val="24"/>
+        <w:szCs w:val="24"/>
+        <w:lang w:val="en-US" w:eastAsia="en-US" w:bidi="ar-SA"/>
+      </w:rPr>
+    </w:rPrDefault>
+    <w:pPrDefault>
+      <w:pPr>
+        <w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/>
+      </w:pPr>
+    </w:pPrDefault>
+  </w:docDefaults>
+  <w:style w:type="paragraph" w:default="1" w:styleId="Normal">
+    <w:name w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:widowControl/>
+      <w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/>
+      <w:jc w:val="left"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="character" w:default="1" w:styleId="DefaultParagraphFont">
+    <w:name w:val="Default Paragraph Font"/>
+    <w:uiPriority w:val="1"/>
+    <w:semiHidden/>
+    <w:unhideWhenUsed/>
+  </w:style>
+  <w:style w:type="table" w:default="1" w:styleId="TableNormal">
+    <w:name w:val="Normal Table"/>
+    <w:uiPriority w:val="99"/>
+    <w:semiHidden/>
+    <w:unhideWhenUsed/>
+    <w:tblPr>
+      <w:tblInd w:w="0" w:type="dxa"/>
+      <w:tblCellMar>
+        <w:top w:w="0" w:type="dxa"/>
+        <w:left w:w="0" w:type="dxa"/>
+        <w:bottom w:w="0" w:type="dxa"/>
+        <w:right w:w="0" w:type="dxa"/>
+      </w:tblCellMar>
+    </w:tblPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="BodyText">
+    <w:name w:val="Body Text"/>
+    <w:basedOn w:val="Normal"/>
+    <w:qFormat/>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="FirstParagraph">
+    <w:name w:val="First Paragraph"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:next w:val="BodyText"/>
+    <w:qFormat/>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Compact">
+    <w:name w:val="Compact"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:spacing w:line="276" w:lineRule="exact"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading1">
+    <w:name w:val="heading 1"/>
+    <w:basedOn w:val="Normal"/>
+    <w:next w:val="FirstParagraph"/>
+    <w:uiPriority w:val="9"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:keepLines/>
+      <w:spacing w:before="136" w:after="0" w:line="276" w:lineRule="exact"/>
+      <w:jc w:val="center"/>
+      <w:outlineLvl w:val="0"/>
+    </w:pPr>
+    <w:rPr>
+      <w:b/>
+      <w:bCs/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading2">
+    <w:name w:val="heading 2"/>
+    <w:basedOn w:val="Normal"/>
+    <w:next w:val="FirstParagraph"/>
+    <w:uiPriority w:val="9"/>
+    <w:unhideWhenUsed/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:keepLines/>
+      <w:spacing w:before="136" w:after="0" w:line="276" w:lineRule="exact"/>
+      <w:jc w:val="center"/>
+      <w:outlineLvl w:val="1"/>
+    </w:pPr>
+    <w:rPr>
+      <w:b/>
+      <w:bCs/>
+      <w:i/>
+      <w:iCs/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading3">
+    <w:name w:val="heading 3"/>
+    <w:basedOn w:val="Normal"/>
+    <w:next w:val="FirstParagraph"/>
+    <w:uiPriority w:val="9"/>
+    <w:unhideWhenUsed/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:keepLines/>
+      <w:spacing w:before="136" w:after="0" w:line="276" w:lineRule="exact"/>
+      <w:jc w:val="left"/>
+      <w:outlineLvl w:val="2"/>
+    </w:pPr>
+    <w:rPr>
+      <w:b/>
+      <w:bCs/>
+      <w:i/>
+      <w:iCs/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="FootnoteText">
+    <w:name w:val="footnote text"/>
+    <w:basedOn w:val="Compact"/>
+    <w:uiPriority w:val="99"/>
+    <w:unhideWhenUsed/>
+    <w:pPr>
+      <w:spacing w:after="120" w:line="276" w:lineRule="exact"/>
+    </w:pPr>
+    <w:rPr>
+      <w:sz w:val="24"/>
+      <w:szCs w:val="24"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="character" w:styleId="FootnoteReference">
+    <w:name w:val="footnote reference"/>
+    <w:uiPriority w:val="99"/>
+    <w:unhideWhenUsed/>
+    <w:rPr>
+      <w:vertAlign w:val="superscript"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Footer">
+    <w:name w:val="footer"/>
+    <w:basedOn w:val="Normal"/>
+    <w:uiPriority w:val="99"/>
+    <w:unhideWhenUsed/>
+    <w:pPr>
+      <w:spacing w:line="276" w:lineRule="exact"/>
+      <w:jc w:val="center"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Header">
+    <w:name w:val="header"/>
+    <w:basedOn w:val="Normal"/>
+    <w:uiPriority w:val="99"/>
+    <w:unhideWhenUsed/>
+    <w:pPr>
+      <w:spacing w:line="276" w:lineRule="exact"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="character" w:styleId="Hyperlink">
+    <w:name w:val="Hyperlink"/>
+    <w:uiPriority w:val="99"/>
+    <w:unhideWhenUsed/>
+    <w:rPr>
+      <w:color w:val="000000"/>
+      <w:u w:val="none"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="table" w:styleId="Table">
+    <w:name w:val="Table"/>
+    <w:basedOn w:val="TableNormal"/>
+    <w:uiPriority w:val="59"/>
+    <w:tblPr>
+      <w:tblBorders>
+        <w:top w:val="nil"/>
+        <w:left w:val="nil"/>
+        <w:bottom w:val="nil"/>
+        <w:right w:val="nil"/>
+        <w:insideH w:val="nil"/>
+        <w:insideV w:val="nil"/>
+      </w:tblBorders>
+    </w:tblPr>
+  </w:style>
+  <!-- Custom paragraph styles used by the Lua filter (custom-style / raw OpenXML). -->
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="CourtTitle">
+    <w:name w:val="Court Title"/>
+    <w:basedOn w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:jc w:val="center"/>
+    </w:pPr>
+    <w:rPr>
+      <w:b/>
+      <w:bCs/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PleadingTitle">
+    <w:name w:val="Pleading Title"/>
+    <w:basedOn w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:jc w:val="center"/>
+    </w:pPr>
+    <w:rPr>
+      <w:b/>
+      <w:bCs/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="Single">
+    <w:name w:val="Single"/>
+    <w:basedOn w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:spacing w:line="276" w:lineRule="exact"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="NegativeNotice">
+    <w:name w:val="Negative Notice"/>
+    <w:basedOn w:val="Single"/>
+    <w:qFormat/>
+    <w:rPr>
+      <w:b/>
+      <w:bCs/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="Spacer">
+    <w:name w:val="Spacer"/>
+    <w:basedOn w:val="Normal"/>
+    <w:pPr>
+      <w:spacing w:line="324" w:lineRule="exact"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="NumberedParagraph">
+    <w:name w:val="Numbered Paragraph"/>
+    <w:basedOn w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:tabs>
+        <w:tab w:val="left" w:pos="1226"/>
+      </w:tabs>
+      <w:ind w:firstLine="720"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="LeadIn">
+    <w:name w:val="Lead In"/>
+    <w:basedOn w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:ind w:firstLine="720"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PrayerItem">
+    <w:name w:val="Prayer Item"/>
+    <w:basedOn w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:tabs>
+        <w:tab w:val="left" w:pos="1571"/>
+      </w:tabs>
+      <w:ind w:left="1571" w:hanging="851"/>
+    </w:pPr>
+  </w:style>
+</w:styles>

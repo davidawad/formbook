@@ -60,4 +60,19 @@ File names: as in the complaint folder, the tools' default names (`OUTPUT-`, `OV
 5. **Length.** The template does not check the 26-page (2016) or 6,500-word (2026 proposal) limit.
 6. **Second filer search** (done): CourtListener RECAP, `court=gasd`, `type=r`, memoranda and briefs in support of motions to dismiss, filed 2025 to 2026. The S.D. Ga. court site refuses non-browser downloads (HTTP 403 to curl), so the local rules were read from the copy retrieved through the fetch tool.
 
+## Engines
+
+Typst (`typst/`) is the reference. The docx engine is `docx/`: `reference.docx` (rebuilt by `sh docx/make-reference.sh`) and `docx/gasd-motion-brief.lua`, which builds the court title, caption, title, numbered headings, signature block and certificate of service from the sample's frontmatter. Output: `samples/OUTPUT-harper-memorandum-mtd.docx`.
+
+- **Matches typst** (same settings in both templates): US Letter, 1-inch margins, EB Garamond 12 pt; double spacing as an exact 24 pt line pitch, 16.2 pt between paragraphs; single-spaced caption, quotations, signature and address blocks; the caption as a borderless three-column table (3.1 in, 0.3 in, 3.1 in); "- N -" centered in the footer on every page; first-line indent 0.5 in; quotations indented 0.75 in on both sides; footnotes in 12 pt single spacing (Word-native footnotes); signature block at 3.2 in; the certificate of service on its own page with the caption repeated (LR 5.1).
+- **Differs from typst**:
+  - Layout is **not verified**. This box has no LibreOffice, so no `.docx.pdf` was rendered and no page was looked at. Word and LibreOffice may paginate differently from the typst PDF.
+  - Heading numbers ("I.", "A.", "1.") are typed text added by the filter, not Word numbering.
+  - The "1." items of a list are typed text with a hanging indent, not Word numbering.
+  - Each paragraph of a quotation stays its own paragraph; typst runs a quotation's lines into one paragraph.
+  - The date line, "Respectfully submitted," and the signers are kept together, as typst keeps them in one unbreakable block. The WHEREFORE paragraph before them is not kept with them (also not in typst).
+  - Headings are capitalized by the style (`w:caps`); the certificate's title is uppercased in the text, as in typst.
+  - Word and LibreOffice need EB Garamond installed (vendored in `fonts/eb-garamond`); it is not embedded.
+- **docx BLOCKED**: the `.docx.pdf` gates (Gate 0 content, Gate 1 rules, Gate 2 page review, Gate 3 generalization, all measured on the LibreOffice PDF) cannot run. `soffice` is not installable here (no conda-forge package, no root), so `tools/render.sh --engine docx` stops after writing the `.docx`, and `tools/check.sh --engine docx` also needs the court's `checks.yaml`, which this court does not have yet. Word or LibreOffice opening the `.docx` without a repair prompt has not been checked. Pages reviewed for docx: 0. The footnote-marker and list-marker differences in the text are expected; the content of every sample paragraph is in the `.docx` in order (checked by a word-sequence comparison, not by a page review).
+
 [Formbook index](../../../../../../README.md) | [Federal courts in Georgia](../../README.md)

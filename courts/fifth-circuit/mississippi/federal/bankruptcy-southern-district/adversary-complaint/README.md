@@ -53,6 +53,40 @@ Not produced by this template (separate filings, not part of the complaint): the
 - Every block of text is rounded up to whole 24 pt rows (`on-grid`), so the next block starts on the grid. Without this, typst puts the leading between lines and each block's last line runs into the next (found and fixed in this build).
 - Signature: date line, "Respectfully submitted," and the signature block in the right half, with counsel details below.
 
+## Engines
+
+Three engines run from one markdown contract. `typst/` is the primary template and the reference for this form. `docx/` was added here. No `latex/` yet.
+
+| Engine | Output in `samples/` | Result |
+|---|---|---|
+| typst | `OUTPUT-griffin-adversary-complaint.pdf` | unchanged |
+| docx | `OUTPUT-griffin-adversary-complaint.docx` | written and checked for package integrity; `.docx.pdf` BLOCKED (below) |
+
+Build: `sh docx/make-reference.sh` once (writes `docx/reference.docx` from pandoc's default, with the court's styles and footer), then `sh tools/render.sh --engine docx <this folder> samples/INPUT-griffin-adversary-complaint.md`. The filter is `docx/mssb-adversary-complaint.lua`. The render script's LibreOffice step fails on the box used here; the `.docx` is written before that step.
+
+What the docx build sets to the typst form (from the same frontmatter). These are settings in the XML and the filter, not a rendered comparison: no page has been rendered (see below).
+
+- US Letter, 1 in margins. EB Garamond 12 pt for the body, caption, footnotes and footer (5005-1(a)(2)(G)).
+- Double spacing as exact 24 pt lines (`w:line="480" w:lineRule="exact"`), the same pitch as the typst template. Single spacing for caption, counsel and signature lines.
+- Cover: court name and division in bold; a borderless caption table with a 3.6 in party column; title in bold capitals.
+- Lead-in, then the consent statement, then numbered paragraphs (1, 2, ...) with a 0.5 in first-line indent. Level-1 headings centred capitals, level-2 centred bold, level-3 bold italic.
+- Lettered sub-items (a), (b), ... hang from 0.5 in; the signature block sits in the right half (3.25 in indent).
+- Footer: centred page number, 12 pt.
+
+What differs, by design or by Word:
+
+- Paragraph numbers are typed text ("1." and a tab), not Word list numbering. An edit does not renumber the paragraphs after it.
+- Headings are styled paragraphs (`MSSB Heading ...`), not Heading 1-3, so there is no navigation pane or outline.
+- No on-grid rounding. Typst rounds each block up to whole 24 pt rows; Word keeps each paragraph's own height. The blank lines before the signature and the 12 pt gaps in the caption are approximated with blank paragraphs and a fixed-height spacer row.
+- Keep-together: headings and the signature block keep with the next paragraph. The last body paragraph is not held with the signature, as typst holds it.
+- The fee table (¶ 49) is built by the filter as a borderless table, 5.5 in wide and indented 1 in, as typst lays it out. Its cells keep italic and bold; other inline markup in a cell is flattened to plain text (the fee table has none).
+- Pagination differs between Word and LibreOffice; page counts are not measured for the docx.
+
+docx BLOCKED (not verified by a render):
+
+- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF, `tools/check.sh --engine docx`): BLOCKED. LibreOffice cannot start on the box used here. The Debian LibreOffice 25.2 packages (extracted without root, all shared libraries resolved) exit at bootstrap with a `DeploymentException`. No `.docx.pdf` exists, so no page was rendered or viewed (pages reviewed: 0), and `samples/.check-docx.txt` is not written. `tools/check.sh` also needs `yq` and a court folder with `court.json` and `rules.md`, which a doc-type folder does not have.
+- The `.docx` has not been opened in Word or LibreOffice. Its package parts are well-formed XML and the zip is valid, which is necessary, not sufficient.
+
 ## Overlay
 
 `samples/OVERLAY-griffin-adversary-complaint.pdf` puts our render (red) over the best-matching page of the filed Griffin complaint (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the final run:

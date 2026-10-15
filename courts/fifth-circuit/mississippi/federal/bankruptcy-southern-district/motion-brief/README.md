@@ -57,6 +57,41 @@ Federal rules: Fed. R. Bankr. P. 9004 read in full on 2026-10-14 from Cornell LI
 - The certificate of service starts a new page, as in the filing.
 - Every double-spaced block is rounded up to whole 24 pt rows (`on-grid`), so the next block starts on the grid. A quotation and an address block are not rounded (their measure differs from their width), and each gets a space below.
 
+## Engines
+
+Three engines run from one markdown contract. `typst/` is the primary template and the reference for this form. `docx/` was added here. No `latex/` yet.
+
+| Engine | Output in `samples/` | Result |
+|---|---|---|
+| typst | `OUTPUT-lentz-motion-brief.pdf` | unchanged |
+| docx | `OUTPUT-lentz-motion-brief.docx` | written and checked for package integrity; `.docx.pdf` BLOCKED (below) |
+
+Build: `sh docx/make-reference.sh` once (writes `docx/reference.docx`), then `sh tools/render.sh --engine docx <this folder> samples/INPUT-lentz-motion-brief.md`. The filter is `docx/mssb-motion-brief.lua`. The render script's LibreOffice step fails on the box used here; the `.docx` is written before that step.
+
+What the docx build sets to the typst form (from the same frontmatter). These are settings in the XML and the filter, not a rendered comparison: no page has been rendered (see below).
+
+- US Letter, 1 in margins. EB Garamond 12 pt for the body, caption, quotations, footnotes and footer (5005-1(a)(2)(G)).
+- Double spacing as exact 24 pt lines, the same pitch as the typst template. Single spacing for caption, quotations, address blocks, counsel and signature lines, and footnotes (5005-1(a)(2)(G) allows this).
+- Cover: court name, division, caption table with a 3.6 in party column, title in bold capitals, and the docket line `(Dkt. # ...)`.
+- Body paragraphs are unnumbered, with a 0.5 in first-line indent. Level-1 headings are centred capitals (I., II., ...), level-2 bold at the left (A., B., ...), level-3 bold italic.
+- Block quotations are single spaced, indented 0.75 in on the left and 0.5 in on the right.
+- The signature block (party, "/s/", signer, counsel) sits in the right half (3.25 in indent) after the text. The certificate of service starts a new page after it.
+- Footer: centred page number, 12 pt.
+
+What differs, by design or by Word:
+
+- Labels inside a block quotation ("1.", "b.", "V.", "(1)") are typed text with a tab, as the filed text prints them, not Word list numbering. They carry no hanging indent, so a wrapped line returns to the quotation's left edge.
+- Headings are styled paragraphs (`MSSB Heading ...`), not Heading 1-3, so there is no navigation pane or outline.
+- No on-grid rounding. Typst rounds each block up to whole 24 pt rows; Word keeps each paragraph's own height.
+- Keep-together: headings and the signature block keep with the next paragraph. The last body paragraph is not held with the signature, as typst holds it.
+- The sample has no pipe tables. A table in another memorandum would fall back to pandoc's table style, which is not the typst layout, and is not checked.
+- Pagination differs between Word and LibreOffice; page counts are not measured for the docx.
+
+docx BLOCKED (not verified by a render):
+
+- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF, `tools/check.sh --engine docx`): BLOCKED. LibreOffice cannot start on the box used here. The Debian LibreOffice 25.2 packages (extracted without root, all shared libraries resolved) exit at bootstrap with a `DeploymentException`. No `.docx.pdf` exists, so no page was rendered or viewed (pages reviewed: 0), and `samples/.check-docx.txt` is not written. `tools/check.sh` also needs `yq` and a court folder with `court.json` and `rules.md`, which a doc-type folder does not have.
+- The `.docx` has not been opened in Word or LibreOffice. Its package parts are well-formed XML and the zip is valid, which is necessary, not sufficient.
+
 ## Overlay
 
 `samples/OVERLAY-lentz-motion-brief.pdf` puts our render (red) over the best-matching page of the filed memorandum (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the final run:

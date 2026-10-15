@@ -94,6 +94,23 @@ Note: the rendered body has 7 pages (body 1-7 are PDF pages 3-9); the certificat
 - The page limit is not enforced (TTAB-TB-PAGE-001).
 - The sample omits the exemplar's images (the end-cap and CES photographs), and the sample is a portion of the body.
 
+## Engines
+
+The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference.sh` (the `reference.docx`: EB Garamond 12 pt, double-spaced body at 24 pt exact, half-inch first-line indent, headings at the typst template's default sizes (16.8, 14.4 and 12 pt), single-spaced block quotations and footnotes), `docx/ttab-trial-brief.lua` (the caption page with the counsel block and date at the foot of the page, the table of authorities, the signature block, the certificate of service), and `docx/render.sh`, which runs the conversion twice or more: pandoc cannot know the pages of the authorities, so each pass converts to PDF with LibreOffice, `docx/toa-pages.sh` finds the body page of every citation, and the next pass lists them. Render: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-treefrog-rebuttal-brief.md` writes `samples/OUTPUT-treefrog-rebuttal-brief.docx` and `.docx.pdf`.
+
+Sections: the caption page and the table of authorities are roman (i, ii); the body is arabic from 1 and the certificate continues it.
+
+| Item | docx vs typst |
+|---|---|
+| Font, size, double spacing, margins, US Letter, heading sizes, block quotations, footnotes | Matches (TTAB-TB-FORM-001 to 003) |
+| Caption page: heading, caption with the ")" column, proceeding numbers, title, "Redacted Version", counsel block and date at the foot | Matches in position; the counsel block is a frame anchored to the bottom margin |
+| Table of authorities | Matches in form (cases alphabetical, then the other groups; dot leaders; "passim" from 7 pages). Page numbers are text computed from the LibreOffice PDF, not Word TA/TOA fields, so they do not update in Word |
+| Table of authorities page numbers | Differ from the typst pages where the pagination differs: the sample's Warner citation is on body page 3 in docx and on page 4 in typst; the statute is on pages 1 and 3 in docx and 1, 3 and 4 in typst. Both pass computed from their own pages |
+| Certificate of service | Own page, as the typst one; the text is double-spaced and not indented, as the typst paragraph |
+| Pagination | Both 9 pages with the same page labels (i, ii, body 1-6, and the certificate on page 7). Word will paginate slightly differently |
+
+BLOCKED (docx): `check.sh --engine docx` cannot run on this folder for the same reason as the notice (no `checks.yaml` or court-root `court.json` for this doc type). The table of authorities page numbers are verified against the LibreOffice PDF only; a Word page can differ by one. Pages reviewed: every page of `OUTPUT-treefrog-rebuttal-brief.docx.pdf` (9 pages) was rendered at 60 dpi and compared with the typst pages.
+
 ## Searches
 
 - Web search, several phrasings: "trial brief" / "opposer's trial brief" / "applicant's trial brief" with ttabvue and "Opposition No." (returned Board orders, extension notices, docket entries, and docketalarm pages; no brief directly).

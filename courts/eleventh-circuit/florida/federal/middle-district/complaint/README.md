@@ -81,3 +81,32 @@ Every page was rendered with `pdftoppm -r 60`, montaged two per image, and viewe
 - Page 9: list (f) to (l), DEMAND FOR JURY TRIAL (unnumbered), date line, signature block. Pass.
 
 No overflow, no orphaned headings. Caption, headings and signature block are as before the font change.
+
+## Engines
+
+| Engine | Status |
+|---|---|
+| typst | primary; unchanged by this section |
+| docx | built: `docx/reference.docx` (made by `docx/make-reference.sh complaint`), `docx/flmd-complaint.lua`, `docx/render.sh`. Output `samples/OUTPUT-bracho-complaint.docx` (valid zip, well-formed XML, text check below). `OUTPUT-bracho-complaint.docx.pdf`: **BLOCKED** (no LibreOffice on this box, see below). |
+| latex | not built |
+
+What matches the typst template (by rule): Letter, 1-inch margins; main text Times New Roman 14-point (LR 1.08(b)); double-spaced; the court-title and caption block (FRCP 10(a)); numbered paragraphs (FRCP 10(b)) with a 0.5-inch first-line indent; lettered lists (a), (b), ...; the indented, unnumbered jury demand; the signature block at 3 inches; page numbers bottom center from page two (`titlePg`, no footer on page one).
+
+What differs from typst:
+
+- **Line spacing.** The docx uses Word's native "double" (auto 2.0), not the 28.1-pt pitch of the typst template. Word's double on 14-point Times New Roman is, by the typst README's estimate (gap 3 above), about 2.3 em, so the docx may run longer than the typst render (9 pages). Not measured here; the docx follows the rule's word.
+- **Typeface.** The docx names Times New Roman, which Word has; LibreOffice substitutes Liberation Serif (metric-compatible). Typst uses Liberation Serif directly.
+- **Caption rule.** A 28-underscore closing rule in a table column (the typst template uses 30, which at 14 pt does not fit the 2.9-inch column).
+- **Numbers are text.** The paragraph numbers are typed (`N.` and a tab), as in the typst template, not Word automatic numbering. A paragraph inserted in Word does not renumber the rest.
+- **Quotations and footnotes.** Block quotations are 13-point, single-spaced (LR 1.08(b)); footnotes are 12-point single-spaced. The typst template sets no size for quotations, so it renders them at 14 point. The sample has no quotations or footnotes.
+- **Pagination** is not measured (see the BLOCKED item): the typst page count of 9 is not a claim for the docx.
+
+Checks run on the `.docx` (not a PDF gate): every word of the markdown body is in the docx text, in order (1578 of 1578 words; `pandoc -t plain`, with the smart-punctuation no-break spaces and ellipses normalized). The cover, caption and signature are added by the filter and are not in the markdown body.
+
+BLOCKED (docx tier 1 gates, `docs/DOCX.md`):
+
+- `OUTPUT-bracho-complaint.docx.pdf` could not be made: `tools/render-docx.sh` calls `soffice`, which is not installed. LibreOffice 25.2 was unpacked from the Debian packages into a private prefix without root; it stops during UNO bootstrap (`RuntimeException`), so no PDF exists. Gates 0 and 1 and the Gate 2 page review were not run on a docx PDF; pages reviewed: 0.
+- Word has not been used to open the file (no Word here). The package is a valid zip with well-formed XML parts.
+- `tools/render-docx.sh` runs LibreOffice with the system font configuration, not the vendored fonts that `docs/FONTS.md` rule 2 requires. That is in `tools/` (out of this change's scope) and should be fixed there before the docx PDF gates can count.
+
+To rebuild: `sh docx/make-reference.sh docx/reference.docx complaint`, then `sh tools/render.sh --engine docx <court-dir>/complaint samples/INPUT-bracho-complaint.md`.

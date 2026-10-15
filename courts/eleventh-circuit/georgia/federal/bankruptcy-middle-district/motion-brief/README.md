@@ -92,3 +92,19 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-di
 10. **Signature twice.** The memorandum signature and the certificate of service signature both appear (the convention in the template; the exemplar has only the first).
 11. **Notice of motion and proposed order** are not produced (GAMB-MOT-003, GAMB-MOT-004). Both are separate documents that must be filed with the motion.
 12. **Overlay naming.** See "Build and check."
+
+## Engines
+
+The typst template above is the primary engine. The docx engine is in `docx/`: `reference.docx` (built by `docx/make-reference.sh`), `gamb.lua` (the caption, the title, the date line, the signature blocks and the certificate of service) and `render.sh` (pandoc with `--from markdown+smart-fancy_lists`, so the typed "(A)", "(i)" labels of the block quotations stay text). Build and check:
+
+```sh
+sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/motion-brief samples/INPUT-gordon-memorandum.md
+```
+
+This writes `samples/OUTPUT-gordon-memorandum.docx` and `samples/OUTPUT-gordon-memorandum.docx.pdf` (LibreOffice 26.8, EB Garamond from `fonts/eb-garamond`).
+
+- **Matches the typst render:** EB Garamond 13 pt, footnotes 12 pt single-spaced; letter; 1-inch margins; body double-spaced (24 pt exact) with a half-inch first-line indent; headings centered bold (level 1, 18 pt), bold (level 2, 16 pt), bold italic (level 3); block quotations indented 0.75 in on both sides and single-spaced; the Form 416D caption as a table with a rule on the right and bottom of the party column; the court lines and title; the signature blocks after the date line; the certificate of service after them; a centered page number on every page. Footnotes are Word footnotes.
+- **Differs:** the docx PDF is 10 pages, the same as typst. Pagination and line breaks are LibreOffice's, not typst's, so individual page breaks differ (see the page starts in the review above). Quotation paragraphs have a 6 pt space before each (typst: 12 pt above and below the whole quotation, none between its paragraphs). The docx PDF page 10 starts with the end of the conclusion, and the date line, signature and certificate follow on it; the typst page 10 starts with the date line. Word may paginate differently again (docs/DOCX.md).
+- **Not opened in Word.** The `.docx` was checked for well-formed XML parts and unique style IDs; it was opened only in LibreOffice.
+- **Gates:** `tools/check.sh --engine docx` was not run for this folder, for the same reason as the adversary complaint (no `checks.yaml`, `reviews/`, `court.json` or `yq` in this snapshot). Every page of the `.docx.pdf` was rendered at 60 dpi and viewed against the typst pages (pages 1-10).
+- **docx BLOCKED:** none recorded. Gates 0-3 have not been run, so no check ID is cleared for docx yet.

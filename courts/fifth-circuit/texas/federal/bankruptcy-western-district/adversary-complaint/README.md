@@ -84,3 +84,24 @@ Not produced by this template (separate filings with the complaint, not part of 
 
 - Exemplar and other complaints: see `exemplars/SOURCE.md`.
 - Rule text: FRBP 7010 and 9004(a) from Cornell LII, fetched 2026-10-14; W.D. Tex. L.R. 9014-1 from https://www.txwb.uscourts.gov/l-rule-9014-1-contested-matters (via WebFetch, 2026-10-14; the page was summarized, not quoted in full).
+
+## Engines
+
+**docx** (`docx/`): `sh tools/render.sh --engine docx adversary-complaint samples/INPUT-osherow-complaint.md` runs pandoc with `docx/txwb-adversary-complaint.lua` on `docx/reference.docx`, then LibreOffice (`soffice --headless --convert-to pdf`). `docx/reference.docx` is rebuilt from `docx/reference-parts/` by `sh docx/build-reference.sh`. EB Garamond must be installed for LibreOffice (`fonts/eb-garamond`). Checked on `samples/OUTPUT-osherow-complaint.docx.pdf`, 9 of 9 pages rendered at 60 dpi and viewed beside the typst pages.
+
+| Layout | Matches typst | Differs (docx against typst, same sample) |
+|---|---|---|
+| Page count, Letter, 1 in margins, EB Garamond 12 pt (embedded) | 9 pages | none |
+| Line pitch: 24 pt body, 13.8 pt single (exact spacing) | yes, to 0.1 pt in the caption and signature | none |
+| Caption: 3.4 in / gutter / 2.8 in, right and bottom rules, case numbers at right | yes | none |
+| Court title, title of the paper, lead-in, roman and lettered headings | yes | heading to the paragraph below is about 5 pt larger (heading spacing 6.8 pt above) |
+| Numbered paragraphs (0.5 in first line, text at 0.92 in) and lettered prayer (a) (text at 1.09 in) | yes | numbers 10 and up do not push the text right (docx uses a fixed tab; typst flows the number) |
+| Signature block, kept together | yes | none |
+| Footer page number | yes | none |
+
+- **Vertical placement.** LibreOffice places the text lower inside exact-height lines: body text sits about 11 pt lower on the page than in the typst PDF, single-spaced text about 3 pt lower. Pitch, margins and page breaks agree. Margins are not moved to compensate (the 1 in margin is the convention, and a shifted margin would not be the court's).
+- **Line breaks** fall on different words in a few lines (renderer metrics; both are left-aligned).
+- **Not tried or not possible here:** 8.6 pt heading lines match typst's page count but clip capital letters in LibreOffice (rejected). Word was not available; it may paginate differently (`docs/DOCX.md`).
+- **Not required by this court:** pleading line numbers, TOC and TOA (no txwb rule found; see Governing rules). Not produced.
+
+**docx BLOCKED:** none for the render. The gates (`tools/check.sh --engine docx`) were not run: the court has no `checks.yaml` or `rules.md` yet, so the checker cannot run on it. The evidence here is the render and the page-by-page review, not a stamp.

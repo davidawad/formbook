@@ -59,4 +59,19 @@ Not verified in this pass: FRCP 8(a) (the template does not check its content); 
 6. **Italics.** The exemplar uses an italic face (`TimesNewRomanPS-ItalicMT`, `pdffonts`), so case names and signals are italic in the filing. The text layer does not say which words are italic, and no per-word font data was extracted, so the sample is roman. The template italicizes `*...*` if a sample uses it.
 7. **Search for a second filer** (done): CourtListener RECAP, `court=gasd`, `order_by=dateFiled desc`, complaints filed 2026-08 to 2026-10. The S.D. Ga. court site refuses non-browser downloads (HTTP 403 to curl), so the local rules were read from the copy retrieved through the fetch tool.
 
+## Engines
+
+Typst (`typst/`) is the reference. The docx engine is `docx/`: `reference.docx` (rebuilt by `sh docx/make-reference.sh`) and `docx/gasd-complaint.lua`, which builds the cover, caption, lead-in, numbered paragraphs, lettered prayer and signature from the sample's frontmatter. Output: `samples/OUTPUT-atlantic-casualty-complaint.docx`.
+
+- **Matches typst** (same settings in both templates): US Letter, 1-inch margins, EB Garamond 12 pt; double spacing as an exact 24 pt line pitch, 16.2 pt between paragraphs; single-spaced caption, quotations and signature; the caption as a borderless three-column table (3.1 in, 0.3 in, 3.1 in); "- N -" centered in the footer on every page, page 1 included; numbered paragraphs with a 0.5 in first-line indent; lettered prayer items "(a)" at 0.5 in with text at 0.9 in.
+- **Differs from typst**:
+  - Layout is **not verified**. This box has no LibreOffice, so no `.docx.pdf` was rendered and no page was looked at. Word and LibreOffice may paginate differently from the typst PDF.
+  - The paragraph numbers ("1.", "2.") and the lettered items are typed text with a tab, not Word numbering, so they do not renumber when a paragraph is added.
+  - Each paragraph of a quotation stays its own paragraph; typst runs a quotation into one paragraph.
+  - A quotation's own lists keep Word's numbers ("1. Covered Property").
+  - The signature block is kept together, but not with the last numbered paragraph before it (typst keeps the two together).
+  - Headings are capitalized by the style (`w:caps`), so the text is as written in the sample.
+  - Word and LibreOffice need EB Garamond installed (vendored in `fonts/eb-garamond`); it is not embedded.
+- **docx BLOCKED**: the `.docx.pdf` gates (Gate 0 content, Gate 1 rules, Gate 2 page review, Gate 3 generalization, all measured on the LibreOffice PDF) cannot run. `soffice` is not installable here (no conda-forge package, no root), so `tools/render.sh --engine docx` stops after writing the `.docx`, and `tools/check.sh --engine docx` also needs the court's `checks.yaml`, which this court does not have yet. Word or LibreOffice opening the `.docx` without a repair prompt has not been checked. Pages reviewed for docx: 0.
+
 [Formbook index](../../../../../../README.md) | [Federal courts in Georgia](../../README.md)

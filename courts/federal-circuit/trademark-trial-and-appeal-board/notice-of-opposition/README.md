@@ -89,6 +89,19 @@ Defects found and fixed in the process: (1) overlapping lines, from the default 
 - The 66(a) (Madrid) variant and the consolidated-opposition variant (several applications, one opposer) are not separate templates; the `applications` block covers several applications.
 - The sample is one filer's notice (Brink). It is not a second, structurally different sample; the template is content-agnostic by construction (no case text in it), but it has not been tested on a second notice.
 
+## Engines
+
+The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference.sh` (the `reference.docx`: EB Garamond 12 pt, double-spaced body at 24 pt exact, half-inch first-line indent, single-spaced footnotes and block quotations, headings at the typst template's default sizes) and `docx/ttab-notice.lua` (the USPTO heading, the applications block, the caption table, the title, the signature block kept together, one slip sheet per exhibit). Render: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-brink-notice-of-opposition.md` writes `samples/OUTPUT-brink-notice-of-opposition.docx` and `.docx.pdf`.
+
+| Item | docx vs typst |
+|---|---|
+| Font, size, double spacing, margins, US Letter, centered page number from 1 | Matches (TTAB-NOP-FORM-001 to 003) |
+| Heading, applications, caption with the ")" column, title, signature block at 3 in., exhibit slip sheets | Matches in content and position; the caption table is a Word table, so its borders are off by design |
+| Pagination | The typst sample runs 8 pages; the docx runs 9. The signature block is kept on one page, which moves it to page 7; the typst block fits on page 6. Word will paginate slightly differently again (line height of the single-spaced lines) |
+| Exhibit slip sheets | A one-cell table of exact height, vertically centered; the same page as the typst slip sheet |
+
+BLOCKED (docx): `check.sh --engine docx` cannot run on this folder: the checks read `checks.yaml` and `court.json` in the court root, and this doc-type folder has neither (the court root has `court.json` but no `checks.yaml`). So no gate ID is green or red for this engine; the render and the page-by-page review are the only checks made. Pages reviewed: every page of `OUTPUT-brink-notice-of-opposition.docx.pdf` (9 pages) was rendered at 60 dpi and compared with the typst pages.
+
 ## Searches
 
 - Web search: "notice of opposition" TTAB pdf ttabvue (returned Board institution and extension orders, not the notice itself); a TTABVUE OPP-1 for 91174465 and 91274910 was fetched directly and found.

@@ -83,3 +83,24 @@ Every page was rendered with `pdftoppm -r 60`, montaged two per image, and viewe
 - Page 12: shotgun argument continued; III. CONCLUSION. Pass. Lower half blank by design: the certificate and signature block are kept together and move to page 13.
 - Page 13: LOCAL RULE 3.01(g) CERTIFICATE; "Respectfully submitted,"; both counsel's blocks; "Attorneys for Defendants". Pass.
 - Page 14: CERTIFICATE OF SERVICE, served list, `s/Jonathan Kepko` and "Attorney" together. Pass.
+
+## Engines
+
+| Engine | Status |
+|---|---|
+| typst | primary; unchanged by this section |
+| docx | built: `docx/reference.docx` (made by `sh ../complaint/docx/make-reference.sh docx/reference.docx motion`), `docx/flmd-motion-brief.lua`, `docx/render.sh`. Output `samples/OUTPUT-phillip-motion-to-dismiss.docx` (valid zip, well-formed XML, text check below). `OUTPUT-phillip-motion-to-dismiss.docx.pdf`: **BLOCKED** (no LibreOffice on this box; see the complaint README, "Engines"). |
+| latex | not built |
+
+What matches the typst template (by rule): Letter, 1-inch margins; main text 14-point, double-spaced; indented body paragraphs, not numbered; headings levels 1 to 4 (level 1 and 2 centered bold, level 3 bold left, level 4 bold italic left); lettered lists; the caption and cover; the signature block at 3 inches, kept as one block; the Local Rule 3.01(g) certificate before the signature; the certificate of service after it, kept together; page numbers bottom center from page two.
+
+What differs from typst:
+
+- **Typeface.** The typst template sets TeX Gyre Pagella, a visual stand-in for Book Antiqua (LR 1.08(a)). The docx names **Times New Roman 14-point** instead, which LR 1.08(b) also permits. Reason: a clerk's Word must have the named face, and Book Antiqua has no metric-compatible free substitute on this box (`fc-match` falls back to a mono face). This is a choice for David to confirm; if Book Antiqua is required, the docx needs a font that renders with the same metrics before the PDF gates mean anything.
+- **Line spacing and length.** Word's native double (auto 2.0), as in the complaint: the docx page count may differ from the typst render (14 pages); not measured here.
+- **Quotations** are 13-point single-spaced (LR 1.08(b)); the typst template sets no quotation size. Footnotes are not in the markdown contract (as in the typst template).
+- **Numbers.** Lettered items are typed `(a)`, `(b)`; the body paragraphs are unnumbered, as in the typst template.
+
+Checks run on the `.docx` (not a PDF gate): every word of the markdown body is in the docx text in order (2804 of 2804 words, including the certificate of service after the signature; `pandoc -t plain`, with smart-punctuation no-break spaces and ellipses normalized).
+
+BLOCKED (docx tier 1 gates, `docs/DOCX.md`): `OUTPUT-phillip-motion-to-dismiss.docx.pdf` could not be made (LibreOffice not runnable here, see the complaint README). Gates 0 and 1 and the Gate 2 page review were not run on a docx PDF; pages reviewed: 0. The sample is an excerpt (see gap 2 above), so the 25-page limit (LR 3.01(b)) is not tested by any engine.

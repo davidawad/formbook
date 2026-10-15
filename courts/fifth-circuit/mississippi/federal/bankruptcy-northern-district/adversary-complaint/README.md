@@ -74,3 +74,27 @@ A local-rule text, or a filed complaint from this court, would settle each of th
 - Page 1: counsel block, court title, two-row caption, title, paragraphs 1 to 5 (preliminary statement, jurisdiction and venue, parties). No overlap. Pass.
 - Page 2: paragraphs 6 to 17, FACTUAL BACKGROUND, COUNT I heading, paragraphs 14 to 17 on the page. No overlap, no heading at foot. Pass.
 - Page 3: paragraphs 18 to 24, COUNT II, REQUEST FOR RELIEF with the WHEREFORE lead-in unnumbered, lettered items (a) to (d) with hanging indent, DEMAND FOR JURY TRIAL, signature block right-aligned, page number. Pass.
+
+## Engines
+
+Docx engine (`docx/`): `reference.docx` (built by `docx/make-reference.sh`), `msnb-adversary-complaint.lua` (counsel block, court title, caption rows, numbered allegations, lettered and prayer items, signature block), and `render.sh` (the pandoc call; `tools/render-docx.sh` uses it). Renders: `samples/OUTPUT-community-bank-loancare.docx` and `.docx.pdf` (3 pages, LibreOffice 26.8).
+
+| Item | Typst (primary) | Docx | Note |
+|---|---|---|---|
+| Font, size | EB Garamond 12 pt | EB Garamond 12 pt (embedded, the only font in the PDF) | |
+| Page, margins | US Letter, 1 in | US Letter, 1 in | |
+| Body spacing | double, 24 pt baseline | exact 24 pt | |
+| Caption | IN RE and case number on one row, rule, PLAINTIFF, VS. and ADVERSARY NO., DEFENDANTS | same, as borderless two-column table rows with a rule under the debtor row | line breaks in the party column differ slightly |
+| Title | centered bold caps | same | |
+| Signature | DATED line, firm, `By: /s/ name` right column, title, counsel block flush left | same | |
+| Page number | centered, 10 pt | centered, 10 pt (`PAGE` field) | |
+| Pages (sample) | 3 | 3 | |
+
+Differences, by design:
+- **Allegation numbering.** The typst template numbers the markdown's plain paragraphs from its own counter, which starts again at 1 after the `1. The parties are:` item, so the sample's typst output shows two paragraphs numbered 1. The docx numbers every allegation consecutively (Fed. R. Civ. P. 10(b)). This is a typst defect; `typst/` is not changed here.
+- The WHEREFORE lead-in (the markdown `>` line) is unnumbered, as in typst; the prayer list keeps its own numbers.
+
+BLOCKED / not verified for docx:
+- Gates 0 to 3 cannot run: no `rules.md` or `checks.yaml` in this court yet, and `yq` is not on the box.
+- Opened in LibreOffice only (the PDF conversion succeeded); not opened in Microsoft Word.
+- The README's older note about `samples/INPUT-synthetic-adversary-complaint.md` is stale: that file is not in the folder, so only `INPUT-community-bank-loancare.md` renders. No second sample exists for Gate 3.
