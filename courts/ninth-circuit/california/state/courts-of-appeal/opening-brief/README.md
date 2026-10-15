@@ -17,7 +17,7 @@ Verified 2026-10-14 against the courts.ca.gov rule pages. The pages were read th
 
 | Requirement | Source | Value used in the template |
 |---|---|---|
-| Font style | Rule 8.74(b)(1) (https://courts.ca.gov/cms/rules/index/eight/rule8_74) | Proportionally spaced serif. Century Schoolbook is "preferred", not required. EB Garamond is used because it is the only serif vendored in `fonts/`, and the exemplar is Garamond. |
+| Font style | Rule 8.74(b)(1) (https://courts.ca.gov/cms/rules/index/eight/rule8_74) | Quoted 2026-10-15: "The font style must be a proportionally spaced serif face. Century Schoolbook is preferred." The rule allows any proportional serif, so the face is not named. EB Garamond (`font-family`) stays; the exemplar is Garamond. Visual-only stand-in if Century is wanted: TeX Gyre Schola (not used). |
 | Font size | Rule 8.204(b)(4) (https://courts.ca.gov/cms/rules/index/eight/rule8_204); Rule 8.74(b)(1) | 13 pt, including footnotes (`type-size`). |
 | Line spacing | Rule 8.74(b)(2) | 1.5 spaced. Measured on the render: body baseline pitch 25.41 pt against 16.97 pt single spacing, which is 1.50 (`body-leading`). |
 | Margins | Rule 8.204(b)(6); Rule 8.74(b)(3) | Left and right 1.5 in, top and bottom 1 in (`side-margin`, `top-margin`). |
@@ -39,7 +39,7 @@ Rule numbers marked "as summarized" or "not fetched" are not confirmed against t
 ## Known conflicts and choices
 
 - **The exemplar does not follow the current margin rule.** The 2021 filing measures 1.0 in at the left (text edge at 72 pt) and about 1.1 in at the right. Rule 8.204(b)(6) as fetched today requires 1.5 in left and right, so the template follows the rule. The exemplar settles nothing about margins, because the rule leaves nothing open here. David should confirm the current margin text against the official rule before a PR cites it.
-- **Font.** Century Schoolbook is the preferred face under Rule 8.74(b)(1), and it is not vendored. Adding a font is outside this unit (`fonts/` is shared), so EB Garamond stands in, and the render is checked for the 13 pt size and the embedded font names only.
+- **Font.** Century Schoolbook is the preferred face under Rule 8.74(b)(1), not a required one; the rule allows any proportional serif. EB Garamond stays. `fonts/tex-gyre-schola/` (the Century Schoolbook substitute in `docs/FONTS.md`) is vendored and could be used if David decides the preference should win; that is a change to this template, not made here. The render is checked for the 13 pt size and the embedded font names (`pdffonts`: EB Garamond only).
 - **Heading scheme.** Roman, A, 1, a is used both in the statements and in the argument, matching the exemplar's table of contents. The exemplar's point headings are bold and hang under the label, which the template does too.
 
 ## Gate 2: visual review of `samples/OUTPUT-kirk-opening-brief.pdf`
