@@ -1,8 +1,14 @@
-BLOCKED: no local exemplar PDF
+# Exemplar sources
 
-Searches tried (2026-10-14):
-- Texas Fifth Court of Appeals docket lookup for Case No. 05-25-00789-CV (Highway App, Inc. v. Kendann Transport): https://search.txcourts.gov/Case.aspx?cn=05-25-00789-CV&coa=coa05 . The docket lists an Appellant Brief filed September 26, 2025. Official SearchMedia URL: https://search.txcourts.gov/SearchMedia.aspx?MediaVersionID=8cb8d167-4888-4685-a092-616b1df2287c&coa=coa05&DT=Brief&MediaID=2b45f934-bef7-4cd3-a7af-2b4ab1108a39 (HTTP 403 from this environment).
-- Search results surfaced filed-document candidates in Texas Public Policy Foundation v. Highland Park Independent School District, No. 05-24-00813-CV: opening brief https://www.texaspolicy.com/wp-content/uploads/2024/10/Appellant-TPPFs-Brief-TPPF-v.-HPISD.pdf ; appellee brief https://www.texaspolicy.com/wp-content/uploads/2024/10/Brief-of-Appellee-HPISD-TPPF-v.-HPISD.pdf ; reply brief https://www.texaspolicy.com/wp-content/uploads/2025/11/HPISD-Appellants-Reply-Brief.pdf . Each PDF endpoint returned HTML/HTTP 403 when fetched from this environment, so no source PDF could be saved and verified locally.
-- Web search for Texas Fifth Court of Appeals appellant, appellee, and reply briefs surfaced indexed text and docket listings, but no candidate PDF could be fetched successfully.
+## FILED-EXAMPLE-reply-brief.pdf (used for the overlay and the transcribed sample)
 
-No exemplar PDF is included because the candidate sources could not be retrieved as PDF files. This also prevents an overlay comparison and a transcription sample.
+- Document: Appellant's Reply Brief, 10 pages (cover, contents, 7 pages of reply and certificates, plus a table of authorities).
+- Filer: Scott H. Palmer, P.C. (Niles Illich, Rebekah Perlstein; counsel for Appellant J.R.). Same filer as the opening-brief exemplar.
+- Court and case: Court of Appeals for the Fifth District of Texas at Dallas, No. 05-20-00920-CV (In re J.R.).
+- Date filed: January 11, 2021 (e-filing stamp "1/11/2021 5:16 PM"); the certificate of service is dated January 12, 2021.
+- URL: https://jlc.org/sites/default/files/attachments/2021-03/2021.1.11%20Reply%20Brief.pdf
+- Retrieved: 2026-10-15 (HTTP 200, application/pdf, 314,834 bytes).
+- SHA-256: 07f694917fcef90dc40ba8ff06a889f65df9d6134cb319ecea8c57f91c49f6f7
+- Filer count: one filer for this doc type. See README.md.
+- Length: the filed reply body is about five pages, so the transcription is short (see README.md, known gaps).
+- Sensitivity: as for the opening brief, the minor's medical and educational details are bracketed out of the transcription.

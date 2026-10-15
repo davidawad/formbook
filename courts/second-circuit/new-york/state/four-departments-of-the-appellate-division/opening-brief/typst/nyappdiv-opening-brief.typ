@@ -32,7 +32,7 @@
 #let font-family = "EB Garamond"            // vendored in /fonts; no system font is used.
 #let type-size = 14pt                       // Style choice above the 11-point floor in secondary sources (README).
 #let body-leading = 1.35em                  // Gap between lines; set so the baseline pitch is about double spacing (README, measured).
-#let single-leading = 0.25em                // Headings, block quotations, table entries: single-spaced.
+#let single-leading = 0.65em                // Headings, block quotations, table entries: single-spaced (Typst's default leading, so two-line headings do not crowd).
 #let page-margin = 1in                      // Style choice; the rules leave margins open (README).
 #let para-indent = 0.5in
 #let heading-tab = 0.5in
@@ -328,13 +328,16 @@
   toa-section(authorities)
   pagebreak()
 
-  // Body: the sample's own sections (cmarker renders the markdown).
-  cmarker.render(md, raw-typst: false, smart-punctuation: true)
+  // Body: the sample's own sections (cmarker renders the markdown). The conclusion is set in
+  // one unbreakable block with the signature, so the signature never stands alone on a page.
+  let conclusion-at = md.matches(regex("(?im)^#[ \t]+conclusion[ \t]*$")).first().start
+  cmarker.render(md.slice(0, conclusion-at), raw-typst: false, smart-punctuation: true)
 
   // Signature block (22 NYCRR 1250.8(b)(5)-(6) follows the argument; the signature is conventional).
   let sig = need(meta, "signature")
-  v(1.2em)
   block(width: 100%, breakable: false, {
+    cmarker.render(md.slice(conclusion-at), raw-typst: false, smart-punctuation: true)
+    v(1.2em)
     align(right, block(width: 55%, {
       [Respectfully submitted,]
       v(1.2em)

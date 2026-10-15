@@ -12,13 +12,13 @@
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `nyappdiv-brief`. |
 | `typst/nyappdiv-opening-brief.typ` | Template. Parameter block at the top: `court-lines`, `word-limit` (14,000), `footnotes-allowed` (false), `required-sections`. |
 | `samples/INPUT-synthetic-opening-brief.md` | Markdown contract sample, invented parties and record cites, real authorities. Labelled SYNTHETIC in its frontmatter. |
-| `samples/OUTPUT-synthetic-opening-brief.pdf` | `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/opening-brief samples/INPUT-synthetic-opening-brief.md` (9 pages, EB Garamond only). |
+| `samples/OUTPUT-synthetic-opening-brief.pdf` | `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/opening-brief samples/INPUT-synthetic-opening-brief.md` (10 pages, EB Garamond only; re-rendered 2026-10-15 after the template fixes in "Page review"). |
 | `samples/synthetic-opening-brief-overlay.pdf`, `-overlay.txt` | Not produced: `tools/overlay.sh` exits 1 with "no exemplar pdf in .../exemplars" (see below). |
 | `exemplars/SOURCE.md` | The search log. There is no exemplar PDF. |
 
 ## Exemplar
 
-**No exemplar found, so this doc type is BLOCKED: no exemplar.** Searches tried on 2026-10-14:
+**No exemplar found, so this doc type is BLOCKED: no exemplar.** Searches tried on 2026-10-14 (items 1-6) and 2026-10-15 (items 7-10):
 
 1. WebSearch (standard): Fourth Department "brief for defendant-appellant" with public-defender terms (Erie, Monroe, Onondaga). Returned decisions and calendars only.
 2. WebSearch (standard): "brief for plaintiff-appellant" / "appellant's brief" with "table of authorities" and "preliminary statement". Returned the Part 1000 rules, a blank form, and a Fourth Department decision list.
@@ -27,7 +27,16 @@
 5. WebFetch of the NYLS digital commons (`digitalcommons.nyls.edu/maynard_briefs/2`): a 1971 First Department brief, outside this court and period.
 6. CourtListener: its RECAP archive covers federal dockets; state appellate briefs were not in the results.
 
-The Fourth Department's own pages (nycourts.gov, including the Part 1000 PDF) returned HTTP 403 to both the browser fetch and curl from this box, so the court's website could not be searched for filed briefs. Next step: a filed Fourth Department opening brief from a public-defender or appellate counsel, or the NYSCEF public docket of a closed appeal. Save it as `exemplars/FILED-EXAMPLE-<case>-<docket>-opening-brief.pdf` and transcribe it into the sample.
+The Fourth Department's own pages (nycourts.gov, including the Part 1000 PDF) returned HTTP 403 to both the browser fetch and curl from this box, so the court's website could not be searched for filed briefs.
+
+Second search, 2026-10-15 (after the first pass found nothing). Nothing below is a Fourth Department opening brief:
+
+7. WebSearch (standard) x3: "Fourth Department" with "brief for defendant-appellant", the Fourth Judicial Department caption line with "brief for defendant-appellant", and "brief for plaintiff-appellant" with Monroe, Erie, Onondaga and Oneida. Returned Fourth Department decisions and motion orders (including an order allowing a corrected brief in *Lavine v. State of New York*, 2024), and counsel listings, not briefs.
+8. WebSearch (standard) x2 and (extended) x2: writing-sample, digital-commons, law-school-clinic and Center for Appellate Litigation / Legal Aid Bureau of Buffalo / Monroe County Public Defender phrasings. Returned the Buffalo CLE materials on Fourth Department rules, a law-firm article on Fourth Department appeals (`hselaw.com`, 8 pages, checked: no brief in it), Brooklyn and Columbia clinic pages, and out-of-state briefs.
+9. CourtListener REST search, type RECAP (`type=r`), for "Fourth Department" with "Brief for Defendant-Appellant": 20 hits, all federal dockets (habeas petitions in `nywd`, `nynd`, `nysd`, `nyed`, and Second Circuit filings). The one state brief attachment found, *Harrell v. Miller* (`nysd` 1:21-cv-06714), is an appendix to a First Department habeas petition (county of conviction: New York), so it is outside this court. CourtListener's opinion search found nothing in `nyappdiv` for the same phrase.
+10. Reachability: `iapps.courts.state.ny.us/nyscef` (NYSCEF) and `nycourts.gov/courts/ad4/library/recordsbriefs.html` (Fourth Department Records & Briefs) both returned HTTP 403 (Cloudflare challenge) to curl from this box. The Records & Briefs page says the Fourth Department library holds briefs only in print and microfiche, so a PDF is unlikely to be public there either.
+
+Next step: a filed Fourth Department opening brief from a public-defender or appellate counsel who will share one, or a NYSCEF public copy of a closed appeal (KA/CA docket number), fetched from a box that can reach NYSCEF. Save it as `exemplars/FILED-EXAMPLE-<case>-<docket>-opening-brief.pdf` and transcribe it into the sample.
 
 ## Governing rules
 
@@ -52,21 +61,27 @@ Not found in any source: a Fourth Department double-spacing rule, a margin rule,
 
 ## Page review (Gate 2)
 
-Every page of `samples/OUTPUT-synthetic-opening-brief.pdf` was rendered at 60 dpi (`pdftoppm -r 60`) and viewed (9 of 9). Typst printed no warnings. Fonts embedded: EB Garamond (Regular, Italic, Bold) only.
+Reviewed 2026-10-15 on the current `samples/OUTPUT-synthetic-opening-brief.pdf` (10 pages). Every page was rendered with `pdftoppm -r 70 -png` and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond (Regular, Italic, Bold) only.
+
+Two template fixes came out of the first review of the 9-page render, and the render was then re-reviewed in full:
+
+- `single-leading` went from 0.25em to 0.65em (Typst's default leading). Two-line point headings had their second line crowding the line above.
+- The conclusion and the signature block are one unbreakable block. Before this, the old render's page 9 held only `Respectfully submitted` and the signature, with no text above it.
 
 | Page | Content | Result |
 |---|---|---|
-| 1 | Cover: docket top right, court, caption, Ind. No., proceeding, title, counsel block, date | OK. Fits one page. The proceeding line wraps and leaves "2026" alone on its own line: ACCEPTED (cosmetic, from the sample's wording). |
-| 2 | Table of contents | OK. Point labels are on one line; page numbers align. Long point titles can wrap, and the page number can move to a new line (see Known gaps). |
-| 3 | Table of authorities (cases, statutes) | OK. Pages from the `toa:` links match the body (checked against the TOC on pp. 4-8). |
+| 1 | Cover: docket top right, court, caption, Ind. No., proceeding, title, counsel block, date | OK. The proceeding line wraps and leaves "2026" alone on its own line: ACCEPTED (cosmetic, from the sample's wording). |
+| 2 | Table of contents | OPEN. The `POINT I` row has no leader dots before its page number ("...Founded Suspicion ." with a stray dot), and the `POINT III` title wraps so "Relief" and its page number start a new line (known gap 12). The page numbers themselves match the headings. |
+| 3 | Table of authorities (cases, statutes) | OK. Page numbers match the body: Brady 8, Strickland 7, De Bour 6, Terry 6, CPL 470.15(6)(a) 8, CPL 710.60 4. |
 | 4 | Statement of questions involved; statement of the case A-B | OK. |
-| 5 | Statement of the case C; Argument, POINT I heading | OK. |
-| 6 | Point I A-B; POINT II heading | OK. |
-| 7 | Point II A-B; POINT III heading | OK. |
-| 8 | Point III A-B; conclusion; signature block | OK. |
-| 9 | Printing specifications statement; signature | OK. The statement's paragraphs are separated; the signature block is not indented. |
+| 5 | Statement of the case C; Argument, POINT I heading | OK. Two-line point heading now leads correctly. |
+| 6 | Point I A-B | OK. |
+| 7 | POINT II heading; Point II A-B | OK. |
+| 8 | POINT III heading; Point III A-B | OK. Half-page white space at the foot, because the conclusion moved to p. 9 with the signature. |
+| 9 | Conclusion; signature block | OK. The conclusion and the signature sit together. |
+| 10 | Printing specifications statement; signature | OK. |
 
-Tier-2 findings (OPEN or ACCEPTED): the cover proceeding wraps to an orphan "2026" (ACCEPTED, sample wording). The first paragraph after a heading is not indented, while later paragraphs are (ACCEPTED, convention). No page is left with an unexplained blank area.
+Tier-2 findings (OPEN or ACCEPTED): the TOC `POINT I` leader is OPEN (table row above, page 2). The TOC `POINT III` wrap is OPEN in the same way as known gap 12. The cover proceeding wraps to an orphan "2026" (ACCEPTED, sample wording). The first paragraph after a heading is not indented, while later paragraphs are (ACCEPTED, convention). Page 8 ends with white space, because the conclusion block is kept with the signature (ACCEPTED).
 
 ## Known gaps
 
