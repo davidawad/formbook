@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"       // the only serif family vendored in fonts/ (README, known gaps)
+#let font-family = "EB Garamond"       // kept: L.R. 10.1 names no face, so docs/FONTS.md has no substitute (README)
 #let type-size = 12pt                  // convention for federal filings; no N.D. Ohio font rule in L.R. 10.1
 #let natural-line = 7.8pt              // EB Garamond's line box, 0.65 em, measured (README)
 #let single-pitch = 13.8pt             // single spacing: 1.15 em at 12 pt

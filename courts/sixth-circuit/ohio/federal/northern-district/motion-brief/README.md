@@ -77,7 +77,7 @@ Every page was rendered at 60 dpi and viewed. No OPEN rows.
 
 ## Known gaps and open choices
 
-1. **Typeface.** L.R. 10.1 sets no font. Both exemplars use Times New Roman; the template uses EB Garamond, the only serif family vendored in `fonts/` (no edits to `fonts/` in this box). Same choice and same consequence as the complaint folder.
+1. **Typeface.** L.R. 10.1 names no face and allows any clearly legible typeface, so `docs/FONTS.md` gives no substitute and the template keeps EB Garamond. Both exemplars use Times New Roman; that is a filer convention (tier 2), not a rule. Liberation Serif (metric-compatible with Times New Roman) is vendored and would remove the difference; switching is a tier-2 decision left open. Same choice and same consequence as the complaint folder.
 2. **Track.** The L.R. 7.1(f) limit depends on the track assigned to the case, which the exemplar does not show. The sample uses `standard` (a 20-page limit). A filing in an expedited case has a 10-page limit, and the build fails over it.
 3. **Page limit counting.** The rule does not say whether the table of contents, the table of authorities or the caption page count toward the limit. The template counts every page from the caption page through the signature block (contents included). That is the stricter reading, so a memorandum that passes is safe under either. David to confirm.
 4. **Modified limits.** A limit set by a judge's order is recorded in frontmatter `page_limit_order`, and the certification states it. The template does not verify the order. The Kinzie exemplar runs 29 pages, over the 20-page limit for a standard track, so it was presumably filed with leave; the order is not in the file.
