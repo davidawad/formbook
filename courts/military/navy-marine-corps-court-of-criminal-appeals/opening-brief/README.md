@@ -23,7 +23,7 @@ sh tools/render.sh $D samples/INPUT-miles-opening-brief.md     # -> samples/OUTP
 sh tools/overlay.sh $D miles-opening-brief                     # -> samples/OVERLAY-miles-opening-brief.pdf and .txt
 ```
 
-`render.sh` compiles with vendored fonts only (`--ignore-system-fonts`) and treats any typst warning as a failure. The first build of this template emitted no warnings; the PDF embeds only `EBGaramond` faces.
+`render.sh` compiles with vendored fonts only (`--ignore-system-fonts`) and treats any typst warning as a failure. Rendered 2026-10-14: no warnings; the PDF embeds only `EBGaramond` faces (see "Typeface" below).
 
 ## Governing rules
 
@@ -47,12 +47,22 @@ https://stjececmsdusgva001.blob.core.usgovcloudapi.net/public/documents/2022_NMC
 | NMCCA-CONT-007 | Signature block ("Respectfully submitted." and the counsel block) after the conclusion. | Appendix I, p. 96 |
 | NMCCA-CONT-008 | Certificate of filing and service on opposing counsel, in the Appendix I form. The service recipient is a frontmatter field (`served_on`). | Rule 18.1(b)(9), p. 32; Appendix I, p. 96 |
 
+## Typeface
+
+| Item | Value |
+|---|---|
+| Rule text | Rule 17(c), p. 28: "All printed matter, including footnotes, must appear in 14-point proportional type, e.g., Times New Roman, Century Schoolbook, etc. Courier, Courier New, and similar non-proportional fonts are not acceptable." (text read with `pdftotext`, 2026-10-14) |
+| Face the rule requires | None. The named faces are examples, and the rule allows any 14-point proportional type. |
+| Typst family used | `EB Garamond` (`fonts/eb-garamond/`). No substitute: the court names no face, so the template keeps EB Garamond (`docs/FONTS.md`). |
+| Fit to a named face | Not applicable. A Times-metric substitute (`Liberation Serif`) would also conform, but the rule does not require it (see open choice 3). |
+| Checked | Rendered 2026-10-14 with `tools/render.sh`: 12 pages, no warnings. `pdffonts`: only EBGaramond Regular, Italic, Bold and BoldItalic, all embedded. Footnotes measured at 14 pt (same glyph height as body text). |
+
 ## Exemplar search (what was tried)
 
 - CourtListener NMCCA filings: the search at `courtlistener.com` returned HTTP 403 to the fetch tool; web search for NMCCA appellant's briefs on CourtListener returned no brief.
 - Navy JAG NMCCA page (`jag.navy.mil/.../code-05/nmcca/`): lists the docket, opinions and oral arguments; no briefs.
 - Web searches for NMCCA appellant's briefs: found the Miles brief (used here) and unpublished NMCCA opinions only.
-- The Miles brief was also found on a third-party mirror (`mirror.hep.gg`), now a 404; the ncsfreedom copy was used.
+- The Miles brief was also found on a third-party mirror (`mirror.hep.gg`), now a 404; the ncsfreedom copy was used. It is saved as `exemplars/FILED-EXAMPLE-miles-201300272-opening-brief.pdf` (fetched again 2026-10-14; 63 pages, created 17 Dec 2013, as `exemplars/SOURCE.md` describes), which the overlay reads.
 
 ## Exemplar: what it settles and what it does not
 
@@ -60,34 +70,39 @@ The exemplar is a 2013 filing: 12-point Times New Roman, single-spaced, under th
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-miles-opening-brief.pdf` (12 pages, rendered at 60 dpi with `pdftoppm -r 60`) was looked at after the final layout changes, except that page 10 (the certificate) was re-rendered after one text change (`served_on`) and looked at again.
+Every page of `OUTPUT-miles-opening-brief.pdf` (12 pages) was rendered at 60 dpi with `pdftoppm -r 60` and looked at. The table is from the pass of 2026-10-14 that ran after the footnote-size fix (see "Changed 2026-10-14"). PDF page n is body page n-2 for n of 3 and up; the index prints roman "ii".
 
 | PDF page | Content | Finding |
 |---|---|---|
 | 1 | Cover | Fits one page. Caption, NMCCA No., title, Before Panel No. 3, tried-at paragraph and counsel block all present. The counsel block sits directly under the tried-at paragraph rather than at the foot of the page (the `v(1fr)` spacer did not pin it). **OPEN**, cosmetic. |
-| 2 | Index of Brief (roman "ii") | Generated from headings; page references match the body. The Argument point sub-entry is in capitals with no label. **OPEN**, cosmetic. |
-| 3 | Assignments of error, jurisdiction (body p. 1) | Double-spaced, 14 pt. Issues run on as paragraphs (Appendix I shows them as numbered items). Matches the filed brief's content. |
-| 4-5 | Statement of the case, facts (pp. 2-3) | Footnotes at 14 pt, single-spaced, superscript references. |
-| 6-7 | Summary of argument, Argument I opening (pp. 4-6) | "Standard of Review" and "Principles of Law" bare bold; argument heading bold italic with label I. The numbered list (Quiroz factors) prints with default list markers. |
-| 8 | Discussion, Conclusion (pp. 7-8) | "Discussion" bare; "A." labelled sub-heading; argument "Conclusion" bare; final "CONCLUSION" centred. |
-| 9 | Signature block only (p. 9) | The signature block is alone on a page: the conclusion ends with space left on p. 8 but the block (kept unbreakable) does not fit, and the block is not kept with the preceding paragraph. **OPEN**, layout. |
-| 10 | Certificate of filing and service (p. 10) | Own page, numbered. Service line reads "Appellate Government Division on 16 December 2013." |
-| 11-12 | (none) | The PDF has 12 pages: cover, index, and body pp. 1-10. |
+| 2 | Index of Brief (roman "ii") | Generated from headings; page references match the body (Conclusion p. 9). The Argument point sub-entry is in capitals with no label. **OPEN**, cosmetic. |
+| 3 | Assignments of error, jurisdiction (body p. 1) | Double-spaced, 14 pt. Issue I is flush left and II-V are first-line indented, as the sample writes them. Appendix I shows the issues as numbered items. **OPEN**, cosmetic (sample-driven). |
+| 4-6 | Statement of the case, facts (body pp. 2-4) | Footnotes at 14 pt, single-spaced, superscript references. OK. |
+| 7 | Summary of argument, begins mid-page (body p. 5) | Summary heading centred; points I-II in sentence form, with the same first-line-indent pattern as page 3 (point III begins on page 8). **OPEN**, cosmetic (sample-driven). |
+| 8 | Summary end, Argument I opening (body p. 6) | "Standard of Review" and "Principles of Law" bare bold; argument heading bold italic with label I. OK. |
+| 9 | Principles of Law, Quiroz factors (body p. 7) | The numbered list prints with default list markers at the body indent. OK. |
+| 10 | Discussion, Conclusion (body p. 8) | "Discussion" bare; "A." labelled sub-heading; argument "Conclusion" bare; footnote 38 at 14 pt. OK. |
+| 11 | Final "CONCLUSION", signature block (body p. 9) | The signature block sits with the conclusion on the same page. The stranded-signature layout finding of the earlier pass is gone. OK. |
+| 12 | Certificate of filing and service (body p. 10) | Own page, numbered. Service line reads "Appellate Government Division on 16 December 2013." OK. |
 
-Overlay: `OVERLAY-miles-opening-brief.txt` pairs each sample page with the filed page it shares the most words with. Pages 1-2 pair with the filed cover and index (word overlap 91% and 31%). The body pairs are lower (33-81%) because the sample is 2022-rule formatted (14 pt, double-spaced) and the filed page is 12-point single-spaced, so the line breaks and page breaks differ by design. The overlay is a diagnostic, not a score.
+Overlay: `OVERLAY-miles-opening-brief.txt` pairs each sample page with the filed page it shares the most words with. Pages 1-2 pair with the filed cover and index (word overlap 91% and 31%). The body pairs run 34-75%, because the sample is 2022-rule formatted (14 pt, double-spaced) and the filed page is 12-point single-spaced, so line and page breaks differ by design. Pages 11-12 both pair with filed page 63, the filing's last page. That pairing is by word overlap only and is not evidence that those pages match. The overlay is a diagnostic, not a score.
+
+## Changed 2026-10-14
+
+- **Footnote size.** The footnote entries rendered at about 12 pt (glyph boxes 15.5 pt high against 18.3 pt for body text), not the 14 pt Rule 17(c) requires for footnotes. Both templates now set `footnote.entry` text to `type-size`. Footnote boxes now match body text (18.3 pt). Page count is unchanged (12). Layout moved: the signature block now sits with the conclusion.
+- **Exemplar restored.** `exemplars/FILED-EXAMPLE-miles-201300272-opening-brief.pdf` was missing from this folder, so the overlay could not run. It is the file `SOURCE.md` describes.
 
 ## Known gaps
 
 - **Table of authorities** is not generated (NMCCA-CONT-002). Not needed for the sample (under 10,000 words), but a real brief over 10,000 words needs one.
 - **Word count** is not computed or checked against the 15,000-word limit (NMCCA-FORM-005).
-- **Signature block** can sit alone on a page (page 9 above).
-- **Cover counsel block** is not pinned to the foot of the cover (page 1 above).
+- **Cover counsel block** is not pinned to the foot of the cover (PDF page 1).
 - **Argument point labels** are not repeated in the index.
 - **Sample is partial.** Argument points II-V, the rest of the statement of facts (after the "mat room" paragraph, including the paragraphs describing the conduct), and most of the discussion are omitted. The sample keeps the headings, the first points and the closing conclusion. Points II-V are described in the summary only.
-- **Font.** Only EB Garamond is vendored (`fonts/`, shared, not editable here). Rule 17(c) requires proportional type and gives Times New Roman and Century Schoolbook as examples. EB Garamond is a proportional serif, so the template uses it at 14 pt. A Times-metric face would need a vendored font.
+- **Font.** See "Typeface" above: no face is required, so EB Garamond (vendored in `fonts/`) stays.
 
 ## Open choices (for David)
 
 1. **Issues format.** Rule 18.1(b)(2) says UPPER CASE; Appendix I shows bold italic sentence case. The template follows whatever the sample writes, so the choice is the sample's, not the template's. Which governs?
 2. **Index of Brief.** Rule 18.1(b)(1) requires a table of cases and authorities for briefs over 10,000 words. Should the template generate it, or should it stay a sample-only concern?
-3. **Font.** Accept EB Garamond at 14 pt as proportional type (current), or require a Times-metric face (needs a vendored font)?
+3. **Font.** Rule 17(c) allows any 14-point proportional type, so EB Garamond (current) conforms. Switch to a Times-metric face (`Liberation Serif`, vendored) by preference, or keep EB Garamond?

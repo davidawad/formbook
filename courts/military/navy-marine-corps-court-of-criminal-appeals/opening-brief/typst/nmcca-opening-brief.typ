@@ -211,6 +211,7 @@
   set text(font: font-family, size: type-size, lang: "en", hyphenate: false)
   set par(leading: body-leading, spacing: body-leading, first-line-indent: para-indent, justify: false)
   set heading(numbering: none)
+  show footnote.entry: set text(size: type-size)  // NMCCA-FORM-001: footnotes are 14-point too.
   show footnote.entry: set par(leading: single-leading, spacing: 0.5em, first-line-indent: 0pt)
   show outline.entry: set block(spacing: 0.6em)
   show quote.where(block: true): it => pad(left: 0.5in, right: 0.5in)[
