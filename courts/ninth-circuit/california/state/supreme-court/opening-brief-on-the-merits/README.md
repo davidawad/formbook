@@ -8,7 +8,7 @@ Doc type `opening-brief-on-the-merits` for the California Supreme Court (`court.
 | `exemplars/FILED-EXAMPLE-people-v-patton-S279670-opening-brief-on-the-merits.pdf` | Filed appellant's opening brief on the merits, 37 pages, text layer present (Demson). |
 | `exemplars/SOURCE.md` | URL, case, filer, date filed and date fetched for both exemplars. |
 | `samples/INPUT-mccune-opening-brief-on-the-merits.md` | Transcription of a portion of the McCune brief: cover, TOC and TOA (built from the markdown), Issue Presented, Introduction, part of the Statement of the Case, most of Argument I.A and part of I.B, Conclusion, word-count certificate, attorney's proof of service. |
-| `samples/OUTPUT-mccune-opening-brief-on-the-merits.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/supreme-court/opening-brief-on-the-merits samples/INPUT-mccune-opening-brief-on-the-merits.md`. 15 pages, EB Garamond only (embedded). |
+| `samples/OUTPUT-mccune-opening-brief-on-the-merits.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/supreme-court/opening-brief-on-the-merits samples/INPUT-mccune-opening-brief-on-the-merits.md`. 15 pages, TeX Gyre Schola only (embedded). |
 | `samples/OVERLAY-mccune-opening-brief-on-the-merits.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/california/state/supreme-court/opening-brief-on-the-merits mccune-opening-brief-on-the-merits`. Red = ours, blue = filed, black = both. The `.txt` is the page map. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
 | `typst/cal-opening-brief-on-the-merits.typ` | The template: `cal-opening-brief-on-the-merits(meta, md)`. Parameters at the top; each traces to a rule or is a style choice. Structure copied from `courts/ninth-circuit/california/state/courts-of-appeal/opening-brief/typst/calctapp-opening-brief.typ` (same rule family), not its numbers. |
@@ -20,7 +20,7 @@ Verified 2026-10-14 against the courts.ca.gov rule pages. The pages were read th
 | Requirement | Source | Value used in the template |
 |---|---|---|
 | Paper size | Rule 8.204(b)(1) (https://courts.ca.gov/cms/rules/index/eight/rule8_204) | US Letter, 8½ × 11 in. |
-| Font style | Rule 8.204(b)(2)–(3) (same URL) | Any conventional roman font; case names italicized. EB Garamond (the only serif vendored in `fonts/`). The McCune exemplar is Century Schoolbook; the font is a style choice, not a rule. |
+| Font style | Rule 8.204(b)(2)–(3) (same URL); rule 8.74(b)(1) (electronic documents, `https://www.courts.ca.gov/cms/rules/index/eight/rule8_74`) | Rule 8.204(b)(2) allows "any conventional font"; rule 8.74(b)(1) says "The font style must be a proportionally spaced serif face. Century Schoolbook is preferred." Court-named face: Century Schoolbook. Vendored substitute: **TeX Gyre Schola** (`font-family`; metric-compatible per `docs/FONTS.md`). Case names italicized. |
 | Type size | Rule 8.204(b)(4) (same URL) | 13 pt, footnotes included (`type-size`). |
 | Line spacing | Rule 8.204(b)(5) (same URL) | Lines at least 1½ spaced (`body-leading`); headings, footnotes, block quotations, TOC and TOA single spaced. |
 | Margins | Rule 8.204(b)(6) (same URL) | Left and right at least 1½ in (`side-margin`), top and bottom at least 1 in (`top-margin`). |
@@ -37,13 +37,15 @@ Verified 2026-10-14 against the courts.ca.gov rule pages. The pages were read th
 
 ## Overlay
 
-Overlay of `OUTPUT-mccune-opening-brief-on-the-merits.pdf` against the McCune exemplar (`overlay.sh` takes the first file in `exemplars/`, which is McCune). Pages are paired by word overlap (`overlay.txt`): cover 1 to 1 (79%), TOC 2 to 2 (68%), TOA 3 to 4 (48%), 4 to 7 (46%), body 5 to 10 (52%), 6 to 11 (54%), 7 to 12 (81%), 8 to 13 (53%), 9 to 19 (54%), 10 to 20 (55%), 11 to 22 (79%), 12 to 23 (58%), conclusion and signature 13 to 53 (74%), certificate 14 to 54 (85%), proof of service 15 to 55 (72%). Word overlap is low where the sample is a portion; it is a diagnostic, not a score.
+Overlay of `OUTPUT-mccune-opening-brief-on-the-merits.pdf` against the McCune exemplar (`overlay.sh` takes the first file in `exemplars/`, which is McCune). Pages are paired by word overlap (`overlay.txt`): cover 1 to 1 (79%), TOC 2 to 2 (68%), TOA 3 to 4 (42%), 4 to 7 (35%), body 5 to 10 (52%), 6 to 11 (54%), 7 to 12 (72%), 8 to 13 (48%), 9 to 19 (63%), 10 to 20 (55%), 11 to 22 (80%), 12 to 23 (52%), conclusion and signature 13 to 53 (59%), certificate 14 to 54 (85%), proof of service 15 to 55 (72%) (pairs as of the Schola render). Word overlap is low where the sample is a portion; it is a diagnostic, not a score.
 
 The sample is a portion, so its body pages pair with the filed pages they came from, and the filed pages it did not transcribe show as blue in the overlay. The cover and certificates line up by content.
 
 ## Page review (Gate 2 record)
 
 All 15 pages of `OUTPUT-mccune-opening-brief-on-the-merits.pdf` were rendered at 60 dpi and viewed as images. Pages 5–7 were viewed before the footnote fix on page 8; that fix moved text only on pages 8 onward, so they were not re-viewed. Pages 2–4 and 8 were re-checked by text after the final edits, and the TOC page numbers match the rendered headings (Issue 5, Introduction 5, Statement of the Case 8, Argument 9, Conclusion 12).
+
+Font change (fonts pass, EB Garamond → TeX Gyre Schola): the page count stayed at 15, and the TOC and TOA page numbers still match the rendered headings and citations. All 15 pages of the new `OUTPUT` were rendered at 70 dpi and viewed again, in two-page montages.
 
 Defects found and fixed in this pass:
 
@@ -60,7 +62,7 @@ Open choices, recorded here so the reviewer can see them:
 
 ## Known gaps
 
-- **Tier 2 is not finished.** Two exemplars from two filers are on file (Pirolo, Demson); the eval loop asks for 2 or 3, so the minimum is met, but a third filer would firm up the comparison. The McCune and Patton exemplars use Century Schoolbook; the template uses EB Garamond (only vendored serif).
+- **Tier 2 is not finished.** Two exemplars from two filers are on file (Pirolo, Demson); the eval loop asks for 2 or 3, so the minimum is met, but a third filer would firm up the comparison. The McCune and Patton exemplars use Century Schoolbook; the template uses TeX Gyre Schola, the vendored Century Schoolbook substitute (rule 8.74(b)(1) prefers that face).
 - **Notice of intent to rely on a Court of Appeal brief** (Rule 8.520(a)(4)): the rule requires it to be attached to the cover when a party relies on a brief it already filed in the Court of Appeal. The template does not generate it; a brief that reuses a Court of Appeal brief needs the notice added by hand.
 - **Statement of Appealability and Statement of the Facts** (Rule 8.204(a)(2)(A)–(C)): the sample omits the statement of facts; the template does not enforce the required content.
 - **Attorney's proof of service** wording and its rule citations (CCP § 1013a, Rules 8.71(f), 8.77) are taken from the exemplar and not verified (see the rules table).
