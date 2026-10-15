@@ -91,3 +91,23 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/moti
 11. **Overlay pairing.** Our pages 8 and 9 pair with the filed pages 9 and 8 (the two signature blocks are split across them in the render and in the filing).
 12. **Not run:** `tools/check.sh` and `tools/check-selftest.sh` (see the complaint README, gap 10: same folder shape, and the brief forbids editing `tools/`).
 13. **Exemplar PDF not in the folder.** Only `exemplars/SOURCE.md` is committed. The 2026-10-14 overlay was run with the PDF fetched from the URL in SOURCE.md (9 pages, "Filed 06/10/16" header checked) and passed as the third argument of `tools/overlay.sh`, not saved in the repo.
+
+## Engines
+
+`typst/` is the reference. The docx engine is `docx/` (`reference.docx` for the styles, page setup and footers; `gamd-motion-brief.lua` for the cover, caption, `[[signature]]` blocks and the body). Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/middle-district/motion-brief samples/INPUT-brooks-motion-brief.md` writes `samples/OUTPUT-brooks-motion-brief.docx` and `samples/OUTPUT-brooks-motion-brief.docx.pdf` (LibreOffice 26.8 converts; EB Garamond from `fonts/` must be installed for LibreOffice, see `docs/FONTS.md`).
+
+| Layout | docx | Note |
+|---|---|---|
+| Face and size | EB Garamond 13 pt body, 11 pt single-spaced footnotes, 12 pt page number | As typst. Named in the styles; Word substitutes silently if the face is not installed. |
+| Line pitch | Exact 27.6 pt on body and headings | Same pitch as typst. |
+| Margins, paper | Letter, 1 in on every side | |
+| Body | First-line indent 0.5 in on every paragraph, no numbering | |
+| Headings | Level 1 centred bold, level 2 bold flush left, level 3 bold italic; text kept as typed | Runs of spaces inside a heading collapse to one. |
+| Footnotes | Word footnotes, 11 pt single-spaced, at the foot of the page | LibreOffice may split a long footnote across two pages (see below). |
+| Caption | Party column with a right rule; "CIVIL ACTION FILE NO." and the number at right | Same reason as the complaint's caption (a ")" column is not countable in a Word table). |
+| Signature block | "Respectfully submitted," at 3 in, firm and signers, address and "Attorneys for" flush left | At each `[[signature]]` line and at the end if there is no marker. |
+| Page number | Centred 12 pt from page 2; page 1 has none | `titlePg` with an empty first-page footer. |
+
+- **Pages reviewed:** all 9 pages of `OUTPUT-brooks-motion-brief.docx.pdf` were rendered at 60 dpi and compared with the typst output page by page (side-by-side). Pages 1 and 2 match in form. From page 3 the page breaks differ (a line or two per page adds up): Argument III starts on page 4 in the docx and on page 3 in typst. LibreOffice also splits footnote 4 across pages 5 and 6 (typst keeps it on page 5), and the certificate of service starts on page 9 (typst: page 8). The page count is the same, 9.
+- **Checks:** `tools/check.sh --engine docx` was not run (same reason as the complaint, gap 10). The docx is not BLOCKED on any tier-1 point in this list. Not verified: opening the `.docx` in Microsoft Word (no Word here); LibreOffice converts it without error, but no GUI repair prompt was checked.
+- **Pagination:** Word and LibreOffice may break lines and footnotes differently from each other and from typst (`docs/DOCX.md`). Do not force page breaks to match.
