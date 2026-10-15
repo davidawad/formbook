@@ -7,9 +7,10 @@ Folder: `courts/ninth-circuit/california/federal/bankruptcy-northern-district/ad
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-appalachian-23-30564-26-03029-adversary-complaint.pdf` (31 pages, one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-appalachian-adversary-complaint.md` (a portion of the complaint: caption and counsel, nature of the action, jurisdiction, parties, first cause of action, prayer, jury demand, signature) |
-| render | ok: `samples/OUTPUT-appalachian-adversary-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-appalachian-adversary-complaint.pdf` and `.txt` (`tools/overlay.sh`) |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none. Civil L.R. 3-4(c)(2)(A) asks for "a standard, proportionally spaced font (e.g., Times New Roman or Century Schoolbook)"; the names are examples. Vendored font kept: **EB Garamond** (no substitute switch; see Typeface below) |
+| render | ok: `samples/OUTPUT-appalachian-adversary-complaint.pdf`, 9 pages, typst 0.15.0 (micromamba, 2026-10-15), vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Bold, BoldItalic embedded), zero warnings (`tools/render.sh`) |
+| overlay | ok: `samples/OVERLAY-appalachian-adversary-complaint.pdf` and `.txt` (`tools/overlay.sh`), run 2026-10-15 against `exemplars/FILED-EXAMPLE-…pdf`, re-fetched from the URL in `exemplars/SOURCE.md` (the file was missing from the snapshot) |
+| pages reviewed | 9 of 9 (every page rasterised at 60 dpi and viewed on 2026-10-15; the page layout is unchanged from the earlier review) |
 | tier 2 | not judged against 2 or 3 filers yet: one exemplar only (see Known gaps 1) |
 
 File names follow the tools, not the brief's `<id>.pdf` / `<id>-overlay.pdf` wording: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `OVERLAY-<id>.pdf` and `.txt`. The sample is `INPUT-<id>.md`, so the id is `appalachian-adversary-complaint`.
@@ -35,6 +36,10 @@ Verified 2026-10-14. Court rules are the Bankruptcy Local Rules "effective May 4
 | Fed. R. Civ. P. 10(b) (as applied by Fed. R. Bankr. P. 7010) | Claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | Each body paragraph is numbered by the template (`allegations()`); headings and lists are not. |
 
 Not produced by this template (separate papers): the adversary cover sheet (B.L.R. 7003-1); the summons; the Certification of Interested Entities or Persons (Civil L.R. 3-15, if the court applies it); any Rule 7.1 disclosure.
+
+## Typeface
+
+Civil L.R. 3-4(c)(2)(A), as applied by B.L.R. 1001-2, requires "a standard, proportionally spaced font (e.g., Times New Roman or Century Schoolbook)". The rule names no face as a requirement: the two faces are examples, and any standard proportional font is allowed. Per `docs/FONTS.md` ("No face named"), the template keeps the vendored **EB Garamond**; no substitute (Liberation Serif, TeX Gyre Schola) is switched in. Size stays 12 pt (3-4(c)(2)(B)), and the 24 pt pitch and 28-line grid are unchanged. The rule text was read on 2026-10-15 from the N.D. Cal. Civil Local Rules page (3-4(c)(2)(A)). A filer who wants a Times-metric face can switch `font-family` to `Liberation Serif` (metric-compatible with the exemplar's Times New Roman); that changes line breaks and page count, so it needs a new review.
 
 ## Layout
 
@@ -79,7 +84,7 @@ Not produced by this template (separate papers): the adversary cover sheet (B.L.
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The brief asks for one exemplar per doc type, so the second filer (not saved) is not used. Tier 2 is not judged against two filers yet.
 2. **Counsel block length.** The sample's counsel columns run to 8 pitch rows, so the court title is on line 9 rather than line 8. Civil L.R. 3-4(a)(3) allows the extra room. The filed exemplar fits its counsel on lines 1 to 10 in two columns; the template matches that layout.
-3. **Font.** EB Garamond is the only vendored font (`fonts/`). The exemplar is Times New Roman; Civil L.R. 3-4(c)(2)(A) names Times New Roman as an example. EB Garamond at 12 pt has a smaller x-height. The 12-point minimum is met. A Times-metric font would remove the difference; `fonts/` is shared and is not edited here.
+3. **Font.** EB Garamond is kept; see "Typeface" above (the rule's Times New Roman is an example, not a requirement). The exemplar is Times New Roman, and EB Garamond at 12 pt has a smaller x-height than Times. The 12-point minimum is met. Recorded as ACCEPTED, pending David's call on whether the look matters more than the Times match.
 4. **Footer.** The footer (title and case number) follows the exemplar. B.L.R. 1001-2 excludes Civil L.R. 3-4(c)(3), so the footer is a convention, not a rule requirement. The footer title wraps to two lines.
 5. **Policy list letters.** The exemplar letters its policy list a., b., c.; the template letters every list (a), (b), ... This is a template convention (list lettering is shared with the prayer). Recorded as ACCEPTED.
 6. **Jury demand numbering.** The exemplar leaves the JURY DEMAND paragraph unnumbered; the template numbers every body paragraph (paragraph 32). Recorded as OPEN: a convention choice for a numbered-paragraph template; a fix would need an unnumbered paragraph style in the template.

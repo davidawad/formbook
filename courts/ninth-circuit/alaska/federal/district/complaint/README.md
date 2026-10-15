@@ -26,7 +26,7 @@ Primary source: the District of Alaska Local Civil Rules, "Effective October 15,
 | D. Alaska L.Civ.R. 7.5(a)(1)(A) | Documents double-spaced (quotations over 50 words or 5 lines single-spaced and indented). | `body-leading = 1.35em` (double; see Measured spacing). |
 | L.Civ.R. 7.5(a)(1)(B) | Margins of at least 1 inch around all text, including footers. | `margins = 1in`; footer inside the bottom margin. |
 | L.Civ.R. 7.5(a)(1)(C) | If more than 1 page: a page number and a footer including the case name and number, at the bottom of each page. | `running-footer`: page number, then `footer_title` and `Case No.`. |
-| L.Civ.R. 7.5(a)(1)(D) | At least 13-point, proportionally spaced font, or the equivalent. | `type-size = 13pt`, EB Garamond (proportional). See Known gaps 2. |
+| L.Civ.R. 7.5(a)(1)(D) | "use at least 13-point, proportionally-spaced font, or the equivalent". No face is named. Text re-read 2026-10-15 from the fetched PDF (`pdftotext`, `Local_Civil_Rules_10-2025.pdf`, page 15). | `type-size = 13pt`, EB Garamond (proportional). See Typeface and Known gaps 2. |
 | L.Civ.R. 7.5(a)(1)(E) | No interlineation; one side of the paper. | Not applicable to the generated PDF. |
 | L.Civ.R. 7.5(a)(2)(A) | Letter size, white paper (conventional filing). | `paper: "us-letter"`. |
 | L.Civ.R. 7.5(a)(3) | Electronic filings: PDF, word searchable. | Typst PDF with embedded text (pdftotext reads it). |
@@ -44,6 +44,15 @@ Primary source: the District of Alaska Local Civil Rules, "Effective October 15,
 | Fed. R. Civ. P. 38(b) | Jury demand. Not fetched in this pass. | `jury_demand: true` adds the demand paragraph; the sample does not use it (the exemplar has none). |
 
 Not produced by this template (separate filings or the civil cover sheet): the civil cover sheet (JS-44); the Rule 7.1 disclosure statement; the summons. Any of these may be required with the first filing.
+
+## Typeface
+
+| Item | Value |
+|---|---|
+| Face required | None named. L.Civ.R. 7.5(a)(1)(D) asks for a 13-point, proportionally-spaced font "or the equivalent". `docs/FONTS.md` applies only where the rule names a face. |
+| Vendored substitute | Not needed. EB Garamond is kept: `font-family = "EB Garamond"` (`fonts/eb-garamond/`). |
+| Metric fit | Not applicable (no court-named face). |
+| Verified | `pdffonts samples/OUTPUT-launch-alaska-complaint.pdf` lists EB Garamond Regular, Bold and Italic only, all embedded (2026-10-15). |
 
 ## Layout
 
@@ -82,7 +91,7 @@ Measured from `pdftotext -bbox` on page 2 of the render: consecutive lines of on
 ## Known gaps and open choices
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. Other D. Alaska complaints were found (Native Village of Hooper Bay v. Burgum, 3:25-cv-00316; Sovereign Inupiat for a Living Arctic v. Burgum, 3:25-cv-00356; NAEC v. Trump, 3:25-cv-00038, doc 1, 46 pages) but not compared. Tier 2 is therefore **not** judged against two filers.
-2. **Font.** D. Alaska requires "13-point, proportionally-spaced font, or the equivalent". EB Garamond at 13 pt meets the size and proportional-spacing wording, but its x-height is smaller than Times New Roman, so the text looks smaller than a Times filing at the same point size. Whether a smaller-looking face counts as the equivalent is a question for David; a vendored Times-metric face would remove the question.
+2. **Font.** D. Alaska requires "13-point, proportionally-spaced font, or the equivalent" and names no face, so EB Garamond stays (see Typeface). EB Garamond at 13 pt meets the size and proportional-spacing wording, but its x-height is smaller than Times New Roman, so the text looks smaller than a Times filing at the same point size. Whether a smaller-looking face counts as "the equivalent" is a question for David. If the answer is no, the vendored Times-metric substitute is Liberation Serif (`fonts/liberation-serif/`): a choice of the filer, not a rule requirement.
 3. **Footer size.** 13 pt, the same as the text, because 7.5(a)(1)(D) does not exempt footers.
 4. **Caption.** The party column is closed by a rule rather than the ")" column used in the exemplar. A convention choice; ACCEPTED.
 5. **Heading level 2 and 3** are centered bold rather than the exemplar's mixed styles. ACCEPTED.

@@ -9,6 +9,7 @@ Doc type: **adversary complaint** (FRBP 7001) in the United States Bankruptcy Co
 | exemplar | no (`exemplars/SOURCE.md`: BLOCKED) |
 | sample md | `samples/INPUT-generic-complaint.md` (fictional, generic; 5 rendered pages) |
 | render | ok: `samples/OUTPUT-generic-complaint.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings |
+| typeface | face required: none. LRBP 9004-1(g) (checked on azb.uscourts.gov, 2026-10-15) says "a proportional font size no smaller than 13 point" and names no face. EB Garamond kept; no vendored substitute needed. Not metric-compatible with Times New Roman, and not changed to it |
 | overlay | fail: `tools/overlay.sh` needs `exemplars/*.pdf` and there is none, so it exits 1 and writes nothing |
 | pages reviewed | 5 of 5 (every page rasterised at 60 dpi and viewed) |
 
@@ -56,7 +57,7 @@ Not generated, and why: the adversary cover sheet (Official Form 104 with the ci
 ## Known gaps and open choices
 
 1. **No exemplar.** Tier 2 (conventions a clerk expects) is not judged against any filed Arizona complaint. Everything below is from the rules, not from a filing. A filed complaint from `arb` would be the first thing to check (see `exemplars/SOURCE.md`).
-2. **Font size.** 13-point EB Garamond is the only vendored proportional font. Times New Roman is the usual Arizona choice; EB Garamond sets smaller at the same size. The 13-point minimum is met; the apparent size is smaller than Times 13.
+2. **Font size.** The rule names no typeface, so EB Garamond is kept (see the typeface row above). Times New Roman is the usual Arizona choice; EB Garamond sets smaller at the same size. The 13-point minimum is met; the apparent size is smaller than Times 13.
 3. **Court title on line 8.** Convention. LRBP 9004-1(a) fixes line 1 for the filer block and says nothing about the title's line.
 4. **Prayer lead-in can be separated from its list.** When a list starts near the foot of a page, its introduction ("WHEREFORE … judgment:") can stay on the page while the list moves to the next, because the list and signature are kept together. The sample shows this on page 4 and 5. Not fixed.
 5. **Footer size.** 11 point. The 13-point minimum is written for text; the footer is identification (convention, flagged).

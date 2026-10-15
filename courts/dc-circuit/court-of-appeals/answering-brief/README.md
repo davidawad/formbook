@@ -7,7 +7,7 @@ Self-contained doc-type folder for `cadc` (D.C. Circuit). Built from one filed e
 | `exemplars/FILED-EXAMPLE-wilson-25-3041-answering-brief.pdf` | Brief for the United States (appellee), *United States v. Wilson*, No. 25-3041, filed 10/20/2025. Text-based, 32 pages. |
 | `exemplars/SOURCE.md` | URL fetched from, case, docket, filer, dates. |
 | `samples/INPUT-wilson.md` | Transcription of the exemplar: front matter, a portion of the statement, summary, first half of argument, conclusion, certificates. |
-| `samples/OUTPUT-wilson.pdf` | Render of the sample (14 pages). |
+| `samples/OUTPUT-wilson.pdf` | Render of the sample (13 pages). |
 | `samples/OVERLAY-wilson.pdf`, `OVERLAY-wilson.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`), and its page map. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
 | `typst/cadc-answering-brief.typ` | The template: `cadc-answering-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top. |
@@ -29,7 +29,7 @@ Verification status is recorded per row. "Fetched" means the text was retrieved 
 | ID | Requirement | Source | Verified |
 |---|---|---|---|
 | CADC-FORM-001 | Proportionally spaced serif face, at least 14-point. | FRAP 32(a)(5), quoted in the D.C. Circuit notice below. | Fetched 2026-10-14 (quoted in notice). |
-| CADC-FORM-002 | Court encourages Century and Times New Roman; Garamond "can be more difficult to read and the use of this typeface is discouraged." Double-spaced; one side only. | D.C. Circuit Handbook, Part IX.A.6, revised 3/16/2021: https://www.cadc.uscourts.gov/sites/cadc/files/noticeGen-noticePreferredTypefacesForBriefs.pdf | Fetched 2026-10-14. Handbook text is the extract in the notice; the full handbook was not retrievable. |
+| CADC-FORM-002 | Court encourages Century and Times New Roman; Garamond "can be more difficult to read and the use of this typeface is discouraged." Double-spaced; one side only. | D.C. Circuit Handbook, Part IX.A.6, revised 3/16/2021: https://www.cadc.uscourts.gov/sites/cadc/files/noticeGen-noticePreferredTypefacesForBriefs.pdf | Fetched 2026-10-14. Handbook text is the extract in the notice; the full handbook was not retrievable. Face: Century (the filed exemplar's body face) → `TeX Gyre Schola` (`docs/FONTS.md`); see Known gaps, item 1. |
 | CADC-FORM-003 | Margins at least one inch on all sides; double-spaced text, with headings, quotations, footnotes and TOC/TOA single-spaced. | FRAP 32(a)(4) and (a)(5)(B). | Not re-fetched. Template follows the exemplar. |
 | CADC-LIMIT-001 | Principal brief (including appellee's): 13,000 words; certificate of compliance. | FRAP 32(a)(7)(B)(i); D.C. Circuit Brief Compliance Checklist (its text reads 13,000 words for a principal brief, citing FRAP 32(a)(2) and (7)). | The checklist URL returned 404 on fetch; the figure comes from a search snippet only. Re-check against the rule text. |
 | CADC-LIMIT-002 | Words exempted from the count: FRAP 32(f) and D.C. Circuit Rule 32(e)(1). | FRAP 32(f), D.C. Cir. R. 32(e)(1) as cited by the exemplar. | Exemplar only. |
@@ -76,38 +76,45 @@ Body: `# Heading` is a section (bold, capitals, centered). Under `# Argument`, `
 
 `overlay.sh` pairs each sample page with the exemplar page sharing the most words (Jaccard overlap of word sets), so the pairing is by text, not position. Result for `OVERLAY-wilson.txt`:
 
-| Sample page | Filed page | Word overlap |
-|---|---|---|
-| 1 (cover) | 1 | 74% |
-| 2 (certificate of parties) | 2 | 88% |
-| 3 (TOC) | 4 | 49% |
-| 4 (TOA) | 5 | 56% |
-| 5 (TOA cont.) | 6 | 42% |
-| 6-8 (body 1-3) | 9, 10, 11 | 46-65% |
-| 9-12 (body 4-7) | 20, 21, 23, 27 | 58-83% |
-| 13-14 (certificates) | 28 | 38-57% |
+Last run (2026-10-15, after the font change):
 
-Limits, stated plainly: the pairing for body pages 4-7 maps to exemplar pages 20-27 (the conclusion and later argument), while the sample's text there comes from exemplar pages 13-20. That is a limit of the word-set pairing (the sample covers a fraction of the exemplar's text, and the page sets overlap across the exemplar's argument). The overlay therefore does not show a clean page-for-page alignment for the argument. It is a diagnostic, not a score. The red and blue layers are not compared pixel by pixel in this README.
+| Sample page | Filed page | Word overlap | What it is |
+|---|---|---|---|
+| 1 | 1 | 74% | Cover |
+| 2 | 2 | 88% | Certificate of parties |
+| 3 | 4 | 49% | TOC |
+| 4 | 5 | 50% | TOA |
+| 5 | 9 | 45% | Issue presented; statement of the case (A) |
+| 6 | 10 | 65% | Statement (proclamation; certificate of pardon) |
+| 7 | 11 | 54% | Statement (district court's order, B) |
+| 8 | 20 | 79% | Summary of argument; argument point I |
+| 9 | 21 | 61% | Argument (relate-to reading; Dubin, Lamar) |
+| 10 | 23 | 55% | Argument (deference; Andrews, Rosemond) |
+| 11 | 27 | 59% | Conclusion; signature block |
+| 12 | 28 | 38% | Certificate of compliance |
+| 13 | 28 | 57% | Certificate of service |
+
+Limits, stated plainly: the sample transcribes part of the filed brief (see Known gaps, item 2), so the pairing is by shared text, not by position. The filed pages it pairs with come from the exemplar's argument and later pages. It is a diagnostic, not a score. The red and blue layers are not compared pixel by pixel in this README.
 
 ## Gate 2: page review
 
-All 14 rendered pages were rasterized at 60 dpi and viewed (`pdftoppm -r 60`). Findings:
+Re-reviewed 2026-10-15 after the font change to TeX Gyre Schola: all 13 rendered pages were rasterized at 60 dpi and viewed (`pdftoppm -r 60`). Findings:
 
 - p.1 cover: fits on one page; oral-argument line, court, number, caption, appeal line with `Cr. No.`, brief title, counsel. No defect.
 - p.2 (ii) certificate of parties: fits one page. No defect.
-- p.3 (iii) TOC: lists Issue Presented, the statement and its sub-headings, summary, argument and its point heading, conclusion, with page numbers that match the body (checked against pp. 6-12). No defect.
-- pp.4-5 (iv-v) TOA: cases, statutes, rules, other authorities; page v holds only the overflow (two groups). Passim threshold not reached. Acceptable.
-- pp.6-8 (body 1-3): double-spaced 14-point EB Garamond; footnote 1 at 14 pt; bold sub-heading A. and B. hang correctly. No defect.
-- pp.9-12 (body 4-7): summary, centered point heading I. with small caps, argument text, conclusion, signature block with `/s/` and counsel lines. The signature block stays with the last paragraph. No defect.
-- p.13 certificate of compliance: wording follows FRAP 32(g); the typeface is named as EB Garamond (see gap 1). Heading was "RULE 32(A)" in the first render (the caps style upper-cased the rule letter); fixed by shortening the heading to "Certificate of Compliance". Re-rendered and re-checked.
-- p.14 certificate of service: wording follows FRAP 25(d) as the exemplar. No defect.
+- p.3 (iii) TOC: lists Issue Presented, the statement and its sub-headings, summary, argument and its point heading, conclusion, with page numbers that match the body (checked against pp. 5-11). No defect.
+- p.4 (iv) TOA: cases, statutes, rules, other authorities on one page. Passim threshold not reached. No defect.
+- pp.5-7 (body 1-3): double-spaced 14-point TeX Gyre Schola; bold sub-heading A. and B. hang correctly. No defect.
+- pp.8-11 (body 4-7): summary, centered point heading I. with small caps, argument text, conclusion, signature block with `/s/` and counsel lines. The signature block stays with the conclusion. No defect.
+- p.12 certificate of compliance: wording follows FRAP 32(g); the typeface is named as TeX Gyre Schola (see gap 1). No defect.
+- p.13 certificate of service: wording follows FRAP 25(d) as the exemplar. No defect.
 
-Pages reviewed: 14 of 14.
+Pages reviewed: 13 of 13. Fonts embedded: TeX Gyre Schola (Regular, Bold, Italic) only; no fallback. Typst printed no warnings.
 
 ## Known gaps
 
-1. Typeface (tier 2, open). Only EB Garamond is vendored under `fonts/` (`fonts/eb-garamond`). The court's Handbook (IX.A.6) encourages Century or Times New Roman and discourages Garamond. The template is FRAP-compliant (proportional serif, 14 pt) but does not match the court's preferred faces. Fix options: vendor a Century-compatible face (licence to check; `fonts/` is shared, so this needs David's decision), or accept EB Garamond. Not chased here.
-2. Sample is partial. The exemplar runs 32 pages (about 4,600 words of text). The sample transcribes the front matter, the first part of the statement (procedural history, the district court's order), the summary, the first half of the argument, the conclusion, and both certificates: about 1,500 words. The remaining statement, the argument's Kelley/Taranto/Martin discussion and Andrews' later parts, and the addendum are not transcribed. The overlay and the 14-page count describe the sample, not the whole brief.
+1. Typeface (resolved 2026-10-15). Face required: Century. The Handbook (IX.A.6) names Century and Times New Roman and discourages Garamond; the filed exemplar's body is set in Century Schoolbook (its PDF also embeds Times New Roman and Arial in part). Substitute: `TeX Gyre Schola` (`docs/FONTS.md`; metric-compatible with the New Century Schoolbook AFMs). The template was EB Garamond before this change; the sample went from 14 to 13 pages. Times New Roman (`Liberation Serif`) is the other face the Handbook names; Century follows the exemplar's body.
+2. Sample is partial. The exemplar runs 32 pages (about 4,600 words of text). The sample transcribes the front matter, the first part of the statement (procedural history, the district court's order), the summary, the first half of the argument, the conclusion, and both certificates: about 1,500 words. The remaining statement, the argument's Kelley/Taranto/Martin discussion and Andrews' later parts, and the addendum are not transcribed. The overlay and the 13-page count describe the sample, not the whole brief.
 3. The certificate of compliance states 1,505 words: that is the sample's count, not the filed brief's (3,768). The count is computed from the sample markdown, as designed.
 4. The addendum (the 90 Fed. Reg. 8331 proclamation) is not transcribed; the exemplar's text layer for it is garbled. The statutes-and-regulations statement is therefore omitted from the sample.
 5. Emphasis that is not in the text layer (italics in quoted text, "(emphasis added)") is omitted; the sample drops the "(emphasis added)" tag rather than invent an emphasis.
