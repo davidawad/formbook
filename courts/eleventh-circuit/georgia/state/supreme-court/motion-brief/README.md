@@ -84,3 +84,30 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/state/supreme-court/motion-b
 ```
 
 The render fails on any typst warning and on any font outside the vendored set (`--ignore-system-fonts`).
+
+## Engines
+
+Typst is the primary engine (above). The DOCX engine is `docx/`: `build-reference.sh` writes `reference.docx` (the 1.5-spaced measurements of the typst motion: 19.5 pt lines, 7.8 pt after each paragraph, 13-pt headings, 11-pt footnotes, the page number in the footer); `ga-motion.lua` builds the cover, questions presented (petition only), TOC, closing and certificate; `render.sh` makes two renders so the TOC numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> samples/INPUT-dpg-opposition-to-emergency-petition.md`: `samples/OUTPUT-dpg-opposition-to-emergency-petition.docx` and `.docx.pdf` (LibreOffice 26.8.1).
+
+| | docx | typst |
+|---|---|---|
+| Pages | 10 | 10 |
+| Font | TeX Gyre Schola only | TeX Gyre Schola only |
+| Line pitch | 19.5 pt; 7.8 pt after paragraphs | same |
+| Headings | 13 pt; the space above a heading depends on what precedes it (see below) | same |
+| Cover | same layout; rules as paragraph borders | same |
+| TOC | every number equals the typst output | same |
+| Closing | the word-count sentence, date and signature kept on one page | same |
+| Certificate | same; recipients in two columns, wrapping | same |
+
+Checked: every page of `OUTPUT-dpg-opposition-to-emergency-petition.docx.pdf` was rendered (60 dpi) and set beside the typst page; line positions were measured with `pdftotext -bbox`.
+
+Measured against typst, the spacing of the transitions that occur in this sample agrees to 1.6 pt or less: level 1 to level 2, body to level 2, level 2 to level 3, and level 2 to body. The space above a heading differs by case (typst adds block spacing that LibreOffice does not), so each case has its own heading style in `reference.docx` (`Heading<n>Body` after body text, the level-1 heading at the top of the body).
+
+What differs:
+
+- **Caption.** The close-parenthesis column and the docket are top-aligned in the table; typst centres them on the caption.
+- **Line breaks.** A few line breaks at the margin differ (LibreOffice and typst break the same lines a word apart in places).
+- Word not run (see answering-brief).
+
+BLOCKED: none.

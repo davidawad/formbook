@@ -108,3 +108,27 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/state/supreme-court/petition
 ```
 
 The render fails on any typst warning and on any font outside the vendored set (`--ignore-system-fonts`).
+
+## Engines
+
+Typst is the primary engine (above). The DOCX engine is `docx/`, the same files as `motion-brief/docx/`: `build-reference.sh` writes `reference.docx`; `ga-motion.lua` builds the cover, the questions presented (Rule 41(2), before the TOC), the TOC, closing and certificate; `render.sh` makes two renders so the TOC numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> samples/INPUT-dpg-emergency-petition.md`: `samples/OUTPUT-dpg-emergency-petition.docx` and `.docx.pdf` (LibreOffice 26.8.1).
+
+| | docx | typst |
+|---|---|---|
+| Pages | 12 | 12 |
+| Font | TeX Gyre Schola only | TeX Gyre Schola only |
+| Line pitch | 19.5 pt; 7.8 pt after paragraphs | same |
+| Questions presented | hanging indent, page 1 | same |
+| Cover | same layout | same |
+| TOC | numbers equal the typst output on all twelve entries | same |
+| Closing | the signature kept on one page | same |
+| Certificate | same; recipients in two columns, the third and later wrapping | same |
+
+Checked: every page of `OUTPUT-dpg-emergency-petition.docx.pdf` was rendered (60 dpi) and set beside the typst page; line positions were measured with `pdftotext -bbox`.
+
+What differs:
+
+- **Caption.** The close-parenthesis column and the docket are top-aligned in the table, as in the motion (typst centres them).
+- Run-in spacing and Word: see motion-brief.
+
+BLOCKED: none.
