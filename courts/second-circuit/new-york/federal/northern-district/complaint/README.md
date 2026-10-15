@@ -84,3 +84,11 @@ Every page rendered at 60 dpi and looked at after the last template change.
 - Page 8: ¶ 71; WHEREFORE with lettered items a. to d.; DEMAND FOR JURY TRIAL; date; signature block with signers, bar roll placeholders and address. Pass.
 
 [Formbook index](../../../../../../README.md)
+
+## Engines
+
+docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond 12 pt, letter, 1 in margins, exact 24 pt body lines, centered page number footer, single-spaced caption and signature lines); `nynd-complaint.lua` builds the caption (rule under the party block), the signature block and the numbering (`1.` ... as text and a tab, lettered prayer items `a.` ... ); `render.sh` reads the markdown as CommonMark (`commonmark_x`, as cmarker reads it), so a literal `*` stays literal. Output: `samples/OUTPUT-golub-complaint.docx` and `.docx.pdf` (LibreOffice, 8 pages, the same count as typst; the .docx converts in LibreOffice without error; not opened in Word).
+
+- Matches typst: paper, margins, font, 24 pt line pitch, caption layout, numbered paragraphs, headings' positions, lettered prayer, signature block with bar roll numbers, page numbers. Pages were compared one by one with the typst render (8 of 8 viewed); page breaks differ by a paragraph in places (page 1 ends after paragraph 2 in the .docx and after paragraph 3 in typst; the total is the same).
+- Differs: section headings are 12 pt bold, the body size. Typst's default heading size (1.4 em, about 16.8 pt) is not a choice L.R. 10.1 makes; this is a tier-2 convention call, left as is.
+- docx BLOCKED: `check.sh <doc-type-folder> --engine docx` cannot run here (exit 2, before any gate): this folder has no `court.json` and no `checks.yaml` (the court has no `checks.yaml` yet either). Gates 0 to 3 are unverified for docx: BLOCKED, not a pass.
