@@ -27,6 +27,7 @@ Retrieved 2026-10-14. Local rule text was extracted with `pdftotext` from the co
 | HIB-FORM-006 | Hearing notice on the caption (date, time, judge). Hearing notice given 28 days before the hearing (LBR 9013-1(c)(1)). | LBR 9013-1(c)(1) (same PDF) |
 | HIB-FORM-007 | Signature block (convention; no local rule text on signatures). | Exemplar |
 | LBR 9013-2(b) | Briefs and memoranda over 10 pages include a table of contents and a table of authorities. The template renders both (TOC and TOA built from the body headings and the `toa:` links in the markdown). | LBR 9013-2(b) (same PDF) |
+| HIB-FORM-008 | Typeface: **no face named.** LBR 9004-1(b)(1) is headed "Font style" but sets only the size (14-point, HIB-FORM-002); the full Dec. 1, 2025 compilation names no typeface. Typeface row: face required = none; substitute = EB Garamond (vendored, `docs/FONTS.md` "No face named"); fit = n/a. | LBR 9004-1(b)(1) (same PDF as HIB-FORM-002; text searched 2026-10-15) |
 | LBR 9013-2(a) | Length: a supporting memorandum may not exceed 25 pages unless the filer certifies it contains no more than 6,250 words (certificate of compliance, LBR 9013-2(a)(4)). | LBR 9013-2(a)(1), (4) (same PDF) |
 
 Procedural references in the sample (Fed. R. Civ. P. 8(a), 9(b), 12(b)(6); Fed. R. Bankr. P. 7008, 7009, 7012) are quoted from the exemplar's authorities, not re-verified against the rules in this pass.

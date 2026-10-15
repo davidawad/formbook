@@ -29,6 +29,7 @@ Quoted from the primary text. Retrieved 2026-10-14.
 | HIB-ADV-FORM-008 | Cover sheet: "Every complaint initiating an adversary proceeding must be accompanied by a cover sheet substantially conforming to the Director's Procedural Form (Adversary Proceeding Cover Sheet)." Filed separately; not rendered by this template (see gaps). | LBR 7003-1, D. Haw. Local Bankruptcy Rules, Dec. 1, 2025: https://www.hib.uscourts.gov/sites/hib/files/documents/local-rules/LBR2025_dec01_7001-2_to_7067-2.pdf |
 | HIB-ADV-FORM-009 | Exhibits: separated from the text by a page identifying the exhibit; no tabs; exhibits are exempt from the formatting rules of LBR 9004-1(b). The sample refers to the lease as Exhibit "A" without transcribing it. | LBR 9004-1(a)(4), (b) (same PDF as HIB-ADV-FORM-002) |
 | HIB-ADV-FORM-010 | Signature block after the prayer, with the date line "DATED:" (convention). | Exemplar; no local rule text on complaint signatures |
+| HIB-ADV-FONT-001 | Typeface: **no face named.** LBR 9004-1(b)(1) is headed "Font style" but sets only the size (14-point, memoranda); the full Dec. 1, 2025 compilation names no typeface. Typeface row: face required = none; substitute = EB Garamond (vendored, `docs/FONTS.md` "No face named"); fit = n/a. | LBR 9004-1(b)(1) (same PDF as HIB-ADV-FORM-002; text searched 2026-10-15) |
 
 No local rule numbered LBR 7010 or LBR 7008 appears in the December 1, 2025 compilation (the index of LBR 7001-2 through 7067-2 lists 7001-2, 7003-1, 7016-1, 7017-1, 7026-1 and later). The FRBP 7010 and 7008 rules above therefore govern the form and content of the complaint.
 
@@ -60,6 +61,6 @@ LBR 7016-1(b) (scheduling conference on filing of a complaint) also applies to t
 3. **Certificate of service (LBR 9013-3).** None in the sample; the exemplar transcribed has none. LBR 9013-3(a) requires a certificate of service unless Rule 7005 governs service and every party served is a registered ECF user. A complaint is served with the summons under FRBP 7004, so whether 9013-3 applies is unclear. Open: needs a ruling on the complaint's service method before a certificate block is added.
 4. **Body abridged.** The sample transcribes ¶¶ 1-63, the first block quotation, the prayer ¶¶ A-H and the signature; ¶¶ 64-133 and the Lease (Exhibit A) are marked as omitted in the sample text. The exemplar is 24 pages of complaint; the sample is 10 pages, inside the 8-14 page band.
 5. **One filer only.** Tier 2 is judged against one exemplar (Hawaii Brewery Development Co., Adv. 26-90013). A second filer was identified (Collins v. Hughes Network Systems, LLC, Adv. 24-90002, Square One Legal, 9 pp.) but not saved, per `exemplars/SOURCE.md`. Tier 2 therefore cannot be fully judged; this is stated, not hidden.
-6. **Typeface.** The local rules name no typeface; the template uses EB Garamond (vendored). The exemplar is Calibri (one filer; tier 3).
+6. **Typeface.** The local rules name no typeface (HIB-ADV-FONT-001), so the template keeps EB Garamond (vendored), as `docs/FONTS.md` prescribes for a court that names no face. The exemplar is Calibri (one filer; tier 3).
 
 [Court README](../README.md)
