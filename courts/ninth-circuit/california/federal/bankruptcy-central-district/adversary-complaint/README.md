@@ -2,7 +2,7 @@
 
 Doc type: **adversary complaint** (FRBP 7001: a proceeding to recover money or property, to determine dischargeability, to obtain an injunction, and so on). Court: United States Bankruptcy Court, Central District of California (cacb), any division. Folder: `courts/ninth-circuit/california/federal/bankruptcy-central-district/adversary-complaint/`.
 
-Status: exemplar=yes, render=ok, overlay=ok, pages reviewed 10 of 10. Nothing here sets a court-level `court.json` status.
+Status: exemplar=yes, render=ok, overlay=ok, pages reviewed 11 of 11 (after the typeface change, below). Nothing here sets a court-level `court.json` status.
 
 ## Governing rules
 
@@ -16,7 +16,7 @@ Sources, read 2026-10-14:
 |---|---|---|---|
 | CACB-FORM-001 | Central Guide 9004-1(b)(2)(A)(i) | Pages 8.5 x 11 inches. | page setup, `page-w`, `page-h` |
 | CACB-FORM-002 | Central Guide 9004-1(b)(2)(B)(i) | Numbered margins required for a party-generated adversary complaint; at most 28 lines per page, numbered consecutively. | `line-numbers()`, `lines-per-page` = 28, `pitch` = 24 pt |
-| CACB-FORM-003 | Central Guide 9004-1(b)(2)(C) | Typeface not smaller than 12 point; the listed typefaces are Arial, Courier, Times New Roman, Helvetica, Geneva, Letter Gothic. Line 1 at least 1 inch below the top edge. | `type-size` = 12 pt; `top-margin` = 72 pt. **Font gap, see gaps 1.** |
+| CACB-FORM-003 | Central Guide 9004-1(b)(2)(C) | Typeface not smaller than 12 point; the listed typefaces are Arial, Courier, Times New Roman, Helvetica, Geneva, Letter Gothic. Line 1 at least 1 inch below the top edge. | `type-size` = 12 pt; `top-margin` = 72 pt. Typeface: Times New Roman is listed, so the template sets `font-family` = "Liberation Serif" (vendored, metric-compatible substitute, `docs/FONTS.md`). See gaps 1. |
 | CACB-FORM-004 | Central Guide 9004-1(b)(2)(F) | Double-spaced, including citations. Footnotes may be single-spaced at 12 point or more. Quotations of 50 words or more may be single-spaced. | `body-leading` (24 pt pitch); `single-leading` for counsel, caption, signature |
 | CACB-FORM-005 | Central Guide 9004-1(b)(2)(G) | Every page numbered consecutively at the bottom, including exhibits. | `footer-block()` |
 | CACB-FORM-006 | Central Guide 9004-1(b)(2)(E) | One side of the paper only. | output is single-sided PDF |
@@ -54,12 +54,12 @@ sh tools/render.sh courts/ninth-circuit/california/federal/bankruptcy-central-di
 sh tools/overlay.sh courts/ninth-circuit/california/federal/bankruptcy-central-district/adversary-complaint lpg-marshack-adversary
 ```
 
-- `samples/OUTPUT-lpg-marshack-adversary.pdf`: 10 pages, letter. Typst compiled with no warnings (`render.sh` fails on any). Fonts: EB Garamond only (vendored); `pdffonts` shows `EBGaramond-Regular`, `-Italic`, `-Bold`, `-BoldItalic`, embedded.
-- Line pitch measured with `pdftotext -bbox-layout` on page 4 at 12 pt: 67.72, 91.72, 115.72, 139.72 pt, i.e. 24.0 pt. Numbered lines run 1 to 28 down the margin.
-- `samples/OVERLAY-lpg-marshack-adversary.pdf` and `.txt`: red = our render, blue = exemplar, black = both. Page map: ours 1-3 ↔ filed 1-3 (about 81-85% word overlap); ours 4-10 ↔ filed 5, 9, 11, 13, 15, 20, 21 (27-76%). The map is coarse (word sets, not layout): the exemplar's body is at a different pagination and carries pleading-paper line numbers in the same grid, so the layers align on the cover and drift after it. The overlay is a diagnostic, not a score.
+- `samples/OUTPUT-lpg-marshack-adversary.pdf`: 11 pages, letter (10 with EB Garamond; Times New Roman is wider, so the sample grew by a page). Typst compiled with no warnings (`render.sh` fails on any). Fonts: Liberation Serif only (vendored); `pdffonts` shows `LiberationSerif`, `-Italic`, `-Bold`, `-BoldItalic`, embedded.
+- Line pitch measured with `pdftotext -bbox-layout` on page 4 (double-spaced body) and page 1 (single-spaced counsel): 24.00 pt and 12.00 pt. The leading is set per face (`body-leading` 1.345 em, `single-leading` 0.345 em), because Liberation Serif's line box is 0.655 em. Numbered lines run 1 to 28 down the margin.
+- `samples/OVERLAY-lpg-marshack-adversary.pdf` and `.txt`: red = our render, blue = exemplar, black = both. Page map: ours 1-3 ↔ filed 1-3 (about 81-85% word overlap); ours 4-11 ↔ filed 5, 9, 11, 13, 13, 20, 21, 21 (27-64%). The map is coarse (word sets, not layout): the exemplar's body is at a different pagination and carries pleading-paper line numbers in the same grid, so the layers align on the cover and drift after it. The overlay is a diagnostic, not a score.
 - Naming: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the brief's `<id>.pdf` / `<id>-overlay.pdf` names do not match `tools/`; the tools' names are used).
 
-## Visual review (Gate 2 record, all 10 pages, rendered at 60 dpi and looked at)
+## Visual review (Gate 2 record, all 11 pages, rendered at 80 dpi and looked at, after the typeface change)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -71,16 +71,19 @@ sh tools/overlay.sh courts/ninth-circuit/california/federal/bankruptcy-central-d
 | 6 | F (¶¶ 23-28), G (¶ 29-30) | OK. Heading "F." kept at the top of the page. |
 | 7 | G (¶¶ 31-32), First Claim for Relief (¶¶ 33-39) | OK. Statute line in bold italic, one line, on grid. |
 | 8 | Second Claim (¶¶ 40-45), Prayer lead-in (WHEREFORE, unnumbered), first group | OK. Statute line wraps, on grid. |
-| 9 | Prayer items 3-12, group labels | OK after the prayer was restructured: group labels are headings, items are one numbered list 1-19 (numbering continues across groups). |
-| 10 | Prayer items 13-19, signature block | OK. Signature: "By: /s/ Chad V. Haes" and the printed name in capitals, then the attorney lines. Dated at left. |
+| 9 | Prayer items 1-8 (First to Fourth Claims) | OK. Group labels are headings, items are one numbered list 1-19 (numbering continues across groups). |
+| 10 | Prayer items 9-13 (Fifth and Seventh Claims) | OK. The Fifth group's heading is kept with its first item. |
+| 11 | Prayer items 14-19 (All Claims), signature block | OK after a fix. In Liberation Serif the signature block split: its last line went to a page of its own. Now the last prayer group and the signature block are one unbreakable block, so they move together. Signature: "By: /s/ Chad V. Haes" and the printed name in capitals, then the attorney lines. Dated at left. |
 
-Reviewed pages: 10 of 10.
+Pages 1-8 of the final render are pixel-identical to the pages reviewed before the signature fix.
 
-Defects found and fixed during review (for the record): the first render had a 13 pt counsel block colliding with the court title and a caption title spilling to page 2 (fixed, above); a nested markdown list collapsed the second claim's prayer items into one bullet (fixed in the sample by flattening; the template's list numbering is now "1.", not "(a)", so a prayer is numbered as filed); the template numbered the WHEREFORE lead-in (now unnumbered, as filed); the printed signer name was not capitalized (now capitalized, as filed); the heading assertion failed on a two-line statute heading (headings now take as many numbered lines as they need).
+Reviewed pages: 11 of 11.
+
+Defects found and fixed during review (for the record): the first render had a 13 pt counsel block colliding with the court title and a caption title spilling to page 2 (fixed, above); a nested markdown list collapsed the second claim's prayer items into one bullet (fixed in the sample by flattening; the template's list numbering is now "1.", not "(a)", so a prayer is numbered as filed); the template numbered the WHEREFORE lead-in (now unnumbered, as filed); the printed signer name was not capitalized (now capitalized, as filed); the heading assertion failed on a two-line statute heading (headings now take as many numbered lines as they need); in the typeface pass (Liberation Serif), the signature block split across pages 10 and 11, leaving its last line alone on page 11 (fixed: the signature is unbreakable and joins the last prayer group, see page 11).
 
 ## Known gaps and open choices
 
-1. **Typeface (CACB-FORM-003). Needs David's call.** The Central Guide lists Arial, Courier, Times New Roman, Helvetica, Geneva and Letter Gothic as the required typefaces. The only font vendored in `fonts/` is EB Garamond (OFL), which is not on that list. The filed exemplar body is Times New Roman (embedded `TimesNewRomanPS`); the template uses EB Garamond, following the N.D. Cal. precedent, which is a departure from the exemplar as well as from the list. Options: vendor a Times-compatible font (a `fonts/` change, outside this box's scope) or accept EB Garamond. The template is not compliant with the typeface list until this is settled. Type size is 12 pt, the floor; the exemplar is 12 pt.
+1. **Typeface (CACB-FORM-003). Resolved in the fonts pass.** The Central Guide lists Arial, Courier, Times New Roman, Helvetica, Geneva and Letter Gothic as the required typefaces. The template uses Liberation Serif, the vendored metric-compatible substitute for Times New Roman (`docs/FONTS.md`), which is the face of the filed exemplar body (embedded `TimesNewRomanPS`). Type size is 12 pt, the floor; the exemplar is 12 pt. No LaTeX or DOCX engine exists for this doc type (`latex/` and `docx/` hold no template), so none needed the change. The sample is a transcription, so its page count is not a check of the filing's pagination; the overlay is the diagnostic.
 2. **Numbered lines.** Drawn on every page (CACB-FORM-002). This differs from the N.D. Cal. template, where numbered lines are for manual filing only: under the Central Guide they are required for party-generated documents such as an adversary complaint, whether filed electronically or not.
 3. **Single spacing.** Counsel, caption and signature are single-spaced at a 12 pt pitch, so two lines fit each numbered line (the exemplar does the same). Footnotes are not supported by this template (the exemplar's footnote 1 is omitted from the sample); a footnote would need single spacing at 12 pt or more.
 4. **Core/non-core statement (CACB-CORE-001).** LBR 7008-1 requires the statement in the first numbered paragraph. **The filed exemplar does not do this**: its core statement is at paragraph 6 (Statement of Jurisdiction and Venue), and paragraph 1 is the statement of the case. The sample keeps it as filed. The template does not enforce the rule. A check on the first numbered paragraph would be needed for a true gate.
