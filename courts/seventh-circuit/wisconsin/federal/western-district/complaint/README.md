@@ -89,3 +89,30 @@ Each page rendered at 60 dpi and viewed after the last template change.
 - Page 9: items E and F; JURY DEMAND heading; the demand unnumbered; "Dated:", the firm, both `/s/` signature blocks. Pass.
 
 Defects found during review and fixed: (a) the first render stacked lines on top of each other (block spacing zero against a 0.65 em line box; fixed by setting block spacing to the double-spacing leading and by stacking the court title as a single-spaced block); (b) WHEREFORE and the jury-demand sentence were numbered (fixed with the `^` marker).
+
+## Engines
+
+**typst** is the primary engine (sections above). **latex**: not built here. **docx**: built, not checked.
+
+Files: `docx/reference.docx` (made by `docx/build-reference.sh <out>`: pandoc plus libzip's `ziptool`, no `zip` or `unzip` needed) and `docx/wiwd-complaint.lua` (cover, caption table, numbered allegations, lettered lists, signature block). No case text is in either file.
+
+What matches typst (set in the reference; checked against the source, not a rendered docx):
+- Font: EB Garamond 12 pt, the only vendored face (`docs/FONTS.md`), named in the document defaults and the body, heading and footer styles. Typst's PDF embeds EB Garamond Regular, Bold and BoldItalic only (`pdffonts`, measured).
+- Page: US Letter, 1 in margins on every side (`w:pgSz` 12240 x 15840, `w:pgMar` 1440; measured in the output `.docx`).
+- Line pitch: exact 24 pt for body text, headings and lettered items (the "double" pitch in `wiwd-complaint.typ`).
+- First-line indent 0.5 in on numbered allegations; numbers are typed as `N.` followed by a tab.
+- Footer: centered `PAGE` field, 11 pt.
+- Typst output for comparison: 9 pages, EB Garamond only (`/work/artifacts/wiwd/complaint/OUTPUT-olson-complaint.pdf`, outside the court folder). The `.docx` page count is not measured.
+
+What differs from typst (not verified in a rendered docx):
+- Paragraph gaps: the docx sets no space before or after body paragraphs; `wiwd-complaint.typ` sets block spacing equal to the body leading. The gap on the page is not measured.
+- Allegation numbers are typed text, not Word list numbering, so they do not renumber when a paragraph is added.
+- Caption: a Word table, with the right and bottom rules on the left cell. Borders differ between Word and LibreOffice (`docs/DOCX.md`).
+- The cover and signature take plain text from the frontmatter; markdown inside frontmatter values (italics) is not carried.
+- Headings use keep-with-next and keep-lines; that is not checked against a render.
+
+BLOCKED (docx):
+- `docx.pdf` and the page-by-page review: `soffice` (LibreOffice) is not installed on this box and cannot be installed here. Gates 0 and 1 cannot run on `samples/OUTPUT-olson-complaint.docx.pdf`.
+- `tools/render-docx.sh` integrity check: `unzip` is not installed on this box, so the script exits 1 at its zip test, before `soffice`. Checked by hand instead: the `.docx` lists 17 parts and every `.xml` and `.rels` part is well formed (`xmllint`), and pandoc reads its text back in order.
+- TOC and TOA: not produced. The typst template does not produce them and the complaint has none.
+- Pleading line numbers: not in the typst template, so not built.
