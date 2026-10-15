@@ -48,7 +48,7 @@ sh tools/render.sh courts/ninth-circuit/montana/federal/bankruptcy-district/adve
 sh tools/overlay.sh courts/ninth-circuit/montana/federal/bankruptcy-district/adversary-complaint bache-noble-complaint
 ```
 
-- `samples/OUTPUT-bache-noble-complaint.pdf`: 4 pages. `render.sh` fails on any typst warning; none. Fonts: EB Garamond only (vendored).
+- `samples/OUTPUT-bache-noble-complaint.pdf`: 4 pages. `render.sh` fails on any typst warning; none. Fonts (`pdffonts`): EB Garamond Regular, Italic, Bold, all embedded (vendored).
 - `samples/OVERLAY-bache-noble-complaint.pdf` and `.txt`: red = our render, blue = exemplar, black = both. Page map (word-overlap pairing, coarse): ours p.1 ↔ filed p.1 (73.0%), p.2 ↔ p.2 (68.2%), p.3 ↔ p.3 (71.8%), p.4 ↔ p.4 (84.0%). The layers will not coincide on text lines: the font is different (EB Garamond vs Times), so the overlay is a diagnostic, not a score.
 
 ## Visual review (all 4 pages rendered at 60 dpi and looked at)
@@ -65,7 +65,7 @@ Reviewed pages: 4 of 4.
 ## Known gaps and open choices
 
 1. **Tier 2 exemplars.** One exemplar, one filer. The eval-loop rule asks for two or three filed exemplars from different filers. A second public Montana adversary complaint with an archived copy was not found on CourtListener's RECAP search (most 2026 complaints are listed as unavailable).
-2. **Font.** EB Garamond at 13 pt, not Times. The LBR sets only the 12-point floor and does not name a face. The repo vendors EB Garamond; Times is not vendored.
+2. **Font.** EB Garamond at 13 pt, not Times. The LBR sets only the 12-point floor for complaints; the Times New Roman requirement in LBR 9013-1(k)(6)(A) covers proposed orders only, so no face is required here and EB Garamond stays (see the court README, "Typeface"). The exemplar is set in Times, so a Times-metric stand-in (`Liberation Serif`) would match its line breaks better; that is a visual choice, not a rule.
 3. **Caption and counsel block are single-spaced.** The LBR's double-spacing rule (5005-2(a)(5)) exempts only quoted material and footnotes. The filed exemplar single-spaces its counsel block and caption too, and the template follows that. Flagged as a convention, not a rule reading.
 4. **Length.** The exemplar is 4 pages, so the sample is 4 pages. The 8-14 page target applies only when the exemplar is that long.
 5. **Paragraph numbering** is typed in the sample (`1\.`), not generated. The template does not check consecutive numbering.

@@ -7,9 +7,10 @@ Folder: `courts/ninth-circuit/northern-mariana-islands/federal/district/complain
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-ewing-16-00034-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-ewing-first-amended-complaint.md` (the whole filed complaint, 12 pages filed, 65 paragraphs) |
-| render | ok: `samples/OUTPUT-ewing-first-amended-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-ewing-first-amended-complaint.pdf` and `OVERLAY-ewing-first-amended-complaint.txt` |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; pages 10 and 11 again after the signature and prayer fix) |
+| typeface | LR 5.2.a requires "12-point type or larger and in a serif font" and names no face. Font: EB Garamond (vendored; no substitute needed). Not metric-compatible with any Times; not needed for LR 5.2.a. |
+| render | ok: `samples/OUTPUT-ewing-first-amended-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, EBGaramond-Bold), no warnings. Re-rendered 2026-10-15. |
+| overlay | fail (not re-run): `tools/overlay.sh` needs `exemplars/FILED-EXAMPLE-*.pdf`, which is not in this snapshot. `samples/OVERLAY-ewing-first-amended-complaint.txt` is from an earlier run; no `OVERLAY-*.pdf` exists here. |
+| pages reviewed | 11 of 11 (re-rendered and every page viewed as PNG at 60 dpi on 2026-10-15) |
 
 File names follow the file roles in `CLAUDE.md` (`INPUT-` the markdown, `OUTPUT-` our render, `OVERLAY-` the comparison) because `tools/render.sh` and `tools/overlay.sh` read and write those names by default. The brief's `<id>.md` / `<id>-overlay.pdf` names are the same files under those names.
 
@@ -66,7 +67,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 1. **Which rules version applies.** The text is the 2017 Final Redline, read through WebFetch (the court site refuses the box's HTTP client). The redline mixes deletions and insertions; the quoted text is the inserted wording (for example LR 5.2.a and LR 7.1). The current adopted version (and any general order since 2017) was not confirmed. **Needs David's check of the court's posted local rules before this template is treated as complete.** The 2016 exemplar predates the 2017 rules and was not used to set any value.
 2. **Bar identification number (LR 5.2.c).** The rule requires counsel's bar identification number. The exemplar (2016) prints none. The template prints the counsel block as given; a real filing needs the number in the frontmatter `counsel` lines. Not invented.
 3. **Lines per page: 25, not 28.** Derived from the 2017 margins (1.5 in top, 1 in bottom); the filed exemplar has 28. The template follows the rule, not the exemplar.
-4. **Font.** EB Garamond (SIL OFL, vendored in `fonts/eb-garamond/`) at 12 pt, the minimum size in LR 5.2.a. EB Garamond has a smaller x-height than Times at the same size, so the text reads smaller than the Times exemplar. It is a serif face (the rule's test). A vendored Times-metric font would remove the difference; that is a font-vendoring question for David, not a template change.
+4. **Font.** EB Garamond (SIL OFL, vendored in `fonts/eb-garamond/`) at 12 pt, the minimum size in LR 5.2.a. Checked 2026-10-15 against the 2017 Final Redline text: the only typeface rule is "All text must be in 12-point type or larger and in a serif font", and no face is named, so `docs/FONTS.md` keeps EB Garamond (no court-named substitute). EB Garamond has a smaller x-height than the Times New Roman used in the filed exemplar; that is the filer's choice (tier 3), not a rule, so it is not chased.
 5. **Ragged right.** The body is left-aligned; the exemplar's justification is not asserted.
 6. **Prayer lettering.** (a), (b), (c) in the template; the filed exemplar uses 1, 2, 3. The template's list convention is shared with the CAND complaint; not asserted against the exemplar.
 7. **Tier 2 exemplars.** One filer only. EVAL-LOOP's tier-2 rule asks for two or three from different filers; the search (below) found candidates but did not save them.

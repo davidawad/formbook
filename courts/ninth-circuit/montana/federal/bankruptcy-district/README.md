@@ -31,4 +31,19 @@ A court is `up for review` when `rules.md` is present and the typst engine passe
 - `exemplars/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `samples/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`
 
+## Typeface
+
+Read from the court's PDF (Mont. LBR, December 1, 2025) on 2026-10-15:
+
+- Mont. LBR 9013-1(k)(6)(A): "All proposed Orders shall be submitted in Times New Roman size 12 font." This names a face for **proposed orders only**.
+- Mont. LBR 5005-2(a)(2) sets only the 12-point floor. No other LBR or Fed. R. Bankr. P. rule read names a face for complaints or motions.
+
+| Doc type | Face required by the rules | Vendored substitute (`docs/FONTS.md`) | Fit | Used |
+|---|---|---|---|---|
+| `adversary-complaint` | none | n/a | n/a | EB Garamond |
+| `motion-brief` | none | n/a | n/a | EB Garamond |
+| (proposed order, no template here) | Times New Roman 12 | `Liberation Serif` | metric-compatible | not built |
+
+A proposed-order template, if one is added, uses `Liberation Serif` (not EB Garamond).
+
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)

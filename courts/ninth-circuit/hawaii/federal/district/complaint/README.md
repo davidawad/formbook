@@ -7,8 +7,9 @@ Folder: `courts/ninth-circuit/hawaii/federal/district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-sffa-1-25-cv-00450-complaint.pdf` (1 filer, Students for Fair Admissions; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-sffa-complaint.md`: paragraphs 1 to 24, the prayer for relief and the signature block of the 56-page filing (not the whole filing) |
-| render | ok: `samples/OUTPUT-sffa-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (stand-in font, see Known gaps 1), no typst warnings |
-| overlay | ok: `samples/OVERLAY-sffa-complaint.pdf` and `samples/OVERLAY-sffa-complaint.txt` |
+| typeface | No face named for complaints (LR 10.2(a)(2) covers memoranda only) → **EB Garamond** (kept; `docs/FONTS.md`: no face named). Embedded per `pdffonts`: EBGaramond Regular, Italic, Bold. |
+| render | ok: `samples/OUTPUT-sffa-complaint.pdf`, 9 pages (unchanged by this pass), typst 0.15.0, vendored fonts only, no typst warnings |
+| overlay | **fail**: needs `exemplars/FILED-EXAMPLE-*.pdf`, not in this snapshot. `samples/OVERLAY-sffa-complaint.*` is stale and must be regenerated once the exemplar PDF is restored. |
 | pages reviewed | 9 of 9 (every page rendered at 50 dpi and viewed after the last template change) |
 
 File names follow the tools' convention, not the brief's `<id>.md` shorthand: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` reads it and writes `OVERLAY-<id>.pdf` / `.txt`, so the sample is `INPUT-<id>.md`.
@@ -54,7 +55,7 @@ Convention (tier 2; from the exemplar, not a rule): page number centered in the 
 
 ## Known gaps and open choices
 
-1. **Font: stand-in.** The template is set in EB Garamond (`font-family`), the only font vendored in `fonts/`. The exemplar is Times New Roman, and LR 10.2(a)(2) names 14-pt Times New Roman for memoranda. A Times-metric font (for example Liberation Serif, SIL OFL, metric-compatible with Times New Roman) is installed on this box but **not vendored**, and the brief forbids system fonts and editing `fonts/`. Vendoring one is a shared change for David or the PM: once it is in `fonts/`, change `font-family` and re-render. This is a tier-2 difference for the complaint (the complaint is not a memorandum, so the rule does not fix its font) and a tier-1 blocker for memoranda (see `../motion-brief/README.md`).
+1. **Font: EB Garamond, by choice.** LR 10.2(a)(2) names 14-pt Times New Roman for memoranda only, so a complaint has no court-named face and keeps EB Garamond (`docs/FONTS.md`). The exemplar is set in Times New Roman, so this is a tier-2 difference from the filed look; the motion brief uses Liberation Serif (`../motion-brief/README.md`). If the court's practice is read to cover all documents, switch `font-family` to `Liberation Serif` and re-check the page count and body pitch as in the motion brief.
 2. **Type size.** The complaint's body is 14 pt. The rule fixes 14 pt for memoranda only; the exemplar is 14-pt Times (measured from the exemplar: glyph box 15.5 pt, Times' 1.107-em box, so 14.0 pt; baseline pitch 32.3 pt). EB Garamond at 14 pt has a smaller x-height than Times at 14 pt, so the text looks smaller than the exemplar.
 3. **Judge initials.** LR 10.2(c)(3) requires the judge's initials after the case number. The exemplar's case number has none (`Civil Action No. 1:25-cv-450`), so the sample has none. The template prints them when `judge_initials` is given. A real filing must carry them.
 4. **JS 44 civil cover sheet, Certification of Interested Entities, summons.** Separate filings (LR 3.1 for the cover sheet). Not produced.

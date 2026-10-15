@@ -13,12 +13,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-// STAND-IN FONT. LR 10.2(a)(2): "All memoranda, including footnotes, shall utilize 14-point Times New
-// Roman plain style". Only EB Garamond is vendored in fonts/, so this is EB Garamond until a
-// Times-metric font is vendored. This is a tier-1 difference; see README "Known gaps", item 1.
-#let font-family = "EB Garamond"
+// LR 10.2(a)(2): "All memoranda, including footnotes, shall utilize 14-point Times New Roman plain
+// style". Substitute per docs/FONTS.md: Liberation Serif (SIL OFL, metric-compatible with Times New Roman).
+#let font-family = "Liberation Serif"
 #let type-size = 14pt                      // LR 10.2(a)(2): 14 pt, footnotes included
-#let body-leading = 1.0em                  // LR 10.2(a)(4) double spacing: baseline pitch 2.3 em (32.2 pt at 14 pt)
+#let body-leading = 1.4em                  // LR 10.2(a)(4) double spacing: baseline pitch 32.3 pt at 14 pt with Liberation Serif (measured; was 1.0em with EB Garamond)
 #let single-leading = 0.12em               // headings, quotations, footnotes, caption, TOC and TOA: single-spaced
 #let page-margin = 1in                     // LR 10.2(a)(1): one-inch margins
 #let para-indent = 0.5in

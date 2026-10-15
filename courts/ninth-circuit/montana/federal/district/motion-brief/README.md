@@ -21,6 +21,7 @@ Federal Rules: Fed. R. Civ. P. 5(b)(2)(E) (electronic service on a registered us
 | MT-FORM-002 | L.R. 1.5(a)(2) | Typewritten in **14-point** font; double-spaced except quoted material and footnotes. Footnotes at 14 pt. | `type-size`, `line-pitch`, footnote entry |
 | MT-FORM-003 | L.R. 1.5(a)(2) | Double-spacing: 32 pt baseline pitch at 14 pt (measured, see Sample). | `line-pitch`, `body-leading`, `gap` |
 | MT-FORM-004 | L.R. 1.5(a)(3) | Consecutively numbered at the bottom of each page. Cover is page i; the front matter is roman, the memorandum arabic from 1. | `footer-num`, page numbering |
+| MT-FONT-001 | L.R. 1.5(a)(2) (2025 text read 2026-10-15: "typewritten in 14-point font size") | **No typeface is named.** Face required: none. Font: EB Garamond (vendored, OFL), kept; no court-named substitute applies. Metric-compatibility: n/a. | `font-family` in `typst/mtd-motion-brief.typ` |
 | MT-CAP-001 | L.R. 1.5(a)(4) and Appendix C, Form A | Counsel block upper left; court title; caption with "Plaintiffs," "v.", "Defendant."; case number and title on the right. | `counsel-block`, `court-title`, `caption-table` |
 | MT-DIV-001 | L.R. 1.2 | Division printed under the court title (here MISSOULA DIVISION). | `court-title` |
 | MT-SIG-001 | L.R. 1.5(b) | Printed name under the signature line. | `signature-block` |
@@ -94,7 +95,7 @@ Reviewed pages: 11 of 11.
 
 ## Known gaps and open choices
 
-1. **Font.** EB Garamond (vendored, OFL) at 14 pt, not Century Schoolbook (exemplar). The certificate of compliance names EB Garamond; if the filer's typeface differs, the certificate must say so. Style choice: noted for David.
+1. **Font.** EB Garamond (vendored, OFL) at 14 pt, not Century Schoolbook (exemplar). L.R. 1.5(a)(2) names no face (checked in the 2025 text on 2026-10-15), so the court-named-face substitution (`docs/FONTS.md`) does not apply and the default face stays. The certificate of compliance names EB Garamond; if the filer's typeface differs, the certificate must say so. If David prefers the exemplar's look, the vendored Century substitute is TeX Gyre Schola (`font-family` change only; line counts would need a re-check). Style choice: noted for David.
 2. **Word count.** The template's count is an approximation of a word processor's count: whitespace-separated tokens of the markdown body that contain a letter or digit, footnote labels and `(toa:KEY)` targets excluded. It gives 1,330 for this partial sample. For a filed brief, the attorney's software count goes in `word_count` in the frontmatter. The L.R. 7.1(d)(2)(A) 6500-word limit is enforced on whichever count is used.
 3. **Partial sample.** Argument I.A (rest), I.B, II–VI and the rest of the Conclusion are not transcribed (see Sample). The TOA therefore lists only the authorities in the transcribed text; the filed TOA lists every authority in the 43-page memorandum (several dozen entries).
 4. **Exemplar citation as filed.** *Sable Commc'ns of Cal., Inc. v. FCC* is cited in the exemplar as "492 U.S. 115, 126 (1986)". The reporter year appears to be 1989. The sample transcribes the citation as filed, so the TOA shows 1986; the filer's citation, not the template's, is the error. Not corrected in the sample.

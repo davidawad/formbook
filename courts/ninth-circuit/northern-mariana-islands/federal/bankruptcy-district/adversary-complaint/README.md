@@ -10,8 +10,9 @@ Folder: `courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-distri
 | exemplar | no (BLOCKED: no exemplar; see the searches below) |
 | sample md | `samples/INPUT-synthetic-complaint.md` (synthetic; placeholder names, numbers and dates; not a transcription of any filing) |
 | render | ok: `samples/OUTPUT-synthetic-complaint.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
+| typeface | face required: none (LR 5.2(a): "serif font"); font kept: EB Garamond (serif, vendored); no substitute needed |
 | overlay | fail: `tools/overlay.sh` needs an exemplar PDF in `exemplars/`; none exists, so no overlay was produced |
-| pages reviewed | 3 of 3 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 3 of 3 (every page rendered at 60 dpi and viewed on 2026-10-15) |
 
 ## Searches tried (for an exemplar)
 
@@ -94,6 +95,6 @@ Reviewed pages: 3 of 3. Re-rendered 2026-10-14 (second session, `tools/render.sh
 2. **Court title in the caption.** Form 416D says "United States Bankruptcy Court … District Of …". This template prints the court title used on the filed motion in this court ("United States District Court for the Northern Mariana Islands, Bankruptcy Division"). FRBP 7010 needs only "substantially conform"; which wording the clerk prefers is for David or the court.
 3. **Synthetic sample.** The sample's parties, numbers, dates and addresses are placeholders. Its checks are layout checks only.
 4. **LR 5.2 values are a third-party summary** (see `../motion-brief/README.md`, NMIB-FORM-001).
-5. **Type size.** 13 pt EB Garamond (style choice; 12 pt minimum per the LR 5.2 summary).
+5. **Type size and face.** 13 pt EB Garamond. LR 5.2(a) (primary text, read 2026-10-15) requires 12-point type or larger in a serif font and names no face, so EB Garamond is kept (see `../motion-brief/README.md`, item 5).
 6. **Not checked:** the consent statement (FRBP 7008), the core-proceeding statement, the 34-day and page limits (not applicable to a complaint), LBR 7003-1 cover-sheet conformance, and LBR 7004-1 service naming (no certificate is generated).
 7. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder does not have that shape, and the brief forbids edits to `tools/`.

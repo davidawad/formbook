@@ -7,9 +7,10 @@ Folder: `courts/ninth-circuit/nevada/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-lynch-2-26-cv-00895-motion-brief.pdf` (one filer, see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-lynch-motion-to-dismiss.md` (the whole 11-page motion: motion, memorandum, conclusion, signature, certificate of service) |
-| render | ok: `samples/OUTPUT-lynch-motion-to-dismiss.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-lynch-motion-to-dismiss.pdf` and `.txt` (pairing by word overlap; see below) |
-| pages reviewed | 11 of 11 (every page rasterized at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none** (LR IA 10-1(a)(3) sets size only: "Text must be size 12 font or larger"; read 2026-10-15 from the court's 2020 local rules PDF). Substitute: none needed; **EB Garamond** kept (no-face default, `docs/FONTS.md`). Fit: n/a. Embedded: EBGaramond Regular, Bold, Italic (`pdffonts`). |
+| render | ok: `samples/OUTPUT-lynch-motion-to-dismiss.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| overlay | ok: `samples/OVERLAY-lynch-motion-to-dismiss.pdf` and `.txt` (pairing by word overlap; see below; re-run 2026-10-15) |
+| pages reviewed | 11 of 11 (every page rasterized at 60 dpi and viewed on 2026-10-15) |
 | BLOCKED | none. Tier-2 coverage is short of the eval loop's "two or three filers" (see Known gaps 1). |
 
 ## Governing rules
@@ -87,7 +88,7 @@ Reviewed pages: 11 of 11.
 ## Known gaps and open choices
 
 1. **One filer only.** The eval loop asks for two or three exemplars from different filers before tier 2 is judged. Searches (CourtListener RECAP API, `type=r`, `court=nvd`, motions to dismiss filed 2025-06 to 2026-10): Advanced Solution v. New Horizon (2:26-cv-00958, 9 pp., Wiley Petersen), Logan v. Citizen's Bank (2:26-cv-00887, 9 pp., Malcolm Cisneros), Browning v. Station Casinos (2:26-cv-00603, 31 pp.) and Riskon v. Zest Labs (2:25-cv-02042, 33 pp.) were found; only the first two are short enough to compare. Both were downloaded and checked for a text layer, but not saved as exemplars or compared in full. Tier 2 is therefore **not** judged against a second filer yet.
-2. **Type size.** The rule requires 12 pt or larger (LR IA 10-1(a)(3)). Body text is 13 pt EB Garamond (the only serif face vendored), chosen so it reads at about the size of the exemplar's 12 pt Times New Roman. EB Garamond at 12 pt would be the minimum-compliant alternative.
+2. **Type size.** The rule requires 12 pt or larger (LR IA 10-1(a)(3)). Body text is 13 pt EB Garamond (the rule names no face, so EB Garamond stays; see the typeface row), chosen so it reads at about the size of the exemplar's 12 pt Times New Roman. EB Garamond at 12 pt would be the minimum-compliant alternative.
 3. **Line pitch.** The exemplar uses a 24 pt grid, so its 28th line sits at about 10.3 in, which breaches the one-inch bottom margin (LR IA 10-1(a)(6)). This template fits the 28 lines between the one-inch margins (pitch 23.14 pt). **This departs from the exemplar's grid; David should confirm the reading.** The same choice is made in the complaint template.
 4. **Filed errors kept as filed.** The exemplar cites "Fed. R. Civ. P. 12(b)(5)" in I.B (the motion relies on 12(b)(6)), says "that tenant 'is inapplicable'" (for "tenet"), . The sample keeps them so that the overlay matches the filing. The author should correct them before filing a version of their own.
 5. **Case names italic.** Italics are applied to case names, *Id.*, and signals in the sample following standard citation form. The exemplar's text layer has no italic markup; the rendered page images show italics for case names in the exemplar. The italics in the sample are a transcription convention, not a check of every italic in the exemplar.

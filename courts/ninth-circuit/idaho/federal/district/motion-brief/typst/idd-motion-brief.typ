@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // only vendored font (fonts/); see README.md, known gaps
+#let font-family = "EB Garamond"        // no face named by LR 5.2(a) or 7.1(a)(2), so EB Garamond (fonts/eb-garamond); see README.md, typeface row
 #let type-size = 12pt                   // LR 5.2(a): at least 12 point, footnotes and footer included
 #let page-w = 8.5in
 #let page-h = 11in

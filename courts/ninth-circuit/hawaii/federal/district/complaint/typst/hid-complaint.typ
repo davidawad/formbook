@@ -11,9 +11,8 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-// STAND-IN FONT. LR 10.2(a)(2) names 14-point Times New Roman for memoranda, and the filed
-// complaint exemplar is set in Times New Roman. No Times-metric font is vendored in fonts/,
-// so this is EB Garamond until one is. See README "Known gaps", item 1.
+// LR 10.2(a)(2) names a face (14-point Times New Roman) for memoranda only; it names none for a
+// complaint, so the template keeps EB Garamond (docs/FONTS.md: no face named). See README "Typeface".
 #let font-family = "EB Garamond"
 #let type-size = 14pt                      // LR 10.2(a)(2) fixes 14 pt for memoranda only, so a complaint's size is
                                            // open; the exemplar's body is 14-pt Times (measured, see README).

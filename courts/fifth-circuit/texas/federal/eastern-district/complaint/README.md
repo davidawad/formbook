@@ -7,9 +7,10 @@ Folder: `courts/fifth-circuit/texas/federal/eastern-district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-pacsec3-lumen-2-25-cv-00668-complaint.pdf` (plaintiff's original complaint, Marshall Division, 8 pages, filed 2025-06-30). A second filer, `exemplars/FILED-EXAMPLE-wetro-hacom-2-15-cv-00416-complaint.pdf` (2015, 5 pages), is kept for conventions; see `exemplars/SOURCE.md`. |
 | sample md | `samples/INPUT-pacsec3-complaint.md`: the whole filing transcribed (caption, 29 numbered paragraphs in 6 headings, prayer, signature block). |
-| render | ok: `samples/OUTPUT-pacsec3-complaint.pdf`, 8 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
-| overlay | ok: `samples/OVERLAY-pacsec3-complaint.pdf` and `samples/OVERLAY-pacsec3-complaint.txt` (`tools/overlay.sh`). Page pairing by word overlap: 79.2, 79.1, 85.5, 94.1, 93.8, 89.0, 78.2, 70.5 percent. |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change). |
+| typeface | Rule names no face: E.D. Tex. CV-10(a)(5) (text read 2026-10-15 from the 2018 copy, the only one retrievable) requires double spacing and "a font no smaller than 12-point type". Vendored substitute: none needed; **EB Garamond kept** (`fonts/eb-garamond/`, the court-agnostic default in `docs/FONTS.md`). Metric compatibility: n/a. The exemplars' Times New Roman is a filer's choice, not a rule. |
+| render | ok: `samples/OUTPUT-pacsec3-complaint.pdf`, 8 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only, no typst warnings; re-rendered 2026-10-15, `pdffonts` shows EB Garamond Regular and Bold embedded. |
+| overlay | **fail**: `tools/overlay.sh` exits 1 with "no exemplar pdf" because `exemplars/` holds only `SOURCE.md` in this snapshot (the `FILED-EXAMPLE-*.pdf` files are not tracked). No `OVERLAY-pacsec3-complaint.pdf` is produced. The `.txt` on disk is from an earlier run and was not rewritten. |
+| pages reviewed | 8 of 8 of `OUTPUT-pacsec3-complaint.pdf` rasterized at 60 dpi and viewed on 2026-10-15 after the typeface check. |
 
 The file names follow the tools' defaults (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief, because `tools/render.sh` and `tools/overlay.sh` write and read those names.
 

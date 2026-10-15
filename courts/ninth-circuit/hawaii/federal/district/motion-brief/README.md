@@ -7,15 +7,16 @@ Folder: `courts/ninth-circuit/hawaii/federal/district/motion-brief/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-us-v-hawaii-1-25-cv-00179-motion-brief.pdf` (1 filer, the State of Hawai‘i defendants; a Rule 12(c) motion, not 12(b); see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-us-v-hawaii-motion-brief.md`: an excerpt of the memorandum (Background, Legal Standard, the first part of Argument A, Conclusion) and the motion paragraphs, caption and signature |
-| render | ok: `samples/OUTPUT-us-v-hawaii-motion-brief.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings. **The font is a stand-in; this is a tier-1 BLOCK for LR 10.2(a)(2). See "Blocked" below.** |
-| overlay | ok: `samples/OVERLAY-us-v-hawaii-motion-brief.pdf` and `samples/OVERLAY-us-v-hawaii-motion-brief.txt` |
-| pages reviewed | 14 of 14 (every page rendered at 50 dpi and viewed after the last template change) |
+| typeface | Times New Roman required (LR 10.2(a)(2)) → **Liberation Serif** (vendored substitute, `fonts/liberation-serif/`, metric-compatible). Embedded per `pdffonts`: LiberationSerif Regular, Italic, Bold. |
+| render | ok: `samples/OUTPUT-us-v-hawaii-motion-brief.pdf`, 14 pages (same as the EB Garamond render), typst 0.15.0, vendored fonts only, no typst warnings. Body baseline pitch measured at 32.33 pt (was 32.27 pt in EB Garamond). |
+| overlay | **fail**: `tools/overlay.sh` needs `exemplars/FILED-EXAMPLE-*.pdf`, which is not in this snapshot (`exemplars/` holds `SOURCE.md` only). `samples/OVERLAY-*` is stale (from EB Garamond) and must be regenerated once the exemplar PDF is restored. |
+| pages reviewed | 14 of 14 rendered at 50 dpi and viewed as a contact sheet after the font change; body text not read at full resolution |
 
 File names follow the tools' convention, not the brief's `<id>.md` shorthand: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` reads it and writes `OVERLAY-<id>.pdf` / `.txt`.
 
-## Blocked
+## Typeface
 
-**BLOCKED (tier 1): the court's mandated typeface is not available.** LR 10.2(a)(2): "All memoranda, including footnotes, shall utilize 14-point Times New Roman plain style, except that italics, underlining, or boldface may be used for emphasis." The template is set in EB Garamond (`font-family`), the only font vendored in `fonts/`. Times New Roman is not vendored, and the brief forbids system fonts and editing `fonts/`. Liberation Serif (SIL OFL, metric-compatible with Times New Roman) is installed on this box but not vendored. Once a Times-metric font is vendored into `fonts/`, change `font-family` in `typst/hid-motion-brief.typ` to that family and re-render, re-review every page, and re-run the overlay. Until then this doc type does not meet LR 10.2(a)(2) and should not be delivered as compliant. The question for David or the PM is the font.
+LR 10.2(a)(2): "All memoranda, including footnotes, shall utilize 14-point Times New Roman plain style, except that italics, underlining, or boldface may be used for emphasis." The court names a face, so the template uses its substitute from `docs/FONTS.md`: **Liberation Serif** (`font-family` in `typst/hid-motion-brief.typ`), metric-compatible with Times New Roman. Status: substitute in use and embedded; metric-compatible, so the typeface is not a blocker. The body leading was recalibrated from 1.0em to 1.4em so the double-spaced pitch stays at about 32.3 pt (LR 10.2(a)(4)); with 1.0em, Liberation Serif gave 26.7 pt, which is not double spacing. The memorandum is still 14 pages, as before the change.
 
 ## Governing rules
 
@@ -25,7 +26,7 @@ Primary sources. Each rule text was read from the source named; the local rules 
 |---|---|---|---|
 | Fed. R. Civ. P. 12(b)(6) and 12(c) (https://www.law.cornell.edu/rules/frcp/rule_12, read 2026-10-14) | Defenses by motion; judgment on the pleadings. The motion form is the same for either. | `motion` paragraphs (frontmatter); the Rule number is text in the sample. | — (content) |
 | D. Haw. LR 10.1 and 10.2(a)(1) (court's posted Local Rules, https://www.hid.uscourts.gov/files/order532/2019_08_26_administrative_Order%20Amending%20the%20Local%20Rules%20eff%202019_09_01(1).pdf, read 2026-10-14) | White opaque 8½ × 11 paper, one-inch margins, one side of each sheet. | `page-margin = 1in`, US-letter, one-sided PDF. | M |
-| LR 10.2(a)(2) (same) | 14-point Times New Roman plain style for all memoranda, footnotes included (italics, underlining and boldface allowed for emphasis). | `type-size = 14pt` everywhere (body, headings, footnotes, quotations). The **typeface is the blocker** (see above). | M |
+| LR 10.2(a)(2) (same) | 14-point Times New Roman plain style for all memoranda, footnotes included (italics, underlining and boldface allowed for emphasis). | `type-size = 14pt` everywhere (body, headings, footnotes, quotations); typeface `Liberation Serif` (see "Typeface"). | M |
 | LR 10.2(a)(4) (same) | Double-spaced, except counsel identification, title of the case, footnotes, quotations and exhibits. | `body-leading = 1.0em`: baseline pitch 2.3 em, which is 32.2 pt at 14 pt. Calibrated to the exemplar's 32.3-pt pitch (`pdftotext -bbox`). Footnotes, block quotations, caption and counsel are single-spaced. | M |
 | LR 10.2(b) (same) | Counsel's name, Hawaii bar number, address, telephone and email, and the party each represents, upper left of the first page. | `caption()`: `counsel.columns` (two columns for the AG counsel), `counsel_for`. | M |
 | LR 10.2(c)(1)–(4) (same) | After counsel: title of the court; title of the action; case number followed by the judge's initials; title of the document. | `court-title`, `parties`, `case_number` (carries the judge initials, e.g. `-HG-WRP`), `title`. | M |
@@ -64,7 +65,7 @@ Convention (tier 2; from the exemplar): the certificate of service in the captio
 
 ## Known gaps and open choices
 
-1. **Blocked: typeface** (see "Blocked" above). Tier 1 for memoranda.
+1. **Overlay not regenerated.** The exemplar PDF is missing from this snapshot, so the overlay cannot run (see the overlay row). Tier-2 review of the new face against the exemplar is therefore not done.
 2. **Rule 12(c), not 12(b).** The brief asked for a Rule 12(b) motion to dismiss. The only full-text D. Haw. motion reached is a Rule 12(c) motion (see Searches). The template is the same for either rule; the sample's motion text says 12(c).
 3. **Excerpt.** The sample is the Background, the Legal Standard, the first part of Argument A and the Conclusion of the 25-page memorandum. Argument A continues and Arguments B and C are not transcribed. Footnotes 5 and 6 of the exemplar are omitted: their text is not legible in the text layer's reading order. The overlay pairs the sample's pages with the filing's pages by word overlap (see `OVERLAY-us-v-hawaii-motion-brief.txt`).
 4. **Appendices A–B** are named in the title (as in the exemplar) but not attached; the sample has no appendices.
