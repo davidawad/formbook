@@ -38,4 +38,22 @@ The Brief of Appellant in BAP No. 11-6012 (*In re Fisette*) is the one public fi
 
 Not checked: PACER (login required; not a public source in this box); the BAP's own docket pages (not reachable from this box); a RECAP-hosted trustee brief in the Fisette case (Justia blocked, no alternate host found).
 
+## Pass 3, 2026-10-15 (nine searches, CourtListener API probes)
+
+Anonymous CourtListener API: 5 requests/min (HTTP 429-style `throttled` body), no API key on this box, so queries were paced. Results with `court=bap8` came back empty (`count: 0`).
+
+| # | Tool / query | Result |
+|---|---|---|
+| 1 | CourtListener v4 search, `type=r&court=bap8`, `q="brief of appellee"`, `"reply brief"`, `"appellee's brief"` | 200, `count: 0` each. No bap8 RECAP document indexed under those terms. |
+| 2 | CourtListener v4 search, `type=r&court=bap8`, no query | `count: 0`. |
+| 3 | CourtListener v4 search, `type=d&court=bap8` | `count: 0`. No bap8 docket indexed. |
+| 4 | CourtListener v4 search, `type=r`, `q="Bankruptcy Appellate Panel" "Eighth Circuit" "brief of appellee"` (no court filter) | 4 hits, none a BAP brief. One ca8 RECAP entry: *Todd Christenson v. Steven Breitenfeldt*, No. 25-6003 (Eighth Circuit BAP appeal; judgment of Jan. 20, 2026 dismissing for lack of jurisdiction, signed by BAP judges Surratt-States, Norton, and Jones). The only RECAP document in the hit is the judgment, not a brief. The docket page is CloudFront-blocked (403) and the API needs a token. |
+| 5 | CourtListener v4 search, `type=r`, `q="B.A.P. 8th Cir" "reply brief"` (no court filter) | 273 hits, none a bap8 brief. |
+| 6 | WebSearch (standard): "Bankruptcy Appellate Panel" "Eighth Circuit" "brief of appellee" pdf BAP No. | Clerk letters (Justia) and BAP opinions. No brief. |
+| 7 | WebSearch (standard): BAP "reply brief of appellant" "appellant's reply brief" pdf | Eighth Circuit unpublished orders, BAP IOPs, and the *Delta Engineering* opinion (270 F.3d 584). No brief. |
+| 8 | WebSearch (extended): ncbrc.org / brief bank, trustee-appellee, "BAP No." | Opinions and a Ninth Circuit BAP order (not this court). No brief. |
+| 9 | WebSearch (standard): "8th Cir. BAP" appellee's brief Chapter 13 trustee, "Table of Authorities", Rule 8015 | Rule text and BAP opinions. No brief. |
+
+Still not searched: PACER (login); a CourtListener API token (the only route to the bap8 RECAP docket listings, which need one for full docket and document lookups).
+
 If a filer later supplies a public BAP appellee's brief, add it here as `exemplars/FILED-EXAMPLE-<short-case>-<docket>-answering-brief.pdf` with the URL, case name, docket, filer, date filed, and date fetched.
