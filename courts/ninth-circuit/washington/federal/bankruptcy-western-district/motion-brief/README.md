@@ -28,6 +28,7 @@ Verified 2026-10-14. Primary source: the W.D. Wash. Local Bankruptcy Rules, "Eff
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | LBR 9004-1(a) (M) | 8-1/2 x 11; standard embedded font, 11 or 12 point; double spaced. | `page-w`, `page-h`; `type-size = 12pt`; `pitch = 24pt` (double spacing); `footer-size = 11pt`. |
+| Typeface | Face required: none. LBR 9004-1(a) says "a standard embedded font" and names no face; no other W.D. Wash. local rule names one (checked 2026-10-15 against the same 2023 PDF). | Face: EB Garamond (`font-family` in `typst/wawb-motion-brief.typ`), kept because the rule names no face (`docs/FONTS.md`, "No face named"). No vendored substitute applies; fit n/a. The filed exemplars use Times New Roman and Arial; that is filer convention, not a rule. |
 | LBR 9004-1(b)(1) (M) | Numbered paper: line numbers in the left margin. | `line-numbers()`: 28 numbered lines. The filed exemplar (Smith) has none; the template follows the rule. |
 | LBR 9004-1(b)(2) (M) | Judge's name at the right side of the top of the front page. | `notation()`: judge at top right. |
 | LBR 9013-1(d)(1)(B) (M) | On the motion, notice, response and reply: judge, chapter, location, date and time of hearing, and response date, in the top right-hand corner. | `notation()`: chapter, hearing location, date, time, response date (from the frontmatter `hearing`). |
