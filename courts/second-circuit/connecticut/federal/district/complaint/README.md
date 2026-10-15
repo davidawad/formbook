@@ -7,8 +7,9 @@ Doc type: **complaint** (Complaint and Demand for Jury Trial) in the United Stat
 | exemplar | yes, one filer: `exemplars/FILED-EXAMPLE-forzano-3-26-cv-00665-complaint.pdf` (see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-forzano-complaint.md`, the whole filing: caption, lead-in, all 66 paragraphs, five causes of action, prayer, jury demand, signature block |
 | render | ok: `samples/OUTPUT-forzano-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular and Bold, embedded), no typst warnings |
-| overlay | ok: `samples/OVERLAY-forzano-complaint.pdf` and `OVERLAY-forzano-complaint.txt` |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | no face named by the rules; EB Garamond kept (vendored, embedded). See Known gaps 2 |
+| overlay | ok: `samples/OVERLAY-forzano-complaint.pdf` and `OVERLAY-forzano-complaint.txt` (pairs by text; exemplar PDF `exemplars/FILED-EXAMPLE-forzano-3-26-cv-00665-complaint.pdf` fetched from the SOURCE.md URL on 2026-10-15) |
+| pages reviewed | 11 of 11 (every page rendered at 60 dpi to PNG and viewed on 2026-10-15) |
 
 Commands (run with `export PATH="$HOME/tb/bin:$PATH"`):
 
@@ -60,7 +61,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 ## Known gaps and open choices
 
 1. **One exemplar.** The eval-loop tier-2 rule asks for two or three filers, each a different filer, before tier 2 is judged. The brief asks for one exemplar per doc type. Other D. Conn. complaints checked for a second reference are listed in `exemplars/SOURCE.md` and were not saved. Tier 2 is therefore judged against the rules and this one filing, and that is not the full bar.
-2. **Font.** The EFPP names Times New Roman among the base-14 fonts. The only font vendored in `fonts/` is EB Garamond, so the render uses it (embedded, legally embeddable). EB Garamond at 12 pt has a smaller x-height than Times at 12 pt, so the text looks slightly smaller than the exemplar. A Times-metric font vendored into `fonts/` would remove this difference; that is a David decision (vendoring).
+2. **Font.** No rule text read for this doc type names a face. EFPP I.F.2 (fetched 2026-10-15) lists Times New Roman among the base-14 fonts only as fonts that need not be embedded; it sets no typeface. Local Rule 10 names none in the text checked (the 9.4.26 rules PDF cited above returned 404 on 2026-10-15; a 2016 copy of Rule 10 on courtrules.net names none; re-verify against the live rules). The exemplar is set in Times New Roman, which is a convention, not a rule. Per `docs/FONTS.md`, a court that names no face keeps EB Garamond, so the template keeps it (embedded, legally embeddable). Liberation Serif, the Times-metric substitute, is vendored and would match the exemplar's line breaks, but it is not used because no rule calls for it. Judge-specific orders are a separate matter: see the note in `motion-brief/README.md` Known gaps 4 (Judge Bryant's 2018 Electronic Filing Order names Arial 12 pt for documents in that judge's cases; that is one judge's order, not a court rule, and the template does not switch per judge).
 3. **Pleading size.** L. Civ. R. 10 is silent on type size for pleadings. 12 pt is used, matching the exemplar and L. Civ. R. 7(a)(5).
 4. **Judge initials.** The template prints `case_number` as given; the template does not check that it has the judge's initials. The sample's number carries them.
 5. **Date in the caption.** The exemplar's caption has no date; L. Civ. R. 10 requires one. The template follows the rule, so the render has a date line that the exemplar lacks. The sample's date is the ECF filing date from the page header.

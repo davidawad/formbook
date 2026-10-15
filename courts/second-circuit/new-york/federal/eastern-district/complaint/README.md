@@ -7,9 +7,9 @@ Folder: `courts/second-circuit/new-york/federal/eastern-district/complaint/` (se
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-blade-1-26-cv-06563-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-blade-complaint.md`: a transcription of selected passages of that filing (caption, opening, parties and jurisdiction, Claims I to VI, prayer, jury demand line, signature). |
-| render | ok: `samples/OUTPUT-blade-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`). |
-| overlay | ok: `samples/OVERLAY-blade-complaint.pdf` (red = ours, blue = filed) and `samples/OVERLAY-blade-complaint.txt` (page map). |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change). |
+| render | ok: `samples/OUTPUT-blade-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`). Re-rendered 2026-10-15; `pdffonts` shows only EB Garamond (Regular, Italic, Bold), all embedded. |
+| overlay | ok: `samples/OVERLAY-blade-complaint.pdf` (red = ours, blue = filed) and `samples/OVERLAY-blade-complaint.txt` (page map). Regenerated 2026-10-15 from `exemplars/FILED-EXAMPLE-blade-1-26-cv-06563-complaint.pdf`, restored from the URL in `exemplars/SOURCE.md` (18 pages, as recorded). |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-checked 2026-10-15). |
 | tier-2 exemplars | 1 filer. EVAL-LOOP asks for 2 or 3 filers; not met (see Known gaps). |
 
 Naming: the brief's `<id>.pdf` / `<id>-overlay.pdf` are written as `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, because `tools/render.sh` and `tools/overlay.sh` read and write those names (file role in the name, per CLAUDE.md).
@@ -28,6 +28,9 @@ Each requirement is from a primary source. Verified 2026-10-14.
 | Local Civil Rule 7.1(b)(2) (same) | At least one-inch margins on all sides. | `margins = 1in` on all sides. |
 | Local Civil Rule 7.1(b)(3) (same) | All text double-spaced, except headings, footnotes, or block quotations. | `line-pitch = 24pt`: baseline pitch measured at 24.0 pt in the PDF (`pdftotext -bbox`). Body paragraphs and prayer items use it. |
 | Local Civil Rule 11.1 | Form of pleadings. | Marked "[Withdrawn]" in the 2026 joint rules. No EDNY local form rule applies to the complaint's layout. |
+| Local Civil Rule 7.1(b), lead-in (same, text read 2026-10-15) | "The typeface, margins, and spacing of all documents presented for filing must meet the following requirements". The rule names no typeface; its only typeface requirement is the 12-point minimum in (b)(1). | Face: **none named**, so the template keeps **EB Garamond** (`docs/FONTS.md`, "No face named"). See Typeface row below. |
+
+Typeface (fonts pass, 2026-10-15): face required = none (LCR 7.1(b) names no face; the 12-point minimum is the only type-size rule). Substitute = EB Garamond (the default, not a stand-in). Fit = n/a. The judge's individual practices, not retrieved, could name a face; if one does, change `font-family` in `typst/nyed-complaint.typ` to that face's substitute from `docs/FONTS.md`.
 
 Not produced by this template (separate filings): the civil cover sheet, the Fed. R. Civ. P. 7.1 disclosure statement and its Local Civil Rule 7.1.1 supplemental statement, the summons. Any of these may be required with the first filing.
 
@@ -55,7 +58,7 @@ Not retrieved, so not asserted: the EDNY ECF Rules and Instructions (the PDF-for
 
 1. **One filer only.** EVAL-LOOP tier 2 asks for 2 or 3 filers. The CourtListener RECAP search (court `nyed`, complaints filed 2026-10-02 to 2026-10-13, type `r`) found several complaints, but only Blade's was available with a text layer and was downloaded. Tier 2 is therefore not judged against two filers.
 2. **Caption and counsel block single-spaced.** LCR 7.1(b)(3) requires double spacing except for headings, footnotes and block quotations. The caption, counsel block and signature block are not in that list. The template single-spaces them, following the exemplar's practice. Whether the rule reaches captions is a reading question for David, and it is a tier-1 question because it changes the form. **Open: David to decide.**
-3. **Font.** Only EB Garamond is vendored in `fonts/`. The exemplar is Times New Roman. EB Garamond at 12 pt has a smaller x-height, so text looks smaller than the exemplar. The 12-point minimum is met. A vendored Times-metric face would remove the difference.
+3. **Font (kept EB Garamond; tier 2, open).** LCR 7.1(b) names no typeface, so `docs/FONTS.md` keeps EB Garamond for this doc type. The filed exemplar is set in Times New Roman, and a filer's choice of face is not a rule. EB Garamond at 12 pt has a smaller x-height than Times New Roman, so text looks smaller than the exemplar; the 12-point minimum is met. A Times-metric substitute (`Liberation Serif`) would match the exemplar's look, but it is a tier-2 choice for David, not a court requirement. **Open: David to decide.**
 4. **Headings must fit the flow.** Headings use `sticky` so a heading does not end a page; a very long heading wraps and is not measured.
 5. **Paragraph numbers differ.** The sample is a selection and the template numbers from 1. The filed numbers are not transcribed; the overlay pairs pages by words, not paragraph numbers.
 6. **Paragraph spacing.** Paragraphs are separated only by the double-space line, with no extra gap. This matches the exemplar's look; it is a tier-2 choice.

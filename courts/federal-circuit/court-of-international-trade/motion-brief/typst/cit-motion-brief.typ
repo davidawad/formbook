@@ -292,8 +292,7 @@
     This brief has been prepared using a proportionally spaced typeface (#font-family, #str(type-size.pt())-point).
     In accordance with the Standard Chambers Procedures of this Court, the undersigned certifies that
     this brief contains #group-digits(words) words, excluding the parts of the brief exempted by
-    Chambers Procedures 2(B)(1)(c). The certified word count is based on the word count of the
-    markdown source from which this brief was typeset, counted as a word processor counts words.
+    Chambers Procedures 2(B)(1)(c). The count includes headings, footnotes and quotations.
   ])
   signature-block(meta)
 }
@@ -340,8 +339,16 @@
   // Rule 81(d) numbers every page from 1; the cover counts as page 1.
   cover-page(meta, need(meta, "brief_title"))
   v(pitch)
-  block(width: 100%, blk(need(meta, "motion")))
-  signature-block(meta)
+  // The motion's last paragraph (the WHEREFORE paragraph) stays on the page with the signature block,
+  // so a signature is never alone on a page (keep-together, not a forced break).
+  let motion-paras = need(meta, "motion").split("\n\n")
+  if motion-paras.len() > 1 {
+    block(width: 100%, blk(motion-paras.slice(0, -1).join("\n\n")))
+  }
+  block(width: 100%, breakable: false, {
+    blk(motion-paras.last())
+    signature-block(meta)
+  })
   pagebreak()
 
   cover-page(meta, need(meta, "memo_title"))

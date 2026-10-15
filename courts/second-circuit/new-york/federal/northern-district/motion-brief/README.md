@@ -5,11 +5,12 @@ Folder: `courts/second-circuit/new-york/federal/northern-district/motion-brief/`
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-mistry-3-26-cv-01419-motion-brief.pdf` (1 filer: defendants' counsel Bond, Schoeneck & King, PLLC; see `exemplars/SOURCE.md`) |
+| exemplar | yes: `exemplars/FILED-EXAMPLE-mistry-3-26-cv-01419-motion-brief.pdf` (1 filer: defendants' counsel Bond, Schoeneck & King, PLLC; see `exemplars/SOURCE.md`; re-fetched from the RECAP URL 2026-10-15, 33 pages) |
 | sample md | `samples/INPUT-mistry-motion-brief.md`: cover, preliminary statement, factual background (A and B, with footnote 1), argument standard, Point I, Point II.A.1 to II.A.3 (with footnote 2), conclusion, signature block. The filed table of authorities is not transcribed (see Known gaps 2). |
-| render | ok: `samples/OUTPUT-mistry-motion-brief.pdf`, 10 pages (cover, contents, 8 body pages), typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-mistry-motion-brief.pdf` and `OVERLAY-mistry-motion-brief.txt` (the tools' names; see Known gaps 10) |
-| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: none (L.R. 7.1 and 10.1 name no typeface; checked against the 2025 edition text 2026-10-15). Vendored substitute: none needed; **EB Garamond** (`docs/FONTS.md`, "No face named" row). Fit: n/a. |
+| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-mistry-motion-brief.pdf`, 10 pages (cover, contents, 8 body pages), typst 0.15.0, `pdffonts`: EB Garamond Regular, Bold, Italic only, all embedded; no warnings |
+| overlay | ok (re-run 2026-10-15): `samples/OVERLAY-mistry-motion-brief.pdf` and `OVERLAY-mistry-motion-brief.txt` (the tools' names; see Known gaps 10) |
+| pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-15, after the re-render; no template change that day) |
 
 ## Governing rules
 
@@ -23,6 +24,7 @@ Primary source: N.D.N.Y. Local Rules of Practice (2025 edition, effective 2025-0
 | L.R. 7.1(b)(2) | An affidavit is not required for a motion under Fed. R. Civ. P. 12(b)(6). | Not produced (no affidavit in the template). |
 | L.R. 7.1(b) | Papers required: memorandum of law, Notice of Motion (for dispositive motions), proof of service. | Only the memorandum is produced here. The Notice of Motion (which must state the grounds for any oral-argument request, L.R. 7.1(b)(5)) and the proof of service are separate filings. |
 | L.R. 10.1(a)(1)–(4), (a)(7) | 12-point type including footnotes; one-inch margins; double-spaced body; block quotations and footnotes may be single-spaced; consecutive page numbers. | `type-size`, `margin`, `body-leading`, `single-leading`, page numbering (see the complaint README for the same rows). |
+| L.R. 7.1, 10.1 (no typeface) | No face, family or font is named anywhere in the rules (full-text search of the 2025 edition, 2026-10-15). Only "12-point type" in 10.1(a)(1). | `font-family = "EB Garamond"`, the "No face named" row of `docs/FONTS.md`. |
 | L.R. 10.1(b)(1) | 8½ × 11 inch paper for paper filings. | `paper: "us-letter"`. |
 | L.R. 10.1(c)(1) | Caption: title of the Court, title of the action, civil action number, the assigned judge's initials, and the name of the paper. | `caption(meta)`; `judges` required (assert). |
 | L.R. 10.1(c)(2) | Filer identification: signature, typed name, bar roll number, office address, telephone and e-mail. | `firm-block` (cover) and `signature-block`; `bar_roll` required for each signer (assert). |
@@ -50,7 +52,7 @@ Primary source: N.D.N.Y. Local Rules of Practice (2025 edition, effective 2025-0
 3. **Italics.** Case names and signals are set in roman in the sample. The filed PDF uses an italic font (TimesNewRomanPS-ItalicMT) but its text layer carries no italic markup, so I did not guess which words are italic. The template does support `*...*` italics. Open (tier 2/3).
 4. **Bar roll numbers.** The filed memorandum's signature block has no bar roll number, but L.R. 10.1(c)(2) requires one. The rule governs. The sample carries `Bar Roll No. [to be supplied]` for each signer. The cover also prints the bar roll (the filed cover does not). L.R. 10.1(c)(2) applies to each document, so the cover is kept as it is.
 5. **Signature line.** The template draws a blank signature line after "By:". The filed memorandum types "/s/" and the attorney's name. The template does not print "/s/". Open (tier 2, minor).
-6. **Typeface.** As the complaint README, item 4: EB Garamond is the only vendored font; the filed exemplar is Times New Roman, which looks larger at 12 point. The 12-point minimum is met. Open for David.
+6. **Typeface (settled 2026-10-15).** As the complaint README, item 4: the rules name no face (L.R. 10.1(a)(1) requires only 12-point type), so `docs/FONTS.md` keeps EB Garamond. The filed Times New Roman looks larger at 12 point; the render differs visually from the filing, and that is a stand-in choice, not a rule defect.
 7. **Alignment.** Body text is ragged right; the exemplar's justification could not be read from its text layer. Not asserted.
 8. **Sample length and coverage.** The sample is an excerpt: the filed memorandum's body is 25 pages, its signature block on the last; the sample's body is 8 pages and covers preliminary statement, factual background A and B, the argument standard, Point I, Point II.A.1 to II.A.3 and the conclusion. Points II.B onward and Points III to VII are not transcribed. The body would have to exceed 25 pages before the template's check fails.
 9. **Block quotations.** The style is set in the template but no block quotation is in the transcribed portion, so it has not been seen in a render.
