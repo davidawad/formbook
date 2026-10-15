@@ -9,7 +9,7 @@ Folder: `courts/ninth-circuit/california/federal/southern-district/complaint/`.
 | sample md | `samples/INPUT-bachman-complaint.md` (a portion of the 35-page filing, see its header comment) |
 | render | ok: `samples/OUTPUT-bachman-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-bachman-complaint.pdf` and `OVERLAY-bachman-complaint.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; pages 6 to 8 re-viewed after the last template change) |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; pages 6 to 8 re-viewed after the last template change; all 8 re-viewed on 2026-10-15 in the typeface pass, no template change) |
 
 ## Governing rules
 
@@ -17,6 +17,7 @@ Folder: `courts/ninth-circuit/california/federal/southern-district/complaint/`.
 |---|---|---|
 | S.D. Cal. Civil L.R. 5.1 | Papers typed double-spaced on one side, line-numbered in the left margin, not more than 28 lines per page, letter size. | `lines-per-page = 28`, `pitch = 24pt`, `page-w = 8.5in`, `line-numbers()`. |
 | S.D. Cal. Civil L.R. 5.1 | Proportional font such as Times New Roman at 14-point; no smaller type for text, footnotes or quotations. | `type-size = 14pt` for all body text, headings, caption and counsel. The footer is 10 pt (see gap 4). |
+| S.D. Cal. Civil L.R. 5.1 (typeface) | No face is required. "Such as Times New Roman" is an example, not a requirement, so the court-named-face substitution does not apply. | Face required: none. Font: **EB Garamond** (kept; `font-family` in `casd-complaint.typ`). Substitute not used, so the fit column is n/a. |
 | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number and a Rule 7(a) designation. | `court-title`, `caption` (case number on the right, title below it). |
 | Fed. R. Civ. P. 10(b) | Claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | `allegations()` numbers each body paragraph; headings, lists and the PRAYER and DEMAND paragraphs are not numbered. |
 
@@ -47,7 +48,7 @@ Not checked: CivLR 7.1 and CivLR 3 (the complaint's first-page requirements, if 
 ## Known gaps and open choices
 
 1. **Only one exemplar.** Tier 2 asks for 2 or 3 filers. The CourtListener API search (`type=r`, `court=casd`, complaints filed 2026-09-08 to 2026-10-11) found other S.D. Cal. complaints (e.g. Novick v. Capricor Therapeutics, 3:26-cv-05568, Pomerantz LLP; Alo, LLC v. Derco, LLC, 3:26-cv-04957, Name Game IP, PC), not downloaded. Tier 2 is therefore **not** judged against two filers yet.
-2. **Font.** CivLR 5.1 names Times New Roman as the example. This template uses EB Garamond at 14 pt: it is the only font vendored in `fonts/`, and this box may not change `fonts/`. EB Garamond has a smaller x-height than Times, so the sample reads smaller than the exemplar even at the same nominal size. A Times-metric font vendored into `fonts/` would remove the difference. Question for David: which font should the S.D. Cal. templates use?
+2. **Font.** CivLR 5.1 names Times New Roman only as an example ("a proportional font such as Times New Roman"), so the rule names no face and this template keeps EB Garamond at 14 pt. `fonts/liberation-serif/` (the Times New Roman substitute, metric-compatible per `docs/FONTS.md`) is vendored, so switching is a one-line change in `font-family` if David reads the exemplar's Times as the clerk's convention. EB Garamond has a smaller x-height than Times, so the sample reads smaller than the exemplar even at the same nominal size. Question for David: should the S.D. Cal. templates keep EB Garamond (the rule's text allows any proportional font) or use Liberation Serif (the exemplar's face)?
 3. **Footer type size.** The footer is 10 pt (case number and title). The 14-point rule is written for text; footers are logged as an interpretation, the same as in the cand template.
 4. **Caption.** The party column is closed by a rule (right and bottom), not the column of ")" marks in the exemplar. ACCEPTED as a tier-2 convention choice.
 5. **Overlay names.** `tools/overlay.sh` reads `samples/OUTPUT-<id>.pdf` and writes `samples/OVERLAY-<id>.pdf` and `.txt`; the render is `OUTPUT-<id>.pdf` (the default of `tools/render.sh`). These are the names the tools use, so they are used here in place of `<id>.pdf` and `<id>-overlay.pdf`.
