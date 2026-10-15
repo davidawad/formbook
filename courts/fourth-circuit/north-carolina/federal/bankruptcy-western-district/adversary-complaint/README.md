@@ -74,4 +74,22 @@ sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-west
 10. **Signature block** runs across pages 7-8 (see the review table).
 11. **Exemplar typos** are transcribed as filed, not corrected.
 
+## Engines
+
+Typst (`typst/`) is the reference. The docx engine is built here (`docx/`: `reference.docx` from `make-reference.sh`, and `ncwb.lua` for the caption, signature block and page layout). The latex engine is not built for this folder.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-gcc-chase-16-03271.pdf` (8 pp) | reference |
+| docx | `OUTPUT-gcc-chase-16-03271.docx` (16 KB) and `OUTPUT-gcc-chase-16-03271.docx.pdf` (LibreOffice, 10 pp) | ok: converted without error; all 10 pages of the `.docx.pdf` rendered at 60 dpi and looked at, and typst pages 1 to 8 looked at beside them |
+
+Rebuild and render: `sh docx/make-reference.sh`, then `sh tools/render.sh --engine docx <this folder> samples/INPUT-gcc-chase-16-03271.md`.
+
+- *Matches typst:* US Letter; one-inch margins; EB Garamond 12 pt only (`pdffonts`: EBGaramond Regular, Bold and Italic, all embedded); body double-spaced at exact 24 pt, half-inch first-line indent, 16 pt after each paragraph (the typst paragraph spacing); headings centered and bold (levels 1 and 2), level 3 bold; the court title, the two-box caption with its rules and "Adv. Proc. No.", the title; the signature block (Dated on the left, the lines from 2.8 in); a centered page number on every page.
+- *Differs (tier 2, not chased):* body line breaks fall at other words in LibreOffice, so page breaks fall at other paragraphs: 10 pages against typst's 8. Page 1 ends before the first numbered paragraph (the "PARTIES" heading moves with ¶ 1). The signature block runs from page 9 onto page 10, where eight lines stand alone; typst breaks its block between pages 7 and 8. The caption rules are table borders, which Word may draw slightly differently (not checked in Word).
+- *Not built:* nothing the typst form has. The complaint has no certificate of service (no `service` block in the sample), as in typst.
+- *Word:* not opened in Word (not installed on this box). Checked: `unzip -tq` is clean, every XML part passes `xmllint --noout`, no style ID is defined twice, and LibreOffice converts the file without error. The no-repair check in Word is not done.
+- *Exemplars:* the filed exemplar this README cites is not in `exemplars/` in this checkout (only `SOURCE.md` is there), so the docx is judged against the typst render only, not against a filed exemplar.
+- *BLOCKED:* none. Every mandated element above renders; the open items are tier 2 or the Word check.
+
 [Formbook index](../../../../../../README.md) | [Status table](../../../../../../STATUS.md) | [Motion sibling](../motion-brief/README.md)

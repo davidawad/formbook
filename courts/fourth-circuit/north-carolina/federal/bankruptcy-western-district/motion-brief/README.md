@@ -75,4 +75,22 @@ sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-west
 9. **Exemplar slips** are transcribed as filed (see the Sample section).
 10. **Local rules currency.** The Sept 2021 PDF is the latest I could find; not checked for a later version.
 
+## Engines
+
+Typst (`typst/`) is the reference. The docx engine is built here (`docx/`: `reference.docx` from `make-reference.sh`, and `ncwb.lua` for the caption, notice of hearing, signature blocks and certificate). The latex engine is not built for this folder.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-applied-machinery-25-03091.pdf` (10 pp) | reference |
+| docx | `OUTPUT-applied-machinery-25-03091.docx` (18 KB) and `OUTPUT-applied-machinery-25-03091.docx.pdf` (LibreOffice, 11 pp) | ok: converted without error; all 11 pages of the `.docx.pdf` rendered at 60 dpi and looked at, and typst pages 1 to 10 looked at beside them |
+
+Rebuild and render: `sh docx/make-reference.sh`, then `sh tools/render.sh --engine docx <this folder> samples/INPUT-applied-machinery-25-03091.md`.
+
+- *Matches typst:* US Letter; one-inch margins; EB Garamond 12 pt only (`pdffonts`: EBGaramond Regular, Bold and Italic, all embedded); body double-spaced at exact 24 pt, half-inch first-line indent, 16 pt after each paragraph; section headings centered (level 1), flush left bold (level 2), bold italic (level 3); block quotations single-spaced, indented 0.5 in both sides. The statute and rule quotations keep their markers as written ("(a) (1) The trustee", "(A) made", "a. Was engaged"): pandoc reads those as lists, and a filter turns them back into paragraphs. The court title, caption, title, the memorandum's signature block, the notice of hearing on a new page with the caption repeated, its own signature, and the certificate of service on its own page with the parties listed. A centered page number on every page.
+- *Differs (tier 2, not chased):* body line breaks fall at other words in LibreOffice, so page breaks fall at other paragraphs: 11 pages against typst's 10. The memorandum's "V. CONCLUSION" moves to page 8 with its WHEREFORE and signature (the docx keeps them together, so page 7 ends with white space; typst keeps the conclusion on page 7). The notice runs pages 9 and 10 (typst 8 and 9), and the bracketed "[Remainder of Page Intentionally Blank ...]" line sits with the notice signature on page 10. The certificate is on page 11 (typst 10). The signature blocks are paragraphs with a tab stop, not a table, so that "WHEREFORE" stays with its signature in LibreOffice; Word may paginate differently.
+- *Not built:* nothing the typst form has. Addresses in the certificate are placeholders, as in the sample (gap 4 above).
+- *Word:* not opened in Word (not installed on this box). Checked: `unzip -tq` is clean, every XML part passes `xmllint --noout`, no style ID is defined twice, and LibreOffice converts the file without error. The no-repair check in Word is not done.
+- *Exemplars:* the filed exemplar this README cites is not in `exemplars/` in this checkout (only `SOURCE.md` is there), so the docx is judged against the typst render only, not against a filed exemplar.
+- *BLOCKED:* none. Every mandated element above renders; the open items are tier 2 or the Word check.
+
 [Formbook index](../../../../../../README.md) | [Status table](../../../../../../STATUS.md) | [Complaint sibling](../adversary-complaint/README.md)
