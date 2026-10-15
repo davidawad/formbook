@@ -104,3 +104,12 @@ Every page was rendered at 60 dpi and viewed. No OPEN rows.
 - Not saved: Underdog Exchange DCM v. Wilson, 1:26-cv-02169 (44 pp, a declaratory-judgment complaint with a text layer, against state officials). It is a third filer, but the brief asks for one exemplar per doc type, and Miller already supplies the second filer.
 
 [Ohio federal index](../../README.md) | [Court folder](../README.md)
+
+## Engines
+
+**docx** (`docx/`): `reference.docx` is built by `docx/build-reference.sh` (pandoc's default, rewritten with sed/perl; zipped and checked with xmllint). `docx/render.sh` owns the build: pandoc with `docx/ohnd-complaint.lua` (caption table, numbered paragraphs, lettered items, signature), then the reference's styles, page setup and footer are put back.
+
+- Matches typst (set in the reference, from the typst template and measured on its render): EB Garamond 12 pt (`fonts/eb-garamond`; the typst PDF embeds EBGaramond-Regular and -Bold); body lines at an exact 27.6 pt pitch (measured 27.6 pt on the typst page 2); single lines at an exact 13.8 pt; 0.5 in first-line indent; 1 in margins, letter paper; a centered 12 pt page number in the footer; numbered paragraphs 1., 2. with the WHEREFORE clause unnumbered; lettered items A., B. (the markdown numbers give the letter).
+- Differs from typst: the 1 1/2 in first-page top margin is a 0.5 in spacer paragraph on page 1 (Word has no per-page top margin); the caption's ")" column has one ")" per party name, not one per wrapped line (a Word table row does not know its wrap count), so a long name that wraps shows fewer ")" than typst; the caption is a borderless Word table, not a typst grid. Not measured: the docx page count (the typst render is 11 pages for the Wagner sample).
+- BLOCKED: `docx.pdf` and page review: soffice is not installed on this box (`soffice: not found`), so no LibreOffice PDF exists, Gates 0 to 3 cannot run on the docx, and no docx page was viewed.
+- BLOCKED: the caption ")" count on a wrapped name (see above); verify on the LibreOffice PDF before the docx gate.
