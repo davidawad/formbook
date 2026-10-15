@@ -7,6 +7,7 @@ Folder: `courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/a
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-snyder-v-biros-23-02020-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-snyder-adversary-complaint.md`: the whole complaint (Parties through Count VI, prayers, signature, certificate of service) |
+| typeface | face required: **none** (LBR 5005-13(b)(4) names Courier only as the size benchmark, "12 Courier or an equivalent font size"; no face is mandated). Substitute: none needed. Used: **EB Garamond** (vendored), 13 pt. Metric-compatible: n/a. See Known gaps 1. |
 | render | ok: `samples/OUTPUT-snyder-adversary-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-snyder-adversary-complaint.pdf` and `.txt` (page map) |
 | pages reviewed | 11 of 11 (every page of the final PDF rendered at 60 dpi and viewed) |
@@ -89,7 +90,7 @@ Every row was checked against the final PDF (the render after the last change). 
 
 ## Known gaps and open choices
 
-1. **Type size (PAWB-ADV-004).** The rule reads "12 Courier or an equivalent font size". The template sets EB Garamond at 13 pt: the only vendored font is EB Garamond, whose x-height is smaller than Times or Courier at 12 pt, so 13 pt is the reading that cannot be faulted. A reading of "12 pt as typed" would allow 12 pt. This is a choice for David. At 12 pt the sample would be shorter; that render was not made.
+1. **Type size and face (PAWB-ADV-004).** The rule reads "12 Courier or an equivalent font size". "Or an equivalent font size" makes Courier a size benchmark, not a required face, so no substitute from `docs/FONTS.md` (TeX Gyre Cursor, Liberation Mono) is used and EB Garamond stays. The template sets EB Garamond at 13 pt: the only vendored font is EB Garamond, whose x-height is smaller than Times or Courier at 12 pt, so 13 pt is the reading that cannot be faulted. A reading of "12 pt as typed" would allow 12 pt. This is a choice for David. At 12 pt the sample would be shorter; that render was not made.
 2. **Unnumbered WHEREFORE and certificate (PAWB-ADV-003).** LBR 5005-13(b)(3) says "sequentially paragraph numbered except as to briefs". The exemplar leaves each WHEREFORE clause and the certificate unnumbered, and the template follows the exemplar. A literal reading would number them. Open reading for David.
 3. **Consent and jurisdiction (PAWB-ADV-008, -009).** FRBP 7008(a) requires the statement; the template does not generate or check it. A Gate 1 check (a required consent sentence) belongs in `checks.yaml` when this folder gets one.
 4. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md` (the court root has `court.json` but no `rules.md`, and this doc-type folder has neither). The gates were not run; the render and overlay were run and the review above is the Gate 2 equivalent. Gate 0 was checked by hand: every word of the sample markdown occurs in the PDF text (0 missing after the final render).

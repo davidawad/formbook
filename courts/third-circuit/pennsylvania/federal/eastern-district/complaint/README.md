@@ -6,9 +6,10 @@ Doc type: **complaint** (complaint and jury demand) in the United States Distric
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-murphy-2-26-cv-07848-complaint.pdf` (one filer, counsel-filed; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-murphy-complaint.md` (a portion of the 22-page filing; see the frontmatter comment) |
-| render | ok: `samples/OUTPUT-murphy-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-murphy-complaint.pdf` and `OVERLAY-murphy-complaint.txt` |
-| pages reviewed | 10 of 10 (every page rasterized at 60 dpi and looked at after the last template change) |
+| typeface | face required: **none** (the E.D. Pa. local civil rules name no face; see Governing rules). Font: **EB Garamond** (vendored), kept under `docs/FONTS.md` "No face named"; no substitution made. `pdffonts` on the 2026-10-15 render: only EB Garamond embedded (Regular, Bold, BoldItalic) |
+| render | ok (re-run 2026-10-15): `samples/OUTPUT-murphy-complaint.pdf`, 10 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings |
+| overlay | **fail** (re-run 2026-10-15): `tools/overlay.sh` exits 1 because `exemplars/` holds only `SOURCE.md`; the filed PDF named there is not in this snapshot. `samples/OVERLAY-murphy-complaint.txt` is the earlier page map, not regenerated; no `OVERLAY-murphy-complaint.pdf` exists |
+| pages reviewed | 10 of 10 (re-rendered 2026-10-15 at 60 dpi; every page looked at, none changed) |
 | tier 1 (mandated form) | checked against the rules below; no mandated typography exists in the E.D. Pa. local rules |
 | tier 2 (professional convention) | judged against one filer only (see Known gaps 1) |
 
@@ -27,7 +28,7 @@ Primary source: **Local Rules of Civil Procedure, E.D. Pa.** (the consolidated c
 | EDPA-COMP-005 | E.D. Pa. Local Civil Rule 40.1 (b) | Attorneys must indicate relatedness on the Civil Cover Sheet and the Designation Form that accompany the complaint. | not generated: separate filings, listed under "Not produced" |
 | EDPA-COMP-006 | E.D. Pa. Local Civil Rule 5.1.2(7) | Certificate of service for documents filed through ECF. Applies to documents served by ECF; the initial complaint is served with a summons under Fed. R. Civ. P. 4, so it carries no certificate in the exemplar, and the template does not add one. | `motion-brief/` carries the certificate for filed motions |
 
-Local typography and margin rules: **none in the E.D. Pa. local civil rules text above.** The only page limits in that text are for habeas petitions and responses (30 and 150 pages), and Local Civil Rule 7.1(c) directs counsel to each judge's policies. The typeface, size, spacing and margins below are therefore convention, not rule; they are chosen to match the filed exemplar where the exemplar is readable (double spacing, 12 point, 1-inch margins).
+Local typography and margin rules: **none in the E.D. Pa. local civil rules text above.** Re-checked 2026-10-15 by extracting the full text of the 05/08/2023 PDF (poppler `pdftotext`): no typeface, font size, spacing or margin rule in Rules 5.1, 5.1.1, 5.1.2 or elsewhere. So no face is named and EB Garamond stays. The only page limits in that text are for habeas petitions and responses (30 and 150 pages), and Local Civil Rule 7.1(c) directs counsel to each judge's policies. The typeface, size, spacing and margins below are therefore convention, not rule; they are chosen to match the filed exemplar where the exemplar is readable (double spacing, 12 point, 1-inch margins).
 
 Not produced by this template (separate filings the Clerk needs with the complaint): the Civil Cover Sheet (JS-44C) and the Designation Form (LR 40.1(b)); the Rule 7.1 disclosure statement if the party is a corporation; the summons. The exemplar's docket entry lists its Civil Cover Sheet and Designation Form as ECF attachments (# 1 and # 2).
 
@@ -82,7 +83,7 @@ Defects found during review and fixed in the template:
 ## Known gaps and open choices
 
 1. **One filer only.** The tier-2 rule asks for two or three exemplars from different filers. Two more E.D. Pa. complaints with text layers were located and checked (Evenstad v. CoilPlus, 2:26-cv-07849, Gurmankin; Johnson v. La Academia, 5:26-cv-07834, Zeff) but not saved, per the brief's one-exemplar-per-doc-type rule. Tier 2 is therefore not yet judged against the 2-to-3-filer standard. **Needs a call from David**: save both as further exemplars.
-2. **Typeface.** EB Garamond (vendored, the only text font in `fonts/`) at 12 pt, not Times New Roman. EB Garamond sets smaller at 12 pt than Times, so the text looks smaller than the exemplar. The 12-point size is met; the difference is visible, not a rule defect.
+2. **Typeface.** The local rules name no face, so EB Garamond stays (`docs/FONTS.md`, "No face named"). The filed exemplar is Times New Roman, which is a choice by its filer, not a requirement. EB Garamond sets smaller at 12 pt than Times, so the text looks smaller than the exemplar. The 12-point size is met; the difference is visible, not a rule defect.
 3. **Margins and spacing.** The local rules set none; 1-inch margins and double spacing match the exemplar.
 4. **Arbitration statement (LR 5.1.1).** The rule requires the complaint to reveal whether the case is subject to arbitration under LR 53.2. The sample's jurisdiction and venue section does not carry that statement, because the full text of the exemplar has no such statement (a search of the whole text layer finds none, so the filed complaint omits it); a real filing needs it. The template does not check for it. Author content.
 5. **ECF header.** Not reproduced; court-generated.

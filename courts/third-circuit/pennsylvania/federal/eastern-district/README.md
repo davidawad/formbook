@@ -20,6 +20,8 @@
 
 Engines: typst `—`, latex `—`, docx `—`.
 
+Typeface: the E.D. Pa. local civil rules (05/08/2023, full text checked 2026-10-15) name no face, so every doc type keeps EB Garamond, the "No face named" row of `docs/FONTS.md`. No substitution applies. See each doc type's README.
+
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 

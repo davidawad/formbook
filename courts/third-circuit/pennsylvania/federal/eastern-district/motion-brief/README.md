@@ -6,9 +6,10 @@ Doc type: **motion with memorandum of law** (a Rule 12(b) motion to dismiss, the
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-harvie-2-26-cv-05544-motion-brief.pdf` (one filer, defense counsel; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-harvie-motion-to-dismiss.md` (a portion of the 38-page filing; see the frontmatter comment) |
-| render | ok: `samples/OUTPUT-harvie-motion-to-dismiss.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-harvie-motion-to-dismiss.pdf` and `OVERLAY-harvie-motion-to-dismiss.txt` |
-| pages reviewed | 9 of 9 (every page rasterized at 60 dpi and looked at after the last template change) |
+| typeface | face required: **none** (the E.D. Pa. local civil rules name no face; see Governing rules). Font: **EB Garamond** (vendored), kept under `docs/FONTS.md` "No face named"; no substitution made. `pdffonts` on the 2026-10-15 render: only EB Garamond embedded (Regular, Bold, Italic) |
+| render | ok (re-run 2026-10-15): `samples/OUTPUT-harvie-motion-to-dismiss.pdf`, 9 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings |
+| overlay | **fail** (re-run 2026-10-15): `tools/overlay.sh` exits 1 because `exemplars/` holds only `SOURCE.md`; the filed PDF named there is not in this snapshot. `samples/OVERLAY-harvie-motion-to-dismiss.txt` is the earlier page map, not regenerated; no `OVERLAY-harvie-motion-to-dismiss.pdf` exists |
+| pages reviewed | 9 of 9 (re-rendered 2026-10-15 at 60 dpi; every page looked at, none changed) |
 | tier 1 (mandated form) | checked against the rules below; no typography rule in the E.D. Pa. local civil rules |
 | tier 2 (professional convention) | judged against one filer only; no table of authorities (see Known gaps) |
 
@@ -27,7 +28,7 @@ Primary source: **Local Rules of Civil Procedure, E.D. Pa.** (consolidated civil
 | EDPA-MOT-005 | Fed. R. Civ. P. 7(b)(1) and 12(b) | A motion states with particularity the grounds for seeking the order (Rule 7(b)(1)); defenses under Rule 12(b)(1) and (6) are raised by motion. Rule text not fetched in this run. | author content (the motion's grounds paragraph and the memorandum) |
 | EDPA-MOT-006 | E.D. Pa. Local Civil Rule 7.1 (page limits) | None in the local rules text for civil briefs. The habeas limits (30 pages) do not apply. Judge-specific policies control. | not enforced |
 
-Local typography and margin rules: **none in the E.D. Pa. local civil rules text above.** The typeface, size, spacing, margins and page-numbering below are convention, chosen to match the filed exemplar. Roman numerals for the table of contents and arabic numerals from 1 for the body follow the exemplar.
+Local typography and margin rules: **none in the E.D. Pa. local civil rules text above.** Re-checked 2026-10-15 by extracting the full text of the 05/08/2023 PDF (poppler `pdftotext`): no typeface, font size, spacing or margin rule in Rules 5.1, 5.1.1, 5.1.2 or elsewhere. So no face is named and EB Garamond stays. The typeface, size, spacing, margins and page-numbering below are convention, chosen to match the filed exemplar. Roman numerals for the table of contents and arabic numerals from 1 for the body follow the exemplar.
 
 Not produced: the table of authorities (not required by the local rules; the exemplar has one; see Known gaps), the summons, and a separate notice of motion (the exemplar has none; the motion itself carries the request).
 
@@ -85,7 +86,7 @@ Defects found during review and fixed in the template:
 
 1. **Table of authorities.** The exemplar has one (three pages in the filed memorandum). The local rules do not require one, and the template does not generate one. The sample's TOC is generated; the TOA is not. A tier-2 finding: a 25-page brief would be expected to carry one by convention. **Needs a call from David** (generate it from `toa:` links, as the CAND motion template does, or leave it out).
 2. **One filer only.** The tier-2 rule asks for two or three exemplars from different filers. Only Harvie was saved. Athilekshmi v. Drexel (2:26-cv-02593) was located but not fetched (no RECAP document was reachable in the search results). Tier 2 is therefore not yet judged against the 2-to-3-filer standard.
-3. **Typeface.** EB Garamond (vendored) at 12 pt, not Times New Roman. The text looks smaller than the exemplar, as in the complaint.
+3. **Typeface.** The local rules name no face, so EB Garamond stays (`docs/FONTS.md`, "No face named"). The filed exemplar is Times New Roman, a choice by its filer, not a requirement. The text looks smaller than the exemplar, as in the complaint.
 4. **Proposed order and certificate.** Included as sections of the sample, not as separate files. The local rule requires a proposed order to accompany each motion; in ECF practice it is a separate PDF. The filing is the exemplar's form.
 5. **Partial transcription.** Parts II.C to II.F (defamation, false light, time bar, fees under the Anti-SLAPP Act) are not transcribed; the sample ends at Part III. The 8 to 14 page target is met (9 pages); a full memorandum would run 25 pages.
 6. **Anti-SLAPP fee application.** 42 Pa. C.S. § 8340.18 is a state statute applied in federal court. The template does not check the fee request's content; it is author content.

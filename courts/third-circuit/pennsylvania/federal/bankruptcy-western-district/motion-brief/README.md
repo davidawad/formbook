@@ -7,6 +7,7 @@ Folder: `courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/m
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-bernstein-v-meyer-unkovic-21-02063-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-bernstein-brief-in-support.md`: a portion of the 19-page brief (caption, all of I and II, the first six paragraphs of III, all of IV.A.1 and IV.A.2, the first three paragraphs of IV.A.3, all of IV.B and IV.D, the first two paragraphs of IV.C, the conclusion and the signature block). See "Sample" below. |
+| typeface | face required: **none** (LBR 5005-13(b)(4) names Courier only as the size benchmark, "12 Courier or an equivalent font size"; no face is mandated). Substitute: none needed. Used: **EB Garamond** (vendored), 13 pt. Metric-compatible: n/a. See Known gaps 1. |
 | render | ok: `samples/OUTPUT-bernstein-brief-in-support.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-bernstein-brief-in-support.pdf` and `.txt` (page map) |
 | pages reviewed | 10 of 10 (every page of the final PDF rendered at 60 dpi and viewed) |
@@ -94,7 +95,7 @@ Gate 2 rows are recorded here, not in `reviews/`, because this folder has no `re
 
 ## Known gaps and open choices
 
-1. **Type size (PAWB-MOT-003).** The same reading as the adversary complaint: EB Garamond at 13 pt, chosen because "12 Courier or an equivalent font size" is ambiguous and EB Garamond at 12 pt looks smaller than the exemplar's Times at 12 pt. A reading of "12 pt as typed" would allow 12 pt. Open choice for David.
+1. **Type size and face (PAWB-MOT-003).** The same reading as the adversary complaint: "12 Courier or an equivalent font size" makes Courier a size benchmark, not a required face, so EB Garamond stays (no `docs/FONTS.md` substitute is used). EB Garamond at 13 pt, chosen because "12 Courier or an equivalent font size" is ambiguous and EB Garamond at 12 pt looks smaller than the exemplar's Times at 12 pt. A reading of "12 pt as typed" would allow 12 pt. Open choice for David.
 2. **Page limit (PAWB-MOT-009).** LBR 7008-1(e) limits a moving party's brief to twenty pages. The template does not count pages, and the sample is 10 pages, so the limit is untested. The full brief has not been rendered at this type size, so its page count is unknown; the author must check it. Open: whether the limit counts the caption and signature pages.
 3. **Motion and proposed order are separate filings.** The exemplar is the brief; the motion (ECF Adv. Doc. 25) and the proposed order (LBR 7008-1(c), 9013-4) are not produced here. A motion template is not in this folder.
 4. **No table of contents or authorities.** No W.PA rule found requires one for a brief of this length. Revisit if the brief runs long enough that a clerk expects one.
