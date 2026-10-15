@@ -21,6 +21,14 @@ Engines: typst `—`, latex `—`, docx `—`.
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 
+## Typeface
+
+| Requirement | Rule read | Template face | Status |
+|---|---|---|---|
+| Face named by the rules | None found. 32 CFR 150.15(a) and App. B name no typeface, size or margin (checked 2026-10-14, LII). ACCA's own rules were not retrievable (site not resolvable; search returned none). | EB Garamond (`font-family` in each doc type) | Kept per `docs/FONTS.md` ("no face named"). Visual only, not tier-1 asserted. |
+
+Revisit if the ACCA Rules of Practice and Procedure are retrieved and name a face: switch to the substitute in `docs/FONTS.md` and re-render.
+
 ## Folders
 
 - `typst/` Typst template (primary)

@@ -22,6 +22,8 @@
 
 The same rules as the opening brief (`../opening-brief/README.md`, "Governing rules"): 32 CFR 150.15(a) (typed, double-spaced, white paper), 32 CFR 150 App. B (cover, section order, certificate), JRAP Rule 17 (form pursuant to each CCA's rules), and the Air Force Rule 17.1 values used only as a stand-in. Read on 2026-10-14; wording caveats are in that README.
 
+Typeface: none is named by the same rules, so the template keeps EB Garamond (`../README.md`, "Typeface").
+
 Answer-specific points from App. B (paraphrased from the WebFetch summary, not verbatim): an answer may adopt the appellant's facts, add facts, or restate them from the Government's viewpoint; uncontroverted matter is not repeated. The template therefore has no mandatory Statement of the Case in the answer; the fixture uses an "adopts" paragraph.
 
 ## Overlay
@@ -49,7 +51,7 @@ Pitch measured on the opening brief's template (same parameters): body lines 26.
 1. **Typeface, size and margins are PROVISIONAL.** The ACCA rule was not retrieved. `type-size = 12pt` and `page-margin = 1in` are the Air Force court's Rule 17.1 values. Tier-1 is not asserted until the ACCA text is read.
 2. **Page limit, cover and TOC/TOA not confirmed** (see `../opening-brief/README.md`, Known gap 2). No TOC/TOA and no length check.
 3. **Title is a convention** (`brief-title`). App. B's form is for the accused; the Government answer's title is not from a source.
-4. **Font.** EB Garamond is the only vendored serif; ACCA's typeface is unknown.
+4. **Font.** The retrieved rules name no face, so EB Garamond stays per `docs/FONTS.md`. ACCA's own rules were not readable (`../README.md`, "Typeface").
 5. **No exemplar, no overlay.** The fixture is FICTIONAL, five pages, and shorter than the 8-14 page target because no filed length exists to match.
 6. **Signature with prayer** (OPEN, page 4 above): no keep-with-previous control.
 7. **Standard of review and prayer are not checked by the template** (the sample has them).
