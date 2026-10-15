@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // FRAP 32(a)(5): proportionally spaced, serif. Vendored in /fonts.
+#let font-family = "Liberation Serif"     // FRAP 32(a)(5): proportionally spaced, serif. Handbook IX.A.6 names Times New Roman; substitute per docs/FONTS.md.
 #let type-size = 14pt                      // FRAP 32(a)(5): 14-point or larger, everywhere (footnotes too).
 #let body-leading = 0.94em                 // FRAP 32(a)(4): double-spaced; see the note on baseline pitch below.
 #let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced (FRAP 32(a)(4)).
@@ -378,7 +378,7 @@
   [I hereby certify that this brief complies with the type-volume limitation of Fed. R. App. P. 28.1(e)(2)(C) and Circuit Rule 32(e)(1). Excluding the parts of the document exempted by Fed. R. App. P. 32(f), this brief contains #group-digits(words) words, including #meta.at("manual_image_words", default: 0) words manually counted in any visual images.]
   parbreak()
   // Literal text: interpolating the length `type-size` into content drew this line in the monospace fallback.
-  [This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6): it is prepared in a proportionally spaced serif typeface (EB Garamond), 14-point.]
+  [This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6): it is prepared in a proportionally spaced serif typeface (Liberation Serif), 14-point.]
   form-sig-line(meta)
 }
 

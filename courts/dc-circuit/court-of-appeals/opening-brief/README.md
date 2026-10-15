@@ -1,12 +1,12 @@
 # D.C. Circuit: appellant's opening brief (typst)
 
-Status: exemplar found, template built and rendered, sample reviewed page by page. Open items are listed under "Known gaps"; the typeface and the line pitch need David's decision.
+Status: exemplar found, template built and rendered, sample reviewed page by page. Typeface switched to the court-named substitute on 2026-10-15 (see Known gaps, item 1). Open items are listed under "Known gaps"; the line pitch needs David's decision.
 
 | Path | What |
 |---|---|
 | `exemplars/FILED-EXAMPLE-centro-v-bessent-25-5181-opening-brief.pdf` | Filed appellants' principal brief, No. 25-5181 (June 27, 2025). Provenance in `exemplars/SOURCE.md`. |
 | `samples/INPUT-centro-opening-brief.md` | Transcription of the exemplar: frontmatter with its cover, certificate, glossary, authorities and signature, and a portion of the body (introduction through the start of argument, then conclusion). |
-| `samples/OUTPUT-centro-opening-brief.pdf` | Render of the sample. 14 pages. |
+| `samples/OUTPUT-centro-opening-brief.pdf` | Render of the sample. 15 pages. |
 | `samples/OVERLAY-centro-opening-brief.pdf`, `-overlay.txt` | Red/blue overlay of the render on the exemplar, and the page map. |
 | `typst/cadc-opening-brief.typ` | The template: `dc-brief(meta, body)`. Content-agnostic; every number is a named parameter at the top. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
@@ -28,7 +28,7 @@ Verified 2026-10-14 against the D.C. Circuit's own rules PDF, "Circuit Rules Eff
 | DC-CR-028-A8 | The words "ORAL ARGUMENT NOT YET SCHEDULED" (or the argued/submitted statement) in capital letters at the top of the front cover | Circuit Rule 28(a)(8) | `cover()`, from `oral_argument` |
 | DC-FRAP-032-A4 | 8½ × 11 paper; double-spaced; quotations over two lines and headings and footnotes may be single-spaced; margins at least one inch on all sides | FRAP 32(a)(4) | `page-margin`, `body-leading`, `single-leading` |
 | DC-FRAP-032-A5 | Proportionally spaced serif face, 14-point or larger; sans-serif allowed in headings and captions | FRAP 32(a)(5)(A) | `font-family`, `type-size` |
-| DC-HB-IX-A6 | Handbook, Format: encourages Century and Times New Roman; discourages Garamond; 14-point serif | D.C. Circuit Handbook IX.A.6, as revised 16 March 2021 (Clerk's notice "Preferred Typefaces for Briefs"): https://www.cadc.uscourts.gov/sites/cadc/files/noticeGen-noticePreferredTypefacesForBriefs.pdf | see Known gaps, item 1 |
+| DC-HB-IX-A6 | Handbook, Format: encourages Century and Times New Roman; discourages Garamond; 14-point serif | D.C. Circuit Handbook IX.A.6, as revised 16 March 2021 (Clerk's notice "Preferred Typefaces for Briefs"): https://www.cadc.uscourts.gov/sites/cadc/files/noticeGen-noticePreferredTypefacesForBriefs.pdf | Face: Century → `TeX Gyre Schola` (`docs/FONTS.md`). See Known gaps, item 1. |
 | DC-FRAP-032-A6 | Plain roman type; case names italicized | FRAP 32(a)(6) | markdown `*...*` |
 | DC-FRAP-028.1-E2 / 032-A7 | Appellant's principal brief: no more than 13,000 words (or 1,300 monospaced lines); the template refuses to build over the limit | FRAP 28.1(e)(2)(A)(i), 32(a)(7)(B)(i); Circuit Rule 32(e) | `word-limit`; `dc-brief()` panics |
 | DC-CR-028-A1 | Certificate as to Parties, Rulings, and Related Cases, immediately inside the cover and before the table of contents, with paragraphs A (parties and amici), B (rulings under review), C (related cases), and the Rule 26.1 disclosure | Circuit Rule 28(a)(1)(A)–(C); FRAP 26.1; Circuit Rule 26.1 | front matter, from `certificate` |
@@ -78,40 +78,41 @@ A sample is one `.md` file: a YAML frontmatter block (metadata) followed by the 
 
 ## Overlay
 
-`sh tools/overlay.sh` puts the sample page (red) over the matched exemplar page (blue); black is where both agree. Pages are paired by word overlap, so the sample's pages land on the exemplar's pages they came from. Word overlap by page: 92.5% on the cover (p.1); 26% on the table of authorities (p.5; the sample lists far fewer authorities than the exemplar); 39–78% on the other pages. The overlay is a diagnostic, not a score; it is recorded here so the pages are not reviewed in isolation.
+`sh tools/overlay.sh` puts the sample page (red) over the matched exemplar page (blue); black is where both agree. Pages are paired by word overlap, so the sample's pages land on the exemplar's pages they came from. Word overlap by page: 92.5% on the cover (p.1); 26% on the table of authorities (p.5; the sample lists far fewer authorities than the exemplar); 39–77% on the other pages. The overlay is a diagnostic, not a score; it is recorded here so the pages are not reviewed in isolation.
 
-Page map (`samples/OVERLAY-centro-opening-brief.txt`): sample p.1 → exemplar p.1; p.2 → p.2; p.3 → p.4; p.4 → p.5; p.5 → p.8; p.6 → p.15; p.7 → p.16; p.8 → p.18; p.9 → p.20; p.10 → p.41; p.11 → p.45; p.12 → p.70; p.13 → p.71; p.14 → p.72.
+Page map (`samples/OVERLAY-centro-opening-brief.txt`): sample p.1 → exemplar p.1; p.2 → p.2; p.3 → p.4; p.4 → p.5; p.5 → p.8; p.6 → p.15; p.7 → p.16; p.8 → p.18; p.9 → p.19; p.10 → p.20; p.11 → p.41; p.12 → p.45; p.13 → p.70; p.14 → p.71; p.15 → p.72.
 
 ## Review record (Gate 2)
 
-Every page of `samples/OUTPUT-centro-opening-brief.pdf` (14 pages) was rendered at 60 dpi and viewed. The pages were checked against the exemplar's layout and the rules above.
+Re-reviewed 2026-10-15 after the font change to TeX Gyre Schola: every page of `samples/OUTPUT-centro-opening-brief.pdf` (15 pages) was rendered at 60 dpi and viewed, checked against the exemplar's layout and the rules above. The table is that review. Before the change the render was 14 pages in EB Garamond; the body now runs one page longer.
 
 | Page | Content | Finding |
 |---|---|---|
 | 1 | Cover | Fits one page. Oral-argument line, case number, court, caption, proceeding, title, three counsel groups, date. OK. |
-| 2 | Rule 28(a)(1) certificate, parties, rulings | Heading two lines, single-spaced. OK. |
-| 3 | Certificate cont. (related cases, Rule 26.1) | OK. |
-| 4 | Table of contents | Page numbers match the layout. OK. |
-| 5 | Table of authorities | Every citation page listed, no "passim". OK. |
-| 6 | Glossary | OK. |
+| 2 | Rule 28(a)(1) certificate, parties, rulings (i) | Heading two lines, single-spaced. OK. |
+| 3 | Certificate cont. (related cases, Rule 26.1) (ii) | OK. |
+| 4 | Table of contents (iii) | Page numbers match the layout. OK. |
+| 5 | Table of authorities (iv) | Every citation page listed, no "passim". OK. |
+| 6 | Glossary (v) | OK. |
 | 7 | Introduction, p. 1 | Double-spaced, first-line indent. OK. |
-| 8 | Introduction cont., Jurisdiction | OK. |
-| 9 | Question presented, statement of the case, summary | OK. |
-| 10 | Summary, standard of review | OK. |
-| 11 | Argument (heading and first paragraph), conclusion | OK. |
-| 12 | Signature block, alone on its page | OPEN: the block did not fit under the conclusion and moved to the next page. Layout only. |
-| 13 | Certificate of compliance | Word count and typeface sentence present. OK. |
-| 14 | Certificate of service | OK. |
+| 8 | Introduction cont. (the district court's denial) | OK. |
+| 9 | Importantly...; Jurisdiction; Question presented; Statutory provisions | OK. |
+| 10 | Statement of the case (A); Summary of argument | OK. |
+| 11 | Argument I (statutory text); Standard of review | OK. |
+| 12 | Argument I (heading and text); Conclusion | OK. |
+| 13 | Signature block, alone on its page | OPEN: the block did not fit under the conclusion and moved to the next page. Layout only; the same orphan is on page 12 of the render made before the font change. |
+| 14 | Certificate of compliance | Word count and typeface sentence present ("14-point TeX Gyre Schola"). OK. |
+| 15 | Certificate of service | OK. |
 
 Defects found during review and fixed in the template: the bold lead-ins of the certificate ran into their paragraphs; paragraph spacing overlapped at every paragraph break; single-spaced two-line headings overlapped; the body lost its first-line indent (a `set par` in the certificate section leaked into the body; the body now resets its own paragraph style).
 
 ## Known gaps
 
-1. **Typeface.** The only vendored serif is EB Garamond (`fonts/eb-garamond/`). The Handbook (IX.A.6) discourages Garamond; it does not forbid it, and EB Garamond at 14 pt satisfies FRAP 32(a)(5)(A). The D.C. Circuit prefers Century or Times New Roman. Neither is vendored, and `fonts/` is outside this box's scope. To switch: vendor a Century Schoolbook-metric or Times-metric font under `fonts/`, then change `font-family` in `typst/cadc-opening-brief.typ`. **Decision for David.**
-2. **Line pitch.** `body-leading` is 1.07em, giving a baseline pitch of about 24 pt at 14 pt. That is the pitch of the filed exemplar's body text. FRAP 32(a)(4) says "double-spaced" without a number; a pitch of about 2× the nominal 14 pt line (≈28 pt) would be larger and would push the sample past 14 pages. **Decision for David.**
+1. **Typeface (resolved 2026-10-15).** Face required: Century. The Handbook (IX.A.6) names Century and Times New Roman as the preferred faces and discourages Garamond; the filed exemplar is set in Century Schoolbook 14-pt. Substitute: `TeX Gyre Schola` (`docs/FONTS.md`; a Century Schoolbook clone, with glyph widths consistent with the Adobe base-35 New Century Schoolbook AFMs). The template was EB Garamond before this change. Page count went from 14 to 15; the sample reflows and no line is forced. The Handbook names Times New Roman too (`Liberation Serif`); Century is used here because the filed exemplar is set in it.
+2. **Line pitch.** `body-leading` is 1.07em, giving a baseline pitch of about 24 pt at 14 pt. That is the pitch of the filed exemplar's body text. FRAP 32(a)(4) says "double-spaced" without a number; a pitch of about 2× the nominal 14 pt line (≈28 pt) would be larger and would push the sample well past 15 pages. **Decision for David.**
 3. **Word count.** The certificate's count (1,312) is the template's count of the sample's body, which is a portion of the brief. The exemplar's own certificate states 10,418 words for the whole brief. The 13,000-word limit is enforced at build time for any sample.
 4. **Sample is a portion.** It is the exemplar's introduction through the start of the argument, then the conclusion, signature and certificates. The argument body and the statutory addendum are not transcribed. The summary's point I is transcribed only as far as the text read.
-5. **Signature alone on a page** (page 12 above). The conclusion and the signature block split across pages.
+5. **Signature alone on a page** (page 13 above). The conclusion and the signature block split across pages. Pre-existing; not caused by the font change.
 6. **Cover color.** FRAP 32(a)(2) makes the appellant's cover blue. This applies to paper copies; the PDF is not colored.
 7. **Addendum separator.** Circuit Rule 28(a)(5) requires a distinctly colored separation page when the addendum is bound with the brief. Paper only; not produced. The sample has no addendum.
 8. **Headings are not numbered by the template.** The labels are typed in the markdown.
