@@ -1,17 +1,35 @@
 # Petition for review
 
-This folder is a self-contained starter template for a petition for review in the Supreme Court of Texas. `typst/main.typ` reads the sample front matter and body; the cover is generated from the case number, party-caption lines, title, and lead-counsel fields. The sample uses a short excerpt of the filed *State of Texas v. F.M.V.* petition for structural and visual comparison. It is not a complete filing.
+Typst template for a petition for review in the Supreme Court of Texas (`typst/main.typ`, module `typst/tex-petition-for-review.typ`). The sample is an excerpt transcribed from the filed *State of Texas v. F.M.V.*, No. 25-0792 petition (`exemplars/FILED-EXAMPLE-hawthorne-25-0792-petition-for-review.pdf`). Rendered output: `samples/OUTPUT-hawthorne-petition-for-review.pdf`; overlay on the filed petition: `samples/OVERLAY-hawthorne-petition-for-review.pdf` and `.txt`.
+
+## Layout
+
+- Cover (page 1, no number): court and case number, caption, the "On Petition for Review" line, the title between rules, and the lead counsel block at the foot of the page (Rule 9.4(g)).
+- Front matter (lower roman, from ii): identities of parties and counsel from the markdown, then the generated table of contents, then the index of authorities generated from the frontmatter `authorities` list.
+- Body (arabic, from 1): the markdown from the heading named in frontmatter `body_start`.
+- Text is Liberation Serif 14 pt, double-spaced (32.2 pt baseline pitch, measured with `pdftotext -bbox`), footnotes 12 pt single-spaced, block quotations single-spaced and indented one inch each side. Headings are centered bold (H1) or bold left (H2, H3).
+- The contents are generated from the headings with page numbers from the layout. The index of authorities page numbers are typed in frontmatter by the author, measured from the rendered PDF (body page numbers).
+- Word count: `word-count` in the template counts the words of the counted sections under the 2026 text of Rule 9.4(i)(1) (headings, footnotes and quotations count; caption, identities, tables, the case, issue and jurisdiction statements, signature, certificates and appendix do not). The count replaces `{{word-count}}` in the certificate of compliance. `assert` fails the render when the count exceeds the limit.
 
 ## Governing rules
 
-Verified October 14, 2026 against the [Texas Rules of Appellate Procedure, effective February 6, 2026](https://txcourts.gov/media/1463134/texas-rules-of-appellate-procedure-02062026.pdf):
+Source notes. The Texas Rules of Appellate Procedure PDF (`txcourts.gov/media/1463134/...`) returned HTTP 403 to every fetch attempted on October 15, 2026, so the rule numbers below are carried over from the October 14 review and have **not been re-read against the rule text in this session**. The word-count exclusions were confirmed by a secondary search of the 2026 amendment (Misc. Docket No. 25-9104) and should also be read against the rule text.
 
-- Rule 9.4(c)–(e): US letter page; one-inch margins; double-spaced text; conventional computer typeface no smaller than 14 point (footnotes at least 12 point). The template sets 14-point EB Garamond and one-inch margins. **Known unmet requirement:** cmarker's rendered paragraphs remain compact despite the template's paragraph spacing settings; double-spacing is not yet achieved.
-- Rule 9.4(g): cover includes case style and number, document title, filing party, and lead counsel's name, mailing address, telephone, email, and Texas Bar number.
-- Rule 9.4(i)(2)(D): petition for review length is 4,500 words if computer-generated or 15 pages if not.
-- Rule 53.2: required petition content and sequence: introduction; identities of parties and counsel; table of contents; index of authorities; statement of the case; jurisdiction; issues; facts; summary; argument; prayer; appendix. The table of contents must have page references and bookmarks.
-- Rule 9.5: service and certificate requirements apply.
+- Rule 9.4(c)–(e): letter paper; one-inch margins; double-spaced text; conventional typeface at least 14 point; footnotes at least 12 point.
+- Rule 9.4(g): cover contents (case style and number, title, filing party, lead counsel's name, address, telephone, email, Texas Bar number).
+- Rule 9.4(i)(1)–(2): word limit for a petition for review, 4,500 words, computer-generated (`word-limit` in the module). Count exclusions as above.
+- Rule 53.2: order of contents: identities, table of contents, index of authorities, statement of the case, jurisdiction, issues, facts, summary, argument, prayer, appendix.
+- Rule 9.5: certificate of service.
 
-## Overlay and known gaps
+## Exemplars
 
-The overlay compares the generated 3-page sample with the 25-page filed petition. The generated cover retains a restrained centered caption, party lines, title between rules, and counsel block. Later sample pages are text excerpts and cannot be expected to align with the filed brief's full content. The template does not yet generate an automatic table of contents, index of authorities, bookmarks, appendix, certificate of service, certificate of compliance, word count, or length validation. Those are known functional gaps; the sample text calls out TOC bookmarks but does not create them. Electronic filing and appendix PDF requirements should be checked against the current clerk notice and rules before filing.
+Three filed petitions from three filers, listed with URLs in `exemplars/SOURCE.md`: the State petition (25-0792), Tanner (25-0648), and San Patricio County Appraisal District (26-0153). Tier 2 (cover, contents, authorities layout) is judged against all three.
+
+## Known gaps
+
+- Not done in this pass: `rules.md`, `checks.yaml`, `reviews/`, `LOG.md`, the latex and docx engines, and the `tools/check.sh` gates. The tracker and `court.json` are untouched.
+- The sample stops at the statement of facts, so the conclusion, prayer, signature, certificate of service and certificate of compliance are not exercised by the render. Their template code is untested.
+- Index of authorities page numbers must be re-measured whenever the body text changes.
+- Appendix and electronic-filing PDF requirements (searchable text, bookmarks, size cap) are not implemented.
+
+[Formbook index](../../../../../../README.md)
