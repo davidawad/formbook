@@ -92,3 +92,12 @@ The overlay is a diagnostic, not a score. Page 12 pairs with the exemplar's sign
 - Page 12: end of Conclusion; WHEREFORE paragraph; "Respectfully submitted," and the signature block. Pass.
 
 Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Engines
+
+- **typst** (primary, `typst/`): the reference for the form.
+- **docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` from pandoc's default reference, and `docx/vaeb.lua` (counsel block, court title, caption, numbered Statement of Undisputed Material Facts, lettered lists, "Respectfully submitted," signature block).
+- Matches typst: EB Garamond 12 pt (the PDF embeds EB Garamond only); exact 24 pt double and 13.8 pt single lines; 0.5 in first-line indent; letter size, 1.5 in top margin, 1 in other margins; centered page number; level 1 headings 17 pt centered bold capitals, level 2 bold 14.5 pt left, level 3 bold italic; caption as three columns (3.4 in, 0.3 in, 2.8 in); the signature block and the list spacing; 5 pt table insets and 0.5 pt rules.
+- Differs: (1) Word-native widow and orphan control moves one or two lines to the next page, so the sample runs to 13 pages in the docx and 12 in typst; (2) the closing WHEREFORE paragraph is kept with the signature block (keep-with-next), so the signature is not left alone on a page; (3) LibreOffice places exact-height lines about 3 pt lower than typst; (4) the caption and signature blocks are borderless tables.
+- No TOC or TOA, no pleading-paper line numbers (this court does not use them).
+- BLOCKED: none recorded. `sh tools/check.sh <court> --engine docx` exits 2 before any gate runs: the court folder has no `checks.yaml` (Gate 1) and no `reviews/`, so the gates cannot pass yet. That is a court-level prerequisite, not a docx limit.

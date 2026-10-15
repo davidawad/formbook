@@ -90,3 +90,12 @@ The overlay is a diagnostic, not a score. The page offset is expected: the sampl
 - Page 9: the prayer's end; date and signature block (firm, "By: /s/", signer, address, counsel line); CERTIFICATE OF SERVICE with the form wording and the service list in two columns; the certificate's signature. Pass.
 
 Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Engines
+
+- **typst** (primary, `typst/`): the reference for the form.
+- **docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` from pandoc's default reference, and `docx/vaeb.lua` (counsel block, court title, caption, numbered paragraphs, lettered lists, signature block, certificate of service).
+- Matches typst: EB Garamond 12 pt (the PDF embeds EB Garamond only); exact 24 pt double and 13.8 pt single lines; 0.5 in first-line indent; letter size, 1.5 in top margin, 1 in other margins; centered page number; level 1 headings 17 pt centered bold capitals (typst's default 1.4 em), level 2 centered bold 14.5 pt (1.2 em), level 3 bold italic; caption as three columns (3.4 in, 0.3 in, 2.8 in) with the ")" column; the signature block and the service list with the typst spacing; 5 pt table insets and 0.5 pt rules.
+- Differs: (1) Word-native widow and orphan control moves one or two lines to the next page, so page breaks fall on different lines (9 pages in both); (2) LibreOffice places exact-height lines about 3 pt lower than typst; (3) the certificate heading and the paragraph before the service list are within about 6 pt of typst, not identical; (4) the caption and signature blocks are borderless tables (Word and LibreOffice draw "none" alike).
+- No TOC or TOA (none in this doc type), so no fields to update. No pleading-paper line numbers (this court does not use them).
+- BLOCKED: none recorded. `sh tools/check.sh <court> --engine docx` exits 2 before any gate runs: the court folder has no `checks.yaml` (Gate 1) and no `reviews/`, so the gates cannot pass yet. That is a court-level prerequisite, not a docx limit.
