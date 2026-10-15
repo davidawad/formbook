@@ -6,9 +6,10 @@ Doc type: **complaint** (with jury demand) in the United States District Court f
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-lord-4-26-cv-00407-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-lord-complaint.md`: paragraphs 1-46 (caption to damages), Counts I and II, jury demand, prayer, signature |
-| render | ok: `samples/OUTPUT-lord-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| typeface | face required: none (LGnR2-4(a) sets a 12-pt floor and names no face). Substitute: none needed; **EB Garamond kept** (`docs/FONTS.md`: "no face named"). Fit: not metric-compatible with the Times/Cambria exemplar; visual only. |
+| render | ok: `samples/OUTPUT-lord-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond Regular, Bold, BoldItalic embedded |
 | overlay | ok: `samples/OVERLAY-lord-complaint.pdf` and `samples/OVERLAY-lord-complaint.txt` |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed) |
+| pages reviewed | 12 of 12 (every page rendered at 70 dpi and viewed, fonts pass; page count unchanged at 12) |
 
 ## Governing rules
 
