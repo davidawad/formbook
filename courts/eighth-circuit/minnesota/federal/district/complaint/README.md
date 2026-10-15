@@ -112,3 +112,14 @@ Pages reviewed: 13 of 13.
 - The Fed. R. Civ. P. 38(b) text was not re-fetched; the jury-demand paragraph follows the exemplar.
 - The ECF PDF requirements (searchable text, embedded fonts, size cap, bookmarks) are not covered: the ECF Guide was not fetched (see Rules).
 - Civil cover sheet (LR 3.1), Rule 7.1 disclosure statement and summons are separate documents and are not covered here.
+
+## Engines
+
+The docx engine (`docx/`) is built from `docx/make-reference.sh` (pandoc's default reference document, restyled) and `docx/mnd-complaint.lua` (front page, caption table, numbering, prayer items, signature block). Outputs: `samples/OUTPUT-3m-complaint.docx` and `samples/OUTPUT-3m-complaint.docx.pdf` (LibreOffice 25.2 conversion). Typst stays the primary engine; the latex engine is not built for this folder.
+
+- **Matches the typst form:** EB Garamond 13 pt throughout; 1-inch margins on letter paper; double spacing at the typst pitch (29.9 pt exact, checked on every page of the PDF); centred bold headings with a double line above and below; first-line indent 0.5 inch with unindented paragraphs after headings; numbered allegations 1 to 36 (checked in the PDF text); lettered prayer items hanging from the letter; caption (party column between rules, "Civil No. ____", bold title); signature block (date left, firm and signer right); page number centred in the bottom margin.
+- **Differs:** pagination. Word's exact line spacing gives each line its full 29.9 pt box, while typst adds leading only between lines, so a page holds 21 lines in docx and 22 in typst. The complaint runs 14 pages in docx against 13 in typst, and the signature block falls alone on page 14. Same pitch, one line less per page; the rule does not set a page count.
+- **Differs:** the typeface is rendered by LibreOffice; kerning and line breaks differ slightly from typst.
+- **docx BLOCKED items:** none for the mandated form. No check IDs exist yet for this folder (no `checks.yaml`), so `tools/check.sh --engine docx` has nothing to run; the Gate 2 review of the docx PDF is recorded below.
+
+Review log (docx): every page of `samples/OUTPUT-3m-complaint.docx.pdf` (14 pages) was rendered at 60 dpi and viewed against the typst pages: pages 1 to 14 PASS on form (caption, headings, numbering, prayer, signature); page 14 carries only the signature block (pagination note above). The `.docx` opens in LibreOffice without a repair prompt; Word was not available to check.

@@ -121,3 +121,13 @@ Pages reviewed: 13 of 13.
 - The ECF PDF requirements (searchable text, embedded fonts, file size, bookmarks) are not covered: the ECF Guide was not fetched (see Rules).
 - The notice of motion, proposed order, and hearing information are not part of this template.
 - Judge initials: the template prints `case_number` as given; the caller must include the initials (LR 5.2(a)).
+
+## Engines
+
+The docx engine (`docx/`) is built from `docx/make-reference.sh` (pandoc's default reference document, restyled) and `docx/mnd-motion-brief.lua` (front page, caption table, signature block, certificate of compliance with the 12,000-word check). Outputs: `samples/OUTPUT-adams-motion-brief.docx` and `samples/OUTPUT-adams-motion-brief.docx.pdf` (LibreOffice 25.2 conversion). Typst stays the primary engine; the latex engine is not built for this folder.
+
+- **Matches the typst form:** EB Garamond 13 pt throughout, footnotes included (native footnotes, 13 pt single-spaced); 1-inch margins on letter paper; double spacing at the typst pitch (29.9 pt exact); first-line indent 0.5 inch, with the first paragraph after a heading unindented, as typst does; level 1 headings centred and bold; level 2 and 3 headings single-spaced, bold and hanging; caption with the court file number, bold title and rule line; signature block; certificate of compliance on its own page with the word count and software from the frontmatter; page number centred in the bottom margin.
+- **Differs:** pagination. Word's exact line spacing gives each line its full 29.9 pt box, while typst adds leading only between lines, so a page holds 21 lines in docx and 22 in typst. The memorandum runs 14 pages in docx against 13 in typst; the signature block moves to its own page 13 with the body ending on page 12. The word limit is a word count, not a page count, so this does not affect compliance.
+- **docx BLOCKED items:** none for the mandated form. No check IDs exist yet for this folder (no `checks.yaml`), so `tools/check.sh --engine docx` has nothing to run; the Gate 2 review of the docx PDF is recorded below.
+
+Review log (docx): every page of `samples/OUTPUT-adams-motion-brief.docx.pdf` (14 pages) was rendered at 60 dpi and viewed against the typst pages: pages 1 to 14 PASS on form (caption, headings, footnotes, signature block, certificate). The `.docx` opens in LibreOffice without a repair prompt; Word was not available to check.
