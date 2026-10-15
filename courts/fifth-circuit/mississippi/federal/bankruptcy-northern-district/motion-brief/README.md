@@ -83,3 +83,29 @@ Every page of `samples/OUTPUT-clanton.pdf` was rendered at 60 dpi and viewed.
 - Pages 7 to 9: paragraphs 7 to 19 (deeds of trust, default, lawsuit, assignments, foreclosure), RELIEF REQUESTED heading at the foot of page 9 with paragraph 20 below it. Pass.
 - Pages 10 to 12: paragraphs 21 to 28 (cause under § 362(d)(1), equity cushion, adequate protection, relief requested), date line, CERTIFICATE OF SERVICE starting on page 12. Pass.
 - Page 13: the certificate's date line, signature block right-aligned, counsel block. Pass.
+
+## Engines
+
+Docx engine (`docx/`): `reference.docx` (built by `docx/make-reference.sh`), `motion-brief.lua` (caption, signature and OF COUNSEL blocks, numbered and lettered paragraphs, footnote notes), and `render.sh` (the pandoc call; `tools/render-docx.sh` uses it). Renders: `samples/OUTPUT-clanton.docx` and `.docx.pdf` (13 pages, LibreOffice 26.8), and `samples/OUTPUT-synthetic-motion-brief.docx` and `.docx.pdf` (3 pages).
+
+| Item | Typst (primary) | Docx | Note |
+|---|---|---|---|
+| Font, size | EB Garamond 12 pt | EB Garamond 12 pt (embedded, the only font in the PDF) | |
+| Page, margins | US Letter, 1 in | US Letter, 1 in | |
+| Body spacing | double, 24 pt baseline | exact 24 pt (`w:line=480 exact`) | no extra gap between paragraphs in either |
+| Footnote notes | 10 pt, written in place after the paragraph | 10 pt, written in place | |
+| Page number | centered, 10 pt | centered, 10 pt (`PAGE` field in the footer) | |
+| Headings | level 1 centered bold underlined caps; level 2 bold; level 3 bold italic | same (level 1 caps by `w:caps`) | |
+| Caption | IN RE, names, CASE NO. right; DEBTORS. and CHAPTER right | same, on a right tab stop | |
+| Signature and OF COUNSEL | right column, OF COUNSEL flush left | same | |
+| Pages (clanton) | 13 | 13 (LibreOffice) | line breaks differ in places; paragraphs fall on different pages |
+
+Differences, by design:
+- **Certificate of service placement.** The typst template holds back the chunk headed `# CERTIFICATE OF SERVICE` to print it after OF COUNSEL, but its match is case-sensitive and the sample heading is `# Certificate of Service`, so typst prints the certificate before the signature. The docx matches the heading case-insensitively and prints it after OF COUNSEL, as the typst comment intends. This is a typst defect; `typst/` is not changed here.
+- **Numbering.** Numbered paragraphs are numbered consecutively across the document (Fed. R. Civ. P. 10(b) form). The typst template numbers only the paragraphs without a markdown number.
+
+BLOCKED / not verified for docx:
+- Gates 0 to 3 (`tools/check.sh --engine docx`) cannot run: this court has no `rules.md` or `checks.yaml` yet, and `yq` is not on the box.
+- The `.docx` was opened in LibreOffice (the PDF conversion succeeded) but not in Microsoft Word; "opens without a repair prompt in Word" is not verified.
+- Local rules are unread (see above), so tier-1 form is the same standard-letter default as the typst template.
+- `samples/INPUT-synthetic-motion-brief.md` does not render in typst (`signature.title` is missing from its frontmatter, so `typst/msnb-motion-brief.typ` fails). The docx renders it with a blank title line under the signature.
