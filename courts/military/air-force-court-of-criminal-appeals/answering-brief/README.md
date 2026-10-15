@@ -86,3 +86,11 @@ Tier-2 findings (OPEN or ACCEPTED): typeface (see Known gaps); the excerpt sampl
 6. **Excerpt samples.** `excerpt: true` (Howard) skips the required-section and standard-of-review checks. A complete answer must not set it.
 7. **Grostefon (R. 18.2).** An answer to a Grostefon issue is not covered by a separate template; the Howard answer excerpt has no such appendix.
 8. **Caption and counsel.** The caption grid aligns the ")" column with the caption's left-hand lines. A long title on the right wraps on its own. The counsel block is printed on the caption page when given; Appendix A does not call for one.
+
+## Engines
+
+**docx** (`docx/`: `reference.docx` from `build-reference.sh`; `afcca.lua`; `render.sh`, the same files as the opening-brief folder). Rendered by `tools/render-docx.sh`; the gates run on the LibreOffice PDF. No index in either sample, so one pass.
+
+- Matches the typst form, page by page on both samples (13 pages, 60 dpi, against the typst page): EB Garamond 12 pt in every style; double spacing as an exact 27 pt line; 0.5 in first-line indent; single spacing for the caption, block quotations, footnotes and headings; 1 in margins on US Letter; the caption table, counsel block (Howard) and TO THE HONORABLE line; I./A./1./a. numbering; the signature block without a closing line, one em above; the certificate on a new page; the PAGE field footer; native footnotes; "§ N" and "(g)(6)" kept together as typst does.
+- Differs: (1) pagination: a few lines break differently (Douglas p. 2 and p. 7; Howard p. 2 to p. 3), and the footnote separator is a little shorter. (2) The caption's right-hand lines sit a few points lower. Page counts match (10 and 3).
+- DOCX BLOCKED: all gates. `sh tools/check.sh <this folder> --engine docx` exits 2: `Error: open .../answering-brief/checks.yaml: no such file or directory` (the snapshot has no `checks.yaml` for this court; not authored here). Also `jq: error: Could not open file .../answering-brief/court.json`.
