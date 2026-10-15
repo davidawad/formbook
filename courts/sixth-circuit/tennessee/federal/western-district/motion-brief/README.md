@@ -6,10 +6,11 @@ Folder: `courts/sixth-circuit/tennessee/federal/western-district/motion-brief/`.
 | Item | Status |
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-gonzalez-carroll-county-1-26-cv-02199-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
+| typeface | **Times New Roman** named by the W.D. Tenn. CM/ECF manual, section "Setting up PDF Reader and Converting to PDF": "The court only allows use of the following fonts ... Times New Roman, Arial, and Courier New. Size of font must be (at least) 12 point." LR 7.1(b) itself names no face. Substitute: **Liberation Serif** (`docs/FONTS.md`, metric-compatible with Times New Roman). EB Garamond is not used. |
 | sample md | `samples/INPUT-gonzalez-memorandum.md` (the whole 9-page filing: caption, background, standard, argument I to IV, conclusion, signature block, certificate of service) |
-| render | ok: `samples/OUTPUT-gonzalez-memorandum.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `samples/OUTPUT-gonzalez-memorandum.pdf`, 9 pages, typst 0.15.0, vendored Liberation Serif only (re-rendered 2026-10-15; `pdffonts`: only LiberationSerif embedded), no warnings |
 | overlay | ok: `samples/OVERLAY-gonzalez-memorandum.pdf` and `samples/OVERLAY-gonzalez-memorandum.txt` (page map) |
-| pages reviewed | 9 of 9 (every page of the final render rasterized at 60 dpi and viewed) |
+| pages reviewed | 9 of 9 (every page of the 2026-10-15 render rasterized at 60 dpi and viewed)
 
 File names follow the tools' defaults (`render.sh` writes `samples/OUTPUT-<id>.pdf`; `overlay.sh` reads it and writes `samples/OVERLAY-<id>.pdf`/`.txt`), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief. `<id>` is `gonzalez-memorandum`.
 
@@ -80,7 +81,7 @@ Each page was rasterized with `pdftoppm -r 60` after the last template change an
 4. **Page limit not enforced.** LR 7.2(e) and LR 12.1(a) cap the memorandum at 20 pages, excluding caption, signature and certificates. The sample is 9 pages in all (about 8 with text and signature, the 9th the certificate). A longer memorandum must be checked by the filer; the template does not count pages.
 5. **Signature line.** The exemplar prints `By:` above `s/`; LR 11.1(b)'s sample has none, and the template follows the rule's sample. A `By:` line would be a one-line change in `typst/tnwd-motion-brief.typ`.
 6. **Certificate of service wording** is the exemplar's (ECF and U.S. Mail), reproduced from the frontmatter. FRCP 5(b)(2)(E) governs the ECF method; the mail method is the filer's choice and is not required.
-7. **Font.** Times New Roman is the exemplar's face; `fonts/` holds only EB Garamond (see the complaint README, gap 3). The 12-point minimum is met; the text looks smaller than the filing.
+7. **Font.** Liberation Serif, the Times New Roman substitute, as the CM/ECF manual requires (see the complaint README, gap 3). The 12-point minimum is met.
 8. **Caption column count.** The number of `)` marks is computed from the height of the party column (one per line), so a party column that wraps differently from the filing shows a different count. Checked by eye against the filing's caption on page 1; the count was not compared mark for mark.
 9. **Overlay.** Pages pair in order (the sample is the whole filing); the overlay is a diagnostic, not a score.
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither, and the brief forbids touching `tools/`. Render and overlay were run; the review above is the visual check for this doc type.

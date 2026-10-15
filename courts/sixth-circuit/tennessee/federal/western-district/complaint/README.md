@@ -6,10 +6,11 @@ Folder: `courts/sixth-circuit/tennessee/federal/western-district/complaint/`.
 | Item | Status |
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-coran-perry-2-26-cv-03285-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
+| typeface | **Times New Roman** named by the W.D. Tenn. CM/ECF manual, section "Setting up PDF Reader and Converting to PDF": "The court only allows use of the following fonts ... Times New Roman, Arial, and Courier New. Size of font must be (at least) 12 point." LR 7.1(b) itself names no face. Substitute: **Liberation Serif** (`docs/FONTS.md`, metric-compatible with Times New Roman). EB Garamond is not used. |
 | sample md | `samples/INPUT-coran-complaint.md` (a portion of the 26-page filing: caption, opening sections, paragraphs 1 to 46, prayer, jury demand, signature, verifications) |
-| render | ok: `samples/OUTPUT-coran-complaint.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `samples/OUTPUT-coran-complaint.pdf`, 14 pages (the second verification alone on p. 14), typst 0.15.0, vendored Liberation Serif only (re-rendered 2026-10-15; `pdffonts`: only LiberationSerif embedded), no warnings |
 | overlay | ok: `samples/OVERLAY-coran-complaint.pdf` and `samples/OVERLAY-coran-complaint.txt` (page map) |
-| pages reviewed | 13 of 13 (every page of the final render rasterized at 60 dpi and viewed) |
+| pages reviewed | 14 of 14 (every page of the 2026-10-15 render rasterized at 60 dpi and viewed)
 
 File names follow the tools' defaults (`render.sh` writes `samples/OUTPUT-<id>.pdf` and `overlay.sh` reads it and writes `samples/OVERLAY-<id>.pdf`/`.txt`), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief. The sample is `samples/INPUT-coran-complaint.md`, so `<id>` is `coran-complaint`.
 
@@ -80,7 +81,7 @@ Each page was rasterized with `pdftoppm -r 60` after the last template change an
 
 1. **One exemplar only.** The brief asks for one filed document per doc type; EVAL-LOOP's tier-2 rule asks for two or three filers. Search (CourtListener RECAP, `type=r`, `court=tnwd`, query `"complaint" "demand for jury trial"`, `available_only=on`, most recent first, the first page of 20) also found *Carter v. X.AI Corp.* (2:26-cv-03257, 55 pages, ruled caption, Times New Roman, class complaint), *Malikie Innovations v. Brother Industries* (2:26-cv-02365, 28 pages, patent complaint), and others. They were downloaded and checked for text and format; not saved. Tier 2 is therefore **not** judged against two filers.
 2. **The exemplar does not follow LR 7.1(c) on the legend.** The filing reads `JURY TRIAL DEMANDED.` opposite the style; LR 7.1(c) says `JURY DEMAND`. The template follows the rule. This is a finding against the exemplar, not a convention choice.
-3. **Font.** Times New Roman is the exemplar's face; `fonts/` holds only EB Garamond, and the render uses nothing else (`--ignore-system-fonts`). EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the filing and runs to more lines per page. The 12-point minimum is met. A vendored Times-metric font (Liberation Serif) would remove the difference; that change touches `fonts/`, which this brief forbids.
+3. **Font.** Times New Roman is the face the CM/ECF manual allows (and the exemplar uses). The template sets Liberation Serif, its metric-compatible substitute (`docs/FONTS.md`). The 12-point minimum is met. The page count went from 13 to 14 because the second verification no longer fits on page 13; it stands alone on page 14.
 4. **Caption column.** The exemplar has no `)` column; the template uses one (the W.D. Tenn. memorandum exemplar does). Both are seen in this district; recorded as ACCEPTED, a tier-2 convention choice.
 5. **Counsel block.** The exemplar places counsel only in the signature block. LR 7.1(a) does not say where the block goes. The template follows the exemplar. A top-left counsel block would be a change to `typst/tnwd-complaint.typ`.
 6. **Verification wording.** The exemplar's verification adds "I believe the allegations expressly stated on information and belief to be true". The template prints the 28 U.S.C. § 1746 declaration only. Counsel may add the sentence in a frontmatter field if wanted; not added.

@@ -9,13 +9,13 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to the word-processor double spacing; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"       // vendored in fonts/; no Times New Roman is vendored (README.md, known gaps)
+#let font-family = "Liberation Serif"  // vendored (fonts/liberation-serif); the W.D. Tenn. e-filing manual allows Times New Roman (README.md, typeface row)
 #let type-size = 12pt                  // LR 7.1(b): no smaller than 12 point, footnotes included
 #let page-w = 8.5in                    // LR 7.1(a): 8 1/2 by 11 inch white paper
 #let page-h = 11in
 #let margin = 1in                      // LR 7.1(a): one-inch margins on all sides
 #let text-width = page-w - 2 * margin
-#let line-box = 7.8pt                  // EB Garamond's line box at 12 pt (0.65 em, as typst measures it)
+#let line-box = 7.86pt                 // Liberation Serif natural line box at 12 pt (leading 0, measured with typst 0.15.0)
 #let pitch = 27.6pt                    // LR 7.1(b): double-spaced; 2 x 1.15 x 12 pt, the word-processor double
 #let single-pitch = 13.8pt             // single spacing: caption, quotations, signature, footnotes
 #let body-leading = pitch - line-box   // the gap between lines of a double-spaced paragraph
