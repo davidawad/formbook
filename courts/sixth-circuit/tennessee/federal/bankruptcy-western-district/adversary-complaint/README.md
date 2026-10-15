@@ -103,3 +103,11 @@ Rendered at 60 dpi with `pdftoppm -r 60` and viewed page by page.
 | 11 | Prayer item G; "Respectfully submitted this 19th day of September, 2025."; signature block | Pass. Item G is kept with the signature block. Finding (tier 2, ACCEPTED): the prayer breaks between pages 10 and 11, leaving page 11 short; the keep rule is preferred to a full page 10. |
 
 Open tier-2 findings: none that block the layout. The items above (Known gaps 2–6) are the ones a clerk or a tier-2 comparison would raise.
+
+## Engines
+
+docx (`docx/build-reference.sh` -> `docx/reference.docx`, filter `docx/tnwb.lua`; render `sh tools/render.sh --engine docx`; judged on `samples/OUTPUT-brewers-adversary-complaint.docx.pdf`, the LibreOffice conversion):
+
+- Matches the typst output: 11 pages in both; EB Garamond only (`pdffonts`, no fallback face); US Letter, 1 in margins; double spacing (exact 23.9 pt, so 27 lines per page as in typst at 24 pt); single-spaced court heading, caption (with the section-mark column), signature block and parties; numbered allegations at 0.5 in with text at 1 in; lettered prayer with a hanging indent; centered caps, centered bold and left bold headings; transfer tables centered, auto width, ruled, header row repeated across pages; footnotes at 10 pt; page number centered in the footer. Pages reviewed: 11 of 11 (every page of the final docx.pdf rasterized at 60 dpi and viewed, compared with the typst pages).
+- Differs (tier 2, not chased): (1) pagination: LibreOffice places exact-spaced text about 4 pt lower and table rows are 14.3 pt against typst's 13.8 pt, so a few page breaks fall a line or two away from typst (for example the transfer table of paragraph 31 starts on page 5 and ends on page 6 in the docx, and entirely on page 5 in typst); (2) the firm name in the signature block wraps to three lines in LibreOffice (typst: two); (3) footnote leading is exact 11.5 pt; (4) cell text of the transfer tables is plain text (markdown emphasis inside a table cell is not carried over); (5) no PDF bookmarks.
+- BLOCKED: none in the template. `sh tools/check.sh <court-dir> --engine docx` cannot run on this folder: it needs `checks.yaml` and `rules.md` (and the court's `court.json`), which this unit does not create; the run exits 2 before any gate. No check ID is BLOCKED by the docx template itself.

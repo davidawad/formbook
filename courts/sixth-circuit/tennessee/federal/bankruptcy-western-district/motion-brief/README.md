@@ -96,3 +96,11 @@ Rendered at 60 dpi with `pdftoppm -r 60` and viewed page by page.
 | 6 | CERTIFICATE OF SERVICE: wording, two columns of served parties, `/s/` signer | Pass after a fix (two columns instead of three, so "200 Jefferson Avenue, Ste. 1113" does not wrap). |
 
 Open tier-2 findings (ACCEPTED): body text is ragged right; the caption uses the § column; the certificate of service wording follows the exemplar and is not tied to a verified rule (Known gaps 7).
+
+## Engines
+
+docx (`docx/build-reference.sh` -> `docx/reference.docx`, filter `docx/tnwb.lua`; render `sh tools/render.sh --engine docx`; judged on `samples/OUTPUT-kenney-motion-memorandum.docx.pdf`, the LibreOffice conversion):
+
+- Matches the typst output: 6 pages in both; EB Garamond only (`pdffonts`); US Letter, 1 in margins; double spacing (exact 23.9 pt, 27 lines per page as in typst at 24 pt); single-spaced court heading, caption, signature block and the certificate of service's parties in two columns; centered caps, centered bold and left bold headings; block quotation indented 0.5 in on both sides and single spaced; footnotes at 10 pt; page number centered in the footer; the signature block kept with the last body paragraph; the certificate of service on its own page as in typst. Pages reviewed: 6 of 6 (every page of the final docx.pdf rasterized at 60 dpi and viewed, compared with the typst pages).
+- Differs (tier 2, not chased): (1) the signature firm name wraps to three lines in LibreOffice ("BAKER, DONELSON, BEARMAN, / CALDWELL & BERKOWITZ, A Professional / Corporation") where typst wraps to two; (2) pagination: the page 2 footnote is set a line tighter, so page 3 begins about one line earlier in the text than in typst; page counts agree; (3) footnote leading is exact 11.5 pt; (4) no PDF bookmarks.
+- BLOCKED: none in the template. `sh tools/check.sh <court-dir> --engine docx` cannot run on this folder: it needs `checks.yaml` and `rules.md` (and the court's `court.json`), which this unit does not create; the run exits 2 before any gate. No check ID is BLOCKED by the docx template itself.
