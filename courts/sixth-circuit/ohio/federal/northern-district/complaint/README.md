@@ -54,7 +54,7 @@ Not in the rules, so not asserted: a font (L.R. 10.1 sets no typeface or size); 
 
 | Value | Choice | Basis |
 |---|---|---|
-| Typeface | EB Garamond 12 pt | The only serif family vendored in `fonts/` (the brief forbids editing `fonts/` and system fonts are banned). The exemplars are Times New Roman. See open choice 1. |
+| Typeface | EB Garamond 12 pt (kept) | Face required: none (L.R. 10.1 names no face or size; it requires "plainly typewritten, printed, or prepared by a clearly legible duplication process"). Substitute: none needed, so EB Garamond stays (`docs/FONTS.md`: "No face named"). Vendored Times-metric option: Liberation Serif, not used (tier-2 convention, see open choice 1). |
 | Line box | 0.65 em (7.8 pt) | Measured on EB Garamond in a scratch file. |
 | Single pitch | 13.8 pt (1.15 em) | 7.8 pt line box + 6 pt leading. |
 | Double pitch | 27.6 pt | Twice the single pitch; equals the Hammill exemplar's measured body pitch. |
@@ -87,7 +87,7 @@ Every page was rendered at 60 dpi and viewed. No OPEN rows.
 
 ## Known gaps and open choices
 
-1. **Typeface.** L.R. 10.1 sets no font. The exemplars use Times New Roman; the template uses EB Garamond because it is the only font vendored in `fonts/`. EB Garamond at 12 pt has a smaller x-height than Times, so the text looks smaller on the page. A Times-metric font would remove the difference, and needs a change to `fonts/` (not done here).
+1. **Typeface.** L.R. 10.1 names no face and allows any clearly legible typeface, so `docs/FONTS.md` gives no substitute and the template keeps EB Garamond. The exemplars use Times New Roman; that is a filer convention (tier 2), not a rule. EB Garamond at 12 pt has a smaller x-height than Times, so the text looks smaller on the page. Liberation Serif (metric-compatible with Times New Roman) is vendored and would remove the difference; switching is a tier-2 decision left open.
 2. **Second filer not transcribed.** The Miller complaint is saved as the second exemplar for tier-2 comparison but was not transcribed (the sample is the Wagner filing). The comparison is by reading the Miller text layer and first page, not a page-by-page review.
 3. **Caption.** The Wagner filing draws the party column with ")" marks; the Miller filing uses a ":" column. The template follows the Wagner filing (tier 2; both are seen in N.D. Ohio filings).
 4. **Division.** The sample's caption carries no division (the Wagner filing does not print one). `division` is available in the frontmatter (the Hammill and Miller filings print "Western Division" and "Eastern Division").

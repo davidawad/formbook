@@ -8,8 +8,9 @@ Folder: `courts/sixth-circuit/ohio/federal/bankruptcy-southern-district/motion-b
 | exemplar | yes: `exemplars/FILED-EXAMPLE-actual-brewing-2-19-bk-50813-motion-brief.pdf` (1 filer, the U.S. Trustee; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-actual-brewing-ust-motion.md` (full transcription of the motion and memorandum, all ten footnotes and the certificate of service; the exemplar's mailing matrix is not transcribed) |
 | render | ok: `samples/OUTPUT-actual-brewing-ust-motion.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular and -Bold, embedded), no warnings |
-| overlay | ok: `samples/OVERLAY-actual-brewing-ust-motion.pdf` and `OVERLAY-actual-brewing-ust-motion.txt` (page map below) |
-| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | Face required: none. The LBRs name no face for filings (S.D. Ohio LBR 9004-1(b): "at least 10-12 font size"). Substitute: none, EB Garamond kept (checked 2026-10-15 against the LBR PDF). Metric note: not applicable. |
+| overlay | ok: `samples/OVERLAY-actual-brewing-ust-motion.pdf` and `OVERLAY-actual-brewing-ust-motion.txt` (page map below). Run 2026-10-15 against the exemplar fetched from the CourtListener URL in `exemplars/SOURCE.md` to `/tmp`; the PDF is not kept in the repo |
+| pages reviewed | 7 of 7 (re-rendered 2026-10-15 with no template change; every page rendered at 60 dpi and viewed) |
 
 ## Governing rules
 
@@ -78,7 +79,7 @@ Defects found and fixed during this review (for the record): (1) the space after
 1. **One filer only.** The brief asks for one exemplar per doc type, and the CourtListener search was rate-limited before a second, post-2024 debtor-side motion with a memorandum was found. Tier 2 is judged against one filer, not two or three.
 2. **No 21-day notice in the sample.** The exemplar (filed March 2019) has no 21-day notice. LBR 9013-1(a)(1)(C), as posted with the 2020 amendments, requires one unless an exemption applies, and the template renders it when the sample carries `{{NOTICE_21_DAY}}` and a `notice:` block. The sample does not carry it, so the render does not show it. Whether the U.S. Trustee's motion to convert or dismiss is exempt under General Order #12 was not checked. Decide before a real filing; the template is ready.
 3. **Local-rule numbers in the filed text predate the 2020 numbering.** The exemplar cites LBR 1007-1, 1007-2, 1015-2, 1074-1 and 5005-4. These are kept as filed. Whether those numbers are current in the 2020 LBR was not checked against each rule.
-4. **Font.** EB Garamond at 12 pt. The exemplar is Times New Roman (embedded). The LBR names no typeface and requires 10 to 12 point. Both are choices; the difference is recorded, not treated as a rule.
+4. **Font.** EB Garamond at 12 pt. The exemplar is Times New Roman (embedded). The LBR names no typeface and requires 10 to 12 point, so no court-named substitute applies (`docs/FONTS.md`: "no face named" keeps EB Garamond). The only face the LBRs name is for the mailing list (LBR 1007-2(b)(1): "Courier New and Times New Roman"), which is a separate document not built by this template. Both are choices; the difference is recorded, not treated as a rule.
 5. **Footnotes single spaced at 12 pt** and the certificate's address blocks single spaced. LBR 9004-1(b) asks for double spacing of the filing; footnotes and address blocks are conventionally single spaced, and the rule does not name either. This is a reading, recorded here.
 6. **Typos in the filed text are kept**, as transcribed: "exits" for "exists", "covert" for "convert", "Chapter11", "Non− Individuals", and a stray numeral before "or in the alternative" that is dropped (noted in the sample's header; it has no footnote behind it).
 7. **Mailing matrix not transcribed** (exemplar pages 8 and 9). The certificate lists the parties by name; the attached matrix is a separate document in practice.

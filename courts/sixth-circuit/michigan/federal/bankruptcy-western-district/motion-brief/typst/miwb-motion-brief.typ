@@ -12,7 +12,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // MIWB-FORM-001: a typewritten face; EB Garamond is the only one vendored in fonts/
+#let font-family = "EB Garamond"        // MIWB-FORM-001: the rules name no face (LBR 9004(f): "typewritten in at least 12-point type"); EB Garamond kept (docs/FONTS.md, "No face named")
 #let type-size = 13pt                   // MIWB-FORM-001: at least 12-point type (LBR 9004(f)); 13 pt matches the exemplar's visual size
 #let pitch = 27.6pt                     // MIWB-FORM-001: double-spaced; the filed exemplars measure 27.6 pt baseline to baseline
 #let body-leading = 1.477em             // gap between lines of body text; with EB Garamond's 0.646em line box this gives the 27.6 pt baseline pitch (measured, README.md)

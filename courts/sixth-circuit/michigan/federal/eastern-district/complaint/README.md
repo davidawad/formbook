@@ -7,9 +7,11 @@ Folder: `courts/sixth-circuit/michigan/federal/eastern-district/complaint/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-music-laa-5-26-cv-13851-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-music-laa-complaint.md` (the whole 12-page complaint, transcribed) |
-| render | ok: `samples/OUTPUT-music-laa-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-music-laa-complaint.pdf` and `OVERLAY-music-laa-complaint.txt` |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | required: none (LR 5.1(a)(3) sets 14 pt for proportional type and names no face); vendored substitute: none needed; font kept: **EB Garamond** (`docs/FONTS.md`, "No face named"). Visual-only: the exemplar is Times New Roman, not a rule. |
+| render | ok: `samples/OUTPUT-music-laa-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| embedded fonts | `pdffonts`: EBGaramond-Regular, -Bold, -BoldItalic only (all embedded) |
+| overlay | ok: `samples/OVERLAY-music-laa-complaint.pdf` and `OVERLAY-music-laa-complaint.txt` (re-run 2026-10-15) |
+| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed on 2026-10-15) |
 
 ## Governing rules
 
@@ -43,7 +45,7 @@ Not produced by this template (separate filings): the civil cover sheet (JS-44),
 ## Known gaps and open choices
 
 1. **One exemplar only.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The CourtListener search (`court=mied`, `type=r`, complaints filed 2026-09 to 2026-10) also found Fleet Connect Solutions LLC v. Road Ready, LLC, 2:26-cv-13496 (33 pp., Liberation Sans, a patent complaint) and Annapolis Pointe Phase I LDHA LLC v. City of Inkster, 2:26-cv-13484 (23 pp., Arial, Pentiuk, Couvreur & Kobiljak). Those were checked for text but not saved (one exemplar per doc type). Tier 2 is therefore **not** judged against two filers yet.
-2. **Font.** The only font vendored in `fonts/` is EB Garamond. The exemplar is Times New Roman. At 14 point, EB Garamond has a smaller x-height, so the text looks smaller than the exemplar. The 14-point minimum is met. A vendored Times-metric font would remove the difference; that is a question for David.
+2. **Font.** LR 5.1(a)(3) requires 14 point for proportional type and names no typeface, so no court-named substitute applies and EB Garamond is kept (`docs/FONTS.md`, "No face named"). The exemplar is Times New Roman, which is a filer's choice (tier 2 at most), not a rule. At 14 point, EB Garamond has a smaller x-height, so the text looks smaller than the exemplar. The 14-point minimum is met. Switching to Liberation Serif (metric-compatible with Times) would remove the visual difference; that is a question for David, not a rule requirement.
 3. **Double spacing.** Defined against the font's own single line (1.15em single, 2.3em double, ~32 pt at 14 pt), which matches Times New Roman's line box. The rule text is "double-spaced", not a pitch, so this is a reading, not a measured number. The exemplar's line pitch is similar (about 32 pt).
 4. **Caption.** The party column is closed by a right and bottom rule instead of the ")" column used in some E.D. Mich. filings. Recorded as ACCEPTED.
 5. **Case-name italics.** The sample's case names are not italic (the exemplar has no case names). The template italicizes `*...*` markup, so future samples can carry italics.

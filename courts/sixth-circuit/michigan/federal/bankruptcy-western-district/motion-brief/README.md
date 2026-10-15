@@ -19,7 +19,7 @@ Sources were fetched 2026-10-14. The local rules are the court's own PDF ("Local
 
 | ID | Rule (source) | Requirement | Where it is in the template |
 |---|---|---|---|
-| MIWB-FORM-001 | LBR 9004(f) | Except exhibits, official forms and software-generated preprinted forms, documents must be "double-spaced and typewritten in at least 12-point type." | `pitch = 27.6pt` (the Cluchey exemplar's measured baseline pitch), `type-size = 13pt` |
+| MIWB-FORM-001 | LBR 9004(f) | Except exhibits, official forms and software-generated preprinted forms, documents must be "double-spaced and typewritten in at least 12-point type." | `pitch = 27.6pt` (the Cluchey exemplar's measured baseline pitch), `type-size = 13pt`. No face is named; EB Garamond kept (gap 7). |
 | MIWB-FORM-002 | Fed. R. Bankr. P. 7010 (https://www.law.cornell.edu/rules/frbp/rule_7010) | A pleading's caption "must substantially conform to the appropriate version of Form 416". A motion is not a pleading; the template gives the motion and the brief the same caption as the exemplars do. | `caption()`, `document-head()` |
 | MIWB-FORM-003 | LBR 9004(a) | The debtor's current chapter in the caption, immediately below the case number. | `caption()`: "Chapter" line directly under "Case No." |
 | MIWB-FORM-004 | LBR 9004(b); Fed. R. Bankr. P. 9004(b) (https://www.law.cornell.edu/rules/frbp/rule_9004) | The caption carries "a brief designation of the document's character"; the LBR adds that the description is centered, immediately before the body, specific, and states the number of the document (first, second) and the name of the moving party. | `document-head()`: the motion's title and the brief's title, centered, bold, capitals, before the body |
@@ -32,12 +32,12 @@ Sources were fetched 2026-10-14. The local rules are the court's own PDF ("Local
 | MIWB-FORM-011 | ECF Administrative Procedures II.A.2 and IV.B (2 MB per document) and V.B (standard letter size) (https://www.miwb.uscourts.gov/sites/miwb/files/local_rules/ECF%20Admin%20Procedures%20Amended%20Eff%2012-13-21.pdf) | "supporting briefs, proposed orders, etc., shall be filed as attachments to the motion"; documents at most 2 MB; letter size. | The brief is a separate document with its own caption and page numbers (`brief-document()`, page numbers restart). Both documents are in one PDF for review, as the Cluchey exemplar is (its brief is docket entry 18-1, attachment 1 to entry 18). Letter paper. The sample is 58 KB. |
 | MIWB-FORM-012 | Fed. R. Bankr. P. 7012(b) (incorporates Fed. R. Civ. P. 12 in adversary proceedings) | The motion to dismiss under Rule 12(b)(1) and 12(b)(6). | Doc type: the sample's text cites it. The template does not check the grounds. |
 
-The local rules have no page limit for briefs in an adversary proceeding and no font or margin rule beyond LBR 9004(f) (the only page-limit hits in the LBR are for mediation summaries). The template therefore has no length check.
+The local rules have no page limit for briefs in an adversary proceeding and no font or margin rule beyond LBR 9004(f) (the only page-limit hits in the LBR are for mediation summaries). The font list in LBR Exhibit 1 is for the creditor matrix only. The template therefore has no length check.
 
 ## Layout
 
 - Motion, then the brief on a new page. Each has the same caption (court name, "In re:" block with "Case No." and "Chapter" on the right, party block with rules, "v.", "Adv. Proc. No." on the right), a centered bold title, the body, and a signature block.
-- Text: EB Garamond (the only vendored face), 13 pt, double-spaced at 27.6 pt baseline pitch (`body-leading = 1.477em`, measured with `pdftotext -bbox-layout`).
+- Text: EB Garamond, 13 pt, double-spaced at 27.6 pt baseline pitch (no face named by the rules; gap 7) (`body-leading = 1.477em`, measured with `pdftotext -bbox-layout`).
 - Margins: 1 in, letter paper. Footer: centered page number; the page count restarts at the brief.
 - Paragraphs: first-line indent 0.5 in; not numbered (the exemplars' motion and brief paragraphs are unnumbered; Murtha's motion is numbered, and that is the exception).
 - Headings in the brief are typed by the author ("I.", "A.", "a."), as in the exemplars: level 1 centered bold capitals, level 2 bold, level 3 bold italic.
@@ -72,7 +72,7 @@ The Murtha filing (Plaintiff's motion with brief, 2011, Maxwell Dunn, PLC) is a 
 4. **Dates statement placement.** The LBR says a motion must state the petition date and dates of conversion, dismissal or reinstatement; it does not say where. The template places it after the first paragraph of the motion (the Cluchey motion has no such statement, so the exemplar does not settle this).
 5. **E-mail address.** The LBR requires one (LBR 9004(d)); the Cluchey exemplar prints none. The sample says so in brackets.
 6. **Wording of the motion's title.** The exemplar's title is in capitals; the template prints the sample's title in capitals. The LBR requires the designation to name the moving party and the number of the document; the sample does.
-7. **Typeface.** Only EB Garamond is vendored. At 13 pt its visual size is close to Times New Roman at 12 pt (the exemplars' face).
+7. **Typeface (no face named; EB Garamond kept).** The only formatting rule is LBR 9004(f): "typewritten in at least 12-point type". The font list in LBR Exhibit 1 ("Courier, Helvetica, Arial or Times New Roman") applies only to the creditor matrix .txt file, not to a motion or brief. So no substitute from `docs/FONTS.md` applies, and EB Garamond stays (`docs/FONTS.md`, "No face named"). Checked 2026-10-15 against the LBR PDF. At 13 pt its visual size is close to Times New Roman at 12 pt (the exemplars' face); that is a visual comparison, not a metric match. Render: 7 pages, unchanged.
 8. **Italics.** The exemplar's text layer shows no italic markup, so case names are not italicised in the sample; the template italicises markdown `*...*` where the sample uses it (`*Id.*`).
 9. **Typo carried over.** The Cluchey motion has "ender an Order" and the brief has "Clutchey" and "pary[y]"; the sample keeps the filer's words.
 10. **Overlay default.** `tools/overlay.sh` chooses the first exemplar alphabetically (`cluchey`), which is the primary exemplar here, so the default is correct for this folder.

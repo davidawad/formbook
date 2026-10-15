@@ -7,9 +7,11 @@ Folder: `courts/sixth-circuit/michigan/federal/eastern-district/motion-brief/`.
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-soboleski-2-26-cv-11195-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-soboleski-motion-brief.md` (partial transcription, see Known gaps) |
-| render | ok: `samples/OUTPUT-soboleski-motion-brief.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-soboleski-motion-brief.pdf` and `OVERLAY-soboleski-motion-brief.txt` |
-| pages reviewed | 15 of 15 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | required: none (LR 5.1(a)(3) sets 14 pt for proportional type and names no face); vendored substitute: none needed; font kept: **EB Garamond** (`docs/FONTS.md`, "No face named"). Visual-only: the exemplar is Times New Roman, not a rule. |
+| render | ok: `samples/OUTPUT-soboleski-motion-brief.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| embedded fonts | `pdffonts`: EBGaramond-Regular, -Bold, -Italic only (all embedded) |
+| overlay | ok: `samples/OVERLAY-soboleski-motion-brief.pdf` and `OVERLAY-soboleski-motion-brief.txt` (re-run 2026-10-15) |
+| pages reviewed | 15 of 15 (every page rendered at 60 dpi and viewed on 2026-10-15) |
 
 ## Governing rules
 
@@ -44,7 +46,7 @@ Rule text: the E.D. Mich. local rules PDF (`https://www.mied.uscourts.gov/PDFs/L
 
 1. **One exemplar only.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The CourtListener search (`court=mied`, `type=r`, motions to dismiss) also found Nano Magic, Inc. v. The Hilsinger Company Parent, LLC, 2:26-cv-12212, ECF 7 (26 pp., Liberation Sans; a Rule 12(b)(2) motion with its brief, Honigman LLP). It was checked for text but not saved. Tier 2 is therefore **not** judged against two filers yet.
 2. **Partial sample.** The brief is 22 pages in the exemplar; the sample transcribes the motion, the front matter (issues, authorities, no table of authorities), the introduction, Argument I, II.A to II.C (II.B and II.C are shortened, the case-string paragraphs of II.B other than Stockdale and James are omitted), III and the conclusion, plus the certificate of service. The table of authorities (pages 'passim' and page numbers) is not transcribed; the template does not generate one. The render is 15 pages, one over the 8-14 target, because the front matter is a full page each.
-3. **Font.** As for the complaint: EB Garamond at 14 pt, against Times New Roman in the exemplar (smaller x-height; a question for David).
+3. **Font.** As for the complaint: LR 5.1(a)(3) names no face, so EB Garamond at 14 pt is kept (`docs/FONTS.md`, "No face named"). The exemplar's Times New Roman is a filer's choice, not a rule; the x-height difference is visual only (a question for David).
 4. **Double spacing.** Same reading as the complaint: 2.3em pitch, ~32 pt at 14 pt, matching Times New Roman's double line box.
 5. **Page numbers.** The motion is numbered 1 and 2; the brief cover is unnumbered; the front matter is roman from ii; the body restarts at 1. The exemplar follows the same pattern, but its motion pages and cover are not transcribed page-for-page, so the page numbers in the TOC follow our render, not the exemplar's.
 6. **Contents.** Generated from the body headings with `outline()`; page numbers are typst's. The exemplar's contents are not matched line-for-line (its heading wording is the same).

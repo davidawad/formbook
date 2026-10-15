@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a named style choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LR 5.1(a)(3): proportional type; vendored in fonts/ (no Times is vendored)
+#let font-family = "EB Garamond"        // LR 5.1(a)(3) names no face (any proportional type, 14 pt): kept per docs/FONTS.md "No face named"
 #let type-size = 14pt                   // LR 5.1(a)(3): 14 point for proportional type, footnotes included
 #let margin = 1in                       // LR 5.1(a)(2): at least 1 inch, top, bottom and sides
 #let page-number-size = 12pt            // page numbers are not text under LR 5.1(a)(3); style choice

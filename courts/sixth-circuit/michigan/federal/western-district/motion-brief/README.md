@@ -9,7 +9,8 @@ Folder: `courts/sixth-circuit/michigan/federal/western-district/motion-brief/`. 
 | sample md | `samples/INPUT-valenzuela-brief.md`: the full 11-page filing's body (concise statement through conclusion, footnote, signature); TOC generated; TOA not transcribed |
 | render | ok: `samples/OUTPUT-valenzuela-brief.pdf`, 8 pages (cover, contents, 6 body pages), typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-valenzuela-brief.pdf` and `samples/OVERLAY-valenzuela-brief.txt` (against the primary exemplar) |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; see the review below) |
+| typeface | rule names no face (LCivR 10.1 sets size only; checked against the rule text 2026-10-15). Stays EB Garamond (vendored, `fonts/eb-garamond/`); no substitute applies. Embedded: EB Garamond only (`pdffonts`). |
+| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed 2026-10-15; see the review below) |
 
 Build, from the repo root (`PATH` must include the toolchain):
 
@@ -32,7 +33,7 @@ Verified 2026-10-14.
 | LCivR 7.2(d) | A request for oral argument goes in the caption and in the heading of the brief. | same | `oral_argument_requested` frontmatter, printed under the case number. |
 | LCivR 7.1(a) | A brief states the concise reasons in support of the party's position and cites the rules and authorities relied on. | same | Author content. |
 | LCivR 7.1(d) | Concurrence certificate is required for non-dispositive motions only. | same | Not required here (not produced). |
-| LCivR 10.1 | Double spaced, 8 1/2 x 11, one side; type no smaller than 12 point; margins at least one inch. | same | `type-size`, `pitch`, `margin`, `body-leading`. Footnotes are 12 point too. |
+| LCivR 10.1 | Double spaced, 8 1/2 x 11, one side; type no smaller than 12 point; margins at least one inch. No typeface is named (checked 2026-10-15). | same | `type-size`, `pitch`, `margin`, `body-leading`. Footnotes are 12 point too. |
 | LCivR 10.3 | Date of signing and the address and telephone number of the signing attorney. | same | `signature` frontmatter. |
 | LCivR 5.7(d)(i) | Electronically filed documents must be in PDF digital format. | same | Render is PDF (`typst compile`). |
 | Fed. R. Civ. P. 7(b)(1) | A motion must state with particularity the grounds and the relief sought. | https://www.law.cornell.edu/rules/frcp/rule_7 (verified 2026-10-14) | Author content; the brief's concise statement (section I) states the grounds. |
@@ -76,7 +77,7 @@ Tier-2 items recorded as accepted or open:
 
 - **Table of authorities (OPEN).** The filed brief has one; the template does not generate one. A TOA needs a citation registry (as in the ca9 template: each citation is linked with its authority key and its page recorded), which this doc type does not have. LCivR 7.2(b) excludes tables from the page limit and no local rule requires one, so the brief is complete without it, but the clerk's expectation for an 11-page brief is that it has one. The exemplar's TOA is the target.
 - **Caption (ACCEPTED).** The second filer (Coddington) uses a section-mark (§) column between the parties and the case number; the template uses a party column closed by a rule, as in the complaint. Both forms appear in this district's filings (tier-2 choice).
-- **Font (ACCEPTED).** The filed brief is in a Times-style face; the template uses EB Garamond, the only vendored font. LCivR 10.1 sets 12 point, which is met. See the complaint README for the same question.
+- **Font (ACCEPTED, fonts pass 2026-10-15).** The filed brief is in a Times-style face. LCivR 10.1 names no typeface, so `docs/FONTS.md` gives no substitute and the template keeps EB Garamond; Liberation Serif (Times) is vendored but not required. LCivR 10.1 sets 12 point, which is met. See the complaint README for the same question.
 
 ## Overlay (`samples/OVERLAY-valenzuela-brief.pdf`)
 
