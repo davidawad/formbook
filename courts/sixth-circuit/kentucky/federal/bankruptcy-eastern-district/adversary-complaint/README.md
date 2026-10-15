@@ -88,3 +88,10 @@ Pages reviewed: 14 of 14.
 8. **Lettered lists.** Items are lettered a., b., c. (the Fox exemplar's style). The Kennedy prayer uses capitals A., B., C. (its own style, tier 3).
 9. **Tier-2 count.** Two exemplars from two filers (Dinsmore & Shohl; Nelson Mullins), both E.D. Ky. complaints. Tier 2 is judged against them (see the table above).
 10. **Adversary number.** The Kennedy copy has the adversary number blank. The template prints `Adv. No. ____` when `adversary_number` is empty, which is what the copy shows.
+
+## Engines
+
+- **typst** (primary): `typst/`, unchanged.
+- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 13 pt, exact 24 pt body line pitch, 0.5 in first-line indent, 1 in margins on US Letter, single-spaced caption, signature and footnotes, 12 pt centered PAGE footer). `docx/kyeb-adversary-complaint.lua` builds the caption table, court and title lines, the signature block and the template's paragraph numbering (typed "N." plus a tab; the author types no numbers); lists are lettered a., b., c. Font, size, line pitch, margins, footer and caption layout match the typst form.
+- **Differs from typst**: (a) the caption rules come from the table style, so the rule under the right column and the rule between the two caption rows are drawn too (typst draws them under the left column only). (b) Paragraph numbers are literal text, not a list, so Word and LibreOffice do not renumber them if the text is edited. (c) Line breaks and page breaks follow Word or LibreOffice font metrics, not typst's.
+- **BLOCKED (docx.pdf gates, Gates 0 to 3 on `OUTPUT-<id>.docx.pdf`)**: LibreOffice (`soffice`) is not installed on the box used for this build, so the LibreOffice PDF was not produced and no page was reviewed in the docx engine. `samples/OUTPUT-kennedy-cambrian-19-51200.docx` was produced and checked only for a valid zip and well-formed XML parts; it has not been opened in Word or LibreOffice (no repair-prompt check).

@@ -112,3 +112,18 @@ Pages reviewed: 3 of 3 (fictional sample).
 12. **Relief without notice (KYEB-NOT-002).** The template does not check whether a motion says so; the author must state it in the body.
 13. **Not run:** `tools/tracker.sh` (it rewrites the root `README.md`, `STATUS.md` and per-folder READMEs, which this bead does not own), and `tools/check.sh` (this doc type has no `checks.yaml`, so there are no Gate 0 or Gate 1 checks to run). `court.json` is not changed.
 14. **Unverified:** whether the court's chambers require a separate memorandum under a judge's standing order; not searched.
+1. **No exemplar (BLOCKED).** Every layout choice above that a clerk would expect to see (heading style, hearing-block wording, certificate wording, sub-heading spacing) is a convention unconfirmed by a filing. See `exemplars/SOURCE.md` for the searches and what would unblock it.
+2. **Typeface.** No face named by a rule (KYEB-FORM-001), so EB Garamond at 13 pt stays, per `docs/FONTS.md` (fonts pass, 2026-10-15). Times (`Liberation Serif`) is vendored; see the adversary-complaint README, gap 1, for the open choice.
+3. **Hearing wording.** LBR 9014-1 requires the date, time and location; the labels "Hearing:", "Time:", "Place:", "Objections due:" are the template's own. Not checked against a filing.
+4. **Proposed order.** Required by LBR 9013-1(d); not generated. The APM (§ XVIII) governs how it is attached.
+5. **Certificate of service.** Printed only when `certificate_of_service` is given. The FRBP 9014(b) requirement is for service, not a particular certificate form; the wording in the test sample is the template's sample, not a form.
+6. **Page limits and the memorandum.** No page or word limit applies under the E.D. Ky. bankruptcy rules located (LBR 9013-2 does not exist in this court's list). The template does not count pages.
+7. **Relief without notice (KYEB-NOT-002).** The template does not check whether a motion says so; the author must state it in the body.
+8. **Unverified:** whether the court's chambers require a separate memorandum under a judge's standing order; not searched.
+
+## Engines
+
+- **typst** (primary): `typst/`, unchanged.
+- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 13 pt, exact 24 pt body line pitch, 0.5 in first-line indent, 1 in margins on US Letter, single-spaced caption, notice of hearing, signature and footnotes, 12 pt centered PAGE footer). `docx/kyeb-motion-brief.lua` builds the caption table, court and title lines, the notice of hearing (under the title, as in the typst form), the signature block and the certificate of service. Headings are the author's markdown headings; lists are lettered a., b., c.
+- **Differs from typst**: (a) the caption rules come from the table style: the rule under the right column and the rule between the two caption rows are drawn too (typst draws them under the left column only). (b) Line and page breaks follow Word or LibreOffice font metrics, not typst's.
+- **BLOCKED (docx.pdf gates, Gates 0 to 3 on `OUTPUT-<id>.docx.pdf`)**: LibreOffice (`soffice`) is not installed on the box used for this build, so the LibreOffice PDF was not produced and no page was reviewed in the docx engine. `samples/OUTPUT-generic-motion-brief.docx` was produced and checked only for a valid zip and well-formed XML parts; it has not been opened in Word or LibreOffice. The motion has no filed exemplar (see the BLOCKED line above), so the docx layout is no more verified than the typst layout.
