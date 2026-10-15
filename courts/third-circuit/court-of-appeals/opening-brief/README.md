@@ -51,7 +51,7 @@ The rules are the court's, not the exemplar's. Where the rules leave a choice op
 
 ## Choices the exemplar settles
 
-- **Typeface**: EB Garamond, the only serif family vendored in `fonts/`. FRAP 32(a)(5) allows any proportional serif at 14 pt. The exemplar is Times New Roman. Garamond is a choice of face, not of size.
+- **Typeface**: EB Garamond. Rule names no face: FRAP 32(a)(5)-(6) and L.A.R. 32.1(c) (2011 text, checked 2026-10-15) name none, so `docs/FONTS.md` "no face named" applies. FRAP 32(a)(5) allows any proportional serif at 14 pt. The exemplar is Times New Roman. Garamond is a choice of face, not of size. Metric compatibility: n/a (no court-named face).
 - **Line pitch**: `body-leading = 0.94em` (the same value as the ca9 template, which records it as double spacing). Measured in this render: body line pitch 31.4 pt on 14 pt type (2.24 × type size). This is our render, not a measurement of the exemplar.
 - **Heading scheme**: I. / A. / 1. / a. at levels 2 to 5, both inside and outside the Argument. The exemplar numbers its Statement of the Case I., II. and its Argument I., II. the same way. The ca9 centred point headings in the Argument are not used.
 - **Section order**: as above, with the related-cases statement after the issues (L.A.R. 28.1(a)(2)); the exemplar follows this, and ca9's placement before the certificates does not apply in this court.

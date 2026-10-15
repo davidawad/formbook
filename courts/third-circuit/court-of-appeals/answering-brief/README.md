@@ -42,7 +42,7 @@ The overlay pairs each sample page with the filed page sharing the most words, s
 - Table of authorities continuation (ours p. 5): 6.9%. The pairing is unreliable on table pages, which hold citations in a different order than the filed version.
 - Filed p. 28 is paired twice (ours p. 17 and 18). That is a pairing artifact, not a layout fault.
 
-Typeface: the filed brief is in Century Schoolbook; the template uses EB Garamond. FRAP 32(a)(5) allows any serif 14-point face, so this is an open choice, not a rule violation. The overlay shows the difference in every body line.
+Typeface: no face is named by the rule (FRAP 32(a)(5)-(6); L.A.R. 32.1(c), 2011 text, checked 2026-10-15), so the template keeps EB Garamond, the "no face named" substitute in `docs/FONTS.md`. The filed brief is in Century Schoolbook; FRAP 32(a)(5) allows any serif 14-point face, so this is an open choice, not a rule violation. The overlay shows the difference in every body line.
 
 ## Pages reviewed (Gate 2 for this render)
 
