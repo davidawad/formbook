@@ -17,7 +17,7 @@ Verified 2026-10-14 against the courts.ca.gov rule pages (rule 8.204 and rule 8.
 
 | Requirement | Source | Value used in the template |
 |---|---|---|
-| Font style | Rule 8.74(b)(1) (https://courts.ca.gov/cms/rules/index/eight/rule8_74); Rule 8.204(b)(2)-(3) | Proportionally spaced serif. Century Schoolbook is "preferred", not required. EB Garamond is used because it is the only serif vendored in `fonts/`, and the exemplar is Garamond. |
+| Font style | Rule 8.74(b)(1) (https://courts.ca.gov/cms/rules/index/eight/rule8_74); Rule 8.204(b)(2)-(3) | Quoted 2026-10-15: "The font style must be a proportionally spaced serif face. Century Schoolbook is preferred." The rule allows any proportional serif, so the face is not named. EB Garamond (`font-family`) stays; the exemplar is Garamond. |
 | Font size | Rule 8.204(b)(4) (https://courts.ca.gov/cms/rules/index/eight/rule8_204); Rule 8.74(b)(1) | 13 pt, including footnotes (`type-size`). Confirmed in both rules. |
 | Line spacing | Rule 8.204(b)(5); Rule 8.74(b)(2) | 1.5 spaced (`body-leading`). Headings, footnotes and block quotations single-spaced. |
 | Margins | Rule 8.204(b)(6); Rule 8.74(b)(3) | Left and right 1.5 in, top and bottom 1 in (`side-margin`, `top-margin`). |
@@ -34,7 +34,7 @@ Verified 2026-10-14 against the courts.ca.gov rule pages (rule 8.204 and rule 8.
 - **Word limit for a reply brief.** From memory, a reply brief may be limited to 9,800 words; this is not in the repo and was not confirmed. The fetched text of rule 8.204(c)(1) does not state that figure and applies 14,000 words to any computer-produced brief. The exemplar's certificate says 10,532 words, which is over 9,800 and under 14,000, so the exemplar is consistent with the fetched text. **David should confirm the reply limit against the official rule before a PR cites it.** The template uses 14,000 until that is settled.
 - **The exemplar's margins.** The exemplar is from 2022 and was not measured for margins. The template follows the rule text as fetched (1.5 in left and right), the same choice as the `opening-brief` folder.
 - **The e-filing stamp.** The exemplar's "Document received by the CA 6th District Court of Appeal" header is not reproduced: it is an e-filing stamp, not part of the brief's text.
-- **Font.** Century Schoolbook is the preferred face under Rule 8.74(b)(1), and it is not vendored. Adding a font is outside this unit (`fonts/` is shared), so EB Garamond stands in.
+- **Font.** Century Schoolbook is the preferred face under Rule 8.74(b)(1), not a required one; the rule allows any proportional serif. EB Garamond stays. `fonts/tex-gyre-schola/` is vendored and could replace it if David decides the preference should win; not changed here.
 
 ## Gate 2: visual review of `samples/OUTPUT-kirk-reply-brief.pdf`
 

@@ -31,7 +31,7 @@ All rules are California Rules of Court. Verified 2026-10-14 against the courts.
 
 | Requirement | Rule and subdivision | Source | Used for |
 |---|---|---|---|
-| Font type: any conventional roman face, proportional or monospaced; case names italic | rule 8.204(b)(2), (b)(3) | https://www.courts.ca.gov/cms/rules/index/eight/rule8_204 | `font-family`; `*Case v. Name*` in the markdown |
+| Font type: any conventional roman face, proportional or monospaced; case names italic. Rule 8.74(b)(1) (electronic filing) adds: a proportionally spaced serif, Century Schoolbook "preferred" | rule 8.204(b)(2), (b)(3); rule 8.74(b)(1) | https://www.courts.ca.gov/cms/rules/index/eight/rule8_204; https://courts.ca.gov/cms/rules/index/eight/rule8_74 | `font-family`; `*Case v. Name*` in the markdown. Face: none named, so EB Garamond (vendored; visual-only stand-in if Century is wanted). Checked 2026-10-15 against the rule text: the font list stays EB Garamond. |
 | Font size, footnotes included, not smaller than 13 point | rule 8.204(b)(4) | same | `type-size = 13pt`; footnote entry at `type-size` |
 | Spacing: lines unnumbered, at least 1½ spaced; headings, footnotes and block quotations may be single-spaced | rule 8.204(b)(5) | same | `body-leading` (about 23.4 pt pitch at 13 pt, the exemplar's measured pitch of 23.5 pt) |
 | Margins: at least 1½ in left and right, 1 in top and bottom | rule 8.204(b)(6) | same | `margin-side`, `margin-tb` |
