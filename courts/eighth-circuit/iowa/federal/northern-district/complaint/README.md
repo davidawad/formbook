@@ -12,6 +12,14 @@ Folder: `courts/eighth-circuit/iowa/federal/northern-district/complaint/`.
 | overlay | ok: `samples/OVERLAY-iowa-rotocast-complaint.pdf` and `.txt` (`tools/overlay.sh`, exemplar passed explicitly). The exemplar PDF is not committed in this snapshot; the overlay used the RECAP copy at the URL in `exemplars/SOURCE.md` (9 pages). |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed in the typeface pass, 2026-10-14) |
 
+## Engines
+
+- **typst** (primary): `typst/`; the output and review above.
+- **docx**: `docx/` (`make-reference.sh` builds `reference.docx` from pandoc's default; `complaint.lua` writes the court title, caption, numbered paragraphs, lettered prayer and signature; `render.sh` runs pandoc). Output: `samples/OUTPUT-iowa-rotocast-complaint.docx` and `samples/OUTPUT-iowa-rotocast-complaint.docx.pdf` (LibreOffice 26.8.1 conversion, `tools/render.sh --engine docx`). Pages reviewed: 8 of 8, every page rendered at 60 dpi and viewed (2026-10-15).
+  - Matches typst: letter paper with 1-inch margins; EB Garamond 12 pt (embedded in the PDF, no fallback face); double spacing at 24 pt exact; single spacing at 13.8 pt for the court title, caption, counsel and signature; half-inch first-line indent; paragraphs numbered 1 to 48 across the headings; centered caps and bold headings; the caption with a column of `)` marks; prayer items lettered A to G at 0.5 in; WHEREFORE and the jury demand unnumbered; the date in the signature block; a centered page number at the foot. Page count is the same as typst (8).
+  - Differs: paragraph numbers and the lettered prayer are typed text, as in typst, not Word auto-numbering, so an inserted paragraph does not renumber itself.   - Differs: pagination moves by one or two lines in places. The docx starts page 2 with JURISDICTION AND VENUE (typst starts it with paragraph 7), because the heading and its paragraph are kept together and the lines above them run a little longer in LibreOffice. Caption marks are one per party line in both engines, so a wrapped party name is short one mark in both.
+  - docx BLOCKED items: none for this sample. Not run: Word (not installed here, so the file is checked in LibreOffice and by a pandoc read-back, not in Word); the repo gate scripts (see gap 7).
+
 ## Governing rules
 
 Primary sources, fetched 2026-10-14:
