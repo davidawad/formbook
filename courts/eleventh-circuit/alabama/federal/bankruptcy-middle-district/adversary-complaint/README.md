@@ -71,3 +71,11 @@ Every page of `samples/OUTPUT-southeastern-stud.pdf` (12 pages) was rendered at 
 - **Jurisdiction and consent.** The filed copy does not state consent. The sample's `jurisdiction.consent` is a bracketed placeholder the pleader must replace; the output carries the bracket.
 - **Not produced:** the summons (Form B 2500A), the certificate of service, Exhibit A (Payoff Letter, not in the filed text), and the cover sheet. LBR 7005-1(c) requires the summons cover sheet and the certificate of service to be filed with the complaint; they are separate documents.
 - **No gate run.** `tools/check.sh` and `tools/check-selftest.sh` were not run for this doc type; this change is render, overlay and visual review only.
+
+## Run status (2026-10-15)
+
+- Exemplar re-downloaded from the RECAP URL in `exemplars/SOURCE.md` (13 pages, 807645 bytes, sha256 `cf01ec6f27dff5ae480d5c5caa6a783dea011aa630b12fb3ea1003d284010366`) to `exemplars/FILED-EXAMPLE-southeastern-stud-adversary-complaint.pdf`.
+- **render=ok**: `sh tools/render.sh <this-dir> samples/INPUT-southeastern-stud.md` wrote `samples/OUTPUT-southeastern-stud.pdf` (12 pages).
+- **overlay=ok**: `sh tools/overlay.sh <this-dir> southeastern-stud` wrote `samples/OVERLAY-southeastern-stud.pdf` and `.txt`; page pairing matches the table above.
+- **pages_reviewed=12**: every page of the render was rasterized and viewed in this run. No new issues; the Gate 2 table above stands.
+- Tier 2 remains unmet: only one filer's almb adversary complaint is on record (see Gaps).

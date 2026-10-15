@@ -35,3 +35,11 @@ All three pages of `samples/OUTPUT-synthetic-stay-motion.pdf` were rendered at 8
 - **Local rules currency.** The rules cited are the 2017 set. The 2024 set (effective 2024-04-01, which the court's ECF notes refer to) includes LBR 9013-1 "Motion Practice" and LBR 9013-3 "Certificates of service for motions" per the 2023 draft table of contents; the adopted text was not retrieved. Those requirements are not encoded here.
 - **Service.** FRBP 9014(b) (service of a motion in a contested matter) was not fetched this session; the certificate text is a placeholder, not a checked statement of the service method.
 - **No gate run.** `tools/check.sh` and `tools/check-selftest.sh` were not run for this doc type.
+
+## Run status (2026-10-15)
+
+- **exemplar=no.** No filed almb motion was found. Two more WebSearch passes (standard mode) returned only court hearing calendars and an order template from almb.uscourts.gov; no RECAP motion PDF. `exemplars/` holds no PDF, so the transcription and overlay steps in this README could not be done.
+- **render=ok** on the existing synthetic sample only: `sh tools/render.sh <this-dir> samples/INPUT-synthetic-stay-motion.md` wrote `samples/OUTPUT-synthetic-stay-motion.pdf` (3 pages). This is a template check, not a filed-form comparison, and is below the 8-14 page bar.
+- **overlay=fail.** `sh tools/overlay.sh <this-dir> synthetic-stay-motion` exits 1 with "no exemplar pdf"; no OVERLAY file was written.
+- **pages_reviewed=3** (all three pages of the synthetic render were viewed as PNG). Page 1 caption and headings, page 2 grounds and signature block, page 3 certificate of service: render layout is clean; content is placeholder text.
+- Still needed: a RECAP-hosted almb motion (see the Gaps above), then a real INPUT transcription and overlay.
