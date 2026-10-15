@@ -25,13 +25,24 @@ Primary source: the FISCR Rules of Procedure, as posted by the court at <https:/
 
 FRAP text is incorporated by FISCR R. 14(d) and 15(d)(2). Checked against <https://www.law.cornell.edu/rules/frap/rule_32> and <https://www.law.cornell.edu/rules/frap/rule_29> on 2026-10-14.
 
+## Typeface
+
+| Item | Value |
+|---|---|
+| Face required by the court | None. FISCR R. 9(c) (paper, double spacing, one-inch margins, page numbers) names no face; R. 15(d)(2) defers to FRAP 32(a)(5), which requires a proportionally spaced serif face at 14 point or larger and names no face. Rechecked against the posted rules text on 2026-10-14. |
+| Vendored substitute | None needed. No court-named face, so the template keeps the default. |
+| Typst family in `typst/fiscr-amicus-brief.typ` | `EB Garamond` (`font-family`) |
+| Fit | n/a (no court-named face to substitute) |
+
+The filed exemplar's embedded font list names Times New Roman (non-embedded) for body text. That is one filer's choice, not a rule, and the exemplar is the only filer available for this doc type; it is a tier-3 style and is not chased. The 14-point size comes from FRAP 32(a)(5)(A) and is kept.
+
 | Rule | Requirement | Where the template uses it |
 |---|---|---|
 | FISCR R. 9(c)(1) | 8½ × 11 inch opaque white paper | `page(paper: "us-letter")` |
 | FISCR R. 9(c)(2) | Typed double-spaced; quotations over two lines may be indented and single-spaced | `body-leading`, `single-leading`, quotation style |
 | FISCR R. 9(c)(3) | Margins of at least one inch on all four sides | `page-margin = 1in` |
 | FISCR R. 9(c)(4) | Page numbered in the lower margin | footer, centered |
-| FISCR R. 9(c), 15(d)(2); FRAP 32(a)(5)(A) | Proportionally spaced serif face, 14-point or larger | `font-family`, `type-size = 14pt`, footnotes 14 pt |
+| FISCR R. 9(c), 15(d)(2); FRAP 32(a)(5)(A) | Proportionally spaced serif face, 14-point or larger | `font-family` (EB Garamond; no face named, see Typeface), `type-size = 14pt`, footnotes 14 pt |
 | FRAP 32(a)(6) | Plain roman; italics or bold for emphasis; case names italic | markdown emphasis; the template does not guess case names |
 | FISCR R. 15(d)(1); 14(a)(2) | Amicus brief must conform to R. 14(a)(2)-(8) and (10); (A) jurisdictional statement, (B) statement of the issues and (C) standard of review need not appear | `required-sections` (no jurisdiction or issues section), `needs-standard-of-review = false` |
 | FISCR R. 14(a)(2) | Table of contents, with page references | `toc-section` (generated) |
@@ -68,7 +79,7 @@ Cover (page 1, unnumbered); then, in roman numerals from ii: Statement Regarding
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-donohue-amicus-brief.pdf` was rendered at 60 dpi and viewed (13 of 13), after the last template change. Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-donohue-amicus-brief.pdf` was rendered at 60 dpi and viewed (13 of 13), after the last template change and again on 2026-10-14 in the fonts pass (no font change; the court names no face). Typst printed no warnings. Fonts embedded (`pdffonts`): EB Garamond only.
 
 | PDF page | Printed page | Content | Result |
 |---|---|---|---|
@@ -89,7 +100,7 @@ Every page of `OUTPUT-donohue-amicus-brief.pdf` was rendered at 60 dpi and viewe
 Tier-2 findings (OPEN or ACCEPTED):
 
 - ACCEPTED: the sample has two point headings (I. and II. in the template's numbering), while the filed brief numbers its points I to V; the template numbers points in order, and the sample omits Parts I.A-III.
-- ACCEPTED: typeface. The filed brief sets 14-point Times New Roman (its certificate says so); the template uses EB Garamond, the only vendored serif. FRAP 32(a)(5)(A) requires a proportional serif at 14 pt, and the rules do not name a face.
+- ACCEPTED: typeface. The filed brief sets 14-point Times New Roman (its certificate says so; its font list is Times New Roman, non-embedded); the template uses EB Garamond. FRAP 32(a)(5)(A) requires a proportional serif at 14 pt, and neither FISCR R. 9(c) nor R. 15(d)(2) names a face, so EB Garamond is kept (see Typeface). Single filer, tier 3.
 - ACCEPTED: the page-numbering and point-numbering differences above are the excerpt's, not the template's. The cover's exact layout is not reproduced (Known gaps 4); the template's cover is the ca1 cover adapted to FISCR's caption.
 
 ## Known gaps
