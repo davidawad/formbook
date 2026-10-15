@@ -7,7 +7,8 @@ Folder: `courts/ninth-circuit/california/federal/eastern-district/motion-brief/`
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-wine-2-26-cv-02243-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-wine-motion-brief.md`: caption, notice of motion (pages 1 to 2 of the filing) and its signature, the table of contents and table of authorities (in full), memorandum introduction and facts (part), Rule 12(e) argument (part), conclusion and signature. Memorandum Part III.A to III.C are not transcribed (see Known gaps). |
-| render | ok: `samples/OUTPUT-wine-motion-brief.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this folder> samples/INPUT-wine-motion-brief.md`) |
+| typeface | face required: none in the E.D. Cal. Local Rules (checked, 2026-10-14; the local-rules text itself was not re-fetched on 2026-10-15). Judge standing orders may set a face or size; the assigned judge's standing order (TLN Civil Standing Order) was not read, so it is not verified. Font: **EB Garamond** (kept; `docs/FONTS.md` "No face named"). Metric-compatible: n/a. Visual only: EB Garamond is not Times. |
+| render | ok: `samples/OUTPUT-wine-motion-brief.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -Italic embedded), no warnings (`sh tools/render.sh <this folder> samples/INPUT-wine-motion-brief.md`) |
 | overlay | ok: `samples/OVERLAY-wine-motion-brief.pdf` and `samples/OVERLAY-wine-motion-brief.txt` (`sh tools/overlay.sh <this folder> wine-motion-brief`) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
 
