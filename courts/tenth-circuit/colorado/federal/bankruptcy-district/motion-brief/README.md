@@ -97,3 +97,16 @@ sh tools/overlay.sh $D katzenberger-motion-brief $D/exemplars/FILED-EXAMPLE-katz
 8. **ECF header** ("Case 26-01048-MER Doc#:28 Filed:08/17/26 Entered...") is not printed in the render; it is the filing system's stamp and is not part of the document text.
 9. **Certificate of service** content is from the exemplar. Whether D.C.COLO requires it in this form was not verified.
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, which this doc-type folder is not. The brief forbids editing `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
+
+## Engines
+
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `cob.lua` builds the caption, the signature table, the heading labels (`I.`, `A.`, `1.`) and the certificate of service). Render: `sh tools/render.sh --engine docx <doc-folder> samples/INPUT-katzenberger-motion-brief.md` writes `samples/OUTPUT-katzenberger-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8.1, vendored EB Garamond). Footnotes are native Word footnotes.
+
+- Matches the typst reference: court title, caption (debtor block, adversary block with its case number), bold capital title, 13 pt EB Garamond, letter, 1.5 in top margin and 1 in elsewhere, double spacing (exact 24 pt), 0.5 in first-line indent, `#` headings centered bold capitals, `##` and `###` headings numbered `I.` and `A.` and hung at the margin, single-spaced block quotation indented 0.5 in both sides, the footnote at 13 pt, the signature block (`Dated:` left, `Respectfully submitted,` and the firm and signer right), the certificate of service after the signature, and the 11 pt centered page number starting at 1. Page count 14 = typst 14. All 14 docx pages and all 14 typst pages were rasterized at 60 dpi and viewed.
+- Differs from typst (renderer or tier 2, not a mandated-form miss):
+  - Page breaks: the body in LibreOffice starts about 6 pt lower on each page and loses a line or two over the document, so breaks fall within a line or two of typst's; page 2 starts with a different paragraph than typst. Page count matches.
+  - Signature block: typst keeps it on page 13; the docx moves the signature table to page 14 with the certificate, because the docx has about one line less space on page 13. The signature content is identical.
+  - Heading VI: the typst heading wraps "Code." to a second line; the docx heading fits on one line (hanging-indent measure differs).
+  - Caption: the adversary designation lines sit a few points lower than typst.
+- BLOCKED: none declared. This folder has no `checks.yaml`, so there are no docx check IDs to block. `sh tools/check.sh <court-dir> --engine docx` fails at the court folder (`checks.yaml` missing), see the PR notes; it was not made to pass.
+- Not checked: Microsoft Word (not available here). The `.docx` is a valid zip with well-formed XML parts and converts in LibreOffice without error.
