@@ -1,0 +1,305 @@
+% U.S. Court of Appeals for the District of Columbia Circuit: appellant's reply brief, LaTeX engine.
+%
+% Built by latex/render.sh: pandoc reads the markdown with the filter cadc.lua (this directory), this template is
+% compiled with tectonic, and the aux file is read back until it settles (the table of contents and table of
+% authorities carry page numbers). Matches typst/cadc-reply-brief.typ: same parameters, same order of parts.
+% Content-agnostic: no case-specific text, no coordinates measured off any filed brief.
+% Frontmatter fields: see ../README.md, "Markdown contract".
+\documentclass[14pt,letterpaper]{extarticle}
+\usepackage{fontspec}
+% FRAP 32(a)(4): 1 inch on all four sides.
+\usepackage[letterpaper,left=1in,right=1in,top=1in,bottom=1in,footskip=0.5in,headheight=0pt,headsep=0pt]{geometry}
+\usepackage{enumitem}
+\usepackage{changepage}
+\usepackage[hidelinks]{hyperref}
+\makeatletter
+
+% FRAP 32(a)(5)(A), Circuit Rule 28: 14-point serif. Liberation Serif, vendored in fonts/liberation-serif/.
+% The renderer passes fontdir (the vendored fonts/ directory, trailing slash). No system font, no fallback.
+\setmainfont[Path=$fontdir$liberation-serif/, Extension=.ttf,
+  UprightFont=LiberationSerif-Regular, BoldFont=LiberationSerif-Bold,
+  ItalicFont=LiberationSerif-Italic, BoldItalicFont=LiberationSerif-BoldItalic,
+  Ligatures=TeX]{LiberationSerif-Regular}
+
+% Line pitch, measured on the typst reference (typst/cadc-reply-brief.typ, 14 pt): body 25.9 pt, single 14.2 pt.
+\newcommand\dc@double{\fontsize{14pt}{25.89pt}\selectfont}
+\newcommand\dc@single{\fontsize{14pt}{14.18pt}\selectfont}
+\newlength\dc@half \setlength{\dc@half}{0.5in}
+
+% Single space after a period (typst does the same). No hyphenation: a word comes out of the PDF whole.
+\frenchspacing
+\lefthyphenmin=100
+\righthyphenmin=100
+\tolerance=2000
+\emergencystretch=0pt
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\hbadness=10000
+\raggedright
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\setlength{\headheight}{0pt}
+\pagestyle{plain}
+% Top of the first line on a page at the 1 in margin (typst: ascender at the margin).
+\topskip=9pt
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\pandocbounded}[1]{#1}
+% Lists: the bullet sits at the margin and the text 11.9 pt in (typst reference).
+\setlist[itemize]{label=\textbullet, leftmargin=11.9pt, labelwidth=11.9pt, labelsep=0pt, align=left,
+  itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt}
+\setlist[enumerate]{leftmargin=0.5in, itemsep=0pt, parsep=0pt, topsep=0pt, partopsep=0pt}
+
+% Footnotes: 14 pt, single-spaced (FRAP 32(a)(5), (a)(4)).
+\renewcommand\footnotesize{\dc@single}
+\setlength{\footnotesep}{0.5\baselineskip}
+\setlength{\skip\footins}{0.9\baselineskip}
+\renewcommand\footnoterule{\kern-3pt\hrule width 30\textwidth height 0.5pt\kern 2.6pt}
+\renewcommand\@makefntext[1]{\noindent\textsuperscript{\@thefnmark}\hskip 0.25em #1}
+
+% Block quotations: indented 0.5 in on both sides, single-spaced, 1 em above and below (typst reference).
+\renewenvironment{quote}{%
+  \par\addvspace{1em}\nointerlineskip%
+  \begin{adjustwidth}{\dc@half}{\dc@half}\dc@single\setlength{\parindent}{0pt}%
+}{%
+  \end{adjustwidth}\par\addvspace{1em}\nointerlineskip%
+}
+
+% ---------------------------------------------------------------------------
+% Headings (typst: style-heading, heading-label). Level 1: centered bold capitals, unnumbered.
+% Levels 2-5 are numbered. Under "Argument": I. / A. / 1. / a.; elsewhere A. / 1. / a. / (1).
+% Levels 2 and 3 are bold; levels 4 and 5 bold italic. Levels 1-4 go to the contents (typst: outline depth 4).
+% The filter (cadc.lua) puts \dc@setarg{1} or \dc@setarg{0} before each level-1 heading: 1 if it is "Argument".
+% ---------------------------------------------------------------------------
+\newcounter{dcLa}
+\newcounter{dcLb}[dcLa]
+\newcounter{dcLc}[dcLb]
+\newcounter{dcLd}[dcLc]
+\newif\ifdc@inarg
+% Set at the end of a heading and cleared by the filter before every other block (cadc.lua): a heading after a heading
+% takes the space of the previous heading, as typst collapses the two spaces into the larger one.
+\newif\ifdc@afterhead
+\newcommand\dc@setarg[1]{\ifnum#1=1 \dc@inargtrue\else\dc@inargfalse\fi}
+\newcommand\dc@labA{\ifdc@inarg\Roman{dcLa}.\else\Alph{dcLa}.\fi}
+\newcommand\dc@labB{\ifdc@inarg\Alph{dcLb}.\else\arabic{dcLb}.\fi}
+\newcommand\dc@labC{\ifdc@inarg\arabic{dcLc}.\else\alph{dcLc}.\fi}
+\newcommand\dc@labD{\ifdc@inarg\alph{dcLd}.\else(\arabic{dcLd})\fi}
+
+% The heading's contents entry is written inside the heading's paragraph (#2 / #5): a \addcontentsline between two
+% vertical glues would stop them from merging (typst collapses the space between two blocks to the larger one).
+\newcommand\dc@hone[2]{%
+  \par\addvspace{1.5em}%
+  \begingroup\centering\dc@single\bfseries\MakeUppercase{#1}#2\par\endgroup
+  \par\nopagebreak\addvspace{18.4pt}\nointerlineskip\dc@afterheadtrue}
+% Numbered heading: label in a 0.5 in box, text hangs under the text (typst: hang(ind + 0.5in)).
+% #1 indent, #2 font style, #3 label, #4 text, #5 contents entry (or nothing).
+\newcommand\dc@hnum[5]{%
+  \par\ifdc@afterhead\else\addvspace{1.1em}\fi%
+  \begingroup\dc@single#2\leftskip=#1\relax
+  \hangindent=0.5in\hangafter=1\relax
+  \noindent\makebox[0.5in][l]{#3}#4#5\par
+  \endgroup
+  \par\nopagebreak\addvspace{0.9em}\nointerlineskip\dc@afterheadtrue}
+
+\renewcommand\label[1]{}
+\renewcommand\section[1]{%
+  \setcounter{dcLa}{0}\setcounter{dcLb}{0}\setcounter{dcLc}{0}\setcounter{dcLd}{0}%
+  \dc@hone{#1}{\addcontentsline{toc}{section}{#1}}}
+\renewcommand\subsection[1]{%
+  \stepcounter{dcLa}\edef\dc@curlab{\dc@labA}%
+  \dc@hnum{0pt}{\bfseries}{\dc@curlab}{#1}{\addcontentsline{toc}{subsection}{\protect\dc@tocentry{\dc@curlab}{#1}}}}
+\renewcommand\subsubsection[1]{%
+  \stepcounter{dcLb}\edef\dc@curlab{\dc@labB}%
+  \dc@hnum{0.5in}{\bfseries}{\dc@curlab}{#1}{\addcontentsline{toc}{subsubsection}{\protect\dc@tocentry{\dc@curlab}{#1}}}}
+\renewcommand\paragraph[1]{%
+  \stepcounter{dcLc}\edef\dc@curlab{\dc@labC}%
+  \dc@hnum{1in}{\bfseries\itshape}{\dc@curlab}{#1}{\addcontentsline{toc}{paragraph}{\protect\dc@tocentry{\dc@curlab}{#1}}}}
+\renewcommand\subparagraph[1]{%
+  \stepcounter{dcLd}\edef\dc@curlab{\dc@labD}%
+  \dc@hnum{1.5in}{\bfseries\itshape}{\dc@curlab}{#1}{}}
+
+% Contents: dot leaders, page on the last line (typst: toc-entry). The entry text written to the toc file is
+% built from macros with no \par (hyperref expands it when writing); the paragraph layout is in \dc@tocrow,
+% called by the \l@ macros when the toc file is read.
+
+\newcommand\dc@tocentry[2]{\makebox[0.5in][l]{#1}#2}
+% #1 space above, #2 indent of the entry, #3 text (the page is \dc@pg).
+\newcommand\dc@tocrow[3]{%
+  \par\addvspace{#1}%
+  \begingroup\dc@single\leftskip=#2\relax\hangindent=0.5in\hangafter=1\relax
+  \noindent#3\nobreak\hskip 0.8em\nobreak\leaders\hbox to 0.4em{\hss.\hss}\hfill\nobreak\hbox to 2.6em{\hfil\dc@pg}\par
+  \endgroup}
+\renewcommand\l@section[2]{\def\dc@pg{#2}\dc@tocrow{0.6em}{0pt}{\MakeUppercase{#1}}}
+\renewcommand\l@subsection[2]{\def\dc@pg{#2}\dc@tocrow{0.35em}{0pt}{#1}}
+\renewcommand\l@subsubsection[2]{\def\dc@pg{#2}\dc@tocrow{0.35em}{0.5in}{#1}}
+\renewcommand\l@paragraph[2]{\def\dc@pg{#2}\dc@tocrow{0.35em}{1in}{#1}}
+
+% ---------------------------------------------------------------------------
+% Table of authorities (Circuit Rule 28(a)(2)): every page of each citation; "passim" from 7 pages (typst reference).
+% Pages are written to the aux file where each citation starts, then read back in the next pass.
+% ---------------------------------------------------------------------------
+\ExplSyntaxOn
+\cs_new_protected:Npn \dc@toaentry #1 #2
+  {
+    \seq_if_exist:cF { g_dc_toa_#1_seq } { \seq_new:c { g_dc_toa_#1_seq } }
+    \seq_if_in:cnF { g_dc_toa_#1_seq } { #2 }
+      { \seq_gput_right:cn { g_dc_toa_#1_seq } { #2 } }
+  }
+\cs_new:Npn \dc@toapages #1
+  {
+    \seq_if_exist:cTF { g_dc_toa_#1_seq }
+      {
+        \int_compare:nNnTF { \seq_count:c { g_dc_toa_#1_seq } } > { 6 }
+          { \emph{passim} }
+          { \seq_use:cn { g_dc_toa_#1_seq } { , } }
+      }
+      { }
+  }
+\ExplSyntaxOff
+\newcommand\dc@toacite[2]{\protected@write\@auxout{}{\string\dc@toaentry{#1}{\thepage}}#2}
+\newif\ifdc@tofirst
+\newcommand\dc@toagroup[1]{%
+  \par\ifdc@tofirst\addvspace{1em}\else\addvspace{1.4em}\fi
+  \noindent\textbf{#1}\ifdc@tofirst\hfill\textbf{\underline{Page(s)}}\fi\par
+  \par\nopagebreak\addvspace{0.2em}\dc@tofirstfalse}
+% One entry: the name (with its comma) and the citation on the next line, 0.35 in in; page list at the right.
+\newcommand\dc@toaline[2]{%
+  \par\addvspace{0.7em}%
+  % One unbreakable block per entry (typst: breakable: false).
+  \noindent\begin{minipage}[t]{\linewidth}\dc@single\hangindent=0.35in\hangafter=1\relax
+  #2\nobreak\hskip 0.8em\nobreak\leaders\hbox to 0.4em{\hss.\hss}\hfill\nobreak\hbox{\dc@toapages{#1}}\par
+  \end{minipage}\par}
+
+% ---------------------------------------------------------------------------
+% Cover (FRAP 32(a)(2)). Typst cover: centered, single-spaced, 1 em between blocks. Centering is a group, not an
+% environment, so no list skips are added above or below.
+% Rules take the vertical space the typst cover gives them (measured on the typst reference cover).
+\newcommand\dc@dblrule{\par\nointerlineskip\hbox to\linewidth{\hss\rule{\linewidth}{1.6pt}\hss}\nointerlineskip
+  \vspace{2.5pt}\nointerlineskip\hbox to\linewidth{\hss\rule{\linewidth}{0.5pt}\hss}\nointerlineskip\vspace{12.3pt}}
+\newcommand\dc@shortrule{\par\nointerlineskip\hbox to\linewidth{\hss\rule{2in}{0.7pt}\hss}\nointerlineskip\vspace{8pt}}
+% Formal lines from the 50% column (typst: pad(left: 50%)).
+\newcommand\dc@halfcol[1]{\par\noindent\hspace*{0.5\linewidth}#1\par}
+% Form signature line (typst: form-sig-line): signature and date, each in a column of half the width.
+\newcommand\dc@formsig{\par\addvspace{1.6em}\noindent%
+  \begin{minipage}[t]{0.45\linewidth}\raggedright
+  /s/ $signature.signer$\par Signature
+  \end{minipage}\hfill%
+  \begin{minipage}[t]{0.45\linewidth}\raggedright
+  $date$\par Date
+  \end{minipage}\par}
+
+\begin{document}
+\thispagestyle{empty}
+\dc@single
+\setlength{\parskip}{0pt}
+\begingroup\centering
+\topskip=0pt
+\vspace*{3.8pt}
+\textbf{No.\ $case_number$}\par
+\setlength{\parskip}{3.5pt}
+\topskip=9pt
+\vspace{1em}
+\dc@dblrule
+\vspace{1em}
+\parbox{4.6in}{\centering\textbf{IN THE UNITED STATES COURT OF APPEALS FOR THE DISTRICT OF COLUMBIA CIRCUIT}}\par
+\vspace{1em}
+\dc@shortrule
+\vspace{15.1pt}
+$for(caption)$
+$for(caption.names)$$caption.names$\par
+$endfor$
+\dc@halfcol{$caption.designation$}
+$sep$\vspace{4.2pt}v.\vspace{4.2pt}\par
+$endfor$
+\vspace{11.7pt}
+\dc@shortrule
+\vspace{1em}
+$proceeding$\par
+$if(district_court_case)$D.C. No. $district_court_case$$endif$$if(district_court_case)$$if(judge)$; $endif$$endif$$if(judge)$$judge$$endif$\par
+\vspace{1em}
+\dc@shortrule
+\vspace{12pt}
+\textbf{\MakeUppercase{$brief_title$}}\par
+\vspace{1em}
+\dc@shortrule
+\vspace{18.2pt}
+\endgroup
+% Counsel (FRAP 32(a)(2)): name, office address, telephone number; from the 50% column.
+\noindent\hspace*{0.5\linewidth}\begin{minipage}[t]{0.5\linewidth}\raggedright
+$for(counsel)$
+$for(counsel.names)$$counsel.names$\par
+$endfor$
+$for(counsel.lines)$\hspace*{0.5em}\emph{$counsel.lines$}\par
+$endfor$
+$sep$\vspace{1em}
+$endfor$
+\end{minipage}
+\par\vspace{1em}
+\dc@dblrule
+\clearpage
+
+% ---- front matter: lower-case roman. Contents, then authorities (typst: no certificate of parties) ----
+\pagenumbering{roman}
+\setcounter{page}{1}
+\dc@single
+\dc@hone{Table of Contents}{}
+\begin{flushright}\dc@single\textbf{\underline{Page}}\end{flushright}
+\@starttoc{toc}
+\clearpage
+
+\dc@single
+\dc@hone{Table of Authorities}{}
+\dc@tofirsttrue
+$toa$
+\clearpage
+
+% ---- the brief: Arabic from 1 ----
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\dc@double
+$body$
+
+% Signature block (typst: signature-block): kept on the page with the last paragraph of the brief.
+\begin{minipage}[t]{\linewidth}
+$tail$
+\par\addvspace{1.4em}
+\dc@single
+\hspace*{0.5\linewidth}\begin{minipage}[t]{0.5\linewidth}\raggedright
+Respectfully submitted,\par\vspace{1.2em}
+s/ $signature.signer$\par
+$signature.signer$\par
+$for(signature.lines)$\hspace*{0.5em}\emph{$signature.lines$}\par
+$endfor$
+\end{minipage}
+$if(date)$\par\addvspace{0.8em}$date$\par$endif$
+\end{minipage}
+
+% ---- certificate of compliance (FRAP 32(g)(1), Form 6) ----
+\clearpage
+\dc@hone{Certificate of Compliance}{}
+\dc@single
+\noindent I hereby certify that this brief complies with the type-volume limitation of Fed. R. App. P. 28.1(e)(2)(C) and Circuit Rule 32(e)(1). Excluding the parts of the document exempted by Fed. R. App. P. 32(f), this brief contains $words_fmt$ words, including $if(manual_image_words)$$manual_image_words$$else$0$endif$ words manually counted in any visual images.\par
+\addvspace{1em}
+\noindent This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6): it is prepared in a proportionally spaced serif typeface (Liberation Serif), 14-point.\par
+\dc@formsig
+
+% ---- certificate of service (FRAP 25(d)): only when service.certificate is true ----
+$if(service.certificate)$
+\clearpage
+\dc@hone{Certificate of Service}{}
+\dc@single
+\noindent I hereby certify that on this date I electronically filed the foregoing with the Clerk of the Court for the United States Court of Appeals for the District of Columbia Circuit using the appellate CM/ECF system, which will send notice of the filing to all counsel of record.\par
+$if(service.unregistered)$
+\addvspace{1em}
+\noindent\textbf{Service on Participants Who Are NOT Registered for Electronic Filing:}\par
+\addvspace{1em}
+\noindent I certify that I served the foregoing on this date by hand delivery, mail, or third-party commercial carrier for delivery within 3 calendar days to the following unregistered participants (list each name and mailing address):\par
+$for(service.unregistered)$
+\hspace*{0.5in}$service.unregistered.name$, $service.unregistered.address$\par
+$endfor$
+$endif$
+\dc@formsig
+$endif$
+
+\end{document}

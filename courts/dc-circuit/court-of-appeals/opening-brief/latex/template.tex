@@ -1,0 +1,258 @@
+% U.S. Court of Appeals for the District of Columbia Circuit: appellant's principal brief, LaTeX engine.
+%
+% Built by latex/render.sh: pandoc reads the markdown with the filter cadc.lua (this directory), this template is
+% compiled with tectonic, and the aux file is read back until it settles (the table of contents and table of
+% authorities carry page numbers). Matches typst/cadc-opening-brief.typ: same parameters, same order of parts.
+% Content-agnostic: no case-specific text, no coordinates, no forced line breaks.
+% Frontmatter fields: see ../README.md, "Markdown contract".
+\documentclass[14pt,letterpaper]{extarticle}
+\usepackage{fontspec}
+% FRAP 32(a)(4): 1 inch on all four sides.
+\usepackage[letterpaper,left=1in,right=1in,top=1in,bottom=1in,footskip=0.5in,headheight=0pt,headsep=0pt]{geometry}
+\usepackage{enumitem}
+\usepackage{changepage}
+\usepackage[hidelinks]{hyperref}
+\makeatletter
+
+% FRAP 32(a)(5)(A), Circuit Rule 28: 14-point serif. TeX Gyre Schola, vendored in fonts/tex-gyre-schola/.
+% The renderer passes fontdir (the vendored fonts/ directory, trailing slash).
+\setmainfont[Path=$fontdir$tex-gyre-schola/, Extension=.otf,
+  UprightFont=texgyreschola-regular, BoldFont=texgyreschola-bold,
+  ItalicFont=texgyreschola-italic, BoldItalicFont=texgyreschola-bolditalic,
+  Ligatures=TeX]{texgyreschola-regular}
+
+% Line pitch: double-spaced body (FRAP 32(a)(4)); single for headings, quotations, footnotes, certificates' blocks.
+\newcommand\dc@double{\fontsize{14pt}{24pt}\selectfont}
+\newcommand\dc@single{\fontsize{14pt}{16pt}\selectfont}
+\newlength\dc@half \setlength{\dc@half}{0.5in}
+
+% No hyphenation: a word comes out of the PDF whole.
+\lefthyphenmin=100
+\righthyphenmin=100
+\tolerance=2000
+\emergencystretch=0pt
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\hbadness=10000
+\raggedright
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+\setlength{\headheight}{0pt}
+\pagestyle{plain}
+
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\pandocbounded}[1]{#1}
+\setlist{itemsep=0pt, parsep=0pt, topsep=0pt, leftmargin=0.5in, labelsep=0.5em}
+
+% Footnotes: 14 pt, single-spaced (FRAP 32(a)(5), (a)(4)).
+\renewcommand\footnotesize{\dc@single}
+\setlength{\footnotesep}{0.5\baselineskip}
+\setlength{\skip\footins}{0.9\baselineskip}
+\renewcommand\footnoterule{\kern-3pt\hrule width 30\textwidth height 0.5pt\kern 2.6pt}
+\renewcommand\@makefntext[1]{\noindent\textsuperscript{\@thefnmark}\hskip 0.25em #1}
+
+% Block quotations: indented 0.5 in on both sides, single-spaced (FRAP 32(a)(4)).
+\renewenvironment{quote}{%
+  \par\addvspace{\baselineskip}%
+  \begin{adjustwidth}{\dc@half}{\dc@half}\dc@single\setlength{\parindent}{0pt}%
+}{%
+  \end{adjustwidth}\par\addvspace{\baselineskip}%
+}
+
+% ---------------------------------------------------------------------------
+% Headings. Level 1: centered bold capitals. Level 2: bold, flush left. Level 3: bold, indented 0.5 in.
+% Levels 1 and 2 go to the table of contents (typst: outline depth 2).
+% ---------------------------------------------------------------------------
+\newcommand\dc@hone[1]{%
+  \par\addvspace{1.4\baselineskip}%
+  \begingroup\centering\dc@single\bfseries\leavevmode#1\par\endgroup
+  \nopagebreak\addvspace{1.2\baselineskip}\nobreak}
+\newcommand\dc@htwo[1]{%
+  \par\addvspace{1.2\baselineskip}%
+  \begingroup\raggedright\dc@single\bfseries\leavevmode#1\par\endgroup
+  \nopagebreak\addvspace{1em}\nobreak}
+\newcommand\dc@hthree[1]{%
+  \par\addvspace{1em}%
+  \begingroup\noindent\dc@single\bfseries\hskip\dc@half\leavevmode#1\par\endgroup
+  \nopagebreak\addvspace{0.9em}\nobreak}
+\renewcommand\label[1]{}
+\renewcommand\section[1]{\addcontentsline{toc}{section}{#1}\dc@hone{#1}}
+\renewcommand\subsection[1]{\addcontentsline{toc}{subsection}{#1}\dc@htwo{#1}}
+\renewcommand\subsubsection[1]{\dc@hthree{#1}}
+\renewcommand\paragraph[1]{\dc@hthree{#1}}
+\renewcommand\subparagraph[1]{\dc@hthree{#1}}
+
+% A front-matter heading: centered bold capitals, listed in the contents (typst: outline depth 2).
+\newcommand\dc@fronthead[1]{\addcontentsline{toc}{section}{#1}\dc@hone{#1}}
+
+% Contents: dot leaders, page on the last line.
+\renewcommand\l@section[2]{\@dottedtocline{0}{0pt}{0pt}{\dc@single#1}{#2}}
+\renewcommand\l@subsection[2]{\@dottedtocline{1}{0.5in}{0pt}{\dc@single#1}{#2}}
+
+% ---------------------------------------------------------------------------
+% Table of authorities (Circuit Rule 28(a)(2)): every page of each citation, no "passim".
+% Pages are written to the aux file where each citation starts, then read back in the next pass.
+% ---------------------------------------------------------------------------
+\ExplSyntaxOn
+\cs_new_protected:Npn \dc@toaentry #1 #2
+  {
+    \seq_if_exist:cF { g_dc_toa_#1_seq } { \seq_new:c { g_dc_toa_#1_seq } }
+    \seq_if_in:cnF { g_dc_toa_#1_seq } { #2 }
+      { \seq_gput_right:cn { g_dc_toa_#1_seq } { #2 } }
+  }
+\cs_new:Npn \dc@toapages #1
+  {
+    \seq_if_exist:cTF { g_dc_toa_#1_seq }
+      { \seq_use:cn { g_dc_toa_#1_seq } { , } }
+      { }
+  }
+\ExplSyntaxOff
+\newcommand\dc@toacite[2]{\protected@write\@auxout{}{\string\dc@toaentry{#1}{\thepage}}#2}
+\newcommand\dc@toagroup[1]{\par\addvspace{1.4\baselineskip}\noindent\textbf{#1}\par\nobreak}
+\newskip\dc@rtoa \dc@rtoa=0.9in plus 1fil
+\newskip\dc@ptoa \dc@ptoa=-0.9in
+\newcommand\dc@toaline[2]{%
+  \begingroup\par\addvspace{0.7\baselineskip}\noindent\hangindent=0.35in\hangafter=1\relax
+  \rightskip=\dc@rtoa\parfillskip=\dc@ptoa
+  #2\nobreak\ \leaders\hbox to 0.4em{\hss.\hss}\hskip 2.5em plus 1fill\hbox to 0.9in{\hss\dc@toapages{#1}}\par\endgroup}
+
+% ---------------------------------------------------------------------------
+% Cover (FRAP 32(a)(2); Circuit Rule 28(a)(8))
+% ---------------------------------------------------------------------------
+\newcommand\dc@cgap{\vskip 0pt plus 1fill minus 14bp}
+
+\begin{document}
+\thispagestyle{empty}
+\dc@single
+\begin{center}
+\bfseries\MakeUppercase{$oral_argument$}\par
+\vspace{1.6em}
+No.\ $case_number$\par
+\vspace{1.6em}
+UNITED STATES COURT OF APPEALS\par
+\vspace{0.2em}
+FOR THE DISTRICT OF COLUMBIA CIRCUIT\par
+\vspace{1.8em}
+$for(caption)$
+$for(caption.names)$$caption.names$\par
+$endfor$
+\vspace{0.3em}$caption.designation$\par
+$sep$\vspace{0.9em}v.\par\vspace{0.9em}
+$endfor$
+\vspace{1.8em}
+$proceeding$\par
+$if(district_court_case)$\vspace{0.4em}$district_court_case$\par$endif$
+$if(judge)$\vspace{0.4em}$judge$\par$endif$
+\vspace{2.2em}
+\bfseries\MakeUppercase{$brief_title$}\par
+\vspace{2.2em}
+\end{center}
+\noindent
+$for(counsel)$
+\begin{minipage}[t]{0.3\linewidth}\raggedright
+$for(counsel.names)$$counsel.names$\par
+$endfor$
+$for(counsel.lines)$\emph{$counsel.lines$}\par
+$endfor$
+\end{minipage}$sep$\hfill$endfor$
+\vfill
+$if(date)$$date$\par$endif$
+\clearpage
+
+% ---- front matter: lower-case roman, starting at the certificate (Circuit Rule 28(a)(1)) ----
+\pagenumbering{roman}
+\setcounter{page}{1}
+\dc@single
+\dc@fronthead{CERTIFICATE AS TO PARTIES, RULINGS, AND RELATED CASES, AND RULE 26.1 DISCLOSURE}
+\dc@double
+\noindent Pursuant to Circuit Rule 28(a)(1) and Federal Rule of Appellate Procedure 26.1, the undersigned counsel certifies as follows:\par
+\addvspace{0.8\baselineskip}
+\noindent\textbf{A.\ Parties and Amici}\par
+\noindent $certificate.parties$\par
+\addvspace{0.8\baselineskip}
+\noindent\textbf{B.\ Rulings Under Review}\par
+\noindent $certificate.rulings$\par
+\addvspace{0.8\baselineskip}
+\noindent\textbf{C.\ Related Cases}\par
+\noindent $certificate.related$\par
+\addvspace{0.8\baselineskip}
+\noindent\textbf{Rule 26.1 Disclosure}\par
+\noindent $certificate.disclosure$\par
+\clearpage
+
+\dc@single
+\begin{center}\bfseries TABLE OF CONTENTS\par\end{center}
+\vspace{1em}
+\@starttoc{toc}
+\clearpage
+
+\dc@fronthead{TABLE OF AUTHORITIES}
+$toa$
+\clearpage
+
+$if(glossary)$
+\dc@fronthead{GLOSSARY}
+\dc@single
+$for(glossary)$
+\par\noindent\hangindent=1.2in\hangafter=1\relax\makebox[1.2in][l]{$glossary.abbr$}$glossary.meaning$\par
+\addvspace{0.6\baselineskip}
+$endfor$
+\clearpage
+$endif$
+
+% ---- the brief: Arabic from 1 ----
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\dc@double
+\setlength{\parindent}{0.5in}
+$body$
+
+% Signature block (FRAP 32; Circuit Rule 28(a)(1)): date at the left, the signer at the right.
+\par\nobreak\addvspace{1.2\baselineskip}\nobreak
+\dc@single
+\noindent
+\begin{minipage}[t]{0.5\linewidth}\raggedright
+$if(date)$$date$\par$endif$
+\end{minipage}%
+\begin{minipage}[t]{0.5\linewidth}\raggedright
+Respectfully submitted,\par\vspace{0.8em}
+s/ $signature.signer$\par
+$signature.signer$\par
+$for(signature.lines)$\emph{$signature.lines$}\par
+$endfor$
+\end{minipage}
+
+% ---- certificate of compliance (FRAP 32(g)(1), Form 6) ----
+\clearpage
+\dc@fronthead{CERTIFICATE OF COMPLIANCE}
+\dc@double
+\noindent This document complies with the type-volume limitations of Fed. R. App. P. 32(a)(7)(B) because, excluding the parts of the document exempted by the Federal Rules of Appellate Procedure and this Court's rules, this document contains $words_fmt$ words, as calculated by my word processing software.\par
+\addvspace{0.8\baselineskip}
+\noindent This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because this document has been prepared in a proportionally spaced typeface, 14-point TeX Gyre Schola, using $word_processor$.\par
+\addvspace{1.2\baselineskip}
+\dc@single
+\begin{flushright}\begin{minipage}[t]{0.55\linewidth}\raggedright
+/s/ $signature.signer$\par
+$signature.signer$
+\end{minipage}\end{flushright}
+
+% ---- certificate of service (FRAP 25(d)) ----
+\clearpage
+\dc@fronthead{CERTIFICATE OF SERVICE}
+\dc@double
+\noindent\hspace*{0.5in}I hereby certify that, on $date$, the foregoing document was served through the Court's ECF system on counsel for all parties.\par
+\addvspace{1.2\baselineskip}
+\dc@single
+\begin{flushright}\begin{minipage}[t]{0.55\linewidth}\raggedright
+/s/ $signature.signer$\par
+$signature.signer$
+\end{minipage}\end{flushright}
+
+% ---- addendum (Circuit Rule 28(a)(5)): after the certificates, excluded from the word count ----
+$if(addendum)$
+\clearpage
+\dc@double
+$addendum$
+$endif$
+\end{document}

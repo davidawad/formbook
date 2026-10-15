@@ -123,3 +123,31 @@ Pages reviewed: 13 of 13. Fonts embedded: TeX Gyre Schola (Regular, Bold, Italic
 8. The BLOCKED marker is not needed: an exemplar was found (CourtListener RECAP, search `type=r`, `court=cadc`, description "APPELLEE BRIEF").
 
 Searches tried for the exemplar: the FCC library (appellee briefs in D.C. Circuit agency cases; blocked with 403 when fetched), the CourtListener search API (found the RECAP entries), and a general web search. The chosen exemplar is a public RECAP copy.
+
+## Engines
+
+The typst template is the primary engine (`typst/`). Two more engines build the same sample: LaTeX (`latex/`) and DOCX (`docx/`). Build commands, from the repo root:
+
+```sh
+A=courts/dc-circuit/court-of-appeals/answering-brief
+sh $A/latex/render.sh $A samples/INPUT-wilson.md $A/samples/OUTPUT-wilson.latex.pdf
+cd $A && pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/cadc-docx.lua samples/INPUT-wilson.md -o samples/OUTPUT-wilson.docx
+```
+
+`latex/render.sh` needs tectonic and pandoc on PATH; the fonts are vendored (`fonts/tex-gyre-schola`). `docx/reference.docx` is pandoc's default reference with the styles and the 1 inch letter page set in place, plus a centered PAGE footer. Its styles: Normal and the body text (TeX Gyre Schola 14 pt, double-spaced, 0.5 in first-line indent), Heading 1 (centered bold capitals), Heading 2 (bold, hanging), footnote text 14 pt, and the custom styles Cover Line, Single Line, Signature Block and Counsel Block that `docx/cadc-docx.lua` uses.
+
+**LaTeX (`latex/`): matches the typst output (tier 1).** Page size and margins; TeX Gyre Schola 14 pt, footnotes 14 pt; double-spaced body at the typst pitch (26.3 pt, measured on `samples/OUTPUT-wilson.pdf`; single 14.8 pt); front matter in roman (cover i, certificate of parties ii, contents iii, authorities iv); body 1 to 7 with the same page numbers as the typst render in the contents; certificate of compliance on page 8 and certificate of service on page 9, with the typst wording; the signature block kept with the last paragraph; word count 1,505 (the typst count). The sample is 13 pages, as the typst render. Heading numbering (I., A., 1., a. inside the Argument; A., 1., a., (1) elsewhere) is done in `latex/cadc.lua`. Fonts: only TeX Gyre Schola is embedded.
+
+LaTeX differences (tier 2 or line breaking, not form): line breaks come from TeX's paragraph breaker, not typst's, so a few body lines and therefore some page numbers in the contents and table of authorities differ from the typst render (for example, the first citation of *Ingersoll-Rand* is on body page 4 here and on page 5 in typst; *Id.* cites of *United States v. Wilson* (2025 WL 1009047) fall on page 3 here, page 3 and 4 in typst). The cover uses fixed gaps (typst fits its gaps to the page). The small capitals of the Argument point headings are synthesized by fontspec (TeX Gyre Schola has no small-caps font). The addendum (contents on Add-1, pages Add-N) is built and was tested on a copy of the sample with an addendum appended; the sample has none.
+
+**DOCX (`docx/`): BLOCKED in part.**
+
+- Gate 0 and Gate 1 (measured on the LibreOffice PDF): BLOCKED. The `.docx.pdf` could not be made: `soffice` is not on PATH, and the LibreOffice tree in `~/lo` fails to start (missing `libXinerama.so.1`; the UNO `DeploymentException` seen earlier). The `.docx` itself is written and validated (`unzip -tq`; `xmllint --noout` on every XML and rels part).
+- Table of contents: not built (BLOCKED). The contents need page numbers from a layout pass, which needs LibreOffice here; a TOC field would be empty until updated (`docs/DOCX.md`). The `.docx` has no contents page.
+- Table of authorities: not built (BLOCKED), for the same reason. Its links to the registry are plain text in the `.docx`. The `.docx` has no authorities page.
+- Front matter numbering: not built (BLOCKED). The footer counts every page in arabic from the cover; the typst and LaTeX renders number the front matter in roman.
+- Keep the signature with the last paragraph: not built (BLOCKED). A Word block has no keep-with-next across the paragraph and the signature block.
+- Pagination: not checked against any renderer. Word may paginate differently (`docs/DOCX.md`).
+- Cover and certificates are paragraphs, not tables (no vertical rule in the caption).
+
+Word limits that apply here: the body count (13,000 words, FRAP 32(a)(7)(B)(i)) is checked in `docx/cadc-docx.lua` and the certificate of compliance states the same count (1,505).

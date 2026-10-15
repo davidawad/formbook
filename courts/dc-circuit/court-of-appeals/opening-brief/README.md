@@ -130,3 +130,33 @@ Defects found during review and fixed in the template: the bold lead-ins of the 
 
 - CourtListener search for D.C. Circuit appellant briefs: https://www.courtlistener.com/api/rest/v4/search/ (queries "Brief for Appellant", "Oral Argument Not Yet Scheduled"). Returned mostly orders; the usable hits were the Centro (No. 25-5181) and Kelly (No. 26-5070) briefs, both on public sites.
 - Web searches for the Circuit Rule 32 text returned other circuits' rules; the D.C. Circuit text came from the rules PDF above.
+
+## Engines
+
+Three engines per doc type (`docs/EVAL-LOOP.md`, "Engines"). The typst template is the reference.
+
+| Engine | Folder | Output | Status |
+|---|---|---|---|
+| typst (primary) | `typst/` | `samples/OUTPUT-centro-opening-brief.pdf` | rendered, reviewed (Known gaps above) |
+| latex | `latex/` (`render.sh`, `template.tex`, `cadc.lua`) | `samples/OUTPUT-centro-opening-brief.latex.pdf` | rendered, 15 pages, same count as typst |
+| docx | `docx/` (`reference.docx`, `cadc.lua`, `make-reference.sh`) | `samples/OUTPUT-centro-opening-brief.docx` | `.docx` written and XML-validated; `.docx.pdf` not produced (see below) |
+
+Build:
+
+```sh
+sh tools/render.sh --engine latex courts/dc-circuit/court-of-appeals/opening-brief samples/INPUT-centro-opening-brief.md
+sh tools/render.sh --engine docx courts/dc-circuit/court-of-appeals/opening-brief samples/INPUT-centro-opening-brief.md
+```
+
+`latex/render.sh` runs tectonic until the aux and toc files settle, so the table of contents and table of authorities carry the page numbers of the PDF. `tools/render-latex.sh` alone (single pass) would print placeholder page numbers and must not be used for this engine.
+
+**LaTeX: what matches typst.** Page size and margins (letter, 1 in); TeX Gyre Schola 14 pt (vendored, via `fontdir`); double-spaced body at a 24 pt pitch; single-spaced footnotes, headings, quotations and certificate blocks; arabic body pages from 1, roman front matter from the certificate; cover contents and order; the certificate of parties, rulings, related cases and Rule 26.1 disclosure; contents with dot leaders; table of authorities in the six groups with every citation page (no "passim"); glossary; certificate of compliance (word count from the body, addendum excluded); certificate of service; addendum after the certificates. **What differs:** the compliance count is 1,311 against typst's 1,312 for the same sample (a one-word counting difference between the Lua and typst word counters); heading styling is a plain bold rather than typst's exact heading spacing; the cover's counsel columns wrap at slightly different points; the contents entries are set in regular weight, as in typst. Tier 2 judgement: the layout reads as the typst output at 50 dpi.
+
+**DOCX: BLOCKED items.** The engine could not be checked against a rendered PDF on this box:
+- `docx.pdf` (LibreOffice render, Gates 0 and 1): BLOCKED. The docx engine needs `soffice`. conda-forge has no LibreOffice package. The Debian LibreOffice debs were extracted and the binary starts, but it aborts with a UNO `DeploymentException` (its bootstrap paths are hard-coded to `/usr/lib/libreoffice`, and the sandbox denies the bind mount that would fix them). The render log is in `/work/artifacts/docx-render-op.log` on the build box, not in the repo.
+- Table of contents page numbers: BLOCKED. The contents list is written without page numbers (Word fields are not updated by pandoc or LibreOffice here). A TOC check fails until a field update step exists (`docs/DOCX.md`, "Fields").
+- Table of authorities page numbers: BLOCKED for the same reason; the list is written without pages (`docs/DOCX.md` expects the TOA check to be BLOCKED for LibreOffice).
+- Cover and certificate layout: the cover is raw OOXML paragraphs, centered, in the body's 24 pt pitch; the counsel columns are stacked, not side by side (a table is needed; DOCX.md notes table rendering differs). Word and LibreOffice may paginate the cover differently.
+- Word check: `.docx` is a valid zip with well-formed XML parts (`unzip -tq`, `xmllint --noout`). Opening it in Word or LibreOffice without a repair prompt was not verified (no LibreOffice here).
+
+`docx/make-reference.sh` regenerates `docx/reference.docx` (TeX Gyre Schola 14 pt, body lines exactly 24 pt, first-line indent 0.5 in, black headings, letter page with 1 in margins, centered PAGE field in the footer).
