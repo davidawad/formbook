@@ -6,9 +6,10 @@ Doc type: **motion with brief in support** (one filed document: a motion to dism
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-gideon-4-25-cv-00450-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-gideon-motion-to-dismiss.md`: the full filing (caption, motion, summary, facts, standard, three propositions, GTCA section, conclusion, signature, footnotes 1-2, certificate of service) |
-| render | ok: `samples/OUTPUT-gideon-motion-to-dismiss.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| typeface | face required: none (LGnR2-4(a) sets a 12-pt floor and names no face). Substitute: none needed; **EB Garamond kept** (`docs/FONTS.md`: "no face named"). Fit: not metric-compatible with the Times exemplar; visual only. |
+| render | ok: `samples/OUTPUT-gideon-motion-to-dismiss.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond Regular, Bold, Italic, BoldItalic embedded |
 | overlay | ok: `samples/OVERLAY-gideon-motion-to-dismiss.pdf` and `samples/OVERLAY-gideon-motion-to-dismiss.txt` |
-| pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; see the table below) |
+| pages reviewed | 12 of 12 (every page rendered at 70 dpi and viewed, fonts pass; see the table below) |
 
 ## Governing rules
 
