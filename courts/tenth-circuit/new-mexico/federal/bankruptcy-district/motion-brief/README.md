@@ -9,9 +9,10 @@ Folder: `courts/tenth-circuit/new-mexico/federal/bankruptcy-district/motion-brie
 |---|---|
 | exemplar | **no** (`BLOCKED: no exemplar`; see `exemplars/SOURCE.md` and "Searches tried" below) |
 | sample md | `samples/INPUT-fictional-motion-brief.md`: FICTIONAL, structure test only (placeholder names, placeholder text). Not a transcription. |
-| render | ok (re-run 2026-10-14 with `sh tools/render.sh <dir> samples/INPUT-fictional-motion-brief.md`): `samples/OUTPUT-fictional-motion-brief.pdf`, 3 pages, letter, EB Garamond only, no typst warnings |
-| overlay | **fail**: `sh tools/overlay.sh <dir> fictional-motion-brief` exits 1, "no exemplar pdf in .../exemplars". Expected: there is no filed exemplar to overlay. |
-| pages reviewed | 3 of 3 (every page of the current render at 60 dpi, viewed) |
+| typeface | No face named (FRBP 9004 and NM LBR, 2023 edition, read in full 2026-10-15; neither names a typeface, font size or spacing). Keeps EB Garamond (`docs/FONTS.md`, "No face named"). Not a substitution: no metric or visual check applies. |
+| render | ok (re-run 2026-10-15, `sh tools/render.sh <dir> samples/INPUT-fictional-motion-brief.md`): `samples/OUTPUT-fictional-motion-brief.pdf`, 3 pages, letter, EB Garamond only (`pdffonts`: `EBGaramond-Regular`, `EBGaramond-Bold`, embedded), no typst warnings |
+| overlay | **fail** (re-run 2026-10-15): `sh tools/overlay.sh <dir> fictional-motion-brief` exits 1, "no exemplar pdf in .../exemplars". Expected: there is no filed exemplar to overlay. No `OVERLAY-*` file is written. |
+| pages reviewed | 3 of 3 (re-rendered 2026-10-15; every page rasterized at 60 dpi and viewed) |
 | check.sh / selftest | not run (same reason as the adversary-complaint folder) |
 
 ## Governing rules
