@@ -76,3 +76,11 @@ The first render showed overlapping caption and counsel lines and paragraphs col
 - CourtListener docket lookup for Castro v. Warner, 2:23-cv-00598 (docket id 237539): docs 1, 2, 44, 45, 46, 47 and 48 fetched from `storage.courtlistener.com/recap/`. Doc 44 is the memorandum (chosen). Doc 45 is the 2-page motion. Docs 46 to 48 were not used.
 - WebSearch for S.D. W. Va. memoranda in support of motions to dismiss: no standalone memorandum PDF other than the Castro docket.
 - Clearinghouse (clearinghouse.net) listed other S.D. W. Va. motion and memorandum documents but returned HTTP 403 to every request, so none could be downloaded.
+
+## Engines
+
+**docx** (`docx/`): `build-reference.sh` makes `reference.docx` from pandoc's default reference; `motion-brief.lua` builds the cover (caption table, title, counsel block at 3.25 in) and the numbered headings; the body and footnotes are pandoc's.
+
+- Matches the typst form: EB Garamond 12 pt; body lines exact 24 pt (double); caption, counsel, quotations, footnotes and signature lines exact 13.8 pt (single); 1 in margins on letter paper; cover without a page number; body numbered from 1; level 1 headings centered and bold, level 2 bold with I., A., 1., a. on the template's indents; no first-line indent for the paragraph after a heading; footnotes 12 pt single; the "Dated" line and signature block at 3.25 in, kept together.
+- Differs: the docx has 13 PDF pages (12 body) against typst's 12. LibreOffice places exact-spaced text about 3 to 11 pt lower on the page, so one line less fits per page; the last signature block is kept with the conclusion (same page in typst). Level 1 and 2 heading sizes follow typst's default (16.8 pt and 14.4 pt); levels 3 to 5 are 12 pt (the sample uses only levels 1 and 2). Caption blank rows differ from typst by a few points.
+- Gates: `sh tools/check.sh <this folder> --engine docx` exits 2 (`Error: open .../checks.yaml: no such file or directory`; this snapshot has no `checks.yaml` for this court). No check ID is BLOCKED for a content reason.
