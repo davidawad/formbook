@@ -83,3 +83,14 @@ The sample is one `.md` file: a YAML frontmatter block followed by the body. The
 - **Substitute: none; EB Garamond kept** (vendored, `fonts/eb-garamond/`), per the fonts policy: a court whose rules name no face keeps EB Garamond. Set in the template as `font-family`.
 - **Compatibility:** not applicable (no named face to match). Pagination is therefore not checked against a Times or Century filing; the length gate uses the word count, not the page count.
 - **Renders (2026-10-15):** `tools/render.sh` with vendored fonts only, zero warnings; `pdffonts` shows only EB Garamond (Regular, Bold, Italic). Page counts unchanged. Every page rasterised at 60 dpi and viewed. Overlay regenerated against the filed exemplar (downloaded from the CourtListener URL in `exemplars/SOURCE.md`; the PDF is not committed to the repo).
+
+## Engines
+
+DOCX (`docx/`): `build-reference.sh` makes `reference.docx` (the same styles as the opening brief: EB Garamond 14 pt, exact 31.4 pt double spacing, 0.5 in first-line indent, letter, 1 in margins). `ca10.lua` writes the cover (one page, no number), the front matter in lower roman, the body in arabic from 1, the signature block, and the certificates (compliance, digital submission when `digital_submission: true`, service).
+
+- Matches the typst output: 13 pages (typst: 13); footer numbers i to iii, then 1 to 9; cover layout (case number, court, caption with "v." except before a `no-v` side, proceeding, D.C. number and judge, brief title, counsel with the telephone on the last group); the body; the certificate of compliance word count (1,641, same as typst); the certificate of service and the signature grid.
+- Differs (tier 2, not chased): headings sit lower at the top of a page; cover rules and spacing are fixed, not fitted; line breaks differ in places; the contents and authorities have no dot leaders.
+- BLOCKED `TOC` (contents, page column): page numbers need a field update in Word or LibreOffice, which this pipeline does not do.
+- BLOCKED `TOA` (table of authorities, "Page(s)" column): same reason.
+- Certificate of compliance, item 2: the typst output prints the typesetting program ("using Typst 0.15.0"). The docx prints no program name ("a proportionally spaced typeface, EB Garamond"); the filer must name the word processor it used. Not a page-count item, but the certificate is incomplete until the filer fills it in.
+- `sh tools/check.sh <court-dir> --engine docx` fails: the court folder has no `checks.yaml` (Gate 1 cannot run). Nothing was edited to pass it.

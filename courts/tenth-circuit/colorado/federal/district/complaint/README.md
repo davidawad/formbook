@@ -85,3 +85,11 @@ Not in the local rules and therefore not asserted: a page limit (none for compla
 - Page 10: signature block (DATE and Respectfully submitted, firm, the `By: /s/` line, contacts, Attorneys for). The block is kept together and sits alone on the last page; it is not separated from the prayer. Pass.
 
 Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+
+## Engines
+
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `cod.lua` sets the caption, numbering, lettered items and signature block). `sh tools/render.sh --engine docx courts/tenth-circuit/colorado/federal/district/complaint samples/INPUT-walton-complaint.md` writes `OUTPUT-walton-complaint.docx` and `OUTPUT-walton-complaint.docx.pdf` (LibreOffice 26.8.1; `pdffonts`: EB Garamond only, embedded).
+
+- Matches the typst output: 10 pages, the same as typst. Letter paper; top margin 1½ in, other margins 1 in; 12 pt EB Garamond; 24 pt exact line pitch (double spacing); caption (court lines, `Civil Action No.`, party block with indented designations and `v.`, bold centred title) within about 4 pt of the typst positions; numbered paragraphs at the first-line indent; centred bold level 1 and 2 headings; the § 1981 block quotation single spaced and indented 1 in each side; lettered prayer items A.–F.; signature block kept together; centred page number in the footer.
+- Differs: (a) pagination. LibreOffice places text in exact-height lines a little lower and applies widow/orphan control differently, so the docx holds about one line less per page; page breaks fall one or two lines earlier, and `JURY TRIAL DEMAND` moves from page 9 (typst) to page 10 (docx), with the signature block. Word may break pages differently again. (b) The paragraph number is followed by an en space where typst uses 0.5 em, so some line ends differ. (c) Typeface and sizes are the same, but the docx is not gated: see below.
+- BLOCKED: none. `sh tools/check.sh courts/tenth-circuit/colorado/federal/district --engine docx` cannot run for this court yet: the court folder has no `checks.yaml` (and no `rules.md`), so no check ID is assessed for the docx engine. This is a gap in the court folder, not a docx failure.

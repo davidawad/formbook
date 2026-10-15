@@ -67,3 +67,11 @@ Every page was rasterized at 60 dpi and viewed. The first render had collided pa
 - Page 8: items (e) to (g), paragraphs 83 to 90, SECOND CAUSE OF ACTION heading. Pass.
 - Page 9: paragraphs 91 to 95, WHEREFORE lead-in, DEMAND FOR TRIAL BY JURY heading and paragraph 96, PRAYER FOR RELIEF heading, items (a) to (c). Pass.
 - Page 10: items (d) and (e), date, signature block (single-spaced, firm, "By: /s/", signer, address, telephone, email, role). No text in the bottom margin except the page number. Pass.
+
+## Engines
+
+- **typst** (primary, `typst/`): the reference for this section.
+- **docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `tned-complaint.lua` sets the caption, numbered paragraphs, lettered items, signature block). Rendered with `tools/render.sh --engine docx`: `samples/OUTPUT-simpson-complaint.docx` and `samples/OUTPUT-simpson-complaint.docx.pdf` (LibreOffice, 10 pages, EB Garamond from `fonts/`). Pages reviewed: 10 of 10 at 60 dpi, each compared with the typst output.
+  - Matches: letter paper, 1-inch margins, 24-pt double spacing, 12-pt EB Garamond, court title, caption (parties left with right and bottom rules, case number and title right), numbered paragraphs with a 0.5-inch first-line indent, lettered prayer items (a), (b), ..., heading sizes and styles (the typst template's 1.4 em, 1.2 em and 1 em), WHEREFORE lead-ins kept with their list, signature block, page number as the only footer text. Paragraph text and numbering are the same on every page.
+  - Differs (tier 2, not chased): the 24-pt exact line places each line's text about 4.6 pt lower than typst, so the page breaks fall in different places. Paragraph 74 starts page 7 in the docx (page 6 in typst), and the PRAYER FOR RELIEF heading starts page 10 in the docx (page 9 in typst). Page count is the same (10). Word may break pages differently again.
+  - BLOCKED: none. `sh tools/check.sh <court-dir> --engine docx` cannot run for this doc-type folder: it expects `checks.yaml` and `court.json` in the court folder, which this folder does not have (see Known gaps, item 10). No gate was edited to make it pass.

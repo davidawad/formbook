@@ -68,3 +68,13 @@ Pages reviewed in the final layout: 1 (caption, motion and its signature), 2 (me
 - **Certificate text is not fixed by the rules.** Civ. R. 5.2 requires the date, the manner and the persons served; the sample copies the filed text.
 - **The exemplar's ECF header** ("Case: 1:26-cv-00448-JPH Doc #: 8 Filed: 05/12/26 Page 1 of 8") is produced by the filing system, not by this template; the template does not reproduce it.
 - **Typeface and size** as in the complaint README: EB Garamond 12 pt, not set by the local rules.
+
+## Engines
+
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default (EB Garamond 12 pt, exact 24 pt double spacing, one-inch margins, centred PAGE footer, heading and paragraph styles). `ohsd.lua` sets the court title, the caption table, the motion's own signature (undated, after the first paragraph), the memorandum page break, the closing signature, and the certificate of service. Render: `samples/OUTPUT-sharp-motion-to-dismiss.docx` and `.docx.pdf` (LibreOffice 26.8.1, EB Garamond embedded), 7 pages, the same count as the typst render. Reviewed: all 7 pages of the `.docx.pdf` and all 7 pages of the typst render, at 60 dpi, in the final state.
+
+- Matches typst: letter paper, margins, EB Garamond 12 pt, 24 pt body pitch, the page count (7), the court title and caption, the motion paragraph and its signature on page 1 (signature lines 24 pt apart as in typst), the memorandum starting on page 2, the section headings, the closing and certificate on page 7, the centred page number.
+- Differs (tier 2, not chased): line breaks differ on most pages; the break after page 4 is one line later in the docx, so page 5 starts at a different sentence; the body text on page 1 starts about 6 pt lower than typst (the caption spacing constant, measured); the certificate heading has a little more space above it than in typst.
+- Word: not available here. The file converts in LibreOffice with no error; Word may paginate slightly differently (docs/DOCX.md).
+- BLOCKED: none. No table of contents, table of authorities, line numbering or bookmarks are required for this document (the memorandum is 7 pages, under the 20-page preference of Civ. R. 7.2(a)(3)).
+- Gates: `sh tools/check.sh courts/sixth-circuit/ohio/federal/southern-district --engine docx` exits 2 before any gate runs: `checks.yaml` (and `rules.md`) do not exist yet for this court, so Gates 0 to 3 are not run for docx. Not changed here.

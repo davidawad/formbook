@@ -63,3 +63,11 @@ Every page was rasterized at 60 dpi and viewed.
 - Page 6: argument text; footnote 4 (a long string citation) at the foot of the page, continuing onto page 7. Pass.
 - Page 7: heading B. (two lines, bold, hanging indent), argument, heading V. CONCLUSION, conclusion paragraph, continuation of footnote 4. Pass.
 - Page 8: signature block (firm, "By: /s/", both attorneys' BPR numbers and contact lines, role), CERTIFICATE OF SERVICE heading, certificate text, recipient, "By: /s/" line. No text in the bottom margin except the page number. Pass.
+
+## Engines
+
+- **typst** (primary, `typst/`): the reference for this section.
+- **docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `tned-motion-brief.lua` sets the caption, the title, the first-paragraph rule, the signature block and the certificate). Rendered with `tools/render.sh --engine docx`: `samples/OUTPUT-brockington-motion-brief.docx` and `samples/OUTPUT-brockington-motion-brief.docx.pdf` (LibreOffice, 8 pages, EB Garamond from `fonts/`). Pages reviewed: 8 of 8 at 60 dpi, each compared with the typst output.
+  - Matches: letter paper, 1-inch margins, 24-pt double spacing, 12-pt EB Garamond, the three-line court title with the division, the caption, the title of the paper, headings (level 1 centred caps, level 2 with a hanging indent, level 3 bold italic), single-spaced block quotations indented 0.5 inch on both sides, native footnotes at 12 pt, no first-line indent after a heading, a block quotation or at the start of the body, the signature block and the certificate of service on page 8 with the conclusion's signature, page number footer.
+  - Differs (tier 2, not chased): the 24-pt exact line places text about 4.6 pt lower than typst, so the page breaks differ early in the brief. Heading II (FACTUAL BACKGROUND) starts page 1 in the docx and page 2 in typst; pages 3 to 6 start on different lines. Footnote 4 is split across pages 6 and 7 in typst and sits on page 6 in the docx. Page count and the placement of the conclusion and signature block (page 7 and page 8) are the same. Word may break pages differently again.
+  - BLOCKED: none. `sh tools/check.sh <court-dir> --engine docx` cannot run for this doc-type folder: it expects `checks.yaml` and `court.json` in the court folder, which this folder does not have (see Known gaps, item 9). No gate was edited to make it pass.

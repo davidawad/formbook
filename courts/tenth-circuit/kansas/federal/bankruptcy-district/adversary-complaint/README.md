@@ -85,3 +85,11 @@ Tier-2 findings (ACCEPTED): the paragraph spacing (pp. 4-5), and the Exhibit A c
 6. **Certificate of service** is not included. The complaint is served with the summons (FRBP 7004), and that certificate is a separate filing. LBR 9013.3 applies to later papers.
 7. **Numbered-paragraph spacing** is the open tier-2 question above; not chased, since the rules do not dictate it.
 8. **Character density** (LBR 9004.1(a)(1)) is not checked mechanically. 16 pt was chosen from a 14 pt measurement (13.4 cpi); the 16 pt figure was not re-measured.
+
+## Engines
+
+**docx** (`docx/build-reference.sh` makes `docx/reference.docx`; `docx/ksb.lua` builds the cover, caption, signature block, numbered allegations and exhibit table). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-rebein-sandy-road-farms.md`. The `.docx.pdf` is 10 pages, the typst output is 10 pages; every page was rasterized at 60 dpi and compared.
+
+- Matches typst: EB Garamond 16 pt, exact 32 pt double pitch, 1 in margins, 0.5 in first-line indent, numbered allegations (number at 0.5 in, text at 1 in, one count across headings), centered caps headings, the caption with its vertical rule, the signature block on the right half, the borderless exhibit table with a repeated header, the centered page number, and the page break before Exhibit A.
+- Differs (tier 2, noted, not chased): (a) typst prints the caption party names in bold (its `show table.cell.where(y: 0)` also bolds the caption row); the docx keeps them regular, which no rule requires. (b) Typst sets no space between paragraphs, so the docx's double-spaced paragraph boundaries are one line taller; line breaks fall at different words. (c) The docx turns off widow control and keeps headings with the next paragraph; with widow control on, LibreOffice moved a heading and its paragraph to the next page and the count became 11 against typst's 10. (d) Exhibit A column widths are set to match the typst wrap, so the table is about 6.4 in wide against typst's 6.3 in.
+- BLOCKED: none for the layout. `sh tools/check.sh <folder> --engine docx` cannot run: this folder has no `checks.yaml` (and no `court.json`), so every gate fails at load. Opened and converted in LibreOffice only; Word is not available here.

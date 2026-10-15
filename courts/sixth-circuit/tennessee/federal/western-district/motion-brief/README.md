@@ -85,3 +85,11 @@ Each page was rasterized with `pdftoppm -r 60` after the last template change an
 8. **Caption column count.** The number of `)` marks is computed from the height of the party column (one per line), so a party column that wraps differently from the filing shows a different count. Checked by eye against the filing's caption on page 1; the count was not compared mark for mark.
 9. **Overlay.** Pages pair in order (the sample is the whole filing); the overlay is a diagnostic, not a score.
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither, and the brief forbids touching `tools/`. Render and overlay were run; the review above is the visual check for this doc type.
+
+## Engines
+
+DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `tnwd-motion-brief.lua` sets the caption, point headings with hung labels, block quotations, the signature block and the certificate of service). Rendered with `sh tools/render.sh --engine docx motion-brief samples/INPUT-gonzalez-memorandum.md` to `samples/OUTPUT-gonzalez-memorandum.docx` and `.docx.pdf` (LibreOffice). Reviewed: all 9 pages of the `.docx.pdf` against all 9 pages of the typst output, at 60 dpi.
+
+- Matches typst: Liberation Serif 12 pt; double spacing 27.6 pt and single 13.8 pt; one-inch margins; caption and `No.` line; title; body unnumbered and double spaced with the ½-inch first-line indent; section headings centred; point headings (I., II., ...) with the label at the margin and the text wrapped under it; block quotations single spaced; the signature block on page 8 with the conclusion, and the certificate of service on page 9, as in typst; page numbers centred. Page count is 9 in both.
+- Differs (ACCEPTED, tier 2): the caption's `)` column is a cell rule (as in the complaint); a few lines break differently (the caption's party names, the bold title line, point heading II), and some pages hold one line more or fewer than typst (line counts per page are within three lines of typst); the signature block is not forced to a page, so Word may move it.
+- BLOCKED: none. `tools/check.sh --engine docx` cannot run: the court folder has no `checks.yaml`, so no check ID was evaluated. See the PR.

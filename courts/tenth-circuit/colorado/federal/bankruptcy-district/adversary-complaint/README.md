@@ -90,3 +90,15 @@ sh tools/overlay.sh $D golec-adversary-complaint $D/exemplars/FILED-EXAMPLE-gole
 7. **Certificate of service and TOC.** None in the exemplar; not encoded.
 8. **Reitmair sample.** No exemplar and no recorded source; kept as an existing sample, as its own render (9 pp.). It is not a transcription of a filed document from this court.
 9. **Check scripts not run.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`, which this doc-type folder is not. The review above is the Gate 2 equivalent for this doc type.
+
+## Engines
+
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `cob.lua` builds the caption, the generated consent paragraph, the signature tables). Render: `sh tools/render.sh --engine docx <doc-folder> samples/INPUT-golec-adversary-complaint.md` writes `samples/OUTPUT-golec-adversary-complaint.docx` and `.docx.pdf` (LibreOffice 26.8.1, vendored EB Garamond).
+
+- Matches the typst reference: court title and adversary caption (debtor block left, case number and chapter right, parties with a blank `Adv. Proc. No.`), 13 pt EB Garamond, letter, 1.5 in top margin and 1 in elsewhere, double spacing (exact 24 pt), 0.5 in first-line indent, consent paragraph as paragraph 1, lettered `(a)` to `(f)` items with the typst item spacing, both signature blocks, 11 pt centered page number. Page count 7 = typst 7. All 7 docx pages and all 7 typst pages were rasterized at 60 dpi and viewed.
+- Differs from typst (tier 2 or renderer, not a mandated-form miss):
+  - Page breaks: LibreOffice places exact-spaced lines and headings a few points lower, so the breaks drift by one or two lines from typst (for example docx page 3 starts at paragraph 9; typst page 3 starts mid-paragraph 9). The text order is the same, and the signature block starts page 7 in both.
+  - Prayer sub-items `i.` to `vi.` are double spaced in the docx (COB-FORM-003). The typst output sets them single spaced, which looks like a cmarker default and is not a rule; the docx keeps the rule.
+  - Caption: the docx party-designation lines sit about 2 to 3 pt lower than typst.
+- BLOCKED: none declared. This folder has no `checks.yaml`, so there are no docx check IDs to block. `sh tools/check.sh <court-dir> --engine docx` fails at the court folder (`checks.yaml` missing), see the PR notes; it was not made to pass.
+- Not checked: Microsoft Word (not available here). The `.docx` is a valid zip with well-formed XML parts and converts in LibreOffice without error.
