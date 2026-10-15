@@ -8,6 +8,7 @@ Doc type: **adversary complaint** commencing an adversary proceeding in the Unit
 | sample md | `samples/INPUT-wallach-rothstein-complaint.md` (transcribed in full: caption, lead-in, every section, all five counts, prayer, signature) |
 | render | ok: `samples/OUTPUT-wallach-rothstein-complaint.pdf`, 8 pages, letter size, typst 0.15.0, vendored EB Garamond only (embedded), no typst warnings |
 | overlay | ok: `samples/OVERLAY-wallach-rothstein-complaint.pdf` and `.txt` (page map below) |
+| typeface | Face required by the rules: none named (LBR 9004-1 requires only "plainly and legibly written"; re-checked 2026-10-15). Vendored substitute: none needed, so EB Garamond is kept (`docs/FONTS.md`, "No face named"). Metric fit: n/a. |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; see Gate 2 table) |
 | tier 2 | **not met**: EVAL-LOOP asks for 2 or 3 filers; only one was found (see Known gaps) |
 
@@ -29,7 +30,7 @@ Not checked mechanically: the layout values are conventions taken from the filed
 ## Layout and typography (conventions, tier 2)
 
 - Letter paper; one-inch margins; page numbers centered at the foot from the cover on (the exemplar numbers its cover too).
-- EB Garamond 12 pt, the only vendored font. The exemplar is Helvetica 12 pt, non-embedded (its text lines are on a 27.6 pt pitch, measured from the text layer). The template uses double spacing at the same 27.6 pt pitch. The typeface differs from the exemplar: a tier 3 choice, since no W.D.N.Y. rule names a font.
+- EB Garamond 12 pt (embedded). The exemplar is Helvetica 12 pt, non-embedded (its text lines are on a 27.6 pt pitch, measured from the text layer). The template uses double spacing at the same 27.6 pt pitch. The typeface differs from the exemplar: a tier 3 choice, since no W.D.N.Y. rule names a font (re-checked 2026-10-15 against LBR 9004-1 and 9004-2; no vendored substitute is needed).
 - Caption: court title centered; a caption grid with the bankruptcy case (`In re:`, the debtor) above the adversary parties (`vs.`), a right rule and a bottom rule on the party column; on the right, `Case No.`, `Chapter`, `Hon.`, `Adv. Pro. No.` (a blank line if the clerk's number is not known, as in the exemplar), then the title in bold.
 - Lead-in ("... alleges as follows:") unnumbered, on page 1 after the caption.
 - Numbered paragraphs: number, then the text, first line indented 0.5 in, double-spaced.
@@ -63,7 +64,7 @@ The pages line up one-to-one. Our paragraph numbers are the template's (1 to 47,
 
 ## Gate 2: visual review (current PDF)
 
-Reviewed sha256 of `samples/OUTPUT-wallach-rothstein-complaint.pdf`: `e63e34638c148642a43da7d481cd27474324be230d2919f03a955e6806a7f66c`. Each page was rendered at 60 dpi and viewed. The final render is pixel-identical (AE = 0 on every page) to the renders that were viewed; the only byte-level difference is the PDF creation timestamp.
+Reviewed sha256 of `samples/OUTPUT-wallach-rothstein-complaint.pdf`: `e7619466e3b1546d8a54b7791575abff181ee70db1296ed073c4e2a09d4f7eca` (re-rendered 2026-10-15 with typst 0.15.0 after the typeface check; the template is unchanged). Each page was rendered at 60 dpi and viewed again on 2026-10-15, all 8 pages; the 2026-10-14 pixel-identity check was not repeated against the earlier file.
 
 The exemplar pages were compared through their text layer (`pdftotext -bbox` for positions) and the overlay pairing; they were not rendered to images for this review, so layout claims about the exemplar are from its text positions.
 
@@ -85,7 +86,7 @@ The exemplar pages were compared through their text layer (`pdftotext -bbox` for
 3. **No table of authorities or cover sheet.** The adversary cover sheet (Form 1040) is a separate filing; this template does not produce it. The sample has no table of authorities.
 4. **Adversary number.** The exemplar's caption leaves the `Adv. Pro. No.` blank; the template prints a blank line when `adv_number` is absent, and the sample follows the exemplar. The clerk assigns the number.
 5. **Italics.** The text layer of the exemplar has no italic markup, so case names are not italic in the sample. The template renders `*...*` italic.
-6. **Typeface.** No W.D.N.Y. font rule; EB Garamond (vendored) instead of the exemplar's Helvetica. Tier 3.
+6. **Typeface.** No W.D.N.Y. font rule (re-checked 2026-10-15); EB Garamond (vendored) instead of the exemplar's Helvetica. Tier 3.
 7. **Local-rules version.** The only local-rules text found is a PDF whose creation date is 2013-08-14. Confirm that LBR 9004-1 and 9004-2 are current.
 8. **Exhibits.** Exhibits A to E are referenced in the sample and are not part of the template.
 9. **tools/check.sh not run.** The checker expects a court directory with `court.json` and `rules.md` at its root; this doc-type folder has neither, and the brief forbids editing `tools/`. Gate 0 and Gate 1 have not been run; the review above is the Gate 2 equivalent.
