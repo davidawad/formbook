@@ -67,3 +67,23 @@ Every page of `OUTPUT-lovato-v-sasson-complaint.pdf` was rasterized at 60 dpi an
 - The "Dated" line and the two-firm signature block follow the sample; the exemplar's signature order is not compared line by line.
 - Summons and cover sheet (LR 7003) are not produced; the template is the complaint only.
 - The sample's lettered prayer items (a–f) are the template's convention; the exemplar's prayer numbering was not compared item by item.
+
+## Engines
+
+docx (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx` from pandoc's default reference) and the filter `docx/nvb-adversary-complaint.lua`. Rendered with `sh tools/render.sh --engine docx <this folder> samples/INPUT-lovato-v-sasson-complaint.md`: `samples/OUTPUT-lovato-v-sasson-complaint.docx` and its LibreOffice PDF `.docx.pdf` (10 pages; the typst render is 10 pages). Page review: `reviews/2026-10-15-docx.md` (every page viewed).
+
+What matches the typst output:
+- US Letter; top margin 1 in; left 1.5 in; right 0.75 in; bottom 48 pt; the text area is 28 lines at exact 24 pt.
+- EB Garamond 13 pt throughout (embedded as EBGaramond-Regular, -Bold, -Italic in the PDF).
+- 28 line numbers on every page, fixed to the page, as typst does. They are a text box anchored to the page in the header (a Word pleading-paper box), not `w:lnNumType`: section line numbering counts body lines only, so a single-spaced caption and blank lines would give other than 28 numbers per page.
+- Counsel block in columns, court title, caption (rule under and right of the party column), numbered paragraphs (number, then a tab to 0.8 in), lettered and bulleted lists, headings (level 1 centered bold capitals, level 2 centered bold), signature block (Dated; firm; "/s/" name; name; role), consecutive page numbers centered in the footer, one rule left of the text.
+- The cover, caption and signature are tables whose row heights are rounded up to whole numbered lines, so the text after them sits on the numbered lines.
+
+What differs from typst:
+- Block quotations are 0.5 in indented on both sides. typst's quotation is narrower on the right (its width is text width minus 1 in, then padded 0.5 in on each side, which leaves a 1.5 in right indent); that looks like a sizing error in the reference, not a court form, so it is not copied. Paragraphs of a quotation are about 12 pt apart (typst 6.5 pt).
+- The vertical rule runs from the top margin to the bottom margin, not the full page height.
+- Grid rounding of the cover and signature uses an estimate of wrapped lines (EB Garamond widths). If Word wraps a line differently, a block can end up a fraction of a line off the numbered lines below it. A quotation's height is estimated the same way.
+- Word has not been used to open the file. LibreOffice opens and converts it with no repair prompt. The header text box is Word 2010+ DrawingML (`wps`) without an `mc:AlternateContent` fallback.
+
+BLOCKED:
+BLOCKED: check.sh (all gates, every docx check ID): not runnable in this folder. `tools/check.sh` reads `<court-dir>/court.json`, `<court-dir>/checks.yaml`, `rules.md` and `reviews/`, and this doc-type folder has only the template, samples and exemplars (`court.json` exists only at `../` (the court folder); `checks.yaml` and `rules.md` exist nowhere in this court yet). No docx gate was evaluated, so `samples/.check-docx.txt` is not written and the docx engine is not marked passing.

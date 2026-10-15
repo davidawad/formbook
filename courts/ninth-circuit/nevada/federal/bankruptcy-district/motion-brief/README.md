@@ -73,3 +73,24 @@ Every page of `OUTPUT-epica-motion-reconsideration.pdf` was rasterized at 60 dpi
 - **Title-page offset.** The exemplar's counsel block starts on line 1. LR 9004(a) requires the title page to begin at least 1 1/2 inches from the top, so the template starts it on line 3. That is a deliberate departure from the exemplar, to follow the rule.
 - **Sample edits.** The sample was changed in two places to match the markdown contract: a `[signature]` marker after the conclusion (the frontmatter signature block is placed there, as in the exemplar; before, the block sat after the certificate), and the certificate's three `[sig]` lines were merged into one chunk so they render as one block and do not orphan. The words are unchanged; the overlay pairs the same passages.
 - Type size 13 pt is a style choice above the 12-point floor (see the template's parameter block).
+
+## Engines
+
+docx (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx` from pandoc's default reference) and the filter `docx/nvb-motion-brief.lua`. Rendered with `sh tools/render.sh --engine docx <this folder> samples/INPUT-epica-motion-reconsideration.md`: `samples/OUTPUT-epica-motion-reconsideration.docx` and its LibreOffice PDF `.docx.pdf` (11 pages; the typst render is 10). Page review: `reviews/2026-10-15-docx.md` (every page viewed).
+
+What matches the typst output:
+- US Letter; top margin 1 in; left 1.5 in; right 0.75 in; bottom 48 pt; the text area is 28 lines at exact 24 pt.
+- EB Garamond 13 pt throughout, and footnotes at 13 pt single-spaced (embedded as EBGaramond-Regular, -Bold, -Italic in the PDF).
+- 28 line numbers on every page, fixed to the page: a text box anchored to the page in the header, not `w:lnNumType` (see the adversary-complaint Engines section for why).
+- Counsel block in columns, court title on two lines, caption (rule under and right of the debtor column; case number, chapter, title in bold capitals, hearing date and time), headings (level 1 centered bold capitals, level 2 centered bold, level 3 bold run-in), the Wright, Miller & Kane quotation single-spaced, lettered and bulleted lists, pandoc footnotes, the signature block at the `[signature]` marker, the certificate's signature lines at 3.4 in, consecutive page numbers centered in the footer, one rule left of the text.
+- The cover, caption and signature are tables whose row heights are rounded up to whole numbered lines.
+
+What differs from typst:
+- Block quotations: 0.5 in indented on both sides (typst's right indent is 1.5 in; see the adversary-complaint Engines section). Paragraphs of a quotation are about 12 pt apart (typst 6.5 pt).
+- Pagination: the LibreOffice render is 11 pages against typst's 10. The certificate of service starts a new page because its heading, text and signature lines do not fit the blank lines left on page 10; the text is the same.
+- The vertical rule runs from the top margin to the bottom margin, not the full page height.
+- Grid rounding of the cover and signature uses an estimate of wrapped lines (see the adversary-complaint Engines section).
+- Word has not been used to open the file. LibreOffice opens and converts it with no repair prompt.
+
+BLOCKED:
+BLOCKED: check.sh (all gates, every docx check ID): not runnable in this folder. `tools/check.sh` reads `<court-dir>/court.json`, `<court-dir>/checks.yaml`, `rules.md` and `reviews/`, and this doc-type folder has only the template, samples and exemplars (`court.json` exists only at `../` (the court folder); `checks.yaml` and `rules.md` exist nowhere in this court yet). No docx gate was evaluated, so `samples/.check-docx.txt` is not written and the docx engine is not marked passing.
