@@ -28,7 +28,7 @@ Primary source: the District of Alaska Local Civil Rules, "Effective October 15,
 | L.Civ.R. 7.1(f) | "Oral Argument Requested" immediately below the title of a motion, if requested. | `oral_argument: true` in frontmatter; not used in the sample. |
 | L.Civ.R. 7.4(a)(1) | A Rule 12(b) motion memorandum must not exceed 35 pages or 10,000 words (reply 20 pages or 5,700 words). | Not counted by the template (no page or word counter). The exemplar's body is about 35 pages after the front matter; see the exemplar SOURCE.md. |
 | L.Civ.R. 7.4(a)(4) | Page and word limits do not include the caption, signature blocks, tables of contents and authorities, Rand notices, or reproduced statutes. | Front matter is separately numbered (roman); the body restarts at 1. |
-| L.Civ.R. 7.5(a)(1)(A)-(E) | Double-spaced; margins of at least 1 inch including footers; page number and case name and number footer on every page of a multi-page document; at least 13-point proportionally spaced font. | `body-leading = 1.35em`, `margins = 1in`, `running-footer` (page number, short paper title, case name and number), `type-size = 13pt`. See complaint README for the measured spacing. |
+| L.Civ.R. 7.5(a)(1)(A)-(E) | Double-spaced; margins of at least 1 inch including footers; page number and case name and number footer on every page of a multi-page document; at least 13-point proportionally spaced font, "or the equivalent" (7.5(a)(1)(D); no face named, re-read 2026-10-15). | `body-leading = 1.35em`, `margins = 1in`, `running-footer` (page number, short paper title, case name and number), `type-size = 13pt`, EB Garamond. See Typeface and the complaint README for the measured spacing. |
 | L.Civ.R. 7.5(a)(2)(A) | Letter size, white paper. | `paper: "us-letter"`. |
 | L.Civ.R. 7.5(b)(1)-(5) | First-page layout: counsel block upper left; court title; case number with the judge's initials; caption; title of the document. | `cover`: `counsel`, `court`, `caption` (case number and judge at right), `title`. |
 | L.Civ.R. 7.5(c)(1)-(2) | Names and bar numbers beneath signatures; the attorney identifies each party represented. | `signature-block`: `preamble`, `/s/` line, `signer`, `lines` (including "Counsel for Defendants"). |
@@ -36,6 +36,15 @@ Primary source: the District of Alaska Local Civil Rules, "Effective October 15,
 | Fed. R. Civ. P. 12(b)(1) | Lack of subject-matter jurisdiction is a defense, asserted by motion. Fetched 2026-10-14 from https://www.law.cornell.edu/rules/frcp/rule_12 (the text of 12(b) and (b)(1) was read). | Cited in the Legal Standard and on the title line. |
 
 Not generated: the notice of motion; a proposed order (not required for Rule 12 motions, L.Civ.R. 7.1(b)(1)); a certificate of service (the exemplar has none; the template generates one only when the frontmatter has a `certificate`, see Known gaps).
+
+## Typeface
+
+| Item | Value |
+|---|---|
+| Face required | None named. L.Civ.R. 7.5(a)(1)(D) asks for a 13-point, proportionally-spaced font "or the equivalent". `docs/FONTS.md` applies only where the rule names a face. The exemplar's Times look is not a requirement. |
+| Vendored substitute | Not needed. EB Garamond is kept: `font-family = "EB Garamond"` (`fonts/eb-garamond/`). |
+| Metric fit | Not applicable (no court-named face). |
+| Verified | `pdffonts samples/OUTPUT-naec-motion-to-dismiss.pdf` lists EB Garamond Regular, Bold and Italic only, all embedded (2026-10-15). |
 
 ## Layout
 
@@ -76,7 +85,7 @@ Single line 17.0 pt, double 34.5 pt at 13 pt (see the complaint README). The TOC
 ## Known gaps and open choices
 
 1. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The State of Alaska's motion to dismiss in the same case (Docket 59) is a second filer, but its memorandum was not in RECAP (404). Tier 2 is not judged against two filers.
-2. **Font.** EB Garamond at 13 pt (see the complaint README, Known gap 2). The memorandum is set in Times in the exemplar; EB Garamond reads smaller at the same point size.
+2. **Font.** No face is named by L.Civ.R. 7.5(a)(1)(D), so EB Garamond stays (see Typeface and the complaint README, Known gap 2). The memorandum is set in Times in the exemplar; EB Garamond reads smaller at the same point size.
 3. **Length.** The template does not count pages or words for L.Civ.R. 7.4(a)(1). The full memorandum must be checked by hand before filing.
 4. **Signature block alone on a page (page 11 of the render).** The block is kept together and does not fit below the Conclusion; the page is otherwise empty. A convention issue a clerk may notice; left as is because moving text to avoid it would be a case-specific tweak.
 5. **Certificate of service.** Not in the exemplar; not in the sample. The template generates one when the frontmatter has a `certificate: {text, signer}` map. The 2025 local rules call for a Certificate of Service only where service is not through CM/ECF (L.Civ.R. 5.1(c)(4), sealed filings served by other means); for an ordinary CM/ECF filing the Notice of Electronic Filing is the proof of service (5.1(c)(3)).
