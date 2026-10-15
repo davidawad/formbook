@@ -80,3 +80,11 @@ Rendered at 60 dpi, viewed in montage (pages 1 to 4, 5 to 8, 9 to 12) after the 
 | 12 | "Dated this 7th day of October, 2026." and the signature block with two signers, address, telephone and e-mail. | Pass. Block alone on the last page (gap 3). |
 
 Gate 2 rows, with the overlay: page-level word overlap is 31% (page 12, the signature page) to 95% (page 1); see `samples/OVERLAY-nocams-motion-brief.txt`. The low pages are the signature page and pages where the exemplar's pagination differs. Not a score.
+
+## Engines
+
+### docx (`docx/`: `build-reference.sh`, `reference.docx`, `wied.lua`)
+
+- **Matches the typst form:** EB Garamond 12 pt body; exact 24 pt (double) line pitch; 0.5 in first-line indent on body paragraphs; letter paper, 1 in margins; centered page number in the footer; centered bold caps for the title and section headings; argument headings ("I. TEXT") bold with the numeral in a 1 in hanging column; sub-headings ("a. Text") bold italic, indented 0.5 in; block quotations single-spaced, indented 0.5 in on each side; caption as a borderless two-column table (3.25 in party column, 0.3 in gutter, case number right); "Dated this ..." and the signature block at a 3.0 in indent. Paragraphs are not numbered. All case text comes from the sample's frontmatter.
+- **Differs or unverified:** the argument-heading numeral uses a tab to a 1 in hanging stop, which is the typst grid; the line breaks and page breaks are not compared with the typst layout. The caption table's borders are set to none; not verified in Word or LibreOffice. Body font EB Garamond is named but not embedded; the machine that opens the file must have it. The brief has no TOC or TOA in the typst template, so the docx has none.
+- **BLOCKED:** the LibreOffice PDF (`samples/OUTPUT-nocams-motion-brief.docx.pdf`) was not produced because `soffice` is not installed on this box (no conda package, no root). Gates 0 and 1 for docx cannot run. No page was rendered or reviewed (pages reviewed: 0). The docx was checked only as a zip with well-formed XML parts and by a pandoc text dump of its order.

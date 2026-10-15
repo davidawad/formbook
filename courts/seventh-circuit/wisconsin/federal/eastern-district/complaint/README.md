@@ -84,3 +84,12 @@ Rendered at 60 dpi and viewed page by page after the last template change (parag
 | 11 | Jury-demand paragraph (unnumbered), "Dated this 13th day of October, 2026.", firm, role, signature, contact block. | Pass. Signature block whole and in the right half of the page. Note 7 above. |
 
 Gate 2 rows, with the overlay: page-level word overlap is 27% (page 11) to 83% (page 5); see `samples/OVERLAY-taylor-complaint.txt`. The lowest pages are the signature page (no body text in the exemplar's matching page) and the mid-pages where the exemplar's pagination differs. Not a score.
+
+## Engines
+
+### docx (`docx/`: `build-reference.sh`, `reference.docx`, `wied.lua`)
+
+- **Matches the typst form:** EB Garamond 12 pt body; exact 24 pt (double) line pitch; 0.5 in first-line indent; letter paper, 1 in margins; centered page number in the footer; centered bold caps for the title and section headings; centered bold count headings; caption as a borderless two-column table (3.25 in party column, 0.3 in gutter, case number right); "Dated this ..." and the signature block at a 3.0 in indent; numbered paragraphs from `#` headings, unnumbered under PRAYER and DEMAND; the prayer list lettered A., B., ... ; the lead-in unnumbered. All case text comes from the sample's frontmatter.
+- **Differs or unverified:** the numbers are typed by the filter (not Word list numbering), so a paragraph's number does not renumber if text is inserted in Word. The number-to-text gap is a tab to the next default tab stop, not the typst 0.3 in gap. Line breaks, page breaks and the vertical position of the cover, caption and signature block are not compared with the typst layout. The caption table's borders are set to none; not verified in Word or LibreOffice. Body font EB Garamond is named but not embedded; the machine that opens the file must have it.
+- **No TOC, TOA or certificate:** the typst template has none, so the docx has none.
+- **BLOCKED:** the LibreOffice PDF (`samples/OUTPUT-taylor-complaint.docx.pdf`) was not produced because `soffice` is not installed on this box (no conda package, no root). Gates 0 and 1 for docx cannot run. No page was rendered or reviewed (pages reviewed: 0). The docx was checked only as a zip with well-formed XML parts and by a pandoc text dump of its order.
