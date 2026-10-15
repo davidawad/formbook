@@ -83,3 +83,28 @@ Overlay (`samples/OVERLAY-gem-reply-brief.txt`): pages pair with the exemplar's 
 - **FCR 32(b)(1) reply limit** rests on a third-party mirror (see Governing rules). Confirm against the official rules before relying on the 7,000 limit.
 - **FCR 32(j) passim ban** is proposed, not in force. The template avoids passim, which satisfies both versions.
 - **No `tools/check.sh` gates for this folder.** The folder has no `checks.yaml`; its validation is the render (no warnings), the font check (only EB Garamond embedded, from `pdffonts`), the page review above, and the overlay.
+
+## Engines
+
+The typst template is the reference. The LaTeX and docx engines are built from the same markdown contract (`docs/EVAL-LOOP.md`, "Engines").
+
+| Engine | Files | Output (`samples/`) | Pages |
+|---|---|---|---|
+| typst (reference) | `typst/` | `OUTPUT-gem-reply-brief.pdf` | 13 |
+| latex | `latex/template.tex`, `latex/cafc.lua`, `latex/render.sh` (tectonic; the counsel block is a two-column table, `-M counsel_columns=true`) | `OUTPUT-gem-reply-brief.latex.pdf` | 13 |
+| docx | `docx/reference.docx` (`docx/make-reference.sh`, `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-gem-reply-brief.docx` and `.docx.pdf` | 13 |
+
+**Matches the typst layout:** 14 pt EB Garamond, double spacing at the typst pitch (31.43 pt); 1 in margins; the cover with the counsel in two columns; the contents and authorities with page numbers; the Roman section headings (I. ARGUMENT, II. CONCLUSION) and the A./i./1. sub-headings; the certificate of compliance (Form 19 wording, box checked) and the certificate of service; the footers.
+
+**Differs from the typst layout:**
+
+- The signature block is kept whole, as typst keeps it, and is not joined to the last paragraph of the conclusion. When the block does not fit on the page, it starts a page of its own (latex: page 11; docx: page 11, the conclusion beginning on page 9 and its last paragraph on page 10). This is the typst reply module's own arrangement.
+- docx contents and authorities are static text with page numbers from a LibreOffice render (see the opening brief's Engines note for the limits).
+- The reply's certificate of service is printed for every reply (typst prints it unconditionally too).
+
+**docx items not verified:** not opened in Word; converted with LibreOffice only.
+
+**Status:** latex render ok; docx render ok. No gate was run (no `checks.yaml` or `check.sh` for this court in this snapshot). The page review is visual.
+
+**Pages viewed:** all 13 pages of the latex render and all 13 of the docx render, at 30 to 40 dpi, in the final state.
+

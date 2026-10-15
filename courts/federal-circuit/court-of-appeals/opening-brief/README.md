@@ -98,4 +98,29 @@ Every page of `OUTPUT-delfasco-opening-brief.pdf` was rendered at 60 dpi (`pdfto
 - **Oral argument statement.** Not in the sample. If a brief includes one, the template removes it from the word count (FRAP 32(f)).
 - **Not verified.** The cover's exact placement of counsel block and phone for the Federal Circuit is taken from the exemplar and FRAP 32(a)(2)(F); the Federal Circuit's own cover form is not in the compilation.
 
+## Engines
+
+The typst template is the reference. The LaTeX and docx engines are built from the same markdown contract (`docs/EVAL-LOOP.md`, "Engines").
+
+| Engine | Files | Output (`samples/`) | Pages |
+|---|---|---|---|
+| typst (reference) | `typst/` | `OUTPUT-delfasco-opening-brief.pdf` | 21 |
+| latex | `latex/template.tex`, `latex/cafc.lua`, `latex/render.sh` (tectonic, EB Garamond from `fonts/eb-garamond`) | `OUTPUT-delfasco-opening-brief.latex.pdf` | 21 |
+| docx | `docx/reference.docx` (made by `docx/make-reference.sh` from `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-delfasco-opening-brief.docx` and `.docx.pdf` (LibreOffice 26.8, vendored fonts only) | 21 |
+
+**Matches the typst layout (latex and docx):** 14 pt EB Garamond throughout, footnotes included; double spacing at the typst baseline pitch (31.43 pt); 1 in margins; the clerk's caption, certificate of interest, contents and authorities with page numbers; Argument labels (I. / A. / 1. / a.); the addendum with its own contents and `Add-` pages; the certificate of compliance (Form 19 wording, box checked) and the certificate of service; page numbers in the footer (roman, arabic, `Add-`).
+
+**Differs from the typst layout:**
+
+- Pagination. The LaTeX file has point II of the Argument on page 9 (typst: 8); its other headings are within a line or two of typst's pages. The contents and authorities give the numbers of their own render, so they follow it.
+- docx contents and authorities are static text with page numbers from a LibreOffice render (the file is rendered, the numbers read from the PDF, and the file is written again until they stop changing). LibreOffice does not honor TA fields (`docs/DOCX.md`), and Word may paginate differently, so the numbers can be off by a page in Word.
+- docx table of authorities finds a citation by the text the brief writes for it. A bare `Id.` or a pinpoint-only short cite is not located, so such pages are not listed.
+- docx word count is pandoc's tokenization: 2,481 for the certificate, against 2,484 from typst.
+
+**docx items not verified:** the file was converted by LibreOffice and not opened in Word. Font substitution was checked from the PDF (`pdffonts`: EB Garamond, plus DejaVu Sans for the checkbox glyph).
+
+**Status:** latex render ok; docx render ok. No `checks.yaml` or `check.sh` exists for this court in this snapshot, so no gate was run on either engine; the page review below is visual only.
+
+**Pages viewed:** all 21 pages of the latex and docx renders, at 30 to 40 dpi, in the final state.
+
 [Formbook index](../../../../README.md)
