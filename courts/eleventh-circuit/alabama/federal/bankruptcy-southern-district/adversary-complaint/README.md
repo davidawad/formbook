@@ -4,7 +4,7 @@
 - Doc type: `adversary-complaint`. Complaint commencing an adversary proceeding (Fed. R. Bankr. P. 7001). Self-contained folder: no shared files.
 - Exemplar: `exemplars/FILED-EXAMPLE-hester-23-01002-complaint.pdf` (*Hester v. U.S. Department of Education*, Adv. No. 23-01002, filed 2023-01-06; provenance in `exemplars/SOURCE.md`). One exemplar only; see Known gaps.
 - Sample: `samples/INPUT-hester-complaint.md` (transcription of the filed complaint, 6 pages). `samples/INPUT-generic-adversary-complaint.md` is a fictional template smoke test, not a transcription.
-- Status: template and README complete; render, overlay and page review done for the Hester sample (6 of 6 pages). Typst engine only. `court.json` untouched. Fonts pass (2026-10-14): no face named by the court's rules, so EB Garamond is kept; re-rendered and re-reviewed (see Typeface row under Governing rules).
+- Status: template and README complete; render, overlay and page review done for the Hester sample (6 of 6 pages). Typst engine only. `court.json` untouched. Fonts pass (2026-10-14): no face named by the court's rules, so EB Garamond is kept; re-rendered and re-reviewed (see Typeface row under Governing rules). DOCX engine added (see Engines); its PDF checks are BLOCKED.
 
 ## Files
 
@@ -63,6 +63,28 @@ Tier-2 findings (ACCEPTED, not chased):
 - The body uses EB Garamond; the filing uses Times New Roman. Typeface is convention (no S.D. Ala. rule).
 - The certificate of service paragraphs take a first-line indent; the filing's paragraphs do not.
 
+## Engines
+
+- **typst** (primary): `typst/`, output `samples/OUTPUT-<id>.pdf`.
+- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh` from `docx/reference-parts/`: styles, numbering, footer) and `docx/alsb.lua` (caption box, stipulation line, signature block, numbered paragraphs, from the same frontmatter). Output `samples/OUTPUT-<id>.docx` for both samples. Command: `sh tools/render.sh --engine docx <this-folder> samples/INPUT-<id>.md`.
+- **latex**: not built.
+
+**Matches typst** (the values come from `typst/alsb-adversary-complaint.typ`, and the line pitch was measured on our own typst render at 26 pt): US Letter, 1 in margins, EB Garamond 13 pt; body lines exactly 26 pt apart; 0.5 in first-line indent; numbered paragraphs run continuously (`1.`-`19.`) at the 0.5 in indent with wrapped lines back at the margin; centered bold caps headings (level 1 at 18 pt, level 2 bold at 15.5 pt); caption with a vertical rule and the case-number column; the LBR 7026-1 line before the signature block; "Dated" and "Respectfully submitted" side by side; certificate of service after the signature; centered page number at 11 pt.
+
+**Differs from typst:**
+
+- Single-spaced blocks (caption, signature, footer) use Word's natural line height for EB Garamond, not typst's 0.3 em leading, so their vertical positions shift by a few points.
+- The prayer items `(1)`-`(3)` are literal labelled paragraphs with the body first-line indent. Typst's render puts `(1)` at the margin and indents `(2)`-`(3)`.
+- Certificate bullets use pandoc's default list indent, not the typst template's.
+- The footer is a bare page number (no "Page X of Y").
+- EB Garamond must be installed on the machine that opens the `.docx`. Word substitutes silently when it is missing.
+
+**docx BLOCKED** (not verified; this box has no working LibreOffice):
+
+- `docx-pdf-render`: the `.docx.pdf` could not be made. conda-forge has no LibreOffice package. The Debian LibreOffice packages were extracted without root, and `soffice.bin` aborts in its UNO bootstrap (`uno::RuntimeException`), so `soffice --headless --convert-to pdf` fails. Gates 0-3 are measured on that PDF, so none of them ran. Visual review: 0 pages rendered, 0 pages looked at.
+- `check-docx`: `sh tools/check.sh <this-folder> --engine docx` fails before any gate runs. The checker reads `court.json` and `checks.yaml` next to the doc-type folder, and this court has neither.
+- Word open test: not run (no Word here). The package parts are well-formed XML (`xmllint`), and pandoc reads the `.docx` back with the caption, body, signature and certificate in order. That is a structural check, not a Word check.
+
 ## Known gaps
 
 1. One exemplar only. The court has one public filed complaint (Hester). A second filer's complaint was not found: CourtListener RECAP searches and one web search on 2026-10-14 turned up no second S.D. Ala. adversary complaint PDF. The court's checklist asks for two; add one when found.
@@ -72,5 +94,5 @@ Tier-2 findings (ACCEPTED, not chased):
 5. The filed complaint has no LBR 7026-1 statement. The sample carries a bracketed note saying so, so the omission is visible. The note is a transcription addition, not the filer's text.
 6. The filing's signature line reads "RESPECTFULLY submitted on this the 6th day of January, 2023." The template prints "Dated: January 6, 2023" in its place.
 7. The consent-to-final-orders statement (Rule 7008(a)) is not enforced by the template. The transcription does not state consent either: the filed complaint has no consent statement, and the template does not check for one.
-8. Only the typst engine is in this folder. No `latex/` or `docx/` engine was built, per the task scope.
+8. No `latex/` engine is built. The docx engine is built but its visual and PDF checks are BLOCKED (see Engines).
 9. The fictional `INPUT-generic-adversary-complaint.md` renders 5 pages and is not reviewed page by page; it exists as a template smoke test only. Its stipulation text was added so it still satisfies the required field.
