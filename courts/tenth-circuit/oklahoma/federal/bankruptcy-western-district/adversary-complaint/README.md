@@ -32,6 +32,7 @@ Each rule was read from the text linked below. The local rules were downloaded a
 | Fed. R. Bankr. P. 7008(a) (<https://www.law.cornell.edu/rules/frbp/rule_7008>, checked 2026-10-14; as amended eff. 2024-12-01) | Fed. R. Civ. P. 8 applies. The complaint must state whether the pleader does or does not consent to entry of final orders or judgment by the bankruptcy court; the jurisdiction allegation refers to the case's name, number and chapter, and the district and division | paragraphs 3 to 5 of the sample (the filer's words, as filed; see Known gaps) |
 | Fed. R. Bankr. P. 7010 (<https://www.law.cornell.edu/rules/frbp/rule_7010>, checked 2026-10-14) | Fed. R. Civ. P. 10 applies in an adversary proceeding, except the caption must substantially conform to Official Form 416 | `caption` (the party column, the `)` column, the case number and adversary number rows) |
 | Fed. R. Bankr. P. 9004(a)-(b) (<https://www.law.cornell.edu/rules/frbp/rule_9004>, checked 2026-10-14) | Legible; caption with the court's name, the case title, the case number and adversary number, and a brief designation of the document | the cover (court name, caption, title in capitals) |
+| Typeface (fonts pass, checked 2026-10-15 against the LR 9004-1.A text in the W.D. Okla. Local Bankruptcy Rules, General Order 26-01, printed p. 49, and Fed. R. Bankr. P. 9004, 7010) | No face is named. The rules require only "no less than 12-point font (including footnotes)". The court's local rules name no typeface anywhere in the form-of-papers provisions. Per `docs/FONTS.md`, no face named means EB Garamond stays (no substitute needed; metric compatibility does not apply) | `font-family = "EB Garamond"` kept; `pdffonts` on `OUTPUT-ruzycki-adversary-complaint.pdf` shows only EB Garamond embedded. The filed exemplar is Times New Roman (tier 2 choice, not a rule; Liberation Serif is the vendored Times substitute if a clerk expects it) |
 | Fed. R. Civ. P. 10(b) (applies through 7010; not separately fetched) | Claims in numbered paragraphs | `allegations`: the template numbers each plain paragraph; `> ` paragraphs and headings are unnumbered |
 
 ## Overlay
@@ -47,6 +48,8 @@ Each rule was read from the text linked below. The local rules were downloaded a
 ## Page review (Gate 2)
 
 Every page of `OUTPUT-ruzycki-adversary-complaint.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond only.
+
+Re-check on 2026-10-15 (fonts pass): the typeface stays EB Garamond (see the typeface row above), so the template is unchanged. Re-rendered with `tools/render.sh` (10 pages, no warnings), overlay re-run against the exemplar (`exemplars/FILED-EXAMPLE-ruzycki-26-01003-adversary-complaint.pdf`, fetched from the URL in `exemplars/SOURCE.md`, MD5 `2881deddc83eb547d6dabcaff51dedf3` matches), and all 10 pages viewed again. Same result as above: p.10 is accepted as mostly blank, and the lettered lists on pp.5-7 keep the accepted spacing.
 
 | Page | Content | Result |
 |---|---|---|
