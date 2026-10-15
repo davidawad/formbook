@@ -141,3 +141,13 @@ The overlay is a diagnostic. Red is our render, blue is the filed page, black is
 - **Substitute: none; EB Garamond kept** (vendored, `fonts/eb-garamond/`), per the fonts policy: a court whose rules name no face keeps EB Garamond. Set in the template as `font-family`.
 - **Compatibility:** not applicable (no named face to match). Pagination is therefore not checked against a Times or Century filing; the length gate uses the word count, not the page count.
 - **Renders (2026-10-15):** `tools/render.sh` with vendored fonts only, zero warnings; `pdffonts` shows only EB Garamond (Regular, Bold, Italic). Page counts unchanged. Every page rasterised at 60 dpi and viewed. Overlay regenerated against the filed exemplar (downloaded from the CourtListener URL in `exemplars/SOURCE.md`; the PDF is not committed to the repo).
+
+## Engines
+
+DOCX (`docx/`): `build-reference.sh` makes `reference.docx` (EB Garamond 14 pt; exact 31.4 pt double spacing; 0.5 in first-line indent; letter paper, 1 in margins; single-spaced headings, footnotes and front matter; centered page-number footer). `ca10.lua` writes the cover, the sections (cover without number, lower-roman front matter, arabic body), the labelled headings, the signature block, the oral-argument statement and the certificates.
+
+- Matches the typst output: 13 pages (typst: 13); 14 pt type, double spacing, margins; footer numbers i, ii, iii, then 1 to 9; cover on one page; the statement of prior appeals; heading labels (I., A., 1., a.); footnotes; signature block; the certificate of compliance word count (1,136, same as typst); the certificate of digital submission with the scanner and its date; the index of attachments.
+- Differs (tier 2, not chased): headings sit lower at the top of a page (Word keeps space before a heading at a section start); the cover spacing is fixed rather than fitted to one page; line breaks differ in places (LibreOffice breaks after a hyphen in "App.113-14", typst does not); the contents and authorities have no dot leaders.
+- BLOCKED `TOC` (contents, page column): the page numbers need a field update in Word or LibreOffice; this pipeline does not update fields, and no first-pass page map is written. The contents list every entry in order, without numbers.
+- BLOCKED `TOA` (table of authorities, "Page(s)" column): same reason; the authorities are listed, cited on the right pages in the typst output only.
+- `sh tools/check.sh <court-dir> --engine docx` fails: the court folder has no `checks.yaml` (Gate 1 cannot run). Nothing was edited to pass it.
