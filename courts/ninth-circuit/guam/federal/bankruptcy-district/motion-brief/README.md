@@ -8,8 +8,9 @@ Folder: `courts/ninth-circuit/guam/federal/bankruptcy-district/motion-brief/`. E
 | exemplar | yes: `exemplars/FILED-EXAMPLE-campos-20-00001-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-campos-motion-to-dismiss.md`: the whole filed document (caption, notice of motion, procedural history, legal standard, argument I to III, conclusion, two footnotes, signature) |
 | render | ok: `samples/OUTPUT-campos-motion-to-dismiss.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
-| overlay | ok: `samples/OVERLAY-campos-motion-to-dismiss.pdf` and `.txt` (each sample page paired with the same-numbered filed page, all 11) |
-| pages reviewed | 11 of 11 (every page rasterised at 60 dpi and viewed; pages 1 to 10 viewed in the layout that preceded the final signature-spacing change, page 11 in the final layout; pages 1 to 10 were not changed by it) |
+| typeface | face required: none (GNLR 5.1 and the Bankr. L.R. text, read 2026-10-15, name no face or point size) → vendored substitute: none; **EB Garamond** is the no-face default (`docs/FONTS.md`) → metric-compatible: n/a |
+| overlay | ok: `samples/OVERLAY-campos-motion-to-dismiss.pdf` and `.txt` (each sample page paired with the same-numbered filed page, all 11); the filed exemplar was re-fetched from the RECAP URL in `exemplars/SOURCE.md` and matches its SHA-256; the PDF is kept outside the repo, since no court tracks exemplar PDFs in git |
+| pages reviewed | 11 of 11 (re-rendered 2026-10-15 and every page rasterised at 60 dpi and viewed; the layout is unchanged from the record below) |
 
 ## Governing rules
 
@@ -52,7 +53,7 @@ Not generated, on purpose: the notice of hearing (GUB 9073-1), the proposed orde
 3. **"With Memorandum in Support" (GUB-MOT-005)** is printed from the frontmatter flag. GNLR 5.1(c)(3)(D) asks for a mention of the memorandum; the exemplar's title does not carry it, so the render differs from the exemplar on that line. The overlay will show it.
 4. **Court name.** The exemplar captions the court "UNITED STATES DISTRICT COURT, DISTRICT COURT OF GUAM"; this template uses "DISTRICT COURT OF GUAM / TERRITORY OF GUAM / BANKRUPTCY DIVISION", the form used in the complaint exemplar and on the court's notice form. The court's own name for the bankruptcy division is not settled by the sources read.
 5. **Line numbers are not drawn.** GNLR 5.1 does not require them; the exemplar (an ECF filing) does not carry them either.
-6. **Font.** EB Garamond (vendored, OFL) at 13 pt. The exemplar is Times New Roman 12 pt, and EB Garamond sets smaller at the same size, so 13 pt was chosen to match its visual size. This is a choice, not a rule (GNLR 5.1 names no typeface or size).
+6. **Font.** EB Garamond (vendored, OFL) at 13 pt. No rule read names a typeface (GNLR 5.1 names no typeface or size; Bankr. L.R. text checked 2026-10-15), so EB Garamond stays, per `docs/FONTS.md`. The exemplar is Times New Roman 12 pt, and EB Garamond sets smaller at the same size, so 13 pt was chosen to match its visual size. This is a choice, not a rule.
 7. **Case names and signals are not italic.** The exemplar's text layer has no italic markup (`pdffonts` shows Times Roman and Bold only), so the sample is roman. The template italicises `*...*`, so a future sample can carry italics. The statutory "(emphasis added)" in the exemplar is therefore not reproduced.
 8. **Headings are double-spaced** (2 em pitch, like body text). GNLR 5.1(a) exempts only counsel, the title of the case, footnotes, quotations and exhibits from double spacing; headings are not in that list, so double spacing is the reading used here.
 9. **Only one exemplar.** Tier 2 is not judged against a second filer; the RECAP search found no other Guam motion in the same docket series.
