@@ -88,4 +88,34 @@ Defects found and fixed during this review (for the record): (1) the space after
 10. **`tools/check.sh` and `tools/check-selftest.sh` are not run.** They expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape; the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 record.
 11. **File names.** The brief names outputs `samples/<id>.pdf` and `samples/<id>-overlay.pdf`. The tools read and write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` by default, and `tools/overlay.sh` reads `OUTPUT-<id>.pdf` to build its overlay, so this folder follows the tools' names. The sample is `INPUT-<id>.md`, the same convention.
 
+## Engines
+
+Engine status: typst `OUTPUT-actual-brewing-ust-motion.pdf` (above); docx built, not checked (see BLOCKED below); latex not built.
+
+**docx** (`docx/`): `docx/build-reference.sh` writes `docx/reference.docx` (styles, page setup, footer page number); `docx/render.sh` runs pandoc with `docx/ohsb-motion-brief.lua` (caption table, unnumbered paragraphs, lettered quotations, signature blocks, certificate address blocks) and restores the reference styles and section. Output: `samples/OUTPUT-actual-brewing-ust-motion.docx`. Checked by the tool here: the zip has no duplicate entries and every XML part is well formed (`tools/render-docx.sh` ran these before the LibreOffice step).
+
+What the reference sets, the same values as the typst template (read back from `styles.xml` and `sectPr`):
+
+- Letter paper, 1 in margins on all four sides.
+- EB Garamond (vendored, `fonts/eb-garamond`), 12 pt body and footnotes, bold for the court title, caption title and headings.
+- Body exact 24 pt pitch (double spacing); single lines (caption, title, signature, certificate address blocks) exact 14 pt; footnotes single spaced.
+- First-line indent 0.5 in on body paragraphs; the lettered quotations of 11 U.S.C. § 1112(b)(4) indented 0.75 in; the numbered summary items hang from 0.5 in.
+- Heading 1 centered bold capitals, Heading 2 centered bold; keep with next and keep lines.
+- Centered PAGE field in the footer, 12 pt.
+- All 10 footnotes are native Word footnotes (`footnotes.xml`).
+
+What differs from the typst template, not verified against a rendered page:
+
+- Page count of the docx is not known; typst gives 7 pages for this sample. Word and LibreOffice may paginate differently from each other too.
+- Paragraph gaps: typst's gap equals one leading; the docx has no extra space between paragraphs, which gives the same 24 pt pitch. Extra space above and below headings and the signature block (typst: 1.35 em) is not set.
+- The "***" rules are centered paragraphs; typst puts 1.35 em above and below each.
+- The signature block's "Dated:" and signer columns use the typst widths (2.6 in and the rest); the typst block has 1.35 em above it, the docx one blank double-spaced line.
+
+**docx BLOCKED items**
+
+- `docx.pdf` and page-by-page review: `soffice` (LibreOffice) is not installed on this box, so `tools/render-docx.sh` stops at `soffice: not found` after writing the `.docx`. No `OUTPUT-actual-brewing-ust-motion.docx.pdf` exists and no page has been rendered or viewed. The Gate 0 and Gate 1 docx checks (`tools/check.sh --engine docx`) cannot run.
+- Word opening check: no Word on this box; the file is checked by zip listing and `xmllint` only (see `docs/DOCX.md`, "Checking a docx", step 3).
+- Tables of contents and authorities: none in this doc type; no TOC or TOA field is used.
+- Notice directive: the sample does not use `{{NOTICE_21_DAY}}`; the docx filter raises an error if it appears, instead of dropping it silently (the typst template renders it).
+
 [Court folder](../README.md)

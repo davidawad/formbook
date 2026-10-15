@@ -92,4 +92,33 @@ Earlier defects found and fixed during this review (for the record): overlapping
 10. **`tools/check.sh` and `tools/check-selftest.sh` are not run.** They expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape; the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 record.
 11. **File names.** The brief names outputs `samples/<id>.pdf` and `samples/<id>-overlay.pdf`. The tools read and write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` by default (and `tools/overlay.sh` reads `OUTPUT-<id>.pdf` to build its overlay), so this folder follows the tools' names, as the court-of-appeals and CAND folders do. The sample is `INPUT-<id>.md`, the same convention.
 
+## Engines
+
+Engine status: typst `OUTPUT-caudill-pc-infinity.pdf` (above); docx built, not checked (see BLOCKED below); latex not built.
+
+**docx** (`docx/`): `docx/build-reference.sh` writes `docx/reference.docx` (styles, page setup, footer page number); `docx/render.sh` runs pandoc with `docx/ohsb-adversary-complaint.lua` (caption table, numbered paragraphs, signature block) and restores the reference styles and section. Output: `samples/OUTPUT-caudill-pc-infinity.docx`. Checked by the tool here: the zip has no duplicate entries and every XML part is well formed (`tools/render-docx.sh` ran these before the LibreOffice step).
+
+What the reference sets, the same values as the typst template (read back from `styles.xml` and `sectPr`):
+
+- Letter paper, 1 in margins on all four sides.
+- EB Garamond (vendored, `fonts/eb-garamond`), 12 pt body and footnotes, bold for the court title, caption title and headings.
+- Body exact 24 pt pitch (double spacing); single lines (caption, title, signature) exact 14 pt; footnotes single spaced.
+- First-line indent 0.5 in on body paragraphs and the numbered relief items.
+- Heading 1 centered bold capitals, Heading 2 centered bold; keep with next and keep lines.
+- Centered PAGE field in the footer, 12 pt.
+
+What differs from the typst template, not verified against a rendered page:
+
+- Page count of the docx is not known; typst gives 8 pages for this sample. Word and LibreOffice may paginate differently from each other too.
+- Paragraph gaps: typst's gap equals one leading; the docx has no extra space between paragraphs, which gives the same 24 pt pitch. Extra space above and below headings and the signature block (typst: 1.35 em) is not set.
+- Paragraph numbers use a tab stop at 1 in; typst sets a 0.3 in gap after the number. Two-digit numbers can sit a little differently.
+- The Exhibit A table is a pandoc table: left aligned (typst centers it), borders from the `Table` style (0.5 pt in typst).
+
+**docx BLOCKED items**
+
+- `docx.pdf` and page-by-page review: `soffice` (LibreOffice) is not installed on this box, so `tools/render-docx.sh` stops at `soffice: not found` after writing the `.docx`. No `OUTPUT-caudill-pc-infinity.docx.pdf` exists and no page has been rendered or viewed. The Gate 0 and Gate 1 docx checks (`tools/check.sh --engine docx`) cannot run.
+- Word opening check: no Word on this box; the file is checked by zip listing and `xmllint` only (see `docs/DOCX.md`, "Checking a docx", step 3).
+- Tables of contents and authorities: none in this doc type; no TOC or TOA field is used.
+- Notice directive: the complaint has no 21-day notice; `{{NOTICE_21_DAY}}` raises an error in the docx filter instead of being dropped silently.
+
 [Court folder](../README.md)
