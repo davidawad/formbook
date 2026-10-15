@@ -75,3 +75,27 @@ Tier-2 findings (OPEN or ACCEPTED): the page-3 gap above (OPEN); the page-10 gap
 3. The exemplar is a 2017 filing. It predates the 2023 local-rule renumbering and the 2024 restyling of Rules 7010 and 9004. The template follows the current text; the filing was used only for layout choices the rules leave open.
 4. The filed complaint carries no certificate. The summons (Fed. R. Bankr. P. 7004) is a separate form and is not part of this template.
 5. Page 3's gap (above) is a template choice, not a rule. It is OPEN.
+
+## Engines
+
+| Engine | Folder | Output in `samples/` | State |
+|---|---|---|---|
+| typst (primary) | `typst/` | `OUTPUT-magnetation-complaint.pdf` | template, unchanged by the docx work; no PDF in the snapshot |
+| latex | `latex/` | none | not built |
+| docx | `docx/` | `OUTPUT-magnetation-complaint.docx`, `OUTPUT-magnetation-complaint.docx.pdf` | built (below) |
+
+The docx build: `sh tools/render.sh --engine docx adversary-complaint samples/INPUT-magnetation-complaint.md`. It runs `docx/render.sh` (pandoc, the Lua filter `docx/mnb-adversary-complaint.lua`, and `docx/reference.docx`). `docx/make-reference.sh` rebuilds the reference. The PDF is LibreOffice 26.8.1 with the vendored fonts only.
+
+What matches the typst output: letter paper with 1 in margins; EB Garamond 12 pt, embedded and the only font; body double-spaced at a 24 pt line pitch with a half-inch first-line indent; numbered paragraphs (numbers typed into the text, as the typst template does) and an unnumbered WHEREFORE; the caption (court title, debtor and adversary boxes with 0.75 pt rules, indented designations, the title in the adversary column, an 18 pt gap); the spacing between its rows matches typst's to about 1 pt; centred bold caps headings; lettered lists (A., B., ...) at the typst indents; the signature block; a centred page number in the footer.
+
+What differs:
+- Heading sizes: Word takes half-points, so 17 pt and 14.5 pt where typst uses 16.8 pt and 14.4 pt.
+- Pagination: 10 pages in docx, 11 in typst. The gap on typst's page 3 is not reproduced: ¶14 flows onto page 3. No page break is forced.
+- Position: the first body line on a page sits about 11 pt lower than typst's, and the first caption line about 4 pt lower (LibreOffice places exact-spaced lines lower). The top margin is 1 in in both.
+- Footnotes: none in this template or sample. Footnote text is set to 10 pt (typst's default measured 10.2 pt); its line spacing is not checked.
+
+docx BLOCKED items:
+- The docx gates do not run yet: this court has no `rules.md` or `checks.yaml`, so `tools/check.sh --engine docx` has no checks to run. Nothing is stamped.
+- Word: not opened (no Word on this box). The renderer checks the zip and the XML parts; LibreOffice converts the file without a repair step.
+
+Page review (docx): all 10 pages of `OUTPUT-magnetation-complaint.docx.pdf` were rendered at 60 dpi and viewed against the typst render. No page has an open defect that is not in the list above.
