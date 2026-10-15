@@ -91,3 +91,12 @@ Reviewed pages: 12 of 12.
 9. **Certificate of service.** None for a complaint: service is by summons (Rule 4). Not produced.
 10. **Civil cover sheet, summons, disclosure statement.** Not produced (see Governing rules).
 11. **Tools gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at the court directory level. This doc-type folder is not that shape, and the brief forbids editing `tools/`. Render and overlay were run; the Gate 2 table above is the review for this doc type.
+
+## Engines
+
+DOCX engine (`docx/`: `reference.docx`, `oknd-complaint.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/oklahoma/federal/northern-district/complaint samples/INPUT-lord-complaint.md`.
+
+- **Matches the typst form:** EB Garamond 13 pt body, 12 pt page number centered in the footer, 1 in margins on letter paper, double spacing (Word "double", line 480), first-line indent 0.5 in, numbered allegations (typed numbers, FRCP 10(b)), centered bold caps level-1 headings, centered bold level-2, bold italic level-3, the cover (court name, caption with rule, title, "Jury Trial Demanded"), lettered "(a)" lists, and the signature block.
+- **Differs from typst:** line pitch is "double" rather than exactly 24 pt (the local rule bans "exactly 24 pt"), so the page holds a different number of lines in Word. The caption and signature block are Word tables (border and row heights differ slightly). Allegation numbers are typed text, not a list field. Footnotes are not used by this form.
+- **Output:** `samples/OUTPUT-lord-complaint.docx` is written. `render-docx.sh` then exits 1 (see below).
+- **BLOCKED:** `docx.pdf` (LibreOffice PDF, check gates 0-3): `soffice` is not installed on this box and cannot be installed without root or conda-forge. Visual review of the docx pages: needs the same PDF; 0 docx pages reviewed. `unzip` is not installed, so the zip-integrity step of `tools/render-docx.sh` fails after the `.docx` is written. The XML parts were checked instead with `ziptool` and `xmllint` (15 of 15 well-formed). Opening in Word and LibreOffice without a repair prompt: not done.
