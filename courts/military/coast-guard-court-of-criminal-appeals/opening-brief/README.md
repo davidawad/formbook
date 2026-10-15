@@ -28,6 +28,8 @@ Everything in the template that is marked `UNVERIFIED` must be replaced from the
 | File | What |
 |---|---|
 | `samples/INPUT-smoke.md` | Placeholder sample. It exercises the template structure only. It is **not** transcribed from an exemplar and must not be treated as one. |
+
+Re-run 2026-10-15 (bead fb-595.20.5): `sh tools/render.sh courts/military/coast-guard-court-of-criminal-appeals/opening-brief samples/INPUT-smoke.md` exit 0. `OUTPUT-smoke.pdf` is 3 pages, letter. All 3 pages rasterized at 60 dpi and viewed: p. 1 caption, Assignments of Error, Statement of the Case and Facts; p. 2 Errors and Argument, Relief Requested and signature; p. 3 certificate of filing and service. Layout only; the text is placeholder.
 | `samples/OUTPUT-smoke.pdf` | Render of `INPUT-smoke.md`. `sh tools/render.sh courts/military/coast-guard-court-of-criminal-appeals/opening-brief samples/INPUT-smoke.md`. Exit 0, no typst warnings, 3 pages, EB Garamond embedded. |
 
 Pages reviewed (rasterized at 60 dpi and viewed, 2026-10-14, after the heading fix): 3 of 3 (`OUTPUT-smoke.pdf` pp. 1-3, re-rendered).

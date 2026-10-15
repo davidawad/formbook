@@ -1,8 +1,14 @@
 # Exemplars: petition (Tax Court)
 
-**BLOCKED: no exemplar.** No public, filed Tax Court petition (a real case, with a docket number, parties and a filing date) was found. No `FILED-EXAMPLE-*.pdf` is present, so `tools/overlay.sh` cannot run for this doc type.
+**Exemplar found (2026-10-15): 1 of 2 filers.** A real, filed Tax Court petition is in `exemplars/`. Tier 2 needs 2 or 3 exemplars from different filers (docs/EVAL-LOOP.md), so the petition's tier-2 judgement is against this one filer only; see the README.
 
-Searched 2026-10-14:
+| File | Case and docket | Filer | Filed | Source (public record) | Fetched |
+|---|---|---|---|---|---|
+| `FILED-EXAMPLE-lawrence-20370-09-petition.pdf` (pages 1 to 52 of 58 of the filing; 52 pages, scanned, OCR text layer added) | *Walter Jesse Lawrence v. Commissioner of Internal Revenue*, U.S. Tax Court Docket No. 20370-09. Amended petition (Form 1 items 1 to 6, notice of deficiency dated May 29, 2009 and July 1, 2009, Ogden, Utah; years 2003, 2004 and 2005) | Walter Jesse Lawrence, petitioner, pro se | Attached as Exhibit 6 to a filing dated 12/09/2009, entered 12/10/2009, in *In re Motors Liquidation Company*, Bankr. S.D.N.Y. No. 09-50026-mg, Doc 4636-1 (the bankruptcy filing that reproduced it). The petition's own signature date is handwritten (read as 10/19/09; not verified against the original). | Document: https://storage.courtlistener.com/recap/gov.uscourts.nysb.233396/gov.uscourts.nysb.233396.4636.1.pdf . Docket page: https://www.courtlistener.com/docket/4327513/4636/1/motors-liquidation-company/ (the RECAP search API gives the file path `recap/gov.uscourts.nysb.233396/gov.uscourts.nysb.233396.4636.1.pdf`, document 4636, attachment 1, Exhibit 6). | 2026-10-15 |
+
+Not included: pages 53 to 58 of the same exhibit (the IRS letters attached to the petition and the bankruptcy forms). The file's pages 1 to 52 have their scanned images unchanged; the OCR text layer was added with `ocrmypdf --force-ocr` (tesseract, English) so that `tools/overlay.sh` can pair pages by text. The filing has no text layer in the original download.
+
+Searched 2026-10-14 (earlier pass, before the find above):
 
 | Search or source | Result |
 |---|---|

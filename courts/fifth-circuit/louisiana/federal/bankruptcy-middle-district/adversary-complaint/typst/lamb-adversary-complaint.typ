@@ -14,7 +14,7 @@
 
 #let font-family = "EB Garamond"        // vendored in /fonts (no system font is used)
 #let type-size = 12pt                   // LAMB-FORM-002: LR 5005-2(b), 12-point font
-#let body-leading = 0.7em               // LAMB-FORM-003: LR 5005-2(b), double-spaced; calibrated, see README
+#let body-leading = 1.305em             // LAMB-FORM-003: LR 5005-2(b), double-spaced = twice the single line pitch of EB Garamond (natural pitch 1.305em, so extra leading equals one natural line); see README
 #let single-leading = 0em                // caption, headings and signature block: single-spaced
 #let page-margin = 1in                  // LAMB-FORM-001: 8.5 x 11 page (LR 5005-2(a)); margins are a style choice
 #let para-indent = 0.5in                // first-line indent; the paragraph number sits at this indent
@@ -103,14 +103,17 @@
 
 /// Split the body into blank-line-separated chunks and typeset each by its first characters.
 /// Convention (LAMB-CONT-002): a chunk starting "WHEREFORE" is an unnumbered prayer lead-in.
+/// The opening chunk, when it is not a heading, is an unnumbered lead-in too: both filed
+/// M.D. La. complaints in exemplars/ leave it unnumbered (Hoven; Criss), and the
+/// numbered allegations start after it.
 #let body-blocks(body) = {
   let chunks = body.replace("\r\n", "\n").split("\n\n").map(s => s.trim()).filter(s => s != "")
-  for c in chunks {
+  for (i, c) in chunks.enumerate() {
     if c.starts-with("### ") { sub-sub-heading(c.slice(4)) }
     else if c.starts-with("## ") { sub-heading(c.slice(3)) }
     else if c.starts-with("# ") { section-heading(c.slice(2)) }
     else if c.starts-with("- ") or c.match(regex("^\\d+\\. ")) != none { lettered(c) }
-    else if c.starts-with("WHEREFORE") { block(width: 100%)[#h(para-indent)#inl(c)] }
+    else if c.starts-with("WHEREFORE") or i == 0 { block(width: 100%)[#h(para-indent)#inl(c)] }
     else { numbered(c) }
   }
 }

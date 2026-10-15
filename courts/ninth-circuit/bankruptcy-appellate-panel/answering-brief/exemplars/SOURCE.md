@@ -14,3 +14,14 @@ Searches tried, all without a BAP appellee's answering brief:
 If a filing is found later, add the PDF as `exemplars/FILED-EXAMPLE-<short-case>-<docket>-answering-brief.pdf` and fill in this file with: URL fetched from, case name, docket number, filer, date filed, date fetched.
 
 Status: BLOCKED: no public exemplar.
+
+## Re-search 2026-10-15 (bead fb-595.20.9)
+
+Still no exemplar. Searches this session:
+
+- CourtListener REST, anonymous (no API token on this box; unthrottled requests are limited to 5/min, so each query was paced). With the court filter, `court=bap9`: `type=rd` `q="answering brief"` = 0; `type=rd` `q="reply brief"` = 0; `type=r` `q=brief` = 0.
+- CourtListener `type=rd` `q="Bankruptcy Appellate Panel" "appellee's answering brief"`: 2 hits, both other courts (a 2014 ca9 brief, a 2019 bankruptcy docket). `type=rd` `q="SC-16-1227"`: 0.
+- Web search (standard, extended): "appellee's answering brief" with BAP number; BAP-caption answering briefs 2023-2025. Results: BAP memoranda (SC-25-1091, CC-25-1037; no briefs), the Litigants Manual, and the Meridian CSAC amicus motion (SC-16-1227, dated 2016-10-14), which supports the appellant and is not an answering brief.
+- Ruled out: Hujazi v. Wirum (ca9 No. 14-1030, a Ninth Circuit appeal, not the BAP). cacttc.org hosts only the Meridian appellant's opening brief (already in `../../opening-brief/exemplars/`).
+
+Status: BLOCKED: no public exemplar (re-confirmed 2026-10-15).

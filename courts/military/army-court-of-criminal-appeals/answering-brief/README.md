@@ -56,3 +56,10 @@ Pitch measured on the opening brief's template (same parameters): body lines 26.
 6. **Signature with prayer** (OPEN, page 4 above): no keep-with-previous control.
 7. **Standard of review and prayer are not checked by the template** (the sample has them).
 8. **No `tools/check.sh` gates run.** Not in this unit's brief; the template is not stamped.
+
+## Re-check (2026-10-15, bead fb-595.20.4)
+
+- Render: `sh tools/render.sh` exit 0, 5 pages, no typst warnings. Overlay: `sh tools/overlay.sh` exit 1 ("no exemplar pdf"), so **overlay=fail**.
+- Gate 2: all 5 pages rendered at 60 dpi and viewed. Same result as the 2026-10-14 review: pages 1, 2, 3, 5 OK; page 4 is the signature block alone (OPEN, finding 6 above, unchanged).
+- Exemplar search: a third pass (see `exemplars/SOURCE.md`, "Third pass") found no ACCA-filed Government answer. Lead: a Government answer in a federal habeas case (*Lorance*, D. Kan.) attaches an ACCA appellant brief, not an answer. Its attachment is not in RECAP storage.
+- Status: BLOCKED: no exemplar.

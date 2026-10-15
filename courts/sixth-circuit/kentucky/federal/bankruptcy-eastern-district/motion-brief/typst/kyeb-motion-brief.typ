@@ -5,9 +5,10 @@
 // measured off an exemplar, no forced line breaks. The body is markdown rendered by cmarker; the metadata
 // comes from the YAML frontmatter of the same file (schema: ../README.md).
 //
-// There is no filed exemplar of this doc type yet (see ../README.md, BLOCKED: no exemplar). The layout
-// is therefore built from the rules and from the adversary-complaint template next door, which uses the
-// same caption and signature conventions. Open choices are listed in ../README.md.
+// Open choices the filed exemplar settles (exemplars/FILED-EXAMPLE-williams-24-60490-motion-brief.pdf, and
+// see ../README.md): single-spaced body with a gap between paragraphs; numbered paragraphs; a judge line in
+// the caption; the title between two rules; the "/s/" signature block with a rule under the signer's name,
+// repeated in the certificate of service; NOTICE after the signature and before the certificate.
 
 #import "@preview/cmarker:0.1.10"
 
@@ -17,13 +18,16 @@
 
 #let font-family = "EB Garamond"         // KYEB-FORM-001: no E.D. Ky. bankruptcy rule sets a typeface; vendored in /fonts.
 #let type-size = 13pt                    // KYEB-FORM-001: a legible size (FRBP 9004(a)); 13 pt because EB Garamond sets smaller than Times.
-#let line-pitch = 24pt                   // KYEB-FORM-003: double spacing for the body (a convention, see ../README.md).
-#let body-leading = 0.54em               // gap between lines of body text; tuned so the line pitch is line-pitch.
-#let single-leading = 0.2em              // caption, signature, headings, footnotes, hearing notice.
+#let body-leading = 0.2em                // KYEB-FORM-003: single spacing, as the exemplar (a convention; see ../README.md).
+#let single-leading = 0.2em              // caption, signature, headings, footnotes, notice.
+#let gap = 12pt                          // the one vertical gap: between paragraphs, around headings and blocks.
 #let margins = (top: 1in, bottom: 1in, left: 1in, right: 1in)
-#let para-indent = 0.5in
+#let para-indent = 0.5in                 // first-line indent of an unnumbered paragraph.
+#let item-indent = 0.25in                // numbered paragraph: the number sits here from the margin...
+#let item-text = 0.6in                   // ...and the text hangs from here.
 #let footer-size = 12pt
-#let caption-left = 3.3in
+#let caption-left = 50%                   // the right-hand column starts at the middle of the text block.
+#let rule-stroke = 0.7pt
 
 // ---------------------------------------------------------------------------
 // Small helpers
@@ -44,6 +48,9 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
+/// The paragraph counter: numbered paragraphs run on through the whole motion, as the exemplar's do.
+#let para-no = counter("kyeb-motion-para")
+
 // ---------------------------------------------------------------------------
 // Caption (FRBP 9004(b): court, title of the case, case number and adversary number if any, designation)
 // ---------------------------------------------------------------------------
@@ -59,18 +66,22 @@
   let left-top = {
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
     [In re:]
-    v(line-pitch * 0.5)
+    v(gap * 0.5)
     for n in debtors.names { inl(n); parbreak() }
-    pad(left: 1.8in, inl(debtors.designation))
+    inl(debtors.designation)
   }
   let right-top = {
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    [#need(meta, "chapter")]
-    v(line-pitch * 0.5)
     [Case No. #need(meta, "case_number")]
     if need(meta, "jointly_administered") {
       linebreak()
       [(Jointly Administered)]
+    }
+    v(gap * 0.5)
+    [#need(meta, "chapter")]
+    if "judge" in meta {
+      v(gap * 1.5)
+      inl(meta.judge)
     }
   }
   // An adversary caption has parties on the left; a main-case motion has the debtors only.
@@ -80,9 +91,9 @@
       for n in side.names { inl(n); parbreak() }
       pad(left: 1.8in, inl(side.designation))
       if i < cap.at("parties", default: ()).len() - 1 {
-        v(line-pitch * 0.5)
+        v(gap * 0.5)
         [v.]
-        v(line-pitch * 0.5)
+        v(gap * 0.5)
       }
     }
   }
@@ -95,7 +106,7 @@
   table(
     columns: (caption-left, 1fr),
     inset: 0pt,
-    stroke: (x, y) => if x == 0 { (right: 0.7pt, bottom: 0.7pt) } else { none },
+    stroke: none,
     pad(right: 1.2em, top: 0.4em, bottom: 0.6em, left-top),
     pad(left: 1.2em, top: 0.4em, bottom: 0.6em, right-top),
     ..if has-parties {(
@@ -107,15 +118,25 @@
   )
 }
 
+/// The title sits between two rules, bold and centred, as in the exemplar.
+#let title-block(meta) = block(width: 100%, above: gap, below: gap, {
+  line(length: 100%, stroke: rule-stroke)
+  v(gap * 0.5)
+  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+  align(center, strong(need(meta, "title").join(" ")))
+  v(gap * 0.5)
+  line(length: 100%, stroke: rule-stroke)
+})
+
 // ---------------------------------------------------------------------------
 // Notice of opportunity for hearing (LBR 9013-1(a)) and hearing date (LBR 9014-1(a))
 // ---------------------------------------------------------------------------
 
-/// Printed under the title when the motion is noticed for hearing or with an objection deadline.
+/// Printed under the title when the motion is set for hearing or with an objection deadline.
 #let hearing-notice(meta) = {
   let h = meta.at("hearing", default: none)
   if h != none {
-    block(width: 100%, above: line-pitch * 0.5, below: line-pitch * 0.5, {
+    block(width: 100%, above: gap, below: gap, {
       set par(first-line-indent: 0pt, leading: single-leading, justify: false)
       if "date" in h { [Hearing: #h.date] ; linebreak() }
       if "time" in h { [Time: #h.time] ; linebreak() }
@@ -126,7 +147,8 @@
 }
 
 // ---------------------------------------------------------------------------
-// Body: paragraphs are unnumbered and first-line indented; headings are typed by the author
+// Body: unnumbered paragraphs are first-line indented; numbered paragraphs run on through the motion;
+// headings are typed by the author
 // ---------------------------------------------------------------------------
 
 #let footnote-def = regex("^\\[\\^([^\\]]+)\\]:[ \\t]*([\\s\\S]*)$")
@@ -151,6 +173,31 @@
   out + inl(rest)
 }
 
+/// Split a chunk of "N. text" lines into its items. A line that does not start with a number continues the
+/// item above it, so a wrapped line of markdown stays in its paragraph.
+#let numbered-items(t) = {
+  let items = ()
+  for line in t.split(regex("\\r?\\n")) {
+    let m = line.match(regex("^\\s*\\d+\\.[ \\t]+"))
+    if m != none {
+      items.push(line.slice(m.end).trim())
+    } else if items.len() > 0 {
+      let last = items.pop()
+      items.push(last + " " + line.trim())
+    }
+  }
+  items
+}
+
+/// One numbered paragraph. The number is set by the counter, not by the author's markdown, so the sequence
+/// stays right when a chunk of the body is split by a heading.
+#let numbered-item(t, notes) = block(width: 100%, below: gap, pad(left: item-indent, grid(
+  columns: (item-text - item-indent, 1fr),
+  column-gutter: 0pt,
+  [#para-no.step()#context para-no.display("1.")],
+  with-notes(t, notes),
+)))
+
 #let body-blocks(body, notes) = {
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
   let pending = []
@@ -163,63 +210,72 @@
       has-pending = true
       continue
     }
-    if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
-      let items = {
+    let piece = none
+    if t.match(regex("^\\d+\\.[ \\t]")) != none {
+      piece = stack(dir: ttb, spacing: 0pt, ..numbered-items(t).map(it => numbered-item(it, notes)))
+    } else if t.starts-with(regex("^[-*+][ \\t]")) {
+      piece = {
         set par(leading: body-leading)
         cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
-        v(body-leading)
+        v(gap)
       }
-      if has-pending {
-        block(breakable: false, width: 100%, { pending; items })
-      } else {
-        items
-      }
-      pending = []
-      has-pending = false
     } else {
       // Each paragraph is its own block, so consecutive paragraphs never run together on one line.
-      let piece = block(width: 100%, [#h(para-indent)#with-notes(t, notes)])
-      if has-pending {
-        block(breakable: false, width: 100%, { pending; piece })
-      } else {
-        piece
-      }
-      pending = []
-      has-pending = false
+      piece = block(width: 100%, below: gap, [#h(para-indent)#with-notes(t, notes)])
     }
+    if has-pending {
+      block(breakable: false, width: 100%, { pending; piece })
+    } else {
+      piece
+    }
+    pending = []
+    has-pending = false
   }
   if has-pending { pending }
 }
 
 // ---------------------------------------------------------------------------
-// Signature block (FRBP 9011(a)) and certificate of service (FRBP 9014(b), by convention)
+// Signature block (FRBP 9011(a)), NOTICE, and certificate of service (FRBP 9014(b), by convention)
 // ---------------------------------------------------------------------------
 
-#let signature-block(meta) = {
+/// The "/s/" block at the right of the page, with a rule under the signer's name. The exemplar repeats it in
+/// the certificate of service, so it is one function; `opening` adds "Respectfully Submitted,".
+#let signature-block(meta, opening: true) = {
   let sig = need(meta, "signature")
-  block(breakable: false, above: line-pitch, {
+  block(breakable: false, above: gap, below: gap, {
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-    grid(columns: (1fr, 3.2in), [Dated: #need(meta, "date")], {
-      [#sig.firm]
-      v(line-pitch)
-      [By: /s/ #sig.signer]
-      linebreak()
+    grid(columns: (1fr, 1fr), [], {
+      if opening [Respectfully Submitted,]
+      v(if opening { gap } else { gap * 0.5 })
+      [/s/ #sig.signer]
+      v(0.2em)
+      line(length: 100%, stroke: rule-stroke)
+      if "firm" in sig { [#sig.firm]; linebreak() }
       for l in sig.at("lines", default: ()) { inl(l); linebreak() }
     })
   })
 }
 
+#let notice-block(meta) = {
+  let n = meta.at("notice", default: none)
+  if n != none {
+    block(width: 100%, above: gap, below: gap, {
+      set par(first-line-indent: 0pt, leading: body-leading, justify: false)
+      block(sticky: true, width: 100%, below: gap, align(center, strong[NOTICE]))
+      inl(n)
+    })
+  }
+}
+
 #let certificate-block(meta) = {
   let cert = meta.at("certificate_of_service", default: none)
   if cert != none {
-    block(breakable: false, above: line-pitch, {
-      set par(first-line-indent: 0pt, leading: body-leading, justify: false)
+    block(breakable: false, above: gap, {
+      set par(first-line-indent: 0pt, leading: body-leading, spacing: gap * 0.25, justify: false)
       align(center, strong(upper("Certificate of Service")))
-      block(width: 100%, above: line-pitch * 0.5, [#h(para-indent)#inl(cert.text)])
-      v(line-pitch)
-      grid(columns: (1fr, 3.2in), [Dated: #need(meta, "date")], {
-        [By: /s/ #need(meta, "signature").signer]
-      })
+      v(gap)
+      cmarker.render(cert.text, raw-typst: false, smart-punctuation: true)
+      signature-block(meta, opening: false)
     })
   }
 }
@@ -262,29 +318,26 @@
 
   // Headings: level 1 centered capitals; level 2 centered bold; level 3 bold at the margin.
   show heading: set text(size: type-size)
-  show heading.where(level: 1): it => block(width: 100%, above: line-pitch * 0.5, below: line-pitch * 0.5, sticky: true,
+  show heading.where(level: 1): it => block(width: 100%, above: gap, below: gap, sticky: true,
     align(center, strong(upper(it.body))))
-  show heading.where(level: 2): it => block(width: 100%, above: line-pitch * 0.5, below: line-pitch * 0.5, sticky: true,
+  show heading.where(level: 2): it => block(width: 100%, above: gap, below: gap, sticky: true,
     align(center, strong(it.body)))
-  show heading.where(level: 3): it => block(width: 100%, above: line-pitch * 0.5, below: line-pitch * 0.5, sticky: true,
+  show heading.where(level: 3): it => block(width: 100%, above: gap, below: gap, sticky: true,
     strong(it.body))
 
   // ---- first page: court, caption, title, hearing notice ----
   court-title(meta)
-  v(line-pitch)
+  v(gap * 1.5)
   caption-table(meta)
-  v(line-pitch * 0.5)
-  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-  align(center, strong(need(meta, "title").map(l => [#l]).join(linebreak())))
+  title-block(meta)
   hearing-notice(meta)
-  v(line-pitch * 0.5)
 
   // ---- body ----
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
-  set enum(numbering: "a.", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
   set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
   body-blocks(body, notes)
 
   signature-block(meta)
+  notice-block(meta)
   certificate-block(meta)
 }

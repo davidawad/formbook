@@ -52,3 +52,15 @@ Other searches in this pass (no App Div answering brief returned):
 
 - A respondent's brief in an Appellate Division appeal that is filed on NYSCEF (public records are sometimes viewable without login), or posted by the Attorney General, a public-interest firm, or a law-school clinic. Confirm the Department, the docket number and the filer from the cover.
 - Once a text-layer PDF is saved here, name it `FILED-EXAMPLE-<short-case>-<docket>-answering-brief.pdf`, record the filer and date here, and re-run `sh tools/overlay.sh` on this folder.
+
+## Search pass, 2026-10-15 (fb-595.20.13)
+
+No respondent's brief from any Department was found. Searches, all public sources:
+
+1. CourtListener REST, `court=nyappdiv`, types `r` (RECAP), `rd`, `o`, queries "brief", "appellant", "respondent brief", "Appellate Division brief": zero RECAP hits. Opinion hits are opinions, not briefs.
+2. WebSearch (standard) x2: NYSCEF header string with "BRIEF FOR RESPONDENT" and the Fourth/Third/Second/First Dept names. Returned Behler v. Tao (Court of Appeals, 403 from host), a Stefanik letter, Second Dept orders and motion decisions.
+3. WebSearch (standard): "RESPONDENT'S BRIEF" with "NYSCEF DOC. NO." and "APPELLATE DIVISION". Returned ag.ny.gov trial-level filings, not appellate briefs.
+4. WebSearch (standard): Hussain CR-23-1493 respondent's brief. Returned only the appellant's brief (see opening-brief/exemplars/SOURCE.md); no People's brief.
+5. WebSearch (standard) x2: ag.ny.gov respondent brief; Fourth Dept respondent brief with table of authorities. Returned the Fuks candidate (below), Fourth Dept decision PDFs and Court of Appeals filing notices.
+
+Candidate still not saved: the Fuks respondent's brief (First Dept, Catafago Fini, filed 2024-04-17, URL in the table above). Its host returns 403 to curl and WebFetch. This box does not spoof headers to get around that.

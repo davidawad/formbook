@@ -63,6 +63,10 @@
 
 #let cover(meta) = page(numbering: none, footer: none)[
   #set par(leading: single-leading, first-line-indent: 0pt, justify: false)
+  #if "argued_by" in meta [
+    #block[To be argued by:#linebreak()#inl(meta.argued_by)]
+    #v(0.4em)
+  ]
   #align(center)[
     #text(size: 14pt)[Court of Appeals]
     #v(0.2em)
@@ -71,8 +75,10 @@
   #v(1.2em)
   #align(center)[
     #text(size: 14pt)[#need(meta, "apl_docket")]
-    #v(0.4em)
-    #text(size: 14pt)[#need(meta, "county_clerk_index")]
+    #if "county_clerk_index" in meta [
+      #v(0.4em)
+      #text(size: 14pt)[#meta.county_clerk_index]
+    ]
   ]
   #v(1.5em)
   #for side in need(meta, "caption") {
@@ -92,7 +98,9 @@
     #text(size: 14pt)[#upper(need(meta, "brief_title"))]
   ]
   #v(1.2em)
-  #align(center)[#need(meta, "proceeding")]
+  #if "proceeding" in meta [
+    #align(center)[#meta.proceeding]
+  ]
   #v(1fr)
   #grid(
     columns: (1fr, 1fr),
@@ -217,10 +225,11 @@
 #let ny-answering-brief(meta, md) = {
   set document(title: need(meta, "brief_title"))
   set text(font: font-family, size: body-size, lang: "en")
+  // Front matter (cover unnumbered, tables in roman); the body restarts at 1 (set below).
   set page(
     paper: "us-letter",
     margin: page-margin,
-    numbering: "1",
+    numbering: "i",
     number-align: center + bottom,
   )
   set par(leading: body-leading, first-line-indent: para-indent, justify: true)
@@ -230,12 +239,28 @@
 
   // Section headings (NY-HEAD-001): level 1 centered, bold, capitals.
   // Sub-headings: bold, left, with the letters and numerals typed in the markdown.
-  show heading.where(level: 1): it => block(above: 1.4em, below: 1.2em, sticky: true, align(center)[
-    #text(weight: "bold")[#upper(it.body)]
-  ])
-  show heading.where(level: 2): it => block(above: 1.2em, below: 0.9em, sticky: true, par(first-line-indent: 0pt, text(weight: "bold", it.body)))
-  show heading.where(level: 3): it => block(above: 1.3em, below: 1.1em, sticky: true, pad(left: 0.5in, par(first-line-indent: 0pt, text(weight: "bold", it.body))))
-  show heading.where(level: 4): it => block(above: 1.2em, below: 1em, sticky: true, pad(left: 1in, par(first-line-indent: 0pt, text(style: "italic", it.body))))
+  // Headings are set unjustified and unhyphenated: the filed exemplars break them at word
+  // ends, not at hyphens (no forced breaks: the wrap is left to the engine).
+  show heading.where(level: 1): it => block(above: 1.4em, below: 1.2em, sticky: true, {
+    set par(justify: false)
+    set text(hyphenate: false)
+    align(center)[#text(weight: "bold")[#upper(it.body)]]
+  })
+  show heading.where(level: 2): it => block(above: 1.2em, below: 0.9em, sticky: true, {
+    set par(justify: false, first-line-indent: 0pt)
+    set text(hyphenate: false)
+    text(weight: "bold", it.body)
+  })
+  show heading.where(level: 3): it => block(above: 1.3em, below: 1.1em, sticky: true, pad(left: 0.5in, {
+    set par(justify: false, first-line-indent: 0pt)
+    set text(hyphenate: false)
+    text(weight: "bold", it.body)
+  }))
+  show heading.where(level: 4): it => block(above: 1.2em, below: 1em, sticky: true, pad(left: 1in, {
+    set par(justify: false, first-line-indent: 0pt)
+    set text(hyphenate: false)
+    text(style: "italic", it.body)
+  }))
 
   // Block quotations (NY-FORM-003): indented, single-spaced.
   show quote.where(block: true): it => pad(left: 0.5in, right: 0.5in, block(above: 1em, below: 1em, {
@@ -248,8 +273,10 @@
   toc-page()
   toa-page(meta)
 
-  // Body: starts on a new page; the first heading begins the argument.
+  // Body: starts on a new page, numbered from 1; the first heading begins the argument.
   pagebreak()
+  set page(numbering: "1")
+  counter(page).update(1)
   set par(leading: body-leading, first-line-indent: para-indent, justify: true)
   cmarker.render(md, raw-typst: false, smart-punctuation: true)
 

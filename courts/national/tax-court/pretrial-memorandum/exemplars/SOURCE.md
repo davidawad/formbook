@@ -1,8 +1,14 @@
 # Exemplars: pretrial memorandum (Tax Court)
 
-**BLOCKED: no exemplar.** No public, filed Tax Court pretrial memorandum was found. No `FILED-EXAMPLE-*.pdf` is present, so `tools/overlay.sh` cannot run for this doc type.
+**Exemplar found (2026-10-15): 1 of 2 filers.** A real, filed Tax Court pretrial memorandum (for the respondent) is in `exemplars/`. Tier 2 needs 2 or 3 exemplars from different filers (docs/EVAL-LOOP.md), so the tier-2 judgement is against this one filer only, and the petitioner-side memorandum is still missing. See the README.
 
-Searched 2026-10-14:
+| File | Case and docket | Filer | Filed | Source (public record) | Fetched |
+|---|---|---|---|---|---|
+| `FILED-EXAMPLE-duffy-8711-16-pretrial-memorandum.pdf` (pages 4 to 26 of the 26-page filing; memorandum pages 1 to 23; OCR text layer added) | *Edward J. Duffy & Shannon L. Duffy v. Commissioner of Internal Revenue*, U.S. Tax Court Docket No. 8711-16. "Respondent's Pretrial Memorandum" / "Pretrial Memorandum for Respondent", Trial Calendar Portland, Oregon, December 10, 2018 | Respondent: Nhi T. Luu, Senior Attorney, U.S. Department of Justice, Tax Division (Portland, Group 2) | Memorandum dated and eFiled in the Tax Court November 26, 2018 (received stamp NOV 26 2018). It was attached to DOJ correspondence filed in the bankruptcy on January 28, 2019. | Document: https://storage.courtlistener.com/recap/gov.uscourts.orb.496563/gov.uscourts.orb.496563.66.0.pdf (26 pages, ECF Doc 66, in *In re Edward J. Duffy*, Bankr. D. Or. No. 18-33339-tmb13). Docket page: https://www.courtlistener.com/docket/7933526/66/edward-j-duffy/ (entry: "Correspondence Re: IRS Pretrial Memorandum filed in U.S. Tax Court case"). | 2026-10-15 |
+
+Not included: pages 1 to 3 of the bankruptcy document (the DOJ cover letter, its service page and the certificate of mailing). The pages are scanned, and the OCR text layer was added with `ocrmypdf --force-ocr` (tesseract, English) so that `tools/overlay.sh` can pair pages by text.
+
+Searched 2026-10-14 (earlier pass, before the find above):
 
 | Search or source | Result |
 |---|---|

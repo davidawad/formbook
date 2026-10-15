@@ -98,3 +98,17 @@ Reviewed pages: 3 of 3. Re-rendered 2026-10-14 (second session, `tools/render.sh
 5. **Type size and face.** 13 pt EB Garamond. LR 5.2(a) (primary text, read 2026-10-15) requires 12-point type or larger in a serif font and names no face, so EB Garamond is kept (see `../motion-brief/README.md`, item 5).
 6. **Not checked:** the consent statement (FRBP 7008), the core-proceeding statement, the 34-day and page limits (not applicable to a complaint), LBR 7003-1 cover-sheet conformance, and LBR 7004-1 service naming (no certificate is generated).
 7. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder does not have that shape, and the brief forbids edits to `tools/`.
+
+## Third session (fb-595.20.11, 2026-10-15)
+
+Re-searched with CourtListener's REST API v4 (anonymous, throttled to 5/min; no API key on this box) and WebSearch.
+
+13. CourtListener search, `court=nmib`, `type=rd` (RECAP documents), queries "complaint", "adversary complaint", "Complaint Filed by Plaintiff", "Adversary Proceeding Cover Sheet", "Plaintiff Defendant adversary", "Adv. Proc. complaint": no adversary complaint returned. Hits were main-case documents of 1:24-bk-00002 (Imperial Pacific) and other bankruptcy dockets, plus one answer to a complaint in 1:17-bk-00001 (Saipan Sea Ventures, not available).
+14. CourtListener search, `court=nmib`, `type=r`, for adversary dockets (`-ap-`): these exist, but none lists an available RECAP document (`recap_documents` empty or `is_available: false`): CNMI v. Manglona 1:13-ap-00001; CDA v. Manglona 1:13-ap-00002; Lee v. Yeom 1:13-ap-00003; Taitingfong v. CDA 1:15-ap-00001; NMI Retirement Fund v. (seven defendants) 1:12-ap-00001 to 00007; Cabrera v. U.S. Department of Education 1:26-ap-00001 (filed 2026-01-20, docket id 72160170).
+15. CourtListener docket-entries and dockets endpoints: HTTP 401 "Authentication credentials were not provided" (entries) and null `pacer_case_id` (dockets), so the RECAP storage path `gov.uscourts.nmib.<pacer_case_id>.<doc>.0.pdf` cannot be built for any adversary docket.
+16. CourtListener docket HTML pages (3 adversary dockets): HTTP 403 to this box.
+17. WebSearch (standard): "Cabrera v. U.S. Department of Education" with Northern Mariana Islands bankruptcy complaint: no hit for the case or the court (student-loan dischargeability cases elsewhere). WebSearch (standard): NMI bankruptcy adversary complaint PDF with 1:24/1:25/1:26-ap: PACER court page, the district's general orders, an inforuptcy 2012 docket listing (1:12-ap-1, closed), and out-of-district material. No complaint.
+
+Result: still no public, text-based adversary complaint from this court. The one live lead is the Cabrera adversary (1:26-ap-00001, filed 2026-01-20): its docket exists, but no document is in the RECAP index, and the storage path needs a `pacer_case_id` this anonymous API does not return. Next step: an authenticated CourtListener (or PACER) pull of `1:26-ap-00001` doc 1, or a Cabrera docket from a box that can reach it.
+
+Re-verified this session: `sh tools/render.sh` exit 0, `samples/OUTPUT-synthetic-complaint.pdf`, 3 pages, EB Garamond only (`pdffonts`). All 3 pages rasterized at 60 dpi (`pdftoppm -r 60`) and viewed: page 1 caption and title, page 2 paragraphs 1 to 11 and sub-heading, page 3 claim, prayer, jury demand and signature. No template change. `sh tools/overlay.sh <dir>` exit 2 (`parameter not set`, no exemplar PDF). The overlay stays not produced.

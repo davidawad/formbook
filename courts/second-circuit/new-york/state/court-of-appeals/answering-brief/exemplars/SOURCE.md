@@ -1,8 +1,37 @@
 # Exemplar source: New York Court of Appeals answering brief
 
-**Result: no exemplar. BLOCKED: no exemplar.** No `FILED-EXAMPLE-*.pdf` is saved in this folder. The searches below found no filed answering brief (brief for respondent / defendant-respondent / plaintiff-respondent) of the New York Court of Appeals that could be downloaded.
+**Result: exemplar found.** `FILED-EXAMPLE-people-v-watkins-apl-2023-00099-answering-brief.pdf` is saved in this folder. It is a filed Brief for Respondent (the answering brief in the Court of Appeals) in *People v. Watkins*, APL-2023-00099.
 
-Date of searches: 2026-10-14.
+- **File:** `FILED-EXAMPLE-people-v-watkins-apl-2023-00099-answering-brief.pdf` (52 pages, letter, text layer present; `pdffonts`: the body and headings are Garamond (regular, italic, bold); Times New Roman, Courier New, Calibri and one other face are also embedded, from the filer's own tables and exhibits)
+- **URL fetched:** <https://statecourtreport.org/sites/default/files/fastcase/additionalPdfs/processed/People%20of%20the%20State%20of%20New%20York%20-Respondent%20Brief%20-01.12.2024.pdf> (a copy hosted by statecourtreport.org; the copy does not show how it was filed)
+- **Case:** *People of the State of New York v. Mark Watkins*, Court of Appeals of the State of New York, APL-2023-00099 (appeal from *People v. Watkins*, 206 A.D.3d 452 (1st Dept. 2022), order of June 9, 2022; judgment of the Supreme Court, New York County, March 26, 2018)
+- **Document:** Brief for Respondent. Cover: "To be argued by MICHAEL J. YETTER (20 Minutes Requested)".
+- **Filer:** Alvin L. Bragg, Jr., District Attorney, New York County (Steven C. Wu, Chief, Appeals Division; Stephen J. Kress and Michael J. Yetter, Assistant District Attorneys, of counsel), for Respondent. This is the People's brief answering the defendant's brief.
+- **Date signed:** January 12, 2024 (cover, signature block and word-count certification). Date filed: not printed on the copy.
+- **Date fetched:** 2026-10-15
+- **Public record:** yes, a brief filed in a state appellate matter and posted publicly.
+
+## Why this exemplar
+
+- Right document type: an answering brief (brief for respondent) in a Court of Appeals appeal, filed under 22 NYCRR Part 500.
+- The text layer is complete and clean (the Word-generated original, not an OCR scan), so the sample can transcribe the text exactly.
+- Its word-count certification states the form: Word 2016, Garamond, 14-point text, 13-point footnotes. The template sets EB Garamond, which matches the typeface the filer used.
+- Its cover, table of contents, table of authorities, questions presented, standard of review, argument, conclusion, signature block and word-count certification show the order of parts in practice.
+
+## Other respondent's briefs found (not saved; available for a second filer)
+
+| Document | URL | Filer | Notes |
+|---|---|---|---|
+| *People v. Debellis*, APL 2022-00107, Respondent's Brief (54 pp; Canon scanner PDF, text layer present) | <https://statecourtreport.org/sites/default/files/fastcase/additionalPdfs/processed/State%20of%20New%20York%20-Brief%20-02.15.2023.pdf> | Darcel D. Clark, Bronx County District Attorney (R. Grace Phillips, Yael V. Levy) | Respondent's brief, dated 2023 (cover date not checked). Scanned, so the text layer is less clean. |
+| *Police Benevolent Association v. City of New York*, APL-2022-00078, Brief for Defendant-Respondent (87 pp; Word-generated, text layer present) | <https://statecourtreport.org/sites/default/files/2023-12/City%20of%20New%20York%20-%20Brief%20-%2003.03.2023.pdf> | Hon. Sylvia O. Hinds-Radix, Corporation Counsel of the City of New York | Respondent's brief, March 3, 2023. A different filer from the Watkins brief, so it is the candidate for a second tier-2 exemplar. |
+
+## Earlier search record (2026-10-14, superseded by the result above)
+
+The first pass recorded no answering brief. The search log is kept below; the 2026-10-15 search found the Watkins brief.
+
+**Earlier result: no exemplar.** Searches run on 2026-10-14 found no filed answering brief that could be downloaded.
+
+Date of earlier searches: 2026-10-14.
 
 ## Documents found and rejected (wrong doc type)
 

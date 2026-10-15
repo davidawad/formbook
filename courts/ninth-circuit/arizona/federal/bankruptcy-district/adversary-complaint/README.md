@@ -10,7 +10,8 @@ Doc type: **adversary complaint** (FRBP 7001) in the United States Bankruptcy Co
 | sample md | `samples/INPUT-generic-complaint.md` (fictional, generic; 5 rendered pages) |
 | render | ok: `samples/OUTPUT-generic-complaint.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings |
 | typeface | face required: none. LRBP 9004-1(g) (checked on azb.uscourts.gov, 2026-10-15) says "a proportional font size no smaller than 13 point" and names no face. EB Garamond kept; no vendored substitute needed. Not metric-compatible with Times New Roman, and not changed to it |
-| overlay | fail: `tools/overlay.sh` needs `exemplars/*.pdf` and there is none, so it exits 1 and writes nothing |
+| overlay | fail: `tools/overlay.sh` needs `exemplars/*.pdf` and there is none, so it exits 1 and writes nothing (re-run 2026-10-15, exit 1) |
+| exemplar search | 2026-10-15 (bead fb-595.20.8): three more WebSearch passes (one extended) and the CourtListener API probe (HTTP 401, no key on this box). Still nothing; see `exemplars/SOURCE.md`, "Third search pass" |
 | pages reviewed | 5 of 5 (every page rasterised at 60 dpi and viewed) |
 
 Note on file names: the brief asked for `samples/<id>.pdf` and `samples/<id>-overlay.pdf`. The shared tools write `samples/OUTPUT-<id>.pdf` and `samples/OVERLAY-<id>.pdf`/`.txt` (the repo's naming for file roles), and `overlay.sh` reads `OUTPUT-<id>.pdf`. The tools were not changed, so this folder follows the tools' names.

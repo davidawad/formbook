@@ -21,6 +21,8 @@ Same structure and same UNVERIFIED parameters as the opening-brief template (EB 
 
 Pages reviewed (rasterized at 60 dpi and viewed, 2026-10-14, after the heading fix): 3 of 3 (`OUTPUT-smoke.pdf` pp. 1-3, re-rendered).
 
+Re-run 2026-10-15 (bead fb-595.20.5): `sh tools/render.sh courts/military/coast-guard-court-of-criminal-appeals/answering-brief samples/INPUT-smoke.md` exit 0 (the sample path is relative to the court directory). `OUTPUT-smoke.pdf` is 3 pages, letter. All 3 pages rasterized at 60 dpi and viewed: p. 1 caption and the Statement of the Case, p. 2 Errors and Argument with the "B. Argument" sub-heading and Relief Requested, p. 3 certificate. Layout only; the text is placeholder. No exemplar, so nothing was compared.
+
 ## Overlay
 
 `sh tools/overlay.sh courts/military/coast-guard-court-of-criminal-appeals/answering-brief smoke` **failed**: `no exemplar pdf in .../answering-brief/exemplars` (exit 1). No overlay written.

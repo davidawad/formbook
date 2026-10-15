@@ -1,13 +1,13 @@
 # Tax Court: petition (Rule 34(b))
 
-**BLOCKED: no exemplar.** No public, filed petition was found (searches and results: [exemplars/SOURCE.md](exemplars/SOURCE.md)). The template is built from the rules, and the sample is fictional. The overlay cannot run without an exemplar.
+**Exemplar: 1 of 2 filers.** One real filed petition is in `exemplars/`: *Lawrence v. Commissioner*, Tax Court Docket No. 20370-09 (pro se, amended petition, Form 1 items; 52 pages, OCR text layer added). Source and search history: [exemplars/SOURCE.md](exemplars/SOURCE.md). Tier 2 is judged against this one filer only, which `docs/EVAL-LOOP.md` says cannot finish tier 2; a second petition from a different filer is still needed.
 
 | Check | Result |
 |---|---|
-| Exemplar | no |
-| Render (`tools/render.sh`) | ok: `samples/OUTPUT-generic-petition.pdf`, 3 pages, no typst warnings |
-| Overlay (`tools/overlay.sh`) | fail: no exemplar PDF in `exemplars/` (no overlay written) |
-| Pages reviewed | 3 of 3 (Gate 2 log below) |
+| Exemplar | yes: `exemplars/FILED-EXAMPLE-lawrence-20370-09-petition.pdf` (1 filer) |
+| Render (`tools/render.sh`) | ok: `samples/OUTPUT-lawrence-20370-09-petition.pdf`, 8 pages, EB Garamond only, no typst warnings. `samples/OUTPUT-generic-petition.pdf` (fictional sample, 3 pages) still renders as before |
+| Overlay (`tools/overlay.sh`) | ok: `samples/OVERLAY-lawrence-20370-09-petition.pdf` and `.txt` (page map: pages 2 to 7 pair with filed pages 2, 3, 4, 6, 7, 8; page 1 and page 8 pair with filed page 51, because the caption and signature text is mostly unreadable in the OCR) |
+| Pages reviewed | 8 of 8 for the transcribed sample (Gate 2, below); 3 of 3 for the fictional sample |
 
 ## What is here
 
@@ -15,17 +15,21 @@
 |---|---|
 | `typst/tax-petition.typ` | The template: `tax-petition(meta, body)`. Every number is a named parameter at the top, and each traces to a rule. |
 | `typst/main.typ` | Entry point. Reads `--input sample=...`, splits frontmatter from body, calls the template. |
-| `samples/INPUT-generic-petition.md` | Fictional sample: two petitioners, the notice of deficiency, assignments of error, facts, special matters, the prayer, the signature block. |
-| `samples/OUTPUT-generic-petition.pdf` | The render. |
-| `exemplars/SOURCE.md` | The exemplar search: what was searched, what came back, why nothing was used. |
+| `samples/INPUT-lawrence-20370-09-petition.md` | Transcribed from the exemplar: caption, Form 1 items 1 to 6, sections I to IV (pages 1 to 8 of the filing, in page order), the omitted pages marked, the prayer and the signature block (page 51). The filer's text is reproduced for layout only. Address and telephone are placeholders. |
+| `samples/OUTPUT-lawrence-20370-09-petition.pdf` | The render of that sample. |
+| `samples/OVERLAY-lawrence-20370-09-petition.pdf`, `.txt` | The red/blue overlay against the exemplar, and its page map. |
+| `samples/INPUT-generic-petition.md` | Fictional sample: two petitioners, the notice of deficiency, assignments of error, facts, special matters, the prayer, the signature block. Kept as a second, structurally different sample. |
+| `samples/OUTPUT-generic-petition.pdf` | The render of the fictional sample. |
+| `exemplars/FILED-EXAMPLE-lawrence-20370-09-petition.pdf`, `exemplars/SOURCE.md` | The exemplar (filed as Exhibit 6 to a public bankruptcy filing) and its source record. |
 
 Naming: the repo tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, and read the `INPUT-<id>.md` file name. This folder follows that, not the `<id>.pdf` names in the task brief.
 
 Build (from the repo root, with the toolchain on PATH):
 
 ```sh
+sh tools/render.sh courts/national/tax-court/petition samples/INPUT-lawrence-20370-09-petition.md
+sh tools/overlay.sh courts/national/tax-court/petition lawrence-20370-09-petition
 sh tools/render.sh courts/national/tax-court/petition samples/INPUT-generic-petition.md
-sh tools/overlay.sh courts/national/tax-court/petition generic-petition   # fails until an exemplar is in exemplars/
 ```
 
 ## Governing rules
@@ -93,9 +97,32 @@ Reviewed 2026-10-14. sha256 of `samples/OUTPUT-generic-petition.pdf`: `89edd40d9
 
 No row is `OPEN`. The overlay (tier 3, a diagnostic) cannot be produced without an exemplar.
 
+## Gate 2 for the transcribed sample (Lawrence exemplar), 2026-10-15
+
+Reviewed 2026-10-15. sha256 of `samples/OUTPUT-lawrence-20370-09-petition.pdf`: `3a403f42895d3dd6df530b6fbea9c181f94116c7e5cf7b51c49a4e3143b57c32`. Every page was rendered at 60 dpi (`pdftoppm -r 60`) and looked at, after the last edit. Compared with the exemplar's pages as read from the scans (exemplar page numbers are the filing's own "Page X of 52").
+
+| Page | Compared with | Finding | Status |
+|---|---|---|---|
+| 1 | exemplar p.1 (caption, Form items 1 to 5) | Caption, ")" column and "Docket No. 20370-09" match. Items 1 to 5 are typed as numbered paragraphs, not the Form's check boxes; the boxes are typed as `[x]` and `[ ]`. The filing's title is "AMENDED PETITION"; the template prints "PETITION" (fixed by the template, see Tier 2 choices). | ACCEPTED (title: template is fixed to "PETITION"; the amended form is the same Form 1 petition, and the rules name no title) |
+| 2 | exemplar p.2 (Form item 6, section I, section II) | Heading "II. Introduction of Credible Evidence" is bold and centered as in the filing. The lone "I." is a paragraph at the left margin in our render; the filing centers it. The template has no rule for a bare roman numeral, so it is left as typed. | ACCEPTED (a lone roman numeral is the filer's layout; the template's heading style is the convention) |
+| 3 | exemplar p.3 (section II, continued; section III heading) | Section III heading wraps to three centered lines, as the filing's heading does. Case name *Rendall v. Commissioner* is italic (Rule 23(f): case names underscored or italic, which the markdown sample supplies). | PASS |
+| 4 | exemplar p.4 (paragraphs A and B) | Lettered paragraphs are indented as normal paragraphs. The filing hangs the letter in the margin. | ACCEPTED (tier 2: the filing's hanging letters are one filer's layout; the template's `(a)` convention is not the Form's; rules leave the lettering open) |
+| 5 | exemplar p.6 (paragraphs C to F) | Same as page 4. Paragraphs are double-spaced at 24.1 pt pitch. | PASS |
+| 6 | exemplar p.7 (paragraph G; the constructive-receipt argument) | First render had a blank line in the middle of paragraph G, which split it: FIXED by joining the paragraph in the sample. Re-viewed: continuous, first-line indent on each paragraph. | FIXED, then PASS |
+| 7 | exemplar p.8 (section IV, paragraphs A to C) | Heading "IV. Assignments of Error..." bold and centered in three lines, as the filing. | PASS |
+| 8 | exemplar p.51 (prayer, enclosures, signature) | Prayer, ENCLOSURES paragraph, date and signature block with the rule above the name. The filing has a handwritten signature and a handwritten address (replaced by placeholders in the sample). Signature is typed in the template; that is the template's convention, not a rule point. | ACCEPTED (handwritten signature in the filing; template typed block) |
+
+No row is `OPEN`. The sample transcribes pages 1 to 8 and 51 of the 52-page petition; pages 9 to 50 are marked omitted in the sample body, so the sample is 8 rendered pages (the brief's 8-to-14 range for an exemplar this long).
+
+## Gate 2 for the fictional sample
+
+Unchanged from 2026-10-14 (the earlier pass above, sha256 `89edd40d...` of the old `OUTPUT-generic-petition.pdf`). It has no exemplar, so no overlay exists for it.
+
 ## Open choices and gaps
 
-- **No exemplar** (BLOCKED, see top). Tier 2 (house conventions across filers) is not judged; the layout follows the rule text and the choices above.
+- **One filer only.** The tier-2 judgement is against one pro se petition (Lawrence). A second petition from a different filer is needed before tier 2 can be called done (docs/EVAL-LOOP.md: fewer than 2 exemplars cannot finish tier 2). The ACCEPTED rows above are judged against this one filer, so they are provisional.
+- The exemplar's form is the amended petition by a pro se filer, with long legal argument. The template models the Rule 34(b) deficiency petition. The overlay pairs by word overlap and is diagnostic only; its page 1 pairs with a different page because the OCR text of the caption is scrambled.
+- The OCR text layer on the exemplar is machine-made (tesseract, English); words in the caption and in handwritten areas are not reliable. The sample transcription was checked against the page images, not the OCR.
 - The sample is fictional and three pages long. A petition is short; the brief's 8 to 14 page target applies to a long exemplar and does not apply here.
 - No footnotes or tables in the template (not used in a petition; cmarker would render them, untested).
 - The mechanical gates of `tools/check.sh` (`checks.yaml`) were not written for this doc type. Checks run by hand here: render (no warnings), font names (`pdffonts`: EB Garamond only), margins (bounding boxes), line pitch (bounding boxes), and the Gate 2 review above.

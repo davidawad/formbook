@@ -27,3 +27,14 @@ Rejected near-misses (not ACCA filings, so not used): CAAF appellant briefs in A
 Result: still no ACCA-filed appellant brief. The rules-only template stays. Overlay cannot run.
 
 To unblock: a public ACCA appellant brief (CourtListener RECAP, the court's own site, or a public brief bank). The docket number format and the cover can then be checked against a real filing.
+
+## Third pass (2026-10-15, bead fb-595.20.4)
+
+CourtListener API v4 (anonymous; no API key is configured in this box, so requests are limited to 5/min) and public web search. Still no ACCA-filed Government answer or appellant brief.
+
+- RECAP document searches (`type=rd`, with and without `court=acca`): phrases "Army Court of Criminal Appeals" with "brief on behalf of the United States", "brief on behalf of appellant", "Assignment of Error", "Government Appellate Division", "Docket No. ARMY". No RECAP document with an ACCA caption. `court=acca` returns 0 results for every query.
+- CourtListener docket HTML pages return HTTP 403 (CloudFront) to non-browser requests; the `recap-documents` endpoint requires authentication.
+- Lead, not usable: the Government's Answer and Return in *Lorance v. Hilton* (habeas, D. Kan. No. 5:18-cv-03297-JWL, CourtListener docket 14586211, Doc. 13, filed 2019-04-17) lists "Attach. H: Brief on Behalf of Appellant to the Army Court of Criminal Appeals" (an ACCA appellant brief). The attachment is not in RECAP storage (`recap/gov.uscourts.ksd.124482/gov.uscourts.ksd.124482.13.8.pdf` returns NoSuchKey; attachment numbers 1-7 and 9 also absent). The petition docket (CourtListener 16461579, Doc. 1, attachments A onward) has the same gap. Obtaining Attach. H needs PACER or a RECAP upload; the ACCA brief is then a public record of a federal filing. Not downloaded, not saved.
+- Web search (3 queries, 2026-10-15): all hits are CAAF briefs on armfor.uscourts.gov (Steele 22-0254, Alfaro 26-0170, Scott 19-0365, Ellis 25-0197, English 19-0050, Davis 24-0152, Cole 23-0162, Briggs 16-0711, Matti 25-0148) or Air Force filings. Not ACCA; not used.
+
+Result: still no ACCA-filed document of this type. Overlay cannot run. To unblock: the Lorance Attach. H (PACER, or a RECAP upload of the answer's attachments) would supply an ACCA appellant brief for opening-brief; no lead found yet for an ACCA Government answer.
