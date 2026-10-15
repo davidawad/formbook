@@ -6,6 +6,7 @@ Doc type: **motion brief**, a memorandum of law in support of a motion to dismis
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-wooten-1-23-cv-00012-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-wooten-motion-brief.md` (the whole memorandum: caption, introduction, legal standard, argument, conclusion, signature, certificate of service) |
+| typeface | none required by the rules (VI-FONT-001): EB Garamond kept, no substitute needed |
 | render | ok: `samples/OUTPUT-wooten-motion-brief.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `samples/OVERLAY-wooten-motion-brief.pdf` and `OVERLAY-wooten-motion-brief.txt` |
 | pages reviewed | 9 of 9 (each page rendered at 70 dpi and viewed; see the review record below) |
@@ -18,6 +19,7 @@ Court: District Court of the Virgin Islands. The local rules (LRCi) have two sou
 |---|---|---|---|---|
 | VI-FORM-001 | LRCi 5.1(a) | All papers double-spaced except quoted material; each page numbered consecutively; 8½ × 11-inch white paper. | VID LRCi PDF, https://www.vid.uscourts.gov/sites/vid/files/local_rules/VID_LRCi_042911.pdf (a July 2011 compilation; the court's current version was not confirmed) | `vid-motion-brief.typ`: `margin`, `body-leading`, page numbering |
 | VI-FORM-002 | LRCi 5.1 (type and margins) | At least 12-point type; at least one-inch margins; footnotes may be 10-point and single-spaced. | Not in the 2011 PDF. Search excerpt of the current LRCi text at courtrules.net (https://www.courtrules.net/courts/federal/district-virgin-islands/local-rules/10791); the page returned HTTP 403, so this is an excerpt, not a read page | `type-size = 12pt`, `margin = 1in`. No footnotes in this exemplar or the template. |
+| VI-FONT-001 | LRCi 5.1(a) and 5.1 (current) | No typeface named. The current excerpt adds "at least 12-point type", which the template meets. | VID LRCi PDF (as above) names no face. Current text: courtrules.net excerpt (as above), which names no face. Checked 2026-10-15. | `font-family = "EB Garamond"` kept. FONTS.md's "No face named" row applies, so no substitute is used. |
 | VI-CONT-001 | LRCi 7.1(c) | A motion is accompanied by a brief stating the reasons and the citation of authorities. | VID LRCi PDF (as above) | The memorandum itself. The notice of motion is a separate filing (see Known gaps 3). |
 | VI-CONT-002 | LRCi 7.1(d) | No document may exceed 20 pages without leave (2011 text). | VID LRCi PDF (as above) | Not checked by the template. The sample is 9 pages. |
 | VI-CONT-003 | LRCi 7.1 (current) | Over 20 substantive pages needs a word-count certificate of compliance. | courtrules.net excerpt (as above) | Not produced. Not needed at this length. |
@@ -49,7 +51,7 @@ Not produced by this template (separate filings): the notice of motion, the prop
 ## Known gaps and open choices
 
 1. **One exemplar.** LRCi tier 2 asks for two or three filers. Port Hamilton Refining & Transportation v. Limetree Bay Terminals, 1:24-cv-00004, ECF 17 (a 10-page memorandum in support of a 12(b)(6) motion to dismiss a counterclaim, filed May 30, 2024; RECAP `gov.uscourts.vid.39844.17.0.pdf`) and Appleton v. Saintnals, LLC, 1:25-cv-00032, ECF 14 (7 pages) were also found with storage. Neither was saved, because the brief asks for one exemplar per doc type. Tier 2 is therefore **not** judged against two filers yet.
-2. **Font.** The VI template uses EB Garamond, the only vendored face; the exemplar is in Times. The 12-point minimum is met. Whether the court expects a Times-metric face is a question for David (see the complaint README, gap 2).
+2. **Font.** No rule names a typeface (VI-FONT-001 in the complaint README), so the template keeps EB Garamond. The exemplar is in Times New Roman, one filer's choice; the 12-point minimum is met. Tier 2's typeface convention rests on this one exemplar (gap 1).
 3. **Notice of motion.** The Wooten filing has a separate motion (ECF 13). Only the memorandum is templated. A notice of motion and a proposed order are separate filings and are not produced.
 4. **Caption form.** The complaint template prints "IN THE DISTRICT COURT OF THE VIRGIN ISLANDS"; the Wooten memorandum prints "DISTRICT COURT OF THE VIRGIN ISLANDS" without "IN THE". Both are seen in D.V.I. filings; the complaint's form is used for both templates and recorded as ACCEPTED for tier 2.
 5. **Typos kept as filed.** The exemplar's text has errors that the transcription keeps, so the sample matches the filing: "Ashcroft v. Igbal", "plausible of on its face", "Fowler v. UpMC Shadyside, 578 F. 3d 203 (3rd Cir. 2009)" with no pin cite, "Buck, 452 F. 3d 256, 260 (3d Cir. 2006)" cited without the case name, and the repeated "Mutual Aid Agreement is attached" construction. These are the author's text, not template defects.

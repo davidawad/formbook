@@ -6,6 +6,7 @@ Doc type: **complaint** in the District Court of the Virgin Islands (`vid`, Divi
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-henry-3-26-cv-00038-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-henry-complaint.md` (a partial transcription: see Known gaps 6) |
+| typeface | none required by the rules (VI-FONT-001): EB Garamond kept, no substitute needed |
 | render | ok: `samples/OUTPUT-henry-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh` treats any warning as failure) |
 | overlay | ok: `samples/OVERLAY-henry-complaint.pdf` and `OVERLAY-henry-complaint.txt` |
 | pages reviewed | 12 of 12 (each page rendered at 70 dpi and viewed; see the review record below) |
@@ -18,6 +19,7 @@ Court: District Court of the Virgin Islands. The rules below are the local rules
 |---|---|---|---|---|
 | VI-FORM-001 | LRCi 5.1(a) | All papers double-spaced except quoted material; each page numbered consecutively; 8½ × 11-inch white paper. | VID LRCi PDF, https://www.vid.uscourts.gov/sites/vid/files/local_rules/VID_LRCi_042911.pdf (a July 2011 compilation; the court's current version was not confirmed) | `vid-complaint.typ`: `margin`, `body-leading`, page numbering |
 | VI-FORM-002 | LRCi 5.1 (type and margins) | At least 12-point type; at least one-inch margins; footnotes may be 10-point and single-spaced. | Not in the 2011 PDF. Search excerpt of the current LRCi text at courtrules.net (https://www.courtrules.net/courts/federal/district-virgin-islands/local-rules/10791); the page itself returned HTTP 403, so this is an excerpt, not a read page | `type-size = 12pt`, `margin = 1in`. Footnotes are not produced (Known gaps 5). |
+| VI-FONT-001 | LRCi 5.1(a) and 5.1 (current) | No typeface named. The current excerpt adds "at least 12-point type", which the template meets. | VID LRCi PDF (as above) names no face. Current text: courtrules.net excerpt (as above), which names no face. Checked 2026-10-15. | `font-family = "EB Garamond"` kept. FONTS.md's "No face named" row applies, so no substitute is used. |
 | VI-CONT-001 | LRCi 7.1(d) | No document may exceed 20 pages without leave (2011 text). | VID LRCi PDF (as above) | Not checked by the template. The sample is 12 pages. |
 | VI-CONT-002 | LRCi 7.1 (current) | Over 20 substantive pages needs a word-count certificate of compliance. | courtrules.net excerpt (as above) | Not produced. Not needed at this length. |
 | FRCP-10(a) | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number, and a Rule 7(a) designation; the complaint's title names all parties. | https://www.law.cornell.edu/rules/frcp/rule_10 | `court-header`, `caption`, `title` |
@@ -50,7 +52,7 @@ Not produced by this template (separate filings): the civil cover sheet, the sum
 ## Known gaps and open choices
 
 1. **One exemplar.** LRCi tier 2 asks for two or three filers. The search found a second complaint with storage: Moorhead v. Fawkes, 1:26-cv-00014, ECF 1 (33 pages, filer Lorelei C. Monsanto and Shelley A.H. Moorhead, RECAP `gov.uscourts.vid.42043.1.0.pdf`). It was not saved because the brief asks for one exemplar per doc type. Tier 2 is therefore **not** judged against two filers yet.
-2. **Font.** The VI template uses EB Garamond, the only vendored face. Times New Roman in the exemplar is larger on the page at the same point size; the 12-point minimum is met. Whether the court expects a Times-metric face is a question for David; vendoring one would remove the difference.
+2. **Font.** No rule names a typeface (VI-FONT-001), so the template keeps EB Garamond. The exemplar's Times New Roman is one filer's choice, not a requirement; it sits larger on the page than EB Garamond at the same point size, and the 12-point minimum is met. Tier 2's typeface convention is judged against one filer's exemplar (gap 1), so it is not established by two.
 3. **Caption.** The party block is closed by a rule (right and bottom), not by a column of ")" marks. Both are seen in D.V.I. filings; recorded as ACCEPTED for tier 2.
 4. **Italics.** The exemplar's text layer has no italic markup, so case names are italic in the sample as the author marked them, following the usual convention. Not checked against the exemplar's typeface.
 5. **Footnotes.** The filed complaint has eight footnotes (footnote 1 on the Fourteenth Amendment, footnote 2 on the hunting license, and six more). The template has no footnote path, and the sample omits the footnote text and its reference marks. This is a visible difference from the filed page and is OPEN for tier 2.
