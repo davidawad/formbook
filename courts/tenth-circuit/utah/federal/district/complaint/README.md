@@ -8,8 +8,9 @@ Folder: `courts/tenth-circuit/utah/federal/district/complaint/`. Self-contained:
 | exemplar | yes: `exemplars/FILED-EXAMPLE-fastre-1-26-cv-00060-complaint.pdf` (15 pages, text layer; `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-fastre-complaint.md` (abridged transcription of the exemplar, see Known gaps) |
 | render | ok: `samples/OUTPUT-fastre-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-fastre-complaint.pdf` and `samples/OVERLAY-fastre-complaint.txt` (`tools/overlay.sh`) |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
+| typeface | face required: **none** (DUCivR 10-1(3) names no typeface; checked against the December 2023 text, 2026-10-15). Substitute: none needed. Font: **EB Garamond** kept (`docs/FONTS.md`: a court naming no face keeps EB Garamond). Not metric-compatible with any Times; not applicable here. |
+| overlay | ok: `samples/OVERLAY-fastre-complaint.pdf` and `samples/OVERLAY-fastre-complaint.txt` (`tools/overlay.sh`, exemplar passed as the third argument: see Render and overlay) |
+| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-15 in the fonts pass, no change to the template) |
 
 File names. The brief names outputs `<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh`, `tools/overlay.sh` and the court-folder convention (`CLAUDE.md`) name them `INPUT-<id>.md` → `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`. The tools were used as they are; `<id>` is `fastre-complaint`.
 
@@ -54,8 +55,10 @@ Not produced by this template (separate filings or documents, not part of the co
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
 sh tools/render.sh courts/tenth-circuit/utah/federal/district/complaint samples/INPUT-fastre-complaint.md
-sh tools/overlay.sh courts/tenth-circuit/utah/federal/district/complaint fastre-complaint
+sh tools/overlay.sh courts/tenth-circuit/utah/federal/district/complaint fastre-complaint /path/to/exemplar.pdf
 ```
+
+The exemplar PDF is not in the checkout (only `exemplars/SOURCE.md` is). On 2026-10-15 the overlay ran against the RECAP copy at the SOURCE.md URL, fetched to a temp directory and passed as the third argument; its page count (15) matches the SOURCE.md. Without the argument, `overlay.sh` looks for `exemplars/*.pdf`.
 
 `OVERLAY-fastre-complaint.pdf` is the red/blue test: red = our render, blue = the filed exemplar, black = both. `OVERLAY-fastre-complaint.txt` is the page map. `overlay.sh` pairs each render page with the exemplar page that shares the most words (its page map is coarse, see below). The overlay is a diagnostic, not a score.
 
@@ -81,7 +84,7 @@ Pages reviewed: 9 of 9.
 
 1. **Abridged sample.** The sample transcribes exemplar ¶¶ 1–53, the first cause of action's heading and ¶¶ 52–53, the prayer and the jury demand. Omitted: exemplar ¶¶ 54–105 (the rest of the Monell count, the individual-liability count against the jail staff, and the detail of ¶¶ 54–85). The render is 9 pages against the exemplar's 15, within the 8–14 target.
 2. **One exemplar.** Tier 2 asks for two or three filers. Alternates were found and recorded in `exemplars/SOURCE.md` (Keller v. Danford, The Preserve v. Kamas City, Owen v. State of Utah Legislative Services). Not run as a second-filer comparison.
-3. **Typeface.** DUCivR 10-1(3) names no typeface. The only font vendored in `fonts/` is EB Garamond; Times New Roman is not vendored, and fonts may not be added here. EB Garamond at 13 pt is used so that the visible size is close to Times 12 pt. Whether the court expects Times specifically is a question for David.
+3. **Typeface.** DUCivR 10-1(3) names no typeface (checked 2026-10-15), so `docs/FONTS.md` keeps the template on EB Garamond, at 13 pt so that the visible size is close to Times 12 pt. The filed exemplar embeds TimesNewRoman (and Arial); that is one filer's choice that the rule leaves open, not a requirement. Whether the clerk convention is Times (which would mean Liberation Serif, the metric-compatible substitute in `fonts/`) is a question for David.
 4. **Type size.** 13 pt is a style choice above the 12-point minimum. The complaint template has no footnote styling and the sample has no footnotes, so the footnote minimum (DUCivR 10-1(3)) is not tested. If a footnote is added, check that it renders at 12 pt or larger.
 5. **Caption separator.** The template inserts "v." between sides; the exemplar uses "vs.". Utah filings use both; the template keeps one form.
 6. **Title.** The exemplar title is "COMPLAINT AND DEMAND FOR JURY TRIAL". The template prints "COMPLAINT" with "JURY DEMANDED" under it, as DUCivR 10-1(7) asks. The sample therefore carries the rule's form, not the exemplar's title line. A filer who keeps the long title should also keep the jury demand line.
