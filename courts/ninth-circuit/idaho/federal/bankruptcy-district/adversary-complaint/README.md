@@ -49,3 +49,14 @@ The sample is a portion of the 32-page filing, so pages 8 and 9 do not have a ma
 - Count headings are set in bold and centered on two lines; the filed headings wrap at a different point.
 - No cover sheet, no summons, no Rule 7007.1 corporate-ownership statement, no consent-to-final-order statement (FRBP 7008(a), LBR 7012-1). None is in the sample; the filed exemplar does not have a consent statement either.
 - Second filer: not collected. Tier 2 would be judged against 2 or 3 filers; this folder has one filer (the United States Trustee).
+
+## Engines
+
+### docx (`docx/`)
+
+- Set in `docx/reference.docx` (built by `docx/make-reference.sh`) and read by `docx/idb.lua`. Set in styles.xml/sectPr, not rendered: EB Garamond 13 pt in every style; body and allegations double spaced (line 480 auto) with 0.6 em (156 twips) after; US Letter, 1 in margins; headings centered bold (levels 1 and 2) or bold at the left (level 3), single spaced; a centered PAGE field at 11 pt in the footer.
+- Written by the filter, not rendered here: counsel block single spaced at the top margin; court heading; caption as a two-column table with a 0.75 pt vertical rule and the debtor rule as a paragraph border; title in caps; lead-in and numbered allegations with a first-line indent, numbers typed with a tab (not Word list numbering); lettered items `(a)`; the date line and signature block at 3.0 in; numbering stops after the PRAYER heading.
+- Differs from typst: line breaks and page count come from Word or LibreOffice, not from typst's leading (0.85 em); the typed numbers do not renumber when a paragraph is inserted; the footnote-like `¹` paragraph is a body paragraph, as in typst; the caption rule is a table border, not a line.
+- Not yet checked: no page of the docx has been rendered or looked at (pages_reviewed = 0).
+- BLOCKED (docx.pdf gates 0 to 3): LibreOffice (`soffice`) is not installed on the build box, so no `.docx.pdf` exists and the gates cannot run. The `.docx` itself is written and validated (zip and well-formed XML parts only).
+- BLOCKED (no TOC or TOA in this doc type): nothing to populate.
