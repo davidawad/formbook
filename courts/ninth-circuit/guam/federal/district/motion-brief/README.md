@@ -9,7 +9,8 @@ Folder: `courts/ninth-circuit/guam/federal/district/motion-brief/`.
 | sample md | `samples/INPUT-leon-guerrero-memorandum.md` (full transcription of the 12-page memorandum, Doc. 13-1; footnotes 1 and 2 not transcribed, see gaps) |
 | render | ok: `samples/OUTPUT-leon-guerrero-memorandum.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
 | overlay | ok: `samples/OVERLAY-leon-guerrero-memorandum.pdf` and `samples/OVERLAY-leon-guerrero-memorandum.txt` (`sh tools/overlay.sh`) |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed) |
+| typeface | face required: none (GNLR 5.1(a), 2022: no typeface or point size; the memorandum's exemplar is Times New Roman, a convention only). Substitute: n/a; EB Garamond kept, the default when a court names no face (`docs/FONTS.md`). Visual only. |
+| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; all 11 viewed again on 2026-10-15 for the fonts pass, no change) |
 
 Tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the names in `tools/`); the brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools write, so the tool names are used.
 
@@ -55,7 +56,7 @@ GNLR 2022 contains no page limit, no memorandum-length rule, no typeface or poin
 1. **One exemplar, one filer.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers; this is not met. Candidates seen and not saved: *Prutehi Guahan v. U.S. Department of the Air Force*, 1:22-cv-00001, Doc. 19 (a motion to dismiss on the RECAP index; not downloaded). *Develles v. Government of Guam*, 1:24-cv-00019, Doc. 45 (a motion to dismiss, but the RECAP PDF is a one-page scan with no text layer; not usable). *Guam Visitors Bureau*, 1:26-cv-00017, Doc. 20 (a first motion to dismiss for lack of jurisdiction, 12 pages, a scan with no text layer; not usable).
 2. **Only the memorandum (Doc. 13-1) is the exemplar.** The motion itself (Doc. 13, 3 pages, same counsel, same caption) is not transcribed or saved. The template renders the caption, the memorandum and the certificate; a standalone motion would use the same chrome with its own body.
 3. **Footnotes not transcribed.** The exemplar has footnote 1 (the Citizen Participation in Government Act, on its page 9) and footnote 2 (the SLAPP argument, 7 GCA § 17101 et seq., on its page 11). The template has no footnote support, and the sample omits both, so the transcription is not complete at those two places.
-4. **Typeface.** EB Garamond (the only vendored font). The exemplar is Times New Roman; the same reasoning as the complaint applies (see `../complaint/README.md`, gap 2).
+4. **Typeface.** No court-named face: GNLR 5.1 (2022) sets none, so EB Garamond is kept (`docs/FONTS.md`, "No face named"). The exemplar is Times New Roman; the same convention question applies (see `../complaint/README.md`, gap 2).
 5. **Italics are supplied by the transcription.** The exemplar's text layer has no italic markup; case names and signals are italicised by the transcriber, following the usual convention. Not checked against the filed typography.
 6. **Emphasis lost.** The memorandum says "(emphasis added)" in two places; the emphasis is not in the text layer and is not reproduced.
 7. **Caption.** No ")" column and no rules; the exemplar has none either. ACCEPTED.
