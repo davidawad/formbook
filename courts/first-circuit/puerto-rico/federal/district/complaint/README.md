@@ -61,3 +61,25 @@ Reading the overlay: the caption, the lead-in and the first body page line up (p
 - **Not transcribed**: filed ¶¶ 5–7, 17–46, 51–71, 84–91, and the body of the second claim after ¶ 83.
 - **Not implemented**: jury demand is an optional field (`jury_demand`), not in the exemplar; no civil cover sheet, summons, or Rule 7.1 disclosure statement; no certificate of service (a complaint is served with a summons).
 - **Current rules**: the exemplar predates the current D.P.R. rules; the template follows the rule text read today and the exemplar only where the rules are silent.
+
+## Engines
+
+The same markdown renders through typst (`typst/`, the reference) and docx (`docx/`). There is no latex engine here and no `checks.yaml` in this folder, so no gate was run on either output; the docx review is by eye.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-conde-vidal-complaint.pdf` (9 pp, reference) | reference |
+| docx | `OUTPUT-conde-vidal-complaint.docx`, `OUTPUT-conde-vidal-complaint.docx.pdf` (10 pp) | ok: LibreOffice converts it without error; all 10 pages of the `.docx.pdf` were rendered at 60 dpi and set beside the typst pages (pages 1 to 10) |
+
+```sh
+sh docx/make-reference.sh                                   # docx/reference.docx (needs pandoc, perl, unzip, zip, xmllint)
+sh tools/render.sh --engine docx courts/first-circuit/puerto-rico/federal/district/complaint samples/INPUT-conde-vidal-complaint.md
+```
+
+**docx** (`docx/reference.docx`, `docx/prd-complaint.lua`, `docx/make-reference.sh`, `docx/parts/`).
+
+- *Matches typst:* EB Garamond 12 pt (EBGaramond Regular and Bold embedded, the vendored face); double spacing at 24 pt exact; 1-inch margins on US Letter; the page number at the bottom centre in the typst form, `-n-` at 12 pt, on every page; the court title; the caption with the rule on the right and the bottom of the party column, the case number and the title in capitals; the lead-in; numbered allegations with the number at 0.5 inch; level-1 headings centred in capitals and level-2 headings in bold; the prayer's lettered items (A., B., ...); the signature block in two columns (date left; "Respectfully submitted," and the counsel groups right, with "By: s/" lines).
+- *Differs:* line breaks fall at different words, so the body runs one page longer than typst (10 against 9) and the signature block sits on page 10 with the last prayer items. Exact-spaced text sits lower in its line than in typst (about 3 pt in the single-spaced caption, about 11 pt in double-spaced body text), because LibreOffice sets exact-height text at the bottom of its line. The first party block of the caption wraps to nine lines where typst uses eight. The prayer's letters and text sit on slightly different tab stops.
+- *Not built:* the civil cover sheet, summons and Rule 7.1 statement, as for typst (see Known gaps above).
+- *BLOCKED:* none. (No check IDs exist for this folder; the requirement IDs above are the ones the typst template cites.)
+- *Not opened in Word:* the `.docx` is a valid zip with well-formed XML parts and LibreOffice opens it; Word has not been run, so the no-repair check in Word is not done.

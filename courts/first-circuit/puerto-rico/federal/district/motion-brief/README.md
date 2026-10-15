@@ -64,3 +64,27 @@ Reading the overlay: the filed PDF is a motion (ECF 10, three pages) followed by
 - **Short citations**: the template does not check that a short cite's page is correct; that is the author's job.
 - **Hearing and noticed-motion language**: the cover has no hearing date, time or courtroom fields. The exemplar's ECF-era memorandum has none; a noticed-motion field (if the court requires one) is not implemented.
 - **Current rules**: the exemplar was filed in 2014, under the local rules of that year; the template follows the rule text read today and the exemplar only where the rules are silent.
+
+## Engines
+
+The same markdown renders through typst (`typst/`, the reference) and docx (`docx/`). There is no latex engine here and no `checks.yaml` in this folder, so no gate was run on either output; the docx review is by eye.
+
+| Engine | Output (`samples/`) | Status |
+|---|---|---|
+| typst | `OUTPUT-franklin-memorandum.pdf` (10 pp: cover, TOC `i`, TOA `ii`, body 1 to 7) | reference |
+| docx | `OUTPUT-franklin-memorandum.docx`, `OUTPUT-franklin-memorandum.docx.pdf` (10 pp: cover, TOC `i`, body 1 to 8) | **BLOCKED** (table of authorities, below); the rest rendered |
+
+```sh
+sh docx/make-reference.sh                                   # docx/reference.docx (needs pandoc, perl, unzip, zip, xmllint)
+sh tools/render.sh --engine docx courts/first-circuit/puerto-rico/federal/district/motion-brief samples/INPUT-franklin-memorandum.md
+```
+
+`docx/render.sh` owns the build: pandoc writes the document, then the table-of-contents page numbers are cached from a LibreOffice pass over the same document (LibreOffice computes the `PAGEREF` fields itself; Word shows the cached numbers until fields are updated).
+
+**docx** (`docx/reference.docx`, `docx/prd-motion-brief.lua`, `docx/render.sh`, `docx/make-reference.sh`, `docx/parts/`).
+
+- *Matches typst:* EB Garamond 12 pt (Regular, Bold and Italic embedded, the vendored face); double spacing at 24 pt exact for the memorandum; single spacing for the caption, counsel blocks, footnotes, the signature groups and the certificate; 1-inch margins; the cover with no page number; the table of contents in lower-roman numbering (`i`), with dot leaders and page numbers, and the body from `1`; heading labels I., A., 1., a. hanging under the heading text; footnotes at 12 pt; the caption and the counsel blocks two to a row; the signature block with "Respectfully submitted," and "Dated:" on one line and the groups two to a row; the certificate of service with the CM/ECF sentence.
+- *Differs:* line breaks fall at different words, and the first line of each exact-spaced block sits about 11 pt lower than in typst (LibreOffice sets exact-height text at the bottom of its line), so each body page holds about one line fewer. The body therefore runs about one page longer, and the signature groups and the certificate run from body page 7 onto body page 8 (typst keeps them all on body page 7). Table-of-contents entries are set at 13.2 pt pitch, as typst sets them. Long headings wrap where typst keeps them on one line (for example level-2 headings). Footnote separators use Word's default rule, not the typst 30% rule.
+- *Pages reviewed:* all 10 pages of `OUTPUT-franklin-memorandum.docx.pdf` were rendered at 60 dpi and set beside the typst pages (cover, TOC, body 1 to 7 against the docx pages 1 to 9, and the docx page 10).
+- *BLOCKED:* `BLOCKED: no check ID (no checks.yaml in this folder): table of authorities`: the TOA is not built. Word TA/TOA fields are not honored by LibreOffice (docs/DOCX.md), and a text TOA needs the page of every citation from a first pass, which this build does not do for the TOA (only for the TOC). The `toa:` links are shown as plain text. The typst TOA (`ii`) therefore has no docx counterpart.
+- *Not opened in Word:* the `.docx` is a valid zip with well-formed XML parts and LibreOffice opens and converts it; Word has not been run, so the no-repair check in Word is not done. Word may paginate the TOC differently; its cached numbers come from LibreOffice.
