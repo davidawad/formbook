@@ -81,3 +81,23 @@ sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adv
 - Baseline pitch on body pages measured with `pdftotext -bbox` at 24.0 pt.
 - Page review (60 dpi, every page): p.1 filer block, court title, dual caption, first paragraphs: pass (after moving the lead-in out of the numbered paragraphs and separating the debtor and party rows). p.2 jurisdiction, parties, paragraphs 2–8, ends with blank lines before a heading group: pass. p.3 factual background and the first claim heading kept with its paragraph: pass. p.4 claims, prayer heading and "WHEREFORE" with the list on p.5: pass with gap 4 above. p.5 list (a)–(e) and the signature block: pass.
 - Overlay: not run against a filing (no exemplar); `overlay=fail`.
+
+## Engines
+
+DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `arb-complaint.lua` builds the caption, numbered allegations, lettered prayer and signature; `render.sh` runs pandoc and fills the footer). Rendered: `samples/OUTPUT-generic-complaint.docx` and `samples/OUTPUT-generic-complaint.docx.pdf` (LibreOffice 26.2 conversion, 4 pages). `pdffonts`: EB Garamond Regular, Bold and Italic only.
+
+Matches the typst form (every page of the `.docx.pdf` rendered at 60 dpi and viewed: pages 1 to 4 of 4):
+- Letter paper; margins top 1 in, left 1.5 in, right 0.75 in, bottom 0.67 in; line numbers 1 to 28 on the 24 pt grid (one page-anchored text box in the header, so the body keeps its 28 lines); double rule at the left text edge and single rule at the right (`pgBorders`).
+- EB Garamond 13 pt, 24 pt line pitch. Filer block on lines 1 to 7, court title on line 8, dual caption with the rules under the debtor and party blocks, the title and relief beside the adversary number.
+- Headings at the typst sizes (level 1 18 pt, level 2 15.5 pt), footnotes 12 pt single (none in this sample).
+- Footer: page number, the title in capitals, `ADV. NO.` and the number. Signature block set with the last prayer item.
+
+Differs from the typst form:
+- Pagination: 4 pages here against 5 in typst. The prayer list and signature fit on page 4; typst moves the list to page 5.
+- Numbered paragraphs: the number is followed by a tab (to 1 in), typst leaves 0.3 in after the number, so the text starts up to 6 pt later.
+- Caption: the box rules are paragraph borders on the party cells, and the caption's row heights are estimated from the text. A different line break in Word can move the body off the pleading numbers by a line.
+- Not opened in Word (no Word here). The line-number text box and page borders are standard WordprocessingML, verified in LibreOffice only.
+
+BLOCKED: none. Open tier-2 items are the ones above and the missing exemplar (see the top of this file).
+
+`tools/check.sh` cannot run on this folder: it needs `court.json` and `checks.yaml` at the court root, and neither is in the doc-type folder. The render and page review above stand in for it.
