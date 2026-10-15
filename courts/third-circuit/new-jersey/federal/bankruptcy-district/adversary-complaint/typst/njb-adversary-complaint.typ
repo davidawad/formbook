@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // the only vendored face (fonts/); see README.md, Known gaps
+#let font-family = "EB Garamond"        // no face named by the rules; docs/FONTS.md "No face named"; see README.md, Known gaps
 #let type-size = 14pt                   // convention: NJ filings in RECAP are 12 to 14 pt; see README.md
 #let body-leading = 1.15em              // double-spaced feel at 14 pt, tuned against the exemplar (README.md)
 #let single-leading = 0.45em            // counsel, caption and signature blocks
