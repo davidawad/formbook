@@ -80,3 +80,11 @@ Reviewed pages: 10 of 10.
 7. **Motion and proposed order** are separate filings and not produced (L.R. 9013-1(A), 9013-4).
 8. **Tables of contents and authorities** are not generated (no rule requires them for an S.D. Ill. brief).
 9. **Footnote and quotation sizes** are the default sizes of the typst theme, not set separately.
+
+## Engines
+
+- **typst** (primary, `typst/`): the reference for the form.
+- **latex** (`latex/`): see `latex/`; not changed by this section.
+- **docx** (`docx/reference.docx`, `docx/ilsb.lua`, `docx/build-reference.sh`): pandoc on reference.docx, EB Garamond 12 pt, exact 24 pt body line pitch, 0.5 in first-line indent, 1 in margins, letter, "Page x of y" footer (PAGE and NUMPAGES fields). `ilsb.lua` lays out the caption (a table with a right and a bottom rule), court title, title, the body as written (headings, paragraphs, block quotations as single-spaced indented blocks, bullets, footnotes), the signature table with the attorney block in the signature column, and the certificate of service when the frontmatter has `service`. Every case word comes from the frontmatter. Matches the typst form in: font and size, body pitch, margins, indent, heading styles (centered bold capitals, centered bold, bold), page-number footer, page order. Differs or is unverified: the single-spacing gaps and the caption and signature table spacing are approximate (Word table and style metrics, not measured against typst); footnote text is 12 pt single-spaced (typst's footnote size was not checked); the sample has no certificate of service, so that path is untested.
+- docx checks: `samples/OUTPUT-gargula-motion-brief.docx` was written and validated (zip test and well-formed XML in every part). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `samples/OUTPUT-gargula-motion-brief.docx.pdf` was not produced and the docx Gate 0 to 3 checks (`tools/check.sh --engine docx`) cannot run. No page was rendered or reviewed (pages reviewed 0). The `.docx` has not been opened in Word or LibreOffice.
+- Blocked or unverified docx items: the docx.pdf render and page review (blocked on soffice); cover and caption table borders not verified against the typst layout; the page count and page breaks in Word may differ from typst.
