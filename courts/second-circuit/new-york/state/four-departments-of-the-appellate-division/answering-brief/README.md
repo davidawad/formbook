@@ -84,3 +84,19 @@ Not produced. `tools/overlay.sh` pairs each rendered page with the best-matching
 See `exemplars/SOURCE.md`. The sibling folder `courts/second-circuit/new-york/state/court-of-appeals/answering-brief/` is also blocked (no exemplar); its README records the same kind of search.
 
 [Formbook index](../../../../../../README.md) | [Court folder](../README.md)
+
+## Engines
+
+**docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/nyappdiv-answering-brief.lua`; output `samples/OUTPUT-<id>.docx`).
+
+- Matches the typst form: letter, 1 in margins, EB Garamond 14 pt body, double-spaced body with a 0.5 in first-line indent, single-spaced headings, block quotations, signature block and printing statement; centered page number in the footer, none on the cover.
+- Differs: "double" is Word's double spacing (`w:line="480"`), not the typst leading, so line breaks and page counts differ. Word and LibreOffice also paginate differently from each other.
+- Differs: the contents is a TOC field with cached entries and no page numbers; Word or LibreOffice must update fields. The authorities list has no page references (a TOA field needs the same update, and LibreOffice does not honor TA/TOA fields).
+- The cover is a centered layout with the calendar notation on the right. Footnote text is 12 pt, as the typst template sets. The affidavit of service prints the method and affiant from the metadata.
+- The word count and the word limit are computed by the filter from the markdown source, not by Word.
+- Validated: `tools/render.sh --engine docx` writes the `.docx`; `unzip -tq` and `xmllint --noout` pass on every XML part of the output and of `reference.docx`.
+
+BLOCKED (docx engine, not passable on this box):
+
+- **docx.pdf gates (Gates 0 and 1, `tools/check.sh --engine docx`): BLOCKED.** LibreOffice (`soffice`) is not installed on this box, so no `samples/OUTPUT-<id>.docx.pdf` exists and the check cannot run. Stamp `samples/.check-docx.txt` not written.
+- **Pages reviewed: 0.** No `.docx` page was rendered or looked at, and the file was not opened in Word or LibreOffice, so no "no repair prompt" result is recorded.

@@ -44,3 +44,33 @@ What the exemplar settled (and what the template now does):
 | `exemplars/SOURCE.md` | URL, case, docket, filer, filing date, date fetched, sha256, and what the exemplar shows. |
 
 [Formbook index](../../../../../../README.md) | [Court folder](../README.md)
+1. **No exemplar** (BLOCKED). The sample is synthetic. The overlay cannot run, and no page has been compared with a filed brief.
+2. **Footnotes** are refused by the template. The rule comes from a 2012 secondary source; confirm it against the current Part 1000 before relying on it.
+3. **Type size** is 14 pt, chosen above the 11-point minimum in the secondary source, because the template should not guess a smaller size. Confirm the current minimum; the printing statement reports the size used.
+4. **Line spacing** (double), **margins** (1 inch) and the **cover layout** are conventions. No primary-source Fourth Department rule was found for them.
+5. **Cover colour** (blue, §1000.8(a)) is not produced. The hard-copy rule applies to paper; the e-filed rule says "to the extent practicable", which is not settled here.
+6. **Form of the printing statement.** §1250.8(b)(6) requires a certification "on a form approved by the court". That form was not obtained. The template's statement carries the §1250.8(j) content and is a stand-in until the approved form is checked.
+7. **Word count** is the markdown body, headings included, computed by `count-words` (1,267 words for the sample). It is not cross-checked against the PDF text in this box. The 14,000-word limit is checked as a hard stop.
+8. **Statement of questions**: the two-page limit (§1250.8(b)(3)) is not checked.
+9. **Page limit** (§1250.8(g)(2), 50 pages typewritten) is not checked; only words are.
+10. **Certificate of service** is not generated. Add a proof-of-service block if the filer needs one.
+11. **TOA tracking** records the page where each `toa:` link starts. A citation that starts at the top of a page and continues is still listed on its starting page. Every citation to be listed must be a link, and the template does not detect citations.
+12. **TOC long titles**: a point title that fills its last line can push the page number onto a new line. Shorter titles avoid it; the template does not wrap around the number.
+13. **Font**: no face is named by the rule. 22 NYCRR 1250.8(f)(1) requires "a serifed, proportionally spaced typeface such as Times Roman" (or a serifed monospaced face such as Courier); "such as" is an example, so EB Garamond is kept, as the template's `font-family` sets. Typeface row: face required none named; substitute none; fit n/a. Checked 2026-10-15 against the LII copy. No system font is used.
+14. **Fourth Department e-filing** (22 NYCRR Part 1245) was not checked.
+
+## Engines
+
+**docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/nyappdiv-opening-brief.lua`; output `samples/OUTPUT-<id>.docx`).
+
+- Matches the typst form: letter, 1 in margins, EB Garamond 14 pt body, double-spaced body with a 0.5 in first-line indent, single-spaced headings, block quotations, signature block and printing statement; centered page number in the footer, none on the cover.
+- Differs: "double" is Word's double spacing (`w:line="480"`), not the typst leading, so line breaks and page counts differ. Word and LibreOffice also paginate differently from each other.
+- Differs: the contents is a TOC field with cached entries and no page numbers; Word or LibreOffice must update fields. The authorities list has no page references (a TOA field needs the same update, and LibreOffice does not honor TA/TOA fields).
+- The cover is a centered layout, not the caption table of the typst form. Footnotes are refused by the filter, as the typst template refuses them.
+- The word count and the word limit are computed by the filter from the markdown source, not by Word.
+- Validated: `tools/render.sh --engine docx` writes the `.docx`; `unzip -tq` and `xmllint --noout` pass on every XML part of the output and of `reference.docx`.
+
+BLOCKED (docx engine, not passable on this box):
+
+- **docx.pdf gates (Gates 0 and 1, `tools/check.sh --engine docx`): BLOCKED.** LibreOffice (`soffice`) is not installed on this box, so no `samples/OUTPUT-<id>.docx.pdf` exists and the check cannot run. Stamp `samples/.check-docx.txt` not written.
+- **Pages reviewed: 0.** No `.docx` page was rendered or looked at, and the file was not opened in Word or LibreOffice, so no "no repair prompt" result is recorded.
