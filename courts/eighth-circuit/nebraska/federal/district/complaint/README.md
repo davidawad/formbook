@@ -83,3 +83,19 @@ Not produced by this template (separate filings, not part of the complaint): the
 Defects found in review and fixed before this render: headings were drawn over the first line of the paragraph after them; paragraphs ran together with no line between them; a counter displayed inside a block measured one line short and overlapped the next paragraph. Each is fixed in `typst/ned-complaint.typ`.
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (and CLAUDE.md's role prefixes): `INPUT-goldenstein-complaint.md` (input), `OUTPUT-goldenstein-complaint.pdf` (our render), `OVERLAY-goldenstein-complaint.pdf` and `.txt` (the comparison). The brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools write.
+
+## Engines
+
+| Engine | Folder | Output in `samples/` | Status |
+|---|---|---|---|
+| typst (primary) | `typst/` | `OUTPUT-goldenstein-complaint.pdf` (11 pages; not in the snapshot, rendered for comparison only) | the reference |
+| docx | `docx/` (`reference.docx` from `make-reference.sh`, and `ned-complaint.lua`) | `OUTPUT-goldenstein-complaint.docx` and `OUTPUT-goldenstein-complaint.docx.pdf` (12 pages, LibreOffice 26.8.1 headless) | rendered; every page of the `.docx.pdf` viewed against the typst render |
+
+**Matches typst** (checked on the LibreOffice PDF): EB Garamond 12 pt (embedded, `pdffonts`); double spacing at 24 pt; 1-inch margins on US Letter; the counsel block; the two court-title lines; the caption as a table with a right and a bottom rule on the party column, "v." between the parties, indented designations, the case number, the bold title, "Jury Trial Demanded" and the trial location; centered bold capitals for level-1 headings; numbered allegations with a half-inch first-line indent; the prayer lettered A., B., ...; the signature block in NECivR 11.1 order with "Dated" at left; the footer from page 2 on (page number centered, the title in capitals, "Case No." at right) and no footer on page 1. The text matches typst word for word (the extracted text of both PDFs, compared without whitespace and footers, differs by one character at a page boundary). Some line breaks fall one word differently from typst.
+
+**Differs from typst:**
+- Pagination. The docx runs 12 pages against typst's 11. LibreOffice sets each baseline about 4 pt lower inside 24 pt exact lines, so a page holds one body line fewer. Page breaks are not forced (DOCX.md, "Known limits").
+- The footer title and case number are document properties (`subject`, `description`) shown by the `SUBJECT` and `COMMENTS` fields. A copy of the `.docx` that drops its properties drops its footer text.
+- Word was not available. The `.docx` was converted and checked in LibreOffice only.
+
+**docx BLOCKED:** `tools/check.sh --engine docx` (Gates 0 to 3) was not run. This folder has no `rules.md` or `checks.yaml`, and the brief forbids adding them or changing `tools/`. So no docx check ID is green or red: `BLOCKED: check.sh (all gates): no rules.md / checks.yaml in this folder; gates not run`.

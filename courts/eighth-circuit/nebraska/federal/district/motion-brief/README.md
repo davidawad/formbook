@@ -88,3 +88,22 @@ Checked on 2026-10-14. NECivR 12.1 (a motion to dismiss suspends the time to ans
 Defects found in review and fixed before this render: the footer's long title wrapped into the page number, so it is now a two-row footer; a multi-line heading was double-spaced inside a single-spaced gap, so its last line ran into the next heading (fixed by single-spacing headings); the signature block was split from the conclusion onto its own page (fixed by keeping the last paragraph with the signature).
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (and CLAUDE.md's role prefixes): `INPUT-sandoval-motion-brief.md` (input), `OUTPUT-sandoval-motion-brief.pdf` (our render), `OVERLAY-sandoval-motion-brief.pdf` and `.txt` (the comparison). The brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools write.
+
+## Engines
+
+| Engine | Folder | Output in `samples/` | Status |
+|---|---|---|---|
+| typst (primary) | `typst/` | `OUTPUT-sandoval-motion-brief.pdf` (13 pages; not in the snapshot, rendered for comparison only) | the reference |
+| docx | `docx/` (`reference.docx` from `make-reference.sh`, and `ned-motion-brief.lua`) | `OUTPUT-sandoval-motion-brief.docx` and `OUTPUT-sandoval-motion-brief.docx.pdf` (14 pages, LibreOffice 26.8.1 headless) | rendered; every page of the `.docx.pdf` viewed against the typst render |
+
+**Matches typst** (checked on the LibreOffice PDF): EB Garamond 12 pt (embedded, `pdffonts`); double spacing at 24 pt; 1-inch margins on US Letter; the two court-title lines; the caption as a table with a right and a bottom rule on the party column, "v." between the parties, the case number and the bold title; the lead-in paragraph; unnumbered body paragraphs with a half-inch first-line indent; the facts list numbered 1., 2., ... with a hanging indent; level-1 headings centered in bold capitals, level-2 bold and level-3 bold italic, both with a hanging indent; block quotations single-spaced and indented a half inch on both sides; the signature block at 3.25 in, kept with the conclusion; the certificate of compliance (the word count and software, from the frontmatter) and the certificate of service (recipients at a half-inch indent); the footer from page 2 on (page number, title in capitals, "Case No.") and no footer on page 1.
+
+The text matches typst word for word (the same comparison as in the complaint's Engines section; one character differs at a page boundary). Some line breaks fall one word differently.
+
+**Differs from typst:**
+- Pagination. The docx runs 14 pages against typst's 13, for the reason given in the complaint's Engines section (LibreOffice's baseline placement in exact-height lines). Page breaks are not forced.
+- The footer title and case number are document properties (`subject`, `description`), shown by the `SUBJECT` and `COMMENTS` fields.
+- The word count is the filer's (as in the typst template): the build stops if the stated count is over 13,000 words or the `compliance` block is missing, as the typst template does. The template does not count words.
+- Word was not available. The `.docx` was converted and checked in LibreOffice only.
+
+**docx BLOCKED:** `tools/check.sh --engine docx` (Gates 0 to 3) was not run. This folder has no `rules.md` or `checks.yaml`, and the brief forbids adding them or changing `tools/`. So no docx check ID is green or red: `BLOCKED: check.sh (all gates): no rules.md / checks.yaml in this folder; gates not run`.
