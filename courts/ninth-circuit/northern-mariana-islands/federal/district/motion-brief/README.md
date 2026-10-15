@@ -7,9 +7,10 @@ Folder: `courts/ninth-circuit/northern-mariana-islands/federal/district/motion-b
 |---|---|
 | exemplar | yes: `exemplars/FILED-EXAMPLE-imperial-pacific-24-cv-00001-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
 | sample md | `samples/INPUT-ipi-motion-to-dismiss-memo.md` (a portion of the 19-page memorandum: caption, lead-in, Background, Facts, Legal Standard, Argument IV.1, conclusion, signature; see Known gaps) |
-| render | ok: `samples/OUTPUT-ipi-motion-to-dismiss-memo.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-ipi-motion-to-dismiss-memo.pdf` and `OVERLAY-ipi-motion-to-dismiss-memo.txt` |
-| pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed; pages 1 to 9 viewed in their final state) |
+| typeface | LR 5.2.a requires "12-point type or larger and in a serif font" and names no face. Font: EB Garamond (vendored; no substitute needed). |
+| render | ok: `samples/OUTPUT-ipi-motion-to-dismiss-memo.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -Italic), no warnings. Re-rendered 2026-10-15. |
+| overlay | fail (not re-run): `tools/overlay.sh` needs `exemplars/FILED-EXAMPLE-*.pdf`, which is not in this snapshot. `samples/OVERLAY-ipi-motion-to-dismiss-memo.txt` is from an earlier run; no `OVERLAY-*.pdf` exists here. |
+| pages reviewed | 9 of 9 (re-rendered and every page viewed as PNG at 60 dpi on 2026-10-15) |
 
 File names follow the file roles in `CLAUDE.md` (`INPUT-` the markdown, `OUTPUT-` our render, `OVERLAY-` the comparison) because `tools/render.sh` and `tools/overlay.sh` read and write those names by default.
 
@@ -71,7 +72,7 @@ Not produced by this template: the notice of motion (a separate section of ECF 6
 1. **Which rules version applies.** The text is the 2017 Final Redline (see the complaint's gap 1). The current adopted version was not confirmed. **Needs David's check of the court's posted local rules.**
 2. **Hearing date and time (LR 5.2.e).** The exemplar leaves them blank ("Hearing Date: ____"), so the sample does too. A filed motion needs them; the template prints what is given and does not invent them.
 3. **Bar identification number (LR 5.2.c).** Not printed in the exemplar's counsel block; the sample prints the counsel block as filed.
-4. **Font.** EB Garamond at 12 pt (the minimum in LR 5.2.a), a serif face. It has a smaller x-height than the exemplar's Times New Roman, so the text reads smaller. A vendored Times-metric font would remove the difference (a font-vendoring question for David).
+4. **Font.** EB Garamond at 12 pt (the minimum in LR 5.2.a). Checked 2026-10-15 against the 2017 Final Redline text: "All text must be in 12-point type or larger and in a serif font"; no face is named, so `docs/FONTS.md` keeps EB Garamond. It has a smaller x-height than the exemplar's Times New Roman, so the text reads smaller; that is the filer's choice (tier 3), not a rule, so it is not chased.
 5. **Sub-headings in III.** The exemplar leaves "Party Standard", "Pleading Standard", "Subject Matter Jurisdiction Standard" and "Failure to State a Claim Standard" unnumbered; the template numbers them 1. to 4. (a convention choice, flagged).
 6. **Background list.** Roman numerals in the exemplar; (a) to (e) here.
 7. **Partial sample.** The sample transcribes Background, Facts, Legal Standard, Argument IV.1 with footnotes 1 and 2, and the conclusion and signature. It does not transcribe Argument IV.2 to IV.6 (the sovereign immunity, ripeness, res judicata, and agency arguments), footnote 3, or the notice of motion. The table of authorities therefore lists only what the sample cites. The 19-page exemplar's remaining pages are not in this sample, so the overlay compares the first pages only; the overlay is a diagnostic, not a score.
