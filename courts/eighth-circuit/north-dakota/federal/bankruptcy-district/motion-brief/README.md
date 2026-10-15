@@ -113,4 +113,30 @@ Page rows (as of the final render):
 
 Open tier-2 items for David: the title placement (below the caption, not in the right column); the single exemplar; the EB Garamond substitution; whether the filer's own typographic quirks should be kept in any future sample (they are kept here as transcribed).
 
+## Engines
+
+### docx (pandoc, `docx/`)
+
+Built with pandoc from `docx/reference.docx` and the Lua filter `docx/ndb-court-form.lua`, which lays out the cover, numbering, signature and certificate from the same frontmatter as the typst template. `docx/make-reference.sh` regenerates `reference.docx`. Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-<id>.md` (writes `samples/OUTPUT-<id>.docx`).
+
+What matches the typst form (same values, set as Word styles):
+
+- EB Garamond 12 pt throughout (style `rFonts`); letter page, 1-inch margins; centered page number in the footer.
+- Body paragraphs double-spaced at exact 27.6 pt; caption, counsel block, quotations and signature single-spaced at exact 13.8 pt.
+- Caption as a borderless table: party column 3.4 in, ")" column 0.3 in, case block at right, vertically centered.
+- Numbered paragraphs (text numbers, 0.5 in first-line indent); "~" continuations and WHEREFORE paragraphs unnumbered; quotations indented 0.5 in both sides.
+- Real footnotes (pandoc); headings centered and bold; signature block as a two-column table; the last numbered paragraph keeps with it.
+
+What differs or is not checked:
+
+- The number-to-text gap is a tab to the next default tab stop (1.0 in), not the typst 0.25 in gap.
+- Caption and signature lines are plain text (typst reads them as markdown inline).
+- Pagination is not compared with the typst render: no LibreOffice PDF exists yet (see below), so the page breaks in Word are unverified.
+- The font must be installed on the machine that opens the file; Word substitutes silently otherwise.
+
+docx BLOCKED items (`docs/DOCX.md`):
+
+- BLOCKED: Gates 0 to 3 on `samples/OUTPUT-<id>.docx.pdf` (`tools/check.sh --engine docx`): `soffice` cannot be run here. LibreOffice is not on conda-forge; the Debian trixie LibreOffice 25.2.3 packages were unpacked without root, but `soffice.bin` aborts at startup with an uncaught `com::sun::star::uno::RuntimeException`. Consequently no `.docx.pdf` was made, no page was rendered or viewed, and `pages_reviewed=0`. The `.docx` is valid (zip test and well-formed XML parts pass) and pandoc reads its text back in order, but nothing visual is claimed for it.
+- BLOCKED: the "opens in Word and LibreOffice without a repair prompt" check: not done (no Word here; LibreOffice unavailable).
+
 [Formbook index](../../../../../../README.md) | [Status table](../../../../../../STATUS.md)

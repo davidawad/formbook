@@ -64,6 +64,39 @@ Every page of `OUTPUT-fulton-answering-brief.pdf` was rendered at 60 dpi and vie
 | 6 (pdf 10) | Conclusion; signature block; date | OK. The conclusion and signature are on one page. |
 | i (pdf 11) | Certificate of service | OK. Roman numeral; drafted wording (see Governing rules). |
 
+## Engines
+
+| Engine | Folder | Output in `samples/` | Status |
+|---|---|---|---|
+| typst (primary) | `typst/` | `OUTPUT-fulton-answering-brief.pdf` | rendered; Gate 2 above |
+| docx | `docx/` | `OUTPUT-fulton-answering-brief.docx` (pandoc, `docx/reference.docx`, `docx/cavc.lua`) | `.docx` written; `.docx.pdf` not produced (BLOCKED, below) |
+| latex | `—` | none | not built |
+
+Build: `sh docx/make-reference.sh` regenerates `docx/reference.docx` from pandoc's default reference; `sh tools/render.sh --engine docx courts/federal-circuit/court-of-veteran-appeals/answering-brief samples/INPUT-fulton-answering-brief.md` writes the `.docx`. No `checks.yaml` exists for this court yet. `tools/check.sh --engine docx` exits 2 here (no `court.json` in the doc-type folder, and no `yq` on this box), so no gate ran on either engine.
+
+**docx matches the typst template:**
+
+- Letter page, 1-inch margins; EB Garamond 14 pt (the font named in the styles, not embedded); body double-spaced (exact 31.45 pt) with a half-inch first-line indent; block quotations and footnotes single-spaced at 14 pt.
+- Caption page with Form 2's contents (Vet. App. No., court, caption, proceeding, brief title, counsel, telephone), with no page number.
+- Contents and authorities in lower roman from i; the body in arabic from 1; the certificate of service in lower roman from i (section breaks carry `w:pgNumType`).
+- Rule 28 labels and indents: in the Argument, point headings (`I.`, `II.`) centered in small capitals and sub-headings `A.`, `1.`, `a.`; elsewhere `A.`, `1.`, `a.`, `(1)`. Levels 4 and below are bold italic, as in the typst template.
+- Table of authorities groups in the typst order (cases, statutes, regulations, rules, other authorities, record citations).
+- The signature block is kept with the last paragraph of the brief (`keepNext`).
+- The level-1 sections required by Rule 28 are checked; the build fails when one is missing or out of order, as the typst template does.
+
+**docx differs from the typst template:**
+
+- The table of contents and the table of authorities have no page numbers. Typst measures them. The docx engine has no pagination pass, so both are static text (not Word fields) and show the entries without page numbers.
+- The caption rules are paragraph borders, and the caption's spacing is set by hand; the typst template fits the caption to one page by measurement. Whether it fits one page has not been checked.
+- Word and LibreOffice paginate differently from each other; no page-based property is asserted for docx.
+
+**docx BLOCKED (delivered partial):**
+
+- `docx.pdf` gates (Gates 0 to 3 and the page review) are BLOCKED. `soffice --headless --convert-to pdf` segfaults at startup on the box where this was built (exit 139), after LibreOffice 25.2.3 and its runtime packages were unpacked from Debian trixie without root; no debugger was available. No `.docx.pdf` was produced, so no page was rendered or reviewed (`pages_reviewed=0`).
+- R. 28(a)(1)-(2), the table of contents and table of authorities with page references: not generated for docx.
+- R. 32(e), the 30-page limit: not checked for docx (the typst template checks it).
+- The `.docx` passed the render script's integrity check (a valid zip, every XML part well formed). It has not been opened in Word or LibreOffice, and no font check has been run on it.
+
 ## Known gaps
 
 - **One exemplar per doc type.** Tier 2 asks for 2-3 filed exemplars from different filers. Only *Fulton* (Secretary's brief) was found. The Secretary's briefs are filed by VA OGC; a second example from a different Secretary's brief would be the next step.

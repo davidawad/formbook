@@ -92,3 +92,23 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/comp
 11. **Lead counsel line** is a rule-driven addition the exemplar does not have (see the rules table).
 12. **Outside the template:** the corporate disclosure (L.R. 87), the civil cover sheet, the summons, and the redaction check (L.R. 5.4) are the filer's separate steps.
 13. **Exemplar PDF not in the folder.** Only `exemplars/SOURCE.md` is committed. The 2026-10-14 overlay was run with the PDF fetched from the URL in SOURCE.md (21 pages, "Filed 06/15/21" header checked) and passed as the third argument of `tools/overlay.sh`, not saved in the repo.
+
+## Engines
+
+`typst/` is the reference. The docx engine is `docx/` (`reference.docx` for the styles, page setup and footers; `gamd-complaint.lua` for the cover, caption, allegations, prayer and signature block). Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/middle-district/complaint samples/INPUT-solen-complaint.md` writes `samples/OUTPUT-solen-complaint.docx` and `samples/OUTPUT-solen-complaint.docx.pdf` (LibreOffice 26.8 converts; EB Garamond from `fonts/` must be installed for LibreOffice, see `docs/FONTS.md`).
+
+| Layout | docx | Note |
+|---|---|---|
+| Face and size | EB Garamond 14 pt, as typst | Named in the styles; Word substitutes silently if the face is not installed. |
+| Line pitch | Exact 32 pt on body, numbers, prayer and signature lead | Same pitch as typst on every page. |
+| Margins, paper | Letter, 1 in on every side | |
+| Numbered allegations | Number on its own centred line, text with a 0.5 in first-line indent | Number is a Word `SEQ` field, so Word renumbers when a paragraph is added. |
+| Prayer | (a) to (i), hanging indent (marker at 0.5 in, text at 0.9 in) | Letter is a `SEQ` field. |
+| Headings | Level 1 centred bold caps (All Caps formatting, text kept as typed), level 2 centred bold, level 3 bold italic | |
+| Caption | Party column with a right rule; "Civil Action No." and "JURY TRIAL DEMANDED" at right | Typst draws one ")" per caption line. A ")" column needs each wrapped line counted, which a Word table cannot report, so docx draws the rule in the same place instead. |
+| Signature block | "Respectfully submitted the ..." at left, firm and signers at 3 in, lead counsel and address flush left | Matches typst on page 10. |
+| Page number | Centred 12 pt on every page, page 1 included | `PAGE` field. |
+
+- **Pages reviewed:** all 10 pages of `OUTPUT-solen-complaint.docx.pdf` were rendered at 60 dpi and compared with the typst output page by page (side-by-side). Page breaks fall where the typst output's do on all 10 pages.
+- **Checks:** `tools/check.sh --engine docx` was not run; the folder is a doc-type folder without `court.json` (see gap 10). The docx is not BLOCKED on any tier-1 point in this list. Not verified: opening the `.docx` in Microsoft Word (no Word here). LibreOffice converts it without error; no GUI repair prompt was checked.
+- **Pagination:** Word may still break lines differently (`docs/DOCX.md`).

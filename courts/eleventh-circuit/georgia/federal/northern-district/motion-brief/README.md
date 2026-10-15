@@ -89,3 +89,32 @@ The overlay pairs our pages with the exemplar by word overlap, which is coarse: 
 6. **Signature block and emails.** Only the signing attorney is transcribed (see Sample); a filed brief with several attorneys needs an email for each.
 7. **Checkers not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json`, `rules.md` and `checks.yaml`, which this doc-type folder does not have; `tools/` may not be edited. Gate 0 and Gate 1 were not run mechanically. The table above is the Gate 2 record.
 8. **Tier-2 choices.** The cover follows the primary exemplar's layout; the court title uses the "IN THE" form, which 3 of the 4 N.D. Ga. filings on file use (the primary exemplar does not). The sub-heading style (bold left, typed letters) is the primary exemplar's.
+
+## Engines
+
+### docx (`docx/`)
+
+Files: `docx/reference.docx` (built once by `docx/make-reference.sh` from pandoc's default reference) and `docx/gand-motion-brief.lua` (the filter: the cover, the caption table, the signature block, the LR 7.1(D) font certificate and the certificate of service). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-durand-motion-brief.md` writes `samples/OUTPUT-durand-motion-brief.docx` and, when LibreOffice is available, `OUTPUT-durand-motion-brief.docx.pdf`.
+
+**Checked so far:** the `.docx` builds with pandoc 3.12.1, every part is well-formed XML (`render-docx.sh` checks this), every paragraph style it uses exists in the reference, and the section carries US Letter with 1 in margins and the PAGE footer. The text reads back in the same order as the markdown, with the certificates after the signature block. **No page of the `.docx` has been rendered or looked at**, so no visual claim is made for it.
+
+What is meant to match the typst template (set in the styles, not yet seen on a page):
+
+- Times New Roman 14 pt in every style, including footnotes and the block quotation (LR 5.1(C)). The typst render uses its metric-compatible substitute, Liberation Serif. The LR 7.1(D) certificate names Times New Roman, and so does the `.docx`.
+- Double spacing: exact 644 twips (32.2 pt). Headings, footnotes, the caption, the block quotation (single-spaced, indented 0.5 in on both sides) and the signature block are single-spaced.
+- 1 in margins on US Letter; page number bottom centre (LR 5.1(D), (E)).
+- Caption and cover as in the complaint: the court title, a caption with the ")" column, `Civil Action No.` on the right, the title in bold capitals.
+- Headings: level 1 centred bold capitals, level 2 bold left (the letters are typed), as the typst template.
+- Certificates: the LR 7.1(D) font certificate and the certificate of service, after the signature block.
+
+What differs from the typst output, and why:
+
+- Single spacing uses Word's single line (16.1 pt for 14 pt Times New Roman), not the typst single-leading (13.4 pt), for the same reason as the complaint (no clipping in Word).
+- Blank-line gaps (the typst `v(body-leading)`) are paragraph spacing of one double line. The typst geometry differs by a few points at each gap.
+- Pagination is Word's or LibreOffice's, not typst's (`docs/DOCX.md`, Known limits). The page count of the typst render (10 pages) is not a docx result.
+
+docx BLOCKED (`docs/DOCX.md`: the `.docx` is delivered, the checks that need its PDF are not run):
+
+- `BLOCKED: docx Gates 0-3 on the .docx.pdf (tools/check.sh --engine docx): LibreOffice cannot start in the build box.` conda-forge has no LibreOffice package. The Debian 25.2.3 packages were extracted without installing and the binary still stops at the UNO bootstrap (`DeploymentException`) with the ICU and program paths set, so `soffice --headless --convert-to pdf` does not run and no `.docx.pdf` exists. Gates 0-1 are not run mechanically for this folder either (no `checks.yaml`; see Known gaps 7).
+- `BLOCKED: docx page review: 0 of the pages of the .docx were rendered and viewed, because there is no PDF to render.`
+- `BLOCKED: docx opens in Word and LibreOffice without a repair prompt: not checked; no Word is available here and LibreOffice does not start.`

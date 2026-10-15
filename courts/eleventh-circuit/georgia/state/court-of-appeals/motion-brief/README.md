@@ -78,3 +78,13 @@ Reviewed pages: 4 of 4.
 5. **No length counter.** The word-count certificate is written from the frontmatter `word_count` field, not counted by the template.
 6. **Margins** (1 in) are an assumption (GACA-FORM-004).
 7. **Footnotes** are supported by cmarker but the sample has none; footnote size follows `type-size`, not separately checked.
+
+## Engines
+
+docx (`docx/`: `reference.docx` from `make-reference.sh`, `gactapp-motion.lua`, `render.sh`; LibreOffice PDF is the checked copy).
+
+- Matches the typst form: Liberation Serif 14 pt throughout; 1-inch margins, Letter; body double-spaced; half-inch first-line indent; cover with the court line, a two-column caption with a vertical rule, and the title centred; the body starts on the cover page, as in the typst form; every page numbered from 1 at the bottom centre; certificate of word count, signature block (3.25 in indent) and certificate of service follow the body.
+- Differs: the typst motion template's double spacing is about 32 pt pitch and the docx uses Word's "double" (about 32 pt), so the line pitch matches; word wrapping and the signature-block spacing differ slightly. The docx runs one page longer (motion: typst 4, docx 5). The certificate of service heading is kept with its paragraph.
+- Petition for rehearing (same form): the counsel address and signature spill to a new page in the docx sample (page 6), where the typst sample fits on 5 pages.
+- BLOCKED: none for this doc type. `sh tools/check.sh --engine docx` was not run (no gate run in this bead; the .docx.pdf is rendered and every page was viewed at 60 dpi).
+- Opened and rendered with LibreOffice only; not opened in Word.

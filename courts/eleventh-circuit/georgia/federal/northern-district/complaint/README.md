@@ -82,3 +82,34 @@ Rows are per the final PDF (sha256 above). The tier-2 comparison is against one 
 6. **Tier 2 filers.** Two filers were collected (Serveco and Washington, both counsel-filed). EVAL-LOOP's tier-2 rule asks for two or three filers; two are on file. The second filer adds a "Certificate of Compliance with Local Rule 5.1" on its last page (font and margins, not required for a complaint by LR 5.1 or LR 7.1(D)); seen in one filer only, so it is tier 3 and not added.
 7. **Checkers not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json`, `rules.md` and `checks.yaml`, which this doc-type folder does not have; the brief forbids editing `tools/`. Gate 0 (content) and Gate 1 (rules) were not run mechanically. The table above is the Gate 2 record.
 8. **Italics.** The exemplar's text layer has no italic markup, so case names in the sample are roman. The template does italicize `*...*`.
+
+## Engines
+
+### docx (`docx/`)
+
+Files: `docx/reference.docx` (built once by `docx/make-reference.sh` from pandoc's default reference, so the styles are reproducible) and `docx/gand-complaint.lua` (the filter: the cover, the caption table, the numbered allegations, the lettered prayer items, the signature block). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-serveco-complaint.md` writes `samples/OUTPUT-serveco-complaint.docx` and, when LibreOffice is available, `OUTPUT-serveco-complaint.docx.pdf`.
+
+**Checked so far:** the `.docx` builds with pandoc 3.12.1, every part is well-formed XML (`render-docx.sh` checks this), every paragraph style it uses exists in the reference, and the section carries US Letter with 1 in margins and the PAGE footer. The text reads back in the same order as the markdown (`pandoc -f docx -t plain`). **No page of the `.docx` has been rendered or looked at**, so no visual claim is made for it.
+
+What is meant to match the typst template (set in the styles, not yet seen on a page):
+
+- Times New Roman 14 pt in every style (LR 5.1(C)). The typst render uses its metric-compatible substitute, Liberation Serif; the `.docx` names Times New Roman, so Word shows the face the rule names.
+- Double spacing: exact 644 twips (32.2 pt), the typst body pitch. Headings, footnotes, the caption and the signature block are single-spaced.
+- 1 in margins on US Letter; page number bottom centre (LR 5.1(D), (E)).
+- Caption: 3.2 in party column, a ")" column, the case number on the right and centred vertically, the parties on exact 19.6 pt lines so the ")" marks line up.
+- Signature block: indented 2.7 in, with the LR 5.1(G) fields from the frontmatter; the block is kept together.
+
+What differs from the typst output, and why:
+
+- Single spacing uses Word's single line (16.1 pt for 14 pt Times New Roman), not the typst single-leading (13.4 pt). Exact 13.4 pt would clip glyphs in Word.
+- The number of a numbered allegation is followed by a tab to 1 in. The typst template puts a fixed 0.25 in after the number, so the text column there moves with the width of the number.
+- Lettered prayer items hang at 0.5 in with the text at 1 in; the typst gap after the letter is 0.4 in.
+- Blank-line gaps (the typst `v(body-leading)`) are paragraph spacing of one double line. The typst geometry differs by a few points at each gap.
+- Pagination is Word's or LibreOffice's, not typst's (`docs/DOCX.md`, Known limits). The page count of the typst render (13 pages) is not a docx result.
+- The orphan signature page (Gate 2 row 13, OPEN above) is not fixed here either: the signature block is kept together but is not kept with the last paragraph.
+
+docx BLOCKED (`docs/DOCX.md`: the `.docx` is delivered, the checks that need its PDF are not run):
+
+- `BLOCKED: docx Gates 0-3 on the .docx.pdf (tools/check.sh --engine docx): LibreOffice cannot start in the build box.` conda-forge has no LibreOffice package. The Debian 25.2.3 packages were extracted without installing and the binary still stops at the UNO bootstrap (`DeploymentException`) with the ICU and program paths set, so `soffice --headless --convert-to pdf` does not run and no `.docx.pdf` exists. Gates 0-1 are not run mechanically for this folder either (no `checks.yaml`; see Known gaps 7).
+- `BLOCKED: docx page review: 0 of the pages of the .docx were rendered and viewed, because there is no PDF to render.`
+- `BLOCKED: docx opens in Word and LibreOffice without a repair prompt: not checked; no Word is available here and LibreOffice does not start.`

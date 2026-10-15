@@ -77,3 +77,25 @@ Each page was rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass 
 - `sh tools/render.sh` exit 0, no typst warnings (warnings fail the build).
 - `sh tools/overlay.sh` wrote the overlay and the page map.
 - `sh tools/check.sh` and `tools/check-selftest.sh` were not run: they expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape. The brief forbids editing `tools/`. The pages were reviewed by eye as the Gate 2 equivalent.
+
+## Engines
+
+- typst (primary): `typst/`, `samples/OUTPUT-castellanos-complaint.pdf`, 7 pages.
+- docx: `docx/make-reference.sh` builds `docx/reference.docx` (pandoc's default reference, with the court's styles and footer); `docx/flsd.lua` builds the caption, the numbered paragraphs and the signature block. Written by `sh tools/render.sh --engine docx <this folder> samples/INPUT-castellanos-complaint.md`: `samples/OUTPUT-castellanos-complaint.docx` and `samples/OUTPUT-castellanos-complaint.docx.pdf` (LibreOffice 26.8.1, headless). 7 pages. Pandoc 3.12.1.
+- latex: not built for this doc type.
+
+What matches typst (every page of the `.docx.pdf` rendered at 60 dpi and compared with the typst page, 2026-10-15): letter paper; 1 in margins; EB Garamond 12 pt throughout (embedded as EB Garamond); body text double-spaced at an exact 27.6 pt pitch with a 0.5 in first-line indent; the caption (court name, centered docket line, style at the left in a 3.25 in column, the "/" closer, centered bold title); numbered paragraphs 1 to 45 with the WHEREFORE and jury-demand paragraphs unnumbered; level-1 headings centered bold capitals, level-2 centered bold, level-3 bold at the left; the signature block single-spaced at 3.5 in; the page number centered at the bottom from page 1.
+
+What differs from typst:
+
+- Headings are all 12 pt bold in docx. Typst's level-1 and level-2 headings render at typst's default heading size, larger than 12 pt. The docx follows the 12 pt minimum; the typst size is a typst-template question, not changed here.
+- Signature block: typst indents the first line of "Dated", "Respectfully submitted," and the counsel lines by 0.5 in (the paragraph's first-line indent carries into the block). The docx sets those lines flush. The counsel block sits at 3.5 in in both.
+- Paragraph numbers are typed text (number, period, tab, tab stop at 0.92 in), not Word list numbering. Typst numbers them itself. In Word, inserting a paragraph means retyping the numbers after it.
+- Pagination: both renders are 7 pages. Individual lines can break differently between LibreOffice and typst; the vertical pitch is the same.
+- Font: EB Garamond must be installed on the machine that opens or renders the `.docx`. Without it Word substitutes silently. The render here used a copy of `fonts/eb-garamond` in `~/.local/share/fonts`.
+
+docx BLOCKED items:
+
+- No layout item is blocked: every page of the `.docx.pdf` matches the typst page in the points above.
+- The repo gates were not run on this folder: `tools/check.sh --engine docx` needs a court folder (`court.json`, `rules.md`, `checks.yaml`), and this doc-type folder has none of them. The fonts check (Gate 1) and the text check (Gate 0) were not run on the `.docx.pdf`.
+- Word was not available: the `.docx` has been converted by LibreOffice with no error, but it has not been opened in Word.

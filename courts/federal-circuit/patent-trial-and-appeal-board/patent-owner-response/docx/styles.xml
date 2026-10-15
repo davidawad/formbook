@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- docx/styles.xml: the paragraph and character styles of the PTAB patent owner response (see make-reference.sh).
+     Mirrors typst/ptab-patent-owner-response.typ: 14-point Times New Roman (37 C.F.R. 42.6(a)(2)(ii)), double
+     spacing for the body (42.6(a)(2)(iii)), single spacing for headings, cover, contents, certificates and footnotes.
+     Sizes are in half-points (w:sz), spacing in twentieths of a point (twips). Heading numbers (I., A., 1.) come from
+     the list numId 901 that make-reference.sh adds to numbering.xml. -->
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <w:docDefaults>
+    <w:rPrDefault><w:rPr>
+      <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
+      <w:sz w:val="28"/><w:szCs w:val="28"/><w:lang w:val="en-US" w:eastAsia="en-US" w:bidi="ar-SA"/>
+    </w:rPr></w:rPrDefault>
+    <w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault>
+  </w:docDefaults>
+  <w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/>
+    <w:pPr><w:widowControl/><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:style>
+  <w:style w:type="character" w:default="1" w:styleId="DefaultParagraphFont"><w:name w:val="Default Paragraph Font"/><w:uiPriority w:val="1"/><w:semiHidden/><w:unhideWhenUsed/></w:style>
+  <w:style w:type="table" w:default="1" w:styleId="TableNormal"><w:name w:val="Normal Table"/><w:uiPriority w:val="99"/><w:semiHidden/><w:unhideWhenUsed/>
+    <w:tblPr><w:tblInd w:w="0" w:type="dxa"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="108" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="108" w:type="dxa"/></w:tblCellMar></w:tblPr></w:style>
+  <w:style w:type="numbering" w:default="1" w:styleId="NoList"><w:name w:val="No List"/><w:uiPriority w:val="99"/><w:semiHidden/><w:unhideWhenUsed/></w:style>
+  <!-- Body text: double spaced, first line indented 0.5 in (the typst para-indent). Left aligned, as the typst template. -->
+  <w:style w:type="paragraph" w:styleId="BodyText"><w:name w:val="Body Text"/><w:basedOn w:val="Normal"/><w:qFormat/>
+    <w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="auto"/><w:ind w:firstLine="720"/><w:jc w:val="left"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:styleId="FirstParagraph"><w:name w:val="First Paragraph"/><w:basedOn w:val="BodyText"/><w:next w:val="BodyText"/><w:qFormat/>
+    <w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="auto"/><w:ind w:firstLine="720"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Compact"><w:name w:val="Compact"/><w:basedOn w:val="BodyText"/><w:qFormat/>
+    <w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="auto"/><w:ind w:firstLine="0"/></w:pPr></w:style>
+  <!-- The conclusion stays on the page of the signature block (typst: block(breakable: false)). -->
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyKeepNext"><w:name w:val="Body Keep Next"/><w:basedOn w:val="BodyText"/><w:next w:val="SignatureBlock"/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/></w:pPr></w:style>
+  <!-- Block quotations: indented from both margins, 1.5 spaced (42.6(a)(2)(iii)). -->
+  <w:style w:type="paragraph" w:styleId="BlockText"><w:name w:val="Block Text"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/>
+    <w:pPr><w:spacing w:before="160" w:after="240" w:line="360" w:lineRule="auto"/><w:ind w:left="720" w:right="720" w:firstLine="0"/><w:jc w:val="left"/></w:pPr></w:style>
+  <!-- Headings: numbered from list 901 (I., A., 1., a.). Level 1 centered in capitals; levels 2 and 3 flush left, bold. -->
+  <w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="901"/></w:numPr><w:spacing w:before="240" w:after="240" w:line="240" w:lineRule="auto"/><w:jc w:val="center"/><w:outlineLvl w:val="0"/></w:pPr>
+    <w:rPr><w:b/><w:bCs/><w:caps/></w:rPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:numPr><w:ilvl w:val="1"/><w:numId w:val="901"/></w:numPr><w:spacing w:before="240" w:after="240" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/><w:outlineLvl w:val="1"/></w:pPr>
+    <w:rPr><w:b/><w:bCs/></w:rPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Heading3"><w:name w:val="heading 3"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:uiPriority w:val="9"/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:numPr><w:ilvl w:val="2"/><w:numId w:val="901"/></w:numPr><w:spacing w:before="240" w:after="240" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/><w:outlineLvl w:val="2"/></w:pPr>
+    <w:rPr><w:b/><w:bCs/><w:i/><w:iCs/></w:rPr></w:style>
+  <!-- Cover, contents, signature, certificates: single spaced, no first-line indent. -->
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="CenteredHeading"><w:name w:val="Centered Heading"/><w:basedOn w:val="Normal"/><w:next w:val="BodyText"/><w:qFormat/>
+    <w:pPr><w:keepNext/><w:keepLines/><w:spacing w:before="0" w:after="240" w:line="240" w:lineRule="auto"/><w:jc w:val="center"/></w:pPr>
+    <w:rPr><w:b/><w:bCs/></w:rPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="SingleLine"><w:name w:val="Single Line"/><w:basedOn w:val="Normal"/><w:qFormat/>
+    <w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/><w:jc w:val="left"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="CoverCenter"><w:name w:val="Cover Center"/><w:basedOn w:val="SingleLine"/><w:qFormat/>
+    <w:pPr><w:jc w:val="center"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="CoverRight"><w:name w:val="Cover Right"/><w:basedOn w:val="SingleLine"/><w:qFormat/>
+    <w:pPr><w:jc w:val="right"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="SignatureBlock"><w:name w:val="Signature Block"/><w:basedOn w:val="SingleLine"/><w:qFormat/>
+    <w:pPr><w:keepLines/><w:jc w:val="right"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="CertificateText"><w:name w:val="Certificate Text"/><w:basedOn w:val="BodyText"/><w:qFormat/>
+    <w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="auto"/><w:ind w:firstLine="720"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="ServiceRecipient"><w:name w:val="Service Recipient"/><w:basedOn w:val="SingleLine"/><w:qFormat/>
+    <w:pPr><w:keepLines/><w:spacing w:before="240" w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:left="720"/></w:pPr></w:style>
+  <!-- Footnotes: 14 pt, single spaced. -->
+  <w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/><w:basedOn w:val="Normal"/><w:uiPriority w:val="99"/><w:unhideWhenUsed/>
+    <w:pPr><w:spacing w:before="0" w:after="120" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/></w:pPr>
+    <w:rPr><w:sz w:val="28"/><w:szCs w:val="28"/></w:rPr></w:style>
+  <w:style w:type="character" w:styleId="FootnoteReference"><w:name w:val="footnote reference"/><w:basedOn w:val="DefaultParagraphFont"/><w:uiPriority w:val="99"/><w:unhideWhenUsed/><w:rPr><w:vertAlign w:val="superscript"/></w:rPr></w:style>
+  <!-- Contents (TOC field entries). -->
+  <w:style w:type="paragraph" w:styleId="TOC1"><w:name w:val="toc 1"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:uiPriority w:val="39"/><w:unhideWhenUsed/>
+    <w:pPr><w:keepLines/><w:spacing w:before="200" w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:left="0" w:right="720"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:styleId="TOC2"><w:name w:val="toc 2"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:uiPriority w:val="39"/><w:unhideWhenUsed/>
+    <w:pPr><w:keepLines/><w:spacing w:before="140" w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:left="720" w:right="720"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Header"><w:name w:val="header"/><w:basedOn w:val="Normal"/><w:uiPriority w:val="99"/><w:unhideWhenUsed/>
+    <w:pPr><w:tabs><w:tab w:val="center" w:pos="4680"/><w:tab w:val="right" w:pos="9360"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:jc w:val="right"/></w:pPr></w:style>
+  <w:style w:type="paragraph" w:styleId="Footer"><w:name w:val="footer"/><w:basedOn w:val="Normal"/><w:uiPriority w:val="99"/><w:unhideWhenUsed/>
+    <w:pPr><w:tabs><w:tab w:val="center" w:pos="4680"/><w:tab w:val="right" w:pos="9360"/></w:tabs><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:jc w:val="center"/></w:pPr></w:style>
+  <w:style w:type="character" w:styleId="Hyperlink"><w:name w:val="Hyperlink"/><w:basedOn w:val="DefaultParagraphFont"/><w:uiPriority w:val="99"/><w:unhideWhenUsed/><w:rPr><w:color w:val="000000"/></w:rPr></w:style>
+  <w:style w:type="character" w:styleId="Strong"><w:name w:val="Strong"/><w:basedOn w:val="DefaultParagraphFont"/><w:qFormat/><w:rPr><w:b/><w:bCs/></w:rPr></w:style>
+  <w:style w:type="character" w:styleId="Emphasis"><w:name w:val="Emphasis"/><w:basedOn w:val="DefaultParagraphFont"/><w:qFormat/><w:rPr><w:i/><w:iCs/></w:rPr></w:style>
+  <w:style w:type="table" w:styleId="Table"><w:name w:val="Table"/><w:basedOn w:val="TableNormal"/><w:uiPriority w:val="59"/>
+    <w:tblPr><w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders><w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr></w:style>
+</w:styles>
