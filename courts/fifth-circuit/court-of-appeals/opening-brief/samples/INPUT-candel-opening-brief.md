@@ -41,7 +41,7 @@ Allan Green, owner of Candel. Candel has no parent corporation, and no publicly 
 
 # Statement Regarding Oral Argument
 
-Appellant Candel & Partners SAS (“Candel”) submits that oral argument would aid the Court. Candel maintains that the district court's failure to explain its decision below warrants vacatur and remand, just as in Banco Mercantil de Norte, S.A. v. Paramo, 114 F.4th 757 (5th Cir. 2024). But should the Court have questions on that point, or on the factors articulated by the Supreme Court in Intel Corp. v. Advanced Micro Devices, Inc., 542 U.S. 241 (2004), and their application here, Candel would welcome the opportunity to address the panel in person.
+Appellant Candel & Partners SAS (“Candel”) submits that oral argument would aid the Court. Candel maintains that the district court's failure to explain its decision below warrants vacatur and remand, just as in *Banco Mercantil de Norte, S.A. v. Paramo*, 114 F.4th 757 (5th Cir. 2024). But should the Court have questions on that point, or on the factors articulated by the Supreme Court in *Intel Corp. v. Advanced Micro Devices, Inc.*, 542 U.S. 241 (2004), and their application here, Candel would welcome the opportunity to address the panel in person.
 
 # Statement of Subject-Matter and Appellate Jurisdiction
 

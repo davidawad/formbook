@@ -71,12 +71,12 @@ Rules were checked against the court's checklist (dated September 2024) on 2026-
 | 4 | Table of contents | 6 | 28.3% |
 | 5 | Table of authorities | 8 | 20.6% |
 | 6 | Jurisdiction, issues | 12 | 54.1% |
-| 7 | Statement of the case | 14 | 70.0% |
-| 8 | Summary of the argument | 27 | 39.5% |
-| 9 | Argument (point I) | 29 | 41.1% |
-| 10 | Argument (point I.A) | 31 | 63.2% |
-| 11 | Argument (point I.B) | 33 | 60.5% |
-| 12 | Conclusion | 57 | 37.0% |
+| 7 | Statement of the case | 14 | 71.9% |
+| 8 | Procedural history, summary of the argument | 27 | 41.7% |
+| 9 | Summary (end); Argument point I | 28 | 40.5% |
+| 10 | Argument (point I.A) | 31 | 54.2% |
+| 11 | Argument (point I.A end, I.B) | 33 | 53.5% |
+| 12 | Conclusion, signature | 57 | 29.8% |
 | 13 | Certificate of service | 58 | 54.7% |
 | 14 | Certificate of compliance | 59 | 33.3% |
 
@@ -88,7 +88,7 @@ The overlay is a diagnostic, not a score. The low overlap on the table of conten
 - Page 2 (certificate of interested persons): single spaced, signature block on the same page.
 - Page 3 (oral argument statement): double spaced, centred heading.
 - Page 4 (table of contents): page numbers match the body pages, the point headings hang.
-- Page 5 (table of authorities): page references match the body pages. Entries whose page list wraps leave a short last line (e.g. "Texas Keystone ... 1, 5, 6"). Open, cosmetic.
+- Page 5 (table of authorities): page references match the body pages. (Before 2026-10-16 a wrapped entry pushed its page list onto a line of its own; fixed, see the verification pass.)
 - Pages 6–12 (body): double spaced, footnotes at 12 point, headings numbered by the template, point headings hang.
 - Page 13 (certificate of service) and page 14 (certificate of compliance): the word count on page 14 is computed from the markdown (1,577 words, excluding the front matter, the tables, the oral argument statement and the certificates). A rough awk count of the same markdown gives 1,592. The difference is markup tokens such as `§`.
 
@@ -104,12 +104,22 @@ Defects found and fixed during the review:
 - **Standard of review**: the checklist requires the argument to include the standards of review (item 1(i)). The sample has no standard-of-review paragraph, and the template does not check for one.
 - **Sample is an excerpt**: the exemplar runs 59 pages; the sample carries the front matter, most of the statement of the case, the summary, points I and I.A/I.B of the argument, the conclusion and both certificates. Point II of the argument and the remaining argument pages are not transcribed.
 - **Table of authorities**: a citation is listed on the page where its link starts. A citation that begins at the end of a page and continues onto the next is listed on the first page. Verified only on this sample.
+- **Word limit**: the template refuses to build a brief over 13,000 words (CA5-LEN-001, FRAP 32(a)(7)(B)(i)); the 30-page option is not checked.
 - **Passim** threshold (7 pages) is in the template but no authority in the sample reaches it.
 - **Cover colour, spiral binding and paper-copy count** (checklist 3(b)-(c), 4) are paper-copy requirements and are not produced.
 - **Record references** are typed by the author (`ROA.1399`); the template does not validate them.
 - **Word count**: the certificate of compliance uses the word count computed from the markdown, not the PDF. Counsel must check it against the word processor before filing.
 - **Certificate typeface statement** names the typeface and point size as the template sets them (EB Garamond 14 point, footnotes 12 point). If a different face is used in filing, the statement must change.
 - Not run: `tools/check.sh` and `tools/check-selftest.sh` (no check contract exists for this doc type yet).
+
+## Verification pass 2026-10-16 (fb-595.26.5)
+
+- Rendered: `sh tools/render.sh` (typst, exit 0, no warnings), 14 pages, same count as the committed PDF. Overlay rerun (`tools/overlay.sh`, exit 0); map above updated (pages 7 to 12 moved by a few lines after the heading-spacing fix).
+- Viewed: all 14 pages at 60 dpi before the fixes and all 14 again after them (page 12 and the TOC/TOA pages at full size, the rest also in a contact sheet); the 14 overlay pages at 40 dpi; exemplar page 1 against our cover.
+- Fixed in `typst/ca5-opening-brief.typ`: (1) TOC and TOA titles were small, bold, left-aligned; now centred bold capitals like the other section titles. (2) TOA and TOC rows: a wrapped entry left its page number alone on the next line ("... 1, 5, / 6") and the leader could shrink to ". ."; each row is now a grid, the entry hangs and the page reference sits at the right on the entry's last line. (3) Sub-headings (I., A.) sat closer to the text above than the double-spaced lines did; space above is now `heading-gap` (2em). Headings no longer use typst's built-in sizes (section titles 1.15em, sub-headings body size). (4) No word-limit check; the template now stops above 13,000 words. (5) The closing signature could stand alone on a page; the last body paragraph (not a footnote definition or heading) is kept with it. (6) Certificate paragraphs are set flush left.
+- Fixed in the sample: the two case names in the statement regarding oral argument were not italic (transcription error).
+- latex engine re-rendered (`--engine latex`, exit 0, 14 pages); its pages were not reviewed in this pass.
+- Gaps that remain: standard-of-review paragraph not transcribed or checked; the sample is an excerpt; typeface differs from the exemplar (EB Garamond vs Century Schoolbook, tier 2 choice); the cover is plain centred text without the exemplar's rules (tier 3); docx not rendered (no soffice).
 
 ## Status
 

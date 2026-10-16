@@ -19,7 +19,13 @@
 #let single-leading = 0.5em               // quotations, footnotes, headings, TOC/TOA, certificates.
 #let page-margin = 1in                     // CA5-FORM-003: 1 inch on all sides.
 #let para-indent = 0.5in
+#let title-size = 1.15em                   // section titles: bold capitals, a little larger than the text
+                                           // (typst's built-in heading sizes are not used).
+#let heading-gap = 2em                     // space above a sub-heading: more than the double-spaced
+                                           // line gap, so the heading does not run into the text above.
+#let label-width = 0.5in                   // the box a heading label ("I.", "A.") sits in.
 #let passim-threshold = 7                  // an authority cited on this many pages or more: "passim"
+#let word-limit = 13000                    // CA5-LEN-001: principal brief, FRAP 32(a)(7)(B)(i).
 #let front-titles = (
   "Certificate of Interested Persons",     // CA5-CONT-001 (5th Cir. R. 28.2.1): before the TOC
   "Statement Regarding Oral Argument",    // CA5-CONT-002 (5th Cir. R. 28.2.3): before the TOC
@@ -178,20 +184,34 @@
   #signer-block(meta.signature)
 ]
 
+/// Title of a front table (contents, authorities): set like a level-1 section heading.
+#let table-title(t) = block(width: 100%, below: 1.2em,
+  align(center, text(size: title-size, strong(upper(t)))))
+
+/// One row of the TOC or TOA: the entry text wraps in its own column, hanging by `hang-by`, and
+/// the dot leader fills the rest of its last line; the page reference sits at the right, on the
+/// entry's last line. (Inside one paragraph a long entry pushed the page number onto a line of
+/// its own.) `hanging-indent` must be set on an explicit `par`: a set rule inside a block is ignored.
+#let leader-row(hang-by, entry, pages) = block(breakable: false, width: 100%, below: 0.8em,
+  grid(columns: (1fr, auto), column-gutter: 0.4em, align: (left, bottom + right),
+    par(hanging-indent: hang-by, first-line-indent: 0pt, leading: single-leading, justify: false,
+      [#entry#h(0.4em)#box(width: 1fr, repeat[.#h(0.2em)])]),
+    pages))
+
 /// Table of contents: every level-1 to level-4 heading of the body, with its printed label and
 /// the body page it starts on (CA5-CONT-004). Built from the headings, never typed in.
 #let toc-page() = context {
   let hs = query(heading).filter(h => plain(h.body).trim() not in front-titles)
   set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
-  strong[TABLE OF CONTENTS]
-  v(0.4in)
-  for h in hs {
-    let pg = counter(page).at(h.location()).first()
-    let label = if h.level >= 2 { heading-label(h) + " " } else { "" }
-    let ind = (h.level - 1) * 0.4in
-    pad(left: ind, bottom: 0.7em)[
-      #label#h.body #box(width: 1fr, repeat[ .]) #pg
-    ]
+  table-title[Table of Contents]
+  for hd in hs {
+    let pg = counter(page).at(hd.location()).first()
+    let ind = (hd.level - 1) * 0.4in
+    if hd.level >= 2 {
+      leader-row(ind + label-width, [#h(ind)#box(width: label-width, heading-label(hd))#hd.body], str(pg))
+    } else {
+      leader-row(0pt, hd.body, str(pg))
+    }
   }
 }
 
@@ -214,25 +234,21 @@
     let ps = pages-for(key)
     if ps.len() == 0 { return none }
     let pstr = if ps.len() >= passim-threshold { "passim" } else { ps.map(str).join(", ") }
-    block(breakable: false, below: 0.8em)[
-      #if a.at("name", default: "") != "" [#emph(a.name), ]
-      #a.cite #box(width: 1fr, repeat[ .]) #pstr
-    ]
+    let name = if a.at("name", default: "") != "" [#emph(a.name), ] else []
+    leader-row(0.35in, [#name#a.cite], pstr)
   }
   let keys-of(kinds) = auth.keys().filter(k => auth.at(k).kind in kinds)
   set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
-  strong[TABLE OF AUTHORITIES]
-  v(0.4in)
+  table-title[Table of Authorities]
+  let group-title(t) = block(above: 1.2em, below: 0.8em, sticky: true, strong(t))
   let case-keys = keys-of(("case",)).sorted(key: k => lower(auth.at(k).name))
   let other-keys = keys-of(("constitution", "statute", "regulation", "rule", "other"))
   if case-keys.len() > 0 {
-    [Cases:]
-    v(0.3em)
+    group-title[Cases]
     for k in case-keys { entry(k) }
   }
   if other-keys.len() > 0 {
-    [Statutes & Other Authorities:]
-    v(0.3em)
+    group-title[Statutes & Other Authorities]
     for k in other-keys.sorted(key: k => lower(auth.at(k).cite)) { entry(k) }
   }
 }
@@ -251,7 +267,11 @@
   // CA5-CONT-007: the word count is computed from the body markdown (the main sections, their
   // footnotes, not the cover, tables, oral argument statement, signature or certificates; FRAP 32(f)).
   let main-md = main.map(s => s.md).join("\n")
-  let words = group-digits(count-words(main-md))
+  let n-words = count-words(main-md)
+  if n-words > word-limit {
+    panic("ca5-opening-brief: the brief has " + str(n-words) + " words; the limit is " + str(word-limit) + " (FRAP 32(a)(7)(B)(i))")
+  }
+  let words = group-digits(n-words)
   let cert-md = certs.map(s => s.md.replace("{{words}}", words))
 
   set page(paper: "us-letter", margin: page-margin, numbering: none)
@@ -284,42 +304,43 @@
     #it.body
   ]
 
+  // Every heading is set at the body size or larger: typst's built-in heading sizes are not used.
+  show heading: set text(size: type-size)
+
   show heading.where(level: 1): it => context {
-    block(width: 100%, above: 1.1em, below: 0.9em, sticky: true)[
+    block(width: 100%, above: heading-gap, below: 0.9em, sticky: true)[
       #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
-      #align(center, strong(upper(it.body)))
+      #align(center, text(size: title-size, strong(upper(it.body))))
     ]
   }
 
+  // Levels 2 to 5: the label sits in a fixed box and the text hangs beside it; each level steps
+  // in by one label width. Bold at levels 2 and 3.
   show heading.where(level: 2): it => context {
-    let label = heading-label(it)
-    block(width: 100%, above: 1.1em, below: 0.9em, sticky: true)[
+    block(width: 100%, above: heading-gap, below: 0.9em, sticky: true)[
       #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
-      #grid(columns: (0.5in, 1fr), column-gutter: 0.1in, label, strong(it.body))
+      #grid(columns: (label-width, 1fr), column-gutter: 0.1in, strong(heading-label(it)), strong(it.body))
     ]
   }
 
   show heading.where(level: 3): it => context {
-    let label = heading-label(it)
-    block(above: 1em, below: 0.8em, sticky: true)[
+    block(width: 100%, above: heading-gap, below: 0.8em, sticky: true)[
       #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
-      #pad(left: 0.5in)[#grid(columns: (0.5in, 1fr), column-gutter: 0.1in, label, strong(it.body))]
+      #pad(left: label-width)[#grid(columns: (label-width, 1fr), column-gutter: 0.1in, strong(heading-label(it)), strong(it.body))]
     ]
   }
 
   show heading.where(level: 4): it => context {
-    let label = heading-label(it)
-    block(above: 1em, below: 0.8em, sticky: true)[
+    block(width: 100%, above: heading-gap, below: 0.8em, sticky: true)[
       #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
-      #pad(left: 1in)[#grid(columns: (0.5in, 1fr), column-gutter: 0.1in, label, it.body)]
+      #pad(left: 2 * label-width)[#grid(columns: (label-width, 1fr), column-gutter: 0.1in, heading-label(it), it.body)]
     ]
   }
 
   show heading.where(level: 5): it => context {
-    let label = heading-label(it)
-    block(above: 1em, below: 0.8em, sticky: true)[
+    block(width: 100%, above: heading-gap, below: 0.8em, sticky: true)[
       #set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
-      #pad(left: 1.5in)[#grid(columns: (0.5in, 1fr), column-gutter: 0.1in, label, it.body)]
+      #pad(left: 3 * label-width)[#grid(columns: (label-width, 1fr), column-gutter: 0.1in, heading-label(it), it.body)]
     ]
   }
 
@@ -348,13 +369,29 @@
   // ---- body (arabic numerals from 1) ----
   set page(numbering: "1")
   counter(page).update(1)
-  cmarker.render(main-md, raw-typst: false, smart-punctuation: true)
-  closing-signature(meta)
+  // The closing signature never stands alone on a page: the brief's last paragraph is kept
+  // together with it. Footnote definitions at the end of the body are not that paragraph; they
+  // stay in the first render, with the references that use them. A last block that is a heading
+  // is not kept.
+  let blocks = main-md.trim(at: end).split(regex("\n[ \t]*\n"))
+  let is-def(b) = b.starts-with("[^") or b.starts-with(" ") or b.starts-with("\t")
+  let i = blocks.len() - 1
+  while i > 0 and is-def(blocks.at(i)) { i -= 1 }
+  let tail = blocks.at(i)
+  let render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+  if i > 0 and not tail.starts-with("#") and not is-def(tail) {
+    render((blocks.slice(0, i) + blocks.slice(i + 1)).join("\n\n"))
+    block(breakable: false, { render(tail); closing-signature(meta) })
+  } else {
+    render(main-md)
+    closing-signature(meta)
+  }
 
   // ---- certificates: each on its own page, numbered in the body sequence ----
   for (i, c) in cert-md.enumerate() {
     pagebreak(weak: true)
-    cmarker.render(c, raw-typst: false, smart-punctuation: true)
+    // Certificate paragraphs and recipient lists are set flush left.
+    { set par(first-line-indent: 0pt); cmarker.render(c, raw-typst: false, smart-punctuation: true) }
     signer-block(meta.signature)
   }
 }
