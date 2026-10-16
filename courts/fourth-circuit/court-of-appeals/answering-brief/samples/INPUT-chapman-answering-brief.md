@@ -11,7 +11,7 @@ caption:
 proceeding: On Appeal from the United States District Court for the District of Maryland
 judge: "(A. David Copperthite, Magistrate Judge)"
 brief_title: Brief of Appellee
-party_line: Attorneys for Appellee
+party_line: "*Attorneys for Appellee*"
 date: March 21, 2025
 phone: "(410) 653-4293 (telephone)"
 counsel:

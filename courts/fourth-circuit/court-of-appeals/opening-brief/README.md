@@ -7,7 +7,7 @@ Doc type `opening-brief` for the U.S. Court of Appeals for the Fourth Circuit (c
 | Item | Result |
 |---|---|
 | Exemplar | yes: filed Opening Brief of Appellant, *NetChoice v. Jones*, No. 26-1252, filed 04/15/2026 (see `exemplars/SOURCE.md`) |
-| Sample | `samples/INPUT-netchoice-opening-brief.md`: 14 rendered pages, excerpted from a 66-page filed brief |
+| Sample | `samples/INPUT-netchoice-opening-brief.md`: 13 rendered pages (typst), excerpted from a 66-page filed brief |
 | Render | ok: `sh tools/render.sh courts/fourth-circuit/court-of-appeals/opening-brief samples/INPUT-netchoice-opening-brief.md`; exit 0, no typst warnings, embedded fonts are TeX Gyre Schola only (`pdffonts`) |
 | Overlay | ok: `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/opening-brief netchoice-opening-brief`; wrote `samples/OVERLAY-netchoice-opening-brief.pdf` and `.txt` |
 | Pages reviewed | 13 of 13 typst pages (every page rendered at 60 dpi and viewed after the font change; the TOC was viewed again after the page-number fix). 16 of 16 LaTeX pages viewed (see Engines). |
@@ -66,8 +66,8 @@ Same shape as the Ninth Circuit's contract (see `courts/ninth-circuit/court-of-a
 1. **Typeface: closed in the fonts pass.** Set in TeX Gyre Schola (Century Schoolbook), per the court's notice and the exemplar. Before, EB Garamond was used, which FRAP accepts but the notice discourages. Not a tier-1 item.
 2. **Cover colour.** Not produced: the template is paper-agnostic. The appellant's paper cover is blue under FRAP 32(a)(2); the electronic cover may be white.
 3. **Disclosure statement.** Not generated. The exemplar (a government party) has none. A private appellant would need one, filed under FRAP 26.1 / Local Rule 26.1 and included in the brief (the court's requirements page).
-4. **Excerpt only.** The sample is 14 pages of a 66-page filed brief. It omits brief pages 7–17 (Statement Parts B–G), 22–52 (Argument II.A.2 to II.C.3), and some of the Summary and Introduction paragraphs (each marked in the sample). The TOA lists only the authorities cited in the excerpt. The 1,523-word certificate count is the excerpt's, not the filed brief's 10,452.
-5. **Cover layout.** The exemplar sets counsel in two columns side by side. The template stacks them in one column in the right half of the page, so counsel lines wrap and postal codes fall onto their own line. Content is complete and the cover fits one page.
+4. **Excerpt only.** The sample is 13 pages of a 66-page filed brief. It omits brief pages 7–17 (Statement Parts B–G), 22–52 (Argument II.A.2 to II.C.3), and some of the Summary and Introduction paragraphs (each marked in the sample). The TOA lists only the authorities cited in the excerpt. The 1,523-word certificate count is the excerpt's, not the filed brief's 10,452.
+5. **Cover layout: closed 2026-10-16.** The exemplar sets counsel in two columns side by side. The template now does the same when there are two or more counsel groups (one group stays in the right half). Lines are roman; a title the markdown italicises stays italic.
 6. **Overlay.** The overlay pairs pages by shared words. Because the sample is an excerpt, pairs are partial matches (word overlap 24–80%). Pairing is only indicative: our Table of Authorities (page 3) pairs with filed page 6 at 25%, which is a page of the filed Table of Authorities, but the match is weak because our TOA lists far fewer authorities.
 7. **Certificates.** Only the CM/ECF service form is generated. Service on unregistered participants is not supported.
 
@@ -81,7 +81,7 @@ Every page of `samples/OUTPUT-netchoice-opening-brief.pdf` was rendered at 60 dp
 
 | PDF page | Folio | Content | Finding |
 |---|---|---|---|
-| 1 | none | Cover | Fits one page. Counsel wraps in the narrow column (see gap 5). |
+| 1 | none | Cover | Fits one page. Counsel in two columns, roman (2026-10-16; see gap 5). |
 | 2 | i | Table of contents | Entries, folios and indent correct. The two deepest entries (II.A, II.A.1) wrapped their folio onto a new line under the wider face; fixed by setting the folio at its content width. |
 | 3 | ii | Table of authorities | One page. |
 | 4 | 1 | Introduction | Body double-spaced; excerpt marker shown. |
@@ -103,7 +103,7 @@ Searches (2026-10-14): CourtListener and RECAP for 4th Cir. opening briefs; the 
 
 Three renderings of the same markdown (`samples/INPUT-netchoice-opening-brief.md`). The typst template is the reference.
 
-**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-netchoice-opening-brief.latex.pdf`, 16 pages (14 before the font change to Schola), every page rendered at 50 dpi and viewed. Layout items the font change exposed, not fixed here: the last Table of Authorities line ("Va. Code § 59.1-584") falls alone onto page iii, and the "REQUEST FOR ORAL ARGUMENT" heading sits at the foot of page 9 with its text on page 10. Matches: TeX Gyre Schola only (vendored, 14 pt text and footnotes), body double-spaced at the typst pitch (31.43 pt), 1-inch margins, 0.5-inch first-line indent, roman folios for the cover-less front matter and arabic from the body, the cover on one page with counsel in the right half, contents and authorities built from the frontmatter and the `toa:` links (passim from seven pages), the signature block kept with the last paragraph, and the certificate of compliance word count (1,523, the same as typst's count). Differs: the cover's spacing is a fixed gap (typst scales the gap to fit the page); paragraph and heading spacing differ slightly, so body page breaks and the folios in the contents and authorities differ from typst by a line or two per page. Not checked by `check.sh` (no `checks.yaml` in this court).
+**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-netchoice-opening-brief.latex.pdf`, 16 pages (14 before the font change to Schola), every page rendered at 50 dpi and viewed; re-rendered and viewed again at 40 dpi on 2026-10-16 after the cover change. Layout items the font change exposed, not fixed here: the last Table of Authorities line ("Va. Code § 59.1-584") falls alone onto page iii, and the "REQUEST FOR ORAL ARGUMENT" heading sits at the foot of page 9 with its text on page 10. Matches: TeX Gyre Schola only (vendored, 14 pt text and footnotes), body double-spaced at the typst pitch (31.43 pt), 1-inch margins, 0.5-inch first-line indent, roman folios for the cover-less front matter and arabic from the body, the cover on one page with counsel in two columns (one group: right half), contents and authorities built from the frontmatter and the `toa:` links (passim from seven pages), the signature block kept with the last paragraph, and the certificate of compliance word count (1,523, the same as typst's count). Differs: the cover's spacing is a fixed gap (typst scales the gap to fit the page); paragraph and heading spacing differ slightly, so body page breaks and the folios in the contents and authorities differ from typst by a line or two per page. Not checked by `check.sh` (no `checks.yaml` in this court).
 
 **docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `samples/OUTPUT-netchoice-opening-brief.docx` is written; the `.docx.pdf` is not, because LibreOffice is not installed (see BLOCKED). Matches in the styles: TeX Gyre Schola 14 pt, body at 31.43 pt exact, 0.5-inch first-line indent, single-spaced headings and block quotations, 1-inch margins, three sections (cover without folio, front matter in roman, body in arabic). The contents and the table of authorities are Word fields (`TOC`, `TA` on each citation, `TOA` per category). Certificate word count 1,523.
 
@@ -113,3 +113,12 @@ BLOCKED (docx):
 - The cover's rules and caption positions are paragraph borders and indents, approximated; the cover was not seen in any renderer.
 - The last paragraph is not kept with the signature block (no keep-with-next across the pair).
 - Opened in neither Word nor LibreOffice: the `.docx` was checked only for well-formed XML parts.
+
+## Verification pass 2026-10-16 (fb-595.26.4)
+
+- Rendered: `sh tools/render.sh … samples/INPUT-netchoice-opening-brief.md` exit 0, no typst warnings, TeX Gyre Schola only (`pdffonts`). 13 pages, the same count as the committed PDF (the "14 rendered pages" in the status table was stale and is corrected).
+- Overlay: `sh tools/overlay.sh … netchoice-opening-brief` exit 0; page map unchanged (see Overlay map). All 13 overlay pages viewed: the cover now lines up with the filed cover's two counsel columns; body pages pair as listed, with the expected partial matches of an excerpt.
+- Pages viewed: 13 of 13 typst pages at 60 dpi, plus the exemplar's page 1 against our cover. After the fix, page 1 was viewed again; pages 2–13 are pixel-identical to the first render (`compare -metric AE`).
+- Fixed (template): cover counsel was one narrow column in the right half, with every office line italic and indented, so addresses and postal codes wrapped. Two or more counsel groups now sit side by side in two columns, roman, as on the filed cover (gap 5 closed). Sample: the cover address lines are split as filed (street / city), the three McGuireWoods names are one per line, and "Counsel for Defendant-Appellant" is italic in the markdown.
+- Fixed (LaTeX, `latex/ca4.lua`): the same two-column counsel layout. The sample change alone had pushed the LaTeX cover's closing rule onto a second page (17 pages); with the layout fix the cover is one page again and the PDF is 16 pages. Every page viewed at 40 dpi. Still open there: "Va. Code § 59.1-584" alone on TOA page iii; "REQUEST FOR ORAL ARGUMENT" at the foot of page 9.
+- Remaining gaps: Known gaps 2–4, 6, 7 (cover colour, disclosure statement, excerpt, weak overlay pairing, CM/ECF-only service). docx not rebuilt (no LibreOffice); the committed `.docx` predates the sample change.

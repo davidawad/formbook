@@ -212,17 +212,30 @@ local function cover(m, gap)
   add('\\textbf{' .. ltx(m.brief_title):upper() .. '}\\par\\vskip ' .. gap)
   add(short .. '\\par\\vskip ' .. gap)
   add('\\end{center}')
-  -- counsel: names, then office lines, in the right half of the page (typst: pad(left: 50%))
+  -- counsel: one group in the right half of the page; two or more groups side by side in two columns
+  -- (typst: counsel-group in a two-column grid). Lines are roman; markdown italics are kept.
   local counsel = items(m.counsel)
-  add('\\begin{flushleft}\\singlespacing\\hspace*{0.5\\textwidth}\\begin{minipage}[t]{0.5\\textwidth}\\raggedright')
-  for gi, g in ipairs(counsel) do
-    for _, n in ipairs(items(g.names)) do add(ltx(n) .. '\\\\') end
+  local function group(g)
+    local s = {}
+    for _, n in ipairs(items(g.names)) do s[#s + 1] = ltx(n) .. '\\\\' end
     local lines = items(g.lines)
-    if gi == #counsel and m.phone ~= nil then lines[#lines + 1] = m.phone end
-    for _, l in ipairs(lines) do add('\\hspace*{0.5em}\\emph{' .. ltx(l) .. '}\\\\') end
-    if gi < #counsel then add('\\vskip ' .. gap) end
+    if m.phone ~= nil and g == counsel[#counsel] then lines[#lines + 1] = m.phone end
+    for _, l in ipairs(lines) do s[#s + 1] = ltx(l) .. '\\\\' end
+    return table.concat(s, '\n')
   end
-  add('\\end{minipage}\\end{flushleft}')
+  add('\\begin{flushleft}\\singlespacing')
+  if #counsel == 1 then
+    add('\\hspace*{0.5\\textwidth}\\begin{minipage}[t]{0.5\\textwidth}\\raggedright')
+    add(group(counsel[1]))
+    add('\\end{minipage}')
+  else
+    for gi, g in ipairs(counsel) do
+      add('\\begin{minipage}[t]{0.47\\textwidth}\\raggedright')
+      add(group(g))
+      add('\\end{minipage}' .. (gi % 2 == 1 and gi < #counsel and '\\hfill' or '\\par\\vskip ' .. gap))
+    end
+  end
+  add('\\end{flushleft}')
   if m.date ~= nil and m.party_line ~= nil then
     add('\\vskip ' .. gap .. '\\begin{tabular*}{\\linewidth}{@{}l@{\\extracolsep{\\fill}}r@{}}' .. ltx(m.date)
       .. ' & ' .. ltx(m.party_line) .. '\\end{tabular*}')

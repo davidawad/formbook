@@ -16,15 +16,19 @@ counsel:
       - "TRISTON C. O’SAVIO"
     lines:
       - "Office of the Attorney General"
-      - "202 North Ninth Street, Richmond, Virginia 23219"
+      - "202 North Ninth Street"
+      - "Richmond, Virginia 23219"
       - "(804) 786-2071 – Telephone"
       - "SolicitorGeneral@oag.state.va.us"
-      - "Counsel for Defendant-Appellant"
+      - "*Counsel for Defendant-Appellant*"
   - names:
-      - "BENJAMIN L. HATCH; ERIN B. ASHWELL; JOHN D. ADAMS"
+      - "BENJAMIN L. HATCH"
+      - "ERIN B. ASHWELL"
+      - "JOHN D. ADAMS"
     lines:
       - "McGuireWoods LLP"
-      - "800 East Canal Street, Richmond, VA 23219"
+      - "800 East Canal Street"
+      - "Richmond, VA 23219"
       - "T: 804.775.1002"
 signature:
   signer: "Tillman J. Breckenridge"

@@ -219,7 +219,7 @@ local function cover(m, gap)
     for _, n in ipairs(items(g.names)) do add(ltx(n) .. '\\\\') end
     local lines = items(g.lines)
     if gi == #counsel and m.phone ~= nil then lines[#lines + 1] = m.phone end
-    for _, l in ipairs(lines) do add('\\hspace*{0.5em}\\emph{' .. ltx(l) .. '}\\\\') end
+    for _, l in ipairs(lines) do add(ltx(l) .. '\\\\') end  -- roman, as in the court's filed briefs
     if gi < #counsel then add('\\vskip ' .. gap) end
   end
   add('\\end{minipage}\\end{flushleft}')
