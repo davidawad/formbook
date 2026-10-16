@@ -53,11 +53,11 @@ Rules not ruled by the sources above, decided by the template (convention, not r
 | p.4 table of authorities | 9 | 16.6% |
 | p.5 Preliminary Statement | 15 | 80.9% |
 | p.6 Preliminary Statement (cont.) | 16 | 88.6% |
-| p.7 Preliminary Statement (cont.) | 17 | 61.1% |
-| p.8 questions presented | 21 | 68.3% |
-| p.9 jurisdiction and statement of the case | 31 | 36.7% |
+| p.7 Preliminary Statement (end), Questions Presented 1 and 2 | 17 | 61.1% |
+| p.8 Question 3, Statement of Jurisdiction, Statement of the Case | 21 | 68.3% |
+| p.9 Statement of the Case (end), Argument, Point I | 31 | 36.7% |
 | p.10 Point I.A | 32 | 98.0% |
-| p.11 Point I.A (cont.) | 34 | 45.2% |
+| p.11 Point I.A (end), footnote 2 | 34 | 45.2% |
 | p.12 conclusion and signature | 65 | 95.0% |
 | p.13 certificate of compliance | 66 | 78.2% |
 | p.14 affidavit of service (blanks) | 106 | 7.6% |
@@ -77,7 +77,7 @@ Read it as a diagnostic. The high-overlap pages are the body text the sample tra
   6. Blank lines (signature "By:" line, affidavit blanks) did not draw, because `underline(h(…))` draws nothing. They are now drawn lines.
   7. A wrapped table-of-contents entry pushed its page number onto its own line. Each contents entry is now three columns (label, title with leader, page number).
   8. The signer was printed twice (once on the "By:" line and again in the names). The "By:" line now stands alone above the first firm's names.
-- Remaining known layout: on the page before the conclusion (p.7) about a third of the page is blank. That is the keep-with-signature rule: the last paragraph and the signature block are kept together, and the conclusion does not fit beneath the Point I.A paragraph. A different sample length would move this break.
+- Remaining known layout: on the page before the conclusion (PDF p.11, numbered 7) about half of the page is blank (re-checked 2026-10-16). That is the keep-with-signature rule: the last paragraph and the signature block are kept together, and the conclusion does not fit beneath the Point I.A paragraph. A different sample length would move this break.
 
 ## Known gaps (not fixed here; for David)
 
@@ -103,6 +103,15 @@ Found and ruled out:
 - NY Court of Appeals rules pages at justia.com (403) and courtrules.net (403): not reachable; LII used instead.
 
 Used: the AG-posted Trump Entrepreneur Initiative opening brief (see `exemplars/SOURCE.md`).
+
+## Verification pass 2026-10-16 (fb-595.26.21)
+
+- Render: `sh tools/render.sh … samples/INPUT-tei-opening-brief.md` exit 0, no typst warnings, 14 pages (the same count as the committed PDF; the committed PDF was not stale in page count). `pdffonts`: EB Garamond only.
+- Pages viewed: 14 of 14 at 60 dpi (`pdftoppm -r 60`), and page 3 (contents) again after the fix. The 14 overlay pages were viewed at 40 dpi, and the exemplar's page 1 against our cover.
+- Overlay: rerun after the fix; the page map is unchanged (table above, page labels corrected to what the pages now hold). Body pages 5, 6, 10 and 12 overlap 81 to 98% with the filed pages; the low pages are the tables, certificates and the blank affidavit, as before.
+- Defect fixed: in the table of contents, a wrapped entry printed its page number on the first line while the dot leader ended on the last line, so the leader pointed at nothing (Point I and Point I.A). The page-number column is now bottom-aligned, so the number sits at the end of the leader.
+- Checked and found right: cover on one page with the argument request upper right, docket, caption, counsel with telephone and fax, date completed (500.13(b)); disclosure and related-litigation statement before the contents (500.1(f), 500.13(a)); body line pitch 31.4 pt at 14 pt (`pdftotext -bbox`; the exemplar's is 32.2 pt), footnotes single spaced at body size; page numbers centred, front matter roman, body from 1; certificate and affidavit each on one page.
+- Remaining gaps: as listed under "Known gaps". Also: the sample's `word_processor: "Microsoft Word"` is transcribed from the exemplar's certificate, so the rendered certificate names Word although this PDF is a typst render; a filer sets the field to what they used. Cover layout differs from the exemplar's (docket upper left, not centred under the argument request; designations not italic or right-aligned): tier 3, not chased.
 
 ## Status
 

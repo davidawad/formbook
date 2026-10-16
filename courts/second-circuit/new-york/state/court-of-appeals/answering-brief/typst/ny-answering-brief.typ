@@ -14,7 +14,8 @@
 #let font-family = "EB Garamond"          // NY-TYPE-001: serif, proportional. Vendored in /fonts.
 #let body-size = 14pt                      // NY-TYPE-002: 14-point body for a proportional font.
 #let note-size = 12pt                      // NY-TYPE-002: footnotes at least 12-point.
-#let body-leading = 1.2em                  // NY-FORM-002: double spacing (tuned by render; see README).
+#let body-leading = 1.59em                 // NY-FORM-002: double spacing: 31.4 pt line pitch at 14 pt (cap-height to baseline
+                                           // line box 9.1 pt + 22.3 pt leading), as a word processor sets 14-point double.
 #let single-leading = 0.45em               // block quotations, footnotes, cover and certificates.
 #let page-margin = 1in                     // NY-FORM-001: one inch on all sides.
 #let para-indent = 0.5in
@@ -62,15 +63,15 @@
 // ---------------------------------------------------------------------------
 
 #let cover(meta) = page(numbering: none, footer: none)[
-  #set par(leading: single-leading, first-line-indent: 0pt, justify: false)
+  #set par(leading: single-leading, spacing: 1.2em, first-line-indent: 0pt, justify: false)
   #if "argued_by" in meta [
-    #block[To be argued by:#linebreak()#inl(meta.argued_by)]
-    #v(0.4em)
+    // 22 NYCRR 500.13(b): the argument request (time and presenter) goes in the upper right corner.
+    #block(width: 100%, below: 1.6em, align(right, block(spacing: 0.4em)[To be argued by:] + block(spacing: 0.4em, inl(meta.argued_by))))
   ]
   #align(center)[
-    #text(size: 14pt)[Court of Appeals]
+    #text(size: 14pt, weight: "bold")[Court of Appeals]
     #v(0.2em)
-    #text(size: 14pt)[of the State of New York]
+    #text(size: 14pt, weight: "bold")[of the State of New York]
   ]
   #v(1.2em)
   #align(center)[
@@ -95,7 +96,7 @@
   }
   #v(2.4em)
   #align(center)[
-    #text(size: 14pt)[#upper(need(meta, "brief_title"))]
+    #text(size: 14pt, weight: "bold")[#upper(need(meta, "brief_title"))]
   ]
   #v(1.2em)
   #if "proceeding" in meta [
@@ -112,6 +113,8 @@
   )
   #v(0.8em)
   #need(meta, "phone")
+  // 500.13(b): counsel's telephone and facsimile numbers; `fax` is printed under the telephone line when given.
+  #if "fax" in meta [ #v(0.3em) #meta.fax ]
   #if "date" in meta [ #v(0.8em) #meta.date ]
 ]
 
@@ -124,7 +127,7 @@
   pagebreak()
   align(center)[#text(weight: "bold")[DISCLOSURE STATEMENT]]
   v(1em)
-  set par(leading: body-leading, first-line-indent: para-indent, justify: true)
+  set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: true)
   inl(meta.disclosure)
 }
 
@@ -137,6 +140,8 @@
   align(center)[#text(weight: "bold")[TABLE OF CONTENTS]]
   v(1em)
   set par(leading: single-leading, first-line-indent: 0pt, justify: false)
+  // Page column heading, as filed contents pages print it.
+  align(right, block(above: 0pt, below: 0.6em, strong(underline[Page])))
   outline(title: none, depth: 2, indent: 0.5in)
 }
 
@@ -157,7 +162,8 @@
   set par(leading: single-leading, first-line-indent: 0pt, justify: false)
   let auths = meta.authorities.values()
   for g in toa-groups {
-    let items = auths.filter(a => a.kind == g.kind)
+    // Alphabetical within each group, as filed tables of authorities list them.
+    let items = auths.filter(a => a.kind == g.kind).sorted(key: a => lower(a.name + " " + a.cite))
     if items.len() == 0 { continue }
     text(weight: "bold")[#g.title]
     v(0.4em)
@@ -190,7 +196,7 @@
   pagebreak()
   align(center)[#text(weight: "bold")[CERTIFICATE OF COMPLIANCE]]
   v(1em)
-  set par(leading: body-leading, first-line-indent: para-indent, justify: true)
+  set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: true)
   [I certify that this brief complies with the word limit of 22 NYCRR 500.13(c)(1), that it contains #group-digits(words) words in the body of the brief, excluding the caption, tables and signature block, and that the count was made by the word-processing system used to prepare it.]
   set par(leading: single-leading, first-line-indent: 0pt, justify: false)
   v(1.5em)
@@ -205,7 +211,7 @@
   pagebreak()
   align(center)[#text(weight: "bold")[CERTIFICATE OF SERVICE]]
   v(1em)
-  set par(leading: body-leading, first-line-indent: para-indent, justify: true)
+  set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: true)
   [I certify that on the date below I served copies of this brief on counsel for all parties by #meta.service.method.]
   set par(leading: single-leading, first-line-indent: 0pt, justify: false)
   for u in meta.service.at("unregistered", default: ()) {
@@ -232,32 +238,43 @@
     numbering: "i",
     number-align: center + bottom,
   )
-  set par(leading: body-leading, first-line-indent: para-indent, justify: true)
-  set footnote.entry(separator: line(length: 1.5in, stroke: 0.5pt))
-  show footnote.entry: set text(size: note-size)
-  show footnote.entry: set par(leading: single-leading, first-line-indent: 0pt)
+  set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: true)
+  set footnote.entry(gap: 0.5em, indent: 0pt, separator: line(length: 1.5in, stroke: 0.5pt))
+  // NY-TYPE-002: footnotes at least 12-point; single spaced (NY-FORM-003). The note number is
+  // followed by a space, as a word processor sets it.
+  show footnote.entry: it => {
+    set text(size: note-size)
+    set par(leading: single-leading, spacing: 0.5em, first-line-indent: (amount: para-indent, all: true))
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    [#super(num)#h(0.25em)#note.body]
+  }
 
   // Section headings (NY-HEAD-001): level 1 centered, bold, capitals.
   // Sub-headings: bold, left, with the letters and numerals typed in the markdown.
   // Headings are set unjustified and unhyphenated: the filed exemplars break them at word
   // ends, not at hyphens (no forced breaks: the wrap is left to the engine).
-  show heading.where(level: 1): it => block(above: 1.4em, below: 1.2em, sticky: true, {
-    set par(justify: false)
+  show heading.where(level: 1): it => block(width: 100%, above: 1.4em, below: 1.2em, sticky: true, {
+    set text(size: body-size)
+    set par(leading: single-leading, justify: false)
     set text(hyphenate: false)
     align(center)[#text(weight: "bold")[#upper(it.body)]]
   })
-  show heading.where(level: 2): it => block(above: 1.2em, below: 0.9em, sticky: true, {
-    set par(justify: false, first-line-indent: 0pt)
+  show heading.where(level: 2): it => block(width: 100%, above: 1.2em, below: 0.9em, sticky: true, {
+    set text(size: body-size)
+    set par(leading: single-leading, justify: false, first-line-indent: 0pt)
     set text(hyphenate: false)
     text(weight: "bold", it.body)
   })
-  show heading.where(level: 3): it => block(above: 1.3em, below: 1.1em, sticky: true, pad(left: 0.5in, {
-    set par(justify: false, first-line-indent: 0pt)
+  show heading.where(level: 3): it => block(width: 100%, above: 1.3em, below: 1.1em, sticky: true, pad(left: 0.5in, {
+    set text(size: body-size)
+    set par(leading: single-leading, justify: false, first-line-indent: 0pt)
     set text(hyphenate: false)
     text(weight: "bold", it.body)
   }))
-  show heading.where(level: 4): it => block(above: 1.2em, below: 1em, sticky: true, pad(left: 1in, {
-    set par(justify: false, first-line-indent: 0pt)
+  show heading.where(level: 4): it => block(width: 100%, above: 1.2em, below: 1em, sticky: true, pad(left: 1in, {
+    set text(size: body-size)
+    set par(leading: single-leading, justify: false, first-line-indent: 0pt)
     set text(hyphenate: false)
     text(style: "italic", it.body)
   }))
@@ -277,7 +294,7 @@
   pagebreak()
   set page(numbering: "1")
   counter(page).update(1)
-  set par(leading: body-leading, first-line-indent: para-indent, justify: true)
+  set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: true)
   cmarker.render(md, raw-typst: false, smart-punctuation: true)
 
   signature-block(meta)
