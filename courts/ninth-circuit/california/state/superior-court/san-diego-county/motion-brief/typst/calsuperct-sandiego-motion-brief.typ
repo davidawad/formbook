@@ -210,6 +210,121 @@
 }
 
 // ---------------------------------------------------------------------------
+// Tables of contents and authorities (CRC 3.1113(f)): a memorandum that exceeds 10 pages must
+// include both. Built when the frontmatter has `authorities:`; citations in the body are links
+// `[text](toa:key)` whose key names an entry there. Every row sits on the 24 pt pleading grid.
+// ---------------------------------------------------------------------------
+
+#let memo-page-limit = 10           // CRC 3.1113(f): over 10 pages, a TOC and a TOA are required.
+#let toc-indent = 0.5in             // each heading level below the top one, in the table of contents.
+#let toa-hang = 0.25in              // a citation's second line hangs under its case name.
+
+#let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
+
+/// Put an invisible `tag` right after the first word of `c`, keeping any emphasis around it.
+/// A tag placed before the first word of a line is filed under the previous line, which can be
+/// on the previous page, so the table of authorities would cite the wrong page.
+#let tag-after-first-word(c, tag) = {
+  if type(c) == str or c.func() == text {
+    let t = if type(c) == str { c } else { c.text }
+    let m = t.match(regex("^\\s*\\S+"))
+    if m == none { return (c, false) }
+    return ([#m.text#tag#t.slice(m.end)], true)
+  }
+  if c.func() == emph { let r = tag-after-first-word(c.body, tag); return (emph(r.first()), r.last()) }
+  if c.func() == strong { let r = tag-after-first-word(c.body, tag); return (strong(r.first()), r.last()) }
+  if c.func() == [].func() {
+    let out = ()
+    let placed = false
+    for ch in c.children {
+      if placed { out.push(ch) }
+      else { let r = tag-after-first-word(ch, tag); out.push(r.first()); placed = r.last() }
+    }
+    return (out.join(), placed)
+  }
+  (c, false)
+}
+
+/// Printed page label of a location ("3", "ii").
+#let page-label(loc) = numbering(loc.page-numbering(), ..counter(page).at(loc))
+
+#let table-title(t) = block(width: 100%, sticky: true, below: box-h,
+  align(center, par(first-line-indent: 0pt, strong(t))))
+
+/// One row of the table of contents: the heading text, a dot leader, the page number.
+#let toc-entry(top-level, it) = {
+  let hd = it.element
+  let ind = (hd.level - top-level) * toc-indent
+  link(hd.location(), block(width: 100%,
+    par(first-line-indent: 0pt, hanging-indent: ind + toc-indent, {
+      h(ind)
+      hd.body
+      h(0.6em)
+      dot-leader
+      box(width: 2.4em, align(right, page-label(hd.location())))
+    })))
+}
+
+#let toc-section() = {
+  table-title[TABLE OF CONTENTS]
+  context {
+    let target = selector(heading).after(<memo-start>)
+    let levels = query(target).map(h => h.level)
+    if levels.len() == 0 { panic("calsuperct-sandiego-motion-brief: the memorandum has no headings for its table of contents") }
+    let top = calc.min(..levels)
+    show outline.entry: it => toc-entry(top, it)
+    outline(title: none, target: target, depth: 9, indent: 0pt)
+  }
+}
+
+#let toa-groups = (
+  ("case", "CASES"),
+  ("constitution", "CONSTITUTIONAL PROVISIONS"),
+  ("statute", "STATUTES"),
+  ("regulation", "REGULATIONS"),
+  ("rule", "RULES"),
+  ("other", "OTHER AUTHORITIES"),
+)
+
+#let toa-section(authorities) = {
+  table-title[TABLE OF AUTHORITIES]
+  context {
+    let hits = query(<toa-hit>)
+    for h in hits {
+      if h.value not in authorities {
+        panic("calsuperct-sandiego-motion-brief: link `toa:" + h.value + "` has no entry under `authorities:` in the frontmatter")
+      }
+    }
+    for (kind, title) in toa-groups {
+      let members = authorities.pairs()
+        .filter(p => p.last().kind == kind and hits.any(h => h.value == p.first()))
+        .sorted(key: p => lower(p.last().at("sort", default: p.last().at("name", default: p.last().cite))))
+      if members.len() == 0 { continue }
+      block(width: 100%, sticky: true, above: box-h, par(first-line-indent: 0pt, strong(title)))
+      for (key, a) in members {
+        let pages = ()
+        for h in hits.filter(h => h.value == key) {
+          let label = page-label(h.location())
+          if label not in pages { pages.push(label) }
+        }
+        block(width: 100%, breakable: false, above: box-h, par(first-line-indent: 0pt, hanging-indent: toa-hang, {
+          if "name" in a {
+            if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
+            [,]
+            linebreak()
+          }
+          inl(a.cite)
+          h(0.6em)
+          dot-leader
+          h(0.3em)
+          pages.join(", ")
+        }))
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Signature block (CRC 2.111(1); signature under CCP 128.7 is the signer's own)
 // ---------------------------------------------------------------------------
 
@@ -235,17 +350,51 @@
   })
 }
 
+/// The body, then `closing` (jury demand, signature block). The signature block never stands alone
+/// on a page: the body's last paragraph is kept on the page with it. Trailing footnote definitions
+/// stay with the rest of the body; a last paragraph that is a heading, a quotation or carries a
+/// footnote reference is not split off, so its note still resolves.
+#let body-with-closing(md, closing) = {
+  let render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+  let paras = md.trim(at: end).split(regex("\n[ \t]*\n"))
+  let k = paras.len() - 1
+  while k > 0 and paras.at(k).trim().starts-with("[^") { k -= 1 }
+  let tail = paras.at(k).trim()
+  if k == 0 or tail.starts-with("#") or tail.starts-with(">") or tail.contains("[^") {
+    render(md)
+    closing
+  } else {
+    render((paras.slice(0, k) + paras.slice(k + 1)).join("\n\n"))
+    block(width: 100%, breakable: false, above: box-h, { render(tail); closing })
+  }
+}
+
 // ---------------------------------------------------------------------------
 // The document
 // ---------------------------------------------------------------------------
 
 #let calsuperct-sandiego-motion-brief(meta, body) = {
+  let authorities = meta.at("authorities", default: none)
+  if body.match(regex("(?m)^#+[ \t]+[^\n]*\\]\\(toa:")) != none {
+    panic("calsuperct-sandiego-motion-brief: citation links (toa:) are not allowed in headings; the table of contents would list them as authorities")
+  }
+  // A combined paper (notice of motion, then the memorandum) is split at the memorandum's heading;
+  // the tables go between the two. Without that heading the whole body is the memorandum.
+  let memo = body.match(regex("(?mi)^#+[ \t]+memorandum of points and authorities[^\n]*$"))
+  let notice-md = if memo == none { "" } else { body.slice(0, memo.start) }
+  let memo-head = if memo == none { "" } else { body.slice(memo.start, memo.end) }
+  let memo-md = if memo == none { body } else { body.slice(memo.end) }
+  let render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+
   set page(
     paper: "us-letter",
     margin: (top: top-margin, bottom: bottom-margin, left: left-margin, right: right-margin),
     background: pleading-background(),
     footer: pleading-footer(need(meta, "footer_title")),
     footer-descent: footer-rise,
+    // CRC 2.109: pages numbered consecutively at the bottom. With tables, the caption page, any
+    // notice and the tables take lowercase roman numerals and the memorandum starts again at 1.
+    numbering: if authorities == none { "1" } else { "i" },
   )
   set text(font: font-family, size: type-size, ..box-edges, lang: "en")
   // Blocks take no automatic spacing: every vertical gap is set explicitly so the grid holds.
@@ -254,6 +403,11 @@
   show heading: style-heading
   show footnote.entry: set text(size: type-size)
   set footnote.entry(indent: 0pt)
+  show link: it => {
+    if type(it.dest) == str and it.dest.starts-with("toa:") {
+      tag-after-first-word(it.body, [#metadata(it.dest.slice(4))<toa-hit>]).first()
+    } else { it }
+  }
 
   // Lines 1-7: attorney block (fixed height). Lines 8-9: court title. Line 10 is blank.
   first-page-top(meta)
@@ -262,11 +416,39 @@
   caption(meta)
   v(pitch)
 
-  cmarker.render(body, raw-typst: false, smart-punctuation: true)
-
-  if "jury_demand" in meta {
-    block(width: 100%, sticky: true, above: 24pt, below: 12pt,
-      align(center, strong(upper(meta.jury_demand))))
+  let memorandum = {
+    render(memo-head)
+    [#metadata(none)<memo-start>]
+    body-with-closing(memo-md, {
+      if "jury_demand" in meta {
+        block(width: 100%, sticky: true, above: 24pt, below: 12pt,
+          align(center, strong(upper(meta.jury_demand))))
+      }
+      signature-block(meta)
+    })
+    [#metadata(none)<memo-end>]
   }
-  signature-block(meta)
+
+  if authorities == none {
+    render(notice-md)
+    memorandum
+    // CRC 3.1113(f): a memorandum over 10 pages needs a table of contents and a table of authorities.
+    context {
+      let n = locate(<memo-end>).page() - locate(<memo-start>).page() + 1
+      if n > memo-page-limit {
+        panic("calsuperct-sandiego-motion-brief: the memorandum runs " + str(n) + " pages; CRC 3.1113(f) requires a table of contents and a table of authorities over " + str(memo-page-limit) + " (add `authorities:` to the frontmatter)")
+      }
+    }
+  } else {
+    render(notice-md)
+    pagebreak()
+    toc-section()
+    pagebreak()
+    toa-section(authorities)
+    {
+      set page(numbering: "1")
+      counter(page).update(1)
+      memorandum
+    }
+  }
 }
