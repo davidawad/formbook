@@ -17,4 +17,11 @@
 
 ## Second filer
 
-- Not collected. Tier 2 is not judged against two filers yet (see README.md).
+- File: `FILED-EXAMPLE-redline-24-00388-motion-brief.pdf` (17 pages, letter, text layer present: ECF header "Case 24-00388-NGH Doc 50 Filed 07/26/24")
+- Court: United States Bankruptcy Court for the District of Idaho (`idb`)
+- Case: *In re Redline Recreational Toys Inc.*, Case No. 24-00388-NGH, chapter 11 (subchapter V)
+- Document: Motion for Approval of Compromise Between Debtor and Montana Boat Rental, LLC (ECF Doc 50), with the LBR 2002-2(d)(1) negative-notice legend below the caption, a memorandum of points and authorities, and the signature on page 7. Pages 8-17 are Exhibit A (proposed order) and Exhibit 1 (settlement agreement). No certificate of service is in the filed document.
+- Filer: the debtor, by Brian M. Rothschild (Parsons Behle & Latimer), Boise, Idaho
+- Date filed: 2024-07-26
+- Fetched from: not recorded. The file arrived in harvest merge 9239ac7 without a source line; the URL is unverified (probably CourtListener RECAP, docket gov.uscourts.idb, Doc 50). Record it when known.
+- Public court record. Used as a visual and structural reference (tier 2), transcribed as `samples/INPUT-redline-motion-brief.md` (filed pages 1-7).
