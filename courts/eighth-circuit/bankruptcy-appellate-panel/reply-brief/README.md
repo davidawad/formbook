@@ -2,10 +2,17 @@
 
 - Court: `bap8`, United States Bankruptcy Appellate Panel for the Eighth Circuit (`courts/eighth-circuit/bankruptcy-appellate-panel/`). Court-root `typst/` and `samples/` are untouched.
 - Doc type: `reply-brief`. Appellant's reply brief, FRBP 8014(c).
-- **Exemplar: BLOCKED: no exemplar.** No public filed reply brief from this court was found after 20 searches in two passes, plus direct fetch attempts (listed in `exemplars/SOURCE.md`). Nothing is stored in `exemplars/`. The one public BAP brief found (the debtor's opening brief in BAP No. 11-6012) is the opening-brief exemplar.
-- Template: built from the rules. Render (2026-10-15, ok, 9 pages) and full page review done (Gate 2 below). Overlay: fail, no exemplar (see Overlay). Exemplar re-searched 2026-10-15 (nine more searches, `exemplars/SOURCE.md` pass 3): still none.
-- Status: rule-driven template plus a synthetic rule-check sample. `court.json` untouched; `status` not set.
-- Typeface: rule names no face (FRBP 8015(a)(5)(A)); kept **EB Garamond**, 14 pt. Re-rendered 2026-10-14 with `tools/render.sh` (zero warnings); `pdffonts`: only EB Garamond embedded. Overlay re-run: fail, no exemplar PDF in `exemplars/`.
+- **Exemplar: BLOCKED: no exemplar.** No public filed reply brief from this court was found after four passes (about 40 searches and probes; pass 4 on 2026-10-16 used the new route that found the answering-brief exemplar: BAP dockets are in RECAP under court id `ca8`). The searches are listed in `exemplars/SOURCE.md`. Nothing is stored in `exemplars/`.
+- Sample: still the synthetic rule-check sample `samples/INPUT-synthetic-reply-brief.md` (placeholder text, not a filing). Its first caption side now sets `v: false` (see Template changes).
+- Render: ok, `samples/OUTPUT-synthetic-reply-brief.pdf`, 9 pages, typst with no warnings (2026-10-16). `pdffonts`: EB Garamond only.
+- Overlay: fail. `sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief synthetic-reply-brief` exits 1, "no exemplar pdf" (2026-10-16).
+- Pages reviewed: 9 of 9 (2026-10-16).
+- Status: rule-driven template plus a synthetic sample. `court.json` untouched; `status` not set.
+- Typeface: rule names no face (FRBP 8015(a)(5)(A)); kept **EB Garamond**, 14 pt.
+
+## Template changes this run (2026-10-16)
+
+`typst/bap8-reply-brief.typ` received the five changes made to the answering-brief template (the two files differ only in the parameter block); see `../answering-brief/README.md`, "Template changes this run": caption `v: false`; court name wraps before "for the Eighth Circuit"; the L.R. BAP 8014A(b)(1) lead sentence and optional `appeal_title` in the interested-parties certification; optional `preliminary` front matter; page references in the tables in their own column. They were settled by the answering-brief exemplar (BAP No. 22-6006) and the opening-brief exemplar, and by the local rule's form text; none was settled by a reply brief.
 
 ## Files
 
@@ -40,42 +47,38 @@ Primary sources, read on 2026-10-14:
 
 ## Gate 2: page review
 
-Every page of the rule-check render was rasterized at 60 dpi (`pdftoppm -r 60`) and viewed. Typst printed no warnings. Fonts embedded: EB Garamond only.
+Render of 2026-10-16, every page rasterized at 60 dpi (`pdftoppm -r 60`) and viewed. Typst printed no warnings. No reply exemplar to compare; pages were checked against the rules and against the answering-brief render.
 
 | Page | Content | Result |
 |---|---|---|
-| 1 | Cover (REPLY BRIEF OF APPELLANT) | OK. |
-| 2 | Certification of Interested Parties (i) | OK. |
+| 1 | Cover (REPLY BRIEF OF APPELLANT) | OK. Court name now wraps before "FOR THE EIGHTH CIRCUIT"; no "v." after the In re line. Re-viewed after the sample change. |
+| 2 | Certification of Interested Parties (i) | OK. Now opens with the L.R. BAP 8014A(b)(1) lead sentence. |
 | 3 | Certification of Related Cases (ii) | OK. |
-| 4 | Table of Contents (iii): Argument I, II and Conclusion | OK. |
+| 4 | Table of Contents (iii): Argument I, II and Conclusion | OK. Page numbers in their own column. |
 | 5 | Table of Authorities (iv): one rule | OK. |
-| 6 | Argument I and II | OK. Blank space at the foot of the page: the conclusion moves to page 7 with its signature block. Re-viewed after a one-word wording change. |
+| 6 | Argument I and II (1) | OK. Space at the foot of the page: the conclusion moves to page 7 with its signature block. |
 | 7 | Conclusion; signature block (2) | OK. |
 | 8 | Certificate of Compliance (3); 127 words | OK. |
 | 9 | Certificate of Service (4) | OK. |
 
-Pages reviewed: 9 of 9 (all re-viewed 2026-10-15 as PNG at 60 dpi after a fresh render; rows above unchanged).
+Pages reviewed: 9 of 9.
 
 ## Overlay
 
-Run 2026-10-15 (also 2026-10-14): `sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief synthetic-reply-brief` exits 1 ("no exemplar pdf"). No `OVERLAY-` file is written. Status: fail.
+Run 2026-10-16: exits 1 ("no exemplar pdf"). No `OVERLAY-` file is written. Status: fail.
 
 ## Known gaps
 
-- **No exemplar, so no tier-2 check.** Nothing is compared to a filed reply brief. The sample is synthetic rule-check text.
-- **No section is mandated.** 8014(c) requires only the tables. The template does not require an argument or a conclusion; the sample includes both as a convention.
-- **Scope of the reply is not checked.** The template does not confirm that the reply answers only matter raised in the appellee's brief.
-- **Overlay tool does not match this layout** (see the opening brief README).
-- **Renders are in `samples/`** (`OUTPUT-synthetic-reply-brief.pdf`). PNG review copies are in `/work/artifacts/bap8/reply-brief/`.
-- **Word count** comes from the markdown body and is not cross-checked against the PDF text.
+- **No exemplar, so no tier-2 check against a filed reply.** The sample is synthetic rule-check text and does not meet the 8-14 page depth bar.
+- **No section is mandated.** 8014(c) requires only the tables. The template does not require an argument or a conclusion.
+- **Scope of the reply is not checked** (that it answers only matter raised in the appellee's brief).
+- **Word count** comes from the markdown, not the PDF text.
 - **Certificate wording** is not verified against Form 417C.
-- **Certifications placement:** before the TOC, by choice.
+- **Certifications placement:** before the TOC; the answering-brief exemplar does the same.
 - **Cover color:** none (FRBP 8015 has no cover-color rule).
 
 ## Engines
 
-**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `front.jq`, `brief.lua`, `render.sh`). `samples/OUTPUT-synthetic-reply-brief.docx` and `.docx.pdf` (LibreOffice). 9 pages, the same count as typst for this sample. `pdffonts` on the PDF: only EB Garamond embedded.
+**docx** (`docx/`). `samples/OUTPUT-synthetic-reply-brief.docx` and `.docx.pdf` were built on 2026-10-15 and are **stale**: they predate this run's sample and template change (the docx still prints "v." after the In re line and lacks the 8014A(b)(1) lead sentence). Not rebuilt: `soffice` (LibreOffice) is not on this box. The docx build (`front.jq`, `brief.lua`) also does not know the new fields `appeal_title`, `caption[].v`, `preliminary`. BLOCKED: docx re-render (no LibreOffice here); docx front matter must be brought up to the typst template.
 
-- Matches typst: the same form as the opening brief (font, size, spacing, margins, cover, contents, authorities, certificates, page numbering). The certificate of compliance word count is 127, the same as typst.
-- Differs: the certificate checkbox is the text `[X]`, not a drawn box; contents and authorities are build-time text with page numbers measured on the LibreOffice PDF, not Word fields; headings are paragraph styles with outline levels.
-- BLOCKED: none for this engine. `tools/check.sh --engine docx` has not been run for this folder: it needs `court.json` and `checks.yaml`, which this folder does not have.
+**latex**: none in this folder.

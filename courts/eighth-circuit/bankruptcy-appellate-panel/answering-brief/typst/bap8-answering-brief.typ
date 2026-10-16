@@ -209,6 +209,14 @@
 
 #let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
 
+/// A table row: `body` (ending in a dot leader) wraps inside the left column; the page reference
+/// sits in its own right column, level with the last line, so it can never wrap onto a line of
+/// its own (which happened with long headings and authorities).
+#let leader-row(body, pages, page-width) = grid(
+  columns: (1fr, page-width), column-gutter: 0.3em,
+  body, align(right + bottom, pages),
+)
+
 /// One table-of-contents row, built from a heading element. The label sits where the
 /// heading's own label sits in the body, and wrapped lines hang under the title text.
 #let toc-entry(it) = {
@@ -221,14 +229,13 @@
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let hang-by = ind + heading-tab
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(hang-by, {
+    leader-row(hang(hang-by, {
       h(ind)
       if numbered { box(width: heading-tab, lab) }
       title
       h(0.8em)
       dot-leader
-      box(width: 2.6em, align(right, it.page()))
-    })))
+    }), it.page(), 2.2em)))
 }
 
 // Certificates, certifications and the disclosure statement are `outlined: false`, so they stay out of the TOC.
@@ -282,7 +289,7 @@
           if label not in pages { pages.push(label) }
         }
         let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
+        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, leader-row(hang(0.35in, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
@@ -291,9 +298,7 @@
           inl(a.cite)
           h(0.8em)
           dot-leader
-          h(0.3em)
-          page-text
-        }))
+        }), page-text, auto))
       }
     }
   }
@@ -325,15 +330,28 @@
   v(gap)
   double-rule
   v(gap)
-  strong(upper(court-name))                            // (B) the name of the court
+  // (B) the name of the court. The closing "for the ... Circuit" phrase is kept on one line, so a
+  // wrapped name breaks before it (both filed exemplars break there); no line break is forced.
+  {
+    let k = court-name.position(" for the ")
+    let name = if k == none { court-name } else {
+      court-name.slice(0, k + 1) + court-name.slice(k + 1).replace(" ", "\u{00A0}")
+    }
+    strong(upper(name))
+  }
   v(gap)
   short-rule
   v(gap)
-  let sides = need(meta, "caption")                     // (C) the title of the case
+  // (C) the title of the case. "v." is printed after a side unless the side sets `v: false`
+  // (an "In re" line, or a side followed by a non-party such as the trustee).
+  let sides = need(meta, "caption")
   for (i, side) in sides.enumerate() {
     for name in side.names { inl(name); parbreak() }
-    align(left, pad(left: 50%, inl(side.designation)))
-    if i < sides.len() - 1 { v(gap * 0.3); [v.]; v(gap * 0.3) }
+    if side.designation != "" { align(left, pad(left: 50%, inl(side.designation))) }
+    if i < sides.len() - 1 {
+      v(gap * 0.3)
+      if side.at("v", default: true) { [v.]; v(gap * 0.3) }
+    }
   }
   v(gap)
   short-rule
@@ -436,9 +454,10 @@
   let sig = need(meta, "signature")
   heading(level: 1, numbering: none, outlined: false)[Certification of Interested Parties]
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
-  [BAP No. #need(meta, "case_number")]
+  // The rule's form starts with the "NUMBER AND TITLE OF THE APPEAL" (`appeal_title`, optional).
+  [BAP No. #need(meta, "case_number")#if "appeal_title" in meta [, #inl(meta.appeal_title)]]
   parbreak()
-  [The undersigned, counsel of record for #inl(sig.at("for", default: "")), certifies that the following listed party (or parties) has (have) an interest in the outcome of this appeal. These representations are made to enable the judges of the panel to evaluate possible disqualification or recusal.]
+  [Certification Required by L.R. BAP 8th Cir. 8014A(b)(1): The undersigned, counsel of record for #inl(sig.at("for", default: "")), certifies that the following listed party (or parties) has (have) an interest in the outcome of this appeal. These representations are made to enable the judges of the panel to evaluate possible disqualification or recusal.]
   md-block(need(meta, "interested_parties"))
   form-sig-line(meta)
   pagebreak(weak: true)
@@ -520,7 +539,8 @@
   }
 
   // ---- length: FRBP 8015(a)(7)(B), with 8015(g) exclusions ----
-  let words = count-words(strip-oral-argument(body-md))
+  // A preliminary summary of the case counts (it is not in the 8015(g) list); an oral-argument statement does not.
+  let words = count-words(strip-oral-argument(body-md)) + count-words(strip-oral-argument(meta.at("preliminary", default: "")))
   if words > word-limit {
     panic("bap8-brief: the brief has " + str(words) + " words; FRBP 8015(a)(7)(B) allows " + str(word-limit))
   }
@@ -577,6 +597,14 @@
   counter(page).update(1)
   if "disclosure" in meta {
     disclosure-page(meta)
+    pagebreak()
+  }
+  // Optional preliminary statements (`preliminary`, markdown with level-1 headings), e.g. a summary
+  // of the case and a statement on oral argument (FRBP 8019(a)). No BAP rule fixes their place;
+  // the filed appellee's brief (BAP No. 22-6006) puts them right after the cover, so they go here,
+  // and they are listed in the table of contents like the filing's.
+  if "preliminary" in meta {
+    md-block(meta.preliminary)
     pagebreak()
   }
   certifications(meta)

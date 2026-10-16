@@ -1,8 +1,27 @@
 # Exemplar source: reply-brief, United States Bankruptcy Appellate Panel for the Eighth Circuit (bap8)
 
-**BLOCKED: no exemplar.** No public filed reply brief from this court was found in two passes of searching, so no `FILED-EXAMPLE-*.pdf` is stored here.
+**BLOCKED: no exemplar.** No public filed reply brief from this court was found in four passes of searching, so no `FILED-EXAMPLE-*.pdf` is stored here.
 
-The Brief of Appellant in BAP No. 11-6012 (*In re Fisette*) is the one public filed BAP brief found; it is the opening-brief exemplar (`../../opening-brief/exemplars/`). No reply brief from that case, or any other BAP case, was found in the public sources searched (pass 2, rows 8 and 12 below).
+Two BAP briefs have been found so far: the debtor's opening brief in BAP No. 11-6012 (*In re Fisette*, `../../opening-brief/exemplars/`) and the appellees' brief in BAP No. 22-6006 (*Farm Credit Services of America v. Swackhammer*, `../../answering-brief/exemplars/`). The appellant's reply in 22-6006 (due 2023-01-06, later extended) is not in RECAP.
+
+## Pass 4, 2026-10-16 (new route: BAP dockets are filed in RECAP under court id `ca8`)
+
+| # | Tool / query | Result |
+|---|---|---|
+| 1 | CourtListener v4 `type=r`, no court filter: `"Bankruptcy Appellate Panel" "Eighth Circuit" "Reply Brief"`; `"BANKRUPTCY APPELLATE PANEL FOR THE EIGHTH CIRCUIT" brief` | 68 and 104 hits. One BAP brief: the appellees' brief in ca8 22-6006 (now the answering-brief exemplar). No reply brief. The rest are bankruptcy-court briefing schedules (mnb, ianb), district-court bankruptcy appeals, and BAP judgments. |
+| 2 | CourtListener v4 `type=r&court=ca8`: `Swackhammer` | Docket 67093634 (22-6006): appellee brief available; an extension motion and an argument form listed but not available; no reply entry in RECAP. |
+| 3 | CourtListener v4 `type=r&court=ca8&available_only=on`: `docketNumber:*-60* AND "REPLY BRIEF"`, `docketNumber:*-6* AND brief` | Only 22-6006, 25-6003 (judgment), 26-6021 (briefing schedule) have available documents. No reply. |
+| 4 | CourtListener v4 `type=r&available_only=on`: `"8014A" reply`; `"L.R. BAP 8th Cir" "reply brief"`; `"Bankruptcy Appellate Panel" "Eighth Circuit" "reply brief of appellant"` | 4, 2 and 1 hits: the 22-6006 appellee brief, unrelated district filings, a BAP judgment. No reply. |
+| 5 | CourtListener v4 `type=r`, courts mnb ianb iasb nebraskab ndb sdb areb arwb moeb mowb and the 8th Cir. district courts, available only: `"reply brief" "Bankruptcy Appellate Panel"`; `"reply brief" BAP` | 27 and 42 hits; district-court bankruptcy appeals (e.g. mnd 0:09-cv-03645 appellant's reply, a district-court appeal, not BAP) and BAP briefing schedules. No BAP reply. Kaltved (mnb 26-04027) docs 58, 60, 63 fetched: notices and the BAP briefing schedule, not briefs. |
+| 6 | CourtListener v4 `type=r&court=ca8&available_only=on`: `APPENDIX "Bankruptcy Appellate Panel"`; `"BAP" "reply brief" appellant` | Court of Appeals appeals from the BAP (23-2491, 25-1654); no BAP reply in an appendix. |
+| 7 | WebSearch (extended): "Reply Brief" "Bankruptcy Appellate Panel" "Eighth Circuit" "Appellate Case" "Date Filed" pdf | BAP opinion 11-6036 and Justia-hosted BAP clerk letters. No reply. |
+| 8 | WebSearch (standard): "8014A(b)" "reply brief" appellant bankruptcy appellate panel | Rule text (FRBP 8014, 8018). No reply. |
+| 9 | WebSearch (extended): "United States Bankruptcy Appellate Panel for the Eighth Circuit" "Reply Brief of Appellant" OR "Appellant's Reply Brief" OR "Reply Brief of Appellants" | 10th Cir. BAP brief page, Justia clerk letters. No reply. |
+| 10 | WebSearch (standard): BAP 8th Cir. reply brief pdf trustee appellant, -opinion | Court of Appeals opinions, BAP IOPs, a judicial-conference presentation. No reply. |
+| 11 | WebFetch: `cases.justia.com/federal/appellate-courts/ca8/11-6013/811728524/2.pdf` | HTTP 403 (Justia still blocked). |
+| 12 | curl: `justice.gov/ust/appellate-briefs` | HTTP 404. |
+
+Still not searched: PACER (login); a CourtListener API token (docket listings for the `ca8` 6000-series dockets, which would show whether a reply was ever bought into RECAP).
 
 ## Pass 1, 2026-10-14 (eight searches)
 
