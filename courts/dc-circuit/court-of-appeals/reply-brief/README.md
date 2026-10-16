@@ -31,6 +31,8 @@ No D.C. Circuit primary text for this doc type was retrieved in full, so the rul
 | FRAP 32(a)(6) | Plain roman type; italics or boldface for emphasis; case names italic. | Case names italic in the sample; `emph` in TOA. | Read on Cornell LII, 2026-10-14. |
 | FRAP 32(f) | Excluded from the count: cover, disclosure statement, TOC, TOA, oral-argument statement, addendum of statutes, certificate of counsel, signature block, proof of service. | `count-words` counts only the markdown body (everything the author types). Cover, TOC, TOA, certificates and signature are generated, not counted. | Read on Cornell LII, 2026-10-14. |
 | FRAP 32(g)(1) | A certificate of compliance stating the word count (or line count), signed by counsel. | `certificate-of-compliance`; the count comes from `count-words`, not typed. | Read on Cornell LII, 2026-10-14. |
+| Cir. R. 28(a)(8) | A brief in a case scheduled for argument (or argued, or submitted without argument) says so in capital letters at the top of the front cover, with the argument date. | `cover-body`, from `oral_argument` (optional field). | Rules PDF as amended through 2025-12-04, fetched 2026-10-16: https://www.cadc.uscourts.gov/sites/cadc/files/rules-RulesFRAP20251204.pdf |
+| Cir. R. 28(a)(2) | The table of authorities lists each page on which an authority is cited; "passim" or similar terms may not be used. | `toa-section`: every page, no passim path. | Same PDF, fetched 2026-10-16. |
 | FRAP 32(a)(2) | Cover contents: court, case number, title, parties, counsel with address and telephone. | `cover-body`. | Cited from memory of the rule's structure; not re-fetched on 2026-10-14. Verify before relying on it. |
 | FRAP 25(d) | Proof of service. | `certificate-of-service`, only when `service.certificate: true`. | Wording is template-authored; FRAP 25(d) text not re-fetched. See Known gaps. |
 
@@ -42,7 +44,7 @@ No D.C. Circuit primary text for this doc type was retrieved in full, so the rul
 
 | Ours | Filed | Overlap | What it is |
 |---|---|---|---|
-| p.1 | p.1 | 76% | Cover |
+| p.1 | p.1 | 85% | Cover (76% before the oral-argument line was added on 2026-10-16) |
 | p.2 | p.2 | 90% | TOC |
 | p.3 | p.3 | 72% | TOA, first page (cases) |
 | p.4 | p.4 | 50% | TOA, second page; the exemplar's TOA is two pages too, so the pairing is by content, not length |
@@ -66,8 +68,8 @@ Every page of `OUTPUT-rosen-kellogg-reply-brief.pdf` was rendered at 60 dpi (`pd
 
 | PDF page | Printed | Content | Result |
 |---|---|---|---|
-| 1 | — | Cover: court, caption, D.C. No. and judge, brief title, counsel | OK. Fits one page; the judge line wraps. |
-| 2 | i | Table of Contents (point and sub-point hanging indents; page column) | OK. |
+| 1 | — | Cover: oral-argument line, number, court, caption, D.C. No. and judge, brief title, counsel | OK after 2026-10-16 (the oral-argument line was missing before; see the verification pass). Fits one page; the judge line wraps. |
+| 2 | i | Table of Contents (point and sub-point hanging indents; page column) | OK after 2026-10-16: before, the page numbers of entries I.A, I.B.2 and I.C wrapped onto lines of their own. |
 | 3 | ii | Table of Authorities, cases (first page) | OK. Case names italic (FRAP 32(a)(6)). |
 | 4 | iii | Table of Authorities, cases (second page) | OK. |
 | 5 | 1 | Summary of Argument; ARGUMENT; point I; sub-point A | OK. |
@@ -125,3 +127,14 @@ Build commands, from the repo root:
 - Heading labels (I., A., 1., a.) are written as text by `docx/cadc.lua`, not as Word numbering; the contents field is not generated.
 
 [Formbook index](../../../../README.md) | [Status table](../../../../STATUS.md)
+
+## Verification pass 2026-10-16 (fb-595.26.12)
+
+- Rendered: `sh tools/render.sh .../reply-brief samples/INPUT-rosen-kellogg-reply-brief.md` exits 0, no typst warnings, 15 pages (the committed PDF had been 16 pages and was stale). Overlay rerun (`tools/overlay.sh ... rosen-kellogg-reply-brief`): same page map as the table above; the cover now overlaps 85%.
+- Viewed: all 15 pages at 60 dpi before the fixes, pp. 1-3 again after each fix, and all 15 pages (contact sheet) of the final render; all 15 overlay pages at 40 dpi; the exemplar's page 1 against our cover.
+- Rules checked in the D.C. Circuit rules PDF (as amended through 2025-12-04; it downloaded on 2026-10-16, so the "returned 404" note under Known gaps is out of date): Circuit Rule 28(a)(8) and 28(a)(2) (rows added to the rules table).
+- Fixed (tier 1): the cover had no oral-argument statement. The exemplar says "ORAL ARGUMENT SCHEDULED FOR APRIL 10, 2025" and Circuit Rule 28(a)(8) requires it. The template now prints the optional `oral_argument` field in capitals at the top of the cover (typst and latex), and the sample's frontmatter carries it.
+- Fixed (tier 1): the table of authorities had a "passim" path from seven pages, which Circuit Rule 28(a)(2) forbids. It is removed (typst and latex); every page is listed, and a long list wraps inside its own column.
+- Fixed (tier 2): in the table of contents, the page numbers of I.A, I.B.2 and I.C wrapped onto lines of their own. Page numbers now have their own column. The latex table of authorities printed "4,5" without a space; it now prints "4, 5".
+- LaTeX re-rendered: 13 pages, builds; the cover shows the oral-argument line.
+- Remaining gaps: as listed under Known gaps (the certificate of service wording is template-authored; case names are italic, unlike the filing).

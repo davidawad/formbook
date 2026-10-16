@@ -18,7 +18,8 @@
 #let page-margin = 1in                     // FRAP 32(a)(5)(B): margins at least 1 inch on all four sides.
 #let para-indent = 0.5in
 #let toc-depth = 4
-#let passim-threshold = 7                  // authority cited on this many pages or more: "passim"
+#let toc-page-col = 2.6em                 // TOC: width of the page-number column
+#let toa-page-col-max = 1.5in             // TOA: a page list wider than this wraps inside its column (no "passim": Cir. R. 28(a)(2))
 #let word-limit = 13000                    // FRAP 32(a)(7)(B)(i): principal brief (appellee's brief included)
 
 // ---------------------------------------------------------------------------
@@ -197,15 +198,18 @@
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let hang-by = ind + heading-tab
+  // The page number has its own column, so a title that fills its last line can never push the
+  // number onto a line of its own; the leader fills what is left of the title's last line.
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(hang-by, {
-      h(ind)
-      if numbered { box(width: heading-tab, lab) }
-      title
-      h(0.8em)
-      dot-leader
-      box(width: 2.6em, align(right, it.page()))
-    })))
+    grid(columns: (1fr, toc-page-col), align: (left, right + bottom),
+      hang(hang-by, {
+        h(ind)
+        if numbered { box(width: heading-tab, lab) }
+        title
+        h(0.8em)
+        dot-leader
+      }),
+      it.page())))
 }
 
 #let toc-section(has-addendum) = {
@@ -262,19 +266,23 @@
           let label = numbering(loc.page-numbering(), ..counter(page).at(loc))
           if label not in pages { pages.push(label) }
         }
-        let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
-          if "name" in a {
-            if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
-            [,]
-            linebreak()
-          }
-          inl(a.cite)
-          h(0.8em)
-          dot-leader
-          h(0.3em)
-          page-text
-        }))
+        // Circuit Rule 28(a)(2): every page is listed; "passim" may not be used.
+        let page-text = pages.join(", ")
+        // The page list has its own column (its natural width, wrapping only past toa-page-col-max).
+        let col = calc.min(measure(page-text).width, toa-page-col-max)
+        block(breakable: false, above: 0.7em, below: 0pt, width: 100%,
+          grid(columns: (1fr, col), column-gutter: 0.3em, align: (left, right + bottom),
+            hang(0.35in, {
+              if "name" in a {
+                if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
+                [,]
+                linebreak()
+              }
+              inl(a.cite)
+              h(0.8em)
+              dot-leader
+            }),
+            par(leading: single-leading, first-line-indent: 0pt, justify: false, page-text)))
       }
     }
   }

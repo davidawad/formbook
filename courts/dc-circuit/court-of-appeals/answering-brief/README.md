@@ -102,8 +102,8 @@ Re-reviewed 2026-10-15 after the font change to TeX Gyre Schola: all 13 rendered
 
 - p.1 cover: fits on one page; oral-argument line, court, number, caption, appeal line with `Cr. No.`, brief title, counsel. No defect.
 - p.2 (ii) certificate of parties: fits one page. No defect.
-- p.3 (iii) TOC: lists Issue Presented, the statement and its sub-headings, summary, argument and its point heading, conclusion, with page numbers that match the body (checked against pp. 5-11). No defect.
-- p.4 (iv) TOA: cases, statutes, rules, other authorities on one page. Passim threshold not reached. No defect.
+- p.3 (iii) TOC: lists Issue Presented, the statement and its sub-headings, summary, argument and its point heading, conclusion, with page numbers that match the body (checked against pp. 5-11). Defect found 2026-10-16 and fixed: when a title filled its last line, the page number wrapped onto a line of its own (B. and I.). See the verification pass below.
+- p.4 (iv) TOA: cases, statutes, rules, other authorities on one page. Every citing page listed (the template had a "passim" path from seven pages, removed 2026-10-16: Circuit Rule 28(a)(2) forbids "passim").
 - pp.5-7 (body 1-3): double-spaced 14-point TeX Gyre Schola; bold sub-heading A. and B. hang correctly. No defect.
 - pp.8-11 (body 4-7): summary, centered point heading I. with small caps, argument text, conclusion, signature block with `/s/` and counsel lines. The signature block stays with the conclusion. No defect.
 - p.12 certificate of compliance: wording follows FRAP 32(g); the typeface is named as TeX Gyre Schola (see gap 1). No defect.
@@ -151,3 +151,13 @@ LaTeX differences (tier 2 or line breaking, not form): line breaks come from TeX
 - Cover and certificates are paragraphs, not tables (no vertical rule in the caption).
 
 Word limits that apply here: the body count (13,000 words, FRAP 32(a)(7)(B)(i)) is checked in `docx/cadc-docx.lua` and the certificate of compliance states the same count (1,505).
+
+## Verification pass 2026-10-16 (fb-595.26.12)
+
+- Rendered: `sh tools/render.sh .../answering-brief samples/INPUT-wilson.md` exits 0, no typst warnings, 13 pages (the committed PDF had been 14 pages and was stale). Overlay rerun (`tools/overlay.sh ... wilson`); the page map and overlaps are unchanged from the table above.
+- Viewed: all 13 pages at 60 dpi before the fixes, then pp. 3-4 again and all 13 pages (contact sheet) after; all 13 overlay pages at 40 dpi; the exemplar's page 1 against our cover.
+- Rule checked: Circuit Rule 28(a)(2) (rules PDF as amended through December 4, 2025, fetched 2026-10-16: https://www.cadc.uscourts.gov/sites/cadc/files/rules-RulesFRAP20251204.pdf): the table of authorities "must identify each page of the brief on which the authority is cited; passim or similar terms may not be used."
+- Fixed (tier 1): the "passim" path in the table of authorities (`passim-threshold`) is removed from `typst/cadc-answering-brief.typ` and `latex/template.tex`; every page is listed. A long page list wraps inside its own right-hand column (`toa-page-col-max`).
+- Fixed (tier 2): table of contents rows whose title filled the last line pushed the page number onto a new line, unaligned (p. iii, entries B. and I.). Page numbers now sit in their own column (`toc-page-col`), bottom-aligned with the title's last line.
+- LaTeX re-rendered after the passim change: 13 pages, builds.
+- Remaining gaps: as listed under Known gaps; unchanged.

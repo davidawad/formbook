@@ -16,7 +16,9 @@
 #let single-leading = 0.45em           // Single spacing for headings, block quotations, signature and certificate blocks, footnotes, tables. Measured on the render: 0.12em overlapped two-line headings.
 #let page-margin = 1in                 // FRAP 32(a)(4): at least one inch on all four sides.
 #let para-indent = 0.5in
+#let counsel-columns = 2             // cover counsel groups per row (a layout choice; FRAP 32(a)(2)(F) sets only the contents)
 #let word-limit = 13000                // FRAP 28.1(e)(2)(A)(i) and 32(a)(7)(B)(i), applied through Circuit Rule 32(e).
+#let toa-page-col-max = 1.5in       // TOA: a page list wider than this wraps inside its column (Circuit Rule 28(a)(2): no "passim").
 
 #let kind-order = ("case", "constitution", "statute", "regulation", "rule", "other")
 #let kind-title = (
@@ -85,23 +87,23 @@
 // Cover (FRAP 32(a)(2); Circuit Rule 28(a)(8))
 // ---------------------------------------------------------------------------
 
-#let cover(meta) = {
+#let cover-body(meta, cols, s, fill) = {
   set par(first-line-indent: 0pt, leading: single-leading, spacing: single-leading)
   set align(center)
   // Circuit Rule 28(a)(8): capital letters at the top of the front cover.
   strong(inl(upper(need(meta, "oral_argument"))))
-  v(1.6em)
+  v(1.6em * s)
   [No. #need(meta, "case_number")]
-  v(1.6em)
+  v(1.6em * s)
   [UNITED STATES COURT OF APPEALS]
   v(0.2em)
   [FOR THE DISTRICT OF COLUMBIA CIRCUIT]
-  v(1.8em)
+  v(1.8em * s)
   for (i, side) in need(meta, "caption").enumerate() {
     if i > 0 {
-      v(0.9em)
+      v(0.9em * s)
       [v.]
-      v(0.9em)
+      v(0.9em * s)
     }
     for n in side.names {
       block(width: 100%, inl(n))
@@ -109,26 +111,42 @@
     v(0.3em)
     block(width: 100%, inl(side.designation))
   }
-  v(1.8em)
+  v(1.8em * s)
   block(width: 100%, inl(need(meta, "proceeding")))
   if "district_court_case" in meta { v(0.4em); block(width: 100%, inl(meta.district_court_case)) }
   if "judge" in meta { v(0.4em); block(width: 100%, inl(meta.judge)) }
-  v(2.2em)
+  v(2.2em * s)
   strong(upper(need(meta, "brief_title")))
-  v(2.2em)
+  v(2.2em * s)
   let groups = need(meta, "counsel")
   grid(
-    columns: (1fr,) * groups.len(),
+    columns: (1fr,) * cols,
     column-gutter: 1.2em,
+    row-gutter: 1.2em * s,
     align: left,
     ..groups.map(g => {
       let block-lines = g.names.map(n => [#n]) + g.lines.map(l => emph(inl(l)))
       block(width: 100%, align(left, stack(dir: ttb, spacing: single-leading, ..block-lines)))
     }),
   )
-  v(1fr)
+  if fill { v(1fr) } else { v(1.2em) }
   if "date" in meta { block(width: 100%, inl(meta.date)) }
 }
+
+/// The cover is one page; the type size never shrinks. Counsel groups are set in rows of
+/// `counsel-columns` (at 14 pt a third column is too narrow for a name or a street line) with
+/// the largest spacing that fits; only if no spacing fits are all groups set in one row.
+#let cover(meta) = layout(size => {
+  let n = need(meta, "counsel").len()
+  let tries = ()
+  for cols in (calc.min(n, counsel-columns), n).dedup() {
+    for s in (1.0, 0.8, 0.6, 0.45, 0.3) { tries.push((cols, s)) }
+  }
+  let fits(t) = measure(block(width: size.width, cover-body(meta, t.at(0), t.at(1), false))).height <= size.height
+  let pick = tries.find(fits)
+  if pick == none { panic("dc-brief: the cover does not fit on one page; shorten the counsel or party lines") }
+  block(height: size.height, cover-body(meta, pick.at(0), pick.at(1), true))
+})
 
 // ---------------------------------------------------------------------------
 // Certificates and signature (Circuit Rule 28(a)(1); FRAP 32(g); FRAP 25(d))
@@ -172,6 +190,9 @@
   out
 }
 
+/// Sort key: case-insensitive, with runs of digits compared as numbers ("8 U.S.C." before "26 U.S.C.").
+#let sort-key(s) = lower(s).replace(regex("\\d+"), m => "0" * calc.max(0, 8 - m.text.len()) + m.text)
+
 #let authority-text(a) = {
   if a.kind == "case" { inl("*" + a.name + "*, " + a.cite) }
   else if "name" in a { inl(a.name + ", " + a.cite) }
@@ -179,6 +200,7 @@
 }
 
 #let toa(meta) = context {
+  set par(first-line-indent: 0pt)
   let pages = cited-pages()
   let reg = need(meta, "authorities")
   for key in pages.keys() {
@@ -187,14 +209,21 @@
   for kind in kind-order {
     let items = reg.pairs().filter(p => p.at(1).kind == kind and p.at(0) in pages)
     if items.len() == 0 { continue }
-    items = items.sorted(key: p => p.at(1).at("sort", default: p.at(1).at("name", default: p.at(1).cite)))
+    items = items.sorted(key: p => sort-key(p.at(1).at("sort", default: p.at(1).at("name", default: p.at(1).cite))))
     v(0.8em)
     strong(kind-title.at(kind))
     v(0.2em)
     for p in items {
       let ps = pages.at(p.at(0)).sorted().map(str).join(", ")
-      block(above: 0.5em, width: 100%, [#set par(leading: single-leading, first-line-indent: 0pt)
-        #authority-text(p.at(1)) #box(width: 1fr, repeat[.]) #ps])
+      // The page list has its own column, so it never runs into the entry or its leader;
+      // a list wider than toa-page-col-max wraps inside the column.
+      let col = calc.min(measure(ps).width, toa-page-col-max)
+      block(above: 0.5em, width: 100%, breakable: false, grid(
+        columns: (1fr, col), column-gutter: 0.3em, align: (left, right + bottom),
+        par(leading: single-leading, first-line-indent: 0pt, hanging-indent: para-indent, justify: false,
+          [#authority-text(p.at(1)) #h(0.3em) #box(width: 1fr, repeat[.])]),
+        par(leading: single-leading, first-line-indent: 0pt, justify: false, ps),
+      ))
     }
   }
 }
@@ -218,21 +247,25 @@
   set par(leading: body-leading, first-line-indent: (amount: para-indent, all: true), justify: false, spacing: body-leading)
   show heading.where(level: 1): it => {
     set par(leading: single-leading, first-line-indent: 0pt)
-    block(above: 1.4em, below: 1.2em, width: 100%, align(center, strong(it.body)))
+    block(above: 1.4em, below: 1.2em, width: 100%, sticky: true, align(center, strong(it.body)))
   }
   show heading.where(level: 2): it => {
     set par(leading: single-leading, first-line-indent: 0pt)
-    block(above: 1.2em, below: 1em, width: 100%, strong(it.body))
+    block(above: 1.2em, below: 1em, width: 100%, sticky: true, strong(it.body))
   }
   show heading.where(level: 3): it => {
     set par(leading: single-leading, first-line-indent: 0pt)
-    block(above: 1em, below: 0.9em, width: 100%, pad(left: para-indent, strong(it.body)))
+    block(above: 1em, below: 0.9em, width: 100%, sticky: true, pad(left: para-indent, strong(it.body)))
   }
   show quote.where(block: true): it => {
     set par(leading: single-leading, first-line-indent: 0pt)
     pad(left: 0.5in, right: 0.5in, bottom: 1.2em, it.body)
   }
   show footnote.entry: set par(leading: single-leading, first-line-indent: 0pt)
+  // Never break between a section sign or pilcrow and its number, nor inside a run of adjacent
+  // parentheses ("6103(i)(2)"). Boxes keep the extracted text exactly the author's characters.
+  show regex("[§¶]+ \\S+"): it => box(it)
+  show regex("\\S*\\)\\(\\S*"): it => box(it)
 
   // Cover: no page number.
   cover(meta)
@@ -245,7 +278,9 @@
   // Circuit Rule 28(a)(1): the certificate comes immediately inside the cover.
   heading(level: 1)[CERTIFICATE AS TO PARTIES, RULINGS, AND RELATED CASES, AND RULE 26.1 DISCLOSURE]
   let cert = need(meta, "certificate")
-  set par(first-line-indent: 0pt, leading: body-leading, spacing: body-leading)
+  // Paragraphs are marked by a first-line indent, as in the body; without it, consecutive
+  // paragraphs of a certificate part read as one.
+  set par(first-line-indent: (amount: para-indent, all: true), leading: body-leading, spacing: body-leading)
   [Pursuant to Circuit Rule 28(a)(1) and Federal Rule of Appellate Procedure 26.1, the undersigned counsel certifies as follows:]
   v(0.8em)
   block(width: 100%, strong[A. Parties and Amici])
@@ -287,8 +322,19 @@
   [#metadata(none)<body-first>]
   // The certificate and glossary above set their own paragraph styles at this level; reset the body.
   set par(leading: body-leading, first-line-indent: (amount: para-indent, all: true), justify: false, spacing: body-leading)
-  inl-body(main)
-  signature-block(meta)
+  // The signature block never stands alone on a page: the body's last paragraph is kept together
+  // with it (unless that last block is a heading or a footnote definition).
+  let text-md = main.trim(at: end)
+  let breaks = text-md.matches(regex("\n[ \t]*\n"))
+  let cut = if breaks.len() > 0 { breaks.last().end } else { 0 }
+  let tail = text-md.slice(cut)
+  if tail.len() > 0 and not tail.starts-with("#") and not tail.starts-with("[^") {
+    inl-body(text-md.slice(0, cut))
+    block(breakable: false, { inl-body(tail); signature-block(meta) })
+  } else {
+    inl-body(text-md)
+    signature-block(meta)
+  }
 
   // Certificates (FRAP 32(g)(1), Form 6 wording; FRAP 25(d)).
   pagebreak()

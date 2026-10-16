@@ -111,7 +111,7 @@
   #3\nobreak\ \leaders\hbox to 0.4em{\hss.\hss}\hskip 2.5em plus 1fill\hbox to 0.9in{\hss\dc@pg}\par\endgroup}
 
 % ---------------------------------------------------------------------------
-% Table of authorities (Circuit Rule 28(a)(2)): every page of each citation; "passim" from seven pages (typst).
+% Table of authorities (Circuit Rule 28(a)(2)): every page of each citation; "passim" or similar may not be used.
 % Pages are written to the aux file where each citation starts, then read back in the next pass.
 % ---------------------------------------------------------------------------
 \ExplSyntaxOn
@@ -125,9 +125,7 @@
   {
     \seq_if_exist:cTF { g_dc_toa_#1_seq }
       {
-        \int_compare:nNnTF { \seq_count:c { g_dc_toa_#1_seq } } > { 6 }
-          { \emph{passim} }
-          { \seq_use:cn { g_dc_toa_#1_seq } { , \c_space_tl } }
+        { \seq_use:cn { g_dc_toa_#1_seq } { , \c_space_tl } }
       }
       { }
   }

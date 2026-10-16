@@ -136,7 +136,7 @@
 \renewcommand\l@paragraph[2]{\def\dc@pg{#2}\dc@tocrow{0.35em}{1in}{#1}}
 
 % ---------------------------------------------------------------------------
-% Table of authorities (Circuit Rule 28(a)(2)): every page of each citation; "passim" from 7 pages (typst reference).
+% Table of authorities (Circuit Rule 28(a)(2)): every page of each citation; "passim" or similar may not be used.
 % Pages are written to the aux file where each citation starts, then read back in the next pass.
 % ---------------------------------------------------------------------------
 \ExplSyntaxOn
@@ -150,9 +150,7 @@
   {
     \seq_if_exist:cTF { g_dc_toa_#1_seq }
       {
-        \int_compare:nNnTF { \seq_count:c { g_dc_toa_#1_seq } } > { 6 }
-          { \emph{passim} }
-          { \seq_use:cn { g_dc_toa_#1_seq } { , } }
+        { \seq_use:cn { g_dc_toa_#1_seq } { , \c_space_tl } }
       }
       { }
   }
@@ -196,6 +194,8 @@
 \begingroup\centering
 \topskip=0pt
 \vspace*{3.8pt}
+% Circuit Rule 28(a)(8): the oral-argument statement, in capitals, at the top of the front cover.
+$if(oral_argument)$\textbf{\MakeUppercase{$oral_argument$}}\par\vspace{0.6em}$endif$
 \textbf{No.\ $case_number$}\par
 \setlength{\parskip}{3.5pt}
 \topskip=9pt
