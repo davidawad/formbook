@@ -84,7 +84,7 @@ Red = our render, blue = the filed exemplar, black = both. The map (`-overlay.tx
 
 Pages reviewed: 14 of 14.
 
-Word count: the certificate reports 1,199 words (the template's count of the sample body, everything before the addendum). An independent `wc`-style count of the markdown with link targets removed gives 1,175; the difference is punctuation-only tokens and list numerals. Both are far under 13,000. The certificate cites FRAP 32(a)(7)(B)(i) and FRAP 32(f).
+Word count: the certificate reports 1,146 words (the template's count of the sample body before the addendum, without the Statement in Support of Oral Argument, which FRAP 32(f) excludes; until 2026-10-16 that statement was counted and the certificate read 1,199). Far under 13,000. The certificate cites FRAP 32(a)(7)(B)(i) and FRAP 32(f).
 
 ## Known gaps
 
@@ -95,7 +95,6 @@ Word count: the certificate reports 1,199 words (the template's count of the sam
 - **Sample is a portion.** About 1,200 words of the 9,969-word filed brief (and the record designation, which the template supports as an addendum but which is not in this sample). The sample is for layout and structure, not for a full text check.
 - **Typeface.** The template sets EB Garamond; the exemplar is Times New Roman. The certificate says EB Garamond, as it must for this render.
 - **No checks yet.** This folder has no `checks.yaml` and no tool gates; the ca9 gate suite is not wired for ca6.
-- **Hyphenation at "14-point".** The certificate breaks the word at its hyphen across two lines. Not changed (a non-breaking hyphen was not tried).
 
 ## Exemplar errors noted (the sample does not carry them)
 
@@ -103,4 +102,15 @@ Listed in `exemplars/SOURCE.md`: the 2023 signature date, the "359895" Krieger d
 
 ## Engines
 
-Same rules and numbers as the typst template (the reference). **latex** (`latex/`, tectonic): EB Garamond 14 pt from `fonts/`, double spacing, one-page cover, TOC and TOA page numbers checked against the body, certificate word count 1,199 (same as typst). Differs: the cover's lower part sits slightly higher than typst's; some lines break differently, so a few TOA page numbers differ by a page from typst; no designation section (typst has none). **docx** (`docx/`): 15 pages against typst's 14; contents run to two pages (typst one); the conclusion splits across pages 5–6 (typst keeps it on one page). Fonts EB Garamond only; word count 1,199 matches. The addendum path is untested (no addendum in the sample). BLOCKED: none; `tools/check.sh` cannot run here (no `checks.yaml`).
+Same rules and numbers as the typst template (the reference). **latex** (`latex/`, tectonic): EB Garamond 14 pt from `fonts/`, double spacing, one-page cover, TOC and TOA page numbers checked against the body, certificate word count 1,199 (typst now 1,146: the latex count still includes the oral-argument statement). Differs: the cover's lower part sits slightly higher than typst's; some lines break differently, so a few TOA page numbers differ by a page from typst; no designation section (typst has none). **docx** (`docx/`): 15 pages against typst's 14; contents run to two pages (typst one); the conclusion splits across pages 5–6 (typst keeps it on one page). Fonts EB Garamond only; word count 1,199 (as latex; not regenerated, see the verification pass). The addendum path is untested (no addendum in the sample). BLOCKED: none; `tools/check.sh` cannot run here (no `checks.yaml`).
+
+## Verification pass 2026-10-16 (fb-595.26.6)
+
+- Re-rendered `samples/OUTPUT-bruneau-answering-brief.pdf` with `tools/render.sh` (exit 0, no typst warnings): 14 pages, the same count as the committed render; before the fixes below its text was identical to the committed PDF (not stale). Overlay rerun: same page map as before (cover 92%, conclusion 81%, body 22–56%).
+- All 14 pages viewed at 60 dpi (pages 12–14 again after the fixes); the 14 overlay pages viewed at 40 dpi, and overlay page 1 (cover against the filed cover) at 150 dpi.
+- Fixed:
+  - p. 7 (certificate of compliance), tier 1: the word count included the Statement in Support of Oral Argument, which FRAP 32(f) excludes. A top-level section whose heading names oral argument is now left out of the count: 1,199 became 1,146.
+  - p. 7: "14-point" broke at its hyphen; now kept on one line (boxed). The Known gap about it is removed.
+  - p. 6 (signature block): wrapped office lines ("P.L.C.", "Midland County, MI and Gladwin County, MI") fell back to the column edge instead of the 0.5em indent; each line now wraps under its own indent. Same rule on the cover counsel block.
+  - "§§ 324.31506" could break between the two signs (the no-break rule matched one sign only); the rule is now `[§¶]+ \S+`. It did not break in this sample.
+- Remaining gaps: as in Known gaps above. The latex PDF was re-rendered (14 pages) but its template still counts the oral-argument statement (1,199); the docx outputs were not touched (no LibreOffice in this box) and also say 1,199. The disclosure page carries no page number, while the opening brief numbers its disclosure page i.

@@ -42,6 +42,9 @@
 
 /// Render an inline markdown string (italics etc.) as inline content.
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+/// An italic address or role line, indented under a name; a line too long for its column wraps
+/// with the same indent. The block gap equals the single-spaced line gap around it.
+#let indented-line(s) = block(above: single-leading, below: single-leading, pad(left: 0.5em, emph(inl(s))))
 
 /// Plain text of a piece of content, for comparisons only.
 #let plain(c) = {
@@ -349,7 +352,7 @@
         for n in g.names { n; linebreak() }
         let lines = g.at("lines", default: ())
         if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
-        for l in lines { h(0.5em); emph(inl(l)); linebreak() }
+        for l in lines { indented-line(l) }
       })
     }
   }))
@@ -397,7 +400,7 @@
   [#signature-line(meta)]
   linebreak()
   upper(sig.signer)
-  for l in sig.at("lines", default: ()) { linebreak(); h(0.5em); emph(inl(l)) }
+  for l in sig.at("lines", default: ()) { indented-line(l) }
 }
 
 #let signature-block(meta) = {
@@ -435,7 +438,7 @@
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
   [I certify that this brief complies with the type-volume limitation of Fed. R. App. P. #word-limit-rule.at(basis). Exclusive of the items exempted by Fed. R. App. P. 32(f), the brief contains #group-digits(words) words.]
   parbreak()
-  [The brief has been prepared in a proportionally spaced typeface, #font-family in #str(int(type-size / 1pt))-point type, which complies with Fed. R. App. P. 32(a)(5) and (6).]
+  [The brief has been prepared in a proportionally spaced typeface, #font-family in #box[#str(int(type-size / 1pt))-point] type, which complies with Fed. R. App. P. 32(a)(5) and (6).]
   cert-block(signature-block-compact(meta))
 }
 
@@ -493,7 +496,16 @@
   let prelim-md = body-md.slice(0, cut)
   let main-md = body-md.slice(cut)
 
-  let words = count-words(body-md)
+  // FRAP 32(f) excludes the statement regarding oral argument from the count: drop any
+  // top-level section whose heading names oral argument before counting.
+  let bounds = top-starts + (body-md.len(),)
+  let counted-md = body-md.slice(0, bounds.first())
+  for i in range(top-starts.len()) {
+    let sec = body-md.slice(bounds.at(i), bounds.at(i + 1))
+    let first-line = sec.split("\n").first()
+    if first-line.match(regex("(?i)oral argument")) == none { counted-md += sec }
+  }
+  let words = count-words(counted-md)
   let limit = word-limits.at(basis)
   if words > limit {
     panic("ca6-brief: the brief has " + str(words) + " words; the " + basis + " limit is " + str(limit))
@@ -535,7 +547,7 @@
   // ("60(b)(5)"), and never between a section sign / pilcrow and its number. Done with
   // unbreakable boxes so the extracted text stays exactly the author's characters.
   show regex("\\S*\\)\\(\\S*"): it => box(it)
-  show regex("[§¶] \\S+"): it => box(it)
+  show regex("[§¶]+ \\S+"): it => box(it)   // keep "§ 12" and "§§ 12" whole: no break inside or after the sign
   show heading: style-heading
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {
