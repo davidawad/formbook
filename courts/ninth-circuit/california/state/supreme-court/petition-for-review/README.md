@@ -2,7 +2,7 @@
 
 Doc-type folder for the California Supreme Court (`cal`, `courts/ninth-circuit/california/state/supreme-court/`). It is self-contained: exemplars, sample, template, and this README. The court root's `typst/` and `samples/` (other doc types) are not touched.
 
-Status: exemplar found (two filed petitions); typst template renders the sample with no warnings; overlay generated against the primary exemplar; every page of the sample rendered and inspected (13 of 13). Latex and docx engines are not built for this doc type.
+Status: exemplar found (two filed petitions); typst template renders the sample with no warnings; overlay generated against the primary exemplar; every page of the sample rendered and inspected (13 of 13; again on 2026-10-16, see "Verification pass"). Latex and docx engines are not built for this doc type.
 
 ## Folder
 
@@ -51,7 +51,7 @@ Verified 2026-10-14 against the courts.ca.gov rule pages (the "California Rules 
 | [8.74(b)(2)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | Text 1.5-spaced (footnotes, headings, subheadings, quotations may be single). | Same as 8.204(b)(5). |
 | [8.74(b)(3)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | Margins 1½ in left/right, 1 in top/bottom. | Same as 8.204(b)(6). |
 | [8.74(b)(4)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | Left-aligned, not justified. | `justify: false` everywhere. |
-| [8.74(c)(1)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | The cover of a brief states its title, the trial court and Court of Appeal numbers, the trial court name and judges, and each party represented. | Cover: "PETITION FOR REVIEW", frontmatter `court_of_appeal:`, `trial_court:`, `judge:`, `counsel:` (CAL-COVER-001). |
+| [8.74(c)(1)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_74) | The cover of a brief states its title, the trial court and Court of Appeal numbers, the trial court name and judges, and each party represented. | Cover: "PETITION FOR REVIEW", frontmatter `court_of_appeal:`, `trial_court:`, `judge:`, `counsel:`, and the party represented from `represents:` (CAL-COVER-001). |
 | [8.25(a)(1)–(2)](https://www.courts.ca.gov/cms/rules/index/eight/rule8_25) | Serve each separately represented party and any other person required; attach a proof of service showing each person served and each party each attorney represents. | `proof-of-service()` from frontmatter `service:` (CAL-SERV-001). |
 | [8.208](https://www.courts.ca.gov/cms/rules/index/eight/rule8_208) | Certificate of interested entities or persons. Its scope is principal briefs and filings in the Court of Appeal in civil appeals; the rule text does not address Supreme Court petitions. | **Not generated** (see Known gaps). |
 
@@ -73,7 +73,8 @@ A sample is one `.md` file: a YAML frontmatter block, then the body. The templat
 | `judge` | no | Cover, the trial judge. |
 | `caption` | yes | Two sides, each `names` (list, inline markdown allowed) and `designation` (right-aligned). "v." is inserted between the sides. Must match the Court of Appeal opinion (rule 8.504(b)(7)). |
 | `counsel` | yes | Cover counsel block (rule 8.74(a)(9)). Each group: `names` (with SBN, as printed) and `lines`. |
-| `phone` | yes | Appended to the last counsel group. |
+| `phone` | yes | Appended to the last counsel group as "Telephone: …". |
+| `represents` | yes | Cover line under the counsel block, in italics, naming the party represented (rule 8.74(c)(1)). |
 | `signature` | yes | `signer` (printed as `/s/ Name`, then in capitals) and `lines` under it. Used after the Conclusion and on each certificate. |
 | `date` | yes | Cover (bottom left), "Dated:" lines, the certificate and the proof of service. |
 | `service` | yes | Proof of service. Each entry: `party`, `names` (optional), `lines` (optional), `method`. |
@@ -104,7 +105,16 @@ The word count in the certificate is computed from the body markdown (headings, 
 
 `samples/OVERLAY-quach-s275121.pdf` puts each sample page (red) over the exemplar page it matches (blue); black is where both agree. Pages are paired by word overlap (`-overlay.txt`), not by index. It is a diagnostic, not a score. Read it page by page.
 
-The pairing in the current render (TeX Gyre Schola; `-overlay.txt`): sample p.1 with filed p.1 (cover, 80%); p.2 (TOC) with filed p.2 (47%); p.3 (TOA) with filed p.5 (30%); the issues page (sample p.4) with filed p.8 (87%); the sample's pages 5 to 7 with filed pages 9 to 11 (78% to 81%); sample pages 8 to 13 with filed pages 14, 23, 24, 26, 42 and 78 (39% to 76%). The filed exemplar's body starts on p.8 and ours on p.4, because our TOC and TOA are shorter (they list only what the portion cites). The lower overlaps (sample pp.11 and 12, 39% and 52%) are where the sample skips exemplar text between the parts it transcribed, so the paired filed page holds text the sample does not have. Sample pages 12 and 13 are the certificate of compliance and the proof of service; they pair with filed pages 42 and 78, which are the exemplar's own certificate and proof of service.
+The pairing in the current render (TeX Gyre Schola; `-overlay.txt`): sample p.1 with filed p.1 (cover, 84%); p.2 (TOC) with filed p.2 (47%); p.3 (TOA) with filed p.5 (30%); the issues page (sample p.4) with filed p.8 (87%); the sample's pages 5 to 7 with filed pages 9 to 11 (78% to 81%); sample pages 8 to 13 with filed pages 14, 23, 24, 26, 42 and 78 (38% to 76%). The filed exemplar's body starts on p.8 and ours on p.4, because our TOC and TOA are shorter (they list only what the portion cites). The lower overlaps (sample pp.11 and 12, 38% and 58%) are where the sample skips exemplar text between the parts it transcribed, so the paired filed page holds text the sample does not have. Sample pages 12 and 13 are the certificate of compliance and the proof of service; they pair with filed pages 42 and 78, which are the exemplar's own certificate and proof of service.
+
+## Verification pass 2026-10-16 (fb-595.26.15)
+
+- Rendered `samples/INPUT-quach-s275121.md` with `tools/render.sh` (typst): exit 0, no warnings, 13 pages before and after the fixes (the committed OUTPUT was not stale in page count). Fonts (`pdffonts`): TeX Gyre Schola regular, bold, italic, embedded, nothing else.
+- Viewed all 13 pages at 60 dpi before the fixes and all 13 again after them. Compared the exemplar's page 1 with our cover. Overlay re-run against the Quach exemplar and all 13 overlay pages viewed: pairing as in "Overlay" above (cover 84%).
+- Fixed, page 1 (cover): the counsel block sat in a column fixed at half the text width, so "(SBN 266728)", "(SBN 323482)" and "Suite 300" wrapped onto lines of their own. It now sits against the right margin and is as wide as its widest line (at least half the text width), as in the exemplar. The address lines are upright (they were italic), the telephone carries "Telephone:", and the party represented is printed under the block (new required field `represents`, rule 8.74(c)(1)); the cover had no "Attorneys for …" line before.
+- Fixed, page 2 (TOC): a wrapped entry ("Following Morgan, … Applies to") ran into the page-number column. Page numbers now sit in their own column; wrapped lines stop short of it.
+- Fixed, pages 11 to 13 (signature blocks): same column fix as the cover, so "Attorneys for Plaintiff-Petitioner Peter Quach" no longer wraps.
+- Not changed: tier 3 differences the overlay shows (the exemplar's small-capital counsel names, its tabular proof of service, the full counsel block under its certificate signature). Known gaps below are unchanged.
 
 ## Known gaps
 

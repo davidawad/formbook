@@ -27,7 +27,6 @@ signature:
   signer: "Kaiya Pirolo"
   role: "Attorney for Appellant Scotlane McCune"
 certificate_role: "appointed counsel for Scotlane McCune"
-word_processor: "Microsoft Word"
 date: "December 30, 2022"
 service:
   declarant: "Kaiya Pirolo"
