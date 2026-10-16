@@ -5,6 +5,9 @@
 # the exemplar. The authorities are real but were not checked against the reporters; pin cites are placeholders.
 docket: "KA 26-00000"
 index_number: "Ind. No. 2025-0000"
+argument:
+  presenter: "Jane Counsel"
+  time_requested: "10 minutes"
 caption:
   - names: ["THE PEOPLE OF THE STATE OF NEW YORK,"]
     designation: "Respondent,"
@@ -16,6 +19,7 @@ counsel:
   - names: ["EXAMPLE COUNTY PUBLIC DEFENDER"]
     lines: ["*Attorney for Defendant-Appellant*", "100 Example Street", "Rochester, New York 14600"]
 phone: "(585) 555-0100"
+email: "counsel@example.org"
 signature:
   signer: "Jane Counsel"
   lines: ["Assistant Public Defender", "100 Example Street", "Rochester, New York 14600", "(585) 555-0100", "counsel@example.org"]
@@ -37,9 +41,6 @@ authorities:
     kind: case
     name: "Strickland v. Washington"
     cite: "466 U.S. 668 (1984)"
-  cpl710:
-    kind: statute
-    cite: "CPL 710.60"
   cpl470:
     kind: statute
     cite: "CPL 470.15 (6) (a)"

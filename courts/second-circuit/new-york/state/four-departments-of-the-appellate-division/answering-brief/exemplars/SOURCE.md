@@ -1,10 +1,56 @@
 # Exemplar source: Appellate Division answering brief (respondent's brief)
 
-**Result: no exemplar. BLOCKED: no exemplar.** No `FILED-EXAMPLE-*.pdf` is saved in this folder. No filed answering brief (brief for respondent / defendant-respondent / plaintiff-respondent) of any of the four Departments of the Appellate Division could be downloaded from a public source during this search.
+**Result: one filed exemplar saved (search pass 2026-10-16, fb-595.26.22).** `FILED-EXAMPLE-nycla-2022-03908-answering-brief.pdf`. The earlier passes (2026-10-14, 2026-10-15) found none; their record is kept below.
 
-Date of searches: 2026-10-14.
+## Exemplar 1
 
-## Documents found and not used
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-nycla-2022-03908-answering-brief.pdf` (52 pages, US letter, text layer present; made in Microsoft Word 2019, NYSCEF stamp added with iText; `pdffonts`: Times New Roman family embedded, Bookman Old Style, Arial Bold, Courier for the stamp) |
+| Case | *New York County Lawyers Association, et al. v. The State of New York, et al.* (plaintiffs-respondents: the bar associations; defendant-respondent: the State; defendants-appellants: the City of New York, its Department of Finance and its Commissioner) |
+| Court | Supreme Court of the State of New York, Appellate Division, **First** Department |
+| Docket | Appellate No. 2022-03908 (New York County Clerk's Index No. 156916/2021); NYSCEF Doc. No. 17 |
+| Document | "Brief for Plaintiffs-Respondents" (cover: "To be argued by: Michael J. Dell, Esq., 15 minutes requested") |
+| Filer | Kramer Levin Naftalis & Frankel LLP (Michael J. Dell, Jason M. Moff, Nathan Schwartzberg), attorneys for plaintiffs-respondents |
+| Date filed | 2023-04-19 (NYSCEF header "FILED: APPELLATE DIVISION - 1ST DEPT 04/19/2023 08:35 PM"; cover and signature dated April 19, 2023) |
+| URL | <https://www.nycla.org/wp-content/uploads/2023/04/2022_03908_NEW_YORK_COUNTY_LAWYER_v_NEW_YORK_COUNTY_LAWYER_RESPONDENT_S_BRIEF_17.pdf> (posted by NYCLA, a party; a copy of the NYSCEF document) |
+| Date fetched | 2026-10-16 (plain `curl`, no special headers) |
+| sha256 | `95941c8b6d6249c2b7acf1c30103d197e066076acb992728ca2e52cf4d6ad520` |
+
+**Public record.** A brief filed on NYSCEF in a public appeal, reposted by a party without access control.
+
+**Department caveat.** First Department. Part 1250 applies to all four Departments, so the doc type and the governing rule match; Department-specific practice (Part 600 for the First, Part 1000 for the Fourth) is not settled by it.
+
+**Limit.** The court banner on the cover ("Supreme Court of the State of New York, Appellate Division—First Department") is an image, so `pdftotext` does not return it; it is visible on the rendered page.
+
+### What the exemplar shows
+
+- Cover: NYSCEF header; "To be argued by / 15 minutes requested" upper right (1250.8(a)); the index number; "APPELLATE NO.:" to the right of the caption; a three-part caption (plaintiffs-respondents, "—against—" the State as defendant-respondent, "—and—" the City defendants-appellants); title "BRIEF FOR PLAINTIFFS-RESPONDENTS"; counsel, address, telephone and three email addresses lower right; date lower left.
+- TOC (`-i-`) with "Page" heading, dot leaders; sections in capitals; Counterstatement of Facts sub-headings A.–D.; Argument points I., II. in capitals, II.A–C in title case. TOA (`-ii-` to `-v-`): "Cases", "Statutes", "Other Authorities"; case name in italics, citation on an indented second line; `passim` for heavily cited authorities.
+- Body from arabic 1 (`- 1 -`): an untitled opening paragraph, then Preliminary Statement, Counterstatement of Question Presented, Counterstatement of Facts, Argument (an untitled standard-of-review paragraph, then points), Conclusion, signature block. Double-spaced Times New Roman 14; block quotations single-spaced and indented; footnotes single-spaced.
+- Last page: Printing Specifications Statement (Times New Roman, 14, double, 10,394 words). No proof of service in this copy.
+
+## Search pass 2026-10-16 (fb-595.26.22)
+
+1. WebSearch: ag.ny.gov Fourth Department "Brief for Respondent": forms and decisions only.
+2. WebSearch: "Brief for Respondents" "22 NYCRR 1250.8": forms, rules, motion decisions.
+3. DocumentCloud search API with curl: blocked by Cloudflare.
+4. WebSearch: "Brief for Respondent" "Printing Specifications Statement" filetype:pdf: Second Department blank forms and guides.
+5. WebSearch: NYCLU Fourth Department respondent brief: an ACLU amicus page and decisions.
+6. WebSearch: ag.ny.gov Third Department briefs: AG-hosted decisions and orders only.
+7. WebSearch: "Brief for Respondent" "Fourth Judicial Department" 2022–2024: returned the NYCLA brief above (saved).
+8. WebSearch: "FILED: APPELLATE DIVISION - 4TH DEPT" brief respondent: decisions, rules, out-of-state briefs.
+9. WebSearch: Fourth Department respondents' brief on wp-content hosts: only *Behler v. Tao* (Court of Appeals; host returns 403).
+10. WebSearch / WebFetch: statecourtreport.org (Oneida County election case): Court of Appeals filings only; the Fourth Department respondents' brief is not posted.
+11. WebSearch: "4TH DEPT" "RECEIVED NYSCEF" respondents: one Fourth Department amicus filing (CA 23-00179), not a respondent's brief.
+12. curl <https://www.nyclu.org/uploads/2022/11/brief.pdf>: downloads, but it is a Second Department appellant's brief (No. 2022-04443). Not used.
+13. WebSearch: Fourth Department "Brief for Plaintiffs-Respondents" / "Defendants-Respondents" from Rochester and Buffalo firms; DA "Attorney for Respondent" KA briefs; courthousenews uploads: decisions only.
+
+No Fourth Department respondent's brief was found that can be downloaded.
+
+## Earlier passes (2026-10-14, 2026-10-15): no exemplar found then
+
+### Documents found and not used
 
 | Document | URL | Why not used |
 |---|---|---|
@@ -13,7 +59,7 @@ Date of searches: 2026-10-14.
 | *Hurrell-Harring v. State of New York*, Reply Brief for Plaintiffs-Appellants, Court of Appeals, 2010 | <https://www.nyclu.org/uploads/2008/05/Reply-Brief-for-Plaintiffs-Appellants.pdf> | Wrong court and wrong doc type (reply). |
 | NYLS Digital Commons, `maynard_briefs` (1971 First Department brief) | <https://digitalcommons.nyls.edu/maynard_briefs> | Defendant-appellant brief, not an answering brief; not downloaded. |
 
-## Second search pass, 2026-10-14 (fb-595.32.2)
+### Second search pass, 2026-10-14 (fb-595.32.2)
 
 **Candidate found, not saved.** A First Department brief matches the doc type and court:
 
@@ -32,7 +78,7 @@ Other searches in this pass (no App Div answering brief returned):
 7. Web: trellis.law briefs with the App Div and index number. No trellis.law hits.
 8. CourtListener API, RECAP, `court=nyappdiv`, "brief for defendant-respondent": zero results. nycourts.gov (Fourth Department clerk) returned HTTP 403.
 
-## Searches tried (no answering brief found)
+### Searches tried (no answering brief found)
 
 1. Web search: Fourth Department "brief for respondent" PDFs, 2024 (standard). Returned only Fourth Department motion decisions on assigned counsel, not briefs.
 2. Web search: 22 NYCRR 1250.8 typeface and word-count rules (standard). Returned printing-specifications forms (AD2, AD3) but not the full rule text.
@@ -44,16 +90,11 @@ Other searches in this pass (no App Div answering brief returned):
 8. CourtListener API, `type=r` (RECAP), `court=nyappdiv`, query "brief for respondent": zero results. CourtListener's HTML search page returned HTTP 403.
 9. Direct fetch of the nycourts.gov AD3 printing-specifications form: HTTP 403.
 
-## Rule source (not an exemplar)
+### Rule source (not an exemplar)
 
 22 NYCRR 1250.8 was read from the Cornell LII copy: <https://www.law.cornell.edu/regulations/new-york/22-NYCRR-1250.8>, fetched 2026-10-14. LII marks the section as adopted 9/17/2018 (New York State Register, October 31, 2018). The official nycourts.gov copy was not reachable from this box. See `../README.md`.
 
-## Next steps for whoever retries
-
-- A respondent's brief in an Appellate Division appeal that is filed on NYSCEF (public records are sometimes viewable without login), or posted by the Attorney General, a public-interest firm, or a law-school clinic. Confirm the Department, the docket number and the filer from the cover.
-- Once a text-layer PDF is saved here, name it `FILED-EXAMPLE-<short-case>-<docket>-answering-brief.pdf`, record the filer and date here, and re-run `sh tools/overlay.sh` on this folder.
-
-## Search pass, 2026-10-15 (fb-595.20.13)
+### Search pass, 2026-10-15 (fb-595.20.13)
 
 No respondent's brief from any Department was found. Searches, all public sources:
 
