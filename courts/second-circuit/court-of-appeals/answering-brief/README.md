@@ -30,7 +30,7 @@ Same as the Ninth Circuit template (`courts/ninth-circuit/court-of-appeals/READM
 - Body: `# Heading` (level 1) is a section. The sections of an appellee's brief are, in order: Jurisdictional Statement (optional, FRAP 28(b)(1)), Counterstatement of Issues Presented for Review (optional, 28(b)(2)), Counterstatement of the Case (optional, 28(b)(3)), Summary of the Argument (required, 28(a)(7) via 28(b)), Argument (required, 28(a)(8) via 28(b)), Conclusion (required, 28(a)(9) via 28(b)). The template does not refuse a brief that omits the optional sections; it does not check the required ones either. That check is a gap (see below).
 - Under `# Argument`, level 2 is a centered point heading (I., II.), level 3 is A., level 4 is 1., level 5 is a. Elsewhere level 2 is A., level 3 is 1.
 - Footnotes, block quotes, italics for case names, and `toa:KEY` links work as in ca9.
-- Word limit: the template refuses a body over 13,000 words (see "Rules").
+- Word limit: the template refuses a body over 14,000 words (Local Rule 32.1(a)(4)(A); see "Rules").
 
 ## Rules
 
@@ -45,8 +45,8 @@ All text below was fetched from the court's site on 2026-10-14 unless marked oth
 | Paper 8½ × 11; double spacing (quotations over two lines may be single-spaced; headings and footnotes single-spaced); margins at least 1 inch on all four sides. | FRAP 32(a)(4) | 2026-10-14 | `page-margin = 1in`, `body-leading` |
 | Proportionally spaced serif face, 14-point or larger (sans only in headings and captions). No face is named: the court's page gives "Times New Roman" only as an example ("Proportionally spaced typeface such as \"Times New Roman\" must be 14-point or larger"). Substitute: none; the template keeps EB Garamond (`docs/FONTS.md`: no face named). | FRAP 32(a)(5)(A); the court's civil-case brief page, verified 2026-10-15 | 2026-10-15 | `type-size = 14pt`, `font-family = "EB Garamond"`; checked by `pdffonts` |
 | Plain roman type style; case names italicized or underlined. | FRAP 32(a)(6) | 2026-10-14 | cmarker italics |
-| Length: principal brief not over 30 pages, unless it is within the type-volume limit; type-volume: no more than 13,000 words (reply: half). | FRAP 32(a)(7)(A)–(B)(i)–(ii) | 2026-10-14 | `type-volume-limit = 13000`; the template panics above it |
-| Length conflict: the court's civil-case page says a principal brief "must not exceed 30 pages or 14,000 words" and cites Local Rule 32.1 (not fetched). | Court's civil-case brief page | 2026-10-14 | the stricter FRAP figure is used |
+| Length: principal brief not over 30 pages, unless it is within the type-volume limit; type-volume: no more than 13,000 words (reply: half). | FRAP 32(a)(7)(A)–(B)(i)–(ii) | 2026-10-14 | superseded by Local Rule 32.1(a)(4)(A) (next row) |
+| Local Rule 32.1(a): briefs conform to FRAP 32(a) "except as set forth below"; (a)(1) the cover title names the party, and "the docket number of the case must appear in type at least one inch high"; (a)(4)(A) a principal brief "is acceptable if it contains no more than 14,000 words". | 2d Cir. Local Rule 32.1, https://www.ca2.uscourts.gov/clerk/case_filing/rules/title7/local_rule_32_1.html | 2026-10-16 | `docket-size = 72pt` (cover); `type-volume-limit = 14000`; certificate cites FRAP 32(a)(7)(B) and LR 32.1(a)(4)(A) |
 | Excluded from the count: cover, disclosure statement, TOC, TOA, oral-argument statement, addendum, certificates, signature block, proof of service. Headings, footnotes and quotations are counted. | FRAP 32(f) | 2026-10-14 | `count-words` on the body only |
 | Certificate of compliance, Form 6 wording (type-volume and typeface). | FRAP 32(g), form in the Appendix of Forms | 2026-10-14 (rule); Form 6 wording taken from the exemplar's certificate | `certificate-of-compliance` |
 | Addendum of statutes, rules, regulations: in the brief's addendum at the end. | FRAP 28(f) | 2026-10-14 | `# Addendum` handling (Add-1 pages) |
@@ -81,10 +81,10 @@ Rendered at `pdftoppm -r 60` and read page by page: 12 of 12 pages reviewed.
 2. **No corporate disclosure statement.** FRAP 26.1 disclosure is required for a nongovernmental corporate party. The template does not generate one. The exemplar has none (individual filer).
 3. **No statement regarding oral argument.** The exemplar has none. The template does not generate one.
 4. **Required sections are not checked.** The template does not refuse a brief missing Summary of the Argument, Argument, or Conclusion. A check belongs in `ca2-answering-brief` before the body is rendered.
-5. **Word limit conflict.** The court's page says 14,000 words; FRAP 32(a)(7)(B)(i) says 13,000. The template enforces 13,000.
+5. **Word limit.** Resolved 2026-10-16: Local Rule 32.1(a)(4)(A) (fetched) sets 14,000 words for a principal brief and displaces FRAP 32(a)(7)(B)(i)'s 13,000 ("except as set forth below"). The template enforces 14,000, as the opening brief does.
 6. **Typeface.** The exemplar is Times New Roman. Neither FRAP 32 nor Local Rule 32.1 names a face, so the template keeps the vendored EB Garamond (no substitute switch), at 14 pt, which satisfies FRAP 32(a)(5)(A). A filer who reads the court page's "such as \"Times New Roman\"" as a requirement would switch to Liberation Serif (metric-compatible, `docs/FONTS.md`); that is a decision for David. The certificate says "Typst in 14-point EB Garamond" (the program that set the type), not Word.
 7. **Sample is a portion.** The sample transcribes the cover, counterstatement, summary, standard of review, part of Argument I.A, the conclusion, and both certificates. It ends mid-sentence on the exemplar's page 22 and says so. It is not the filed brief's full 48 pages.
-8. **Local Rule 32.1 not fetched.** The court's page cites Local Rule 32.1 and 25.1 without giving their text. The template relies on FRAP 32 and the court's summary.
+8. **Local Rule 32.1 fetched 2026-10-16** (court rule page). Only (a), (a)(1) and (a)(4)(A) are used. The docket number is set at 72 pt (one inch type size); the cap-height reading (about 105 pt) is the same open question as in the reply brief's README.
 9. **Counsel lines.** The role line ("Counsel for the Defendant-Appellee ...") prints after the email, where the exemplar prints the telephone number before it.
 
 ## Engines (latex, docx)
@@ -93,3 +93,13 @@ Built by `latex/` (`template.tex` + `ca2.lua`, the same template as the other do
 
 - **latex** (`samples/OUTPUT-finkelman-answering-brief.latex.pdf`, 13 pages; typst: 12). Matches: the cover and its counsel block, the heading structure and labels, contents and authorities with computed page numbers, the certificates (type-volume and typeface wording; certificate of service because `service.certificate: true`), certificate word count 1,428 (same as typst). Differs: one page longer than typst, from the heading spacing in the Counterstatement; the cover spreads less.
 - **docx** (`samples/OUTPUT-finkelman-answering-brief.docx`, `.docx.pdf` 13 pages). Matches: the cover, sections and numbering, styles, certificates, word count 1,428. BLOCKED: `DOCX-TOC-PAGES` and `DOCX-TOA-PAGES` (contents and authorities have no page numbers; see the opening brief's README).
+
+## Verification pass 2026-10-16 (fb-595.26.2)
+
+- Re-rendered `INPUT-finkelman-answering-brief.md` with `tools/render.sh`: exit 0, no warnings, 12 pages (the committed PDF was not stale: same text and page count). Fonts: EB Garamond Regular/Bold/Italic only.
+- Viewed all 12 pages at 60 dpi, the exemplar's page 1, and all 12 overlay pages at 40 dpi. The overlay pairing is unchanged (cover 91.8%, body 73-91%, TOC/TOA 35%/18%, certificates 45-49%).
+- Fixed (tier 1): the cover printed the docket number at 14 pt; Local Rule 32.1(a)(1) requires type at least one inch high. Now `docket-size = 72pt` (typst) and `\fontsize{72}{80}` (latex `ca2.lua`). The cover still fits one page.
+- Fixed (tier 1): the word limit was 13,000 (FRAP); Local Rule 32.1(a)(4)(A), now fetched, sets 14,000 for a principal brief. Limit and certificate wording (FRAP 32(a)(7)(B) and LR 32.1(a)(4)(A)) updated in typst and latex.
+- Fixed (tier 2): the table of authorities sorted numbers as text ("10 U.S.C." before "9 U.S.C."); the sort key now compares digit runs by value. No visible change in this sample's order.
+- Latex re-rendered (13 pages) and every page viewed. Open latex defects, not fixed: the "Counterstatement of the Case" heading stands alone at the foot of page 2 and the Point I heading at the foot of page 6 (headings not kept with the next paragraph); the counsel block wraps "PLLC" and the role line.
+- Still open: gaps 1-4, 6, 7, 9 above; the counsel role line still prints before the telephone (it is in the sample's `lines`).

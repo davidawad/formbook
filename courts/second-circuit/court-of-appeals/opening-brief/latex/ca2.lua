@@ -189,7 +189,8 @@ local function cover(m)
     and "IN THE UNITED STATES COURT OF APPEALS\\\\FOR THE SECOND CIRCUIT"
     or "IN THE\\\\United States Court of Appeals for the Second Circuit"
   add("\\thispagestyle{empty}")
-  add("{\\centering\\briefsingle\\bfseries No.\\ " .. tex(need(m, "case_number")) .. "\\par}")
+  -- Local Rule 32.1(a)(1): docket number "in type at least one inch high" (72 pt = 1 in).
+  add("{\\centering\\bfseries\\fontsize{72}{80}\\selectfont " .. tex(need(m, "case_number")) .. "\\par}")
   add("\\vspace{7pt}\\briefdouble" .. GAP)
   add("{\\centering\\briefsingle\\bfseries " .. court .. "\\par}")
   add(RULE)

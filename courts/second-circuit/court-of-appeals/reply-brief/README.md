@@ -133,3 +133,11 @@ Built by `latex/` (`template.tex` + `ca2.lua`, `DOC = "reply"`) and `docx/` (`re
 
 - **latex** (`samples/OUTPUT-lowe-reply-brief.latex.pdf`, 14 pages; typst: 14). Matches: the cover with counsel in two columns, the contents and authorities (computed page numbers), the Introduction and Argument headings, the signature block with the date, the certificates of compliance and service (reply wording), word count 1,635. Differs: the cover has no short rules between its parts (the typst cover's rules were dropped to keep it on one page); the typst count is 1,634 against 1,635 here, because typst's counter and the rule text disagree by one token and this count follows the rule.
 - **docx** (`samples/OUTPUT-lowe-reply-brief.docx`, `.docx.pdf` 14 pages). Matches: the cover on one page (counsel in two columns), sections and numbering, the certificates, word count 1,635. BLOCKED: `DOCX-TOC-PAGES` and `DOCX-TOA-PAGES` (see the opening brief's README).
+
+## Verification pass 2026-10-16 (fb-595.26.2)
+
+- Re-rendered `INPUT-lowe-reply-brief.md` with `tools/render.sh`: exit 0, no warnings, 14 pages (the committed PDF was not stale: same text and page count). Overlay rerun against the Lowe exemplar; the page map is unchanged.
+- Viewed all 14 pages at 60 dpi, the exemplar's page 1, and all 14 overlay pages at 40 dpi. The cover's 72 pt docket number already met Local Rule 32.1(a)(1).
+- Fixed (tier 2): the table of authorities listed "10 U.S.C. § 987(f)(4)" before the "9 U.S.C." entries (text sort). The sort key now compares digit runs by value; statutes read 9 U.S.C. § 2, § 16(a), § 402(a), then 10 U.S.C. § 987(f)(4).
+- Latex re-rendered (14 pages) and every page viewed. Open latex defects, not fixed: the contents entry for II.A puts its page number past the right margin; statutes still sort as text; the certificate of service's "Date" line is blank; the footnote on page 5 is set close below the text.
+- Still open: the known gaps above (authorities page iii holds one entry; the signature lists the signer only; portion of the brief).

@@ -20,8 +20,9 @@
 #let para-indent = 0.5in
 #let toc-depth = 4
 #let passim-threshold = 7                  // authority cited on this many pages or more: "passim"
-#let type-volume-limit = 13000             // CA2-LEN-001: FRAP 32(a)(7)(B)(i). The court's brief page says 14,000
-                                           // for principal briefs; the stricter FRAP figure is enforced here.
+#let type-volume-limit = 14000             // CA2-LEN-001: 2d Cir. Local Rule 32.1(a)(4)(A), principal brief (the local rule
+                                           // replaces FRAP 32(a)(7)(B)(i)'s 13,000; LR 32.1(a): "except as set forth below").
+#let docket-size = 72pt                    // CA2-COVER-001: Local Rule 32.1(a)(1), docket number "in type at least one inch high" (72 pt = 1 in).
 #let court-name = "United States Court of Appeals for the Second Circuit"  // CA2-COVER-002
 #let software = "Typst"                     // certificate of compliance: the program that set the type (Form 6)
 
@@ -242,7 +243,8 @@
   ("other", "Other Authorities:"),
 )
 
-#let sort-key(a) = lower(plain(inl(a.at("sort", default: a.at("name", default: "") + " " + a.cite))))
+/// Sort key: case-insensitive, with digit runs compared by value ("9 U.S.C." before "10 U.S.C.").
+#let sort-key(a) = lower(plain(inl(a.at("sort", default: a.at("name", default: "") + " " + a.cite)))).replace(regex("\\d+"), m => "0" * calc.max(0, 10 - m.text.len()) + m.text)
     .replace(regex("[^a-z0-9 ]"), "")
 
 /// Table of authorities, built from the `toa:` links found in the body.
@@ -303,7 +305,7 @@
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
   set align(center)
   // FRAP 32(a)(2)(A): the number of the case, centered at the top.
-  strong[#need(meta, "case_number")]
+  text(size: docket-size, weight: "bold", need(meta, "case_number"))
   v(gap)
   // FRAP 32(a)(2)(B): the name of the court.
   strong[IN THE\ #court-name]
@@ -393,7 +395,7 @@
 #let certificate-of-compliance(meta, words) = {
   heading(level: 1, numbering: none)[Certificate of Compliance]
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
-  [This brief complies with the type-volume limitation of Fed. R. App. P. 32(a)(7)(B) because this brief contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. App. P. 32(f).]
+  [This brief complies with the type-volume limitation of Fed. R. App. P. 32(a)(7)(B) and Local Rule 32.1(a)(4)(A) because this brief contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. App. P. 32(f).]
   parbreak()
   [This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type style requirements of Fed. R. App. P. 32(a)(6) because this brief has been prepared in a proportionally spaced typeface using #meta.at("software", default: software) in 14-point #meta.at("typeface", default: "EB Garamond").]
   form-sig-line(meta)
@@ -435,7 +437,7 @@
   let add-md = if add == none { none } else { md.slice(add.end) }
   let words = count-words(body-md)
   if words > type-volume-limit {
-    panic("ca2-answering-brief: the brief has " + str(words) + " words; FRAP 32(a)(7)(B)(i) allows " + str(type-volume-limit))
+    panic("ca2-answering-brief: the brief has " + str(words) + " words; Local Rule 32.1(a)(4)(A) allows " + str(type-volume-limit))
   }
 
   // ---- document-wide settings ----

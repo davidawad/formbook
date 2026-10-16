@@ -219,7 +219,8 @@
   ((("other",), "Other Authorities:")),
 )
 
-#let sort-key(a) = lower(plain(inl(a.at("sort", default: a.at("name", default: "") + " " + a.cite))))
+/// Sort key: case-insensitive, with digit runs compared by value ("9 U.S.C." before "10 U.S.C.").
+#let sort-key(a) = lower(plain(inl(a.at("sort", default: a.at("name", default: "") + " " + a.cite)))).replace(regex("\\d+"), m => "0" * calc.max(0, 10 - m.text.len()) + m.text)
     .replace(regex("[^a-z0-9 ]"), "")
 
 /// Table of authorities, built from the `toa:` links found in the body.

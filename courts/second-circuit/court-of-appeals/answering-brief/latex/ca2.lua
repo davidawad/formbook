@@ -9,7 +9,7 @@
 --
 -- DOC selects the wording of the doc type's own template: "opening", "answering" or "reply".
 local DOC = "answering"
-local WORD_LIMIT = ({ opening = 14000, answering = 13000, reply = 7000 })[DOC]   -- Local Rule 32.1(a), FRAP 32(a)(7)(B)
+local WORD_LIMIT = ({ opening = 14000, answering = 14000, reply = 7000 })[DOC]   -- Local Rule 32.1(a), FRAP 32(a)(7)(B)
 local FIRST_ARG_LEVEL = 3  -- sub-heading indent steps start at level 3 inside the Argument (typst label-indent)
 
 -- Helpers
@@ -189,7 +189,8 @@ local function cover(m)
     and "IN THE UNITED STATES COURT OF APPEALS\\\\FOR THE SECOND CIRCUIT"
     or "IN THE\\\\United States Court of Appeals for the Second Circuit"
   add("\\thispagestyle{empty}")
-  add("{\\centering\\briefsingle\\bfseries No.\\ " .. tex(need(m, "case_number")) .. "\\par}")
+  -- Local Rule 32.1(a)(1): docket number "in type at least one inch high" (72 pt = 1 in).
+  add("{\\centering\\bfseries\\fontsize{72}{80}\\selectfont " .. tex(need(m, "case_number")) .. "\\par}")
   add("\\vspace{7pt}\\briefdouble" .. GAP)
   add("{\\centering\\briefsingle\\bfseries " .. court .. "\\par}")
   add(RULE)
@@ -336,7 +337,7 @@ local function certificate_of_compliance(m, words)
     body = "1.\\ This document complies with the type-volume limit of Fed.\\ R.\\ App.\\ P.\\ 32(a)(7)(B) and Local Rule 32.1(a) because, excluding the parts of the document exempted by Fed.\\ R.\\ App.\\ P.\\ 32(f): this document contains " .. n .. " words.\\par\n" ..
       "2.\\ This document complies with the typeface requirements of Fed.\\ R.\\ App.\\ P.\\ 32(a)(5) and the type style requirements of Fed.\\ R.\\ App.\\ P.\\ 32(a)(6) because: this document has been prepared in a proportionally spaced typeface using " .. typeface .. " in 14-point type.\\par\n"
   elseif DOC == "answering" then
-    body = "This brief complies with the type-volume limitation of Fed.\\ R.\\ App.\\ P.\\ 32(a)(7)(B) because this brief contains " .. n .. " words, excluding the parts of the brief exempted by Fed.\\ R.\\ App.\\ P.\\ 32(f).\\par\n" ..
+    body = "This brief complies with the type-volume limitation of Fed.\\ R.\\ App.\\ P.\\ 32(a)(7)(B) and Local Rule 32.1(a)(4)(A) because this brief contains " .. n .. " words, excluding the parts of the brief exempted by Fed.\\ R.\\ App.\\ P.\\ 32(f).\\par\n" ..
       "This brief complies with the typeface requirements of Fed.\\ R.\\ App.\\ P.\\ 32(a)(5) and the type style requirements of Fed.\\ R.\\ App.\\ P.\\ 32(a)(6) because this brief has been prepared in a proportionally spaced typeface using LaTeX in 14-point " .. typeface .. ".\\par\n"
   else
     body = "This brief complies with the type-volume limitation set forth in Local Rule 32.1(a)(4)(B) because it contains " .. n .. " words, excluding the parts of the brief exempted by Federal Rule of Appellate Procedure 32(f).\\par\n" ..
