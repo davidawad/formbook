@@ -95,11 +95,11 @@ Word count: 1,428 by the template; 1,428 by an independent `awk` count of the ma
 
 | ours | filed | word overlap |
 |---|---|---|
-| 1 (cover) | 1 | 60.2% |
+| 1 (cover) | 1 | 68.6% |
 | 2 (oral argument) | 14 | 77.7% |
 | 3 (contents) | 15 | 39.3% |
-| 4 (authorities) | 17 | 30.3% |
-| 5 (authorities, statutes) | 18 | 5.3% |
+| 4 (authorities) | 17 | 34.3% |
+| 5 (authorities, statutes) | 18 | 32.1% |
 | 6 (introduction) | 19 | 83.8% |
 | 7 (statement of the case) | 20 | 46.4% |
 | 8 (standard, summary) | 26 | 93.3% |
@@ -110,7 +110,7 @@ Word count: 1,428 by the template; 1,428 by an independent `awk` count of the ma
 | 13 (certificate of compliance) | 47 | 33.8% |
 | 14 (certificate of service) | 13 | 25.6% |
 
-The overlay is a diagnostic, not a score. Low overlap on the contents and the certificates is expected: the page pairing matches words, and the exemplar's contents and authorities pages list different page numbers and an extra CIP. Page 5 (overlap 5.3%) is the short statutes page, which pairs with an exemplar authorities page of different content. Page 14 pairs with exemplar page 13 (the exemplar's certificate of compliance) because the exemplar's text is on that page; the pairing is by word, so it is not the same certificate.
+The overlay is a diagnostic, not a score. Low overlap on the contents and the certificates is expected: the page pairing matches words, and the exemplar's contents and authorities pages list different page numbers and an extra CIP. Page 14 pairs with exemplar page 13 (the exemplar's certificate of compliance) because the exemplar's text is on that page; the pairing is by word, so it is not the same certificate.
 
 ## Gate 2: visual review
 
@@ -126,19 +126,20 @@ Open or accepted findings, by page:
 
 | Page | Finding | Status |
 |---|---|---|
-| 1 | Cover fits on one page; counsel block reads correctly. The lead counsel's firm name wraps on the cover. | ACCEPTED (column width is the cover's half-page indent, as in the ca9 template) |
+| 1 | Cover fits on one page; three counsel groups side by side, each with its own address and telephone (fixed 2026-10-16). Long firm names wrap within their column. | OK |
 | 2 | Statement Regarding Oral Argument on page i. | OK |
-| 3 | Contents: page numbers right, leaders present, subheading entries wrap with page numbers on the last line. | OK |
-| 4 | Table of Citations: no passim, every page listed. | OK |
-| 5 | Statutes group starts a new page (iv) with two entries. | ACCEPTED (each authority entry is kept whole, so the short statutes group moves to a new page; the layout is the same as ca9's) |
+| 3 | Contents: page numbers right, leaders present, subheading entries wrap with page numbers on the last line; double-spaced (fixed 2026-10-16). | OK |
+| 4 | Table of Authorities: no passim, every page listed; double-spaced (fixed 2026-10-16). | OK |
+| 5 | Authorities continue (three cases), then the Statutes group on the same page (iv). | OK |
 | 6 | Introduction and the start of the statement of the case, double-spaced, headings in place. | OK |
-| 6 | "Fla. Stat. § 97.0575(1)(f)" breaks between "Stat." and "§" at the line end. | OPEN (typographic: a non-breaking space in the markdown would fix it; the sample text is kept as filed) |
-| 7 | Procedural background, standard of review, summary: contents match the numbering. | OK |
+| 7 | "Fla. Stat. § 97.0575(1)(f)" breaks between "Stat." and "§" at the line end. | OPEN (typographic: a non-breaking space in the markdown would fix it; the sample text is kept as filed) |
+| 7 | End of the factual background; Procedural Background, II.A heading hanging; contents match the numbering. | OK |
 | 8 | Standard of Review and Summary of Argument. | OK |
 | 9–10 | Argument I.A: point and subheading placement, italic case names, citations in the body. | OK |
 | 11 | Footnote 1 (the exemplar's footnote 8) continues onto the next page. | ACCEPTED (footnote renumbered from the sample's position; a split footnote is normal typesetting) |
 | 12 | Conclusion; signature block with "s/" and capitals, lead counsel only. | ACCEPTED (one signer; the exemplar has three counsel signing as "/s/" on one line, which the template does not model) |
-| 13 | Certificate of compliance, Form 6 wording, word count. | OK |
+| 12 | Signature block: the firm line wraps and its second line ("P.A.") starts at the column edge, not under the indented firm name. | ACCEPTED (tier 2 cosmetic; one long firm name) |
+| 13 | Certificate of compliance, Form 6 wording, word count; double-spaced (fixed 2026-10-16). | OK |
 | 14 | Certificate of service, CM/ECF wording. | OK |
 
 Nothing is marked OK without a render and a look.
@@ -146,15 +147,26 @@ Nothing is marked OK without a render and a look.
 ## Known gaps
 
 1. **Typeface.** Decided 2026-10-14: the face required is none. FRAP 32(a)(5)(A) requires a proportionally spaced face with serifs, 14 pt or larger, and names no family (checked at Cornell LII). The Eleventh Circuit local-rule text could not be read here, so a local face cannot be ruled out. No substitute is needed and EB Garamond stays. The exemplar is set in Times New Roman 14 pt, one filer's choice (tier 3).
-2. **Overlay not run (2026-10-14).** `tools/overlay.sh` needs `exemplars/*.pdf`, which is absent from this snapshot (`exemplars/` holds only `SOURCE.md`). `samples/OVERLAY-naacp-v-byrd-25-12813.txt` is from an earlier pass; no overlay PDF exists.
 2. **CIP.** The exemplar includes its Certificate of Interested Persons inside the brief (pp. C-1 to C-12). 11th Cir. R. 26.1-1 requires it as a separate filing; the template does not produce one.
 3. **Excerpt.** The sample is a transcription of part of the brief: the cover, oral-argument statement, contents, authorities, introduction, the statement of the case (I and II.A only), standard of review, summary, Argument I.A (first part), conclusion, signature, certificates. The exemplar's body runs from page 1 to page 28, with certificates on page 29 of its own numbering. Statement II.B–C and Argument I.B–C and II are not transcribed.
 4. **Exemplar inconsistency.** The exemplar's Table of Citations gives *In re Griffiths* as 413 U.S. 719; its text gives 413 U.S. 717. The sample uses 717, the cite in the body.
 5. **Cross-references.** The exemplar's footnote 8 says "See supra at 6"; the sample says "See supra Statement of the Case," because page references in the sample do not match the exemplar's pagination. The footnote number is the sample's own (1), not the exemplar's (8).
-6. **Multiple counsel.** The cover lists three counsel and one lead signer. The template models one signer.
+6. **Multiple counsel.** The cover lists three counsel groups (two Elias Law Group offices and King, Blackwell) and one lead signer. The template models one signer.
 7. **Form 6 "word-processing program".** Form 6 asks for the program name and version; the certificate says "set with Typst 0.15.0" because that is the program that set the type.
 8. **Addendum, adoption statement, cross-appeal layout.** Template supports the addendum and the cross-appeal word limit; no sample exercises them, and the adoption statement (CA11-CONT-008) is not generated.
 9. **No gate.** `tools/check.sh` is not wired to this folder: no `checks.yaml`, no `rules.md`, no selftest. The checks above are by reading and by the word count.
+
+## Verification pass 2026-10-16 (fb-595.26.11)
+
+- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/answering-brief samples/INPUT-naacp-v-byrd-25-12813.md` exits 0, no typst warnings, 14 pages (the committed PDF also had 14). Fonts embedded: EB Garamond Regular, Italic, Bold only.
+- Viewed: all 14 pages at 60 dpi after each fix (the last time pages 2-14 as a contact sheet, since only the cover changed); the exemplar's page 1 against our cover; the 14 overlay pages at 40 dpi.
+- Overlay: rerun; `samples/OVERLAY-naacp-v-byrd-25-12813.pdf` and `.txt` rewritten (table above).
+- Defect fixed (tier 1): the Table of Contents, the Table of Authorities and the Certificate of Compliance were single-spaced. 11th Cir. R. 32-3 (HB, re-read 2026-10-16) allows single spacing only for the cover, the certificate of service, direct quotes, headings and footnotes, and names the two tables as double-spaced. Entries now use the body leading inside and between entries. The short Statutes page (iv) now carries the last three cases too.
+- Defect fixed (transcription, tier 1 on the cover): the sample put Abha Khanna at the Washington office and dropped two telephone numbers. The exemplar lists Khanna in Seattle with (206) 656-0177 and the Washington lawyers with (202) 968-4490. The sample now has three counsel groups, each with its telephone (FRAP 32(a)(2)(F)).
+- Defect fixed (tier 2): with three groups stacked in the right half, the cover only fitted with zero spacing and the rules touched the text. Two or more counsel groups now sit side by side across the full width (up to three per row), as the exemplar sets them; one group keeps the half-page indent.
+- latex: the same counsel layout added (`latex/template.tex`, `latex/ca11.lua`: `counsel_multi`); before it, the latex cover spilled onto a second page. `sh tools/render.sh --engine latex ...` exits 0, 14 pages; pages 1-2 viewed. The latex tables are still single-spaced: OPEN.
+- docx: not rebuilt (no LibreOffice on this box), so `OUTPUT-naacp-v-byrd-25-12813.docx` and `.docx.pdf` predate the corrected counsel lines and the double-spaced tables: OPEN.
+- Remaining gaps: one exemplar; no `checks.yaml`; the signature block's wrapped firm line; the rest of "Known gaps".
 
 ## Engines
 
@@ -163,7 +175,7 @@ outputs are `samples/OUTPUT-naacp-v-byrd-25-12813.latex.pdf`, `.docx` and `.docx
 
 - **latex** (`latex/template.tex`, `latex/ca11.lua`, `latex/render.sh`). Matches: EB Garamond 14 pt, double spacing,
   one-inch margins, the cover with its double rules, the statement regarding oral argument, the table of contents
-  (single spaced, as typst sets it) and the table of authorities with the capitalised group titles, the Form 6
+  (single spaced; typst now double-spaces it, see "Verification pass 2026-10-16") and the table of authorities with the capitalised group titles, the Form 6
   certificate of compliance, the certificate of service when `service.certificate` is set. Differs: line breaks and
   quotation spacing, so some body paragraphs fall one line apart from typst (14 pages both).
   The addendum (`Add-n` pages with its own table, the `# Addendum` heading) is written but this sample has none, so it is

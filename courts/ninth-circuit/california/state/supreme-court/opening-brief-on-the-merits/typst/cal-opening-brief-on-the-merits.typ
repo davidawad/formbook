@@ -158,9 +158,12 @@
 // ---------------------------------------------------------------------------
 
 #let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
+#let page-col = 2em   // the TOC's page-number column; wrapped title lines stop short of it
 
 /// One table-of-contents row, built from a heading element. The label sits where the heading's
-/// own label sits in the body, and wrapped lines hang under the title text.
+/// own label sits in the body, and wrapped lines hang under the title text. The title and its
+/// leader wrap in the left column; the page number sits in its own right-hand column, level with
+/// the last line, so no wrapped line runs into the page numbers.
 #let toc-entry(it) = {
   let hd = it.element
   let numbered = hd.numbering != none and hd.level >= 2
@@ -168,14 +171,15 @@
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(ind + heading-tab, {
-      h(ind)
-      if numbered { box(width: heading-tab, lab) }
-      title
-      h(0.6em)
-      dot-leader
-      box(width: 2.4em, align(right, it.page()))
-    })))
+    grid(columns: (1fr, page-col), column-gutter: 0.3em,
+      hang(ind + heading-tab, {
+        h(ind)
+        if numbered { box(width: heading-tab, lab) }
+        title
+        h(0.6em)
+        dot-leader
+      }),
+      align(right + bottom, it.page()))))
 }
 
 /// The table of contents lists the body's headings: the ones after `<body-start>` and before
@@ -260,7 +264,8 @@
 #let cover-body(meta, gap) = {
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
   set align(center)
-  for l in need(meta, "court_lines") { strong(l); linebreak() }
+  // Regular weight, as in the transcribed exemplar: the court's name fits on one line at 13 pt.
+  for l in need(meta, "court_lines") { l; linebreak() }
   v(gap)
   // Caption on the left, the Supreme Court and Court of Appeal numbers on the right.
   grid(columns: (3.4fr, 2.6fr), column-gutter: 0.25in,
@@ -335,7 +340,7 @@
 #let certificate-of-word-count(meta, words) = {
   heading(level: 1, numbering: none)[Certification of Word Count]
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
-  [Pursuant to rule 8.520(c)(1) of the California Rules of Court, I, #need(meta, "signature").signer, #emph(inl(need(meta, "certificate_role"))), certify that I prepared the foregoing document on behalf of my client, and that the word count for this brief is #group-digits(words), excluding the tables and this certificate. This brief therefore complies with the rule, which limits a computer-generated opening brief on the merits to #group-digits(word-limit) words. I certify that I prepared this document in #need(meta, "word_processor"), and that this is the word count that program generated for this document. I certify under penalty of perjury under the laws of the State of California that the foregoing is true and correct.]
+  [Pursuant to rule 8.520(c)(1) of the California Rules of Court, I, #need(meta, "signature").signer, #emph(inl(need(meta, "certificate_role"))), certify that I prepared the foregoing document on behalf of my client, and that the word count for this brief is #group-digits(words), excluding the tables and this certificate. This brief therefore complies with the rule, which limits a computer-generated opening brief on the merits to #group-digits(word-limit) words. The count includes footnotes and was computed from the text of the brief. I certify under penalty of perjury under the laws of the State of California that the foregoing is true and correct.]
   signature-block(meta)
 }
 
@@ -364,7 +369,7 @@
   // ---- metadata checks (loud failure beats silent omission) ----
   for k in ("court_lines", "case_number", "court_of_appeal_number", "caption", "proceeding", "trial_court",
             "superior_case_number", "judge", "brief_title", "counsel", "counsel_for", "signature",
-            "certificate_role", "word_processor", "date", "service") { let _ = need(meta, k) }
+            "certificate_role", "date", "service") { let _ = need(meta, k) }
   let authorities = meta.at("authorities", default: (:))
 
   // ---- count, then fail loudly on the word limit ----

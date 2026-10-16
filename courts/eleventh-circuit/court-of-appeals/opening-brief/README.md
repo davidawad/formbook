@@ -7,9 +7,9 @@ Doc-type folder for the Eleventh Circuit, `opening-brief` (one self-contained fo
 | Exemplar | yes: `exemplars/FILED-EXAMPLE-hill-v-clayton-county-23-12884-opening-brief.pdf` (see `exemplars/SOURCE.md`) |
 | Sample markdown | `samples/INPUT-hill-opening-brief.md`, a partial transcription of the exemplar (cover, CIP, oral argument, jurisdiction, issues, case, argument II.A/II.B, conclusion, certificates) |
 | Render | ok: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief samples/INPUT-hill-opening-brief.md` gives 16 pages, no typst warnings |
-| Overlay | fail (2026-10-14): `tools/overlay.sh` needs `exemplars/*.pdf`, which is absent from this snapshot (`exemplars/` holds only `SOURCE.md`). No `OVERLAY-hill-opening-brief.pdf` exists; `-overlay.txt` is from an earlier pass |
+| Overlay | ok (2026-10-16): `sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/opening-brief hill-opening-brief` writes `samples/OVERLAY-hill-opening-brief.pdf` and `.txt` (16 pages paired) |
 | Typeface | face required: none named (FRAP 32(a)(5)(A)); no substitute; EB Garamond kept |
-| Pages reviewed | 16 of 16 re-rendered 2026-10-14 and checked as 40-dpi contact sheets (every page visible; not a full-size read) |
+| Pages reviewed | 16 of 16 re-rendered 2026-10-16 and viewed one by one at 60 dpi (see "Verification pass 2026-10-16") |
 | Tier 1 gates | not built (no `checks.yaml` for this doc type); the form rules below are implemented in the template and checked by review only |
 | Status | not set. `court.json` is not used here |
 
@@ -56,7 +56,7 @@ The body: `#` sections (Statement Regarding Adoption, Jurisdictional Statement, 
 
 ## Overlay (`samples/OVERLAY-hill-opening-brief.txt`)
 
-The overlay pairs each of our pages with the filed page sharing the most words. Pages 1-5 (cover, CIP, oral argument, TOC) pair with the same-numbered exemplar pages, with 58-85% word overlap. Body pages (ours 6-16) pair with exemplar pages 15-43 at 31-77% overlap, because the sample is a partial transcription that starts at the Jurisdictional Statement. Overlay page 8 (our TOA) pairs with exemplar page 2 at 1.4%; that is a pairing artifact, because the Table of Citations has no counterpart in the exemplar's first pages, not a content match. The overlay is a diagnostic, not a score.
+The overlay pairs each of our pages with the filed page sharing the most words. Pages 1-5 (cover, CIP, oral argument, TOC) pair with the same-numbered exemplar pages, with 58-86% word overlap; pages 6-7 (the rest of the TOC) pair with exemplar pages 5-6 at 31-33%. Body pages (ours 9-16) pair with exemplar pages 15-43 at 32-77% overlap, because the sample is a partial transcription that starts at the Jurisdictional Statement. Overlay page 8 (our TOA) pairs with exemplar page 2 at 1.4%; that is a pairing artifact, because the Table of Citations has no counterpart in the exemplar's first pages, not a content match. The overlay is a diagnostic, not a score.
 
 Visible differences from the exemplar that are tier 3 (one filer's choice) and are left alone:
 
@@ -74,8 +74,8 @@ Visible differences from the exemplar that are tier 3 (one filer's choice) and a
 | 5-6 (ii, iii) | yes | TOC with page numbers; wrapped entries double-spaced; C-1 entry at top |
 | 7-8 (iv, v) | yes | Table of Citations; primary citations marked with asterisks (`*4`, `*5`); "Rules" group spills one entry onto v |
 | 9 (1) | yes | Adoption and Jurisdictional Statement |
-| 10 (2) | yes | Issues and Statement of the Case, A. and B. headings |
-| 11 (3) | yes | Summary of the Argument; Argument I. Standard of Review; blank third of the page before the next point heading (point II and A. would not fit with two lines of text) |
+| 10 (2) | yes | Issues and Statement of the Case, A. and B. headings; the B. Standard of Review paragraph continues on page 3 |
+| 11 (3) | yes | end of Standard of Review; Summary of the Argument; Argument I. Standard of Review; blank space at the foot of the page before point II (the point heading, A. and the first lines would not fit) |
 | 12 (4) | yes | point II centered heading in bold capitals; A. subheading hanging; block quotes single-spaced |
 | 13 (5) | yes | B. subheading, Anago quote; Conclusion heading |
 | 14 (6) | yes | conclusion and signature block kept together |
@@ -96,6 +96,15 @@ Defects found during review and fixed in this pass: the signature block stood al
 8. **Clearinghouse** listings (e.g. doc 74063) returned an error page from this environment.
 9. **Not implemented:** addenda, a required-section ordering check, and the Standard-of-Review heading check that ca9 has.
 10. **Length.** 16 rendered pages against a target of 8-14. The extra pages are the double-spaced TOC and TOA (2 + 2 pages) and the CIP (2 pages), all required by the rules or the exemplar. Trimming the body further would cut the argument down to a stub.
+
+## Verification pass 2026-10-16 (fb-595.26.11)
+
+- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief samples/INPUT-hill-opening-brief.md` exits 0, no typst warnings, 16 pages (the committed PDF also had 16). Fonts embedded: EB Garamond Regular, Italic, Bold only.
+- Viewed: all 16 pages at 60 dpi, before and after the fix; the exemplar's page 1 against our cover; the 16 overlay pages at 40 dpi.
+- Overlay: rerun; `samples/OVERLAY-hill-opening-brief.pdf` and `.txt` rewritten. Pages 1-5 pair with exemplar pages 1-5 (58-86%); page 8 (the short Rules page of the TOA) still pairs at 1.4%, a pairing artifact.
+- Defect fixed (tier 2): body paragraphs had no first-line indent, so with double spacing a new paragraph could not be told from a continued one (exemplar and convention indent them). Cause: the `set par(first-line-indent: 0pt)` for the oral-argument statement was not scoped and carried into the body. It is now scoped; body paragraphs indent 0.5 in, and the oral-argument statement indents too. Page count unchanged; the Standard of Review paragraph now ends on page 3 and the TOA page for *Managed Care* moved from 2 to 3, as the TOA shows.
+- Remaining gaps: a citation line that follows a block quote is a new markdown paragraph, so it is indented (the exemplar sets it flush left); tier 3, left. The rest of "Known gaps" stands (no `checks.yaml`, one exemplar, CIP placement, asterisk position).
+- latex: `sh tools/render.sh --engine latex ...` rebuilt `OUTPUT-hill-opening-brief.latex.pdf` (exit 0, 16 pages); its pages were not reviewed in this pass. docx outputs untouched (no LibreOffice on this box).
 
 ## Build
 

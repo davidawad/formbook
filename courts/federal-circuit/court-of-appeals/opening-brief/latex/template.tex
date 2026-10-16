@@ -276,7 +276,7 @@
   \par\addvspace{0.9\baselineskip}\noindent\hangindent=0.5in\hangafter=1\relax
   #1.\hskip0.2em #2\par}
 
-% A signature line of a certificate filed by counsel (Form 9 style): "Is/" then the name, the date.
+% A signature line of a certificate filed by counsel (Form 9 style): "/s/" then the name, the date.
 \newcommand\ca@certsig[2]{% #1 prefix, #2 signer
   \par\nobreak\addvspace{1.6\baselineskip}\nobreak
   \begin{flushleft}\hspace*{0.5\linewidth}\begin{minipage}[t]{0.5\linewidth}\raggedright
@@ -349,7 +349,7 @@ $endfor$
 \ca@item{3}{All parent corporations and any publicly held companies that own 10 percent of the stock of a party or amicus curiae represented by me are: $interest.parents$.}
 \ca@item{4}{The names of all law firms and the partners and associates that (a) appeared for the entities in the originating court or agency or (b) are expected to appear in this court for the entities not including those who have already entered an appearance in this court: $interest.other_counsel$.}
 \ca@item{5}{$if(related_cases.cases)$Related or prior cases meeting the criteria under Fed. Cir. R. 47.5(a) are listed in the Statement of Related Cases.$else$I am unaware of any cases pending in this or any other court or agency that meet the criteria under Fed. Cir. R. 47.5(a). I am unaware of any cases pending that will directly affect or be directly affected by this court's decision in the pending appeal.$endif$}
-\ca@certsig{Is/}{$signature.signer$}
+\ca@certsig{/s/}{$signature.signer$}
 \clearpage
 
 % Table of contents: the brief's own headings, the front matter, and the addendum's entry (Add-1)
@@ -380,7 +380,7 @@ $else$
 \ca@item{1}{I am unaware of any other appeal in or from the same civil action or proceeding in the originating tribunal that was previously before this or any other appellate court.}
 \ca@item{2}{I am unaware of any case pending in this or any other tribunal that will directly affect or be directly affected by this court's decision in the pending case.}
 $endif$
-\ca@certsig{Is/}{$signature.signer$}
+\ca@certsig{/s/}{$signature.signer$}
 
 % ---- the brief: Arabic from 1 ----
 \clearpage
@@ -458,7 +458,7 @@ $for(service.unregistered)$
 \begin{adjustwidth}{0.5in}{0pt}$service.unregistered.name$, $service.unregistered.address$\end{adjustwidth}\addvspace{0.7\baselineskip}
 $endfor$
 $endif$
-\ca@certsig{Is/}{$signature.signer$}
+\ca@certsig{/s/}{$signature.signer$}
 $endif$
 
 \end{document}

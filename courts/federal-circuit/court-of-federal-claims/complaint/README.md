@@ -8,9 +8,9 @@ Doc-type folder for the Court of Federal Claims (`uscfc`), complaint. Self-conta
 |---|---|
 | Exemplar | yes: one filed complaint (Design Build, LLC, No. 1:26-cv-01361, filed 2026-09-15). See `exemplars/SOURCE.md`. |
 | Typeface | Rule names no face (RCFC 5.5(c)(2): text and footnotes no smaller than 12 point). Keeps EB Garamond; no vendored substitute applied. Visual-only comparison to the exemplar's Times New Roman, see Known gaps 1. |
-| Render | ok: `sh tools/render.sh courts/federal-circuit/court-of-federal-claims/complaint samples/INPUT-design-build-llc-26-1361.md`; exit 0, no typst warnings, EB Garamond only (`pdffonts`). 13 pages. |
+| Render | ok: `sh tools/render.sh courts/federal-circuit/court-of-federal-claims/complaint samples/INPUT-design-build-llc-26-1361.md`; exit 0, no typst warnings, EB Garamond only (`pdffonts`). 13 pages (re-rendered 2026-10-16). |
 | Overlay | ok: `sh tools/overlay.sh courts/federal-circuit/court-of-federal-claims/complaint design-build-llc-26-1361`; exit 0, wrote `OVERLAY-…pdf` and `OVERLAY-….txt`. The exemplar PDF was restored from the URL in `exemplars/SOURCE.md` and matches its SHA-256. |
-| Pages reviewed | 13 of 13. Every page of the final render rasterized at 50 dpi (`pdftoppm -r 50`) and looked at, 2026-10-14. |
+| Pages reviewed | 13 of 13. Every page of the final render rasterized at 60 dpi (`pdftoppm -r 60`) and looked at, 2026-10-16 (earlier: 50 dpi, 2026-10-14). |
 | Tier 2 vs. a second filer | not done (one exemplar only). |
 
 ## Governing rules
@@ -63,7 +63,7 @@ Body: `## Heading` prints as a centred bold capital section heading; `### Headin
 
 `OVERLAY-design-build-llc-26-1361.pdf`: red is our render only; blue is the filed exemplar only; black is where both agree. `OVERLAY-design-build-llc-26-1361.txt` is the page map: each of our pages is paired with the exemplar page sharing the most words.
 
-The map pairs by text, so it is approximate. Our pages 1–6 pair with exemplar pages 1–6 (word overlap 69–77%). Our page 7 pairs with exemplar page 10 (33%): it holds the transcription note for the omitted ¶¶ 30–40 and 43–48, so the exemplar pages 7–9 have no counterpart. Our pages 8–13 pair with exemplar pages 12, 13, 14, 15, 16 and 18 (41–79%). Word overlap is partial by design, because the sample is a partial transcription. The check that matters is the caption on page 1 and the signature and certificate on pages 12–13.
+The map pairs by text, so it is approximate. Our pages 1–6 pair with exemplar pages 1–6 (word overlap 69–77%). Our page 7 pairs with exemplar page 10 (33%): it holds the transcription note for the omitted ¶¶ 30–40 and 43–48, so the exemplar pages 7–9 have no counterpart. Our pages 8–13 pair with exemplar pages 12, 13, 14, 15, 16 and 18 (41–79%; map regenerated 2026-10-16, same pairing). Word overlap is partial by design, because the sample is a partial transcription. The check that matters is the caption on page 1 and the signature and certificate on pages 12–13.
 
 ## Samples
 
@@ -93,6 +93,17 @@ The docx engine is `docx/` (`make-reference.sh` builds `reference.docx`; `uscfc-
 | Signature block: Dated, Respectfully submitted, `/s/`, name, contact lines (RCFC 5.5(d)-(f)); certificate of service on its own page | |
 
 **docx BLOCKED:** `tools/check.sh <court> --engine docx` cannot run for this court yet: the court root has no `court.json`, `checks.yaml` or `rules.md`, so Gates 1 and 2 have nothing to check against. This is a court-level gap, not a docx check failure, and it is not fixed in this folder. The gates themselves were not run. Pages reviewed: all 14 pages of the docx PDF, rasterized at 60 dpi and viewed, 2026-10-15.
+
+## Verification pass 2026-10-16 (fb-595.26.14)
+
+- Rendered: `sh tools/render.sh … samples/INPUT-design-build-llc-26-1361.md`, exit 0, no typst warnings, EB Garamond only. 13 pages, as before (the committed PDF was not stale in page count).
+- Viewed: all 13 pages at 60 dpi, before and after the fixes; exemplar pages 1, 17 and 18 at 50 dpi; all 13 overlay pages.
+- Overlay: `sh tools/overlay.sh … design-build-llc-26-1361` rerun, exit 0; same page pairing as above. It shows our caption sits slightly lower, our lines drift against the exemplar's down each page (different face and leading), and the exemplar's caption names are bold (tier 3).
+- Fixed:
+  1. Section (`##`) headings printed at Typst's default heading size (about 14 pt), larger than the 12 pt title and the exemplar's headings. Both heading levels are now set at `type-size`.
+  2. The certificate of service text was single spaced. RCFC 5.5(c)(4) double-spaces text and lets only quoted material and footnotes be single spaced, and the exemplar double-spaces it. It now uses the body leading.
+  3. The certificate's `/s/` line was right-aligned, with its rule running left of the name. It now uses the same right-hand column as the complaint's signature block.
+- Gaps that remain: Known gaps 1–6 above. The docx was not re-rendered in this pass (no LibreOffice on the box), so it does not have fixes 1–3. The latex engine has no folder for this doc type.
 
 ## Build and check (from the repo root)
 

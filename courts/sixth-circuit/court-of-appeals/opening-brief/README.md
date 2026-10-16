@@ -46,6 +46,7 @@ The sample is one `.md` file: a YAML frontmatter block, then the body. Follows t
 | Field | Feeds |
 |---|---|
 | `case_number`, `caption`, `proceeding`, `brief_title`, `counsel`, `phone`, `signature`, `date` | Cover, signature block, certificates |
+| `counsel_for` (optional) | One line centred under the cover's counsel block (e.g. "Counsel for ...") |
 | `disclosure` | Circuit Rule 26.1 page (markdown text) |
 | `oral_argument` | Statement in Support of Oral Argument (markdown text) |
 | `designation_intro`, `designation` (rows of `date`, `rno`, `description`) | Designation of District Court Record |
@@ -58,7 +59,7 @@ Body: `# Heading` sections (Introduction optional; then Statement of Jurisdictio
 
 `samples/OVERLAY-netchoice-opening-brief.pdf` puts our render (red) over the filed page it best matches (blue); black is agreement. Pages are paired by word overlap, not by index. The map (`-overlay.txt`):
 
-- pp. 1–3 (cover, disclosure, TOC) pair with filed pp. 1–3, with word overlap 98%, 90%, 61%. The disclosure text is the same in both; the TOC's differences are the sample's own page numbers.
+- pp. 1–3 (cover, disclosure, TOC) pair with filed pp. 1–3, with word overlap 100%, 90%, 61%. The disclosure text is the same in both; the TOC's differences are the sample's own page numbers.
 - pp. 4–5 (TOA) pair with filed TOA pages 10–11 at 26% and 21%. This is expected: the filed TOA runs seven pages (filed pp. 6–12); ours lists only the authorities the excerpt cites.
 - pp. 6–13 (oral-argument statement, Introduction, Jurisdiction, Issues, Statement of the Case, Summary, Argument) pair with filed pp. 13–39 at 30–77%. The filed text is the same, but our excerpt skips paragraphs and uses EB Garamond where the exemplar uses Palatino.
 - pp. 14–18 (conclusion, certificates, designation) pair with filed pp. 86–90 at 47–87%.
@@ -95,6 +96,7 @@ Pages reviewed: 18 of 18. Final render: 18 pages, zero typst warnings, `pdffonts
 ## Log
 
 - 2026-10-14: exemplar found (CourtListener RECAP, ca6, 25-5660, entry 16); rules read; template and sample written; render (18 pp.), overlay, full page review; findings fixed as above.
+- 2026-10-16: verification pass (fb-595.26.6), see below.
 
 ## Engines
 
@@ -103,3 +105,15 @@ Same rules and numbers as the typst template; the typst output is the reference 
 **latex** (`latex/template.tex`, `latex/ca6-opening-brief.lua`; tectonic). Matches: EB Garamond 14 pt from `fonts/` only (embedded, `pdffonts`), double spacing (31.43 bp body pitch, measured from the typst render), single-spaced blocks, 1 in margins, roman front matter and arabic body, one-page cover, TOC and TOA page numbers (checked against the body pages), certificates, designation, 14-pt footnotes. Differs: 19 pages against typst's 18; the TOC runs two pages; the cover rules are drawn with `\vrule` and sit a few points from typst's. The appellant's blue cover is not drawn (same as typst). Tectonic fetches its TeX packages on the first run.
 
 **docx** (`docx/reference.docx`, `docx/reference-addendum.docx`, `docx/reference-src/`, `docx/make-reference.sh`, `docx/render.sh`, `docx/pages.lua`, `docx/ca6-opening-brief.lua`). The styles are the typst measures (`reference-src/styles.xml`); the TOC is one-row tables with dot leaders; the TOC and TOA numbers come from the LibreOffice PDF (`pages.lua`, rebuilt until stable). Matches: the same page order, cover, numbering, certificates and designation; the word count (1,472) equals typst's. Differs: the TOC and TOA are text, so they do not update in Word if the text changes (rerun `docx/render.sh`); Word may paginate slightly differently from the LibreOffice PDF that is checked (docs/DOCX.md). BLOCKED: none for the opening brief. The court has no `checks.yaml` or `reviews/` yet, so `tools/check.sh` cannot run here for any engine.
+
+## Verification pass 2026-10-16 (fb-595.26.6)
+
+- Re-rendered `samples/OUTPUT-netchoice-opening-brief.pdf` with `tools/render.sh` (exit 0, no typst warnings): 18 pages, the same count as the committed render; before the fixes below its text was identical to the committed PDF, so it was not stale. Overlay rerun; map unchanged except the cover (98% to 100%, from the added counsel line).
+- All 18 pages viewed at 60 dpi (pages 1, 9, 14, 17, 18 again after the fixes); the 18 overlay pages viewed at 40 dpi, and overlay page 1 (cover against the filed cover) at 150 dpi.
+- Fixed:
+  - p. 3 (Statement of Jurisdiction): "28 U.S.C. §§ 1651" broke between the two section signs ("§" at the line end, "§ 1651" on the next line). The no-break rule matched only a single sign; it is now `[§¶]+ \S+`, so "§§ 1651" stays whole.
+  - pp. 11–12 (designation): straight apostrophes ("NetChoice's") in the table cells, which bypassed the markdown render. The cells now go through `inl`, as the rest of the frontmatter does.
+  - Cover: the filed cover's "Counsel for Plaintiff-Appellant NetChoice" line was not transcribed and the template had no place for it. Added the optional `counsel_for` field. With it the single right-half counsel column no longer fit one page, so several counsel groups are now set in two columns across the measure (one group stays in the right half), as on the filed cover.
+  - Certificate of compliance: "14-point" is kept on one line (boxed).
+  - Signature block and cover: an indented italic line too long for its column now wraps with the same indent.
+- Remaining gaps: as in Known gaps above. The latex PDF was re-rendered (19 pages, unchanged count) but the latex and docx engines do not read `counsel_for`, so their covers lack that line; the docx outputs were not touched (no LibreOffice in this box). The designation table does not repeat its header row on the continuation page (p. 12).

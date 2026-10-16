@@ -67,7 +67,7 @@ All 14 pages rendered at 60 dpi (`pdftoppm -r 60`) and viewed one by one. Findin
 | Page | Content | Result |
 |---|---|---|
 | 1 | Cover | OK: docket line, court, caption with "v.", proceeding, title, counsel block. Fits one page. |
-| 2 | TOC (roman i) | Fixed in this pass: the page number for entry I. wrapped to its own line. Fix: page-number box 1.2em, gap 0.6em. Now on the same line; the leader on that line is short (one dot), a known cosmetic gap. |
+| 2 | TOC (roman i) | Fixed in this pass: the page number for entry I. wrapped to its own line. Fix: page-number box 1.2em, gap 0.6em. Now on the same line; the leader on that line is short (one dot), a known cosmetic gap. 2026-10-16: the gap between entries was smaller than the leading inside an entry, so single-line entries sat closer than double spacing; now equal (fixed). |
 | 3 | TOA (roman ii) | OK: every page listed, asterisks on primary citations (Ross 6*, QBE 7*, Trbovich 8*), no passim, rules group. |
 | 4-12 | Body 1-9 | OK: double spacing, 14-point, first-line indent, hanging point headings, italic case names, citation pages correct. Body page 5 (pdf 8) ends with about five lines of white space because the point III heading and its opening lines move to the next page (the heading is kept with the paragraph that follows it). |
 | 9 (pdf 12) | Conclusion and signature | OK: centered CONCLUSION, signature block at 50%, firm and address at the margin, after the conclusion. |
@@ -79,7 +79,6 @@ Pages reviewed: 14 of 14. Every page was rendered and viewed.
 ## Differences from the exemplar (accepted, with reason)
 
 - **Typeface**: decided 2026-10-14. Face required: none named. FRAP 32(a)(5)(A) requires a proportionally spaced serif face, 14 pt or larger, and names no family; the Eleventh Circuit local-rule text could not be read here. No substitute, so EB Garamond (vendored in `fonts/eb-garamond/`) stays; the exemplar's Times New Roman is a filer's choice (tier 3). The certificate says so.
-- **Overlay not run (2026-10-14)**: `tools/overlay.sh` needs `exemplars/*.pdf`, which is absent from this snapshot. `samples/OVERLAY-jg-v-northfield-reply-brief.txt` is from an earlier pass; no overlay PDF exists.
 - **Double-spaced TOC and TOA**: the exemplar single-spaces them; 11th Cir. R. 32-3 requires double spacing. The template follows the rule.
 - **Asterisks in the TOA**: the exemplar has none. The primary-citation marks (Ross, QBE, Trbovich) are the transcriber's choice, and need the brief's author to confirm.
 - **Certificates numbered**: 11th Cir. R. 32-4 lets them go unnumbered; the exemplar numbers them, so the template numbers them.
@@ -96,6 +95,14 @@ Pages reviewed: 14 of 14. Every page was rendered and viewed.
 - Certificate word count is the template's own count (2,132 for this text), not a word-processor count.
 - Unregistered-party service (`service.unregistered`) is not supported; add when a sample needs it.
 - The TOC leader on entry I. is one dot long (text is near full width there); cosmetic.
+
+## Verification pass 2026-10-16 (fb-595.26.11)
+
+- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief samples/INPUT-jg-v-northfield-reply-brief.md` exits 0, no typst warnings, 14 pages (the committed PDF also had 14).
+- Viewed: all 14 pages at 60 dpi (pages 2-3 again after the fix); the exemplar's page 1 against our cover; the 14 overlay pages at 40 dpi.
+- Overlay: rerun; `samples/OVERLAY-jg-v-northfield-reply-brief.pdf` and `.txt` rewritten. Every page still pairs with the same-numbered filed page, 57.6-92.6% (table above unchanged).
+- Defect fixed (tier 1, 11th Cir. R. 32-3): in the TOC and TOA the space between entries (0.3em, 0.6em, 0.7em) was less than the double-spaced leading inside an entry, so consecutive one-line entries were not double-spaced. Both tables now use the body leading between entries. Page count unchanged.
+- Remaining gaps: as listed under "Known gaps" (one exemplar, CIP question, TOC entry I. one-dot leader, signature block single-spaced). latex rebuilt (`--engine latex`, exit 0, 14 pages), its pages not reviewed in this pass; docx untouched (no LibreOffice).
 
 ## Reproduce
 

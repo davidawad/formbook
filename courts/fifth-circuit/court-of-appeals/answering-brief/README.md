@@ -108,6 +108,7 @@ All 14 pages were rendered at 60 dpi and looked at. Findings and their fates:
 | 2 | Certificate of interested persons on its own page, signature. | OK. |
 | 3 | Statement regarding oral argument on its own page. | OK. |
 | 4 contents | "11" wrapped onto a line of its own for long entries; the dot leader was too narrow. | Fixed: each TOC row is a three-column grid (title, leader, page), so the title wraps in its own column and the page number stays on the row. |
+| 4 contents (2026-10-16) | With the three-column grid, the page number of a wrapped entry sat on the entry's first line, with the leader squeezed between title and number. | Fixed: two columns; the leader ends the title's last line and the page number sits at the right on that last line, as in the exemplar's table. |
 | 5-6 authorities | Cases and rules in alphabetical order, page references, "Page(s)" heading. Italic case names. | OK. |
 | 7 | Response to statement of issues, statement of the case; footnote 1 at 14 pt, continues to page 8. | OK. |
 | 8-9 | Facts, summary of argument; running text. | OK. |
@@ -115,9 +116,19 @@ All 14 pages were rendered at 60 dpi and looked at. Findings and their fates:
 | 11 | Point II heading wraps across three lines, centred; sub-point A hangs under its label. | OK. |
 | 12 | Conclusion heading and paragraph, then signature block kept together. | OK. Changed from an earlier render in which the signature stood alone on page 13 (the footnote definition was the last block; see the last bullet of the Markdown contract). |
 | 13 | Certificate of service. | OK. |
+| 2, 13, 14 (2026-10-16) | The signature mark ("s/ J. Cheves Ligon", "Assistant City Attorney") was right-aligned line by line, so the two lines started at different points. | Fixed: a left-aligned block in the right part of the line. |
 | 14 | Certificate of compliance: two numbered paragraphs with the word count and the typeface statement. | Fixed: the two paragraphs were run together (no paragraph break); now separate. |
 
 Pages changed after the review: pages 1 and 4 were rendered again after the cover and TOC fixes, and looked at; the rest of the layout did not change.
+
+## Verification pass 2026-10-16 (fb-595.26.5)
+
+- Rendered: `sh tools/render.sh` (typst, exit 0, no warnings), 14 pages, same count as the committed PDF. Overlay rerun (`tools/overlay.sh`, exit 0); the page map is unchanged from the table above.
+- Viewed: all 14 pages at 60 dpi before the fixes; after them pages 2, 4, 13, 14 at full size and all 14 in a contact sheet; the 14 overlay pages at 40 dpi; exemplar page 1 against our cover.
+- Fixed in `typst/ca5-answering-brief.typ`: the TOC page number on the last line of a wrapped entry, and the signature-mark alignment (both in the review log above).
+- Checked and left: page 9 ends about a third blank because the Argument heading, point heading I and the start of its text move to page 10 together (headings are kept with their text; accepted). The front pages are numbered in arabic from the cover, as in the exemplar.
+- latex engine re-rendered (`--engine latex`, exit 0, 13 pages); its pages were not reviewed in this pass.
+- Gaps that remain: the open questions below (red cover, generative-AI certification, local-rule text, typeface); the sample is a portion of the brief; docx not rendered (no soffice).
 
 ## Open questions (for David)
 

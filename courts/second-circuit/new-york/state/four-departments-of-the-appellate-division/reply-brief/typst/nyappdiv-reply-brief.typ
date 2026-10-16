@@ -178,7 +178,8 @@
     grid(columns: (label-width, 1fr, 2em), column-gutter: 0pt,
       [#h(ind)#if numbered { lab }],
       [#title#h(0.4em)#dot-leader],
-      align(right, it.page()))
+      // The number sits on the last line of a wrapped title, where its dot leader ends.
+      align(right + bottom, it.page()))
   }))
 }
 

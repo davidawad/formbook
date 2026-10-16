@@ -14,8 +14,10 @@ proceeding: "On Appeal from the United States District Court for the Northern Di
 brief_title: "Appellees’ Answer Brief"
 oral_argument: "While the challenged provision in this case implicates significant constitutional rights, the issues raised on appeal are straightforward. Appellees maintain that this appeal can be resolved on the papers based on the statute’s clear violations of well-established constitutional law. If the Court determines that oral argument would help facilitate resolution of the appeal, Appellees welcome the opportunity to participate."
 counsel:
-  - names: ["Abha Khanna", "Julie Zuckerbrod", "Julianna Astarita"]
-    lines: ["ELIAS LAW GROUP LLP", "250 Massachusetts Ave NW, Suite 400", "Washington, DC 20002"]
+  - names: ["Abha Khanna"]
+    lines: ["ELIAS LAW GROUP LLP", "1700 Seventh Ave, Suite 2100", "Seattle, WA 98101", "(206) 656-0177"]
+  - names: ["Julie Zuckerbrod", "Julianna Astarita"]
+    lines: ["ELIAS LAW GROUP LLP", "250 Massachusetts Ave NW, Suite 400", "Washington, DC 20002", "(202) 968-4490"]
   - names: ["Frederick S. Wermuth"]
     lines: ["KING, BLACKWELL, ZEHNDER & WERMUTH, P.A.", "P.O. Box 1631", "Orlando, FL 32802-1631"]
 phone: "(407) 422-2472"

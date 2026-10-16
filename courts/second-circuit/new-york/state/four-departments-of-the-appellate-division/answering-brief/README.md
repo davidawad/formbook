@@ -1,15 +1,13 @@
 # Appellate Division (all four Departments): answering brief (respondent's brief)
 
-Status: **BLOCKED: no exemplar.** No filed answering brief of any Appellate Division Department could be downloaded (search record in `exemplars/SOURCE.md`). The template is built from 22 NYCRR 1250.8. The sample is **rule-built placeholder text, not a transcription** of any filed brief, and is not a model for any filing.
+Status: **exemplar found** (2026-10-16): a First Department respondent's brief, *NYCLA v. State of New York*, App. No. 2022-03908 (see `exemplars/SOURCE.md`). The template was rebuilt on this court's reply-brief template and the sample is now a partial transcription of the exemplar. Render ok, overlay ok, 19 of 19 pages reviewed.
 
 | Gate | Result |
 |---|---|
-| exemplar | no |
-| render | ok (`sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/answering-brief samples/INPUT-nyappdiv-answering-brief-sample.md`; re-run 2026-10-14: 10 pages; vendored EB Garamond only; no typst warnings) |
-| overlay | fail (`sh tools/overlay.sh …/answering-brief nyappdiv-answering-brief-sample` exits 1: `no exemplar pdf in …/exemplars`; no `-overlay.pdf` written; re-run 2026-10-14) |
-| pages reviewed | 10 of 10 (re-rendered and every page rasterized at 60 dpi and viewed on 2026-10-14) |
-
-`BLOCKED: no exemplar`. A second search on 2026-10-14 found one candidate, *Fuks v. Rakia Associates* (First Department, plaintiff-respondent brief filed 2024-04-17). Its only host returns 403 to curl and WebFetch, so it is not saved. See `exemplars/SOURCE.md`, "Second search pass". Tier 2 (professional convention, judged against filed exemplars) has not been assessed. Tier 1 is not claimed as met: see the table of authorities gap below.
+| exemplar | yes: `exemplars/FILED-EXAMPLE-nycla-2022-03908-answering-brief.pdf` (First Dept, NYSCEF Doc. 17, filed 2023-04-19, Kramer Levin for plaintiffs-respondents) |
+| render | ok: `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/answering-brief samples/INPUT-nycla-2022-03908-answering.md`, 19 pages, EB Garamond Regular/Bold/Italic only, no typst warnings (2026-10-16) |
+| overlay | ok: `sh tools/overlay.sh …/answering-brief nycla-2022-03908-answering`, wrote `samples/OVERLAY-nycla-2022-03908-answering.pdf` and `.txt` (2026-10-16) |
+| pages reviewed | 19 of 19 (every page rasterized at 60 dpi and viewed, 2026-10-16); overlay viewed as a 40 dpi contact sheet, pages 1, 5 and 12 at 100 dpi |
 
 ## Governing rules
 
@@ -35,53 +33,58 @@ Rule dates: 1250.8 as read is dated 9/17/2018 (LII). No later amendment was seen
 
 ## Folders
 
-- `typst/main.typ`: entrypoint; reads `sample=` from `--input`.
-- `typst/nyappdiv-answering-brief.typ`: template. The structure follows `courts/second-circuit/new-york/state/court-of-appeals/answering-brief/typst/`, with the numbers and certificate wording changed to 1250.8.
-- `samples/INPUT-nyappdiv-answering-brief-sample.md`: rule-built placeholder sample (frontmatter schema below).
-- `samples/OUTPUT-nyappdiv-answering-brief-sample.pdf`: render output (10 pages).
-- `samples/nyappdiv-answering-brief-sample-overlay.*`: **not produced** (overlay failed; see above).
-- `exemplars/SOURCE.md`: search record.
+- `typst/main.typ`: entry point; reads `sample=` from `--input` (default `samples/INPUT-nycla-2022-03908-answering.md`).
+- `typst/nyappdiv-answering-brief.typ`: the template, `nyappdiv-answering-brief(meta, md)`. Copied from `../reply-brief/typst/nyappdiv-reply-brief.typ` (cover, TOC, TOA with page references, signature, printing statement, blank affidavit of service) with these changes: word limit 14,000 (1250.8(f)(2)); headings outside the Argument are lettered A., 1. (the exemplar's Counterstatement of Facts) while Argument points stay I., A.; point headings in capitals only under the Argument; the docket is printed as written; a caption side may carry its own `joiner` ("– and –"); an optional `closing` line in the signature block.
+- `samples/INPUT-nycla-2022-03908-answering.md`: partial transcription of the exemplar (see "Sample").
+- `samples/OUTPUT-nycla-2022-03908-answering.pdf`: render output (19 pages).
+- `samples/OVERLAY-nycla-2022-03908-answering.pdf`, `.txt`: overlay on the exemplar and its page map.
+- `exemplars/FILED-EXAMPLE-nycla-2022-03908-answering-brief.pdf`, `exemplars/SOURCE.md`: the exemplar, its source and the search record.
 
 ## Markdown contract (frontmatter)
 
+The same schema as `../reply-brief` (see its README), plus `joiner` and `closing`.
+
 | Field | Required | Feeds |
 |---|---|---|
-| `index_no` | yes | cover, top left, e.g. `Index No. 000000/2025` |
-| `docket` | yes | cover, top left under the index number, e.g. `[Department] Department Docket No. CA 00-00000` |
-| `court` | yes | cover, centered: the Supreme Court and Judicial Department |
-| `calendar` | yes | cover, upper right. `mode: argued` (with `argued_by`, `time`) or `mode: submitted` |
-| `caption` | yes | list of two sides, each with `names` and `designation`; "–against–" between sides |
-| `brief_title` | yes | cover title (printed in capitals, see gaps) and document title |
-| `counsel` | yes | cover, lower right: `names`, `lines`, and `email` |
-| `phone` | yes | cover, lower right |
-| `signature` | yes | `signer` and `lines`, after the Conclusion and on the printing statement |
-| `date` | no | under the signature, on the printing statement, and on the affidavit |
-| `service` | no | `method`, `affiant`, and `unregistered` (list of `{name, address}`); shown only when given |
-| `authorities` | yes if the body cites any | table of authorities: `kind` (case, constitution, statute, regulation, rule, other), `name`, `cite` |
+| `docket` | yes | cover, top left, printed as written (e.g. `Appellate No. 2022-03908`) |
+| `county_clerk_index` | no | cover, top left, under the docket |
+| `department` | yes | cover: "Appellate Division—*department*" |
+| `argument` | yes | cover, upper right (1250.8(a)): `presenter` and `time_requested`; without `presenter`, "Submitted without oral argument" |
+| `caption` | yes | list of sides: `names` (list), `designation`, optional `joiner` (the word above this side; default "– against –") |
+| `caption_note` | no | a line under the caption |
+| `brief_title` | yes | cover title (capitals, bold) and document title |
+| `counsel` | yes | cover, lower right: list of `{firm, lines}` (name, address, telephone and email lines) |
+| `attorneys_for` | yes | cover, under counsel |
+| `signature` | yes | `date`, `place`, optional `closing`, `attorneys_for`, `blocks` (list of `{firm, names, lines, by?}`) |
+| `authorities` | if cited | key: `{kind, name?, cite, sort?}`; kind is case, constitution, statute, regulation, rule or other. Only authorities cited with a `[text](toa:key)` link are listed, with the printed pages of those links |
 
-Body: `#` is a section (centered, bold, capitals). `##` is a POINT heading (bold, left); `###` is the point's title; `####` is a sub-argument letter (italic). Block quotations are `>`. Footnotes are `[^key]` with a definition anywhere in the file. Escape markdown-looking leading characters (`1\.`).
+Body: `#` section (centered, bold, capitals); `##` under the Argument is a point (I., capitals), elsewhere a lettered sub-heading (A.); `###` under a point is A.; `####` 1. Text before the first heading is printed as an untitled opening paragraph. Block quotations are `>`. Footnotes are `[^key]`.
+
+## Sample
+
+`samples/INPUT-nycla-2022-03908-answering.md` is the filer's text, partly transcribed: the cover; the opening paragraph and its footnote; the Preliminary Statement's first four paragraphs and its last; the Counterstatement of Question Presented (complete); from the Counterstatement of Facts, the start of A., the start of B., the start of C., the first and the last two paragraphs of D.; the Argument's standard-of-review paragraph; Point I (complete); Point II.A's first two paragraphs; II.B's first two paragraphs and the first paragraph of its footnote; II.C's first two paragraphs; the Conclusion and the signature block. Everything else is left out, so the render is 19 pages against the exemplar's 52, and its word count (2,873) is the sample's, not the filed 10,394. Footnotes are renumbered (the exemplar's footnote 3 is footnote 2). The exemplar's typo "CLPR 3211(e)" is kept in the text; the TOA entry reads "CPLR 3211(e)", as the exemplar's TOA does.
 
 ## What the overlay shows
 
-Not produced. `tools/overlay.sh` pairs each rendered page with the best-matching exemplar page by word overlap. There is no exemplar, so there is nothing to overlay.
+`samples/OVERLAY-nycla-2022-03908-answering.txt` pairs every rendered page with an exemplar page: cover with cover (83%), TOC with TOC (96%), the transcribed body pages with their source pages (43–100%), the printing statement with the filed one (50%), and the blank affidavit with nothing real (7%; the exemplar copy has no proof of service). Where the text is the same, our lines sit close to the filed lines; the drift down a page is about a line. The filed cover spreads its parts over the page and prints the court banner as an image; ours stacks them with rules between, the reply-brief cover. The filed signature puts the names above the firm; ours puts the firm first (tier 3, not chased).
 
-## Known gaps (from the 10-page review)
+## Verification pass 2026-10-16 (fb-595.26.22)
 
-1. **No exemplar; tier 2 not assessed.** Layout is judged against the rule only. Blocked until a filed App Div answering brief is saved (see `exemplars/SOURCE.md`).
-2. **Table of authorities has no page references.** 1250.8(b)(2) requires "indicating the pages of the brief where they are cited." The template lists authorities but does not generate page numbers. **Tier 1 gap, not fixed.** A real filing needs it.
-3. **Signature block alone on page 8.** The Conclusion ends on page 7 with room for about a quarter page; the signature block (about 2.2 inches) moves to the next page with no text above it. No keep-with-next control between the Conclusion and the signature block. Not fixed.
-4. **Word count is approximate.** The certificate-style count is whitespace-delimited tokens of the markdown body, minus footnote definitions. It includes markup tokens (`#`, `>`, `[^`), so it overcounts slightly; the sample's printing statement reads 797 words. It is not a filing count, and the word-processor count should be substituted (1250.8(j) lets the party rely on it). No page-limit or word-limit check is enforced.
-5. **Cover title in capitals.** `brief_title` is printed in capitals on the cover. 1250.8(f)(1) bars all-capital words except in headings; the cover title is treated as a heading. Judgment call, not verified against any filed cover.
-6. **Double spacing is estimated, not measured.** `body-leading = 1.2em` was chosen by eye against the rendered page. Rule (h) says double-spaced; no exemplar exists to measure it against. Measure against a filed brief when one is found.
-7. **Block quotation and heading spacing tuned by eye** (same caveat as item 6).
-8. **Questions Presented.** The first numbered item sits flush, and item 2 takes a first-line indent (paragraph after a heading vs. after a paragraph). Cosmetic; not fixed.
-9. **Pagination.** The cover counts as page 1 but is not printed. The TOC and TOA are numbered 2 and 3, and the body starts on page 4. Whether 1250.8(h)'s "numbered consecutively" wants the cover counted is not resolved by the rule text.
-10. **Counterstatement and CPLR 5531.** The sample includes a respondent's counterstatement only as an optional heading. The CPLR 5531 statement (appellant-side addendum in the First and Second Departments) is not generated; see NYAD-ADD-001.
-11. **Sample depth.** The sample body is roughly 800 words of placeholder text and renders to 10 pages. It is rule-built and not depth-matched to any filed brief.
+- Exemplar: none before this pass. Searched again (13 searches, `exemplars/SOURCE.md`); one First Department respondent's brief saved.
+- Render before the fixes: the old template and placeholder sample, 10 pages, exit 0. All 10 viewed. Defects: no page numbers in the table of authorities (tier 1, 1250.8(b)(2)); the argued/submitted notation below the caption, not in the upper right (tier 1, 1250.8(a)); the TOC listed "POINT I" with no point heading (tier 1, 1250.8(b)(1)); the signature block alone on page 8; counsel lines right-aligned with paragraph spacing.
+- Fixed by rebuilding the template on the reply-brief template (see "Folders") and replacing the placeholder sample with the transcription. The placeholder `INPUT-nyappdiv-answering-brief-sample.md` and its PDF are removed.
+- Render after: 19 pages, exit 0, no warnings. All 19 viewed: cover on one page; TOC with point headings and page numbers; TOA with printed page numbers (two pages, `ii`–`iii`); body 1–13; Conclusion kept with the signature block on page 13; printing statement on 14; blank affidavit on 15.
+- Not fixed (tier 2/3): the citation line under a block quotation takes the first-line indent (the exemplar sets it flush); the firm name on the cover wraps and its two lines sit tight; body page 12 ends half empty because the Conclusion and signature are kept together.
 
-## Searches for an exemplar
+## Known gaps
 
-See `exemplars/SOURCE.md`. The sibling folder `courts/second-circuit/new-york/state/court-of-appeals/answering-brief/` is also blocked (no exemplar); its README records the same kind of search.
+1. **Exemplar is First Department.** Part 1250 governs all four Departments; Department rules (Parts 600, 670, 800, 1000) were not checked.
+2. **Footnotes** are printed at body size (14 pt; the rule minimum is 12 pt), single-spaced, as in the reply-brief template.
+3. **Word count** is the template's count of the markdown body (links keep their text, markup removed), not a word-processor count. The 14,000-word limit is a hard stop.
+4. **Proof of service** is a blank affidavit form; its form is not verified against Part 1250. The exemplar copy has none.
+5. **CPLR 5531 statement** (appellant's addendum in the First and Second Departments) is not generated; see NYAD-ADD-001.
+6. **Double spacing** (`body-leading`) is the reply-brief value, checked by overlay against the First Department exemplars only.
+7. **docx engine not updated.** The docx filter (`docx/nyappdiv-answering-brief.lua`) reads the old frontmatter schema (`index_no`, `calendar`, `counsel.names`, `phone`, `service`). The committed `samples/OUTPUT-nyappdiv-answering-brief-sample.docx` is from the removed placeholder sample; it was not touched in this pass. The docx engine needs the new schema before it can render the new sample.
 
 [Formbook index](../../../../../../README.md) | [Court folder](../README.md)
 

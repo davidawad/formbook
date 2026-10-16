@@ -52,9 +52,9 @@ The render was 20 pages. Every page was rendered at 60 dpi and looked at.
 |---|---|---|
 | 1 | Cover | Fits one page. Counsel's "Counsel for Appellee..." line wraps. Acceptable. |
 | 2 | Corporate disclosure statement (roman i) | Fine. |
-| 3-4 | Table of contents (ii), table of authorities (iii-iv) | Authorities grouped by kind; passim not reached in this portion. |
+| 3-4 | Table of contents (ii), table of authorities (iii-iv) | Authorities grouped by kind; passim not reached in this portion. TOC entry I. had its page number wrapped onto a line of its own: fixed 2026-10-16, see below. |
 | 5-16 | Body (arabic 1-11) | Headings numbered automatically; point headings in small capitals; no widow headings. |
-| 17 | Certificate of bar membership (12) | Fine. |
+| 17 | Certificate of bar membership (12) | Fine. Text double-spaced since 2026-10-16 (see below). |
 | 18 | Electronic-filing certification (13) | Blank line for the virus-program version. Intentional. |
 | 19 | Certificate of compliance (14) | Count is that of this sample (2,421 words), not the filed brief (4,185). The typeface line was fixed to read "14-point EB Garamond" (it had printed as code). Re-checked after the fix. |
 | 20 | Certificate of service (15) | Fine. |
@@ -74,8 +74,8 @@ The sample is 2,421 words of the exemplar's 4,185; the body is 11 pages, within 
 ## Build
 
 ```sh
-export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq
-cd /work/repo
+export PATH="$HOME/.local/share/formbook/env/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq
+cd <repo root>
 sh tools/render.sh courts/third-circuit/court-of-appeals/answering-brief samples/INPUT-binder-answering-brief.md
 sh tools/overlay.sh courts/third-circuit/court-of-appeals/answering-brief binder-answering-brief
 ```
@@ -87,3 +87,13 @@ sh tools/overlay.sh courts/third-circuit/court-of-appeals/answering-brief binder
 - **typst** (`typst/`): primary, unchanged.
 - **latex** (`latex/template.tex`, `latex/ca3.lua`; built by `tools/render-latex.sh` with tectonic, two passes): 14 pt EB Garamond from the vendored `fonts/`, double spaced, 1 inch margins; roman pages for the corporate disclosure statement, contents and authorities, then arabic body pages; the Argument's point headings are centered with roman numerals; the addendum uses `Add-N` page numbers. Differs from typst: 21 pages against typst's 20; the certificate of compliance names LaTeX; the addendum has no table of its own (the sample has no addendum, so it is not exercised); the layout is checked by eye on a contact sheet, not by Gate 2. Tier 1 is not signed off for this engine.
 - **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`): writes `samples/OUTPUT-<id>.docx`. `docx.pdf` checks are **BLOCKED**: LibreOffice (`soffice`) is not installed and has no conda-forge package. Not provided (not checked, not claimed): table of contents and table of authorities page numbers; footer page numbers and the roman/arabic sections; the disclosure statement's paragraph layout; the addendum's own page numbering; body first-line indents; the Argument's centered point headings.
+
+## Verification pass 2026-10-16 (fb-595.26.3)
+
+- Rendered: `sh tools/render.sh ... samples/INPUT-binder-answering-brief.md`, exit 0, no typst warnings, 20 pages (the same count as the first pass). Overlay rerun: `samples/OVERLAY-binder-answering-brief.pdf`, 20 pages; pairs and percentages as described above (cover 86.9%, disclosure 67.8%, TOC 72.4%, TOA 44.8% and 6.9%, body 40-69%, filed p. 28 paired twice).
+- Viewed: all 20 pages of the OUTPUT at 60 dpi, the 20 overlay pages at 40 dpi (as one contact sheet), and the exemplar's pages 1 and 2 against our cover and disclosure statement (same elements and order; the exemplar's disclosure is single-spaced, as ours is).
+- Defect fixed (tier 2): in the TOC (PDF p. 3), the page number "5" of Argument I wrapped onto a line of its own, below the leader. TOC rows are now a two-column grid (title and leader, then a fixed 2.6em page-number column), so the number stays on the last line of its entry. After the fix only PDF page 3 changed (every other page is pixel-identical to the pre-fix render); page 3 was viewed again: every number sits on its entry's last line.
+- Defect fixed (tier 2; FRAP 32(a)(4) exempts only quotations, headings and footnotes from double spacing): the four certificates (PDF pp. 17-20) were single-spaced with no paragraph indent. The filed certificates of all three ca3 filers seen (Binder pp. 28-30, Tresslar pp. 44-47, AFP reply pp. 34-35) are double-spaced with a first-line indent. The certificate text now uses the body leading and indent; the signature blocks stay single-spaced. Page count unchanged (20); pp. 17-20 viewed again. The disclosure statement stays single-spaced, as in the exemplar (p. 2).
+- Not changed, noted: the cover's "Counsel for Appellee ..." line wraps without a hanging indent (tier 3); the e-filing certificate's blank for the virus program sits at the right margin (tier 3).
+- latex re-rendered (`--engine latex`): exit 0, 21 pages, as recorded. Its pages were not reviewed in this pass. docx not touched (no `soffice`).
+- Gaps unchanged: see Known gaps. One exemplar only; a second filer is still needed for tier 2.

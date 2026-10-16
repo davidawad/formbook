@@ -186,11 +186,12 @@
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else if numbered and hd.level == 2 { upper(hd.body) } else { hd.body }
   // Three columns: label, title with its leader, page number. The page number has its own column,
-  // so a title that wraps never pushes it onto a line of its own; wrapped titles hang under the text.
+  // so a title that wraps never pushes it onto a line of its own; wrapped titles hang under the text,
+  // and the page number sits on the last line, where the leader ends.
   let label-width = if numbered { ind + heading-tab } else { ind }
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt, {
     set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
-    grid(columns: (label-width, 1fr, 2em), column-gutter: 0pt,
+    grid(columns: (label-width, 1fr, 2em), column-gutter: 0pt, align: (left + top, left + top, right + bottom),
       [#h(ind)#if numbered { lab }],
       [#title#h(0.4em)#dot-leader],
       align(right, it.page()))

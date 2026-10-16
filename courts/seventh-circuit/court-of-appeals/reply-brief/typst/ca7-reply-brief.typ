@@ -266,9 +266,10 @@
 #let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
 
 /// One counsel group: names, then the lines under them (office address, telephone).
+/// Names and lines are set as given: markdown emphasis in them is honoured, nothing is forced italic.
 #let counsel-cell(g) = block(breakable: false, {
-  for n in g.names { n; linebreak() }
-  for l in g.at("lines", default: ()) { emph(inl(l)); linebreak() }
+  for n in g.names { inl(n); linebreak() }
+  for l in g.at("lines", default: ()) { inl(l); linebreak() }
 })
 
 #let cover-body(meta, gap) = {
@@ -348,7 +349,7 @@
       [/s/ #sig.signer]
       linebreak()
       upper(sig.signer)
-      for l in sig.at("lines", default: ()) { linebreak(); h(0.5em); emph(inl(l)) }
+      for l in sig.at("lines", default: ()) { linebreak(); h(0.5em); inl(l) }
     }))
     if "date" in meta { v(0.8em); [Dated: #meta.date] }
   })

@@ -46,7 +46,7 @@ Tier 2 (conventions) is judged against the exemplar only: cover arrangement, hea
 
 ## Markdown contract
 
-One `.md` file: YAML frontmatter, then the body. The template builds the cover, front matter, TOC, TOA, signature block and both certificates. Full field list in the frontmatter of `samples/INPUT-banks-costar-response.md`. Required: `case_number`, `caption`, `proceeding`, `brief_title`, `counsel`, `phone`, `signature`, `date`, `virus_check`, `summary`, `authorities` (when the body cites any). Optional: `judge`, `district_court_case`, `disclosure` (omit when the party is not a nongovernmental corporation).
+One `.md` file: YAML frontmatter, then the body. The template builds the cover, front matter, TOC, TOA, signature block and both certificates. Full field list in the frontmatter of `samples/INPUT-banks-costar-response.md`. Required: `case_number`, `caption`, `proceeding`, `brief_title`, `counsel` (each group may carry its own `phone`, printed under that group), `phone` (only when no counsel group has one; printed under the last group), `signature`, `date`, `virus_check`, `summary`, `authorities` (when the body cites any). Optional: `judge`, `district_court_case`, `disclosure` (omit when the party is not a nongovernmental corporation).
 
 - Headings: `# Heading` is a centered bold section (Statement, Argument, Conclusion). Argument point headings are numbered automatically (I., A., 1., a.); do not type the numbers. Level 2 outside the Argument is A., level 3 is 1., and so on.
 - Citations: `[*Case v. Name*, 1 F.4th 2 (8th Cir. 2026)](toa:key)`. Every `toa:` key must be in `authorities:`, or the build stops. Each link is recorded with the page it starts on for the TOA.
@@ -56,7 +56,7 @@ One `.md` file: YAML frontmatter, then the body. The template builds the cover, 
 
 ## What the overlay shows
 
-`samples/OVERLAY-banks-costar-response.pdf` puts our render (red) over the filed exemplar page (blue), pages paired by word overlap; black is where both agree. The page map is in `-overlay.txt`. It is a diagnostic, not a score: the sample is a portion of a 58-page brief, so the pages after the first few pair with the exemplar's pages where the same text appears, and where a page has no counterpart the red stands alone. Overlap by page: cover 98%, summary 100%, disclosure 83%, TOC 52% (different entries and page numbers), TOA 29% and 16% (the sample cites a subset), body 50-76%, conclusion 30%, certificates 85-100%.
+`samples/OVERLAY-banks-costar-response.pdf` puts our render (red) over the filed exemplar page (blue), pages paired by word overlap; black is where both agree. The page map is in `-overlay.txt`. It is a diagnostic, not a score: the sample is a portion of a 58-page brief, so the pages after the first few pair with the exemplar's pages where the same text appears, and where a page has no counterpart the red stands alone. Overlap by page: cover 100%, summary 100%, disclosure 83%, TOC 52% (different entries and page numbers), TOA 29% and 16% (the sample cites a subset), body 50-76%, conclusion 30%, certificates 85-100%.
 
 ## Render review (Gate 2 equivalent, recorded by hand)
 
@@ -68,9 +68,9 @@ Each page was rendered at 60 dpi (`pdftoppm -r 60`) and viewed. Pages 1 to 14 we
 | 4 (TOC), 10, 11 | Headings showed doubled numbers ("I. I. CoStar", "A. A. Background"): the sample had typed the numerals the template numbers itself | FIXED in the sample; re-viewed |
 | 2 to 14 | Body pitch 28 pt (double spacing), first-line indent, footnote 14 pt, centered bold headings, page numbers bottom-centered, TOA with dot leaders, cover on one page | PASS |
 | 1 (cover) | Cover fits one page; the case number, court, caption, proceeding, brief title and two-column counsel block are all present | PASS |
-| 13, 14 (certificates) | Word count computed from the body (1,222 for this portion, which is not the filed brief's 11,620); virus statement and date in place | PASS |
+| 13, 14 (certificates) | Word count computed from the body (1,193 for this portion, which is not the filed brief's 11,620); virus statement and date in place | PASS |
 
-The sample's word count (1,222) and the filed brief's (11,620) are different because the sample is a portion; the template computes the count it certifies, so it never copies a number from the exemplar.
+The sample's word count (1,193) and the filed brief's (11,620) are different because the sample is a portion; the template computes the count it certifies, so it never copies a number from the exemplar.
 
 ## Known gaps
 
@@ -91,6 +91,15 @@ The sample's word count (1,222) and the filed brief's (11,620) are different bec
 1. First render: 17 pages (body 9 pages, TOA 2 pages). Cut the Standard of Review (optional for an appellee under FRAP 28(b)(4)), trimmed the statement and summary paragraphs and one argument paragraph. Now 14 pages, inside the 8-14 target.
 2. Fixed the TOC page-number wrap and the doubled heading numerals (see the review table).
 3. Overlay regenerated after the last render.
+
+## Verification pass 2026-10-16 (fb-595.26.8)
+
+- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/answering-brief samples/INPUT-banks-costar-response.md` exit 0, no typst warnings, 14 pages (unchanged from the committed PDF before this pass), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0): cover 100%, summary 100%, disclosure 83%, TOC 52%, TOA 29% and 16%, body 50-76%, conclusion page 30%, certificates 85% and 100%.
+- Viewed: all 14 pages at 60 dpi, the exemplar's page 1 against our cover, and all 14 overlay pages at 40 dpi. Pages 1 and 13 viewed again after the fixes below; the text of pages 2-12 and 14 is unchanged by them.
+- Fixed (tier 1, FRAP 32(a)(2)(F)): the cover printed one telephone number, under the Chicago group, and it was the Washington number; the Chicago number (312) 416-6200 was missing. The template took a single top-level `phone` and appended it to the last group. Counsel groups now take their own `phone` (top-level `phone` remains the fallback), and the sample gives each group its number as filed. The latex and docx filters read the per-group `phone` the same way (latex re-rendered and its cover viewed; docx not rebuilt, no `soffice`).
+- Fixed (sample): an unused footnote definition (`[^kastenmeier]`, left over from trimming) was counted in the certified word count. Removed; the certificate now states 1,193 words (was 1,219).
+- No other defects seen: cover on one page, front matter roman i-v, TOC and TOA page numbers match the body, headings not stranded (the Statement of the Case and the Argument start new pages : the heading group did not fit in the few lines left on the page before), footnote 14 pt, certificates complete.
+- Remaining: the gaps listed above (one filer only for tier 2; no `checks.yaml`, so `tools/check.sh` does not apply; cover colour; addendum). Latex render (13 pages) builds; on its cover the rule above the brief title runs through the judge line (latex only, not fixed in this pass).
 
 [Court folder](../README.md)
 

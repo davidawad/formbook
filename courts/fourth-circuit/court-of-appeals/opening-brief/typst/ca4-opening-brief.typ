@@ -308,15 +308,21 @@
   short-rule
   v(gap)
   // Counsel: names, office addresses and telephone numbers (FRAP 32(a)(2)(F)).
-  align(left, pad(left: 50%, {
+  // One group sits in the right half of the page; two or more groups are set side by side
+  // in two columns (the convention of the court's filed briefs). Lines are roman; a line the
+  // markdown italicises (a title, "Counsel for ...") stays italic.
+  let groups = need(meta, "counsel")
+  let counsel-group(g) = block(breakable: false, {
     set par(hanging-indent: 0pt, spacing: 0.5em)
-    for g in need(meta, "counsel") {
-      block(breakable: false, {
-        for n in g.names { n; linebreak() }
-        for l in g.at("lines", default: ()) { h(0.5em); emph(inl(l)); linebreak() }
-      })
-    }
-  }))
+    for n in g.names { inl(n); linebreak() }
+    for l in g.at("lines", default: ()) { inl(l); linebreak() }
+  })
+  if groups.len() == 1 {
+    align(left, pad(left: 50%, counsel-group(groups.first())))
+  } else {
+    align(left, grid(columns: (1fr, 1fr), column-gutter: 1.5em, row-gutter: 0.8em,
+      ..groups.map(counsel-group)))
+  }
   v(gap)
   double-rule
 }

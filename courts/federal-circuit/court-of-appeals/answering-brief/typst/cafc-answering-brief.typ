@@ -299,10 +299,11 @@
     let groups = need(meta, "counsel")
     for (gi, g) in groups.enumerate() {
       block(breakable: false, {
-        for n in g.names { n; linebreak() }
+        // One line per name and per address line; a line too long for the column wraps under its own indent.
+        for n in g.names { block(spacing: single-leading, n) }
         let lines = g.at("lines", default: ())
         if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
-        for l in lines { h(0.5em); inl(l); linebreak() }
+        for l in lines { block(spacing: single-leading, inset: (left: 0.5em), inl(l)) }
       })
     }
   }))
@@ -322,6 +323,19 @@
   if g == none { panic("cafc-brief: the cover does not fit on one page; shorten the counsel or party lines") }
   cover-body(meta, g * 1em)
 }))
+
+/// Exemplary patent claims (Fed. Cir. R. 32(a)(3)): when the language of a patent or patent
+/// application is at issue, each principal brief carries one or more illustrative claims inside
+/// the front cover, or immediately after it when the text needs more room. Electronic filings
+/// have no inside cover, so the claims take their own unnumbered page(s) right after the cover.
+/// The text may be single-spaced. Only when the frontmatter has `patent_claims`.
+#let patent-claims-page(meta) = if "patent_claims" in meta {
+  page(numbering: none, footer: none, {
+    heading(level: 1, numbering: none, outlined: false, meta.at("patent_claims_heading", default: "Exemplary Patent Claims"))
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+    for p in meta.patent_claims { inl(p); parbreak() }
+  })
+}
 
 // ---------------------------------------------------------------------------
 // Signature, related statement, certificates
@@ -440,6 +454,7 @@
 
   // ---- cover ----
   cover(meta)
+  patent-claims-page(meta)
 
   // ---- front matter (lowercase roman): contents, authorities, related cases ----
   set page(numbering: "i")

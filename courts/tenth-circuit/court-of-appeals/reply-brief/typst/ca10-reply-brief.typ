@@ -224,8 +224,13 @@
   ("other", "Other Authorities:"),
 )
 
-#let sort-key(a) = lower(plain(inl(a.at("sort", default: a.at("name", default: "") + " " + a.cite))))
+/// Sort key: lowercased plain text without punctuation; digit runs zero-padded so "2 U.S.C." sorts
+/// before "28 U.S.C.". (Parenthesised: a method chain on a new line after `#let` is not code.)
+#let sort-key(a) = (
+  lower(plain(inl(a.at("sort", default: a.at("name", default: "") + " " + a.cite))))
     .replace(regex("[^a-z0-9 ]"), "")
+    .replace(regex("\\d+"), m => "0" * calc.max(0, 8 - m.text.len()) + m.text)
+)
 
 /// Table of authorities, built from the `toa:` links found in the body.
 #let toa-section(authorities) = {

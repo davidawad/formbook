@@ -88,19 +88,19 @@ Re-reviewed 2026-10-15 after the font change to TeX Gyre Schola: every page of `
 
 | Page | Content | Finding |
 |---|---|---|
-| 1 | Cover | Fits one page. Oral-argument line, case number, court, caption, proceeding, title, three counsel groups, date. OK. |
-| 2 | Rule 28(a)(1) certificate, parties, rulings (i) | Heading two lines, single-spaced. OK. |
+| 1 | Cover | Fits one page. Oral-argument line, case number, court, caption, proceeding, title, three counsel groups, date. Changed 2026-10-16: three counsel columns broke names ("Michael T. / Kirkpatrick"); groups are now set two to a row, as in the exemplar. |
+| 2 | Rule 28(a)(1) certificate, parties, rulings (i) | Heading two lines, single-spaced. Paragraphs had no indent and no gap, so consecutive paragraphs read as one; fixed 2026-10-16 (first-line indent). |
 | 3 | Certificate cont. (related cases, Rule 26.1) (ii) | OK. |
 | 4 | Table of contents (iii) | Page numbers match the layout. OK. |
-| 5 | Table of authorities (iv) | Every citation page listed, no "passim". OK. |
+| 5 | Table of authorities (iv) | Every citation page listed, no "passim". Fixed 2026-10-16: statutes sorted as text ("8 U.S.C." after "28 U.S.C."), and a full-width entry ran into its page number. |
 | 6 | Glossary (v) | OK. |
 | 7 | Introduction, p. 1 | Double-spaced, first-line indent. OK. |
 | 8 | Introduction cont. (the district court's denial) | OK. |
 | 9 | Importantly...; Jurisdiction; Question presented; Statutory provisions | OK. |
 | 10 | Statement of the case (A); Summary of argument | OK. |
 | 11 | Argument I (statutory text); Standard of review | OK. |
-| 12 | Argument I (heading and text); Conclusion | OK. |
-| 13 | Signature block, alone on its page | OPEN: the block did not fit under the conclusion and moved to the next page. Layout only; the same orphan is on page 12 of the render made before the font change. |
+| 12 | Argument I (heading and text) | OK. Space at the foot: the conclusion moved to the next page with the signature. |
+| 13 | Conclusion and signature block | Fixed 2026-10-16: the signature block was alone on this page; the last paragraph is now kept with it, and headings never end a page. |
 | 14 | Certificate of compliance | Word count and typeface sentence present ("14-point TeX Gyre Schola"). OK. |
 | 15 | Certificate of service | OK. |
 
@@ -112,7 +112,7 @@ Defects found during review and fixed in the template: the bold lead-ins of the 
 2. **Line pitch.** `body-leading` is 1.07em, giving a baseline pitch of about 24 pt at 14 pt. That is the pitch of the filed exemplar's body text. FRAP 32(a)(4) says "double-spaced" without a number; a pitch of about 2× the nominal 14 pt line (≈28 pt) would be larger and would push the sample well past 15 pages. **Decision for David.**
 3. **Word count.** The certificate's count (1,312) is the template's count of the sample's body, which is a portion of the brief. The exemplar's own certificate states 10,418 words for the whole brief. The 13,000-word limit is enforced at build time for any sample.
 4. **Sample is a portion.** It is the exemplar's introduction through the start of the argument, then the conclusion, signature and certificates. The argument body and the statutory addendum are not transcribed. The summary's point I is transcribed only as far as the text read.
-5. **Signature alone on a page** (page 13 above). The conclusion and the signature block split across pages. Pre-existing; not caused by the font change.
+5. **Signature alone on a page (resolved 2026-10-16).** The body's last paragraph is now kept with the signature block, as in the reply template.
 6. **Cover color.** FRAP 32(a)(2) makes the appellant's cover blue. This applies to paper copies; the PDF is not colored.
 7. **Addendum separator.** Circuit Rule 28(a)(5) requires a distinctly colored separation page when the addendum is bound with the brief. Paper only; not produced. The sample has no addendum.
 8. **Headings are not numbered by the template.** The labels are typed in the markdown.
@@ -160,3 +160,16 @@ sh tools/render.sh --engine docx courts/dc-circuit/court-of-appeals/opening-brie
 - Word check: `.docx` is a valid zip with well-formed XML parts (`unzip -tq`, `xmllint --noout`). Opening it in Word or LibreOffice without a repair prompt was not verified (no LibreOffice here).
 
 `docx/make-reference.sh` regenerates `docx/reference.docx` (TeX Gyre Schola 14 pt, body lines exactly 24 pt, first-line indent 0.5 in, black headings, letter page with 1 in margins, centered PAGE field in the footer).
+
+## Verification pass 2026-10-16 (fb-595.26.12)
+
+- Rendered: `sh tools/render.sh .../opening-brief samples/INPUT-centro-opening-brief.md` exits 0, no typst warnings, 15 pages (the committed PDF had been 14 pages and was stale; the 15-page review above matches the re-render). Overlay rerun: same page map as above; overlaps unchanged except p.12 (71.7%) and p.13 (33.3%), where the conclusion moved to the signature page.
+- Viewed: all 15 pages at 60 dpi before the fixes, the changed pages after each fix, and all 15 pages of the final render; all 15 overlay pages at 40 dpi (contact sheet); exemplar pages 1-8 against our cover, certificate, contents and authorities.
+- Fixed (tier 2), in `typst/cadc-opening-brief.typ`:
+  - Certificate of parties: paragraphs ran together (no indent, no gap). They now take the body's first-line indent, as in the exemplar.
+  - Table of authorities: entries sorted with digit runs compared as numbers (8 U.S.C. before 26 U.S.C.); the page list has its own column, so a full-width entry no longer runs into it; long lists wrap in that column.
+  - Signature block alone on a page: the body's last paragraph is kept with the signature, and headings are sticky (never last on a page).
+  - "§ 6103" and "6103(i)(2)" are never split across lines.
+  - Cover: counsel groups are set two to a row (`counsel-columns`); a third column broke names and street lines at 14 pt. The cover spacing shrinks (never the type) to keep the cover on one page; the cover panics if it cannot fit.
+- LaTeX re-rendered: 15 pages, builds (latex template unchanged).
+- Remaining gaps: Known gaps 2 (line pitch, David's decision), 3-4 (partial sample), 6-12 unchanged.

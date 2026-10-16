@@ -162,6 +162,14 @@
 // ---------------------------------------------------------------------------
 
 #let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
+#let page-col = 2em   // the TOC's page-number column; wrapped title lines stop short of it
+
+/// A table row: `body` (ending in a dot leader) wraps in the left column; `pg` sits in its own
+/// right-hand column, level with the last line, so no wrapped line runs into the page numbers.
+#let leader-row(body, pg) = grid(
+  columns: (1fr, page-col), column-gutter: 0.3em,
+  body, align(right + bottom, pg),
+)
 
 /// One table-of-contents row, built from an outline entry. Wrapped lines hang under the title.
 #let toc-entry(it) = {
@@ -171,15 +179,13 @@
   let lab = if hd.numbering != none { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.7em } else { 0.4em }, below: 0pt,
-    hang(ind + heading-tab, {
+    leader-row(hang(ind + heading-tab, {
       h(ind)
       if lab != none { box(width: heading-tab, lab) }
       title
       h(0.3em)
       dot-leader
-      h(0.3em)
-      box(width: 0.9em, align(right, it.page()))
-    })))
+    }), it.page())))
 }
 
 /// Contents: every outlined heading from the Issues to the certificates (the front matter and
@@ -263,6 +269,15 @@
 
 #let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
 
+/// A left-aligned block set against the right margin: as wide as its widest line, at least half
+/// the text width, at most all of it. Used for the cover's counsel block and the signature block,
+/// so a long name or address line does not wrap in a column fixed at half the page.
+#let right-column(body) = layout(size => {
+  let natural = measure(body).width
+  let w = calc.min(calc.max(natural, size.width * 50%), size.width)
+  align(left, pad(left: size.width - w, block(width: w, align(left, body))))
+})
+
 #let cover-body(meta, gap) = {
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
   set align(center)
@@ -299,19 +314,21 @@
   v(gap)
   short-rule
   v(gap)
-  // Attorneys filing the petition: name, State Bar number, address, telephone (rule 8.74(a)(9)).
-  align(left, pad(left: 50%, {
+  // Attorneys filing the petition: name, State Bar number, address, telephone (rule 8.74(a)(9)),
+  // and the party they represent (rule 8.74(c)(1)).
+  right-column({
     set par(hanging-indent: 0pt, spacing: 0.5em)
     let groups = need(meta, "counsel")
     for (gi, g) in groups.enumerate() {
       block(breakable: false, {
         for n in g.names { inl(n); linebreak() }
         let lines = g.at("lines", default: ())
-        if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
-        for l in lines { h(0.5em); emph(inl(l)); linebreak() }
+        if gi == groups.len() - 1 { lines = lines + ("Telephone: " + need(meta, "phone"),) }
+        for l in lines { h(0.5em); inl(l); linebreak() }
       })
     }
-  }))
+    emph(inl(need(meta, "represents")))
+  })
   v(gap)
   align(left, need(meta, "date"))
 }
@@ -337,14 +354,14 @@
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
     [Dated: #need(meta, "date")]
     v(1.2em)
-    align(left, pad(left: 50%, {
+    right-column({
       [Respectfully submitted,]
       v(1.2em)
       [/s/ #sig.signer]
       linebreak()
       upper(sig.signer)
       for l in sig.at("lines", default: ()) { linebreak(); h(0.5em); emph(inl(l)) }
-    }))
+    })
   })
 }
 
@@ -380,7 +397,7 @@
 
 #let cal-petition(meta, md) = {
   // ---- metadata checks (loud failure beats silent omission) ----
-  for k in ("caption", "court_of_appeal", "trial_court", "counsel", "phone", "signature", "date", "service") {
+  for k in ("caption", "court_of_appeal", "trial_court", "counsel", "phone", "represents", "signature", "date", "service") {
     let _ = need(meta, k)
   }
   let authorities = meta.at("authorities", default: (:))

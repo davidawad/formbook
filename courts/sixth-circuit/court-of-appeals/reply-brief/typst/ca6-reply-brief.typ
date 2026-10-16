@@ -369,7 +369,7 @@
   block(breakable: false, {
     [This reply brief complies with the type-volume limitation of Fed.~R.~App.~P.~32(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed.~R.~App.~P.~32(f).]
     parbreak()
-    [This reply brief complies with the typeface requirements of Fed.~R.~App.~P.~32(a)(5) and the type-style requirements of Fed.~R.~App.~P.~32(a)(6) because it has been prepared in a proportionally spaced typeface, #(type-size-pt)-point #font-family.]
+    [This reply brief complies with the typeface requirements of Fed.~R.~App.~P.~32(a)(5) and the type-style requirements of Fed.~R.~App.~P.~32(a)(6) because it has been prepared in a proportionally spaced typeface, #box[#(type-size-pt)-point] #font-family.]
     cert-signature(meta)
   })
 }
@@ -435,7 +435,7 @@
   // Never break inside a token of adjacent parentheses ("60(b)(5)"), and never between a
   // section sign and its number. Unbreakable boxes; the extracted text is unchanged.
   show regex("\\S*\\)\\(\\S*"): it => box(it)
-  show regex("[§¶] \\S+"): it => box(it)
+  show regex("[§¶]+ \\S+"): it => box(it)   // keep "§ 12" and "§§ 12" whole: no break inside or after the sign
   show heading: style-heading
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {

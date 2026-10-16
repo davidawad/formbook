@@ -206,15 +206,18 @@
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let hang-by = ind + heading-tab
+  // The page number lives in its own column so it never wraps onto a line of its own:
+  // a long title wraps, and the leader and number stay on its last line.
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(hang-by, {
-      h(ind)
-      if numbered { box(width: heading-tab, lab) }
-      title
-      h(0.8em)
-      dot-leader
-      box(width: 2.6em, align(right, it.page()))
-    })))
+    grid(columns: (1fr, 2.6em), column-gutter: 0.4em,
+      hang(hang-by, {
+        h(ind)
+        if numbered { box(width: heading-tab, lab) }
+        title
+        h(0.8em)
+        dot-leader
+      }),
+      align(bottom + right, it.page()))))
 }
 
 #let toc-section(has-addendum) = {
@@ -403,7 +406,7 @@
 /// Certificate of bar membership (L.A.R. 28.3(d)).
 #let bar-certificate(meta) = {
   heading(level: 1, numbering: none)[Certificate of Bar Membership]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+  set par(first-line-indent: (amount: para-indent, all: true), leading: body-leading, spacing: body-leading, justify: false)   // FRAP 32(a)(4): text double-spaced
   [I hereby certify that at least one of the attorneys whose names appear on this brief is a member of the bar of this Court.]
   cert-signature(meta)
 }
@@ -411,7 +414,7 @@
 /// Electronic-filing certification (L.A.R. 31.1(c)): identical text, virus check and the version of the program used.
 #let electronic-certificate(meta) = {
   heading(level: 1, numbering: none)[Electronic-Filing Certification]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+  set par(first-line-indent: (amount: para-indent, all: true), leading: body-leading, spacing: body-leading, justify: false)   // FRAP 32(a)(4): text double-spaced
   [I hereby certify that the text of the electronically filed brief is identical to the text in the paper copies. I also certify that a virus detection program has been run on the electronic file and that no virus was detected. The virus detection program used, and its version, is #h(1fr)#box(width: 2.2in, line(length: 100%, stroke: 0.5pt))#h(0.1em).]
   cert-signature(meta)
 }
@@ -419,7 +422,7 @@
 /// Certificate of compliance, FRAP 32(g)(1) and Form 6 (Fed. R. App. P. 32(a)(7)(B), 32(a)(5), 32(a)(6)).
 #let certificate-of-compliance(meta, words) = {
   heading(level: 1, numbering: none)[Certificate of Compliance]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+  set par(first-line-indent: (amount: para-indent, all: true), leading: body-leading, spacing: body-leading, justify: false)   // FRAP 32(a)(4): text double-spaced
   [1. This brief complies with the type-volume limitation of Fed. R. App. P. 32(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. App. P. 32(f). The count includes #meta.at("manual_image_words", default: 0) words counted by hand in any visual images.]
   [2. This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because it has been prepared in a proportionally spaced typeface using Typst #str(sys.version.major).#str(sys.version.minor).#str(sys.version.patch) in #int(type-size / 1pt)-point #font-family.]
   cert-signature(meta)
@@ -430,7 +433,7 @@
 #let certificate-of-service(meta) = {
   let svc = meta.service
   heading(level: 1, numbering: none)[Certificate of Service]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+  set par(first-line-indent: (amount: para-indent, all: true), leading: body-leading, spacing: body-leading, justify: false)   // FRAP 32(a)(4): text double-spaced
   [I certify that on #svc.date I caused the foregoing #inl(need(meta, "brief_title")) to be served by #svc.method on the following:]
   for u in svc.to { block(above: 0.7em, breakable: false, pad(left: 0.5in, [#u.name, #u.address])) }
   cert-signature(meta)

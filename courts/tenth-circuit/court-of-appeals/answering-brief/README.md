@@ -8,9 +8,9 @@
 ## Result
 
 - exemplar=yes: `exemplars/FILED-EXAMPLE-willey-sweetwater-25-8027-answering-brief.pdf` (filed appellee brief, 63 pages, text layer present; see `exemplars/SOURCE.md`)
-- render=ok: `samples/OUTPUT-willey-answering-brief.pdf` (14 pages, no typst warnings, vendored fonts only)
+- render=ok: `samples/OUTPUT-willey-answering-brief.pdf` (13 pages since 2026-10-16, no typst warnings, vendored fonts only)
 - overlay=ok: `samples/OVERLAY-willey-answering-brief.pdf` and `-overlay.txt`
-- pages reviewed: 14 of 14 (`pdftoppm -r 60`, every page viewed)
+- pages reviewed: 13 of 13 in the 2026-10-16 pass (`pdftoppm -r 60`, every page viewed)
 
 ## Governing rules
 
@@ -46,7 +46,7 @@ Not generated, on purpose: a corporate disclosure statement (FRAP 26.1), a gloss
 - `typst/ca10-answering-brief.typ` is the template: `ca10-brief(meta, md)`. Every number is a named parameter at the top, each traced to a rule. No case-specific text, no coordinates measured off the exemplar, no forced line breaks. Compile only via `tools/render.sh`.
 - `typst/main.typ` reads the sample named by `--input sample=...`, splits the frontmatter, and calls the template.
 - Calibration: the body baseline pitch is 28.14 pt for 14 pt type (`body-leading = 1.36em`). The exemplar's double-spaced body measures 28.08 pt (page 11 of the exemplar, lines at y=103.79 and 131.87). This is measured, not from a rule.
-- Structure, as the exemplar and the rules give it: cover (two pages, `i`-`ii`), TOC (`iii`), TOA and prior-appeals statement (`iv`), body (`1`-`n`, arabic from 1), signature block after the conclusion, statement of counsel as to oral argument, certificate of compliance, certificate of digital submission, certificate of service.
+- Structure, as the rules give it: cover (one page, `i`, unnumbered; FRAP 32(a)(2)), TOC (`ii`), TOA and prior-appeals statement (`iii`), body (`1`-`n`, arabic from 1), signature block after the conclusion, statement of counsel as to oral argument, certificate of compliance, certificate of digital submission, certificate of service.
 
 ## Markdown contract
 
@@ -88,7 +88,7 @@ pdftoppm -r 60 -png courts/tenth-circuit/court-of-appeals/answering-brief/sample
 ## Sample
 
 - `samples/INPUT-willey-answering-brief.md`: a transcription of part of the exemplar for visual comparison, not the whole brief. It carries the cover, the TOC/TOA data, the jurisdictional statement, the issues, the statement of the case (I. Factual Background, II. Procedural Background), the conclusion, the statement of counsel as to oral argument, and the certificates. The Argument (Parts I-III) and the Summary of Argument are omitted.
-- The certificate of compliance states 1,775 words. That is the sample body's own approximate count, not the 12,524 words of the filed brief.
+- The certificate of compliance states 1,802 words (1,775 before the conclusion's first sentences were restored on 2026-10-16). That is the sample body's own approximate count, not the 12,524 words of the filed brief.
 
 ## Overlay
 
@@ -99,14 +99,14 @@ pdftoppm -r 60 -png courts/tenth-circuit/court-of-appeals/answering-brief/sample
 1. **Cover colour.** FRAP 32(a)(2) requires a red cover for the appellee's paper copies. The PDF is white, as the exemplar's ECF copy is. The template does not draw a coloured cover; a paper copy must be printed on a red cover.
 2. **Length is not enforced.** The template does not check the 13,000-word or 30-page limit for the appellee's principal brief. The count it prints (`count-words`) is approximate (whitespace-delimited, markup stripped). A gate for the full brief is needed before filing.
 3. **Rule texts not fetched:** 10th Cir. R. 32(A), 32(B), 25.5, 28.2(C), 46.5 and 25.4 were taken from the 2026 checklist and the exemplar, not the rule text. The checklist was fetched as a PDF; the 10th Cir. rules page returned 404. Verify against the court's rules before the template is treated as final.
-4. **Table of authorities.** Page references come from `search` regexes over the rendered text. A citation split across lines or across a changed run of text is found only if its regex still matches one text element. Italic case names in the TOA show a stray space before the comma after the name ("Reich , 141") in the PDF text layer and in the 60 dpi page image; not corrected.
+4. **Table of authorities.** Page references come from `search` regexes over the rendered text. A citation split across lines or across a changed run of text is found only if its regex still matches one text element. The stray space after every matched authority ("Reich , 141", "25.5 ;") was fixed on 2026-10-16.
 5. **Not in the template:** corporate disclosure statement (FRAP 26.1), glossary, addendum, the ECF running header, paper-copy counts.
 6. **Sample is partial.** The Argument is omitted, so the TOA lists only the authorities in the transcribed portion, and the TOC lists no Argument headings.
-7. **Lengths.** The sample is 14 pages (cover 2, TOC 1, TOA and prior statement 1, body 7, certificates 3), within the 8-14 target. The filed exemplar is 63 pages.
+7. **Lengths.** The sample is 13 pages (cover 1, TOC 1, TOA and prior statement 1, body 7, certificates 3), within the 8-14 target. The filed exemplar is 63 pages.
 
 ## Pages reviewed
 
-All 14 pages of `samples/OUTPUT-willey-answering-brief.pdf` were rendered at 60 dpi and viewed after the final build: cover (1-2), TOC (3), TOA and prior statement (4), body (5-11), certificates (12-14). Defects found and fixed during review: TOA page numbers blank (fixed: show-rule tagging moved into the brief scope), TOC showing physical rather than roman page numbers for front matter (fixed), cover telephone line not centered (fixed), signature in capitals with the name line missing (fixed), compliance certificate wording "font size" (fixed).
+(2026-10-14 pass, 14-page layout; superseded by the 2026-10-16 section below.) All 14 pages were rendered at 60 dpi and viewed: cover (1-2), TOC (3), TOA and prior statement (4), body (5-11), certificates (12-14). Defects found and fixed during review: TOA page numbers blank (fixed: show-rule tagging moved into the brief scope), TOC showing physical rather than roman page numbers for front matter (fixed), cover telephone line not centered (fixed), signature in capitals with the name line missing (fixed), compliance certificate wording "font size" (fixed).
 
 ## Log
 
@@ -124,7 +124,7 @@ All 14 pages of `samples/OUTPUT-willey-answering-brief.pdf` were rendered at 60 
 
 Typst is the primary engine. The DOCX engine (`docx/build-reference.sh`, `docx/ca10.lua`, `docx/reference.docx`) renders the same sample through pandoc and LibreOffice; the PDF is `samples/OUTPUT-willey-answering-brief.docx.pdf`.
 
-**Matches the typst output:** 14-point EB Garamond throughout; letter paper with 1 in margins; the two-page cover (page i unnumbered, page ii numbered `ii`, centered caption, counsel and phone, oral-argument line as written in the frontmatter); the contents on `iii` and the table of authorities with the prior-appeals statement on `iv`; body numbered from 1; double-spaced body (exact 556 twips, 27.8 pt, against typst's measured 28 pt) with a 0.5 in first-line indent; centered bold body H1 in its own case, bold left H2 with a 0.5 in hanging indent; single-spaced footnotes at 14 pt; the signature block and the "By:" service signature at 3.25 in; the statement of counsel as to oral argument; the compliance, digital-submission and service certificates, each on its own page, in typst's order; the word count (1,775, computed as typst's `count-words` does).
+**Matches the typst output** (as of 2026-10-15; the typst cover became one page on 2026-10-16, see below): 14-point EB Garamond throughout; letter paper with 1 in margins; the two-page cover (page i unnumbered, page ii numbered `ii`, centered caption, counsel and phone, oral-argument line as written in the frontmatter); the contents on `iii` and the table of authorities with the prior-appeals statement on `iv`; body numbered from 1; double-spaced body (exact 556 twips, 27.8 pt, against typst's measured 28 pt) with a 0.5 in first-line indent; centered bold body H1 in its own case, bold left H2 with a 0.5 in hanging indent; single-spaced footnotes at 14 pt; the signature block and the "By:" service signature at 3.25 in; the statement of counsel as to oral argument; the compliance, digital-submission and service certificates, each on its own page, in typst's order; the word count (1,775, computed as typst's `count-words` does).
 
 **Differs (tier 2, not chased):** the cover caption and counsel lines are set more loosely than the typst cover; the body H1 and H2 use the same sizes (19.5 pt and 17 pt, typst 19.6 pt and 16.8 pt) but their space above and below is tighter, because LibreOffice keeps the space above a heading at the top of a page; the compliance certificate names the filing program as "a proportionally spaced word processor" (instructed wording, see below); the contents and the table of authorities show no page numbers; the authorities keep dot leaders running to the margin, and the contents have none.
 
@@ -137,3 +137,17 @@ Typst is the primary engine. The DOCX engine (`docx/build-reference.sh`, `docx/c
 - Certificate of compliance, item 2 (program name): the typst template prints "using Typst". The docx prints "using a proportionally spaced word processor", as the rule requires the filer to name the program. The filer must replace it with the program name before filing; the template cannot know it.
 
 **Other notes:** the cover is two sections, page i with no footer and page ii with a roman footer starting at 2, so the footer reads `ii`, `iii`, `iv`, then arabic from 1 in the body. The word limit is 13,000 for a principal brief (FRAP 32(a)(7)(B)(i)); the sample's 1,775 words are within it.
+
+## Verification pass 2026-10-16 (fb-595.26.10)
+
+- Rendered: `tools/render.sh` exit 0, no typst warnings; 14 pages before the fixes, **13 after**. Overlay rerun (`tools/overlay.sh`): cover pairs with filed p. 1 at 61.5%, body pages 49-82%, certificates 60-86%.
+- Viewed: all 14 pages of the first re-render, then all 13 pages after the template fixes (pages 9-13 again after the sample fix), at 60 dpi; the 13 overlay pages at 40 dpi; exemplar pages 1-3 against our cover.
+- Defects fixed:
+  1. **Two-page cover** (tier 1). The brief title, the oral-argument line and counsel sat on page ii, not on the front cover; FRAP 32(a)(2)(D)-(E) put them on the front cover. The exemplar's filer splits the cover over two pages (tier 3, not followed). The cover is now one page, the groups spread with flexible space and the title set between two short rules. Front matter moves up one roman number (TOC `ii`, TOA `iii`).
+  2. **Single-spaced lines touching.** `single-leading` was 0.2em, so cover, TOC/TOA, signature and certificate lines crowded (descenders on ascenders). Now 0.65em (typst's normal single spacing).
+  3. **Stray space after every TOA-tagged authority** ("Reich , 141", "25.5 ;", "§ 1983 ."): the citation tag was `[#metadata(keys) <ca10-cite>]`, whose space printed. Removed.
+  4. **First paragraph after a heading not indented** (the oral-argument statement, the first paragraph of each section). The exemplar indents them (filed pp. 10, 60). The paragraph indent now applies to all paragraphs.
+  5. TOC and TOA had no page-column heading and the dot leaders ran into the entry ("Background:."). Added "Page" / "Page(s)" and a small gap before the leader.
+  6. Sample: the conclusion began mid-sentence ("Willeys failed ..."): the first sentences on filed p. 57 were dropped at the page break. Restored. Case names in the oral-argument statement set in italics, as filed.
+- DOCX outputs not touched (no LibreOffice on this box). The docx engine still makes the two-page cover; `OUTPUT-willey-answering-brief.docx.pdf` (15 pages) is now out of step with the typst render.
+- Remaining gaps: Known gaps 1-3, 5, 6 above (cover colour, length not enforced, local rule texts not fetched, no glossary or disclosure, partial sample); no `checks.yaml`.

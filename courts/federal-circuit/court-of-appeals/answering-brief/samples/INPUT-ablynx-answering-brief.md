@@ -20,13 +20,16 @@ counsel:
     lines: ["Associate Solicitors", "Office of the Solicitor", "U.S. Patent and Trademark Office", "Mail Stop 8, P.O. Box 1450", "Alexandria, Virginia 22313", "Attorneys for the Director of the U.S. Patent and Trademark Office"]
 phone: "(571) 272-9035"
 date: "August 14, 2026"
+patent_claims_heading: "Representative Claim"
+patent_claims:
+  - '51\. A fusion protein comprising at least two immunoglobulin single variable domains (ISV), wherein one of the at least two ISVs is at the C-terminal end of the fusion protein, wherein the ISV at the C-terminal end of the fusion protein is a VHH, a humanized VHH, a VH, or a camelized VH that: does not bind to serum albumin; and has a C-terminal end of the sequence VTVSS(X)n (SEQ ID NO: 34), in which n is 1, 2, 3, 4, or 5, and in which each X is chosen from the group consisting of alanine (A), glycine (G), valine (V), leucine (L), and isoleucine (I), except with the proviso that when n is 3, each X is chosen from the group consisting of glycine (G), valine (V), leucine (L), and isoleucine (I), wherein the fusion protein does not comprise an ISV that binds IL-23 or other interleukins.'
+  - "Appx151."
 signature:
   signer: "Kakoli Caprihan"
   lines: ["AUSTIN P. MAYRON", "Deputy Solicitor", "ROBERT J. MCMANUS", "Senior IP Legal Counsel", "KAKOLI CAPRIHAN", "JUSTIN BOVA", "MAUREEN D. QUELER", "Associate Solicitors", "Office of the Solicitor", "U.S. Patent and Trademark Office", "Mail Stop 8, P.O. Box 1450", "Alexandria, Virginia 22313", "(571) 272-9035", "Attorneys for the Director of the U.S. Patent and Trademark Office"]
   certificate_lines: ["Associate Solicitor", "United States Patent & Trademark Office", "Mail Stop 8", "P.O. Box 1450", "Alexandria, Virginia 22313-1450"]
 related_statement:
   - "The Director is not aware of any other appeal in connection with the Patent Trial and Appeal Board (“Board”) proceeding below that is before this or any other court. The Director is also unaware of any other case pending in this or any other court that will directly affect, or be directly affected by, the Court’s decision in this appeal."
-word_counter: "Microsoft Word"
 service:
   certificate: true
 authorities:

@@ -19,7 +19,7 @@ Status: exemplar=yes, render=ok, overlay=ok, pages_reviewed=16 of 16. Full depth
 Build (from the repo root; the toolchain is `typst` 0.15.0, poppler, ImageMagick):
 
 ```sh
-export PATH="$HOME/tb/bin:$PATH"
+export PATH="$HOME/.local/share/formbook/env/bin:$PATH"
 D=courts/ninth-circuit/california/state/courts-of-appeal/answering-brief
 sh tools/render.sh $D samples/INPUT-brown-respondents-brief.md
 sh tools/overlay.sh $D brown-respondents-brief
@@ -101,3 +101,17 @@ BLOCKED (docx engine, `samples/OUTPUT-brown-respondents-brief.docx`):
 - Certificate of interested entities: not generated. Reason: not yet written.
 - TOC and TOA: not generated (typst builds both with page numbers). Reason: no TOC/TOA filter yet; LibreOffice does not honor TA/TOA fields (docs/DOCX.md).
 - Certificate of compliance and certificate of service: not generated. Reason: not yet written.
+
+## Verification pass 2026-10-16 (fb-595.26.16)
+
+- Rendered with `sh tools/render.sh .../answering-brief samples/INPUT-brown-respondents-brief.md`: exit 0, no typst warnings, 16 pages (the committed PDF was also 16 pages, so it was not stale). `pdffonts`: EB Garamond Regular, Italic and Bold only. Committed PDF: `603456c5fb07fa93…`.
+- Viewed all 16 pages at 60 dpi (pages 1, 3, 15 and 16 again after the fixes), and the 16 overlay pages at 40 dpi. Our cover was compared with the exemplar's page 1 (90% word overlap).
+- Overlay rerun (`tools/overlay.sh`): pairings unchanged from the "Overlay" section above.
+- Fixed, in `typst/calctapp-answering-brief.typ`:
+  - Cover (page 1): bar numbers split across lines in the two-column counsel block ("WENDY MUSELL (SBN No. / 203507)"). A parenthetical on a counsel line is now kept whole, so "(SBN No. 203507)" moves to its own line, as the exemplar sets it. The cover still fits one page.
+  - TOC (page 3): same two-column entry as the other doc types (`toc-page-width`), so a long title cannot strand its page number. Wrapped entries now break a little earlier.
+  - Certificate of compliance (page 15): the signer block was right-aligned text (ragged left) in a box at the left half. It is now left-aligned and starts at the middle of the page, like the brief's signature block on page 14.
+  - Certificate of service (page 16): the declarant's name, the same defect and fix.
+  - The no-break rule for a section sign and its number now covers "§§" (`[§¶]+ \S+`).
+- Accepted, not changed (tier 3): "else / —discuss" (page 9), an em dash at the start of a line, which is a legal break.
+- Remaining gaps: one exemplar (one filer), so tier 2 cannot be finished; no `checks.yaml`, so Gates 0 and 1 have not run; latex not rendered (no `latex/` in this folder); docx not converted (no `soffice`).

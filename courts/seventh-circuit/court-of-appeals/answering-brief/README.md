@@ -2,7 +2,7 @@
 
 Doc type `answering-brief` of court `ca7` (`courts/seventh-circuit/court-of-appeals/`). This folder is self-contained: its own exemplar, sample, template and rules. The court-root `typst/` and `samples/` are not touched.
 
-Status: exemplar = yes; typeface = none named by the rules, EB Garamond kept (fonts pass, 2026-10-15; see the court `README.md` "Typeface"); render = ok (fonts pass); overlay = **fail** (the filed exemplar PDF is not in this snapshot, so `tools/overlay.sh` exits 1 with "no exemplar pdf"; the committed `.txt` is from an earlier run); pages reviewed = 14 of 14 in the fonts pass. The Seventh Circuit rules were read in the fonts pass (see "Verification status" below).
+Status: exemplar = yes; typeface = none named by the rules, EB Garamond kept (fonts pass, 2026-10-15; see the court `README.md` "Typeface"); render = ok (re-run 2026-10-16); overlay = ok (re-run 2026-10-16, the exemplar is in `exemplars/`); pages reviewed = 14 of 14 in the verification pass of 2026-10-16 (see "Verification pass"). The Seventh Circuit rules were read in the fonts pass (see "Verification status" below).
 
 ## Folder
 
@@ -71,7 +71,7 @@ The rules for this doc type were checked as follows:
 5. **Exemplar typos are kept as printed**: "26-1854" in footnote 4, "655 F.3d at 774", "Holiday v. Alt. Richfield Co.", "Robertson ... (E.D. La. July 11, 2026)", "Rightsell ... 2026 U.S. Dist. LEXIS 51716 at \*6". They belong to the filing, not to the template. The template does not change citation text.
 6. **Short appendix not produced.** Seventh Circuit short appendices are separate filings (Carter's title page shows one combined). No addendum section exists in this template.
 7. **One exemplar only.** The tier-2 standard calls for two or three exemplars from different filers. Carter's brief is recorded in `exemplars/SOURCE.md` for comparison, but not used in the overlay.
-8. **Overlay pairing is diagnostic.** Pages are paired by word overlap, not by position. The cover and TOC pair at 100%, and the TOA at 41%. Body pages (PDF 4–10) pair with filed body pages at 45–69%. PDF page 11 (conclusion and signature) pairs at 34%, since the filed brief's signature sits on a different page. PDF pages 12–14 (certificates) pair at 80–92%. The overlay shows where the sample and the exemplar differ; it is not a score.
+8. **Overlay pairing is diagnostic.** Pages are paired by word overlap, not by position. The cover and TOC pair at 100%, and the TOA at 41%. Body pages (PDF 4–10) pair with filed body pages at 45–69%. PDF page 11 (conclusion and signature) pairs at 34%, since the filed brief's signature sits on a different page. PDF pages 12–14 (certificates) pair with filed pages 32–34 at 80%, 85% and 90% (2026-10-16 run). The overlay shows where the sample and the exemplar differ; it is not a score.
 
 ## Pages reviewed (Gate 2)
 
@@ -93,12 +93,23 @@ PDF page (printed folio) and what it shows:
 | 10 | 7 | Argument II (end) | Single-spaced block quotation, indented. Transcription note. |
 | 11 | 8 | Argument III heading, conclusion, signature block | Heading kept with the conclusion; signature block unbroken. |
 | 12 | 9 | Certificate of compliance | Word count, typeface line, signature block. |
-| 13 | 10 | Certificate of service (counsel list) | Fine. |
-| 14 | 11 | Certificate of service (signature block) | Signature block moved as one unit. |
+| 13 | 10 | Certificate of service (counsel list, first four groups) | Fine. |
+| 14 | 11 | Certificate of service (last two groups, signature block) | Since 2026-10-16 the last group served is kept with the signature block, so the signature no longer stands alone. |
 
 Every page was rasterized (`pdftoppm -r 60`) and viewed, first after the template's last substantive change and again after the final edits.
 
 Fonts pass, 2026-10-15: the sample was re-rendered (14 pages, `pdffonts`: EB Garamond only, embedded), and all 14 pages were rasterized at `pdftoppm -r 70` and viewed again. No layout change, since the face did not change. Nothing new was found on the pages. The overlay could not be regenerated: `exemplars/` holds only `SOURCE.md`.
+
+## Verification pass 2026-10-16 (fb-595.26.7)
+
+- Rendered: `sh tools/render.sh ... samples/INPUT-craig-answering-brief.md`, exit 0, no typst warnings, 14 pages (the committed OUTPUT was also 14 pages). Re-rendered after each fix.
+- Viewed: all 14 pages at `pdftoppm -r 60`, one PNG at a time; pages 1 and 11–14 again after the fixes (pages 2–10 are text-identical to the first render, checked page by page with `pdftotext -layout`). Exemplar page 1 compared with our cover; exemplar pages 31–34 (signature, certificates) viewed. All 14 overlay pages viewed at `-r 40`.
+- Overlay: regenerated (the exemplar is now in `exemplars/`). Cover and TOC 100%, TOA 41%, body 45–69%, conclusion page 34%, certificates 80–90%. Margins and text block coincide; differences are face and size (EB Garamond vs Times New Roman, both 12 pt) and omitted text.
+- Fixed:
+  - Template: counsel, signature and service address lines were forced italic; the exemplar sets them roman with only the "Counsel for / Attorneys for" lines italic. Lines are now set as given, and markdown `*...*` in a line is honoured.
+  - Template: the certificate of service's signature block stood alone on PDF page 14. The last counsel group served is now kept with the signature block.
+  - Sample: the service list was mis-transcribed (Bever and Fecht merged under BBFCS; Gritton and Freel missing). It now has the six groups as filed (exemplar pp. 33–34); the role lines are marked italic in the markdown, as printed.
+- Remaining gaps: as in "Known gaps" (Rule 26.1 statement, partial transcription, one exemplar in the overlay). The service certificate's wording and the signature position (left, not right as filed) are the template's, not the filer's (tier 3). The latex engine was re-rendered from the corrected sample (exit 0, 14 pages) but its pages were not viewed in this pass. The docx outputs were not rebuilt (no LibreOffice on this box), so `OUTPUT-craig-answering-brief.docx` and `.docx.pdf` predate the service-list correction.
 
 ## Changes made during review
 
@@ -111,7 +122,7 @@ Fonts pass, 2026-10-15: the sample was re-rendered (14 pages, `pdffonts`: EB Gar
 
 ## Engines
 
-- **typst** (`typst/`): primary, unchanged.
+- **typst** (`typst/`): primary. Roman address lines and the service-signature keep changed 2026-10-16 (see "Verification pass").
 - **latex** (`latex/template.tex`, `latex/ca7-answering-brief.lua`): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 26.9 pt double spacing, one-inch margins, no hyphenation. The Argument's point headings are centered small capitals; other headings use A. / 1. / a. / (1). Cover, TOC, TOA, signers block (`/s/` and bar numbers) and both certificates follow the typst frontmatter fields. Output `samples/OUTPUT-craig-answering-brief.latex.pdf`, 14 pages (typst: 14). Differences: the cover is not fitted to the page, so its final date line and rule may sit differently; the TOC shows the short certificate title, not the full typst heading. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
 - **docx** (`docx/`): `build-reference.sh` (reference styles, EB Garamond 12 pt, exact 26.9 pt double spacing, 11 pt footnotes), `ca7-answering-brief.lua` (cover, TOC, TOA, signature and certificates as styled paragraphs), `render.sh` (sections with roman front matter and arabic body, PAGE footers, and a two-pass TOC/TOA page map read from the LibreOffice PDF), `pagemap.awk`. Output `samples/OUTPUT-craig-answering-brief.docx` and `.docx.pdf`, 14 pages (typst: 14); the certificate word count is 2,579, the same as typst. Matches typst: the face, sizes, spacing, one-inch margins, cover lines and counsel, roman and arabic folios, the centered Argument point headings, the TOC and TOA entries with page numbers, both certificates. Differences: the cover is spaced by hand (typst fits it to the page); the TOA page list comes from a text search of the PDF, so a short-form cite (`Allen`) also counts unlinked mentions (Allen: 1, 4, 5, 6, 7; typst 1, 4, 5, 6); the TOC and TOA are static text, not fields, and Word may paginate a page number differently; the compliance certificate omits the typst "using Typst" clause (no word processor is named in the frontmatter). Opened in LibreOffice without error; not opened in Word. BLOCKED: `tools/check.sh --engine docx` cannot run: no `checks.yaml` and no `court.json` in this folder or the court (exit 2), so no Gate 1 check ID can be reported; Gate 2 has no `reviews/` file.
 

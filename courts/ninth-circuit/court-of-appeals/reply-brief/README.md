@@ -7,8 +7,8 @@ Self-contained folder for the reply brief of an appellant or petitioner in this 
 | `exemplars/FILED-EXAMPLE-bl-productions-23-55431-reply-brief.pdf` | The filed reply (34 pp., text-based, Garamond embedded). |
 | `exemplars/SOURCE.md` | Where it was fetched from, filer, date filed, date fetched, and the exemplar's known defects. |
 | `samples/INPUT-bl-productions-reply-brief.md` | Transcription of the exemplar: cover, related-cases statement, point I.A, introduction and conclusion. A portion, not the whole reply (it is about 1,960 of the reply's 6,998 counted words). |
-| `samples/OUTPUT-bl-productions-reply-brief.pdf` | The template's render of that sample (13 pages). |
-| `samples/OVERLAY-bl-productions-reply-brief.pdf`, `-overlay.txt` | Red (ours) / blue (filed) overlay, 13 pages, with the page map. |
+| `samples/OUTPUT-bl-productions-reply-brief.pdf` | The template's render of that sample (14 pages since the 2026-10-16 pass). |
+| `samples/OVERLAY-bl-productions-reply-brief.pdf`, `-overlay.txt` | Red (ours) / blue (filed) overlay, 14 pages, with the page map. |
 | `typst/main.typ`, `typst/ca9-reply-brief.typ` | The template. Copied from `../typst/` and changed only where the reply rules differ (see below). |
 
 ## Governing rules (verified 2026-10-14)
@@ -48,23 +48,24 @@ sh tools/overlay.sh courts/ninth-circuit/court-of-appeals/reply-brief bl-product
 pdftoppm -r 60 -png courts/ninth-circuit/court-of-appeals/reply-brief/samples/OUTPUT-bl-productions-reply-brief.pdf /tmp/p
 ```
 
-Render: ok (13 pages, typst 0.15.0, vendored EB Garamond, no warnings). Overlay: ok (13 pages).
+Render: ok (14 pages, typst 0.15.0, vendored EB Garamond, no warnings; rerun 2026-10-16). Overlay: ok (14 pages, rerun 2026-10-16).
 
-Pages reviewed: 13 of 13 (every page rendered at 60 dpi and looked at).
+Pages reviewed: 14 of 14 (every page rendered at 60 dpi and looked at, 2026-10-16).
 
 | Page | Printed folio | Content | Finding |
 |---|---|---|---|
 | 1 | none | Cover | Case number, caption, D.C. No. and judge, title, two counsel groups each with its phone. One page. |
 | 2 | i | Table of contents | Entries and page numbers match the body (Argument 2, Conclusion 8, Related cases 9, Certificate 10). The exemplar also lists the TOC and TOA themselves; this one does not. |
-| 3 | ii | Table of authorities | Cases, Rules, Other Authorities groups; pages match the citations. |
-| 4 | 1 | Introduction | Double-spaced, 14 pt. Ends mid-sentence, as the filed introduction does. |
-| 5 | 2 | Argument I, A | Point heading centered; sub-heading A hangs with its label. |
-| 6–7 | 3–4 | Argument, footnotes 1 and 2 | Footnotes 14 pt, marked, with links into the table of authorities. |
-| 8–9 | 5–6 | Argument | Short-form citations (*Id.*, *Bruen*, *Teixeira*, B&L Orange Cnty.) italic. Block quotation indented and single-spaced. |
-| 10 | 7 | Argument | Continues to the last paragraph of I.A. |
-| 11 | 8 | Conclusion, signature | Signature block kept with the last paragraph. |
-| 12 | 9 | Statement of Related Cases (Form 17) | Selected box drawn, pending case listed. |
-| 13 | 10 | Certificate of Compliance (Form 8) | "complies with the word limit of Cir. R. 32-1" checked. Counted words 1,964 (the sample's count, not the filing's). |
+| 3 | ii | Table of authorities | Cases, Constitutional Provisions, Statutes; pages match the citations. |
+| 4 | iii | Table of authorities (cont.) | Rules, Other Authorities. |
+| 5 | 1 | Introduction | Double-spaced, 14 pt. Ends mid-sentence, as the filed introduction does. |
+| 6 | 2 | Argument I, A | Point heading centered; sub-heading A hangs with its label. |
+| 7–8 | 3–4 | Argument, footnotes 1 and 2 | Footnotes 14 pt, marked, with links into the table of authorities. |
+| 9–10 | 5–6 | Argument | Short-form citations (*Id.*, *Bruen*, *Teixeira*, B&L Orange Cnty.) italic. Block quotation indented and single-spaced. |
+| 11 | 7 | Argument | Continues to the last paragraph of I.A. |
+| 12 | 8 | Conclusion, signature | Signature block kept with the last paragraph. |
+| 13 | 9 | Statement of Related Cases (Form 17) | Selected box drawn, pending case listed. |
+| 14 | 10 | Certificate of Compliance (Form 8) | "complies with the word limit of Cir. R. 32-1" checked. Counted words 1,964 (the sample's count, not the filing's). |
 
 Defects found in the review and fixed: an Argument sub-heading was typed at level 2, which made it a point (II) instead of sub-heading B (fixed in the sample; the sample now stops at I.A). The counsel block printed one phone number for both counsel groups (fixed: each group carries its own `phone`).
 
@@ -85,8 +86,8 @@ The same markdown renders through three engines. Typst (`typst/`) is the referen
 
 | Engine | Output (`samples/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-bl-productions-reply-brief.pdf` (13 pp) | reference |
-| latex | `OUTPUT-bl-productions-reply-brief.latex.pdf` (13 pp) | ok: rendered, every page compared with the typst page |
+| typst | `OUTPUT-bl-productions-reply-brief.pdf` (14 pp) | reference |
+| latex | `OUTPUT-bl-productions-reply-brief.latex.pdf` (14 pp) | ok: rendered, every page compared with the typst page |
 | docx | `OUTPUT-bl-productions-reply-brief.docx`; no `.docx.pdf` | BLOCKED: no LibreOffice on this box (below) |
 
 ```sh
@@ -99,7 +100,7 @@ sh tools/render.sh --engine docx  courts/ninth-circuit/court-of-appeals/reply-br
 - *Matches typst:* 14 pt type; double spacing at the typst baseline pitch (31.4 pt); single spacing for headings, quotations, footnotes and the tables; 1-inch margins; the cover (case number, rules, caption with the designations, proceeding and district docket, title, both counsel groups with their telephone numbers); the table of contents and table of authorities with dot leaders and page numbers (groups, sorting, "passim" at seven or more pages); heading labels (I., A., 1., a. in the Argument; A., 1., a., (1) elsewhere); footnotes at 14 pt; block quotations; the signature block kept with the last paragraph; the Statement of Related Cases (Form 17) with its boxes; the Certificate of Compliance (Form 8) with the word count. The count is 1,964 here, the same as typst's. Page numbers: none on the cover, roman in front matter, arabic from 1 in the body.
 - *Differs:* body lines break at slightly different words (TeX and typst use different line-breaking), so some pages start a line or two apart from typst's. Page count and the page of every heading and authority match. The signature block sits at half the text width, where typst's sits at about 40%. The cover spacing is fixed rather than fitted to the page. The dot leaders are drawn with a different spacing.
 - *Not exercised by this sample:* the Certificate of Service (Form 15) with unregistered parties, the addendum (Add-n), "passim", and the five heading levels. These were checked on a synthetic sample kept outside the repo: each compiled and laid out as intended. The Statement of Related Cases with a pending case is exercised.
-- *Gates:* `tools/check.sh` does not apply to this folder (no `checks.yaml` or `court.json`; see "Not run" above), so no gate was run. The review is by eye: all 13 pages of the LaTeX PDF were rendered at 60 dpi and set beside the typst page.
+- *Gates:* `tools/check.sh` does not apply to this folder (no `checks.yaml` or `court.json`; see "Not run" above), so no gate was run. The review is by eye: all 13 pages of the LaTeX PDF were rendered at 60 dpi and set beside the typst page (before 2026-10-16; see the verification pass for the 14-page rebuild).
 
 **docx** (`docx/reference.docx`, `docx/ca9.lua`, `docx/make-reference.sh`). **BLOCKED.**
 
@@ -107,3 +108,20 @@ sh tools/render.sh --engine docx  courts/ninth-circuit/court-of-appeals/reply-br
 - *Delivered:* `samples/OUTPUT-bl-productions-reply-brief.docx`. It is a valid zip with well-formed XML (checked by `render-docx.sh`). It has the reference's styles (EB Garamond 14 pt, double-spaced body with a half-inch first-line indent, single-spaced headings, footnotes and block quotations, letter page, 1-inch margins, a centered page-number footer) and the heading labels. It has not been opened in Word or LibreOffice, so the no-repair check is not done.
 - *BLOCKED check IDs (not built for docx, a missing feature, not a Word limit):* CA9-COVER-001 to -007 (no cover; the caption is a table in Word, and the cover is not built); CA9-CONT-001 (no table of contents field); CA9-CONT-002 (no table of authorities: TA/TOA fields are not written, and LibreOffice does not honor them, see `docs/DOCX.md`); CA9-CERT-001, -003 and -004 (the certificates are not built); CA9-ADD-001 (the addendum is not numbered Add-n); CA9-FORM-008 (the footer counts arabic from the cover, with no roman front matter); CA9-CONT-012 (the labels are typed text, not Word list numbering, and are not measured on a PDF). Every Gate 1 and Gate 2 check is unmeasured for the docx for lack of a PDF.
 - *Rebuild the reference:* `sh docx/make-reference.sh` (from pandoc's default reference document; needs `perl`, `unzip`, `zip` and `xmllint`).
+
+## Verification pass 2026-10-16 (fb-595.26.9)
+
+- **Rendered:** `sh tools/render.sh` on the committed sample first gave 13 pages, the same as the committed PDF, and exit 0 with no typst warnings. After the sample fix below it gives 14 pages, also exit 0 with no warnings. The PDF embeds only the four EB Garamond faces.
+- **Viewed:** all 14 pages of the typst PDF at 60 dpi, the exemplar's page 1 beside our cover, and all 14 overlay pages (at 40 and 150 dpi).
+- **Overlay:** rerun with `sh tools/overlay.sh`. Our p.1 ↔ filed p.1 (89%), p.5-8 ↔ filed p.7-10 (69-95%), p.13-14 ↔ filed p.32-33 (Forms 17 and 8, 73-81%). The two TOA pages both pair with filed p.5 (23-25%). Body pitch and margins match the filed pages.
+  - Tier-2 differences, not changed: the filed Forms 17 and 8 use the court's form layout (form title, instructions URL, form footer). The filed signature block names the firm and the represented parties. The filed cover sets the two counsel groups side by side.
+- **Defect found and fixed (sample transcription, not template):** the table of authorities left out authorities that the transcribed text cites and that the exemplar's TOA lists:
+  - Assembly Bill 893;
+  - Fed. R. Civ. P. 12 (the `frcp12` entry existed but nothing linked to it);
+  - the First and Second Amendments.
+
+  FRAP 28(a)(3) requires each authority with the pages where it is cited. They are now `toa:` links. The amendments are under Constitutional Provisions, where the exemplar puts them under Other Authorities. The TOA runs to two pages (ii-iii), so the PDF is 14 pages. The body page numbers and the TOC are unchanged.
+  - Stale statement corrected: the old page table said the TOA had a Rules group. The old render had none.
+- **Template:** no change.
+- **LaTeX:** rebuilt with `sh tools/render.sh --engine latex` (exit 0, 14 pages, the same page count as typst, EB Garamond only). Pages 1-4 (cover, TOC, TOA) were viewed this pass; the TOA groups and page numbers match typst. Pages 5-14 of the latex PDF were not viewed this pass.
+- **Remaining gaps:** as listed under Known gaps (excerpt sample, one signature, stacked counsel groups, cover colour). Also, the Forms 17 and 8 are not in the court's form layout. DOCX is untouched (no `soffice`).

@@ -7,8 +7,8 @@ ours p.6  filed p.5  word-overlap 31.1%
 ours p.7  filed p.6  word-overlap 33.3%
 ours p.8  filed p.2  word-overlap 1.4%
 ours p.9  filed p.15  word-overlap 32.0%
-ours p.10  filed p.21  word-overlap 42.0%
-ours p.11  filed p.25  word-overlap 42.2%
+ours p.10  filed p.21  word-overlap 32.7%
+ours p.11  filed p.25  word-overlap 38.3%
 ours p.12  filed p.27  word-overlap 34.4%
 ours p.13  filed p.30  word-overlap 40.3%
 ours p.14  filed p.41  word-overlap 61.0%

@@ -175,15 +175,18 @@
   let ind = if hd.level >= 2 { (hd.level - 2) * heading-tab } else { 0pt }
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
+  // The page number lives in its own column so it never wraps onto a line of its own:
+  // a long title wraps, and the leader and number stay on its last line.
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(ind + heading-tab, {
-      h(ind)
-      if numbered { box(width: heading-tab, lab) }
-      title
-      h(0.8em)
-      dot-leader
-      box(align(right, it.page()))
-    })))
+    grid(columns: (1fr, auto), column-gutter: 0.4em,
+      hang(ind + heading-tab, {
+        h(ind)
+        if numbered { box(width: heading-tab, lab) }
+        title
+        h(0.8em)
+        dot-leader
+      }),
+      align(bottom + right, it.page()))))
 }
 
 #let toc-section() = {

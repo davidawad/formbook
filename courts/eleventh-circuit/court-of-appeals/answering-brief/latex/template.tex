@@ -177,6 +177,20 @@ $endif$
 \cashortrule
 \par\begingroup\centering\textbf{\MakeUppercase{$brief_title$}}\par\endgroup
 \cashortrule
+$if(counsel_multi)$
+\par\begingroup\noindent
+$for(counsel)$
+\begin{minipage}[t]{0.31\textwidth}\casingle\raggedright
+$for(counsel.names)$\hangindent=1em\hangafter=1 $it$\par
+$endfor$
+$for(counsel.lines)$\hangindent=1em\hangafter=1 \hspace*{0.5em}\emph{$it$}\par
+$endfor$
+$if(counsel.phone)$\hspace*{0.5em}\emph{$counsel.phone$}\par
+$endif$
+\end{minipage}\hfill
+$endfor$
+\par\endgroup
+$else$
 \par\noindent\hspace*{0.5\textwidth}\begin{minipage}[t]{0.5\textwidth}\casingle
 $for(counsel)$
 $for(counsel.names)$$it$\par
@@ -188,6 +202,7 @@ $endif$
 \vspace{0.5em}
 $endfor$
 \end{minipage}\par
+$endif$
 \cadoublerule
 
 % ---------------------------------------------------------------------------

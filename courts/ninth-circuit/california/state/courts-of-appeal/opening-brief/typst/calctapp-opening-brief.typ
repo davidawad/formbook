@@ -158,6 +158,7 @@
 // ---------------------------------------------------------------------------
 
 #let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
+#let toc-page-width = 2em               // page-number column of the table of contents
 
 /// One table-of-contents row, built from a heading element. The label sits where the heading's
 /// own label sits in the body, and wrapped lines hang under the title text.
@@ -167,15 +168,19 @@
   let ind = if hd.level >= 2 { (hd.level - 2) * heading-tab } else { 0pt }
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
+  // Two columns: the title and its leader wrap inside the first, the page number sits in the second,
+  // level with the last line. A long title therefore never pushes its page number onto a line of its own.
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(ind + heading-tab, {
-      h(ind)
-      if numbered { box(width: heading-tab, lab) }
-      title
-      h(0.6em)
-      dot-leader
-      box(width: 2.4em, align(right, it.page()))
-    })))
+    grid(columns: (1fr, toc-page-width), column-gutter: 0.3em,
+      hang(ind + heading-tab, {
+        h(ind)
+        if numbered { box(width: heading-tab, lab) }
+        title
+        h(0.6em)
+        dot-leader
+      }),
+      align(right + bottom, it.page()),
+    )))
 }
 
 /// The table of contents lists the body's headings: the ones after `<body-start>` and before
@@ -403,7 +408,7 @@
   // ("60(b)(5)"), and never between a section sign and its number. Unbreakable boxes keep the
   // extracted text the author's characters.
   show regex("\\S*\\)\\(\\S*"): it => box(it)
-  show regex("[§¶] \\S+"): it => box(it)
+  show regex("[§¶]+ \\S+"): it => box(it)
   show heading: style-heading
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {

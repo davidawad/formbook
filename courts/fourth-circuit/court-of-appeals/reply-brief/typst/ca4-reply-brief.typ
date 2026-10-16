@@ -212,7 +212,7 @@
 
 #let toc-section(has-addendum) = {
   heading(level: 1, numbering: none, outlined: false)[Table of Contents]
-  align(right, block(above: 0.3em, below: 0pt, strong(underline[Page])))
+  align(right, block(above: 0.3em, below: 0pt, strong(underline(offset: 0.2em)[Page])))
   let target = if has-addendum {
     selector(heading.where(outlined: true)).before(<add-start>, inclusive: true)
   } else {
@@ -253,7 +253,7 @@
       block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
         set par(first-line-indent: 0pt)
         strong(title)
-        if first { h(1fr); strong(underline[Page(s)]) }
+        if first { h(1fr); strong(underline(offset: 0.2em)[Page(s)]) }
       })
       first = false
       for (key, a) in members {
@@ -335,7 +335,7 @@
         for n in g.names { n; linebreak() }
         let lines = g.at("lines", default: ())
         if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
-        for l in lines { h(0.5em); emph(inl(l)); linebreak() }
+        for l in lines { inl(l); linebreak() }  // roman, as in the court's filed briefs
       })
     }
   }))

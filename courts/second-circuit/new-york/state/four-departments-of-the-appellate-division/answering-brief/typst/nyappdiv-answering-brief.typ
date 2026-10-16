@@ -1,24 +1,30 @@
-// New York Appellate Division (all four Departments): answering brief (respondent's brief).
+// New York Supreme, Appellate Division: a respondent's (answering) brief (22 NYCRR 1250.8(c)), any of the four departments.
+// Built from the reply-brief template of this court (same cover, tables and printing statement);
+// the word limit and the heading scheme outside the Argument differ.
 //
-// Rule-driven and content-agnostic. Rule IDs (NYAD-...) refer to ../README.md, which cites
-// 22 NYCRR 1250.8. No case-specific text, no coordinates measured off any filed brief, no
-// forced line breaks. The markdown body is rendered by cmarker; the metadata comes from the
-// YAML frontmatter of the sample (schema: ../README.md, "Markdown contract").
+// Rule-driven and content-agnostic. Rule references (22 NYCRR Part 1250) are in ../README.md.
+// No case-specific text, no coordinates measured off any filed brief, no forced line
+// breaks. The markdown body is rendered by cmarker; the metadata comes from the YAML
+// frontmatter of the same file (schema: ../README.md, "Markdown contract").
 
 #import "@preview/cmarker:0.1.10"
 
 // ---------------------------------------------------------------------------
-// Parameters (the only numbers in this file; each traces to a rule)
+// Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // NYAD-TYPE-001: serif, proportional, vendored in /fonts.
-#let body-size = 14pt                      // NYAD-TYPE-002: 14-point body, proportional face.
-#let note-size = 12pt                      // NYAD-TYPE-002: footnotes no less than 12-point.
-#let body-leading = 1.2em                  // NYAD-FORM-002: double spacing (estimate, see README).
-#let single-leading = 0.45em               // NYAD-FORM-003: quotations, headings, footnotes, cover, certificates.
-#let page-margin = 1in                     // NYAD-FORM-001: one inch on all sides.
+#let font-family = "EB Garamond"          // 1250.8(f)(1): serifed, proportionally spaced. Vendored in /fonts.
+#let type-size = 14pt                      // 1250.8(f)(1)(i): body in 14-point type.
+#let body-leading = 0.94em                 // 1250.8(h): double spaced (about 2.2 x type size per line box).
+#let single-leading = 0.12em               // headings, quotations, footnotes, contents: single spaced (1250.8(h)).
+#let page-margin = 1in                     // 1250.8(h): one inch on all sides.
 #let para-indent = 0.5in
-#let word-limit = 14000                    // NYAD-WORD-001: respondent's brief, 22 NYCRR 1250.8(f)(2).
+#let heading-tab = 0.5in
+#let toc-depth = 4
+#let passim-threshold = 7                  // an authority cited on this many pages or more prints "passim".
+#let word-limit = 14000                    // 1250.8(f)(2): computer-generated respondent's brief.
+#let caption-separator = [– against –]
+#let word-processor = "Typst 0.15.0"       // 1250.8(j): the means used to prepare this brief.
 
 // ---------------------------------------------------------------------------
 // Small helpers
@@ -27,10 +33,24 @@
 /// Render an inline markdown string (italics etc.) as inline content.
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
+/// Plain text of a piece of content, for comparisons only.
+#let plain(c) = {
+  if type(c) == str { c }
+  else if c == [] { "" }
+  else if c.has("text") { c.text }
+  else if c.has("children") { c.children.map(plain).join() }
+  else if c.has("body") { plain(c.body) }
+  else if c.func() == [ ].func() { " " }
+  else { "" }
+}
+
 #let need(meta, key) = {
   if key not in meta { panic("nyappdiv-answering-brief: missing required metadata field `" + key + "`") }
   meta.at(key)
 }
+
+/// A stack of separate lines (each its own block; no forced line break inside text).
+#let lines-stack(items) = stack(dir: ttb, spacing: 0.3em, ..items)
 
 /// Split "---\nyaml\n---\nbody" into (meta, body).
 #let split-frontmatter(src) = {
@@ -39,7 +59,32 @@
   (yaml(bytes(m.captures.at(0))), src.slice(m.end))
 }
 
-/// 14000 -> "14,000"
+/// Put an invisible `tag` right after the first word of `c`, keeping any emphasis around it.
+/// Returns (content, placed). Why not simply put the tag in front: when a citation begins at the
+/// start of a line, typst files a tag that sits before the first word under the PREVIOUS line, which
+/// may be on the previous page, so the table of authorities would cite the wrong page.
+#let tag-after-first-word(c, tag) = {
+  if type(c) == str or c.func() == text {
+    let t = if type(c) == str { c } else { c.text }
+    let m = t.match(regex("^\\s*\\S+"))
+    if m == none { return (c, false) }
+    return ([#m.text#tag#t.slice(m.end)], true)
+  }
+  if c.func() == emph { let r = tag-after-first-word(c.body, tag); return (emph(r.first()), r.last()) }
+  if c.func() == strong { let r = tag-after-first-word(c.body, tag); return (strong(r.first()), r.last()) }
+  if c.func() == [].func() {
+    let out = ()
+    let placed = false
+    for ch in c.children {
+      if placed { out.push(ch) }
+      else { let r = tag-after-first-word(ch, tag); out.push(r.first()); placed = r.last() }
+    }
+    return (out.join(), placed)
+  }
+  (c, false)
+}
+
+/// 6915 -> "6,915"
 #let group-digits(n) = {
   let s = str(n)
   let out = ""
@@ -50,206 +95,427 @@
   out
 }
 
-/// Word count of the markdown body, whitespace-delimited like a word processor.
-/// Point headings and footnote text count; footnote definitions are removed from the
-/// count because their text is printed at the foot of a page, not in the body. Markup
-/// characters are counted as they are (a known approximation, see README "Known gaps").
+/// Word count of markdown source, whitespace-delimited like a word processor.
+/// Markup characters are removed first; links keep their text.
 #let count-words(md) = {
-  let s = md.replace(regex("(?m)^\\[\\^[^\\]]+\\]:.*$"), "")
+  let s = md
+  s = s.replace(regex("<!--[\\s\\S]*?-->"), " ")
+  s = s.replace(regex("(?m)^\\[\\^[^\\]]+\\]:"), " ")      // footnote definition labels
+  s = s.replace(regex("\\[\\^[^\\]]+\\]"), "")             // footnote references
+  // (typst's string replacement has no $1: a function returns the captured text)
+  let keep(m) = m.captures.at(0)
+  s = s.replace(regex("\\[([^\\]]*)\\]\\([^)]*\\)"), keep)  // links keep their text
+  s = s.replace(regex("(?m)^#{1,6}[ \t]+"), "")
+  s = s.replace(regex("(?m)^>[ \t]?"), "")
+  s = s.replace(regex("(?m)^[ \t]*([-*+]|[0-9]+[.)])[ \t]+"), "")   // list markers are not words
+  s = s.replace(regex("\\\\(.)"), keep)                    // backslash escapes
+  s = s.replace(regex("[*]"), "")
+  s = s.replace(regex("(^|[\\s(\\[\u{201C}\"])_"), keep)
+  s = s.replace(regex("_([\\s.,;:)\\]\u{201D}\"!?]|$)"), keep)
   s.split(regex("\\s+")).filter(w => w != "").len()
 }
 
 // ---------------------------------------------------------------------------
-// Cover (NYAD-COVER-001..003)
+// Headings: numbering scheme and styles
 // ---------------------------------------------------------------------------
 
-/// Upper right: argued or submitted; if argued, the time and the attorney who will argue.
-#let calendar-notation(cal) = {
-  if cal.mode == "submitted" {
-    [Submitted]
+/// True when the level-1 section that contains `loc` is the Argument.
+#let in-argument(loc) = {
+  let tops = query(selector(heading.where(level: 1)).before(loc, inclusive: true))
+  tops.len() > 0 and lower(plain(tops.last().body)).trim() == "argument"
+}
+
+/// Printed label of a numbered heading. Under the Argument the points are I. / A. / 1. / a.
+/// (level 2 to 5); in the other sections (e.g. the counterstatement of facts) A. / 1. / a. / (1).
+#let heading-label(h) = {
+  let n = counter(heading).at(h.location()).at(h.level - 1, default: 1)
+  let scheme = if in-argument(h.location()) { ("I.", "A.", "1.", "a.") } else { ("A.", "1.", "a.", "(1)") }
+  if h.level < 2 or h.level > 5 { panic("nyappdiv-answering-brief: headings deeper than level 5 are not supported") }
+  numbering(scheme.at(h.level - 2), n)
+}
+
+/// Point headings (level 2 under the Argument) are set in capitals, as the exemplar does.
+#let is-point(h) = h.level == 2 and in-argument(h.location())
+
+/// A single-spaced paragraph whose continuation lines are indented by `indent`.
+/// (Must be an explicit `par`: a `set par(hanging-indent)` inside a block is ignored by typst 0.15.)
+#let hang(indent, body) = par(
+  hanging-indent: indent, first-line-indent: 0pt, leading: single-leading, justify: false, body,
+)
+
+#let style-heading(it) = {
+  set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
+  set text(size: type-size)   // every heading is body size or larger; no typst default sizes
+  if it.level == 1 {
+    // Section headings: bold, capitals, centered (1250.8(f)(1): capitals and bold only in headings).
+    block(width: 100%, sticky: true, above: 1.5em, below: 1.1em,
+      align(center, strong(upper(it.body))))
+  } else if it.numbering == none {
+    block(width: 100%, sticky: true, above: 1.2em, below: 0.9em, strong(it.body))
   } else {
-    [Argued: #cal.at("argued_by", default: "[attorney]")]
-    linebreak()
-    [Time requested: #cal.at("time", default: "[time]")]
+    // Numbered sub-headings: the label hangs in a box; the text wraps under itself.
+    // Level 2 steps in from the margin by nothing, each further level by half an inch.
+    let ind = (it.level - 2) * heading-tab
+    let lab = heading-label(it)
+    block(width: 100%, sticky: true, above: 1.1em, below: 0.9em, hang(ind + heading-tab, {
+      h(ind)
+      box(width: heading-tab, if it.level >= 4 { strong(emph(lab)) } else { strong(lab) })
+      if is-point(it) { strong(upper(it.body)) }
+      else if it.level >= 4 { strong(emph(it.body)) }
+      else { strong(it.body) }
+    }))
   }
 }
 
-#let cover(meta) = page(numbering: none, footer: none)[
-  #set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  #align(left)[
-    #need(meta, "index_no") #linebreak()
-    #need(meta, "docket")
-  ]
-  #v(0.8em)
-  #align(center)[
-    #text(size: 14pt)[#need(meta, "court")]
-  ]
-  #v(1.2em)
-  #for side in need(meta, "caption") {
-    align(center)[
-      #for name in side.names {
-        block(inl(name))
-      }
-      #v(0.3em)
-      #side.designation
-    ]
-    if side != need(meta, "caption").last() {
-      align(center)[#v(0.6em) #emph[--against--] #v(0.6em)]
-    }
-  }
-  #v(1.6em)
-  #align(right)[
-    #block(width: 3.2in, align(left, calendar-notation(need(meta, "calendar"))))
-  ]
-  #v(1.2em)
-  #align(center)[
-    #text(size: 14pt)[#upper(need(meta, "brief_title"))]
-  ]
-  #v(1fr)
-  #align(right)[
-    #block(width: 3.2in, breakable: false, {
-      let c = need(meta, "counsel")
-      for n in c.names { block(inl(n)) }
-      for l in c.at("lines", default: ()) { block(inl(l)) }
-      block(need(meta, "phone"))
-      if "email" in c { block(inl(c.email)) }
-    })
-  ]
-]
-
 // ---------------------------------------------------------------------------
-// Tables: contents and authorities (NYAD-TOC-001; table of authorities has no page references: known gap)
+// Tables of contents and authorities
 // ---------------------------------------------------------------------------
 
-#let toc-page() = {
-  pagebreak()
-  align(center)[#text(weight: "bold")[TABLE OF CONTENTS]]
-  v(1em)
-  set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  outline(title: none, depth: 2, indent: 0.5in)
+#let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
+
+/// One table-of-contents row, built from a heading element. Wrapped lines hang under the title.
+#let toc-entry(it) = {
+  let hd = it.element
+  let numbered = hd.numbering != none and hd.level >= 2
+  let ind = if hd.level >= 2 { (hd.level - 2) * heading-tab } else { 0pt }
+  let lab = if numbered { heading-label(hd) } else { none }
+  let title = if hd.level == 1 { upper(hd.body) } else if numbered and is-point(hd) { upper(hd.body) } else { hd.body }
+  // Three columns: label, title with its leader, page number. The page number has its own column,
+  // so a title that wraps never pushes it onto a line of its own; wrapped titles hang under the text.
+  let label-width = if numbered { ind + heading-tab } else { ind }
+  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt, {
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
+    grid(columns: (label-width, 1fr, 2em), column-gutter: 0pt,
+      [#h(ind)#if numbered { lab }],
+      [#title#h(0.4em)#dot-leader],
+      // The number sits on the last line of a wrapped title, where its dot leader ends.
+      align(right + bottom, it.page()))
+  }))
+}
+
+/// Table of contents: every outlined heading (point headings, sections, the printing statement).
+#let toc-section() = {
+  heading(level: 1, numbering: none, outlined: false)[Table of Contents]
+  align(right, block(above: 0.3em, below: 0pt, strong(underline[Page])))
+  show outline.entry: toc-entry
+  outline(title: none, target: heading.where(outlined: true), depth: toc-depth, indent: 0pt)
 }
 
 #let toa-groups = (
-  (kind: "case", title: "Cases"),
-  (kind: "constitution", title: "Constitutional Provisions"),
-  (kind: "statute", title: "Statutes"),
-  (kind: "regulation", title: "Regulations"),
-  (kind: "rule", title: "Rules"),
-  (kind: "other", title: "Other Authorities"),
+  ("case", "Cases:"),
+  ("constitution", "Constitutional Provisions:"),
+  ("statute", "Statutes:"),
+  ("regulation", "Regulations:"),
+  ("rule", "Rules:"),
+  ("other", "Other Authorities:"),
 )
 
-#let toa-page(meta) = {
-  if "authorities" not in meta { return }
-  pagebreak()
-  align(center)[#text(weight: "bold")[TABLE OF AUTHORITIES]]
-  v(1em)
-  set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  let auths = meta.authorities.values()
-  for g in toa-groups {
-    let items = auths.filter(a => a.kind == g.kind)
-    if items.len() == 0 { continue }
-    text(weight: "bold")[#g.title]
-    v(0.4em)
-    for a in items {
-      let shown = if a.kind == "case" { "*" + a.name + "*" } else { a.name }
-      block(above: 0.5em, inl(shown + ", " + a.cite))
+#let sort-key(a) = lower(plain(inl(a.at("sort", default: a.at("name", default: "") + " " + a.cite))))
+    .replace(regex("[^a-z0-9 ]"), "")
+
+/// Table of authorities, built from the `toa:` links found in the body.
+#let toa-section(authorities) = {
+  heading(level: 1, numbering: none, outlined: false)[Table of Authorities]
+  context {
+    let hits = query(<toa-hit>)
+    for h in hits {
+      if h.value not in authorities {
+        panic("nyappdiv-answering-brief: link `toa:" + h.value + "` has no entry under `authorities:` in the frontmatter")
+      }
     }
-    v(0.8em)
+    let first = true
+    for (kind, title) in toa-groups {
+      let members = authorities.pairs()
+        .filter(p => p.last().kind == kind and hits.any(h => h.value == p.first()))
+        .sorted(key: p => sort-key(p.last()))
+      if members.len() == 0 { continue }
+      block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
+        set par(first-line-indent: 0pt)
+        strong(title)
+        if first { h(1fr); strong(underline[Page(s)]) }
+      })
+      first = false
+      for (key, a) in members {
+        // Distinct printed page labels, in document order.
+        let pages = ()
+        for h in hits.filter(h => h.value == key) {
+          let loc = h.location()
+          let label = numbering(loc.page-numbering(), ..counter(page).at(loc))
+          if label not in pages { pages.push(label) }
+        }
+        let page-text = if pages.len() >= passim-threshold { emph[passim] } else { pages.join(", ") }
+        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
+          if "name" in a {
+            if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
+            [,]
+            linebreak()
+          }
+          inl(a.cite)
+          h(0.8em)
+          dot-leader
+          h(0.3em)
+          page-text
+        }))
+      }
+    }
   }
 }
 
 // ---------------------------------------------------------------------------
-// Signature, printing specifications statement, proof of service (NYAD-SIG-001, NYAD-PRINT-001, NYAD-SERV-001)
+// Cover (1250.8(b))
 // ---------------------------------------------------------------------------
 
+#let double-rule = {
+  line(length: 100%, stroke: 1.6pt)
+  v(2.5pt)
+  line(length: 100%, stroke: 0.5pt)
+}
+#let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
+
+/// The cover: the docket and the argument notice on one row (upper right: 1250.8(b)), the court,
+/// the caption, the title, and the filing attorney's name, address, telephone and email (lower right).
+#let cover-body(meta, gap) = {
+  // The cover is set with the glyph bounds as its line box, so the counsel and caption fit one page.
+  set text(top-edge: "bounds", bottom-edge: "bounds")
+  set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
+  let arg = need(meta, "argument")
+  // The docket is printed as the filer writes it, label included (e.g. "Appellate No. ...", "Docket No. CA ...").
+  let docket-lines = (inl(need(meta, "docket")),)
+  if "county_clerk_index" in meta { docket-lines.push(meta.county_clerk_index) }
+  grid(columns: (1fr, 3.1in), column-gutter: 0.3in, align: (left, right),
+    lines-stack(docket-lines),
+    block(align(left, {
+      if "presenter" in arg {
+        [To be Argued by:]
+        parbreak()
+        strong(upper(inl(arg.presenter)))
+        parbreak()
+        [(Time Requested: #arg.time_requested)]
+      } else {
+        [Submitted without oral argument]
+      }
+    })))
+  v(gap)
+  set align(center)
+  strong[New York Supreme Court]
+  parbreak()
+  [Appellate Division—#need(meta, "department")]
+  v(gap)
+  double-rule
+  v(gap)
+  let sides = need(meta, "caption")
+  // A side may name the word that joins it to the side above (`joiner`, e.g. "– and –" for a
+  // second group of defendants); the default is the "against" separator.
+  for (i, side) in sides.enumerate() {
+    if i > 0 { v(gap * 0.3); if "joiner" in side { inl(side.joiner) } else { caption-separator }; v(gap * 0.3) }
+    for name in side.names { inl(name); parbreak() }
+    align(left, pad(left: 50%, inl(side.designation)))
+  }
+  if "caption_note" in meta { v(gap * 0.3); inl(meta.caption_note) }
+  v(gap)
+  double-rule
+  v(gap)
+  strong(upper(inl(need(meta, "brief_title"))))
+  v(gap)
+  short-rule
+  v(gap)
+  // Lower right: the filing attorneys, name, address, telephone and email; whom they represent.
+  grid(columns: (1fr, 3.4in), column-gutter: 0.3in, align: left, [],
+    block(width: 100%, {
+      for g in need(meta, "counsel") {
+        block(breakable: false, below: 0.6em, {
+          set par(hanging-indent: 0pt, spacing: 0.35em)
+          strong(upper(inl(g.firm)))
+          parbreak()
+          for l in g.lines { inl(l); parbreak() }
+        })
+      }
+      emph(inl(need(meta, "attorneys_for")))
+    }))
+  v(gap)
+  double-rule
+}
+
+/// The cover is one page. The spacing between its parts is the only thing that gives:
+/// the largest spacing at which the whole cover fits the page is used (the type size never shrinks).
+#let cover(meta) = page(numbering: none, footer: none, layout(size => {
+  let fits(g) = measure(block(width: size.width, cover-body(meta, g * 1em))).height <= size.height
+  let g = (1.0, 0.8, 0.6, 0.45, 0.3, 0.2, 0.1, 0.0).find(fits)
+  if g == none { panic("nyappdiv-answering-brief: the cover does not fit on one page; shorten the caption or counsel") }
+  cover-body(meta, g * 1em)
+}))
+
+// ---------------------------------------------------------------------------
+// Signature, printing statement, proof of service
+// ---------------------------------------------------------------------------
+
+/// A blank to fill in by hand (a drawn line on the baseline; underline() draws nothing for spacing).
+#let blank(w) = box(width: w, line(length: 100%, stroke: 0.5pt))
+
+/// Signature block after the Conclusion. Each firm's block is a column; the block marked `by`
+/// carries the "By:" signature line. The block stays on one page.
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
-  set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  v(1.5em)
-  block(breakable: false, pad(left: 3.25in, [
-    Respectfully submitted,
-    #v(1.8em)
-    #sig.signer
-    #for l in sig.lines { linebreak(); inl(l) }
-    #if "date" in meta [ #linebreak() #meta.date ]
-  ]))
+  block(breakable: false, above: 1.4em, {
+    set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+    [#sig.date]
+    parbreak()
+    [#sig.place]
+    if "closing" in sig { align(right, block(width: 50%, align(left, inl(sig.closing)))) }
+    v(1.2em)
+    let cells = ()
+    for b in sig.blocks {
+      cells.push(block(breakable: false, {
+        set par(spacing: 0.4em)   // one line per paragraph here: tighter than the body's double spacing
+        strong(upper(inl(b.firm)))
+        parbreak()
+        if "by" in b { [By: #blank(2.2in)]; parbreak() }
+        for n in b.names { inl(n); parbreak() }
+        for l in b.lines { emph(inl(l)); parbreak() }
+      }))
+    }
+    grid(columns: sig.blocks.map(b => 1fr), column-gutter: 0.4in, align: left, ..cells)
+    v(0.6em)
+    emph(inl(sig.attorneys_for))
+  })
 }
 
-/// Printing specifications statement, 22 NYCRR 1250.8(j). Typeface, point size and line
-/// spacing are fixed by this template and printed from its constants, not typed by hand.
-#let printing-statement(meta, words) = {
-  pagebreak()
-  align(center)[#text(weight: "bold")[PRINTING SPECIFICATIONS STATEMENT]]
-  v(1em)
-  set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  [This brief was prepared on a computer. The typeface is #font-family, a serifed, proportionally spaced typeface. The body is printed in #str(body-size.pt()) point type and footnotes in #str(note-size.pt()) point type. The line spacing is double-spaced. The word count, exclusive of the pages containing the table of contents, table of authorities, proof of service and certificate of compliance, and exclusive of the signature block, is #group-digits(words) words. The word count was made by the word-processing system used to prepare the brief.]
-  v(1.5em)
-  block(breakable: false, pad(left: 3.25in, [
-    #need(meta, "signature").signer
-    #if "date" in meta [ #linebreak() #meta.date ]
-  ]))
+/// Printing Specifications Statement (1250.8(j)): the brief's last page. The typeface named is the
+/// one this file sets (the vendored face), so the statement is true of the PDF it sits in.
+#let printing-statement(words) = {
+  heading(level: 1, numbering: none)[Printing Specifications Statement]
+  set par(first-line-indent: para-indent, leading: body-leading, justify: false)
+  [I hereby certify pursuant to 22 NYCRR 1250.8(j) that the foregoing brief was prepared on a computer using #word-processor.]
+  parbreak()
+  [A proportionally spaced typeface was used, as follows:]
+  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+  block(above: 0.8em, below: 0.8em, pad(left: para-indent, lines-stack((
+    [Name of typeface: #font-family],
+    [Point size: #str(int(type-size.pt()))],
+    [Line spacing: Double],
+  ))))
+  set par(first-line-indent: para-indent, leading: body-leading, justify: false)
+  [*Word Count.* The total number of words in this brief, inclusive of point headings and footnotes and exclusive of pages containing the table of contents, table of citations, proof of service, and this statement, is #group-digits(words).]
 }
 
-#let certificate-of-service(meta) = {
-  if "service" not in meta { return }
-  pagebreak()
-  align(center)[#text(weight: "bold")[AFFIDAVIT OF SERVICE]]
-  v(1em)
-  set par(leading: body-leading, first-line-indent: para-indent, justify: true)
-  [#meta.service.at("affiant", default: "[Affiant name]") states that on the date below copies of this brief were served on counsel for every party by #meta.service.method.]
-  set par(leading: single-leading, first-line-indent: 0pt, justify: false)
-  for u in meta.service.at("unregistered", default: ()) {
-    block(above: 1em, breakable: false, [#u.name #linebreak() #u.address])
-  }
-  v(1.5em)
-  block(breakable: false, pad(left: 3.25in, [
-    #need(meta, "signature").signer
-    #if "date" in meta [ #linebreak() #meta.date ]
-  ]))
+/// Proof of service: blanks only. Nothing case-specific is printed here.
+#let affidavit-of-service() = {
+  heading(level: 1, numbering: none, outlined: false)[Affidavit of Service]
+  set par(first-line-indent: para-indent, leading: body-leading, justify: false)
+  block(above: 0em, below: 1.2em, grid(columns: (auto, 1fr), column-gutter: 0.6em, row-gutter: 0.4em,
+    [STATE OF NEW YORK], [)],
+    [], [) ss.:],
+    [COUNTY OF #blank(1.8in)], [)],
+  ))
+  [#blank(2.6in), being duly sworn, deposes and says: deponent is not a party to this action, is over 18 years of age, and resides at #blank(2.4in).]
+  parbreak()
+  [On the #blank(0.7in) day of #blank(1.2in), 20#blank(0.4in), deponent served the within brief upon each attorney for each party to this appeal, at the address designated by that attorney for that purpose, by #blank(2.4in), and by #blank(1.4in).]
+  block(above: 1.8em, below: 0pt, pad(left: 50%, lines-stack((
+    blank(2.4in),
+    [Sworn to before me this],
+    [#blank(0.7in) day of #blank(1.2in), 20#blank(0.4in)],
+    blank(2.4in),
+    [Notary Public],
+  ))))
 }
 
 // ---------------------------------------------------------------------------
-// Main entry
+// The brief
 // ---------------------------------------------------------------------------
 
 #let nyappdiv-answering-brief(meta, md) = {
-  set document(title: need(meta, "brief_title"))
-  set text(font: font-family, size: body-size, lang: "en")
-  set page(
-    paper: "us-letter",
-    margin: page-margin,
-    numbering: "1",
-    number-align: center + bottom,
+  // ---- metadata checks (loud failure beats silent omission) ----
+  for k in ("docket", "department", "argument", "caption", "brief_title", "counsel",
+            "attorneys_for", "signature") { let _ = need(meta, k) }
+  let authorities = meta.at("authorities", default: (:))
+
+  // ---- word limit (1250.8(f)(2)): the body, inclusive of point headings and footnotes ----
+  let words = count-words(md)
+  if words > word-limit {
+    panic("nyappdiv-answering-brief: the brief has " + str(words) + " words; 22 NYCRR 1250.8(f)(2) allows " + str(word-limit) + " for a respondent's brief")
+  }
+
+  // ---- document-wide settings ----
+  set document(
+    title: plain(inl(need(meta, "brief_title"))) + ", " + need(meta, "docket"),
+    author: need(meta, "signature").blocks.first().firm,
   )
-  set par(leading: body-leading, first-line-indent: para-indent, justify: true)
-  set footnote.entry(separator: line(length: 1.5in, stroke: 0.5pt))
-  show footnote.entry: set text(size: note-size)
-  show footnote.entry: set par(leading: single-leading, first-line-indent: 0pt)
-
-  // Headings (NYAD-HEAD-001): headings may be bold and capitalised; body text may not (NYAD-TYPE-001).
-  show heading.where(level: 1): it => block(above: 1.4em, below: 1.2em, sticky: true, align(center)[
-    #text(weight: "bold")[#upper(it.body)]
-  ])
-  show heading.where(level: 2): it => block(above: 1.2em, below: 0.9em, sticky: true, par(first-line-indent: 0pt, text(weight: "bold", it.body)))
-  show heading.where(level: 3): it => block(above: 1.3em, below: 1.1em, sticky: true, pad(left: 0.5in, par(first-line-indent: 0pt, text(weight: "bold", it.body))))
-  show heading.where(level: 4): it => block(above: 1.2em, below: 1em, sticky: true, pad(left: 1in, par(first-line-indent: 0pt, text(style: "italic", it.body))))
-
-  // Block quotations (NYAD-FORM-003): indented, single-spaced.
-  show quote.where(block: true): it => pad(left: 0.5in, right: 0.5in, block(above: 1em, below: 1em, {
-    set par(leading: single-leading, first-line-indent: 0pt, justify: true)
+  set page(paper: "us-letter", margin: page-margin, number-align: center, footer-descent: 30%)
+  set text(
+    font: font-family, size: type-size, lang: "en", region: "us",
+    hyphenate: false, fallback: false,
+    top-edge: "ascender", bottom-edge: "descender",
+  )
+  set par(
+    leading: body-leading, spacing: body-leading,
+    first-line-indent: (amount: para-indent, all: true), justify: false,
+  )
+  set heading(numbering: none)
+  set footnote.entry(
+    gap: 0.5em, clearance: 0.9em, indent: 0pt,
+    separator: line(length: 30%, stroke: 0.5pt),
+  )
+  show footnote.entry: it => {
+    // 1250.8(f)(1)(i): footnotes at least 12 points. The body size is used, as the exemplar does.
+    set text(size: type-size)
+    set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, spacing: 0.5em)
+    let note = it.note
+    let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
+    [#super(num)#h(0.25em)#note.body]
+  }
+  show quote.where(block: true): it => block(above: 1em, below: 1em, pad(left: para-indent, right: para-indent, {
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)
     it.body
   }))
+  // Typography that holds for any text: never break inside a token of adjacent parentheses
+  // ("63(12)(a)"), and never between a section sign / pilcrow and its number. Done with
+  // unbreakable boxes so the extracted text stays exactly the author's characters.
+  show regex("\\S*\\)\\(\\S*"): it => box(it)
+  show regex("[§¶] \\S+"): it => box(it)
+  show heading: style-heading
+  show link: it => {
+    if type(it.dest) == str and it.dest.starts-with("toa:") {
+      tag-after-first-word(it.body, [#metadata(it.dest.slice(4))<toa-hit>]).first()
+    } else { it.body }
+  }
 
+  // ---- cover ----
   cover(meta)
-  toc-page()
-  toa-page(meta)
 
-  // Body: starts on a new page; the first heading begins the brief's text.
+  // ---- front matter (lowercase roman) ----
+  set page(numbering: "i")
+  counter(page).update(1)
+  toc-section()
   pagebreak()
-  set par(leading: body-leading, first-line-indent: para-indent, justify: true)
-  cmarker.render(md, raw-typst: false, smart-punctuation: true)
+  toa-section(authorities)
 
-  signature-block(meta)
-  printing-statement(meta, count-words(md))
-  certificate-of-service(meta)
+  // ---- body (arabic from 1) ----
+  set page(numbering: "1")
+  counter(page).update(1)
+  {
+    set heading(numbering: "1")
+    // The signature block never stands alone on a page: the brief's last paragraph is
+    // kept together with it. Footnote definitions are not paragraphs of the text and never take part.
+    let render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true, h1-level: 1)
+    let parts = md.trim(at: end).split(regex("\n[ \t]*\n"))
+    let k = parts.len() - 1
+    while k > 0 and parts.at(k).starts-with("[^") { k -= 1 }
+    let first = if k > 0 and parts.at(k - 1).starts-with("#") { k - 1 } else { k }
+    let notes = parts.slice(k + 1)
+    let head = parts.slice(0, first) + notes
+    let tail = parts.slice(first, k + 1)
+    if tail.len() == 0 or tail.first().starts-with("[^") {
+      render(parts.join("\n\n"))
+      signature-block(meta)
+    } else {
+      render(head.join("\n\n"))
+      block(breakable: false, { render(tail.join("\n\n")); signature-block(meta) })
+    }
+  }
+
+  // ---- printing specifications statement (1250.8(j)), then proof of service ----
+  pagebreak(weak: true)
+  printing-statement(words)
+  pagebreak(weak: true)
+  affidavit-of-service()
 }

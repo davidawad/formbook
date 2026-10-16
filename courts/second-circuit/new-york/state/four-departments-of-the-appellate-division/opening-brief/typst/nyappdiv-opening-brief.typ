@@ -205,7 +205,15 @@
 #let toa-entry(key, a) = context {
   // Pages on which the key is cited in the body (links `[...](toa:KEY)`).
   let hits = query(<toa-cite>).filter(e => e.value.key == key)
-  let pages = hits.map(e => e.location().page()).dedup().sorted()
+  // Printed page labels (the body restarts at 1 after the roman front matter), not physical PDF pages.
+  let pages = ()
+  for e in hits {
+    let loc = e.location()
+    let label = numbering(loc.page-numbering(), ..counter(page).at(loc))
+    if label not in pages { pages.push(label) }
+  }
+  // 1250.8(b)(2): every listed authority shows the pages where it is cited; an entry no link reaches is an error.
+  if pages.len() == 0 { panic("nyappdiv-brief: authority `" + key + "` is listed but never cited with a `toa:` link") }
   let p = if pages.len() >= passim-threshold { "passim" } else { pages.map(str).join(", ") }
   let label = if a.at("kind", default: "") == "case" and "name" in a {
     inl("*" + a.name + "*, " + a.cite)
@@ -249,7 +257,26 @@
 
 #let cover(meta) = {
   set page(numbering: none)
-  align(right, strong(meta.docket))
+  // The cover is not brief text, so it is single-spaced (1250.8(h) double-spaces the text); it must fit one page.
+  set par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt)
+  set block(spacing: single-leading)
+  // 22 NYCRR 1250.8(a): the upper right-hand section states whether the cause is argued or submitted,
+  // and if argued, the time required and the attorney who will argue. The docket sits on the left of that row.
+  let arg = need(meta, "argument")
+  grid(columns: (1fr, auto), column-gutter: 0.3in,
+    strong(need(meta, "docket")),
+    block({
+      set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+      if "presenter" in arg {
+        [To be argued by:]
+        linebreak()
+        strong(inl(arg.presenter))
+        linebreak()
+        [Time requested: #arg.time_requested]
+      } else {
+        [Submitted]
+      }
+    }))
   v(0.6em)
   for l in court-lines { align(center, strong(l)) }
   v(1.2em)
@@ -268,7 +295,9 @@
       for n in g.names { align(left, strong(n)) }
       for l in g.at("lines", default: ()) { align(left, inl(l)) }
     }
-    if "phone" in meta { v(0.2em); align(left, meta.phone) }
+    // 1250.8(a): the lower right-hand section gives the filing attorney's telephone number and email address.
+    align(left, need(meta, "phone"))
+    align(left, need(meta, "email"))
   }))
   v(1.2em)
   align(left, need(meta, "date"))

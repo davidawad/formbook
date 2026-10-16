@@ -1,4 +1,5 @@
 ---
+oral_argument: "Oral Argument Scheduled for April 10, 2025"
 case_number: "24-5158"
 caption:
   - names:

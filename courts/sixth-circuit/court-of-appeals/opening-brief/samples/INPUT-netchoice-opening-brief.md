@@ -20,6 +20,7 @@ counsel:
   - names: ["Joshua P. Morrow"]
     lines: ["LEHOTSKY KELLER COHN LLP", "408 W. 11th Street, 5th Floor", "Austin, TX 78701"]
 phone: "(512) 693-8350"
+counsel_for: "Counsel for Plaintiff-Appellant NetChoice"
 signature:
   signer: "Scott A. Keller"
   lines: ["Counsel for Plaintiff-Appellant", "LEHOTSKY KELLER COHN LLP", "200 Massachusetts Ave. NW, Suite 700", "Washington, DC 20001", "(512) 693-8350", "scott@lkcfirm.com"]

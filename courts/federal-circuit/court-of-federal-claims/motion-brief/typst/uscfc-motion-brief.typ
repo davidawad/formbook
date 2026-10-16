@@ -283,7 +283,8 @@
     align(left, pad(left: 50%, {
       [Respectfully submitted,]
       v(1.2em)
-      [/s/ #sig.signer]
+      // The signature line: /s/ and the signer on a rule the width of the column.
+      box(width: 100%, stroke: (bottom: 0.5pt + black), inset: (bottom: 2pt))[/s/ #sig.signer]
       linebreak()
       // RCFC 5.5(f): the email and telephone number of the attorney of record directly below the signature line.
       [#sig.signer]
@@ -300,14 +301,17 @@
 #let certificate-of-service(meta) = {
   let svc = need(meta, "service")
   heading(level: 1, numbering: none, outlined: false)[Certificate of Service]
+  // RCFC 5.5(c)(4): the certificate statement is text, so it is double spaced like the body.
+  par(first-line-indent: para-indent)[I hereby certify that on this #svc.day, I caused a true and correct copy of the foregoing #inl(svc.documents) to be served by #inl(svc.manner) on:]
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
-  [I hereby certify that on this #svc.day, I caused a true and correct copy of the foregoing #inl(svc.documents) to be served by #inl(svc.manner) on:]
   for r in svc.recipients {
     block(above: 0.8em, breakable: false, pad(left: 0.5in, {
       for l in r.lines { inl(l); linebreak() }
     }))
   }
-  block(above: 1.6em, breakable: false, pad(left: 50%, [/s/ #need(meta, "signature").signer]))
+  // The signature in the same right-hand column as the brief's signature block.
+  block(above: 1.6em, breakable: false, grid(columns: (1fr, 1fr), [],
+    box(width: 100%, stroke: (bottom: 0.5pt + black), inset: (bottom: 2pt))[/s/ #need(meta, "signature").signer]))
 }
 
 // ---------------------------------------------------------------------------

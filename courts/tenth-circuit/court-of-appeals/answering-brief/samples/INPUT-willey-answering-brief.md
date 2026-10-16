@@ -19,7 +19,7 @@ counsel:
 phone: "Telephone: (303) 799-8889"
 oral_argument: "ORAL ARGUMENT IS NOT REQUESTED"
 oral_argument_statement: >-
-  Oral argument is not requested or required under Fed. R. App. P. 34(2)(a)-(c) because: (1) the appeal is frivolous; (2) the dispositive issues have been authoritatively decided; and (3) the facts and legal arguments are adequately presented in the briefs and record, and the decisional process would not be significantly aided by oral argument. See Chung v. Washington Interscholastic Activities Ass'n, 538 F. Supp. 3d 1170, 1175 (W.D. Wash. 2021) ("When a party has [had] an adequate opportunity to provide the trial court with evidence and a memorandum of law, there is no prejudice [in a refusal to grant oral argument." (quoting Partridge v. Reich, 141 F.3d 920, 926 (9th Cir. 1998)).
+  Oral argument is not requested or required under Fed. R. App. P. 34(2)(a)-(c) because: (1) the appeal is frivolous; (2) the dispositive issues have been authoritatively decided; and (3) the facts and legal arguments are adequately presented in the briefs and record, and the decisional process would not be significantly aided by oral argument. *See Chung v. Washington Interscholastic Activities Ass'n*, 538 F. Supp. 3d 1170, 1175 (W.D. Wash. 2021) ("When a party has [had] an adequate opportunity to provide the trial court with evidence and a memorandum of law, there is no prejudice [in a refusal to grant oral argument." (quoting *Partridge v. Reich*, 141 F.3d 920, 926 (9th Cir. 1998)).
 signature:
   signer: "L. Kathleen Chaney"
   lines: ["L. Kathleen Chaney, Esq., #6-3211", "Eric D. Hevenor, Esq., #6-4435", "4949 S. Syracuse Street, Suite 600", "Denver, Colorado 80237", "Telephone: (303) 799-8889", "Facsimile: (303) 799-3700", "Attorneys for Appellees"]
@@ -104,7 +104,7 @@ On June 29, 2023, the District filed a motion to dismiss Plaintiff’s Complaint
 
 # CONCLUSION
 
-Willeys failed to produce evidence of a 2021 Policy, or that the Student was ever referred to by an alternate name or pronoun pursuant to the 2022-23 PNCP.
+No genuine dispute of material fact exists as to any of the Willeys’ claims. Indeed, the Willeys failed to produce evidence sufficient to support their claims. The Willeys failed to produce evidence of a 2021 Policy, or that the Student was ever referred to by an alternate name or pronoun pursuant to the 2022-23 PNCP.
 
 The Willeys failed to produce evidence that the District knew or should have known of their religious convictions, or that the District took any action that caused the Willeys to violate their right to religious expression.
 

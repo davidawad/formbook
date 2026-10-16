@@ -199,16 +199,18 @@
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let hang-by = ind + heading-tab
-  // A grid, not one paragraph: a long title wraps in its own column and the page number
-  // stays on the row (inside one paragraph the number wrapped onto a line of its own).
+  // A grid, not one paragraph: a long title wraps in its own column (inside one paragraph the
+  // number wrapped onto a line of its own). The dot leader fills the rest of the title's last
+  // line and the page number sits at the right on that last line, as in a filed table.
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    grid(columns: (auto, 1fr, auto), column-gutter: 0.4em,
+    grid(columns: (1fr, auto), column-gutter: 0.4em, align: (left, bottom + right),
       hang(hang-by, {
         h(ind)
         if numbered { box(width: heading-tab, lab) }
         title
+        h(0.4em)
+        box(width: 1fr, repeat[.#h(0.16em)])
       }),
-      box(width: 100%, repeat[.#h(0.16em)]),
       it.page())))
 }
 
@@ -378,7 +380,8 @@
 /// signer's name with the first line of the signature block as the title, right of centre.
 #let signature-mark(meta) = block(above: 1.4em, breakable: false, {
   set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-  align(right, block(width: 55%, {
+  // A left-aligned block in the right 55% of the line: the lines start flush with each other.
+  pad(left: 45%, block(width: 100%, {
     signature-line(meta)
     linebreak()
     let lines = need(meta, "signature").at("lines", default: ())

@@ -41,7 +41,7 @@ Not produced, on purpose: a corporate disclosure statement (FRAP 26.1 is filed s
 | `proceeding` | yes | "On Appeal from ..." line (write it in the case's own caps) |
 | `brief_title` | yes | Cover title (in capitals), certificate of service description |
 | `counsel` | yes | list of `{names, lines}`; `lines` are printed plain; put the telephone number in `lines` |
-| `signature` | yes | `signer` (printed "/s/ Name" and then the name), `lines`, optional `also` (further counsel, unsigned), optional `note` (single-spaced paragraph under the block) |
+| `signature` | yes | `signer` (printed "/s/ Name" and then the name), `lines`, optional `also` (further counsel, unsigned), optional `note` (single-spaced paragraph under the block), optional `role` (the line under the name in the certificate signatures; default "Counsel for Appellant") |
 | `date` | no | Under the signature block; the date in the certificate of service |
 | `service` | no | `certificate: true` prints the certificate of service |
 | `authorities` | yes if the body cites any | map of key to `{kind, name, cite}` (`kind`: `case`, `statute`, `rule`, `other`, `constitution`, `regulation`); `name` is omitted for statutes, rules and other |
@@ -69,6 +69,15 @@ All 18 pages of `samples/OUTPUT-delgado-midland.pdf` were rasterized at 60 dpi (
 | 17 (before the fix) | The signature block stood alone on a page (footnote definitions at the end of the markdown stopped the keep-with-signature rule) | Fixed: the last paragraph is kept with the signature; the conclusion now starts on the page with the signature |
 | 17 | Certificate of compliance: "14-point" broke at the hyphen | Fixed: kept together |
 | 18 | Certificate of service | OK |
+
+## Verification pass 2026-10-16 (fb-595.26.8)
+
+- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/reply-brief samples/INPUT-delgado-midland.md` exit 0, no typst warnings, 18 pages (same as the committed PDF), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0); pairings unchanged (40% to 100%, as above).
+- Viewed: all 18 pages at 60 dpi, the exemplar's page 1 against our cover, and all 18 overlay pages at 40 dpi. Pages 17 and 18 viewed again after the fixes; the text of pages 1-16 is unchanged by them.
+- Fixed (tier 2): the signature under both certificates was set in markup with `\` breaks, so each line picked up a leading space and the three lines stepped to the right. It is now one `cert-sig` block, flush left from mid-page like the signature block, with the role line from `signature.role` (default "Counsel for Appellant") instead of fixed text.
+- Fixed (tier 2): "(EB Garamond, 14-point)" was boxed as one unit and dropped to its own line, leaving a short line above. Only each comma-separated part is kept together now, so "14-point" still never breaks at the hyphen.
+- Checked, no defect: cover on one page; TOC (i) and TOA (ii-iv) page numbers match the body; footnotes 1-3 on their pages at 14 pt; no heading stranded; page 15 ends short because the conclusion is kept with the signature block (as before).
+- Remaining: the gaps below are unchanged; tier 2 still judged on this one filer. Latex re-rendered (19 pages, builds); not reviewed page by page in this pass. Docx not rebuilt (no `soffice`).
 
 ## Known gaps
 

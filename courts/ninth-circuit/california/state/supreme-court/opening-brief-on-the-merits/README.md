@@ -37,7 +37,7 @@ Verified 2026-10-14 against the courts.ca.gov rule pages. The pages were read th
 
 ## Overlay
 
-Overlay of `OUTPUT-mccune-opening-brief-on-the-merits.pdf` against the McCune exemplar (`overlay.sh` takes the first file in `exemplars/`, which is McCune). Pages are paired by word overlap (`overlay.txt`): cover 1 to 1 (79%), TOC 2 to 2 (68%), TOA 3 to 4 (42%), 4 to 7 (35%), body 5 to 10 (52%), 6 to 11 (54%), 7 to 12 (72%), 8 to 13 (48%), 9 to 19 (63%), 10 to 20 (55%), 11 to 22 (80%), 12 to 23 (52%), conclusion and signature 13 to 53 (59%), certificate 14 to 54 (85%), proof of service 15 to 55 (72%) (pairs as of the Schola render). Word overlap is low where the sample is a portion; it is a diagnostic, not a score.
+Overlay of `OUTPUT-mccune-opening-brief-on-the-merits.pdf` against the McCune exemplar (`overlay.sh` takes the first file in `exemplars/`, which is McCune). Pages are paired by word overlap (`overlay.txt`): cover 1 to 1 (79%), TOC 2 to 2 (68%), TOA 3 to 4 (42%), 4 to 7 (35%), body 5 to 10 (52%), 6 to 11 (54%), 7 to 12 (72%), 8 to 13 (48%), 9 to 19 (63%), 10 to 20 (55%), 11 to 22 (80%), 12 to 23 (52%), conclusion and signature 13 to 53 (59%), certificate 14 to 54 (77%), proof of service 15 to 55 (72%) (pairs as of the 2026-10-16 render). Word overlap is low where the sample is a portion; it is a diagnostic, not a score.
 
 The sample is a portion, so its body pages pair with the filed pages they came from, and the filed pages it did not transcribe show as blue in the overlay. The cover and certificates line up by content.
 
@@ -60,13 +60,22 @@ Open choices, recorded here so the reviewer can see them:
 - The sample omits the Statement of Facts and most of the Argument; the frontmatter comment says so.
 - The TOA's second page holds only a few entries; that is the TOA's own length, not a layout defect.
 
+## Verification pass 2026-10-16 (fb-595.26.15)
+
+- Rendered `samples/INPUT-mccune-opening-brief-on-the-merits.md` with `tools/render.sh` (typst): exit 0, no warnings, 15 pages before and after the fixes (the committed OUTPUT was not stale in page count). Fonts (`pdffonts`): TeX Gyre Schola regular, bold, italic, embedded, nothing else.
+- Viewed all 15 pages at 60 dpi before the fixes and all 15 again after them. Compared both exemplars' page 1 (McCune, Patton) with our cover. Overlay re-run against the McCune exemplar and all 15 overlay pages viewed: pairing as in "Overlay" above.
+- Fixed, page 1 (cover): the court heading was bold and wrapped ("… OF THE STATE OF / CALIFORNIA"). It is now regular weight, as in the McCune exemplar (Patton sets it bold, but on a shorter line), and fits on one line.
+- Fixed, page 2 (TOC): the wrapped entry "A. Proposition 8 and the Subsequent Victim Restitution" ran into the page-number column. Page numbers now sit in their own column; wrapped lines stop short of it.
+- Fixed, page 14 (certificate of word count): it said the count was the one Microsoft Word generated, but the count is computed by the template. That sentence is replaced by "The count includes footnotes and was computed from the text of the brief"; the `word_processor` field is gone from the template and the sample.
+- Not changed: the body is 1.5-spaced (the rule minimum; the McCune exemplar is double-spaced, so the overlay drifts down the page), the boxed caption of the exemplars (tier 3). Known gaps below are unchanged.
+
 ## Known gaps
 
 - **Tier 2 is not finished.** Two exemplars from two filers are on file (Pirolo, Demson); the eval loop asks for 2 or 3, so the minimum is met, but a third filer would firm up the comparison. The McCune and Patton exemplars use Century Schoolbook; the template uses TeX Gyre Schola, the vendored Century Schoolbook substitute (rule 8.74(b)(1) prefers that face).
 - **Notice of intent to rely on a Court of Appeal brief** (Rule 8.520(a)(4)): the rule requires it to be attached to the cover when a party relies on a brief it already filed in the Court of Appeal. The template does not generate it; a brief that reuses a Court of Appeal brief needs the notice added by hand.
 - **Statement of Appealability and Statement of the Facts** (Rule 8.204(a)(2)(A)–(C)): the sample omits the statement of facts; the template does not enforce the required content.
 - **Attorney's proof of service** wording and its rule citations (CCP § 1013a, Rules 8.71(f), 8.77) are taken from the exemplar and not verified (see the rules table).
-- **Word count** is computed from the markdown by the template; the number printed on the certificate is that computed count, not a count from a word processor. The exemplar's certificate says "Microsoft Word"; the template prints the `word_processor` field from the frontmatter.
+- **Word count** is computed from the markdown by the template; the number printed on the certificate is that computed count. The certificate says so ("The count includes footnotes and was computed from the text of the brief"); it no longer names a word processor (the `word_processor` field was removed 2026-10-16, because the sentence it fed said the program generated the count, which was not true). Rule 8.520(c)(1) lets the certifier rely on the program's count but does not require it.
 - **Cover caption**: a long party name or a long review line may wrap; the cover is one page and the template refuses to build if it cannot fit (`cover`), so a very long caption must be shortened in the frontmatter.
 - The template has no checks yet (`checks.yaml` is not written). The gate stamps and the selftest belong to the court-level eval loop, not this box.
 

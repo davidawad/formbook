@@ -1,6 +1,6 @@
 # Court of Appeals for the Seventh Circuit: reply brief (`ca7` / `reply-brief`)
 
-Status of this doc type: exemplar yes (2 filers), typst template built, sample rendered (fonts pass, 2026-10-15), overlay **not regenerated** (the filed exemplar PDFs are not in this snapshot; `tools/overlay.sh` exits 1 with "no exemplar pdf"; the committed `.txt` is from an earlier run), every page reviewed (12 of 12 again in the fonts pass). Typeface: none named by the rules; EB Garamond kept (court `README.md`, "Typeface").
+Status of this doc type: exemplar yes (2 filers), typst template built, sample rendered and overlay regenerated (2026-10-16; the exemplars are in `exemplars/`), every page reviewed (12 of 12 in the verification pass of 2026-10-16; see "Verification pass"). Typeface: none named by the rules; EB Garamond kept (court `README.md`, "Typeface").
 Not wired into the court-level eval loop (no `rules.md`, `checks.yaml` or `check.sh` gates for this folder; see "Known gaps").
 
 ## Governing rules
@@ -34,7 +34,7 @@ its rules.
 |---|---|
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits the frontmatter, calls the template. |
 | `typst/ca7-reply-brief.typ` | The template: `ca7-reply-brief(meta, md)`. Content-agnostic. Every number is a named parameter at the top and traces to a rule ID above. |
-| `samples/INPUT-act-now-reply-brief.md` | Markdown transcribed from the primary exemplar (cover, the body through Point II.A, the conclusion, the certificate metadata). A portion, not the whole brief. |
+| `samples/INPUT-act-now-reply-brief.md` | Markdown transcribed from the primary exemplar (cover, the body through Point II.A, the headings of II.B, II.C and III with transcription notes, the conclusion, the certificate metadata). A portion, not the whole brief. |
 | `samples/OUTPUT-act-now-reply-brief.pdf` | `sh tools/render.sh courts/seventh-circuit/court-of-appeals/reply-brief samples/INPUT-act-now-reply-brief.md`. 12 pages. |
 | `samples/OVERLAY-act-now-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/reply-brief act-now-reply-brief`. Red = ours, blue = filed, black = both. |
 | `exemplars/FILED-EXAMPLE-act-now-v-doe-26-2473-reply-brief.pdf` | Primary exemplar: the whole 19-page reply brief, 26-2473. |
@@ -83,16 +83,16 @@ signature-block fix.
 | PDF page | Printed page | Content | Finding |
 |---|---|---|---|
 | 1 | (none) | Cover | Case number at top; court name; caption; proceeding; title; two-column counsel. Fits one page. OK. |
-| 2 | ii | TOC | Point and sub-point entries with dot leaders, page column right. OK. |
+| 2 | ii | TOC | Point and sub-point entries with dot leaders, page column right. Since 2026-10-16: I, II, II.A–C, III, IV. Conclusion, as in the filed TOC. OK. |
 | 3 | iii | TOA | Cases only (the sample cites no statutes). Page references computed. OK. |
 | 4 | 1 | Body | Double-spaced: 27.7 pt baseline pitch, 23 lines per page. Point I heading. OK. |
 | 5 | 2 | Body, footnotes 1-2 | 11 pt footnotes, single-spaced, separator rule. OK. |
 | 6 | 3 | Body | OK. |
 | 7 | 4 | Body | Pilcrow pair "¶¶" in a record citation renders with the vendored face. OK. |
 | 8 | 5 | Body, Point II | OK. Footnote 3 (Nieves, FKFJ) on the page. |
-| 9 | 6 | Body, II.A, footnote 6 | Large gap above the footnote block: the conclusion moved to the next page with its signature (see below). Accepted. |
-| 10 | 7 | Conclusion, signature | Conclusion and signature block on one page (not alone). OK. |
-| 11 | 8 | Certificate of compliance | Form 6 content; word count computed (2,085). OK. |
+| 9 | 6 | Body, II.A, headings II.B and II.C with transcription notes, footnote 4 | OK (2026-10-16). |
+| 10 | 7 | Point III heading and note, IV. Conclusion, signature | Conclusion and signature block on one page (not alone). OK. |
+| 11 | 8 | Certificate of compliance | Form 6 content; word count computed (2,160 since 2026-10-16). OK. |
 | 12 | 9 | Certificate of service | CM/ECF statement; Cir. R. 31(b) paper copies. OK. |
 
 Pages reviewed: 12 of 12. Fonts pass, 2026-10-15: re-rendered (12 pages; `pdffonts`: EB Garamond only, embedded), and all 12 pages rasterized at `pdftoppm -r 70` and viewed again. Nothing changed on the pages.
@@ -101,16 +101,26 @@ Pages reviewed: 12 of 12. Fonts pass, 2026-10-15: re-rendered (12 pages; `pdffon
 
 `samples/OVERLAY-act-now-reply-brief.txt`: each of our pages is paired with the filed page sharing most words (the tool's
 pairing, not a verified alignment). Lowest word overlap: ours p.3 (TOA, 36%: the filed TOA lists more authorities than the
-transcribed portion), ours p.10 (conclusion and signature, 38%: paired with filed p.17, which is outside the transcribed
+transcribed portion), ours p.10 (Point III note, conclusion and signature, 39%: paired with filed p.17, which is outside the transcribed
 portion), ours p.11 (certificate, 46%: different certificate wording). These reflect what the sample omits or words
 differently, not layout defects; the page-by-page review above is the layout check.
 
 ## Word count check
 
-Template count (certificate): 2,085 words, computed from the markdown with Word's whitespace rule. Cross-check: the PDF's
+Template count (certificate): 2,085 words before 2026-10-16 (2,160 after the three headings and notes were added), computed from the markdown with Word's whitespace rule. Cross-check: the PDF's
 text for the body pages, excluding page numbers and the signature block, comes to about 2,050 words (headings and footnotes
 included). The difference is about 2%. The certificate number is the template's count; before filing a real brief, confirm it
 in the word processor the brief was typed in.
+
+## Verification pass 2026-10-16 (fb-595.26.7)
+
+- Rendered: `sh tools/render.sh ... samples/INPUT-act-now-reply-brief.md`, exit 0, no typst warnings, 12 pages (the committed OUTPUT was also 12 pages). Re-rendered after each fix.
+- Viewed: all 12 pages at `pdftoppm -r 60`, one PNG at a time; pages 1, 2 and 9–12 again after the fixes (pages 3–8 are text-identical to the first render, checked page by page with `pdftotext -layout`). Exemplar page 1 compared with our cover. All 12 overlay pages viewed at `-r 40`.
+- Overlay: regenerated against the ACT NOW exemplar. Cover 94%, TOC 88% (was 63%), TOA 36%, body pages 59–92%, conclusion page 39%, certificates 46% and 63%. Margins and text block coincide; differences are the face (EB Garamond vs Times New Roman) and omitted text.
+- Fixed:
+  - Template: cover counsel lines and signature lines were forced italic; the exemplar sets them roman, with only the admission parentheticals and the "Attorneys for" note italic. Lines and names are now set as given; markdown `*...*` is honoured (the sample marks the two parentheticals).
+  - Sample: the TOC numbered the conclusion "III." because Points II.B, II.C and III were left out of the transcription; the filed TOC has "IV. Conclusion". Their headings are now transcribed (text from the filed TOC), each followed by a bracketed transcription note, so the TOC has the filed structure. The certificate word count moves from 2,085 to 2,160.
+- Remaining gaps: as in "Known gaps" (gray cover question, typeface, portion only, no automated gates). The latex engine was re-rendered (exit 0, 12 pages) but its pages were not viewed in this pass. The docx outputs were not rebuilt (no LibreOffice on this box), so `OUTPUT-act-now-reply-brief.docx` and `.docx.pdf` predate the added headings (their 2,085 word count and TOC are the old sample's).
 
 ## Known gaps
 
@@ -126,8 +136,8 @@ in the word processor the brief was typed in.
    court's system at filing, not by the brief. The template does not reproduce it.
 4. **Disclosure statement.** Not generated: it is a separate attorney filing (Cir. R. 26.1), and the exemplar has none.
 5. **Addendum and appendix.** Not supported. A reply brief with a short appendix would need a template change.
-6. **Portion only.** The sample transcribes the introduction, Point I, Point II and II.A (in part), and the conclusion. Point II.B
-   and Point III are not transcribed. The rule compliance of the template does not depend on this; it is a visual sample.
+6. **Portion only.** The sample transcribes the introduction, Point I, Point II and II.A (in part), and the conclusion. The text
+   of Points II.B, II.C and III is not transcribed; their headings are, each with a bracketed note. The rule compliance of the template does not depend on this; it is a visual sample.
 7. **Exemplar citation error, not copied.** The ACT NOW certificate says the type-volume limit is "Circuit Rule 29". The
    limit is Circuit Rule 32(c). The template follows the rule.
 8. **Signature block.** Only the signer, firm and telephone are transcribed; the exemplar's full signature block was not
@@ -142,7 +152,7 @@ in the word processor the brief was typed in.
 
 ## Engines
 
-- **typst** (`typst/`): primary, unchanged.
-- **latex** (`latex/template.tex`, `latex/ca7-reply-brief.lua`): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 27.7 pt double spacing, one-inch margins, no hyphenation. TOC lists point headings down to level 3 (`toc_depth` 3). Counsel groups with `column: right` and `counsel_note` are handled; the certificates include the paper-copy and unregistered-participant paragraphs. Output `samples/OUTPUT-act-now-reply-brief.latex.pdf`, 11 pages (typst: 12). Differences: the cover spacing is hand-set; the certificate of compliance wording is written for LaTeX rather than copied from the typst text. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
+- **typst** (`typst/`): primary. Roman counsel and signature lines changed 2026-10-16 (see "Verification pass").
+- **latex** (`latex/template.tex`, `latex/ca7-reply-brief.lua`): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 27.7 pt double spacing, one-inch margins, no hyphenation. TOC lists point headings down to level 3 (`toc_depth` 3). Counsel groups with `column: right` and `counsel_note` are handled; the certificates include the paper-copy and unregistered-participant paragraphs. Output `samples/OUTPUT-act-now-reply-brief.latex.pdf`, 12 pages (typst: 12; re-rendered 2026-10-16 from the sample with the added headings, pages not viewed). Differences: the cover spacing is hand-set; the certificate of compliance wording is written for LaTeX rather than copied from the typst text. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
 - **docx** (`docx/`): `build-reference.sh` (reference styles, EB Garamond 12 pt, exact 27.7 pt double spacing, 11 pt footnotes), `ca7-reply-brief.lua` (cover with the counsel in two columns and the closing double rule, TOC of the body headings, TOA, signature and certificates), `render.sh` (sections with roman front matter (the cover counts as i) and arabic body, PAGE footers, and a two-pass TOC/TOA page map read from the LibreOffice PDF), `pagemap.awk`. Output `samples/OUTPUT-act-now-reply-brief.docx` and `.docx.pdf`, 12 pages (typst: 12); the certificate word count is 2,085, the same as typst. Matches typst: the face and sizes, spacing, margins, cover and its numbering, TOC (body headings only, as typst), TOA with page numbers, the certificates and the service page break. Differences: the cover is spaced by hand; the TOA page list comes from a text search of the PDF; the TOC is static text, not a field; the compliance certificate omits the typst "using Typst" clause (no word processor is named in the frontmatter). Opened in LibreOffice without error; not opened in Word. BLOCKED: `tools/check.sh --engine docx` cannot run: no `checks.yaml` and no `court.json` in this folder or the court (exit 2), so no Gate 1 check ID can be reported; Gate 2 has no `reviews/` file.
 

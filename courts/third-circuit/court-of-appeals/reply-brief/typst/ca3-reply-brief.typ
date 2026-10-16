@@ -327,19 +327,23 @@
   v(gap)
   short-rule
   v(gap)
-  // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number).
-  align(left, pad(left: 50%, {
+  // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number). One group sits in the
+  // right half; two or more groups (separate offices) sit side by side, two to a row, across the
+  // full width, so a multi-office counsel list does not squeeze the cover's spacing to nothing.
+  let groups = need(meta, "counsel")
+  let group-block(gi, g) = block(breakable: false, {
     set par(hanging-indent: 0pt, spacing: 0.5em)
-    let groups = need(meta, "counsel")
-    for (gi, g) in groups.enumerate() {
-      block(breakable: false, {
-        for n in g.names { n; linebreak() }
-        let lines = g.at("lines", default: ())
-        if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
-        for l in lines { h(0.5em); emph(inl(l)); linebreak() }
-      })
-    }
-  }))
+    for n in g.names { n; linebreak() }
+    let lines = g.at("lines", default: ())
+    if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
+    for l in lines { h(0.5em); emph(inl(l)); linebreak() }
+  })
+  if groups.len() == 1 {
+    align(left, pad(left: 50%, group-block(0, groups.at(0))))
+  } else {
+    align(left, grid(columns: (1fr, 1fr), column-gutter: 1em, row-gutter: 1em,
+      ..groups.enumerate().map(((gi, g)) => group-block(gi, g))))
+  }
   v(gap)
   double-rule
 }
@@ -387,7 +391,7 @@
 /// typeface (FRAP 32(a)(5)-(6)), identical copies and virus check (L.A.R. 31.1(c)). CA3-CERT-001..003.
 #let certificate-of-compliance(meta, words) = {
   heading(level: 1, numbering: none)[Certificate of Compliance]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+  set par(first-line-indent: (amount: para-indent, all: true), leading: body-leading, spacing: body-leading, justify: false)   // FRAP 32(a)(4): text double-spaced
   [The undersigned counsel certifies pursuant to L.A.R. 46.1(e) that counsel is a member in good standing of the bar of this Court.]
   parbreak()
   [This brief complies with the type-volume limitation of FRAP 32(a)(7)(B)(ii) because it contains #group-digits(words) words, including headings, footnotes, and quotations, and excluding the items exempted by FRAP 32(f). It is prepared in #meta.at("typeface", default: "14-point, proportionally spaced serif type") and complies with the typeface and type-style requirements of FRAP 32(a)(5) and (6).]
@@ -400,7 +404,7 @@
 #let certificate-of-service(meta) = {
   let svc = meta.service
   heading(level: 1, numbering: none)[Certificate of Service]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+  set par(first-line-indent: (amount: para-indent, all: true), leading: body-leading, spacing: body-leading, justify: false)   // FRAP 32(a)(4): text double-spaced
   [I hereby certify that the foregoing brief was electronically filed on this date with the Clerk of the Court for the United States Court of Appeals for the Third Circuit by using the appellate CM/ECF system. Participants in the case who are registered CM/ECF users will be served by the appellate CM/ECF system.]
   let unreg = svc.at("unregistered", default: ())
   if unreg.len() > 0 {

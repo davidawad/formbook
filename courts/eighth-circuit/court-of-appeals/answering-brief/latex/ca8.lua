@@ -345,13 +345,16 @@ function Pandoc(doc)
   end
   local groups = meta.counsel or {}
   local counsel = {}
+  local any_group_phone = false
+  for _, g in ipairs(groups) do if g.phone then any_group_phone = true end end
   local width = "\\dimexpr(\\linewidth-0.25in*(" .. #groups .. "-1))/" .. #groups .. "\\relax"
   for gi, g in ipairs(groups) do
     local names = {}
     for _, n in ipairs(g.names or {}) do names[#names + 1] = tex(n) end
     local lines = {}
     for _, l in ipairs(g.lines or {}) do lines[#lines + 1] = tex(l) end
-    if gi == #groups and meta.phone then lines[#lines + 1] = tex(meta.phone) end
+    if g.phone then lines[#lines + 1] = tex(g.phone)
+    elseif gi == #groups and meta.phone and not any_group_phone then lines[#lines + 1] = tex(meta.phone) end
     if gi > 1 then counsel[#counsel + 1] = "\\hspace{0.25in}" end
     counsel[#counsel + 1] = "\\CounselCell{" .. width .. "}{" .. table.concat(names, "\\\\") .. "}{"
       .. table.concat(lines, "\\\\") .. "}"

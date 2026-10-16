@@ -29,6 +29,9 @@
 
 /// Render an inline markdown string (italics etc.) as inline content.
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+/// An italic address or role line, indented under a name; a line too long for its column wraps
+/// with the same indent. The block gap equals the single-spaced line gap around it.
+#let indented-line(s) = block(above: single-leading, below: single-leading, pad(left: 0.5em, emph(inl(s))))
 
 /// Plain text of a piece of content, for comparisons only.
 #let plain(c) = {
@@ -319,19 +322,27 @@
   v(gap)
   short-rule
   v(gap)
-  // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number).
-  align(left, pad(left: 50%, {
+  // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number). One group sits in the right
+  // half; several groups are set in two columns across the measure, as covers conventionally are.
+  {
     set par(hanging-indent: 0pt, spacing: 0.5em)
     let groups = need(meta, "counsel")
-    for (gi, g) in groups.enumerate() {
-      block(breakable: false, {
-        for n in g.names { n; linebreak() }
-        let lines = g.at("lines", default: ())
-        if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
-        for l in lines { h(0.5em); emph(inl(l)); linebreak() }
-      })
+    let group-block(gi, g) = block(breakable: false, {
+      for n in g.names { n; linebreak() }
+      let lines = g.at("lines", default: ())
+      if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
+      for l in lines { indented-line(l) }
+    })
+    if groups.len() == 1 {
+      align(left, pad(left: 50%, group-block(0, groups.first())))
+    } else {
+      align(left, grid(columns: (1fr, 1fr), column-gutter: 1em, row-gutter: 0.8em,
+        ..groups.enumerate().map(((gi, g)) => group-block(gi, g))))
     }
-  }))
+  }
+  // Optional line naming the party counsel represent (frontmatter `counsel_for:`), centred under
+  // the counsel block as is conventional; FRAP 32(a)(2)(F) does not require it.
+  if "counsel_for" in meta { v(gap * 0.5); inl(meta.counsel_for) }
   v(gap)
   double-rule
 }
@@ -363,7 +374,7 @@
       signature-line(meta)
       linebreak()
       sig.signer
-      for l in sig.at("lines", default: ()) { linebreak(); h(0.5em); emph(inl(l)) }
+      for l in sig.at("lines", default: ()) { indented-line(l) }
     }))
   })
 }
@@ -397,7 +408,7 @@
 #let certificate-of-compliance(meta, words) = {
   heading(level: 1, numbering: none)[Certificate of Compliance]
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
-  [This brief complies with: (1) the type-volume limitation of Federal Rule of Appellate Procedure 32(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Rule 32(f); and (2) the typeface requirements of Rule 32(a)(5) and the type style requirements of Rule 32(a)(6) because it has been prepared in a proportionally spaced typeface (#(type-size / 1pt)-point #font-family) using #typesetter. The word count is computed from the markdown source of this brief.]
+  [This brief complies with: (1) the type-volume limitation of Federal Rule of Appellate Procedure 32(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Rule 32(f); and (2) the typeface requirements of Rule 32(a)(5) and the type style requirements of Rule 32(a)(6) because it has been prepared in a proportionally spaced typeface (#box[#(type-size / 1pt)-point] #font-family) using #typesetter. The word count is computed from the markdown source of this brief.]
   form-sig-line(meta)
 }
 
@@ -420,7 +431,7 @@
     set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.4em, justify: false)
     grid(columns: (1.5in, 2.3in, 1fr), column-gutter: 0.15in, row-gutter: 0.6em,
       strong[Date Filed], strong[R.No.; Page ID \#], strong[Description of Document],
-      ..need(meta, "designation").map(d => (d.date, d.rno, d.description)).flatten())
+      ..need(meta, "designation").map(d => (inl(d.date), inl(d.rno), inl(d.description))).flatten())
   })
 }
 
@@ -478,7 +489,7 @@
   // ("60(b)(5)"), and never between a section sign / pilcrow and its number. Done with
   // unbreakable boxes so the extracted text stays exactly the author's characters.
   show regex("\\S*\\)\\(\\S*"): it => box(it)
-  show regex("[§¶] \\S+"): it => box(it)
+  show regex("[§¶]+ \\S+"): it => box(it)   // keep "§ 12" and "§§ 12" whole: no break inside or after the sign
   show heading: style-heading
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {

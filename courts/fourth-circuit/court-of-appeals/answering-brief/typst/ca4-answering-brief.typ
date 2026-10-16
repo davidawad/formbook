@@ -191,7 +191,7 @@
 #let toc-entry(it) = {
   let hd = it.element
   let num = numbered(hd)
-  let ind = if num { label-indent(hd) } else if hd.level >= 2 { (hd.level - 2) * heading-tab } else { 0pt }
+  let ind = if num { label-indent(hd) } else if hd.level >= 2 { (hd.level - 1) * heading-tab } else { 0pt }
   // The Argument's centered point heading has no body indent in the table; its label starts at the margin.
   if num and hd.level == 2 { ind = 0pt }
   let lab = if num { heading-label(hd) } else { none }
@@ -210,7 +210,7 @@
 
 #let toc-section() = {
   heading(level: 1, numbering: none, outlined: false)[Table of Contents]
-  align(right, block(above: 0.3em, below: 0pt, strong(underline[Page])))
+  align(right, block(above: 0.3em, below: 0pt, strong(underline(offset: 0.2em)[Page])))
   show outline.entry: toc-entry
   outline(title: none, target: selector(heading.where(outlined: true)), depth: toc-depth, indent: 0pt)
 }
@@ -246,7 +246,7 @@
       block(above: if first { 1em } else { 1.4em }, below: 0.2em, sticky: true, {
         set par(first-line-indent: 0pt)
         strong(title)
-        if first { h(1fr); strong(underline[Page(s)]) }
+        if first { h(1fr); strong(underline(offset: 0.2em)[Page(s)]) }
       })
       first = false
       for (key, a) in members {
@@ -319,7 +319,8 @@
   v(gap)
   short-rule
   v(gap)
-  // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number).
+  // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number). Lines are roman, as in the
+  // court's filed briefs; a line the markdown italicises stays italic.
   align(left, pad(left: 50%, {
     set par(hanging-indent: 0pt, spacing: 0.5em)
     let groups = need(meta, "counsel")
@@ -328,13 +329,13 @@
         for n in g.names { n; linebreak() }
         let lines = g.at("lines", default: ())
         if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
-        for l in lines { h(0.5em); emph(inl(l)); linebreak() }
+        for l in lines { inl(l); linebreak() }
       })
     }
   }))
   v(gap)
   grid(columns: (1fr, 1fr), align: (left, right),
-    [#need(meta, "date")], [#need(meta, "party_line")])
+    [#need(meta, "date")], inl(need(meta, "party_line")))
   v(gap * 0.6)
   double-rule
 }

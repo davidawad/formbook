@@ -11,14 +11,14 @@ Status: exemplar found, template and sample render; overlay generated; every ren
 | `exemplars/SOURCE.md` | URL fetched from, case, docket, filer, dates. |
 | `samples/INPUT-de-luca-reply-brief.md` | Markdown transcription of an excerpt of the exemplar (see "Known gaps"). Frontmatter + body, per the markdown contract below. |
 | `samples/OUTPUT-de-luca-reply-brief.pdf` | `sh tools/render.sh courts/fourth-circuit/court-of-appeals/reply-brief samples/INPUT-de-luca-reply-brief.md` (10 pages). |
-| `samples/OVERLAY-de-luca-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/reply-brief de-luca-reply-brief` (red = ours, blue = filed, black = both). |
+| `samples/OVERLAY-de-luca-reply-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/reply-brief de-luca-reply-brief` (red = ours, blue = filed, black = both). |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca4-reply-brief.typ` | The template: `ca4-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. Structure copied from `courts/ninth-circuit/court-of-appeals/typst/ca9-brief.typ`; the numbers, cover, certificates and related-cases section are the Fourth Circuit's. |
 
 Build and check (from the repo root):
 
 ```sh
-export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
+export PATH="$HOME/.local/share/formbook/env/bin:$PATH"   # tools/bootstrap.sh toolchain
 sh tools/render.sh courts/fourth-circuit/court-of-appeals/reply-brief samples/INPUT-de-luca-reply-brief.md
 sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/reply-brief de-luca-reply-brief
 ```
@@ -125,7 +125,8 @@ All 10 pages were looked at after the first render, and again after the font cha
 | 6 body p.3 | Argument heading centered; point heading I. flush with label; A. sub-heading. | OK |
 | 7 body p.4 | Body text; signals `See` italic; quotation marks curly. | OK |
 | 8 body p.5 | Citations italic (case names and signals); pin cites. | OK |
-| 9 body p.6 | Footnote 1 at 14 pt; CONCLUSION; signature block with `s/`, capitals name, italic lines and date. | OK |
+| 8 body p.5 (2026-10-16) | Footnote 1 now sits at the foot of this page; the rest of the page is blank because the CONCLUSION heading, its paragraph and the signature block are kept together (the keep rule) and do not fit. | ACCEPTED |
+| 9 body p.6 | CONCLUSION; signature block with `s/`, capitals name, italic lines and date. | OK |
 | 10 certificate of compliance | Word count and typeface statement; signature line. | OK |
 
 Nothing is `OPEN` that blocks the build. The docx and latex engines were not built (the brief asks for typst only).
@@ -162,3 +163,14 @@ BLOCKED (docx):
 - The addendum's `Add-N` folios are not built in the docx (the sample has no addendum).
 - The cover's rules and caption positions are paragraph borders and indents, approximated.
 - Opened in neither Word nor LibreOffice: well-formed XML only.
+
+## Verification pass 2026-10-16 (fb-595.26.4)
+
+- Exemplars: `exemplars/` held two files with the same SHA-256 (`3136a819…`): `FILED-EXAMPLE-dnc-de-luca-26-1532-reply-brief.pdf` (the one `SOURCE.md` and this README name) and an undocumented copy, `FILED-EXAMPLE-de-luca-v-nc-26-1532-reply-brief.pdf`. The copy was removed; `overlay.sh` picks the first PDF in the folder, which is now the documented one.
+- Rendered: `sh tools/render.sh … samples/INPUT-de-luca-reply-brief.md` exit 0, no typst warnings, Liberation Serif only (`pdffonts`). 10 pages, the same count as the committed PDF.
+- Overlay: `sh tools/overlay.sh … de-luca-reply-brief` exit 0; page map unchanged (table above). All 10 overlay pages viewed. The cover pairs weakly (39%) because the filed cover carries the full caption and "(counsel listed on reverse)"; body pages line up line for line where the text is transcribed.
+- Pages viewed: 10 of 10 typst pages at 60 dpi, plus the exemplar's pages 1 and 2 (cover and counsel list). After the fixes, pp. 1–3 were viewed again (pp. 4–10 are pixel-identical to the first render, `compare -metric AE`).
+- Fixed (template): cover counsel lines were italic and indented; they are now roman and flush, as in the filed counsel list. The `Page` / `Page(s)` underline crossed the descender of the "g"; it now sits lower.
+- Stale note corrected: footnote 1 is on PDF page 8, not page 9; page 8 is half blank because the Conclusion block is kept with the signature (row added to the page table, ACCEPTED).
+- Fixed (LaTeX, `latex/ca4.lua`): cover counsel lines roman, as in typst. Re-rendered, 11 pages; every page viewed at 40 dpi. Still open there: "CONCLUSION" at the foot of page 6 with its text on page 7.
+- Remaining gaps: as listed under Known gaps (excerpt, lead counsel only on the cover, abridged caption, gray cover, doubled period before the TOC leader). docx not rebuilt (no LibreOffice).

@@ -108,3 +108,12 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 
 **Pages viewed:** all 13 pages of the latex render and all 13 of the docx render, at 30 to 40 dpi, in the final state.
 
+
+## Verification pass 2026-10-16 (fb-595.26.13)
+
+- Rendered: `sh tools/render.sh courts/federal-circuit/court-of-appeals/reply-brief samples/INPUT-gem-reply-brief.md`, exit 0, no typst warnings, 13 pages (same as the committed PDF). Overlay rerun, exit 0: cover 98%, Argument 50–100%, signature 96%, Form 19 90%, certificate of service 95%; TOC and TOA low (17–22%), the sample's TOC and TOA list fewer entries than the filed ones.
+- Viewed: all 13 pages at 60 dpi, page 1 again after the fix; the overlay pages at 40 dpi; the exemplar's page 1 against our cover.
+- Fixed: cover counsel columns. "TAFT STETTINIUS & HOLLISTER, LLP" does not fit a half-width column at 14 pt and wrapped "LLP" flush left, reading as a separate address line. Each counsel line is now its own paragraph with a 1 em hanging indent.
+- Checked, not changed: page 10 holds only the last four lines of the Conclusion and page 11 the whole signature block; the filed brief does the same (its signature block is on a page of its own). Reply briefs are not principal briefs, so Fed. Cir. R. 32(a)(3) (exemplary claims) does not apply.
+- LaTeX re-rendered, 13 pages; its cover still wraps the firm name flush left, and its PDF page 6 carries only the block quotation tail and "Appx68." before the Conclusion starts a new page. docx not re-rendered (no LibreOffice): `docx/cafc-docx.lua` keeps an "Is/" signature prefix in a code path this sample does not reach (the committed docx PDF has no "Is/").
+- Remaining gaps: as under Known gaps.

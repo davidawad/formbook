@@ -325,7 +325,7 @@
         for n in g.names { n; linebreak() }
         let lines = g.at("lines", default: ())
         if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
-        for l in lines { h(0.5em); emph(inl(l)); linebreak() }
+        for l in lines { h(0.5em); inl(l); linebreak() }
       })
     }
     if "role" in meta { parbreak(); emph(inl(meta.role)) }
@@ -359,7 +359,7 @@
     })
   }
   block(above: 0.6em, {
-    for l in sig.at("lines", default: ()) { emph(inl(l)); linebreak() }
+    for l in sig.at("lines", default: ()) { inl(l); linebreak() }
   })
 })
 
@@ -390,14 +390,16 @@
   heading(level: 1, numbering: none)[Certificate of Service]
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
   [I hereby certify that on #need(meta, "date"), the foregoing #inl(need(meta, "brief_title")) was submitted for filing with the Clerk of Court of the United States Court of Appeals for the Seventh Circuit #svc.at("method", default: "using the CM/ECF system")#if "served_by" in svc [ and served by #svc.served_by] on the following counsel of record:]
-  for g in svc.counsel {
-    block(above: 0.8em, breakable: false, pad(left: 0.5in, {
-      set par(hanging-indent: 0pt, spacing: 0.4em)
-      for n in g.names { n; linebreak() }
-      for l in g.at("lines", default: ()) { emph(inl(l)); linebreak() }
-    }))
-  }
-  signers-block(meta)
+  // Address lines are set as given (markdown emphasis in a line is honoured; nothing is forced italic).
+  let served(g) = block(above: 0.8em, breakable: false, pad(left: 0.5in, {
+    set par(hanging-indent: 0pt, spacing: 0.4em)
+    for n in g.names { n; linebreak() }
+    for l in g.at("lines", default: ()) { inl(l); linebreak() }
+  }))
+  let groups = svc.counsel
+  for g in groups.slice(0, calc.max(groups.len() - 1, 0)) { served(g) }
+  // The last group served travels with the signature, so the signature never stands alone on a page.
+  block(breakable: false, { if groups.len() > 0 { served(groups.last()) }; signers-block(meta) })
 }
 
 // ---------------------------------------------------------------------------

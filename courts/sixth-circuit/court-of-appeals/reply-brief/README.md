@@ -112,3 +112,11 @@ The page-10 pairing is a matcher artifact: the Conclusion's words are few, and t
 ## Engines
 
 Same rules and numbers as the typst template (the reference). **latex** (`latex/`, tectonic): EB Garamond 14 pt from `fonts/`; 10 pages against typst's 12; certificate word count 1,458 (same as typst). Differs: the cover is more compact at the top than typst's; the counsel block is narrower so a long name does not wrap; pagination differs, so TOC and TOA page numbers follow the latex body. **docx** (`docx/`): 12 pages, same as typst; fonts EB Garamond only; certificate word count 1,458 matches. Differs: TOA page numbers for Johnson (p. 7, typst 6), McNeal (p. 4, typst 3) and Fed. R. Evid. 801(d)(2) (pp. 6–7) follow the docx's pagination; signature-block gaps are approximate; copy-paste from the docx includes a word joiner in "32(a)(7)(B)"-style tokens. The addendum path is removed (the typst has none). BLOCKED: none; `tools/check.sh` cannot run here (no `checks.yaml`).
+
+## Verification pass 2026-10-16 (fb-595.26.6)
+
+- Re-rendered `samples/OUTPUT-smith-reply-brief.pdf` with `tools/render.sh` (exit 0, no typst warnings): 12 pages, the same count and the same text on every page as the committed render (not stale). Overlay rerun: same page map as in the table above.
+- All 12 pages viewed at 60 dpi; the 12 overlay pages viewed at 40 dpi, and overlay page 1 (cover against the filed cover) at 150 dpi. Cover fits one page; TOC page numbers (Introduction 1, Argument 3, I. 3, Conclusion 7, certificates 8 and 9) match the printed footers; TOA pages match the citing pages (McNeal 3, Schlosser 5, Johnson and Wyatt 6).
+- Changed (shared typography with the other two doc types, no visible change in this sample): "14-point" in the certificate of compliance is kept on one line; the no-break rule for section signs now also covers "§§".
+- Open (tier 2/3, not changed): the cover has no closing rule under the counsel block and sets the party designations and "Counsel for Appellants" in roman, where the filed cover uses a rule and italics. Known gaps 2 and 3 above still hold (certificate of compliance starts printed page 8; printed page 6 ends early).
+- The latex PDF was re-rendered (10 pages, unchanged count); the docx outputs were not touched (no LibreOffice in this box).

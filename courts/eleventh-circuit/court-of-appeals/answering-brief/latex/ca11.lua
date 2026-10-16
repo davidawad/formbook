@@ -232,6 +232,8 @@ function Pandoc(doc)
   -- The phone line closes the last counsel group (typst: the last group carries the telephone number).
   local counsel = doc.meta.counsel
   if counsel and #counsel > 0 then counsel[#counsel].phone = doc.meta.phone end
+  -- Two or more counsel groups sit side by side across the full width (typst: up to three per row).
+  if counsel and #counsel > 1 then doc.meta.counsel_multi = "1" end
   doc.meta.words = group_digits(words)
   doc.meta.limit = group_digits(limit)
   doc.meta.toa = pandoc.MetaBlocks({ pandoc.RawBlock("latex", toa_section(doc.meta.authorities)) })

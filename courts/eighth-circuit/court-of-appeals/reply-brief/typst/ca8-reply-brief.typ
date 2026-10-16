@@ -328,22 +328,30 @@
   })
 }
 
+/// Signature under each certificate: "/s/ Name", the name, and the signer's role (`signature.role`,
+/// default "Counsel for Appellant"), set flush left from the middle of the line like the signature block.
+#let cert-sig(meta) = block(breakable: false, above: 1.4em, {
+  set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+  let sig = need(meta, "signature")
+  align(left, pad(left: 50%, {
+    [/s/ #sig.signer]
+    linebreak()
+    sig.signer
+    linebreak()
+    sig.at("role", default: "Counsel for Appellant")
+  }))
+})
+
 /// Certificate of Compliance, Form 6 wording (FRAP 32(g)(1)-(2); CA8-CERT-001). The word count is
 /// computed from the markdown: the body through the conclusion, footnotes included, the tables,
 /// the signature block and the certificates excluded.
 #let certificate-of-compliance(meta, words) = {
   heading(level: 1, numbering: none)[Certificate of Compliance]
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
-  [I certify that this brief complies with the type-volume limitation of Fed.~R.~App.~P. 32(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed.~R.~App.~P. 32(f). The brief complies with the typeface requirements of Fed.~R.~App.~P. 32(a)(5) and the type-style requirements of Fed.~R.~App.~P. 32(a)(6) because it has been prepared in a proportionally spaced typeface (#box[#font-name]).]
+  [I certify that this brief complies with the type-volume limitation of Fed.~R.~App.~P. 32(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed.~R.~App.~P. 32(f). The brief complies with the typeface requirements of Fed.~R.~App.~P. 32(a)(5) and the type-style requirements of Fed.~R.~App.~P. 32(a)(6) because it has been prepared in a proportionally spaced typeface (#font-name.split(", ").map(box).join(", ")).]
   parbreak()
   [Pursuant to Circuit~Rule~28A(h), I also certify that the electronic files of this brief have been submitted to the Clerk through the Court's CM/ECF system and have been scanned for viruses and are virus-free.]
-  block(breakable: false, above: 1.4em, {
-    align(right, block(width: 50%, [
-      /s/ #need(meta, "signature").signer \
-      #need(meta, "signature").signer \
-      Counsel for Appellant
-    ]))
-  })
+  cert-sig(meta)
 }
 
 /// Certificate of Service (FRAP 25; Circuit~Rule~25A(a)). Printed only when `service.certificate` is true.
@@ -351,13 +359,7 @@
   heading(level: 1, numbering: none)[Certificate of Service]
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
   [Pursuant to Fed.~R.~App.~P. 25 and Circuit~Rule~25A(a), I hereby certify that on #meta.at("date", default: "__________"), I filed a copy of the #plain(inl(need(meta, "brief_title"))) with the Clerk of the Court through the Court's CM/ECF system, which will serve electronic copies on all registered counsel.]
-  block(breakable: false, above: 1.4em, {
-    align(right, block(width: 50%, [
-      /s/ #need(meta, "signature").signer \
-      #need(meta, "signature").signer \
-      Counsel for Appellant
-    ]))
-  })
+  cert-sig(meta)
 }
 
 // ---------------------------------------------------------------------------
