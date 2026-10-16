@@ -15,9 +15,10 @@ brief_title: "Response Brief for Appellee CoStar Realty Information, Inc."
 counsel:
   - names: ["RICHARD B. RAILE"]
     lines: ["Baker & Hostetler LLP", "1050 Connecticut Ave., N.W., Suite 1100", "Washington, D.C. 20036", "rraile@bakerlaw.com"]
+    phone: "(202) 861-1711"
   - names: ["BONNIE KEANE DELGOBBO", "JOEL C. GRISWOLD"]
     lines: ["Baker & Hostetler LLP", "One North Wacker Dr., Suite 4500", "Chicago, IL 60606", "bdelgobbo@bakerlaw.com", "jcgriswold@bakerlaw.com"]
-phone: "(202) 861-1711"
+    phone: "(312) 416-6200"
 signature:
   signer: "Bonnie Keane DelGobbo"
   lines: ["Baker & Hostetler LLP", "One North Wacker Dr., Suite 4500", "Chicago, IL 60606", "(312) 416-6200", "bdelgobbo@bakerlaw.com"]
@@ -163,7 +164,5 @@ The textual problem here, as in [*Christopherson*, 161 F.4th at 528](toa:christo
 # Conclusion
 
 The Court should affirm the district court’s judgment.
-
-[^kastenmeier]: The Subcommittee on Courts, Civil Liberties, and the Administration of Justice of the House Comm. on the Judiciary, 97th Cong. 1 (1982) (statement of Rep. Kastenmeier).
 
 [^kodak]: Available at https://kodakdigitizing.com/blogs/news/history-of-the-vhs-tape?srsltid=AfmBOopsBABKIQUr0c5eP5VZZHon2bydMzkXRiBOqPFEZUd8Mo4jjr6 (last visited Apr. 28, 2026).

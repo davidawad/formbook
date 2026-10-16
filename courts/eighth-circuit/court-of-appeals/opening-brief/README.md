@@ -76,10 +76,18 @@ Every page of `OUTPUT-wolters-opening-brief.pdf` was rendered at 60 dpi and view
 | 11 | Part I text (4-5); Part I.A heading (5) | OK. |
 | 12 | Part I.A continued (6) | OK. |
 | 13 | Conclusion; signature block (7) | OK after the fix: the counsel address is now two lines, not one wrapping line. |
-| 14 | Certificate of compliance (8) | OK. Word count shows 1,627 words: the count of the sample, not of the filed brief (6,272). Item 3 is the virus statement. |
+| 14 | Certificate of compliance (8) | OK (checkbox wrap fixed 2026-10-16, see below). Word count shows 1,627 words: the count of the sample, not of the filed brief (6,272). Item 3 is the virus statement. |
 | 15 | Certificate of service (9) | OK. |
 
 Pages 1-12 and 14-15 were viewed on the render before the last edit. The last edit (splitting the signature address into two lines) changes only page 13, which was viewed again after it.
+
+## Verification pass 2026-10-16 (fb-595.26.8)
+
+- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/opening-brief samples/INPUT-wolters-opening-brief.md` exit 0, no typst warnings, 15 pages (same as the committed PDF), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0); the page pairings and overlaps are the same as listed under "Overlay" above.
+- Viewed: all 15 pages at 60 dpi, the exemplar's page 1 against our cover, and all 15 overlay pages at 40 dpi. Page 14 viewed again (60 dpi and 150 dpi) after the fix; the text of every other page is unchanged by it.
+- Fixed (tier 2): in the certificate of compliance, the second checkbox item wrapped its second line under the box instead of under the text. Each checkbox item is now a paragraph with a hanging indent the width of the box and its gap.
+- Checked, no defect: cover on one page; summary of the case one page, first item (8th Cir. R. 28A(i)(1)); TOC and TOA page numbers match the body; no heading stranded at a page foot; page numbering roman i-v then arabic 1-9. The pilcrow in record cites ("3 ¶ 11") is EB Garamond's own glyph.
+- Remaining: the gaps below are unchanged. Latex re-rendered (15 pages, builds); not reviewed page by page in this pass. Docx not rebuilt (no `soffice`).
 
 ## Known gaps
 

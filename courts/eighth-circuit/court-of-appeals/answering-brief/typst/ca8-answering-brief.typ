@@ -289,14 +289,16 @@
 #let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
 
 /// Counsel blocks in two columns, the name of each group in capitals, its address and contact lines
-/// below (FRAP 32(a)(2)(F): name, office address and telephone number). The phone number follows the
-/// last group's lines.
+/// below (FRAP 32(a)(2)(F): name, office address and telephone number). A group's own `phone`
+/// follows its lines; a top-level `phone` (used when no group has one) follows the last group's lines.
 #let counsel-block(meta) = {
   let groups = need(meta, "counsel")
+  let has-group-phone = groups.any(g => "phone" in g)
   let cells = ()
   for (gi, g) in groups.enumerate() {
     let lines = g.at("lines", default: ())
-    if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
+    if "phone" in g { lines = lines + (g.phone,) }
+    else if gi == groups.len() - 1 and not has-group-phone { lines = lines + (need(meta, "phone"),) }
     cells.push(block(breakable: false, {
       set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
       for n in g.names { smallcaps(n); linebreak() }
@@ -407,7 +409,9 @@
 
 #let ca8-answering-brief(meta, md) = {
   // ---- metadata checks (loud failure beats silent omission) ----
-  for k in ("case_number", "caption", "proceeding", "brief_title", "counsel", "phone", "signature", "virus_check") { let _ = need(meta, k) }
+  for k in ("case_number", "caption", "proceeding", "brief_title", "counsel", "signature", "virus_check") { let _ = need(meta, k) }
+  // FRAP 32(a)(2)(F): a telephone number, per counsel group or once for all.
+  if not need(meta, "counsel").any(g => "phone" in g) { let _ = need(meta, "phone") }
   let authorities = meta.at("authorities", default: (:))
 
   // ---- the word count: the body only (FRAP 32(f) excludes the cover, disclosure, tables, summary, signature, certificates) ----

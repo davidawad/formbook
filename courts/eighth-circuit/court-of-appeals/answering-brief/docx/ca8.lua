@@ -183,11 +183,13 @@ function Pandoc(doc)
     add(centered(d))
   end
   add(centered({ pandoc.Strong(meta.brief_title or {}) }))
+  local any_group_phone = false
   for _, g in ipairs(meta.counsel or {}) do
     for _, n in ipairs(g.names or {}) do add(centered(n)) end
     for _, l in ipairs(g.lines or {}) do add(centered(l)) end
+    if g.phone then add(centered(g.phone)); any_group_phone = true end
   end
-  if meta.phone then add(centered(meta.phone)) end
+  if meta.phone and not any_group_phone then add(centered(meta.phone)) end
   add(page_break())
 
   if summary then

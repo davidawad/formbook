@@ -439,15 +439,11 @@
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
   [1. This document complies with the type-volume limit of Fed. R. App. P. 32(a)(7)(B) because, excluding the parts of the document exempted by Fed. R. App. P. 32(f):]
   block(above: 0.8em, below: 0.8em, breakable: false, pad(left: 1.6em, {
-    checkbox(true)
-    h(0.6em)
-    [this document contains #group-digits(words) words.]
+    par(hanging-indent: 0.72em + 0.6em)[#checkbox(true)#h(0.6em)this document contains #group-digits(words) words.]
   }))
   [2. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because:]
   block(above: 0.8em, below: 0.8em, breakable: false, pad(left: 1.6em, {
-    checkbox(true)
-    h(0.6em)
-    [this document has been prepared in a proportionally spaced typeface using #need(meta, "word_processor") in #int(type-size.pt())-point #need(meta, "typeface") roman type.]
+    par(hanging-indent: 0.72em + 0.6em)[#checkbox(true)#h(0.6em)this document has been prepared in a proportionally spaced typeface using #need(meta, "word_processor") in #int(type-size.pt())-point #need(meta, "typeface") roman type.]
   }))
   // 8th Cir. R. 28A(h): counsel certifies that the brief (and the addendum) was scanned for viruses.
   [3. The brief has been scanned for viruses and it is virus free.]
