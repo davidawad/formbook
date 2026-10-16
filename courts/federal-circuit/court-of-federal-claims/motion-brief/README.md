@@ -2,7 +2,7 @@
 
 A motion for judgment on the administrative record (RCFC 52.1(c)) with its memorandum of law, the form used in bid protests. This folder is one self-contained doc type under the court (`uscfc`). The court-root `typst/` and `samples/` are not touched.
 
-Status: **exemplar = yes** (the PDF is not in `exemplars/` on the 2026-10-14 fonts-pass box; see Exemplar below), **typeface = EB Garamond, kept** (the rules name no face; see Decisions), **render = ok** (re-rendered 2026-10-14, 13 pages, EB Garamond only, 13 of 13 pages viewed at 50 dpi), **overlay = fail on this box** (`tools/overlay.sh` needs `exemplars/*.pdf` and the OCR text-layer copy, neither present; the committed `OVERLAY-oracle-memorandum.*` were not rewritten). The brief is a full-depth form; the sample is an excerpt of a 72-page memorandum (13 rendered pages). Not a complete reproduction of the filing.
+Status: **exemplar = yes** (in `exemplars/`), **typeface = EB Garamond, kept** (the rules name no face; see Decisions), **render = ok** (re-rendered 2026-10-16, 13 pages, EB Garamond only, 13 of 13 pages viewed at 60 dpi), **overlay = ok** (rerun 2026-10-16 against a rebuilt OCR text-layer copy; see "Verification pass 2026-10-16"). The brief is a full-depth form; the sample is an excerpt of a 72-page memorandum (13 rendered pages). Not a complete reproduction of the filing.
 
 ## Layout
 
@@ -80,7 +80,7 @@ Body:
 
 **Font: EB Garamond at 12 point.** RCFC 5.5(c)(2) sets only the minimum type size (12 point) and names no typeface; the whole rules PDF (as amended July 27, 2026) was searched and names none. Per `docs/FONTS.md`, a court that names no face keeps EB Garamond. The filed exemplar is set in Times New Roman, which the rules do not require. `fonts/liberation-serif/` (the Times New Roman substitute) is vendored, but using it would be a convention choice, not a rule requirement, so it is not applied. 12 point EB Garamond looks smaller than 12 point Times; the difference is visible in the overlay.
 
-**Double spacing.** `body-leading = 0.9em` was chosen by eye for a double-spaced look at 12 point. The pitch was not measured against the exemplar.
+**Double spacing.** `body-leading = 0.9em` was chosen by eye for a double-spaced look at 12 point. Measured 2026-10-16 on the render (`pdftotext -bbox`, body p. 1): 26.46 pt baseline pitch (2.2 em). The complaint template uses 27.6 pt (2 × 1.15 em); both are double spaced, but the two doc types differ slightly.
 
 **Email under the signature.** The exemplar's signature block gives telephone and fax but not the email; the email is on the cover only. RCFC 5.5(f) requires the email "directly below the signature line of every filing", so the template prints it there. This is a rule-driven deviation from the exemplar.
 
@@ -129,7 +129,7 @@ All 13 rendered pages were rasterized at 60 dpi and viewed in montage (`pdftoppm
 3. Certificate recipient lines printed literal asterisks ("*Counsel for Defendant*") — now inline markdown.
 4. The table of authorities heading and the certificate heading appeared in the table of contents — now unnumbered and outside the TOC, as in the exemplar.
 
-After fixes 2-4 the re-render was checked by text extraction (pp. 1, 10, and the TOA heading); the montage images predate those fixes.
+After fixes 2-4 the re-render was checked by text extraction (pp. 1, 10, and the TOA heading); the montage images predate those fixes. All 13 pages of the current render were viewed on 2026-10-16 (see below).
 
 ## Known gaps
 
@@ -156,6 +156,17 @@ The docx engine is `docx/`: `make-reference.sh` builds `reference.docx` (EB Gara
 **How the page numbers are made.** `render.sh` builds the document once without numbers, reads the PDF to find the body page of each heading and of each authority link, then builds it again with those numbers and checks that measuring that PDF gives the same numbers (at most three builds). The body length is checked against RCFC 5.4(b)(1): 40 pages, or 50 for a cross-motion. Word may paginate slightly differently from LibreOffice; the numbers are LibreOffice's.
 
 **docx BLOCKED:** `tools/check.sh <court> --engine docx` cannot run for this court yet: the court root has no `court.json`, `checks.yaml` or `rules.md`, so Gates 1 and 2 have nothing to check against. This is a court-level gap, not a docx check failure, and it is not fixed in this folder. The gates themselves were not run. Pages reviewed: all 13 pages of the docx PDF, rasterized at 60 dpi and viewed, 2026-10-15.
+
+## Verification pass 2026-10-16 (fb-595.26.14)
+
+- Rendered: `sh tools/render.sh … samples/INPUT-oracle-memorandum.md`, exit 0, no typst warnings, EB Garamond only. 13 pages (cover, TOC i, TOA ii, body 1-10), the same count as the committed PDF.
+- Viewed: all 13 pages at 60 dpi, before and after the fixes; exemplar pp. 3, 4 and 75 at 50 dpi; all 13 overlay pages.
+- Overlay: the OCR text-layer copy named above (`/work/artifacts/...`) is no longer on the box. Run without it, `tools/overlay.sh` paired 11 of 13 pages with the wrong filed page (overlap 5-12%), because pp. 4-78 of the exemplar are scans. The copy was rebuilt outside the repo (`/tmp/uscfc-textlayer.pdf`, which is not kept): native pp. 1-3, plus pp. 4-78 OCR'd with tesseract 5 (conda-forge, `--psm 6`, 300 dpi). `sh tools/overlay.sh … oracle-memorandum /tmp/uscfc-textlayer.pdf` exited 0, and the page map is the same as in the Overlay table (cover 80.3%, p. 12 61.4%, p. 9 40.0%; the other pages unchanged). In the overlay the body lines drift apart down each page (different face and leading), and the exemplar's caption box, redaction bars and "REDACTED VERSION" stamp are absent from ours (tier 3 / not template content).
+- Fixed:
+  1. The certificate of service statement was single spaced, with no indent. RCFC 5.5(c)(4) double-spaces text, and the exemplar's certificate (p. 3) is double spaced. It now uses the body leading and a first-line indent; the recipient blocks stay single spaced.
+  2. The certificate's `/s/` signature was placed about 0.85 in from the left margin, not in the signature column. It is now in the right half, on a signature rule.
+  3. The brief's signature block had no signature line. RCFC 5.5(f) puts the email and phone "directly below the signature line", and the exemplar draws one. `/s/ Name` now sits on a rule the width of the column.
+- Gaps that remain: Known gaps above. The docx was not re-rendered in this pass (no LibreOffice on the box), so it does not have fixes 1-3. The latex engine has no folder for this doc type. The overlay depends on a text-layer copy that is not in the repo.
 
 ## Search log
 

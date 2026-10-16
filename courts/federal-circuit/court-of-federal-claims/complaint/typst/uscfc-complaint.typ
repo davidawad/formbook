@@ -133,7 +133,7 @@
 }
 
 #let certificate-of-service(meta) = {
-  set par(leading: single-leading)
+  // CFC-FORM-004: the certificate text is text, so it stays double spaced (body leading).
   pagebreak(weak: true)
   align(center, text(weight: "bold", "CERTIFICATE OF SERVICE"))
   v(double-line)
@@ -141,8 +141,9 @@
     I hereby certify that on #need(meta, "date"), I caused a copy of the #lower(need(meta, "title")) to be served on all parties via the Court's electronic case filing system.
   ]
   v(double-line)
-  align(right, block(width: sig-left, breakable: false)[
-    #set par(justify: false)
+  // Same column as the signature block of the complaint.
+  grid(columns: (1fr, sig-left - 1in), [], block(width: 100%, breakable: false)[
+    #set par(justify: false, leading: single-leading)
     #box(width: 100%, stroke: (bottom: 0.5pt + black), inset: (bottom: 2pt))[/s/ #need(need(meta, "signature"), "signer")]
     \
     #need(need(meta, "signature"), "signer")
@@ -175,12 +176,14 @@
   // Neither is numbered: the complaint's own paragraph numbers are the author's.
   // Sticky: a heading never ends a page; it moves with the paragraph that follows it.
   show heading.where(level: 2): it => block(sticky: true, width: 100%, {
+    set text(size: type-size)              // headings at the body size, as the title.
     set par(leading: single-leading, first-line-indent: 0pt)
     v(single-line)
     align(center, text(weight: "bold", upper(it.body)))
     v(single-line)
   })
   show heading.where(level: 3): it => block(sticky: true, width: 100%, {
+    set text(size: type-size)              // headings at the body size, as the title.
     set par(leading: single-leading, first-line-indent: 0pt)
     v(single-line)
     text(weight: "bold", it.body)
