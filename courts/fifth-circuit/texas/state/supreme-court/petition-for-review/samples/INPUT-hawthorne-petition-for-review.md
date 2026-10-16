@@ -16,18 +16,34 @@ lead_counsel:
   email: "Am.frizzelle@epcountytx.gov"
   bar_number: "24105239"
 body_start: "STATEMENT OF THE CASE"
+rules_edition: "2025"
+signature:
+  name: "Amanda Frizzelle"
+  office:
+    - "CHRISTINA SANCHEZ"
+    - "EL PASO COUNTY"
+    - "320 S. Campbell St, Ste. 200"
+    - "El Paso, Texas 79901"
+    - "Tel: (915) 273-3238"
+    - "Fax: (915) 273-3277"
+    - "Email: Am.frizzelle@epcountytx.gov"
+  lines:
+    - "AMANDA D. FRIZZELLE"
+    - "Assistant County Attorney"
+    - "Texas Bar No. 24105239"
+  for: "Attorney for Petitioner"
 authorities:
   - group: "Cases"
     items:
       - name: "In re F.M.V."
         italic: true
         rest: ", No. 08-24-00077-CV, 2025 WL 2146682 (Tex. App.—El Paso July 29, 2025)"
-        pages: "1, 2"
+        pages: "1, 2, 6, 7, 8, 10"
   - group: "Statutes"
     items:
       - name: "Tex. Fam. Code § 51.095"
         rest: ""
-        pages: "2"
+        pages: "2, 7, 8, 9, 10"
       - name: "Tex. Gov’t Code § 22.001"
         rest: ""
         pages: "2"
@@ -102,3 +118,84 @@ After the statement was complete, F.M.V. was taken back to Magistrate Priddy, wh
 ## C. Trial and Disposition.
 
 F.M.V. was referred to the Juvenile Probation Department on five counts of Deadly Conduct Discharge Firearm. (R.R. Vol. III at 109:1-109:2). F.M.V. was tried by a jury in the 65th District Court on March 19, 2024; the jury found F.M.V. delinquent on all five counts of Deadly Conduct Discharge Firearm. (C.R. at 234). F.M.V. elected for the trial judge to decide the disposition; on March 22, 2024, the court sentenced him to three years commitment to the Texas Juvenile Justice Department. (C.R. at 244).
+
+# INTRODUCTION AND SUMMARY OF THE ARGUMENT
+
+The dispute in this juvenile matter is legal not factual.
+
+On a November evening in 2022, gunmen fired more than thirty bullets into the home of Maria de los Angeles Ramirez and Leonardo Ramirez Torres.[^1] Fourteen-year-old juvenile FMV later confessed that his friend Andre—armed with an AR rifle—and his accomplice, Jonathan—armed with a .45 caliber handgun—picked F.M.V. up in a white, Dodge Charger. FMV guided them to the victims’ home.[^2] FMV “pointed out” the house, and Andre and Jonathan got out of the car and began shooting.[^3] Those substantive facts have not been disputed.
+
+[^1]: R.R. Vol. II at 160:1 and R.R. Vol. III at 54:24-55:6.
+
+[^2]: *In re F.M.V.*, No. 08-24-00077-CV, 2025 WL 2146682, at \*6 (Tex. App.—El Paso 2025, pet. filed).
+
+[^3]: *Id.*
+
+The procedural facts aren’t in dispute either. After an investigation, FMV was detained and Mirandized.[^4] He was then taken to the jail magistrate where he was again read his *Miranda* warnings one-by-one.[^5] Investigating officers were positioned at a distance from both the Appellant and the magistrate, having no direct involvement in the process of reading or explaining the Appellant’s rights.[^6] The detective then took FMV to the Juvenile Probation Department to obtain his statement.[^7] After the statement was complete, FMV was taken back to the jail magistrate to sign the statement in the magistrate’s presence.[^8]
+
+[^4]: R.R. Vol. III at 104.23-105:9.
+
+[^5]: R.R. Vol. III at 107:5-107:6.
+
+[^6]: R.R. Vol. I at 9:21-25.
+
+[^7]: R.R. Vol. III at 104:15.
+
+[^8]: *In re F.M.V.*, No. 08-24-00077-CV, 2025 WL 2146682, at \*10 (Tex. App.—El Paso 2025, pet. filed).
+
+At trial, FMV challenged the manner in which section 51.095 of the Family Code was applied to his confession. Specifically, he noted that the magistrate supervised the signing of his confession with armed law enforcement officers about 30 feet away. FMV claimed that this violated subsection (a)(1)(B)(i), which prohibits law enforcement officers from being “present” while he was in the “presence” of the magistrate during signing. The trial court conducted a full evidentiary hearing. It then concluded that this Family Code provision was not violated when he signed—after he asked to correct it—his confession. The Eighth Court of Appeals disagreed—essentially concluding that “presence” in the statute means “constructive” presence or “line of sight.” But the Court of Appeals analysis missed the mark by not viewing the statute as a whole. This presents an issue of first impression for this Court.
+
+But the statute itself suggests a much more common-sense interpretation. Section 51.095(a)(1)(D) requires the magistrate to certify that her examination of the juvenile was “independent” of any law enforcement officers. Tex. Fam. Code § 51.095(a)(1)(D). In other words, all that is needed is that law enforcement officers not be “present” so that the magistrate has an opportunity to conduct a neutral examination of the statement outside the physical influence of law enforcement. That’s all that happened here. To conclude otherwise was error.
+
+# ARGUMENT
+
+## A. The Magistrate Provided a Neutral Examination of F.M.V.’s Statement Outside the Physical Presence of Law Enforcement.
+
+The purpose of the procedures in Family Code Section 51.095 is to ensure that a magistrates examination of a child is “independent” of any law enforcement officer or prosecuting attorney. *See* Tex. Fam. Code § 51.095(D) (requiring that the magistrate certify that her examination of the child was “independent” of any law enforcement officer or prosecuting attorney). The trial court concluded that FMV received exactly that: an independent examination by a magistrate that accepted his statement outside the “presence” of law enforcement. (C.R. 146). The Appellate court concluded otherwise because “law enforcement officers were present, some of whom were armed, without any showing that their presence was necessary for the magistrate’s personal safety.” *In re F.M.V.*, No. 08-24-00077-CV, 2025 WL 2146682, at \*11 (Tex. App.—El Paso July 29, 2025) (publication pending).
+
+But not only was F.M.V. repeatedly warned of his rights after his detention, the timeline of events demonstrates that both the Officers and the Magistrate strictly complied with all the requirements of § 51.095:
+
+**3:22 pm: Magistrate Priddy reviews F.M.V.’s statement with him outside the presence of law enforcement and F.M.V. makes changes to his statement.**
+
+- Magistrate Priddy came outside to review the statement with F.M.V. (R.R. Vol. 1 at 60: 5-8). Magistrate Priddy signs a certification stating F.M.V. signed his statement with “no law enforcement or prosecuting attorney present.” (R.R. Vol. 1, State’s Exhibit 3).
+- Detective Bastardo testified that he was approximately 30 feet from F.M.V.:
+
+> A. Outside I’m about 30 feet away from them.
+>
+> Q. Okay
+>
+> A. But I’m – completely away from them.
+>
+> Q. You’re not part of the conversation unless the judge calls you?
+>
+> A. Correct.
+
+(R.R. Vol. 1 at 60: 11-16).
+
+## B. Constructing “presence” under § 51.095 of the Family Code to mean “line of sight”, rather than “physical presence” creates new law that should be reviewed.
+
+Under Texas Family Code § 51.095, a child’s statement is admissible in evidence if the child received warnings from a Magistrate prior to making the statement, and the child signed the statement in the presence of a magistrate judge with no law enforcement officer or prosecuting attorney “present.” Tex. Fam. Code § 51.095(1), (1)(B)(i). But the statute does not squarely define law enforcement “presence,” and this Court has not yet taken up the issue. It should do so now.
+
+### 1. As to criminal proceedings, most Texas courts interpret “presence” to encompass both physical and sensory proximity.
+
+In criminal contexts such as proceedings or sentencing, Texas courts have found “presence” to mean close physical proximity – within reach of the senses of sight and sound. Yet, here, the Eighth Court of Appeals concluded that “presence” in Family Code §51.095 means “in line of sight.” *In re F.M.V.*, 2025 WL 2146682 at \*12. This holding does not square with existing caselaw in criminal matters.
+
+# CONCLUSION AND PRAYER
+
+There was understandable error below. This Court has never had the opportunity to address the meaning of “presence” in this section of the Family Code. But the Court should do so now. “Presence” should not be read in isolation to mean “line of site” or “constructive” presence. That reading does harm to the other three uses of “presence” in the statute. The trial court agreed: the juvenile was examined by the magistrate independently of the law enforcement officers 30 feet down the block. Yet the Court of Appeals failed to read the statute as a whole and consider its definition in light of the other four uses of “presence.” For all these reasons, Petitioner State of Texas prays that this court grant this Petition for Review, and after full briefing and oral argument, reverse and render judgment in favor of the State and affirm the judgment of the trial court.
+
+# CERTIFICATE OF SERVICE
+
+I hereby certify that a true and correct copy of the foregoing document was sent to the attorney for the Appellant, Kelli Childress, 500 E. San Antonio, Room 501, El Paso, Texas 79901 via electronic mail at ReVargas@epcounty.com, on this 10th day of October 2025.
+
+# CERTIFICATE OF COMPLIANCE
+
+Pursuant to the Texas Rule of Appellate Procedure 9.4(i)(1), (3), I hereby certify that this Appellate Brief contains {{word-count}} words. This is a computer-generated document using 14-point typeface for all text and 12-point footnotes.
+
+# APPENDIX
+
+1. F.M.V. Court of Appeals Brief
+2. May 2, 2025 Notice from 8th Court of Appeals: Case set for submission without oral argument
+3. Trial Court Judgment
+4. 8th Court of Appeals Opinion
+5. Rules and Statutes Cited

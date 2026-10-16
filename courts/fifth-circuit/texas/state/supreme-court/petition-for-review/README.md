@@ -1,36 +1,49 @@
 # Petition for review
 
-Typst template for a petition for review in the Supreme Court of Texas (`typst/main.typ`, module `typst/tex-petition-for-review.typ`). The sample is an excerpt transcribed from the filed *State of Texas v. F.M.V.*, No. 25-0792 petition (`exemplars/FILED-EXAMPLE-hawthorne-25-0792-petition-for-review.pdf`). Rendered output: `samples/OUTPUT-hawthorne-petition-for-review.pdf`; overlay on the filed petition: `samples/OVERLAY-hawthorne-petition-for-review.pdf` and `.txt`.
+Typst template for a petition for review in the Supreme Court of Texas (`typst/main.typ`, module `typst/tex-petition-for-review.typ`). The sample is transcribed from the filed *State of Texas v. F.M.V.*, No. 25-0792 petition (`exemplars/FILED-EXAMPLE-hawthorne-25-0792-petition-for-review.pdf`), with every section of the filed petition and the argument excerpted. Rendered output: `samples/OUTPUT-hawthorne-petition-for-review.pdf` (16 pages); overlay on the filed petition: `samples/OVERLAY-hawthorne-petition-for-review.pdf` and `.txt`.
 
 ## Layout
 
-- Cover (page 1, no number): court and case number, caption, the "On Petition for Review" line, the title between rules, and the lead counsel block at the foot of the page (Rule 9.4(g)).
-- Front matter (lower roman, from ii): identities of parties and counsel from the markdown, then the generated table of contents, then the index of authorities generated from the frontmatter `authorities` list.
-- Body (arabic, from 1): the markdown from the heading named in frontmatter `body_start`.
-- Text is Liberation Serif 14 pt, double-spaced (32.2 pt baseline pitch, measured with `pdftotext -bbox`), footnotes 12 pt single-spaced, block quotations single-spaced and indented one inch each side. Headings are centered bold (H1) or bold left (H2, H3).
-- The contents are generated from the headings with page numbers from the layout. The index of authorities page numbers are typed in frontmatter by the author, measured from the rendered PDF (body page numbers).
-- Word count: `word-count` in the template counts the words of the counted sections under the 2026 text of Rule 9.4(i)(1) (headings, footnotes and quotations count; caption, identities, tables, the case, issue and jurisdiction statements, signature, certificates and appendix do not). The count replaces `{{word-count}}` in the certificate of compliance. `assert` fails the render when the count exceeds the limit.
+- Cover (page 1, no number): case number, court, caption, the "On Review" line, the title between rules, lead counsel (name, address, telephone, email, bar number) at the foot of the page (Rule 9.4(g)).
+- Front matter (lower roman, from ii): each H1 section before `body_start` on its own page: the introduction (2026 text only, double-spaced), the identities of parties and counsel (single-spaced); then the generated table of contents (headings to level 3, bookmarked) and the index of authorities from the frontmatter `authorities` list.
+- Body (arabic, from 1): the markdown from the heading named in `body_start`. The signature block (frontmatter `signature`: `name`, `office`, `lines`, `for`) is set by the template in the right half of the page after the section whose title contains "prayer"; each section whose title starts with "certificat" gets a short `/s/` signature (Rule 9.5(e)); the appendix index starts a new page.
+- Liberation Serif 14 pt (headings too), double-spaced (32.2 pt pitch), every paragraph indented 0.5 in (including the first after a heading, as all three filers do), footnotes 12 pt single-spaced, block quotations single-spaced and indented 1 in each side. Footnote markers are raised digits (`super(typographic: false)`): Liberation Serif has superscript glyphs only for 1-3, so markers 4 and up came out a different size before this change.
+- Word count: the counted H1 sections (front matter and body) under Rule 9.4(i)(1), 2026 text; the count, with a thousands separator, replaces `{{word-count}}` in the certificate of compliance. The render fails (`assert`) when the count is over the limit, when the 2026 introduction is over 1,000 words, or when a required section is missing or out of order.
+- `rules_edition` (frontmatter): `"2026"` (default) or `"2025"`. The sample uses `"2025"` because the filed petition (Oct. 10, 2025) predates the amendments; the 2026 path (introduction first, 6,500 words) was rendered from a temporary copy of the sample with an `# INTRODUCTION` section before the identities and checked (introduction on page ii, listed in the contents). Removing the introduction under 2026 fails the render, as intended.
 
 ## Governing rules
 
-Source notes. The Texas Rules of Appellate Procedure PDF (`txcourts.gov/media/1463134/...`) returned HTTP 403 to every fetch attempted on October 15, 2026, so the rule numbers below are carried over from the October 14 review and have **not been re-read against the rule text in this session**. The word-count exclusions were confirmed by a secondary search of the 2026 amendment (Misc. Docket No. 25-9104) and should also be read against the rule text.
+Primary source read this session (October 16, 2026): the text of the amendments in Misc. Docket No. 25-9104 (Tex. Dec. 23, 2025; effective for petitions filed on or after January 1, 2026), reproduced as the appendix of D. Todd Smith, *The Appellate Advocate* vol. 35 no. 2 (Spring 2026), <https://www.texappcounsel.com/wp-content/uploads/sites/958/2026/06/Smith-SCOTX-PFR-Article-in-Appellate-Adv-V35-No2-.pdf>. The Court's own copies (<https://www.txcourts.gov/media/1461814/259104.pdf>, the TRAP PDF) still return HTTP 403 to this box, so the redline was read through that reprint; read it against the Court's PDF before relying on it.
 
-- Rule 9.4(c)–(e): letter paper; one-inch margins; double-spaced text; conventional typeface at least 14 point; footnotes at least 12 point.
-- Rule 9.4(g): cover contents (case style and number, title, filing party, lead counsel's name, address, telephone, email, Texas Bar number).
-- Rule 9.4(i)(1)–(2): word limit for a petition for review, 4,500 words, computer-generated (`word-limit` in the module). Count exclusions as above.
-- Rule 53.2: order of contents: identities, table of contents, index of authorities, statement of the case, jurisdiction, issues, facts, summary, argument, prayer, appendix.
-- Rule 9.5: certificate of service.
+- Rule 9.4(c)-(e): letter paper; one-inch margins; double-spaced text (footnotes, block quotations, short lists and issues may be single-spaced); conventional typeface at least 14 point; footnotes at least 12 point. Not re-read this session (unchanged by 25-9104).
+- Rule 9.4(g): cover contents (case style and number, title, party, lead counsel's name, mailing address, telephone, email, State Bar number). Not re-read this session.
+- Rule 9.4(i)(1) (2026): excluded from the count: caption, identity of parties and counsel, statement regarding oral argument, table of contents, index of authorities, statement of the case, statement of issues presented, statement of jurisdiction, statement of procedural history, signature, proof of service, certification, certificate of compliance, appendix. Read.
+- Rule 9.4(i)(2)(D) (2026): petition for review 6,500 words, inclusive of the introduction (former limit 4,500). Rule 9.4(i)(3): certificate stating the number of words. Read.
+- Rule 53.2 (2026), in order: (a) introduction (at most 1,000 words, counted), (b) identity of parties and counsel, (c) table of contents (bookmarked), (d) index of authorities, (e) statement of the case, (f) statement of jurisdiction, (g) issues presented (with record cites for preservation), (h) statement of facts, (i) summary of the argument, (j) argument, (k) prayer, (l) appendix (bookmarked). Read. The redline shows a struck "(g) Introduction ... summarizing the reasons" line; read as deleted.
+- Rule 9.5: certificate of service, signed. Not re-read this session.
 
 ## Exemplars
 
-Three filed petitions from three filers, listed with URLs in `exemplars/SOURCE.md`: the State petition (25-0792), Tanner (25-0648), and San Patricio County Appraisal District (26-0153). Tier 2 (cover, contents, authorities layout) is judged against all three.
+Three filed petitions from three filers, listed with URLs in `exemplars/SOURCE.md`: the State petition (25-0792, Oct. 2025, former rules), Tanner (25-0648, Aug. 2025, former rules), and San Patricio County Appraisal District (26-0153, Feb. 2026, the only one under the 2026 rules: introduction on pages ii-iv before "Parties and Counsel"). Tier-2 cross-check this pass: the SPCAD petition's front matter (introduction placement, counsel list, contents) and the signature and certificate layout of all three filers (signature block in the right half after the prayer; `/s/` and name under each certificate), which the template now follows.
+
+## Depth pass (fb-595.38.2, October 16, 2026)
+
+Sample extended from the statement of facts (10 pages) to the full structure: introduction and summary of the argument (with footnotes 1-8), argument (A with the timeline entry, a bulleted list and a block-quoted Q&A; B; B.1 at level 3), conclusion and prayer, generated signature block, certificate of service, certificate of compliance, appendix index. 16 rendered pages (cover, ii-iv, body 1-12); all 16 rendered at 60 dpi and looked at.
+
+Overlay page map (ours -> filed, word overlap): 1->1 (67%), 2->4 identities (97%), 3->2 contents (69%), 4->3 index (32%, ours is the measured short index), 5-11 -> 5-11 (60-86%), 12->13, 13->16, 14->23, 15->24 signature and certificates (75%), 16->25 appendix (82%). Tier-3 differences (filed pages run at a different measure; filed places the contents before the identities, which the rule orders the other way): not chased.
+
+Template fixes from the deeper sample: cover listed the lead counsel's name after the address (now first); first paragraph after a heading was not indented; footnote markers 4 and up were a smaller glyph; no signature block or certificate signatures existed (only typed in markdown); the contents stopped at level 2 (Rule 53.2(c) wants each point); the contents had no bookmark; the word limit was the former 4,500 under the 2026 exclusions; no check of the required sections and their order; the count missed "statement of procedural history" and "certification" exclusions; the count had no thousands separator.
+
+Index of authorities page numbers re-measured from this render with `pdftotext` per page.
 
 ## Known gaps
 
-- Not done in this pass: `rules.md`, `checks.yaml`, `reviews/`, `LOG.md`, the latex and docx engines, and the `tools/check.sh` gates. The tracker and `court.json` are untouched.
-- The sample stops at the statement of facts, so the conclusion, prayer, signature, certificate of service and certificate of compliance are not exercised by the render. Their template code is untested.
-- Index of authorities page numbers must be re-measured whenever the body text changes.
-- Appendix and electronic-filing PDF requirements (searchable text, bookmarks, size cap) are not implemented.
+- Not done: `rules.md`, `checks.yaml`, `reviews/`, `LOG.md`, the latex engine, the `tools/check.sh` gates, a second (structurally different) sample. The tracker and `court.json` are untouched.
+- Index of authorities page numbers are typed in frontmatter and must be re-measured whenever the text moves (no `toa:` links as in the First Circuit reference).
+- The Rule 53.2(l) appendix documents themselves (court of appeals opinion, judgment, statutes) are not produced; only the appendix index is.
+- Rule 9.4(e)-(g) and 9.5 were not re-read against primary text this session (the TRAP PDF is 403).
+- The sample's certificate of compliance wording drops the filer's "created in Microsoft Word ... relying on the word count of the software" sentence, since the count comes from the template.
+- docx (`docx/tex.lua`) was not changed: it still uses the 4,500-word limit, splits the count at "Respectfully submitted", has no signature block from frontmatter `signature` and no `rules_edition`. No `soffice` on this box, so `samples/OUTPUT-hawthorne-petition-for-review.docx` and `.docx.pdf` were NOT regenerated and are stale against the extended INPUT.
 
 [Formbook index](../../../../../../README.md)
 
