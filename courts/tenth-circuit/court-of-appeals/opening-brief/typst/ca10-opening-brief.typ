@@ -224,8 +224,13 @@
   ("other", "Other Authorities:"),
 )
 
-#let sort-key(a) = lower(plain(inl(a.at("sort", default: a.at("name", default: "") + " " + a.cite))))
+/// Sort key: lowercased plain text without punctuation; digit runs zero-padded so "2 U.S.C." sorts
+/// before "28 U.S.C.". (Parenthesised: a method chain on a new line after `#let` is not code.)
+#let sort-key(a) = (
+  lower(plain(inl(a.at("sort", default: a.at("name", default: "") + " " + a.cite))))
     .replace(regex("[^a-z0-9 ]"), "")
+    .replace(regex("\\d+"), m => "0" * calc.max(0, 8 - m.text.len()) + m.text)
+)
 
 /// Table of authorities, built from the `toa:` links found in the body.
 #let toa-section(authorities) = {
@@ -378,14 +383,14 @@
 /// authorities and carries a negative statement when there are no related appeals.
 #let prior-appeals(meta) = {
   heading(level: 1, numbering: none)[Statement of Prior or Related Appeals]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+  // Text of the brief: double-spaced like the body (CA10-FORM-001, FRAP 32(a)(4)).
   inl(need(meta, "prior_appeals"))
 }
 
 /// Statement in Support of Oral Argument (10th Cir. R. 28.2(C)(2)); only when argument is requested.
 #let oral-argument-statement(meta) = {
   heading(level: 1, numbering: none)[Statement in Support of Oral Argument]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+  // Text of the brief: double-spaced like the body (CA10-FORM-001, FRAP 32(a)(4)).
   inl(need(meta, "oral_argument_statement"))
 }
 

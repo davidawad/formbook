@@ -15,7 +15,7 @@
 #let type-size = 14pt                      // CA10-FORM-004 / 10th Cir. R. 32(A): 13 or 14 point, 14 preferred.
                                            // A proportional face must be 14-point or larger (FRAP 32(a)(5)).
 #let body-leading = 1.36em                 // CA10-FORM-003: double spacing (FRAP 32(a)(4)); calibrated in README.md.
-#let single-leading = 0.2em                // quotations, headings, TOC/TOA, certificates: single-spaced.
+#let single-leading = 0.65em               // quotations, headings, TOC/TOA, certificates: single-spaced (typst's normal line gap).
 #let para-spacing = 0.9em
 #let page-margin = 1in                     // CA10-FORM-002: at least one inch on all four sides (FRAP 32(a)(4)).
 #let para-indent = 0.5in
@@ -87,30 +87,33 @@
   }
 }
 
-/// The cover, on two pages: the first carries the case number, court, caption and proceeding;
-/// the second carries the title of the brief, the oral argument statement and counsel.
+/// The front cover, on one page (FRAP 32(a)(2): the front cover carries the case number, court,
+/// title of the case, nature of the proceeding and court below, title of the brief, and counsel;
+/// 10th Cir. R. 28.2(C)(1)-(2): district, judge, district court case number, oral argument).
+/// The groups are spread with flexible space, so the page fills without fixed offsets.
+#let cover-rule = align(center, line(length: 40%, stroke: 0.5pt))
+
 #let cover(meta) = {
   set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+  align(center)[No. #need(meta, "case_number")]
+  v(1fr)
   align(center)[
-    No. #need(meta, "case_number")
-    #v(0.6in)
     *UNITED STATES COURT OF APPEALS*\
     *FOR THE TENTH CIRCUIT*
   ]
-  v(0.7in)
+  v(1fr)
   caption-block(meta)
-  v(0.8in)
+  v(1fr)
   align(center, inl(need(meta, "proceeding")))
   if "judge" in meta { align(center, inl(meta.judge)) }
   if "district_court_case" in meta { align(center, inl(meta.district_court_case)) }
-  pagebreak()
-  align(center)[
-    #v(0.8in)
-    *#upper(need(meta, "brief_title"))*
-    #v(0.5in)
-    #need(meta, "oral_argument")
-  ]
-  v(1.2in)
+  v(1fr)
+  cover-rule
+  align(center, strong(upper(need(meta, "brief_title"))))
+  cover-rule
+  v(1fr)
+  align(center, need(meta, "oral_argument"))
+  v(1fr)
   for group in need(meta, "counsel") {
     align(center, block(width: 100%, sticky: true, {
       for name in group.names {
@@ -123,6 +126,7 @@
     v(0.6em)
   }
   align(center, par(first-line-indent: 0pt, leading: single-leading, inl(need(meta, "phone"))))
+  v(0.5fr)
 }
 
 // ---------------------------------------------------------------------------
@@ -152,6 +156,7 @@
   block(width: 100%, below: 0.6em, par(first-line-indent: 0pt, hanging-indent: 0.4in, leading: single-leading, justify: false, {
     h(indent)
     title
+    h(0.3em)
     box(width: 1fr, repeat[.#h(0.16em)])
     shown
   }))
@@ -159,6 +164,7 @@
 
 #let toc-section() = {
   section-title[TABLE OF CONTENTS]
+  align(right, strong(underline[Page]))
   context {
     // Front-matter entries, found by their labels.
     for (lab, t) in ((<ca10-toa>, [TABLE OF AUTHORITIES]), (<ca10-prior>, [STATEMENT OF PRIOR OR RELATED APPEALS])) {
@@ -200,6 +206,7 @@
 
 #let toa-section(authorities) = {
   [#section-title[TABLE OF AUTHORITIES] <ca10-toa>]
+  align(right, strong(underline[Page(s)]))
   context for k in toa-kinds {
     let items = authorities.pairs().filter(p => p.last().at("kind", default: "other") == k.kind)
     if items.len() > 0 {
@@ -209,7 +216,7 @@
         let shown = if a.kind == "case" { emph(a.name) } else { [#a.name] }
         let cite = if a.at("cite", default: "") != "" { [, #a.cite] } else { [] }
         let mark = if pages.len() == 0 { [--] } else if pages.len() >= passim-threshold { [passim] } else { pages.map(str).join(", ") }
-        block(width: 100%, below: 0.6em, par(first-line-indent: 0pt, hanging-indent: 0.4in, leading: single-leading, justify: false, [#shown#cite#box(width: 1fr, repeat[.#h(0.16em)])#mark]))
+        block(width: 100%, below: 0.6em, par(first-line-indent: 0pt, hanging-indent: 0.4in, leading: single-leading, justify: false, [#shown#cite#h(0.3em)#box(width: 1fr, repeat[.#h(0.16em)])#mark]))
       }
     }
   }
@@ -293,7 +300,7 @@
   set document(title: "Answer brief " + need(meta, "case_number"))
   set text(font: font-family, size: type-size, lang: "en", region: "us")
   set page(paper: "us-letter", margin: page-margin, numbering: front-page-number)
-  set par(leading: body-leading, spacing: para-spacing, first-line-indent: para-indent, justify: false)
+  set par(leading: body-leading, spacing: para-spacing, first-line-indent: (amount: para-indent, all: true), justify: false)
   show heading.where(level: 1): it => style-heading-1(it)
   show heading.where(level: 2): it => style-heading-2(it)
   show footnote.entry: it => {
@@ -306,10 +313,10 @@
   let pattern = auth.pairs().map(p => "(" + p.last().search + ")").join("|")
   show regex(pattern): it => {
     let keys = auth.pairs().filter(p => it.text.find(regex(p.last().search)) != none).map(p => p.first())
-    it + [#metadata(keys) <ca10-cite>]
+    it + [#metadata(keys)<ca10-cite>]   // no space before the label: a space would print
   }
 
-  // Cover (pages i-ii).
+  // Cover (page i, unnumbered).
   cover(meta)
   pagebreak()
 

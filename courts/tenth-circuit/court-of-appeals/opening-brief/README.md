@@ -76,13 +76,13 @@ A sample is one `.md` file: a YAML frontmatter block, then the markdown body. Th
 - p1 cover: fits on one page; caption, originating case line, counsel block, oral-argument line all present. Pass.
 - p2 TOC: all sections listed with page numbers, Argument point I. under Argument, attachments index listed. Pass.
 - p3 TOA: one page; cases, statutes, grouped; page numbers from links (e.g., *Bost* on 2, 3, 4, 5). Pass.
-- p4 Statement of prior or related appeals (roman iii): negative statement. Pass. Alone on its page (the TOA fills p3).
+- p4 Statement of prior or related appeals (roman iii): negative statement, double-spaced body paragraph since 2026-10-16. Pass. Alone on its page (the TOA fills p3).
 - p5 Jurisdictional statement, issues, start of statement of the case: 14 pt, double spacing, footnote 1 at foot. Pass.
 - p6 Rest of statement of the case, summary of argument. Pass.
 - p7 Standard of review, Argument I opening (italic case names, TOA links). Pass.
 - p8 Argument I, continued. Pass.
 - p9 Argument I continued, footnote 2 at foot of page; conclusion moved to next page with its signature block (keep logic). Pass.
-- p10 Conclusion, signature block, Statement in Support of Oral Argument. Pass.
+- p10 Conclusion, signature block, Statement in Support of Oral Argument (double-spaced, indented, since 2026-10-16). Pass.
 - p11 Certificate of compliance: 1,136 words, typeface and type-style statements. Pass.
 - p12 Certificate of digital submission and certificate of service (share a page). Pass.
 - p13 Index of attachments. Pass.
@@ -151,3 +151,13 @@ DOCX (`docx/`): `build-reference.sh` makes `reference.docx` (EB Garamond 14 pt; 
 - BLOCKED `TOC` (contents, page column): the page numbers need a field update in Word or LibreOffice; this pipeline does not update fields, and no first-pass page map is written. The contents list every entry in order, without numbers.
 - BLOCKED `TOA` (table of authorities, "Page(s)" column): same reason; the authorities are listed, cited on the right pages in the typst output only.
 - `sh tools/check.sh <court-dir> --engine docx` fails: the court folder has no `checks.yaml` (Gate 1 cannot run). Nothing was edited to pass it.
+
+## Verification pass 2026-10-16 (fb-595.26.10)
+
+- Rendered: `tools/render.sh` exit 0, no typst warnings, 13 pages (unchanged). Overlay rerun (`tools/overlay.sh`); page map unchanged (cover 74.6%, body pages 52-82%).
+- Viewed: all 13 pages at 60 dpi, and pages 2, 3, 4, 10, 11 again after the fixes; the 13 overlay pages at 40 dpi; exemplar page 1 against our cover (same parts, same order; the exemplar sets Times New Roman and lists one counsel group on the cover).
+- Defects fixed:
+  1. TOA statutes sorted as text ("2 U.S.C.", "28 U.S.C.", "3 U.S.C."). The sort key now zero-pads digit runs: 2, 3, 28, 52. The punctuation-stripping step had never run (a method chain on a new line after `#let` is markup, not code); the key is now parenthesised.
+  2. Statement in Support of Oral Argument and Statement of Prior or Related Appeals were single-spaced with no indent. They are text of the brief (FRAP 32(a)(4)), and the exemplar double-spaces its oral-argument statement (filed p. 33). Both now take the body paragraph style. Page count unchanged.
+- LaTeX engine rebuilt (`--engine latex`, exit 0, 19 pages, unchanged); its pages were not viewed in this pass. DOCX outputs not touched (no LibreOffice on this box); the docx engine (`docx/ca10.lua`, `as_single`) still sets both statements single-spaced, and the latex template still sets the oral-argument statement unindented (`\noindent`); neither engine was changed.
+- Remaining gaps: as listed above (font, cover colour, heading style, 10th Cir. R. 32(B) exclusions unverified, no `checks.yaml`).

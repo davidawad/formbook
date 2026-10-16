@@ -94,3 +94,12 @@ DOCX (`docx/`): `build-reference.sh` makes `reference.docx` (the same styles as 
 - BLOCKED `TOA` (table of authorities, "Page(s)" column): same reason.
 - Certificate of compliance, item 2: the typst output prints the typesetting program ("using Typst 0.15.0"). The docx prints no program name ("a proportionally spaced typeface, EB Garamond"); the filer must name the word processor it used. Not a page-count item, but the certificate is incomplete until the filer fills it in.
 - `sh tools/check.sh <court-dir> --engine docx` fails: the court folder has no `checks.yaml` (Gate 1 cannot run). Nothing was edited to pass it.
+
+## Verification pass 2026-10-16 (fb-595.26.10)
+
+- Rendered: `tools/render.sh` exit 0, no typst warnings, 13 pages (unchanged). Overlay rerun with the Oliver exemplar as the third argument; page map unchanged (cover 51.8%, body pages 47-81%). Run without the third argument, `overlay.sh` takes the Lyman brief and the map drops to 4-21% on the body; do not regenerate it that way.
+- Viewed: all 13 pages at 60 dpi (this closes the gap noted under Results: the pages of the current render have now been looked at); the 13 overlay pages at 40 dpi; Oliver exemplar page 1 against our cover (same parts and order; the exemplar continues counsel on an inside cover, ours fits one page).
+- Defect fixed: the TOA sort key's punctuation-stripping step never ran (a method chain on a new line after `#let` is markup, not code), and digit runs sorted as text. The key is now parenthesised and zero-pads digit runs, so "2 U.S.C." sorts before "28 U.S.C.". The sample's TOA order is unchanged (checked in the text layer of pages ii-iii after the rebuild).
+- No other defects found: cover on one page, TOC and TOA page numbers match the body pages, 14-point double-spaced body, footnote at body size, signature kept with the conclusion, Form 6 certificate (1,641 words) and certificate of service each on their own page.
+- DOCX output not touched (no LibreOffice on this box). No latex engine in this folder.
+- Remaining gaps: as listed under Known gaps (partial sample, no Gate 2 review or `checks.yaml`, glossary and addendum not generated, cover colour, second sample not transcribed).
