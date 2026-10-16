@@ -187,6 +187,7 @@
 // ---------------------------------------------------------------------------
 
 #let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
+#let toc-page-width = 2.2em             // page-number column of the table of contents
 
 /// One table-of-contents row, built from a heading element. The label sits where the
 /// heading's own label sits in the body, and wrapped lines hang under the title text.
@@ -198,14 +199,18 @@
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let hang-by = ind + heading-tab
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(hang-by, {
-      h(ind)
-      if numbered { box(width: heading-tab, lab) }
-      title
-      h(0.8em)
-      dot-leader
-      box(width: 2.6em, align(right, it.page()))
-    })))
+    // Two columns: the title and its leader wrap inside the first, the page number sits in the second,
+    // level with the last line, so a long title never pushes its page number onto a line of its own.
+    grid(columns: (1fr, toc-page-width), column-gutter: 0.3em,
+      hang(hang-by, {
+        h(ind)
+        if numbered { box(width: heading-tab, lab) }
+        title
+        h(0.8em)
+        dot-leader
+      }),
+      align(right + bottom, it.page()),
+    )))
 }
 
 #let toc-section() = {
@@ -323,8 +328,11 @@
   v(gap)
   // Counsel and the party each one represents (rule 8.204(b)(10)). The lead firm is centered
   // across the page, as in the exemplar; the others share two columns.
+  // A parenthetical on a counsel line (a bar number) is kept whole: it moves to the next line
+  // in a narrow column rather than splitting.
   {
     set par(hanging-indent: 0pt, spacing: 0.5em)
+    show regex("\\([^()]+\\)"): it => box(it)
     let groups = need(meta, "counsel")
     let group-block(g) = block(breakable: false, {
       for n in g.names { n; linebreak() }
@@ -425,15 +433,15 @@
   heading(level: 1, numbering: none)[Certificate of Compliance]
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
   [The foregoing #inl(need(meta, "brief_title")) complies with the type-volume limitation of California Rules of Court, rule 8.204(c)(1) because it contains #group-digits(words) words, excluding the parts of the brief exempted by rule 8.204(c)(3), and was prepared in 13-point #font-family, a proportionally spaced typeface, using a word-processing program. The electronic brief was subject to a virus scan and no virus was detected prior to its submission.]
-  block(breakable: false, above: 1.4em, {
+  block(breakable: false, width: 100%, above: 1.4em, {
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
     let sig = need(meta, "signature")
     [Dated: #meta.at("date", default: "__________")]
-    align(right, block(width: 55%, {
-      v(1.2em)
+    v(1.2em)
+    pad(left: 50%, {
       sig.signer
       for l in sig.at("lines", default: ()) { linebreak(); emph(inl(l)) }
-    }))
+    })
   })
 }
 
@@ -458,7 +466,7 @@
   [I declare under penalty of perjury under the laws of the State of California that the foregoing is true and correct.]
   parbreak()
   [Executed on #meta.at("date", default: "__________") at #svc.place, California.]
-  block(breakable: false, above: 1.2em, align(right, block(width: 55%, [#svc.declarant])))
+  block(breakable: false, width: 100%, above: 1.2em, pad(left: 50%, [#svc.declarant]))
 }
 
 // ---------------------------------------------------------------------------
@@ -513,7 +521,7 @@
   // ("60(b)(5)"), and never between a section sign / pilcrow and its number. Done with
   // unbreakable boxes so the extracted text stays exactly the author's characters.
   show regex("\\S*\\)\\(\\S*"): it => box(it)
-  show regex("[§¶] \\S+"): it => box(it)
+  show regex("[§¶]+ \\S+"): it => box(it)
   show heading: style-heading
   show link: it => {
     if type(it.dest) == str and it.dest.starts-with("toa:") {
