@@ -2,7 +2,7 @@
 
 Doc type `opening-brief` for court `ca3`. Self-contained: exemplar, sample, template and rules live here. Court-root `typst/` and `samples/` (none for ca3 yet) are not touched.
 
-Status: exemplar=yes, sample=yes (one), typst render=ok, overlay=ok. Three-engine (latex, docx) work is not part of this doc type yet.
+Status: exemplar=yes, sample=yes (one), typst render=ok, overlay=ok. latex built (see Engines); docx written, its PDF checks BLOCKED (no LibreOffice).
 
 ## Build and check
 
@@ -94,7 +94,7 @@ Every page of `samples/OUTPUT-tresslar-opening-brief.pdf` (18 pages, PDF page nu
 | PDF page | Finding | Action |
 |---|---|---|
 | 1 (cover) | "THIRD / CIRCUIT" split across a line by natural wrap | Fixed: non-breaking spaces bind "THE THIRD CIRCUIT" (joined words, not a forced break) |
-| 2 (TOC) | Page numbers wrapped to their own line where a title ran to the margin | Fixed: page-number box sized to its content. Re-viewed: every number on its line |
+| 2 (TOC) | Page numbers wrapped to their own line where a title ran to the margin | Fixed: page-number box sized to its content (first pass); replaced 2026-10-16 by a two-column grid, see the verification pass below. Re-viewed: every number on its line |
 | 2 (TOC) | Sub-headings showed "A. A." and "B. B." | Fixed: the sample typed the letters into the headings; removed (the template numbers them) |
 | 3-4 (TOA) | TOA runs onto a second page, with one entry alone on PDF page 4 | Accepted: the exemplar's TOA also runs two pages |
 | 5-14 | Body: double spacing, I./A./B./C. headings, the related-cases statement after the issues, footnote 1 at foot of page, signature block after the conclusion | No change |
@@ -103,7 +103,7 @@ Every page of `samples/OUTPUT-tresslar-opening-brief.pdf` (18 pages, PDF page nu
 
 Pages reviewed: 18 of 18 in the first pass. After the fixes, PDF pages 2 and 12 were viewed again; the page count stayed at 18. The other pages were not viewed again. The edits touched only the TOC page-number box and two sample headings.
 
-Word count in the compliance certificate (2,157) is the count of this sample's body and related-cases text. It is not the count of the filed brief: the sample transcribes part of the argument.
+Word count in the compliance certificate (2,155 in the 2026-10-16 render; 2,157 was recorded earlier) is the count of this sample's body and related-cases text. It is not the count of the filed brief: the sample transcribes part of the argument.
 
 ## Known gaps
 
@@ -112,7 +112,6 @@ Word count in the compliance certificate (2,157) is the count of this sample's b
 - **Addendum** (FRAP 28(f)) is not supported: the ca9 `# Addendum` mechanism was not copied. A `# Addendum` heading in the markdown would render as an ordinary section.
 - **Argument sections I.A to I.E** of the Tresslar brief are not transcribed. The sample covers the front matter, the statements, Summary, Standard of Review, Argument I's opening, Argument II, the conclusion and the certificates.
 - **Certificate of service rule** (FRAP 25(d)) text was not fetched in this run; the wording follows the exemplar.
-- **Three-engine work** (latex, docx) is not part of this doc type.
 - **Checker** (`checks.yaml`, `tools/check.sh`) does not yet exist for this court; this doc type is rendered and overlaid only.
 
 ## Engines
@@ -120,3 +119,13 @@ Word count in the compliance certificate (2,157) is the count of this sample's b
 - **typst** (`typst/`): primary, unchanged.
 - **latex** (`latex/template.tex`, `latex/ca3.lua`; built by `tools/render-latex.sh` with tectonic, two passes): 14 pt EB Garamond from the vendored `fonts/`, double spaced, 1 inch margins, roman front matter and arabic body, one-page cover, table of contents and table of authorities read from the previous pass, each certificate on its own page. Differs from typst: 17 pages against typst's 18 (line breaks and keep-with-next rules differ); the certificate of compliance names LaTeX where typst names Typst (`prepared_with` is not set in the sample); the heading layout is checked by eye on a contact sheet, not by Gate 2. Tier 1 is not signed off for this engine.
 - **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`): writes `samples/OUTPUT-<id>.docx`. `docx.pdf` checks are **BLOCKED**: LibreOffice (`soffice`) has no conda-forge package and is not installed on this box. Items the docx does not yet provide (not checked, not claimed): table of contents page numbers (a TOC field, not updated); table of authorities page numbers (names and citations only); footer page numbers and the roman/arabic sections; the cover's exact placement; first-line indents on body paragraphs; centered point headings (the opening brief has none).
+
+## Verification pass 2026-10-16 (fb-595.26.3)
+
+- Rendered: `sh tools/render.sh ... samples/INPUT-tresslar-opening-brief.md`, exit 0, no typst warnings, 18 pages (the same count as the first pass). Overlay rerun: `samples/OVERLAY-tresslar-opening-brief.pdf`, 18 pages; pairs and percentages unchanged (cover 93.8%, TOC 60.2%, certificates 58.6-97.2%, body 30-55%). TOA page 2 (our p. 4, one entry) pairs at 4.3%.
+- Viewed: all 18 pages of the OUTPUT at 60 dpi, the 18 overlay pages at 40 dpi (as one contact sheet), and the exemplar's page 1 against our cover (same order of elements; the exemplar is Times New Roman and puts counsel at the left margin, tier 3).
+- Checked: footnote 1 (p. 11) is set at 14 pt (word boxes as tall as the body text); the cover fits page 1; TOC page numbers match the body headings; no heading is left at the foot of a page.
+- Defect fixed: the TOC page number was a content-sized box after a `1fr` leader, so a title that ran to the margin would still push the number onto its own line (latent; not visible in this sample). TOC rows are now a two-column grid (title and leader, then the page number), as in the reply-brief template. After the fix only PDF page 2 changed (every other page is pixel-identical to the pre-fix render); page 2 was viewed again.
+- Stale statement corrected: the compliance certificate reads 2,155 words, not 2,157.
+- latex re-rendered (`--engine latex`): exit 0, 17 pages, as recorded. Its pages were not reviewed in this pass. docx not touched (no `soffice`).
+- Gaps unchanged: cover colour, disclosure statement, addendum, partial transcription, FRAP 25(d) text, no `checks.yaml`/`check.sh` for this doc type, one saved exemplar (the second filer is consulted, not saved).

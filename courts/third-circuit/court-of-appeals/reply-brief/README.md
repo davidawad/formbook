@@ -49,14 +49,14 @@ Pages are paired by shared words, not index (`tools/overlay.sh`). The exemplar i
 
 | Page | Content | Finding |
 |---|---|---|
-| 1 | Cover | Fits on one page. Caption, proceeding, district court number and judge, title, counsel with telephone. Matches the filed cover's order. |
+| 1 | Cover | Fits on one page. Caption, proceeding, district court number and judge, title, counsel with telephone. Matches the filed cover's order. The two counsel groups were stacked in the right half, which squeezed the cover spacing to nothing: fixed 2026-10-16, see below. |
 | 2 | TOC | Fixed: the page number of a long entry (A.) wrapped onto its own line. TOC rows are now a two-column grid, so the page number stays on the last line of its entry. Page numbers match the body. |
 | 3 | TOA (ii) | Cases grouped and alphabetized, with page lists. Matches the filed TOA format. |
 | 4 | Introduction (1) | Fixed: "Id.." had a doubled period (sample markup). Double-spaced, 14-point. |
 | 5 | Argument (2) | Point heading I. centered and small caps; A. hangs. |
 | 6 | Argument I.A.1 (3) | Level 4 heading (1.) in bold italic, hanging. Block of citations linked. |
 | 7 | Argument continued and Conclusion (4) | Conclusion heading; signature block (/s/, name, firm, address, email) follows. |
-| 8 | Certificate of compliance (5) | Bar membership, word count (812, this sample's count, not the filing's 6,479), identical copies and virus check. |
+| 8 | Certificate of compliance (5) | Double-spaced since 2026-10-16 (see below). Bar membership, word count (812, this sample's count, not the filing's 6,479), identical copies and virus check. |
 | 9 | Certificate of service (6) | Filed-form wording, /s/ signature, date. |
 
 Pages reviewed: 9 of 9.
@@ -81,3 +81,13 @@ Pages reviewed: 9 of 9.
 - **typst** (`typst/`): primary, unchanged.
 - **latex** (`latex/template.tex`, `latex/ca3.lua`; built by `tools/render-latex.sh` with tectonic, two passes): 14 pt EB Garamond from the vendored `fonts/`, double spaced, 1 inch margins, roman front matter and arabic body; the Argument's point headings are centered with roman numerals; the certificates each on their own page. The word limit is 6,500 words (FRAP 32(a)(7)(B)(ii)), checked from the markdown source. Differs from typst: 10 pages against typst's 9; the certificate of compliance names LaTeX where typst names Typst; the layout is checked by eye on a contact sheet, not by Gate 2. Tier 1 is not signed off for this engine.
 - **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`): writes `samples/OUTPUT-<id>.docx`. `docx.pdf` checks are **BLOCKED**: LibreOffice (`soffice`) is not installed and has no conda-forge package. Not provided (not checked, not claimed): table of contents and table of authorities page numbers; footer page numbers; the cover's placement; body first-line indents; the Argument's centered point headings.
+
+## Verification pass 2026-10-16 (fb-595.26.3)
+
+- Rendered: `sh tools/render.sh ... samples/INPUT-afp-reply-brief.md`, exit 0, no typst warnings, 9 pages (the same count as the first pass). Overlay rerun: `samples/OVERLAY-afp-reply-brief.pdf`, 9 pages; pairs and percentages unchanged (cover 86.8%, TOC 31.2%, TOA 36.5%, body 35-84%, certificates 57.4% and 57.6%).
+- Viewed: all 9 pages of the OUTPUT at 60 dpi, the 9 overlay pages at 40 dpi (as one contact sheet), the exemplar's page 1 against our cover, and the exemplar's certificate pages 34-35.
+- Defect fixed (tier 2), cover: the two counsel groups were stacked in the right half of the page, so the cover fit only with the spacing between its parts at or near zero (the rules touched the text above and below them). Two or more counsel groups now sit side by side, two to a row, across the full width, as on the filed cover; one group still sits in the right half. The cover now fits with clear space around every rule. The template still sets no coordinates; the spacing is the largest that fits.
+- Defect fixed (tier 2; FRAP 32(a)(4) exempts only quotations, headings and footnotes from double spacing): the certificate of compliance and the certificate of service were single-spaced with no paragraph indent. The filed certificates (AFP pp. 34-35, and those of the other two ca3 filers, Tresslar and Binder) are double-spaced with a first-line indent. The certificate text now uses the body leading and indent. Page count unchanged (9).
+- After both fixes only PDF pages 1, 8 and 9 changed (every other page is pixel-identical to the pre-fix render); those three pages were viewed again.
+- latex re-rendered (`--engine latex`): exit 0, 10 pages, as recorded. Its pages were not reviewed in this pass. docx not touched (no `soffice`).
+- Gaps unchanged: see Known gaps (portion transcribed, grey cover, 15-page cap not enforced, L.A.R. text not retrieved, one saved exemplar, no monospaced option).
