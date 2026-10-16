@@ -86,11 +86,11 @@
   block(breakable: false, above: line-pitch, {
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
     grid(columns: (1fr, 3.2in), if "date" in meta [Dated: #meta.date] else [], {
-      [Respectfully submitted,]
-      v(line-pitch * 0.5)
-      inl(sig.firm)
-      linebreak()
-      v(line-pitch * 0.5)
+      // Closing line and firm are optional: LBR 5005-4(f) requires only the signer's name, a mailing address
+      // and a telephone number or email address. An empty `closing` omits the line.
+      let closing = sig.at("closing", default: "Respectfully submitted,")
+      if closing != "" { inl(closing); v(line-pitch * 0.5) }
+      if sig.at("firm", default: "") != "" { inl(sig.firm); linebreak(); v(line-pitch * 0.5) }
       [/s/ #sig.signer]
       linebreak()
       for l in sig.at("lines", default: ()) { inl(l); linebreak() }
@@ -128,8 +128,14 @@
     leading: body-leading, spacing: 0.9em,
     first-line-indent: (amount: para-indent, all: true), justify: false,
   )
-  show heading: it => block(width: 100%, above: line-pitch * 0.5, below: line-pitch * 0.5, sticky: true,
-    align(center, strong(if it.level == 1 { upper(it.body) } else { it.body })))
+  // Headings: body size, single-spaced, case as the author wrote it (no rule fixes heading size or case; both
+  // filed exemplars set headings at body size).
+  show heading: it => block(width: 100%, above: line-pitch, below: line-pitch * 0.5, sticky: true, {
+    set text(size: type-size)
+    set par(leading: single-leading)
+    align(center, strong(it.body))
+  })
+  set list(indent: para-indent, body-indent: para-indent * 0.5)
   show table: it => block(above: line-pitch * 0.5, below: line-pitch * 0.5, breakable: false, {
     set text(size: type-size)
     it
@@ -140,8 +146,22 @@
   v(line-pitch)
   caption-table(meta)
   v(line-pitch)
+  // Notice legend (LBR 1017-2(b), 9007-1(c), 4001-1, M.D. Ala. Local Rules eff. 2024-04-01): the rule's text "in all
+  // capital letters, bolded, and centered on the page under the style of the case". The author supplies the text of
+  // the rule the motion is filed under; the template sets it.
+  if "notice" in meta {
+    align(center, block({
+      set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+      strong(upper(inl(meta.notice)))
+    }))
+    v(line-pitch)
+  }
   align(center, strong(upper(inl(need(meta, "title")))))
   v(line-pitch * 0.5)
+  // The body is double-spaced: restore the body leading after the single-spaced caption and title.
+  set par(leading: body-leading)
+  show quote.where(block: true): set par(leading: single-leading)   // Block quotations single-spaced (convention).
+  show quote.where(block: true): set block(above: line-pitch * 0.5, below: line-pitch * 0.5)
 
   // Body: each markdown block is its own block-level item; "# " lines are headings; "N. " lines are numbered.
   let blocks = md.trim().split("\n\n")
@@ -155,13 +175,13 @@
     } else {
       let a = numbered(t)
       let body = cmarker.render(t, raw-typst: false, smart-punctuation: true)
-      block(width: 100%, above: 0pt, below: 0pt, if a != none { a } else if t.starts-with(">") { body } else { h(para-indent) + body })
+      block(width: 100%, above: body-leading, below: body-leading, if a != none { a } else if t.starts-with(">") or t.starts-with("- ") or t.starts-with("* ") { body } else { h(para-indent) + body })
     }
   }
   // The prayer stays with the signature block that follows it.
   let last = blocks.last().trim()
   let a = numbered(last)
-  block(sticky: true, width: 100%, if a != none { a } else { par(first-line-indent: para-indent, inl(last)) })
+  block(sticky: true, width: 100%, above: body-leading, if a != none { a } else { par(first-line-indent: para-indent, inl(last)) })
   signature-block(meta)
 
   // Certificate of service: text from frontmatter, filed with the motion (service under FRBP 9014(b); see README).
@@ -170,5 +190,24 @@
     align(center, strong[CERTIFICATE OF SERVICE])
     v(line-pitch * 0.5)
     par(first-line-indent: para-indent, inl(meta.certificate))
+    // Signature under the certificate (LBR 5005-4(e): the filer's name on a signature block).
+    if "certificate_signature" in meta {
+      block(breakable: false, above: line-pitch, {
+        set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+        grid(columns: (1fr, 3.2in), [], meta.certificate_signature.map(inl).join(linebreak()))
+      })
+    }
+    // Service list (LBR 9013-3: the names and addresses of all parties served, and the method used for each,
+    // with the addresses for each method clearly designated). `service` is a list of { method, parties }, each
+    // party a list of lines.
+    if "service" in meta {
+      set par(first-line-indent: 0pt, leading: single-leading, justify: false)
+      for group in meta.service {
+        block(above: line-pitch, below: line-pitch * 0.5, sticky: true, underline(inl(group.method)))
+        for p in group.parties {
+          block(breakable: false, above: 0pt, below: line-pitch * 0.5, p.map(inl).join(linebreak()))
+        }
+      }
+    }
   }
 }

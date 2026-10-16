@@ -2,75 +2,90 @@
 
 Doc-type folder for a motion with its grounds in numbered paragraphs (a contested matter in the main case). Engine: typst (`typst/`). Parent court: [`../README.md`](../README.md).
 
-- Exemplar: **none** (see `exemplars/SOURCE.md`).
-- Sample: `samples/INPUT-synthetic-stay-motion.md`. **Synthetic**: not transcribed from a filing. Every party, number and date is invented, and placeholders are bracketed.
-- Render: `samples/OUTPUT-synthetic-stay-motion.pdf` (5 pages, EB Garamond embedded, no typst warnings) via `sh tools/render.sh <this-dir> samples/INPUT-synthetic-stay-motion.md`. **render=ok** (2026-10-15).
-- Overlay: **fail**, not produced. `sh tools/overlay.sh <this-dir> synthetic-stay-motion` exits 1 ("no exemplar pdf in exemplars"). There is nothing to overlay against, so tier 2 cannot be judged.
-- Depth: the sample was extended from the 3-page stub to 5 pages with the structure a motion needs (caption, `#` and `##` headings, numbered runs 1-22, a block quotation, prayer, signature block, certificate on its own page). **Below the 8-14 page target.** The target assumes a real exemplar of that length. No exemplar exists, and padding a synthetic sample with invented text would test nothing.
+- Exemplars: **two** (see `exemplars/SOURCE.md`). Primary: `FILED-EXAMPLE-ebury-street-24-10499-motion-brief.pdf` (Bankruptcy Administrator's Motion to Dismiss, Britt B. Griggs, 12 pages). Second filer, tier 2 only: `FILED-EXAMPLE-wheat-18-03041-motion-brief.pdf` (U.S. Attorney's memorandum of law in an adversary proceeding, 19 pages).
+- Transcribed sample: `samples/INPUT-ebury-motion-brief.md`, the whole of the Ebury Street motion: caption, LBR 1017-2 notice legend, title, introduction, paragraphs 1-41 (with the filer's own numbering, including the jump from 16 to 21 and the repeated 39 and 40), the bulleted list in paragraph 3, six headings, prayer, signature block, certificate of service and the full service list (4 mail, 16 CM/ECF).
+- Render: `samples/OUTPUT-ebury-motion-brief.pdf`, **12 pages**, EB Garamond only (embedded; `pdffonts`), no typst warnings. `sh tools/render.sh <this-dir> samples/INPUT-ebury-motion-brief.md`. **render=ok** (2026-10-16).
+- Overlay: `samples/OVERLAY-ebury-motion-brief.pdf` and `.txt` via `sh tools/overlay.sh <this-dir> ebury-motion-brief`. **overlay=ok** (2026-10-16). The tool takes the first PDF in `exemplars/` by name, which is the Ebury Street motion.
+- Synthetic sample kept: `samples/INPUT-synthetic-stay-motion.md` (invented, bracketed placeholders), re-rendered after the template fixes: `samples/OUTPUT-synthetic-stay-motion.pdf`, 6 pages (5 before the double-spacing fix), no warnings.
 
 ## Engines
 
 - **typst** (primary): `typst/`, as above.
-- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`) and `docx/almb-motion-brief.lua` (the court title, caption, title, signature block and certificate of service; the body stays pandoc's). `sh tools/render.sh --engine docx <this-dir> samples/INPUT-synthetic-stay-motion.md` writes `samples/OUTPUT-synthetic-stay-motion.docx`, then stops: `soffice` is not on the build box, so no `samples/OUTPUT-synthetic-stay-motion.docx.pdf` exists.
-- **Matches the typst form** (the reference styles and filter, checked in the `.docx` XML and its text, not by eye): letter with 1-inch margins; EB Garamond 13 pt in every style; body double-spaced at exactly 24 pt with a 0.5 in first-line indent; the caption as a table with a boxed left column and the case number and chapter at right, no adversary number; centered bold level-1 headings in caps at 18 pt (the typst heading scale); `##` subheadings bold and left-aligned, kept with the paragraph after; the prayer kept with the signature block; the signature block single-spaced and unbreakable; the certificate of service on its own page; a centered "-N-" page number at 11 pt in the footer.
-- **Differs or is unverified**: (a) no page of the docx has been rendered or viewed, so line breaks, page count, caption box spacing and footer position are not checked against the typst pages; Word and LibreOffice may paginate differently. (b) The block quotation is single-spaced with 0.5 in indents on both sides, set by eye from the typst page; it is not measured. (c) The numbered grounds are literal numbers in ordinary paragraphs, not Word list numbering. (d) The core document title is empty: the frontmatter is cleared so pandoc does not print a Title paragraph above the caption.
-- **docx BLOCKED** (see `docs/DOCX.md`):
-  - `tools/check.sh --engine docx`, Gates 0 and 1 on the `.docx.pdf`: BLOCKED. `soffice` is not installed and conda-forge has no LibreOffice package. The `.docx` passes the render step's zip and XML checks; the PDF conversion does not run.
-  - Gate 2 on the docx: BLOCKED, same cause. `pages_reviewed=0`.
-  - Opening in LibreOffice and Word without a repair prompt: not performed (neither is installed).
-  - `tools/check.sh` for any engine: BLOCKED for this court. It needs `court.json` and `checks.yaml`, and this court has neither yet.
+- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`) and `docx/almb-motion-brief.lua` (the court title, caption, title, signature block and certificate of service; the body stays pandoc's). `sh tools/render.sh --engine docx <this-dir> samples/INPUT-synthetic-stay-motion.md` writes `samples/OUTPUT-synthetic-stay-motion.docx`, then stops: `soffice` is not on the build box, so no `.docx.pdf` exists.
+- **docx now lags the typst form** (the docx files were not touched in this pass): (a) level-1 headings are 18 pt caps in the docx, body size and as-written case in typst; (b) the docx filter does not read the new frontmatter fields `notice`, `certificate_signature`, `service` or `signature.closing`, so the LBR 1017-2 / 9007-1 legend and the LBR 9013-3 service list are missing from a docx render of the Ebury sample; (c) the docx was never rendered to pages, so line breaks, page count and caption spacing are unchecked. Earlier notes (reference styles: letter, 1 in margins, EB Garamond 13 pt, exact 24 pt double spacing, 0.5 in first-line indent, boxed caption table, keep-with-next prayer, certificate on its own page, "-N-" footer) still describe the docx.
+- **docx BLOCKED** (see `docs/DOCX.md`): Gates 0-2 on the `.docx.pdf` need `soffice`, which is not installed (conda-forge has no LibreOffice). `pages_reviewed=0` for docx. `tools/check.sh` for any engine is also blocked for this court: it has no `checks.yaml` yet.
 
 ## Rules (requirement IDs)
 
-Verified 2026-10-14 from the primary text. Kind: **M** mandated by a rule, **C** convention, **A** author responsibility.
+Kind: **M** mandated by a rule, **C** convention, **A** author responsibility. Local rules: M.D. Ala. Local Bankruptcy Rules effective 2024-04-01, `https://www.almb.uscourts.gov/sites/almb/files/ALMB%20Local%20Rules%2C%20April%201%2C%202024.pdf` (linked from `https://www.almb.uscourts.gov/local-rules-and-administrative-orders`), text read 2026-10-16. The 2017 set (`.../Local_Rules_Dec_1_%202017.pdf`) was read as well; it is superseded.
 
 | ID | Requirement | Kind | Source (verified) |
 |---|---|---|---|
-| ALMB-MOT-001 | A motion must state its grounds with particularity and set forth the relief or order requested. | M | FRBP 9013(b), https://www.law.cornell.edu/rules/frbp/rule_9013 ("A motion must state its grounds with particularity and set forth the relief or order requested."). Last amended 2024-04-02, eff. 2024-12-01. The template's numbered grounds section is the author's; the rule does not fix the layout. |
-| ALMB-MOT-002 | The caption shows the court name, the case title, the case number and a brief designation of the document. A main-case motion has no adversary number. | M | FRBP 9004(b), https://www.law.cornell.edu/rules/frbp/rule_9004 (verified 2026-10-14; last amended 2024-04-02, eff. 2024-12-01). |
+| ALMB-MOT-001 | A motion must state its grounds with particularity and set forth the relief or order requested. | M | FRBP 9013(b), https://www.law.cornell.edu/rules/frbp/rule_9013 (verified 2026-10-14). Numbered grounds are the author's; the rule does not fix the layout. |
+| ALMB-MOT-002 | The caption shows the court name, the case title, the case number and a brief designation of the document. A main-case motion has no adversary number. | M | FRBP 9004(b), https://www.law.cornell.edu/rules/frbp/rule_9004 (verified 2026-10-14). |
 | ALMB-MOT-003 | The document is legible. | M | FRBP 9004(a), same URL. |
-| ALMB-MOT-004 | Every signed paper has a signature block at the end of the text with the full name of each signer, a complete mailing address, a telephone number and an email address. `/s/` is acceptable. | M | LBR 9011-1(a)-(b), M.D. Ala. Local Rules effective 2017-12-01 (PDF `almb.uscourts.gov/sites/almb/files/Local_Rules_Dec_1_%202017.pdf`, p. 48). Not checked against the 2024 local rules (see Gaps). |
-| ALMB-MOT-005 | A motion for relief from the automatic stay states with specificity why the relief is requested, and attaches legible copies of the documents that support the claimed interest in the debtor's property (mortgages on real property show their recording information). | M | LBR 4001-1(a)(1)-(2) (M.D. Ala. Local Rules effective 2017-12-01, p. 34). Read this session from the 2017 text. The 2024 text was not checked. The synthetic sample does not attach Exhibit A, so this requirement is not met by the sample as delivered; it is an author responsibility there. |
-| ALMB-MOT-006 | A certificate of service accompanies the motion. The template prints it when `certificate` is in the frontmatter. | C | No local rule text checked for motions this session. The draft 2023 local-rule table lists "9013-3 Certificates of service for motions" and "7005-1 Certificates of service in adversary proceedings", but the adopted text was not retrieved. Treat the requirement as C until verified. |
-| ALMB-MOT-007 | No typography, margin or spacing rule in the local rules. Font, size, margins and double spacing are the template's style choices, matched to the adversary complaint in this court. | C | 2017 local rules, full text searched for font, margin, point size, spacing: none. |
+| ALMB-MOT-004 | Every paper shows, in a signature block at the end of the text or elsewhere, the full name of each signer, at least one complete and current mailing address, and at least one current telephone number and/or email address. The filer's name on a signature block with the CM/ECF login is the signature; `/s/` is used. | M | LBR 5005-4(e)-(f) (2024, pp. 36-37). This replaces 2017 LBR 9011-1, which required both telephone and email. |
+| ALMB-MOT-005 | A motion for relief from the automatic stay states why relief is requested and attaches the documents that support the movant's interest. | M | LBR 4001-1 (2024, p. 28; the 2017 text, LBR 4001-1(a), was read in detail). Author responsibility in the synthetic sample, which attaches nothing. |
+| ALMB-MOT-006 | A certificate of service is filed, stating with specificity who was served and how; it lists the names and addresses of all parties served, states the method for each, and designates the addresses or email addresses used for each method. | M | LBR 9013-1(b) and LBR 9013-3 (2024, pp. 46-47). The template prints the certificate text, an optional signature (`certificate_signature`) and a service list grouped by method (`service: [{method, parties}]`). |
+| ALMB-MOT-008 | When a motion is served under a negative-notice rule, the rule's legend is printed "in all capital letters, bolded, and centered on the page under the style of the case". | M | LBR 1017-2(b) (motions to dismiss by a trustee or the Bankruptcy Administrator, 2024 p. 9); LBR 9007-1(c) (filings on the Negative Notice List, p. 43); LBR 4001-1 for chapter 7 stay motions (2017 text 4001-1(b)). The template sets the `notice` frontmatter text that way; the author supplies the wording of the rule invoked. |
+| ALMB-MOT-007 | No typography, margin or spacing rule in the local rules. Font, size, margins and double spacing are the template's style choices, matched to the adversary complaint in this court. | C | 2024 and 2017 local rules, full text searched for font, point, margin, spacing: none. Typeface per `docs/FONTS.md` (no face named: EB Garamond). |
 
 ## What the overlay shows
 
-Nothing. There is no exemplar, so no overlay is produced.
+Page map (`samples/OVERLAY-ebury-motion-brief.txt`), ours against filed:
 
-## Template changes in the depth pass
+| Ours | Filed | Word overlap | Content |
+|---|---|---|---|
+| 1 | 1 | 62.8% | caption, legend, title, introduction |
+| 2 | 2 | 45.7% | paras 1-3 and the bullets |
+| 3 | 3 | 86.7% | paras 4-8 |
+| 4 | 4 | 74.7% | paras 9-13, "Section 1112(b)" |
+| 5 | 5 | 66.4% | paras 13-22 |
+| 6 | 6 | 58.5% | paras 22-30 |
+| 7 | 8 | 54.1% | paras 31-37 (filed p.7 is not best match for any page: our p.7 starts at para 31 where filed p.7 starts mid-para 27) |
+| 8 | 9 | 74.0% | paras 37-40 |
+| 9 | 10 | 90.5% | second 39-41, prayer, signature block |
+| 10 | 11 | 74.7% | certificate, mail list |
+| 11 | 12 | 59.1% | CM/ECF list |
+| 12 | 12 | 33.0% | last four CM/ECF entries |
 
-- `##` lines render as bold, left-aligned subheadings kept with the paragraph after them. Before this, every `#` line was a centred level-1 heading, so the sample's `## A. ...` subheadings would have looked like Roman-numeral sections.
+Same page count (12 vs 12). Our body runs about one page shorter (13 pt EB Garamond at a 24 pt pitch sets more words per page than the filed 12 pt Times), and the service list runs one page longer because our entries keep a 12 pt gap and the CM/ECF heading moves to a new page. Left margin and top of the text block coincide on every body page; the legend and title land lower on p.1 because our caption is a box with padding, not the filed two-column text caption.
 
-## Gate 2 review
+## Gate 2 review (2026-10-16)
 
-Depth pass, 2026-10-15: every page of `samples/OUTPUT-synthetic-stay-motion.pdf` (5 pages) was rendered at 60 dpi and viewed. Page 1 caption and first headings, page 2 numbered runs and subheadings, page 3 the block quotation and section IV, page 4 section V, the prayer and the signature block (checked again after the telephone placeholder fix), page 5 the certificate on its own page. The sample's own telephone placeholder had been parsed as emphasis (`___`) and printed as `[(__) -]`; it now reads `[TELEPHONE]`. The template renders the markdown, so the sample text is the thing to fix, not the template.
+Every page of `OUTPUT-ebury-motion-brief.pdf` (12) and `OVERLAY-ebury-motion-brief.pdf` (12) was rendered to PNG and viewed; every page of `OUTPUT-synthetic-stay-motion.pdf` (6) was viewed after the template changes. **pages_reviewed=12** (Ebury output; 12 overlay pages and 6 synthetic pages also viewed).
 
-No row is recorded against a filed exemplar, because there is none. This is a visual check of the template, not a tier-2 review.
+| Page | Finding | Tier | Status |
+|---|---|---|---|
+| all body | Body was **not double-spaced**: a `set par(leading: single-leading)` for the caption stayed in force for the whole body (pitch about 19.5 pt, not 24 pt). Fixed: body leading restored after the title, block spacing equal to the leading so the pitch is the same between paragraphs. The synthetic sample's earlier "5 pages, double-spaced" note was wrong for the same reason. | 2 | FIXED |
+| 4, 5, 6, 7, 9 | Headings were 18 pt and a two-line heading was double-spaced; both exemplars set headings at body size. Fixed: body size, single-spaced, centered bold, case as written (the template no longer upper-cases them; the synthetic sample already writes caps). | 2 | FIXED (docx not updated) |
+| 1 | LBR 1017-2 legend could not be expressed. Added `notice`: caps, bold, centered under the caption (ALMB-MOT-008). The filed legend is justified full-width, not centered; the rule says centered. | 1 | FIXED |
+| 10-12 | Service list could not be expressed (certificate was one paragraph). Added `certificate_signature` and `service` grouped by method with the method line underlined (ALMB-MOT-006). | 1 | FIXED |
+| 2-3 | The template prefixed every non-numbered block with the paragraph indent, which would have put a stray indent before a list. Fixed before the first render: lists are not prefixed; list indent 0.5 in. Bullets checked on pages 2-3. | 2 | FIXED |
+| 9 | Signature block: filed has `/s/`, title and ASB number at right and the office address at left; ours stacks office, `/s/` and all lines in the right column (the firm line prints above `/s/`). All LBR 5005-4(f) items present. | 3 | ACCEPTED |
+| 1 | Caption: ours is the boxed left column with case number and chapter at right; filed is unboxed text with CHAPTER 11 opposite the debtor and CASE NO. opposite "DEBTOR."; the second exemplar (Wheat) uses the `)` column caption. Each filer differs; ours carries every FRBP 9004(b) element. | 3 | ACCEPTED |
+| 1 | Title: filed is bold underlined; ours bold caps, not underlined. | 3 | ACCEPTED |
+| all body | Numbered paragraphs: filed puts the number at 0.5 in and text at 1 in (tab); ours number at 0.5 in with a word space. | 3 | ACCEPTED |
+| 10 | Certificate text double-spaced (filed single). | 3 | ACCEPTED |
+| all | Footer "-N-" centered; filed has a right-aligned bare number. Neither is a rule. | 3 | ACCEPTED |
 
-Known render behaviour, not yet judged against a filing: the certificate of service is a single paragraph with no signature line; the caption's left box and the right column are set from the template's own widths.
+### Tier 2 against the second exemplar (Wheat, U.S. Attorney)
 
-## Exemplar searches (depth pass, 2026-10-15)
+- Matches: letter, double-spaced body, centered bold headings at body size, first-line-indented paragraphs, `s/` signature with address/telephone/email per signer, certificate of service on its own page stating method and listing non-CM/ECF parties with addresses.
+- Differences, OPEN: Wheat numbers its headings with Roman numerals ("I. STATEMENT OF THE CASE") and uses no numbered paragraphs (a brief, not a motion); the template supports both (`#` headings as written, unnumbered paragraphs), so this is author content. Wheat's signature block carries two signers and "By:"; the template takes one signer plus free lines (a second signer can be written into `lines`, but not with its own `/s/`). OPEN, tier 2: multi-signer blocks.
+- Wheat's adversary caption (plaintiff v. defendants, ADV. NO.) is outside this doc type; see `../adversary-complaint/`.
 
-Not found. Tried after `exemplars/SOURCE.md` (2026-10-14):
+## Template changes in this pass
 
-- WebSearch (standard): `"Middle District of Alabama" bankruptcy "motion for relief from stay" courtlistener almb`. Returned hearing calendars on almb.uscourts.gov only.
-- WebSearch (standard): `"Bankr. M.D. Ala." motion for relief from automatic stay "Exhibit A"`. Returned LR 4001-1 text (courtrules.net) and form templates, no filed motion.
-- WebSearch (extended): almb motion for relief from stay filed document, Northern Division, 2024-2025. Returned govinfo published opinions (for example 24-80619, 20-30619, 25-30256 consent order) and the court's local-forms page. Opinions and orders are not the motions. The consent order in 25-30256 (Doc. 1618) is an order, not a movant's filing. The govinfo opinions cite the motions but are not the motions.
-
-**BLOCKED: no exemplar.** A filed almb motion for relief from stay would close the gap: find its RECAP docket by case number (e.g. 25-30256, 24-80619), save `exemplars/FILED-EXAMPLE-<name>-motion.pdf`, transcribe it into `samples/INPUT-<id>.md`, then run the overlay.
+- Body leading restored to double spacing after the single-spaced caption and title (defect fix).
+- Headings at body size, single-spaced, not upper-cased.
+- Optional `notice` (negative-notice legend), `certificate_signature`, `service` (list of `{method, parties}`), `signature.closing` (empty string omits "Respectfully submitted,"), `signature.firm` optional.
+- Bulleted lists render without the paragraph indent prefix; block quotations single-spaced.
 
 ## Gaps
 
-- **No exemplar.** The brief asks for a public filed exemplar and a transcribed sample. None was found (see `exemplars/SOURCE.md`). Until one is added, the sample is synthetic and tier 2 cannot be judged.
-- **Local rules currency.** The rules cited are the 2017 set. The 2024 set (effective 2024-04-01, which the court's ECF notes refer to) includes LBR 9013-1 "Motion Practice" and LBR 9013-3 "Certificates of service for motions" per the 2023 draft table of contents; the adopted text was not retrieved. Those requirements are not encoded here.
-- **Service.** FRBP 9014(b) (service of a motion in a contested matter) was not fetched this session; the certificate text is a placeholder, not a checked statement of the service method.
-- **No gate run.** `tools/check.sh` and `tools/check-selftest.sh` were not run for this doc type.
-
-## Run status (2026-10-15)
-
-- **exemplar=no.** No filed almb motion was found. Two more WebSearch passes (standard mode) returned only court hearing calendars and an order template from almb.uscourts.gov; no RECAP motion PDF. `exemplars/` holds no PDF, so the transcription and overlay steps in this README could not be done.
-- **render=ok** on the existing synthetic sample only: `sh tools/render.sh <this-dir> samples/INPUT-synthetic-stay-motion.md` wrote `samples/OUTPUT-synthetic-stay-motion.pdf` (3 pages). This is a template check, not a filed-form comparison, and is below the 8-14 page bar.
-- **overlay=fail.** `sh tools/overlay.sh <this-dir> synthetic-stay-motion` exits 1 with "no exemplar pdf"; no OVERLAY file was written.
-- **pages_reviewed=3** (all three pages of the synthetic render were viewed as PNG). Page 1 caption and headings, page 2 grounds and signature block, page 3 certificate of service: render layout is clean; content is placeholder text.
-- Still needed: a RECAP-hosted almb motion (see the Gaps above), then a real INPUT transcription and overlay.
+- **docx** lags the typst changes above and cannot be rendered to pages (no `soffice`). See Engines.
+- **No gate run.** This court has no `checks.yaml`; `tools/check.sh` and `tools/check-selftest.sh` were not run.
+- **Overlay PDF page size.** `tools/overlay.sh` writes pages at 241 x 312 pt, not letter size; viewing needs `pdftoppm -scale-to`. Tool issue, not changed here.
+- **Exemplar provenance.** The retrieval URLs of both exemplars were not recorded (`exemplars/SOURCE.md`).
+- **Multi-signer signature blocks** (tier 2, from Wheat): not expressible with a separate `/s/` per signer.
