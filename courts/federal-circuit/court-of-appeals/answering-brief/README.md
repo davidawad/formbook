@@ -1,7 +1,7 @@
 # Federal Circuit: answering brief (brief for the appellee)
 
 Doc type: `answering-brief`. Court: `cafc` (Court of Appeals for the Federal Circuit).
-Status: full-depth template built from one filed exemplar; the sample renders to 13 pages.
+Status: full-depth template built from one filed exemplar; the sample renders to 14 pages (13 before the 2026-10-16 pass added the representative-claim page).
 Not a court-level `court.json` status change: this folder does not set `status` (only David does).
 
 ## Layout
@@ -10,7 +10,7 @@ Not a court-level `court.json` status change: this folder does not set `status` 
 |---|---|
 | `exemplars/FILED-EXAMPLE-in-re-ablynx-26-1333-answering-brief.pdf` | Brief for Appellee, Director of the USPTO, *In re Ablynx N.V., Sanofi*, No. 26-1333, filed 2026-08-14 (38 pp.). Provenance in `exemplars/SOURCE.md`. |
 | `samples/INPUT-ablynx-answering-brief.md` | Markdown transcription (front matter + a portion of the body, Statement of the Issue through Conclusion, with the signature and both certificates). |
-| `samples/OUTPUT-ablynx-answering-brief.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-appeals/answering-brief samples/INPUT-ablynx-answering-brief.md` (13 pages). |
+| `samples/OUTPUT-ablynx-answering-brief.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-appeals/answering-brief samples/INPUT-ablynx-answering-brief.md` (14 pages). |
 | `samples/OVERLAY-ablynx-answering-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-appeals/answering-brief ablynx-answering-brief` (red = our render, blue = exemplar). |
 | `typst/main.typ` | Entry point; reads `--input sample=...`, splits the frontmatter, calls the template. |
 | `typst/cafc-answering-brief.typ` | Template `cafc-brief(meta, md)`. Structure copied from `courts/ninth-circuit/court-of-appeals/typst/ca9-brief.typ`; numbers and forms are the Federal Circuit's. |
@@ -33,25 +33,24 @@ Not verified: whether any Federal Circuit rule amendments after the mirror's tex
 
 ## What the overlay shows
 
-The overlay pairs each sample page with the exemplar page sharing the most words. The sample is a portion of a 38-page brief, so most pages overlap only partly (word-overlap 33–92%, see `OVERLAY-ablynx-answering-brief.txt`). The cover (92%) and the Statement of the Issue (89%) line up closely. Red-only text is the sample's transcription beyond the exemplar's words; blue-only text is exemplar content the sample does not reproduce (the omitted Statement of the Case, Argument B.2–B.3, the chart and figures).
+The overlay pairs each sample page with the exemplar page sharing the most words. The sample is a portion of a 38-page brief, so most pages overlap only partly (word-overlap 33–92%, see `OVERLAY-ablynx-answering-brief.txt`). The cover (92%), the representative-claim page (88%) and the Statement of the Issue (84%) line up closely. Red-only text is the sample's transcription beyond the exemplar's words; blue-only text is exemplar content the sample does not reproduce (the omitted Statement of the Case, Argument B.2–B.3, the chart and figures).
 
-Measured line pitch on a body page: exemplar 32.2 pt, sample 32.1 pt (body leading `0.99em` with 14 pt type). The first render used `0.94em` and gave 31.4 pt; I changed it to match the exemplar. Page count stayed at 13.
+Measured line pitch on a body page: exemplar 32.2 pt, sample 32.1 pt (body leading `0.99em` with 14 pt type). The first render used `0.94em` and gave 31.4 pt; I changed it to match the exemplar.
 
 ## Pages reviewed (Gate 2 record)
 
-All 13 rendered pages were rendered at 60 dpi and looked at, in their final state.
+All 14 rendered pages were rendered at 60 dpi and looked at, in their final state (2026-10-16).
 
 | Page | Content | Result |
 |---|---|---|
-| 1 | Cover (case number, caption, proceeding, title, counsel, date) | Fits one page; no defects. The court line wraps naturally ("UNITED STATES COURT OF APPEALS FOR THE FEDERAL CIRCUIT" on one line at 14 pt bold; no forced break). |
-| 2 | Table of Contents (i) | Entries, dot leaders, page numbers match the body (checked against pages 1, 2, 3, 4, 6, 7). |
-| 3 | Table of Authorities (ii) | Cases, Statutes groups. Fallaux shows "2, 4, 6". |
-| 4 | Statement of Related Cases (iii) | Heading and paragraphs; no defects. |
-| 5–11 | Body pp. 1–7 | Numbered headings (I.–V., A., B., 1.), footnotes at 14 pt, block of bullets, signature block kept with the Conclusion. |
-| 12 | Certificate of Compliance (body p. 8) | Word count (1,330, computed from the markdown) and the FRAP 32(a)(5)–(6) sentence. |
-| 13 | Certificate of Service (body p. 9) | Generic CM/ECF wording (see gaps). |
-
-Pages 6 and 7 were the ones that moved when the leading changed; they were re-checked after the change.
+| 1 | Cover (case number, caption, proceeding, title, counsel, date) | Fits one page. Counsel lines that wrap now hang under their own indent (fixed 2026-10-16). |
+| 2 | Representative claim (unnumbered) | Fed. Cir. R. 32(a)(3); single-spaced; added 2026-10-16. |
+| 3 | Table of Contents (i) | Entries, dot leaders, page numbers match the body. |
+| 4 | Table of Authorities (ii) | Cases, Statutes groups. Fallaux shows "2, 4, 6". |
+| 5 | Statement of Related Cases (iii) | Heading and paragraphs; no defects. |
+| 6–12 | Body pp. 1–7 | Numbered headings (I.–V., A., B., 1.), footnotes at 14 pt, block of bullets, signature block kept with the Conclusion. |
+| 13 | Certificate of Compliance (body p. 8) | Word count (1,330, computed from the markdown) and the FRAP 32(a)(5)–(6) sentence. |
+| 14 | Certificate of Service (body p. 9) | Generic CM/ECF wording (see gaps). |
 
 ## Known gaps (not defects of this template; recorded so they are not missed)
 
@@ -60,10 +59,10 @@ Pages 6 and 7 were the ones that moved when the leading changed; they were re-ch
 - **No addendum.** The Federal Circuit's addendum (if any) is not generated; the ca9 addendum scaffold was dropped.
 - **No CM/ECF header.** The "Case: 26-1333 Document: 23 Page: N Filed: date" line at the top of each filed page is generated by the e-filing system and is not reproduced.
 - **Certificate of service wording** is a convention: the exemplar has no certificate of service, and the sample includes one with generic CM/ECF language. Its rule citation is not verified.
-- **Certificate of Interest (Form 9)** is not generated (see the table above).
+- **Certificate of Interest (Form 9)** is not generated. Correct for this filer: Fed. Cir. R. 47.4(b) exempts the United States and its officers or agencies (verified 2026-10-16, see below). A private appellee would need one; the template does not produce it.
 - **Signature.** The certificate reuses the sample's signature lines; the exemplar's certificate lists only the signer's title and office. The template prints `certificate_lines` separately so the two can differ.
 - **Statement of Related Cases** is text supplied by the sample; the template does not generate it from a form.
-- **Word count** is computed from the markdown body (headings, text, footnotes, quotations; not list markers or footnote marks), not from a word processor; the certificate names the word processor the sample supplies (`word_counter`).
+- **Word count** is computed from the markdown body (headings, text, footnotes, quotations; not list markers or footnote marks), not from a word processor. The certificate names `word_counter` if the frontmatter gives one; the sample no longer does (it said "Microsoft Word", which the render does not use), so the certificate reads "the word-processing system used to prepare it".
 - **Exemplar text layer** is from a paper-capture producer; pdftotext extracts it, but the transcription was checked by eye against the page images, not against an OCR-free source.
 - **Second exemplar** is not included; the brief asked for one exemplar per doc type and the ca9 two-filer rule is a court-level check, not this folder's.
 - The template's `word-limit` and certificate wording depend on the unverified Fed. Cir. R. 32(b) figure above.
@@ -78,8 +77,8 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 
 | Engine | Files | Output (`samples/`) | Pages |
 |---|---|---|---|
-| typst (reference) | `typst/` | `OUTPUT-ablynx-answering-brief.pdf` | 13 |
-| latex | `latex/template.tex`, `latex/cafc.lua`, `latex/render.sh` (tectonic) | `OUTPUT-ablynx-answering-brief.latex.pdf` | 14 |
+| typst (reference) | `typst/` | `OUTPUT-ablynx-answering-brief.pdf` | 14 |
+| latex | `latex/template.tex`, `latex/cafc.lua`, `latex/render.sh` (tectonic) | `OUTPUT-ablynx-answering-brief.latex.pdf` | 15 |
 | docx | `docx/reference.docx` (`docx/make-reference.sh`, `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-ablynx-answering-brief.docx` and `.docx.pdf` | 14 |
 
 **Matches the typst layout:** 14 pt EB Garamond, double spacing at the typst pitch (32.13 pt, 0.99em leading); 1 in margins; the cover; contents and authorities with page numbers; the Roman section headings (I. to V.) hanging at the margin with the A./1. sub-headings; the statement of related cases; the certificate of compliance with the signature under it; the certificate of service; the footers (roman then arabic).
@@ -97,3 +96,15 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 
 **Pages viewed:** all 14 pages of the latex render and all 14 of the docx render, at 30 to 40 dpi, in the final state.
 
+
+## Verification pass 2026-10-16 (fb-595.26.13)
+
+- Rendered: `sh tools/render.sh courts/federal-circuit/court-of-appeals/answering-brief samples/INPUT-ablynx-answering-brief.md`, exit 0, no typst warnings. Before the fixes it gave 13 pages (same as the committed PDF); after them, 14. Overlay rerun, exit 0: cover 92%, claim page ↔ filed p. 2 88%, front matter 33–73%, body 41–89%, certificates ↔ filed pp. 37–38.
+- Viewed: all 13 pages before the fixes and all 14 after, at 60 dpi; the overlay pages at 40 dpi; the exemplar's pages 1 and 2 against ours.
+- Fixed:
+  - Missing representative claim (tier 1). Fed. Cir. R. 32(a)(3) (Rules of Practice, Oct. 6, 2026 compilation, p. 145, fetched 2026-10-16): when the language of a patent or application is at issue, each principal brief carries exemplary claims inside the front cover or right after it. The exemplar has it on p. 2. New optional `patent_claims` / `patent_claims_heading` frontmatter, rendered on unnumbered single-spaced page(s) after the cover (typst and latex); the sample now transcribes claim 51 and "Appx151." (the subscript n of "(X)n" is set as plain text).
+  - Certificate of compliance said the count was "calculated by Microsoft Word"; the number is computed by the template. Removed `word_counter` from the sample, so the default wording is used.
+  - Cover: a counsel line too long for the column ("Attorneys for the Director of the U.S. Patent and Trademark Office") wrapped to the column edge, out of its indent. Each line is now its own block, so it wraps under its indent.
+- Verified at the primary source (Rules of Practice, Oct. 6, 2026, fetched 2026-10-16 from cafc.uscourts.gov): Fed. Cir. R. 32(b)(1), 14,000 words for a principal brief (p. 145); Fed. Cir. R. 47.4(b), the United States and its officers or agencies are exempt from the certificate of interest (p. 199). The "Not verified" notes on these two rows above are superseded.
+- LaTeX re-rendered: 15 pages (the claim page added; the body still runs one page longer than typst). docx not re-rendered (no LibreOffice): the committed `.docx`/`.docx.pdf` predate the claim page and still print "as calculated by Microsoft Word"; `docx/cafc-docx.lua` keeps an "Is/" signature prefix in a code path this sample does not reach (the committed docx PDF has no "Is/").
+- Remaining gaps: as under Known gaps; the latex cover still wraps the long counsel line flush left.

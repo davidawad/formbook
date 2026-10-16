@@ -297,9 +297,9 @@
   // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number), two groups to a row.
   grid(columns: (1fr, 1fr), column-gutter: 0.1in, row-gutter: 0.6em,
     ..need(meta, "counsel").map(g => align(left, block(breakable: false, {
-      set par(hanging-indent: 0pt, spacing: 0.4em)
-      for n in g.names { n; linebreak() }
-      for l in g.at("lines", default: ()) { l; linebreak() }
+      // One paragraph per line, single-spaced; a line too long for its column wraps under a hanging indent.
+      set par(spacing: single-leading)
+      for l in g.names + g.at("lines", default: ()) { par(hanging-indent: 1em, l) }
     }))))
   v(gap * 0.6)
   align(center, inl(need(meta, "counsel_for")))

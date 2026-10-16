@@ -376,6 +376,19 @@
   cover-body(meta, g * 1em)
 }))
 
+/// Exemplary patent claims (Fed. Cir. R. 32(a)(3)): when the language of a patent or patent
+/// application is at issue, each principal brief carries one or more illustrative claims inside
+/// the front cover, or immediately after it when the text needs more room. Electronic filings
+/// have no inside cover, so the claims take their own unnumbered page(s) right after the cover.
+/// The text may be single-spaced. Only when the frontmatter has `patent_claims`.
+#let patent-claims-page(meta) = if "patent_claims" in meta {
+  page(numbering: none, footer: none, {
+    heading(level: 1, numbering: none, outlined: false, meta.at("patent_claims_heading", default: "Exemplary Patent Claims"))
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+    for p in meta.patent_claims { inl(p); parbreak() }
+  })
+}
+
 // ---------------------------------------------------------------------------
 // Front matter: certificate of interest (Fed. Cir. R. 47.4; Form 9), statement of related cases
 // (Fed. Cir. R. 28(a)(4), 47.5(a)). Both are listed in the table of contents.
@@ -391,7 +404,7 @@
 )
 
 #let numbered-items(items) = for (i, t) in items.enumerate() {
-  block(above: 0.9em, below: 0pt, breakable: true, hang(0.5in, [#(i + 1). #h(0.2em) #t]))
+  block(above: 0.9em, below: 0pt, breakable: true, hang(0.3in, [#box(width: 0.3in)[#(i + 1).]#t]))
 }
 
 /// Signature line for a certificate filed by counsel (Form 9 / Form 19 / Form 30 style).
@@ -417,7 +430,7 @@
     [The names of all law firms and the partners and associates that (a) appeared for the entities in the originating court or agency or (b) are expected to appear in this court for the entities not including those who have already entered an appearance in this court: #inl(ci.other_counsel).],
     [#if need(meta, "related_cases").status == "none" [I am unaware of any cases pending in this or any other court or agency that meet the criteria under Fed. Cir. R. 47.5(a). I am unaware of any cases pending that will directly affect or be directly affected by this court's decision in the pending appeal.] else [Related or prior cases meeting the criteria under Fed. Cir. R. 47.5(a) are listed in the Statement of Related Cases.]],
   ))
-  signature-line-block(meta, "Is/")
+  signature-line-block(meta, "/s/")
 }
 
 #let related-cases-page(meta) = {
@@ -434,7 +447,7 @@
     // Fed. Cir. R. 47.5(a)(1): title and number, date of decision, panel, reporter citation; 47.5(a)(2): pending cases.
     numbered-items(rc.cases.map(c => inl(c)))
   }
-  signature-line-block(meta, "Is/")
+  signature-line-block(meta, "/s/")
 }
 
 
@@ -506,7 +519,7 @@
     [I further certify that on the same date I served the foregoing by U.S. Mail on the following persons, who are not registered for electronic filing:]
     for u in unreg { block(above: 0.7em, breakable: false, pad(left: 0.5in, [#u.name, #u.address])) }
   }
-  signature-line-block(meta, "Is/")
+  signature-line-block(meta, "/s/")
 }
 
 #let toc-addendum() = {
@@ -604,6 +617,7 @@
 
   // ---- cover ----
   cover(meta)
+  patent-claims-page(meta)
 
   // ---- front matter (lowercase roman): certificate of interest, contents, authorities, related cases ----
   set page(numbering: "i")

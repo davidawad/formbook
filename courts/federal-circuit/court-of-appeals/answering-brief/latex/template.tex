@@ -278,7 +278,7 @@
   \par\addvspace{0.9\baselineskip}\noindent\hangindent=0.5in\hangafter=1\relax
   #1.\hskip0.2em #2\par}
 
-% A signature line of a certificate filed by counsel (Form 9 style): "Is/" then the name, the date.
+% A signature line of a certificate filed by counsel (Form 9 style): "/s/" then the name, the date.
 \newcommand\ca@certsig[2]{% #1 prefix, #2 signer
   \par\nobreak\addvspace{1.6\baselineskip}\nobreak
   \begin{flushleft}\hspace*{0.5\linewidth}\begin{minipage}[t]{0.5\linewidth}\raggedright
@@ -337,6 +337,19 @@ $if(date)$\ca@cgap\begin{flushleft}\hspace*{0.5\linewidth}$date$\end{flushleft}$
 \ca@cgap
 \ca@dblrule
 \clearpage
+
+$if(patent_claims)$
+% Exemplary patent claims (Fed. Cir. R. 32(a)(3)): when the language of a patent or patent application is at issue, the
+% principal brief carries illustrative claims inside the front cover, or right after it. An electronic filing has no
+% inside cover, so they take their own unnumbered page(s) after the cover; single-spaced, as the rule allows.
+\begingroup\pagestyle{empty}\thispagestyle{empty}
+\ca@single
+\ca@sechead{$if(patent_claims_heading)$$patent_claims_heading$$else$Exemplary Patent Claims$endif$}{}
+$for(patent_claims)$
+\par\addvspace{0.9\baselineskip}\noindent $patent_claims$\par
+$endfor$
+\clearpage\endgroup
+$endif$
 
 % ---- front matter: lower-case roman, the cover unnumbered ----
 \pagenumbering{roman}

@@ -123,4 +123,16 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 
 **Pages viewed:** all 21 pages of the latex and docx renders, at 30 to 40 dpi, in the final state.
 
+## Verification pass 2026-10-16 (fb-595.26.13)
+
+- Rendered: `sh tools/render.sh courts/federal-circuit/court-of-appeals/opening-brief samples/INPUT-delfasco-opening-brief.md`, exit 0, no typst warnings, 21 pages (same as the committed PDF; the earlier page count was not stale). Overlay rerun: `sh tools/overlay.sh ... delfasco-opening-brief`, exit 0; pairings as listed under Overlay (cover ↔ filed addendum cover 64%, certificate of interest 91%, body pages 47–85%).
+- Viewed: all 21 pages at 60 dpi, then pages 2, 6, 15 and 21 again after the fixes; the overlay pages at 40 dpi; the exemplar's page 1 against our cover (same parts in the same order; the filed cover also prints the Board judges and the date, not reproduced, tier 3).
+- Fixed:
+  - Certificate of interest, statement of related cases and certificate of service signed "Is/ John J. O'Brien": the template hard-coded an OCR misreading of "/s/". Now "/s/" (typst and latex).
+  - Numbered certificate items (pp. 2, 6): continuation lines hung 0.5 in, deeper than the item text. The number now sits in a fixed 0.3 in box and wrapped lines align with the text.
+  - Sample, Argument II (p. 15): nested quotations `"'When … provisions.'"` and `"'the … provisions,'"` were curled wrongly by smart punctuation (closing quote printed as opening and vice versa). Set with explicit curly quotes in the markdown.
+- Added: optional `patent_claims` (list of markdown paragraphs) and `patent_claims_heading` frontmatter. When present, the claims print on unnumbered page(s) right after the cover, single-spaced (Fed. Cir. R. 32(a)(3), Federal Circuit Rules of Practice, Oct. 6, 2026 compilation, p. 145, fetched 2026-10-16). Not in this sample (contract appeal); checked with a throwaway sample (22 pages, claims on page 2, then the certificate of interest), not committed.
+- LaTeX re-rendered (21 pages, `/s/` in all certificates). docx not re-rendered (no LibreOffice on this box): `docx/cafc-docx.lua` still prints "Is/" and the committed `.docx`/`.docx.pdf` carry it; the docx has no claims page and the old certificate-item indent.
+- Remaining gaps: as under Known gaps (excerpted sample, addendum placeholder, Form 30 layout not reproduced).
+
 [Formbook index](../../../../README.md)
