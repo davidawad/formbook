@@ -29,17 +29,23 @@ signature:
       number: "36989-29"
     - name: "Andrew W. Ardizone"
       number: "38769-49"
-  lines: ["CROSSEN LAW FIRM LLC", "4661 Lisborn Drive", "Carmel, Indiana 46033", "T: (317) 939-6800", "F: (317) 939-6801", "Email: gina@crossenlawfirm.com", "Email: trevor@crossenlawfirm.com", "Email: andrew@crossenlawfirm.com", "Counsel for Appellees"]
+  lines: ["CROSSEN LAW FIRM LLC", "4661 Lisborn Drive", "Carmel, Indiana 46033", "T: (317) 939-6800", "F: (317) 939-6801", "Email: gina@crossenlawfirm.com", "Email: trevor@crossenlawfirm.com", "Email: andrew@crossenlawfirm.com", "*Counsel for Appellees*"]
 service:
   method: "electronically using the CM/ECF system"
   served_by: "email"
   counsel:
     - names: ["Andrew M. McNeil", "Bradley R. Sugarman", "Seth M. Thomas", "Jackson L. Schroeder"]
-      lines: ["BOSE MCKINNEY & EVANS LLP", "111 Monument Circle, Suite 2700", "Indianapolis, Indiana 46204", "amcneil@boselaw.com", "bsugarman@boselaw.com", "sthomas@boselaw.com", "jschroeder@boselaw.com", "Attorneys for Appellant"]
+      lines: ["BOSE MCKINNEY & EVANS LLP", "111 Monument Circle, Suite 2700", "Indianapolis, Indiana 46204", "amcneil@boselaw.com", "bsugarman@boselaw.com", "sthomas@boselaw.com", "jschroeder@boselaw.com", "*Attorneys for Appellant*"]
     - names: ["Arie Lipinski"]
-      lines: ["LIPINSKI LAW", "951 N Delaware Street", "Indianapolis, Indiana 46202", "Lipinski@lipinski-law.com", "Attorney for Seth Smith and Cornerstone Trading Group LLC"]
-    - names: ["Robert L. Bever", "Jeffrey B. Fecht"]
-      lines: ["BBFCS ATTORNEYS", "27 North 8th Street", "Richmond, Indiana 47374", "bbever@bbfcslaw.com", "jfecht@rbelaw.com", "Attorneys for Third-party Defendant, First Bank Richmond"]
+      lines: ["LIPINSKI LAW", "951 N Delaware Street", "Indianapolis, Indiana 46202", "Lipinski@lipinski-law.com", "*Attorney for Seth Smith and Cornerstone Trading Group LLC*"]
+    - names: ["Robert L. Bever"]
+      lines: ["BBFCS ATTORNEYS", "27 North 8th Street", "Richmond, Indiana 47374", "bbever@bbfcslaw.com"]
+    - names: ["Jeffrey B. Fecht"]
+      lines: ["RILEY BENNET EGLOFF", "500 N. Meridian Street, Suite 550", "Indianapolis, Indiana 46024", "jfecht@rbelaw.com", "*Attorneys for Third-party Defendant, First Bank Richmond*"]
+    - names: ["Allison Wells Gritton"]
+      lines: ["DINSMORE & SHOHL LLP", "One Indiana Square, Suite 1800", "211 N. Pennsylvania", "Indianapolis, IN 46204", "Allison.gritton@dinsmore.com", "*Attorney for Third-party Defendant, Wayne County, Indiana*"]
+    - names: ["James P. Freel"]
+      lines: ["Ward, Hocker, & Thornton, PLLC", "333 West Vine St., Suite 1100", "Lexington, KY 40507", "James.free@whtlaw.com"]
 authorities:
   allen:
     kind: case

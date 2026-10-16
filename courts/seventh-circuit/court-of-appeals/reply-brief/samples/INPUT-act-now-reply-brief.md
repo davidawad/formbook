@@ -1,8 +1,8 @@
 ---
 # Sample 1 of 1. Transcribed from exemplars/FILED-EXAMPLE-act-now-v-doe-26-2473-reply-brief.pdf
 # for visual comparison only: cover, the body from the introduction through the first part of Point II.A,
-# the conclusion, and the certificates. It is a PORTION of the real reply brief (body pages 1-7 of 13; Point II.B,
-# Point III and the conclusion's later pages are not transcribed). Paragraphs are omitted between the headings
+# the conclusion, and the certificates. It is a PORTION of the real reply brief (body pages 1-7 of 13; the text of Point II.B,
+# II.C and III is not transcribed, only their headings). Paragraphs are omitted between the headings
 # shown. The table of contents and table of authorities are generated from the headings and the toa: links below,
 # so they list only what is transcribed. See ../README.md, "Markdown contract", for the meaning of every field.
 case_number: "26-2473"
@@ -16,7 +16,7 @@ district_court_case: "1:25-cv-15704"
 judge: "Honorable Martha M. Pacold"
 brief_title: "Appellants’ Reply Brief"
 counsel:
-  - names: ["Jocelyn (Josie) E. Skinner", "(application for admission pending)", "Emily K. Merolli", "(admission for application pending)"]
+  - names: ["Jocelyn (Josie) E. Skinner", "(*application for admission pending*)", "Emily K. Merolli", "(*admission for application pending*)"]
     lines: ["SLIGO LAW GROUP, PLLC", "1717 K St. NW, Suite 900", "Washington, DC 20006", "Telephone: (202) 888-2084"]
   - names: ["Aneel L. Chablani (No. 6242658)", "Michael R. Ortega (No. 6339469)"]
     lines: ["CHICAGO LAWYERS’ COMMITTEE FOR CIVIL RIGHTS", "25 E. Washington St., Suite 1300", "Chicago, IL 60602", "Telephone: (312) 630-9744", "Fax: (312) 630-1127"]
@@ -86,6 +86,18 @@ Rather than engage with this analysis, the Department switches focus to the sele
 ### The Selective-Subsidy Cases Do Not Condone the Department’s Actions Because the Department Is Enforcing Its Own Policy, Not a Funding Condition Congress Imposed.
 
 Defendants repeat the sleight-of-hand that led the district court to err. They assert that *Rust* and other selective-subsidy cases broadly permit “the government” to make selective funding decisions about “programmatic activities,” and that the non-continuations thus “rest[] squarely within the Department’s authority to define and update programmatic priorities.” (Resp. Br. 17–18; *compare with* Br. 23–25.) But those cases turn on Congress’s authority—not the Department’s—to make value judgments via its Spending Power, as Defendants appear to concede.[^six] (*See* Br. 23 n.4 (collecting cases).) And they make plain that neither Congress nor the Department may use federal funds to penalize expression made without those funds. (Br. 23–24 (discussing [*Agency for Int’l Dev. v. All. for Open Soc’y Int’l.*, 570 U.S. 205 (2013)](toa:alliance)).)
+
+### Even if the Department Was Enforcing a Funding Condition Imposed by Congress, Such a Funding Condition Is Viewpoint Discrimination Prohibited Under the Selective-Subsidy Cases.
+
+*[Transcription note: the text of Point II.B is not transcribed here.]*
+
+### Plaintiffs Did Not Waive Their Argument.
+
+*[Transcription note: the text of Point II.C is not transcribed here.]*
+
+## The Court Erred in Failing to Make any Findings of Irreparable Harm.
+
+*[Transcription note: the text of Point III is not transcribed here.]*
 
 ## Conclusion
 

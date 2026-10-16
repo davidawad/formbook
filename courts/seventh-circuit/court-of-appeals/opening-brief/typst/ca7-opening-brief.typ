@@ -19,6 +19,7 @@
 #let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced (FRAP 32(a)(4)).
 #let page-margin = 1in                     // FRAP 32(a)(4): at least one inch on all four sides.
 #let para-indent = 0.5in
+#let counsel-step = 0.5em                 // counsel and signature address lines step in under the name
 #let toc-depth = 4
 #let passim-threshold = 7                  // authority cited on this many pages or more: "passim"
 #let word-limit = 14000                    // Cir. R. 32(c): principal brief, excluding FRAP 32(f) items.
@@ -171,6 +172,7 @@
 // ---------------------------------------------------------------------------
 
 #let dot-leader = box(width: 1fr, repeat[.#h(0.16em)])
+#let toc-page-col = 2.6em                   // width of the TOC page-number column
 
 /// One table-of-contents row, built from a heading element. The label sits where the
 /// heading's own label sits in the body, and wrapped lines hang under the title text.
@@ -181,15 +183,18 @@
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let hang-by = ind + heading-tab
+  // The page number has its own column, so a title that fills its last line can never
+  // push the number onto a line of its own; the leader runs to the end of the title column.
   link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
-    hang(hang-by, {
-      h(ind)
-      if numbered { box(width: heading-tab, lab) }
-      title
-      h(0.8em)
-      dot-leader
-      box(width: 2.6em, align(right, it.page()))
-    })))
+    grid(columns: (1fr, toc-page-col), align: (left, right + bottom),
+      hang(hang-by, {
+        h(ind)
+        if numbered { box(width: heading-tab, lab) }
+        title
+        h(0.8em)
+        dot-leader
+      }),
+      it.page())))
 }
 
 #let toc-section(has-addendum) = {
@@ -314,7 +319,8 @@
     columns: (1fr, 1fr), column-gutter: 1em, row-gutter: 0.6em, align: left,
     ..need(meta, "counsel").map(g => block(breakable: false, {
       for n in g.names { n; linebreak() }
-      for l in g.lines { h(0.5em); inl(l); linebreak() }
+      // Address lines step in; a line that wraps keeps the step (no ragged continuation).
+      block(above: single-leading, below: 0pt, pad(left: counsel-step, g.lines.map(inl).join(linebreak())))
     })),
   )
   if "counsel_for" in meta { inl(meta.counsel_for) }
@@ -347,7 +353,8 @@
       signature-line(meta)
       linebreak()
       upper(sig.signer)
-      for l in sig.at("lines", default: ()) { linebreak(); h(0.5em); inl(l) }
+      let lines = sig.at("lines", default: ())
+      if lines.len() > 0 { block(above: single-leading, below: 0pt, pad(left: counsel-step, lines.map(inl).join(linebreak()))) }
     }))
     if "date" in meta { v(0.8em); meta.date }
   })
