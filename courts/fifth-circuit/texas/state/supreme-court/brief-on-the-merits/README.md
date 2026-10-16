@@ -1,36 +1,46 @@
 # Brief on the merits
 
-Typst template for a petitioner's brief on the merits in the Supreme Court of Texas (`typst/main.typ`, module `typst/tex-brief-on-the-merits.typ`). The sample is an excerpt transcribed from the filed *State of Texas v. F.M.V.*, No. 25-0792 brief on the merits (`exemplars/FILED-EXAMPLE-hawthorne-25-0792-brief-on-the-merits.pdf`). Rendered output: `samples/OUTPUT-hawthorne-brief-on-the-merits.pdf`; overlay on the filed brief: `samples/OVERLAY-hawthorne-brief-on-the-merits.pdf` and `.txt`.
+Typst template for a petitioner's brief on the merits in the Supreme Court of Texas (`typst/main.typ`, module `typst/tex-brief-on-the-merits.typ`). The sample is transcribed from the filed *State of Texas v. F.M.V.*, No. 25-0792 brief on the merits (`exemplars/FILED-EXAMPLE-hawthorne-25-0792-brief-on-the-merits.pdf`), every section of the filed brief with the argument excerpted. Rendered output: `samples/OUTPUT-hawthorne-brief-on-the-merits.pdf` (18 pages); overlay on the filed brief: `samples/OVERLAY-hawthorne-brief-on-the-merits.pdf` and `.txt`.
 
 ## Layout
 
-- Cover (page 1, no number): court and case number, caption, the "On Petition for Review" line, the title between rules, and the lead counsel block at the foot of the page (Rule 9.4(g)).
-- Front matter (lower roman, from ii): identities of parties and counsel from the markdown (single-spaced, as the exemplars set counsel lists), then the generated table of contents, then the index of authorities generated from the frontmatter `authorities` list.
-- Body (arabic, from 1): the markdown from the heading named in frontmatter `body_start`.
-- Text is Liberation Serif 14 pt, double-spaced (32.2 pt baseline pitch, measured with `pdftotext -bbox`), footnotes 12 pt single-spaced, block quotations single-spaced and indented one inch each side. Headings are centered bold (H1) or bold left (H2, H3).
-- The contents are generated from the headings with page numbers from the layout. The index of authorities page numbers are typed in frontmatter by the author, measured from the rendered PDF (body page numbers).
-- Word count: `word-count` counts the words of the counted sections under the 2026 text of Rule 9.4(i)(1) (headings, footnotes and quotations count; caption, identities, tables, the case, issue and jurisdiction statements, signature, certificates and appendix do not). The count replaces `{{word-count}}` in the certificate of compliance. `assert` fails the render when the count exceeds the limit.
+- Cover (page 1, no number): case number, court, caption, the "On Petition for Review" line, the title between rules, lead counsel block at the foot of the page (Rule 9.4(g)).
+- Front matter (lower roman, from ii): each H1 section before `body_start` on its own page (identities single-spaced), then the generated table of contents (headings to level 3, bookmarked) and the index of authorities from the frontmatter `authorities` list.
+- Body (arabic, from 1): the markdown from `body_start`. The signature block (frontmatter `signature`: `name`, `office`, `lines`, `for`) is set in the right half of the page after the section whose title contains "prayer"; each "certificat..." section gets a short `/s/` signature (Rule 9.5(e)); the appendix index starts a new page.
+- Liberation Serif 14 pt (headings too), double-spaced (32.2 pt pitch), every paragraph indented 0.5 in, footnotes 12 pt single-spaced, block quotations single-spaced and indented 1 in each side, footnote markers as raised digits (Liberation Serif has superscript glyphs only for 1-3).
+- Word count: every counted H1 section under Rule 9.4(i)(1) (2026 text), with a thousands separator, into `{{word-count}}`; the render fails over 15,000 words or when a Rule 55.2 section is missing or out of order. `rules_edition` `"2026"` (default; no statement of jurisdiction required, one may still be included) or `"2025"` (jurisdiction required). The sample uses the default; the filed brief (July 2026) keeps a statement of jurisdiction, an introduction and a standard of review between the required sections, which the order check allows.
 
 ## Governing rules
 
-Source notes. The Texas Rules of Appellate Procedure PDF (`txcourts.gov/media/1463134/...`) returned HTTP 403 to every fetch attempted on October 15, 2026, so the rule numbers below are carried over from the October 14 review and have **not been re-read against the rule text in this session**. The word-count exclusions were confirmed by a secondary search of the 2026 amendment (Misc. Docket No. 25-9104) and should also be read against the rule text.
+Primary source read this session (October 16, 2026): the amendments in Misc. Docket No. 25-9104 (Tex. Dec. 23, 2025; effective January 1, 2026), reproduced as the appendix of D. Todd Smith, *The Appellate Advocate* vol. 35 no. 2 (Spring 2026), <https://www.texappcounsel.com/wp-content/uploads/sites/958/2026/06/Smith-SCOTX-PFR-Article-in-Appellate-Adv-V35-No2-.pdf>. The Court's PDFs (<https://www.txcourts.gov/media/1461814/259104.pdf>, the TRAP PDF) return HTTP 403 to this box; read the redline against them before relying on it.
 
-- Rule 9.4(c)–(e): letter paper; one-inch margins; double-spaced text; conventional typeface at least 14 point; footnotes at least 12 point.
-- Rule 9.4(g): cover contents (case style and number, title, filing party, lead counsel's name, address, telephone, email, Texas Bar number).
-- Rule 9.4(i)(1)–(2): word limit for a brief on the merits, 15,000 words, computer-generated (`word-limit` in the module). Count exclusions as above.
-- Rules 55.1 and 55.2: a merits brief is filed when ordered. Order of contents: identities, table of contents, index of authorities, statement of the case, issues, facts, summary, argument, prayer, certificates, appendix.
-- Rule 9.5: certificate of service.
+- Rule 9.4(c)-(e): letter paper; one-inch margins; double-spaced text (footnotes, block quotations, short lists and issues may be single-spaced); typeface at least 14 point; footnotes at least 12 point. Not re-read this session.
+- Rule 9.4(g): cover contents. Not re-read this session.
+- Rule 9.4(i)(1) (2026) exclusions (read): caption, identity of parties and counsel, statement regarding oral argument, table of contents, index of authorities, statement of the case, issues presented, statement of jurisdiction, statement of procedural history, signature, proof of service, certification, certificate of compliance, appendix.
+- Rule 9.4(i)(2)(B): brief 15,000 words, unchanged in 2026 (read). Rule 9.4(i)(3): certificate stating the word count (read).
+- Rule 55.1 (2026): a merits brief is filed only when ordered. Rule 55.2 (2026), in order (read): (a) identity of parties and counsel, (b) table of contents (bookmarked), (c) index of authorities, (d) statement of the case, (e) issues presented (with preservation cites), (f) statement of facts, (g) summary of the argument, (h) argument, (i) prayer. The 2026 text drops the statement of jurisdiction (read from the redline lettering "(fe) Issues Presented" and the article's summary).
+- Rule 9.5: certificate of service, signed. Not re-read this session.
 
 ## Exemplars
 
-Three filed merits briefs from three filers, listed with URLs in `exemplars/SOURCE.md`: the State brief (25-0792), Tanner (25-0648), and San Patricio County Appraisal District (26-0153). Tier 2 (cover, contents, authorities, heading layout) is judged against all three.
+Three filed merits briefs from three filers, listed with URLs in `exemplars/SOURCE.md`: the State brief (25-0792), Tanner (25-0648), and San Patricio County Appraisal District (26-0153). Tier-2 cross-check this pass: signature block and certificates in all three (signature in the right half after the prayer; `/s/` plus name under each certificate), which the template now follows.
+
+## Depth pass (fb-595.38.2, October 16, 2026)
+
+Sample extended from the statement of facts (12 pages) to the full structure: the timeline as a bulleted list (as filed), summary of the argument, standard of review, argument I (with a footnote) and II (with the numbered findings), conclusion and prayer, generated signature block, certificate of service, certificate of compliance, appendix index; the index of authorities now lists the 9 cases, 4 statutes and 2 rules cited, page numbers measured from this render. 18 rendered pages (cover, ii-iv, body 1-14); all 18 rendered at 60 dpi and looked at.
+
+Overlay page map (ours -> filed, word overlap): 1->1 (60%), 2->6 identities (98%), 3->2 contents (42%), 4->4 index (56%), 5->7, 6->9, 7->10, 8->12, 9->13 (99%), 10->14, 11->15, 12->16, 13->18, 14->20, 15->21, 16->35 signature and service (78%), 17->36 compliance (69%), 18->37 appendix (86%). Tier-3 differences (filed text set at a narrower measure, "Page X of Y" footers, contents before identities against the rule's order): not chased.
+
+Template fixes from the deeper sample: same as the petition template (shared code): lead counsel's name first on the cover; first paragraph after a heading indented; footnote markers from 4 up no longer a different glyph size; signature block and certificate signatures generated from frontmatter; contents to level 3 and bookmarked; required sections and order checked under Rule 55.2; count exclusions brought to the 2026 list; thousands separator in the count.
 
 ## Known gaps
 
-- Not done in this pass: `rules.md`, `checks.yaml`, `reviews/`, `LOG.md`, the latex and docx engines, and the `tools/check.sh` gates. The tracker and `court.json` are untouched.
-- The sample stops at the statement of facts, so the summary, argument, prayer, signature, certificate of service and certificate of compliance are not exercised by the render. Their template code is untested.
-- Index of authorities page numbers must be re-measured whenever the body text changes.
-- Appendix and electronic-filing PDF requirements are not implemented.
+- Not done: `rules.md`, `checks.yaml`, `reviews/`, `LOG.md`, the latex engine, the `tools/check.sh` gates, a second (structurally different) sample. The tracker and `court.json` are untouched.
+- 18 pages is above the 8-14 target of this pass; the excerpt keeps one paragraph or a short list from each section rather than dropping a required section.
+- Index of authorities page numbers are typed in frontmatter and must be re-measured whenever the text moves.
+- Rule 9.4(e)-(g) and 9.5 were not re-read against primary text this session.
+- The sample's certificate of compliance drops the filer's "relying on the word count of the software" wording, since the template supplies the count.
+- docx (`docx/tex.lua`) was not changed: no signature block from frontmatter `signature`, count still split at "Respectfully submitted", no `rules_edition` or order check. No `soffice` on this box, so `samples/OUTPUT-hawthorne-brief-on-the-merits.docx` and `.docx.pdf` were NOT regenerated and are stale against the extended INPUT.
 
 [Formbook index](../../../../../../README.md)
 

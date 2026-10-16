@@ -1,59 +1,40 @@
-# Appellant's Reply Brief template (Texas Court of Appeals, Fifth District at Dallas)
+# Appellant's Reply Brief template (Texas Court of Appeals)
 
-Typst template for an appellant's reply brief in the Fifth Court of Appeals at Dallas. Engine: typst (`typst/`). latex and docx are not built for this doc type.
+Typst template for an appellant's reply brief in a Texas court of appeals (TRAP 38.3). The district and seat on the cover come from the frontmatter (`district`, `seat`; default Fifth District at Dallas, the court of the exemplar). Engines: typst (`typst/`, primary) and docx (`docx/`, not regenerated in the 2026-10-16 pass; see "Engines").
 
-## Governing rules (checked 2026-10-15)
+The template module `typst/texapp-reply-brief.typ` is the opening brief's code (`../opening-brief/typst/texapp-opening-brief.typ`) with `word-limit` set to 7,500. The rule table, the markdown contract and the 2026-10-16 changes are in `../opening-brief/README.md`.
 
-Verification status: the primary text, the Texas Rules of Appellate Procedure as updated February 6, 2026 (https://www.txcourts.gov/media/1463134/texas-rules-of-appellate-procedure-02062026.pdf), returned HTTP 403 to every fetch from this box on 2026-10-15 (WebFetch, and curl with browser headers). The Rule 9.4 text below comes from secondary summaries (appeal.pro, RuleDex, state-rules.com). Re-check each line against the primary PDF before relying on it.
+## Governing rules (checked 2026-10-15, re-attempted 2026-10-16)
+
+The primary TRAP PDF (https://www.txcourts.gov/media/1463134/texas-rules-of-appellate-procedure-02062026.pdf) returned HTTP 403 on 2026-10-15 and 2026-10-16; rule text is from secondary summaries. Rules specific to this doc type:
 
 | Rule | Requirement | Where the template uses it | Verification |
 |---|---|---|---|
-| TRAP 9.4(c) | margins at least 1 inch on both sides, top and bottom | `page-margin` = 1in | secondary |
-| TRAP 9.4(e) | conventional typeface no smaller than 14-point; footnotes no smaller than 12-point | `type-size` = 14pt, `footnote-size` = 12pt | secondary |
-| TRAP 9.4 (spacing) | body text double-spaced; footnotes, block quotations, short lists and issues may be single-spaced | `body-leading` = 1.6em (pitch 2.25em, about 31.5pt); `single-leading` = 0.5em (pitch 1.15em, about 16pt) | secondary |
-| TRAP 9.4(i) | word limit 7,500 words for a reply brief if computer-generated; word-count certificate | not enforced by the template; counsel supplies the certificate | secondary |
-| TRAP 38.3 | contents of a reply brief | the template orders the headings the sample supplies; no index of authorities is generated | not verified against primary text |
-| TRAP 9.5 | service certificate | counsel supplies | not verified (the exemplar cites Rule 9.5) |
-| Fifth Court local rules | local length and briefing limits (a combined reply and cross-appellee brief has its own limit) | not encoded | secondary (search summary) |
-
-Typeface: no face is named by the rules, so EB Garamond (vendored; `docs/FONTS.md`).
-
-## Markdown contract
-
-Same as the opening brief (`../opening-brief/README.md`): frontmatter fields `case_number`, `appellant`, `appellee`, `trial_court`, `county`, `trial_cause`, `brief_title`, optional `caption`, and `counsel` as a list. Paragraphs shorter than 100 characters are not indented.
+| TRAP 38.3 | the appellant may file a reply addressing any matter in the appellee's brief; no prescribed contents | front matter is empty (no `{{identity}}`); contents and index are still generated, as the filer did | secondary |
+| TRAP 9.4(i)(2)(C) | 7,500 words for a computer-generated reply brief in a court of appeals | `word-limit` = 7500; `assert` fails the render above it; `{{word-count}}` in the certificate | secondary |
+| TRAP 9.4(c)-(e), (g), 39.7, 9.5 | as for the opening brief | as for the opening brief | secondary |
+| Fifth Court local rules | local limits (a combined reply and cross-appellee brief has its own limit) | not encoded | secondary |
 
 ## Exemplar and overlay
 
-- Exemplar: `exemplars/FILED-EXAMPLE-reply-brief.pdf`; source, filer, date and hash in `exemplars/SOURCE.md`.
-- Overlay: `samples/OVERLAY-reply-brief.pdf` and `.txt`. A diagnostic (tier 3), not a score.
+- Exemplar: `exemplars/FILED-EXAMPLE-reply-brief.pdf` (10 pages; Scott H. Palmer, P.C.); source in `exemplars/SOURCE.md`.
+- Overlay: `samples/OVERLAY-reply-brief.pdf` and `.txt`. Page map (ours to filed, word overlap): 1-1 cover 73%, 2-2 contents 46%, 3-2 index 50%, 4-3 94%, 5-4 94%, 6-5 75%, 7-6 50%, 8-7 prayer and signature 46%, 9-8 certificates 40%. The filer puts contents and authorities on one page; the template gives each its own page (tier 3).
 
 ## Sample
 
-`samples/INPUT-reply-brief.md` is transcribed from the complete reply body of the exemplar: the first reply issue, the second reply issue (with the minor-specific paragraph bracketed out), conclusion and prayer, signature block, certificate of compliance (word count left as `[word count]`), and certificate of service. The render is 7 pages (cover, contents, five body pages, and the certificates). That is one page short of the 8-page target: the filed reply's body is only about five pages, and the transcription does not pad it.
+`samples/INPUT-reply-brief.md` is a full transcription of the filed reply: cover (with ORAL ARGUMENT REQUESTED and ACCELERATED APPEAL), contents, index of authorities, address to the court, First Reply Issue, Second Reply Issue, conclusion and prayer (list), signature, certificate of compliance (generated word count, 1,077 words) and certificate of service with two recipients. The appellant's medical and educational details are bracketed out.
 
-## Render and review
-
-```
-sh tools/render.sh courts/fifth-circuit/texas/state/court-of-civil-appeals/reply-brief samples/INPUT-reply-brief.md
-sh tools/overlay.sh courts/fifth-circuit/texas/state/court-of-civil-appeals/reply-brief reply-brief
-```
-
-Output: `samples/OUTPUT-reply-brief.pdf`. Review: `reviews/2026-10-15.md`.
+Render: 9 pages (cover; ii contents; iii index; body 1-6). Every page rendered at 60 dpi and viewed on 2026-10-16; review in `reviews/2026-10-16.md`.
 
 ## Known gaps
 
-1. Sample is 7 pages, below the 8-page target, because the exemplar's reply body is short. A second filed reply for this doc type would fix it; none was found.
-2. No index of authorities is generated (TRAP 38.3 and 38.1). Counsel supplies it. OPEN in the review.
-3. No word-count certificate is computed. The certificate in the sample is a placeholder, `[word count]`.
-4. Signature blocks are flush left but double-spaced and split across a page break in this sample. OPEN in the review.
-5. One filer for this doc type (Scott H. Palmer, P.C.), the same filer as the opening brief.
-6. Rule text from secondary sources (see the table above).
-7. `tools/check.sh` was not run for this doc type. No stamp is written.
-8. Pagination: the cover is unnumbered and the following pages are numbered from the cover as page 1.
+1. One filer for this doc type (the same filer as the opening brief).
+2. The filed reply is short, so the sample cannot reach more pages without invented text; 9 pages is the whole brief.
+3. Rule text is secondary. `tools/check.sh` not run; no stamp.
 
 ## Engines
 
 - **typst** (`typst/`): the reference for the form.
-- **docx** (`docx/render.sh`, `docx/build-reference.sh`, `docx/reference.docx`, `docx/texapp.lua`): `samples/OUTPUT-reply-brief.docx` and `.docx.pdf` (7 pages, LibreOffice). Same page count and the same contents page numbers as typst (3, 5, 6, 7, 7). Matches typst: EB Garamond 14 pt (embedded), 31.5 pt double-spaced body with 0.5 in first-line indent, single-spaced block quotations and headings, 1 in margins, centered page number from page 2 (cover unnumbered), the cover built from the frontmatter, a contents page with page numbers, body lines under 100 characters not indented. Differs: headings in typst render at Typst's default sizes (19.5 pt level 1, 17 pt level 2), and the docx matches those; headings keep more space after them in LibreOffice (about 6 pt); LibreOffice keeps the space above a heading at the top of a page, typst does not. Typst does not indent some long body paragraphs that contain italic text (its short-paragraph helper returns no text for some inline content); the docx indents them, as the rule says. Star paging ("at *3") is escaped in the build so pandoc does not read it as emphasis. Contents page numbers come from a LibreOffice layout (two passes in `docx/render.sh`), not from Word. The bullets of the conclusion list are EB Garamond bullets in the .docx, but LibreOffice draws them in its own OpenSymbol font (bundled with LibreOffice, not in `fonts/`); Word draws them in EB Garamond.
-- BLOCKED: tools/check.sh docx gates 0 to 3: not run. The court folder has no `checks.yaml`, `rules.md` or `court.json` at the level `check.sh` reads, so the gates cannot start and no `.check-docx.txt` stamp is written.
-- Word was not available: the `.docx` was opened with LibreOffice only (the PDF conversion succeeded, which is the no-repair proof here); Word was not checked.
+- **docx** (`docx/`): `samples/OUTPUT-reply-brief.docx` and `.docx.pdf` are from the earlier sample and were **not regenerated** on 2026-10-16 (no `soffice` on this box). The docx filter predates the placeholder contract (`{{contents}}`, `{{signature}}`, `{{signer}}`, `{{word-count}}`) and the `authorities` list; a re-render would print the placeholders literally and omit the index. BLOCKED until `docx/texapp.lua` is updated.
+- BLOCKED: tools/check.sh docx gates 0 to 3 not run (no `checks.yaml`, `rules.md` at the level `check.sh` reads).
+- **latex**: not built for this doc type.

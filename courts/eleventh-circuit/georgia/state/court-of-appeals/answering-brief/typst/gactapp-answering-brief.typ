@@ -1,7 +1,9 @@
-// Court of Appeals of Georgia (gactapp): answering-brief (see the doc-type name in the README).
+// Court of Appeals of Georgia (gactapp): answering brief (see the doc-type name in the README).
 //
 // Content-agnostic. Every number is a named parameter below and traces to the rule
-// cited next to it (see ../README.md for the rule text status). No case-specific text,
+// cited next to it (Court of Appeals of Georgia Rules, effective March 26, 2026,
+// https://www.gaappeals.gov/wp-content/uploads/2026/03/COA-Rules-Complete-Eff-26-March-26.pdf,
+// read 2026-10-16 from the Wayback Machine copy; see ../README.md). No case-specific text,
 // no coordinates measured off any filed brief, no forced line breaks.
 // The markdown body is rendered by cmarker; the metadata is the YAML frontmatter of the
 // sample (schema: ../README.md, "Markdown contract").
@@ -12,13 +14,16 @@
 // Parameters
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // Substitute for the face named in the rules (docs/FONTS.md). See README.md.
-#let type-size = 14pt                      // Ga. Ct. App. R. 2(3): 14-point or larger serif (secondhand; see README.md).
-#let body-leading = 1.1em                  // Double spacing at 14 pt: baseline pitch about 2.2 x type size. Checked by eye on the render.
-#let single-leading = 0.45em               // Headings, block quotations, cover: single-spaced.
-#let page-margin = 1in
+#let font-family = "Liberation Serif"     // Rule 2 (c) (3) names Times New Roman as a compliant face; Liberation Serif is its metric-compatible substitute (docs/FONTS.md).
+#let type-size = 14pt                      // Rule 2 (c) (3): serif, proportionally spaced, 14-point or larger (footnotes included).
+#let body-leading = 1.65em                 // Rule 2 (c) (2): no less than double spacing. With typst's default line box this gives a
+                                           // baseline pitch of about 32.3 pt = 2 x the 1.15 em single line of this face at 14 pt.
+#let single-leading = 0.45em               // Rule 2 (c) (2) excludes block quotations, headings, captions and footnotes: single-spaced.
+#let page-margin = 1in                     // Rule 24 (c): not less than one inch at top, sides and bottom.
 #let para-indent = 0.5in
-#let toc-depth = 2
+#let toc-depth = 3
+#let sig-indent = 3.2in                    // signature block starts right of centre (style; exemplars do the same).
+#let word-count-text = "This submission does not exceed the word count limit imposed by Rule 24."  // Rule 24 (f) (1): mandated wording.
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -44,16 +49,87 @@
   align(center)[
     #set par(leading: single-leading, spacing: 0.4em)
     #for n in side.names [ #inl(n) \ ]
-    #side.designation
+    #emph(side.designation)
   ]
 }
 
-/// Counsel group: names (bold) then the italic lines beneath.
+/// Counsel group: names (bold) then the lines beneath.
 #let counsel-group(g) = {
   set par(leading: single-leading, spacing: 0pt, first-line-indent: 0pt)
   for n in g.names [ #strong(n) \ ]
-  for l in g.lines [ #emph(l) \ ]
+  for l in g.lines [ #inl(l) \ ]
   v(0.6em)
+}
+
+/// Signers of the signature block. Rule 2 (a) (2) (ii): "/s/" and the typed name, underlined,
+/// with the typed name again below the underline; Rule 2 (a): bar number, address, phone, e-mail.
+#let signers(sig) = {
+  if "signers" in sig { sig.signers } else { ((name: need(sig, "signer"), lines: ()),) }
+}
+
+#let signer-entry(s) = {
+  underline[/s/ #emph(s.name)] + linebreak()
+  [#s.name]
+  for l in s.at("lines", default: ()) { linebreak() + inl(l) }
+}
+
+#let signature-block(sig, first-only: false) = {
+  let all = signers(sig)
+  let list = if first-only { (all.first(),) } else { all }
+  block(width: 100%, breakable: false, pad(left: sig-indent)[
+    #set par(leading: single-leading, first-line-indent: 0pt, spacing: 0pt)
+    #if "firm" in sig [ #strong(sig.firm) #v(0.8em) ]
+    #for (i, s) in list.enumerate() {
+      if i > 0 { v(0.9em) }
+      signer-entry(s)
+    }
+    #if sig.at("lines", default: ()).len() > 0 {
+      v(0.6em)
+      for l in sig.lines [ #inl(l) \ ]
+    }
+  ])
+}
+
+/// Table of authorities. Each entry carries `find`: a string that appears in every citation of
+/// the authority in the body (e.g. the volume and reporter, "324 Ga. App."). A show rule on that
+/// string drops a marker after each occurrence; the table lists the pages of the markers.
+#let toa-marker(key) = [#metadata(key)<gactapp-toa>]
+
+#let mark-authorities(meta, content) = {
+  let out = content
+  for group in meta.at("authorities", default: ()) {
+    for e in group.entries {
+      if "find" in e {
+        let key = e.find
+        out = {
+          show key: it => it + toa-marker(key)
+          out
+        }
+      }
+    }
+  }
+  out
+}
+
+#let toa-pages(key) = context {
+  let pages = query(<gactapp-toa>)
+    .filter(m => m.value == key)
+    .map(m => counter(page).at(m.location()).first())
+    .dedup()
+  if pages.len() == 0 { [--] } else { pages.map(str).join(", ") }
+}
+
+#let authorities-table(meta) = {
+  heading(level: 1, outlined: true)[Table of Authorities]
+  set par(leading: single-leading, first-line-indent: 0pt, hanging-indent: 1.5em, justify: false)
+  for group in meta.authorities {
+    block(above: 1.2em, below: 0.8em, sticky: true, strong(group.heading))
+    for e in group.entries {
+      block(above: 0.9em, below: 0.9em, breakable: false)[
+        #inl(e.cite) #box(width: 1fr, repeat[.#h(2pt)]) #h(4pt) #if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
+      ]
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -62,86 +138,119 @@
 
 #let gactapp-brief(meta, body) = {
   set document(title: need(meta, "brief_title"))
-  set page(paper: "us-letter", margin: page-margin)
+  // Rule 24 (e): every page numbered sequentially with an Arabic numeral at the bottom; the cover is page 1.
+  set page(paper: "us-letter", margin: page-margin, numbering: "1", number-align: center + bottom)
   set text(font: font-family, size: type-size, lang: "en", hyphenate: false)
-  set par(leading: body-leading, spacing: body-leading, first-line-indent: para-indent, justify: false)
+  set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: false)
   set heading(numbering: none)
 
   // Heading levels in the markdown body: level 1 is a section (centred, capitals, bold);
   // level 2 and 3 are sub-headings (bold, left).
-  show heading.where(level: 1): it => block(above: 1.6em, below: 1.2em, sticky: true)[
+  show heading.where(level: 1): it => block(width: 100%, above: 1.6em, below: 1.2em, sticky: true)[
+    #set text(size: type-size)
     #set par(leading: single-leading, first-line-indent: 0pt)
     #align(center, text(weight: "bold", upper(it.body)))
   ]
-  show heading.where(level: 2): it => block(above: 1.2em, below: 0.8em, sticky: true)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
+  show heading.where(level: 2): it => block(width: 100%, above: 1.2em, below: 0.8em, sticky: true)[
+    #set text(size: type-size)
+    #set par(leading: single-leading, first-line-indent: 0pt, hanging-indent: 0.5in)
     #text(weight: "bold", it.body)
   ]
-  show heading.where(level: 3): it => block(above: 1em, below: 0.8em, sticky: true)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
+  show heading.where(level: 3): it => block(width: 100%, above: 1em, below: 0.8em, sticky: true)[
+    #set text(size: type-size)
+    #set par(leading: single-leading, first-line-indent: 0pt, hanging-indent: 0.5in)
     #text(weight: "bold", style: "italic", it.body)
   ]
 
-  // Block quotations: indented, single-spaced.
+  // Block quotations: indented, single-spaced (Rule 2 (c) (2) exclusion).
   show quote.where(block: true): it => block(inset: (left: 0.5in, right: 0.5in), above: 0.8em, below: 1.2em)[
     #set par(leading: single-leading, first-line-indent: 0pt)
     #it.body
   ]
+  // Footnotes: 14 pt like the text (Rule 2 (c) (3)), single-spaced (Rule 2 (c) (2) exclusion).
+  show footnote.entry: it => {
+    set text(size: type-size)
+    set par(leading: single-leading, first-line-indent: 0pt)
+    mark-authorities(meta, it)  // citations in footnotes count toward the table of authorities
+  }
 
-  // ---- Cover (no page number) ----
-  page(numbering: none)[
+  // ---- Cover ----
+  page[
     #set par(leading: single-leading, first-line-indent: 0pt)
     #align(center)[
       #text(weight: "bold")[IN THE COURT OF APPEALS OF THE STATE OF GEORGIA] \
-      #v(0.4in)
+      #v(0.3in)
       #text(weight: "bold")[Case No. #need(meta, "case_number")]
     ]
-    #v(0.5in)
+    #v(0.3in)
     #caption-side(meta.caption.at(0))
-    #v(0.3in)
+    #v(0.2in)
     #align(center)[v.]
-    #v(0.3in)
+    #v(0.2in)
     #caption-side(meta.caption.at(1))
-    #v(0.5in)
+    #v(0.3in)
     #align(center)[
       #set par(leading: single-leading, first-line-indent: 0pt)
-      #emph(need(meta, "proceeding"))
-      #if "trial_court_case" in meta [ \ #emph("Trial court case no. " + meta.trial_court_case) ]
+      #if "proceeding" in meta { inl(meta.proceeding) }
+      #if "trial_court_case" in meta [ \ #inl(meta.trial_court_case) ]
     ]
     #v(1fr)
     #align(center)[
       #set par(leading: single-leading, first-line-indent: 0pt)
-      #text(weight: "bold", size: 16pt, upper(need(meta, "brief_title")))
+      #text(weight: "bold", size: 16pt, upper(inl(need(meta, "brief_title"))))
     ]
     #v(1fr)
     #{
       set par(leading: single-leading, first-line-indent: 0pt)
-      for g in need(meta, "counsel") { counsel-group(g) }
-      if "phone" in meta [ #meta.phone ]
+      pad(left: sig-indent, {
+        for g in need(meta, "counsel") { counsel-group(g) }
+        if "phone" in meta [ #meta.phone ]
+      })
     }
   ]
 
-  // ---- Table of contents ----
-  page(numbering: "i")[
-    #counter(page).update(1)
-    #set par(leading: single-leading, first-line-indent: 0pt)
-    #align(center, text(weight: "bold")[TABLE OF CONTENTS])
-    #v(0.5em)
-    #outline(title: none, depth: toc-depth, indent: 1.5em)
-  ]
+  // ---- Table of contents (Rule 25 (a) (1)) ----
+  if meta.at("toc", default: true) {
+    page[
+      #set par(leading: single-leading, first-line-indent: 0pt)
+      #align(center, text(weight: "bold")[TABLE OF CONTENTS])
+      #v(0.5em)
+      #show outline.entry: it => block(above: 0.9em, below: 0.9em, it)
+      #outline(title: none, depth: toc-depth, indent: 1.5em)
+    ]
+  }
+
+  // ---- Table of authorities (Rule 25 (a) (1)) ----
+  if "authorities" in meta {
+    page(authorities-table(meta))
+  }
 
   // ---- Body ----
-  set page(numbering: "1", number-align: center + bottom)
-  counter(page).update(1)
-  cmarker.render(body, raw-typst: false, smart-punctuation: true)
+  mark-authorities(meta, cmarker.render(body, raw-typst: false, smart-punctuation: true))
 
-  // ---- Signature block ----
+  // ---- Word-count certification, date, signature block (Rule 24 (f) (1): just above the signature block) ----
   v(0.3in)
   block(width: 100%, breakable: false)[
-    #set par(leading: single-leading, first-line-indent: 0pt)
-    #if "date" in meta [ #meta.date \ ]
-    #v(0.6em)
-    #h(3.2in) /s/ #upper(need(meta, "signature").signer) \
-    #for l in need(meta, "signature").lines [ #h(3.2in) #emph(l) \ ]
+    #par(first-line-indent: (amount: para-indent, all: true))[#word-count-text]
+    #if "date" in meta { par(first-line-indent: (amount: para-indent, all: true), inl(meta.date)) }
+    #v(0.4em)
+    #signature-block(need(meta, "signature"))
   ]
+
+  // ---- Certificate of service (Rules 2 (a), 6) ----
+  if "service" in meta {
+    let svc = meta.service
+    pagebreak(weak: true)
+    heading(level: 1)[Certificate of Service]
+    for p in svc.at("paragraphs", default: ()) { par(inl(p)) }
+    for r in svc.at("recipients", default: ()) {
+      block(above: 1em, below: 1em, breakable: false, pad(left: 1in)[
+        #set par(leading: single-leading, first-line-indent: 0pt, spacing: 0pt)
+        #for l in r [ #inl(l) \ ]
+      ])
+    }
+    if "closing" in svc { par(inl(svc.closing)) }
+    v(0.4em)
+    signature-block(need(meta, "signature"), first-only: svc.at("first_signer_only", default: true))
+  }
 }

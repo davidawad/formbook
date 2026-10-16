@@ -1,9 +1,31 @@
 # Exemplar source: answering-brief, United States Bankruptcy Appellate Panel for the Eighth Circuit (bap8)
 
-**BLOCKED: no exemplar.** No public filed appellee's (answering) brief from this court was found in two passes of searching, so no `FILED-EXAMPLE-*.pdf` is stored here.
+## FILED-EXAMPLE-swackhammer-22-6006-answering-brief.pdf
 
-The Brief of Appellant in BAP No. 11-6012 (*In re Fisette*) is the one public filed BAP brief found; it is the opening-brief exemplar (`../../opening-brief/exemplars/`). Its trustee-appellee brief was searched for and not found (pass 2, row 7-11 below).
+| Field | Value |
+|---|---|
+| Document | Appellees' Brief |
+| Case | *Farm Credit Services of America, PCA v. Steven L. Swackhammer and Michelle M. Swackhammer* (In re Steven L. Swackhammer; Carol Dunbar, Chapter 12 Trustee), on appeal from the U.S. Bankruptcy Court for the Southern District of Iowa |
+| Docket | BAP No. 22-6006 (8th Cir. BAP); CM/ECF Entry ID 5230114 |
+| Filer | Robert C. Gainer, Cutler Law Firm, P.C., West Des Moines, Iowa, for the debtor-appellees |
+| Date filed | 2022-12-23 |
+| URL | <https://storage.courtlistener.com/recap/gov.uscourts.ca8.103874/gov.uscourts.ca8.103874.814659093.0.pdf> (CourtListener RECAP docket 67093634, docket entry "BRIEF FILED - APPELLEE BRIEF ... Length: 3326 words") |
+| Date fetched | 2026-10-16 |
+| Checks | 22 pages, US Letter, text PDF (`pdftotext` yields the full text); Word 2021 with the judiciary's iText stamp "Appellate Case: 22-6006 ... Date Filed: 12/23/2022 Entry ID: 5230114" on every page. Cover reads "In the United States Bankruptcy Appellate Panel for the Eighth Circuit"; certifications cite L.R. BAP 8th Cir. 8014A(b)(1)-(2). Public court record. |
 
+How it was found (pass 4): the CourtListener RECAP search with `court=bap8` is empty (passes 1-3), but the Eighth Circuit's CM/ECF hosts the BAP's dockets, and RECAP files them under court id `ca8` with docket numbers of the form `YY-6NNN`. A full-text RECAP search without a court filter, `"Bankruptcy Appellate Panel" "Eighth Circuit" "Reply Brief"`, returned this entry.
+
+The earlier passes below were run before this route was known.
+
+## Pass 4, 2026-10-16
+
+| # | Tool / query | Result |
+|---|---|---|
+| 1 | WebSearch (extended): justice.gov UST "Bankruptcy Appellate Panel for the Eighth Circuit" brief United States Trustee appellee pdf | BAP opinions (e.g. No. 26-6010) and rules; no UST brief. `justice.gov/ust/appellate-briefs` returns 404. |
+| 2 | CourtListener v4 `type=r`: `"BAP No" "Brief of Appellee" "Eighth Circuit"` | 0 hits. |
+| 3 | CourtListener v4 `type=r`: `"Bankruptcy Appellate Panel" "Eighth Circuit" "Reply Brief"` | 68 hits; among them **ca8 22-6006, APPELLEE BRIEF, available**. Downloaded, checked, kept. |
+| 4 | CourtListener v4 `type=r&court=ca8`: `Swackhammer` | Same docket: the appellee brief is the only RECAP-available brief; the appellant's brief and reply are not in RECAP. |
+| 5 | CourtListener v4 `type=r&court=ca8&available_only=on`: `docketNumber:*-60* AND "APPELLEE BRIEF"`, `docketNumber:*-6* AND brief` | Only three BAP dockets have any available document (22-6006, 25-6003, 26-6021); 22-6006 is the only one with a brief. |
 ## Pass 1, 2026-10-14 (eight searches)
 
 | # | Tool / query | Result |
@@ -56,4 +78,3 @@ Anonymous CourtListener API: 5 requests/min (HTTP 429-style `throttled` body), n
 
 Still not searched: PACER (login); a CourtListener API token (the only route to the bap8 RECAP docket listings, which need one for full docket and document lookups).
 
-If a filer later supplies a public BAP appellee's brief, add it here as `exemplars/FILED-EXAMPLE-<short-case>-<docket>-answering-brief.pdf` with the URL, case name, docket, filer, date filed, and date fetched.

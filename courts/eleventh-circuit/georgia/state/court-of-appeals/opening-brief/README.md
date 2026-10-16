@@ -1,74 +1,68 @@
 # Court of Appeals of Georgia (`gactapp`): appellant's brief (`opening-brief`)
 
-**BLOCKED: no exemplar.** No filed Georgia Court of Appeals appellant's brief was found (searches below). The template and a fictional sample were built from the rules as found; the rule text itself could not be read from a primary source on this box, so every rule-derived value below is provisional.
+Exemplar: **yes** (`exemplars/FILED-EXAMPLE-campbell-v-taylor-A26A1103-opening-brief.pdf`, Appellant's Brief in *Campbell v. Taylor*, No. A26A1103, filed January 26, 2026 by Jody D. Peterman, LLC; source in `exemplars/SOURCE.md`). The sample is a transcription of it.
 
 ## Status of each output
 
 | Item | Result |
 |---|---|
-| `exemplars/` | empty: no real filing found (`exemplars/SOURCE.md`) |
-| `samples/INPUT-fictional-opening-brief.md` | fictional sample, rule-driven, not a transcription |
-| render (`tools/render.sh`) | ok: `samples/OUTPUT-fictional-opening-brief.pdf`, 7 pages, exit 0, zero typst warnings, Liberation Serif embedded (LiberationSerif, -Bold, -Italic, -BoldItalic) |
-| overlay (`tools/overlay.sh`) | fail: no exemplar PDF to overlay (`no exemplar pdf in .../exemplars`, exit 1) |
-| pages reviewed | 7 of 7 (final render, every page viewed at 60 dpi) |
+| `exemplars/` | 1 filed brief, text PDF, 18 pages, court e-filing stamp "Case A26A1103 Filed 01/26/2026" on every page |
+| `samples/INPUT-fictional-opening-brief.md` | transcription of the whole filed brief (cover, table of authorities, all sections, signature, certificate of service). The id still says "fictional": it was kept so the existing docx outputs keep their names (see Engines) |
+| render (`tools/render.sh`) | ok: `samples/OUTPUT-fictional-opening-brief.pdf`, 17 pages, exit 0, zero typst warnings, Liberation Serif (regular, bold, italic, bold italic) embedded |
+| overlay (`tools/overlay.sh`) | ok: `samples/OVERLAY-fictional-opening-brief.pdf` and `.txt` |
+| pages reviewed | 17 of 17 (every page rendered at 60 dpi and looked at), plus the 18 exemplar pages |
 
-The tool's default output name is `OUTPUT-<id>.pdf`, not `<id>.pdf`; the repo's tools read and write those names.
+## Governing rules (primary source, read 2026-10-16)
 
-## Governing rules
+Court of Appeals of Georgia Rules, effective March 26, 2026: `https://www.gaappeals.gov/wp-content/uploads/2026/03/COA-Rules-Complete-Eff-26-March-26.pdf`. gaappeals.gov refuses this box (HTTP 403), so the PDF was read from the Internet Archive copy `https://web.archive.org/web/2026id_/https://www.gaappeals.gov/wp-content/uploads/2026/03/COA-Rules-Complete-Eff-26-March-26.pdf` (53 pages, text PDF). This table replaces the earlier secondhand one; the same rules govern the appellee's brief and the reply brief.
 
-Rule text status: **not verified against the rule itself.** `gaappeals.gov`, `state-rules.com`, `courtrules.net` and `efast.gaappeals.us` all returned HTTP 403, 404 or a JavaScript shell to this box (2026-10-15). The points below come from search-engine summaries of those pages, marked secondhand.
-
-| Requirement | Value in template | Source and status |
+| Requirement | Rule | Template |
 |---|---|---|
-| Typeface | serif, proportional, 14-point or larger | Ga. Ct. App. R. 2(3), as summarized from the gaappeals.gov rules page: "computer-generated documents" must use a serif, proportionally spaced face of 14 pt or larger; Times New Roman and Century Schoolbook are listed as compliant examples; sans-serif allowed in headings and captions; monospaced faces (Courier) excluded. **Secondhand; not read from the rule.** |
-| Rule-named face | Times New Roman and Century Schoolbook are examples, not a single mandated face (per the summary) | If the primary text names one face only, change the substitute. |
-| Substitute | **Liberation Serif** (`docs/FONTS.md`, the Times New Roman row; metric-compatible) | Chosen because the summary's first example is Times New Roman. Century Schoolbook would map to TeX Gyre Schola (not used). |
-| Size | 14 pt body, footnotes not used; headings 14 pt bold | Ga. Ct. App. R. 2(3) (secondhand). |
-| Spacing | body leading 1.1 em (baseline pitch about 2.2 x type size, measured on the render); headings, block quotations and the cover single-spaced (0.45 em) | Older Georgia rule set (2010, secondhand) required double-spacing "including quotations and footnotes". **Conflict:** the template single-spaces block quotations. Open item. |
-| Margins | 1 inch all sides | Convention; not checked against the rule. |
-| Paper | US Letter | Convention. |
-| Length | not enforced | Rule 24 word limit, secondhand: 8,400 words for civil briefs, 14,000 criminal (summaries disagree on the amendment date: Oct 9, 2025 vs 2017). Word-count certification just above the signature block (secondhand). **Not generated.** |
-| Required sections | Table of contents (generated), Statement of Jurisdiction, Enumeration of Errors, Statement of the Case, Statement of Facts, Argument and Citation of Authority, Conclusion | Ga. Ct. App. R. 25 (appellant's brief): secondhand says a 2017 revision lists seven items, four mandatory; the list was not retrieved. The sample uses the heading set above, which matches a 2007 Clerk's seminar paper (Enumeration of Errors as Part II) and is not verified against the current rule. |
-| Rule number | Ga. Ct. App. R. 22 to 25 (brief rules: 22 not found; 23 appellee; 24 form and length; 25 contents) | Index by search summary; Rule 22 text not found. |
+| Letter paper (8 1/2 x 11), searchable PDF | 2 (c) (1), 2 (a) (2) (i) | `paper: "us-letter"`; typst writes text PDFs |
+| No less than double spacing, except block quotations, headings, captions and footnotes | 2 (c) (2) | `body-leading = 1.65em`: baseline pitch 32.3 pt measured on the render, the exemplar measures 32.2 pt (Word "double" at 14 pt). **Changed**: the old 1.1em gave 24.6 pt, below double spacing |
+| Serif, proportionally spaced, 14 pt or larger; Times New Roman and Century Schoolbook named as examples; no monospace; italics or bold only for emphasis | 2 (c) (3) | Liberation Serif 14 pt (Times New Roman substitute, `docs/FONTS.md`); footnotes 14 pt |
+| Margins not less than 1 inch at top, sides, bottom | 24 (c) | 1 in all sides |
+| Pages numbered sequentially with an Arabic numeral at the bottom of each page | 24 (e) | **Changed**: every page Arabic, cover = 1 (was: unnumbered cover, roman contents). The exemplar numbers its cover 1 |
+| 8,400 words civil, 14,000 criminal; certification "This submission does not exceed the word count limit imposed by Rule 24." just above the signature block | 24 (f) (1), (3) | **Added**: the sentence is printed above the signature block (fixed rule text). Word count itself is not computed |
+| Signed; mailing address, phone, e-mail, State Bar number; "/s/" typed name underlined, typed name again below the underline | 2 (a), 2 (a) (2) (ii) | **Changed**: each signer prints underlined "/s/ *Name*", then the name, then its lines |
+| Certificate of service on opposing counsel, method identified; e-mail service needs the prior-agreement certification | 2 (a), 6 (b) (2), 6 (d) | **Added**: `service` frontmatter renders a "Certificate of Service" page with recipients and a signature |
+| Contents: (1) for long briefs a table of contents and of cited authorities with page references; (2) introduction; (3) jurisdictional statement; (4) enumeration of errors; (5) statement of the case; (6) summary of argument; (7) argument with standard of review. Items 3, 4, 5, 7 mandatory | 25 (a) | Body headings come from the markdown; contents generated; **added** an optional generated table of authorities (`authorities` frontmatter) |
+| Citations by case name, volume, page, year of the Official Report | 24 (d) | content, not template |
+| Address of a criminal defendant on the face of the brief | 24 (h) | not applicable to the sample (civil); a criminal brief adds it to `counsel` or the caption |
 
-Date verified: **not verified** (no primary text read). Date of this README: 2026-10-15.
+## Exemplar, overlay page map
 
-## Template
+`samples/OVERLAY-fictional-opening-brief.txt`: ours 1-10 pair with filed 1-10 (cover 90%, contents 74%, authorities 90%, body 44-67%), ours 11-15 with filed 12-15 (our page breaks run about one page ahead: 17 pages against 18), ours 16 with filed 16 (signature, 71%), ours 17 with filed 17 (certificate of service, 66%). Body lines sit on the same pitch (black where they agree in the overlay); the drift is word wrap (Liberation Serif vs. the filer's Times New Roman, and their justified text).
 
-- `typst/main.typ` reads the sample (`--input sample=...`), splits the frontmatter, and calls `gactapp-brief`.
-- `typst/gactapp-opening-brief.typ`: cover (court line, case number, two-sided caption, proceeding line, title, counsel block), table of contents (typst `outline` from level 1 and 2 headings), body (markdown via cmarker), signature block after the body.
-- No case-specific text, no measured coordinates, no forced line breaks, no system fonts. The only fixed text is the court name on the cover, which is the court's name.
+## Gate 2 review (all 17 pages, 60 dpi)
+
+| Page | Content | Finding |
+|---|---|---|
+| 1 | Cover: court, case no., caption, title, counsel | OK. Centred caption (the filer uses a ")" two-column caption: tier 3, not chased) |
+| 2 | Table of contents with leaders and pages | OK |
+| 3 | Table of authorities, Cases and Constitution | OK; pages generated from the body |
+| 4 | Introduction, Jurisdictional Statement, Enumeration of Errors, Statement of the Case | OK. Headings 14 pt bold caps centred |
+| 5-6 | Statement of the case, deposition Q/A as a single-spaced block quote | OK |
+| 7-14 | Argument, sub-headings A, B, 1 | OK; double spaced, 0.5 in indents |
+| 15 | Conclusion | OK; the rest of the page is empty because the certification and signature are kept together (ACCEPTED) |
+| 16 | Word-count certification, date, firm, three signers, address | OK |
+| 17 | Certificate of service | OK |
+
+## What changed (template `typst/gactapp-opening-brief.typ`)
+
+Double spacing (Rule 2 (c) (2)); Arabic numbering on every page (24 (e)); fixed Rule 24 certification above the signature (24 (f) (1)); conformed underlined signatures, several signers (2 (a) (2) (ii)); certificate of service (6); generated table of authorities (25 (a) (1)); headings forced to 14 pt and full width (they rendered at typst's default heading size and left-aligned before); first-line indent on every paragraph, as filed; footnotes 14 pt single spaced; `proceeding` now optional.
 
 ## Markdown contract
 
-Frontmatter: `case_number`, `caption` (two sides: `names`, `designation`), `proceeding`, `trial_court_case` (optional), `brief_title`, `counsel` (groups with `names` and `lines`), `phone`, `signature` (`signer`, `lines`), `date` (optional). Body: `#` level 1 is a section (centred, capitals, bold); `##` and `###` are sub-headings. Block quotations with `>`. Escape a leading `1.`, `-`, `#` in text with a backslash.
+Frontmatter: `case_number`; `caption` (two sides: `names`, `designation`); `proceeding` and `trial_court_case` (optional, centred under the caption); `brief_title`; `counsel` (groups: `names` bold, `lines`); `phone` (optional); `signature` (`firm` optional, `signers` list of `name` + `lines`, or the older single `signer`; `lines` printed after the signers); `date` (a full sentence printed after the certification, e.g. "Respectfully submitted this ..."); `toc` (default true); `authorities` (groups: `heading`, `entries` of `cite` and `find`: a string present in every citation of that authority, e.g. "324 Ga. App.", whose occurrences give the page numbers); `service` (`paragraphs`, `recipients` list of line lists, `closing`, `first_signer_only` default true). Body: `#` section heading (centred caps bold), `##` and `###` sub-headings; `>` block quotations; `[^n]` footnotes. Escape `[X]:` at a line start (`\[X\]:`), or markdown reads it as a link definition.
 
 ## Known gaps
 
-1. Rule text unverified (see above). The face, size and spacing are the reading of a secondhand summary.
-2. No exemplar. The sample is invented; its length (7 pages: cover, contents, 5 body) is below the 8-14 page target, which cannot be checked without a real filing's length.
-3. Not generated: table of citations, certificate of word count, certificate of service, word limit check.
-4. The signature block is kept with the body by `block(breakable: false)` only. If the Conclusion falls at the foot of a page the signature can start a new page alone. The fictional sample was trimmed to avoid it; a real brief may not be.
-5. Block quotations are single-spaced (conflict with the 2010 summary: see Spacing).
-6. Paragraphs after the first in an escaped numbered list are indented (typst indents paragraphs that follow paragraphs). Not checked against a filing.
-7. Contents entries are set tightly, with no spacing between them.
-
-## Searches tried (2026-10-15)
-
-- Official rules: gaappeals.gov `?p=1073`, `?p=3817`, the 2025 consolidated rules PDF (`COA-Rules-Complete-Eff-9-Oct-2025.pdf`): all HTTP 403 to WebFetch and curl.
-- state-rules.com Georgia appellate rules 22-25: JavaScript shell, no rule text.
-- courtrules.net Georgia Court of Appeals page: HTTP 403.
-- efast.gaappeals.us 2009 and 2010 court rule PDFs: HTTP 404 / blocked.
-- Web search (standard and extended): typeface, Rule 24, Rules 22/23/25. Snippets only; one source for Rule 2(3).
-- Exemplar: CourtListener REST search for "Court of Appeals of Georgia" with "brief of appellant": 10 results, none a Georgia Court of Appeals brief (N.D. Ga., S.D. Ga., M.D. Ga., 11th Cir., D. Del., etc.). Web search for public Georgia Court of Appeals brief PDFs: only efast seminar papers and a 2025 clerk's order.
+1. Word count is not computed or checked against 8,400 / 14,000 words.
+2. Case names are italic, not underlined as in this exemplar (Rule 2 (c) (3) allows either).
+3. A `find` string that appears in another authority's citation would over-count pages; choose volume + reporter strings.
+4. docx outputs are stale (below).
 
 ## Engines
 
-docx (`docx/`: `reference.docx` from `make-reference.sh`, `gactapp-brief.lua`, `render.sh`; LibreOffice PDF is the checked copy).
-
-- Matches the typst form: Liberation Serif 14 pt throughout; 1-inch margins, Letter; body double-spaced (Word "double"); half-inch first-line indent, none after headings; headings centred caps (level 1), bold (level 2), bold italic (level 3); block quotations indented both sides and single-spaced; cover with no page number; contents on a lower-roman page; body numbered from 1 at the bottom centre; signature block at 3.2 in.
-- Contents is a TOC field with cached entries; page numbers come from a first LibreOffice pass (`docx/render.sh`), so Word may show a different page after updating fields.
-- Differs: the typst body leading measures about 24.6 pt (pitch of the render), below true double spacing (about 32 pt for this face). The docx uses true double spacing, so it runs longer (opening brief: typst 7 pages, docx 9). This is a typst finding for the typst template, not changed here.
-- Footnotes: the typst brief template sets no footnote rule; the docx uses 14 pt single-spaced footnotes (the form's stated 14 pt). No sample has footnotes.
-- BLOCKED: none for this doc type. `sh tools/check.sh --engine docx` was not run (no gate run in this bead; the .docx.pdf is rendered and every page was viewed at 60 dpi).
-- Opened and rendered with LibreOffice only; not opened in Word.
+docx (`docx/`: `reference.docx`, `gactapp-brief.lua`, `render.sh`). **Not regenerated in this pass**: this box has no LibreOffice (`soffice`), so `OUTPUT-fictional-opening-brief.docx` and `.docx.pdf` are still renders of the earlier synthetic sample, and the docx form still has the old numbering (unnumbered cover, roman contents), no Rule 24 certification and no certificate of service. These are open docx items (`BLOCKED` until rerun with `soffice`): Rule 24 (e) numbering, Rule 24 (f) (1) certification, Rule 6 certificate, the new frontmatter keys (`signature.signers`, `authorities`, `service`). latex: none in this court.

@@ -1,15 +1,17 @@
 # Exemplar source: opening-brief (appellant's brief), gactapp
 
-**Status: BLOCKED: no exemplar.** No filed Georgia Court of Appeals appellant's brief was found.
-
 | Field | Value |
 |---|---|
-| URL fetched from | none: no candidate found |
-| Case name, docket no., filer, date filed | none |
-| Date fetched | 2026-10-15 (searches only) |
+| File | `FILED-EXAMPLE-campbell-v-taylor-A26A1103-opening-brief.pdf` (18 pages, text PDF, Foxit; Times New Roman) |
+| Original URL | https://www.gaappeals.gov/wp-content/uploads/2026/04/A26A1103-BRIEF-OF-APPELLANT-NT.pdf (the court's own posting of briefs in argued cases) |
+| Fetched from | https://web.archive.org/web/2026id_/https://www.gaappeals.gov/wp-content/uploads/2026/04/A26A1103-BRIEF-OF-APPELLANT-NT.pdf (Internet Archive copy; gaappeals.gov returns HTTP 403 to this box) |
+| Case | Doris Campbell v. Clinton Taylor and Kaye E. Smith, as Administrator of the Estate of Susan Taylor |
+| Docket | Court of Appeals of Georgia No. A26A1103 (from the Superior Court of Lowndes County, No. 2024CV0039) |
+| Document | Appellant's Brief |
+| Filer | Jody D. Peterman, T. Michael Burke, Jr., Stephen D. Delk (Jody D. Peterman, LLC, Valdosta), counsel for Appellant |
+| Date filed | January 26, 2026 (court e-filing stamp "Case A26A1103 Filed 01/26/2026" on every page) |
+| Date fetched | 2026-10-16 |
 
-## Searches tried
+Verified: `pdftotext` yields the full text; `pdfinfo` 18 pages; the court stamp and caption identify a Court of Appeals of Georgia filing of this doc type.
 
-- CourtListener REST search (`/api/rest/v4/search/`), "Court of Appeals of Georgia" with "brief of appellant": 10 results, none a Georgia Court of Appeals brief.
-- Web search for public Georgia Court of Appeals appellant's briefs (PDF): only efast.gaappeals.us seminar papers (2002, 2007) and a 2025 clerk's order (Murray v. State, A25I0225), no briefs.
-- gaappeals.gov and efast.gaappeals.us: blocked from this box (HTTP 403 / 404).
+How it was found: web search for "Court of Appeals of Georgia" brief of appellant PDF returned gaappeals.gov `wp-content/uploads/<yyyy>/<mm>/<docket>-BRIEF-OF-APPELLANT-NT.pdf` files; the Wayback CDX API (`/cdx/search/cdx?url=gaappeals.gov/wp-content/uploads/&matchType=prefix&filter=mimetype:application/pdf`) lists about 50 archived appellant, appellee and reply briefs from 2022-2026. Earlier failed searches (2026-10-15) tried CourtListener and direct gaappeals.gov fetches only.

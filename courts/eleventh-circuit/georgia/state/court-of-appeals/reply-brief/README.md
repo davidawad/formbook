@@ -1,52 +1,41 @@
 # Court of Appeals of Georgia (`gactapp`): reply brief (`reply-brief`)
 
-**BLOCKED: no exemplar.** No filed Georgia Court of Appeals reply brief was found (searches as in `../opening-brief/README.md` and `exemplars/SOURCE.md`). The template and a fictional sample were built from the rules as found; the rule text was not read from a primary source (see Governing rules).
+Exemplar: **yes** (`exemplars/FILED-EXAMPLE-chapman-v-marta-A26A2158-reply-brief.pdf`, Appellant's Reply Brief in *Chapman v. Metropolitan Atlanta Rapid Transit Authority*, No. A26A2158, filed August 3, 2026 by Keith Foster (The Foster Firm, LLC) and Ralph Goldberg (Goldberg & Cuvillier, P.C.); source in `exemplars/SOURCE.md`). A third filer, different from the opening- and answering-brief exemplars. The sample transcribes the whole brief.
 
 ## Status of each output
 
 | Item | Result |
 |---|---|
-| `exemplars/` | empty: no real filing found (`exemplars/SOURCE.md`) |
-| `samples/INPUT-fictional-reply-brief.md` | fictional sample, rule-driven, not a transcription |
-| render (`tools/render.sh`) | ok: `samples/OUTPUT-fictional-reply-brief.pdf`, 4 pages, exit 0, zero typst warnings, Liberation Serif embedded |
-| overlay (`tools/overlay.sh`) | fail: no exemplar PDF to overlay (exit 1) |
-| pages reviewed | 4 of 4 (final render, every page viewed at 60 dpi) |
+| `exemplars/` | 1 filed brief, text PDF, 10 pages, court e-filing stamp on every page |
+| `samples/INPUT-fictional-reply-brief.md` | transcription: cover, table of cited authorities (cases and other authority), argument III with the nested *Graves*/*Garner* quotation, conclusion, both footnotes, certificate of service. Id kept for the existing docx outputs |
+| render | ok: `samples/OUTPUT-fictional-reply-brief.pdf`, 9 pages, exit 0, no warnings, Liberation Serif embedded |
+| overlay | ok: `samples/OVERLAY-fictional-reply-brief.pdf` / `.txt` |
+| pages reviewed | 9 of 9 at 60 dpi, plus the 10 exemplar pages |
 
 ## Governing rules
 
-Rule text status: **not verified against the rule itself**; see `../opening-brief/README.md` for the failed primary-source fetches.
+Same as `../opening-brief/README.md`. Specific: Rule 24 (a): one reply brief as of right; Rule 24 (f) (1): reply briefs limited to 4,200 words, with the Rule 24 certification above the signature block; Rule 25 (c): a reply need only contain the argument (item 7); contents and authorities tables (items 1, 2) encouraged for long replies. The filer prints the certification on its own page headed "Rule 24 Certification" and does not sign the brief body; our template keeps the certification immediately above a signature block as Rule 24 (f) (1) says.
 
-| Requirement | Value in template | Source and status |
-|---|---|---|
-| Typeface | serif, proportional, 14-point or larger | Ga. Ct. App. R. 2(3) (secondhand). |
-| Substitute | **Liberation Serif** (`docs/FONTS.md`, Times New Roman row) | Same choice as the other two doc types. |
-| Spacing | as opening brief | Older rule set (2010, secondhand) required double-spacing including quotations. Open item. |
-| Margins, paper | 1 inch; US Letter | Convention. |
-| Length | not enforced | Reply limit, secondhand: 4,200 words or 15 pages for reply briefs (2017 notice). The same summaries give 8,400 words for civil briefs as amended Oct 9, 2025; the reply figure is **not verified** for the current rule. |
-| Required sections | Table of contents (generated); Argument and Citation of Authority; Conclusion | Ga. Ct. App. R. 25 (reply brief, secondhand: 2017 revision lists required and optional elements): **text not retrieved.** The heading set is a guess and must be checked against the rule. |
-| Rule number | Ga. Ct. App. R. 25 (reply) | Index by search summary; not verified. |
+## Overlay page map
 
-Date verified: **not verified**. Date of this README: 2026-10-15.
+Ours 1-3 with filed 1-3 (cover 91%, contents 78%, authorities 64%: the filer's table runs to two pages), ours 4-6 with filed 5-7 (68-89%), ours 7-8 with filed 8 (conclusion and footnote 2), ours 9 with filed 10 (certificate of service, 91%).
 
-## Known gaps
+## Gate 2 review (9 of 9 pages)
 
-1. Rule text unverified; the reply brief's required sections and word limit are unverified.
-2. No exemplar. The sample is invented and short by design (a reply is short); the 8-14 page target does not apply to it without an exemplar.
-3. Not generated: word-count certificate, certificate of service, table of citations.
-4. The signature may fall alone onto a new page (see opening brief, gap 4).
-5. Block quotations are single-spaced (conflict with the 2010 summary).
+| Page | Finding |
+|---|---|
+| 1 | Cover with both counsel groups. OK |
+| 2 | Contents. OK |
+| 3 | Table of authorities, A. Cases / B. Other Authority, pages generated. OK. Fixed in review: authorities cited only in footnote 1 (*Durham*, *Hunter*, *Wallace*, *Zayac*) showed "--" because footnote entries were outside the marking rule; the template now marks footnotes too |
+| 4 | Argument heading, long point heading III (single spaced, bold), nested block quotation. OK |
+| 5-7 | Quotations single spaced, text double spaced. OK |
+| 8 | Conclusion with footnote 2, Rule 24 certification, two signers. OK |
+| 9 | Certificate of service with both signers (`first_signer_only: false`, as filed). OK |
 
-## Template and markdown contract
+## What changed
 
-Same as `../opening-brief/`: `typst/main.typ` calls `gactapp-brief` from `typst/gactapp-reply-brief.typ`; frontmatter and body conventions are as in `../opening-brief/README.md`. The sample's cover title is "Reply Brief of Appellant".
+Template: shared with the opening brief (`typst/gactapp-reply-brief.typ` is the same file renamed); see `../opening-brief/README.md`. Sample replaced by the transcription.
 
-## Engines
+## Gaps
 
-docx (`docx/`: `reference.docx` from `make-reference.sh`, `gactapp-brief.lua`, `render.sh`; LibreOffice PDF is the checked copy).
-
-- Matches the typst form: Liberation Serif 14 pt throughout; 1-inch margins, Letter; body double-spaced (Word "double"); half-inch first-line indent, none after headings; headings centred caps (level 1), bold (level 2), bold italic (level 3); block quotations indented both sides and single-spaced; cover with no page number; contents on a lower-roman page; body numbered from 1 at the bottom centre; signature block at 3.2 in.
-- Contents is a TOC field with cached entries; page numbers come from a first LibreOffice pass (`docx/render.sh`), so Word may show a different page after updating fields.
-- Differs: the typst body leading measures about 24.6 pt (pitch of the render), below true double spacing (about 32 pt for this face). The docx uses true double spacing, so it runs longer (opening brief: typst 7 pages, docx 9). This is a typst finding for the typst template, not changed here.
-- Footnotes: the typst brief template sets no footnote rule; the docx uses 14 pt single-spaced footnotes (the form's stated 14 pt). No sample has footnotes.
-- BLOCKED: none for this doc type. `sh tools/check.sh --engine docx` was not run (no gate run in this bead; the .docx.pdf is rendered and every page was viewed at 60 dpi).
-- Opened and rendered with LibreOffice only; not opened in Word.
+Word count (4,200) not computed. The filer underlines case names; ours are italic (Rule 2 (c) (3) allows both). docx outputs stale (no `soffice`), same open items as the opening brief.
