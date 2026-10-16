@@ -1,15 +1,15 @@
-# Exemplar source: answering-brief (appellee's brief), gactapp
-
-**Status: BLOCKED: no exemplar.** No filed Georgia Court of Appeals appellee's brief was found.
+# Exemplar source: answering-brief (Brief of Appellee), gactapp
 
 | Field | Value |
 |---|---|
-| URL fetched from | none: no candidate found |
-| Case name, docket no., filer, date filed | none |
-| Date fetched | 2026-10-15 (searches only) |
+| File | `FILED-EXAMPLE-campbell-v-taylor-A26A1103-answering-brief.pdf` (11 pages, text PDF, Word for Microsoft 365; Century Schoolbook) |
+| Original URL | https://www.gaappeals.gov/wp-content/uploads/2026/04/A26A1103-BRIEF-OF-APPELLEE-EE.pdf |
+| Fetched from | https://web.archive.org/web/2026id_/https://www.gaappeals.gov/wp-content/uploads/2026/04/A26A1103-BRIEF-OF-APPELLEE-EE.pdf (Internet Archive copy; gaappeals.gov returns HTTP 403 to this box) |
+| Case | Doris Campbell v. Kaye Smith, as the Administrator of the Estate of Susan Taylor |
+| Docket | Court of Appeals of Georgia No. A26A1103 (from the Superior Court of Lowndes County, No. 2024CV0039) |
+| Document | Brief of Appellee |
+| Filer | Austin Atkinson, M. Blake Walker, Morgan McClure (Hall Booth Smith, P.C., Atlanta), counsel for Appellee |
+| Date filed | March 11, 2026 (court e-filing stamp on every page) |
+| Date fetched | 2026-10-16 |
 
-## Searches tried
-
-- CourtListener REST search (`/api/rest/v4/search/`), "Court of Appeals of Georgia" with "brief of appellant": 10 results, none a Georgia Court of Appeals brief.
-- Web search for public Georgia Court of Appeals appellant's briefs (PDF): only efast.gaappeals.us seminar papers (2002, 2007) and a 2025 clerk's order (Murray v. State, A25I0225), no briefs.
-- gaappeals.gov and efast.gaappeals.us: blocked from this box (HTTP 403 / 404).
+Verified: `pdftotext` yields the full text; `pdfinfo` 11 pages; court stamp and caption confirm the court and doc type. Found through the gaappeals.gov brief postings and the Wayback CDX listing (see `../../opening-brief/exemplars/SOURCE.md`).

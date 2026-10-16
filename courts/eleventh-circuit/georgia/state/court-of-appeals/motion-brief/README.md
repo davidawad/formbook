@@ -1,90 +1,61 @@
 # Georgia Court of Appeals (gactapp): motion-brief
 
-Doc type: **motion** (a filed motion with its supporting argument). Court: Court of Appeals of the State of Georgia. Folder: `courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief/`.
+Doc type: any motion filed in the Court of Appeals (Rule 41; emergency motions Rule 40 (b)). Exemplar: **yes** (`exemplars/FILED-EXAMPLE-state-v-dpg-2022CV372734-motion-brief.pdf`, the State of Georgia's Emergency Motion for Supersedeas in *State of Georgia v. Democratic Party of Georgia, Inc., DSCC, and Warnock for Georgia*, filed November 21, 2022 by the Office of the Attorney General and Robbins Alloy Belinfante Littlefield, LLC). The Court of Appeals number is blank ("No. ____") on the filed cover, as emergency motions are filed before docketing; the file name uses the trial-court number (Fulton Superior Court 2022-CV-372734). Source: `exemplars/SOURCE.md`. Nothing here sets a `court.json` status.
 
-BLOCKED: no exemplar. No filed motion of this type from this court could be downloaded (searches and reasons in `exemplars/SOURCE.md`). The sample is synthetic and written from the rules.
+## Status
 
-Status: exemplar=no, render=ok, overlay=fail (no exemplar PDF to overlay against), pages reviewed 4 of 4 (rendered at 60 dpi and looked at). Nothing here sets a `court.json` status.
+| Item | Result |
+|---|---|
+| `exemplars/` | 1 filed motion, text PDF, 29 pages (Century Schoolbook; Democracy Docket's diagonal "retrieved from" watermark is in the text layer, so `pdftotext` shows stray letters) |
+| `samples/INPUT-motion-sample.md` | transcription of filed pages i-11 and 19-24: cover, tables, Introduction, Jurisdiction, Background, Argument I.A, II, Conclusion, signature, certificate of service. Argument I.B (filed pages 12-19) is omitted. Id kept for the existing docx outputs |
+| render | ok: `samples/OUTPUT-motion-sample.pdf`, 15 pages, exit 0, no warnings, Liberation Serif embedded |
+| overlay | ok: `samples/OVERLAY-motion-sample.pdf` / `.txt` |
+| pages reviewed | 15 of 15 at 60 dpi, plus the 29 exemplar pages |
 
-## Governing rules
+## Governing rules (primary source, read 2026-10-16)
 
-The rule text could not be read from the official source on this box. The official rules PDF (`https://www.gaappeals.gov/wp-content/uploads/2026/03/COA-Rules-Complete-Eff-9-Oct-2025.pdf`, "Eff 9 Oct 2025") and the gaappeals.us and state-rules.com copies all returned HTTP 403, so each row below is marked by how well it is supported. Nothing below is quoted from the official text.
+Court of Appeals of Georgia Rules, effective March 26, 2026, `https://www.gaappeals.gov/wp-content/uploads/2026/03/COA-Rules-Complete-Eff-26-March-26.pdf`, read from the Internet Archive copy (gaappeals.gov returns 403 here). Supersedes the secondhand GACA-* table of the previous README.
 
-| ID | Rule (as cited) | Requirement | Verified? | Where it lives |
-|---|---|---|---|---|
-| GACA-FORM-001 | Ga. Ct. App. R. 24 (as cited by the court's checklist) | Letter paper, 8½ × 11 in. | Not verified; standard paper size assumed | `typst/gactapp-motion-brief.typ` (`paper`) |
-| GACA-FORM-002 | Ga. Ct. App. R. 24 (the checklist cites Rule 2(c)(2)) | Typeface: Times New Roman, regular, 14 pt, for printed or e-filed documents. Alternative for typed documents: no smaller than 10 characters per inch. | Secondary only: a WebSearch summary of the court's own checklist (gaappeals.us, sources not fetched). Rule number conflicts across sources. **Needs checking against the official text.** | `font-family`, `type-size` |
-| GACA-FORM-003 | Ga. Ct. App. R. 24 (checklist cites Rule 2(c)(1)) | Double spacing, excluding quotations and footnotes. | Secondary only (same checklist). | `body-leading` (line pitch 32.2 pt, measured) |
-| GACA-FORM-004 | Not found | Margins. Template uses 1 in on all sides. | Not from a rule. Style assumption. | `margins` |
-| GACA-FORM-005 | Ga. Ct. App. R. 24(c) (checklist) | Arabic page numbers at the bottom of each page. | Secondary only. | `numbering: "1"`, centred footer |
-| GACA-CONT-001 | Not verified | Body structure: statement of the case, argument with citation of authority, conclusion. | Convention, not a rule citation. The sample uses these headings. | body (markdown `#` and `##` headings) |
-| GACA-CERT-001 | Ga. Ct. App. R. 37 (as summarised by two third-party sites) | Motions for reconsideration are prepared under Rule 24 and limited to 4,200 words, with a word-count certificate above the signature block. | Secondary only. | `word-count-certificate` (only when frontmatter has `word_count`) |
-| GACA-SIG-001 | Not verified | Signature block: firm, attorney, Georgia Bar number, address, telephone, email. | Convention. | `signature-block` |
-| GACA-CERT-002 | Not verified (e-filing certificate of service is customary) | Certificate of service on opposing counsel, with the method of service. | Convention. | `certificate-of-service` |
-| GACA-LIMIT-001 | Ga. Ct. App. R. 24 (checklist: 30 pages paper / 8,400 words e-filed for civil briefs) | Length limit for briefs. | Secondary only. Not enforced: the template has no page or word counter. | not enforced |
-
-Rule 37's 10-day deadline and its grounds (subsection (e)) are secondary-only and do not apply to a motion-brief; they are recorded in the rehearing folder's README.
-
-## The typeface
-
-- **Court-named face:** Times New Roman (per the court's checklist, see GACA-FORM-002).
-- **Substitute:** Liberation Serif (`fonts/liberation-serif/`, SIL OFL 1.1), per `docs/FONTS.md`. Metric-compatible with Times New Roman.
-- **Not used:** EB Garamond. The rule names a face, so the substitute above applies (`docs/FONTS.md`, rule 3).
-- **Size:** 14 pt, footnotes included (footnote text is set at `type-size`). Headings are bold at the same size.
-
-## Sample
-
-- `samples/INPUT-motion-sample.md`: a synthetic motion (Appellee's motion to dismiss an appeal as untimely). Frontmatter carries the court, case number, caption, title, signature, service and word count. Body: a statement of the case, an argument in three parts with sub-parts, and a conclusion. Names, numbers and dates are invented. Statutory citations (O.C.G.A. §§ 5-6-38(a) and 9-15-14) are given as illustrations and have not been checked against the code.
-- The sample is 4 pages. The eval-loop target is 8 to 14 pages when the exemplar is that long, but there is no exemplar to size against, so the sample was not padded to reach it.
-- The sample's frontmatter has a `synthetic:` field stating it is not a transcription. Templates ignore unknown fields.
-
-## Render and overlay
-
-```sh
-export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief samples/INPUT-motion-sample.md
-sh tools/overlay.sh courts/eleventh-circuit/georgia/state/court-of-appeals/motion-brief motion-sample
-```
-
-- `samples/OUTPUT-motion-sample.pdf`: 4 pages. Typst compiled with no warnings (`render.sh` treats any warning as a failure). `pdffonts`: LiberationSerif-Bold and LiberationSerif, both embedded.
-- Output name: `tools/render.sh` and `tools/overlay.sh` name files `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`; the brief's `<id>.pdf` naming was not used, so the existing tools work unchanged.
-- Overlay: **fails**. `tools/overlay.sh` exits 1 with "no exemplar pdf in .../exemplars", because `exemplars/` has no PDF. No `OVERLAY-motion-sample.pdf` or `.txt` was written.
-
-## Visual review (Gate 2 record, all 4 pages, rendered at 60 dpi and looked at)
-
-| Page | What it is | Finding |
+| Requirement | Rule | Template |
 |---|---|---|
-| 1 | Cover: court title, caption (left party block, right case number and lower-court number), title, opening paragraph, "Statement of the Case" begins | OK after fixes. The first render had body paragraphs overlapping one another (see Fixes). |
-| 2 | Argument, sections I, A, B | OK. Headings bold at 14 pt; paragraphs have first-line indent; double spacing even. |
-| 3 | Argument II, III; Conclusion | OK. |
-| 4 | Certificate of word count, signature block (right-hand column), certificate of service | OK. Signature block sits in the right half. Word-count certificate sits above the signature, as the rule summary describes. |
+| Motions are separate documents, prepared in accordance with Rule 24; e-filed motions limited to 4,200 words "as certified by the filer"; no attachments (except Rule 40 (b) emergency motions) | 41 (b) | form below; word count not computed |
+| Letter paper; double spacing except block quotations, headings, captions, footnotes; serif proportional 14 pt+ (Times New Roman, Century Schoolbook named) | 2 (c) (1)-(3) | Liberation Serif 14 pt; `body-leading 1.65em` (32.3 pt pitch, measured) |
+| Margins 1 in; pages numbered with Arabic numerals at the bottom | 24 (c), (e) | 1 in; every page Arabic, cover = 1 (the exemplar uses roman numerals for its front matter; the rule says Arabic) |
+| Certification "This submission does not exceed the word count limit imposed by Rule 24." just above the signature block | 24 (f) (1) | **Changed**: the old template printed its own "I certify that this motion contains N words" certificate, which is not the rule's wording. Now the fixed sentence; `word_count` is accepted and ignored |
+| Signature with "/s/" typed name underlined, name below; bar number, address, phone, e-mail | 2 (a), 2 (a) (2) (ii) | **Changed**: `signer_line` underlined, optional `signature.name` printed below it |
+| Certificate of service, method identified; e-mail prior-agreement certification | 6 (b) (2), 6 (d) | `service.paragraphs` / `recipients` (new, optional) or the generated sentence |
+| Emergency motion content (necessity, filed order, notice of appeal) | 40 (b) | content, not template |
 
-Reviewed pages: 4 of 4.
+## Overlay page map
 
-## Fixes made during review
+Ours 1-3 with filed i-iii (cover 94%, contents 78%, authorities 59%), ours 4-11 with filed 1-10 (50-89%), ours 12-14 with filed 19-23 (argument II and conclusion, 47-58%), ours 15 with filed 25 (certificate, 75%).
 
-1. **Overlapping lines at paragraph breaks.** `set par(spacing: 0pt)` caused the first line of a new paragraph to sit on top of the last line of the previous one. Removed; the paragraph break now has no extra gap and the first-line indent marks the new paragraph.
-2. **Double spacing.** First leading (0.85 em) gave about 16 pt line pitch, which is single spacing. Measured with `pdftotext -bbox-layout`, pitch is now 32.2 pt, double spacing at 14 pt.
-3. **Heading size.** Level-1 and level-2 headings were rendered at the default heading size. Now set to `type-size`.
-4. **Signature block.** Was right-aligned with the signer's name repeated. Now placed in the right half with the name only once (the name was removed from the sample's `signature.signer` list).
-5. **Service certificate.** "on 15th day of October" changed to "on October 15, 2026," (the service `date` field now holds the date form).
+## Gate 2 review (15 of 15 pages)
 
-## Known gaps and open choices
+| Page | Finding |
+|---|---|
+| 1 | Cover: court, "Case No. ____", caption with roles, lower court, title, two counsel groups. OK |
+| 2 | Table of contents (`toc: true`). OK |
+| 3 | Table of authorities: Cases, Statutes, Constitutional Provisions, generated pages. OK |
+| 4-6 | Introduction with footnotes 1-2 (14 pt, single spaced). OK |
+| 6-9 | Jurisdiction, Background (bullet list), footnote 3. OK |
+| 9-12 | Argument, headings I, A (bold italic), II. OK |
+| 13-14 | Conclusion, Rule 24 certification, date line, underlined /s/ signature. OK |
+| 15 | Certificate of service with three recipient groups; signature: /s/ line, name, bar number. OK |
 
-1. **Rule text unverified.** Every GACA-* requirement is from a secondary source; the official rules could not be read. **Needs David's check** against the current published rules (`COA-Rules-Complete-Eff-9-Oct-2025.pdf`) before the template is treated as complete. The rule-number conflict (Rule 2(c) against Rule 24) is open.
-2. **Exemplar.** None. Tier 2 conventions cannot be judged against filed examples. `BLOCKED: no exemplar`.
-3. **Level-1 headings** are left-aligned, bold, upper case. Many briefs centre them; the choice here is not from a rule.
-4. **No table of contents or table of authorities.** Not generated. Whether this court requires them for a motion is not verified.
-5. **No length counter.** The word-count certificate is written from the frontmatter `word_count` field, not counted by the template.
-6. **Margins** (1 in) are an assumption (GACA-FORM-004).
-7. **Footnotes** are supported by cmarker but the sample has none; footnote size follows `type-size`, not separately checked.
+Fixed in review: signature block width (`100% - 3.25in` inside a padded block collapsed to a one-word column); case number with markdown escapes printed backslashes (the cover prints `case_number` as plain text); the certificate's signature repeated every counsel line and broke across pages (now /s/ line, name and first line, unbreakable).
 
-## Engines
+## What changed (template `typst/gactapp-motion-brief.typ`)
 
-docx (`docx/`: `reference.docx` from `make-reference.sh`, `gactapp-motion.lua`, `render.sh`; LibreOffice PDF is the checked copy).
+Separate cover page by default (`cover_page`, default true; both filed exemplars of this court's motions, this one and the Sierra Club reconsideration motion, use one), centred caption, optional `counsel` on the cover; optional `toc` and generated `authorities`; rule wording of the Rule 24 certification; underlined conformed signature; certificate of service from `paragraphs` / `recipients` / `closing`; headings forced to 14 pt; first-line indent on every paragraph; footnotes 14 pt single spaced and counted in the table of authorities.
 
-- Matches the typst form: Liberation Serif 14 pt throughout; 1-inch margins, Letter; body double-spaced; half-inch first-line indent; cover with the court line, a two-column caption with a vertical rule, and the title centred; the body starts on the cover page, as in the typst form; every page numbered from 1 at the bottom centre; certificate of word count, signature block (3.25 in indent) and certificate of service follow the body.
-- Differs: the typst motion template's double spacing is about 32 pt pitch and the docx uses Word's "double" (about 32 pt), so the line pitch matches; word wrapping and the signature-block spacing differ slightly. The docx runs one page longer (motion: typst 4, docx 5). The certificate of service heading is kept with its paragraph.
-- Petition for rehearing (same form): the counsel address and signature spill to a new page in the docx sample (page 6), where the typst sample fits on 5 pages.
-- BLOCKED: none for this doc type. `sh tools/check.sh --engine docx` was not run (no gate run in this bead; the .docx.pdf is rendered and every page was viewed at 60 dpi).
-- Opened and rendered with LibreOffice only; not opened in Word.
+## Markdown contract
+
+`court`, `case_number`, `lower_court_case` (optional), `parties` (list of `name`, `role`; a `v.` entry with empty role), `title`, `counsel` (optional cover groups), `cover_page`, `toc`, `authorities` (as the briefs: `heading`, `entries` of `cite`, `find`), `signature` (`date`, `lines` printed above the /s/ line, `signer_line`, `name`, `signer` lines), `service` (`date`, `doc_type`, `served_on`, `method`, `address` for the generated sentence; or `paragraphs`, `recipients`, `closing`), `word_count` (ignored).
+
+## Gaps
+
+1. Word count not computed or checked against 4,200.
+2. The exemplar's counsel are set in two columns on the cover and signature page; ours stack them (tier 3).
+3. Only one conformed signature is underlined; extra signers in `signer` lines are plain text.
+4. docx: **not regenerated** (no `soffice` on this box). `OUTPUT-motion-sample.docx` / `.docx.pdf` are renders of the old synthetic sample and the docx form still prints the old word-count certificate and starts the body on the cover. Open docx items: Rule 24 (f) (1) wording, underlined signature, cover page, `toc` / `authorities`, `service.paragraphs`.
