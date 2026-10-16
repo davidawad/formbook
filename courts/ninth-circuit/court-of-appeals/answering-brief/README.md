@@ -3,8 +3,8 @@
 - Court: `ca9`, Court of Appeals for the Ninth Circuit (`courts/ninth-circuit/court-of-appeals/`)
 - Doc type: `answering-brief`. One self-contained folder: its own template, exemplar and sample. It does not touch the court-root `typst/`, `samples/` or `rules.md`, which hold the opening brief.
 - Exemplar: `exemplars/FILED-EXAMPLE-newsom-v-trump-25-3727-answering-brief.pdf` (*Newsom v. Trump*, No. 25-3727, Answering Brief of Plaintiffs-Appellees, DktEntry 63.1, filed 2025-09-02; 71 pages; text-based). Provenance in `exemplars/SOURCE.md`.
-- Sample: `samples/INPUT-newsom-answering-brief.md`: an excerpt of the filed brief (see Known gaps). Rendered to 14 pages.
-- Status: template built, sample rendered, overlay made, all 14 pages viewed (below). Not reviewed by a human. `court.json` untouched.
+- Sample: `samples/INPUT-newsom-answering-brief.md`: an excerpt of the filed brief (see Known gaps). Rendered to 15 pages (14 before the 2026-10-16 pass; see the end of this file).
+- Status: template built, sample rendered, overlay made, all 15 pages viewed (2026-10-16 pass, below). Not reviewed by a human. `court.json` untouched.
 
 ## Files
 
@@ -13,7 +13,7 @@
 | `typst/main.typ` | Entry point; reads `--input sample=...` (default `samples/INPUT-newsom-answering-brief.md`) and calls `ca9-answering-brief`. |
 | `typst/ca9-answering-brief.typ` | Template. A copy of the ca9 opening-brief template (`../typst/ca9-brief.typ`) with four changes: the header says answering brief; the Statement of Related Cases page is generated only when the metadata has a `related_cases` map (Circuit Rule 28-2.6, see below); `toc-depth` is 5 (all argument levels); the function is named `ca9-answering-brief`. The page geometry, type, cover, TOA, Form 8 and addendum code are unchanged. |
 | `samples/INPUT-newsom-answering-brief.md` | Markdown contract sample (frontmatter + body). |
-| `samples/OUTPUT-newsom-answering-brief.pdf` | `sh tools/render.sh courts/ninth-circuit/court-of-appeals/answering-brief samples/INPUT-newsom-answering-brief.md` (14 pages). |
+| `samples/OUTPUT-newsom-answering-brief.pdf` | `sh tools/render.sh courts/ninth-circuit/court-of-appeals/answering-brief samples/INPUT-newsom-answering-brief.md` (15 pages). |
 | `samples/OVERLAY-newsom-answering-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/court-of-appeals/answering-brief newsom-answering-brief`. |
 | `exemplars/` | The filed exemplar and `SOURCE.md`. |
 
@@ -41,34 +41,36 @@ Primary sources, read on 2026-10-14 in the Ninth Circuit's "FRAP, Ninth Circuit 
 
 `samples/OVERLAY-newsom-answering-brief.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only. Pairings from the last run (`-overlay.txt`):
 
-- sample p.1-3 ↔ filed p.1-3 (19-57%): cover, TOC, TOA. The sample TOA lists only the cited authorities, so its overlap is lower.
-- sample p.4 ↔ filed p.12 (95%): introduction; the word sets nearly coincide.
-- sample p.5-7 ↔ filed p.13-15 (34-59%): introduction end, jurisdiction, statement, summary of argument.
-- sample p.8-11 ↔ filed p.25, 27-29 (46-68%): summary end, argument I and I.A.1.a.
-- sample p.12 ↔ filed p.48 (40%): the *Martin* discussion. The sample takes it from the filed argument's later part, so the match is partial.
-- sample p.13 ↔ filed p.70 (39%): conclusion and signature block.
-- sample p.14 ↔ filed p.71 (73%): Form 8.
+- sample p.1-3 ↔ filed p.1-3 (20-61%): cover, TOC, TOA first page. The sample TOA lists only the cited authorities, so its overlap is lower.
+- sample p.4 ↔ filed p.9 (18%): TOA second page (Other Authorities); the filed list is much longer.
+- sample p.5 ↔ filed p.12 (95%): introduction; the word sets nearly coincide.
+- sample p.6-8 ↔ filed p.13-15 (34-59%): introduction end, jurisdiction, statement, summary of argument.
+- sample p.9-12 ↔ filed p.25, 27-29 (36-68%): summary end, argument I and I.A.1.a.
+- sample p.13 ↔ filed p.48 (40%): the *Martin* discussion. The sample takes it from the filed argument's later part, so the match is partial.
+- sample p.14 ↔ filed p.70 (39%): conclusion and signature block.
+- sample p.15 ↔ filed p.71 (73%): Form 8.
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-newsom-answering-brief.pdf` was rendered at 60 dpi and viewed (14 of 14). Typst printed no warnings. Fonts embedded: EB Garamond only (Regular, Italic, Bold, Bold Italic). Page numbers below are PDF pages; the brief's own page numbers are printed on the page.
+Every page of `OUTPUT-newsom-answering-brief.pdf` was rendered at 60 dpi and viewed (15 of 15, 2026-10-16). Typst printed no warnings. Fonts embedded: EB Garamond only (Regular, Italic, Bold, Bold Italic). Page numbers below are PDF pages; the brief's own page numbers are printed on the page.
 
 | PDF page | Content | Result |
 |---|---|---|
 | 1 | Cover | OK. Fits one page. The counsel block is abbreviated (see Known gaps). |
 | 2 | Table of contents (I, A, 1, a levels) | OK. Matches the exemplar's TOC levels after `toc-depth` was raised to 5. |
-| 3 | Table of authorities | OK. Cases italic; statutes and other authorities in their own groups. |
-| 4 | Introduction (brief p. 1) | OK. |
-| 5 | Introduction end (brief p. 2) | OK. |
-| 6 | Introduction end; Jurisdiction; Statement A. (brief p. 3) | OK. |
-| 7 | Statement A. end; Summary of Argument (brief p. 4) | OK. |
-| 8 | Summary end; Argument heading and I (brief p. 5) | OK. Heading small caps, centered, as in the opening-brief template. |
-| 9 | Argument I text; headings A. and 1. (brief p. 6) | OK. Headings numbered by the template (after the fix below). |
-| 10 | Argument I.A.1.a heading; text (brief p. 7) | OK. |
-| 11 | Argument I.A.1.a text (brief p. 8) | OK. |
-| 12 | Argument I.A.1.a *Martin* paragraph (brief p. 9) | OK. |
-| 13 | Conclusion; signature block (brief p. 10) | OK. The signature stands with the last paragraph. |
-| 14 | Certificate of compliance, Form 8 | OK. States 2,213 words: the count of the sample body, not the filed brief (13,995). |
+| 3 | Table of authorities (ii): cases, constitutional provisions, statutes | OK. Cases italic; each group under its own heading. |
+| 4 | Table of authorities (iii): other authorities | OK. Five entries. The Mayson entry nearly fills the line, so its leader is a single dot. |
+| 5 | Introduction (brief p. 1) | OK. |
+| 6 | Introduction (brief p. 2) | OK. |
+| 7 | Introduction end; Jurisdiction; Statement A. (brief p. 3) | OK. |
+| 8 | Statement A. end; Summary of Argument (brief p. 4) | OK. |
+| 9 | Summary end; Argument heading and I (brief p. 5) | OK. Heading small caps, centered, as in the opening-brief template. |
+| 10 | Argument I text; headings A. and 1. (brief p. 6) | OK. Headings numbered by the template (after the fix below). |
+| 11 | Argument I.A.1.a heading; text (brief p. 7) | OK. |
+| 12 | Argument I.A.1.a text (brief p. 8) | OK. |
+| 13 | Argument I.A.1.a *Martin* paragraph (brief p. 9) | OK. |
+| 14 | Conclusion; signature block (brief p. 10) | OK. The signature stands with the last paragraph. |
+| 15 | Certificate of compliance, Form 8 | OK. States 2,213 words: the count of the sample body, not the filed brief (13,995). |
 
 Fixes made during review:
 
@@ -94,8 +96,8 @@ The same markdown renders through three engines. Typst (`typst/`) is the referen
 
 | Engine | Output (`samples/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-newsom-answering-brief.pdf` (14 pp) | reference |
-| latex | `OUTPUT-newsom-answering-brief.latex.pdf` (14 pp) | ok: rendered, every page compared with the typst page |
+| typst | `OUTPUT-newsom-answering-brief.pdf` (15 pp) | reference |
+| latex | `OUTPUT-newsom-answering-brief.latex.pdf` (15 pp) | ok: rendered, every page compared with the typst page |
 | docx | `OUTPUT-newsom-answering-brief.docx`; no `.docx.pdf` | BLOCKED: no LibreOffice on this box (below) |
 
 ```sh
@@ -108,6 +110,18 @@ sh tools/render.sh --engine docx  courts/ninth-circuit/court-of-appeals/answerin
 - *Matches typst:* the same form elements as the reply brief, with the same page for every heading, the Introduction, Jurisdiction, Statement and its "A. Legal Background", Summary of Argument, Argument with all five levels, Conclusion and certificate. The table of authorities (groups, page lists, the statute and the other authorities) matches. The certificate's word count, 2,213, is the same as typst's.
 - *Differs:* body lines break at slightly different words, so a few pages begin a line or two apart from typst's; the page count is the same. The signature block sits at half the text width, where typst's sits at about 40%. The cover spacing is fixed rather than fitted. The deepest table-of-contents entry wraps its title in the same place as typst.
 - *Not exercised by this sample:* a related-cases statement (the sample has none; the template emits one only when the metadata has `related_cases`), the Certificate of Service, the addendum, and "passim". These were checked on the synthetic sample used for the reply brief.
-- *Gates:* `tools/check.sh` does not apply to this folder (no `checks.yaml` or `court.json`). The review is by eye: all 14 pages of the LaTeX PDF were rendered at 60 dpi and set beside the typst page.
+- *Gates:* `tools/check.sh` does not apply to this folder (no `checks.yaml` or `court.json`). The review is by eye: all 14 pages of the LaTeX PDF were rendered at 60 dpi and set beside the typst page (before 2026-10-16; see the verification pass for the 15-page rebuild).
 
 **docx** (`docx/reference.docx`, `docx/ca9.lua`, `docx/make-reference.sh`). **BLOCKED.** The reasons are the reply brief's (`../reply-brief/README.md`, "Engines"): no `soffice` on this box, so no `.docx.pdf` and no gate on the docx. The `.docx` is delivered as a valid zip with well-formed XML. The BLOCKED check IDs are the same as for the reply brief, with one difference: the related-cases statement is not in the sample, so CA9-CERT-003 is not exercised. CA9-COVER-001 to -007, CA9-CONT-001, CA9-CONT-002, CA9-CERT-001 and -004, CA9-ADD-001, CA9-FORM-008 and CA9-CONT-012 are not built for docx.
+
+## Verification pass 2026-10-16 (fb-595.26.9)
+
+- **Rendered:** `sh tools/render.sh` on the committed sample first gave 14 pages, the same as the committed PDF, and exit 0 with no typst warnings. After the sample fixes below it gives 15 pages, also exit 0 with no warnings. The PDF embeds only the four EB Garamond faces.
+- **Viewed:** all 15 pages of the typst PDF at 60 dpi, the exemplar's page 1 beside our cover, and all 15 overlay pages (at 40 and 150 dpi).
+- **Overlay:** rerun with `sh tools/overlay.sh`; pairings above. The cover, introduction and Form 8 align by text. The body pitch and margins match the filed pages. The filed Form 8 is the court's form layout ("Form 8. Certificate of Compliance for Briefs", instructions URL, form footer). Ours gives the same statements and boxes under a plain heading. That is tier 2 and is not changed here.
+- **Defects found and fixed (sample transcription, not template):**
+  1. The TOA left out authorities that the transcribed text cites: U.S. Const. art. I, § 8, cls. 15-16; Exec. Order 14339; and the Leider, Coakley and Vladeck articles. The exemplar's TOA lists all of them. FRAP 28(a)(3) requires each authority with the pages where it is cited. They are now `toa:` links with frontmatter entries, worded as in the filed TOA. The TOA now has a Constitutional Provisions group and runs to two pages (ii-iii), so the PDF is 15 pages. The body page numbers are unchanged.
+  2. On the cover, "Attorney General of California" was in `names` (roman) and the attorneys Harbourt and Hu were in `lines` (italic), so names and titles were set the wrong way round. The block is now two groups: Bonta with his title, then Harbourt and Hu with "Deputy Solicitors General", the department and the address. The cover still fits one page.
+- **Template:** no change. No case-specific text, no measured coordinates and no forced breaks were found in `typst/ca9-answering-brief.typ`.
+- **LaTeX:** rebuilt with `sh tools/render.sh --engine latex` (exit 0, 15 pages, the same page count as typst, EB Garamond only). Pages 1-4 (cover, TOC, TOA) were viewed this pass; the TOA page numbers match typst. Gap: the Coakley entry in the latex TOA wraps, and its page number ("3") sits alone on the next line with no leader. Pages 5-15 of the latex PDF were not viewed this pass.
+- **Remaining gaps:** as listed under Known gaps (excerpt sample, abbreviated counsel block, one filer only). Also, the Form 8 page is not the court's form layout. DOCX is untouched (no `soffice`).

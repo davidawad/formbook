@@ -16,8 +16,10 @@ district_court_case: "3:25-cv-04870"
 judge: "The Honorable Charles R. Breyer"
 brief_title: "Answering Brief of Plaintiffs-Appellees"
 counsel:
-  - names: ["ROB BONTA", "Attorney General of California"]
-    lines: ["SAMUEL T. HARBOURT", "CHRISTOPHER D. HU", "Deputy Solicitors General", "455 Golden Gate Avenue, Suite 11000", "San Francisco, CA 94102-7004"]
+  - names: ["ROB BONTA"]
+    lines: ["Attorney General of California"]
+  - names: ["SAMUEL T. HARBOURT", "CHRISTOPHER D. HU"]
+    lines: ["Deputy Solicitors General", "State of California Department of Justice", "455 Golden Gate Avenue, Suite 11000", "San Francisco, CA 94102-7004"]
 phone: "(415) 510-3919"
 signature:
   signer: "Samuel T. Harbourt"
@@ -66,12 +68,27 @@ authorities:
   mayson:
     kind: other
     cite: "Mayson & Stevenson, Misdemeanors by the Numbers, 61 B.C. L. Rev. 971 (2020)"
+  const-militia:
+    kind: constitution
+    cite: "U.S. Const. art. I, § 8, cls. 15-16"
+  eo14339:
+    kind: other
+    cite: "Exec. Order 14339, 90 Fed. Reg. 42121 (Aug. 25, 2025)"
+  leider:
+    kind: other
+    cite: "Leider, The Modern Militia, 2023 Mich. St. L. Rev. 893 (2023)"
+  coakley:
+    kind: other
+    cite: "Coakley, The Role of Federal Military Forces in Domestic Disorders, 1789-1878 (1988)"
+  vladeck:
+    kind: other
+    cite: "Vladeck, Note, Emergency Power and the Militia Acts, 114 Yale L.J. 149 (2004)"
 ---
 # Introduction
 
 On June 7, for the first time in our Nation’s history, the President invoked 10 U.S.C. § 12406 to federalize a State’s National Guard over the objections of the State’s Governor. President Trump and Defense Secretary Hegseth transferred 4,000 members of California’s National Guard—one in three of the Guard’s total active members—to federal control to serve in a civilian law enforcement role on the streets of Los Angeles and other communities in Southern California. After the State and Governor Newsom brought suit to challenge that unprecedented action, the district court temporarily ordered the return of federalized troops to the State. The district court held that defendants’ actions were likely unlawful and threatened to cause irreparable injury to both California and our Nation’s democratic traditions. This Court, however, administratively stayed the district court’s order and one week later issued a stay pending appeal.
 
-Since that time, it has become clear that defendants’ actions in Southern California earlier this summer were just the opening salvo in an effort to transform the role of the military in American society. President Trump and Secretary Hegseth have deployed thousands of soldiers to streets of Washington, D.C. for the purpose of civilian crime control. Plans are underway to do the same thing in Chicago. President Trump has also threatened to target New York, Oakland, and San Francisco with similar deployments. And a recent executive order directs Secretary Hegseth to ensure that National Guard troops in all 50 States are ready to be deployed for civilian law enforcement purposes. Indeed, the order requires the Secretary to establish a new “standing National Guard quick reaction force” for “rapid nationwide deployment.” Exec. Order 14339, 90 Fed. Reg. 42121-42122 (Aug. 25, 2025). At no prior point in our history has the President used the military this way: as his own personal police force, to be deployed for whatever law enforcement missions he deems appropriate.
+Since that time, it has become clear that defendants’ actions in Southern California earlier this summer were just the opening salvo in an effort to transform the role of the military in American society. President Trump and Secretary Hegseth have deployed thousands of soldiers to streets of Washington, D.C. for the purpose of civilian crime control. Plans are underway to do the same thing in Chicago. President Trump has also threatened to target New York, Oakland, and San Francisco with similar deployments. And a recent executive order directs Secretary Hegseth to ensure that National Guard troops in all 50 States are ready to be deployed for civilian law enforcement purposes. Indeed, the order requires the Secretary to establish a new “standing National Guard quick reaction force” for “rapid nationwide deployment.” [Exec. Order 14339, 90 Fed. Reg. 42121-42122 (Aug. 25, 2025)](toa:eo14339). At no prior point in our history has the President used the military this way: as his own personal police force, to be deployed for whatever law enforcement missions he deems appropriate.
 
 In the face of that extraordinary threat, this Court should revisit the reasoning in its prior stay order. That order adopted a “highly deferential standard of review” (Stay Order 33) that will make it difficult for courts to meaningfully limit defendants’ future reliance on Section 12406. The district court, by contrast, applied a more demanding standard—a standard consistent with the statute’s text and history, as well as the serious threat posed by defendants’ actions to our system of federalism, the separation of powers, and longstanding norms against “military intrusion into civilian affairs.” [*Laird v. Tatum*, 408 U.S. 1, 15 (1972)](toa:laird). Because defendants have never provided an adequate justification under that standard, the district court’s temporary restraining order should be affirmed.
 
@@ -85,9 +102,9 @@ The Court previously concluded that it has appellate jurisdiction. *See* Stay Or
 
 ## Legal Background
 
-At the Constitutional Convention, “[t]he Framers heavily debated . . . whether the entire military power should be transferred to the national government.” Leider, The Modern Militia, 2023 Mich. St. L. Rev. 893, 916 (2023). James Madison “advocated for full national control of the militia.” *Id.* “Other delegates, however, fought Madison by stressing the importance” of state control. *Id.* at 917. Under the prevailing compromise, embodied in the Constitution’s Militia Clauses, the States retain control of the militia absent a valid federalization pursuant to a statute enacted by Congress. *See* U.S. Const. art. I, § 8, cls. 15-16.
+At the Constitutional Convention, “[t]he Framers heavily debated . . . whether the entire military power should be transferred to the national government.” [Leider, The Modern Militia, 2023 Mich. St. L. Rev. 893, 916 (2023)](toa:leider). James Madison “advocated for full national control of the militia.” *Id.* “Other delegates, however, fought Madison by stressing the importance” of state control. *Id.* at 917. Under the prevailing compromise, embodied in the Constitution’s Militia Clauses, the States retain control of the militia absent a valid federalization pursuant to a statute enacted by Congress. *See* [U.S. Const. art. I, § 8, cls. 15-16](toa:const-militia).
 
-By vesting federalization authority “in the Congress, not the president,” the Framers ensured that the President would not have unfettered power to call forth state militias for service at the federal level. Coakley, The Role of Federal Military Forces in Domestic Disorders, 1789-1878, at 14 (1988). “Most everyone at the Convention dreaded a powerful standing army, and nearly as many feared a central, dominant Chief Executive.” Vladeck, Note, Emergency Power and the Militia Acts, 114 Yale L.J. 149, 157 (2004).
+By vesting federalization authority “in the Congress, not the president,” the Framers ensured that the President would not have unfettered power to call forth state militias for service at the federal level. [Coakley, The Role of Federal Military Forces in Domestic Disorders, 1789-1878, at 14 (1988)](toa:coakley). “Most everyone at the Convention dreaded a powerful standing army, and nearly as many feared a central, dominant Chief Executive.” [Vladeck, Note, Emergency Power and the Militia Acts, 114 Yale L.J. 149, 157 (2004)](toa:vladeck).
 
 Today, the States retain primary responsibility over the militia—in modern terms, the National Guard. But Congress has delegated limited statutory authority to the President to call the Guard into federal service. Section 12406 is one such statute. A separate set of laws—known collectively as the Insurrection Act—also authorizes federalization in specified circumstances. *See* [10 U.S.C. §§ 251-255](toa:usc251).
 
@@ -109,7 +126,7 @@ The district court correctly held that a temporary restraining order was necessa
 
 #### There Is No “Rebellion” or Other Basis for Federalizing the National Guard Under Section 12406
 
-Exercising its power under the Militia Clauses, *see* U.S. Const. art. I, § 8, cls. 15-16, Congress has delegated limited authority to the President to federalize members of the National Guard. The only statute invoked by defendants here—[Section 12406](toa:usc12406)—requires a showing that “(1) the United States [has been] . . . invaded or is in danger of invasion by a foreign nation”; “(2) there is a rebellion or danger of a rebellion against the authority of the Government of the United States”; or “(3) the President is unable with the regular forces to execute the laws of the United States.” Defendants do not rely on the first predicate and have not shown that either the second or third is satisfied. And neither deference nor nonjusticiability principles support reversal of the district court’s injunction.
+Exercising its power under the Militia Clauses, *see* [U.S. Const. art. I, § 8, cls. 15-16](toa:const-militia), Congress has delegated limited authority to the President to federalize members of the National Guard. The only statute invoked by defendants here—[Section 12406](toa:usc12406)—requires a showing that “(1) the United States [has been] . . . invaded or is in danger of invasion by a foreign nation”; “(2) there is a rebellion or danger of a rebellion against the authority of the Government of the United States”; or “(3) the President is unable with the regular forces to execute the laws of the United States.” Defendants do not rely on the first predicate and have not shown that either the second or third is satisfied. And neither deference nor nonjusticiability principles support reversal of the district court’s injunction.
 
 ##### The Predicates for Invoking Section 12406 Are Not Satisfied
 
