@@ -183,7 +183,8 @@
   let lab = if numbered { heading-label(hd) } else { none }
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let hang-by = ind + heading-tab
-  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.3em }, below: 0pt,
+  // The gap between entries equals the leading inside an entry, so the whole table is double-spaced.
+  link(hd.location(), block(width: 100%, above: body-leading, below: 0pt,
     hang(hang-by, leading: body-leading, {
       h(ind)
       if numbered { box(width: heading-tab, lab) }
@@ -248,7 +249,7 @@
           if h.value.at("primary", default: false) and label not in starred { starred.push(label) }
         }
         let page-text = labels.map(l => if l in starred { l + "*" } else { l }).join(", ")
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, leading: body-leading, {
+        block(breakable: false, above: body-leading, below: 0pt, width: 100%, hang(0.35in, leading: body-leading, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]

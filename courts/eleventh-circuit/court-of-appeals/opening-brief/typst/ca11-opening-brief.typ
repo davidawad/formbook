@@ -491,8 +491,11 @@
   set page(numbering: "i")
   counter(page).update(1)
   heading(level: 1, numbering: none)[Statement Regarding Oral Argument]
-  set par(first-line-indent: 0pt, leading: body-leading, spacing: body-leading, justify: false)
-  inl(need(meta, "oral_argument"))
+  // Scoped: a bare `set par` here would leak into the body and drop its first-line indents.
+  {
+    set par(first-line-indent: para-indent, leading: body-leading, spacing: body-leading, justify: false)
+    inl(need(meta, "oral_argument"))
+  }
   pagebreak()
   toc-section()
   pagebreak()

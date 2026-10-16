@@ -143,6 +143,12 @@
   hanging-indent: indent, first-line-indent: 0pt, leading: single-leading, justify: false, body,
 )
 
+/// The same, double-spaced: the Table of Contents and the Table of Citations must be double-spaced
+/// (11th Cir. R. 32-3; CA11-FORM-003).
+#let dhang(indent, body) = par(
+  hanging-indent: indent, first-line-indent: 0pt, leading: body-leading, justify: false, body,
+)
+
 /// Left edge of a heading's label. Level 2 labels sit at the margin, and each further level
 /// steps in half an inch more.
 #let label-indent(h) = (h.level - 2) * heading-tab
@@ -185,9 +191,9 @@
   let title = if hd.level == 1 { upper(hd.body) } else { hd.body }
   let hang-by = ind + heading-tab
   // The page number sits in its own column, bottom-aligned, so it always follows the last line of a wrapped title.
-  link(hd.location(), block(width: 100%, above: if hd.level == 1 { 0.6em } else { 0.35em }, below: 0pt,
+  link(hd.location(), block(width: 100%, above: body-leading, below: 0pt,
     grid(columns: (1fr, 1.8em), column-gutter: 0.4em,
-      hang(hang-by, {
+      dhang(hang-by, {
         h(ind)
         if numbered { box(width: heading-tab, lab) }
         title
@@ -247,7 +253,7 @@
           let label = numbering(loc.page-numbering(), ..counter(page).at(loc))
           if label not in pages { pages.push(label) }
         }
-        block(breakable: false, above: 0.7em, below: 0pt, width: 100%, hang(0.35in, {
+        block(breakable: false, above: body-leading, below: 0pt, width: 100%, dhang(0.35in, {
           if "name" in a {
             if kind == "case" { emph(inl(a.name)) } else { inl(a.name) }
             [,]
@@ -308,19 +314,24 @@
   v(gap)
   short-rule
   v(gap)
-  // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number).
-  align(left, pad(left: 50%, {
-    set par(hanging-indent: 0pt, spacing: 0.5em)
-    let groups = need(meta, "counsel")
-    for (gi, g) in groups.enumerate() {
-      block(breakable: false, {
-        for n in g.names { n; linebreak() }
-        let lines = g.at("lines", default: ())
-        if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
-        for l in lines { h(0.5em); emph(inl(l)); linebreak() }
-      })
-    }
-  }))
+  // Counsel (FRAP 32(a)(2)(F): name, office address, telephone number). One group sits in the right
+  // half of the page; two or more groups sit side by side across the full width (up to three per row),
+  // so every group can carry its own address and telephone without crowding the cover.
+  let groups = need(meta, "counsel")
+  let group-body(gi, g) = block(breakable: false, {
+    set par(spacing: 0.25em)
+    for n in g.names { hang(0pt, n) }
+    let lines = g.at("lines", default: ())
+    if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
+    for l in lines { hang(1em, [#h(0.5em)#emph(inl(l))]) }
+  })
+  let bodies = groups.enumerate().map(((gi, g)) => group-body(gi, g))
+  if groups.len() == 1 {
+    align(left, pad(left: 50%, bodies.first()))
+  } else {
+    let cols = calc.min(groups.len(), 3)
+    align(left, grid(columns: (1fr,) * cols, column-gutter: 1em, row-gutter: 0.8em, ..bodies))
+  }
   v(gap)
   double-rule
 }
@@ -374,7 +385,7 @@
 #let certificate-of-compliance(meta, words) = {
   let basis = meta.at("word_limit_basis", default: "standard")
   heading(level: 1, numbering: none, outlined: false)[Certificate of Compliance]
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
+  set par(first-line-indent: 0pt, leading: body-leading, spacing: body-leading, justify: false)
   [This brief complies with the type-volume limit of Fed. R. App. P. 32(a)(7)(B) #if basis == "cross-appeal" [(as applied by Fed. R. App. P. 28.1(e)(2)(A)(ii))] because, excluding the parts of the brief exempted by Fed. R. App. P. 32(f) and 11th Cir. R. 32-4, it contains #group-digits(words) words#if meta.at("manual_image_words", default: 0) > 0 [, including #meta.manual_image_words words manually counted in visual images].]
   parbreak()
   [This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because it has been prepared in a proportionally spaced typeface, #font-family, #str(int(type-size / 1pt))-point, set with Typst #str(sys.version).]
