@@ -2,7 +2,9 @@
 
 - Court: United States Bankruptcy Appellate Panel for the First Circuit (`bap1`), folder `courts/first-circuit/bankruptcy-appellate-panel/reply-brief/`
 - Doc type: `reply`
-- Status: **BLOCKED: no exemplar.** Template built from the rules; no filed bap1 exemplar found (see `exemplars/SOURCE.md` for every search tried).
+- Status: **BLOCKED: no exemplar** (re-searched 2026-10-16). No public bap1 reply brief exists on CourtListener (searched under court id `ca1`, where the BAP's dockets are filed; see "Re-search 2026-10-16" below and `exemplars/SOURCE.md`). The template is shared with the opening and answering briefs and received their 2026-10-16 fixes (see `../opening-brief/README.md`, "Template changes from the overlay"); the generic sample was re-rendered and every page viewed. Typst only: `docx/` and `latex/` were not touched.
+
+Summary line for the PM: `exemplar=no render=ok overlay=blocked pages_reviewed=7`
 
 ## Rules (verified 2026-10-14)
 
@@ -18,21 +20,23 @@
 | BAP-LR-002 | Statement regarding interested parties (Official Form 2) | 1st Cir. BAP L.R. 8014-1(a)(3) | 2026-10-14 |
 | BAP-LR-003 | Statement regarding oral argument: one-half page, after the tables, before the first page | 1st Cir. BAP L.R. 8019-1(a) | 2026-10-14 |
 | BAP-LR-004 | Record cites to the appendix (App. at __) | 1st Cir. BAP L.R. 8014-1(a)(1) | 2026-10-14 |
+| BAP-COVER-001 | Cover: case number centered at the top; court name; title of the case (FRBP 8003(d)(2), with the debtor); nature of the proceeding and court below; brief title identifying the party; counsel name, address, telephone and email | FRBP 8015(a)(2) via [LII](https://www.law.cornell.edu/rules/frbp/rule_8015) | 2026-10-16 |
+| BAP-LR-005 | The related-cases and interested-parties statements are "substantially in the form of" Official Forms 1 and 2 (caption, statement with checkboxes, signature of attorney with address and telephone); interested parties not required of governmental parties | 1st Cir. BAP L.R. 8014-1(a)(2), (3) and Official Forms 1-2, [BAP local rules PDF](https://www.bap1.uscourts.gov/sites/bap1/files/BAP%20Local%20Rules.pdf) pp. 11, 17-18 | 2026-10-16 |
 
 ## Conflict to resolve (David)
 
-The [BAP guide](https://www.bap1.uscourts.gov/sites/bap1/files/BAP_Guide.pdf) §VI says text may be 11-point, double-spaced, with a 30-page limit (15 for reply), and that a 13,000-word principal brief is acceptable. FRBP 8015(a)(5) as fetched says 14-point and 13,000 words (half for reply). The template follows the federal rule, which the local rules cannot override (L.R. 8015-1(a) only lets the panel accept nonconforming documents). Which governs the bap1 filing is an open question for David; the guide's 11-point figure should not be used until it is resolved. The quick reference also lists 30 and 15 pages, which the template does not enforce (the word limit does).
+The [BAP guide](https://www.bap1.uscourts.gov/sites/bap1/files/BAP_Guide.pdf) §VI says text may be 11-point, double-spaced, with a 30-page limit (15 for reply), and that a 13,000-word principal brief is acceptable. FRBP 8015(a)(5) as fetched says 14-point and 13,000 words (half for reply). The template follows the federal rule, which the local rules cannot override (L.R. 8015-1(a) only lets the panel accept nonconforming documents). Which governs the bap1 filing is an open question for David; the guide's 11-point figure should not be used until it is resolved. Evidence from the two filed exemplars (2026-10-16): the appellant's brief is set in Courier New, a monospaced face, at about 12 pt (allowed by FRBP 8015(a)(5)(B) at no more than 10 1/2 characters per inch); the U.S. Trustee's brief is set in Garamond 14 pt. Neither uses an 11-point proportional face. The quick reference also lists 30 and 15 pages, which the template does not enforce (the word limit does).
 
 ## Template
 
 - `typst/bap1-reply.typ` (the template, `doc-kind = "reply"`) and `typst/main.typ` (entry). Same structure as the other two doc types; only the constant and the cover title differ.
-- Cover: BAP docket number, the panel name, caption, proceeding, bankruptcy case number, brief title, counsel block. No page number on the cover.
+- Cover (BAP-COVER-001): BAP number at the top, the panel name, bankruptcy case number, optional debtor line (`debtor`), caption, proceeding, brief title with the optional party name (`party`), counsel block (two columns when there are several counsel groups). No page number on the cover.
 - Front matter: optional corporate disclosure (FRBP 8012, only when `disclosure:` is given), table of contents (outline), table of authorities (built from `toa:` links; "passim" at 7+ pages), oral-argument statement.
-- Body: markdown rendered by cmarker. Level-1 headings are sections, centered bold capitals. Level 2 is `I.`, level 3 `A.`, level 4 `1.`. The template refuses to build if a required section heading is missing (BAP-FORM-001) or the word count exceeds the limit (BAP-LEN-001).
-- Back matter: signature block, statement regarding related cases (checkboxes), certificate of compliance. The word count is computed from the rendered text (headings included, footnotes not).
+- Body: markdown rendered by cmarker. Body text double spaced (ascender-to-descender line box, about 31.4 pt pitch at 14 pt). Headings at body size, single spaced: level 1 centered bold capitals; level 2 `I.` left, bold, numbered, hanging indent; level 3 `A.`, level 4 `1.`. The template refuses to build if a required section heading is missing (BAP-FORM-001; each section accepts several titles, case-insensitive) or the word count exceeds the limit (BAP-LEN-001).
+- Back matter: signature block, certificate of compliance, then the statements regarding related cases and interested parties (BAP-LR-001, -002, -005), each repeating the Official Form caption with checkboxes and the attorney's signature block; the interested-parties statement is omitted when `governmental_party: true`. The word count is computed from the rendered text (headings included, footnotes not).
 - Fonts: only the vendored EB Garamond (`fonts/eb-garamond/`); `render.sh` uses `--ignore-system-fonts`, and any typst warning fails the build.
 
-## Sample and overlay
+## Sample and overlay (before 2026-10-16)
 
 - `samples/INPUT-generic-reply-brief.md`: fictional, rule-structured, not a transcription of any filing. Frontmatter is the schema.
 - `samples/OUTPUT-generic-reply-brief.pdf`: rendered with `sh tools/render.sh courts/first-circuit/bankruptcy-appellate-panel/reply-brief samples/INPUT-generic-reply-brief.md`. Renders clean (no typst warnings).
@@ -44,12 +48,46 @@ The [BAP guide](https://www.bap1.uscourts.gov/sites/bap1/files/BAP_Guide.pdf) §
 - Render: `sh tools/render.sh` on `samples/INPUT-generic-reply-brief.md` exits 0 (6 pages). Overlay: `sh tools/overlay.sh` exits 1, "no exemplar pdf".
 - Pages reviewed this run: 0. The sample was rendered to check the build, not reviewed page by page; the Gate 2 notes below are from the earlier run.
 
-## Gate 2 review (every page viewed)
+## Gate 2 review of the generic sample (earlier run, before 2026-10-15)
 
 Pages were rasterized at 60 dpi and each was checked on a contact sheet. Defects found and fixed in the same pass: cover lines running together (fixed with per-line blocks); paragraphs without first-line indent; signature and certificate blocks running together. Remaining open items:
 
 - Signature block and "Respectfully submitted" land alone on the last page (answering brief, page 6) when the conclusion ends near the foot of page 5. The template keeps the signature block unbreakable but does not keep it with the conclusion. Accepted for now.
 - The cover, TOC and TOA were checked against the rules only, not against any filed bap1 exemplar.
+
+## Re-search 2026-10-16 (still BLOCKED)
+
+CourtListener files the First Circuit BAP's dockets under the circuit's court id `ca1`, not `bap1`; the opening and answering exemplars were found that way. Reply-brief searches on 2026-10-16 (by the batch lead, recorded here; details in `exemplars/SOURCE.md`): RECAP full text `"BANKRUPTCY APPELLATE PANEL FOR THE FIRST CIRCUIT" "REPLY BRIEF"` (24 hits, none a bap1 reply brief: mab, mad, prd, prb, med and ca1 circuit filings); `caseName:Blumsack court=ca1` (no reply brief docketed or uploaded in BAP No. MW 23-03); `caseName:Akouete court=ca1` and `caseName:Muszynski court=ca1` (bap1 dockets 24-11, 24-14, 24-16, 26-3; the Muszynski docket, BAP No. PR 24-011, shows "Appellant Charles Muszynski reply brief filed" on 03/07/2025, but the document is not on RECAP); `description:(brief) AND "Bankruptcy Appellate Panel" court=ca1` (none). **BLOCKED: no public bap1 reply brief**, so no transcription and no overlay for this doc type, and tier 2 cannot be judged for it.
+
+## Template changes from the overlay (2026-10-16)
+
+Found on the real content (the Blumsack transcriptions of `../opening-brief/` and `../answering-brief/`) and fixed in the shared template; the three doc types carry the same file (`typst/bap1-opening.typ`, `bap1-answering.typ`, `bap1-reply.typ`, only `doc-kind` differs), so each change is in all three. Every typst `OUTPUT-*.pdf` of the three doc types was re-rendered and viewed after the last change.
+
+1. **Body was not double spaced (tier 1, BAP-FORM-004, FRBP 8015(a)(4)).** `body-leading = 0.94em` was copied from the CA9 template without CA9's ascender/descender line box, so the body baseline pitch was 22.26 pt at 14 pt type (1.6 x the size). The text now sets `top-edge: "ascender", bottom-edge: "descender"` as CA9 does: measured pitch 31.43 pt (`pdftotext -bbox`, generic opening p. 5 and both Blumsack renders p. 9). For comparison the U.S. Trustee's brief (Garamond 14 pt, Word double spacing) measures 31.5 pt. Headings, block quotations, footnotes, TOC and TOA stay single spaced, as FRBP 8015(a)(4) allows.
+2. **No statement regarding interested parties (tier 1, BAP-LR-002, 1st Cir. BAP L.R. 8014-1(a)(3), Official Form 2).** Added. It is omitted when `governmental_party: true` (the rule exempts governmental parties; the U.S. Trustee's brief has none). New frontmatter `interested_parties: {status: none | listed, parties: [...]}`, default `none` like `related_cases`.
+3. **The related-cases statement was not in the form of Official Form 1 (tier 1, BAP-LR-001: "substantially in the form of").** Both statements now repeat the form's caption (court, BAP No., bankruptcy case number, title of the case), then the checkboxes, then the signature of the attorney with address and telephone, as on Official Forms 1 and 2 (local rules PDF pp. 17-18) and on both exemplars. They now follow the certificate of compliance, so they are "attached to the last page of [the] brief" (L.R. 8014-1(a)(2), (3)). They are set in plain single spacing so each stays on one page.
+4. **Cover (tier 1, FRBP 8015(a)(2)(C), (E)).** Optional `debtor` (names, designation) prints the "In re" debtor line of the title of the case; optional `party` adds the party to the brief title ("BRIEF FOR APPELLANT, SCOTT H. BLUMSACK"). The bankruptcy case number moved above the title of the case (Official Forms 1-2 and both exemplars). With several counsel the cover ran onto a second page (U.S. Trustee transcription): several counsel groups are now set in two columns.
+5. **Required-heading check too strict.** It rejected the opening filer's "Summary of Argument". Each FRBP 8014(a) requirement now lists the titles it accepts (e.g. "Jurisdictional Statement", "Statement of Appellate Jurisdiction"), compared case-insensitively.
+6. **Headings (tier 2, both filers).** Level-2 headings printed no number in the body (the TOC had it) and were centered; both filers set them left, bold, with the number and a hanging indent, and the template now does. Level-1 and level-2 headings were 1.4 em and 1.2 em; both filers set headings at the body size, and the template now does.
+7. **Table of authorities (tier 2, both filers).** No dot leaders; wrapped lines started flush left and a page number could wrap alone onto the next line. Entries now have dot leaders, a hanging indent, and the pages in their own column level with the entry's last line.
+
+Not changed (rule governs, tier-2 difference ACCEPTED): the cover keeps the BAP number at the top (FRBP 8015(a)(2)(A): "the number of the case centered at the top"); both filers put the court name first. Front matter keeps arabic page numbers from the cover (the appellant numbers it that way; the U.S. Trustee uses roman numerals, one filer's style).
+
+DOCX and LaTeX: this was a typst-only pass. `docx/` was not touched, so the docx engine still has the old behavior for items 1-7 (its body line pitch is the old 22.25 pt, which is the same tier-1 spacing defect; no interested-parties statement; old cover and statement layout). The docx text in "Engines" below predates this pass. Follow-up for the docx engine.
+
+## Gate 2 review of the generic sample (2026-10-16, after the template changes)
+
+`samples/OUTPUT-generic-reply-brief.pdf` (7 pages), rendered at 60 dpi and every page viewed. No exemplar to compare with; checked against the rules and against the two filed bap1 briefs of the other doc types.
+
+| Page | Compared with | Finding | Status |
+|---|---|---|---|
+| 1 | rules (BAP-COVER-001) | Cover: BAP No. at top, court, bankruptcy case number, caption, proceeding, "REPLY BRIEF FOR APPELLANT", counsel. | PASS |
+| 2 | rules (FRBP 8014(a)(2)) | TOC with leaders, I.-II. entries numbered, pages match the body. | PASS |
+| 3 | rules (FRBP 8014(a)(3)) | TOA with leaders; pages match the body (p.4). | PASS |
+| 4 | rules (BAP-FORM-004) | Argument, I., II., Conclusion; body double spaced; headings at body size; signature block under the Conclusion. | PASS |
+| 5 | rules (FRBP 8015(h)) | Certificate of compliance under FRBP 8015(a)(7)(B), word count 134. | PASS |
+| 6 | Official Form 1 | Statement regarding related cases with caption, checkboxes and signature, one page. | PASS |
+| 7 | Official Form 2 | Statement regarding interested parties with caption, checkboxes and signature, one page. | PASS |
 
 ## Engines
 
