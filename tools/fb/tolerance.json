@@ -1,0 +1,18 @@
+{
+  "noise": {
+    "typst": {
+      "pt": 0.0,
+      "doc": "courts/ninth-circuit/court-of-appeals",
+      "sample": "sweet-opening-brief",
+      "date": "2026-10-17"
+    },
+    "latex": {
+      "pt": 0.0,
+      "doc": "courts/ninth-circuit/court-of-appeals",
+      "sample": "sweet-opening-brief",
+      "date": "2026-10-17"
+    }
+  },
+  "pt": 0.01,
+  "source": "fb diff-selftest --write-tolerance: largest coordinate difference between two builds of the same sample, per engine (see noise), never below the 0.01 pt measurement resolution"
+}
