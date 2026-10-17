@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 13 pp., text layer verified 2026-10-17; court e-filing stamp on p. 1 | `FILED-EXAMPLE-aclu-vt-skoric-23-ap-389-amicus-brief.pdf` | Amici curiae ACLU Foundation of Vermont, Disability Rights Vermont, Vermonters for Criminal Justice Reform | Skoric v. Department of Labor, Vt. Sup. Ct. No. 23-AP-389 | 2024-02-02 | https://www.acluvt.org/app/uploads/2024/02/2024-02-02_skoric_amicus.pdf | `3db712f78234b5973d1e0ccda9d64317c49a5cf9ab47af916e8f209a21f7f348` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: targeted the Vermont Judiciary public site for Supreme Court petitions for review, motions, rehearing, and writ petitions. Search returned no qualifying party filing PDF; no additional public text-layer filing was retrieved. Procedural routes checked against the official Vermont Rules of Appellate Procedure: https://www.vermontjudiciary.org/attorneys/rules.

@@ -410,3 +410,11 @@ BLOCKED fb-l129.4  wyo/motion-brief: follow-up official-source and public filing
 BLOCKED fb-l129.4  wyo/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/tenth-circuit/wyoming/state/supreme-court/exemplars/SOURCE.md
 BLOCKED fb-l129.4  wyo/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/tenth-circuit/wyoming/state/supreme-court/exemplars/SOURCE.md
 BLOCKED fb-l129.4  wyo/petition-for-rehearing: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/tenth-circuit/wyoming/state/supreme-court/exemplars/SOURCE.md
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+BLOCKED rows re-searched for vermont state courts; official rules/docket indexes and targeted public-filing queries reviewed. No additional qualifying downloadable text-layer PDF was verified for the remaining BLOCKED rows.
+BLOCKED fb-l129.4  vt/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/second-circuit/vermont/state/supreme-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  vt/motion-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/second-circuit/vermont/state/supreme-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  vt/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/second-circuit/vermont/state/supreme-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  vt/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/second-circuit/vermont/state/supreme-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  vt/petition-for-rehearing: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/second-circuit/vermont/state/supreme-court/exemplars/SOURCE.md
