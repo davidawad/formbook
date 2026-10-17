@@ -382,3 +382,14 @@ BLOCKED fb-l129.4  tenn/petition-for-writ: follow-up official-source and public 
 BLOCKED fb-l129.4  tennctapp/motion-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/tennessee/state/court-of-appeals/exemplars/SOURCE.md
 BLOCKED fb-l129.4  tennctapp/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/tennessee/state/court-of-appeals/exemplars/SOURCE.md
 BLOCKED fb-l129.4  tennctapp/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/tennessee/state/court-of-appeals/exemplars/SOURCE.md
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+BLOCKED rows re-searched for montana state courts; official rules/docket indexes and targeted public-filing queries reviewed. No additional qualifying downloadable text-layer PDF was verified for the remaining BLOCKED rows.
+BLOCKED fb-l129.4  monttc/opening-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/montana/state/tax-appeal-board/exemplars/SOURCE.md
+BLOCKED fb-l129.4  monttc/answering-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/montana/state/tax-appeal-board/exemplars/SOURCE.md
+BLOCKED fb-l129.4  monttc/reply-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/montana/state/tax-appeal-board/exemplars/SOURCE.md
+BLOCKED fb-l129.4  monttc/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/montana/state/tax-appeal-board/exemplars/SOURCE.md
+BLOCKED fb-l129.4  monttc/motion-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/montana/state/tax-appeal-board/exemplars/SOURCE.md
+BLOCKED fb-l129.4  monttc/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/montana/state/tax-appeal-board/exemplars/SOURCE.md
+BLOCKED fb-l129.4  monttc/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/montana/state/tax-appeal-board/exemplars/SOURCE.md
+BLOCKED fb-l129.4  monttc/amicus-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/montana/state/tax-appeal-board/exemplars/SOURCE.md

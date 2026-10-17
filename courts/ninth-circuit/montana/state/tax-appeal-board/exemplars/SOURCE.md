@@ -15,3 +15,7 @@ Indexed level: `state-appellate`
 | `amicus-brief` — Amicus curiae brief | BLOCKED: not a filing this body receives in practice: neither MCA 15-2-301 et seq. nor the Board's procedures provide for amicus participation, and no amicus filing appears in any posted MTAB decision; the Board publishes only its own decisions and orders (mtab.mt.gov/decisions); it has no public e-docket and does not post party filings, and briefs filed in MTAB proceedings are not otherwise published (checked mtab.mt.gov decisions, pending appeals, reference pages and Montana Supreme Court docket) |  |  |  |  |  |  |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: searched the Montana Supreme Court docket/results and judicial document service for Tax Appeal Board party filings, briefs, and motions; official search returned Tax Appeal Board decisions/forms and Supreme Court dockets/orders, not qualifying MTAB party PDFs. No new text-layer filing was retrieved. MTAB authority and published-record limits checked against official Board materials: https://mtab.mt.gov/decisions ; https://mtab.mt.gov/ ; https://courts.mt.gov/Forms/Appeals.
