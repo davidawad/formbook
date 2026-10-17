@@ -13,7 +13,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // Vendored in /fonts. No Missouri or FRBP type rule; see ../README.md, gap 2.
+#let font-family = ("Times New Roman", "Liberation Serif")         // Vendored in /fonts. No Missouri or FRBP type rule; see ../README.md, gap 2.
 #let type-size = 13pt                    // Tier 2: the exemplars are 12 pt Times; EB Garamond needs 13 pt for the same apparent size.
 #let body-leading = 0.55em               // Tier 2: single spacing within a paragraph, as in both memorandum exemplars.
 #let body-spacing = 1.0em                // Tier 2: one blank line between paragraphs, as in both memorandum exemplars.

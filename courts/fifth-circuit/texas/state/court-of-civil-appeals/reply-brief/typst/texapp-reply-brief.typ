@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif" // TRAP 9.4(e) names no typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif") // TRAP 9.4(e) names no typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 14pt              // TRAP 9.4(e): conventional typeface no smaller than 14-point
 #let footnote-size = 12pt          // TRAP 9.4(e): footnotes no smaller than 12-point
 #let body-leading = 1.6em          // TRAP 9.4(d): double-spaced text; natural line + 1.6em = 2.25em pitch (README)

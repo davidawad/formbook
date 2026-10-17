@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // No M.D. Ala. typography rule exists; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")    // No M.D. Ala. typography rule exists; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                    // Convention: 12 pt, the size of the filed complaint (no local rule sets a size).
 #let line-pitch = 24pt                   // Double spacing, as the filed complaint (convention, see ../README.md).
 #let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.

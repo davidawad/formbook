@@ -27,3 +27,7 @@
 | Date retrieved | 2026-10-17 |
 | SHA-256 | `001adf838fa6142408f9d2c8c1f2d409779dfdb765beb6057ca954e0fb1acb62` |
 | Public record | Filed brief served from the official Ninth Circuit website; the PDF bears the appellate docket stamp |
+
+## Selected replacement
+
+The Sweet brief is flagged for Garamond. The saved ACA Connects brief is a same-court, same-document-type public filing with a native text layer and embedded Times New Roman. It is the selected replacement for the font-audit item; the Sweet sample remains paired with its source.

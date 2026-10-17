@@ -13,7 +13,7 @@
 // Parameters (each traces to a rule or to a stated layout choice in ../README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"   // no ALND typeface rule; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // no ALND typeface rule; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // 12 pt, the exemplar's size (no ALND rule sets one; Liberation Serif has Times metrics, docs/FONTS.md)
 #let line-pitch = 24pt                  // double spacing, the convention of the exemplar (no ALND rule states it)
 #let body-leading = 1.345em             // gap between body lines: Liberation Serif sets a 0.655 em line box, so this gives a 24 pt pitch at 12 pt

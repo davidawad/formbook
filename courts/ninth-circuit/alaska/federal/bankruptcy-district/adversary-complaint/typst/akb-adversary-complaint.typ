@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"    // LBR 9004-1(a)(7): 12 point or 10 pitch; only vendored fonts
+#let font-family = ("Times New Roman", "Liberation Serif")    // LBR 9004-1(a)(7): 12 point or 10 pitch; only vendored fonts
 #let type-size = 12pt
 #let pitch = 24pt                   // LBR 9004-1(a)(4): double spacing
 #let page-w = 8.5in                 // LBR 9004-1(a)(1): letter size

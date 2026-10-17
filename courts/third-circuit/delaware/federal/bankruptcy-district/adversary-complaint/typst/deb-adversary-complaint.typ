@@ -13,7 +13,7 @@
 // No typeface is named for pleadings: LR 7007-2 applies only to motions in adversary proceedings, and
 // Fed. R. Bankr. P. 7010 / Fed. R. Civ. P. 10 name none, so the default applies: Liberation Serif, the
 // Times New Roman substitute (docs/FONTS.md "No face named"). See ../README.md, "Typeface".
-#let font-family = "Liberation Serif"        // Times New Roman substitute (docs/FONTS.md "No face named"); vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute (docs/FONTS.md "No face named"); vendored in fonts/
 #let type-size = 12pt
 #let body-leading = 1.345em              // double spacing: Liberation Serif line box 0.655em + 1.345em = 24 pt at 12 pt
 #let single-leading = 0.5em

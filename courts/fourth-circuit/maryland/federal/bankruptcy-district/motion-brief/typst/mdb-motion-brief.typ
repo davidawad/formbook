@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"         // Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (see README: Times New Roman in the exemplar)
+#let font-family = ("Times New Roman", "Liberation Serif")         // Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (see README: Times New Roman in the exemplar)
 #let type-size = 12pt                    // Local Rule 9004-1: 12 point or larger for text (footer too: no footnotes)
 #let page-margin = 1in                   // Local Rule 9004-1: at least one inch on each side
 #let page-w = 8.5in

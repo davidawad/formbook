@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a choice recorded in README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md (Times New Roman in the exemplar)
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute per docs/FONTS.md (Times New Roman in the exemplar)
 #let type-size = 12pt                   // L.U.Civ.R. 7(b)(5)(B): text 12-point or larger
 #let footnote-size = 11pt               // 7(b)(5)(B): footnotes 11-point or larger
 #let margin = 1in                       // 7(b)(5)(A): at least 1 inch on all four sides

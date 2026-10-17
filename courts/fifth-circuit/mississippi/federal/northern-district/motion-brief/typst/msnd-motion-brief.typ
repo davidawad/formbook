@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // L.U.Civ.R. 7(b)(5)(B): a proportionally spaced face with serifs; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // L.U.Civ.R. 7(b)(5)(B): a proportionally spaced face with serifs; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // L.U.Civ.R. 7(b)(5)(B): text 12-point or larger
 #let footnote-size = 11pt               // L.U.Civ.R. 7(b)(5)(B): footnotes 11-point or larger
 #let page-w = 8.5in                     // L.U.Civ.R. 7(b)(5)(A): 8 1/2 by 11 inch paper

@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // B.L.R. 1001-2 / Civil L.R. 3-4(c)(2)(A): standard proportional font; vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // B.L.R. 1001-2 / Civil L.R. 3-4(c)(2)(A): standard proportional font; vendored in fonts/
 #let type-size = 12pt                   // Civil L.R. 3-4(c)(2)(B): 12 point type or larger
 #let pitch = 24pt                       // Civil L.R. 3-4(c)(2): double-spaced; the numbered lines are this pitch
 #let lines-per-page = 28                // Civil L.R. 3-4(c)(2): no more than 28 lines per page

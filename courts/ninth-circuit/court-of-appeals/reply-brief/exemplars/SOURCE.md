@@ -29,3 +29,7 @@ Known limits of this exemplar: the filing has two signature blocks (Barvir for M
 | Date retrieved | 2026-10-17 |
 | SHA-256 | `408e48d86b0282cf6bf34cde67b814eb1905c61dd0adb7ec45c1ed3e5f094f29` |
 | Public record | Filed brief served from the official Ninth Circuit website; the PDF bears the appellate docket stamp |
+
+## Selected replacement
+
+The B & L Productions brief is flagged for Garamond. The saved San Francisco brief is a same-court, same-document-type public filing with a native text layer and Times New Roman fonts; it is the selected replacement. The B & L sample remains paired with its own filing.

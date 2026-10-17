@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no typeface is named by GNLR 5.1; a proportional serif, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // no typeface is named by GNLR 5.1; a proportional serif, vendored in fonts/
 #let type-size = 13pt                   // EB Garamond sets smaller than Times at the same size; 13 pt matches the exemplar's visual size
 #let footnote-size = 11pt               // footnotes are exempt from double spacing (GNLR 5.1(a)); the size is a layout choice
 #let page-w = 8.5in                     // GNLR 5.1(a): 8 1/2 by 11 inch paper

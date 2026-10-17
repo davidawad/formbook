@@ -27,3 +27,7 @@
 - CourtListener RECAP search (`type=r`, `court=mowb`, "adversary" complaint) turned up about 17 adversary items; those with RECAP PDFs included Carlson (25-04017), Standley (19-03015), Rose (04-06024, a 5-page dischargeability complaint in Helvetica, by Old Missouri National Bank), American Trailer & Storage v. Bank of the West (09-04156), Farmland Industries (04-04322, avoidance complaint by J.P. Morgan Trust). Carlson is the most recent text-layer complaint with a full caption, counts and certificate.
 - govinfo (USCOURTS-mowb packages) hosts court opinions and orders, not party complaints; no complaint was found there.
 - Rose and American Trailer are not saved (the brief asks for the exemplars that settle the layout; two filers are enough for the tier-2 comparison the loop asks for).
+
+## Replacement for the audited non-redistributable-font exemplar
+
+The audited `FILED-EXAMPLE-standley-19-03015-adversary-complaint.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-carlson-25-04017-adversary-complaint.pdf` from a different filer. See the primary-exemplar record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

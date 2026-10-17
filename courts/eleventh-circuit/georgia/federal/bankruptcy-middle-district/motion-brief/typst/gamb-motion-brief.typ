@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or is a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // No font rule for motions in this court (GAMB-FORM-002); Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")    // No font rule for motions in this court (GAMB-FORM-002); Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                    // Style choice: 12 pt, the size of the filed exemplars (no rule sets a size). See ../README.md.
 #let line-pitch = 24pt                   // Double spacing for the body (GAMB-FORM-003, style choice; see ../README.md).
 #let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.

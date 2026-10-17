@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"  // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")  // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 14pt                  // Loc. R. 5.1(C): at least 14-point font, everywhere (footer included)
 #let pitch = 32.2pt                    // double spacing: the baseline pitch measured on the filed exemplars
 #let body-leading = 1.65em             // extra space between lines; calibrated so body lines land on `pitch`

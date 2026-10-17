@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"         // No EDNY rule names a face (NYED-FORM-002); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")         // No EDNY rule names a face (NYED-FORM-002); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                    // NYED-FORM-002: LCR 7.1(b)(1), 12-point type or larger.
 #let footnote-size = 10pt                // NYED-FORM-002: LCR 7.1(b)(1), 10-point type allowed in footnotes.
 #let line-pitch = 24pt                   // NYED-FORM-003: LCR 7.1(b)(3), double-spaced body text.

@@ -14,7 +14,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // BAP-FORM-003: serif, proportional (FRBP 8015(a)(5)); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")     // BAP-FORM-003: serif, proportional (FRBP 8015(a)(5)); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                // BAP-FORM-003: 14-point or larger (FRBP 8015(a)(5)).
 #let body-leading = 0.94em           // BAP-FORM-004: double spacing (FRBP 8015(a)(4)), with the fixed 1.305em line box set below.
 #let single-leading = 0.12em         // block quotations, headings, footnotes, TOC and TOA: single-spaced.

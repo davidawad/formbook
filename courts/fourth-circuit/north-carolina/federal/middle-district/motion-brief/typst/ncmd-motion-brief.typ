@@ -13,7 +13,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"         // NCMD-FORM-002: proportional font; the rule names no face, so the default applies: Times New Roman substitute (docs/FONTS.md "No face named")
+#let font-family = ("Times New Roman", "Liberation Serif")         // NCMD-FORM-002: proportional font; the rule names no face, so the default applies: Times New Roman substitute (docs/FONTS.md "No face named")
 #let type-size = 13pt                    // NCMD-FORM-002: proportional font "no smaller than 13 point" (LR 7.1(a)); footnotes included
 #let pitch = 23pt                        // NCMD-FORM-003: one double-spaced line; 27 x 23 pt = 621 pt, inside the 630 pt text height (see README.md)
 #let body-leading = pitch - 1.15em      // the text runs in a 1.15em line box (top-edge 0.9em, bottom-edge -0.25em) (14.95 pt at 13 pt); the gap makes the 23 pt pitch

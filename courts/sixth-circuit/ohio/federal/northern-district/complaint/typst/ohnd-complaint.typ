@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"  // L.R. 10.1 names no face; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")  // L.R. 10.1 names no face; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                  // convention for federal filings; no N.D. Ohio font rule in L.R. 10.1
 // Absolute lengths at 12 pt, so pitches can be divided (typst cannot divide two em lengths). Liberation Serif's
 // line box is 0.655 em (7.86 pt); single spacing adds the rest of 1.15 em (13.8 pt pitch); double

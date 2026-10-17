@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no E.D. Cal. font rule; the only font vendored in fonts/ (README.md, open choices)
+#let font-family = ("Times New Roman", "Liberation Serif")        // no E.D. Cal. font rule; the only font vendored in fonts/ (README.md, open choices)
 #let type-size = 12pt                   // no E.D. Cal. type-size rule; the exemplar is 12 pt
 #let pitch = 24pt                       // L.R. 130(c): double-spaced; the numbered lines are this pitch
 #let lines-per-page = 28                // L.R. 130(b) asks for numbered lines; 28 per page matches the exemplar

@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "TeX Gyre Schola"      // GA-SC-FONT-001: Century family; substitute for Century Schoolbook (docs/FONTS.md)
+#let font-family = ("Times New Roman", "Liberation Serif")      // GA-SC-FONT-001: Century family; substitute for Century Schoolbook (docs/FONTS.md)
 #let type-size = 13pt                      // GA-SC-FONT-002: body and headings no smaller than 13-pt Century Schoolbook
 #let note-size = 11pt                      // GA-SC-FONT-002: footnotes no smaller than 11-pt Century Schoolbook
 #let body-leading = 0.78em                 // GA-SC-SPACE-001: line pitch of about 1.5 x type size (measured; between 1.2x and double)

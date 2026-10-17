@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // L.R. 2.01(A)(1) names no typeface; EB Garamond is the vendored font in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // L.R. 2.01(A)(1) names no typeface; EB Garamond is the vendored font in fonts/
 #let type-size = 12pt                   // L.R. 2.01(A)(1): 12-point or larger
 #let pitch = 24pt                       // L.R. 2.01(A)(1): double spaced; a 24 pt baseline pitch at 12 pt
 #let body-leading = 1.35em              // EB Garamond's line box is 0.65em, so 0.65em + 1.35em = 2em = 24 pt

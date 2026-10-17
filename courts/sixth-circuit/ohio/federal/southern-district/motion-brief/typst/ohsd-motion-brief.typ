@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // S.D. Ohio Civ. R. 5.1 sets no typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // S.D. Ohio Civ. R. 5.1 sets no typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // S.D. Ohio Civ. R. 5.1 sets no point size; 12 pt is the working standard (README.md)
 #let page-w = 8.5in                     // Civ. R. 5.1(a): 8 1/2 by 11 inch paper
 #let page-h = 11in

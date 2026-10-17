@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // L.R. 7.5(a)(1)(D): proportionally spaced; vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // L.R. 7.5(a)(1)(D): proportionally spaced; vendored in fonts/
 #let type-size = 13pt                   // L.R. 7.5(a)(1)(D): at least 13-point
 #let body-leading = 1.35em              // L.R. 7.5(a)(1)(A): double-spaced. Measured at 13 pt: single line 17.0 pt, double 34.5 pt (README.md)
 #let single-leading = 0em              // single spacing: the line pitch is the font line height (17.0 pt at 13 pt)

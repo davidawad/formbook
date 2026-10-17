@@ -36,3 +36,7 @@
 - Date retrieved: 2026-10-17
 - sha256: 0b36393e2d850e8adbe4fc28648d0e6e44d4146e9300926c47e6d098a4de78b5
 - Notes: a Rule 37.6 class amicus (a State by its Attorney General: 9,000 words, and exempt from the authorship/funding disclosure).
+
+## Selected replacement
+
+The West Virginia filing is flagged for Century Expanded BT. The saved Chamber brief is the closest selected replacement: a same-court amicus brief with a text layer, filed by a different organization, in New Century Schoolbook. The Loper Bright NSSF brief is another text-layer option in Century Schoolbook. Both better reflect the Supreme Court's booklet typography than a Times New Roman replacement would. The existing West Virginia sample remains paired with its original source.

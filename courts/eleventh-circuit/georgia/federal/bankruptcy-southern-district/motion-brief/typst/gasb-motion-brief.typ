@@ -13,7 +13,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // Font: not set by any S.D. Ga. rule found (see ../README.md); Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")    // Font: not set by any S.D. Ga. rule found (see ../README.md); Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                    // Convention: 12 pt, the size of the filed exemplars (no rule sets a size).
 #let line-pitch = 24pt                   // GASB-FORM-002: double-spaced (LR 10.1, incorporated by the Uniformity of Practice clause).
 #let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.

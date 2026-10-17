@@ -30,6 +30,10 @@ It is a typed, counsel-drafted petition in booklet form, with a text layer, and 
 | Filer | Petitioners Loper Bright Enterprises et al., by Paul D. Clement, Counsel of Record (Clement & Murphy, PLLC), with Ryan P. Mulvey (Cause of Action Institute) |
 | Date filed | 2022-11-10 (docket entry date; date on the cover) |
 | URL fetched from | <https://www.supremecourt.gov/DocketPDF/22/22-451/246256/20221110145441811_2022-11-10%20Loper%20Bright%20Cert%20Petition%20FINAL.pdf> (docket: <https://www.supremecourt.gov/RSS/Cases/JSON/22-451.json>) |
+
+## Selected replacement
+
+The Fisher cert petition is flagged for Century Expanded BT. The saved Loper Bright cert petition is the selected replacement: same court and document type, text-layer filing with embedded Century Schoolbook, matching the Court's booklet-face convention. The Fisher sample remains paired with its own source.
 | Date retrieved | 2026-10-17 |
 | sha256 | cc6c994fe683b8cdf57d0aacadd173166115edffe988b9092b417085cfba2086 |
 

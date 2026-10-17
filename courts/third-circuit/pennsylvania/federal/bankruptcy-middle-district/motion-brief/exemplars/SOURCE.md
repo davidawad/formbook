@@ -20,3 +20,24 @@
 
 - CourtListener search API, `type=rd`, `court=pamb`: "Brief in Support", "Memorandum of Law", "Motion" with "Memorandum of Law", "Motion" with "Brief in Support". Candidates examined and rejected: Madeam, Chapter 13 trustee's Memorandum of Law in Support of Motion to Dismiss (5-22-bk-01575, Doc 33; text-based but a standalone memorandum from a trustee's motion; kept as a secondary reference in `../README.md`, not used for the sample); the Sanctions motion (214443, Doc 127, 26 pages, scanned: no text layer); Rosario, Memorandum of Law and Fact (264466, Doc 59, 3 pages, not checked in full).
 - Web search for pamb memoranda and briefs: no additional text-based PDFs.
+
+## Initial font-audit search note (superseded)
+
+At the initial search pass, the Madeam memorandum had been identified but its public PDF URL had not yet been recovered. It has since been downloaded, verified, and selected below.
+
+## Selected font-audit replacement — In re Madeam
+
+The Mullen PDF is flagged for Liberation Sans in the font audit and is an OCR/text-layer scan. The saved Madeam memorandum is selected as the same-court motion-brief replacement: it is a public filing supporting a motion to dismiss, with a native searchable text layer and Times New Roman body text. It is a separate memorandum from the motion and was filed by a Chapter 13 trustee, so it is a font-audit replacement rather than a direct substitute for Mullen's sample.
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-madeam-5-22-bk-01575-motion-brief.pdf` |
+| Court | U.S. Bankruptcy Court for the Middle District of Pennsylvania |
+| Case | *In re Alfredo F. Madeam, Jr.*, Chapter 13, No. 5-22-bk-01575-MJC |
+| Document | Memorandum of Law in Support of Trustee's Motion to Dismiss, ECF Doc. 33 (7 pages) |
+| Filer | Jack N. Zaharopoulos, Standing Chapter 13 Trustee |
+| Date filed | January 12, 2023 |
+| Source URL | https://storage.courtlistener.com/recap/gov.uscourts.pamb.274935/gov.uscourts.pamb.274935.33.0.pdf (CourtListener RECAP; docket entry 33) |
+| Date retrieved | 2026-10-17 |
+| Text and fonts | Native text layer (`pdftotext` extracts 1,966 words); embedded Times New Roman regular and italic; Liberation Sans and standard fonts also appear in cover/signature material. |
+| SHA-256 | `36e0ef70eda367e94ff449bd3cbd57a1cbf0e64872e27f91547a6f6f748b67ca` |

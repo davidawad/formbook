@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"   // LBR 5005-1(c)(2): 12 to 14 point type, no face named; kept per docs/FONTS.md (README)
+#let font-family = ("Times New Roman", "Liberation Serif")   // LBR 5005-1(c)(2): 12 to 14 point type, no face named; kept per docs/FONTS.md (README)
 #let type-size = 13pt              // inside the 12-14 point range; EB Garamond at 13 pt reads like Times 12 pt
 #let body-leading = 0.85em         // double-spaced body (the exemplar's body); pitch measured in README
 #let para-indent = 0.5in           // first-line indent of numbered allegations

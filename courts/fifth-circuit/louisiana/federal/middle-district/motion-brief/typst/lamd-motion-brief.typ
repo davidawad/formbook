@@ -11,7 +11,7 @@
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
 #let court-name = ("UNITED STATES DISTRICT COURT", "MIDDLE DISTRICT OF LOUISIANA") // the court's name, not a case's
-#let font-family = "Liberation Serif"   // LR 10(a)(1): standard typeface; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // LR 10(a)(1): standard typeface; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // LR 10(a)(1): no smaller than standard 12-point
 #let page-w = 8.5in                     // LR 10(a)(1): 8 1/2 by 11 inch paper
 #let page-h = 11in

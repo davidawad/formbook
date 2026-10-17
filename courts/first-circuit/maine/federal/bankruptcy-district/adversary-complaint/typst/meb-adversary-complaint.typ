@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // no D. Me. rule on typeface; Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (README.md, gap 2)
+#let font-family = ("Times New Roman", "Liberation Serif")        // no D. Me. rule on typeface; Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (README.md, gap 2)
 #let type-size = 12pt                   // legible, 12 point is the convention in the filed exemplar
 #let page-w = 8.5in
 #let page-h = 11in

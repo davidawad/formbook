@@ -15,7 +15,7 @@
 
 // LR 10.2(a)(2): "All memoranda, including footnotes, shall utilize 14-point Times New Roman plain
 // style". Substitute per docs/FONTS.md: Liberation Serif (SIL OFL, metric-compatible with Times New Roman).
-#let font-family = "Liberation Serif"
+#let font-family = ("Times New Roman", "Liberation Serif")
 #let type-size = 14pt                      // LR 10.2(a)(2): 14 pt, footnotes included
 #let body-leading = 1.4em                  // LR 10.2(a)(4) double spacing: baseline pitch 32.3 pt at 14 pt with Liberation Serif (measured; was 1.0em with EB Garamond)
 #let single-leading = 0.12em               // headings, quotations, footnotes, caption, TOC and TOA: single-spaced

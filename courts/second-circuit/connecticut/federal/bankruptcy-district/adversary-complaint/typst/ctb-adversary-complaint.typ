@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"      // no typeface rule in the bankruptcy local rules; Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (README.md, gap 2)
+#let font-family = ("Times New Roman", "Liberation Serif")      // no typeface rule in the bankruptcy local rules; Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (README.md, gap 2)
 #let type-size = 12pt                  // D. Conn. L. Civ. R. 7(a)(5), applied by Local Bankr. R. 7007-1: text at least 12 point
 #let body-leading = 1.345em            // L. Civ. R. 10: double-spaced. Liberation Serif's line box is 0.655em, so 0.655em + 1.345em = 2.0em = 24 pt
 #let single-leading = 0.5em            // single spacing for the caption, the signature block and the block quotes

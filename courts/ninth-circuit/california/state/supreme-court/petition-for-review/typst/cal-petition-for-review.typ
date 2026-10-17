@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "TeX Gyre Schola"      // CAL-FONT-001: proportionally spaced serif, Century Schoolbook preferred (rule 8.74(b)(1)). Substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")      // CAL-FONT-001: proportionally spaced serif, Century Schoolbook preferred (rule 8.74(b)(1)). Substitute per docs/FONTS.md. Vendored in /fonts.
 #let font-named = "Century Schoolbook"    // the face the rule names; the certificate states it (Schola is a Century Schoolbook clone).
 #let type-size = 13pt                      // CAL-FONT-002: 13-point or larger, footnotes included (rules 8.204(b)(4), 8.74(b)(1)).
 #let body-leading = 0.94em                 // CAL-SPACE-001: double-spaced text, as the filed exemplar is. Rule 8.204(b)(5) asks for 1.5.

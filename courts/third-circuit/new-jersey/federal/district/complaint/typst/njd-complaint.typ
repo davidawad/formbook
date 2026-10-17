@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"        // NJD-FORM-002: a standard proportional serif; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // NJD-FORM-002: a standard proportional serif; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                   // NJD-FORM-002: 12 point, the size both filed exemplars use
 #let pitch = 27.6pt                     // NJD-FORM-003: double spacing, measured in the exemplars (DGL p.3: 27.6 pt)
 #let body-leading = pitch - 0.909em     // gap between lines of body text: the ascender-to-descender line box set below is 0.909em in Liberation Serif, so the line pitch is `pitch`

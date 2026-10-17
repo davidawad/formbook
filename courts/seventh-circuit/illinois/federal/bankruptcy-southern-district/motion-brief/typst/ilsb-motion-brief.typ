@@ -12,7 +12,7 @@
 // Parameters (each traces to a rule or to a named style choice; see ../README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"        // No S.D. Ill. rule names a typeface (ILSB-FORM-002 gap); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")        // No S.D. Ill. rule names a typeface (ILSB-FORM-002 gap); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                   // Style choice. No S.D. Ill. type-size rule.
 #let pitch = 24pt                       // Double spacing for the body (convention, not a rule).
 #let body-leading = 1.345em             // Gives a 24 pt baseline pitch at 12 pt in Liberation Serif (line box 0.655 em).

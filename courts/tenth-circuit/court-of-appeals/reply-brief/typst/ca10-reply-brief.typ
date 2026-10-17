@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // FRAP 32(a)(5)(A): proportional serif face; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")     // FRAP 32(a)(5)(A): proportional serif face; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                      // FRAP 32(a)(5)(A) and 10th Cir. R. 32(A): 14-point, footnotes too.
 #let body-leading = 1.336em                // FRAP 32(a)(4): double-spaced (about 2.2 x the type size per line).
 #let single-leading = 0.516em              // headings, quotations, footnotes, TOC/TOA: single-spaced.

@@ -12,7 +12,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // MIWB-FORM-001: the rules name no face (LBR 9004(f): "typewritten in at least 12-point type"); Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // MIWB-FORM-001: the rules name no face (LBR 9004(f): "typewritten in at least 12-point type"); Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // MIWB-FORM-001: at least 12-point type (LBR 9004(f))
 #let pitch = 27.6pt                     // MIWB-FORM-001: double-spaced; the filed exemplars measure 27.6 pt baseline to baseline
 #let body-leading = 1.645em             // gap between lines of body text; with Liberation Serif's 0.655em line box this gives the 27.6 pt baseline pitch at 12 pt

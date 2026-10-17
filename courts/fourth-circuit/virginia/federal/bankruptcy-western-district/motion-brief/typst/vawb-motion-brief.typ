@@ -13,7 +13,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or is a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md, vendored in fonts/liberation-serif; the W.D. Va. rules name no typeface or size
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute per docs/FONTS.md, vendored in fonts/liberation-serif; the W.D. Va. rules name no typeface or size
 #let type-size = 12pt              // convention: 12 pt body, the size the filed motion uses
 #let body-leading = 1.345em        // about 24 pt pitch at 12 pt: double spacing, as in the filed motion
 #let single-leading = 0.5em        // counsel, caption, block quotations and signature blocks

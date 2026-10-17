@@ -13,7 +13,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // CivLR 5.1: proportional font "such as Times New Roman"; EB Garamond is the vendored one (README.md, gap 2)
+#let font-family = ("Times New Roman", "Liberation Serif")         // CivLR 5.1: proportional font "such as Times New Roman"; EB Garamond is the vendored one (README.md, gap 2)
 #let type-size = 14pt                    // CivLR 5.1: type no smaller than 14-point for proportional text
 #let line-pitch = 24pt                   // CivLR 5.1: double spacing; the numbered lines are this pitch
 #let lines-per-page = 28                 // CivLR 5.1: not more than 28 lines per page

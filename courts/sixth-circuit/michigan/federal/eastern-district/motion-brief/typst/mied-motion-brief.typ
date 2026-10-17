@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a named style choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // LR 5.1(a)(3) names no face (any proportional type, 14 pt); Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // LR 5.1(a)(3) names no face (any proportional type, 14 pt); Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 14pt                   // LR 5.1(a)(3): 14 point for proportional type, footnotes included
 #let margin = 1in                       // LR 5.1(a)(2): at least 1 inch, top, bottom and sides
 #let page-size = 12pt                   // page numbers are not text under LR 5.1(a)(3); style choice

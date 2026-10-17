@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LR 7.1(f)(1)(A): word limit for a proportional font; vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // LR 7.1(f)(1)(A): word limit for a proportional font; vendored in fonts/
 #let type-size = 13pt                   // LR 7.1(h)(1): at least 13-point, footnotes included
 #let page-w = 8.5in                     // LR 7.1(h)(1): 8 1/2 by 11 inches
 #let page-h = 11in

@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LAMB-FORM-002: LR 5005-2(b), 12-point font (footnotes too)
 #let body-leading = 0.898em            // LAMB-FORM-003: LR 5005-2(b), double-spaced; calibrated, see README (Liberation Serif line box 1.107em, hhea ascender to descender: 24 pt pitch at 12 pt)
 #let single-leading = 0.198em          // caption, block quotations, notice and signature: single-spaced (1.305em pitch)

@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (README.md, Known gaps)
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (README.md, Known gaps)
 #let type-size = 12pt                   // L.R. 7(F)(3): 12 point Roman, footnotes included (set below)
 #let margin-in = 1in                    // L.R. 7(F)(3): one-inch margins
 #let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 1.345em gives a 24 pt baseline pitch at 12 pt

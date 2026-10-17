@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"         // INNB-FORM-005: no typeface is named in B-5005-2; Times New Roman substitute per docs/FONTS.md. See ../README.md.
+#let font-family = ("Times New Roman", "Liberation Serif")         // INNB-FORM-005: no typeface is named in B-5005-2; Times New Roman substitute per docs/FONTS.md. See ../README.md.
 #let type-size = 12pt                    // INNB-FORM-005: no size is named in B-5005-2; 12 pt is a style choice. See ../README.md.
 #let line-pitch = 24pt                   // INNB-FORM-001: double spacing. With the margins below, 27 lines fit per page.
 #let body-leading = 1.091em              // gap between lines of body text: with the 0.909em ascender-to-descender box set below, a 2.0em = line-pitch at 12 pt.

@@ -9,7 +9,7 @@
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
 #let numbered = false                   // briefs: paragraphs are not numbered (Fed. R. Civ. P. 10 does not apply)
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md (fonts/); see README.md, known gaps
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md (fonts/); see README.md, known gaps
 #let type-size = 12pt                   // L.R. 5-1(b): at least 12-point type in the body
 #let margin = 1in                       // L.R. 5-1(b): at least 1-inch margins
 #let page-w = 8.5in                     // 8 1/2 x 11 inch paper (L.R. 5-1(d) for paper filings)

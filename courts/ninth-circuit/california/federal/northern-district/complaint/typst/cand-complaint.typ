@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Civil L.R. 3-4(c)(2)(A): standard proportional font; the rule's example is Times New Roman, substituted by its metric-compatible vendored clone (docs/FONTS.md)
+#let font-family = ("Times New Roman", "Liberation Serif")   // Civil L.R. 3-4(c)(2)(A): standard proportional font; the rule's example is Times New Roman, substituted by its metric-compatible vendored clone (docs/FONTS.md)
 #let type-size = 12pt                   // Civil L.R. 3-4(c)(2)(B): 12 point type or larger
 #let pitch = 24pt                       // Civil L.R. 3-4(c)(2): double-spaced; the numbered lines are this pitch
 #let lines-per-page = 28                // Civil L.R. 3-4(c)(2): no more than 28 lines per page

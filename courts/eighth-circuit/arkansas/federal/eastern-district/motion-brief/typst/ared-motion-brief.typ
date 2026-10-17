@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; no rule names a font (LR 5.5(a) sets only a minimum)
+#let font-family = ("Times New Roman", "Liberation Serif")        // vendored in fonts/; no rule names a font (LR 5.5(a) sets only a minimum)
 #let type-size = 12pt                   // LR 5.5(a): type not less than elite (12 cpi); 12 pt is the working equivalent
 #let table-size = 11pt                  // tables only; the exemplar's chart is set smaller than body text (convention)
 #let pitch = 24pt                       // LR 5.5(a): double space

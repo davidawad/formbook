@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"       // Times New Roman substitute per docs/FONTS.md, vendored in fonts/liberation-serif/
+#let font-family = ("Times New Roman", "Liberation Serif")       // Times New Roman substitute per docs/FONTS.md, vendored in fonts/liberation-serif/
 #let type-size = 12pt                  // LRCi 5.1: at least 12-point type (source caveat in README.md)
 #let margin = 1in                      // LRCi 5.1: one-inch margins (source caveat in README.md)
 #let body-leading = 1.345em            // double spacing: Liberation Serif's line box is 0.655em, so 1.345em leading gives a 24 pt pitch at 12 pt

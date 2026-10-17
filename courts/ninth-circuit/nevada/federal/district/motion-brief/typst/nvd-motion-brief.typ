@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/ (the only serif face vendored); LR IA 10-1(a)(3) names no face
+#let font-family = ("Times New Roman", "Liberation Serif")        // vendored in fonts/ (the only serif face vendored); LR IA 10-1(a)(3) names no face
 #let type-size = 13pt                   // LR IA 10-1(a)(3): 12 pt or larger. 13 pt EB Garamond reads like 12 pt Times (README.md)
 #let lines-per-page = 28                // LR IA 10-1(a)(1): no more than 28 numbered lines per page
 #let page-w = 8.5in                     // LR IA 10-1(c): 8 1/2 by 11 inch paper

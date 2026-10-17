@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif" // no font is set by FRBP 9013 or the E.D. Tex. bankruptcy local rules; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif") // no font is set by FRBP 9013 or the E.D. Tex. bankruptcy local rules; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt
 #let page-w = 8.5in                // letter; the rules set no paper size for this filing
 #let page-h = 11in

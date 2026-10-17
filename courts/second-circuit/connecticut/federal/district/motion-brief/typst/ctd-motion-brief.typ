@@ -13,7 +13,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // CTD-FORM-003: the rules name no font (see README); Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")     // CTD-FORM-003: the rules name no font (see README); Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                // CTD-FORM-002: text at least 12 point (L.R. 7(a)(5))
 #let footnote-size = 10pt            // CTD-FORM-002: footnotes at least 10 point (L.R. 7(a)(5))
 #let line-pitch = 27.6pt             // CTD-FORM-001: double spacing = 2 x 13.8 pt, the single line of 12 pt Times in Word

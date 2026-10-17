@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // vendored in /fonts; the only serif face available here
+#let font-family = ("Times New Roman", "Liberation Serif")          // vendored in /fonts; the only serif face available here
 #let type-size = 12pt                      // RCFC-FORM-002: text and footnotes no smaller than 12 point
 #let body-leading = 0.9em                  // RCFC-FORM-004: double spacing (see README, "Decisions")
 #let single-leading = 0.12em               // quotations, footnotes, headings, TOC/TOA: single-spaced

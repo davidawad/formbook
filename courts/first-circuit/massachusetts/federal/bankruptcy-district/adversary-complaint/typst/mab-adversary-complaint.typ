@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md (fonts/); Appendix 8(c) asks for a plain roman type
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md (fonts/); Appendix 8(c) asks for a plain roman type
 #let type-size = 12pt                   // Appendix 8(c): not less than 12-point for the body
 #let footnote-size = 10pt               // Appendix 8(c): not less than 10-point for footnotes
 #let page-w = 8.5in                     // Appendix 8(a): 8.5 x 11-inch document format

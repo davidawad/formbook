@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a stated choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // R. 9004-1(a)(1): one simple font; vendored in fonts/ (the only font available here)
+#let font-family = ("Times New Roman", "Liberation Serif")        // R. 9004-1(a)(1): one simple font; vendored in fonts/ (the only font available here)
 #let type-size = 12pt                   // no size is set by the local rules (tier 2: the exemplars are set at about 12 pt)
 #let margin = 1in                       // R. 9004-1(a)(1): margins not less than one inch
 #let page-w = 8.5in                     // R. 9004-1(a)(1): white 8 1/2 x 11 inch paper

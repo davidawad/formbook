@@ -14,7 +14,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // CA9-FORM-004: serif, proportional. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // CA9-FORM-004: serif, proportional. Vendored in /fonts.
 #let type-size = 14pt                      // CA9-FORM-004: 14-point or larger, everywhere.
 #let body-leading = 0.94em                 // CA9-FORM-003: with the metric-aligned line box below this
                                            // gives a baseline pitch of about 2.2 x type size (double spacing).

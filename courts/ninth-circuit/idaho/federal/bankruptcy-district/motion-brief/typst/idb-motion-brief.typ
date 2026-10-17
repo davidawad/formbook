@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"   // LBR 5005-1(c)(2): 12 to 14 point type, no face named; kept per docs/FONTS.md (README)
+#let font-family = ("Times New Roman", "Liberation Serif")   // LBR 5005-1(c)(2): 12 to 14 point type, no face named; kept per docs/FONTS.md (README)
 #let type-size = 13pt              // inside the 12-14 point range; EB Garamond at 13 pt reads like Times 12 pt
 #let note-size = 12pt              // footnotes: LBR 5005-1(c)(2) sets 12 pt as the floor for all type
 #let body-leading = 1.45em         // double spacing (both filers; no rule sets it): about 2.1 em, 27.5 pt, baseline to baseline

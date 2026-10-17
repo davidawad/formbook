@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // the LBRs set no typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // the LBRs set no typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // FRBP 9004(a): legible; no rule sets a size, so the 12 pt convention
 #let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 0.655em + 1.345em = 2em = 24 pt at 12 pt
 #let pitch = 24pt                       // one double-spaced line at 12 pt: 0.655em + 1.345em = 2em = 24 pt (a blank line is one pitch)

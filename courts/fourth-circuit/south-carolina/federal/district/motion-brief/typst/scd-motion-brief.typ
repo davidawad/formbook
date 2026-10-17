@@ -7,7 +7,7 @@
 // ---- rule parameters ----
 // L.R. 1.05(B) requires Times New Roman, Arial or Courier New. Times New Roman is the face used here;
 // its vendored metric-compatible substitute is Liberation Serif (docs/FONTS.md, substitution table).
-#let font-family = "Liberation Serif"
+#let font-family = ("Times New Roman", "Liberation Serif")
 #let type-size = 12pt                 // L.R. 1.05(C): minimum 12-point type
 #let margin = 1in                     // L.R. 1.05(A): minimum one-inch margins
 #let double-leading = 1.6em           // L.R. 1.05(E): double-spaced text (calibrated: about 27pt pitch at 12pt, see README.md)

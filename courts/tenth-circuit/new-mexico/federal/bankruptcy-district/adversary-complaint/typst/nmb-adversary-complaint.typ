@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // no typeface rule in FRBP or NM LBR; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // no typeface rule in FRBP or NM LBR; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // convention (no size rule); matches the filed exemplar's body
 #let body-leading = 1.345em             // double spacing: about 24 pt baseline pitch at 12 pt (convention)
 #let single-leading = 0.6em             // counsel, caption, block quotations and signature block

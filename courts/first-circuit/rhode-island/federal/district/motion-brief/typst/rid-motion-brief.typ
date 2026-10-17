@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; LR Cv 5(a)(3) sets no typeface, only the size
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; LR Cv 5(a)(3) sets no typeface, only the size
 #let type-size = 12pt                   // LR Cv 5(a)(3): at least 12-point font
 #let footnote-size = 10pt               // LR Cv 5(a)(3): footnotes at least 10-point, may be single-spaced
 #let page-w = 8.5in                     // LR Cv 5(a): 8 1/2 by 11 inch paper

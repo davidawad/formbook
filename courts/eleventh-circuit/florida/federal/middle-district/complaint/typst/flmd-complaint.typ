@@ -8,7 +8,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"   // Times New Roman substitute (docs/FONTS.md, metric-compatible); the filed exemplar is Times New Roman, LR 1.08(b).
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute (docs/FONTS.md, metric-compatible); the filed exemplar is Times New Roman, LR 1.08(b).
 #let type-size = 14pt              // FLMD-TYPE-002: main text at least 13-point (1.08(a)); Times New Roman must be 14-point (1.08(b)).
 #let body-leading = 1.35em         // FLMD-TYPE-001: 2.0 double-spaced. Measured baseline pitch with Liberation Serif at 14pt is 28.1pt (2.0em), checked with pdftotext -bbox.
 #let single-leading = 0.5em        // FLMD-TYPE-003: indented quotations, caption, counsel and signature blocks are single-spaced.

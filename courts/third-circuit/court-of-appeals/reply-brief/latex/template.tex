@@ -15,7 +15,7 @@
 \usepackage{longtable,booktabs,array}
 \usepackage{xcolor}
 
-\setmainfont[Path=$fontdir$liberation-serif/,Extension=.ttf,UprightFont=LiberationSerif-Regular,BoldFont=LiberationSerif-Bold,ItalicFont=LiberationSerif-Italic,BoldItalicFont=LiberationSerif-BoldItalic]{LiberationSerif-Regular}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 
 \hypersetup{colorlinks=false,pdfborder={0 0 0}}
 \setlength{\parindent}{0.5in}

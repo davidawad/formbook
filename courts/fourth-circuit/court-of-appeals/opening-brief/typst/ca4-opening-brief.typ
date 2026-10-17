@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "TeX Gyre Schola"      // FRAP 32(a)(5)(A): proportional serif face. Century Schoolbook (court's preferred typefaces; exemplar): substitute per docs/FONTS.md.
+#let font-family = ("Times New Roman", "Liberation Serif")      // FRAP 32(a)(5)(A): proportional serif face. Century Schoolbook (court's preferred typefaces; exemplar): substitute per docs/FONTS.md.
 #let type-size = 14pt                      // FRAP 32(a)(5)(A): 14-point or larger, text and footnotes.
 #let body-leading = 0.94em                 // FRAP 32(a)(4): double-spaced. With the metric-aligned line box
                                            // below this gives a baseline pitch of about 2.2 x type size.

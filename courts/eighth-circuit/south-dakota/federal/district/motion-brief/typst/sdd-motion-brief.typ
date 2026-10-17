@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/ (the only font the build can use)
+#let font-family = ("Times New Roman", "Liberation Serif")        // vendored in fonts/ (the only font the build can use)
 #let type-size = 12pt                   // LR 83.4: type must be at least 12 point
 #let pitch = 24pt                       // LR 83.4: double-spaced text; the baseline pitch at 12 pt
 #let page-w = 8.5in                     // LR 83.4: 8 1/2 by 11 inch paper

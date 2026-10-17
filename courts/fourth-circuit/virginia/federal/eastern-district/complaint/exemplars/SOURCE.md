@@ -12,4 +12,20 @@
 - Text layer: yes (`pdftotext` yields text)
 - Public court record (RECAP). Used only as a visual and structural reference.
 
-Second filer candidate (not saved in `exemplars/`, so the overlay default pairs with one filer only): *Warren v. Bloomberg Industry Group, Inc.*, No. 1:26-cv-03349 (E.D. Va., Alexandria), Document 1, 14 pages, filed 2026-10-06 by Samuel Warren, by counsel Adam Nadelhaft (named on the companion proposed summons, Document 2). Fetched from https://storage.courtlistener.com/recap/gov.uscourts.vaed.607529/gov.uscourts.vaed.607529.1.0.pdf (CourtListener docket https://www.courtlistener.com/docket/74926977/1/warren-v-bloomberg-industry-group-inc/). Not yet read past page 1 or transcribed. Tier 2 is judged against one filer for now; see `README.md` (Known gaps).
+## Replacement exemplar: *Warren v. Bloomberg Industry Group, Inc.*
+
+- File: `FILED-EXAMPLE-warren-1-26-cv-03349-complaint.pdf` (14 pages)
+- Court: United States District Court, Eastern District of Virginia, Alexandria Division
+- Case: *Samuel Warren v. Bloomberg Industry Group, Inc.*
+- Docket: No. 1:26-cv-03349-MSN-LRV, Document 1
+- Document: Complaint (employment discrimination; jury demand and prayer for relief)
+- Filer: Plaintiff Samuel Warren, by counsel Adam S. Nadelhaft, Charlson Bredehoft Cohen Brown & Nadelhaft, P.C.
+- Date filed: 2026-10-06 (ECF header on each page)
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.vaed.607529/gov.uscourts.vaed.607529.1.0.pdf
+- Docket page: https://www.courtlistener.com/docket/74926977/1/warren-v-bloomberg-industry-group-inc/
+- Date retrieved: 2026-10-17
+- SHA-256: `60291210909910ae2e5394f62762d0aae9660382618851994abb6357c3c3800f`
+- Text layer: yes; `pdftotext` yields all 14 pages (3,440 words). Embedded Times New Roman family (`pdffonts`: TimesNewRomanPSMT, TimesNewRomanPS-BoldMT, TimesNewRomanPS-ItalicMT).
+- Public filing: CourtListener RECAP copy.
+
+This text-based Times New Roman filing replaces the scanned `FILED-EXAMPLE-tamaris-1-26-cv-03298-complaint.pdf` for font and text-layer comparison. The Tamaris file is retained as historical source material. Tier 2 can now compare two filers; the Warren complaint is the replacement reference.

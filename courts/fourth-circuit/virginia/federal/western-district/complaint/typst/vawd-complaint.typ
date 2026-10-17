@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to the exemplars; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // no rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/. See README "Known gaps".
+#let font-family = ("Times New Roman", "Liberation Serif")        // no rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/. See README "Known gaps".
 #let type-size = 12pt                   // no rule sets a size; 12 pt, the size of the Times used by the exemplars (docs/FONTS.md)
 #let line-pitch = 27.6pt                // double spacing: baseline-to-baseline distance measured on both exemplars
 #let body-leading = line-pitch - 1.15em // the text runs in a 1.15em line box (top-edge 0.9em, bottom-edge -0.25em); the gap makes the 27.6 pt pitch

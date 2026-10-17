@@ -21,3 +21,7 @@ Only one filer is available so far. The eval loop wants 2 or 3 exemplars from di
 | File | SHA-256 |
 |---|---|
 | `FILED-EXAMPLE-kirk-v-city-of-morgan-hill-H048745-opening-brief.pdf` | `1531b7f0181fbeda4beb56877ea4c8ddf45c5291a39e5e0955f1a63dfb48d199` |
+
+## Opening-brief replacement identified; file retrieval blocked
+
+The Kirk opening brief is flagged for Garamond. A same-court, same-document-type public filing with searchable text has been identified: *Yumori-Kaku et al. v. City of Santa Clara*, Nos. H046105/H046696, Appellant's Opening Brief by the City of Santa Clara, filed July 23, 2019. The public copy is at https://www.svvoice.com/wp-content/uploads/2019/10/cvra-city-opening-brief-2019.pdf; the indexed PDF text includes the filing's caption and appellate e-filing notice. The origin blocks direct download from this environment with an HTML access challenge, so a checked local replacement PDF could not be saved. The Kirk exemplar remains the saved file pending retrieval.

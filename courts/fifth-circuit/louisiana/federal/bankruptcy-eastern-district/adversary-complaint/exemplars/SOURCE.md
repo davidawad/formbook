@@ -17,3 +17,18 @@
 Public court record (RECAP). The filer is a Chapter 7 trustee's counsel, so the filing is a representative complaint in a pending adversary.
 
 Other candidates found and not saved (the brief asks for one exemplar per doc type): *Crosby Tugs, L.L.C. v. Pelican Marine Logistics, LLC*, Adv. No. 26-01083, complaint filed 2026-10-12 (6 pages, RECAP `gov.uscourts.laeb.211046.1.0.pdf`); *Brown v. Burmaster*, Adv. No. 23-01032 (5 pages, `gov.uscourts.laeb.202033.1.0.pdf`). Tier 2 of EVAL-LOOP asks for 2 or 3 filers; see README.md.
+
+## Replacement for the audited non-redistributable-font exemplar
+
+- File: `FILED-EXAMPLE-crosby-tugs-26-01083-adversary-complaint.pdf` (6 pages)
+- Case: *Crosby Tugs, L.L.C. v. Pelican Marine Logistics, LLC*, Adv. No. 26-01083
+- Document: Doc. 1, Complaint
+- Filer: Crosby Tugs, L.L.C., by counsel Michael D. Rubenstein, Liskow & Lewis
+- Date filed: 2026-10-12 (CM/ECF header on each page)
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.laeb.211046/gov.uscourts.laeb.211046.1.0.pdf
+- Date retrieved: 2026-10-17
+- SHA-256: `b0bb3a22b1b88295c7068814b21cd4cabc2ff850e87a84905048c216537ab011`
+- Text layer: yes; `pdftotext` yields the complaint. Its body uses Times-Roman (unembedded), so it is a text-layer Times-family comparison, not a Times New Roman font-embedding reference.
+- Public filing: CourtListener RECAP copy.
+
+This public, text-based complaint replaces the audited `FILED-EXAMPLE-babin-crescent-24-01028-adversary-complaint.pdf` (Garamond) for font and text-layer comparison. The Babin PDF is retained as historical source material.

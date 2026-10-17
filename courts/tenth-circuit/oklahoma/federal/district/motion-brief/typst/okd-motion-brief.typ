@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 13pt                   // LCvR7.1(d): not less than 13-point type, footnotes included
 #let page-w = 8.5in                     // LCvR5.2(a): 8 1/2 by 11 inch paper
 #let page-h = 11in

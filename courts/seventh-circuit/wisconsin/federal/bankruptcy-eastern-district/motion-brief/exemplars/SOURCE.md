@@ -9,3 +9,17 @@
 - Date filed: 04/08/2022 (ECF stamp "Filed 04/08/22")
 - Date fetched: 2026-10-14
 - Note: the PDF is a scan with a text layer (OCR); the sample transcription corrects obvious OCR errors and does not reproduce exhibits or the Table of Contents, which the filing does not contain.
+
+## Font-audit selected replacement — Ability Insurance Company
+
+The Vongermeten filing is flagged as a scanned OCR PDF. The saved Ability Insurance Company brief is a same-court, same-document-type public filing with a native text layer and Times New Roman body text. It supports a separate motion to dismiss rather than combining the motion and memorandum in one file, so it is a font-audit selected replacement, not a direct sample substitute.
+
+- File: `FILED-EXAMPLE-ability-insurance-16-24179-motion-brief.pdf`
+- Case: *In re Green Box NA Green Bay, LLC*, No. 16-24179-beh, Chapter 11
+- Document: Ability Insurance Company's Brief in Support of Motion to Dismiss (8 pages; Doc. 351)
+- Filer: Ability Insurance Company, through Conway, Olejniczak & Jerry, S.C.
+- Date filed: 2017-11-29
+- URL: https://oneidaeye.com/wp-content/uploads/2017/11/2017-11-29-Ability-Ins.-Cos-Brief-in-Support-of-Motion-to-Dismiss-16-24179-Ch-11-GBNAGB.pdf
+- Date retrieved: 2026-10-17
+- Text layer: yes (`pdftotext` returns 2,189 words); Times New Roman embedded for body text
+- SHA-256: `59e884ff003131ed9fecf7eacdf542db7f57888a4bfcfdbea1b09fbe8585eeff`

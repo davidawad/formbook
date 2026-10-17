@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"         // No M.D. Pa. font rule found (see ../README.md, gaps); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")         // No M.D. Pa. font rule found (see ../README.md, gaps); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                    // FRBP 9004(a): clearly legible; no M.D. Pa. size rule. 12 pt, as the filed papers (Times New Roman 12 pt).
 #let line-pitch = 24pt                   // Double spacing, as the filed complaint (convention, see ../README.md).
 #let body-leading = line-pitch - 0.909em // Gap between body lines: the ascender-to-descender line box set below is 0.909em in Liberation Serif, so the line pitch is line-pitch.

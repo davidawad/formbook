@@ -28,3 +28,7 @@ Second filer: not collected in this pass. The brief asks for one exemplar per do
 - Pages: 34. Text layer: yes (Times New Roman embedded).
 - sha256: 9d06e69c6b3dc5d93e641987a79fa43b797e29feea8f20dd357153efe2496954
 - Different party and counsel from the Kerrick exemplar (Adams Leclair LLP for the Town of Gorham defendants). Public court record. Used only as a visual and structural reference.
+
+## Selected replacement
+
+The Kerrick memorandum is flagged for Calisto MT. The saved State of New York filing is a text-layer filing from the same court and motion-brief type, with embedded Times New Roman, and is the closest available selected replacement. Its scope is an amicus-participation motion rather than a dispositive motion, so the source sample still reflects Kerrick and should not be silently retargeted to it.

@@ -12,7 +12,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no typeface rule in the S.D. Iowa Local Rules; tier 2. EB Garamond is the only serif in fonts/ (the exemplar is Times New Roman)
+#let font-family = ("Times New Roman", "Liberation Serif")        // no typeface rule in the S.D. Iowa Local Rules; tier 2. EB Garamond is the only serif in fonts/ (the exemplar is Times New Roman)
 #let type-size = 12pt                   // no size rule in the Local Rules; tier 2: 12 point, as in the exemplar
 #let footnote-size = 12pt               // tier 2: footnotes at text size, as in the exemplar
 #let pitch = 24pt                       // LR 10(b)(1): double spaced; 24 pt baseline pitch at 12 pt

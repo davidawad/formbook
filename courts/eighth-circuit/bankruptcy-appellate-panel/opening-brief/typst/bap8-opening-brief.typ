@@ -28,7 +28,7 @@
 // ---------------------------------------------------------------------------
 
 #let court-name = "United States Bankruptcy Appellate Panel for the Eighth Circuit"   // FRBP 8015(a)(2)(B)
-#let font-family = "EB Garamond"          // FRBP 8015(a)(5)(A): proportionally spaced, serif. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // FRBP 8015(a)(5)(A): proportionally spaced, serif. Vendored in /fonts.
 #let type-size = 14pt                      // FRBP 8015(a)(5)(A): 14-point or larger, everywhere, footnotes included.
 #let body-leading = 0.94em                 // with the metric-aligned line box, a baseline pitch of about
                                            // 2.2 x type size: double spacing (FRBP 8015(a)(4)).

@@ -28,3 +28,7 @@ Second filer: not collected. The brief asks for one exemplar per doc type; the o
 - Notes: filed in 2010 under the pre-2013 local rules; no LBR 9013-1(c) response notice (an accompanying memorandum, not the initial motion). Signature blocks give firm, address, telephone, fax (one block), e-mail and USDC-PR number, but do not name the client.
 - sha256: `3762b25397fa876e2638f49e34757fce0b203cee269da4b71df5da303f6b7f1a`
 - Public court record (RECAP). Used only as a visual and structural reference.
+
+## Replacement for the audited non-redistributable-font exemplar
+
+The audited `FILED-EXAMPLE-perez-cruz-20-00126-motion-brief.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-gdb-10-00139-motion-brief.pdf` from a different filer. See the second-filer record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

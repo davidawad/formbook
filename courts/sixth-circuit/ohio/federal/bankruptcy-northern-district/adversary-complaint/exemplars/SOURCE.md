@@ -9,6 +9,10 @@ Both files are public RECAP documents from CourtListener, fetched 2026-10-14 via
 
 Different filers: the debtor's counsel (Alrachid) and the U.S. Trustee (Stone).
 
+## Selected replacement
+
+The Alrachid complaint is flagged for Segoe UI. The saved Stone complaint is the selected replacement: a same-court adversary complaint from a different filer, with an extractable text layer and embedded Times New Roman. The Alrachid sample remains paired with its source and must be rebuilt before replacing that PDF.
+
 Notes:
 - The Alrachid complaint's exhibits (Exhibit B payment ledger, pp. 16-31) are not transcribed; `samples/INPUT-adversary-complaint.md` transcribes the body (caption, jurisdiction, parties, background, counts, prayer, signature).
 - The Stone caption shows the adversary number blank in the filed form; the number `25-05001` is the CourtListener docket number.
