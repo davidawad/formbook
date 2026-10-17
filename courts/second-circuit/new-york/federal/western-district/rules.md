@@ -14,6 +14,8 @@ Re-check cadence: re-check annually each January (the court adopts amended Local
 | FRCP | Federal Rules of Civil Procedure 5.2, 7, 8, 10, 11, 38 (Legal Information Institute) | https://www.law.cornell.edu/rules/frcp/rule_5.2, `rule_7`, `rule_8`, `rule_10`, `rule_11`, `rule_38` |
 | EX-C1 | Complaint exemplar: Kerrick v. Town of Gorham, No. 6:26-cv-06006, Doc. 1-2 (plaintiff, Gregory L. Silverman). Visual reference only. | `complaint/exemplars/SOURCE.md` |
 | EX-M1 | Motion-brief exemplar: Kerrick v. Town of Gorham, No. 6:26-cv-06006, Doc. 6-9 (defendants, Adams Leclair LLP). Visual reference only. | `motion-brief/exemplars/SOURCE.md` |
+| EX-C2 | Complaint exemplar 2: NIFLA v. James, No. 1:24-cv-00514, Doc. 1 (plaintiffs, Alliance Defending Freedom / Michael G. McCartin Law PLLC). Added 2026-10-17. Visual reference only. | `complaint/exemplars/SOURCE.md` |
+| EX-M2 | Motion-brief exemplar 2: United States v. City of Rochester, No. 6:25-cv-06226, State of New York amicus-leave motion, memorandum and proposed amicus brief (NY Attorney General). Added 2026-10-17. Visual reference only. | `motion-brief/exemplars/SOURCE.md` |
 
 All rule PDFs and HTML pages above were fetched on 2026-10-17 (cached outside the repo in `/work/artifacts/rules-cache/nywd/`).
 
@@ -82,7 +84,7 @@ IDs are stable. `checks.yaml` references them. Never renumber; retire an ID by m
 | NYWD-CONT-104 | Jury demand, if made, may be included in the pleading (served no later than 14 days after the last pleading directed to the issue). | FRCP 38(b) | A |
 | NYWD-CONT-105 | A completed civil cover sheet "shall be submitted with every complaint"; when opening a case online, the civil cover sheet, summons and marshal forms are attached to the initiating document as individual attachments. Separate filing; the template does not produce it. | LR 3; APG 2(C)(iii) | M (separate document) |
 | NYWD-CONT-106 | RICO claims: a "RICO Case Statement" is filed under separate cover with the papers first asserting the claim. Separate filing. | LR 9 | A |
-| NYWD-CONT-107 | Headings PARTIES / JURISDICTION / FACTUAL BACKGROUND / causes of action / relief, centered bold capitals; "JURY TRIAL DEMANDED" legend in the caption. Seen in EX-C1 only: one filer's style until a second complaint exemplar is compared. | EX-C1 | C (one filer) |
+| NYWD-CONT-107 | Headings for parties / jurisdiction (and venue) / factual background / causes of action / prayer for relief, centered capitals; a jury-demand legend in the caption ("JURY TRIAL DEMANDED" EX-C1, "JURY DEMANDED" EX-C2). Seen across two filers (EX-C1, EX-C2): a convention. An INTRODUCTION heading appears in EX-C2 only (that filer's style). | EX-C1, EX-C2 | C |
 
 ## Doc type: motion-brief
 
@@ -94,7 +96,7 @@ IDs are stable. `checks.yaml` references them. Never renumber; retire an ID by m
 | NYWD-CONT-203 | The motion states with particularity the grounds and the relief sought. | FRCP 7(b)(1) | A |
 | NYWD-CONT-204 | Sur-reply papers are not permitted without the judge's permission. | LR 7(a)(6) | A |
 | NYWD-CONT-205 | Pro se opponent: counsel serves printed copies of cited unreported decisions on the pro se litigant. | LR 7(a)(8) | A |
-| NYWD-CONT-206 | Front matter: cover page with caption, title and counsel block; table of contents; table of authorities. No rule requires a TOC or TOA (LR 7(a)(2)(C) only excludes them from the page count). Seen in EX-M1 only: one filer's style until a second exemplar is compared. | EX-M1 | C (one filer) |
+| NYWD-CONT-206 | Front matter: table of contents and table of authorities. No rule requires a TOC or TOA (LR 7(a)(2)(C) only excludes them from the page count). Seen in EX-M1 (cover page with caption, title and counsel block, TOC, TOA) and in the proposed brief of EX-M2 (TOC, TOA, no separate cover): TOC and TOA are a convention across two filers; the separate cover page is EX-M1's style. EX-M2 is an amicus filing, so this comparison is weaker than two dispositive memoranda. | EX-M1, EX-M2 | C |
 | NYWD-FORM-201 | When the front matter is numbered in roman and the body in arabic, the PDF page labels match (see NYWD-ELEC-004). | APG 4(A) | M |
 
 ## Not verified
