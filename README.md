@@ -826,7 +826,7 @@ GNU General Public License v3.0 (see [LICENSE](LICENSE)) for the templates, tool
 
 ## Tracker
 
-Regenerate with `tools/tracker.sh` (the completion logic is in [Bend](https://github.com/HigherOrderCO/Bend), `tools/tracker.bend`). Per-court detail is in [STATUS.md](STATUS.md). A court is `done` only when a human sets it in its `court.json`.
+Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Rust tool `tools/fb`: `fb manifest`, `fb tracker`). Per-court detail is in [STATUS.md](STATUS.md). A court is `done` only when a human sets it in its `court.json`.
 
 <!-- tracker:start -->
 | Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |

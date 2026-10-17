@@ -1,0 +1,14 @@
+[package]
+name = "fb"
+version = "0.1.0"
+edition = "2021"
+description = "Formbook tooling: check gates, manifest, tracker, READMEs"
+publish = false
+
+[[bin]]
+name = "fb"
+path = "src/main.rs"
+
+[dependencies]
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"
