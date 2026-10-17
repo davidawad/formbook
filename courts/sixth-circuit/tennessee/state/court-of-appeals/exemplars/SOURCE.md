@@ -15,3 +15,7 @@ Indexed level: `state-appellate`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 27 pp., text layer verified 2026-10-17; filed 2020; posted by Beacon Center | `FILED-EXAMPLE-beacon-metro-v-dreher-2020-00635-amicus-brief.pdf` | Beacon Center of Tennessee, amicus curiae (Braden H. Boucek) | Metropolitan Government of Nashville v. Dreher, No. M2020-00635-COA-R3-CV | undated | https://www.beacontn.org/wp-content/uploads/2020/11/Amicus-brief.pdf | `a00935ed7524de274e0fd386c9cc6c0fa918c79565b54d8a804c9b6925ae7733` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: searched tncourts.gov appellate rules, capital-case/document archives, and targeted queries for substantive motions, petitions for review, and writ filings. Results were opinions and rules quoting or describing party briefs, not the underlying filings; no additional public filed text-layer PDF was retrieved for the blocked rows. Appellate routes checked against official Tennessee Rules of Appellate Procedure and e-filing rule: https://www.tncourts.gov/rules/rules-appellate-procedure ; https://www.tncourts.gov/courts/supreme-court/rules/supreme-court-rules/rule-46-electronic-filing.

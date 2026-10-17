@@ -371,3 +371,14 @@ BLOCKED fb-l129.4  ortc/motion-brief: follow-up official-source and public filin
 BLOCKED fb-l129.4  ortc/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/tax-court/exemplars/SOURCE.md
 BLOCKED fb-l129.4  ortc/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/tax-court/exemplars/SOURCE.md
 BLOCKED fb-l129.4  ortc/amicus-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/tax-court/exemplars/SOURCE.md
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+BLOCKED rows re-searched for tennessee state courts; official rules/docket indexes and targeted public-filing queries reviewed. No additional qualifying downloadable text-layer PDF was verified for the remaining BLOCKED rows.
+BLOCKED fb-l129.4  tenncrimapp/reply-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/tennessee/state/court-of-criminal-appeals/exemplars/SOURCE.md
+BLOCKED fb-l129.4  tenncrimapp/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/tennessee/state/court-of-criminal-appeals/exemplars/SOURCE.md
+BLOCKED fb-l129.4  tenncrimapp/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/tennessee/state/court-of-criminal-appeals/exemplars/SOURCE.md
+BLOCKED fb-l129.4  tenncrimapp/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/tennessee/state/court-of-criminal-appeals/exemplars/SOURCE.md
+BLOCKED fb-l129.4  tenn/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/tennessee/state/supreme-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  tennctapp/motion-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/tennessee/state/court-of-appeals/exemplars/SOURCE.md
+BLOCKED fb-l129.4  tennctapp/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/tennessee/state/court-of-appeals/exemplars/SOURCE.md
+BLOCKED fb-l129.4  tennctapp/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/tennessee/state/court-of-appeals/exemplars/SOURCE.md
