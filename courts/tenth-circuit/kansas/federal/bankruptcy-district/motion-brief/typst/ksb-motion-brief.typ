@@ -13,11 +13,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // Vendored in /fonts. The only font the build can see.
-#let type-size = 16pt                    // KSB-FORM-002: 12 pt or larger, and an average of no more than 12 characters per inch (LBR 9004.1(a)(1)). Measured: 13.4 cpi at 14 pt, so 16 pt; see ../README.md.
+#let font-family = "Liberation Serif"    // Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 16pt                    // KSB-FORM-002: 12 pt or larger, and an average of no more than 12 characters per inch (LBR 9004.1(a)(1)). Measured in Liberation Serif on the sample text (typst 0.15.0, 2026-10-17): 12.8 cpi at 14 pt, 11.9 at 15 pt, 11.2 at 16 pt; 16 pt keeps a margin under 12.
 #let line-pitch = 2 * type-size           // KSB-FORM-003: double-spaced where practicable (LBR 9004.1(a)(1)): two type sizes per line.
-#let body-leading = line-pitch - 1.114 * type-size  // gap between body lines; 1.114 em is EB Garamond's own line height, so the pitch is line-pitch.
-#let single-leading = 0.25em             // counsel block, caption, headings, tables and authorities.
+#let body-leading = line-pitch - 1.107 * type-size  // gap between body lines; 1.107 em is Liberation Serif's line box (hhea ascender 0.891em to descender 0.216em), so the pitch is line-pitch.
+#let single-leading = 0.448em            // counsel block, caption, headings, tables and authorities.
 #let page-margin = 1in                   // style choice: 1 inch on all sides (no margin figure in the rules).
 #let para-indent = 0.5in                 // first-line indent of body paragraphs.
 #let heading-tab = 0.5in                 // hanging label width for numbered sub-headings.
@@ -296,7 +296,7 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    top-edge: 0.891em, bottom-edge: -0.216em,  // Liberation Serif's hhea ascender and descender: a 1.107em line box
   )
   set par(
     leading: body-leading, spacing: 0pt,

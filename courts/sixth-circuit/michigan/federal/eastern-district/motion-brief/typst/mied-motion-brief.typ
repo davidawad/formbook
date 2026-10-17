@@ -11,14 +11,14 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a named style choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LR 5.1(a)(3) names no face (any proportional type, 14 pt): kept per docs/FONTS.md "No face named"
+#let font-family = "Liberation Serif"   // LR 5.1(a)(3) names no face (any proportional type, 14 pt); Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 14pt                   // LR 5.1(a)(3): 14 point for proportional type, footnotes included
 #let margin = 1in                       // LR 5.1(a)(2): at least 1 inch, top, bottom and sides
 #let page-size = 12pt                   // page numbers are not text under LR 5.1(a)(3); style choice
 // Double spacing (LR 5.1(a)(2)) is defined against the font's own single line: the font's line box is
-// 0.65em, so single spacing is a 1.15em pitch (Times New Roman's single line box) and double is 2.3em.
-#let single-leading = 0.5em             // single pitch 1.15em: captions, signature, authorities, tables
-#let double-leading = 1.65em            // double pitch 2.3em: body text
+// 0.655em (Liberation Serif), so single spacing is a 1.15em pitch (Times New Roman's single line box) and double is 2.3em.
+#let single-leading = 0.495em            // single pitch 1.15em: captions, signature, authorities, tables
+#let double-leading = 1.645em           // double pitch 2.3em: body text
 #let para-indent = 0.5in
 #let caption-left = 3.3in               // width of the party column of the caption
 

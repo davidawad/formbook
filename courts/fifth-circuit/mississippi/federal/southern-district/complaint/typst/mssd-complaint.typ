@@ -8,10 +8,10 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a choice recorded in README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/ (the only vendored face). Times New Roman in the exemplar.
-#let type-size = 13pt                   // 13 pt EB Garamond reads at the size of 12 pt Times (README.md, gaps)
+#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md (Times New Roman in the exemplar)
+#let type-size = 12pt                   // 12 pt, the exemplar's size; no complaint rule sets one (L.U.Civ.R. 7(b)(5)(B), for memoranda, sets 12-point or larger)
 #let margin = 1in                       // all four sides (the exemplar's margins; FRCP 10 sets none)
-#let body-leading = 1.47em              // double spacing: calibrated to the exemplar's 27.6 pt line pitch (README.md)
+#let body-leading = 1.645em             // double spacing: calibrated to the exemplar's 27.6 pt line pitch (README.md); Liberation Serif's 0.655em line box + 1.645em = 2.3em = 27.6 pt at 12 pt
 #let single-leading = 0.25em            // single spacing for the court title, caption, headings and signature block
 #let para-indent = 0.5in                // first-line indent of numbered allegations
 

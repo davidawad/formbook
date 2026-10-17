@@ -12,14 +12,14 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or is a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"      // layout choice: no S.D.Ind. font rule; vendored in fonts/
+#let font-family = "Liberation Serif"      // layout choice: no S.D.Ind. font rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                 // layout choice: the Rule 9004(a) legibility floor is the only requirement
 #let pitch = 27.6pt                   // layout choice: double spacing, matching the filed exemplar (27.6 pt baseline pitch, measured)
 #let page-w = 8.5in                   // S.D.Ind. B-5005-3: no larger than 8-1/2 by 11 inches
 #let page-h = 11in
 #let margin = 1in                     // layout choice
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.65em            // double spacing: 0.65 em line box + 1.65 em leading = 27.6 pt at 12 pt (measured, README.md)
+#let body-leading = 1.645em           // double spacing: 0.655 em line box + 1.645 em leading = 27.6 pt at 12 pt (measured, README.md)
 #let single-leading = 0.5em           // single spacing for the caption, the counsel and the signature block
 #let para-indent = 0.5in              // first-line indent of body paragraphs
 #let caption-left = 3.4in             // width of the party column of each caption

@@ -9,12 +9,12 @@
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
 #let numbered = false                   // briefs: paragraphs are not numbered (Fed. R. Civ. P. 10 does not apply)
-#let font-family = "EB Garamond"        // the only vendored font (fonts/); see README.md, known gaps
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md (fonts/); see README.md, known gaps
 #let type-size = 12pt                   // L.R. 5-1(b): at least 12-point type in the body
 #let margin = 1in                       // L.R. 5-1(b): at least 1-inch margins
 #let page-w = 8.5in                     // 8 1/2 x 11 inch paper (L.R. 5-1(d) for paper filings)
 #let page-h = 11in
-#let body-leading = 1.35em              // L.R. 5-1(b): double spaced; 24 pt pitch at 12 pt (EB Garamond line box 0.65em)
+#let body-leading = 1.345em             // L.R. 5-1(b): double spaced; 24 pt pitch at 12 pt (Liberation Serif line box 0.655em)
 #let single-leading = 0.5em             // headings, caption, counsel and signature block: single spaced
 #let para-indent = 0.5in                // first-line indent of paragraphs
 #let text-width = page-w - 2 * margin

@@ -11,10 +11,10 @@
 // Parameters (each traces to a rule or a named style choice; see README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // vendored in /fonts. No SC bankruptcy rule names a typeface.
-#let type-size = 13pt                   // style choice: EB Garamond sets smaller than Times at the same size (README.md)
+#let font-family = "Liberation Serif"        // No SC bankruptcy rule names a typeface; Times New Roman substitute per docs/FONTS.md, vendored in /fonts.
+#let type-size = 12pt                   // no SC bankruptcy rule sets a size; the 12 pt convention (docs/FONTS.md)
 #let pitch = 24pt                       // double spacing: the line pitch of body text
-#let body-leading = 0.54em              // tuned so body lines fall on the pitch (README.md)
+#let body-leading = pitch - 1.15em     // body lines fall on the pitch: the text runs in a 1.15em line box (top-edge 0.9em, bottom-edge -0.25em)
 #let single-leading = 0.2em             // caption, signature, notice headings, footnotes
 #let page-margin = 1in
 #let para-indent = 0.5in                // first-line indent of body paragraphs
@@ -223,7 +223,9 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    // A 1.15em line box (a word-processor single line); Liberation Serif's ascender-descender box is only 0.909em,
+    // so single-spaced lines with no gap would touch.
+    top-edge: 0.9em, bottom-edge: -0.25em,
   )
   set par(leading: body-leading, spacing: 0pt, first-line-indent: (amount: para-indent, all: true), justify: false)
   set enum(numbering: "a)", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)

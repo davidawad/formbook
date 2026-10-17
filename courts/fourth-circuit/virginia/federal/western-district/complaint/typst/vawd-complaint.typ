@@ -9,12 +9,12 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to the exemplars; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no rule; vendored in fonts/ (the only serif face there). See README "Known gaps".
-#let type-size = 13pt                   // no rule; EB Garamond at 13 pt sets the x-height of Times 12 pt used by the exemplars
+#let font-family = "Liberation Serif"        // no rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/. See README "Known gaps".
+#let type-size = 12pt                   // no rule sets a size; 12 pt, the size of the Times used by the exemplars (docs/FONTS.md)
 #let line-pitch = 27.6pt                // double spacing: baseline-to-baseline distance measured on both exemplars
-#let body-leading = 0.82em              // natural line box is 1.3 em in this font (measured); 0.82 em more gives a 27.6 pt pitch
-#let single-leading = 0em                 // single spacing: the font's natural line box (about 17 pt at 13 pt); typst does not accept negative leading
-#let single-pitch = 17pt                // one line of single-spaced text (the font's natural line box); the ")" marks are counted in these rows
+#let body-leading = line-pitch - 1.15em // the text runs in a 1.15em line box (top-edge 0.9em, bottom-edge -0.25em); the gap makes the 27.6 pt pitch
+#let single-pitch = 13.8pt              // one line of single-spaced text (1.15 x 12 pt, word-processor single spacing); the ")" marks are counted in these rows
+#let single-leading = single-pitch - 1.15em // single spacing: the 1.15em line box plus this gap is single-pitch
 #let margins = (top: 1in, bottom: 1in, left: 1in, right: 1in)
 #let para-indent = 0.5in                // first line of a numbered paragraph
 #let caption-width = 3.3in              // width of the party block in the box caption
@@ -92,7 +92,7 @@
   }
   let cell-marks(c) = context {
     let n = calc.max(1, calc.ceil(measure(width: caption-width, c).height / single-pitch))
-    stack(dir: ttb, spacing: 0pt, ..range(n).map(_ => align(center)[)]))
+    stack(dir: ttb, spacing: 0pt, ..range(n).map(_ => block(height: single-pitch, width: 100%, align(center)[)])))
   }
   set par(leading: single-leading, first-line-indent: 0pt, justify: false)
   grid(columns: (caption-width, 0.4in), ..rows.map(c => (cell-text(c), cell-marks(c))).flatten())
@@ -221,7 +221,9 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    // A 1.15em line box (a word-processor single line); Liberation Serif's ascender-descender box is only 0.909em,
+    // so single-spaced lines with no gap would touch.
+    top-edge: 0.9em, bottom-edge: -0.25em,
   )
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
   set enum(numbering: "a.", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)

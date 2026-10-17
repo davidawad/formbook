@@ -11,12 +11,12 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // CA2-FORM-004: serif, proportional. Vendored in /fonts.
+#let font-family = "Liberation Serif"          // CA2-FORM-004: serif, proportional; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // CA2-FORM-004: FRAP 32(a)(5)(A), 14-point or larger, everywhere.
 #let docket-size = 72pt                    // CA2-COVER-001: Local Rule 32.1(a)(1), docket number at least one inch high.
-#let body-leading = 0.94em                 // double spacing: the metric-aligned line box below this
-                                           // gives a baseline pitch of about 2.2 x type size.
-#let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced.
+#let body-leading = 1.336em                // double spacing: Liberation Serif's ascender-to-descender box (0.909em, set below)
+                                           // plus this leading gives a 2.245em baseline pitch (31.4 pt at 14 pt), about 2.2 x type size.
+#let single-leading = 0.516em              // headings, quotations, footnotes, TOC/TOA: single-spaced.
 #let page-margin = 1in                     // CA2-FORM-002: FRAP 32(a)(4), at least one inch on all four sides.
 #let para-indent = 0.5in
 #let heading-tab = 0.5in

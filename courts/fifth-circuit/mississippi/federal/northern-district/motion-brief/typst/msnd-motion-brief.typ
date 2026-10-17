@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // L.U.Civ.R. 7(b)(5)(B): a proportionally spaced face with serifs (vendored in fonts/)
+#let font-family = "Liberation Serif"   // L.U.Civ.R. 7(b)(5)(B): a proportionally spaced face with serifs; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // L.U.Civ.R. 7(b)(5)(B): text 12-point or larger
 #let footnote-size = 11pt               // L.U.Civ.R. 7(b)(5)(B): footnotes 11-point or larger
 #let page-w = 8.5in                     // L.U.Civ.R. 7(b)(5)(A): 8 1/2 by 11 inch paper
@@ -18,8 +18,8 @@
 #let margin = 1in                       // L.U.Civ.R. 7(b)(5)(A): at least 1 inch on all four sides
 #let text-width = page-w - 2 * margin
 #let pitch = 24pt                       // one double-spaced line (the baseline pitch of body text)
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 1.35em gives 24 pt at 12 pt
-#let single-leading = 0.5em             // single spacing for the caption, the signature block and footnotes
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 1.345em gives 24 pt at 12 pt
+#let single-leading = 0.495em            // single spacing for the caption, the signature block and footnotes
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 3.25in              // width of the party column of the caption
 

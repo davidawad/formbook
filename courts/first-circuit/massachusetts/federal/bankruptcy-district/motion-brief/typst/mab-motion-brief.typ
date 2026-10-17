@@ -9,14 +9,14 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // the only vendored face (fonts/); Appendix 8(c) asks for a plain roman type
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md (fonts/); Appendix 8(c) asks for a plain roman type
 #let type-size = 12pt                   // Appendix 8(c): not less than 12-point for the body
 #let footnote-size = 10pt               // Appendix 8(c): not less than 10-point for footnotes
 #let page-w = 8.5in                     // Appendix 8(a): 8.5 x 11-inch document format
 #let page-h = 11in
 #let margin = 1in                       // Appendix 8(a): at least one inch on all four sides
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // Appendix 8(a): double-spaced; EB Garamond's line box is 0.65em, so this is a 24 pt pitch at 12 pt
+#let body-leading = 1.345em             // Appendix 8(a): double-spaced; Liberation Serif's line box is 0.655em, so this is a 24 pt pitch at 12 pt
 #let single-leading = 0.5em             // single spacing for the caption, counsel and signature (Appendix 8(a) exceptions)
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.4in               // width of the party column of the caption

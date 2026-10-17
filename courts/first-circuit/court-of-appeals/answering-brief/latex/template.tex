@@ -1,12 +1,13 @@
 % LaTeX template for the First Circuit brief (engine "latex"). Mirrors ../typst/ca1-opening-brief.typ:
-% the same form (FRAP 32(a)): EB Garamond 14 pt, double-spaced body, 1 inch margins, roman front matter,
+% the same form (FRAP 32(a)): Liberation Serif 14 pt, double-spaced body, 1 inch margins, roman front matter,
 % arabic body, Add-N addendum. The content (cover, TOC, TOA, certificates, headings) is built by ca1.lua
 % from the markdown and its frontmatter; this file only holds the page layout and the macros it calls.
 \documentclass[14pt,letterpaper]{extarticle}
 \usepackage{fontspec}
-% Vendored EB Garamond only (fontdir is passed by tools/render-latex.sh). No system fonts.
-\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf, UprightFont=EBGaramond-Regular, ItalicFont=EBGaramond-Italic,
-  BoldFont=EBGaramond-Bold, BoldItalicFont=EBGaramond-BoldItalic, Ligatures=TeX]{EBGaramond-Regular}
+% FRAP 32(a)(5)(A): proportionally spaced serif. Vendored Liberation Serif only, the Times New Roman substitute
+% per docs/FONTS.md (fontdir is passed by tools/render-latex.sh). No system fonts.
+\setmainfont[Path=$fontdir$liberation-serif/, Extension=.ttf, UprightFont=LiberationSerif-Regular, ItalicFont=LiberationSerif-Italic,
+  BoldFont=LiberationSerif-Bold, BoldItalicFont=LiberationSerif-BoldItalic, Ligatures=TeX]{LiberationSerif-Regular}
 \usepackage[letterpaper,margin=1in,footskip=0.5in]{geometry}   % FRAP 32(a)(4)
 \usepackage{indentfirst}     % every paragraph is indented, including the first after a heading
 \usepackage{needspace}

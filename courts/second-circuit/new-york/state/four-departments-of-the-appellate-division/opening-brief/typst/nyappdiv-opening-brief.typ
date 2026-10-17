@@ -29,9 +29,9 @@
 // Parameters (every number traces to a rule or to a style choice noted beside it)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"            // vendored in /fonts; no system font is used.
+#let font-family = "Liberation Serif"            // Times New Roman substitute per docs/FONTS.md, vendored in /fonts; no system font is used.
 #let type-size = 14pt                       // Style choice above the 11-point floor in secondary sources (README).
-#let body-leading = 1.35em                  // Gap between lines; set so the baseline pitch is about double spacing (README, measured).
+#let body-leading = 1.345em                 // Gap between lines; set so the baseline pitch is about double spacing (README, measured).
 #let single-leading = 0.65em                // Headings, block quotations, table entries: single-spaced (Typst's default leading, so two-line headings do not crowd).
 #let page-margin = 1in                      // Style choice; the rules leave margins open (README).
 #let para-indent = 0.5in

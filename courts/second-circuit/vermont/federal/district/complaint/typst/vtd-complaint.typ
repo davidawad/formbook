@@ -9,9 +9,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // L.R. 10(a)(2), (4): plainly legible, 12 point or more; the rule names no face, so EB Garamond stays (docs/FONTS.md, "No face named"); vendored in fonts/
-#let type-size = 13pt                   // L.R. 10(a)(4) requires 12 point or more; 13 pt is a style choice (EB Garamond's x-height is smaller than Times New Roman's at the same size)
-#let body-leading = 1.35em              // L.R. 10(a)(6): double-spaced. EB Garamond's line box is 0.65em, so 1.35em of leading gives a 2.0em baseline pitch
+#let font-family = "Liberation Serif"        // L.R. 10(a)(2), (4): plainly legible, 12 point or more; the rule names no face, so the default applies: Times New Roman substitute (docs/FONTS.md, "No face named"); vendored in fonts/
+#let type-size = 12pt                   // L.R. 10(a)(4): 12 point or more; the rule floor
+#let body-leading = 1.345em             // L.R. 10(a)(6): double-spaced. Liberation Serif's line box is 0.655em, so 1.345em of leading gives a 2.0em baseline pitch
 #let single-leading = 0.5em             // quotations, caption, counsel and signature: single-spaced (1.15em pitch)
 #let page-margin = 1in                  // L.R. 10(a)(3): at least 1 inch on every side
 #let text-width = 8.5in - 2 * page-margin

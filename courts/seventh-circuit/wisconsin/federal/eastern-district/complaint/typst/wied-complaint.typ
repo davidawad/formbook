@@ -8,14 +8,14 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see ../README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // General L.R. 5(a)(6): proportional serif; vendored in fonts/
+#let font-family = "Liberation Serif"        // General L.R. 5(a)(6): proportional serif; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                   // General L.R. 5(a)(6)(A): 12-point or larger
 #let page-w = 8.5in                     // General L.R. 5(a)(5): 8½ by 11 inch paper
 #let page-h = 11in
 #let margin = 1in                       // General L.R. 5(a)(5): at least one inch on all four sides
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // General L.R. 5(a)(5): double-spaced; 1.35em leading on EB Garamond's
-                                        // 0.65em line box gives a 24 pt baseline pitch at 12 pt (measured, ../README.md)
+#let body-leading = 1.345em             // General L.R. 5(a)(5): double-spaced; 1.345em leading on Liberation Serif's
+                                        // 0.655em line box gives a 24 pt baseline pitch at 12 pt (measured, ../README.md)
 #let single-leading = 0.5em             // single spacing: caption, headings, signature block, quotations
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.25in              // width of the party column of the caption

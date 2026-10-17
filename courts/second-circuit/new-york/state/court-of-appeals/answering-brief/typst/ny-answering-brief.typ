@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // NY-TYPE-001: serif, proportional. Vendored in /fonts.
+#let font-family = "Liberation Serif"          // NY-TYPE-001: serif, proportional; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let body-size = 14pt                      // NY-TYPE-002: 14-point body for a proportional font.
 #let note-size = 12pt                      // NY-TYPE-002: footnotes at least 12-point.
 #let body-leading = 1.59em                 // NY-FORM-002: double spacing: 31.4 pt line pitch at 14 pt (cap-height to baseline

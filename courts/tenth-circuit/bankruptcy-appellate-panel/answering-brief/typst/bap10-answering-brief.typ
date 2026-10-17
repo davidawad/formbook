@@ -24,11 +24,12 @@
 // ---------------------------------------------------------------------------
 
 #let court-name = "United States Bankruptcy Appellate Panel of the Tenth Circuit"   // FRBP 8015(a)(2)(B)
-#let font-family = "EB Garamond"          // FRBP 8015(a)(5)(A): proportionally spaced, serif. Vendored in /fonts.
+#let font-family = "Liberation Serif"     // FRBP 8015(a)(5)(A): proportionally spaced, serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                      // FRBP 8015(a)(5)(A) requires 14-point; 10th Cir. BAP L.R. 8015-1(b) accepts 12-point. 14 satisfies both.
-#let body-leading = 0.94em                 // with the metric-aligned line box, a baseline pitch of about
+#let body-leading = 1.336em                // with the metric-aligned line box, a baseline pitch of about
                                            // 2.2 x type size: double spacing (FRBP 8015(a)(4)).
-#let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced (FRBP 8015(a)(4)).
+#let single-leading = 0.516em              // headings, quotations, footnotes, TOC/TOA: single-spaced (FRBP 8015(a)(4)).
+                                           // Liberation Serif line box (ascender to descender) is 0.909em: body pitch 0.909 + 1.336 = 2.245em, single 1.425em.
 #let page-margin = 1in                     // FRBP 8015(a)(4): at least one inch on all four sides.
 #let para-indent = 0.5in
 #let toc-depth = 4
@@ -188,7 +189,7 @@
     // Unnumbered sub-headings: bold, left.
     block(width: 100%, sticky: true, above: 1.2em, below: 0.9em, strong(it.body))
   } else if in-argument(it.location()) and it.level == 2 {
-    // Point headings: bold small capitals, centered, with the roman numeral.
+    // Point headings: bold, centered, with the roman numeral (smallcaps() has no effect: Liberation Serif has no small capitals).
     block(width: 100%, sticky: true, above: 1.2em, below: 1em,
       align(center, strong(smallcaps(heading-label(it) + [ ] + it.body))))
   } else {

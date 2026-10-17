@@ -11,9 +11,9 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // Vendored in /fonts (no system fonts). Not set by any Vt. LBR.
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in /fonts (no system fonts). Not set by any Vt. LBR.
 #let type-size = 12pt                    // Vt. LBR 5005-1 sets no size; 12 pt is the court's usual practice (README, gap 2).
-#let body-leading = 1.67em               // VT-AC-003: 2.0 line spacing; measured pitch 27.8 pt at 12 pt (README).
+#let body-leading = 1.665em              // VT-AC-003: 2.0 line spacing; measured pitch 27.8 pt at 12 pt (README).
 #let single-leading = 0.45em             // quotations, caption, signature block: single-spaced.
 #let page-margin = 1in                   // VT-AC-002: no less than 3/4 inch, exclusive of page numbers.
 #let indent = 0.5in                      // first-line indent of numbered paragraphs.

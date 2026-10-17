@@ -11,12 +11,12 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"   // convention: the one vendored serif (fonts/eb-garamond)
+#let font-family = "Liberation Serif"   // convention: Times New Roman substitute per docs/FONTS.md (fonts/liberation-serif)
 #let type-size = 12pt              // NYSM-FORM-002: 22 NYCRR 202.5(a) print no smaller than 12-point
 #let footnote-size = 11pt          // NYSM-FORM-003: 22 NYCRR 202.5(a) footnotes no smaller than 10-point; 11-point for legibility
 #let page-margin = 1in             // NYSM-FORM-004: 22 NYCRR 202.5(a) margins no smaller than one inch
 #let para-indent = 0.5in           // convention: text paragraphs begin with a first-line indent
-#let body-leading = 1.65em         // NYSM-FORM-001: double space (202.5(a)); baseline pitch about twice the single pitch, see README
+#let body-leading = 1.645em        // NYSM-FORM-001: double space (202.5(a)); baseline pitch about twice the single pitch, see README
 #let single-leading = 0.52em       // quotations, caption, signature block, TOC/TOA, footnotes: single-spaced
 #let toc-depth = 4
 #let passim-threshold = 7          // convention (as in the ca9 template): an authority on 7 or more pages prints "passim"

@@ -332,7 +332,7 @@ end
 
 local function certificate_of_compliance(m, words)
   local n = group_digits(words)
-  local typeface = "EB Garamond"
+  local typeface = "Liberation Serif"
   local body
   if DOC == "opening" then
     body = "1.\\ This document complies with the type-volume limit of Fed.\\ R.\\ App.\\ P.\\ 32(a)(7)(B) and Local Rule 32.1(a) because, excluding the parts of the document exempted by Fed.\\ R.\\ App.\\ P.\\ 32(f): this document contains " .. n .. " words.\\par\n" ..

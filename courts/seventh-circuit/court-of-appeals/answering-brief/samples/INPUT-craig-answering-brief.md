@@ -20,7 +20,7 @@ counsel:
 phone: "T: (317) 939-6800"
 role: "Counsel for Plaintiffs-Appellees"
 date: "May 21, 2026"
-typeface: "EB Garamond"
+typeface: "Liberation Serif"
 signature:
   signers:
     - name: "Trevor J. Crossen"

@@ -12,11 +12,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // Vendored in /fonts. No EDNY rule names a face (NYED-FORM-002).
+#let font-family = "Liberation Serif"         // No EDNY rule names a face (NYED-FORM-002); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                    // NYED-FORM-002: LCR 7.1(b)(1), 12-point type or larger.
 #let line-pitch = 24pt                   // NYED-FORM-003: LCR 7.1(b)(3), double-spaced body text.
-#let body-leading = 0.695em              // Gap between body lines; with EB Garamond 12 pt the baseline pitch is 24 pt (double spacing, measured).
-#let single-leading = 0.2em              // Caption, counsel block, headings, signature block (7.1(b)(3) exceptions for headings).
+#let body-leading = line-pitch - 0.909em // Gap between body lines: text edges are ascender/descender (below), a 0.909em line box in Liberation Serif, so the baseline pitch is line-pitch (double spacing).
+#let single-leading = 0.241em            // 0.909em + 0.241em = 1.15em (13.8 pt), single spacing: Caption, counsel block, headings, signature block (7.1(b)(3) exceptions for headings).
 #let margins = (top: 1in, bottom: 1in, x: 1in)  // NYED-FORM-004: LCR 7.1(b)(2), at least one inch on all sides.
 #let para-indent = 0.5in                 // First-line indent of numbered paragraphs.
 #let number-tab = 0.5in                  // Distance from paragraph number to text.
@@ -108,7 +108,7 @@
     } else if t.starts-with("- ") {
       // Prayer items: lettered A., B., ... in a label column. A list may break across pages.
       let items = t.split(regex("\\r?\\n")).filter(l => l.trim() != "")
-      set par(first-line-indent: 0pt, leading: body-leading, spacing: 0pt, justify: false)
+      set par(first-line-indent: 0pt, leading: body-leading, spacing: body-leading, justify: false)
       for (i, it) in items.enumerate() {
         let txt = it.trim().slice(2)
         block(breakable: true, width: 100%, pad(left: para-indent, grid(
@@ -120,11 +120,11 @@
       v(body-leading)
     } else if t.starts-with("WHEREFORE") {
       // The prayer lead-in is an unnumbered paragraph (Fed. R. Civ. P. 10(b) numbers allegations only).
-      par(first-line-indent: para-indent, leading: body-leading, spacing: 0pt, justify: false, inl(t))
+      par(first-line-indent: para-indent, leading: body-leading, spacing: body-leading, justify: false, inl(t))
     } else {
       // Paragraph number at the first-line indent; text starts one number-tab further in.
       n += 1
-      par(first-line-indent: 0pt, leading: body-leading, spacing: 0pt, justify: false, [
+      par(first-line-indent: 0pt, leading: body-leading, spacing: body-leading, justify: false, [
         #h(para-indent)#box(width: number-tab)[#n.]#inl(t)
       ])
     }
@@ -181,7 +181,7 @@
     hyphenate: false, fallback: false,
     top-edge: "ascender", bottom-edge: "descender",
   )
-  set par(leading: body-leading, spacing: 0pt, justify: false)
+  set par(leading: body-leading, spacing: body-leading, justify: false)
 
   // ---- first page: counsel, court, caption, title ----
   counsel-block(meta)
@@ -197,7 +197,7 @@
 
   // Unnumbered lead-in paragraph (the "Plaintiff ... states as follows:" opening), if given.
   if "lead_in" in meta {
-    par(first-line-indent: para-indent, leading: body-leading, spacing: 0pt, justify: false, inl(meta.lead_in))
+    par(first-line-indent: para-indent, leading: body-leading, spacing: body-leading, justify: false, inl(meta.lead_in))
   }
   allegations(md)
   signature-block(meta)

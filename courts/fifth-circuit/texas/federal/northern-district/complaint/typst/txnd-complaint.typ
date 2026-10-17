@@ -8,15 +8,15 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; the rules name no typeface for a complaint (see README)
+#let font-family = "Liberation Serif"   // the rules name no typeface for a complaint; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // N.D. Tex. LR 7.2 sets 12-point or larger for briefs; applied to the complaint too
 #let pitch = 24pt                       // double spacing: baseline-to-baseline distance of body text at 12 pt
 #let page-w = 8.5in                     // LR 10.1: 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let margin-all = 1in                   // LR 7.2 margins (at least one inch); applied to the complaint too
 #let text-width = page-w - 2 * margin-all
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 1.35em leading gives a 24 pt pitch at 12 pt (README.md)
-#let single-leading = 0.5em             // single spacing for the caption, the title and the signature block
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 1.345em leading gives a 24 pt pitch at 12 pt (README.md)
+#let single-leading = 0.495em            // single spacing for the caption, the title and the signature block
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.6in               // width of the party column of the caption
 #let caption-sign = 0.4in               // the column of section marks (§) that separates the parties from the case data

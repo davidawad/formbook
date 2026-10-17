@@ -9,13 +9,13 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no face named by D. Me. LR 10(b)(1), so docs/FONTS.md "No face named": EB Garamond (README.md)
-#let type-size = 13pt                   // LR 10(b)(1): 12-point or larger. 13 pt EB Garamond has about the x-height of 12 pt Times, the face in the filed exemplars (README.md)
+#let font-family = "Liberation Serif"        // no face named by D. Me. LR 10(b)(1), so docs/FONTS.md "No face named": Times New Roman substitute (README.md)
+#let type-size = 12pt                   // LR 10(b)(1): 12-point or larger; 12 pt, as the filed exemplars (README.md)
 #let footnote-size = 11pt               // LR 10(b)(1): footnotes 10-point or larger
 #let page-w = 8.5in                     // LR 10(b)(3): 8 1/2 by 11 inches
 #let page-h = 11in
 #let margin = 1in                       // LR 10(b)(5): 1-inch margins on all four sides
-#let body-leading = 27.6pt - 0.65em     // LR 10(b)(2): double-spaced: 27.6 pt baseline pitch (Word double spacing for 12 pt Times; the filed exemplars measure 27.6 pt) less EB Garamond's 0.65 em line box
+#let body-leading = 27.6pt - 0.655em     // LR 10(b)(2): double-spaced: 27.6 pt baseline pitch (Word double spacing for 12 pt Times; the filed exemplars measure 27.6 pt) less Liberation Serif's 0.655 em line box
 #let single-leading = 0.5em             // caption, headings, block quotes, footnotes, signature: single-spaced
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 3.4in               // width of the party block of the caption

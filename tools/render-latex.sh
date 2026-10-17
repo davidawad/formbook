@@ -8,7 +8,7 @@
 #   <court>/latex/template.tex  otherwise: pandoc --to latex --template, plus every <court>/latex/*.lua as a
 #                               filter, then tectonic (default) or xelatex (LATEX_ENGINE=xelatex).
 # The template must load fonts from the vendored directory, passed to it as the pandoc variable `fontdir`
-# (trailing slash), e.g. \setmainfont{EBGaramond-Regular}[Path=$fontdir$, Extension=.ttf]. Gate 1 asserts the
+# (trailing slash), e.g. \setmainfont{LiberationSerif-Regular}[Path=$fontdir$liberation-serif/, Extension=.ttf]. Gate 1 asserts the
 # embedded font names, so a silent fallback fails the check.
 set -eu
 ROOT=$(cd "$(dirname "$0")/.." && pwd)

@@ -12,11 +12,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // KYED-FORM-002: proportionally spaced font. Vendored in /fonts (the only family vendored).
+#let font-family = "Liberation Serif"   // KYED-FORM-002: proportionally spaced font; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // KYED-FORM-002: at least 12-point type, footnotes included.
 #let line-pitch = 24pt                  // KYED-FORM-001: text double spaced. Measured on the render (README.md).
-#let body-leading = 1.35em              // gap between lines of body text, tuned so the baseline pitch is line-pitch.
-#let single-leading = 0.5em             // caption, headings, block quotes, footnotes, signature block: single spaced.
+#let body-leading = 1.345em             // gap between lines of body text, tuned so the baseline pitch is line-pitch.
+#let single-leading = 0.495em            // caption, headings, block quotes, footnotes, signature block: single spaced.
 #let margin-all = 1in                   // KYED-FORM-001: at least one inch on all sides.
 #let para-indent = 0.5in                // first-line indent of body paragraphs.
 

@@ -1,8 +1,8 @@
-ours p.1  filed p.1  word-overlap 76.0%
-ours p.2  filed p.3  word-overlap 60.1%
-ours p.3  filed p.9  word-overlap 40.0%
-ours p.4  filed p.9  word-overlap 60.6%
-ours p.5  filed p.14  word-overlap 38.8%
-ours p.6  filed p.16  word-overlap 40.7%
-ours p.7  filed p.19  word-overlap 38.4%
-ours p.8  filed p.20  word-overlap 32.4%
+ours p.1  filed p.1  word-overlap 80.2%
+ours p.2  filed p.3  word-overlap 62.2%
+ours p.3  filed p.4  word-overlap 34.3%
+ours p.4  filed p.9  word-overlap 59.2%
+ours p.5  filed p.12  word-overlap 42.9%
+ours p.6  filed p.15  word-overlap 46.9%
+ours p.7  filed p.17  word-overlap 38.8%
+ours p.8  filed p.19  word-overlap 41.5%

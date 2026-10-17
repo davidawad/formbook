@@ -13,7 +13,7 @@
 // vendored substitute, Liberation Serif (metric-compatible; docs/FONTS.md).
 #let font-family = "Liberation Serif"
 #let type-size = 12pt                    // LR 7007-2(a)(ii): at least 12-point typeface
-#let body-leading = 1.35em               // LR 7007-2(a)(ii): double-spaced (set in em; was measured with EB Garamond)
+#let body-leading = 1.345em              // LR 7007-2(a)(ii): double-spaced: Liberation Serif line box 0.655em + 1.345em = 24 pt at 12 pt
 #let single-leading = 0.5em              // single spacing for captions, cover, block quotes, counsel and signature
 #let page-w = 8.5in                      // FRBP 9004 / LR 7007-2: letter-size paper
 #let page-h = 11in

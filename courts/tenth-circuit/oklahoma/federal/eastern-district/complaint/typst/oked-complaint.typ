@@ -8,12 +8,12 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LCvR 5.2(a) names no typeface; EB Garamond is the vendored font (README, gap 2)
+#let font-family = "Liberation Serif"   // LCvR 5.2(a) names no typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LCvR 5.2(a): print style, footnotes included, not smaller than 12 point
 #let page-margin = 1in                  // LCvR 5.2(a): margins at least 1 inch on the top, bottom and sides
 #let line-pitch = 24pt                  // double spacing: LCvR 5.2(a) requires at least 1.5; the exemplar is double
-#let body-leading = 1.35em              // EB Garamond line box is 0.65em, so 1.35em leading is a 24 pt pitch at 12 pt
-#let single-leading = 0.5em             // caption, counsel and signature block (README, gap 1)
+#let body-leading = 1.345em             // Liberation Serif line box is 0.655em, so 1.345em leading is a 24 pt pitch at 12 pt
+#let single-leading = 0.495em            // caption, counsel and signature block (README, gap 1)
 #let single-pitch = 13.8pt              // one single-spaced caption row: fixed height so the ")" column lines up
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let number-width = 0.5in               // the paragraph number sits in the first half inch, text starts at 1 inch

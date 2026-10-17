@@ -9,16 +9,16 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"         // vendored in fonts/ (see README: Times New Roman in the exemplar)
+#let font-family = "Liberation Serif"         // Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (see README: Times New Roman in the exemplar)
 #let type-size = 12pt                    // Local Rule 9004-1: 12 point or larger for text (footer too: no footnotes)
 #let page-margin = 1in                   // Local Rule 9004-1: at least one inch on each side
 #let page-w = 8.5in
 #let page-h = 11in
 #let text-width = page-w - 2 * page-margin
-#let body-leading = 1.35em               // double spacing: with the 0.65em line box, a 24 pt pitch at 12 pt (the exemplar)
+#let body-leading = 1.345em              // double spacing: with the 0.655em line box, a 24 pt pitch at 12 pt (the exemplar)
 #let pitch = 24pt                        // the double-spaced line pitch every block is rounded up to
 #let single-leading = 0.5em              // single spacing for the caption, the block quotations and the signature
-#let single-pitch = 14pt                 // 0.65em line box + 0.5em leading, rounded
+#let single-pitch = 14pt                 // 0.655em line box + 0.5em leading (13.9 pt), rounded
 #let para-indent = 0.5in
 #let caption-left = 4.0in                // the party column, with its ")" column
 #let caption-right = text-width - caption-left

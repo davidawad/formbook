@@ -8,10 +8,10 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // Gen. L.R. 5(a)(2): plain roman font; vendored in fonts/ (see README.md, gap 1)
+#let font-family = "Liberation Serif"   // Gen. L.R. 5(a)(2): plain roman font; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // Gen. L.R. 5(a)(2): 12 point or larger, footer included
-#let body-leading = 1.35em              // Gen. L.R. 5(a)(1): double-spaced text; measured as 24 pt baseline pitch at 12 pt (CAND template, same font)
-#let single-leading = 0.5em             // headings, caption, counsel and signature lines may be single-spaced
+#let body-leading = 1.345em             // Gen. L.R. 5(a)(1): double-spaced text; measured as 24 pt baseline pitch at 12 pt (CAND template, same font)
+#let single-leading = 0.495em            // headings, caption, counsel and signature lines may be single-spaced
 #let margin = 1in                       // Gen. L.R. 5(a)(1): at least 1 inch on all four sides
 #let text-width = 8.5in - 2 * margin
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs

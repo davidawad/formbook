@@ -10,11 +10,11 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; the LBRs set no typeface (see README.md)
-#let type-size = 13pt
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 0.65em + 1.35em = 2em = 24 pt at 12 pt
-#let pitch = 26pt                       // one double-spaced line at 13 pt: 0.65em + 1.35em = 2em = 26 pt (a blank line is one pitch)
-#let single-leading = 0.5em             // caption, counsel, signature block, footnotes: single-spaced lines
+#let font-family = "Liberation Serif"   // the LBRs set no typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 12pt                   // FRBP 9004(a): legible; no rule sets a size, so the 12 pt convention
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 0.655em + 1.345em = 2em = 24 pt at 12 pt
+#let pitch = 24pt                       // one double-spaced line at 12 pt: 0.655em + 1.345em = 2em = 24 pt (a blank line is one pitch)
+#let single-leading = 0.495em           // caption, counsel, signature block, footnotes: single-spaced lines
 #let para-indent = 0.5in
 #let page-margin = 1in
 #let text-width = 8.5in - 2 * page-margin

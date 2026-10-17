@@ -10,12 +10,12 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a named layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // Vendored in fonts/ (the only serif vendored). Not a rule requirement: the rule is about size.
-#let type-size = 13pt                   // LR 5.1.1(a): at least 12 point for all printed matter. 13 pt is a style choice (Garamond sets smaller than Times at the same size; see README.md).
-#let footer-size = 13pt                 // LR 5.1.1(a) "all printed matter": the page number is printed matter too.
-#let line-pitch = 27pt                  // Double spacing, measured against the exemplar's 27.6 pt pitch at 12 pt Times (README.md).
-#let body-leading = 1.43em              // Gap between body lines. EB Garamond's line box is about 0.65em, so 1.43em gives about 2.08em (27 pt at 13 pt): double spacing.
-#let single-leading = 0.45em            // Caption, counsel block, signature and footnotes: single spacing (about 1.1em, EB Garamond line box 0.65em).
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/. Not a rule requirement: the rule is about size.
+#let type-size = 12pt                   // LR 5.1.1(a): at least 12 point for all printed matter.
+#let footer-size = 12pt                 // LR 5.1.1(a) "all printed matter": the page number is printed matter too.
+#let line-pitch = 27.6pt                // LR 5.1.1(a): double spacing "according to typical word processing software": 2 x 1.15 x 12 pt, the exemplar's 27.6 pt pitch (README.md).
+#let body-leading = 1.645em              // Gap between body lines. Liberation Serif's line box is 0.655em, so 1.645em gives 2.3em (27.6 pt at 12 pt): double spacing.
+#let single-leading = 0.45em            // Caption, counsel block, signature and footnotes: single spacing (about 1.1em, Liberation Serif line box 0.655em).
 #let page-margin = 1in                  // LR 5.1.1(a): margins not less than 1 inch.
 #let para-indent = 0.5in                // First-line indent of numbered paragraphs.
 #let number-tab = 0.5in                 // Distance from the paragraph number to the text.

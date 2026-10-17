@@ -10,15 +10,15 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // L.R. 9004-1(a)(3): 12-point font; the vendored serif face
+#let font-family = "Liberation Serif"   // L.R. 9004-1(a)(3): 12-point font, no face named; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // L.R. 9004-1(a)(3)
 #let footnote-size = 10pt               // L.R. 9004-1(a)(3): footnotes may be 10-point
 #let margin = 1in                       // L.R. 9004-1(a)(2): at least one inch on every side
 #let page-w = 8.5in                     // US Letter
 #let page-h = 11in
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // L.R. 9004-1(a)(4): double spacing; with EB Garamond's 0.65em line box this is a 24 pt pitch at 12 pt
-#let single-leading = 0.5em             // single spacing for caption, signature block and certificate (about 13.8 pt)
+#let body-leading = 1.345em             // L.R. 9004-1(a)(4): double spacing; with Liberation Serif's 0.655em line box this is a 24 pt pitch at 12 pt
+#let single-leading = 0.495em            // single spacing for caption, signature block and certificate (about 13.8 pt)
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.4in               // width of the party column of the caption
 #let quote-inset = 0.5in                // block quotations are indented on both sides

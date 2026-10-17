@@ -15,10 +15,10 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // Convention: vendored serif (no S.D. Ala. type rule). See ../README.md.
-#let type-size = 13pt                    // Convention. EB Garamond sets smaller than Times at the same size.
-#let body-leading = 1.35em               // Gap between lines of body text; tuned so the body is about double-spaced.
-#let single-leading = 0.3em              // Caption, headings, signature block, footnotes.
+#let font-family = "Liberation Serif"    // no S.D. Ala. type rule; Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 12pt                    // Convention: 12 pt, the size of the filed exemplars (no rule sets a size).
+#let body-leading = 1.345em              // Gap between lines of body text; 0.655em line box + 1.345em = 24 pt pitch, double-spaced.
+#let single-leading = 0.495em            // Caption, headings, signature block, footnotes: single spacing, 0.655em line box + 0.495em = 1.15em pitch.
 #let page-margin = 1in                   // Convention: 1 inch on all sides.
 #let para-indent = 0.5in                 // First-line indent of body paragraphs.
 #let footer-size = 11pt                  // Page number only; not body text.

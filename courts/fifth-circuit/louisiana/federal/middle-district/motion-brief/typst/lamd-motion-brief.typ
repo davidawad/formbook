@@ -11,17 +11,17 @@
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
 #let court-name = ("UNITED STATES DISTRICT COURT", "MIDDLE DISTRICT OF LOUISIANA") // the court's name, not a case's
-#let font-family = "EB Garamond"        // LR 10(a)(1): standard typeface; the only serif vendored in fonts/
+#let font-family = "Liberation Serif"   // LR 10(a)(1): standard typeface; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // LR 10(a)(1): no smaller than standard 12-point
 #let page-w = 8.5in                     // LR 10(a)(1): 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let margin = 1in                       // LR 10(a)(1): every margin no less than one inch
 #let footer-descent = 0.6in             // LR 10(a)(1): page numbers no less than 1/2 inch from the bottom edge
-#let body-leading = 1.35em              // LR 10(a)(1): double spaced; EB Garamond's 0.65em line box + 1.35em = 24 pt pitch at 12 pt (README.md)
-#let single-pitch = 13.8pt              // single spacing (caption, quotations, signature): 0.65em + 0.5em at 12 pt
+#let body-leading = 1.345em             // LR 10(a)(1): double spaced; Liberation Serif's 0.655em line box + 1.345em = 24 pt pitch at 12 pt (README.md)
+#let single-pitch = 13.8pt              // single spacing (caption, quotations, signature): 0.655em + 0.495em at 12 pt
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let quote-indent = 1in                 // block quotation indent, both sides
-#let single-leading-quote = 0.5em       // single spacing for block quotations: the single pitch minus the 0.65em line box
+#let single-leading-quote = 0.495em      // single spacing for block quotations: the single pitch minus the 0.655em line box
 #let signature-indent = 2.5in           // the signature column starts at mid-page, as in the filed exemplars
 #let text-width = page-w - 2 * margin
 #let caption-party-w = 2.7in            // width of the party column (the party names, then "VERSUS" between them)
@@ -151,7 +151,7 @@
     footer-descent: footer-descent,
   )
   set text(font: font-family, size: type-size, lang: "en")
-  // Paragraph and block spacing equal the double-space pitch: a line of text is about 0.65em tall, so
+  // Paragraph and block spacing equal the double-space pitch: a line of text is about 0.655em tall, so
   // with spacing 0 consecutive paragraphs and blocks overprint (measured; see README.md).
   set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
   set block(spacing: body-leading)

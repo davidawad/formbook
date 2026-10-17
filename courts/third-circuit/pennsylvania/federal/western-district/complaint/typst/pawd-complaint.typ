@@ -6,8 +6,8 @@
 #import "@preview/cmarker:0.1.10"
 
 // ---- LCvR 5.1 format ----
-#let type-size = 13pt // LCvR 5.1.B: not smaller than 12 pt. 13 pt EB Garamond has about the x-height of 12 pt Times.
-#let double = 26pt // LCvR 5.1.B: double-spaced, a baseline pitch of two type sizes (0.65 em line + 1.35 em leading).
+#let type-size = 12pt // LCvR 5.1.B: not smaller than 12 pt.
+#let double = 24pt // LCvR 5.1.B: double-spaced, a baseline pitch of two type sizes (0.655 em line + 1.345 em leading).
 #let para-indent = 0.5in
 #let single-leading = 0.6em // headings, the caption and the signature block may be single-spaced.
 
@@ -151,9 +151,9 @@
     number-align: center,
     footer-descent: 0.4in,
   )
-  set text(font: "EB Garamond", size: type-size, lang: "en", ligatures: true)
-  set par(leading: 1.35em, justify: false, spacing: 0pt) // 0.65 em line + 1.35 em leading = a 26 pt pitch at 13 pt
-  set block(spacing: 1.35em) // the gap between blocks is the leading again, so the pitch stays 26 pt
+  set text(font: "Liberation Serif", size: type-size, lang: "en", ligatures: true)
+  set par(leading: 1.345em, justify: false, spacing: 0pt) // 0.655 em line (Liberation Serif) + 1.345 em leading = a 24 pt pitch at 12 pt
+  set block(spacing: 1.345em) // the gap between blocks is the leading again, so the pitch stays 24 pt
 
   block(width: 100%, align(center)[*IN THE UNITED STATES DISTRICT COURT*])
   block(width: 100%, above: 0pt, align(center)[*FOR THE WESTERN DISTRICT OF PENNSYLVANIA*])

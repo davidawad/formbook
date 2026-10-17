@@ -9,10 +9,10 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // CV-10 names no face; vendored in fonts/ (docs/FONTS.md: no face named)
-#let type-size = 13pt                   // CV-10(a): 12-point or larger. 13 pt because EB Garamond sets smaller than Times 12
-#let body-leading = 1.35em              // double spacing: the line box is 0.65em, so this gives a 2.0em (26 pt) pitch
-#let single-leading = 0.55em            // single spacing (caption, signature, headings): a 1.2em line pitch (line box 0.65em + leading)
+#let font-family = "Liberation Serif"   // CV-10 names no face; Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 12pt                   // CV-10(a): 12-point or larger
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so this gives a 2.0em (24 pt) pitch
+#let single-leading = 0.545em           // single spacing (caption, signature, headings): a 1.2em line pitch (line box 0.655em + leading)
 #let single-pitch = 1.2em
 #let margin = 1in                       // CV-10(a): one-inch margins on all sides
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs

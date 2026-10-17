@@ -11,10 +11,10 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // WVSB-FORM-002: no rule names a typeface (see ../README.md). Vendored in /fonts.
-#let type-size = 13pt                    // WVSB-FORM-002: a style choice. EB Garamond sets smaller than Times at the same size.
+#let font-family = "Liberation Serif"         // WVSB-FORM-002: no rule names a typeface (see ../README.md); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let type-size = 12pt                    // WVSB-FORM-002: no rule sets a size; the 12 pt convention (docs/FONTS.md).
 #let line-pitch = 24pt                   // WVSB-FORM-003: double spacing, as in the exemplar.
-#let body-leading = 0.54em               // gap between lines of body text; tuned so the line pitch is line-pitch.
+#let body-leading = line-pitch - 1.15em // gap between lines of body text: the text runs in a 1.15em line box (top-edge 0.9em, bottom-edge -0.25em), so the line pitch is line-pitch.
 #let single-leading = 0.2em              // caption, counsel block, headings, footnotes, quotations.
 #let margins = (top: 1in, bottom: 1in, x: 1in)   // WVSB-FORM-004: a style choice (the exemplar uses 1 in).
 #let para-indent = 0.5in
@@ -128,7 +128,9 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    // A 1.15em line box (a word-processor single line); Liberation Serif's ascender-descender box is only 0.909em,
+    // so single-spaced lines with no gap would touch.
+    top-edge: 0.9em, bottom-edge: -0.25em,
   )
   set par(
     leading: body-leading, spacing: 0pt,

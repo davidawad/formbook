@@ -10,9 +10,9 @@
 // Parameters (each traces to a rule or a named style choice; see ../README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"     // MAD-FORM-002: L.R. 5.1 sets no typeface; EB Garamond is the serif vendored in fonts/
-#let type-size = 13pt                // style choice: 13 pt EB Garamond is about the apparent size of 12 pt Times (README)
-#let body-leading = 1.2em            // MAD-FORM-001: double spacing, 24 pt between baselines at 13 pt (EB Garamond line box 0.65 em + 1.2 em) (L.R. 5.1(a)(2))
+#let font-family = "Liberation Serif"     // MAD-FORM-002: L.R. 5.1 sets no typeface; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let type-size = 12pt                // style choice: L.R. 5.1 sets no size; 12 pt, the size of the filed exemplars (Times New Roman 12 pt)
+#let body-leading = 1.345em          // MAD-FORM-001: double spacing, 24 pt between baselines at 12 pt (Liberation Serif line box 0.655 em + 1.345 em) (L.R. 5.1(a)(2))
 #let single-leading = 0.45em         // single spacing: caption, quotations, footnotes, signature block, certificates (exempt under L.R. 5.1(a)(2))
 #let para-gap = 0.65em               // gap between paragraphs (a zero gap makes typst 0.15 stack paragraphs on top of each other)
 #let page-margin = 1in               // style choice (the rules set paper size only, L.R. 5.1(a)(2))

@@ -14,9 +14,9 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"     // BAP-FORM-003: serif, proportional (FRBP 8015(a)(5)). Vendored in /fonts.
+#let font-family = "Liberation Serif"     // BAP-FORM-003: serif, proportional (FRBP 8015(a)(5)); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                // BAP-FORM-003: 14-point or larger (FRBP 8015(a)(5)).
-#let body-leading = 0.94em           // BAP-FORM-004: double spacing (FRBP 8015(a)(4)), with the ascender/descender line box set below.
+#let body-leading = 0.94em           // BAP-FORM-004: double spacing (FRBP 8015(a)(4)), with the fixed 1.305em line box set below.
 #let single-leading = 0.12em         // block quotations, headings, footnotes, TOC and TOA: single-spaced.
 #let line-gap = 0.35em             // gap between the single-spaced lines of the cover, captions and signature blocks.
 #let form-leading = 0.65em          // plain single spacing (typst's default) for signature blocks and the L.R. 8014-1 statements.
@@ -181,10 +181,11 @@
 
   set document(title: kind.title + " (BAP No. " + need(meta, "case_number") + ")")
   set page(paper: "us-letter", margin: page-margin, numbering: "1")
-  // BAP-FORM-004: the metric-aligned line box (ascender to descender) with body-leading gives a
-  // baseline pitch of about 2.2 x the type size, i.e. double spacing (as in the CA9 template).
+  // BAP-FORM-004: a fixed line box, 1em above the baseline and 0.305em below (1.305em), with
+  // body-leading gives a baseline pitch of 2.245em (31.4 pt at 14 pt), about 2.2 x the type size,
+  // i.e. double spacing (FRBP 8015(a)(4)).
   set text(font: font-family, size: type-size, lang: "en", ligatures: true,
-    top-edge: "ascender", bottom-edge: "descender")
+    top-edge: 1em, bottom-edge: -0.305em)
   set par(justify: false, leading: body-leading, first-line-indent: para-indent, spacing: body-leading)
   show footnote.entry: set text(size: type-size)
   show link: it => if type(it.dest) == str and it.dest.starts-with("toa:") { it.body } else { it }

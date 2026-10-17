@@ -12,12 +12,12 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // Vendored in /fonts. No EDNY rule names a face (NYED-FORM-002).
+#let font-family = "Liberation Serif"         // No EDNY rule names a face (NYED-FORM-002); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                    // NYED-FORM-002: LCR 7.1(b)(1), 12-point type or larger.
 #let footnote-size = 10pt                // NYED-FORM-002: LCR 7.1(b)(1), 10-point type allowed in footnotes.
 #let line-pitch = 24pt                   // NYED-FORM-003: LCR 7.1(b)(3), double-spaced body text.
-#let body-leading = 0.695em              // Gap between body lines; with EB Garamond 12 pt the baseline pitch is 24 pt (measured).
-#let single-leading = 0.2em              // Caption, counsel block, headings, footnotes, TOC and TOA, signature block (7.1(b)(3)).
+#let body-leading = line-pitch - 0.909em // Gap between body lines: text edges are ascender/descender (below), a 0.909em line box in Liberation Serif, so the baseline pitch is line-pitch (double spacing).
+#let single-leading = 0.241em            // 0.909em + 0.241em = 1.15em (13.8 pt), single spacing: Caption, counsel block, headings, footnotes, TOC and TOA, signature block (7.1(b)(3)).
 #let margins = (top: 1in, bottom: 1in, x: 1in)  // NYED-FORM-004: LCR 7.1(b)(2), at least one inch on all sides.
 #let para-indent = 0.5in                 // First-line indent of body paragraphs (convention).
 #let heading-tab = 0.5in                 // Width of a heading label (I., A., 1., a.) and the hang that follows it.
@@ -287,7 +287,7 @@
     hyphenate: false, fallback: false,
     top-edge: "ascender", bottom-edge: "descender",
   )
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
+  set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
   set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))
   show footnote.entry: set text(size: footnote-size)
   show footnote.entry: set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.4em)
@@ -340,7 +340,7 @@
         let (lvl, lab, txt) = parse-heading(t)
         heading-element(lvl, lab, txt)
       } else {
-        par(first-line-indent: para-indent, leading: body-leading, spacing: 0pt, justify: false,
+        par(first-line-indent: para-indent, leading: body-leading, spacing: body-leading, justify: false,
           with-notes(t, defs))
       }
     }

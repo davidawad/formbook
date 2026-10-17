@@ -10,10 +10,10 @@
 // Rule-driven parameters
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"   // LR 10.1 "standard font": the serif face vendored in fonts/ (README, known gap 1)
+#let font-family = "Liberation Serif" // LR 10.1 "standard font"; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt              // LR 10.1 sets no point size; 12 pt, as in the filed exemplar
-#let body-leading = 1.35em         // double spacing: the EB Garamond line box is 0.65em, so 0.65em + 1.35em = 24 pt at 12 pt
-#let single-leading = 0.5em        // single spacing (caption, counsel, signature): about 13.8 pt
+#let body-leading = 1.345em        // double spacing: the Liberation Serif line box is 0.655em, so 0.655em + 1.345em = 24 pt at 12 pt
+#let single-leading = 0.495em       // single spacing (caption, counsel, signature): about 13.8 pt
 #let margin = 1in                  // LR 10.1: every margin no less than one inch
 #let footer-descent = 0.6in        // LR 10.1: a page number is not less than 1/2 inch from the bottom edge
 #let para-indent = 0.5in           // first-line indent; a numbered paragraph's number starts here

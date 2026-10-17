@@ -8,13 +8,13 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no font rule in the N.D. Tex. bankruptcy rules for complaints; the only vendored font
+#let font-family = "Liberation Serif"   // no font rule in the N.D. Tex. bankruptcy rules for complaints; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // convention; the mailing-matrix size rule (10 to 14 pt) is not a complaint rule
 #let page-w = 8.5in                     // FRBP 9004(a): legible paper; 8 1/2 by 11 inch is the practice (Form 416 is letter size)
 #let page-h = 11in
 #let margin = 1in                       // convention
-#let body-leading = 1.35em              // double spacing: about 24 pt pitch at 12 pt (convention, see README.md)
-#let single-leading = 0.5em             // single spacing for counsel, caption and signature
+#let body-leading = 1.345em             // double spacing: about 24 pt pitch at 12 pt (convention, see README.md)
+#let single-leading = 0.495em            // single spacing for counsel, caption and signature
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.25in              // width of the party column of the caption
 

@@ -16,6 +16,7 @@ counsel:
 signature:
   firm: "FIRM NAME, PLLC"
   signer: "Counsel Name"
+  title: "One of Its Attorneys"
   lines:
     - "*Counsel Name (MS Bar No. 00000)*"
     - "123 Example Street, Suite 400"

@@ -10,10 +10,10 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"       // PRD-FORM-002: proportional font, vendored in /fonts (see ../README.md)
+#let font-family = "Liberation Serif"       // PRD-FORM-002: proportional font; Times New Roman substitute per docs/FONTS.md, vendored in /fonts (see ../README.md)
 #let type-size = 12pt                  // PRD-FORM-002: 12 point or larger for a proportional font (L.Civ.R. 7)
 #let line-pitch = 24pt                 // PRD-FORM-003: double spacing (L.Civ.R. 7); the baseline pitch of body text
-#let body-leading = 1.35em             // gap between body lines at 12 pt in EB Garamond: gives the 24 pt pitch (measured, README)
+#let body-leading = 1.345em            // gap between body lines at 12 pt in Liberation Serif: gives the 24 pt pitch (measured, README)
 #let single-leading = 0.5em            // caption, counsel block, signature block: single-spaced (L.Civ.R. 7)
 #let page-margin = 1in                 // PRD-FORM-004: margins are not stated in the rule text read; 1 inch as in the exemplar (README)
 #let para-indent = 0.5in               // first-line indent of the lead-in

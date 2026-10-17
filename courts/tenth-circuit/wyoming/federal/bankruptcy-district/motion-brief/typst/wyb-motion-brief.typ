@@ -5,11 +5,11 @@
 #import "@preview/cmarker:0.1.10"
 
 // ---- rule parameters (every number traces to a rule; see README.md) ----
-#let font-family = "EB Garamond"          // vendored in fonts/; the only font (system fonts are ignored)
+#let font-family = "Liberation Serif"     // Times New Roman substitute, the default per docs/FONTS.md
 #let body-size = 13pt                     // LBR 9004-1(A): typewritten text not less than 13 point
 #let small-size = 11pt                    // LBR 9004-1(A): counsel headings not smaller than 10 point
-#let body-leading = 1.35em                // double spacing: EB Garamond's line box is 0.65em, so this is a 2.0em pitch
-#let single-leading = 0.5em               // single spacing for counsel, caption, signature, certificate
+#let body-leading = 1.345em               // double spacing: Liberation Serif's line box is 0.655em, so this is a 2.0em pitch
+#let single-leading = 0.495em              // single spacing for counsel, caption, signature, certificate
 #let margin-top = 1in                     // LBR 9004-1(A): top margin one inch
 #let margin-side = 1in
 #let margin-bottom = 1in

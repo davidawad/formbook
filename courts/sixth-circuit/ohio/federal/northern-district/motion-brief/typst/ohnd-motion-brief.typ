@@ -10,9 +10,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"       // kept: L.R. 10.1 names no face, so docs/FONTS.md has no substitute (README)
+#let font-family = "Liberation Serif"  // L.R. 10.1 names no face; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                  // convention for federal filings; no N.D. Ohio font rule in L.R. 10.1
-#let natural-line = 7.8pt              // EB Garamond's line box, 0.65 em, measured (README)
+#let natural-line = 7.86pt             // Liberation Serif's line box, 0.655 em at 12 pt
 #let single-pitch = 13.8pt             // single spacing: 1.15 em at 12 pt
 #let body-pitch = 2 * single-pitch     // double spacing (L.R. 10.1): 27.6 pt, twice the single pitch
 #let body-leading = body-pitch - natural-line

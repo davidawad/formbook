@@ -42,7 +42,7 @@ signature:                                 # appended after the Conclusion and o
   lines: ["Jellison & Nathanson, LLP", "Tel. (617) 248-1806"]
 date: "March 17, 2025"
 word_processor: "Typst 0.15.1"             # ca1 certificate of compliance
-typeface: "EB Garamond"                    # ca1 certificate of compliance
+typeface: "Liberation Serif"               # ca1 certificate of compliance
 service: {certificate: true}               # adds a certificate of service
 authorities:                               # registry for toa: links
   mahone: {kind: case, name: "United States v. Mahone", cite: "453 F.3d 68 (1st Cir. 2006)"}

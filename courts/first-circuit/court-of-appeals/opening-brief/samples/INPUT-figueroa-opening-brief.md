@@ -30,7 +30,7 @@ signature:
     - "dnathanson@JNdefense.com"
 date: "March 17, 2025"
 word_processor: "Typst 0.15.1"
-typeface: "EB Garamond"
+typeface: "Liberation Serif"
 service:
   certificate: true
 authorities:

@@ -11,9 +11,9 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // Vendored in /fonts. LR 9004-1(a) allows any proportional font.
+#let font-family = "Liberation Serif"          // LR 9004-1(a) allows any proportional font; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                      // WIEB-FORM-001: proportional font not smaller than 12-point.
-#let body-leading = 1.35em                 // WIEB-FORM-002: double-spaced body; tuned by pdftotext -bbox (README).
+#let body-leading = 1.345em                // WIEB-FORM-002: double-spaced body; tuned by pdftotext -bbox (README).
 #let single-leading = 0.55em               // caption, headings, blocks: single-spaced (pitch about 14 pt).
 #let page-margin = 1in                     // WIEB-FORM-003: one-inch margin on all sides.
 #let para-indent = 0.5in                   // numbered paragraphs (FRCP 10(b), via FRBP 7010).

@@ -9,9 +9,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"         // vendored in fonts/; no E.D. Va. rule names a typeface (README.md)
+#let font-family = "Liberation Serif"         // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; no E.D. Va. rule names a typeface (README.md)
 #let type-size = 12pt                    // convention: 12 point, as in both filed exemplars
-#let body-leading = 1.35em               // double spacing: EB Garamond's line box is 0.65em, so this gives a 24 pt pitch at 12 pt
+#let body-leading = 1.345em              // double spacing: Liberation Serif's line box is 0.655em, so this gives a 24 pt pitch at 12 pt
 #let single-leading = 0.5em              // single spacing for counsel, caption, signature, service list: about 13.8 pt
 #let para-indent = 0.5in                 // first-line indent of body paragraphs
 #let page-w = 8.5in                      // LBR 5005-1(C)(3): letter size

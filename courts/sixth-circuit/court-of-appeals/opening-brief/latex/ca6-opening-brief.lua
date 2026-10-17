@@ -188,7 +188,7 @@ local function certificate_of_compliance(m, words)
   return table.concat({
     '\\caHeadOne{Certificate of Compliance}',
     '\\begin{caSingle}This brief complies with: (1) the type-volume limitation of Federal Rule of Appellate Procedure 32(a)(7)(B) because it contains '
-      .. group_digits(words) .. ' words, excluding the parts of the brief exempted by Rule 32(f); and (2) the typeface requirements of Rule 32(a)(5) and the type style requirements of Rule 32(a)(6) because it has been prepared in a proportionally spaced typeface (14-point EB Garamond) using LaTeX (XeTeX via Tectonic 0.17.0). The word count is computed from the markdown source of this brief.\\end{caSingle}',
+      .. group_digits(words) .. ' words, excluding the parts of the brief exempted by Rule 32(f); and (2) the typeface requirements of Rule 32(a)(5) and the type style requirements of Rule 32(a)(6) because it has been prepared in a proportionally spaced typeface (14-point Liberation Serif) using LaTeX (XeTeX via Tectonic 0.17.0). The word count is computed from the markdown source of this brief.\\end{caSingle}',
     form_sig_line(m),
   }, '\n')
 end
