@@ -8,17 +8,16 @@ BLOCKED nmcca answering-brief: no publicly accessible NMCCA-filed answer brief l
 BLOCKED bap6/opening-brief: no second-filer filed opening brief saved; public searches surfaced only the official blank pro se form and opinions, not another brief.
 BLOCKED bap6/answering-brief: no second-filer filed answering brief saved; no usable public BAP answer brief was found in the available court and RECAP sources.
 BLOCKED bap6/reply-brief: no second-filer filed reply brief saved; no usable public BAP reply brief was found in the available court and RECAP sources.
-BLOCKED kyeb/adversary-complaint: only one qualifying adversary complaint is saved; no second public complaint from a different filer was retrieved.
 BLOCKED kyeb/motion-brief: the additional Wells Fargo PDF is a motion without a separately filed memorandum, so it does not qualify as a second motion-brief exemplar.
 BLOCKED kyed: court-level rules.md and verified additional exemplars remain unfinished for complaint and motion-brief.
 BLOCKED kywb: court-level rules.md and verified additional exemplars remain unfinished for adversary-complaint and motion-brief.
 BLOCKED mieb: court-level rules.md and second-filer exemplars remain unfinished for adversary-complaint and motion-brief.
-BLOCKED miwb: court-level rules.md and second-filer exemplars remain unfinished for adversary-complaint and motion-brief.
+BLOCKED miwb: court-level rules.md remains unfinished; both doc types already have two public exemplars from different filers.
 BLOCKED mied: court-level rules.md and second-filer exemplars remain unfinished for complaint and motion-brief.
-BLOCKED miwd: court-level rules.md and second-filer exemplars remain unfinished for complaint and motion-brief.
-BLOCKED ohnb: court-level rules.md and second-filer exemplars remain unfinished for adversary-complaint and motion-brief.
+BLOCKED miwd: court-level rules.md remains unfinished; both doc types already have two public exemplars from different filers.
+BLOCKED ohnb: court-level rules.md remains unfinished; both doc types already have two public exemplars from different filers.
 BLOCKED ohsb: court-level rules.md and second-filer exemplars remain unfinished for adversary-complaint and motion-brief.
-BLOCKED ohnd: court-level rules.md and second-filer exemplars remain unfinished for complaint and motion-brief.
+BLOCKED ohnd: court-level rules.md remains unfinished; both doc types already have two public exemplars from different filers.
 BLOCKED ohsd: court-level rules.md and second-filer exemplars remain unfinished for complaint and motion-brief.
 BLOCKED tneb: court-level rules.md and second-filer exemplars remain unfinished for adversary-complaint and motion-brief.
 BLOCKED tnmb: court-level rules.md and second-filer exemplars remain unfinished for adversary-complaint and motion-brief.
