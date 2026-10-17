@@ -1,6 +1,6 @@
 # Middle District of Tennessee rules
 
-Primary sources checked 2026-10-14. Re-check every six months and before changing a template. Sources: M.D. Tenn. Local Rules of Court, 2025 amendments effective 2025-05-15, https://www.tnmd.uscourts.gov/sites/tnmd/files/2025.05.15%20TNMD%20Local%20Rules%20of%20Court%20-%202025%20amendments%20_0.pdf; and FRCP 7, 8, 10, 11, https://www.law.cornell.edu/rules/frcp/.
+Primary sources checked 2026-10-14. Re-check every six months and before changing a template. Sources: M.D. Tenn. Local Rules of Court, 2025 amendments effective 2025-05-15, https://www.tnmd.uscourts.gov/sites/tnmd/files/2025.05.15%20TNMD%20Local%20Rules%20of%20Court%20-%202025%20amendments%20_0.pdf; and FRCP 7, 8, 10, 11, https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure.
 
 Kinds: **M** mandatory; **C** convention; **T** template contract; **A** author responsibility.
 
