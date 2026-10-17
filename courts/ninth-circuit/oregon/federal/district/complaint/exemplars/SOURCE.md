@@ -28,3 +28,19 @@ The brief asks for one exemplar per doc type. These were seen in the same search
 
 - *Brown v. Lincoln County*, 6:26-cv-02227 (filed 10/12/26, 25 pages, RECAP `gov.uscourts.ord.197261.1.0.pdf`), counsel-filed.
 - *Butler v. LeGore*, 2:26-cv-02234 (filed 10/13/26, 14 pages, RECAP `gov.uscourts.ord.197278.1.0_1.pdf`), pro se prisoner complaint with IFP status; a different form, not a counsel model.
+
+## Second exemplar (retrieved 2026-10-17)
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-lo-brown-6-26-cv-02227-complaint.pdf` |
+| Filer | Connor Brown, filed by attorneys Viktoria Lo and Stephanie Pollan (different filer from Kliewer) |
+| Case | *Brown v. Lincoln County*, No. 6:26-cv-02227-AP |
+| Document | Document 1, Complaint, 25 pages |
+| Date filed | 2026-10-12 (ECF header) |
+| URL | https://storage.courtlistener.com/recap/gov.uscourts.ord.197261/gov.uscourts.ord.197261.1.0.pdf |
+| Date retrieved | 2026-10-17 |
+| SHA-256 | `fed7fb23291c7aab99ebf145c29262d828820c57b7c223bbc60f9cdd11364cc6` |
+| Public record | CourtListener RECAP copy of the non-sealed ECF filing |
+
+Downloaded from the public RECAP storage URL and checked with `pdfinfo` and `pdftotext`; the PDF is 25 pages with extractable text.
