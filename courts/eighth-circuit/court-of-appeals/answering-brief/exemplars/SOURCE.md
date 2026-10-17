@@ -11,3 +11,31 @@ How it was found: CourtListener's RECAP search API, `https://www.courtlistener.c
 Other candidates seen but not saved (one exemplar per doc type is kept, so the overlay has an unambiguous reference): *Burnett v. Spring Way Center, LLC*, No. 24-2168 (filed by RE/MAX and Anywhere, Faegre Drinker; https://storage.courtlistener.com/recap/gov.uscourts.ca8.109127/gov.uscourts.ca8.109127.805154935.0.pdf).
 
 Only one filer's brief is on file, so tier 2 (professional convention) is judged against this one exemplar only. A second filer's appellee brief is needed to tell convention from one filer's style (see README.md, "Known gaps").
+
+## Second filer
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-anywhere-remax-24-2143-answering-brief.pdf` (67 pages) |
+| Case / docket | *Rhonda Burnett, et al. v. National Association of Realtors, et al.*, consolidated Nos. 24-2143, 24-2168, 24-2391 |
+| Document | Anywhere and RE/MAX's Response Brief |
+| Filer | Anywhere Real Estate Inc. and RE/MAX, LLC, by Aaron D. Van Oort, Faegre Drinker Biddle & Reath LLP, et al. |
+| Date filed | 2024-12-11 (certificate of service states it was filed in CM/ECF that date) |
+| URL | https://storage.courtlistener.com/recap/gov.uscourts.ca8.109127/gov.uscourts.ca8.109127.805154935.0.pdf |
+| Date retrieved | 2026-10-17 |
+| SHA-256 | `404061f6ad2d773feb4640f7e4292ae1314fa72f5384031913c3f51360422133` |
+| Public filing | Yes, CourtListener RECAP; `pdftotext` confirms text on the 67-page PDF. |
+
+## Third filer
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-minnesota-simon-26-2679-answering-brief.pdf` (72 pages) |
+| Case / docket | *United States of America v. Steve Simon et al.*, No. 26-2679 |
+| Document | Brief for Defendants-Appellees Steve Simon and Minnesota |
+| Filer | Steve Simon and the State of Minnesota, by counsel for the Minnesota Attorney General |
+| Date filed | 2026-09-15 (CourtListener RECAP docket entry) |
+| URL | https://storage.courtlistener.com/recap/gov.uscourts.ca8.115359/gov.uscourts.ca8.115359.00805610678.0.pdf |
+| Date retrieved | 2026-10-17 |
+| SHA-256 | `2e07246e63a68b33f7d25740a51403ebe9932f74f222249baa60827e2682ac2e` |
+| Public filing | Yes, CourtListener RECAP; `pdftotext` confirms text on the 72-page PDF. |
