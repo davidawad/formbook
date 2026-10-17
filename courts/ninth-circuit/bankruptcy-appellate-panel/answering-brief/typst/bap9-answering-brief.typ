@@ -28,10 +28,11 @@
   // BAP-CONTENT-001: FRBP 8014(b). The appellee's brief meets the same requirements as the opening brief,
   // except that the statements of jurisdiction, of issues and standards of review, and of the case need not be
   // included. The summary, argument and conclusion (FRBP 8014(a)(6)-(7)) remain required.
-  // Each entry is a requirement with the titles a brief may use (see the opening-brief template).
+  // Each entry is a requirement with the titles a brief may use (see the opening-brief template). The Klein
+  // exemplar titles its argument "Discussion" (FRBP 8014(a)(8) fixes the content, not the title).
   required: (
     ("Summary of Argument", "Summary of the Argument"),
-    ("Argument",),
+    ("Argument", "Discussion"),
     ("Conclusion",),
   ),
   // BAP-LENGTH-001: FRBP 8015(a)(7): 30 pages, or the type-volume limit of 8015(a)(7)(B).
@@ -84,11 +85,20 @@
 }
 
 /// Sort key for the table of authorities (the explicit `sort` field, else the name, else the cite).
-#let sort-key(a) = lower(a.at("sort", default: a.at("name", default: "") + " " + a.at("cite", default: "")))
+/// Numbers compare by value, not digit by digit ("11 U.S.C. § 349" before "§ 1112"): each run of digits is
+/// zero-padded to a common width before the comparison.
+#let sort-key(a) = lower(a.at("sort", default: a.at("name", default: "") + " " + a.at("cite", default: ""))).replace(
+  regex("\\d+"), m => "0" * calc.max(0, 10 - m.text.len()) + m.text,
+)
 
 // ---------------------------------------------------------------------------
 // Cover (BAP-COVER-001: FRBP 8015(a)(2) and Litigants Manual §VIII.5 item 4 ff.)
 // ---------------------------------------------------------------------------
+/// The brief title on the cover (FRBP 8015(a)(2)(E): it identifies the party or parties for whom the brief is filed).
+/// `brief_title` in the frontmatter overrides the default when the filer is more than one party or names the brief
+/// it answers ("Appellants' Reply to Brief of Appellee ...").
+#let brief-title(meta) = meta.at("brief_title", default: doc.title)
+
 #let cover(meta) = page(numbering: none, footer: none, {
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
   set align(center)
@@ -97,6 +107,17 @@
   v(1.2em)
   strong(upper(court-name))
   v(1.4em)
+  // FRBP 8015(a)(2)(C) and 8003(d)(2)(A): the title of the case is the title of the bankruptcy case ("In re ...,
+  // Debtor") and then the parties to the appeal. Optional key `bankruptcy_case` (names, designation), printed first.
+  if "bankruptcy_case" in meta {
+    let bk = meta.bankruptcy_case
+    for name in bk.at("names") {
+      inl(name)
+      linebreak()
+    }
+    inl(bk.at("designation"))
+    v(1.0em)
+  }
   for (i, side) in need(meta, "caption").enumerate() {
     for name in side.at("names") {
       inl(name)
@@ -112,7 +133,7 @@
   v(0.8em)
   inl(need(meta, "proceeding"))
   v(1.6em)
-  strong(upper(doc.title))
+  strong(upper(brief-title(meta)))
   v(1.6em)
   // counsel: printed as given, with the telephone number under the last group (FRAP 32(a)(2)(F), FRBP 8015(a)(2))
   let groups = need(meta, "counsel")
@@ -169,7 +190,9 @@
 }
 
 #let toc-section() = {
-  outline(title: align(center, strong[TABLE OF CONTENTS]), depth: 2, indent: 0pt)
+  // Sub-headings are indented under their section (tier 2: the Klein, Hujazi and Beavor tables of contents all
+  // indent them; a flush-left list hid the hierarchy).
+  outline(title: align(center, strong[TABLE OF CONTENTS]), depth: 2, indent: para-indent)
 }
 
 // ---------------------------------------------------------------------------
@@ -239,6 +262,10 @@
       if unreg.len() == 0 {
         [I certify that all parties of record to this appeal either are registered CM/ECF users, or have registered for electronic notice, or have consented in writing to electronic service, and that service will be accomplished through the CM/ECF system.]
       } else {
+        // BAP sample certificate ("not all case participants are registered"): the registered parties are served
+        // through CM/ECF, and the others by mail, listed. Both statements are printed.
+        [I further certify that parties of record to this appeal who either are registered CM/ECF users, or who have registered for electronic notice, or who have consented in writing to electronic service, will be served through the CM/ECF system.]
+        parbreak()
         [I further certify that some of the parties of record to this appeal have not consented to electronic service. I have mailed the foregoing document by First-Class Mail, postage prepaid, or have dispatched it to a third party commercial carrier for delivery within 3 calendar days, to the following parties:]
         for u in unreg {
           par(first-line-indent: 0pt, hanging-indent: 0.4in, leading: single-leading, [#inl(u.at("name")), #inl(u.at("address"))])
@@ -259,7 +286,8 @@
 
   // ---- required sections (BAP-CONTENT-001) ----
   for titles in doc.required {
-    let found = titles.any(h => md.match(regex("(?m)^#[ \t]+" + h + "[ \t]*$")) != none)
+    // a title matches with or without an enumerator ("V. Discussion") and in any case ("CONCLUSION").
+    let found = titles.any(h => md.match(regex("(?mi)^#[ \t]+(?:[IVXLC]+\\.[ \t]+)?" + h + "[ \t]*$")) != none)
     if not found {
       panic("bap9-" + doc.kind + ": the brief has no level-1 heading `" + titles.join("` or `") + "` (FRBP 8014(a))")
     }
@@ -273,7 +301,7 @@
 
   // ---- document-wide settings ----
   set document(
-    title: doc.title + ", " + need(meta, "case_number"),
+    title: brief-title(meta) + ", " + need(meta, "case_number"),
     author: need(meta, "signature").at("signer"),
   )
   set page(paper: "us-letter", margin: page-margin, number-align: center)
@@ -309,17 +337,19 @@
   // level 3 are the sub-headings under them (bold, left, hanging).
   // Each level has its own rule: a generic `show heading` rule ahead of these returned the heading unchanged.
   // Level 1 needs the explicit width: without it the block shrinks and `align(center)` does not center.
-  show heading.where(level: 1): it => block(width: 100%, above: 1.2em, below: 1.1em, breakable: false, {
+  // Space above each heading is larger than the paragraph spacing (body-leading), and space below is smaller,
+  // so a heading sits with the text it introduces (it sat closer to the preceding paragraph before).
+  show heading.where(level: 1): it => block(width: 100%, above: body-leading + 0.8em, below: 1.1em, breakable: false, {
     set par(first-line-indent: 0pt, hanging-indent: 0pt, leading: single-leading, justify: false)
     set text(size: type-size, weight: "bold")
     align(center, it.body)
   })
-  show heading.where(level: 2): it => block(above: 1em, below: 0.9em, breakable: false, {
+  show heading.where(level: 2): it => block(above: body-leading + 0.5em, below: 0.9em, breakable: false, {
     set par(first-line-indent: 0pt, hanging-indent: 0.5in, leading: single-leading, justify: false)
     set text(size: type-size, weight: "bold")
     it.body
   })
-  show heading.where(level: 3): it => block(above: 0.9em, below: 0.8em, breakable: false, {
+  show heading.where(level: 3): it => block(above: body-leading + 0.5em, below: 0.8em, breakable: false, {
     set par(first-line-indent: 0pt, hanging-indent: 0.5in, leading: single-leading, justify: false)
     set text(size: type-size, weight: "bold")
     it.body
