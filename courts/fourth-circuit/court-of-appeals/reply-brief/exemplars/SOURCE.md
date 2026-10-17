@@ -14,3 +14,16 @@
 | Text layer | Text-based PDF (`pdftotext` yields the brief text; a diagonal "DEMOCRACY" watermark letter-stack is present on each page and is not part of the brief) |
 
 This is a public court filing. The file is kept unchanged in this folder.
+
+## Additional exemplar from a different filer
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-doj-in-re-trump-18-2486-reply-brief.pdf` |
+| URL | https://www.ca4.uscourts.gov/docs/pdfs/18-2486/18-2486_replybrief.pdf |
+| Filer | Petitioner, United States Department of Justice (Civil Division, Appellate Staff) |
+| Case | *In re Donald J. Trump*, No. 18-2486 |
+| Document | Reply Brief for Petitioner (Doc. 50; 35 pages) |
+| Date filed | February 21, 2019 (ECF header) |
+| Date retrieved | 2026-10-17 |
+| SHA-256 | `039e92a15827b7539856d88ebb2a9bc4a4e2d88867ba129d19dd83fc20e7f1e0` |

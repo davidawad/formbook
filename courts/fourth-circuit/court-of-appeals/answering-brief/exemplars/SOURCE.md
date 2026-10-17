@@ -27,3 +27,16 @@ Public court record (RECAP). Used as a visual and structural reference only; no 
 - Web search for "Brief of Appellee" with the Fourth Circuit, the ca4 running header and the case-number pattern: returned state forms and rule pages only.
 - The DOJ case-document pages: a Fourth Circuit DOJ brief (United States v. George, Nos. 19-4841, 19-4872) is an appellant/cross-appellee brief, not an answering brief; the Milikowsky appellee brief is a 1994 Second Circuit filing.
 - CourtListener RECAP search (API) returned many appellee briefs; the other candidates that were downloaded and checked (Walmart Real Estate v. Quarterfield, No. 24-1355, 46 pp.; Chamber of Commerce v. Lierman, No. 24-1727, 37 pp.) were also text-based. Chapman was chosen for its recent date (March 2025), its full ECF-style structure, and its counsel's standard format.
+
+## Additional exemplar from a different filer
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-planned-parenthood-phillip-21-1043-answering-brief.pdf` |
+| URL | https://affordablecareactlitigation.com/wp-content/uploads/2021/05/4c-appellees-brief.pdf |
+| Filer | Plaintiffs-Appellees Planned Parenthood South Atlantic and related appellees, through Mayer Brown LLP, Planned Parenthood Federation of America, and Burnette, Shutt & McDaniel, PA |
+| Case | *Planned Parenthood South Atlantic, et al. v. Phillip*, No. 21-1043 |
+| Document | Response Brief for Appellees (Doc. 25; 58 pages) |
+| Date filed | May 28, 2021 (ECF header) |
+| Date retrieved | 2026-10-17 |
+| SHA-256 | `584a25e7df833b9350a1d4e1e23106ca8868ef718def0b6e874dcb2f240f3642` |

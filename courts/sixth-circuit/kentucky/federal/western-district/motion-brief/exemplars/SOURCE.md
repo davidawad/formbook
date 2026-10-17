@@ -28,3 +28,14 @@ Exemplars are public filings from CourtListener RECAP (storage.courtlistener.com
 - Filer: Defendant Cleanlife Energy LLC, by counsel F. Maximilian Czernin (Squire Patton Boggs (US) LLP) and B. Scott Jones (Reminger Co., LPA)
 - Date filed: 2026-07-02 ("Filed 07/02/26" on every page)
 - Source URL: https://storage.courtlistener.com/recap/gov.uscourts.kywd.145301/gov.uscourts.kywd.145301.11.1.pdf
+
+## Additional filer (second tier-2 exemplar)
+
+- File: `FILED-EXAMPLE-glantz-3-26-cv-454-motion-brief.pdf` (30 pages; text layer present)
+- Case: *N. Glantz & Son, LLC v. Cleanlife Energy LLC*, No. 3:26-cv-00454-GNS
+- Document: Defendant's Memorandum of Law in Support of Motion to Dismiss (Document 11-1)
+- Filer: Defendant Cleanlife Energy LLC, by counsel F. Maximilian Czernin (Squire Patton Boggs (US) LLP) and B. Scott Jones (Reminger Co., LPA)
+- Date filed: 2026-07-02 (ECF header)
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.kywd.145301/gov.uscourts.kywd.145301.11.1.pdf
+- Date retrieved: 2026-10-17
+- SHA-256: `e25a8c4cfadace43d25892d336373335cffb6551712c924ddb99e7e0189eba9e`

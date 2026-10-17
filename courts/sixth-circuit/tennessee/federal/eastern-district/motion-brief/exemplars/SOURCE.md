@@ -14,3 +14,14 @@
 - Public court record (RECAP). Used only as a visual and structural reference.
 
 Second filer: not collected. The search also returned ABC IP, LLC v. Hoffman, No. 1:25-cv-00389 (E.D. Tenn.), a memorandum in support of a Rule 12(b)(6) motion (23 pages, recap/gov.uscourts.tned.122447.50.0.pdf), as a candidate for the tier-2 "two or three filers" rule. It was not downloaded in this pass. See `../README.md`.
+
+## Additional filer (second tier-2 exemplar)
+
+- File: `FILED-EXAMPLE-abc-ip-hoffman-1-25-cv-00389-motion-brief.pdf` (23 pages; text layer present)
+- Case: *ABC IP, LLC, et al. v. Hoffman, et al.*, No. 1:25-cv-00389-CLC-CHS
+- Document: Defendants' Brief in Support of Partial Motion to Dismiss (Document 50)
+- Filer: Defendants Timothy Hoffman and Hoffman Tactical, LLC, by counsel
+- Date filed: 2026-03-02 (CourtListener docket entry 50; Document 49 was later stricken by order)
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.tned.122447/gov.uscourts.tned.122447.50.0.pdf
+- Date retrieved: 2026-10-17
+- SHA-256: `3e3cb904775c87a1cf397f43e676a326d2fe960360dfcca590f5c64a79aa6109`
