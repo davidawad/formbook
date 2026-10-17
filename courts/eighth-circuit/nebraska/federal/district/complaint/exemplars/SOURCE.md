@@ -19,3 +19,13 @@
 - Horsley v. Board of Regents of the University of Nebraska, No. 4:26-cv-03326 (filed 2026-09-24; 6 pp.). Shorter; not checked for layout.
 - Wells v. Camacho, No. 8:26-cv-00582 (19 pp.), Kelley v. Kiewit Corp., No. 8:26-cv-00496 (41 pp.), Chretien v. Kiewit Corp., No. 8:26-cv-00488 (31 pp.). Not downloaded.
 - Pro se complaints (Holmes v. State of Nebraska, No. 8:26-cv-00555, and the Bayson complaint, No. 4:26-cv-03344) were skipped: not attorney-drafted, so not representative of the filer conventions the template is judged against.
+
+## FILED-EXAMPLE-harrison-8-26-cv-00501-complaint.pdf
+
+- Case: *Harrison v. Bang*, No. 8:26-cv-00501, Document 1.
+- Filer: plaintiff Steven Harrison, represented by Adam J. Sipple.
+- Date filed: 2026-09-02.
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.ned.112829/gov.uscourts.ned.112829.1.0.pdf
+- Date retrieved: 2026-10-17.
+- PDF pages: 10. SHA-256: `5da34e206b3bf264320540b2673779f7e8f04958b89955f5e99f6cd9572dffab`.
+- Distinct counsel/filer from the Goldenstein exemplar above; source folder notes that its caption has a different convention.

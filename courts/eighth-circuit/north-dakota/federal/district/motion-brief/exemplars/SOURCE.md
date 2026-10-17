@@ -26,3 +26,18 @@ The RECAP search for motions to dismiss in this court returned several candidate
 - The title in the exemplar reads "DMS HEATH TECHNOLOGIES" (a typo in the filing). The sample uses "DMS HEALTH TECHNOLOGIES".
 - The exemplar has no table of contents or table of authorities. D.N.D. Civ. R. 7.1(A)(1)(a) makes them optional ("if a party chooses to include them"), so the template does not require them.
 - The sample is a portion: it transcribes the introduction, the summary of allegations, the standard, the start of the argument (heading V, subheading 1 and its subheading A with the first paragraph of A), the conclusion, the signature block and the certificate of service. Other argument sections (A to D of V, IV conflicts of law, and the rest of the motion) are not transcribed. See `../README.md`.
+
+## Second filer
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-teigen-1-25-cv-00207-motion-brief.pdf` (36 pages) |
+| Court | U.S. District Court, District of North Dakota |
+| Case / docket | *Hoefer v. Teigen*, No. 1:25-cv-00207-DLH-CRH, Document 13 |
+| Document | Defendants' Memorandum of Law in Support of Motion to Dismiss |
+| Filer | Defendants Josh Teigen, Shayden Akason, Richard Garman, David Lehman, and James Albrecht, by counsel |
+| Date filed | 2025-11-17 (ECF header on each page) |
+| URL | https://storage.courtlistener.com/recap/gov.uscourts.ndd.69636/gov.uscourts.ndd.69636.13.0.pdf |
+| Date retrieved | 2026-10-17 |
+| SHA-256 | `eec7415e3a56883e8e95cbeab300b5faa0f93fa4c7e5a1d7052bd454c5b0e770` |
+| Public filing | Yes, CourtListener RECAP; searchable text is present. |

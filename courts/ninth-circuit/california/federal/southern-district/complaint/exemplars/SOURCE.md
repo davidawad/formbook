@@ -13,3 +13,12 @@
 - Public court record (RECAP). Used only as a visual and structural reference.
 
 Second filer: not collected in this pass. The CourtListener results also listed Novick v. Capricor Therapeutics (3:26-cv-05568, Pomerantz LLP) and Alo, LLC v. Derco (3:26-cv-04957, Name Game IP, PC) as S.D. Cal. complaints from 2026. A second filer is needed for a tier-2 comparison against 2 or 3 filers; that is not met here (see README.md, gap 1).
+
+- File: `FILED-EXAMPLE-bosa-3-01-cv-01179-complaint.pdf`
+- Filer: Plaintiff Bosa Development
+- Case: *Bosa Development v. Shell Oil Company*, No. 3:01-cv-01179-W-CGA (Doc. 1)
+- Date filed: 2001-06-29
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.casd.41021.1.0.pdf
+- Date retrieved: 2026-10-17
+- sha256: `3ff56b920ac728f7b6432aedfeb809a5d965f874b614ed0082e0434f240b868f`
+- Note: Public RECAP scan; no text layer. Kept as a filer-independent comparison only.

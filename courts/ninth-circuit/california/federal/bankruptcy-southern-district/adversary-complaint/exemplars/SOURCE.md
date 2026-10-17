@@ -15,3 +15,13 @@ Caveats:
 - The exemplar is from 2009 and uses the pre-2010 cover sheet (Form B 104, 10/06 edition). Current filings use the same form number.
 - The caption is the Form 416 layout of a 2009 filing; the template follows it, not the 2009 numbering.
 - Only one filer is collected for this doc type. EVAL-LOOP tier 2 asks for two or three filers; see `../README.md`.
+
+- File: `FILED-EXAMPLE-stika-25-90036-adversary-complaint.pdf`
+- Filer: Plaintiff Matthew Stika
+- Case: *Stika v. Alegria*, No. 25-90036-CL (Doc. 1)
+- Document: adversary complaint, 3-page scanned PDF
+- Date filed: 2025-03-28
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.casb.466625/gov.uscourts.casb.466625.1.0.pdf
+- Date retrieved: 2026-10-17
+- sha256: `f1cdd9247e89df6d032cecedfda41956d33546ece7f7f9a30ce14b10bc3d03cc`
+- Note: Public RECAP scan without a text layer; retained only for a filer-independent structural comparison.

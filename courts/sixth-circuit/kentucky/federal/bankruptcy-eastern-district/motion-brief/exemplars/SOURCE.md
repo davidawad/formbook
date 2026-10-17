@@ -33,3 +33,15 @@ The EVAL-LOOP tier-2 rule needs a second filer. The strongest candidate found is
 - Second pass (2026-10-14): WebSearch on "motion for relief from stay" memorandum (only docket pages and opinions); sale free and clear with memorandum (docket pages and an opinion); CourtListener RECAP via WebSearch (no RECAP documents returned); Cambrian 19-51200 with "Lexington Division" (govinfo opinions only); Epiq docId 3867825 (a 73-page confirmation order, not a motion); Cambrian Key-Way motion to compel (no Epiq PDF of the motion); Americore 19-61608 (docket listing and news only); Justia (a Cloudflare challenge page, not a PDF); Sixth Circuit appendix (BAP calendars and judgments only).
 
 Not tried: PACER (requires an account and fees; not used by this box), and the court's own CM/ECF document viewer (login required).
+
+## Additional filer (candidate second tier-2 exemplar; motion without a separately filed memorandum)
+
+- File: `FILED-EXAMPLE-wells-fargo-18-70393-motion-brief.pdf` (33 pages; text layer present)
+- Case: CourtListener docket 18-70393-tnw; caption identifies underlying case 18-10393
+- Document: Wells Fargo Bank, N.A., Motion for Relief from the Automatic Stay and for Abandonment (Document 12); motion pages are 1–5, remaining pages include a proof of claim and loan documents
+- Filer: Wells Fargo Bank, N.A., by counsel Joel K. Jensen (Lerner, Sampson & Rothfuss)
+- Date filed: 2018-08-21 (ECF header)
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.kyeb.298864/gov.uscourts.kyeb.298864.12.0_3.pdf
+- Docket: https://www.courtlistener.com/docket/7219995/12/william-charles-polly-jr/
+- Date retrieved: 2026-10-17
+- SHA-256: `f0b00f32c3224e4e4e7df8b25f88cdae6e13d7c96d250bab6639e4e027b1b7ab`

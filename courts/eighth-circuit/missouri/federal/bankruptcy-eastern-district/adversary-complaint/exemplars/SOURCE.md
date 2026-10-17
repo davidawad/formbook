@@ -16,3 +16,14 @@
 
 - *23andMe Holding Co. v. J.R.*, Adv. No. 25-04011 (Bankr. E.D. Mo.), Complaint, 25 pages, filed 2025-04-14, by Carmody MacDonald PC for the debtors. https://storage.courtlistener.com/recap/gov.uscourts.moeb.463084/gov.uscourts.moeb.463084.1.0.pdf . Different filer; its ¶ 10 states the consent under Fed. R. Bankr. P. 7008, which this exemplar does not.
 - *Kevin James Morrell adversary*, Adv. No. 25-04009 (corrected complaint filed by the Plaintiff's counsel, 2025-03-20, 8 pages). Found in the search, not downloaded.
+
+## Second filer (tier-2 comparison)
+
+- File: `FILED-EXAMPLE-23andme-25-04011-adversary-complaint.pdf` (25 pages, including Official Form adversary cover sheet)
+- Case: *23andMe Holding Co. and 23andMe, Inc. v. J.R. and M.M.*, Adv. No. 25-04011 (main case 25-40976-357)
+- Filer: Debtors 23andMe Holding Co. and 23andMe, Inc., by Carmody MacDonald PC
+- Date filed: 2025-04-14 (ECF header)
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.moeb.463084/gov.uscourts.moeb.463084.1.0.pdf
+- Date retrieved: 2026-10-17
+- SHA-256: `76aa19fde21567f346e0dfe4bf6fa52c1f93fb32dbf059178a9dae7cd52bfe48`
+- Public CourtListener RECAP filing; separate filer from the Trustee complaint above. The first two pages are the cover sheet required with the complaint and are not part of the transcribed pleading.

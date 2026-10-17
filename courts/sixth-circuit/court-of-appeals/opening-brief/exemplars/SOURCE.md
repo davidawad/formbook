@@ -16,3 +16,14 @@
 Found by searching CourtListener's API for Sixth Circuit RECAP documents whose description is an appellant's brief (`q="opening brief" OR "brief of appellant"`, `court=ca6`, `available_only=on`). Chosen because it is a text-based PDF with a full cover, disclosure statement, table of contents, table of authorities, oral-argument statement, certificates, and the Rule 30(g) district-court designation, all of which the template must reproduce.
 
 Only the brief's structure and the text of its opening pages were transcribed into `samples/`. The filer is a trade association (NetChoice), not a government party; the exemplar is an interlocutory preliminary-injunction appeal.
+
+## Additional filer
+
+- File: `FILED-EXAMPLE-jb-k-cabinet-21-5074-opening-brief.pdf` (74 pages, text layer)
+- Case: *J.B.-K. et al. v. Secretary of the Kentucky Cabinet for Health and Family Services et al.*, No. 21-5074
+- Document: Brief of Plaintiffs-Appellants, Document 17
+- Filer: Minor plaintiffs and class representatives, by Richard Frank Dawahare and Douglas L. McSwain and Thomas E. Travis of Wyatt, Tarrant & Combs, LLP
+- Date filed: 2021-04-23 (ECF header)
+- URL: https://www.courthousenews.com/wp-content/uploads/2021/10/ky-foster-brief.pdf
+- Date retrieved: 2026-10-17
+- SHA-256: `fd2a4a827ed6825e105b0bbbb35287d37d84c3cc52d68ee98cf33ebed88c9c0a`
