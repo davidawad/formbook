@@ -15,3 +15,7 @@ Indexed level: `state-appellate`
 | `amicus-brief` — Amicus curiae brief | BLOCKED: no public filed copy: Tax Court has no online docket or document access (case file copies only via OJD records request form, courts.oregon.gov/courts/tax/records); State of Oregon Law Library digital collection holds only Tax Court decisions; OJD, Law Library CONTENTdm, ACLU-OR, Democracy Docket and First Liberty sites checked, no Tax Court amicus filing found |  |  |  |  |  |  |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: searched Oregon appellate court public rules, court filing pages, and targeted queries for petitions for review, writ filings, and Tax Court party briefs. Official search results surfaced rules/committee materials explaining petition format but no retrievable party filing for the blocked types; the Tax Court records page offers case-file requests rather than public document downloads. Procedural routes checked against official ORAP and statutes: https://www.courts.oregon.gov/courts/appellate/rules/Pages/orap.aspx ; https://www.courts.oregon.gov/courts/tax/records ; ORS 305.445, 305.501(5), 34.120.

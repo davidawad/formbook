@@ -358,3 +358,16 @@ BLOCKED fb-l129.4  njtaxct/motion-brief: follow-up official-source and public fi
 BLOCKED fb-l129.4  njtaxct/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/tax-court/exemplars/SOURCE.md
 BLOCKED fb-l129.4  njtaxct/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/tax-court/exemplars/SOURCE.md
 BLOCKED fb-l129.4  njtaxct/amicus-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/tax-court/exemplars/SOURCE.md
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+BLOCKED rows re-searched for oregon state courts; official rules/docket indexes and targeted public-filing queries reviewed. No additional qualifying downloadable text-layer PDF was verified for the remaining BLOCKED rows.
+BLOCKED fb-l129.4  orctapp/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/court-of-appeals/exemplars/SOURCE.md
+BLOCKED fb-l129.4  orctapp/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/court-of-appeals/exemplars/SOURCE.md
+BLOCKED fb-l129.4  ortc/opening-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  ortc/answering-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  ortc/reply-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  ortc/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  ortc/motion-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  ortc/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  ortc/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  ortc/amicus-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/oregon/state/tax-court/exemplars/SOURCE.md
