@@ -12,3 +12,19 @@
 - Public court record (RECAP). Used only as a visual and structural reference.
 
 Second filer: not collected. Two other bankruptcy-court adversary complaints on the same RECAP search were checked and rejected as exemplars: 20-00027 (scanned images only, no text layer) and 23-03241 entry 115 (scanned, 32 pages; this one is a pro se-style upload). The PROMESA complaints in the same court (for example 25-00043, LUMA v. PREPA) are captioned in the United States District Court, not the bankruptcy court, and do not match the form for this folder.
+
+## 2. Second filer (added 2026-10-17, fb-595.21.1)
+
+- File: `FILED-EXAMPLE-noriega-colombani-22-00026-adversary-complaint.pdf`
+- Court: United States Bankruptcy Court, District of Puerto Rico (`prb`)
+- Case: *Orlando Noriega Colombani v. Cooperativa de Ahorro y Crédito de Rincón, a/k/a Coop A/C Rincón*, Adv. Proc. No. 22-00026, in Bankr. Case No. 20-03954-MCF, Chapter 13
+- Docket / document: adversary Doc. 1 (RECAP docket entry text: "Adversary case 22-00026. 21 (Validity, priority or extent of lien or other interest in property): Complaint by ORLANDO NORIEGA COLOMBANI against COOPERATIVA DE AHORRO Y CREDITO DE RINCON ... (VARGAS MUNIZ, CARLOS) (Entered: 05/05/2022)")
+- Document: "Complaint Seeking Contempt Remedies for Violation of the Automatic Stay and the Order of Confirmation of the Plan" (PDF pp. 3-8), preceded by the B1040 adversary cover sheet (pp. 1-2) and followed by the proposed summons and its certificate of service (pp. 9-10). 10 pages in all.
+- Filer: Plaintiff-debtor Orlando Noriega Colombani, by counsel Carlos M. Vargas Muñiz (solo practitioner, Mayagüez; U.S.D.C. 121607). Different party and different counsel from entry 1 (Organic Power, LLC; Godreau & Gonzalez Law).
+- Date filed: 2022-05-05 (docket "Entered: 05/05/2022"; signature block "Dated: May 4, 2022")
+- Fetched from: https://storage.courtlistener.com/recap/gov.uscourts.prb.357598/gov.uscourts.prb.357598.1.0.pdf (docket entry page https://www.courtlistener.com/docket/63290633/1/noriega-colombani-v-cooperativa-de-ahorro-y-credito-de-rincon/, found through the CourtListener website search `type=r&q=complaint&court=prb&available_only=on`)
+- Date retrieved: 2026-10-17
+- Text layer: mixed. The complaint pages 3-8 are born-digital with a text layer (embedded LeelawadeeUI-Semilight body at about 12 pt, TimesNewRomanPSMT and CourierNewPSMT in places). Pages 1-2 (cover sheet) and 9-10 (summons) are scanned images with an Acrobat OCR layer.
+- Notes: contains the FRBP 7008 consent statement (para. 1), a LBR 9013-1(c)-style response notice (21 days), a certificate of service and an "s/" signature with the U.S.D.C. number, address, e-mail and telephone (no fax). No ECF header stamp on the RECAP copy.
+- sha256: `1907809e8a9c1c33e08c1efcddf1e968b58cb6613a9a73d37e063919daa30b4f`
+- Public court record (RECAP). Used only as a visual and structural reference.
