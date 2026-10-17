@@ -15,3 +15,7 @@ Indexed level: `state-appellate`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 39 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-aclu-mi-rogers-346348-amicus-brief.pdf` | ACLU of Michigan et al. (amici curiae) | People v Rogers, COA No. 346348 (on remand) | 2021-01-04 | https://www.aclumich.org/app/uploads/2023/01/protection_for_transgender_people_under_hate_crimes_statute_-_people_v_rogers_-_aclu_amicus_brief_-_court_of_appeals_on_remand.pdf | `28f8d0c1ca5e90ebd50e570f7ac942b8efeb05708da7bd5160a255e5aa04ad58` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: targeted Michigan Courts queries for Court of Appeals answering briefs and petitions for review of agency orders; the official public search exposed no qualifying filed text-layer PDF for either blocked row. The Court of Appeals brief/transfer route was checked against the official Michigan Court Rules and court public filing pages: https://www.courts.michigan.gov/rules-administrative-orders-and-rules-of-practice/court-rules/ ; https://www.courts.michigan.gov/courts/court-of-appeals/.

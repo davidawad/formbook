@@ -424,3 +424,8 @@ BLOCKED rows re-searched for illinois state courts; official rules/docket indexe
 BLOCKED fb-l129.4  ill/petition-for-rehearing: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/seventh-circuit/illinois/state/supreme-court/exemplars/SOURCE.md
 BLOCKED fb-l129.4  illappct/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/seventh-circuit/illinois/state/appellate-court/exemplars/SOURCE.md
 BLOCKED fb-l129.4  illappct/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/seventh-circuit/illinois/state/appellate-court/exemplars/SOURCE.md
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+BLOCKED rows re-searched for michigan state courts; official rules/docket indexes and targeted public-filing queries reviewed. No additional qualifying downloadable text-layer PDF was verified for the remaining BLOCKED rows.
+BLOCKED fb-l129.4  michctapp/answering-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/michigan/state/court-of-appeals/exemplars/SOURCE.md
+BLOCKED fb-l129.4  michctapp/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/michigan/state/court-of-appeals/exemplars/SOURCE.md
