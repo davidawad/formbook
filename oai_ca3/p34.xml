@@ -1,0 +1,2709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH
+	xmlns="http://www.openarchives.org/OAI/2.0/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/
+		http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+	<responseDate>2026-10-17T21:00:56Z</responseDate>
+	<request verb="ListRecords" resumptionToken="12365887/oai_dc/3400//" >http://digitalcommons.law.byu.edu/do/oai/</request>
+	
+	<ListRecords>
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4414</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellant v. Robbie Michael Macdonald, Defendant/Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Interlocutory Appeal from two pretrial suppression rulings, in the Fourth Judicial District, Utah County, the Honorable Derek Pullan presiding</dc:description>
+<dc:date>2015-11-30T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3415</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4414/viewcontent/20150123_CA_Utah_v_MacDonald_blue_39082.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4419</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee v. Kristopher England, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from an order of restitution following a conviction for theft, a third degree felony, in the Third Judicial District, Salt Lake County, the Honorable charlene Barlow presiding</dc:description>
+<dc:date>2015-12-18T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3420</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4419/viewcontent/20150218_CA_Utah_v_England_red_39086.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4391</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>David Larsen, Plaintiff/Appellant, vs. Davis County School District, Defendant/Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the Second Judicial District Court Davis, County, State of Utah, Honorable John Morris Case No. 150700222</dc:description>
+<dc:date>2016-12-13T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3392</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4391/viewcontent/20160099_CA_Larsen_v_Davis_County_Scho_gray_38998.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4407</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Asset Acceptance, LLC, Plaintiff/Appellee vs. Edison Guimaraes, an Individual, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from final judgment of the Second Judicial District Court, Farmington Department, Davis County, State of Utah, the Honorable David Connors, presiding.</dc:description>
+<dc:date>2014-10-31T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3408</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4407/viewcontent/20140244_CA_Asset_Acceptance__v_Guimaraes_blue_39059.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4426</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee v. Mario L. Guillen, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a conviction for theft, a class A misdemeanor and false personal information, a class A misdemeanor in the Second District Court, State of Utah, the Honorable W. Brent West, Judge, presiding</dc:description>
+<dc:date>2015-08-25T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3427</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4426/viewcontent/20150462_CA_State_of_Utah_v_Guillen_blue_39061.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4403</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Javier Rojas, Petitioner/Appellant, v. Utah Labor Commission, Ferrari Color and/or Workers Compensation Fund, Respondents/Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:date>2017-03-02T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3404</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4403/viewcontent/20160644_CA_Rojas_v_Utah_Labor_Commis_red_38990.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4408</identifier>
+		<datestamp>2019-12-11T16:52:31Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee v. Mario Louis Guillen, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from sentences for attempted theft and giving false personal information to a peace officer, both class A misdemeanors, in the Second Judicial District, Weber County, the Honorable W. Brent West presiding</dc:description>
+<dc:date>2015-11-25T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3409</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4408/viewcontent/20140462_CA_State_of_Utah_v_Guillen_red_39060.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4411</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee vs. Dalton Thomas, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the Fourth District Court, Utah County, State of Utah, from a restitution order following a conviction of burglray and criminal mischief, third degree felonies, before the Honarble Judge James Taylor</dc:description>
+<dc:date>2016-04-01T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3412</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4411/viewcontent/201500624_CA_State_of_Utah_v_Dalton_Thomas_grey_39066.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4421</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Jack Daniel Brown, Petitioner/Appellant v. State of Utah</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from dismissal of petition for post-conviction relief challenging conviction for one count of aggravated murder, a first degree felony, in the Fifth Judicial District, Washington County, the Honorable G. Michael Westfall presiding</dc:description>
+<dc:date>2015-12-17T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3422</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4421/viewcontent/20150266_CA_Brown_v_Utah_red_39074.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4424</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee v. Alex L. Lambrose, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a conviction for aggravated robbery in the Second District Court, State of Utah, the Honorable Scott M. Hadley, Judge, presiding.</dc:description>
+<dc:date>2015-09-16T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3425</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4424/viewcontent/20150398_CA_Utah_v_Lambrose_blue_39096.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4436</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee v. Justin Paul Craft, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from convicctions for aggravated robbery and aggravated burglary, both first degree felonies, in the Third Judicial District, Salt Lake County, the Honorable Paul Parker presiding.</dc:description>
+<dc:date>2016-05-31T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3437</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4436/viewcontent/20150750_CA_Utah_v_Craft_red_39095.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4409</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee v. John Robert Fox, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from Sentence, Judgment, Commitment entered on August 6, 2014, in the Second District Court, Davis County, the Honorable David Connors, presiding</dc:description>
+<dc:date>2017-02-17T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3410</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4409/viewcontent/20140857_CA_Utah_v_Fox_gray_39079.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4429</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Jack Phillips, Petitioner/Appellant v. Utah Department of Commerce, and Utah Securities Commission, Respondents/Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:date>2016-04-01T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3430</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4429/viewcontent/20150534_CA_Phillips_v_Utah_Department_C_gray_39076.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4428</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Jack Phillips, Petitioner v. Utah Department of Commerce, and Utah Securities Commission, Respondents</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:date>2015-11-04T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3429</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4428/viewcontent/20150534_CA_Phillips_v_Utah_Department_C_blue_39073.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4446</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee v. Elizabeth Ashley Morrison, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a restitution order from a judgment of convition for Negligent Homicide, a class A misdemeanor, in violation of Utah Code § 76-5-207(2) (2012); and two counts of Driving Under the Influence, class A misdemeanors, in violation of Utah Code § 41-6a-502 (2012), in the Third Judicial Court, in and for Salt Lake County, State of Utah, the Honorable Robin W. Reese, presiding</dc:description>
+<dc:date>2014-05-06T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3447</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4446/viewcontent/20131156_CA_State_of_Utah_v_Morrison_blue_39144.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4466</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Brooke Robinson, Petitioner - Appellant, vs. Juan Pablo Matas-Vidal, Respondent - Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>APPEAL FROM THE FINAL ORDER OF THE FOURTH JUDICIAL DISTRICT COURT OF UTAH COUNTY, THE HONORABLE CHRISTINE S. JOHNSON</dc:description>
+<dc:date>2015-10-28T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3467</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4466/viewcontent/20150418_CA_Robinson_v_Matas_Vidal_blue_39119.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4439</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Terry R. Spencer, Et Al., Plaintiffs/Appellants vs. Stephen M. Glover, Et Al., Defendants/Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the Order of the Third Judicial District Court of Salt Lake, State of Utah the Honorable L. Douglas Hogan, Presiding</dc:description>
+<dc:date>2016-05-09T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3440</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4439/viewcontent/20150892_CA_Spencer__et_al_v_Glover_blue_39054.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4438</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Jacob D. Williams, an Individual, Plaintiff/Appellant vs. Craig Alan Anderson, an Individual, Quinn Zite, an Individual, and Anderson Zite, LLC (F/K/a Fix a Phone, LLC), a Utah Limited Liability Company, Defendants/Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the Third Judicial District Court of Salt Lake County, Case No. 130901891, The Honorable Robert P. Faust</dc:description>
+<dc:date>2016-05-11T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3439</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4438/viewcontent/20150886_CA_Williams_v_Anderson_and_Zite_gray_39092.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4442</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee vs. Theophelus Clay McClellan, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the Third District Court, Salt Lake County, Judge Mark Kouris Presiding. Appellant is not currently incarcerated in connection with this matter.</dc:description>
+<dc:date>2017-04-13T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3443</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4442/viewcontent/20160566_CA_Utah_v_McClellan_blue_39091.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4444</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State v. Jessie Dean Sheffield</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Re: State v. Jessie Dean Sheffield</dc:description>
+<dc:date>2017-05-18T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3445</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4444/viewcontent/20161003_CA_Utah_v_Sheffield_white_39100.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4441</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Carbon/Emery Telcom, Inc., Petitioner vs. Utah Public Service Commission, Respondent</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>On Appeal from the Public Service Commission of Utah</dc:description>
+<dc:date>2017-02-15T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3442</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4441/viewcontent/20160496_CA_CarbonEmery_Telc_v_Utah_Public_Servi_blue_39052.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4443</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee vs. Jessie Dean Sheffield, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a final judgment and conviction of the Carbon County Seventh District Court, entered by Judge Douglas B. Thomas</dc:description>
+<dc:date>2017-05-10T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3444</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4443/viewcontent/20161003_CA_Utah_v_Sheffield_blue_39089.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4448</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Citizens for Responsible Charter Schools, LLC, a Utah Limited Liability Corporation, Plaintiff/Appellant v. Martell Menlove in His Official Capacity as Superintendent of the Utah State Office of Education and State School Board; And Jenefer Youngfield, In</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Answer Brief on Appeal from Final Judgment and Order of Dismissal, Fifth Judicial District Court, Washington County, State of Utah, St. George Department, Honorable Judge Jeffrey C. Wilcox, Presiding</dc:description>
+<dc:date>2015-04-13T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3449</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4448/viewcontent/20140398_CA_Responsible_Chart_v_Menlove_red_39121.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4452</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee v. Samuel Lorin Jenkins, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from an order revoking and reinstating probation for Joyriding/Unauthorized Control of a Motor Vehicle, a class A misdemeanor, in violation of Utah Code § 41-1a-1314, in the Third Judicial District, in and for Salt Lake County, State of Utah, the Honorable Vernice Trease presiding.</dc:description>
+<dc:date>2015-06-16T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3453</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4452/viewcontent/20141048_CA_State_of_Utah_v_Jenkins_blue_39146.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4453</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee v. Samuel Lorin Jenkins, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from an order revoking and reinstating probation on a conviction for unauthorized control of a vehicle, a class a misdemeanor, in the Third Judicial District, Salt Lake County, the Honorable Vernice Trease presiding</dc:description>
+<dc:date>2015-07-14T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3454</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4453/viewcontent/20141048_CA_State_of_Utah_v_Jenkins_red_39148.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4454</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Salt Lake City, Plaintiff/Appellee, v. Samuel Lorin Jenkins, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the sentence following a plea to one count of Violation of Protective Order, a class A misdemeanor, in violation of Utah Code § 76-5- I 08, in the Third Judicial District, in and for Salt Lake County, State of Utah, the Honorable Vernice Trease, presiding.</dc:description>
+<dc:date>2015-07-02T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3455</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4454/viewcontent/20141058_CA_Salt_Lake_City_v_Jenkins_blue_39118.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4457</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Integrita, LLC, Wendy Harrison &#38; Design-Build Solutions, LLC Appellants, vs. Utah Labor Commission &#38; Scott Moulton, Respondents</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from Decision of the Third Judicial District Court, Salt Lake County</dc:description>
+<dc:date>2016-02-26T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3458</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4457/viewcontent/20150110_CA_Integrita__LLC_v_Utah_Labor_Commis_gray_39140.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4458</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Integrita, LLC, Wendy Harrison &#38; Design-Build Solutions, LLC, Petitioners/Appellants v. Utah Labor Commission, and Scott Moulton, an Individual, Respondent/Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the Judgment of the Third Judicial District Court, Davis County, Judge Robert P. Faust</dc:description>
+<dc:date>2016-01-27T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3459</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4458/viewcontent/20150110_CA_Integrita__LLC_v_Utah_Labor_Commis_red_39139.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4460</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>David and Ruth M. Fuller and Fuller&#39;s Appliance Parts and Service, LLC, Appellants, vs. Denise Bohne and Western States Insurance Agency, Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>On Appeal from the Third Judicial District Court, Salt Lake County Case No. 100901093, Judge Deno Himonas</dc:description>
+<dc:date>2016-02-08T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3461</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4460/viewcontent/20150146_CA_Fuller_and_Fuller_v_Bohne__Western_St_gray_39134.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4459</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>David and Ruth M. Fuller and Fuller&#39;s Appliance Parts and Service, LLC, Appellants, vs. Denise Bohne and Western States Insurance Agency, Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>On Appeal from the Third Judicial District Court, Salt Lake County Case No. 100901093, Judge Deno Himonas</dc:description>
+<dc:date>2015-10-26T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3460</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4459/viewcontent/20150146_CA_Fuller_and_Fuller_v_Bohne__Western_St_blue_39137.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4449</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>David K Gillett, an Individual, and Majestic Airlines Incorporated, a Utah Corporation, Plaintiffs/Appellants vs. Boyd J Brown, an Individual, Sentry Financial Corporation, a Utah Corporation, and Sfc Aircraft Corp I, a Utah Corporation, Defendants/Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the Third Judicial District Court in and for Salt Lake County The Honorable L.A. Dever, District Judge</dc:description>
+<dc:date>2015-02-07T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3450</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4449/viewcontent/20140682_CA_gillett_v_Brown_blue_39113.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4461</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>David and Ruth M. Fuller and Fuller&#39;s Appliance Parts and Service, LLC, Plaintiffs / Appellants, v. Denise Bohne, Insurance Agent, Western States Insurance Agency, Auto Owners Insurance Company, Safeco Insurance Company of Los Angeles, California, Defendants / Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>On Appeal from the Third Judicial District Court, Salt Lake County Case No. 100901093, Judge Deno Hirnonas</dc:description>
+<dc:date>2016-01-04T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3462</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4461/viewcontent/20150146_CA_Fuller_and_Fuller_v_Bohne__Western_St_red_39133.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4462</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee, vs. Romeo Lucero Olivarez, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a judgment of conviction arising from Sery pleas to two counts of Possession or Use of a Controlled Substance, a third degree felony, in violation of Utah Code §58-37-8(2)(a)(i), in the Third District Cou11, in and for Salt Lake County, State of Utah, the Honorable Randall Skanchy presiding.</dc:description>
+<dc:date>2015-12-31T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3463</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4462/viewcontent/20150284_CA_State_of_Utah_v_Olivarez_blue_39141.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4467</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Brooke Robinson, Petitioner - Appellant, vs. Juan Pablo Matas-Vidal, Respondent - Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>APPEAL FROM THE FINAL ORDER OF THE FOURTH JUDICIAL DISTRICT COURT OF UTAH COUNTY, THE HONORABLE CHRISTINE S. JOHNSON</dc:description>
+<dc:date>2016-02-29T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3468</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4467/viewcontent/20150418_CA_Robinson_v_Matas_Vidal_gray_39110.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4469</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Leslie D. Mower, an Individual; Ld Iii, LLC, a Utah Limited Liability Company; Ld Ranch, LLC, a Utah Limited Liability Company, Plaintiffs/Appellants, vs. David R. Simpson, an Individual; Landmark Real Estate, Inc., a Utah Corporation; Wood Springs, LLC,  a Utah Limited Liability Company; Pheasant Meadows, LLC, a Utah Limited Liability Company; Kristin Mackey, an Individual; Dean Mackey, an Individual; And Does 1-10, Defendants/ Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the Final Judgment of the Fourth District Court, Utah County, Provo Division, The Honorable Judge Lynn W. Davis</dc:description>
+<dc:date>2016-03-22T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3470</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4469/viewcontent/20150549_CA_Mower__LD_Ranch_v_Simpson__Landmark_gray_39132.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4468</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Brooke Robinson, Petitioner and Appellant, v. Juan Pablo Matas-Vidal, Respondent and Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>On appeal from the Fourth Judicial District Court, Utah County, Honorable Christine S. Johnson, District Court No. 134100249</dc:description>
+<dc:date>2015-12-31T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3469</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4468/viewcontent/20150418_CA_Robinson_v_Matas_Vidal_red_39108.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4470</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Leslie D. Mower, an Individual; Ld Iii, LLC, a Utah Limited Liability Company; And Ld Ranch, LLC, a Utah Limited Liability Company, Plaintiffs/ Appellants, v. David R. Simpson, an Individual; Landmark Real Estate, Inc., a Utah Corporation; Wood Springs, LLC, a Utah Limited Liability Company; Pheasant Meadows, LLC, a Utah Limited Liability Company; Kristin W. Mackey, an Individual; Dean Mackey, an Individual; And Does 1-10, Defendants/Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from Judgment of the Fourth Judicial District Court, Judge Lynn W. Davis</dc:description>
+<dc:date>2016-02-24T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3471</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4470/viewcontent/20150549_CA_Mower__LD_Ranch_v_Simpson__Landmark_red_39130.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4473</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Kelli A. Gonzalez, Plaintiff/Appellant v. Department of Workforce Services, Defendant/Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Brief of Appellant Kelli A. Gonzalez</dc:description>
+<dc:date>2016-02-29T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3474</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4473/viewcontent/20150582_CA_Gonzalez_v_Department_of_Wor_nocolor_39106.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4471</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Leslie D. Mower; Ld Iii, LLC; Ld Ranch, LLC, Plaintiffs/Appellants v. David R Simpson, Landmark Real Estate, Inc., Wood Springs, LLC, Pheasant Meadows, LLC, Kristin Mackey; Dean Mackey, Defendants/Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the Fourth Judicial District Court, Utah County, State of Utah The Honorable Lynn W. Davis</dc:description>
+<dc:date>2016-02-26T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3472</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4471/viewcontent/20150549_CA_Mower__LD_Ranch_v_Simpson__Landmark_red_39131.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4475</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee, v. Landin Dee Moosman, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a judgment of conviction for three counts of violation of a protective order, under Utah Code § 76-5-108, entered in the Third Judicial District Court, in and for Salt Lake County, State of Utah, the Honorable Bruce Lubeck, presiding.</dc:description>
+<dc:date>2016-04-12T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3476</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4475/viewcontent/20150588_CA_State_of_Utah_v_Moosman_gray_39127.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4474</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Kelli Gonzalez, Plaintiff-Appellant, vs. Utah Department of Workforce Services, Defendant-Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the tinal order dismissing a petition for review, from the Third District Court, State of Utah The Honorable Katie Bernards-Goodman presiding.</dc:description>
+<dc:date>2016-03-22T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3475</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4474/viewcontent/20150582_CA_Gonzalez_v_Utah_Work_Service_red_39102.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4479</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Michael and Susan Morris, Plaintiffs/Appellants, vs. Garrett B. Gunderson, Freedom Fast Track, LLC, Andrew Howell and Durham Jones &#38; Pinegar. p.c., Defendants/Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>APPEAL FROM SUMMARY JUDGMENT TAKEN FROM THE FOURTH JUDICIAL DISTRICT COURT FOR UTAH COUNTY, STATE OF UTAH Judge James R. Taylor Presiding</dc:description>
+<dc:date>2016-08-10T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3480</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4479/viewcontent/20150604_CA_Morris_v_Gunderson__Freedo_blue_39151.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4476</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee, v. Landin Dee Moosman, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from sentences on three convictions for violating a protective order, in the Third Judicial District, Salt Lake County, the Honorable Bruce Lubeck presiding</dc:description>
+<dc:date>2016-03-03T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3477</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4476/viewcontent/20150588_CA_State_of_Utah_v_Moosman_red_39126.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4483</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Staci Baker, Defendant/Appellant vs. C504750p, LLC, Plaintiff/Appelle</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from Order Denying Relief from Default Judgement of the Fourth District Court, Utah County, State of Utah, the Honorble James R. Taylor Presdiding</dc:description>
+<dc:date>2016-06-13T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3484</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4483/viewcontent/20150826_CA_Baker_v_C504750P__LLC_gray_39155.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4484</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>C504750, LLC, a Utah Limited Liability Company, Plaintiff/Appellee vs. Staci Baker, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>ON APPEAL FROM THE DECISION OF THE FOURTH DISTRICT COURT, UTAH COUNTY, HONORABLE JAMES R. TAYLOR PRESIDING</dc:description>
+<dc:date>2016-05-11T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3485</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4484/viewcontent/20150826_CA_Baker_v_C504750P__LLC_red_39154.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4482</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Staci Baker, Defendant/Appellant vs. C504750p, LLC, Plaintiff/Appelle</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from Order Denying Relief from Default Judgement of the Fourth District Court, Utah County, State of Utah, the Honorble James R. Taylor Presdiding</dc:description>
+<dc:date>2016-04-05T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3483</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4482/viewcontent/20150826_CA_Baker_v_C504750P__LLC_blue_39153.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4447</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Citizens for Responsible Charter Schools, LLC, a Utah Limited Liability Corporation, Plaintiff/Appellant v. Martell Menlove in His Official Capacity as Superintendent of the Utah State Office of Education and State School Board; And Jenefer Youngfield, in Her Official Capacity as School Construction and Facilities Safety Specialist Utah State Office of Education, Defendants/Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:date>2014-10-06T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3448</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4447/viewcontent/20140398_CA_Responsible_Chart_v_Menlove_blue_39124.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4472</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Kristen Pulham, Petitioner. v. William Kirsling Respondent</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>APPEAL TO THE COURT OF APPEALS FROM THE FINDINGS OF FACT AND CONCLUSIONS OF LAW, DATED SEPTEMBER 5, 2014, THE.AMENDED DECREE OF DIVORCE FOLLOWING AN EARLIER BIFURCATED DECREE, DATED NOVEMBER 4, 2014, AND THE ORDER DENYING MOTION FOR NEW TRIAL, DATED JUNE 17, 2015, OF THE THIRD JUDICIAL DISTRICT COURT IN AND FOR SALT LAKE COUNTY, STATE OF UTAH</dc:description>
+<dc:date>2016-07-11T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3473</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4472/viewcontent/20150577_CA_Pulham_v_Kirsling_blue_39116.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4451</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>David K Gillett, an Individual, and Majestic Airlines Incorporated, a Utah Corporation, Plaintiffs/Appellants vs. Boyd J Brown, an Individual, Sentry Financial Corporation, a Utah Corporation, and Sfc Aircraft Corp I, a Utah Corporation, Defendants/Appell</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>On Appeal from a grant of Summary Judgment in favor of Defendants/Appellees, entered in the Third Judicial District Court, in and for Salt Lake County, the Honorable L.A. Dever presiding, District Court No. 080921211. Appellant is not incarcerated.</dc:description>
+<dc:date>2015-04-08T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3452</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4451/viewcontent/20140682_CA_gillett_v_Brown_red_39114.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4455</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Salt Lake City, Plaintiff/Appellee, v. Samuel Lorin Jenkins, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the sentence following a plea to one count of Violation of Protective Order, a class A misdemeanor, in violation of Utah Code § 76-5-108, in the Third Judicial District, in and for Salt Lake County, State of Utah, the Honorable Vernice Trease, presiding.</dc:description>
+<dc:date>2015-08-05T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3456</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4455/viewcontent/20141058_CA_Salt_Lake_City_v_Jenkins_red_39123.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4463</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee, vs. Romeo Lucero Olivarez, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a judgment of conviction arising from Sery pleas to two counts of Possession or Use of a Controlled Substance, a third degree felony, in violation of Utah Code §58-37-8(2)(a)(i), in the Third District Court, in and for Salt Lake County, State of Utah, the Honorable Randall Skanchy presiding.</dc:description>
+<dc:date>2016-05-11T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3464</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4463/viewcontent/20150284_CA_State_of_Utah_v_Olivarez_gray_39143.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4465</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Sheila G Winkler, Petitioner, v. Workforce Appeals Board, Utah Department of Workforce Services, and Salt Lake City Corp., Respondents</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Petition for Review of a Decision of the Workforce Appeals Board of the Department of Workforce Services, State of Utah</dc:description>
+<dc:date>2015-11-30T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3466</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4465/viewcontent/20150342_CA_Winkler_v_Workforce_Appeals_red_39120.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4456</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Integrita, LLC, Wendy Harrison &#38; Design-Build Solutions, LLC Appellants, vs. Utah Labor Commission &#38; Scott Moulton, Respondents</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from Decision of the Third Judicial District Court</dc:description>
+<dc:date>2015-11-02T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3457</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4456/viewcontent/20150110_CA_Integrita__LLC_v_Utah_Labor_Commis_blue_39138.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4464</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee, vs. Romeo Lucero Olivarez, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from convictions for two counts of unlawful possession of a controlled substance, both third degree felonies, in the Third Judicial District, Salt Lake County, the Honorable Randall Skanchy presiding</dc:description>
+<dc:date>2016-04-20T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3465</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4464/viewcontent/20150284_CA_State_of_Utah_v_Olivarez_red_39142.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4480</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Michael and Susan Morris, Plaintiffs/Appellants, vs. Garrett B Gunderson; Freedom Fast Track , LLC; Andrew Howell; Durham Jones &#38; Pinegar, Pc, Defendants/Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>APPEAL FROM THE FOURTH JUDICIAL DISTRICT COURT, UTAH COUNTY, JUDGE JAMES R. TAYLOR</dc:description>
+<dc:date>2016-10-12T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3481</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4480/viewcontent/20150604_CA_Morris_v_Gunderson__Freedo_red_39152.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4481</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Andrew Veysey, Petitioner/Appellee vs. Alexis Veysey, Respondent/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>APPEAL FROM THE THIRD DISTRICT COURT, SALT LAKE COUNTY, JUDGE BARRY LAWRENCE</dc:description>
+<dc:date>2016-02-19T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3482</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4481/viewcontent/20150609_CA_Veysey_v_Veysey_blue_39103.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4477</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff and Appellee, v. Michael John Edgar, Defendant and Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>On appeal from the Fourth Judicial District Court, Utah County, Honorable Lynn W. Davis, District Court No.141400828</dc:description>
+<dc:date>2016-05-23T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3478</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4477/viewcontent/20150597_CA_State_of_Utah_v_Edgar_gray_39136.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4478</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintfiff/Appellee, v. Michael John Edgar, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from convictions for possession of a controlled substance, a second degree felony, possession of drug paraphernalia, a class A misdemeanor, and unlawful possession of a dangerous weapon, a class A misdemeanor, in the Fourth Judicial District, Utah County, the Honorable Lynn W. Davis presiding</dc:description>
+<dc:date>2016-04-20T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3479</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4478/viewcontent/20150597_CA_State_of_Utah_v_Edgar_red_39135.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4440</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Terry R. Spencer, Et Al., Plaintiffs/Appellants vs. Stephen M. Glover, Et Al., Defendants/Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from Order Granting Motion to Dismiss, Spencer. Et al., v. Glover, Case No. 150903279, Honorable L. Douglas Hogan, Presiding</dc:description>
+<dc:date>2016-06-08T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3441</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4440/viewcontent/20150892_CA_Spencer__et_al_v_Glover_red_39053.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4445</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>John Fenley, Plaintiff/Appellant vs. Provo City, Defendant/Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>On appeal from the Fourth Judicial District Court, Utah County, Hon. James Brady, Case No. 170400320</dc:description>
+<dc:date>2017-08-25T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3446</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4445/viewcontent/20170405_CA_Fenley_v_Provo_blue_39098.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4450</identifier>
+		<datestamp>2019-12-10T18:50:53Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>David K Gillett, an Individual, and Majestic Airlines Incorporated, a Utah Corporation, Plaintiffs/Appellants vs. Boyd J Brown, an Individual, Sentry Financial Corporation, a Utah Corporation, and Sfc Aircraft Corp I, a Utah Corporation, Defendants/Appell</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the Third Judicial District Court in and for Salt Lake County The Honorable L.A. Dever, District Judge</dc:description>
+<dc:date>2014-12-31T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3451</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4450/viewcontent/20140682_SC_Gillett_v_Brown_gray_39115.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4486</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Charley Patterson, an Individual, Plaintiff/Appellee vs. Jed Knight, and Individual, and Alisha Knight, and Individual, Defendants/Appellants</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>APPEAL FROM AN ORDER OF THE THIRD JUDICIAL DISTRIT COURT FOR SALT LAKE COUNTY, HONORABLE JAMES GARDNER, DITRICT JUDGE</dc:description>
+<dc:date>2016-09-02T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3487</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4486/viewcontent/20150885_CA_Patterson_v_Knight_gray_39129.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4502</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff and Appellee, v. Abisai Martinez-Castellanos, Defendant and Appellent</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>An Appela from a Judgment and Criminal Convictions for Two Counts of Possession of Controlled Substances (Third Degree Felonies), Posession of Drug Paraphernalia (a Class B Misdemeanor), and Driving with a Controlled Substance in the body (a Class B Misdemeanor), Entereed in the Fourth Judicial district Cour, Juab County, the Honorable James Brady Presiding (District Court Case No. 101600146)</dc:description>
+<dc:date>2015-08-12T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3503</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4502/viewcontent/20130432_CA_State_of_Utah_v_Martinez_Castella_gray_39242.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4520</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Neal K. Ostler, Petitioner, vs. Utah State Retirement Board, Respondent.</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>BRIEF OF RESPONDENT AND REAL PARTY IN INTEREST SALT LAKE COMMUNITY COLLEGE On Petition for Review from the Utah State Retirement Board Agency Case No. 13-25R</dc:description>
+<dc:date>2016-09-07T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3521</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4520/viewcontent/20160220_CA_Ostler_v_State_Retirement__red_39173.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4485</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Charley Patterson, an Individual, Plaintiff/Appellee vs. Jed Knight, and Individual, and Alisha Knight, and Individual, Defendants/Appellants</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>APPEAL FROM AN ORDER OF THE THIRD JUDICIAL DISTRIT COURT FOR SALT LAKE COUNTY, HONORABLE JAMES GARDNER, DITRICT JUDGE</dc:description>
+<dc:date>2016-04-22T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3486</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4485/viewcontent/20150885_CA_Patterson_v_Knight_blue_39128.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4488</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Jacob D. Williams, an Individual, Plaintiff/Appellant vs. Craig Alan Anderson, an Individual, and Quinn Zite, an Individual, and Anderson Zite, LLC (F/K/a/ Fix a Phone, LLC), a Utah Limited Liability Company, Defendants/Appellees</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:date>2016-05-04T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3489</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4488/viewcontent/20150886_CA_Williams_v_Anderson_Zite_blue_39105.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4494</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Larry Harmon, Petitioner-Appellant vs. Utah Board of Pardons and Parole, Respondent-Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>On Appeal from the Third Judicial District Court The Honorable Todd M. Shaughnessy presiding Case No. 150903620</dc:description>
+<dc:date>2016-12-13T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3495</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4494/viewcontent/20160192_CA_Harmon_v_Utah_Pardons_Paro_red_39104.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4497</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, P;aintiff/Appellee vs. Thomas Edward Egley, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a final judgment and conviction of the Carbon County Seventh District Court, entered by Judge George M. Harmond, Jr.</dc:description>
+<dc:date>2017-03-29T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3498</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4497/viewcontent/20160976_CA_State_of_Utah_v_Egley_blue_39147.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4496</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee v. Preston Michael Cowlishaw, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a conviction for kidnapping, a second degree felony, failure to respond at the command of police, a third degree felony and theft, a second degree felony in the Second District Court, State of Utah, the Honorable Ernie W. Jones, Judge, presiding</dc:description>
+<dc:date>2016-11-18T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3497</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4496/viewcontent/20160477_CA_State_of_Utah_v_Cowlishaw_blue_39107.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4504</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah Plaintiff/Appellee, v. Cooper John Anthony Van Huizen, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>This is the reply brief of appellant challenging the juvenile court bindover order transferring jurisdiction to the adult court in this Serious Youth Offender case, which order was entered in the Second District Juvenile Court, Weber County, State of Utah, the Honorable Michelle M. Heward presiding. As the defective transfer order failed to provide lawful jurisdiction in the adult court, the convictions and pleas entered in the Second District Court, Weber County, State of Utah, the Honorable Ernie Jones, presiding, must be vacated.</dc:description>
+<dc:date>2015-09-14T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3505</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4504/viewcontent/20140602_CA_State_of_Utah_v_Van_Huizen_gray_39216.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4503</identifier>
+		<datestamp>2019-12-11T16:52:39Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee, v. Abisai Martinez-Castellanos, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from convictions for two counts of controlled substance possession, third degree felonies, and one count each of possession of drug paraphernalia and driving with a controlled substance in the body, both class B misdemeanors, in the Fourth Judicial District, Juab County, the Honorable James Brady presiding</dc:description>
+<dc:date>2015-05-13T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3504</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4503/viewcontent/20130432_CA_State_of_Utah_v_Martinez_Castella_red_39239.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4509</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>In Regard to Darrell Wayne Morris, Witness/Appellant. State of Utah, Plaintiff, v. Danny Leroy Logue, Defendant.</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>ON APPEAL FROM A FINDING OF CONTEMPT ENTERED BY HONORABLE DEREK M. PULLAN OF THE FOURTH JUDICIAL DISTRICT COURT IN AND FOR UTAH COUNTY, STATE OF UTAH</dc:description>
+<dc:date>2015-11-30T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3510</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4509/viewcontent/20150187_CA_State_of_Utah_v_Logue_blue_39183.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4512</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee, vs. Russell Edward Yalowski, Defendant/Appellant.</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a conviction for one count of burglary,  a second degree felony, in violation of Utah Code 76-6-202: one count of threat of violence, a class B misdemeanor, in violation of Utah Code 76-5-107(1): and one count of criminal mischief, a class B misdemeanor, in violation of Utah Code 76-6-106(2)(c), in the Third Judicial district Court, in and for Salt Lake County, State of Utah, the Honorable Paul B. Parker presiding.</dc:description>
+<dc:date>2016-03-29T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3513</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4512/viewcontent/20150270_CA_State_of_Utah_v_Yalowski_gray_39208.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4516</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee, v. Daniel Wayne Fakatou, Defendant/Appellant.</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Re: State v. Fakatou Appeal No. 20150328-CA</dc:description>
+<dc:date>2017-02-23T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3517</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4516/viewcontent/20150328_CA_Utah_v_Fakatou_white_39168.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4513</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee, v Russell Edward Yalowski</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from convictions for burglary, a second degree felony; threat of violence, a class B misdemeanor; and criminal mischief, a class B misdemeanor, in the Third Judicial District, Salt Lake County, the Honorable robin W. Reese presiding</dc:description>
+<dc:date>2016-01-27T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3514</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4513/viewcontent/20150270_CA_State_of_Utah_v_Yalowski_red_39205.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4518</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff and Appellee, v. Michael John Edgar, Defendant and Appellant.</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>On appeal from the Fourth Judicial District Court, Utah County, Honorable Lynn W. Davis, District Court No.141400828 Appellant Michael edgar is currently incarcerated</dc:description>
+<dc:date>2015-12-16T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3519</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4518/viewcontent/20150597_CA_State_of_Utah_v_Edgar_blue_39166.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4515</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee, v. Daniel Wayne Fakatou, Defendant/Appellant.</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from sentencing on a conviction for one count of aggravated assault, a third degree felony, in the Third Judicial District, Salt lake County, the Honorable Mark Kouris presiding</dc:description>
+<dc:date>2017-01-31T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3516</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4515/viewcontent/20150328_CA_Utah_v_Fakatou_red_39162.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4519</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Kylee J. Sandusky, Petitioner/Appellee v. George A. Sandusky Respondent/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>APPEAL FROM A JUDGMENT OF THE THIRD JUDICIAL DISTRICT COURT OF SUMMIT COUNTY, UTAH, HON. KARA L. PETTIT.</dc:description>
+<dc:date>2016-07-19T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3520</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4519/viewcontent/20160131_CA_Sandusky_v_Sandusky_blue_39252.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4521</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee v. Vratislav Roger Bilek, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a judgment of conviction for Kidnapping, a second degree felony, in violation of Utah Code 76-5-301, in the Third Judicial District, in and for Salt Lake County, State of Utah, the Hoborable Bruce Lubeck presiding.</dc:description>
+<dc:date>2016-07-19T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3522</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4521/viewcontent/20160285_CA_Utah_v_Bilek_blue_39286.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4525</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Gaspar Avila, Petitioner and Appellant, vs. Taylorsville City, Respondent and Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>APPEAL FROM THE THIRD DISTRICT COURT -- SALT LAKE DEPT., SALT LAKE COUNTY, HONORABLE SU CHON</dc:description>
+<dc:date>2017-01-17T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3526</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4525/viewcontent/20160612_CA_Avila_v_Taylorsville_City_blue_39245.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4526</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Gaspar Avila, Petitioner and Appellant, vs. Taylorsville City, Respondent and Appellee</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>APPEAL FROM THE THIRD DISTRICT COURT -- SALT LAKE DEPT., SALT LAKE COUNTY, HONORABLE SU CHON</dc:description>
+<dc:date>2017-04-20T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3527</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4526/viewcontent/20160612_CA_Avila_v_Taylorsville_City_gray_39250.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4490</identifier>
+		<datestamp>2019-12-11T16:52:35Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee vs. Amelia Suzanne Hoffman, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a sentence of probation to class-A-misdemeanor attempted possession of  a controlled substance in the Third Judicial District Court, Salt Lake County, the Honroable Royal I. Hansen presiding</dc:description>
+<dc:date>2017-03-20T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3491</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4490/viewcontent/20150894_CA_State_of_Utah_v_Hoffman_red_39150.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4506</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Remax Elite Dba, Hilary &#34;Skip&#34; Wing, Aspenwood Realestate Corporation, Plaintiffs v. Still Standing Stable, Lc, Charles &#34;Chuck&#34; Schvaneveldt, and Cathy Code, Defendants</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a judgment entered in the Second Judicial District Court Weber County, State of Utah, Honorable Noel S. Hyde</dc:description>
+<dc:date>2015-07-15T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3507</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4506/viewcontent/20140978_CA_Remax_Elite_v_Still_Standing_St_blue_39163.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4508</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>In Re: Darrell Wayne Morris, Witness/Appellant State of Utah, Plaintiff/Appellee, v. Danny Leroy Logue, Defendant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from an order finding Appellant in contempt for refusing to testify in a trial involving a first degree felony in the Fourth Judicial District, Utah County, the Honorable Derek M. Pullan presiding</dc:description>
+<dc:date>2016-04-04T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3509</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4508/viewcontent/20150187_CA_Morris__State_of__v_Logue_red_39187.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4514</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee, v Daniel Wayne Fakatou, Defendant/Appellant.</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from sentence following a guilty plea to one count of aggravated assault, a third degree felony, in violation of Utah Code 76-5-103(1), in the Third Judicial District Court, in and for Salt Lake County, State of Utah, the Honorable Mark Kouris presiding. Apppellant is incarcerated</dc:description>
+<dc:date>2016-10-13T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3515</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4514/viewcontent/20150328_CA_Utah_v_Fakatou_blue_39161.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4511</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee, vs Russell Edward Yalowski, Defendant/Appellant.</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a conviction for one count of burglary, a second degree felony, in violation of Utah Code 76-6-202; one count of threat of violence, a class B misdemeanor, in violation of Utah Code 76-6-106, in the Third Judicial District Court, in and for Salt Lake County, State of Utah, the Honorable Robin W. Reece presiding.</dc:description>
+<dc:date>2015-09-21T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3512</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4511/viewcontent/20150270_CA_State_of_Utah_v_Yalowski_blue_39202.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4523</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Lynessa Michelle Anderson, Petitioner/Appellee, v. Loren Price Anderson Respondent/Appellant.</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>ON APPEAL FROM THE JUDGMENT IN THE FOURTH DISTRICT COURT THE HONORABLE SAMUEL D. MCVEY PRESIDING</dc:description>
+<dc:date>2016-11-17T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3524</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4523/viewcontent/20160507_CA_Anderson_v_Anderson_blue_39172.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4524</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Lynessa Michelle Anderson, Petitioner/Appellee, vs. Loren Price Anderson Respondent/Appellant.</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the Fourth District Court, Utah County, Judge Samuel D. McVey Presiding</dc:description>
+<dc:date>2017-02-24T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3525</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4524/viewcontent/20160507_CA_Anderson_v_Anderson_red_39174.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4495</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee v. Vratislav Roger Bilek, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a judgment of convivtion for Kidnapping, a second degree felony, in ciolation of Utah Code 76-5-301, in the Third Judicial District, in and for Salt Lake County, State of utah, the Honroable Bruce Lubeck presiding</dc:description>
+<dc:date>2016-12-22T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3496</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4495/viewcontent/20160285_CA_Utah_v_Bilek_gray_39157.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4499</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah,  Plaintiff/Appellee, v. Levi Gene King, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the Minutes- Change of Plea-Sentence, Judgement, Commitment entered on January 18, 2013, in the Second District Court, Davis County, the Honorable Thomas L. Kay, presiding</dc:description>
+<dc:date>2014-10-30T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3500</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4499/viewcontent/20130223_CA_Utah_v_King_blue_39159.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4498</identifier>
+		<datestamp>2019-12-11T16:52:36Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee vs. Lewis Rene Judd, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Ths is an appeal from the Judgment and Sentence filed on or about July 29, 2017 by  the Fifth Judicial District Court of Iron County, State of utah, Judge Keith C. Barnes presiding and folllowing jury trial. Counsel for Appellant files an Anders&#39; Brief in compliance with State v. Wells, 2000 Utah App. 304, 13 P.3d 1056. The Appellant is not incarcerated, having already served the sentence imposed by the trial court.</dc:description>
+<dc:date>2017-02-01T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3499</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4498/viewcontent/20160666_CA_State_of_Utah_v_Judd_blue_39117.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4510</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>In Regard to Darrell Wayne Morris, Witness/Appellant. State of Utah, Plaintiff, v. Danny Leroy Logue, Defendant.</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>ON APPEAL FROM A FINDING OF CONTEMPT ENTERED BY HONORABLE DEREK M. PULLAN OF THE FOURTH JUDICIAL DISTRICT COURT IN AND FOR UTAH COUNTY, STATE OF UTAH</dc:description>
+<dc:date>2015-05-09T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3511</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4510/viewcontent/20150187_CA_State_of_Utah_v_Logue_gray_39191.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4501</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff and Appellee, v. Abisai Martinez-Castellanos, Defendant and Appellent</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>An Appela from a Judgment and Criminal Convictions for Two Counts of Possession of Controlled Substances (Third Degree Felonies), Posession of Drug Paraphernalia (a Class B Misdemeanor), and Driving with a Controlled Substance in the body (a Class B Misdemeanor), Entereed in the Fourth Judicial district Cour, Juab County, the Honorable James Brady Presiding (District Court Case No. 101600146)</dc:description>
+<dc:date>2015-01-08T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3502</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4501/viewcontent/20130432_CA_State_of_Utah_v_Martinez_Castella_blue_39219.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4492</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Clearfield City, Plaintiff/Appellee v S. Steven Maese, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a convivtion of Speeding, a class C misdemeanor under Utah Codes 41-6a-601, reduced to an infraction upon the City&#39;s motion. The judgement was entered in the Second Judicial District Court, Farmington Department, the Honorable John R. Morris presiding. the Appellant is not incarcerated.</dc:description>
+<dc:date>2015-12-31T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3493</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4492/viewcontent/20150962_CA_Clearfield_City_v_Maese_blue_39101.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4493</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah, Plaintiff/Appellee vs. Larry Harmon, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>THIS APPEAL STEMS FROM A  DISMISSAL OF A RULE 65B PETITION IN THE THIRD JUDICIAL DISTRICT COURT, SALT LAKE COUNTY, BEFORE THE HONORABLE TODD M. SHAUGHNESSY</dc:description>
+<dc:date>2016-10-11T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3494</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4493/viewcontent/20160192_CA_Harmon_v_State_of_Utah_blue_39109.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4505</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Aspenwood Real Estate Corporation, Elite Legacy Corporation, and Hilary &#34;Skip&#34; Wing, Plaintiff/Appellees, vs. Charles &#34;Chuck&#34; Schvaneveldt Defendant/Appellant.</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:date>2015-10-16T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3506</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4505/viewcontent/20140978_CA_Aspenwood_Real_Es_v_Schvaneveldt_red_39164.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4507</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Remax Elite Dba, Hilary &#34;Skip&#34; Wing, Aspenwood Realestate Corporation, Plaintiffs v. Still Standing Stable, Lc, Charles &#34;Chuck&#34; Schvaneveldt, and Cathy Code, Defendants</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>APPEAL FROM THE SECOND DISTRICT COURT, WEBER COUNTY, STATE OF UTAH THE HON. S. HYDE, CIVIL NO. 060906802</dc:description>
+<dc:date>2015-11-18T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3508</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4507/viewcontent/20140978_CA_Remax_Elite_v_Still_Standing_St_gray_39165.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4522</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>State of Utah Plaintiff/Appellee v. Vratislav Roger Bilek Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from the revocation of probation entered on a conviction for kidnapping, a second degree felony, in the Third Judicial District, Salt Lake County, the Honorable Bruce C. Lubeck presiding</dc:description>
+<dc:date>2016-11-21T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3523</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4522/viewcontent/20160285_CA_Utah_v_Bilek_red_39167.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4487</identifier>
+		<datestamp>2019-12-11T16:52:33Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>Charley Patterson, an Individual, Plaintiff/Appellee vs. Jed Knight, and Individual, and Alisha Knight, and Individual, Defendants/Appellants</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>On appeal from the Third Judicial District Court, Honorable James Gardner, District Court No. 140906572</dc:description>
+<dc:date>2016-06-27T07:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3488</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4487/viewcontent/20150885_CA_Patterson_v_Knight_red_39122.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+			
+<record>
+	<header>
+		<identifier>oai:digitalcommons.law.byu.edu:byu_ca3-4489</identifier>
+		<datestamp>2019-11-26T19:42:03Z</datestamp>
+				<setSpec>publication:utah_briefs_collection</setSpec>
+				<setSpec>publication:byu_ca3</setSpec>
+			</header>
+	<metadata>
+		<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+			<dc:title>The State of Utah, Plaintiff/Appellee v. Amelia Suzanne Hoffman, Defendant/Appellant</dc:title>
+<dc:creator>Utah Court of Appeals</dc:creator>
+<dc:description>Appeal from a judgement of conviction for attempted possession or use of a controlled substance, a Class A. Misdemeanor, in violation of utah Code 58-37-8; in the Third Judicial Disctrict, in and for Salt Lake County, State of Utah, the Honorable Royal I. Hansen presiding</dc:description>
+<dc:date>2016-11-14T08:00:00Z</dc:date>
+<dc:type>text</dc:type>
+<dc:format>application/pdf</dc:format>
+<dc:identifier >https://digitalcommons.law.byu.edu/byu_ca3/3490</dc:identifier>
+<dc:identifier>https://digitalcommons.law.byu.edu/context/byu_ca3/article/4489/viewcontent/20150894_CA_State_of_Utah_v_Hoffman_blue_39149.pdf</dc:identifier>
+<dc:rights>Public record document (some rights may be reserved).</dc:rights>
+<dc:source>Utah Court of Appeals Briefs (2007– 2019)</dc:source>
+<dc:publisher>BYU Law Digital Commons</dc:publisher>
+<dc:subject>Law</dc:subject>
+
+		</oai_dc:dc>
+	</metadata>
+</record>
+
+				
+			<resumptionToken completeListSize="4225" cursor="3400">12365887/oai_dc/3500//</resumptionToken>
+		
+		</ListRecords>
+</OAI-PMH>
