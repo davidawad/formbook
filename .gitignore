@@ -5,3 +5,5 @@ out/
 
 # internal task-queue state (local br store); not part of the public repo
 .beads/
+.claude/worktrees/
+/tools/fb/target/
