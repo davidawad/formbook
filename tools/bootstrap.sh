@@ -105,7 +105,7 @@ fi
 probe pandoc pandoc --version || true
 probe tectonic tectonic --version || true
 probe soffice soffice --version || true
-presence cargo
+presence bend
 presence br
 
 echo
