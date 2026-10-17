@@ -15,3 +15,7 @@ Indexed level: `state-appellate`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 10 pp., text layer verified 2026-10-17; MEC e-filed stamp; via MC Law Judicial Data Project brief archive | `FILED-EXAMPLE-maj-wright-v-turan-foley-2016-wc-01264-amicus-brief.pdf` | Amicus Mississippi Association for Justice (in support of appellant) | Wright v. Turan-Foley Motors, Inc., No. 2016-WC-01264-COA (Miss. Ct. App.) | 2016-12-20 | https://law-db.mc.edu/judicial/briefs/2016-WC-01264-COAAC.PDF | `679349e876e73a340147cd9e2953cfda93db032eb1e5ec39309ad80d32bc7765` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: queried the Mississippi Supreme Court rules and official case/brief sources for petitions for review, certiorari/interlocutory review, chancery-court appellate briefs, and writ filings. The official-search results did not expose party PDFs matching the blocked types; no new downloadable text-layer filing was retrieved. Procedural routes were checked against the official Mississippi Rules of Appellate Procedure and court materials: https://courts.ms.gov/rules/msrulesofcourt/rules_of_appellate_procedure.pdf ; https://courts.ms.gov/.
