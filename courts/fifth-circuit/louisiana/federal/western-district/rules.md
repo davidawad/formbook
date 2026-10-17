@@ -7,7 +7,7 @@ Alias `lawd`. Scope: civil complaints and motion memoranda in the Western Distri
 | Tag | Source | URL |
 |---|---|---|
 | LR | W.D. La. Civil and Criminal Local Rules, effective May 7, 2024 | https://www.lawd.uscourts.gov/sites/lawd/files/UPLOADS/Local_Rules_050724.pdf |
-| FRCP | Federal Rules of Civil Procedure, Rules 5, 7, 8, 10, 11 | https://www.uscourts.gov/file/7832/download |
+| FRCP | Federal Rules of Civil Procedure (current rules page; court page states Civil Rules last amended in 2025) | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure |
 
 ## Page form
 

@@ -7,7 +7,7 @@ Alias `laed`. Scope: civil complaints and supporting/opposing motion memoranda i
 | Tag | Source | URL |
 |---|---|---|
 | LR | E.D. La. Local Civil Rules, effective March 1, 2022, revised February 4, 2025 | https://www.laed.uscourts.gov/sites/default/files/local_rules/2022%20CIVIL%20RULES%20LAED%20w%20Amendment%202%204%2025.pdf |
-| FRCP | Federal Rules of Civil Procedure, Rules 5, 7, 8, 10, 11 | https://www.uscourts.gov/file/7832/download |
+| FRCP | Federal Rules of Civil Procedure (current rules page; court page states Civil Rules last amended in 2025) | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure |
 
 ## Page form
 

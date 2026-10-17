@@ -7,7 +7,7 @@ Alias `lamd`. Scope: civil complaints and motion memoranda in the Middle Distric
 | Tag | Source | URL |
 |---|---|---|
 | LR | M.D. La. Local Rules, effective August 18, 2022 (official court copy; no later revision is listed on the court's Local Rules page) | https://www.lamd.uscourts.gov/sites/default/files/pdf/2022%20Local%20Rules%20Revisions%208-18-2022.pdf |
-| FRCP | Federal Rules of Civil Procedure, Rules 5, 7, 8, 10, 11 | https://www.uscourts.gov/file/7832/download |
+| FRCP | Federal Rules of Civil Procedure (current rules page; court page states Civil Rules last amended in 2025) | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure |
 
 ## Page form
 

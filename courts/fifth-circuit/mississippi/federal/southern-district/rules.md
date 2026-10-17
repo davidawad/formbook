@@ -7,7 +7,7 @@ Alias `mssd`. Scope: civil complaints and motion memoranda. Verified against the
 | Tag | Source | URL |
 |---|---|---|
 | LR | Local Uniform Civil Rules for the Northern and Southern Districts of Mississippi, current December 1, 2024 | https://www.mssd.uscourts.gov/sites/mssd/files/2024%20Local%20Civil%20Rules%20MSSD%20(.pdf).pdf |
-| FRCP | Federal Rules of Civil Procedure, Rules 5, 7, 8, 10, 11 | https://www.uscourts.gov/file/7832/download |
+| FRCP | Federal Rules of Civil Procedure (current rules page; court page states Civil Rules last amended in 2025) | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure |
 
 ## Complaints
 
