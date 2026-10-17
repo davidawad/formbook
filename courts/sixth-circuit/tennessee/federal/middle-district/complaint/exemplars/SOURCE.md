@@ -14,3 +14,4 @@
 - Public court record (RECAP). Used only as a visual and structural reference.
 
 Second filer: not saved in this pass (the brief asks for one exemplar per doc type). Candidate: *Bledsoe v. Tennessee Sheriffs’ Association, Inc.*, No. 3:26-cv-01445 (complaint, 41 pages, filed 2026-10-09, counsel-drafted, RECAP `gov.uscourts.tnmd.112076.1.0.pdf`). Its caption uses "JURY DEMAND" and its text is Times New Roman. EVAL-LOOP's tier-2 rule (2 or 3 filers) is therefore not yet met; see README.md.
+
