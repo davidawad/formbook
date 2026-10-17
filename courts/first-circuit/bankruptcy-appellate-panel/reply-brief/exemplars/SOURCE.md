@@ -26,3 +26,9 @@ CourtListener files the First Circuit BAP's dockets under the circuit's court id
 - `description:(brief) AND "Bankruptcy Appellate Panel" court=ca1`: no bap1 reply brief.
 
 Result: no public bap1 reply brief. The reply template shares the opening and answering template (only `doc-kind` differs), so the 2026-10-16 template changes (see `../README.md`) apply to it, but no reply-specific layout was checked against a filing.
+
+## Search 2026-10-17 (fb-595.21.1): no further exemplar
+
+- CourtListener RECAP search API (`court=ca1`, query `"Statement Regarding Interested Parties" "Bankruptcy Appellate Panel"`, the Official Form 2 title that only BAP briefs carry): not answered; the anonymous quota was exhausted by the box (HTTP 429, "50/hour", then "125/day").
+- Web searches (standard and extended) for First Circuit BAP appellant, appellee and reply briefs and for U.S. Trustee Program BAP briefs on justice.gov: only BAP forms, local rules, opinions, and a redacted sample brief (nlrg.com "Peter Rabbit" sample, no real filer; not used).
+- Result: no new public filed bap1 brief from a different filer. Recorded in `docs/box-blocked.md`.
