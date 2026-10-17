@@ -1,6 +1,6 @@
 # Eastern District of Tennessee rules
 
-Primary sources checked 2026-10-14. Re-check every six months and before changing a template. Sources: [E.D. Tenn. Local Rules](https://www.tned.uscourts.gov/local-rules), revised April 8, 2026 (LR 5.1); FRCP 7, 8, 10, 11, 12, 38, https://www.law.cornell.edu/rules/frcp/.
+Primary sources checked 2026-10-14. Re-check every six months and before changing a template. Sources: [E.D. Tenn. Local Rules](https://www.tned.uscourts.gov/local-rules), revised April 8, 2026 (LR 5.1); FRCP 7, 8, 10, 11, 12, 38, https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure.
 
 Kinds: **M** mandatory; **C** convention; **T** template contract; **A** author responsibility.
 
