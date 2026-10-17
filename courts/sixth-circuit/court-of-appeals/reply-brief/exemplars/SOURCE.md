@@ -24,3 +24,14 @@ Measured from the PDF (not from the rules): body and footnote text both 14 pt Ti
 (pdftohtml size 21 at its 1.5 scale; the footnote text, "Like the district court...",
 is in the same font as the body), 1-inch margins, double spacing. Cover and
 headings are in the same face.
+
+## Additional filer
+
+- File: `FILED-EXAMPLE-cs-v-mccrumb-24-1364-reply-brief.pdf` (19 pages, text layer)
+- Case: *C.S. v. Craig McCrumb et al.*, No. 24-1364
+- Document: Reply Brief of Appellant, Document 32
+- Filer: Plaintiff-Appellant C.S., by Michael F. Smith (The Smith Appellate Law Firm), John R. Monroe (John Monroe Law, P.C.), and Eugene Volokh
+- Date filed: 2024-11-06 (ECF header)
+- URL: https://assets.nationbuilder.com/firearmspolicycoalition/pages/6462/attachments/original/1730943512/2024.11.06_032_Reply_Brief_of_Appellant.pdf
+- Date retrieved: 2026-10-17
+- SHA-256: `b48c94309b23efebe5ed9621d342aa76feb1ebd827757348159896b58da26e93`
