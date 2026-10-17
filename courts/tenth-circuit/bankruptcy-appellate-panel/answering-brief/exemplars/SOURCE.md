@@ -30,3 +30,9 @@ Still **BLOCKED: no public exemplar**. Each row below was run on 2026-10-15 from
 The court-authored sample is still **not** an exemplar: it is a template, not a filing.
 
 Render and overlay on the same date: `tools/render.sh` exit 0, no typst warnings, 7 pages. Output in `/work/artifacts/bap10/`, not `samples/`. The snapshot has no PDFs, so no existing `samples/` PDF was regenerated. `tools/overlay.sh` exit 1 (no OUTPUT in `samples/`; no exemplar exists either).
+
+## Re-check 2026-10-17 (second attempt)
+
+Still blocked: no public filed answering brief located. Fresh web searches for an appellee/answering brief with Tenth Circuit BAP case identifiers surfaced only BAP opinions, appellate opinions, the court's sample, and a public pro se appellant brief in *Rusk v. Beutler* (BAP No. UT-25-10). The Rusk filing is an appellant's brief and does not establish answering-brief conventions, so it is not stored or used as an answering-brief exemplar. The BAP's publicly hosted decision in that case is an opinion, not a brief.
+
+A direct anonymous CourtListener RECAP API request for `type=r&court=bap10&q=answering brief` and a docket request returned `Anonymous users don't have permission to access the API` on 2026-10-17. The web searches did not surface a public filed answering brief from another accessible source. With no filing to compare, no exemplar-derived transcription or overlay can be made without substituting a different document type.

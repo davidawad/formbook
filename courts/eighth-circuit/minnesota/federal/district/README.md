@@ -7,15 +7,6 @@
 - State / territory: Minnesota
 - Status: **todo** (0%); manual status in `court.json`: `todo`
 
-## Typeface
-
-Checked against D. Minn. LR 7.1(h)(1) (complete set, PDF dated June 10, 2026; text read 2026-10-14). The rule sets a 13-point size and names no typeface, so no court-named substitute applies (`docs/FONTS.md`, rule 3). Both doc types keep EB Garamond.
-
-| Doc type | Face required by rule | Font in template | Substitute status |
-|---|---|---|---|
-| `complaint/` | none (size only: LR 7.1(h)(1)) | EB Garamond | n/a: no court-named face |
-| `motion-brief/` | none (size only: LR 7.1(h)(1)) | EB Garamond | n/a: no court-named face |
-
 ## Checklist
 
 - [ ] `rules.md` present

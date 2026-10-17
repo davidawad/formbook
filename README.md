@@ -89,7 +89,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Court of Federal Claims](courts/federal-circuit/court-of-federal-claims) | `uscfc` | todo | — | — | — | 0 |
 | [United States Court of International Trade](courts/federal-circuit/court-of-international-trade) | `cit` | todo | — | — | — | 0 |
 | [United States Court of Veteran Appeals](courts/federal-circuit/court-of-veteran-appeals) | `cavc` | todo | — | — | — | 0 |
-| [Patent Trial and Appeal Board](courts/federal-circuit/patent-trial-and-appeal-board) | `ptab` | todo | — | — | — | 0 |
+| [Patent Trial and Appeal Board](courts/federal-circuit/patent-trial-and-appeal-board) | `ptab` | in progress | — | — | — | 13 |
 | [Trademark Trial and Appeal Board](courts/federal-circuit/trademark-trial-and-appeal-board) | `ttab` | todo | — | — | — | 0 |
 
 ## Military courts
@@ -550,7 +550,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](courts/ninth-circuit/bankruptcy-appellate-panel) | `bap9` | todo | — | — | — | 0 |
-| [Court of Appeals for the Ninth Circuit](courts/ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | — | — | 63 |
+| [Court of Appeals for the Ninth Circuit](courts/ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | pass | — | 75 |
 
 ### Alaska
 
@@ -832,7 +832,8 @@ Regenerate with `tools/tracker.sh` (the completion logic is in [Bend](https://gi
 | Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Supreme Court of the United States | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Federal Circuit and feeder courts | 6 | 0 | 0 | 0 | 6 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+|  | 1 | 0 | 0 | 0 | 1 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Federal Circuit and feeder courts | 6 | 0 | 0 | 1 | 5 | 0.0% | 0.0% | 0 | 0 | 0 | 2.1% |
 | Military courts | 6 | 0 | 0 | 0 | 6 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | National courts and tribunals | 5 | 0 | 0 | 0 | 5 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | First Circuit | 23 | 0 | 0 | 0 | 23 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
@@ -843,9 +844,9 @@ Regenerate with `tools/tracker.sh` (the completion logic is in [Bend](https://gi
 | Sixth Circuit | 30 | 0 | 0 | 0 | 30 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | Seventh Circuit | 22 | 0 | 0 | 0 | 22 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | Eighth Circuit | 39 | 0 | 0 | 0 | 39 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Ninth Circuit | 65 | 0 | 1 | 2 | 62 | 0.0% | 1.5% | 1 | 0 | 0 | 0.9% |
+| Ninth Circuit | 65 | 0 | 1 | 2 | 62 | 0.0% | 1.5% | 1 | 1 | 0 | 1.1% |
 | Tenth Circuit | 34 | 0 | 0 | 0 | 34 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | Eleventh Circuit | 32 | 0 | 0 | 0 | 32 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | D.C. Circuit | 4 | 0 | 0 | 0 | 4 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| **Total** | 375 | 0 | 1 | 3 | 371 | 0.0% | 0.2% | 1 | 0 | 0 | 0.1% |
+| **Total** | 376 | 0 | 1 | 4 | 371 | 0.0% | 0.2% | 1 | 1 | 0 | 0.2% |
 <!-- tracker:end -->

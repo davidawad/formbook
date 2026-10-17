@@ -9,7 +9,7 @@ Courts under `courts` (375).
 | [United States Court of Federal Claims](federal-circuit/court-of-federal-claims) | `uscfc` | todo | — | — | — | 0 |
 | [United States Court of International Trade](federal-circuit/court-of-international-trade) | `cit` | todo | — | — | — | 0 |
 | [United States Court of Veteran Appeals](federal-circuit/court-of-veteran-appeals) | `cavc` | todo | — | — | — | 0 |
-| [Patent Trial and Appeal Board](federal-circuit/patent-trial-and-appeal-board) | `ptab` | todo | — | — | — | 0 |
+| [Patent Trial and Appeal Board](federal-circuit/patent-trial-and-appeal-board) | `ptab` | in progress | — | — | — | 13 |
 | [Trademark Trial and Appeal Board](federal-circuit/trademark-trial-and-appeal-board) | `ttab` | todo | — | — | — | 0 |
 | [U S Air Force Court of Criminal Appeals](military/air-force-court-of-criminal-appeals) | `afcca` | todo | — | — | — | 0 |
 | [U S Army Court of Criminal Appeals](military/army-court-of-criminal-appeals) | `acca` | todo | — | — | — | 0 |
@@ -245,7 +245,7 @@ Courts under `courts` (375).
 | [North Dakota Supreme Court](eighth-circuit/north-dakota/state/supreme-court) | `nd` | todo | — | — | — | 0 |
 | [Supreme Court of South Dakota](eighth-circuit/south-dakota/state/supreme-court) | `sd` | todo | — | — | — | 0 |
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](ninth-circuit/bankruptcy-appellate-panel) | `bap9` | todo | — | — | — | 0 |
-| [Court of Appeals for the Ninth Circuit](ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | — | — | 63 |
+| [Court of Appeals for the Ninth Circuit](ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | pass | — | 75 |
 | [United States Bankruptcy Court, D. Alaska](ninth-circuit/alaska/federal/bankruptcy-district) | `akb` | todo | — | — | — | 0 |
 | [United States District Court for the District of Alaska](ninth-circuit/alaska/federal/district) | `akd` | todo | — | — | — | 0 |
 | [United States Bankruptcy Court, D. Arizona](ninth-circuit/arizona/federal/bankruptcy-district) | `arb` | todo | — | — | — | 0 |

@@ -1,1 +1,2 @@
 BLOCKED fb-595.20.18: bap8/reply-brief has no public filed exemplar after a fourth search pass (CourtListener RECAP files bap8 under ca8 22-6NNN; appellant reply in 22-6006 not in RECAP; Justia blocked from the box); answering-brief done (Swackhammer 22-6006).
+BLOCKED fb-595.20.23: No public filed Tenth Circuit BAP answering brief was located after the 2026-10-17 search; the accessible Rusk filing is an appellant's brief, and CourtListener's anonymous RECAP API denies access. No matching exemplar, transcription, or overlay can be responsibly produced.

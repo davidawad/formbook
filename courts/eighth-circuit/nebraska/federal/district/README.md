@@ -31,4 +31,13 @@ A court is `up for review` when `rules.md` is present and the typst engine passe
 - `exemplars/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `samples/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`
 
+
+## Typeface
+
+| Item | Status |
+|---|---|
+| Face required | none: NECivR 7.1 and 10.1 (2022 text, read 2026-10-14) name no typeface, type size or spacing beyond 10.1(b)(1)'s paper size and top margin |
+| Substitute | none; EB Garamond is kept (no-face default, `docs/FONTS.md`) in `complaint/` and `motion-brief/` |
+| Fit | n/a. The filed exemplars are Times New Roman, a filer's choice |
+
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
