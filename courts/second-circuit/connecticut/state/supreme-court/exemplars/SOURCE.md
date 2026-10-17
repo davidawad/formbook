@@ -7,7 +7,7 @@ Indexed level: `state-supreme`
 |---|---|---|---|---|---|---|---|
 | `brief-on-the-merits` — Brief on the merits (state supreme court) | COLLECTED: 48 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-ccdla-sc20470-brief-on-the-merits.pdf` | Connecticut Criminal Defense Lawyers Association et al. (plaintiffs-appellants; ACLU Foundation of Connecticut) | Connecticut Criminal Defense Lawyers Ass'n v. Lamont, S.C. 20470 | 2020-05-29 | https://www.acluct.org/app/uploads/2020/05/2020-05-29_appellants_brief.pdf | `d04ddb7c7dccaf62ca50f9e88ae8ffbf723073d2318ef075565f95e92e9f29e8` |
 | `answering-brief` — Answering brief (appellee's principal brief) | PENDING: not yet searched |  |  |  |  |  |  |
-| `reply-brief` — Reply brief | PENDING: not yet searched |  |  |  |  |  |  |
+| `reply-brief` — Reply brief | COLLECTED: 22 pp., text layer verified 2026-10-17; certified question from 2d Cir.; c. 2021-22 | `FILED-EXAMPLE-glover-plaintiffs-sc20607-reply-brief.pdf` | Marjorie Glover et al. (plaintiffs-appellants; Zangari Cohn Cuthbertson Duhl & Grello, Public Justice) | Glover v. Bausch & Lomb Inc., SC 20607 | undated | https://www.publicjustice.net/wp-content/uploads/2025/12/SC-20607-Reply-Brief.pdf | `2b0d81c687d77b748cf4d7e1d0cdc48740c2834195b37cb88c03d1fa88185f8d` |
 | `petition-for-review` — Petition for review (agency order or state high court) | PENDING: not yet searched |  |  |  |  |  |  |
 | `motion-brief` — Motion and supporting memorandum | PENDING: not yet searched |  |  |  |  |  |  |
 | `petition-for-discretionary-review` — Petition for discretionary review | PENDING: not yet searched |  |  |  |  |  |  |
