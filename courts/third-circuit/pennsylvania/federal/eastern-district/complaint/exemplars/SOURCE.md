@@ -29,3 +29,21 @@ CourtListener REST search, `type=r`, `court_id:paed`, query `short_description:c
 The tier-2 rule asks for two or three exemplars from different filers. The brief asks for one saved exemplar per doc type. The second-filer candidates (Evenstad, Johnson) were located and their text layers confirmed but not saved, so **tier 2 is judged against one filer only** (see the README, "Known gaps").
 
 The overlay pairs against `FILED-EXAMPLE-murphy-2-26-cv-07848-complaint.pdf` (the first `exemplars/*.pdf` in the folder).
+
+## 2. Second filer: `FILED-EXAMPLE-doe-5-25-cv-02070-complaint.pdf`
+
+| Field | Value |
+|---|---|
+| Court | United States District Court, E.D. Pa. (`paed`) |
+| Case | *Student Doe v. Kristi Noem, in her official capacity as Secretary of Homeland Security, et al.* |
+| Docket / document | No. 5:25-cv-02070 (judge initials CH in the ECF header), Document 1 |
+| Pages | 19 |
+| Text layer | yes (`pdftotext` yields the text; Times New Roman embedded; about 14 pt, line pitch about 32 pt) |
+| Document | Complaint (untitled beyond the caption; sections "INTRODUCTION" through "PRAYER FOR RELIEF"; numbered paragraphs) |
+| Filer | Plaintiff Student Doe; counsel Karen L. Hoffmann, Ellenberg Law Group, Philadelphia (counsel block at the top left of page 1, Pa. attorney ID printed) |
+| Date filed | 2025-04-24 (ECF header "Filed 04/24/25") |
+| URL fetched | https://web.archive.org/web/20250426081354id_/https://storage.courtlistener.com/recap/gov.uscourts.paed.636620/gov.uscourts.paed.636620.1.0.pdf (Internet Archive copy of the CourtListener RECAP file) |
+| Date retrieved | 2026-10-17 |
+| sha256 | `3934539fd18bf4a4cd1102c1c6409be3c4e2e2dbd6770208a5cb38c60ee7ca1b` |
+
+Found by: the CourtListener search API was throttled on 2026-10-17; RECAP URLs for `paed` were listed from the Internet Archive CDX index of `storage.courtlistener.com`, and docket-entry-1 files of recent cases were read by page 1. Different party and counsel from Murphy (The Kim Law Firm).
