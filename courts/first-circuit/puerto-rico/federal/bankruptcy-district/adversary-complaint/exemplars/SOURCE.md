@@ -28,3 +28,7 @@ Second filer: not collected. Two other bankruptcy-court adversary complaints on 
 - Notes: contains the FRBP 7008 consent statement (para. 1), a LBR 9013-1(c)-style response notice (21 days), a certificate of service and an "s/" signature with the U.S.D.C. number, address, e-mail and telephone (no fax). No ECF header stamp on the RECAP copy.
 - sha256: `1907809e8a9c1c33e08c1efcddf1e968b58cb6613a9a73d37e063919daa30b4f`
 - Public court record (RECAP). Used only as a visual and structural reference.
+
+## Replacement for the audited non-redistributable-font exemplar
+
+The audited `FILED-EXAMPLE-noriega-colombani-22-00026-adversary-complaint.pdf` (Leelawadee UI Semilight) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-organic-power-20-00055-adversary-complaint.pdf` from a different filer. See the primary-exemplar record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

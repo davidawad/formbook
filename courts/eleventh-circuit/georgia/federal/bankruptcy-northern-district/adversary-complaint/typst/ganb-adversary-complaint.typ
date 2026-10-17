@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"   // GANB-FORM-002: legible proportional serif; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // GANB-FORM-002: legible proportional serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // GANB-FORM-002: no size in FRBP 9004(a); 12 pt, the usual floor (Times New Roman substitute, docs/FONTS.md).
 #let single-leading = 0.495em            // single spacing: Liberation Serif's line box is 0.655em, so the pitch is 1.15em
 #let body-leading = 1.07em              // GANB-FORM-003: one and one-half spacing, 1.5 x single pitch = 1.725em = 0.655em + this gap

@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")     // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                      // TNMD-FORM-002: 12-point or larger.
 // Liberation Serif's natural line box is 0.655 em (7.86 pt at 12 pt), so the leading is set in points.
 #let body-leading = 19.74pt                // TNMD-FORM-003: double spacing, a 27.6 pt baseline pitch (measured; README).

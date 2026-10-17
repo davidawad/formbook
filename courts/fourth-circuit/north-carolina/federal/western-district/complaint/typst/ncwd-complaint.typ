@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // LCvR 7.1(d): font size is the rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (README)
+#let font-family = ("Times New Roman", "Liberation Serif")        // LCvR 7.1(d): font size is the rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (README)
 #let type-size = 12pt                   // LCvR 7.1(d): a minimum of 12 point
 #let margin = 1in                       // LCvR 7.1(d): one-inch margins
 #let text-width = 8.5in - 2 * margin

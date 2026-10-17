@@ -33,3 +33,7 @@
 | sha256 | `c61a3853d15c919c0ebff4a163dbeb8bf993b63fb5372e02e316ad9508b7dcd4` |
 
 Different party and counsel from Binder (Coldwell Banker, K&L Gates). Shows: cover, TOC, TOA, statement of jurisdiction, issues, related cases, statement of the case, summary, argument, conclusion, a numbered certificate of compliance (word count, typeface, virus check, identical copies) and a CM/ECF certificate of service. No bar-membership certificate (government counsel; see L.A.R. 28.3(d) committee comment).
+
+## Selected replacement
+
+The United States v. Harris brief is flagged for Garamond. The saved Binder brief is a public answering brief in this court with an extractable text layer and Century Schoolbook, the court's booklet face; it is the best currently saved selected replacement. The Harris sample remains paired with its source until rebuilt against Binder.

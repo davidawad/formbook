@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LCR 10(e)(1): proportionally spaced font; vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // LCR 10(e)(1): proportionally spaced font; vendored in fonts/
 #let type-size = 12pt                   // LCR 10(e)(1): 12 point or larger
 #let pitch = 24pt                       // LCR 10(e)(1): double spaced or exactly 24 points; the numbered lines are this pitch
 #let lines-per-page = 27                // LCR 10(e)(5): numbered paper; 27 numbered lines fill the text block

@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // L.R. 9004-1(a)(3): 12-point font, no face named; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // L.R. 9004-1(a)(3): 12-point font, no face named; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // L.R. 9004-1(a)(3)
 #let footnote-size = 10pt               // L.R. 9004-1(a)(3): footnotes may be 10-point
 #let margin = 1in                       // L.R. 9004-1(a)(2): at least one inch on every side

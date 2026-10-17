@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // LR 7.2 sets only the size; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // LR 7.2 sets only the size; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LR 7.2: 12-point or larger
 #let pitch = 24pt                       // double spacing: baseline-to-baseline distance of body text at 12 pt
 #let page-w = 8.5in                     // LR 10.1: 8 1/2 by 11 inch paper

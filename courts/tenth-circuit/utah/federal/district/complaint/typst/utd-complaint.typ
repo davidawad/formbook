@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // DUCivR 10-1(3) names no typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")    // DUCivR 10-1(3) names no typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                    // DUCivR 10-1(3): minimum 12 point, footnotes included.
 #let line-pitch = 24pt                   // DUCivR 10-1(4): double spacing, two lines of 12 pt type per line.
 #let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.

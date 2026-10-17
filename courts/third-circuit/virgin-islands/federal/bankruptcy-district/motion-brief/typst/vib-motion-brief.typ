@@ -10,7 +10,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"        // VIB-MB-FONT: Times New Roman substitute per docs/FONTS.md, vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")        // VIB-MB-FONT: Times New Roman substitute per docs/FONTS.md, vendored in /fonts.
 #let type-size = 12pt                    // VIB-MB-FONT: LBR 5005-1(B) "no smaller than 12 Courier or an equivalent"; 12 pt Liberation Serif (a Times New Roman substitute) is the usual equivalent.
 #let body-leading = 1.345em               // VIB-MB-SPACING: double-spaced body. Liberation Serif line box 0.655em + 1.345em = 24 pt at 12 pt.
 #let page-margin = 1in                   // VIB-MB-MARGIN: letter paper, one-inch margins on every side.

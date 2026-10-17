@@ -33,7 +33,7 @@
 
 #let court-line = "IN THE UNITED STATES AIR FORCE COURT OF CRIMINAL APPEALS"   // Appendix A
 #let honorable = "TO THE HONORABLE, THE JUDGES OF THE UNITED STATES AIR FORCE COURT OF CRIMINAL APPEALS:"   // Appendix A
-#let font-family = "EB Garamond"           // Rule 17.1(a): proportional type. Vendored in /fonts (see README, Known gaps).
+#let font-family = ("Times New Roman", "Liberation Serif")           // Rule 17.1(a): proportional type. Vendored in /fonts (see README, Known gaps).
 #let type-size = 12pt                      // Rule 17.1(a): proportional 12-point type, everywhere, footnotes included.
 #let body-leading = 0.94em                 // Rule 17.1(a): double-spaced. Calibrated on the render (README, Page review).
 #let single-leading = 0.12em               // Block quotations, footnotes, headings, caption, TOC/TOA: single-spaced.

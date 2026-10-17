@@ -8,8 +8,7 @@
 \documentclass[12pt,letterpaper]{extarticle}
 \usepackage{fontspec}
 % FRAP 32(a)(5)(A) and Cir. R. 32(b): proportionally spaced serif; Times New Roman substitute per docs/FONTS.md.
-\setmainfont[Path=$fontdir$liberation-serif/, Extension=.ttf, UprightFont=LiberationSerif-Regular, ItalicFont=LiberationSerif-Italic,
-  BoldFont=LiberationSerif-Bold, BoldItalicFont=LiberationSerif-BoldItalic]{LiberationSerif-Regular}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 \usepackage[letterpaper,margin=1in,footskip=0.45in]{geometry}
 \usepackage{needspace}
 \usepackage{booktabs,longtable}

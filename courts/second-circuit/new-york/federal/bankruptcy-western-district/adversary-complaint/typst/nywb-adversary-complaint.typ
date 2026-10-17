@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // no W.D.N.Y. font rule (LBR 9004-1: "plainly and legibly written"); Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")        // no W.D.N.Y. font rule (LBR 9004-1: "plainly and legibly written"); Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // convention: 12 point, as the filed exemplar
 #let page-w = 8.5in                     // LBR 9004-1: letter size paper
 #let page-h = 11in

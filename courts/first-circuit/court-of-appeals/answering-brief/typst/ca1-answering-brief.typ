@@ -25,7 +25,7 @@
 // ---------------------------------------------------------------------------
 
 #let court-name = "United States Court of Appeals for the First Circuit"   // FRAP 32(a)(2)(B)
-#let font-family = "Liberation Serif"          // FRAP 32(a)(5)(A): proportionally spaced, serif; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // FRAP 32(a)(5)(A): proportionally spaced, serif; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // FRAP 32(a)(5)(A): 14-point or larger, everywhere, footnotes included.
 #let body-leading = 0.94em                 // with the fixed 1.305em line box set below, a baseline pitch of about
                                            // 2.2 x type size: double spacing (FRAP 32(a)(4)).

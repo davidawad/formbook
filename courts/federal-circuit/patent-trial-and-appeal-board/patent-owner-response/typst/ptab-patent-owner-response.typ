@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // PTAB-POR-FORM-002: 14-point Times New Roman proportional font. Vendored metric-compatible stand-in (README, gap 1).
+#let font-family = ("Times New Roman", "Liberation Serif")     // PTAB-POR-FORM-002: 14-point Times New Roman proportional font. Vendored metric-compatible stand-in (README, gap 1).
 #let type-size = 14pt                      // PTAB-POR-FORM-002: footnotes and headers too (no exception).
 #let double-leading = 1.64em               // PTAB-POR-FORM-003: double spacing, about 32 pt pitch for 14-point Times (calibrated, see README).
 #let single-leading = 0.5em                // single spacing, about 16 pt pitch for 14-point Times (headings, TOC, certificates, footnotes).

@@ -10,7 +10,7 @@
 // Rule-driven parameters
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif" // LR 10.1 "standard font"; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif") // LR 10.1 "standard font"; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt              // LR 10.1 sets no point size; 12 pt, as in the filed exemplar
 #let body-leading = 1.345em        // double spacing: the Liberation Serif line box is 0.655em, so 0.655em + 1.345em = 24 pt at 12 pt
 #let single-leading = 0.495em       // single spacing (caption, counsel, signature): about 13.8 pt

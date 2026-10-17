@@ -25,3 +25,7 @@ Caveats:
 - Date retrieved: 2026-10-17
 - sha256: `f1cdd9247e89df6d032cecedfda41956d33546ece7f7f9a30ce14b10bc3d03cc`
 - Note: Public RECAP scan without a text layer; retained only for a filer-independent structural comparison.
+
+## Selected replacement
+
+The Stika filing is the scan flagged by the font audit. The saved Steakhouse Partners complaint is a same-court, same-document-type public filing with a text layer, so it is the available selected replacement. It uses AdobePi and Arial rather than Times New Roman. The sample remains based on the Steakhouse filing.

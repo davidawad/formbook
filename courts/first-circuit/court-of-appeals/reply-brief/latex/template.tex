@@ -6,8 +6,7 @@
 \usepackage{fontspec}
 % FRAP 32(a)(5)(A): proportionally spaced serif. Vendored Liberation Serif only, the Times New Roman substitute
 % per docs/FONTS.md (fontdir is passed by tools/render-latex.sh). No system fonts.
-\setmainfont[Path=$fontdir$liberation-serif/, Extension=.ttf, UprightFont=LiberationSerif-Regular, ItalicFont=LiberationSerif-Italic,
-  BoldFont=LiberationSerif-Bold, BoldItalicFont=LiberationSerif-BoldItalic, Ligatures=TeX]{LiberationSerif-Regular}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 \usepackage[letterpaper,margin=1in,footskip=0.5in]{geometry}   % FRAP 32(a)(4)
 \usepackage{indentfirst}     % every paragraph is indented, including the first after a heading
 \usepackage{needspace}

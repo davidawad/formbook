@@ -29,4 +29,5 @@
 - The filing is joint (debtor and committee). The template's signature block takes one signer; the transcription uses the Debtor's counsel (Craige) and carries Sokolosky and Kallergis as the firm and committee counsel in the `for` field only. The second counsel block is not reproduced.
 - The filing's certificate is an electronic-service certificate (CM/ECF only), with no served list. The template's certificate sentence says "on the parties listed below"; the transcription passes an empty served list and the template now handles it (see `../typst/oknb-motion-brief.typ`).
 - The filing's footnote 4 (after "$3,500,000" in ¶ 27) has no text in the PDF's text layer. The transcription omits it and notes the gap.
+- Font-audit note: this filed PDF is not image-only. `pdftotext` extracts 4,212 words; `pdffonts` reports Times-Roman text. The TSV audit's "no text layer" classification is inconsistent with the PDF and should be corrected rather than prompting an exemplar swap.
 - Only one exemplar from this court, from one filer (OKF). Tier 2 is judged against this filing and the rules, not against two or three filers.

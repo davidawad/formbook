@@ -12,7 +12,7 @@
 // Parameters (the only numbers here; each traces to a rule or a stated choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"           // vendored in /fonts; no system fallback (render.sh)
+#let font-family = ("Times New Roman", "Liberation Serif")           // vendored in /fonts; no system fallback (render.sh)
 #let type-size = 12pt                       // TTAB-NOP-FORM-001: at least 11-point (37 CFR 2.126(a)(1))
 #let body-leading = 0.695em                 // TTAB-NOP-FORM-002: double-spaced (24 pt pitch at 12 pt); measured in ../README.md
 #let single-leading = 0em                   // caption, headings, signature block, exhibit slip sheets

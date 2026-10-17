@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see ../README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"     // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; --ignore-system-fonts means no other substitute
+#let font-family = ("Times New Roman", "Liberation Serif")     // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; --ignore-system-fonts means no other substitute
 #let type-size = 12pt                // LBR 9004-1(a)(1)(A): minimum 12-point, text and footnotes
 #let pitch = 24pt                    // LBR 9004-1(a)(1)(B): double-spaced body (baseline pitch, measured)
 #let page-w = 8.5in                  // LBR 9004-1(a)(2)(C): letter size

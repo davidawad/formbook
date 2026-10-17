@@ -28,6 +28,11 @@ pub fn calibrate(c: &Ctx) -> Res<String> {
     );
     std::fs::write(&ctyp, typ).map_err(|e| io_fail(&ctyp, e))?;
     let fonts = format!("{}/fonts", c.root);
+    let tnr_fonts = if cfg!(target_os = "macos") {
+        "/System/Library/Fonts/Supplemental"
+    } else {
+        "/usr/share/fonts/truetype/msttcorefonts"
+    };
     let mut t = cmd(
         &c.env,
         "typst",
@@ -35,6 +40,8 @@ pub fn calibrate(c: &Ctx) -> Res<String> {
             "compile",
             "--font-path",
             &fonts,
+            "--font-path",
+            tnr_fonts,
             "--ignore-system-fonts",
             &ctyp,
             &cpdf,
@@ -95,18 +102,28 @@ pub fn prepare(c: &Ctx, sid: &str, md: &str, pdf: &str, w: &str) -> Res<Option<P
                 &c.court,
                 &format!(".samples[] | select(.id == \"{sid}\") | .md"),
             )?;
-            let mut r = cmd(
-                &c.env,
-                "sh",
-                &[
-                    &format!("{}/tools/render.sh", c.root),
-                    "--engine",
-                    &c.engine,
-                    &c.doc,
-                    &mdrel,
-                    pdf,
-                ],
-            );
+            let mut r = if c.engine == "typst" {
+                let mut command = std::process::Command::new(
+                    std::env::current_exe().map_err(|e| io_fail("fb", e))?,
+                );
+                command
+                    .current_dir(&c.root)
+                    .args(["render", &c.doc, mdrel.as_str(), pdf]);
+                command
+            } else {
+                cmd(
+                    &c.env,
+                    "sh",
+                    &[
+                        &format!("{}/tools/render.sh", c.root),
+                        "--engine",
+                        &c.engine,
+                        &c.doc,
+                        &mdrel,
+                        pdf,
+                    ],
+                )
+            };
             r.stdout(Stdio::null());
             super::sh::flush();
             r.status().map_err(|e| io_fail("sh", e))?.success()

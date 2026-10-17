@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LCivR 10.1: type no smaller than 12 point
 #let pitch = 24pt                       // LCivR 10.1: double spaced; a 24 pt baseline pitch at 12 pt
 #let page-w = 8.5in                     // LCivR 10.1: 8 1/2 x 11 inch paper

@@ -13,7 +13,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"   // JPML-FORM-002: 12-point font. EB Garamond is the only vendored family; see ../README.md.
+#let font-family = ("Times New Roman", "Liberation Serif")   // JPML-FORM-002: 12-point font. EB Garamond is the only vendored family; see ../README.md.
 #let type-size = 12pt              // JPML-FORM-002: 12-point for text and footnotes alike.
 #let line-pitch = 24pt             // JPML-FORM-003: double spaced, text only. 27 lines fit on a body page.
 #let body-leading = 0.694em        // gap between lines of body text; tuned so the line pitch is line-pitch (see ../README.md).

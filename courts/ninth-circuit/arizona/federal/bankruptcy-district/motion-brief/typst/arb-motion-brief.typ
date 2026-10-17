@@ -11,7 +11,7 @@
 // Parameters (each traces to a rule or a named layout choice; see README.md)
 // ---------------------------------------------------------------------------
 #let court-title = ("UNITED STATES BANKRUPTCY COURT", "DISTRICT OF ARIZONA")  // LRBP 1005-1(a)
-#let font-family = "EB Garamond"        // proportional, standard; vendored in fonts/ (LRBP 9004-1(g))
+#let font-family = ("Times New Roman", "Liberation Serif")        // proportional, standard; vendored in fonts/ (LRBP 9004-1(g))
 #let type-size = 13pt                   // LRBP 9004-1(g): "a proportional font size no smaller than 13 point"
 #let footnote-size = 12pt               // LRBP 9004-1(g): footnotes may be 12 point
 #let pitch = 24pt                       // LRBP 9004-1(g): double spacing; the numbered lines are this pitch

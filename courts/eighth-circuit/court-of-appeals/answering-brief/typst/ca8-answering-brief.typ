@@ -17,7 +17,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // FRAP 32(a)(5)(A): proportionally spaced, serif. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // FRAP 32(a)(5)(A): proportionally spaced, serif. Vendored in /fonts.
 #let type-size = 14pt                      // FRAP 32(a)(5)(A): 14-point or larger, everywhere (footnotes too).
 #let body-leading = 0.94em                 // FRAP 32(a)(4): double-spaced. Calibrated so the baseline pitch is 28 pt
                                            // (2 x 14 pt), the pitch of the filed exemplar's body text.

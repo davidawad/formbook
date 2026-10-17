@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LR-Civ. 10.1: "at least 12 pitch", letter quality; 12 pt proportional (README.md)
 #let pitch = 24pt                       // LR-Civ. 10.1: text double spaced; one double-spaced line = 24 pt at 12 pt
 #let body-leading = 1.345em             // Liberation Serif's line box is 0.655em, so 1.345em + 0.655em = 2em = 24 pt at 12 pt

@@ -25,3 +25,7 @@ The second row is a second answering-type filing in the same case from the other
 | Date fetched | 2026-10-14 |
 
 Public record: both filings were served in the case and posted by the counsel's organization.
+
+## Font-audit text-layer verification
+
+The audit inventory labels `FILED-EXAMPLE-hicks-13-004-answer-appellant.pdf` as having no text layer, but local inspection contradicts that label: `pdftotext` extracts 8,111 words from this 26-page PDF. The government brief `FILED-EXAMPLE-hicks-13-004-answering-brief.pdf` yields 16,497 words across 49 pages. Both public filings in CMCR Case No. 13-004 are text-based answering-type briefs and use Times-Roman; the appellant's answer is the text-layer replacement reference for its audit row, and the government brief is the saved text-layer alternate. Neither requires an image-scan replacement.

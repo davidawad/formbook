@@ -22,3 +22,7 @@ Second filer: not saved in this pass (the brief asks for one exemplar per doc ty
 - Date retrieved: 2026-10-17
 - sha256: `41e8f07c6bc42188348df5386cea2efe683f4e1a33a04085c2a734f6ad0ac6d4`
 - Note: Public RECAP scan without a text layer; retained as a filer-independent structural comparison only.
+
+## Selected replacement
+
+The Schneider filing is the scan flagged by the font audit. The saved Appalachian Insurance Company complaint is a same-court, same-document-type public filing with a native text layer and embedded Times New Roman; it is the selected replacement. The current sample is already based on Appalachian and remains paired with that source.

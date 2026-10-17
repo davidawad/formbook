@@ -27,3 +27,7 @@ This is a public court filing. The file is kept unchanged in this folder.
 | Date filed | February 21, 2019 (ECF header) |
 | Date retrieved | 2026-10-17 |
 | SHA-256 | `039e92a15827b7539856d88ebb2a9bc4a4e2d88867ba129d19dd83fc20e7f1e0` |
+
+## Replacement for the audited non-redistributable-font exemplar
+
+The audited `FILED-EXAMPLE-doj-in-re-trump-18-2486-reply-brief.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-dnc-de-luca-26-1532-reply-brief.pdf` from a different filer. See the additional-exemplar record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

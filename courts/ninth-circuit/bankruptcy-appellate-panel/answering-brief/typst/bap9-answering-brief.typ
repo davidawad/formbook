@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"          // BAP-FORM-002: proportionally spaced; vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // BAP-FORM-002: proportionally spaced; vendored in /fonts.
 #let type-size = 14pt                      // BAP-FORM-002: 14-point or larger, everywhere.
 #let body-leading = 1.3em                  // BAP-FORM-003: double spacing; calibrated by measured line pitch (../README.md).
 #let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA, certificates.

@@ -32,6 +32,10 @@ search log below) found only opinions, docket trackers and forms.
 | 2 | Same | `q="Adversary case" "Complaint by"` | Candidates: Celli v. City of Troy (18-90026), Davidson (23-90018), Sherman (18-90007), Levine-Trustee (24-90021), Fangio v. Vehifax (15-50001), Stevens (26-90046). Dkt 1 PDFs downloaded and tested for a text layer: Celli and Davidson are scanned (no text); Sherman and Leakh are short; Fangio and Stevens have text. |
 | 3 | Same | `q=Vehifax` (type `rd`) | Found Fangio v. Vehifax Dkt 1 (text) and Dkt 25 (memorandum in support of summary judgment; not in RECAP storage). |
 | 4 | CourtListener storage, Fangio docket | `storage.courtlistener.com/recap/gov.uscourts.nynb.349360/...N.0.pdf` for N = 2 to 60 | Only N = 1 and N = 52 exist; N = 52 is a 30-page scanned document, not used. |
+
+## Selected replacement
+
+The Fangio filing is classified as an OCR scan by the font audit. The saved Stevens complaint is a same-court adversary complaint with an extractable text layer and Times New Roman in the body, and is the selected replacement. Fangio remains paired with the existing sample.
 | 5 | Web search, PacerMonitor, Trellis, Justia, Stretto, inforuptcy | adversary and docket names | Docket listings only; no complaint PDFs. Justia and inforuptcy return HTTP 403. |
 | 6 | Web search, the Dakari (N.D.N.Y. 04-cv-452) and Diocese of Syracuse matters | adversary and appeal names | Opinions and claims-site pages; no adversary complaint PDF. |
 

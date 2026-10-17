@@ -12,8 +12,7 @@
 \usepackage{enumitem}
 
 % ---- type: Liberation Serif, the Times New Roman substitute per docs/FONTS.md, from the vendored fonts only (CA10-FORM-002) ----
-\setmainfont[Path=$fontdir$liberation-serif/, Extension=.ttf, UprightFont=LiberationSerif-Regular, BoldFont=LiberationSerif-Bold,
-  ItalicFont=LiberationSerif-Italic, BoldItalicFont=LiberationSerif-BoldItalic]{LiberationSerif-Regular}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 
 % 14-point everywhere, double spaced (CA10-FORM-001); the line pitch matches the typst template.
 \renewcommand\normalsize{\@setfontsize\normalsize{14pt}{31.43pt}}

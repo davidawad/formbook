@@ -16,7 +16,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"       // Vendored in fonts/. L.R. 9004(C) names no typeface; see README.md.
+#let font-family = ("Times New Roman", "Liberation Serif")       // Vendored in fonts/. L.R. 9004(C) names no typeface; see README.md.
 #let type-size = 12pt                  // L.R. 9004(C): standard 12-point font, footer included.
 #let margin = 1in                      // L.R. 9004(C): margins no less than 1 inch.
 #let text-width = 8.5in - 2 * margin

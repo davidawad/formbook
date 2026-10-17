@@ -59,3 +59,20 @@ Date of earlier searches: 2026-10-14.
 - Look up a current APL docket where the Attorney General or a public-interest group is respondent, and fetch the respondent's brief from that party's own site, or from the NYSCEF public record if accessible.
 - Clearinghouse (<https://clearinghouse.net>) lists the Court of Appeals filings for some cases, with PDFs.
 - Once a PDF is saved, name it `FILED-EXAMPLE-<short-case>-<docket>-answering-brief.pdf`, record the filer and date here, and re-run the overlay.
+
+## Font-audit selected replacement — People v. Rankin
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-people-v-rankin-apl-2022-00131-answering-brief.pdf` |
+| Court | New York Court of Appeals |
+| Case | *People v. Rankin*, APL 2022-00131 |
+| Document | Brief for Respondent, 48 pages |
+| Filer | People of the State of New York, through the New York County District Attorney's Office |
+| Date filed | May 30, 2025 |
+| URL | https://legalaidnyc.org/wp-content/uploads/2026/01/People-v-Rankin-Respondent-Brief-05.30.2025.pdf |
+| Date retrieved | 2026-10-17 |
+| Text layer / fonts | 11,506 words extracted; embedded Times New Roman used for body text (with embedded Garamond and Arial in supporting material) |
+| SHA-256 | `dd0b648da9126f33fa5bbb4eb20107b7a9befea9207fcfdce83c03dc63fdb781` |
+
+This filed respondent's brief is a same-court, same-document-type candidate to replace the Garamond-font Watkins exemplar for font reproduction. The Watkins sample remains paired with its source until its transcription is rebuilt against Rankin.

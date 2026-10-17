@@ -45,3 +45,7 @@ Not tried: PACER (requires an account and fees; not used by this box), and the c
 - Docket: https://www.courtlistener.com/docket/7219995/12/william-charles-polly-jr/
 - Date retrieved: 2026-10-17
 - SHA-256: `f0b00f32c3224e4e4e7df8b25f88cdae6e13d7c96d250bab6639e4e027b1b7ab`
+
+## Selected replacement
+
+The Wells Fargo PDF is flagged for Calisto MT. The saved Williams motion-brief is the selected replacement: same bankruptcy court and document type, public filing with a text layer, and Times New Roman body text. The Williams sample remains paired with that source and must be rebuilt before replacing the Wells Fargo PDF.

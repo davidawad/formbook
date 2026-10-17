@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; the complaint has no type-size rule in the local rules
+#let font-family = ("Times New Roman", "Liberation Serif")        // vendored in fonts/; the complaint has no type-size rule in the local rules
 #let type-size = 13pt                   // D. Minn. LR 7.1(h)(1) sets 13 point for memoranda; used here too (open choice, see README.md)
 #let page-w = 8.5in                     // LR 5.2(a) and Fed. R. Civ. P. 10: letter paper, numbered pages
 #let page-h = 11in

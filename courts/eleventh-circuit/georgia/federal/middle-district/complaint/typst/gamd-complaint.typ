@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to the exemplar; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md (Times New Roman itself cannot be vendored)
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute per docs/FONTS.md (Times New Roman itself cannot be vendored)
 #let type-size = 14pt                   // the exemplar's body text is 14 pt Times New Roman (no M.D. Ga. size rule found)
 #let footer-size = 12pt                 // the exemplar's page number is 12 pt
 #let page-w = 8.5in                     // Fed. R. Civ. P. 10(a) and the paper: letter size (the exemplar is letter)

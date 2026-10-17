@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // vendored in /fonts; the local rules name no typeface
+#let font-family = ("Times New Roman", "Liberation Serif")         // vendored in /fonts; the local rules name no typeface
 #let type-size = 14pt                    // HIB-FORM-002: LBR 9004-1(b)(1), all memoranda including footnotes: 14-point type
 #let body-leading = 1em                  // HIB-FORM-003: double spacing. Line pitch is 2.3 em (natural line 1.31 em + this gap),
                                          // the same pitch as double-spaced Times New Roman, so a page holds the same lines.

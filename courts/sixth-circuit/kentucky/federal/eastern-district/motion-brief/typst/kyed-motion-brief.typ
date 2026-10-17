@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"   // KYED-FORM-002: proportionally spaced font; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // KYED-FORM-002: proportionally spaced font; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // KYED-FORM-002: at least 12-point type, footnotes included.
 #let line-pitch = 24pt                  // KYED-FORM-001: text double spaced. Measured on the render (README.md).
 #let body-leading = 1.345em             // gap between lines of body text, tuned so the baseline pitch is line-pitch.

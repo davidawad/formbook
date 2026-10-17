@@ -10,7 +10,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // NMIB-FORM-002: serif type. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")         // NMIB-FORM-002: serif type. Vendored in /fonts.
 #let type-size = 13pt                    // NMIB-FORM-002: 12 point or larger. 13 pt is a style choice (EB Garamond sets smaller than Times at the same size); see ../README.md.
 #let pitch = 24pt                        // NMIB-FORM-003: double spacing on 24 numbered lines (pleading form, see NMIB-FORM-004).
 #let body-leading = 0.54em               // tuned so one body line occupies exactly one pitch at type-size.

@@ -5,8 +5,7 @@
 \documentclass[12pt,letterpaper]{article}
 \usepackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont[Path=$fontdir$tex-gyre-schola/, Extension=.otf, UprightFont=texgyreschola-regular, BoldFont=texgyreschola-bold,
-  ItalicFont=texgyreschola-italic, BoldItalicFont=texgyreschola-bolditalic]{TeXGyreSchola}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 \usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{indentfirst}
 \usepackage{needspace}

@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // LCvR 5.2(a) names no typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // LCvR 5.2(a) names no typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LCvR 5.2(a): print style, footnotes included, not smaller than 12 point
 #let page-margin = 1in                  // LCvR 5.2(a): margins at least 1 inch on the top, bottom and sides
 #let line-pitch = 24pt                  // double spacing: LCvR 5.2(a) requires at least 1.5; the exemplar is double

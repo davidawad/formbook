@@ -10,7 +10,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // LR 9004(b): proportional font; vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")          // LR 9004(b): proportional font; vendored in fonts/
 #let type-size = 13pt                     // LR 9004(b): at least 12 point. 13 pt is a style choice (EB Garamond sets smaller than Times at 12); see ../README.md.
 #let pitch = 24pt                         // LR 9004(a): double-spaced; the numbered lines are this pitch
 #let lines-per-page = 28                  // LR 9004(a): each printed line numbered in the left margin, 28 to a page

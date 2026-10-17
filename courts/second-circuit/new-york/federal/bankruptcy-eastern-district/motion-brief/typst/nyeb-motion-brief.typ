@@ -13,7 +13,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see ../README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"       // no font is named by FRBP 9004 or E.D.N.Y. LBR 9004-1; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")       // no font is named by FRBP 9004 or E.D.N.Y. LBR 9004-1; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                  // no size is named either; 12 pt is the working convention (README.md)
 #let page-w = 8.5in                    // E.D.N.Y. LBR 9004-1(a)(ii): 8 1/2 x 11 inch paper
 #let margin = 1in                      // layout choice: 1 inch margins on all sides

@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // no face named by D. Me. LR 10(b)(1), so docs/FONTS.md "No face named": Times New Roman substitute (README.md)
+#let font-family = ("Times New Roman", "Liberation Serif")        // no face named by D. Me. LR 10(b)(1), so docs/FONTS.md "No face named": Times New Roman substitute (README.md)
 #let type-size = 12pt                   // LR 10(b)(1): 12-point or larger; 12 pt, as the filed exemplars (README.md)
 #let page-w = 8.5in                     // LR 10(b)(3): 8 1/2 by 11 inches
 #let page-h = 11in

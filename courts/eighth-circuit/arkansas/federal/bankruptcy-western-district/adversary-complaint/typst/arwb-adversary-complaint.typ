@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a named layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; no Times New Roman is vendored (README.md, gap 2)
+#let font-family = ("Times New Roman", "Liberation Serif")        // vendored in fonts/; no Times New Roman is vendored (README.md, gap 2)
 #let type-size = 13pt                   // EB Garamond sets narrower than Times, so 13 pt gives about the exemplar's line length (README.md, gap 2)
 #let body-leading = 1.2em               // double spacing: 0.65em line box + 1.2em leading = 24 pt baseline pitch at 13 pt (measured, README.md)
 #let single-leading = 0.55em            // single spacing for caption, court title and signature: 0.65em box + 0.55em = 1.2em pitch

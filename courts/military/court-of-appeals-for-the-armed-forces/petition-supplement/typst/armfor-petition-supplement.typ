@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"           // Rule 37(a): proportional type. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")           // Rule 37(a): proportional type. Vendored in /fonts.
 #let type-size = 14pt                       // Rule 37(a): 14-point, printed matter including footnotes.
 #let body-leading = 0.94em                  // Double spacing, calibrated as in courts/ninth-circuit/court-of-appeals.
 #let single-leading = 0.12em                // Headings, block quotations, footnotes, index, authorities.

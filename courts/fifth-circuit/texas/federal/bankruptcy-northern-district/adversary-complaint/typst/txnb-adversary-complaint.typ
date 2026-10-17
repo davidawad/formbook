@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // no font rule in the N.D. Tex. bankruptcy rules for complaints; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // no font rule in the N.D. Tex. bankruptcy rules for complaints; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // convention; the mailing-matrix size rule (10 to 14 pt) is not a complaint rule
 #let page-w = 8.5in                     // FRBP 9004(a): legible paper; 8 1/2 by 11 inch is the practice (Form 416 is letter size)
 #let page-h = 11in

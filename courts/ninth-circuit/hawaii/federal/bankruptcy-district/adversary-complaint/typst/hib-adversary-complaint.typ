@@ -13,7 +13,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // vendored in /fonts; the local rules name no typeface
+#let font-family = ("Times New Roman", "Liberation Serif")         // vendored in /fonts; the local rules name no typeface
 #let type-size = 12pt                    // HIB-ADV-FORM-002: no local rule sets the type size of a complaint
                                          // (LBR 9004-1(b)(1) covers memoranda only); tier 2: a clerk's 12-point convention
 #let body-leading = 1em                  // HIB-ADV-FORM-003: double spacing. Line pitch is 2.3 em (natural line 1.31 em + this gap)

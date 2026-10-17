@@ -27,3 +27,16 @@ The brief asks for one exemplar per doc type. These are complaints in this court
 | Castillo (adversary) | Adv. 18-01013 | Epifanio Castillo | 2018-03-13 | 4 | https://storage.courtlistener.com/recap/gov.uscourts.nmb.161454/gov.uscourts.nmb.161454.1.0.pdf |
 
 Checked 2026-10-14: each has a text layer (pdftotext returns words). The Sanchez v. Guajardo complaint (Adv. 19-01040) returns almost no text (a scan) and was not used.
+
+## Font-audit selected replacement — Quorum Health Resources v. Bailey
+
+The Johnson exemplar is flagged for EquityA. The saved Quorum complaint is a public filing in the same court and document type, with a text layer (3,890 extracted words) and Times New Roman. It is the selected replacement for the Johnson font-audit item. Johnson remains paired with the existing sample until its transcription is rebuilt against Quorum.
+
+- File: `FILED-EXAMPLE-quorum-health-resources-18-01028-adversary-complaint.pdf`
+- Case: *Quorum Health Resources, LLC v. Bailey* (Otero County Hospital Association), Adv. No. 18-01028
+- Filer: Quorum Health Resources, LLC
+- Date filed: 2018-05-17
+- PDF: https://storage.courtlistener.com/recap/gov.uscourts.nmb.162129/gov.uscourts.nmb.162129.1.0.pdf
+- Text layer: yes; Times New Roman is present and not embedded
+- SHA-256: `7c5000ef721c3ad68af76cc572a54b3bbcf5e83bbceddb0daed26b4b1a3a2418`
+- Retrieved: 2026-10-17

@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (Times itself cannot be vendored)
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (Times itself cannot be vendored)
 #let type-size = 12pt                   // LR 5.1(a): proportionally spaced font, no less than 12 point
 #let margin = 1in                       // LR 5.1(a): no less than one-inch margins
 #let body-leading = 1.645em             // LR 5.1(a): double spaced = 2 x single (1.15em = 13.8 pt); Liberation Serif line box 0.655em, so 27.6 pt pitch

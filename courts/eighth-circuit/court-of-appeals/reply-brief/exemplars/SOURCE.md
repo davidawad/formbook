@@ -13,6 +13,10 @@
 | Date fetched | 2026-10-14 |
 | Notes | Public court record. The file is a Microsoft Word 2019 export (Georgia 14-point text). The RECAP copy is the court's own docket document, not an edited copy. |
 
+## Replacement for the audited non-redistributable-font exemplar
+
+The audited `FILED-EXAMPLE-lindell-24-1608-reply-brief.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-delgado-midland-24-1786-reply-brief.pdf` from a different filer. See the primary-exemplar record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
+
 ## Second filer
 
 | Field | Value |

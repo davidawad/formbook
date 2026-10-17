@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // no font rule in L.R. 5.1; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // no font rule in L.R. 5.1; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // L.R. 5.1(a)(4): fonts no smaller than 12 point, footnotes included
 #let page-w = 8.5in                     // L.R. 5.1(a)(3): standard 8 1/2 x 11 inch paper
 #let page-h = 11in

@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no D.C. Bankruptcy rule sets a face; vendored in fonts/ (README.md, gap 2)
+#let font-family = ("Times New Roman", "Liberation Serif")        // no D.C. Bankruptcy rule sets a face; vendored in fonts/ (README.md, gap 2)
 #let type-size = 12pt                   // no D.C. Bankruptcy rule sets a size; 12 pt matches the exemplar's body (README.md, gap 2)
 #let pitch = 27.6pt                     // double spacing: the exemplar's body lines are 27.6 pt apart (measured, README.md)
 #let body-leading = 1.65em              // gives a 27.6 pt baseline pitch at 12 pt in EB Garamond (measured, README.md)

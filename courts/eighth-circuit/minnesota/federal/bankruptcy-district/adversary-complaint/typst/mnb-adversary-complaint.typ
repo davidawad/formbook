@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no font rule in the local rules; EB Garamond is the vendored serif (README.md)
+#let font-family = ("Times New Roman", "Liberation Serif")        // no font rule in the local rules; EB Garamond is the vendored serif (README.md)
 #let type-size = 12pt                   // no size rule in the local rules; 12 pt is the convention in both exemplars
 #let page-w = 8.5in                     // LBR 9004-1(a): letter-size paper
 #let page-h = 11in

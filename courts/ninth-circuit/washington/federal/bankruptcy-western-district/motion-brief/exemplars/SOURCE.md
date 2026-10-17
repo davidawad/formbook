@@ -25,3 +25,7 @@ Second filer (tier-2 cross-check):
 - Date fetched: 2026-10-14
 - Text layer: yes (Times New Roman, unembedded; Liberation Sans embedded for the form lines)
 - Filed in 2015, under the rules before the December 1, 2023 Local Bankruptcy Rules. Used only for the memorandum heading and the notation conventions; it is not evidence of the current rule.
+
+## Selected replacement
+
+The 2025 Smith exemplar is flagged by the font audit for `wrdembedsub39`. The saved 2015 Pigida memorandum is the selected replacement for that audit item: it is a public filing from the same court and motion-brief document type, has an extractable text layer, and uses Times New Roman. It is retained as its own filed example because the sample is transcribed from Smith; replacing Smith's PDF in place would invalidate that sample.

@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; no NH rule sets a typeface (README.md, gap 1)
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; no NH rule sets a typeface (README.md, gap 1)
 #let type-size = 12pt                   // no NH or federal minimum found for the body; 12 pt is the working standard
 #let body-leading = 1.645em             // double spacing: about 27.6 pt line pitch at 12 pt (2 x 13.8 pt, the Word convention for 12 pt Times)
 #let single-leading = 0.5em             // counsel block, caption, signature, footnotes: single spaced

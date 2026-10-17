@@ -16,9 +16,7 @@
 
 % Liberation Serif, vendored: CA2-FORM-004 (FRAP 32(a)(5)(A)), a proportional serif at 14 point or larger;
 % Times New Roman substitute per docs/FONTS.md.
-\setmainfont[Path=$fontdir$liberation-serif/, Extension=.ttf, UprightFont=LiberationSerif-Regular,
-  BoldFont=LiberationSerif-Bold, ItalicFont=LiberationSerif-Italic, BoldItalicFont=LiberationSerif-BoldItalic,
-  Ligatures=TeX]{LiberationSerif-Regular}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 
 \makeatletter
 % ---------------------------------------------------------------------------

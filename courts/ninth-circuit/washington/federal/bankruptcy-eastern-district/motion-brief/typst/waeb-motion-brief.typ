@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // WAEB-MB-FORM-001: proportionally spaced serif. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // WAEB-MB-FORM-001: proportionally spaced serif. Vendored in /fonts.
 #let type-size = 14pt                      // WAEB-MB-FORM-001: 14 points or more, everywhere (LBR 9004-1(a)(3)).
 #let body-leading = 0.94em                 // WAEB-MB-FORM-002: double spacing (LBR 9004-1(a)(3)); about 2.2 x type size.
 #let single-leading = 0.12em               // counsel block, caption, quotations, footnotes, signature lines.
