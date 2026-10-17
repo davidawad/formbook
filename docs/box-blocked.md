@@ -12,12 +12,10 @@ BLOCKED kyeb/motion-brief: the additional Wells Fargo PDF is a motion without a 
 BLOCKED kyed: court-level rules.md and verified additional exemplars remain unfinished for complaint and motion-brief.
 BLOCKED kywb: court-level rules.md and verified additional exemplars remain unfinished for adversary-complaint and motion-brief.
 BLOCKED mieb: court-level rules.md and second-filer exemplars remain unfinished for adversary-complaint and motion-brief.
-BLOCKED miwb: court-level rules.md remains unfinished; both doc types already have two public exemplars from different filers.
 BLOCKED mied: court-level rules.md and second-filer exemplars remain unfinished for complaint and motion-brief.
 BLOCKED miwd: court-level rules.md remains unfinished; both doc types already have two public exemplars from different filers.
 BLOCKED ohnb: court-level rules.md remains unfinished; both doc types already have two public exemplars from different filers.
 BLOCKED ohsb: court-level rules.md and second-filer exemplars remain unfinished for adversary-complaint and motion-brief.
-BLOCKED ohnd: court-level rules.md remains unfinished; both doc types already have two public exemplars from different filers.
 BLOCKED ohsd: court-level rules.md and second-filer exemplars remain unfinished for complaint and motion-brief.
 BLOCKED tneb: court-level rules.md and second-filer exemplars remain unfinished for adversary-complaint and motion-brief.
 BLOCKED tnmb: court-level rules.md and second-filer exemplars remain unfinished for adversary-complaint and motion-brief.
