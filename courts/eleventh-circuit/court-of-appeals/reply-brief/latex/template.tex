@@ -4,8 +4,7 @@
 % Fonts: only the vendored Liberation Serif (Times New Roman substitute, docs/FONTS.md), through the pandoc variable fontdir (no system fonts). See ../README.md.
 \documentclass[14pt,letterpaper]{extarticle}
 \usepackage{fontspec}
-\setmainfont[Path=$fontdir$liberation-serif/, Extension=.ttf, UprightFont=LiberationSerif-Regular, ItalicFont=LiberationSerif-Italic,
-  BoldFont=LiberationSerif-Bold, BoldItalicFont=LiberationSerif-BoldItalic, Ligatures=TeX]{LiberationSerif-Regular}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 \usepackage[letterpaper,margin=1in,footskip=0.3in]{geometry}
 \usepackage{etoolbox}      % table-of-citations page lists
 \usepackage[hidelinks,unicode,bookmarks=false]{hyperref}

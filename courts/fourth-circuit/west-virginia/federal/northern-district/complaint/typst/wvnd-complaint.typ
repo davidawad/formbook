@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // vendored in fonts/liberation-serif (Times New Roman substitute, metric-compatible); LR Civ P 7.02(a) names Times New Roman, Courier New or Arial (README, known gaps)
+#let font-family = ("Times New Roman", "Liberation Serif")   // vendored in fonts/liberation-serif (Times New Roman substitute, metric-compatible); LR Civ P 7.02(a) names Times New Roman, Courier New or Arial (README, known gaps)
 #let type-size = 12pt              // LR Civ P 7.02(a): 12 point proportionally spaced type
 #let page-w = 8.5in                // LR Civ P 7.02(a): 8 1/2 by 11 inch paper
 #let page-h = 11in

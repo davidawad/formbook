@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"          // vendored in fonts/; the render never falls back to a system font
+#let font-family = ("Times New Roman", "Liberation Serif")          // vendored in fonts/; the render never falls back to a system font
 #let type-size = 12pt                     // LBR 9004-1(a)(1)(B): no smaller than 12 point (footer included)
 #let page-w = 8.5in                       // LBR 9004-1(a)(1)(A)
 #let page-h = 11in

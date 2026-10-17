@@ -27,7 +27,7 @@
 // ---------------------------------------------------------------------------
 
 #let court-name = "United States Foreign Intelligence Surveillance Court of Review"   // FRAP 32(a)(2)(B), as applied by R. 15(d)(2)
-#let font-family = "EB Garamond"           // FRAP 32(a)(5)(A): proportionally spaced, serif. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")           // FRAP 32(a)(5)(A): proportionally spaced, serif. Vendored in /fonts.
 #let type-size = 14pt                      // FRAP 32(a)(5)(A): 14-point or larger, everywhere, footnotes included.
 #let body-leading = 0.94em                 // with the metric-aligned line box, a baseline pitch of about
                                            // 2.2 x type size: double spacing (FISCR R. 9(c)(2)).

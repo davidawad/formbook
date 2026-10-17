@@ -39,3 +39,7 @@
 - Date retrieved: 2026-10-17
 - SHA-256: `f2c9e8571ec336039fbfea2659e5bf399e9ab5685ad30b2f0304100325a3dadb`
 - Public CourtListener RECAP filing; a third filer/document type variant.
+
+## Selected replacement
+
+The CaPFA complaint is an OCR scan flagged by the font audit. The saved Jane Doe and United States complaints are same-court, same-document-type public filings with searchable text; the United States complaint uses Times New Roman and is the preferred selected replacement. The CaPFA sample remains paired with its own filing.

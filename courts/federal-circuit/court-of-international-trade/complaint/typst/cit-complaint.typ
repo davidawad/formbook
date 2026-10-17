@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // vendored in /fonts; the only font this template uses
+#let font-family = ("Times New Roman", "Liberation Serif")         // vendored in /fonts; the only font this template uses
 #let type-size = 12pt                    // CIT-TYPE-001: Rule 81(f), 12 point or larger, footnotes included
 #let pitch = 24pt                        // CIT-SPACE-001: Rule 81(f), double spaced: 24 pt baseline pitch at 12 pt
 #let body-leading = 0.695em              // gap between lines of body text; EB Garamond's line box is 1.3em at 12 pt, so this gives a 24 pt pitch (measured, ../README.md)

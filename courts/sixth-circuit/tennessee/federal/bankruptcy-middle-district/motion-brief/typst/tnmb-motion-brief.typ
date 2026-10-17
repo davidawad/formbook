@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to the filed exemplar; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif" // no family is named by the rules; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif") // no family is named by the rules; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                 // LBR 5005-3(a): clearly legible in 12-point font
 #let page-w = 8.5in                   // LBR 5005-3(a): 8 1/2 x 11 inch paper
 #let page-h = 11in

@@ -52,3 +52,7 @@ Listed as "seen but not used" in entry 1; fetched and verified on 2026-10-17. No
 | sha256 | 024a03f483a4296a9658e68a6cd7c12741959b0e9ea69045ae5b58b584047a0b |
 
 Listed as "seen but not used" in entry 1 (ShowDoc 01208048483); fetched and verified on 2026-10-17.
+
+## Replacement for the audited Garamond exemplar
+
+The audited `FILED-EXAMPLE-chavez-19-7391-opening-brief.pdf` (Garamond) is replaced for font and text-layer comparison by `FILED-EXAMPLE-butler-20-7621-opening-brief.pdf` and `FILED-EXAMPLE-guzman-21-0009-opening-brief.pdf`, both text-based filings from different filers. See the preceding records for their public filing URLs, filers, dockets, dates, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

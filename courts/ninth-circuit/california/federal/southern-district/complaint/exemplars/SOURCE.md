@@ -22,3 +22,7 @@ Second filer: not collected in this pass. The CourtListener results also listed 
 - Date retrieved: 2026-10-17
 - sha256: `3ff56b920ac728f7b6432aedfeb809a5d965f874b614ed0082e0434f240b868f`
 - Note: Public RECAP scan; no text layer. Kept as a filer-independent comparison only.
+
+## Selected replacement
+
+The Bosa filing is the scan flagged by the font audit. The saved Bachman complaint is a same-court, same-document-type public filing with a native text layer and embedded Times New Roman, making it the selected replacement. The sample is already based on Bachman.

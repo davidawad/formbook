@@ -9,7 +9,7 @@
 // Parameters (each traces to a rule or a named style choice; see ../README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // MAD-FORM-002: L.R. 5.1 sets no typeface; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")     // MAD-FORM-002: L.R. 5.1 sets no typeface; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                // style choice: L.R. 5.1 sets no size; 12 pt, the size of the filed exemplars (Times New Roman 12 pt)
 #let body-leading = 1.345em          // MAD-FORM-001: double spacing, 24 pt between baselines at 12 pt (Liberation Serif line box 0.655 em + 1.345 em) (L.R. 5.1(a)(2))
 #let single-leading = 0.45em         // single spacing: caption, quotations, signature block (exempt under L.R. 5.1(a)(2))

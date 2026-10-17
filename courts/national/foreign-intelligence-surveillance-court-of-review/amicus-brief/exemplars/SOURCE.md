@@ -36,3 +36,7 @@ Search scope: the court's public-filings index (pages 0-12 read, the FISCR 16-01
 Why it is used now: the earlier pass set it aside as a "proposed attachment". The copy on the court's site is a separate document bearing the Clerk's "Filed" stamp of February 26, 2018, three days after the motion, so it is the brief as filed with the Court. It is the only second filer's FISCR amicus brief in the public-filings index (pages 0-17 re-read 2026-10-17). Its title keeps the "[Proposed]" label, and its caption layout (court name block, docket number on the right) differs from the court-appointed amicus's: a tier-2 data point, not a defect.
 
 sha256 of exemplar 1 (computed 2026-10-17): 41dcf6f8dcd8cf51a5c68d512f54c6c2d6824c2f5d61be2303b0c08892f807d9
+
+## Font-audit replacement for scanned Reporters Committee filing
+
+The Reporters Committee PDF is scanned with an OCR layer and was classified impossible by the font audit. For font-sensitive sample comparisons, use the first exemplar, the court-appointed amicus's filed brief: it is the same court and document type, has a native text layer on pages 1–43, and embeds Times New Roman. The Reporters Committee filing remains archived as a tier-2 comparison because its Clerk-stamped filed copy is useful for observing a second filer's caption conventions; it is not used as the font reference.

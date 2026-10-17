@@ -13,7 +13,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LBR 9004-1(A): no less than 12-point (footnotes included)
 #let page-w = 8.5in                     // LBR 9004-1(A): 8 1/2 by 11 inches
 #let page-h = 11in

@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no typeface is required by LCvR 5.1(d); the vendored serif in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // no typeface is required by LCvR 5.1(d); the vendored serif in fonts/
 #let type-size = 12pt                   // LCvR 5.1(d): all pleadings in 12-pt type, footnotes too
 #let page-w = 8.5in                     // LCvR 5.1(d): standard 8 1/2 by 11 inch format
 #let page-h = 11in

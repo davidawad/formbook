@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // CA5-FORM-005: proportional serif; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")     // CA5-FORM-005: proportional serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                      // CA5-FORM-005: 14 point or larger for text.
 #let footnote-size = 12pt                  // CA5-FORM-005: 12 point or larger for footnotes.
 #let body-leading = 1.55em                 // CA5-FORM-004: double spaced; this leading gives about

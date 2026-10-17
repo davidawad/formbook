@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // style choice: N.D. Ala. local rules set no type size (see ../README.md)
 #let body-leading = 1.0em               // gap between body lines; with glyph-bounds line boxes (see text edges below) the body is double-spaced (~24 pt pitch)
 #let single-leading = 0.4em             // caption, counsel block, headings, signature block

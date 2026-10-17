@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // no rule names a font for this court (LBR 9004-1 is silent); Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // no rule names a font for this court (LBR 9004-1 is silent); Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // the usual 12-point text; the rules set no minimum for this court
 #let body-leading = 1.345em             // double spacing (LBR 9004-1(a)): the line box is 0.655em, so 0.655em + 1.345em = 2em (about 24 pt)
 #let single-leading = 0.495em            // single spacing for the caption, counsel, signature and certificate (about 13.8 pt)

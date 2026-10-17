@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // COB-FORM-002: proportionally spaced; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")    // COB-FORM-002: proportionally spaced; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                    // COB-FORM-002: 12 point or larger.
 #let line-pitch = 24pt                   // COB-FORM-003: double spacing (proxy rule, see README).
 #let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.

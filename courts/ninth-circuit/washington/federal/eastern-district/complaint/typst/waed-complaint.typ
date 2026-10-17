@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LCivR 10(d): serif, traditional Roman; vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // LCivR 10(d): serif, traditional Roman; vendored in fonts/
 #let type-size = 14pt                   // LCivR 10(d): proportionately spaced typeface of 14 points or more
 #let pitch = 32pt                       // LCivR 10(d): text double spaced; 32 pt = 2 x 1.15 x 14 pt (the exemplar's pitch)
 #let lines-per-page = 21                // the exemplar's numbered lines (21 per page); the rule does not fix a count

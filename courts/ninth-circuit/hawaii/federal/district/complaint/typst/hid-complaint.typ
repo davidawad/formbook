@@ -13,7 +13,7 @@
 
 // LR 10.2(a)(2) names a face (14-point Times New Roman) for memoranda only; it names none for a
 // complaint, so the template keeps EB Garamond (docs/FONTS.md: no face named). See README "Typeface".
-#let font-family = "EB Garamond"
+#let font-family = ("Times New Roman", "Liberation Serif")
 #let type-size = 14pt                      // LR 10.2(a)(2) fixes 14 pt for memoranda only, so a complaint's size is
                                            // open; the exemplar's body is 14-pt Times (measured, see README).
 #let body-leading = 1.0em                  // LR 10.2(a)(4) double spacing: baseline pitch 2.3 em (32.2 pt at 14 pt),

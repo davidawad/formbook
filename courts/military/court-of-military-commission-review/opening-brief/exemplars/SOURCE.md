@@ -13,6 +13,10 @@
 
 Not used from this source: the appendix and the motion to attach, which are not in the PDF.
 
+## Font-audit replacement designation
+
+The OCR-scanned `FILED-EXAMPLE-united-states-14-001-opening-brief.pdf` is replaced for font/text-layer comparison by the text-based `FILED-EXAMPLE-hicks-13-004-opening-brief.pdf` from a different filer. The Hicks brief's source details appear above. The al-Qosi brief below is an additional text-extractable comparison filing; it was produced with OCR and is not the selected font reference. The United States original is retained as historical source material.
+
 ## 2. Second filer: `FILED-EXAMPLE-united-states-14-001-opening-brief.pdf`
 
 | Field | Value |

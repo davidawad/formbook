@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // FRAP 32(a)(5): proportionally spaced serif; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")     // FRAP 32(a)(5): proportionally spaced serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                      // FRAP 32(a)(5)(A): 14-point or larger, everywhere.
 #let body-leading = 1.336em                // 11th Cir. R. 32-3: double-spaced, with the metric-aligned
                                            // line box below (about 2.2 x type size baseline pitch).

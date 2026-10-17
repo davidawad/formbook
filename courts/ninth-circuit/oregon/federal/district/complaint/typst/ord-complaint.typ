@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/ (the only serif face vendored; no rule names a face)
+#let font-family = ("Times New Roman", "Liberation Serif")        // vendored in fonts/ (the only serif face vendored; no rule names a face)
 #let type-size = 13pt                   // LR 10-1(c) floor is 12 pt; 13 pt because EB Garamond's x-height is smaller than Times 12 pt (README)
 #let footer-size = 12pt                 // LR 10-1(c): the footer is typewritten material, so it is 12 pt too
 #let pitch = 24pt                       // LR 10-1(b): double spacing; 27 lines fill the 9-inch text height exactly

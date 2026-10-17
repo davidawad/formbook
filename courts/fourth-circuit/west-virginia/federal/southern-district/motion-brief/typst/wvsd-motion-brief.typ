@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // LR 7.1(a)(4): proportional face; Times New Roman is on the presumed-legible list; this is its substitute (docs/FONTS.md), vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // LR 7.1(a)(4): proportional face; Times New Roman is on the presumed-legible list; this is its substitute (docs/FONTS.md), vendored in fonts/
 #let type-size = 12pt                   // LR 7.1(a)(4): 12-point or larger; footnotes included
 #let page-w = 8.5in                     // LR 7.1(a)(3): 8 1/2 by 11 inch paper
 #let page-h = 11in

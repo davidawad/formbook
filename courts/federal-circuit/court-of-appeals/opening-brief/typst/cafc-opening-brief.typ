@@ -29,7 +29,7 @@
 // ---------------------------------------------------------------------------
 
 #let court-name = "United States Court of Appeals for the Federal Circuit"   // FRAP 32(a)(2)(B); Fed. Cir. R. 32(a)(1)
-#let font-family = "EB Garamond"          // FRAP 32(a)(5)(A): proportionally spaced, serif. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // FRAP 32(a)(5)(A): proportionally spaced, serif. Vendored in /fonts.
 #let type-size = 14pt                      // FRAP 32(a)(5)(A) and Fed. Cir. R. 32 Practice Notes (Footnotes): 14-point, footnotes included.
 #let body-leading = 0.94em                 // with the metric-aligned line box, a baseline pitch of about
                                            // 2.2 x type size: double spacing (FRAP 32(a)(4)).

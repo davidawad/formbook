@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // GNLR 5.1 sets no typeface; EB Garamond is the only font vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // GNLR 5.1 sets no typeface; EB Garamond is the only font vendored in fonts/
 #let type-size = 12pt                   // the convention of the exemplar
 #let pitch = 24pt                       // GNLR 5.1(a): double-spaced text
 #let page-w = 8.5in                     // GNLR 5.1(a): 8 1/2 by 11 inch paper

@@ -11,7 +11,24 @@
 
 ## Filer count (tier 2)
 
-This is the only public almb adversary complaint retrieved. The eval-loop rule asks for 2 or 3 exemplars from different filers for tier 2; that is **not met**. See `../README.md`, Gaps.
+Two public almb adversary complaints are now saved. `FILED-EXAMPLE-plant-bae-24-03037-adversary-complaint.pdf` is a text-layer filing from a different filer and is designated as the replacement font/text exemplar for both scanned Southeastern Stud records below. The eval-loop rule asks for 2 or 3 exemplars from different filers for tier 2; those two filers are now represented. See `../README.md`, Gaps, for any remaining comparison limits.
+
+## Replacement for the audited scanned exemplars
+
+- File: `FILED-EXAMPLE-plant-bae-24-03037-adversary-complaint.pdf` (8 pages)
+- Court: United States Bankruptcy Court, Middle District of Alabama, Northern Division
+- Case: *Plant Bae, LLC v. QuickBridge Funding LLC*, Adv. No. 24-03037, in *In re Plant Bae, LLC*, Case No. 24-30639, Chapter 11
+- Document: Doc. 1, Complaint (automatic-stay violations; damages and injunctive relief)
+- Filer: Plant Bae, LLC, debtor-in-possession, by Paul D. Esco (ASB-3772-O61P)
+- Date filed: 2024-07-24 (CM/ECF header on each page)
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.almb.261137/gov.uscourts.almb.261137.1.0.pdf
+- Docket page: https://www.courtlistener.com/docket/68976255/1/plant-bae-llc-adversary-proceeding/
+- Date retrieved: 2026-10-17
+- SHA-256: `99cf5b2476b38d39de5fd2464fb81223a04eeadbc9d683ea854c815a73eb1188`
+- Text layer: yes (`pdftotext` extracts the 8-page complaint); `pdffonts` reports embedded Times New Roman, Liberation Sans, and standard fonts.
+- Public filing: CourtListener RECAP copy.
+
+This text-layer Times New Roman filing replaces the scanned `FILED-EXAMPLE-southeastern-stud-15-03014-adversary-complaint.pdf` and `FILED-EXAMPLE-southeastern-stud-adversary-complaint.pdf` for font/text-layer comparison. The originals are retained as historical source material.
 
 ## Searches tried
 

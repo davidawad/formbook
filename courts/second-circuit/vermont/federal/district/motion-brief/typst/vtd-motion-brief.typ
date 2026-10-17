@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // L.R. 10(a)(2), (4): plainly legible, 12 point or more; the rule names no face, so the default applies: Times New Roman substitute (docs/FONTS.md, "No face named"); vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // L.R. 10(a)(2), (4): plainly legible, 12 point or more; the rule names no face, so the default applies: Times New Roman substitute (docs/FONTS.md, "No face named"); vendored in fonts/
 #let type-size = 12pt                   // L.R. 10(a)(4): 12 point or more, footnotes included; the rule floor
 #let body-leading = 1.345em             // L.R. 10(a)(6): double-spaced. Liberation Serif's line box is 0.655em, so 1.345em of leading gives a 2.0em baseline pitch
 #let single-leading = 0.5em             // footnotes, caption, headings of several lines, signature: single-spaced (1.15em pitch)

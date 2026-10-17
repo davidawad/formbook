@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"   // LR-102.2.b: Times New Roman or larger typeface. Metric-compatible substitute, vendored in /fonts (docs/FONTS.md).
+#let font-family = ("Times New Roman", "Liberation Serif")   // LR-102.2.b: Times New Roman or larger typeface. Metric-compatible substitute, vendored in /fonts (docs/FONTS.md).
 #let type-size = 12pt                   // LR-102.2.b: at least 12 pt text (Times New Roman 12 pt).
 #let footnote-size = 10pt               // LR-102.2.b: at least 10 pt footnotes.
 #let num-size = 12pt                    // page numbers: not text under LR-102.2.b

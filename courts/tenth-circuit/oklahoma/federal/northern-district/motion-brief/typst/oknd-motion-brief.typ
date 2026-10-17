@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // OKND-FORM-002: proportional font; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")    // OKND-FORM-002: proportional font; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                    // OKND-FORM-002: not smaller than 12 pt, footnotes and quotations included.
 #let line-pitch = 24pt                   // OKND-FORM-001: double spacing. With the margins below, 27 lines fit per page.
 #let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.

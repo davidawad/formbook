@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // Civil Rule 5.1(B)(2) sets a size, not a typeface; the vendored face is used
+#let font-family = ("Times New Roman", "Liberation Serif")        // Civil Rule 5.1(B)(2) sets a size, not a typeface; the vendored face is used
 #let type-size = 12pt                   // Civil Rule 5.1(B)(2): 12-point font or larger
 #let page-w = 8.5in                     // Civil Rule 5.1(B)(1): standard size paper
 #let page-h = 11in

@@ -123,7 +123,7 @@
 #let pawd-motion-brief(meta, body) = {
   set document(title: meta.title)
   set page(paper: "us-letter", margin: 1in, numbering: none)
-  set text(font: "Liberation Serif", size: type-size, lang: "en", ligatures: true)
+  set text(font: ("Times New Roman", "Liberation Serif"), size: type-size, lang: "en", ligatures: true)
   set par(leading: 1.345em, justify: false, spacing: 0pt) // 0.655 em line (Liberation Serif) + 1.345 em leading = a 24 pt pitch at 12 pt
   set block(spacing: 1.345em) // the gap between blocks is the leading again, so the pitch stays 24 pt
   // LCvR 5.1.B: footnotes are single-spaced and in the same type size as the body.

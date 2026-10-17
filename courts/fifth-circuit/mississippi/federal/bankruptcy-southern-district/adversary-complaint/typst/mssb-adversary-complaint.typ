@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // 5005-1(a)(2)(G): no smaller than 12 point; footer and captions included
 #let pitch = 24pt                       // 5005-1(a)(2)(G): double-spaced; one line of text is one pitch
 #let page-w = 8.5in                     // 5005-1(a)(2)(G): 8 1/2 by 11 inches

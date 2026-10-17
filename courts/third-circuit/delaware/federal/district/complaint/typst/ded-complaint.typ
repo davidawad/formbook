@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a named layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/. Not a rule requirement: the rule is about size.
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/. Not a rule requirement: the rule is about size.
 #let type-size = 12pt                   // LR 5.1.1(a): at least 12 point for all printed matter.
 #let footer-size = 12pt                 // LR 5.1.1(a) "all printed matter": the page number is printed matter too.
 #let line-pitch = 27.6pt                // LR 5.1.1(a): double spacing "according to typical word processing software": 2 x 1.15 x 12 pt, the exemplar's 27.6 pt pitch (README.md).

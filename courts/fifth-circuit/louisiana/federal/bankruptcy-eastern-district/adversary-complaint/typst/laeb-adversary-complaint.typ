@@ -10,7 +10,7 @@
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
 #let court-lines = ("UNITED STATES BANKRUPTCY COURT", "EASTERN DISTRICT OF LOUISIANA")  // Fed. R. Bankr. P. 9004(b)
-#let font-family = "Liberation Serif"   // no E.D. La. font rule; Times New Roman substitute per docs/FONTS.md (the exemplar is Times New Roman)
+#let font-family = ("Times New Roman", "Liberation Serif")   // no E.D. La. font rule; Times New Roman substitute per docs/FONTS.md (the exemplar is Times New Roman)
 #let type-size = 12pt                   // convention: the exemplar's body is 12 pt
 #let page-w = 8.5in                     // letter paper
 #let page-h = 11in

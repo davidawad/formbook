@@ -41,3 +41,7 @@ Search path (for the record): CourtListener search API, `type=rd`, `court=ca8`, 
 | Date retrieved | 2026-10-17 |
 | SHA-256 | `6c55af8e74752c49d9ca7534a041f4ebd84d89af12da224a6f387c929e26ca33` |
 | Public filing | Yes, CourtListener RECAP; `pdftotext` confirms a text-based PDF. |
+
+## Replacement for the audited non-redistributable-font exemplar
+
+The audited `FILED-EXAMPLE-wolters-26-2459-opening-brief.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-messamer-22-2600-opening-brief.pdf` from a different filer. See the second-filer record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

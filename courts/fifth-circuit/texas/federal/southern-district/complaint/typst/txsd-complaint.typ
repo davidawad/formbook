@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // no face named by S.D. Tex. LR10.2 or the judges' procedures retrieved; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // no face named by S.D. Tex. LR10.2 or the judges' procedures retrieved; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 13pt                   // Galveston Div. R. of Practice f and Judge Hanks Procs. 7.A: "13-point" (not in LR10.2; see README.md)
 #let double = 1.345em                   // double spacing: Liberation Serif's line box is 0.655em, so 0.655em + 1.345em = 2.0 x type size
 #let single = 0.495em                    // single spacing for caption, counsel and signature blocks

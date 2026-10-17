@@ -13201,11 +13201,11 @@
       ]
     },
     "courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/motion-brief/exemplars/FILED-EXAMPLE-OKF-24-11060-motion-brief.pdf": {
-      "body": "",
-      "body_share": 0.000,
-      "class": "impossible",
-      "face": "",
-      "why": "no text layer (scanned image)",
+      "body": "times",
+      "body_share": 1.000,
+      "class": "approximate",
+      "face": "Times-Roman",
+      "why": "Times-Roman body; pdftotext extracts 4,212 words (text layer present).",
       "fonts": [
         "Times-Roman"
       ]
@@ -14453,6 +14453,15 @@
         "CIDFont+F4",
         "LiberationSans"
       ]
-    }
+    },
+    "courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/motion-brief/exemplars/FILED-EXAMPLE-madeam-5-22-bk-01575-motion-brief.pdf": {"body":"timesnewroman","body_share":0.946,"class":"metric-exact","face":"Times New Roman","why":"Times New Roman body face; metric exact.","fonts":["Helvetica","Times-BoldItalic","TimesNewRoman,Italic","Courier","Courier-Bold","Courier-Oblique","Courier-BoldOblique","LiberationSans","Helvetica-Bold","Helvetica-Oblique","Helvetica-BoldOblique","TimesNewRoman","Times-Roman","Times-Bold","TimesNewRoman,Bold","Times-Italic","LiberationSans","LiberationSans","LiberationSans","LiberationSans","LiberationSans","LiberationSans"]},
+    "courts/ninth-circuit/california/state/courts-of-appeal/reply-brief/exemplars/FILED-EXAMPLE-yumori-kaku-H034059-reply-brief.pdf": {"body":"timesnewroman","body_share":1.0,"class":"metric-exact","face":"Times New Roman","why":"Times New Roman body face; metric exact.","fonts":["TimesNewRoman,Bold","TimesNewRoman","TimesNewRoman,Italic","HiddenHorzOCR","Times-Bold","Times-Roman","Helvetica","Times-Bold","Times-Roman","Helvetica","Times-Bold","Times-Roman","Helvetica"]},
+    "courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/adversary-complaint/exemplars/FILED-EXAMPLE-crosby-tugs-26-01083-adversary-complaint.pdf": {"body":"timesnewroman","body_share":0.92,"class":"metric-exact","face":"Times New Roman","why":"Times New Roman body face; metric exact.","fonts":["Helvetica","Courier-Bold","Courier-Oblique","Courier-BoldOblique","LiberationSans","Helvetica-Bold","Helvetica-Oblique","Helvetica-BoldOblique","Times-Roman","Times-Bold","Times-Italic","Times-BoldItalic","Courier","ArialMT","TimesNewRomanPS-BoldMT","TimesNewRomanPSMT","LiberationSans","TimesNewRomanPS-ItalicMT","LiberationSans","LiberationSans","LiberationSans","LiberationSans","TimesNewRomanPS-BoldItalicMT"]},
+    "courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/adversary-complaint/exemplars/FILED-EXAMPLE-lopes-castillo-6-26-ap-00089-adversary-complaint.pdf": {"body":"cidfont+f1","body_share":0.899,"class":"impossible","face":"","why":"No redistributable metric-exact body face is identified.","fonts":["CIDFont+F1","Times-Italic","Times-BoldItalic","Courier","Courier-Bold","Courier-Oblique","Courier-BoldOblique","LiberationSans","CIDFont+F2","CIDFont+F3","Helvetica","Helvetica-Bold","Helvetica-Oblique","Helvetica-BoldOblique","Times-Roman","Times-Bold","LiberationSans","CIDFont+F4","LiberationSans","LiberationSans","LiberationSans","LiberationSans","LiberationSans","LiberationSans"]},
+    "courts/fourth-circuit/virginia/federal/eastern-district/complaint/exemplars/FILED-EXAMPLE-warren-1-26-cv-03349-complaint.pdf": {"body":"timesnewroman","body_share":0.944,"class":"metric-exact","face":"Times New Roman","why":"Times New Roman body face; metric exact.","fonts":["LiberationSans","TimesNewRomanPS-BoldMT","TimesNewRomanPSMT","ArialMT","TimesNewRomanPS-ItalicMT"]},
+    "courts/second-circuit/new-york/state/court-of-appeals/answering-brief/exemplars/FILED-EXAMPLE-people-v-rankin-apl-2022-00131-answering-brief.pdf": {"body":"garamond","body_share":0.972,"class":"impossible","face":"","why":"No redistributable metric-exact body face is identified.","fonts":["TimesNewRomanPSMT","TimesNewRomanPS-BoldMT","TimesNewRomanPS-BoldItalicMT","TimesNewRomanPS-ItalicMT","Garamond-Bold","Garamond-Italic","Garamond","ArialMT","SourceSansPro-Regular","SourceSansPro-Italic"]},
+    "courts/tenth-circuit/utah/federal/district/motion-brief/exemplars/FILED-EXAMPLE-adams-2-25-cv-00438-motion-brief.pdf": {"body":"timesnewroman","body_share":0.978,"class":"metric-exact","face":"Times New Roman","why":"Times New Roman body face; metric exact.","fonts":["LiberationSans","Calibri","TimesNewRomanPSMT","TimesNewRomanPS-ItalicMT","TimesNewRomanPS-BoldMT","Aptos","ArialMT","Arial-BoldMT","TimesNewRomanPS-BoldItalicMT"]},
+    "courts/tenth-circuit/new-mexico/federal/bankruptcy-district/adversary-complaint/exemplars/FILED-EXAMPLE-quorum-health-resources-18-01028-adversary-complaint.pdf": {"body":"timesnewroman","body_share":0.952,"class":"metric-exact","face":"Times New Roman","why":"Times New Roman body face; metric exact.","fonts":["TimesNewRomanPSMT","Courier","Courier-Bold","Courier-Oblique","Courier-BoldOblique","LiberationSans","Helvetica","Helvetica-Bold","Helvetica-Oblique","Helvetica-BoldOblique","Times-Roman","Times-Bold","Times-Italic","Times-BoldItalic","LiberationSans","Calibri","TimesNewRomanPSMT","LiberationSans","TimesNewRomanPS-BoldMT","LiberationSans","ArialMT","LiberationSans","LiberationSans","TimesNewRomanPS-ItalicMT","LiberationSans","LiberationSans","TimesNewRomanPS-BoldItalicMT","LiberationSans","LiberationSans","LiberationSans","LiberationSans","LiberationSans","LiberationSans"]},
+    "courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/motion-brief/exemplars/FILED-EXAMPLE-ability-insurance-16-24179-motion-brief.pdf": {"body":"timesnewroman","body_share":0.943,"class":"metric-exact","face":"Times New Roman","why":"Times New Roman body face; metric exact.","fonts":["TimesNewRomanPS-ItalicMT","TimesNewRomanPS-BoldMT","Georgia-Bold","LiberationSans","TimesNewRomanPSMT","Calibri","Georgia","Arial-BoldMT","SymbolMT","ArialMT"]}
   }
 }

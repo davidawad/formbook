@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // No W.D. Ky. type rule; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")    // No W.D. Ky. type rule; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                    // 12 pt, the exemplar's size; Liberation Serif has Times metrics (docs/FONTS.md) (style choice).
 #let pitch = 24pt                        // Double spacing: the convention of the filed exemplar (style choice).
 #let body-leading = pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is `pitch`.

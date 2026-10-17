@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"     // L.R. 10.1 names no typeface; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")     // L.R. 10.1 names no typeface; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                // L.R. 10.1(a)(1): at least 12-point type, text and footnotes
 #let margin = 1in                    // L.R. 10.1(a)(2): one-inch margins on all four sides
 #let body-leading = 1.345em          // L.R. 10.1(a)(3): double-spaced body; 24 pt baseline pitch at 12 pt (as in the cand template)

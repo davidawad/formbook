@@ -15,7 +15,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each is a convention or a rule; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"     // no typeface is mandated; EB Garamond is the vendored serif (fonts/)
+#let font-family = ("Times New Roman", "Liberation Serif")     // no typeface is mandated; EB Garamond is the vendored serif (fonts/)
 #let type-size = 12pt                // convention: 12 point, the size the exemplar uses
 #let body-leading = 1.35em           // convention: double-spaced body text (exemplar), 1.35em of leading at 12 pt
 #let single-leading = 0.5em          // single-spaced caption, block quotations, tables and signature block

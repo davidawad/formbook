@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"   // convention: Times New Roman substitute per docs/FONTS.md (fonts/liberation-serif)
+#let font-family = ("Times New Roman", "Liberation Serif")   // convention: Times New Roman substitute per docs/FONTS.md (fonts/liberation-serif)
 #let type-size = 12pt              // NYSM-FORM-002: 22 NYCRR 202.5(a) print no smaller than 12-point
 #let footnote-size = 11pt          // NYSM-FORM-003: 22 NYCRR 202.5(a) footnotes no smaller than 10-point; 11-point for legibility
 #let page-margin = 1in             // NYSM-FORM-004: 22 NYCRR 202.5(a) margins no smaller than one inch

@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"          // FRAP 32(a)(5)(A): proportionally spaced, serif; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // FRAP 32(a)(5)(A): proportionally spaced, serif; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // Cir. R. 32(b) requires 12 pt in the body; 14 pt (FRAP 32(a)(5)(A)) is used.
 #let footnote-size = 12pt                  // Cir. R. 32(b): 11 pt or larger in footnotes.
 #let body-leading = 1.336em                // FRAP 32(a)(4): double-spaced. With the ascender-to-descender line box set below

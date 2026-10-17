@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // LR 7007-2(a)(ii) requires Courier New or Times New Roman. Times New Roman is set through its
 // vendored substitute, Liberation Serif (metric-compatible; docs/FONTS.md).
-#let font-family = "Liberation Serif"
+#let font-family = ("Times New Roman", "Liberation Serif")
 #let type-size = 12pt                    // LR 7007-2(a)(ii): at least 12-point typeface
 #let body-leading = 1.345em              // LR 7007-2(a)(ii): double-spaced: Liberation Serif line box 0.655em + 1.345em = 24 pt at 12 pt
 #let single-leading = 0.5em              // single spacing for captions, cover, block quotes, counsel and signature

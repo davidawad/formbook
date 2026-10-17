@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Central Guide 9004-1(b)(2)(C): Times New Roman is a listed typeface; Liberation Serif is its metric-compatible substitute (docs/FONTS.md)
+#let font-family = ("Times New Roman", "Liberation Serif")   // Central Guide 9004-1(b)(2)(C): Times New Roman is a listed typeface; Liberation Serif is its metric-compatible substitute (docs/FONTS.md)
 #let type-size = 12pt                   // Central Guide 9004-1(b)(2)(C): not smaller than 12 point (the floor; the filed exemplar is 12 pt)
 #let pitch = 24pt                       // Central Guide 9004-1(b)(2)(F): double-spaced; the numbered lines are this pitch
 #let lines-per-page = 28                // Central Guide 9004-1(b)(2)(B)(i): not more than 28 numbered lines per page

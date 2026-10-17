@@ -13,7 +13,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // MIEB-FORM-002: proportional serif; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")    // MIEB-FORM-002: proportional serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                    // MIEB-FORM-002: LBR 9029-1(h) "14 point (proportional)" for all text and footnotes.
 #let body-leading = 1.345em             // MIEB-FORM-003: double-spaced text; tuned so body pitch is about 2 x single spacing (see ../README.md).
 #let single-leading = 0.3em              // caption, counsel and signature blocks (MIEB-FORM-004: single spacing is an accepted convention).

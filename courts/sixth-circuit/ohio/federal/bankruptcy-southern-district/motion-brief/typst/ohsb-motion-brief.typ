@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LBR 9004-1(b): typed print at least 10-12 point; 12 point is used
 #let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 24 pt pitch at 12 pt
 #let single-leading = 0.495em            // footnotes, signature block and caption lines: about 14 pt pitch

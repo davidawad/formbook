@@ -28,3 +28,7 @@ Not saved in this box. A second Sixth Circuit answering brief from a different f
 - URL: https://www.courthousenews.com/wp-content/uploads/2021/10/ky-state-brief.pdf
 - Date retrieved: 2026-10-17
 - SHA-256: `58b450a55214ce841b31682b236b96f3e051ceec3fce2c1a0026abe748ac231c`
+
+## Selected replacement
+
+The Bruneau PDF is a scanned filing with OCR. The saved *JB-K Cabinet* answering brief is a same-court, same-document-type public filing with an extractable text layer and is the selected replacement. It uses Century Schoolbook rather than Times New Roman, but remains the best available typed brief from a different filer in this folder. Keep the Bruneau sample paired with its source unless the sample is rebuilt around the replacement.

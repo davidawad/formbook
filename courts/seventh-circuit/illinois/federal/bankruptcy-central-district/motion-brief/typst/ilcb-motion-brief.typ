@@ -16,7 +16,7 @@
 // ---------------------------------------------------------------------------
 
 #let court-lines = ("UNITED STATES BANKRUPTCY COURT", "CENTRAL DISTRICT OF ILLINOIS")  // FRBP 7010, Form 416
-#let font-family = "Liberation Serif"          // no court rule names a face (README, ILCB-TYPE-1); Times New Roman substitute per docs/FONTS.md, vendored in /fonts
+#let font-family = ("Times New Roman", "Liberation Serif")          // no court rule names a face (README, ILCB-TYPE-1); Times New Roman substitute per docs/FONTS.md, vendored in /fonts
 #let type-size = 12pt                      // no CDIL typography rule (FRBP 9004(a): legible only); 12 pt, the size the
                                            // exemplars use (see README, gaps).
 #let body-leading = 1.391em                // with the ascender-to-descender line box set below (0.909em), a 2.3em = 27.6 pt

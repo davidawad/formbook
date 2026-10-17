@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // no font is mandated by LR 5.2(e); Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (see README.md)
+#let font-family = ("Times New Roman", "Liberation Serif")        // no font is mandated by LR 5.2(e); Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (see README.md)
 #let type-size = 12pt                   // LR 5.2(e)(1): 12-point type in the body of the text
 #let page-w = 8.5in                     // LR 5.2(e): 8 1/2 x 11 inch paper
 #let page-h = 11in

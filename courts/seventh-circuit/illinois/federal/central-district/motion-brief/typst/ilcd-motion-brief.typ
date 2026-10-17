@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; LR 5.1(B)(2) asks for a plain roman style
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; LR 5.1(B)(2) asks for a plain roman style
 #let type-size = 12pt                   // LR 5.1(B)(2): body text 12-point or 14-point
 #let footnote-size = 10pt               // LR 5.1(B)(2): footnote text no smaller than 10-point
 #let page-margin = 1in                  // LR 5.1(A)

@@ -27,3 +27,5 @@
 - Date retrieved: 2026-10-17
 - sha256: 6995343572c6c2341056d318efc2b83854e614076dc3b0a49360a5f5ac798a3f
 - Public court record. Used as a visual and structural reference only.
+
+The scanned `FILED-EXAMPLE-wheeling-13-10670-motion-brief.pdf` is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-mattson-24-20188-motion-brief.pdf`. See the primary-exemplar record above for its public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

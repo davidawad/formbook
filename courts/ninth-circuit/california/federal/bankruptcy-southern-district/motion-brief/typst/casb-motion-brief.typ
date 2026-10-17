@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // CASB-FORM-002: vendored in fonts/; see README.md
+#let font-family = ("Times New Roman", "Liberation Serif")        // CASB-FORM-002: vendored in fonts/; see README.md
 #let type-size = 12pt                   // CASB-FORM-002: 12 point; the rule text is not verified, see README.md
 #let pitch = 24pt                       // CASB-FORM-003: double spacing; the numbered lines are this pitch
 #let lines-per-page = 28                // CASB-FORM-003: pleading paper, 28 numbered lines (exemplars)

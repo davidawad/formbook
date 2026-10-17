@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"      // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; see README "Known gaps"
+#let font-family = ("Times New Roman", "Liberation Serif")      // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; see README "Known gaps"
 #let type-size = 12pt                 // L.R. 5-4(a)(4): at least 12-point type in the body
 #let note-size = 10pt                 // L.R. 5-4(a)(4): at least 10-point type in footnotes
 #let pitch = 27.6pt                   // L.R. 5-4(a)(5): double spaced; two single lines of 12 pt type (13.8 pt each)

@@ -27,3 +27,7 @@ Doc type: **complaint**, United States District Court for the District of New Je
 - Text layer: yes
 
 Both files are public court records (RECAP). Used only as visual and structural references for tier 2 (house conventions across two filers).
+
+## Selected replacement
+
+The DGL complaint is flagged for unnamed `Z_C00000.tmp` fonts. The saved Gomez complaint is the selected replacement: same court and document type, public RECAP filing, extractable text, and embedded Times New Roman in the body. The DGL sample remains paired with its source until it is rebuilt against Gomez.

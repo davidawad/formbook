@@ -5,8 +5,7 @@
 \documentclass[12pt,letterpaper]{article}
 \usepackage{fontspec}
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont[Path=$fontdir$liberation-serif/, Extension=.ttf, UprightFont=LiberationSerif-Regular, BoldFont=LiberationSerif-Bold,
-  ItalicFont=LiberationSerif-Italic, BoldItalicFont=LiberationSerif-BoldItalic]{LiberationSerif}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 \usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{indentfirst}
 \usepackage{needspace}

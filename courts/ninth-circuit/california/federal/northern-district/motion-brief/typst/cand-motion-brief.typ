@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // CAND-FORM-002: standard, proportionally spaced font; the rule's example is Times New Roman, substituted by its metric-compatible vendored clone (docs/FONTS.md).
+#let font-family = ("Times New Roman", "Liberation Serif")    // CAND-FORM-002: standard, proportionally spaced font; the rule's example is Times New Roman, substituted by its metric-compatible vendored clone (docs/FONTS.md).
 #let type-size = 12pt                    // CAND-FORM-002: 12 point or larger, footnotes and quotations too.
 #let line-pitch = 24pt                   // CAND-FORM-003: double spacing. With the margins below, 27 lines fit (limit 28).
 #let body-leading = 1.09em               // gap between lines of body text; tuned so the line pitch is line-pitch (Liberation Serif at 12 pt: 10.9 pt line box + 13.1 pt leading = 24 pt, measured).

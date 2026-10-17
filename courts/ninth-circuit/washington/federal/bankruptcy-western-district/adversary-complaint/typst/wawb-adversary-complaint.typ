@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LBR 9004-1(a): standard embedded font; vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // LBR 9004-1(a): standard embedded font; vendored in fonts/
 #let type-size = 12pt                   // LBR 9004-1(a): 11 or 12 point
 #let footer-size = 11pt                 // LBR 9004-1(a): the bottom notation is printed in the same 11 point minimum
 #let pitch = 24pt                       // LBR 9004-1(a): double spaced; the numbered lines are this pitch

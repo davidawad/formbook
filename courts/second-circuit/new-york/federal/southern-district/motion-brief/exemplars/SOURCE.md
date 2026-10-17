@@ -49,3 +49,7 @@
 | sha256 | `653fb472932572ae6c5858bdb157269090bf3b3cf4c664508f3c140381022735` |
 
 Form notes (tier 2): page 1 is a caption-only cover (court name, parties at left, "Case No." at right, title centered below; no counsel block on the cover, unlike entry 1); table of contents, table of authorities and a table of defined terms on roman-numbered pages; body arabic from 1, page number centered at the foot; centered caps top-level headings (PRELIMINARY STATEMENT, BACKGROUND, ARGUMENT, CONCLUSION); argument headings I./II., then A./B., then 1./2.; signature block after the conclusion with "/s/". No certificate of compliance with a word count appears in this PDF (Local Civ. R. 7.1(c) requires one for attorney-filed briefs; whether it was filed separately was not checked).
+
+## Selected replacement
+
+The Minerva filing is flagged as an OCR paper-capture. The saved Garg memorandum is a same-court, same-document-type public filing with a native text layer, Times New Roman body text, and distinct counsel. It is the selected replacement for Minerva; the sample is already based on Garg.

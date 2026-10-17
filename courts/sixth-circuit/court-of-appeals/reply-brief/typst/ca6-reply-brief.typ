@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // CA6-FORM-005: proportionally spaced serif; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")     // CA6-FORM-005: proportionally spaced serif; Times New Roman substitute per docs/FONTS.md
 #let type-size-pt = 14                     // CA6-FORM-005: 14-point or larger; footnotes at the same size (6 Cir. checklist).
 #let type-size = type-size-pt * 1pt
 #let body-leading = 1.336em                // CA6-FORM-004: double spacing (same metric as the ca9 template).

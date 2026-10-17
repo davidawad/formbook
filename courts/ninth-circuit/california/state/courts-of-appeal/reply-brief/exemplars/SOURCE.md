@@ -21,3 +21,20 @@ Only one filer is available for this doc type so far. The eval loop wants 2 or 3
 | File | SHA-256 |
 |---|---|
 | `FILED-EXAMPLE-kirk-v-city-of-morgan-hill-H048745-reply-brief.pdf` | `ba49e7978cbcbd0dfaf42c011bfb789927c0e97c181ab45c58a0a5174e5af1d0` |
+
+## Selected font-audit replacement
+
+The Kirk reply brief is flagged for Garamond. The additional filed reply brief below is selected to replace it for font reproduction: it is from the same court and document type, has an extractable text layer, and uses Times New Roman. Preserve the Kirk PDF as an archived exemplar; the existing Kirk sample still needs to be retargeted before delivery.
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-yumori-kaku-H034059-reply-brief.pdf` |
+| Court | California Court of Appeal, Sixth Appellate District |
+| Case | *Yvonne Wong v. Tai Jing, Jia Ma, and Yelp! Inc.*, No. H034059 |
+| Document | Appellants' Reply Brief, 23 pages |
+| Filer | Defendants-Appellants Tai Jing, Jia Ma, and Yelp! Inc., through California Anti-SLAPP Project |
+| Date | 2009-10-09 (PDF filename/date; filing status is stated on the brief) |
+| URL | https://www.dmlp.org/sites/citmedialaw.org/files/2009-10-09-Appellants%20Reply%20Brief.pdf |
+| Retrieved | 2026-10-17 |
+| Text layer / fonts | 5,146 words extracted; embedded Times New Roman, regular, bold and italic |
+| SHA-256 | `dfd8f9cf81a813daf33029cb824ac3a1c859cf8c664338334e684f88a64d645b` |

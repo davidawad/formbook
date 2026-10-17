@@ -19,7 +19,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (the numbers in this file; each traces to a rule or a layout choice)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"   // vendored in fonts/; the filed exemplar is Times New Roman (README: Known gaps)
+#let font-family = ("Times New Roman", "Liberation Serif")   // vendored in fonts/; the filed exemplar is Times New Roman (README: Known gaps)
 #let type-size = 12pt              // FRBP 9004(a) legibility; the exemplar is 12 pt
 #let pitch = 27.6pt               // double spacing as Word sets it for 12 pt type: 2 x 13.8 pt (single-spaced line, 1.15 em)
 #let body-leading = pitch - 0.65em // leading that makes the baseline pitch 27.6 pt: EB Garamond line box is 0.65 em
