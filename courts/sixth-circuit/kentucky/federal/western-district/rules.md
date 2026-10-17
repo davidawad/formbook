@@ -1,6 +1,6 @@
 # Western District of Kentucky rules
 
-Primary sources checked 2026-10-14. Re-check every six months and before changing a template. Sources: Joint General Order 2026-01 (re-states the Joint Local Rules), https://www.kywd.uscourts.gov/sites/kywd/files/Joint%20General%20Order%2026-01-1.pdf; FRCP 10, https://www.law.cornell.edu/rules/frcp/rule_10; Joint General Order 2017-01A, https://www.kyed.uscourts.gov/sites/kyed/files/JGO17-01A.pdf; and Joint General Order 2018-02, https://www.kywd.uscourts.gov/sites/kywd/files/general-ordes/Joint_General_Order_2018-02.pdf.
+Primary sources checked 2026-10-14. Re-check every six months and before changing a template. Sources: Joint General Order 2026-01 (re-states the Joint Local Rules), https://www.kywd.uscourts.gov/sites/kywd/files/Joint%20General%20Order%2026-01-1.pdf; FRCP 10, https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure; Joint General Order 2017-01A, https://www.kyed.uscourts.gov/sites/kyed/files/JGO17-01A.pdf; and Joint General Order 2018-02, https://www.kywd.uscourts.gov/sites/kywd/files/general-ordes/Joint_General_Order_2018-02.pdf.
 
 Kinds: **M** mandatory; **C** convention; **T** template contract; **A** author responsibility.
 
