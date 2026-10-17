@@ -14,3 +14,11 @@
 | Source of record | RECAP (free access, public court record) |
 
 Filer count for tier 2: this is the only complaint saved for cacd. The CourtListener search also found other cacd complaints (Greenberg v. Creative Artists Agency, 2:26-cv-11882, Dkt. 1, 10 pp., Harmon Seidman & Bruss; Huemen, Inc. v. Ludo Fact USA, 5:23-cv-00516, Dkt. 1, 10 pp.). They were not saved because the brief asks for one exemplar per doc type; see README.md.
+
+- File: `FILED-EXAMPLE-greenberg-2-26-cv-11882-complaint.pdf`
+- Filer: Plaintiffs Jill Greenberg and Jill Greenberg Studio, Inc., by Amanda L. Bruss of Harmon Seidman & Bruss, LLC
+- Case: *Greenberg v. Creative Artists Agency LLC*, No. 2:26-cv-11882 (Doc. 1)
+- Date filed: 2026-10-12
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.cacd.1042892/gov.uscourts.cacd.1042892.1.0.pdf
+- Date retrieved: 2026-10-17
+- sha256: `638e9516d407c8beb6f3269b5e912a983c8f4205796c79c01652c9e649a56bc3`
