@@ -6,7 +6,6 @@
 - Circuit: `ca7`
 - State / territory: Illinois
 - Status: **todo** (0%); manual status in `court.json`: `todo`
-- Typeface: none named by the local rules (LR 5.1(a), 7.1(a)(3): 12-point type, double-spaced). EB Garamond in every doc type, per `docs/FONTS.md`; see each doc-type README.
 
 ## Checklist
 

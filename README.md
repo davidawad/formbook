@@ -831,8 +831,8 @@ Regenerate with `tools/tracker.sh` (the completion logic is in [Bend](https://gi
 <!-- tracker:start -->
 | Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Supreme Court of the United States | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 |  | 1 | 0 | 0 | 0 | 1 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
+| Supreme Court of the United States | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | Federal Circuit and feeder courts | 6 | 0 | 0 | 1 | 5 | 0.0% | 0.0% | 0 | 0 | 0 | 2.1% |
 | Military courts | 6 | 0 | 0 | 0 | 6 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | National courts and tribunals | 5 | 0 | 0 | 0 | 5 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
@@ -849,4 +849,27 @@ Regenerate with `tools/tracker.sh` (the completion logic is in [Bend](https://gi
 | Eleventh Circuit | 32 | 0 | 0 | 0 | 32 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | D.C. Circuit | 4 | 0 | 0 | 0 | 4 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | **Total** | 376 | 0 | 1 | 4 | 371 | 0.0% | 0.2% | 1 | 1 | 0 | 0.2% |
+
+Typst per doc type (a doc type is complete with template, sample, render, exemplar and overlay; per-doc-type rows in STATUS.md):
+
+| Group | Doc types | Template | Sample | Render | Exemplar | Overlay | Typst complete | % complete | Gates pass |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+|  | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 100.0% | 0 |
+| Supreme Court of the United States | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 100.0% | 0 |
+| Federal Circuit and feeder courts | 13 | 13 | 13 | 13 | 13 | 13 | 13 | 100.0% | 0 |
+| Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 11 | 91.6% | 0 |
+| National courts and tribunals | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 100.0% | 0 |
+| First Circuit | 26 | 26 | 26 | 26 | 25 | 25 | 25 | 96.1% | 0 |
+| Second Circuit | 32 | 32 | 32 | 32 | 32 | 32 | 32 | 100.0% | 0 |
+| Third Circuit | 27 | 27 | 27 | 27 | 27 | 27 | 27 | 100.0% | 0 |
+| Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 0 |
+| Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 0 |
+| Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 0 |
+| Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 0 |
+| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 45 | 97.8% | 0 |
+| Ninth Circuit | 72 | 72 | 72 | 72 | 71 | 71 | 71 | 98.6% | 1 |
+| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 36 | 92.3% | 0 |
+| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 0 |
+| D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 0 |
+| **Total** | 491 | 491 | 491 | 491 | 484 | 484 | 484 | 98.5% | 1 |
 <!-- tracker:end -->

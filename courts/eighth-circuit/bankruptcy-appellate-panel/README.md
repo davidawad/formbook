@@ -5,7 +5,6 @@
 - Level: bap
 - Circuit: `ca8`
 - Status: **todo** (0%); manual status in `court.json`: `todo`
-- Typeface: face required by the rules: none named. FRBP 8015(a)(5)(A) requires a proportional face with serifs (sans-serif allowed in headings and captions) at 14 pt or larger, or a monospaced face at most 10½ characters per inch. Substitute: **EB Garamond** (kept; the rules name no face, so no vendored substitute is needed). Metric: n/a. Checked 2026-10-14 against the rule text (courtrules.net; official text not re-read). No court-local typeface rule was found in this folder. All three doc types use EB Garamond at 14 pt; `pdffonts` on each OUTPUT shows only EB Garamond embedded.
 
 ## Checklist
 

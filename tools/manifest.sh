@@ -11,8 +11,25 @@
 #   8 review file present (reviews/*.md)
 # A stamp samples/.check-<engine>.txt (written by tools/check.sh on a full green run) is valid only while its
 # first line is PASS and every "sha256  path" line still matches the file on disk.
-# Output order follows data/index.json so groups are contiguous. Usage: tools/manifest.sh [repo-root]
+# Output order follows data/index.json so groups are contiguous. Usage: tools/manifest.sh [--doctypes] [repo-root]
+#
+# With --doctypes it emits one line per Typst doc type instead, for the per-doc-type table:
+#   alias|group|doctype|path|flags
+# A doc type is a subfolder of a court folder (COURT/<doctype>/, no court.json of its own) holding typst/, samples/
+# or exemplars/; the court folder itself counts as doc type "(court root)" when its own typst/ is not empty.
+# flags = six characters, in order:
+#   1 typst template present (typst/ not empty, 0/1)
+#   2 number of samples/INPUT-*.md (0-9, capped)
+#   3 typst render: 0 = no samples/OUTPUT-*.pdf, 1 = rendered, 2 = rendered and a valid typst stamp (gates green)
+#   4 number of exemplars/*.pdf (0-9, capped)
+#   5 overlay PDF present (samples/OVERLAY-*.pdf, 0/1)
+#   6 review file present (reviews/*.md, 0/1)
 set -eu
+DOCTYPES=0
+[ "${1:-}" != --doctypes ] || {
+  DOCTYPES=1
+  shift
+}
 ROOT=${1:-$(cd "$(dirname "$0")/.." && pwd)}
 cd "$ROOT"
 
@@ -66,12 +83,49 @@ engine_state() { # $1 court dir, $2 engine -> 0|1|2
 # "n|alias|group" in index order (n = position, used to sort the walk)
 ORDER=$(jq -r '.courts | to_entries | to_entries[] | "\(.key)|\(.value.key)|\(.value.value.group)"' data/index.json)
 
+# sort "alias|..." lines into data/index.json order (extra sort keys in "$@"), inserting the group after the alias
+in_order() {
+  awk -F'|' -v OFS='|' -v order="$ORDER" '
+    BEGIN { n = split(order, ls, "\n"); for (i = 1; i <= n; i++) { split(ls[i], a, "|"); o[a[2]] = a[1]; g[a[2]] = a[3] } }
+    { $1 = o[$1] "|" $1 "|" g[$1]; print }
+  ' | sort -t'|' -k1,1n "$@" | cut -d'|' -f2-
+}
+
+# typst render state of doc-type folder $1: 0 none, 1 rendered, 2 rendered with a valid typst stamp
+render_state() {
+  [ -n "$(pdfs "$1" typst)" ] || {
+    printf 0
+    return
+  }
+  if stamp_valid "$1" typst; then printf 2; else printf 1; fi
+}
+doctype_flags() { # $1 folder
+  t=0
+  if [ -f "$1/typst/main.typ" ]; then t=1; fi
+  printf '%s%s%s%s%s%s' "$t" "$(count "$1"/samples/INPUT-*.md)" "$(render_state "$1")" "$(count "$1"/exemplars/*.pdf)" \
+    "$(count "$1"/samples/OVERLAY-*.pdf | sed 's/[2-9]/1/')" "$(count "$1"/reviews/*.md | sed 's/[2-9]/1/')"
+}
+
+if [ "$DOCTYPES" = 1 ]; then
+  # doc types sort by name within a court; "(court root)" sorts first (byte order)
+  export LC_ALL=C
+  find courts -name court.json | while IFS= read -r cj; do
+    d=$(dirname "$cj")
+    a=$(jq -r .alias "$cj")
+    [ ! -f "$d/typst/main.typ" ] || printf '%s|(court root)|%s|%s\n' "$a" "$d" "$(doctype_flags "$d")"
+    for s in "$d"/*/; do
+      s=${s%/}
+      [ -d "$s" ] && [ ! -f "$s/court.json" ] || continue
+      [ -d "$s/typst" ] || [ -d "$s/samples" ] || [ -d "$s/exemplars" ] || continue
+      printf '%s|%s|%s|%s\n' "$a" "${s##*/}" "$s" "$(doctype_flags "$s")"
+    done
+  done | in_order -k2,2 -k4,4
+  exit 0
+fi
+
 find courts -name court.json | while IFS= read -r cj; do
   d=$(dirname "$cj")
   meta=$(jq -r '[.alias, .level, (.name | gsub("[|\n]"; " ")), .path, (.status // "todo")] | join("|")' "$cj")
   flags="$(has_file "$d/rules.md")$(count "$d"/exemplars/*.pdf)$(count "$d"/samples/*.md)$(engine_state "$d" typst)$(engine_state "$d" latex)$(engine_state "$d" docx)$(count "$d"/samples/OVERLAY-*.pdf | sed 's/[2-9]/1/')$(count "$d"/reviews/*.md | sed 's/[2-9]/1/')"
   printf '%s|%s\n' "$meta" "$flags"
-done | awk -F'|' -v OFS='|' -v order="$ORDER" '
-  BEGIN { n = split(order, ls, "\n"); for (i = 1; i <= n; i++) { split(ls[i], a, "|"); o[a[2]] = a[1]; g[a[2]] = a[3] } }
-  { print o[$1], $1, g[$1], $2, $3, $4, $5, $6 }
-' | sort -t'|' -k1,1n | cut -d'|' -f2-
+done | in_order

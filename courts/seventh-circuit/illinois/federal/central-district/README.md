@@ -20,8 +20,6 @@
 
 Engines: typst `—`, latex `—`, docx `—`.
 
-Typeface: the local rules name no face (CDIL LR 5.1(B)(2) asks for 12- or 14-point body text in a plain, roman style), so every doc type keeps EB Garamond, the vendored default (see `docs/FONTS.md`, "No face named"). Each doc type's README has the row.
-
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 

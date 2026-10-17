@@ -10,6 +10,12 @@
 #           status   markdown per-court table (STATUS.md body)
 #           rows     alias|status|percent|typst|latex|docx|items lines (consumed by tools/gen_readmes.py);
 #                    items = 8 bits, one per checklist item below
+#           dsummary markdown aggregate of Typst doc-type completeness (per group + total)
+#           doctypes markdown per-doc-type table (STATUS.md)
+#         The doc-type input is the second CLI arg, written by tools/manifest.sh --doctypes:
+#           alias|group|doctype|path|flags
+#         flags is six characters: template(0/1) samples(count) render(0 none,1 rendered,2 gates pass)
+#           exemplars(count) overlay(0/1) review(0/1)
 #
 # Rules:
 #   done          iff court.json status == "done" (manual; nothing here ever writes it)
@@ -19,6 +25,10 @@
 #   percent       = round(items present / 8 * 100), "done" forces 100. The 8 items: rules, exemplars >= 2,
 #                   samples >= 2, typst pass, latex pass, docx pass, overlay pdf, review file
 #   engine cell   0 -> "—" (no template), 1 -> "built" (template and rendered PDF), 2 -> "pass" (valid stamp)
+#
+# Doc types (Typst only): a doc type is "complete" iff all five items are present: typst template, a sample
+# (samples/INPUT-*.md), a typst render (samples/OUTPUT-*.pdf), an exemplar (exemplars/*.pdf) and an overlay
+# (samples/OVERLAY-*.pdf). "Gates" is pass iff tools/check.sh left a valid typst stamp; it is shown, not required.
 
 import Base
 
@@ -30,6 +40,17 @@ type Agg is Data:
 
 type Grp is Data:
   Grp{name: String, agg: Agg}
+
+# one doc type: bits = template, sample, render, exemplar, overlay, gates (0/1 each)
+type DRow is Data:
+  DRow{alias: String, group: String, dt: String, path: String, ns: Char, ne: Char, bs: List<&2, U32>}
+
+# n doc types; t s r e o = items present; c complete; g gates pass
+type DAgg is Data:
+  DAgg{n: U32, t: U32, s: U32, r: U32, e: U32, o: U32, c: U32, g: U32}
+
+type DGrp is Data:
+  DGrp{name: String, agg: DAgg}
 
 # ---- file IO -------------------------------------------------------------
 
@@ -243,6 +264,141 @@ def rowline(r: Row) -> String:
 def rowsout(rs: List<&2, Row>) -> List<&2, String>:
   smap(~Row, ~(r => rowline(r)), rs)
 
+# ---- doc types (Typst completeness) --------------------------------------
+
+def dmk2(a: String, g: String, dt: String, p: String, cs: List<&2, Char>) -> List<&2, DRow>:
+  match cs:
+    case Con{+t, Con{+s, Con{+r, Con{+e, Con{+o, _}}}}}:
+      [DRow{a, g, dt, p, s, e, [isc(t, '1'), nz(s), nz(r), nz(e), isc(o, '1'), isc(r, '2')]}]
+    case _:
+      Nil{}
+
+def dparse(fs: List<&2, String>) -> List<&2, DRow>:
+  match fs:
+    case Con{a, Con{g, Con{dt, Con{p, Con{f, _}}}}}:
+      dmk2(a, g, dt, p, String.to_list(f))
+    case _:
+      Nil{}
+
+def drows(ls: List<&2, String>) -> List<&2, DRow>:
+  match ls:
+    case Nil{}:
+      Nil{}
+    case Con{l, t}:
+      List.append(&2, DRow, dparse(String.split(l, '|')), drows(t))
+
+def dzero() -> DAgg:
+  DAgg{0, 0, 0, 0, 0, 0, 0, 0}
+
+# 1 iff all five Typst items are present
+def complete(bs: List<&2, U32>) -> U32:
+  match bs:
+    case Con{t, Con{s, Con{r, Con{e, Con{o, _}}}}}:
+      (t * s * r * e * o : U32)
+    case _:
+      0
+
+def dbump(a: DAgg, +bs: List<&2, U32>) -> DAgg:
+  match a bs:
+    case DAgg{n, t, s, r, e, o, c, g} Con{t1, Con{s1, Con{r1, Con{e1, Con{o1, Con{g1, _}}}}}}:
+      DAgg{(n + 1 : U32), (t + t1 : U32), (s + s1 : U32), (r + r1 : U32), (e + e1 : U32), (o + o1 : U32), (c + complete(bs) : U32), (g + g1 : U32)}
+    case a _:
+      a
+
+def dmerge(a: DAgg, b: DAgg) -> DAgg:
+  match a b:
+    case DAgg{n, t, s, r, e, o, c, g} DAgg{n2, t2, s2, r2, e2, o2, c2, g2}:
+      DAgg{(n + n2 : U32), (t + t2 : U32), (s + s2 : U32), (r + r2 : U32), (e + e2 : U32), (o + o2 : U32), (c + c2 : U32), (g + g2 : U32)}
+
+def dput(same: Bool, g: String, bs: List<&2, U32>, name: String, agg: DAgg, rest: List<&2, DGrp>) -> List<&2, DGrp>:
+  match same:
+    case True{}:
+      DGrp{name, dbump(agg, bs)} <> rest
+    case False{}:
+      DGrp{g, dbump(dzero(), bs)} <> (DGrp{name, agg} <> rest)
+
+def dpush(+g: String, bs: List<&2, U32>, acc: List<&2, DGrp>) -> List<&2, DGrp>:
+  match acc:
+    case Nil{}:
+      [DGrp{g, dbump(dzero(), bs)}]
+    case Con{DGrp{+name, agg}, rest}:
+      dput(String.eq(name, g), g, bs, name, agg, rest)
+
+def dgroups(rs: List<&2, DRow>, acc: List<&2, DGrp>) -> List<&2, DGrp>:
+  match rs:
+    case Nil{}:
+      List.reverse(&2, DGrp, acc)
+    case Con{DRow{a, g, dt, p, ns, ne, bs}, t}:
+      dgroups(t, dpush(g, bs, acc))
+
+def dtotal(gs: List<&2, DGrp>, acc: DAgg) -> DAgg:
+  match gs:
+    case Nil{}:
+      acc
+    case Con{DGrp{name, agg}, t}:
+      dtotal(t, dmerge(acc, agg))
+
+def daggrow(label: String, a: DAgg) -> String:
+  match a:
+    case DAgg{+n, t, s, r, e, o, +c, g}:
+      "| " ++ label ++ " | " ++ U32.show(n) ++ " | " ++ U32.show(t) ++ " | " ++ U32.show(s) ++ " | " ++ U32.show(r)
+        ++ " | " ++ U32.show(e) ++ " | " ++ U32.show(o) ++ " | " ++ U32.show(c) ++ " | " ++ pct1(c, n) ++ "% | " ++ U32.show(g) ++ " |"
+
+def dgrprow(g: DGrp) -> String:
+  match g:
+    case DGrp{name, agg}:
+      daggrow(name, agg)
+
+def dsummary(+gs: List<&2, DGrp>) -> List<&2, String>:
+  +t = dtotal(gs, dzero())
+  "| Group | Doc types | Template | Sample | Render | Exemplar | Overlay | Typst complete | % complete | Gates pass |" <>
+  ("|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|" <>
+   List.append(&2, String, smap(~DGrp, ~(g => dgrprow(g)), gs), [daggrow("**Total**", t)]))
+
+def yes(+b: U32) -> String:
+  Bool.pick(String, U32.is_eq(b, 1), "yes", "—")
+
+# a count cell: the digit, or "—" for none (9 means 9 or more)
+def num(+c: Char) -> String:
+  Bool.pick(String, Char.is_eq(c, '0'), "—", Bool.pick(String, Char.is_eq(c, '9'), "9+", String.from_list([c])))
+
+def miss(+b: U32, w: String) -> List<&2, String>:
+  Bool.pick(List<&2, String>, U32.is_eq(b, 1), Nil{}, [w])
+
+def joinc(xs: List<&2, String>) -> String:
+  match xs:
+    case Nil{}:
+      ""
+    case Con{h, Nil{}}:
+      h
+    case Con{h, t}:
+      h ++ ", " ++ joinc(t)
+
+def verdict(bs: List<&2, U32>) -> String:
+  match bs:
+    case Con{+t, Con{+s, Con{+r, Con{+e, Con{+o, _}}}}}:
+      Bool.pick(String, U32.is_eq((t * s * r * e * o : U32), 1), "**complete**",
+        "missing " ++ joinc(List.append(&2, String, miss(t, "template"), List.append(&2, String, miss(s, "sample"),
+          List.append(&2, String, miss(r, "render"), List.append(&2, String, miss(e, "exemplar"), miss(o, "overlay")))))))
+    case _:
+      "—"
+
+def dcells(ns: Char, ne: Char, bs: List<&2, U32>) -> String:
+  match bs:
+    case Con{+t, Con{+s, Con{+r, Con{+e, Con{+o, Con{+g, _}}}}}}:
+      yes(t) ++ " | " ++ num(ns) ++ " | " ++ yes(r) ++ " | " ++ num(ne) ++ " | " ++ yes(o) ++ " | " ++ Bool.pick(String, U32.is_eq(g, 1), "pass", "—")
+    case _:
+      "— | — | — | — | — | —"
+
+def dtrow(r: DRow) -> String:
+  match r:
+    case DRow{a, g, dt, p, ns, +ne, +bs}:
+      "| " ++ a ++ " | [" ++ dt ++ "](" ++ p ++ ") | " ++ dcells(ns, ne, bs) ++ " | " ++ verdict(bs) ++ " |"
+
+def dtable(rs: List<&2, DRow>) -> List<&2, String>:
+  "| Alias | Doc type | Template | Samples | Render | Exemplars | Overlay | Gates | Typst |" <>
+  ("|---|---|---|---:|---|---:|---|---|---|" <> smap(~DRow, ~(r => dtrow(r)), rs))
+
 # ---- main ----------------------------------------------------------------
 
 # one print per line keeps every string short (long ++ chains overflow the stack)
@@ -255,7 +411,7 @@ def emit(ls: List<&2, String>) -> IO(Unit):
         IO.print(h)
         emit(t)
 
-def report(+rs: List<&2, Row>) -> IO(Unit):
+def report(+rs: List<&2, Row>, +ds: List<&2, DRow>) -> IO(Unit):
   do IO<Unit>:
     IO.print("=== summary")
     emit(summary(groups(rs, Nil{})))
@@ -263,16 +419,28 @@ def report(+rs: List<&2, Row>) -> IO(Unit):
     emit(status(rs))
     IO.print("=== rows")
     emit(rowsout(rs))
+    IO.print("=== dsummary")
+    emit(dsummary(dgroups(ds, Nil{})))
+    IO.print("=== doctypes")
+    emit(dtable(ds))
 
-def arg0(as: List<String>) -> String:
+def run2(m: String, d: String) -> IO(Unit):
+  do IO<Unit>:
+    text : String <- slurp(m)
+    dtext : String <- slurp(d)
+    report(rows(lines_go(text, Nil{}, Nil{})), drows(lines_go(dtext, Nil{}, Nil{})))
+
+# args: [manifest [doctypes]]
+def run(as: List<String>) -> IO(Unit):
   match as:
-    case Con{h, _}:
-      h
+    case Con{m, Con{d, _}}:
+      run2(m, d)
+    case Con{m, Nil{}}:
+      run2(m, "out/doctypes.txt")
     case Nil{}:
-      "out/manifest.txt"
+      run2("out/manifest.txt", "out/doctypes.txt")
 
 def main() -> IO(Unit):
   do IO<Unit>:
     args : List<String> <- IO.args()
-    text : String <- slurp(arg0(args))
-    report(rows(lines_go(text, Nil{}, Nil{})))
+    run(args)

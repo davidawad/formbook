@@ -7,9 +7,10 @@ cd "$ROOT"
 mkdir -p out
 
 sh tools/manifest.sh > out/manifest.txt
+sh tools/manifest.sh --doctypes > out/doctypes.txt
 
-# Bend prints three sections ("=== summary|status|rows"); a failed run exits nonzero.
-if ! bend tools/tracker.bend out/manifest.txt > out/tracker.out 2> out/bend.err; then
+# Bend prints five sections ("=== summary|status|rows|dsummary|doctypes"); a failed run exits nonzero.
+if ! bend tools/tracker.bend out/manifest.txt out/doctypes.txt > out/tracker.out 2> out/bend.err; then
   cat out/bend.err >&2
   exit 1
 fi
@@ -17,9 +18,18 @@ section() { awk -v s="=== $1" '/^=== /{on = ($0 == s); next} on' out/tracker.out
 section summary > out/summary.md
 section status  > out/status.md
 section rows    > out/rows.txt
+section dsummary > out/dsummary.md
+section doctypes > out/doctypes.md
+
+# the README block: per-court summary, then Typst completeness per doc type (COURT/<doctype>/ folders)
+{
+  cat out/summary.md
+  printf '\nTypst per doc type (a doc type is complete with template, sample, render, exemplar and overlay; per-doc-type rows in STATUS.md):\n\n'
+  cat out/dsummary.md
+} > out/readme-block.md
 
 # splice the summary into README.md between the tracker markers
-awk -v f=out/summary.md '
+awk -v f=out/readme-block.md '
   /<!-- tracker:start -->/ { print; while ((getline l < f) > 0) print l; skip = 1; next }
   /<!-- tracker:end -->/   { skip = 0 }
   !skip
@@ -32,6 +42,13 @@ cat out/README.new > README.md
   cat out/summary.md
   printf '\n## Per court\n\n'
   cat out/status.md
+  printf '\n## Typst per doc type: summary\n\n'
+  printf 'One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself as "(court root)" when its own `typst/` is not empty. '
+  printf 'Complete = all five present: Typst template (`typst/`), sample (`samples/INPUT-*.md`), render (`samples/OUTPUT-*.pdf`), '
+  printf 'exemplar (`exemplars/*.pdf`), overlay (`samples/OVERLAY-*.pdf`). Gates = `tools/check.sh` left a valid typst stamp (shown, not required).\n\n'
+  cat out/dsummary.md
+  printf '\n## Typst per doc type\n\n'
+  cat out/doctypes.md
   printf '\n'
 } > STATUS.md
 

@@ -24,8 +24,14 @@
 #
 # Needs: sh, gawk, yq (mikefarah), jq, typst, poppler (pdfinfo pdffonts pdftotext pdftohtml pdfimages), shasum.
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
-COURT=$(cd "${1:?usage: tools/check.sh <court-dir> [--engine E] [--no-render] [--only SAMPLE_ID]}" && pwd)
+DOC=$(cd "${1:?usage: tools/check.sh <court-dir-or-doc-type> [--engine E] [--no-render] [--only SAMPLE_ID]}" && pwd)
 shift
+# Document-type folders do not carry court.json. Resolve court metadata upward,
+# but keep document files and stamps rooted at the folder supplied by the caller.
+COURT=$DOC
+while [ ! -f "$COURT/court.json" ] && [ "$COURT" != / ]; do COURT=$(dirname "$COURT"); done
+[ -f "$COURT/court.json" ] || { echo "no court.json found above $DOC" >&2; exit 2; }
+[ -f "$COURT/checks.yaml" ] || { echo "no court-level checks.yaml at $COURT" >&2; exit 2; }
 ENGINE=typst
 RENDER=1
 ONLY=""
@@ -56,7 +62,9 @@ export LC_ALL=en_US.UTF-8
 . "$ROOT/tools/check/lib.sh"
 
 ALIAS=$(jq -r .alias "$COURT/court.json")
-OUT="$ROOT/out/check/$ALIAS"
+DOC_KEY=${DOC#"$ROOT/"}
+DOC_KEY=$(printf '%s' "$DOC_KEY" | tr '/' '_')
+OUT="$ROOT/out/check/$ALIAS/$DOC_KEY"
 mkdir -p "$OUT"
 TAB=$(printf '\t')
 # the template file(s) a failure points at: checks.yaml `template` for typst, `templates.<engine>` otherwise
@@ -85,7 +93,7 @@ FTOP=$(($(cfg .params.page_height_pt) - $(cfg .params.margin_pt))) # text below 
 prepare() {
   W="$OUT/$SID"
   mkdir -p "$W"
-  [ "$RENDER" = 0 ] || sh "$ROOT/tools/render.sh" --engine "$ENGINE" "$COURT" "$(cfg ".samples[] | select(.id == \"$SID\") | .md")" "$PDF" > /dev/null || return 1
+  [ "$RENDER" = 0 ] || sh "$ROOT/tools/render.sh" --engine "$ENGINE" "$DOC" "$(cfg ".samples[] | select(.id == \"$SID\") | .md")" "$PDF" > /dev/null || return 1
   [ -f "$PDF" ] || {
     echo "no PDF at $PDF" >&2
     return 1
@@ -142,7 +150,7 @@ run_checks() { # $1 = space-separated gate numbers
         printf '  PASS  %-14s %s\n          %s\n' "$id" "$name" "$MEAS"
         echo P >> "$OUT/.tally"
       else
-        line=$(grep -rnH -F -- "$anchor" "$COURT/$TEMPLATE" 2> /dev/null | head -1 | sed "s/^[^:]*:\([0-9]*\):.*/\1/")
+        line=$(grep -rnH -F -- "$anchor" "$DOC/$TEMPLATE" 2> /dev/null | head -1 | sed "s/^[^:]*:\([0-9]*\):.*/\1/")
         printf '  FAIL  %-14s %s\n          measured: %s\n          expected: %s\n          fix:      %s:%s  (%s)\n' "$id" "$name" "$MEAS" "$expect" "$TEMPLATE" "${line:-?}" "$anchor"
         [ -z "$DETAIL" ] || printf '%s\n' "$DETAIL" | sed 's/^/          - /'
         echo F >> "$OUT/.tally"
@@ -158,8 +166,8 @@ printf '0\n' > "$OUT/.fails"
 echo "formbook check: $ALIAS ($(jq -r .name "$COURT/court.json"))  font calibration: 14 pt = $(awk -v r="$CALIB" 'BEGIN { printf "%.2f", r * 14 }') pt word height"
 for SID in $(cfg '.samples[].id'); do
   [ -z "$ONLY" ] || [ "$ONLY" = "$SID" ] || continue
-  MD="$COURT/$(cfg ".samples[] | select(.id == \"$SID\") | .md")"
-  PDF="$COURT/$(cfg ".samples[] | select(.id == \"$SID\") | .pdf")"
+  MD="$DOC/$(cfg ".samples[] | select(.id == \"$SID\") | .md")"
+  PDF="$DOC/$(cfg ".samples[] | select(.id == \"$SID\") | .pdf")"
   case $ENGINE in latex) PDF="${PDF%.pdf}.latex.pdf" ;; docx) PDF="${PDF%.pdf}.docx.pdf" ;; esac
   echo
   echo "=== sample $SID"
@@ -169,8 +177,8 @@ for SID in $(cfg '.samples[].id'); do
     continue
   }
   echo "    $(basename "$PDF"): $NPAGES pages"
-  printf '%s  %s\n' "$(shasum -a 256 "$PDF" | cut -d" " -f1)" "${PDF#$COURT/}" >> "$OUT/.shas"
-  [ "$ENGINE" != docx ] || printf '%s  %s\n' "$(shasum -a 256 "${PDF%.pdf}" | cut -d' ' -f1)" "${PDF%.pdf}" | sed "s|  $COURT/|  |" >> "$OUT/.shas"
+  printf '%s  %s\n' "$(shasum -a 256 "$PDF" | cut -d" " -f1)" "${PDF#$DOC/}" >> "$OUT/.shas"
+  [ "$ENGINE" != docx ] || printf '%s  %s\n' "$(shasum -a 256 "${PDF%.pdf}" | cut -d' ' -f1)" "${PDF%.pdf}" | sed "s|  $DOC/|  |" >> "$OUT/.shas"
   echo " GATE 0 CONTENT"
   run_checks "0"
   echo " GATE 1 RULES"
@@ -191,7 +199,7 @@ P=$(grep -c P "$OUT/.tally")
 F=$(grep -c F "$OUT/.tally")
 echo
 echo "RESULT: $P checks passed, $F failed"
-STAMP="$COURT/samples/.check-$ENGINE.txt"
+STAMP="$DOC/samples/.check-$ENGINE.txt"
 if [ "$F" != 0 ]; then
   rm -f "$STAMP" # any failure invalidates the engine's stamp
 elif [ -z "$ONLY" ]; then
@@ -199,7 +207,7 @@ elif [ -z "$ONLY" ]; then
     echo PASS
     sort -k2 "$OUT/.shas"
   } > "$STAMP"
-  echo "stamp: ${STAMP#$COURT/} written for engine $ENGINE"
+  echo "stamp: ${STAMP#$DOC/} written for engine $ENGINE"
 fi
 if [ "$F" = 0 ]; then
   echo "All gates green: this court folder is eligible for 'up for review' (tools/tracker.sh). 'done' is set by David, by hand, in court.json."

@@ -20,8 +20,6 @@
 
 Engines: typst `—`, latex `—`, docx `—`.
 
-Typeface (fonts pass, 2026-10-14): both doc types (`adversary-complaint`, `motion-brief`) name no face in the rules they cite, so both keep vendored EB Garamond (per `docs/FONTS.md`, a court that names no face gets EB Garamond). The exemplars are Times New Roman, which the rules do not require. Per-doc-type rows are in each doc type's README.
-
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 
