@@ -96,7 +96,7 @@
     grid(
       columns: (1fr, auto),
       upper(need(meta, "footer_title")),
-      [ADV. NO. #need(meta, "adversary_number")],
+      if str(need(meta, "adversary_number")) != "" { [ADV. NO. #need(meta, "adversary_number")] } else { [] },
     )
   }),
 )
@@ -261,7 +261,11 @@
     },
     foreground: footer-block(meta),
   )
-  set document(title: upper(need(meta, "title")) + ", Adv. No. " + need(meta, "adversary_number"), author: need(meta, "signature").signer)
+  let document-title = upper(need(meta, "title"))
+  let document-title = if str(need(meta, "adversary_number")) != "" {
+    document-title + ", Adv. No. " + need(meta, "adversary_number")
+  } else { document-title }
+  set document(title: document-title, author: need(meta, "signature").signer)
   set text(font: font-family, size: type-size, lang: "en", region: "us", hyphenate: false, fallback: false)
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
 
