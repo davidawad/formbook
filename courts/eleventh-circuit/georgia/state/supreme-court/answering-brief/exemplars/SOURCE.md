@@ -15,3 +15,9 @@
 | Public record | Yes: a brief filed in an appeal to the Supreme Court of Georgia, republished by State Court Report |
 
 Different filer from the opening-brief and reply-brief exemplars (appellee's counsel, not appellants' counsel). Used for: cover, counsel block, table of contents and authorities, introduction, statement of the case, the opening of argument I, conclusion, signature block and certificate of service (see `samples/INPUT-clark.md`).
+
+## SHA-256 checksums
+
+| File | SHA-256 |
+|---|---|
+| `FILED-EXAMPLE-clark-v-leigh-S26A0349-answering-brief.pdf` | `3160054add8107f76438d6d0e4a7a8b5a0abe69de3547428c4c22a9313f160d9` |

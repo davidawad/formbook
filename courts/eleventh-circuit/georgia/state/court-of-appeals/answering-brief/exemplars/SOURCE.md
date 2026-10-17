@@ -13,3 +13,9 @@
 | Date fetched | 2026-10-16 |
 
 Verified: `pdftotext` yields the full text; `pdfinfo` 11 pages; court stamp and caption confirm the court and doc type. Found through the gaappeals.gov brief postings and the Wayback CDX listing (see `../../opening-brief/exemplars/SOURCE.md`).
+
+## SHA-256 checksums
+
+| File | SHA-256 |
+|---|---|
+| `FILED-EXAMPLE-campbell-v-taylor-A26A1103-answering-brief.pdf` | `de5177b95d5872c1e50c034126f1e73561405ea663732b1aaf1eb652dc404903` |

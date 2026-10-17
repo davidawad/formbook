@@ -15,3 +15,9 @@
 Verified: `pdftotext` yields the full text; `pdfinfo` 18 pages; the court stamp and caption identify a Court of Appeals of Georgia filing of this doc type.
 
 How it was found: web search for "Court of Appeals of Georgia" brief of appellant PDF returned gaappeals.gov `wp-content/uploads/<yyyy>/<mm>/<docket>-BRIEF-OF-APPELLANT-NT.pdf` files; the Wayback CDX API (`/cdx/search/cdx?url=gaappeals.gov/wp-content/uploads/&matchType=prefix&filter=mimetype:application/pdf`) lists about 50 archived appellant, appellee and reply briefs from 2022-2026. Earlier failed searches (2026-10-15) tried CourtListener and direct gaappeals.gov fetches only.
+
+## SHA-256 checksums
+
+| File | SHA-256 |
+|---|---|
+| `FILED-EXAMPLE-campbell-v-taylor-A26A1103-opening-brief.pdf` | `fdaa90428fa058337a210ea5992973c47a6dfdc1563d8deac0ef7d3086847451` |

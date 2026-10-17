@@ -59,11 +59,11 @@
     },
     "state-appellate": {
       "core": ["opening-brief", "answering-brief", "reply-brief"],
-      "extended": ["amicus-brief", "petition-for-writ", "petition-for-rehearing", "petition-for-review", "motion-brief"]
+      "extended": ["answer", "amicus-brief", "petition-for-writ", "petition-for-rehearing", "petition-for-review", "petition-for-discretionary-review", "motion-brief"]
     },
     "state-supreme": {
       "core": ["opening-brief", "answering-brief", "petition-for-review"],
-      "extended": ["reply-brief", "amicus-brief", "brief-on-the-merits", "petition-for-writ", "petition-for-rehearing", "motion-brief"]
+      "extended": ["answer", "reply-brief", "amicus-brief", "brief-on-the-merits", "petition-for-writ", "petition-for-rehearing", "petition-for-discretionary-review", "motion-brief"]
     },
     "agency": {
       "core": ["petition", "trial-brief"],

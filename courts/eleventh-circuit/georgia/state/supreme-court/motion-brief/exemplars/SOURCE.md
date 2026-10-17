@@ -10,3 +10,9 @@
 - **Public court record:** yes (a party filing, posted publicly by Democracy Docket)
 - **How found:** WebSearch for Supreme Court of Georgia petition and motion filings in PDF form; this was the only result that was a Supreme Court of Georgia motion response.
 - **Notes for use:** A response to a motion in the Supreme Court is a Rule 26 filing, so Rules 15–17 and 20 apply to it. It is the closest exemplar to a motion-brief, but it is an opposition, not a motion. The filing does not carry the Rule 20(7) word-count certificate; that wording is not taken from this exemplar.
+
+## SHA-256 checksums
+
+| File | SHA-256 |
+|---|---|
+| `FILED-EXAMPLE-democratic-party-of-georgia-S23M0376-motion-brief.pdf` | `d15479d0c1d57219a2c98aa00127e23700e58c2a80e3f73af12fe5ede8656459` |

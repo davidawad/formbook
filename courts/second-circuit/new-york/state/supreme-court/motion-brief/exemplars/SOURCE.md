@@ -3,6 +3,7 @@
 | Field | Value |
 |---|---|
 | URL fetched from | https://www.pillsburylaw.com/images/content/1/4/141607/Valentino-2020.09.14-Plaintiffs-Opposition-to-MTD.pdf (a copy of the NYSCEF filing, hosted by the law firm Pillsbury) |
+| SHA-256 | `c42e53b78e493ee14d0e93ded0da8c0b74af5a86dc892006114d696a19846a16` |
 | Case name | Valentino U.S.A., Inc. v. 693 Fifth Owner LLC |
 | Court | Supreme Court of the State of New York, County of New York (Commercial Division; Hon. Andrew Borrok) |
 | Docket / index no. | Index No. 652605/2020, Motion Seq. 001 (printed on the copy) |

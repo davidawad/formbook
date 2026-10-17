@@ -10,3 +10,9 @@
 - **Public court record:** yes (a party filing, posted publicly by Democracy Docket)
 - **How found:** WebSearch for Supreme Court of Georgia certiorari petitions; the Democracy Docket package was the only Georgia Supreme Court petition in PDF form in the results.
 - **Notes for use:** This is a petition for certiorari from an interlocutory superior court order, filed after the Court of Appeals refused to stay it. Rule 41 applies to it the same way it applies to a petition from a Court of Appeals decision. The emergency motion to stay is a combined filing, and the word-count and certification rules of Rule 20 apply to it as well. The filing has no word-count certificate (Rule 20(7)), so it is not the source of that wording; the form of the rule is taken from `docs/` and `rules.md`.
+
+## SHA-256 checksums
+
+| File | SHA-256 |
+|---|---|
+| `FILED-EXAMPLE-democratic-party-of-georgia-A230012-petition-for-review.pdf` | `97ead098ef9b42db7c3d7159ad63037f16b939c556b108ed21fe2ebb5275e1c8` |

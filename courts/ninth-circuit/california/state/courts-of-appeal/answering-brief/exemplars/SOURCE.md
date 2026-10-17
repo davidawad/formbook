@@ -19,3 +19,9 @@ Notes:
 - The copy is a file-stamped copy republished by Stanford Law School. The brief is a public court filing.
 - No court's own website, CourtListener, or Justia copy of a California Court of Appeal respondent's brief was found (searched 2026-10-14; see `../README.md`, "Exemplar search").
 - The exemplar's certificate of compliance cites "California Rule of Court 8.520(c)(1)". Rule 8.520 governs Supreme Court review briefs. The sample uses rule 8.204(c)(1), the Court of Appeal rule (see `../README.md`).
+
+## SHA-256 checksums
+
+| File | SHA-256 |
+|---|---|
+| `FILED-EXAMPLE-brown-C095798-answering-brief.pdf` | `79ff3179d736e4749a7f5a32aa9ba526ac86c417de450ecf31efa1ac6bd0678f` |
