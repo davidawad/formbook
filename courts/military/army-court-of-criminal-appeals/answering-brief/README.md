@@ -1,72 +1,73 @@
-# U.S. Army Court of Criminal Appeals (acca): answering brief (brief on behalf of the United States)
+# U.S. Army Court of Criminal Appeals (acca): answering brief (brief on behalf of the appellee)
 
 - Court: `acca`, U.S. Army Court of Criminal Appeals (`courts/military/army-court-of-criminal-appeals/`)
-- Doc type: `answering-brief`. The Government's answer to the appellant's brief, under 32 CFR 150.15 (App. B covers the accused's brief; App. B says an answer may adopt the appellant's facts, add facts, or restate them from the Government's view, and that uncontroverted matter is not repeated). One self-contained folder, no shared files.
-- Exemplar: **BLOCKED: no exemplar.** No public ACCA Government answer found; searches listed in `exemplars/SOURCE.md`.
-- Sample: `samples/INPUT-fictional-answering-brief.md`. **FICTIONAL** structural fixture (invented names, docket, record cites and holdings), not a transcription of a filing.
-- Template: `typst/acca-answering-brief.typ` (entry `typst/main.typ`). Copied from `../opening-brief/typst/`; the differences are the title, the `doc-kind`, and the certificate recipient.
-- Status: template built and rendered (5 pages, 0 typst warnings; re-rendered 2026-10-14, unit acca-32.22). Overlay: **fail** (no exemplar to pair). Page review: done (5 of 5, below; all 5 re-viewed on 2026-10-14). The second exemplar search also found nothing (`exemplars/SOURCE.md`, "Second pass"). Tier-1 is **not asserted** (the ACCA form rule was not retrieved; see Known gaps 1-2). One OPEN tier-2 finding (signature block alone on page 4). `court.json` untouched.
+- Doc type: `answering-brief`. The United States' answer to the appellant's assignments of error. ACCA Rule 17.1(a): pleadings "raising or addressing" an assignment of error follow Rule 13 and Appendix A, so the answer uses the Appendix A form with the appellee's title.
+- Exemplar: `exemplars/FILED-EXAMPLE-akbar-20050514-answering-brief.pdf`, an 11-page extract of *United States v. Akbar*, Army Dkt. 20050514, Brief on Behalf of Appellee, filed 29 November 2010 by the Government Appellate Division (source, page map: `exemplars/SOURCE.md`). Found on the fourth search pass (2026-10-16, bead fb-595.20.20).
+- Samples: `samples/INPUT-akbar-answering-brief.md` (transcription of the extract); `samples/INPUT-fictional-answering-brief.md` (FICTIONAL fixture, kept).
+- Template: `typst/acca-answering-brief.typ` (entry `typst/main.typ`). Same as `../opening-brief/typst/acca-opening-brief.typ` except the title ("BRIEF ON BEHALF OF APPELLEE", as the filer titles it) and the default certificate recipient (the Defense Appellate Division).
+- Status (2026-10-16): rule text retrieved and applied. Render ok (11 pages), overlay ok, every page reviewed. `tools/check.sh` not run (no `checks.yaml`). `court.json` untouched.
 
 ## Files
 
 | Path | What |
 |---|---|
-| `typst/main.typ` | Entry point; reads `--input sample=...`, calls `acca-brief`. |
-| `typst/acca-answering-brief.typ` | Template. Parameter block at the top: `doc-kind = "answering-brief"`, `brief-title`, `court-line`, `font-family`, `type-size`, `body-leading`, `page-margin`. |
-| `samples/INPUT-fictional-answering-brief.md` | Markdown contract sample (frontmatter + body). FICTIONAL. Same frontmatter schema as the opening brief (see `../opening-brief/README.md`, "Markdown contract"). |
-| `samples/OUTPUT-fictional-answering-brief.pdf` | `sh tools/render.sh courts/military/army-court-of-criminal-appeals/answering-brief samples/INPUT-fictional-answering-brief.md` (5 pages). |
-| `samples/OVERLAY-fictional-answering-brief.*` | Not produced: `sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/answering-brief fictional-answering-brief` exits 1 with "no exemplar pdf". |
-| `exemplars/SOURCE.md` | BLOCKED record and the searches tried. |
+| `typst/main.typ`, `typst/acca-answering-brief.typ` | Entry point and template. |
+| `samples/INPUT-akbar-answering-brief.md` | Transcription of the extract (caption page, brief pp. 1-7, 216-218). Names the filer blacked out are written `[redacted]`. |
+| `samples/OUTPUT-akbar-answering-brief.pdf` | `sh tools/render.sh courts/military/army-court-of-criminal-appeals/answering-brief samples/INPUT-akbar-answering-brief.md` (11 pages). |
+| `samples/OVERLAY-akbar-answering-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/answering-brief akbar-answering-brief`. |
+| `samples/INPUT-fictional-answering-brief.md`, `OUTPUT-fictional-answering-brief.pdf` | FICTIONAL fixture and render (4 pages). No overlay. |
+| `exemplars/SOURCE.md` | Exemplar record, page map, search passes. |
+
+Markdown contract: the same as the opening brief (`../opening-brief/README.md`, "Markdown contract"); the certificate's default `recipient` is "the Defense Appellate Division".
 
 ## Governing rules
 
-The same rules as the opening brief (`../opening-brief/README.md`, "Governing rules"): 32 CFR 150.15(a) (typed, double-spaced, white paper), 32 CFR 150 App. B (cover, section order, certificate), JRAP Rule 17 (form pursuant to each CCA's rules), and the Air Force Rule 17.1 values used only as a stand-in. Read on 2026-10-14; wording caveats are in that README.
-
-Typeface: none is named by the same rules, so the template keeps EB Garamond (`../README.md`, "Typeface").
-
-Answer-specific points from App. B (paraphrased from the WebFetch summary, not verbatim): an answer may adopt the appellant's facts, add facts, or restate them from the Government's viewpoint; uncontroverted matter is not repeated. The template therefore has no mandatory Statement of the Case in the answer; the fixture uses an "adopts" paragraph.
+ACCA *Rules of Appellate Procedure*, effective 15 January 2019, `https://www.jagcnet.army.mil/Home/assets/pdf/court/RulesofCourt.pdf`, read from the Wayback capture 20250729125903 on 2026-10-16. Rules 13.2, 17.1(a)-(b), 17.3 and Appendix A apply as listed in `../opening-brief/README.md` ("Governing rules"): Times New Roman 14 pt (Liberation Serif), double-spaced (32.3 pt pitch), 1 in margins, letter; Appendix A caption on page 1, "TO THE HONORABLE ..." line, "Panel" at the foot of page 1, Certificate of Service on its own page. Appendix A also says an answer "may adopt the appellant's statement of facts if there is no dispute; may state additional facts; or ... restate the facts as they appear from the appellee's viewpoint."
 
 ## Overlay
 
-Not produced. The exemplar is missing, so `tools/overlay.sh` has nothing to pair against (exit 1, "no exemplar pdf").
+`sh tools/overlay.sh ... akbar-answering-brief` exit 0. Page map:
 
-## Page review (Gate 2)
+| Ours | Filed (extract) | Overlap | Note |
+|---|---|---|---|
+| 1 | 1 | 41.1% | Caption. The filer used a separate caption page with four counsel blocks (2010 practice); App. A puts the caption on page 1 above the body, so our p. 1 also carries the Statement of the Case. Rule wins. |
+| 2 | 3 | 40.0% | |
+| 3 | 3 | 40.9% | |
+| 4 | 5 | 47.5% | |
+| 5 | 5 | 41.9% | |
+| 6 | 6 | 42.2% | |
+| 7 | 7 | 46.9% | |
+| 8 | 8 | 67.4% | End of the Statement of Facts extract |
+| 9 | 9 | 82.9% | Assignment LVIII, Law and Argument, Conclusion |
+| 10 | 10 | 29.7% | Signature blocks |
+| 11 | 11 | 79.1% | Certificate of Service |
 
-Every page of `OUTPUT-fictional-answering-brief.pdf` was rendered at 60 dpi and viewed (5 of 5). Fonts embedded: EB Garamond (regular, bold, bold italic). Typst printed no warnings. After the counsel-line fix on page 1, the text of pages 2-5 was compared with the earlier render (`pdftotext -layout`): unchanged.
+The filer is Courier 12 pt with smaller footnotes (pre-2019); ours is 14 pt Times-metric throughout per R. 13.2, so our text runs about one page longer per seven. Margins, double-spaced grid and page-number position line up.
+
+## Page review (Gate 2), 2026-10-16
+
+Every page of `OUTPUT-akbar-answering-brief.pdf` (11) and `OVERLAY-akbar-answering-brief.pdf` (11) rasterized at 60 dpi and viewed. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only. No typst warnings.
 
 | Page | Content | Result |
 |---|---|---|
-| 1 | Cover: court line, caption, docket, title "BRIEF ON BEHALF OF THE UNITED STATES", trial line, Government counsel block | OK. One page. Counsel block was wrapping ("Attorney-Advisor, Government Appellate / Division"); fixed by splitting the fixture's line, not by the template. |
-| 2 | Statement of the Case (adopts appellant's); Statement of Facts (Government's view); ERRORS AND ARGUMENT; Error I heading, Standard of Review | OK. Level-1 headings are sticky. |
-| 3 | Error I Argument; Error II heading, Standard of Review, Argument; WHEREFORE prayer | OK. |
-| 4 | Signature block alone | **OPEN**: the signature block is the only content on page 4. Page 3 was full, so the last paragraph (WHEREFORE) ends page 3 and the signature block starts a new page. A clerk would expect the prayer and the signature together. The template has no keep-with-previous control for markdown content. |
-| 5 | Certificate of Filing and Service; certifier block | OK. |
-
-Tier-2 findings (OPEN or ACCEPTED): (a) page 4 signature alone (OPEN, above). (b) The title "BRIEF ON BEHALF OF THE UNITED STATES" is a convention, not checked against a filed ACCA Government answer (ACCEPTED as a placeholder until an exemplar is found). (c) The certificate names "appellate defense counsel for the appellant": App. B's wording covers the Court and opposing counsel; the exact recipients are not verified.
-
-Pitch measured on the opening brief's template (same parameters): body lines 26.4 pt apart on 12 pt type (about 2.2 x size, double spacing); single-spaced blocks 13.7 pt apart.
+| 1 | Caption, "TO THE HONORABLE ...", Statement of the Case, footnotes 1-4, "Panel 2" | OK |
+| 2-8 | Statement of Facts, The Crimes; dense footnotes (up to 13 per page) | OK. Footnote marks were a mix of typographic and synthesized superscripts (Liberation Serif lacks some superscript digits); fixed with `set super(typographic: false)`, re-rendered, all marks now match. ACCEPTED: pages with many footnotes leave space at the foot (footnotes kept with their marks). |
+| 9 | Assignment LVIII (bold capitals), Law and Argument, Conclusion | OK |
+| 10 | Signature blocks (four signers) | OPEN (tier 2): the unbreakable signature block moves to its own page; the filer kept Conclusion and signatures together on p. 217. |
+| 11 | Certificate of Service | OK |
 
 ## Known gaps
 
-1. **Typeface, size and margins are PROVISIONAL.** The ACCA rule was not retrieved. `type-size = 12pt` and `page-margin = 1in` are the Air Force court's Rule 17.1 values. Tier-1 is not asserted until the ACCA text is read.
-2. **Page limit, cover and TOC/TOA not confirmed** (see `../opening-brief/README.md`, Known gap 2). No TOC/TOA and no length check.
-3. **Title is a convention** (`brief-title`). App. B's form is for the accused; the Government answer's title is not from a source.
-4. **Font.** The retrieved rules name no face, so EB Garamond stays per `docs/FONTS.md`. ACCA's own rules were not readable (`../README.md`, "Typeface").
-5. **No exemplar, no overlay.** The fixture is FICTIONAL, five pages, and shorter than the 8-14 page target because no filed length exists to match.
-6. **Signature with prayer** (OPEN, page 4 above): no keep-with-previous control.
-7. **Standard of review and prayer are not checked by the template** (the sample has them).
-8. **No `tools/check.sh` gates run.** Not in this unit's brief; the template is not stamped.
+1. TOC/TOA (R. 17.3(a)) not generated; 50-page limit not checked.
+2. Exemplar predates the 2019 rules (Courier, separate caption page). No post-2019 ACCA answer found.
+3. No `checks.yaml`; `tools/check.sh` not run.
+4. The docx engine was not changed in this pass and still builds the old EB Garamond 12 pt cover-page form; `samples/OUTPUT-fictional-answering-brief.docx` is from that form.
 
-## Re-check (2026-10-15, bead fb-595.20.4)
+## History
 
-- Render: `sh tools/render.sh` exit 0, 5 pages, no typst warnings. Overlay: `sh tools/overlay.sh` exit 1 ("no exemplar pdf"), so **overlay=fail**.
-- Gate 2: all 5 pages rendered at 60 dpi and viewed. Same result as the 2026-10-14 review: pages 1, 2, 3, 5 OK; page 4 is the signature block alone (OPEN, finding 6 above, unchanged).
-- Exemplar search: a third pass (see `exemplars/SOURCE.md`, "Third pass") found no ACCA-filed Government answer. Lead: a Government answer in a federal habeas case (*Lorance*, D. Kan.) attaches an ACCA appellant brief, not an answer. Its attachment is not in RECAP storage.
-- Status: BLOCKED: no exemplar.
+- 2026-10-14 / 2026-10-15: no exemplar; PROVISIONAL template (EB Garamond 12 pt, cover page). See `exemplars/SOURCE.md`.
+- 2026-10-16 (bead fb-595.20.20): rules and *Akbar* briefs found via the Internet Archive; template moved to R. 13.2 / 17.1 / App. A; *Akbar* sample, render and overlay added.
+
 ## Engines
 
-**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 12 pt, double-spaced body with a 0.5 in first-line indent, single-spaced centered and flush-left headings, single-spaced block quotes and footnotes, letter with 1 in margins, centered page number from page 2). `docx/acca-brief.lua` builds the cover, counsel block, signature block, certificate of filing and service, and appendix from the frontmatter, as the typst template does. Output: `samples/OUTPUT-<id>.docx`, valid zip with well-formed XML parts (checked with `unzip -tq` and `xmllint --noout`). Opened in neither Word nor LibreOffice on this box.
-
-- Matches the typst form: the same face, size, margins, spacing, page-number placement (none on the cover), cover and certificate order, and the signature block kept with the last paragraph (`keepNext`).
-- Differs: the counsel blocks are a borderless two-column table, and the cover uses fixed spacing where typst pushes the counsel block to the foot of the page (`v(1fr)`). Body paragraphs have no space between them (typst adds 0.94 em); "double" is Word's double (`w:line="480"`), not typst's 1.55 em leading, so line pitch differs slightly. Word and LibreOffice paginate differently.
-- BLOCKED: docx.pdf Gates 0 to 3 (`tools/check.sh --engine docx`) cannot run: LibreOffice (`soffice`) is not installed on this box, so `samples/OUTPUT-<id>.docx.pdf` was not produced and no page was reviewed. The `.docx` has not been opened in Word or LibreOffice (whether it opens without a repair prompt is unconfirmed). The font-name check (EB Garamond embedded) also needs the PDF.
+**docx** (`docx/`), unchanged and out of step with the typst form (Known gaps 4). BLOCKED: `tools/check.sh --engine docx` cannot run (no LibreOffice on the earlier box; no `checks.yaml`).
