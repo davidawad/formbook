@@ -8,7 +8,7 @@ Kinds: **M** mandatory by rule; **C** convention; **T** template contract; **A**
 
 | ID | Requirement | Primary source | Kind |
 |---|---|---|---|
-| CA6-FORM-001 | Use paper 8½ × 11 inches; margins at least one inch on all sides. Text double-spaced; headings, footnotes and quotations longer than two lines may be single-spaced. Page numbers may appear in the margins. | FRAP 32(a)(4); https://www.law.cornell.edu/rules/frap/rule_32 (verified 2026-10-17) | M |
+| CA6-FORM-001 | Use paper 8½ × 11 inches; margins at least one inch on all sides. Text double-spaced; headings, footnotes and quotations longer than two lines may be single-spaced. Page numbers may appear in the margins. | FRAP 32(a)(4); https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-appellate-procedure (verified 2026-10-17) | M |
 | CA6-FORM-002 | Use a proportionally spaced serif typeface of at least 14 points, or a monospaced typeface of at least 12 points and no more than 10½ characters per inch. Case names in the body and footnotes are italic or underlined. | FRAP 32(a)(5)(A), (a)(6); same source and verification date | M |
 | CA6-FORM-003 | A brief's cover contains the case number centered at the top, court name, case title, proceeding and court below, brief title identifying the filing party, and counsel name, address and telephone. | FRAP 32(a)(2)(A)–(F); Briefs Checklist Part I (official link above), verified 2026-10-17 | M |
 | CA6-LEN-001 | Principal brief: 13,000 words or 30 pages; reply: 6,500 words or 15 pages. Cross-appeal appellee principal brief: 15,300 words or 35 pages; cross-appeal reply: 6,500 words or 15 pages. | FRAP 32(a)(7)(A), (B); FRAP 28.1(e)(2); 6 Cir. R. 28(e)(1)–(2), combined rules PDF, verified 2026-10-17 | M |
