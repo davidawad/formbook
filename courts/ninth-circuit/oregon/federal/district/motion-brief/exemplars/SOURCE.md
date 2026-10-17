@@ -26,3 +26,19 @@
 
 - *Beckstrom v. Beckstrom*, 6:26-cv-00920-AA (Eugene Division), Twin Lakes Church's Motion to Dismiss and Supporting Memorandum of Law (8 pages, RECAP `gov.uscourts.ord.193990.25.0_1.pdf`), filed by counsel John Kaempf. The memorandum is in the same document. This is a second counsel-filed motion with a combined memorandum, usable for the tier-2 second-filer check.
 - *Stapleton v. PeaceHealth*, 6:26-cv-00684 (39 pages), a larger combined motion; not downloaded.
+
+## Second exemplar (retrieved 2026-10-17)
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-kaempf-beckstrom-6-26-cv-00920-motion-brief.pdf` |
+| Filer | Defendant Twin Lakes Church, filed by attorney John Kaempf (different filer from Zoetis) |
+| Case | *Beckstrom v. Beckstrom*, No. 6:26-cv-00920-AA |
+| Document | Document 25, Motion to Dismiss and Supporting Memorandum of Law, 8 pages |
+| Date filed | 2026-06-30 (PDF metadata; CourtListener RECAP entry) |
+| URL | https://storage.courtlistener.com/recap/gov.uscourts.ord.193990/gov.uscourts.ord.193990.25.0_1.pdf |
+| Date retrieved | 2026-10-17 |
+| SHA-256 | `c7a6df600489e7c42b6f9491ac850d8697d9072d3cb8e5af7e1ad71f5db32cb6` |
+| Public record | CourtListener RECAP copy of the non-sealed ECF filing |
+
+Downloaded from the public RECAP storage URL and checked with `pdfinfo` and `pdftotext`; the PDF is 8 pages with extractable text.

@@ -12,3 +12,16 @@
 | Date filed | September 6, 2024 (the brief's date line and certificates; RECAP docket entry "BRIEF FILED - APPELLANT REPLY BRIEF", entered 09/06/2024) |
 | Date fetched | 2026-10-14 |
 | Notes | Public court record. The file is a Microsoft Word 2019 export (Georgia 14-point text). The RECAP copy is the court's own docket document, not an edited copy. |
+
+## Second filer
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-lindell-24-1608-reply-brief.pdf` (15 pages) |
+| URL | https://storage.courtlistener.com/recap/gov.uscourts.ca8.108528/gov.uscourts.ca8.108528.805031396.0.pdf |
+| Case / docket | *Robert Zeidman v. Lindell Management LLC*, No. 24-1608 (appeal from D. Minn. No. 0:23-cv-01433) |
+| Filer | Lindell Management LLC, respondent-appellant; counsel Douglas G. Wardlow and Thomas F. Miller |
+| Date filed | 2024-06-28 (CourtListener RECAP docket entry) |
+| Date retrieved | 2026-10-17 |
+| SHA-256 | `67af4a3ca60e090701197b7636896045620765b86830140d8a320ea284a9f84f` |
+| Public filing | Yes, CourtListener RECAP. `pdftotext` confirms a text-based 15-page PDF. |

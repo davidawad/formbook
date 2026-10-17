@@ -17,8 +17,22 @@ Searched for a text-based, public D. Alaska complaint. The search (WebSearch, D.
 
 ## Second filer
 
-Not collected in this pass. The brief asks for one exemplar per doc type. The other D. Alaska complaints found (Native Village of Hooper Bay v. Burgum, 3:25-cv-00316; Sovereign Inupiat for a Living Arctic v. Burgum, 3:25-cv-00356; Northern Alaska Environmental Center v. Trump, 3:25-cv-00038, second amended complaint) were not downloaded, so EVAL-LOOP's tier-2 rule (2 or 3 filers) is not met. Recorded in `../README.md`.
+The additional NAEC complaint below is from a different plaintiff filer than the Launch Alaska complaint. Both are public RECAP records. Tier-2 comparison remains a template-review task; this collection adds the missing source.
 
 ## Other sources checked
 
 - The NAEC complaint (3:25-cv-00038, doc 1, 46 pages) was downloaded and read for structure; it is not the exemplar used here.
+
+## Additional exemplar (different filer)
+
+- File: `FILED-EXAMPLE-naec-3-25-cv-00038-complaint.pdf` (46 pages; text layer present)
+- Court: United States District Court for the District of Alaska
+- Case: *Northern Alaska Environmental Center, et al. v. Trump, et al.*
+- Docket: No. 3:25-cv-00038-SLG, Document 1
+- Document: Complaint for Declaratory and Injunctive Relief
+- Filer: Northern Alaska Environmental Center and co-plaintiffs, by counsel Earthjustice and co-counsel
+- Date filed: February 19, 2025
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.akd.75657/gov.uscourts.akd.75657.1.0.pdf
+- Date retrieved: 2026-10-17
+- SHA-256: `621ace3abd7bd0da88eff721cfa5558f73dc256a1de8ba87974588ec479fa031`
+- Public CourtListener RECAP filing. This is a different plaintiff filer from the Launch Alaska exemplar.

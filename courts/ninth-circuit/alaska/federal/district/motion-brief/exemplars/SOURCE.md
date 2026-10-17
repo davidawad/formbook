@@ -18,8 +18,22 @@ Searched for a text-based, public D. Alaska Rule 12(b) motion with a memorandum.
 
 ## Second filer
 
-Not collected in this pass. The brief asks for one exemplar per doc type. The State of Alaska's motion to dismiss (Docket 59) in the same case is a second filer, but its memorandum was not found in RECAP (404), so tier 2 is not judged against two filers. Recorded in `../README.md`.
+The additional memorandum below was filed for the Department of the Navy by the District of Alaska U.S. Attorney's Office, distinct from the existing Federal Defendants memorandum filed through DOJ's Environment and Natural Resources Division. Both are public RECAP records.
 
 ## Note on length
 
 The memorandum runs 42 pages. Local Civil Rule 7.4(a)(1) limits a Rule 12(b) memorandum to 35 pages or 10,000 words; Rule 7.4(a)(4) excludes the caption, signature blocks and the tables from that limit. The body here is about 35 pages after the front matter, so the exemplar is within the limit when those parts are excluded. This was checked by the page numbering, not by a word count.
+
+## Additional exemplar (different filer)
+
+- File: `FILED-EXAMPLE-usao-3-25-cv-00141-motion-brief.pdf` (19 pages; text layer present)
+- Court: United States District Court for the District of Alaska
+- Case: *Launch Alaska v. Department of the Navy, Office of Naval Research*
+- Docket: No. 3:25-cv-00141-GMS, Document 15
+- Document: Defendant's Motion to Dismiss and Memorandum in Opposition to Plaintiff's Complaint for Injunctive Relief
+- Filer: Department of the Navy, Office of Naval Research, by the U.S. Attorney's Office for the District of Alaska (E. Bryan Wilson)
+- Date filed: July 21, 2025
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.akd.76659/gov.uscourts.akd.76659.15.0.pdf
+- Date retrieved: 2026-10-17
+- SHA-256: `44699e17b78317adac9b4e22b22357a3e62de56fd724e8cdefe94d927326aaf7`
+- Public CourtListener RECAP filing. The existing exemplar was filed by Federal Defendants through DOJ's Environment and Natural Resources Division; this one is filed for a different defendant by the District of Alaska U.S. Attorney's Office.

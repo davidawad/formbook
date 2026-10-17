@@ -22,3 +22,11 @@ Searched for a text-based, public N.D. Cal. motion. Options found: an EFF motion
 - WebSearch: advocacy-org hosted N.D. Cal. filings (eff.org, knightcolumbia.org, aclunc.org, democracyforward.org). Democracy Forward's AFGE v. Trump memorandum (3:25-cv-03698-SI, ECF 37-1) returned HTTP 403 to both WebFetch and curl; not used.
 - Justia `cases.justia.com` PDFs: HTTP 403 to curl.
 - Not retrieved from the box: CourtListener itself (403).
+
+- File: `FILED-EXAMPLE-america-first-3-25-cv-03372-motion-brief.pdf`
+- Filer: Amicus America First Legal Foundation, by JW Howard/Attorneys, Ltd. and Boyden Gray PLLC
+- Case: *Leigh v. Newsom*, No. 3:25-cv-03372-JSC (Doc. 10-1)
+- Date filed: 2025-04-23
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.cand.448087/gov.uscourts.cand.448087.10.1.pdf
+- Date retrieved: 2026-10-17
+- sha256: `3fe38a92ca757226371101168da1e20ace69771cec5a55d748c6784301121a3a`

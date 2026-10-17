@@ -13,3 +13,14 @@
 | Date fetched | 2026-10-14 |
 | Text layer | Yes: `pdftotext` yields the full caption, body, counts, prayer, and signature block |
 | Public record | Yes: a public complaint in a federal bankruptcy adversary proceeding, from the RECAP archive |
+
+## Second filer (tier-2 comparison)
+
+- File: `FILED-EXAMPLE-manty-19-04106-adversary-complaint.pdf` (7 pages)
+- Case: *Nauni Manty, Chapter 7 Trustee v. ASKNET, Inc.*, Adv. No. 19-04106 (main case WYNIT Distribution, LLC, et al., No. 17-42726 et al.)
+- Filer: Chapter 7 Trustee Nauni Jo Manty, by counsel Jacqueline J. Williams, Manty & Associates, P.A.
+- Date filed: 2019-04-16 (ECF header)
+- URL: https://www.courtlistener.com/?q=19-04106+Manty&type=r
+- Date retrieved: 2026-10-17
+- SHA-256: `a86d523ae001cca34db5ddd38e51134051ce7db4f00834d067a6c4054a14d746`
+- Public CourtListener RECAP filing; a separate filer from the Magnetation adversary.

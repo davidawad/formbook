@@ -17,3 +17,11 @@ Other E.D. Cal. complaints checked for this doc type (not saved; the brief asks 
 - Lightfoot v. Game Time Supplements, LLC, 1:26-cv-07594 (23 pp.), Rorke-Giorgi v. Ulta Beauty, Inc., 2:26-cv-03086 (37 pp.), Kirby v. City of Stockton, 2:26-cv-03284 (42 pp.) (counsel filings, not reviewed for format).
 
 Second filer: not collected in this pass. EVAL-LOOP's tier-2 rule asks for two or three filers; that is recorded as an open item in `../README.md`.
+
+- File: `FILED-EXAMPLE-kennedy-1-26-cv-07817-complaint.pdf`
+- Filer: Plaintiff Jeremiah Kennedy, by Jibrael S. Hindi, Law Offices of Jibrael S. Hindi
+- Case: *Kennedy v. Thrive Causemetics, Inc.*, No. 1:26-cv-07817-HBK (Doc. 1)
+- Date filed: 2026-09-24
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.caed.502408/gov.uscourts.caed.502408.1.0.pdf
+- Date retrieved: 2026-10-17
+- sha256: `57a92bc1898221fdf5daaea0ea17390e62ccfc73fb8ee4df10237b14f0801649`
