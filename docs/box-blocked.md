@@ -329,3 +329,17 @@ BLOCKED fb-l129.4  misschanceryct/petition-for-discretionary-review: follow-up o
 BLOCKED fb-l129.4  misschanceryct/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/fifth-circuit/mississippi/state/chancery-courts/exemplars/SOURCE.md
 BLOCKED fb-l129.4  misschanceryct/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/fifth-circuit/mississippi/state/chancery-courts/exemplars/SOURCE.md
 BLOCKED fb-l129.4  misschanceryct/amicus-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/fifth-circuit/mississippi/state/chancery-courts/exemplars/SOURCE.md
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+BLOCKED rows re-searched for pennsylvania state courts; official rules/docket indexes and targeted public-filing queries reviewed. No additional qualifying downloadable text-layer PDF was verified for the remaining BLOCKED rows.
+BLOCKED fb-l129.4  pasuperct/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/superior-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  pasuperct/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/superior-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  pasuperct/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/superior-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  pacommwct/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/commonwealth-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  cjdpa/opening-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/court-of-judicial-discipline/exemplars/SOURCE.md
+BLOCKED fb-l129.4  cjdpa/answering-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/court-of-judicial-discipline/exemplars/SOURCE.md
+BLOCKED fb-l129.4  cjdpa/reply-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/court-of-judicial-discipline/exemplars/SOURCE.md
+BLOCKED fb-l129.4  cjdpa/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/court-of-judicial-discipline/exemplars/SOURCE.md
+BLOCKED fb-l129.4  cjdpa/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/court-of-judicial-discipline/exemplars/SOURCE.md
+BLOCKED fb-l129.4  cjdpa/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/court-of-judicial-discipline/exemplars/SOURCE.md
+BLOCKED fb-l129.4  cjdpa/amicus-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/court-of-judicial-discipline/exemplars/SOURCE.md
