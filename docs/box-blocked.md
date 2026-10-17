@@ -343,3 +343,18 @@ BLOCKED fb-l129.4  cjdpa/petition-for-discretionary-review: follow-up official-s
 BLOCKED fb-l129.4  cjdpa/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/court-of-judicial-discipline/exemplars/SOURCE.md
 BLOCKED fb-l129.4  cjdpa/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/court-of-judicial-discipline/exemplars/SOURCE.md
 BLOCKED fb-l129.4  cjdpa/amicus-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/pennsylvania/state/court-of-judicial-discipline/exemplars/SOURCE.md
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+BLOCKED rows re-searched for new-jersey state courts; official rules/docket indexes and targeted public-filing queries reviewed. No additional qualifying downloadable text-layer PDF was verified for the remaining BLOCKED rows.
+BLOCKED fb-l129.4  nj/reply-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/supreme-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  nj/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/supreme-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  nj/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/supreme-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  nj/petition-for-rehearing: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/supreme-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  njtaxct/opening-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  njtaxct/answering-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  njtaxct/reply-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  njtaxct/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  njtaxct/motion-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  njtaxct/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  njtaxct/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/tax-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  njtaxct/amicus-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/third-circuit/new-jersey/state/tax-court/exemplars/SOURCE.md
