@@ -9,9 +9,9 @@ Indexed level: `state-supreme`
 | `answering-brief` — Answering brief (appellee's principal brief) | PENDING: not yet searched |  |  |  |  |  |  |
 | `reply-brief` — Reply brief | PENDING: not yet searched |  |  |  |  |  |  |
 | `petition-for-review` — Petition for review (agency order or state high court) | PENDING: not yet searched |  |  |  |  |  |  |
-| `motion-brief` — Motion and supporting memorandum | PENDING: not yet searched |  |  |  |  |  |  |
+| `motion-brief` — Motion and supporting memorandum | COLLECTED: 9 pp., text layer verified 2026-10-17; Petitioners' supplemental brief supporting stay and applying for stay and ancillary relief | `FILED-EXAMPLE-aclu-ok-walke-v-walters-ma-122592-motion-brief.pdf` | Petitioners Walke et al. (ACLU of Oklahoma, Americans United, Oklahoma Appleseed) | Walke v. Walters, No. MA-122592 (Okla.) | 2025-03 | https://www.acluok.org/app/uploads/2025/03/supplemental_brief14.pdf | `312ae564b3ad064c94dd54199f10bcba2063bac25bf4c4cc8e9630e38273adef` |
 | `petition-for-discretionary-review` — Petition for discretionary review | PENDING: not yet searched |  |  |  |  |  |  |
-| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | PENDING: not yet searched |  |  |  |  |  |  |
+| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | COLLECTED: 50 pp., text layer verified 2026-10-17; Application to assume original jurisdiction and petition for writ of mandamus/prohibition; as-filed copy, docket no. blank on face | `FILED-EXAMPLE-aclu-ok-walke-v-walters-ma-122592-petition-for-writ.pdf` | Petitioners Walke et al. (ACLU of Oklahoma, Americans United, Oklahoma Appleseed) | Walke v. Walters, No. MA-122592 (Okla.) | 2024-10 | https://www.acluok.org/app/uploads/2024/10/okbiblepetfin.pdf | `236b0d1cbeef4715149230a964511e2752f227dd935cb5a8d5295f1dab165851` |
 | `petition-for-rehearing` — Petition for panel rehearing or rehearing en banc | PENDING: not yet searched |  |  |  |  |  |  |
 | `amicus-brief` — Amicus curiae brief | PENDING: not yet searched |  |  |  |  |  |  |
 
