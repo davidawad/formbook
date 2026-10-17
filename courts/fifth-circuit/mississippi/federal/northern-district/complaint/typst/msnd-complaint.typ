@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // no local rule sets a complaint typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // no local rule sets a complaint typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // the memorandum rule (L.U.Civ.R. 7(b)(5)(B)) is the court's only typeface rule; used here too
 #let page-w = 8.5in                     // 8 1/2 by 11 inch paper (L.U.Civ.R. 7(b)(5)(A), applied for consistency)
 #let page-h = 11in

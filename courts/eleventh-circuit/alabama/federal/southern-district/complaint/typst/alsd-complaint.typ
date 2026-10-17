@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Gen. L.R. 5(a)(2): plain roman font; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // Gen. L.R. 5(a)(2): plain roman font; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // Gen. L.R. 5(a)(2): 12 point or larger, footer included
 #let body-leading = 1.345em             // Gen. L.R. 5(a)(1): double-spaced text; measured as 24 pt baseline pitch at 12 pt (CAND template, same font)
 #let single-leading = 0.495em            // headings, caption, counsel and signature lines may be single-spaced

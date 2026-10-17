@@ -4,11 +4,13 @@ mod check;
 mod diff;
 mod diffselftest;
 mod fetch;
+mod fonts;
 mod lint;
 mod manifest;
 mod matchstamp;
 mod measure;
 mod readmes;
+mod render;
 mod track;
 mod tracker;
 
@@ -24,13 +26,15 @@ fn main() -> ExitCode {
         "manifest" => manifest::main(rest),
         "tracker" => track::main(rest),
         "readmes" => readmes::main(rest),
+        "render" => render::main(rest),
         "diff" => diff::main(rest),
         "measure" => measure::main(rest),
         "diff-selftest" => diffselftest::main(rest),
         "fetch" => fetch::main(rest),
+        "fonts" => fonts::main(rest),
         "lint" => lint::main(rest),
         "match-stamp" => matchstamp::main(rest),
-        _ => Err(fail(2, "usage: fb check|manifest|tracker|readmes|measure|diff|fetch|lint|match-stamp|diff-selftest ...")),
+        _ => Err(fail(2, "usage: fb check|render|fonts|manifest|tracker|readmes|measure|diff|fetch|lint|match-stamp|diff-selftest ...")),
     };
     result.unwrap_or_else(|e| {
         eprintln!("{}", e.msg);

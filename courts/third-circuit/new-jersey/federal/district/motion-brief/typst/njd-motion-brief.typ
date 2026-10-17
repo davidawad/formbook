@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // NJD-FORM-002: Times New Roman 14 pt is the rule's reference face; Liberation Serif is its metric-compatible substitute (docs/FONTS.md)
+#let font-family = ("Times New Roman", "Liberation Serif")    // NJD-FORM-002: Times New Roman 14 pt is the rule's reference face; Liberation Serif is its metric-compatible substitute (docs/FONTS.md)
 #let type-size = 14pt                    // NJD-FORM-002: 14-point proportional type (L.Civ.R. 7.2(d)); no 25% page-limit reduction applies
 #let pitch = 28.3pt                      // NJD-FORM-003: double spacing, measured in the Karre exemplar (28.3 pt at 14 pt)
 #let body-leading = 1.114em              // gap between lines of body text; tuned so the line pitch is `pitch` (Liberation Serif, see README.md)

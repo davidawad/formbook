@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (SIL OFL); render.sh compiles with vendored fonts only
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (SIL OFL); render.sh compiles with vendored fonts only
 #let type-size = 12pt              // no bankruptcy-court type rule for complaints; 12 pt is the LR 9013-2(a) floor for briefs
 #let page-w = 8.5in                // letter paper (convention; the local rules are silent on paper size)
 #let page-h = 11in

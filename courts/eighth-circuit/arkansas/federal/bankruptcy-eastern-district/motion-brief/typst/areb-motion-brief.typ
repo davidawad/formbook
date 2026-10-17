@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a convention)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // convention: vendored serif (no system fonts)
+#let font-family = ("Times New Roman", "Liberation Serif")          // convention: vendored serif (no system fonts)
 #let type-size = 12pt                      // AREB-FORM-004 (convention): no rule sets a size
 #let body-leading = 1.2em                  // convention: about double spacing for body text
 #let single-leading = 0.45em               // caption, counsel block, signature, quotations

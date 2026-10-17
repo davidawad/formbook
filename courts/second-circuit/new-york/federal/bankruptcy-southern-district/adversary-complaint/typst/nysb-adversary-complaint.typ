@@ -10,7 +10,7 @@
 // Parameters (each traces to a rule, the exemplar, or a stated convention; see README.md)
 // ---------------------------------------------------------------------------
 #let court-name = ("UNITED STATES BANKRUPTCY COURT", "SOUTHERN DISTRICT OF NEW YORK")  // Form 416D; Fed. R. Bankr. P. 9004(b)
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; the exemplar is Times New Roman. No font rule in LBR 9004-1 (README.md)
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; the exemplar is Times New Roman. No font rule in LBR 9004-1 (README.md)
 #let type-size = 12pt                   // exemplar: 12 pt (measured); LBR 9004-1 is adapted from Civil Rule 11.1 (README.md)
 #let body-leading = 1.645em             // double spacing: Liberation Serif line box 0.655em + 1.645em = 2.3em = 27.6 pt, the exemplar's pitch
 #let single-leading = 0.5em             // single spacing for counsel, caption, footnotes and signature (about 13.8 pt)

@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"     // DUCivR 10-1(3): clearly legible; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")     // DUCivR 10-1(3): clearly legible; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                     // DUCivR 10-1(3) and LBR 5005-3(a)(4): minimum 12 point
 #let pitch = 24pt                         // DUCivR 10-1(4): double-spaced; a 24 pt baseline pitch at 12 pt
 #let body-leading = 1.345em               // Liberation Serif's line box is 0.655em (measured), so 1.345em leading = 24 pt pitch

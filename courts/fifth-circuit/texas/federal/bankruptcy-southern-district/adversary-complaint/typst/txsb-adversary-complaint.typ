@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // no typeface is set by the S.D. Tex. rules; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // no typeface is set by the S.D. Tex. rules; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // no point size is set by the S.D. Tex. rules; 12 pt is the usual minimum
 #let page-w = 8.5in                     // LR10.2: 8 1/2 by 11 inch paper
 #let page-h = 11in

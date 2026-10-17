@@ -15,7 +15,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif" // District LR 5.1 names no face; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif") // District LR 5.1 names no face; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 14pt              // District LR 5.1(C): at least 14-point font
 #let body-leading = 1.65em         // District LR 5.1(C): double spaced (baseline pitch about 32 pt at 14 pt)
 #let single-leading = 0.45em       // caption, counsel block, signature block

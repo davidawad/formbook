@@ -72,7 +72,7 @@
       if here().page() > 1 { align(center, text(size: 14pt, counter(page).display())) }
     },
   )
-  set text(font: "Liberation Serif", size: 14pt, lang: "en")
+  set text(font: ("Times New Roman", "Liberation Serif"), size: 14pt, lang: "en")
   set par(leading: body-leading, first-line-indent: 0.5in, justify: false)
   show footnote.entry: set text(size: 12pt)
   show footnote.entry: set par(leading: single-leading, first-line-indent: 0pt)

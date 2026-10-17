@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"         // No EDNY rule names a face (NYED-FORM-002); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")         // No EDNY rule names a face (NYED-FORM-002); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                    // NYED-FORM-002: LCR 7.1(b)(1), 12-point type or larger.
 #let line-pitch = 24pt                   // NYED-FORM-003: LCR 7.1(b)(3), double-spaced body text.
 #let body-leading = line-pitch - 0.909em // Gap between body lines: text edges are ascender/descender (below), a 0.909em line box in Liberation Serif, so the baseline pitch is line-pitch (double spacing).

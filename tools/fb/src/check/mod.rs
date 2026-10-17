@@ -228,6 +228,25 @@ fn sample(c: &Ctx, sid: &str, t: &mut Tally) -> Res<()> {
     let gates = [("0", "CONTENT"), ("1", "RULES"), ("2", "VISUAL REVIEW")];
     for (g, title) in gates {
         out(&format!(" GATE {g} {title}\n"));
+        if g == "1" && times_exemplar(c)? {
+            let fonts = std::fs::read_to_string(format!("{}/fonts.txt", s.w))
+                .map_err(|e| io_fail(&format!("{}/fonts.txt", s.w), e))?;
+            let found = fonts.lines().skip(2).any(|line| {
+                let name = line.split_whitespace().next().unwrap_or("");
+                name.rsplit_once('+').map_or(name, |(_, n)| n) == "TimesNewRomanPSMT"
+            });
+            if found {
+                out("  PASS TNR-EMBEDDED: TimesNewRomanPSMT is embedded\n");
+                t.pass += 1;
+                append(&f(".tally"), "P\n")?;
+            } else {
+                out("  FAIL TNR-EMBEDDED: TimesNewRomanPSMT is not embedded\n");
+                t.fail += 1;
+                t.fails_sample += 1;
+                append(&f(".tally"), "F\n")?;
+                append(&f(".fails_sample"), "F\n")?;
+            }
+        }
         run_checks(c, &s, g, t)?;
     }
     t.fails += t.fails_sample;
@@ -239,6 +258,11 @@ fn sample(c: &Ctx, sid: &str, t: &mut Tally) -> Res<()> {
         run_checks(c, &s, "3", t)?;
     }
     Ok(())
+}
+
+/// True when a metric-exact Times exemplar is recorded for this document type.
+fn times_exemplar(c: &Ctx) -> Res<bool> {
+    crate::fonts::has_times_exemplar(std::path::Path::new(&c.root), std::path::Path::new(&c.doc))
 }
 
 /// The verdict of one check row: (pass, measured, detail).

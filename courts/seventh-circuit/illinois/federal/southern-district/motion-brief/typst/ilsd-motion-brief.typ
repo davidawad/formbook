@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"       // Times New Roman substitute per docs/FONTS.md, vendored in /fonts; no system font can be used (tools/render.sh)
+#let font-family = ("Times New Roman", "Liberation Serif")       // Times New Roman substitute per docs/FONTS.md, vendored in /fonts; no system font can be used (tools/render.sh)
 #let type-size = 12pt                  // ILSD-FORM-002: "12-point font" (SDIL-LR 7.1(a)(3)); footnotes too
 #let body-leading = 16.14pt            // gap between lines of body text; with the natural line height of Liberation Serif 12 pt (0.655em, 7.86 pt) the pitch is 24 pt, double spacing (SDIL-LR 7.1(a)(3))
 #let single-leading = 6.14pt           // single spacing: 7.86 pt natural + 6.14 pt is a 14 pt pitch. Caption, signature, certificate, footnotes.

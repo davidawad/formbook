@@ -4,8 +4,7 @@
 % the vendored EB Garamond, through the pandoc variable fontdir (no system fonts). See ../README.md, "Engines".
 \documentclass[14pt,letterpaper]{extarticle}
 \usepackage{fontspec}
-\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf, UprightFont=EBGaramond-Regular, ItalicFont=EBGaramond-Italic,
-  BoldFont=EBGaramond-Bold, BoldItalicFont=EBGaramond-BoldItalic, Ligatures=TeX]{EBGaramond-Regular}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 \usepackage[letterpaper,margin=1in,footskip=0.3in]{geometry}
 \usepackage{indentfirst}   % every paragraph is indented, as in the typst form
 \usepackage{etoolbox}      % lists of page numbers for the table of authorities

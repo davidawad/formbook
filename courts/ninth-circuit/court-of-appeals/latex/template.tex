@@ -25,10 +25,7 @@
 
 % CA9-FORM-004: a proportionally spaced serif face, 14 pt or larger. Vendored in fonts/eb-garamond/.
 % font-family: EB Garamond. The renderer passes fontdir (the vendored fonts/ directory, trailing slash).
-\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf,
-  UprightFont=EBGaramond-Regular, BoldFont=EBGaramond-Bold,
-  ItalicFont=EBGaramond-Italic, BoldItalicFont=EBGaramond-BoldItalic,
-  Ligatures=TeX]{EBGaramond-Regular}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 
 % Sizes are in big points (bp, the unit of the PDF's coordinates): 14 bp = 14 TeX pt is not the same length.
 \newcommand\ca@type{\fontsize{14bp}{28bp}\selectfont}  % type-size: 14 pt, body-leading: double (28 pt)

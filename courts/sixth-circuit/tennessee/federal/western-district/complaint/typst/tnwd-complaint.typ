@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to the word-processor double spacing; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"  // vendored (fonts/liberation-serif); the W.D. Tenn. e-filing manual allows Times New Roman (README.md, typeface row)
+#let font-family = ("Times New Roman", "Liberation Serif")  // vendored (fonts/liberation-serif); the W.D. Tenn. e-filing manual allows Times New Roman (README.md, typeface row)
 #let type-size = 12pt                  // LR 7.1(b): no smaller than 12 point, footnotes included
 #let page-w = 8.5in                    // LR 7.1(a): 8 1/2 by 11 inch white paper
 #let page-h = 11in

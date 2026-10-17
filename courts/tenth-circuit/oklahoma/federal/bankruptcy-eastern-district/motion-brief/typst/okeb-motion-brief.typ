@@ -13,7 +13,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                    // LBR 9004-1(A): no less than 12 point, footnotes included
 #let page-margin = 1in                   // LBR 9004-1(A): margins no less than one inch
 #let double-leading = 1.65em             // LBR 9004-1(A): briefs double spaced; 27.6 pt baseline pitch

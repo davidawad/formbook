@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // Not fixed by the LBR; the repo vendors this font. See README.md.
+#let font-family = ("Times New Roman", "Liberation Serif")         // Not fixed by the LBR; the repo vendors this font. See README.md.
 #let type-size = 13pt                    // MTB-FORM-002: at least 12 point. 13 pt because EB Garamond sets smaller than Times.
 #let line-pitch = 24pt                   // MTB-FORM-003: double spacing. 27 lines per page at these margins.
 #let body-leading = 0.54em               // gap between body lines; tuned so the line pitch is line-pitch.

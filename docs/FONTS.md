@@ -1,21 +1,29 @@
 # Fonts policy
 
-Every template compiles with the vendored fonts in `fonts/` and nothing else. A court's rules name a typeface; this file says which vendored family stands in for it.
+Every template compiles with the vendored fonts in `fonts/`, plus the one pinned Times New Roman directory where required. A court's rules name a typeface; this file says which installed or vendored family the template uses.
 
 ## Rules
 
-1. **Vendored only.** Only fonts with an open licence that permits redistribution live in `fonts/`, each family in its own folder with its licence text beside the files.
-2. **System fonts are never used.** Typst runs as `typst compile --font-path fonts --ignore-system-fonts` (`tools/render.sh`, `tools/render-latex.sh`, and the docx path). A missing font is an error, not a silent fallback. Any typst warning fails the render.
-3. **Court-named faces map to a free equivalent** (substitution table below). A template whose court rules name a face uses that face's substitute. A court that names no face gets Liberation Serif, the Times New Roman substitute (David, 2026-10-17: the default text face is Times New Roman, which cannot be vendored). EB Garamond is used only where a court's rules name Garamond.
+1. **Vendored or pinned licensed install.** Fonts with an open licence that permits redistribution live in `fonts/`, each family in its own folder with its licence text beside the files. Times New Roman is the exception: it is licensed and installed separately on the build box, never committed; renders may add only the pinned directory `/System/Library/Fonts/Supplemental` (macOS) or `/usr/share/fonts/truetype/msttcorefonts` (Linux). The exact installed font is asserted in Gate 1.
+2. **Unpinned system fonts are never used.** Typst runs with `--ignore-system-fonts` and explicit font paths: `fonts/` and, for Times New Roman, exactly one platform path listed in rule 1. A missing font is an error, not a silent fallback. Any typst warning fails the render.
+3. **Court-named faces map to the approved face** (substitution table below). A template whose court rules name a face uses that face's approved choice. A Times exemplar uses Times New Roman first and Liberation Serif as fallback. Other court-named faces use their listed substitute. A court that names no face gets Liberation Serif. EB Garamond is used only where a court's rules name Garamond.
 4. **The embedded font names are asserted** (`pdffonts`, per `docs/EVAL-LOOP.md` R3). A template that embeds anything outside the family it declares is meant to fail Gate 1.
 5. **No font is modified.** Renaming and reserved-name clauses in the licences only bite on modified versions; none are made here.
+
+Times New Roman Typst renders go through the Rust renderer so it can add the pinned platform directory while retaining `--ignore-system-fonts`:
+
+```sh
+cargo run -q --manifest-path tools/fb/Cargo.toml -- render <doc-type-dir> samples/INPUT-<id>.md
+```
+
+`tools/check.sh` routes its Typst render through the same Rust path. For LaTeX, templates select Times New Roman when fontspec finds the installed family and fall back to Liberation Serif otherwise; the Gate 1 font assertion rejects a fallback render for a Times exemplar.
 
 ## Vendored families
 
 | Folder | Faces | Licence (text in folder) | Upstream | Used for |
 |---|---|---|---|---|
 | `fonts/eb-garamond/` | Regular, Italic, Bold, BoldItalic (`.otf`) | SIL OFL 1.1 (`OFL.txt`) | EB Garamond, Octavio Pardo et al. | Garamond requirements only (a court rule that names Garamond) |
-| `fonts/liberation-serif/` | Regular, Italic, Bold, BoldItalic (`.ttf`) | SIL OFL 1.1 (`OFL.txt`) | Liberation Fonts 2.1.5, <https://github.com/liberationfonts/liberation-fonts> (Google, Red Hat) | Default text face (no face named: Times New Roman substitute); Times New Roman requirements |
+| `fonts/liberation-serif/` | Regular, Italic, Bold, BoldItalic (`.ttf`) | SIL OFL 1.1 (`OFL.txt`) | Liberation Fonts 2.1.5, <https://github.com/liberationfonts/liberation-fonts> (Google, Red Hat) | Default text face (no face named); fallback for Times New Roman |
 | `fonts/tex-gyre-schola/` | Regular, Italic, Bold, BoldItalic (`.otf`) | GUST Font License, an LPPL-equivalent (`GUST-FONT-LICENSE.txt`) | TeX Gyre Schola 2.609 (31 Mar 2026), GUST e-foundry, <https://www.gust.org.pl/projects/e-foundry/tex-gyre/schola> | Century Schoolbook requirements |
 | `fonts/tex-gyre-termes/` | Regular, Italic, Bold, BoldItalic (`.otf`) | GUST Font License (`GUST-FONT-LICENSE.txt`) | TeX Gyre Termes 2.609, GUST e-foundry, <https://www.gust.org.pl/projects/e-foundry/tex-gyre/termes> | Times alternate |
 | `fonts/tex-gyre-pagella/` | Regular, Italic, Bold, BoldItalic (`.otf`) | GUST Font License | TeX Gyre Pagella 2.609, <https://www.gust.org.pl/projects/e-foundry/tex-gyre/pagella> | Palatino / Book Antiqua requirements |
@@ -47,11 +55,11 @@ Court requirement → vendored family. The rule column is the primary source for
 | Century family, 12-pt, booklet format (SCOTUS) | Rules of the Supreme Court of the United States, Rule 33.1(b), <https://www.law.cornell.edu/rules/supct/rule_33> (text: "typeset in Century family (e.g., Century Expanded, New Century Schoolbook, or Century Schoolbook) 12-point type") | **TeX Gyre Schola** | Upstream README: glyph widths are consistent with the Adobe base-35 New Century Schoolbook AFMs (`ncr`, `ncb`, `nci`, `ncbi`). A real Century Schoolbook clone, not the original font. |
 | Century Schoolbook / New Century Schoolbook (named by a court) | Court rule | **TeX Gyre Schola** | As above. |
 | Century Expanded (named by a court) | Court rule | **TeX Gyre Schola** (visual stand-in) | Visual only. See "Century Expanded" below. |
-| Times New Roman, 14-pt, proportional (PTAB) | 37 C.F.R. § 42.6(a)(2)(ii), <https://www.law.cornell.edu/cfr/text/37/42.6> ("14-point, Times New Roman proportional font, with normal spacing, must be used") | **Liberation Serif** | Upstream README: the family "aims to provide document layout compatibility" with Times New Roman. Designed as a metric-compatible substitute; not checked here against a Times New Roman file, since none is on this box. |
-| Times / Times New Roman (named by a court, any other rule) | Court rule | **Liberation Serif** | As above. |
+| Times New Roman, 14-pt, proportional (PTAB) | 37 C.F.R. § 42.6(a)(2)(ii), <https://www.law.cornell.edu/cfr/text/37/42.6> ("14-point, Times New Roman proportional font, with normal spacing, must be used") | **Times New Roman**, Liberation Serif fallback | Primary font is the licensed Microsoft font installed separately on build boxes; Gate 1 requires embedded `TimesNewRomanPSMT`. |
+| Times / Times New Roman (named by a court, any other rule; or exemplar uses Times) | Court rule or exemplar audit | **Times New Roman**, Liberation Serif fallback | Primary font is the licensed Microsoft font installed separately on build boxes; Gate 1 requires embedded `TimesNewRomanPSMT`. |
 | Garamond (named by a court) | Court rule | **EB Garamond** | Not metric-compatible with any commercial Garamond. Line breaks, page count and length limits will differ from a filing set in a commercial Garamond; check the length gate against the rule's limit, not against a filed sample. |
 | Palatino / Book Antiqua (named by a court) | Court rule | **TeX Gyre Pagella** | Visual only. |
-| No face named (the usual case) | — (default text face is Times New Roman, David 2026-10-17) | **Liberation Serif** | Metric-compatible with Times New Roman, as above. |
+| No face named (the usual case) | — | **Liberation Serif** | Metric-compatible with Times New Roman. |
 
 A court's rule text decides the requirement; this table only says which vendored family stands in. If a rule names a face not in the table, add a row here in the same change as the template, with the rule cited.
 
@@ -63,8 +71,8 @@ The Typst name is exactly what a template passes to `font:`; the first five rows
 
 | Court-named face | Substitute (Typst family name) | Folder under `fonts/` | Licence | Fit |
 |---|---|---|---|---|
-| Times New Roman, Times | `Liberation Serif` (primary) | `liberation-serif/` | SIL OFL 1.1 | Metric-compatible |
-| Times New Roman, Times (alternate) | `TeX Gyre Termes` | `tex-gyre-termes/` | GUST FL | Visual (Times clone, URW Nimbus Roman lineage) |
+| Times New Roman, Times | `Times New Roman` (primary), `Liberation Serif` (fallback) | pinned system install; `liberation-serif/` | proprietary install; SIL OFL 1.1 | Primary exact; fallback metric-compatible |
+| Times New Roman, Times (alternate visual substitute) | `TeX Gyre Termes` | `tex-gyre-termes/` | GUST FL | Visual (Times clone, URW Nimbus Roman lineage) |
 | Century Schoolbook, New Century Schoolbook, "Century family" | `TeX Gyre Schola` | `tex-gyre-schola/` | GUST FL | Metric-compatible with the Adobe base-35 New Century Schoolbook AFMs |
 | Century Expanded | `TeX Gyre Schola` | `tex-gyre-schola/` | GUST FL | Visual only |
 | Georgia | `Gelasio` | `gelasio/` | SIL OFL 1.1 | Metric-compatible (designed as a Georgia match) |
@@ -79,7 +87,7 @@ The Typst name is exactly what a template passes to `font:`; the first five rows
 | Tahoma | `DejaVu Sans` | `dejavu-sans/` | Bitstream Vera / DejaVu licence (check the folder) | Visual fallback only; NOT metric-compatible, so pagination may differ. See `fonts/TAHOMA-NOTE.md` |
 | Equity (Butterick) | `Liberation Serif` (alternate `TeX Gyre Termes`) | not vendorable | commercial | Visual only; see below |
 | Garamond | `EB Garamond` | `eb-garamond/` | SIL OFL 1.1 | Visual only |
-| No face named (default: Times New Roman) | `Liberation Serif` | `liberation-serif/` | SIL OFL 1.1 | Metric-compatible |
+| No face named (default: Liberation Serif unless exemplar is Times) | `Liberation Serif` | `liberation-serif/` | SIL OFL 1.1 | Metric-compatible |
 
 ### Century Expanded
 

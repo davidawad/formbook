@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"          // CA3-FORM-004: serif, proportional; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // CA3-FORM-004: serif, proportional; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // CA3-FORM-004: 14-point or larger, everywhere (FRAP 32(a)(5)(A)).
 #let body-leading = 1.336em                // CA3-FORM-003: FRAP 32(a)(4): double-spaced. With the ascender-to-descender line box set below
                                            // (0.909em in Liberation Serif) the baseline pitch is 2.245em = 31.4 pt at 14 pt.

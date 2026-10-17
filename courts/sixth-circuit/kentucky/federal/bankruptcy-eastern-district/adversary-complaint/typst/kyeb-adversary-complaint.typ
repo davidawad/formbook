@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // KYEB-FORM-001: no E.D. Ky. bankruptcy rule sets a typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")    // KYEB-FORM-001: no E.D. Ky. bankruptcy rule sets a typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                    // KYEB-FORM-001: a legible size (FRBP 9004(a)); 12 pt, the usual floor (Times New Roman substitute, docs/FONTS.md).
 #let line-pitch = 24pt                   // KYEB-FORM-003: double spacing for the body (a convention, see ../README.md).
 #let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.

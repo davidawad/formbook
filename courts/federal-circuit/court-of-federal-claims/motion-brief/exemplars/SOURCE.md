@@ -22,3 +22,7 @@
 - Pages: 92. Text layer: yes on every page (Word to PDF, "Acrobat PDFMaker 24 for Word"); `pdffonts` shows Times New Roman in the brief; the appendix carries the agreement's own fonts (Calibri, Arial).
 - SHA-256: `09cc7ffb80fefe84d31171ea50d59534e6ed9e7350be98c4b7e8e0c396850ca6`
 - Doc-type note: a motion to dismiss, not a motion for judgment on the administrative record. Both are RCFC 7.2(b) dispositive motions whose supporting brief follows RCFC 5.4 and 5.5, so the form comparison (caption, cover, tables, headings, signature) carries over; the RCFC 52.1(c) statement of facts does not.
+
+## Replacement for the audited scanned exemplar
+
+The audited `FILED-EXAMPLE-oracle-18-1880C-motion-brief.pdf` (scanned pages with an OCR text layer) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-united-states-26-458-motion-brief.pdf`. See Exemplar 2 above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

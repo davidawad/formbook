@@ -22,3 +22,9 @@ Both are publicly released FISC filings posted by the court at fisc.uscourts.gov
 - Date filed: September 30, 2013 (dated line and certificate of service; the scan's received stamp reads "SEP 30 2013")
 
 Search: the court's public-filings index (fisc.uscourts.gov/public-filings, pages 0-17) lists 354 PDFs. The 90 that are motions, responses or related filings from 2007-2025 were downloaded and tested with pdftotext for a text layer (about 40 of the 90 have one); image-only scans were skipped. The four motions first tried (2023 and 2024 government and movant motions) are image-only. Among the motions with text, these two are chosen as the two exemplars: a government motion (2020) and a private-party motion (2013), covering two filer conventions. Other text-bearing motions (e.g. the 2013 Provider Rule 62 motion, Misc. 13-xx and BR 14-01 government motions) are alternates.
+
+## Selected font-audit replacement — In re Accuracy Concerns
+
+The Yahoo motion is flagged in the font audit as having no text layer. The saved Accuracy Concerns motion is the selected same-court, same-document-type text-layer replacement: it is a public FISC motion, and its five-page PDF has an OCR text layer (`pdftotext` extracts 1,051 words). Its scanned page images use Times-family text; the searchable OCR uses HiddenHorzOCR. The full filing metadata is recorded above. The Yahoo filing remains archived with its original sample; rebuild that sample against Accuracy Concerns before treating this as a sample substitution.
+
+SHA-256 of the selected replacement PDF: `712774805dd9022badd2de88ad1572a045bdb80f08b3868a6701eba8c9d7e4d8`.

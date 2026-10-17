@@ -4,7 +4,7 @@
 // YAML frontmatter of the same file (fields listed in ../README.md).
 #import "@preview/cmarker:0.1.10"
 
-#let font-family = "EB Garamond"   // vendored in fonts/. No N.D. Iowa rule names a font (README, gap 1).
+#let font-family = ("Times New Roman", "Liberation Serif")   // vendored in fonts/. No N.D. Iowa rule names a font (README, gap 1).
 #let type-size = 13pt              // EB Garamond at 13 pt sets close to Times 12 pt (README, gap 2).
 #let body-leading = 1.2em          // double-spaced body text (README, gap 3).
 #let para-indent = 0.5in

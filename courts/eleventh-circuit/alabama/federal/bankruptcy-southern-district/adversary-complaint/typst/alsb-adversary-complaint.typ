@@ -15,7 +15,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // no S.D. Ala. type rule; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")    // no S.D. Ala. type rule; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                    // Convention: 12 pt, the size of the filed exemplars (no rule sets a size).
 #let body-leading = 1.345em              // Gap between lines of body text; 0.655em line box + 1.345em = 24 pt pitch, double-spaced.
 #let single-leading = 0.495em            // Caption, headings, signature block, footnotes: single spacing, 0.655em line box + 0.495em = 1.15em pitch.

@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see ../README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // General L.R. 5(a)(6): proportional serif; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // General L.R. 5(a)(6): proportional serif; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                   // General L.R. 5(a)(6)(A): 12-point or larger
 #let page-w = 8.5in                     // General L.R. 5(a)(5): 8½ by 11 inch paper
 #let page-h = 11in

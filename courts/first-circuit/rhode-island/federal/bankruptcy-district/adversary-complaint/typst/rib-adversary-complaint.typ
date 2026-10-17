@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"          // Times New Roman substitute per docs/FONTS.md, vendored in fonts/liberation-serif; no system font is used
+#let font-family = ("Times New Roman", "Liberation Serif")          // Times New Roman substitute per docs/FONTS.md, vendored in fonts/liberation-serif; no system font is used
 #let type-size = 12pt                     // LBR 1005-1(b): text at least 11 point
 #let footnote-size = 10pt                 // LBR 1005-1(b): footnotes at least 10 point
 #let body-leading = 1.345em               // LBR 1005-1(b): double spaced. The Liberation Serif line box is 0.655em, so 2em = 24 pt pitch at 12 pt

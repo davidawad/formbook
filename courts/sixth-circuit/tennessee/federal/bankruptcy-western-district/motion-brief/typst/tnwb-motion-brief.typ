@@ -12,7 +12,7 @@
 // or is a stated choice in ../README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // TNWB-FORM-001: serif; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")     // TNWB-FORM-001: serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                      // TNWB-FORM-001: exemplar convention (12 pt)
 // Line pitch = natural line height (about 7.8 pt for this face at 12 pt) + leading.
 #let body-leading = 1.345em                // double spacing: 24 pt baseline pitch

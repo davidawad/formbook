@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/ (the only serif face vendored here)
+#let font-family = ("Times New Roman", "Liberation Serif")        // vendored in fonts/ (the only serif face vendored here)
 #let type-size = 13pt                   // EB Garamond at 13 pt has about the x-height of Times New Roman at 12 pt (the Johnson exemplar)
 #let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 1.35em leading gives about 2 lines of pitch
 #let single-leading = 0.5em             // counsel, caption and signature: single spaced

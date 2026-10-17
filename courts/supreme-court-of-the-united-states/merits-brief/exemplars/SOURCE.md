@@ -33,5 +33,9 @@ Only one exemplar is held for this doc type. A second filer's merits brief (a re
 - Filer: Petitioners Loper Bright Enterprises et al., by Paul D. Clement, Counsel of Record (Clement & Murphy, PLLC), with Cause of Action Institute
 - Date filed: 2023-07-17 (docket entry date; date on the cover)
 - URL: https://www.supremecourt.gov/DocketPDF/22/22-451/272199/20230717152715108_2023-07-17%20Loper%20Bright%20Opening%20Brief%20FINAL.pdf (docket: https://www.supremecourt.gov/RSS/Cases/JSON/22-451.json)
+
+## Selected replacement
+
+The United States merits brief is flagged for Century Expanded BT. The saved Loper Bright petitioner merits brief is a same-court, same-document-type alternative with an extractable text layer and Century Schoolbook, consistent with the Court's booklet typography. Its filer differs from the United States, and the existing United States sample remains paired with its source.
 - Date retrieved: 2026-10-17
 - sha256: 893d935b37fa60ea71b07a518c8e3b5963746983056dc0a1275aff695bfa861b

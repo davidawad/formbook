@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a named layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // LR 9004-1.A: a standard font; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // LR 9004-1.A: a standard font; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // LR 9004-1.A: no less than 12 point, footnotes included
 #let page-margin = 1in                  // LR 9004-1.A: margins no less than one inch
 #let body-leading = 0.893em             // LR 9004-1.A: double spaced; Liberation Serif line box 1.107em (hhea ascender to descender) + 0.893em = 24 pt pitch at 12 pt

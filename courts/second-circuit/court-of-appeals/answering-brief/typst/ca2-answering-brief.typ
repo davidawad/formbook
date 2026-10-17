@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"          // CA2-FORM-005: serif, proportional; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // CA2-FORM-005: serif, proportional; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // CA2-FORM-005: 14-point or larger, everywhere.
 #let body-leading = 1.336em                // CA2-FORM-004: Liberation Serif's ascender-to-descender box (0.909em, set below)
                                            // plus this leading gives a 2.245em baseline pitch (31.4 pt at 14 pt), about 2.2 x type size (double spacing).

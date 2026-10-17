@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // CA11-FORM-003: serif, proportional; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")     // CA11-FORM-003: serif, proportional; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                      // CA11-FORM-003: 14-point or larger, everywhere (FRAP 32(a)(5)(A)).
 #let body-leading = 1.336em                // CA11-FORM-004: double spacing (about 2.2 x type size baseline pitch).
 #let single-leading = 0.516em              // CA11-FORM-005: quotations, headings, footnotes, cover, TOC/TOA

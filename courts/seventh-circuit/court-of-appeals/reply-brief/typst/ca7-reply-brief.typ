@@ -15,7 +15,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"          // Serif, proportionally spaced (FRAP 32(a)(5)(A)); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // Serif, proportionally spaced (FRAP 32(a)(5)(A)); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                      // CA7-FORM-005: 12 points or larger in the body (Cir. R. 32(b)).
 #let note-size = 11pt                      // CA7-FORM-005: 11 points or larger in footnotes (Cir. R. 32(b)).
 #let body-leading = 1.396em                // CA7-FORM-004: double-spaced (FRAP 32(a)(4)): 27.7 pt baseline pitch on the 12 pt body (README, visual review): 0.909em Liberation Serif ascender-to-descender box + 1.396em.

@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a named layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LR 5.2.a: a serif font. Vendored in fonts/.
+#let font-family = ("Times New Roman", "Liberation Serif")        // LR 5.2.a: a serif font. Vendored in fonts/.
 #let type-size = 12pt                   // LR 5.2.a: 12-point type or larger, footnotes included.
 #let pitch = 24pt                       // LR 5.2.a: double spacing; the numbered lines are this pitch.
 #let page-w = 8.5in                     // LR 5.2.a: 8.5 x 11 inch paper.

@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // Vendored in /fonts; the only face a render may use.
+#let font-family = ("Times New Roman", "Liberation Serif")          // Vendored in /fonts; the only face a render may use.
 #let type-size = 12pt                      // CFC-FORM-002: text and footnotes no smaller than 12 point.
 #let page-margin = 1in                     // CFC-FORM-003: margins not less than 1 inch on each side.
 #let para-indent = 0.5in                   // Style: first-line indent of numbered paragraphs.

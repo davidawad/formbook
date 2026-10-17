@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"          // FRAP 32(a)(5): proportionally spaced serif; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // FRAP 32(a)(5): proportionally spaced serif; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // FRAP 32(a)(5)(A): 14-point or larger, text and footnotes (L.A.R. 32.2(a)).
 #let body-leading = 1.336em                // FRAP 32(a)(4): double-spaced text. With the ascender-to-descender line box set below
                                            // (0.909em in Liberation Serif) the baseline pitch is 2.245em = 31.4 pt at 14 pt.

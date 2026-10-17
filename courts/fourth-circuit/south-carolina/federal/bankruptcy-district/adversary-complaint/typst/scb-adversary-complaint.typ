@@ -11,7 +11,7 @@
 // Parameters (each traces to a rule or a named style choice; see README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"        // No SC bankruptcy rule names a typeface; Times New Roman substitute per docs/FONTS.md, vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")        // No SC bankruptcy rule names a typeface; Times New Roman substitute per docs/FONTS.md, vendored in /fonts.
 #let type-size = 12pt                   // no SC bankruptcy rule sets a size; the 12 pt convention (docs/FONTS.md)
 #let pitch = 24pt                       // double spacing: the line pitch of body text
 #let body-leading = pitch - 1.15em     // body lines fall on the pitch: the text runs in a 1.15em line box (top-edge 0.9em, bottom-edge -0.25em)

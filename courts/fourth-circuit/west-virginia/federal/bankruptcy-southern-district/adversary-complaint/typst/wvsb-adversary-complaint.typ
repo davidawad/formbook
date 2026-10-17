@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"         // WVSB-FORM-002: no rule names a typeface (see ../README.md); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")         // WVSB-FORM-002: no rule names a typeface (see ../README.md); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                    // WVSB-FORM-002: no rule sets a size; the 12 pt convention (docs/FONTS.md).
 #let line-pitch = 24pt                   // WVSB-FORM-003: double spacing, as in the exemplar.
 #let body-leading = line-pitch - 1.15em // gap between lines of body text: the text runs in a 1.15em line box (top-edge 0.9em, bottom-edge -0.25em), so the line pitch is line-pitch.

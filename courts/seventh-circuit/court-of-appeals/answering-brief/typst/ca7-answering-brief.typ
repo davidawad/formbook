@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"          // Serif, proportional; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // Serif, proportional; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                      // CA7-FORM-004: 12-point text (Cir. R. 32(b)).
 #let footnote-size = 11pt                  // CA7-FORM-005: 11-point footnotes (Cir. R. 32(b)).
 #let body-leading = 1.336em                // CA7-FORM-003: with the ascender-to-descender line box set below (0.909em in

@@ -7,7 +7,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // L.R. 9014-1(a) names 12 pt for the notice; the body is set at the same size
 #let margin = 1in                       // convention; the exemplar's margins are about one inch
 #let body-leading = 1.345em             // double spacing (about 24 pt pitch at 12 pt)

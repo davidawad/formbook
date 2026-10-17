@@ -23,10 +23,7 @@
 % ---------------------------------------------------------------------------
 
 % FRAP 32(a)(5)(A): a proportionally spaced serif face, 14 point or larger. Vendored in fonts/eb-garamond/.
-\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf,
-  UprightFont=EBGaramond-Regular, BoldFont=EBGaramond-Bold,
-  ItalicFont=EBGaramond-Italic, BoldItalicFont=EBGaramond-BoldItalic,
-  Ligatures=TeX]{EBGaramond-Regular}
+\IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{\setmainfont{Liberation Serif}}
 
 % Sizes are in big points (bp, the unit of the PDF's coordinates; typst's pt is the same unit).
 % Body: 14 pt with double spacing (FRAP 32(a)(4)): the baseline pitch is body_pitch (31.43 bp for 0.94em).

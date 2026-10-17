@@ -14,7 +14,7 @@
 // Parameters (each traces to a rule or a named style choice; see ../README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"        // NYSD-FORM-002: the joint rules name no typeface; Times New Roman substitute per docs/FONTS.md. See README gaps.
+#let font-family = ("Times New Roman", "Liberation Serif")        // NYSD-FORM-002: the joint rules name no typeface; Times New Roman substitute per docs/FONTS.md. See README gaps.
 #let type-size = 12pt                    // NYSD-FORM-002: 12-point type or larger, footnotes included (Local Civ. R. 7.1(b)(1) allows 10 pt footnotes; this uses 12).
 #let body-leading = 1.091em              // NYSD-FORM-003: double-spaced (Local Civ. R. 7.1(b)(3)); text edges are ascender/descender (below), a 0.909em
                                          // line box in Liberation Serif, so 0.909em + 1.091em = 2.0em = a 24 pt pitch at 12 pt, also between paragraphs.

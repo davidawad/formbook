@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"     // CTD-FORM-003: the rules name no font (see README); Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")     // CTD-FORM-003: the rules name no font (see README); Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                // CTD-FORM-002: 12-point text (L.R. 7(a)(5) for memoranda; Rule 10 is silent for pleadings)
 #let line-pitch = 27.6pt             // CTD-FORM-001: double spacing = 2 x 13.8 pt, the single line of 12 pt Times in Word (the exemplar measures 27.6 pt)
 #let body-leading = 1.645em          // gap between lines; with Liberation Serif's line box (0.655 em) it gives line-pitch (measured, README)

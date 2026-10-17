@@ -10,6 +10,10 @@
 - Fetched from: `https://storage.courtlistener.com/recap/gov.uscourts.ohsd.312810/gov.uscourts.ohsd.312810.1.0.pdf` (RECAP). The docket HTML page is blocked for this box (CloudFront 403); the RECAP file path came from the CourtListener search API (`/api/rest/v4/search/?court=ohsd&type=r`), field `filepath_local`.
 - Date fetched: 2026-10-14
 - Text layer: yes (`pdftotext` yields text; Paper Capture OCR, Garamond fonts embedded)
+
+## Font-audit replacement candidate (not downloaded)
+
+The Doe PDF is flagged for Garamond. A possible same-court, same-document-type text-layer replacement is *Thomas v. Wayner*, No. 2:26-cv-00734, Doc. 1, filed June 16, 2026 (14 pages), available at https://docketnexus.com/doc/483024133.pdf. The browser-rendered filing includes the ECF header and searchable complaint text. Direct PDF download from this environment returned an HTML access challenge, so a PDF could not be saved and verified locally; it is not yet a replacement exemplar.
 - Public court record (RECAP). Used only as a structural and visual reference.
 
 ## Redaction in the transcription

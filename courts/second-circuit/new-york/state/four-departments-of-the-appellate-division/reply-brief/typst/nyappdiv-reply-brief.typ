@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"          // 1250.8(f)(1): serifed, proportionally spaced; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // 1250.8(f)(1): serifed, proportionally spaced; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // 1250.8(f)(1)(i): body in 14-point type.
 #let body-leading = 1.336em                // 1250.8(h): double spaced: with the 0.909em ascender-to-descender box, a 2.245em pitch (31.4 pt at 14 pt, about 2.2 x type size).
 #let single-leading = 0.516em              // headings, quotations, footnotes, contents: single spaced (1250.8(h)).

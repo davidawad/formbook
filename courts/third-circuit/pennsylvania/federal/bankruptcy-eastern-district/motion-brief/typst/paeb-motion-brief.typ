@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // no E.D. Pa. rule names a font; Times New Roman substitute per docs/FONTS.md (README.md)
+#let font-family = ("Times New Roman", "Liberation Serif")        // no E.D. Pa. rule names a font; Times New Roman substitute per docs/FONTS.md (README.md)
 #let type-size = 12pt                   // convention; the Henry exemplar is 12 point
 #let body-leading = 1.345em             // double spacing: 24 pt baseline pitch at 12 pt (README.md)
 #let single-leading = 0.5em             // single spacing for the caption, the signature block and the service list

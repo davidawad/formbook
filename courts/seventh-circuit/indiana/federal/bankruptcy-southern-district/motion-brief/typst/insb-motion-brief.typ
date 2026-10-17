@@ -12,7 +12,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or is a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"      // layout choice: no S.D.Ind. font rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")      // layout choice: no S.D.Ind. font rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                 // layout choice: the Rule 9004(a) legibility floor is the only requirement
 #let pitch = 27.6pt                   // layout choice: double spacing, matching the filed exemplar (27.6 pt baseline pitch, measured)
 #let page-w = 8.5in                   // S.D.Ind. B-5005-3: no larger than 8-1/2 by 11 inches

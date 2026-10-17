@@ -10,7 +10,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"        // LR 5.1 names no face; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = ("Times New Roman", "Liberation Serif")        // LR 5.1 names no face; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 14pt                   // LR 5.1: typeface not smaller than 14 point
 #let pitch = 32pt                       // LR 5.1: double spacing. 32 pt is the baseline pitch of the 14 pt filed exemplars
 #let body-leading = 22.83pt             // gap between lines of body text; with the 0.655 em (Liberation Serif) line box it gives the 32 pt pitch

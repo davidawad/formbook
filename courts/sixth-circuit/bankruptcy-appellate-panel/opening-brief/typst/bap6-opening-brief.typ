@@ -15,7 +15,7 @@
 
 #let doc-type = "opening"                  // "opening", "answering" or "reply": selects the rules below
 #let doc-title = "brief of appellant"      // FRBP 8014(a); the answering brief is "brief of appellee"
-#let font-family = "Liberation Serif"      // FRBP 8015(a)(5): proportionally spaced, serif; Times New Roman substitute per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")      // FRBP 8015(a)(5): proportionally spaced, serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                      // FRBP 8015(a)(5)(A): 14-point or larger, everywhere.
 #let body-leading = 1.955em                // FRBP 8015(a)(4): double-spaced. Pitch = 0.655em (Liberation Serif line box) + leading = 2.61em; single = 1.305em (calibration in ../README.md).
 #let single-leading = 0.65em               // headings, block quotations, cover, TOC and TOA: single-spaced (typst default leading).

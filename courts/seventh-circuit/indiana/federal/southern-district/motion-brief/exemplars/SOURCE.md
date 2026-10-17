@@ -23,3 +23,7 @@ Date fetched for all files below: 2026-10-14. Source: CourtListener RECAP (publi
 - Date filed: stamped "Filed 06/05/26"; signed "Date: June 5, 2026"
 - Fetched from: https://storage.courtlistener.com/recap/gov.uscourts.insd.228725/gov.uscourts.insd.228725.11.0.pdf (docket https://www.courtlistener.com/docket/73122229/11/midwest-renewable-energy-association-v-veleta/)
 - Notes: a state-agency filer, so it is a different filer from exemplar 1. The caption uses a ")" column.
+
+## Font-audit selected replacement
+
+The UIndy PDF is flagged for an unnamed Garamond face. The saved Midwest Renewable memorandum is the replacement for that font-audit item: it is a same-court, same-document-type public filing with an extractable text layer and Times New Roman in the body. The UIndy transcription remains tied to the UIndy filing, so that PDF cannot be overwritten without rebuilding the sample.

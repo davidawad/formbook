@@ -30,3 +30,7 @@
 | Text layer | Yes, born-digital (Times New Roman embedded; `pdftotext` extracts every page). In the addendum, about 14 pages (e.g. PDF pp. 49-50, 58-60, 64-79, mostly patent drawing sheets) carry under 40 extractable words each. |
 | sha256 | 60b2350848065af2ea57b3d0dd87b9d2a302544e807895b3b87599189f9d623c |
 | Notes | Form 9 certificate of interest reproduced (PDF pp. 2-7); TOC (I. Introduction, II. Question Presented, III. Statement of the Case, IV. Standard of Review, V. Argument, VI. Conclusion); no Summary of the Argument heading; statement of related cases and statement of jurisdiction present; addendum bound with the brief; certificate of compliance (Times New Roman 14-point); no certificate of service. Different party and firm from Delfasco/Cordatis. |
+
+## Replacement for the audited scanned exemplar
+
+The audited `FILED-EXAMPLE-delfasco-24-1363-opening-brief.pdf` (scanned pages with an OCR text layer) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-vidstream-24-2265-opening-brief.pdf` from a different filer. See the second-filer record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

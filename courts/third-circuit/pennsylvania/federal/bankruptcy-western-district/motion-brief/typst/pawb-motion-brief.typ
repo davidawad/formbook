@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; the only fonts typst may see (--ignore-system-fonts)
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; the only fonts typst may see (--ignore-system-fonts)
 #let type-size = 12pt                   // LBR 5005-13(b)(4): "no smaller than 12 Courier or an equivalent font size", footnotes included; 12 pt Liberation Serif (a Times New Roman substitute) is the usual equivalent
 #let page-w = 8.5in                     // LBR 5005-13(b)(1): 8.5 by 11 inch paper
 #let page-h = 11in

@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LRCiv 7.1(b)(1): proportional font; vendored in fonts/ (see README.md, gap 2)
+#let font-family = ("Times New Roman", "Liberation Serif")        // LRCiv 7.1(b)(1): proportional font; vendored in fonts/ (see README.md, gap 2)
 #let type-size = 13pt                   // LRCiv 7.1(b)(1): a proportional font of no less than 13 point, footnotes included
 #let pitch = 24pt                       // LRCiv 7.1(b)(1): double-spaced body; the numbered lines are this pitch
 #let lines-per-page = 28                // LRCiv 7.1(b)(1): no more than 28 lines per page
