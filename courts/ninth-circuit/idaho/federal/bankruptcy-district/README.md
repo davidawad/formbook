@@ -20,6 +20,8 @@
 
 Engines: typst `—`, latex `—`, docx `—`.
 
+Typeface: face required, none (LBR 5005-1(c)(2) sets 12 to 14 point type and names no face, checked 2026-10-15). Vendored substitute, none needed; the templates keep EB Garamond (see `docs/FONTS.md`, "No face named").
+
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 

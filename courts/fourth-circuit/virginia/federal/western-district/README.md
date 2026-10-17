@@ -20,6 +20,8 @@
 
 Engines: typst `—`, latex `—`, docx `—`.
 
+Typeface (both doc types, checked 2026-10-14): face required: none (the W.D. Va. Local Civil Rules name no typeface, font size or spacing). Font: EB Garamond, unchanged. No vendored substitute is needed. Exemplars are Times New Roman by habit only.
+
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 
