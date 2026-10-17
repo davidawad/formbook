@@ -1,6 +1,35 @@
 # Exemplar source: uscgcoca opening brief
 
-BLOCKED: no public exemplar
+**Exemplar found (fourth pass, 2026-10-16, bead fb-595.20.21).** The appellant's Assignment of Error and Brief in *United States v. Steen*, published (redacted) by the CGCCA on its Appellate Briefs page; fetched from the Internet Archive because uscg.mil returns 403 to this box.
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-steen-1464-opening-brief.pdf` (8 pages, an extract; see page map) |
+| Case | *United States v. Boatswain's Mate Third Class Justin D. Steen, U.S. Coast Guard*, CGCCA Dkt. 1464, Case No. SP 24978 |
+| Document | "Appellant's Assignment of Error and Brief", 31 pp. as published (redacted; the published copy ends at the Conclusion, with no signature or certificate page) |
+| Filer | Appellate defense counsel for the appellant (signature page not in the published copy) |
+| Date filed | Dated 4 April 2019 (caption) |
+| URL fetched from | `https://web.archive.org/web/20200919035023id_/https://www.uscg.mil/Portals/0/Headquarters/Legal/cca/Court_of_Criminal_Appeals_Opinions/AppellantBriefs/US%20v%20BM3%20Steen%20AOE%20and%20Brief_Redacted.pdf?ver=2019-06-06-154540-357` (listed on the court's page `https://www.uscg.mil/Resources/Legal/Court-of-Criminal-Appeals/Court-of-Criminal-Appeals-Appellate-Briefs/`, Wayback capture 20190820115734) |
+| Date fetched | 2026-10-16 |
+| Public record | Yes: published by the court, redacted by it (the witness's name). |
+| PDF type | Acrobat Pro DC Paper Capture with ClearScan (OCR text; OCR errors such as "Comt" for "Court"). |
+
+Page map of the extract (`pdfseparate` / `pdfunite`):
+
+| Extract p. | Source p. | Content |
+|---|---|---|
+| 1 | 1 | Caption, "TO THE HONORABLE ...", Statement of the Case and Jurisdiction |
+| 2-3 | 2-3 | Statement of Facts (A. Background; B. the M.R.E. 404(b) motion, with a block quotation; C. start) |
+| 4 | 10 | Summary of Argument |
+| 5 | 11 | Issues Presented I and II |
+| 6 | 12 | Argument I: Standard of review, Analysis (numbered quotation), heading A |
+| 7-8 | 30-31 | End of Argument II (C.), Conclusion |
+
+Source pp. 4-9 and 13-29 are left out. `samples/INPUT-steen-opening-brief.md` transcribes exactly the extracted pages.
+
+## First pass (2026-10-14): superseded record
+
+At the time (superseded by the fourth pass): BLOCKED, no public exemplar.
 
 No filed opening brief (Assignments of Error and Brief on Behalf of Appellant) from the U.S. Coast Guard Court of Criminal Appeals was found, so there is no `FILED-EXAMPLE-*.pdf` here.
 
@@ -50,3 +79,15 @@ The same routes as the answering-brief pass 3 (`../../answering-brief/exemplars/
 - WebSearch (standard), "Brief on Behalf of Appellant" "Assignments of Error" pdf: CAAF Fernandez amicus, 32 CFR 150 App. B, and CGCCA opinions (Ryder, Crawford, King, Naputi, Gogo). No CGCCA appellant's brief.
 - WebSearch (standard), "ASSIGNMENTS OF ERROR" "Appellant" brief Docket 2025: CGCCA opinions Ducker (No. 1508, 22 Jul 2025) and Ray (No. 1498), both on uscg.mil opinion pages. Opinions, not briefs. Older briefs quoted in opinions (Tamayo No. 1425, Coker No. 1188, Gogo No. 1292) are on media.defense.gov as opinions.
 - The uscg.mil Appellate Briefs index lists the CGCCA's filings by case, and the search snippet shows "Assignments of Error" links (see answering-brief pass 3, item 20). Opening it returned HTTP 403, as did the rules PDF and media.defense.gov, even with a browser user agent.
+
+## Fourth pass (2026-10-16, bead fb-595.20.21)
+
+New routes only. Result: **found**. The court's own "Appellate Briefs" page and its PDFs are archived in the Internet Archive, which this box can reach although uscg.mil returns 403.
+
+1. Live `https://www.uscg.mil/Resources/Legal/Court-of-Criminal-Appeals/Court-of-Criminal-Appeals-Appellate-Briefs/` with curl and a browser User-Agent: HTTP 403 (unchanged).
+2. Wayback CDX for `uscg.mil/Resources/Legal/Court-of-Criminal-Appeals*`: the briefs index is archived once, `20190820115734`. Fetched it: it lists Appellant's Assignments of Error / Government Answer / Appellant's Reply for Steen, Harpole, Guzman, Pacheco, Rodriguez, Livingstone, Hernandez and Rogers, linking to `uscg.mil/Portals/0/Headquarters/Legal/cca/Court_of_Criminal_Appeals_Opinions/AppellantBriefs/`.
+3. Wayback CDX for that `AppellantBriefs/` folder: 45 PDF captures (2020-2021), adding Goodell II, Schwartz, Stoddard-Castro, Piccininno, Flores (Art. 62), Olsen, Tucker (habeas) and Weiser. All fetched with the raw `id_` form (Wayback rate-limits; retried with backoff). 38 of 45 downloaded; Weiser AOE, Harpole AOE, Steen reply, Livingstone AOE, Rogers answer, Piccininno answer and Flores response did not download (timeouts).
+4. Triage: Goodell II AOE has a broken text layer (no ToUnicode; extracts as garbage), so the overlay cannot pair it. Schwartz, Stoddard-Castro and Piccininno AOEs are 2-4 page merits-type filings. 2017-2018 filings (Hernandez, Rodriguez, Guzman, Livingstone, Pacheco) predate the 1 January 2019 rules. **Steen** (Dkt. 1464) is the newest full pair under the JRAP-era rules with a usable text layer: the AOE (dated 4 April 2019, 31 pp., Acrobat ClearScan OCR) and the Government answer (6 May 2019, 19 pp., text layer). Used for both doc types; different filers (defense / government).
+5. Rules: Wayback CDX for `uscg.mil/Portals/0/Headquarters/Legal/cca/*` gave the rules PDFs. Fetched `CGCCA Rules of Appellate Procedure with JRAP (March 2025).pdf` (capture 20250428115614, 33 pp.), `Coast Guard Rules of Appellate Procedure with JRAP (effective 1Jan19).pdf` (20191130041821, 28 pp.) and `Joint Rules of Appellate Procedure (May 2024).pdf` (20240705065445). Rule 17.1 (format), 17.2 (content), 17.3 (length, word certificate) and 14 (signature) were read; see `../README.md`.
+
+Not used: the other 37 downloaded filings (older rules, broken text, merits-only, or other doc types: replies, habeas, Art. 62).

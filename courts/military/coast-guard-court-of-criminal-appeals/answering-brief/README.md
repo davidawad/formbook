@@ -1,51 +1,56 @@
-# uscgcoca: answering brief (Brief on Behalf of the United States)
+# uscgcoca: answering brief (Answer to Appellant's Assignments of Error on Behalf of the United States)
 
-**Status: BLOCKED: no exemplar. Template is a rules-derived skeleton, not a tier-1 template.**
-
-The CGCCA calls the government's filing a "Government Answer" to the appellant's "Assignments of Error". This folder uses the 1997 rule's wording for the government's brief (32 CFR 150.15(a): a brief on behalf of the government "shall be of like character" as the accused's).
+- Court: U.S. Coast Guard Court of Criminal Appeals (CGCCA).
+- Doc type: the Government's answer, listed by the court as "Government Answer" (Rule 18(d): "An answer by the United States shall be filed no later than 30 days after the filing of an appellant's brief"; R. 17.2(a) "Answer Briefs").
+- Exemplar: `exemplars/FILED-EXAMPLE-steen-1464-answering-brief.pdf`, an 8-page extract of *United States v. Steen*, Docket No. 1464, Answer to Appellant's Assignments of Error on Behalf of the United States, filed 6 May 2019 by Appellate Government Counsel (Commandant (CG-LMJ)); published by the court (source, page map: `exemplars/SOURCE.md`). Found on the fourth pass (2026-10-16, bead fb-595.20.21).
+- Samples: `samples/INPUT-steen-answering-brief.md` (transcription); `samples/INPUT-smoke.md` (placeholder, kept).
+- Template: `typst/uscgcoca-answering-brief.typ`; identical to `../opening-brief/typst/uscgcoca-opening-brief.typ` except the default title ("ANSWER TO APPELLANT'S ASSIGNMENTS OF ERROR ON BEHALF OF THE UNITED STATES", as filed).
+- Status (2026-10-16): render ok (8 pages); overlay ok; every page reviewed. No `checks.yaml`; `tools/check.sh` not run. `court.json` untouched.
 
 ## Governing rules
 
-Same as `../opening-brief/README.md`. The CGCCA Rules of Appellate Procedure with JRAP (Rev. 03/25) could not be read on 2026-10-14 (uscg.mil HTTP 403). The only primary text read is 32 CFR 150.15 and App. B (62 Fed. Reg. 2017, 15 Jan 1997), which is superseded in part and is silent on typeface, margins, page or word limits, cover and tables.
-
-## What the template does (`typst/uscgcoca-answering-brief.typ`)
-
-Same structure and same UNVERIFIED parameters as the opening-brief template (EB Garamond 12 pt, 1 in margins, leading 1.3 em for double spacing, placeholder). The title is "Brief on Behalf of the United States", and the caption's government side is "Appellee". Both wordings need confirming against the JRAP text.
-
-## Sample and render
-
-| File | What |
-|---|---|
-| `samples/INPUT-smoke.md` | Placeholder sample, template structure only. **Not** transcribed from an exemplar. |
-| `samples/OUTPUT-smoke.pdf` | `sh tools/render.sh courts/military/coast-guard-court-of-criminal-appeals/answering-brief samples/INPUT-smoke.md`. Exit 0, no typst warnings, 3 pages. |
-
-Pages reviewed (rasterized at 60 dpi and viewed, 2026-10-14, after the heading fix): 3 of 3 (`OUTPUT-smoke.pdf` pp. 1-3, re-rendered).
-
-Re-run 2026-10-15 (bead fb-595.20.5): `sh tools/render.sh courts/military/coast-guard-court-of-criminal-appeals/answering-brief samples/INPUT-smoke.md` exit 0 (the sample path is relative to the court directory). `OUTPUT-smoke.pdf` is 3 pages, letter. All 3 pages rasterized at 60 dpi and viewed: p. 1 caption and the Statement of the Case, p. 2 Errors and Argument with the "B. Argument" sub-heading and Relief Requested, p. 3 certificate. Layout only; the text is placeholder. No exemplar, so nothing was compared.
+The same rules and the same parameter mapping as `../opening-brief/README.md` ("Governing rules"): CGCCA Rules of Appellate Procedure Rev. 03/25, R. 17.1 (Times New Roman at least 12 pt, at least 15-point spacing, 1 in margins, letter), R. 17.2(a) (content, certificate of service), R. 17.3 (20,000 words for "briefs and answers", word certificate), R. 14 (signature). Read 2026-10-16 from the Wayback capture 20250428115614. Markdown contract: same as the opening brief.
 
 ## Overlay
 
-`sh tools/overlay.sh courts/military/coast-guard-court-of-criminal-appeals/answering-brief smoke` **failed**: `no exemplar pdf in .../answering-brief/exemplars` (exit 1). No overlay written.
+`sh tools/overlay.sh courts/military/coast-guard-court-of-criminal-appeals/answering-brief steen-answering-brief` exit 0:
 
-## Findings from the page review
+| Ours | Filed (extract) | Overlap | Note |
+|---|---|---|---|
+| 1 | 1 | 83.7% | Caption, introduction, Statement of the Case |
+| 2 | 2 | 59.5% | |
+| 3 | 3 | 60.8% | |
+| 4 | 4 | 61.6% | |
+| 5 | 5 | 60.7% | Issue I, Standard of Review, Discussion |
+| 6 | 6 | 44.4% | End of the p. 6 extract, then the p. 18 text and Conclusion |
+| 7 | 8 | 46.6% | Mispaired: ours p. 7 holds the Prayer for Relief and both signature blocks (filed extract p. 7); the filed certificate page repeats Godsey's address block, so it scores higher. |
+| 8 | 8 | 67.4% | Certificates (Compliance, Service) |
 
-- Level-1 and level-2 headings are now `block(sticky: true)` (same fix as the opening brief). Page 1 now ends with "I. ..." and its "A. Standard of review" sub-heading, and only "B. Argument" flows to page 2. Level-3 headings are not sticky; the template has no level-3 show rule. Left as is: placeholder text, and the layout is unverified.
-- Sample text is placeholder throughout; the layout proves structure only.
-- Cover: none; the case block and caption open page 1 (App. B has no cover sheet).
+## Page review (Gate 2), 2026-10-16
+
+All 8 pages of `OUTPUT-steen-answering-brief.pdf` and all 8 of `OVERLAY-steen-answering-brief.pdf` rasterized at 60 dpi and viewed. Fonts: Liberation Serif Regular, Bold, Italic only; no typst warnings.
+
+| Page | Result |
+|---|---|
+| 1 | OK. Caption (date, title, docket, panel, tried-at), address line, introduction, STATEMENT OF THE CASE, footnote 1. ACCEPTED (tier 3): the filer put "CGCMSP 24978" above the docket; the sample carries it at the start of the tried-at text. |
+| 2-4 | OK. Facts with the long footnote 2 single-spaced at the foot of p. 2. |
+| 5 | OK. Issue I heading in bold capitals; centered Standard of Review / Discussion; lettered heading A. |
+| 6 | OK. The excerpt jumps from source p. 6 to p. 18 mid-page (transcription boundary, documented in the sample header). |
+| 7 | OPEN (tier 2): PRAYER FOR RELIEF starts a new page with the two side-by-side signature blocks; the filer kept Conclusion, Prayer and signatures on one page (p. 18). Caused by the sticky heading plus the unbreakable signature row not fitting under the Conclusion. |
+| 8 | OK. Certificate of Compliance (R. 17.3; not in the 2019 filing) and Certificate of Service, signed by the last signer (Godsey, as filed). |
 
 ## Known gaps
 
-- **No exemplar.** No filed CGCCA government answer was found; the searches are in `exemplars/SOURCE.md`.
-- **Rules unreadable** (see Governing rules). Every UNVERIFIED value is a placeholder.
-- **Name mismatch.** The court's own label is "Government Answer", not "answering brief". The folder name follows the brief.
-
-BLOCKED: no public exemplar (CGCCA government answer). Two search passes on 2026-10-14 (listed in `exemplars/SOURCE.md`, with the opening-brief trail) found no filed CGCCA government answer. CourtListener returned 0 results for this court; the uscg.mil pages returned HTTP 403; the Navy JAG filings table is empty in the fetched capture. Needs a public copy from the uscg.mil Appellate Briefs index or the Navy JAG filings table, and the JRAP text, before tier-1 work can start.
+1. TOC/TOA and summary of argument over 30 pages (R. 17.3) not generated; word limit printed, not enforced; word count approximate unless `word_count` is given.
+2. The 2019 exemplar has no word certificate; the template adds it per R. 17.3 (2025).
+3. The docx engine was not changed in this pass and still builds the earlier EB Garamond form; `samples/OUTPUT-smoke.docx*` come from it. The `signature` list form used by the Steen sample is typst-only for now.
+4. No `checks.yaml`; `tools/check.sh` not run.
 
 ## Engines
 
-Docx (`docx/`, `samples/OUTPUT-smoke.docx`, `samples/OUTPUT-smoke.docx.pdf`; built by `docx/build-reference.sh`, filter `docx/uscgcoca.lua`, the same files as the opening brief). Rendered and checked on the smoke sample only, 3 pages, all 3 pages looked at.
+**docx** (`docx/`): unchanged; out of step with the typst form (Known gaps 3). BLOCKED: `tools/check.sh --engine docx` cannot run on this folder (no `checks.yaml`).
 
-- **Matches the typst form:** EB Garamond 12 pt (`pdffonts`: only EBGaramond Regular, Bold, Italic embedded); letter; 1 in margins; body lines at the typst pitch (23.4 pt, exact); the caption (government side "Appellee"), title "Brief on Behalf of the United States", counsel block, rule-and-signer signature block, and the certificate on a new page; page number centered from 1. Pagination matches the typst render (same three page breaks).
-- **Differs:** LibreOffice places text inside an exact-height line lower than typst does, so the first line of page 1 sits about 10 pt lower, and a few lines after a single-spaced heading are off by up to about 5 pt. Heading sizes are rounded to half points (H1 17 pt for typst's 16.8 pt; H2 14.5 pt for 14.4 pt). Word may paginate differently (docs/DOCX.md).
-- **Not in the typst template:** footnote text is set to 10 pt in the reference (not measured against typst; the smoke sample has no footnotes).
-- **BLOCKED:** nothing in the typst form is blocked. `tools/check.sh` cannot run on this doc-type folder (no `checks.yaml` or `court.json` at this level), so no docx stamp is written.
+## History
+
+- 2026-10-14 / 2026-10-15: BLOCKED (no exemplar, rules unread).
+- 2026-10-16 (bead fb-595.20.21): Steen answer and the rules recovered from the Internet Archive; template, sample, render, overlay; smoke sample re-rendered (2 pages, viewed).

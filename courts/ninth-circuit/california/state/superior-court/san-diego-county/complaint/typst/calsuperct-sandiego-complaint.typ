@@ -220,6 +220,25 @@
   })
 }
 
+/// The body, then `closing` (jury demand, signature block). The signature block never stands alone
+/// on a page: the body's last paragraph is kept on the page with it. Trailing footnote definitions
+/// stay with the rest of the body; a last paragraph that is a heading, a quotation or carries a
+/// footnote reference is not split off, so its note still resolves.
+#let body-with-closing(md, closing) = {
+  let render(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
+  let paras = md.trim(at: end).split(regex("\n[ \t]*\n"))
+  let k = paras.len() - 1
+  while k > 0 and paras.at(k).trim().starts-with("[^") { k -= 1 }
+  let tail = paras.at(k).trim()
+  if k == 0 or tail.starts-with("#") or tail.starts-with(">") or tail.contains("[^") {
+    render(md)
+    closing
+  } else {
+    render((paras.slice(0, k) + paras.slice(k + 1)).join("\n\n"))
+    block(width: 100%, breakable: false, above: box-h, { render(tail); closing })
+  }
+}
+
 // ---------------------------------------------------------------------------
 // The document
 // ---------------------------------------------------------------------------
@@ -247,11 +266,11 @@
   caption(meta)
   v(pitch)
 
-  cmarker.render(body, raw-typst: false, smart-punctuation: true)
-
-  if "jury_demand" in meta {
-    block(width: 100%, sticky: true, above: 24pt, below: 12pt,
-      align(center, strong(upper(meta.jury_demand))))
-  }
-  signature-block(meta)
+  body-with-closing(body, {
+    if "jury_demand" in meta {
+      block(width: 100%, sticky: true, above: 24pt, below: 12pt,
+        align(center, strong(upper(meta.jury_demand))))
+    }
+    signature-block(meta)
+  })
 }

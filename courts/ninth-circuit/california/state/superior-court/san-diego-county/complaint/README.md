@@ -103,11 +103,11 @@ sh tools/overlay.sh courts/ninth-circuit/california/state/superior-court/san-die
 | 7 | Pass. |
 | 8 | Pass. |
 | 9 | Pass. The last body line is line 27; line 28 blank. |
-| 10 | **OPEN (tier 2):** the signature block alone on page 10: "Dated" and the signature at line 1-6 with no body text above. The block is sticky and does not fit on page 9. Clerks accept this, but it reads as an orphan page; the fix is to keep the last body paragraph with the signature, which cmarker output does not allow simply. Not fixed here. |
+| 10 | Fixed 2026-10-16: the template now keeps the last body paragraph (¶ 16) on the page with `Dated:` and the signature block; page 10 holds ¶ 16 and the signature. Re-rendered (10 pages, exit 0) and pages 8-10 viewed again. Pass. |
 
 ### Open tier-2 items
 
-1. Page 10: orphaned signature page (above).
+1. ~~Page 10: orphaned signature page~~: fixed 2026-10-16 (last paragraph kept with the signature).
 2. The attorney block in the sample is abridged; the exemplar's full counsel list (Chief and Senior AAG lines) does not fit lines 1-7 at 12 pt. A real filer with a long counsel list would hit the template's panic. Not a rule breach; a limit of the grid.
 
 ## Known gaps

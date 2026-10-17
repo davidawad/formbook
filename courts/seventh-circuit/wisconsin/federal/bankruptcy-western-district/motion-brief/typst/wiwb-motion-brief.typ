@@ -1,6 +1,6 @@
 // Motion with brief in support (memorandum), United States Bankruptcy Court for the Western District of
-// Wisconsin (wiwb). Built from the rules, not from a filed exemplar (none found: see ../exemplars/SOURCE.md).
-// Rules (see ../README.md for quotes, URLs and the verification date):
+// Wisconsin (wiwb). Built from the rules; the filed exemplar (../exemplars/SOURCE.md) settles only what they
+// leave open. Rules (see ../README.md for quotes, URLs and the verification date):
 //   Fed. R. Bankr. P. 9013 (a motion is written; it states its grounds with particularity and the relief sought),
 //   9004(a)-(b) (legibility; caption elements), 9011 (signature block), 9014 (contested matter, for a motion
 //   that is not an adversary-proceeding motion), 7012(b) (Fed. R. Civ. P. 12(b) defenses in adversary proceedings).
@@ -18,7 +18,7 @@
 #let margin-top = 1in
 #let margin-bottom = 1in
 #let text-width = page-w - 2 * margin-x
-#let body-leading = 1.65em              // double-spaced body: 27.6 pt baseline pitch at 12 pt, measured on the filed exemplar (README.md)
+#let body-leading = 1.65em              // double-spaced body (convention; no W.D. Wis. rule found): 2 x 1.15 x 12 pt = 27.6 pt baseline pitch, the word-processor "double" line (README.md)
 #let single-leading = 0.5em             // single-spaced caption and signature block
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 3.4in               // width of the party column of the caption
@@ -71,41 +71,64 @@
   }
 }
 
-/// Caption for a contested matter (main case, no adversary) or an adversary proceeding. The adversary
-/// number is printed only when the sample gives one; otherwise a blank line for the clerk.
-#let caption(meta) = grid(
-  columns: (caption-left, 1fr),
-  column-gutter: 0.25in,
-  block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 10pt), {
-    // The debtor's designation ("Debtor.") is printed under the name, as the caption does on filed papers.
-    line-stack(("In re:", meta.debtor, "Debtor.", "Case No. " + meta.bankruptcy_case)
-      + if "chapter" in meta { ("Chapter " + meta.chapter,) } else { () })
-    if "caption" in meta {
+/// Caption. A contested matter in the main case (no `caption:` in the frontmatter) follows Official Form 416B
+/// (Caption, Short Title, 12/15): "In re" and the debtor's name with "Debtor" under it at the left; "Case No."
+/// and "Chapter" at the right; no rules. An adversary proceeding keeps the boxed party column with the
+/// adversary number at the right (Fed. R. Bankr. P. 7010). The adversary number is printed only when the
+/// sample gives one; otherwise a blank line for the clerk.
+#let caption(meta) = if "caption" not in meta {
+  grid(
+    columns: (caption-left, 1fr),
+    column-gutter: 0.25in,
+    // One blank single-spaced line between the elements, as Official Form 416B spaces them.
+    {
+      set par(leading: single-leading, justify: false)
+      set block(spacing: 1.5em)
+      block("In re:")
+      block(inl(meta.debtor))
+      block(pad(left: para-indent, "Debtor."))
+    },
+    {
+      set par(leading: single-leading, justify: false)
+      set block(spacing: 1.5em)
+      block("Case No. " + meta.bankruptcy_case)
+      if "chapter" in meta { block("Chapter " + meta.chapter) }
+    },
+  )
+} else {
+  grid(
+    columns: (caption-left, 1fr),
+    column-gutter: 0.25in,
+    block(width: caption-left, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 10pt, bottom: 10pt), {
+      line-stack(("In re:", meta.debtor, "Debtor.", "Case No. " + meta.bankruptcy_case)
+        + if "chapter" in meta { ("Chapter " + meta.chapter,) } else { () })
       v(1.2em)
       party-column(meta)
-    }
-  }),
-  align(top, {
-    v(0.2em)
-    if "caption" in meta {
+    }),
+    align(top, {
+      v(0.2em)
       text(weight: "bold", "Adversary Case No.")
+      h(0.4em)
       if "adversary_case" in meta and meta.adversary_case != "" {
-        h(0.4em)
         meta.adversary_case
       } else {
-        h(0.4em)
         box(width: 1.6in, line(length: 1.6in, stroke: 0.5pt))
       }
-    }
-  }),
-)
+    }),
+  )
+}
 
 #let cover(meta) = {
   court-title()
   caption(meta)
-  v(1.5em)
-  align(center, text(weight: "bold", upper(meta.title)))
-  v(1.5em)
+  v(2em)
+  // Designation of the paper (Fed. R. Bankr. P. 9004(b)(4); Official Form 416B "[Designation of Character of
+  // Paper]"): centred, bold capitals, single-spaced so a two-line title reads as one block.
+  align(center, block(width: text-width - 2 * para-indent, {
+    set par(leading: single-leading, spacing: 0pt, justify: false)
+    text(weight: "bold", upper(meta.title))
+  }))
+  v(2em)
 }
 
 // ---------------------------------------------------------------------------
@@ -124,14 +147,18 @@
   for m in body.matches(regex("(?m)^\\[\\^([^\\]]+)\\]:[ \\t]*(.*)$")) {
     notes.insert(m.captures.at(0), m.captures.at(1))
   }
-  for c in chunks {
+  let chunks = chunks.filter(c => not c.trim().starts-with(regex("^\\[\\^[^\\]]+\\]:")))
+  for (i, c) in chunks.enumerate() {
     let t = c.trim()
-    if t.starts-with(regex("^\\[\\^[^\\]]+\\]:")) { continue }
     for r in t.matches(regex("\\[\\^([^\\]]+)\\]")) {
       let id = r.captures.at(0)
       t = t + "\n\n[^" + id + "]: " + notes.at(id, default: "")
     }
     parbreak()
+    // The last paragraph is kept on the page with the signature block that follows it, so the signature
+    // never stands alone on a page (the signature block itself does not break).
+    let last = i == chunks.len() - 1
+    show: it => if last { block(sticky: true, breakable: false, it) } else { it }
     if t.starts-with("#") {
       cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
     } else if t.starts-with(">") {
@@ -157,20 +184,29 @@
 
 #let signature(meta) = {
   v(2 * body-leading)
-  block(width: text-width, breakable: false, grid(
-    columns: (1fr, 3.1in),
-    align(top, if "date" in meta { inl(meta.date) } else { [] }),
-    align(top, {
-      if "firm" in meta.signature { text(weight: "bold", meta.signature.firm) }
-      v(single-leading)
-      // The closing line ("Respectfully submitted,") is the filer's choice; it is printed only when given.
-      if "closing" in meta.signature { meta.signature.closing; v(2 * body-leading) }
-      // Electronic signature: "/s/" over the signer's name, as CM/ECF filers type it (Fed. R. Bankr. P. 9011).
-      "By: /s/ " + meta.signature.signer
-      v(0.2em)
-      line-stack(meta.signature.lines)
-    }),
-  ))
+  // Rows: closing and firm in the right column; then the date at the left on the same line as the "By:"
+  // signature line; then the signer's lines under the signature.
+  block(width: text-width, breakable: false, {
+    set par(leading: single-leading, justify: false)
+    grid(
+      columns: (1fr, 3.1in),
+      row-gutter: 1.5em,
+      [],
+      {
+        // The closing line ("Respectfully submitted,") is the filer's choice; it is printed only when given.
+        if "closing" in meta.signature { block(below: 1.5em, meta.signature.closing) }
+        if "firm" in meta.signature { text(weight: "bold", meta.signature.firm) }
+      },
+      if "date" in meta { inl(meta.date) } else { [] },
+      // Electronic signature: "/s/" before the signer's name, as CM/ECF filers type it (Fed. R. Bankr. P.
+      // 9011(a) requires the signature; the "/s/" form is convention, see README.md).
+      {
+        "By: /s/ " + meta.signature.signer
+        v(0.2em)
+        line-stack(meta.signature.lines)
+      },
+    )
+  })
 }
 
 // ---------------------------------------------------------------------------
@@ -193,10 +229,18 @@
   set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
 
   // Headings are the body size (typst's default heading size is larger; the filed memorandum's are 12 pt).
-  show heading.where(level: 1): it => block(width: text-width, above: 1.2em, below: 0.6em, sticky: true,
-    align(center, text(size: type-size, weight: "bold", upper(it.body))))
-  show heading.where(level: 2): it => block(width: text-width, above: 1em, below: 0.5em, sticky: true,
-    { set par(hanging-indent: 0.4in); text(size: type-size, weight: "bold", it.body) })
+  // A heading is single-spaced (a two-line heading reads as one unit) and set off by one double-spaced line
+  // above and below; it is sticky so it never ends a page.
+  show heading.where(level: 1): it => block(width: text-width, above: body-leading, below: body-leading,
+    sticky: true, {
+      set par(leading: single-leading)
+      align(center, text(size: type-size, weight: "bold", upper(it.body)))
+    })
+  show heading.where(level: 2): it => block(width: text-width, above: body-leading, below: body-leading,
+    sticky: true, {
+      set par(leading: single-leading, hanging-indent: 0.4in)
+      text(size: type-size, weight: "bold", it.body)
+    })
 
   cover(meta)
   brief-body(body)

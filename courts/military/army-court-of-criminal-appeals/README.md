@@ -25,9 +25,7 @@ A court is `up for review` when `rules.md` is present and the typst engine passe
 
 | Requirement | Rule read | Template face | Status |
 |---|---|---|---|
-| Face named by the rules | None found. 32 CFR 150.15(a) and App. B name no typeface, size or margin (checked 2026-10-14, LII). ACCA's own rules were not retrievable (site not resolvable; search returned none). | EB Garamond (`font-family` in each doc type) | Kept per `docs/FONTS.md` ("no face named"). Visual only, not tier-1 asserted. |
-
-Revisit if the ACCA Rules of Practice and Procedure are retrieved and name a face: switch to the substitute in `docs/FONTS.md` and re-render.
+| Face named by the rules | ACCA Rules of Appellate Procedure (eff. 15 Jan 2019) R. 13.2 and 17.1(b): "Times New Roman 14-point", double-spaced, 1-inch margins. Read 2026-10-16 from `https://www.jagcnet.army.mil/Home/assets/pdf/court/RulesofCourt.pdf` (Wayback capture 20250729125903). | Liberation Serif 14 pt (`font-family`, `type-size` in each doc type's typst template) | Applied 2026-10-16 (bead fb-595.20.20), typst only. The docx engine still uses EB Garamond 12 pt and must be updated in a docx pass. |
 
 ## Folders
 

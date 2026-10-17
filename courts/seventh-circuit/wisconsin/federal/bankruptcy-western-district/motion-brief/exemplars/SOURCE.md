@@ -1,19 +1,17 @@
 # Exemplar source: motion with memorandum, W.D. Wis. Bankruptcy Court
 
-**No exemplar found.** exemplar=no. No PDF is saved in this folder.
+exemplar=yes. One filed exemplar is saved here.
 
-## Searches tried (2026-10-14)
+## FILED-EXAMPLE-johnson-18-10327-motion-brief.pdf
 
-CourtListener (API, `court=wiwb`, RECAP documents with a RECAP PDF on file, type `r`):
-- "Motion to Dismiss Adversary Proceeding" and "Motion to Dismiss Adversary Proceeding brief": returned only court decisions (for example Ryan M. Johnson and Angela Lee Johnson, adversary 3-22-00049, doc 22; Parr v. Rassbach, adversary 1-22-00050, doc 21), not party motions.
-- "Brief in Support" motion-to-dismiss; "Brief in Support of Motion"; "memorandum in support motion to dismiss adversary proceeding"; "memorandum in support" adversary: returned court decisions and memorandum decisions only.
-- Notices of motion and motions with RECAP PDFs in other bankruptcy dockets (for example Nathaniel James Marvin Raimer, doc 27, a trustee notice of motion to compromise; Jennifer McKinney, doc 13, a motion to quash levy): these are notices and short motions, not a memorandum or brief.
-- Direct RECAP fetches of Johnson adversary (1-23-00041) docs 11 and 14 (the amended complaint and the motion to dismiss): not in the RECAP archive (the storage URL returned an XML error page).
+- **Document:** Hiawatha National Bank's Post-Trial Memorandum of Law in Support of its Motion to Dismiss, *In re Mark Eugene Johnson*, Case No. 18-10327-12 (Bankr. W.D. Wis.), a chapter 12 case. A contested matter in the main case (Fed. R. Bankr. P. 9014), not an adversary proceeding.
+- **Filer:** Eckberg Lammers, P.C. (Hudson, Wis.), Amanda K. Schlitz, for creditor Hiawatha National Bank. Dated March 16, 2018.
+- **File:** 19 pages, letter, text layer present (Microsoft Word to Acrobat Distiller 11, created 2018-03-17). Fonts: Times New Roman (regular, bold, italic) not embedded, plus Courier, Arial and Symbol fragments. No ECF header stamp on the saved copy.
+- **Obtained from:** not recorded. The file entered the repo in the harvest merge `9239ac7` ("merge harvest-batch-1792027302"), which kept no download URL or date. A PACER/RECAP copy of docket 18-10327 is the likely source (unverified). The file is kept as committed and was not re-downloaded in this pass. **Open:** record the URL when the docket is next fetched.
+- **Contents:** court name, short-title caption (In re / debtor / "Debtor." at left; Case No. at right), designation in bold capitals, an opening paragraph, JURISDICTION AND VENUE and BACKGROUND (numbered paragraphs 1-27), ARGUMENT with lettered subheadings A-G, block quotations, a bulleted list, two footnotes, CONCLUSION, and a signature block (date at left; firm, "By: s/" signature, bar number, address, telephone, e-mail at right). No certificate of service, notice of motion or proposed order in this filing.
 
-Web search (standard): "Western District of Wisconsin bankruptcy motion memorandum Rule 9013", "wiwb local rules 9013"; returned other districts' local rules (E.D. Wis. LR 9013, E.D. Wis. LR 9013.3, D. Wyo. 9013-2) and the W.D. Wis. pro-hac-vice page. None are this court's motion rules.
+The sample `samples/INPUT-hiawatha-memorandum.md` is a full-text transcription of this exemplar (checked word by word against `pdftotext` on 2026-10-16: the only differences are straight versus curly apostrophes in two block quotations and footnote markers).
 
-Court website: the published local rules page (ecf.wiwb.uscourts.gov, "Revised 6/2015") lists seven LBRs, none on motions or form of papers.
+## Only one filer
 
-## What would settle it
-
-A party-filed motion with a supporting memorandum or brief, from this court (wiwb), with a text layer, from a filer other than the one in another exemplar. The CourtListener search that found the adversary complaint (`../../adversary-complaint/exemplars/SOURCE.md`) did not return one; PACER's case locator or a docket search of the Johnson (1-23-00041) or Parr (1-22-00050) adversary dockets for the motion filings would be the next step.
+Tier 2 asks for two or three exemplars from different filers. Only this one is saved. Searches made on 2026-10-14 for a second party-filed motion brief with a text layer (CourtListener `court=wiwb` RECAP searches for "Brief in Support", "memorandum in support", motion to dismiss adversary proceeding; web searches for W.D. Wis. bankruptcy motion rules) returned court decisions, notices of motion and short motions only. A second filer's brief would come from a docket-level search of a W.D. Wis. bankruptcy docket with a briefed contested motion.
