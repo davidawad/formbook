@@ -5,9 +5,9 @@ Indexed level: `state-supreme`
 
 | Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
 |---|---|---|---|---|---|---|---|
-| `brief-on-the-merits` — Brief on the merits (state supreme court) | PENDING: not yet searched |  |  |  |  |  |  |
+| `brief-on-the-merits` — Brief on the merits (state supreme court) | COLLECTED: 30 pp., text layer verified 2026-10-17; brief of appellant | `FILED-EXAMPLE-plf-hamann-s-24-0234-brief-on-the-merits.pdf` | Thomas Hamann (appellant, Pacific Legal Foundation) | Hamann v. Heart Mountain Irrigation District, No. S-24-0234 | 2025-01-21 | https://pacificlegal.org/wp-content/uploads/2025/01/Tom-Hamann-v.-Heart-Mountain-Irrigation-District-et-al._Opening-Brief_01.21.25.pdf | `3ce59f51f9ed24d31f970b846d61650acc5e6ed73583bf8788b7b6d49a6c25c1` |
 | `answering-brief` — Answering brief (appellee's principal brief) | PENDING: not yet searched |  |  |  |  |  |  |
-| `reply-brief` — Reply brief | PENDING: not yet searched |  |  |  |  |  |  |
+| `reply-brief` — Reply brief | COLLECTED: 13 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-plf-hamann-s-24-0234-reply-brief.pdf` | Thomas Hamann (appellant, Pacific Legal Foundation) | Hamann v. Heart Mountain Irrigation District, No. S-24-0234 | 2025-03-21 | https://pacificlegal.org/wp-content/uploads/2025/01/Tom-Hamann-v.-Heart-Mountain-Irrigation-District-et-al._PLF-Reply-Brief_3.21.25.pdf | `de1248a8447251277483b8b83257868417675d537d307861f885e83431933952` |
 | `petition-for-review` — Petition for review (agency order or state high court) | PENDING: not yet searched |  |  |  |  |  |  |
 | `motion-brief` — Motion and supporting memorandum | PENDING: not yet searched |  |  |  |  |  |  |
 | `petition-for-discretionary-review` — Petition for discretionary review | PENDING: not yet searched |  |  |  |  |  |  |

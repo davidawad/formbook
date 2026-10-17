@@ -5,13 +5,13 @@ Indexed level: `state-appellate`
 
 | Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
 |---|---|---|---|---|---|---|---|
-| `opening-brief` — Opening brief (appellant's principal brief) | PENDING: not yet searched |  |  |  |  |  |  |
-| `answering-brief` — Answering brief (appellee's principal brief) | PENDING: not yet searched |  |  |  |  |  |  |
-| `reply-brief` — Reply brief | PENDING: not yet searched |  |  |  |  |  |  |
-| `petition-for-discretionary-review` — Petition for discretionary review | PENDING: not yet searched |  |  |  |  |  |  |
-| `motion-brief` — Motion and supporting memorandum | PENDING: not yet searched |  |  |  |  |  |  |
-| `petition-for-review` — Petition for review (agency order or state high court) | PENDING: not yet searched |  |  |  |  |  |  |
-| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | PENDING: not yet searched |  |  |  |  |  |  |
-| `amicus-brief` — Amicus curiae brief | PENDING: not yet searched |  |  |  |  |  |  |
+| `opening-brief` — Opening brief (appellant's principal brief) | BLOCKED: not a filing this court receives: the Oregon Tax Court is a trial court; Magistrate Division decisions are appealed to the Regular Division by filing a new complaint for trial de novo (ORS 305.501(5)), and Regular Division judgments are appealed to the Oregon Supreme Court, where appellate briefs are filed (ORS 305.445) |  |  |  |  |  |  |
+| `answering-brief` — Answering brief (appellee's principal brief) | BLOCKED: not a filing this court receives: no appellate briefing in the Tax Court; Magistrate-to-Regular Division review is by complaint and answer with trial de novo (ORS 305.501(5); ORS 305.560), and the answering brief on appeal from the Tax Court is filed in the Oregon Supreme Court (ORS 305.445) |  |  |  |  |  |  |
+| `reply-brief` — Reply brief | BLOCKED: not a filing this court receives: no appellate briefing in the Tax Court (ORS 305.501(5) de novo trial in Regular Division); reply briefs on appeal from the Tax Court are filed in the Oregon Supreme Court (ORS 305.445) |  |  |  |  |  |  |
+| `petition-for-discretionary-review` — Petition for discretionary review | BLOCKED: not a filing this court receives: the Tax Court has no discretionary-review procedure; Regular Division judgments are reviewable as of right by appeal to the Oregon Supreme Court (ORS 305.445) |  |  |  |  |  |  |
+| `motion-brief` — Motion and supporting memorandum | BLOCKED: no public filed copy: Tax Court motions (e.g. TCR 47 summary judgment) exist but the court has no online docket or document access (case file copies only via OJD records request form, courts.oregon.gov/courts/tax/records); State of Oregon Law Library CONTENTdm holds only Tax Court decisions; OJD, ACLU-OR, Democracy Docket, First Liberty sites checked, no posted Tax Court motion found |  |  |  |  |  |  |
+| `petition-for-review` — Petition for review (agency order or state high court) | BLOCKED: not a filing this court receives: Department of Revenue and county assessor actions are challenged in the Tax Court by complaint, not by petition for review (ORS 305.275, 305.280, 305.560; Magistrate Division appeals ORS 305.501(5)); review of Tax Court judgments is by appeal to the Oregon Supreme Court (ORS 305.445) |  |  |  |  |  |  |
+| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | BLOCKED: not a filing this court receives: Tax Court proceedings begin by complaint (ORS 305.560); original mandamus jurisdiction lies in the circuit courts and the Oregon Supreme Court (ORS 34.120; Or Const Art VII (Amended) s 2), not the Tax Court |  |  |  |  |  |  |
+| `amicus-brief` — Amicus curiae brief | BLOCKED: no public filed copy: Tax Court has no online docket or document access (case file copies only via OJD records request form, courts.oregon.gov/courts/tax/records); State of Oregon Law Library digital collection holds only Tax Court decisions; OJD, Law Library CONTENTdm, ACLU-OR, Democracy Docket and First Liberty sites checked, no Tax Court amicus filing found |  |  |  |  |  |  |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
