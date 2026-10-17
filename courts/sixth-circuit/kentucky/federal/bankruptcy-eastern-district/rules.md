@@ -1,6 +1,6 @@
 # Eastern District of Kentucky Bankruptcy Court rules
 
-Primary sources checked 2026-10-17. Re-check every six months and before changing a template. Sources: [Local Bankruptcy Rules, effective December 1, 2024](https://www.kyeb.uscourts.gov/sites/kyeb/files/KYEB%20120124%20Local%20Rules%20POST%20COMMENT%20CLEAN%20FINAL%20110424_0.pdf); [Administrative Procedures Manual](https://www.kyeb.uscourts.gov/administrative-procedures-manual); and Federal Rules of Bankruptcy Procedure 7008, 7010, 9004, 9011, 9013 and 9014 at https://www.law.cornell.edu/rules/frbp/.
+Primary sources checked 2026-10-17. Re-check every six months and before changing a template. Sources: [Local Bankruptcy Rules, effective December 1, 2024](https://www.kyeb.uscourts.gov/sites/kyeb/files/KYEB%20120124%20Local%20Rules%20POST%20COMMENT%20CLEAN%20FINAL%20110424_0.pdf); [Administrative Procedures Manual](https://www.kyeb.uscourts.gov/administrative-procedures-manual); and Federal Rules of Bankruptcy Procedure 7008, 7010, 9004, 9011, 9013 and 9014 at https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-bankruptcy-procedure.
 
 Kinds: **M** mandatory; **C** convention; **T** template contract; **A** author responsibility. Local Rule 1001-3 provides that district court local rules apply only when included in the APM's district-rule list. The APM list excludes the district rule on form of papers; therefore no general typeface, margin, paper-size or spacing requirement is identified for these documents.
 
