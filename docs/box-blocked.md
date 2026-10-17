@@ -393,3 +393,11 @@ BLOCKED fb-l129.4  monttc/motion-brief: follow-up official-source and public fil
 BLOCKED fb-l129.4  monttc/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/montana/state/tax-appeal-board/exemplars/SOURCE.md
 BLOCKED fb-l129.4  monttc/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/montana/state/tax-appeal-board/exemplars/SOURCE.md
 BLOCKED fb-l129.4  monttc/amicus-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/ninth-circuit/montana/state/tax-appeal-board/exemplars/SOURCE.md
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+BLOCKED rows re-searched for iowa state courts; official rules/docket indexes and targeted public-filing queries reviewed. No additional qualifying downloadable text-layer PDF was verified for the remaining BLOCKED rows.
+BLOCKED fb-l129.4  iowa/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/eighth-circuit/iowa/state/supreme-court/exemplars/SOURCE.md
+BLOCKED fb-l129.4  iowactapp/petition-for-discretionary-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/eighth-circuit/iowa/state/court-of-appeals/exemplars/SOURCE.md
+BLOCKED fb-l129.4  iowactapp/motion-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/eighth-circuit/iowa/state/court-of-appeals/exemplars/SOURCE.md
+BLOCKED fb-l129.4  iowactapp/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/eighth-circuit/iowa/state/court-of-appeals/exemplars/SOURCE.md
+BLOCKED fb-l129.4  iowactapp/petition-for-writ: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/eighth-circuit/iowa/state/court-of-appeals/exemplars/SOURCE.md
