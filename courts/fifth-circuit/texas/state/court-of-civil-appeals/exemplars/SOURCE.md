@@ -15,3 +15,7 @@ Indexed level: `state-appellate`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 65 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-tma-abbott-v-doe-03-22-00126-amicus-brief.pdf` | Amicus Texas Medical Association | Abbott v. Doe, No. 03-22-00126-CV (Tex. App.—Austin) | 2022-03-18 | https://jlc.org/sites/default/files/attachments/2022-08/2022.3.18%20TX%20Medical%20Assn%20Amicus%20Br..pdf | `5c6b03fc1a1ffccdcf90d57918b60d336f46257b00e4c6635a16394881058850` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: searched the official Texas Judicial Branch Rules & Forms index, State Commission on Judicial Conduct opinions, Texas statutes Chapter 33, and targeted queries for Review Tribunal, special-court filings, Court of Criminal Appeals PDRs, and Supreme Court review petitions. The official sources returned statutes, opinions, court rules, and docket references, but no additional downloadable public filed text-layer PDF for the rows remaining BLOCKED. Status remains BLOCKED pending an accessible filing; current-court jurisdiction citations were checked against the official Texas sources linked here: https://www.txcourts.gov/rules-forms/ ; https://www.scjc.texas.gov/opinions/ ; https://statutes.capitol.texas.gov/
