@@ -10,3 +10,7 @@ Found, not usable as exemplars (no freely downloadable PDF of the filing itself)
 Not reachable: ptab.uspto.gov (the PTAB E2E search is a script-driven page; no direct PDF URL was found).
 
 Status: BLOCKED. See `rules.md`, "Exemplars: blocked".
+
+## Update 2026-10-17
+
+The "no exemplars" note above is superseded. Exemplars live in the doc-type folders: `petition/exemplars/` (Salesforce, Huawei: two filers) and `patent-owner-response/exemplars/` (Swarm Technology, Omni MedSci: two filers). See each folder's `SOURCE.md` and `../rules.md`, "Exemplars".
