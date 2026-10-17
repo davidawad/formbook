@@ -8,7 +8,9 @@
 #                                                           overlay review)
 #   doc types: alias|group|doctype|path|flags             (6 flags: template samples render exemplars overlay
 #                                                           review)
-# Output order follows data/index.json.
+# Every flag keys on committed text (exemplars/SOURCE.md, samples/INPUT-*.md, typst/*.typ, samples/OVERLAY-*.txt,
+# stamps, reviews), never on PDF presence, so a checkout without the PDFs gives the same manifest. Output order
+# follows data/index.json.
 set -euo pipefail
 FB_ROOT="$(dirname "$0")/.."
 export FB_ROOT

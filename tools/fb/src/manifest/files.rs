@@ -31,11 +31,6 @@ pub fn glob_match(name: &str, prefix: &str, suffix: &str) -> bool {
     name.len() >= prefix.len() + suffix.len() && name.starts_with(prefix) && name.ends_with(suffix)
 }
 
-/// Number of matches as one character, capped at 9 (the manifest's count fields).
-pub fn count(dir: &Path, prefix: &str, suffix: &str) -> char {
-    digit(matching(dir, prefix, suffix).len())
-}
-
 pub fn digit(n: usize) -> char {
     char::from_digit(n.min(9) as u32, 10).unwrap_or('9')
 }
@@ -51,32 +46,6 @@ pub fn bit(b: bool) -> char {
 
 pub fn is_file(p: &Path) -> bool {
     p.is_file()
-}
-
-/// `samples/.check-<engine>.txt` is valid while its first line is PASS, it has more than one line, and
-/// `shasum -a 256 -c` (run in `dir`) accepts the rest.
-pub fn stamp_valid(dir: &Path, engine: &str) -> bool {
-    fs::read(dir.join("samples").join(format!(".check-{engine}.txt")))
-        .map(|bytes| {
-            stamp_ok(&String::from_utf8_lossy(&bytes), |p| {
-                sha256_file(&dir.join(p))
-            })
-        })
-        .unwrap_or(false)
-}
-
-/// The stamp rule on a stamp's text; `hash_of` gives the lower-case hex digest of a listed path, if readable.
-pub fn stamp_ok(text: &str, hash_of: impl Fn(&str) -> Option<String>) -> bool {
-    let newlines = text.matches('\n').count();
-    let mut lines = text.split('\n');
-    let first_pass = lines.next() == Some("PASS");
-    let entries: Vec<(String, &str)> = lines.filter_map(parse_sum_line).collect();
-    first_pass
-        && newlines > 1
-        && !entries.is_empty()
-        && entries
-            .iter()
-            .all(|(h, p)| hash_of(p).is_some_and(|got| &got == h))
 }
 
 /// A `shasum -c` line: 64 hex digits, then two spaces or " *", then the path. Other lines are ignored.
@@ -102,10 +71,6 @@ mod tests {
     use super::*;
 
     const H: &str = "98ea6e4f216f2fb4b69fff9b3a44842c38686ca685f3f55dc48c5d3fb1107be4";
-
-    fn known(p: &str) -> Option<String> {
-        (p == "a").then(|| H.to_string())
-    }
 
     #[test]
     fn glob() {
@@ -139,18 +104,5 @@ mod tests {
             parse_sum_line(&format!("{upper}  a")),
             Some((H.to_string(), "a"))
         );
-    }
-
-    #[test]
-    fn stamp_rule() {
-        assert!(stamp_ok(&format!("PASS\n{H}  a\n"), known));
-        assert!(stamp_ok(&format!("PASS\n{H}  a\njunk\n"), known));
-        assert!(stamp_ok(&format!("PASS\n\n{H}  a"), known));
-        // one line only (wc -l counts newlines)
-        assert!(!stamp_ok(&format!("PASS\n{H}  a"), known));
-        assert!(!stamp_ok(&format!("FAIL\n{H}  a\n"), known));
-        assert!(!stamp_ok("PASS\njunk\n", known));
-        assert!(!stamp_ok(&format!("PASS\n{H}  missing\n"), known));
-        assert!(!stamp_ok(&format!("PASS\n{}  a\n", "0".repeat(64)), known));
     }
 }

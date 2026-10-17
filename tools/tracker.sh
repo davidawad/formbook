@@ -2,6 +2,8 @@
 # tracker.sh: regenerate the tracker: manifest -> completion logic -> README block, STATUS.md, per-folder READMEs.
 #
 # Usage: tools/tracker.sh        (needs: cargo; the logic is `fb tracker` in tools/fb, Rust)
+# Court and folder READMEs are written only between <!-- fb:generated:start --> and <!-- fb:generated:end -->;
+# hand-written text outside the markers is kept unchanged.
 set -euo pipefail
 FB_ROOT="$(dirname "$0")/.."
 export FB_ROOT

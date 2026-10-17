@@ -1,5 +1,5 @@
 //! `fb`: formbook tooling. Subcommands replace the branching of tools/check.sh,
-//! tools/manifest.sh and tools/tracker.sh (and tools/gen_readmes.py).
+//! tools/manifest.sh and tools/tracker.sh; `fb readmes` replaces tools/gen_readmes.py.
 mod check;
 mod manifest;
 mod readmes;
