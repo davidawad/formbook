@@ -429,3 +429,5 @@ BLOCKED fb-l129.4  illappct/petition-for-writ: follow-up official-source and pub
 BLOCKED rows re-searched for michigan state courts; official rules/docket indexes and targeted public-filing queries reviewed. No additional qualifying downloadable text-layer PDF was verified for the remaining BLOCKED rows.
 BLOCKED fb-l129.4  michctapp/answering-brief: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/michigan/state/court-of-appeals/exemplars/SOURCE.md
 BLOCKED fb-l129.4  michctapp/petition-for-review: follow-up official-source and public filing searches found no retrievable qualifying filing; see courts/sixth-circuit/michigan/state/court-of-appeals/exemplars/SOURCE.md
+
+RESOLVED fb-l129.4 Vermont rule cite: `vt/petition-for-review` is verified against 3 V.S.A. § 815(a), (c) and the official V.R.A.P. 3-4 Notice of Appeal form. Agency review is commenced by notice of appeal, so the existing row remains BLOCKED as not a petition type, with a primary-source citation now recorded in `courts/second-circuit/vermont/state/supreme-court/exemplars/SOURCE.md`.
