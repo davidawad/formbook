@@ -4,11 +4,11 @@
 - CourtListener: [ptab](https://www.courtlistener.com/?court=ptab)
 - Level: agency
 - Circuit: `cafc`
-- Status: **todo** (0%); manual status in `court.json`: `todo`
+- Status: **in progress** (13%); manual status in `court.json`: `todo`
 
 ## Checklist
 
-- [ ] `rules.md` present
+- [x] `rules.md` present
 - [ ] `exemplars/` has at least 2 filed PDFs (different filers)
 - [ ] `samples/` has at least 2 .md samples
 - [ ] typst engine passes (`samples/.check-typst.txt` valid)

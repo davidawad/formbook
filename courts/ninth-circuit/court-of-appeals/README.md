@@ -4,7 +4,7 @@
 - CourtListener: [ca9](https://www.courtlistener.com/?court=ca9)
 - Level: appellate
 - Circuit: `ca9`
-- Status: **up for review** (63%); manual status in `court.json`: `todo`
+- Status: **up for review** (75%); manual status in `court.json`: `todo`
 
 ## Checklist
 
@@ -12,12 +12,12 @@
 - [ ] `exemplars/` has at least 2 filed PDFs (different filers)
 - [x] `samples/` has at least 2 .md samples
 - [x] typst engine passes (`samples/.check-typst.txt` valid)
-- [ ] latex engine passes (`samples/.check-latex.txt` valid)
+- [x] latex engine passes (`samples/.check-latex.txt` valid)
 - [ ] docx engine passes (`samples/.check-docx.txt` valid)
 - [x] overlay PDF present (`samples/*-overlay.pdf`)
 - [x] a review file in `reviews/`
 
-Engines: typst `pass`, latex `—`, docx `—`.
+Engines: typst `pass`, latex `pass`, docx `—`.
 
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
@@ -38,6 +38,7 @@ A court is `up for review` when `rules.md` is present and the typst engine passe
 | `checks.yaml` | The eval-loop contract: samples, parameters, and one check per requirement ID. See [`docs/EVAL-LOOP.md`](../../../docs/EVAL-LOOP.md). |
 | `typst/ca9-brief.typ` | The template: `ca9-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
+| `latex/template.tex`, `latex/ca9.lua`, `latex/render.sh` | The LaTeX engine: pandoc reads the same markdown through `ca9.lua` (Argument flags, citations, table of authorities, certificate counts), `template.tex` lays it out, and `render.sh` runs tectonic until the contents and authorities are settled. |
 | `samples/sweet-opening-brief.{md,pdf}` | Transcribed from the exemplar for visual comparison (a portion of the brief, not all of it). |
 | `samples/generic-opening-brief.{md,pdf}` | Fictional, structurally different: the generalization sample. |
 | `reviews/` | Recorded visual reviews (Gate 2). |
