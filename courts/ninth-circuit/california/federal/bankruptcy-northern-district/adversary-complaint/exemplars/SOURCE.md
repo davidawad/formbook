@@ -12,3 +12,13 @@
 - Public court record (RECAP). Used as a visual and structural reference only.
 
 Second filer: not saved in this pass (the brief asks for one exemplar per doc type). EVAL-LOOP's tier-2 rule (2 or 3 filers) is therefore not met yet; see README.md. The search also returned other adversary filings in this court (for example 26-03039 Goldberg v. United States, 26-03016 Callaway), which were not checked for pleading format and not saved.
+
+- File: `FILED-EXAMPLE-schneider-09-05109-adversary-complaint.pdf`
+- Filer: Plaintiff Saeed Fazeli
+- Case: *Saeed Fazeli v. Michael J. Schneider*, No. 09-05109 (Doc. 1)
+- Document: adversary complaint with Clerk cover sheet
+- Date filed: 2009-04-27
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.canb.368876/gov.uscourts.canb.368876.1.0.pdf
+- Date retrieved: 2026-10-17
+- sha256: `41e8f07c6bc42188348df5386cea2efe683f4e1a33a04085c2a734f6ad0ac6d4`
+- Note: Public RECAP scan without a text layer; retained as a filer-independent structural comparison only.
