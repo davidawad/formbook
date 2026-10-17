@@ -20,16 +20,3 @@
 
 - The exemplar has no notice of motion, objection deadline, or hearing. LBR 9013-1(c) requires one (conforming substantially to Official Form B 420A) for a motion in an adversary proceeding, unless it is a contemporaneous motion under LBR 9013-2. The filing omits it. The template generates the notice from frontmatter fields; see README.md.
 - The caption number ("Adversary No. 18-00173 MMH") does not match the ECF number (25-10013). The sample keeps the caption number as printed.
-
-## 2. Second filer (added 2026-10-17)
-
-- File: `FILED-EXAMPLE-compass-coffee-26-00005-motion-brief.pdf` (6 pages, text layer present: `pdftotext` reads it; Word for Microsoft 365 output, TimesNewRomanPS-BoldMT embedded, Times-Roman/Bold not embedded)
-- Court: United States Bankruptcy Court for the District of Columbia (`dcb`)
-- Case: *In re Compass Coffee, LLC*, chapter 11, No. 26-00005 (ELG) (ECF header `Case 26-00005-ELG Doc 14`)
-- Document: Debtor's Motion to Reject Certain Unexpired Non-Residential Leases (ECF Doc 14, main document only; exhibits are separate attachments). Sections I. Jurisdiction, Venue, and Predicates for Relief; II. Background; III. Relief Requested; IV. Basis for Relief; V. Notice; signature. No certificate of service or B 420A notice in this PDF. A main-case motion, not an adversary-proceeding motion
-- Filer: Debtor Compass Coffee, LLC, by Tyler P. Brown, Jennifer E. Wuebker (D.C. Bar No. 1035039) and Nicholas S. Monico (Hunton Andrews Kurth LLP), Richmond, Virginia, proposed counsel (different party and firm from entry 1)
-- Date filed: 2026-01-06 (ECF header "Filed 01/06/26")
-- Fetched from: https://web.archive.org/web/20260109145625id_/https://storage.courtlistener.com/recap/gov.uscourts.dcb.50893/gov.uscourts.dcb.50893.14.0_1.pdf (Internet Archive copy of the CourtListener RECAP file; storage.courtlistener.com returned HTTP 429)
-- Date retrieved: 2026-10-17
-- sha256: `e948032d33fa54e6b1607938bd2067fbe1aba6049cc55a804c37641684c283eb`
-- Found via the Internet Archive CDX index of `storage.courtlistener.com/recap/gov.uscourts.dcb.*`.
