@@ -29,3 +29,23 @@
 
 - CourtListener RECAP, nysd, memoranda and motions filed since 2026-06-01: about 40 results. Available memoranda in support of a motion to dismiss: 670151 (this one, 17 pp., counsel-filed) and 670733 (Garg, 30 pp., counsel-filed). This one is closer to the 8 to 14 page render target.
 - Not used: 669744 (37 pp. MTD for lack of jurisdiction or summary judgment, not a Rule 12(b)(6) memorandum), 674295 (33 pp., a Dimon/JPMorgan MTD, too long for the target).
+
+## 2. Better Home & Finance Holding Co. v. Garg (added 2026-10-17)
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-garg-26-cv-07025-motion-brief.pdf` (30 pages, letter, native text layer from Word via Acrobat PDFMaker, `pdftotext` reads it cleanly; not scanned) |
+| Case | *Better Home & Finance Holding Company v. Vishal Garg* |
+| Court | United States District Court, Southern District of New York |
+| Docket no. | 1:26-cv-07025-CM (page header: `Case 1:26-cv-07025-CM Document 41 Filed 09/08/26`) |
+| Document | Document 41: Defendant's Memorandum of Law in Support of Motion to Dismiss the First Amended Complaint (Rule 12(b)(1) and 12(b)(6)) |
+| Filer | Defendant Vishal Garg; counsel Quinn Emanuel Urquhart & Sullivan, LLP (signed "/s/ Michael E. Swartz"; also Alex Spiro, Minji Reem, Linda Moon, Robert M. Garsson). Different party and firm from entry 1 (Rahman defendants / Holland & Knight). |
+| Date filed | September 8, 2026 (header) |
+| URL fetched | https://storage.courtlistener.com/recap/gov.uscourts.nysd.670733/gov.uscourts.nysd.670733.41.0.pdf (RECAP copy) |
+| Docket page | https://www.courtlistener.com/docket/74661924/better-home-finance-holding-company-v-garg/ |
+| How found | Named in entry 1's "Limits" note (found in the 2026-10-14 RECAP search); fetched again and checked on 2026-10-17 |
+| Fonts (`pdffonts`) | Times New Roman (regular, bold, italic, bold italic) for the text; Calibri, Arial Bold, Symbol in small amounts; Liberation Sans is the ECF stamp |
+| Date retrieved | 2026-10-17 |
+| sha256 | `653fb472932572ae6c5858bdb157269090bf3b3cf4c664508f3c140381022735` |
+
+Form notes (tier 2): page 1 is a caption-only cover (court name, parties at left, "Case No." at right, title centered below; no counsel block on the cover, unlike entry 1); table of contents, table of authorities and a table of defined terms on roman-numbered pages; body arabic from 1, page number centered at the foot; centered caps top-level headings (PRELIMINARY STATEMENT, BACKGROUND, ARGUMENT, CONCLUSION); argument headings I./II., then A./B., then 1./2.; signature block after the conclusion with "/s/". No certificate of compliance with a word count appears in this PDF (Local Civ. R. 7.1(c) requires one for attorney-filed briefs; whether it was filed separately was not checked).
