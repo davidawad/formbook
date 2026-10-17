@@ -11,11 +11,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // FRAP 32(a)(5): proportional serif face. Vendored in /fonts.
+#let font-family = "Liberation Serif"          // FRAP 32(a)(5): proportional serif face; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // FRAP 32(a)(5): 14-point or larger, everywhere.
-#let body-leading = 0.94em                 // with the metric-aligned line box below this
-                                           // gives a baseline pitch of about 2.2 x type size (double spacing).
-#let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced.
+#let body-leading = 1.336em                // FRAP 32(a)(4): double-spaced. With the ascender-to-descender line box set below
+                                           // (0.909em in Liberation Serif) the baseline pitch is 2.245em = 31.4 pt at 14 pt.
+#let single-leading = 0.516em              // 0.909em + 0.516em = 1.425em (about 20 pt at 14 pt): headings, quotations, footnotes, TOC/TOA: single-spaced.
 #let page-margin = 1in                     // FRAP 32(a)(4): at least 1 inch, all four sides
 #let para-indent = 0.5in
 #let toc-depth = 4

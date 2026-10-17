@@ -8,15 +8,15 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; no system font (README.md, known gaps)
+#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 13pt                   // LCvR7.1(d): print style not less than 13-point, footnotes included
 #let page-w = 8.5in                     // LCvR5.2(a): 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let margin = 1in                       // LCvR7.1(d): minimum one inch on the top, bottom and sides
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // LCvR5.2(a) double spacing: 0.65em line box + 1.35em = 2.0em pitch (26 pt at 13 pt)
-#let single-leading = 0.5em             // single spacing for the caption, counsel and signature blocks
-#let single-pitch = 15pt                // one single-spaced line at 13 pt (0.65em + 0.5em, measured in README.md)
+#let body-leading = 1.345em             // LCvR5.2(a) double spacing: 0.655em line box + 1.345em = 2.0em pitch (26 pt at 13 pt)
+#let single-leading = 0.495em            // single spacing for the caption, counsel and signature blocks
+#let single-pitch = 15pt                // one single-spaced line at 13 pt (0.655em + 0.495em, measured in README.md)
 #let para-indent = 0.5in                // first-line indent of numbered allegations
 #let caption-left = 3.4in               // width of the party column of the caption
 #let paren-w = 0.3in                    // the ")" column between the parties and the case number

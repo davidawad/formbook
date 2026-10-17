@@ -8,10 +8,10 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"     // L.R. 10.1 names no typeface; EB Garamond is the one vendored in fonts/
+#let font-family = "Liberation Serif"     // L.R. 10.1 names no typeface; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                // L.R. 10.1(a)(1): at least 12-point type, text and footnotes
 #let margin = 1in                    // L.R. 10.1(a)(2): one-inch margins on all four sides
-#let body-leading = 1.35em           // L.R. 10.1(a)(3): double-spaced body; 24 pt baseline pitch at 12 pt (as in the cand template)
+#let body-leading = 1.345em          // L.R. 10.1(a)(3): double-spaced body; 24 pt baseline pitch at 12 pt (as in the cand template)
 #let single-leading = 0.5em          // L.R. 10.1(a)(4): block quotations, footnotes, caption, cover and signature are single-spaced
 #let pitch = 24pt                    // one double-spaced line: the unit of vertical space between blocks
 #let para-indent = 0.5in             // first-line indent of body paragraphs

@@ -11,11 +11,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"   // TRAP 9.4(e) names no typeface; EB Garamond per docs/FONTS.md
+#let font-family = "Liberation Serif" // TRAP 9.4(e) names no typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 14pt              // TRAP 9.4(e): conventional typeface no smaller than 14-point
 #let footnote-size = 12pt          // TRAP 9.4(e): footnotes no smaller than 12-point
 #let body-leading = 1.6em          // TRAP 9.4(d): double-spaced text; natural line + 1.6em = 2.25em pitch (README)
-#let single-leading = 0.5em        // TRAP 9.4(d) exceptions: footnotes, block quotations, headings, tables, lists
+#let single-leading = 0.495em       // TRAP 9.4(d) exceptions: footnotes, block quotations, headings, tables, lists
 #let page-margin = 1in             // TRAP 9.4(c): margins at least 1 inch on all four sides
 #let para-indent = 0.5in
 #let short-line = 50               // paragraphs shorter than this (characters) are set flush left

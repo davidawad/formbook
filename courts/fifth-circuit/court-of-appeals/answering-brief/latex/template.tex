@@ -1,5 +1,5 @@
 % Fifth Circuit principal brief, LaTeX engine (tools/render-latex.sh, pandoc --template).
-% Form (CA5-FORM-*, CA5-LEN-*): 8.5 x 11 in, 1 in margins, EB Garamond 14 pt text, 12 pt footnotes,
+% Form (CA5-FORM-*, CA5-LEN-*): 8.5 x 11 in, 1 in margins, Liberation Serif (Times New Roman substitute, docs/FONTS.md) 14 pt text, 12 pt footnotes,
 % double spacing for text, single spacing for headings, quotations, footnotes, tables and certificates.
 % The body is produced by ca5-brief.lua (cover, front statements, TOC, TOA, body, certificates); this file
 % holds the page setup, the fonts, and the macros those blocks call. No case-specific text lives here.
@@ -7,8 +7,8 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{fontspec}
 % Vendored fonts only (no system fonts): the renderer passes the pandoc variable fontdir.
-\setmainfont{EBGaramond-Regular}[Path=$fontdir$eb-garamond/, Extension=.otf, BoldFont=EBGaramond-Bold,
-  ItalicFont=EBGaramond-Italic, BoldItalicFont=EBGaramond-BoldItalic]
+\setmainfont{LiberationSerif-Regular}[Path=$fontdir$liberation-serif/, Extension=.ttf, BoldFont=LiberationSerif-Bold,
+  ItalicFont=LiberationSerif-Italic, BoldItalicFont=LiberationSerif-BoldItalic]
 \usepackage[hidelinks,bookmarks=false]{hyperref}
 \usepackage{xcolor}
 

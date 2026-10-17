@@ -11,11 +11,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // No W.D. Ky. type rule; vendored in /fonts (style choice, see ../README.md).
-#let type-size = 13pt                    // 13 pt EB Garamond sets about as large as 12 pt Times (style choice).
+#let font-family = "Liberation Serif"    // No W.D. Ky. type rule; Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 12pt                    // 12 pt, the exemplar's size; Liberation Serif has Times metrics (docs/FONTS.md) (style choice).
 #let pitch = 24pt                        // Double spacing: the convention of the filed exemplar (style choice).
-#let body-leading = 0.54em               // Gap between lines of body text; tuned so the line pitch is `pitch`.
-#let single-leading = 0.2em              // Caption, counsel, signature, table text.
+#let body-leading = pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is `pitch`.
+#let single-leading = 0.398em            // Caption, counsel, signature, table text.
 #let margins = (top: 1in, bottom: 1in, x: 1in)
 #let para-indent = 0.5in                 // First-line indent of numbered allegations.
 #let number-gap = 0.3in                  // Gap between the allegation number and its text.
@@ -199,7 +199,7 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    top-edge: 0.891em, bottom-edge: -0.216em,  // Liberation Serif's hhea ascender and descender: a 1.107em line box
   )
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
   // Only the exhibit tables use enum/table styling; the prayer's lettered items are set here.

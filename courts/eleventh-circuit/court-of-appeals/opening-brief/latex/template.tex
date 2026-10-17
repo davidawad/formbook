@@ -1,11 +1,11 @@
 % U.S. Court of Appeals for the Eleventh Circuit: appellant's opening brief (FRAP 28, 32; 11th Cir. R. 28-1, 32-3).
 % LaTeX engine. The same form as typst/ca11-opening-brief.typ: rule-driven and content-agnostic. Everything printed
 % comes from the markdown frontmatter, the body, or latex/ca11.lua (heading labels, table of citations, word count).
-% Fonts: only the vendored EB Garamond, through the pandoc variable fontdir (no system fonts). See ../README.md.
+% Fonts: only the vendored Liberation Serif (Times New Roman substitute, docs/FONTS.md), through the pandoc variable fontdir (no system fonts). See ../README.md.
 \documentclass[14pt,letterpaper]{extarticle}
 \usepackage{fontspec}
-\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf, UprightFont=EBGaramond-Regular, ItalicFont=EBGaramond-Italic,
-  BoldFont=EBGaramond-Bold, BoldItalicFont=EBGaramond-BoldItalic, Ligatures=TeX]{EBGaramond-Regular}
+\setmainfont[Path=$fontdir$liberation-serif/, Extension=.ttf, UprightFont=LiberationSerif-Regular, ItalicFont=LiberationSerif-Italic,
+  BoldFont=LiberationSerif-Bold, BoldItalicFont=LiberationSerif-BoldItalic, Ligatures=TeX]{LiberationSerif-Regular}
 \usepackage[letterpaper,margin=1in,footskip=0.3in]{geometry}
 \usepackage{etoolbox}      % table-of-citations page lists
 \usepackage[hidelinks,unicode,bookmarks=false]{hyperref}
@@ -235,7 +235,7 @@ $if(keep)$\end{samepage}$endif$
 \clearpage
 \caHone{Certificate of Compliance}
 \begingroup\cabody\noindent\parindent=0pt\relax
-Pursuant to Rule 32(g) of the Federal Rules of Appellate Procedure, I certify that the foregoing \textbf{\MakeUppercase{$brief_title$}} complies with (1) the word limit of Rule 32(a)(7)(B) of the Federal Rules of Appellate Procedure because it contains $words$ words, which is no more than $limit$, and (2) the typeface and type-style requirements of Rule 32(a)(5) and (6) of the Federal Rules of Appellate Procedure because it has been prepared in a proportionally spaced typeface (EB Garamond) in 14-point.\par
+Pursuant to Rule 32(g) of the Federal Rules of Appellate Procedure, I certify that the foregoing \textbf{\MakeUppercase{$brief_title$}} complies with (1) the word limit of Rule 32(a)(7)(B) of the Federal Rules of Appellate Procedure because it contains $words$ words, which is no more than $limit$, and (2) the typeface and type-style requirements of Rule 32(a)(5) and (6) of the Federal Rules of Appellate Procedure because it has been prepared in a proportionally spaced typeface (Liberation Serif) in 14-point.\par
 \endgroup
 \par\addvspace{1.4em}\noindent\hspace*{0.5\textwidth}
 \begin{minipage}[t]{0.5\textwidth}\casingle

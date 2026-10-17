@@ -8,14 +8,14 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LR 5.2(a): proportionately spaced; vendored in fonts/ (see README, gap 1)
+#let font-family = "Liberation Serif"   // LR 5.2(a): proportionately spaced; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // LR 5.2(a): at least 12-point
 #let page-w = 8.5in                     // LR 5.2(a): 8 1/2 x 11 inch page
 #let page-h = 11in
 #let margin = 1in                       // LR 5.2(a): margins of at least one inch on all sides
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // LR 5.2(a): double spaced (24 pt baseline pitch at 12 pt; measured, README.md)
-#let single-leading = 0.5em             // block quotes, headings, caption and signature: single spaced
+#let body-leading = 1.345em             // LR 5.2(a): double spaced (24 pt baseline pitch at 12 pt; measured, README.md)
+#let single-leading = 0.495em            // block quotes, headings, caption and signature: single spaced
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.1in               // width of the party column of the caption
 

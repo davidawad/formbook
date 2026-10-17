@@ -11,11 +11,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // Vendored in /fonts. No M.D. Ala. typography rule exists (see ../README.md, gaps).
-#let type-size = 13pt                    // Style choice: EB Garamond sits smaller than Times, so 13 pt reads like the filed 12 pt Times.
+#let font-family = "Liberation Serif"    // No M.D. Ala. typography rule exists; Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 12pt                    // Convention: 12 pt, the size of the filed complaint (no local rule sets a size).
 #let line-pitch = 24pt                   // Double spacing, as the filed complaint (convention, see ../README.md).
-#let body-leading = 0.54em               // Gap between lines of body text; tuned so the line pitch is line-pitch.
-#let single-leading = 0.2em              // Caption, counsel block, signature, headings, tables.
+#let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.
+#let single-leading = 0.398em            // Caption, counsel block, signature, headings, tables.
 #let page-margin = 1in                   // Style choice (no local margin rule; FRBP 9004(a) requires legibility only).
 #let margins = (top: page-margin, bottom: page-margin, x: page-margin)
 #let para-indent = 0.5in
@@ -171,7 +171,7 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    top-edge: 0.891em, bottom-edge: -0.216em,  // Liberation Serif's hhea ascender and descender: a 1.107em line box
   )
   set par(
     leading: body-leading, spacing: 0.9em,

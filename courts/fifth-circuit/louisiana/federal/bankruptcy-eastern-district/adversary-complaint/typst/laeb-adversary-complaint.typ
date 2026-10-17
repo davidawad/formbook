@@ -10,14 +10,14 @@
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
 #let court-lines = ("UNITED STATES BANKRUPTCY COURT", "EASTERN DISTRICT OF LOUISIANA")  // Fed. R. Bankr. P. 9004(b)
-#let font-family = "EB Garamond"        // vendored in fonts/; the exemplar is Times New Roman (no E.D. La. font rule)
+#let font-family = "Liberation Serif"   // no E.D. La. font rule; Times New Roman substitute per docs/FONTS.md (the exemplar is Times New Roman)
 #let type-size = 12pt                   // convention: the exemplar's body is 12 pt
 #let page-w = 8.5in                     // letter paper
 #let page-h = 11in
 #let margin = 1in                       // convention: the exemplar's margins are 1 inch
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 24 pt pitch at 12 pt
-#let single-leading = 0.5em             // single spacing for caption, counsel and signature block
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 24 pt pitch at 12 pt
+#let single-leading = 0.495em            // single spacing for caption, counsel and signature block
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs (number sits at the indent)
 #let caption-left = 3.4in               // width of the party column of the caption
 #let footer-size = 11pt

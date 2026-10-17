@@ -11,12 +11,12 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // FRAP 32(a)(5)(A): proportionally spaced, serif. Vendored in /fonts.
+#let font-family = "Liberation Serif"          // FRAP 32(a)(5)(A): proportionally spaced, serif; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // Cir. R. 32(b) requires 12 pt in the body; 14 pt (FRAP 32(a)(5)(A)) is used.
 #let footnote-size = 12pt                  // Cir. R. 32(b): 11 pt or larger in footnotes.
-#let body-leading = 0.94em                 // FRAP 32(a)(4): double-spaced. With the metric-aligned line box
-                                           // below this gives a baseline pitch of about 2.2 x type size.
-#let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced (FRAP 32(a)(4)).
+#let body-leading = 1.336em                // FRAP 32(a)(4): double-spaced. With the ascender-to-descender line box set below
+                                           // (0.909em in Liberation Serif) this gives a baseline pitch of 2.245em, about 2.2 x type size.
+#let single-leading = 0.516em              // headings, quotations, footnotes, TOC/TOA: single-spaced (FRAP 32(a)(4)); 1.425em pitch.
 #let page-margin = 1in                     // FRAP 32(a)(4): at least one inch on all four sides.
 #let para-indent = 0.5in
 #let counsel-step = 0.5em                 // counsel and signature address lines step in under the name

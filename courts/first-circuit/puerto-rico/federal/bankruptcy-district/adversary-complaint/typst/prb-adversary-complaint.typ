@@ -10,12 +10,12 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no typeface rule in the PR bankruptcy LBRs; vendored serif (convention)
+#let font-family = "Liberation Serif"        // no typeface rule in the PR bankruptcy LBRs; Times New Roman substitute per docs/FONTS.md (convention)
 #let type-size = 12pt                   // convention (both exemplars set 12 pt); LBR 9013-1(c)(1) needs 11 pt minimum for notices
 #let page-w = 8.5in                     // LBR 1005-1(b): 8 1/2 x 11 inch
 #let page-h = 11in
 #let margin = 1in                       // convention (both exemplars have one-inch margins)
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 1.35em gives a 24 pt baseline pitch at 12 pt (measured, README.md)
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 1.345em gives a 24 pt baseline pitch at 12 pt (measured, README.md)
 #let pitch = 24pt                        // one double-spaced row: body-leading on a 12 pt line box
 #let single-leading = 0.5em             // single spacing for the caption, the title block and the signature block
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs

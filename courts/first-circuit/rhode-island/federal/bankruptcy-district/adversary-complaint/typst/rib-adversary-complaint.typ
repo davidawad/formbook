@@ -10,10 +10,10 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"          // vendored in fonts/eb-garamond; no system font is used
+#let font-family = "Liberation Serif"          // Times New Roman substitute per docs/FONTS.md, vendored in fonts/liberation-serif; no system font is used
 #let type-size = 12pt                     // LBR 1005-1(b): text at least 11 point
 #let footnote-size = 10pt                 // LBR 1005-1(b): footnotes at least 10 point
-#let body-leading = 1.35em                // LBR 1005-1(b): double spaced. The EB Garamond line box is 0.65em, so 2em = 24 pt pitch at 12 pt
+#let body-leading = 1.345em               // LBR 1005-1(b): double spaced. The Liberation Serif line box is 0.655em, so 2em = 24 pt pitch at 12 pt
 #let single-leading = 0.5em               // single spacing: caption, counsel, quotations, signature (exempt under LBR 1005-1(b))
 #let para-indent = 0.5in
 #let page-w = 8.5in                       // LBR 1005-1(b): 8 1/2 x 11 inch paper

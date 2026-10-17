@@ -11,11 +11,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // COB-FORM-002: proportionally spaced, vendored in /fonts.
-#let type-size = 13pt                    // COB-FORM-002: 12 point or larger. 13 pt because EB Garamond sets smaller than Times at the same size; see ../README.md.
+#let font-family = "Liberation Serif"    // COB-FORM-002: proportionally spaced; Times New Roman substitute per docs/FONTS.md
+#let type-size = 12pt                    // COB-FORM-002: 12 point or larger.
 #let line-pitch = 24pt                   // COB-FORM-003: double spacing (proxy rule, see README).
-#let body-leading = 0.54em               // gap between body lines; tuned so the baseline pitch is line-pitch at 13 pt.
-#let single-leading = 0.2em              // caption, headings that wrap, block quotations, footnotes, signature block.
+#let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.
+#let single-leading = 0.398em            // caption, headings that wrap, block quotations, footnotes, signature block.
 #let margin-top = 1.5in                  // COB-FORM-004 (proxy): 1.5 in top, 1 in elsewhere.
 #let margin-other = 1in
 #let para-indent = 0.5in
@@ -174,7 +174,7 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    top-edge: 0.891em, bottom-edge: -0.216em,  // Liberation Serif's hhea ascender and descender: a 1.107em line box
   )
   set par(
     leading: body-leading, spacing: 0pt,

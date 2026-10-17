@@ -13,13 +13,14 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see ../README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"       // no font is named by FRBP 9004 or E.D.N.Y. LBR 9004-1; vendored in fonts/
+#let font-family = "Liberation Serif"       // no font is named by FRBP 9004 or E.D.N.Y. LBR 9004-1; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                  // no size is named either; 12 pt is the working convention (README.md)
 #let page-w = 8.5in                    // E.D.N.Y. LBR 9004-1(a)(ii): 8 1/2 x 11 inch paper
 #let margin = 1in                      // layout choice: 1 inch margins on all sides
 #let text-width = page-w - 2 * margin
-#let pitch = 24pt                      // double spacing: EB Garamond's line box is 0.65em, so leading 1.35em gives 24 pt at 12 pt
-#let body-leading = 1.35em
+#let pitch = 24pt                      // double spacing: Liberation Serif's line box is 0.655em, so leading 1.345em gives 24 pt at 12 pt
+#let body-leading = 1.345em
+
 #let single-leading = 0.5em            // single spacing for counsel block, caption, quotations, signature block
 #let para-indent = 0.5in               // first-line indent of body paragraphs
 #let quote-indent = 1in                // quotations are indented on both sides

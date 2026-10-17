@@ -12,10 +12,11 @@
 // Parameters (each traces to a rule or a named style choice; see ../README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // NYSD-FORM-002: the joint rules name no typeface; EB Garamond is the vendored one. See README gaps.
+#let font-family = "Liberation Serif"        // NYSD-FORM-002: the joint rules name no typeface; Times New Roman substitute per docs/FONTS.md. See README gaps.
 #let type-size = 12pt                    // NYSD-FORM-002: 12-point type or larger (Local Civ. R. 7.1(b)(1)).
-#let body-leading = 1.35em               // NYSD-FORM-003: double-spaced (Local Civ. R. 7.1(b)(3)); a 24 pt pitch at 12 pt (EB Garamond line box 0.65 em).
-#let single-leading = 0.5em              // caption, headings, block quotations, footnotes, signature block: single-spaced where the rule allows.
+#let body-leading = 1.091em              // NYSD-FORM-003: double-spaced (Local Civ. R. 7.1(b)(3)); text edges are ascender/descender (below), a 0.909em
+                                         // line box in Liberation Serif, so 0.909em + 1.091em = 2.0em = a 24 pt pitch at 12 pt, also between paragraphs.
+#let single-leading = 0.241em            // 0.909em + 0.241em = 1.15em (13.8 pt), single spacing: caption, headings, block quotations, footnotes, signature block: single-spaced where the rule allows.
 #let line-pitch = 24pt                   // one double-spaced line; used for spacing around headings and the caption.
 #let margin = 1in                        // NYSD-FORM-004: at least one-inch margins on all sides (Local Civ. R. 7.1(b)(2)).
 #let para-indent = 0.5in                 // first-line indent of numbered paragraphs.
@@ -187,7 +188,7 @@
     hyphenate: false, fallback: false,
     top-edge: "ascender", bottom-edge: "descender",
   )
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
+  set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
   set enum(numbering: "(a)", indent: list-indent, body-indent: 0.4in, spacing: body-leading)
   set list(indent: list-indent, body-indent: 0.4in, spacing: body-leading)
   set footnote.entry(gap: 0.5em, clearance: 0.9em, separator: line(length: 30%, stroke: 0.5pt))

@@ -11,12 +11,12 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // CA5-FORM-005: proportional serif. Vendored in /fonts.
+#let font-family = "Liberation Serif"     // CA5-FORM-005: proportional serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                      // CA5-FORM-005: 14 point or larger for text.
 #let footnote-size = 12pt                  // CA5-FORM-005: 12 point or larger for footnotes.
 #let body-leading = 1.55em                 // CA5-FORM-004: double spaced; this leading gives about
                                            // a 2.2 x type size baseline pitch (ca9 tuning, checked).
-#let single-leading = 0.5em               // quotations, footnotes, headings, TOC/TOA, certificates.
+#let single-leading = 0.495em              // quotations, footnotes, headings, TOC/TOA, certificates.
 #let page-margin = 1in                     // CA5-FORM-003: 1 inch on all sides.
 #let para-indent = 0.5in
 #let title-size = 1.15em                   // section titles: bold capitals, a little larger than the text

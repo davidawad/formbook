@@ -11,9 +11,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or is a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"   // vendored in fonts/eb-garamond; the W.D. Va. rules name no typeface or size
+#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md, vendored in fonts/liberation-serif; the W.D. Va. rules name no typeface or size
 #let type-size = 12pt              // convention: 12 pt body, the size the filed complaint uses
-#let body-leading = 1.35em         // about 24 pt pitch at 12 pt: double spacing, as in the filed complaint
+#let body-leading = 1.345em        // about 24 pt pitch at 12 pt: double spacing, as in the filed complaint
 #let single-leading = 0.5em        // counsel, caption and signature blocks
 #let page-w = 8.5in                // LR 5005-3(C), LR 7001-1(C)(3): standard letter size
 #let page-h = 11in

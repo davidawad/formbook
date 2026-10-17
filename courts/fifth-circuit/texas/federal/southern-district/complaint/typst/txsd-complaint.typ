@@ -8,10 +8,10 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no face named by S.D. Tex. LR10.2 or the judges' procedures retrieved; kept (docs/FONTS.md "No face named"); see README.md
+#let font-family = "Liberation Serif"   // no face named by S.D. Tex. LR10.2 or the judges' procedures retrieved; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 13pt                   // Galveston Div. R. of Practice f and Judge Hanks Procs. 7.A: "13-point" (not in LR10.2; see README.md)
-#let double = 1.35em                    // double spacing: EB Garamond's line box is 0.65em, so 0.65em + 1.35em = 2.0 x type size
-#let single = 0.5em                     // single spacing for caption, counsel and signature blocks
+#let double = 1.345em                   // double spacing: Liberation Serif's line box is 0.655em, so 0.655em + 1.345em = 2.0 x type size
+#let single = 0.495em                    // single spacing for caption, counsel and signature blocks
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs; hanging indent of lettered items
 #let page-margin = 1in                  // 1-inch margins on all sides
 #let caption-left = 3.3in               // width of the party column of the caption

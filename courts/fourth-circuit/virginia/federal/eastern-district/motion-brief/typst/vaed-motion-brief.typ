@@ -9,10 +9,10 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; the only family vendored (README.md, Known gaps)
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (README.md, Known gaps)
 #let type-size = 12pt                   // L.R. 7(F)(3): 12 point Roman, footnotes included (set below)
 #let margin-in = 1in                    // L.R. 7(F)(3): one-inch margins
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 1.35em gives a 24 pt baseline pitch at 12 pt
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 1.345em gives a 24 pt baseline pitch at 12 pt
 #let single-leading = 0.5em             // single spacing for the caption, block lists, and signature block: about 13.8 pt pitch
 #let para-indent = 0.5in                // first-line indent of body text
 #let max-pages = 30                     // L.R. 7(F)(3): an opening brief shall not exceed 30 pages (exhibits and affidavits excluded)

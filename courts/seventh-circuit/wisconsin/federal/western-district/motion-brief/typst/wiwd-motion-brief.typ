@@ -10,13 +10,13 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/ (the only font vendored); see README.md, open question 1
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; see README.md, open question 1
 #let type-size = 12pt                   // convention, matching the filed exemplar's body size; no W.D. Wis. rule verified
 #let page-w = 8.5in                     // 8 1/2 by 11 inch paper (convention; the exemplar is letter size)
 #let page-h = 11in
 #let margin = 1in                       // convention; the exemplar's text block is about 1 inch in from each edge
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 1.35em leading gives about 24 pt at 12 pt
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 1.345em leading gives about 24 pt at 12 pt
 #let single-leading = 0.5em             // single spacing for the caption, the title, the block quotes and the signature block
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 3.2in               // width of the party column of the caption
@@ -146,7 +146,7 @@
   )
   set text(font: font-family, size: type-size, lang: "en")
   // Block spacing equals the double-spacing leading (see main.typ and README.md): with zero spacing the
-  // blocks overlap, because EB Garamond's line box is 0.65em.
+  // blocks overlap, because Liberation Serif's line box is 0.655em.
   set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
 
   // Headings: level 1 is a centered section (CONCLUSION); level 2 a bold argument heading at the left margin;

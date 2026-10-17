@@ -9,14 +9,14 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to the filed exemplar; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"      // no family is named by the rules; EB Garamond is the vendored serif (README.md)
+#let font-family = "Liberation Serif" // no family is named by the rules; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                 // LBR 5005-3(a): clearly legible in 12-point font
 #let page-w = 8.5in                   // LBR 5005-3(a): 8 1/2 x 11 inch paper
 #let page-h = 11in
 #let margin = 1in                     // LBR 5005-3(a): one-inch margins throughout
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em            // double spacing (exemplar): 24 pt baseline pitch at 12 pt (line box 0.65em)
-#let single-leading = 0.5em           // single spacing: caption, quotations, signature (about 13.8 pt)
+#let body-leading = 1.345em           // double spacing (exemplar): 24 pt baseline pitch at 12 pt (line box 0.655em)
+#let single-leading = 0.495em          // single spacing: caption, quotations, signature (about 13.8 pt)
 #let para-indent = 0.5in              // first-line indent of paragraphs (exemplar)
 #let caption-left = 3.7in             // party column of the caption: a party name must fit one row (README.md)
 #let caption-mid = 0.3in              // the ")" column

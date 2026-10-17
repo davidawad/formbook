@@ -9,9 +9,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // L.R. 10(a)(2), (4): plainly legible, 12 point or more; the rule names no face, so EB Garamond stays (docs/FONTS.md, "No face named"); vendored in fonts/
-#let type-size = 13pt                   // L.R. 10(a)(4) requires 12 point or more, footnotes included; 13 pt is a style choice (EB Garamond's x-height is smaller than Times New Roman's at the same size)
-#let body-leading = 1.35em              // L.R. 10(a)(6): double-spaced. EB Garamond's line box is 0.65em, so 1.35em of leading gives a 2.0em baseline pitch
+#let font-family = "Liberation Serif"        // L.R. 10(a)(2), (4): plainly legible, 12 point or more; the rule names no face, so the default applies: Times New Roman substitute (docs/FONTS.md, "No face named"); vendored in fonts/
+#let type-size = 12pt                   // L.R. 10(a)(4): 12 point or more, footnotes included; the rule floor
+#let body-leading = 1.345em             // L.R. 10(a)(6): double-spaced. Liberation Serif's line box is 0.655em, so 1.345em of leading gives a 2.0em baseline pitch
 #let single-leading = 0.5em             // footnotes, caption, headings of several lines, signature: single-spaced (1.15em pitch)
 #let page-margin = 1in                  // L.R. 10(a)(3): at least 1 inch on every side
 #let text-width = 8.5in - 2 * page-margin
@@ -84,7 +84,7 @@
 
 /// The body in order. A `#` heading is unnumbered. A list is numbered 1., 2., ... A paragraph is not numbered:
 /// it is indented and double-spaced, and followed by a `v(body-leading)` gap (a paragraph's last line box is
-/// 0.65em, so the gap makes the next line 2.0em below it).
+/// 0.655em in Liberation Serif, so the gap makes the next line 2.0em below it).
 #let argument(body) = {
   // A footnote definition (`[^n]: ...`) belongs to the paragraph that refers to it: each chunk is rendered by its own
   // cmarker call, so the definition is folded into the chunk before it, not left as a chunk of its own.

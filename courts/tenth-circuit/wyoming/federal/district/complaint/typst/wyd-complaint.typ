@@ -8,17 +8,17 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/eb-garamond/; no system font is ever used
-#let type-size = 13pt                   // LR 10.1(a): not less than 12 point. 13 pt matches the visual size of Times 12 (README)
+#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 12pt                   // LR 10.1(a): not less than 12 point
 #assert(type-size >= 12pt, message: "wyd-complaint: D. Wyo. LR 10.1(a) requires type not less than 12 point")
 #let page-w = 8.5in                     // LR 10.1(a): 8 1/2 x 11 inch paper
 #let page-h = 11in
 #let margin = 1in                       // LR 10.1(a): one inch margin on all sides
 #let text-width = page-w - 2 * margin
-// Double spacing (LR 10.1(a)): EB Garamond's natural line is about 0.98 em, so a 1.05 em extra leading gives a
-// 26 pt pitch at 13 pt, the same ratio as Word's "double" setting for a 12 pt serif (README).
-#let body-leading = 1.05em
-#let single-leading = 0.3em             // single spacing for the attorney block, caption and signature
+// Double spacing (LR 10.1(a)): Liberation Serif's line box is 0.655 em, so a 1.345 em leading gives a
+// 2 em (24 pt) baseline pitch at 12 pt.
+#let body-leading = 1.345em
+#let single-leading = 0.495em           // single spacing (a 1.15 em pitch) for the attorney block, caption and signature
 #let para-indent = 0.5in                // first-line indent of numbered allegations
 #let caption-left = 3.1in               // party column of the caption
 #let caption-mid = 0.35in               // ")" column

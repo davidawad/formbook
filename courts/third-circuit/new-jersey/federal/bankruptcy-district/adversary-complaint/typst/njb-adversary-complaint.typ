@@ -8,9 +8,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no face named by the rules; docs/FONTS.md "No face named"; see README.md, Known gaps
+#let font-family = "Liberation Serif"        // no face named by the rules; Times New Roman substitute per docs/FONTS.md "No face named"; see README.md, Known gaps
 #let type-size = 14pt                   // convention: NJ filings in RECAP are 12 to 14 pt; see README.md
-#let body-leading = 1.15em              // double-spaced feel at 14 pt, tuned against the exemplar (README.md)
+#let body-leading = 1.145em             // double-spaced feel at 14 pt, tuned against the exemplar (README.md): 0.655em line box + 1.145em = 25.2 pt
 #let single-leading = 0.45em            // counsel, caption and signature blocks
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let page-margin = 1in                  // FRBP 9004: legible paper; the exemplar uses 1 inch on all sides

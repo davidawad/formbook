@@ -13,10 +13,10 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // NCMD-FORM-002: proportional font; the rule names no face, so EB Garamond stays (docs/FONTS.md "No face named")
+#let font-family = "Liberation Serif"         // NCMD-FORM-002: proportional font; the rule names no face, so the default applies: Times New Roman substitute (docs/FONTS.md "No face named")
 #let type-size = 13pt                    // NCMD-FORM-002: proportional font "no smaller than 13 point" (LR 7.1(a)); footnotes included
 #let pitch = 23pt                        // NCMD-FORM-003: one double-spaced line; 27 x 23 pt = 621 pt, inside the 630 pt text height (see README.md)
-#let body-leading = 0.464em              // EB Garamond natural line height at 13 pt is 16.97 pt (measured); 16.97 + 0.464em (6.03 pt) = 23.0 pt pitch
+#let body-leading = pitch - 1.15em      // the text runs in a 1.15em line box (top-edge 0.9em, bottom-edge -0.25em) (14.95 pt at 13 pt); the gap makes the 23 pt pitch
 #let single-leading = 0.3em              // caption, counsel and signature blocks, table of contents and authorities, footnotes
 #let top-margin = 1.25in                 // NCMD-FORM-004: top margin "not less than one and one-quarter inches" (LR 7.1(a))
 #let bottom-margin = 1in                 // NCMD-FORM-004: bottom, left and right margins "not less than one inch" (LR 7.1(a))
@@ -301,7 +301,9 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    // A 1.15em line box (a word-processor single line); Liberation Serif's ascender-descender box is only 0.909em,
+    // so single-spaced lines with no gap would touch.
+    top-edge: 0.9em, bottom-edge: -0.25em,
   )
   set par(
     leading: body-leading, spacing: 0pt,

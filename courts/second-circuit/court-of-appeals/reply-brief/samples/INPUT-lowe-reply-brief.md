@@ -33,7 +33,7 @@ signature:
   lines: ["COOLEY LLP", "1299 Pennsylvania Avenue NW", "Suite 700", "Washington, DC 20004", "(202) 842-7800", "emcdowell@cooley.com"]
 date: "September 10, 2026"
 typeface_software: "Typst"
-typeface: "EB Garamond"
+typeface: "Liberation Serif"
 service:
   certificate: true
 authorities:

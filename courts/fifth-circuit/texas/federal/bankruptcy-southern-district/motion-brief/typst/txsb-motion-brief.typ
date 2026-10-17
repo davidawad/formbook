@@ -9,14 +9,14 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no typeface is set by the S.D. Tex. rules; EB Garamond is the vendored font
+#let font-family = "Liberation Serif"   // no typeface is set by the S.D. Tex. rules; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // no point size is set by the S.D. Tex. rules; 12 pt is the usual minimum
 #let page-w = 8.5in                     // LR10.2: 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let margin = 1in                       // not set by the rules; a 1 inch convention (see README.md)
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // LR10.2 double spacing: 0.65em line box + 1.35em = 2.0em, 24 pt at 12 pt
-#let single-leading = 0.5em             // caption, counsel and signature blocks
+#let body-leading = 1.345em             // LR10.2 double spacing: 0.655em line box + 1.345em = 2.0em, 24 pt at 12 pt
+#let single-leading = 0.495em            // caption, counsel and signature blocks
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.25in              // width of the party column of the caption
 

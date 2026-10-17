@@ -9,15 +9,15 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; the only serif family vendored (README.md, known gaps)
+#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // 5005-1(a)(2)(G): no smaller than 12 point; footer and captions included
 #let pitch = 24pt                       // 5005-1(a)(2)(G): double-spaced; one line of text is one pitch
 #let page-w = 8.5in                     // 5005-1(a)(2)(G): 8 1/2 by 11 inches
 #let page-h = 11in
 #let margin = 1in                       // the rules set no margin; one inch is the usual minimum (README.md)
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // double spacing: 0.65em line box + 1.35em leading = 2.0em = 24 pt at 12 pt (measured in ../README.md)
-#let single-leading = 0.5em             // single spacing for caption, counsel block, tables and signature
+#let body-leading = 1.345em             // double spacing: 0.655em line box + 1.345em leading = 2.0em = 24 pt at 12 pt (measured in ../README.md)
+#let single-leading = 0.495em            // single spacing for caption, counsel block, tables and signature
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs and unnumbered lead-ins
 #let caption-left = 3.6in               // width of the party column of the caption
 #let signature-indent = 3.25in          // the signature block sits in the right half of the page

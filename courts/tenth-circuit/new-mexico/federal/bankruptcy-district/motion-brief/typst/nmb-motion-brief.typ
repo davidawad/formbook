@@ -9,9 +9,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no typeface rule in FRBP or NM LBR; the vendored serif (fonts/)
+#let font-family = "Liberation Serif"   // no typeface rule in FRBP or NM LBR; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // convention (no size rule); matches the filed exemplar's body
-#let body-leading = 1.35em              // double spacing: about 24 pt baseline pitch at 12 pt (convention)
+#let body-leading = 1.345em             // double spacing: about 24 pt baseline pitch at 12 pt (convention)
 #let single-leading = 0.6em             // counsel, caption, block quotations and signature block
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let margin = 1in                       // all four sides (convention; the rules give no margin)

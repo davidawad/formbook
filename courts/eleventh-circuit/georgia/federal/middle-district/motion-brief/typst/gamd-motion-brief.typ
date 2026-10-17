@@ -10,12 +10,12 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to the exemplar; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; Times New Roman is not vendored (README, known gaps)
-#let type-size = 13pt                   // the exemplar's body text is 12 pt Times New Roman; EB Garamond sets smaller at the same size
+#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md (Times New Roman itself cannot be vendored)
+#let type-size = 12pt                   // the exemplar's body text is 12 pt Times New Roman (no M.D. Ga. size rule found)
 #let footnote-size = 11pt               // footnotes single-spaced, a point or so under the text (exemplar)
 #let pitch = 27.6pt                     // the exemplar's double-spaced baseline pitch (12 pt Times, measured: about 27.5 pt)
-#let body-leading = (pitch / type-size) * 1em - 0.65em   // EB Garamond's line box is about 0.65em (see README)
-#let single-leading = 0.5em             // caption, headings' neighbours, footnotes, signature and address block
+#let body-leading = (pitch / type-size) * 1em - 0.655em  // Liberation Serif's line box is 0.655em
+#let single-leading = 0.495em            // caption, headings' neighbours, footnotes, signature and address block
 #let single-pitch = 1.15 * type-size      // the minimum height of one single-spaced caption row
 #let para-indent = 0.5in                // first-line indent of body paragraphs (exemplar)
 #let margin = 1in                       // the exemplar: 1 inch on every side

@@ -11,10 +11,10 @@
 // Parameters (each traces to a rule or a named style choice; see ../README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // the local rules set no typeface; the vendored font in fonts/
-#let type-size = 13pt                   // FRBP 9004(a): "clearly legible". 13 pt is a style choice (see ../README.md)
-#let body-leading = 0.54em              // gap between body lines, tuned so the line pitch is `pitch` (double spacing)
+#let font-family = "Liberation Serif"        // the local rules set no typeface; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let type-size = 12pt                   // FRBP 9004(a): "clearly legible"; no local size rule, so the 12 pt convention (docs/FONTS.md)
 #let pitch = 24pt                       // the double-spaced line pitch of the filed exemplar
+#let body-leading = pitch - 1.15em     // gap between body lines: the text runs in a 1.15em line box (top-edge 0.9em, bottom-edge -0.25em), so the line pitch is `pitch` (double spacing)
 #let single-leading = 0.2em             // single spacing: caption, headings, signature block, footnotes
 #let cap-row = 16pt                     // one single-spaced caption row; the parenthesis column aligns row by row
 #let page-margin = 1in
@@ -196,7 +196,9 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    // A 1.15em line box (a word-processor single line); Liberation Serif's ascender-descender box is only 0.909em,
+    // so single-spaced lines with no gap would touch.
+    top-edge: 0.9em, bottom-edge: -0.25em,
   )
   set par(
     leading: body-leading, spacing: 0pt,

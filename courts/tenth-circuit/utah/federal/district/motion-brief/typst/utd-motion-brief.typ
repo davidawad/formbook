@@ -15,11 +15,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // vendored in /fonts; DUCivR 10-1(3) names no typeface (see ../README.md)
-#let type-size = 13pt                    // DUCivR 10-1(3): minimum 12 point, footnotes included. 13 pt: see ../README.md
-#let line-pitch = 26pt                   // DUCivR 10-1(4): double spacing. Measured baseline pitch (see ../README.md)
-#let body-leading = 0.69em               // gap between lines of body text; tuned so the baseline pitch is line-pitch
-#let single-leading = 0em                // caption, counsel block, headings in tables, TOC, TOA, footnotes, signature
+#let font-family = "Liberation Serif"    // DUCivR 10-1(3) names no typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 12pt                    // DUCivR 10-1(3): minimum 12 point, footnotes included.
+#let line-pitch = 24pt                   // DUCivR 10-1(4): double spacing, two lines of 12 pt type per line.
+#let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.
+#let single-leading = 0.198em            // caption, counsel block, headings in tables, TOC, TOA, footnotes, signature (a 1.305em pitch, about 15.7 pt at 12 pt)
 #let top-margin = 1.5in                  // DUCivR 10-1(1): top margin at least 1 1/2 inches
 #let bottom-margin = 1in                 // DUCivR 10-1(1): remaining margins at least 1 inch
 #let side-margin = 1in
@@ -266,7 +266,7 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    top-edge: 0.891em, bottom-edge: -0.216em,  // Liberation Serif's hhea ascender and descender: a 1.107em line box
   )
   set par(
     leading: body-leading, spacing: 0pt,

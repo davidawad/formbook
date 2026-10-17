@@ -9,10 +9,10 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // LR 5.1 names no face; EB Garamond is the only serif vendored in fonts/
+#let font-family = "Liberation Serif"        // LR 5.1 names no face; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 14pt                   // LR 5.1: typeface not smaller than 14 point
 #let pitch = 32pt                       // LR 5.1: double spacing. 32 pt is the baseline pitch of the 14 pt filed exemplars
-#let body-leading = 22.9pt              // gap between lines of body text; with the 0.65 em line box it gives the 32 pt pitch
+#let body-leading = 22.83pt             // gap between lines of body text; with the 0.655 em (Liberation Serif) line box it gives the 32 pt pitch
 #let single-leading = 0.5em             // single spacing: headings, caption, signature block
 #let caption-line = 16pt                // one row of the caption: single spaced
 #let margin-all = 1in                   // LR 5.1: margins at least one inch on all four sides

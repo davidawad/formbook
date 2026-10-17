@@ -12,10 +12,10 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // vendored in /fonts (no system font is used)
+#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LAMB-FORM-002: LR 5005-2(b), 12-point font
-#let body-leading = 1.305em             // LAMB-FORM-003: LR 5005-2(b), double-spaced = twice the single line pitch of EB Garamond (natural pitch 1.305em, so extra leading equals one natural line); see README
-#let single-leading = 0em                // caption, headings and signature block: single-spaced
+#let body-leading = 1.503em             // LAMB-FORM-003: LR 5005-2(b), double-spaced = twice the single line pitch (single pitch 1.305em: Liberation Serif line box 1.107em hhea ascender to descender + the single leading); see README
+#let single-leading = 0.198em             // caption, headings and signature block: single-spaced
 #let page-margin = 1in                  // LAMB-FORM-001: 8.5 x 11 page (LR 5005-2(a)); margins are a style choice
 #let para-indent = 0.5in                // first-line indent; the paragraph number sits at this indent
 #let caption-stroke = 0.7pt
@@ -166,7 +166,7 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    top-edge: 0.891em, bottom-edge: -0.216em,  // Liberation Serif's hhea ascender and descender: a 1.107em line box
   )
   set par(
     leading: body-leading, spacing: body-leading,

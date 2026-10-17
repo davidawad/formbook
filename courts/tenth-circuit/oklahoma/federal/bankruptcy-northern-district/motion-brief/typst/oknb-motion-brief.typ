@@ -13,14 +13,14 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; the only typeface the build can use
-#let type-size = 13pt                   // LBR 9004-1(A): no less than 12-point (footnotes included); 13 pt because EB Garamond sets small
+#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 12pt                   // LBR 9004-1(A): no less than 12-point (footnotes included)
 #let page-w = 8.5in                     // LBR 9004-1(A): 8 1/2 by 11 inches
 #let page-h = 11in
 #let margin = 1in                       // LBR 9004-1(A): margins of no less than one inch
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 1.35em leading makes a 2.0em pitch (LBR 9004-1(A)); measured in README.md
-#let single-leading = 0.5em             // single spacing for caption, notice box, signature block, certificate, footnotes
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 1.345em leading makes a 2.0em pitch (LBR 9004-1(A)); measured in README.md
+#let single-leading = 0.495em            // single spacing for caption, notice box, signature block, certificate, footnotes
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 3.6in               // width of the party column of the caption (LBR 9004-2(A))
 #let court-name = ("UNITED STATES BANKRUPTCY COURT", "NORTHERN DISTRICT OF OKLAHOMA")  // LBR 9004-2(A): name of the court

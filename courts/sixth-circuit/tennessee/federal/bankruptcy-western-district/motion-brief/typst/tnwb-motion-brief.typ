@@ -12,10 +12,10 @@
 // or is a stated choice in ../README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // TNWB-FORM-001: vendored serif (see README, known gaps)
+#let font-family = "Liberation Serif"     // TNWB-FORM-001: serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                      // TNWB-FORM-001: exemplar convention (12 pt)
 // Line pitch = natural line height (about 7.8 pt for this face at 12 pt) + leading.
-#let body-leading = 1.35em                 // double spacing: 24 pt baseline pitch
+#let body-leading = 1.345em                // double spacing: 24 pt baseline pitch
 #let single-leading = 0.6em                // single spacing: about 14 pt pitch
 #let page-margin = 1in                     // TNWB-FORM-002: exemplar convention, no court rule found
 #let para-indent = 0.5in                   // body paragraphs: first-line indent

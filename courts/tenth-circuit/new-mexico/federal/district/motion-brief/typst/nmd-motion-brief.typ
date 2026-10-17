@@ -9,11 +9,11 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/ (the only serif vendored); see README.md, Known gaps
+#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LR-Civ. 10.1: "at least 12 pitch", letter quality; 12 pt proportional (README.md)
 #let pitch = 24pt                       // LR-Civ. 10.1: text double spaced; one double-spaced line = 24 pt at 12 pt
-#let body-leading = 1.35em              // EB Garamond's line box is 0.65em, so 1.35em + 0.65em = 2em = 24 pt at 12 pt
-#let single-leading = 0.5em             // single spacing (caption, signature, certificate lists): about 13.8 pt
+#let body-leading = 1.345em             // Liberation Serif's line box is 0.655em, so 1.345em + 0.655em = 2em = 24 pt at 12 pt
+#let single-leading = 0.495em            // single spacing (caption, signature, certificate lists): about 13.8 pt
 #let margins = (top: 1.5in, bottom: 1in, left: 1in, right: 1in)   // LR-Civ. 10.1: top at least 1 1/2 in; others at least 1 in
 #let text-width = 8.5in - 1in - 1in
 #let para-indent = 0.5in                // first-line indent of body paragraphs

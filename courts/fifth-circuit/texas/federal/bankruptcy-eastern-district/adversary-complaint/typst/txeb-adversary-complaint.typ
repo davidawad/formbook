@@ -9,13 +9,13 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"   // no font is set by FRBP 7010 or the E.D. Tex. bankruptcy local rules; vendored font only
+#let font-family = "Liberation Serif" // no font is set by FRBP 7010 or the E.D. Tex. bankruptcy local rules; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt
 #let page-w = 8.5in                // paper: letter; the rules set no paper size for this pleading
 #let page-h = 11in
 #let margin = 1in
 #let text-width = page-w - 2 * margin
-#let double = 1.35em               // double spacing: 0.65em natural line box + 1.35em leading = 24 pt pitch at 12 pt
+#let double = 1.345em              // double spacing: 0.655em natural line box + 1.345em leading = 24 pt pitch at 12 pt
 #let single = 0.65em               // single spacing (caption, block quotations, signature)
 #let indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-case-col = 3.4in      // party column of the caption

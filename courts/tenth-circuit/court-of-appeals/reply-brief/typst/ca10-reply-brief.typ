@@ -11,10 +11,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // FRAP 32(a)(5)(A): proportional serif face. Vendored in /fonts.
+#let font-family = "Liberation Serif"     // FRAP 32(a)(5)(A): proportional serif face; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                      // FRAP 32(a)(5)(A) and 10th Cir. R. 32(A): 14-point, footnotes too.
-#let body-leading = 0.94em                 // FRAP 32(a)(4): double-spaced (about 2.2 x the type size per line).
-#let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced.
+#let body-leading = 1.336em                // FRAP 32(a)(4): double-spaced (about 2.2 x the type size per line).
+#let single-leading = 0.516em              // headings, quotations, footnotes, TOC/TOA: single-spaced.
+                                           // Liberation Serif line box (ascender to descender) is 0.909em: body pitch 0.909 + 1.336 = 2.245em, single 1.425em.
 #let page-margin = 1in                     // FRAP 32(a)(4): at least one inch on all four sides.
 #let para-indent = 0.5in
 #let toc-depth = 4
@@ -165,7 +166,7 @@
     // Unnumbered sub-headings: bold, left.
     block(width: 100%, sticky: true, above: 1.2em, below: 0.9em, strong(it.body))
   } else if in-argument(it.location()) and it.level == 2 {
-    // Point headings: bold small capitals, centered, with the roman numeral.
+    // Point headings: bold, centered, with the roman numeral (smallcaps() has no effect: Liberation Serif has no small capitals).
     block(width: 100%, sticky: true, above: 1.2em, below: 1em,
       align(center, strong(smallcaps(heading-label(it) + [ ] + it.body))))
   } else {

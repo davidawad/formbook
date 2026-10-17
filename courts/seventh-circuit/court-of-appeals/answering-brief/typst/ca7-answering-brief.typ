@@ -11,12 +11,12 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // Serif, proportional. Vendored in /fonts (the only face there).
+#let font-family = "Liberation Serif"          // Serif, proportional; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                      // CA7-FORM-004: 12-point text (Cir. R. 32(b)).
 #let footnote-size = 11pt                  // CA7-FORM-005: 11-point footnotes (Cir. R. 32(b)).
-#let body-leading = 0.94em                 // CA7-FORM-003: with the metric-aligned line box below this
-                                           // gives a baseline pitch of about 2.2 x type size (double spacing).
-#let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced.
+#let body-leading = 1.336em                // CA7-FORM-003: with the ascender-to-descender line box set below (0.909em in
+                                           // Liberation Serif) this gives a baseline pitch of 2.245em, about 2.2 x type size (double spacing).
+#let single-leading = 0.516em              // headings, quotations, footnotes, TOC/TOA: single-spaced (1.425em pitch).
 #let page-margin = 1in                     // CA7-FORM-002
 #let para-indent = 0.5in
 #let toc-depth = 4

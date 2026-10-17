@@ -8,15 +8,15 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; the only font typst can see (tools/render.sh)
+#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LCivR 10.1: type no smaller than 12 point
 #let pitch = 24pt                       // LCivR 10.1: double spaced; a 24 pt baseline pitch at 12 pt
 #let page-w = 8.5in                     // LCivR 10.1: 8 1/2 x 11 inch paper
 #let page-h = 11in
 #let margin = 1in                       // LCivR 10.1: all margins at least one inch
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so this gives a 24 pt pitch (README.md)
-#let single-leading = 0.5em             // single spacing for counsel, caption and signature block
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so this gives a 24 pt pitch (README.md)
+#let single-leading = 0.495em            // single spacing for counsel, caption and signature block
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let number-gap = 0.3in                 // gap between a paragraph number and its text
 #let caption-left = 3.25in              // width of the party column of the caption

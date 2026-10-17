@@ -9,11 +9,11 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a named layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LR 9004-1.A: a standard font; EB Garamond is the vendored one (README: gaps)
+#let font-family = "Liberation Serif"   // LR 9004-1.A: a standard font; Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // LR 9004-1.A: no less than 12 point, footnotes included
 #let page-margin = 1in                  // LR 9004-1.A: margins no less than one inch
-#let body-leading = 0.695em             // LR 9004-1.A: double spaced; 1.305em line box (ascender to descender) + 0.695em = 24 pt pitch at 12 pt
-#let single-leading = 0.5em             // caption, headings that wrap, signature block (single spaced)
+#let body-leading = 0.893em             // LR 9004-1.A: double spaced; Liberation Serif line box 1.107em (hhea ascender to descender) + 0.893em = 24 pt pitch at 12 pt
+#let single-leading = 0.698em           // caption, headings that wrap, signature block (single spaced)
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.3in               // party column of the caption
 #let caption-paren = 0.25in             // ")" column of the caption
@@ -173,7 +173,7 @@
     margin: page-margin,
     footer: context align(center, text(size: type-size, counter(page).display())),
   )
-  set text(font: font-family, size: type-size, lang: "en", top-edge: "ascender", bottom-edge: "descender")
+  set text(font: font-family, size: type-size, lang: "en", top-edge: 0.891em, bottom-edge: -0.216em)  // Liberation Serif's hhea ascender and descender: a 1.107em line box
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
 
   cover(meta)

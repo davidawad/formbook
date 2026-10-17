@@ -10,13 +10,13 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"   // vendored in fonts/ (SIL OFL); render.sh compiles with vendored fonts only
+#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (SIL OFL); render.sh compiles with vendored fonts only
 #let type-size = 12pt              // no bankruptcy-court type rule for complaints; 12 pt is the LR 9013-2(a) floor for briefs
 #let page-w = 8.5in                // letter paper (convention; the local rules are silent on paper size)
 #let page-h = 11in
 #let margin = 1in                  // LR 9013-2(a): one inch on all sides (stated for briefs; applied to the complaint too)
 #let text-width = page-w - 2 * margin
-#let double = 1.35em               // double spacing: EB Garamond line box is 0.65 em, so this leading gives a 24 pt baseline pitch at 12 pt
+#let double = 1.345em              // double spacing: Liberation Serif line box is 0.655 em, so this leading gives a 24 pt baseline pitch at 12 pt
 #let single = 0.5em                // single spacing for caption, counsel block and quotations (about 14 pt pitch)
 #let para-indent = 0.5in           // first-line indent of each allegation
 #let caption-left = 3.6in          // width of the party column of the caption boxes

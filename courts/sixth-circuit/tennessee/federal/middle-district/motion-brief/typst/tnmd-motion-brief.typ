@@ -12,12 +12,12 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // Vendored in /fonts; the only serif font in the repo (README: Known gaps).
-#let type-size = 13pt                      // TNMD-FORM-002: 12-point or larger. 13 pt because EB Garamond's x-height is smaller than Times 12 pt.
-// EB Garamond's natural line box is about 0.65 em (8.45 pt at 13 pt), so the leading is set in points.
-#let body-leading = 19.15pt                // TNMD-FORM-003: double spacing, a 27.6 pt baseline pitch (measured; README).
-#let single-pitch = 15pt                   // Single spacing: headings, caption, signature, service lists, footnotes.
-#let single-leading = 6.55pt               // single-pitch minus the natural line box.
+#let font-family = "Liberation Serif"     // Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 12pt                      // TNMD-FORM-002: 12-point or larger.
+// Liberation Serif's natural line box is 0.655 em (7.86 pt at 12 pt), so the leading is set in points.
+#let body-leading = 19.74pt                // TNMD-FORM-003: double spacing, a 27.6 pt baseline pitch (measured; README).
+#let single-pitch = 13.8pt                 // Single spacing: headings, caption, signature, service lists, footnotes. 1.15 x type size.
+#let single-leading = 5.94pt               // single-pitch minus the natural line box.
 #let page-margin = 1in                     // TNMD-FORM-001: one-inch margins.
 #let para-indent = 0.5in                   // First-line indent of body paragraphs (TNMD-MEMO-002).
 #let caption-left = 3.3in                  // Party column of the caption.

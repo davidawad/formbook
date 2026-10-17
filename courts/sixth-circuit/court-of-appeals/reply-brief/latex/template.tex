@@ -8,14 +8,15 @@
 \usepackage{fancyhdr,needspace,titletoc,longtable,array}
 \makeatletter
 
-% FRAP 32(a)(5)(A): EB Garamond from the vendored fonts directory only (no system fonts).
-\setmainfont[Path=$fontdir$eb-garamond/, BoldFont=EBGaramond-Bold.otf, ItalicFont=EBGaramond-Italic.otf,
-  BoldItalicFont=EBGaramond-BoldItalic.otf, Ligatures=TeX]{EBGaramond-Regular.otf}
-\newfontfamily\scfam[Path=$fontdir$eb-garamond/, Letters=SmallCaps]{EBGaramond-Regular.otf}
-\newfontfamily\scbfam[Path=$fontdir$eb-garamond/, Letters=SmallCaps]{EBGaramond-Bold.otf}
-\defaultfontfeatures{Path=$fontdir$eb-garamond/}
+% FRAP 32(a)(5)(A): proportionally spaced serif; Liberation Serif, the Times New Roman substitute per docs/FONTS.md, from the vendored fonts directory only (no system fonts).
+\setmainfont[Path=$fontdir$liberation-serif/, BoldFont=LiberationSerif-Bold.ttf, ItalicFont=LiberationSerif-Italic.ttf,
+  BoldItalicFont=LiberationSerif-BoldItalic.ttf, Ligatures=TeX]{LiberationSerif-Regular.ttf}
+% Liberation Serif has no small capitals (no smcp feature), so point headings are plain bold, as in the typst template.
+\newfontfamily\scfam[Path=$fontdir$liberation-serif/]{LiberationSerif-Regular.ttf}
+\newfontfamily\scbfam[Path=$fontdir$liberation-serif/]{LiberationSerif-Bold.ttf}
+\defaultfontfeatures{Path=$fontdir$liberation-serif/}
 
-% Metrics measured from the typst render (14-point EB Garamond): body lines 31.43 pt apart (FRAP 32(a)(4)
+% Metrics measured from the typst render (14-point Liberation Serif): body lines 31.43 pt apart (FRAP 32(a)(4)
 % double spacing), single-spaced blocks 19.95 pt apart. Paragraphs are ragged right, first line indented 0.5 in.
 \newcommand{\doublespacing}{\fontsize{14pt}{31.43pt}\selectfont}
 \newcommand{\singlespacing}{\fontsize{14pt}{19.95pt}\selectfont}

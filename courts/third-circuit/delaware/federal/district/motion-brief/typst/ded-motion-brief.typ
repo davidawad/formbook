@@ -15,11 +15,11 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a named layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"          // Vendored in fonts/ (the only serif vendored). Not a rule requirement: the rule is about size.
-#let type-size = 13pt                     // LR 5.1.1(a): at least 12 point for all printed matter. 13 pt is a style choice (Garamond sets smaller than Times at the same size; see README.md).
-#let footer-size = 13pt                   // LR 5.1.1(a) "all printed matter": the page number is printed matter too.
-#let line-pitch = 27pt                    // Double spacing, measured against the exemplar's pitch (README.md).
-#let body-leading = 1.43em                // Gap between body lines. EB Garamond's line box is about 0.65em, so 1.43em gives about 2.08em (27 pt at 13 pt).
+#let font-family = "Liberation Serif"          // Times New Roman substitute per docs/FONTS.md, vendored in fonts/. Not a rule requirement: the rule is about size.
+#let type-size = 12pt                     // LR 5.1.1(a): at least 12 point for all printed matter.
+#let footer-size = 12pt                   // LR 5.1.1(a) "all printed matter": the page number is printed matter too.
+#let line-pitch = 27.6pt                  // LR 5.1.1(a): double spacing "according to typical word processing software": 2 x 1.15 x 12 pt, the exemplar's pitch (README.md).
+#let body-leading = 1.645em                // Gap between body lines. Liberation Serif's line box is 0.655em, so 1.645em gives 2.3em (27.6 pt at 12 pt).
 #let single-leading = 0.45em              // Cover, counsel, caption, signature, headings that wrap, footnotes, contents and citations.
 #let margins = (top: 1in, bottom: 1in, x: 1in)   // LR 5.1.1(a): margins not less than 1 inch.
 #let para-indent = 0.5in

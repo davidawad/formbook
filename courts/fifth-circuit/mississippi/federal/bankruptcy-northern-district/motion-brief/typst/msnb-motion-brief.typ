@@ -9,11 +9,11 @@
 // ---------------------------------------------------------------------------
 // Parameters
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; no local-rule font found (see README.md)
+#let font-family = "Liberation Serif"   // no local-rule font found; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt
 #let margin = 1in
-#let body-leading = 1.35em              // double spacing at 12 pt (EB Garamond line box is 0.65em)
-#let single-leading = 0.5em
+#let body-leading = 1.345em             // double spacing at 12 pt (Liberation Serif line box is 0.655em)
+#let single-leading = 0.495em
 #let para-indent = 0.5in
 
 // ---------------------------------------------------------------------------

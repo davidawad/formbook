@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"      // vendored in fonts/; see README "Known gaps"
+#let font-family = "Liberation Serif"      // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; see README "Known gaps"
 #let type-size = 12pt                 // L.R. 5-4(a)(4): at least 12-point type in the body
 #let note-size = 10pt                 // L.R. 5-4(a)(4): at least 10-point type in footnotes
 #let pitch = 27.6pt                   // L.R. 5-4(a)(5): double spaced; two single lines of 12 pt type (13.8 pt each)
@@ -20,7 +20,7 @@
 #let page-h = 11in
 #let para-indent = 0.5in              // first-line indent of body paragraphs
 #let caption-left = 3.2in             // width of the party column of the caption
-#let body-leading = 1.65em            // baseline pitch 27.6 pt at 12 pt: EB Garamond's line box is 0.65em (README.md)
+#let body-leading = 1.645em           // baseline pitch 27.6 pt at 12 pt: Liberation Serif's line box is 0.655em (README.md)
 #let single-leading = 0.5em           // baseline pitch 13.8 pt at 12 pt
 
 // ---------------------------------------------------------------------------

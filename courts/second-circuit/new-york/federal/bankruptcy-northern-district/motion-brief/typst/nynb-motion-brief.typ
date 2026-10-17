@@ -10,14 +10,14 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see ../README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"     // vendored in fonts/; --ignore-system-fonts means no substitute
+#let font-family = "Liberation Serif"     // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; --ignore-system-fonts means no other substitute
 #let type-size = 12pt                // LBR 9004-1(a)(1)(A): minimum 12-point, text and footnotes
 #let pitch = 24pt                    // LBR 9004-1(a)(1)(B): double-spaced body (baseline pitch, measured)
 #let page-w = 8.5in                  // LBR 9004-1(a)(2)(C): letter size
 #let page-h = 11in
 #let margin = 1in                    // LBR 9004-1(a)(2)(A): one-inch margin on all four sides
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em           // 0.65em line box + 1.35em leading = 2.0em = 24 pt at 12 pt
+#let body-leading = 1.345em          // 0.655em line box + 1.345em leading = 2.0em = 24 pt at 12 pt
 #let single-leading = 0.5em          // 0.65em + 0.5em = 1.15em = 13.8 pt: caption, counsel, block quotes, signature
 #let para-indent = 0.5in             // first line of each body paragraph (memorandum text is not numbered)
 #let caption-left = 3.4in            // width of the party column of the caption

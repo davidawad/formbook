@@ -9,13 +9,13 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no W.D. La. font rule (LR 7.1, 7.8, 10.1, checked 2026-10-14); no-face default per docs/FONTS.md
+#let font-family = "Liberation Serif"   // no W.D. La. font rule (LR 7.1, 7.8, 10.1, checked 2026-10-14); Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // convention for filed briefs; the rule set does not state a size
 #let page-margin = 1in                  // convention; the rule set does not state margins
 #let text-width = 8.5in - 2 * page-margin
-#let pitch = 24pt                       // one double-spaced line: EB Garamond's 0.65em line box plus the leading below
-#let body-leading = 1.35em              // LR 10.1 double spacing: 1.35em of leading gives the 24 pt pitch (measured, README.md)
-#let single-leading = 0.5em             // single spacing for the caption, the tables and the signature block
+#let pitch = 24pt                       // one double-spaced line: Liberation Serif's 0.655em line box plus the leading below
+#let body-leading = 1.345em             // LR 10.1 double spacing: 1.345em of leading gives the 24 pt pitch (measured, README.md)
+#let single-leading = 0.495em            // single spacing for the caption, the tables and the signature block
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 3.3in               // width of the party column of the caption
 #let caption-star = 0.3in               // width of the asterisk column between the parties and the case number

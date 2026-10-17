@@ -16,10 +16,10 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // KYEB-FORM-001: no E.D. Ky. bankruptcy rule sets a typeface; vendored in /fonts.
-#let type-size = 13pt                    // KYEB-FORM-001: a legible size (FRBP 9004(a)); 13 pt because EB Garamond sets smaller than Times.
-#let body-leading = 0.2em                // KYEB-FORM-003: single spacing, as the exemplar (a convention; see ../README.md).
-#let single-leading = 0.2em              // caption, signature, headings, footnotes, notice.
+#let font-family = "Liberation Serif"    // KYEB-FORM-001: no E.D. Ky. bankruptcy rule sets a typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 12pt                    // KYEB-FORM-001: a legible size (FRBP 9004(a)); 12 pt, the usual floor (Times New Roman substitute, docs/FONTS.md).
+#let body-leading = 0.398em              // KYEB-FORM-003: single spacing, as the exemplar (a convention; see ../README.md).
+#let single-leading = 0.398em            // caption, signature, headings, footnotes, notice.
 #let gap = 12pt                          // the one vertical gap: between paragraphs, around headings and blocks.
 #let margins = (top: 1in, bottom: 1in, left: 1in, right: 1in)
 #let para-indent = 0.5in                 // first-line indent of an unnumbered paragraph.
@@ -309,7 +309,7 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    top-edge: 0.891em, bottom-edge: -0.216em,  // Liberation Serif's hhea ascender and descender: a 1.107em line box
   )
   set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
   set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))

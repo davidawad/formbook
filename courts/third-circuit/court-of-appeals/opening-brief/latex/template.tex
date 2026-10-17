@@ -3,7 +3,8 @@
 % ca3.lua turns the frontmatter and every heading into the cover, the tables, the certificates and
 % raw LaTeX calls to the macros below. Built by tools/render-latex.sh (tectonic; two passes, because
 % the tables of contents and authorities are read from the aux file of the previous pass).
-% Fonts: the vendored EB Garamond only (fontdir); nothing from the system.
+% Fonts: the vendored Liberation Serif only (fontdir), the Times New Roman substitute per docs/FONTS.md
+% (FRAP 32(a)(5)(A): proportionally spaced serif); nothing from the system.
 \documentclass[14pt,letterpaper]{extarticle}
 \usepackage{fontspec}
 \usepackage[letterpaper,margin=1in]{geometry}
@@ -14,7 +15,7 @@
 \usepackage{longtable,booktabs,array}
 \usepackage{xcolor}
 
-\setmainfont[Path=$fontdir$eb-garamond/,Extension=.otf,UprightFont=*-Regular,BoldFont=*-Bold,ItalicFont=*-Italic,BoldItalicFont=*-BoldItalic]{EBGaramond}
+\setmainfont[Path=$fontdir$liberation-serif/,Extension=.ttf,UprightFont=LiberationSerif-Regular,BoldFont=LiberationSerif-Bold,ItalicFont=LiberationSerif-Italic,BoldItalicFont=LiberationSerif-BoldItalic]{LiberationSerif-Regular}
 
 \hypersetup{colorlinks=false,pdfborder={0 0 0}}
 \setlength{\parindent}{0.5in}

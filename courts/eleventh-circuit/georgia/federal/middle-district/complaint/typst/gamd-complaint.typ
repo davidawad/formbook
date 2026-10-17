@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to the exemplar; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; Times New Roman is not vendored (README, known gaps)
+#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md (Times New Roman itself cannot be vendored)
 #let type-size = 14pt                   // the exemplar's body text is 14 pt Times New Roman (no M.D. Ga. size rule found)
 #let footer-size = 12pt                 // the exemplar's page number is 12 pt
 #let page-w = 8.5in                     // Fed. R. Civ. P. 10(a) and the paper: letter size (the exemplar is letter)
@@ -17,8 +17,8 @@
 #let margin = 1in                       // the exemplar: 1 inch on every side
 #let text-width = page-w - 2 * margin
 #let pitch = 32pt                       // the exemplar's baseline pitch (double spacing, measured on the exemplar)
-#let body-leading = (pitch / type-size) * 1em - 0.65em   // EB Garamond's line box is about 0.65em (see README)
-#let single-leading = 0.5em             // single spacing for the signature and the address block
+#let body-leading = (pitch / type-size) * 1em - 0.655em  // Liberation Serif's line box is 0.655em
+#let single-leading = 0.495em            // single spacing for the signature and the address block
 #let single-pitch = 16pt                // one single-spaced caption row (about 1.15 em at 14 pt)
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs (exemplar)
 #let caption-w = 3.3in                  // width of the party column of the caption
