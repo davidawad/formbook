@@ -5,13 +5,13 @@ Indexed level: `state-appellate`
 
 | Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
 |---|---|---|---|---|---|---|---|
-| `opening-brief` — Opening brief (appellant's principal brief) | PENDING: not yet searched |  |  |  |  |  |  |
-| `answering-brief` — Answering brief (appellee's principal brief) | PENDING: not yet searched |  |  |  |  |  |  |
-| `reply-brief` — Reply brief | PENDING: not yet searched |  |  |  |  |  |  |
-| `petition-for-discretionary-review` — Petition for discretionary review | PENDING: not yet searched |  |  |  |  |  |  |
-| `motion-brief` — Motion and supporting memorandum | PENDING: not yet searched |  |  |  |  |  |  |
-| `petition-for-review` — Petition for review (agency order or state high court) | PENDING: not yet searched |  |  |  |  |  |  |
-| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | PENDING: not yet searched |  |  |  |  |  |  |
-| `amicus-brief` — Amicus curiae brief | PENDING: not yet searched |  |  |  |  |  |  |
+| `opening-brief` — Opening brief (appellant's principal brief) | BLOCKED: not a filing this body receives: the MDL Panel decides motions to transfer related cases to a pretrial judge (Tex. Gov't Code s.74.161-.163; Tex. R. Jud. Admin. 13.3) and hears no appeals, so there is no appellant's opening brief |  |  |  |  |  |  |
+| `answering-brief` — Answering brief (appellee's principal brief) | BLOCKED: no public filed copy obtained: MDL Panel filings are docketed by the Clerk of the Supreme Court of Texas and posted only on txcourts.gov (MDL pages and search.txcourts.gov), which return HTTP 403 to this box; no third-party copy found, and the web-search budget was exhausted (nearest filing is a response to a motion to transfer, Tex. R. Jud. Admin. 13.3; the Panel takes no appellate merits briefs) |  |  |  |  |  |  |
+| `reply-brief` — Reply brief | BLOCKED: no public filed copy obtained: MDL Panel filings are docketed by the Clerk of the Supreme Court of Texas and posted only on txcourts.gov (MDL pages and search.txcourts.gov), which return HTTP 403 to this box; no third-party copy found, and the web-search budget was exhausted (nearest filing is a reply in support of a motion to transfer, Tex. R. Jud. Admin. 13.3) |  |  |  |  |  |  |
+| `petition-for-discretionary-review` — Petition for discretionary review | BLOCKED: not a filing this body receives: the MDL Panel has no discretionary-review jurisdiction; its orders are reviewable only by the Supreme Court of Texas by mandamus (Tex. R. Jud. Admin. 13.9(b)) |  |  |  |  |  |  |
+| `motion-brief` — Motion and supporting memorandum | BLOCKED: no public filed copy obtained: MDL Panel filings are docketed by the Clerk of the Supreme Court of Texas and posted only on txcourts.gov (MDL pages and search.txcourts.gov), which return HTTP 403 to this box; no third-party copy found, and the web-search budget was exhausted (the Panel's principal filing is a motion to transfer with argument, Tex. R. Jud. Admin. 13.3) |  |  |  |  |  |  |
+| `petition-for-review` — Petition for review (agency order or state high court) | BLOCKED: not a filing this body receives: the MDL Panel is reached by motion to transfer (Tex. R. Jud. Admin. 13.3), not petition for review; Panel orders are reviewed only by the Supreme Court of Texas by mandamus (Rule 13.9(b)) |  |  |  |  |  |  |
+| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | BLOCKED: not a filing this body receives: the MDL Panel has no writ jurisdiction; mandamus review of its orders is filed in the Supreme Court of Texas (Tex. R. Jud. Admin. 13.9(b)) |  |  |  |  |  |  |
+| `amicus-brief` — Amicus curiae brief | BLOCKED: no public filed copy obtained: MDL Panel filings are docketed by the Clerk of the Supreme Court of Texas and posted only on txcourts.gov (MDL pages and search.txcourts.gov), which return HTTP 403 to this box; no third-party copy found, and the web-search budget was exhausted; amicus submissions to the Panel are rare |  |  |  |  |  |  |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
