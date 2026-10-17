@@ -13,11 +13,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // Font: not set by any S.D. Ga. rule found (see ../README.md). Vendored in /fonts.
-#let type-size = 13pt                    // Style choice: 13 pt EB Garamond chosen by eye to approximate 12 pt Times (not measured).
+#let font-family = "Liberation Serif"    // Font: not set by any S.D. Ga. rule found (see ../README.md); Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 12pt                    // Convention: 12 pt, the size of the filed exemplars (no rule sets a size).
 #let line-pitch = 24pt                   // GASB-FORM-002: double-spaced (LR 10.1, incorporated by the Uniformity of Practice clause).
-#let body-leading = 0.54em               // gap between lines of body text; tuned so the line pitch is line-pitch.
-#let single-leading = 0.2em              // caption, counsel block, headings, footnotes, certificate.
+#let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.
+#let single-leading = 0.398em            // caption, counsel block, headings, footnotes, certificate.
 #let margins = (top: 1in, bottom: 1in, x: 1in)  // Style choice: no margin rule in the S.D. Ga. rules found; 1 inch is the usual floor.
 #let para-indent = 0.5in
 #let heading-tab = 0.5in
@@ -192,7 +192,7 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    top-edge: 0.891em, bottom-edge: -0.216em,  // Liberation Serif's hhea ascender and descender: a 1.107em line box
   )
   set par(
     leading: body-leading, spacing: 0pt,

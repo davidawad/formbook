@@ -11,11 +11,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"       // vendored in /fonts; no system font can be used (tools/render.sh)
+#let font-family = "Liberation Serif"       // Times New Roman substitute per docs/FONTS.md, vendored in /fonts; no system font can be used (tools/render.sh)
 #let type-size = 12pt                  // ILSD-FORM-002: 12-point type; the rule text is SDIL-LR 7.1(a)(3), briefs. Applied to complaints too (see README).
 #let line-pitch = 24pt                 // ILSD-FORM-003: double spacing (SDIL-LR 5.1(a)); tuned so body lines land on this pitch.
-#let body-leading = 16.2pt             // gap between lines of body text; with the natural line height of EB Garamond 12 pt (7.8 pt) the pitch is line-pitch (24 pt).
-#let single-leading = 6.2pt           // single spacing: natural line height of EB Garamond 12 pt (7.8 pt) plus 6.2 pt is a 14 pt pitch. Caption, counsel, signature, headings that wrap.
+#let body-leading = 16.14pt            // gap between lines of body text; with the natural line height of Liberation Serif 12 pt (0.655em, 7.86 pt) the pitch is line-pitch (24 pt).
+#let single-leading = 6.14pt          // single spacing: natural line height of Liberation Serif 12 pt (7.86 pt) plus 6.14 pt is a 14 pt pitch. Caption, counsel, signature, headings that wrap.
 #let margins = (top: 1in, bottom: 1in, x: 1in)  // ILSD-FORM-001: 1-inch margins (convention; see README)
 #let para-indent = 0.5in               // first-line indent of numbered paragraphs (Fed. R. Civ. P. 10(b): numbered paragraphs)
 #let caption-line = 14pt               // one single-spaced caption line

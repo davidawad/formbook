@@ -9,12 +9,12 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; the only font typst may see (--ignore-system-fonts)
-#let type-size = 13pt                   // LBR 5005-13(b)(4): "no smaller than 12 Courier or an equivalent font size", footnotes included
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; the only fonts typst may see (--ignore-system-fonts)
+#let type-size = 12pt                   // LBR 5005-13(b)(4): "no smaller than 12 Courier or an equivalent font size", footnotes included; 12 pt Liberation Serif (a Times New Roman substitute) is the usual equivalent
 #let page-w = 8.5in                     // LBR 5005-13(b)(1): 8.5 by 11 inch paper
 #let page-h = 11in
 #let margin = 1in                       // convention (both exemplars); no W.PA rule sets margins
-#let body-leading = 1.35em              // double spacing (EB Garamond line box 0.65em; see the cand complaint README)
+#let body-leading = 1.345em             // double spacing: Liberation Serif line box 0.655em + 1.345em = 24 pt at 12 pt
 #let single-leading = 0.5em             // single spacing: caption, counsel and signature blocks, footnotes
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.4in               // width of the debtor and party column of the caption

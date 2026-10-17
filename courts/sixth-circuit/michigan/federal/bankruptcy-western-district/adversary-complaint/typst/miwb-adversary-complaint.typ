@@ -7,11 +7,11 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // MIWB-FORM-001: the rules name no face (LBR 9004(f): "typewritten in at least 12-point type"); EB Garamond kept (docs/FONTS.md, "No face named")
-#let type-size = 13pt                   // MIWB-FORM-001: at least 12-point type (LBR 9004(f)); 13 pt matches the exemplar's visual size
+#let font-family = "Liberation Serif"   // MIWB-FORM-001: the rules name no face (LBR 9004(f): "typewritten in at least 12-point type"); Times New Roman substitute, the default per docs/FONTS.md
+#let type-size = 12pt                   // MIWB-FORM-001: at least 12-point type (LBR 9004(f))
 #let pitch = 27.6pt                     // MIWB-FORM-001: double-spaced; the filed exemplars measure 27.6 pt baseline to baseline
-#let body-leading = 1.477em              // gap between lines of body text; with EB Garamond's 0.646em line box this gives the 27.6 pt baseline pitch (measured, README.md)
-#let single-leading = 0.45em            // caption, counsel, signature, footers: single-spaced (about 14 pt pitch)
+#let body-leading = 1.645em             // gap between lines of body text; with Liberation Serif's 0.655em line box this gives the 27.6 pt baseline pitch at 12 pt
+#let single-leading = 0.495em         // caption, counsel, signature, footers: single-spaced (1.15em, 13.8 pt pitch)
 #let page-margin = 1in                  // MIWB-FORM-011: letter paper; margins are a layout choice (the exemplars use 1 in)
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs (exemplars: 0.5 in)
 #let caption-left = 3.5in               // width of the left (party) column of the caption

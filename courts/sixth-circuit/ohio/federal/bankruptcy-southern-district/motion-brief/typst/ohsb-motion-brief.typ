@@ -10,10 +10,10 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/ (the only family vendored; no system fonts)
+#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LBR 9004-1(b): typed print at least 10-12 point; 12 point is used
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 24 pt pitch at 12 pt
-#let single-leading = 0.5em             // footnotes, signature block and caption lines: about 14 pt pitch
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 24 pt pitch at 12 pt
+#let single-leading = 0.495em            // footnotes, signature block and caption lines: about 14 pt pitch
 #let cap-line = 14pt                    // one caption or signature line (fixed height keeps the ")" column aligned)
 #let para-indent = 0.5in                // first-line indent of paragraphs
 #let quote-indent = 0.75in              // left indent of the lettered quotation of 11 U.S.C. § 1112(b)(4)

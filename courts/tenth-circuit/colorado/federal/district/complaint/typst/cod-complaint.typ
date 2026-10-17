@@ -7,14 +7,14 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no typeface rule in 10.1(d); EB Garamond is the vendored serif (README)
+#let font-family = "Liberation Serif"   // no typeface rule in 10.1(d); Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LCivR 10.1(d): not less than 12-point font
 #let page-w = 8.5in                     // LCivR 10.1(b): 8 1/2 by 11 inch white paper
 #let page-h = 11in
 #let margin-top = 1.5in                 // LCivR 10.1(c): 1 1/2 inches at the top
 #let margin-side = 1in                  // LCivR 10.1(c): 1 inch at the left and right
 #let margin-bottom = 1in                // LCivR 10.1(c): 1 inch at the bottom
-#let body-leading = 1.35em              // LCivR 10.1(e): double spaced (about 24 pt baseline pitch at 12 pt, see README)
+#let body-leading = 1.345em             // LCivR 10.1(e): double spaced (about 24 pt baseline pitch at 12 pt, see README)
 #let single-leading = 0.65em            // single spacing for the caption, counsel block, signature and block quotations
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let court-lines = (

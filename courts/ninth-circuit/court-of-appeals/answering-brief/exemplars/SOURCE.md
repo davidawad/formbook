@@ -11,3 +11,17 @@
 - **Public court record:** yes (ACMS filing, RECAP-archived)
 - **How found:** CourtListener RECAP document search for "answering brief" in ca9 (type `rd`), then the PDF in the storage URL above. A WebSearch lead (clearinghouse.net/doc/162855, the same brief) could not be opened: the site returned HTTP 403.
 - **Notes:** Form 8 (certificate of compliance) is the last page. The filing has no related-cases statement, no certificate of service, and no disclosure statement. The brief's own text gives 13,995 words in the Form 8 certificate.
+
+## Second filer — ACA Connects v. Bonta
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-bonta-21-15430-answering-brief.pdf` |
+| Filer | Defendant-Appellee Rob Bonta, California Attorney General, through the California Department of Justice (different filer from Newsom and the State of California) |
+| Case | *ACA Connects—America's Communications Association v. Bonta*, No. 21-15430 |
+| Document | Answering Brief, DktEntry 30, 232 pages |
+| Date filed | 2021-05-04 |
+| URL | https://cdn.ca9.uscourts.gov/datastore/general/2021/09/16/21-15430-Answering-Brief.pdf |
+| Date retrieved | 2026-10-17 |
+| SHA-256 | `07f38378a53b3cf4c56070bf794889e8cbe047b3ab7c5c90efbe6f19117ca506` |
+| Public record | Filed brief served from the official Ninth Circuit website; the PDF bears the appellate docket stamp |

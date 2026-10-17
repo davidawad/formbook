@@ -9,13 +9,13 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no D. Me. rule on typeface; vendored in fonts/ (README.md, gap 2)
+#let font-family = "Liberation Serif"        // no D. Me. rule on typeface; Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (README.md, gap 2)
 #let type-size = 12pt                   // legible, 12 point is the convention in the filed exemplar
 #let page-w = 8.5in
 #let page-h = 11in
 #let margin = 1in                       // no D. Me. margin rule; the exemplar uses one inch on all sides
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // double spacing (about 24 pt baseline pitch at 12 pt, as the exemplar)
+#let body-leading = 1.345em             // double spacing (about 24 pt baseline pitch at 12 pt, as the exemplar)
 #let pitch = 24pt                       // one double-spaced line; blocks are rounded up to whole lines
 #let single-leading = 0.5em             // single spacing: caption, court name, signature block (about 14 pt)
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs

@@ -12,11 +12,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // OKND-FORM-002: vendored proportional font (the only one in /fonts).
-#let type-size = 13pt                    // OKND-FORM-002: not smaller than 12 pt, footnotes and quotations included. 13 pt is a style choice; see ../README.md.
+#let font-family = "Liberation Serif"    // OKND-FORM-002: proportional font; Times New Roman substitute per docs/FONTS.md
+#let type-size = 12pt                    // OKND-FORM-002: not smaller than 12 pt, footnotes and quotations included.
 #let line-pitch = 24pt                   // OKND-FORM-001: double spacing. With the margins below, 27 lines fit per page.
-#let body-leading = 0.54em               // gap between lines of body text; tuned so the line pitch is line-pitch (measured, ../README.md).
-#let single-leading = 0.2em              // captions, block quotations, footnotes, tables of contents and authorities, signature block.
+#let body-leading = line-pitch - 1.107 * type-size  // gap between body lines: Liberation Serif's line box (hhea ascender to descender, 0.891em + 0.216em) is 1.107em, so the pitch is line-pitch.
+#let single-leading = 0.398em            // captions, block quotations, footnotes, tables of contents and authorities, signature block.
 #let margins = (top: 1in, bottom: 1in, x: 1in)   // OKND-FORM-003: at least one inch on the top, bottom and sides.
 #let footer-size = 12pt                  // page number, at the 12 pt floor.
 #let para-indent = 0.5in
@@ -272,7 +272,7 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    top-edge: 0.891em, bottom-edge: -0.216em,  // Liberation Serif's hhea ascender and descender: a 1.107em line box
   )
   set par(
     leading: body-leading, spacing: 0pt,

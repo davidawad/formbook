@@ -12,9 +12,9 @@
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // vendored in /fonts; LR 5.1 names no typeface
+#let font-family = "Liberation Serif"   // LR 5.1 names no typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LR 5.1: no smaller than 12, footnotes included
-#let body-leading = 1.35em              // LR 5.1: double-spaced. Line box 0.65em + leading 1.35em = 24 pt pitch at 12 pt (measured)
+#let body-leading = 1.345em             // LR 5.1: double-spaced. Line box 0.655em + leading 1.345em = 24 pt pitch at 12 pt (measured)
 #let single-leading = 0.65em            // LR 5.1: quotations, headings, footnotes may be single-spaced; caption and signature block too
 #let page-margin = 1in                  // LR 5.1: at least one inch on all four sides
 #let para-indent = 0.5in                // first-line indent of body paragraphs
@@ -34,7 +34,7 @@
 /// Inline markdown (for names with *et al.*, etc.).
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 
-/// Single-spaced stack: one item per block, spaced by the single-spacing pitch (0.65em line box + 0.65em).
+/// Single-spaced stack: one item per block, spaced by the single-spacing pitch (0.655em line box + 0.65em).
 #let single-stack(items) = {
   set par(leading: single-leading, spacing: 0pt, justify: false, first-line-indent: 0pt)
   stack(dir: ttb, spacing: single-leading, ..items.map(inl))

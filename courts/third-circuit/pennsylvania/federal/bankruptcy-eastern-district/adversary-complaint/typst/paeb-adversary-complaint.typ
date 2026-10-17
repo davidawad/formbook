@@ -8,9 +8,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no E.D. Pa. rule names a font; EB Garamond is the only vendored font (README.md)
+#let font-family = "Liberation Serif"        // no E.D. Pa. rule names a font; Times New Roman substitute per docs/FONTS.md (README.md)
 #let type-size = 12pt                   // convention; the Krueger and TIG exemplars are 12 point
-#let body-leading = 1.35em              // double spacing: 24 pt baseline pitch at 12 pt (README.md)
+#let body-leading = 1.345em             // double spacing: 24 pt baseline pitch at 12 pt (README.md)
 #let single-leading = 0.5em             // single spacing for the caption, the signature block and the service list
 #let margin = 1in                       // convention (no E.D. Pa. margin rule)
 #let para-indent = 0.5in                // first-line indent of paragraphs

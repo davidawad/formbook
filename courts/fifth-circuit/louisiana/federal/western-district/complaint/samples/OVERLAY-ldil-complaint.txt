@@ -1,5 +1,6 @@
 ours p.1  filed p.1  word-overlap 79.2%
-ours p.2  filed p.3  word-overlap 56.0%
-ours p.3  filed p.4  word-overlap 60.3%
-ours p.4  filed p.7  word-overlap 59.0%
-ours p.5  filed p.8  word-overlap 49.3%
+ours p.2  filed p.3  word-overlap 52.8%
+ours p.3  filed p.4  word-overlap 67.3%
+ours p.4  filed p.6  word-overlap 59.6%
+ours p.5  filed p.8  word-overlap 60.9%
+ours p.6  filed p.9  word-overlap 85.0%

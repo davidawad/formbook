@@ -11,10 +11,10 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/ (README.md, Known gaps: Times is not vendored)
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (Times itself cannot be vendored)
 #let type-size = 12pt                   // LR 5.1(a): proportionally spaced font, no less than 12 point
 #let margin = 1in                       // LR 5.1(a): no less than one-inch margins
-#let body-leading = 1.65em              // LR 5.1(a): double spaced = 2 x single (1.15em = 13.8 pt); EB Garamond line box 0.65em, so 27.6 pt pitch
+#let body-leading = 1.645em             // LR 5.1(a): double spaced = 2 x single (1.15em = 13.8 pt); Liberation Serif line box 0.655em, so 27.6 pt pitch
 #let single-leading = 0.5em             // caption, counsel, signature: single spaced
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let text-width = 8.5in - 2 * margin

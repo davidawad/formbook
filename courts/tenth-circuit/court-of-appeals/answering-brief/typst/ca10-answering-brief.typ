@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // CA10-FORM-004: proportionally spaced, serif. Vendored in /fonts.
+#let font-family = "Liberation Serif"     // CA10-FORM-004: proportionally spaced, serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                      // CA10-FORM-004 / 10th Cir. R. 32(A): 13 or 14 point, 14 preferred.
                                            // A proportional face must be 14-point or larger (FRAP 32(a)(5)).
 #let body-leading = 1.36em                 // CA10-FORM-003: double spacing (FRAP 32(a)(4)); calibrated in README.md.

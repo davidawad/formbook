@@ -14,10 +14,11 @@
 // Parameters (each traces to a rule or a named style choice; see ../README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // NYSD-FORM-002: the joint rules name no typeface; EB Garamond is the vendored one. See README gaps.
+#let font-family = "Liberation Serif"        // NYSD-FORM-002: the joint rules name no typeface; Times New Roman substitute per docs/FONTS.md. See README gaps.
 #let type-size = 12pt                    // NYSD-FORM-002: 12-point type or larger, footnotes included (Local Civ. R. 7.1(b)(1) allows 10 pt footnotes; this uses 12).
-#let body-leading = 1.35em               // NYSD-FORM-003: double-spaced (Local Civ. R. 7.1(b)(3)); a 24 pt pitch at 12 pt (EB Garamond line box 0.65 em).
-#let single-leading = 0.5em              // counsel block, caption, headings, footnotes, tables of contents and authorities, signature block.
+#let body-leading = 1.091em              // NYSD-FORM-003: double-spaced (Local Civ. R. 7.1(b)(3)); text edges are ascender/descender (below), a 0.909em
+                                         // line box in Liberation Serif, so 0.909em + 1.091em = 2.0em = a 24 pt pitch at 12 pt, also between paragraphs.
+#let single-leading = 0.241em            // 0.909em + 0.241em = 1.15em (13.8 pt), single spacing: counsel block, caption, headings, footnotes, tables of contents and authorities, signature block.
 #let line-pitch = 24pt
 #let margins = (top: 1in, bottom: 1in, x: 1in)   // NYSD-FORM-004: at least one-inch margins on all sides (Local Civ. R. 7.1(b)(2)).
 #let para-indent = 0.5in
@@ -266,7 +267,7 @@
     top-edge: "ascender", bottom-edge: "descender",
   )
   set par(
-    leading: body-leading, spacing: 0pt,
+    leading: body-leading, spacing: body-leading,
     first-line-indent: (amount: para-indent, all: true), justify: false,
   )
   set heading(numbering: heading-num)

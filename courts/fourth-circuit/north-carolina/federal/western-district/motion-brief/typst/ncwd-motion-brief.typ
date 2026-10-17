@@ -9,12 +9,12 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LCvR 7.1(d): font size is the rule; the family is vendored in fonts/ (README)
+#let font-family = "Liberation Serif"        // LCvR 7.1(d): font size is the rule; Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (README)
 #let type-size = 12pt                   // LCvR 7.1(d): a minimum of 12 point
 #let margin = 1in                       // LCvR 7.1(d): one-inch margins
 #let text-width = 8.5in - 2 * margin
 #let pitch = 24pt                       // block spacing unit: one double-spaced line
-#let body-leading = 1.65em              // double spacing: twice the single line (13.8 pt), a 27.6 pt pitch at 12 pt, as the filed exemplar sets it (measured, README)
+#let body-leading = 1.645em             // double spacing: twice the single line (13.8 pt), a 27.6 pt pitch at 12 pt, as the filed exemplar sets it (measured, README)
 #let single-leading = 0.5em             // single spacing for caption, counsel, signature: about 13.8 pt at 12 pt
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 2.9in               // party column of the caption

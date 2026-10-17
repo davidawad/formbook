@@ -3,7 +3,7 @@
 #import "@preview/cmarker:0.1.10"
 
 // ---- parameters ----
-#let font-family = "EB Garamond"   // vendored in /fonts; no system font is ever used
+#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md, vendored in /fonts; no system font is ever used
 #let type-size = 12pt              // LBR 9004-1 (search excerpt, see README): minimum 10 pt; 12 pt used
 #let body-leading = 0.85em         // ~1.5 spacing: inside LBR 9004-1's single-to-double range (see README)
 #let single-leading = 0.3em        // caption, counsel block, notice, signature, certificate, footer

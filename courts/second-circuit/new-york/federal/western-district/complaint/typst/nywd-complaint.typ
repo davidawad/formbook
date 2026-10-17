@@ -8,9 +8,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"   // vendored in fonts/ (the only vendored family); see README.md, known gaps
+#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; see README.md, known gaps
 #let type-size = 12pt              // Local Rule 10(a)(1): all text and footnotes at least 12-point
-#let body-leading = 1.35em         // Local Rule 10(a)(2): double-spaced body; 0.65em line box + 1.35em = 24 pt pitch at 12 pt
+#let body-leading = 1.345em        // Local Rule 10(a)(2): double-spaced body; 0.655em line box + 1.345em = 24 pt pitch at 12 pt
 #let single-leading = 0.65em       // block quotations, caption, counsel and signature blocks
 #let margin = 1in                  // Local Rule 10(a)(4): at least one inch on all four sides
 #let para-indent = 0.5in           // first-line indent of numbered paragraphs

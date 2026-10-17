@@ -3,9 +3,9 @@
 #import "@preview/cmarker:0.1.10"
 
 // ---- parameters ----
-#let font-family = "EB Garamond"   // vendored in /fonts; no system font is ever used
+#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md, vendored in /fonts; no system font is ever used
 #let type-size = 12pt              // LBR 9004-1 (search excerpt, see README): minimum 10 pt; 12 pt used
-#let body-leading = 1.65em         // double spacing (27.6 pt line pitch at 12 pt), as in the filed complaints; LBR 9004-1 allows up to double
+#let body-leading = 1.645em        // double spacing (27.6 pt line pitch at 12 pt), as in the filed complaints; LBR 9004-1 allows up to double
 #let single-leading = 0.3em        // caption, counsel block, signature, footer
 #let para-indent = 0.5in           // FRCP 10(b) numbered paragraphs; indent is presentation only
 #let margins = (top: 1in, bottom: 1in, left: 1in, right: 1in)  // LBR 9004-1 is silent on margins; 1 in is the convention

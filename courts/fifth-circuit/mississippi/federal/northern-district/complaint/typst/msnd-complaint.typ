@@ -9,15 +9,15 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // proportional serif (vendored in fonts/); no local rule sets a complaint typeface
+#let font-family = "Liberation Serif"   // no local rule sets a complaint typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // the memorandum rule (L.U.Civ.R. 7(b)(5)(B)) is the court's only typeface rule; used here too
 #let page-w = 8.5in                     // 8 1/2 by 11 inch paper (L.U.Civ.R. 7(b)(5)(A), applied for consistency)
 #let page-h = 11in
 #let margin = 1in                       // at least 1 inch on all four sides (L.U.Civ.R. 7(b)(5)(A))
 #let text-width = page-w - 2 * margin
-#let body-leading = 1.35em              // double spacing: EB Garamond's line box is 0.65em, so 1.35em gives 24 pt at 12 pt
+#let body-leading = 1.345em             // double spacing: Liberation Serif's line box is 0.655em, so 1.345em gives 24 pt at 12 pt
 #let pitch = 24pt                       // one double-spaced line (the baseline pitch of body text)
-#let single-leading = 0.5em             // single spacing for the caption, the title, and the signature block
+#let single-leading = 0.495em            // single spacing for the caption, the title, and the signature block
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.25in              // width of the party column of the caption
 

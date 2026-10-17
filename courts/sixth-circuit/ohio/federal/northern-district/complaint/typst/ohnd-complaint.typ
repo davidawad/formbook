@@ -9,12 +9,12 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"       // kept: L.R. 10.1 names no face, so docs/FONTS.md has no substitute (README)
+#let font-family = "Liberation Serif"  // L.R. 10.1 names no face; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                  // convention for federal filings; no N.D. Ohio font rule in L.R. 10.1
-// Absolute lengths at 12 pt, so pitches can be divided (typst cannot divide two em lengths). EB Garamond's
-// line box is 0.65 em (7.8 pt), measured (README); single spacing adds 0.5 em (13.8 pt pitch); double
+// Absolute lengths at 12 pt, so pitches can be divided (typst cannot divide two em lengths). Liberation Serif's
+// line box is 0.655 em (7.86 pt); single spacing adds the rest of 1.15 em (13.8 pt pitch); double
 // spacing is twice that (27.6 pt pitch), the same pitch Word gives 12 pt type.
-#let natural-line = 7.8pt
+#let natural-line = 7.86pt
 #let single-pitch = 13.8pt
 #let body-pitch = 2 * single-pitch
 #let body-leading = body-pitch - natural-line

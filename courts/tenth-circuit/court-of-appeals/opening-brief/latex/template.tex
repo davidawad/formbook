@@ -11,9 +11,9 @@
 \usepackage{needspace}
 \usepackage{enumitem}
 
-% ---- type: EB Garamond from the vendored fonts only (CA10-FORM-002) ----
-\setmainfont[Path=$fontdir$eb-garamond/, Extension=.otf, UprightFont=EBGaramond-Regular, BoldFont=EBGaramond-Bold,
-  ItalicFont=EBGaramond-Italic, BoldItalicFont=EBGaramond-BoldItalic]{EBGaramond-Regular}
+% ---- type: Liberation Serif, the Times New Roman substitute per docs/FONTS.md, from the vendored fonts only (CA10-FORM-002) ----
+\setmainfont[Path=$fontdir$liberation-serif/, Extension=.ttf, UprightFont=LiberationSerif-Regular, BoldFont=LiberationSerif-Bold,
+  ItalicFont=LiberationSerif-Italic, BoldItalicFont=LiberationSerif-BoldItalic]{LiberationSerif-Regular}
 
 % 14-point everywhere, double spaced (CA10-FORM-001); the line pitch matches the typst template.
 \renewcommand\normalsize{\@setfontsize\normalsize{14pt}{31.43pt}}
@@ -54,10 +54,10 @@
   \addcontentsline{toc}{ctenha}{\ctentocline{0}{}{#2}}%
   \nopagebreak\addvspace{1.1em}\nopagebreak}
 
-% Argument point (level 2 in the Argument): bold small capitals, centred.
+% Argument point (level 2 in the Argument): bold, centred (Liberation Serif has no small capitals).
 \newcommand{\ctenpoint}[3]{%
   \par\needspace{4\baselineskip}\addvspace{1.2em}%
-  \begingroup\centering\bfseries\addfontfeature{Letters=SmallCaps}#1~#2\par\endgroup
+  \begingroup\centering\bfseries #1~#2\par\endgroup
   \addcontentsline{toc}{ctenhb}{\ctentocline{0}{#1}{#3}}%
   \nopagebreak\addvspace{1em}\nopagebreak}
 
@@ -237,7 +237,7 @@ $endif$
 \ctenlistedtitle{CERTIFICATE OF COMPLIANCE}
 \noindent This brief complies with the type-volume limitation of Federal Rule of Appellate Procedure 32(a)(7)(B), because it contains $words$ words, which is no more than the $word_limit$ words permitted for a principal brief, excluding the parts of the brief exempted by Federal Rule of Appellate Procedure 32(f).
 
-\noindent The brief also complies with the typeface requirements of Federal Rule of Appellate Procedure 32(a)(5) and the type style requirements of Federal Rule of Appellate Procedure 32(a)(6), because it has been prepared in a proportionally spaced typeface, EB Garamond, in 14-point type.
+\noindent The brief also complies with the typeface requirements of Federal Rule of Appellate Procedure 32(a)(5) and the type style requirements of Federal Rule of Appellate Procedure 32(a)(6), because it has been prepared in a proportionally spaced typeface, Liberation Serif, in 14-point type.
 \par\needspace{8\baselineskip}\addvspace{1.6em}
 \hspace*{0.5\textwidth}\begin{minipage}[t]{0.5\textwidth}
 /s/ $signature.signer$\\

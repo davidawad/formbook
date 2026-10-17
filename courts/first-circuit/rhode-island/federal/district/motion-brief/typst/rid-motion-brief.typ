@@ -11,7 +11,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; LR Cv 5(a)(3) sets no typeface, only the size
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; LR Cv 5(a)(3) sets no typeface, only the size
 #let type-size = 12pt                   // LR Cv 5(a)(3): at least 12-point font
 #let footnote-size = 10pt               // LR Cv 5(a)(3): footnotes at least 10-point, may be single-spaced
 #let page-w = 8.5in                     // LR Cv 5(a): 8 1/2 by 11 inch paper
@@ -19,7 +19,7 @@
 #let margin = 1in                       // convention (no D.R.I. margin rule); page number sits in the bottom margin
 #let text-width = page-w - 2 * margin
 #let pitch = 27.6pt                     // double spacing: the baseline pitch of both filed exemplars at 12 pt (measured, README.md)
-#let body-leading = 1.65em              // EB Garamond sets a 0.65em line, so 1.65em of leading gives the 27.6 pt pitch above
+#let body-leading = 1.645em             // Liberation Serif sets a 0.655em line, so 1.645em of leading gives the 27.6 pt pitch above
 #let single-leading = 0.5em             // caption, counsel, signature and footnotes: single-spaced (13.8 pt at 12 pt)
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let quote-indent = 0.5in               // block quotations are indented on both sides

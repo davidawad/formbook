@@ -24,7 +24,7 @@ signature:
   lines: ["BAKER & HOSTETLER LLP", "Washington Square, Ste. 1100", "1050 Connecticut Ave., N.W.", "Washington, DC 20036", "(202) 861-1711", "adickerson@bakerlaw.com"]
 date: "August 4, 2026"
 virus_scanner: "CrowdStrike Falcon Sensor Version 7.38.21003.0"
-typeface: "14-point, proportionally spaced EB Garamond"
+typeface: "14-point, proportionally spaced Liberation Serif"
 service:
   certificate: true
 authorities:

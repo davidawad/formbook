@@ -26,3 +26,12 @@ Searched for a text-based, public complaint filed in an adversary proceeding in 
 
 - `casedocs.omniagentsolutions.com/.../df09f702-...-2632.pdf`: Order approving stipulation (Doc 2632, LPG case, June 11, 2026). An order, not a complaint.
 - `about.ag/pics/bk/656.pdf` and `692.pdf` (Tulving Company, 8:14-bk-11492-ES): Chapter 7 trustee motions on the court-approved form F 2016-2.2 (cash disbursements). Forms, not memoranda.
+
+- File: `FILED-EXAMPLE-girardi-2-21-ap-01155-adversary-complaint.pdf`
+- Filer: Plaintiff Elissa Miller, by Ronald N. Richards, Law Offices of Ronald Richards & Associates, APC
+- Case: *Elissa Miller v. Erika Girardi, et al.*, No. 2:21-ap-01155-BR (Doc. 1)
+- Document: 31-page adversary complaint
+- Date filed: 2021-07-14
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.cacb.1929597/gov.uscourts.cacb.1929597.1.0.pdf
+- Date retrieved: 2026-10-17
+- sha256: `3ee70472c347543810f06cc22b2821936d0d6b65397b3989c511c066552b2b40`

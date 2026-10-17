@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; no system font is used (tools/render.sh)
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; no system font is used (tools/render.sh)
 #let type-size = 12pt                   // convention: 12 point body text (no W.D. Wis. rule found; README.md)
 #let page-w = 8.5in                     // 8 1/2 by 11 inch paper (convention; README.md)
 #let page-h = 11in
@@ -18,7 +18,7 @@
 #let margin-top = 1in
 #let margin-bottom = 1in
 #let text-width = page-w - 2 * margin-x
-#let body-leading = 1.35em              // convention: loosely double-spaced body; measured pitch in README.md
+#let body-leading = 1.345em             // convention: loosely double-spaced body; measured pitch in README.md
 #let single-leading = 0.5em             // single-spaced caption and signature block
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.4in               // width of the party column of the caption
@@ -177,7 +177,7 @@
     footer: footer(),
   )
   set text(font: font-family, size: type-size, lang: "en")
-  // Paragraph gap: the line box of EB Garamond is 0.65em, so a paragraph gap of body-leading gives a 24 pt
+  // Paragraph gap: the line box of Liberation Serif is 0.655em, so a paragraph gap of body-leading gives a 24 pt
   // baseline pitch at the start of each paragraph, the same as inside it (measured with pdftotext -bbox).
   set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false)
 

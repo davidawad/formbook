@@ -9,9 +9,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no E.D.N.C. typeface rule; the exemplar is a Times-style serif; vendored in fonts/
+#let font-family = "Liberation Serif"        // no E.D.N.C. typeface rule; the exemplar is a Times-style serif; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                   // no E.D.N.C. type-size rule (FRBP 9004(a): "clearly legible"); exemplar is 12 pt
-#let body-leading = 1.35em              // double spacing as in the exemplar: 0.65em line box + 1.35em leading = 24 pt pitch
+#let body-leading = 1.345em             // double spacing as in the exemplar: 0.655em line box + 1.345em leading = 24 pt pitch
 #let single-leading = 0.5em             // single spacing: counsel, signature, certificate of service, quotations
 #let margin = 1in                       // no E.D.N.C. margin rule; 1 inch as in the exemplar
 #let para-indent = 0.5in                // first-line indent of body paragraphs

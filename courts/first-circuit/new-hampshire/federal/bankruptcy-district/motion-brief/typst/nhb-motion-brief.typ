@@ -11,9 +11,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; no NH rule sets a typeface (README.md, gap 1)
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; no NH rule sets a typeface (README.md, gap 1)
 #let type-size = 12pt                   // no NH or federal minimum found for the body; 12 pt is the working standard
-#let body-leading = 1.65em              // double spacing: about 27.6 pt line pitch at 12 pt (2 x 13.8 pt, the Word convention for 12 pt Times)
+#let body-leading = 1.645em             // double spacing: about 27.6 pt line pitch at 12 pt (2 x 13.8 pt, the Word convention for 12 pt Times)
 #let single-leading = 0.5em             // counsel block, caption, signature, footnotes: single spaced
 #let para-indent = 0.5in                // first-line indent of body paragraphs (memoranda are not numbered)
 #let page-margin = 1in                  // letter paper, one-inch margins (no NH rule found; common practice)

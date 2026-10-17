@@ -11,11 +11,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // INNB-FORM-005: no typeface is named in B-5005-2; EB Garamond is the vendored font. See ../README.md.
-#let type-size = 13pt                    // INNB-FORM-005: no size is named in B-5005-2; 13 pt matches the ca9 precedent (Garamond sets small). See ../README.md.
+#let font-family = "Liberation Serif"         // INNB-FORM-005: no typeface is named in B-5005-2; Times New Roman substitute per docs/FONTS.md. See ../README.md.
+#let type-size = 12pt                    // INNB-FORM-005: no size is named in B-5005-2; 12 pt is a style choice. See ../README.md.
 #let line-pitch = 24pt                   // INNB-FORM-001: double spacing. With the margins below, 27 lines fit per page.
-#let body-leading = 0.54em               // gap between lines of body text; tuned so the line pitch is line-pitch.
-#let single-leading = 0.2em              // caption, counsel and debtor blocks, signature block, quotations.
+#let body-leading = 1.091em              // gap between lines of body text: with the 0.909em ascender-to-descender box set below, a 2.0em = line-pitch at 12 pt.
+#let single-leading = 0.596em            // caption, counsel and debtor blocks, signature block, quotations (1.505em pitch).
 #let margins = (top: 1in, bottom: 1in, x: 1in)  // INNB-FORM-004: 8 1/2 x 11 paper; margins are a style choice (no margin figure in B-5005-2).
 #let para-indent = 0.5in
 #let footer-size = 11pt                  // page number only (INNB-FORM-003); not body text.
@@ -211,7 +211,7 @@
     top-edge: "ascender", bottom-edge: "descender",
   )
   set par(
-    leading: body-leading, spacing: 0pt,
+    leading: body-leading, spacing: body-leading,   // INNB-FORM-001: double spaced between paragraphs too (24 pt)
     first-line-indent: 0pt, justify: false,
   )
   set footnote.entry(gap: 0.5em, clearance: 0.9em, indent: 0pt, separator: line(length: 30%, stroke: 0.5pt))

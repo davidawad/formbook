@@ -8,15 +8,15 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; the only face the build can use (no system fonts)
+#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 13pt                   // LCvR7.1(d): not less than 13-point type, footnotes included
 #let page-w = 8.5in                     // LCvR5.2(a): 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let margin = 1in                       // LCvR7.1(d): at least one inch on the top, bottom and sides
 #let text-width = page-w - 2 * margin
 #let pitch = 27.5pt                     // double-spaced baseline pitch, the same as the filed exemplar's (measured, README.md)
-#let body-leading = 1.465em             // leading that gives that pitch: 27.5 pt minus the 0.65 em EB Garamond line box at 13 pt
-#let single-leading = 0.5em             // single spacing for the caption, quotations and signature block
+#let body-leading = 1.46em              // leading that gives that pitch: 27.5 pt minus Liberation Serif's 0.655 em line box at 13 pt
+#let single-leading = 0.495em            // single spacing for the caption, quotations and signature block
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let caption-left = 3.6in               // party column of the caption (each party line must fit it: see caption-row)
 #let caption-mark = 0.3in               // column of ")" marks between the parties and the case information

@@ -8,10 +8,10 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; LR 5.1(B)(2) asks for a plain roman style
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; LR 5.1(B)(2) asks for a plain roman style
 #let type-size = 12pt                   // LR 5.1(B)(2): body text 12-point or 14-point
 #let page-margin = 1in                  // LR 5.1(A): approximately one-inch margins on each side, top and bottom
-#let body-leading = 1.35em              // LR 5.1(B)(1): double spacing. EB Garamond's line box is 0.65em, so 0.65em + 1.35em = 2.0em = 24 pt at 12 pt
+#let body-leading = 1.345em             // LR 5.1(B)(1): double spacing. Liberation Serif's line box is 0.655em, so 0.655em + 1.345em = 2.0em = 24 pt at 12 pt
 #let single-leading = 0.5em             // single spacing for the caption, block quotations and signature blocks
 #let gap = 2em                          // one blank double-spaced line (24 pt at 12 pt), used around headings and blocks
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
@@ -54,7 +54,7 @@
 /// One ")" mark per line of a caption row: a long party name wraps onto more lines, and its row gets one mark per line.
 #let paren-cell(content) = context {
   let h = measure(width: caption-left, content).height
-  let n = int(calc.max(1, calc.round((h + single-leading).to-absolute().pt() / (0.65em + single-leading).to-absolute().pt())))
+  let n = int(calc.max(1, calc.round((h + single-leading).to-absolute().pt() / (0.655em + single-leading).to-absolute().pt())))
   align(right, stack(dir: ttb, spacing: single-leading, ..range(n).map(_ => [)])))
 }
 

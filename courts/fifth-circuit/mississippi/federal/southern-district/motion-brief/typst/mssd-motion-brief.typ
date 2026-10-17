@@ -9,11 +9,11 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to a choice recorded in README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/ (the only vendored face). Times New Roman in the exemplar.
-#let type-size = 13pt                   // 13 pt EB Garamond reads at the size of 12 pt Times (README.md, gaps)
-#let footnote-size = 12pt               // 7(b)(5)(B): footnotes 11-point or larger; 12 pt EB Garamond reads like 11 pt Times
+#let font-family = "Liberation Serif"   // Times New Roman substitute per docs/FONTS.md (Times New Roman in the exemplar)
+#let type-size = 12pt                   // L.U.Civ.R. 7(b)(5)(B): text 12-point or larger
+#let footnote-size = 11pt               // 7(b)(5)(B): footnotes 11-point or larger
 #let margin = 1in                       // 7(b)(5)(A): at least 1 inch on all four sides
-#let body-leading = 1.47em              // 7(b)(5)(A): double spacing, calibrated to 27.6 pt line pitch (README.md)
+#let body-leading = 1.645em             // 7(b)(5)(A): double spacing, calibrated to 27.6 pt line pitch (README.md); Liberation Serif's 0.655em line box + 1.645em = 2.3em = 27.6 pt at 12 pt
 #let single-leading = 0.25em            // headings, caption, footnotes, signature block: single spaced
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 

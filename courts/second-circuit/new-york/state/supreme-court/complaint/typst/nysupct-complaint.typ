@@ -11,12 +11,12 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"   // convention: the one vendored serif (fonts/eb-garamond)
+#let font-family = "Liberation Serif"   // convention: Times New Roman substitute per docs/FONTS.md (fonts/liberation-serif)
 #let type-size = 12pt              // NYSC-FORM-002: 22 NYCRR 202.5(a) print no smaller than 12-point
 #let footnote-size = 10pt          // NYSC-FORM-003: 22 NYCRR 202.5(a) footnotes no smaller than 10-point
 #let page-margin = 1in             // NYSC-FORM-004: 22 NYCRR 202.5(a) margins no smaller than one inch
 #let para-indent = 0.5in           // convention: numbered paragraphs begin with a first-line indent
-#let body-leading = 1.65em         // NYSC-FORM-005: double space (202.5(a)); tuned so the baseline pitch matches a double-spaced 12-point page, see README
+#let body-leading = 1.645em        // NYSC-FORM-005: double space (202.5(a)); tuned so the baseline pitch matches a double-spaced 12-point page, see README
 #let single-leading = 0.52em       // block quotations, caption, signature block, TOC: single-spaced (pitch about 14 pt)
 #let toc-depth = 2
 

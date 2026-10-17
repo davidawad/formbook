@@ -36,7 +36,7 @@ signature:
     - "mwhitney@whitneylawgroup.com"
 date: "October 9, 2024"
 word_processor: "Typst 0.15.1"
-typeface: "EB Garamond"
+typeface: "Liberation Serif"
 service:
   certificate: true
 authorities:

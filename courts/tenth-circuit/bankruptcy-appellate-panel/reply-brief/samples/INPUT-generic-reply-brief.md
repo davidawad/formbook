@@ -23,7 +23,7 @@ signature:
   lines: ["Example Law Office", "100 Example Street", "Anytown, ST 00000", "(555) 555-0100", "pat@example.com"]
 date: "November 18, 2026"
 word_processor: "Microsoft Word"
-typeface: "Garamond"
+typeface: "Liberation Serif"
 related_cases:
   status: none
 authorities:

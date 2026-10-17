@@ -20,3 +20,16 @@ Doc type: motion with memorandum of authorities, United States Bankruptcy Court,
 - CourtListener REST search (`/api/rest/v4/search/?type=r&court=waeb&q=motion memorandum in support`): returned memoranda supporting motions in adversary and main cases. The 1 Min LLC memorandum (Doc 14) was chosen because it is an EDWA adversary memorandum supporting a motion to dismiss, with the full caption, TOC and TOA, and a text layer.
 - Web search for "Eastern District of Washington" bankruptcy motion memorandum "LBR 9013": returned only LBR 9013-1 text and forms; no filed memorandum.
 - Justia form pages for EDWA (LF 9013 and LF 9013.2) are forms, not filings, and were not used as exemplars.
+
+## 2. `FILED-EXAMPLE-astria-health-21-80005-motion-brief.pdf`
+
+- Court: United States Bankruptcy Court, Eastern District of Washington
+- Case: *Astria Health v. Cerner Corporation*, adversary proceeding within *In re Astria Health*, Chapter 11, Case No. 19-01189-WLH11
+- Docket: Adv. Proc. No. 21-80005-WLH, Document 87
+- Document: Memorandum in Support of Defendant's Motion for Protective Order to Prevent Plaintiffs from Serving Subpoenas on Cerner's Clients (22 pages)
+- Filer: Cerner Corporation and Cerner Revenue Cycle, LLC, by Bruce K. Medeiros (Davidson Backman Medeiros PLLC) and Patrick N. Fanning, Kristina L. Burmeister, and J. Aaron Craig (Peak Litigation LLP)
+- Date filed: November 15, 2021
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.waeb.210307/gov.uscourts.waeb.210307.87.0.pdf
+- Date retrieved: 2026-10-17
+- SHA-256: `5d041f1868c12d727dec187ddd889eb40f1f51e91f3b41de2cbcb599b61a490b`
+- Public CourtListener RECAP filing; searchable text, 22 pages, US Letter. The filer and counsel differ from the 1 Min LLC defendants' supporting memorandum by Bush Kornfeld LLP. Used as a second-filer structural reference.

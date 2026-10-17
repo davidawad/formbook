@@ -7,11 +7,11 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"       // vendored in fonts/; see README.md, known gap 2
+#let font-family = "Liberation Serif"  // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 14pt                  // Loc. R. 5.1(C): at least 14-point font, everywhere (footer included)
 #let pitch = 32.2pt                    // double spacing: the baseline pitch measured on the filed exemplars
 #let body-leading = 1.65em             // extra space between lines; calibrated so body lines land on `pitch`
-#let single-leading = 0.5em            // caption, court title and signature: single spaced, 16 pt pitch (see README.md)
+#let single-leading = 0.495em           // caption, court title and signature: single spaced, 16 pt pitch (see README.md)
 #let blank-line = 16pt                 // one single-spaced blank line
 #let para-indent = 0.5in               // first-line indent of numbered paragraphs
 #let caption-left = 3.3in              // width of the party column of the caption

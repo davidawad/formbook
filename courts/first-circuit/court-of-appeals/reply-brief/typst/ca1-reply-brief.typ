@@ -22,9 +22,9 @@
 // ---------------------------------------------------------------------------
 
 #let court-name = "United States Court of Appeals for the First Circuit"   // FRAP 32(a)(2)(B)
-#let font-family = "EB Garamond"          // FRAP 32(a)(5)(A): proportionally spaced, serif. Vendored in /fonts.
+#let font-family = "Liberation Serif"          // FRAP 32(a)(5)(A): proportionally spaced, serif; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // FRAP 32(a)(5)(A): 14-point or larger, everywhere, footnotes included.
-#let body-leading = 0.94em                 // with the metric-aligned line box, a baseline pitch of about
+#let body-leading = 0.94em                 // with the fixed 1.305em line box set below, a baseline pitch of about
                                            // 2.2 x type size: double spacing (FRAP 32(a)(4)).
 #let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced (FRAP 32(a)(4)).
 #let page-margin = 1in                     // FRAP 32(a)(4): at least one inch on all four sides.
@@ -516,7 +516,9 @@
   set text(
     font: font-family, size: type-size, lang: "en", region: "us",
     hyphenate: false, fallback: false,
-    top-edge: "ascender", bottom-edge: "descender",
+    // Fixed line box, 1em above the baseline and 0.305em below (1.305em): with body-leading the
+    // pitch is 2.245em (31.4 pt at 14 pt), FRAP 32(a)(4) double spacing; single-leading gives 20 pt.
+    top-edge: 1em, bottom-edge: -0.305em,
   )
   set par(
     leading: body-leading, spacing: body-leading,

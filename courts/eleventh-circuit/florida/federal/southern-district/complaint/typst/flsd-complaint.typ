@@ -8,13 +8,13 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no font rule in L.R. 5.1; the only vendored face (fonts/), see README.md
+#let font-family = "Liberation Serif"   // no font rule in L.R. 5.1; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // L.R. 5.1(a)(4): fonts no smaller than 12 point
 #let page-w = 8.5in                     // L.R. 5.1(a)(3): standard 8 1/2 x 11 inch paper
 #let page-h = 11in
 #let margin = 1in                       // L.R. 5.1(a)(4): 1 inch on top, bottom and each side
 #let body-leading = 1.65em              // L.R. 5.1(a)(4): at least 1 1/2 spaces; the exemplar is double-spaced (27.6 pt pitch at 12 pt), see README.md
-#let single-leading = 0.5em             // quotations of 50 words or more, footnotes, signature and caption blocks
+#let single-leading = 0.495em            // quotations of 50 words or more, footnotes, signature and caption blocks
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let style-width = 3.25in               // L.R. 5.1(a)(5)(C): the style fills no more than the left side of the page
 

@@ -7,12 +7,12 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LR 7.1(a)(4): proportional face; Garamond is presumed legible; vendored in fonts/
+#let font-family = "Liberation Serif"        // LR 7.1(a)(4): proportional face; Times New Roman is on the presumed-legible list; this is its substitute (docs/FONTS.md), vendored in fonts/
 #let type-size = 12pt                   // LR 7.1(a)(4): 12-point or larger; footnotes included
 #let page-w = 8.5in                     // LR 7.1(a)(3): 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let margin = 1in                       // LR 7.1(a)(3): at least one inch on all four sides
-#let body-leading = 1.35em              // LR 7.1(a)(3) double spacing: EB Garamond line box 0.65em + 1.35em = 24 pt at 12 pt
+#let body-leading = 1.345em             // LR 7.1(a)(3) double spacing: Liberation Serif line box 0.655em + 1.345em = 24 pt at 12 pt
 #let single-leading = 0.5em             // single spacing for caption, counsel, headings, quotations, footnotes (LR 7.1(a)(3) allows)
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 3.0in               // width of the party column of the caption

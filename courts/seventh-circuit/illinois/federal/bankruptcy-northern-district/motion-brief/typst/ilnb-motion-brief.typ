@@ -12,11 +12,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // ILNB-FORM-002: a proportionally spaced font. Vendored in /fonts.
-#let type-size = 13pt                    // ILNB-FORM-002: at least 12 point, footnotes included. 13 pt is a style choice (EB Garamond sets smaller than Times at the same point size); see ../README.md.
+#let font-family = "Liberation Serif"         // ILNB-FORM-002: a proportionally spaced font; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let type-size = 12pt                    // ILNB-FORM-002: at least 12 point, footnotes included (the rule floor).
 #let line-pitch = 24pt                   // ILNB-FORM-003: double spacing, a 24 pt baseline pitch.
-#let body-leading = 0.54em               // extra space between body lines; tuned so the baseline pitch is line-pitch (measured: 24.0 pt at 13 pt).
-#let single-leading = 0.2em              // caption, counsel, signature block, footnotes, quotations, headings (ILNB-FORM-003 exception, README.md).
+#let body-leading = 1.091em              // extra space between body lines: the ascender-to-descender box set below is 0.909em, so the pitch is 2.0em = line-pitch at 12 pt.
+#let single-leading = 0.596em            // caption, counsel, signature block, footnotes, quotations, headings (ILNB-FORM-003 exception, README.md) (1.505em pitch).
 #let page-margin = 1in                   // ILNB-FORM-004: no margin less than one inch.
 #let para-indent = 0.5in                 // first-line indent of body paragraphs.
 #let heading-tab = 0.5in                 // hanging indent of a heading's label.
@@ -45,7 +45,7 @@
 
 /// Several single-spaced lines, one block per item. Items are markdown strings or content.
 #let line-stack(items) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
+  set par(leading: single-leading, spacing: single-leading, justify: false)
   stack(dir: ttb, spacing: single-leading, ..items.map(i => if type(i) == str { inl(i) } else { i }))
 }
 
@@ -77,7 +77,7 @@
 // ---------------------------------------------------------------------------
 
 #let court-title(meta) = {
-  set par(leading: single-leading, spacing: 0pt, justify: false)
+  set par(leading: single-leading, spacing: single-leading, justify: false)
   align(center, text(weight: "bold", line-stack((
     "IN THE UNITED STATES BANKRUPTCY COURT",
     "FOR THE NORTHERN DISTRICT OF ILLINOIS",
@@ -117,7 +117,7 @@
     column-gutter: 0.3in,
     block(width: 3.4in, stroke: (right: 0.75pt, bottom: 0.75pt), inset: (right: 0.15in, bottom: 0.12in), left),
     block(inset: (top: 0pt), {
-      set par(leading: single-leading, spacing: 0pt, justify: false)
+      set par(leading: single-leading, spacing: single-leading, justify: false)
       let rows = ()
       if "chapter" in cap { rows.push(cap.chapter) }
       rows.push("Case No. " + cap.case_number)
@@ -136,7 +136,7 @@
   caption(meta)
   v(line-pitch)
   align(center, block(width: 100%, sticky: true, {
-    set par(leading: single-leading, spacing: 0pt, justify: false)
+    set par(leading: single-leading, spacing: single-leading, justify: false)
     text(weight: "bold", upper(need(meta, "title")))
   }))
   v(line-pitch)

@@ -302,7 +302,7 @@ function Pandoc(doc)
     '\\par\\addvspace{1em}' ..
     'This brief complies with the typeface and type-style requirements of Federal Rule of Appellate ' ..
     'Procedure 32(a)(5)-(6) and Circuit Rule 32(b) because this brief has been prepared in a ' ..
-    'proportionally spaced typeface using LaTeX in EB Garamond ' .. CONFIG.cert_sizes .. ' font.\\endgroup')
+    'proportionally spaced typeface using LaTeX in Liberation Serif ' .. CONFIG.cert_sizes .. ' font.\\endgroup')
   back[#back + 1] = raw(form_sig_line(meta))
   if svc ~= nil and svc.certificate then
     back[#back + 1] = raw('\\cahead{1}{0}{}{Certificate of Service}{cs}{99}')

@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no font is mandated by LR 5.2(e); vendored in fonts/ (see README.md)
+#let font-family = "Liberation Serif"        // no font is mandated by LR 5.2(e); Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (see README.md)
 #let type-size = 12pt                   // LR 5.2(e)(1): 12-point type in the body of the text
 #let page-w = 8.5in                     // LR 5.2(e): 8 1/2 x 11 inch paper
 #let page-h = 11in
@@ -17,10 +17,11 @@
 #let margin-left = 1in
 #let margin-right = 1in
 #let text-width = page-w - margin-left - margin-right
-// LR 5.2(e): "line spacing will be at least 2.0 lines". Measured for EB Garamond at 12 pt: the natural line
-// box is 0.65 em (7.8 pt), so 1.65 em of leading gives a 27.6 pt baseline pitch, the pitch of double-spaced
+// LR 5.2(e): "line spacing will be at least 2.0 lines". In Liberation Serif at 12 pt the natural line
+// box is 0.655 em (7.86 pt), so 1.645 em of leading gives a 27.6 pt baseline pitch, the pitch of double-spaced
 // 12-point Times New Roman in the filed exemplar (2 x 13.8 pt).
-#let body-leading = 1.65em
+#let body-leading = 1.645em
+
 #let pitch = 27.6pt                    // one double-spaced line: the height a heading or a list item takes up
 #let single-leading = 0.5em             // single spacing (13.8 pt pitch) for the caption, signature and counsel blocks
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs

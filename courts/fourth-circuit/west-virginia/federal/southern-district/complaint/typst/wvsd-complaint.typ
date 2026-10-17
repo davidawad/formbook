@@ -9,12 +9,12 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // proportional serif, vendored in fonts/ (see README.md)
+#let font-family = "Liberation Serif"        // proportional serif; Times New Roman substitute per docs/FONTS.md, vendored in fonts/ (see README.md)
 #let type-size = 12pt                   // 12 point, as LR Civ P 7.1(a)(4) requires for memoranda
 #let page-w = 8.5in                     // 8 1/2 by 11 inch paper (LR Civ P 7.1(a)(3))
 #let page-h = 11in
 #let margin = 1in                       // at least one inch on all four sides (LR Civ P 7.1(a)(3))
-#let body-leading = 1.35em              // double spacing: EB Garamond line box 0.65em + 1.35em = 24 pt at 12 pt
+#let body-leading = 1.345em             // double spacing: Liberation Serif line box 0.655em + 1.345em = 24 pt at 12 pt
 #let single-leading = 0.5em             // single spacing for caption, counsel, signature, quotations, footnotes
 #let para-indent = 0.5in                // the number of an allegation sits at this indent
 #let caption-left = 3.7in               // width of the party column of the caption (wide enough for a party's address on one line)

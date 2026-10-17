@@ -12,10 +12,10 @@
 // Parameters (each traces to a rule or to a named style choice; see ../README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // Vendored in /fonts. No S.D. Ill. rule names a typeface (ILSB-FORM-002 gap).
+#let font-family = "Liberation Serif"        // No S.D. Ill. rule names a typeface (ILSB-FORM-002 gap); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                   // Style choice: the exemplar is Times 12 pt. No S.D. Ill. type-size rule.
 #let pitch = 24pt                       // Double spacing for the body (convention, not a rule; see ../README.md).
-#let body-leading = 1.35em              // Gives a 24 pt baseline pitch at 12 pt in EB Garamond (line box 0.65 em).
+#let body-leading = 1.345em             // Gives a 24 pt baseline pitch at 12 pt in Liberation Serif (line box 0.655 em).
 #let single-leading = 0.5em             // Caption, counsel, signature, block quotations, footer.
 #let page-w = 8.5in                     // ILSB-FORM-001 (L.R. 5005-2): 8 1/2 by 11 inch paper.
 #let page-h = 11in

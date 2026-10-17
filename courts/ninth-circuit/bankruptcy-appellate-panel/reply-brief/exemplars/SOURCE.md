@@ -51,3 +51,13 @@ Still no exemplar. Searches this pass: CourtListener REST (anonymous, `type=r`):
 - *Moehling v. Select Portfolio Servicing, Inc.*, BAP No. SC-26-1081, "Appellant's Reply Brief", 21 PDF pages. Filer: appellant Steven M. Moehling, pro se (signed "/s/ Steven M. Moehling, Appellant, Pro Se"). URL: https://storage.courtlistener.com/recap/gov.uscourts.ca9.22437/gov.uscourts.ca9.22437.12.0.pdf. Born-digital (PDF creation date 2026-06-19). Viewed pages 1-2 at 60 dpi: cover with court name first, "In re: Steven M. Moehling, Debtor" caption with the BAP and bankruptcy numbers at the right, then the parties; TOC with a running header, numbered level-1 entries.
 - *Reznick v. U.S. Trustee*, BAP No. CC-22-1128, Appellant's Reply Brief, 16 PDF pages, pro per, a scan (OmniPage OCR). URL: https://storage.courtlistener.com/recap/gov.uscourts.ca9.21514/gov.uscourts.ca9.21514.47.0.pdf. Not viewed or compared (pro per scan; the two above cover the comparison).
 - The answering-brief alternate *Hujazi v. Wirum* (BAP No. NC-14-1030, see `../../answering-brief/exemplars/SOURCE.md`) was also compared for the cover caption.
+
+## FILED-EXAMPLE-moehling-SC-26-1081-reply-brief.pdf
+
+- Filer: appellant Steven M. Moehling, pro se.
+- Case: *Moehling v. Select Portfolio Servicing, Inc.*, BAP No. SC-26-1081.
+- Date filed: June 19, 2026 (PDF creation date; signature page bears filing date).
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.ca9.22437/gov.uscourts.ca9.22437.12.0.pdf
+- Date retrieved: 2026-10-17.
+- SHA-256: `a1798469456e88cff87e74074da6e8daa38cfd079977ee4a9c27588ab17ed694`.
+- Alternate filer to the Beavor exemplar above.

@@ -12,11 +12,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // NJD-FORM-002: a standard proportional serif; the only vendored family in fonts/
+#let font-family = "Liberation Serif"        // NJD-FORM-002: a standard proportional serif; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                   // NJD-FORM-002: 12 point, the size both filed exemplars use
 #let pitch = 27.6pt                     // NJD-FORM-003: double spacing, measured in the exemplars (DGL p.3: 27.6 pt)
-#let body-leading = 1em                 // gap between lines of body text; tuned so the line pitch is `pitch` (measured: 27.6 pt, see README.md)
-#let single-leading = 0.2em             // counsel block, caption, signature blocks, certification
+#let body-leading = pitch - 0.909em     // gap between lines of body text: the ascender-to-descender line box set below is 0.909em in Liberation Serif, so the line pitch is `pitch`
+#let single-leading = 0.596em           // 0.909em + 0.596em = about 18 pt at 12 pt: counsel block, caption, signature blocks, certification
 #let page-margin = 1in                  // NJD-FORM-001: no complaint margin rule; 1 inch, as in both exemplars
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let number-gap = 0.3in                 // gap between a paragraph number and its text
@@ -175,7 +175,7 @@
     hyphenate: false, fallback: false,
     top-edge: "ascender", bottom-edge: "descender",
   )
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: 0pt, justify: false)
+  set par(leading: body-leading, spacing: body-leading, first-line-indent: 0pt, justify: false) // NJD-FORM-003: a paragraph break keeps the double-spaced pitch
   set enum(numbering: "a.", indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
   set list(indent: 0.5in, body-indent: 0.4in, spacing: body-leading)
 

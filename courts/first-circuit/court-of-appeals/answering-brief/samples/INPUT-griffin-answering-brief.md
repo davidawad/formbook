@@ -32,7 +32,7 @@ signature:
     - "jcollins@morganbrown.com"
 date: "January 2, 2024"
 word_processor: "Typst 0.15.1"
-typeface: "EB Garamond"
+typeface: "Liberation Serif"
 service:
   certificate: true
 authorities:

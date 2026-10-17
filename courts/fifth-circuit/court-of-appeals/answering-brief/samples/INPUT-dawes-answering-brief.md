@@ -29,7 +29,7 @@ signature:
   signer: "J. Cheves Ligon"
   lines: ["Assistant City Attorney", "CITY ATTORNEY’S OFFICE", "1500 Marilla Street, Room 7DN", "Dallas, Texas 75201", "Telephone: 214-670-3519", "john.ligon@dallas.gov"]
 date: "January 30, 2026"
-prepared_with: "Typst 0.15.0 in 14-point EB Garamond"
+prepared_with: "Typst 0.15.0 in 14-point Liberation Serif"
 service:
   certificate: true
   recipients: "Service is made through the Court’s Notice of Docket Activity on Thad D. Spalding, Shelby White, and Daryl K. Washington, counsel for Appellants, who have consented in writing to accept such notice as service of this document by electronic means."

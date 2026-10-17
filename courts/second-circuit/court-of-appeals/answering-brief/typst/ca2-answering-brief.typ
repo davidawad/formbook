@@ -11,11 +11,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // CA2-FORM-005: serif, proportional. Vendored in /fonts.
+#let font-family = "Liberation Serif"          // CA2-FORM-005: serif, proportional; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // CA2-FORM-005: 14-point or larger, everywhere.
-#let body-leading = 0.94em                 // CA2-FORM-004: with the metric-aligned line box below this
-                                           // gives a baseline pitch of about 2.2 x type size (double spacing).
-#let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced.
+#let body-leading = 1.336em                // CA2-FORM-004: Liberation Serif's ascender-to-descender box (0.909em, set below)
+                                           // plus this leading gives a 2.245em baseline pitch (31.4 pt at 14 pt), about 2.2 x type size (double spacing).
+#let single-leading = 0.516em              // headings, quotations, footnotes, TOC/TOA: single-spaced.
 #let page-margin = 1in                     // CA2-FORM-004: at least one inch on all four sides.
 #let para-indent = 0.5in
 #let toc-depth = 4
@@ -397,7 +397,7 @@
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
   [This brief complies with the type-volume limitation of Fed. R. App. P. 32(a)(7)(B) and Local Rule 32.1(a)(4)(A) because this brief contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. App. P. 32(f).]
   parbreak()
-  [This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type style requirements of Fed. R. App. P. 32(a)(6) because this brief has been prepared in a proportionally spaced typeface using #meta.at("software", default: software) in 14-point #meta.at("typeface", default: "EB Garamond").]
+  [This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type style requirements of Fed. R. App. P. 32(a)(6) because this brief has been prepared in a proportionally spaced typeface using #meta.at("software", default: software) in 14-point #meta.at("typeface", default: "Liberation Serif").]
   form-sig-line(meta)
 }
 

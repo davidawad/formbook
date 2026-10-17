@@ -13,11 +13,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"     // CTD-FORM-003: vendored in fonts/; the rules name no font (see README)
+#let font-family = "Liberation Serif"     // CTD-FORM-003: the rules name no font (see README); Times New Roman substitute per docs/FONTS.md, vendored in fonts/
 #let type-size = 12pt                // CTD-FORM-002: text at least 12 point (L.R. 7(a)(5))
 #let footnote-size = 10pt            // CTD-FORM-002: footnotes at least 10 point (L.R. 7(a)(5))
 #let line-pitch = 27.6pt             // CTD-FORM-001: double spacing = 2 x 13.8 pt, the single line of 12 pt Times in Word
-#let body-leading = 1.65em           // gap between lines of body text; with EB Garamond's line box (0.65 em) it gives line-pitch
+#let body-leading = 1.645em          // gap between lines of body text; with Liberation Serif's line box (0.655 em) it gives line-pitch
 #let single-leading = 0.5em          // headings, captions, footnotes, block quotes, tables, signature blocks: single spaced
 #let margin = 1in                    // CTD-FORM-004: at least one inch on every side (L.R. 10)
 #let margins = (top: margin, bottom: margin, x: margin)

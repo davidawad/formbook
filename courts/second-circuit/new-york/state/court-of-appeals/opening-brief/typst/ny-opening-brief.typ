@@ -11,10 +11,10 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // 500.1(j): serifed, proportionally spaced. Vendored in /fonts.
+#let font-family = "Liberation Serif"          // 500.1(j): serifed, proportionally spaced; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // 500.1(j)(1): body in 14-point type.
-#let body-leading = 0.94em                 // 500.1(l): double spaced (about 2.2 x type size per line box).
-#let single-leading = 0.12em               // headings, quotations, footnotes, contents: single spaced (500.1(l)).
+#let body-leading = 1.336em                // 500.1(l): double spaced: with the 0.909em ascender-to-descender box, a 2.245em pitch (31.4 pt at 14 pt, about 2.2 x type size).
+#let single-leading = 0.516em              // headings, quotations, footnotes, contents: single spaced (500.1(l)).
 #let page-margin = 1in                     // 500.1(l): one inch on all sides.
 #let para-indent = 0.5in
 #let heading-tab = 0.5in

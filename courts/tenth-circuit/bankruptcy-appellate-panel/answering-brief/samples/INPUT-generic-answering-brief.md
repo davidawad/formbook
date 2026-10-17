@@ -23,7 +23,7 @@ signature:
   lines: ["Sample Trustee Office", "200 Sample Avenue", "Anytown, ST 00000", "(555) 555-0200", "riley@example.com"]
 date: "November 4, 2026"
 word_processor: "Microsoft Word"
-typeface: "Garamond"
+typeface: "Liberation Serif"
 related_cases:
   status: none
 authorities:

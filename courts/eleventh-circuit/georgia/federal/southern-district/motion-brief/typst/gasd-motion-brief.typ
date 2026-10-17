@@ -9,11 +9,11 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see ../README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no S.D. Ga. typeface rule found (README.md); vendored in fonts/
+#let font-family = "Liberation Serif"   // no S.D. Ga. typeface rule found (README.md); Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // the exemplar and the usual practice; not set by an S.D. Ga. rule
-#let body-leading = 1.35em              // LR 10.1 double-spacing: EB Garamond's line box is 0.65em, so this is a 24 pt pitch at 12 pt
-#let single-leading = 0.5em             // single spacing for the caption, quotations, footnotes and signature
-#let single-row = 13.8pt                // one single-spaced line: 0.65em line box + single-leading at 12 pt
+#let body-leading = 1.345em             // LR 10.1 double-spacing: Liberation Serif's line box is 0.655em, so this is a 24 pt pitch at 12 pt
+#let single-leading = 0.495em            // single spacing for the caption, quotations, footnotes and signature
+#let single-row = 13.8pt                // one single-spaced line: 0.655em line box + single-leading at 12 pt
 #let page-w = 8.5in                     // LR 5.4: paper 8 1/2 by 11 inches
 #let page-h = 11in
 #let margin = 1in                       // not set by a rule (README.md); the usual 1-inch margin

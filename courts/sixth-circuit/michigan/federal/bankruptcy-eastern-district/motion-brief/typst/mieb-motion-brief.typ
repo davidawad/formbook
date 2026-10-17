@@ -14,9 +14,9 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // MIEB-FORM-002: proportional serif; vendored in /fonts.
+#let font-family = "Liberation Serif"    // MIEB-FORM-002: proportional serif; Times New Roman substitute per docs/FONTS.md
 #let type-size = 14pt                    // MIEB-FORM-002: LBR 9029-1(h) "14 point (proportional)" for all text and footnotes.
-#let body-leading = 1.35em               // MIEB-FORM-003: double spacing (pitch 28 pt at 14 pt type; see ../README.md).
+#let body-leading = 1.345em              // MIEB-FORM-003: double spacing (pitch 28 pt at 14 pt type; see ../README.md).
 #let single-leading = 0.3em              // caption, counsel and signature blocks: single spacing (MIEB-FORM-004).
 #let footnote-leading = 0.3em            // footnotes and block quotations are exempt from double spacing (LBR 9029-1(h)).
 #let margins = 1in                       // MIEB-FORM-001: LBR 9029-1(h) "at least 1 inch on the top, sides and bottom".

@@ -7,7 +7,7 @@
 #let page-margin = 1in          // convention: no N.D. Ohio margin rule for complaints (LBR 5005-1 silent)
 #let type-size = 12pt          // convention: LBR 9013-2(a) sets 12 pt for motions and briefs; complaints follow
 #let leading = 1.4em           // double spacing: 24 pt line pitch at 12 pt type (matches the filed exemplar); see README
-#let serif = "EB Garamond"     // vendored (fonts/eb-garamond); --ignore-system-fonts makes any other face an error
+#let serif = "Liberation Serif" // Times New Roman substitute, the default per docs/FONTS.md (fonts/liberation-serif)
 
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 

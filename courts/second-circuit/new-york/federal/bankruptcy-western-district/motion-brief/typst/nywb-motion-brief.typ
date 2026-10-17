@@ -9,16 +9,16 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no W.D.N.Y. font rule (LBR 9004-1 says only "plainly and legibly written"); a vendored serif
+#let font-family = "Liberation Serif"        // no W.D.N.Y. font rule (LBR 9004-1 says only "plainly and legibly written"); Times New Roman substitute per docs/FONTS.md
 #let type-size = 12pt                   // convention: 12 point, as the filed exemplar (Times New Roman 12 pt)
 #let page-w = 8.5in                     // LBR 9004-1: letter size paper
 #let page-h = 11in
 #let margin = 1in                       // convention: one-inch margins on every side (no W.D.N.Y. margin rule)
-#let body-leading = 1.65em              // convention: double spacing; EB Garamond line box 0.65em + 1.65em = 2.3em = 27.6 pt at 12 pt, the exemplar's pitch
+#let body-leading = 1.645em             // convention: double spacing; Liberation Serif line box 0.655em + 1.645em = 2.3em = 27.6 pt at 12 pt, the exemplar's pitch
 #let single-leading = 0.5em             // single spacing for the caption, counsel block and signature block
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 3.4in               // width of the party column of the caption
-#let block-gap = 1.65em                 // space between a heading and the text it introduces (one double-spaced line)
+#let block-gap = 1.645em                // space between a heading and the text it introduces (one double-spaced line)
 
 // ---------------------------------------------------------------------------
 // Helpers

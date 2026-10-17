@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // vendored in fonts/; the only font typst can see (tools/render.sh)
+#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // style choice: N.D. Ala. local rules set no type size (see ../README.md)
 #let body-leading = 1.0em               // gap between body lines; with glyph-bounds line boxes (see text edges in the entry point) the body is double-spaced (~24 pt pitch)
 #let single-leading = 0.4em             // caption, counsel block, signature block, certificate of service
@@ -135,7 +135,7 @@
     margin: (top: 1in, bottom: 1in, left: 1in, right: 1in),
     footer: context align(center, text(size: 11pt, counter(page).display())),
   )
-  // Glyph-bounds line boxes: EB Garamond's default line box is shorter than its glyphs, so stacked
+  // Glyph-bounds line boxes: the default line box (cap height to baseline) is shorter than the glyphs, so stacked
   // caption rows collide without them.
   set text(font: font-family, size: type-size, lang: "en", top-edge: "bounds", bottom-edge: "bounds")
   set par(leading: body-leading, justify: false, spacing: 0pt)

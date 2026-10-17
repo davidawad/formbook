@@ -7,11 +7,11 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; the only font the build can use
+#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // convention (FRBP 9004(a): legible; no point size in the rule)
 #let margin = 1in                       // convention; the exemplar's margins are about one inch
-#let body-leading = 1.35em              // double spacing (about 24 pt pitch at 12 pt)
-#let single-leading = 0.5em
+#let body-leading = 1.345em             // double spacing (about 24 pt pitch at 12 pt)
+#let single-leading = 0.495em
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs (Fed. R. Civ. P. 10(b))
 #let caption-left = 3.4in               // width of the parties column of the caption
 #let text-width = 8.5in - 2 * margin

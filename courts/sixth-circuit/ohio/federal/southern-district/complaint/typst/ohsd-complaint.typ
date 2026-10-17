@@ -8,13 +8,13 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // S.D. Ohio Civ. R. 5.1 sets no typeface; EB Garamond is the only serif vendored in fonts/
+#let font-family = "Liberation Serif"   // S.D. Ohio Civ. R. 5.1 sets no typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // S.D. Ohio Civ. R. 5.1 sets no point size; 12 pt is the working standard (README.md)
 #let page-w = 8.5in                     // Civ. R. 5.1(a): 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let margin = 1in                       // Civ. R. 5.1(a): one-inch margins on all sides (the electronic-filing rule)
-#let body-leading = 1.35em              // double spacing: 24 pt baseline pitch at 12 pt in EB Garamond (line box 0.65em); README.md
-#let single-leading = 0.5em             // single spacing for the caption party block, counsel and signature
+#let body-leading = 1.345em             // double spacing: 24 pt baseline pitch at 12 pt in Liberation Serif (line box 0.655em); README.md
+#let single-leading = 0.495em            // single spacing for the caption party block, counsel and signature
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 3.3in               // width of the party column of the caption
 #let text-width = page-w - 2 * margin

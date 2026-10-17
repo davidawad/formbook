@@ -10,9 +10,9 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // vendored in fonts/; the exemplar is Times New Roman (see README.md)
+#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; the exemplar is Times New Roman (see README.md)
 #let type-size = 12pt                   // convention; the local rules set no type size
-#let body-leading = 1.35em              // double spacing: 24 pt baseline pitch at 12 pt (measured, README.md)
+#let body-leading = 1.345em             // double spacing: 24 pt baseline pitch at 12 pt (measured, README.md)
 #let pitch = 24pt                       // one double-spaced line; blocks are whole numbers of these
 #let single-leading = 0.5em             // counsel, caption, signature and block quotations are single-spaced
 #let para-indent = 0.5in                // first-line indent of body paragraphs

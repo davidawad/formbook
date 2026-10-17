@@ -11,11 +11,11 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // CA2-FORM-004: serif, proportional. Vendored in /fonts.
+#let font-family = "Liberation Serif"          // CA2-FORM-004: serif, proportional; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 14pt                      // CA2-FORM-004: 14-point or larger, everywhere.
-#let body-leading = 0.94em                 // CA2-CONV-001: with the metric-aligned line box below this
-                                           // gives a baseline pitch of about 2.2 x type size (double spacing).
-#let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced.
+#let body-leading = 1.336em                // CA2-CONV-001: Liberation Serif's ascender-to-descender box (0.909em, set below)
+                                           // plus this leading gives a 2.245em baseline pitch (31.4 pt at 14 pt), about 2.2 x type size (double spacing).
+#let single-leading = 0.516em              // headings, quotations, footnotes, TOC/TOA: single-spaced.
 #let page-margin = 1in                     // CA2-FORM-003: at least one inch on all four sides.
 #let para-indent = 0.5in
 #let toc-depth = 4

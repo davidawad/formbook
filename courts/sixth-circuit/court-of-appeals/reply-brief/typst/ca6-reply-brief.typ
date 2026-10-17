@@ -11,11 +11,12 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // CA6-FORM-005: proportionally spaced serif. Vendored in /fonts.
+#let font-family = "Liberation Serif"     // CA6-FORM-005: proportionally spaced serif; Times New Roman substitute per docs/FONTS.md
 #let type-size-pt = 14                     // CA6-FORM-005: 14-point or larger; footnotes at the same size (6 Cir. checklist).
 #let type-size = type-size-pt * 1pt
-#let body-leading = 0.94em                 // CA6-FORM-004: double spacing (same metric as the ca9 template).
-#let single-leading = 0.12em               // headings, block quotations, footnotes, TOC/TOA: single-spaced.
+#let body-leading = 1.336em                // CA6-FORM-004: double spacing (same metric as the ca9 template).
+#let single-leading = 0.516em              // headings, block quotations, footnotes, TOC/TOA: single-spaced.
+                                           // Liberation Serif line box (ascender to descender) is 0.909em: body pitch 0.909 + 1.336 = 2.245em, single 1.425em.
 #let page-margin = 1in                     // CA6-FORM-004: at least one inch on all four sides.
 #let para-indent = 0.5in
 #let heading-tab = 0.5in

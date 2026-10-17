@@ -2,10 +2,10 @@
 
 // Texas Rules of Appellate Procedure 9.4 (form), 9.5 (service), 38.1 and 70.3 (merits brief).
 // Text is 14-point and double-spaced (9.4(d)-(e)); headings, the cover, identity and contents
-// blocks are single-spaced; footnotes are 12-point. Leading 1.65em gives a 32.2 pt baseline
-// pitch (2 x 14 pt x 1.15) in EB Garamond. The identity page and contents are numbered in
+// blocks are single-spaced; footnotes are 12-point. Leading 1.645em gives a 32.2 pt baseline
+// pitch (2 x 14 pt x 1.15) in Liberation Serif, whose line box is 0.655em. The identity page and contents are numbered in
 // lower-case roman; the body starts at page 1 with the Statement Regarding Oral Argument.
-#let body-leading = 1.65em
+#let body-leading = 1.645em
 #let single-leading = 0.65em
 #let body-start = "# Statement Regarding Oral Argument"
 
@@ -72,7 +72,7 @@
       if here().page() > 1 { align(center, text(size: 14pt, counter(page).display())) }
     },
   )
-  set text(font: "EB Garamond", size: 14pt, lang: "en")
+  set text(font: "Liberation Serif", size: 14pt, lang: "en")
   set par(leading: body-leading, first-line-indent: 0.5in, justify: false)
   show footnote.entry: set text(size: 12pt)
   show footnote.entry: set par(leading: single-leading, first-line-indent: 0pt)

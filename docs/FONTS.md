@@ -6,7 +6,7 @@ Every template compiles with the vendored fonts in `fonts/` and nothing else. A 
 
 1. **Vendored only.** Only fonts with an open licence that permits redistribution live in `fonts/`, each family in its own folder with its licence text beside the files.
 2. **System fonts are never used.** Typst runs as `typst compile --font-path fonts --ignore-system-fonts` (`tools/render.sh`, `tools/render-latex.sh`, and the docx path). A missing font is an error, not a silent fallback. Any typst warning fails the render.
-3. **Court-named faces map to a free equivalent** (substitution table below). A template whose court rules name a face uses that face's substitute, never EB Garamond. Only a court that names no face gets EB Garamond.
+3. **Court-named faces map to a free equivalent** (substitution table below). A template whose court rules name a face uses that face's substitute. A court that names no face gets Liberation Serif, the Times New Roman substitute (David, 2026-10-17: the default text face is Times New Roman, which cannot be vendored). EB Garamond is used only where a court's rules name Garamond.
 4. **The embedded font names are asserted** (`pdffonts`, per `docs/EVAL-LOOP.md` R3). A template that embeds anything outside the family it declares is meant to fail Gate 1.
 5. **No font is modified.** Renaming and reserved-name clauses in the licences only bite on modified versions; none are made here.
 
@@ -14,8 +14,8 @@ Every template compiles with the vendored fonts in `fonts/` and nothing else. A 
 
 | Folder | Faces | Licence (text in folder) | Upstream | Used for |
 |---|---|---|---|---|
-| `fonts/eb-garamond/` | Regular, Italic, Bold, BoldItalic (`.otf`) | SIL OFL 1.1 (`OFL.txt`) | EB Garamond, Octavio Pardo et al. | Default text face; Garamond requirements |
-| `fonts/liberation-serif/` | Regular, Italic, Bold, BoldItalic (`.ttf`) | SIL OFL 1.1 (`OFL.txt`) | Liberation Fonts 2.1.5, <https://github.com/liberationfonts/liberation-fonts> (Google, Red Hat) | Times New Roman requirements |
+| `fonts/eb-garamond/` | Regular, Italic, Bold, BoldItalic (`.otf`) | SIL OFL 1.1 (`OFL.txt`) | EB Garamond, Octavio Pardo et al. | Garamond requirements only (a court rule that names Garamond) |
+| `fonts/liberation-serif/` | Regular, Italic, Bold, BoldItalic (`.ttf`) | SIL OFL 1.1 (`OFL.txt`) | Liberation Fonts 2.1.5, <https://github.com/liberationfonts/liberation-fonts> (Google, Red Hat) | Default text face (no face named: Times New Roman substitute); Times New Roman requirements |
 | `fonts/tex-gyre-schola/` | Regular, Italic, Bold, BoldItalic (`.otf`) | GUST Font License, an LPPL-equivalent (`GUST-FONT-LICENSE.txt`) | TeX Gyre Schola 2.609 (31 Mar 2026), GUST e-foundry, <https://www.gust.org.pl/projects/e-foundry/tex-gyre/schola> | Century Schoolbook requirements |
 | `fonts/tex-gyre-termes/` | Regular, Italic, Bold, BoldItalic (`.otf`) | GUST Font License (`GUST-FONT-LICENSE.txt`) | TeX Gyre Termes 2.609, GUST e-foundry, <https://www.gust.org.pl/projects/e-foundry/tex-gyre/termes> | Times alternate |
 | `fonts/tex-gyre-pagella/` | Regular, Italic, Bold, BoldItalic (`.otf`) | GUST Font License | TeX Gyre Pagella 2.609, <https://www.gust.org.pl/projects/e-foundry/tex-gyre/pagella> | Palatino / Book Antiqua requirements |
@@ -51,9 +51,11 @@ Court requirement → vendored family. The rule column is the primary source for
 | Times / Times New Roman (named by a court, any other rule) | Court rule | **Liberation Serif** | As above. |
 | Garamond (named by a court) | Court rule | **EB Garamond** | Not metric-compatible with any commercial Garamond. Line breaks, page count and length limits will differ from a filing set in a commercial Garamond; check the length gate against the rule's limit, not against a filed sample. |
 | Palatino / Book Antiqua (named by a court) | Court rule | **TeX Gyre Pagella** | Visual only. |
-| No face named (the usual case) | — | **EB Garamond** | — |
+| No face named (the usual case) | — (default text face is Times New Roman, David 2026-10-17) | **Liberation Serif** | Metric-compatible with Times New Roman, as above. |
 
 A court's rule text decides the requirement; this table only says which vendored family stands in. If a rule names a face not in the table, add a row here in the same change as the template, with the rule cited.
+
+Size under the default face. Templates written while EB Garamond was the default often set 13 pt "because EB Garamond sets smaller than Times". That reason is gone: Liberation Serif has Times metrics, so the rule's own floor (usually 12 pt) is the size, unless the rule asks for more. Measured with typst 0.15.0 on the vendored files (2026-10-17): a pangram at 100 pt is 17.15 em wide in EB Garamond and 18.27 em in Liberation Serif, so 12 pt Liberation Serif sets about as many words per line as 13 pt EB Garamond did; the default line box (cap height) is 0.650 em in EB Garamond and 0.655 em in Liberation Serif, so leading computed for one holds for the other to within 0.1 pt per line at 14 pt.
 
 ### Full substitution table
 
@@ -77,7 +79,7 @@ The Typst name is exactly what a template passes to `font:`; the first five rows
 | Tahoma | `DejaVu Sans` | `dejavu-sans/` | Bitstream Vera / DejaVu licence (check the folder) | Visual fallback only; NOT metric-compatible, so pagination may differ. See `fonts/TAHOMA-NOTE.md` |
 | Equity (Butterick) | `Liberation Serif` (alternate `TeX Gyre Termes`) | not vendorable | commercial | Visual only; see below |
 | Garamond | `EB Garamond` | `eb-garamond/` | SIL OFL 1.1 | Visual only |
-| No face named | `EB Garamond` | `eb-garamond/` | SIL OFL 1.1 | n/a |
+| No face named (default: Times New Roman) | `Liberation Serif` | `liberation-serif/` | SIL OFL 1.1 | Metric-compatible |
 
 ### Century Expanded
 
@@ -96,7 +98,7 @@ Not vendorable. Equity (Matthew Butterick, MB Type) is commercial and licensed p
 
 ### Finding which face a court requires
 
-Check the court's `rules.md` (or the `README.md` "Typeface" row) in its folder under `courts/`, and the cited rule text. Then use that face's substitute from the table. Templates must use the substitute of the court-named face, not EB Garamond, wherever the rules name one. If a rule names a face missing from the table, add a row in the same change.
+Check the court's `rules.md` (or the `README.md` "Typeface" row) in its folder under `courts/`, and the cited rule text. Then use that face's substitute from the table. Templates must use the substitute of the court-named face wherever the rules name one, and Liberation Serif (Times New Roman substitute) where they name none. EB Garamond only stands in for a court-named Garamond. If a rule names a face missing from the table, add a row in the same change.
 
 ## Proving a family works
 

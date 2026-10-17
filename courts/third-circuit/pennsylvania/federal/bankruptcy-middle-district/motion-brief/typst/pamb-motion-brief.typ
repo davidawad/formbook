@@ -11,11 +11,12 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // Vendored in /fonts. No M.D. Pa. font rule found (see ../README.md, gaps).
-#let type-size = 13pt                    // Style choice: EB Garamond runs smaller than Times at the same point size; the filed brief is 12 pt Times.
+#let font-family = "Liberation Serif"         // No M.D. Pa. font rule found (see ../README.md, gaps); Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let type-size = 12pt                    // FRBP 9004(a): clearly legible; no M.D. Pa. size rule. 12 pt, as the filed papers (Times New Roman 12 pt).
 #let line-pitch = 24pt                   // Double spacing, as the filed brief (convention, see ../README.md).
-#let body-leading = 0.54em               // Gap between lines of body text; tuned so the line pitch is line-pitch.
-#let single-leading = 0.2em              // Caption, signature, headings, certificates.
+#let body-leading = line-pitch - 0.909em // Gap between body lines: the ascender-to-descender line box set below is 0.909em in Liberation Serif, so the line pitch is line-pitch.
+#let para-gap = 1.48em                   // Gap between body paragraphs: 0.909em + 1.48em = 28.7 pt at 12 pt, a little more than one double-spaced line.
+#let single-leading = 0.596em            // 0.909em + 0.596em = about 18 pt at 12 pt. Caption, signature, headings, certificates.
 #let page-margin = 1in                   // Style choice (no local margin rule found).
 #let margins = (top: page-margin, bottom: page-margin, x: page-margin)
 #let para-indent = 0.5in
@@ -200,7 +201,7 @@
     top-edge: "ascender", bottom-edge: "descender",
   )
   set par(
-    leading: body-leading, spacing: 0.9em,
+    leading: body-leading, spacing: para-gap,
     first-line-indent: (amount: para-indent, all: true), justify: false,
   )
   set heading(numbering: heading-num)
@@ -227,7 +228,7 @@
   align(center, strong(upper(inl(need(meta, "title")))))
   v(line-pitch * 0.5)
 
-  set par(first-line-indent: para-indent, leading: body-leading, spacing: 0.9em, justify: false)
+  set par(first-line-indent: para-indent, leading: body-leading, spacing: para-gap, justify: false)
   // The conclusion is sticky with the signature block so the signature never stands alone.
   let paras = md.trim().split("\n\n")
   cmarker.render(paras.slice(0, -1).join("\n\n"), raw-typst: false, smart-punctuation: true)

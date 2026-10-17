@@ -10,13 +10,13 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a stated convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no font rule in the N.D. Tex. bankruptcy rules for motions; the only vendored font
+#let font-family = "Liberation Serif"   // no font rule in the N.D. Tex. bankruptcy rules for motions; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // convention
 #let page-w = 8.5in                     // FRBP 9004(a): legible paper; 8 1/2 by 11 inch is the practice
 #let page-h = 11in
 #let margin = 1in                       // convention
-#let body-leading = 1.35em              // double spacing: about 24 pt pitch at 12 pt (convention, see README.md)
-#let single-leading = 0.5em             // single spacing for counsel, caption, block quotes and signature
+#let body-leading = 1.345em             // double spacing: about 24 pt pitch at 12 pt (convention, see README.md)
+#let single-leading = 0.495em            // single spacing for counsel, caption, block quotes and signature
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let caption-left = 3.25in              // width of the party column of the caption
 

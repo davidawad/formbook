@@ -16,13 +16,12 @@
 // ---------------------------------------------------------------------------
 
 #let court-lines = ("UNITED STATES BANKRUPTCY COURT", "CENTRAL DISTRICT OF ILLINOIS")  // FRBP 7010, Form 416
-#let font-family = "EB Garamond"          // vendored in /fonts; no court rule names a face (README, ILCB-TYPE-1)
-#let type-size = 13pt                      // no CDIL typography rule (FRBP 9004(a): legible only).
-                                           // 13 pt EB Garamond has the x-height of 12 pt Times, the
-                                           // face and size the exemplars use (see README, gaps).
-#let body-leading = 0.88em                 // with this line box, baseline pitch is about 27 pt: double
-                                           // spacing, as in all three exemplars (README, tier 2)
-#let single-leading = 0.12em               // captions, headings, quotations, footnotes: single-spaced
+#let font-family = "Liberation Serif"          // no court rule names a face (README, ILCB-TYPE-1); Times New Roman substitute per docs/FONTS.md, vendored in /fonts
+#let type-size = 12pt                      // no CDIL typography rule (FRBP 9004(a): legible only); 12 pt, the size the
+                                           // exemplars use (see README, gaps).
+#let body-leading = 1.391em                // with the ascender-to-descender line box set below (0.909em), a 2.3em = 27.6 pt
+                                           // baseline pitch: double spacing, as in all three exemplars (README, tier 2)
+#let single-leading = 0.516em              // captions, headings, quotations, footnotes: single-spaced (1.425em pitch)
 #let page-margin = 1in                     // exemplars all use 1 in; no rule sets it (tier 2)
 #let para-indent = 0.5in                   // first-line indent of body paragraphs
 #let caption-left-width = 3.4in
@@ -71,7 +70,7 @@
   let case-lines = cap.at("right")
   let rows = calc.max(party-lines.len(), case-lines.len())
   block(breakable: false, {
-    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0pt, justify: false)
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: single-leading, justify: false)
     for i in range(rows) {
       grid(
         columns: (caption-left-width, caption-paren-width, 1fr),
@@ -85,8 +84,8 @@
 
 /// The court's name, centered, in capitals (as printed in the rule's own form).
 #let court-heading() = {
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 0pt)
-  stack(dir: ttb, spacing: 0pt, ..court-lines.map(l => align(center, strong(l))))
+  set par(first-line-indent: 0pt, leading: single-leading, spacing: single-leading)
+  stack(dir: ttb, spacing: single-leading, ..court-lines.map(l => align(center, strong(l))))
   v(1.5em)
 }
 
@@ -94,7 +93,7 @@
 #let title-block(meta) = {
   let t = need(meta, "document_title")
   block(breakable: false, above: 1.5em, below: 1.5em, width: 85%, align(center, {
-    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0pt)
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: single-leading)
     strong(inl(t))
   }))
 }
@@ -127,7 +126,7 @@
 #let signature-block(meta) = {
   let sig = need(meta, "signature")
   block(breakable: false, above: 1.5em, width: 100%, {
-    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0pt)
+    set par(first-line-indent: 0pt, leading: single-leading, spacing: single-leading)
     if "dated" in meta { [Dated: #inl(meta.dated)] ; v(1.2em) }
     pad(left: 45%, stack(
       dir: ttb, spacing: single-leading,
