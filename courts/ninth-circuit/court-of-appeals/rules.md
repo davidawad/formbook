@@ -1,6 +1,6 @@
 # Ninth Circuit principal (opening) brief: rules
 
-Alias `ca9`. Scope: the principal brief of an appellant or petitioner, filed by counsel through the Appellate Electronic Filing System (ACMS). Verified against primary sources on 2026-10-06.
+Alias `ca9`. Scope: appellate briefs filed by counsel through the Appellate Electronic Filing System (ACMS). Principal-brief requirements below describe an opening brief. Verified against primary sources on 2026-10-17. Re-check at each annual FRAP/local-rule update and at least annually.
 
 ## Sources
 
@@ -10,7 +10,7 @@ Every requirement below cites one of these. Page numbers are the printed page nu
 |---|---|---|
 | HB | Ninth Circuit "FRAP, Ninth Circuit Rules, Circuit Advisory Committee Notes", effective June 1, 2026 (the court's current rules handbook) | https://cdn.ca9.uscourts.gov/datastore/uploads/frap-June%201%202026.pdf |
 | RULES-PAGE | Court's rules landing page (names the handbook above as current; lists the 2024, 2025 and June 2026 rule changes) | https://www.ca9.uscourts.gov/rules/ |
-| FRAP | Federal Rules of Appellate Procedure (same text as HB; cross-checked) | https://www.law.cornell.edu/rules/frap/rule_32 and https://www.law.cornell.edu/rules/frap/rule_28 |
+| FRAP | Federal Rules of Appellate Procedure, official U.S. Courts publication (effective Dec. 1, 2025); relevant provisions cross-checked against HB | https://www.uscourts.gov/sites/default/files/document/federal-rules-of-appellate-procedure.pdf |
 | F8 | Form 8, Certificate of Compliance for Briefs (Rev. 12/01/22) | https://cdn.ca9.uscourts.gov/datastore/uploads/forms/form08.pdf |
 | F15 | Form 15, Certificate of Service for Electronic Filing (Rev. 12/01/2018) | https://cdn.ca9.uscourts.gov/datastore/uploads/forms/form15.pdf |
 | F17 | Form 17, Statement of Related Cases Pursuant to Circuit Rule 28-2.6 (New 12/01/2018) | https://cdn.ca9.uscourts.gov/datastore/uploads/forms/form17.pdf |
@@ -151,3 +151,14 @@ Required order of the appellant's brief, with this court's overrides applied:
 | CA9-REVIEW-001 | A recorded visual review of the current PDF covers every page and lists no open defect (docs/EVAL-LOOP.md, Gate 2). | T |
 | CA9-GEN-001 | The second sample exercises every feature listed in `checks.yaml: generalization.require_features`. | T |
 | CA9-GEN-002 | Both samples pass gates 0 to 2. | T |
+
+## Document-type differences
+
+The requirements above apply to principal (opening) briefs unless stated otherwise. Answering and reply briefs use the same page form, electronic filing, cover, and certificate rules, with the length and required-content differences below. The Ninth Circuit Handbook's Circuit Rule 32-1 is controlling; FRAP 28(b) and (c) set the responding brief's required content.
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| CA9-LEN-004 | An answering brief may not exceed 14,000 words or 35 pages. | Circuit Rule 32-1(a), HB p. 141 | M |
+| CA9-LEN-005 | A reply brief may not exceed 7,000 words or 15 pages. | Circuit Rule 32-1(b), HB p. 141 | M |
+| CA9-CONT-014 | An answering brief must include the appellee's argument, and may omit the jurisdictional statement, issues, and case statement if the appellee is satisfied with the appellant's presentation; any omitted section should be identified as adopted. | FRAP 28(b), official FRAP PDF; HB | M |
+| CA9-CONT-015 | A reply brief must contain a table of contents and table of authorities, and may address only the arguments presented in the appellee's brief. It need not repeat the statement of the case or issues. | FRAP 28(c), official FRAP PDF; HB | M |

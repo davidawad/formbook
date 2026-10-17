@@ -15,3 +15,17 @@
 Why this exemplar: it is an appellant's reply brief filed in this court, with the full front matter (cover, table of contents, table of authorities), argument headings, conclusion, signature, Form 17, Form 8 and certificate of service. It has no statement of jurisdiction, which matches FRAP 28(c).
 
 Known limits of this exemplar: the filing has two signature blocks (Barvir for Michel & Associates, Kilmer for the Second Amendment Foundation); the template takes one signer. The Form 8 box checked is "complies with the word limit of Cir. R. 32-1".
+
+## Second filer — Coalition on Homelessness v. City and County of San Francisco
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-san-francisco-23-15087-reply-brief.pdf` |
+| Filer | Defendants-Appellants City and County of San Francisco, through City Attorney David Chiu and counsel (different filer from B & L Productions and its counsel) |
+| Case | *Coalition on Homelessness v. City and County of San Francisco*, No. 23-15087 |
+| Document | Appellants' Reply Brief (Preliminary Injunction Appeal), DktEntry 54, 36 pages |
+| Date filed | 2023-04-25 |
+| URL | https://cdn.ca9.uscourts.gov/datastore/uploads/cases-of-interest/23-15087/23-15087-Reply-brief.pdf |
+| Date retrieved | 2026-10-17 |
+| SHA-256 | `408e48d86b0282cf6bf34cde67b814eb1905c61dd0adb7ec45c1ed3e5f094f29` |
+| Public record | Filed brief served from the official Ninth Circuit website; the PDF bears the appellate docket stamp |
