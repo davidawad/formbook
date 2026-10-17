@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"         // NCMD-FORM-002: proportional font; the rule names no face, so the default applies: Times New Roman substitute (docs/FONTS.md "No face named")
+#let font-family = "TeX Gyre Schola"         // NCMD-FORM-002: proportional font; Schola matches the audited exemplar (docs/FONTS.md)
 #let type-size = 13pt                    // NCMD-FORM-002: proportional font "no smaller than 13 point" (LR 7.1(a))
 #let lines-per-page = 27                 // NCMD-FORM-003: "no more than 27 lines of regularly spaced text on a page" (LR 7.1(a))
 #let pitch = 23pt                        // one double-spaced line; 27 x 23 pt = 621 pt, inside the 630 pt text height (see README.md)

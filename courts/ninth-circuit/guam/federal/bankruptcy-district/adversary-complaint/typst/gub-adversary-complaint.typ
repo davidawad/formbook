@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")        // no point size or face is set by GNLR 5.1; a proportional serif, vendored in fonts/
+#let font-family = "TeX Gyre Termes"        // no point size or face is set by GNLR 5.1; a proportional serif, vendored in fonts/
 #let type-size = 12pt                   // the exemplar is 12 pt Times; EB Garamond at 12 pt is the same size on the grid
 #let pitch = 24pt                       // GNLR 5.1(a): double-spaced; the numbered lines are this pitch
 #let lines-per-page = 28                // the exemplar's pleading form: 28 numbered lines (a convention, not a GNLR rule)

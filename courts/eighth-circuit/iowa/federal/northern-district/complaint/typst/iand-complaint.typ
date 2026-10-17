@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")        // no typeface is named in LR 10; EB Garamond is the vendored serif (README.md, gap 2)
+#let font-family = "TeX Gyre Termes"        // no typeface is named in LR 10; Termes matches the audited exemplar (docs/FONTS.md)
 #let type-size = 12pt                   // no size is named in LR 10; 12 point is the usual federal filing size
 #let pitch = 24pt                       // LR 10(b)(1): double spaced; the baseline pitch of body text
 #let page-w = 8.5in                     // LR 10(a): 8 1/2 by 11 inch

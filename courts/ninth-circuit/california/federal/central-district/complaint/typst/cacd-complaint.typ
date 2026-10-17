@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // L.R. 11-3.1.1: proportionally spaced font; vendored in fonts/ (README.md, Known gaps)
+#let font-family = ("Times New Roman", "Liberation Serif")        // L.R. 11-3.1.1: proportionally spaced font; vendored in fonts/ (README.md, Known gaps)
 #let type-size = 14pt                   // L.R. 11-3.1.1: standard (non-condensed) 14-point or larger
 #let pitch = 24pt                       // L.R. 11-3.2 and 11-3.6: double spaced; the numbered lines are this pitch
 #let lines-per-page = 28                // L.R. 11-3.2: not more than 28 lines per page

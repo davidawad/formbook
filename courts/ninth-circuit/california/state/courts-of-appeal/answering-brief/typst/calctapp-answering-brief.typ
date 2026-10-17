@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // CALCTAPP-FORM-002: a conventional roman face. Vendored in /fonts.
+#let font-family = "TeX Gyre Schola"          // CALCTAPP-FORM-002: a conventional roman face. Vendored in /fonts.
 #let type-size = 13pt                      // CALCTAPP-FORM-003: 13-point or larger, footnotes included.
 #let body-leading = 0.49em                 // CALCTAPP-FORM-004: about 23.4 pt pitch at 13 pt (the exemplar measures 23.5 pt), double-style, well over 1.5 spacing.
 #let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced.

@@ -11,7 +11,7 @@
 // Parameters: the only numbers in this file. Each one traces to a rule or is a named style choice.
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"   // CRC 2.105 names Times New Roman; vendored substitute per docs/FONTS.md.
+#let font-family = ("Times New Roman", "Liberation Serif")   // CRC 2.105 names Times New Roman; vendored substitute per docs/FONTS.md.
 #let type-size = 12pt              // CRC 2.104: a font size not smaller than 12 points.
 #let box-h = 12pt                  // one text line occupies 1 em of box; the leading sets the pitch.
 #let pitch = 24pt                  // double spacing (CRC 2.108(1)); the pleading grid is this pitch.
