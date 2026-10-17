@@ -26,7 +26,7 @@ IDs are stable; do not renumber them. The opening-brief rules apply unless a row
 | BAP9-FORM-002 | A proportionally spaced face includes serifs, may use sans-serif in headings and captions, and is 14-point or larger; plain roman type is used, with italics or boldface for emphasis and case names italicized or underlined. | FRBP 8015(a)(5)-(6); MANUAL § VIII.7 | M |
 | BAP9-FORM-003 | Text is double-spaced. Headings, footnotes, and quotations of more than two lines may be single-spaced. | FRBP 8015(a)(4); MANUAL § VIII.7 | M |
 | BAP9-COVER-001 | The cover states the appeal number, court name, case title, nature of the proceeding and court below, brief title identifying the filing party, and counsel's name, address, telephone number, and email address. | FRBP 8015(a)(2); MANUAL § VIII.7 | M |
-| BAP9-COVER-002 | The cover is white for electronic filing. Paper-copy cover colors apply only if the BAP directs paper copies. | BAP Administrative Order Regarding Electronic Filing; MANUAL | M |
+| BAP9-COVER-002 | Convention: use a white electronic cover. FRBP 8015 does not impose a cover-color rule; any paper-copy requirement depends on a BAP order. | FRBP 8015(a)(2); BAP Administrative Order Regarding Electronic Filing; MANUAL | C |
 
 ### Length and required content
 
