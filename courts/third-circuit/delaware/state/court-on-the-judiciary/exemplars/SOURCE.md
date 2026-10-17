@@ -3,15 +3,15 @@
 Index alias: `deljudct`  
 Indexed level: `state-appellate`
 
-| Doc type | Required filed exemplar | Status |
-|---|---|---|
-| `opening-brief` — Opening brief (appellant's principal brief) | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `answering-brief` — Answering brief (appellee's principal brief) | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `reply-brief` — Reply brief | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `petition-for-discretionary-review` — Petition for discretionary review | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `motion-brief` — Motion and supporting memorandum | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `petition-for-review` — Petition for review (agency order or state high court) | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `amicus-brief` — Amicus curiae brief | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+|---|---|---|---|---|---|---|---|
+| `opening-brief` — Opening brief (appellant's principal brief) | BLOCKED: no public copy found: Court on the Judiciary proceedings are confidential until final disposition under the court's rules and the court posts only final opinions; none of the 3,567 Supreme Court oral-argument filings on courts.delaware.gov, ~580 ACLU-DE or ~3,500 Delaware DOJ PDF media files is a Court on the Judiciary filing |  |  |  |  |  |  |
+| `answering-brief` — Answering brief (appellee's principal brief) | BLOCKED: no public copy found: Court on the Judiciary proceedings are confidential until final disposition under the court's rules and the court posts only final opinions; none of the 3,567 Supreme Court oral-argument filings on courts.delaware.gov, ~580 ACLU-DE or ~3,500 Delaware DOJ PDF media files is a Court on the Judiciary filing |  |  |  |  |  |  |
+| `reply-brief` — Reply brief | BLOCKED: no public copy found: Court on the Judiciary proceedings are confidential until final disposition under the court's rules and the court posts only final opinions; none of the 3,567 Supreme Court oral-argument filings on courts.delaware.gov, ~580 ACLU-DE or ~3,500 Delaware DOJ PDF media files is a Court on the Judiciary filing |  |  |  |  |  |  |
+| `petition-for-discretionary-review` — Petition for discretionary review | BLOCKED: not a filing this court receives: the Court on the Judiciary (Del. Const. art. IV, sec. 37) hears complaints of judicial misconduct referred by the Preliminary Investigatory Committee; it has no appellate or discretionary-review jurisdiction |  |  |  |  |  |  |
+| `motion-brief` — Motion and supporting memorandum | BLOCKED: no public copy found: Court on the Judiciary proceedings are confidential until final disposition under the court's rules and the court posts only final opinions; none of the 3,567 Supreme Court oral-argument filings on courts.delaware.gov, ~580 ACLU-DE or ~3,500 Delaware DOJ PDF media files is a Court on the Judiciary filing |  |  |  |  |  |  |
+| `petition-for-review` — Petition for review (agency order or state high court) | BLOCKED: not a filing this court receives: proceedings begin by complaint to the court's Preliminary Investigatory Committee and a formal charge, not by petition (Del. Const. art. IV, sec. 37; Rules of the Court on the Judiciary) |  |  |  |  |  |  |
+| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | BLOCKED: not a filing this court receives: the court's jurisdiction is limited to censure, removal or retirement of judicial officers (Del. Const. art. IV, sec. 37); it issues no writs |  |  |  |  |  |  |
+| `amicus-brief` — Amicus curiae brief | BLOCKED: no public copy found: Court on the Judiciary proceedings are confidential until final disposition under the court's rules and the court posts only final opinions; none of the 3,567 Supreme Court oral-argument filings on courts.delaware.gov, ~580 ACLU-DE or ~3,500 Delaware DOJ PDF media files is a Court on the Judiciary filing |  |  |  |  |  |  |
 
-No exemplar is claimed by this manifest yet. A qualifying entry must include the source URL, filer, case, filing date, retrieval date, filename, and SHA-256; text extraction must be verified before marking it collected.
+Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.

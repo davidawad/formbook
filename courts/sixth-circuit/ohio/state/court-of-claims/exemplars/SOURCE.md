@@ -3,15 +3,15 @@
 Index alias: `ohioctcl`  
 Indexed level: `state-appellate`
 
-| Doc type | Required filed exemplar | Status |
-|---|---|---|
-| `opening-brief` — Opening brief (appellant's principal brief) | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `answering-brief` — Answering brief (appellee's principal brief) | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `reply-brief` — Reply brief | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `petition-for-discretionary-review` — Petition for discretionary review | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `motion-brief` — Motion and supporting memorandum | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `petition-for-review` — Petition for review (agency order or state high court) | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
-| `amicus-brief` — Amicus curiae brief | Public filed PDF with text layer; file and SHA-256 pending | BLOCKED: no candidate URL or artifact verified in this run |
+| Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
+|---|---|---|---|---|---|---|---|
+| `opening-brief` — Opening brief (appellant's principal brief) | BLOCKED: not a filing this court receives in appellate form: the Court of Claims is a trial-level court for civil claims against the State (R.C. 2743.02-.03); appeals from it go to the Tenth District Court of Appeals (R.C. 2743.20); its victims-of-crime appeals (R.C. 2743.61) are decided on the record without party merit briefs of this kind |  |  |  |  |  |  |
+| `answering-brief` — Answering brief (appellee's principal brief) | BLOCKED: not a filing this court receives in appellate form: the Court of Claims is a trial-level court for civil claims against the State (R.C. 2743.02-.03); appeals from it go to the Tenth District Court of Appeals (R.C. 2743.20); its victims-of-crime appeals (R.C. 2743.61) are decided on the record without party merit briefs of this kind |  |  |  |  |  |  |
+| `reply-brief` — Reply brief | BLOCKED: not a filing this court receives in appellate form: the Court of Claims is a trial-level court for civil claims against the State (R.C. 2743.02-.03); appeals from it go to the Tenth District Court of Appeals (R.C. 2743.20); its victims-of-crime appeals (R.C. 2743.61) are decided on the record without party merit briefs of this kind |  |  |  |  |  |  |
+| `petition-for-discretionary-review` — Petition for discretionary review | BLOCKED: not a filing this court receives: trial-level court with no discretionary-review jurisdiction (R.C. 2743.03); discretionary review is sought in the Supreme Court of Ohio (S.Ct.Prac.R. 7.01) |  |  |  |  |  |  |
+| `motion-brief` — Motion and supporting memorandum | BLOCKED: ohiocourtofclaims.gov case search returns 403 from this host; WebSearch budget exhausted; crawls of ACLU of Ohio, 1851 Center, Democracy Docket, PLF, Earthjustice, OEC media found no Court of Claims filing |  |  |  |  |  |  |
+| `petition-for-review` — Petition for review (agency order or state high court) | BLOCKED: not a filing this court receives: agency-order review goes to common pleas (R.C. 119.12); public-records disputes are commenced by complaint, not petition (R.C. 2743.75); objections to special-master reports are not a petition for review; ohiocourtofclaims.gov case search returns 403 from this host; WebSearch budget exhausted; crawls of ACLU of Ohio, 1851 Center, Democracy Docket, PLF, Earthjustice, OEC media found no Court of Claims filing |  |  |  |  |  |  |
+| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | BLOCKED: not a filing this court receives: the Court of Claims has no original mandamus/prohibition jurisdiction (R.C. 2743.03; writs lie in common pleas, courts of appeals and Supreme Court under R.C. 2731.02 and Ohio Const. art. IV) |  |  |  |  |  |  |
+| `amicus-brief` — Amicus curiae brief | BLOCKED: ohiocourtofclaims.gov case search returns 403 from this host; WebSearch budget exhausted; crawls of ACLU of Ohio, 1851 Center, Democracy Docket, PLF, Earthjustice, OEC media found no Court of Claims filing; amicus filings in this trial-level court are rare and not published |  |  |  |  |  |  |
 
-No exemplar is claimed by this manifest yet. A qualifying entry must include the source URL, filer, case, filing date, retrieval date, filename, and SHA-256; text extraction must be verified before marking it collected.
+Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
