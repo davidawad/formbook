@@ -14,7 +14,7 @@
 
 // CRC 2.105: "essentially equivalent to Courier, Times New Roman, or Arial". No face is named, so
 // the Times New Roman row of docs/FONTS.md applies: Liberation Serif (metric-compatible).
-#let font-family = "Liberation Serif"
+#let font-family = ("Times New Roman", "Liberation Serif")
 #let type-size = 12pt              // CRC 2.104: a font size not smaller than 12 points.
 #let box-h = 12pt                  // one text line occupies 1 em of box; the leading sets the pitch.
 #let pitch = 24pt                  // double spacing (CRC 2.108(1)); the pleading grid is this pitch.

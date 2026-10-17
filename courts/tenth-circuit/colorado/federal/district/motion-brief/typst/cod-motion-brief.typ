@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // no typeface rule in 10.1(d); Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = "Liberation Sans"   // no typeface rule in 10.1(d); matches the audited exemplar (docs/FONTS.md)
 #let type-size = 12pt                   // LCivR 10.1(d): not less than 12-point font, footnotes included
 #let page-w = 8.5in                     // LCivR 10.1(b): 8 1/2 by 11 inch white paper
 #let page-h = 11in

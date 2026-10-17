@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or to the exemplar; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")   // Times New Roman substitute per docs/FONTS.md (Times New Roman itself cannot be vendored)
+#let font-family = "TeX Gyre Termes"   // Termes matches the audited exemplar (docs/FONTS.md)
 #let type-size = 12pt                   // the exemplar's body text is 12 pt Times New Roman (no M.D. Ga. size rule found)
 #let footnote-size = 11pt               // footnotes single-spaced, a point or so under the text (exemplar)
 #let pitch = 27.6pt                     // the exemplar's double-spaced baseline pitch (12 pt Times, measured: about 27.5 pt)

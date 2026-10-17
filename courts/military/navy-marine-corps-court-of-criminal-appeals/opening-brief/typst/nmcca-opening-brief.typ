@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // NMCCA-FORM-001: proportional serif, vendored in /fonts.
+#let font-family = "Liberation Mono"          // NMCCA-FORM-001: proportional serif, vendored in /fonts.
 #let type-size = 14pt                      // NMCCA-FORM-001: 14-point type, footnotes included.
 #let body-leading = 1.75em                 // NMCCA-FORM-002: double-spaced (see README: 2 x 1.2 em single pitch).
 #let single-leading = 0.55em               // single pitch 1.2 em for the caption, headings, quotations, footnotes, signature blocks.

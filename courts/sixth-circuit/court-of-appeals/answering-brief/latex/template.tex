@@ -8,13 +8,14 @@
 \usepackage{fancyhdr,needspace,titletoc,longtable,array}
 \makeatletter
 
-% FRAP 32(a)(5)(A): proportionally spaced serif; Liberation Serif, the Times New Roman substitute per docs/FONTS.md, from the vendored fonts directory only (no system fonts).
-\setmainfont[Path=$fontdir$liberation-serif/, BoldFont=LiberationSerif-Bold.ttf, ItalicFont=LiberationSerif-Italic.ttf,
-  BoldItalicFont=LiberationSerif-BoldItalic.ttf, Ligatures=TeX]{LiberationSerif-Regular.ttf}
-% Liberation Serif has no small capitals (no smcp feature), so point headings are plain bold, as in the typst template.
-\newfontfamily\scfam[Path=$fontdir$liberation-serif/]{LiberationSerif-Regular.ttf}
-\newfontfamily\scbfam[Path=$fontdir$liberation-serif/]{LiberationSerif-Bold.ttf}
-\defaultfontfeatures{Path=$fontdir$liberation-serif/}
+% TeX Gyre Schola is the audited Century Schoolbook substitute per docs/FONTS.md.
+\setmainfont[Path=$fontdir$tex-gyre-schola/, Extension=.otf, UprightFont=texgyreschola-regular,
+  BoldFont=texgyreschola-bold, ItalicFont=texgyreschola-italic,
+  BoldItalicFont=texgyreschola-bolditalic, Ligatures=TeX]{texgyreschola-regular}
+% TeX Gyre Schola has no small capitals, so point headings are plain bold, as in the typst template.
+\newfontfamily\scfam[Path=$fontdir$tex-gyre-schola/, Extension=.otf]{texgyreschola-regular}
+\newfontfamily\scbfam[Path=$fontdir$tex-gyre-schola/, Extension=.otf]{texgyreschola-bold}
+\defaultfontfeatures{Path=$fontdir$tex-gyre-schola/, Extension=.otf}
 
 % Metrics measured from the typst render (14-point Liberation Serif): body lines 31.43 pt apart (FRAP 32(a)(4)
 % double spacing), single-spaced blocks 19.95 pt apart. Paragraphs are ragged right, first line indented 0.5 in.

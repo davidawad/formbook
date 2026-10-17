@@ -4,7 +4,7 @@
 #import "@preview/cmarker:0.1.10"
 
 // ---- parameters (rule each one traces to: README.md) ----
-#let body-font = "Liberation Serif" // Times New Roman, preferred (ch. 3.3(c)(7)); substitute per docs/FONTS.md
+#let body-font = ("Times New Roman", "Liberation Serif") // Times New Roman, preferred (ch. 3.3(c)(7)); substitute per docs/FONTS.md
 #let body-size = 12pt
 #let body-leading = 1.74em       // double-spaced text, ch. 3.3(c)(7); measured pitch ~27.6pt at 12pt
 #let margin = 1in                // convention; the manual sets no margin figure

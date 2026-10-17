@@ -8,7 +8,7 @@
 #let page-margin = 1in          // convention: no N.D. Ohio margin rule (LBR 5005-1 sets paper size only)
 #let type-size = 12pt          // LBR 9013-2(a): at least 12 point, footnotes included (mandated)
 #let leading = 1.4em           // convention: double spacing, as the filed exemplars; see README
-#let serif = "Liberation Serif" // Times New Roman substitute, the default per docs/FONTS.md (fonts/liberation-serif)
+#let serif = ("Times New Roman", "Liberation Serif") // Times New Roman substitute, the default per docs/FONTS.md (fonts/liberation-serif)
 
 #let inl(s) = cmarker.render(s, raw-typst: false, smart-punctuation: true)
 

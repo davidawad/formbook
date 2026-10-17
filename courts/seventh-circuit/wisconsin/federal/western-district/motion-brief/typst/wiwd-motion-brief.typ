@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; see README.md, open question 1
+#let font-family = "TeX Gyre Schola"        // Schola matches the audited exemplar (docs/FONTS.md); see README.md, open question 1
 #let type-size = 12pt                   // convention, matching the filed exemplar's body size; no W.D. Wis. rule verified
 #let page-w = 8.5in                     // 8 1/2 by 11 inch paper (convention; the exemplar is letter size)
 #let page-h = 11in

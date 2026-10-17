@@ -16,7 +16,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"    // KYEB-FORM-001: no E.D. Ky. bankruptcy rule sets a typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = "TeX Gyre Cursor"    // KYEB-FORM-001: no E.D. Ky. bankruptcy rule sets a typeface; Cursor matches the audited exemplar (docs/FONTS.md)
 #let type-size = 12pt                    // KYEB-FORM-001: a legible size (FRBP 9004(a)); 12 pt, the usual floor (Times New Roman substitute, docs/FONTS.md).
 #let body-leading = 0.398em              // KYEB-FORM-003: single spacing, as the exemplar (a convention; see ../README.md).
 #let single-leading = 0.398em            // caption, signature, headings, footnotes, notice.

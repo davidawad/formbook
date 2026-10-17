@@ -18,7 +18,7 @@
 #import "@preview/cmarker:0.1.10"
 
 // ---- rule parameters ----
-#let typeface = "Liberation Serif"   // R. 17.1: Times New Roman (substitute, docs/FONTS.md)
+#let typeface = ("Times New Roman", "Liberation Serif")   // R. 17.1: Times New Roman (substitute, docs/FONTS.md)
 #let body-size = 12pt                // R. 17.1: at least 12-point
 #let margin = 1in                    // R. 17.1: at least one inch on all four sides
 #let body-leading = 1.64em           // R. 17.1: at least 15-point spacing; double-spaced (27.6 pt pitch), as filed

@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"         // ILNB-FORM-002: a proportionally spaced font; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")         // ILNB-FORM-002: a proportionally spaced font; Times New Roman substitute per docs/FONTS.md. Vendored in /fonts.
 #let type-size = 12pt                    // ILNB-FORM-002: at least 12 point, footnotes included (the rule floor).
 #let line-pitch = 24pt                   // ILNB-FORM-003: double spacing, a 24 pt baseline pitch.
 #let body-leading = 1.091em              // extra space between body lines: the ascender-to-descender box set below is 0.909em, so the pitch is 2.0em = line-pitch at 12 pt.

@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = "TeX Gyre Pagella"   // Pagella matches the audited exemplar (docs/FONTS.md)
 #let type-size = 12pt                   // LR 10.1(a): not less than 12 point
 #assert(type-size >= 12pt, message: "wyd-complaint: D. Wyo. LR 10.1(a) requires type not less than 12 point")
 #let page-w = 8.5in                     // LR 10.1(a): 8 1/2 x 11 inch paper

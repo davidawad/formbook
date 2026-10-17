@@ -90,6 +90,16 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     let court = opts::resolve_court(&doc)?;
     let o = opts::parse_opts(rest)?;
     let root = crate::repo_root()?.to_string_lossy().into_owned();
+    let (_, font_findings) = crate::lint::fonts::check(std::path::Path::new(&root))?;
+    if !font_findings.is_empty() {
+        font_findings
+            .iter()
+            .for_each(|finding| eprintln!("{finding}"));
+        return Err(fail(
+            1,
+            "fb check: font audit mismatch; run `fb lint fonts`",
+        ));
+    }
     let mut env: Env = vec![("LC_ALL".into(), "en_US.UTF-8".into())];
     let alias = court_field(&court, "alias")?;
     let out_dir = format!("{root}/out/check/{alias}/{}", opts::doc_key(&doc, &root));

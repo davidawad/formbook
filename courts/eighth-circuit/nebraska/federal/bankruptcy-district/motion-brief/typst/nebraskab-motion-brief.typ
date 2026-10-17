@@ -12,7 +12,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a named layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // no Nebraska font rule; standard serif, vendored in fonts/
+#let font-family = "TeX Gyre Bonum"        // no Nebraska font rule; standard serif, vendored in fonts/
 #let type-size = 13pt                   // legible (FRBP 9004(a)); 13 pt in EB Garamond reads like 12 pt Times (README.md)
 #let body-leading = 1.35em              // double spacing: 26 pt baseline pitch at 13 pt (EB Garamond's line box is 0.65em)
 #let single-leading = 0.45em            // single spacing for caption, signature, footnotes

@@ -9,7 +9,7 @@
 // Parameters (each traces to a rule or a named style choice; see ../README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"        // the local rules set no typeface; Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = "TeX Gyre Schola"        // the local rules set no typeface; Schola matches the audited exemplar (docs/FONTS.md)
 #let type-size = 12pt                   // FRBP 9004(a): "clearly legible"; no local size rule, so the 12 pt convention (docs/FONTS.md)
 #let pitch = 24pt                       // the double-spaced line pitch of the filed exemplar
 #let body-leading = pitch - 1.15em     // gap between body lines: the text runs in a 1.15em line box (top-edge 0.9em, bottom-edge -0.25em), so the line pitch is `pitch` (double spacing)
