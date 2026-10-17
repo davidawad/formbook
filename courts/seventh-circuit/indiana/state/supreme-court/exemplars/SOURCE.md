@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | BLOCKED: CourtListener RECAP exhibit probing (rate-limited 50/hour) and crawls of ACLU-IN, ACLU national, Democracy Docket, WLF, PLF, Earthjustice, Lambda Legal found no public text-layer copy; public.courts.in.gov/mycourts.in.gov unreachable from this host; WebSearch budget exhausted |  |  |  |  |  |  |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: searched the Indiana Judicial Branch public forms/rules pages, Clerk and MyCase access guidance, the Attorney General appeals archive, and targeted queries for Indiana Court of Appeals and Supreme Court briefs, petitions, and motions. Search surfaced an official State appellee brief in McCoy v. State (21A-CR-2000), but it does not resolve any BLOCKED document type in this manifest; the three ordinary COA brief types already have exemplars. MyCase docket PDFs remained inaccessible from this host, and no new qualifying public text-layer PDF for the BLOCKED rows was retrieved. Jurisdictional statements were checked against the official Appellate Rules: https://www.in.gov/courts/rules/appellate/appellate.pdf ; https://www.in.gov/courts/clerk/faqs/ ; https://www.in.gov/attorneygeneral/about-the-office/appeals/victim-services/appeals-process/
