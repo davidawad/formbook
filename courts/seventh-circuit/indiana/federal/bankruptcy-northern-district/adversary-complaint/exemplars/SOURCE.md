@@ -21,3 +21,14 @@
 - WebSearch: `gov.uscourts.innb` filename prefix; results were other districts.
 - WebFetch of CourtListener web search pages: HTTP 403. The CourtListener API search worked (see above).
 - CourtListener API, `court_id:innb` complaints: 2,164 results; the first 16 were read. Vendramin was the one selected.
+
+## Exemplar 2 (second filer; tier-2 comparison)
+
+- File: `FILED-EXAMPLE-fischer-08-01025-adversary-complaint.pdf` (2 pages; text layer)
+- Case: *Fischer, Trustee v. Radio Shack Credit Services*, Adv. No. 08-01025, Bankr. N.D. Ind., Fort Wayne Division, Doc. 1, Complaint
+- Filer: Trustee (different filer from Exemplar 1)
+- Date filed: 2008-02-06
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.innb.259912/gov.uscourts.innb.259912.1.0.pdf (CourtListener RECAP)
+- Date retrieved: 2026-10-17
+- SHA-256: `6095a870e0eb6281c023145d9fa050caa4ade9b0d25aedcd5aa5ea9c304b1f46`
+- Note: filed copy uses Helvetica with fonts not embedded. Retained as public comparative evidence; it is not used as a PDF production requirement. The short pleading's two-page caption and signature structure provides the distinct-filer comparison.

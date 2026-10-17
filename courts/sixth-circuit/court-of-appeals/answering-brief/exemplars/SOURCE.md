@@ -17,3 +17,14 @@
 ## Second filer
 
 Not saved in this box. A second Sixth Circuit answering brief from a different filer is needed for the tier-2 comparison (see `README.md`, Known gaps).
+
+## Additional filer
+
+- File: `FILED-EXAMPLE-jb-k-cabinet-21-5074-answering-brief.pdf` (71 pages, text layer)
+- Case: *J.B.-K. et al. v. Secretary of the Kentucky Cabinet for Health and Family Services et al.*, No. 21-5074
+- Document: Brief of Defendants-Appellees, Document 24
+- Filer: Secretary of the Kentucky Cabinet for Health and Family Services, Commissioner of the Kentucky Department for Community Based Services, and Elizabeth Caywood, by counsel for the Commonwealth
+- Date filed: 2021-06-23 (ECF header)
+- URL: https://www.courthousenews.com/wp-content/uploads/2021/10/ky-state-brief.pdf
+- Date retrieved: 2026-10-17
+- SHA-256: `58b450a55214ce841b31682b236b96f3e051ceec3fce2c1a0026abe748ac231c`

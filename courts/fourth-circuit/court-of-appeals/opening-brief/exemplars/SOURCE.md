@@ -19,3 +19,16 @@
 - Clearinghouse doc 170539 (Opening Brief of Plaintiffs-Appellants, *South Carolina NAACP v. Weaver*, No. 25-2216, Feb. 20, 2026): the page returns HTTP 403 to both WebFetch and curl. Not used.
 - Everytown, *Maryland Shall Issue v. Anne Arundel County*, No. 23-1351 (Appellants' Opening Brief, 2023): a real 4th Cir. opening brief, but from 2023 and not fetched. Available as a second exemplar if the tier-2 review needs one.
 - ACLU *Edwards v. Witherspoon* page: no direct PDF of the brief on the page. Not used.
+
+## Additional exemplar from a different filer
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-plaintiff-ow-24-1288-opening-brief.pdf` |
+| URL | https://jlc.org/sites/default/files/attachments/2024-06/2024.06.13%20Appellant%27s%20Opening%20Br..pdf |
+| Filer | Plaintiff-Appellant O.W., through Makiba A. Gaines of Polaris Law Firm |
+| Case | *O.W. v. Carr, et al.*, No. 24-1288 |
+| Document | Opening Brief of Appellant (Doc. 40; 53 pages) |
+| Date filed | June 13, 2024 (ECF header) |
+| Date retrieved | 2026-10-17 |
+| SHA-256 | `9b30aa63d920443506899c1061338e15dccbcedfe67924d3bfbc55cb002a6b9d` |
