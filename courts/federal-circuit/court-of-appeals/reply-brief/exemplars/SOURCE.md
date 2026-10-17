@@ -19,3 +19,19 @@
 Search of CourtListener's RECAP index (`type=r`, `court=cafc`, query "reply brief"). Available reply briefs with a downloadable PDF were Gem Products (26-1817, 39 pp.), Solos Technology v. Meta (26-1721, 45 pp.), Mathai v. United States (26-1041, corrected reply, 40 pp.) and Johnson v. Collins (26-1370, 28 pp.). Gem Products was chosen: counsel-filed, text-based, and it has the full structure (cover, TOC, TOA, Argument, Conclusion, signature, Form 19, certificate of service).
 
 The filing is marked "PENDING COMPLIANCE REVIEW" on the docket. The copy is the one the public docket serves; the template does not depend on the filing being final.
+
+## 2. Top Brand LLC v. Cozy Comfort Co., No. 2024-2191 (second filer)
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-top-brand-24-2191-reply-brief.pdf` (45 pages; ECF Document 24) |
+| Court | U.S. Court of Appeals for the Federal Circuit |
+| Case | *Top Brand LLC, Sky Creations LLC, E Star LLC, Flying Star LLC, John Ngan v. Cozy Comfort Company LLC, Brian Speciale, Michael Speciale*, No. 2024-2191 (appeal from D. Ariz. No. 2:21-cv-00597-SPL, Judge Steven P. Logan) |
+| Document | "REPLY BRIEF FOR APPELLANTS" |
+| Filer | Top Brand LLC et al. and John Ngan (Appellants), by Jones Day (Gregory A. Castanias, John C. Evans; additional counsel on the inside cover) |
+| Date filed | 2024-12-31 (ECF stamp "Filed: 12/31/2024") |
+| URL fetched | https://storage.courtlistener.com/recap/gov.uscourts.cafc.22049/gov.uscourts.cafc.22049.24.0.pdf (CourtListener RECAP; URL listed from the Internet Archive CDX index of storage.courtlistener.com) |
+| Date retrieved | 2026-10-17 |
+| Text layer | Yes, born-digital (Acrobat PDFMaker for Word; Times New Roman embedded) |
+| sha256 | f0ba948fa377c4c213e63d93fadd05bb98c4c92f5f35c9979034cf4221255edd |
+| Notes | Form 9 certificate of interest included (not required in a reply), TOC, TOA, table of abbreviations, Introduction, Argument (I.-V. with A./B.), Conclusion, certificate of compliance in paragraph form ("14 point Times New Roman"), certificate of service. Different party and firm from GEM/Taft. |
