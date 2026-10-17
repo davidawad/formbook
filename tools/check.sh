@@ -30,8 +30,14 @@ shift
 # but keep document files and stamps rooted at the folder supplied by the caller.
 COURT=$DOC
 while [ ! -f "$COURT/court.json" ] && [ "$COURT" != / ]; do COURT=$(dirname "$COURT"); done
-[ -f "$COURT/court.json" ] || { echo "no court.json found above $DOC" >&2; exit 2; }
-[ -f "$COURT/checks.yaml" ] || { echo "no court-level checks.yaml at $COURT" >&2; exit 2; }
+[ -f "$COURT/court.json" ] || {
+  echo "no court.json found above $DOC" >&2
+  exit 2
+}
+[ -f "$COURT/checks.yaml" ] || {
+  echo "no court-level checks.yaml at $COURT" >&2
+  exit 2
+}
 ENGINE=typst
 RENDER=1
 ONLY=""
@@ -114,9 +120,6 @@ prepare() {
 }
 
 # ---- run every check of the given gates against the prepared sample -------------------------------------
-FAILS=0
-PASSES=0
-ALLFAIL=0
 run_checks() { # $1 = space-separated gate numbers
   GATES=$1
   yq -o=json e '.checks' "$COURT/checks.yaml" | jq -r '.[] | [.id, (.gate|tostring), .method, .name, .expect, (.fix.anchor // ""), ((.engines // ["*"]) | join(",")), (.engines_reason // "-"), ((.args // []) | join("\u001f"))] | @tsv' |
@@ -142,6 +145,7 @@ run_checks() { # $1 = space-separated gate numbers
         DETAIL=""
         oldifs=$IFS
         IFS=$(printf '\037')
+        # shellcheck disable=SC2086 # intentional split on IFS (unit separator)
         set -- $args
         IFS=$oldifs
         "chk_$method" "$@"
@@ -177,7 +181,7 @@ for SID in $(cfg '.samples[].id'); do
     continue
   }
   echo "    $(basename "$PDF"): $NPAGES pages"
-  printf '%s  %s\n' "$(shasum -a 256 "$PDF" | cut -d" " -f1)" "${PDF#$DOC/}" >> "$OUT/.shas"
+  printf '%s  %s\n' "$(shasum -a 256 "$PDF" | cut -d" " -f1)" "${PDF#"$DOC"/}" >> "$OUT/.shas"
   [ "$ENGINE" != docx ] || printf '%s  %s\n' "$(shasum -a 256 "${PDF%.pdf}" | cut -d' ' -f1)" "${PDF%.pdf}" | sed "s|  $DOC/|  |" >> "$OUT/.shas"
   echo " GATE 0 CONTENT"
   run_checks "0"
@@ -207,7 +211,7 @@ elif [ -z "$ONLY" ]; then
     echo PASS
     sort -k2 "$OUT/.shas"
   } > "$STAMP"
-  echo "stamp: ${STAMP#$DOC/} written for engine $ENGINE"
+  echo "stamp: ${STAMP#"$DOC"/} written for engine $ENGINE"
 fi
 if [ "$F" = 0 ]; then
   echo "All gates green: this court folder is eligible for 'up for review' (tools/tracker.sh). 'done' is set by David, by hand, in court.json."
