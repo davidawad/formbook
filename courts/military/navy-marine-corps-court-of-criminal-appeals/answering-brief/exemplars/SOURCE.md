@@ -2,6 +2,15 @@
 
 **No exemplar.** No public filed NMCCA answer brief (appellee's or government's brief answering an appellant's assignments of error) was found, and no PDF is in this folder.
 
+Additional search pass on 2026-10-17:
+
+- CourtListener RECAP API, `https://www.courtlistener.com/api/rest/v4/search/?q=nmcca&type=r`, and exact-phrase query for "Navy-Marine Corps Court of Criminal Appeals": results were federal district-court RECAP dockets; none was an NMCCA docket or an NMCCA answer brief. Search terms `nmcca answer brief` likewise returned unrelated district-court cases.
+- Official NMCCA decisions page, `https://www.jag.navy.mil/about/organization/ojag/code-05/nmcca/opinions/`: the public table contains court decisions and links to a separate NMCCA docket page, not briefing.
+- Official Navy-Marine Corps Court Filings & Records, `https://www.jag.navy.mil/military-justice/filings-records/`: its public table API (`https://www.jag.navy.mil/api/tables/filings-records/data/`) returned 2,056 records on this date. The visible record/document fields are trial-court records (for example, Statements of Trial Results titled by accused); this table did not surface appellate briefing. The page says released documents are selected and redacted.
+- Web searches for `"NMCCA No." "Brief on Behalf of the United States"`, `"Navy-Marine Corps Appellate Review Activity" "Answer to" brief filetype:pdf`, and `site:law.justia.com/cases/military "N-M. Ct. Crim. App." "Government" "Answer" brief` returned CAAF filings or opinions and no NMCCA-filed answer.
+
+This pass did not locate a qualifying filing. CAAF answering briefs and NMCCA appellant briefs remain excluded because neither is an NMCCA answer brief. No exemplar PDF, transcription, or overlay was created; the existing synthetic sample is not relabeled as a filed sample.
+
 Searches on 2026-10-14 (web search, standard and extended modes):
 
 - "Navy-Marine Corps Court of Criminal Appeals appellee's brief answer to assignments of error pdf": returned the NMCCA appellant's brief in *United States v. Miles* (No. 201300272, already the opening-brief exemplar, not an answer) and CAAF answer briefs: *United States v. Valencia* (CAAF No. 25-0089/MC, answering an NMCCA case) and *In re B.M.* (CAAF No. 23-0233/NA). Both are filed at the Court of Appeals for the Armed Forces, not this court, under different rules. They were not used.
