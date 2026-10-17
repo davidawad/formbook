@@ -1,6 +1,7 @@
 #!/bin/sh
 # Audit the body font of every filed exemplar and classify how exactly we can reproduce it.
 # Usage: tools/exemplar-fonts.sh [out.json]   (default data/exemplar-fonts.json)
+#        tools/exemplar-fonts.sh --only <file.pdf>...   audit just these files, print TSV, write nothing
 #
 # For each courts/**/exemplars/FILED-EXAMPLE-*.pdf:
 #   body      the font family carrying the most characters (pdftohtml -xml, every page; the
@@ -16,12 +17,18 @@
 # Sources: pdffonts, pdftohtml (poppler), gawk, jq. No network.
 set -eu
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
+ONLY=
+if [ "${1:-}" = --only ]; then
+  shift
+  ONLY=1
+  for p in "$@"; do printf '%s\n' "$p"; done > "${TMPDIR:-/tmp}/exemplar-fonts.only.$$"
+fi
 OUT=${1:-$ROOT/data/exemplar-fonts.json}
 ID=$ROOT/data/exemplar-fonts-identified.tsv
 TMP=$(mktemp)
 trap 'rm -f "$TMP"' EXIT
-cd "$ROOT"
-find courts -name 'FILED-EXAMPLE-*.pdf' | LC_ALL=C sort | while IFS= read -r f; do
+if [ -n "$ONLY" ]; then LIST="${TMPDIR:-/tmp}/exemplar-fonts.only.$$"; else cd "$ROOT"; LIST=; fi
+{ if [ -n "$LIST" ]; then cat "$LIST"; else find courts -name 'FILED-EXAMPLE-*.pdf' | LC_ALL=C sort; fi; } | while IFS= read -r f; do
   fonts=$(pdffonts "$f" 2>/dev/null | awk 'NR > 2 { sub(/^[A-Z][A-Z][A-Z][A-Z][A-Z][A-Z]\+/, "", $1); print $1 }' | LC_ALL=C sort -u | paste -sd' ' -)
   # pages among the first twelve (the pages the body font is read from) that carry a page-sized raster of real content (a scan, possibly
   # OCRed); blank page-sized backgrounds a few hundred bytes long do not count
@@ -79,6 +86,11 @@ find courts -name 'FILED-EXAMPLE-*.pdf' | LC_ALL=C sort | while IFS= read -r f; 
       printf "%s\t%s\t%.3f\t%s\t%s\t%s\t%s\n", file, body, share, cls, face, why note, fonts
     }'
 done > "$TMP"
+if [ -n "$ONLY" ]; then
+  rm -f "$LIST"
+  cat "$TMP"
+  exit 0
+fi
 jq -R -s '
   split("\n") | map(select(length > 0) | split("\t")) |
   map({ key: .[0], value: { body: .[1], body_share: (.[2] | tonumber), class: .[3], face: .[4], why: .[5],
