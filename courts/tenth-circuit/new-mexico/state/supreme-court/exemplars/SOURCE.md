@@ -5,14 +5,14 @@ Indexed level: `state-supreme`
 
 | Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
 |---|---|---|---|---|---|---|---|
-| `brief-on-the-merits` — Brief on the merits (state supreme court) | PENDING: not yet searched |  |  |  |  |  |  |
-| `answering-brief` — Answering brief (appellee's principal brief) | PENDING: not yet searched |  |  |  |  |  |  |
-| `reply-brief` — Reply brief | PENDING: not yet searched |  |  |  |  |  |  |
+| `brief-on-the-merits` — Brief on the merits (state supreme court) | COLLECTED: 30 pp., text layer verified 2026-10-17; brief in chief | `FILED-EXAMPLE-nm-legislature-grisham-v-van-soelen-s1sc39481-brief-on-the-merits.pdf` | Petitioners Gov. Lujan Grisham et al. (executive and legislative defendants) | Lujan Grisham v. Van Soelen, No. S-1-SC-39481 | 2022-11-03 | https://www.democracydocket.com/wp-content/uploads/2022/01/S-1-SC-39481-Brief-in-Chief.pdf | `f2b69f6c68ba43e99e70a7b0352252da759556eada18f51797a011c5b540ece8` |
+| `answering-brief` — Answering brief (appellee's principal brief) | COLLECTED: 29 pp., text layer verified 2026-10-17; answer brief | `FILED-EXAMPLE-rpnm-grisham-v-van-soelen-s1sc39481-answering-brief.pdf` | Real parties in interest Republican Party of New Mexico et al. | Lujan Grisham v. Van Soelen, No. S-1-SC-39481 | 2022-11-23 | https://www.democracydocket.com/wp-content/uploads/2022/01/S-1-SC-39481-Answer-Brief-Real-Party-Inters.pdf | `0ab5f4084b6599e90fd5c048bafe61ecb9e9fbc9cdadeba9e5eb96ee77c91272` |
+| `reply-brief` — Reply brief | COLLECTED: 20 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-nm-legislature-grisham-v-van-soelen-s1sc39481-reply-brief.pdf` | Petitioners Gov. Lujan Grisham et al. | Lujan Grisham v. Van Soelen, No. S-1-SC-39481 | 2022-12-05 | https://www.democracydocket.com/wp-content/uploads/2022/01/S-1-SC-39481-Reply-Brief.pdf | `3ec6893f24ea1c2315922bf0d73823165c73e0cdab4e49d63510aff9d98adba1` |
 | `petition-for-review` — Petition for review (agency order or state high court) | PENDING: not yet searched |  |  |  |  |  |  |
 | `motion-brief` — Motion and supporting memorandum | PENDING: not yet searched |  |  |  |  |  |  |
 | `petition-for-discretionary-review` — Petition for discretionary review | PENDING: not yet searched |  |  |  |  |  |  |
-| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | PENDING: not yet searched |  |  |  |  |  |  |
+| `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | COLLECTED: 100 pp., text layer verified 2026-10-17; verified petition for writ of superintending control | `FILED-EXAMPLE-nm-legislature-grisham-v-van-soelen-s1sc39481-petition-for-writ.pdf` | Petitioners Gov. Lujan Grisham et al. | Lujan Grisham v. Van Soelen, No. S-1-SC-39481 | 2022-07-22 | https://www.democracydocket.com/wp-content/uploads/2022/01/2022-0722-Verified-Petition-for-Writ-of-Superintending-Control-and-Request-for-Stay-NMSC.pdf | `3248defaa45332838f826f5736942d9c99684c9d43f79fdf2dcbb6f57acd13b6` |
 | `petition-for-rehearing` — Petition for panel rehearing or rehearing en banc | PENDING: not yet searched |  |  |  |  |  |  |
-| `amicus-brief` — Amicus curiae brief | PENDING: not yet searched |  |  |  |  |  |  |
+| `amicus-brief` — Amicus curiae brief | COLLECTED: 36 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-dpnm-rpnm-v-oliver-s1sc40146-amicus-brief.pdf` | Amicus Democratic Party of New Mexico | Republican Party of New Mexico v. Oliver, No. S-1-SC-40146 | 2023-11-17 | https://www.democracydocket.com/wp-content/uploads/2022/01/2023-11-17-Democratic-party-of-New-Mexicos-amicus-brief.pdf | `9b630d07bc6e8a48edc55775b19b790a9786801b24e2fc4898dc3b28c33f7554` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
