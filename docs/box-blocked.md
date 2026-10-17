@@ -50,3 +50,5 @@ BLOCKED mowd/complaint: A second filer complaint is still needed. Cincinnati Spe
 BLOCKED mowd/motion-brief: A second filer suggestions/memorandum is still needed. Ketcherside v. Foley, 5:26-cv-06042, Doc. 18 returned HTTP 404 from RECAP storage; Vincenti v. USA Fencing Association, 4:25-cv-00850, Doc. 14 was identified but no public PDF was retrievable. No PACER purchase made.
 BLOCKED ared/complaint: rules were added, but a second different-filer public complaint was not collected or source-recorded in this run; tier-2 comparison remains incomplete.
 BLOCKED ared/motion-brief: rules were added, but a second different-filer public motion brief was not collected or source-recorded in this run; tier-2 comparison remains incomplete.
+BLOCKED arwd/complaint: this court unit was not completed in this run; current local-rule verification and second-filer public exemplar collection/source record remain outstanding.
+BLOCKED arwd/motion-brief: this court unit was not completed in this run; current local-rule verification and second-filer public exemplar collection/source record remain outstanding.
