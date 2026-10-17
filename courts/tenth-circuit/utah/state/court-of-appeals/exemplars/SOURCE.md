@@ -6,7 +6,7 @@ Indexed level: `state-appellate`
 | Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
 |---|---|---|---|---|---|---|---|
 | `opening-brief` — Opening brief (appellant's principal brief) | PENDING: not yet searched |  |  |  |  |  |  |
-| `answering-brief` — Answering brief (appellee's principal brief) | PENDING: not yet searched |  |  |  |  |  |  |
+| `answering-brief` — Answering brief (appellee's principal brief) | COLLECTED: 125 pp., text layer verified 2026-10-17; BYU Law Digital Commons copy (byu_ca3/3790) via Wayback; BYU cover page prepended; date = certificate of service | `FILED-EXAMPLE-state-ag-harper-20180024-answering-brief.pdf` | State of Utah (appellee), Utah Attorney General's Office (William M. Hains) | State v. Harper, No. 20180024-CA | 2019-08-09 | https://web.archive.org/web/20231027164734id_/https://digitalcommons.law.byu.edu/cgi/viewcontent.cgi?article=4789&amp;context=byu_ca3 | `cd32638a0eab2932dc98a056cd6a251e3368c247bc298c636cf3384e29e26fca` |
 | `reply-brief` — Reply brief | PENDING: not yet searched |  |  |  |  |  |  |
 | `petition-for-discretionary-review` — Petition for discretionary review | PENDING: not yet searched |  |  |  |  |  |  |
 | `motion-brief` — Motion and supporting memorandum | PENDING: not yet searched |  |  |  |  |  |  |

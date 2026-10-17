@@ -13,6 +13,6 @@ Indexed level: `state-supreme`
 | `petition-for-discretionary-review` — Petition for discretionary review | PENDING: not yet searched |  |  |  |  |  |  |
 | `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | PENDING: not yet searched |  |  |  |  |  |  |
 | `petition-for-rehearing` — Petition for panel rehearing or rehearing en banc | PENDING: not yet searched |  |  |  |  |  |  |
-| `amicus-brief` — Amicus curiae brief | PENDING: not yet searched |  |  |  |  |  |  |
+| `amicus-brief` — Amicus curiae brief | COLLECTED: 26 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-nclc-epic-vita-sjc13542-amicus-brief.pdf` | National Consumer Law Center and EPIC (amici curiae; Bailey & Glasser LLP) | Vita v. New England Baptist Hospital, No. SJC-13542 | undated | https://epic.org/wp-content/uploads/2024/03/Vita-v-New-England-Baptist-Amicus-NCLC-EPIC.pdf | `128fe8ee11389acb0310c5829f40f46d55eb8d6b000e15fb2878d61bcf4e889c` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
