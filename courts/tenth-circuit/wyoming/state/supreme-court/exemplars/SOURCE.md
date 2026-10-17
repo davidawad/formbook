@@ -13,6 +13,6 @@ Indexed level: `state-supreme`
 | `petition-for-discretionary-review` — Petition for discretionary review | PENDING: not yet searched |  |  |  |  |  |  |
 | `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | PENDING: not yet searched |  |  |  |  |  |  |
 | `petition-for-rehearing` — Petition for panel rehearing or rehearing en banc | PENDING: not yet searched |  |  |  |  |  |  |
-| `amicus-brief` — Amicus curiae brief | PENDING: not yet searched |  |  |  |  |  |  |
+| `amicus-brief` — Amicus curiae brief | COLLECTED: 52 pp., text layer verified 2026-10-17; docket number not printed on cover; decided as 2014 WY 126 | `FILED-EXAMPLE-jlc-state-v-mares-2014wy126-amicus-brief.pdf` | Juvenile Law Center et al. (amici curiae supporting appellee) | State of Wyoming v. Mares, 2014 WY 126 (Wyo. Sup. Ct.) | 2014 | https://jlc.org/sites/default/files/case_files/Wyoming%20v%20Mares%20JLC%20Amicus%20FINAL2.pdf | `ad6a50613528d90b69e9eaf1872d577df4e7b7a0afad0133181ae5bee85b5faa` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
