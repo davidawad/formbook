@@ -5,9 +5,9 @@ Indexed level: `state-appellate`
 
 | Doc type | Status | File | Filer | Case | Date filed | URL | SHA-256 |
 |---|---|---|---|---|---|---|---|
-| `opening-brief` — Opening brief (appellant's principal brief) | PENDING: not yet searched |  |  |  |  |  |  |
-| `answering-brief` — Answering brief (appellee's principal brief) | PENDING: not yet searched |  |  |  |  |  |  |
-| `reply-brief` — Reply brief | PENDING: not yet searched |  |  |  |  |  |  |
+| `opening-brief` — Opening brief (appellant's principal brief) | COLLECTED: 43 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-public-counsel-mae-m-v-komrosky-g064332-opening-brief.pdf` | Mae M. et al. (plaintiffs-appellants; Public Counsel, Ballard Spahr) | Mae M. v. Komrosky, No. G064332 (formerly E083409) (Cal. Ct. App. 4th Dist., Div. 3) | 2024-06-14 | https://faith-freedom.com/wp-content/uploads/2026/02/2024.06.14AOB.pdf | `58e857c69e43690212f60735003120471224412365678697528803324c8e5c66` |
+| `answering-brief` — Answering brief (appellee's principal brief) | COLLECTED: 67 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-temecula-usd-mae-m-v-komrosky-g064332-answering-brief.pdf` | Joseph Komrosky et al., Temecula Valley Unified School District board (defendants-respondents; Advocates for Faith & Freedom) | Mae M. v. Komrosky, No. G064332 (formerly E083409) (Cal. Ct. App. 4th Dist., Div. 3) | 2024-08-29 | https://faith-freedom.com/wp-content/uploads/2026/02/2024.08.29RB.pdf | `82c6d88d6c51c2ac7e28c4258fc86c71f07dae516be2d723455ba37f7fed9247` |
+| `reply-brief` — Reply brief | COLLECTED: 46 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-public-counsel-mae-m-v-komrosky-g064332-reply-brief.pdf` | Mae M. et al. (plaintiffs-appellants; Public Counsel, Ballard Spahr) | Mae M. v. Komrosky, No. G064332 (formerly E083409) (Cal. Ct. App. 4th Dist., Div. 3) | 2024-09-18 | https://faith-freedom.com/wp-content/uploads/2026/02/2024.09.18ARB.pdf | `d657c22c335416e6979824bec36df70875e952f4bb42a17a26985c8076bd1d48` |
 | `petition-for-discretionary-review` — Petition for discretionary review | PENDING: not yet searched |  |  |  |  |  |  |
 | `motion-brief` — Motion and supporting memorandum | PENDING: not yet searched |  |  |  |  |  |  |
 | `petition-for-review` — Petition for review (agency order or state high court) | PENDING: not yet searched |  |  |  |  |  |  |
