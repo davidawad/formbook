@@ -25,3 +25,15 @@ Exemplars are public filings from CourtListener RECAP (storage.courtlistener.com
 
 A third W.D. Ky. complaint (Thomas v. Southern Baptist Theological Seminary, No. 3:26-cv-00803-CHB, 17 pages, filed 2026-10-06,
 https://storage.courtlistener.com/recap/gov.uscourts.kywd.147545/gov.uscourts.kywd.147545.1.0.pdf) was checked but not saved.
+
+## Additional filer (second tier-2 exemplar)
+
+- File: `FILED-EXAMPLE-scales-3-26-cv-807-complaint.pdf` (6 pages; text layer present)
+- Case: *Scales v. Ford Motor Company*, No. 3:26-cv-00807-CHB
+- Document: Complaint and Demand for Jury Trial (Document 1)
+- Filer: Plaintiff Tirell Scales, by counsel
+- Date filed: 2026-10-07 (ECF header)
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.kywd.147581/gov.uscourts.kywd.147581.1.0.pdf
+- Docket: https://www.courtlistener.com/docket/74934337/1/scales-v-ford-motor-company/
+- Date retrieved: 2026-10-17
+- SHA-256: `f5fdc886dda84b2cd8b7449b3a6e138d5c90d5719d03d5f006c89f2c5017a3d4`
