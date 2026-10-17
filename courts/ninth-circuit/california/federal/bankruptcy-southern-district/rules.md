@@ -41,3 +41,5 @@ Applies to `motion-brief/`. The source document's motion type controls notice an
 |---|---|---|---|
 | CASB-CONT-006 | Motion or memorandum complies with current LBR 9013-6 and 9013-7 for content, service, hearing notice, briefing and length; no one-size-fits-all notice deadline is asserted. | CASB-LBR, LBR 9013-6, 9013-7; FRBP 9013-9014 | M |
 | CASB-CONT-007 | Motion states grounds and requested relief with particularity. | FRBP 9013 | M |
+
+**Tier-2 evidence gap:** At this verification pass, the motion-brief folder contains only one distinct filer exemplar. Its tier-2 visual convention review is blocked pending a second public motion brief from another filer; see `docs/box-blocked.md`.
