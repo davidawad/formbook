@@ -20,6 +20,8 @@
 
 Engines: typst `—`, latex `—`, docx `—`.
 
+Typeface: no court-wide face is named by the rules read so far (EFPP I.F.2 and Local Rule 10 text checked; see each doc type's README). Templates keep EB Garamond. One judge's standing order (Bryant, J., Electronic Filing Order revised 1/17/2018) names Arial 12 pt for cases before that judge; not templated.
+
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 

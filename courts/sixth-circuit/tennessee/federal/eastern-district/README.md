@@ -23,6 +23,13 @@ Engines: typst `—`, latex `—`, docx `—`.
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
 
+## Typeface
+
+| Doc type | Face required (rule) | Substitute (`docs/FONTS.md`) | Fit |
+|---|---|---|---|
+| complaint | none: E.D. Tenn. LR 5.1 sets a 12-pt minimum and names no face | none; EB Garamond kept ("No face named") | n/a (visual only vs. the exemplar's Times-like face) |
+| motion-brief | none: E.D. Tenn. LR 5.1 (same) | none; EB Garamond kept | n/a (same) |
+
 ## Folders
 
 - `typst/` Typst template (primary)
