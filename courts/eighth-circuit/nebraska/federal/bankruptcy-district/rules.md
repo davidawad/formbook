@@ -19,7 +19,7 @@ Kinds: **M** = mandated; **C** = convention; **A** = author responsibility. The 
 |---|---|---|---|
 | NEBR-FORM-001 | Complaint caption follows Fed. R. Bankr. P. 7008 and Fed. R. Civ. P. 10(a), stating the bankruptcy court, title, case number, adversary number, and party names. | FRBP 7008; FRCP 10(a); Neb. R. Bankr. P. 7001-1 | M |
 | NEBR-CONT-001 | Claims appear in numbered paragraphs, each limited as far as practicable to one set of circumstances; state claims and requested relief. | FRCP 10(b), 8(a); FRBP 7008 | M |
-| NEBR-CERT-001 | A nongovernmental corporation requesting relief files a Rule 7007.1 ownership statement with its first pleading, motion, response, or other request. | Neb. R. Bankr. P. 9013-1; FRBP 7007.1 | M |
+| NEBR-CERT-001 | A nongovernmental corporation requesting relief files a Rule 7007.1 ownership statement with its first pleading, motion, response, or other request. | FRBP 7007.1 | M |
 
 ### Motion brief
 
