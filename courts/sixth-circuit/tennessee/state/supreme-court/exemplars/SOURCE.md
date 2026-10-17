@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 28 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-tacdl-zagorski-1996-00110-amicus-brief.pdf` | Tennessee Association of Criminal Defense Lawyers, amici curiae (Bass, Berry & Sims PLC) | State v. Zagorski, No. M1996-00110-SC-DPE-DD | undated | https://www.tncourts.gov/sites/default/files/docs/zagorski._amicus_brief._tn_criminal_defense.pdf | `89aff3965f344e6613f9c5b64ff394160bb4b72683b92e21d114afd608d305ce` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: searched tncourts.gov appellate rules, capital-case/document archives, and targeted queries for substantive motions, petitions for review, and writ filings. Results were opinions and rules quoting or describing party briefs, not the underlying filings; no additional public filed text-layer PDF was retrieved for the blocked rows. Appellate routes checked against official Tennessee Rules of Appellate Procedure and e-filing rule: https://www.tncourts.gov/rules/rules-appellate-procedure ; https://www.tncourts.gov/courts/supreme-court/rules/supreme-court-rules/rule-46-electronic-filing.

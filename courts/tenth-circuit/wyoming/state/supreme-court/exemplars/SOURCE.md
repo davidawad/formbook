@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 52 pp., text layer verified 2026-10-17; docket number not printed on cover; decided as 2014 WY 126 | `FILED-EXAMPLE-jlc-state-v-mares-2014wy126-amicus-brief.pdf` | Juvenile Law Center et al. (amici curiae supporting appellee) | State of Wyoming v. Mares, 2014 WY 126 (Wyo. Sup. Ct.) | 2014 | https://jlc.org/sites/default/files/case_files/Wyoming%20v%20Mares%20JLC%20Amicus%20FINAL2.pdf | `ad6a50613528d90b69e9eaf1872d577df4e7b7a0afad0133181ae5bee85b5faa` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: retried targeted searches for Wyoming Supreme Court briefs, motions, rehearing petitions, and petitions for review on wyocourts.gov and the public C-Track portal. No result supplied a downloadable qualifying text-layer filing; the C-Track portal remained inaccessible from this host (HTTP 403/Azure gateway as previously recorded). Jurisdictional routes checked against official Wyoming Rules of Appellate Procedure: https://www.courts.state.wy.us/legal-assistants/rules/ ; W.R.A.P. 12.09 and 13.

@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 35 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-iowa-hospital-assn-shimp-23-2025-amicus-brief.pdf` | Iowa Hospital Association (amicus curiae), Finley Law Firm | Shimp v. Gibbons, No. 23-2025 | 2026-06-05 | https://www.iowacourts.gov/courtcases/24792/briefs/9012/embedBrief | `70587469d0fee75802283a33532c5bd5ef55ae5432f78604f5b679e5bfcc522b` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: searched iowacourts.gov Supreme Court opinions/case pages for original certiorari writ petitions and Court of Appeals motion/transfer filings. Official pages provide downloadable merits briefs in selected appellate cases, but no petition or motion matching the remaining blocked rows was exposed; no new qualifying PDF was retrieved. Routes checked against official Iowa Rules of Appellate Procedure and court materials: https://www.iowacourts.gov/for-the-public/representing-yourself/appeals ; https://www.iowacourts.gov/iowa-courts/rules-of-court/ ; Iowa R. App. P. 6.104, 6.107, 6.1101, 6.1103.
