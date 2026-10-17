@@ -19,3 +19,18 @@ It is a typed, counsel-drafted petition in booklet form, with a text layer, and 
 
 - supremecourt.gov DocketPDF search results (2018-2026, e.g. 25-5935, 25-6104, 25-5509, 25-7189, 25-7604, 25-5675, 24-6977, 25-6083): handwritten or form-based pro se petitions on the Court's fill-in template. Their text layers are OCR noise, so they cannot serve as typed exemplars.
 - Searches for 2024-2026 counsel-drafted petitions (Institute for Justice, ACLU, Cato, "Counsel of Record" with "RULE 29.6"): no typed counsel petition came up. A 2025 counsel petition is the better exemplar if one can be found, and would be a welcome replacement.
+
+## 2. `FILED-EXAMPLE-loper-bright-22-451-cert-petition.pdf` (second filer, tier-2 comparison)
+
+| Field | Value |
+|---|---|
+| Court | Supreme Court of the United States |
+| Case | *Loper Bright Enterprises v. Raimondo*, No. 22-451 (on petition from the D.C. Circuit) |
+| Document | "Petition for Writ of Certiorari" (petition only; the appendix is a separate docket file), 49 pages, US Letter PDF of a booklet-format petition; text layer yes (Century Schoolbook embedded) |
+| Filer | Petitioners Loper Bright Enterprises et al., by Paul D. Clement, Counsel of Record (Clement & Murphy, PLLC), with Ryan P. Mulvey (Cause of Action Institute) |
+| Date filed | 2022-11-10 (docket entry date; date on the cover) |
+| URL fetched from | <https://www.supremecourt.gov/DocketPDF/22/22-451/246256/20221110145441811_2022-11-10%20Loper%20Bright%20Cert%20Petition%20FINAL.pdf> (docket: <https://www.supremecourt.gov/RSS/Cases/JSON/22-451.json>) |
+| Date retrieved | 2026-10-17 |
+| sha256 | cc6c994fe683b8cdf57d0aacadd173166115edffe988b9092b417085cfba2086 |
+
+Rejected on 2026-10-17: the *In re Grand Jury* petition (No. 21-1397, DocketPDF 221600) is a scan of the paper copy with an OCR layer (Times New Roman OCR text, "RECEIVED" stamp), not a typeset text PDF.
