@@ -15,3 +15,9 @@
 | Public record | Yes: a brief filed in an appeal to the Supreme Court of Georgia, republished by State Court Report |
 
 Used for: cover and counsel block, table of contents and authorities, jurisdictional statement, enumeration of errors, statement of the case, summary of argument, the argument's opening, conclusion, word-count statement, signature block and certificate of service (see `samples/INPUT-clark.md`).
+
+## SHA-256 checksums
+
+| File | SHA-256 |
+|---|---|
+| `FILED-EXAMPLE-clark-v-leigh-S26A0349-opening-brief.pdf` | `599399cc1225dfb35bfbfe76cdb6f229241816b2ffee1fa036034e7b7da0d47c` |

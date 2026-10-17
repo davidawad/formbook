@@ -5,7 +5,7 @@ mod opts;
 mod prepare;
 mod rows;
 mod sh;
-mod stamp;
+pub(crate) mod stamp;
 
 use crate::{fail, Res};
 use sh::{cfg, io_fail, out, Env};

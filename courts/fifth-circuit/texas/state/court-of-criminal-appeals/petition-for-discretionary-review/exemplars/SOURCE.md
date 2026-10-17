@@ -7,5 +7,6 @@
 - Source URL: https://www.pdf-archive.com/2017/04/21/states-petition-discretionary-review/states-petition-discretionary-review.pdf
 - Source record page: https://www.pdf-archive.com/2017/04/21/states-petition-discretionary-review/
 - Date fetched: 2026-10-14
+- SHA-256: `887bae199943024fe222de79a262d5cfb334cfc4738f3c1c2dc77c7e1f4e5872`
 
 Publicly filed petition PDF. The archive reproduces the filing stamp and filing details on the first page.

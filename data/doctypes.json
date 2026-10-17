@@ -1,81 +1,305 @@
 {
   "_comment": "Canonical doc-type vocabulary per court level (levels are data/index.json .courts[].level). A doc-type id is the folder name under a court folder. core = every court of that level should have it (priority high); extended = common filings worth adding next (priority normal). min_pages = a folder whose longest samples/OUTPUT-*.pdf is shorter than this is a 'deepen' unit. Doc types already on disk that are not listed here stay valid; they are never reported as missing. tools/worklist.sh reads this file. Change it by PR; ids are lowercase-hyphenated.",
   "doctypes": {
-    "complaint": {"title": "Complaint", "min_pages": 5, "what": "Initial pleading starting a civil action: caption, parties, jurisdiction and venue, numbered allegations, claims for relief, prayer, jury demand, signature."},
-    "answer": {"title": "Answer", "min_pages": 4, "what": "Responsive pleading with admissions and denials by paragraph, affirmative defenses, counterclaims, signature, certificate of service."},
-    "motion-brief": {"title": "Motion and supporting memorandum", "min_pages": 6, "what": "Motion with memorandum of points and authorities (facts, argument headings, conclusion, certificates) as the court's local rules require."},
-    "opposition-brief": {"title": "Memorandum in opposition to a motion", "min_pages": 6, "what": "Response to a motion, with any statement-of-disputed-facts section the court requires."},
-    "reply-memorandum": {"title": "Reply memorandum in support of a motion", "min_pages": 4, "what": "Movant's reply to an opposition, within the court's page limit."},
-    "notice-of-removal": {"title": "Notice of removal", "min_pages": 3, "what": "28 U.S.C. 1446 notice removing a state action: grounds, venue, index of attached pleadings, certificate of notice."},
-    "notice-of-appeal": {"title": "Notice of appeal", "min_pages": 2, "what": "FRAP 3 or state-equivalent notice of appeal from a final judgment or order."},
-    "declaration": {"title": "Declaration in support", "min_pages": 3, "what": "Sworn declaration under 28 U.S.C. 1746 (or state equivalent): numbered paragraphs, perjury attestation."},
-    "proposed-order": {"title": "Proposed order", "min_pages": 2, "what": "Proposed order submitted with a motion, in the form the local rules require."},
-    "opening-brief": {"title": "Opening brief (appellant's principal brief)", "min_pages": 12, "what": "Cover, tables, jurisdiction, issues, statement of the case, standard of review, argument, certificates, addendum as required."},
-    "answering-brief": {"title": "Answering brief (appellee's principal brief)", "min_pages": 12, "what": "Appellee's principal brief with the court's required sections and length limits."},
-    "reply-brief": {"title": "Reply brief", "min_pages": 8, "what": "Appellant's reply brief, within the court's reduced length limit."},
-    "amicus-brief": {"title": "Amicus curiae brief", "min_pages": 10, "what": "Interest statement, authorship and funding disclosure, argument, certificates."},
-    "petition-for-rehearing": {"title": "Petition for panel rehearing or rehearing en banc", "min_pages": 6, "what": "FRAP 40 / 35 petition with the court's required statement and page limit."},
-    "petition-for-review": {"title": "Petition for review (agency order or state high court)", "min_pages": 8, "what": "Petition seeking review of an agency order or intermediate appellate decision, with questions presented and appendix."},
-    "cert-petition": {"title": "Petition for a writ of certiorari", "min_pages": 15, "what": "S. Ct. R. 14 petition: questions presented, parties list, tables, opinions below, jurisdiction, reasons for granting."},
-    "brief-in-opposition": {"title": "Brief in opposition to certiorari", "min_pages": 8, "what": "S. Ct. R. 15 brief in opposition."},
-    "merits-brief": {"title": "Merits brief", "min_pages": 15, "what": "Brief on the merits after certiorari or in an original action."},
-    "motion-for-leave": {"title": "Motion for leave to file", "min_pages": 3, "what": "Short motion for leave (amicus brief, oversized brief, supplemental authority)."},
-    "adversary-complaint": {"title": "Adversary proceeding complaint", "min_pages": 5, "what": "Fed. R. Bankr. P. 7001 complaint with the local caption."},
-    "answer-to-adversary-complaint": {"title": "Answer to adversary complaint", "min_pages": 4, "what": "Responsive pleading in an adversary proceeding."},
-    "motion-for-relief-from-stay": {"title": "Motion for relief from the automatic stay", "min_pages": 4, "what": "11 U.S.C. 362(d) motion with the local-form required facts."},
-    "objection-to-claim": {"title": "Objection to proof of claim", "min_pages": 3, "what": "Fed. R. Bankr. P. 3007 objection with the required notice language."},
-    "chapter-13-plan": {"title": "Chapter 13 plan", "min_pages": 4, "what": "Local-form Chapter 13 plan, or the national form with local additions."},
-    "petition": {"title": "Petition (original or agency proceeding)", "min_pages": 6, "what": "Petition initiating an original or agency proceeding."},
-    "trial-brief": {"title": "Trial brief", "min_pages": 8, "what": "Pretrial or trial brief required by an agency tribunal or trial court."},
-    "demurrer": {"title": "Demurrer or state motion to dismiss", "min_pages": 4, "what": "State-court challenge to a pleading in the state's required format (pleading paper where mandated)."},
-    "petition-for-writ": {"title": "Petition for writ (mandate, prohibition, habeas)", "min_pages": 8, "what": "Original writ petition with verification, memorandum and exhibit index per the rules."},
-    "brief-on-the-merits": {"title": "Brief on the merits (state supreme court)", "min_pages": 12, "what": "Principal merits brief after review is granted."},
-    "petition-for-discretionary-review": {"title": "Petition for discretionary review", "min_pages": 8, "what": "Petition seeking discretionary review of an intermediate-court decision."}
+    "complaint": {
+      "title": "Complaint",
+      "min_pages": 5,
+      "what": "Initial pleading starting a civil action: caption, parties, jurisdiction and venue, numbered allegations, claims for relief, prayer, jury demand, signature."
+    },
+    "answer": {
+      "title": "Answer",
+      "min_pages": 4,
+      "what": "Responsive pleading with admissions and denials by paragraph, affirmative defenses, counterclaims, signature, certificate of service."
+    },
+    "motion-brief": {
+      "title": "Motion and supporting memorandum",
+      "min_pages": 6,
+      "what": "Motion with memorandum of points and authorities (facts, argument headings, conclusion, certificates) as the court's local rules require."
+    },
+    "opposition-brief": {
+      "title": "Memorandum in opposition to a motion",
+      "min_pages": 6,
+      "what": "Response to a motion, with any statement-of-disputed-facts section the court requires."
+    },
+    "reply-memorandum": {
+      "title": "Reply memorandum in support of a motion",
+      "min_pages": 4,
+      "what": "Movant's reply to an opposition, within the court's page limit."
+    },
+    "notice-of-removal": {
+      "title": "Notice of removal",
+      "min_pages": 3,
+      "what": "28 U.S.C. 1446 notice removing a state action: grounds, venue, index of attached pleadings, certificate of notice."
+    },
+    "notice-of-appeal": {
+      "title": "Notice of appeal",
+      "min_pages": 2,
+      "what": "FRAP 3 or state-equivalent notice of appeal from a final judgment or order."
+    },
+    "declaration": {
+      "title": "Declaration in support",
+      "min_pages": 3,
+      "what": "Sworn declaration under 28 U.S.C. 1746 (or state equivalent): numbered paragraphs, perjury attestation."
+    },
+    "proposed-order": {
+      "title": "Proposed order",
+      "min_pages": 2,
+      "what": "Proposed order submitted with a motion, in the form the local rules require."
+    },
+    "opening-brief": {
+      "title": "Opening brief (appellant's principal brief)",
+      "min_pages": 12,
+      "what": "Cover, tables, jurisdiction, issues, statement of the case, standard of review, argument, certificates, addendum as required."
+    },
+    "answering-brief": {
+      "title": "Answering brief (appellee's principal brief)",
+      "min_pages": 12,
+      "what": "Appellee's principal brief with the court's required sections and length limits."
+    },
+    "reply-brief": {
+      "title": "Reply brief",
+      "min_pages": 8,
+      "what": "Appellant's reply brief, within the court's reduced length limit."
+    },
+    "amicus-brief": {
+      "title": "Amicus curiae brief",
+      "min_pages": 10,
+      "what": "Interest statement, authorship and funding disclosure, argument, certificates."
+    },
+    "petition-for-rehearing": {
+      "title": "Petition for panel rehearing or rehearing en banc",
+      "min_pages": 6,
+      "what": "FRAP 40 / 35 petition with the court's required statement and page limit."
+    },
+    "petition-for-review": {
+      "title": "Petition for review (agency order or state high court)",
+      "min_pages": 8,
+      "what": "Petition seeking review of an agency order or intermediate appellate decision, with questions presented and appendix."
+    },
+    "cert-petition": {
+      "title": "Petition for a writ of certiorari",
+      "min_pages": 15,
+      "what": "S. Ct. R. 14 petition: questions presented, parties list, tables, opinions below, jurisdiction, reasons for granting."
+    },
+    "brief-in-opposition": {
+      "title": "Brief in opposition to certiorari",
+      "min_pages": 8,
+      "what": "S. Ct. R. 15 brief in opposition."
+    },
+    "merits-brief": {
+      "title": "Merits brief",
+      "min_pages": 15,
+      "what": "Brief on the merits after certiorari or in an original action."
+    },
+    "motion-for-leave": {
+      "title": "Motion for leave to file",
+      "min_pages": 3,
+      "what": "Short motion for leave (amicus brief, oversized brief, supplemental authority)."
+    },
+    "adversary-complaint": {
+      "title": "Adversary proceeding complaint",
+      "min_pages": 5,
+      "what": "Fed. R. Bankr. P. 7001 complaint with the local caption."
+    },
+    "answer-to-adversary-complaint": {
+      "title": "Answer to adversary complaint",
+      "min_pages": 4,
+      "what": "Responsive pleading in an adversary proceeding."
+    },
+    "motion-for-relief-from-stay": {
+      "title": "Motion for relief from the automatic stay",
+      "min_pages": 4,
+      "what": "11 U.S.C. 362(d) motion with the local-form required facts."
+    },
+    "objection-to-claim": {
+      "title": "Objection to proof of claim",
+      "min_pages": 3,
+      "what": "Fed. R. Bankr. P. 3007 objection with the required notice language."
+    },
+    "chapter-13-plan": {
+      "title": "Chapter 13 plan",
+      "min_pages": 4,
+      "what": "Local-form Chapter 13 plan, or the national form with local additions."
+    },
+    "petition": {
+      "title": "Petition (original or agency proceeding)",
+      "min_pages": 6,
+      "what": "Petition initiating an original or agency proceeding."
+    },
+    "trial-brief": {
+      "title": "Trial brief",
+      "min_pages": 8,
+      "what": "Pretrial or trial brief required by an agency tribunal or trial court."
+    },
+    "demurrer": {
+      "title": "Demurrer or state motion to dismiss",
+      "min_pages": 4,
+      "what": "State-court challenge to a pleading in the state's required format (pleading paper where mandated)."
+    },
+    "petition-for-writ": {
+      "title": "Petition for writ (mandate, prohibition, habeas)",
+      "min_pages": 8,
+      "what": "Original writ petition with verification, memorandum and exhibit index per the rules."
+    },
+    "brief-on-the-merits": {
+      "title": "Brief on the merits (state supreme court)",
+      "min_pages": 12,
+      "what": "Principal merits brief after review is granted."
+    },
+    "petition-for-discretionary-review": {
+      "title": "Petition for discretionary review",
+      "min_pages": 8,
+      "what": "Petition seeking discretionary review of an intermediate-court decision."
+    }
   },
   "levels": {
     "supreme": {
-      "core": ["cert-petition", "merits-brief", "amicus-brief"],
-      "extended": ["brief-in-opposition", "reply-brief", "motion-for-leave"]
+      "core": [
+        "cert-petition",
+        "merits-brief",
+        "amicus-brief"
+      ],
+      "extended": [
+        "brief-in-opposition",
+        "reply-brief",
+        "motion-for-leave"
+      ]
     },
     "appellate": {
-      "core": ["opening-brief", "answering-brief", "reply-brief"],
-      "extended": ["amicus-brief", "petition-for-rehearing", "motion-brief", "petition-for-review", "notice-of-appeal"]
+      "core": [
+        "opening-brief",
+        "answering-brief",
+        "reply-brief"
+      ],
+      "extended": [
+        "amicus-brief",
+        "petition-for-rehearing",
+        "motion-brief",
+        "petition-for-review",
+        "notice-of-appeal"
+      ]
     },
     "bap": {
-      "core": ["opening-brief", "answering-brief", "reply-brief"],
-      "extended": ["motion-brief", "notice-of-appeal"]
+      "core": [
+        "opening-brief",
+        "answering-brief",
+        "reply-brief"
+      ],
+      "extended": [
+        "motion-brief",
+        "notice-of-appeal"
+      ]
     },
     "district": {
-      "core": ["complaint", "motion-brief"],
-      "extended": ["answer", "opposition-brief", "reply-memorandum", "notice-of-removal", "notice-of-appeal", "declaration", "proposed-order"]
+      "core": [
+        "complaint",
+        "motion-brief"
+      ],
+      "extended": [
+        "answer",
+        "opposition-brief",
+        "reply-memorandum",
+        "notice-of-removal",
+        "notice-of-appeal",
+        "declaration",
+        "proposed-order"
+      ]
     },
     "bankruptcy": {
-      "core": ["adversary-complaint", "motion-brief"],
-      "extended": ["answer-to-adversary-complaint", "motion-for-relief-from-stay", "objection-to-claim", "chapter-13-plan", "opposition-brief", "notice-of-appeal"]
+      "core": [
+        "adversary-complaint",
+        "motion-brief"
+      ],
+      "extended": [
+        "answer-to-adversary-complaint",
+        "motion-for-relief-from-stay",
+        "objection-to-claim",
+        "chapter-13-plan",
+        "opposition-brief",
+        "notice-of-appeal"
+      ]
     },
     "state-trial": {
-      "core": ["complaint", "motion-brief", "answer"],
-      "extended": ["demurrer", "opposition-brief", "reply-memorandum", "declaration", "proposed-order", "notice-of-appeal"]
+      "core": [
+        "complaint",
+        "motion-brief",
+        "answer"
+      ],
+      "extended": [
+        "demurrer",
+        "opposition-brief",
+        "reply-memorandum",
+        "declaration",
+        "proposed-order",
+        "notice-of-appeal"
+      ]
     },
     "state-appellate": {
-      "core": ["opening-brief", "answering-brief", "reply-brief"],
-      "extended": ["amicus-brief", "petition-for-writ", "petition-for-rehearing", "petition-for-review", "motion-brief"]
+      "core": [
+        "opening-brief",
+        "answering-brief",
+        "reply-brief",
+        "petition-for-discretionary-review",
+        "motion-brief"
+      ],
+      "extended": [
+        "petition-for-review",
+        "petition-for-writ",
+        "amicus-brief"
+      ]
     },
     "state-supreme": {
-      "core": ["opening-brief", "answering-brief", "petition-for-review"],
-      "extended": ["reply-brief", "amicus-brief", "brief-on-the-merits", "petition-for-writ", "petition-for-rehearing", "motion-brief"]
+      "core": [
+        "brief-on-the-merits",
+        "answering-brief",
+        "reply-brief",
+        "petition-for-review",
+        "motion-brief"
+      ],
+      "extended": [
+        "petition-for-discretionary-review",
+        "petition-for-writ",
+        "petition-for-rehearing",
+        "amicus-brief"
+      ]
     },
     "agency": {
-      "core": ["petition", "trial-brief"],
-      "extended": ["opening-brief", "answering-brief", "reply-brief", "motion-brief", "amicus-brief"]
+      "core": [
+        "petition",
+        "trial-brief"
+      ],
+      "extended": [
+        "opening-brief",
+        "answering-brief",
+        "reply-brief",
+        "motion-brief",
+        "amicus-brief"
+      ]
     },
     "military": {
-      "core": ["opening-brief", "answering-brief"],
-      "extended": ["reply-brief", "petition-for-review", "motion-brief"]
+      "core": [
+        "opening-brief",
+        "answering-brief"
+      ],
+      "extended": [
+        "reply-brief",
+        "petition-for-review",
+        "motion-brief"
+      ]
     },
     "national": {
-      "core": ["complaint", "motion-brief"],
-      "extended": ["opening-brief", "answering-brief", "reply-brief", "amicus-brief", "answer", "opposition-brief"]
+      "core": [
+        "complaint",
+        "motion-brief"
+      ],
+      "extended": [
+        "opening-brief",
+        "answering-brief",
+        "reply-brief",
+        "amicus-brief",
+        "answer",
+        "opposition-brief"
+      ]
     }
   }
 }
