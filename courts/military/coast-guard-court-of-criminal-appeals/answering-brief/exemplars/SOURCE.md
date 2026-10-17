@@ -93,3 +93,20 @@ New routes only. Result: **found**. The court's own "Appellate Briefs" page and 
 5. Rules: Wayback CDX for `uscg.mil/Portals/0/Headquarters/Legal/cca/*` gave the rules PDFs. Fetched `CGCCA Rules of Appellate Procedure with JRAP (March 2025).pdf` (capture 20250428115614, 33 pp.), `Coast Guard Rules of Appellate Procedure with JRAP (effective 1Jan19).pdf` (20191130041821, 28 pp.) and `Joint Rules of Appellate Procedure (May 2024).pdf` (20240705065445). Rule 17.1 (format), 17.2 (content), 17.3 (length, word certificate) and 14 (signature) were read; see `../README.md`.
 
 Not used: the other 37 downloaded filings (older rules, broken text, merits-only, or other doc types: replies, habeas, Art. 62).
+
+## 2. Second exemplar: `FILED-EXAMPLE-weiser-1469-answering-brief.pdf`
+
+| Field | Value |
+|---|---|
+| Court | United States Coast Guard Court of Criminal Appeals (`uscgcoca`) |
+| Case | *United States v. Seaman Recruit (E-1) Sam O. Weiser, U.S. Coast Guard*, CGCCA Docket No. 1469, CGCMG 0375 |
+| Pages | 43 |
+| Text layer | yes (Times New Roman embedded; 12 pt, line pitch about 27-28 pt) |
+| Document | "Answer and Brief on Behalf of the United States", dated 10 March 2020, submitted "in accordance with Rule 17 of this Honorable Court's Rules of Practice and Procedure" (published redacted by the CGCCA) |
+| Filer | Appellee United States, by Appellate Government Counsel, Commandant (CG-LMJ); the signing Lieutenant's name is redacted in the published copy |
+| Date filed | 10 March 2020 (date on the caption and certificate of filing and service) |
+| URL fetched | https://web.archive.org/web/20210515024353id_/https://www.uscg.mil/Portals/0/Headquarters/Legal/cca/Court_of_Criminal_Appeals_Opinions/AppellantBriefs/US%20v.%20Weiser%20-%20Government%20Answer%20and%20Brief_Redacted.pdf?ver=if_wA3MvcQxpRCIJigYfqw%3D%3D (Internet Archive copy of the CGCCA's own posting) |
+| Date retrieved | 2026-10-17 |
+| sha256 | `660d07d970bf202baef1ef7e085a8976e91cb91fc704bbf0492a2588ea7b14e3` |
+
+Filer caveat: in a CGCCA appeal the appellee is always the United States, represented by the same Appellate Government Counsel office (CG-LMJ) as in Steen. This exemplar is a different case and (as far as the redaction shows) a different individual signer, but not a different party or office: no answer brief from a different party can exist in this court. Its layout agreements with Steen are that office's practice.

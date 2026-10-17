@@ -91,3 +91,20 @@ New routes only. Result: **found**. The court's own "Appellate Briefs" page and 
 5. Rules: Wayback CDX for `uscg.mil/Portals/0/Headquarters/Legal/cca/*` gave the rules PDFs. Fetched `CGCCA Rules of Appellate Procedure with JRAP (March 2025).pdf` (capture 20250428115614, 33 pp.), `Coast Guard Rules of Appellate Procedure with JRAP (effective 1Jan19).pdf` (20191130041821, 28 pp.) and `Joint Rules of Appellate Procedure (May 2024).pdf` (20240705065445). Rule 17.1 (format), 17.2 (content), 17.3 (length, word certificate) and 14 (signature) were read; see `../README.md`.
 
 Not used: the other 37 downloaded filings (older rules, broken text, merits-only, or other doc types: replies, habeas, Art. 62).
+
+## 2. Second filer: `FILED-EXAMPLE-rodriguez-1450-opening-brief.pdf`
+
+| Field | Value |
+|---|---|
+| Court | United States Coast Guard Court of Criminal Appeals (`uscgcoca`) |
+| Case | *United States v. Boatswain's Mate Second Class (E-5) Michael R. Rodriguez, U.S. Coast Guard*, CGCCA Dkt. 1450, Case No. G 0353, Panel 8 |
+| Pages | 29 |
+| Text layer | yes (`pdftotext` yields the text; Times New Roman embedded; 12 pt, line pitch about 27-28 pt) |
+| Document | "Assignments of Error and Brief on Behalf of the Appellant", dated 19 September 2017 (published redacted by the CGCCA on its Appellate Briefs page) |
+| Filer | Appellant Michael R. Rodriguez, by civilian defense counsel James S. Trieschmann (Law Office of James Trieschmann, Washington, DC); certificate of service by e-mail |
+| Date filed | 19 September 2017 (date on the caption and certificate of service; no court filing stamp) |
+| URL fetched | https://web.archive.org/web/20200919022535id_/https://www.uscg.mil/Portals/0/Headquarters/Legal/cca/Court_of_Criminal_Appeals_Opinions/AppellantBriefs/US%20v%20BM2%20Rodriguez%20Appellant's%20Assignment%20of%20Errors_Redacted.pdf?ver=2018-05-14-063530-620 (Internet Archive copy of the CGCCA's own posting; `www.uscg.mil` returns HTTP 403 to this box) |
+| Date retrieved | 2026-10-17 |
+| sha256 | `e3ee7aac990445520e0a2461822698cbd506a0e43885c76e612c4251ed72bfc1` |
+
+Different party (appellant Rodriguez) and counsel (civilian defense counsel, not the Coast Guard appellate defense office) from Steen. Caveat: filed under the Coast Guard rules in force before the 1 January 2019 JRAP-era rules; the format the 2025 rules require (Rule 17.1, 17.3) must be checked against the rules, not this exemplar. The Weiser AOE (2020) and Harpole AOE (2019) captures are truncated at 1 MiB in the Internet Archive and could not be used.
