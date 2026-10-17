@@ -39,3 +39,9 @@ The earlier searches filtered on CourtListener court id `bap1`, which has opinio
 
 - Brief of Appellee William K. Harrington, United States Trustee, BAP No. MW 23-003, filed June 26, 2023 by the U.S. Trustee Program (Frederick Gaston Hall, Trial Attorney, signing; Ramona D. Elliott, Deputy Director/General Counsel). URL https://storage.courtlistener.com/recap/gov.uscourts.ca1.2190/gov.uscourts.ca1.2190.1147963.0.pdf. It is the primary exemplar of `../answering-brief/` (saved there). Compared with this brief for the tier-2 choices recorded in `../README.md` (cover order, level-1 and level-2 headings, TOA leaders, the Official-Form caption on the statement regarding related cases).
 - No second appellant's opening brief from another filer was found (see `../reply-brief/exemplars/SOURCE.md` for the 2026-10-16 searches), so tier 2 is judged against two filers in one case, one opening and one answering brief.
+
+## Search 2026-10-17 (fb-595.21.1): no further exemplar
+
+- CourtListener RECAP search API (`court=ca1`, query `"Statement Regarding Interested Parties" "Bankruptcy Appellate Panel"`, the Official Form 2 title that only BAP briefs carry): not answered; the anonymous quota was exhausted by the box (HTTP 429, "50/hour", then "125/day").
+- Web searches (standard and extended) for First Circuit BAP appellant, appellee and reply briefs and for U.S. Trustee Program BAP briefs on justice.gov: only BAP forms, local rules, opinions, and a redacted sample brief (nlrg.com "Peter Rabbit" sample, no real filer; not used).
+- Result: no new public filed bap1 brief from a different filer. Recorded in `docs/box-blocked.md`.

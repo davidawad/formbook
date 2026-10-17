@@ -25,3 +25,20 @@ A second appellant's principal brief in this court, filed by the Department of J
 
 - CourtListener search API for D.C. Circuit briefs ("Brief for Appellant", "Oral Argument Not Yet Scheduled"); returned mostly orders and amicus filings.
 - Five CourtListener RECAP PDFs from the first search (Nos. 25-5157, 25-5181, 25-5055, 26-5070 orders): orders, not briefs.
+
+## 2. FILED-EXAMPLE-hegseth-26-5070-opening-brief.pdf
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-hegseth-26-5070-opening-brief.pdf` (71 pages) |
+| Court | United States Court of Appeals for the District of Columbia Circuit |
+| URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.cadc.42904/gov.uscourts.cadc.42904.01208832639.0.pdf (CourtListener RECAP archive; the URL recorded as a cross-check in the section above) |
+| Case name | *Kelly v. Hegseth* (caption: "Mark Kelly, United States Senator Representing the State of Arizona, Plaintiff-Appellee, v. Pete Hegseth, in his Official Capacity as Secretary of Defense; U.S. Department of Defense; John C. Phelan, in his Official Capacity as Secretary of the Navy; U.S. Department of the Navy, Defendants-Appellants") |
+| Docket no. | 26-5070 (D.C. Circuit); appeal from the U.S. District Court for the District of Columbia. ECF stamp "USCA Case #26-5070 Document #2164687 Filed: 03/20/2026" |
+| Document | "BRIEF FOR APPELLANTS" (cover header "[ORAL ARGUMENT SCHEDULED FOR MAY 7, 2026]"); Rule 28(a)(1) certificate, TOC, TOA, glossary, body, certificates, addendum |
+| Filer | Defendants-Appellants Hegseth et al. (federal government), by Brett A. Shumate, Brad Hinshelwood, Cynthia Barmore and John Bailey, Civil Division, U.S. Department of Justice (different party and counsel from exemplar 1, Public Citizen Litigation Group / Raise the Floor Alliance) |
+| Date filed | March 20, 2026 (ECF stamp) |
+| Date retrieved | 2026-10-17 |
+| Text layer | Yes on all pages. Certificate of compliance: 11,257 words; "Word for Microsoft 365 in Georgia 14-point font". |
+| sha256 | `d8e7770955e6fe734410cddc4b3994bdefc33e1c0c348f5c6d2cfbdea6de6817` |
+| Public record | Yes: a public filing in a federal appeal, downloaded from the RECAP archive. |

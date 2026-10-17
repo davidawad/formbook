@@ -1,5 +1,7 @@
 # Exemplar source
 
+## 1. `FILED-EXAMPLE-mattson-24-20188-motion-brief.pdf` (primary: transcribed in `samples/`)
+
 - File: `FILED-EXAMPLE-mattson-24-20188-motion-brief.pdf`
 - Court: United States Bankruptcy Court, District of Maine
 - Case: *In re Kevin J. Mattson*, Chapter 7, Case No. 24-20188 PGC
@@ -12,4 +14,16 @@
 - Text layer: yes (`pdftotext` reads the body; Times Roman and Courier fonts, non-embedded)
 - Public court record (RECAP). Used as a visual and structural reference only.
 
-Second filer: not collected in this pass (see README.md, Known gaps).
+## 2. `FILED-EXAMPLE-wheeling-13-10670-motion-brief.pdf` (second filer, tier-2 comparison)
+
+- Court: United States Bankruptcy Court, District of Maine
+- Case: *In re Montreal Maine & Atlantic Railway Ltd.*, Chapter 11, Case No. 13-10670
+- Document: "Wheeling & Lake Erie Railway Company's Motion to Enforce Payment of Allowed Administrative Claim Pursuant to Order Confirming Trustee's Revised First Amended Plan of Liquidation Dated July 15, 2015 (As Amended on October 8, 2015) and Incorporated Memorandum of Law", Doc 1938
+- Pages: 9 in the PDF (main document 7 pages: motion with jurisdictional statement, numbered paragraphs, argument, prayer, signature, certificate of service with the ECF service list; then a 1-page proposed order and a 1-page hearing notice)
+- Text layer: yes (`pdftotext` reads every page; Times New Roman fonts, not embedded, as the filer's system produced)
+- Filer: Creditor Wheeling & Lake Erie Railway Company, by George J. Marcus, David C. Johnson and Andrew C. Helman, Marcus, Clegg & Mistretta, P.A., Portland, Maine (different party and firm from exemplar 1)
+- Date filed: 2016-01-29 (ECF header "Filed 01/29/16"). Note: filed under the Local Rules then in force, not the December 2025 rules.
+- Fetched from: https://www.richter.ca/wp-content/uploads/Insolvency-Cases/en/M/Montreal-Maine-and-Atlantic-Canada-Co/Chapter-11---Montreal-Maine-and-Atlantic-Railway-Ltd/Motions/430-DE1938-Wheeling-motion-enforce-20160129.pdf (public case-document page of Richter, the Canadian monitor in the parallel CCAA proceeding; the PDF is the ECF-stamped court copy)
+- Date retrieved: 2026-10-17
+- sha256: 6995343572c6c2341056d318efc2b83854e614076dc3b0a49360a5f5ac798a3f
+- Public court record. Used as a visual and structural reference only.

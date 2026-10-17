@@ -11,3 +11,28 @@
 - Date fetched: 2026-10-14
 - Text layer: yes (`pdftotext` returns the body text)
 - Public court record (supremecourt.gov docket file); no sealed or restricted material.
+- sha256 (computed 2026-10-17): 9169d45fbac40e38793ebac84f1deac1b5dda583923de973ee0533340282c04f
+
+## 2. `FILED-EXAMPLE-chamber-of-commerce-22-451-amicus-brief.pdf` (second filer, tier-2 comparison)
+
+- Court: Supreme Court of the United States
+- Case: *Loper Bright Enterprises v. Raimondo*, No. 22-451 (merits stage)
+- Document: "Brief for Amicus Curiae the Chamber of Commerce of the United States of America in Support of Petitioners", 35 pages, US Letter PDF of a booklet-format brief; text layer yes (New Century Schoolbook embedded)
+- Filer: Amicus Chamber of Commerce of the United States of America, by Helgi C. Walker, Counsel of Record (Gibson, Dunn & Crutcher LLP), with U.S. Chamber Litigation Center
+- Date filed: 2023-07-24 (docket entry date)
+- URL: https://www.supremecourt.gov/DocketPDF/22/22-451/272688/20230724120208874_Chamber%20-%20Loper%20Bright%20Amicus%20Brief.pdf (docket: https://www.supremecourt.gov/RSS/Cases/JSON/22-451.json)
+- Date retrieved: 2026-10-17
+- sha256: 126ad84e71fd0155223308f00efe4edc26b78614f22389a1642abe4c2b402497
+- Notes: "other amicus" class (8,000 words, light green on paper).
+
+## 3. `FILED-EXAMPLE-west-virginia-22-451-amicus-brief.pdf` (third filer, tier-2 comparison)
+
+- Court: Supreme Court of the United States
+- Case: *Loper Bright Enterprises v. Raimondo*, No. 22-451 (merits stage)
+- Document: "Brief of Amici Curiae State of West Virginia and 26 Other States in Support of Petitioners", 51 pages, US Letter PDF of a booklet-format brief; text layer yes (Century Expanded BT embedded)
+- Filer: Amici State of West Virginia and 26 other States, by Lindsay S. See, Solicitor General, Counsel of Record (Office of the West Virginia Attorney General)
+- Date filed: 2023-07-24 (docket entry date)
+- URL: https://www.supremecourt.gov/DocketPDF/22/22-451/272740/20230724151234261_Loper%20Bright%20States%20Merits%20Amicus.pdf (docket: https://www.supremecourt.gov/RSS/Cases/JSON/22-451.json)
+- Date retrieved: 2026-10-17
+- sha256: 0b36393e2d850e8adbe4fc28648d0e6e44d4146e9300926c47e6d098a4de78b5
+- Notes: a Rule 37.6 class amicus (a State by its Attorney General: 9,000 words, and exempt from the authorship/funding disclosure).

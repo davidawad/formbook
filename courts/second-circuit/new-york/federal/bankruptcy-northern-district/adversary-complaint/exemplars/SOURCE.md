@@ -46,3 +46,34 @@ The first-round searches (2026-10-14, earlier in this session) that found no exe
 ## Redactions and changes
 
 None to the filing's text. The transcription omits the ECF header line only (the court's stamp, not authored text).
+
+## 2. Second exemplar (added 2026-10-17): Stevens v. Evepark London LP
+
+A second filer, different party and different firm from exemplar 1 (Fangio, trustee, by The Crossmore Law Office). This is
+the "Stevens, Adv. No. 26-90046" candidate listed above under "Other candidates"; it is now on file.
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-stevens-v-evepark-26-90046-adversary-complaint.pdf` |
+| Source URL | https://storage.courtlistener.com/recap/gov.uscourts.nynb.403424/gov.uscourts.nynb.403424.1.0.pdf |
+| Court | United States Bankruptcy Court, N.D.N.Y. |
+| Case | *Fred Stevens, as Plan Administrator v. Evepark London LP* |
+| Main case / adversary | Bankr. No. 24-11029 (PGR) (Prime Capital Ventures, LLC, Chapter 11) / Adv. Pro. No. 26-90046 (ECF header "Case 26-90046-1") |
+| Docket / document | Adv. Dkt 1 (Complaint seeking (I) the avoidance and recovery of fraudulent transfers pursuant to 11 U.S.C. §§ 544(a), 548(a)(1)(A) and 550(a) and N.Y. DCL § 273(a)(1); and (II) payment of pre-judgment interest and attorneys' fees) |
+| Filer | Fred Stevens, Plan Administrator (plaintiff). Counsel: Klestadt Winters Jureller Southard & Stevens, LLP, New York, New York (Fred Stevens, Lauren C. Kiss, Kevin B. Collins; signed "/s/ Fred Stevens") |
+| Date filed | 09/15/26 (ECF header "Filed 09/15/26 Entered 09/15/26 14:49:20"; the complaint is dated September 15, 2026) |
+| Date retrieved | 2026-10-17 |
+| Form | 33 pages (cover page with counsel block, caption and title; table of contents; 30 numbered body pages; 1-page Exhibit A), letter (612 x 792 pt), text layer present (8,735 words extracted by `pdftotext`), produced by Acrobat PDFMaker 26 for Word. Body font Times New Roman (embedded subset `TimesNewRomanPSMT`); the court's ECF header stamp adds non-embedded Helvetica/Courier. Not scanned. 1.9 MB. |
+| SHA-256 | `7e3ab2d19d560d536cbe61530e31d79301c5a546787b1fabb863be4ff692dcc8` |
+
+Verified with `pdfinfo` and `pdftotext`: page 1 carries the N.D.N.Y. caption ("UNITED STATES BANKRUPTCY COURT /
+NORTHERN DISTRICT OF NEW YORK"), the bankruptcy caption (In re Prime Capital Ventures, LLC, Chapter 11, Case No.
+24-11029 (PGR)) and the adversary caption (Fred Stevens, as Plan Administrator, Plaintiff, -against- Evepark London LP,
+Defendant, Adv. Pro. No. 26-________), with the title of the complaint centred below. Paragraph 3 states the plaintiff's
+consent to the entry of final orders or judgments (FRBP 7008). The prayer ("WHEREFORE ...", items A to C) and the `/s/`
+signature block are on PDF page 32.
+
+Differences from exemplar 1 worth recording for tier 2 (each seen in one filer only, so filer style, not convention):
+counsel block at the top left of page 1; a separate cover page and a table of contents; caption drawn with a dashed rule
+and a column of colons (S.D.N.Y. style); prayer items lettered "A." to "C."; no SSN/TIN line in the caption (as in
+exemplar 1; LBR 9004-1(c) still requires it).

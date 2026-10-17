@@ -19,3 +19,18 @@ Other candidates with an available RECAP PDF, not saved (the brief asks for one 
 - Eigen Systems Limited v. Messer Cutting Systems, Inc., No. 1:26-cv-00888, partial motion opening brief (26 pages), filed 2026-07-20 by Messer Cutting Systems, Inc.
 - CEA Industries, Inc. v. 10X Capital Partners LLC, No. 1:26-cv-00595, opening brief (26 pages), filed 2026-05-22 by 10X Capital Partners LLC.
 These are the candidates for the tier-2 second and third filers; see ../README.md.
+
+## 2. Second filer: `FILED-EXAMPLE-panini-1-26-cv-00849-motion-brief.pdf`
+
+- Court: United States District Court for the District of Delaware (`ded`)
+- Case: *Zane Murdock v. Panini America, Inc. & NFL Properties LLC*
+- Docket: No. 1:26-cv-00849-JLH, Document 14
+- Pages: 22 (cover p. i, TOC, TOA, body, signature, certificate of service)
+- Text layer: yes (Times New Roman embedded)
+- Document: "Opening Brief in Support of Defendant Panini America, Inc.'s Motion to Dismiss Under Federal Rules of Civil Procedure 12(b)(6), 9(b), and 8(a)(2)" (sections I. Introduction, II. Nature and Stage of the Proceedings, III. Summary of the Argument, IV. Statement of Facts, V. Argument, VI. Conclusion)
+- Filer: Defendant Panini America, Inc., by Troutman Pepper Locke LLP (James H. S. Levine, Del. Bar No. 5355)
+- Date filed: 2026-08-19 (ECF header "Filed 08/19/26"; the 2026-07-14 date in the candidate note above is not the date on this document)
+- URL fetched: https://storage.courtlistener.com/recap/gov.uscourts.ded.93857/gov.uscourts.ded.93857.14.0.pdf (CourtListener RECAP; the candidate listed in the "Other candidates" note above)
+- Date retrieved: 2026-10-17
+- sha256: `e365f90aa99df7fc6e75e42c423ec736c8961648b5733422396381267d11cc2d`
+- Different party and counsel from Abramson (Safe Life Policy; Heyman Enerio Gattuso & Hirzel and Fellows Labriola).

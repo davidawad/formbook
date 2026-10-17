@@ -25,3 +25,21 @@ CourtListener REST search, `type=r`, `court_id:paed`, query `"motion to dismiss"
 The tier-2 rule asks for two or three exemplars from different filers. Only one motion exemplar was saved (one per doc type, per the brief). **Tier 2 is judged against one filer only.** See the README, "Known gaps".
 
 The overlay pairs against `FILED-EXAMPLE-harvie-2-26-cv-05544-motion-brief.pdf` (the first `exemplars/*.pdf` in the folder).
+
+## 2. Second filer: `FILED-EXAMPLE-trump-2-24-cv-05560-motion-brief.pdf`
+
+| Field | Value |
+|---|---|
+| Court | United States District Court, E.D. Pa. (`paed`) |
+| Case | *Yusef Salaam, et al. v. Donald J. Trump* |
+| Docket / document | No. 2:24-cv-05560-WB, Document 26-1 (attachment to Document 26, the Notice of Motion to Dismiss) |
+| Pages | 27 (caption page, TOC p. i, TOA, body pp. 1-19, signature p. 20) |
+| Text layer | yes (`pdftotext` yields the text; Times New Roman embedded; 12 pt, line pitch about 27-28 pt) |
+| Document | "Defendant Donald J. Trump's Motion to Dismiss (Fed. R. Civ. Proc. 12(b)(6); 42 Pa.C.S. § 8340.11 et seq.)": the supporting brief, with table of contents, table of authorities, Introduction, Factual Background, Legal Standards, Argument I-III, Conclusion |
+| Filer | Defendant Donald J. Trump; counsel Karin M. Sweigart (PA No. 247462), Dhillon Law Group Inc., San Francisco |
+| Date filed | 2024-12-11 (ECF header "Filed 12/11/24") |
+| URL fetched | https://storage.courtlistener.com/recap/gov.uscourts.paed.628885/gov.uscourts.paed.628885.26.1.pdf (CourtListener RECAP; the URL of the notice, `...628885.26.0.pdf`, was surfaced by a web search) |
+| Date retrieved | 2026-10-17 |
+| sha256 | `acaa85d69249cf2880f9bcaf4d9d8df2fd32140b9102c8dda60ef731b73ef787` |
+
+Different party and counsel from Harvie (Defending America PAC; Bochetto & Lentz and Lex Politica).

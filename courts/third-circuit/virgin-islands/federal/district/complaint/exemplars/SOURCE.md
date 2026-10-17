@@ -19,3 +19,18 @@ It is a complaint in this court, filed by a private party, with a text layer, a 
 - CourtListener REST search API (`type=r`, `court=vid`, `q=complaint`): returned docket listings; the storage URLs above come from its `recap_documents` field. The API is rate-limited to 5 requests per minute.
 - CourtListener docket pages and clearinghouse.net: HTTP 403 to curl and WebFetch.
 - govinfo / vid.uscourts.gov: opinions only, no filed complaints.
+
+## 2. Second filer: `FILED-EXAMPLE-united-states-3-25-cv-00050-complaint.pdf`
+
+- Court: District Court of the Virgin Islands, Division of St. Thomas and St. John (`vid`)
+- Case: *United States of America v. The Government of the Virgin Islands, the Virgin Islands Police Department, and Mario Brooks, in his official capacity as Police Commissioner*
+- Docket / document: No. 3:25-cv-00050, Document 1
+- Pages: 12
+- Text layer: yes (`pdftotext` yields the text; Times New Roman embedded; set on numbered pleading lines, line pitch about 23-24 pt)
+- Document: Complaint
+- Filer: Plaintiff United States, by the U.S. Attorney's Office for the District of the Virgin Islands (Angela P. Tyson-Floyd) and the U.S. Department of Justice, Civil Rights Division, Special Litigation Section (Andrew M. Darlington and others)
+- Date filed: 2025-12-16 (ECF header "Filed: 12/16/25"; signed "DATED: December 16, 2025")
+- URL fetched: https://storage.courtlistener.com/recap/gov.uscourts.vid.41549/gov.uscourts.vid.41549.1.0.pdf (CourtListener RECAP; URL found in the Internet Archive CDX index of `storage.courtlistener.com`, the CourtListener search API being throttled on 2026-10-17)
+- Date retrieved: 2026-10-17
+- sha256: `5f914b114582274e8c858446b03dd3ae73764b71df4eca5de4ea300d09332dbd`
+- Different party and counsel from Henry (Waldner Law, P.C.).

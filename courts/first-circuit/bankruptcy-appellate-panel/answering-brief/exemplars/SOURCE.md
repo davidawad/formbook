@@ -40,3 +40,9 @@ The earlier searches filtered on CourtListener court id `bap1`, which has opinio
 
 - Brief for Appellant, Scott H. Blumsack, BAP No. MW 23-03, filed May 5, 2023 by Dmitry Lev, Law Offices of D. Lev, PC. URL https://storage.courtlistener.com/recap/gov.uscourts.ca1.2190/gov.uscourts.ca1.2190.1147641.0.pdf. It is the primary exemplar of `../opening-brief/` (saved there). Compared with this brief for the tier-2 choices recorded in `../README.md`.
 - No second appellee's brief from another filer was found, so tier 2 is judged against two filers in one case, one opening and one answering brief.
+
+## Search 2026-10-17 (fb-595.21.1): no further exemplar
+
+- CourtListener RECAP search API (`court=ca1`, query `"Statement Regarding Interested Parties" "Bankruptcy Appellate Panel"`, the Official Form 2 title that only BAP briefs carry): not answered; the anonymous quota was exhausted by the box (HTTP 429, "50/hour", then "125/day").
+- Web searches (standard and extended) for First Circuit BAP appellant, appellee and reply briefs and for U.S. Trustee Program BAP briefs on justice.gov: only BAP forms, local rules, opinions, and a redacted sample brief (nlrg.com "Peter Rabbit" sample, no real filer; not used).
+- Result: no new public filed bap1 brief from a different filer. Recorded in `docs/box-blocked.md`.

@@ -12,3 +12,26 @@
 - Why this exemplar: a real, public, text-based merits brief in this court, filed by a petitioner, in the booklet typography Rule 33.1(b) requires (Century family).
 
 Only one exemplar is held for this doc type. A second filer's merits brief (a respondent's brief) was not yet located; the tier-2 comparison in the README is therefore against one filer.
+
+## 2. `FILED-EXAMPLE-united-states-21-1397-merits-brief.pdf` (second filer, tier-2 comparison)
+
+- Court: Supreme Court of the United States
+- Case: *In re Grand Jury*, No. 21-1397 (on writ of certiorari to the Ninth Circuit)
+- Document: "Brief for the United States" (respondent's brief on the merits, Rule 24.2), 58 pages, US Letter PDF of a booklet-format brief; text layer yes (Century Expanded BT embedded)
+- Filer: Respondent United States, by Elizabeth B. Prelogar, Solicitor General, Counsel of Record (Office of the Solicitor General, Department of Justice)
+- Date filed: 2022-12-16 (docket entry date in the Court's case JSON)
+- URL: https://www.supremecourt.gov/DocketPDF/21/21-1397/250234/20221216175930869_21-1397%20Grand%20Jury.pdf (docket: https://www.supremecourt.gov/RSS/Cases/JSON/21-1397.json)
+- Date retrieved: 2026-10-17
+- sha256: d8b0b48488a613b0e220662555d30944a07b7185cf7bf83370b2fd4f34c29591
+- Notes: a Solicitor General filing (gray cover on paper, Rule 33.1(e)); its table of authorities uses "passim", which Rule 34.2 (2026 text) says should not be used. A respondent's brief: Rule 24.2 lets it omit items 24.1(a), (d)-(g); it still carries a Question Presented page.
+
+## 3. `FILED-EXAMPLE-loper-bright-22-451-merits-brief.pdf` (third filer, tier-2 comparison)
+
+- Court: Supreme Court of the United States
+- Case: *Loper Bright Enterprises v. Raimondo*, No. 22-451 (on writ of certiorari to the D.C. Circuit)
+- Document: "Brief for Petitioners" (petitioner's brief on the merits, Rule 24.1), 69 pages, US Letter PDF of a booklet-format brief; text layer yes (Century Schoolbook embedded)
+- Filer: Petitioners Loper Bright Enterprises et al., by Paul D. Clement, Counsel of Record (Clement & Murphy, PLLC), with Cause of Action Institute
+- Date filed: 2023-07-17 (docket entry date; date on the cover)
+- URL: https://www.supremecourt.gov/DocketPDF/22/22-451/272199/20230717152715108_2023-07-17%20Loper%20Bright%20Opening%20Brief%20FINAL.pdf (docket: https://www.supremecourt.gov/RSS/Cases/JSON/22-451.json)
+- Date retrieved: 2026-10-17
+- sha256: 893d935b37fa60ea71b07a518c8e3b5963746983056dc0a1275aff695bfa861b

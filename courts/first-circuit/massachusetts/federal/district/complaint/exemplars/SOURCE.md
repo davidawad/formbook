@@ -25,3 +25,22 @@ The brief asks for one exemplar per doc type, so only the file above is in this 
 | Filer | Plaintiff Alexis Clere (counsel not read in this run) |
 | Length / format | 9 pages; Word-generated; text layer present; numbered paragraphs; different caption layout (a single party column) |
 | Filed | 09/29/2026 |
+
+## 2. Second filer: Clere (Brody, Hardoon, Perkins & Kesten)
+
+Added 2026-10-17 (fb-595.21.1): the "checked, not saved" second filer above, now saved and verified.
+
+| Item | Value |
+|---|---|
+| File | `FILED-EXAMPLE-clere-1-26-cv-14437-complaint.pdf` (9 pages, text layer present; Word-generated; Times New Roman body) |
+| Court | United States District Court, District of Massachusetts |
+| Case | *Clere v. Delta Air Lines, Inc.* |
+| Docket no. | 1:26-cv-14437-ADB (Document 1; caption "Docket No.: 26-" left blank by the filer) |
+| Document | "COMPLAINT AND DEMAND FOR JURY TRIAL" (bodily injury on an international flight), with a certificate of service |
+| Filer | Plaintiff Alexis Clere, by counsel Michael V. Glennon (BBO# 678977), Brody, Hardoon, Perkins & Kesten, LLP, Boston (different party and firm from Door Systems / Hamilton, Brook, Smith & Reynolds) |
+| Date filed | 09/29/2026 (ECF stamp "Filed 09/29/26"; signature "DATED: September 29, 2026") |
+| URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.mad.306893/gov.uscourts.mad.306893.1.0.pdf (CourtListener RECAP) |
+| Date retrieved | 2026-10-17 |
+| sha256 | `22ffb5a20a2999f3b608ee5fb824fea00c9823bc41d7e5a7a0b4706d4bc6fb67` |
+
+Public court record (RECAP copy of the ECF document, header included).

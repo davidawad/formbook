@@ -20,3 +20,17 @@
 
 - The exemplar has no notice of motion, objection deadline, or hearing. LBR 9013-1(c) requires one (conforming substantially to Official Form B 420A) for a motion in an adversary proceeding, unless it is a contemporaneous motion under LBR 9013-2. The filing omits it. The template generates the notice from frontmatter fields; see README.md.
 - The caption number ("Adversary No. 18-00173 MMH") does not match the ECF number (25-10013). The sample keeps the caption number as printed.
+
+## 2. Second filer: Webster v. R13 Community Partners LLC (defendants' motion to dismiss)
+
+- File: `FILED-EXAMPLE-r13-25-10053-motion-brief.pdf` (18 pages)
+- Court: United States Bankruptcy Court for the District of Columbia (`dcb`)
+- Case: *Wendell W. Webster, chapter 7 Trustee v. R13 Community Partners LLC, et al.*, Adv. No. 25-10053-ELG, in the chapter 7 case of *Broughton Construction Co., LLC*, No. 23-00378-ELG
+- Docket / document: Doc 12, "DEFENDANTS' MOTION TO DISMISS AND BRIEF IN SUPPORT" (FRBP 7012 / FRCP 12(b)(6); introduction, background, argument, conclusion, signature, certificate of service; motion and brief combined in one paper, as LBR 9013-1(e)(2) permits)
+- Filer: Defendant R13 Community Partners LLC (on behalf of itself and three co-defendants), by Christopher J. Giaimo (Bar # 458974), Squire Patton Boggs (US) LLP. Different party and counsel from Swain (McNamee Hosea, P.A.).
+- Date filed: 2026-03-02 (ECF header "Filed 03/02/26 Entered 03/02/26 16:17:12")
+- URL fetched: https://storage.courtlistener.com/recap/gov.uscourts.dcb.50854/gov.uscourts.dcb.50854.12.0.pdf (CourtListener RECAP)
+- Date retrieved: 2026-10-17
+- Text layer: yes (Power PDF Create; `pdftotext` yields the full text; Times New Roman named but not embedded)
+- sha256: `253038486a433e6f75ee80c6b9c3f490262814abff9d8cb90946d931bc80c2f1`
+- Notes: no attorney block on page 1 (LBR 5005-1(c)), no notice of motion (LBR 9013-1(c)) and no consent statement in the document; page numbers "-n-" centered at the foot. Found by checking RECAP storage URLs for the Webster adversary dockets (the search API was rate-limited).

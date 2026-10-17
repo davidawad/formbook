@@ -19,3 +19,18 @@ It is a memorandum, not the notice-of-motion packet. The notice is a separate fi
 
 - CourtListener REST search (`type=r`, `court=vid`, `q="memorandum in support" "motion to dismiss"`): returned storage paths for Appleton v. Saintnals (1:25-cv-00032, ECF 14), Ohno v. Brooks, Lynch v. Donnelly, Port Hamilton and Wooten. Appleton ECF 14 is 7 pages; Wooten is the best length match.
 - WebSearch: "District of the Virgin Islands motion to dismiss memorandum of law pdf": returned Superior Court filings and opinions; no federal brief.
+
+## 2. Second filer: `FILED-EXAMPLE-gvi-3-25-cv-00050-motion-brief.pdf`
+
+- Court: District Court of the Virgin Islands, Division of St. Thomas and St. John (`vid`)
+- Case: *United States of America v. The Government of the Virgin Islands, et al.*, No. 3:25-cv-00050-ER-GAT
+- Docket / document: Document 66 (exhibits are 66-1 to 66-5, not saved)
+- Pages: 12
+- Text layer: yes (Times New Roman embedded; 12 pt, line pitch about 27-28 pt)
+- Document: "GVI's Motion to Dismiss Pursuant to FRCP R 12(b)(1)": the motion with its argument (roman-numbered points, Conclusion) in one document, then a certificate of service; every page after the first carries a running header with the short case name, case number, document title and "Page x of 12"
+- Filer: Defendant Government of the Virgin Islands, by the V.I. Department of Justice (Gordon C. Rhea, Attorney General; Ariel M. Smith, Assistant Attorney General, V.I. Bar No. 532)
+- Date filed: 2026-07-23 (ECF header "Filed: 07/23/26"; certificate of service dated July 22, 2026)
+- URL fetched: https://storage.courtlistener.com/recap/gov.uscourts.vid.41549/gov.uscourts.vid.41549.66.0.pdf (CourtListener RECAP; URL found in the Internet Archive CDX index)
+- Date retrieved: 2026-10-17
+- sha256: `9f6710769c3c7d802afd288c27a7f6d1b13c2470bee126806f447d9463e5ffe9`
+- Different party and counsel from Wooten (Limetree Bay Terminals; Akerman LLP).
