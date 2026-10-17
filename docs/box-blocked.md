@@ -52,3 +52,5 @@ BLOCKED ared/complaint: rules were added, but a second different-filer public co
 BLOCKED ared/motion-brief: rules were added, but a second different-filer public motion brief was not collected or source-recorded in this run; tier-2 comparison remains incomplete.
 BLOCKED arwd/complaint: this court unit was not completed in this run; current local-rule verification and second-filer public exemplar collection/source record remain outstanding.
 BLOCKED arwd/motion-brief: this court unit was not completed in this run; current local-rule verification and second-filer public exemplar collection/source record remain outstanding.
+BLOCKED areb/adversary-complaint: this court unit was not completed in this run; current local-rule verification and second-filer public exemplar collection/source record remain outstanding.
+BLOCKED areb/motion-brief: this court unit was not completed in this run; current local-rule verification and second-filer public exemplar collection/source record remain outstanding.
