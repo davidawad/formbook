@@ -12,6 +12,6 @@ Indexed level: `state-appellate`
 | `motion-brief` — Motion and supporting memorandum | PENDING: not yet searched |  |  |  |  |  |  |
 | `petition-for-review` — Petition for review (agency order or state high court) | PENDING: not yet searched |  |  |  |  |  |  |
 | `petition-for-writ` — Petition for writ (mandate, prohibition, habeas) | PENDING: not yet searched |  |  |  |  |  |  |
-| `amicus-brief` — Amicus curiae brief | PENDING: not yet searched |  |  |  |  |  |  |
+| `amicus-brief` — Amicus curiae brief | COLLECTED: 22 pp., text layer verified 2026-10-17; captioned In the Nebraska Court of Appeals; copy has no file stamp (2016 appeal); hosted by ACLU of Nebraska | `FILED-EXAMPLE-child-welfare-orgs-stewart-a-16-18-amicus-brief.pdf` | Child-welfare organizations (amici curiae), Nebraska Appleseed / WilmerHale / Bartle & Geier | Stewart v. Heineman, No. A-16-18 | undated | https://www.aclunebraska.org/app/uploads/2017/01/amicus_brief_for_child_welfare_stewart_ricketts.pdf | `8f2aa5e46fa8a8e71ed831bf50e7ce6f308a47a1c5393b29cf72ffb691cb8453` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
