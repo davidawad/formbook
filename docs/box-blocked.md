@@ -18,3 +18,18 @@ BLOCKED arb/motion-brief: only one public court-hosted motion memorandum by a fi
 BLOCKED gud/motion-brief: only one public motion-brief exemplar by a filer is available in the existing folder; a 2026-10-17 CourtListener/RECAP and court-site search did not locate a second accessible motion memorandum from a different filer.
 BLOCKED gub/adversary-complaint: the existing folder has one public adversary complaint; searches of the official court sources and CourtListener/RECAP on 2026-10-17 did not locate a second freely accessible complaint PDF by a different filer.
 BLOCKED gub/motion-brief: the existing folder has one public motion brief; searches of the official court sources and CourtListener/RECAP on 2026-10-17 did not locate a second freely accessible motion brief by a different filer.
+BLOCKED hid/complaint: the existing SFFA filing is the sole saved accessible complaint PDF; the README records searches of RECAP and other public repositories but the second filer candidate was not retrieved into the exemplar folder.
+BLOCKED hid/motion-brief: the existing State of Hawaii filing is the sole saved accessible motion memorandum PDF; README search notes found no second public filer PDF, and exemplar PDF is absent from this source snapshot.
+BLOCKED hib/adversary-complaint: only the Hawaii Brewery adversary complaint is saved; SOURCE.md/README identifies a Collins v. Hughes Network Systems candidate but no public PDF was collected into the folder.
+BLOCKED hib/motion-brief: the field-rolloffs motion is the only saved exemplar; no second filer PDF is recorded in SOURCE.md and the README reports one filer only.
+BLOCKED mtd/complaint: Free Speech Coalition v. Knudsen is the sole saved complaint exemplar; README records other located Montana filings were unsuitable or not saved as a second filer complaint.
+BLOCKED mtd/motion-brief: Free Speech Coalition v. Knudsen is the sole saved supporting brief exemplar; README records no second filer memorandum of this type was located.
+BLOCKED mtb/adversary-complaint: the Bache/Noble complaint is the sole saved public adversary complaint; no second different-filer complaint PDF is recorded in SOURCE.md.
+BLOCKED mtb/motion-brief: the Mohler trustee-sale motion is the sole saved exemplar; no second different-filer contested-matter motion PDF is recorded in SOURCE.md.
+BLOCKED nvd/complaint: the Lovato v. Sasson complaint is the sole saved exemplar; README records other candidates but no second filer PDF was collected.
+BLOCKED nvd/motion-brief: the Epica motion is the sole saved exemplar; README records a second candidate but it was not collected, and pro se filings are not a counseled model.
+BLOCKED nvb/adversary-complaint: the Lovato v. Sasson adversary complaint is the sole saved exemplar; README records other candidates but no second different-filer PDF was collected.
+BLOCKED nvb/motion-brief: the Epica motion is the sole saved exemplar; no second different-filer counseled motion PDF is recorded in SOURCE.md.
+BLOCKED nmid/complaint: Ewing complaint is the sole saved exemplar; no second public filed complaint PDF by a different filer is recorded in SOURCE.md.
+BLOCKED nmid/motion-brief: Imperial Pacific motion memorandum is the sole saved exemplar; no second different-filer public motion brief PDF is recorded in SOURCE.md.
+BLOCKED nmid/rules: the court-hosted 2017 Local Rules source is a Final Redline and available materials do not establish whether its text was adopted or superseded; local rule verification is incomplete.
