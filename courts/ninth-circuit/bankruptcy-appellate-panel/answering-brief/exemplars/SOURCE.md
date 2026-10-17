@@ -49,3 +49,13 @@ Still no exemplar. Searches this pass: CourtListener REST (anonymous, `type=r`):
 
 - *Hujazi v. Wirum (In re North Oxford Bright Horizons Group)*, BAP No. NC-14-1030, "Answering Brief", 16 PDF pages, filed 10/21/2014 (ECF header "Case: 14-1030, Document: 29, Filed: 10/21/2014"). Filer: appellee Andrea A. Wirum, former chapter 7 trustee; counsel Charles P. Maher, McKenna Long & Aldridge LLP (San Francisco). URL: https://storage.courtlistener.com/recap/gov.uscourts.ca9.18072/gov.uscourts.ca9.18072.29.0.pdf. Born-digital Word file (Times New Roman, not embedded). Viewed pages 1, 2, 4, 5, 6, 7 at 60 dpi and compared: cover layout (court name first, a boxed caption with "In re: North Oxford Bright Horizons Group, Debtor" and the BAP and bankruptcy numbers at the right), TOC (sub-headings indented under their section), TOA, body headings (left-aligned, numbered "I.", not centered), certifications placed before the TOC.
 - Other candidates seen in the download set, not used: `gov.uscourts.ca9.22314.14.0.pdf` (*Andrew v. Official Committee of Unsecured Creditors*, BAP No. NC-25-1238) and `gov.uscourts.ca9.22108.8.0.pdf` (*Second Amended Klein Living Trust v. Sharp*, BAP No. CC-25-1037, 51 pp): both Pachulski Stang Ziehl & Jones, the same firm as the primary, so not a different filer.
+
+## FILED-EXAMPLE-hujazi-NC-14-1030-answering-brief.pdf
+
+- Filer: appellee Andrea A. Wirum, former Chapter 7 trustee; counsel Charles P. Maher, McKenna Long & Aldridge LLP.
+- Case: *Hujazi v. Wirum (In re North Oxford Bright Horizons Group)*, BAP No. NC-14-1030.
+- Date filed: October 21, 2014 (ECF header).
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.ca9.18072/gov.uscourts.ca9.18072.29.0.pdf
+- Date retrieved: 2026-10-17.
+- SHA-256: `1eb3a585c0ee7d64d3de3928e51ed64c877d136616c0f4d4bbee37e3e68933aa`.
+- Alternate filer to the Klein exemplar above.
