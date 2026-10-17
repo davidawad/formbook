@@ -13,3 +13,15 @@
 | Date fetched | 2026-10-14 |
 | Text layer | Yes: `pdftotext` yields all 17 pages, including the proposed order on p. 17 |
 | Public record | Yes: a public motion in a federal bankruptcy case, from the RECAP archive |
+
+## Second filer (tier-2 comparison)
+
+- File: `FILED-EXAMPLE-local-motion-21-31539-motion-brief.pdf` (12 pages; motion and memorandum, with proposed order)
+- Case: *In re Local Motion MN, LLC*, Case No. 21-31539-KAC, Chapter 11
+- Document: Debtor's Notice of Hearing and Motion to Approve Settlement Agreement with Pan Yue, Doc. 135
+- Filer: Debtor Local Motion MN, LLC, by John D. Lamey III, Lamey Law Firm, P.A.
+- Date filed: 2022-08-01 (ECF header)
+- URL: https://www.courtlistener.com/?q=21-31539+Local+Motion&type=r
+- Date retrieved: 2026-10-17
+- SHA-256: `dea185c2860948f2ab1060ca9e6d69e03853816b0fe6e6f576b2a5ee909bc66c`
+- Public CourtListener RECAP filing; a separate filer from the U.S. Trustee motion in the primary example.
