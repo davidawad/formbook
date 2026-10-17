@@ -25,3 +25,11 @@ Searched for a text-based, public motion with a memorandum of points and authori
 ## What would settle it
 
 A second filed C.D. Cal. bankruptcy motion with a memorandum, from a filer other than a Danning Gill trustee (for example, a creditor's or debtor's motion, such as Zions Bancorporation's remand motion, 8:26-ap-01060 Doc 16), would give a second tier-2 comparison.
+
+- File: `FILED-EXAMPLE-lordon-2-25-bk-19832-motion-brief.pdf`
+- Filer: Debtor Lordon Enterprises, Inc., by Salvato Boufadel LLP (Misty Perry Isaacson and Joseph Boufadel)
+- Case: *In re Lordon Enterprises, Inc.*, No. 2:25-bk-19832-BR (Doc. 71)
+- Date filed: 2026-02-02
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.cacb.2029850/gov.uscourts.cacb.2029850.71.0.pdf
+- Date retrieved: 2026-10-17
+- sha256: `765045fb1e822e7924d168a3577df6960e25a4ccaacb0f49c4be1dcc5778bd2d`
