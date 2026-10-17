@@ -15,3 +15,9 @@
 | Public record | Yes: a document filed in a public appellate docket, posted by the filer. |
 
 Only one filer is available so far. The eval loop wants 2 or 3 exemplars from different filers for tier 2; this court has 1, so tier 2 cannot be finished yet (see README.md).
+
+## SHA-256 checksums
+
+| File | SHA-256 |
+|---|---|
+| `FILED-EXAMPLE-kirk-v-city-of-morgan-hill-H048745-opening-brief.pdf` | `1531b7f0181fbeda4beb56877ea4c8ddf45c5291a39e5e0955f1a63dfb48d199` |

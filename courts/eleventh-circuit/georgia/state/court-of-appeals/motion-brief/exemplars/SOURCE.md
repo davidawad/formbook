@@ -14,3 +14,9 @@
 Verified: `pdftotext` yields the full text; `pdfinfo` 29 pages; cover caption "In the Court of Appeals of Georgia", Rule 24 certification and Rule 6 certificate. Note: the host stamped a diagonal "RETRIEVED FROM DEMOCRACYDOCKET.COM" watermark into the text layer; it is not part of the filing.
 
 Why this one: no docketed Court of Appeals motion with an A-number was found as a public text PDF (searches 2026-10-16: web search for Rule 41 motions, motions to dismiss, supplement the record, oral argument, extension; the Rule 24 certification sentence; CourtListener RECAP full text; Just Security's Georgia clearinghouse, which holds only briefs for the Court of Appeals; the gaappeals.gov Wayback listing, which holds only briefs). The Sierra Club motion for reconsideration (A21A1129) is used for `petition-for-rehearing`, so a different filer was preferred here.
+
+## SHA-256 checksums
+
+| File | SHA-256 |
+|---|---|
+| `FILED-EXAMPLE-state-v-dpg-2022CV372734-motion-brief.pdf` | `1554ad62f148038cd23d07888a9a360154826fcfc9a88dc2ca010ea6a33506b6` |

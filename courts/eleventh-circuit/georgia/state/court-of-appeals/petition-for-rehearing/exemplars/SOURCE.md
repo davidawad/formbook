@@ -17,3 +17,9 @@ Georgia has no petition for rehearing; the closest real type is the motion for r
 Verified: `pdftotext` yields the full text; `pdfinfo` 15 pages; court stamp, caption and Rule 37 text confirm the court and doc type. Found by web search for the Rule 24 certification sentence with "motion for reconsideration".
 
 Earlier (2026-10-15) searches that failed: CourtListener RECAP/opinions, direct gaappeals.gov / efast.gaappeals.us fetches (403/404), state-rules.com and courtrules.net (Cloudflare).
+
+## SHA-256 verification
+
+| File | SHA-256 |
+|---|---|
+| FILED-EXAMPLE-sierra-club-v-psc-A21A1129-petition-for-rehearing.pdf | 6038b5f7a91ba8380d0ac1da04a8bbd22b479ecd89002c7788229aaa8a8224a4 |

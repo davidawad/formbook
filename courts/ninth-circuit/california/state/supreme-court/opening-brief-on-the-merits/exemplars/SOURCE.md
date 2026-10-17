@@ -40,3 +40,10 @@ Its cover uses the same block of Supreme Court No. / Court of Appeal No. / Super
 | Public record | Yes: a document filed in a public Supreme Court docket, posted by the court. |
 
 Two filers are on file (Pirolo, Demson): the minimum the eval loop asks for tier 2. A third filer would make the comparison firmer; see `../README.md`.
+
+## SHA-256 checksums
+
+| File | SHA-256 |
+|---|---|
+| `FILED-EXAMPLE-people-v-mccune-S276303-opening-brief-on-the-merits.pdf` | `b3b22b7218874c44b5dcdaaa42eb892d10df1e0bb00253afaec936fc23799a36` |
+| `FILED-EXAMPLE-people-v-patton-S279670-opening-brief-on-the-merits.pdf` | `82fc7198053791031a97dc4ba81624b9e912a44acb029813837ca2e2247da681` |

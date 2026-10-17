@@ -33,3 +33,10 @@ Both are public court records posted by the Supreme Court of California on its w
 - Supreme Court "document" pages for filed petitions (`supreme.courts.ca.gov/document/...`), found by search for "California Supreme Court petition for review filed pdf". Two were downloaded and checked; both are real filings with text layers.
 - Not used: conference lists and order lists on the same site (not petitions).
 - Not searched further: CourtListener (its RECAP coverage is federal, not this court).
+
+## SHA-256 checksums
+
+| File | SHA-256 |
+|---|---|
+| `FILED-EXAMPLE-hoehn-s277510-petition-for-review.pdf` | `5e7493d6502293b40ec9f3f5dc35640c2b17446d64e26a1a30ca6536b03cb873` |
+| `FILED-EXAMPLE-quach-s275121-petition-for-review.pdf` | `2843ed448e0f28d2b7da70f3ddae11926472426fe6391c8cdb55dcac3d70e240` |

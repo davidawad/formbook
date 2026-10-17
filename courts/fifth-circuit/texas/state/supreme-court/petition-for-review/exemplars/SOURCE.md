@@ -11,3 +11,11 @@ Three public petitions for review from three different filers. All three were fe
 The overlay (`samples/OVERLAY-hawthorne-petition-for-review.*`) compares our render with the State petition, the first file above, because the sample is transcribed from it.
 
 Tier 2 (cover, identities, contents and authorities layout) is judged against all three. The State file is also the transcription source, so it is the only one with a page-by-page overlay.
+
+## SHA-256 verification
+
+| File | SHA-256 |
+|---|---|
+| FILED-EXAMPLE-hawthorne-25-0792-petition-for-review.pdf | a5c72ad4902d0d216fd74007e6c3f60a8379aead8f2076fddf79c29b0135902e |
+| FILED-EXAMPLE-spcad-26-0153-petition-for-review.pdf | f623391f4e4f6b7c17937d789bb9a158c195d04f56392d30f146f0f52c08db62 |
+| FILED-EXAMPLE-tanner-25-0648-petition-for-review.pdf | a453c2359091465f73b21818f4c4e15d92f3bd8cc05884d1cc7a35da25cd73de |

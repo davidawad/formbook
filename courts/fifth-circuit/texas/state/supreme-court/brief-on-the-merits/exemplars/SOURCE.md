@@ -11,3 +11,11 @@ Three public merits briefs from three different filers, fetched on October 15, 2
 The overlay (`samples/OVERLAY-hawthorne-brief-on-the-merits.*`) compares our render with the State brief, the first file above, because the sample is transcribed from it.
 
 Tier 2 (cover, identities, contents, authorities and argument-heading layout) is judged against all three.
+
+## SHA-256 verification
+
+| File | SHA-256 |
+|---|---|
+| FILED-EXAMPLE-hawthorne-25-0792-brief-on-the-merits.pdf | c2ce052b741fe15ddf00527199994ecc717a81b979378f00ed577ae3e62b2b50 |
+| FILED-EXAMPLE-spcad-26-0153-brief-on-the-merits.pdf | 454ee264239a4470ca8d4b4db044539549e0058515e00af892a8cf4397a697b8 |
+| FILED-EXAMPLE-tanner-25-0648-brief-on-the-merits.pdf | 0e6aef06d7d513eff1dd0a9ed2673fd65bb28c9c9eeb5dba6d9cec59fa02f2bf |
