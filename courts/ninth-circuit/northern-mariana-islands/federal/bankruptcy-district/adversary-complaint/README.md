@@ -111,6 +111,16 @@ Re-searched with CourtListener's REST API v4 (anonymous, throttled to 5/min; no 
 
 Result: still no public, text-based adversary complaint from this court. The one live lead is the Cabrera adversary (1:26-ap-00001, filed 2026-01-20): its docket exists, but no document is in the RECAP index, and the storage path needs a `pacer_case_id` this anonymous API does not return. Next step: an authenticated CourtListener (or PACER) pull of `1:26-ap-00001` doc 1, or a Cabrera docket from a box that can reach it.
 
+## Fourth search pass (fb-n5t4, 2026-10-17)
+
+The required batch task prompted another search for a public filed complaint:
+
+18. Public web searches for NMI bankruptcy adversary complaints and the known adversary case numbers (`1:13-ap-00001`, `1:13-ap-00002`, `1:13-ap-00003`, `1:15-ap-00001`) returned no complaint PDF. Searches for the known parties likewise surfaced decisions, docket summaries, and unrelated courts, not a complaint filed in this court.
+19. The court's official opinions page publishes *Lee v. Yeom*, 1:13-ap-00003, ECF No. 57: <https://www.nmid.uscourts.gov/sites/nmid/files/opinions/1-13-ap-00003-57.pdf>. The decision says that the plaintiff filed an adversary complaint, but it is a decision, not the filed complaint, and it supplies no complaint PDF. I did not substitute it as the exemplar.
+20. A search of CourtListener RECAP results and direct indexed storage URLs still found no available complaint. The anonymous REST API answers HTTP 403 (`Anonymous users don't have permission to access the API`), so it cannot expose a newly indexed document or document ID from this environment.
+
+Result: no public filed adversary complaint found. The missing artifact is still a blocker for sample transcription, a valid exemplar overlay, and a comparison-based all-page review. The existing synthetic output was rasterized at 100 dpi and all three pages were inspected on 2026-10-17 for its own layout only; that inspection is not a substitute for comparison to a filed exemplar. No overlay was produced.
+
 Re-verified this session: `sh tools/render.sh` exit 0, `samples/OUTPUT-synthetic-complaint.pdf`, 3 pages, EB Garamond only (`pdffonts`). All 3 pages rasterized at 60 dpi (`pdftoppm -r 60`) and viewed: page 1 caption and title, page 2 paragraphs 1 to 11 and sub-heading, page 3 claim, prayer, jury demand and signature. No template change. `sh tools/overlay.sh <dir>` exit 2 (`parameter not set`, no exemplar PDF). The overlay stays not produced.
 ## Engines
 
