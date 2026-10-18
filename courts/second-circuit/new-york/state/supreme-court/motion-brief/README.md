@@ -4,14 +4,14 @@ Doc type `motion-brief` for court `nysupct` (CourtListener id `nysupct`, New Yor
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-valentino-652605-2020-motion-brief.pdf` | The real filed memorandum of law (Plaintiff's opposition to a CPLR 3211 motion), 30 pp., text layer. Provenance: `exemplars/SOURCE.md`. |
-| `samples/INPUT-valentino.md` | Markdown transcription of a portion of the exemplar: cover data, the Preliminary Statement, the Statement of Facts, Argument I (intro, I.A.i(a)-(c), I.A.ii), the Conclusion, signature, service list and certification. Verbatim text except where the Known gaps section says otherwise. |
-| `samples/OUTPUT-valentino.pdf` | Our render (14 pp.). |
-| `samples/OVERLAY-valentino.pdf`, `samples/OVERLAY-valentino.txt` | Red/blue overlay of our render on the exemplar, and the page map. |
+| `usage/SAMPLE-nysupct-motion-brief-valentino6526052020.pdf` | The real filed memorandum of law (Plaintiff's opposition to a CPLR 3211 motion), 30 pp., text layer. Provenance: `usage/SOURCE.md`. |
+| `usage/INPUT-nysupct-motion-brief-valentino.md` | Markdown transcription of a portion of the exemplar: cover data, the Preliminary Statement, the Statement of Facts, Argument I (intro, I.A.i(a)-(c), I.A.ii), the Conclusion, signature, service list and certification. Verbatim text except where the Known gaps section says otherwise. |
+| `usage/OUTPUT-nysupct-motion-brief-valentino.typst.pdf` | Our render (14 pp.). |
+| `usage/OVERLAY-valentino.pdf`, `usage/OVERLAY-valentino.txt` | Red/blue overlay of our render on the exemplar, and the page map. |
 | `typst/main.typ` | Entry point: reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/nysupct-motion-brief.typ` | The template. Content-agnostic; every number is a named parameter at the top and traces to a rule (NYSM- IDs below) or a stated convention. |
 
-File names: the sample is `INPUT-valentino.md` and the outputs are `OUTPUT-valentino.pdf` and `OVERLAY-valentino.{pdf,txt}`, which are the names `tools/render.sh` and `tools/overlay.sh` read and write by default (the same pattern as the sibling `complaint/` folder). The brief asked for `<id>.pdf` and `<id>-overlay.pdf`; the tools do not take those names, and the tools were not edited.
+File names: the sample is `INPUT-nysupct-motion-brief-valentino.md` and the outputs are `OUTPUT-nysupct-motion-brief-valentino.typst.pdf` and `OVERLAY-valentino.{pdf,txt}`, which are the names `tools/render.sh` and `tools/overlay.sh` read and write by default (the same pattern as the sibling `complaint/` folder). The brief asked for `<id>.pdf` and `<id>-overlay.pdf`; the tools do not take those names, and the tools were not edited.
 
 ## Governing rules
 
@@ -85,11 +85,11 @@ Strings that begin with `*` (italic markup) or contain `*` must be quoted in YAM
 From the repo root (toolchain first: `export PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/second-circuit/new-york/state/supreme-court/motion-brief samples/INPUT-valentino.md   # -> samples/OUTPUT-valentino.pdf
+sh tools/render.sh courts/second-circuit/new-york/state/supreme-court/motion-brief usage/INPUT-nysupct-motion-brief-valentino.md   # -> usage/OUTPUT-nysupct-motion-brief-valentino.typst.pdf
 sh tools/overlay.sh courts/second-circuit/new-york/state/supreme-court/motion-brief valentino                    # -> OVERLAY-valentino.pdf and .txt
 ```
 
-Typst runs as `typst compile --root <doctype-dir> --font-path fonts --ignore-system-fonts --package-cache-path vendor/typst-packages --input sample=samples/NAME.md typst/main.typ out.pdf`. The font and the markdown package (cmarker 0.1.10) are vendored, so a build never depends on what is installed or on the network. Any typst warning fails the render (`tools/render.sh`).
+Typst runs as `typst compile --root <doctype-dir> --font-path fonts --ignore-system-fonts --package-cache-path vendor/typst-packages --input sample=usage/NAME.md typst/main.typ out.pdf`. The font and the markdown package (cmarker 0.1.10) are vendored, so a build never depends on what is installed or on the network. Any typst warning fails the render (`tools/render.sh`).
 
 Checks run for this doc type:
 
@@ -150,7 +150,7 @@ Rendered at `pdftoppm -r 60` and looked at, page by page. Page numbers below are
 
 ## Decisions
 
-- **One exemplar, not two.** The brief asked for one real filed document of this type. Valentino v. 693 Fifth Owner LLC was chosen: a NYSCEF-stamped NY County memorandum with a text layer, 30 pp., and the full structure (cover, TOC, TOA, sections, signature, service list, certification). Two other candidates were found by search and listed in `exemplars/SOURCE.md` (a Suffolk County memorandum in support of a CPLR 3211 motion; a NY County memorandum in *Wong*).
+- **One exemplar, not two.** The brief asked for one real filed document of this type. Valentino v. 693 Fifth Owner LLC was chosen: a NYSCEF-stamped NY County memorandum with a text layer, 30 pp., and the full structure (cover, TOC, TOA, sections, signature, service list, certification). Two other candidates were found by search and listed in `usage/SOURCE.md` (a Suffolk County memorandum in support of a CPLR 3211 motion; a NY County memorandum in *Wong*).
 - **Cover follows the exemplar, not the complaint.** The complaint template prints the title in the caption's right column; the memorandum prints it once, centred, with the counsel block at the foot of the cover, as the exemplar does.
 - **Word limit enforced as a build failure.** An over-limit sample fails the render, rather than printing a certification that is wrong. The limit is the rule's, not a convention.
 - **Cmarker markdown, as in the ca9 template.** The same markdown contract, the same `toa:` link mechanism for the TOA, and the same page-accurate tagging.
@@ -158,16 +158,16 @@ Rendered at `pdftoppm -r 60` and looked at, page by page. Page numbers below are
 
 ## Provenance
 
-- Exemplar: `exemplars/SOURCE.md` (URL fetched from, case, index no., filer, date filed, date fetched).
+- Exemplar: `usage/SOURCE.md` (URL fetched from, case, index no., filer, date filed, date fetched).
 - Rules: the Cornell and search-result sources in the table above, read 2026-10-14.
 
 ## Engines
 
-Three engines per doc type: `typst/` (primary), `docx/` and `latex/` (not built here; see the Engines section of the PR). The docx engine is `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc 3.12's default reference), plus `docx/nysupct-motion-brief.lua` (cover, section breaks for the roman and arabic page numbers, TOC field, TOA, signature block, service list, word-count certificate). Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/supreme-court/motion-brief samples/INPUT-valentino.md`.
+Three engines per doc type: `typst/` (primary), `docx/` and `latex/` (not built here; see the Engines section of the PR). The docx engine is `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc 3.12's default reference), plus `docx/nysupct-motion-brief.lua` (cover, section breaks for the roman and arabic page numbers, TOC field, TOA, signature block, service list, word-count certificate). Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/supreme-court/motion-brief usage/INPUT-nysupct-motion-brief-valentino.md`.
 
 - **Matches the typst form.** Letter paper; 1 in margins; EB Garamond 12 pt body; double line spacing (`w:line="480"`, auto); 0.5 in first-line indent; footnotes 11 pt single-spaced; the cover unnumbered; front matter (TOC, TOA) in lower-case roman; the body and certificate in arabic from 1; centred bold headings with the typst numbering typed by the author; the word-count certificate for the `filing` clause.
 - **Differs.** Word's "double" is not the typst leading (1.65 em), so the line pitch differs. The counsel block sits at a fixed 2 in below the title, not at the page foot as in typst (the flexible space has no docx equivalent). The word count is the filter's count of the body and its footnotes, not Word's count; the certificate states it, so a counsel must check it against the word processor before signing. The TOC is a TOC field with cached heading entries and no page numbers.
-- **Generated.** `samples/OUTPUT-valentino.docx` (validated: `unzip -tq` passes; all 17 XML parts pass `xmllint --noout`). The word count in this sample is 2,796 (within the 7,000 limit for `filing: in-chief`).
-- **BLOCKED (docx.pdf gates).** LibreOffice (`soffice`) is not installed on the box that built this engine, so no `samples/OUTPUT-valentino.docx.pdf` exists and no page was rendered or reviewed.
+- **Generated.** `usage/OUTPUT-nysupct-motion-brief-valentino.docx` (validated: `unzip -tq` passes; all 17 XML parts pass `xmllint --noout`). The word count in this sample is 2,796 (within the 7,000 limit for `filing: in-chief`).
+- **BLOCKED (docx.pdf gates).** LibreOffice (`soffice`) is not installed on the box that built this engine, so no `usage/OUTPUT-valentino.docx.pdf` exists and no page was rendered or reviewed.
 - **BLOCKED (TOC page numbers).** The TOC needs a field update (page numbers are not in the cached result).
 - **BLOCKED (TOA page numbers).** The table of authorities lists each authority with no page numbers: LibreOffice does not honour TA/TOA fields (docs/DOCX.md), so the TOA check IDs cannot pass by construction. The entries and grouping follow the typst form.

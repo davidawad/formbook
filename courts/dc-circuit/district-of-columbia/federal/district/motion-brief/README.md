@@ -5,10 +5,10 @@ Folder: `courts/dc-circuit/district-of-columbia/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-estrada-1-26-cv-00603-motion-brief.pdf` (one filer, see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-estrada-motion-to-dismiss.md`: caption and title, the table of contents (generated), introduction, facts A to G, legal standard, argument I (A, B), argument IV, conclusion and signature block. Exemplar pages 1, 7 to 16, and 25 to 26 |
-| render | ok: `samples/OUTPUT-estrada-motion-to-dismiss.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-estrada-motion-to-dismiss.pdf` and `OVERLAY-estrada-motion-to-dismiss.txt` |
+| exemplar | yes: `usage/SAMPLE-dcd-motion-brief-estrada126cv00603.pdf` (one filer, see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-dcd-motion-brief-estradamotiontodismiss.md`: caption and title, the table of contents (generated), introduction, facts A to G, legal standard, argument I (A, B), argument IV, conclusion and signature block. Exemplar pages 1, 7 to 16, and 25 to 26 |
+| render | ok: `usage/OUTPUT-dcd-motion-brief-estradamotiontodismiss.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-estrada-motion-to-dismiss.pdf` and `OVERLAY-estrada-motion-to-dismiss.txt` |
 | pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed). Pages 1 and 2 (caption, table of contents) were viewed before the last two template edits (paragraph indent, keep-with-signature), which do not touch the caption or the contents page; the other twelve pages were viewed after them |
 
 File names: the render and overlay names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`), not the `<id>.pdf` and `<id>-overlay.pdf` names in the task brief. The tools are shared and were not edited.
@@ -85,7 +85,7 @@ Defects found during review and fixed in the template: body paragraphs had no fi
 
 ## Engines
 
-The typst template (`typst/`) is the reference. The docx engine is `docx/` (`reference.docx` from `make-reference.sh`, `motion-brief.lua`, and `render.sh`, which owns the build), rendered by `sh tools/render.sh --engine docx motion-brief samples/INPUT-estrada-motion-to-dismiss.md` into `samples/OUTPUT-estrada-motion-to-dismiss.docx` and `samples/OUTPUT-estrada-motion-to-dismiss.docx.pdf` (LibreOffice 26.8.1.1; the vendored EB Garamond installed for it). The docx.pdf is 14 pages, the same count as the typst render; every page was rendered at 60 dpi and compared with the typst render.
+The typst template (`typst/`) is the reference. The docx engine is `docx/` (`reference.docx` from `make-reference.sh`, `motion-brief.lua`, and `render.sh`, which owns the build), rendered by `sh tools/render.sh --engine docx motion-brief usage/INPUT-dcd-motion-brief-estradamotiontodismiss.md` into `usage/OUTPUT-dcd-motion-brief-estradamotiontodismiss.docx` and `usage/OUTPUT-dcd-motion-brief-estradamotiontodismiss.docx.pdf` (LibreOffice 26.8.1.1; the vendored EB Garamond installed for it). The docx.pdf is 14 pages, the same count as the typst render; every page was rendered at 60 dpi and compared with the typst render.
 
 - **What matches the rules:** US Letter, 1-inch margins; 12-point EB Garamond; double spacing at an exact 24-pt pitch; the caption page with no page number; the contents on a page numbered in lower-case roman; the body numbered in arabic from 1; the caption and the title below it; first-line indented paragraphs; block quotations indented 0.5 inch from both margins; a heading that stays with the text after it; the last paragraph kept with the signature block, and the signature block laid out as in typst (Dated, Respectfully submitted, the firm, the `/s/` line and each signer's block).
 - **What differs from typst, and why:**

@@ -14,7 +14,7 @@ Re-check cadence: when the Court posts a notice on its "Notices of Rule Amendmen
 | PMF | Pretrial Memorandum form (2 pages; PDF dated 2026-09-04) | https://ustaxcourt.gov/files/documents/Pretrial_Memorandum_Form.pdf |
 | SPTO | Standing Pretrial Order, regular case, sample (PDF dated 2021-12-27) | https://ustaxcourt.gov/files/documents/SPTO_regular_sample.pdf |
 | DAWSON | DAWSON Practitioner Training Guide (the Court's eFiling instructions for counsel) | https://ustaxcourt.gov/files/documents/DAWSON_Practitioner_Training_Guide.pdf |
-| EX-* | Filed exemplars in each doc type's `exemplars/` (see `SOURCE.md`). Visual reference only. | local |
+| EX-* | Filed exemplars in each doc type's `usage/` (see `SOURCE.md`). Visual reference only. | local |
 
 Kinds: **M** = mandated by a Tax Court Rule, a form the Rules incorporate, or the Standing Pretrial Order. **C** = convention (rules leave it open). **T** = project/tooling rule. **A** = author responsibility, not machine-checkable.
 
@@ -77,7 +77,7 @@ IDs are stable. Never renumber; retire an ID by marking it `(withdrawn)`.
 | TAX-CONT-013 | Ordinarily one petition per notice; joinder as Rule 34(b)(3)(B) allows. | R 34(b)(3), TCR p. 33 | A |
 | TAX-CONT-014 | No claim for litigation or administrative costs in the petition (Rule 231 only). | R 34(f), TCR p. 34 | M |
 | TAX-CONT-015 | A properly completed Form 2 (simplified petition) also satisfies Rule 34; the template models the Form 1 pleading. | R 34(d), TCR p. 34 | M (alternative) |
-| TAX-CONT-016 | Petition structure in the one exemplar (Lawrence, pro se): caption, numbered paragraphs 1 to 6 following Form 1, lettered assignments of error and facts, prayer, signature. One filer only; tier 2 is not settled (see `petition/exemplars/SOURCE.md`). | EX-lawrence | C (one filer) |
+| TAX-CONT-016 | Petition structure in the one exemplar (Lawrence, pro se): caption, numbered paragraphs 1 to 6 following Form 1, lettered assignments of error and facts, prayer, signature. One filer only; tier 2 is not settled (see `petition/usage/SOURCE.md`). | EX-lawrence | C (one filer) |
 
 ## Doc type: `pretrial-memorandum` (Rule 131(b), Standing Pretrial Order)
 
@@ -90,4 +90,4 @@ IDs are stable. Never renumber; retire an ID by marking it `(withdrawn)`.
 
 ## Exemplar status (2026-10-17)
 
-Both doc types still have one filer each. No second public filing was found on 2026-10-17 (searches recorded in each `exemplars/SOURCE.md` and in `docs/box-blocked.md`). Tier 2 for this court is therefore not settled; the `C` rows above that cite one exemplar are that filer's style until a second filer is found.
+Both doc types still have one filer each. No second public filing was found on 2026-10-17 (searches recorded in each `usage/SOURCE.md` and in `docs/box-blocked.md`). Tier 2 for this court is therefore not settled; the `C` rows above that cite one exemplar are that filer's style until a second filer is found.

@@ -5,11 +5,11 @@ Folder: `courts/first-circuit/new-hampshire/federal/bankruptcy-district/motion-b
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-old-cold-15-11400-motion-brief.pdf` (one filer, see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-old-cold-motion-brief.md`: the full memorandum (introduction, factual background, argument with sub-sections A and B and their sub-headings i to iv, conclusion), eight footnotes, the signature block and the certificate of service text; the service list is not transcribed (gap 5) |
+| exemplar | yes: `usage/SAMPLE-nhb-motion-brief-oldcold1511400.pdf` (one filer, see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nhb-motion-brief-oldcold.md`: the full memorandum (introduction, factual background, argument with sub-sections A and B and their sub-headings i to iv, conclusion), eight footnotes, the signature block and the certificate of service text; the service list is not transcribed (gap 5) |
 | typeface | face required: none (no NH local rule names a typeface; see gap 1). Font used: EB Garamond (vendored, the court-names-no-face default in `docs/FONTS.md`). Not a substitution: nothing to match. |
-| render | ok: `samples/OUTPUT-old-cold-motion-brief.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EB Garamond Regular, Bold and BoldItalic embedded), no warnings (`tools/render.sh`, re-run 2026-10-14) |
-| overlay | ok: `samples/OVERLAY-old-cold-motion-brief.pdf` and `samples/OVERLAY-old-cold-motion-brief.txt` (re-run 2026-10-14). The filed PDF is not in this checkout (`exemplars/` holds only `SOURCE.md`); the overlay was run against the copy fetched from the URL in `exemplars/SOURCE.md` (15 pages, matching the record) |
+| render | ok: `usage/OUTPUT-nhb-motion-brief-oldcold.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EB Garamond Regular, Bold and BoldItalic embedded), no warnings (`tools/render.sh`, re-run 2026-10-14) |
+| overlay | ok: `usage/OVERLAY-old-cold-motion-brief.pdf` and `usage/OVERLAY-old-cold-motion-brief.txt` (re-run 2026-10-14). The filed PDF is not in this checkout (`usage/` holds only `SOURCE.md`); the overlay was run against the copy fetched from the URL in `usage/SOURCE.md` (15 pages, matching the record) |
 | pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed on the 2026-10-14 re-render; no template change, so the review matches the earlier one) |
 
 File names follow the tools' contract (`render.sh` writes `OUTPUT-<id>.pdf`, `overlay.sh` reads it and writes `OVERLAY-<id>.pdf`/`.txt`), not the bare `<id>.md` / `<id>.pdf` names in the task brief.
@@ -49,7 +49,7 @@ Primary sources, fetched 2026-10-14. Federal rules from the Legal Information In
 
 ## What the overlay shows
 
-`samples/OVERLAY-old-cold-motion-brief.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by word overlap; the page map is in `OVERLAY-old-cold-motion-brief.txt`:
+`usage/OVERLAY-old-cold-motion-brief.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by word overlap; the page map is in `OVERLAY-old-cold-motion-brief.txt`:
 
 ```
 ours p.1  filed p.1  word-overlap 80.4%   ours p.8  filed p.8  word-overlap 78.2%
@@ -98,7 +98,7 @@ No findings were recorded in `reviews/` (this doc type has no `reviews/` folder)
 
 ## Engines
 
-docx (`docx/`: `build-reference.sh`, `reference.docx`, `nhb.lua`; output `samples/OUTPUT-old-cold-motion-brief.docx` and `.docx.pdf`, LibreOffice PDF, 15 pages, EB Garamond only):
+docx (`docx/`: `build-reference.sh`, `reference.docx`, `nhb.lua`; output `usage/OUTPUT-nhb-motion-brief-oldcold.docx` and `.docx.pdf`, LibreOffice PDF, 15 pages, EB Garamond only):
 
 - Matches the typst form: EB Garamond 12 pt; body at an exact 27.6 pt line pitch; 0.5 in first-line indent with no space between paragraphs (as the typst renders); single-spaced block quotes at 13.8 pt; footnotes 10 pt at an 11.5 pt pitch; `###` headings bold italic, `##` headings bold with a hanging indent; the caption, title, conclusion and certificate of service; the signature blocks kept with the text before them; the memorandum unnumbered (as the typst); PAGE number centered in the footer.
 - Differs: LibreOffice line breaks drift by a few lines per page against the typst PDF (footnote and block-quote lines are the largest source), so the CONCLUSION block (kept with its signature) moves to page 14 and the certificate of service moves whole to page 15 (the typst has 14 pages with the certificate split between pages 13 and 14). The certificate is kept as one unit rather than split.

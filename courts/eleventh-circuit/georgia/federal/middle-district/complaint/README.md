@@ -5,10 +5,10 @@ Folder: `courts/eleventh-circuit/georgia/federal/middle-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-solen-5-21-cv-00196-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-solen-complaint.md` (a portion of the 21-page filing, see Known gaps) |
-| render | ok: `samples/OUTPUT-solen-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-solen-complaint.pdf` and `OVERLAY-solen-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-gamd-complaint-solen521cv00196.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-gamd-complaint-solen.md` (a portion of the 21-page filing, see Known gaps) |
+| render | ok: `usage/OUTPUT-gamd-complaint-solen.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-solen-complaint.pdf` and `OVERLAY-solen-complaint.txt` |
 | typeface | face required: **none** (M.D. Ga. Local Rules name no typeface); font: **EB Garamond** (vendored, kept per `docs/FONTS.md`, "No face named"); not a substitution, so no metric question arises |
 | pages reviewed | 10 of 10 (re-rendered 2026-10-14 with no template change; every page rendered at 60 dpi and viewed) |
 
@@ -55,11 +55,11 @@ Not produced by this template (separate filings, not in the rules read above): t
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/eleventh-circuit/georgia/federal/middle-district/complaint samples/INPUT-solen-complaint.md
+sh tools/render.sh courts/eleventh-circuit/georgia/federal/middle-district/complaint usage/INPUT-gamd-complaint-solen.md
 sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/complaint solen-complaint
 ```
 
-- The render writes `samples/OUTPUT-solen-complaint.pdf` (the default name in `tools/render.sh`); the overlay reads it and writes `OVERLAY-solen-complaint.pdf` and `.txt` (the tool's names; the brief's `<id>-overlay` names were not used, because the tool reads and writes these).
+- The render writes `usage/OUTPUT-gamd-complaint-solen.typst.pdf` (the default name in `tools/render.sh`); the overlay reads it and writes `OVERLAY-solen-complaint.pdf` and `.txt` (the tool's names; the brief's `<id>-overlay` names were not used, because the tool reads and writes these).
 - Red = our render, blue = exemplar, black = both. The page map pairs pages by word overlap: ours 1-10 pair with filed 1-4, 6-9, 20 and 21, since the sample skips pages. The overlay is a diagnostic, not a score.
 
 ## Visual review (Gate 2 record, all 10 pages, rendered at 60 dpi and looked at)
@@ -91,11 +91,11 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/comp
 10. **Not run:** `tools/check.sh` and `tools/check-selftest.sh` were not run. They expect a court-level folder with `court.json` and `rules.md`; this doc-type folder is in the one-folder-per-doc-type layout the brief sets, and the brief forbids editing `tools/`.
 11. **Lead counsel line** is a rule-driven addition the exemplar does not have (see the rules table).
 12. **Outside the template:** the corporate disclosure (L.R. 87), the civil cover sheet, the summons, and the redaction check (L.R. 5.4) are the filer's separate steps.
-13. **Exemplar PDF not in the folder.** Only `exemplars/SOURCE.md` is committed. The 2026-10-14 overlay was run with the PDF fetched from the URL in SOURCE.md (21 pages, "Filed 06/15/21" header checked) and passed as the third argument of `tools/overlay.sh`, not saved in the repo.
+13. **Exemplar PDF not in the folder.** Only `usage/SOURCE.md` is committed. The 2026-10-14 overlay was run with the PDF fetched from the URL in SOURCE.md (21 pages, "Filed 06/15/21" header checked) and passed as the third argument of `tools/overlay.sh`, not saved in the repo.
 
 ## Engines
 
-`typst/` is the reference. The docx engine is `docx/` (`reference.docx` for the styles, page setup and footers; `gamd-complaint.lua` for the cover, caption, allegations, prayer and signature block). Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/middle-district/complaint samples/INPUT-solen-complaint.md` writes `samples/OUTPUT-solen-complaint.docx` and `samples/OUTPUT-solen-complaint.docx.pdf` (LibreOffice 26.8 converts; EB Garamond from `fonts/` must be installed for LibreOffice, see `docs/FONTS.md`).
+`typst/` is the reference. The docx engine is `docx/` (`reference.docx` for the styles, page setup and footers; `gamd-complaint.lua` for the cover, caption, allegations, prayer and signature block). Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/middle-district/complaint usage/INPUT-gamd-complaint-solen.md` writes `usage/OUTPUT-gamd-complaint-solen.docx` and `usage/OUTPUT-gamd-complaint-solen.docx.pdf` (LibreOffice 26.8 converts; EB Garamond from `fonts/` must be installed for LibreOffice, see `docs/FONTS.md`).
 
 | Layout | docx | Note |
 |---|---|---|
@@ -109,6 +109,6 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/comp
 | Signature block | "Respectfully submitted the ..." at left, firm and signers at 3 in, lead counsel and address flush left | Matches typst on page 10. |
 | Page number | Centred 12 pt on every page, page 1 included | `PAGE` field. |
 
-- **Pages reviewed:** all 10 pages of `OUTPUT-solen-complaint.docx.pdf` were rendered at 60 dpi and compared with the typst output page by page (side-by-side). Page breaks fall where the typst output's do on all 10 pages.
+- **Pages reviewed:** all 10 pages of `OUTPUT-gamd-complaint-solen.docx.pdf` were rendered at 60 dpi and compared with the typst output page by page (side-by-side). Page breaks fall where the typst output's do on all 10 pages.
 - **Checks:** `tools/check.sh --engine docx` was not run; the folder is a doc-type folder without `court.json` (see gap 10). The docx is not BLOCKED on any tier-1 point in this list. Not verified: opening the `.docx` in Microsoft Word (no Word here). LibreOffice converts it without error; no GUI repair prompt was checked.
 - **Pagination:** Word may still break lines differently (`docs/DOCX.md`).

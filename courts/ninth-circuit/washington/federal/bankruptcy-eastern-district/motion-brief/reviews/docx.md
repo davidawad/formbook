@@ -1,6 +1,6 @@
 # waeb motion-brief: docx review (2026-10-15)
 
-Rendered: `samples/OUTPUT-1min-motion-to-dismiss-memorandum.docx.pdf` (14 pages, LibreOffice 26.8, EB Garamond only). Every page rasterized at 60 dpi and viewed. Typst reference pages were viewed too (`/work/artifacts/waeb/motion-brief/typst-1min-NN.png`).
+Rendered: `usage/OUTPUT-1min-motion-to-dismiss-memorandum.docx.pdf` (14 pages, LibreOffice 26.8, EB Garamond only). Every page rasterized at 60 dpi and viewed. Typst reference pages were viewed too (`/work/artifacts/waeb/motion-brief/typst-1min-NN.png`).
 
 ## sample 1min-motion-to-dismiss-memorandum docx
 

@@ -4,13 +4,13 @@ Doc type: **adversary complaint** (FRBP 7001 adversary proceeding, filed by a pl
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-riske-dempster-25-04038-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-riske-dempster.md` (the whole complaint, pages 3 to 8 of the exemplar; the Form 104 cover sheet is not transcribed) |
-| render | ok: `samples/OUTPUT-riske-dempster.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-riske-dempster.pdf` and `samples/OVERLAY-riske-dempster.txt` (page map) |
+| exemplar | yes: `usage/SAMPLE-moeb-adversary-complaint-riskedempster2504038.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-moeb-adversary-complaint-riskedempster.md` (the whole complaint, pages 3 to 8 of the exemplar; the Form 104 cover sheet is not transcribed) |
+| render | ok: `usage/OUTPUT-moeb-adversary-complaint-riskedempster.typst.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-riske-dempster.pdf` and `usage/OVERLAY-riske-dempster.txt` (page map) |
 | pages reviewed | 6 of 6 (every page rendered at 60 dpi and viewed; see the review table) |
 
-File names: the sample is `INPUT-riske-dempster.md`, so `tools/render.sh` and `tools/overlay.sh` produce `OUTPUT-riske-dempster.pdf` and `OVERLAY-riske-dempster.{pdf,txt}`. These are the repo's file-role names (CLAUDE.md), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief; the tools fix them.
+File names: the sample is `INPUT-moeb-adversary-complaint-riskedempster.md`, so `tools/render.sh` and `tools/overlay.sh` produce `OUTPUT-moeb-adversary-complaint-riskedempster.typst.pdf` and `OVERLAY-riske-dempster.{pdf,txt}`. These are the repo's file-role names (CLAUDE.md), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief; the tools fix them.
 
 ## Governing rules
 
@@ -58,13 +58,13 @@ Not produced (separate filings, or the court's own forms): Adversary Proceeding 
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env, see below)
-sh tools/render.sh courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district/adversary-complaint samples/INPUT-riske-dempster.md
+sh tools/render.sh courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district/adversary-complaint usage/INPUT-moeb-adversary-complaint-riskedempster.md
 sh tools/overlay.sh courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district/adversary-complaint riske-dempster
 ```
 
 Toolchain: `micromamba create -p ~/tb -c conda-forge typst=0.15.0 poppler imagemagick gawk jq` (the box has no root and no typst). `typst --version` → 0.15.0.
 
-Overlay page map (`samples/OVERLAY-riske-dempster.txt`): ours p.1 ↔ filed p.3 (70.4%), p.2 ↔ p.4 (66.0%), p.3 ↔ p.5 (63.8%), p.4 ↔ p.6 (66.3%), p.5 ↔ p.7 (67.4%), p.6 ↔ p.8 (69.1%). The pairing is by word overlap (coarse); the exemplar's cover sheet (filed pages 1 and 2) has no counterpart in our render, so the offset is the cover sheet. The overlay is a diagnostic, not a score.
+Overlay page map (`usage/OVERLAY-riske-dempster.txt`): ours p.1 ↔ filed p.3 (70.4%), p.2 ↔ p.4 (66.0%), p.3 ↔ p.5 (63.8%), p.4 ↔ p.6 (66.3%), p.5 ↔ p.7 (67.4%), p.6 ↔ p.8 (69.1%). The pairing is by word overlap (coarse); the exemplar's cover sheet (filed pages 1 and 2) has no counterpart in our render, so the offset is the cover sheet. The overlay is a diagnostic, not a score.
 
 ## Gate 2: visual review (every page, rendered at 60 dpi and viewed)
 
@@ -100,10 +100,10 @@ Three engines from one markdown contract. typst is the primary template and is u
 
 | Engine | Folder | Output for `riske-dempster` | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `samples/OUTPUT-riske-dempster.pdf` (not in the snapshot; `tools/render.sh`) | unchanged |
-| docx | `docx/` | `samples/OUTPUT-riske-dempster.docx`, `samples/OUTPUT-riske-dempster.docx.pdf` | rendered by LibreOffice; all 6 pages rendered at 60 dpi and viewed |
+| typst (primary) | `typst/` | `usage/OUTPUT-moeb-adversary-complaint-riskedempster.typst.pdf` (not in the snapshot; `tools/render.sh`) | unchanged |
+| docx | `docx/` | `usage/OUTPUT-moeb-adversary-complaint-riskedempster.docx`, `usage/OUTPUT-moeb-adversary-complaint-riskedempster.docx.pdf` | rendered by LibreOffice; all 6 pages rendered at 60 dpi and viewed |
 
-Build: `sh docx/make-reference.sh <absolute path>/docx/reference.docx` rebuilds the reference (pandoc's default reference, edited for the court's form). `sh tools/render.sh --engine docx <court-dir> samples/INPUT-riske-dempster.md` writes the `.docx` and the LibreOffice PDF. `docx/moeb-adversary-complaint.lua` builds the caption table, the numbered paragraphs, the consent sentence, the signature block and the certificate (if the sample has one).
+Build: `sh docx/make-reference.sh <absolute path>/docx/reference.docx` rebuilds the reference (pandoc's default reference, edited for the court's form). `sh tools/render.sh --engine docx <court-dir> usage/INPUT-moeb-adversary-complaint-riskedempster.md` writes the `.docx` and the LibreOffice PDF. `docx/moeb-adversary-complaint.lua` builds the caption table, the numbered paragraphs, the consent sentence, the signature block and the certificate (if the sample has one).
 
 LibreOffice here is 26.8.1, unpacked from the document-foundation Linux tarball (conda-forge has no LibreOffice). The vendored EB Garamond is installed for the user running LibreOffice (`docs/DOCX.md`), so the PDF embeds only EB Garamond.
 
@@ -127,4 +127,4 @@ LibreOffice here is 26.8.1, unpacked from the document-foundation Linux tarball 
 
 **docx BLOCKED items:** none for the layout. The gate runner (`tools/check.sh --engine docx`) is not run: this court folder has no `rules.md`, `checks.yaml` or `reviews/` yet, so MOEB-AC-001 to 010 are checked by hand on the docx PDF, not by the gate. BLOCKED: gate runner, gates 0 to 3 on docx, no `checks.yaml` in the court folder yet.
 
-**Source issue (not changed):** `samples/INPUT-riske-dempster.md` writes "11 U.S.C § 550" (no period after "C") in the Count III WHEREFORE clause. Both engines reproduce it as written.
+**Source issue (not changed):** `usage/INPUT-moeb-adversary-complaint-riskedempster.md` writes "11 U.S.C § 550" (no period after "C") in the Count III WHEREFORE clause. Both engines reproduce it as written.

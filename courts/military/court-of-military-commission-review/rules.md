@@ -12,11 +12,11 @@ Access note: `www.mc.mil` returns HTTP 403 to this box. The rules and the new ex
 |---|---|---|
 | CMCR-R | Rules of Practice for the United States Court of Military Commission Review, revised February 3, 2016 (Administrative Order 16-01), "Email Addresses Updated on December 13, 2022" (87 pp.) | https://www.mc.mil/Portals/0/pdfs/CMCR%20Rules%20of%20Practice%20(Feb%203%202016)(email%20addresses%20updated%20Dec%2013%202022).pdf (read from https://web.archive.org/web/20241204021914/https://www.mc.mil/Portals/0/pdfs/CMCR%20Rules%20of%20Practice%20(Feb%203%202016)(email%20addresses%20updated%20Dec%2013%202022).pdf?ver=qH2lpeZzOUhleG1xnx0oOA%3d%3d) |
 | APP-1 | CMCR-R Appendix 1, "Format for Brief on Behalf of (Appellant) (Appellee)" ("This Appendix is from Appendix 1 of the ACCA Rules") | same PDF |
-| EX-HICKS-OB | Brief on behalf of appellant, *Hicks v. United States*, CMCR No. 13-004 (Center for Constitutional Rights; detailed defense counsel), 2013 | `opening-brief/exemplars/` |
-| EX-NASHIRI | Brief on behalf of appellant (the United States), *United States v. al Nashiri*, U.S.C.M.C.R. No. 14-001 (Office of the Chief Prosecutor), 2014 | `opening-brief/exemplars/` |
-| EX-QOSI | Brief on behalf of appellant, *United States v. al Qosi*, USCMCR No. 17-001 (Military Commissions Defense Organization), 2017 | `opening-brief/exemplars/` |
-| EX-HICKS-GOV | Brief of the United States on the court's lack of authority, *Hicks*, CMCR No. 13-004 (Office of the Chief Prosecutor) | `answering-brief/exemplars/` |
-| EX-HICKS-ANS | Answer brief re jurisdiction, *Hicks*, CMCR No. 13-004 (appellant's counsel) | `answering-brief/exemplars/` |
+| EX-HICKS-OB | Brief on behalf of appellant, *Hicks v. United States*, CMCR No. 13-004 (Center for Constitutional Rights; detailed defense counsel), 2013 | `opening-brief/usage/` |
+| EX-NASHIRI | Brief on behalf of appellant (the United States), *United States v. al Nashiri*, U.S.C.M.C.R. No. 14-001 (Office of the Chief Prosecutor), 2014 | `opening-brief/usage/` |
+| EX-QOSI | Brief on behalf of appellant, *United States v. al Qosi*, USCMCR No. 17-001 (Military Commissions Defense Organization), 2017 | `opening-brief/usage/` |
+| EX-HICKS-GOV | Brief of the United States on the court's lack of authority, *Hicks*, CMCR No. 13-004 (Office of the Chief Prosecutor) | `answering-brief/usage/` |
+| EX-HICKS-ANS | Answer brief re jurisdiction, *Hicks*, CMCR No. 13-004 (appellant's counsel) | `answering-brief/usage/` |
 
 Kinds: **M** = mandated by a CMCR rule. **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

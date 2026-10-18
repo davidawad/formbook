@@ -1,14 +1,14 @@
 # Court of Appeals for the Sixth Circuit: answering brief (appellee's brief)
 
-Folder: `courts/sixth-circuit/court-of-appeals/answering-brief/`. Status: **template and one sample; not a complete tier-1/tier-2 pass** (see Known gaps). This is a standalone doc-type folder; the court root's `typst/` and `samples/` are not touched.
+Folder: `courts/sixth-circuit/court-of-appeals/answering-brief/`. Status: **template and one sample; not a complete tier-1/tier-2 pass** (see Known gaps). This is a standalone doc-type folder; the court root's `typst/` and `usage/` are not touched.
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-bruneau-23-1761-answering-brief.pdf` | The filed exemplar: Brief of Defendants-Appellees Midland County and Gladwin County, 6th Cir. No. 23-1761, Doc. 40, filed 2024-01-31. 56 pp., text layer present. |
-| `exemplars/SOURCE.md` | Where it came from, who filed it, and the errors seen in it. |
-| `samples/INPUT-bruneau-answering-brief.md` | Markdown transcription (a portion, see its header). Markdown contract below. |
-| `samples/OUTPUT-bruneau-answering-brief.pdf` | Render of the sample: 14 pages. |
-| `samples/OVERLAY-bruneau-answering-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). Page map below. |
+| `usage/SAMPLE-ca6-answering-brief-bruneau231761.pdf` | The filed exemplar: Brief of Defendants-Appellees Midland County and Gladwin County, 6th Cir. No. 23-1761, Doc. 40, filed 2024-01-31. 56 pp., text layer present. |
+| `usage/SOURCE.md` | Where it came from, who filed it, and the errors seen in it. |
+| `usage/INPUT-ca6-answering-brief-bruneau.md` | Markdown transcription (a portion, see its header). Markdown contract below. |
+| `usage/OUTPUT-ca6-answering-brief-bruneau.typst.pdf` | Render of the sample: 14 pages. |
+| `usage/OVERLAY-bruneau-answering-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). Page map below. |
 | `typst/main.typ` | Entry point. Reads `--input sample=...`, splits frontmatter, calls the template. |
 | `typst/ca6-answering-brief.typ` | The template `ca6-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or cites a rule. |
 
@@ -16,7 +16,7 @@ Build (from the repo root; the same commands for any sample):
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
-sh tools/render.sh courts/sixth-circuit/court-of-appeals/answering-brief samples/INPUT-bruneau-answering-brief.md
+sh tools/render.sh courts/sixth-circuit/court-of-appeals/answering-brief usage/INPUT-ca6-answering-brief-bruneau.md
 sh tools/overlay.sh courts/sixth-circuit/court-of-appeals/answering-brief bruneau-answering-brief
 ```
 
@@ -60,7 +60,7 @@ Same contract as the ca9 `README.extra.md`, with these differences:
 - No `related_cases`, `limit`, `manual_image_words`, or Form 8 keys (Ninth Circuit only).
 - Body, citations (`[text](toa:key)`), footnotes, block quotations, lists, escaping: as in the ca9 contract.
 
-## Overlay (`samples/OVERLAY-bruneau-answering-brief.pdf`)
+## Overlay (`usage/OVERLAY-bruneau-answering-brief.pdf`)
 
 Red = our render, blue = the filed exemplar, black = both. The map (`-overlay.txt`) pairs each sample page with the exemplar page sharing the most words. The sample is a portion, and some paragraphs are condensed, so body pages overlap only partly (word overlap 22-56%); the cover, disclosure, TOC and certificate pages overlap more (cover 92%, conclusion 81%). Read the overlay for layout (margins, cover, TOC position, heading placement) and not for text identity.
 
@@ -98,7 +98,7 @@ Word count: the certificate reports 1,146 words (the template's count of the sam
 
 ## Exemplar errors noted (the sample does not carry them)
 
-Listed in `exemplars/SOURCE.md`: the 2023 signature date, the "359895" Krieger docket in one cite, the Baird entry in the TOA, and OCR damage in the text layer.
+Listed in `usage/SOURCE.md`: the 2023 signature date, the "359895" Krieger docket in one cite, the Baird entry in the TOA, and OCR damage in the text layer.
 
 ## Engines
 
@@ -106,7 +106,7 @@ Same rules and numbers as the typst template (the reference). **latex** (`latex/
 
 ## Verification pass 2026-10-16 (fb-595.26.6)
 
-- Re-rendered `samples/OUTPUT-bruneau-answering-brief.pdf` with `tools/render.sh` (exit 0, no typst warnings): 14 pages, the same count as the committed render; before the fixes below its text was identical to the committed PDF (not stale). Overlay rerun: same page map as before (cover 92%, conclusion 81%, body 22–56%).
+- Re-rendered `usage/OUTPUT-ca6-answering-brief-bruneau.typst.pdf` with `tools/render.sh` (exit 0, no typst warnings): 14 pages, the same count as the committed render; before the fixes below its text was identical to the committed PDF (not stale). Overlay rerun: same page map as before (cover 92%, conclusion 81%, body 22–56%).
 - All 14 pages viewed at 60 dpi (pages 12–14 again after the fixes); the 14 overlay pages viewed at 40 dpi, and overlay page 1 (cover against the filed cover) at 150 dpi.
 - Fixed:
   - p. 7 (certificate of compliance), tier 1: the word count included the Statement in Support of Oral Argument, which FRAP 32(f) excludes. A top-level section whose heading names oral argument is now left out of the count: 1,199 became 1,146.

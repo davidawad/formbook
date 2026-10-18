@@ -5,10 +5,10 @@ Folder: `courts/eleventh-circuit/alabama/federal/middle-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: two filed motion memoranda from different filers, `exemplars/FILED-EXAMPLE-nutrien-1-25-cv-00302-motion-brief.pdf` and `exemplars/FILED-EXAMPLE-beasley-allen-2-24-cv-00582-motion-brief.pdf` (see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-nutrien-motion-brief.md`: an excerpt of the Nutrien brief (caption, introduction, procedural history, standard of review, Argument I and II through the block quotation, then the conclusion, signature, of-counsel block and certificate of service). Sections III and IV are omitted and marked in the sample |
-| render | ok: `samples/OUTPUT-nutrien-motion-brief.pdf`, 10 pages, `tools/render.sh` exit 0, no typst warnings, embedded fonts EB Garamond only |
-| overlay | ok: `samples/OVERLAY-nutrien-motion-brief.pdf` and `samples/OVERLAY-nutrien-motion-brief.txt` (against the Nutrien exemplar) |
+| exemplar | yes: two filed motion memoranda from different filers, `usage/SAMPLE-almd-motion-brief-nutrien125cv00302.pdf` and `usage/SAMPLE-almd-motion-brief-beasleyallen224cv00582.pdf` (see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-almd-motion-brief-nutrien.md`: an excerpt of the Nutrien brief (caption, introduction, procedural history, standard of review, Argument I and II through the block quotation, then the conclusion, signature, of-counsel block and certificate of service). Sections III and IV are omitted and marked in the sample |
+| render | ok: `usage/OUTPUT-almd-motion-brief-nutrien.typst.pdf`, 10 pages, `tools/render.sh` exit 0, no typst warnings, embedded fonts EB Garamond only |
+| overlay | ok: `usage/OVERLAY-nutrien-motion-brief.pdf` and `usage/OVERLAY-nutrien-motion-brief.txt` (against the Nutrien exemplar) |
 | pages reviewed | 10 of 10: every page rendered at 60 dpi and viewed after the last template change |
 
 File names follow the repo's tools and `CLAUDE.md` file roles (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.md` names in the brief, because `tools/render.sh` and `tools/overlay.sh` read and write those names.
@@ -52,16 +52,16 @@ Mechanical checks: none in this folder. The only check run is an ad hoc word com
 
 The Beasley Allen memorandum was measured (line pitch, type size, text layer) but not overlaid and not compared page by page. Its only contribution is the type-size convention. The caption, heading and certificate conventions rest on the Nutrien filing alone, together with the two complaint captions in the sibling folder. That is one filer for these checks, and it is stated here rather than hidden.
 
-Overlay (`samples/OVERLAY-nutrien-motion-brief.pdf`): pages 1 to 8 pair with exemplar pages 1 to 8 (71% to 97% word overlap). Pages 9 and 10 pair with exemplar page 29 (the conclusion and certificate), because the excerpt omits Sections III and IV. The differences in pages 1 to 8 are flow and leading: tier 3.
+Overlay (`usage/OVERLAY-nutrien-motion-brief.pdf`): pages 1 to 8 pair with exemplar pages 1 to 8 (71% to 97% word overlap). Pages 9 and 10 pair with exemplar page 29 (the conclusion and certificate), because the excerpt omits Sections III and IV. The differences in pages 1 to 8 are flow and leading: tier 3.
 
 ## Engines
 
-- **typst** (primary): `typst/`, unchanged. Renders `samples/OUTPUT-nutrien-motion-brief.pdf` (10 pages).
-- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`), `docx/almd.lua`. Writes `samples/OUTPUT-nutrien-motion-brief.docx` from `samples/INPUT-nutrien-motion-brief.md`. Needs pandoc, unzip, zip, xmllint and perl on PATH, and EB Garamond installed where the file is opened.
+- **typst** (primary): `typst/`, unchanged. Renders `usage/OUTPUT-almd-motion-brief-nutrien.typst.pdf` (10 pages).
+- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`), `docx/almd.lua`. Writes `usage/OUTPUT-almd-motion-brief-nutrien.docx` from `usage/INPUT-almd-motion-brief-nutrien.md`. Needs pandoc, unzip, zip, xmllint and perl on PATH, and EB Garamond installed where the file is opened.
   - Matches the typst values, set in the reference and the filter: EB Garamond 14 pt; US Letter with 1-inch margins; body lines double-spaced at 32.2 pt exact, 0.5 in first-line indent, 23.1 pt between paragraphs; the title and the court title centered and bold; the FRCP 10(a) caption as a borderless three-column table (3.4 in, 0.15 in, 2.95 in) with "Case No.:"; headings: level 1 centered and bold, levels 2 and 3 flush left with a hanging half inch; a block quotation single-spaced and indented 0.5 in on both sides; the date line; the signature block; the "OF COUNSEL" block; the certificate of service; a centered page number in the footer.
   - Differs or unknown: none checked on a rendered page yet (see BLOCKED). Word and LibreOffice may break lines and pages differently from typst. The argument headings keep the typed "I." and "A." of the sample, as the typst template does. No table of contents or table of authorities is built (the sample has none); a brief that needs one needs a field or a written table, and this folder has neither yet.
   - Checked so far: the package unzips, every XML part is well formed, and the text reads back in order (`pandoc -f docx -t plain`), with the caption, the date line, the "OF COUNSEL" block and the certificate in place.
-  - BLOCKED: `BLOCKED: docx.pdf checks (Gates 0 to 3 on samples/OUTPUT-nutrien-motion-brief.docx.pdf): LibreOffice (soffice) cannot be installed on this box. conda-forge has no LibreOffice package, and apt needs root. So no .docx.pdf was made, no page was rendered to PNG, and tools/check.sh --engine docx cannot run. Pages reviewed: 0 of 10.` The .docx must still be opened in LibreOffice and Word, with the result recorded under `## sample nutrien-motion-brief docx` in a review file (none exists in this folder yet).
+  - BLOCKED: `BLOCKED: docx.pdf checks (Gates 0 to 3 on usage/OUTPUT-nutrien-motion-brief.docx.pdf): LibreOffice (soffice) cannot be installed on this box. conda-forge has no LibreOffice package, and apt needs root. So no .docx.pdf was made, no page was rendered to PNG, and tools/check.sh --engine docx cannot run. Pages reviewed: 0 of 10.` The .docx must still be opened in LibreOffice and Word, with the result recorded under `## sample nutrien-motion-brief docx` in a review file (none exists in this folder yet).
 
 ## Known gaps
 

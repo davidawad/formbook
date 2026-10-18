@@ -5,11 +5,11 @@ Folder: `courts/tenth-circuit/utah/federal/district/complaint/`. Self-contained:
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-fastre-1-26-cv-00060-complaint.pdf` (15 pages, text layer; `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-fastre-complaint.md` (abridged transcription of the exemplar, see Known gaps) |
-| render | ok: `samples/OUTPUT-fastre-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/SAMPLE-utd-complaint-fastre126cv00060.pdf` (15 pages, text layer; `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-utd-complaint-fastre.md` (abridged transcription of the exemplar, see Known gaps) |
+| render | ok: `usage/OUTPUT-utd-complaint-fastre.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | typeface | face required: **none** (DUCivR 10-1(3) names no typeface; checked against the December 2023 text, 2026-10-15). Substitute: none needed. Font: **EB Garamond** kept (`docs/FONTS.md`: a court naming no face keeps EB Garamond). Not metric-compatible with any Times; not applicable here. |
-| overlay | ok: `samples/OVERLAY-fastre-complaint.pdf` and `samples/OVERLAY-fastre-complaint.txt` (`tools/overlay.sh`, exemplar passed as the third argument: see Render and overlay) |
+| overlay | ok: `usage/OVERLAY-fastre-complaint.pdf` and `usage/OVERLAY-fastre-complaint.txt` (`tools/overlay.sh`, exemplar passed as the third argument: see Render and overlay) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-15 in the fonts pass, no change to the template) |
 
 File names. The brief names outputs `<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh`, `tools/overlay.sh` and the court-folder convention (`CLAUDE.md`) name them `INPUT-<id>.md` → `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`. The tools were used as they are; `<id>` is `fastre-complaint`.
@@ -54,11 +54,11 @@ Not produced by this template (separate filings or documents, not part of the co
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/tenth-circuit/utah/federal/district/complaint samples/INPUT-fastre-complaint.md
+sh tools/render.sh courts/tenth-circuit/utah/federal/district/complaint usage/INPUT-utd-complaint-fastre.md
 sh tools/overlay.sh courts/tenth-circuit/utah/federal/district/complaint fastre-complaint /path/to/exemplar.pdf
 ```
 
-The exemplar PDF is not in the checkout (only `exemplars/SOURCE.md` is). On 2026-10-15 the overlay ran against the RECAP copy at the SOURCE.md URL, fetched to a temp directory and passed as the third argument; its page count (15) matches the SOURCE.md. Without the argument, `overlay.sh` looks for `exemplars/*.pdf`.
+The exemplar PDF is not in the checkout (only `usage/SOURCE.md` is). On 2026-10-15 the overlay ran against the RECAP copy at the SOURCE.md URL, fetched to a temp directory and passed as the third argument; its page count (15) matches the SOURCE.md. Without the argument, `overlay.sh` looks for `usage/*.pdf`.
 
 `OVERLAY-fastre-complaint.pdf` is the red/blue test: red = our render, blue = the filed exemplar, black = both. `OVERLAY-fastre-complaint.txt` is the page map. `overlay.sh` pairs each render page with the exemplar page that shares the most words (its page map is coarse, see below). The overlay is a diagnostic, not a score.
 
@@ -83,7 +83,7 @@ Pages reviewed: 9 of 9.
 ## Known gaps and open choices
 
 1. **Abridged sample.** The sample transcribes exemplar ¶¶ 1–53, the first cause of action's heading and ¶¶ 52–53, the prayer and the jury demand. Omitted: exemplar ¶¶ 54–105 (the rest of the Monell count, the individual-liability count against the jail staff, and the detail of ¶¶ 54–85). The render is 9 pages against the exemplar's 15, within the 8–14 target.
-2. **One exemplar.** Tier 2 asks for two or three filers. Alternates were found and recorded in `exemplars/SOURCE.md` (Keller v. Danford, The Preserve v. Kamas City, Owen v. State of Utah Legislative Services). Not run as a second-filer comparison.
+2. **One exemplar.** Tier 2 asks for two or three filers. Alternates were found and recorded in `usage/SOURCE.md` (Keller v. Danford, The Preserve v. Kamas City, Owen v. State of Utah Legislative Services). Not run as a second-filer comparison.
 3. **Typeface.** DUCivR 10-1(3) names no typeface (checked 2026-10-15), so `docs/FONTS.md` keeps the template on EB Garamond, at 13 pt so that the visible size is close to Times 12 pt. The filed exemplar embeds TimesNewRoman (and Arial); that is one filer's choice that the rule leaves open, not a requirement. Whether the clerk convention is Times (which would mean Liberation Serif, the metric-compatible substitute in `fonts/`) is a question for David.
 4. **Type size.** 13 pt is a style choice above the 12-point minimum. The complaint template has no footnote styling and the sample has no footnotes, so the footnote minimum (DUCivR 10-1(3)) is not tested. If a footnote is added, check that it renders at 12 pt or larger.
 5. **Caption separator.** The template inserts "v." between sides; the exemplar uses "vs.". Utah filings use both; the template keeps one form.
@@ -96,12 +96,12 @@ Pages reviewed: 9 of 9.
 
 ## Engines
 
-**docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` (pandoc's reference with the styles, footer and section of `typst/utd-complaint.typ`), and the filter `docx/utd-complaint.lua` (cover with counsel block and caption table, numbering of the allegations, numbered prayer items, signature block). `sh tools/render.sh --engine docx <folder> samples/INPUT-fastre-complaint.md` writes `samples/OUTPUT-fastre-complaint.docx`.
+**docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` (pandoc's reference with the styles, footer and section of `typst/utd-complaint.typ`), and the filter `docx/utd-complaint.lua` (cover with counsel block and caption table, numbering of the allegations, numbered prayer items, signature block). `sh tools/render.sh --engine docx <folder> usage/INPUT-utd-complaint-fastre.md` writes `usage/OUTPUT-utd-complaint-fastre.docx`.
 
 - Matches the typst form: Letter; top margin 1 1/2 in, others 1 in; EB Garamond 13 pt; exact 26 pt line spacing for body text; first-line indent 0.5 in; numbered allegations 1 to 53 (none under the Prayer or Jury Demand headings); headings centred bold capitals (level 1) and centred bold (level 2), left bold (level 3); centred page number on every page; caption table with the rule at the right and bottom; "JURY DEMANDED" under the title; signature block.
 - Differs: the caption and signature are Word tables (border and row heights differ slightly between Word and LibreOffice); allegation numbers are typed text, not a list field (they do not renumber when a paragraph is inserted by hand); the spacing between the number and the text is a tab stop, not the typst gap.
 - Checked on the box: the .docx is a zip whose 17 XML parts are well-formed (`ziptool` + `xmllint`, because `unzip` is not installed).
-- BLOCKED, docx.pdf (Gates 0 to 3 on `samples/OUTPUT-fastre-complaint.docx.pdf`): `soffice` is not installed on this box and cannot be installed here (no conda-forge package, no root), so no LibreOffice PDF was made and `tools/check.sh --engine docx` cannot run.
+- BLOCKED, docx.pdf (Gates 0 to 3 on `usage/OUTPUT-fastre-complaint.docx.pdf`): `soffice` is not installed on this box and cannot be installed here (no conda-forge package, no root), so no LibreOffice PDF was made and `tools/check.sh --engine docx` cannot run.
 - BLOCKED, `tools/render.sh --engine docx` exits 1: the zip-integrity step runs `unzip -tq`, and `unzip` (and `zip`) are not installed on this box. The .docx is written before that step; the render stops there.
 - BLOCKED, visual review of the .docx pages: 0 of 9 pages reviewed (`pages_reviewed=0`); the pages cannot be rendered without LibreOffice. The typst pages were reviewed at 60 dpi (9 of 9) as the reference.
 - Not checked: that the file opens in Word or LibreOffice without a repair prompt (no Word, no LibreOffice on the box).

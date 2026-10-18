@@ -1,10 +1,10 @@
 # Eighth Circuit BAP (bap8): reply brief
 
-- Court: `bap8`, United States Bankruptcy Appellate Panel for the Eighth Circuit (`courts/eighth-circuit/bankruptcy-appellate-panel/`). Court-root `typst/` and `samples/` are untouched.
+- Court: `bap8`, United States Bankruptcy Appellate Panel for the Eighth Circuit (`courts/eighth-circuit/bankruptcy-appellate-panel/`). Court-root `typst/` and `usage/` are untouched.
 - Doc type: `reply-brief`. Appellant's reply brief, FRBP 8014(c).
-- **Exemplar: BLOCKED: no exemplar.** No public filed reply brief from this court was found after four passes (about 40 searches and probes; pass 4 on 2026-10-16 used the new route that found the answering-brief exemplar: BAP dockets are in RECAP under court id `ca8`). The searches are listed in `exemplars/SOURCE.md`. Nothing is stored in `exemplars/`.
-- Sample: still the synthetic rule-check sample `samples/INPUT-synthetic-reply-brief.md` (placeholder text, not a filing). Its first caption side now sets `v: false` (see Template changes).
-- Render: ok, `samples/OUTPUT-synthetic-reply-brief.pdf`, 9 pages, typst with no warnings (2026-10-16). `pdffonts`: EB Garamond only.
+- **Exemplar: BLOCKED: no exemplar.** No public filed reply brief from this court was found after four passes (about 40 searches and probes; pass 4 on 2026-10-16 used the new route that found the answering-brief exemplar: BAP dockets are in RECAP under court id `ca8`). The searches are listed in `usage/SOURCE.md`. Nothing is stored in `usage/`.
+- Sample: still the synthetic rule-check sample `usage/INPUT-bap8-reply-brief-synthetic.md` (placeholder text, not a filing). Its first caption side now sets `v: false` (see Template changes).
+- Render: ok, `usage/OUTPUT-bap8-reply-brief-synthetic.typst.pdf`, 9 pages, typst with no warnings (2026-10-16). `pdffonts`: EB Garamond only.
 - Overlay: fail. `sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief synthetic-reply-brief` exits 1, "no exemplar pdf" (2026-10-16).
 - Pages reviewed: 9 of 9 (2026-10-16).
 - Status: rule-driven template plus a synthetic sample. `court.json` untouched; `status` not set.
@@ -20,9 +20,9 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `bap8-brief`. |
 | `typst/bap8-reply-brief.typ` | Template. Parameter block at the top: `doc-kind`, `word-limit` (6,500), `required-sections` (none beyond the tables), `needs-standard-of-review = false`. |
-| `samples/INPUT-synthetic-reply-brief.md` | Markdown contract sample. Placeholder prose and counsel; not a transcription of any filing. |
-| `exemplars/SOURCE.md` | Blocked exemplar search log. |
-| Render output | `sh tools/render.sh courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief samples/INPUT-synthetic-reply-brief.md` writes `samples/OUTPUT-synthetic-reply-brief.pdf`; rendered 2026-10-14 (ok, 9 pages, no typst warnings). |
+| `usage/INPUT-bap8-reply-brief-synthetic.md` | Markdown contract sample. Placeholder prose and counsel; not a transcription of any filing. |
+| `usage/SOURCE.md` | Blocked exemplar search log. |
+| Render output | `sh tools/render.sh courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief usage/INPUT-bap8-reply-brief-synthetic.md` writes `usage/OUTPUT-bap8-reply-brief-synthetic.typst.pdf`; rendered 2026-10-14 (ok, 9 pages, no typst warnings). |
 
 ## Markdown contract (frontmatter)
 
@@ -79,6 +79,6 @@ Run 2026-10-16: exits 1 ("no exemplar pdf"). No `OVERLAY-` file is written. Stat
 
 ## Engines
 
-**docx** (`docx/`). `samples/OUTPUT-synthetic-reply-brief.docx` and `.docx.pdf` were built on 2026-10-15 and are **stale**: they predate this run's sample and template change (the docx still prints "v." after the In re line and lacks the 8014A(b)(1) lead sentence). Not rebuilt: `soffice` (LibreOffice) is not on this box. The docx build (`front.jq`, `brief.lua`) also does not know the new fields `appeal_title`, `caption[].v`, `preliminary`. BLOCKED: docx re-render (no LibreOffice here); docx front matter must be brought up to the typst template.
+**docx** (`docx/`). `usage/OUTPUT-bap8-reply-brief-synthetic.docx` and `.docx.pdf` were built on 2026-10-15 and are **stale**: they predate this run's sample and template change (the docx still prints "v." after the In re line and lacks the 8014A(b)(1) lead sentence). Not rebuilt: `soffice` (LibreOffice) is not on this box. The docx build (`front.jq`, `brief.lua`) also does not know the new fields `appeal_title`, `caption[].v`, `preliminary`. BLOCKED: docx re-render (no LibreOffice here); docx front matter must be brought up to the typst template.
 
 **latex**: none in this folder.

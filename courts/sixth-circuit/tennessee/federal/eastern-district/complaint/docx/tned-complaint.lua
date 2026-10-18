@@ -1,4 +1,4 @@
--- E.D. Tenn. complaint, DOCX engine (docs/DOCX.md): the markdown contract of samples/INPUT-<id>.md -> Word.
+-- E.D. Tenn. complaint, DOCX engine (docs/DOCX.md): the markdown contract of usage/INPUT-<id>.md -> Word.
 -- Mirrors typst/tned-complaint.typ: court title (with the division when the filing names one), caption
 -- (parties left with right and bottom rules; case number, and the title right), the lead-in, numbered
 -- paragraphs (Fed. R. Civ. P. 10(b)), lettered items (a), (b), ... for lists, WHEREFORE lead-ins unnumbered,

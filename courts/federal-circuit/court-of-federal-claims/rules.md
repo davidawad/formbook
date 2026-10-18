@@ -11,11 +11,11 @@ Re-check cadence: re-check annually each August 1 (the court's rule amendments t
 | RCFC | Rules of the United States Court of Federal Claims, "As amended through July 27, 2026" (PDF; ModDate 2026-10-08; sha256 `943733526f5391cad22562adf31411148fecfb03f01ae7bcf8bd6ec051a0c971`). Page numbers below are the printed page numbers. Read in full for the rules cited. Copy read: the live court URL fetched with the WebFetch tool on 2026-10-17 (plain `curl` from this box gets HTTP 404 from every uscfc.uscourts.gov page); cached outside the repo at `/work/artifacts/rules-cache/uscfc/rules-10.08.26.pdf`. | https://www.uscfc.uscourts.gov/sites/cfc/files/Rules%2010.08.26.pdf |
 | APP-C | RCFC Appendix C, "Procedure in Procurement Protest Cases Pursuant to 28 U.S.C. § 1491(b)" (in the RCFC PDF above) | same |
 | APP-E | RCFC Appendix E, "Electronic Filing Procedures", pp. 160-164 (in the RCFC PDF above) | same |
-| EX-DB | Complaint, *Design Build, LLC v. United States*, No. 26-1361 C (Watt, Tieder, Hoffar & Fitzgerald) | `complaint/exemplars/` |
-| EX-MTA | Complaint, *Metropolitan Transportation Authority v. United States*, No. 26-422 C (Kaplan Martin LLP) | `complaint/exemplars/` |
-| EX-OFN | Complaint for Relief, *Opportunity Finance Network v. United States*, No. 26-1324 C (Jenner & Block LLP) | `complaint/exemplars/` |
-| EX-ORACLE | Motion and Memorandum for Judgment on the Administrative Record, *Oracle America, Inc. v. United States*, No. 18-1880C, bid protest (Arnold & Porter Kaye Scholer LLP). Memorandum pages are scanned images. | `motion-brief/exemplars/` |
-| EX-US | Defendant's Motion to Dismiss and in the Alternative Motion to Strike, *Sublime Systems, Inc. v. United States*, No. 26-458 (U.S. Department of Justice, Commercial Litigation Branch) | `motion-brief/exemplars/` |
+| EX-DB | Complaint, *Design Build, LLC v. United States*, No. 26-1361 C (Watt, Tieder, Hoffar & Fitzgerald) | `complaint/usage/` |
+| EX-MTA | Complaint, *Metropolitan Transportation Authority v. United States*, No. 26-422 C (Kaplan Martin LLP) | `complaint/usage/` |
+| EX-OFN | Complaint for Relief, *Opportunity Finance Network v. United States*, No. 26-1324 C (Jenner & Block LLP) | `complaint/usage/` |
+| EX-ORACLE | Motion and Memorandum for Judgment on the Administrative Record, *Oracle America, Inc. v. United States*, No. 18-1880C, bid protest (Arnold & Porter Kaye Scholer LLP). Memorandum pages are scanned images. | `motion-brief/usage/` |
+| EX-US | Defendant's Motion to Dismiss and in the Alternative Motion to Strike, *Sublime Systems, Inc. v. United States*, No. 26-458 (U.S. Department of Justice, Commercial Litigation Branch) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule of this court (RCFC or one of its appendices). **C** = convention (the rules leave it open; taken from the exemplars, with the filers that show it). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

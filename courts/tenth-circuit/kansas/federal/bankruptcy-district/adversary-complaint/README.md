@@ -2,8 +2,8 @@
 
 - Court: `ksb`, United States Bankruptcy Court for the District of Kansas (`courts/tenth-circuit/kansas/federal/bankruptcy-district/`)
 - Doc type: `adversary-complaint`. Complaint commencing an adversary proceeding under FRBP Part VII. One self-contained folder.
-- Exemplar: `exemplars/FILED-EXAMPLE-rebein-sandy-road-farms-25-07014-adversary-complaint.pdf` (*Rebein v. Panhandle Eastern Pipe Line Company, LP*, Adv. No. 25-07014, filed 2025-04-09, 13 pages, Chapter 7 trustee's complaint). Provenance, search trail and caveats in `exemplars/SOURCE.md`. The file was re-downloaded from its URL on 2026-10-14.
-- Sample: `samples/INPUT-rebein-sandy-road-farms.md`, a transcription of the filed complaint (caption, counsel block, introduction, jurisdiction, Counts I to III with prayers, signature block, Exhibit A). The exemplar's Exhibit B (demand letter) and ECF header and footer are not transcribed.
+- Exemplar: `usage/SAMPLE-ksb-adversary-complaint-rebeinsandyroadfarms2507014.pdf` (*Rebein v. Panhandle Eastern Pipe Line Company, LP*, Adv. No. 25-07014, filed 2025-04-09, 13 pages, Chapter 7 trustee's complaint). Provenance, search trail and caveats in `usage/SOURCE.md`. The file was re-downloaded from its URL on 2026-10-14.
+- Sample: `usage/INPUT-ksb-adversary-complaint-rebeinsandyroadfarms.md`, a transcription of the filed complaint (caption, counsel block, introduction, jurisdiction, Counts I to III with prayers, signature block, Exhibit A). The exemplar's Exhibit B (demand letter) and ECF header and footer are not transcribed.
 - Status: template complete, rendered, overlaid, and every page reviewed (below). `court.json` untouched.
 
 ## Files
@@ -12,10 +12,10 @@
 |---|---|
 | `typst/main.typ` | Entry point. Reads `--input sample=...` and calls `ksb-adversary-complaint`. |
 | `typst/ksb-adversary-complaint.typ` | Template. Parameter block at the top (type, spacing, margins, indents). Metadata checks at the top of `ksb-adversary-complaint`. |
-| `samples/INPUT-rebein-sandy-road-farms.md` | Markdown contract sample: YAML frontmatter, then the body. |
-| `samples/OUTPUT-rebein-sandy-road-farms.pdf` | `sh tools/render.sh courts/tenth-circuit/kansas/federal/bankruptcy-district/adversary-complaint samples/INPUT-rebein-sandy-road-farms.md` (10 pages, no typst warnings). |
-| `samples/OVERLAY-rebein-sandy-road-farms.pdf`, `.txt` | `sh tools/overlay.sh courts/tenth-circuit/kansas/federal/bankruptcy-district/adversary-complaint rebein-sandy-road-farms` (red = ours, blue = filed, black = agree; page map in the `.txt`). |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-ksb-adversary-complaint-rebeinsandyroadfarms.md` | Markdown contract sample: YAML frontmatter, then the body. |
+| `usage/OUTPUT-ksb-adversary-complaint-rebeinsandyroadfarms.typst.pdf` | `sh tools/render.sh courts/tenth-circuit/kansas/federal/bankruptcy-district/adversary-complaint usage/INPUT-ksb-adversary-complaint-rebeinsandyroadfarms.md` (10 pages, no typst warnings). |
+| `usage/OVERLAY-rebein-sandy-road-farms.pdf`, `.txt` | `sh tools/overlay.sh courts/tenth-circuit/kansas/federal/bankruptcy-district/adversary-complaint rebein-sandy-road-farms` (red = ours, blue = filed, black = agree; page map in the `.txt`). |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
 ### Frontmatter contract (sample metadata)
 
@@ -50,7 +50,7 @@ Requirement IDs used in `ksb-adversary-complaint.typ`:
 
 ## Overlay
 
-`samples/OVERLAY-rebein-sandy-road-farms.pdf` (10 pages, one per page of our render) puts our render (red) over the best-matching page of the filed complaint (blue). Pages are paired by word overlap, not index.
+`usage/OVERLAY-rebein-sandy-road-farms.pdf` (10 pages, one per page of our render) puts our render (red) over the best-matching page of the filed complaint (blue). Pages are paired by word overlap, not index.
 
 - Pairings (word overlap, from the `.txt` map): ours p.1 ↔ filed p.1 (58%), p.2 ↔ p.2 (49%), p.3 ↔ p.2 (58%), p.4 ↔ p.3 (72%), p.5 ↔ p.4 (43%), p.6 ↔ p.4 (62%), p.7 ↔ p.5 (89%), p.8 ↔ p.6 (81%), p.9 ↔ p.7 (76%), p.10 ↔ p.7 (67%). Pairing by word overlap is only a locator; it does not show that the layouts match.
 - Visible differences: the blue layer carries the ECF header and footer (`Case 25-07014 Doc# 1 Filed 04/09/25 Page n of 13`), and the filed text is a different serif, so lines wrap at different words and the red and blue text do not coincide. Our paragraphs have no space between them; the filed complaint leaves a blank line between paragraphs. See page review.
@@ -58,7 +58,7 @@ Requirement IDs used in `ksb-adversary-complaint.typ`:
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-rebein-sandy-road-farms.pdf` was rendered at 70 dpi and viewed (10 of 10). Typst printed no warnings. Fonts: EB Garamond only. The "Compared with" column gives the overlay pairing. Filed pages were viewed as images only for overlay p.1 and filed p.4.
+Every page of `OUTPUT-ksb-adversary-complaint-rebeinsandyroadfarms.typst.pdf` was rendered at 70 dpi and viewed (10 of 10). Typst printed no warnings. Fonts: EB Garamond only. The "Compared with" column gives the overlay pairing. Filed pages were viewed as images only for overlay p.1 and filed p.4.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -77,7 +77,7 @@ Tier-2 findings (ACCEPTED): the paragraph spacing (pp. 4-5), and the Exhibit A c
 
 ## Known gaps
 
-1. **One exemplar.** Tier 2 wants two or three filers; only the Rebein complaint is in `exemplars/`. Paragraph spacing and the choice of a 16 pt serif are judged from this one filing only.
+1. **One exemplar.** Tier 2 wants two or three filers; only the Rebein complaint is in `usage/`. Paragraph spacing and the choice of a 16 pt serif are judged from this one filing only.
 2. **No cover sheet.** The Adversary Proceeding Cover Sheet (Form B1040, LBR 7003.1(a)) is a separate filing and is not produced.
 3. **Exhibits.** The filed Exhibit B (demand letter) is not transcribed. Exhibit A is transcribed as a table only.
 4. **ECF header and footer** (`Case … Doc# 1 Filed … Page n of 13`) and the scanned return-receipt card are not transcribed. The template prints no ECF footer.
@@ -88,7 +88,7 @@ Tier-2 findings (ACCEPTED): the paragraph spacing (pp. 4-5), and the Exhibit A c
 
 ## Engines
 
-**docx** (`docx/build-reference.sh` makes `docx/reference.docx`; `docx/ksb.lua` builds the cover, caption, signature block, numbered allegations and exhibit table). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-rebein-sandy-road-farms.md`. The `.docx.pdf` is 10 pages, the typst output is 10 pages; every page was rasterized at 60 dpi and compared.
+**docx** (`docx/build-reference.sh` makes `docx/reference.docx`; `docx/ksb.lua` builds the cover, caption, signature block, numbered allegations and exhibit table). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-ksb-adversary-complaint-rebeinsandyroadfarms.md`. The `.docx.pdf` is 10 pages, the typst output is 10 pages; every page was rasterized at 60 dpi and compared.
 
 - Matches typst: EB Garamond 16 pt, exact 32 pt double pitch, 1 in margins, 0.5 in first-line indent, numbered allegations (number at 0.5 in, text at 1 in, one count across headings), centered caps headings, the caption with its vertical rule, the signature block on the right half, the borderless exhibit table with a repeated header, the centered page number, and the page break before Exhibit A.
 - Differs (tier 2, noted, not chased): (a) typst prints the caption party names in bold (its `show table.cell.where(y: 0)` also bolds the caption row); the docx keeps them regular, which no rule requires. (b) Typst sets no space between paragraphs, so the docx's double-spaced paragraph boundaries are one line taller; line breaks fall at different words. (c) The docx turns off widow control and keeps headings with the next paragraph; with widow control on, LibreOffice moved a heading and its paragraph to the next page and the count became 11 against typst's 10. (d) Exhibit A column widths are set to match the typst wrap, so the table is about 6.4 in wide against typst's 6.3 in.

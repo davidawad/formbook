@@ -5,11 +5,11 @@ Folder: `courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/moti
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-swain-landing-25-10013-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-swain-landing.md`: the whole 7-page motion and memorandum transcribed, plus the notice of motion and fill-in lines the rule requires and the exemplar lacks (gap 1) |
+| exemplar | yes: `usage/SAMPLE-dcb-motion-brief-swainlanding2510013.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-dcb-motion-brief-swainlanding.md`: the whole 7-page motion and memorandum transcribed, plus the notice of motion and fill-in lines the rule requires and the exemplar lacks (gap 1) |
 | typeface | face required: none (LBR and FRBP checked, see gap 2). Font: EB Garamond (`docs/FONTS.md`: "no face named" row) |
-| render | ok: `samples/OUTPUT-swain-landing.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Bold, Italic, BoldItalic, all embedded), no warnings; re-rendered 2026-10-15 |
-| overlay | ok: `samples/OVERLAY-swain-landing.pdf` and `OVERLAY-swain-landing.txt` (re-run 2026-10-15 against `exemplars/FILED-EXAMPLE-swain-landing-25-10013-motion-brief.pdf`) |
+| render | ok: `usage/OUTPUT-dcb-motion-brief-swainlanding.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Bold, Italic, BoldItalic, all embedded), no warnings; re-rendered 2026-10-15 |
+| overlay | ok: `usage/OVERLAY-swain-landing.pdf` and `OVERLAY-swain-landing.txt` (re-run 2026-10-15 against `usage/SAMPLE-dcb-motion-brief-swainlanding2510013.pdf`) |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi to PNG and viewed, 2026-10-15) |
 | check gates | not run: `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this is a doc-type folder, and `tools/` is out of scope for this box |
 
@@ -17,7 +17,7 @@ File names: as in `adversary-complaint/README.md`, the tools' default names are 
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/motion-brief samples/INPUT-swain-landing.md
+sh tools/render.sh courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/motion-brief usage/INPUT-dcb-motion-brief-swainlanding.md
 sh tools/overlay.sh courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/motion-brief swain-landing
 ```
 
@@ -55,7 +55,7 @@ Not produced: a proposed order, the Exhibit A referred to in the motion (the Fin
 1. **Notice of motion (LBR 9013-1(c)).** The filed exemplar has no notice of motion, no objection deadline and no hearing, although the rule requires one for a motion in an adversary proceeding unless it is filed with a contemporaneous motion under LBR 9013-2. The template generates the notice; the sample leaves the response deadline and the hearing blank (the fill-in lines print as underscores), because the exemplar gives no date and the sample must not invent one. The notice's wording is not Official Form B 420A: it has not been checked against that form. A filer should use the form itself.
 2. **Typeface and size.** As in the complaint README (gap 2), checked 2026-10-15 against the court's LBR PDF: no rule names a typeface or point size, so the template keeps EB Garamond at 12 pt (`docs/FONTS.md`: a court that names no face keeps EB Garamond). The exemplar is Times New Roman, 12 pt. Switching to Liberation Serif is a choice for David, not a rule requirement.
 3. **One exemplar only.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The CourtListener API search (`type=r&court=dcb`, query "motion to dismiss" adversary) turned up Engelhorn (25-10044), Developer RE1 (25-10037), JPK NewCo (25-10015, entry 20, not checked) and Anglin Consulting (25-10032, entry 43, no PDF). None of those was checked for text and none was saved. The web search for a D.C. Bankruptcy motion found the court's local rules and general orders, not a filing. A second filer is needed for tier 2.
-4. **Caption number.** The exemplar's caption says "Adversary No. 18-00173 MMH" but the ECF header says "Case 25-10013-ELG". The sample keeps the caption number as printed, and records the ECF number in `exemplars/SOURCE.md`.
+4. **Caption number.** The exemplar's caption says "Adversary No. 18-00173 MMH" but the ECF header says "Case 25-10013-ELG". The sample keeps the caption number as printed, and records the ECF number in `usage/SOURCE.md`.
 5. **Certificate of service wording.** The exemplar's certificate says "Motion and Memorandum in Support of Debtor's Motion to Dismiss", which does not match the filer's own motion. The template's certificate says "the foregoing", so the sample's certificate differs from the exemplar's words on purpose.
 6. **Typed numbering and typos.** The exemplar types its own heading numbers (I., A., 1.), so the template does not number headings. The transcription keeps the filer's wording and typos ("recission", "Similarly state law rescission", "§548(a)(B)(i)", "failure to state a Claim"). Italics for case names are not in the text layer, so the sample is roman (the template italicises `*...*` markup where the sample uses it).
 7. **Overlay.** The sample is the whole motion, so the overlay pairs pages one-to-one (ours p.1 to p.7 with filed p.1 to p.7). The overlay is a diagnostic, not a score.
@@ -78,13 +78,13 @@ Gate 2 rows for these pages are recorded here, not in `reviews/`: this doc type 
 
 Typst is the primary engine (`typst/`). The docx engine (`docx/`) is built here; there is no latex engine for this doc type.
 
-| Engine | Folder | `samples/` output | Status |
+| Engine | Folder | `usage/` output | Status |
 |---|---|---|---|
-| typst | `typst/` | `OUTPUT-swain-landing.pdf` (rendered, not committed) | primary; not changed by the docx work |
-| docx | `docx/` | `OUTPUT-swain-landing.docx` (committed); `.docx.pdf` is a LibreOffice render, kept out of the tree | built; 8 pages against typst's 7; see below |
+| typst | `typst/` | `OUTPUT-dcb-motion-brief-swainlanding.typst.pdf` (rendered, not committed) | primary; not changed by the docx work |
+| docx | `docx/` | `OUTPUT-dcb-motion-brief-swainlanding.docx` (committed); `.docx.pdf` is a LibreOffice render, kept out of the tree | built; 8 pages against typst's 7; see below |
 | latex | none | none | not built |
 
-**docx.** `docx/reference.docx` is generated by `docx/make-reference.sh` (pandoc's default reference, restyled: EB Garamond 12 pt; body double-spaced at 27.6 pt; single lines at 13.2 pt; headings with 13.8 pt above and below; 1-inch margins; a centred PAGE field in the footer). `docx/dcb-motion-brief.lua` writes the cover (counsel block, court title, the caption as a borderless table, the title, the bordered notice of motion), the signature block and the certificate of service from the frontmatter. The body is pandoc's: headings, paragraphs and block quotations (Word's Block Text style). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-swain-landing.md <out>.docx.pdf` (the `.docx` is written beside the PDF path).
+**docx.** `docx/reference.docx` is generated by `docx/make-reference.sh` (pandoc's default reference, restyled: EB Garamond 12 pt; body double-spaced at 27.6 pt; single lines at 13.2 pt; headings with 13.8 pt above and below; 1-inch margins; a centred PAGE field in the footer). `docx/dcb-motion-brief.lua` writes the cover (counsel block, court title, the caption as a borderless table, the title, the bordered notice of motion), the signature block and the certificate of service from the frontmatter. The body is pandoc's: headings, paragraphs and block quotations (Word's Block Text style). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-dcb-motion-brief-swainlanding.md <out>.docx.pdf` (the `.docx` is written beside the PDF path).
 
 What matches the typst render (every page of the docx PDF rendered at 60 dpi and viewed beside the typst page, 2026-10-15):
 
@@ -100,6 +100,6 @@ What differs:
 - **Baselines.** LibreOffice puts double-spaced baselines 2 to 3 pt lower than Typst does. The cover gaps are set from measured baselines (comments in `cover()`).
 - **Word.** Not run. The file was opened in LibreOffice 26.8.1 without a repair prompt. Word may paginate slightly differently (`docs/DOCX.md`).
 
-Not run and BLOCKED: `tools/check.sh --engine docx` (Gates 0 to 3). It needs a court folder with `checks.yaml`, `reviews/` and `rules.md`; this doc-type folder has none, and the change does not create them. No check ID was run. Nothing is stamped (`samples/.check-docx.txt` is not written).
+Not run and BLOCKED: `tools/check.sh --engine docx` (Gates 0 to 3). It needs a court folder with `checks.yaml`, `reviews/` and `rules.md`; this doc-type folder has none, and the change does not create them. No check ID was run. Nothing is stamped (`usage/.check-docx.txt` is not written).
 
 Toolchain used for the LibreOffice render: the official LibreOffice 26.8.1 Linux build (documentfoundation.org), with X11 and pango libraries from conda-forge, and the vendored `fonts/eb-garamond` installed in the user's font directory so that LibreOffice finds it.

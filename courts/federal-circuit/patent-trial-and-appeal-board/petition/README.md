@@ -2,24 +2,24 @@
 
 Doc type `petition` of court `ptab` (Patent Trial and Appeal Board, `courts/federal-circuit/patent-trial-and-appeal-board/`). Self-contained: this folder holds the rules, exemplars, sample, template and review for this doc type only.
 
-**Status: rendered (render=ok), overlaid (overlay=ok), all 14 pages reviewed. Tier 2 is still open.** The rules require 14-point Times New Roman (37 C.F.R. § 42.6(a)(2)(ii)). Times New Roman is not vendored; the template uses Liberation Serif, the vendored metric-compatible stand-in (gap 1). Both filed exemplars are present and their source records are in `exemplars/SOURCE.md`. Tier 2 compares against the two exemplars; the open items are in the review below.
+**Status: rendered (render=ok), overlaid (overlay=ok), all 14 pages reviewed. Tier 2 is still open.** The rules require 14-point Times New Roman (37 C.F.R. § 42.6(a)(2)(ii)). Times New Roman is not vendored; the template uses Liberation Serif, the vendored metric-compatible stand-in (gap 1). Both filed exemplars are present and their source records are in `usage/SOURCE.md`. Tier 2 compares against the two exemplars; the open items are in the review below.
 
 ```sh
-sh tools/render.sh courts/federal-circuit/patent-trial-and-appeal-board/petition samples/INPUT-salesforce-ipr.md   # -> samples/OUTPUT-salesforce-ipr.pdf
+sh tools/render.sh courts/federal-circuit/patent-trial-and-appeal-board/petition usage/INPUT-ptab-petition-salesforceipr.md   # -> usage/OUTPUT-ptab-petition-salesforceipr.typst.pdf
 sh tools/overlay.sh courts/federal-circuit/patent-trial-and-appeal-board/petition salesforce-ipr \
-  courts/federal-circuit/patent-trial-and-appeal-board/petition/exemplars/FILED-EXAMPLE-salesforce-wsou-IPR2022-00154-petition.pdf
-# -> samples/OVERLAY-salesforce-ipr.pdf and .txt
+  courts/federal-circuit/patent-trial-and-appeal-board/petition/usage/SAMPLE-ptab-petition-salesforcewsouipr202200154.pdf
+# -> usage/OVERLAY-salesforce-ipr.pdf and .txt
 ```
 
-The overlay's default exemplar is the first `exemplars/*.pdf` in name order, which is the Huawei copy. The sample is transcribed from the Salesforce copy, so pass that exemplar as the third argument.
+The overlay's default exemplar is the first `usage/*.pdf` in name order, which is the Huawei copy. The sample is transcribed from the Salesforce copy, so pass that exemplar as the third argument.
 
 The tools name outputs `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (the court-wide convention in `docs/EVAL-LOOP.md`), not `<id>.pdf`; this folder follows the tools.
 
 | Item | Status |
 |---|---|
 | exemplar | yes: two filed petitions from two filers (Salesforce, Huawei) |
-| render | ok: `samples/OUTPUT-salesforce-ipr.pdf`, 14 pages, Liberation Serif embedded, no typst warnings |
-| overlay | ok: `samples/OVERLAY-salesforce-ipr.pdf` and `.txt`, against the Salesforce exemplar |
+| render | ok: `usage/OUTPUT-ptab-petition-salesforceipr.typst.pdf`, 14 pages, Liberation Serif embedded, no typst warnings |
+| overlay | ok: `usage/OVERLAY-salesforce-ipr.pdf` and `.txt`, against the Salesforce exemplar |
 | pages reviewed | 14 (every page of the render viewed as PNG at 70 dpi) |
 | typeface | face required: Times New Roman, 14-pt (§ 42.6(a)(2)(ii)) → vendored substitute: `Liberation Serif` (`fonts/liberation-serif`, metric-compatible, per `docs/FONTS.md`) → embedded: LiberationSerif only (`pdffonts`) |
 
@@ -27,10 +27,10 @@ The tools name outputs `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (the court-wide 
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-salesforce-wsou-IPR2022-00154-petition.pdf` | Filed petition, Salesforce v. WSOU (IPR2022-00154). Used for the sample and the overlay. |
-| `exemplars/FILED-EXAMPLE-huawei-wsou-IPR2021-00689-petition.pdf` | Filed petition, Huawei v. WSOU (IPR2021-00689). Second filer, for tier-2 comparison. |
-| `exemplars/SOURCE.md` | URL, case, filer, date, date fetched, search record for both. |
-| `samples/INPUT-salesforce-ipr.md` | Markdown transcription of the Salesforce petition: cover data, introduction, mandatory notices, requirements, relief, overview, POSITA, claim construction, prior art, conclusion. About 2,100 words. |
+| `usage/SAMPLE-ptab-petition-salesforcewsouipr202200154.pdf` | Filed petition, Salesforce v. WSOU (IPR2022-00154). Used for the sample and the overlay. |
+| `usage/SAMPLE-ptab-petition-huaweiwsouipr202100689.pdf` | Filed petition, Huawei v. WSOU (IPR2021-00689). Second filer, for tier-2 comparison. |
+| `usage/SOURCE.md` | URL, case, filer, date, date fetched, search record for both. |
+| `usage/INPUT-ptab-petition-salesforceipr.md` | Markdown transcription of the Salesforce petition: cover data, introduction, mandatory notices, requirements, relief, overview, POSITA, claim construction, prior art, conclusion. About 2,100 words. |
 | `typst/main.typ` | Entry point; reads the sample and its YAML frontmatter. |
 | `typst/ptab-petition.typ` | Template: `petition(meta, body)`. Content-agnostic; every number traces to a rule (`PTAB-PET-…` IDs below). |
 
@@ -76,7 +76,7 @@ Body: `# Heading` is a level-1 section (numbered I., II. …, centered, capitals
 
 ## Review (Gate 2 equivalent, recorded)
 
-Rendered `samples/OUTPUT-salesforce-ipr.pdf` (14 pages: cover, contents i, body 1–10, word-count certificate, certificate of service) and viewed every page as PNG (70 dpi). Checked: page size, margins, double spacing, indents of paragraphs and of the claim quotation, heading styles and numbering, the bullet counsel list, running header, signature block, the conclusion kept with its signature block, and both certificates. No tier-1 layout defect found.
+Rendered `usage/OUTPUT-ptab-petition-salesforceipr.typst.pdf` (14 pages: cover, contents i, body 1–10, word-count certificate, certificate of service) and viewed every page as PNG (70 dpi). Checked: page size, margins, double spacing, indents of paragraphs and of the claim quotation, heading styles and numbering, the bullet counsel list, running header, signature block, the conclusion kept with its signature block, and both certificates. No tier-1 layout defect found.
 
 Calibration (unchanged from the earlier draft): baseline pitch with Liberation Serif at 14 pt is 9.17 pt + `par.leading`; double spacing is `double-leading` = 1.64 em (about 32 pt pitch), which the render measures.
 
@@ -89,7 +89,7 @@ Tier-2 findings, compared against the two filed petitions (both are the same doc
 
 ## Overlay
 
-`samples/OVERLAY-salesforce-ipr.pdf` prints our render in red over the Salesforce exemplar in blue (black where both agree). Pages are paired by shared words; the pairing is in `samples/OVERLAY-salesforce-ipr.txt`. Our pages 1–12 pair with filed pp.2–26, and our pp.13–14 pair with filed pp.71–72 (the exemplar's certificates). Our cover (p.1) pairs with filed p.2, the exemplar's PTAB cover page; filed p.1 is the district-court "EXHIBIT A" slip sheet, so it has no counterpart. Word overlap is 29–93% per page; the low pages are the counsel list and the prior-art pages, where the transcription differs from the exemplar's layout. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-salesforce-ipr.pdf` prints our render in red over the Salesforce exemplar in blue (black where both agree). Pages are paired by shared words; the pairing is in `usage/OVERLAY-salesforce-ipr.txt`. Our pages 1–12 pair with filed pp.2–26, and our pp.13–14 pair with filed pp.71–72 (the exemplar's certificates). Our cover (p.1) pairs with filed p.2, the exemplar's PTAB cover page; filed p.1 is the district-court "EXHIBIT A" slip sheet, so it has no counterpart. Word overlap is 29–93% per page; the low pages are the counsel list and the prior-art pages, where the transcription differs from the exemplar's layout. The overlay is a diagnostic, not a score.
 
 ## Gaps
 
@@ -105,10 +105,10 @@ Tier-2 findings, compared against the two filed petitions (both are the same doc
 | Engine | Folder | State |
 |---|---|---|
 | typst (primary) | `typst/` | rendered and reviewed (above) |
-| docx | `docx/` | `.docx` built (`samples/OUTPUT-salesforce-ipr.docx`); `.docx.pdf` BLOCKED; no page reviewed |
+| docx | `docx/` | `.docx` built (`usage/OUTPUT-ptab-petition-salesforceipr.docx`); `.docx.pdf` BLOCKED; no page reviewed |
 | latex | none | not in this brief |
 
-Build: `sh docx/make-reference.sh docx/reference.docx` rebuilds the reference (committed). `sh tools/render.sh --engine docx courts/federal-circuit/patent-trial-and-appeal-board/petition samples/INPUT-salesforce-ipr.md` writes the `.docx`; its LibreOffice step needs `soffice`.
+Build: `sh docx/make-reference.sh docx/reference.docx` rebuilds the reference (committed). `sh tools/render.sh --engine docx courts/federal-circuit/patent-trial-and-appeal-board/petition usage/INPUT-ptab-petition-salesforceipr.md` writes the `.docx`; its LibreOffice step needs `soffice`.
 
 What matches typst (set in the XML; no rendered page has been seen yet):
 
@@ -130,7 +130,7 @@ What differs from typst:
 
 docx BLOCKED (list these in the PR):
 
-- Gates 0 to 3 on `samples/OUTPUT-salesforce-ipr.docx.pdf`: BLOCKED. The build box has no LibreOffice (`libreoffice` is not on conda-forge, and `soffice` is not installed). So there is no PDF, no stamp and no page review.
+- Gates 0 to 3 on `usage/OUTPUT-salesforce-ipr.docx.pdf`: BLOCKED. The build box has no LibreOffice (`libreoffice` is not on conda-forge, and `soffice` is not installed). So there is no PDF, no stamp and no page review.
 - Contents page numbers: BLOCKED. LibreOffice does not update TOC fields, so a PDF check cannot pass the contents until a renderer fills them.
 - Header and page-number placement on each body page: unverified (needs the PDF).
 - Opens in Word and LibreOffice without a repair prompt: not checked. Every XML part is well-formed (`xmllint`) and pandoc reads the file back, which is necessary, not sufficient (docs/DOCX.md).

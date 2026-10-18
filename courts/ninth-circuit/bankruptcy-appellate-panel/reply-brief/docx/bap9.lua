@@ -1,5 +1,5 @@
 -- Bankruptcy Appellate Panel of the Ninth Circuit, appellant's reply brief: DOCX engine (docs/DOCX.md).
--- The markdown contract (the frontmatter of samples/INPUT-*.md, as in typst/bap9-opening-brief.typ) becomes a Word
+-- The markdown contract (the frontmatter of usage/INPUT-*.md, as in typst/bap9-opening-brief.typ) becomes a Word
 -- document on docx/reference.docx. The cover, table of contents, table of authorities, signature block and
 -- certificates are built here from the frontmatter, in the custom styles of reference.docx; the body keeps its
 -- markdown structure. Sections: cover (no footer), front matter (lower roman, from i), body and certificates

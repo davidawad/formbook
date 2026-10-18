@@ -5,10 +5,10 @@ Folder: `courts/seventh-circuit/wisconsin/federal/eastern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-taylor-2-26-cv-01900-complaint.pdf` (13 pp., counsel-filed); second filer `FILED-EXAMPLE-testolin-2-26-cv-01895-complaint.pdf` (9 pp., pleading paper). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-taylor-complaint.md` (the whole filing, transcribed from the text layer) |
-| render | ok (re-run 2026-10-15): `samples/OUTPUT-taylor-complaint.pdf`, 11 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold only (embedded), no warnings |
-| overlay | fail (2026-10-15): `tools/overlay.sh` exits 1, `no exemplar pdf in exemplars/`. The filed PDFs are not in this snapshot (`exemplars/` holds `SOURCE.md` only). The earlier `OVERLAY-taylor-complaint.*` files are from a run with the PDFs present and are not regenerated |
+| exemplar | yes: `usage/SAMPLE-wied-complaint-taylor226cv01900.pdf` (13 pp., counsel-filed); second filer `SAMPLE-wied-complaint-testolin226cv01895.pdf` (9 pp., pleading paper). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-wied-complaint-taylor.md` (the whole filing, transcribed from the text layer) |
+| render | ok (re-run 2026-10-15): `usage/OUTPUT-wied-complaint-taylor.typst.pdf`, 11 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold only (embedded), no warnings |
+| overlay | fail (2026-10-15): `tools/overlay.sh` exits 1, `no exemplar pdf in usage/`. The filed PDFs are not in this snapshot (`usage/` holds `SOURCE.md` only). The earlier `OVERLAY-taylor-complaint.*` files are from a run with the PDFs present and are not regenerated |
 | pages reviewed | 11 of 11 (re-rendered 2026-10-15 and each page viewed at 60 dpi in montage) |
 
 ## Governing rules
@@ -65,7 +65,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 9. **Overlay pairing.** The Taylor exemplar and the render differ in pagination (the exemplar is 13 pages; ours is 11) because of the font, so the overlay pairs pages by word overlap, not index. The overlay is a diagnostic, not a score.
 10. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and a `rules.md` in the court directory. This doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review below is the Gate 2 equivalent for this doc type.
 
-## Review of the rendered pages (`samples/OUTPUT-taylor-complaint.pdf`, 11 pages)
+## Review of the rendered pages (`usage/OUTPUT-wied-complaint-taylor.typst.pdf`, 11 pages)
 
 Rendered at 60 dpi and viewed page by page after the last template change (paragraph spacing).
 
@@ -83,7 +83,7 @@ Rendered at 60 dpi and viewed page by page after the last template change (parag
 | 10 | Paragraphs 81 to 86, PRAYER FOR RELIEF, items A to F (lettered). | Pass. Prayer items are lettered; items are not numbered. |
 | 11 | Jury-demand paragraph (unnumbered), "Dated this 13th day of October, 2026.", firm, role, signature, contact block. | Pass. Signature block whole and in the right half of the page. Note 7 above. |
 
-Gate 2 rows, with the overlay: page-level word overlap is 27% (page 11) to 83% (page 5); see `samples/OVERLAY-taylor-complaint.txt`. The lowest pages are the signature page (no body text in the exemplar's matching page) and the mid-pages where the exemplar's pagination differs. Not a score.
+Gate 2 rows, with the overlay: page-level word overlap is 27% (page 11) to 83% (page 5); see `usage/OVERLAY-taylor-complaint.txt`. The lowest pages are the signature page (no body text in the exemplar's matching page) and the mid-pages where the exemplar's pagination differs. Not a score.
 
 ## Engines
 
@@ -92,4 +92,4 @@ Gate 2 rows, with the overlay: page-level word overlap is 27% (page 11) to 83% (
 - **Matches the typst form:** EB Garamond 12 pt body; exact 24 pt (double) line pitch; 0.5 in first-line indent; letter paper, 1 in margins; centered page number in the footer; centered bold caps for the title and section headings; centered bold count headings; caption as a borderless two-column table (3.25 in party column, 0.3 in gutter, case number right); "Dated this ..." and the signature block at a 3.0 in indent; numbered paragraphs from `#` headings, unnumbered under PRAYER and DEMAND; the prayer list lettered A., B., ... ; the lead-in unnumbered. All case text comes from the sample's frontmatter.
 - **Differs or unverified:** the numbers are typed by the filter (not Word list numbering), so a paragraph's number does not renumber if text is inserted in Word. The number-to-text gap is a tab to the next default tab stop, not the typst 0.3 in gap. Line breaks, page breaks and the vertical position of the cover, caption and signature block are not compared with the typst layout. The caption table's borders are set to none; not verified in Word or LibreOffice. Body font EB Garamond is named but not embedded; the machine that opens the file must have it.
 - **No TOC, TOA or certificate:** the typst template has none, so the docx has none.
-- **BLOCKED:** the LibreOffice PDF (`samples/OUTPUT-taylor-complaint.docx.pdf`) was not produced because `soffice` is not installed on this box (no conda package, no root). Gates 0 and 1 for docx cannot run. No page was rendered or reviewed (pages reviewed: 0). The docx was checked only as a zip with well-formed XML parts and by a pandoc text dump of its order.
+- **BLOCKED:** the LibreOffice PDF (`usage/OUTPUT-taylor-complaint.docx.pdf`) was not produced because `soffice` is not installed on this box (no conda package, no root). Gates 0 and 1 for docx cannot run. No page was rendered or reviewed (pages reviewed: 0). The docx was checked only as a zip with well-formed XML parts and by a pandoc text dump of its order.

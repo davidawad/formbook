@@ -4,8 +4,8 @@ Reviewer: the docx engine agent, 2026-10-15. Method: `pdftoppm -r 60`, every pag
 
 ## sample harbor-custom-complaint docx
 
-- PDF: `samples/OUTPUT-harbor-custom-complaint.docx.pdf`, sha256 `d1fda9b2d935dee8b9c676b826c7e53751367f1be202d7c40c26013801c6dae7`
-- DOCX: `samples/OUTPUT-harbor-custom-complaint.docx`, sha256 `fdb35d92ac8bc2d784a1aa234387bbf57bcf5b9e137d35f82694dbf9094d026e`
+- PDF: `usage/OUTPUT-harbor-custom-complaint.docx.pdf`, sha256 `d1fda9b2d935dee8b9c676b826c7e53751367f1be202d7c40c26013801c6dae7`
+- DOCX: `usage/OUTPUT-harbor-custom-complaint.docx`, sha256 `fdb35d92ac8bc2d784a1aa234387bbf57bcf5b9e137d35f82694dbf9094d026e`
 
 | page | verdict | note |
 |---|---|---|

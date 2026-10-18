@@ -5,10 +5,10 @@ Folder: `courts/fourth-circuit/west-virginia/federal/southern-district/motion-br
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-castro-2-23-cv-00598-motion-brief.pdf` (1 filer, a state party; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-castro-motion-brief.md` (a portion of the filing: caption, Introduction through Point III, Conclusion, signature; see Known gaps) |
-| render | ok: `samples/OUTPUT-castro-motion-brief.pdf`, 12 pages (caption page plus body numbered 1 to 11), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; the same page count and the same overlay map as before) |
-| overlay | ok: `samples/OVERLAY-castro-motion-brief.pdf` and `OVERLAY-castro-motion-brief.txt` (re-run 2026-10-14 against `exemplars/FILED-EXAMPLE-castro-2-23-cv-00598-motion-brief.pdf`, restored from the URL in `exemplars/SOURCE.md`; the file was missing from the snapshot, 24 pages, sha256 `e3906afa18128f556017c7baedc36c667ae7404a627c97864a9ba4dd0516b0ae`) |
+| exemplar | yes: `usage/SAMPLE-wvsd-motion-brief-castro223cv00598.pdf` (1 filer, a state party; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-wvsd-motion-brief-castro.md` (a portion of the filing: caption, Introduction through Point III, Conclusion, signature; see Known gaps) |
+| render | ok: `usage/OUTPUT-wvsd-motion-brief-castro.typst.pdf`, 12 pages (caption page plus body numbered 1 to 11), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; the same page count and the same overlay map as before) |
+| overlay | ok: `usage/OVERLAY-castro-motion-brief.pdf` and `OVERLAY-castro-motion-brief.txt` (re-run 2026-10-14 against `usage/SAMPLE-wvsd-motion-brief-castro223cv00598.pdf`, restored from the URL in `usage/SOURCE.md`; the file was missing from the snapshot, 24 pages, sha256 `e3906afa18128f556017c7baedc36c667ae7404a627c97864a9ba4dd0516b0ae`) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed on 2026-10-14) |
 
 File names: the tools write `OUTPUT-<id>.pdf` (render) and `OVERLAY-<id>.pdf/.txt` (overlay) by default, so those are the names used here. The brief's `<id>.pdf` and `<id>-overlay.pdf` names were not used, because `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf`.
@@ -56,7 +56,7 @@ The first render showed overlapping caption and counsel lines and paragraphs col
 
 ## Overlay (red = ours, blue = filed, black = both)
 
-`samples/OVERLAY-castro-motion-brief.pdf` pairs each sample page with the filed page sharing the most words: p.1 with filed p.3 (91.8%), p.2 with filed p.4 (86.0%), p.3 with p.5 (69.6%), p.4 with p.6 (52.6%), p.5 with p.8 (53.7%), p.6 with p.9 (67.1%), p.7 with p.10 (83.5%), p.8 with p.11 (76.1%), p.9 with p.12 (53.1%), p.10 with p.14 (50.4%), p.11 with p.15 (74.4%), p.12 with p.2 (30.0%). The pairing is by words, not position, so the low-overlap pages are where the sample's line breaks or omitted text differ from the filed page. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-castro-motion-brief.pdf` pairs each sample page with the filed page sharing the most words: p.1 with filed p.3 (91.8%), p.2 with filed p.4 (86.0%), p.3 with p.5 (69.6%), p.4 with p.6 (52.6%), p.5 with p.8 (53.7%), p.6 with p.9 (67.1%), p.7 with p.10 (83.5%), p.8 with p.11 (76.1%), p.9 with p.12 (53.1%), p.10 with p.14 (50.4%), p.11 with p.15 (74.4%), p.12 with p.2 (30.0%). The pairing is by words, not position, so the low-overlap pages are where the sample's line breaks or omitted text differ from the filed page. The overlay is a diagnostic, not a score.
 
 ## Known gaps and open choices
 

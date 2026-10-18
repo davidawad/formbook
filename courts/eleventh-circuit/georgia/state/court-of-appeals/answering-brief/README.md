@@ -1,15 +1,15 @@
 # Court of Appeals of Georgia (`gactapp`): appellee's brief (`answering-brief`)
 
-In Georgia this is the "Brief of Appellee" (Rule 25 (b)). Exemplar: **yes** (`exemplars/FILED-EXAMPLE-campbell-v-taylor-A26A1103-answering-brief.pdf`, Brief of Appellee in *Campbell v. Taylor*, No. A26A1103, filed March 11, 2026 by Hall Booth Smith, P.C.; source in `exemplars/SOURCE.md`). It answers the appellant's brief used as the `opening-brief` exemplar, filed by a different firm. The sample is a transcription of the whole brief.
+In Georgia this is the "Brief of Appellee" (Rule 25 (b)). Exemplar: **yes** (`usage/SAMPLE-gactapp-answering-brief-campbellvtaylora26a1103.pdf`, Brief of Appellee in *Campbell v. Taylor*, No. A26A1103, filed March 11, 2026 by Hall Booth Smith, P.C.; source in `usage/SOURCE.md`). It answers the appellant's brief used as the `opening-brief` exemplar, filed by a different firm. The sample is a transcription of the whole brief.
 
 ## Status of each output
 
 | Item | Result |
 |---|---|
-| `exemplars/` | 1 filed brief, text PDF, 11 pages (Century Schoolbook, court e-filing stamp on every page) |
-| `samples/INPUT-fictional-answering-brief.md` | transcription of the whole filed brief, both footnotes included. Id kept for the existing docx outputs |
-| render | ok: `samples/OUTPUT-fictional-answering-brief.pdf`, 10 pages, exit 0, no warnings, Liberation Serif embedded |
-| overlay | ok: `samples/OVERLAY-fictional-answering-brief.pdf` / `.txt` |
+| `usage/` | 1 filed brief, text PDF, 11 pages (Century Schoolbook, court e-filing stamp on every page) |
+| `usage/INPUT-gactapp-answering-brief-fictional.md` | transcription of the whole filed brief, both footnotes included. Id kept for the existing docx outputs |
+| render | ok: `usage/OUTPUT-gactapp-answering-brief-fictional.typst.pdf`, 10 pages, exit 0, no warnings, Liberation Serif embedded |
+| overlay | ok: `usage/OVERLAY-fictional-answering-brief.pdf` / `.txt` |
 | pages reviewed | 10 of 10 at 60 dpi, plus the 11 exemplar pages |
 
 ## Governing rules

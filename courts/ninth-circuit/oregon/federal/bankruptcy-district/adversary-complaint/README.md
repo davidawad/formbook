@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/oregon/federal/bankruptcy-district/adversary-compl
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-green-oregon-26-03055-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-green-oregon-complaint.md` (a portion of the 76-page filing; see Known gaps) |
-| render | ok: `samples/OUTPUT-green-oregon-complaint.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-green-oregon-complaint.pdf` and `OVERLAY-green-oregon-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-orb-adversary-complaint-greenoregon2603055.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-orb-adversary-complaint-greenoregoncomplaint.md` (a portion of the 76-page filing; see Known gaps) |
+| render | ok: `usage/OUTPUT-orb-adversary-complaint-greenoregoncomplaint.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-green-oregon-complaint.pdf` and `OVERLAY-green-oregon-complaint.txt` |
 | pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed; pages 2, 10, 11 also at 110 dpi after the layout fixes) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`), not the `<id>.md` names in the brief, because the tools read and write those names by default.
@@ -73,11 +73,11 @@ Not verified in this run: the text of FRBP 7001, 7003, 7004, 7008 (the sample qu
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (EB Garamond, exact 24 pt body lines, 13.8 pt single lines, letter with 1 in top and bottom and 0.75 in sides, "TITLE / Page N of M" footer); `docx/orb-complaint.lua` with `docx/orb-common.lua` writes the cover, the caption table, the numbered allegations, the lettered prayer and the signature block; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in capitals. Output: `samples/OUTPUT-green-oregon-complaint.docx` and `.docx.pdf` (LibreOffice 26.8.1), 14 pages, all 14 viewed at 60 dpi (review: `reviews/2026-10-15-docx.md`).
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (EB Garamond, exact 24 pt body lines, 13.8 pt single lines, letter with 1 in top and bottom and 0.75 in sides, "TITLE / Page N of M" footer); `docx/orb-complaint.lua` with `docx/orb-common.lua` writes the cover, the caption table, the numbered allegations, the lettered prayer and the signature block; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in capitals. Output: `usage/OUTPUT-orb-adversary-complaint-greenoregoncomplaint.docx` and `.docx.pdf` (LibreOffice 26.8.1), 14 pages, all 14 viewed at 60 dpi (review: `reviews/2026-10-15-docx.md`).
 
 - Matches the typst output: letter; margins; EB Garamond 12 pt with the headings at typst's default heading sizes (about 17 pt level 1, 14.5 pt level 2); body double-spaced; 0.5 in first-line indent; numbered allegations; the LBR 9004-2(c) caption with one ")" per party line; the counsel block and the court title; the footer; lettered prayer items A., B., ...; the date and the signature block 3 in from the left margin.
 - Differs from typst: the paragraph numbers are typed by the filter, not Word auto-numbering; the number of ")" marks is estimated from the width of each party line (Word does not report it to the filter), so it can be one line off for another party name; the number is followed by a tab to 1.0 in, typst's text starts about 0.1 in earlier. Pagination: LibreOffice puts 14 pages where typst puts 13; the typst reference runs its numbered paragraphs together (no paragraph break between allegations), which is also why it is shorter. The docx separates them.
 - Fonts: LibreOffice must see the vendored `fonts/` and no substitute. This box has no system EB Garamond, so run the conversion with a fontconfig file that lists only `/work/repo/fonts` (`FONTCONFIG_FILE=...`); without it LibreOffice substitutes silently.
 - Not verified in Word (LibreOffice only). The `.docx` is a valid zip of well-formed XML, and LibreOffice opens and converts it without a repair prompt.
 
-BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`; a doc-type folder has neither, so the script exits 2 (`jq` and `checks.yaml` errors, then `tools/check.sh: 82: arithmetic expression`). The gates did not run and `samples/.check-docx.txt` was not written.
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`; a doc-type folder has neither, so the script exits 2 (`jq` and `checks.yaml` errors, then `tools/check.sh: 82: arithmetic expression`). The gates did not run and `usage/.check-docx.txt` was not written.

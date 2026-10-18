@@ -2,12 +2,12 @@
 
 Court: United States Bankruptcy Court for the District of Delaware (`deb`). Path: `courts/third-circuit/delaware/federal/bankruptcy-district/motion-brief/`.
 
-**Status: typeface set (Times New Roman, via the vendored substitute Liberation Serif).** The render succeeds with zero typst warnings and every page (12) was reviewed. The overlay **did not run**: the exemplar PDF is not in `exemplars/` on this box (only `SOURCE.md`), so `OVERLAY-bumble-bee-motion-brief.pdf` was not regenerated and the `.txt` shown below is from the earlier EB Garamond render. See "Known gaps". The exemplar is a filed motion memorandum from this court, so the template is built for the adversary-proceeding motion route, not the main-case notice-of-motion route.
+**Status: typeface set (Times New Roman, via the vendored substitute Liberation Serif).** The render succeeds with zero typst warnings and every page (12) was reviewed. The overlay **did not run**: the exemplar PDF is not in `usage/` on this box (only `SOURCE.md`), so `OVERLAY-bumble-bee-motion-brief.pdf` was not regenerated and the `.txt` shown below is from the earlier EB Garamond render. See "Known gaps". The exemplar is a filed motion memorandum from this court, so the template is built for the adversary-proceeding motion route, not the main-case notice-of-motion route.
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-bumble-bee-trent-jason-19-51146-motion-brief.pdf`: Memorandum of Law in Support of Defendant's Motion to Dismiss the Complaint, Adv. Pro. No. 19-51146 (LSS), filed 02/17/2020 by Bumble Bee Foods, LLC. 14 pages. Source and search record: `exemplars/SOURCE.md`.
-- The sample transcribes the full memorandum (`samples/INPUT-bumble-bee-motion-brief.md`), including the cover and counsel block, the TOC and TOA sections, all argument headings, the block-quoted transcript, footnotes 1–7, the conclusion, and the signature.
+- `usage/SAMPLE-deb-motion-brief-bumblebeetrentjason1951146.pdf`: Memorandum of Law in Support of Defendant's Motion to Dismiss the Complaint, Adv. Pro. No. 19-51146 (LSS), filed 02/17/2020 by Bumble Bee Foods, LLC. 14 pages. Source and search record: `usage/SOURCE.md`.
+- The sample transcribes the full memorandum (`usage/INPUT-deb-motion-brief-bumblebee.md`), including the cover and counsel block, the TOC and TOA sections, all argument headings, the block-quoted transcript, footnotes 1–7, the conclusion, and the signature.
 
 ## Governing rules (verified 2026-10-14)
 
@@ -28,14 +28,14 @@ The local rules PDF was fetched through the fetch tool, which saved it locally; 
 ## Layout
 
 - `typst/main.typ` (entry point), `typst/deb-motion-brief.typ` (template). Parameters at the top of the template, each with its rule.
-- `samples/INPUT-bumble-bee-motion-brief.md`: frontmatter (caption, title, date, counsel, signature blocks) plus the body in markdown. Footnotes use markdown `[^n]`; headings: `#` centred section, `##` argument heading, `###` table of authorities (centred, kept out of the TOC).
-- `samples/OUTPUT-bumble-bee-motion-brief.pdf`: render (12 pages, Liberation Serif embedded; was 11 pages in EB Garamond). `samples/OVERLAY-bumble-bee-motion-brief.pdf` and `.txt`: overlay (not regenerated; see Overlay).
+- `usage/INPUT-deb-motion-brief-bumblebee.md`: frontmatter (caption, title, date, counsel, signature blocks) plus the body in markdown. Footnotes use markdown `[^n]`; headings: `#` centred section, `##` argument heading, `###` table of authorities (centred, kept out of the TOC).
+- `usage/OUTPUT-deb-motion-brief-bumblebee.typst.pdf`: render (12 pages, Liberation Serif embedded; was 11 pages in EB Garamond). `usage/OVERLAY-bumble-bee-motion-brief.pdf` and `.txt`: overlay (not regenerated; see Overlay).
 
-Naming: the brief asks for `samples/<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, and the overlay reads the `OUTPUT-` name. The tool names are used so the overlay runs unmodified.
+Naming: the brief asks for `usage/<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, and the overlay reads the `OUTPUT-` name. The tool names are used so the overlay runs unmodified.
 
 ## Overlay (red = ours, blue = filed; `OVERLAY-bumble-bee-motion-brief.txt`)
 
-**Not regenerated.** `tools/overlay.sh` exits 1 here: `exemplars/` has no `FILED-EXAMPLE-*.pdf` (only `SOURCE.md`), and the RECAP download in `SOURCE.md` returned an error page, not a PDF. The table below is from the earlier 11-page EB Garamond render and no longer matches `OUTPUT-bumble-bee-motion-brief.pdf`. Re-run `sh tools/overlay.sh` once the exemplar is in place.
+**Not regenerated.** `tools/overlay.sh` exits 1 here: `usage/` has no `SAMPLE-*.pdf` (only `SOURCE.md`), and the RECAP download in `SOURCE.md` returned an error page, not a PDF. The table below is from the earlier 11-page EB Garamond render and no longer matches `OUTPUT-deb-motion-brief-bumblebee.typst.pdf`. Re-run `sh tools/overlay.sh` once the exemplar is in place.
 
 Old page map (EB Garamond, 11 pages), our page to filed page, by word overlap:
 
@@ -69,7 +69,7 @@ Pages 1–11 as reviewed in the final render: cover (1), TOC (2), table of autho
 ## Known gaps
 
 - **Typeface: Times New Roman → Liberation Serif (visual and metric check).** LR 7007-2(a)(ii) names Times New Roman, set here through Liberation Serif, the metric-compatible substitute in `docs/FONTS.md`. Metric compatibility is the upstream claim, not checked on this box (no Times New Roman file). The page count rose from 11 to 12 with the change; the rule is the reason, not a defect.
-- **Overlay not run (exemplar missing).** See "Overlay". The exemplar PDF must be restored to `exemplars/` before the overlay can be regenerated.
+- **Overlay not run (exemplar missing).** See "Overlay". The exemplar PDF must be restored to `usage/` before the overlay can be regenerated.
 - **Counsel email (LR 7007-2(a)(i)).** The exemplar's cover has no email addresses, but the rule requires them. The template renders what the frontmatter gives, so a real filing sample must supply emails. The sample leaves them out because the exemplar does.
 - **TOC.** Generated from levels 1–2, so the TOA is not listed. LR 7007-2(b)(i)(A) asks for a TOC of the body's headings; the TOA heading is a section of its own and is left out. Minor.
 - **TOA.** Typed as text in the sample, not generated from citations. Citations and their page numbers are not checked by the template.
@@ -81,16 +81,16 @@ Pages 1–11 as reviewed in the final render: cover (1), TOC (2), table of autho
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference for the form. Rendered sample: `samples/OUTPUT-bumble-bee-motion-brief.pdf`.
+- **typst** (primary, `typst/`): the reference for the form. Rendered sample: `usage/OUTPUT-deb-motion-brief-bumblebee.typst.pdf`.
 - **latex**: not built (`latex/` is empty).
-- **docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default reference: Times New Roman 12 pt (LR 7007-2(a)(ii)), double spacing (Word "double", line 480 auto), 0.5 in first-line indent on body text, 1 in margins on letter paper, centered PAGE number in the footer, black bold headings (level 3 in capitals), 10 pt single footnotes, and the paragraph styles "Centered", "CenteredBody" and "Single". `docx/deb.lua` builds from the frontmatter the cover (court line, Form 416 caption, title, party designation, date and counsel), the table of contents, the body and the signature block. Build: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/deb.lua samples/INPUT-bumble-bee-motion-brief.md -o samples/OUTPUT-bumble-bee-motion-brief.docx`.
+- **docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default reference: Times New Roman 12 pt (LR 7007-2(a)(ii)), double spacing (Word "double", line 480 auto), 0.5 in first-line indent on body text, 1 in margins on letter paper, centered PAGE number in the footer, black bold headings (level 3 in capitals), 10 pt single footnotes, and the paragraph styles "Centered", "CenteredBody" and "Single". `docx/deb.lua` builds from the frontmatter the cover (court line, Form 416 caption, title, party designation, date and counsel), the table of contents, the body and the signature block. Build: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/deb.lua usage/INPUT-deb-motion-brief-bumblebee.md -o usage/OUTPUT-deb-motion-brief-bumblebee.docx`.
 - **docx: matches** the typst form: page size and margins, the face and size, the first-line indent, the block quotes single-spaced and indented, the caption layout, the centered headings, the page-number footer, footnotes at the end of each page, the table of authorities as typed text (as in typst).
 - **docx: differs**:
-  - Line pitch. The typst body pitch is 24.06 pt for 12 pt type (measured on page 4 of `OUTPUT-bumble-bee-motion-brief.pdf`). Word's double is two line heights of the font, not measured here. The docx will run longer than the typst pages.
+  - Line pitch. The typst body pitch is 24.06 pt for 12 pt type (measured on page 4 of `OUTPUT-deb-motion-brief-bumblebee.typst.pdf`). Word's double is two line heights of the font, not measured here. The docx will run longer than the typst pages.
   - Table of contents: a TOC field over levels 1 and 2, with its entries cached but no page numbers. Word or LibreOffice shows the page numbers after the field is updated (select all, F9). The typst contents page carries page numbers.
   - The date and the counsel block sit at the foot of the cover as two frames anchored to the bottom margin. This is a Word frame placement; it was not checked in LibreOffice.
   - The table of authorities is typed text with no page numbers, as the typst sample is.
   - The face is Times New Roman; typst renders the metric-compatible Liberation Serif. A Word user has Times New Roman; a LibreOffice user needs a metric-compatible face for the same line breaks.
   - The `.docx` has been checked as a zip and as well-formed XML only. It was not opened in Word or LibreOffice (neither is available on the build box).
-- **docx BLOCKED.** The court folder has no `checks.yaml` or `rules.md`, so no gate check ID is readable here. Every gate measured on the LibreOffice PDF (`samples/OUTPUT-bumble-bee-motion-brief.docx.pdf`) is BLOCKED: Gate 0 (content, italics, footnotes), Gate 1 (rule checks, including the TOC page numbers), Gate 2 (page review of the `.docx.pdf`) and Gate 3 (second sample). Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
+- **docx BLOCKED.** The court folder has no `checks.yaml` or `rules.md`, so no gate check ID is readable here. Every gate measured on the LibreOffice PDF (`usage/OUTPUT-bumble-bee-motion-brief.docx.pdf`) is BLOCKED: Gate 0 (content, italics, footnotes), Gate 1 (rule checks, including the TOC page numbers), Gate 2 (page review of the `.docx.pdf`) and Gate 3 (second sample). Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
 - Pages reviewed: typst 12 of 12 (60 dpi). docx: 0 (the `.docx` pages cannot be rendered on this box).

@@ -15,8 +15,8 @@ Access note: on 2026-10-17 `www.vid.uscourts.gov` rejected direct requests from 
 | FRBP | Federal Rules of Bankruptcy Procedure 7003, 7007.1, 7008, 7010, 9004, 9011 (LII text, restyled eff. Dec. 1, 2024) | https://www.law.cornell.edu/rules/frbp/rule_7008 (and rule_7003, rule_7007.1, rule_7010, rule_9004, rule_9011) |
 | FRCP | Federal Rules of Civil Procedure 8, 10 (applied by FRBP 7008, 7010) | https://www.law.cornell.edu/rules/frcp/rule_8 , https://www.law.cornell.edu/rules/frcp/rule_10 |
 | F416D | Official Form 416D, Caption for Use in Adversary Proceeding (12/15) | https://www.uscourts.gov/sites/default/files/form_b416d_0.pdf |
-| EX-SPRINGEL | First amended adversary complaint, *Springel v. Global Bank of Commerce*, Adv. No. 09-03071 (Vinson & Elkins; Law Offices of Benjamin A. Currence) | `adversary-complaint/exemplars/` |
-| EX-PROSSER | Omnibus memorandum of law in support of motion to dismiss, *Benta v. Christie's Inc.*, Adv. No. 3:21-ap-03001 (Fox Rothschild; Hunton Andrews Kurth) | `motion-brief/exemplars/` |
+| EX-SPRINGEL | First amended adversary complaint, *Springel v. Global Bank of Commerce*, Adv. No. 09-03071 (Vinson & Elkins; Law Offices of Benjamin A. Currence) | `adversary-complaint/usage/` |
+| EX-PROSSER | Omnibus memorandum of law in support of motion to dismiss, *Benta v. Christie's Inc.*, Adv. No. 3:21-ap-03001 (Fox Rothschild; Hunton Andrews Kurth) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (FRBP, FRCP as applied, LBR). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

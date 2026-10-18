@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/california/federal/northern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | listed in `exemplars/SOURCE.md` (1 filer), but the PDF is **not in this snapshot**: `exemplars/` holds only `SOURCE.md` |
-| sample md | `samples/INPUT-superhuman-complaint.md` (a portion of the filing, see below) |
-| render | ok: `samples/OUTPUT-superhuman-complaint.pdf`, 10 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Bold embedded), no warnings |
-| overlay | **fail**: `tools/overlay.sh` exits 1 ("no exemplar pdf in exemplars/"). `samples/OVERLAY-superhuman-complaint.txt` is the stale page map from the EB Garamond render; no `.pdf` overlay exists |
+| exemplar | listed in `usage/SOURCE.md` (1 filer), but the PDF is **not in this snapshot**: `usage/` holds only `SOURCE.md` |
+| sample md | `usage/INPUT-cand-complaint-superhuman.md` (a portion of the filing, see below) |
+| render | ok: `usage/OUTPUT-cand-complaint-superhuman.typst.pdf`, 10 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Bold embedded), no warnings |
+| overlay | **fail**: `tools/overlay.sh` exits 1 ("no exemplar pdf in usage/"). `usage/OVERLAY-superhuman-complaint.txt` is the stale page map from the EB Garamond render; no `.pdf` overlay exists |
 | pages reviewed | 10 of 10 (every page rendered at 70 dpi and viewed after the font change) |
 
 Typeface: Civil L.R. 3-4(c)(2)(A) names Times New Roman and Century Schoolbook as examples of a standard proportional font. The template uses **Liberation Serif**, the vendored metric-compatible Times New Roman substitute (`docs/FONTS.md`), at 12 pt. The filed exemplar is Times. Page count is unchanged from the EB Garamond render (10 pages).
@@ -78,7 +78,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ## Engines
 
-Docx engine: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/cand.lua` (cover, caption, numbered allegations, lettered prayer items, signature block). Sample build: `samples/OUTPUT-superhuman-complaint.docx` (valid zip, every XML part well-formed). Not rendered: no LibreOffice on the build box, so **pages reviewed = 0**. `make-reference.sh` needs `unzip` and `zip`, which the build box lacks; it was run with a stand-in built on libzip's `ziptool` (outside the repo). Tell the lead before relying on a rebuild on another box.
+Docx engine: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/cand.lua` (cover, caption, numbered allegations, lettered prayer items, signature block). Sample build: `usage/OUTPUT-cand-complaint-superhuman.docx` (valid zip, every XML part well-formed). Not rendered: no LibreOffice on the build box, so **pages reviewed = 0**. `make-reference.sh` needs `unzip` and `zip`, which the build box lacks; it was run with a stand-in built on libzip's `ziptool` (outside the repo). Tell the lead before relying on a rebuild on another box.
 
 What the docx sets (in `styles.xml`, `document.xml` and the footer part; not rendered):
 - Liberation Serif 12 pt in the document defaults, black text; footnotes 12 pt, single spaced.

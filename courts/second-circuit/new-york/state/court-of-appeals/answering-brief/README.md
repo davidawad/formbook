@@ -1,13 +1,13 @@
 # New York Court of Appeals: answering brief (brief for respondent)
 
-Status: **exemplar found (2026-10-15); not `done`.** The exemplar is `exemplars/FILED-EXAMPLE-people-v-watkins-apl-2023-00099-answering-brief.pdf`, a filed Brief for Respondent (Manhattan DA, January 12, 2024). The sample is a **transcription of part of that brief** (cover, tables, preliminary statement, question presented, part of the statement of the case, standard of review, start of the argument, conclusion, certification), not the whole 52 pages. The earlier "BLOCKED: no exemplar" result is superseded; its search log is kept in `exemplars/SOURCE.md`.
+Status: **exemplar found (2026-10-15); not `done`.** The exemplar is `usage/SAMPLE-ny-answering-brief-peoplevwatkinsapl202300099.pdf`, a filed Brief for Respondent (Manhattan DA, January 12, 2024). The sample is a **transcription of part of that brief** (cover, tables, preliminary statement, question presented, part of the statement of the case, standard of review, start of the argument, conclusion, certification), not the whole 52 pages. The earlier "BLOCKED: no exemplar" result is superseded; its search log is kept in `usage/SOURCE.md`.
 
 | Gate | Result |
 |---|---|
-| exemplar | yes: *People v. Watkins*, APL-2023-00099, Brief for Respondent (Manhattan DA), dated January 12, 2024; text layer present; see `exemplars/SOURCE.md` |
+| exemplar | yes: *People v. Watkins*, APL-2023-00099, Brief for Respondent (Manhattan DA), dated January 12, 2024; text layer present; see `usage/SOURCE.md` |
 | typeface | face required: none (NY-TYPE-001 / 500.1(j): "serifed, proportionally spaced typeface, such as Times Roman"; Times is an example). Vendored substitute: none needed; **EB Garamond kept** (`fonts/eb-garamond`). Fit: n/a. Liberation Serif (Times-metric) is vendored if David wants the Times example applied: set `font-family` and re-render |
-| render | ok (`sh tools/render.sh … samples/INPUT-ny-answering-brief-sample.md`, 13 pages, vendored EB Garamond only, no typst warnings; re-rendered 2026-10-16 after the fixes below, pdffonts: EB Garamond Regular/Italic/Bold embedded) |
-| overlay | ok (`sh tools/overlay.sh <court-dir> ny-answering-brief-sample` wrote `samples/OVERLAY-ny-answering-brief-sample.pdf` and `.txt`; page map below) |
+| render | ok (`sh tools/render.sh … usage/INPUT-ny-answering-brief-nyansweringbriefsample.md`, 13 pages, vendored EB Garamond only, no typst warnings; re-rendered 2026-10-16 after the fixes below, pdffonts: EB Garamond Regular/Italic/Bold embedded) |
+| overlay | ok (`sh tools/overlay.sh <court-dir> ny-answering-brief-sample` wrote `usage/OVERLAY-ny-answering-brief-sample.pdf` and `.txt`; page map below) |
 | pages reviewed | 13 of 13 of the final render (2026-10-16): every page rendered at 60 dpi (`pdftoppm -r 60`) and viewed after the last template change |
 
 Tier 1 (the court's mandated form) is **not claimed as met**: the rules are still only checked against search excerpts (see "Governing rules"). Tier 2 findings are in "Tier 2 review" below.
@@ -37,11 +37,11 @@ Rule dates: none verified. The Justia copy is current only through September 202
 
 - `typst/main.typ`: entrypoint (reads `sample=` from `--input`).
 - `typst/ny-answering-brief.typ`: template. Structure copied from `courts/ninth-circuit/court-of-appeals/typst/`; the numbers, rules and certificate wording are New York's (not the ca9 ones).
-- `samples/INPUT-ny-answering-brief-sample.md`: transcription of part of the exemplar (see the header comment in the file). Frontmatter schema below.
-- `samples/OUTPUT-ny-answering-brief-sample.pdf`: render output (13 pages, EB Garamond only).
-- `samples/OVERLAY-ny-answering-brief-sample.pdf` and `.txt`: overlay on the exemplar and page map.
-- `exemplars/FILED-EXAMPLE-people-v-watkins-apl-2023-00099-answering-brief.pdf`: the exemplar (52 pages).
-- `exemplars/SOURCE.md`: exemplar record (URL, case, docket, filer, dates) and the search log.
+- `usage/INPUT-ny-answering-brief-nyansweringbriefsample.md`: transcription of part of the exemplar (see the header comment in the file). Frontmatter schema below.
+- `usage/OUTPUT-ny-answering-brief-nyansweringbriefsample.typst.pdf`: render output (13 pages, EB Garamond only).
+- `usage/OVERLAY-ny-answering-brief-sample.pdf` and `.txt`: overlay on the exemplar and page map.
+- `usage/SAMPLE-ny-answering-brief-peoplevwatkinsapl202300099.pdf`: the exemplar (52 pages).
+- `usage/SOURCE.md`: exemplar record (URL, case, docket, filer, dates) and the search log.
 
 ## Markdown contract (frontmatter)
 
@@ -91,7 +91,7 @@ Each row is a convention the exemplar shows that the template does not match, or
 
 ## What the overlay shows
 
-`tools/overlay.sh` pairs each rendered page with the best-matching exemplar page by word overlap (`samples/OVERLAY-ny-answering-brief-sample.txt`). The page map of the 2026-10-16 render:
+`tools/overlay.sh` pairs each rendered page with the best-matching exemplar page by word overlap (`usage/OVERLAY-ny-answering-brief-sample.txt`). The page map of the 2026-10-16 render:
 
 | Our PDF page | Filed PDF page | Word overlap |
 |---|---|---|
@@ -124,7 +124,7 @@ The pairing is by word-set overlap, so it is a diagnostic, not a score. Our page
 
 ## Verification pass 2026-10-16 (fb-595.26.21)
 
-- Render: `sh tools/render.sh … samples/INPUT-ny-answering-brief-sample.md` exit 0, no typst warnings. The committed PDF had 12 pages and re-rendered to 12 before any change; after the fixes below it is 13 pages (cover, contents ii, authorities iii, body 1 to 10). `pdffonts`: EB Garamond only.
+- Render: `sh tools/render.sh … usage/INPUT-ny-answering-brief-nyansweringbriefsample.md` exit 0, no typst warnings. The committed PDF had 12 pages and re-rendered to 12 before any change; after the fixes below it is 13 pages (cover, contents ii, authorities iii, body 1 to 10). `pdffonts`: EB Garamond only.
 - Pages viewed: all 13 pages of the final render at 60 dpi, plus the pages each intermediate fix touched. The 13 overlay pages were viewed at 40 dpi, and the exemplar's page 1 against our cover.
 - Overlay: rerun on the final render; map in "What the overlay shows".
 - Defects fixed (template `typst/ny-answering-brief.typ`):
@@ -140,13 +140,13 @@ The pairing is by word-set overlap, so it is a diagnostic, not a score. Our page
 
 ## Searches for an exemplar
 
-See `exemplars/SOURCE.md`. The 2026-10-14 search found no answering brief. The 2026-10-15 search found the Watkins brief through statecourtreport.org's copies of Court of Appeals briefs. Two other real Court of Appeals filings were read during the earlier search, a 2010 *Hurrell-Harring* reply brief and a 2016 *People v. Trump Entrepreneur Initiative* appellants' brief; neither is an answering brief.
+See `usage/SOURCE.md`. The 2026-10-14 search found no answering brief. The 2026-10-15 search found the Watkins brief through statecourtreport.org's copies of Court of Appeals briefs. Two other real Court of Appeals filings were read during the earlier search, a 2010 *Hurrell-Harring* reply brief and a 2016 *People v. Trump Entrepreneur Initiative* appellants' brief; neither is an answering brief.
 
 [Formbook index](../../../../../../README.md) | [Court README](../README.md)
 
 ## Engines
 
-**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 14 pt, body lines exact 31.4 pt and justified, 0.5 in first-line indent, block quotations indented and single spaced, footnotes 12 pt, letter page, 1 in margins, centred PAGE footer). `docx/ny-answering.lua` builds the cover, disclosure statement, contents, table of authorities and certificates from the same frontmatter as the typst template; the cover is its own section with an empty footer, so the page count runs from the cover as in typst. Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/court-of-appeals/answering-brief samples/INPUT-ny-answering-brief-sample.md` writes `samples/OUTPUT-ny-answering-brief-sample.docx`.
+**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 14 pt, body lines exact 31.4 pt and justified, 0.5 in first-line indent, block quotations indented and single spaced, footnotes 12 pt, letter page, 1 in margins, centred PAGE footer). `docx/ny-answering.lua` builds the cover, disclosure statement, contents, table of authorities and certificates from the same frontmatter as the typst template; the cover is its own section with an empty footer, so the page count runs from the cover as in typst. Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/court-of-appeals/answering-brief usage/INPUT-ny-answering-brief-nyansweringbriefsample.md` writes `usage/OUTPUT-ny-answering-brief-nyansweringbriefsample.docx`.
 
 - Matches the typst form: typeface, sizes, margins, cover contents and order, disclosure page, certificate of compliance text (word count 1,119 on the sample when the docx was built; the typst render now prints 2,015, not reconciled, docx not re-run here), certificate of service when given, signature block at 3.25 in. The body keeps the markdown's own heading letters and numerals.
 - Differs: (line pitch reconciled 2026-10-16: the typst body pitch is now 31.4 pt, the same as the docx exact 31.4 pt; it was 25.9 pt.) The table of contents is a TOC field (placeholder until a field update). The table of authorities is listed in key order (typst: alphabetical within each group since 2026-10-16) and has no page references (typst has none either: known gap in this court). Pagination is Word's or LibreOffice's, not measured.

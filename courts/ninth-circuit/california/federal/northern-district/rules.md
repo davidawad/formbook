@@ -29,7 +29,7 @@ Kinds: **M** mandated by rule; **C** convention; **T** project requirement; **A*
 | CAND-CONT-005 | A motion is filed as one document, not exceeding 25 pages, and its first page shows hearing date/time; opening paragraph gives notice, next paragraph concisely states relief, and following paragraphs give points and authorities. | CAND-LR, Civil L.R. 7-2(b) | M |
 | CAND-CONT-006 | Brief/memorandum accompanying motion does not exceed 25 pages of text (reply limit 15 pages; opposition limit 25 pages), subject to rule and court order. | CAND-LR, Civil L.R. 7-3(a), (c), 7-4(b) | M |
 | CAND-CONT-007 | Motions are accompanied by declarations/affidavits required under the local rules; factual contentions must be supported. | CAND-LR, Civil L.R. 7-2(d), 7-5; FRCP 7(b) | M |
-| CAND-FORM-006 | Briefs and complaints use the caption/header/footer pattern appearing across the two or more saved filers; the rule controls any conflict. | `exemplars/SOURCE.md`, cross-filer convention | C |
+| CAND-FORM-006 | Briefs and complaints use the caption/header/footer pattern appearing across the two or more saved filers; the rule controls any conflict. | `usage/SOURCE.md`, cross-filer convention | C |
 
 ### Complaint
 

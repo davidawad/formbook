@@ -4,11 +4,11 @@ Doc type: **complaint** (with jury demand) in the United States District Court f
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-lord-4-26-cv-00407-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-lord-complaint.md`: paragraphs 1-46 (caption to damages), Counts I and II, jury demand, prayer, signature |
+| exemplar | yes: `usage/SAMPLE-oknd-complaint-lord426cv00407.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-oknd-complaint-lord.md`: paragraphs 1-46 (caption to damages), Counts I and II, jury demand, prayer, signature |
 | typeface | face required: none (LGnR2-4(a) sets a 12-pt floor and names no face). Substitute: none needed; **EB Garamond kept** (`docs/FONTS.md`: "no face named"). Fit: not metric-compatible with the Times/Cambria exemplar; visual only. |
-| render | ok: `samples/OUTPUT-lord-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond Regular, Bold, BoldItalic embedded |
-| overlay | ok: `samples/OVERLAY-lord-complaint.pdf` and `samples/OVERLAY-lord-complaint.txt` |
+| render | ok: `usage/OUTPUT-oknd-complaint-lord.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond Regular, Bold, BoldItalic embedded |
+| overlay | ok: `usage/OVERLAY-lord-complaint.pdf` and `usage/OVERLAY-lord-complaint.txt` |
 | pages reviewed | 12 of 12 (every page rendered at 70 dpi and viewed, fonts pass; page count unchanged at 12) |
 
 ## Governing rules
@@ -51,11 +51,11 @@ Not produced by this template: the civil cover sheet, the summons, the Rule 7.1 
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/tenth-circuit/oklahoma/federal/northern-district/complaint samples/INPUT-lord-complaint.md
+sh tools/render.sh courts/tenth-circuit/oklahoma/federal/northern-district/complaint usage/INPUT-oknd-complaint-lord.md
 sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/northern-district/complaint lord-complaint
 ```
 
-File names follow the tools: `tools/render.sh` writes `samples/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `samples/OVERLAY-<id>.pdf` and `OVERLAY-<id>.txt`. The brief's `<id>.pdf` / `<id>-overlay.pdf` names do not match the tools, and the tools are not edited here.
+File names follow the tools: `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `OVERLAY-<id>.txt`. The brief's `<id>.pdf` / `<id>-overlay.pdf` names do not match the tools, and the tools are not edited here.
 
 The overlay is a diagnostic, not a score. Red is our render, blue is the exemplar, black is both. Pages pair by word overlap (`OVERLAY-lord-complaint.txt`): ours p.1 ↔ filed p.1 (88.6%), p.2 ↔ p.2 (80.1%), p.3 ↔ p.4 (52.5%), p.4 ↔ p.5 (76.3%), p.5 ↔ p.6 (76.4%), p.6 ↔ p.7 (58.0%), p.7 ↔ p.9 (70.6%), p.8 ↔ p.10 (73.3%), p.9 ↔ p.12 (52.9%), p.10 ↔ p.13 (65.7%), p.11 ↔ p.14 (70.5%), p.12 ↔ p.24 (49.5%, the signature page). The exemplar is 24 pages in Cambria/Calibri, not double-spaced, with a different caption layout, and the sample omits Counts III-XIII. The two layers agree on words and not on line position; the lower percentages are on pages where the sample skips exemplar text.
 
@@ -94,9 +94,9 @@ Reviewed pages: 12 of 12.
 
 ## Engines
 
-DOCX engine (`docx/`: `reference.docx`, `oknd-complaint.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/oklahoma/federal/northern-district/complaint samples/INPUT-lord-complaint.md`.
+DOCX engine (`docx/`: `reference.docx`, `oknd-complaint.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/oklahoma/federal/northern-district/complaint usage/INPUT-oknd-complaint-lord.md`.
 
 - **Matches the typst form:** EB Garamond 13 pt body, 12 pt page number centered in the footer, 1 in margins on letter paper, double spacing (Word "double", line 480), first-line indent 0.5 in, numbered allegations (typed numbers, FRCP 10(b)), centered bold caps level-1 headings, centered bold level-2, bold italic level-3, the cover (court name, caption with rule, title, "Jury Trial Demanded"), lettered "(a)" lists, and the signature block.
 - **Differs from typst:** line pitch is "double" rather than exactly 24 pt (the local rule bans "exactly 24 pt"), so the page holds a different number of lines in Word. The caption and signature block are Word tables (border and row heights differ slightly). Allegation numbers are typed text, not a list field. Footnotes are not used by this form.
-- **Output:** `samples/OUTPUT-lord-complaint.docx` is written. `render-docx.sh` then exits 1 (see below).
+- **Output:** `usage/OUTPUT-oknd-complaint-lord.docx` is written. `render-docx.sh` then exits 1 (see below).
 - **BLOCKED:** `docx.pdf` (LibreOffice PDF, check gates 0-3): `soffice` is not installed on this box and cannot be installed without root or conda-forge. Visual review of the docx pages: needs the same PDF; 0 docx pages reviewed. `unzip` is not installed, so the zip-integrity step of `tools/render-docx.sh` fails after the `.docx` is written. The XML parts were checked instead with `ziptool` and `xmllint` (15 of 15 well-formed). Opening in Word and LibreOffice without a repair prompt: not done.

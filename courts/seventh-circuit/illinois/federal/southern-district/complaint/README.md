@@ -5,11 +5,11 @@ Folder: `courts/seventh-circuit/illinois/federal/southern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-pro-life-action-league-3-26-cv-01087-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-pro-life-complaint.md`: caption, lead-in, paragraphs 1 to 54 of the filing and one unnumbered paragraph, Count I, prayer, signature (see "Sample" below) |
+| exemplar | yes: `usage/SAMPLE-ilsd-complaint-prolifeactionleague326cv01087.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ilsd-complaint-prolife.md`: caption, lead-in, paragraphs 1 to 54 of the filing and one unnumbered paragraph, Count I, prayer, signature (see "Sample" below) |
 | typeface | face required by rules: **none** (S.D. Ill. LR 5.1(a) and 7.1(a)(3) set 12-point type and double spacing only; no typeface named). Vendored substitute: **EB Garamond** (kept, because no face is named). Fit: n/a. |
-| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-pro-life-complaint.pdf`, 11 pages, typst 0.15.0, `pdffonts`: EB Garamond only (Regular, Bold, Italic, embedded), no warnings |
-| overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `exemplars/*.pdf`, which is not in this snapshot (only `exemplars/SOURCE.md` is tracked). `samples/OVERLAY-pro-life-complaint.txt` is the earlier output and was not regenerated; no `.pdf` overlay is present. |
+| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-ilsd-complaint-prolife.typst.pdf`, 11 pages, typst 0.15.0, `pdffonts`: EB Garamond only (Regular, Bold, Italic, embedded), no warnings |
+| overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `usage/*.pdf`, which is not in this snapshot (only `usage/SOURCE.md` is tracked). `usage/OVERLAY-pro-life-complaint.txt` is the earlier output and was not regenerated; no `.pdf` overlay is present. |
 | pages reviewed | 11 of 11 (2026-10-15: every page rendered at 60 dpi and viewed; no template change in that pass) |
 | `check.sh` | not run: the gates expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape (the brief forbids `tools/` edits). Gate 0 and Gate 1 were not run; the review below is the Gate 2 equivalent for this doc type. |
 
@@ -52,7 +52,7 @@ Local practice not checked (judges' standing orders and the ECF Procedures are s
 
 ## Sample
 
-- `samples/INPUT-pro-life-complaint.md` transcribes the filing: caption and counsel block (from the signature), lead-in, paragraphs 1 to 54 of the filing (Introduction, Jurisdiction and Venue, Parties, Factual Background) and the unnumbered paragraph that follows them in the filing (its "Defendant IPLA's very choice of name", sample only, marked `%`), Count I (filing paragraphs 65 to 74, sample paragraphs 55 to 64), the Prayer for Relief in full, and the signature block. Paragraphs 56 to 64 of the filing (the "Fundraising History" section) and Counts II to IV (paragraphs 75 to 102) are not transcribed. The filing's paragraph numbers are not kept: the template numbers from 1, so the sample's numbers differ from the filing's (the overlay pairs pages, not numbers).
+- `usage/INPUT-ilsd-complaint-prolife.md` transcribes the filing: caption and counsel block (from the signature), lead-in, paragraphs 1 to 54 of the filing (Introduction, Jurisdiction and Venue, Parties, Factual Background) and the unnumbered paragraph that follows them in the filing (its "Defendant IPLA's very choice of name", sample only, marked `%`), Count I (filing paragraphs 65 to 74, sample paragraphs 55 to 64), the Prayer for Relief in full, and the signature block. Paragraphs 56 to 64 of the filing (the "Fundraising History" section) and Counts II to IV (paragraphs 75 to 102) are not transcribed. The filing's paragraph numbers are not kept: the template numbers from 1, so the sample's numbers differ from the filing's (the overlay pairs pages, not numbers).
 - The prayer is transcribed with its items as they are, but its subitems (a) to (d) and (a) to (g) are written inline in the item text, not as nested lists.
 - Case names and other emphasis are roman in the transcription; the exemplar's text layer carries no italic markup, so italics were not invented.
 - The left caption column reads "ILLINOIS PRO-LIFE ACTION, and / RIGHT TO LIFE ACTION," with the designation "Defendants." below; the exemplar uses a different line break in the caption, which the template does not reproduce (no forced line breaks).
@@ -77,12 +77,12 @@ Reviewed pages: 11 of 11.
 
 ## Overlay
 
-`sh tools/overlay.sh courts/seventh-circuit/illinois/federal/southern-district/complaint pro-life-complaint` writes `samples/OVERLAY-pro-life-complaint.pdf` and `.txt`. Page map: ours p.1 ↔ filed p.1, p.2 ↔ p.2, p.3 ↔ p.4, p.4 ↔ p.5, p.5 ↔ p.6, p.6 ↔ p.7, p.7 ↔ p.9, p.8 ↔ p.10, p.9 ↔ p.14, p.10 ↔ p.19, p.11 ↔ p.20. The pairing is by word overlap, so the sample's skipped paragraphs (56 to 64 and the later counts) make the middle pages pair with later filed pages. The overlay is a diagnostic: the exemplar's caption and numbering differ from the template's, and the filed text is in a different font and line length, so the two layers do not coincide on lines.
+`sh tools/overlay.sh courts/seventh-circuit/illinois/federal/southern-district/complaint pro-life-complaint` writes `usage/OVERLAY-pro-life-complaint.pdf` and `.txt`. Page map: ours p.1 ↔ filed p.1, p.2 ↔ p.2, p.3 ↔ p.4, p.4 ↔ p.5, p.5 ↔ p.6, p.6 ↔ p.7, p.7 ↔ p.9, p.8 ↔ p.10, p.9 ↔ p.14, p.10 ↔ p.19, p.11 ↔ p.20. The pairing is by word overlap, so the sample's skipped paragraphs (56 to 64 and the later counts) make the middle pages pair with later filed pages. The overlay is a diagnostic: the exemplar's caption and numbering differ from the template's, and the filed text is in a different font and line length, so the two layers do not coincide on lines.
 
 ## Known gaps and open choices
 
 1. **One exemplar, one filer.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers from different filers. Searched CourtListener's search API (`court=ilsd`, `type=r`) for complaints filed 2026-07 to 2026-10. Downloaded and checked: Kirby v. Continental Tire (3:26-cv-01028, counsel-filed, 14 pages; no body text in the text layer, only the ECF header, so unusable); Croom v. Brookhart (3:26-cv-01042, pro se, not text-searchable); Pro-Life (used). Not usable: Hoopes v. Chevron (3:26-cv-01414, complaint not in the RECAP cache). Tier 2 is therefore judged against one filer, and the complaint is not yet "up for review" by EVAL-LOOP's standard.
-2. **Font.** The template uses EB Garamond (vendored, OFL) at 12 pt, not Times New Roman. The local rules name no typeface (LR 5.1(a): "typewritten, printed, or prepared by a clearly legible duplication process"; LR 7.1(a)(3): "12-point font"), so `docs/FONTS.md` keeps EB Garamond. The exemplar is Times New Roman (`exemplars/SOURCE.md`), so a clerk may expect Times; that is a tier-2 convention, not a rule. A Times substitute (Liberation Serif, metric-compatible) is vendored and would switch the font if David decides the convention outweighs the rule. EB Garamond at 12 pt looks smaller than the exemplar's Times at 12 pt.
+2. **Font.** The template uses EB Garamond (vendored, OFL) at 12 pt, not Times New Roman. The local rules name no typeface (LR 5.1(a): "typewritten, printed, or prepared by a clearly legible duplication process"; LR 7.1(a)(3): "12-point font"), so `docs/FONTS.md` keeps EB Garamond. The exemplar is Times New Roman (`usage/SOURCE.md`), so a clerk may expect Times; that is a tier-2 convention, not a rule. A Times substitute (Liberation Serif, metric-compatible) is vendored and would switch the font if David decides the convention outweighs the rule. EB Garamond at 12 pt looks smaller than the exemplar's Times at 12 pt.
 3. **Line length and justification.** Body text is left-aligned (ragged right). The exemplar's justification was not determined from the text layer. Tier 2 or 3.
 4. **Caption.** The caption is a ")" column built from a grid; the exemplar's breaks differ (the defendants' name runs onto a second line in the template). No forced line breaks are used.
 5. **Paragraph numbers.** Numbered from 1 for the sample. The filing numbers paragraphs continuously from 1 to 102; a complete transcription would keep them.
@@ -96,7 +96,7 @@ Reviewed pages: 11 of 11.
 DOCX (`docx/`; built 2026-10-15, not reviewed):
 
 - Files: `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc's default reference: EB Garamond 12 pt, exact 24 pt line pitch, 0.5 in first-line indent, 1 in margins, letter, footnotes 12 pt single, centered PAGE footer, and the custom styles Centered, Single, CaptionLine, SigIndent, PrayerItem, and so on), `docx/reference.docx` (committed build output), `docx/ilsd.lua` (cover, caption table, numbered paragraphs, prayer items and signature block, all from the frontmatter).
-- Output: `samples/OUTPUT-pro-life-complaint.docx`, written by `sh tools/render.sh --engine docx courts/seventh-circuit/illinois/federal/southern-district/complaint samples/INPUT-pro-life-complaint.md`. The `.docx` opens as a valid zip and every XML part is well-formed (`unzip -tq`, `xmllint --noout`). Pandoc resolved the footer relationship (`footer1.xml`) and the content type.
+- Output: `usage/OUTPUT-ilsd-complaint-prolife.docx`, written by `sh tools/render.sh --engine docx courts/seventh-circuit/illinois/federal/southern-district/complaint usage/INPUT-ilsd-complaint-prolife.md`. The `.docx` opens as a valid zip and every XML part is well-formed (`unzip -tq`, `xmllint --noout`). Pandoc resolved the footer relationship (`footer1.xml`) and the content type.
 - Matches the typst form, by construction (not checked on a render): font and size (EB Garamond 12 pt), double spacing, 0.5 in first-line indent, 1 in margins, centered page number, 12 pt footnotes, centered bold headings, prayer items with hanging labels, and the signature block at 3.25 in.
 - Differs or unverified: the caption ")" column relies on exact 14 pt caption lines in a borderless table, and the cover and caption spacing (14 pt lines, 24 pt gaps) is set by style, not measured against typst. Caption names are read as plain text (markdown emphasis in a caption name would be dropped). Paragraph and line breaks, and therefore the page count, may differ in Word.
 - BLOCKED: `docx.pdf` not produced (`soffice` is not installed on this box, and cannot be installed here). The LibreOffice PDF gates (Gates 0 to 3, `sh tools/check.sh --engine docx`) cannot run. The docx.pdf render and page review are the REMAINING work.
@@ -108,9 +108,9 @@ DOCX (`docx/`; built 2026-10-15, not reviewed):
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/illinois/federal/southern-district/complaint samples/INPUT-pro-life-complaint.md
+sh tools/render.sh courts/seventh-circuit/illinois/federal/southern-district/complaint usage/INPUT-ilsd-complaint-prolife.md
 sh tools/overlay.sh courts/seventh-circuit/illinois/federal/southern-district/complaint pro-life-complaint
-pdftoppm -r 60 -png courts/seventh-circuit/illinois/federal/southern-district/complaint/samples/OUTPUT-pro-life-complaint.pdf /tmp/rev/complaint/p
+pdftoppm -r 60 -png courts/seventh-circuit/illinois/federal/southern-district/complaint/usage/OUTPUT-ilsd-complaint-prolife.typst.pdf /tmp/rev/complaint/p
 ```
 
 [Doc type index](../../../../../../README.md) · [Southern District](../README.md)

@@ -5,10 +5,10 @@ Folder: `courts/first-circuit/massachusetts/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-diaz-smith-college-3-26-cv-12246-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-smith-college-motion-to-dismiss.md`: the whole 12-page memorandum (caption, introduction, facts with footnotes and a block quotation, argument I to III, conclusion, signature, certificate of service). Transcribed from the text layer of the exemplar. |
-| render | ok: `samples/OUTPUT-smith-college-motion-to-dismiss.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh courts/first-circuit/massachusetts/federal/district/motion-brief samples/INPUT-smith-college-motion-to-dismiss.md`) |
-| overlay | ok: `samples/OVERLAY-smith-college-motion-to-dismiss.pdf` and `OVERLAY-smith-college-motion-to-dismiss.txt` (`sh tools/overlay.sh courts/first-circuit/massachusetts/federal/district/motion-brief smith-college-motion-to-dismiss`) |
+| exemplar | yes: `usage/SAMPLE-mad-motion-brief-diazsmithcollege326cv12246.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-mad-motion-brief-smithcollegemotiontodismiss.md`: the whole 12-page memorandum (caption, introduction, facts with footnotes and a block quotation, argument I to III, conclusion, signature, certificate of service). Transcribed from the text layer of the exemplar. |
+| render | ok: `usage/OUTPUT-mad-motion-brief-smithcollegemotiontodismiss.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh courts/first-circuit/massachusetts/federal/district/motion-brief usage/INPUT-mad-motion-brief-smithcollegemotiontodismiss.md`) |
+| overlay | ok: `usage/OVERLAY-smith-college-motion-to-dismiss.pdf` and `OVERLAY-smith-college-motion-to-dismiss.txt` (`sh tools/overlay.sh courts/first-circuit/massachusetts/federal/district/motion-brief smith-college-motion-to-dismiss`) |
 | typeface | No face named by the court's rules: EB Garamond kept (`docs/FONTS.md`, "No face named"). Fonts pass 2026-10-14: re-rendered with vendored fonts only, `pdffonts` shows EB Garamond only, no warnings. |
 | pages reviewed | 12 of 12 (fonts pass 2026-10-14: every page rendered at 60 dpi and viewed; earlier review at the last template change) |
 
@@ -78,7 +78,7 @@ Defects found in review and fixed (all in `mad-motion-brief.typ`):
 2. **Footnotes** are 12 pt, single-spaced; the rules set no footnote size (L.R. 5.1(a)(2) exempts footnotes from double spacing only).
 3. **Certificate of consultation** (L.R. 7.1(a)(2)). The template renders it when the sample has `consultation`. The exemplar memorandum does not carry one: the certification belongs to the motion, which is a separate filing and is not produced here.
 4. **Request for oral argument** (L.R. 7.1(d)). Not generated.
-5. **Exemplars.** One filer saved (Smith College). The second (Ferrini v. Allied World Assurance Co., 1:26-cv-10838-LTS, Starr Surplus Lines) is recorded in `exemplars/SOURCE.md`, not saved. Tier 2 is judged against one filer here.
+5. **Exemplars.** One filer saved (Smith College). The second (Ferrini v. Allied World Assurance Co., 1:26-cv-10838-LTS, Starr Surplus Lines) is recorded in `usage/SOURCE.md`, not saved. Tier 2 is judged against one filer here.
 6. **ECF header.** The court's stamp ("Case 3:26-cv-12246-CLM Document 11 Filed ...") is not reproduced.
 7. **Exhibits.** The sample refers to Exhibit A (the CBA); the exhibit is not part of the template.
 8. **Case names** are roman in the sample, as the exemplar's text layer shows no italics. The template does italicize `*...*` in markdown.
@@ -90,7 +90,7 @@ Defects found in review and fixed (all in `mad-motion-brief.typ`):
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond only, 13 pt, 1 in margins, US Letter, page number in the footer, footnotes at 12 pt single). `motion-brief.lua` builds the caption (a two-cell table with the party rule), the court title, the memorandum title, the DATED line and the signature block, and the certificates of service and consultation (when the sample has them), as Word paragraphs in named styles; body paragraphs, headings, quotations and footnotes are pandoc's own, mapped to the reference's styles. Checked on the LibreOffice PDF `samples/OUTPUT-smith-college-motion-to-dismiss.docx.pdf` (every page viewed at 60 dpi, against the typst render). Word was not checked; the `.docx` was opened with LibreOffice only.
+docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond only, 13 pt, 1 in margins, US Letter, page number in the footer, footnotes at 12 pt single). `motion-brief.lua` builds the caption (a two-cell table with the party rule), the court title, the memorandum title, the DATED line and the signature block, and the certificates of service and consultation (when the sample has them), as Word paragraphs in named styles; body paragraphs, headings, quotations and footnotes are pandoc's own, mapped to the reference's styles. Checked on the LibreOffice PDF `usage/OUTPUT-mad-motion-brief-smithcollegemotiontodismiss.docx.pdf` (every page viewed at 60 dpi, against the typst render). Word was not checked; the `.docx` was opened with LibreOffice only.
 
 Matches the typst form: EB Garamond only; body lines at a 24 pt pitch; headings at the typst sizes (18 pt level 1, 15.5 pt level 2, 13 pt level 3, bold); quotations single-spaced and indented 0.5 in each side; footnotes 12 pt single; the DATED line, the signature block and the certificates kept together; footer page number centered at 12 pt. Justified text is hyphenated (`autoHyphenation`), as typst hyphenates.
 

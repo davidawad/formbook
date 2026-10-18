@@ -32,13 +32,13 @@ LR 5.1 (S.D. Ga., as incorporated: "Each paper served other than by a United Sta
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-master-lending-26-04010-adversary-complaint.pdf`: Complaint (ECF 1), *Caron v. Synergy Homes of Georgia, LLC, et al.*, Adv. Pro. No. 26-04010-EJC, in *In re Master Lending Group, LLC*, No. 23-40569-EJC (Chapter 7), Savannah Division. 8 pages. Filed May 14, 2026 by the Chapter 7 trustee's counsel (Hunter Maclean Exley & Dunn, P.C.). Text layer present.
-- Provenance and searches: `exemplars/SOURCE.md`.
-- **Only one exemplar.** The eval-loop tier-2 rule asks for two or three from different filers. A second filer (Butler v. Ally Financial, 24-01001-SDB, 26 pages) was downloaded and checked, but it is 9.6 MB, over the snapshot size limit, so it was not kept; its RECAP URL is in `exemplars/SOURCE.md`. Tier 2 is judged against this one exemplar, so the tier-2 judgment is weaker than the bar asks for.
+- `usage/SAMPLE-gasb-adversary-complaint-masterlending2604010.pdf`: Complaint (ECF 1), *Caron v. Synergy Homes of Georgia, LLC, et al.*, Adv. Pro. No. 26-04010-EJC, in *In re Master Lending Group, LLC*, No. 23-40569-EJC (Chapter 7), Savannah Division. 8 pages. Filed May 14, 2026 by the Chapter 7 trustee's counsel (Hunter Maclean Exley & Dunn, P.C.). Text layer present.
+- Provenance and searches: `usage/SOURCE.md`.
+- **Only one exemplar.** The eval-loop tier-2 rule asks for two or three from different filers. A second filer (Butler v. Ally Financial, 24-01001-SDB, 26 pages) was downloaded and checked, but it is 9.6 MB, over the snapshot size limit, so it was not kept; its RECAP URL is in `usage/SOURCE.md`. Tier 2 is judged against this one exemplar, so the tier-2 judgment is weaker than the bar asks for.
 
 ## Sample
 
-- `samples/INPUT-master-lending-complaint.md` transcribes the whole exemplar: the caption, all 48 numbered paragraphs, the five headings, the WHEREFORE clause, footnote 1, and the signature block. The exemplar's Exhibit 1 (the notice of default, ECF 1-1) is not transcribed.
+- `usage/INPUT-gasb-adversary-complaint-masterlendingcomplaint.md` transcribes the whole exemplar: the caption, all 48 numbered paragraphs, the five headings, the WHEREFORE clause, footnote 1, and the signature block. The exemplar's Exhibit 1 (the notice of default, ECF 1-1) is not transcribed.
 - The frontmatter carries the caption, counsel and signature fields (schema below). Headings are typed in the author's case (the template does not change case).
 
 Frontmatter schema for this doc type:
@@ -61,12 +61,12 @@ Frontmatter schema for this doc type:
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
 D=courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/adversary-complaint
-sh tools/render.sh $D samples/INPUT-master-lending-complaint.md          # -> samples/OUTPUT-master-lending-complaint.pdf
-sh tools/overlay.sh $D master-lending-complaint $D/exemplars/FILED-EXAMPLE-master-lending-26-04010-adversary-complaint.pdf
+sh tools/render.sh $D usage/INPUT-gasb-adversary-complaint-masterlendingcomplaint.md          # -> usage/OUTPUT-gasb-adversary-complaint-masterlendingcomplaint.typst.pdf
+sh tools/overlay.sh $D master-lending-complaint $D/usage/SAMPLE-master-lending-26-04010-adversary-complaint.pdf
 ```
 
-- `samples/OUTPUT-master-lending-complaint.pdf`: 8 pages. Typst compiled with no warnings (`render.sh` fails on any). Only the vendored EB Garamond is embedded (`pdffonts`).
-- `samples/OVERLAY-master-lending-complaint.pdf` and `.txt`: red = our render, blue = the filed exemplar, black = both. The page map pairs pages 1-8 with filed pages 1-8, with word overlap 58-90%. The overlay is a diagnostic: the exemplar is set in Times with no printed page number on the caption page, and the render is not, so text lines will not coincide.
+- `usage/OUTPUT-gasb-adversary-complaint-masterlendingcomplaint.typst.pdf`: 8 pages. Typst compiled with no warnings (`render.sh` fails on any). Only the vendored EB Garamond is embedded (`pdffonts`).
+- `usage/OVERLAY-master-lending-complaint.pdf` and `.txt`: red = our render, blue = the filed exemplar, black = both. The page map pairs pages 1-8 with filed pages 1-8, with word overlap 58-90%. The overlay is a diagnostic: the exemplar is set in Times with no printed page number on the caption page, and the render is not, so text lines will not coincide.
 - File names follow the tools (`OUTPUT-`, `OVERLAY-`, `INPUT-`), not the brief's `<id>.pdf` / `<id>-overlay.pdf` names.
 
 ## Visual review (Gate 2 record: all 8 pages rendered at 60 dpi and looked at)
@@ -99,7 +99,7 @@ Pages reviewed: 8 of 8.
 
 ## Engines
 
-The docx engine (`docx/`: `reference.docx` from `make-reference.sh`, and `gasb-adversary-complaint.lua`) is built next to the typst template. Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/adversary-complaint samples/INPUT-master-lending-complaint.md` (from the repository root, as in the Render section above) writes `samples/OUTPUT-master-lending-complaint.docx` and its LibreOffice PDF `samples/OUTPUT-master-lending-complaint.docx.pdf`.
+The docx engine (`docx/`: `reference.docx` from `make-reference.sh`, and `gasb-adversary-complaint.lua`) is built next to the typst template. Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-gasb-adversary-complaint-masterlendingcomplaint.md` (from the repository root, as in the Render section above) writes `usage/OUTPUT-gasb-adversary-complaint-masterlendingcomplaint.docx` and its LibreOffice PDF `usage/OUTPUT-gasb-adversary-complaint-masterlendingcomplaint.docx.pdf`.
 
 - **Matches typst:** EB Garamond 13 pt throughout (embedded in the LibreOffice PDF; `pdffonts`); body double-spaced (exact 24 pt) with a half-inch first-line indent; 1-inch margins on letter paper; the court title, the caption table with the rule under and beside the left cell, the title in bold capitals; headings bold and centered; footnotes at 13 pt, single-spaced; the signature block (the date at left, the firm at right); a page number on every page, the caption page included (11 pt, centered). The paragraph numbers are the author's `1.`, `2.`, ... in the markdown, carried into the docx as numbered paragraphs.
 - **Differs from typst:** (1) the paragraph numbers are left-aligned at half an inch and the text hangs at 0.75 in; typst right-aligns each number, so "10." starts left of "1.". (2) Word and LibreOffice paginate slightly differently; the page counts here are the LibreOffice PDF's (8 pages, the same as typst). (3) The docx does not embed EB Garamond: a machine that opens the `.docx` in Word needs EB Garamond installed, or Word substitutes a font. The LibreOffice PDF is made with the vendored fonts (`fonts/eb-garamond/`). (4) The caption rules are Word table borders (0.75 pt), not typst's 0.7 pt lines. (5) pandoc does not write the YAML title as a title block (the caption carries it); the document's core "title" property is not set.

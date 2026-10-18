@@ -15,10 +15,10 @@ Access note: on 2026-10-17 `www.deb.uscourts.gov` rejected direct requests from 
 | FRBP | Federal Rules of Bankruptcy Procedure 7003, 7007.1, 7008, 7010, 9004, 9011 (LII text, restyled eff. Dec. 1, 2024) | https://www.law.cornell.edu/rules/frbp/rule_7008 (and rule_7003, rule_7007.1, rule_7010, rule_9004, rule_9011) |
 | FRCP | Federal Rules of Civil Procedure 8, 10 (applied by FRBP 7008, 7010) | https://www.law.cornell.edu/rules/frcp/rule_8 , https://www.law.cornell.edu/rules/frcp/rule_10 |
 | F416D | Official Form 416D, Caption for Use in Adversary Proceeding (12/15) | https://www.uscourts.gov/sites/default/files/form_b416d_0.pdf |
-| EX-ZOHAR | Adversary complaint, *Tilton v. MBIA Inc.*, Adv. No. 19-50390 (Cole Schotz; Gibson Dunn) | `adversary-complaint/exemplars/` |
-| EX-GIULIANO | Adversary complaint, *Giuliano v. Fisk*, Adv. No. 26-50942 (Fox Rothschild) | `adversary-complaint/exemplars/` |
-| EX-BUMBLEBEE | Memorandum of law in support of motion to dismiss, *Jason v. Bumble Bee Foods, LLC*, Adv. No. 19-51146 (Young Conaway; Paul, Weiss) | `motion-brief/exemplars/` |
-| EX-SUN | Opening brief in support of motion to dismiss, *PCT Litigation Trust v. Sun*, Adv. No. 25-51975 (Morris James; Loeb & Loeb) | `motion-brief/exemplars/` |
+| EX-ZOHAR | Adversary complaint, *Tilton v. MBIA Inc.*, Adv. No. 19-50390 (Cole Schotz; Gibson Dunn) | `adversary-complaint/usage/` |
+| EX-GIULIANO | Adversary complaint, *Giuliano v. Fisk*, Adv. No. 26-50942 (Fox Rothschild) | `adversary-complaint/usage/` |
+| EX-BUMBLEBEE | Memorandum of law in support of motion to dismiss, *Jason v. Bumble Bee Foods, LLC*, Adv. No. 19-51146 (Young Conaway; Paul, Weiss) | `motion-brief/usage/` |
+| EX-SUN | Opening brief in support of motion to dismiss, *PCT Litigation Trust v. Sun*, Adv. No. 25-51975 (Morris James; Loeb & Loeb) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (FRBP, FRCP as applied, Del. Bankr. L.R.). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

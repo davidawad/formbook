@@ -5,10 +5,10 @@ Folder: `courts/sixth-circuit/ohio/federal/northern-district/complaint/` (one se
 
 | Item | Status |
 |---|---|
-| exemplar | yes: 2 filers. `exemplars/FILED-EXAMPLE-wagner-1-26-cv-02669-complaint.pdf` (12 pp, transcribed) and `exemplars/FILED-EXAMPLE-miller-5-26-cv-02517-complaint.pdf` (31 pp, second filer). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-wagner-complaint.md`: the whole 12-page filing (caption, all 26 numbered paragraphs, lettered sub-items, prayer, signature). |
-| render | ok: `samples/OUTPUT-wagner-complaint.pdf`, 11 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
-| overlay | ok: `samples/OVERLAY-wagner-complaint.pdf` and `samples/OVERLAY-wagner-complaint.txt` (paired against the Wagner exemplar). |
+| exemplar | yes: 2 filers. `usage/SAMPLE-ohnd-complaint-wagner126cv02669.pdf` (12 pp, transcribed) and `usage/SAMPLE-ohnd-complaint-miller526cv02517.pdf` (31 pp, second filer). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-ohnd-complaint-wagner.md`: the whole 12-page filing (caption, all 26 numbered paragraphs, lettered sub-items, prayer, signature). |
+| render | ok: `usage/OUTPUT-ohnd-complaint-wagner.typst.pdf`, 11 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
+| overlay | ok: `usage/OVERLAY-wagner-complaint.pdf` and `usage/OVERLAY-wagner-complaint.txt` (paired against the Wagner exemplar). |
 | pages reviewed | 11 of 11 (every page of the current PDF rendered at 60 dpi and viewed after the last template change). |
 | content check | every word of the sample body appears in the PDF, in order; the only difference is "non-compliant", which the render breaks at its hyphen (the two halves are present). |
 | `tools/check.sh` | not run: it expects a court folder with `court.json`, `rules.md` and `checks.yaml`, which this doc-type folder is not (the same note as the cand complaint). |
@@ -83,7 +83,7 @@ Every page was rendered at 60 dpi and viewed. No OPEN rows.
 
 ## Overlay
 
-`samples/OVERLAY-wagner-complaint.pdf` is red (ours), blue (filed), black (both). The pairing in `OVERLAY-wagner-complaint.txt` is by shared words, so pages one step apart in the filing pair with each other (our p.2 with the filed p.2 at 46.7%; our p.3 with the filed p.4). The shift is the paragraph numbering of the filed copy and the page breaks, not a missing paragraph (see the content check above). The overlay is a diagnostic; tier 3 differences are not chased.
+`usage/OVERLAY-wagner-complaint.pdf` is red (ours), blue (filed), black (both). The pairing in `OVERLAY-wagner-complaint.txt` is by shared words, so pages one step apart in the filing pair with each other (our p.2 with the filed p.2 at 46.7%; our p.3 with the filed p.4). The shift is the paragraph numbering of the filed copy and the page breaks, not a missing paragraph (see the content check above). The overlay is a diagnostic; tier 3 differences are not chased.
 
 ## Known gaps and open choices
 
@@ -94,7 +94,7 @@ Every page was rendered at 60 dpi and viewed. No OPEN rows.
 5. **Judge line.** "Judge:" prints with the value from frontmatter; a blank value leaves the label alone, as the Wagner filing does.
 6. **Lettered items use an ordered list.** Lettering goes beyond the 26 letters only if a list runs past Z; the sample uses A-T.
 7. **Standing orders.** Individual judges' standing orders may add format or page rules (for example a font size). Not reviewed here; the district rules above are the only ones cited.
-8. **Render and overlay names.** The brief names `samples/<id>.md` and `samples/<id>.pdf`; the tools write `samples/OUTPUT-<id>.pdf` and `samples/OVERLAY-<id>.pdf/.txt` by default. The tools were used as written (they are not to be edited), so those are the names in the folder.
+8. **Render and overlay names.** The brief names `usage/<id>.md` and `usage/<id>.pdf`; the tools write `usage/OUTPUT-<id>.pdf` and `usage/OVERLAY-<id>.pdf/.txt` by default. The tools were used as written (they are not to be edited), so those are the names in the folder.
 9. **Not produced:** the JS-44 civil cover sheet, the corporate disclosure statement, the summons. They are separate filings (L.R. 3.13).
 
 ## Searches (exemplar selection)

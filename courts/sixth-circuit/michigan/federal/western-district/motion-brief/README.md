@@ -1,25 +1,25 @@
 # miwd: motion-brief
 
 Doc type: **motion-brief** (brief in support of a Rule 12(b)(6) motion to dismiss, with its memorandum) in the United States District Court for the Western District of Michigan (`miwd`).
-Folder: `courts/sixth-circuit/michigan/federal/western-district/motion-brief/`. Self-contained: it does not touch the court root (`court.json`, `typst/`, `samples/`, `exemplars/`). The motion itself (the notice of motion, a separate filing that states the relief sought, FRCP 7(b)(1)) is not produced here.
+Folder: `courts/sixth-circuit/michigan/federal/western-district/motion-brief/`. Self-contained: it does not touch the court root (`court.json`, `typst/`, `usage/`, `usage/`). The motion itself (the notice of motion, a separate filing that states the relief sought, FRCP 7(b)(1)) is not produced here.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: 2 filers, `exemplars/FILED-EXAMPLE-valenzuela-alliance-1-26-cv-1694-motion-brief.pdf` (primary, Barnes & Thornburg for Alliance Cloud) and `exemplars/FILED-EXAMPLE-coddington-skopos-1-25-cv-100-motion-brief.pdf` (second filer, Biles Wilson for Skopos). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-valenzuela-brief.md`: the full 11-page filing's body (concise statement through conclusion, footnote, signature); TOC generated; TOA not transcribed |
-| render | ok: `samples/OUTPUT-valenzuela-brief.pdf`, 8 pages (cover, contents, 6 body pages), typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-valenzuela-brief.pdf` and `samples/OVERLAY-valenzuela-brief.txt` (against the primary exemplar) |
+| exemplar | yes: 2 filers, `usage/SAMPLE-miwd-motion-brief-valenzuelaalliance126cv1694.pdf` (primary, Barnes & Thornburg for Alliance Cloud) and `usage/SAMPLE-miwd-motion-brief-coddingtonskopos125cv100.pdf` (second filer, Biles Wilson for Skopos). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-miwd-motion-brief-valenzuelabrief.md`: the full 11-page filing's body (concise statement through conclusion, footnote, signature); TOC generated; TOA not transcribed |
+| render | ok: `usage/OUTPUT-miwd-motion-brief-valenzuelabrief.typst.pdf`, 8 pages (cover, contents, 6 body pages), typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-valenzuela-brief.pdf` and `usage/OVERLAY-valenzuela-brief.txt` (against the primary exemplar) |
 | typeface | rule names no face (LCivR 10.1 sets size only; checked against the rule text 2026-10-15). Stays EB Garamond (vendored, `fonts/eb-garamond/`); no substitute applies. Embedded: EB Garamond only (`pdffonts`). |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed 2026-10-15; see the review below) |
 
 Build, from the repo root (`PATH` must include the toolchain):
 
 ```sh
-sh tools/render.sh courts/sixth-circuit/michigan/federal/western-district/motion-brief samples/INPUT-valenzuela-brief.md
-sh tools/overlay.sh courts/sixth-circuit/michigan/federal/western-district/motion-brief valenzuela-brief exemplars/FILED-EXAMPLE-valenzuela-alliance-1-26-cv-1694-motion-brief.pdf
+sh tools/render.sh courts/sixth-circuit/michigan/federal/western-district/motion-brief usage/INPUT-miwd-motion-brief-valenzuelabrief.md
+sh tools/overlay.sh courts/sixth-circuit/michigan/federal/western-district/motion-brief valenzuela-brief usage/SAMPLE-miwd-motion-brief-valenzuelaalliance126cv1694.pdf
 ```
 
-The tools write `samples/OUTPUT-<id>.pdf` and `samples/OVERLAY-<id>.pdf`/`.txt`. The brief names these `<id>.pdf` and `<id>-overlay.pdf`; the tools (which this box must not edit) use the `OUTPUT-`/`OVERLAY-` names, so those are what is delivered.
+The tools write `usage/OUTPUT-<id>.pdf` and `usage/OVERLAY-<id>.pdf`/`.txt`. The brief names these `<id>.pdf` and `<id>-overlay.pdf`; the tools (which this box must not edit) use the `OUTPUT-`/`OVERLAY-` names, so those are what is delivered.
 
 ## Governing rules
 
@@ -79,9 +79,9 @@ Tier-2 items recorded as accepted or open:
 - **Caption (ACCEPTED).** The second filer (Coddington) uses a section-mark (§) column between the parties and the case number; the template uses a party column closed by a rule, as in the complaint. Both forms appear in this district's filings (tier-2 choice).
 - **Font (ACCEPTED, fonts pass 2026-10-15).** The filed brief is in a Times-style face. LCivR 10.1 names no typeface, so `docs/FONTS.md` gives no substitute and the template keeps EB Garamond; Liberation Serif (Times) is vendored but not required. LCivR 10.1 sets 12 point, which is met. See the complaint README for the same question.
 
-## Overlay (`samples/OVERLAY-valenzuela-brief.pdf`)
+## Overlay (`usage/OVERLAY-valenzuela-brief.pdf`)
 
-Red is our render, blue is the filed exemplar, black is where both agree. Pages are paired by shared words: ours p.1 with filed p.1 (91.8%), p.2 with p.2 (89.4%), p.3 with p.5 (91.6%), p.4 with p.6 (76.8%), p.5 with p.7 (60.1%), p.6 with p.9 (52.5%), p.7 with p.10 (55.7%), p.8 with p.11 (67.4%). The page map is in `samples/OVERLAY-valenzuela-brief.txt`. The contents page overlays the filed contents and, in blue only, the filed table of authorities that we do not produce. The overlay is a diagnostic, not a score.
+Red is our render, blue is the filed exemplar, black is where both agree. Pages are paired by shared words: ours p.1 with filed p.1 (91.8%), p.2 with p.2 (89.4%), p.3 with p.5 (91.6%), p.4 with p.6 (76.8%), p.5 with p.7 (60.1%), p.6 with p.9 (52.5%), p.7 with p.10 (55.7%), p.8 with p.11 (67.4%). The page map is in `usage/OVERLAY-valenzuela-brief.txt`. The contents page overlays the filed contents and, in blue only, the filed table of authorities that we do not produce. The overlay is a diagnostic, not a score.
 
 ## Known gaps
 
@@ -99,7 +99,7 @@ CourtListener search for W.D. Mich. motions and briefs in support of a motion to
 
 ## Engines
 
-DOCX (`docx/`): `sh tools/render.sh --engine docx <this folder> samples/INPUT-valenzuela-brief.md` writes `samples/OUTPUT-valenzuela-brief.docx` (pandoc + `docx/reference.docx` from `docx/build-reference.sh` + `docx/miwd-motion-brief.lua`: cover, contents, numbered headings, signature). Three sections: the cover (empty footer), the contents (lower roman), the brief (arabic from 1). The zip has no duplicate entries and every XML part is well formed (checked 2026-10-15). The `.docx.pdf` step did not run: soffice is not installed on this box.
+DOCX (`docx/`): `sh tools/render.sh --engine docx <this folder> usage/INPUT-miwd-motion-brief-valenzuelabrief.md` writes `usage/OUTPUT-miwd-motion-brief-valenzuelabrief.docx` (pandoc + `docx/reference.docx` from `docx/build-reference.sh` + `docx/miwd-motion-brief.lua`: cover, contents, numbered headings, signature). Three sections: the cover (empty footer), the contents (lower roman), the brief (arabic from 1). The zip has no duplicate entries and every XML part is well formed (checked 2026-10-15). The `.docx.pdf` step did not run: soffice is not installed on this box.
 
 - **Matches the typst reference (set in reference.docx and the filter):** letter paper, 1 in margins, EB Garamond 12 pt (vendored; code styles use vendored Liberation Mono), exact 24 pt body pitch, exact 13.8 pt single lines for the caption, block quotations, footnotes and signature, 0.5 in first-line indent, footnotes 12 pt, heading numbers I., A., 1., a. with hanging indents, the caption with its rule, "ORAL ARGUMENT REQUESTED" at the right of the caption, the title centered below the caption, the signature block kept as one unbreakable row.
 - **Differs from typst:**
@@ -108,7 +108,7 @@ DOCX (`docx/`): `sh tools/render.sh --engine docx <this folder> samples/INPUT-va
   - The 25-page limit (LCivR 7.2(b)) is enforced by typst's assert; the docx has no equivalent check. The count of brief pages in the docx is not measured.
   - Caption rule as a cell border (as in the complaint).
 - **docx BLOCKED items:**
-  - `docx.pdf / page review`: soffice not installed on this box, so no LibreOffice PDF exists and no page was viewed. Every Gate 0 to 3 check that reads the `.docx.pdf` is blocked, and `samples/.check-docx.txt` is not written.
+  - `docx.pdf / page review`: soffice not installed on this box, so no LibreOffice PDF exists and no page was viewed. Every Gate 0 to 3 check that reads the `.docx.pdf` is blocked, and `usage/.check-docx.txt` is not written.
   - `LCivR 7.2(b)` (25-page limit): cannot be measured on the docx until the LibreOffice PDF exists (BLOCKED for this box).
   - `TOC page numbers`: the TOC field has no page numbers until Word or LibreOffice updates it (Word/LibreOffice pagination may differ from the typst numbers).
   - `TOA`: not generated (matches typst; open gap). Word limit: TA/TOA fields are not produced (docs/DOCX.md).

@@ -5,13 +5,13 @@ Folder: `courts/second-circuit/vermont/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-blackberry-coulter-5-22-cv-98-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-coulter-motion-brief.md`: an excerpt of the 25-page memorandum, 9 rendered pages (caption, introduction and background, plaintiffs' allegations, legal standard, the opening of Argument I, all of Argument II, conclusion and signature). The omitted spans are marked in the sample. |
-| render | ok: `samples/OUTPUT-coulter-motion-brief.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-coulter-motion-brief.pdf` and `samples/OVERLAY-coulter-motion-brief.txt` (page map) |
+| exemplar | yes: `usage/SAMPLE-vtd-motion-brief-blackberrycoulter522cv98.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-vtd-motion-brief-coulter.md`: an excerpt of the 25-page memorandum, 9 rendered pages (caption, introduction and background, plaintiffs' allegations, legal standard, the opening of Argument I, all of Argument II, conclusion and signature). The omitted spans are marked in the sample. |
+| render | ok: `usage/OUTPUT-vtd-motion-brief-coulter.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-coulter-motion-brief.pdf` and `usage/OVERLAY-coulter-motion-brief.txt` (page map) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed; see the review below) |
 
-File names follow `tools/render.sh` and `tools/overlay.sh` (`samples/INPUT-<id>.md` in; `samples/OUTPUT-<id>.pdf` and `samples/OVERLAY-<id>.pdf|.txt` out). See the complaint README for why.
+File names follow `tools/render.sh` and `tools/overlay.sh` (`usage/INPUT-<id>.md` in; `usage/OUTPUT-<id>.pdf` and `usage/OVERLAY-<id>.pdf|.txt` out). See the complaint README for why.
 
 ## Governing rules
 
@@ -59,7 +59,7 @@ Not checked by the template: the content of the memorandum (the legal argument),
 6. **Certificate of service.** Not included (see the rules table). The exemplar filed one as an attachment.
 7. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court directory with `court.json` and `rules.md`, which this doc-type folder does not have, and `tools/` is not part of this work. Render, overlay, and the mutant check of the page limit were run; the review below is the per-page check.
 
-## Review of the rendered pages (`samples/OUTPUT-coulter-motion-brief.pdf`, 9 pages, viewed at 60 dpi, after the final template change)
+## Review of the rendered pages (`usage/OUTPUT-vtd-motion-brief-coulter.typst.pdf`, 9 pages, viewed at 60 dpi, after the final template change)
 
 - Page 1: court title; caption with `Docket No. 5:22-CV-98` and the bold title at the right; the opening paragraph; INTRODUCTION AND BACKGROUND; the first paragraph and the start of the second. Pass.
 - Page 2: the rest of the litigation-history paragraph, the Santa Clara paragraph, and the first part of the "After Plaintiffs filed..." paragraph, which ends at "in Vermont," (footnote 1's reference is on page 3). Pass.
@@ -77,7 +77,7 @@ Pages reviewed: 9 of 9.
 
 ## Engines
 
-DOCX engine (`docx/`: `build-reference.sh` makes `reference.docx`; `vtd-motion-brief.lua` is the filter; `render.sh` is the build, which escapes an asterisk before a digit so that the Westlaw star pages "at *10" keep their asterisks). The render is `samples/OUTPUT-coulter-motion-brief.docx` and `samples/OUTPUT-coulter-motion-brief.docx.pdf` (LibreOffice conversion, no errors). The `.docx.pdf` has 10 pages; all 10 were viewed side by side with the typst render at 60 dpi. `render.sh` was run from `/` and from `/tmp` and gave the same bytes.
+DOCX engine (`docx/`: `build-reference.sh` makes `reference.docx`; `vtd-motion-brief.lua` is the filter; `render.sh` is the build, which escapes an asterisk before a digit so that the Westlaw star pages "at *10" keep their asterisks). The render is `usage/OUTPUT-vtd-motion-brief-coulter.docx` and `usage/OUTPUT-vtd-motion-brief-coulter.docx.pdf` (LibreOffice conversion, no errors). The `.docx.pdf` has 10 pages; all 10 were viewed side by side with the typst render at 60 dpi. `render.sh` was run from `/` and from `/tmp` and gave the same bytes.
 
 - Matches the typst output: letter paper, 1 in margins; EB Garamond 13 pt; body text at an exact 26 pt pitch (double) with a 0.5 in first-line indent; footnotes at 13 pt, single-spaced, with a rule above them (native footnotes); the caption as a table with a right and a bottom rule, the docket number and the bold title at the right; the court title; headings (centered bold capitals; bold at the margin for the argument headings; bold italic indented 0.5 in); the list numbered 1., 2., ... with a hanging indent; the signature block (date line, firm, rule, counsel, "Attorneys for ..."), kept together; a centered arabic page number. The text of the `.docx.pdf` matches the typst PDF word for word (checked with `pdftotext`; the differences are reading order in the caption and footnotes, and the line-break hyphenation of "34-35").
 - Differs: the docx is one page longer (10 pages against 9). Line heights are exact, so each page of the docx carries about one line fewer of body text than the typst page. The last page of the docx holds the date line, the counsel block and the signature alone (kept together), where typst keeps them on page 9 with the CONCLUSION. This is OPEN for David: the fix would be a layout change to the template (the typst page is full), not a docx-only change. The caption's right column is a few points taller in the docx.

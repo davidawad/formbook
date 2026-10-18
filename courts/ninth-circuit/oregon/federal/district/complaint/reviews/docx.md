@@ -7,8 +7,8 @@ file is the Gate 2 record for the docx engine.
 
 ## sample kliewer-complaint docx
 
-- pdf: `samples/OUTPUT-kliewer-complaint.docx.pdf`, sha256 `139c2fa5473726a1c7393954190082d874f4d564221ab234fdf16caa476f94f5`, 9 pages, letter, EB Garamond embedded
-- docx: `samples/OUTPUT-kliewer-complaint.docx`, sha256 `f71f90fa138db09a505f0b85aa75e0615ea48d485309850862a07eba69c0c455`
+- pdf: `usage/OUTPUT-kliewer-complaint.docx.pdf`, sha256 `139c2fa5473726a1c7393954190082d874f4d564221ab234fdf16caa476f94f5`, 9 pages, letter, EB Garamond embedded
+- docx: `usage/OUTPUT-kliewer-complaint.docx`, sha256 `f71f90fa138db09a505f0b85aa75e0615ea48d485309850862a07eba69c0c455`
 - pages reviewed: 9 of 9
 
 | Page | Content | Finding |

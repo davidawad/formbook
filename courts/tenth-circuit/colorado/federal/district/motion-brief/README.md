@@ -4,10 +4,10 @@ Doc type: **motion-brief** in the United States District Court for the District 
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-sussman-1-26-cv-02065-motion-brief.pdf` (one filer: Sussman v. Miller, Defendants' motion; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-sussman-motion-to-dismiss.md` (a transcription of part of the 16-page filing; see Known gaps) |
-| render | ok: `samples/OUTPUT-sussman-motion-to-dismiss.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-sussman-motion-to-dismiss.pdf` and `samples/OVERLAY-sussman-motion-to-dismiss.txt` |
+| exemplar | yes: `usage/SAMPLE-cod-motion-brief-sussman126cv02065.pdf` (one filer: Sussman v. Miller, Defendants' motion; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-cod-motion-brief-sussmanmotiontodismiss.md` (a transcription of part of the 16-page filing; see Known gaps) |
+| render | ok: `usage/OUTPUT-cod-motion-brief-sussmanmotiontodismiss.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-sussman-motion-to-dismiss.pdf` and `usage/OVERLAY-sussman-motion-to-dismiss.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names: the sample is `INPUT-<id>.md`, the render is `OUTPUT-<id>.pdf` and the overlay is `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default (the brief's `<id>.md` / `<id>-overlay.pdf` form was not used for this reason).
@@ -15,7 +15,7 @@ File names: the sample is `INPUT-<id>.md`, the render is `OUTPUT-<id>.pdf` and t
 Commands (from the repo root, with `PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/tenth-circuit/colorado/federal/district/motion-brief samples/INPUT-sussman-motion-to-dismiss.md
+sh tools/render.sh courts/tenth-circuit/colorado/federal/district/motion-brief usage/INPUT-cod-motion-brief-sussmanmotiontodismiss.md
 sh tools/overlay.sh courts/tenth-circuit/colorado/federal/district/motion-brief sussman-motion-to-dismiss
 ```
 
@@ -64,11 +64,11 @@ Page limits: the 2025 local rules set none for district-court motions (the only 
 5. **Italics.** Case names are italic in the sample by the template's convention (`*...*` is italic). The filing's italic runs were not checked one by one; the overlay does not check italics.
 6. **Font.** EB Garamond (vendored) is used at 12 pt; the filing's body is Times New Roman (per `pdffonts`). The civil rules set no typeface (10.1(d) asks for 12-point or larger), so EB Garamond is kept under the fonts policy (`docs/FONTS.md`: a court that names no face keeps EB Garamond). The one face named in this court's rules is D.C.COLO.LPtR 17(a)–(b), Arial 12-point for claim-construction and dispositive-motion briefs in patent cases; it does not govern this civil rights motion. If this template is used for a brief in a patent case, the face must switch to `Liberation Sans` (metric-compatible Arial). EB Garamond's smaller x-height makes the text look smaller than the exemplar; that is the same choice as the complaint folder and is a question for David (a vendored Times-metric font would remove the difference).
 7. **Certificate of compliance.** The sample keeps the filing's certificate, which is required by the judge's practice standards, not by LCivR 7.1(a) (excepted for Rule 12 motions by 7.1(b)(2)). The template prints it only when the frontmatter supplies `conferral`.
-8. **Overlay is a diagnostic, not a score.** Page pairs from `samples/OVERLAY-sussman-motion-to-dismiss.txt`: ours p.1 with filed p.1 at 93%; p.2 with p.2 at 76%; p.3 with p.4 at 75%; p.4 with p.5 at 70%; p.5 with p.6 at 46%; p.6 with p.8 at 60%; p.7 with p.15 at 60%; p.8 with p.16 at 64%. The pairs shift because the sample omits parts of the filing; read the overlay for layout, not text.
+8. **Overlay is a diagnostic, not a score.** Page pairs from `usage/OVERLAY-sussman-motion-to-dismiss.txt`: ours p.1 with filed p.1 at 93%; p.2 with p.2 at 76%; p.3 with p.4 at 75%; p.4 with p.5 at 70%; p.5 with p.6 at 46%; p.6 with p.8 at 60%; p.7 with p.15 at 60%; p.8 with p.16 at 64%. The pairs shift because the sample omits parts of the filing; read the overlay for layout, not text.
 9. **Not produced.** Proposed order (LCivR 7.1(g): a separate document with its own caption), any notice of hearing or related filing.
 10. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the page review below is the Gate 2 equivalent.
 
-## Review of the rendered pages (`OUTPUT-sussman-motion-to-dismiss.pdf`, 8 pages)
+## Review of the rendered pages (`OUTPUT-cod-motion-brief-sussmanmotiontodismiss.typst.pdf`, 8 pages)
 
 - Page 1: caption (plaintiff, `v.`, three defendants), title MOTION TO DISMISS, lead-in, CERTIFICATE OF COMPLIANCE, I. INTRODUCTION heading and first lines. Footer page number. Pass.
 - Page 2: INTRODUCTION end; II. STANDARD OF REVIEW; III. ALLEGED FACTS; first paragraphs; footnote 1 at the foot of the page, 12 pt. Pass.
@@ -83,7 +83,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `cod.lua` sets the caption, section numbers, the certificates and the signature block). `sh tools/render.sh --engine docx courts/tenth-circuit/colorado/federal/district/motion-brief samples/INPUT-sussman-motion-to-dismiss.md` writes `OUTPUT-sussman-motion-to-dismiss.docx` and `OUTPUT-sussman-motion-to-dismiss.docx.pdf` (LibreOffice 26.8.1; `pdffonts`: EB Garamond only, embedded).
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `cod.lua` sets the caption, section numbers, the certificates and the signature block). `sh tools/render.sh --engine docx courts/tenth-circuit/colorado/federal/district/motion-brief usage/INPUT-cod-motion-brief-sussmanmotiontodismiss.md` writes `OUTPUT-cod-motion-brief-sussmanmotiontodismiss.docx` and `OUTPUT-cod-motion-brief-sussmanmotiontodismiss.docx.pdf` (LibreOffice 26.8.1; `pdffonts`: EB Garamond only, embedded).
 
 - Matches the typst output: 8 pages, the same as typst. Letter paper; margins as the complaint; 12 pt EB Garamond with 24 pt exact line pitch; caption and title as the complaint; section headings numbered by the template (I. centred caps; A., 1. with a hanging number, as typst); the conferral certificate and the certificate of service (centred bold headings, the party block indented and single spaced); footnotes at 12 pt, single spaced, with superscript references; the block quotation single spaced and indented one inch each side; centred page number in the footer.
 - Differs: (a) pagination. Same cause as the complaint: about one line less per page in LibreOffice, so page breaks fall one or two lines earlier (for example page 4 starts with "Plaintiff brings various claims", page 7 starts with "Plaintiff asserts that the deputies"); the page count is the same. Word may break pages differently again. (b) Footnote separator and number spacing are LibreOffice's defaults, not typst's; they look the same at 60 dpi.

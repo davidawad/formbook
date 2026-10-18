@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/adv
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-icap-25-80041-adversary-complaint.pdf` (Bush Kornfeld LLP for co-trustees, 2025-09-26) and `exemplars/FILED-EXAMPLE-cle-elum-25-80033-adversary-complaint.pdf` (Stoel Rives LLP for the City of Cle Elum, Chapter 9, 2025-08-13). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-icap-adversary-complaint.md`: caption, paragraphs 1 to 35 (Counts I and II), prayer, signature, Exhibit 1 and Exhibit 2 (full tables). Counts III and IV are not transcribed (see Known gaps). |
-| render | ok: `samples/OUTPUT-icap-adversary-complaint.pdf`, 17 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> samples/INPUT-icap-adversary-complaint.md samples/OUTPUT-icap-adversary-complaint.pdf`). |
-| overlay | ok: `samples/OVERLAY-icap-adversary-complaint.pdf` and `samples/OVERLAY-icap-adversary-complaint.txt` (`tools/overlay.sh` with the iCap exemplar as third argument, 2026-10-15; see Overlay). The exemplar PDF is not in the checkout; it was fetched from its CourtListener URL in `exemplars/SOURCE.md` into a scratch directory for the run. |
+| exemplar | yes: `usage/SAMPLE-waeb-adversary-complaint-icap2580041.pdf` (Bush Kornfeld LLP for co-trustees, 2025-09-26) and `usage/SAMPLE-waeb-adversary-complaint-cleelum2580033.pdf` (Stoel Rives LLP for the City of Cle Elum, Chapter 9, 2025-08-13). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-waeb-adversary-complaint-icap.md`: caption, paragraphs 1 to 35 (Counts I and II), prayer, signature, Exhibit 1 and Exhibit 2 (full tables). Counts III and IV are not transcribed (see Known gaps). |
+| render | ok: `usage/OUTPUT-waeb-adversary-complaint-icap.typst.pdf`, 17 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-waeb-adversary-complaint-icap.md usage/OUTPUT-waeb-adversary-complaint-icap.typst.pdf`). |
+| overlay | ok: `usage/OVERLAY-icap-adversary-complaint.pdf` and `usage/OVERLAY-icap-adversary-complaint.txt` (`tools/overlay.sh` with the iCap exemplar as third argument, 2026-10-15; see Overlay). The exemplar PDF is not in the checkout; it was fetched from its CourtListener URL in `usage/SOURCE.md` into a scratch directory for the run. |
 | pages reviewed | 17 of 17 (2026-10-15: every page rasterized at 70 dpi and viewed as a contact sheet, unchanged font; earlier 60 dpi review 2026-10-14). |
 | typeface | LBR 9004-1(a)(3) names no face; EB Garamond kept (2026-10-15 check of the rule text). See Typeface. |
 
@@ -69,7 +69,7 @@ Not produced by this template (separate filings, may be required with the first 
 
 ## Overlay
 
-`samples/OVERLAY-icap-adversary-complaint.pdf` is the red/blue comparison of our render (red) with the filed exemplar (blue), page by page; `-overlay.txt` is the page map. Pairing by text gives: ours 1 to 11 with filed 1 to 11 (word overlap 47 to 89 per cent), ours 12 to 17 with filed 13 to 18 (the exemplar has counts III and IV and the Exhibit 1 table on different pages). The overlay is diagnostic, not a score: the red and blue differ in font size (EB Garamond 14 pt against Times 12 pt in the exemplar), so the text does not line up by eye.
+`usage/OVERLAY-icap-adversary-complaint.pdf` is the red/blue comparison of our render (red) with the filed exemplar (blue), page by page; `-overlay.txt` is the page map. Pairing by text gives: ours 1 to 11 with filed 1 to 11 (word overlap 47 to 89 per cent), ours 12 to 17 with filed 13 to 18 (the exemplar has counts III and IV and the Exhibit 1 table on different pages). The overlay is diagnostic, not a score: the red and blue differ in font size (EB Garamond 14 pt against Times 12 pt in the exemplar), so the text does not line up by eye.
 
 ## Known gaps
 
@@ -94,7 +94,7 @@ Not produced by this template (separate filings, may be required with the first 
 
 ## Engines
 
-docx (`docx/`): `reference.docx` (built by `docx/build-reference.sh`), `complaint.lua` (the markdown contract to cover, caption, numbered paragraphs, lettered lists, signature block and exhibits), `render.sh` (pandoc, then the footer title). Render: `sh tools/render.sh --engine docx <this dir> samples/INPUT-icap-adversary-complaint.md` writes `samples/OUTPUT-icap-adversary-complaint.docx` and `samples/OUTPUT-icap-adversary-complaint.docx.pdf` (LibreOffice 26.8; `pdffonts` shows EB Garamond only). Pages: docx 17, typst 17.
+docx (`docx/`): `reference.docx` (built by `docx/build-reference.sh`), `complaint.lua` (the markdown contract to cover, caption, numbered paragraphs, lettered lists, signature block and exhibits), `render.sh` (pandoc, then the footer title). Render: `sh tools/render.sh --engine docx <this dir> usage/INPUT-waeb-adversary-complaint-icap.md` writes `usage/OUTPUT-waeb-adversary-complaint-icap.docx` and `usage/OUTPUT-waeb-adversary-complaint-icap.docx.pdf` (LibreOffice 26.8; `pdffonts` shows EB Garamond only). Pages: docx 17, typst 17.
 
 What matches the typst output (`typst/`): letter, 1 in margins; EB Garamond 14 pt throughout; body lines on the typst line pitch (31.4 pt, exact spacing); counsel, caption, signature and table lines single-spaced (about 20 pt); footnotes single-spaced as in the typst complaint template; footer `COMPLAINT n`; counsel side by side and the caption with its rules on page 1; court title with the typst blank lines; numbered paragraphs, (a) lists and A. headings; each exhibit on its own page with the header row repeated; signature block after the prayer, kept with the closing paragraph and the date.
 
@@ -104,4 +104,4 @@ What differs (checked page by page, `reviews/docx.md`):
 - "/s/ JASON EDWARD WAX (WSBA #41944)" wraps in LibreOffice inside the 3.5 in signature column; typst keeps it on one line.
 - Word was not run here (no Word on this machine). Word may paginate slightly differently (docs/DOCX.md).
 
-BLOCKED: check.sh gates 0-3: `tools/check.sh <this dir> --engine docx` cannot run on a doc-type folder. It reads `court.json` and `checks.yaml` from the court dir; this folder has neither, and the court folder has `court.json` but no `checks.yaml`. No `samples/.check-docx.txt` is written. The pages were checked by hand (see `reviews/docx.md`), not by the gates.
+BLOCKED: check.sh gates 0-3: `tools/check.sh <this dir> --engine docx` cannot run on a doc-type folder. It reads `court.json` and `checks.yaml` from the court dir; this folder has neither, and the court folder has `court.json` but no `checks.yaml`. No `usage/.check-docx.txt` is written. The pages were checked by hand (see `reviews/docx.md`), not by the gates.

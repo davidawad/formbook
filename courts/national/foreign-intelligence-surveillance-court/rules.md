@@ -10,7 +10,7 @@ Re-check cadence: the Rules have been unchanged since they took effect November 
 |---|---|---|
 | FR | United States Foreign Intelligence Surveillance Court, Rules of Procedure, effective November 1, 2010. Page numbers are the Rules' printed pages. | https://www.fisc.uscourts.gov/sites/default/files/FISC%20Rules%20of%20Procedure.pdf |
 | RP | FISC "Rules of Procedure" page (states the 2010 Rules are current and supersede the 2006 rules and procedures) | https://www.fisc.uscourts.gov/rules-procedure |
-| EX-* | Filed exemplars in `motion-brief/exemplars/` (see `SOURCE.md`): the United States (DOJ National Security Division) in Misc. 19-02, and Yahoo! Inc. (ZwillGen PLLC) in 105B(g) 07-01 | local |
+| EX-* | Filed exemplars in `motion-brief/usage/` (see `SOURCE.md`): the United States (DOJ National Security Division) in Misc. 19-02, and Yahoo! Inc. (ZwillGen PLLC) in 105B(g) 07-01 | local |
 
 Kinds: **M** = mandated by a FISC Rule. **C** = convention (rules leave it open). **T** = project/tooling rule. **A** = author responsibility, not machine-checkable.
 

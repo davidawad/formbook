@@ -6,10 +6,10 @@ Folder: `courts/ninth-circuit/washington/federal/eastern-district/motion-brief/`
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-hartsock-4-26-cv-05098-motion-to-dismiss.pdf` (25 pp., ECF No. 4; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-hartsock-motion-to-dismiss.md` (an excerpt, 11 rendered pages; see below) |
-| render | ok: `samples/OUTPUT-hartsock-motion-to-dismiss.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-hartsock-motion-to-dismiss.pdf` and `OVERLAY-hartsock-motion-to-dismiss.txt` |
+| exemplar | yes: `usage/SAMPLE-waed-motion-brief-hartsock426cv05098motiontodismiss.pdf` (25 pp., ECF No. 4; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-waed-motion-brief-hartsockmotiontodismiss.md` (an excerpt, 11 rendered pages; see below) |
+| render | ok: `usage/OUTPUT-waed-motion-brief-hartsockmotiontodismiss.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-hartsock-motion-to-dismiss.pdf` and `OVERLAY-hartsock-motion-to-dismiss.txt` |
 | typeface | face required: none named by LCivR 10(d) (serif or traditional Roman; proportionately spaced, 14 pt or more; or monospaced). Vendored substitute: not needed, EB Garamond kept (any proportional serif meets the rule). Fit: n/a. Font list: `EB Garamond`, embedded (`pdffonts`). |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; pages 2 to 9 and 11 after the last footer change, as a contact sheet; all 11 again on the fonts pass) |
 
@@ -50,7 +50,7 @@ Local rules source: E.D. Wash. Local Civil Rules, November 2025 version (per the
 
 ## Overlay
 
-`samples/OVERLAY-hartsock-motion-to-dismiss.pdf`: our render in red, the filed exemplar in blue, overlap in black. Pages are paired by shared words (`tools/overlay.sh`); the page map is in `OVERLAY-hartsock-motion-to-dismiss.txt`:
+`usage/OVERLAY-hartsock-motion-to-dismiss.pdf`: our render in red, the filed exemplar in blue, overlap in black. Pages are paired by shared words (`tools/overlay.sh`); the page map is in `OVERLAY-hartsock-motion-to-dismiss.txt`:
 
 | our page | filed page | word overlap |
 |---|---|---|
@@ -98,7 +98,7 @@ The overlay is a diagnostic, not a score. The sample pairs with the filed pages 
 
 ### docx (`docx/`)
 
-Build and render: `sh docx/build-reference.sh docx/reference.docx` (the reference is generated), then `sh tools/render.sh --engine docx <this folder> samples/INPUT-hartsock-motion-to-dismiss.md`, which writes `samples/OUTPUT-hartsock-motion-to-dismiss.docx` and `samples/OUTPUT-hartsock-motion-to-dismiss.docx.pdf` (LibreOffice 26.8 conversion; EB Garamond embedded). `docx/motion-brief.lua` lays out the caption (with the hearing notation), the table of contents, the memorandum and the signature block; `docx/pleading.lua` holds the shared helpers. `docx/render.sh` runs two passes: pass 1 writes the headings it finds and their pages come from its PDF; pass 2 writes the table of contents with those pages and must paginate like pass 1.
+Build and render: `sh docx/build-reference.sh docx/reference.docx` (the reference is generated), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-waed-motion-brief-hartsockmotiontodismiss.md`, which writes `usage/OUTPUT-waed-motion-brief-hartsockmotiontodismiss.docx` and `usage/OUTPUT-waed-motion-brief-hartsockmotiontodismiss.docx.pdf` (LibreOffice 26.8 conversion; EB Garamond embedded). `docx/motion-brief.lua` lays out the caption (with the hearing notation), the table of contents, the memorandum and the signature block; `docx/pleading.lua` holds the shared helpers. `docx/render.sh` runs two passes: pass 1 writes the headings it finds and their pages come from its PDF; pass 2 writes the table of contents with those pages and must paginate like pass 1.
 
 What matches the typst output (checked on the LibreOffice PDF, 11 pages, the same first line on every page, and the same TOC pages: I 3, II 4, III 6, IV 7, A 7, B 7, V 10, certificate 11):
 
@@ -118,4 +118,4 @@ What differs (not a rule; tier 2 or 3):
 
 Checks: `tools/check.sh` cannot run on a doc-type folder: it reads `<court>/court.json` and `<court>/checks.yaml`, and this folder has neither. The docx PDF was checked by hand: every word of the sample is in the PDF (the two exceptions are em-dash joins that `pdftotext` splits), all 11 pages were viewed as PNG (`reviews/docx-review.md`).
 
-BLOCKED: tools/check.sh (all gates, `--engine docx`): the script needs `<court>/court.json` and `<court>/checks.yaml` (`Error: open .../checks.yaml: no such file or directory`), which only exist at court level; no gate ran on this folder, so `samples/.check-docx.txt` is not written.
+BLOCKED: tools/check.sh (all gates, `--engine docx`): the script needs `<court>/court.json` and `<court>/checks.yaml` (`Error: open .../checks.yaml: no such file or directory`), which only exist at court level; no gate ran on this folder, so `usage/.check-docx.txt` is not written.

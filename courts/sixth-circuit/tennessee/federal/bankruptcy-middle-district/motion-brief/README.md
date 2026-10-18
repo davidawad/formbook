@@ -5,11 +5,11 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district/motio
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-lemeh-no-name-3-25-ap-90071-motion-brief.pdf` (1 filer, the defendant; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-nng-mtd-memo.md`: the full 8-page memorandum with its three footnotes, transcribed from the text layer |
-| render | ok: `samples/OUTPUT-nng-mtd-memo.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/SAMPLE-tnmb-motion-brief-lemehnoname325ap90071.pdf` (1 filer, the defendant; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-tnmb-motion-brief-nngmtdmemo.md`: the full 8-page memorandum with its three footnotes, transcribed from the text layer |
+| render | ok: `usage/OUTPUT-tnmb-motion-brief-nngmtdmemo.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | typeface | Rules name no face (LBR 5005-3(a): "All filings shall be clearly legible in 12-point font"). Vendored family: `EB Garamond` (`docs/FONTS.md`, "No face named"). Exemplar is Times New Roman: EB Garamond is visual only against it, not metric-compatible. |
-| overlay | ok: `samples/OVERLAY-nng-mtd-memo.pdf` and `samples/OVERLAY-nng-mtd-memo.txt` (`tools/overlay.sh`) |
+| overlay | ok: `usage/OVERLAY-nng-mtd-memo.pdf` and `usage/OVERLAY-nng-mtd-memo.txt` (`tools/overlay.sh`) |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names follow the tools, not the brief's `<id>.pdf` / `<id>-overlay.pdf`: `tools/render.sh` writes `OUTPUT-<id>.pdf`, `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf` and `.txt`, and the markdown is `INPUT-<id>.md`.
@@ -48,7 +48,7 @@ Primary source: Local Bankruptcy Rules of the United States Bankruptcy Court for
 
 ## Overlay
 
-`samples/OVERLAY-nng-mtd-memo.pdf`: red is our render, blue is the filed exemplar, black is where they agree. `OVERLAY-nng-mtd-memo.txt` maps each of our pages to the best-matching filed page by shared words: ours 1 to filed 1 (65.4%), 2 to 2 (62.5%), 3 to 3 (74.4%), 4 to 5 (52.6%), 5 to 6 (60.5%), 6 to 7 (71.1%), 7 to 8 (73.9%). The exemplar is 8 pages and the render is 7. The map is off by one from page 4 on because the page breaks differ; the cause was not isolated (the font difference, Known gap 1, is the likely driver). The overlay is a diagnostic, not a score.
+`usage/OVERLAY-nng-mtd-memo.pdf`: red is our render, blue is the filed exemplar, black is where they agree. `OVERLAY-nng-mtd-memo.txt` maps each of our pages to the best-matching filed page by shared words: ours 1 to filed 1 (65.4%), 2 to 2 (62.5%), 3 to 3 (74.4%), 4 to 5 (52.6%), 5 to 6 (60.5%), 6 to 7 (71.1%), 7 to 8 (73.9%). The exemplar is 8 pages and the render is 7. The map is off by one from page 4 on because the page breaks differ; the cause was not isolated (the font difference, Known gap 1, is the likely driver). The overlay is a diagnostic, not a score.
 
 ## Known gaps and open choices
 

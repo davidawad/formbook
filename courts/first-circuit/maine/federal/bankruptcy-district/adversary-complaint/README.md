@@ -4,10 +4,10 @@ Doc type: **adversary complaint** (commencing an adversary proceeding) in the Un
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-manhart-26-01006-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-manhart-adversary-complaint.md` (the whole 5-page complaint, transcribed) |
-| render | ok: `samples/OUTPUT-manhart-adversary-complaint.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-manhart-adversary-complaint.pdf` and `.txt` (page map below) |
+| exemplar | yes: `usage/SAMPLE-meb-adversary-complaint-manhart2601006.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-meb-adversary-complaint-manhart.md` (the whole 5-page complaint, transcribed) |
+| render | ok: `usage/OUTPUT-meb-adversary-complaint-manhart.typst.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-manhart-adversary-complaint.pdf` and `.txt` (page map below) |
 | pages reviewed | 4 of 4 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names: the tools read and write `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` by default, so the sample uses those names (not `<id>.md` and `<id>-overlay.pdf` as the brief's layout listed). `<id>` is `manhart-adversary-complaint`.
@@ -48,7 +48,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## What the overlay shows
 
-`samples/OVERLAY-manhart-adversary-complaint.pdf`: red is our render, blue is the filed exemplar, and black is where they agree. The page map (`.txt`):
+`usage/OVERLAY-manhart-adversary-complaint.pdf`: red is our render, blue is the filed exemplar, and black is where they agree. The page map (`.txt`):
 
 ```
 ours p.1  filed p.1  word-overlap 67.9%
@@ -85,12 +85,12 @@ Defects found and fixed during review: (1) paragraphs drawn over each other (a b
 
 ## Engines
 
-Typst is the primary engine. This section covers the docx engine (`docx/`): pandoc 3.6.4 with `docx/reference.docx` (the page setup and styles; rebuild with `sh docx/make-reference.sh docx`) and the Lua filter `docx/meb-adversary-complaint.lua` (the cover, caption, numbered paragraphs, relief and signature). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-manhart-adversary-complaint.md`.
+Typst is the primary engine. This section covers the docx engine (`docx/`): pandoc 3.6.4 with `docx/reference.docx` (the page setup and styles; rebuild with `sh docx/make-reference.sh docx`) and the Lua filter `docx/meb-adversary-complaint.lua` (the cover, caption, numbered paragraphs, relief and signature). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-meb-adversary-complaint-manhart.md`.
 
 | Output | Result |
 |---|---|
-| `samples/OUTPUT-manhart-adversary-complaint.docx` | written; zip and well-formed XML parts pass the `render-docx.sh` integrity check |
-| `samples/OUTPUT-manhart-adversary-complaint.docx.pdf` | **not produced**: LibreOffice does not start in the build environment (see BLOCKED below) |
+| `usage/OUTPUT-meb-adversary-complaint-manhart.docx` | written; zip and well-formed XML parts pass the `render-docx.sh` integrity check |
+| `usage/OUTPUT-manhart-adversary-complaint.docx.pdf` | **not produced**: LibreOffice does not start in the build environment (see BLOCKED below) |
 | pages reviewed in the docx PDF | 0 of 4 (there is no PDF to render; the typst pages are the reference) |
 
 **What matches typst** (the same values, set in the reference styles): US Letter with 1 in margins; EB Garamond 12 pt; body lines exactly 24 pt (double spacing); first-line indent 0.5 in; paragraphs numbered 1, 2, ... as typed text with a tab (the typst template numbers them the same way, not as an automatic list); the caption as a table with the right and bottom rules of the typst box; the title in capitals; level-1 headings centred in capitals; the WHEREFORE paragraph and the signature block kept together; the footer "- n -" from a PAGE field.
@@ -103,7 +103,7 @@ Typst is the primary engine. This section covers the docx engine (`docx/`): pand
 - The docx names "EB Garamond" and does not embed it. The font must be installed on the machine that opens the file, or Word substitutes silently.
 - Footnote text (not in this sample) inherits 12 pt single spacing from Normal; not checked.
 
-**docx BLOCKED items** (the docx checks run on `samples/OUTPUT-manhart-adversary-complaint.docx.pdf`):
+**docx BLOCKED items** (the docx checks run on `usage/OUTPUT-manhart-adversary-complaint.docx.pdf`):
 
 - `BLOCKED: Gate 0 and Gate 1 (tools/check.sh --engine docx)`: no `.docx.pdf` exists, so the page count, the font names and the content gates cannot run. Cause: LibreOffice 25.2 (Debian trixie packages, unpacked without root) stops at bootstrap with a `DeploymentException`, even for `soffice --version`.
 - `BLOCKED: Gate 2 (page review of the docx PDF)`: no pages reviewed, for the same reason.

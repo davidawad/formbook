@@ -5,10 +5,10 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/moti
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-kenney-18-00186-motion-brief.pdf` (memorandum only, 1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-kenney-motion-memorandum.md` (the full 7-page memorandum transcribed: caption, background, standard of review, argument, conclusion, footnotes, signature, certificate of service) |
-| render | ok: `samples/OUTPUT-kenney-motion-memorandum.pdf`, 6 pages, US Letter, typst 0.15.0, vendored EB Garamond only, no typst warnings |
-| overlay | ok: `samples/OVERLAY-kenney-motion-memorandum.pdf` and `samples/OVERLAY-kenney-motion-memorandum.txt` |
+| exemplar | yes: `usage/SAMPLE-tnwb-motion-brief-kenney1800186.pdf` (memorandum only, 1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-tnwb-motion-brief-kenneymotionmemorandum.md` (the full 7-page memorandum transcribed: caption, background, standard of review, argument, conclusion, footnotes, signature, certificate of service) |
+| render | ok: `usage/OUTPUT-tnwb-motion-brief-kenneymotionmemorandum.typst.pdf`, 6 pages, US Letter, typst 0.15.0, vendored EB Garamond only, no typst warnings |
+| overlay | ok: `usage/OVERLAY-kenney-motion-memorandum.pdf` and `usage/OVERLAY-kenney-motion-memorandum.txt` |
 | pages reviewed | 6 of 6 (every page of the final render rasterized at 60 dpi and viewed) |
 | tier 2 | not met: one filer only (see Known gaps 1) |
 | typeface | face required by the rules: none (Known gaps 4) -> vendored substitute: none needed, EB Garamond kept per `docs/FONTS.md` ("No face named") -> not applicable |
@@ -16,7 +16,7 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/moti
 Commands (from the repo root, with `export PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/motion-brief samples/INPUT-kenney-motion-memorandum.md
+sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/motion-brief usage/INPUT-tnwb-motion-brief-kenneymotionmemorandum.md
 sh tools/overlay.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/motion-brief kenney-motion-memorandum
 ```
 
@@ -99,7 +99,7 @@ Open tier-2 findings (ACCEPTED): body text is ragged right; the caption uses the
 
 ## Engines
 
-docx (`docx/build-reference.sh` -> `docx/reference.docx`, filter `docx/tnwb.lua`; render `sh tools/render.sh --engine docx`; judged on `samples/OUTPUT-kenney-motion-memorandum.docx.pdf`, the LibreOffice conversion):
+docx (`docx/build-reference.sh` -> `docx/reference.docx`, filter `docx/tnwb.lua`; render `sh tools/render.sh --engine docx`; judged on `usage/OUTPUT-tnwb-motion-brief-kenneymotionmemorandum.docx.pdf`, the LibreOffice conversion):
 
 - Matches the typst output: 6 pages in both; EB Garamond only (`pdffonts`); US Letter, 1 in margins; double spacing (exact 23.9 pt, 27 lines per page as in typst at 24 pt); single-spaced court heading, caption, signature block and the certificate of service's parties in two columns; centered caps, centered bold and left bold headings; block quotation indented 0.5 in on both sides and single spaced; footnotes at 10 pt; page number centered in the footer; the signature block kept with the last body paragraph; the certificate of service on its own page as in typst. Pages reviewed: 6 of 6 (every page of the final docx.pdf rasterized at 60 dpi and viewed, compared with the typst pages).
 - Differs (tier 2, not chased): (1) the signature firm name wraps to three lines in LibreOffice ("BAKER, DONELSON, BEARMAN, / CALDWELL & BERKOWITZ, A Professional / Corporation") where typst wraps to two; (2) pagination: the page 2 footnote is set a line tighter, so page 3 begins about one line earlier in the text than in typst; page counts agree; (3) footnote leading is exact 11.5 pt; (4) no PDF bookmarks.

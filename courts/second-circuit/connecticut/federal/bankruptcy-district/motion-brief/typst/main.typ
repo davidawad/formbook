@@ -1,12 +1,12 @@
 // Entry point. Compile with the doc-type folder as --root; tools/render.sh does it:
 //   typst compile --root <doc-type-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=samples/INPUT-NAME.md \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/INPUT-NAME.md \
 //     typst/main.typ out.pdf
 // Page sequence: cover (no number), table of contents and table of authorities (roman), body (arabic from 1).
 // Page and text settings live here (set rules inside a function do not reach the page).
 #import "ctb-motion-brief.typ": cover, toc, toa, body-text, signature, split-frontmatter, font-family, type-size, body-leading, margin
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-pillsbury-memorandum.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ctb-motion-brief-pillsburymemorandum.md"))
 #let (meta, body) = split-frontmatter(src)
 
 // Each heading is shown as its body, with block spacing: a heading never ends a page (sticky).

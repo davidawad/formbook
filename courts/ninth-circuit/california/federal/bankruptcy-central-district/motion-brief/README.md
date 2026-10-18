@@ -4,7 +4,7 @@ Doc type: **motion** with notice and a memorandum of points and authorities (FRB
 
 Status: exemplar=yes, render=ok, overlay=ok, pages reviewed 11 of 11 (the transcribed sample, every page viewed as PNG in its final form). Nothing here sets a court-level `court.json` status.
 
-The exemplar is a filed chapter 7 trustee's motion with a memorandum, *In re James Capital Advisors, Inc.*, 2:23-bk-14820-BB, Doc 48 (Bankr. C.D. Cal., Los Angeles Division, filed August 23, 2023). Its source, filer and search trail are in `exemplars/SOURCE.md`. The sample `samples/INPUT-james-capital-advisors.md` is a **transcription** of that filing in its real order (notice, memorandum, declaration, proof of service). Page 9 of the filing is a rotated scan, read by eye.
+The exemplar is a filed chapter 7 trustee's motion with a memorandum, *In re James Capital Advisors, Inc.*, 2:23-bk-14820-BB, Doc 48 (Bankr. C.D. Cal., Los Angeles Division, filed August 23, 2023). Its source, filer and search trail are in `usage/SOURCE.md`. The sample `usage/INPUT-cacb-motion-brief-jamescapitaladvisors.md` is a **transcription** of that filing in its real order (notice, memorandum, declaration, proof of service). Page 9 of the filing is a rotated scan, read by eye.
 
 The template's layout comes from the rules; the exemplar settles the conventions the rules leave open (section numerals above the titles, unruled tables, a signature block with the firm to the right). The filing uses Times New Roman, and this template uses Liberation Serif, its vendored metric-compatible substitute (`docs/FONTS.md`): see gap 2.
 
@@ -50,13 +50,13 @@ No table of contents or table of authorities is generated. No C.D. Cal. rule tha
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/ninth-circuit/california/federal/bankruptcy-central-district/motion-brief samples/INPUT-james-capital-advisors.md
+sh tools/render.sh courts/ninth-circuit/california/federal/bankruptcy-central-district/motion-brief usage/INPUT-cacb-motion-brief-jamescapitaladvisors.md
 sh tools/overlay.sh courts/ninth-circuit/california/federal/bankruptcy-central-district/motion-brief james-capital-advisors
 ```
 
-- `samples/OUTPUT-james-capital-advisors.pdf`: 11 pages, the same count as the filing. Typst compiled with no warnings. Fonts: Liberation Serif only (vendored); `pdffonts` shows `LiberationSerif` and `LiberationSerif-Bold`, embedded. The sample has no italic markup, so no italic face is used.
+- `usage/OUTPUT-cacb-motion-brief-jamescapitaladvisors.typst.pdf`: 11 pages, the same count as the filing. Typst compiled with no warnings. Fonts: Liberation Serif only (vendored); `pdffonts` shows `LiberationSerif` and `LiberationSerif-Bold`, embedded. The sample has no italic markup, so no italic face is used.
 - Line pitch: `body-leading` 1.345 em and `single-leading` 0.345 em give 24.0 pt and 12.0 pt on the numbered grid, as in the adversary complaint (the leading is set per face because Liberation Serif's line box is 0.655 em).
-- `samples/OVERLAY-james-capital-advisors.pdf` and `.txt` were written. Page pairing by word overlap: notice pages 1-2 at 84% and 92%; memorandum pages 3-6 at 94%, 80%, 75%, 71%; declaration and proof of service pages 7, 9, 10, 11 at 85%, 77%, 41%, 80%. Our page 8 pairs with filed page 2 at 17%: a spurious pairing, since the declaration's second page carries few words. The memorandum's conclusion falls on page 6 here and page 7 in the filing; the sample is a transcription, so this is not established as a template finding.
+- `usage/OVERLAY-james-capital-advisors.pdf` and `.txt` were written. Page pairing by word overlap: notice pages 1-2 at 84% and 92%; memorandum pages 3-6 at 94%, 80%, 75%, 71%; declaration and proof of service pages 7, 9, 10, 11 at 85%, 77%, 41%, 80%. Our page 8 pairs with filed page 2 at 17%: a spurious pairing, since the declaration's second page carries few words. The memorandum's conclusion falls on page 6 here and page 7 in the filing; the sample is a transcription, so this is not established as a template finding.
 
 ## Visual review (Gate 2 record, all 11 pages of the transcribed sample, rendered at 80 dpi and looked at, final render with Liberation Serif)
 
@@ -80,7 +80,7 @@ Defects found and fixed during review: the footer title clipped at the page edge
 
 ## Known gaps and open choices
 
-1. **One exemplar, one filer.** The exemplar is a chapter 7 trustee's motion by trustee's counsel (Danning, Gill, Israel & Krasnoff). Tier 2 asks for 2 or 3 filers; a second filed motion with a memorandum from a creditor or debtor (for example, Zions Bancorporation's remand motion, 8:26-ap-01060 Doc 16, 30 pages) is the next addition. See `exemplars/SOURCE.md`.
+1. **One exemplar, one filer.** The exemplar is a chapter 7 trustee's motion by trustee's counsel (Danning, Gill, Israel & Krasnoff). Tier 2 asks for 2 or 3 filers; a second filed motion with a memorandum from a creditor or debtor (for example, Zions Bancorporation's remand motion, 8:26-ap-01060 Doc 16, 30 pages) is the next addition. See `usage/SOURCE.md`.
 2. **Typeface (CACB-FORM-001 to -006). Resolved in the fonts pass.** The Central Guide lists Times New Roman among the required typefaces; the template uses Liberation Serif, the vendored metric-compatible substitute (`docs/FONTS.md`). Same decision as the adversary complaint: see that README, gap 1. The sample's page count is 11, the same as the filing.
 3. **Proof of service (LBR 9013-1(e)).** Required with every document under the rule; not generated. A separate form (F 9013-3.1 family) is needed.
 4. **Court-approved notice forms (LBR 9013-1(o), (p), (q)).** If the motion is decided on notice or without a hearing, the court's form must be used (LBR 9009-1(b)(4)). This template makes a free-form notice; it is not those forms.
@@ -94,10 +94,10 @@ Defects found and fixed during review: the footer title clipped at the page edge
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` builds `reference.docx`; `cacb-motion.lua` lays out the cover, the caption, the numbered headings, the body, the signature blocks and the page breaks). Built with `sh tools/render.sh --engine docx`; `samples/OUTPUT-james-capital-advisors.docx` and `.docx.pdf` are the output. Checked with LibreOffice only (Word is not available here).
+**docx** (`docx/`: `build-reference.sh` builds `reference.docx`; `cacb-motion.lua` lays out the cover, the caption, the numbered headings, the body, the signature blocks and the page breaks). Built with `sh tools/render.sh --engine docx`; `usage/OUTPUT-cacb-motion-brief-jamescapitaladvisors.docx` and `.docx.pdf` are the output. Checked with LibreOffice only (Word is not available here).
 
 - Matches the typst template: the same page, pleading numbers, rules, typeface, pitches and footer as the adversary complaint docx; counsel on lines 1-7; the court title; the single caption (debtor ruled on the left; case and chapter numbers, title and hearing on the right) with the body starting on the same first page; headings numbered from their level (I., A., 1., a.; level 1 is an unnumbered centered section that restarts the count), the blank line before a level-2 heading; unruled, single-spaced tables; signature blocks at the markers, with the paragraph before a signature kept with it; `<!-- pagebreak -->` starts the next block on a new page; footer with the page number, the title and the case number.
 - Differs or is limited: the 28 pleading numbers are a text box in the header, and the single-spaced rows (counsel, caption, tables, signature) are not rounded to the 24 pt grid, as in the adversary docx. Headings are plain text: italics in a heading would be lost (none in this sample). The bottom margin is 1 pt less than the typst template (table rules). The font name is Liberation Serif, as in the typst template; the rule text names Times New Roman (same decision as the adversary complaint). Block quotations use Word's Block Text style, not a typst block.
-- Page count: this docx renders to 12 pages in LibreOffice. The typst README reports 11 pages for the same sample. No typst `OUTPUT` PDF exists in `samples/` and none was made, so the difference was not traced page by page. Pagination differs by renderer (docs/DOCX.md).
+- Page count: this docx renders to 12 pages in LibreOffice. The typst README reports 11 pages for the same sample. No typst `OUTPUT` PDF exists in `usage/` and none was made, so the difference was not traced page by page. Pagination differs by renderer (docs/DOCX.md).
 - Pages rendered and viewed in LibreOffice at 60 dpi: 1-12 (all).
 - **BLOCKED: `sh tools/check.sh <doc-dir> --engine docx` does not run.** It needs `checks.yaml` (the Gate 1 rule checks) and `reviews/` at court level, and neither exists for cacb; it exits 2 before any gate runs and writes no stamp. Gates 0-3 are not verified by the tool. Reason: court-level files, out of scope for this task.

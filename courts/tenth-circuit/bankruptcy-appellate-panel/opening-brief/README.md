@@ -2,9 +2,9 @@
 
 - Court: `bap10`, United States Bankruptcy Appellate Panel of the Tenth Circuit (`courts/tenth-circuit/bankruptcy-appellate-panel/`)
 - Doc type: `opening-brief`. Rule basis: Fed. R. Bankr. P. Part VIII and 10th Cir. BAP Local Rules (see Governing rules).
-- Exemplar: **none**. BLOCKED: no exemplar. Searched WebSearch (standard and extended), the CourtListener API (`court=bap10` RECAP: 0 documents; opinions only), Tenth Circuit RECAP (BAP-origin appeals are ca10 filings, not BAP filings), Justia dockets; only the court's own pro se guide sample brief was found (not a filing). Searches are recorded in exemplars/SOURCE.md.
-- Render: `samples/OUTPUT-generic-opening-brief.pdf` (typst, vendored EB Garamond only). Overlay: **fail**, no exemplar PDF (`tools/overlay.sh` exits 1: "no exemplar pdf in exemplars").
-- Sample: `samples/INPUT-generic-opening-brief.md`. Fictional parties, real rule citations. It is a generic sample built to exercise the template, not a transcription of any filing.
+- Exemplar: **none**. BLOCKED: no exemplar. Searched WebSearch (standard and extended), the CourtListener API (`court=bap10` RECAP: 0 documents; opinions only), Tenth Circuit RECAP (BAP-origin appeals are ca10 filings, not BAP filings), Justia dockets; only the court's own pro se guide sample brief was found (not a filing). Searches are recorded in usage/SOURCE.md.
+- Render: `usage/OUTPUT-bap10-opening-brief-generic.typst.pdf` (typst, vendored EB Garamond only). Overlay: **fail**, no exemplar PDF (`tools/overlay.sh` exits 1: "no exemplar pdf in exemplars").
+- Sample: `usage/INPUT-bap10-opening-brief-generic.md`. Fictional parties, real rule citations. It is a generic sample built to exercise the template, not a transcription of any filing.
 - Status: template built and rendered; every page reviewed (see Page review). Not reviewed by a human; `court.json` untouched (status not set).
 
 ## Files
@@ -13,10 +13,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `bap10-brief`. |
 | `typst/bap10-opening-brief.typ` | Template. Parameter block at the top (`doc-kind`, `word-limit`, `required-sections`, `needs-standard-of-review`); the rest is the shared body, identical in the three doc-type copies. |
-| `samples/INPUT-generic-opening-brief.md` | Markdown contract sample (frontmatter + body). |
-| `samples/OUTPUT-generic-opening-brief.pdf` | `sh tools/render.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief samples/INPUT-generic-opening-brief.md` |
-| `samples/OVERLAY-generic-opening-brief.*` | not produced: no exemplar (see Overlay). |
-| `exemplars/SOURCE.md` | The search record. No exemplar file. |
+| `usage/INPUT-bap10-opening-brief-generic.md` | Markdown contract sample (frontmatter + body). |
+| `usage/OUTPUT-bap10-opening-brief-generic.typst.pdf` | `sh tools/render.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-bap10-opening-brief-generic.md` |
+| `usage/OVERLAY-generic-opening-brief.*` | not produced: no exemplar (see Overlay). |
+| `usage/SOURCE.md` | The search record. No exemplar file. |
 
 File names follow the tools' convention (`INPUT-`/`OUTPUT-`/`OVERLAY-` plus the sample id), so `tools/render.sh` and `tools/overlay.sh` find them without extra arguments.
 
@@ -54,7 +54,7 @@ Not produced. `sh tools/overlay.sh courts/tenth-circuit/bankruptcy-appellate-pan
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-generic-opening-brief.pdf` was rendered at 60 dpi and viewed.
+Every page of `OUTPUT-bap10-opening-brief-generic.typst.pdf` was rendered at 60 dpi and viewed.
 
 | Page | Content | Result |
 |---|---|---|
@@ -94,22 +94,22 @@ On the first render the TOC repeated the heading numbers ("I. I. ...") and a lon
 
 ## Build and check
 
-    sh tools/render.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief samples/INPUT-generic-opening-brief.md
+    sh tools/render.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-bap10-opening-brief-generic.md
     sh tools/overlay.sh courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief generic-opening-brief   # fails until an exemplar exists
 
 ## Re-check 2026-10-15
 
-- Exemplar: still **none** (BLOCKED: no exemplar). The searches of 2026-10-15 are logged at the end of `exemplars/SOURCE.md`. The BAP's own Briefs page posts no filed brief, only court-authored samples and forms.
-- Render: `sh tools/render.sh` exit 0, no typst warnings, 11 pages. The output is `/work/artifacts/bap10/OUTPUT-generic-opening-brief.pdf`, not `samples/`: the snapshot carries no PDFs, so the existing `samples/` names were not regenerated.
-- Overlay: `sh tools/overlay.sh` exit 1. It finds no OUTPUT in `samples/`, and there is no exemplar to overlay even if there were. Not produced.
+- Exemplar: still **none** (BLOCKED: no exemplar). The searches of 2026-10-15 are logged at the end of `usage/SOURCE.md`. The BAP's own Briefs page posts no filed brief, only court-authored samples and forms.
+- Render: `sh tools/render.sh` exit 0, no typst warnings, 11 pages. The output is `/work/artifacts/bap10/OUTPUT-generic-opening-brief.pdf`, not `usage/`: the snapshot carries no PDFs, so the existing `usage/` names were not regenerated.
+- Overlay: `sh tools/overlay.sh` exit 1. It finds no OUTPUT in `usage/`, and there is no exemplar to overlay even if there were. Not produced.
 - Pages reviewed: 11 of 11. Every page was rasterised at 60 dpi and viewed on 2026-10-15. The Page review table above matches that render. No template change was made: with no exemplar, no open choice can be settled.
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/bap10.lua` builds the cover, front matter, headings, signature and certificates from the same markdown. Build: `sh docx/build-reference.sh docx/reference.docx`; render: `sh tools/render.sh --engine docx courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief samples/INPUT-generic-opening-brief.md`.
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/bap10.lua` builds the cover, front matter, headings, signature and certificates from the same markdown. Build: `sh docx/build-reference.sh docx/reference.docx`; render: `sh tools/render.sh --engine docx courts/tenth-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-bap10-opening-brief-generic.md`.
 
 - Matches the typst form: letter, 1 in margins; EB Garamond 14 pt body, footnotes and headings; double-spaced body (Word "double", auto 480) with a 0.5 in first-line indent; single-spaced headings, quotations and footnotes; cover with no page number; front matter in lowercase roman; body in arabic from 1 (three sections); Argument point headings centered; heading labels (I. A. 1. a. in the Argument, A. 1. a. (1) elsewhere); word count and length check on the same markdown rule as typst (limit: 13,000 words); certificate of compliance; statement of related cases as the last page.
 - Differs from typst: heading labels are typed text, not list numbering; the certificate checkbox is "[X]", not a drawn box; the front matter and body are separate Word sections, and a cover that fills the page may push its empty section-break paragraph onto a new page in Word or LibreOffice; the required-section order check runs in typst only (not repeated in the Lua filter); no keep-with-signature rule.
-- BLOCKED, docx.pdf gates (Gates 0 and 1 on `OUTPUT-generic-opening-brief.docx.pdf`): LibreOffice (`soffice`) is not installed on this box, so no `.docx.pdf` was made and no page was rendered or viewed (pages reviewed: 0).
+- BLOCKED, docx.pdf gates (Gates 0 and 1 on `OUTPUT-bap10-opening-brief-generic.docx.pdf`): LibreOffice (`soffice`) is not installed on this box, so no `.docx.pdf` was made and no page was rendered or viewed (pages reviewed: 0).
 - BLOCKED, table of contents page numbers: the TOC is a TOC field whose cached entries have no page numbers; Word or LibreOffice fills them only after a field update. LibreOffice needs an update on load (see docs/DOCX.md).
 - BLOCKED, table of authorities page references: no page numbers are written (a TOA field is not honored by LibreOffice, and no first-pass page numbers are generated). The authorities list itself is complete.
 - Not checked here: no Word open test (no repair prompt), font embedding (EB Garamond must be installed on the reader's machine; the file names it), and Word vs LibreOffice pagination of the cover (one page is typst-checked only).

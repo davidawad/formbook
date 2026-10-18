@@ -5,10 +5,10 @@ Folder: `courts/eighth-circuit/nebraska/federal/bankruptcy-district/motion-brief
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-kelly-zuhlke-24-04011-motion-brief.pdf` (1 filer, 9 pages; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-zuhlke-motion-brief.md` (the whole brief: caption, intro, sections I to IV with subsections A to F, signature, and the certificate's wording in frontmatter) |
-| render | ok: `samples/OUTPUT-zuhlke-motion-brief.pdf`, 11 pages (the exemplar's 9, plus the certificate on its own page), typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-zuhlke-motion-brief.pdf` and `OVERLAY-zuhlke-motion-brief.txt` (page map) |
+| exemplar | yes: `usage/SAMPLE-nebraskab-motion-brief-kellyzuhlke2404011.pdf` (1 filer, 9 pages; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nebraskab-motion-brief-zuhlke.md` (the whole brief: caption, intro, sections I to IV with subsections A to F, signature, and the certificate's wording in frontmatter) |
+| render | ok: `usage/OUTPUT-nebraskab-motion-brief-zuhlke.typst.pdf`, 11 pages (the exemplar's 9, plus the certificate on its own page), typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-zuhlke-motion-brief.pdf` and `OVERLAY-zuhlke-motion-brief.txt` (page map) |
 | typeface | no face required by the rules (checked 2026-10-14, see Decisions); EB Garamond kept, no substitute from `docs/FONTS.md` applies |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last change; see the review section) |
 
@@ -64,13 +64,13 @@ Body: `## SECTION` (roman), `### Subsection` (letter), blank-line-separated para
 
 ## Engines
 
-Three engines, one markdown sample (`samples/INPUT-zuhlke-motion-brief.md`). The typst template is the reference for the layout.
+Three engines, one markdown sample (`usage/INPUT-nebraskab-motion-brief-zuhlke.md`). The typst template is the reference for the layout.
 
 | Engine | Files | Status |
 |---|---|---|
-| typst (primary) | `typst/`, `samples/OUTPUT-zuhlke-motion-brief.pdf` | rendered (see above) |
+| typst (primary) | `typst/`, `usage/OUTPUT-nebraskab-motion-brief-zuhlke.typst.pdf` | rendered (see above) |
 | latex | none in this folder | not built |
-| docx | `docx/` (`reference.docx`, `nebraskab-motion-brief.lua`, `build-reference.sh`, `render.sh`), `samples/OUTPUT-zuhlke-motion-brief.docx` | `.docx` written; `.docx.pdf` BLOCKED (below) |
+| docx | `docx/` (`reference.docx`, `nebraskab-motion-brief.lua`, `build-reference.sh`, `render.sh`), `usage/OUTPUT-nebraskab-motion-brief-zuhlke.docx` | `.docx` written; `.docx.pdf` BLOCKED (below) |
 
 **docx, what matches the typst template** (the same values, set as Word styles in `reference.docx`): US Letter, 1 in margins; EB Garamond 13 pt; body double spaced (26 pt exact) with a 0.5 in first-line indent; caption, signature and certificate single spaced (14.3 pt exact); footnotes 11 pt; page number centered in the footer, 11 pt. Caption: the court name; the *In re* block with a rule under it; the parties with "v."; intervenors after them, with no "v."; the case lines and the adversary line on the right, then the title in bold capitals, in a borderless three-column table (3.4 in, 0.25 in gutter, 2.85 in). `##` headings are centered bold, numbered I., II., ... by the filter; `###` headings are bold with a hanging A., B., ... that restart under each section. The signature block is kept on one page. The certificate of service starts on its own page, with the CM/ECF wording of the typst template.
 

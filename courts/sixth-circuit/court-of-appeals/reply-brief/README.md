@@ -4,10 +4,10 @@ Self-contained folder for one document type of the Court of Appeals for the Sixt
 
 | Item | State |
 |---|---|
-| Exemplar (filed, text-based) | yes: `exemplars/FILED-EXAMPLE-smith-v-pam-transport-24-5549-reply-brief.pdf` (see `exemplars/SOURCE.md`) |
-| Sample markdown | `samples/INPUT-smith-reply-brief.md` (a portion: cover, tables, Introduction, Argument point I to the printed page 7 paragraph, Conclusion, signatures, certificates) |
-| Render | `sh tools/render.sh courts/sixth-circuit/court-of-appeals/reply-brief samples/INPUT-smith-reply-brief.md` → 12 pages, no typst warnings |
-| Overlay | `samples/OVERLAY-smith-reply-brief.pdf` and `-overlay.txt` (`tools/overlay.sh`, against the exemplar) |
+| Exemplar (filed, text-based) | yes: `usage/SAMPLE-ca6-reply-brief-smithvpamtransport245549.pdf` (see `usage/SOURCE.md`) |
+| Sample markdown | `usage/INPUT-ca6-reply-brief-smith.md` (a portion: cover, tables, Introduction, Argument point I to the printed page 7 paragraph, Conclusion, signatures, certificates) |
+| Render | `sh tools/render.sh courts/sixth-circuit/court-of-appeals/reply-brief usage/INPUT-ca6-reply-brief-smith.md` → 12 pages, no typst warnings |
+| Overlay | `usage/OVERLAY-smith-reply-brief.pdf` and `-overlay.txt` (`tools/overlay.sh`, against the exemplar) |
 | Pages reviewed | 12 of 12, each rendered at `pdftoppm -r 60` and looked at, in the final state |
 | Known gaps | see "Known gaps and open findings" below |
 
@@ -46,9 +46,9 @@ FRAP 32(g)(2) names Form 6 as an acceptable certificate; this template follows t
 
 - `typst/main.typ`: entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template.
 - `typst/ca6-reply-brief.typ`: the template, `ca6-reply-brief(meta, md)`. Content-agnostic: every number is a named parameter at the top and traces to a rule (or is a style choice noted as such). No case-specific text, no coordinates taken from the exemplar, no forced line breaks.
-- `samples/INPUT-smith-reply-brief.md`: the sample, transcribed from the exemplar.
-- `samples/OUTPUT-smith-reply-brief.pdf`, `-overlay.pdf`, `-overlay.txt`: render and overlay.
-- `exemplars/`: the filed PDF and `SOURCE.md`.
+- `usage/INPUT-ca6-reply-brief-smith.md`: the sample, transcribed from the exemplar.
+- `usage/OUTPUT-ca6-reply-brief-smith.typst.pdf`, `-overlay.pdf`, `-overlay.txt`: render and overlay.
+- `usage/`: the filed PDF and `SOURCE.md`.
 
 ## Markdown contract
 
@@ -86,7 +86,7 @@ Body:
 
 ## Overlay
 
-`samples/OVERLAY-smith-reply-brief.txt` is the page map (`tools/overlay.sh` pairs each sample page with the exemplar page sharing the most words):
+`usage/OVERLAY-smith-reply-brief.txt` is the page map (`tools/overlay.sh` pairs each sample page with the exemplar page sharing the most words):
 
 | Sample page | Exemplar page | Word overlap |
 |---|---|---|
@@ -115,7 +115,7 @@ Same rules and numbers as the typst template (the reference). **latex** (`latex/
 
 ## Verification pass 2026-10-16 (fb-595.26.6)
 
-- Re-rendered `samples/OUTPUT-smith-reply-brief.pdf` with `tools/render.sh` (exit 0, no typst warnings): 12 pages, the same count and the same text on every page as the committed render (not stale). Overlay rerun: same page map as in the table above.
+- Re-rendered `usage/OUTPUT-ca6-reply-brief-smith.typst.pdf` with `tools/render.sh` (exit 0, no typst warnings): 12 pages, the same count and the same text on every page as the committed render (not stale). Overlay rerun: same page map as in the table above.
 - All 12 pages viewed at 60 dpi; the 12 overlay pages viewed at 40 dpi, and overlay page 1 (cover against the filed cover) at 150 dpi. Cover fits one page; TOC page numbers (Introduction 1, Argument 3, I. 3, Conclusion 7, certificates 8 and 9) match the printed footers; TOA pages match the citing pages (McNeal 3, Schlosser 5, Johnson and Wyatt 6).
 - Changed (shared typography with the other two doc types, no visible change in this sample): "14-point" in the certificate of compliance is kept on one line; the no-break rule for section signs now also covers "§§".
 - Open (tier 2/3, not changed): the cover has no closing rule under the counsel block and sets the party designations and "Counsel for Appellants" in roman, where the filed cover uses a rule and italics. Known gaps 2 and 3 above still hold (certificate of compliance starts printed page 8; printed page 6 ends early).

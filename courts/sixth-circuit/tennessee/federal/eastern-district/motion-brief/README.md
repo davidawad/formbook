@@ -5,10 +5,10 @@ Folder: `courts/sixth-circuit/tennessee/federal/eastern-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-brockington-sweet-emmaline-1-26-cv-00065-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-brockington-motion-brief.md` (the whole memorandum, footnotes included) |
-| render | ok (re-run 2026-10-15): `samples/OUTPUT-brockington-motion-brief.pdf`, 8 pages, typst 0.15.0, `tools/render.sh` with vendored fonts only, no warnings; `pdffonts`: EB Garamond Regular, Bold and Italic embedded |
-| overlay | ok (re-run 2026-10-15): `samples/OVERLAY-brockington-motion-brief.pdf` and `OVERLAY-brockington-motion-brief.txt` (page map) |
+| exemplar | yes: `usage/SAMPLE-tned-motion-brief-brockingtonsweetemmaline126cv00065.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-tned-motion-brief-brockington.md` (the whole memorandum, footnotes included) |
+| render | ok (re-run 2026-10-15): `usage/OUTPUT-tned-motion-brief-brockington.typst.pdf`, 8 pages, typst 0.15.0, `tools/render.sh` with vendored fonts only, no warnings; `pdffonts`: EB Garamond Regular, Bold and Italic embedded |
+| overlay | ok (re-run 2026-10-15): `usage/OVERLAY-brockington-motion-brief.pdf` and `OVERLAY-brockington-motion-brief.txt` (page map) |
 | pages reviewed | 8 of 8 (re-rendered and re-viewed 2026-10-15 at 60 dpi) |
 | typeface | face required: none (LR 5.1) → EB Garamond kept (no substitute) → visual only for the exemplar's Times-like face |
 
@@ -67,7 +67,7 @@ Every page was rasterized at 60 dpi and viewed.
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for this section.
-- **docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `tned-motion-brief.lua` sets the caption, the title, the first-paragraph rule, the signature block and the certificate). Rendered with `tools/render.sh --engine docx`: `samples/OUTPUT-brockington-motion-brief.docx` and `samples/OUTPUT-brockington-motion-brief.docx.pdf` (LibreOffice, 8 pages, EB Garamond from `fonts/`). Pages reviewed: 8 of 8 at 60 dpi, each compared with the typst output.
+- **docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `tned-motion-brief.lua` sets the caption, the title, the first-paragraph rule, the signature block and the certificate). Rendered with `tools/render.sh --engine docx`: `usage/OUTPUT-tned-motion-brief-brockington.docx` and `usage/OUTPUT-tned-motion-brief-brockington.docx.pdf` (LibreOffice, 8 pages, EB Garamond from `fonts/`). Pages reviewed: 8 of 8 at 60 dpi, each compared with the typst output.
   - Matches: letter paper, 1-inch margins, 24-pt double spacing, 12-pt EB Garamond, the three-line court title with the division, the caption, the title of the paper, headings (level 1 centred caps, level 2 with a hanging indent, level 3 bold italic), single-spaced block quotations indented 0.5 inch on both sides, native footnotes at 12 pt, no first-line indent after a heading, a block quotation or at the start of the body, the signature block and the certificate of service on page 8 with the conclusion's signature, page number footer.
   - Differs (tier 2, not chased): the 24-pt exact line places text about 4.6 pt lower than typst, so the page breaks differ early in the brief. Heading II (FACTUAL BACKGROUND) starts page 1 in the docx and page 2 in typst; pages 3 to 6 start on different lines. Footnote 4 is split across pages 6 and 7 in typst and sits on page 6 in the docx. Page count and the placement of the conclusion and signature block (page 7 and page 8) are the same. Word may break pages differently again.
   - BLOCKED: none. `sh tools/check.sh <court-dir> --engine docx` cannot run for this doc-type folder: it expects `checks.yaml` and `court.json` in the court folder, which this folder does not have (see Known gaps, item 9). No gate was edited to make it pass.

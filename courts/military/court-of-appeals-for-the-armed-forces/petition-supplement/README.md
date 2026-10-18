@@ -31,30 +31,30 @@ Rules that do not apply to the supplement: Rule 24(a)'s "Relevant Authorities" a
 |---|---|
 | `typst/armfor-petition-supplement.typ` | The template: `armfor-petition-supplement(meta, md)`. Content-agnostic: no case text, no coordinates, no forced line breaks, the vendored EB Garamond only (`fallback: false`). |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...` and passes it to the template. |
-| `samples/INPUT-cooper-supplement.md` | The markdown transcription of the Cooper exemplar: frontmatter (caption, counsel, signature, service, authorities), then the Issue, jurisdiction, chronology, facts, the good-cause argument and point I with its sub-headings, and the conclusion. About a third of the filed text. |
-| `samples/OUTPUT-cooper-supplement.pdf` | The render, 12 pages. |
-| `samples/OVERLAY-cooper-supplement.pdf`, `.txt` | The red/blue comparison and its page map. |
-| `exemplars/FILED-EXAMPLE-cooper-26-0258-petition-supplement.pdf` | Filed exemplar 1 (Air Force). |
-| `exemplars/FILED-EXAMPLE-hernandez-26-0263-petition-supplement.pdf` | Filed exemplar 2 (Marine Corps), for the tier-2 cross-check. |
-| `exemplars/SOURCE.md` | URL, case, docket, filer, date filed, date fetched, for both exemplars. |
+| `usage/INPUT-armfor-petition-supplement-coopersupplement.md` | The markdown transcription of the Cooper exemplar: frontmatter (caption, counsel, signature, service, authorities), then the Issue, jurisdiction, chronology, facts, the good-cause argument and point I with its sub-headings, and the conclusion. About a third of the filed text. |
+| `usage/OUTPUT-armfor-petition-supplement-coopersupplement.typst.pdf` | The render, 12 pages. |
+| `usage/OVERLAY-cooper-supplement.pdf`, `.txt` | The red/blue comparison and its page map. |
+| `usage/SAMPLE-armfor-petition-supplement-cooper260258.pdf` | Filed exemplar 1 (Air Force). |
+| `usage/SAMPLE-armfor-petition-supplement-hernandez260263.pdf` | Filed exemplar 2 (Marine Corps), for the tier-2 cross-check. |
+| `usage/SOURCE.md` | URL, case, docket, filer, date filed, date fetched, for both exemplars. |
 
-File names follow the repository's file-role convention (`INPUT-`, `OUTPUT-`, `OVERLAY-`) because `tools/render.sh` and `tools/overlay.sh` read and write those names by default. The brief asked for `samples/<id>.md` and `<id>-overlay.pdf`; the tools cannot produce those names without an edit to shared tools, which this box does not make.
+File names follow the repository's file-role convention (`INPUT-`, `OUTPUT-`, `OVERLAY-`) because `tools/render.sh` and `tools/overlay.sh` read and write those names by default. The brief asked for `usage/<id>.md` and `<id>-overlay.pdf`; the tools cannot produce those names without an edit to shared tools, which this box does not make.
 
 Commands, from the repository root:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # toolchain from the box setup (typst 0.15.0, poppler, ImageMagick)
-sh tools/render.sh courts/military/court-of-appeals-for-the-armed-forces/petition-supplement samples/INPUT-cooper-supplement.md
+sh tools/render.sh courts/military/court-of-appeals-for-the-armed-forces/petition-supplement usage/INPUT-armfor-petition-supplement-coopersupplement.md
 sh tools/overlay.sh courts/military/court-of-appeals-for-the-armed-forces/petition-supplement cooper-supplement
 ```
 
 ## Results
 
-- Render: **ok**. `tools/render.sh` ran and wrote `samples/OUTPUT-cooper-supplement.pdf` with no typst warnings. Fonts: `EBGaramond-Regular`, `-Bold`, `-Italic`, all embedded; nothing else.
+- Render: **ok**. `tools/render.sh` ran and wrote `usage/OUTPUT-armfor-petition-supplement-coopersupplement.typst.pdf` with no typst warnings. Fonts: `EBGaramond-Regular`, `-Bold`, `-Italic`, all embedded; nothing else.
 - Overlay: **ok**. `tools/overlay.sh` ran against Cooper (the first exemplar by name) and wrote `OVERLAY-cooper-supplement.pdf`. Page map in `OVERLAY-cooper-supplement.txt`: the cover and index pair with the exemplar's first pages, and the body pairs with the exemplar's body pages (filed pages 6 to 9, 12, 14, 22 and 25 by text overlap). The lowest word overlaps are ours p.3 (31%, the table of authorities, which the exemplar lays out differently), ours p.9 (34%, the page that ends in white space) and ours p.2 (47%, the index). The overlay is a diagnostic, not a score; the differences it shows on these pages were read from the render above and accepted or fixed there.
 - Pages reviewed: **12 of 12**. Each page of the current PDF was rendered at 60 dpi and looked at.
 
-## Gate 2: visual review of `samples/OUTPUT-cooper-supplement.pdf`
+## Gate 2: visual review of `usage/OUTPUT-armfor-petition-supplement-coopersupplement.typst.pdf`
 
 Every page of the 12-page PDF was rendered at 60 dpi and looked at. "PDF p." is the page of the render; "body" is the page number printed in the footer. "Compared with" is the Cooper exemplar page that the overlay pairs with it (`OVERLAY-cooper-supplement.txt`).
 

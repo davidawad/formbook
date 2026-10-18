@@ -4,10 +4,10 @@ Doc type: **adversary complaint** in an adversary proceeding in the United State
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 1 filer: `exemplars/FILED-EXAMPLE-gate-truckin-fletcher-25-05046-adversary-complaint.pdf` (see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-fletcher-25-05046.md`, the whole filing (caption, 38 numbered paragraphs, prayer, signature, certificate) |
-| render | ok: `samples/OUTPUT-fletcher-25-05046.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
-| overlay | ok: `samples/OVERLAY-fletcher-25-05046.pdf` and `OVERLAY-fletcher-25-05046.txt`, made 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not committed; see gaps 11) |
+| exemplar | yes, 1 filer: `usage/SAMPLE-ganb-adversary-complaint-gatetruckinfletcher2505046.pdf` (see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ganb-adversary-complaint-fletcher2505046.md`, the whole filing (caption, 38 numbered paragraphs, prayer, signature, certificate) |
+| render | ok: `usage/OUTPUT-ganb-adversary-complaint-fletcher2505046.typst.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
+| overlay | ok: `usage/OVERLAY-fletcher-25-05046.pdf` and `OVERLAY-fletcher-25-05046.txt`, made 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not committed; see gaps 11) |
 | pages reviewed | 6 of 6 re-rendered and viewed 2026-10-14 (fonts pass; the face did not change, see Typeface below) |
 
 ## Typeface
@@ -23,7 +23,7 @@ Not a `court.json` status; nothing here sets `status`. The court-root `README.md
 
 ## File names
 
-The brief asked for `samples/<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. The shared tools write and read `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`, so the sample uses those names. `<id>` is `fletcher-25-05046`.
+The brief asked for `usage/<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. The shared tools write and read `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`, so the sample uses those names. `<id>` is `fletcher-25-05046`.
 
 ## Governing rules
 
@@ -72,11 +72,11 @@ Body:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/adversary-complaint samples/INPUT-fletcher-25-05046.md
+sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-ganb-adversary-complaint-fletcher2505046.md
 sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/adversary-complaint fletcher-25-05046
 ```
 
-- `samples/OVERLAY-fletcher-25-05046.pdf`: red = ours, blue = filed, black = both. Page pairing (from `OVERLAY-fletcher-25-05046.txt`): ours p.1 ↔ filed p.1 (91.6%), p.2 ↔ p.2 (87.6%), p.3 ↔ p.3 (67.3%), p.4 ↔ p.4 (62.2%), p.5 ↔ p.5 (50.5%), p.6 ↔ p.6 (88.1%). Both are 6 pages. The overlay is a diagnostic, not a score.
+- `usage/OVERLAY-fletcher-25-05046.pdf`: red = ours, blue = filed, black = both. Page pairing (from `OVERLAY-fletcher-25-05046.txt`): ours p.1 ↔ filed p.1 (91.6%), p.2 ↔ p.2 (87.6%), p.3 ↔ p.3 (67.3%), p.4 ↔ p.4 (62.2%), p.5 ↔ p.5 (50.5%), p.6 ↔ p.6 (88.1%). Both are 6 pages. The overlay is a diagnostic, not a score.
 
 ## Defects found and fixed (Gate 2 record)
 
@@ -101,8 +101,8 @@ Reviewed pages: 6 of 6.
 
 | Engine | Result here | Output |
 |---|---|---|
-| typst (primary, `typst/`) | unchanged by this work | `samples/OUTPUT-fletcher-25-05046.pdf` |
-| docx (`docx/`) | `.docx` built and XML-checked; `.docx.pdf` **not produced** (no LibreOffice in this box), so no page was rendered or reviewed | `samples/OUTPUT-fletcher-25-05046.docx` |
+| typst (primary, `typst/`) | unchanged by this work | `usage/OUTPUT-ganb-adversary-complaint-fletcher2505046.typst.pdf` |
+| docx (`docx/`) | `.docx` built and XML-checked; `.docx.pdf` **not produced** (no LibreOffice in this box), so no page was rendered or reviewed | `usage/OUTPUT-ganb-adversary-complaint-fletcher2505046.docx` |
 
 `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference: EB Garamond 13 pt; body text 1.5 spaced (exact 22.4 pt, the typst pitch); half-inch first-line indent; footnotes 11 pt; letter page, 1-inch margins; centered 11 pt page number. `docx/ganb-adversary-complaint.lua` builds the first page (caption as a borderless table: 3.4 in, 0.3 in ")" column, the rest; 0.4 in gap for the filing stamp; rule; title), numbers the allegations and letters the prayer as typed text (number at ½ in, text at 0.8 in), and builds the signature and certificate blocks in the right half of the page, as the typst template does.
 
@@ -131,5 +131,5 @@ Reviewed pages: 6 of 6.
 8. **Not generated:** the adversary cover sheet, the summons, the civil cover sheet. Separate filings.
 9. **Filing stamp area.** Kept for paper filing (BLR 5005-1, secondary); ECF copies do not need it.
 10. **Local practice not checked:** judge-specific standing orders, and the 2024 amendments to Rules 7008 and 7010 (restyling only, per the committee notes).
-11. **Exemplar PDF not in the repo.** Only `exemplars/SOURCE.md` is committed. For the 2026-10-14 overlay the RECAP copy was fetched from the URL in `SOURCE.md` into a scratch directory and passed to `tools/overlay.sh` as its third argument. Committing the PDF is a repo decision, not made here.
+11. **Exemplar PDF not in the repo.** Only `usage/SOURCE.md` is committed. For the 2026-10-14 overlay the RECAP copy was fetched from the URL in `SOURCE.md` into a scratch directory and passed to `tools/overlay.sh` as its third argument. Committing the PDF is a repo decision, not made here.
 12. **BLR 5005-1 subsection (f) and the 2019 PDF not retrieved (2026-10-14).** courtrules.net returns HTTP 403; the court's 2019 local-rules PDF returns an 855-byte error page. The font conclusion rests on the excerpts, which name no face; re-check subsection (f) against the court's PDF.

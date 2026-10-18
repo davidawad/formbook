@@ -13,10 +13,10 @@ Access note: on 2026-10-17 `www.njd.uscourts.gov` rejected direct requests from 
 | LCivR | Local Civil and Criminal Rules of the U.S. District Court for the District of New Jersey, "With Revisions as of July 22, 2026" (122 pp.; includes the Electronic Case Filing Policies and Procedures after L.Civ.R. 5.2) | https://www.njd.uscourts.gov/sites/njd/files/CompleteLocalRules.pdf |
 | ECF-PP | Electronic Case Filing Policies and Procedures, D.N.J. (printed in LCivR after Civ. Rule 5.2) | same PDF |
 | FRCP | Federal Rules of Civil Procedure 5, 7, 7.1, 8, 10, 11, 38 (LII text) | https://www.law.cornell.edu/rules/frcp/rule_5 (and rule_7, rule_7.1, rule_8, rule_10, rule_11, rule_38) |
-| EX-DGL | Complaint, *DGL Group Ltd. v. GoLabs, Inc.*, No. 2:26-cv-13086 (Kasowitz LLP) | `complaint/exemplars/` |
-| EX-GOMEZ | Complaint, *Gomez v. Town of West New York*, No. 2:25-cv-02242 (Law Offices of Richard Malagiere) | `complaint/exemplars/` |
-| EX-KARRE | Memorandum of law in support of motion to dismiss, *Karre v. E*Trade Securities LLC*, No. 2:26-cv-06421 (McGuireWoods, for Bank of America) | `motion-brief/exemplars/` |
-| EX-ZEINES | Memorandum of law in support of motion to dismiss, *Zeines v. Blejer*, No. 2:25-cv-13335 (Freedman Normand Friedland) | `motion-brief/exemplars/` |
+| EX-DGL | Complaint, *DGL Group Ltd. v. GoLabs, Inc.*, No. 2:26-cv-13086 (Kasowitz LLP) | `complaint/usage/` |
+| EX-GOMEZ | Complaint, *Gomez v. Town of West New York*, No. 2:25-cv-02242 (Law Offices of Richard Malagiere) | `complaint/usage/` |
+| EX-KARRE | Memorandum of law in support of motion to dismiss, *Karre v. E*Trade Securities LLC*, No. 2:26-cv-06421 (McGuireWoods, for Bank of America) | `motion-brief/usage/` |
+| EX-ZEINES | Memorandum of law in support of motion to dismiss, *Zeines v. Blejer*, No. 2:25-cv-13335 (Freedman Normand Friedland) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (FRCP, D.N.J. L.Civ.R., or the ECF Policies and Procedures). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

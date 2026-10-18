@@ -72,7 +72,7 @@ From the repo root:
 
 ```sh
 export PATH=/work/artifacts/bin:$PATH   # only if typst, poppler and magick are not installed system-wide
-sh tools/render.sh courts/ninth-circuit/california/state/superior-court/motion-brief samples/INPUT-aclu-fresno-motion-brief.md
+sh tools/render.sh courts/ninth-circuit/california/state/superior-court/motion-brief usage/INPUT-calsuperct-motion-brief-aclufresno.md
 sh tools/overlay.sh courts/ninth-circuit/california/state/superior-court/motion-brief aclu-fresno-motion-brief
 ```
 
@@ -80,9 +80,9 @@ The render fails on any typst warning. The font is the vendored `Liberation Seri
 
 ## Samples and exemplar
 
-- `samples/INPUT-aclu-fresno-motion-brief.md`: an excerpt transcribed from the exemplar. It has the caption, the notice (all of it, with the signature block), the introduction (in full), factual background sections A and B (in part), argument sections A and B (in part, with the block quotation from *Fredericks*), and the conclusion (in full). The exemplar has no proof of service. Its footnotes 3-8 and most of the memorandum (about 14 pages in the original) are not transcribed. The footnote text is abbreviated (the URLs are dropped).
-- `samples/OUTPUT-aclu-fresno-motion-brief.pdf`: the render, 9 pages (caption and notice on pages 1-2, tables on pages 3-4, memorandum on pages 5-9). The memorandum runs 5 pages (CRC 3.1113(d): at most 15).
-- `samples/OVERLAY-aclu-fresno-motion-brief.pdf` and `-overlay.txt`: the red/blue overlay against `exemplars/FILED-EXAMPLE-aclu-v-city-of-fresno-24CECG01635-motion-brief.pdf`. Page map from `overlay.sh`:
+- `usage/INPUT-calsuperct-motion-brief-aclufresno.md`: an excerpt transcribed from the exemplar. It has the caption, the notice (all of it, with the signature block), the introduction (in full), factual background sections A and B (in part), argument sections A and B (in part, with the block quotation from *Fredericks*), and the conclusion (in full). The exemplar has no proof of service. Its footnotes 3-8 and most of the memorandum (about 14 pages in the original) are not transcribed. The footnote text is abbreviated (the URLs are dropped).
+- `usage/OUTPUT-calsuperct-motion-brief-aclufresno.typst.pdf`: the render, 9 pages (caption and notice on pages 1-2, tables on pages 3-4, memorandum on pages 5-9). The memorandum runs 5 pages (CRC 3.1113(d): at most 15).
+- `usage/OVERLAY-aclu-fresno-motion-brief.pdf` and `-overlay.txt`: the red/blue overlay against `usage/SAMPLE-calsuperct-motion-brief-acluvcityoffresno24cecg01635.pdf`. Page map from `overlay.sh`:
 
   ```
   ours p.1  filed p.1   word-overlap 80.2%
@@ -96,9 +96,9 @@ The render fails on any typst warning. The font is the vendored `Liberation Seri
   ours p.9  filed p.21  word-overlap 61.7%
   ```
 
-  The map is a text-similarity pairing, not a score. The overlay is a diagnostic (tier 3). The exemplar PDF is not stored in the repo (`exemplars/` holds `SOURCE.md` only); this overlay was run against a copy fetched from the URL in `exemplars/SOURCE.md` on 2026-10-15, kept outside the repo.
+  The map is a text-similarity pairing, not a score. The overlay is a diagnostic (tier 3). The exemplar PDF is not stored in the repo (`usage/` holds `SOURCE.md` only); this overlay was run against a copy fetched from the URL in `usage/SOURCE.md` on 2026-10-15, kept outside the repo.
 
-- Exemplar and sources: `exemplars/SOURCE.md`. The table of authorities of the exemplar (pages 4-6) lists the authorities used here; the sample's registry matches the exemplar's citations for the authorities it cites.
+- Exemplar and sources: `usage/SOURCE.md`. The table of authorities of the exemplar (pages 4-6) lists the authorities used here; the sample's registry matches the exemplar's citations for the authorities it cites.
 
 ## Gate 2: page review (sample `aclu-fresno-motion-brief`, 9 pages, `pdftoppm -r 70`, Liberation Serif)
 
@@ -122,7 +122,7 @@ Page 9 is the only open row. It is a layout issue (keep the last paragraph with 
 
 1. **Font style (CRC 2.105): Times New Roman, substituted.** CRC 2.105 allows Courier, Times New Roman, or Arial. The template uses Times New Roman's vendored substitute, `Liberation Serif` (`fonts/liberation-serif`, SIL OFL 1.1, metric-compatible; `docs/FONTS.md`), set in `typst/calsuperct-motion-brief.typ` (`font-family`). Times New Roman was chosen because it is a proportional serif that keeps the template's serif look; the rule allows Courier or Arial equally, and switching to either is a one-line change.
 2. **Page 9 signature orphan** (Gate 2, OPEN). Still open under Liberation Serif: the conclusion fills page 8 and the signature block is alone on page 9. The complaint's equivalent orphan is resolved by the font change.
-3. **Exemplars: one.** The brief asks for one exemplar per doc type. A second filer's motion (the EFF fee motion, Sacramento Superior Court, 34-2022-80004019) is recorded in `exemplars/SOURCE.md` but not stored. Tier-2 choices are therefore judged against one filer.
+3. **Exemplars: one.** The brief asks for one exemplar per doc type. A second filer's motion (the EFF fee motion, Sacramento Superior Court, 34-2022-80004019) is recorded in `usage/SOURCE.md` but not stored. Tier-2 choices are therefore judged against one filer.
 4. **Sample is an excerpt.** The memorandum sections not transcribed are not exercised by the template: other authorities, longer footnotes, more headings at each level, and the page-limit guard near 15 pages.
 5. **Second, structurally different sample**: not made.
 6. **Proof of service** is not generated. The exemplar has none.
@@ -138,7 +138,7 @@ Page 9 is the only open row. It is a layout issue (keep the last paragraph with 
 
 ### docx (built, not rendered here)
 
-Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once) and the Lua filter `docx/calsuperct.lua`. `tools/render.sh --engine docx` writes `samples/OUTPUT-<id>.docx`; the LibreOffice PDF step is BLOCKED on this box (see below).
+Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once) and the Lua filter `docx/calsuperct.lua`. `tools/render.sh --engine docx` writes `usage/OUTPUT-<id>.docx`; the LibreOffice PDF step is BLOCKED on this box (see below).
 
 What the docx sets (in `styles.xml`, `sectPr`, `footer1.xml`, or the filter). Set in styles.xml/sectPr, not rendered:
 

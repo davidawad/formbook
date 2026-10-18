@@ -5,10 +5,10 @@ Folder: `courts/fourth-circuit/virginia/federal/bankruptcy-eastern-district/moti
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-amiri-v-vaziri-26-01002-motion-brief.pdf` (1 filer, defendant's counsel; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-amiri-motion-for-summary-judgment.md`: caption, opening, the full Statement of Undisputed Material Facts (28 numbered paragraphs), the Standard of Review, the Visa prepaid card and family support sections, the Conclusion and the signature. The asset-sale, means-test, gambling and garnishment sections are omitted (the exemplar is 19 pages; the sample is 12). |
-| render | ok: `samples/OUTPUT-amiri-motion-for-summary-judgment.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-amiri-motion-for-summary-judgment.pdf` and `.txt` (page map below) |
+| exemplar | yes: `usage/SAMPLE-vaeb-motion-brief-amirivvaziri2601002.pdf` (1 filer, defendant's counsel; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-vaeb-motion-brief-amirimotionforsummaryjudgment.md`: caption, opening, the full Statement of Undisputed Material Facts (28 numbered paragraphs), the Standard of Review, the Visa prepaid card and family support sections, the Conclusion and the signature. The asset-sale, means-test, gambling and garnishment sections are omitted (the exemplar is 19 pages; the sample is 12). |
+| render | ok: `usage/OUTPUT-vaeb-motion-brief-amirimotionforsummaryjudgment.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-amiri-motion-for-summary-judgment.pdf` and `.txt` (page map below) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; pages 8 to 12 on the final build, pages 1 to 7 on a build that differs only from page 8 onward in heading levels) |
 
 File names follow the repo's role-prefix convention (`INPUT-`, `OUTPUT-`, `OVERLAY-`) because `tools/render.sh` and `tools/overlay.sh` read and write those names by default. The brief's `<id>.md` / `<id>-overlay.pdf` names were not used for that reason.
@@ -43,9 +43,9 @@ Not produced by this template (separate papers that the rules require with the m
 - Signature block: "Respectfully submitted," then "/s/ Name" (no firm line; the exemplar has none), the signer's line and the address, bar number, telephone and email.
 - Certificate of service: generated only when the frontmatter has `service` (the exemplar has none).
 
-## Overlay (`samples/OVERLAY-amiri-motion-for-summary-judgment.pdf`)
+## Overlay (`usage/OVERLAY-amiri-motion-for-summary-judgment.pdf`)
 
-Red is our render, blue is the filed exemplar, black is where they agree. Page map (`samples/OVERLAY-amiri-motion-for-summary-judgment.txt`):
+Red is our render, blue is the filed exemplar, black is where they agree. Page map (`usage/OVERLAY-amiri-motion-for-summary-judgment.txt`):
 
 ```
 ours p.1  filed p.1   word-overlap 86.3%

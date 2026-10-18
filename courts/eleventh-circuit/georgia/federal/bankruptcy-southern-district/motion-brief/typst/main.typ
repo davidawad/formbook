@@ -1,9 +1,9 @@
 // Entrypoint. Compile with the doc-type folder as --root; tools/render.sh does it:
 //   typst compile --root <doctype-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=samples/NAME.md \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
 //     typst/main.typ out.pdf
 #import "gasb-motion-brief.typ": gasb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-howard-motion-brief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-gasb-motion-brief-howard.md"))
 #let (meta, body) = split-frontmatter(src)
 #gasb-motion-brief(meta, body)

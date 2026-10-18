@@ -17,12 +17,12 @@ Access note: on 2026-10-17 `www.ca3.uscourts.gov` answered every request from th
 | COPIES | Order "Reduced Number of Copies of Briefs Required" (April 29, 2013): 7 paper copies instead of 10 | https://web.archive.org/web/20260904131130/https://www.ca3.uscourts.gov/sites/ca3/files/briefs_fewer_order.pdf |
 | QC | Notice "Quality Control Program for the Filing of Briefs on the Merits" (blast email of 2026-01-04; program live January 5, 2026) | https://web.archive.org/web/20260105070013/https://www.ca3.uscourts.gov/sites/ca3/files/BlastEmail_2026_01_04.pdf |
 | FRAP | Federal Rules of Appellate Procedure 25, 26.1, 28, 32 (LII text) | https://www.law.cornell.edu/rules/frap/rule_32 , https://www.law.cornell.edu/rules/frap/rule_28 , https://www.law.cornell.edu/rules/frap/rule_26.1 , https://www.law.cornell.edu/rules/frap/rule_25 |
-| EX-TRESSLAR | Opening brief, *Tresslar v. Greene*, No. 26-1367 (The Gold Law Firm) | `opening-brief/exemplars/` |
-| EX-HARRIS-OB | Opening brief, *United States v. Harris*, No. 21-3031 (Federal Public Defender, W.D. Pa.) | `opening-brief/exemplars/` |
-| EX-BINDER | Answering brief, *Binder v. Coldwell Banker*, No. 24-1997 (K&L Gates) | `answering-brief/exemplars/` |
-| EX-HARRIS-AB | Answering brief for the United States, *United States v. Harris*, No. 21-3031 (USAO W.D. Pa. and DOJ Criminal Division) | `answering-brief/exemplars/` |
-| EX-AFP | Reply brief, *Americans for Prosperity Foundation v. Albence*, No. 26-2469 (Baker & Hostetler) | `reply-brief/exemplars/` |
-| EX-LACOSTA | Reply brief for the United States, *United States v. LaCosta-Franco*, No. 26-2028 (USAO E.D. Pa.) | `reply-brief/exemplars/` |
+| EX-TRESSLAR | Opening brief, *Tresslar v. Greene*, No. 26-1367 (The Gold Law Firm) | `opening-brief/usage/` |
+| EX-HARRIS-OB | Opening brief, *United States v. Harris*, No. 21-3031 (Federal Public Defender, W.D. Pa.) | `opening-brief/usage/` |
+| EX-BINDER | Answering brief, *Binder v. Coldwell Banker*, No. 24-1997 (K&L Gates) | `answering-brief/usage/` |
+| EX-HARRIS-AB | Answering brief for the United States, *United States v. Harris*, No. 21-3031 (USAO W.D. Pa. and DOJ Criminal Division) | `answering-brief/usage/` |
+| EX-AFP | Reply brief, *Americans for Prosperity Foundation v. Albence*, No. 26-2469 (Baker & Hostetler) | `reply-brief/usage/` |
+| EX-LACOSTA | Reply brief for the United States, *United States v. LaCosta-Franco*, No. 26-2028 (USAO E.D. Pa.) | `reply-brief/usage/` |
 
 Kinds: **M** = mandated by a court rule (FRAP or Third Circuit L.A.R.). **C** = convention (taken from the exemplars or common practice; the rules leave it open). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

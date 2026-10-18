@@ -1,4 +1,4 @@
--- D. Colo. complaint, DOCX engine (docs/DOCX.md): the markdown contract of samples/INPUT-<id>.md -> Word.
+-- D. Colo. complaint, DOCX engine (docs/DOCX.md): the markdown contract of usage/INPUT-<id>.md -> Word.
 -- Mirrors typst/cod-complaint.typ: court lines, "Civil Action No.", party block with "v." between sides,
 -- bold centred title, lead-in, numbered paragraphs (Fed. R. Civ. P. 10(b)) with "N." at the first-line
 -- indent, unnumbered paragraphs ("::" prefix), headings (level 1 and 2 centred bold, level 3 bold italic),

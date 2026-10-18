@@ -4,17 +4,17 @@ Doc type: **complaint** (Complaint and Demand for Jury Trial) in the United Stat
 
 | Item | Status |
 |---|---|
-| exemplar | yes, one filer: `exemplars/FILED-EXAMPLE-forzano-3-26-cv-00665-complaint.pdf` (see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-forzano-complaint.md`, the whole filing: caption, lead-in, all 66 paragraphs, five causes of action, prayer, jury demand, signature block |
-| render | ok: `samples/OUTPUT-forzano-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular and Bold, embedded), no typst warnings |
+| exemplar | yes, one filer: `usage/SAMPLE-ctd-complaint-forzano326cv00665.pdf` (see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ctd-complaint-forzano.md`, the whole filing: caption, lead-in, all 66 paragraphs, five causes of action, prayer, jury demand, signature block |
+| render | ok: `usage/OUTPUT-ctd-complaint-forzano.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular and Bold, embedded), no typst warnings |
 | typeface | no face named by the rules; EB Garamond kept (vendored, embedded). See Known gaps 2 |
-| overlay | ok: `samples/OVERLAY-forzano-complaint.pdf` and `OVERLAY-forzano-complaint.txt` (pairs by text; exemplar PDF `exemplars/FILED-EXAMPLE-forzano-3-26-cv-00665-complaint.pdf` fetched from the SOURCE.md URL on 2026-10-15) |
+| overlay | ok: `usage/OVERLAY-forzano-complaint.pdf` and `OVERLAY-forzano-complaint.txt` (pairs by text; exemplar PDF `usage/SAMPLE-ctd-complaint-forzano326cv00665.pdf` fetched from the SOURCE.md URL on 2026-10-15) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi to PNG and viewed on 2026-10-15) |
 
 Commands (run with `export PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/second-circuit/connecticut/federal/district/complaint samples/INPUT-forzano-complaint.md
+sh tools/render.sh courts/second-circuit/connecticut/federal/district/complaint usage/INPUT-ctd-complaint-forzano.md
 sh tools/overlay.sh courts/second-circuit/connecticut/federal/district/complaint forzano-complaint
 ```
 
@@ -60,7 +60,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Known gaps and open choices
 
-1. **One exemplar.** The eval-loop tier-2 rule asks for two or three filers, each a different filer, before tier 2 is judged. The brief asks for one exemplar per doc type. Other D. Conn. complaints checked for a second reference are listed in `exemplars/SOURCE.md` and were not saved. Tier 2 is therefore judged against the rules and this one filing, and that is not the full bar.
+1. **One exemplar.** The eval-loop tier-2 rule asks for two or three filers, each a different filer, before tier 2 is judged. The brief asks for one exemplar per doc type. Other D. Conn. complaints checked for a second reference are listed in `usage/SOURCE.md` and were not saved. Tier 2 is therefore judged against the rules and this one filing, and that is not the full bar.
 2. **Font.** No rule text read for this doc type names a face. EFPP I.F.2 (fetched 2026-10-15) lists Times New Roman among the base-14 fonts only as fonts that need not be embedded; it sets no typeface. Local Rule 10 names none in the text checked (the 9.4.26 rules PDF cited above returned 404 on 2026-10-15; a 2016 copy of Rule 10 on courtrules.net names none; re-verify against the live rules). The exemplar is set in Times New Roman, which is a convention, not a rule. Per `docs/FONTS.md`, a court that names no face keeps EB Garamond, so the template keeps it (embedded, legally embeddable). Liberation Serif, the Times-metric substitute, is vendored and would match the exemplar's line breaks, but it is not used because no rule calls for it. Judge-specific orders are a separate matter: see the note in `motion-brief/README.md` Known gaps 4 (Judge Bryant's 2018 Electronic Filing Order names Arial 12 pt for documents in that judge's cases; that is one judge's order, not a court rule, and the template does not switch per judge).
 3. **Pleading size.** L. Civ. R. 10 is silent on type size for pleadings. 12 pt is used, matching the exemplar and L. Civ. R. 7(a)(5).
 4. **Judge initials.** The template prints `case_number` as given; the template does not check that it has the judge's initials. The sample's number carries them.
@@ -89,7 +89,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (EB Garamond 12 pt, exact 27.6 pt double-spaced lines, 1 in margins, centred page number from page 2); `docx/complaint.lua` writes the cover (court, caption table with its rules), the numbered paragraphs (typed numbers), the lettered and bulleted lists and the signature block. Output: `samples/OUTPUT-forzano-complaint.docx` and `.docx.pdf` (LibreOffice 26.8, `pdffonts`: EBGaramond Regular and Bold, embedded), 11 pages, the same count as the typst render.
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (EB Garamond 12 pt, exact 27.6 pt double-spaced lines, 1 in margins, centred page number from page 2); `docx/complaint.lua` writes the cover (court, caption table with its rules), the numbered paragraphs (typed numbers), the lettered and bulleted lists and the signature block. Output: `usage/OUTPUT-ctd-complaint-forzano.docx` and `.docx.pdf` (LibreOffice 26.8, `pdffonts`: EBGaramond Regular and Bold, embedded), 11 pages, the same count as the typst render.
 
 - Matches the typst output: US Letter; 1 in margins; EB Garamond 12 pt; every body line on the 27.6 pt pitch (measured on the PDF: 27.6 pt between body lines, as in typst); no widow control, as in typst, so the page breaks fall where typst's do; caption with the party column ruled right and bottom and the case number, date, title and jury demand at right; unnumbered lead-in, prayer and jury demand; lettered prayer items (a) to (h); bullets in paragraph 19; signature block at the right with "Dated" at left; no page number on page 1.
 - Differs from typst: in Word and LibreOffice an exact-spaced line puts its text lower in the line box than typst does, so the first line of each page (and the court title) sits about 14 pt lower; the paragraph pitch is unchanged. The paragraph number is followed by a tab stop at 1 in, where typst's text position follows the width of the number; the sample's numbers are one or two digits, so the text starts at the same place. Table borders are drawn by Word and by LibreOffice slightly differently; judged on the LibreOffice PDF.
@@ -111,4 +111,4 @@ Gate 2 review of the docx PDF (11 of 11 pages rendered at 60 dpi and viewed on 2
 | 10 | Paragraphs 60 to 66; FIFTH CAUSE OF ACTION; PRAYER FOR RELIEF with (a) and (b) | OK |
 | 11 | Prayer items (c) to (h); DEMAND FOR JURY TRIAL; "Dated" and the signature block | OK. Page number shown. |
 
-BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and a doc-type folder has neither (the court folder has `court.json` but no `checks.yaml` or `rules.md` yet), so the gates did not run and `samples/.check-docx.txt` was not written. Gate 0 was checked by hand: every word of the sample is in the PDF except the `[unnumbered]` markers, which are not text.
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and a doc-type folder has neither (the court folder has `court.json` but no `checks.yaml` or `rules.md` yet), so the gates did not run and `usage/.check-docx.txt` was not written. Gate 0 was checked by hand: every word of the sample is in the PDF except the `[unnumbered]` markers, which are not text.

@@ -1,15 +1,15 @@
 # caed: motion-brief
 
 Doc type: **motion-brief**, a Rule 12(b) motion to dismiss (or for a more definite statement) with the notice of motion and a memorandum of points and authorities, in the United States District Court for the Eastern District of California (`caed`).
-Folder: `courts/ninth-circuit/california/federal/eastern-district/motion-brief/` (self-contained; the court root's `typst/` and `samples/` are not touched).
+Folder: `courts/ninth-circuit/california/federal/eastern-district/motion-brief/` (self-contained; the court root's `typst/` and `usage/` are not touched).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-wine-2-26-cv-02243-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-wine-motion-brief.md`: caption, notice of motion (pages 1 to 2 of the filing) and its signature, the table of contents and table of authorities (in full), memorandum introduction and facts (part), Rule 12(e) argument (part), conclusion and signature. Memorandum Part III.A to III.C are not transcribed (see Known gaps). |
+| exemplar | yes: `usage/SAMPLE-caed-motion-brief-wine226cv02243.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-caed-motion-brief-wine.md`: caption, notice of motion (pages 1 to 2 of the filing) and its signature, the table of contents and table of authorities (in full), memorandum introduction and facts (part), Rule 12(e) argument (part), conclusion and signature. Memorandum Part III.A to III.C are not transcribed (see Known gaps). |
 | typeface | face required: none in the E.D. Cal. Local Rules (checked, 2026-10-14; the local-rules text itself was not re-fetched on 2026-10-15). Judge standing orders may set a face or size; the assigned judge's standing order (TLN Civil Standing Order) was not read, so it is not verified. Font: **EB Garamond** (kept; `docs/FONTS.md` "No face named"). Metric-compatible: n/a. Visual only: EB Garamond is not Times. |
-| render | ok: `samples/OUTPUT-wine-motion-brief.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -Italic embedded), no warnings (`sh tools/render.sh <this folder> samples/INPUT-wine-motion-brief.md`) |
-| overlay | ok: `samples/OVERLAY-wine-motion-brief.pdf` and `samples/OVERLAY-wine-motion-brief.txt` (`sh tools/overlay.sh <this folder> wine-motion-brief`) |
+| render | ok: `usage/OUTPUT-caed-motion-brief-wine.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -Italic embedded), no warnings (`sh tools/render.sh <this folder> usage/INPUT-caed-motion-brief-wine.md`) |
+| overlay | ok: `usage/OVERLAY-wine-motion-brief.pdf` and `usage/OVERLAY-wine-motion-brief.txt` (`sh tools/overlay.sh <this folder> wine-motion-brief`) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names: the tools name files by role (`INPUT-` is the markdown, `OUTPUT-` is our render, `OVERLAY-` is the comparison). This folder follows them rather than the `<id>.md` / `<id>-overlay.pdf` names in the brief, because `tools/render.sh`, `tools/overlay.sh` and `CLAUDE.md` read those names.
@@ -58,11 +58,11 @@ Judge-specific rules are not in the template and were **not verified**: the fili
 
 ## Overlay
 
-`samples/OVERLAY-wine-motion-brief.pdf`: our render in red, the filed exemplar in blue, multiplied, one page per sample page, each paired with the exemplar page sharing the most words (`OVERLAY-wine-motion-brief.txt`). The sample skips memorandum pages 9 to 23 of the filing, so the memorandum pages pair at lower overlap; the table of authorities' page references are the filed pages (they do not match the excerpt), so the tables pair lower too. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-wine-motion-brief.pdf`: our render in red, the filed exemplar in blue, multiplied, one page per sample page, each paired with the exemplar page sharing the most words (`OVERLAY-wine-motion-brief.txt`). The sample skips memorandum pages 9 to 23 of the filing, so the memorandum pages pair at lower overlap; the table of authorities' page references are the filed pages (they do not match the excerpt), so the tables pair lower too. The overlay is a diagnostic, not a score.
 
 ## Known gaps and open choices
 
-1. **One exemplar.** The brief asks for one exemplar per doc type. EVAL-LOOP's tier-2 rule asks for two or three filers. The second candidate is Wilce v. Willow Health Services, Inc., 2:26-cv-02465-DAD-AC, Document 7 (a Rules 12(b)(1), (2), (f) motion with memorandum, 28 pp., George LLP; not saved; see `exemplars/SOURCE.md`). Tier 2 is therefore **not** judged against two filers yet.
+1. **One exemplar.** The brief asks for one exemplar per doc type. EVAL-LOOP's tier-2 rule asks for two or three filers. The second candidate is Wilce v. Willow Health Services, Inc., 2:26-cv-02465-DAD-AC, Document 7 (a Rules 12(b)(1), (2), (f) motion with memorandum, 28 pp., George LLP; not saved; see `usage/SOURCE.md`). Tier 2 is therefore **not** judged against two filers yet.
 2. **Font.** No E.D. Cal. rule names a typeface or type size. The exemplar is Times New Roman 12 pt. This template uses EB Garamond, the only font vendored in `fonts/`; it has a smaller x-height at 12 pt. This is an open choice for David, not a rule failure.
 3. **Excerpt.** The sample transcribes the notice (pages 1 to 2 of the filing) and its signature (page 3); the full table of contents (page i) and table of authorities (pages ii to iii); memorandum page 1 (introduction and the start of the facts, with the footnote omitted); the argument's Rule 12(e) section (page 17 of the memorandum) and the conclusion (page 18), with signature. Memorandum Parts III.A to III.C (filing pages 4 to 16) are not transcribed, so the sample's argument headings run from D to III. The table of contents lists only the headings in the sample.
 4. **Table of authorities page references.** The entries are the filed table's entries, with the filed page numbers. They do not match the sample's pages, because the sample is an excerpt. A complete sample would need its own page numbers, which the template does not compute. Recorded here so no one reads the page numbers as the excerpt's.
@@ -89,9 +89,9 @@ Defects found and fixed during review: the signature block sat alone on a page (
 
 ### docx (checked with LibreOffice only; Word is not available here)
 
-- Build: `sh docx/build-reference.sh docx/reference.docx` (styles, the numbered-line header frame, the footer, page borders, the final section); render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-wine-motion-brief.md` writes `samples/OUTPUT-wine-motion-brief.docx` and `.docx.pdf` (8 pages; EB Garamond regular, bold and italic embedded).
-- Pages viewed: all 8 pages of `OUTPUT-wine-motion-brief.docx.pdf` at 60 dpi, in the final build.
-- No typst `OUTPUT` PDF exists in `samples/` for this sample; the comparison is with the typst template source and the README above.
+- Build: `sh docx/build-reference.sh docx/reference.docx` (styles, the numbered-line header frame, the footer, page borders, the final section); render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-caed-motion-brief-wine.md` writes `usage/OUTPUT-caed-motion-brief-wine.docx` and `.docx.pdf` (8 pages; EB Garamond regular, bold and italic embedded).
+- Pages viewed: all 8 pages of `OUTPUT-caed-motion-brief-wine.docx.pdf` at 60 dpi, in the final build.
+- No typst `OUTPUT` PDF exists in `usage/` for this sample; the comparison is with the typst template source and the README above.
 - Page numbers as in typst: the notice and the cover in arabic from 1; the table of contents and table of authorities in roman (i, ii, iii); the memorandum in arabic from 1. Three sections (`docx/caed-motion-brief.lua`), each with the header and footer of the final section (`docx/fix-sections.pl`).
 - Table of contents: `docx/render.sh` converts the docx once with LibreOffice, finds each memorandum heading's page, writes the numbers into the table, builds again, and fails if a third conversion would move a number. Word may paginate differently; the numbers are the LibreOffice ones.
 - Table of authorities: page references are printed from the `authorities` frontmatter (as in typst), not computed.

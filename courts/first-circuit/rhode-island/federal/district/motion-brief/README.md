@@ -5,10 +5,10 @@ Folder: `courts/first-circuit/rhode-island/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-tablada-1-26-cv-00118-motion-brief.pdf` (1 filer, 14 pages, memorandum ECF No. 7; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-tablada-motion-brief.md`: the whole memorandum (introduction, facts, standard of review, argument with its four numbered sub-headings, conclusion), the five footnotes, the signature block and the certificate of service. Converted from the text layer and corrected by hand. |
-| render | ok: `samples/OUTPUT-tablada-motion-brief.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-tablada-motion-brief.pdf` and `samples/OVERLAY-tablada-motion-brief.txt` |
+| exemplar | yes: `usage/SAMPLE-rid-motion-brief-tablada126cv00118.pdf` (1 filer, 14 pages, memorandum ECF No. 7; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-rid-motion-brief-tablada.md`: the whole memorandum (introduction, facts, standard of review, argument with its four numbered sub-headings, conclusion), the five footnotes, the signature block and the certificate of service. Converted from the text layer and corrected by hand. |
+| render | ok: `usage/OUTPUT-rid-motion-brief-tablada.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-tablada-motion-brief.pdf` and `usage/OVERLAY-tablada-motion-brief.txt` |
 | pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed after the last template change) |
 
 ## Governing rules
@@ -56,7 +56,7 @@ As the complaint: 27.6 pt baseline pitch on the exemplar (Tablada, page 3: 72.49
 
 ## What the overlay shows
 
-`samples/OVERLAY-tablada-motion-brief.pdf`: each page of our render in red over the filed page it matches best, in blue; black is agreement. The pairing is by word overlap and is in `OVERLAY-tablada-motion-brief.txt`. Pages 1 to 11 pair one to one with per-page word overlap of 48% to 90%. Pages 12 and 13 pair with filed pages 13 and 14, and our page 14 (the certificate of service on its own) pairs with the filed page 14, which also carries the end of the conclusion; the lower overlap there is pagination, not missing text. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-tablada-motion-brief.pdf`: each page of our render in red over the filed page it matches best, in blue; black is agreement. The pairing is by word overlap and is in `OVERLAY-tablada-motion-brief.txt`. Pages 1 to 11 pair one to one with per-page word overlap of 48% to 90%. Pages 12 and 13 pair with filed pages 13 and 14, and our page 14 (the certificate of service on its own) pairs with the filed page 14, which also carries the end of the conclusion; the lower overlap there is pagination, not missing text. The overlay is a diagnostic, not a score.
 
 ## Review log (Gate 2)
 
@@ -95,7 +95,7 @@ LOG:
 
 **typst** is the reference and is unchanged by the docx work.
 
-**docx** (`docx/reference.docx` built by `docx/make-reference.sh`; `docx/rid-motion-brief.lua` for the cover, the heading labels, the statement on oral argument, the signature block and the certificate of service). Output: `samples/OUTPUT-tablada-motion-brief.docx` and `samples/OUTPUT-tablada-motion-brief.docx.pdf` (LibreOffice, 15 pages; typst is 14). Status: converts without error; every page of the docx PDF was viewed at 60 dpi beside the typst page of the same sample (pages_reviewed = 15). Not opened in Microsoft Word (not available here); the file is a valid zip with well-formed XML parts.
+**docx** (`docx/reference.docx` built by `docx/make-reference.sh`; `docx/rid-motion-brief.lua` for the cover, the heading labels, the statement on oral argument, the signature block and the certificate of service). Output: `usage/OUTPUT-rid-motion-brief-tablada.docx` and `usage/OUTPUT-rid-motion-brief-tablada.docx.pdf` (LibreOffice, 15 pages; typst is 14). Status: converts without error; every page of the docx PDF was viewed at 60 dpi beside the typst page of the same sample (pages_reviewed = 15). Not opened in Microsoft Word (not available here); the file is a valid zip with well-formed XML parts.
 
 - *Matches typst (checked on the LibreOffice PDF):* US Letter, 1-inch margins; EB Garamond 12 pt (the only font embedded); double spacing at exact 27.6 pt; footnotes 10 pt, single spaced; block quotations indented 0.5 in on both sides, double spaced; the caption and cover; headings with the typst labels (I. INTRODUCTION centered; A. Tablada's Mortgage at the left; level 3 as written, bold); the statement on oral argument; the signature block with "Dated:", "Respectfully submitted by," and the same gaps as typst (measured on the PDF); the certificate of service on its own last page with its signer line; page number centered at the bottom of every page, arabic from 1.
 - *Differs (tier 2, not blocking):* (a) Pagination: the docx has one page more (15 against 14). The text drifts by a line or two per page because LibreOffice wraps some lines differently; the level 3 heading "1." of the Argument moves to page 8 (keep with next), which leaves about six blank lines at the foot of page 7; the conclusion and signature block fall on page 14 in the docx and page 13 in typst. The certificate is alone on page 15 in the docx and on page 14 in typst. (b) Footnote text wraps slightly wider in LibreOffice than in typst (same 10 pt size and line pitch), so footnote lines differ. (c) Every line sits about 3 pt lower than in the typst PDF (same cause as the complaint). (d) Heading labels are typed text, not Word numbering.

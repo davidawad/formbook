@@ -5,13 +5,13 @@ Folder: `courts/sixth-circuit/ohio/federal/southern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-doe-v-columbus-2-26-cv-00684-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-doe-complaint.md` (partial transcription, see Known gaps) |
-| render | ok: `samples/OUTPUT-doe-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
-| overlay | ok: `samples/OVERLAY-doe-complaint.pdf` and `OVERLAY-doe-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-ohsd-complaint-doevcolumbus226cv00684.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ohsd-complaint-doe.md` (partial transcription, see Known gaps) |
+| render | ok: `usage/OUTPUT-ohsd-complaint-doe.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
+| overlay | ok: `usage/OVERLAY-doe-complaint.pdf` and `OVERLAY-doe-complaint.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed in the final layout) |
 
-File names follow `tools/overlay.sh` and CLAUDE.md, not the brief's shorter names: the sample is `samples/INPUT-<id>.md`, the render `samples/OUTPUT-<id>.pdf`, the overlay `samples/OVERLAY-<id>.pdf` and `.txt`. The tool reads and writes those names by default.
+File names follow `tools/overlay.sh` and CLAUDE.md, not the brief's shorter names: the sample is `usage/INPUT-<id>.md`, the render `usage/OUTPUT-<id>.pdf`, the overlay `usage/OVERLAY-<id>.pdf` and `.txt`. The tool reads and writes those names by default.
 
 ## Governing rules
 
@@ -45,7 +45,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Overlay
 
-`samples/OVERLAY-doe-complaint.pdf`: red is our render, blue is the filed exemplar, black where both agree. Pages are paired by word overlap (`OVERLAY-doe-complaint.txt`): our pages 1 to 8 pair with filed pages 1, 3, 9, 9, 14, 16, 19, 20. Page 1 pairs at 76% word overlap (the caption and parties match the filed caption). The later pages match less because the sample is a partial transcription, so most filed words are absent by design. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-doe-complaint.pdf`: red is our render, blue is the filed exemplar, black where both agree. Pages are paired by word overlap (`OVERLAY-doe-complaint.txt`): our pages 1 to 8 pair with filed pages 1, 3, 9, 9, 14, 16, 19, 20. Page 1 pairs at 76% word overlap (the caption and parties match the filed caption). The later pages match less because the sample is a partial transcription, so most filed words are absent by design. The overlay is a diagnostic, not a score.
 
 ## Review findings (rendered pages, 60 dpi)
 
@@ -60,7 +60,7 @@ Pages reviewed in the final layout: 1 (caption, parties), 2 (numbered parties an
 ## Known gaps
 
 - **Tier 2 is not met: one filer.** A second S.D. Ohio complaint from a different filer was not found. RECAP entries for *Xiao v. General Electric*, 1:26-cv-01033, and other October 2026 complaints have no available document. EVAL-LOOP asks for 2 or 3 filers.
-- **The sample is a partial transcription.** It keeps the caption, parties, jurisdiction, Counts I–V and VII (count paragraphs that are procedural or legal theory), the prayer, the jury demand and the signature. Filed ¶¶ 31–64 (the factual narrative of a sexual-assault survivor's case) are replaced by a bracketed note, a deliberate choice recorded in `exemplars/SOURCE.md`. Counts VI and VIII and the state-court exhibits (filed pp. 21–53) are not transcribed. The render is 8 pages against a 20-page pleading (the brief's 8–14 target is for an exemplar of that length; this one is long, but the sample is short by design).
+- **The sample is a partial transcription.** It keeps the caption, parties, jurisdiction, Counts I–V and VII (count paragraphs that are procedural or legal theory), the prayer, the jury demand and the signature. Filed ¶¶ 31–64 (the factual narrative of a sexual-assault survivor's case) are replaced by a bracketed note, a deliberate choice recorded in `usage/SOURCE.md`. Counts VI and VIII and the state-court exhibits (filed pp. 21–53) are not transcribed. The render is 8 pages against a 20-page pleading (the brief's 8–14 target is for an exemplar of that length; this one is long, but the sample is short by design).
 - **Typeface and size are not set by the local rules.** S.D. Ohio Civ. R. 5.1 is silent on the face and the point size; the template uses EB Garamond 12 pt as a working standard, which matches the Garamond filing. Judges' standing orders may set something different. This needs a decision from David if a different face is wanted, since only EB Garamond is vendored.
 - **Division assignment is not checked.** `division` is written by the author; Civ. R. 82.1 (venue by county) is not implemented.
 - **Claim of unconstitutionality (Civ. R. 10.1)** is not rendered; the author adds it to the title when it applies.
@@ -70,7 +70,7 @@ Pages reviewed in the final layout: 1 (caption, parties), 2 (numbered parties an
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default (EB Garamond 12 pt, exact 24 pt double spacing, one-inch margins, centred PAGE footer, heading and paragraph styles). `ohsd.lua` sets the court title, the caption table, the numbered allegations, the prayer, the signature block and the certificate (none here). Render: `samples/OUTPUT-doe-complaint.docx` and `.docx.pdf` (LibreOffice 26.8.1, EB Garamond embedded), 8 pages. Reviewed: all 8 pages of the `.docx.pdf` and all 8 pages of the typst render, at 60 dpi, in the final state.
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default (EB Garamond 12 pt, exact 24 pt double spacing, one-inch margins, centred PAGE footer, heading and paragraph styles). `ohsd.lua` sets the court title, the caption table, the numbered allegations, the prayer, the signature block and the certificate (none here). Render: `usage/OUTPUT-ohsd-complaint-doe.docx` and `.docx.pdf` (LibreOffice 26.8.1, EB Garamond embedded), 8 pages. Reviewed: all 8 pages of the `.docx.pdf` and all 8 pages of the typst render, at 60 dpi, in the final state.
 
 - Matches typst: letter paper, margins, EB Garamond 12 pt, 24 pt body pitch, the page count (8), the court title and caption (page 1 caption lines within 0.1 pt of the typst baselines), the PARTIES heading and first allegation (within about 1 pt), numbered allegations with a 0.5 in first-line indent and text at 1 in, count headings, the prayer, the signature block, the centred page number.
 - Differs (tier 2, not chased): line breaks differ on most pages (LibreOffice shaping: for example allegation 2 breaks after "sexual-"). Page breaks differ: the docx ends page 2 after allegation 14, and the prayer for relief moves to page 8 whole (kept with its items), where typst keeps it on page 7. Pages 3 and 5 end short because of widow control. The caption spacing constants differ between the complaint and motion-brief `ohsd.lua` (the left column is taller here, the right column in the motion); both are measured against the typst output.

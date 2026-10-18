@@ -1,22 +1,22 @@
 # Seventh Circuit: appellant's opening brief
 
-Court: `ca7` (U.S. Court of Appeals for the Seventh Circuit). Doc type: `opening-brief`. One self-contained folder per doc type; the court-root `typst/` and `samples/` (ca9's opening brief lives there) are not touched.
+Court: `ca7` (U.S. Court of Appeals for the Seventh Circuit). Doc type: `opening-brief`. One self-contained folder per doc type; the court-root `typst/` and `usage/` (ca9's opening brief lives there) are not touched.
 
 ## Status
 
 | Item | Result |
 |---|---|
-| Exemplar | yes: `exemplars/FILED-EXAMPLE-torres-22-2830-opening-brief.pdf` (see `exemplars/SOURCE.md`) |
-| Sample | `samples/INPUT-torres-opening-brief.md` (cover, counsel, TOC, TOA, body excerpt, conclusion, signature, certificates) |
+| Exemplar | yes: `usage/SAMPLE-ca7-opening-brief-torres222830.pdf` (see `usage/SOURCE.md`) |
+| Sample | `usage/INPUT-ca7-opening-brief-torres.md` (cover, counsel, TOC, TOA, body excerpt, conclusion, signature, certificates) |
 | Typeface | None named by the rules (FRAP 32(a)(5)(A); Cir. R. 32(b)). Font: EB Garamond, vendored, kept (fonts pass, 2026-10-15; see the court `README.md` "Typeface"). `pdffonts`: only `EBGaramond` Regular, Bold, Italic, all embedded. |
-| Render | ok (re-run 2026-10-16, fb-595.26.7): `sh tools/render.sh courts/seventh-circuit/court-of-appeals/opening-brief samples/INPUT-torres-opening-brief.md` gives 14 pages, vendored fonts only, no typst warnings |
-| Overlay | ok (re-run 2026-10-16, fb-595.26.7): the filed PDF is in `exemplars/`; `sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/opening-brief torres-opening-brief` exits 0 and rewrites `samples/OVERLAY-torres-opening-brief.pdf` and `.txt` |
+| Render | ok (re-run 2026-10-16, fb-595.26.7): `sh tools/render.sh courts/seventh-circuit/court-of-appeals/opening-brief usage/INPUT-ca7-opening-brief-torres.md` gives 14 pages, vendored fonts only, no typst warnings |
+| Overlay | ok (re-run 2026-10-16, fb-595.26.7): the filed PDF is in `usage/`; `sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/opening-brief torres-opening-brief` exits 0 and rewrites `usage/OVERLAY-torres-opening-brief.pdf` and `.txt` |
 | Pages reviewed | 14 of 14 in the verification pass, 2026-10-16 (`pdftoppm -r 60`, every PNG viewed; see "Verification pass") |
 
 Build and check, from the repo root (typst 0.15.0; `PATH` must include the micromamba env):
 
 ```sh
-sh tools/render.sh courts/seventh-circuit/court-of-appeals/opening-brief samples/INPUT-torres-opening-brief.md
+sh tools/render.sh courts/seventh-circuit/court-of-appeals/opening-brief usage/INPUT-ca7-opening-brief-torres.md
 sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/opening-brief torres-opening-brief
 ```
 
@@ -65,9 +65,9 @@ Open tier-2 items (left open, not papered over):
 
 ## Verification pass 2026-10-16 (fb-595.26.7)
 
-- Rendered: `sh tools/render.sh ... samples/INPUT-torres-opening-brief.md`, exit 0, no typst warnings, 14 pages (the committed OUTPUT was also 14 pages; no stale page count). Re-rendered after each fix.
+- Rendered: `sh tools/render.sh ... usage/INPUT-ca7-opening-brief-torres.md`, exit 0, no typst warnings, 14 pages (the committed OUTPUT was also 14 pages; no stale page count). Re-rendered after each fix.
 - Viewed: all 14 pages at `pdftoppm -r 60`, one PNG at a time; pages 1, 2 and 9 again after the fixes (the other 11 pages are text-identical to the first render, checked page by page with `pdftotext -layout`). Exemplar page 1 compared with our cover. All 14 overlay pages viewed at `-r 40`.
-- Overlay: regenerated (the exemplar is now in `exemplars/`). Pairing unchanged: cover 92.8% (filed p.1), Summary of Argument 99.0% (filed p.11), other pages 30-70% because the sample is an excerpt. Margins and the text block coincide with the filed pages; the differences are the face (EB Garamond vs Times New Roman) and omitted text.
+- Overlay: regenerated (the exemplar is now in `usage/`). Pairing unchanged: cover 92.8% (filed p.1), Summary of Argument 99.0% (filed p.11), other pages 30-70% because the sample is an excerpt. Margins and the text block coincide with the filed pages; the differences are the face (EB Garamond vs Times New Roman) and omitted text.
 - Fixed in `typst/ca7-opening-brief.typ`:
   - TOC: the page number now has its own column (`toc-page-col`), so a title whose last line is full can no longer push the number onto a line by itself (was: entry I.B, page "3" stranded under the leaders).
   - Cover counsel and signature block: address lines step in as one padded block (`counsel-step`), so a wrapped line keeps the indent (was: "SCHOLER LLP" and "Washington, DC 20001" fell back to the left edge).
@@ -79,7 +79,7 @@ Open tier-2 items (left open, not papered over):
 - Blue cover (FRAP 32(a)(2)): paper-copy only, not produced.
 - Rule 26.1 disclosure forms (Cir. R. 26.1): separate attorney filings, not generated. The exemplar shows them at pages 2-4 as fillable forms; they are not in the sample or the template.
 - Body excerpt: the sample transcribes the cover, TOC and TOA material, Jurisdictional Statement, Issue, Introduction (two paragraphs), Statement of the Case (I.A-B in part, II), Summary of Argument, Standard of Review, the start of the Argument (I, I.A.1, I.A.2 opening) and the Conclusion. The middle of the brief (I.A.3 through I.B.2) is not transcribed; the TOC and TOA show only the transcribed headings.
-- Second exemplar: a second filer is needed for the tier-2 check (2-3 exemplars from different filers). The candidate `Agofsky v. Baysore`, No. 24-1067, entry 7 (Federal Community Defender; 87 pages; text layer) was found on CourtListener and is recorded in `exemplars/SOURCE.md`, but it is not yet saved or transcribed.
+- Second exemplar: a second filer is needed for the tier-2 check (2-3 exemplars from different filers). The candidate `Agofsky v. Baysore`, No. 24-1067, entry 7 (Federal Community Defender; 87 pages; text layer) was found on CourtListener and is recorded in `usage/SOURCE.md`, but it is not yet saved or transcribed.
 - Circuit Rule 30 short appendix: not produced.
 - Fonts: EB Garamond is kept. The exemplar uses Times New Roman, but the rules name no face (see the court `README.md` "Typeface"), so Liberation Serif is not substituted; matching the filer's face is tier 3, not chased.
 - Table of contents (PDF page 2, folio i): the entry "B. Mr. Torres is confined in a moldy, contaminated cell for three months" used to wrap with its page number "3" dropped to a line of its own. Fixed 2026-10-16 (see "Verification pass").
@@ -91,14 +91,14 @@ Open tier-2 items (left open, not papered over):
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls the template. |
 | `typst/ca7-opening-brief.typ` | The template: `ca7-opening-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
-| `samples/INPUT-torres-opening-brief.md` | The sample markdown (frontmatter + body). |
-| `samples/OUTPUT-torres-opening-brief.pdf` | The render (14 pages). |
-| `samples/OVERLAY-torres-opening-brief.pdf`, `-overlay.txt` | The red/blue overlay against the exemplar, and its page map. |
-| `exemplars/FILED-EXAMPLE-torres-22-2830-opening-brief.pdf`, `exemplars/SOURCE.md` | The filed exemplar and its source record. |
+| `usage/INPUT-ca7-opening-brief-torres.md` | The sample markdown (frontmatter + body). |
+| `usage/OUTPUT-ca7-opening-brief-torres.typst.pdf` | The render (14 pages). |
+| `usage/OVERLAY-torres-opening-brief.pdf`, `-overlay.txt` | The red/blue overlay against the exemplar, and its page map. |
+| `usage/SAMPLE-ca7-opening-brief-torres222830.pdf`, `usage/SOURCE.md` | The filed exemplar and its source record. |
 
 ## Engines
 
 - **typst** (`typst/`): primary. TOC page column and counsel-line indent changed 2026-10-16 (see "Verification pass").
-- **latex** (`latex/template.tex`, `latex/ca7-opening-brief.lua`): EB Garamond 14 pt from the vendored `fonts/` (`fontdir`), 12 pt footnotes, 31.4 pt double spacing, one-inch margins, no hyphenation, left aligned. Cover, TOC, TOA (page list, `passim` at 7 or more pages), roman then arabic numbering, signature block and both certificates are built from the same frontmatter. Output `samples/OUTPUT-torres-opening-brief.latex.pdf`, 16 pages (typst: 14). Differences: the cover spacing is hand-set rather than fitted; the signature block can start a page alone (typst keeps the last paragraph with it); the body runs about one page longer; an addendum (FRAP 28(f)) is not rendered and the engine stops with an error if the sample has one. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
-- **docx** (`docx/`): `build-reference.sh` (reference styles, EB Garamond 14 pt, exact 31.4 pt double spacing, 12 pt footnotes), `ca7-opening-brief.lua` (cover with double rules and two-column counsel, TOC, TOA, signature and certificates), `render.sh` (sections with roman front matter and arabic body, PAGE footers, and a two-pass TOC/TOA page map read from the LibreOffice PDF), `pagemap.awk`. Output `samples/OUTPUT-torres-opening-brief.docx` and `.docx.pdf`, 14 pages (typst: 14); the certificate word count is 1,871, the same as typst. Matches typst: the face and sizes, spacing, margins, cover, TOC entries with the certificates, TOA with page numbers, body and certificates. Differences: the cover is spaced by hand; the TOA page list comes from a text search of the PDF; the TOC and TOA are static text, not fields; the compliance certificate omits the typst "using Typst" clause and the typeface is named from the template (EB Garamond). Opened in LibreOffice without error; not opened in Word. BLOCKED: `tools/check.sh --engine docx` cannot run: no `checks.yaml` and no `court.json` in this folder or the court (exit 2), so no Gate 1 check ID can be reported; Gate 2 has no `reviews/` file.
+- **latex** (`latex/template.tex`, `latex/ca7-opening-brief.lua`): EB Garamond 14 pt from the vendored `fonts/` (`fontdir`), 12 pt footnotes, 31.4 pt double spacing, one-inch margins, no hyphenation, left aligned. Cover, TOC, TOA (page list, `passim` at 7 or more pages), roman then arabic numbering, signature block and both certificates are built from the same frontmatter. Output `usage/OUTPUT-ca7-opening-brief-torres.latex.pdf`, 16 pages (typst: 14). Differences: the cover spacing is hand-set rather than fitted; the signature block can start a page alone (typst keeps the last paragraph with it); the body runs about one page longer; an addendum (FRAP 28(f)) is not rendered and the engine stops with an error if the sample has one. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
+- **docx** (`docx/`): `build-reference.sh` (reference styles, EB Garamond 14 pt, exact 31.4 pt double spacing, 12 pt footnotes), `ca7-opening-brief.lua` (cover with double rules and two-column counsel, TOC, TOA, signature and certificates), `render.sh` (sections with roman front matter and arabic body, PAGE footers, and a two-pass TOC/TOA page map read from the LibreOffice PDF), `pagemap.awk`. Output `usage/OUTPUT-ca7-opening-brief-torres.docx` and `.docx.pdf`, 14 pages (typst: 14); the certificate word count is 1,871, the same as typst. Matches typst: the face and sizes, spacing, margins, cover, TOC entries with the certificates, TOA with page numbers, body and certificates. Differences: the cover is spaced by hand; the TOA page list comes from a text search of the PDF; the TOC and TOA are static text, not fields; the compliance certificate omits the typst "using Typst" clause and the typeface is named from the template (EB Garamond). Opened in LibreOffice without error; not opened in Word. BLOCKED: `tools/check.sh --engine docx` cannot run: no `checks.yaml` and no `court.json` in this folder or the court (exit 2), so no Gate 1 check ID can be reported; Gate 2 has no `reviews/` file.
 

@@ -32,13 +32,13 @@ Not used, and why:
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-rabo-bayes-26-59007-adversary-complaint.pdf`: Amended Complaint (ECF Doc 4), 7 pages, filed July 8, 2026 by Rabo AgriFinance LLC (Womble Bond Dickinson (US) LLP). Text layer present (Word-generated, TimesNewRomanPSMT embedded).
-- Provenance, searches and the caption spelling note are in `exemplars/SOURCE.md`.
+- `usage/SAMPLE-insb-adversary-complaint-rabobayes2659007.pdf`: Amended Complaint (ECF Doc 4), 7 pages, filed July 8, 2026 by Rabo AgriFinance LLC (Womble Bond Dickinson (US) LLP). Text layer present (Word-generated, TimesNewRomanPSMT embedded).
+- Provenance, searches and the caption spelling note are in `usage/SOURCE.md`.
 - One exemplar, one filer. The eval loop's tier-2 rule asks for two or three filed exemplars from different filers; this is a gap (see Known gaps).
 
 ## Sample
 
-- `samples/INPUT-rabo-bayes-adversary-complaint.md`: the whole amended complaint transcribed, every paragraph, the caption, counts, prayer and signature block. The ECF header is not transcribed (a court stamp, not part of the document). Exhibits A and B are referred to, not attached (as in the filing).
+- `usage/INPUT-insb-adversary-complaint-rabobayes.md`: the whole amended complaint transcribed, every paragraph, the caption, counts, prayer and signature block. The ECF header is not transcribed (a court stamp, not part of the document). Exhibits A and B are referred to, not attached (as in the filing).
 - The markdown contract: YAML frontmatter (`case_number`, `chapter`, `division`, `debtor`, `adversary`, `title`, `lead_in`, `date`, `signature`); `#` headings; a blank line between chunks; `(a)` and `(1)` for lettered and prayer items (shown as `a.` and `1.`); a `>` quotation; a `[...]` bracketed note. A chunk that starts with a lowercase letter continues the paragraph before it, unnumbered (the total after paragraph 16's list).
 - The sample's case-specific content is only in its frontmatter and body. The template holds no case text.
 
@@ -46,12 +46,12 @@ Not used, and why:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/adversary-complaint samples/INPUT-rabo-bayes-adversary-complaint.md
+sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-insb-adversary-complaint-rabobayes.md
 sh tools/overlay.sh courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/adversary-complaint rabo-bayes-adversary-complaint
 ```
 
-- `samples/OUTPUT-rabo-bayes-adversary-complaint.pdf`: 6 pages. Typst compiled with no warnings (`render.sh` fails on any). Vendored font only: `pdffonts` shows EBGaramond-Regular and -Bold, embedded (Identity-H).
-- `samples/OVERLAY-rabo-bayes-adversary-complaint.pdf` and `.txt`: red = our render, blue = exemplar, black = both. The page map pairs pages one to one: ours p.1-6 ↔ filed p.1-6 (word overlap 47-64%). The overlay is a diagnostic, not a score: the exemplar's text sits at a different position on the page (its own spacing and caption layout), so the layers do not coincide line for line.
+- `usage/OUTPUT-insb-adversary-complaint-rabobayes.typst.pdf`: 6 pages. Typst compiled with no warnings (`render.sh` fails on any). Vendored font only: `pdffonts` shows EBGaramond-Regular and -Bold, embedded (Identity-H).
+- `usage/OVERLAY-rabo-bayes-adversary-complaint.pdf` and `.txt`: red = our render, blue = exemplar, black = both. The page map pairs pages one to one: ours p.1-6 ↔ filed p.1-6 (word overlap 47-64%). The overlay is a diagnostic, not a score: the exemplar's text sits at a different position on the page (its own spacing and caption layout), so the layers do not coincide line for line.
 - File names: the repo's tools read `OUTPUT-<id>.pdf` and write `OVERLAY-<id>.pdf/.txt` (CLAUDE.md naming), so this folder uses `INPUT-`/`OUTPUT-`/`OVERLAY-`, not the `<id>.pdf` and `<id>-overlay.pdf` in the task brief.
 
 ## Visual review (Gate 2 record, all 6 pages, rendered at 60 dpi and looked at)
@@ -69,7 +69,7 @@ Reviewed pages: 6 of 6 (final state). Earlier passes found and fixed: line overl
 
 ## Known gaps and open choices
 
-1. **Tier-2 exemplars.** One exemplar from one filer. The eval loop asks for two or three from different filers. Not done; a second S.D. Ind. bankruptcy adversary complaint would be needed. Searches tried are in `exemplars/SOURCE.md`.
+1. **Tier-2 exemplars.** One exemplar from one filer. The eval loop asks for two or three from different filers. Not done; a second S.D. Ind. bankruptcy adversary complaint would be needed. Searches tried are in `usage/SOURCE.md`.
 2. **Form 416.** The caption layout is the exemplar's, checked against Rule 7010's wording. The Official Form 416 text itself was not fetched, so the caption is not checked line by line against the form.
 3. **Corporate Ownership Statement (B-7007-2).** Not generated. Required for the LLC plaintiff in a real filing.
 4. **Font.** No face named by the rules (checked 2026-10-15); EB Garamond at 12 pt is kept. Not a Times New Roman template, because the rules do not require one.
@@ -85,6 +85,6 @@ Reviewed pages: 6 of 6 (final state). Earlier passes found and fixed: line overl
 
 - Matches the typst form, by construction: font and size, double spacing, first-line indent, margins, the page-number footer, the caption and signature text.
 - Differs or is unverified: the allegation number is followed by a tab stop at 1 in (typst uses a 0.3 in gap); the body grid is kept by exact line spacing, not by typst's block rounding, so page breaks may fall differently; the caption rule (0.75 pt, right and bottom) and the borderless signature table are written as XML and not checked against the typst layout.
-- BLOCKED: docx.pdf checks (Gates 0 and 1 on `samples/OUTPUT-rabo-bayes-adversary-complaint.docx.pdf`): not produced, because `soffice` is not installed on this box. No page was rendered or reviewed (pages reviewed 0).
-- `sh tools/render.sh --engine docx` writes `samples/OUTPUT-rabo-bayes-adversary-complaint.docx`, then fails at the soffice step (expected here). The `.docx` was checked with `unzip -tq` and `xmllint --noout` on every XML part.
+- BLOCKED: docx.pdf checks (Gates 0 and 1 on `usage/OUTPUT-rabo-bayes-adversary-complaint.docx.pdf`): not produced, because `soffice` is not installed on this box. No page was rendered or reviewed (pages reviewed 0).
+- `sh tools/render.sh --engine docx` writes `usage/OUTPUT-insb-adversary-complaint-rabobayes.docx`, then fails at the soffice step (expected here). The `.docx` was checked with `unzip -tq` and `xmllint --noout` on every XML part.
 - TOC and TOA: none in this doc type.

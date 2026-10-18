@@ -1,5 +1,5 @@
 -- E.D. Tenn. memorandum of law (motion brief), DOCX engine (docs/DOCX.md): the markdown contract of
--- samples/INPUT-<id>.md -> Word. Mirrors typst/tned-motion-brief.typ: court title (with the division when the
+-- usage/INPUT-<id>.md -> Word. Mirrors typst/tned-motion-brief.typ: court title (with the division when the
 -- filing names one), caption (parties left with right and bottom rules; the case number right), the title of the
 -- paper, the body (double-spaced; first-line indent, none after a heading or a block quotation), headings
 -- (level 1 centred caps, level 2 hanging, level 3 bold italic), block quotations (single-spaced, indented both

@@ -4,9 +4,9 @@ Doc type: the appellant's principal brief in a direct appeal (Ga. Sup. Ct. R. 19
 
 | Check | Result |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-clark-v-leigh-S26A0349-opening-brief.pdf` (see `exemplars/SOURCE.md`) |
+| exemplar | yes: `usage/SAMPLE-ga-opening-brief-clarkvleighs26a0349.pdf` (see `usage/SOURCE.md`) |
 | render | ok: `tools/render.sh` (typst, `--ignore-system-fonts`, no warnings); 15 pages; only TeX Gyre Schola embedded (`pdffonts`) |
-| overlay | ok: `samples/OVERLAY-clark.pdf` and `OVERLAY-clark.txt` (`tools/overlay.sh`) |
+| overlay | ok: `usage/OVERLAY-clark.pdf` and `OVERLAY-clark.txt` (`tools/overlay.sh`) |
 | pages reviewed | 15 of 15, each rendered to PNG at 60 dpi and looked at |
 
 ## Governing rules
@@ -50,8 +50,8 @@ The rules do not prescribe cover contents for briefs. The layout follows the exe
 ## Files
 
 - `typst/main.typ`: entry point. `typst/ga-opening-brief.typ`: template, `ga-brief(meta, body)`.
-- `samples/INPUT-clark.md`: markdown transcription of the exemplar (frontmatter for cover, counsel, signature, service and authorities; body from the exemplar's text). Parts not transcribed are marked `[Omitted from this transcription: ...]`.
-- `samples/OUTPUT-clark.pdf`: render. `samples/OVERLAY-clark.pdf` and `OVERLAY-clark.txt`: red (ours), blue (filed), black (both) comparison, and the page map.
+- `usage/INPUT-ga-opening-brief-clark.md`: markdown transcription of the exemplar (frontmatter for cover, counsel, signature, service and authorities; body from the exemplar's text). Parts not transcribed are marked `[Omitted from this transcription: ...]`.
+- `usage/OUTPUT-ga-opening-brief-clark.typst.pdf`: render. `usage/OVERLAY-clark.pdf` and `OVERLAY-clark.txt`: red (ours), blue (filed), black (both) comparison, and the page map.
 - File names follow the tools (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.md` / `<id>-overlay.pdf` names in the bead. The tools hardcode the names.
 
 ## What the overlay shows
@@ -76,7 +76,7 @@ Each rendered page was checked. Defects found and fixed during the review:
 - **No `tools/check.sh` gate run.** The per-doc-type layout has no `checks.yaml` or `rules.md`; the gates in `docs/EVAL-LOOP.md` are not applied to this folder.
 - **Certificate wording.** Rule 14 is quoted from the PDF text; the certificate's wording follows the rule's own sentence, which differs from the exemplar's wording.
 - **Single-spacing reading** (see above).
-- **Exemplar** is one filing in one case (S26A0349) by the appellants' counsel. It is the only Supreme Court opening brief found in the search; see `exemplars/SOURCE.md`.
+- **Exemplar** is one filing in one case (S26A0349) by the appellants' counsel. It is the only Supreme Court opening brief found in the search; see `usage/SOURCE.md`.
 
 ## Related
 
@@ -85,7 +85,7 @@ Each rendered page was checked. Defects found and fixed during the review:
 
 ## Engines
 
-Typst is the primary engine (above). The DOCX engine is `docx/`, the same files as `answering-brief/docx/`: `build-reference.sh` writes `reference.docx`; `ga-brief.lua` builds the cover, TOC, TOA, closing, certificate and the sections; `render.sh` makes two renders so the TOC and TOA numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> samples/INPUT-clark.md`: `samples/OUTPUT-clark.docx` and `samples/OUTPUT-clark.docx.pdf` (LibreOffice 26.8.1).
+Typst is the primary engine (above). The DOCX engine is `docx/`, the same files as `answering-brief/docx/`: `build-reference.sh` writes `reference.docx`; `ga-brief.lua` builds the cover, TOC, TOA, closing, certificate and the sections; `render.sh` makes two renders so the TOC and TOA numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> usage/INPUT-ga-opening-brief-clark.md`: `usage/OUTPUT-ga-opening-brief-clark.docx` and `usage/OUTPUT-clark.docx.pdf` (LibreOffice 26.8.1).
 
 | | docx | typst |
 |---|---|---|
@@ -97,7 +97,7 @@ Typst is the primary engine (above). The DOCX engine is `docx/`, the same files 
 | Footnotes | 11 pt, single | same |
 | TOC, TOA | dot leaders, numbers from the docx render | same form |
 
-Checked: every page of `OUTPUT-clark.docx.pdf` was rendered (60 dpi) and set beside the typst page. The cover, TOC, TOA, headings, footnotes and signature grid were read on the page images; line positions were measured with `pdftotext -bbox`.
+Checked: every page of `OUTPUT-ga-opening-brief-clark.docx.pdf` was rendered (60 dpi) and set beside the typst page. The cover, TOC, TOA, headings, footnotes and signature grid were read on the page images; line positions were measured with `pdftotext -bbox`.
 
 What differs:
 

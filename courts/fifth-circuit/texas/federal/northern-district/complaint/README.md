@@ -5,11 +5,11 @@ Folder: `courts/fifth-circuit/texas/federal/northern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-lilly-v-brown-3-26-cv-03514-complaint.pdf` (Eli Lilly, non-class complaint); second filer `exemplars/FILED-EXAMPLE-burkes-bsw-3-26-cv-03570-complaint.pdf` (Burkes, class complaint). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-lilly-complaint.md` (a portion of the 35-page filing: caption, sections I to III of the general allegations, cause of action 1, prayer, jury demand, signature) |
+| exemplar | yes: `usage/SAMPLE-txnd-complaint-lillyvbrown326cv03514.pdf` (Eli Lilly, non-class complaint); second filer `usage/SAMPLE-txnd-complaint-burkesbsw326cv03570.pdf` (Burkes, class complaint). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-txnd-complaint-lilly.md` (a portion of the 35-page filing: caption, sections I to III of the general allegations, cause of action 1, prayer, jury demand, signature) |
 | typeface | face required: none (LR 7.2 sets the size, 12 pt or larger; LR 10.1 names no face) -> vendored substitute: EB Garamond (the default, `fonts/eb-garamond/`) -> fit: n/a, no court-named face to match. The filed exemplars use Times New Roman; see Known gaps 2. |
-| render | ok: `samples/OUTPUT-lilly-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; `pdffonts` shows EBGaramond-Regular and EBGaramond-Bold embedded) |
-| overlay | ok: `samples/OVERLAY-lilly-complaint.pdf` and `samples/OVERLAY-lilly-complaint.txt` (page map; regenerated 2026-10-14 against the Lilly exemplar fetched from the URL in `exemplars/SOURCE.md`; the exemplar PDF is not committed) |
+| render | ok: `usage/OUTPUT-txnd-complaint-lilly.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; `pdffonts` shows EBGaramond-Regular and EBGaramond-Bold embedded) |
+| overlay | ok: `usage/OVERLAY-lilly-complaint.pdf` and `usage/OVERLAY-lilly-complaint.txt` (page map; regenerated 2026-10-14 against the Lilly exemplar fetched from the URL in `usage/SOURCE.md`; the exemplar PDF is not committed) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-14 after the re-render) |
 | file names | the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (the names `tools/render.sh` and `tools/overlay.sh` use); the brief's `<id>.pdf` and `<id>-overlay.pdf` were not used, to keep the tools unchanged |
 
@@ -39,9 +39,9 @@ Judge-specific requirements (individual judges' standing orders) are not checked
 - Signature block single-spaced at the right half: `Dated`, `Respectfully submitted`, firm, `/s/`, name, bar number, address, telephone, fax, email, role.
 - Page numbers centered at the foot of every page; no header.
 
-## Overlay (`samples/OVERLAY-lilly-complaint.pdf`)
+## Overlay (`usage/OVERLAY-lilly-complaint.pdf`)
 
-Red is our render, blue is the filed exemplar, black is where they agree. The pages are paired by word overlap (`tools/overlay.sh`), so a partial transcription still lines up with the pages it came from. The overlay is a diagnostic, not a score: the sample is a portion of the filing, paragraph numbers are not transcribed, and our page breaks do not follow the filing's. The overlay pairs our pages 1 to 7 with filed pages 1, 3, 6, 8, 9, 10 and 11 (in that order), and our pages 8 to 10 with filed pages 25, 34 and 35. Read the page map in `samples/OVERLAY-lilly-complaint.txt`.
+Red is our render, blue is the filed exemplar, black is where they agree. The pages are paired by word overlap (`tools/overlay.sh`), so a partial transcription still lines up with the pages it came from. The overlay is a diagnostic, not a score: the sample is a portion of the filing, paragraph numbers are not transcribed, and our page breaks do not follow the filing's. The overlay pairs our pages 1 to 7 with filed pages 1, 3, 6, 8, 9, 10 and 11 (in that order), and our pages 8 to 10 with filed pages 25, 34 and 35. Read the page map in `usage/OVERLAY-lilly-complaint.txt`.
 
 ## Known gaps and open choices
 
@@ -52,11 +52,11 @@ Red is our render, blue is the filed exemplar, black is where they agree. The pa
 5. **Prayer items** are numbered `1.` to `7.`. The filed exemplar letters the sub-items of item 1 (i, ii, iii, ...); the sample omits them, and the template has no sub-item form. Tier 2; open.
 6. **Headings.** Level 2 and level 3 headings are left-aligned in the template. The filed exemplar centers its sub-cause heading ("Unfair Competition in Violation of..."). Tier 2; open.
 7. **Signature block alone on the last page.** The signature falls on page 10 with no body text. This matches the filed exemplar (its page 35 holds only the signature), so it is recorded as ACCEPTED.
-8. **One sample only.** EVAL-LOOP asks for two or three filers in tier-2 comparison. The second filer (Burkes) is saved in `exemplars/` but not transcribed. Its caption and signature block were read and match the structure used here.
+8. **One sample only.** EVAL-LOOP asks for two or three filers in tier-2 comparison. The second filer (Burkes) is saved in `usage/` but not transcribed. Its caption and signature block were read and match the structure used here.
 9. **Case-name italics.** The text layer carries no italic markup, so case names are not italicized in the sample. The template italicizes `*...*` markdown, so future samples can carry italics.
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape. The brief forbids editing `tools/`, so the gates were not run. The page review above is the Gate 2 equivalent.
 
-## Review of the rendered pages (`samples/OUTPUT-lilly-complaint.pdf`, 10 pages)
+## Review of the rendered pages (`usage/OUTPUT-txnd-complaint-lilly.typst.pdf`, 10 pages)
 
 Each page was rendered at 60 dpi and viewed after the last template change.
 
@@ -75,12 +75,12 @@ Earlier review rounds found and fixed: court-title and caption lines overlapping
 
 ## Engines
 
-| Engine | Folder | Output in `samples/` | State |
+| Engine | Folder | Output in `usage/` | State |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-lilly-complaint.pdf` | the reference (see the review above) |
-| docx | `docx/` | `OUTPUT-lilly-complaint.docx`, `OUTPUT-lilly-complaint.docx.pdf` | `.docx` built and valid (zip and XML checks pass); `.docx.pdf` BLOCKED |
+| typst (primary) | `typst/` | `OUTPUT-txnd-complaint-lilly.typst.pdf` | the reference (see the review above) |
+| docx | `docx/` | `OUTPUT-txnd-complaint-lilly.docx`, `OUTPUT-txnd-complaint-lilly.docx.pdf` | `.docx` built and valid (zip and XML checks pass); `.docx.pdf` BLOCKED |
 
-The docx is built by pandoc (3.6.4) from `docx/reference.docx` and `docx/txnd-complaint.lua`. `reference.docx` is made by `sh docx/make-reference.sh` from `docx/styles.xml`. The cover, the caption, the title, the numbered paragraphs and the signature block are built by the filter from the frontmatter. Command: `sh tools/render.sh --engine docx <court>/complaint samples/INPUT-lilly-complaint.md`.
+The docx is built by pandoc (3.6.4) from `docx/reference.docx` and `docx/txnd-complaint.lua`. `reference.docx` is made by `sh docx/make-reference.sh` from `docx/styles.xml`. The cover, the caption, the title, the numbered paragraphs and the signature block are built by the filter from the frontmatter. Command: `sh tools/render.sh --engine docx <court>/complaint usage/INPUT-txnd-complaint-lilly.md`.
 
 What follows the typst template, by construction (the styles and the filter carry the typst parameters; no docx page has been seen, so none of this is a visual claim):
 

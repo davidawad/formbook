@@ -5,10 +5,10 @@ Folder: `courts/third-circuit/pennsylvania/federal/middle-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes, one filer: `exemplars/FILED-EXAMPLE-orndorff-1-26-cv-02944-motion-brief.pdf` (Cumberland County's memorandum in support of a 12(b)(6) motion). A second filer was **not found**: see gap 1. See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-orndorff.md`: caption, Preliminary Statement and facts (I–III), Statement of Questions (IV), Standard of Review (V), Argument A and A.1 only (VI), Conclusion (VII), the LR 7.1 certificate of non-concurrence, the certificate of service (first two counsel), signature. |
-| render | ok: `samples/OUTPUT-orndorff.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-orndorff.pdf` and `OVERLAY-orndorff.txt` (red = ours, blue = Orndorff exemplar) |
+| exemplar | yes, one filer: `usage/SAMPLE-pamd-motion-brief-orndorff126cv02944.pdf` (Cumberland County's memorandum in support of a 12(b)(6) motion). A second filer was **not found**: see gap 1. See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-pamd-motion-brief-orndorff.md`: caption, Preliminary Statement and facts (I–III), Statement of Questions (IV), Standard of Review (V), Argument A and A.1 only (VI), Conclusion (VII), the LR 7.1 certificate of non-concurrence, the certificate of service (first two counsel), signature. |
+| render | ok: `usage/OUTPUT-pamd-motion-brief-orndorff.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-orndorff.pdf` and `OVERLAY-orndorff.txt` (red = ours, blue = Orndorff exemplar) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; see "Review" below) |
 
 Naming: the tools (`tools/render.sh`, `tools/overlay.sh`) read and write `INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf` and `.txt`, so the sample id is `orndorff`.
@@ -30,7 +30,7 @@ Sources and dates. Read on 2026-10-14. The brief-related rules are in the court'
 | PAMD-BRF-001 | LR 5.1 | 8½ × 11 paper; 14 point or larger; standard face | `typst/pamd-motion-brief.typ`: `type-size = 14pt`, `font-family` |
 | PAMD-BRF-002 | LR 5.1 | Double-spaced text; 32 pt baseline pitch (verified in the render) | `pitch`, `body-leading` |
 | PAMD-BRF-003 | LR 5.1 | Margins ≥ 1 in, all sides; page numbers in the margin | `margin-all = 1in`; page number in the bottom margin |
-| PAMD-BRF-004 | LR 7.8(a) | Statement of questions, procedural history, facts, argument, conclusion | authored body sections (`samples/`), in the order of the exemplar |
+| PAMD-BRF-004 | LR 7.8(a) | Statement of questions, procedural history, facts, argument, conclusion | authored body sections (`usage/`), in the order of the exemplar |
 | PAMD-BRF-005 | LR 7.1 | Certification of concurrence sought (non-concurrence), in the filing | authored body text (the certificate is a body section, not generated) |
 | PAMD-BRF-006 | LR 7.8(a) | Table of contents and table of authorities when the brief is more than 15 pages | **not generated**: see gap 2 |
 | PAMD-BRF-007 | LR 7.8(b)(1)–(2) | 15 pages, or 5,000 words with a word-count certificate | **not checked**: see gap 2 |
@@ -71,7 +71,7 @@ Not produced by this template (separate filings): the motion itself; the propose
 
 ## Review
 
-Every page of `OUTPUT-orndorff.pdf` was rendered at 60 dpi and viewed. The caption and page 1 were re-checked after the two caption edits (shortened rows) and the cover edit (stacked court title). Pages 2–8 were re-viewed after the caption and service-list edits.
+Every page of `OUTPUT-pamd-motion-brief-orndorff.typst.pdf` was rendered at 60 dpi and viewed. The caption and page 1 were re-checked after the two caption edits (shortened rows) and the cover edit (stacked court title). Pages 2–8 were re-viewed after the caption and service-list edits.
 
 - Page 1: court title stacked; caption with colons and the judge at the right (the "COMMONWEALTH OF / PENNSYLVANIA –" rows fit after shortening); the title centred and bold caps across three lines; "I. PRELIMINARY STATEMENT" and the first paragraph. Pass.
 - Page 2: paragraphs of the preliminary statement; "II. PROCEDURAL HISTORY" and "III. RELEVANT FACTS" flush-left bold; paragraph indents. Pass.
@@ -95,5 +95,5 @@ Every page of `OUTPUT-orndorff.pdf` was rendered at 60 dpi and viewed. The capti
 
 - **typst** (primary, `typst/`): the reference for the form. Pages reviewed in this README above.
 - **latex**: not built in this pass.
-- **docx** (`docx/reference.docx`, `docx/build-reference.sh`, `docx/pamd.lua`; sample `samples/OUTPUT-orndorff.docx`). Built with `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/pamd.lua samples/INPUT-orndorff.md`. Matches the typst template: EB Garamond 14 pt (declared in the styles; the font must be installed on the machine that opens the file), exact 32 pt line pitch, 0.5 in first-line indent on body paragraphs, 1 in margins on letter paper, page number centred in a 12 pt footer, flush-left bold caps level-1 headings, flush-left bold level-2 and bold italic level-3 headings, the court title, the caption as a borderless table with 16 pt rows and a colon column, the title, the Statement of Questions with its "A.", "B." labels as text, `~` blocks (service lists) single-spaced without indent, and the signature block (date at left; firm, "By:" with an underline tab, and the signer at right). Differences: single-spaced blocks use exact 16 pt lines (typst uses its own leading), the "By:" rule is an underlined tab, and the page breaks are not measured. The table of contents, table of authorities and word-count certificate are not produced, as in the typst template (gap 2 above). The `.docx` was checked only for a valid zip and well-formed XML parts, and read back with pandoc. It was not opened in Word or LibreOffice.
+- **docx** (`docx/reference.docx`, `docx/build-reference.sh`, `docx/pamd.lua`; sample `usage/OUTPUT-pamd-motion-brief-orndorff.docx`). Built with `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/pamd.lua usage/INPUT-pamd-motion-brief-orndorff.md`. Matches the typst template: EB Garamond 14 pt (declared in the styles; the font must be installed on the machine that opens the file), exact 32 pt line pitch, 0.5 in first-line indent on body paragraphs, 1 in margins on letter paper, page number centred in a 12 pt footer, flush-left bold caps level-1 headings, flush-left bold level-2 and bold italic level-3 headings, the court title, the caption as a borderless table with 16 pt rows and a colon column, the title, the Statement of Questions with its "A.", "B." labels as text, `~` blocks (service lists) single-spaced without indent, and the signature block (date at left; firm, "By:" with an underline tab, and the signer at right). Differences: single-spaced blocks use exact 16 pt lines (typst uses its own leading), the "By:" rule is an underlined tab, and the page breaks are not measured. The table of contents, table of authorities and word-count certificate are not produced, as in the typst template (gap 2 above). The `.docx` was checked only for a valid zip and well-formed XML parts, and read back with pandoc. It was not opened in Word or LibreOffice.
 - **docx BLOCKED.** No checks file is readable for this court (no `checks.yaml` in the court folder), so there are no gate check IDs to list. The rule IDs measured on the `.docx.pdf` (PAMD-BRF-001 to PAMD-BRF-008, see the table above) are all BLOCKED: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked. The docx is not verified against Gates 0 to 3.

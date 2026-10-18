@@ -5,10 +5,10 @@ Folder: `courts/tenth-circuit/wyoming/federal/bankruptcy-district/adversary-comp
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-miller-v-water-works-20-02029-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-miller-complaint.md` (the whole 6-page complaint, transcribed) |
-| render | ok: `samples/OUTPUT-miller-complaint.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only (embedded as EBGaramond-Regular/Italic/Bold), no warnings |
-| overlay | ok: `samples/OVERLAY-miller-complaint.pdf` and `samples/OVERLAY-miller-complaint.txt` (every page paired with a filed page, 55% to 80% word overlap) |
+| exemplar | yes: `usage/SAMPLE-wyb-adversary-complaint-millervwaterworks2002029.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-wyb-adversary-complaint-millercomplaint.md` (the whole 6-page complaint, transcribed) |
+| render | ok: `usage/OUTPUT-wyb-adversary-complaint-millercomplaint.typst.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only (embedded as EBGaramond-Regular/Italic/Bold), no warnings |
+| overlay | ok: `usage/OVERLAY-miller-complaint.pdf` and `usage/OVERLAY-miller-complaint.txt` (every page paired with a filed page, 55% to 80% word overlap) |
 | pages reviewed | 5 of 5 (every page rendered at 60 dpi and viewed after the last template change) |
 | BLOCKED | none. Tier 2 is not judged against two or three filers yet (see Known gaps). |
 
@@ -50,7 +50,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # or the bootstrap toolchain
-sh tools/render.sh courts/tenth-circuit/wyoming/federal/bankruptcy-district/adversary-complaint samples/INPUT-miller-complaint.md
+sh tools/render.sh courts/tenth-circuit/wyoming/federal/bankruptcy-district/adversary-complaint usage/INPUT-wyb-adversary-complaint-millercomplaint.md
 sh tools/overlay.sh courts/tenth-circuit/wyoming/federal/bankruptcy-district/adversary-complaint miller-complaint
 ```
 
@@ -79,7 +79,7 @@ sh tools/overlay.sh courts/tenth-circuit/wyoming/federal/bankruptcy-district/adv
 
 ## Engines
 
-**docx** (`docx/reference.docx` + `docx/wyb-adversary-complaint.lua`; output `samples/OUTPUT-miller-complaint.docx`).
+**docx** (`docx/reference.docx` + `docx/wyb-adversary-complaint.lua`; output `usage/OUTPUT-wyb-adversary-complaint-millercomplaint.docx`).
 
 - Matches: EB Garamond 13 pt body, 1 in margins, letter paper, exact 26 pt (double) line pitch, 0.5 in first-line indent, bold centered court title, caption table with the party rule and bottom rule and case information on the right, counsel block 11 pt single spaced, page number footer 11 pt centered, footnote text 13 pt.
 - Differs: the filter lays out the cover in a table with plain-text caption values (no inline markdown in caption parties), and the pleading-paper paragraph numbers and lettered prayer items are typed text, not Word list numbering. Heading and signature keep-together uses keepNext, so Word and LibreOffice may break pages differently.

@@ -12,7 +12,7 @@ Page numbers are the printed page numbers of the Rulebook.
 |---|---|---|
 | RB | First Circuit Rulebook: FRAP, First Circuit Local Rules, IOPs, "Effective with amendments through June 1, 2026" (197 PDF pages; read 2026-10-17). Contains the FRAP text, the Notice to Litigants (p. 7), the Local Rules and Appendix Form 6 (p. 113). | https://www.ca1.uscourts.gov/sites/ca1/files/rulebook.pdf |
 | FRAP | Federal Rules of Appellate Procedure, Rules 25, 26.1, 28, 32 (cross-check of the RB text; same wording) | https://www.law.cornell.edu/rules/frap/rule_32 and https://www.law.cornell.edu/rules/frap/rule_28 |
-| EX | The filed exemplars in each doc type's `exemplars/` (see `exemplars/SOURCE.md` there). Visual reference only. | local |
+| EX | The filed exemplars in each doc type's `usage/` (see `usage/SOURCE.md` there). Visual reference only. | local |
 
 Kinds: **M** = mandated by a court rule (FRAP or First Circuit Local Rule). **C** = convention (seen in exemplars from different filers; the rules leave it open). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

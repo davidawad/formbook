@@ -1,6 +1,6 @@
 # USCMCR: brief on behalf of appellant (opening brief)
 
-Status for this doc type: exemplar=yes, render=ok, overlay=ok, pages_reviewed=13 (every page of `samples/OUTPUT-hicks-opening-brief.pdf`, viewed after the last render).
+Status for this doc type: exemplar=yes, render=ok, overlay=ok, pages_reviewed=13 (every page of `usage/OUTPUT-mc-opening-brief-hicks.typst.pdf`, viewed after the last render).
 
 **Tier 1 (the rules' mandated form) is NOT verified.** The governing rules text could not be read (see "Rule basis"), and the typeface the rules call for is not vendored (see "Typeface"). Do not treat this template as passing tier 1.
 
@@ -8,18 +8,18 @@ Status for this doc type: exemplar=yes, render=ok, overlay=ok, pages_reviewed=13
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-hicks-13-004-opening-brief.pdf` | The filed brief (Hicks, Nov. 5, 2013). Text-based PDF. |
-| `exemplars/SOURCE.md` | URL, case, filer, date filed, date fetched. |
-| `samples/INPUT-hicks-opening-brief.md` | Markdown transcription of the exemplar: cover data, issues, jurisdiction, statement of the case and facts, Argument I to III (in part), conclusion, footnotes, certificate data. |
-| `samples/OUTPUT-hicks-opening-brief.pdf` | Our render (13 pages). |
-| `samples/OVERLAY-hicks-opening-brief.pdf`, `.txt` | Red (ours) over blue (filed) overlay, and its page map. |
+| `usage/SAMPLE-mc-opening-brief-hicks13004.pdf` | The filed brief (Hicks, Nov. 5, 2013). Text-based PDF. |
+| `usage/SOURCE.md` | URL, case, filer, date filed, date fetched. |
+| `usage/INPUT-mc-opening-brief-hicks.md` | Markdown transcription of the exemplar: cover data, issues, jurisdiction, statement of the case and facts, Argument I to III (in part), conclusion, footnotes, certificate data. |
+| `usage/OUTPUT-mc-opening-brief-hicks.typst.pdf` | Our render (13 pages). |
+| `usage/OVERLAY-hicks-opening-brief.pdf`, `.txt` | Red (ours) over blue (filed) overlay, and its page map. |
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...`. |
 | `typst/mc-opening-brief.typ` | The template: `mc-brief(meta, body)`. Court constants and rule-driven parameters at the top. |
 
 Build and check (from the repo root, with the toolchain on `PATH`):
 
 ```sh
-sh tools/render.sh courts/military/court-of-military-commission-review/opening-brief samples/INPUT-hicks-opening-brief.md
+sh tools/render.sh courts/military/court-of-military-commission-review/opening-brief usage/INPUT-mc-opening-brief-hicks.md
 sh tools/overlay.sh courts/military/court-of-military-commission-review/opening-brief hicks-opening-brief
 ```
 
@@ -62,7 +62,7 @@ Tier 2 calls for two or three exemplars from different filers. Only one opening 
 
 ## Overlay (red/blue)
 
-`samples/OVERLAY-hicks-opening-brief.pdf` pairs each of our pages with the filed page sharing the most words, and shows our render in red over that filed page in blue. The map, from `OVERLAY-hicks-opening-brief.txt`, after the final render:
+`usage/OVERLAY-hicks-opening-brief.pdf` pairs each of our pages with the filed page sharing the most words, and shows our render in red over that filed page in blue. The map, from `OVERLAY-hicks-opening-brief.txt`, after the final render:
 
 | Our page | Filed page | Word overlap |
 |---|---|---|
@@ -84,7 +84,7 @@ The sample is an excerpt of the filed brief (the Argument from Part III onward, 
 
 ## Page review (Gate 2 stand-in)
 
-Every page of `samples/OUTPUT-hicks-opening-brief.pdf` was rendered at 60 dpi and viewed after the last change.
+Every page of `usage/OUTPUT-mc-opening-brief-hicks.typst.pdf` was rendered at 60 dpi and viewed after the last change.
 
 | PDF page | Content | Finding |
 |---|---|---|
@@ -113,7 +113,7 @@ Fixes made during this review: paragraph spacing was zero, so separate paragraph
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default reference, `mc.lua` builds the cover, contents, signature and certificates from the frontmatter). Render: `sh tools/render.sh --engine docx <folder> samples/INPUT-hicks-opening-brief.md` writes `samples/OUTPUT-hicks-opening-brief.docx` and `.docx.pdf` (LibreOffice). Pages reviewed: 13 of 13 (every page of the `.docx.pdf`, each compared with the typst page; the review PNGs are in `/work/artifacts/mc/opening-brief/`, not committed).
+**docx** (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default reference, `mc.lua` builds the cover, contents, signature and certificates from the frontmatter). Render: `sh tools/render.sh --engine docx <folder> usage/INPUT-mc-opening-brief-hicks.md` writes `usage/OUTPUT-mc-opening-brief-hicks.docx` and `.docx.pdf` (LibreOffice). Pages reviewed: 13 of 13 (every page of the `.docx.pdf`, each compared with the typst page; the review PNGs are in `/work/artifacts/mc/opening-brief/`, not committed).
 
 - Matches the typst form: Liberation Serif 12 pt (the Times New Roman substitute, `docs/FONTS.md`; `pdffonts` shows only LiberationSerif), 1 in margins, US Letter; caption with the parenthesis column; counsel block; centered bold level-1 headings (17 pt, the size the typst headings render at) and bold hanging level-2/3 headings; footnotes 11 pt; cover and contents unnumbered; body numbered from 1, centered; certificates on their own pages; the signature block kept together.
 - Differs: the word count prints with a thousands separator (3,857), as the filed exemplar does; the typst prints 3857. The issues list (1) to (4) is a Word numbered list with a hanging indent, not the typst paragraphs. Word may paginate differently from LibreOffice.

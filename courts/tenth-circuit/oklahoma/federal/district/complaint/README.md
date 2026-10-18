@@ -5,11 +5,11 @@ Folder: `courts/tenth-circuit/oklahoma/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-pilf-ziriax-5-26-cv-01440-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-pilf-ziriax-complaint.md` (a portion of the 15-page filing; see below) |
+| exemplar | yes: `usage/SAMPLE-okd-complaint-pilfziriax526cv01440.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-okd-complaint-pilfziriax.md` (a portion of the 15-page filing; see below) |
 | typeface | rule: LCvR7.1(d) names no face (13-point minimum and margins only; read from the rules PDF 2026-10-15). Substitute: none; EB Garamond kept, the no-face case in `docs/FONTS.md`. Fit: n/a (the rules name no face); see gap 3 |
-| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-pilf-ziriax-complaint.pdf`, 10 pages (unchanged), typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold only, embedded; no warnings |
-| overlay | **fail**: not regenerated. `exemplars/` holds only `SOURCE.md` (the filed PDF named there is not in the repo), so `tools/overlay.sh` cannot run. `OVERLAY-pilf-ziriax-complaint.pdf` is absent and the `.txt` is from an earlier render, so it does not match the current OUTPUT |
+| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-okd-complaint-pilfziriax.typst.pdf`, 10 pages (unchanged), typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold only, embedded; no warnings |
+| overlay | **fail**: not regenerated. `usage/` holds only `SOURCE.md` (the filed PDF named there is not in the repo), so `tools/overlay.sh` cannot run. `OVERLAY-pilf-ziriax-complaint.pdf` is absent and the `.txt` is from an earlier render, so it does not match the current OUTPUT |
 | pages reviewed | 10 of 10 on the 2026-10-15 render (every page rasterized at 60 dpi and viewed; no layout change) |
 | tools/check.sh, check-selftest.sh | not run: they expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither shape (the brief forbids editing `tools/`) |
 
@@ -92,6 +92,6 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 - BLOCKED (not done):
   - `docx.pdf` (LibreOffice conversion, Gates 0 and 1): `soffice` is not installed on this box and cannot be installed here (no conda-forge package, no root).
   - Visual review of the docx pages: pages_reviewed=0 (needs the LibreOffice PDF).
-  - Zip integrity step of `tools/render-docx.sh`: `unzip` is not installed, so the command exits 1 after writing `samples/OUTPUT-pilf-ziriax-complaint.docx` (`unzip: not found`, then `... is not a valid zip`). The parts were checked instead with `ziptool` (17 parts) and `xmllint --noout`: all well formed.
+  - Zip integrity step of `tools/render-docx.sh`: `unzip` is not installed, so the command exits 1 after writing `usage/OUTPUT-okd-complaint-pilfziriax.docx` (`unzip: not found`, then `... is not a valid zip`). The parts were checked instead with `ziptool` (17 parts) and `xmllint --noout`: all well formed.
   - Opening the .docx in Word or LibreOffice without a repair prompt: not done.
   - `tools/check.sh --engine docx`: not run (needs the `.docx.pdf`).

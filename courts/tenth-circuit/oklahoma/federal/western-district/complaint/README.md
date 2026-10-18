@@ -5,14 +5,14 @@ Folder: `courts/tenth-circuit/oklahoma/federal/western-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-caskey-5-26-cv-02533-complaint.pdf` (one filer, plaintiff's counsel; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-caskey-complaint.md`: the whole complaint, all 109 paragraphs, caption, headings, prayer, jury demand, signature |
-| render | ok: `samples/OUTPUT-caskey-complaint.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-caskey-complaint.pdf` and `OVERLAY-caskey-complaint.txt` (`sh tools/overlay.sh`) |
+| exemplar | yes: `usage/SAMPLE-okwd-complaint-caskey526cv02533.pdf` (one filer, plaintiff's counsel; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-okwd-complaint-caskey.md`: the whole complaint, all 109 paragraphs, caption, headings, prayer, jury demand, signature |
+| render | ok: `usage/OUTPUT-okwd-complaint-caskey.typst.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
+| overlay | ok: `usage/OVERLAY-caskey-complaint.pdf` and `OVERLAY-caskey-complaint.txt` (`sh tools/overlay.sh`) |
 | pages reviewed | 15 of 15, every page rasterized at 60 dpi and viewed (pages 2 to 5 on the first render, the rest after the last template change; the later changes did not move the page breaks of pages 2 to 13, checked against the numbered paragraphs) |
 
 File names follow the house convention that `tools/render.sh` and `tools/overlay.sh` read and write: the
-brief's `samples/<id>.md` is `samples/INPUT-<id>.md`, its `<id>.pdf` is `OUTPUT-<id>.pdf`, and its
+brief's `usage/<id>.md` is `usage/INPUT-<id>.md`, its `<id>.pdf` is `OUTPUT-<id>.pdf`, and its
 `<id>-overlay.pdf` / `.txt` are `OVERLAY-<id>.pdf` / `.txt`.
 
 ## Governing rules
@@ -65,12 +65,12 @@ this template does not reflect). Federal rules: Fed. R. Civ. P. 8, 10 and 12 fro
 
 ## Engines
 
-**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (styles, letter page with 1 in margins, centered PAGE footer); `docx/okwd-complaint.lua` builds the cover, caption, numbered allegations (typed "N." then a tab), lettered prayer items and the signature block. Render: `sh tools/render.sh --engine docx courts/tenth-circuit/oklahoma/federal/western-district/complaint samples/INPUT-caskey-complaint.md`.
+**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (styles, letter page with 1 in margins, centered PAGE footer); `docx/okwd-complaint.lua` builds the cover, caption, numbered allegations (typed "N." then a tab), lettered prayer items and the signature block. Render: `sh tools/render.sh --engine docx courts/tenth-circuit/oklahoma/federal/western-district/complaint usage/INPUT-okwd-complaint-caskey.md`.
 
 - Matches the typst template: EB Garamond 13 pt; exact 26 pt line pitch (double); 17.55 pt after each paragraph; 0.5 in first-line indent; level-1 headings bold centered capitals, level-2 bold centered; single 15 pt blocks for the caption, counsel and signature; `Case No. ____` when the case number is blank; `JURY TRIAL DEMANDED` at the right of the caption when set; signature kept with the last paragraph.
 - Differs from typst: the caption and signature are borderless tables (one ")" paragraph per caption line, not measured against wrapped names); numbers are typed text, not Word list numbering; footnote text is exact 26 pt, as the typst body leading would set it (the template has no separate footnote rule).
-- Word check: `samples/OUTPUT-caskey-complaint.docx` was written. Every XML part passes `xmllint --noout` and pandoc reads it back (`pandoc -f docx -t plain`). Word itself has not been run.
-- BLOCKED, `docx.pdf` (LibreOffice PDF, Gates 0 and 1 on the docx): `soffice` is not installed on this box and cannot be installed here (no conda-forge package, no root). `samples/OUTPUT-caskey-complaint.docx.pdf` does not exist.
+- Word check: `usage/OUTPUT-okwd-complaint-caskey.docx` was written. Every XML part passes `xmllint --noout` and pandoc reads it back (`pandoc -f docx -t plain`). Word itself has not been run.
+- BLOCKED, `docx.pdf` (LibreOffice PDF, Gates 0 and 1 on the docx): `soffice` is not installed on this box and cannot be installed here (no conda-forge package, no root). `usage/OUTPUT-caskey-complaint.docx.pdf` does not exist.
 - BLOCKED, `tools/render-docx.sh` integrity step: `unzip` and `zip` are not installed. The render prints `render-docx.sh: 43: unzip: not found`, then `render-docx.sh: .../OUTPUT-caskey-complaint.docx is not a valid zip`, and exits 1 after writing the .docx. `reference.docx` was built with `ziptool` (libzip) instead.
 - BLOCKED, visual review of the docx pages: no LibreOffice, so no docx page was rendered or viewed (pages reviewed: 0 of 15). The typst pages were reviewed (15 of 15) as the template reference only; that is not a docx review.
 - Not done: Word open test (no repair prompt), font embedding (EB Garamond must be installed where the file opens), table-of-contents or cross-reference fields (none in this doc type).

@@ -1,15 +1,15 @@
 # Tenth Circuit: reply brief
 
-Doc-type folder for the Court of Appeals for the Tenth Circuit, reply brief (the appellant's reply under FRAP 28(c)). Self-contained: its own exemplar, sample, template and overlay. Court-root `typst/` and `samples/` are not touched.
+Doc-type folder for the Court of Appeals for the Tenth Circuit, reply brief (the appellant's reply under FRAP 28(c)). Self-contained: its own exemplar, sample, template and overlay. Court-root `typst/` and `usage/` are not touched.
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-oliver-26-2126-reply-brief.pdf` | Filed exemplar, primary: *United States v. Oliver*, No. 26-2126, DOJ reply brief, 2026-10-08. Text layer present. |
-| `exemplars/FILED-EXAMPLE-lyman-26-4014-reply-brief.pdf` | Second filer (tier-2 comparison): *Lyman v. Henderson*, No. 26-4014, reply brief, 2026-07-27. |
-| `exemplars/SOURCE.md` | URL fetched from, case, docket, filer, date filed, date fetched, and why each file was used. |
-| `samples/INPUT-oliver-reply-brief.md` | Transcription of the Oliver brief: cover and caption, the Introduction, Argument I.A and I.B, the Conclusion, the signature block (and footnote 1). A portion, not the whole brief. |
-| `samples/OUTPUT-oliver-reply-brief.pdf` | Render, 13 pages. |
-| `samples/OVERLAY-oliver-reply-brief.pdf`, `-overlay.txt` | Red/blue overlay against the Oliver exemplar, and the page map. |
+| `usage/SAMPLE-ca10-reply-brief-oliver262126.pdf` | Filed exemplar, primary: *United States v. Oliver*, No. 26-2126, DOJ reply brief, 2026-10-08. Text layer present. |
+| `usage/SAMPLE-ca10-reply-brief-lyman264014.pdf` | Second filer (tier-2 comparison): *Lyman v. Henderson*, No. 26-4014, reply brief, 2026-07-27. |
+| `usage/SOURCE.md` | URL fetched from, case, docket, filer, date filed, date fetched, and why each file was used. |
+| `usage/INPUT-ca10-reply-brief-oliver.md` | Transcription of the Oliver brief: cover and caption, the Introduction, Argument I.A and I.B, the Conclusion, the signature block (and footnote 1). A portion, not the whole brief. |
+| `usage/OUTPUT-ca10-reply-brief-oliver.typst.pdf` | Render, 13 pages. |
+| `usage/OVERLAY-oliver-reply-brief.pdf`, `-overlay.txt` | Red/blue overlay against the Oliver exemplar, and the page map. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
 | `typst/ca10-reply-brief.typ` | Template: `ca10-reply-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
 
@@ -17,12 +17,12 @@ Build, from the repo root:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (see the toolchain note in the PR)
-sh tools/render.sh courts/tenth-circuit/court-of-appeals/reply-brief samples/INPUT-oliver-reply-brief.md
+sh tools/render.sh courts/tenth-circuit/court-of-appeals/reply-brief usage/INPUT-ca10-reply-brief-oliver.md
 sh tools/overlay.sh courts/tenth-circuit/court-of-appeals/reply-brief oliver-reply-brief \
-  courts/tenth-circuit/court-of-appeals/reply-brief/exemplars/FILED-EXAMPLE-oliver-26-2126-reply-brief.pdf
+  courts/tenth-circuit/court-of-appeals/reply-brief/usage/SAMPLE-ca10-reply-brief-oliver262126.pdf
 ```
 
-`render.sh` compiles with the vendored fonts only (`--ignore-system-fonts`) and fails on any typst warning. The overlay takes the exemplar as its third argument, because `overlay.sh` otherwise picks the first file in `exemplars/` alphabetically (the Lyman brief).
+`render.sh` compiles with the vendored fonts only (`--ignore-system-fonts`) and fails on any typst warning. The overlay takes the exemplar as its third argument, because `overlay.sh` otherwise picks the first file in `usage/` alphabetically (the Lyman brief).
 
 ## Governing rules
 
@@ -54,8 +54,8 @@ The sample is one `.md` file: a YAML frontmatter block followed by the body. The
 
 ## Results
 
-- **Render:** ok. `tools/render.sh` built `samples/OUTPUT-oliver-reply-brief.pdf` (13 pages) with no typst warnings. Fonts embedded: EBGaramond-Regular/Bold/Italic (Identity-H). Final build sha256 `5f91caea…`.
-- **Overlay:** ok. `samples/OVERLAY-oliver-reply-brief.pdf` and `-overlay.txt` are written.
+- **Render:** ok. `tools/render.sh` built `usage/OUTPUT-ca10-reply-brief-oliver.typst.pdf` (13 pages) with no typst warnings. Fonts embedded: EBGaramond-Regular/Bold/Italic (Identity-H). Final build sha256 `5f91caea…`.
+- **Overlay:** ok. `usage/OVERLAY-oliver-reply-brief.pdf` and `-overlay.txt` are written.
 - **Pages reviewed:** 13 of 13. Every page was rasterised at 60 dpi (`pdftoppm -r 60`) and looked at. The review was on the render made before the last template change. That change (paragraph breaks in the digital-submission list) is not in this sample, and the re-render is the same size as the reviewed one (101,383 bytes), but I did not re-view its pages.
 - **Branches tested on a temporary transcription** (deleted, not committed): `digital_submission: true` with `virus_scanner`, and a `service.unregistered` list. The render was 14 pages, with the Certificate of Digital Submission and the unregistered-service paragraph present. The first attempt ran the five list items together ("and(5)"); fixed with paragraph breaks.
 
@@ -82,7 +82,7 @@ The sample is one `.md` file: a YAML frontmatter block followed by the body. The
 - **Unverified claim, not used.** A secondary Typelaw blog post says the Tenth Circuit requires Century Schoolbook. No court-published text found says so, so the template does not follow it. The filed exemplars use different faces (Oliver reply: Century Schoolbook; Lyman opening: Times New Roman), which is consistent with the rules naming none.
 - **Substitute: none; EB Garamond kept** (vendored, `fonts/eb-garamond/`), per the fonts policy: a court whose rules name no face keeps EB Garamond. Set in the template as `font-family`.
 - **Compatibility:** not applicable (no named face to match). Pagination is therefore not checked against a Times or Century filing; the length gate uses the word count, not the page count.
-- **Renders (2026-10-15):** `tools/render.sh` with vendored fonts only, zero warnings; `pdffonts` shows only EB Garamond (Regular, Bold, Italic). Page counts unchanged. Every page rasterised at 60 dpi and viewed. Overlay regenerated against the filed exemplar (downloaded from the CourtListener URL in `exemplars/SOURCE.md`; the PDF is not committed to the repo).
+- **Renders (2026-10-15):** `tools/render.sh` with vendored fonts only, zero warnings; `pdffonts` shows only EB Garamond (Regular, Bold, Italic). Page counts unchanged. Every page rasterised at 60 dpi and viewed. Overlay regenerated against the filed exemplar (downloaded from the CourtListener URL in `usage/SOURCE.md`; the PDF is not committed to the repo).
 
 ## Engines
 

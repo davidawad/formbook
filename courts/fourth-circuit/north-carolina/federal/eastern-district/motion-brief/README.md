@@ -5,11 +5,11 @@ Folder: `courts/fourth-circuit/north-carolina/federal/eastern-district/motion-br
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-johnson-5-26-cv-00320-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-johnson-memo.md` (the introduction, a portion of the facts, the standard of review, the first point of the argument, the conclusion, the signature block and the certificate of service of a 20-page memorandum) |
+| exemplar | yes: `usage/SAMPLE-nced-motion-brief-johnson526cv00320.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nced-motion-brief-johnsonmemo.md` (the introduction, a portion of the facts, the standard of review, the first point of the argument, the conclusion, the signature block and the certificate of service of a 20-page memorandum) |
 | typeface | no face named by the rule: EB Garamond (vendored default; `docs/FONTS.md`, "No face named"); no substitute applied |
-| render | ok: `samples/OUTPUT-johnson-memo.pdf`, 8 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
-| overlay | ok: `samples/OVERLAY-johnson-memo.pdf` (red = our render, blue = filed page, black = agreement) and `samples/OVERLAY-johnson-memo.txt` (the page map) |
+| render | ok: `usage/OUTPUT-nced-motion-brief-johnsonmemo.typst.pdf`, 8 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
+| overlay | ok: `usage/OVERLAY-johnson-memo.pdf` (red = our render, blue = filed page, black = agreement) and `usage/OVERLAY-johnson-memo.txt` (the page map) |
 | pages reviewed | 8 of 8, every page rendered at 60 dpi and viewed on the final render (table below) |
 | tier 2 | not judged against a second filer: see "Known gaps", item 1 |
 
@@ -66,7 +66,7 @@ Primary source: United States District Court, Eastern District of North Carolina
 5. **Title block has no box rule.** The exemplar sets its title at the right inside a box rule; the template sets the title in bold capitals at the right, without a box. Accepted: the rule's example form uses the ")" column and no box.
 6. **The exemplar's typos are kept in the sample.** The sample transcribes the filing's text as it is printed, for example "North Carolin." in Part I.A and "the "the FTC Buyers Guide,"" in the allegations. The sample is for layout and structure comparison, not for citation.
 7. **Exhibit citations are abbreviated.** The sample keeps the exemplar's exhibit and docket-entry citations, but drops the exhibit text it does not reproduce.
-8. **File names.** The brief's literal names (`samples/<id>.md`, `<id>-overlay.pdf`) are replaced by the repository's tool names (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`), because `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf`, and `tools/` is out of scope for this unit.
+8. **File names.** The brief's literal names (`usage/<id>.md`, `<id>-overlay.pdf`) are replaced by the repository's tool names (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`), because `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf`, and `tools/` is out of scope for this unit.
 9. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court root (a `court.json` and `rules.md`); this doc-type folder is not that shape, and the brief forbids touching `tools/`. The render (no warnings, vendored font only) and the overlay were run; the review below is the Gate 2 equivalent.
 10. **Sample length.** The sample renders 8 pages from a 20-page exemplar. The brief asks for 8 to 14 pages when the exemplar is that long; the sample is at the low end because it transcribes the parts the template exercises (introduction, facts, a standard of review, one argument point, conclusion, signature, certificate) and not the whole argument.
 11. **LR 10.1(e) rule number in the title.** The rule asks that the title state the rule number "if applicable"; the exemplar's title does not (its first paragraph names Rules 12(b)(2) and 12(b)(6)). The template prints `brief_title` as given, so the choice is the filer's. Left open for David: whether the template should require the rule number in the title.
@@ -86,7 +86,7 @@ Primary source: United States District Court, Eastern District of North Carolina
 
 ## Engines
 
-The same markdown renders through the typst engine (`typst/`, the reference) and the docx engine (`docx/`). The docx output is `samples/OUTPUT-johnson-memo.docx` with its LibreOffice PDF `samples/OUTPUT-johnson-memo.docx.pdf`. Build: `sh docx/make-reference.sh` (the reference), then `sh tools/render.sh --engine docx <this folder> samples/INPUT-johnson-memo.md`.
+The same markdown renders through the typst engine (`typst/`, the reference) and the docx engine (`docx/`). The docx output is `usage/OUTPUT-nced-motion-brief-johnsonmemo.docx` with its LibreOffice PDF `usage/OUTPUT-nced-motion-brief-johnsonmemo.docx.pdf`. Build: `sh docx/make-reference.sh` (the reference), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-nced-motion-brief-johnsonmemo.md`.
 
 - *Matches typst (checked on the PDF):* EB Garamond 12 pt, the only face in the PDF (no substitution); letter paper with 1-inch margins (all text inside 72 to 540 pt); body double-spaced at the typst baseline pitch of 27.6 pt, with a 0.5 in first-line indent and no space between paragraphs; the cover and caption as in the complaint, with the "No." line; heading labels as the template prints them: under ARGUMENT, I., II. and A., B.; elsewhere A., B. and 1., 2., each followed by a tab to a hanging indent; level 1 centered bold capitals, level 2 bold with its label at 0, level 3 bold with its label at 0.5 in, all at typst's sizes; footnotes at 12 pt, single-spaced; the dated signature block at 3 in; the certificate of service after the signature, kept on one page with it (Fed. R. Civ. P. 5(d)(1)(B)); the page number centered in the footer, sequential from the cover. Page count is the same as typst (8 pages), and the certificate of service falls on page 8 in both.
 - *Differs:* LibreOffice and typst break some lines at different words, so a few pages hold one line more or less. The footnote 3 paragraph ("Consulting Engineers") splits across pages 6 and 7 in the docx, where typst keeps it whole on page 6, so the CONCLUSION heading is on page 7 in both, but the footnote sits on page 7 in the docx and on page 6 in typst. Heading sizes are set as sizes (about 17 pt and 14.5 pt), because typst's 1.4 em and 1.2 em come from its defaults. The labels are typed text, not Word list numbering, so a Word edit does not renumber them.

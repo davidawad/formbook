@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-southern-district/motion-
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-cmg-funding-26-03633-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-cmg-funding.md`: the complete numbered text of the motion (¶¶ 1 to 42, all sections, the WHEREFORE clause), the caption, the emergency notice, the signature blocks and the certificate of service. Exemplar footnotes 2 to 4 are not transcribed; the proposed order (Exhibit A) is not saved. |
-| render | ok: `samples/OUTPUT-cmg-funding.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
-| overlay | **not regenerated (fail)**: `tools/overlay.sh` exits 1 because `exemplars/` holds only `SOURCE.md` in this snapshot (the filed PDF is not in the tree or in git). `samples/OVERLAY-cmg-funding.txt` is the page map from the earlier run; no `OVERLAY-cmg-funding.pdf` is present. |
+| exemplar | yes: `usage/SAMPLE-txsb-motion-brief-cmgfunding2603633.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-txsb-motion-brief-cmgfunding.md`: the complete numbered text of the motion (¶¶ 1 to 42, all sections, the WHEREFORE clause), the caption, the emergency notice, the signature blocks and the certificate of service. Exemplar footnotes 2 to 4 are not transcribed; the proposed order (Exhibit A) is not saved. |
+| render | ok: `usage/OUTPUT-txsb-motion-brief-cmgfunding.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
+| overlay | **not regenerated (fail)**: `tools/overlay.sh` exits 1 because `usage/` holds only `SOURCE.md` in this snapshot (the filed PDF is not in the tree or in git). `usage/OVERLAY-cmg-funding.txt` is the page map from the earlier run; no `OVERLAY-cmg-funding.pdf` is present. |
 | pages reviewed | 12 of 12 (fonts pass, 2026-10-14: every page rendered at 60 dpi and viewed on the final layout) |
 
 ## Governing rules
@@ -74,7 +74,7 @@ As the adversary-complaint template: US Letter, 1 inch margins (a convention), E
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` writes `reference.docx` (styles, footer page number); `motion.lua` builds the caption, the BLR 9013-1 notices, numbered paragraphs, lettered lists, the signature block and the certificate of service from the sample; `render.sh` runs pandoc, then writes the caption rules and keeps table rows whole. Output: `samples/OUTPUT-cmg-funding.docx` and `.docx.pdf` (LibreOffice, 12 pages; typst is 12 pages).
+docx (`docx/`): `build-reference.sh` writes `reference.docx` (styles, footer page number); `motion.lua` builds the caption, the BLR 9013-1 notices, numbered paragraphs, lettered lists, the signature block and the certificate of service from the sample; `render.sh` runs pandoc, then writes the caption rules and keeps table rows whole. Output: `usage/OUTPUT-txsb-motion-brief-cmgfunding.docx` and `.docx.pdf` (LibreOffice, 12 pages; typst is 12 pages).
 
 - Matches the typst form: EB Garamond 12 pt; body double spaced as an exact 24 pt line; 1 in margins, letter; 0.5 in first-line indent; numbered paragraphs; headings (centered bold for levels 1 and 2, bold left for level 3); the two-column caption with the right and bottom rules and the case numbers at right; the BLR 9013-1(b) and (i) notice text, verbatim; the emergency and hearing lines when the sample has them; the certificate of service; centered page number; footnote text 10 pt (typst measures about 10.2 pt); single-spaced lines at the typst pitch (13.8 pt); signature block kept whole.
 - Differs, and why: the paragraph numbers are typed with a tab, not Word auto-numbering (the numbers are the sample's own); the caption rules are cell borders added by `docx/render.sh`, because pandoc cannot write cell borders and LibreOffice does not draw paragraph borders in a table cell; LibreOffice places exact-line text about 3 pt lower than typst, so a page can hold one line less and a break can fall differently (page counts match on this sample).

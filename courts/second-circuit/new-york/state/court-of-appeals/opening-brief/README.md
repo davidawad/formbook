@@ -4,18 +4,18 @@ Doc type `opening-brief` of court `ny` (folder: `courts/second-circuit/new-york/
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-people-v-trump-entrepreneur-apl-2016-00115-opening-brief.pdf` | Real filed brief (Respondents-Appellants, APL-2016-00115), text layer present |
-| `exemplars/SOURCE.md` | URL fetched, case, docket, filer, date signed, date fetched, why this exemplar, its limits |
-| `samples/INPUT-tei-opening-brief.md` | Markdown transcription of the exemplar (a portion; see below) |
-| `samples/OUTPUT-tei-opening-brief.pdf` | `sh tools/render.sh … samples/INPUT-tei-opening-brief.md` (14 pages) |
-| `samples/OVERLAY-tei-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh … tei-opening-brief` (red = our render, blue = filed exemplar page, black = both) |
+| `usage/SAMPLE-ny-opening-brief-peoplevtrumpentrepreneurapl201600115.pdf` | Real filed brief (Respondents-Appellants, APL-2016-00115), text layer present |
+| `usage/SOURCE.md` | URL fetched, case, docket, filer, date signed, date fetched, why this exemplar, its limits |
+| `usage/INPUT-ny-opening-brief-tei.md` | Markdown transcription of the exemplar (a portion; see below) |
+| `usage/OUTPUT-ny-opening-brief-tei.typst.pdf` | `sh tools/render.sh … usage/INPUT-ny-opening-brief-tei.md` (14 pages) |
+| `usage/OVERLAY-tei-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh … tei-opening-brief` (red = our render, blue = filed exemplar page, black = both) |
 | `typst/main.typ` | Entry point (reads the sample named by `--input sample=`) |
 | `typst/ny-opening-brief.typ` | The template, `ny-opening-brief(meta, md)`. Structure copied from `courts/ninth-circuit/court-of-appeals/typst/`; numbers and rules are NY's |
 
 Build (from the repo root, toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/second-circuit/new-york/state/court-of-appeals/opening-brief samples/INPUT-tei-opening-brief.md
+sh tools/render.sh courts/second-circuit/new-york/state/court-of-appeals/opening-brief usage/INPUT-ny-opening-brief-tei.md
 sh tools/overlay.sh courts/second-circuit/new-york/state/court-of-appeals/opening-brief tei-opening-brief
 ```
 
@@ -43,7 +43,7 @@ Rules not ruled by the sources above, decided by the template (convention, not r
 
 ## What the overlay shows
 
-`samples/OVERLAY-tei-opening-brief.txt` pairs each of our 14 pages with the filed page of most shared words:
+`usage/OVERLAY-tei-opening-brief.txt` pairs each of our 14 pages with the filed page of most shared words:
 
 | Ours | Filed page | Word overlap |
 |---|---|---|
@@ -102,11 +102,11 @@ Found and ruled out:
 - A 1973 brief at digitalcommons.nyls.edu: a scan without a text layer (not checked further).
 - NY Court of Appeals rules pages at justia.com (403) and courtrules.net (403): not reachable; LII used instead.
 
-Used: the AG-posted Trump Entrepreneur Initiative opening brief (see `exemplars/SOURCE.md`).
+Used: the AG-posted Trump Entrepreneur Initiative opening brief (see `usage/SOURCE.md`).
 
 ## Verification pass 2026-10-16 (fb-595.26.21)
 
-- Render: `sh tools/render.sh … samples/INPUT-tei-opening-brief.md` exit 0, no typst warnings, 14 pages (the same count as the committed PDF; the committed PDF was not stale in page count). `pdffonts`: EB Garamond only.
+- Render: `sh tools/render.sh … usage/INPUT-ny-opening-brief-tei.md` exit 0, no typst warnings, 14 pages (the same count as the committed PDF; the committed PDF was not stale in page count). `pdffonts`: EB Garamond only.
 - Pages viewed: 14 of 14 at 60 dpi (`pdftoppm -r 60`), and page 3 (contents) again after the fix. The 14 overlay pages were viewed at 40 dpi, and the exemplar's page 1 against our cover.
 - Overlay: rerun after the fix; the page map is unchanged (table above, page labels corrected to what the pages now hold). Body pages 5, 6, 10 and 12 overlap 81 to 98% with the filed pages; the low pages are the tables, certificates and the blank affidavit, as before.
 - Defect fixed: in the table of contents, a wrapped entry printed its page number on the first line while the dot leader ended on the last line, so the leader pointed at nothing (Point I and Point I.A). The page-number column is now bottom-aligned, so the number sits at the end of the leader.
@@ -123,7 +123,7 @@ Used: the AG-posted Trump Entrepreneur Initiative opening brief (see `exemplars/
 
 ## Engines
 
-**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 14 pt, body lines exact 31.4 pt, 0.5 in first-line indent, 14 pt single-spaced footnotes, letter page, 1 in margins, centred PAGE footer, empty cover footer). `docx/ny-opening.lua` builds the cover, disclosure, related litigation, contents, authorities, signature, certificates and affidavit from the same frontmatter as the typst template. Sections: cover (no number), front matter (lower roman), body and certificates (arabic from 1). Point headings are numbered I. / A. / 1. / a. as text by the filter. Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/court-of-appeals/opening-brief samples/INPUT-tei-opening-brief.md` writes `samples/OUTPUT-tei-opening-brief.docx`.
+**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 14 pt, body lines exact 31.4 pt, 0.5 in first-line indent, 14 pt single-spaced footnotes, letter page, 1 in margins, centred PAGE footer, empty cover footer). `docx/ny-opening.lua` builds the cover, disclosure, related litigation, contents, authorities, signature, certificates and affidavit from the same frontmatter as the typst template. Sections: cover (no number), front matter (lower roman), body and certificates (arabic from 1). Point headings are numbered I. / A. / 1. / a. as text by the filter. Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/court-of-appeals/opening-brief usage/INPUT-ny-opening-brief-tei.md` writes `usage/OUTPUT-ny-opening-brief-tei.docx`.
 
 - Matches the typst form: typeface, size, double spacing, margins, cover contents and order, front-matter order, the certificate of compliance text, the affidavit blanks. Word count 1,471 on the sample, the same as the typst render (`count-words` rule reproduced).
 - Differs: the table of contents is a TOC field (placeholder text until a field update in Word or LibreOffice); the table of authorities lists the authorities without page numbers; the addendum is numbered 1, 2, ... (typst: Add-1, ...) and has no addendum contents list; the affidavit blanks are typed underscores, not drawn lines; the cover and signature blocks are borderless tables, so their layout is not the typst layout. Pagination is Word's or LibreOffice's, not measured.

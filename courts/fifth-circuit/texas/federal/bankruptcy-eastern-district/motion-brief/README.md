@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-eastern-district/motion-b
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-ballout-wisner-21-04121-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-ballout-wisner-motion.md` (the whole 8-page filing, transcribed; paragraph numbers left to the template) |
-| render | ok: `samples/OUTPUT-ballout-wisner-motion.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-ballout-wisner-motion.pdf` and `OVERLAY-ballout-wisner-motion.txt` (page map) |
+| exemplar | yes: `usage/SAMPLE-txeb-motion-brief-balloutwisner2104121.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-txeb-motion-brief-balloutwisnermotion.md` (the whole 8-page filing, transcribed; paragraph numbers left to the template) |
+| render | ok: `usage/OUTPUT-txeb-motion-brief-balloutwisnermotion.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-ballout-wisner-motion.pdf` and `OVERLAY-ballout-wisner-motion.txt` (page map) |
 | typeface | face required: none (the 2022 E.D. Tex. Bankr. local rules name no typeface; checked 2026-10-14). Font: EB Garamond (vendored, kept). No substitute applies. |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -71,8 +71,8 @@ CourtListener RECAP search with `court=txeb`, `type=r`: "motion to dismiss" with
 
 ## Engines
 
-Typst is the primary engine (above). The docx engine is in `docx/`: `reference.docx` (built by `docx/make-reference.sh`), `txeb-motion-brief.lua` (the caption, court title, 14-day negative notice, signature block, certificate of service, allegation numbers) and `render.sh` (pandoc). Output: `samples/OUTPUT-ballout-wisner-motion.docx`. The latex engine is not built for this folder.
+Typst is the primary engine (above). The docx engine is in `docx/`: `reference.docx` (built by `docx/make-reference.sh`), `txeb-motion-brief.lua` (the caption, court title, 14-day negative notice, signature block, certificate of service, allegation numbers) and `render.sh` (pandoc). Output: `usage/OUTPUT-txeb-motion-brief-balloutwisnermotion.docx`. The latex engine is not built for this folder.
 
 - **Matches the typst form (built from the typst values; no docx page has been rendered or looked at):** EB Garamond 12 pt; letter paper with 1-inch margins; body double spaced at exact 24 pt; allegation numbers with a half-inch first-line indent and the text after a tab; the caption as a borderless table of exact 14.5 pt rows with the § column; the court title; the centered bold title; the 14-day negative notice text, verbatim, single spaced, before the body; the Roman headings centered and the sub-headings flush left; single-spaced block quotations and relief items indented 0.75 in; the signature block with "Dated" at the left and the signer from 3.25 in; the certificate of service with flush-left address lines and the right-half signature; a centered PAGE field in the footer.
 - **Differs from typst:** pagination is set by Word and LibreOffice, not typst (not measured); the page number is a PAGE field; the "Dated" line uses a tab stop, not a grid; the docx has no bookmarks or tagged PDF.
-- **docx BLOCKED:** the `.docx.pdf` checks cannot run here. LibreOffice (`soffice`) is not installable in this image (conda-forge has no LibreOffice package; no root, no apt), so `samples/OUTPUT-ballout-wisner-motion.docx.pdf` is not produced and Gates 0 to 3 on the docx PDF (`tools/check.sh --engine docx`) are BLOCKED. Gate 2 (every page rendered and looked at) is not done for the docx. The `.docx` opens with pandoc and is a valid zip of well-formed XML; it has not been opened in Word or LibreOffice. The proposed order (LBR 9013-1(b)) is not produced, as for the typst template.
+- **docx BLOCKED:** the `.docx.pdf` checks cannot run here. LibreOffice (`soffice`) is not installable in this image (conda-forge has no LibreOffice package; no root, no apt), so `usage/OUTPUT-ballout-wisner-motion.docx.pdf` is not produced and Gates 0 to 3 on the docx PDF (`tools/check.sh --engine docx`) are BLOCKED. Gate 2 (every page rendered and looked at) is not done for the docx. The `.docx` opens with pandoc and is a valid zip of well-formed XML; it has not been opened in Word or LibreOffice. The proposed order (LBR 9013-1(b)) is not produced, as for the typst template.

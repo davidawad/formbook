@@ -1,15 +1,15 @@
 # Tenth Circuit (ca10): appellant's opening brief
 
-Doc type `opening-brief` for court `ca10`. Self-contained: exemplar, sample, template, and overlay live in this folder. The court-root `typst/` and `samples/` are not used by this doc type.
+Doc type `opening-brief` for court `ca10`. Self-contained: exemplar, sample, template, and overlay live in this folder. The court-root `typst/` and `usage/` are not used by this doc type.
 
 Status: exemplar **yes**; template renders with the repo's `tools/render.sh` (no warnings); overlay produced; every page of the sample was rendered and reviewed (13 of 13).
 
 ## Layout
 
-- `exemplars/FILED-EXAMPLE-lyman-v-henderson-26-4014-opening-brief.pdf`: the real filed brief. Provenance in `exemplars/SOURCE.md`.
-- `samples/INPUT-lyman-v-henderson-opening-brief.md`: the markdown sample (frontmatter + body). A **portion** of the brief: cover, TOC, TOA, prior-appeals statement, jurisdictional statement, issues, a portion of the statement of the case, a portion of the summary, standard of review, Argument I, conclusion, oral-argument statement, certificates, attachments index.
-- `samples/OUTPUT-lyman-v-henderson-opening-brief.pdf`: `sh tools/render.sh courts/tenth-circuit/court-of-appeals/opening-brief samples/INPUT-lyman-v-henderson-opening-brief.md` (13 pages).
-- `samples/OVERLAY-lyman-v-henderson-opening-brief.pdf` and `-overlay.txt`: `sh tools/overlay.sh courts/tenth-circuit/court-of-appeals/opening-brief lyman-v-henderson-opening-brief`.
+- `usage/SAMPLE-ca10-opening-brief-lymanvhenderson264014.pdf`: the real filed brief. Provenance in `usage/SOURCE.md`.
+- `usage/INPUT-ca10-opening-brief-lymanvhenderson.md`: the markdown sample (frontmatter + body). A **portion** of the brief: cover, TOC, TOA, prior-appeals statement, jurisdictional statement, issues, a portion of the statement of the case, a portion of the summary, standard of review, Argument I, conclusion, oral-argument statement, certificates, attachments index.
+- `usage/OUTPUT-ca10-opening-brief-lymanvhenderson.typst.pdf`: `sh tools/render.sh courts/tenth-circuit/court-of-appeals/opening-brief usage/INPUT-ca10-opening-brief-lymanvhenderson.md` (13 pages).
+- `usage/OVERLAY-lyman-v-henderson-opening-brief.pdf` and `-overlay.txt`: `sh tools/overlay.sh courts/tenth-circuit/court-of-appeals/opening-brief lyman-v-henderson-opening-brief`.
 - `typst/main.typ` (entrypoint) and `typst/ca10-opening-brief.typ` (template). The template is the ca9 engine (cmarker markdown, TOC/TOA by typst introspection) with ca10 cover, statements and certificates.
 
 ## Governing rules
@@ -95,7 +95,7 @@ Defects found and fixed during review:
 
 ## Overlay
 
-`samples/OVERLAY-lyman-v-henderson-opening-brief.pdf` pairs each sample page with the filed page sharing the most words (`-overlay.txt`):
+`usage/OVERLAY-lyman-v-henderson-opening-brief.pdf` pairs each sample page with the filed page sharing the most words (`-overlay.txt`):
 
 | Sample p. | Filed p. | Word overlap |
 |---|---|---|
@@ -126,12 +126,12 @@ The overlay is a diagnostic. Red is our render, blue is the filed page, black is
 - **Attachments** are listed on the index only. The decision and judgment are filed as separate PDFs, not produced by the template.
 - **Sample is a portion** of the filed brief (roughly 1,100 words of body against about 5,650 in the original). Where the transcription drops text, it is dropped at paragraph boundaries; no sentence is stitched from non-adjacent text. The one paragraph read incompletely in the source (the district court’s "acknowledged" sentence, brief p. 7 / PDF p. 12) was omitted.
 - **No `checks.yaml`** for this doc type; no gate script was run against it (out of scope for this box). Verification is the render, the overlay, and the page review above.
-- **Court-root folders.** The court-root `typst/` and `samples/` (ca9's opening brief) are untouched; so are `data/`, `tools/`, `lib/`, `fonts/` and `vendor/`.
+- **Court-root folders.** The court-root `typst/` and `usage/` (ca9's opening brief) are untouched; so are `data/`, `tools/`, `lib/`, `fonts/` and `vendor/`.
 
 ## Engines
 
-- **typst** (primary): `typst/`, output `samples/OUTPUT-lyman-v-henderson-opening-brief.pdf`.
-- **latex** (`latex/template.tex` + `latex/ca10-opening-brief.lua`): output `samples/OUTPUT-lyman-v-henderson-opening-brief.latex.pdf`, 19 pages against typst's 13. Matches the 14-pt EB Garamond type, 31.43-pt double spacing, 1-inch margins, roman front matter and arabic body, cover on one page, TOC and TOA with page references, and the certificates. Known differences: pagination is longer; footnote text on some pages runs wide (not yet fixed); the TOC wrap indent is not hung; the signature block is not kept with the last paragraph.
+- **typst** (primary): `typst/`, output `usage/OUTPUT-ca10-opening-brief-lymanvhenderson.typst.pdf`.
+- **latex** (`latex/template.tex` + `latex/ca10-opening-brief.lua`): output `usage/OUTPUT-ca10-opening-brief-lymanvhenderson.latex.pdf`, 19 pages against typst's 13. Matches the 14-pt EB Garamond type, 31.43-pt double spacing, 1-inch margins, roman front matter and arabic body, cover on one page, TOC and TOA with page references, and the certificates. Known differences: pagination is longer; footnote text on some pages runs wide (not yet fixed); the TOC wrap indent is not hung; the signature block is not kept with the last paragraph.
 - **docx**: not built yet (see the court-level PR notes). LibreOffice is not installed on this box; a Debian-package extraction was started but not verified.
 
 ## Typeface (fonts pass, 2026-10-15)
@@ -140,7 +140,7 @@ The overlay is a diagnostic. Red is our render, blue is the filed page, black is
 - **Unverified claim, not used.** A secondary Typelaw blog post says the Tenth Circuit requires Century Schoolbook. No court-published text found says so, so the template does not follow it. The filed exemplars use different faces (Oliver reply: Century Schoolbook; Lyman opening: Times New Roman), which is consistent with the rules naming none.
 - **Substitute: none; EB Garamond kept** (vendored, `fonts/eb-garamond/`), per the fonts policy: a court whose rules name no face keeps EB Garamond. Set in the template as `font-family`.
 - **Compatibility:** not applicable (no named face to match). Pagination is therefore not checked against a Times or Century filing; the length gate uses the word count, not the page count.
-- **Renders (2026-10-15):** `tools/render.sh` with vendored fonts only, zero warnings; `pdffonts` shows only EB Garamond (Regular, Bold, Italic). Page counts unchanged. Every page rasterised at 60 dpi and viewed. Overlay regenerated against the filed exemplar (downloaded from the CourtListener URL in `exemplars/SOURCE.md`; the PDF is not committed to the repo).
+- **Renders (2026-10-15):** `tools/render.sh` with vendored fonts only, zero warnings; `pdffonts` shows only EB Garamond (Regular, Bold, Italic). Page counts unchanged. Every page rasterised at 60 dpi and viewed. Overlay regenerated against the filed exemplar (downloaded from the CourtListener URL in `usage/SOURCE.md`; the PDF is not committed to the repo).
 
 ## Engines
 

@@ -1,13 +1,13 @@
 # Complaint: U.S. District Court, District of Puerto Rico (`prd`)
 
-Doc type folder for a complaint in this court. One self-contained folder per doc type; the court-root `typst/` and `samples/` are not touched.
+Doc type folder for a complaint in this court. One self-contained folder per doc type; the court-root `typst/` and `usage/` are not touched.
 
 | | |
 |---|---|
-| Exemplar | **yes**: `exemplars/FILED-EXAMPLE-conde-vidal-3-14-cv-01253-complaint.pdf` (Amended Complaint, ECF 7, No. 3:14-cv-01253-PG, filed 06/25/2014, 34 pages, text-based). Provenance in `exemplars/SOURCE.md`. |
-| Sample | `samples/INPUT-conde-vidal-complaint.md`: a portion of the filing. Caption, lead-in, all section headings in order; filed ¶¶ 1–4 and 8–10 (introduction), 11–15 (jurisdiction), 16 (plaintiffs), 47–50 (facts), 72–81 (first claim), 82–83 (second claim, incorporation and capacity only), the prayer (A–F, see gaps), and the signature block |
-| Render | `samples/OUTPUT-conde-vidal-complaint.pdf`, **9 pages**, no typst warnings (`sh tools/render.sh courts/first-circuit/puerto-rico/federal/district/complaint samples/INPUT-conde-vidal-complaint.md`) |
-| Overlay | `samples/OVERLAY-conde-vidal-complaint.pdf` and `.txt` (`sh tools/overlay.sh courts/first-circuit/puerto-rico/federal/district/complaint conde-vidal-complaint`) |
+| Exemplar | **yes**: `usage/SAMPLE-prd-complaint-condevidal314cv01253.pdf` (Amended Complaint, ECF 7, No. 3:14-cv-01253-PG, filed 06/25/2014, 34 pages, text-based). Provenance in `usage/SOURCE.md`. |
+| Sample | `usage/INPUT-prd-complaint-condevidal.md`: a portion of the filing. Caption, lead-in, all section headings in order; filed ¶¶ 1–4 and 8–10 (introduction), 11–15 (jurisdiction), 16 (plaintiffs), 47–50 (facts), 72–81 (first claim), 82–83 (second claim, incorporation and capacity only), the prayer (A–F, see gaps), and the signature block |
+| Render | `usage/OUTPUT-prd-complaint-condevidal.typst.pdf`, **9 pages**, no typst warnings (`sh tools/render.sh courts/first-circuit/puerto-rico/federal/district/complaint usage/INPUT-prd-complaint-condevidal.md`) |
+| Overlay | `usage/OVERLAY-conde-vidal-complaint.pdf` and `.txt` (`sh tools/overlay.sh courts/first-circuit/puerto-rico/federal/district/complaint conde-vidal-complaint`) |
 | Pages reviewed | 9 of 9 (rendered at 60 dpi and looked at, final render) |
 | Typeface | face required by the rules: **none named** (L.Civ.R. 7 sets a point size, 12 pt for a proportional font; secondary read, see below) → substitute: **EB Garamond** (no face named, `docs/FONTS.md`) → metric-compatible: n/a, visual only. The exemplar is set in Times New Roman, but an exemplar does not set a rule. Font list unchanged in `typst/prd-complaint.typ`. |
 
@@ -66,14 +66,14 @@ Reading the overlay: the caption, the lead-in and the first body page line up (p
 
 The same markdown renders through typst (`typst/`, the reference) and docx (`docx/`). There is no latex engine here and no `checks.yaml` in this folder, so no gate was run on either output; the docx review is by eye.
 
-| Engine | Output (`samples/`) | Status |
+| Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-conde-vidal-complaint.pdf` (9 pp, reference) | reference |
-| docx | `OUTPUT-conde-vidal-complaint.docx`, `OUTPUT-conde-vidal-complaint.docx.pdf` (10 pp) | ok: LibreOffice converts it without error; all 10 pages of the `.docx.pdf` were rendered at 60 dpi and set beside the typst pages (pages 1 to 10) |
+| typst | `OUTPUT-prd-complaint-condevidal.typst.pdf` (9 pp, reference) | reference |
+| docx | `OUTPUT-prd-complaint-condevidal.docx`, `OUTPUT-prd-complaint-condevidal.docx.pdf` (10 pp) | ok: LibreOffice converts it without error; all 10 pages of the `.docx.pdf` were rendered at 60 dpi and set beside the typst pages (pages 1 to 10) |
 
 ```sh
 sh docx/make-reference.sh                                   # docx/reference.docx (needs pandoc, perl, unzip, zip, xmllint)
-sh tools/render.sh --engine docx courts/first-circuit/puerto-rico/federal/district/complaint samples/INPUT-conde-vidal-complaint.md
+sh tools/render.sh --engine docx courts/first-circuit/puerto-rico/federal/district/complaint usage/INPUT-prd-complaint-condevidal.md
 ```
 
 **docx** (`docx/reference.docx`, `docx/prd-complaint.lua`, `docx/make-reference.sh`, `docx/parts/`).

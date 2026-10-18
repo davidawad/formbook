@@ -12,10 +12,10 @@ Re-check cadence: re-check annually each January (the court adopts amended Local
 | RULES-PAGE | Court's rules page (links the LR file above as the Local Rules of Civil Procedure "Effective January 15, 2026") | https://www.nywd.uscourts.gov/rules-individual-local-federal |
 | APG | W.D.N.Y. Administrative Procedures Guide for Electronic Filing, "Revised: October 5, 2022" (24 pages, sha256 `0db64af00caf8d660d61f0e7a4d08d89c6045bf39c500084327403a6fa5bbccc`); incorporated by LR 5.1(a). Linked from https://www.nywd.uscourts.gov/cmecf-information-0. | https://www.nywd.uscourts.gov/sites/nywd/files/administrative%20guide%2020221005.pdf |
 | FRCP | Federal Rules of Civil Procedure 5.2, 7, 8, 10, 11, 38 (Legal Information Institute) | https://www.law.cornell.edu/rules/frcp/rule_5.2, `rule_7`, `rule_8`, `rule_10`, `rule_11`, `rule_38` |
-| EX-C1 | Complaint exemplar: Kerrick v. Town of Gorham, No. 6:26-cv-06006, Doc. 1-2 (plaintiff, Gregory L. Silverman). Visual reference only. | `complaint/exemplars/SOURCE.md` |
-| EX-M1 | Motion-brief exemplar: Kerrick v. Town of Gorham, No. 6:26-cv-06006, Doc. 6-9 (defendants, Adams Leclair LLP). Visual reference only. | `motion-brief/exemplars/SOURCE.md` |
-| EX-C2 | Complaint exemplar 2: NIFLA v. James, No. 1:24-cv-00514, Doc. 1 (plaintiffs, Alliance Defending Freedom / Michael G. McCartin Law PLLC). Added 2026-10-17. Visual reference only. | `complaint/exemplars/SOURCE.md` |
-| EX-M2 | Motion-brief exemplar 2: United States v. City of Rochester, No. 6:25-cv-06226, State of New York amicus-leave motion, memorandum and proposed amicus brief (NY Attorney General). Added 2026-10-17. Visual reference only. | `motion-brief/exemplars/SOURCE.md` |
+| EX-C1 | Complaint exemplar: Kerrick v. Town of Gorham, No. 6:26-cv-06006, Doc. 1-2 (plaintiff, Gregory L. Silverman). Visual reference only. | `complaint/usage/SOURCE.md` |
+| EX-M1 | Motion-brief exemplar: Kerrick v. Town of Gorham, No. 6:26-cv-06006, Doc. 6-9 (defendants, Adams Leclair LLP). Visual reference only. | `motion-brief/usage/SOURCE.md` |
+| EX-C2 | Complaint exemplar 2: NIFLA v. James, No. 1:24-cv-00514, Doc. 1 (plaintiffs, Alliance Defending Freedom / Michael G. McCartin Law PLLC). Added 2026-10-17. Visual reference only. | `complaint/usage/SOURCE.md` |
+| EX-M2 | Motion-brief exemplar 2: United States v. City of Rochester, No. 6:25-cv-06226, State of New York amicus-leave motion, memorandum and proposed amicus brief (NY Attorney General). Added 2026-10-17. Visual reference only. | `motion-brief/usage/SOURCE.md` |
 
 All rule PDFs and HTML pages above were fetched on 2026-10-17 (cached outside the repo in `/work/artifacts/rules-cache/nywd/`).
 

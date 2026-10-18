@@ -5,10 +5,10 @@ Folder: `courts/tenth-circuit/kansas/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-jenkins-2-26-cv-02623-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-jenkins-complaint.md`: the whole filing, 14 pages, transcribed (no paragraph numbers; the template numbers them) |
-| render | ok: `samples/OUTPUT-jenkins-complaint.pdf`, 14 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Bold, -Italic), no warnings (`tools/render.sh`) |
-| overlay | fail: `tools/overlay.sh` exits 1, "no exemplar pdf": `exemplars/` holds no `FILED-EXAMPLE-*.pdf` in this snapshot. `samples/OVERLAY-jenkins-complaint.txt` is left from the EB Garamond render and is stale; no `.pdf` overlay exists |
+| exemplar | yes: `usage/SAMPLE-ksd-complaint-jenkins226cv02623.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ksd-complaint-jenkins.md`: the whole filing, 14 pages, transcribed (no paragraph numbers; the template numbers them) |
+| render | ok: `usage/OUTPUT-ksd-complaint-jenkins.typst.pdf`, 14 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Bold, -Italic), no warnings (`tools/render.sh`) |
+| overlay | fail: `tools/overlay.sh` exits 1, "no exemplar pdf": `usage/` holds no `SAMPLE-*.pdf` in this snapshot. `usage/OVERLAY-jenkins-complaint.txt` is left from the EB Garamond render and is stale; no `.pdf` overlay exists |
 | pages reviewed | 14 of 14: every page rendered at 70 dpi and viewed after the Liberation Serif change (fonts pass) |
 
 ## Governing rules
@@ -68,10 +68,10 @@ A sample is one `.md` file: YAML frontmatter, then the body.
 6. **Civil cover sheet.** D. Kan. R. 3.1 requires the civil docket cover sheet with the complaint. It is a clerk's form, not produced here.
 7. **Paragraph numbers.** The template numbers the allegations from 1; the render ends at paragraph 73, the filed copy's last numbered paragraph. The sample does not carry the filed numbers, so a line-by-line match is not checked.
 8. **Overlay pairing.** The sample and the filed copy share pages one to one (14 each), so the overlay pairs pages by index. The overlay is a diagnostic, not a score.
-9. **Output and overlay file names.** `tools/render.sh` writes `samples/OUTPUT-<id>.pdf` and `tools/overlay.sh` reads that name and writes `samples/OVERLAY-<id>.pdf`/`.txt`; the sample is `samples/INPUT-<id>.md` (the file-role naming in `docs/EVAL-LOOP.md`). The brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools produce, and the tools are shared, so they were not changed.
+9. **Output and overlay file names.** `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` reads that name and writes `usage/OVERLAY-<id>.pdf`/`.txt`; the sample is `usage/INPUT-<id>.md` (the file-role naming in `docs/EVAL-LOOP.md`). The brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools produce, and the tools are shared, so they were not changed.
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json`, `rules.md` and `checks.yaml`; this doc-type folder has none of those, and the brief forbids editing `tools/`. The render and the overlay were run; the page review above is the Gate 2 equivalent for this doc type.
 
-## Review of the rendered pages (`samples/OUTPUT-jenkins-complaint.pdf`, 14 pages, Liberation Serif)
+## Review of the rendered pages (`usage/OUTPUT-ksd-complaint-jenkins.typst.pdf`, 14 pages, Liberation Serif)
 
 | Page | Content | Result |
 |---|---|---|
@@ -105,6 +105,6 @@ Gate 2 rows are recorded here, not in `reviews/` (this doc type has no `reviews/
 Differs from typst: no ")" column in the caption (the party lines are stacked and the case number sits below them); no pagination guarantee (Word and LibreOffice may break lines differently); the lead-in and body are the same text as typst.
 
 BLOCKED (docx gates cannot run on this box):
-- `docx.pdf` (LibreOffice conversion): `soffice` is not installed on the box, so `tools/render-docx.sh` stops after writing `samples/OUTPUT-jenkins-complaint.docx`.
+- `docx.pdf` (LibreOffice conversion): `soffice` is not installed on the box, so `tools/render-docx.sh` stops after writing `usage/OUTPUT-ksd-complaint-jenkins.docx`.
 - Visual review of the docx pages: 0 pages reviewed (no docx-rendered page exists here); the typst pages were viewed as the comparison.
 - Page-count check (D. Kan. R. 7.1 does not apply to complaints, but the exemplar's 14 pages): not measured for docx.

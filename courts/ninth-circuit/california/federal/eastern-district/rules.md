@@ -31,7 +31,7 @@ Kinds: **M** mandated by rule; **C** convention; **T** project requirement; **A*
 | CAED-CONT-005 | Motion states its grounds and requested relief with particularity. | FRCP 7(b)(1) | M |
 | CAED-CERT-001 | Memorandum length, any hearing notice, and supporting papers follow the current assigned judge's standing order and applicable E.D. Cal. motion rules; check Rule 230 before filing. | CAED-LR, L.R. 230; judge-specific standing order | M |
 | CAED-FORM-007 | Pleading paper with numbered lines and a footer bearing page number and paper description follows the district's express local form rules. | CAED-LR, L.R. 130(b), 130(d) | M |
-| CAED-FORM-008 | Filing caption layout and headings reflect the shared convention in the filed complaint and motion examples. | `exemplars/SOURCE.md`, cross-filer comparison | C |
+| CAED-FORM-008 | Filing caption layout and headings reflect the shared convention in the filed complaint and motion examples. | `usage/SOURCE.md`, cross-filer comparison | C |
 
 ### Complaint
 

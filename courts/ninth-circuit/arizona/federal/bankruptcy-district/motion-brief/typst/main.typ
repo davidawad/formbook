@@ -1,9 +1,9 @@
 // Entrypoint. Compile with the doc-type folder as --root; tools/render.sh does it:
 //   typst compile --root <doctype-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=samples/NAME.md \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
 //     typst/main.typ out.pdf
 #import "arb-motion-brief.typ": arb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-generic-motion.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-arb-motion-brief-titanmotion.md"))
 #let (meta, body) = split-frontmatter(src)
 #arb-motion-brief(meta, body)

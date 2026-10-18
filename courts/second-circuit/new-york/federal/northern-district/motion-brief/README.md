@@ -1,15 +1,15 @@
 # nynd: motion-brief
 
 Doc type: **motion-brief**, the memorandum of law in support of a motion (here a Fed. R. Civ. P. 12(b)(6) motion to dismiss), in the United States District Court for the Northern District of New York (`nynd`).
-Folder: `courts/second-circuit/new-york/federal/northern-district/motion-brief/` (self-contained; the court root `typst/` and `samples/` are not touched).
+Folder: `courts/second-circuit/new-york/federal/northern-district/motion-brief/` (self-contained; the court root `typst/` and `usage/` are not touched).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-mistry-3-26-cv-01419-motion-brief.pdf` (1 filer: defendants' counsel Bond, Schoeneck & King, PLLC; see `exemplars/SOURCE.md`; re-fetched from the RECAP URL 2026-10-15, 33 pages) |
-| sample md | `samples/INPUT-mistry-motion-brief.md`: cover, preliminary statement, factual background (A and B, with footnote 1), argument standard, Point I, Point II.A.1 to II.A.3 (with footnote 2), conclusion, signature block. The filed table of authorities is not transcribed (see Known gaps 2). |
+| exemplar | yes: `usage/SAMPLE-nynd-motion-brief-mistry326cv01419.pdf` (1 filer: defendants' counsel Bond, Schoeneck & King, PLLC; see `usage/SOURCE.md`; re-fetched from the RECAP URL 2026-10-15, 33 pages) |
+| sample md | `usage/INPUT-nynd-motion-brief-mistry.md`: cover, preliminary statement, factual background (A and B, with footnote 1), argument standard, Point I, Point II.A.1 to II.A.3 (with footnote 2), conclusion, signature block. The filed table of authorities is not transcribed (see Known gaps 2). |
 | typeface | face required: none (L.R. 7.1 and 10.1 name no typeface; checked against the 2025 edition text 2026-10-15). Vendored substitute: none needed; **EB Garamond** (`docs/FONTS.md`, "No face named" row). Fit: n/a. |
-| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-mistry-motion-brief.pdf`, 10 pages (cover, contents, 8 body pages), typst 0.15.0, `pdffonts`: EB Garamond Regular, Bold, Italic only, all embedded; no warnings |
-| overlay | ok (re-run 2026-10-15): `samples/OVERLAY-mistry-motion-brief.pdf` and `OVERLAY-mistry-motion-brief.txt` (the tools' names; see Known gaps 10) |
+| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-nynd-motion-brief-mistry.typst.pdf`, 10 pages (cover, contents, 8 body pages), typst 0.15.0, `pdffonts`: EB Garamond Regular, Bold, Italic only, all embedded; no warnings |
+| overlay | ok (re-run 2026-10-15): `usage/OVERLAY-mistry-motion-brief.pdf` and `OVERLAY-mistry-motion-brief.txt` (the tools' names; see Known gaps 10) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-15, after the re-render; no template change that day) |
 
 ## Governing rules
@@ -81,7 +81,7 @@ Every page rendered at 60 dpi and looked at after the last template change. Page
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond 12 pt, letter, 1 in margins, exact 24 pt body lines, 12 pt single-spaced footnotes and block quotes, centered page number footer); `nynd-motion-brief.lua` builds the cover (caption with rules, title of the paper, filing firm at 3.25 in), the contents page and the signature block, and writes the section breaks (cover unnumbered, contents i, ii, ..., memorandum 1, 2, ... from its first page). `render.sh` reads the markdown as CommonMark (`commonmark_x`, as cmarker reads it), so a literal `*` (Westlaw star pages such as "at *5") stays literal, and makes two passes: pass 1 lays the memorandum out, LibreOffice converts it, and each heading's page label is read from that PDF; pass 2 writes the contents with those page numbers. Output: `samples/OUTPUT-mistry-motion-brief.docx` and `.docx.pdf` (LibreOffice, 10 pages, the same count as typst: cover, contents, 8 body pages; the .docx converts in LibreOffice without error; not opened in Word).
+docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond 12 pt, letter, 1 in margins, exact 24 pt body lines, 12 pt single-spaced footnotes and block quotes, centered page number footer); `nynd-motion-brief.lua` builds the cover (caption with rules, title of the paper, filing firm at 3.25 in), the contents page and the signature block, and writes the section breaks (cover unnumbered, contents i, ii, ..., memorandum 1, 2, ... from its first page). `render.sh` reads the markdown as CommonMark (`commonmark_x`, as cmarker reads it), so a literal `*` (Westlaw star pages such as "at *5") stays literal, and makes two passes: pass 1 lays the memorandum out, LibreOffice converts it, and each heading's page label is read from that PDF; pass 2 writes the contents with those page numbers. Output: `usage/OUTPUT-nynd-motion-brief-mistry.docx` and `.docx.pdf` (LibreOffice, 10 pages, the same count as typst: cover, contents, 8 body pages; the .docx converts in LibreOffice without error; not opened in Word).
 
 - Matches typst: paper, margins, font, body line pitch, first-line indents (none after a heading, as typst), footnotes, the contents entries and their page numbers (body pages 1 to 8, as the typst contents), cover and signature block layout, bullets, pagination (8 body pages, as typst; the contents page numbers equal the typst contents). Pages were compared one by one with the typst render (10 of 10 viewed).
 - Differs: section headings are 12 pt (body size, bold); typst's default heading size (about 16.8 pt) is not a choice L.R. 7.1 or 10.1 makes; left as is (tier-2 convention call). The cover's title and firm block are placed by fixed spacing tuned to the typst render, not by typst's flexible 1fr space: a much longer caption would move them. The contents is a TOC field with cached entries: Word shows the cached page numbers and recomputes them only if the field is updated, and Word's own pagination may differ by a line.

@@ -5,16 +5,16 @@ Folder: `courts/second-circuit/new-york/federal/southern-district/motion-brief/`
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-minerva-26-cv-06789-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-minerva-motion-to-dismiss.md` (full body transcription, corrected from the exemplar's OCR text; see Sample) |
+| exemplar | yes: `usage/SAMPLE-nysd-motion-brief-minerva26cv06789.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nysd-motion-brief-minervamotiontodismiss.md` (full body transcription, corrected from the exemplar's OCR text; see Sample) |
 | typeface | face required: **none** in the court's rules (the joint rules name no face; see NYSD-FORM-002). One judge's practices name Times New Roman 12 pt (see gaps, item 2). Vendored substitute: **none**, EB Garamond kept per `docs/FONTS.md` ("No face named"). Fit: n/a. `pdffonts`: EBGaramond-Regular, -Italic, -Bold, embedded. |
-| render | ok: `samples/OUTPUT-minerva-motion-to-dismiss.pdf`, 18 pages (cover, TOC, TOA, body of 13 pages, certificate), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
-| overlay | ok: `samples/OVERLAY-minerva-motion-to-dismiss.pdf` and `.txt` (re-generated 2026-10-15 against `exemplars/FILED-EXAMPLE-minerva-26-cv-06789-motion-brief.pdf`, the RECAP copy named in `exemplars/SOURCE.md`) |
+| render | ok: `usage/OUTPUT-nysd-motion-brief-minervamotiontodismiss.typst.pdf`, 18 pages (cover, TOC, TOA, body of 13 pages, certificate), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| overlay | ok: `usage/OVERLAY-minerva-motion-to-dismiss.pdf` and `.txt` (re-generated 2026-10-15 against `usage/SAMPLE-nysd-motion-brief-minerva26cv06789.pdf`, the RECAP copy named in `usage/SOURCE.md`) |
 | pages reviewed | 18 of 18 (every page rendered at 60 dpi and looked at, again on 2026-10-15 after the re-render) |
 
-Naming note: the brief asked for `samples/<id>.md` and `<id>-overlay.pdf`. The tools and repo convention use `INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`, so those names are used. The id is `minerva-motion-to-dismiss`.
+Naming note: the brief asked for `usage/<id>.md` and `<id>-overlay.pdf`. The tools and repo convention use `INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`, so those names are used. The id is `minerva-motion-to-dismiss`.
 
-Not set here: `court.json` status, the court-root `typst/` and `samples/` folders (untouched), `STATUS.md`, the tracker.
+Not set here: `court.json` status, the court-root `typst/` and `usage/` folders (untouched), `STATUS.md`, the tracker.
 
 ## Governing rules
 
@@ -56,7 +56,7 @@ Not produced by this template: the notice of motion (LCivR 7.1(a)(1)); the propo
 
 ## Sample
 
-- `samples/INPUT-minerva-motion-to-dismiss.md` transcribes the whole exemplar body: the preliminary statement, background, legal standard, Argument I (with Singapore veil-piercing and footnote 1), II (with A, B, C, D and footnote 2), III, IV, V and the conclusion. The caption, counsel block, title, signature and certificate are transcribed from the exemplar's first page and last pages.
+- `usage/INPUT-nysd-motion-brief-minervamotiontodismiss.md` transcribes the whole exemplar body: the preliminary statement, background, legal standard, Argument I (with Singapore veil-piercing and footnote 1), II (with A, B, C, D and footnote 2), III, IV, V and the conclusion. The caption, counsel block, title, signature and certificate are transcribed from the exemplar's first page and last pages.
 - Text: the exemplar's text layer is OCR (paper capture), with errors (for example "Complainf s", "Comp!.", "Malrn·een", "MahYveen", "Trombly" for *Twombly*, "Blue TiVhale" for *Blue Whale*). The sample corrects these by reading in context. It was not checked word-for-word against the page image, so a residual transcription error is possible; the citations below are the ones to check first.
 - Word count (`word_count: "3,546"` in the frontmatter): counted from the sample body (from "Preliminary Statement" to the end of the conclusion, with headings and footnotes) using `wc -w` after removing link targets and markup. It is not the word processor's count. The exemplar's own certificate states 3,599 words. This README does not explain the difference; the certificate in the render says 3,546, the count of this sample only. A real filing must take its count from the word processor.
 - Citations: the sample keeps the citations as the exemplar prints them. Not verified against the reporters: *Archawski v. Hanioti*, "239 F.2d 806 (2d Cir. 1956)" (OCR; the reporter and year look doubtful and should be checked before any use); the pincites of *AlbaniaBEG* (94) and *Koehler* (537–41), which were read from OCR; *Golden Horn* and *Platina* (WL numbers as printed). The Bull article and the Reilly commentary are in the TOA as printed.
@@ -65,12 +65,12 @@ Not produced by this template: the notice of motion (LCivR 7.1(a)(1)); the propo
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/second-circuit/new-york/federal/southern-district/motion-brief samples/INPUT-minerva-motion-to-dismiss.md
+sh tools/render.sh courts/second-circuit/new-york/federal/southern-district/motion-brief usage/INPUT-nysd-motion-brief-minervamotiontodismiss.md
 sh tools/overlay.sh courts/second-circuit/new-york/federal/southern-district/motion-brief minerva-motion-to-dismiss
 ```
 
-- `samples/OUTPUT-minerva-motion-to-dismiss.pdf`: 18 pages. typst compiled with no warnings. Vendored fonts only (`pdffonts`: EBGaramond-Regular, -Italic, -Bold, embedded).
-- `samples/OVERLAY-minerva-motion-to-dismiss.pdf` and `.txt`: red = our render, blue = exemplar, black = both agree. Pages are paired by word overlap. The pairing is coarse and the overlay is a diagnostic, not a score. Ours p.1 to 2 pair with the filed pages 1 to 2 (86% and 89%); ours p.3 to 8 pair with filed p.3 to 8 at 20% to 89% (lowest at p.4, 20%); from our p.9 to p.18 the pairing is one page earlier than the printed page (filed p.8 to 17), which is what word overlap found. I did not investigate the cause of that offset. Read the overlay as pairing pages by text, not as a page-for-page match.
+- `usage/OUTPUT-nysd-motion-brief-minervamotiontodismiss.typst.pdf`: 18 pages. typst compiled with no warnings. Vendored fonts only (`pdffonts`: EBGaramond-Regular, -Italic, -Bold, embedded).
+- `usage/OVERLAY-minerva-motion-to-dismiss.pdf` and `.txt`: red = our render, blue = exemplar, black = both agree. Pages are paired by word overlap. The pairing is coarse and the overlay is a diagnostic, not a score. Ours p.1 to 2 pair with the filed pages 1 to 2 (86% and 89%); ours p.3 to 8 pair with filed p.3 to 8 at 20% to 89% (lowest at p.4, 20%); from our p.9 to p.18 the pairing is one page earlier than the printed page (filed p.8 to 17), which is what word overlap found. I did not investigate the cause of that offset. Read the overlay as pairing pages by text, not as a page-for-page match.
 
 ## Visual review (Gate 2 record, all 18 pages, rendered at 60 dpi and looked at)
 
@@ -110,7 +110,7 @@ Printed page numbers are the body's own (1 to 13); PDF page numbers in brackets.
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `motion-brief.lua` builds the cover, the tables, the authorities, the signature and the certificate; `render.sh` and `pages.awk` set the page numbers). Output: `samples/OUTPUT-minerva-motion-to-dismiss.docx` and `.docx.pdf` (LibreOffice PDF, 16 pages). Opened and converted by LibreOffice without error (no Word here).
+DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `motion-brief.lua` builds the cover, the tables, the authorities, the signature and the certificate; `render.sh` and `pages.awk` set the page numbers). Output: `usage/OUTPUT-nysd-motion-brief-minervamotiontodismiss.docx` and `.docx.pdf` (LibreOffice PDF, 16 pages). Opened and converted by LibreOffice without error (no Word here).
 
 - Matches the typst output: letter paper, 1 in margins; EB Garamond 12 pt (`pdffonts`: EBGaramond-Regular, -Italic, -Bold); body double spaced at an exact 24 pt pitch with a 0.5 in first-line indent; headings level 2 to 5 hang with their labels (I., A., 1., a.); block quotations and footnotes single spaced; cover with no number, tables in roman numerals, body from 1, certificate with no number; the certificate's word count and typeface text come from the frontmatter and the template.
 - Table of contents and table of authorities: the page numbers come from a first LibreOffice pass (`render.sh`): `pages.awk` finds each heading and each `toa:` link text in the body PDF text, in document order, then the docx is written again with those numbers. Spot checks against the rendered pages agree (for example CONCLUSION 11, Archawski 6, Koehler 9, MTBE 10). A link text that does not appear in the body is an error, not a blank. The numbers hold in Word only if Word paginates the same way; that is the known limit in `docs/DOCX.md`.

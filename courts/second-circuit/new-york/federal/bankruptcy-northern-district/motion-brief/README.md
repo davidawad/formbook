@@ -5,25 +5,25 @@ New York (`nynb`). The exemplar is a memorandum supporting a Rule 12(b)(6) motio
 (FRBP 7012(b)(6)).
 Folder: `courts/second-circuit/new-york/federal/bankruptcy-northern-district/motion-brief/`.
 
-**Exemplar found (1 filer).** `exemplars/FILED-EXAMPLE-ef-consulting-v-gecc-10-90175-motion-brief.pdf` is a real, public,
+**Exemplar found (1 filer).** `usage/SAMPLE-nynb-motion-brief-efconsultingvgecc1090175.pdf` is a real, public,
 text-based memorandum filed in this court (Adv. Pro. No. 10-90175, Dkt 6, January 2011; 42 pages). The sample is an excerpt
 transcription of it: the caption, the Preliminary Statement, the Overview, Statement of Facts A to D, the Conclusion, the
-signature block and the affidavit of service. Provenance and the search log are in `exemplars/SOURCE.md`. Tier 2 would
+signature block and the affidavit of service. Provenance and the search log are in `usage/SOURCE.md`. Tier 2 would
 normally be judged against 2 or 3 filers; one filer is on file, so a second memorandum is still wanted.
 
 | Item | Status |
 |---|---|
-| exemplar | **yes**: `exemplars/FILED-EXAMPLE-ef-consulting-v-gecc-10-90175-motion-brief.pdf` (42 pages, text layer) |
-| sample md | `samples/INPUT-motion-brief.md`: excerpt transcription (7 body pages plus the conclusion, signature and affidavit, 7 rendered pages in all). The frontmatter comment lists what is omitted and why. |
-| render | ok: `samples/OUTPUT-motion-brief.pdf`, 7 pages, letter, EB Garamond only (embedded), `tools/render.sh` exit 0, no typst warnings |
-| overlay | ok: `samples/OVERLAY-motion-brief.pdf` and `.txt`, `tools/overlay.sh` exit 0. The overlay pairs our page 1 with the filing's page 8 (the filing's caption and text start on different pages; see the gaps). Word-overlap per page: 52.8, 78.4, 55.0, 61.6, 58.9, 76.1, 70.7 percent |
+| exemplar | **yes**: `usage/SAMPLE-nynb-motion-brief-efconsultingvgecc1090175.pdf` (42 pages, text layer) |
+| sample md | `usage/INPUT-nynb-motion-brief-sample.md`: excerpt transcription (7 body pages plus the conclusion, signature and affidavit, 7 rendered pages in all). The frontmatter comment lists what is omitted and why. |
+| render | ok: `usage/OUTPUT-nynb-motion-brief-sample.typst.pdf`, 7 pages, letter, EB Garamond only (embedded), `tools/render.sh` exit 0, no typst warnings |
+| overlay | ok: `usage/OVERLAY-motion-brief.pdf` and `.txt`, `tools/overlay.sh` exit 0. The overlay pairs our page 1 with the filing's page 8 (the filing's caption and text start on different pages; see the gaps). Word-overlap per page: 52.8, 78.4, 55.0, 61.6, 58.9, 76.1, 70.7 percent |
 | pages reviewed | 7 of 7, each rendered at 70 dpi and viewed. The final change moved only the affidavit's date line (page 7), and page 7 was viewed again after it. |
 
 The rendered sample is 7 pages, below the 8 to 14 pages that an excerpt of a 42-page filing would give if it were
 transcribed in full. The transcription covers the caption and the body opening, then jumps to the conclusion; the
 omitted middle (Points I to VII) is listed under the gaps. It is not padded to reach a page count.
 
-File names: `INPUT-motion-brief.md`, `OUTPUT-motion-brief.pdf`, `OVERLAY-motion-brief.pdf/.txt` (id `motion-brief`).
+File names: `INPUT-nynb-motion-brief-sample.md`, `OUTPUT-nynb-motion-brief-sample.typst.pdf`, `OVERLAY-motion-brief.pdf/.txt` (id `motion-brief`).
 
 ## Markdown contract (frontmatter)
 
@@ -108,7 +108,7 @@ govern and the template keeps its rule-based form.
 12 pt, exact 24 pt body lines, 13.8 pt single lines for the caption, block quotations and signature, 1 in margins, letter,
 centred PAGE field); `docx/nynb-motion-brief.lua` builds the cover (chambers legend when given, counsel, court title,
 bankruptcy and adversary captions, title), the body (headings and block quotations from the reference styles), the
-signature block and the certificate of service. Output: `samples/OUTPUT-motion-brief.docx` and `.docx.pdf`
+signature block and the certificate of service. Output: `usage/OUTPUT-nynb-motion-brief-sample.docx` and `.docx.pdf`
 (LibreOffice). The `.docx` converts in LibreOffice with no error; the zip and XML parts are well formed.
 
 - Matches the typst output: font and size, line pitch, margins, page numbers, caption layout and rules, headings

@@ -1,15 +1,15 @@
 # arwd: motion brief
 
 Doc type: **motion brief** (the memorandum in support of a Rule 12(b) motion to dismiss) in the United States District Court for the Western District of Arkansas (`arwd`).
-Folder: `courts/eighth-circuit/arkansas/federal/western-district/motion-brief/` (self-contained; the court-root `typst/` and `samples/` are not touched).
+Folder: `courts/eighth-circuit/arkansas/federal/western-district/motion-brief/` (self-contained; the court-root `typst/` and `usage/` are not touched).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-gasper-3-26-cv-03048-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-gasper-motion-brief.md` (the whole 11-page brief, transcribed) |
+| exemplar | yes: `usage/SAMPLE-arwd-motion-brief-gasper326cv03048.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-arwd-motion-brief-gasper.md` (the whole 11-page brief, transcribed) |
 | typeface | face required: **none**. LR 5.5(a) says "type not less than elite" and names no face (searched the consolidated local rules, 66 pp., 2026-10-14). Vendored substitute: **not needed**; kept **EB Garamond** (`fonts/eb-garamond/`), as the fonts policy allows for a court that names no face. Metric class: n/a. The filed exemplar is Times New Roman (tier 2, not chased; see gap 2). |
-| render | ok (re-rendered 2026-10-14): `samples/OUTPUT-gasper-motion-brief.pdf`, 10 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings; `pdffonts`: EBGaramond Regular/Bold/Italic only |
-| overlay | ok (regenerated 2026-10-14): `samples/OVERLAY-gasper-motion-brief.pdf` and `OVERLAY-gasper-motion-brief.txt`, against the filed exemplar re-fetched from the URL in `exemplars/SOURCE.md` (the PDF is not committed in this tree; see gap 10) |
+| render | ok (re-rendered 2026-10-14): `usage/OUTPUT-arwd-motion-brief-gasper.typst.pdf`, 10 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings; `pdffonts`: EBGaramond Regular/Bold/Italic only |
+| overlay | ok (regenerated 2026-10-14): `usage/OVERLAY-gasper-motion-brief.pdf` and `OVERLAY-gasper-motion-brief.txt`, against the filed exemplar re-fetched from the URL in `usage/SOURCE.md` (the PDF is not committed in this tree; see gap 10) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-14) |
 
 File names follow the repo's roles (`INPUT-`, `OUTPUT-`, `OVERLAY-`) because `tools/render.sh` and `tools/overlay.sh` read and write those names.
@@ -60,9 +60,9 @@ The typst template above is the primary engine. The docx engine is in `docx/`; i
 
 - `docx/build-reference.sh` builds `docx/reference.docx`: EB Garamond 12 pt, double spacing as an exact 27.6 pt line, 0.5 in first-line indent, letter page with 1 in margins, "Page n of N" centered 0.4 in from the bottom, and single-spaced styles for the caption, court title, closing, signature and certificate, plus the single-spaced block quotation. Run `sh docx/build-reference.sh docx/reference.docx` (needs pandoc, zip, unzip and xmllint).
 - `docx/arwd-motion-brief.lua` turns the same markdown into Word: the court title and caption as borderless tables of exact width, the title in bold, unnumbered body paragraphs, capitalized level-1 headings, block quotations, numbered lists ("1."), the closing and signature block kept with the last paragraph, and the certificate of service when the frontmatter has one.
-- `sh tools/render.sh --engine docx <this folder> samples/INPUT-gasper-motion-brief.md` writes `samples/OUTPUT-gasper-motion-brief.docx`. The `.docx.pdf` step did not run (see BLOCKED below).
+- `sh tools/render.sh --engine docx <this folder> usage/INPUT-arwd-motion-brief-gasper.md` writes `usage/OUTPUT-arwd-motion-brief-gasper.docx`. The `.docx.pdf` step did not run (see BLOCKED below).
 
-**What matches** (checked on the .docx XML and its text, not by eye): font and size, the 27.6 pt line pitch, margins, the first-line indent, the block-quotation indents, the caption and closing table widths, the page-number footer fields, and the word sequence: every word of `INPUT-gasper-motion-brief.md` appears in the .docx in the same order.
+**What matches** (checked on the .docx XML and its text, not by eye): font and size, the 27.6 pt line pitch, margins, the first-line indent, the block-quotation indents, the caption and closing table widths, the page-number footer fields, and the word sequence: every word of `INPUT-arwd-motion-brief-gasper.md` appears in the .docx in the same order.
 
 **What differs:** Word breaks lines and places page breaks differently from typst, so pagination is not the same, and "Page n of N" is a field that Word and LibreOffice fill in at layout. Numbered items hang from 0.5 in with text at 1.0 in (typst's body indent is about 1.07 in). Stacked headings are one "Heading Continued" paragraph, not Word headings. The caption, closing and certificate tables hold plain text. The certificate heading is a level-1 heading, so Word lists it in the outline.
 
@@ -72,7 +72,7 @@ The typst template above is the primary engine. The docx engine is in `docx/`; i
 
 ## What the overlay shows
 
-`samples/OVERLAY-gasper-motion-brief.pdf`: red = our render, blue = the filed exemplar, black = both. Pages are paired by word overlap (`OVERLAY-gasper-motion-brief.txt`): ours 1-10 ↔ filed 1-10 in order (98.8 % on page 1, 74.7 % on page 5, 44.5 % on page 9, 60.7 % on page 10). The exemplar is set in Times with its own line breaks and the page breaks fall in different places, so the two layers do not coincide line for line. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-gasper-motion-brief.pdf`: red = our render, blue = the filed exemplar, black = both. Pages are paired by word overlap (`OVERLAY-gasper-motion-brief.txt`): ours 1-10 ↔ filed 1-10 in order (98.8 % on page 1, 74.7 % on page 5, 44.5 % on page 9, 60.7 % on page 10). The exemplar is set in Times with its own line breaks and the page breaks fall in different places, so the two layers do not coincide line for line. The overlay is a diagnostic, not a score.
 
 
 ## Gate 2: visual review (every page rendered at 60 dpi and viewed)
@@ -92,7 +92,7 @@ The typst template above is the primary engine. The docx engine is in `docx/`; i
 
 ## Known gaps and open choices
 
-1. **One exemplar.** Tier 2 asks for 2 or 3 filers; only Gasper v. Bruce is saved. Other memorandum briefs found (E3 Tax in *Zrazhevskiy*; American Express and Ally in *Page v. TransUnion*; King and River Valley in *Landis*) are listed in `exemplars/SOURCE.md`. Their RECAP main documents have no page counts, so they were not downloaded.
+1. **One exemplar.** Tier 2 asks for 2 or 3 filers; only Gasper v. Bruce is saved. Other memorandum briefs found (E3 Tax in *Zrazhevskiy*; American Express and Ally in *Page v. TransUnion*; King and River Valley in *Landis*) are listed in `usage/SOURCE.md`. Their RECAP main documents have no page counts, so they were not downloaded.
 2. **Character pitch and typeface.** LR 5.5(a) "type not less than elite" is read as a 12-point type size for a proportional face (as in the complaint). It names no typeface, so the fonts policy keeps EB Garamond; no substitute is substituted. EB Garamond sets smaller than Times New Roman at the same size; the filed exemplar is Times New Roman. Liberation Serif would be a tier-2 convention choice, not made here. **Needs David's call** on the reading, as for the complaint.
 3. **Motion not produced.** LR 7.2(e) requires the motion in a separate pleading. This template produces the brief only. A motion template and a proposed order would be separate doc types.
 4. **No page limit enforced.** No limit appears in the local rules read. The brief is 10 pages rendered; a judge's order could set a limit.
@@ -101,4 +101,4 @@ The typst template above is the primary engine. The docx engine is in `docx/`; i
 7. **Italics are the transcriber's.** The text layer has no italic markup; the case names, *Id.* and *See* are italicized by standard citation form (the exemplar embeds Times Italic).
 8. **Certificate of service is conditional.** Rendered only when the frontmatter has `certificate`, because Fed. R. Civ. P. 5(d)(1)(B) does not require one for ECF service.
 9. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at the court root; this doc-type folder is not that shape, and the brief forbids editing `tools/`. The Gate 2 table above is the review for this doc type.
-10. **Exemplar PDF not in the tree.** `exemplars/SOURCE.md` records the CourtListener URL, but the `FILED-EXAMPLE-*.pdf` file was never committed (the exemplar row above said it was). On 2026-10-14 it was re-fetched from that URL into a scratch directory (`/work/artifacts/arwd-exemplars/`), not the repo, and used for the overlay. Commit it to `exemplars/` if the repo is to rebuild the overlay offline.
+10. **Exemplar PDF not in the tree.** `usage/SOURCE.md` records the CourtListener URL, but the `SAMPLE-*.pdf` file was never committed (the exemplar row above said it was). On 2026-10-14 it was re-fetched from that URL into a scratch directory (`/work/artifacts/arwd-exemplars/`), not the repo, and used for the overlay. Commit it to `usage/` if the repo is to rebuild the overlay offline.

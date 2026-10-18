@@ -5,11 +5,11 @@ Folder: `courts/fifth-circuit/louisiana/federal/western-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-louisiana-dental-implant-lab-6-26-cv-00025-complaint.pdf` (1 filer, see `exemplars/SOURCE.md`) |
+| exemplar | yes: `usage/SAMPLE-lawd-complaint-louisianadentalimplantlab626cv00025.pdf` (1 filer, see `usage/SOURCE.md`) |
 | typeface | face required: none (LR 10.1 names no face or size, checked 2026-10-14). Vendored substitute: none needed, EB Garamond kept (`"EB Garamond"`, the no-face default in `docs/FONTS.md`). Fit: n/a. The filed exemplar is set in Times New Roman, which is a filer choice, not a rule. |
-| sample md | `samples/INPUT-ldil-complaint.md`: the whole filed text (9 pages), the comparison chart not transcribed |
-| render | ok: `samples/OUTPUT-ldil-complaint.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> samples/INPUT-ldil-complaint.md`) |
-| overlay | ok: `samples/OVERLAY-ldil-complaint.pdf` and `OVERLAY-ldil-complaint.txt` (`sh tools/overlay.sh <this dir> ldil-complaint`) |
+| sample md | `usage/INPUT-lawd-complaint-ldil.md`: the whole filed text (9 pages), the comparison chart not transcribed |
+| render | ok: `usage/OUTPUT-lawd-complaint-ldil.typst.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-lawd-complaint-ldil.md`) |
+| overlay | ok: `usage/OVERLAY-ldil-complaint.pdf` and `OVERLAY-ldil-complaint.txt` (`sh tools/overlay.sh <this dir> ldil-complaint`) |
 | pages reviewed | 5 of 5 (every page rendered at 60 dpi and viewed after the last template change) |
 | tools/check.sh | not run: that script expects a court folder with `court.json` and `rules.md`, and this doc-type folder has neither (the brief forbids editing `tools/`). Render and overlay are the gates here. |
 
@@ -66,9 +66,9 @@ Every page was rendered at 60 dpi and viewed after the last template change.
 
 ## Engines
 
-**docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/lawd-complaint.lua`). Output: `samples/OUTPUT-ldil-complaint.docx`. **The `.docx.pdf` is BLOCKED** (below), so no page of the docx has been checked on a PDF.
+**docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/lawd-complaint.lua`). Output: `usage/OUTPUT-lawd-complaint-ldil.docx`. **The `.docx.pdf` is BLOCKED** (below), so no page of the docx has been checked on a PDF.
 
-- Build: `sh tools/render.sh --engine docx <this dir> samples/INPUT-ldil-complaint.md` writes the `.docx`; the step that needs `soffice` then fails. Rebuild the reference with `sh docx/make-reference.sh`.
+- Build: `sh tools/render.sh --engine docx <this dir> usage/INPUT-lawd-complaint-ldil.md` writes the `.docx`; the step that needs `soffice` then fails. Rebuild the reference with `sh docx/make-reference.sh`.
 - *Matches typst (from the template, not measured on a rendered page):* EB Garamond 12 pt; body double spaced at an exact 24 pt pitch (the typst pitch); half-inch first-line indent; letter page with 1-inch margins; centered page number from page 1; headings centered bold capitals (level 1), centered bold (level 2), bold italic (level 3); caption with the court title, party column with designations at 1.5 in, asterisk column, CIVIL ACTION NO. and blank JUDGE / MAGISTRATE JUDGE lines; numbered paragraphs (21 in the sample, the last one "21.") and lettered lists (`a.`, `A.` after `:::upper`); unnumbered paragraphs after `:::unnumbered`; signature block as a borderless table (date at left, "Respectfully submitted," and the sample's lines at right). Every word of the sample is in the `.docx`, except the sample's own list markers (`1.`, ..., `8.`), which are relabeled `a.` to `h.` as typst does (checked with pandoc's text export).
 - *Differs:* paragraph numbers and list letters are typed text with a tab (not Word list numbering), so they do not renumber if a paragraph is inserted. The caption asterisks are estimated from character widths, not measured: the count can differ from the typst count by one when a party name wraps differently. Body text is left aligned, as in typst.
 - *Viewers:* the caption and the signature are tables; style-level indents and exact line spacing are honored by Word and LibreOffice as specified, but the preview converter below did not honor style-level indents.

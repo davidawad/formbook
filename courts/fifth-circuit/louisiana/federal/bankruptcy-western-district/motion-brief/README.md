@@ -4,10 +4,10 @@ Doc type: **motion with memorandum** (FRBP 9013; LBR 7007-1 to 7007-3 as applied
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-new-century-fabricators-14-50652-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`). A joinder in a receiver's motion, with its memorandum in the same filing. |
-| sample md | `samples/INPUT-new-century-motion-brief.md` (the whole filed document, 8 pages, transcribed, nine footnotes) |
-| render | ok: `samples/OUTPUT-new-century-motion-brief.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-new-century-motion-brief.pdf` and `.txt` |
+| exemplar | yes: `usage/SAMPLE-lawb-motion-brief-newcenturyfabricators1450652.pdf` (1 filer; see `usage/SOURCE.md`). A joinder in a receiver's motion, with its memorandum in the same filing. |
+| sample md | `usage/INPUT-lawb-motion-brief-newcentury.md` (the whole filed document, 8 pages, transcribed, nine footnotes) |
+| render | ok: `usage/OUTPUT-lawb-motion-brief-newcentury.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-new-century-motion-brief.pdf` and `.txt` |
 | pages reviewed | 8 of 8 (every page rendered and looked at after the last template change) |
 
 File names: `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the tools hard-code these names), so the sample PDF and overlay carry those names rather than `<id>.pdf` and `<id>-overlay.pdf`.
@@ -36,12 +36,12 @@ The exemplar was filed in 2014 and the rules above are the 2026 text; the sample
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-new-century-fabricators-14-50652-motion-brief.pdf`: *In re New Century Fabricators, Inc.*, No. 14-50652 (Chapter 11, Judge Robert Summerhays), "Joinder in Emergency Motion to Dismiss with Memorandum in Support", 8 pages, docket #14, filed 2014-06-03 by FCC, LLC d/b/a First Capital (counsel Gordon, Arata, McCollam, Duplantis & Eagan, LLC). Provenance and searches are in `exemplars/SOURCE.md`.
+- `usage/SAMPLE-lawb-motion-brief-newcenturyfabricators1450652.pdf`: *In re New Century Fabricators, Inc.*, No. 14-50652 (Chapter 11, Judge Robert Summerhays), "Joinder in Emergency Motion to Dismiss with Memorandum in Support", 8 pages, docket #14, filed 2014-06-03 by FCC, LLC d/b/a First Capital (counsel Gordon, Arata, McCollam, Duplantis & Eagan, LLC). Provenance and searches are in `usage/SOURCE.md`.
 - Only one exemplar. EVAL-LOOP's tier-2 rule asks for 2 or 3 filers; see gaps.
 
 ## Sample and template
 
-- `samples/INPUT-new-century-motion-brief.md`. Its frontmatter carries the caption (`caption.left` as `{t, i}` items, `caption.right` as lines), `title` (lines), and `signature` (`lead`, `firm`, `by`, `lines`, `counsel_for`); the optional `certificate` key is not used by this sample.
+- `usage/INPUT-lawb-motion-brief-newcentury.md`. Its frontmatter carries the caption (`caption.left` as `{t, i}` items, `caption.right` as lines), `title` (lines), and `signature` (`lead`, `firm`, `by`, `lines`, `counsel_for`); the optional `certificate` key is not used by this sample.
 - Body: markdown rendered whole. `#` is a level-1 heading (centered bold); `##` is a level-2 heading (bold, underlined, at the left); `1.` lists are lettered (a), (b)…; footnotes are `[^id]` with a definition elsewhere in the body; paragraphs are not numbered (a memorandum, unlike a complaint). Headings are written in caps as filed.
 - Transcription: every paragraph, list and footnote of the filing. Not transcribed: the bold-italic defined terms ("First Capital", "Receiver") (plain quotes); case names are italic in the sample by citation convention, because the text layer carries no italics. The "EXHIBIT n" references are bold, as in the filing.
 - `typst/lawb-motion-brief.typ` (template) and `typst/main.typ` (entry point). Court name and layout constants are in the template; every case-specific word comes from the frontmatter.
@@ -50,7 +50,7 @@ The exemplar was filed in 2014 and the rules above are the 2026 text; the sample
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief samples/INPUT-new-century-motion-brief.md
+sh tools/render.sh courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief usage/INPUT-lawb-motion-brief-newcentury.md
 sh tools/overlay.sh courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief new-century-motion-brief
 ```
 
@@ -78,10 +78,10 @@ Engines for this doc type: typst (primary, `typst/`) and docx (`docx/`). `latex/
 
 ### docx
 
-- Build: `sh docx/make-reference.sh` writes `docx/reference.docx` (pandoc's default styles, patched to the typst values: EB Garamond 13 pt, body at 26 pt exact, 0.5 in first-line indent, letter page with 1-inch margins, "- n -" page-number footer). `docx/lawb-motion-brief.lua` builds the cover (court name, caption box, title, rule under the title), the signature block and the certificate (when the frontmatter has one), and letters the lists "a.", "b.". Render: `sh tools/render.sh --engine docx courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief samples/INPUT-new-century-motion-brief.md`, which writes `samples/OUTPUT-new-century-motion-brief.docx`.
+- Build: `sh docx/make-reference.sh` writes `docx/reference.docx` (pandoc's default styles, patched to the typst values: EB Garamond 13 pt, body at 26 pt exact, 0.5 in first-line indent, letter page with 1-inch margins, "- n -" page-number footer). `docx/lawb-motion-brief.lua` builds the cover (court name, caption box, title, rule under the title), the signature block and the certificate (when the frontmatter has one), and letters the lists "a.", "b.". Render: `sh tools/render.sh --engine docx courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief usage/INPUT-lawb-motion-brief-newcentury.md`, which writes `usage/OUTPUT-lawb-motion-brief-newcentury.docx`.
 - Matches the typst template, in the markup: EB Garamond 13 pt throughout; body double-spaced (26 pt lines) with a 0.5 in first-line indent on every body paragraph; caption, signature block and footnotes single-spaced (15 pt); 1-inch margins; letter page; centered bold level-1 headings and bold, underlined level-2 headings at the left, each with a blank double line above and below; the caption box with its rules; the signature block at 2.75 in, kept together; the "- n -" page number centered in the footer.
 - Differs, by design or not checked: the list letters are typed text ("a." and a tab), not Word list numbering. The tab stop is fixed at 0.9 in from the margin. The caption box is a Word table with borders, which Word and LibreOffice draw slightly differently. Line and page breaks are the renderer's, so the page count is not known until the PDF is made. The "signature alone on page 8" open item (Known gaps, 2) may or may not reproduce in the docx.
-- **BLOCKED: `.docx.pdf` checks (Gates 0 to 3 on the LibreOffice PDF, and the Gate 2 page review).** `soffice` is not installed on the box that built this: conda-forge has no LibreOffice package and there is no root for apt. `tools/render.sh --engine docx` therefore writes the `.docx` and then fails at `soffice`, so `samples/OUTPUT-new-century-motion-brief.docx.pdf` is not produced. Checked so far: the `.docx` is a valid zip, its XML parts are well-formed, and pandoc reads it back with every word of the sample body in order (the typed list letters and the signature block come from the template). Pages reviewed: 0 of the docx's pages, so no visual claim is made for the docx.
+- **BLOCKED: `.docx.pdf` checks (Gates 0 to 3 on the LibreOffice PDF, and the Gate 2 page review).** `soffice` is not installed on the box that built this: conda-forge has no LibreOffice package and there is no root for apt. `tools/render.sh --engine docx` therefore writes the `.docx` and then fails at `soffice`, so `usage/OUTPUT-new-century-motion-brief.docx.pdf` is not produced. Checked so far: the `.docx` is a valid zip, its XML parts are well-formed, and pandoc reads it back with every word of the sample body in order (the typed list letters and the signature block come from the template). Pages reviewed: 0 of the docx's pages, so no visual claim is made for the docx.
 - Open for Word: the opening machine needs EB Garamond installed, or Word substitutes a font. The vendored `fonts/` copy is for typst only.
 
 ## Known gaps and open choices

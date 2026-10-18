@@ -28,12 +28,12 @@ Not used, and why:
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-insight-terminal-v-city-of-oakland-24-03007-motion-brief.pdf`: Defendant City of Oakland's Memorandum of Law in Support of Motion to Dismiss, *Insight Terminal Solutions, LLC v. City of Oakland*, Adv. Proc. No. 24-03007-jal (Bankr. W.D. Ky.; main case No. 19-32231). Filed May 1, 2024 by Dentons Bingham Greenbaum LLP for the City, as Attachment 1 (Dkt. 25-1) to the City's motion. The file is the attachment unaltered: 77 pages, of which **pages 2 to 27 are the memorandum** and page 28 is its certificate of service; the rest are further exhibits.
-- Provenance, searches and the caveat are in `exemplars/SOURCE.md`.
+- `usage/SAMPLE-kywb-motion-brief-insightterminalvcityofoakland2403007.pdf`: Defendant City of Oakland's Memorandum of Law in Support of Motion to Dismiss, *Insight Terminal Solutions, LLC v. City of Oakland*, Adv. Proc. No. 24-03007-jal (Bankr. W.D. Ky.; main case No. 19-32231). Filed May 1, 2024 by Dentons Bingham Greenbaum LLP for the City, as Attachment 1 (Dkt. 25-1) to the City's motion. The file is the attachment unaltered: 77 pages, of which **pages 2 to 27 are the memorandum** and page 28 is its certificate of service; the rest are further exhibits.
+- Provenance, searches and the caveat are in `usage/SOURCE.md`.
 
 ## Sample
 
-- `samples/INPUT-insight-terminal-city-of-oakland.md`: a **partial** transcription of the memorandum, with the caption, the signature page and the certificate:
+- `usage/INPUT-kywb-motion-brief-insightterminalcityofoakland.md`: a **partial** transcription of the memorandum, with the caption, the signature page and the certificate:
   - the caption and title;
   - Part I, Preliminary Statement (¶¶1–4);
   - Part II, Factual Background (¶¶5–25), with its sub-parts A (¶¶7–13), B (¶¶14–19) and C (¶¶20–25), and footnote 1;
@@ -50,12 +50,12 @@ Not used, and why:
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
 cd /work/repo
-sh tools/render.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/motion-brief samples/INPUT-insight-terminal-city-of-oakland.md
+sh tools/render.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/motion-brief usage/INPUT-kywb-motion-brief-insightterminalcityofoakland.md
 sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/motion-brief insight-terminal-city-of-oakland
 ```
 
-- `samples/OUTPUT-insight-terminal-city-of-oakland.pdf`: 10 pages. Typst compiled with no warnings. `pdffonts`: EBGaramond-Regular and -Bold only, embedded. Named `OUTPUT-` (the name `tools/render.sh` writes by default and `tools/overlay.sh` reads).
-- `samples/OVERLAY-insight-terminal-city-of-oakland.pdf` and `.txt`: red = our render, blue = exemplar (the 77-page attachment), black = both. The page map pairs pages by word overlap: ours p.1–4 ↔ filed p.2–5 (66–90%); p.5–7 ↔ filed p.6–8 (41–59%); p.8 ↔ filed p.9 (23%, the page where the transcription stops at ¶25 and the filing runs on to the Argument); p.9 ↔ filed p.27 (90%, the signature page); p.10 ↔ filed p.28 (83%, the certificate). The overlay is a diagnostic, not a score: the render is in a different face and line length from the filing, so lines will not coincide.
+- `usage/OUTPUT-kywb-motion-brief-insightterminalcityofoakland.typst.pdf`: 10 pages. Typst compiled with no warnings. `pdffonts`: EBGaramond-Regular and -Bold only, embedded. Named `OUTPUT-` (the name `tools/render.sh` writes by default and `tools/overlay.sh` reads).
+- `usage/OVERLAY-insight-terminal-city-of-oakland.pdf` and `.txt`: red = our render, blue = exemplar (the 77-page attachment), black = both. The page map pairs pages by word overlap: ours p.1–4 ↔ filed p.2–5 (66–90%); p.5–7 ↔ filed p.6–8 (41–59%); p.8 ↔ filed p.9 (23%, the page where the transcription stops at ¶25 and the filing runs on to the Argument); p.9 ↔ filed p.27 (90%, the signature page); p.10 ↔ filed p.28 (83%, the certificate). The overlay is a diagnostic, not a score: the render is in a different face and line length from the filing, so lines will not coincide.
 
 ## Visual review (Gate 2 record: all 10 pages, final render at 60 dpi, looked at)
 
@@ -87,7 +87,7 @@ sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-dis
 
 ## Engines
 
-The docx engine (`docx/`) is built, and its `.docx` renders, but its LibreOffice PDF was not made (see BLOCKED). Build: `sh docx/build-reference.sh docx/reference.docx`. Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-insight-terminal-city-of-oakland.md`, which writes `samples/OUTPUT-insight-terminal-city-of-oakland.docx` and then fails at the `soffice` step. `docx/render.sh` (called by `tools/render-docx.sh`) runs pandoc with `docx/kywb-motion-brief.lua`, puts back the reference's styles and page setup, and checks the zip and XML parts.
+The docx engine (`docx/`) is built, and its `.docx` renders, but its LibreOffice PDF was not made (see BLOCKED). Build: `sh docx/build-reference.sh docx/reference.docx`. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-kywb-motion-brief-insightterminalcityofoakland.md`, which writes `usage/OUTPUT-kywb-motion-brief-insightterminalcityofoakland.docx` and then fails at the `soffice` step. `docx/render.sh` (called by `tools/render-docx.sh`) runs pandoc with `docx/kywb-motion-brief.lua`, puts back the reference's styles and page setup, and checks the zip and XML parts.
 
 What matches the typst form (set in `docx/reference.docx`; read from its XML, not from a rendering):
 
@@ -107,7 +107,7 @@ What differs from typst:
 
 docx BLOCKED (the checks that run on the `.docx.pdf` cannot run):
 
-- `docx.pdf` and the Gate 0 and Gate 1 checks: `soffice` (LibreOffice) is not installed on this box, so `samples/OUTPUT-insight-terminal-city-of-oakland.docx.pdf` was not produced. Not passed.
+- `docx.pdf` and the Gate 0 and Gate 1 checks: `soffice` (LibreOffice) is not installed on this box, so `usage/OUTPUT-insight-terminal-city-of-oakland.docx.pdf` was not produced. Not passed.
 - Gate 2 page review of the docx: no PDF to look at, so no pages reviewed. Not passed.
 - Opening the `.docx` in LibreOffice or Word (no repair prompt): not done. Only the zip, the XML well-formedness and a pandoc read-back were checked.
 - Word limits in `docs/DOCX.md` that apply to this form: none. The form has no table of contents, table of authorities or pleading line numbers.

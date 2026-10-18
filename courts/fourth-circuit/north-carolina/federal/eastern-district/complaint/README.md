@@ -5,11 +5,11 @@ Folder: `courts/fourth-circuit/north-carolina/federal/eastern-district/complaint
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-powell-5-26-cv-00667-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-powell-complaint.md` (a portion of the 49-page filing; see its frontmatter comment) |
+| exemplar | yes: `usage/SAMPLE-nced-complaint-powell526cv00667.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nced-complaint-powell.md` (a portion of the 49-page filing; see its frontmatter comment) |
 | typeface | no face named by the rule: EB Garamond (vendored default; `docs/FONTS.md`, "No face named"); no substitute applied |
-| render | ok: `samples/OUTPUT-powell-complaint.pdf`, 9 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
-| overlay | ok: `samples/OVERLAY-powell-complaint.pdf` (red = our render, blue = filed page, black = agreement) and `samples/OVERLAY-powell-complaint.txt` (the page map) |
+| render | ok: `usage/OUTPUT-nced-complaint-powell.typst.pdf`, 9 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
+| overlay | ok: `usage/OVERLAY-powell-complaint.pdf` (red = our render, blue = filed page, black = agreement) and `usage/OVERLAY-powell-complaint.txt` (the page map) |
 | pages reviewed | 9 of 9, every page rendered at 60 dpi and viewed on the final render (table below) |
 | tier 2 | not judged against a second filer: see "Known gaps", item 1 |
 
@@ -67,7 +67,7 @@ Not produced by this template (separate papers that the filer may need with the 
 5. **Paragraph numbers in the sample run from 1**, not the filed numbers (the sample is a portion; paragraphs 17, 21 and 24 of the filing, which hold a quotation and bulleted lists, are omitted).
 6. **Ragged right.** Body text is left-aligned, not justified; the exemplar's alignment is not asserted.
 7. **Headings wrap double-spaced.** A heading that runs to two lines (the "IV. ADMINISTRATIVE EXHAUSTION" heading) keeps the body's double spacing. Setting the wrapped heading single-spaced overlapped the next paragraph in this typst build, so the template keeps the simpler form.
-8. **File names.** The brief's literal names (`samples/<id>.md`, `<id>-overlay.pdf`) are replaced by the repository's tool names (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`), because `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf`, and `tools/` is out of scope for this unit.
+8. **File names.** The brief's literal names (`usage/<id>.md`, `<id>-overlay.pdf`) are replaced by the repository's tool names (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`), because `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf`, and `tools/` is out of scope for this unit.
 9. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court root (a `court.json` and `rules.md`); this doc-type folder is not that shape, and the brief forbids touching `tools/`. The render (no warnings, vendored font only) and the overlay were run; the review below is the Gate 2 equivalent.
 
 ## Review of the rendered pages (final render)
@@ -86,7 +86,7 @@ Not produced by this template (separate papers that the filer may need with the 
 
 ## Engines
 
-The same markdown renders through the typst engine (`typst/`, the reference) and the docx engine (`docx/`). The docx output is `samples/OUTPUT-powell-complaint.docx` with its LibreOffice PDF `samples/OUTPUT-powell-complaint.docx.pdf`. Build: `sh docx/make-reference.sh` (the reference), then `sh tools/render.sh --engine docx <this folder> samples/INPUT-powell-complaint.md`.
+The same markdown renders through the typst engine (`typst/`, the reference) and the docx engine (`docx/`). The docx output is `usage/OUTPUT-nced-complaint-powell.docx` with its LibreOffice PDF `usage/OUTPUT-nced-complaint-powell.docx.pdf`. Build: `sh docx/make-reference.sh` (the reference), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-nced-complaint-powell.md`.
 
 - *Matches typst (checked on the PDF):* EB Garamond 12 pt, the only face in the PDF (no substitution); letter paper with 1-inch margins (all text inside 72 to 540 pt); body double-spaced at the typst baseline pitch of 27.6 pt, with no space between paragraphs and a 0.5 in first-line indent; the cover (court and division, the "No." line, the caption with its ")" column, the title block and the jury legend); allegations numbered 1, 2, ... with headings and the WHEREFORE clause unnumbered; the prayer lettered A., B., ... with a hanging indent; headings bold, centered at level 1 and 2, bold italic at level 3, at typst's sizes; the date line and signature block at 3 in; footnote at 12 pt, single-spaced; the page number centered in the footer, sequential from the cover. Page count is the same as typst (9 pages).
 - *Differs:* LibreOffice and typst break some lines at different words, so a few pages hold one line more or less, and the text sits about 3 pt lower on each page than in typst. Measured against the typst page: the caption, headings and signature block fall within about 3 pt. The paragraph numbers and prayer letters are typed by the template, not Word list numbering, so editing the docx in Word does not renumber them. Heading sizes (about 17 pt and 14.5 pt) are set as sizes, because typst's 1.4 em and 1.2 em come from its defaults.

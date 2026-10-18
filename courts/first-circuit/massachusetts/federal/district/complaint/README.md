@@ -5,14 +5,14 @@ Folder: `courts/first-circuit/massachusetts/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-door-systems-26-14133-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-door-systems-complaint.md`: the whole filing (97 numbered paragraphs, Counts I to VI, prayer A to Q, jury demand, signature). Transcribed from the text layer of the exemplar. |
-| render | ok: `samples/OUTPUT-door-systems-complaint.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh courts/first-circuit/massachusetts/federal/district/complaint samples/INPUT-door-systems-complaint.md`) |
-| overlay | ok: `samples/OVERLAY-door-systems-complaint.pdf` and `OVERLAY-door-systems-complaint.txt` (`sh tools/overlay.sh courts/first-circuit/massachusetts/federal/district/complaint door-systems-complaint`) |
+| exemplar | yes: `usage/SAMPLE-mad-complaint-doorsystems2614133.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-mad-complaint-doorsystems.md`: the whole filing (97 numbered paragraphs, Counts I to VI, prayer A to Q, jury demand, signature). Transcribed from the text layer of the exemplar. |
+| render | ok: `usage/OUTPUT-mad-complaint-doorsystems.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh courts/first-circuit/massachusetts/federal/district/complaint usage/INPUT-mad-complaint-doorsystems.md`) |
+| overlay | ok: `usage/OVERLAY-door-systems-complaint.pdf` and `OVERLAY-door-systems-complaint.txt` (`sh tools/overlay.sh courts/first-circuit/massachusetts/federal/district/complaint door-systems-complaint`) |
 | typeface | No face named by the court's rules: EB Garamond kept (`docs/FONTS.md`, "No face named"). Fonts pass 2026-10-14: re-rendered with vendored fonts only, `pdffonts` shows EB Garamond only, no warnings. |
 | pages reviewed | 14 of 14 (fonts pass 2026-10-14: every page rendered at 60 dpi and viewed; earlier review at the last template change) |
 
-File names follow the tools, not the brief's wording: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` reads that name and writes `OVERLAY-<id>.pdf` / `.txt`, so the sample is `samples/<id>.md` with those outputs. The tools are shared and were not edited.
+File names follow the tools, not the brief's wording: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` reads that name and writes `OVERLAY-<id>.pdf` / `.txt`, so the sample is `usage/<id>.md` with those outputs. The tools are shared and were not edited.
 
 ## Governing rules
 
@@ -71,7 +71,7 @@ Defects found in review and fixed (all in `mad-complaint.typ`):
 2. **Paragraph gap.** Paragraphs are separated by 0.65 em on top of the double spacing; the exemplar shows no visible gap. Tier-2 choice, recorded as ACCEPTED: the gap is what keeps the paragraphs apart under typst 0.15 (see the defect above).
 3. **Caption.** The party column is closed by a rule (right and bottom) rather than the ")" column of the exemplar. Tier-2 convention choice, ACCEPTED (the CAND templates use the same closure).
 4. **Justified text.** Body text is justified; the exemplar's justification could not be read from the text layer.
-5. **Exemplars.** One filer saved (the Door Systems complaint). The second D. Mass. complaint checked (Clere v. Delta Air Lines, 1:26-cv-14437-ADB) is recorded in `exemplars/SOURCE.md`, not saved. Tier 2 is judged against one filer here, not the two or three EVAL-LOOP asks for.
+5. **Exemplars.** One filer saved (the Door Systems complaint). The second D. Mass. complaint checked (Clere v. Delta Air Lines, 1:26-cv-14437-ADB) is recorded in `usage/SOURCE.md`, not saved. Tier 2 is judged against one filer here, not the two or three EVAL-LOOP asks for.
 6. **ECF header.** The court's ECF stamp ("Case 1:26-cv-14133-MJJ Document 1 Filed ...") is added by the court's system and is not reproduced.
 7. **Exhibits.** The sample refers to Exhibits A and B; the exhibits themselves are not part of the template.
 8. **Rules currency.** The local rules are the 2019 consolidated copy (see above); amendments after that date are not checked.
@@ -82,7 +82,7 @@ Defects found in review and fixed (all in `mad-complaint.typ`):
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond only, 13 pt, 1 in margins, US Letter, page number in the footer). `complaint.lua` builds the caption (a two-cell table with the party rule), the title and the signature block as Word paragraphs in named styles, the prayer letters (A to Q) and the jury demand. `render.sh` runs pandoc and adds the Word numbering for the allegations (pandoc drops numbering it does not write). Checked on the LibreOffice PDF `samples/OUTPUT-door-systems-complaint.docx.pdf` (every page viewed at 60 dpi, against the typst render). Word was not checked; the `.docx` was opened with LibreOffice only.
+docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond only, 13 pt, 1 in margins, US Letter, page number in the footer). `complaint.lua` builds the caption (a two-cell table with the party rule), the title and the signature block as Word paragraphs in named styles, the prayer letters (A to Q) and the jury demand. `render.sh` runs pandoc and adds the Word numbering for the allegations (pandoc drops numbering it does not write). Checked on the LibreOffice PDF `usage/OUTPUT-mad-complaint-doorsystems.docx.pdf` (every page viewed at 60 dpi, against the typst render). Word was not checked; the `.docx` was opened with LibreOffice only.
 
 Matches the typst form: EB Garamond only (no fallback face); body lines at a 24 pt pitch; headings at the typst sizes (18 pt level 1, 15.5 pt level 2, bold caps); single lines at 14.3 pt; numbered paragraphs at 0.5 in with the text after the number; prayer letters hanging; jury demand and signature block kept together; footer page number centered at 12 pt. Justified text is hyphenated (`autoHyphenation`), as typst hyphenates. Like the typst render, no space is added between paragraphs or around headings.
 

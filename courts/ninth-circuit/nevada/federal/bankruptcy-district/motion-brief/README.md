@@ -2,8 +2,8 @@
 
 - Court: `nvb`, United States Bankruptcy Court, District of Nevada (`courts/ninth-circuit/nevada/federal/bankruptcy-district/`)
 - Doc type: `motion-brief`. A contested-matter motion in the main case, with its legal memorandum in the same paper (LR 9014(c)(1)); the motion here is a Rule 59(e)/60(b) motion for reconsideration.
-- Exemplar: `exemplars/FILED-EXAMPLE-epica-human-health-26-50579-motion-brief.pdf` (*In re Epica Human Health LLC*, Case No. BK-26-50579-gs, Motion for Reconsideration, filed 2026-07-16, ECF 79; provenance in `exemplars/SOURCE.md`). One filer only; see Gaps.
-- Sample: `samples/INPUT-epica-motion-reconsideration.md` (transcribed from the exemplar; 10 pages rendered, the exemplar's 10).
+- Exemplar: `usage/SAMPLE-nvb-motion-brief-epicahumanhealth2650579.pdf` (*In re Epica Human Health LLC*, Case No. BK-26-50579-gs, Motion for Reconsideration, filed 2026-07-16, ECF 79; provenance in `usage/SOURCE.md`). One filer only; see Gaps.
+- Sample: `usage/INPUT-nvb-motion-brief-epicamotionreconsideration.md` (transcribed from the exemplar; 10 pages rendered, the exemplar's 10).
 - Status: template, render, overlay and page review done (below). `court.json` untouched; no status set.
 
 ## Files
@@ -12,10 +12,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `nvb-motion-brief`. |
 | `typst/nvb-motion-brief.typ` | Template. Parameter block at the top, with the rule each traces to. Footnotes, block quotations, lists, headings and the signature are handled here. |
-| `samples/INPUT-epica-motion-reconsideration.md` | Markdown contract sample: frontmatter (counsel, debtor, case number, chapter, title, hearing, date, signature); body with headings, paragraphs, one footnote, a block quotation, and a certificate of service. |
-| `samples/OUTPUT-epica-motion-reconsideration.pdf` | `sh tools/render.sh <court>/motion-brief samples/INPUT-epica-motion-reconsideration.md` (10 pages, EB Garamond only, no typst warnings). |
-| `samples/OVERLAY-epica-motion-reconsideration.pdf`, `.txt` | `sh tools/overlay.sh <court>/motion-brief epica-motion-reconsideration` (red = ours, blue = filed, black = both agree). |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-nvb-motion-brief-epicamotionreconsideration.md` | Markdown contract sample: frontmatter (counsel, debtor, case number, chapter, title, hearing, date, signature); body with headings, paragraphs, one footnote, a block quotation, and a certificate of service. |
+| `usage/OUTPUT-nvb-motion-brief-epicamotionreconsideration.typst.pdf` | `sh tools/render.sh <court>/motion-brief usage/INPUT-nvb-motion-brief-epicamotionreconsideration.md` (10 pages, EB Garamond only, no typst warnings). |
+| `usage/OVERLAY-epica-motion-reconsideration.pdf`, `.txt` | `sh tools/overlay.sh <court>/motion-brief epica-motion-reconsideration` (red = ours, blue = filed, black = both agree). |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
 ## Governing rules
 
@@ -40,7 +40,7 @@ Choices the rules leave open (tier 2 or 3, not asserted mechanically): the cover
 
 ## Overlay
 
-`samples/OVERLAY-epica-motion-reconsideration.pdf` puts our render (red) over the best-matching filed page (blue). Pages are paired by word overlap, not index. Diagnostic only, not a score. Pairings from the last run:
+`usage/OVERLAY-epica-motion-reconsideration.pdf` puts our render (red) over the best-matching filed page (blue). Pages are paired by word overlap, not index. Diagnostic only, not a score. Pairings from the last run:
 
 - p.1 ↔ filed p.1 (82%), p.2 ↔ p.2 (63%), p.3 ↔ p.3 (61%): the cover, the caption and the opening paragraph line up. Our counsel block starts at line 3 (the title-page offset in LR 9004(a)); the exemplar starts at line 1, and the overlay shows the offset.
 - p.4 ↔ p.4 (52%) through p.7 ↔ p.7 (48%): the legal argument, with the same passages on the same pages in the filed copy, but different line breaks.
@@ -49,7 +49,7 @@ Choices the rules leave open (tier 2 or 3, not asserted mechanically): the cover
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-epica-motion-reconsideration.pdf` was rasterized at 60 dpi and viewed (10 of 10), against the filed exemplar page of the same number.
+Every page of `OUTPUT-nvb-motion-brief-epicamotionreconsideration.typst.pdf` was rasterized at 60 dpi and viewed (10 of 10), against the filed exemplar page of the same number.
 
 | Page | Content | Result |
 |---|---|---|
@@ -66,7 +66,7 @@ Every page of `OUTPUT-epica-motion-reconsideration.pdf` was rasterized at 60 dpi
 
 ## Gaps
 
-- **One filer only.** EVAL-LOOP tier 2 asks for two or three filers. `exemplars/SOURCE.md` records a second candidate (a Womble Bond Dickinson motion to compel in the lead case, ECF 279, not saved) and a pro se motion (not a counsel model). Tier 2 is therefore judged against one filer and the result is provisional.
+- **One filer only.** EVAL-LOOP tier 2 asks for two or three filers. `usage/SOURCE.md` records a second candidate (a Womble Bond Dickinson motion to compel in the lead case, ECF 279, not saved) and a pro se motion (not a counsel model). Tier 2 is therefore judged against one filer and the result is provisional.
 - **Page 1 (OPEN).** A six-line footnote on page 1 pushes the first body paragraph to page 2, leaving four blank lines above the footnote. The footnote text is transcribed unchanged and cannot be shortened, and the footnote cannot go below 12 point (LR 9004(b)). A fix would have to change how the first paragraph is split across pages, which is tier 2 layout work not yet done. Left open rather than hidden.
 - **Notice of hearing and proof of service** (LR 9014(b)(1)-(2)) are separate documents and are not produced. The sample's hearing block reads "TBD", as the exemplar does.
 - **Filed-copy features not reproduced:** the counsel footer on page 1 (bottom left), the "* * * * *" ornament above the court title, and the underline below the debtor's name (the template draws a right and bottom rule instead, as the adversary template does).
@@ -76,7 +76,7 @@ Every page of `OUTPUT-epica-motion-reconsideration.pdf` was rasterized at 60 dpi
 
 ## Engines
 
-docx (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx` from pandoc's default reference) and the filter `docx/nvb-motion-brief.lua`. Rendered with `sh tools/render.sh --engine docx <this folder> samples/INPUT-epica-motion-reconsideration.md`: `samples/OUTPUT-epica-motion-reconsideration.docx` and its LibreOffice PDF `.docx.pdf` (11 pages; the typst render is 10). Page review: `reviews/2026-10-15-docx.md` (every page viewed).
+docx (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx` from pandoc's default reference) and the filter `docx/nvb-motion-brief.lua`. Rendered with `sh tools/render.sh --engine docx <this folder> usage/INPUT-nvb-motion-brief-epicamotionreconsideration.md`: `usage/OUTPUT-nvb-motion-brief-epicamotionreconsideration.docx` and its LibreOffice PDF `.docx.pdf` (11 pages; the typst render is 10). Page review: `reviews/2026-10-15-docx.md` (every page viewed).
 
 What matches the typst output:
 - US Letter; top margin 1 in; left 1.5 in; right 0.75 in; bottom 48 pt; the text area is 28 lines at exact 24 pt.
@@ -93,4 +93,4 @@ What differs from typst:
 - Word has not been used to open the file. LibreOffice opens and converts it with no repair prompt.
 
 BLOCKED:
-BLOCKED: check.sh (all gates, every docx check ID): not runnable in this folder. `tools/check.sh` reads `<court-dir>/court.json`, `<court-dir>/checks.yaml`, `rules.md` and `reviews/`, and this doc-type folder has only the template, samples and exemplars (`court.json` exists only at `../` (the court folder); `checks.yaml` and `rules.md` exist nowhere in this court yet). No docx gate was evaluated, so `samples/.check-docx.txt` is not written and the docx engine is not marked passing.
+BLOCKED: check.sh (all gates, every docx check ID): not runnable in this folder. `tools/check.sh` reads `<court-dir>/court.json`, `<court-dir>/checks.yaml`, `rules.md` and `reviews/`, and this doc-type folder has only the template, samples and exemplars (`court.json` exists only at `../` (the court folder); `checks.yaml` and `rules.md` exist nowhere in this court yet). No docx gate was evaluated, so `usage/.check-docx.txt` is not written and the docx engine is not marked passing.

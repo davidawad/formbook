@@ -15,9 +15,9 @@ Access note: on 2026-10-17 `www.paeb.uscourts.gov` rejected direct requests from
 | FRBP | Federal Rules of Bankruptcy Procedure 7003, 7007.1, 7008, 7010, 9004, 9011, 9013 (LII text, restyled eff. Dec. 1, 2024) | https://www.law.cornell.edu/rules/frbp/rule_7008 (and rule_7003, rule_7007.1, rule_7010, rule_9004, rule_9011, rule_9013) |
 | FRCP | Federal Rules of Civil Procedure 8, 10 (applied by FRBP 7008, 7010) | https://www.law.cornell.edu/rules/frcp/rule_8 , https://www.law.cornell.edu/rules/frcp/rule_10 |
 | F416D | Official Form 416D, Caption for Use in Adversary Proceeding (12/15) | https://www.uscourts.gov/sites/default/files/form_b416d_0.pdf |
-| EX-KRUEGER | Adversary complaint, Adv. No. 26-00127 (Kang Haggerty LLC, for plaintiffs Krueger) | `adversary-complaint/exemplars/` |
-| EX-TIG | Adversary complaint, Adv. No. 26-00204 (Salzmann Hughes PC, for plaintiffs) | `adversary-complaint/exemplars/` |
-| EX-HENRY | Memorandum of law in support of motion to dismiss, *Henry v. US Bank Trust Co.*, Adv. No. 26-00106 (Eckert Seamans, for the defendant) | `motion-brief/exemplars/` |
+| EX-KRUEGER | Adversary complaint, Adv. No. 26-00127 (Kang Haggerty LLC, for plaintiffs Krueger) | `adversary-complaint/usage/` |
+| EX-TIG | Adversary complaint, Adv. No. 26-00204 (Salzmann Hughes PC, for plaintiffs) | `adversary-complaint/usage/` |
+| EX-HENRY | Memorandum of law in support of motion to dismiss, *Henry v. US Bank Trust Co.*, Adv. No. 26-00106 (Eckert Seamans, for the defendant) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (FRBP, FRCP as applied, L.B.R.). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

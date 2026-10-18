@@ -11,10 +11,10 @@ Re-check cadence: re-check annually each December 1 (the court's local-rule amen
 | LR | Local Rules of the U.S. District Court for the District of New Hampshire, effective December 1, 2025 (includes the Supplemental Rules); the court's local-rules page lists it as current | https://www.nhd.uscourts.gov/pdf/2025%20Local%20Rules%20-%20District%20of%20New%20Hampshire.pdf (linked from https://www.nhd.uscourts.gov/local-rules-0) |
 | ECF | Supplemental Rules for Electronic Case Filing (Appendix A of LR; "Incorporated as Supplement to Local Rules December 1, 2011, As Amended Through December 1, 2025"), cited "ECF Rule n" | same PDF as LR |
 | FRCP | Federal Rules of Civil Procedure, Rules 5, 5.2, 7, 7.1, 8, 10, 11, 38 (current text) | https://www.law.cornell.edu/rules/frcp/rule_5 (and `rule_5.2`, `rule_7`, `rule_7.1`, `rule_8`, `rule_10`, `rule_11`, `rule_38`) |
-| EX-C1 | Complaint exemplar: Nicholas v. Federal Express Corp., No. 1:26-cv-00879, Doc. 1 (Douglas, Leonard & Garvey; Lichten & Liss-Riordan) | `complaint/exemplars/SOURCE.md` |
-| EX-C2 | Complaint exemplar: Grant v. Allstate Insurance Co., No. 1:26-cv-00677, Doc. 1 (Kimmel & Silverman) | `complaint/exemplars/SOURCE.md` |
-| EX-M1 | Motion exemplar: Jonas v. Ayotte, No. 1:26-cv-00600, Doc. 14 (N.H. Attorney General) | `motion-brief/exemplars/SOURCE.md` |
-| EX-M2 | Motion exemplar: EEOC v. Coca-Cola Beverages Northeast, No. 1:26-cv-00115, Doc. 6-1 (The Bennett Law Firm) | `motion-brief/exemplars/SOURCE.md` |
+| EX-C1 | Complaint exemplar: Nicholas v. Federal Express Corp., No. 1:26-cv-00879, Doc. 1 (Douglas, Leonard & Garvey; Lichten & Liss-Riordan) | `complaint/usage/SOURCE.md` |
+| EX-C2 | Complaint exemplar: Grant v. Allstate Insurance Co., No. 1:26-cv-00677, Doc. 1 (Kimmel & Silverman) | `complaint/usage/SOURCE.md` |
+| EX-M1 | Motion exemplar: Jonas v. Ayotte, No. 1:26-cv-00600, Doc. 14 (N.H. Attorney General) | `motion-brief/usage/SOURCE.md` |
+| EX-M2 | Motion exemplar: EEOC v. Coca-Cola Beverages Northeast, No. 1:26-cv-00115, Doc. 6-1 (The Bennett Law Firm) | `motion-brief/usage/SOURCE.md` |
 
 Kinds: **M** = mandated by a court rule (FRCP or the Local Rules). **C** = convention (taken from exemplars of different filers; the rules leave it open). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

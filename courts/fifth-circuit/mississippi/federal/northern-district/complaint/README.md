@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/mississippi/federal/northern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-haas-outdoors-1-25-cv-184-complaint.pdf` (1 filer, 20 pp; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-haas-complaint.md` (transcription of the complaint's caption, parties, jurisdiction, background, Counts I–III, prayer, jury demand and signature; the figures are noted, not reproduced) |
-| render | ok: `samples/OUTPUT-haas-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> samples/INPUT-haas-complaint.md`) |
-| overlay | ok: `samples/OVERLAY-haas-complaint.pdf` and `OVERLAY-haas-complaint.txt` (`sh tools/overlay.sh <this dir> haas-complaint`) |
+| exemplar | yes: `usage/SAMPLE-msnd-complaint-haasoutdoors125cv184.pdf` (1 filer, 20 pp; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-msnd-complaint-haas.md` (transcription of the complaint's caption, parties, jurisdiction, background, Counts I–III, prayer, jury demand and signature; the figures are noted, not reproduced) |
+| render | ok: `usage/OUTPUT-msnd-complaint-haas.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-msnd-complaint-haas.md`) |
+| overlay | ok: `usage/OVERLAY-haas-complaint.pdf` and `OVERLAY-haas-complaint.txt` (`sh tools/overlay.sh <this dir> haas-complaint`) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`), so the sample is `INPUT-<id>.md` and the id is `haas-complaint`.
@@ -48,7 +48,7 @@ The court's own local rules are the N.D. and S.D. Mississippi Local Uniform Civi
 
 ## Known gaps and open choices
 
-1. **One exemplar.** Tier 2 is not yet judged against two or three filers. The search (CourtListener RECAP, `court=msnd`, complaints filed 2025-08 to 2026-07) also found *Fulmer v. EZ Auto, Inc.* (3:26-cv-00121, 11 pp), whose text layer stops after page 1, and *Smith v. Southern Bancorp Bank* (3:26-cv-00038, 15 pp), not downloaded further. See `exemplars/SOURCE.md`.
+1. **One exemplar.** Tier 2 is not yet judged against two or three filers. The search (CourtListener RECAP, `court=msnd`, complaints filed 2025-08 to 2026-07) also found *Fulmer v. EZ Auto, Inc.* (3:26-cv-00121, 11 pp), whose text layer stops after page 1, and *Smith v. Southern Bancorp Bank* (3:26-cv-00038, 15 pp), not downloaded further. See `usage/SOURCE.md`.
 2. **Font.** The rule names no complaint typeface, so `docs/FONTS.md` keeps EB Garamond (no court-named face, no substitute). The exemplar is Times New Roman. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the filed page. The 12-point size is kept; a Times-metric font would remove the difference.
 3. **Figures.** The exemplar's comparison figures (paragraphs 15 and 17) are noted in the sample, not reproduced. The overlay therefore pairs sample page 4 with exemplar page 11, a figure page with little text.
 4. **Paragraph numbers.** The sample's numbers are the template's (1 to 40), which match the exemplar's numbering. The exhibits are not reproduced.
@@ -57,7 +57,7 @@ The court's own local rules are the N.D. and S.D. Mississippi Local Uniform Civi
 7. **Not produced:** civil cover sheet, corporate disclosure statement (L.U.Civ.R. 7(c)), summons, and the filing fee.
 8. **Gates.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md`; this doc-type folder does not have that shape, and the brief forbids touching `tools/`. The gates were not run. Render, overlay and the page review above are the checks for this doc type.
 
-## Review of the rendered pages (`OUTPUT-haas-complaint.pdf`, 11 pages)
+## Review of the rendered pages (`OUTPUT-msnd-complaint-haas.typst.pdf`, 11 pages)
 
 - Page 1: court title lines 1–3, caption with the party column closed by a rule and the right column (case number, jury demand), title centered, lead-in, paragraphs 1–5 on the double-spaced grid. Pass.
 - Page 2: BACKGROUND and Haas' Intellectual Property headings, paragraphs 6–7 with footnote 1 at the foot of the page, "Defendant's Infringing Products" heading with paragraph 8. Pass.
@@ -81,7 +81,7 @@ The page review checks the layout of the render. Text fidelity to the exemplar r
 
 Two engines are built from the same sample: typst (primary, `typst/`) and docx (`docx/`). This doc type has no latex template yet.
 
-**docx** (`docx/`): `docx/reference.docx` (rebuilt by `sh docx/make-reference.sh`), the Lua filter `docx/msnd-complaint.lua`, and `docx/render.sh` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> samples/INPUT-haas-complaint.md`; it writes `samples/OUTPUT-haas-complaint.docx` and `samples/OUTPUT-haas-complaint.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`).
+**docx** (`docx/`): `docx/reference.docx` (rebuilt by `sh docx/make-reference.sh`), the Lua filter `docx/msnd-complaint.lua`, and `docx/render.sh` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> usage/INPUT-msnd-complaint-haas.md`; it writes `usage/OUTPUT-msnd-complaint-haas.docx` and `usage/OUTPUT-msnd-complaint-haas.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`).
 
 What matches typst, checked on the LibreOffice PDF:
 

@@ -13,7 +13,7 @@ Re-check cadence: re-check annually each December 1 (FRBP amendment date) and wh
 | GUIDE | BAP Guide (12 pp., PDF dated 2025-05-20), Part VI "Briefs and Appendix" (pp. 7-8). Explanatory, not a rule. | https://www.bap1.uscourts.gov/sites/bap1/files/BAP_Guide.pdf |
 | QR | BAP Quick Reference (5 pp., PDF dated 2024-12-16). Explanatory, not a rule. | https://www.bap1.uscourts.gov/sites/bap1/files/BAP_QuickReference.pdf |
 | FRBP | Federal Rules of Bankruptcy Procedure 8011, 8012, 8014, 8015 (restyled, eff. Dec. 1, 2024) | https://www.law.cornell.edu/rules/frbp/rule_8015, .../rule_8014, .../rule_8012, .../rule_8011 |
-| EX | The filed exemplars in each doc type's `exemplars/` (see `SOURCE.md` there). Visual reference only. | local |
+| EX | The filed exemplars in each doc type's `usage/` (see `SOURCE.md` there). Visual reference only. | local |
 
 Kinds: **M** = mandated by a rule (FRBP or 1st Cir. BAP L.R. / General Order). **C** = convention (the rules leave it open; seen across filers). **T** = project/tooling rule. **A** = author responsibility, not machine-checkable.
 
@@ -89,7 +89,7 @@ Findings:
 
 ## Doc type: opening-brief
 
-Exemplars: see `opening-brief/exemplars/SOURCE.md` (Blumsack / Law Offices of D. Lev, PC, BAP No. MW 23-03; a second opening-brief filer is listed there if one was found).
+Exemplars: see `opening-brief/usage/SOURCE.md` (Blumsack / Law Offices of D. Lev, PC, BAP No. MW 23-03; a second opening-brief filer is listed there if one was found).
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
@@ -98,7 +98,7 @@ Exemplars: see `opening-brief/exemplars/SOURCE.md` (Blumsack / Law Offices of D.
 
 ## Doc type: answering-brief
 
-Exemplars: see `answering-brief/exemplars/SOURCE.md` (U.S. Trustee Harrington / DOJ Executive Office for U.S. Trustees, BAP No. MW 23-003; a second filer listed there if found).
+Exemplars: see `answering-brief/usage/SOURCE.md` (U.S. Trustee Harrington / DOJ Executive Office for U.S. Trustees, BAP No. MW 23-003; a second filer listed there if found).
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
@@ -107,7 +107,7 @@ Exemplars: see `answering-brief/exemplars/SOURCE.md` (U.S. Trustee Harrington / 
 
 ## Doc type: reply-brief
 
-Exemplars: see `reply-brief/exemplars/SOURCE.md`.
+Exemplars: see `reply-brief/usage/SOURCE.md`.
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|

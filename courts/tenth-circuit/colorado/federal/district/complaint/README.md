@@ -5,10 +5,10 @@ Folder: `courts/tenth-circuit/colorado/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-walton-1-26-cv-01127-complaint.pdf` (one filer: Walton v. Protecto Wrap Co.; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-walton-complaint.md` (a transcription of part of the 16-page filing; see Known gaps) |
-| render | ok: `samples/OUTPUT-walton-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-walton-complaint.pdf` and `samples/OVERLAY-walton-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-cod-complaint-walton126cv01127.pdf` (one filer: Walton v. Protecto Wrap Co.; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-cod-complaint-walton.md` (a transcription of part of the 16-page filing; see Known gaps) |
+| render | ok: `usage/OUTPUT-cod-complaint-walton.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-walton-complaint.pdf` and `usage/OVERLAY-walton-complaint.txt` |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names: the sample is `INPUT-<id>.md`, the render is `OUTPUT-<id>.pdf` and the overlay is `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default. The brief's `<id>.md` / `<id>-overlay.pdf` form was not used for this reason.
@@ -16,7 +16,7 @@ File names: the sample is `INPUT-<id>.md`, the render is `OUTPUT-<id>.pdf` and t
 Commands (from the repo root, with `PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/tenth-circuit/colorado/federal/district/complaint samples/INPUT-walton-complaint.md
+sh tools/render.sh courts/tenth-circuit/colorado/federal/district/complaint usage/INPUT-cod-complaint-walton.md
 sh tools/overlay.sh courts/tenth-circuit/colorado/federal/district/complaint walton-complaint
 ```
 
@@ -64,14 +64,14 @@ Not in the local rules and therefore not asserted: a page limit (none for compla
 1. **One filer, not two or three.** EVAL-LOOP's tier-2 rule asks for exemplars from 2 or 3 different filers. Searches on CourtListener (RECAP, `court=cod`) found these other federal complaints, not saved: Peterson v. Christian Community Foundation, Inc., 1:26-cv-00179-RMR-MDB (23 pp; no counsel block on page 1 in the check made here); Dolmas v. Vitalant, Inc., 1:26-cv-01197-LTB-RTG (29 pp; no counsel block on page 1); Preferred Choice Products, LLC v. All American Sales, LLC, 1:26-cv-05134 (25 pp, counsel-signed, filed 10/09/26), which is a 65 MB PDF and was not saved (the repo's exemplars are small public records). The state-court complaints attached to removals (Engvall, Peters) are not federal complaints and were not used. Tier 2 is therefore **not** judged against 2 or 3 filers yet.
 2. **Font.** The rules set no typeface, so EB Garamond (vendored) is kept at 12 pt under `docs/FONTS.md`; `pdffonts` on the render shows only EB Garamond embedded. The exemplar is Arial-type (LiberationSans) at 12 pt, and EB Garamond's smaller x-height makes the text look smaller than the exemplar. A vendored Times-metric or Arial-metric font would remove the difference; that is a choice for David.
 3. **Sample is a transcription of part of the filing**, not the whole 16 pages. Included: caption, lead-in, preliminary statement, parties, jurisdiction, administrative remedies, factual allegations (paragraphs 16–30 and 32–49 of the filing), first claim (paragraphs 49–51 of the sample), third claim, fourth claim (with the § 1981 block quotation), prayer, jury demand, signature. Omitted: paragraph 31 (it quotes a racial slur, and the sample leaves that text out), the second claim, paragraph 53 onward within the first claim, the fifth claim (its paragraph 103 quotes the same slur), and the sixth claim. Because the template numbers paragraphs, the sample's paragraph numbers and the filed numbers diverge after the omitted paragraphs, so overlay pairs of later pages share fewer words.
-4. **The overlay is a diagnostic, not a score.** Page pairs from the overlay map (`samples/OVERLAY-walton-complaint.txt`): ours p.1–p.2 pair with filed p.1–p.2 at 93–95% word overlap; ours p.3 with p.3 at 78%; the remaining pairs are lower because of the omissions in item 3 and because the filed pages hold different paragraphs. Read the overlay for layout (margins, caption, headings, signature), not for text.
+4. **The overlay is a diagnostic, not a score.** Page pairs from the overlay map (`usage/OVERLAY-walton-complaint.txt`): ours p.1–p.2 pair with filed p.1–p.2 at 93–95% word overlap; ours p.3 with p.3 at 78%; the remaining pairs are lower because of the omissions in item 3 and because the filed pages hold different paragraphs. Read the overlay for layout (margins, caption, headings, signature), not for text.
 5. **Caption.** The party block is plain lines, with no column of ")" marks or rules, matching the filed Walton caption. This is a convention choice, not a rule point.
 6. **Not produced.** Civil Cover Sheet (D.C.COLO.LCivR 3.1(a)), Notice of Related Cases (3.2), summons and the Rule 7.1 disclosure statement are separate filings and are not part of this template.
 7. **Judge practice standards.** Individual judges' practice standards (for example, on fonts or a complaint's length) were not checked and are not asserted.
 8. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape; the brief forbids touching `tools/`. Render and overlay were run; the page review in this README is the Gate 2 equivalent for this doc type.
 9. **Signer name.** The exemplar's `By: /s/ Name` line is kept as `sig_line`; the signer's name then appears again under it, as in the filing.
 
-## Review of the rendered pages (`OUTPUT-walton-complaint.pdf`, 10 pages)
+## Review of the rendered pages (`OUTPUT-cod-complaint-walton.typst.pdf`, 10 pages)
 
 - Page 1: court name, civil action line, party block, title, lead-in and the preliminary statement; the PARTIES heading moves to page 2 with its paragraph (no heading left at the foot). Footer page number. No spill. Pass.
 - Page 2: PARTIES heading and paragraphs 1–5; JURISDICTION AND VENUE heading and paragraphs 6–10. Pass.
@@ -88,7 +88,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `cod.lua` sets the caption, numbering, lettered items and signature block). `sh tools/render.sh --engine docx courts/tenth-circuit/colorado/federal/district/complaint samples/INPUT-walton-complaint.md` writes `OUTPUT-walton-complaint.docx` and `OUTPUT-walton-complaint.docx.pdf` (LibreOffice 26.8.1; `pdffonts`: EB Garamond only, embedded).
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `cod.lua` sets the caption, numbering, lettered items and signature block). `sh tools/render.sh --engine docx courts/tenth-circuit/colorado/federal/district/complaint usage/INPUT-cod-complaint-walton.md` writes `OUTPUT-cod-complaint-walton.docx` and `OUTPUT-cod-complaint-walton.docx.pdf` (LibreOffice 26.8.1; `pdffonts`: EB Garamond only, embedded).
 
 - Matches the typst output: 10 pages, the same as typst. Letter paper; top margin 1½ in, other margins 1 in; 12 pt EB Garamond; 24 pt exact line pitch (double spacing); caption (court lines, `Civil Action No.`, party block with indented designations and `v.`, bold centred title) within about 4 pt of the typst positions; numbered paragraphs at the first-line indent; centred bold level 1 and 2 headings; the § 1981 block quotation single spaced and indented 1 in each side; lettered prayer items A.–F.; signature block kept together; centred page number in the footer.
 - Differs: (a) pagination. LibreOffice places text in exact-height lines a little lower and applies widow/orphan control differently, so the docx holds about one line less per page; page breaks fall one or two lines earlier, and `JURY TRIAL DEMAND` moves from page 9 (typst) to page 10 (docx), with the signature block. Word may break pages differently again. (b) The paragraph number is followed by an en space where typst uses 0.5 em, so some line ends differ. (c) Typeface and sizes are the same, but the docx is not gated: see below.

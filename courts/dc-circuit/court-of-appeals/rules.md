@@ -14,7 +14,7 @@ The rules PDF has no printed page numbers; rows cite rule numbers. Handbook rows
 | HB | "Handbook of Practice and Internal Procedures", "As Amended Through September 17, 2026", Part IX.A (briefs), pp. 39-43. Guidance only (Preface), but it states the court's typeface preference. | https://www.cadc.uscourts.gov/sites/cadc/files/rules-Handbook20260917.pdf |
 | ORD-28A7 | En banc order of July 11, 2025 amending Circuit Rule 28(a)(7) (Standing), effective August 11, 2025 | https://www.cadc.uscourts.gov/sites/cadc/files/orderCircRule28a7.pdf |
 | FRAP | Federal Rules of Appellate Procedure 28, 32 (cross-check of the CR text) | https://www.law.cornell.edu/rules/frap/rule_32 and https://www.law.cornell.edu/rules/frap/rule_28 |
-| EX | The filed exemplars in each doc type's `exemplars/` (see `SOURCE.md` there). Visual reference only. | local |
+| EX | The filed exemplars in each doc type's `usage/` (see `SOURCE.md` there). Visual reference only. | local |
 
 Kinds: **M** = mandated by a court rule (FRAP or D.C. Circuit Rule). **C** = convention (seen in exemplars from different filers, or stated by the Handbook as a preference; the rules leave it open). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

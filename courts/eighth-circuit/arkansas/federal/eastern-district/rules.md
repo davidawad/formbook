@@ -8,7 +8,7 @@ Alias `ared`. Scope: civil complaints and separate briefs in support of motions 
 |---|---|---|---|
 | EDA-LR | Local Rules of the United States District Court for the Eastern and Western Districts of Arkansas | https://www.are.uscourts.gov/sites/are/files/local_rules/All_LR.pdf | Current complete copy linked from https://www.are.uscourts.gov/court-info/local-rules-and-orders/local-rules; rules 5.1 and 5.5 last amended Nov. 5, 2020 and Dec. 30, 2019, respectively; Rule 7.2 last amended Dec. 1, 2019. Verified current listing and text 2026-10-17. |
 | FRCP | Federal Rules of Civil Procedure | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-civil-procedure | Current official publication checked 2026-10-17; relevant Rules 4, 5, 7, 8, 10, 11, 12, 38 |
-| EXEMPLARS | Public filings in each doc-type folder's `exemplars/` directory | Source URL, filer, filing/retrieval date, and SHA-256 are recorded in each folder's `exemplars/SOURCE.md` | Public filings; visual convention only |
+| EXEMPLARS | Public filings in each doc-type folder's `usage/` directory | Source URL, filer, filing/retrieval date, and SHA-256 are recorded in each folder's `usage/SOURCE.md` | Public filings; visual convention only |
 
 Kinds: **M** = mandatory; **C** = convention; **T** = repository contract; **A** = filer responsibility. Local rules supplement the FRCP.
 
@@ -30,7 +30,7 @@ Kinds: **M** = mandatory; **C** = convention; **T** = repository contract; **A**
 | ARED-CONT-002 | Claims are stated in numbered paragraphs, each limited as far as practicable to one set of circumstances; separate transactions or occurrences are placed in separate counts when clarity requires. | FRCP 10(b), official FRCP publication, verified 2026-10-17 | M |
 | ARED-CERT-002 | A party demanding a jury must serve and file the demand no later than 14 days after the last pleading directed to the issue; it may be included in the complaint. | FRCP 38(b)(1)-(2), official FRCP publication, verified 2026-10-17 | M (if demanding a jury) |
 | ARED-ELEC-002 | A represented party may file a case-initiating complaint on paper under the case-initiation exception; self-represented filers generally submit paper unless ordered to e-file. | E.D. Ark. LR 5.1, EDA-LR p. 4, verified 2026-10-17 | M |
-| ARED-CONT-003 | Caption, heading, paragraph, and signature-block styling follow the complaint exemplars where the rules leave a choice. | `complaint/exemplars/SOURCE.md`, retrieved 2026-10-14 | C |
+| ARED-CONT-003 | Caption, heading, paragraph, and signature-block styling follow the complaint exemplars where the rules leave a choice. | `complaint/usage/SOURCE.md`, retrieved 2026-10-14 | C |
 
 The original and two copies requirement in E.D. Ark. LR 5.5(a), and the JS-44 civil cover sheet under LR 5.5(d), concern paper filing and/or separate accompanying papers. The complaint template does not generate those extra copies or the separate cover sheet.
 
@@ -43,7 +43,7 @@ The original and two copies requirement in E.D. Ark. LR 5.5(a), and the JS-44 ci
 | ARED-CONT-006 | A written motion states with particularity the grounds for seeking the order. | FRCP 7(b)(1)(B), official FRCP publication, verified 2026-10-17 | M |
 | ARED-CONT-007 | A motion to dismiss may assert the defenses listed in FRCP 12(b), including failure to state a claim under 12(b)(6). | FRCP 12(b)(6), official FRCP publication, verified 2026-10-17 | M |
 | ARED-CONT-008 | Local Rule 7.2 sets no page or word limit for the supporting brief; an assigned judge may set additional requirements. | E.D. Ark. LR 7.2(a), EDA-LR pp. 10-11, verified 2026-10-17 | M |
-| ARED-CONT-009 | Heading hierarchy, citation layout, and signature-block placement follow the motion-brief exemplar where the rules leave a choice. | `motion-brief/exemplars/SOURCE.md`, retrieved 2026-10-14 | C |
+| ARED-CONT-009 | Heading hierarchy, citation layout, and signature-block placement follow the motion-brief exemplar where the rules leave a choice. | `motion-brief/usage/SOURCE.md`, retrieved 2026-10-14 | C |
 | ARED-CERT-003 | A separate certificate of service is not required when service is made through the court's electronic filing system. | FRCP 5(d)(1)(B), official FRCP publication, verified 2026-10-17 | M |
 
 ## Author responsibilities

@@ -1,13 +1,13 @@
 # 11th Circuit: appellant's opening brief
 
-Doc-type folder for the Eleventh Circuit, `opening-brief` (one self-contained folder per doc type). Court-root `typst/` and `samples/` are not used here.
+Doc-type folder for the Eleventh Circuit, `opening-brief` (one self-contained folder per doc type). Court-root `typst/` and `usage/` are not used here.
 
 | Item | Status |
 |---|---|
-| Exemplar | yes: `exemplars/FILED-EXAMPLE-hill-v-clayton-county-23-12884-opening-brief.pdf` (see `exemplars/SOURCE.md`) |
-| Sample markdown | `samples/INPUT-hill-opening-brief.md`, a partial transcription of the exemplar (cover, CIP, oral argument, jurisdiction, issues, case, argument II.A/II.B, conclusion, certificates) |
-| Render | ok: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief samples/INPUT-hill-opening-brief.md` gives 16 pages, no typst warnings |
-| Overlay | ok (2026-10-16): `sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/opening-brief hill-opening-brief` writes `samples/OVERLAY-hill-opening-brief.pdf` and `.txt` (16 pages paired) |
+| Exemplar | yes: `usage/SAMPLE-ca11-opening-brief-hillvclaytoncounty2312884.pdf` (see `usage/SOURCE.md`) |
+| Sample markdown | `usage/INPUT-ca11-opening-brief-hill.md`, a partial transcription of the exemplar (cover, CIP, oral argument, jurisdiction, issues, case, argument II.A/II.B, conclusion, certificates) |
+| Render | ok: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief usage/INPUT-ca11-opening-brief-hill.md` gives 16 pages, no typst warnings |
+| Overlay | ok (2026-10-16): `sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/opening-brief hill-opening-brief` writes `usage/OVERLAY-hill-opening-brief.pdf` and `.txt` (16 pages paired) |
 | Typeface | face required: none named (FRAP 32(a)(5)(A)); no substitute; EB Garamond kept |
 | Pages reviewed | 16 of 16 re-rendered 2026-10-16 and viewed one by one at 60 dpi (see "Verification pass 2026-10-16") |
 | Tier 1 gates | not built (no `checks.yaml` for this doc type); the form rules below are implemented in the template and checked by review only |
@@ -54,7 +54,7 @@ Not verified: the full text of 11th Cir. R. 26.1-1 (the CIP form is at https://w
 
 The body: `#` sections (Statement Regarding Adoption, Jurisdictional Statement, Statement of the Issues, Statement of the Case, Summary of the Argument, Argument, Conclusion). Under Argument, `##` is a centered point heading (I., II.), `###` is A., `####` is 1. Elsewhere `##` is A., `###` is 1. Cite an authority as `[*Case v. Case*, cite](toa:KEY)`; `toa*:KEY` marks a primary citation.
 
-## Overlay (`samples/OVERLAY-hill-opening-brief.txt`)
+## Overlay (`usage/OVERLAY-hill-opening-brief.txt`)
 
 The overlay pairs each of our pages with the filed page sharing the most words. Pages 1-5 (cover, CIP, oral argument, TOC) pair with the same-numbered exemplar pages, with 58-86% word overlap; pages 6-7 (the rest of the TOC) pair with exemplar pages 5-6 at 31-33%. Body pages (ours 9-16) pair with exemplar pages 15-43 at 32-77% overlap, because the sample is a partial transcription that starts at the Jurisdictional Statement. Overlay page 8 (our TOA) pairs with exemplar page 2 at 1.4%; that is a pairing artifact, because the Table of Citations has no counterpart in the exemplar's first pages, not a content match. The overlay is a diagnostic, not a score.
 
@@ -92,32 +92,32 @@ Defects found during review and fixed in this pass: the signature block stood al
 4. **CIP placement.** 11th Cir. R. 26.1-1 may require the CIP to be filed separately (through the web-based form) rather than inside the brief. The exemplar includes it inside the brief as C-1; the template follows the exemplar. Confirm.
 5. **Primary-citation asterisks** (11th Cir. R. 28-1(d)) are implemented as a `toa*:` marker, with the asterisk on the page. The rule does not say exactly where the asterisk goes; the template puts it next to the page number in the Table of Citations.
 6. **Transcription.** The sample is a partial transcription. The minor child's name in the settlement agreement quotation is replaced with "[minor child name redacted]". The exemplar has apparent citation errors (Hayes v. Nat'l Serv. Indus. dated 1990; Mass. Cas. v. Forman dated 1994 in one place), which are copied as written and not corrected.
-7. **Exemplar count.** One exemplar only (Hill). `exemplars/SOURCE.md` lists two other RECAP briefs found by search (Lozman, No. 24-11477; Popoca, No. 22-10994). Tier 2 says two or three exemplars from different filers; a second one is needed before tier 2 can pass.
+7. **Exemplar count.** One exemplar only (Hill). `usage/SOURCE.md` lists two other RECAP briefs found by search (Lozman, No. 24-11477; Popoca, No. 22-10994). Tier 2 says two or three exemplars from different filers; a second one is needed before tier 2 can pass.
 8. **Clearinghouse** listings (e.g. doc 74063) returned an error page from this environment.
 9. **Not implemented:** addenda, a required-section ordering check, and the Standard-of-Review heading check that ca9 has.
 10. **Length.** 16 rendered pages against a target of 8-14. The extra pages are the double-spaced TOC and TOA (2 + 2 pages) and the CIP (2 pages), all required by the rules or the exemplar. Trimming the body further would cut the argument down to a stub.
 
 ## Verification pass 2026-10-16 (fb-595.26.11)
 
-- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief samples/INPUT-hill-opening-brief.md` exits 0, no typst warnings, 16 pages (the committed PDF also had 16). Fonts embedded: EB Garamond Regular, Italic, Bold only.
+- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief usage/INPUT-ca11-opening-brief-hill.md` exits 0, no typst warnings, 16 pages (the committed PDF also had 16). Fonts embedded: EB Garamond Regular, Italic, Bold only.
 - Viewed: all 16 pages at 60 dpi, before and after the fix; the exemplar's page 1 against our cover; the 16 overlay pages at 40 dpi.
-- Overlay: rerun; `samples/OVERLAY-hill-opening-brief.pdf` and `.txt` rewritten. Pages 1-5 pair with exemplar pages 1-5 (58-86%); page 8 (the short Rules page of the TOA) still pairs at 1.4%, a pairing artifact.
+- Overlay: rerun; `usage/OVERLAY-hill-opening-brief.pdf` and `.txt` rewritten. Pages 1-5 pair with exemplar pages 1-5 (58-86%); page 8 (the short Rules page of the TOA) still pairs at 1.4%, a pairing artifact.
 - Defect fixed (tier 2): body paragraphs had no first-line indent, so with double spacing a new paragraph could not be told from a continued one (exemplar and convention indent them). Cause: the `set par(first-line-indent: 0pt)` for the oral-argument statement was not scoped and carried into the body. It is now scoped; body paragraphs indent 0.5 in, and the oral-argument statement indents too. Page count unchanged; the Standard of Review paragraph now ends on page 3 and the TOA page for *Managed Care* moved from 2 to 3, as the TOA shows.
 - Remaining gaps: a citation line that follows a block quote is a new markdown paragraph, so it is indented (the exemplar sets it flush left); tier 3, left. The rest of "Known gaps" stands (no `checks.yaml`, one exemplar, CIP placement, asterisk position).
-- latex: `sh tools/render.sh --engine latex ...` rebuilt `OUTPUT-hill-opening-brief.latex.pdf` (exit 0, 16 pages); its pages were not reviewed in this pass. docx outputs untouched (no LibreOffice on this box).
+- latex: `sh tools/render.sh --engine latex ...` rebuilt `OUTPUT-ca11-opening-brief-hill.latex.pdf` (exit 0, 16 pages); its pages were not reviewed in this pass. docx outputs untouched (no LibreOffice on this box).
 
 ## Build
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst, poppler, imagemagick, gawk, jq (micromamba, conda-forge)
-sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief samples/INPUT-hill-opening-brief.md
+sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief usage/INPUT-ca11-opening-brief-hill.md
 sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/opening-brief hill-opening-brief
 ```
 
 ## Engines
 
 The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
-outputs are `samples/OUTPUT-hill-opening-brief.latex.pdf`, `.docx` and `.docx.pdf`.
+outputs are `usage/OUTPUT-ca11-opening-brief-hill.latex.pdf`, `.docx` and `.docx.pdf`.
 
 - **latex** (`latex/template.tex`, `latex/ca11.lua`, `latex/render.sh`). Matches: EB Garamond 14 pt from `fonts/`,
   double spacing, one-inch margins, the cover, the C-1 and C-2 pages of the certificate of interested persons,

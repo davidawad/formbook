@@ -2,15 +2,15 @@
 
 Complete doc-type folder: template, two samples from two filers, two exemplars, renders, overlays. Court-level README: [../README.md](../README.md).
 
-The two exemplars are different kinds of contested-matter paper from different filers: a numbered objection with argument (Ziegler, objecting creditors) and a motion with a negative-notice legend and a memorandum of points and authorities (Redline, the debtor). Provenance in `exemplars/SOURCE.md`.
+The two exemplars are different kinds of contested-matter paper from different filers: a numbered objection with argument (Ziegler, objecting creditors) and a motion with a negative-notice legend and a memorandum of points and authorities (Redline, the debtor). Provenance in `usage/SOURCE.md`.
 
 ## Layout
 
 - `typst/main.typ` entrypoint; `typst/idb-motion-brief.typ` template (parameters at the top, each cited to the rule or the convention it follows).
-- `samples/INPUT-ziegler-motion-brief.md` and `samples/INPUT-redline-motion-brief.md` transcribed samples.
-- `samples/OUTPUT-<id>.pdf` our renders (ziegler 9 pages, redline 6 pages), from `sh tools/render.sh <this-dir> samples/INPUT-<id>.md`.
-- `samples/OVERLAY-<id>.pdf` and `.txt`, from `sh tools/overlay.sh <this-dir> <id> exemplars/FILED-EXAMPLE-...pdf`. The exemplar is passed explicitly: with no third argument `overlay.sh` takes the first exemplar in `ls` order (redline), which is the wrong one for the ziegler sample.
-- `exemplars/FILED-EXAMPLE-ziegler-20-40042-motion-brief.pdf` (9 pages) and `exemplars/FILED-EXAMPLE-redline-24-00388-motion-brief.pdf` (17 pages; the motion is pages 1-7).
+- `usage/INPUT-idb-motion-brief-ziegler.md` and `usage/INPUT-idb-motion-brief-redline.md` transcribed samples.
+- `usage/OUTPUT-<id>.pdf` our renders (ziegler 9 pages, redline 6 pages), from `sh tools/render.sh <this-dir> usage/INPUT-<id>.md`.
+- `usage/OVERLAY-<id>.pdf` and `.txt`, from `sh tools/overlay.sh <this-dir> <id> usage/SAMPLE-...pdf`. The exemplar is passed explicitly: with no third argument `overlay.sh` takes the first exemplar in `ls` order (redline), which is the wrong one for the ziegler sample.
+- `usage/SAMPLE-idb-motion-brief-ziegler2040042.pdf` (9 pages) and `usage/SAMPLE-idb-motion-brief-redline2400388.pdf` (17 pages; the motion is pages 1-7).
 
 ## Markdown contract
 
@@ -53,7 +53,7 @@ Placement: the dated line and signature follow the body and come before `# CERTI
 
 Red is our render, blue the filed exemplar, black where they agree. Pages are paired by word overlap (`.txt`).
 
-`samples/OVERLAY-ziegler-motion-brief.pdf`:
+`usage/OVERLAY-ziegler-motion-brief.pdf`:
 
 | our page | filed page | word overlap |
 |---|---|---|
@@ -69,7 +69,7 @@ Red is our render, blue the filed exemplar, black where they agree. Pages are pa
 
 Both are 9 pages. Pages 1-3 run in step (counsel block, caption, title, paragraphs 1-4, footnote 1 at the foot of page 3 in the filed brief; ours puts the footnote at the foot of page 3, where its reference falls). From page 4 ours runs ahead by a fraction of a page (EB Garamond 13 pt against Times New Roman 12 pt), so page 7 pairs with filed 8. Ours closes like the filed brief: WHEREFORE, the dated line and firm block, then the certificate of service (our 8-9, filed 9).
 
-`samples/OVERLAY-redline-motion-brief.pdf`:
+`usage/OVERLAY-redline-motion-brief.pdf`:
 
 | our page | filed page | word overlap |
 |---|---|---|
@@ -110,10 +110,10 @@ No OPEN tier-2 rows.
 ## Remaining gaps
 
 - The redline sample renders 6 pages, under the 8 to 14 aimed for: the filed motion itself is 7 pages, and its exhibits (a proposed order with its own caption, a settlement agreement) are separate papers the template does not set.
-- The redline exemplar's source URL was not recorded when the file was committed (see `exemplars/SOURCE.md`).
+- The redline exemplar's source URL was not recorded when the file was committed (see `usage/SOURCE.md`).
 - Case names: Ziegler has no italics in its text layer, so that sample has none; the redline sample italicizes case names as filed.
 - No `rules.md` or `checks.yaml` in this folder, so `tools/check.sh` gates have not been run here.
-- The docx engine (`docx/`) was not touched in this pass and still follows the earlier contract: it letters `- ` items, has no `[^id]` footnotes, no `: ` paragraphs, no `notice`, `judge`, `by`, `lines_below` or `service_signature`, and puts the signature at the end. `samples/OUTPUT-ziegler-motion-brief.docx` is from the earlier sample. The latex engine has no folder for this doc type.
+- The docx engine (`docx/`) was not touched in this pass and still follows the earlier contract: it letters `- ` items, has no `[^id]` footnotes, no `: ` paragraphs, no `notice`, `judge`, `by`, `lines_below` or `service_signature`, and puts the signature at the end. `usage/OUTPUT-idb-motion-brief-ziegler.docx` is from the earlier sample. The latex engine has no folder for this doc type.
 
 ## Engines
 

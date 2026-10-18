@@ -5,11 +5,11 @@ Folder: `courts/third-circuit/new-jersey/federal/bankruptcy-district/motion-brie
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-cushing-26-01099-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`). Its pages 1 and 2 are a notice of motion, not a brief; the brief runs on pages 3 to 13 |
-| sample md | `samples/INPUT-cushing-motion-brief.md` (excerpt of the combined response and motion: caption, preliminary statement, facts, legal standard, res judicata, Rooker-Feldman, conclusion, signature; see Known gaps) |
+| exemplar | yes: `usage/SAMPLE-njb-motion-brief-cushing2601099.pdf` (1 filer; see `usage/SOURCE.md`). Its pages 1 and 2 are a notice of motion, not a brief; the brief runs on pages 3 to 13 |
+| sample md | `usage/INPUT-njb-motion-brief-cushing.md` (excerpt of the combined response and motion: caption, preliminary statement, facts, legal standard, res judicata, Rooker-Feldman, conclusion, signature; see Known gaps) |
 | typeface | face required: none. Substitute: none needed; EB Garamond (`docs/FONTS.md`, "No face named"). Metric: n/a. Checked 2026-10-15 against the D.N.J. Local Bankruptcy Rules package (as posted, 2025): no typeface or point-size text in it, and LBR 1001-1's 2015 comment says an unincorporated Local Civil Rule does not apply. Judges' preferences (Judges' Info tab) were not checked. |
-| render | ok: `samples/OUTPUT-cushing-motion-brief.pdf`, 8 pages, typst 0.15.0, embedded fonts EB Garamond only (`pdffonts`), no warnings (re-rendered 2026-10-15) |
-| overlay | ok: `samples/OVERLAY-cushing-motion-brief.pdf` and `OVERLAY-cushing-motion-brief.txt` (re-run 2026-10-15) |
+| render | ok: `usage/OUTPUT-njb-motion-brief-cushing.typst.pdf`, 8 pages, typst 0.15.0, embedded fonts EB Garamond only (`pdffonts`), no warnings (re-rendered 2026-10-15) |
+| overlay | ok: `usage/OVERLAY-cushing-motion-brief.pdf` and `OVERLAY-cushing-motion-brief.txt` (re-run 2026-10-15) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed on 2026-10-15; the only later edit is a comment in the template, and the text of the render is unchanged) |
 
 File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `OVERLAY-<id>.pdf/.txt`. The sample is `INPUT-<id>.md`.
@@ -55,7 +55,7 @@ Not produced by this template: the notice of motion (LBR 9013-1(a)(1)), certific
 8. **No table of contents.** The template does not generate one. The exemplar's combined pleading has none. Whether the court's judges expect one for a longer brief is a question for the judges' preferences (LBR 1001-1 comment), not a rule.
 9. **Check scripts not run.** As for the adversary complaint: `tools/check.sh` is not run for this doc-type shape and the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent.
 
-## Review of the rendered pages (OUTPUT-cushing-motion-brief.pdf, 8 pages)
+## Review of the rendered pages (OUTPUT-njb-motion-brief-cushing.typst.pdf, 8 pages)
 
 - Page 1: counsel block, court name, the LBR 9004-1 caption note, the debtor block (case number, chapter 13, judge, hearing date), the adversary block, the bold title and the lead-in. Nothing spills. Pass.
 - Page 2: PRELIMINARY STATEMENT and the first paragraphs of STATEMENT OF FACTS. Pass.
@@ -74,4 +74,4 @@ Overlay (`OVERLAY-cushing-motion-brief.txt`): page 1 pairs with the exemplar's p
 - **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/njb.lua`): pandoc on `reference.docx`. Matches the typst template: EB Garamond 14 pt, exact 25.2 pt line pitch and 9.8 pt paragraph gap (both measured on the typst output, not on a filed PDF), 0.5 in first-line indent on body paragraphs, 1 in margins on letter paper, 12 pt centered page number in the footer, bold centered 13 pt capital level-1 headings, bold 14 pt level-2 and bold italic level-3 headings, the caption (counsel block, court name, LBR 9004-1 note, caption tables with the right and bottom rules including the hearing line, bold title), the body directly after the title, bracketed notes centered and italic, signature block in a borderless table. Paragraphs are not numbered, as in the typst template.
 - Differs from typst: cover and signature text is plain (italics in the frontmatter are dropped there); caption and signature rules are Word table borders, which Word and LibreOffice draw slightly differently; line breaks and page numbers may differ in Word from the typst pages.
 - Not built on the docx: no TOC or TOA (none in this template); footnotes are not used by the template.
-- BLOCKED: LibreOffice (`soffice`) is not installed in the build box, so `samples/OUTPUT-cushing-motion-brief.docx.pdf` cannot be produced, and the Gate 0 CONTENT, Gate 1 RULES, Gate 2 VISUAL REVIEW and Gate 3 GENERALIZATION checks cannot be run on it. No `checks.yaml` exists for `njb` yet, so there are no check IDs to list. Reason for every item: LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked. The `.docx` passes the zip and XML well-formedness checks; it has not been rendered or viewed.
+- BLOCKED: LibreOffice (`soffice`) is not installed in the build box, so `usage/OUTPUT-cushing-motion-brief.docx.pdf` cannot be produced, and the Gate 0 CONTENT, Gate 1 RULES, Gate 2 VISUAL REVIEW and Gate 3 GENERALIZATION checks cannot be run on it. No `checks.yaml` exists for `njb` yet, so there are no check IDs to list. Reason for every item: LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked. The `.docx` passes the zip and XML well-formedness checks; it has not been rendered or viewed.

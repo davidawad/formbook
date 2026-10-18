@@ -1,6 +1,6 @@
 // Motion with memorandum (brief), United States Bankruptcy Court, N.D. Iowa.
 // Governing rules and the reading of each: ../README.md. Entry point: main.typ.
-// The markdown body (samples/<id>.md) is rendered by cmarker; the metadata comes from the
+// The markdown body (usage/<id>.md) is rendered by cmarker; the metadata comes from the
 // YAML frontmatter of the same file (fields listed in ../README.md).
 #import "@preview/cmarker:0.1.10"
 

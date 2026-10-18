@@ -2,7 +2,7 @@
 
 Doc type: **brief in support of a motion** (here, a brief supporting a motion to dismiss an adversary complaint, the case L.R. 9013-5(A) names). Court: United States Bankruptcy Court for the Southern District of Illinois (ilsb). Folder: `courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief/`.
 
-Status: exemplar=yes (one filed exemplar, Gargula v. Deighan Law LLC, Adv. 20-06018, Doc 15-1, a memorandum in support of a motion; see `exemplars/SOURCE.md`), render=ok (`samples/OUTPUT-gargula-motion-brief.pdf`, 10 pages), overlay=ok (`samples/OVERLAY-gargula-motion-brief.pdf`, `.txt` page map), pages reviewed 10 of 10 (every page rendered at 70 dpi and looked at). Open: a second filer for the tier-2 comparison (see `exemplars/SOURCE.md`). No `court.json` status is set here; nothing in this folder sets `status`.
+Status: exemplar=yes (one filed exemplar, Gargula v. Deighan Law LLC, Adv. 20-06018, Doc 15-1, a memorandum in support of a motion; see `usage/SOURCE.md`), render=ok (`usage/OUTPUT-ilsb-motion-brief-gargula.typst.pdf`, 10 pages), overlay=ok (`usage/OVERLAY-gargula-motion-brief.pdf`, `.txt` page map), pages reviewed 10 of 10 (every page rendered at 70 dpi and looked at). Open: a second filer for the tier-2 comparison (see `usage/SOURCE.md`). No `court.json` status is set here; nothing in this folder sets `status`.
 
 ## Governing rules
 
@@ -26,13 +26,13 @@ Not generated, on purpose: the motion itself (a separate document); a proposed o
 
 ## Exemplar
 
-**One filed exemplar:** `exemplars/FILED-EXAMPLE-gargula-deighan-20-06018-motion-brief.pdf`, the memorandum in support of the defendants' motion to withdraw the reference (Adv. 20-06018, Doc 15-1, filed 04/12/21), from CourtListener RECAP. It is a brief supporting a motion, the doc type here. Its caption is not on the attachment's first page; the sample's caption is copied from the same adversary's Doc 18. The filing has no certificate of service. Full provenance, the searches and the gaps are in `exemplars/SOURCE.md`.
+**One filed exemplar:** `usage/SAMPLE-ilsb-motion-brief-garguladeighan2006018.pdf`, the memorandum in support of the defendants' motion to withdraw the reference (Adv. 20-06018, Doc 15-1, filed 04/12/21), from CourtListener RECAP. It is a brief supporting a motion, the doc type here. Its caption is not on the attachment's first page; the sample's caption is copied from the same adversary's Doc 18. The filing has no certificate of service. Full provenance, the searches and the gaps are in `usage/SOURCE.md`.
 
-Tier 2 wants two or three filers; one is saved. The second candidate (Naumann, 09-32092, Doc 35, a brief supporting an objection to confirmation) is in `exemplars/SOURCE.md`, not saved.
+Tier 2 wants two or three filers; one is saved. The second candidate (Naumann, 09-32092, Doc 35, a brief supporting an objection to confirmation) is in `usage/SOURCE.md`, not saved.
 
 ## Sample
 
-- `samples/INPUT-gargula-motion-brief.md` is a **transcription** of the filed exemplar: pages 1 to 10 (through Argument V.A.3), then the Conclusion and signature (pages 19 and 20). The middle of the filing (V.A.4 to V.C) is omitted, and the sample says so in a visible note. Caption fields are from the same adversary's Doc 18 (see `exemplars/SOURCE.md`). The earlier fictional sample (`INPUT-generic-motion-brief.md`) was removed.
+- `usage/INPUT-ilsb-motion-brief-gargula.md` is a **transcription** of the filed exemplar: pages 1 to 10 (through Argument V.A.3), then the Conclusion and signature (pages 19 and 20). The middle of the filing (V.A.4 to V.C) is omitted, and the sample says so in a visible note. Caption fields are from the same adversary's Doc 18 (see `usage/SOURCE.md`). The earlier fictional sample (`INPUT-generic-motion-brief.md`) was removed.
 - Frontmatter fields: `title`, `division`, `debtors`, `debtor_designation`, `bankruptcy_case_no`, `chapter`, `adversary_no`, `caption.parties`, `date`, `signature` (`party`, `signer`, `signer_title`, `attorney`), `service` (`statement`, `parties`, `signature`).
 - Body markdown: `# Heading` centered bold capitals; `## Heading` centered bold; `### Heading` bold, left. The author types any numbering (I., A., 1.). Paragraphs are not numbered and have a first-line indent. `> text` is a single-spaced block quotation. `- item` is a bullet list. `text[^key]` and `[^key]: text` make a footnote.
 
@@ -40,15 +40,15 @@ Tier 2 wants two or three filers; one is saved. The second candidate (Naumann, 0
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief samples/INPUT-gargula-motion-brief.md
+sh tools/render.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief usage/INPUT-ilsb-motion-brief-gargula.md
 sh tools/overlay.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/motion-brief gargula-motion-brief
 ```
 
 - `typst/main.typ` is the entry point; `typst/ilsb-motion-brief.typ` is the template (EB Garamond, vendored; `--ignore-system-fonts`; any typst warning fails). The render compiled with no warnings.
-- `samples/OUTPUT-gargula-motion-brief.pdf`: 10 pages. The overlay pairs sample pages 1 to 9 with filed pages 1 to 9 and sample page 10 with filed page 19 (word overlap 56% to 86%; 31% for page 10, where the filed conclusion follows omitted text).
-- `samples/OVERLAY-gargula-motion-brief.pdf` (red = render, blue = filed exemplar, black = both) and `OVERLAY-gargula-motion-brief.txt` (page map).
+- `usage/OUTPUT-ilsb-motion-brief-gargula.typst.pdf`: 10 pages. The overlay pairs sample pages 1 to 9 with filed pages 1 to 9 and sample page 10 with filed page 19 (word overlap 56% to 86%; 31% for page 10, where the filed conclusion follows omitted text).
+- `usage/OVERLAY-gargula-motion-brief.pdf` (red = render, blue = filed exemplar, black = both) and `OVERLAY-gargula-motion-brief.txt` (page map).
 
-Naming: `tools/render.sh` writes `samples/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `samples/OVERLAY-<id>.pdf` and `.txt` (the repo's tool names). The tools were not edited.
+Naming: `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `.txt` (the repo's tool names). The tools were not edited.
 
 ## Visual review (Gate 2: every page rendered at 70 dpi and looked at)
 
@@ -71,7 +71,7 @@ Reviewed pages: 10 of 10.
 
 ## Known gaps and open choices
 
-1. **One exemplar, not two.** Tier 2 (a clerk's conventions, judged against two or three filers) needs a second filer; see `exemplars/SOURCE.md` for the candidate not saved. The caption of the exemplar is not in the filing (copied from the same adversary's Doc 18). The filing has no certificate of service, so the sample does not test that block.
+1. **One exemplar, not two.** Tier 2 (a clerk's conventions, judged against two or three filers) needs a second filer; see `usage/SOURCE.md` for the candidate not saved. The caption of the exemplar is not in the filing (copied from the same adversary's Doc 18). The filing has no certificate of service, so the sample does not test that block.
 2. **Typeface, type size, margins.** No S.D. Ill. rule names them. EB Garamond 12 pt, 1-inch margins and double spacing are style choices, the same as the adversary complaint folder.
 3. **20-page limit (L.R. 9013-5(F)).** Not counted. The author must check the length, excluding the signature page and attachments.
 4. **Citations (L.R. 9013-5(D)).** The rule requires citations to the authorities relied on. The template does not check them. Authorities are the author's.
@@ -86,5 +86,5 @@ Reviewed pages: 10 of 10.
 - **typst** (primary, `typst/`): the reference for the form.
 - **latex** (`latex/`): see `latex/`; not changed by this section.
 - **docx** (`docx/reference.docx`, `docx/ilsb.lua`, `docx/build-reference.sh`): pandoc on reference.docx, EB Garamond 12 pt, exact 24 pt body line pitch, 0.5 in first-line indent, 1 in margins, letter, "Page x of y" footer (PAGE and NUMPAGES fields). `ilsb.lua` lays out the caption (a table with a right and a bottom rule), court title, title, the body as written (headings, paragraphs, block quotations as single-spaced indented blocks, bullets, footnotes), the signature table with the attorney block in the signature column, and the certificate of service when the frontmatter has `service`. Every case word comes from the frontmatter. Matches the typst form in: font and size, body pitch, margins, indent, heading styles (centered bold capitals, centered bold, bold), page-number footer, page order. Differs or is unverified: the single-spacing gaps and the caption and signature table spacing are approximate (Word table and style metrics, not measured against typst); footnote text is 12 pt single-spaced (typst's footnote size was not checked); the sample has no certificate of service, so that path is untested.
-- docx checks: `samples/OUTPUT-gargula-motion-brief.docx` was written and validated (zip test and well-formed XML in every part). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `samples/OUTPUT-gargula-motion-brief.docx.pdf` was not produced and the docx Gate 0 to 3 checks (`tools/check.sh --engine docx`) cannot run. No page was rendered or reviewed (pages reviewed 0). The `.docx` has not been opened in Word or LibreOffice.
+- docx checks: `usage/OUTPUT-ilsb-motion-brief-gargula.docx` was written and validated (zip test and well-formed XML in every part). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `usage/OUTPUT-gargula-motion-brief.docx.pdf` was not produced and the docx Gate 0 to 3 checks (`tools/check.sh --engine docx`) cannot run. No page was rendered or reviewed (pages reviewed 0). The `.docx` has not been opened in Word or LibreOffice.
 - Blocked or unverified docx items: the docx.pdf render and page review (blocked on soffice); cover and caption table borders not verified against the typst layout; the page count and page breaks in Word may differ from typst.

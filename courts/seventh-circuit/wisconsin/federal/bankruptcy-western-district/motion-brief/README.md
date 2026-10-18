@@ -7,9 +7,9 @@ Status: exemplar=yes (one filer), render=ok (19 pages, typst 0.15.0, no warnings
 ## What is here
 
 - **Template**: `typst/main.typ` (entry) and `typst/wiwb-motion-brief.typ` (layout). No case-specific text: every name, number, title and date comes from the sample's frontmatter.
-- **Exemplar**: `exemplars/FILED-EXAMPLE-johnson-18-10327-motion-brief.pdf`, Hiawatha National Bank's Post-Trial Memorandum of Law in Support of its Motion to Dismiss, *In re Johnson*, No. 18-10327-12, filed by Eckberg Lammers, P.C. (Amanda K. Schlitz), March 16, 2018. 19 pages, Times New Roman, text layer. Details and provenance in `exemplars/SOURCE.md`.
-- **Sample**: `samples/INPUT-hiawatha-memorandum.md` is a **full transcription of that exemplar** (all 19 pages): court name, short-title caption, designation, opening paragraph, JURISDICTION AND VENUE, BACKGROUND (paragraphs 1-27), ARGUMENT with subheadings A-G, five block quotations (ten paragraphs), a five-item bulleted list, both footnotes, CONCLUSION, and the signature block. Compared word by word with `pdftotext` of the exemplar: no missing text. The exemplar has no certificate of service, notice of hearing or proposed order, so the sample has none. The id `hiawatha-memorandum` is kept (it already names this filing, and the docx engine's `OUTPUT-hiawatha-memorandum.docx` uses it).
-- **Outputs**: `samples/OUTPUT-hiawatha-memorandum.pdf`, `samples/OVERLAY-hiawatha-memorandum.pdf` and `.txt`. The stale `samples/OUTPUT-constructed-motion-brief.pdf` (no matching input) was removed in this pass.
+- **Exemplar**: `usage/SAMPLE-wiwb-motion-brief-johnson1810327.pdf`, Hiawatha National Bank's Post-Trial Memorandum of Law in Support of its Motion to Dismiss, *In re Johnson*, No. 18-10327-12, filed by Eckberg Lammers, P.C. (Amanda K. Schlitz), March 16, 2018. 19 pages, Times New Roman, text layer. Details and provenance in `usage/SOURCE.md`.
+- **Sample**: `usage/INPUT-wiwb-motion-brief-hiawathamemorandum.md` is a **full transcription of that exemplar** (all 19 pages): court name, short-title caption, designation, opening paragraph, JURISDICTION AND VENUE, BACKGROUND (paragraphs 1-27), ARGUMENT with subheadings A-G, five block quotations (ten paragraphs), a five-item bulleted list, both footnotes, CONCLUSION, and the signature block. Compared word by word with `pdftotext` of the exemplar: no missing text. The exemplar has no certificate of service, notice of hearing or proposed order, so the sample has none. The id `hiawatha-memorandum` is kept (it already names this filing, and the docx engine's `OUTPUT-wiwb-motion-brief-hiawathamemorandum.docx` uses it).
+- **Outputs**: `usage/OUTPUT-wiwb-motion-brief-hiawathamemorandum.typst.pdf`, `usage/OVERLAY-hiawatha-memorandum.pdf` and `.txt`. The stale `usage/OUTPUT-constructed-motion-brief.pdf` (no matching input) was removed in this pass.
 
 ## Governing rules
 
@@ -47,12 +47,12 @@ Federal rule text was read on the Legal Information Institute pages (https://www
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/motion-brief samples/INPUT-hiawatha-memorandum.md
+sh tools/render.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/motion-brief usage/INPUT-wiwb-motion-brief-hiawathamemorandum.md
 sh tools/overlay.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/motion-brief hiawatha-memorandum
 ```
 
-- `samples/OUTPUT-hiawatha-memorandum.pdf`: 19 pages (the exemplar is 19). Typst compiled with no warnings. `pdffonts`: EBGaramond-Regular, -Bold, -Italic only, all embedded.
-- `samples/OVERLAY-hiawatha-memorandum.pdf` / `.txt`: ours red, filed blue. Page map (word overlap, a diagnostic, not a score): every page pairs with the same filed page, 1→1 through 19→19. Overlap 74% (p.1), 80% (p.2), 91-93% (p.3-4), 72-82% (p.5-7), 46-67% (p.8-14, where our pages run about one paragraph behind), 80% (p.15), 85-96% (p.16-19). Before this pass the map skipped filed pages 9 and 12 and the signature stood alone on page 19.
+- `usage/OUTPUT-wiwb-motion-brief-hiawathamemorandum.typst.pdf`: 19 pages (the exemplar is 19). Typst compiled with no warnings. `pdffonts`: EBGaramond-Regular, -Bold, -Italic only, all embedded.
+- `usage/OVERLAY-hiawatha-memorandum.pdf` / `.txt`: ours red, filed blue. Page map (word overlap, a diagnostic, not a score): every page pairs with the same filed page, 1→1 through 19→19. Overlap 74% (p.1), 80% (p.2), 91-93% (p.3-4), 72-82% (p.5-7), 46-67% (p.8-14, where our pages run about one paragraph behind), 80% (p.15), 85-96% (p.16-19). Before this pass the map skipped filed pages 9 and 12 and the signature stood alone on page 19.
 
 ## Changes in this pass (fb-595.38.3)
 
@@ -60,7 +60,7 @@ sh tools/overlay.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-western-
 2. Designation single-spaced and centred in a narrower block (it had been double-spaced across the full width).
 3. Headings single-spaced with one double-spaced line above and below (two-line level-2 headings had been double-spaced and touched the next paragraph).
 4. The last body paragraph is kept with the signature block (the signature had been alone on page 19); the date now sits on the "By:" line, as in the exemplar.
-5. Stale `OUTPUT-constructed-motion-brief.pdf` removed; README and `exemplars/SOURCE.md` corrected (they said no exemplar existed).
+5. Stale `OUTPUT-constructed-motion-brief.pdf` removed; README and `usage/SOURCE.md` corrected (they said no exemplar existed).
 
 ## Visual review (Gate 2 record, 2026-10-16)
 
@@ -91,8 +91,8 @@ Reviewed pages: 19 of 19 (OUTPUT) and 19 of 19 (OVERLAY).
 
 ## Known gaps
 
-1. **One filer.** Tier 2 asks for two or three exemplars from different filers; only one is saved. Searches are in `exemplars/SOURCE.md`.
-2. **Exemplar provenance.** The download URL and date of the exemplar were not recorded when it was harvested; see `exemplars/SOURCE.md`.
+1. **One filer.** Tier 2 asks for two or three exemplars from different filers; only one is saved. Searches are in `usage/SOURCE.md`.
+2. **Exemplar provenance.** The download URL and date of the exemplar were not recorded when it was harvested; see `usage/SOURCE.md`.
 3. **Local rule.** No current W.D. Wis. bankruptcy local rule on motion form, memoranda or page limits was found. The form choices above are conventions until one is read.
 4. **No `checks.yaml` / `rules.md`.** This doc-type folder has neither, so `tools/check.sh` cannot run here (it exits on the missing files). Adding them is outside this pass.
 5. **Not generated:** notice of motion and hearing, proposed order, certificate of service. None is in the exemplar and no local rule requiring one was found.
@@ -102,10 +102,10 @@ Reviewed pages: 19 of 19 (OUTPUT) and 19 of 19 (OVERLAY).
 
 Note (fb-595.38.3): the DOCX notes below were written against the earlier typst form. The typst caption now follows Official Form 416B (no rules, Case No. at right) and the signature is no longer alone on the last page; the docx engine was not changed in this pass and still draws the older caption.
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/wiwb.lua` lays out the cover, caption, enumerated items and signature block; body paragraphs, headings, block quotations and footnotes are pandoc's own, styled from the reference. Built with `sh tools/render.sh --engine docx <this dir> samples/INPUT-hiawatha-memorandum.md`, which writes `samples/OUTPUT-hiawatha-memorandum.docx`.
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/wiwb.lua` lays out the cover, caption, enumerated items and signature block; body paragraphs, headings, block quotations and footnotes are pandoc's own, styled from the reference. Built with `sh tools/render.sh --engine docx <this dir> usage/INPUT-wiwb-motion-brief-hiawathamemorandum.md`, which writes `usage/OUTPUT-wiwb-motion-brief-hiawathamemorandum.docx`.
 
 - **Matches the typst form (by its parameters, not seen on a page):** EB Garamond 12 pt; body at 27.6 pt exact line pitch (double spacing, as the typst leading gives); first-line indent 0.5 in; paragraphs not numbered; level-1 headings bold capitals, centred; level-2 headings bold, left, with a 0.4 in hanging indent; block quotations 0.5 in on both sides, single-spaced; footnotes 10 pt single-spaced; enumerated items with a hanging label; caption with the "In re:" block and its left and bottom rules; title centred bold; signature block in the right 3.1 in column that does not break across pages; 11 pt centred page number; letter paper, 1 in margins. The sample has no adversary caption, so no party column or adversary number is drawn, as the typst form does for it.
 - **Differs or unverified:** the enumerated items are typed labels (1., 2., ...), not Word list numbering. Block quotations and the paragraph gap after them are approximated with exact spacing, not typst's spacing rule. The caption rules are table borders. The "By: /s/" line is plain text, not a drawn line. The title and date metadata are printed once, on the cover and in the signature block. Word and LibreOffice may paginate differently; not compared.
-- **BLOCKED (docx.pdf and page review):** `soffice` is not installed on this box (no conda package, no root), so `samples/OUTPUT-hiawatha-memorandum.docx.pdf` was not produced, `tools/check.sh --engine docx` cannot run, and no page was rendered or reviewed (pages reviewed for docx: 0). The render script fails at the soffice step after writing the .docx; the .docx itself is valid (zip and every XML part well-formed).
+- **BLOCKED (docx.pdf and page review):** `soffice` is not installed on this box (no conda package, no root), so `usage/OUTPUT-hiawatha-memorandum.docx.pdf` was not produced, `tools/check.sh --engine docx` cannot run, and no page was rendered or reviewed (pages reviewed for docx: 0). The render script fails at the soffice step after writing the .docx; the .docx itself is valid (zip and every XML part well-formed).
 - **BLOCKED (not verified):** the .docx has not been opened in Word or LibreOffice; the font name "EB Garamond" is declared and must be installed to show; the signature block's placement at the foot of the last page is not checked (the typst review left it OPEN on page 19).
 - **TOC, TOA:** none, because the typst form has none; no field update is needed.

@@ -1,6 +1,6 @@
 # waeb adversary-complaint: docx review (2026-10-15)
 
-Rendered: `samples/OUTPUT-icap-adversary-complaint.docx.pdf` (17 pages, LibreOffice 26.8, EB Garamond only). Every page rasterized at 60 dpi and viewed. Typst reference pages were viewed too (`/work/artifacts/waeb/adversary-complaint/typst-icap-NN.png`).
+Rendered: `usage/OUTPUT-icap-adversary-complaint.docx.pdf` (17 pages, LibreOffice 26.8, EB Garamond only). Every page rasterized at 60 dpi and viewed. Typst reference pages were viewed too (`/work/artifacts/waeb/adversary-complaint/typst-icap-NN.png`).
 
 ## sample icap-adversary-complaint docx
 

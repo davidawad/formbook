@@ -31,13 +31,13 @@ Not used, and why: FRCP 10 (which governs complaints under FRBP 7010) does not g
 
 ## Exemplars
 
-- `exemplars/FILED-EXAMPLE-blackjewel-19-30289-doc1938-motion-brief.pdf`: 21 pages (15-page motion plus a 6-page Core/2002 service list). Doc. 1938, *In re Blackjewel, L.L.C., et al.*, Case No. 3:19-bk-30289 (Bankr. S.D. W. Va.), filed April 24, 2020 by the Official Committee of Unsecured Creditors (Whiteford, Taylor & Preston LLP). **The sample transcribes this one.** Text layer present.
-- `exemplars/FILED-EXAMPLE-blackjewel-19-30289-doc1196-motion-brief.pdf`: 10 pages (5-page emergency motion plus a 5-page proposed order). Doc. 1196, same case, filed October 7, 2019 by the debtors (Supple Law Office; Squire Patton Boggs). Used for the caption and title conventions, a second filer.
-- Provenance, caveats and the searches tried are in `exemplars/SOURCE.md`.
+- `usage/SAMPLE-wvsb-motion-brief-blackjewel1930289doc1938.pdf`: 21 pages (15-page motion plus a 6-page Core/2002 service list). Doc. 1938, *In re Blackjewel, L.L.C., et al.*, Case No. 3:19-bk-30289 (Bankr. S.D. W. Va.), filed April 24, 2020 by the Official Committee of Unsecured Creditors (Whiteford, Taylor & Preston LLP). **The sample transcribes this one.** Text layer present.
+- `usage/SAMPLE-wvsb-motion-brief-blackjewel1930289doc1196.pdf`: 10 pages (5-page emergency motion plus a 5-page proposed order). Doc. 1196, same case, filed October 7, 2019 by the debtors (Supple Law Office; Squire Patton Boggs). Used for the caption and title conventions, a second filer.
+- Provenance, caveats and the searches tried are in `usage/SOURCE.md`.
 
 ## Sample
 
-- `samples/INPUT-blackjewel-doc1938.md`: transcribed from Doc. 1938. Caption and debtors footnote, title, opening paragraph, headings (Preliminary Statement through Notice), ¶¶ 1–52, footnotes 2–4 (in the body), the WHEREFORE clause (carried in the `closing:` key so it stays with the signature), the signature blocks.
+- `usage/INPUT-wvsb-motion-brief-blackjeweldoc1938.md`: transcribed from Doc. 1938. Caption and debtors footnote, title, opening paragraph, headings (Preliminary Statement through Notice), ¶¶ 1–52, footnotes 2–4 (in the body), the WHEREFORE clause (carried in the `closing:` key so it stays with the signature), the signature blocks.
 - Certificate of service: **template-supplied, not in the exemplar.** The exemplar has none. The date and method are bracketed placeholders for counsel. The wording follows the exemplar's Notice paragraph (¶ 52).
 - The template's `closing:` key holds the WHEREFORE clause. It is set in the same unbreakable block as the signature, so the signature never stands alone on a page.
 
@@ -46,12 +46,12 @@ Not used, and why: FRCP 10 (which governs complaints under FRBP 7010) does not g
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
 D=courts/fourth-circuit/west-virginia/federal/bankruptcy-southern-district/motion-brief
-sh tools/render.sh $D samples/INPUT-blackjewel-doc1938.md   # -> samples/OUTPUT-blackjewel-doc1938.pdf
-sh tools/overlay.sh $D blackjewel-doc1938 $D/exemplars/FILED-EXAMPLE-blackjewel-19-30289-doc1938-motion-brief.pdf
+sh tools/render.sh $D usage/INPUT-wvsb-motion-brief-blackjeweldoc1938.md   # -> usage/OUTPUT-wvsb-motion-brief-blackjeweldoc1938.typst.pdf
+sh tools/overlay.sh $D blackjewel-doc1938 $D/usage/SAMPLE-blackjewel-19-30289-doc1938-motion-brief.pdf
 ```
 
-- The overlay takes the exemplar explicitly. Without the third argument it picks the first PDF in `exemplars/` (doc1196), which is the wrong exemplar for this sample.
-- `samples/OUTPUT-blackjewel-doc1938.pdf`: 14 pages (13 of motion, 1 certificate). Typst compiled with no warnings. Fonts: EBGaramond-Regular, -Bold, -Italic only (embedded).
+- The overlay takes the exemplar explicitly. Without the third argument it picks the first PDF in `usage/` (doc1196), which is the wrong exemplar for this sample.
+- `usage/OUTPUT-wvsb-motion-brief-blackjeweldoc1938.typst.pdf`: 14 pages (13 of motion, 1 certificate). Typst compiled with no warnings. Fonts: EBGaramond-Regular, -Bold, -Italic only (embedded).
 - File names follow the tools (`OUTPUT-`, `OVERLAY-`); the brief's `<id>.pdf` and `<id>-overlay.pdf` names differ.
 - Overlay pairing (ours → filed Doc. 1938): p.1–8 ↔ 1–8; p.9 ↔ 10; p.10 ↔ 11; p.11 ↔ 12; p.12 ↔ 13; p.13 ↔ 14; p.14 (certificate) ↔ 21, which is a service-list page with no counterpart (7.6%, expected). Word-overlap pairing is coarse; it is a diagnostic, not a score.
 
@@ -91,7 +91,7 @@ Pages reviewed: 14 of 14. The first version had the signature block alone on pag
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; filter `wvsb-motion-brief.lua`; measured on the LibreOffice PDF, `samples/OUTPUT-blackjewel-doc1938.docx.pdf`, 15 pages; see `docs/DOCX.md`).
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; filter `wvsb-motion-brief.lua`; measured on the LibreOffice PDF, `usage/OUTPUT-wvsb-motion-brief-blackjeweldoc1938.docx.pdf`, 15 pages; see `docs/DOCX.md`).
 
 - Matches the typst form: EB Garamond 13 pt (the PDF embeds EBGaramond-Regular, -Bold, -Italic only); letter paper; 1 in margins; body double-spaced at an exact 24 pt pitch with a 0.5 in first-line indent; caption, counsel blocks, footnotes and headings single-spaced at an exact 17 pt pitch; level 1 headings centred in capitals; levels 2 to 4 labelled "A.", "1.", "a." by the filter, hanging at the margin; the WHEREFORE clause kept with the signature; the certificate of service on a new page; page number centred in the footer at 11 pt.
 - Differs: (a) the caption rules are paragraph borders, as in the adversary complaint. (b) Heading labels and lettered or numbered items are typed text, not Word list numbering (the labels are the ones the sample gives or the typst heading scheme produces). (c) Between paragraphs the typst output has a single-line pitch (about 17 pt, `par(spacing: 0pt)`); the docx keeps 24 pt, so the docx is longer (15 pages against typst's 14). The typst template was not changed; this is for review. (d) The certificate of service is template-supplied with the bracketed placeholders from the sample.

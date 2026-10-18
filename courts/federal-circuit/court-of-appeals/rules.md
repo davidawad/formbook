@@ -18,12 +18,12 @@ Page numbers are the printed page numbers of the compilation (FCR) or of the Ele
 | F30 | Form 30, Certificate of Service (July 2020) | https://www.cafc.uscourts.gov/wp-content/uploads/RulesProceduresAndForms/Forms/form30.pdf |
 | PROP | "Rules of Practice, Proposed Amendments, July 2026, Public Clean Copy" (proposed Fed. Cir. R. 32(j); not in force) | https://www.cafc.uscourts.gov/wp-content/uploads/RulesProceduresAndForms/FederalCircuitRules/FCRProposedAmendments-PublicCleanCopy-July%202026.pdf |
 | FORMS-PAGE | Court forms page (links F9, F19, F30) | https://www.cafc.uscourts.gov/home/rules-procedures-forms/court-forms/ |
-| EX-DELFASCO | Opening brief, *Delfasco LLC v. Secretary of the Army*, No. 24-1363 (Cordatis LLP) | `opening-brief/exemplars/` |
-| EX-VIDSTREAM | Opening brief, *VidStream LLC v. Twitter, Inc.*, No. 24-2265 (Caldwell Cassady & Curry PC) | `opening-brief/exemplars/` |
-| EX-ABLYNX | Brief for Appellee Director of the USPTO, *In re Ablynx N.V.*, No. 26-1333 (USPTO Office of the Solicitor) | `answering-brief/exemplars/` |
-| EX-LIGADO | Response brief of appellee, *Ligado Networks LLC v. United States*, No. 25-1792 (Paul, Weiss; Munger, Tolles & Olson; Selendy Gay; Covington & Burling) | `answering-brief/exemplars/` |
-| EX-GEM | Reply brief, *GEM Products, LLC v. Rupp Marine, Inc.*, No. 2026-1817 (Taft Stettinius & Hollister LLP) | `reply-brief/exemplars/` |
-| EX-TOPBRAND | Reply brief, *Top Brand LLC v. Cozy Comfort Co.*, No. 2024-2191 (Jones Day) | `reply-brief/exemplars/` |
+| EX-DELFASCO | Opening brief, *Delfasco LLC v. Secretary of the Army*, No. 24-1363 (Cordatis LLP) | `opening-brief/usage/` |
+| EX-VIDSTREAM | Opening brief, *VidStream LLC v. Twitter, Inc.*, No. 24-2265 (Caldwell Cassady & Curry PC) | `opening-brief/usage/` |
+| EX-ABLYNX | Brief for Appellee Director of the USPTO, *In re Ablynx N.V.*, No. 26-1333 (USPTO Office of the Solicitor) | `answering-brief/usage/` |
+| EX-LIGADO | Response brief of appellee, *Ligado Networks LLC v. United States*, No. 25-1792 (Paul, Weiss; Munger, Tolles & Olson; Selendy Gay; Covington & Burling) | `answering-brief/usage/` |
+| EX-GEM | Reply brief, *GEM Products, LLC v. Rupp Marine, Inc.*, No. 2026-1817 (Taft Stettinius & Hollister LLP) | `reply-brief/usage/` |
+| EX-TOPBRAND | Reply brief, *Top Brand LLC v. Cozy Comfort Co.*, No. 2024-2191 (Jones Day) | `reply-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (FRAP, a Federal Circuit Rule, or the EFP adopted under Fed. Cir. R. 25(a)(4)). **C** = convention (the rules leave it open; the exemplars that show it are named). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

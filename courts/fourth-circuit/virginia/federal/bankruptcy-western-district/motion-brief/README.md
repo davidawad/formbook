@@ -2,8 +2,8 @@
 
 - Court: `vawb`, United States Bankruptcy Court for the Western District of Virginia (`courts/fourth-circuit/virginia/federal/bankruptcy-western-district/`)
 - Doc type: `motion-brief`. A motion and the memorandum in support, in one document (FRBP 9013; LR 9013-1). One self-contained folder, no shared files.
-- Exemplar: `exemplars/FILED-EXAMPLE-thomas-17-05010-motion-brief.pdf` (*Thomas v. Midland Funding, LLC*, Adv. Nos. 17-AP-05009 & 17-AP-05010, Defendants' Motion to Dismiss and Memorandum in Support, filed 2017-08-07; provenance in `exemplars/SOURCE.md`).
-- Sample: `samples/INPUT-thomas-midland-motion-to-dismiss.md`: the caption and counsel, paragraphs 1–12, the Conclusion, paragraph 26, the prayer, the signature block and the certificate of service. Paragraphs 13–25 and footnotes 2–3 are not transcribed.
+- Exemplar: `usage/SAMPLE-vawb-motion-brief-thomas1705010.pdf` (*Thomas v. Midland Funding, LLC*, Adv. Nos. 17-AP-05009 & 17-AP-05010, Defendants' Motion to Dismiss and Memorandum in Support, filed 2017-08-07; provenance in `usage/SOURCE.md`).
+- Sample: `usage/INPUT-vawb-motion-brief-thomasmidlandmotiontodismiss.md`: the caption and counsel, paragraphs 1–12, the Conclusion, paragraph 26, the prayer, the signature block and the certificate of service. Paragraphs 13–25 and footnotes 2–3 are not transcribed.
 - Status: template built; render, overlay and a page-by-page review done (below). Not reviewed by a human; `court.json` of the court folder untouched.
 - Exemplar: yes (one filer, one exemplar).
 
@@ -13,10 +13,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `vawb-motion-brief`. |
 | `typst/vawb-motion-brief.typ` | Template. Parameter block at the top, each line tied to a rule or marked as a convention. |
-| `samples/INPUT-thomas-midland-motion-to-dismiss.md` | Sample: YAML frontmatter (caption, title, counsel, signature, certificate of service) and the body. |
-| `samples/OUTPUT-thomas-midland-motion-to-dismiss.pdf` | `sh tools/render.sh courts/fourth-circuit/virginia/federal/bankruptcy-western-district/motion-brief samples/INPUT-thomas-midland-motion-to-dismiss.md` (10 pages, no typst warnings). |
-| `samples/OVERLAY-thomas-midland-motion-to-dismiss.pdf`, `.txt` | `sh tools/overlay.sh courts/fourth-circuit/virginia/federal/bankruptcy-western-district/motion-brief thomas-midland-motion-to-dismiss`. |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-vawb-motion-brief-thomasmidlandmotiontodismiss.md` | Sample: YAML frontmatter (caption, title, counsel, signature, certificate of service) and the body. |
+| `usage/OUTPUT-vawb-motion-brief-thomasmidlandmotiontodismiss.typst.pdf` | `sh tools/render.sh courts/fourth-circuit/virginia/federal/bankruptcy-western-district/motion-brief usage/INPUT-vawb-motion-brief-thomasmidlandmotiontodismiss.md` (10 pages, no typst warnings). |
+| `usage/OVERLAY-thomas-midland-motion-to-dismiss.pdf`, `.txt` | `sh tools/overlay.sh courts/fourth-circuit/virginia/federal/bankruptcy-western-district/motion-brief thomas-midland-motion-to-dismiss`. |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
 File names follow the repo's tools (`INPUT-`/`OUTPUT-`/`OVERLAY-`); see `../adversary-complaint/README.md`.
 
@@ -49,7 +49,7 @@ No page limit was found in the 2025 text.
 
 ## Overlay
 
-`samples/OVERLAY-thomas-midland-motion-to-dismiss.pdf` puts our render (red) over the filed exemplar page with the most shared words (blue). Pairings from the last run (word overlap):
+`usage/OVERLAY-thomas-midland-motion-to-dismiss.pdf` puts our render (red) over the filed exemplar page with the most shared words (blue). Pairings from the last run (word overlap):
 
 - Sample p.1 ↔ filed p.2 (45.2%): ours is the caption and first paragraph; the filed p.1 is the caption with counsel block above the title, which the overlay pairs with our p.1 only weakly. Expected: the counsel block is at the signature page in ours (LR 9013-1(C)).
 - p.2–p.8 ↔ filed p.2–p.8 (35–68%): the same paragraphs in the same places. Page 8 (the end of paragraph 12, the Conclusion and the prayer) pairs at 35.5%; the filed page with the same text is not the same page layout.
@@ -60,7 +60,7 @@ Diagnostic only, not a score.
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-thomas-midland-motion-to-dismiss.pdf` was rendered at 60 dpi and viewed (10 of 10). The first pass showed a caption defect (the Chapter and Case No. lines were in one column and did not line up with the debtor they belong to) and the certificate of service defects below; those were fixed, pages 1–8 re-compared as text (unchanged), and pages 9–10 re-rendered and re-viewed.
+Every page of `OUTPUT-vawb-motion-brief-thomasmidlandmotiontodismiss.typst.pdf` was rendered at 60 dpi and viewed (10 of 10). The first pass showed a caption defect (the Chapter and Case No. lines were in one column and did not line up with the debtor they belong to) and the certificate of service defects below; those were fixed, pages 1–8 re-compared as text (unchanged), and pages 9–10 re-rendered and re-viewed.
 
 | Page | Content | Result |
 |---|---|---|
@@ -91,7 +91,7 @@ Typst printed no warnings. Fonts embedded: EB Garamond Regular, Bold and Italic 
 ## Engines
 
 - **typst** (primary): as above.
-- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` (pandoc's default reference, its styles replaced, PAGE footer, letter page with a 1.5 in top margin); `docx/vawb-motion-brief.lua` writes the court title, the two-debtor caption, the title, the signature block and the certificate of service as Word paragraphs and tables, and the numbered paragraphs and the I. / A. / 1. / a. headings as text with a hanging indent. Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-thomas-midland-motion-to-dismiss.md` (LibreOffice PDF).
+- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` (pandoc's default reference, its styles replaced, PAGE footer, letter page with a 1.5 in top margin); `docx/vawb-motion-brief.lua` writes the court title, the two-debtor caption, the title, the signature block and the certificate of service as Word paragraphs and tables, and the numbered paragraphs and the I. / A. / 1. / a. headings as text with a hanging indent. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-vawb-motion-brief-thomasmidlandmotiontodismiss.md` (LibreOffice PDF).
 - docx matches the typst form: EB Garamond 12 pt (embedded as EBGaramond in the PDF); body double spaced at an exact 24 pt pitch; one-inch sides and bottom; caption with the debtors paired with their chapter and case numbers, the bordered party column and the adversary numbers; numbers at 0.5 in; headings I. / A. / 1.; footnotes at 10 pt; page number centered 10 pt; counsel block lower left; certificate of service after the signature.
 - docx differs from typst in one place: the last body paragraph (the WHEREFORE clause) is kept with the signature block (keepNext). The typst PDF leaves the signature block alone on page 9 (Gate 2 OPEN row); the docx has no such page. Pagination otherwise matches: 10 pages in both. Footnote 1 falls on page 7 in the docx and page 6 in typst.
 - docx BLOCKED: none for the form. `tools/check.sh --engine docx` cannot run on this folder: it needs `court.json` and `checks.yaml` in the court directory, and neither exists yet for `vawb` (the Gate 1 rules are not written). So no check ID is measured for docx; the visual review was done by hand on all 10 docx pages and all 10 typst pages.

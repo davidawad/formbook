@@ -5,16 +5,16 @@ Folder: `courts/eighth-circuit/north-dakota/federal/bankruptcy-district/adversar
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-bourbon-street-23-07012-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-bourbon-street.md` (full transcription of the 9-page filing, plus the consent statement in the frontmatter; see "Sample") |
-| render | ok: `samples/OUTPUT-bourbon-street.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-bourbon-street.pdf` and `samples/OVERLAY-bourbon-street.txt` (page map) |
+| exemplar | yes: `usage/SAMPLE-ndb-adversary-complaint-bourbonstreet2307012.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ndb-adversary-complaint-bourbonstreet.md` (full transcription of the 9-page filing, plus the consent statement in the frontmatter; see "Sample") |
+| render | ok: `usage/OUTPUT-ndb-adversary-complaint-bourbonstreet.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-bourbon-street.pdf` and `usage/OVERLAY-bourbon-street.txt` (page map) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; pages 1-7 viewed on the render before the consent change, page 8 viewed after the final change) |
 
 Commands (run from /work/repo with the toolchain on PATH):
 
 ```
-sh tools/render.sh courts/eighth-circuit/north-dakota/federal/bankruptcy-district/adversary-complaint samples/INPUT-bourbon-street.md
+sh tools/render.sh courts/eighth-circuit/north-dakota/federal/bankruptcy-district/adversary-complaint usage/INPUT-ndb-adversary-complaint-bourbonstreet.md
 sh tools/overlay.sh courts/eighth-circuit/north-dakota/federal/bankruptcy-district/adversary-complaint bourbon-street
 ```
 
@@ -52,7 +52,7 @@ Nothing in the rules sets a font, a size beyond legibility, or a line spacing fo
 
 ## Sample
 
-`samples/INPUT-bourbon-street.md` transcribes the complete 9-page filing: caption, lead-in, all 39 numbered paragraphs, the three counts with their headings and WHEREFORE clauses, and the signature block. The transcription keeps the filing's wording and punctuation. Differences from the filed document:
+`usage/INPUT-ndb-adversary-complaint-bourbonstreet.md` transcribes the complete 9-page filing: caption, lead-in, all 39 numbered paragraphs, the three counts with their headings and WHEREFORE clauses, and the signature block. The transcription keeps the filing's wording and punctuation. Differences from the filed document:
 
 - `consent_statement` is a test value, supplied in the frontmatter. The filed complaint does not contain a consent statement. The statement is required by FRBP 7008(a) and the wording is counsel's choice; the sample's text is only a stand-in to exercise the field.
 - The bracketed "[Signature on Following Page]" line is not transcribed (the template places the signature).
@@ -62,7 +62,7 @@ Paragraph numbers in the render match the exemplar's numbering (1 to 39).
 
 ## Overlay
 
-`samples/OVERLAY-bourbon-street.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (see `OVERLAY-bourbon-street.txt`):
+`usage/OVERLAY-bourbon-street.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (see `OVERLAY-bourbon-street.txt`):
 
 | Our page | Filed page | Word overlap |
 |---|---|---|
@@ -89,7 +89,7 @@ The overlay is a diagnostic, not a score. Differences in the lower-overlap pages
 
 ## Review of the rendered pages (Gate 2 rows)
 
-Every page of `samples/OUTPUT-bourbon-street.pdf` was rendered at 60 dpi and viewed. Defects found during the review and fixed in the template are listed first.
+Every page of `usage/OUTPUT-ndb-adversary-complaint-bourbonstreet.typst.pdf` was rendered at 60 dpi and viewed. Defects found during the review and fixed in the template are listed first.
 
 Fixed during review:
 - Paragraph spacing: blocks did not add the leading after their last line, so paragraphs collided and headings overlapped the text before them. Fixed by `below: body-leading` on every body block.
@@ -116,7 +116,7 @@ Open tier-2 items for David (not defects of the template as built): the consent 
 
 ### docx (pandoc, `docx/`)
 
-Built with pandoc from `docx/reference.docx` and the Lua filter `docx/ndb-court-form.lua`, which lays out the cover, numbering, signature and certificate from the same frontmatter as the typst template. `docx/make-reference.sh` regenerates `reference.docx`. Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-<id>.md` (writes `samples/OUTPUT-<id>.docx`).
+Built with pandoc from `docx/reference.docx` and the Lua filter `docx/ndb-court-form.lua`, which lays out the cover, numbering, signature and certificate from the same frontmatter as the typst template. `docx/make-reference.sh` regenerates `reference.docx`. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-<id>.md` (writes `usage/OUTPUT-<id>.docx`).
 
 What matches the typst form (same values, set as Word styles):
 
@@ -135,7 +135,7 @@ What differs or is not checked:
 
 docx BLOCKED items (`docs/DOCX.md`):
 
-- BLOCKED: Gates 0 to 3 on `samples/OUTPUT-<id>.docx.pdf` (`tools/check.sh --engine docx`): `soffice` cannot be run here. LibreOffice is not on conda-forge; the Debian trixie LibreOffice 25.2.3 packages were unpacked without root, but `soffice.bin` aborts at startup with an uncaught `com::sun::star::uno::RuntimeException`. Consequently no `.docx.pdf` was made, no page was rendered or viewed, and `pages_reviewed=0`. The `.docx` is valid (zip test and well-formed XML parts pass) and pandoc reads its text back in order, but nothing visual is claimed for it.
+- BLOCKED: Gates 0 to 3 on `usage/OUTPUT-<id>.docx.pdf` (`tools/check.sh --engine docx`): `soffice` cannot be run here. LibreOffice is not on conda-forge; the Debian trixie LibreOffice 25.2.3 packages were unpacked without root, but `soffice.bin` aborts at startup with an uncaught `com::sun::star::uno::RuntimeException`. Consequently no `.docx.pdf` was made, no page was rendered or viewed, and `pages_reviewed=0`. The `.docx` is valid (zip test and well-formed XML parts pass) and pandoc reads its text back in order, but nothing visual is claimed for it.
 - BLOCKED: the "opens in Word and LibreOffice without a repair prompt" check: not done (no Word here; LibreOffice unavailable).
 
 [Formbook index](../../../../../../README.md) | [Status table](../../../../../../STATUS.md)

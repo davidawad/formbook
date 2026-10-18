@@ -5,14 +5,14 @@ Folder: `courts/fourth-circuit/south-carolina/federal/bankruptcy-district/advers
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-joye-25-80012-adversary-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-haigler-joye.md`: the whole 9-page filing transcribed (caption, jurisdiction, 50 numbered allegations, three causes of action, prayer, signature) |
-| render | ok: `samples/OUTPUT-haigler-joye.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> samples/INPUT-haigler-joye.md`) |
-| overlay | ok: `samples/OVERLAY-haigler-joye.pdf` and `samples/OVERLAY-haigler-joye.txt` (`sh tools/overlay.sh <this-dir> haigler-joye`) |
+| exemplar | yes: `usage/SAMPLE-scb-adversary-complaint-joye2580012.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-scb-adversary-complaint-haiglerjoye.md`: the whole 9-page filing transcribed (caption, jurisdiction, 50 numbered allegations, three causes of action, prayer, signature) |
+| render | ok: `usage/OUTPUT-scb-adversary-complaint-haiglerjoye.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> usage/INPUT-scb-adversary-complaint-haiglerjoye.md`) |
+| overlay | ok: `usage/OVERLAY-haigler-joye.pdf` and `usage/OVERLAY-haigler-joye.txt` (`sh tools/overlay.sh <this-dir> haigler-joye`) |
 | typeface | face required: **none** (the FRBP cited below and the SC LBR name no typeface; the exemplar's Times New Roman is a filer's choice, which the rules do not require). Vendored substitute: **EB Garamond** (kept, no court face). Fit: n/a. Re-checked 2026-10-14 in the fonts pass: `pdffonts` shows only EB Garamond embedded. The SC LBR PDF could not be read through WebFetch that day, so its no-typeface reading rests on the earlier 2026-10-14 fetch recorded in the Governing rules table below, not on a re-read. |
 | pages reviewed | 8 of 8 (every page rasterized at 60 dpi and viewed after the last template change; re-viewed 2026-10-14 in the fonts pass) |
 
-File names: the brief asked for `samples/<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. The sample is `<id>.md` as asked. The render and overlay use the names `tools/render.sh` and `tools/overlay.sh` write (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`); `overlay.sh` reads `OUTPUT-<id>.pdf` by name and cannot be pointed elsewhere.
+File names: the brief asked for `usage/<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. The sample is `<id>.md` as asked. The render and overlay use the names `tools/render.sh` and `tools/overlay.sh` write (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`); `overlay.sh` reads `OUTPUT-<id>.pdf` by name and cannot be pointed elsewhere.
 
 ## Governing rules
 
@@ -49,7 +49,7 @@ Not generated (separate filings, outside this template): the Adversary Proceedin
 
 ## Known gaps and open choices
 
-1. **One exemplar only.** The second filer found (*Fort, Trustee v. Kauffman Precast, LLC*, Adv. No. 18-80024-hb, 6 pp., 2018, Roe Cassidy) is recorded in `exemplars/SOURCE.md`, not saved. Tier-2 comparison against two or three filers is therefore **not** done.
+1. **One exemplar only.** The second filer found (*Fort, Trustee v. Kauffman Precast, LLC*, Adv. No. 18-80024-hb, 6 pp., 2018, Roe Cassidy) is recorded in `usage/SOURCE.md`, not saved. Tier-2 comparison against two or three filers is therefore **not** done.
 2. **Typeface and size.** Neither the FRBP nor the SC LBR names a typeface or size. The exemplar is Times New Roman. The template uses EB Garamond (the only vendored font) at 13 pt, because EB Garamond sets smaller than Times at the same size (the same choice as the CAND motion template). Whether the court's judges want a larger apparent size is a choice for David.
 3. **ECF header not reproduced.** The "Case 25-80012-eg Doc 1 Filed ... Page N of 9" line is added by CM/ECF on filing and is not part of the document.
 4. **Email address missing from the signature (SC LBR 9011-4).** The exemplar's signature block has no email address, and the rule requires one. The template prints only the lines given in the frontmatter, so the transcription keeps the exemplar's omission. A filing needs the email added to `signature.lines`.
@@ -77,7 +77,7 @@ Gate 2 rows: the review above. There is no `reviews/` folder for this doc type.
 
 ## Engines
 
-**docx** (`docx/`; `samples/OUTPUT-haigler-joye.docx` and `samples/OUTPUT-haigler-joye.docx.pdf`, 9 pages in LibreOffice). `sh docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt; body at a 24 pt exact pitch; single lines at 19.56 pt exact; 1-inch margins; centered PAGE footer at 12 pt). `docx/scb-adversary-complaint.lua` builds the caption (a table with the rules), the court title, the numbered allegations, the lettered prayer and the signature block, which is kept with the last two blocks. Render: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-haigler-joye.md`.
+**docx** (`docx/`; `usage/OUTPUT-scb-adversary-complaint-haiglerjoye.docx` and `usage/OUTPUT-scb-adversary-complaint-haiglerjoye.docx.pdf`, 9 pages in LibreOffice). `sh docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt; body at a 24 pt exact pitch; single lines at 19.56 pt exact; 1-inch margins; centered PAGE footer at 12 pt). `docx/scb-adversary-complaint.lua` builds the caption (a table with the rules), the court title, the numbered allegations, the lettered prayer and the signature block, which is kept with the last two blocks. Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-scb-adversary-complaint-haiglerjoye.md`.
 
 Matches typst: typeface and size, margins, the 24 pt body pitch, caption layout and text, allegation numbers with wrapped lines flush left, block quotations, headings, the lettered prayer, the signature block and "Dated" line, the centered page number.
 
@@ -89,13 +89,13 @@ Differs:
 
 No BLOCKED items. The court folder has no check IDs for this doc type, and no docx-only limit fails a requirement of the form.
 
-Pages reviewed: 9 of 9 of `samples/OUTPUT-haigler-joye.docx.pdf`, each viewed at 60 dpi beside the typst render (`/tmp/scb-adversary-complaint/typst.pdf`, not in the repo), and line positions checked with `pdftotext -bbox-layout`.
+Pages reviewed: 9 of 9 of `usage/OUTPUT-scb-adversary-complaint-haiglerjoye.docx.pdf`, each viewed at 60 dpi beside the typst render (`/tmp/scb-adversary-complaint/typst.pdf`, not in the repo), and line positions checked with `pdftotext -bbox-layout`.
 
 ## Reproduce
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/fourth-circuit/south-carolina/federal/bankruptcy-district/adversary-complaint samples/INPUT-haigler-joye.md
+sh tools/render.sh courts/fourth-circuit/south-carolina/federal/bankruptcy-district/adversary-complaint usage/INPUT-scb-adversary-complaint-haiglerjoye.md
 sh tools/overlay.sh courts/fourth-circuit/south-carolina/federal/bankruptcy-district/adversary-complaint haigler-joye
 ```
 

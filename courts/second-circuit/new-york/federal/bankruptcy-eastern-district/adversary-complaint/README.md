@@ -5,10 +5,10 @@ Folder: `courts/second-circuit/new-york/federal/bankruptcy-eastern-district/adve
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-toyvation-1-26-43344-adversary-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-toyvation-adversary-complaint.md` (the whole complaint: caption, 69 numbered paragraphs, five cause headings, prayer, signature) |
-| render | ok: `samples/OUTPUT-toyvation-adversary-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-toyvation-adversary-complaint.pdf` and `samples/OVERLAY-toyvation-adversary-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-nyeb-adversary-complaint-toyvation12643344.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nyeb-adversary-complaint-toyvation.md` (the whole complaint: caption, 69 numbered paragraphs, five cause headings, prayer, signature) |
+| render | ok: `usage/OUTPUT-nyeb-adversary-complaint-toyvation.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-toyvation-adversary-complaint.pdf` and `usage/OVERLAY-toyvation-adversary-complaint.txt` |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed in its final state) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief, because the tools read and write those names and the brief forbids editing `tools/`.
@@ -46,7 +46,7 @@ Not produced by this template (separate papers, not part of the complaint): the 
 
 ## What the overlay shows
 
-`samples/OVERLAY-toyvation-adversary-complaint.pdf`: red is our render, blue is the filed exemplar, black is where they agree. The page map (`.txt`) pairs each of our 9 pages with the exemplar page sharing most words: 1 to 1 (80.0%), 2 to 2 (59.2%), 3 to 4 (42.9%), 4 to 5 (59.8%), 5 to 6 (82.9%), 6 to 7 (81.5%), 7 to 8 (73.4%), 8 to 9 (61.1%), 9 to 10 (87.7%). The exemplar is 10 pages. Pairing is by shared words, so the page breaks differ and the pairs are not one-to-one; the low score on page 3 has not been traced to a cause. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-toyvation-adversary-complaint.pdf`: red is our render, blue is the filed exemplar, black is where they agree. The page map (`.txt`) pairs each of our 9 pages with the exemplar page sharing most words: 1 to 1 (80.0%), 2 to 2 (59.2%), 3 to 4 (42.9%), 4 to 5 (59.8%), 5 to 6 (82.9%), 6 to 7 (81.5%), 7 to 8 (73.4%), 8 to 9 (61.1%), 9 to 10 (87.7%). The exemplar is 10 pages. Pairing is by shared words, so the page breaks differ and the pairs are not one-to-one; the low score on page 3 has not been traced to a cause. The overlay is a diagnostic, not a score.
 
 ## Known gaps and open choices
 
@@ -83,9 +83,9 @@ Pages reviewed: 9 of 9.
 
 ## Engines
 
-docx (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (pandoc default, styles replaced, footer with a centred page number, letter page with 1 in margins); `docx/nyeb-adversary-complaint.lua` builds the cover, caption, numbered allegations, prayer and signature. `tools/render.sh --engine docx` uses the default path of `tools/render-docx.sh`. Output: `samples/OUTPUT-toyvation-adversary-complaint.docx` and `.docx.pdf` (LibreOffice, 9 pages). Reviewed: 9 of 9 pages of the `.docx.pdf`, against the typst render (9 pages) at 60 dpi. LibreOffice converts the file with no error; `pdffonts` shows EB Garamond embedded.
+docx (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (pandoc default, styles replaced, footer with a centred page number, letter page with 1 in margins); `docx/nyeb-adversary-complaint.lua` builds the cover, caption, numbered allegations, prayer and signature. `tools/render.sh --engine docx` uses the default path of `tools/render-docx.sh`. Output: `usage/OUTPUT-nyeb-adversary-complaint-toyvation.docx` and `.docx.pdf` (LibreOffice, 9 pages). Reviewed: 9 of 9 pages of the `.docx.pdf`, against the typst render (9 pages) at 60 dpi. LibreOffice converts the file with no error; `pdffonts` shows EB Garamond embedded.
 
 - **Matches typst:** letter paper, 1 in margins; EB Garamond 12 pt; body on a 24 pt pitch with a 0.5 in first-line indent; caption with the rules, the `In re` / `Case No.` / `Chapter` block, the adversary block with `Adv. Pro. No.` and the title; numbered allegations (number at 0.5 in, text at 1 in, wrapped lines back at 1 in); unnumbered lead-in; prayer lettered (a) to (e); WHEREFORE kept with the prayer; signature block kept with the last prayer item; centred page number.
 - **Differs:** paragraph numbers and prayer letters are typed text followed by a tab, not Word list numbering, so they do not renumber if a paragraph is added in Word. Exact line spacing puts glyphs a few points lower than typst's line box, so lines on a page sit up to about 5 pt lower, and page breaks differ (in the docx, prayer item (d) ends page 8 and (e) moves with the signature to page 9). The title is in the caption only: it is not written to the document properties.
-- **docx BLOCKED (not run):** `tools/check.sh <doc-type-dir> --engine docx` (Gates 0 to 3) cannot run for this folder. It reads `court.json` and `checks.yaml` at the court root, and this court has no `checks.yaml` yet. No `samples/.check-docx.txt` stamp is written. The page review above and the font and page-size checks stand in for Gate 2 only; they are not a Gate 1 pass.
+- **docx BLOCKED (not run):** `tools/check.sh <doc-type-dir> --engine docx` (Gates 0 to 3) cannot run for this folder. It reads `court.json` and `checks.yaml` at the court root, and this court has no `checks.yaml` yet. No `usage/.check-docx.txt` stamp is written. The page review above and the font and page-size checks stand in for Gate 2 only; they are not a Gate 1 pass.
 - **Not checked in Word:** no Word is available here. The file was opened and converted in LibreOffice.

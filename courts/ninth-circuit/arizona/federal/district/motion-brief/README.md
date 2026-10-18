@@ -1,14 +1,14 @@
 # D. Ariz. (azd): motion with memorandum
 
-Doc type: **motion** (a motion to dismiss, or in the alternative to stay, with its memorandum of points and authorities, one filed document) in the United States District Court for the District of Arizona. Folder: `courts/ninth-circuit/arizona/federal/district/motion-brief/`. The court-root `typst/` and `samples/` of `district/` are not touched.
+Doc type: **motion** (a motion to dismiss, or in the alternative to stay, with its memorandum of points and authorities, one filed document) in the United States District Court for the District of Arizona. Folder: `courts/ninth-circuit/arizona/federal/district/motion-brief/`. The court-root `typst/` and `usage/` of `district/` are not touched.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-evancho-4-26-cv-00363-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-evancho-mtd.md`: the whole motion, caption to certificate of service (17 pages, as the exemplar) |
+| exemplar | yes: `usage/SAMPLE-azd-motion-brief-evancho426cv00363.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-azd-motion-brief-evanchomtd.md`: the whole motion, caption to certificate of service (17 pages, as the exemplar) |
 | typeface | face required: **none** (LRCiv 7.1(b)(1) names a size and a pitch, not a face; see Governing rules) → **EB Garamond** (vendored, OFL; no substitute). Not metric-compatible with Times, so line count is not the Times line count. |
-| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-evancho-mtd.pdf`, 17 pages, typst 0.15.0, `tools/render.sh`, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -BoldItalic embedded), no warnings, exit 0 |
-| overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `exemplars/FILED-EXAMPLE-evancho-4-26-cv-00363-motion-brief.pdf`, which is not in this snapshot (not in git, not on disk). No `OVERLAY-evancho-mtd.pdf` was produced. `OVERLAY-evancho-mtd.txt` is the earlier page map, not regenerated. |
+| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-azd-motion-brief-evanchomtd.typst.pdf`, 17 pages, typst 0.15.0, `tools/render.sh`, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -BoldItalic embedded), no warnings, exit 0 |
+| overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `usage/SAMPLE-azd-motion-brief-evancho426cv00363.pdf`, which is not in this snapshot (not in git, not on disk). No `OVERLAY-evancho-mtd.pdf` was produced. `OVERLAY-evancho-mtd.txt` is the earlier page map, not regenerated. |
 | pages reviewed | 17 of 17 (re-viewed 2026-10-15 at 60 dpi, every page; no layout change from the render before) |
 
 File names follow the repo's tools: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf`, the overlay `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default.
@@ -49,7 +49,7 @@ Primary source: D. Ariz. Local Rules of Civil Procedure, the "Local Rules Master
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/ninth-circuit/arizona/federal/district/motion-brief samples/INPUT-evancho-mtd.md
+sh tools/render.sh courts/ninth-circuit/arizona/federal/district/motion-brief usage/INPUT-azd-motion-brief-evanchomtd.md
 sh tools/overlay.sh courts/ninth-circuit/arizona/federal/district/motion-brief evancho-mtd
 ```
 
@@ -81,7 +81,7 @@ Defects found in review and fixed (all in `typst/azd-motion.typ`): (1) paragraph
 
 ## Known gaps and open choices
 
-1. **Only one exemplar.** EVAL-LOOP tier 2 asks for 2 or 3 filers from different sources. Not met for this doc type. Searches tried are in `exemplars/SOURCE.md`.
+1. **Only one exemplar.** EVAL-LOOP tier 2 asks for 2 or 3 filers from different sources. Not met for this doc type. Searches tried are in `usage/SOURCE.md`.
 2. **Font.** LRCiv 7.1(b)(1) names no typeface: "fixed-pitch type size no smaller than ten (10) pitch ... or in a proportional font size no smaller than 13 point" (text read 2026-10-15 from the 2020 master file). So the template keeps EB Garamond (vendored, OFL) at 13 pt, per `docs/FONTS.md` ("No face named"), and does not substitute Liberation Serif for the exemplar's Times New Roman. EB Garamond sets smaller than Times at the same size.
 3. **Page limit (LRCiv 7.2(e)(1)).** The template does not count the 17 pages. The sample is 17 pages with the caption, signature and certificate, the same as the exemplar. The brief's target was 8 to 14 pages; this sample is not cut down, because the exemplar is 17 pages and cutting the memorandum would drop the signature and certificate the brief asks for.
 4. **Memorandum mention on the first page (LRCiv 7.1(a)(3)(C)).** The rule asks for "mention of any notice of motion or affidavits or memorandum in support" in the caption's right column. The exemplar's title does not say "memorandum"; the template does not add it. An author who wants it can add it to `brief_title`.
@@ -96,8 +96,8 @@ Defects found in review and fixed (all in `typst/azd-motion.typ`): (1) paragraph
 ## Engines
 
 **docx** (LibreOffice only; Word was not available, so "opens in Word without a repair prompt" is not verified).
-`docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt, exact 24 pt lines, letter, typst margins, PAGE field footer, a different first-page header). `docx/azd-motion.lua` builds the cover, caption, hung and numbered headings (I., A., 1., a., as typst), body paragraphs, signature and certificate. `docx/render.sh` runs pandoc with the filter, then writes the running header (pages 2 on) from the sample's `running_header` frontmatter, because that text is case-specific and cannot live in the template. `sh tools/render.sh --engine docx <this folder> samples/INPUT-evancho-mtd.md` writes `samples/OUTPUT-evancho-mtd.docx` and `.docx.pdf`: 17 pages; fonts embedded EBGaramond only.
+`docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt, exact 24 pt lines, letter, typst margins, PAGE field footer, a different first-page header). `docx/azd-motion.lua` builds the cover, caption, hung and numbered headings (I., A., 1., a., as typst), body paragraphs, signature and certificate. `docx/render.sh` runs pandoc with the filter, then writes the running header (pages 2 on) from the sample's `running_header` frontmatter, because that text is case-specific and cannot live in the template. `sh tools/render.sh --engine docx <this folder> usage/INPUT-azd-motion-brief-evanchomtd.md` writes `usage/OUTPUT-azd-motion-brief-evanchomtd.docx` and `.docx.pdf`: 17 pages; fonts embedded EBGaramond only.
 
 - Matches typst: EB Garamond 13 pt; 28 numbered lines on a 24 pt grid; counsel from line 1; court title on line 7; caption ruled right and below; headings hung at the typst indents; running header from page 2 in 10 pt in the top margin; signature and certificate. All 17 pages viewed at 60 dpi.
-- Differs, and why: (1) the pleading numbers are a floating text box in each header, and the pleading rules are page borders around the text area (top to bottom margin, not the full page height as in typst); (2) the caption row height is estimated from the number of wrapped lines, so the grid below it can differ by a line from typst; (3) headings use the body pitch, so a two-line heading takes two numbered lines in both engines, but Word may break lines differently; (4) no typst PDF is in `samples/` for this doc type (`OUTPUT-evancho-mtd.pdf` is not in this snapshot), so the docx was compared with the typst template and the review above, not with a rendered typst page.
+- Differs, and why: (1) the pleading numbers are a floating text box in each header, and the pleading rules are page borders around the text area (top to bottom margin, not the full page height as in typst); (2) the caption row height is estimated from the number of wrapped lines, so the grid below it can differ by a line from typst; (3) headings use the body pitch, so a two-line heading takes two numbered lines in both engines, but Word may break lines differently; (4) no typst PDF is in `usage/` for this doc type (`OUTPUT-azd-motion-brief-evanchomtd.typst.pdf` is not in this snapshot), so the docx was compared with the typst template and the review above, not with a rendered typst page.
 - BLOCKED: `tools/check.sh <folder> --engine docx` cannot run on a doc-type folder: it reads `court.json` and `checks.yaml` from the folder it is given (exit 2). No stamp is written. The Gate 1 rule checks are not run for docx; the observations above are not a gate result.

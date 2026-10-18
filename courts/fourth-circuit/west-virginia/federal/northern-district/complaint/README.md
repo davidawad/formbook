@@ -5,11 +5,11 @@ Folder: `courts/fourth-circuit/west-virginia/federal/northern-district/complaint
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-heston-1-26-cv-00092-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-heston-complaint.md` (a portion of the 36-page filing; see below) |
+| exemplar | yes: `usage/SAMPLE-wvnd-complaint-heston126cv00092.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-wvnd-complaint-heston.md` (a portion of the 36-page filing; see below) |
 | typeface | Liberation Serif (vendored; the Times New Roman substitute, metric-compatible). Court-named face per LR Civ P 7.02(a), applied to this paper as the court's standard (see known gaps 1). Was EB Garamond. |
-| render | ok: `samples/OUTPUT-heston-complaint.pdf`, 8 pages (8 before the font change), typst 0.15.0, vendored Liberation Serif only, `pdffonts`: LiberationSerif, -Bold, -Italic embedded, no warnings |
-| overlay | ok: `samples/OVERLAY-heston-complaint.pdf` and `samples/OVERLAY-heston-complaint.txt`, run against the RECAP copy in `exemplars/SOURCE.md` (the exemplar PDF is not in this checkout, so the tool's default `exemplars/*.pdf` lookup fails; pass the file as the third argument) |
+| render | ok: `usage/OUTPUT-wvnd-complaint-heston.typst.pdf`, 8 pages (8 before the font change), typst 0.15.0, vendored Liberation Serif only, `pdffonts`: LiberationSerif, -Bold, -Italic embedded, no warnings |
+| overlay | ok: `usage/OVERLAY-heston-complaint.pdf` and `usage/OVERLAY-heston-complaint.txt`, run against the RECAP copy in `usage/SOURCE.md` (the exemplar PDF is not in this checkout, so the tool's default `usage/*.pdf` lookup fails; pass the file as the third argument) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the font change) |
 | tier-1 gate | none asserted by a local rule for this paper; see "Governing rules" and the open question below |
 
@@ -54,7 +54,7 @@ Not produced by this template (separate papers, not part of the complaint): the 
 
 ## What the sample is (and is not)
 
-`samples/INPUT-heston-complaint.md` transcribes the caption, the lead-in, the introduction, the jurisdiction and venue paragraphs, the parties, the first part of the facts (the interrogation, the North Marion meeting), Count I's first five paragraphs, the prayer, the jury demand and the signature block. The filing's paragraphs 25–40 and 68–182 are not transcribed; the sample says so in brackets. Paragraph numbers in the sample are assigned by the template and do not match the filing, so the sample's "paragraphs 1 through 182" in Count I refers to the filing's numbering, as the exemplar's own text does.
+`usage/INPUT-wvnd-complaint-heston.md` transcribes the caption, the lead-in, the introduction, the jurisdiction and venue paragraphs, the parties, the first part of the facts (the interrogation, the North Marion meeting), Count I's first five paragraphs, the prayer, the jury demand and the signature block. The filing's paragraphs 25–40 and 68–182 are not transcribed; the sample says so in brackets. Paragraph numbers in the sample are assigned by the template and do not match the filing, so the sample's "paragraphs 1 through 182" in Count I refers to the filing's numbering, as the exemplar's own text does.
 
 ## Known gaps and open choices
 
@@ -76,11 +76,11 @@ Not produced by this template (separate papers, not part of the complaint): the 
 - Page 7: paragraph 50; "COUNT I…" heading (three lines, centered), "(Against the Marion County Board of Education)", paragraphs 51–55, "PRAYER FOR RELIEF", items (a) and (b). Pass.
 - Page 8: items (c)–(h), "DEMAND FOR JURY TRIAL", the jury demand, the date and the signature block (party, "By Counsel,", "s/ Ryan J. Umina", counsel lines with e-mail and telephone). Pass.
 
-Overlay (`samples/OVERLAY-heston-complaint.txt`): page pairing by shared words against the RECAP copy (36 pages). Pages 1–3 pair with the same filed pages (68.6%, 60.2%, 45.1% word overlap); the rest pair with later filed pages because the sample skips filed paragraphs. The pairing is a diagnostic, not a score.
+Overlay (`usage/OVERLAY-heston-complaint.txt`): page pairing by shared words against the RECAP copy (36 pages). Pages 1–3 pair with the same filed pages (68.6%, 60.2%, 45.1% word overlap); the rest pair with later filed pages because the sample skips filed paragraphs. The pairing is a diagnostic, not a score.
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` builds `reference.docx`; `wvnd-complaint.lua` writes the caption, the numbering and the signature). Output: `samples/OUTPUT-heston-complaint.docx` and `.docx.pdf` (LibreOffice PDF). Pages reviewed: 9 of 9, every page rendered at 60 dpi and viewed.
+DOCX (`docx/`: `build-reference.sh` builds `reference.docx`; `wvnd-complaint.lua` writes the caption, the numbering and the signature). Output: `usage/OUTPUT-wvnd-complaint-heston.docx` and `.docx.pdf` (LibreOffice PDF). Pages reviewed: 9 of 9, every page rendered at 60 dpi and viewed.
 
 - Matches the typst form: Liberation Serif 12 pt (`pdffonts`: LiberationSerif only), letter, 1 in margins, body double spaced at an exact 24 pt pitch (measured on both PDFs with `pdftotext -bbox`), 0.5 in first-line indent, caption with the parties left, "v.", the designation indented 1 in, the civil action number and judge at the bottom right, a rule beneath, the title bold and centered, headings centered bold, prayer items (a)–(h) with a hanging indent, the signature block at 3.25 in, page number centered at the foot of each page.
 - Differs: the gap after a paragraph number is a tab stop at 0.85 in (typst: 0.25 in after the number). Pagination differs: the docx runs 9 pages, the typst 8, because the line breaking and the caption spacing differ slightly between Word-style layout and typst. The last paragraph is kept with the signature, so the signature never stands alone on a page.

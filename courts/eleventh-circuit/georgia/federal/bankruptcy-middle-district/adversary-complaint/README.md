@@ -4,13 +4,13 @@ Doc type: **adversary-complaint** (a complaint commencing an adversary proceedin
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-galardi-22-05008-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-galardi-complaint.md` (caption, all 96 numbered paragraphs, prayer, signature block) |
-| render | ok: `samples/OUTPUT-galardi-complaint.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-galardi-complaint.pdf` and `OVERLAY-galardi-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-gamb-adversary-complaint-galardi2205008.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-gamb-adversary-complaint-galardicomplaint.md` (caption, all 96 numbered paragraphs, prayer, signature block) |
+| render | ok: `usage/OUTPUT-gamb-adversary-complaint-galardicomplaint.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-galardi-complaint.pdf` and `OVERLAY-galardi-complaint.txt` |
 | pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed; pages 1-2 and 13-14 viewed again after the final changes; all 14 re-rendered and viewed again 2026-10-14 in the fonts pass, no change) |
 
-This folder is self-contained. It does not touch the court-root `typst/` or `samples/`.
+This folder is self-contained. It does not touch the court-root `typst/` or `usage/`.
 
 ## Governing rules
 
@@ -55,12 +55,12 @@ Not produced by this template, and why:
 Build and check (from the repo root, with the toolchain on PATH: `export PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint samples/INPUT-galardi-complaint.md
+sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-gamb-adversary-complaint-galardicomplaint.md
 sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint galardi-complaint
 ```
 
-- `samples/OUTPUT-galardi-complaint.pdf` is the render. The file names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-` and `OVERLAY-` prefixes), not the `<id>.pdf` and `<id>-overlay.pdf` names in the task brief, because those tools are shared and fix the names.
-- `samples/OVERLAY-galardi-complaint.pdf` (red = our render, blue = exemplar, black = both) and `.txt` (the page map). The page map pairs pages by word overlap, which is coarse: our pages 3-4 pair with filed pages 4 and 6, and so on. It is a diagnostic, not a score.
+- `usage/OUTPUT-gamb-adversary-complaint-galardicomplaint.typst.pdf` is the render. The file names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-` and `OVERLAY-` prefixes), not the `<id>.pdf` and `<id>-overlay.pdf` names in the task brief, because those tools are shared and fix the names.
+- `usage/OVERLAY-galardi-complaint.pdf` (red = our render, blue = exemplar, black = both) and `.txt` (the page map). The page map pairs pages by word overlap, which is coarse: our pages 3-4 pair with filed pages 4 and 6, and so on. It is a diagnostic, not a score.
 
 ## Visual review (Gate 2 record, all 14 pages, rendered at 60 dpi and viewed)
 
@@ -88,7 +88,7 @@ Numbering check: the sample's COUNT I begins at ¶63 and COUNT II at ¶81, which
 1. **One exemplar only.** The eval-loop tier-2 rule asks for two or three filers. A CourtListener API search (`court=gamb`, `type=r`, "adversary proceeding" complaint) found other adversary dockets: Morrison v. SN Servicing (23-05003), Padgett v. Bank of America (19-05042) and Harvey v. Nationstar (22-01008). In the search results I saw, none listed an available complaint PDF (the cover-sheet and order entries were unavailable), and I did not open those dockets. The Galardi complaint is the only text-based M.D. Ga. adversary complaint I downloaded. Tier 2 is not judged against two filers.
 2. **Font and size (GAMB-FORM-002).** No M.D. Ga. bankruptcy rule names a face, font size or spacing for pleadings (checked 2026-10-14 against the Clerk's Instructions and the Local Rules, Apr. 2025; the only face rule is for proposed orders). Per the fonts pass, a court that names no face keeps EB Garamond, the template's font. The exemplar is Times New Roman, which is one filer's choice (tier 3), not a rule. Switching to Liberation Serif would be a style decision, not a rule requirement, and is not made here.
 3. **Exhibits and numbering.** The sample transcribes all 96 paragraphs of the exemplar's body. Exhibits A-F (attachments to ECF Doc. 1) are not in the exemplar PDF and are not reproduced. The exemplar's numbering skips ¶93 (it goes 92, 94). The template numbers consecutively, so from ¶93 on the sample's numbers are one lower than the exemplar's. No cross-reference in the complaint points past ¶81, so none is affected.
-4. **Transcription.** The exemplar's second signature block prints "Will Geer" under the `/s/ Garrett Nail` line; the sample uses Garrett Nail (see `exemplars/SOURCE.md`). Other typos in the exemplar are reproduced as printed (for example "is resides", "Subrust", "serve as the successor trustee"). Straight quotes in the sample are typeset as curly quotes by the template.
+4. **Transcription.** The exemplar's second signature block prints "Will Geer" under the `/s/ Garrett Nail` line; the sample uses Garrett Nail (see `usage/SOURCE.md`). Other typos in the exemplar are reproduced as printed (for example "is resides", "Subrust", "serve as the successor trustee"). Straight quotes in the sample are typeset as curly quotes by the template.
 5. **Jury demand, and other options.** No jury-demand option is built. A complaint seeking a jury trial would need one (FRCP 38 through FRBP 9015). Not in this exemplar.
 6. **Adversary number.** The exemplar leaves the adversary number blank (it is assigned by the Clerk). The template shows a blank line when `adversary_number` is empty.
 7. **Case names are roman in the sample.** The exemplar's text layer has no italic markup; the template italicizes `*...*` markdown, so a future sample can italicize case names.
@@ -99,10 +99,10 @@ Numbering check: the sample's COUNT I begins at ¶63 and COUNT II at ¶81, which
 The typst template above is the primary engine. The docx engine is in `docx/`: `reference.docx` (built by `docx/make-reference.sh`), `gamb.lua` (the caption, the title, the numbering of the paragraphs, the "(a)" sub-items, the WHEREFORE and the signature blocks) and `render.sh` (pandoc with `--from markdown+smart-fancy_lists`, so a typed "(a)" stays text). Build and check:
 
 ```sh
-sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint samples/INPUT-galardi-complaint.md
+sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-gamb-adversary-complaint-galardicomplaint.md
 ```
 
-This writes `samples/OUTPUT-galardi-complaint.docx` and `samples/OUTPUT-galardi-complaint.docx.pdf` (LibreOffice 26.8, EB Garamond from `fonts/eb-garamond`).
+This writes `usage/OUTPUT-gamb-adversary-complaint-galardicomplaint.docx` and `usage/OUTPUT-gamb-adversary-complaint-galardicomplaint.docx.pdf` (LibreOffice 26.8, EB Garamond from `fonts/eb-garamond`).
 
 - **Matches the typst render:** EB Garamond 13 pt; letter; 1-inch margins; body double-spaced (24 pt exact) with a half-inch first-line indent; headings centered bold (level 1), bold (level 2), bold italic (level 3); the Form 416D caption as a table with a rule on the right and bottom of the party column; the court lines and title; paragraphs after the first heading numbered 1, 2, ... ; "(a)" sub-items with a hanging label; the WHEREFORE paragraph kept with the signature blocks; a centered page number on every page.
 - **Differs:** the docx PDF is 16 pages against 14 for typst. LibreOffice places the first line of an exact 24 pt line about 6 pt lower than typst, so a page holds about one line fewer. The WHEREFORE and signature chain moves as one, so page 15 holds only ¶ 96. No rule sets a page count here. Word may paginate differently again (docs/DOCX.md). The numbers are typed text, as in the typst template, not Word list numbering.

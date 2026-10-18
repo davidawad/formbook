@@ -30,7 +30,7 @@
   set page(
     paper: "us-letter",
     margin: margin,
-    // Body numbering starts at the Introduction (filed-brief convention, see exemplars/SOURCE.md): the cover (page 1)
+    // Body numbering starts at the Introduction (filed-brief convention, see usage/SOURCE.md): the cover (page 1)
     // and table of contents (page 2) are unnumbered, so the displayed number is the physical page minus 2.
     numbering: n => str(n - 2),
     footer: context {

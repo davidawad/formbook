@@ -2,7 +2,7 @@
 
 Typst template for a motion filed in the United States Foreign Intelligence Surveillance Court, built from the court's own Rules of Procedure. Scope: publicly released motions (for example, a motion to publish an opinion or to modify a reporting requirement). Other FISC doc types (applications, certifications, petitions, orders) are not covered here.
 
-Status: exemplar=yes (two filed motions), render=ok, overlay=ok, both pages reviewed (9 of 9 rendered pages, all looked at). No `court.json` status change; the court's `court.json` and the court-root `typst/` and `samples/` are untouched.
+Status: exemplar=yes (two filed motions), render=ok, overlay=ok, both pages reviewed (9 of 9 rendered pages, all looked at). No `court.json` status change; the court's `court.json` and the court-root `typst/` and `usage/` are untouched.
 
 ## Governing rules
 
@@ -37,7 +37,7 @@ Rule 25(a)'s 20-page limit applies to petitions and responses, not motions, so t
 - `typst/main.typ`: entry point. `sample=` names the markdown file to render.
 - `typst/fisc-motion-brief.typ`: `fisc-motion-brief(meta, md)`. Content-agnostic. Parameters at the top. No case text, no forced line breaks, vendored fonts only. Every number traces to a rule (FISC-...) or a stated convention.
 
-Frontmatter (`samples/*.md`):
+Frontmatter (`usage/*.md`):
 
 | Field | Required | Meaning |
 |---|---|---|
@@ -57,26 +57,26 @@ Build:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick
-sh tools/render.sh courts/national/foreign-intelligence-surveillance-court/motion-brief samples/INPUT-accuracy-concerns-misc-19-02.md
-sh tools/render.sh courts/national/foreign-intelligence-surveillance-court/motion-brief samples/INPUT-yahoo-directives-105b-07-01.md
-sh tools/overlay.sh courts/national/foreign-intelligence-surveillance-court/motion-brief accuracy-concerns-misc-19-02 courts/national/foreign-intelligence-surveillance-court/motion-brief/exemplars/FILED-EXAMPLE-accuracy-concerns-misc-19-02-motion-brief.pdf
-sh tools/overlay.sh courts/national/foreign-intelligence-surveillance-court/motion-brief yahoo-directives-105b-07-01 courts/national/foreign-intelligence-surveillance-court/motion-brief/exemplars/FILED-EXAMPLE-yahoo-directives-105b-07-01-motion-brief.pdf
+sh tools/render.sh courts/national/foreign-intelligence-surveillance-court/motion-brief usage/INPUT-fisc-motion-brief-accuracyconcernsmisc1902.md
+sh tools/render.sh courts/national/foreign-intelligence-surveillance-court/motion-brief usage/INPUT-fisc-motion-brief-yahoodirectives105b0701.md
+sh tools/overlay.sh courts/national/foreign-intelligence-surveillance-court/motion-brief accuracy-concerns-misc-19-02 courts/national/foreign-intelligence-surveillance-court/motion-brief/usage/SAMPLE-fisc-motion-brief-accuracyconcernsmisc1902.pdf
+sh tools/overlay.sh courts/national/foreign-intelligence-surveillance-court/motion-brief yahoo-directives-105b-07-01 courts/national/foreign-intelligence-surveillance-court/motion-brief/usage/SAMPLE-fisc-motion-brief-yahoodirectives105b0701.pdf
 ```
 
-Naming: the shared tools fix the output names, so outputs follow them rather than the `<id>.pdf` / `<id>-overlay.pdf` pattern in the brief. Render writes `samples/OUTPUT-<id>.pdf`; overlay reads that and writes `samples/OVERLAY-<id>.pdf` and `.txt`.
+Naming: the shared tools fix the output names, so outputs follow them rather than the `<id>.pdf` / `<id>-overlay.pdf` pattern in the brief. Render writes `usage/OUTPUT-<id>.pdf`; overlay reads that and writes `usage/OVERLAY-<id>.pdf` and `.txt`.
 
 ## Exemplars
 
 | File | Case and filer | Date filed | Sample |
 |---|---|---|---|
-| `exemplars/FILED-EXAMPLE-accuracy-concerns-misc-19-02-motion-brief.pdf` | Misc. 19-02, Motion to Modify Reporting Period. Government (DOJ National Security Division, Office of Intelligence). | June 4, 2020 (received stamp) | `samples/INPUT-accuracy-concerns-misc-19-02.md` |
-| `exemplars/FILED-EXAMPLE-yahoo-directives-105b-07-01-motion-brief.pdf` | No. 105B(g) 07-01, Yahoo! Inc.'s Unclassified Motion under FISC Rule 62. Private party. | September 30, 2013 | `samples/INPUT-yahoo-directives-105b-07-01.md` |
+| `usage/SAMPLE-fisc-motion-brief-accuracyconcernsmisc1902.pdf` | Misc. 19-02, Motion to Modify Reporting Period. Government (DOJ National Security Division, Office of Intelligence). | June 4, 2020 (received stamp) | `usage/INPUT-fisc-motion-brief-accuracyconcernsmisc1902.md` |
+| `usage/SAMPLE-fisc-motion-brief-yahoodirectives105b0701.pdf` | No. 105B(g) 07-01, Yahoo! Inc.'s Unclassified Motion under FISC Rule 62. Private party. | September 30, 2013 | `usage/INPUT-fisc-motion-brief-yahoodirectives105b0701.md` |
 
-Sources and searches are recorded in `exemplars/SOURCE.md`. Both exemplars are scans with an OCR text layer, so `overlay.sh` can pair pages by text. Samples are transcriptions: OCR text, checked against the page images, with the handwritten verification date (June 3, 2020) read from the scan.
+Sources and searches are recorded in `usage/SOURCE.md`. Both exemplars are scans with an OCR text layer, so `overlay.sh` can pair pages by text. Samples are transcriptions: OCR text, checked against the page images, with the handwritten verification date (June 3, 2020) read from the scan.
 
 ## Overlay (the red/blue test)
 
-`samples/OVERLAY-<id>.pdf` is our render (red) over the filed page it pairs with (blue); black is where they agree. `samples/OVERLAY-<id>.txt` is the page map.
+`usage/OVERLAY-<id>.pdf` is our render (red) over the filed page it pairs with (blue); black is where they agree. `usage/OVERLAY-<id>.txt` is the page map.
 
 Page map (word-overlap by pairing):
 
@@ -138,7 +138,7 @@ Build and render:
 
 ```sh
 sh docx/build-reference.sh docx/reference.docx    # pandoc default reference, edited (EB Garamond 12 pt, 24 pt body, 15.6 pt single blocks, footer PAGE field)
-sh tools/render.sh --engine docx courts/national/foreign-intelligence-surveillance-court/motion-brief samples/INPUT-<id>.md
+sh tools/render.sh --engine docx courts/national/foreign-intelligence-surveillance-court/motion-brief usage/INPUT-<id>.md
 ```
 
 Files: `docx/build-reference.sh` (writes `reference.docx`; zips with `ziptool`, since `zip` is not installed here), `docx/reference.docx`, `docx/fisc.lua` (the frontmatter becomes the court heading, caption table, title, signature, clearance, verification and certificate; the body keeps its markdown structure).

@@ -1,14 +1,14 @@
 # kywd: motion-brief (Rule 12(b) motion to dismiss with memorandum)
 
 Doc type: **motion-brief** in the United States District Court for the Western District of Kentucky (`kywd`): a Rule 12(b)(6) motion to dismiss with its memorandum of law. Under the joint local rules the motion and its supporting memorandum are one filing (LR 7.1(a), merged by JGO 2017-01A); the template covers that combined document.
-Folder: `courts/sixth-circuit/kentucky/federal/western-district/motion-brief/` (self-contained: `exemplars/`, `samples/`, `typst/`, this README).
+Folder: `courts/sixth-circuit/kentucky/federal/western-district/motion-brief/` (self-contained: `usage/`, `usage/`, `typst/`, this README).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-zoeller-3-25-cv-740-motion-brief.pdf` (memorandum, 19 pages, 1 filer; see `exemplars/SOURCE.md`). Companion: `exemplars/FILED-EXAMPLE-zoeller-3-25-cv-740-motion.pdf` (the 2-page motion, same filer). Second filer for comparison: `exemplars/FILED-EXAMPLE-glantz-3-26-cv-454-motion-brief.pdf` (30-page memorandum, different filer). |
-| sample md | `samples/INPUT-zoeller-memorandum.md`: the whole memorandum (caption, introduction, statement of facts, all of Law & Argument I to VIII, conclusion, signature). The motion page and the certificate of service are not transcribed. |
-| render | ok: `samples/OUTPUT-zoeller-memorandum.pdf`, 16 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> samples/INPUT-zoeller-memorandum.md`). |
-| overlay | ok: `samples/OVERLAY-zoeller-memorandum.pdf` and `samples/OVERLAY-zoeller-memorandum.txt` (`sh tools/overlay.sh <this-dir> zoeller-memorandum exemplars/FILED-EXAMPLE-zoeller-3-25-cv-740-motion-brief.pdf`). The tool's default exemplar is the first PDF in `exemplars/` alphabetically, which is the Glantz file; pass the Zoeller file explicitly. |
+| exemplar | yes: `usage/SAMPLE-kywd-motion-brief-zoeller325cv740.pdf` (memorandum, 19 pages, 1 filer; see `usage/SOURCE.md`). Companion: `usage/SAMPLE-kywd-motion-brief-zoeller325cv740motion.pdf` (the 2-page motion, same filer). Second filer for comparison: `usage/SAMPLE-kywd-motion-brief-glantz326cv454.pdf` (30-page memorandum, different filer). |
+| sample md | `usage/INPUT-kywd-motion-brief-zoellermemorandum.md`: the whole memorandum (caption, introduction, statement of facts, all of Law & Argument I to VIII, conclusion, signature). The motion page and the certificate of service are not transcribed. |
+| render | ok: `usage/OUTPUT-kywd-motion-brief-zoellermemorandum.typst.pdf`, 16 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> usage/INPUT-kywd-motion-brief-zoellermemorandum.md`). |
+| overlay | ok: `usage/OVERLAY-zoeller-memorandum.pdf` and `usage/OVERLAY-zoeller-memorandum.txt` (`sh tools/overlay.sh <this-dir> zoeller-memorandum usage/SAMPLE-kywd-motion-brief-zoeller325cv740.pdf`). The tool's default exemplar is the first PDF in `usage/` alphabetically, which is the Glantz file; pass the Zoeller file explicitly. |
 | pages reviewed | 16 of 16 (every page rendered at 60 dpi and viewed). Pages 1 to 15 were viewed after the final caption-width change (page 16 was viewed before it). That change moved only the caption and left the pagination at 16 pages. |
 | checks | `tools/check.sh` is not run for this folder (it expects a court folder with `court.json` and `rules.md`; the brief forbids touching `tools/`). The review below is the Gate 2 equivalent. |
 
@@ -54,9 +54,9 @@ Not verified in this pass and not asserted by the template: the consolidated W.D
 6. **Heading depth.** Level 2 and level 3 are both bold, left. The exemplar sub-headings are bold; whether its sub-heading italics are a convention is not checked (tier 3).
 7. **Certificate of service.** Not in the exemplar memorandum (the companion motion carries one). The template supports it; the sample does not use it.
 8. **Overlay default.** `tools/overlay.sh` picks the first exemplar alphabetically (Glantz). Pass the Zoeller memorandum explicitly, as shown in the table above.
-9. **File names.** `tools/render.sh` writes `samples/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `samples/OVERLAY-<id>.pdf` and `.txt`; these are the names used here.
+9. **File names.** `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `.txt`; these are the names used here.
 
-## Review of the rendered pages (samples/OUTPUT-zoeller-memorandum.pdf)
+## Review of the rendered pages (usage/OUTPUT-kywd-motion-brief-zoellermemorandum.typst.pdf)
 
 - Page 1: court title (3 lines), caption with ")" column, `CIVIL ACTION NO. 3:25-CV-00740-DJH` on the vs. row (one line), title centered bold, opening paragraph, INTRODUCTION centered. Pass.
 - Page 2: introduction paragraphs; STATEMENT OF FACTS centered; paragraphs unnumbered with first-line indent. Pass.
@@ -79,7 +79,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ## Engines
 
-**docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh reference.docx`), `kywd-motion-brief.lua` (court title, caption table, signing block, optional certificate of service), `render.sh` (pandoc, then the reference's styles, page setup and footer are restored into the output). Render: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-zoeller-memorandum.md`. It writes `samples/OUTPUT-zoeller-memorandum.docx` and then stops at the soffice step (see BLOCKED).
+**docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh reference.docx`), `kywd-motion-brief.lua` (court title, caption table, signing block, optional certificate of service), `render.sh` (pandoc, then the reference's styles, page setup and footer are restored into the output). Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-kywd-motion-brief-zoellermemorandum.md`. It writes `usage/OUTPUT-kywd-motion-brief-zoellermemorandum.docx` and then stops at the soffice step (see BLOCKED).
 
 What matches typst (set in `reference.docx`):
 - Letter paper, 1 in margins on all four sides (LR 5.2(a)).

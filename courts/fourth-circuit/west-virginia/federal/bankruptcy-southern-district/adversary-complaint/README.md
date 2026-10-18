@@ -33,12 +33,12 @@ Not used, and why: the Blackjewel Procedures Order (Bankr. S.D. W. Va., 2020, in
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-blackjewel-19-30289-doc334-adversary-complaint.pdf`: 23 pages, Doc. 334 in *In re Blackjewel, L.L.C., et al.*, Case No. 3:19-bk-30289 (Bankr. S.D. W. Va.), filed July 25, 2019 by plaintiffs' counsel (Petsonk PLLC; Mountain State Justice, Inc.). Text layer present (`pdftotext` reads it).
-- Provenance, caveats and the searches tried are in `exemplars/SOURCE.md`. The caveat that matters: the complaint is captioned as an adversary complaint but is docketed in the main case, and it is the only adversary-style complaint from this court found.
+- `usage/SAMPLE-wvsb-adversary-complaint-blackjewel1930289doc334.pdf`: 23 pages, Doc. 334 in *In re Blackjewel, L.L.C., et al.*, Case No. 3:19-bk-30289 (Bankr. S.D. W. Va.), filed July 25, 2019 by plaintiffs' counsel (Petsonk PLLC; Mountain State Justice, Inc.). Text layer present (`pdftotext` reads it).
+- Provenance, caveats and the searches tried are in `usage/SOURCE.md`. The caveat that matters: the complaint is captioned as an adversary complaint but is docketed in the main case, and it is the only adversary-style complaint from this court found.
 
 ## Sample
 
-- `samples/INPUT-blackjewel-doc334.md`: transcribed from the exemplar. Caption, counsel block, opening paragraph, ¶¶ 1–43 (parties, jurisdiction, facts), Counts I and II, the prayer (¶ 112), and the signature blocks. Footnote 1 (the debtors) is the caption footnote. Counts III–VI (¶¶ 68–111) are not transcribed, so the prayer's numbering jumps from 67 to 112 and its item e refers to Count VIII, which is not in the sample. This is deliberate, to stay in the 8–14 page target.
+- `usage/INPUT-wvsb-adversary-complaint-blackjeweldoc334.md`: transcribed from the exemplar. Caption, counsel block, opening paragraph, ¶¶ 1–43 (parties, jurisdiction, facts), Counts I and II, the prayer (¶ 112), and the signature blocks. Footnote 1 (the debtors) is the caption footnote. Counts III–VI (¶¶ 68–111) are not transcribed, so the prayer's numbering jumps from 67 to 112 and its item e refers to Count VIII, which is not in the sample. This is deliberate, to stay in the 8–14 page target.
 - The `consent:` line is a placeholder (gap 1). The exemplar has no consent statement.
 
 ## Render and overlay
@@ -46,12 +46,12 @@ Not used, and why: the Blackjewel Procedures Order (Bankr. S.D. W. Va., 2020, in
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
 D=courts/fourth-circuit/west-virginia/federal/bankruptcy-southern-district/adversary-complaint
-sh tools/render.sh $D samples/INPUT-blackjewel-doc334.md   # -> samples/OUTPUT-blackjewel-doc334.pdf
-sh tools/overlay.sh $D blackjewel-doc334                    # -> samples/OVERLAY-blackjewel-doc334.pdf and .txt
+sh tools/render.sh $D usage/INPUT-wvsb-adversary-complaint-blackjeweldoc334.md   # -> usage/OUTPUT-wvsb-adversary-complaint-blackjeweldoc334.typst.pdf
+sh tools/overlay.sh $D blackjewel-doc334                    # -> usage/OVERLAY-blackjewel-doc334.pdf and .txt
 ```
 
-- `samples/OUTPUT-blackjewel-doc334.pdf`: 12 pages. Typst compiled with no warnings (`render.sh` fails on any). Fonts: EBGaramond-Regular, -Bold, -Italic only (embedded).
-- File names follow the tools (`OUTPUT-`, `OVERLAY-`), which the brief's `<id>.pdf` and `<id>-overlay.pdf` names differ from. The page map is in `samples/OVERLAY-blackjewel-doc334.txt`.
+- `usage/OUTPUT-wvsb-adversary-complaint-blackjeweldoc334.typst.pdf`: 12 pages. Typst compiled with no warnings (`render.sh` fails on any). Fonts: EBGaramond-Regular, -Bold, -Italic only (embedded).
+- File names follow the tools (`OUTPUT-`, `OVERLAY-`), which the brief's `<id>.pdf` and `<id>-overlay.pdf` names differ from. The page map is in `usage/OVERLAY-blackjewel-doc334.txt`.
 - Overlay pairing (ours → filed): p.1–2 ↔ 1–2; p.3 ↔ 3; p.4 ↔ 5; p.5 ↔ 6; p.6–7 ↔ 7–8; p.8 ↔ 10; p.9 ↔ 11; p.10 ↔ 12; p.11 ↔ 13; p.12 ↔ 22 (the prayer and signature page of the exemplar). The pairing is by word overlap, so it is coarse. The exemplar's pleading layout is not reproduced, so the two layers do not coincide on text lines. It is a diagnostic, not a score.
 
 ## Visual review (Gate 2 record: all 12 pages rendered at 60 dpi and looked at)
@@ -83,12 +83,12 @@ Pages reviewed: 12 of 12. The first version had the signature block alone on pag
 6. **Notice of Hearing.** The 2020 Blackjewel Procedures Order requires a notice of hearing on the first page of motions. It is case-specific and not applied. Whether a court-wide form requires one was not verified.
 7. **Typeface and spacing.** No rule sets a typeface or spacing for this court (FRBP 9004(a) requires only legibility; the local rules say nothing). EB Garamond 13 pt double-spaced is a style choice. The exemplar's filers used Times New Roman and Calibri (`pdffonts`). Judge-specific standing orders were not checked.
 8. **Partial transcription.** Counts III–VI and the class allegations (¶¶ 68–111) are omitted for the 8–14 page target. The prayer refers to Count VIII, which is not in the sample.
-9. **Single exemplar.** One filed adversary complaint, captioned as an adversary, filed in the main case. The eval-loop rule asks for two or three from different filers before tier 2 is judged; none was found in the searches listed in `exemplars/SOURCE.md`. Tier 2 is therefore judged against this one exemplar only.
+9. **Single exemplar.** One filed adversary complaint, captioned as an adversary, filed in the main case. The eval-loop rule asks for two or three from different filers before tier 2 is judged; none was found in the searches listed in `usage/SOURCE.md`. Tier 2 is therefore judged against this one exemplar only.
 10. **No certificate of service or summons.** A complaint is served with a summons issued by the Clerk (LR 7004-2), which the template does not generate.
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; filter `wvsb-adversary-complaint.lua`; measured on the LibreOffice PDF, `samples/OUTPUT-blackjewel-doc334.docx.pdf`, 14 pages; see `docs/DOCX.md`).
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; filter `wvsb-adversary-complaint.lua`; measured on the LibreOffice PDF, `usage/OUTPUT-wvsb-adversary-complaint-blackjeweldoc334.docx.pdf`, 14 pages; see `docs/DOCX.md`).
 
 - Matches the typst form: EB Garamond 13 pt (the PDF embeds EBGaramond-Regular, -Bold, -Italic only); letter paper; 1 in margins; body double-spaced at an exact 24 pt pitch with a 0.5 in first-line indent; caption, counsel blocks, footnotes and headings single-spaced at an exact 17 pt pitch; level 1 headings centred in capitals, level 2 centred, level 3 at the margin; the caption footnote is a native footnote on the "Debtors." designation; page number centred in the footer at 11 pt; consent statement before the signature; counsel blocks side by side.
 - Differs: (a) the caption rules are paragraph borders (a right rule on the left-column paragraphs and a bottom rule on an empty paragraph), not a cell border; LibreOffice leaves a small break in the right rule at the "v." line. (b) Between paragraphs the typst output has a single-line pitch (about 17 pt), because `par(spacing: 0pt)` removes the leading there; the docx keeps 24 pt. The docx is therefore longer (14 pages against typst's 12). The typst template was not changed; this is for review. (c) The consent statement and the signature are kept together (keep-with-next), so they move to a new page as one block.

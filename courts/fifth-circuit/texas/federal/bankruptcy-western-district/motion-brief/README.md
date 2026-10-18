@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-western-district/motion-b
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-minns-varriale-23-01036-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-oakes-motion.md` (a portion of the 21-page filing, see Known gaps) |
-| render | ok: `samples/OUTPUT-oakes-motion.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-oakes-motion.pdf` and `OVERLAY-oakes-motion.txt` |
+| exemplar | yes: `usage/SAMPLE-txwb-motion-brief-minnsvarriale2301036.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-txwb-motion-brief-oakesmotion.md` (a portion of the 21-page filing, see Known gaps) |
+| render | ok: `usage/OUTPUT-txwb-motion-brief-oakesmotion.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-oakes-motion.pdf` and `OVERLAY-oakes-motion.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and all 8 pages viewed again on 2026-10-14, font unchanged) |
 
 File names follow the tools, not the brief's `<id>.md` shorthand: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf`, and the overlay `OVERLAY-<id>.pdf/.txt` (see `tools/overlay.sh`).
@@ -75,22 +75,22 @@ Not produced by this template: a separate memorandum of points and authorities (
 7. **Italics.** The text layer has no italic markup, so the case names and "Id." are roman. The template italicizes `*...*`.
 8. **Font.** EB Garamond (vendored; `docs/FONTS.md` "No face named"), not Times New Roman. The rules name no face (see Governing rules, Typeface), so no substitute is used. At 12 pt EB Garamond sets smaller than Times; that is a visual difference from the filed copy, not a rule requirement.
 9. **Spacing and margins are conventions.** Rule 9004(a) sets none; the layout follows the exemplar (double spacing, one-inch margins).
-10. **One exemplar.** Tier-2 comparison needs two or three filers; only this one is saved. Other txwb motions are listed in `exemplars/SOURCE.md`.
+10. **One exemplar.** Tier-2 comparison needs two or three filers; only this one is saved. Other txwb motions are listed in `usage/SOURCE.md`.
 11. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape. Render and overlay were run; the visual review above is the Gate 2 equivalent.
 12. **Local rules checked, one edition.** The W.D. Tex. local rules were read from the 2014 redline on txwb.uscourts.gov (fetched 2026-10-14). L.R. 9004 has no typeface rule for pleadings. The redline may be older than the current rules; the current text is not checked.
 
 ## Searches and sources
 
-- Overlay (2026-10-14): the exemplar PDF is not committed to the repo (no `exemplars/*.pdf` in any court folder). It was downloaded from the URL in `exemplars/SOURCE.md` to `/work/artifacts/txwb-rules/exemplars/minns-motion.pdf` and passed as the third argument of `tools/overlay.sh`.
+- Overlay (2026-10-14): the exemplar PDF is not committed to the repo (no `usage/*.pdf` in any court folder). It was downloaded from the URL in `usage/SOURCE.md` to `/work/artifacts/txwb-rules/usage/minns-motion.pdf` and passed as the third argument of `tools/overlay.sh`.
 
-- Exemplar and other motions: see `exemplars/SOURCE.md`.
+- Exemplar and other motions: see `usage/SOURCE.md`.
 - L.R. 9014-1(a): https://www.txwb.uscourts.gov/l-rule-9014-1-contested-matters (WebFetch, 2026-10-14; the page carries no revision date). A courtrules.net copy exists at https://www.courtrules.net/courts/federal/bankruptcy-western-district-texas/local-rules/l-rule-9014-1.
 - FRBP 9004(a): https://www.law.cornell.edu/rules/frbp/rule_9004 (fetched 2026-10-14).
 - Clerk's office address: WebSearch, 2026-10-14; not confirmed (see Known gaps 1).
 
 ## Engines
 
-**docx** (`docx/`): `sh tools/render.sh --engine docx motion-brief samples/INPUT-oakes-motion.md` runs pandoc with `docx/txwb-motion-brief.lua` on `docx/reference.docx`, then LibreOffice (`soffice --headless --convert-to pdf`). `docx/reference.docx` is rebuilt from `docx/reference-parts/` by `sh docx/build-reference.sh`. EB Garamond must be installed for LibreOffice (`fonts/eb-garamond`). Checked on `samples/OUTPUT-oakes-motion.docx.pdf`, 8 of 8 pages rendered at 60 dpi and viewed beside the typst pages.
+**docx** (`docx/`): `sh tools/render.sh --engine docx motion-brief usage/INPUT-txwb-motion-brief-oakesmotion.md` runs pandoc with `docx/txwb-motion-brief.lua` on `docx/reference.docx`, then LibreOffice (`soffice --headless --convert-to pdf`). `docx/reference.docx` is rebuilt from `docx/reference-parts/` by `sh docx/build-reference.sh`. EB Garamond must be installed for LibreOffice (`fonts/eb-garamond`). Checked on `usage/OUTPUT-txwb-motion-brief-oakesmotion.docx.pdf`, 8 of 8 pages rendered at 60 dpi and viewed beside the typst pages.
 
 | Layout | Matches typst | Differs (docx against typst, same sample) |
 |---|---|---|

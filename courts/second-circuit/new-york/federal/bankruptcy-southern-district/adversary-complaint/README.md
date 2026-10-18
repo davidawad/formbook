@@ -35,25 +35,25 @@ Judge-specific chambers practices may add requirements; not checked in this run.
 
 ## Files
 
-- `exemplars/FILED-EXAMPLE-celsius-24-04018-adversary-complaint.pdf` (primary, Quinn Emanuel for the Post-Effective Date
-  Celsius Debtors, filed Aug. 9, 2024) and `exemplars/FILED-EXAMPLE-ehrenfeld-19-01128-adversary-complaint.pdf` (second
-  filer, the NY Attorney General for The Lawyers' Fund, filed May 3, 2019, 4 pages). See `exemplars/SOURCE.md`.
-- `samples/INPUT-celsius-complaint.md`: transcribed from the primary exemplar: the caption and counsel frontmatter, paragraphs
+- `usage/SAMPLE-nysb-adversary-complaint-celsius2404018.pdf` (primary, Quinn Emanuel for the Post-Effective Date
+  Celsius Debtors, filed Aug. 9, 2024) and `usage/SAMPLE-nysb-adversary-complaint-ehrenfeld1901128.pdf` (second
+  filer, the NY Attorney General for The Lawyers' Fund, filed May 3, 2019, 4 pages). See `usage/SOURCE.md`.
+- `usage/INPUT-nysb-adversary-complaint-celsiuscomplaint.md`: transcribed from the primary exemplar: the caption and counsel frontmatter, paragraphs
   1-31, the prayer and the first signature group. Not the whole pleading (30 pages).
-- `samples/OUTPUT-celsius-complaint.pdf`: 11 pages (cover + 10). `samples/OVERLAY-celsius-complaint.pdf` and `.txt`.
-- The brief named the sample `samples/<id>.md` and `<id>.pdf`, and `<id>-overlay.pdf`. The repo's tools and file-role names
+- `usage/OUTPUT-nysb-adversary-complaint-celsiuscomplaint.typst.pdf`: 11 pages (cover + 10). `usage/OVERLAY-celsius-complaint.pdf` and `.txt`.
+- The brief named the sample `usage/<id>.md` and `<id>.pdf`, and `<id>-overlay.pdf`. The repo's tools and file-role names
   (`INPUT-`, `OUTPUT-`, `OVERLAY-`) are used instead, so `tools/render.sh` and `tools/overlay.sh` work unchanged.
 
 ## Commands (from the repo root)
 
-    sh tools/render.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/adversary-complaint samples/INPUT-celsius-complaint.md
+    sh tools/render.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-nysb-adversary-complaint-celsiuscomplaint.md
     sh tools/overlay.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/adversary-complaint celsius-complaint
 
 The render is a clean typst compile with the vendored fonts (no warnings).
 
 ## Overlay
 
-`samples/OVERLAY-celsius-complaint.txt` pairs each rendered page with the filed page sharing the most words:
+`usage/OVERLAY-celsius-complaint.txt` pairs each rendered page with the filed page sharing the most words:
 
     ours p.1 -> filed p.1 (92.9%)    ours p.2 -> p.2 (74.1%)    ours p.3 -> p.3 (78.8%)    ours p.4 -> p.4 (79.1%)
     ours p.5 -> p.5 (60.7%)          ours p.6 -> p.6 (58.0%)    ours p.7 -> p.7 (63.3%)    ours p.8 -> p.8 (57.6%)
@@ -93,7 +93,7 @@ Open in the render: none that is visible at this resolution. The overlay is not 
 - Not produced: the summons, the Form 1040 adversary cover sheet, the civil cover information, and exhibits. These are
   separate filings, not the complaint.
 - The paragraph count in a long complaint is not limited by the template.
-- Tier 2 asks for 2-3 filers. Two filed complaints are in `exemplars/` (Celsius, Ehrenfeld). The sample is transcribed from one.
+- Tier 2 asks for 2-3 filers. Two filed complaints are in `usage/` (Celsius, Ehrenfeld). The sample is transcribed from one.
 
 ## BLOCKED
 

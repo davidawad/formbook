@@ -2,8 +2,8 @@
 
 - Court: `bap9` (United States Bankruptcy Appellate Panel of the Ninth Circuit), folder `courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief/`
 - Template: `typst/bap9-answering-brief.typ` (entry `typst/main.typ`)
-- Exemplar: `exemplars/FILED-EXAMPLE-klein-CC-25-1042-answering-brief.pdf` (see `exemplars/SOURCE.md`)
-- Samples: `samples/INPUT-klein-answering-brief.md`, a transcription of the exemplar, rendered to `samples/OUTPUT-klein-answering-brief.pdf`, overlay `samples/OVERLAY-klein-answering-brief.pdf` and `.txt`; and `samples/INPUT-fictional-answering-brief.md` (fictional), rendered to `samples/OUTPUT-fictional-answering-brief.pdf`
+- Exemplar: `usage/SAMPLE-bap9-answering-brief-kleincc251042.pdf` (see `usage/SOURCE.md`)
+- Samples: `usage/INPUT-bap9-answering-brief-klein.md`, a transcription of the exemplar, rendered to `usage/OUTPUT-bap9-answering-brief-klein.typst.pdf`, overlay `usage/OVERLAY-klein-answering-brief.pdf` and `.txt`; and `usage/INPUT-bap9-answering-brief-fictional.md` (fictional), rendered to `usage/OUTPUT-bap9-answering-brief-fictional.typst.pdf`
 - Status of this doc type:
   - **Exemplar found (2026-10-16).** *Klein v. Sharp*, BAP No. CC-25-1042, Appellee's Answering Brief filed May 2, 2025 by Pachulski Stang Ziehl & Jones LLP for the chapter 11 trustee. Born-digital, complete. Alternate from a different filer: *Hujazi v. Wirum*, BAP No. NC-14-1030 (McKenna Long & Aldridge LLP), compared for tier 2, not saved.
   - The Klein sample transcribes the whole body (the brief is short: 1,598 words by the filer's count). The fictional sample is kept as it was.
@@ -41,7 +41,7 @@ BAP R. 8015(a)-1 itself was read on 2026-10-16 (https://cdn.ca9.uscourts.gov/dat
 
 ## Exemplar search (resolved 2026-10-16)
 
-The earlier passes (2026-10-14 and 2026-10-15) searched CourtListener with `court=bap9` and found nothing. The reason: CourtListener files BAP9 dockets under the circuit's court id `ca9`, with the short number (ca9 docket "25-1042" is BAP No. CC-25-1042). The 2026-10-15 pass also wrongly ruled out *Hujazi v. Wirum* as a Ninth Circuit appeal; it is BAP No. NC-14-1030 (corrected in `exemplars/SOURCE.md`). Searching RECAP (`type=r`) under `ca9` for answering briefs with BAP captions found four candidates; three are from the same firm (Pachulski Stang Ziehl & Jones), so the primary is the shortest complete one (Klein, CC-25-1042) and the alternate is Hujazi (a different filer). Details, URLs and the rejected candidates are in `exemplars/SOURCE.md`.
+The earlier passes (2026-10-14 and 2026-10-15) searched CourtListener with `court=bap9` and found nothing. The reason: CourtListener files BAP9 dockets under the circuit's court id `ca9`, with the short number (ca9 docket "25-1042" is BAP No. CC-25-1042). The 2026-10-15 pass also wrongly ruled out *Hujazi v. Wirum* as a Ninth Circuit appeal; it is BAP No. NC-14-1030 (corrected in `usage/SOURCE.md`). Searching RECAP (`type=r`) under `ca9` for answering briefs with BAP captions found four candidates; three are from the same firm (Pachulski Stang Ziehl & Jones), so the primary is the shortest complete one (Klein, CC-25-1042) and the alternate is Hujazi (a different filer). Details, URLs and the rejected candidates are in `usage/SOURCE.md`.
 
 ## Template changes from the overlay
 
@@ -55,13 +55,13 @@ Each change is rule-driven or a tier-2 convention seen across filers; none copie
 6. **Table of authorities sorted numbers digit by digit** ("28 U.S.C. § 1334" before "§ 157"). Digit runs now compare by value. Klein's own table has the digit-by-digit order; the Beavor reply table has numeric order; numeric is the professional choice.
 7. **Certificate of service with unregistered parties** dropped the BAP sample certificate's middle sentence (registered parties served through CM/ECF). Both sentences are now printed (Litigants Manual Rev'd 01/26, sample certificate, manual p. 60). Klein has no unregistered parties, so it is not affected; shown on the Beavor reply sample.
 
-Re-rendered after the changes: `OUTPUT-klein-answering-brief.pdf` (14 pages) and `OUTPUT-fictional-answering-brief.pdf` (now 11 pages; was 10, from the heading spacing).
+Re-rendered after the changes: `OUTPUT-bap9-answering-brief-klein.typst.pdf` (14 pages) and `OUTPUT-bap9-answering-brief-fictional.typst.pdf` (now 11 pages; was 10, from the heading spacing).
 
-## Sample (`samples/INPUT-klein-answering-brief.md`)
+## Sample (`usage/INPUT-bap9-answering-brief-klein.md`)
 
 A transcription of the exemplar, not a fictional sample. The whole body is transcribed: the introductory paragraph, sections I-VI with the filer's numbering and upper-case titles, the five Statement-of-the-Case sub-headings, the signature, the compliance certificate and the interested-parties certification, all from the PDF's text layer. Case names and order titles in italics as filed. Omitted, as stated in the file's header comment: the bold-underlined defined terms (plain text here) and the filer's related-cases certification (BAP R. 8015(a)-1(b) asks it of the appellant's opening brief, so the template does not print one for an appellee). The filing has no certificate of service; the template prints its standard one. Authorities are linked with `toa:` keys, so the table of authorities is generated from the body. The compliance certificate states the template's count, 1,801 words; the filer's certificate states 1,598 (Word's count; ours is a whitespace-token count that includes citations and headings).
 
-## Sample (`samples/INPUT-fictional-answering-brief.md`)
+## Sample (`usage/INPUT-bap9-answering-brief-fictional.md`)
 
 Fictional. About 950 words of body text. Sections: summary of argument; argument with sub-headings; conclusion. No statements of jurisdiction, issues or the case (correct under FRBP 8014(b)). Interested-parties certificate only. Written to the rules, not transcribed.
 
@@ -70,7 +70,7 @@ File naming follows the tools (`INPUT-` / `OUTPUT-` / `OVERLAY-`), as in the ope
 
 ## Overlay
 
-`sh tools/overlay.sh courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief klein-answering-brief` exits 0 (only one PDF in `exemplars/`) and writes `samples/OVERLAY-klein-answering-brief.pdf` (14 pages) and `.txt`.
+`sh tools/overlay.sh courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief klein-answering-brief` exits 0 (only one PDF in `usage/`) and writes `usage/OVERLAY-klein-answering-brief.pdf` (14 pages) and `.txt`.
 
 Page map (ours → filed page, word overlap): 1→1 (94%), 2→2 (84%), 3→3 (86%), 4→4 (94%), 5→5 (96%), 6→6 (89%), 7→7 (78%), 8→8 (47%), 9→8 (40%), 10→9 (55%), 11→10 (61%), 12→11 (65%), 13→14 (33%), 14→14 (10%). Our body runs 9 pages against the filer's 8 (EB Garamond 14 pt sets wider than Times New Roman 14 pt), so from page 8 on the pairing is the nearest filed page, not a page-for-page claim. Page 14 (our certificate of service) has no counterpart in the filing.
 
@@ -130,13 +130,13 @@ Tier-2 comparison with the alternate (Hujazi, viewed pages 1, 2, 4, 5, 6, 7): Hu
 
 ## Re-check 2026-10-15 (bead fb-595.20.9)
 
-- Re-searched for an exemplar (CourtListener with `court=bap9`, paced; web search). None found. Searches are logged in `exemplars/SOURCE.md`.
-- Re-rendered `samples/INPUT-fictional-answering-brief.md` with `sh tools/render.sh`: 10 pages, exit 0. Every page rendered at 60 dpi and viewed; layout unchanged from the review above. The PDF was moved to `/work/artifacts/bap9/` and is not committed.
+- Re-searched for an exemplar (CourtListener with `court=bap9`, paced; web search). None found. Searches are logged in `usage/SOURCE.md`.
+- Re-rendered `usage/INPUT-bap9-answering-brief-fictional.md` with `sh tools/render.sh`: 10 pages, exit 0. Every page rendered at 60 dpi and viewed; layout unchanged from the review above. The PDF was moved to `/work/artifacts/bap9/` and is not committed.
 - `sh tools/overlay.sh` exits 1 (`no exemplar pdf`). Overlay: not produced.
 - Status unchanged: **BLOCKED: no public exemplar.**
 ## Engines
 
-docx (`docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/bap9.lua` builds the cover, front matter, signature and certificates from the frontmatter; output `samples/OUTPUT-<id>.docx`).
+docx (`docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/bap9.lua` builds the cover, front matter, signature and certificates from the frontmatter; output `usage/OUTPUT-<id>.docx`).
 
 - Matches the typst form: US Letter with 1 in margins; EB Garamond 14 pt (font name declared; it must be installed where the file is opened); double spacing as exact 36.5 pt lines, the typst 1.3em gap between paragraphs, 0.5 in first-line indent; single-spaced headings, quotations, footnotes, table entries, signature and certificates; centered bold level-1 headings, bold left level-2 and level-3 headings with hanging indent. Three sections: cover with no footer, front matter in lower roman from i, body and certificates in arabic from 1. The filter applies the same word limit and required-heading checks as the typst template and passes the body word count to the compliance certificate (the opening and reply counts, 1,782 and 344, match the figures recorded in those READMEs).
 - Differs from the typst form: (1) the table of contents is a TOC field whose cached result lists the headings without page numbers; Word or LibreOffice shows page numbers after a field update. (2) The table of authorities lists the cited authorities without page numbers in every viewer (LibreOffice does not honor TA/TOA fields), so it has no dot leaders. (3) Line breaks and page breaks follow Word or LibreOffice, not the typst render. (4) The last body paragraph is kept with the signature block (KeepWithNext); certificates are not forced onto one page.
@@ -145,4 +145,4 @@ docx (`docx/build-reference.sh` builds `docx/reference.docx` from pandoc's defau
 - The .docx was validated for a valid zip, well-formed XML in every part, three sections with footer references, and every paragraph style defined in styles.xml. It has not been opened in Word or LibreOffice.
 ## Render check 2026-10-15
 
-Re-rendered `samples/OUTPUT-fictional-*.pdf` with `sh tools/render.sh` (exit 0, no typst warnings). `sh tools/overlay.sh` exits 1 again: no exemplar pdf. Every page rendered at 60 dpi and viewed: answering-brief 10 of 10, reply-brief 6 of 6. No template changes in this pass. Still BLOCKED on the exemplar; search log appended to `exemplars/SOURCE.md`.
+Re-rendered `usage/OUTPUT-fictional-*.pdf` with `sh tools/render.sh` (exit 0, no typst warnings). `sh tools/overlay.sh` exits 1 again: no exemplar pdf. Every page rendered at 60 dpi and viewed: answering-brief 10 of 10, reply-brief 6 of 6. No template changes in this pass. Still BLOCKED on the exemplar; search log appended to `usage/SOURCE.md`.

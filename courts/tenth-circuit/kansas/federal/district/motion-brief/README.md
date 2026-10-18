@@ -5,10 +5,10 @@ Folder: `courts/tenth-circuit/kansas/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-blatnick-2-26-cv-02480-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-blatnick-motion-brief.md`: the whole memorandum, 11 pages, transcribed (case names and signals italic as the filed copy sets them) |
-| render | ok: `samples/OUTPUT-blatnick-motion-brief.pdf`, 12 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Bold, -Italic), no warnings (`tools/render.sh`); the page-limit check passes (the brief body ends on page 11, the signature block; the certificate is on page 12) |
-| overlay | fail: `tools/overlay.sh` exits 1, "no exemplar pdf": `exemplars/` holds no `FILED-EXAMPLE-*.pdf` in this snapshot. `samples/OVERLAY-blatnick-motion-brief.txt` is left from the EB Garamond render and is stale; no `.pdf` overlay exists |
+| exemplar | yes: `usage/SAMPLE-ksd-motion-brief-blatnick226cv02480.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ksd-motion-brief-blatnick.md`: the whole memorandum, 11 pages, transcribed (case names and signals italic as the filed copy sets them) |
+| render | ok: `usage/OUTPUT-ksd-motion-brief-blatnick.typst.pdf`, 12 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Bold, -Italic), no warnings (`tools/render.sh`); the page-limit check passes (the brief body ends on page 11, the signature block; the certificate is on page 12) |
+| overlay | fail: `tools/overlay.sh` exits 1, "no exemplar pdf": `usage/` holds no `SAMPLE-*.pdf` in this snapshot. `usage/OVERLAY-blatnick-motion-brief.txt` is left from the EB Garamond render and is stale; no `.pdf` overlay exists |
 | pages reviewed | 12 of 12: every page rendered at 70 dpi and viewed after the Liberation Serif change (fonts pass) |
 
 ## Governing rules
@@ -67,11 +67,11 @@ A sample is one `.md` file: YAML frontmatter, then the body.
 6. **Heading style.** The filed copy's level 2 headings are letters with a hanging indent, which the template reproduces. The filed copy's level 3 headings are not used in this sample (the memorandum has none), so their style is untested against an exemplar.
 7. **Combined motion.** The memorandum is a separate filing from the motion (Doc. 6 and Doc. 7). A combined motion and brief would need the motion's own caption and relief statement, which this template does not produce.
 8. **Overlay pairing.** The sample and the filed copy have the same page count (11), so the overlay pairs pages by index. The overlay is a diagnostic, not a score.
-9. **Output and overlay file names.** As in the complaint: `samples/INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`, the names `tools/render.sh` and `tools/overlay.sh` read and write.
+9. **Output and overlay file names.** As in the complaint: `usage/INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`, the names `tools/render.sh` and `tools/overlay.sh` read and write.
 10. **Check scripts not run.** As in the complaint, `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json`, `rules.md` and `checks.yaml`; this doc-type folder has none, and the brief forbids editing `tools/`.
 11. **Block quotations and footnotes.** The sample has neither. The paths are exercised by a scratch sample rendered once with a block quotation, a footnote, levels 3 and 4, a list and the certificate (the scratch sample was deleted after the render). The footnote number is set tight to its text (typst 0.15 has no separate number gap for footnote entries).
 
-## Review of the rendered pages (`samples/OUTPUT-blatnick-motion-brief.pdf`, 12 pages, Liberation Serif)
+## Review of the rendered pages (`usage/OUTPUT-ksd-motion-brief-blatnick.typst.pdf`, 12 pages, Liberation Serif)
 
 | Page | Content | Result |
 |---|---|---|
@@ -104,6 +104,6 @@ Gate 2 rows are recorded here, not in `reviews/` (this doc type has no `reviews/
 Differs from typst: no ")" column in the caption; the page-limit assertion (15 pages, D. Kan. R. 7.1(d)(3)) is not run for docx, since page counts come from the LibreOffice PDF; Word may paginate differently.
 
 BLOCKED (docx gates cannot run on this box):
-- `docx.pdf` (LibreOffice conversion): `soffice` is not installed on the box, so `tools/render-docx.sh` stops after writing `samples/OUTPUT-blatnick-motion-brief.docx`.
+- `docx.pdf` (LibreOffice conversion): `soffice` is not installed on the box, so `tools/render-docx.sh` stops after writing `usage/OUTPUT-ksd-motion-brief-blatnick.docx`.
 - Visual review of the docx pages: 0 pages reviewed; the typst pages were viewed as the comparison.
 - Page limit (15 pages through the signature, D. Kan. R. 7.1(d)(3)): not measured for docx.

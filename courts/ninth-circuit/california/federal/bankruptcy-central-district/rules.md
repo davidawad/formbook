@@ -23,7 +23,7 @@ Kinds: **M** mandated by rule; **C** convention; **T** project requirement; **A*
 | CACB-CERT-001 | Pleading title, caption and any required local cover sheet follow LBR 7003-1 and the applicable Clerk form. | CACB-LBR, LBR 7003-1; FRBP 7003 | M |
 | CACB-CONT-003 | Motion states grounds and requested relief; notice, service and hearing procedure follow local motion practice. | FRBP 9013, 9014; CACB-LBR, LBR 9013-1 | M |
 | CACB-CONT-004 | A memorandum exceeding ten pages includes a table of contents and table of authorities; comply with the current LBR 9013-2 length and form requirements. | CACB-LBR, LBR 9013-2 | M |
-| CACB-FORM-002 | Pleading-paper line count, caption arrangement and footer choices are conventions evidenced by the different-filer filed examples, not independent font or spacing mandates. | `exemplars/SOURCE.md` | C |
+| CACB-FORM-002 | Pleading-paper line count, caption arrangement and footer choices are conventions evidenced by the different-filer filed examples, not independent font or spacing mandates. | `usage/SOURCE.md` | C |
 
 ### Adversary complaint
 

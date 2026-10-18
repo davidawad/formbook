@@ -5,21 +5,21 @@ Folder: `courts/ninth-circuit/washington/federal/bankruptcy-western-district/mot
 
 | Item | Status |
 |---|---|
-| exemplar | yes. Primary: `exemplars/FILED-EXAMPLE-smith-24-10218-motion-brief.pdf` (19 pp., Debtor's motion and memorandum, William C. Budigan). Second filer: `exemplars/FILED-EXAMPLE-pigida-14-01248-motion-brief.pdf` (15 pp., memorandum in support of partial summary judgment, The Rigby Law Firm; filed 2015 under the old rules). Both re-downloaded 2026-10-14 from the URLs in `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-smith-motion-memorandum.md`: transcription of exemplar pp. 1 to 11 and 17 to 18 (notation, caption, motion, memorandum, signature, certificate of service). Pages 12 to 16 and 19 are not transcribed; see Known gaps. |
-| render | ok: `samples/OUTPUT-smith-motion-memorandum.pdf`, 12 pages, Letter, typst 0.15.0 through `tools/render.sh`, no typst warnings, fonts: EB Garamond Regular, Bold and Italic only (`pdffonts`, all embedded). |
-| overlay | ok: `samples/OVERLAY-smith-motion-memorandum.pdf` and `samples/OVERLAY-smith-motion-memorandum.txt` (page map), against the Smith exemplar. |
+| exemplar | yes. Primary: `usage/SAMPLE-wawb-motion-brief-smith2410218.pdf` (19 pp., Debtor's motion and memorandum, William C. Budigan). Second filer: `usage/SAMPLE-wawb-motion-brief-pigida1401248.pdf` (15 pp., memorandum in support of partial summary judgment, The Rigby Law Firm; filed 2015 under the old rules). Both re-downloaded 2026-10-14 from the URLs in `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-wawb-motion-brief-smithmotionmemorandum.md`: transcription of exemplar pp. 1 to 11 and 17 to 18 (notation, caption, motion, memorandum, signature, certificate of service). Pages 12 to 16 and 19 are not transcribed; see Known gaps. |
+| render | ok: `usage/OUTPUT-wawb-motion-brief-smithmotionmemorandum.typst.pdf`, 12 pages, Letter, typst 0.15.0 through `tools/render.sh`, no typst warnings, fonts: EB Garamond Regular, Bold and Italic only (`pdffonts`, all embedded). |
+| overlay | ok: `usage/OVERLAY-smith-motion-memorandum.pdf` and `usage/OVERLAY-smith-motion-memorandum.txt` (page map), against the Smith exemplar. |
 | pages reviewed | 12 of 12: every page rasterized at 80 dpi and viewed in the final render (after the caption and signature fixes, all pages were viewed again). |
 
 Commands (from the repo root):
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
-sh tools/render.sh courts/ninth-circuit/washington/federal/bankruptcy-western-district/motion-brief samples/INPUT-smith-motion-memorandum.md
-sh tools/overlay.sh courts/ninth-circuit/washington/federal/bankruptcy-western-district/motion-brief smith-motion-memorandum courts/ninth-circuit/washington/federal/bankruptcy-western-district/motion-brief/exemplars/FILED-EXAMPLE-smith-24-10218-motion-brief.pdf
+sh tools/render.sh courts/ninth-circuit/washington/federal/bankruptcy-western-district/motion-brief usage/INPUT-wawb-motion-brief-smithmotionmemorandum.md
+sh tools/overlay.sh courts/ninth-circuit/washington/federal/bankruptcy-western-district/motion-brief smith-motion-memorandum courts/ninth-circuit/washington/federal/bankruptcy-western-district/motion-brief/usage/SAMPLE-wawb-motion-brief-smith2410218.pdf
 ```
 
-The overlay tool's default exemplar is the first PDF in `exemplars/` alphabetically, which is the Pigida filing. The Smith exemplar is passed explicitly because it is the one the sample was transcribed from.
+The overlay tool's default exemplar is the first PDF in `usage/` alphabetically, which is the Pigida filing. The Smith exemplar is passed explicitly because it is the one the sample was transcribed from.
 
 ## Governing rules
 
@@ -100,15 +100,15 @@ The overlay is a diagnostic, not a score. Pages 1 to 3 agree most closely: the n
 7. **Caption entries.** The debtor names are split into one frontmatter entry per line (`MELANIE A SMITH`, `*aka* M A SMITH`, `*aka* M SMITH,`) so that each ")" lines up with one name line. This is sample data, not a template break.
 8. **Second filer not overlaid.** The Pigida filing (2015) was used for the tier-2 cross-check of the notation, caption and bottom notation. It is not overlaid because its pleading format predates the 2023 rules.
 9. **Gate 2 record.** No `reviews/` file for this doc type. The page review above is the visual check; it is not a recorded Gate 2 review.
-10. **Adversary complaint.** The sibling `adversary-complaint/` folder has no `OUTPUT` or `OVERLAY` PDF and no `README` outputs in `samples/`. Not touched in this change.
+10. **Adversary complaint.** The sibling `adversary-complaint/` folder has no `OUTPUT` or `OVERLAY` PDF and no `README` outputs in `usage/`. Not touched in this change.
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion-brief.lua` writes the notation, the caption, the body and the signature; `docx/render.sh` (run by `tools/render-docx.sh`) fills the bottom notation from the frontmatter. Output: `samples/OUTPUT-smith-motion-memorandum.docx` and `.docx.pdf` (LibreOffice 26.8), 12 pages; all 12 pages rendered at 60 dpi and viewed (`reviews/docx.md`).
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion-brief.lua` writes the notation, the caption, the body and the signature; `docx/render.sh` (run by `tools/render-docx.sh`) fills the bottom notation from the frontmatter. Output: `usage/OUTPUT-wawb-motion-brief-smithmotionmemorandum.docx` and `.docx.pdf` (LibreOffice 26.8), 12 pages; all 12 pages rendered at 60 dpi and viewed (`reviews/docx.md`).
 
 - Matches the typst output: letter; the same margins and 28-line grid as the complaint; EB Garamond 12 pt (`pdffonts`: EBGaramond Regular, Bold, Italic); pleading rules; the notation at the top right (judge, chapter, hearing location, date, time, response date) on lines 1 to 6; the court title; the caption with the debtor block, a ")" column and the case number and title at right, with a rule under the party column; body paragraphs unnumbered with a first-line indent; level 1 headings centered caps, level 2 bold, level 3 italic; block quotations indented 0.5 in both sides and double spaced; lists with bullets at 0.5 in and text at 0.9 in; the "Dated:" paragraph kept whole; bottom notation on every page.
 - Differs from typst: the numbers and the bottom notation are floating text boxes, not body flow; the notation and the caption are table rows with a minimum height in whole grid lines, so the body stays on the grid when a row wraps differently; page breaks follow LibreOffice (both renders are 12 pages, but the certificate and the "Dated:" block fall on different pages); the bullets are typed "•" in a table, not a Word list.
 - Fonts: as for the complaint, run with a `FONTCONFIG_FILE` that lists only the repo's `fonts/` directory.
 - Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML, every style it uses is defined, and the footer placeholders are all filled.
 
-BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml` at the court level, and a doc-type folder has neither; it exits 2 (`jq: Could not open file .../court.json`), so the gates did not run and `samples/.check-docx.txt` was not written.
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml` at the court level, and a doc-type folder has neither; it exits 2 (`jq: Could not open file .../court.json`), so the gates did not run and `usage/.check-docx.txt` was not written.

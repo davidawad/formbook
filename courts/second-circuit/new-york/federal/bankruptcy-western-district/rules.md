@@ -21,8 +21,8 @@ Re-check cadence: re-check annually each December 1 (the usual effective date of
 | FRBP-5005 | Fed. R. Bankr. P. 5005(a)(1) (as amended Apr. 2, 2024, eff. Dec. 1, 2024) | https://www.law.cornell.edu/rules/frbp/rule_5005 |
 | FRCP-10 | Fed. R. Civ. P. 10 (as amended Apr. 30, 2007, eff. Dec. 1, 2007), applied by FRBP 7010 | https://www.law.cornell.edu/rules/frcp/rule_10 |
 | JUDGE | Chambers pages of Judge Timothy P. Lyster and Chief Judge Carl L. Bucki and the documents linked there that were fetched ("TPL Motion Scheduling aug 2026.pdf", "Negative Notice Procedures.pdf", "Calendar Practice Mayville NF Olean.pdf"); read for format rules, none found | https://www.nywb.uscourts.gov/content/judge-timothy-p-lyster, https://www.nywb.uscourts.gov/content/chief-judge-carl-l-bucki |
-| EX-AC | Adversary-complaint exemplars, 3 filers (see `adversary-complaint/exemplars/SOURCE.md`): Wallach (Harter Secrest & Emery), Advisory Trust Group (Pachulski Stang Ziehl & Jones), Diocese of Rochester (Bond, Schoeneck & King; Blank Rome) | local |
-| EX-MB | Motion-brief exemplars, 3 filers (see `motion-brief/exemplars/SOURCE.md`): Diocese of Rochester (Bond, Schoeneck & King), Official Committee of Unsecured Creditors (Pachulski Stang Ziehl & Jones), Continental Insurance (Barclay Damon; Crowell & Moring) | local |
+| EX-AC | Adversary-complaint exemplars, 3 filers (see `adversary-complaint/usage/SOURCE.md`): Wallach (Harter Secrest & Emery), Advisory Trust Group (Pachulski Stang Ziehl & Jones), Diocese of Rochester (Bond, Schoeneck & King; Blank Rome) | local |
+| EX-MB | Motion-brief exemplars, 3 filers (see `motion-brief/usage/SOURCE.md`): Diocese of Rochester (Bond, Schoeneck & King), Official Committee of Unsecured Creditors (Pachulski Stang Ziehl & Jones), Continental Insurance (Barclay Damon; Crowell & Moring) | local |
 
 Kinds: **M** = mandated by a court rule (Local Rule, the court's ECF Administrative Procedures, FRBP or an FRCP rule the FRBP applies). **C** = convention (the rules leave it open; taken from exemplars of different filers). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

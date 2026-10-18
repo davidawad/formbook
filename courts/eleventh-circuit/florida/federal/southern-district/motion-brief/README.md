@@ -5,10 +5,10 @@ Folder: `courts/eleventh-circuit/florida/federal/southern-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-slack-midland-1-26-cv-25201-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-slack-motion-brief.md` (the exemplar's full text: 10 pages of motion and memorandum, the signature block and the certificate of service) |
-| render | ok: `samples/OUTPUT-slack-motion-brief.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh ... samples/INPUT-slack-motion-brief.md`) |
-| overlay | ok: `samples/OVERLAY-slack-motion-brief.pdf` and `samples/OVERLAY-slack-motion-brief.txt` (`sh tools/overlay.sh ... slack-motion-brief`) |
+| exemplar | yes: `usage/SAMPLE-flsd-motion-brief-slackmidland126cv25201.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-flsd-motion-brief-slack.md` (the exemplar's full text: 10 pages of motion and memorandum, the signature block and the certificate of service) |
+| render | ok: `usage/OUTPUT-flsd-motion-brief-slack.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh ... usage/INPUT-flsd-motion-brief-slack.md`) |
+| overlay | ok: `usage/OVERLAY-slack-motion-brief.pdf` and `usage/OVERLAY-slack-motion-brief.txt` (`sh tools/overlay.sh ... slack-motion-brief`) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass re-render; template unchanged) |
 
 File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `OVERLAY-<id>.pdf` and `.txt`.
@@ -83,8 +83,8 @@ Each page was rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass 
 
 ## Engines
 
-- typst (primary): `typst/`, `samples/OUTPUT-slack-motion-brief.pdf`, 12 pages.
-- docx: `docx/make-reference.sh` builds `docx/reference.docx`; `docx/flsd.lua` builds the caption, the signature block and the certificate of service; `docx/render.sh` writes the `.docx` (it escapes Westlaw star paging before pandoc reads the sample, see below). Written by `sh tools/render.sh --engine docx <this folder> samples/INPUT-slack-motion-brief.md`: `samples/OUTPUT-slack-motion-brief.docx` and `samples/OUTPUT-slack-motion-brief.docx.pdf` (LibreOffice 26.8.1, headless). 12 pages. Pandoc 3.12.1.
+- typst (primary): `typst/`, `usage/OUTPUT-flsd-motion-brief-slack.typst.pdf`, 12 pages.
+- docx: `docx/make-reference.sh` builds `docx/reference.docx`; `docx/flsd.lua` builds the caption, the signature block and the certificate of service; `docx/render.sh` writes the `.docx` (it escapes Westlaw star paging before pandoc reads the sample, see below). Written by `sh tools/render.sh --engine docx <this folder> usage/INPUT-flsd-motion-brief-slack.md`: `usage/OUTPUT-flsd-motion-brief-slack.docx` and `usage/OUTPUT-flsd-motion-brief-slack.docx.pdf` (LibreOffice 26.8.1, headless). 12 pages. Pandoc 3.12.1.
 - latex: not built for this doc type.
 
 What matches typst (every page of the `.docx.pdf` rendered at 60 dpi and compared with the typst page, 2026-10-15): letter paper; 1 in margins; EB Garamond 12 pt throughout, with footnotes at 12 pt single-spaced; body text double-spaced at an exact 27.6 pt pitch with a 0.5 in first-line indent; the caption (court name, division, centered docket line with the judges' names, style at the left in a 3.25 in column, the "/" closer, centered bold title); unnumbered body; footnotes as Word footnotes; level-1 headings centered bold capitals, level-2 bold at the left, level-3 bold at 0.5 in; the signature block at 3.5 in; the certificate of service with its service list; the page number centered at the bottom from page 1. Citations keep the Westlaw star paging ("at \*8") and the italic signals as the typst render shows them.

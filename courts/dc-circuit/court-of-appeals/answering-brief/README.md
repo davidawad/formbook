@@ -4,11 +4,11 @@ Self-contained doc-type folder for `cadc` (D.C. Circuit). Built from one filed e
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-wilson-25-3041-answering-brief.pdf` | Brief for the United States (appellee), *United States v. Wilson*, No. 25-3041, filed 10/20/2025. Text-based, 32 pages. |
-| `exemplars/SOURCE.md` | URL fetched from, case, docket, filer, dates. |
-| `samples/INPUT-wilson.md` | Transcription of the exemplar: front matter, a portion of the statement, summary, first half of argument, conclusion, certificates. |
-| `samples/OUTPUT-wilson.pdf` | Render of the sample (13 pages). |
-| `samples/OVERLAY-wilson.pdf`, `OVERLAY-wilson.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`), and its page map. |
+| `usage/SAMPLE-cadc-answering-brief-wilson253041.pdf` | Brief for the United States (appellee), *United States v. Wilson*, No. 25-3041, filed 10/20/2025. Text-based, 32 pages. |
+| `usage/SOURCE.md` | URL fetched from, case, docket, filer, dates. |
+| `usage/INPUT-cadc-answering-brief-wilson.md` | Transcription of the exemplar: front matter, a portion of the statement, summary, first half of argument, conclusion, certificates. |
+| `usage/OUTPUT-cadc-answering-brief-wilson.typst.pdf` | Render of the sample (13 pages). |
+| `usage/OVERLAY-wilson.pdf`, `OVERLAY-wilson.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`), and its page map. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
 | `typst/cadc-answering-brief.typ` | The template: `cadc-answering-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top. |
 
@@ -16,7 +16,7 @@ Build (from the repo root):
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (conda-forge)
-sh tools/render.sh courts/dc-circuit/court-of-appeals/answering-brief samples/INPUT-wilson.md
+sh tools/render.sh courts/dc-circuit/court-of-appeals/answering-brief usage/INPUT-cadc-answering-brief-wilson.md
 sh tools/overlay.sh courts/dc-circuit/court-of-appeals/answering-brief wilson
 ```
 
@@ -130,13 +130,13 @@ The typst template is the primary engine (`typst/`). Two more engines build the 
 
 ```sh
 A=courts/dc-circuit/court-of-appeals/answering-brief
-sh $A/latex/render.sh $A samples/INPUT-wilson.md $A/samples/OUTPUT-wilson.latex.pdf
-cd $A && pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/cadc-docx.lua samples/INPUT-wilson.md -o samples/OUTPUT-wilson.docx
+sh $A/latex/render.sh $A usage/INPUT-cadc-answering-brief-wilson.md $A/usage/OUTPUT-wilson.latex.pdf
+cd $A && pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/cadc-docx.lua usage/INPUT-cadc-answering-brief-wilson.md -o usage/OUTPUT-cadc-answering-brief-wilson.docx
 ```
 
 `latex/render.sh` needs tectonic and pandoc on PATH; the fonts are vendored (`fonts/tex-gyre-schola`). `docx/reference.docx` is pandoc's default reference with the styles and the 1 inch letter page set in place, plus a centered PAGE footer. Its styles: Normal and the body text (TeX Gyre Schola 14 pt, double-spaced, 0.5 in first-line indent), Heading 1 (centered bold capitals), Heading 2 (bold, hanging), footnote text 14 pt, and the custom styles Cover Line, Single Line, Signature Block and Counsel Block that `docx/cadc-docx.lua` uses.
 
-**LaTeX (`latex/`): matches the typst output (tier 1).** Page size and margins; TeX Gyre Schola 14 pt, footnotes 14 pt; double-spaced body at the typst pitch (26.3 pt, measured on `samples/OUTPUT-wilson.pdf`; single 14.8 pt); front matter in roman (cover i, certificate of parties ii, contents iii, authorities iv); body 1 to 7 with the same page numbers as the typst render in the contents; certificate of compliance on page 8 and certificate of service on page 9, with the typst wording; the signature block kept with the last paragraph; word count 1,505 (the typst count). The sample is 13 pages, as the typst render. Heading numbering (I., A., 1., a. inside the Argument; A., 1., a., (1) elsewhere) is done in `latex/cadc.lua`. Fonts: only TeX Gyre Schola is embedded.
+**LaTeX (`latex/`): matches the typst output (tier 1).** Page size and margins; TeX Gyre Schola 14 pt, footnotes 14 pt; double-spaced body at the typst pitch (26.3 pt, measured on `usage/OUTPUT-cadc-answering-brief-wilson.typst.pdf`; single 14.8 pt); front matter in roman (cover i, certificate of parties ii, contents iii, authorities iv); body 1 to 7 with the same page numbers as the typst render in the contents; certificate of compliance on page 8 and certificate of service on page 9, with the typst wording; the signature block kept with the last paragraph; word count 1,505 (the typst count). The sample is 13 pages, as the typst render. Heading numbering (I., A., 1., a. inside the Argument; A., 1., a., (1) elsewhere) is done in `latex/cadc.lua`. Fonts: only TeX Gyre Schola is embedded.
 
 LaTeX differences (tier 2 or line breaking, not form): line breaks come from TeX's paragraph breaker, not typst's, so a few body lines and therefore some page numbers in the contents and table of authorities differ from the typst render (for example, the first citation of *Ingersoll-Rand* is on body page 4 here and on page 5 in typst; *Id.* cites of *United States v. Wilson* (2025 WL 1009047) fall on page 3 here, page 3 and 4 in typst). The cover uses fixed gaps (typst fits its gaps to the page). The small capitals of the Argument point headings are synthesized by fontspec (TeX Gyre Schola has no small-caps font). The addendum (contents on Add-1, pages Add-N) is built and was tested on a copy of the sample with an addendum appended; the sample has none.
 
@@ -154,7 +154,7 @@ Word limits that apply here: the body count (13,000 words, FRAP 32(a)(7)(B)(i)) 
 
 ## Verification pass 2026-10-16 (fb-595.26.12)
 
-- Rendered: `sh tools/render.sh .../answering-brief samples/INPUT-wilson.md` exits 0, no typst warnings, 13 pages (the committed PDF had been 14 pages and was stale). Overlay rerun (`tools/overlay.sh ... wilson`); the page map and overlaps are unchanged from the table above.
+- Rendered: `sh tools/render.sh .../answering-brief usage/INPUT-cadc-answering-brief-wilson.md` exits 0, no typst warnings, 13 pages (the committed PDF had been 14 pages and was stale). Overlay rerun (`tools/overlay.sh ... wilson`); the page map and overlaps are unchanged from the table above.
 - Viewed: all 13 pages at 60 dpi before the fixes, then pp. 3-4 again and all 13 pages (contact sheet) after; all 13 overlay pages at 40 dpi; the exemplar's page 1 against our cover.
 - Rule checked: Circuit Rule 28(a)(2) (rules PDF as amended through December 4, 2025, fetched 2026-10-16: https://www.cadc.uscourts.gov/sites/cadc/files/rules-RulesFRAP20251204.pdf): the table of authorities "must identify each page of the brief on which the authority is cited; passim or similar terms may not be used."
 - Fixed (tier 1): the "passim" path in the table of authorities (`passim-threshold`) is removed from `typst/cadc-answering-brief.typ` and `latex/template.tex`; every page is listed. A long page list wraps inside its own right-hand column (`toa-page-col-max`).

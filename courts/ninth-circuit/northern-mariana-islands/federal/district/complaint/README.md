@@ -5,11 +5,11 @@ Folder: `courts/ninth-circuit/northern-mariana-islands/federal/district/complain
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-ewing-16-00034-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-ewing-first-amended-complaint.md` (the whole filed complaint, 12 pages filed, 65 paragraphs) |
+| exemplar | yes: `usage/SAMPLE-nmid-complaint-ewing1600034.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nmid-complaint-ewingfirstamended.md` (the whole filed complaint, 12 pages filed, 65 paragraphs) |
 | typeface | LR 5.2.a requires "12-point type or larger and in a serif font" and names no face. Font: EB Garamond (vendored; no substitute needed). Not metric-compatible with any Times; not needed for LR 5.2.a. |
-| render | ok: `samples/OUTPUT-ewing-first-amended-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, EBGaramond-Bold), no warnings. Re-rendered 2026-10-15. |
-| overlay | fail (not re-run): `tools/overlay.sh` needs `exemplars/FILED-EXAMPLE-*.pdf`, which is not in this snapshot. `samples/OVERLAY-ewing-first-amended-complaint.txt` is from an earlier run; no `OVERLAY-*.pdf` exists here. |
+| render | ok: `usage/OUTPUT-nmid-complaint-ewingfirstamended.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, EBGaramond-Bold), no warnings. Re-rendered 2026-10-15. |
+| overlay | fail (not re-run): `tools/overlay.sh` needs `usage/SAMPLE-*.pdf`, which is not in this snapshot. `usage/OVERLAY-ewing-first-amended-complaint.txt` is from an earlier run; no `OVERLAY-*.pdf` exists here. |
 | pages reviewed | 11 of 11 (re-rendered and every page viewed as PNG at 60 dpi on 2026-10-15) |
 
 File names follow the file roles in `CLAUDE.md` (`INPUT-` the markdown, `OUTPUT-` our render, `OVERLAY-` the comparison) because `tools/render.sh` and `tools/overlay.sh` read and write those names by default. The brief's `<id>.md` / `<id>-overlay.pdf` names are the same files under those names.
@@ -18,7 +18,7 @@ File names follow the file roles in `CLAUDE.md` (`INPUT-` the markdown, `OUTPUT-
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/ninth-circuit/northern-mariana-islands/federal/district/complaint samples/INPUT-ewing-first-amended-complaint.md
+sh tools/render.sh courts/ninth-circuit/northern-mariana-islands/federal/district/complaint usage/INPUT-nmid-complaint-ewingfirstamended.md
 sh tools/overlay.sh courts/ninth-circuit/northern-mariana-islands/federal/district/complaint ewing-first-amended-complaint
 ```
 
@@ -94,12 +94,12 @@ Reviewed pages: 11 of 11.
 
 ## Engines
 
-**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`), `docx/nmid-complaint.lua` (cover, numbered paragraphs, lettered prayer items, signature block) and `docx/render.sh` (puts the sample's footer title and case number into the footer; the reference keeps placeholders). Output: `samples/OUTPUT-ewing-first-amended-complaint.docx` and `.docx.pdf` (11 pages, same as typst).
+**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`), `docx/nmid-complaint.lua` (cover, numbered paragraphs, lettered prayer items, signature block) and `docx/render.sh` (puts the sample's footer title and case number into the footer; the reference keeps placeholders). Output: `usage/OUTPUT-nmid-complaint-ewingfirstamended.docx` and `.docx.pdf` (11 pages, same as typst).
 
 - Matches typst: US Letter; margins 1.5 in top, 1 in bottom (25 lines of 24 pt), 1 in left, 0.5 in right; EB Garamond 12 pt; exact 24 pt double spacing; numbers 1 to 25 in a text box fixed in the left margin (not `w:lnNumType`, which would number the single-spaced cover lines and move with the text); pleading rules as page borders; counsel block, court title, caption table with its right and bottom rule; signature block kept with the last item; footer page number and title.
 - Differs: the pleading rules are page borders, so they run the height of the text area, not the full page height (typst draws full height); widow control is off in the reference to match typst's line fill; a heading and its paragraph move together, so a page can end two lines short (page 1 and page 8 of the sample); the caption and signature tables are a fixed minimum height, so the text under them keeps the 24 pt grid only while their content fits.
 - Fonts: LibreOffice needs the vendored `fonts/eb-garamond` visible (for example `FONTCONFIG_FILE` pointing at a conf that lists it); without it the PDF silently uses a fallback face.
-- Visual review: 11 of 11 pages of `OUTPUT-ewing-first-amended-complaint.docx.pdf` rendered at 60 dpi and viewed (2026-10-15). Open defects: none. Compared with the typst render: page 1 side by side, the rest against the same form (line count per page, heading and signature placement).
+- Visual review: 11 of 11 pages of `OUTPUT-nmid-complaint-ewingfirstamended.docx.pdf` rendered at 60 dpi and viewed (2026-10-15). Open defects: none. Compared with the typst render: page 1 side by side, the rest against the same form (line count per page, heading and signature placement).
 - `tools/check.sh` cannot run on this folder (it reads `court.json` and `checks.yaml`, which exist at court level only, not in `complaint/`). No `.check-docx.txt` stamp is written.
 
 BLOCKED: check.sh (all gates, docx): `tools/check.sh <doc-type dir> --engine docx` exits 2 on a doc-type folder (no `court.json` / `checks.yaml` / `rules.md` there); the docx was checked by the visual review above, not by the gates.

@@ -2,7 +2,7 @@
 
 Court: United States Bankruptcy Court for the District of Delaware (`deb`). Path: `courts/third-circuit/delaware/federal/bankruptcy-district/adversary-complaint/`.
 
-**Typeface: EB Garamond (no face named for pleadings).** The template renders with zero typst warnings and all 10 pages were re-reviewed. The overlay **did not run**: the exemplar PDF is not in `exemplars/` on this box (only `SOURCE.md`), so the `OVERLAY-` files are from an earlier render. The sample is a partial transcription of the filed complaint, not the whole of it. See "Known gaps".
+**Typeface: EB Garamond (no face named for pleadings).** The template renders with zero typst warnings and all 10 pages were re-reviewed. The overlay **did not run**: the exemplar PDF is not in `usage/` on this box (only `SOURCE.md`), so the `OVERLAY-` files are from an earlier render. The sample is a partial transcription of the filed complaint, not the whole of it. See "Known gaps".
 
 ## Typeface
 
@@ -10,7 +10,7 @@ Kept at EB Garamond, the no-face default in `docs/FONTS.md`. Checked: LR 7007-2 
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-zohar-iii-tilton-19-50390-adversary-complaint.pdf`: Complaint of Lynn Tilton and the Patriarch & Octaluna Entities for Equitable Subordination, Adv. Pro. No. 19-50390 (KBO), Doc 7, filed 11/12/2019 (dated October 1, 2019). 80 pages, text layer present (paragraph numbers are not in the text layer but are on the page image). The RECAP copy is the public redacted version. Source and search record: `exemplars/SOURCE.md`.
+- `usage/SAMPLE-deb-adversary-complaint-zohariiitilton1950390.pdf`: Complaint of Lynn Tilton and the Patriarch & Octaluna Entities for Equitable Subordination, Adv. Pro. No. 19-50390 (KBO), Doc 7, filed 11/12/2019 (dated October 1, 2019). 80 pages, text layer present (paragraph numbers are not in the text layer but are on the page image). The RECAP copy is the public redacted version. Source and search record: `usage/SOURCE.md`.
 - Filer: Lynn Tilton and the Patriarch and Octaluna entities, by Cole Schotz P.C. and Gibson, Dunn & Crutcher LLP.
 
 ## Governing rules (verified 2026-10-14)
@@ -30,8 +30,8 @@ The rules were fetched and read on 2026-10-14. The court's own PDF URL is reject
 ## Layout
 
 - `typst/main.typ` (entry point), `typst/deb-adversary-complaint.typ` (template). Parameters at the top.
-- `samples/INPUT-zohar-adversary-complaint.md`: frontmatter (caption, title, date, preamble, signature blocks) plus the body. Body paragraphs are numbered automatically (FRCP 10(b)). Unnumbered: headings; lists; the WHEREFORE clause and lettered prayer items; and editorial notes in italic brackets (`*[...]*`), which mark omitted text.
-- `samples/OUTPUT-zohar-adversary-complaint.pdf` (10 pages); `samples/OVERLAY-zohar-adversary-complaint.pdf` and `.txt`.
+- `usage/INPUT-deb-adversary-complaint-zohar.md`: frontmatter (caption, title, date, preamble, signature blocks) plus the body. Body paragraphs are numbered automatically (FRCP 10(b)). Unnumbered: headings; lists; the WHEREFORE clause and lettered prayer items; and editorial notes in italic brackets (`*[...]*`), which mark omitted text.
+- `usage/OUTPUT-deb-adversary-complaint-zohar.typst.pdf` (10 pages); `usage/OVERLAY-zohar-adversary-complaint.pdf` and `.txt`.
 
 Naming: as in the motion-brief README: `OUTPUT-` and `OVERLAY-` are the names `tools/render.sh` and `tools/overlay.sh` use.
 
@@ -65,7 +65,7 @@ Layout as reviewed: caption and preamble (1–2), preliminary statement (2–6),
 ## Known gaps
 
 - **Typeface: none named for pleadings.** See "Typeface". The motion brief uses Liberation Serif for LR 7007-2(a)(ii); that rule is limited to motions, so this complaint stays on EB Garamond.
-- **Overlay not run (exemplar missing).** The overlay section below is from an earlier render. Restore the exemplar PDF to `exemplars/`, then re-run `sh tools/overlay.sh`.
+- **Overlay not run (exemplar missing).** The overlay section below is from an earlier render. Restore the exemplar PDF to `usage/`, then re-run `sh tools/overlay.sh`.
 - **Partial transcription.** The sample covers the caption, the preamble, the preliminary statement (paragraphs 1–13 of the transcription), the first part of section II, section III, the count I lead-in, the prayer, and the signature. Section II's remaining defendants, section IV (factual allegations), and count I's subsections are not transcribed. The omissions are marked in the sample with italic-bracket notes. The complaint runs 80 pages; the sample is 10.
 - **Paragraph numbers do not match the filed complaint.** The filed complaint cross-refers to paragraph 68 (in section II). The sample numbers its paragraphs from 1 in order, so its numbers are not the filed ones. Filing a real complaint from this template would number from the real text.
 - **Redactions.** The public version has redaction gaps (in paragraphs 8 and 9 of the transcription). They are shown as `[REDACTED]`, which is a transcription mark, not a template feature.
@@ -78,9 +78,9 @@ Layout as reviewed: caption and preamble (1–2), preliminary statement (2–6),
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference for the form. Rendered sample: `samples/OUTPUT-zohar-adversary-complaint.pdf`.
+- **typst** (primary, `typst/`): the reference for the form. Rendered sample: `usage/OUTPUT-deb-adversary-complaint-zohar.typst.pdf`.
 - **latex**: not built (`latex/` is empty).
-- **docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default reference: EB Garamond 12 pt, double spacing (Word "double", line 480 auto), 0.5 in first-line indent on body text, 1 in margins on letter paper, centered PAGE number in the footer, black bold headings, 10 pt single footnotes, and the paragraph styles "Centered", "CenteredBody" and "Single". `docx/deb.lua` builds from the frontmatter the court line, the Form 416 caption (two tables, with the rule at the right and bottom of the party column), the title, the numbered allegations, the centered italic notes, the lettered prayer items and the signature block. Build: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/deb.lua samples/INPUT-zohar-adversary-complaint.md -o samples/OUTPUT-zohar-adversary-complaint.docx`.
+- **docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default reference: EB Garamond 12 pt, double spacing (Word "double", line 480 auto), 0.5 in first-line indent on body text, 1 in margins on letter paper, centered PAGE number in the footer, black bold headings, 10 pt single footnotes, and the paragraph styles "Centered", "CenteredBody" and "Single". `docx/deb.lua` builds from the frontmatter the court line, the Form 416 caption (two tables, with the rule at the right and bottom of the party column), the title, the numbered allegations, the centered italic notes, the lettered prayer items and the signature block. Build: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/deb.lua usage/INPUT-deb-adversary-complaint-zohar.md -o usage/OUTPUT-deb-adversary-complaint-zohar.docx`.
 - **docx: matches** the typst form: page size and margins, the face and size, the first-line indent, the paragraph numbering (typed "n." and a tab, as in typst), the caption layout, the centered headings, the italic notes, the page-number footer.
 - **docx: differs**:
   - Line pitch. The typst body pitch is 24.06 pt for 12 pt type (measured on the motion brief render; the same `body-leading` is used here). Word's double is two line heights of the font, not measured here. The docx will run longer than the typst pages, and no page count is compared.
@@ -89,5 +89,5 @@ Layout as reviewed: caption and preamble (1–2), preliminary statement (2–6),
   - The caption and the signature block are tables. Table border rendering differs between Word and LibreOffice.
   - EB Garamond must be installed on the machine that opens the file; Word substitutes silently if it is missing.
   - The `.docx` has been checked as a zip and as well-formed XML only. It was not opened in Word or LibreOffice (neither is available on the build box).
-- **docx BLOCKED.** The court folder has no `checks.yaml` or `rules.md`, so no gate check ID is readable here. Every gate measured on the LibreOffice PDF (`samples/OUTPUT-zohar-adversary-complaint.docx.pdf`) is BLOCKED: Gate 0 (content, italics, footnotes), Gate 1 (rule checks), Gate 2 (page review of the `.docx.pdf`) and Gate 3 (second sample). Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
+- **docx BLOCKED.** The court folder has no `checks.yaml` or `rules.md`, so no gate check ID is readable here. Every gate measured on the LibreOffice PDF (`usage/OUTPUT-zohar-adversary-complaint.docx.pdf`) is BLOCKED: Gate 0 (content, italics, footnotes), Gate 1 (rule checks), Gate 2 (page review of the `.docx.pdf`) and Gate 3 (second sample). Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
 - Pages reviewed: typst 10 of 10 (60 dpi). docx: 0 (the `.docx` pages cannot be rendered on this box).

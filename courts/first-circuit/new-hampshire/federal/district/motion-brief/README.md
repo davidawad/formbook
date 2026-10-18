@@ -5,10 +5,10 @@ Folder: `courts/first-circuit/new-hampshire/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-jonas-1-26-cv-00600-motion-brief.pdf` (1 filer, government defendants; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-jonas-motion-brief.md`: pages 1 to 13 and 22 to 25 of the 25-page filing, transcribed from the text layer (pages 14 to 21 and the footnotes are not transcribed; see Known gaps) |
-| render | ok: `samples/OUTPUT-jonas-motion-brief.pdf`, 18 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-jonas-motion-brief.pdf` and `OVERLAY-jonas-motion-brief.txt` |
+| exemplar | yes: `usage/SAMPLE-nhd-motion-brief-jonas126cv00600.pdf` (1 filer, government defendants; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nhd-motion-brief-jonas.md`: pages 1 to 13 and 22 to 25 of the 25-page filing, transcribed from the text layer (pages 14 to 21 and the footnotes are not transcribed; see Known gaps) |
+| render | ok: `usage/OUTPUT-nhd-motion-brief-jonas.typst.pdf`, 18 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-jonas-motion-brief.pdf` and `OVERLAY-jonas-motion-brief.txt` |
 | typeface | Rule names no face (LR 5.1(a): "a proportionately spaced font ... no less than twelve (12) point"; no typeface named in the section). Vendored substitute: none needed. Kept **EB Garamond** (`fonts/eb-garamond/`). Not metric-compatible with the filing's Times New Roman; not chased (tier 3). |
 | pages reviewed | 18 of 18 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-14 with no template change) |
 
@@ -67,7 +67,7 @@ Note on the certificate: the filing's certificate states only the ECF manner and
 12. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. The render and overlay were run; the page review below is the Gate 2 equivalent for this doc type.
 13. **File names.** The samples are `INPUT-<id>.md` and the outputs are `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`, because `tools/render.sh` and `tools/overlay.sh` write these names and the brief forbids editing `tools/`.
 
-## Review of the rendered pages (`OUTPUT-jonas-motion-brief.pdf`, 60 dpi)
+## Review of the rendered pages (`OUTPUT-nhd-motion-brief-jonas.typst.pdf`, 60 dpi)
 
 - Page 1: court title, caption with the ")" column and `Civil No.`, title in bold caps, the opening paragraph (NOW COME). No spill. Pass.
 - Pages 2 to 4: INTRODUCTION, BACKGROUND, the list (a) to (d) with hanging indent (it breaks between pages 3 and 4). No overlap. Pass.
@@ -81,7 +81,7 @@ Defects found in review and fixed (kept here so the template does not regress): 
 
 ## Engines
 
-docx (`docx/build-reference.sh` builds `docx/reference.docx`; filter `docx/nhd-motion-brief.lua`): `samples/OUTPUT-jonas-motion-brief.docx` and `OUTPUT-jonas-motion-brief.docx.pdf` (LibreOffice conversion). Matches typst: EB Garamond; exact 27.6 pt body pitch; the three-column caption with the ")" column and the case number on the middle row; the centered caps heading forms; the certificate of service; the signature block. Page count matches (18 and 18). Word was not available; the file was checked with LibreOffice only.
+docx (`docx/build-reference.sh` builds `docx/reference.docx`; filter `docx/nhd-motion-brief.lua`): `usage/OUTPUT-nhd-motion-brief-jonas.docx` and `OUTPUT-nhd-motion-brief-jonas.docx.pdf` (LibreOffice conversion). Matches typst: EB Garamond; exact 27.6 pt body pitch; the three-column caption with the ")" column and the case number on the middle row; the centered caps heading forms; the certificate of service; the signature block. Page count matches (18 and 18). Word was not available; the file was checked with LibreOffice only.
 
 - BLOCKED: pagination from page 1. In typst page 1 ends after "NOW COME ..." and INTRODUCTION starts page 2; the docx starts INTRODUCTION on page 1. The page breaks differ from there on, though the total is the same at 18 pages. Keep-together and keep-with-next behaviour of typst's blocks is not reproduced.
 - The signature block is an all-caps stacked block at the 3.25 in indent in the docx, and a more compact block in typst; both sit on page 17.

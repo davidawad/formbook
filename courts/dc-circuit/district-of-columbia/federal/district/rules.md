@@ -19,10 +19,10 @@ Re-check cadence: re-check annually each December 1 and whenever the court posts
 | FRCP-11 | Fed. R. Civ. P. 11 | https://www.law.cornell.edu/rules/frcp/rule_11 |
 | FRCP-12 | Fed. R. Civ. P. 12 | https://www.law.cornell.edu/rules/frcp/rule_12 |
 | FRCP-38 | Fed. R. Civ. P. 38 | https://www.law.cornell.edu/rules/frcp/rule_38 |
-| EX-C1 | Complaint, Terre du Soleil v. SBA, 1:26-cv-03510 (Clark Hill PLC) | `complaint/exemplars/SOURCE.md` |
-| EX-C2 | Complaint, SMP v. FEC, 1:26-cv-00336 (Elias Law Group LLP); filer's copy, no ECF stamp | `complaint/exemplars/SOURCE.md` |
-| EX-M1 | Memorandum, Estrada v. American University, 1:26-cv-00603, ECF 9-1 (Saul Ewing LLP) | `motion-brief/exemplars/SOURCE.md` |
-| EX-M2 | Memorandum, Esrati v. FEC, 1:26-cv-01498, ECF 12-1 (FEC Office of General Counsel) | `motion-brief/exemplars/SOURCE.md` |
+| EX-C1 | Complaint, Terre du Soleil v. SBA, 1:26-cv-03510 (Clark Hill PLC) | `complaint/usage/SOURCE.md` |
+| EX-C2 | Complaint, SMP v. FEC, 1:26-cv-00336 (Elias Law Group LLP); filer's copy, no ECF stamp | `complaint/usage/SOURCE.md` |
+| EX-M1 | Memorandum, Estrada v. American University, 1:26-cv-00603, ECF 9-1 (Saul Ewing LLP) | `motion-brief/usage/SOURCE.md` |
+| EX-M2 | Memorandum, Esrati v. FEC, 1:26-cv-01498, ECF 12-1 (FEC Office of General Counsel) | `motion-brief/usage/SOURCE.md` |
 
 Kinds: **M** = mandated by a court rule (Local Rule or Federal Rule). **C** = convention (the rules leave it open; taken from exemplars of different filers). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

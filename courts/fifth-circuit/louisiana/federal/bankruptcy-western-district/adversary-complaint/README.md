@@ -4,10 +4,10 @@ Doc type: **adversary complaint** (FRBP 7001) in the United States Bankruptcy Co
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-andrus-v-c-g-boats-19-05061-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-andrus-adversary-complaint.md` (the whole filed complaint, 8 pages, transcribed) |
-| render | ok: `samples/OUTPUT-andrus-adversary-complaint.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-andrus-adversary-complaint.pdf` and `.txt` |
+| exemplar | yes: `usage/SAMPLE-lawb-adversary-complaint-andrusvcgboats1905061.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-lawb-adversary-complaint-andrus.md` (the whole filed complaint, 8 pages, transcribed) |
+| render | ok: `usage/OUTPUT-lawb-adversary-complaint-andrus.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-andrus-adversary-complaint.pdf` and `.txt` |
 | pages reviewed | 7 of 7 (every page rendered and looked at after the last template change; ¶9–10 checked at 110 dpi) |
 
 File names: `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the tools hard-code these names), so the sample PDF and overlay carry those names rather than `<id>.pdf` and `<id>-overlay.pdf`.
@@ -32,12 +32,12 @@ No LBR gives a typeface, margin, spacing or line-count rule for adversary compla
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-andrus-v-c-g-boats-19-05061-adversary-complaint.pdf`: *Andrus v. C & G Boats, Inc.*, Adv. Proc. 19-05061 (main case *In re Rooster Petroleum, LLC*, No. 17-50708, Chapter 7, Lafayette Division), complaint for avoidance and recovery of preferential transfers, 8 pages, filed 2019-05-31 by the chapter 7 trustee's counsel. Provenance and the searches are in `exemplars/SOURCE.md`.
+- `usage/SAMPLE-lawb-adversary-complaint-andrusvcgboats1905061.pdf`: *Andrus v. C & G Boats, Inc.*, Adv. Proc. 19-05061 (main case *In re Rooster Petroleum, LLC*, No. 17-50708, Chapter 7, Lafayette Division), complaint for avoidance and recovery of preferential transfers, 8 pages, filed 2019-05-31 by the chapter 7 trustee's counsel. Provenance and the searches are in `usage/SOURCE.md`.
 - Only one exemplar. EVAL-LOOP's tier-2 rule asks for 2 or 3 filers; see gaps.
 
 ## Sample and template
 
-- `samples/INPUT-andrus-adversary-complaint.md` carries the filing's text: caption (frontmatter), the opening paragraph (`>`, unnumbered), headings (`#`), numbered paragraphs, the transfers table (¶17), the prayer's list (`1.` items, lettered (a)–(d)), the prayer lead-in (`>`), and the signature block (frontmatter). Coverage against the filed PDF: every word of the filing except the ECF header and footer text ("Page n of 8", "19-05061 - #1 File 05/31/19 …"), which are not part of the document.
+- `usage/INPUT-lawb-adversary-complaint-andrus.md` carries the filing's text: caption (frontmatter), the opening paragraph (`>`, unnumbered), headings (`#`), numbered paragraphs, the transfers table (¶17), the prayer's list (`1.` items, lettered (a)–(d)), the prayer lead-in (`>`), and the signature block (frontmatter). Coverage against the filed PDF: every word of the filing except the ECF header and footer text ("Page n of 8", "19-05061 - #1 File 05/31/19 …"), which are not part of the document.
 - Markdown contract (for future samples): YAML frontmatter (`division`, `caption.left` as `{t, i}` items where `i` is the indent level, `caption.right` as lines, `title`, `signature` with `firm`, `by`, `lines`, `counsel_for`); then blank-line-separated chunks: `#` heading (level 1 centered bold underlined caps: the template does not uppercase, so write the caps as filed), a `>` paragraph (unnumbered), a `1.` list (lettered (a), (b)…), a `|` table, or any other chunk (one numbered paragraph). The template numbers paragraphs; the sample does not put numbers in its text.
 - `typst/lawb-adversary-complaint.typ` (template) and `typst/main.typ` (entry point). Court name and layout constants are in the template; every case-specific word comes from the frontmatter.
 
@@ -45,7 +45,7 @@ No LBR gives a typeface, margin, spacing or line-count rule for adversary compla
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/adversary-complaint samples/INPUT-andrus-adversary-complaint.md
+sh tools/render.sh courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-lawb-adversary-complaint-andrus.md
 sh tools/overlay.sh courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/adversary-complaint andrus-adversary-complaint
 ```
 
@@ -70,10 +70,10 @@ Engines for this doc type: typst (primary, `typst/`) and docx (`docx/`). `latex/
 
 ### docx
 
-- Build: `sh docx/make-reference.sh` writes `docx/reference.docx` (pandoc's default styles, patched to the typst values: EB Garamond 13 pt, body at 26 pt exact, 0.5 in first-line indent, letter page with 1-inch margins, page-number footer). `docx/lawb-adversary-complaint.lua` builds the cover, the caption box and the signature block from the frontmatter, types the paragraph numbers and letters the prayer items. Render: `sh tools/render.sh --engine docx courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/adversary-complaint samples/INPUT-andrus-adversary-complaint.md`, which writes `samples/OUTPUT-andrus-adversary-complaint.docx`.
+- Build: `sh docx/make-reference.sh` writes `docx/reference.docx` (pandoc's default styles, patched to the typst values: EB Garamond 13 pt, body at 26 pt exact, 0.5 in first-line indent, letter page with 1-inch margins, page-number footer). `docx/lawb-adversary-complaint.lua` builds the cover, the caption box and the signature block from the frontmatter, types the paragraph numbers and letters the prayer items. Render: `sh tools/render.sh --engine docx courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-lawb-adversary-complaint-andrus.md`, which writes `usage/OUTPUT-lawb-adversary-complaint-andrus.docx`.
 - Matches the typst template, in the markup: EB Garamond 13 pt throughout; body double-spaced (26 pt lines, the typst pitch); caption, signature block and footnotes single-spaced (15 pt); 1-inch margins; numbered paragraphs with a 0.5 in indent and the text at 1 in; "(a)" items at 0.5 in; centered bold underlined level-1 headings and centered bold level-2 headings, each with a blank double line above and below; the caption's parties-and-numbers divider; the signature block at 3.25 in, kept together; the page number centered in the footer.
 - Differs, by design or not checked: the paragraph numbers are typed text ("1." and a tab), not Word list numbering, so inserting a paragraph does not renumber the rest. The tab stop is fixed at 1 in; typst sets the text a fixed 0.4 in after the number, so the text column moves by a few points for two-digit numbers. The caption rules and the table are Word table borders, which Word and LibreOffice draw slightly differently. Line and page breaks are the renderer's, so the page count is not known until the PDF is made.
-- **BLOCKED: `.docx.pdf` checks (Gates 0 to 3 on the LibreOffice PDF, and the Gate 2 page review).** `soffice` is not installed on the box that built this: conda-forge has no LibreOffice package and there is no root for apt. `tools/render.sh --engine docx` therefore writes the `.docx` and then fails at `soffice`, so `samples/OUTPUT-andrus-adversary-complaint.docx.pdf` is not produced. Checked so far: the `.docx` is a valid zip, its XML parts are well-formed, and pandoc reads it back with every word of the sample body in order (the typed numbers and the signature block come from the template). Pages reviewed: 0 of the docx's pages, so no visual claim is made for the docx.
+- **BLOCKED: `.docx.pdf` checks (Gates 0 to 3 on the LibreOffice PDF, and the Gate 2 page review).** `soffice` is not installed on the box that built this: conda-forge has no LibreOffice package and there is no root for apt. `tools/render.sh --engine docx` therefore writes the `.docx` and then fails at `soffice`, so `usage/OUTPUT-andrus-adversary-complaint.docx.pdf` is not produced. Checked so far: the `.docx` is a valid zip, its XML parts are well-formed, and pandoc reads it back with every word of the sample body in order (the typed numbers and the signature block come from the template). Pages reviewed: 0 of the docx's pages, so no visual claim is made for the docx.
 - Open for Word: the opening machine needs EB Garamond installed, or Word substitutes a font. The vendored `fonts/` copy is for typst only.
 
 ## Known gaps and open choices

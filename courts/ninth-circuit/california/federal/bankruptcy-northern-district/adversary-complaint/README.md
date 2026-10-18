@@ -5,11 +5,11 @@ Folder: `courts/ninth-circuit/california/federal/bankruptcy-northern-district/ad
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-appalachian-23-30564-26-03029-adversary-complaint.pdf` (31 pages, one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-appalachian-adversary-complaint.md` (a portion of the complaint: caption and counsel, nature of the action, jurisdiction, parties, first cause of action, prayer, jury demand, signature) |
+| exemplar | yes: `usage/SAMPLE-canb-adversary-complaint-appalachian23305642603029.pdf` (31 pages, one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-canb-adversary-complaint-appalachian.md` (a portion of the complaint: caption and counsel, nature of the action, jurisdiction, parties, first cause of action, prayer, jury demand, signature) |
 | typeface | face required: none. Civil L.R. 3-4(c)(2)(A) asks for "a standard, proportionally spaced font (e.g., Times New Roman or Century Schoolbook)"; the names are examples. Vendored font kept: **EB Garamond** (no substitute switch; see Typeface below) |
-| render | ok: `samples/OUTPUT-appalachian-adversary-complaint.pdf`, 9 pages, typst 0.15.0 (micromamba, 2026-10-15), vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Bold, BoldItalic embedded), zero warnings (`tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-appalachian-adversary-complaint.pdf` and `.txt` (`tools/overlay.sh`), run 2026-10-15 against `exemplars/FILED-EXAMPLE-…pdf`, re-fetched from the URL in `exemplars/SOURCE.md` (the file was missing from the snapshot) |
+| render | ok: `usage/OUTPUT-canb-adversary-complaint-appalachian.typst.pdf`, 9 pages, typst 0.15.0 (micromamba, 2026-10-15), vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Bold, BoldItalic embedded), zero warnings (`tools/render.sh`) |
+| overlay | ok: `usage/OVERLAY-appalachian-adversary-complaint.pdf` and `.txt` (`tools/overlay.sh`), run 2026-10-15 against `usage/SAMPLE-…pdf`, re-fetched from the URL in `usage/SOURCE.md` (the file was missing from the snapshot) |
 | pages reviewed | 9 of 9 (every page rasterised at 60 dpi and viewed on 2026-10-15; the page layout is unchanged from the earlier review) |
 | tier 2 | not judged against 2 or 3 filers yet: one exemplar only (see Known gaps 1) |
 
@@ -59,7 +59,7 @@ Civil L.R. 3-4(c)(2)(A), as applied by B.L.R. 1001-2, requires "a standard, prop
 
 ## Overlay (what it shows)
 
-`samples/OVERLAY-appalachian-adversary-complaint.pdf`: red = our render, blue = the filed exemplar, black = both. Pages are paired by word overlap (`.txt`). Pages 1 to 6 pair with the same-numbered exemplar pages (word overlap 61% to 95%). Pages 7 to 9 pair with exemplar pages 23, 29 and 30 because the sample skips the exemplar's pages 8 to 22 and 24 to 28 (the transcription is a portion of the filing). The overlay is a diagnostic, not a score.
+`usage/OVERLAY-appalachian-adversary-complaint.pdf`: red = our render, blue = the filed exemplar, black = both. Pages are paired by word overlap (`.txt`). Pages 1 to 6 pair with the same-numbered exemplar pages (word overlap 61% to 95%). Pages 7 to 9 pair with exemplar pages 23, 29 and 30 because the sample skips the exemplar's pages 8 to 22 and 24 to 28 (the transcription is a portion of the filing). The overlay is a diagnostic, not a score.
 
 ## Review of the rendered pages (Gate 2 equivalent; 60 dpi, every page viewed)
 

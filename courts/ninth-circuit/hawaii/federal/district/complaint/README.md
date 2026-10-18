@@ -5,11 +5,11 @@ Folder: `courts/ninth-circuit/hawaii/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-sffa-1-25-cv-00450-complaint.pdf` (1 filer, Students for Fair Admissions; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-sffa-complaint.md`: paragraphs 1 to 24, the prayer for relief and the signature block of the 56-page filing (not the whole filing) |
+| exemplar | yes: `usage/SAMPLE-hid-complaint-sffa125cv00450.pdf` (1 filer, Students for Fair Admissions; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-hid-complaint-sffa.md`: paragraphs 1 to 24, the prayer for relief and the signature block of the 56-page filing (not the whole filing) |
 | typeface | No face named for complaints (LR 10.2(a)(2) covers memoranda only) → **EB Garamond** (kept; `docs/FONTS.md`: no face named). Embedded per `pdffonts`: EBGaramond Regular, Italic, Bold. |
-| render | ok: `samples/OUTPUT-sffa-complaint.pdf`, 9 pages (unchanged by this pass), typst 0.15.0, vendored fonts only, no typst warnings |
-| overlay | **fail**: needs `exemplars/FILED-EXAMPLE-*.pdf`, not in this snapshot. `samples/OVERLAY-sffa-complaint.*` is stale and must be regenerated once the exemplar PDF is restored. |
+| render | ok: `usage/OUTPUT-hid-complaint-sffa.typst.pdf`, 9 pages (unchanged by this pass), typst 0.15.0, vendored fonts only, no typst warnings |
+| overlay | **fail**: needs `usage/SAMPLE-*.pdf`, not in this snapshot. `usage/OVERLAY-sffa-complaint.*` is stale and must be regenerated once the exemplar PDF is restored. |
 | pages reviewed | 9 of 9 (every page rendered at 50 dpi and viewed after the last template change) |
 
 File names follow the tools' convention, not the brief's `<id>.md` shorthand: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` reads it and writes `OVERLAY-<id>.pdf` / `.txt`, so the sample is `INPUT-<id>.md`.
@@ -76,11 +76,11 @@ Convention (tier 2; from the exemplar, not a rule): page number centered in the 
 
 ### docx (`docx/`)
 
-- Built by `docx/make-reference.sh` (writes `docx/reference.docx`) and `docx/hid.lua` (pandoc filter). `sh tools/render.sh --engine docx <this folder> samples/INPUT-sffa-complaint.md` writes `samples/OUTPUT-sffa-complaint.docx`.
+- Built by `docx/make-reference.sh` (writes `docx/reference.docx`) and `docx/hid.lua` (pandoc filter). `sh tools/render.sh --engine docx <this folder> usage/INPUT-hid-complaint-sffa.md` writes `usage/OUTPUT-hid-complaint-sffa.docx`.
 - Set in styles.xml, sectPr and footer1.xml (not rendered here): EB Garamond 14 pt throughout; body at exact 32.2 pt line pitch with 0.5 in first-line indent; headings bold, single-spaced (level 1 capitals, left; level 2 hanging "I."); counsel block 11 pt single-spaced; US Letter with 1 in margins; centered "- n -" footer (PAGE field).
 - Written by the filter: counsel block and caption box as tables (rule at the right and bottom of the parties box); allegations numbered 1, 2, ... and roman headings; prayer lettered a., b., ...; WHEREFORE paragraph unnumbered; dated line and signature blocks at the right.
 - Differs from typst: table cell and border metrics are Word's; no judge initials in the sample; no typst-side tracking, kerning or hyphenation controls. Line breaks and page breaks may differ in Word.
 - Font: EB Garamond must be installed on the machine that opens the file, or Word substitutes silently.
 - Not rendered: nothing in the `.docx` was looked at. `pages_reviewed` for docx = 0.
-- BLOCKED (docx.pdf gates 0 to 3): `soffice` is not installed on the build box (no LibreOffice package on conda-forge), so no `OUTPUT-sffa-complaint.docx.pdf` exists.
+- BLOCKED (docx.pdf gates 0 to 3): `soffice` is not installed on the build box (no LibreOffice package on conda-forge), so no `OUTPUT-hid-complaint-sffa.docx.pdf` exists.
 - No TOC or TOA in the complaint (LR 7.4(f) does not apply), so no field-result BLOCKED item.

@@ -2,15 +2,15 @@
 
 Doc-type folder for the adversary complaint in the United States Bankruptcy Court for the Middle District of Alabama. Engine: typst (`typst/`). Parent court: [`../README.md`](../README.md).
 
-- Exemplar: `exemplars/FILED-EXAMPLE-southeastern-stud-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`).
-- Sample: `samples/INPUT-southeastern-stud.md` (transcribed from the exemplar), rendered to `samples/OUTPUT-southeastern-stud.pdf` (12 pages).
-- Overlay: `samples/OVERLAY-southeastern-stud.pdf` and `samples/OVERLAY-southeastern-stud.txt`.
-- Render: `sh tools/render.sh <this-dir> samples/INPUT-southeastern-stud.md`. Overlay: `sh tools/overlay.sh <this-dir> southeastern-stud`.
+- Exemplar: `usage/SAMPLE-almb-adversary-complaint-southeasternstud1503014.pdf` (1 filer; see `usage/SOURCE.md`).
+- Sample: `usage/INPUT-almb-adversary-complaint-southeasternstud.md` (transcribed from the exemplar), rendered to `usage/OUTPUT-almb-adversary-complaint-southeasternstud.typst.pdf` (12 pages).
+- Overlay: `usage/OVERLAY-southeastern-stud.pdf` and `usage/OVERLAY-southeastern-stud.txt`.
+- Render: `sh tools/render.sh <this-dir> usage/INPUT-almb-adversary-complaint-southeasternstud.md`. Overlay: `sh tools/overlay.sh <this-dir> southeastern-stud`.
 
 ## Engines
 
 - **typst** (primary): `typst/`, as above.
-- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`) and `docx/almb-adversary-complaint.lua` (the court title, caption, title, consent block and signature block; the body stays pandoc's). `sh tools/render.sh --engine docx <this-dir> samples/INPUT-southeastern-stud.md` writes `samples/OUTPUT-southeastern-stud.docx`, then stops: `soffice` is not on the build box, so no `samples/OUTPUT-southeastern-stud.docx.pdf` exists.
+- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`) and `docx/almb-adversary-complaint.lua` (the court title, caption, title, consent block and signature block; the body stays pandoc's). `sh tools/render.sh --engine docx <this-dir> usage/INPUT-almb-adversary-complaint-southeasternstud.md` writes `usage/OUTPUT-almb-adversary-complaint-southeasternstud.docx`, then stops: `soffice` is not on the build box, so no `usage/OUTPUT-southeastern-stud.docx.pdf` exists.
 - **Matches the typst form** (the reference styles and filter, checked in the `.docx` XML and its text, not by eye): letter with 1-inch margins; EB Garamond 13 pt in every style; body double-spaced at exactly 24 pt with a 0.5 in first-line indent; the caption as a table with a boxed left column and the case number and blank adversary number at right; centered bold level-1 headings in caps; the consent block under the caption; numbered allegations 1 to 33 keep the numbers the markdown gives; the prayer kept with the signature block; the signature block single-spaced and unbreakable; a centered "-N-" page number at 11 pt in the footer.
 - **Differs or is unverified**: (a) no page of the docx has been rendered or viewed, so line breaks, page count, caption box spacing and footer position are not checked against the typst pages; Word and LibreOffice may paginate differently. (b) The blank adversary number is underlined non-breaking spaces, not a drawn line. (c) The numbered allegations are literal numbers in ordinary paragraphs, not Word list numbering. (d) The core document title is empty: the frontmatter is cleared so pandoc does not print a Title paragraph above the caption.
 - **docx BLOCKED** (see `docs/DOCX.md`):
@@ -39,7 +39,7 @@ Verified 2026-10-14 from the primary text. Kind: **M** mandated by a rule, **C**
 
 ## What the overlay shows
 
-`samples/OVERLAY-southeastern-stud.pdf`: red is our render, blue is the filed exemplar, black is both. Pages are paired by word overlap (`samples/OVERLAY-southeastern-stud.txt`):
+`usage/OVERLAY-southeastern-stud.pdf`: red is our render, blue is the filed exemplar, black is both. Pages are paired by word overlap (`usage/OVERLAY-southeastern-stud.txt`):
 
 | Ours | Filed | Word overlap |
 |---|---|---|
@@ -65,7 +65,7 @@ The page pairing is a diagnostic. The offsets come from pagination: our renderin
 
 ## Gate 2 review
 
-Every page of `samples/OUTPUT-southeastern-stud.pdf` (12 pages) was rendered at 80 dpi and viewed in its final state, both singly and as contact sheets. Findings:
+Every page of `usage/OUTPUT-almb-adversary-complaint-southeasternstud.typst.pdf` (12 pages) was rendered at 80 dpi and viewed in its final state, both singly and as contact sheets. Findings:
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -78,7 +78,7 @@ Every page of `samples/OUTPUT-southeastern-stud.pdf` (12 pages) was rendered at 
 
 ## Gaps
 
-- **Tier 2 is not met.** Only one public filer's almb adversary complaint was retrieved (see `exemplars/SOURCE.md`). The eval loop needs 2 or 3 filers. Search for a second one (CourtListener docket API, when its throttle lifts, or a RECAP docket page) is the next step.
+- **Tier 2 is not met.** Only one public filer's almb adversary complaint was retrieved (see `usage/SOURCE.md`). The eval loop needs 2 or 3 filers. Search for a second one (CourtListener docket API, when its throttle lifts, or a RECAP docket page) is the next step.
 - **Local rules currency.** The local rules fetched are the 2017 set (effective 2017-12-01). The court's own pages refer to new local rules effective 2024-04-01, and the draft 2023 redline lists LBR 7005-1, 9013-1 and 9013-3; the adopted 2024 text was not retrieved. Treat LBR 7005-1 and 9011-1 citations as the 2017 text until the 2024 text is checked.
 - **Jurisdiction and consent.** The filed copy does not state consent. The sample's `jurisdiction.consent` is a bracketed placeholder the pleader must replace; the output carries the bracket.
 - **Not produced:** the summons (Form B 2500A), the certificate of service, Exhibit A (Payoff Letter, not in the filed text), and the cover sheet. LBR 7005-1(c) requires the summons cover sheet and the certificate of service to be filed with the complaint; they are separate documents.
@@ -86,8 +86,8 @@ Every page of `samples/OUTPUT-southeastern-stud.pdf` (12 pages) was rendered at 
 
 ## Run status (2026-10-15)
 
-- Exemplar re-downloaded from the RECAP URL in `exemplars/SOURCE.md` (13 pages, 807645 bytes, sha256 `cf01ec6f27dff5ae480d5c5caa6a783dea011aa630b12fb3ea1003d284010366`) to `exemplars/FILED-EXAMPLE-southeastern-stud-adversary-complaint.pdf`.
-- **render=ok**: `sh tools/render.sh <this-dir> samples/INPUT-southeastern-stud.md` wrote `samples/OUTPUT-southeastern-stud.pdf` (12 pages).
-- **overlay=ok**: `sh tools/overlay.sh <this-dir> southeastern-stud` wrote `samples/OVERLAY-southeastern-stud.pdf` and `.txt`; page pairing matches the table above.
+- Exemplar re-downloaded from the RECAP URL in `usage/SOURCE.md` (13 pages, 807645 bytes, sha256 `cf01ec6f27dff5ae480d5c5caa6a783dea011aa630b12fb3ea1003d284010366`) to `usage/SAMPLE-almb-adversary-complaint-southeasternstud1503014.pdf`.
+- **render=ok**: `sh tools/render.sh <this-dir> usage/INPUT-almb-adversary-complaint-southeasternstud.md` wrote `usage/OUTPUT-almb-adversary-complaint-southeasternstud.typst.pdf` (12 pages).
+- **overlay=ok**: `sh tools/overlay.sh <this-dir> southeastern-stud` wrote `usage/OVERLAY-southeastern-stud.pdf` and `.txt`; page pairing matches the table above.
 - **pages_reviewed=12**: every page of the render was rasterized and viewed in this run. No new issues; the Gate 2 table above stands.
 - Tier 2 remains unmet: only one filer's almb adversary complaint is on record (see Gaps).

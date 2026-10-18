@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/california/federal/southern-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-sager-3-26-cv-03372-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-sager-motion-brief.md` (a portion of the 42-page attachment: cover, TOC, TOA, introduction, factual background, standard of review, arguments I, II and III, conclusion, signature) |
-| render | ok: `samples/OUTPUT-sager-motion-brief.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-sager-motion-brief.pdf` and `OVERLAY-sager-motion-brief.txt` |
+| exemplar | yes: `usage/SAMPLE-casd-motion-brief-sager326cv03372.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-casd-motion-brief-sager.md` (a portion of the 42-page attachment: cover, TOC, TOA, introduction, factual background, standard of review, arguments I, II and III, conclusion, signature) |
+| render | ok: `usage/OUTPUT-casd-motion-brief-sager.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-sager-motion-brief.pdf` and `OVERLAY-sager-motion-brief.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; the cover was re-checked after the last change; all 8 re-viewed on 2026-10-15 in the typeface pass, no template change) |
 
 ## Governing rules
@@ -54,7 +54,7 @@ Not produced by this template, and not checked: a table of authorities listing e
 7. **TOA wrap.** A long TOA entry (ServiceMaster) wraps its page number onto a second line. Cosmetic; the entry is in the TOA but the layout could use a grid like the TOC.
 8. **Signature block.** The template prints "Respectfully submitted," and the firm name (from `signature.preamble`); the exemplar has the date, the firm and the "By: /s/" line without "Respectfully submitted". Convention, not a rule; logged.
 9. **Heading placement.** The grid rule adds `body-leading` of space above each heading, so a heading at the top of a page is 15 pt below the grid line; accepted.
-10. **Overlay names.** `tools/overlay.sh` reads `samples/OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf` and `.txt`; these are the names the tools use, not `<id>.pdf` and `<id>-overlay.pdf`.
+10. **Overlay names.** `tools/overlay.sh` reads `usage/OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf` and `.txt`; these are the names the tools use, not `<id>.pdf` and `<id>-overlay.pdf`.
 11. **Overlay pairing.** Pages are paired by shared words: sample p.1 (cover) with filed p.1; p.2 (TOC) with filed p.2; p.3 (TOA) with filed p.5 (the TOA page); p.4 and p.5 (body) with filed pp.12 and 13; p.6 with filed p.15; p.7 and p.8 (unjust enrichment and conclusion) with filed pp.40 and 41. The pairings are a diagnostic, not a score.
 12. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court directory with `court.json` and `rules.md`, and this doc-type folder does not have that shape. The gates were not run; render and overlay were run, and the review below is the Gate 2 equivalent for this doc type.
 
@@ -75,7 +75,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ### docx
 
-Built by `docx/make-reference.sh` (writes `docx/reference.docx` from pandoc's default reference) and `docx/casd.lua` (the filter). Sample: `samples/OUTPUT-sager-motion-brief.docx` (zip and XML parts checked with `unzip -t` and `xmllint`; the LibreOffice PDF was not made).
+Built by `docx/make-reference.sh` (writes `docx/reference.docx` from pandoc's default reference) and `docx/casd.lua` (the filter). Sample: `usage/OUTPUT-casd-motion-brief-sager.docx` (zip and XML parts checked with `unzip -t` and `xmllint`; the LibreOffice PDF was not made).
 
 Set in `styles.xml` and `sectPr` only, **not rendered** (no LibreOffice on the build box):
 

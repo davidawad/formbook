@@ -5,10 +5,10 @@ Folder: `courts/third-circuit/pennsylvania/federal/middle-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `exemplars/FILED-EXAMPLE-dillow-4-26-cv-03021-complaint.pdf` (primary; transcribed) and `exemplars/FILED-EXAMPLE-anderson-4-26-cv-03004-complaint.pdf` (second caption style; compared, not transcribed). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-dillow.md`: caption, paragraphs 1–65 (through Count I), prayer, jury demand, signature. Counts II–VII are omitted. |
-| render | ok: `samples/OUTPUT-dillow.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-dillow.pdf` and `OVERLAY-dillow.txt` (red = ours, blue = Dillow exemplar) |
+| exemplar | yes, two filers: `usage/SAMPLE-pamd-complaint-dillow426cv03021.pdf` (primary; transcribed) and `usage/SAMPLE-pamd-complaint-anderson426cv03004.pdf` (second caption style; compared, not transcribed). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-pamd-complaint-dillow.md`: caption, paragraphs 1–65 (through Count I), prayer, jury demand, signature. Counts II–VII are omitted. |
+| render | ok: `usage/OUTPUT-pamd-complaint-dillow.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-dillow.pdf` and `OVERLAY-dillow.txt` (red = ours, blue = Dillow exemplar) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; see "Review" below) |
 
 Naming: the tools (`tools/render.sh`, `tools/overlay.sh`) read and write `INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf` and `.txt`, so the sample id is `dillow` and the files carry those prefixes.
@@ -56,7 +56,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Overlay
 
-`tools/overlay.sh` pairs each rendered page with the exemplar page that shares the most words (word overlap, not position). Pass the Dillow exemplar explicitly (`sh tools/overlay.sh <dir> dillow <exemplar.pdf>`); the default takes the first PDF in `exemplars/`, which is Anderson. Pages 1–10 pair with the same page number. Pages 11–12 (prayer, jury demand, signature) pair with filed pages 16–17 because the sample skips Counts II–VII. The map is in `OVERLAY-dillow.txt`. The overlay is a diagnostic, not a score: word overlap runs 62–85% on the body pages.
+`tools/overlay.sh` pairs each rendered page with the exemplar page that shares the most words (word overlap, not position). Pass the Dillow exemplar explicitly (`sh tools/overlay.sh <dir> dillow <exemplar.pdf>`); the default takes the first PDF in `usage/`, which is Anderson. Pages 1–10 pair with the same page number. Pages 11–12 (prayer, jury demand, signature) pair with filed pages 16–17 because the sample skips Counts II–VII. The map is in `OVERLAY-dillow.txt`. The overlay is a diagnostic, not a score: word overlap runs 62–85% on the body pages.
 
 ## Known gaps and open choices
 
@@ -71,7 +71,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Review
 
-Gate 2 equivalent, recorded here (this doc type has no `reviews/` folder). Every page of `OUTPUT-dillow.pdf` was rendered at 60 dpi and viewed.
+Gate 2 equivalent, recorded here (this doc type has no `reviews/` folder). Every page of `OUTPUT-pamd-complaint-dillow.typst.pdf` was rendered at 60 dpi and viewed.
 
 - Page 1: court title, caption with colons, "CIVIL ACTION NO." and "JURY TRIAL DEMANDED" at the right, title centred, lead-in, paragraph 1 starts on the page. No spill. Pass. Re-viewed after the cover edit (the court title stacked as two lines): unchanged. Pass.
 - Pages 2–3: paragraphs 2–13, centred level-1 headings ("JURISDICTION AND VENUE", "III. PARTIES"). The heading at the foot of page 2 moved to page 3 with its paragraph. Pass.
@@ -95,5 +95,5 @@ Tier 2 is compared against two filed exemplars (Dillow page by page through the 
 
 - **typst** (primary, `typst/`): the reference for the form. Pages reviewed in this README above.
 - **latex**: not built in this pass.
-- **docx** (`docx/reference.docx`, `docx/build-reference.sh`, `docx/pamd.lua`; sample `samples/OUTPUT-dillow.docx`). Built with `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/pamd.lua samples/INPUT-dillow.md`. Matches the typst template: EB Garamond 14 pt (declared in the styles; the font must be installed on the machine that opens the file), exact 32 pt line pitch, 0.5 in first-line indent, 1 in margins on letter paper, page number centred in a 12 pt footer, centred bold caps level-1 headings and centred bold level-2 headings, the court title, the caption as a borderless table with 16 pt rows and a colon column, the title, the lead-in, numbered allegations (number as text, `^` paragraphs unnumbered), prayer items (a), (b) ... as text, and the signature block as a borderless table. Differences: single-spaced blocks use exact 16 pt lines (typst uses its own leading), the signature rule is a paragraph border 3.2 in wide, and the page breaks are not measured (the typst layout is about 20 lines a page; Word may differ). The `.docx` was checked only for a valid zip and well-formed XML parts, and read back with pandoc. It was not opened in Word or LibreOffice.
+- **docx** (`docx/reference.docx`, `docx/build-reference.sh`, `docx/pamd.lua`; sample `usage/OUTPUT-pamd-complaint-dillow.docx`). Built with `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/pamd.lua usage/INPUT-pamd-complaint-dillow.md`. Matches the typst template: EB Garamond 14 pt (declared in the styles; the font must be installed on the machine that opens the file), exact 32 pt line pitch, 0.5 in first-line indent, 1 in margins on letter paper, page number centred in a 12 pt footer, centred bold caps level-1 headings and centred bold level-2 headings, the court title, the caption as a borderless table with 16 pt rows and a colon column, the title, the lead-in, numbered allegations (number as text, `^` paragraphs unnumbered), prayer items (a), (b) ... as text, and the signature block as a borderless table. Differences: single-spaced blocks use exact 16 pt lines (typst uses its own leading), the signature rule is a paragraph border 3.2 in wide, and the page breaks are not measured (the typst layout is about 20 lines a page; Word may differ). The `.docx` was checked only for a valid zip and well-formed XML parts, and read back with pandoc. It was not opened in Word or LibreOffice.
 - **docx BLOCKED.** No checks file is readable for this court (no `checks.yaml` in the court folder), so there are no gate check IDs to list. The rule IDs measured on the `.docx.pdf` (PAMD-CMP-001 to PAMD-CMP-008, see the table above) are all BLOCKED: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked. The docx is not verified against Gates 0 to 3.

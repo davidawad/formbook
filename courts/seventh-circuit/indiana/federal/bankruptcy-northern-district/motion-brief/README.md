@@ -6,13 +6,13 @@ Scope: the template produces the supporting brief (the memorandum). Under N.D. I
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-river-terrace-14-11829-motion-brief.pdf` (one filer: a creditor; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-river-terrace-motion-brief.md`: the whole brief as filed (13 pages), transcribed |
-| render | ok: `samples/OUTPUT-river-terrace-motion-brief.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
-| overlay | ok: `samples/OVERLAY-river-terrace-motion-brief.pdf` and `.txt` (exit 0) |
+| exemplar | yes: `usage/SAMPLE-innb-motion-brief-riverterrace1411829.pdf` (one filer: a creditor; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-innb-motion-brief-riverterrace.md`: the whole brief as filed (13 pages), transcribed |
+| render | ok: `usage/OUTPUT-innb-motion-brief-riverterrace.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
+| overlay | ok: `usage/OVERLAY-river-terrace-motion-brief.pdf` and `.txt` (exit 0) |
 | pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed; pages 1 to 3 re-viewed after the last template change) |
 
-This is a doc-type folder, not a court folder: `court.json`, `STATUS.md` and the court-root `typst/` and `samples/` are untouched, and nothing here sets a status.
+This is a doc-type folder, not a court folder: `court.json`, `STATUS.md` and the court-root `typst/` and `usage/` are untouched, and nothing here sets a status.
 
 ## Governing rules
 
@@ -53,7 +53,7 @@ Not used, and why: B-7008-1 (responsive pleadings) applies to answers, not brief
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env at ~/tb)
-sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/motion-brief samples/INPUT-river-terrace-motion-brief.md
+sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/motion-brief usage/INPUT-innb-motion-brief-riverterrace.md
 sh tools/overlay.sh courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/motion-brief river-terrace-motion-brief
 ```
 
@@ -95,7 +95,7 @@ File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf`, and `to
 
 ## Engines
 
-DOCX engine (`docx/`): `reference.docx` built by `docx/build-reference.sh`, filter `docx/innb.lua`. Output `samples/OUTPUT-river-terrace-motion-brief.docx`.
+DOCX engine (`docx/`): `reference.docx` built by `docx/build-reference.sh`, filter `docx/innb.lua`. Output `usage/OUTPUT-innb-motion-brief-riverterrace.docx`.
 
 - Matches the typst form: EB Garamond 13 pt body; exact 24 pt line pitch; 0.5 in first-line indent; US Letter with 1 in margins; single-spaced caption, block quotations, signature and footnote text; centred page number (11 pt) in the footer; court title, debtor block, title (one line per entry), headings as written (centred caps for level 1, bold left for level 2), native footnotes, block quotations indented 0.5 in on both sides, and the lettered list of the Bid Procedures written back as "a." to "d." paragraphs; the signature block ("Dated:" at left, signature at right) in one unbreakable row. No numbered paragraphs, as in the typst form.
 - Differs or unverified: the debtor block rule and cell paddings are approximations of the typst stroke and inset values and have not been compared on a page. Single spacing is Word's "single", not typst's 0.2 em leading. Footnote numbering is Word's (continuous). The signature block does not carry the last paragraph to the next page (same open item as typst, page 13 of the typst render); it is not fixed here. The font must be installed on the machine that opens the file.

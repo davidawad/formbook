@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/washington/federal/eastern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-plenty-2-26-cv-00258-complaint.pdf` (primary, 12 pp.) and `exemplars/FILED-EXAMPLE-price-2-25-cv-00410-complaint.pdf` (second filer, 5 pp.); see `exemplars/SOURCE.md` |
-| sample md | `samples/INPUT-plenty-complaint.md` (transcription of all 12 pages; footnotes not transcribed, see gaps) |
-| render | ok: `samples/OUTPUT-plenty-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-plenty-complaint.pdf` and `OVERLAY-plenty-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-waed-complaint-plenty226cv00258.pdf` (primary, 12 pp.) and `usage/SAMPLE-waed-complaint-price225cv00410.pdf` (second filer, 5 pp.); see `usage/SOURCE.md` |
+| sample md | `usage/INPUT-waed-complaint-plenty.md` (transcription of all 12 pages; footnotes not transcribed, see gaps) |
+| render | ok: `usage/OUTPUT-waed-complaint-plenty.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-plenty-complaint.pdf` and `OVERLAY-plenty-complaint.txt` |
 | typeface | face required: none named by LCivR 10(d) (serif or traditional Roman; proportionately spaced, 14 pt or more; or monospaced). Vendored substitute: not needed, EB Garamond kept (any proportional serif meets the rule). Fit: n/a. Font list: `EB Garamond`, embedded (`pdffonts`). |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change, and again on the fonts pass) |
 
@@ -51,7 +51,7 @@ Not produced by this template: the civil cover sheet (JS-44), the corporate disc
 
 ## Overlay
 
-`samples/OVERLAY-plenty-complaint.pdf` shows our render in red, the filed exemplar in blue, and their overlap in black, page by page. Pages are paired by shared words, not by index (`tools/overlay.sh`); the page map is in `OVERLAY-plenty-complaint.txt`:
+`usage/OVERLAY-plenty-complaint.pdf` shows our render in red, the filed exemplar in blue, and their overlap in black, page by page. Pages are paired by shared words, not by index (`tools/overlay.sh`); the page map is in `OVERLAY-plenty-complaint.txt`:
 
 | our page | filed page | word overlap |
 |---|---|---|
@@ -97,7 +97,7 @@ The overlay is a diagnostic, not a score. It shows the filed text runs longer th
 
 ### docx (`docx/`)
 
-Build and render: `sh docx/build-reference.sh docx/reference.docx` (the reference is generated, so it can be rebuilt), then `sh tools/render.sh --engine docx <this folder> samples/INPUT-plenty-complaint.md`, which writes `samples/OUTPUT-plenty-complaint.docx` and `samples/OUTPUT-plenty-complaint.docx.pdf` (LibreOffice 26.8 conversion; EB Garamond embedded, `pdffonts`). `docx/complaint.lua` lays out the cover, caption and signature block (`docx/pleading.lua`, shared helpers) and numbers the paragraphs; `docx/render.sh` fills the footer title from `footer_title`.
+Build and render: `sh docx/build-reference.sh docx/reference.docx` (the reference is generated, so it can be rebuilt), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-waed-complaint-plenty.md`, which writes `usage/OUTPUT-waed-complaint-plenty.docx` and `usage/OUTPUT-waed-complaint-plenty.docx.pdf` (LibreOffice 26.8 conversion; EB Garamond embedded, `pdffonts`). `docx/complaint.lua` lays out the cover, caption and signature block (`docx/pleading.lua`, shared helpers) and numbers the paragraphs; `docx/render.sh` fills the footer title from `footer_title`.
 
 What matches the typst output (checked on the LibreOffice PDF, 9 pages, the same page count and the same first line on every page):
 
@@ -118,4 +118,4 @@ What differs (not a rule; tier 2 or 3):
 
 Checks: `tools/check.sh` cannot run on a doc-type folder: it reads `<court>/court.json` and `<court>/checks.yaml`, and this folder has neither. The docx PDF was checked by hand instead: every word of the sample is in the PDF (the two exceptions are em-dash joins that `pdftotext` splits), the 9 pages were viewed as PNG (`reviews/docx-review.md`).
 
-BLOCKED: tools/check.sh (all gates, `--engine docx`): the script needs `<court>/court.json` and `<court>/checks.yaml` (`Error: open .../checks.yaml: no such file or directory`), which only exist at court level; no gate ran on this folder, so `samples/.check-docx.txt` is not written.
+BLOCKED: tools/check.sh (all gates, `--engine docx`): the script needs `<court>/court.json` and `<court>/checks.yaml` (`Error: open .../checks.yaml: no such file or directory`), which only exist at court level; no gate ran on this folder, so `usage/.check-docx.txt` is not written.

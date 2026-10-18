@@ -33,7 +33,7 @@ Kinds: **M** mandated by rule; **C** convention; **T** project requirement; **A*
 | CACD-CONT-005 | A motion includes notice and supporting papers; its points and authorities state the grounds and requested relief. | CACD-LR, L.R. 7-3, 7-5; FRCP 7(b) | M |
 | CACD-CONT-006 | A memorandum of points and authorities or brief exceeding ten pages (excluding exhibits) includes indexed tables of contents and authorities. | CACD-LR, L.R. 11-8 | M |
 | CACD-FORM-007 | Block quotations from cited authorities longer than one sentence are indented 5–20 spaces. | CACD-LR, L.R. 11-3.7 | M |
-| CACD-COVER-002 | One-page cover/caption and centered headings are followed as an observed practice across the saved filed examples; local rule controls where it differs. | `exemplars/SOURCE.md`, cross-filer convention | C |
+| CACD-COVER-002 | One-page cover/caption and centered headings are followed as an observed practice across the saved filed examples; local rule controls where it differs. | `usage/SOURCE.md`, cross-filer convention | C |
 
 ### Complaint
 

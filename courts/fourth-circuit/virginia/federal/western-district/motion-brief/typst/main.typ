@@ -1,9 +1,9 @@
 // Entry point. Compile with the doc-type folder as --root; tools/render.sh does it:
 //   typst compile --root <doctype-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=samples/NAME.md \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
 //     typst/main.typ out.pdf
 #import "vawd-motion-brief.typ": vawd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-fitch-motion-brief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-vawd-motion-brief-fitch.md"))
 #let (meta, body) = split-frontmatter(src)
 #vawd-motion-brief(meta, body)

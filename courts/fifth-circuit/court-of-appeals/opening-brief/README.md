@@ -1,24 +1,24 @@
 # Fifth Circuit: opening brief (principal brief of appellant)
 
-Template for the principal brief of an appellant in the U.S. Court of Appeals for the Fifth Circuit. Content-agnostic: every number is a named parameter at the top of `typst/ca5-opening-brief.typ` and traces to a rule or a style choice. The court-root `typst/` and `samples/` (the older ca5 material) are not part of this folder and were not touched.
+Template for the principal brief of an appellant in the U.S. Court of Appeals for the Fifth Circuit. Content-agnostic: every number is a named parameter at the top of `typst/ca5-opening-brief.typ` and traces to a rule or a style choice. The court-root `typst/` and `usage/` (the older ca5 material) are not part of this folder and were not touched.
 
 ## Layout
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-candel-25-20366-opening-brief.pdf` | Filed exemplar: Brief of Appellant, *Candel & Partners SAS v. ExxonMobil Corp.*, No. 25-20366 (5th Cir.), filed 2025-11-03, 59 pages, text layer present. |
-| `exemplars/SOURCE.md` | Where the exemplar came from, the docket number, the filer, the date filed and the date fetched. |
-| `samples/INPUT-candel-opening-brief.md` | Markdown transcription of the exemplar: front matter, the sections of the brief, footnotes, the conclusion and both certificates. Follows the markdown contract of the ninth-circuit sample (frontmatter, `# Heading` sections, `toa:` citation links, `[^n]` footnotes). |
-| `samples/OUTPUT-candel-opening-brief.pdf` | Render of the sample (14 pages). |
-| `samples/OVERLAY-candel-opening-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map from `tools/overlay.sh`. |
+| `usage/SAMPLE-ca5-opening-brief-candel2520366.pdf` | Filed exemplar: Brief of Appellant, *Candel & Partners SAS v. ExxonMobil Corp.*, No. 25-20366 (5th Cir.), filed 2025-11-03, 59 pages, text layer present. |
+| `usage/SOURCE.md` | Where the exemplar came from, the docket number, the filer, the date filed and the date fetched. |
+| `usage/INPUT-ca5-opening-brief-candel.md` | Markdown transcription of the exemplar: front matter, the sections of the brief, footnotes, the conclusion and both certificates. Follows the markdown contract of the ninth-circuit sample (frontmatter, `# Heading` sections, `toa:` citation links, `[^n]` footnotes). |
+| `usage/OUTPUT-ca5-opening-brief-candel.typst.pdf` | Render of the sample (14 pages). |
+| `usage/OVERLAY-candel-opening-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map from `tools/overlay.sh`. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca5-opening-brief.typ` | The template: `ca5-opening-brief(meta, md)`. |
 
 Build (from the repo root, with typst 0.15.0 on PATH):
 
 ```sh
-sh tools/render.sh courts/fifth-circuit/court-of-appeals/opening-brief samples/INPUT-candel-opening-brief.md
-sh tools/overlay.sh courts/fifth-circuit/court-of-appeals/opening-brief candel-opening-brief exemplars/FILED-EXAMPLE-candel-25-20366-opening-brief.pdf
+sh tools/render.sh courts/fifth-circuit/court-of-appeals/opening-brief usage/INPUT-ca5-opening-brief-candel.md
+sh tools/overlay.sh courts/fifth-circuit/court-of-appeals/opening-brief candel-opening-brief usage/SAMPLE-ca5-opening-brief-candel2520366.pdf
 ```
 
 Typst runs with the vendored fonts only (`--ignore-system-fonts`); any typst warning fails the render. The font is EB Garamond (`fonts/eb-garamond/`), and cmarker 0.1.10 is vendored under `vendor/typst-packages/`.
@@ -61,7 +61,7 @@ Rules were checked against the court's checklist (dated September 2024) on 2026-
 
 ## What the overlay shows
 
-`samples/OVERLAY-candel-opening-brief.txt` maps each of the 14 sample pages to the exemplar page sharing the most words:
+`usage/OVERLAY-candel-opening-brief.txt` maps each of the 14 sample pages to the exemplar page sharing the most words:
 
 | Sample page | Content | Best exemplar page | Word overlap |
 |---|---|---|---|
@@ -123,9 +123,9 @@ Defects found and fixed during the review:
 
 ## Status
 
-- exemplar: yes (`exemplars/FILED-EXAMPLE-candel-25-20366-opening-brief.pdf`)
-- render: ok (`samples/OUTPUT-candel-opening-brief.pdf`, 14 pages, no typst warnings)
-- overlay: ok (`samples/OVERLAY-candel-opening-brief.pdf`, page map in `-overlay.txt`)
+- exemplar: yes (`usage/SAMPLE-ca5-opening-brief-candel2520366.pdf`)
+- render: ok (`usage/OUTPUT-ca5-opening-brief-candel.typst.pdf`, 14 pages, no typst warnings)
+- overlay: ok (`usage/OVERLAY-candel-opening-brief.pdf`, page map in `-overlay.txt`)
 - pages reviewed: 14 of 14
 
 ## Engines

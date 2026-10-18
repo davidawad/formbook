@@ -22,10 +22,10 @@ re-verify NYNB-ELEC-006 and the 9013-1 rows on or after 2026-12-01.
 | FRCP | Federal Rules of Civil Procedure 8 and 10 (applied by FRBP 7008 and 7010; Cornell LII text) | https://www.law.cornell.edu/rules/frcp/rule_8, https://www.law.cornell.edu/rules/frcp/rule_10 |
 | F416D | Official Form 416D, Caption for Use in Adversary Proceeding (12/15) (sha256 `a2ed5c2eeba7f1a78c4ae18fb9d9ee97d9586b67bf0e92766c35e85470082834`) | https://www.uscourts.gov/sites/default/files/form_b416d_0.pdf |
 | F416A | Official Form 416A, Caption (Full) (12/15) (sha256 `ad62c9ed2c031075ddc77f073d52fb12e70f40c42a1922efe72e1a9f50f1a2ac`) | https://www.uscourts.gov/sites/default/files/form_b416a_0.pdf |
-| EX-FANGIO | Exemplar: Fangio (Ch. 11 trustee) v. Vehifax Corp., Adv. No. 15-50001, Dkt 1, complaint, by The Crossmore Law Office | `adversary-complaint/exemplars/` |
-| EX-STEVENS | Exemplar: Stevens (Plan Administrator) v. Evepark London LP, Adv. No. 26-90046, Dkt 1, complaint, by Klestadt Winters Jureller Southard & Stevens, LLP | `adversary-complaint/exemplars/` |
-| EX-GECC | Exemplar: EF Consulting LLC v. General Electric Capital Corp., Adv. No. 10-90175, Dkt 6, GECC's memorandum of law in support of its motion to dismiss, by Moritt Hock & Hamroff LLP | `motion-brief/exemplars/` |
-| EX-EFC | Exemplar: same adversary, Dkt 13, plaintiffs' (EF Consulting LLC and Oasis HC LLC) memorandum of law in opposition to the motion to dismiss and in support of their cross-motion for partial summary judgment, by Backenroth Frankel & Krinsky LLP | `motion-brief/exemplars/` |
+| EX-FANGIO | Exemplar: Fangio (Ch. 11 trustee) v. Vehifax Corp., Adv. No. 15-50001, Dkt 1, complaint, by The Crossmore Law Office | `adversary-complaint/usage/` |
+| EX-STEVENS | Exemplar: Stevens (Plan Administrator) v. Evepark London LP, Adv. No. 26-90046, Dkt 1, complaint, by Klestadt Winters Jureller Southard & Stevens, LLP | `adversary-complaint/usage/` |
+| EX-GECC | Exemplar: EF Consulting LLC v. General Electric Capital Corp., Adv. No. 10-90175, Dkt 6, GECC's memorandum of law in support of its motion to dismiss, by Moritt Hock & Hamroff LLP | `motion-brief/usage/` |
+| EX-EFC | Exemplar: same adversary, Dkt 13, plaintiffs' (EF Consulting LLC and Oasis HC LLC) memorandum of law in opposition to the motion to dismiss and in support of their cross-motion for partial summary judgment, by Backenroth Frankel & Krinsky LLP | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a court rule (LBR, AP, FRBP, or FRCP as applied by the FRBP). **C** = convention (the rules
 leave it open; taken from exemplars, with the filers named). **T** = project/tooling rule of this repo. **A** = author

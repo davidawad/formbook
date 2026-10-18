@@ -22,7 +22,7 @@ Kinds: **M** mandated by rule; **C** convention; **T** project requirement; **A*
 | CASB-CONT-001 | An adversary action commences by complaint and states claims and relief. | FRBP 7003, 7008; FRCP 8 | M |
 | CASB-CONT-002 | Caption identifies court, parties and adversary proceeding and paper. | FRBP 9004; FRCP 10(a) via FRBP 7010 | M |
 | CASB-CONT-003 | Motion states grounds and relief; notice and hearing follow applicable local motion practice. | FRBP 9013, 9014; CASB-LBR, LBR 9013-6, 9013-7 | M |
-| CASB-FORM-002 | Pleading-paper line numbers, rules and footer are exemplar-derived convention unless a current rule or administrative procedure expressly requires them. | `exemplars/SOURCE.md`, cross-filer comparison | C |
+| CASB-FORM-002 | Pleading-paper line numbers, rules and footer are exemplar-derived convention unless a current rule or administrative procedure expressly requires them. | `usage/SOURCE.md`, cross-filer comparison | C |
 
 ### Adversary complaint
 

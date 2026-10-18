@@ -1,4 +1,4 @@
--- W.D. Tenn. complaint, DOCX engine (docs/DOCX.md): the markdown contract of samples/INPUT-<id>.md -> Word.
+-- W.D. Tenn. complaint, DOCX engine (docs/DOCX.md): the markdown contract of usage/INPUT-<id>.md -> Word.
 -- Mirrors typst/tnwd-complaint.typ: court title (single), caption (parties with a rule at the right of the
 -- party column, case number and JURY DEMAND opposite), the title, numbered allegations after the first heading
 -- (the number at 1/2 inch, the text at the tab after it), lead-in paragraphs unnumbered, a lettered prayer list,

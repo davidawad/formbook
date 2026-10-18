@@ -3,21 +3,21 @@
 Doc type: **adversary complaint** in the United States Bankruptcy Court for the Northern District of New York (`nynb`).
 Folder: `courts/second-circuit/new-york/federal/bankruptcy-northern-district/adversary-complaint/`.
 
-**Exemplar found (1 filer).** `exemplars/FILED-EXAMPLE-fangio-v-vehifax-15-50001-adversary-complaint.pdf` is a real, public,
+**Exemplar found (1 filer).** `usage/SAMPLE-nynb-adversary-complaint-fangiovvehifax1550001.pdf` is a real, public,
 text-based complaint filed in this court (Adv. No. 15-50001, Dkt 1, filed January 2015). The sample is a transcription of
-it. Provenance and the search log are in `exemplars/SOURCE.md`. Tier 2 would normally be judged against 2 or 3 filers; one
-filer is on file, so a second complaint is still wanted (candidate: Stevens, Adv. No. 26-90046, in `exemplars/SOURCE.md`).
+it. Provenance and the search log are in `usage/SOURCE.md`. Tier 2 would normally be judged against 2 or 3 filers; one
+filer is on file, so a second complaint is still wanted (candidate: Stevens, Adv. No. 26-90046, in `usage/SOURCE.md`).
 
 | Item | Status |
 |---|---|
-| exemplar | **yes**: `exemplars/FILED-EXAMPLE-fangio-v-vehifax-15-50001-adversary-complaint.pdf` (6 pages, text layer) |
-| sample md | `samples/INPUT-adversary-complaint.md`: transcription of the filing's text (the 37 numbered paragraphs, the preamble, the WHEREFORE clause, the prayer, the signature block). Frontmatter comment lists every difference from the filing. |
-| render | ok: `samples/OUTPUT-adversary-complaint.pdf`, 6 pages, letter, EB Garamond only (embedded), `tools/render.sh` exit 0, no typst warnings |
-| overlay | ok: `samples/OVERLAY-adversary-complaint.pdf` and `.txt`, `tools/overlay.sh` exit 0. Page word-overlap: 70.3, 66.6, 66.3, 55.2, 50.5, 84.2 percent (pages 1 to 6) |
+| exemplar | **yes**: `usage/SAMPLE-nynb-adversary-complaint-fangiovvehifax1550001.pdf` (6 pages, text layer) |
+| sample md | `usage/INPUT-nynb-adversary-complaint-sample.md`: transcription of the filing's text (the 37 numbered paragraphs, the preamble, the WHEREFORE clause, the prayer, the signature block). Frontmatter comment lists every difference from the filing. |
+| render | ok: `usage/OUTPUT-nynb-adversary-complaint-sample.typst.pdf`, 6 pages, letter, EB Garamond only (embedded), `tools/render.sh` exit 0, no typst warnings |
+| overlay | ok: `usage/OVERLAY-adversary-complaint.pdf` and `.txt`, `tools/overlay.sh` exit 0. Page word-overlap: 70.3, 66.6, 66.3, 55.2, 50.5, 84.2 percent (pages 1 to 6) |
 | pages reviewed | 6 of 6, each rendered at 70 dpi and viewed. Pages 1 to 4 were viewed before the last template change (the prayer's sticky chain, which begins on page 5); that change cannot move text on pages 1 to 4. Pages 5 and 6 were viewed after it. |
 
-File names: the sample is `INPUT-adversary-complaint.md`; the id is `adversary-complaint` (the render and overlay default
-names are `OUTPUT-adversary-complaint.pdf`, `OVERLAY-adversary-complaint.pdf/.txt`).
+File names: the sample is `INPUT-nynb-adversary-complaint-sample.md`; the id is `adversary-complaint` (the render and overlay default
+names are `OUTPUT-nynb-adversary-complaint-sample.typst.pdf`, `OVERLAY-adversary-complaint.pdf/.txt`).
 
 ## Markdown contract (frontmatter)
 
@@ -101,7 +101,7 @@ keeps the template's rule-based form. Layout choices the rules leave open are th
 **docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt body lines,
 13.8 pt single lines, 1 in margins, letter, PAGE field centred in the footer); `docx/nynb-adversary-complaint.lua` builds
 the cover, the two caption tables, the numbered paragraphs, the prayer and the signature block. Output:
-`samples/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice). The `.docx` converts in LibreOffice with no
+`usage/OUTPUT-nynb-adversary-complaint-sample.docx` and `.docx.pdf` (LibreOffice). The `.docx` converts in LibreOffice with no
 error; the zip and XML parts are well formed.
 
 - Matches the typst output: font and size, line pitch, margins, page numbers, caption layout and rules, the numbering

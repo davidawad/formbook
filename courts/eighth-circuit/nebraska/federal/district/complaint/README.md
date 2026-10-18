@@ -5,10 +5,10 @@ Folder: `courts/eighth-circuit/nebraska/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 1 filer: `exemplars/FILED-EXAMPLE-goldenstein-8-26-cv-00593-complaint.pdf` (see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-goldenstein-complaint.md` (the whole 12-page filing, paragraph numbers left to the template) |
-| render | ok: `samples/OUTPUT-goldenstein-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-goldenstein-complaint.pdf` and `OVERLAY-goldenstein-complaint.txt` (page map) |
+| exemplar | yes, 1 filer: `usage/SAMPLE-ned-complaint-goldenstein826cv00593.pdf` (see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ned-complaint-goldenstein.md` (the whole 12-page filing, paragraph numbers left to the template) |
+| render | ok: `usage/OUTPUT-ned-complaint-goldenstein.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-goldenstein-complaint.pdf` and `OVERLAY-goldenstein-complaint.txt` (page map) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed in the final state) |
 | typeface | face required: none (NECivR names no typeface). Substitute: none; EB Garamond kept (no-face default, `docs/FONTS.md`). Fit: n/a. Exemplar is Times New Roman, a filer's choice (see Known gaps, 1). |
 | tier 2 | not yet judged against 2 or 3 filers: one exemplar only (see Known gaps, 2) |
@@ -57,7 +57,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 ## Known gaps and open choices
 
 1. **Font.** The District's rules name no font: NECivR 7.1 and 10.1 in the 2022 text (`NECivR.2022.pdf`, read 2026-10-14) contain no typeface, type-size or spacing rule beyond 10.1(b)(1)'s paper size and top margin. `docs/FONTS.md` says a court that names no face keeps EB Garamond, so the template does. The exemplar is Times New Roman, which is the filer's choice, not a rule; Liberation Serif (metric-compatible with Times New Roman) is vendored but is not used, because no rule calls for it. The text looks smaller than the exemplar at the same 12 pt because of EB Garamond's smaller x-height.
-2. **One exemplar.** Tier 2 asks for 2 or 3 filers. Harrison v. Bang, No. 8:26-cv-00501 (10 pp., another attorney, a different caption convention) is the likely second filer; it is listed in `exemplars/SOURCE.md` but not saved, per the one-exemplar rule.
+2. **One exemplar.** Tier 2 asks for 2 or 3 filers. Harrison v. Bang, No. 8:26-cv-00501 (10 pp., another attorney, a different caption convention) is the likely second filer; it is listed in `usage/SOURCE.md` but not saved, per the one-exemplar rule.
 3. **Signature label.** NECivR 11.1(a)(1)(A) gives "s/ Judith Attorney" with no "By:" label. The exemplar writes "By: /s/". The template follows the rule.
 4. **Counsel block.** Its placement is the exemplar's; the District does not require one.
 5. **No pleading paper.** The exemplar has none, and the District has no line-number rule. The template uses no line numbers.
@@ -82,14 +82,14 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 Defects found in review and fixed before this render: headings were drawn over the first line of the paragraph after them; paragraphs ran together with no line between them; a counter displayed inside a block measured one line short and overlapped the next paragraph. Each is fixed in `typst/ned-complaint.typ`.
 
-File names follow `tools/render.sh` and `tools/overlay.sh` (and CLAUDE.md's role prefixes): `INPUT-goldenstein-complaint.md` (input), `OUTPUT-goldenstein-complaint.pdf` (our render), `OVERLAY-goldenstein-complaint.pdf` and `.txt` (the comparison). The brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools write.
+File names follow `tools/render.sh` and `tools/overlay.sh` (and CLAUDE.md's role prefixes): `INPUT-ned-complaint-goldenstein.md` (input), `OUTPUT-ned-complaint-goldenstein.typst.pdf` (our render), `OVERLAY-goldenstein-complaint.pdf` and `.txt` (the comparison). The brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools write.
 
 ## Engines
 
-| Engine | Folder | Output in `samples/` | Status |
+| Engine | Folder | Output in `usage/` | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-goldenstein-complaint.pdf` (11 pages; not in the snapshot, rendered for comparison only) | the reference |
-| docx | `docx/` (`reference.docx` from `make-reference.sh`, and `ned-complaint.lua`) | `OUTPUT-goldenstein-complaint.docx` and `OUTPUT-goldenstein-complaint.docx.pdf` (12 pages, LibreOffice 26.8.1 headless) | rendered; every page of the `.docx.pdf` viewed against the typst render |
+| typst (primary) | `typst/` | `OUTPUT-ned-complaint-goldenstein.typst.pdf` (11 pages; not in the snapshot, rendered for comparison only) | the reference |
+| docx | `docx/` (`reference.docx` from `make-reference.sh`, and `ned-complaint.lua`) | `OUTPUT-ned-complaint-goldenstein.docx` and `OUTPUT-ned-complaint-goldenstein.docx.pdf` (12 pages, LibreOffice 26.8.1 headless) | rendered; every page of the `.docx.pdf` viewed against the typst render |
 
 **Matches typst** (checked on the LibreOffice PDF): EB Garamond 12 pt (embedded, `pdffonts`); double spacing at 24 pt; 1-inch margins on US Letter; the counsel block; the two court-title lines; the caption as a table with a right and a bottom rule on the party column, "v." between the parties, indented designations, the case number, the bold title, "Jury Trial Demanded" and the trial location; centered bold capitals for level-1 headings; numbered allegations with a half-inch first-line indent; the prayer lettered A., B., ...; the signature block in NECivR 11.1 order with "Dated" at left; the footer from page 2 on (page number centered, the title in capitals, "Case No." at right) and no footer on page 1. The text matches typst word for word (the extracted text of both PDFs, compared without whitespace and footers, differs by one character at a page boundary). Some line breaks fall one word differently from typst.
 

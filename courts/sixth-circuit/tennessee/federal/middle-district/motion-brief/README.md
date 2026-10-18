@@ -1,14 +1,14 @@
 # tnmd: motion-brief
 
 Doc type: **motion-brief**, the memorandum of law supporting a motion to dismiss under Fed. R. Civ. P. 12(b), in the United States District Court for the Middle District of Tennessee (`tnmd`).
-Folder: `courts/sixth-circuit/tennessee/federal/middle-district/motion-brief/` (self-contained; the court-root `typst/` and `samples/` are not touched).
+Folder: `courts/sixth-circuit/tennessee/federal/middle-district/motion-brief/` (self-contained; the court-root `typst/` and `usage/` are not touched).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-veris-3-26-cv-00918-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-veris-motion-brief.md`: excerpt of the 27-page memorandum (pages 1 to 5, the start of Section IV and IV.B, and pages 26 to 27). Pages 6 to 10 and 13 to 25 are not transcribed; see Known gaps 3. |
-| render | ok: `samples/OUTPUT-veris-motion-brief.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-veris-motion-brief.pdf` and `samples/OVERLAY-veris-motion-brief.txt` (sample page 6 pairs with exemplar page 5 and page 7 with exemplar page 12, because the transcription skips pages) |
+| exemplar | yes: `usage/SAMPLE-tnmd-motion-brief-veris326cv00918.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-tnmd-motion-brief-veris.md`: excerpt of the 27-page memorandum (pages 1 to 5, the start of Section IV and IV.B, and pages 26 to 27). Pages 6 to 10 and 13 to 25 are not transcribed; see Known gaps 3. |
+| render | ok: `usage/OUTPUT-tnmd-motion-brief-veris.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-veris-motion-brief.pdf` and `usage/OVERLAY-veris-motion-brief.txt` (sample page 6 pairs with exemplar page 5 and page 7 with exemplar page 12, because the transcription skips pages) |
 | typeface | face required: none. LR 7.03(a) (applies to LCrR 57.01 too) requires "at least 12-point font" and names no face, so the court-named-face substitute does not apply. Stays EB Garamond (vendored, visual only), per `docs/FONTS.md` ("No face named"). |
 | pages reviewed | 9 of 9 (re-rendered 2026-10-15 with vendored fonts only, zero warnings; every page rendered at 60 dpi and viewed) |
 | tier 1 | not gated: `tools/check.sh` expects a court folder with `court.json` and `rules.md`, which this doc-type folder is not, and the brief forbids touching `tools/`. The rule rows below are the tier-1 record. |
@@ -86,7 +86,7 @@ Gate 2 rows are recorded here, not in `reviews/` (this doc type has no `reviews/
 
 ## Engines
 
-docx: `docx/build-reference.sh` (builds `docx/reference.docx`) and `docx/tnmd.lua` (caption, signature, certificate of service, prayer lettering, footnotes). Output: `samples/OUTPUT-veris-motion-brief.docx` and `samples/OUTPUT-veris-motion-brief.docx.pdf` (LibreOffice 26.8.1 conversion). Typst output for comparison: `samples/OUTPUT-veris-motion-brief.pdf`. The docx is 10 pages; the typst output is 9. Every page of both was rasterized at 60 dpi and viewed (docx pages 1 to 7 before the last two changes, which only moved the signature and certificate; pages 8 to 10 after).
+docx: `docx/build-reference.sh` (builds `docx/reference.docx`) and `docx/tnmd.lua` (caption, signature, certificate of service, prayer lettering, footnotes). Output: `usage/OUTPUT-tnmd-motion-brief-veris.docx` and `usage/OUTPUT-tnmd-motion-brief-veris.docx.pdf` (LibreOffice 26.8.1 conversion). Typst output for comparison: `usage/OUTPUT-tnmd-motion-brief-veris.typst.pdf`. The docx is 10 pages; the typst output is 9. Every page of both was rasterized at 60 dpi and viewed (docx pages 1 to 7 before the last two changes, which only moved the signature and certificate; pages 8 to 10 after).
 
 - Matches typst: letter paper, one-inch margins, EB Garamond 13 pt (embedded), double spacing as an exact 27.6 pt pitch, single spacing at 15 pt for the caption, headings, footnotes and signature, centered page number (TNMD-FORM-001 to 004). Caption with the ")" column and the judge lines on the right; the title block; footnotes single-spaced at 13 pt; headings (centered level 1, flush-left level 2, indented level 3) at the typst default sizes; the signature block at 3.25 in; the certificate of service entries, kept together, with the signer block that has no opening line.
 - Differs: the docx runs one page longer (10 against 9). Exact line spacing in Word and LibreOffice puts each line's text about 12 pt lower in its line box than typst, so each page holds about one line less; the line pitch is identical. Headings keep with the text after them, which moves a few lines. The ")" column is one ")" per estimated caption line, as in the complaint. The page-count difference is a renderer effect, not a rule (LR 7.01(a)(2) allows 25 pages).

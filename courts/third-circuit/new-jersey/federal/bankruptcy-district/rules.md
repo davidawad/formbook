@@ -14,10 +14,10 @@ Access note: on 2026-10-17 `www.njb.uscourts.gov` rejected direct requests from 
 | FRBP | Federal Rules of Bankruptcy Procedure 7003, 7007.1, 7008, 7010, 9004, 9011 (LII text, restyled eff. Dec. 1, 2024) | https://www.law.cornell.edu/rules/frbp/rule_7008 (and rule_7003, rule_7007.1, rule_7010, rule_9004, rule_9011) |
 | FRCP | Federal Rules of Civil Procedure 8, 10 (applied by FRBP 7008, 7010) | https://www.law.cornell.edu/rules/frcp/rule_8 , https://www.law.cornell.edu/rules/frcp/rule_10 |
 | F416D | Official Form 416D, Caption for Use in Adversary Proceeding (12/15) | https://www.uscourts.gov/sites/default/files/form_b416d_0.pdf |
-| EX-SUPOR | Adversary complaint, Adv. No. 26-01475 (K&L Gates, for the Supor plaintiffs) | `adversary-complaint/exemplars/` |
-| EX-ORCA | Adversary complaint, *OrcaFunding LLC v. Shabsels*, Adv. No. 26-01421 (Jacobs P.C.) | `adversary-complaint/exemplars/` |
-| EX-GOLDBERG | Adversary complaint, *Goldberg v. Internal Revenue Service*, Adv. No. 26-01030 (Akerman LLP) | `adversary-complaint/exemplars/` |
-| EX-CUSHING | Notice of motion to dismiss and combined brief, *Cushing v. Lakeview Loan Servicing*, Adv. No. 26-01099 (Robertson, Anschutz, Schneid, Crane & Partners) | `motion-brief/exemplars/` |
+| EX-SUPOR | Adversary complaint, Adv. No. 26-01475 (K&L Gates, for the Supor plaintiffs) | `adversary-complaint/usage/` |
+| EX-ORCA | Adversary complaint, *OrcaFunding LLC v. Shabsels*, Adv. No. 26-01421 (Jacobs P.C.) | `adversary-complaint/usage/` |
+| EX-GOLDBERG | Adversary complaint, *Goldberg v. Internal Revenue Service*, Adv. No. 26-01030 (Akerman LLP) | `adversary-complaint/usage/` |
+| EX-CUSHING | Notice of motion to dismiss and combined brief, *Cushing v. Lakeview Loan Servicing*, Adv. No. 26-01099 (Robertson, Anschutz, Schneid, Crane & Partners) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (FRBP, FRCP as applied, D.N.J. LBR). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

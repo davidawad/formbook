@@ -5,11 +5,11 @@ Folder: `courts/sixth-circuit/ohio/federal/bankruptcy-southern-district/motion-b
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-actual-brewing-2-19-bk-50813-motion-brief.pdf` (1 filer, the U.S. Trustee; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-actual-brewing-ust-motion.md` (full transcription of the motion and memorandum, all ten footnotes and the certificate of service; the exemplar's mailing matrix is not transcribed) |
-| render | ok: `samples/OUTPUT-actual-brewing-ust-motion.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular and -Bold, embedded), no warnings |
+| exemplar | yes: `usage/SAMPLE-ohsb-motion-brief-actualbrewing219bk50813.pdf` (1 filer, the U.S. Trustee; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ohsb-motion-brief-actualbrewingustmotion.md` (full transcription of the motion and memorandum, all ten footnotes and the certificate of service; the exemplar's mailing matrix is not transcribed) |
+| render | ok: `usage/OUTPUT-ohsb-motion-brief-actualbrewingustmotion.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular and -Bold, embedded), no warnings |
 | typeface | Face required: none. The LBRs name no face for filings (S.D. Ohio LBR 9004-1(b): "at least 10-12 font size"). Substitute: none, EB Garamond kept (checked 2026-10-15 against the LBR PDF). Metric note: not applicable. |
-| overlay | ok: `samples/OVERLAY-actual-brewing-ust-motion.pdf` and `OVERLAY-actual-brewing-ust-motion.txt` (page map below). Run 2026-10-15 against the exemplar fetched from the CourtListener URL in `exemplars/SOURCE.md` to `/tmp`; the PDF is not kept in the repo |
+| overlay | ok: `usage/OVERLAY-actual-brewing-ust-motion.pdf` and `OVERLAY-actual-brewing-ust-motion.txt` (page map below). Run 2026-10-15 against the exemplar fetched from the CourtListener URL in `usage/SOURCE.md` to `/tmp`; the PDF is not kept in the repo |
 | pages reviewed | 7 of 7 (re-rendered 2026-10-15 with no template change; every page rendered at 60 dpi and viewed) |
 
 ## Governing rules
@@ -46,7 +46,7 @@ Each rule was read from its primary source. The local rules are the S.D. Ohio Lo
 
 ## Overlay
 
-`tools/overlay.sh` pairs each sample page with the exemplar page sharing the most words (`samples/OVERLAY-actual-brewing-ust-motion.txt`):
+`tools/overlay.sh` pairs each sample page with the exemplar page sharing the most words (`usage/OVERLAY-actual-brewing-ust-motion.txt`):
 
 ```
 ours p.1  filed p.1  word-overlap 94.1%
@@ -86,13 +86,13 @@ Defects found and fixed during this review (for the record): (1) the space after
 8. **Page count.** 7 pages for the body; the exemplar's body is also 7 pages (its pages 8 and 9 are the matrix). Inside the target for the content transcribed.
 9. **LBR 9013-2(a) 20-page limit** is not counted by the template; the sample is 7 pages.
 10. **`tools/check.sh` and `tools/check-selftest.sh` are not run.** They expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape; the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 record.
-11. **File names.** The brief names outputs `samples/<id>.pdf` and `samples/<id>-overlay.pdf`. The tools read and write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` by default, and `tools/overlay.sh` reads `OUTPUT-<id>.pdf` to build its overlay, so this folder follows the tools' names. The sample is `INPUT-<id>.md`, the same convention.
+11. **File names.** The brief names outputs `usage/<id>.pdf` and `usage/<id>-overlay.pdf`. The tools read and write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` by default, and `tools/overlay.sh` reads `OUTPUT-<id>.pdf` to build its overlay, so this folder follows the tools' names. The sample is `INPUT-<id>.md`, the same convention.
 
 ## Engines
 
-Engine status: typst `OUTPUT-actual-brewing-ust-motion.pdf` (above); docx built, not checked (see BLOCKED below); latex not built.
+Engine status: typst `OUTPUT-ohsb-motion-brief-actualbrewingustmotion.typst.pdf` (above); docx built, not checked (see BLOCKED below); latex not built.
 
-**docx** (`docx/`): `docx/build-reference.sh` writes `docx/reference.docx` (styles, page setup, footer page number); `docx/render.sh` runs pandoc with `docx/ohsb-motion-brief.lua` (caption table, unnumbered paragraphs, lettered quotations, signature blocks, certificate address blocks) and restores the reference styles and section. Output: `samples/OUTPUT-actual-brewing-ust-motion.docx`. Checked by the tool here: the zip has no duplicate entries and every XML part is well formed (`tools/render-docx.sh` ran these before the LibreOffice step).
+**docx** (`docx/`): `docx/build-reference.sh` writes `docx/reference.docx` (styles, page setup, footer page number); `docx/render.sh` runs pandoc with `docx/ohsb-motion-brief.lua` (caption table, unnumbered paragraphs, lettered quotations, signature blocks, certificate address blocks) and restores the reference styles and section. Output: `usage/OUTPUT-ohsb-motion-brief-actualbrewingustmotion.docx`. Checked by the tool here: the zip has no duplicate entries and every XML part is well formed (`tools/render-docx.sh` ran these before the LibreOffice step).
 
 What the reference sets, the same values as the typst template (read back from `styles.xml` and `sectPr`):
 
@@ -113,7 +113,7 @@ What differs from the typst template, not verified against a rendered page:
 
 **docx BLOCKED items**
 
-- `docx.pdf` and page-by-page review: `soffice` (LibreOffice) is not installed on this box, so `tools/render-docx.sh` stops at `soffice: not found` after writing the `.docx`. No `OUTPUT-actual-brewing-ust-motion.docx.pdf` exists and no page has been rendered or viewed. The Gate 0 and Gate 1 docx checks (`tools/check.sh --engine docx`) cannot run.
+- `docx.pdf` and page-by-page review: `soffice` (LibreOffice) is not installed on this box, so `tools/render-docx.sh` stops at `soffice: not found` after writing the `.docx`. No `OUTPUT-ohsb-motion-brief-actualbrewingustmotion.docx.pdf` exists and no page has been rendered or viewed. The Gate 0 and Gate 1 docx checks (`tools/check.sh --engine docx`) cannot run.
 - Word opening check: no Word on this box; the file is checked by zip listing and `xmllint` only (see `docs/DOCX.md`, "Checking a docx", step 3).
 - Tables of contents and authorities: none in this doc type; no TOC or TOA field is used.
 - Notice directive: the sample does not use `{{NOTICE_21_DAY}}`; the docx filter raises an error if it appears, instead of dropping it silently (the typst template renders it).

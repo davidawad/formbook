@@ -3,15 +3,15 @@
 Doc type: **adversary complaint** in the United States Bankruptcy Court for the Northern District of Texas (`txnb`).
 Folder: `courts/fifth-circuit/texas/federal/bankruptcy-northern-district/adversary-complaint/`.
 
-Exemplar: Prime Asset LLC v. PrimaLend Capital Partners, LP, adversary 26-09001 (Bankr. N.D. Tex., Fort Worth Division), Doc 1, filed January 7, 2026. Source and URLs in `exemplars/SOURCE.md`.
+Exemplar: Prime Asset LLC v. PrimaLend Capital Partners, LP, adversary 26-09001 (Bankr. N.D. Tex., Fort Worth Division), Doc 1, filed January 7, 2026. Source and URLs in `usage/SOURCE.md`.
 
 | Item | Status |
 |---|---|
 | typeface | face required: none (L.B.R. revised 12/1/2025 and 12/1/16 name no face for complaints). Substitute: none; **EB Garamond** kept (`docs/FONTS.md`, "No face named"). Metric note: none needed. |
-| exemplar | yes: `exemplars/FILED-EXAMPLE-prime-asset-v-primalend-26-09001-adversary-complaint.pdf` (the whole 27-page filing, text layer present) |
-| sample md | `samples/INPUT-prime-asset-v-primalend.md`: a transcription of the caption and counsel block, ¶¶ 1–37, the Count Six to Eight paragraphs, the prayer and the signature. Filing pages 10–24 (¶¶ 38–122, the factual allegations and Counts One to Five) are not transcribed; the sample marks the gap. |
-| render | ok: `tools/render.sh` (typst 0.15.0, vendored EB Garamond only, no warnings) writes `samples/OUTPUT-prime-asset-v-primalend.pdf`, 11 pages |
-| overlay | ok: `tools/overlay.sh` writes `samples/OVERLAY-prime-asset-v-primalend.pdf` and `.txt`; every rendered page is paired with a filed page (see the page map in the `.txt`) |
+| exemplar | yes: `usage/SAMPLE-txnb-adversary-complaint-primeassetvprimalend2609001.pdf` (the whole 27-page filing, text layer present) |
+| sample md | `usage/INPUT-txnb-adversary-complaint-primeassetvprimalend.md`: a transcription of the caption and counsel block, ¶¶ 1–37, the Count Six to Eight paragraphs, the prayer and the signature. Filing pages 10–24 (¶¶ 38–122, the factual allegations and Counts One to Five) are not transcribed; the sample marks the gap. |
+| render | ok: `tools/render.sh` (typst 0.15.0, vendored EB Garamond only, no warnings) writes `usage/OUTPUT-txnb-adversary-complaint-primeassetvprimalend.typst.pdf`, 11 pages |
+| overlay | ok: `tools/overlay.sh` writes `usage/OVERLAY-prime-asset-v-primalend.pdf` and `.txt`; every rendered page is paired with a filed page (see the page map in the `.txt`) |
 | pages reviewed | 11 of 11 (every page of the final render rasterized at 80 dpi and viewed after the last template change) |
 
 ## Governing rules
@@ -58,7 +58,7 @@ The local rules copy is dated "Revised 12/1/16". A later revision may exist on t
 3. **Adversary cover sheet (L.B.R. 7003-1) and summons.** Not generated. The cover sheet is a separate filing that must accompany the complaint; the N.D. Tex. form is not in the vendored set, and the Southern District's B104 form found in search is not this court's form. Needs a decision.
 4. **Certificates and proposed order.** Not part of a complaint in this template. A certificate of service of the summons may be needed; not in scope.
 5. **Font.** No typeface rule was found for complaints in the 2016 or 2025 local-rules text, so the face is not court-named and EB Garamond at 12 pt is kept (`docs/FONTS.md`, "No face named"). It is smaller in apparent size than Times New Roman at 12 pt. Re-check if the court names a face in a later revision.
-6. **Output PDFs.** `samples/OUTPUT-prime-asset-v-primalend.pdf` and `samples/OVERLAY-prime-asset-v-primalend.pdf` (with `.txt`) are written where the tools put them. Regenerate with `sh tools/render.sh <this-folder> samples/INPUT-prime-asset-v-primalend.md` and `sh tools/overlay.sh <this-folder> prime-asset-v-primalend`.
+6. **Output PDFs.** `usage/OUTPUT-txnb-adversary-complaint-primeassetvprimalend.typst.pdf` and `usage/OVERLAY-prime-asset-v-primalend.pdf` (with `.txt`) are written where the tools put them. Regenerate with `sh tools/render.sh <this-folder> usage/INPUT-txnb-adversary-complaint-primeassetvprimalend.md` and `sh tools/overlay.sh <this-folder> prime-asset-v-primalend`.
 7. **Paragraph numbering is not checked for continuity across sections or claim headings.** Numbering is by the template only; a complaint that restarts numbering per claim would need a change.
 8. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and `tools/` is out of scope for this box. The gates were not run.
 9. **Signature block differs from the filing.** The template prints "Respectfully submitted," and the firm name above "By: /s/"; the filing has only the "Dated" line, the firm and the signers. Recorded here, not changed.
@@ -79,7 +79,7 @@ Earlier template versions overlapped headings and body text (block-wrapped parag
 
 ## Engines
 
-**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`) and `docx/txnb-adversary-complaint.lua`. Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-prime-asset-v-primalend.md` writes `samples/OUTPUT-prime-asset-v-primalend.docx` and `.docx.pdf` (11 pages, the same count as the typst output).
+**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`) and `docx/txnb-adversary-complaint.lua`. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-txnb-adversary-complaint-primeassetvprimalend.md` writes `usage/OUTPUT-txnb-adversary-complaint-primeassetvprimalend.docx` and `.docx.pdf` (11 pages, the same count as the typst output).
 
 - Matches typst: US Letter with 1 in margins; EB Garamond 12 pt (`pdffonts` on the `.docx.pdf` shows only EB Garamond, no fallback face); body double-spaced at a 24 pt line pitch, 0.5 in first-line indent, no space between paragraphs; counsel single-spaced at top left; court title bold, centered, 24 pt pitch; Form 416 caption as a borderless table with the party column ruled on the right and bottom; title bold and centered; numbered paragraphs typed as "N." and a tab (text at 0.75 in), as the typst template does; lists lettered (a), (b), ...; headings (level 1 centered bold, level 2 bold, level 3 bold italic) kept with the next paragraph; signature block kept together; 10 pt page number centered in the footer.
 - Differs: (1) LibreOffice places the text of a 24 pt line about 4 pt lower than typst does, so each page holds the same lines but the first line starts about 4 pt lower; margins are unchanged. (2) Paragraph numbers are typed text, not Word list numbering (no automatic renumbering). (3) Word's natural line height for EB Garamond can differ from LibreOffice's, so Word may paginate slightly differently. (4) No footnotes in this doc type; if used, the `Footnote Text` style is 12 pt, single-spaced.

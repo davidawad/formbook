@@ -5,10 +5,10 @@ Folder: `courts/tenth-circuit/new-mexico/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-turner-1-26-cv-03220-motion-brief.pdf` (1 filer, counsel-filed; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-turner-motion.md` (the whole 13-page motion, with its footnote 1 omitted; see Known gaps) |
-| render | ok: `samples/OUTPUT-turner-motion.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-turner-motion.pdf` and `OVERLAY-turner-motion.txt` (`tools/overlay.sh`) |
+| exemplar | yes: `usage/SAMPLE-nmd-motion-brief-turner126cv03220.pdf` (1 filer, counsel-filed; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nmd-motion-brief-turnermotion.md` (the whole 13-page motion, with its footnote 1 omitted; see Known gaps) |
+| render | ok: `usage/OUTPUT-nmd-motion-brief-turnermotion.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| overlay | ok: `usage/OVERLAY-turner-motion.pdf` and `OVERLAY-turner-motion.txt` (`tools/overlay.sh`) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the sample id is the `.md` name). The brief's `<id>-overlay` names are not what `tools/overlay.sh` writes, so the tool's names are used.
@@ -47,7 +47,7 @@ Primary sources, fetched 2026-10-14. Each rule's text was read in the source; th
 
 ## Overlay
 
-`samples/OVERLAY-turner-motion.pdf`: each page of our render is shown in red and paired with the filed page sharing the most words (blue; black where they agree). The pairing is by text, not by index. The page map is in `OVERLAY-turner-motion.txt`:
+`usage/OVERLAY-turner-motion.pdf`: each page of our render is shown in red and paired with the filed page sharing the most words (blue; black where they agree). The pairing is by text, not by index. The page map is in `OVERLAY-turner-motion.txt`:
 
 ```
 ours p.1  filed p.1  word-overlap 95.7%

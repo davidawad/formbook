@@ -5,11 +5,11 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district/adver
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-lemeh-no-name-3-25-ap-90071-adversary-complaint.pdf` (1 filer, the trustee; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-lemeh-no-name.md`: the full 5-page complaint, transcribed from the text layer |
-| render | ok: `samples/OUTPUT-lemeh-no-name.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/SAMPLE-tnmb-adversary-complaint-lemehnoname325ap90071.pdf` (1 filer, the trustee; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-tnmb-adversary-complaint-lemehnoname.md`: the full 5-page complaint, transcribed from the text layer |
+| render | ok: `usage/OUTPUT-tnmb-adversary-complaint-lemehnoname.typst.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | typeface | Rules name no face (LBR 5005-3(a): "clearly legible in 12-point font"). Vendored family: `EB Garamond` (`docs/FONTS.md`, "No face named"). Exemplar is Times New Roman: EB Garamond is visual only against it, not metric-compatible. |
-| overlay | ok: `samples/OVERLAY-lemeh-no-name.pdf` and `samples/OVERLAY-lemeh-no-name.txt` (`tools/overlay.sh`) |
+| overlay | ok: `usage/OVERLAY-lemeh-no-name.pdf` and `usage/OVERLAY-lemeh-no-name.txt` (`tools/overlay.sh`) |
 | pages reviewed | 4 of 4 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names follow the tools, not the brief's `<id>.pdf` / `<id>-overlay.pdf`: `tools/render.sh` writes `OUTPUT-<id>.pdf`, `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf` and `.txt`, and the markdown is `INPUT-<id>.md` (the file-role names in CLAUDE.md).
@@ -49,7 +49,7 @@ Not produced by this template: the adversary cover sheet, the summons, the notic
 
 ## Overlay
 
-`samples/OVERLAY-lemeh-no-name.pdf`: red is our render, blue is the filed exemplar, black is where they agree. `OVERLAY-lemeh-no-name.txt` maps each of our pages to its best-matching filed page by shared words: ours 1 to filed 1 (82.7%), ours 2 to filed 2 (70.7%), ours 3 to filed 3 (60.8%), ours 4 to filed 4 (51.1%). The overlay is a diagnostic, not a score. The differences are the font (Known gaps 1), the single caption row layout, and the bold headings.
+`usage/OVERLAY-lemeh-no-name.pdf`: red is our render, blue is the filed exemplar, black is where they agree. `OVERLAY-lemeh-no-name.txt` maps each of our pages to its best-matching filed page by shared words: ours 1 to filed 1 (82.7%), ours 2 to filed 2 (70.7%), ours 3 to filed 3 (60.8%), ours 4 to filed 4 (51.1%). The overlay is a diagnostic, not a score. The differences are the font (Known gaps 1), the single caption row layout, and the bold headings.
 
 ## Known gaps and open choices
 

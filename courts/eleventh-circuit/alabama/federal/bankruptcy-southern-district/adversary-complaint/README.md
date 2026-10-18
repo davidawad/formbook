@@ -2,8 +2,8 @@
 
 - Court: `alsb`, United States Bankruptcy Court, S.D. Alabama (`courts/eleventh-circuit/alabama/federal/bankruptcy-southern-district/`)
 - Doc type: `adversary-complaint`. Complaint commencing an adversary proceeding (Fed. R. Bankr. P. 7001). Self-contained folder: no shared files.
-- Exemplar: `exemplars/FILED-EXAMPLE-hester-23-01002-complaint.pdf` (*Hester v. U.S. Department of Education*, Adv. No. 23-01002, filed 2023-01-06; provenance in `exemplars/SOURCE.md`). One exemplar only; see Known gaps.
-- Sample: `samples/INPUT-hester-complaint.md` (transcription of the filed complaint, 6 pages). `samples/INPUT-generic-adversary-complaint.md` is a fictional template smoke test, not a transcription.
+- Exemplar: `usage/SAMPLE-alsb-adversary-complaint-hester2301002complaint.pdf` (*Hester v. U.S. Department of Education*, Adv. No. 23-01002, filed 2023-01-06; provenance in `usage/SOURCE.md`). One exemplar only; see Known gaps.
+- Sample: `usage/INPUT-alsb-adversary-complaint-hestercomplaint.md` (transcription of the filed complaint, 6 pages). `usage/INPUT-alsb-adversary-complaint-generic.md` is a fictional template smoke test, not a transcription.
 - Status: template and README complete; render, overlay and page review done for the Hester sample (6 of 6 pages). Typst engine only. `court.json` untouched. Fonts pass (2026-10-14): no face named by the court's rules, so EB Garamond is kept; re-rendered and re-reviewed (see Typeface row under Governing rules). DOCX engine added (see Engines); its PDF checks are BLOCKED.
 
 ## Files
@@ -12,10 +12,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `alsb-adversary-complaint`. |
 | `typst/alsb-adversary-complaint.typ` | Template. Parameter block at the top (EB Garamond 13 pt, 1 in margins, double-spaced body, caption, numbered paragraphs). |
-| `samples/INPUT-hester-complaint.md` | Transcription of the filed complaint (frontmatter + body). Includes caption, sections, prayer, signature block and certificate of service. |
-| `samples/OUTPUT-hester-complaint.pdf` | `sh tools/render.sh courts/eleventh-circuit/alabama/federal/bankruptcy-southern-district/adversary-complaint samples/INPUT-hester-complaint.md` (6 pages). |
-| `samples/OVERLAY-hester-complaint.pdf`, `.txt` | `sh tools/overlay.sh courts/eleventh-circuit/alabama/federal/bankruptcy-southern-district/adversary-complaint hester-complaint` (red = ours, blue = filed, black = agree). |
-| `samples/INPUT-generic-adversary-complaint.md`, `OUTPUT-generic-adversary-complaint.pdf` | Fictional sample (5 pages); kept as a template smoke test. |
+| `usage/INPUT-alsb-adversary-complaint-hestercomplaint.md` | Transcription of the filed complaint (frontmatter + body). Includes caption, sections, prayer, signature block and certificate of service. |
+| `usage/OUTPUT-alsb-adversary-complaint-hestercomplaint.typst.pdf` | `sh tools/render.sh courts/eleventh-circuit/alabama/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-alsb-adversary-complaint-hestercomplaint.md` (6 pages). |
+| `usage/OVERLAY-hester-complaint.pdf`, `.txt` | `sh tools/overlay.sh courts/eleventh-circuit/alabama/federal/bankruptcy-southern-district/adversary-complaint hester-complaint` (red = ours, blue = filed, black = agree). |
+| `usage/INPUT-alsb-adversary-complaint-generic.md`, `OUTPUT-alsb-adversary-complaint-generic.typst.pdf` | Fictional sample (5 pages); kept as a template smoke test. |
 
 Frontmatter fields the template requires: `title`, `case_number`, `chapter`, `adversary_number`, `court`, `caption` (debtor, plaintiff, defendant), `signature` (signer, lines), `stipulation-26-1`. Optional: `date`, `certificate-of-service` (markdown, rendered after the signature block).
 
@@ -38,14 +38,14 @@ The same S.D. Ala. local rules copy contains no font, margin, spacing or paper-s
 
 ## Overlay
 
-`samples/OVERLAY-hester-complaint.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the final run:
+`usage/OVERLAY-hester-complaint.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the final run:
 
 - p.1 ↔ filed p.1 (76%), p.2 ↔ p.2 (71%), p.3 ↔ p.3 (72%), p.4 ↔ p.4 (68%): body text lines up with the same passages.
 - p.5 ↔ filed p.6 (44%), p.6 ↔ filed p.6 (31%): prayer, signature and certificate of service. The filed complaint has its signature and certificate on pages 5-6 with a different break.
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-hester-complaint.pdf` was rasterized at 60 dpi and viewed after the final render (6 of 6). Typst printed no warnings. Fonts embedded: EB Garamond (regular, bold, italic) only.
+Every page of `OUTPUT-alsb-adversary-complaint-hestercomplaint.typst.pdf` was rasterized at 60 dpi and viewed after the final render (6 of 6). Typst printed no warnings. Fonts embedded: EB Garamond (regular, bold, italic) only.
 
 | Page | Content | Result |
 |---|---|---|
@@ -65,8 +65,8 @@ Tier-2 findings (ACCEPTED, not chased):
 
 ## Engines
 
-- **typst** (primary): `typst/`, output `samples/OUTPUT-<id>.pdf`.
-- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh` from `docx/reference-parts/`: styles, numbering, footer) and `docx/alsb.lua` (caption box, stipulation line, signature block, numbered paragraphs, from the same frontmatter). Output `samples/OUTPUT-<id>.docx` for both samples. Command: `sh tools/render.sh --engine docx <this-folder> samples/INPUT-<id>.md`.
+- **typst** (primary): `typst/`, output `usage/OUTPUT-<id>.pdf`.
+- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh` from `docx/reference-parts/`: styles, numbering, footer) and `docx/alsb.lua` (caption box, stipulation line, signature block, numbered paragraphs, from the same frontmatter). Output `usage/OUTPUT-<id>.docx` for both samples. Command: `sh tools/render.sh --engine docx <this-folder> usage/INPUT-<id>.md`.
 - **latex**: not built.
 
 **Matches typst** (the values come from `typst/alsb-adversary-complaint.typ`, and the line pitch was measured on our own typst render at 26 pt): US Letter, 1 in margins, EB Garamond 13 pt; body lines exactly 26 pt apart; 0.5 in first-line indent; numbered paragraphs run continuously (`1.`-`19.`) at the 0.5 in indent with wrapped lines back at the margin; centered bold caps headings (level 1 at 18 pt, level 2 bold at 15.5 pt); caption with a vertical rule and the case-number column; the LBR 7026-1 line before the signature block; "Dated" and "Respectfully submitted" side by side; certificate of service after the signature; centered page number at 11 pt.
@@ -95,4 +95,4 @@ Tier-2 findings (ACCEPTED, not chased):
 6. The filing's signature line reads "RESPECTFULLY submitted on this the 6th day of January, 2023." The template prints "Dated: January 6, 2023" in its place.
 7. The consent-to-final-orders statement (Rule 7008(a)) is not enforced by the template. The transcription does not state consent either: the filed complaint has no consent statement, and the template does not check for one.
 8. No `latex/` engine is built. The docx engine is built but its visual and PDF checks are BLOCKED (see Engines).
-9. The fictional `INPUT-generic-adversary-complaint.md` renders 5 pages and is not reviewed page by page; it exists as a template smoke test only. Its stipulation text was added so it still satisfies the required field.
+9. The fictional `INPUT-alsb-adversary-complaint-generic.md` renders 5 pages and is not reviewed page by page; it exists as a template smoke test only. Its stipulation text was added so it still satisfies the required field.

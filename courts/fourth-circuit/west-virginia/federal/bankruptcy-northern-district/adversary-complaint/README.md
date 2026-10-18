@@ -2,7 +2,7 @@
 
 Doc type: **adversary complaint** initiating an adversary proceeding (FRBP 7001 et seq.). Court: United States Bankruptcy Court for the Northern District of West Virginia. Folder: `courts/fourth-circuit/west-virginia/federal/bankruptcy-northern-district/adversary-complaint/`.
 
-**BLOCKED: no exemplar.** No filed complaint from this court was found after the searches listed in `exemplars/SOURCE.md`. The template is built from the rules below, and the sample is fictional. The overlay cannot run without an exemplar PDF.
+**BLOCKED: no exemplar.** No filed complaint from this court was found after the searches listed in `usage/SOURCE.md`. The template is built from the rules below, and the sample is fictional. The overlay cannot run without an exemplar PDF.
 
 Status: exemplar=no, render=ok (typst, no warnings, EB Garamond embedded, re-rendered 2026-10-14 for the fonts pass), overlay=fail (`tools/overlay.sh` exits 1: "no exemplar pdf"), pages reviewed 5 of 5 (rendered at 60 dpi and viewed on 2026-10-14). Nothing here sets `status` in `court.json`.
 
@@ -35,11 +35,11 @@ The 2003 LBR 9004-2(a) cites "Official Form 16C". FRBP 7010 (2024) refers to the
 
 ## What the sample shows
 
-`samples/INPUT-example-adversary-complaint.md` is fictional: a Chapter 7 trustee suing a transferee and an insider under 11 U.S.C. §§ 544(b), 548, 550 and 502(d). It has 34 numbered paragraphs, three counts, a prayer and a signature. It exercises the caption (with the "In re" debtor block), part headings, count headings, subheadings, the continuous numbering, and the prayer.
+`usage/INPUT-example-adversary-complaint.md` is fictional: a Chapter 7 trustee suing a transferee and an insider under 11 U.S.C. §§ 544(b), 548, 550 and 502(d). It has 34 numbered paragraphs, three counts, a prayer and a signature. It exercises the caption (with the "In re" debtor block), part headings, count headings, subheadings, the continuous numbering, and the prayer.
 
-Render: `sh tools/render.sh <this-dir> samples/INPUT-example-adversary-complaint.md` produced `samples/OUTPUT-example-adversary-complaint.pdf`, 5 pages, embedded fonts EBGaramond-Regular and EBGaramond-Bold only, no typst warnings.
+Render: `sh tools/render.sh <this-dir> usage/INPUT-example-adversary-complaint.md` produced `usage/OUTPUT-wvnb-adversary-complaint-example.typst.pdf`, 5 pages, embedded fonts EBGaramond-Regular and EBGaramond-Bold only, no typst warnings.
 
-The file names differ from the brief's naming on purpose. `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` reads that name and writes `OVERLAY-<id>.pdf` and `.txt`, so these are the names used. The sample is `samples/<id>.md` as specified.
+The file names differ from the brief's naming on purpose. `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` reads that name and writes `OVERLAY-<id>.pdf` and `.txt`, so these are the names used. The sample is `usage/<id>.md` as specified.
 
 ## Page review (Gate 2 record, 60 dpi, every page viewed)
 
@@ -63,9 +63,9 @@ The file names differ from the brief's naming on purpose. `tools/render.sh` writ
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (run `sh docx/build-reference.sh docx/reference.docx`); `docx/wvnb-adversary-complaint.lua` builds the caption, signature grid and the page break before Schedule 1, and numbers the paragraphs once across the complaint. Rendered by `sh tools/render.sh --engine docx <this-dir> samples/INPUT-<id>.md`; the PDF is the LibreOffice conversion.
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (run `sh docx/build-reference.sh docx/reference.docx`); `docx/wvnb-adversary-complaint.lua` builds the caption, signature grid and the page break before Schedule 1, and numbers the paragraphs once across the complaint. Rendered by `sh tools/render.sh --engine docx <this-dir> usage/INPUT-<id>.md`; the PDF is the LibreOffice conversion.
 
 - Matches the typst form: EB Garamond 12 pt (checked with `pdffonts`), exact 27.6 pt body line pitch (the typst pitch, measured from the typst PDF), 0.5 in first-line indent, letter, 1 in margins, 10 pt centered page-number footer, level 1 centered capitals, level 2 centered bold, the two-column caption box with its right and bottom rules, the signature grid (Dated at left, signer in the 3.2 in column), and Schedule 1 on its own page after the signature.
 - Differs: the numbered paragraphs follow the template's stated form (number on the first-line indent, text wrapping to the margin). The typst render does not: its numbers sit at the margin with a hanging indent, so the typst PDF and the docx disagree there; `typst/` was not changed. The Schedule table has a full grid in both. The docx runs 5 pages, as typst does, with different line breaks.
-- Reviewed: every page of `OUTPUT-protea-adversary-complaint.docx.pdf` (5), each against the typst page at 60 dpi.
+- Reviewed: every page of `OUTPUT-wvnb-adversary-complaint-protea.docx.pdf` (5), each against the typst page at 60 dpi.
 - BLOCKED: `tools/check.sh --engine docx` cannot run: this snapshot has no `checks.yaml` for this court (exit 2, `Error: open .../checks.yaml: no such file or directory`). No check IDs were authored. Word is not available here; verified by LibreOffice only.

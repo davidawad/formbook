@@ -1,11 +1,11 @@
 # Eighth Circuit BAP (bap8): opening brief (appellant's brief)
 
-- Court: `bap8`, United States Bankruptcy Appellate Panel for the Eighth Circuit (`courts/eighth-circuit/bankruptcy-appellate-panel/`). Court-root `typst/` and `samples/` are untouched.
+- Court: `bap8`, United States Bankruptcy Appellate Panel for the Eighth Circuit (`courts/eighth-circuit/bankruptcy-appellate-panel/`). Court-root `typst/` and `usage/` are untouched.
 - Doc type: `opening-brief`. Appellant's brief, FRBP 8014(a).
-- **Exemplar: yes.** `exemplars/FILED-EXAMPLE-fisette-11-6012-opening-brief.pdf`: Brief of Appellant, Michael James Fisette, BAP No. 11-6012, filed 2011-04-07 (68 pages, text-based, public). Source, URL, filer and fetch date in `exemplars/SOURCE.md`.
-- **Sample: transcription.** `samples/INPUT-fisette-11-6012.md` transcribes the filing's cover, party list, body from the Jurisdictional Statement (filing p. 7) through the Nobelman block quote (p. 15), the conclusion (pp. 26-27), the signature and the service certificate. Filing page 15 after the block quote through page 25 (rest of Argument II, Arguments III-VII) is omitted; the omission is marked in the file.
-- Render: ok, `samples/OUTPUT-fisette-11-6012.pdf`, 19 pages, typst with no warnings (2026-10-14).
-- Overlay: ok, `samples/OVERLAY-fisette-11-6012.pdf` and `.txt` (19 pages, 2026-10-14). Diagnostic only, see below.
+- **Exemplar: yes.** `usage/SAMPLE-bap8-opening-brief-fisette116012.pdf`: Brief of Appellant, Michael James Fisette, BAP No. 11-6012, filed 2011-04-07 (68 pages, text-based, public). Source, URL, filer and fetch date in `usage/SOURCE.md`.
+- **Sample: transcription.** `usage/INPUT-bap8-opening-brief-fisette116012.md` transcribes the filing's cover, party list, body from the Jurisdictional Statement (filing p. 7) through the Nobelman block quote (p. 15), the conclusion (pp. 26-27), the signature and the service certificate. Filing page 15 after the block quote through page 25 (rest of Argument II, Arguments III-VII) is omitted; the omission is marked in the file.
+- Render: ok, `usage/OUTPUT-bap8-opening-brief-fisette116012.typst.pdf`, 19 pages, typst with no warnings (2026-10-14).
+- Overlay: ok, `usage/OVERLAY-fisette-11-6012.pdf` and `.txt` (19 pages, 2026-10-14). Diagnostic only, see below.
 - Pages reviewed: 19 of 19 as PNG at 60 dpi (2026-10-14). Pages 3, 4, 11, 12 and 14 were re-viewed after the heading-numeral fix; the rest were viewed in the render before it, and the fix did not change pagination.
 - Status: `court.json` untouched; `status` not set. No `tracker.sh`, no `STATUS.md`.
 
@@ -15,10 +15,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `bap8-brief`. |
 | `typst/bap8-opening-brief.typ` | Template. Parameter block at the top: `doc-kind`, `word-limit` (13,000), `required-sections` (FRBP 8014(a)(4)-(9) order), `needs-standard-of-review`. |
-| `samples/INPUT-fisette-11-6012.md` | Markdown transcription of the filed brief (contract below). |
-| `samples/OUTPUT-fisette-11-6012.pdf` | Render of the transcription (`sh tools/render.sh courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief samples/INPUT-fisette-11-6012.md`). |
-| `samples/OVERLAY-fisette-11-6012.pdf`, `.txt` | Overlay on the exemplar (`sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief fisette-11-6012`). |
-| `exemplars/FILED-EXAMPLE-fisette-11-6012-opening-brief.pdf`, `exemplars/SOURCE.md` | The filed exemplar and its source log. |
+| `usage/INPUT-bap8-opening-brief-fisette116012.md` | Markdown transcription of the filed brief (contract below). |
+| `usage/OUTPUT-bap8-opening-brief-fisette116012.typst.pdf` | Render of the transcription (`sh tools/render.sh courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-bap8-opening-brief-fisette116012.md`). |
+| `usage/OVERLAY-fisette-11-6012.pdf`, `.txt` | Overlay on the exemplar (`sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief fisette-11-6012`). |
+| `usage/SAMPLE-bap8-opening-brief-fisette116012.pdf`, `usage/SOURCE.md` | The filed exemplar and its source log. |
 
 Template change this run: `required-sections` now matches `^(statement of (the )?)?jurisdiction`, so a heading "Jurisdictional Statement" (the filing's wording) passes. The old pattern required the words "statement of" and rejected the filing. Nothing else in the template changed. The answering and reply templates have their own copies of the pattern and are untouched.
 
@@ -26,7 +26,7 @@ Template change this run: `required-sections` now matches `^(statement of (the )
 
 `case_number` (printed after "BAP No."), `caption` (list of `{names, designation}`; the template prints "v." between sides), `proceeding`, `brief_title`, `counsel` (list of `{names, lines}`), `phone`, `email`, `signature` (`signer`, `for`, `lines`), `date`, `word_processor`, `typeface`, `interested_parties` and `related_cases` (markdown; L.R. BAP 8014A(b)), `disclosure` (optional; FRBP 8014(a)(1)), `service` (`certificate`; `unregistered` list of `name`/`address`), `authorities` (key: `{kind: case|statute|rule|constitution|regulation|other, cite, name}`). Body citations are `[text](toa:key)`; a `toa:` link in a heading is refused. An authority cited in the body must be in `authorities`.
 
-Transcription notes for `INPUT-fisette-11-6012.md`:
+Transcription notes for `INPUT-bap8-opening-brief-fisette116012.md`:
 - The filing's "Email" is absent (the 2011 filing has none). The `email` field and the signature block say "Not stated in the filed brief" rather than inventing an address.
 - The filing gives two suites for counsel: 2001 Killebrew Drive, Suite 330 on the cover and Suite 300 in the signature. Both are kept as printed.
 - The filing's page 2 lists three creditor parties only; those are the interested parties printed.
@@ -111,11 +111,11 @@ What the overlay shows: our text and the filing's text share words and paragraph
 - **Form 417C wording** is not verified.
 - **Certifications placement:** before the TOC, by choice (see the rules table).
 - **Disclosure statement:** rendered only when `disclosure` is given. The filing has no disclosure statement, so none is given.
-- **Trustee's brief and the reply** in this case were not found (Justia is blocked from this box). See `../answering-brief/exemplars/SOURCE.md` and `../reply-brief/exemplars/SOURCE.md`.
+- **Trustee's brief and the reply** in this case were not found (Justia is blocked from this box). See `../answering-brief/usage/SOURCE.md` and `../reply-brief/usage/SOURCE.md`.
 
 ## Engines
 
-**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `front.jq`, `brief.lua`, `render.sh`). `samples/OUTPUT-fisette-11-6012.docx` and `.docx.pdf` (LibreOffice). 19 pages, the same count as typst for this sample. `pdffonts` on the PDF: only EB Garamond (Regular, Bold, Italic) embedded.
+**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `front.jq`, `brief.lua`, `render.sh`). `usage/OUTPUT-bap8-opening-brief-fisette116012.docx` and `.docx.pdf` (LibreOffice). 19 pages, the same count as typst for this sample. `pdffonts` on the PDF: only EB Garamond (Regular, Bold, Italic) embedded.
 
 - Matches typst: EB Garamond 14 pt throughout (headings, footnotes, cover, contents, authorities); US Letter, 1 in margins; double spacing at 31.45 pt exact (typst 31.43 pt); 0.5 in first-line indent; single-spaced 14 pt footnotes and block quotations; section headings bold and centered; point headings bold small caps with roman labels; sub-heading labels hang at the typst positions; cover with the same parts in the same order; page numbers lower-roman on the front matter and arabic from body page 1, none on the cover; contents and authorities with dot leaders; the last body paragraph kept with the signature block. Contents page numbers match typst for this sample.
 - Differs: the checkbox in the certificate of compliance is the text `[X]`, not a drawn box. Contents and authorities are text written at build time, not Word TOC/TA fields, so they do not update in Word; their page numbers are measured on the LibreOffice PDF. Headings are paragraph styles with outline levels, not Heading styles. The word count in the certificate comes from pandoc's plain text: 2,643 here, typst counts 2,642.

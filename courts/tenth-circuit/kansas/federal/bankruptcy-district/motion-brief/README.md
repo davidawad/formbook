@@ -2,8 +2,8 @@
 
 - Court: `ksb`, United States Bankruptcy Court for the District of Kansas (`courts/tenth-circuit/kansas/federal/bankruptcy-district/`)
 - Doc type: `motion-brief`. The memorandum that supports a motion, here a motion to dismiss an adversary complaint (LBR 7012.1(a) requires it). The motion itself is a separate filing and is not produced. One self-contained folder.
-- Exemplar: `exemplars/FILED-EXAMPLE-williamson-social-networking-20-05036-motion-brief.pdf` (*Williamson v. Comcast Spotlight, LP*, Adv. No. 20-05036, memorandum filed 2020-04-06, 13 pages with table of contents and table of authorities). Provenance, search trail and caveats in `exemplars/SOURCE.md`. The file was re-downloaded from its URL on 2026-10-14.
-- Sample: `samples/INPUT-williamson-comcast-memorandum.md`, a transcription of the filed memorandum: caption, counsel block, the table of contents and table of authorities (built by the template from links in the body), introduction, nature of proceedings, factual allegations, question presented, legal standard, Argument (two levels of headings), conclusion, signature block, and certificate of service.
+- Exemplar: `usage/SAMPLE-ksb-motion-brief-williamsonsocialnetworking2005036.pdf` (*Williamson v. Comcast Spotlight, LP*, Adv. No. 20-05036, memorandum filed 2020-04-06, 13 pages with table of contents and table of authorities). Provenance, search trail and caveats in `usage/SOURCE.md`. The file was re-downloaded from its URL on 2026-10-14.
+- Sample: `usage/INPUT-ksb-motion-brief-williamsoncomcastmemorandum.md`, a transcription of the filed memorandum: caption, counsel block, the table of contents and table of authorities (built by the template from links in the body), introduction, nature of proceedings, factual allegations, question presented, legal standard, Argument (two levels of headings), conclusion, signature block, and certificate of service.
 - Status: template complete, rendered, overlaid, and every page reviewed (below). `court.json` untouched.
 
 ## Files
@@ -12,10 +12,10 @@
 |---|---|
 | `typst/main.typ` | Entry point. Reads `--input sample=...` and calls `ksb-motion-brief`. |
 | `typst/ksb-motion-brief.typ` | Template. Parameter block at the top (type, spacing, margins, indents, the passim threshold). Metadata and section checks at the top of `ksb-motion-brief`. |
-| `samples/INPUT-williamson-comcast-memorandum.md` | Markdown contract sample: YAML frontmatter, then the body. |
-| `samples/OUTPUT-williamson-comcast-memorandum.pdf` | `sh tools/render.sh courts/tenth-circuit/kansas/federal/bankruptcy-district/motion-brief samples/INPUT-williamson-comcast-memorandum.md` (14 pages, no typst warnings). |
-| `samples/OVERLAY-williamson-comcast-memorandum.pdf`, `.txt` | `sh tools/overlay.sh courts/tenth-circuit/kansas/federal/bankruptcy-district/motion-brief williamson-comcast-memorandum` (red = ours, blue = filed, black = agree; page map in the `.txt`). |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-ksb-motion-brief-williamsoncomcastmemorandum.md` | Markdown contract sample: YAML frontmatter, then the body. |
+| `usage/OUTPUT-ksb-motion-brief-williamsoncomcastmemorandum.typst.pdf` | `sh tools/render.sh courts/tenth-circuit/kansas/federal/bankruptcy-district/motion-brief usage/INPUT-ksb-motion-brief-williamsoncomcastmemorandum.md` (14 pages, no typst warnings). |
+| `usage/OVERLAY-williamson-comcast-memorandum.pdf`, `.txt` | `sh tools/overlay.sh courts/tenth-circuit/kansas/federal/bankruptcy-district/motion-brief williamson-comcast-memorandum` (red = ours, blue = filed, black = agree; page map in the `.txt`). |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
 ### Frontmatter contract (sample metadata)
 
@@ -56,7 +56,7 @@ Requirement IDs used in `ksb-motion-brief.typ`:
 
 ## Overlay
 
-`samples/OVERLAY-williamson-comcast-memorandum.pdf` (14 pages, one per page of our render) puts our render (red) over the best-matching page of the filed memorandum (blue). Pages are paired by word overlap, not index.
+`usage/OVERLAY-williamson-comcast-memorandum.pdf` (14 pages, one per page of our render) puts our render (red) over the best-matching page of the filed memorandum (blue). Pages are paired by word overlap, not index.
 
 - Pairings (word overlap, from the `.txt` map): ours p.1 ↔ filed p.1 (63%), p.2 ↔ p.2 (68%), p.3 ↔ p.4 (40%), p.4 (TOA continuation) ↔ no match, p.5 ↔ p.5 (86%), p.6 ↔ p.6 (34%), p.7 ↔ p.6 (44%), p.8 ↔ p.7 (37%), p.9 ↔ p.7 (62%), p.10 ↔ p.8 (54%), p.11 ↔ p.8 (58%), p.12 ↔ p.9 (45%), p.13 ↔ p.1 (34%), p.14 ↔ p.13 (84%). Pairing by word overlap is only a locator; it does not show that the layouts match.
 - Visible differences: the filed memorandum uses Times, our render uses EB Garamond, so line breaks fall at different words. The blue layer carries the ECF header and footer (`Doc# 8`, `Filed 04/06/20`, per `SOURCE.md`) and the filer's own TOC and TOA page numbers. Our p.13 (signature block) pairs with filed p.1 by overlap, which is a weak match; our p.14 (certificate of service) pairs with filed p.13.
@@ -64,7 +64,7 @@ Requirement IDs used in `ksb-motion-brief.typ`:
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-williamson-comcast-memorandum.pdf` was rendered at 70 dpi and viewed (14 of 14). Typst printed no warnings. Fonts: EB Garamond only. The "Compared with" column gives the overlay pairing. Filed pages were viewed as images only for overlay p.8.
+Every page of `OUTPUT-ksb-motion-brief-williamsoncomcastmemorandum.typst.pdf` was rendered at 70 dpi and viewed (14 of 14). Typst printed no warnings. Fonts: EB Garamond only. The "Compared with" column gives the overlay pairing. Filed pages were viewed as images only for overlay p.8.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -87,7 +87,7 @@ Every page of `OUTPUT-williamson-comcast-memorandum.pdf` was rendered at 70 dpi 
 
 ## Known gaps
 
-1. **One exemplar.** Tier 2 wants two or three filers. The second candidate in `exemplars/SOURCE.md` (*Taylor v. Community Loan Servicing*, 23-06024, doc 45) was not downloaded in this pass.
+1. **One exemplar.** Tier 2 wants two or three filers. The second candidate in `usage/SOURCE.md` (*Taylor v. Community Loan Servicing*, 23-06024, doc 45) was not downloaded in this pass.
 2. **The motion is not produced.** Only the memorandum; the motion it supports is a separate filing.
 3. **Page 13 signature block** (OPEN above).
 4. **Passim and TOA checks** are template behaviour (pages from `toa:` links, passim at 7 or more pages). The sample's authorities were added by hand and were not cross-checked against the PDF text here.
@@ -98,7 +98,7 @@ Every page of `OUTPUT-williamson-comcast-memorandum.pdf` was rendered at 70 dpi 
 
 ## Engines
 
-**docx** (`docx/build-reference.sh` makes `docx/reference.docx`; `docx/ksb.lua` builds the counsel block, caption, title, table of contents, table of authorities, signature block and certificate of service). `docx/render.sh` renders in two passes: pass 1 writes the search phrases and a PDF, `docx/pages.lua` (run by `pandoc lua`) finds each heading and each authority in that PDF, and pass 2 writes the page numbers into the TOC and TOA. Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-williamson-comcast-memorandum.md`. The `.docx.pdf` is 14 pages, the typst output is 14 pages; every page was rasterized at 60 dpi and compared.
+**docx** (`docx/build-reference.sh` makes `docx/reference.docx`; `docx/ksb.lua` builds the counsel block, caption, title, table of contents, table of authorities, signature block and certificate of service). `docx/render.sh` renders in two passes: pass 1 writes the search phrases and a PDF, `docx/pages.lua` (run by `pandoc lua`) finds each heading and each authority in that PDF, and pass 2 writes the page numbers into the TOC and TOA. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-ksb-motion-brief-williamsoncomcastmemorandum.md`. The `.docx.pdf` is 14 pages, the typst output is 14 pages; every page was rasterized at 60 dpi and compared.
 
 - Matches typst: the cover and caption, the TOC and TOA on their own pages with the Page(s) column, "passim" for an authority on 7 pages or more, double-spaced body, level-1 headings centered in caps and levels 2 to 4 with hanging labels (A., 1., a.), the signature block (the signature alone on page 13 reproduces typst's OPEN item), the certificate of service on its own page, and the centered page number.
 - Differs (tier 2, noted, not chased): (a) TOC and TOA page numbers come from the LibreOffice pagination of this docx, and four entries differ from typst because line breaks differ: Khalick p. 8 (typst 9), Woodridge p. 10 (typst 11), Trustees (Wasatch) p. 10 (typst 11), and 11 U.S.C. § 548(a)(1)(B) lists 5, 7, 9 (typst 5, 7, 9, 10). Word may paginate differently again. (b) Dot leaders are tab leaders, set tighter than typst's spaced dots. (c) A heading at the top of a page keeps its space above, which typst drops, so it sits about a line lower. (d) Heading keep-with-next is on and widow control is off, to keep the page count at typst's 14.

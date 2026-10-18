@@ -2,8 +2,8 @@
 
 - Court: `ca1`, Court of Appeals for the First Circuit (`courts/first-circuit/court-of-appeals/`)
 - Doc type: `reply-brief`. Reply Brief of Appellant (FRAP 28(c)); one self-contained folder, no shared files.
-- Exemplar: `exemplars/FILED-EXAMPLE-warner-24-1414-reply-brief.pdf` (*Warner v. DeJoy*, No. 24-1414, filed 2024-10-09; provenance in `exemplars/SOURCE.md`).
-- Sample: `samples/INPUT-warner-reply-brief.md` (excerpt of the filed brief; see Known gaps).
+- Exemplar: `usage/SAMPLE-ca1-reply-brief-warner241414.pdf` (*Warner v. DeJoy*, No. 24-1414, filed 2024-10-09; provenance in `usage/SOURCE.md`).
+- Sample: `usage/INPUT-ca1-reply-brief-warner.md` (excerpt of the filed brief; see Known gaps).
 - Status: template built; render and page review re-done 2026-10-14 (pages below). Overlay PDF not regenerated this run (see Overlay). Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,10 +12,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `ca1-brief`. |
 | `typst/ca1-reply-brief.typ` | Template; the same code as the opening-brief template with its parameter block set for a reply: `word-limit = 6500`, `required-sections = ()` (FRAP 28(c)), `needs-standard-of-review = false`, `addendum = "optional"`. A "Reply Argument" heading gets the same roman-numeral point scheme as "Argument". |
-| `samples/INPUT-warner-reply-brief.md` | Markdown contract sample (frontmatter + body). |
-| `samples/OUTPUT-warner-reply-brief.pdf` | `sh tools/render.sh courts/first-circuit/court-of-appeals/reply-brief samples/INPUT-warner-reply-brief.md` (10 pages). |
-| `samples/OVERLAY-warner-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/first-circuit/court-of-appeals/reply-brief warner-reply-brief`. |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-ca1-reply-brief-warner.md` | Markdown contract sample (frontmatter + body). |
+| `usage/OUTPUT-ca1-reply-brief-warner.typst.pdf` | `sh tools/render.sh courts/first-circuit/court-of-appeals/reply-brief usage/INPUT-ca1-reply-brief-warner.md` (10 pages). |
+| `usage/OVERLAY-warner-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/first-circuit/court-of-appeals/reply-brief warner-reply-brief`. |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
 ## Governing rules
 
@@ -37,9 +37,9 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 
 ## Overlay
 
-This run (2026-10-14): `tools/overlay.sh` could not write the PDF, because `exemplars/FILED-EXAMPLE-warner-24-1414-reply-brief.pdf` is not in this checkout (`exemplars/` holds only `SOURCE.md`). The `.txt` page map is unchanged from the earlier run, and the pairings below are from that run.
+This run (2026-10-14): `tools/overlay.sh` could not write the PDF, because `usage/SAMPLE-ca1-reply-brief-warner241414.pdf` is not in this checkout (`usage/` holds only `SOURCE.md`). The `.txt` page map is unchanged from the earlier run, and the pairings below are from that run.
 
-`samples/OVERLAY-warner-reply-brief.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only. Pairings from the last run:
+`usage/OVERLAY-warner-reply-brief.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only. Pairings from the last run:
 
 - p.1 ↔ filed p.1 (80%), p.2 ↔ p.2 (55%), p.3 ↔ p.3 (20%): cover, TOC, and TOA (the sample's TOA has two cases; the filed TOA lists many).
 - p.4 ↔ p.5 (85%), p.5 ↔ p.6 (85%): introduction and reply argument; point I.
@@ -49,7 +49,7 @@ This run (2026-10-14): `tools/overlay.sh` could not write the PDF, because `exem
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-warner-reply-brief.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-ca1-reply-brief-warner.typst.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond only.
 
 | Page | Content | Result |
 |---|---|---|
@@ -77,26 +77,26 @@ Tier-2 findings (OPEN or ACCEPTED): the page-7 lead-in finding above (OPEN); the
 
 ## Engines
 
-The typst template is the reference. The same sample is rendered in two more engines; each has its own output in `samples/`.
+The typst template is the reference. The same sample is rendered in two more engines; each has its own output in `usage/`.
 
 | Engine | Folder | Output | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `samples/OUTPUT-warner-reply-brief.pdf` (10 pages) | unchanged |
-| latex | `latex/` (`template.tex` + `ca1.lua`, tectonic) | `samples/OUTPUT-warner-reply-brief.latex.pdf` (10 pages) | renders; checked by eye, see below |
-| docx | `docx/` (`reference.docx` + `ca1.lua`, pandoc) | `samples/OUTPUT-warner-reply-brief.docx` | builds and validates; `.docx.pdf` BLOCKED (no LibreOffice) |
+| typst (primary) | `typst/` | `usage/OUTPUT-ca1-reply-brief-warner.typst.pdf` (10 pages) | unchanged |
+| latex | `latex/` (`template.tex` + `ca1.lua`, tectonic) | `usage/OUTPUT-ca1-reply-brief-warner.latex.pdf` (10 pages) | renders; checked by eye, see below |
+| docx | `docx/` (`reference.docx` + `ca1.lua`, pandoc) | `usage/OUTPUT-ca1-reply-brief-warner.docx` | builds and validates; `.docx.pdf` BLOCKED (no LibreOffice) |
 
 **LaTeX matches** (tier 1): EB Garamond 14 pt from `fonts/` only (`fontdir`), body double-spaced at the typst pitch (31.5 pt), 1 inch margins, footnotes 14 pt, roman front matter, arabic body, the cover (FRAP 32(a)(2)), the TOC and TOA with page numbers from the aux file, the certificates (Form 6 wording and the word count, 901 words, equal to typst), the signature and the addendum with `Add-N` pages. No addendum in the sample; the addendum is optional here (1st Cir. R. 28.0(b)(1)), so none is rendered.
 
 **LaTeX differs** (tier 2): the body breaks lines and pages a little differently, so the sample is 10 pages against typst's 10. The sub-heading paragraphs keep with the text below them by `\nobreak` only (`needspace` misfired in this box). The signature block is not kept with the last paragraph. Tectonic fetches TeX packages on its first run (cached afterwards).
 
-**DOCX** (`samples/OUTPUT-warner-reply-brief.docx`): the word count is 901, equal to typst. The cover, certificates and signature use the custom styles in `reference.docx`; the sections give roman front matter, arabic body and (addendum briefs) `Add-N`.
+**DOCX** (`usage/OUTPUT-ca1-reply-brief-warner.docx`): the word count is 901, equal to typst. The cover, certificates and signature use the custom styles in `reference.docx`; the sections give roman front matter, arabic body and (addendum briefs) `Add-N`.
 
 BLOCKED (docx):
-- `docx.pdf` checks (every gate on the LibreOffice PDF): BLOCKED, no `soffice` on this box (LibreOffice has no conda-forge package; `docs/DOCX.md`). No `samples/.check-docx.txt` stamp is written.
+- `docx.pdf` checks (every gate on the LibreOffice PDF): BLOCKED, no `soffice` on this box (LibreOffice has no conda-forge package; `docs/DOCX.md`). No `usage/.check-docx.txt` stamp is written.
 - Contents and authorities page numbers: no page numbers are printed. They need a first-pass layout, which needs LibreOffice. The entries list the headings and authorities only.
 - Point headings of the Argument are Heading 2 (left), not centered small capitals.
 - Check boxes are the text "[X]" (EB Garamond has no check-box glyph).
 - Cover rule lines are not drawn in the docx.
 - The `.docx` is not yet opened in Word or LibreOffice (no LibreOffice here), so the no-repair check is not done.
 
-Build: `sh docx/make-reference.sh none` once (the output is committed), then `sh tools/render.sh --engine latex|docx <court-dir> samples/INPUT-warner-reply-brief.md`. The docx command exits non-zero at the LibreOffice step after writing the `.docx`.
+Build: `sh docx/make-reference.sh none` once (the output is committed), then `sh tools/render.sh --engine latex|docx <court-dir> usage/INPUT-ca1-reply-brief-warner.md`. The docx command exits non-zero at the LibreOffice step after writing the `.docx`.

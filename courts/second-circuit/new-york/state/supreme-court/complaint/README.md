@@ -4,10 +4,10 @@ Doc type `complaint` for court `nysupct` (CourtListener id `nysupct`). Layout fo
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-people-v-trump-452564-2022-complaint.pdf` | The real filed verified complaint (222 pp, text layer). Provenance: `exemplars/SOURCE.md`. |
-| `samples/INPUT-people-v-trump.md` | Markdown transcription of a portion of the exemplar (caption metadata, table of contents, introduction, part of the facts, first cause of action, prayer, signature, verification). |
-| `samples/OUTPUT-people-v-trump.pdf` | Our render (9 pages). |
-| `samples/OVERLAY-people-v-trump.pdf`, `.txt` | Red/blue overlay of our render on the exemplar, and the page map. |
+| `usage/SAMPLE-nysupct-complaint-peoplevtrump4525642022.pdf` | The real filed verified complaint (222 pp, text layer). Provenance: `usage/SOURCE.md`. |
+| `usage/INPUT-nysupct-complaint-peoplevtrump.md` | Markdown transcription of a portion of the exemplar (caption metadata, table of contents, introduction, part of the facts, first cause of action, prayer, signature, verification). |
+| `usage/OUTPUT-nysupct-complaint-peoplevtrump.typst.pdf` | Our render (9 pages). |
+| `usage/OVERLAY-people-v-trump.pdf`, `.txt` | Red/blue overlay of our render on the exemplar, and the page map. |
 | `typst/main.typ` | Entry point: reads the sample named by `--input sample=...`, calls the template. |
 | `typst/nysupct-complaint.typ` | The template. Content-agnostic; every number is a parameter at the top and traces to a rule or a stated convention. |
 
@@ -60,11 +60,11 @@ Body: `# I. HEADING` (level 1, centred), `## A. Heading` (level 2), `### ...` (l
 From the repo root (toolchain first: `export PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/second-circuit/new-york/state/supreme-court/complaint samples/INPUT-people-v-trump.md
+sh tools/render.sh courts/second-circuit/new-york/state/supreme-court/complaint usage/INPUT-nysupct-complaint-peoplevtrump.md
 sh tools/overlay.sh courts/second-circuit/new-york/state/supreme-court/complaint people-v-trump
 ```
 
-Output names are the tools' own: `samples/OUTPUT-people-v-trump.pdf`, `samples/OVERLAY-people-v-trump.pdf` and `.txt`. The brief's shorter names (`<id>.pdf`, `<id>-overlay.pdf`) would need a change to `tools/`, which this box does not edit.
+Output names are the tools' own: `usage/OUTPUT-nysupct-complaint-peoplevtrump.typst.pdf`, `usage/OVERLAY-people-v-trump.pdf` and `.txt`. The brief's shorter names (`<id>.pdf`, `<id>-overlay.pdf`) would need a change to `tools/`, which this box does not edit.
 
 Typst is invoked with `--font-path fonts --ignore-system-fonts`. A missing font is an error, and any typst warning fails the render (`tools/render.sh` enforces this).
 
@@ -72,7 +72,7 @@ Typst is invoked with `--font-path fonts --ignore-system-fonts`. A missing font 
 
 Red is our render; blue is the exemplar page the tool paired with it (best word overlap, page by page); black is where both agree. The overlay compares the layout of our typeset page against a filed page that carries the same words. It is a diagnostic, not a score.
 
-Pairings from `samples/OVERLAY-people-v-trump.txt`:
+Pairings from `usage/OVERLAY-people-v-trump.txt`:
 
 | Our page | Paired exemplar page | Word overlap | Note |
 |---|---|---|---|
@@ -88,7 +88,7 @@ Pairings from `samples/OVERLAY-people-v-trump.txt`:
 
 ## Review record (Gate 2)
 
-Every page of `OUTPUT-people-v-trump.pdf` was rendered at 60 dpi and looked at: 9 of 9 reviewed. The first pass found three defects, all fixed in the template:
+Every page of `OUTPUT-nysupct-complaint-peoplevtrump.typst.pdf` was rendered at 60 dpi and looked at: 9 of 9 reviewed. The first pass found three defects, all fixed in the template:
 
 1. Caption: the court line and the county line shared a row. Cause: `align` inside a code block joined inline. Fix: each line wrapped in a block.
 2. Body: paragraphs overlapped (line pitch ran at zero or negative gap). Cause: paragraph spacing set to a negative value. Fix: paragraph spacing equal to the body leading (1.65 em), so the paragraph gap is one line, matching the exemplar.
@@ -109,7 +109,7 @@ After the fixes, all 9 pages were re-rendered and looked at again (the final ren
 - **Caption placement.** The exemplar puts the table of contents on its own pages after the summons. The template puts it on the page after the caption, which is a convention; the exemplar's layout is not copied.
 - **Typeface.** EB Garamond at 12 pt, not Times New Roman. The rules name no face, so no vendored substitute applies (`docs/FONTS.md`: no face named → EB Garamond). Visible difference from the exemplar, which is a convention and not a requirement.
 - **Sample coverage.** The sample is a portion of the 222-page filing (introduction, part of section A, the first cause of action, prayer, signature, verification). Parties (section II), jurisdiction (section III), most of section IV, and the other causes of action are not transcribed. The prayer's missing letter H is in the exemplar itself and is kept as it appears there.
-- **Index number.** The exemplar copy reads "INDEX NO. UNASSIGNED". The index no. 452564/2022 appears in a secondary source only (see `exemplars/SOURCE.md`).
+- **Index number.** The exemplar copy reads "INDEX NO. UNASSIGNED". The index no. 452564/2022 appears in a secondary source only (see `usage/SOURCE.md`).
 
 ## Exemplar search (for the record)
 
@@ -117,10 +117,10 @@ Searched (2026-10-14): NYSCEF and nycourts.gov form pages (blank forms only); Ju
 
 ## Engines
 
-Three engines per doc type: `typst/` (primary), `docx/` and `latex/` (not built here; see the Engines section of the PR). The docx engine is `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc 3.12's default reference) plus `docx/nysupct-complaint.lua` (caption table, TOC field, signature block, service list, verification page). Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/supreme-court/complaint samples/INPUT-people-v-trump.md`.
+Three engines per doc type: `typst/` (primary), `docx/` and `latex/` (not built here; see the Engines section of the PR). The docx engine is `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc 3.12's default reference) plus `docx/nysupct-complaint.lua` (caption table, TOC field, signature block, service list, verification page). Render: `sh tools/render.sh --engine docx courts/second-circuit/new-york/state/supreme-court/complaint usage/INPUT-nysupct-complaint-peoplevtrump.md`.
 
 - **Matches the typst form.** Letter paper; 1 in margins (22 NYCRR 202.5(a)); EB Garamond 12 pt body (no face named by the rules); double line spacing (`w:line="480"`, auto); 0.5 in first-line indent; footnotes 10 pt single-spaced; centred bold level-1 headings; caption with the bordered party box and `-against-`; centred page number in the footer; verification on its own page.
 - **Differs.** Word's "double" is two times the font's line height, not the typst leading of 1.65 em, so the line pitch will not equal the typst pitch. The caption and signature blocks are tables, whose borders Word and LibreOffice draw slightly differently. The TOC is a TOC field: its cached entries are the headings, without page numbers, until the field is updated.
-- **Generated.** `samples/OUTPUT-people-v-trump.docx` (validated: `unzip -tq` passes; all 17 XML parts pass `xmllint --noout`). Not generated, as in typst: the summons and the NYSCEF legend.
-- **BLOCKED (docx.pdf gates).** LibreOffice (`soffice`) is not installed on the box that built this engine, so no `samples/OUTPUT-people-v-trump.docx.pdf` exists and no page was rendered or reviewed. Gates 0 and 1 on the docx PDF cannot run here.
+- **Generated.** `usage/OUTPUT-nysupct-complaint-peoplevtrump.docx` (validated: `unzip -tq` passes; all 17 XML parts pass `xmllint --noout`). Not generated, as in typst: the summons and the NYSCEF legend.
+- **BLOCKED (docx.pdf gates).** LibreOffice (`soffice`) is not installed on the box that built this engine, so no `usage/OUTPUT-people-v-trump.docx.pdf` exists and no page was rendered or reviewed. Gates 0 and 1 on the docx PDF cannot run here.
 - **BLOCKED (TOC page numbers).** The TOC check cannot pass by construction until a LibreOffice field update (or a Word update with `w:updateFields`) fills the page numbers; the cached result carries no pages.

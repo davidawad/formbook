@@ -1,12 +1,12 @@
 # Tax Court: pretrial memorandum (Rule 131(b), Standing Pretrial Order)
 
-**Exemplar: 1 of 2 filers.** One real filed pretrial memorandum is in `exemplars/`: the respondent's, *Duffy v. Commissioner*, Tax Court Docket No. 8711-16 (Trial Calendar Portland, Oregon, December 10, 2018; OCR text layer added). Source and search history: [exemplars/SOURCE.md](exemplars/SOURCE.md). Tier 2 is judged against this one filer only, which `docs/EVAL-LOOP.md` says cannot finish tier 2; a petitioner-side memorandum from a different filer is still needed.
+**Exemplar: 1 of 2 filers.** One real filed pretrial memorandum is in `usage/`: the respondent's, *Duffy v. Commissioner*, Tax Court Docket No. 8711-16 (Trial Calendar Portland, Oregon, December 10, 2018; OCR text layer added). Source and search history: [usage/SOURCE.md](usage/SOURCE.md). Tier 2 is judged against this one filer only, which `docs/EVAL-LOOP.md` says cannot finish tier 2; a petitioner-side memorandum from a different filer is still needed.
 
 | Check | Result |
 |---|---|
-| Exemplar | yes: `exemplars/FILED-EXAMPLE-duffy-8711-16-pretrial-memorandum.pdf` (1 filer, respondent) |
-| Render (`tools/render.sh`) | ok: `samples/OUTPUT-duffy-8711-16-pretrial-memorandum.pdf`, 7 pages, EB Garamond only, no typst warnings. `samples/OUTPUT-generic-pretrial-memorandum.pdf` (fictional sample, 3 pages) still renders as before |
-| Overlay (`tools/overlay.sh`) | ok: `samples/OVERLAY-duffy-8711-16-pretrial-memorandum.pdf` and `.txt`. Page map (sample page to exemplar page; exemplar pages are memorandum pages 1 to 23): 1→2, 2→3, 3→4, 4→13, 5→20, 6→21, 7→23. The pairing is by word overlap and is diagnostic only: pages 4 to 7 pair with later memorandum pages because the sample omits memorandum pages 7 to 21 |
+| Exemplar | yes: `usage/SAMPLE-tax-pretrial-memorandum-duffy871116.pdf` (1 filer, respondent) |
+| Render (`tools/render.sh`) | ok: `usage/OUTPUT-tax-pretrial-memorandum-duffy871116.typst.pdf`, 7 pages, EB Garamond only, no typst warnings. `usage/OUTPUT-tax-pretrial-memorandum-generic.typst.pdf` (fictional sample, 3 pages) still renders as before |
+| Overlay (`tools/overlay.sh`) | ok: `usage/OVERLAY-duffy-8711-16-pretrial-memorandum.pdf` and `.txt`. Page map (sample page to exemplar page; exemplar pages are memorandum pages 1 to 23): 1→2, 2→3, 3→4, 4→13, 5→20, 6→21, 7→23. The pairing is by word overlap and is diagnostic only: pages 4 to 7 pair with later memorandum pages because the sample omits memorandum pages 7 to 21 |
 | Pages reviewed | 7 of 7 for the transcribed sample (Gate 2, below); 3 of 3 for the fictional sample |
 
 The brief's target for an exemplar this long was 8 to 14 rendered pages. The sample is 7 pages: the memorandum's summary of facts, its analysis of the issues and its later pages do not OCR cleanly (the tables and the argument are scrambled in the text layer), so they are marked omitted in the sample. This is a shortfall against the target, and it is stated here rather than padded.
@@ -17,20 +17,20 @@ The brief's target for an exemplar this long was 8 to 14 rendered pages. The sam
 |---|---|
 | `typst/tax-pretrial-memorandum.typ` | The template: `tax-pretrial-memorandum(meta, body)`. Every number is a named parameter at the top, and each traces to a rule or a style choice. |
 | `typst/main.typ` | Entry point. Reads `--input sample=...`, splits frontmatter from body, calls the template. |
-| `samples/INPUT-duffy-8711-16-pretrial-memorandum.md` | Transcribed from the exemplar: the caption, the form fields (attorneys, amounts table, status boxes, trial time, stipulation), motions, issues 1 to 6, the witness table, the start of the summary of facts, the respondent's adjustment positions, the partnership passage, the penalties paragraph, the evidentiary-problems paragraph, and the certificate of service. Omitted pages are marked. The attorney's email and bar number are placeholders (not legible in the scan); taxpayers' address is a placeholder. |
-| `samples/OUTPUT-duffy-8711-16-pretrial-memorandum.pdf`, `samples/OVERLAY-duffy-8711-16-pretrial-memorandum.pdf`, `.txt` | The render, the overlay against the exemplar, and its page map. |
-| `samples/INPUT-generic-pretrial-memorandum.md` | Fictional sample: two petitioners, both attorneys, one amounts row, a status box, a witness table, the issues, the summary of facts, a signature block. Kept as a second, structurally different sample. |
-| `samples/OUTPUT-generic-pretrial-memorandum.pdf` | The render of the fictional sample. |
-| `exemplars/FILED-EXAMPLE-duffy-8711-16-pretrial-memorandum.pdf`, `exemplars/SOURCE.md` | The exemplar (pages 4 to 26 of a public bankruptcy filing) and its source record. |
+| `usage/INPUT-tax-pretrial-memorandum-duffy871116.md` | Transcribed from the exemplar: the caption, the form fields (attorneys, amounts table, status boxes, trial time, stipulation), motions, issues 1 to 6, the witness table, the start of the summary of facts, the respondent's adjustment positions, the partnership passage, the penalties paragraph, the evidentiary-problems paragraph, and the certificate of service. Omitted pages are marked. The attorney's email and bar number are placeholders (not legible in the scan); taxpayers' address is a placeholder. |
+| `usage/OUTPUT-tax-pretrial-memorandum-duffy871116.typst.pdf`, `usage/OVERLAY-duffy-8711-16-pretrial-memorandum.pdf`, `.txt` | The render, the overlay against the exemplar, and its page map. |
+| `usage/INPUT-tax-pretrial-memorandum-generic.md` | Fictional sample: two petitioners, both attorneys, one amounts row, a status box, a witness table, the issues, the summary of facts, a signature block. Kept as a second, structurally different sample. |
+| `usage/OUTPUT-tax-pretrial-memorandum-generic.typst.pdf` | The render of the fictional sample. |
+| `usage/SAMPLE-tax-pretrial-memorandum-duffy871116.pdf`, `usage/SOURCE.md` | The exemplar (pages 4 to 26 of a public bankruptcy filing) and its source record. |
 
 Naming: the repo tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, and read the `INPUT-<id>.md` file name. This folder follows that, not the `<id>.pdf` names in the task brief.
 
 Build (from the repo root, with the toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/national/tax-court/pretrial-memorandum samples/INPUT-duffy-8711-16-pretrial-memorandum.md
+sh tools/render.sh courts/national/tax-court/pretrial-memorandum usage/INPUT-tax-pretrial-memorandum-duffy871116.md
 sh tools/overlay.sh courts/national/tax-court/pretrial-memorandum duffy-8711-16-pretrial-memorandum
-sh tools/render.sh courts/national/tax-court/pretrial-memorandum samples/INPUT-generic-pretrial-memorandum.md
+sh tools/render.sh courts/national/tax-court/pretrial-memorandum usage/INPUT-tax-pretrial-memorandum-generic.md
 ```
 
 ## Governing rules
@@ -76,7 +76,7 @@ The page number is placed with `page(foreground: place(bottom + center, dy: -foo
 
 ## Gate 2: visual review of the current PDF
 
-Reviewed 2026-10-14. sha256 of `samples/OUTPUT-generic-pretrial-memorandum.pdf`: `bb43d4cc3e1bf22125147e73386e4e48aebd331ed683c126ea054c28b89c8271` (re-rendered 2026-10-14 for the fonts pass; the face is unchanged, and the pages were looked at again). Every page was rendered at 60 dpi and looked at. There is no exemplar, so the pages are compared with the form's fields and the rules.
+Reviewed 2026-10-14. sha256 of `usage/OUTPUT-tax-pretrial-memorandum-generic.typst.pdf`: `bb43d4cc3e1bf22125147e73386e4e48aebd331ed683c126ea054c28b89c8271` (re-rendered 2026-10-14 for the fonts pass; the face is unchanged, and the pages were looked at again). Every page was rendered at 60 dpi and looked at. There is no exemplar, so the pages are compared with the form's fields and the rules.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -88,7 +88,7 @@ No row is `OPEN`. The overlay cannot be produced without an exemplar.
 
 ## Gate 2 for the transcribed sample (Duffy exemplar), 2026-10-15
 
-Reviewed 2026-10-15. sha256 of `samples/OUTPUT-duffy-8711-16-pretrial-memorandum.pdf`: `1860ff364d1293c394d1a8cfeb48303c4369e52f42199fbaefe3526f1d21072a`. Every page was rendered at 60 dpi (`pdftoppm -r 60`) and looked at, after the last edit. Compared with the exemplar's memorandum pages as read from the scan (memorandum page numbers are the filing's own "Docket No. 8711-16 - N -").
+Reviewed 2026-10-15. sha256 of `usage/OUTPUT-tax-pretrial-memorandum-duffy871116.typst.pdf`: `1860ff364d1293c394d1a8cfeb48303c4369e52f42199fbaefe3526f1d21072a`. Every page was rendered at 60 dpi (`pdftoppm -r 60`) and looked at, after the last edit. Compared with the exemplar's memorandum pages as read from the scan (memorandum page numbers are the filing's own "Docket No. 8711-16 - N -").
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -104,7 +104,7 @@ No row is `OPEN`. The sample transcribes parts of memorandum pages 1 to 6, 12 to
 
 ## Gate 2 for the fictional sample
 
-Unchanged from 2026-10-14 (the pass above, sha256 `bb43d4cc...` of the old `OUTPUT-generic-pretrial-memorandum.pdf`). It has no exemplar, so no overlay exists for it.
+Unchanged from 2026-10-14 (the pass above, sha256 `bb43d4cc...` of the old `OUTPUT-tax-pretrial-memorandum-generic.typst.pdf`). It has no exemplar, so no overlay exists for it.
 
 ## Open choices and gaps
 
@@ -116,7 +116,7 @@ Unchanged from 2026-10-14 (the pass above, sha256 `bb43d4cc...` of the old `OUTP
 
 ## Engines
 
-**docx** (`docx/reference.docx` from `docx/build-reference.sh`, and `docx/tax-pretrial-memorandum.lua`). Output: `samples/OUTPUT-generic-pretrial-memorandum.docx` and `samples/OUTPUT-generic-pretrial-memorandum.docx.pdf` (LibreOffice conversion, 3 pages).
+**docx** (`docx/reference.docx` from `docx/build-reference.sh`, and `docx/tax-pretrial-memorandum.lua`). Output: `usage/OUTPUT-tax-pretrial-memorandum-generic.docx` and `usage/OUTPUT-tax-pretrial-memorandum-generic.docx.pdf` (LibreOffice conversion, 3 pages).
 
 - Matches the typst output: EB Garamond 14 pt throughout (`pdffonts` shows only EBGaramond-Regular and EBGaramond-Bold); letter, 1 in side margins, 1 in top and bottom; double spacing as exact 24.1 pt lines and single as exact 14.7 pt; 0.5 in first-line indent; caption; the form fields single-spaced with the values at 3.6 in; the attorney block side by side; the amounts table ruled; the status boxes drawn as bordered boxes with an X when checked; flush-left bold section headings; the witness table ruled; the signature block with the rule.
 - Differs: (1) the "NAME OF CASE" value wraps to three lines in LibreOffice, two in typst (about 1 pt of width); (2) the checkboxes are text boxes, so they are taller than they are wide; (3) the "SUMMARY OF FACTS" heading moves to page 3 (typst keeps the heading and three lines on page 2), so later pages shift by a few lines; (4) the caption, form and signature block are tables built by the filter, so positions differ by a few points.

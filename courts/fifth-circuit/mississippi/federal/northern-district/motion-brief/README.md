@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/mississippi/federal/northern-district/motion-brief
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-stokes-3-25-cv-307-motion-brief.pdf` (1 filer, 12 pp; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-stokes-motion-brief.md` (transcription of the brief: caption, the introduction, facts, standard, the argument with its three headings, conclusion, footnotes 1–3, the signature block and the OF COUNSEL block) |
-| render | ok: `samples/OUTPUT-stokes-motion-brief.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> samples/INPUT-stokes-motion-brief.md`) |
-| overlay | ok: `samples/OVERLAY-stokes-motion-brief.pdf` and `OVERLAY-stokes-motion-brief.txt` (`sh tools/overlay.sh <this dir> stokes-motion-brief`) |
+| exemplar | yes: `usage/SAMPLE-msnd-motion-brief-stokes325cv307.pdf` (1 filer, 12 pp; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-msnd-motion-brief-stokes.md` (transcription of the brief: caption, the introduction, facts, standard, the argument with its three headings, conclusion, footnotes 1–3, the signature block and the OF COUNSEL block) |
+| render | ok: `usage/OUTPUT-msnd-motion-brief-stokes.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-msnd-motion-brief-stokes.md`) |
+| overlay | ok: `usage/OVERLAY-stokes-motion-brief.pdf` and `OVERLAY-stokes-motion-brief.txt` (`sh tools/overlay.sh <this dir> stokes-motion-brief`) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`), so the sample is `INPUT-<id>.md` and the id is `stokes-motion-brief`.
@@ -51,7 +51,7 @@ Primary sources: the joint 2024 Local Civil Rules for the Southern and Northern 
 
 ## Known gaps and open choices
 
-1. **One exemplar.** Tier 2 is not yet judged against two or three filers. *Haley v. X.AI Corp.*, 3:26-cv-00148-DMB-RP, ECF 51 (27 pp; a defendant's memorandum in support of a motion to dismiss, text layer present) is the next candidate; it is longer than the 8–14 page target and was not used. See `exemplars/SOURCE.md`.
+1. **One exemplar.** Tier 2 is not yet judged against two or three filers. *Haley v. X.AI Corp.*, 3:26-cv-00148-DMB-RP, ECF 51 (27 pp; a defendant's memorandum in support of a motion to dismiss, text layer present) is the next candidate; it is longer than the 8–14 page target and was not used. See `usage/SOURCE.md`.
 2. **Font.** L.U.Civ.R. 7(b)(5)(B) names no face (only "a proportionally spaced or monospaced face" with serifs for a proportional one), so `docs/FONTS.md` keeps EB Garamond here; no Times-family substitute is required. The exemplar is Times New Roman, which the rule does not require. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the filed page. The 12-point size and the footnote size are kept.
 3. **Case names.** The exemplar's text layer has no italic markup, so the italics in the sample (case names, *Id.*, signals such as *See*, *see also*, *Compare* … *with*) are a transcription choice following Rule 7(b)(5)(C), not a reading of the filed PDF.
 4. **Paragraph split at a page break.** A paragraph that continues onto the next page can leave one blank line at the top of that page (page 6 of the render). Paragraphs are set in fixed-height blocks (`on-grid`), and a block that breaks across a page keeps the height of its leftover lines. The alternative, plain flow, lays out paragraphs in a loop incorrectly in typst 0.15 (lines of one paragraph overlapped the next), so the fixed-height form was kept. The gap is cosmetic and is recorded here rather than fixed.
@@ -61,7 +61,7 @@ Primary sources: the joint 2024 Local Civil Rules for the Southern and Northern 
 8. **Gates.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md`; this doc-type folder does not have that shape, and the brief forbids touching `tools/`. The gates were not run. Render, overlay and the page review above are the checks for this doc type.
 9. **Footnote 1 is long** (a judicial-notice cite and a parenthetical). It is set at 11 pt, as the rule allows.
 
-## Review of the rendered pages (`OUTPUT-stokes-motion-brief.pdf`, 11 pages)
+## Review of the rendered pages (`OUTPUT-msnd-motion-brief-stokes.typst.pdf`, 11 pages)
 
 - Page 1: court title, caption (party column closed by a rule; the right column with "CIVIL ACTION NO.: 3:25-cv-307-GHD-RP"), the title, and the introduction. Pass.
 - Page 2: FACTS heading and the first two fact paragraphs with footnotes 1 and 2 at the foot of the page. Pass.
@@ -85,7 +85,7 @@ The page review checks the layout of the render. Text fidelity to the exemplar r
 
 Two engines are built from the same sample: typst (primary, `typst/`) and docx (`docx/`). This doc type has no latex template yet.
 
-**docx** (`docx/`): `docx/reference.docx` (rebuilt by `sh docx/make-reference.sh`), the Lua filter `docx/msnd-motion-brief.lua`, and `docx/render.sh` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> samples/INPUT-stokes-motion-brief.md`; it writes `samples/OUTPUT-stokes-motion-brief.docx` and `samples/OUTPUT-stokes-motion-brief.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`).
+**docx** (`docx/`): `docx/reference.docx` (rebuilt by `sh docx/make-reference.sh`), the Lua filter `docx/msnd-motion-brief.lua`, and `docx/render.sh` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> usage/INPUT-msnd-motion-brief-stokes.md`; it writes `usage/OUTPUT-msnd-motion-brief-stokes.docx` and `usage/OUTPUT-msnd-motion-brief-stokes.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`).
 
 What matches typst, checked on the LibreOffice PDF:
 

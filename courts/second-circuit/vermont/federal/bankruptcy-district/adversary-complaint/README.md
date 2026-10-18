@@ -5,10 +5,10 @@ Folder: `courts/second-circuit/vermont/federal/bankruptcy-district/adversary-com
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-fouracre-v-axos-23-01001-adversary-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-fouracre-adversary-complaint.md` (the filed complaint, transcribed in full except the statutory block quotes in ¶¶ 57–76, which are transcribed in full too; see gap 4) |
-| render | ok: `samples/OUTPUT-fouracre-adversary-complaint.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-fouracre-adversary-complaint.pdf` and `OVERLAY-fouracre-adversary-complaint.txt` (page map written by `tools/overlay.sh`, see gap 9) |
+| exemplar | yes: `usage/SAMPLE-vtb-adversary-complaint-fouracrevaxos2301001.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-vtb-adversary-complaint-fouracre.md` (the filed complaint, transcribed in full except the statutory block quotes in ¶¶ 57–76, which are transcribed in full too; see gap 4) |
+| render | ok: `usage/OUTPUT-vtb-adversary-complaint-fouracre.typst.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-fouracre-adversary-complaint.pdf` and `OVERLAY-fouracre-adversary-complaint.txt` (page map written by `tools/overlay.sh`, see gap 9) |
 | pages reviewed | 15 of 15 (each page rendered at 60 dpi and viewed; pages 1 to 15 after the last layout change, see the review below; re-rendered and all 15 pages viewed again 2026-10-15, no font change) |
 
 ## Governing rules
@@ -76,7 +76,7 @@ The overlay is a diagnostic, not a score. The differences that show on the overl
 
 ## Review of the rendered pages (Gate 2 equivalent)
 
-Every page of `OUTPUT-fouracre-adversary-complaint.pdf` was rendered at 60 dpi and viewed. Result per page:
+Every page of `OUTPUT-vtb-adversary-complaint-fouracre.typst.pdf` was rendered at 60 dpi and viewed. Result per page:
 
 - Page 1: caption, title, heading A and B, paragraphs 1 to 5. Caption closed by rules; the adversary number and chapter line up on the right. Pass.
 - Page 2: heading C, paragraphs 6 to 15. Pass.
@@ -109,11 +109,11 @@ Defects found and fixed during the review (all in the template, none in the samp
 8. **Length.** The render is 15 pages. The exemplar is 18 pages. 15 is one page over the 8-to-14-page target in the brief; the transcription includes the statutory text in full, so the difference is from the layout, not omitted content.
 9. **Overlay naming.** `tools/overlay.sh` writes `OVERLAY-<id>.pdf` and `OVERLAY-<id>.txt`; the brief's `<id>-overlay.pdf` names are not what the tool writes. The tool was used as written (`tools/` is outside this box's scope). Render output is `OUTPUT-<id>.pdf` (the tool default) rather than `<id>.pdf`.
 10. **No check gates were run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, which this doc-type folder is not. This file is the Gate 2 record instead.
-11. **Tier 2.** Only one filer is in `exemplars/`. The brief asks for one exemplar per doc type; the tier-2 check against two or three filers is not done.
+11. **Tier 2.** Only one filer is in `usage/`. The brief asks for one exemplar per doc type; the tier-2 check against two or three filers is not done.
 
 ## Engines
 
-docx (`docx/`: `build-reference.sh` builds `reference.docx`; `vtb.lua` writes the caption table, the numbering, the quotations, the lettered items and the signature). Render: `samples/OUTPUT-fouracre-adversary-complaint.docx` and `.docx.pdf` (LibreOffice conversion, EB Garamond embedded, 15 pages; all 15 pages viewed beside the typst render, `/work/artifacts/vtb/adversary-complaint/`). The `.docx` converts in LibreOffice with no error.
+docx (`docx/`: `build-reference.sh` builds `reference.docx`; `vtb.lua` writes the caption table, the numbering, the quotations, the lettered items and the signature). Render: `usage/OUTPUT-vtb-adversary-complaint-fouracre.docx` and `.docx.pdf` (LibreOffice conversion, EB Garamond embedded, 15 pages; all 15 pages viewed beside the typst render, `/work/artifacts/vtb/adversary-complaint/`). The `.docx` converts in LibreOffice with no error.
 
 - Matches the typst output: letter page, 1 in margins, EB Garamond 12 pt, body at the typst 2.0 pitch (exact 27.84 pt), single-spaced caption, quotations and signature (exact 13.2 pt), 0.5 in first-line indent on numbered paragraphs, lettered items, centered bold headings, bold italic left headings, centered page number in the footer, the caption table with the rules, the signature at 3 in.
 - Differs: line breaks and page breaks follow LibreOffice's EB Garamond metrics, so a few lines wrap differently and some page breaks move (for example the 77(a) and 78 quotations start one page earlier in docx). Heading spacing is approximated from the typst `above`/`below` values. The last body paragraph is kept with the signature block (Word-native keep-with-next), which typst does not do.

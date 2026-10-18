@@ -14,10 +14,10 @@ Re-check cadence: re-check annually each December 1 (national rule amendments an
 | DRI | Local Rules of the United States District Court for the District of Rhode Island, "Effective January 1, 2006, As Amended through April 1, 2024" (the file the bankruptcy court's Local Rules page links as "U.S. District Court, R.I. Local Rules"); applied by LBR 1001-1(b) and 7001-1 where the LBRs and FRBP are silent. Rule read: LR Cv 5(a). | https://www.rid.uscourts.gov/sites/rid/files/documents/Approved%20Dec%202024%20Rules.pdf |
 | FRBP | Federal Rules of Bankruptcy Procedure 7003, 7007.1, 7008, 7010, 9004, 9011, 9013 (restyled, as amended Apr. 2, 2024, eff. Dec. 1, 2024) | https://www.law.cornell.edu/rules/frbp/rule_7008 (and `rule_7003`, `rule_7007.1`, `rule_7010`, `rule_9004`, `rule_9011`, `rule_9013`) |
 | FRCP | Federal Rules of Civil Procedure 8(a), 10(a)-(b), 38(b) (applied by FRBP 7008, 7010, 9015) | https://www.law.cornell.edu/rules/frcp/rule_8 , `rule_10`, `rule_38` |
-| EX-A1 | Adversary complaint: Pisaturo (Ch. 7 Trustee) v. Sunflower Real Estate, LLC, Adv. 1:19-ap-01020, Doc. 1 (Peter J. Furness, for the trustee) | `adversary-complaint/exemplars/SOURCE.md` |
-| EX-A2 | Adversary complaint: Harrington (U.S. Trustee) v. Ziegelmayer, Adv. 1:18-ap-01066, Doc. 1 (Gary L. Donahue, Office of the U.S. Trustee) | `adversary-complaint/exemplars/SOURCE.md` |
-| EX-M1 | Motion to dismiss with memorandum: Hidalgo v. Astrue, Adv. 1:12-ap-01039, Doc. 11 (Michael P. Iannotti, U.S. Attorney's Office, D.R.I.) | `motion-brief/exemplars/SOURCE.md` |
-| EX-M2 | Memorandum in support of motion to dismiss: Donovan v. Christiana Trust, Adv. 1:17-ap-01028, Doc. 7-1 (Eric B. Hogberg, RI #8777, Houser & Allison, APC, for Christiana Trust) | `motion-brief/exemplars/SOURCE.md` |
+| EX-A1 | Adversary complaint: Pisaturo (Ch. 7 Trustee) v. Sunflower Real Estate, LLC, Adv. 1:19-ap-01020, Doc. 1 (Peter J. Furness, for the trustee) | `adversary-complaint/usage/SOURCE.md` |
+| EX-A2 | Adversary complaint: Harrington (U.S. Trustee) v. Ziegelmayer, Adv. 1:18-ap-01066, Doc. 1 (Gary L. Donahue, Office of the U.S. Trustee) | `adversary-complaint/usage/SOURCE.md` |
+| EX-M1 | Motion to dismiss with memorandum: Hidalgo v. Astrue, Adv. 1:12-ap-01039, Doc. 11 (Michael P. Iannotti, U.S. Attorney's Office, D.R.I.) | `motion-brief/usage/SOURCE.md` |
+| EX-M2 | Memorandum in support of motion to dismiss: Donovan v. Christiana Trust, Adv. 1:17-ap-01028, Doc. 7-1 (Eric B. Hogberg, RI #8777, Houser & Allison, APC, for Christiana Trust) | `motion-brief/usage/SOURCE.md` |
 
 Exemplar filers checked 2026-10-17 from the signature blocks: four different parties and four different counsel (Furness; Donahue for the U.S. Trustee; Iannotti for the U.S. Attorney; Hogberg for a creditor).
 

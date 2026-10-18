@@ -55,7 +55,7 @@ Kinds: **M** mandated by rule; **C** professional convention or court guidance t
 |---|---|---|---|
 | CA4-FORM-009 | The court notice prefers Times New Roman, Century Schoolbook, or Georgia and discourages Garamond. This is advisory guidance; FRAP requires a proportionally spaced serif, not a named font. | TYPEFACE | C |
 | CA4-COVER-002 | Electronic briefs use a white cover; color distinction applies to ordered paper copies. | GUIDE, “Cover Color” | C |
-| CA4-CONT-008 | Use clear, conventional section headings and the court's prescribed appendix citation format. Visual details not specified by the rules are judged against filed examples from distinct filers. | GUIDE; exemplars listed in each document-type `exemplars/SOURCE.md` | C |
+| CA4-CONT-008 | Use clear, conventional section headings and the court's prescribed appendix citation format. Visual details not specified by the rules are judged against filed examples from distinct filers. | GUIDE; exemplars listed in each document-type `usage/SOURCE.md` | C |
 
 ## Document-type differences
 

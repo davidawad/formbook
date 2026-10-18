@@ -5,10 +5,10 @@ Folder: `courts/sixth-circuit/ohio/federal/northern-district/motion-brief/` (one
 
 | Item | Status |
 |---|---|
-| exemplar | yes: 2 filers. `exemplars/FILED-EXAMPLE-hammill-3-25-cv-00462-motion-brief.pdf` (15 pp, U.S. Government, transcribed) and `exemplars/FILED-EXAMPLE-kinzie-1-25-cv-01217-motion-brief.pdf` (29 pp, an individual defendant, with a table of contents and table of authorities; not transcribed). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-hammill-motion-brief.md`: the whole 15-page memorandum (caption, every section, three footnotes, signature). |
-| render | ok: `samples/OUTPUT-hammill-motion-brief.pdf`, 14 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
-| overlay | ok: `samples/OVERLAY-hammill-motion-brief.pdf` and `samples/OVERLAY-hammill-motion-brief.txt` (paired against the Hammill exemplar). |
+| exemplar | yes: 2 filers. `usage/SAMPLE-ohnd-motion-brief-hammill325cv00462.pdf` (15 pp, U.S. Government, transcribed) and `usage/SAMPLE-ohnd-motion-brief-kinzie125cv01217.pdf` (29 pp, an individual defendant, with a table of contents and table of authorities; not transcribed). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-ohnd-motion-brief-hammill.md`: the whole 15-page memorandum (caption, every section, three footnotes, signature). |
+| render | ok: `usage/OUTPUT-ohnd-motion-brief-hammill.typst.pdf`, 14 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
+| overlay | ok: `usage/OVERLAY-hammill-motion-brief.pdf` and `usage/OVERLAY-hammill-motion-brief.txt` (paired against the Hammill exemplar). |
 | pages reviewed | 14 of 14 (every page of the current PDF rendered at 60 dpi and viewed after the last template change). |
 | content check | every word of the sample body and of its three footnotes appears in the PDF (compared as word counts, because footnotes sit at the foot of the page and dashes split at line ends; the body's word order was not compared). |
 | `tools/check.sh` | not run: same reason as the complaint folder. |
@@ -73,7 +73,7 @@ Every page was rendered at 60 dpi and viewed. No OPEN rows.
 
 ## Overlay
 
-`samples/OVERLAY-hammill-motion-brief.pdf` is red (ours), blue (filed), black (both). The page map (`OVERLAY-hammill-motion-brief.txt`) pairs pages 1 to 8 with the same page number (word overlap 97.9% on page 1, falling to 44% on page 8 where the exemplar's pagination drifts); pages 9 to 13 pair one page later (our 9 with the filed 10). Our page 14 pairs with the filed 14 (32.8%) because the certification is ours and the exemplar has none. The overlay is a diagnostic; tier 3 differences are not chased.
+`usage/OVERLAY-hammill-motion-brief.pdf` is red (ours), blue (filed), black (both). The page map (`OVERLAY-hammill-motion-brief.txt`) pairs pages 1 to 8 with the same page number (word overlap 97.9% on page 1, falling to 44% on page 8 where the exemplar's pagination drifts); pages 9 to 13 pair one page later (our 9 with the filed 10). Our page 14 pairs with the filed 14 (32.8%) because the certification is ours and the exemplar has none. The overlay is a diagnostic; tier 3 differences are not chased.
 
 ## Known gaps and open choices
 

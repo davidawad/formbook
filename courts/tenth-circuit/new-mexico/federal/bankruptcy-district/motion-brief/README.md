@@ -5,12 +5,12 @@ Folder: `courts/tenth-circuit/new-mexico/federal/bankruptcy-district/motion-brie
 
 | Item | Status |
 |---|---|
-| exemplar | **yes**: `exemplars/FILED-EXAMPLE-roman-catholic-18-13027-motion-brief.pdf` (1 filer: Official Committee of Unsecured Creditors; ECF Doc 383, 54 pp., filed 2020-05-29; main case, contested matter). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-roman-catholic-memorandum.md`: an excerpt transcribed from the exemplar's text layer: caption, lead-in, introduction, factual paragraphs 1 to 26, conclusion, prayer, signature. Omitted: TOC, TOA, argument sections, service list. The certificate is a placeholder (the filing has none). |
-| older sample | `samples/INPUT-fictional-motion-brief.md`: FICTIONAL, structure test only (adversary caption, placeholder text). Kept as a second check of the adversary caption path. |
+| exemplar | **yes**: `usage/SAMPLE-nmb-motion-brief-romancatholic1813027.pdf` (1 filer: Official Committee of Unsecured Creditors; ECF Doc 383, 54 pp., filed 2020-05-29; main case, contested matter). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-nmb-motion-brief-romancatholicmemorandum.md`: an excerpt transcribed from the exemplar's text layer: caption, lead-in, introduction, factual paragraphs 1 to 26, conclusion, prayer, signature. Omitted: TOC, TOA, argument sections, service list. The certificate is a placeholder (the filing has none). |
+| older sample | `usage/INPUT-nmb-motion-brief-fictional.md`: FICTIONAL, structure test only (adversary caption, placeholder text). Kept as a second check of the adversary caption path. |
 | typeface | No face named (FRBP 9004 and NM LBR, 2023 edition, read in full 2026-10-14; neither names a typeface, font size or spacing). Keeps EB Garamond (`docs/FONTS.md`, "No face named"). The exemplar is set in Times New Roman, one filer's choice, not a court requirement. See Open items. |
-| render | ok (2026-10-15, `sh tools/render.sh <dir> samples/INPUT-roman-catholic-memorandum.md`): `samples/OUTPUT-roman-catholic-memorandum.pdf`, 12 pages, letter, EB Garamond only (`pdffonts`: `EBGaramond-Regular`, `EBGaramond-Bold`, embedded), no typst warnings. Fictional sample re-rendered the same day: 3 pages, ok. |
-| overlay | ok, mechanically (2026-10-15, `sh tools/overlay.sh <dir> roman-catholic-memorandum`): `samples/OVERLAY-roman-catholic-memorandum.pdf` (12 pp.) and `.txt` (page map). The page pairing is by shared words and is poor: the exemplar's TOC and TOA pages (2 to 9) have no counterpart in the sample, so pages drift. The overlay is a diagnostic, not a tier-2 verdict. |
+| render | ok (2026-10-15, `sh tools/render.sh <dir> usage/INPUT-nmb-motion-brief-romancatholicmemorandum.md`): `usage/OUTPUT-nmb-motion-brief-romancatholicmemorandum.typst.pdf`, 12 pages, letter, EB Garamond only (`pdffonts`: `EBGaramond-Regular`, `EBGaramond-Bold`, embedded), no typst warnings. Fictional sample re-rendered the same day: 3 pages, ok. |
+| overlay | ok, mechanically (2026-10-15, `sh tools/overlay.sh <dir> roman-catholic-memorandum`): `usage/OVERLAY-roman-catholic-memorandum.pdf` (12 pp.) and `.txt` (page map). The page pairing is by shared words and is poor: the exemplar's TOC and TOA pages (2 to 9) have no counterpart in the sample, so pages drift. The overlay is a diagnostic, not a tier-2 verdict. |
 | pages reviewed | Output: **12 of 12** rendered at 60 dpi (`pdftoppm -r 60`) and viewed, 2026-10-15. Overlay: **12 of 12** rendered and viewed (visually misaligned, as above). Exemplar pages viewed: 1 and 4 (caption; TOA). |
 | check.sh / selftest | not run. The bead excludes `tools/` and the tracker; the court's gates were not part of this pass. |
 
@@ -103,14 +103,14 @@ Second pass (2026-10-14, brief `fb-595.32.16`):
 - CourtListener REST API: HTTP 429, `Retry-After` about 6.3 hours, so this pass could not query it again.
 - inforuptcy.com docket page: HTTP 403.
 
-What would settle it: a PACER copy (or a CourtListener RECAP upload by a user with access) of one of the motions above, with a text layer, saved as `exemplars/FILED-EXAMPLE-<case>-<docket>-motion-brief.pdf` and recorded in `exemplars/SOURCE.md`. Then re-run the overlay.
+What would settle it: a PACER copy (or a CourtListener RECAP upload by a user with access) of one of the motions above, with a text layer, saved as `usage/SAMPLE-<case>-<docket>-motion-brief.pdf` and recorded in `usage/SOURCE.md`. Then re-run the overlay.
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `nmb-filter.lua` builds the caption, numbered paragraphs, lettered sub-items, signature and certificate from the frontmatter). Output: `samples/OUTPUT-<id>.docx` (produced and zip/XML-validated; see the render check below).
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `nmb-filter.lua` builds the caption, numbered paragraphs, lettered sub-items, signature and certificate from the frontmatter). Output: `usage/OUTPUT-<id>.docx` (produced and zip/XML-validated; see the render check below).
 
 - Matches the typst form: EB Garamond 12 pt; exact 24 pt (double) line spacing; letter paper, 1 in margins; numbered paragraphs with a 0.5 in first-line indent and renumbered by the filter; lettered sub-items with a hanging indent; 15 pt single-spaced block quotations indented 0.75 in each side; caption table (court, debtor block, case number, party block with right and bottom rule, adversary number, title); signature block at 3.25 in; footnotes 10 pt; footer "Page X of Y" (PAGE and NUMPAGES fields).
 - Differs: the typst footer's left-hand title is not in the docx footer, because the footer is part of the reference and the title is case text from the frontmatter (a `render.sh` could add it; not done). Table borders, the "By:" leader line (tab leader, not a 2.6 in rule) and pagination differ between Word and LibreOffice. Word substitutes silently if EB Garamond is not installed on the machine that opens the file (`docs/FONTS.md`).
 - No TOC or TOA in these forms, so no field-update caveat applies.
 - Validation run here: `sh docx/build-reference.sh reference.docx` (unzip -tq and xmllint on every XML part: no errors); `sh tools/render.sh --engine docx` wrote the `.docx` and passed the zip and XML-well-formedness checks, then stopped at the soffice step.
-- BLOCKED (docx.pdf gates 0 and 1, and the visual check of every page): LibreOffice (`soffice`) is not installed on this box, so no `samples/OUTPUT-<id>.docx.pdf` exists and no docx page was rendered or looked at. `tools/check.sh --engine docx` cannot pass until it is run where soffice exists. Not claimed as passed.
+- BLOCKED (docx.pdf gates 0 and 1, and the visual check of every page): LibreOffice (`soffice`) is not installed on this box, so no `usage/OUTPUT-<id>.docx.pdf` exists and no docx page was rendered or looked at. `tools/check.sh --engine docx` cannot pass until it is run where soffice exists. Not claimed as passed.

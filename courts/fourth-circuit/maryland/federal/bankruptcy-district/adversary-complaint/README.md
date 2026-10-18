@@ -5,10 +5,10 @@ Folder: `courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-co
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-kapitus-26-00188-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-kapitus-complaint.md` (an abridged transcription, see "Transcription") |
-| render | ok: `samples/OUTPUT-kapitus-complaint.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-kapitus-complaint.pdf` and `samples/OVERLAY-kapitus-complaint.txt` (13 sample pages paired with 19 exemplar pages) |
+| exemplar | yes: `usage/SAMPLE-mdb-adversary-complaint-kapitus2600188.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-mdb-adversary-complaint-kapituscomplaint.md` (an abridged transcription, see "Transcription") |
+| render | ok: `usage/OUTPUT-mdb-adversary-complaint-kapituscomplaint.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-kapitus-complaint.pdf` and `usage/OVERLAY-kapitus-complaint.txt` (13 sample pages paired with 19 exemplar pages) |
 | pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names follow the repo's role convention (`INPUT-` for markdown, `OUTPUT-` for our render, `OVERLAY-` for the comparison), because `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf/.txt` by name.
@@ -70,7 +70,7 @@ Paragraph numbers are not transcribed: the template numbers the allegations. The
 
 ## Overlay
 
-`samples/OVERLAY-kapitus-complaint.pdf` is the red/blue comparison: red is our render, blue is the filed exemplar. Pages are paired by shared words (`tools/overlay.sh`); the word overlap per page is 57%-94%, and the page map is in `OVERLAY-kapitus-complaint.txt`. The overlay was built against the filed exemplar fetched from the SOURCE.md URL (the PDF is not in this snapshot). Because the sample is abridged and the template is in EB Garamond, the overlay shows the difference in font and in the omitted Count III. It is a diagnostic, not a score.
+`usage/OVERLAY-kapitus-complaint.pdf` is the red/blue comparison: red is our render, blue is the filed exemplar. Pages are paired by shared words (`tools/overlay.sh`); the word overlap per page is 57%-94%, and the page map is in `OVERLAY-kapitus-complaint.txt`. The overlay was built against the filed exemplar fetched from the SOURCE.md URL (the PDF is not in this snapshot). Because the sample is abridged and the template is in EB Garamond, the overlay shows the difference in font and in the omitted Count III. It is a diagnostic, not a score.
 
 ## Review of the rendered pages (Gate 2 rows)
 
@@ -103,14 +103,14 @@ Open layout item: none on the complaint's pages.
 
 The same markdown renders through three engines. Typst (`typst/`) is the reference. Only the docx engine is built in this pass; the latex engine is not built for this doc type.
 
-| Engine | Output (`samples/`) | Status |
+| Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-kapitus-complaint.pdf` (13 pp) | reference |
-| docx | `OUTPUT-kapitus-complaint.docx` and `OUTPUT-kapitus-complaint.docx.pdf` (13 pp, LibreOffice) | rendered; BLOCKED lines below |
+| typst | `OUTPUT-mdb-adversary-complaint-kapituscomplaint.typst.pdf` (13 pp) | reference |
+| docx | `OUTPUT-mdb-adversary-complaint-kapituscomplaint.docx` and `OUTPUT-mdb-adversary-complaint-kapituscomplaint.docx.pdf` (13 pp, LibreOffice) | rendered; BLOCKED lines below |
 
 ```sh
 sh docx/make-reference.sh     # rebuilds docx/reference.docx from pandoc's default reference document
-sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-complaint samples/INPUT-kapitus-complaint.md
+sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-complaint usage/INPUT-mdb-adversary-complaint-kapituscomplaint.md
 ```
 
 **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/mdb-adversary-complaint.lua`).
@@ -119,7 +119,7 @@ sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/bankrupt
 - *Differs (tier 2):* body lines break at other words, so some pages carry a line more or less than typst and a few page breaks move (page 4 onward, most visibly at pp. 4, 12 and 13). Prayer item C is split between pp. 12 and 13 in the docx; typst keeps it whole on p. 12. The caption rule sits closer to the next party line than in typst.
 - *Not verified:* the `.docx` has not been opened in Microsoft Word (no Word on this box). LibreOffice converts it without error, and it is a valid zip with well-formed XML parts (`unzip -t`, `xmllint` on every `.xml` and `.rels` part). Word may paginate slightly differently (docs/DOCX.md).
 - *Gate status:* this court folder has no `checks.yaml`, so `tools/check.sh --engine docx` was not run and no pass stamp was written. The review is by eye.
-- *Pages reviewed:* 13 of 13. Every page of `samples/OUTPUT-kapitus-complaint.docx.pdf` was rendered at 60 dpi and viewed beside the same page of the typst render, on the final build.
+- *Pages reviewed:* 13 of 13. Every page of `usage/OUTPUT-mdb-adversary-complaint-kapituscomplaint.docx.pdf` was rendered at 60 dpi and viewed beside the same page of the typst render, on the final build.
 - *Build notes:* this box has no `unzip` or `zip`, so the reference build and the zip check used stand-ins outside the repo, built on the toolchain's `ziptool`. The first `soffice` run with a fresh profile exits 81; a wrapper retried it once.
 
 BLOCKED: docx-word-open: not opened in Microsoft Word (not installed on this box); LibreOffice opens and converts the file without error.

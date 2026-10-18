@@ -4,11 +4,11 @@ Doc type: **adversary-complaint**, the complaint that starts an adversary procee
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 2 filers: `exemplars/FILED-EXAMPLE-carlson-25-04017-adversary-complaint.pdf` (35 pp, Enterprise Bank and Trust, 2025) and `exemplars/FILED-EXAMPLE-standley-19-03015-adversary-complaint.pdf` (7 pp, Standley Enterprises, 2019). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-enterprise-carlson-complaint.md` (a portion of the Carlson complaint, see gap 6) |
-| render | ok: `samples/OUTPUT-enterprise-carlson-complaint.pdf`, 10 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
+| exemplar | yes, 2 filers: `usage/SAMPLE-mowb-adversary-complaint-carlson2504017.pdf` (35 pp, Enterprise Bank and Trust, 2025) and `usage/SAMPLE-mowb-adversary-complaint-standley1903015.pdf` (7 pp, Standley Enterprises, 2019). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-mowb-adversary-complaint-enterprisecarlsoncomplaint.md` (a portion of the Carlson complaint, see gap 6) |
+| render | ok: `usage/OUTPUT-mowb-adversary-complaint-enterprisecarlsoncomplaint.typst.pdf`, 10 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
 | typeface | no face named by the court's rules (checked 2026-10-14); EB Garamond kept, per `docs/FONTS.md` rule 3 |
-| overlay | fail (2026-10-14): `tools/overlay.sh` cannot run, because `exemplars/` holds only `SOURCE.md` and the filed PDFs are not in this snapshot. The `OVERLAY-enterprise-carlson-complaint.txt` shown is from the earlier run; no `.pdf` overlay exists. |
+| overlay | fail (2026-10-14): `tools/overlay.sh` cannot run, because `usage/` holds only `SOURCE.md` and the filed PDFs are not in this snapshot. The `OVERLAY-enterprise-carlson-complaint.txt` shown is from the earlier run; no `.pdf` overlay exists. |
 | pages reviewed | 10 of 10 (every page of the 2026-10-14 render rasterized at 60 dpi and viewed) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`INPUT-` for the markdown, `OUTPUT-` for the render, `OVERLAY-` for the overlay), which is the file-role naming in CLAUDE.md. The overlay tool writes `OVERLAY-<id>.pdf`; it does not write `<id>-overlay.pdf`.
@@ -51,7 +51,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Overlay
 
-`sh tools/overlay.sh courts/eighth-circuit/missouri/federal/bankruptcy-western-district/adversary-complaint enterprise-carlson-complaint`. Pages are paired by word overlap (the first exemplar in `exemplars/`, which is Carlson). The page map from the final run (`samples/OVERLAY-enterprise-carlson-complaint.txt`): ours p.1 to p.7 pair with filed pp. 1, 2, 4, 5, 6, 8 and 9 (word overlap 53% to 85%); ours p.8 to p.10 pair with filed p.34 and p.35 (63.9%, 58.9% and 26.8%), because the sample's Count XI and prayer come from the end of the filing. The page pairing is by word overlap, so it is coarse. The overlay is a diagnostic, not a score. The visible differences are tier-3 ones: the Carlson filing is in a different typeface, its paragraph numbers are not ours, and the sample omits most of its text.
+`sh tools/overlay.sh courts/eighth-circuit/missouri/federal/bankruptcy-western-district/adversary-complaint enterprise-carlson-complaint`. Pages are paired by word overlap (the first exemplar in `usage/`, which is Carlson). The page map from the final run (`usage/OVERLAY-enterprise-carlson-complaint.txt`): ours p.1 to p.7 pair with filed pp. 1, 2, 4, 5, 6, 8 and 9 (word overlap 53% to 85%); ours p.8 to p.10 pair with filed p.34 and p.35 (63.9%, 58.9% and 26.8%), because the sample's Count XI and prayer come from the end of the filing. The page pairing is by word overlap, so it is coarse. The overlay is a diagnostic, not a score. The visible differences are tier-3 ones: the Carlson filing is in a different typeface, its paragraph numbers are not ours, and the sample omits most of its text.
 
 ## Gate 2 review (current PDF, every page rendered at 60 dpi and viewed)
 
@@ -86,7 +86,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for this doc type. Unchanged by the docx work.
-- **docx** (`docx/`): `reference.docx` (built by `sh docx/make-reference.sh`: styles, US Letter, 1 inch margins, centred PAGE footer) and `mowb.lua` (caption, numbering, lettered lists, signature block and certificate). Output: `samples/OUTPUT-enterprise-carlson-complaint.docx` and `.docx.pdf` (`sh tools/render.sh --engine docx <this folder> samples/INPUT-enterprise-carlson-complaint.md`).
+- **docx** (`docx/`): `reference.docx` (built by `sh docx/make-reference.sh`: styles, US Letter, 1 inch margins, centred PAGE footer) and `mowb.lua` (caption, numbering, lettered lists, signature block and certificate). Output: `usage/OUTPUT-mowb-adversary-complaint-enterprisecarlsoncomplaint.docx` and `.docx.pdf` (`sh tools/render.sh --engine docx <this folder> usage/INPUT-mowb-adversary-complaint-enterprisecarlsoncomplaint.md`).
   - **Matches typst:** US Letter, 1 inch margins, EB Garamond 13 pt (the declared face; a machine without it substitutes silently, so install it to open the file as designed), caption rows with the ")" column, numbered paragraphs 1 to 42 with WHEREFORE unnumbered, lettered (a), (b) lists, headings I., II. (continuous), the consent statement before the first heading, the signature block with "Respectfully submitted," and the certificate of service.
   - **Differs from typst:** the body is set at an exact 24 pt line pitch with 15.6 pt between paragraphs, which reads looser than the typst body. The Carlson sample is 12 pages in docx and 10 in typst. The signature block is kept together (`keepNext`), so it moves to page 12 with the certificate.
   - **Checked:** the `.docx.pdf` is the LibreOffice 26.8.1 conversion (fonts embedded: EB Garamond only). Every page (1-12) was rendered at 60 dpi and viewed beside the typst pages. The `.docx` was not opened in Word.

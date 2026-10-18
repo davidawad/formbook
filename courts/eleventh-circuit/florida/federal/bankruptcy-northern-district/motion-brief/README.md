@@ -26,7 +26,7 @@ No case-specific text, coordinates or forced line breaks are in the template: th
 
 ## What the overlay shows
 
-Sample: `samples/INPUT-rooks.md` (transcription of the filed motion, 4 pages, Doc 40 of Adv. Pro. No. 16-04003-KKS). Render: `samples/OUTPUT-rooks.pdf` (5 pages). Overlay: `samples/OVERLAY-rooks.pdf` (red = our render, blue = filed exemplar, black = both) with page map `samples/OVERLAY-rooks.txt`.
+Sample: `usage/INPUT-flnb-motion-brief-rooks.md` (transcription of the filed motion, 4 pages, Doc 40 of Adv. Pro. No. 16-04003-KKS). Render: `usage/OUTPUT-flnb-motion-brief-rooks.typst.pdf` (5 pages). Overlay: `usage/OVERLAY-rooks.pdf` (red = our render, blue = filed exemplar, black = both) with page map `usage/OVERLAY-rooks.txt`.
 
 - Layout matches the filing's order: caption, title, numbered paragraphs, memorandum, conferral certificate, WHEREFORE, signature, certificate of service, footnote 1 at the foot of its page.
 - Pagination: the render is 5 pages against 4 in the filing (the 14-point face and the added word-count certificate). Overlay word overlap per page: p1 76%, p2 46%, p3 48%, p4 54%, p5 85% (pairing by shared words; the drift reflects the extra page, not a rule failure).
@@ -47,7 +47,7 @@ Sample: `samples/INPUT-rooks.md` (transcription of the filed motion, 4 pages, Do
 
 ## Engines
 
-Word (`docx/`) is built next to the typst template: `docx/reference.docx` (made by `docx/make-reference.sh`), `docx/flnb-motion-brief.lua` (caption, title, signature block after the WHEREFORE paragraph, the word count in the certificate), `docx/render.sh` (pandoc with the reference and the filter; native footnotes). Build: `sh tools/render.sh --engine docx motion-brief samples/INPUT-rooks.md` writes `samples/OUTPUT-rooks.docx` and `OUTPUT-rooks.docx.pdf` (LibreOffice 26.8). Checked on the LibreOffice PDF; Word was not available.
+Word (`docx/`) is built next to the typst template: `docx/reference.docx` (made by `docx/make-reference.sh`), `docx/flnb-motion-brief.lua` (caption, title, signature block after the WHEREFORE paragraph, the word count in the certificate), `docx/render.sh` (pandoc with the reference and the filter; native footnotes). Build: `sh tools/render.sh --engine docx motion-brief usage/INPUT-flnb-motion-brief-rooks.md` writes `usage/OUTPUT-flnb-motion-brief-rooks.docx` and `OUTPUT-flnb-motion-brief-rooks.docx.pdf` (LibreOffice 26.8). Checked on the LibreOffice PDF; Word was not available.
 
 - **Matches typst:** EB Garamond 14 pt; 32.2 pt line pitch for body text; single 15.4 pt lines in the caption and signature block; 1-inch margins; centred page number; caption, title, numbered paragraphs, footnote 1 at the foot of its page, signature block after WHEREFORE, certificates in the same order; signature block at 45% of the text width.
 - **Differs from typst (docx follows the template's intent; typst/ is not changed here):**

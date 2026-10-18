@@ -5,11 +5,11 @@ Folder: `courts/tenth-circuit/utah/federal/district/motion-brief/`. Self-contain
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-miller-stormont-2-25-cv-00857-motion-brief.pdf` (22 pages, text layer; `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-miller-motion-to-dismiss.md` (abridged transcription of the exemplar, see Known gaps) |
-| render | ok: `samples/OUTPUT-miller-motion-to-dismiss.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/SAMPLE-utd-motion-brief-millerstormont225cv00857.pdf` (22 pages, text layer; `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-utd-motion-brief-millermotiontodismiss.md` (abridged transcription of the exemplar, see Known gaps) |
+| render | ok: `usage/OUTPUT-utd-motion-brief-millermotiontodismiss.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | typeface | face required: **none** (DUCivR 10-1(3) names no typeface; checked against the December 2023 text, 2026-10-15). Substitute: none needed. Font: **EB Garamond** kept (`docs/FONTS.md`: a court naming no face keeps EB Garamond). Not metric-compatible with any Times; not applicable here. |
-| overlay | ok: `samples/OVERLAY-miller-motion-to-dismiss.pdf` and `samples/OVERLAY-miller-motion-to-dismiss.txt` (`tools/overlay.sh`, exemplar passed as the third argument: see Render and overlay) |
+| overlay | ok: `usage/OVERLAY-miller-motion-to-dismiss.pdf` and `usage/OVERLAY-miller-motion-to-dismiss.txt` (`tools/overlay.sh`, exemplar passed as the third argument: see Render and overlay) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-15 in the fonts pass, no change to the template) |
 
 File names. The brief names outputs `<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh`, `tools/overlay.sh` and the court-folder convention (`CLAUDE.md`) name them `INPUT-<id>.md` → `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`. The tools were used as they are; `<id>` is `miller-motion-to-dismiss`.
@@ -56,11 +56,11 @@ Not produced by this template: a proposed order (DUCivR 7-1, separate filing), a
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/tenth-circuit/utah/federal/district/motion-brief samples/INPUT-miller-motion-to-dismiss.md
+sh tools/render.sh courts/tenth-circuit/utah/federal/district/motion-brief usage/INPUT-utd-motion-brief-millermotiontodismiss.md
 sh tools/overlay.sh courts/tenth-circuit/utah/federal/district/motion-brief miller-motion-to-dismiss /path/to/exemplar.pdf
 ```
 
-The exemplar PDF is not in the checkout (only `exemplars/SOURCE.md` is). On 2026-10-15 the overlay ran against the RECAP copy at the SOURCE.md URL, fetched to a temp directory and passed as the third argument; its page count (22) matches the SOURCE.md. Without the argument, `overlay.sh` looks for `exemplars/*.pdf`.
+The exemplar PDF is not in the checkout (only `usage/SOURCE.md` is). On 2026-10-15 the overlay ran against the RECAP copy at the SOURCE.md URL, fetched to a temp directory and passed as the third argument; its page count (22) matches the SOURCE.md. Without the argument, `overlay.sh` looks for `usage/*.pdf`.
 
 `OVERLAY-miller-motion-to-dismiss.pdf` is the red/blue test: red = our render, blue = the filed exemplar, black = both. `OVERLAY-miller-motion-to-dismiss.txt` is the page map.
 
@@ -94,21 +94,21 @@ Pages reviewed: 12 of 12.
 5. **TOA completeness.** The TOA is generated from the links in the sample. The exemplar's printed TOA omits *Leverington*, which its text cites; the sample's TOA includes it, because the links make it complete. Authorities cited only in the omitted parts (for example *Dennis v. Sparks*, *Hoai*, *Whipple*) are not in the sample's TOA.
 6. **Judge.** The caption shows "Judge Daphne A. Oberg", as the exemplar does; no magistrate judge line (the exemplar has none).
 7. **Exemplar wording.** The sample keeps the exemplar's wording, including its "barred by the by Younger abstention". One punctuation change: the *Bailey* cite is set as 846 P.2d 1278, 1280 (the filed text has no comma between the page numbers).
-8. **Tier-2 comparison.** One exemplar only. Alternates (Adams v. Tooele County School District, Fox v. University of Utah, Xlear v. FTC) are in `exemplars/SOURCE.md`. Not run as a second-filer comparison.
+8. **Tier-2 comparison.** One exemplar only. Alternates (Adams v. Tooele County School District, Fox v. University of Utah, Xlear v. FTC) are in `usage/SOURCE.md`. Not run as a second-filer comparison.
 9. **Certificates.** No certificate of service (FRCP 5(d)(1)(B)); no certificate of compliance (not needed under the page limit).
 10. **Signature placement.** The signature block is unbreakable but is not kept with the conclusion paragraph, unlike the complaint's template. The sample's signature sits on the conclusion's page with room to spare; a longer conclusion could leave the block alone on a page.
 11. **Check scripts not run.** As for the complaint: `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; the brief forbids editing `tools/`. Render and overlay were run; the review above is the Gate 2 record.
 
 ## Engines
 
-**docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` (pandoc's reference with the styles, footer and section of `typst/utd-motion-brief.typ`), and the filter `docx/utd-motion-brief.lua` (cover with counsel block and caption, heading labels "I." and "A.", numbered and bulleted lists, table of contents and table of authorities, page breaks before the contents and before the memorandum, signature block). `sh tools/render.sh --engine docx <folder> samples/INPUT-miller-motion-to-dismiss.md` writes `samples/OUTPUT-miller-motion-to-dismiss.docx`.
+**docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` (pandoc's reference with the styles, footer and section of `typst/utd-motion-brief.typ`), and the filter `docx/utd-motion-brief.lua` (cover with counsel block and caption, heading labels "I." and "A.", numbered and bulleted lists, table of contents and table of authorities, page breaks before the contents and before the memorandum, signature block). `sh tools/render.sh --engine docx <folder> usage/INPUT-utd-motion-brief-millermotiontodismiss.md` writes `usage/OUTPUT-utd-motion-brief-millermotiontodismiss.docx`.
 
 - Matches the typst form: Letter; top margin 1 1/2 in, others 1 in; EB Garamond 13 pt; exact 26 pt line spacing for body text; first-line indent 0.5 in; headings centred bold capitals (level 1), bold with "I." at the margin (level 2), bold with "A." indented half an inch (level 3); lists numbered "1." and bulleted at 0.5 in; footnotes at 13 pt, single spaced; centred page number on every page; caption with the judge; motion, contents, authorities and memorandum in the same order.
 - Differs: the caption and signature are Word tables; the table of contents and table of authorities are written as text (below); the typst page-number column is not reproduced.
 - BLOCKED, TOC page numbers: the table of contents is a TOC field whose cached result lists the headings without page numbers. Page numbers need a field update in Word or LibreOffice, and the cached numbers cannot be known without a rendered layout. Each heading entry is present; no page number is shown.
 - BLOCKED, TOA page numbers: the table of authorities lists the authorities that the body links, grouped and sorted, without page numbers (no TA or TOA fields; LibreOffice does not honor them, see `docs/DOCX.md`). The "passim" rule (7 or more pages) is not applied.
 - Checked on the box: the .docx is a zip whose 17 XML parts are well-formed (`ziptool` + `xmllint`, because `unzip` is not installed).
-- BLOCKED, docx.pdf (Gates 0 to 3 on `samples/OUTPUT-miller-motion-to-dismiss.docx.pdf`): `soffice` is not installed on this box and cannot be installed here, so no LibreOffice PDF was made and `tools/check.sh --engine docx` cannot run.
+- BLOCKED, docx.pdf (Gates 0 to 3 on `usage/OUTPUT-miller-motion-to-dismiss.docx.pdf`): `soffice` is not installed on this box and cannot be installed here, so no LibreOffice PDF was made and `tools/check.sh --engine docx` cannot run.
 - BLOCKED, `tools/render.sh --engine docx` exits 1: the zip-integrity step runs `unzip -tq`, and `unzip` (and `zip`) are not installed on this box. The .docx is written before that step; the render stops there.
 - BLOCKED, visual review of the .docx pages: 0 of 12 pages reviewed (`pages_reviewed=0`); the pages cannot be rendered without LibreOffice. The typst pages were reviewed at 60 dpi (12 of 12) as the reference.
 - Not checked: that the file opens in Word or LibreOffice without a repair prompt (no Word, no LibreOffice on the box).

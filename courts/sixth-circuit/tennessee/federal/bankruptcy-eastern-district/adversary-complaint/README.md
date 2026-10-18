@@ -5,14 +5,14 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/adve
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-hood-3-18-ap-03008-adversary-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-hood-complaint.md`: the whole filing (8 pages), transcribed from the text layer |
+| exemplar | yes: `usage/SAMPLE-tneb-adversary-complaint-hood318ap03008.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-tneb-adversary-complaint-hoodcomplaint.md`: the whole filing (8 pages), transcribed from the text layer |
 | typeface | face required: none (E.D. Tenn. LBR 9004-1(a) names no typeface; checked against the full local rules PDF, 2026-10-15). Font: EB Garamond kept (vendored, `fonts/eb-garamond/`); no court face to substitute. Visual only versus the filed Times New Roman. |
-| render | ok: `samples/OUTPUT-hood-complaint.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings, pdffonts shows EBGaramond only (2026-10-15) |
-| overlay | ok: `samples/OVERLAY-hood-complaint.pdf` and `samples/OVERLAY-hood-complaint.txt` (regenerated 2026-10-15) |
+| render | ok: `usage/OUTPUT-tneb-adversary-complaint-hoodcomplaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings, pdffonts shows EBGaramond only (2026-10-15) |
+| overlay | ok: `usage/OVERLAY-hood-complaint.pdf` and `usage/OVERLAY-hood-complaint.txt` (regenerated 2026-10-15) |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed on 2026-10-15) |
 
-Tools: `sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/adversary-complaint samples/INPUT-hood-complaint.md`, then `sh tools/overlay.sh <same dir> hood-complaint`. Output names follow the repo's file roles (`OUTPUT-`, `OVERLAY-`), not the `<id>-overlay.pdf` names in the brief, because `tools/render.sh` and `tools/overlay.sh` write those names by default.
+Tools: `sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/adversary-complaint usage/INPUT-tneb-adversary-complaint-hoodcomplaint.md`, then `sh tools/overlay.sh <same dir> hood-complaint`. Output names follow the repo's file roles (`OUTPUT-`, `OVERLAY-`), not the `<id>-overlay.pdf` names in the brief, because `tools/render.sh` and `tools/overlay.sh` write those names by default.
 
 ## Governing rules
 
@@ -63,11 +63,11 @@ Not produced by this template (separate filings that may accompany a complaint):
 
 ## Overlay
 
-`samples/OVERLAY-hood-complaint.pdf`: red is our render, blue is the filed exemplar, black is where both agree. Page pairing (`OVERLAY-hood-complaint.txt`): our pages 1 to 7 pair with filed pages 1, 2, 4, 5, 6, 7, 8. The word overlap per page is 47% to 87%. The pairing is by words, so a page offset is expected where our pagination differs by a line. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-hood-complaint.pdf`: red is our render, blue is the filed exemplar, black is where both agree. Page pairing (`OVERLAY-hood-complaint.txt`): our pages 1 to 7 pair with filed pages 1, 2, 4, 5, 6, 7, 8. The word overlap per page is 47% to 87%. The pairing is by words, so a page offset is expected where our pagination differs by a line. The overlay is a diagnostic, not a score.
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 12 pt, exact 24 pt double lines, 13.8 pt single lines, 1 in margins, page number from page 2 through `titlePg`); `docx/tneb-adversary-complaint.lua` builds the cover, caption, numbered allegations, lettered prayer and signature. Rendered with `sh tools/render.sh --engine docx <dir> samples/INPUT-hood-complaint.md` to `samples/OUTPUT-hood-complaint.docx` and `.docx.pdf` (LibreOffice 26.8.1, 7 pages, pdffonts shows EB Garamond only). Every page of both the `.docx.pdf` and the typst output was rasterized at 60 dpi and viewed (7 of 7, 2026-10-15).
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 12 pt, exact 24 pt double lines, 13.8 pt single lines, 1 in margins, page number from page 2 through `titlePg`); `docx/tneb-adversary-complaint.lua` builds the cover, caption, numbered allegations, lettered prayer and signature. Rendered with `sh tools/render.sh --engine docx <dir> usage/INPUT-tneb-adversary-complaint-hoodcomplaint.md` to `usage/OUTPUT-tneb-adversary-complaint-hoodcomplaint.docx` and `.docx.pdf` (LibreOffice 26.8.1, 7 pages, pdffonts shows EB Garamond only). Every page of both the `.docx.pdf` and the typst output was rasterized at 60 dpi and viewed (7 of 7, 2026-10-15).
 
 - Matches the typst output: letter page, 1 in margins, EB Garamond 12 pt, double-spaced body with a 0.5 in first-line indent, the cover (court, district, caption, title) in the same lines and single-spaced caption, bold centered headings, numbered allegations, lettered prayer, the signature block at 3.25 in kept on one page, the page number centered from page 2 with page 1 unnumbered.
 - Differs (tier 2, not chased): line breaks fall one line apart on some pages (page 3 carries one more line in the docx, so the page 4 break moves); LibreOffice places exact-spacing leading above the text, so the text starts about 11 pt lower on each page (the margin is unchanged); the number-to-text gap is a tab to 1 in, where typst uses 0.3 in after the number; pandoc's smart extension prints curly quotes and dashes where typst prints the sample's straight characters; the cover spacers (3 pt and 22 pt) are tuned to the typst title position, not a rule value.

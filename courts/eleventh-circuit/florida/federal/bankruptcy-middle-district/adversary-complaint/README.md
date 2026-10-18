@@ -5,11 +5,11 @@ Folder: `courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/adve
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-one-fat-frog-6-26-ap-00095-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`; SHA-256 checked against `SOURCE.md`) |
-| sample md | `samples/INPUT-budgen-complaint.md`: the full text of the 12-page filing (every paragraph, both footnotes, the transfer table, the prayers, the signature block) |
+| exemplar | yes: `usage/SAMPLE-flmb-adversary-complaint-onefatfrog626ap00095.pdf` (1 filer; see `usage/SOURCE.md`; SHA-256 checked against `SOURCE.md`) |
+| sample md | `usage/INPUT-flmb-adversary-complaint-budgencomplaint.md`: the full text of the 12-page filing (every paragraph, both footnotes, the transfer table, the prayers, the signature block) |
 | typeface | required: Times New Roman, 12 point (Style Guide II.A). Template: **Liberation Serif**, the metric-compatible substitute in `docs/FONTS.md`. Embedded: `LiberationSerif` family only (`pdffonts`). |
-| render | ok: `samples/OUTPUT-budgen-complaint.pdf`, 10 pages, typst 0.15.0, vendored Liberation Serif only, no typst warnings |
-| overlay | ok: `samples/OVERLAY-budgen-complaint.pdf` and `samples/OVERLAY-budgen-complaint.txt` (page map: 10 of 10 sample pages paired) |
+| render | ok: `usage/OUTPUT-flmb-adversary-complaint-budgencomplaint.typst.pdf`, 10 pages, typst 0.15.0, vendored Liberation Serif only, no typst warnings |
+| overlay | ok: `usage/OVERLAY-budgen-complaint.pdf` and `usage/OVERLAY-budgen-complaint.txt` (page map: 10 of 10 sample pages paired) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; see the table at the end) |
 | status in `court.json` | not set (the brief does not ask for it) |
 
@@ -61,7 +61,7 @@ Not produced by this template (separate filings, not part of the pleading): the 
 8. **Tools not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, not this doc-type shape; `tools/` is shared and was not changed. The gates were not run; the render, overlay and page review below are the checks run.
 9. **Local Rule 7001-1 deadlines and certificates.** Not a form requirement of the complaint; not produced.
 
-## Review of the rendered pages (`samples/OUTPUT-budgen-complaint.pdf`, 60 dpi, every page viewed)
+## Review of the rendered pages (`usage/OUTPUT-flmb-adversary-complaint-budgencomplaint.typst.pdf`, 60 dpi, every page viewed)
 
 Viewed on the Liberation Serif render (the current `OUTPUT`).
 
@@ -78,22 +78,22 @@ Viewed on the Liberation Serif render (the current `OUTPUT`).
 | 9 | Paragraphs 62 to 67; the WHEREFORE with lettered items a to e. Pass. |
 | 10 | Reservation of rights (unnumbered), the signature block at right, page number 10. No heading is left at a page foot. Pass. |
 
-Overlay (`samples/OVERLAY-budgen-complaint.txt`): the word-overlap pairing matches each sample page to the filed page with the most shared words (47% to 82%); pages 4 to 10 pair with a later filed page, as expected because the filing's cover and counts take more room in Times. The overlay is a diagnostic, not a score.
+Overlay (`usage/OVERLAY-budgen-complaint.txt`): the word-overlap pairing matches each sample page to the filed page with the most shared words (47% to 82%); pages 4 to 10 pair with a later filed page, as expected because the filing's cover and counts take more room in Times. The overlay is a diagnostic, not a score.
 
 ## How to build
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick
-sh tools/render.sh courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/adversary-complaint samples/INPUT-budgen-complaint.md
+sh tools/render.sh courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-flmb-adversary-complaint-budgencomplaint.md
 sh tools/overlay.sh courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/adversary-complaint budgen-complaint
 ```
 
-`render.sh` writes `samples/OUTPUT-budgen-complaint.pdf` and `overlay.sh` writes `samples/OVERLAY-budgen-complaint.pdf` and `.txt`: the names the tools read and write by default.
+`render.sh` writes `usage/OUTPUT-flmb-adversary-complaint-budgencomplaint.typst.pdf` and `overlay.sh` writes `usage/OVERLAY-budgen-complaint.pdf` and `.txt`: the names the tools read and write by default.
 
 ## Engines
 
 - **typst** (primary): unchanged; see the sections above.
-- **docx** (`docx/`): pandoc, `docx/reference.docx` (built by `sh docx/build-reference.sh` from `docx/parts/`: styles, numbering, footer) and `docx/flmb-pleading.lua`. Output: `samples/OUTPUT-budgen-complaint.docx`.
+- **docx** (`docx/`): pandoc, `docx/reference.docx` (built by `sh docx/build-reference.sh` from `docx/parts/`: styles, numbering, footer) and `docx/flmb-pleading.lua`. Output: `usage/OUTPUT-flmb-adversary-complaint-budgencomplaint.docx`.
   - Matches typst: Letter, one-inch margins; 12 point body with exact 24 pt double spacing; numbered paragraphs (bare numbers) and `^` unnumbered paragraphs; court title, caption (slash rule), and signature block built from the frontmatter; level 1 to 3 headings centred (as the complaint template sets them); lists lettered `a.`; footnotes at 12 point, single spaced; page numbers centered from page 2 (first-page footer empty).
   - Differs: the declared font is Times New Roman (the Style Guide's face); typst uses the Liberation Serif substitute. Caption and signature are two-column tables whose widths are fractions (pandoc writes them against its own base width; Word scales them, not verified). The caption rule is a paragraph border with a tab for the slash, not a drawn line. Lists take one of ten `Pleading List n` styles, so an eleventh ordered list in one sample fails the build. The signature block is not kept with a preceding list (the complaint's body ends in a paragraph, as in typst).
-  - docx BLOCKED: `docx.pdf` gates (Gate 0 and 1 on `samples/OUTPUT-budgen-complaint.docx.pdf`, and the page review). LibreOffice is not installable from conda-forge; Debian packages extracted without root segfault at startup on this box. Pages reviewed: 0 of 0 (no `.docx.pdf` exists). The font-name proof cannot pass as written: the LibreOffice PDF would show the metric substitute, not Times New Roman. `tools/check.sh --engine docx` expects a court folder (`court.json`, `rules.md`) and was not run.
+  - docx BLOCKED: `docx.pdf` gates (Gate 0 and 1 on `usage/OUTPUT-budgen-complaint.docx.pdf`, and the page review). LibreOffice is not installable from conda-forge; Debian packages extracted without root segfault at startup on this box. Pages reviewed: 0 of 0 (no `.docx.pdf` exists). The font-name proof cannot pass as written: the LibreOffice PDF would show the metric substitute, not Times New Roman. `tools/check.sh --engine docx` expects a court folder (`court.json`, `rules.md`) and was not run.

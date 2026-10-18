@@ -22,7 +22,7 @@ Kinds: **M** mandated by rule; **C** convention; **T** project requirement; **A*
 | CASD-CONT-005 | Motion states with particularity grounds and relief sought. | FRCP 7(b)(1); S.D. Cal. CivLR 7.1 | M |
 | CASD-FORM-001 | Formatting, paper size, spacing, font and pagination follow current S.D. Cal. CivLR 5.1 and the assigned judge's chambers rules. The June 1, 2026 PDF is the official current edition listed by the court; no unsupported font size or typeface is inferred here. | CASD-LR, CivLR 5.1; court chambers rules page | M |
 | CASD-ELEC-001 | E-filed PDF and electronic signature comply with the ECF Administrative Policies and Procedures Manual and FRCP 11(a); redact personal identifiers under FRCP 5.2. | S.D. Cal. ECF policies; FRCP 5.2, 11(a) | M |
-| CASD-FORM-002 | Caption and heading conventions are informed by the two-filer examples; the local rules and judge procedures control. | `exemplars/SOURCE.md`, cross-filer convention | C |
+| CASD-FORM-002 | Caption and heading conventions are informed by the two-filer examples; the local rules and judge procedures control. | `usage/SOURCE.md`, cross-filer convention | C |
 
 ### Complaint
 

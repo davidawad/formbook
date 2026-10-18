@@ -4,11 +4,11 @@ Doc type `adversary-complaint` (FRBP 7001 adversary proceeding, commenced by com
 
 ## Status
 
-- Exemplar: yes, one filer (RMW Acquisition Company, LLC, Adv. 13-01437, filed 2013-12-27, 14 pp.). See `exemplars/SOURCE.md`.
-- Render: ok (`sh tools/render.sh <this dir> samples/INPUT-rmw-complaint.md`, 13 pages, no typst warnings, EB Garamond only).
-- Overlay: ok (`sh tools/overlay.sh <this dir> rmw-complaint`, `samples/OVERLAY-rmw-complaint.pdf` and `.txt`).
-- Pages reviewed: 13 of 13 (every page of `samples/OUTPUT-rmw-complaint.pdf` rendered at 60 dpi and looked at, after the last template change).
-- Second filer: not collected. A candidate is listed in `exemplars/SOURCE.md` but was not downloaded.
+- Exemplar: yes, one filer (RMW Acquisition Company, LLC, Adv. 13-01437, filed 2013-12-27, 14 pp.). See `usage/SOURCE.md`.
+- Render: ok (`sh tools/render.sh <this dir> usage/INPUT-ilnb-adversary-complaint-rmwcomplaint.md`, 13 pages, no typst warnings, EB Garamond only).
+- Overlay: ok (`sh tools/overlay.sh <this dir> rmw-complaint`, `usage/OVERLAY-rmw-complaint.pdf` and `.txt`).
+- Pages reviewed: 13 of 13 (every page of `usage/OUTPUT-ilnb-adversary-complaint-rmwcomplaint.typst.pdf` rendered at 60 dpi and looked at, after the last template change).
+- Second filer: not collected. A candidate is listed in `usage/SOURCE.md` but was not downloaded.
 
 ## Governing rules
 
@@ -32,7 +32,7 @@ Verified 2026-10-14 against the primary text. Rule text quoted from the sources;
 
 ## What the overlay shows
 
-`samples/OVERLAY-rmw-complaint.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (`samples/OVERLAY-rmw-complaint.txt`):
+`usage/OVERLAY-rmw-complaint.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (`usage/OVERLAY-rmw-complaint.txt`):
 
 ```
 ours p.1  filed p.1  word-overlap 72.1%
@@ -66,7 +66,7 @@ Pages 1 to 7 pair one to one. From page 8 the pairing is one page later: our pag
 - Adversary Proceeding Cover Sheet (Official Form B 1040, LBR 7003-1) and summons (Official Form 287 or equivalent) are separate documents and are not generated.
 - Exhibits are referred to, not produced. The RMW complaint attaches Exhibits A through U; this sample does not include them.
 - The RMW complaint's count is written as one paragraph (see Decisions); a multi-count complaint's count headings are typed by the author in the body.
-- No second filer: `exemplars/` holds one filing. Tier 2 (2 or 3 exemplars from different filers) is not met for this doc type.
+- No second filer: `usage/` holds one filing. Tier 2 (2 or 3 exemplars from different filers) is not met for this doc type.
 - The sample transcribes the full 14-page exemplar, including its footnotes. Typos in the exemplar (for example "as define below", "negations") are kept, not corrected.
 
 ## Searches tried
@@ -86,8 +86,8 @@ Pages 1 to 7 pair one to one. From page 8 the pairing is one page later: our pag
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default; `ilnb.lua` lays out the cover, caption, numbered paragraphs, prayer and signature). Built with `sh tools/render.sh --engine docx <this dir> samples/INPUT-rmw-complaint.md`.
+DOCX (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default; `ilnb.lua` lays out the cover, caption, numbered paragraphs, prayer and signature). Built with `sh tools/render.sh --engine docx <this dir> usage/INPUT-ilnb-adversary-complaint-rmwcomplaint.md`.
 
 - **Matches the typst form (in the styles and filter; not checked against a rendered page):** EB Garamond 13 pt; exact 24 pt line pitch; 0.5 in first-line indent; US Letter with 1 in margins; centred 12 pt PAGE number in the footer; level-1 headings centred bold capitals, level-2 bold, level-3 bold italic; numbered body paragraphs; lettered prayer items.
 - **Differs or unverified:** the caption is a two-column table whose party column is ruled on the right and bottom, with widths taken from the typst layout (3.4 in, 0.3 in gutter), but its borders are not verified against the typst layout. The signature block stacks the "Dated" and city lines above the signature column (typst sets them side by side). Footnotes and body text are pandoc's own footnote and paragraph handling. The docx `.docx` was validated (zip and XML well-formed; every `pStyle` defined; one footer relation resolves); it was not opened in Word.
-- **BLOCKED:** `docx.pdf` (`samples/OUTPUT-rmw-complaint.docx.pdf`) is not produced because `soffice` (LibreOffice) is not installed on this box, so `tools/render.sh --engine docx` stops after writing `samples/OUTPUT-rmw-complaint.docx`. Pages reviewed: 0. The docx gates (`tools/check.sh --engine docx`) cannot run. Pagination in Word may differ from LibreOffice.
+- **BLOCKED:** `docx.pdf` (`usage/OUTPUT-rmw-complaint.docx.pdf`) is not produced because `soffice` (LibreOffice) is not installed on this box, so `tools/render.sh --engine docx` stops after writing `usage/OUTPUT-ilnb-adversary-complaint-rmwcomplaint.docx`. Pages reviewed: 0. The docx gates (`tools/check.sh --engine docx`) cannot run. Pagination in Word may differ from LibreOffice.

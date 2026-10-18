@@ -1,20 +1,20 @@
 # U.S. Court of Appeals for the Third Circuit: appellant's reply brief (`ca3`, `reply-brief`)
 
-Rule-driven typst form for an appellant's reply brief (FRAP 28(c)). Rule texts were checked on 2026-10-14 where the row says "verified"; the rest are marked "not fetched". One self-contained doc-type folder; the court root's `typst/` and `samples/` are not touched.
+Rule-driven typst form for an appellant's reply brief (FRAP 28(c)). Rule texts were checked on 2026-10-14 where the row says "verified"; the rest are marked "not fetched". One self-contained doc-type folder; the court root's `typst/` and `usage/` are not touched.
 
 | Path | What |
 |---|---|
 | `typst/ca3-reply-brief.typ` | The template: `ca3-reply-brief(meta, md)`. Content-agnostic; the numbers are named parameters at the top. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
-| `samples/INPUT-afp-reply-brief.md` | Transcription of the filed exemplar (cover data, TOA, Introduction, part of Argument I.A.1, Conclusion, signature). A portion of the real brief, not all of it. |
-| `samples/OUTPUT-afp-reply-brief.pdf` | `sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief samples/INPUT-afp-reply-brief.md`. 9 pages. |
-| `samples/OVERLAY-afp-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/third-circuit/court-of-appeals/reply-brief afp-reply-brief`. Red = ours, blue = filed, black = both. |
-| `exemplars/FILED-EXAMPLE-afp-26-2469-reply-brief.pdf`, `exemplars/SOURCE.md` | The filed reply brief (AFP, 3d Cir. 26-2469, Dkt. 30) and its provenance. |
+| `usage/INPUT-ca3-reply-brief-afp.md` | Transcription of the filed exemplar (cover data, TOA, Introduction, part of Argument I.A.1, Conclusion, signature). A portion of the real brief, not all of it. |
+| `usage/OUTPUT-ca3-reply-brief-afp.typst.pdf` | `sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief usage/INPUT-ca3-reply-brief-afp.md`. 9 pages. |
+| `usage/OVERLAY-afp-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/third-circuit/court-of-appeals/reply-brief afp-reply-brief`. Red = ours, blue = filed, black = both. |
+| `usage/SAMPLE-ca3-reply-brief-afp262469.pdf`, `usage/SOURCE.md` | The filed reply brief (AFP, 3d Cir. 26-2469, Dkt. 30) and its provenance. |
 
 Build (from the repo root, with the toolchain on `PATH`):
 
 ```sh
-sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief samples/INPUT-afp-reply-brief.md
+sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief usage/INPUT-ca3-reply-brief-afp.md
 sh tools/overlay.sh courts/third-circuit/court-of-appeals/reply-brief afp-reply-brief
 ```
 
@@ -67,7 +67,7 @@ Pages reviewed: 9 of 9.
 - **Gray cover not rendered.** The chart calls for a gray cover on paper copies of a reply (item 1d). The template draws a plain cover, as the filed exemplar's PDF does (the color is a print property). Hard copies (chart: seven hard copies within five days of electronic filing) are outside a PDF template.
 - **Page limit not enforced.** FRAP 32(a)(7)(A) also caps a reply at 15 pages unless it complies with the word limit. The template enforces the word limit (CA3-LEN-001) only. A brief that passes the word limit but runs past 15 pages would render without a warning.
 - **L.A.R. text not retrieved.** The Third Circuit local rules page (https://www.ca3.uscourts.gov/rules-procedures/local-appellate-rules) returned 404 on 2026-10-14, and the L.A.R. 31.1(c) and 46.1(e) texts did not turn up in search. Those citations come from the exemplar's filed certificate and from the chart; they are not verified against the rule text.
-- **Exemplar count.** One filed exemplar (AFP, a private-firm reply). A second filer (U.S. Attorney's reply, 3d Cir. 26-2028) is identified in `exemplars/SOURCE.md` but not saved; it is needed for the tier-2 comparison.
+- **Exemplar count.** One filed exemplar (AFP, a private-firm reply). A second filer (U.S. Attorney's reply, 3d Cir. 26-2028) is identified in `usage/SOURCE.md` but not saved; it is needed for the tier-2 comparison.
 - **Monospaced option not implemented.** FRAP 32(a)(5)(B) permits 10½ cpi monospaced type with a 650-line limit. The template does only proportional type.
 
 ## Searches (exemplar)
@@ -80,11 +80,11 @@ Pages reviewed: 9 of 9.
 
 - **typst** (`typst/`): primary, unchanged.
 - **latex** (`latex/template.tex`, `latex/ca3.lua`; built by `tools/render-latex.sh` with tectonic, two passes): 14 pt EB Garamond from the vendored `fonts/`, double spaced, 1 inch margins, roman front matter and arabic body; the Argument's point headings are centered with roman numerals; the certificates each on their own page. The word limit is 6,500 words (FRAP 32(a)(7)(B)(ii)), checked from the markdown source. Differs from typst: 10 pages against typst's 9; the certificate of compliance names LaTeX where typst names Typst; the layout is checked by eye on a contact sheet, not by Gate 2. Tier 1 is not signed off for this engine.
-- **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`): writes `samples/OUTPUT-<id>.docx`. `docx.pdf` checks are **BLOCKED**: LibreOffice (`soffice`) is not installed and has no conda-forge package. Not provided (not checked, not claimed): table of contents and table of authorities page numbers; footer page numbers; the cover's placement; body first-line indents; the Argument's centered point headings.
+- **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`): writes `usage/OUTPUT-<id>.docx`. `docx.pdf` checks are **BLOCKED**: LibreOffice (`soffice`) is not installed and has no conda-forge package. Not provided (not checked, not claimed): table of contents and table of authorities page numbers; footer page numbers; the cover's placement; body first-line indents; the Argument's centered point headings.
 
 ## Verification pass 2026-10-16 (fb-595.26.3)
 
-- Rendered: `sh tools/render.sh ... samples/INPUT-afp-reply-brief.md`, exit 0, no typst warnings, 9 pages (the same count as the first pass). Overlay rerun: `samples/OVERLAY-afp-reply-brief.pdf`, 9 pages; pairs and percentages unchanged (cover 86.8%, TOC 31.2%, TOA 36.5%, body 35-84%, certificates 57.4% and 57.6%).
+- Rendered: `sh tools/render.sh ... usage/INPUT-ca3-reply-brief-afp.md`, exit 0, no typst warnings, 9 pages (the same count as the first pass). Overlay rerun: `usage/OVERLAY-afp-reply-brief.pdf`, 9 pages; pairs and percentages unchanged (cover 86.8%, TOC 31.2%, TOA 36.5%, body 35-84%, certificates 57.4% and 57.6%).
 - Viewed: all 9 pages of the OUTPUT at 60 dpi, the 9 overlay pages at 40 dpi (as one contact sheet), the exemplar's page 1 against our cover, and the exemplar's certificate pages 34-35.
 - Defect fixed (tier 2), cover: the two counsel groups were stacked in the right half of the page, so the cover fit only with the spacing between its parts at or near zero (the rules touched the text above and below them). Two or more counsel groups now sit side by side, two to a row, across the full width, as on the filed cover; one group still sits in the right half. The cover now fits with clear space around every rule. The template still sets no coordinates; the spacing is the largest that fits.
 - Defect fixed (tier 2; FRAP 32(a)(4) exempts only quotations, headings and footnotes from double spacing): the certificate of compliance and the certificate of service were single-spaced with no paragraph indent. The filed certificates (AFP pp. 34-35, and those of the other two ca3 filers, Tresslar and Binder) are double-spaced with a first-line indent. The certificate text now uses the body leading and indent. Page count unchanged (9).

@@ -1,14 +1,14 @@
 # W.D. Pa. (pawd): motion-brief (memorandum of law supporting a motion to dismiss)
 
 Doc type **motion-brief** in the United States District Court for the Western District of Pennsylvania (`pawd`, Third Circuit). The covered case is a Fed. R. Civ. P. 12(b)(6) motion to dismiss with its memorandum of law (the rules require the memorandum to be a separate document from the motion, LCvR 5.1.F).
-Folder: `courts/third-circuit/pennsylvania/federal/western-district/motion-brief/`. Built by the wave-3 unit fb-595.31.16 (Haiku); the court root `typst/` and `samples/` were not touched.
+Folder: `courts/third-circuit/pennsylvania/federal/western-district/motion-brief/`. Built by the wave-3 unit fb-595.31.16 (Haiku); the court root `typst/` and `usage/` were not touched.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-albright-3-21-cv-00112-memorandum.pdf` (primary, transcribed in part) and `exemplars/FILED-EXAMPLE-north-american-dental-2-23-cv-01202-memorandum.pdf` (second filer, saved for comparison, not transcribed). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-albright-memorandum.md` (an excerpt: caption, introduction with footnote 2, part of the factual background, legal standard, the punitive-damages section, signature block; see Known gaps) |
-| render | ok: `samples/OUTPUT-albright-memorandum.pdf`, 8 pages (caption page, TOC page ii, body pages 1 to 6), typst 0.15.0, vendored EB Garamond only, no typst warnings (`tools/render.sh` exit 0) |
-| overlay | ok: `samples/OVERLAY-albright-memorandum.pdf` and `samples/OVERLAY-albright-memorandum.txt` (`tools/overlay.sh` exit 0) |
+| exemplar | yes: `usage/SAMPLE-pawd-motion-brief-albright321cv00112memorandum.pdf` (primary, transcribed in part) and `usage/SAMPLE-pawd-motion-brief-northamericandental223cv01202memorandum.pdf` (second filer, saved for comparison, not transcribed). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-pawd-motion-brief-albrightmemorandum.md` (an excerpt: caption, introduction with footnote 2, part of the factual background, legal standard, the punitive-damages section, signature block; see Known gaps) |
+| render | ok: `usage/OUTPUT-pawd-motion-brief-albrightmemorandum.typst.pdf`, 8 pages (caption page, TOC page ii, body pages 1 to 6), typst 0.15.0, vendored EB Garamond only, no typst warnings (`tools/render.sh` exit 0) |
+| overlay | ok: `usage/OVERLAY-albright-memorandum.pdf` and `usage/OVERLAY-albright-memorandum.txt` (`tools/overlay.sh` exit 0) |
 | pages reviewed | 8 of 8: every page rendered at 60 dpi (`pdftoppm -r 60`) and viewed after the last template change |
 
 File names: as in the complaint folder, the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (not `<id>.pdf` and `<id>-overlay.pdf`). The sample id is `albright-memorandum`.
@@ -47,7 +47,7 @@ Not produced by this template: the motion, the proposed order (LCvR 7.D), the ta
 
 ## What the overlay shows
 
-`samples/OVERLAY-albright-memorandum.pdf`: each page is red (our render) multiplied over blue (the filed exemplar's page with the most shared words). Black is where both agree. The pairing is by word overlap, not index (`samples/OVERLAY-albright-memorandum.txt`). Final map: ours p.1 to filed p.1 (94%), p.2 to p.2 (39%, the table of contents against the filing's table of authorities), p.3 to p.6 (91%), p.4 to p.7 (78%), p.5 to p.8 (50%), p.6 to p.21 (57%), p.7 to p.22 (95%), p.8 to p.23 (84%). The overlay is a diagnostic, not a score. The sample is an excerpt of the filing, so the pages it pairs with are the pages its text came from, not a page-for-page copy.
+`usage/OVERLAY-albright-memorandum.pdf`: each page is red (our render) multiplied over blue (the filed exemplar's page with the most shared words). Black is where both agree. The pairing is by word overlap, not index (`usage/OVERLAY-albright-memorandum.txt`). Final map: ours p.1 to filed p.1 (94%), p.2 to p.2 (39%, the table of contents against the filing's table of authorities), p.3 to p.6 (91%), p.4 to p.7 (78%), p.5 to p.8 (50%), p.6 to p.21 (57%), p.7 to p.22 (95%), p.8 to p.23 (84%). The overlay is a diagnostic, not a score. The sample is an excerpt of the filing, so the pages it pairs with are the pages its text came from, not a page-for-page copy.
 
 ## Known gaps and open choices
 
@@ -79,6 +79,6 @@ Earlier review passes found and fixed: headings larger than the body text (the h
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the court's form.
-- **docx** (`docx/reference.docx`, `docx/pawd.lua`, `docx/build-reference.sh`; sample `samples/OUTPUT-albright-memorandum.docx`): built with pandoc 3.6.4 on the reference. Matches the typst template: EB Garamond 13 pt, exact 26 pt (double) line pitch, 1 in margins on US Letter, 0.5 in first-line indent, footnotes at the body size and single-spaced, headings numbered by the filter (I., A., 1., a.) with the typst indents, block quotations indented 1 in on both sides, the caption (a borderless table), the title, the "Date:" line and the signature block at 3 in, page number centered in the footer from 1 at the Introduction.
+- **docx** (`docx/reference.docx`, `docx/pawd.lua`, `docx/build-reference.sh`; sample `usage/OUTPUT-pawd-motion-brief-albrightmemorandum.docx`): built with pandoc 3.6.4 on the reference. Matches the typst template: EB Garamond 13 pt, exact 26 pt (double) line pitch, 1 in margins on US Letter, 0.5 in first-line indent, footnotes at the body size and single-spaced, headings numbered by the filter (I., A., 1., a.) with the typst indents, block quotations indented 1 in on both sides, the caption (a borderless table), the title, the "Date:" line and the signature block at 3 in, page number centered in the footer from 1 at the Introduction.
 - Differences from typst: the contents page has no printed roman number (the caption page and the contents share a section without a footer, because a second footer needs a relationship id that pandoc assigns at build time); the contents entries have no page numbers (a TOC field, updated in Word or LibreOffice); the caption rows are spaced by the table, not the typst grid.
-- **BLOCKED** (docx): no `checks.yaml` exists for this court, so no gate check ID can be listed. Every check measured on `samples/OUTPUT-albright-memorandum.docx.pdf` is BLOCKED with the reason "LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked". Also BLOCKED: the contents page numbers (TOC field, needs a field update, and LibreOffice cannot be run here to check them). The `.docx` passes the package checks run here (ziptool reads every entry, xmllint on every XML part, no duplicate style ids); it was not opened in Word or LibreOffice.
+- **BLOCKED** (docx): no `checks.yaml` exists for this court, so no gate check ID can be listed. Every check measured on `usage/OUTPUT-albright-memorandum.docx.pdf` is BLOCKED with the reason "LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked". Also BLOCKED: the contents page numbers (TOC field, needs a field update, and LibreOffice cannot be run here to check them). The `.docx` passes the package checks run here (ziptool reads every entry, xmllint on every XML part, no duplicate style ids); it was not opened in Word or LibreOffice.

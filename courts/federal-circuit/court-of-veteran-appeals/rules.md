@@ -16,12 +16,12 @@ Every requirement below cites one of these. All were fetched with curl from the 
 | ER | CM/ECF E-Rules, effective October 1, 2026 (preface adds ACMS) | https://www.uscourts.cavc.gov/documents/eRules20261001.pdf (linked from https://www.uscourts.cavc.gov/e_filing_rules.php) |
 | F2 | Appendix of Forms (Samples), Form 2, sample caption page "APPELLANT'S BRIEF" (Rev 8/11) | https://www.uscourts.cavc.gov/documents/RulesFormsAppendix.pdf |
 | F18 | Same appendix, Form 18, "Sample Format for Table of Authorities" (08/11) | https://www.uscourts.cavc.gov/documents/RulesFormsAppendix.pdf |
-| EX-CHAVEZ | Appellant's brief, *Chavez v. Wilkie*, No. 19-7391 (Sarah E. O'Brien, Chisholm, Chisholm & Kilpatrick) | `opening-brief/exemplars/` |
-| EX-BUTLER | Appellant's brief, *Butler v. McDonough*, No. 20-7621 (Ashley C. Gautreau) | `opening-brief/exemplars/` |
-| EX-GUZMAN | Appellant's brief, *Guzman v. McDonough*, No. 21-0009 (Tara R. Goffney) | `opening-brief/exemplars/` |
-| EX-FULTON | Secretary's brief, *Fulton v. Wilkie*, No. 19-0320 (VA OGC, Mark J. Hamel) | `answering-brief/exemplars/` |
-| EX-PENNEY | Secretary's brief, *Penney v. Wilkie*, No. 19-1814 (VA OGC, James M. Carlson) | `answering-brief/exemplars/` |
-| EX-RUNDELL | Secretary's brief, *Rundell v. Wilkie*, No. 19-4044 (VA OGC, Alexander M. Panio) | `answering-brief/exemplars/` |
+| EX-CHAVEZ | Appellant's brief, *Chavez v. Wilkie*, No. 19-7391 (Sarah E. O'Brien, Chisholm, Chisholm & Kilpatrick) | `opening-brief/usage/` |
+| EX-BUTLER | Appellant's brief, *Butler v. McDonough*, No. 20-7621 (Ashley C. Gautreau) | `opening-brief/usage/` |
+| EX-GUZMAN | Appellant's brief, *Guzman v. McDonough*, No. 21-0009 (Tara R. Goffney) | `opening-brief/usage/` |
+| EX-FULTON | Secretary's brief, *Fulton v. Wilkie*, No. 19-0320 (VA OGC, Mark J. Hamel) | `answering-brief/usage/` |
+| EX-PENNEY | Secretary's brief, *Penney v. Wilkie*, No. 19-1814 (VA OGC, James M. Carlson) | `answering-brief/usage/` |
+| EX-RUNDELL | Secretary's brief, *Rundell v. Wilkie*, No. 19-4044 (VA OGC, Alexander M. Panio) | `answering-brief/usage/` |
 
 Kinds: **M** = mandated by a court rule (Vet. App. R. or E-Rule). **C** = convention (the rules leave it open; taken from exemplars of different filers). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

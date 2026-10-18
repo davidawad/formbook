@@ -14,11 +14,11 @@ Re-check cadence: re-check annually each December 1 (federal rule amendments tak
 | CASE-OPEN | EDNY "CM/ECF Electronic New Civil Case Opening Manual" (cover date 05/09/2018; PDF modified 2026-05-15), linked from the same page | https://www.nyed.uscourts.gov/sites/default/files/uploads/caseopeningmanual.pdf |
 | PRINT-PDF | EDNY "Printing to PDF" instructions (PDF dated 2021-06-24), linked from the same page | https://www.nyed.uscourts.gov/sites/default/files/uploads/print%20to%20pdf.pdf |
 | FRCP | Federal Rules of Civil Procedure, Rules 5, 5.2, 7, 7.1, 8, 10, 11, 12, 38 (current text) | https://www.law.cornell.edu/rules/frcp/rule_5 , .../rule_5.2 , .../rule_7 , .../rule_7.1 , .../rule_8 , .../rule_10 , .../rule_11 , .../rule_12 , .../rule_38 |
-| EX-C1 | Complaint exemplar 1: Blade v. GameStop Inc., No. 1:26-cv-06563, ECF 1 (Robert Wisniewski P.C. for plaintiff) | `complaint/exemplars/SOURCE.md` |
-| EX-C2 | Complaint exemplar 2: Forsythe v. Carerite Centers LLC, No. 2:26-cv-06559, ECF 1 (Romero Law Group PLLC for plaintiff) | `complaint/exemplars/SOURCE.md` |
-| EX-C3 | Complaint exemplar 3: Mejia v. Hamide NYC Inc, No. 1:26-cv-06581, ECF 1 (Joseph & Kirschenbaum LLP for plaintiff) | `complaint/exemplars/SOURCE.md` |
-| EX-M1 | Memorandum exemplar 1: Force v. Qatar Charity, No. 1:20-cv-02578 (BMC), ECF 56-1 (Ropes & Gray LLP for defendant Qatar National Bank) | `motion-brief/exemplars/SOURCE.md` |
-| EX-M2 | Memorandum exemplar 2: Saldarriaga v. Coffin, No. 1:20-cv-03529 (RPK)(JRC), ECF 19 (Office of the Attorney General of Florida, William E. Chorba, for defendant Ann Coffin) | `motion-brief/exemplars/SOURCE.md` |
+| EX-C1 | Complaint exemplar 1: Blade v. GameStop Inc., No. 1:26-cv-06563, ECF 1 (Robert Wisniewski P.C. for plaintiff) | `complaint/usage/SOURCE.md` |
+| EX-C2 | Complaint exemplar 2: Forsythe v. Carerite Centers LLC, No. 2:26-cv-06559, ECF 1 (Romero Law Group PLLC for plaintiff) | `complaint/usage/SOURCE.md` |
+| EX-C3 | Complaint exemplar 3: Mejia v. Hamide NYC Inc, No. 1:26-cv-06581, ECF 1 (Joseph & Kirschenbaum LLP for plaintiff) | `complaint/usage/SOURCE.md` |
+| EX-M1 | Memorandum exemplar 1: Force v. Qatar Charity, No. 1:20-cv-02578 (BMC), ECF 56-1 (Ropes & Gray LLP for defendant Qatar National Bank) | `motion-brief/usage/SOURCE.md` |
+| EX-M2 | Memorandum exemplar 2: Saldarriaga v. Coffin, No. 1:20-cv-03529 (RPK)(JRC), ECF 19 (Office of the Attorney General of Florida, William E. Chorba, for defendant Ann Coffin) | `motion-brief/usage/SOURCE.md` |
 
 Kinds: **M** = mandated by a court rule (FRCP, Joint Local Rule, or the court's published ECF instructions). **C** = convention (the rules leave it open; taken from the exemplars, with the filers that show it). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

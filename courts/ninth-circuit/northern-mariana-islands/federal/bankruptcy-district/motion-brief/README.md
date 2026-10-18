@@ -5,11 +5,11 @@ Folder: `courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-distri
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-imperial-pacific-24-bk-00002-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-imperial-pacific-memo.md` (portion of the filing: cover, TOC, TOA, preliminary statement, ¶¶ 1–17, Argument A opening, conclusion, signature) |
-| render | ok: `samples/OUTPUT-imperial-pacific-memo.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
+| exemplar | yes: `usage/SAMPLE-nmib-motion-brief-imperialpacific24bk00002.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nmib-motion-brief-imperialpacificmemo.md` (portion of the filing: cover, TOC, TOA, preliminary statement, ¶¶ 1–17, Argument A opening, conclusion, signature) |
+| render | ok: `usage/OUTPUT-nmib-motion-brief-imperialpacificmemo.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
 | typeface | face required: none (LR 5.2(a): "serif font"); font kept: EB Garamond (serif, vendored); no substitute needed |
-| overlay | ok: `samples/OVERLAY-imperial-pacific-memo.pdf` and `OVERLAY-imperial-pacific-memo.txt` (exemplar re-fetched 2026-10-15 from the URL in `exemplars/SOURCE.md`; the PDF was missing from the snapshot) |
+| overlay | ok: `usage/OVERLAY-imperial-pacific-memo.pdf` and `OVERLAY-imperial-pacific-memo.txt` (exemplar re-fetched 2026-10-15 from the URL in `usage/SOURCE.md`; the PDF was missing from the snapshot) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on 2026-10-15) |
 | tier 2 | not judged against a second filer (none found for this court; see gaps) |
 
@@ -56,12 +56,12 @@ Not generated here: a notice of motion (the exemplar is the memorandum only; a m
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
-sh tools/render.sh courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district/motion-brief samples/INPUT-imperial-pacific-memo.md
+sh tools/render.sh courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district/motion-brief usage/INPUT-nmib-motion-brief-imperialpacificmemo.md
 sh tools/overlay.sh courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district/motion-brief imperial-pacific-memo \
-  courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district/motion-brief/exemplars/FILED-EXAMPLE-imperial-pacific-24-bk-00002-motion-brief.pdf
+  courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district/motion-brief/usage/SAMPLE-nmib-motion-brief-imperialpacific24bk00002.pdf
 ```
 
-Overlay page map (`samples/OVERLAY-imperial-pacific-memo.txt`): ours p.1 ↔ filed p.1 (89.5%); p.2 ↔ p.2 (30.5%, the cover and TOC share few words); p.3 ↔ p.4 (13.4%, the TOA against the filed TOA); p.4 ↔ p.7; p.5 ↔ p.8; p.6 ↔ p.9; p.7 ↔ p.10; p.8 ↔ p.15 (59%); p.9 ↔ p.31 (20.5%, the signature page against the filed signature page). Red is our render; blue is the filed exemplar; black is both. The overlay is a diagnostic, not a score: the filing is a Word document with its own line spacing, and only the sample's transcribed pages have a counterpart.
+Overlay page map (`usage/OVERLAY-imperial-pacific-memo.txt`): ours p.1 ↔ filed p.1 (89.5%); p.2 ↔ p.2 (30.5%, the cover and TOC share few words); p.3 ↔ p.4 (13.4%, the TOA against the filed TOA); p.4 ↔ p.7; p.5 ↔ p.8; p.6 ↔ p.9; p.7 ↔ p.10; p.8 ↔ p.15 (59%); p.9 ↔ p.31 (20.5%, the signature page against the filed signature page). Red is our render; blue is the filed exemplar; black is both. The overlay is a diagnostic, not a score: the filing is a Word document with its own line spacing, and only the sample's transcribed pages have a counterpart.
 
 ## Visual review (Gate 2 record, all 9 pages, rendered at 60 dpi and viewed)
 
@@ -97,11 +97,11 @@ Reviewed pages: 9 of 9.
 ## Engines
 
 - **typst** (primary): `typst/`, as above.
-- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 13 pt, exact 24 pt line spacing, 0.5 in first-line indent, letter, margins 1.5 in top, 1 in bottom, 1.3 in left, 1 in right, pleading rules as page borders, line numbers 1 to 24 restarting each page, page number centered in the footer at 11 pt, footnotes 13 pt single spaced, headings centered caps (level 1) or bold with hanging labels (levels 2 to 4)). `docx/nmib-motion-brief.lua` writes the cover and the caption table, the table of contents field and the table of authorities, the heading labels (A., 1., a.) and the signature block, and makes three sections: the cover (no number), the front matter (i, ii, ...), the body (1, 2, ...). Built 2026-10-15: `samples/OUTPUT-imperial-pacific-memo.docx` written by `tools/render.sh --engine docx`; `unzip -tq` OK; every XML part `xmllint --noout` OK. `docx/reference.docx` is built by `docx/build-reference.sh`.
+- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 13 pt, exact 24 pt line spacing, 0.5 in first-line indent, letter, margins 1.5 in top, 1 in bottom, 1.3 in left, 1 in right, pleading rules as page borders, line numbers 1 to 24 restarting each page, page number centered in the footer at 11 pt, footnotes 13 pt single spaced, headings centered caps (level 1) or bold with hanging labels (levels 2 to 4)). `docx/nmib-motion-brief.lua` writes the cover and the caption table, the table of contents field and the table of authorities, the heading labels (A., 1., a.) and the signature block, and makes three sections: the cover (no number), the front matter (i, ii, ...), the body (1, 2, ...). Built 2026-10-15: `usage/OUTPUT-nmib-motion-brief-imperialpacificmemo.docx` written by `tools/render.sh --engine docx`; `unzip -tq` OK; every XML part `xmllint --noout` OK. `docx/reference.docx` is built by `docx/build-reference.sh`.
 - **Matches the typst form:** typeface and size, double spacing, indents, margins, pleading rules, numbers 1 to 24, page-number format per section, footnote size, heading style and labels, cover and caption layout, signature block.
 - **Differs from the typst form:**
   - Table of contents: a TOC field. Its page numbers appear only after the fields are updated; the file asks Word to update fields on open (`w:updateFields`). The cached text says so.
   - Table of authorities: lists each authority the body cites, grouped as in the typst form, without page numbers and without "passim".
   - Word's line numbering skips tables, so the caption and signature table rows carry no line numbers; the counsel block and the caption are single spaced, not on the 24-point grid.
   - Word and LibreOffice paginate differently; page numbers may be off by a page in one of them.
-- **BLOCKED (docx.pdf gates 0 and 1, and the page review):** LibreOffice (`soffice`) is not installed on this box, so `samples/OUTPUT-imperial-pacific-memo.docx.pdf` was not made and no page of the `.docx` was viewed; the `.docx` was not opened in Word either. Checks that cannot pass by construction: the TOC page numbers (field, updated only on open), the TOA page numbers (a TOA field is not honored by LibreOffice, and the filter writes no page numbers), and line numbers on the caption and signature tables.
+- **BLOCKED (docx.pdf gates 0 and 1, and the page review):** LibreOffice (`soffice`) is not installed on this box, so `usage/OUTPUT-imperial-pacific-memo.docx.pdf` was not made and no page of the `.docx` was viewed; the `.docx` was not opened in Word either. Checks that cannot pass by construction: the TOC page numbers (field, updated only on open), the TOA page numbers (a TOA field is not honored by LibreOffice, and the filter writes no page numbers), and line numbers on the caption and signature tables.

@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/oregon/federal/bankruptcy-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-sheehy-26-03009-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`). It is a motion with its argument in the body, not a separate memorandum. |
-| sample md | `samples/INPUT-sheehy-motion.md` (transcription of the full 5-page filing, plus the rule-mandated notice; see Known gaps) |
-| render | ok: `samples/OUTPUT-sheehy-motion.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-sheehy-motion.pdf` and `OVERLAY-sheehy-motion.txt` |
+| exemplar | yes: `usage/SAMPLE-orb-motion-brief-sheehy2603009.pdf` (1 filer; see `usage/SOURCE.md`). It is a motion with its argument in the body, not a separate memorandum. |
+| sample md | `usage/INPUT-orb-motion-brief-sheehymotion.md` (transcription of the full 5-page filing, plus the rule-mandated notice; see Known gaps) |
+| render | ok: `usage/OUTPUT-orb-motion-brief-sheehymotion.typst.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-sheehy-motion.pdf` and `OVERLAY-sheehy-motion.txt` |
 | pages reviewed | 5 of 5 (every page rendered at 60 dpi and viewed; page 1 also at 110 dpi after the court-title fix) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`), not the `<id>.md` names in the brief.
@@ -71,11 +71,11 @@ Not verified in this run: FRCP 60(b) and FRBP 9024, as cited by the exemplar (no
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (the same page and type values as the complaint; headings 17 pt and 14.5 pt; "Pleading Flush" for the `~` paragraphs; "Pleading Notice" for the LBR 9013-1(b)(2) notice); `docx/orb-motion.lua` with `docx/orb-common.lua` writes the cover, the caption, the notice, the body (unnumbered paragraphs, lettered lists 1., 2., ...), the signature block and the certificate of service on its own page; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in capitals. Output: `samples/OUTPUT-sheehy-motion.docx` and `.docx.pdf` (LibreOffice 26.8.1), 6 pages, all 6 viewed at 60 dpi (review: `reviews/2026-10-15-docx.md`).
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (the same page and type values as the complaint; headings 17 pt and 14.5 pt; "Pleading Flush" for the `~` paragraphs; "Pleading Notice" for the LBR 9013-1(b)(2) notice); `docx/orb-motion.lua` with `docx/orb-common.lua` writes the cover, the caption, the notice, the body (unnumbered paragraphs, lettered lists 1., 2., ...), the signature block and the certificate of service on its own page; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in capitals. Output: `usage/OUTPUT-orb-motion-brief-sheehymotion.docx` and `.docx.pdf` (LibreOffice 26.8.1), 6 pages, all 6 viewed at 60 dpi (review: `reviews/2026-10-15-docx.md`).
 
 - Matches the typst output: letter; margins; EB Garamond 12 pt; double-spaced body; 0.5 in first-line indent on body paragraphs and none on the `~` paragraphs; the caption with the ")" column and the hearing lines when a sample sets them; the notice on page 2; the H1 and H2 headings; the certificate of service on its own page with its heading centered.
 - Differs from typst: the ")" count is estimated from the width of each party line (see the complaint Engines note); the list numbers are typed; the certificate's lines are single-spaced paragraphs with the same gap as the typst `v()`. Pagination: LibreOffice puts 6 pages where typst puts 5; the signature block (date and firm lines) moves to page 5 by itself because it is kept together with the date.
 - Fonts: as the complaint: LibreOffice must see only `/work/repo/fonts` (`FONTCONFIG_FILE`).
 - Not verified in Word. The `.docx` is a valid zip of well-formed XML, and LibreOffice converts it without a repair prompt.
 
-BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`; a doc-type folder has neither, so the script exits 2 (the same errors as the complaint). The gates did not run and `samples/.check-docx.txt` was not written.
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`; a doc-type folder has neither, so the script exits 2 (the same errors as the complaint). The gates did not run and `usage/.check-docx.txt` was not written.

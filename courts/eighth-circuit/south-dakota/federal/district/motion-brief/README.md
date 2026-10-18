@@ -5,11 +5,11 @@ Folder: `courts/eighth-circuit/south-dakota/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-lone-eagle-5-26-cv-05068-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-lone-eagle-motion-to-dismiss.md` (the full filed text of the exemplar; see below) |
+| exemplar | yes: `usage/SAMPLE-sdd-motion-brief-loneeagle526cv05068.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-sdd-motion-brief-loneeaglemotiontodismiss.md` (the full filed text of the exemplar; see below) |
 | typeface | face required: **none** (D.S.D. Civ. LR 83.4 says only "Fonts must be at least 12-point"; checked in the official PDF 2026-10-14). Substitute: none; **EB Garamond** kept, as `docs/FONTS.md` says for a court that names no face. Fit: n/a. |
-| render | ok: `samples/OUTPUT-lone-eagle-motion-to-dismiss.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond-Regular, -Bold and -Italic embedded |
-| overlay | ok: `samples/OVERLAY-lone-eagle-motion-to-dismiss.pdf` and `OVERLAY-lone-eagle-motion-to-dismiss.txt`, built against the filed exemplar fetched from the RECAP URL in `exemplars/SOURCE.md` (the PDF is not in `exemplars/` in this snapshot; pass it as the third argument to `tools/overlay.sh`) |
+| render | ok: `usage/OUTPUT-sdd-motion-brief-loneeaglemotiontodismiss.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond-Regular, -Bold and -Italic embedded |
+| overlay | ok: `usage/OVERLAY-lone-eagle-motion-to-dismiss.pdf` and `OVERLAY-lone-eagle-motion-to-dismiss.txt`, built against the filed exemplar fetched from the RECAP URL in `usage/SOURCE.md` (the PDF is not in `usage/` in this snapshot; pass it as the third argument to `tools/overlay.sh`) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed again on 2026-10-14 after the fonts-pass re-render) |
 | tier 2 | not met to the eval-loop standard: one filer so far (see Known gaps) |
 
@@ -53,7 +53,7 @@ Not produced by this template: a table of contents or table of authorities (not 
 
 ## Overlay (red/blue test)
 
-`samples/OVERLAY-lone-eagle-motion-to-dismiss.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (see `samples/OVERLAY-lone-eagle-motion-to-dismiss.txt`):
+`usage/OVERLAY-lone-eagle-motion-to-dismiss.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (see `usage/OVERLAY-lone-eagle-motion-to-dismiss.txt`):
 
 - our p.1 over filed p.1 (82.5% word overlap)
 - our p.2 over filed p.2 (67.5%)
@@ -97,7 +97,7 @@ The first render had every paragraph's last line overlapped by the next paragrap
 
 ## Engines
 
-Typst is the primary engine (`typst/`). The DOCX engine is `docx/`: pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`) and the filter `docx/sdd-motion-brief.lua`. Its output is `samples/OUTPUT-lone-eagle-motion-to-dismiss.docx`; the LibreOffice PDF of it (`OUTPUT-lone-eagle-motion-to-dismiss.docx.pdf`) was not produced (see BLOCKED).
+Typst is the primary engine (`typst/`). The DOCX engine is `docx/`: pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`) and the filter `docx/sdd-motion-brief.lua`. Its output is `usage/OUTPUT-sdd-motion-brief-loneeaglemotiontodismiss.docx`; the LibreOffice PDF of it (`OUTPUT-sdd-motion-brief-loneeaglemotiontodismiss.docx.pdf`) was not produced (see BLOCKED).
 
 What the docx follows from the same rules as the typst template (checked in the style and section XML, not on a render):
 
@@ -124,5 +124,5 @@ Differences and open items:
 
 docx BLOCKED items:
 
-- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF of `OUTPUT-lone-eagle-motion-to-dismiss.docx`): **BLOCKED**. LibreOffice is not on conda-forge and apt needs root. The Debian trixie LibreOffice 25.2.3 debs, extracted without root into a private prefix, abort at UNO bootstrap (`terminate called after throwing an instance of 'com::sun::star::uno::RuntimeException'`, also for `soffice --version`); the cause was not found. No `.docx.pdf` exists, so no docx Gate 0 to 3 result and no docx page was reviewed.
+- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF of `OUTPUT-sdd-motion-brief-loneeaglemotiontodismiss.docx`): **BLOCKED**. LibreOffice is not on conda-forge and apt needs root. The Debian trixie LibreOffice 25.2.3 debs, extracted without root into a private prefix, abort at UNO bootstrap (`terminate called after throwing an instance of 'com::sun::star::uno::RuntimeException'`, also for `soffice --version`); the cause was not found. No `.docx.pdf` exists, so no docx Gate 0 to 3 result and no docx page was reviewed.
 - Word: the `.docx` was not opened in Word (not available here), so the "opens without a repair prompt" check is not done. The package parts are well-formed XML (`xmllint`).

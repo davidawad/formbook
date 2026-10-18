@@ -1,4 +1,4 @@
--- S.D. Ohio pleading, DOCX engine (docs/DOCX.md): the markdown contract of samples/INPUT-<id>.md -> Word.
+-- S.D. Ohio pleading, DOCX engine (docs/DOCX.md): the markdown contract of usage/INPUT-<id>.md -> Word.
 -- Mirrors typst/ohsd-*.typ: court title, caption table (parties left with right and bottom rules; case
 -- number, judge, title and legend right), numbered allegations (Fed. R. Civ. P. 10(b)), lettered items
 -- (prayer for relief), signature blocks kept together (cantSplit rows, keepNext on the closing paragraph),

@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district/m
 
 | Item | Status |
 |---|---|
-| exemplar | **yes**: `exemplars/FILED-EXAMPLE-clanton-26-11416-motion-brief.pdf` (Fairport Asset Management REO 2, LLC, Doc. 39, 14 pages, filed 2026-07-14). Source and URL in `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-clanton.md`: transcription of the filed motion (caption, headings, numbered paragraphs, lettered grounds and relief, signature, certificate of service). The synthetic sample `samples/INPUT-synthetic-motion-brief.md` is kept as a second input. |
-| render | ok: `samples/OUTPUT-clanton.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`). |
-| overlay | ok: `samples/OVERLAY-clanton.pdf` and `samples/OVERLAY-clanton.txt` (`sh tools/overlay.sh`, 13 pages). |
+| exemplar | **yes**: `usage/SAMPLE-msnb-motion-brief-clanton2611416.pdf` (Fairport Asset Management REO 2, LLC, Doc. 39, 14 pages, filed 2026-07-14). Source and URL in `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-msnb-motion-brief-clanton.md`: transcription of the filed motion (caption, headings, numbered paragraphs, lettered grounds and relief, signature, certificate of service). The synthetic sample `usage/INPUT-msnb-motion-brief-synthetic.md` is kept as a second input. |
+| render | ok: `usage/OUTPUT-msnb-motion-brief-clanton.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`). |
+| overlay | ok: `usage/OVERLAY-clanton.pdf` and `usage/OVERLAY-clanton.txt` (`sh tools/overlay.sh`, 13 pages). |
 | pages reviewed | 13 of 13 (OUTPUT rendered at 60 dpi and viewed page by page; overlay pages 1 to 4 viewed). |
 
 ## Governing rules
@@ -63,7 +63,7 @@ The filed exemplar is 14 pages, double spaced, with an ECF header line at the to
 
 ## Overlay
 
-`samples/OVERLAY-clanton.pdf`: red is our render, blue is the filed exemplar, black where both agree. The pages are paired by text (`samples/OVERLAY-clanton.txt`): ours p.1 to p.13 map to filed p.1, 2, 4, 5, 6, 6, 7, 8, 9, 11, 12, 13, 14. Word overlap per page is 37% to 80%. The overlay is a diagnostic: the text layers match, but the lines do not register, because the filed paper has an ECF header and a different line spacing and margin set.
+`usage/OVERLAY-clanton.pdf`: red is our render, blue is the filed exemplar, black where both agree. The pages are paired by text (`usage/OVERLAY-clanton.txt`): ours p.1 to p.13 map to filed p.1, 2, 4, 5, 6, 6, 7, 8, 9, 11, 12, 13, 14. Word overlap per page is 37% to 80%. The overlay is a diagnostic: the text layers match, but the lines do not register, because the filed paper has an ECF header and a different line spacing and margin set.
 
 ## Known gaps and open choices
 
@@ -76,7 +76,7 @@ The filed exemplar is 14 pages, double spaced, with an ECF header line at the to
 
 ## Review of the rendered pages
 
-Every page of `samples/OUTPUT-clanton.pdf` was rendered at 60 dpi and viewed.
+Every page of `usage/OUTPUT-msnb-motion-brief-clanton.typst.pdf` was rendered at 60 dpi and viewed.
 
 - Pages 1 to 3: counsel block, court title, caption, title, introduction, background, paragraphs 1 to 6, the Calhoun and Webster property descriptions begin. Pass.
 - Pages 4 to 6: legal descriptions of the TRACT 1 to 3 parcels with LESS AND EXCEPT paragraphs and the tracts list. Pass.
@@ -86,7 +86,7 @@ Every page of `samples/OUTPUT-clanton.pdf` was rendered at 60 dpi and viewed.
 
 ## Engines
 
-Docx engine (`docx/`): `reference.docx` (built by `docx/make-reference.sh`), `motion-brief.lua` (caption, signature and OF COUNSEL blocks, numbered and lettered paragraphs, footnote notes), and `render.sh` (the pandoc call; `tools/render-docx.sh` uses it). Renders: `samples/OUTPUT-clanton.docx` and `.docx.pdf` (13 pages, LibreOffice 26.8), and `samples/OUTPUT-synthetic-motion-brief.docx` and `.docx.pdf` (3 pages).
+Docx engine (`docx/`): `reference.docx` (built by `docx/make-reference.sh`), `motion-brief.lua` (caption, signature and OF COUNSEL blocks, numbered and lettered paragraphs, footnote notes), and `render.sh` (the pandoc call; `tools/render-docx.sh` uses it). Renders: `usage/OUTPUT-msnb-motion-brief-clanton.docx` and `.docx.pdf` (13 pages, LibreOffice 26.8), and `usage/OUTPUT-msnb-motion-brief-synthetic.docx` and `.docx.pdf` (3 pages).
 
 | Item | Typst (primary) | Docx | Note |
 |---|---|---|---|
@@ -108,4 +108,4 @@ BLOCKED / not verified for docx:
 - Gates 0 to 3 (`tools/check.sh --engine docx`) cannot run: this court has no `rules.md` or `checks.yaml` yet, and `yq` is not on the box.
 - The `.docx` was opened in LibreOffice (the PDF conversion succeeded) but not in Microsoft Word; "opens without a repair prompt in Word" is not verified.
 - Local rules are unread (see above), so tier-1 form is the same standard-letter default as the typst template.
-- `samples/INPUT-synthetic-motion-brief.md` does not render in typst (`signature.title` is missing from its frontmatter, so `typst/msnb-motion-brief.typ` fails). The docx renders it with a blank title line under the signature.
+- `usage/INPUT-msnb-motion-brief-synthetic.md` does not render in typst (`signature.title` is missing from its frontmatter, so `typst/msnb-motion-brief.typ` fails). The docx renders it with a blank title line under the signature.

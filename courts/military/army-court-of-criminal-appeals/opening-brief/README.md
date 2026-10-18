@@ -2,8 +2,8 @@
 
 - Court: `acca`, U.S. Army Court of Criminal Appeals (`courts/military/army-court-of-criminal-appeals/`)
 - Doc type: `opening-brief`. The appellant's brief (assignments of error and argument), ACCA Rule 17.1(a) and Appendix A ("Format for Brief on Behalf of Appellant").
-- Exemplar: `exemplars/FILED-EXAMPLE-akbar-20050514-opening-brief.pdf`, an 11-page extract of *United States v. Akbar*, Army Dkt. 20050514, Brief on Behalf of Appellant, filed 1 February 2010 by the Defense Appellate Division (source, page map: `exemplars/SOURCE.md`). Found on the fourth search pass (2026-10-16, bead fb-595.20.20).
-- Samples: `samples/INPUT-akbar-opening-brief.md` (transcription of the extract); `samples/INPUT-fictional-opening-brief.md` (FICTIONAL structural fixture, kept).
+- Exemplar: `usage/SAMPLE-acca-opening-brief-akbar20050514.pdf`, an 11-page extract of *United States v. Akbar*, Army Dkt. 20050514, Brief on Behalf of Appellant, filed 1 February 2010 by the Defense Appellate Division (source, page map: `usage/SOURCE.md`). Found on the fourth search pass (2026-10-16, bead fb-595.20.20).
+- Samples: `usage/INPUT-acca-opening-brief-akbar.md` (transcription of the extract); `usage/INPUT-acca-opening-brief-fictional.md` (FICTIONAL structural fixture, kept).
 - Template: `typst/acca-opening-brief.typ` (entry `typst/main.typ`).
 - Status (2026-10-16): rule text retrieved and applied (Times New Roman 14 pt via Liberation Serif, double-spaced, 1 in margins, Appendix A caption). Render ok (10 pages), overlay ok, every page reviewed. `tools/check.sh` not run (no `checks.yaml` here). `court.json` untouched.
 
@@ -13,11 +13,11 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...`, calls `acca-brief`. |
 | `typst/acca-opening-brief.typ` | Template. Parameter block at the top: `brief-title`, `court-line`, `address-line`, `font-family`, `type-size`, `body-leading`, `page-margin`. |
-| `samples/INPUT-akbar-opening-brief.md` | Transcription of the exemplar extract (brief pp. 1, 17-22, 481-483 and the certificate). |
-| `samples/OUTPUT-akbar-opening-brief.pdf` | `sh tools/render.sh courts/military/army-court-of-criminal-appeals/opening-brief samples/INPUT-akbar-opening-brief.md` (10 pages). |
-| `samples/OVERLAY-akbar-opening-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/opening-brief akbar-opening-brief`. |
-| `samples/INPUT-fictional-opening-brief.md`, `OUTPUT-fictional-opening-brief.pdf` | FICTIONAL fixture and its render (5 pages). No overlay (it is not a transcription). |
-| `exemplars/SOURCE.md` | Exemplar record, page map, and every search pass. |
+| `usage/INPUT-acca-opening-brief-akbar.md` | Transcription of the exemplar extract (brief pp. 1, 17-22, 481-483 and the certificate). |
+| `usage/OUTPUT-acca-opening-brief-akbar.typst.pdf` | `sh tools/render.sh courts/military/army-court-of-criminal-appeals/opening-brief usage/INPUT-acca-opening-brief-akbar.md` (10 pages). |
+| `usage/OVERLAY-akbar-opening-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/opening-brief akbar-opening-brief`. |
+| `usage/INPUT-acca-opening-brief-fictional.md`, `OUTPUT-acca-opening-brief-fictional.typst.pdf` | FICTIONAL fixture and its render (5 pages). No overlay (it is not a transcription). |
+| `usage/SOURCE.md` | Exemplar record, page map, and every search pass. |
 
 ## Markdown contract
 
@@ -50,7 +50,7 @@ Superseded: the earlier stand-ins (32 CFR 150.15 and App. B, AFCCA Rule 17.1, EB
 
 ## Overlay
 
-`sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/opening-brief akbar-opening-brief` exit 0. Page map (`samples/OVERLAY-akbar-opening-brief.txt`):
+`sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/opening-brief akbar-opening-brief` exit 0. Page map (`usage/OVERLAY-akbar-opening-brief.txt`):
 
 | Ours | Filed (extract) | Word overlap | Note |
 |---|---|---|---|
@@ -69,7 +69,7 @@ The filed brief is Courier 12 pt (pre-2019 rules); ours is Times-metric 14 pt pe
 
 ## Page review (Gate 2), 2026-10-16
 
-Every page of `OUTPUT-akbar-opening-brief.pdf` (10) and `OVERLAY-akbar-opening-brief.pdf` (10) rasterized at 60 dpi and viewed; the filed extract's 11 pages viewed too. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only. Typst printed no warnings.
+Every page of `OUTPUT-acca-opening-brief-akbar.typst.pdf` (10) and `OVERLAY-akbar-opening-brief.pdf` (10) rasterized at 60 dpi and viewed; the filed extract's 11 pages viewed too. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only. Typst printed no warnings.
 
 | Page | Content | Result |
 |---|---|---|
@@ -88,11 +88,11 @@ Every page of `OUTPUT-akbar-opening-brief.pdf` (10) and `OVERLAY-akbar-opening-b
 2. The exemplar predates the 2019 rules (Courier, title page style of 2010). The 2019 Appendix A form decides the layout; no post-2019 ACCA brief was found.
 3. Extract p. 1 of the exemplar has no text layer, so the overlay pairs ours p. 1 by eye only.
 4. No `checks.yaml`; `tools/check.sh` was not run and no stamp is claimed.
-5. The docx engine (`docx/`) was not changed in this pass (bead scope) and still builds the old EB Garamond 12 pt cover-page form; `samples/OUTPUT-fictional-opening-brief.docx` is from that older form. It must be brought to R. 13.2 / App. A in a docx pass.
+5. The docx engine (`docx/`) was not changed in this pass (bead scope) and still builds the old EB Garamond 12 pt cover-page form; `usage/OUTPUT-acca-opening-brief-fictional.docx` is from that older form. It must be brought to R. 13.2 / App. A in a docx pass.
 
 ## History
 
-- 2026-10-14 (unit acca-32.22) and 2026-10-15 (bead fb-595.20.4): no exemplar; template built from 32 CFR 150 with PROVISIONAL AFCCA values (EB Garamond 12 pt, cover page). Searches in `exemplars/SOURCE.md`.
+- 2026-10-14 (unit acca-32.22) and 2026-10-15 (bead fb-595.20.4): no exemplar; template built from 32 CFR 150 with PROVISIONAL AFCCA values (EB Garamond 12 pt, cover page). Searches in `usage/SOURCE.md`.
 - 2026-10-16 (bead fb-595.20.20): ACCA rules and the *Akbar* briefs found via the Internet Archive; template changed to R. 13.2 / 17.1 / App. A; *Akbar* sample, render and overlay added.
 
 ## Engines

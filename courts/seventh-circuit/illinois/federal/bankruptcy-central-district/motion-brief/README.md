@@ -6,20 +6,20 @@ Doc type: a motion filed in an adversary proceeding, with its memorandum of law 
 
 | Path | What |
 |---|---|
-| `exemplars/` | Two filed memoranda in support of motions to dismiss, from two different filers, with `SOURCE.md`. |
+| `usage/` | Two filed memoranda in support of motions to dismiss, from two different filers, with `SOURCE.md`. |
 | `typst/ilcb-motion-brief.typ` | The template: `ilcb-motion-brief(meta, md)`. Content-agnostic; each number is a named parameter at the top. |
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...`. |
-| `samples/INPUT-reinbold-menard-motion-brief.md` | Transcribed in full from the first exemplar (Menard, Inc., Ottosen DiNolfo, Doc 21). |
-| `samples/OUTPUT-reinbold-menard-motion-brief.pdf` | Our render (14 pages). |
-| `samples/OVERLAY-reinbold-menard-motion-brief.pdf`, `.txt` | Red/blue overlay against the first exemplar, and the page map. |
+| `usage/INPUT-ilcb-motion-brief-reinboldmenard.md` | Transcribed in full from the first exemplar (Menard, Inc., Ottosen DiNolfo, Doc 21). |
+| `usage/OUTPUT-ilcb-motion-brief-reinboldmenard.typst.pdf` | Our render (14 pages). |
+| `usage/OVERLAY-reinbold-menard-motion-brief.pdf`, `.txt` | Red/blue overlay against the first exemplar, and the page map. |
 
 File names follow the repo's role convention (`INPUT-`, `OUTPUT-`, `OVERLAY-`) because `tools/render.sh` and `tools/overlay.sh` read and write those names.
 
 Build (from the repo root, with the toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/seventh-circuit/illinois/federal/bankruptcy-central-district/motion-brief samples/INPUT-reinbold-menard-motion-brief.md
-sh tools/overlay.sh courts/seventh-circuit/illinois/federal/bankruptcy-central-district/motion-brief reinbold-menard-motion-brief courts/seventh-circuit/illinois/federal/bankruptcy-central-district/motion-brief/exemplars/FILED-EXAMPLE-reinbold-menard-19-08110-motion-brief.pdf
+sh tools/render.sh courts/seventh-circuit/illinois/federal/bankruptcy-central-district/motion-brief usage/INPUT-ilcb-motion-brief-reinboldmenard.md
+sh tools/overlay.sh courts/seventh-circuit/illinois/federal/bankruptcy-central-district/motion-brief reinbold-menard-motion-brief courts/seventh-circuit/illinois/federal/bankruptcy-central-district/motion-brief/usage/SAMPLE-ilcb-motion-brief-reinboldmenard1908110.pdf
 ```
 
 The overlay takes the exemplar as an explicit argument, because its default (the alphabetically first exemplar) is the Walmart memorandum, not the Menard memorandum the sample comes from.
@@ -56,7 +56,7 @@ Body: `#` is a centered bold section heading (I. INTRODUCTION, IV. CONCLUSION). 
 
 ## Overlay
 
-`samples/OVERLAY-reinbold-menard-motion-brief.pdf`: red is our render, blue is the filed Menard memorandum, black is where they agree. The page map (`.txt`) pairs our pages with the filed pages by shared words: our pages 1 to 10 pair with filed pages 1 to 10 (word overlap 44.5% to 86.2%); our page 11 pairs with filed page 12, our 12 with 13, 13 with 14, 14 with 15. So from page 11 on our pagination runs one page ahead of the filed copy in the overlay's reckoning. The differences that the overlay shows are tier 2 or tier 3: the typeface (EB Garamond against the filed copy's Arial), the page breaks (the filer's line and page breaks differ from ours), and the filed copy's own footer, "Page X of 15", where the template prints a centered page number. The filed copy also carries the CM/ECF header ("Case 19-08110 Doc 21 Filed ...") that the court system adds on filing, which the template does not generate.
+`usage/OVERLAY-reinbold-menard-motion-brief.pdf`: red is our render, blue is the filed Menard memorandum, black is where they agree. The page map (`.txt`) pairs our pages with the filed pages by shared words: our pages 1 to 10 pair with filed pages 1 to 10 (word overlap 44.5% to 86.2%); our page 11 pairs with filed page 12, our 12 with 13, 13 with 14, 14 with 15. So from page 11 on our pagination runs one page ahead of the filed copy in the overlay's reckoning. The differences that the overlay shows are tier 2 or tier 3: the typeface (EB Garamond against the filed copy's Arial), the page breaks (the filer's line and page breaks differ from ours), and the filed copy's own footer, "Page X of 15", where the template prints a centered page number. The filed copy also carries the CM/ECF header ("Case 19-08110 Doc 21 Filed ...") that the court system adds on filing, which the template does not generate.
 
 ## Pages reviewed
 
@@ -86,7 +86,7 @@ Fonts pass, 2026-10-15: no court rule names a face, so the face stays EB Garamon
 ## Engines
 
 - **typst** (primary): unchanged by the docx work. The typst render of the sample is 14 pages.
-- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` (same reference as the adversary complaint: EB Garamond 13 pt, exact 28.4 pt body pitch, 0.5 in first-line indent, single-spaced 11 pt footnotes and block quotations, Letter with 1 in margins, centered PAGE footer, custom styles for the caption, title, signature, counsel and certificate of service). `docx/ilcb-motion-brief.lua` writes the court heading, the caption table, the title, the signature block and the certificate of service. Rendered with `tools/render.sh --engine docx`: `samples/OUTPUT-reinbold-menard-motion-brief.docx` and `.docx.pdf` (15 pages). Converted by LibreOffice (`soffice --headless`) with no error and no repair; the zip and every XML part validate. Not opened in Word.
+- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` (same reference as the adversary complaint: EB Garamond 13 pt, exact 28.4 pt body pitch, 0.5 in first-line indent, single-spaced 11 pt footnotes and block quotations, Letter with 1 in margins, centered PAGE footer, custom styles for the caption, title, signature, counsel and certificate of service). `docx/ilcb-motion-brief.lua` writes the court heading, the caption table, the title, the signature block and the certificate of service. Rendered with `tools/render.sh --engine docx`: `usage/OUTPUT-ilcb-motion-brief-reinboldmenard.docx` and `.docx.pdf` (15 pages). Converted by LibreOffice (`soffice --headless`) with no error and no repair; the zip and every XML part validate. Not opened in Word.
 - **Matches typst**: typeface and size, line pitch, first-line indent, no space between body paragraphs, margins, page numbers, caption, title, headings I to IV and A/B and i/ii levels, footnote and block-quote formatting, the signature block, counsel lines, and the certificate of service text. Pages 1 to 15 viewed at 60 dpi against the typst render (15 of 15).
 - **Differs (tier 2)**: level-1 headings are centered bold 13 pt in the docx; the typst render prints them left-aligned and larger (about 18 pt). Exact line spacing puts the first line of each page slightly lower than typst. The docx runs one page longer (15 against 14): the chain of keep-with-next from the last WHEREFORE paragraph through the signature and counsel block leaves the certificate of service alone on page 15, where typst fits it on page 14.
 - **docx BLOCKED**: `sh tools/check.sh <this folder> --engine docx` cannot run. It exits 2 because this folder has no `court.json` and no `checks.yaml`, so no check ID ran and no `.check-docx.txt` stamp was written. Not a pass.

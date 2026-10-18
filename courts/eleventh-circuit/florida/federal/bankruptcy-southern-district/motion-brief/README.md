@@ -2,7 +2,7 @@
 
 Court: United States Bankruptcy Court, Southern District of Florida (`flsb`). Doc type: motion brief under Fed. R. Bankr. P. 9013 with its memorandum (filed in an adversary proceeding).
 
-**exemplar=yes, with a scope limit.** Filed exemplar: `exemplars/FILED-EXAMPLE-laspro-alinia-16-01315-motion-brief.pdf`. It is the **memorandum in support of a motion to dismiss** (ECF 49, 2017), not the motion itself (ECF 29). See `exemplars/SOURCE.md`.
+**exemplar=yes, with a scope limit.** Filed exemplar: `usage/SAMPLE-flsb-motion-brief-lasproalinia1601315.pdf`. It is the **memorandum in support of a motion to dismiss** (ECF 49, 2017), not the motion itself (ECF 29). See `usage/SOURCE.md`.
 
 ## Governing rules
 
@@ -26,15 +26,15 @@ PDF text layer: L.R. 9004-1(a)(1) requires text-searchable PDF; the output has o
 |---|---|
 | `typst/flsb-motion-brief.typ` | Template: `flsb-motion-brief(meta, body)`. Content-agnostic; case words come from the sample's frontmatter. |
 | `typst/main.typ` | Entry point. |
-| `samples/INPUT-alinia-memorandum.md` | Transcription of the exemplar: caption, title, body (pages 1–12), footnotes 1–2, conclusion, signature block, certificate of service with service list. |
-| `samples/OUTPUT-alinia-memorandum.pdf` | Our render. |
-| `samples/OVERLAY-alinia-memorandum.pdf`, `.txt` | Red/blue overlay and page map. |
-| `exemplars/` | The filed PDF and `SOURCE.md`. |
+| `usage/INPUT-flsb-motion-brief-aliniamemorandum.md` | Transcription of the exemplar: caption, title, body (pages 1–12), footnotes 1–2, conclusion, signature block, certificate of service with service list. |
+| `usage/OUTPUT-flsb-motion-brief-aliniamemorandum.typst.pdf` | Our render. |
+| `usage/OVERLAY-alinia-memorandum.pdf`, `.txt` | Red/blue overlay and page map. |
+| `usage/` | The filed PDF and `SOURCE.md`. |
 
 Commands, from the repo root with the toolchain on `PATH`:
 
 ```sh
-sh tools/render.sh courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/motion-brief samples/INPUT-alinia-memorandum.md
+sh tools/render.sh courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/motion-brief usage/INPUT-flsb-motion-brief-aliniamemorandum.md
 sh tools/overlay.sh courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/motion-brief alinia-memorandum
 ```
 
@@ -42,11 +42,11 @@ File-name note: as in the complaint README, the tools write `OUTPUT-<id>.pdf` an
 
 ## Overlay (red/blue test)
 
-Pairings from `samples/OVERLAY-alinia-memorandum.txt` (word overlap, a diagnostic, not a score): ours p.1 → filed p.1 (76.0%), p.2 → p.2 (63.6%), p.3 → p.4 (55.7%), p.4 → p.5 (83.1%), p.5 → p.6 (77.2%), p.6 → p.8 (53.5%), p.7 → p.9 (62.9%), p.8 → p.10 (82.3%), p.9 → p.11 (76.8%), p.10 → p.12 (77.8%). From page 3 on our page numbers differ from the exemplar's, so compare the overlay by content, not by page number. The filed pages 14 and 15 have no text layer, so the overlay cannot pair against them.
+Pairings from `usage/OVERLAY-alinia-memorandum.txt` (word overlap, a diagnostic, not a score): ours p.1 → filed p.1 (76.0%), p.2 → p.2 (63.6%), p.3 → p.4 (55.7%), p.4 → p.5 (83.1%), p.5 → p.6 (77.2%), p.6 → p.8 (53.5%), p.7 → p.9 (62.9%), p.8 → p.10 (82.3%), p.9 → p.11 (76.8%), p.10 → p.12 (77.8%). From page 3 on our page numbers differ from the exemplar's, so compare the overlay by content, not by page number. The filed pages 14 and 15 have no text layer, so the overlay cannot pair against them.
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-alinia-memorandum.pdf` (10 pages) was rendered at 60 dpi and looked at. `pages_reviewed=10`.
+Every page of `OUTPUT-flsb-motion-brief-aliniamemorandum.typst.pdf` (10 pages) was rendered at 60 dpi and looked at. `pages_reviewed=10`.
 
 | Page | Result |
 |---|---|
@@ -80,14 +80,14 @@ Defects found and fixed while reviewing:
 
 ## Engines
 
-Word (`docx/`): pandoc with `docx/reference.docx` (built by `docx/make-reference.sh`, from pandoc's default) and `docx/flsb-motion-brief.lua`; `docx/render.sh` writes `samples/OUTPUT-alinia-memorandum.docx`. Run `sh tools/render.sh --engine docx <this dir> samples/INPUT-alinia-memorandum.md`.
+Word (`docx/`): pandoc with `docx/reference.docx` (built by `docx/make-reference.sh`, from pandoc's default) and `docx/flsb-motion-brief.lua`; `docx/render.sh` writes `usage/OUTPUT-flsb-motion-brief-aliniamemorandum.docx`. Run `sh tools/render.sh --engine docx <this dir> usage/INPUT-flsb-motion-brief-aliniamemorandum.md`.
 
 What matches the typst output: EB Garamond 12 pt; 1-inch margins on letter paper; double spacing (24 pt exact) for body paragraphs with a half-inch first-line indent; single-spaced caption, block quotations, signature block (indented three inches) and certificates; 10-point footnotes; centered page number; the caption as a borderless table with "Case No.", "Chapter" and "Adv. Case No." labels; centered bold section headings (level 1 in capitals) and kept with the next paragraph; lettered and roman parentheticals at a half-inch left indent; the Certificate of Conferral when `conferral:` is given; the Certificate of Service with its service list.
 
 What differs: the last body paragraph is not kept with the signature block (the typst template does, so a signature never stands alone); the Heading 2 style is left-aligned as in the typst template, but page breaks may differ from the typst PDF; the footnote and block-quote spacing follows the reference styles and may differ by a line from the typst output. The EB Garamond font must be installed on the machine that opens the file.
 
 docx BLOCKED (not verified; see docs/DOCX.md):
-- `docx.pdf` gates (all of `tools/check.sh --engine docx`, which measure the LibreOffice PDF): BLOCKED: LibreOffice (`soffice`) is not installed in this environment and is not in conda-forge, so `samples/OUTPUT-alinia-memorandum.docx.pdf` was not produced and no page was rendered or reviewed. `tools/check.sh` also cannot run here yet (it needs `yq`, `checks.yaml` and `court.json` for this doc type).
+- `docx.pdf` gates (all of `tools/check.sh --engine docx`, which measure the LibreOffice PDF): BLOCKED: LibreOffice (`soffice`) is not installed in this environment and is not in conda-forge, so `usage/OUTPUT-alinia-memorandum.docx.pdf` was not produced and no page was rendered or reviewed. `tools/check.sh` also cannot run here yet (it needs `yq`, `checks.yaml` and `court.json` for this doc type).
 - The `.docx` itself was written and its XML parts are well-formed (`unzip -t`, `xmllint`). It has not been opened in Word or LibreOffice, so "opens without a repair prompt" is unchecked.
 
 ## Status

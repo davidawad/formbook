@@ -5,11 +5,11 @@ Folder: `courts/sixth-circuit/michigan/federal/bankruptcy-western-district/adver
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `exemplars/FILED-EXAMPLE-spiech-farms-17-05398-adversary-complaint.pdf` (primary; Rayman & Knight for the Chapter 11 debtor, 2017) and `exemplars/FILED-EXAMPLE-fuller-25-02060-adversary-complaint.pdf` (Chapter 7 debtor, 2026, through counsel). Provenance in `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-spiech-complaint.md`: the whole 8-page complaint transcribed, exhibits left out |
-| render | ok: `samples/OUTPUT-spiech-complaint.pdf`, 9 pages, letter, 67 KB, typst 0.15.0 with vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> samples/INPUT-spiech-complaint.md`) |
-| overlay | ok: `samples/OVERLAY-spiech-complaint.pdf` (red = ours, blue = filed Spiech, black = both) and `samples/OVERLAY-spiech-complaint.txt` (page map). Run as `sh tools/overlay.sh <this dir> spiech-complaint <this dir>/exemplars/FILED-EXAMPLE-spiech-farms-17-05398-adversary-complaint.pdf`; see "Overlay" for why the exemplar is passed explicitly |
-| pages reviewed | 9 of 9 (every page of the final `OUTPUT-spiech-complaint.pdf` rendered at 60 dpi and viewed) |
+| exemplar | yes, two filers: `usage/SAMPLE-miwb-adversary-complaint-spiechfarms1705398.pdf` (primary; Rayman & Knight for the Chapter 11 debtor, 2017) and `usage/SAMPLE-miwb-adversary-complaint-fuller2502060.pdf` (Chapter 7 debtor, 2026, through counsel). Provenance in `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-miwb-adversary-complaint-spiechcomplaint.md`: the whole 8-page complaint transcribed, exhibits left out |
+| render | ok: `usage/OUTPUT-miwb-adversary-complaint-spiechcomplaint.typst.pdf`, 9 pages, letter, 67 KB, typst 0.15.0 with vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-miwb-adversary-complaint-spiechcomplaint.md`) |
+| overlay | ok: `usage/OVERLAY-spiech-complaint.pdf` (red = ours, blue = filed Spiech, black = both) and `usage/OVERLAY-spiech-complaint.txt` (page map). Run as `sh tools/overlay.sh <this dir> spiech-complaint <this dir>/usage/SAMPLE-miwb-adversary-complaint-spiechfarms1705398.pdf`; see "Overlay" for why the exemplar is passed explicitly |
+| pages reviewed | 9 of 9 (every page of the final `OUTPUT-miwb-adversary-complaint-spiechcomplaint.typst.pdf` rendered at 60 dpi and viewed) |
 
 File names follow the tools (`INPUT-` / `OUTPUT-` / `OVERLAY-`), not the `<id>.pdf` form in the brief: `tools/render.sh` and `tools/overlay.sh` read and write those names by default.
 
@@ -45,7 +45,7 @@ Sources were fetched 2026-10-14. The local rules are the court's own PDF ("Local
 
 ## Engines
 
-docx (`docx/`): pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`), the Lua filter `docx/miwb-adversary-complaint.lua` (caption, numbered allegations, the generated statements, signing block), and `docx/render.sh`, which puts back the reference styles, page setup and footer that pandoc drops. Built and checked on this box as far as possible: `OUTPUT-spiech-complaint.docx` is written; the zip has no duplicate entries and every XML part is well formed.
+docx (`docx/`): pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`), the Lua filter `docx/miwb-adversary-complaint.lua` (caption, numbered allegations, the generated statements, signing block), and `docx/render.sh`, which puts back the reference styles, page setup and footer that pandoc drops. Built and checked on this box as far as possible: `OUTPUT-miwb-adversary-complaint-spiechcomplaint.docx` is written; the zip has no duplicate entries and every XML part is well formed.
 
 - Matches the typst reference (set in the reference, not yet measured on a rendered page): EB Garamond 13 pt throughout; exact 27.6 pt line spacing for body, numbered paragraphs and headings; 0.5 in first-line indent; numbers at 0.5 in with text at 1 in (tab stop); letter size with 1 in margins (12240 x 15840 twips, 1440 margins); headings 1 and 2 centered bold capitals, heading 3 bold at the margin; footnote text 13 pt single spaced; footer "Page n of N" at 11 pt, centered (PAGE and NUMPAGES fields). The typst baseline pitch measures 27.65 pt on page 2 of `/work/artifacts/miwb/adversary-complaint/OUTPUT-spiech-complaint.pdf` (pdftotext bbox), which is the value the docx declares.
 - Differs from typst: the caption rule is a cell border (bottom, and right on the adversary block), not the typst "_____/" slash rule; caption spacing is set in twips, so line positions may differ by a point or two. Numbers on allegations are typed text, not Word automatic numbering, so an inserted paragraph will not renumber the rest. Lettered lists are typed "a." labels with a hanging 0.5 in indent. Page count and line breaks are not measured yet (no rendered docx.pdf).
@@ -54,7 +54,7 @@ docx (`docx/`): pandoc with `docx/reference.docx` (built by `docx/build-referenc
 
 ## Overlay
 
-`samples/OVERLAY-spiech-complaint.pdf` pairs each rendered page with the Spiech exemplar page that shares the most words (`OVERLAY-spiech-complaint.txt`):
+`usage/OVERLAY-spiech-complaint.pdf` pairs each rendered page with the Spiech exemplar page that shares the most words (`OVERLAY-spiech-complaint.txt`):
 
 | ours | filed | word overlap |
 |---|---|---|
@@ -68,7 +68,7 @@ docx (`docx/`): pandoc with `docx/reference.docx` (built by `docx/build-referenc
 | 8 | 7 | 57.1% |
 | 9 | 8 | 73.1% |
 
-Read it as a diagnostic, not a score. The differences are expected: the template prints the petition-date and core statements from the fields (in the rule's position) where the filer's paragraphs 1, 2 and 5 were written out; the caption's "In re:" is the form's wording where the filer wrote "IN THE MATTER OF:"; the filer's ECF header and footer ("Case:17-05398-jtg Doc #:3 Filed..." at the top) are court-applied and not reproduced. The overlay default chooses `ls exemplars/*.pdf | head -1`, which is the Fuller file alphabetically; the Spiech file is passed explicitly because it is the primary exemplar.
+Read it as a diagnostic, not a score. The differences are expected: the template prints the petition-date and core statements from the fields (in the rule's position) where the filer's paragraphs 1, 2 and 5 were written out; the caption's "In re:" is the form's wording where the filer wrote "IN THE MATTER OF:"; the filer's ECF header and footer ("Case:17-05398-jtg Doc #:3 Filed..." at the top) are court-applied and not reproduced. The overlay default chooses `ls usage/*.pdf | head -1`, which is the Fuller file alphabetically; the Spiech file is passed explicitly because it is the primary exemplar.
 
 ## Second exemplar (tier 2)
 
@@ -94,8 +94,8 @@ CourtListener v4 search, `court=miwb`, `type=r`: "adversary" (1,301 hits), "comp
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (see the brief's toolchain steps)
 cd /work/repo
-sh tools/render.sh courts/sixth-circuit/michigan/federal/bankruptcy-western-district/adversary-complaint samples/INPUT-spiech-complaint.md
-sh tools/overlay.sh courts/sixth-circuit/michigan/federal/bankruptcy-western-district/adversary-complaint spiech-complaint courts/sixth-circuit/michigan/federal/bankruptcy-western-district/adversary-complaint/exemplars/FILED-EXAMPLE-spiech-farms-17-05398-adversary-complaint.pdf
+sh tools/render.sh courts/sixth-circuit/michigan/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-miwb-adversary-complaint-spiechcomplaint.md
+sh tools/overlay.sh courts/sixth-circuit/michigan/federal/bankruptcy-western-district/adversary-complaint spiech-complaint courts/sixth-circuit/michigan/federal/bankruptcy-western-district/adversary-complaint/usage/SAMPLE-miwb-adversary-complaint-spiechfarms1705398.pdf
 ```
 
 [Formbook index](../../../../../../README.md) | [Status table](../../../../../../STATUS.md)

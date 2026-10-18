@@ -5,11 +5,11 @@ Folder: `courts/fifth-circuit/texas/federal/northern-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-coney-4-26-cv-00713-motion-brief.pdf` (Defendants' brief in support of a renewed Rule 12(b)(1), (4), (5), (6) motion, with table of contents and index of authorities); second filer `exemplars/FILED-EXAMPLE-legacy-fertel-4-26-cv-00792-motion-brief.pdf` (Plaintiff's combined motion and brief). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-coney-motion-brief.md` (a portion of the 32-page filing: caption, introduction, issues, background, argument A (1 to 3), B (1 to 3), C, conclusion, certificate of service, signature blocks; the argument after section C is omitted) |
+| exemplar | yes: `usage/SAMPLE-txnd-motion-brief-coney426cv00713.pdf` (Defendants' brief in support of a renewed Rule 12(b)(1), (4), (5), (6) motion, with table of contents and index of authorities); second filer `usage/SAMPLE-txnd-motion-brief-legacyfertel426cv00792.pdf` (Plaintiff's combined motion and brief). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-txnd-motion-brief-coney.md` (a portion of the 32-page filing: caption, introduction, issues, background, argument A (1 to 3), B (1 to 3), C, conclusion, certificate of service, signature blocks; the argument after section C is omitted) |
 | typeface | face required: none (LR 7.2 sets the size, 12 pt or larger; LR 10.1 names no face) -> vendored substitute: EB Garamond (the default, `fonts/eb-garamond/`) -> fit: n/a, no court-named face to match. The filed exemplars use Times New Roman; see Known gaps 4. |
-| render | ok: `samples/OUTPUT-coney-motion-brief.pdf`, 11 pages (cover, table of contents, index of authorities, body pages 1 to 8), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; `pdffonts` shows EBGaramond-Regular and EBGaramond-Bold embedded) |
-| overlay | ok: `samples/OVERLAY-coney-motion-brief.pdf` and `samples/OVERLAY-coney-motion-brief.txt` (page map; regenerated 2026-10-14 against the Coney exemplar fetched from the URL in `exemplars/SOURCE.md`; the exemplar PDF is not committed) |
+| render | ok: `usage/OUTPUT-txnd-motion-brief-coney.typst.pdf`, 11 pages (cover, table of contents, index of authorities, body pages 1 to 8), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; `pdffonts` shows EBGaramond-Regular and EBGaramond-Bold embedded) |
+| overlay | ok: `usage/OVERLAY-coney-motion-brief.pdf` and `usage/OVERLAY-coney-motion-brief.txt` (page map; regenerated 2026-10-14 against the Coney exemplar fetched from the URL in `usage/SOURCE.md`; the exemplar PDF is not committed) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed on 2026-10-14 after the re-render) |
 | file names | the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (the names `tools/render.sh` and `tools/overlay.sh` use); see the complaint README |
 
@@ -35,9 +35,9 @@ Judge-specific requirements (individual judges' standing orders, including the p
 - Signature block at the right half: `Respectfully submitted,`; one block per signer (`/s/`, name, bar number, firm, address, telephone, email, role).
 - Page numbers centered at the foot of each body and front-matter page.
 
-## Overlay (`samples/OVERLAY-coney-motion-brief.pdf`)
+## Overlay (`usage/OVERLAY-coney-motion-brief.pdf`)
 
-Red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by word overlap (`tools/overlay.sh`). The overlay is a diagnostic, not a score: the sample is a portion of the filing, our page breaks do not follow the filing's, and our table pages (cover, contents, authorities) have no counterpart in the sample. The overlay's table-of-authorities page (our page 3) pairs with a filed page that shares few words, which is expected. Read the page map in `samples/OVERLAY-coney-motion-brief.txt`.
+Red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by word overlap (`tools/overlay.sh`). The overlay is a diagnostic, not a score: the sample is a portion of the filing, our page breaks do not follow the filing's, and our table pages (cover, contents, authorities) have no counterpart in the sample. The overlay's table-of-authorities page (our page 3) pairs with a filed page that shares few words, which is expected. Read the page map in `usage/OVERLAY-coney-motion-brief.txt`.
 
 ## Known gaps and open choices
 
@@ -53,7 +53,7 @@ Red is our render, blue is the filed exemplar, black is where they agree. Pages 
 10. **Indent of the first paragraph** after the lead-in "COME NOW" is not reproduced; the template indents every body paragraph.
 11. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape. The brief forbids editing `tools/`, so the gates were not run. The page review below is the Gate 2 equivalent.
 
-## Review of the rendered pages (`samples/OUTPUT-coney-motion-brief.pdf`, 11 pages)
+## Review of the rendered pages (`usage/OUTPUT-txnd-motion-brief-coney.typst.pdf`, 11 pages)
 
 Each page was rendered at 60 dpi and viewed after the last template change.
 
@@ -73,12 +73,12 @@ Earlier review rounds found and fixed the same defects the complaint had (see th
 
 ## Engines
 
-| Engine | Folder | Output in `samples/` | State |
+| Engine | Folder | Output in `usage/` | State |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-coney-motion-brief.pdf` | the reference (see the review above) |
-| docx | `docx/` | `OUTPUT-coney-motion-brief.docx`, `OUTPUT-coney-motion-brief.docx.pdf` | `.docx` built and valid (zip and XML checks pass); `.docx.pdf` BLOCKED; table page numbers BLOCKED |
+| typst (primary) | `typst/` | `OUTPUT-txnd-motion-brief-coney.typst.pdf` | the reference (see the review above) |
+| docx | `docx/` | `OUTPUT-txnd-motion-brief-coney.docx`, `OUTPUT-txnd-motion-brief-coney.docx.pdf` | `.docx` built and valid (zip and XML checks pass); `.docx.pdf` BLOCKED; table page numbers BLOCKED |
 
-The docx is built by pandoc (3.6.4) from `docx/reference.docx` and `docx/txnd-motion-brief.lua`. `docx/render.sh` owns the build: it runs pandoc, then writes the footer's relationship id into the section breaks. `reference.docx` is made by `sh docx/make-reference.sh` from `docx/styles.xml`. Command: `sh tools/render.sh --engine docx <court>/motion-brief samples/INPUT-coney-motion-brief.md`.
+The docx is built by pandoc (3.6.4) from `docx/reference.docx` and `docx/txnd-motion-brief.lua`. `docx/render.sh` owns the build: it runs pandoc, then writes the footer's relationship id into the section breaks. `reference.docx` is made by `sh docx/make-reference.sh` from `docx/styles.xml`. Command: `sh tools/render.sh --engine docx <court>/motion-brief usage/INPUT-txnd-motion-brief-coney.md`.
 
 Sections: the cover has no page number; the table of contents and the index of authorities are numbered in lower roman from `ii` (as in typst, where the cover is page `i`); the body starts at `1`.
 

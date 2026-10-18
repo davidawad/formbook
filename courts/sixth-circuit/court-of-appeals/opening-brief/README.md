@@ -1,14 +1,14 @@
 # Sixth Circuit (ca6) — opening brief (appellant's principal brief)
 
-Doc type `opening-brief` of `courts/sixth-circuit/court-of-appeals`. Self-contained: the court-root `typst/` and `samples/` (ca9 layout) are not touched.
+Doc type `opening-brief` of `courts/sixth-circuit/court-of-appeals`. Self-contained: the court-root `typst/` and `usage/` (ca9 layout) are not touched.
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-netchoice-v-skrmetti-25-5660-opening-brief.pdf` | Real filed Sixth Circuit appellant's brief (text-based PDF, 90 pp.). |
-| `exemplars/SOURCE.md` | URL fetched, case, docket, filer, date filed, date fetched. |
-| `samples/INPUT-netchoice-opening-brief.md` | Markdown transcription (excerpt) of the exemplar: frontmatter (cover, disclosure, oral-argument statement, designation, authorities) and body. |
-| `samples/OUTPUT-netchoice-opening-brief.pdf` | `sh tools/render.sh courts/sixth-circuit/court-of-appeals/opening-brief samples/INPUT-netchoice-opening-brief.md` |
-| `samples/OVERLAY-netchoice-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/sixth-circuit/court-of-appeals/opening-brief netchoice-opening-brief` |
+| `usage/SAMPLE-ca6-opening-brief-netchoicevskrmetti255660.pdf` | Real filed Sixth Circuit appellant's brief (text-based PDF, 90 pp.). |
+| `usage/SOURCE.md` | URL fetched, case, docket, filer, date filed, date fetched. |
+| `usage/INPUT-ca6-opening-brief-netchoice.md` | Markdown transcription (excerpt) of the exemplar: frontmatter (cover, disclosure, oral-argument statement, designation, authorities) and body. |
+| `usage/OUTPUT-ca6-opening-brief-netchoice.typst.pdf` | `sh tools/render.sh courts/sixth-circuit/court-of-appeals/opening-brief usage/INPUT-ca6-opening-brief-netchoice.md` |
+| `usage/OVERLAY-netchoice-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/sixth-circuit/court-of-appeals/opening-brief netchoice-opening-brief` |
 | `typst/main.typ` | Entry point; reads `--input sample=...`. |
 | `typst/ca6-opening-brief.typ` | Template `ca6-brief(meta, md)`. Content-agnostic; the numbers are named parameters traced to the rules. |
 
@@ -57,7 +57,7 @@ Body: `# Heading` sections (Introduction optional; then Statement of Jurisdictio
 
 ## Overlay
 
-`samples/OVERLAY-netchoice-opening-brief.pdf` puts our render (red) over the filed page it best matches (blue); black is agreement. Pages are paired by word overlap, not by index. The map (`-overlay.txt`):
+`usage/OVERLAY-netchoice-opening-brief.pdf` puts our render (red) over the filed page it best matches (blue); black is agreement. Pages are paired by word overlap, not by index. The map (`-overlay.txt`):
 
 - pp. 1–3 (cover, disclosure, TOC) pair with filed pp. 1–3, with word overlap 100%, 90%, 61%. The disclosure text is the same in both; the TOC's differences are the sample's own page numbers.
 - pp. 4–5 (TOA) pair with filed TOA pages 10–11 at 26% and 21%. This is expected: the filed TOA runs seven pages (filed pp. 6–12); ours lists only the authorities the excerpt cites.
@@ -68,7 +68,7 @@ Font difference: the exemplar is Palatino Linotype; the template is EB Garamond 
 
 ## Page review (Gate 2)
 
-All 18 pages of `samples/OUTPUT-netchoice-opening-brief.pdf` were rasterised at `pdftoppm -r 60` and viewed. Findings and their fixes:
+All 18 pages of `usage/OUTPUT-ca6-opening-brief-netchoice.typst.pdf` were rasterised at `pdftoppm -r 60` and viewed. Findings and their fixes:
 
 | Page (printed) | Finding | Fix |
 |---|---|---|
@@ -108,7 +108,7 @@ Same rules and numbers as the typst template; the typst output is the reference 
 
 ## Verification pass 2026-10-16 (fb-595.26.6)
 
-- Re-rendered `samples/OUTPUT-netchoice-opening-brief.pdf` with `tools/render.sh` (exit 0, no typst warnings): 18 pages, the same count as the committed render; before the fixes below its text was identical to the committed PDF, so it was not stale. Overlay rerun; map unchanged except the cover (98% to 100%, from the added counsel line).
+- Re-rendered `usage/OUTPUT-ca6-opening-brief-netchoice.typst.pdf` with `tools/render.sh` (exit 0, no typst warnings): 18 pages, the same count as the committed render; before the fixes below its text was identical to the committed PDF, so it was not stale. Overlay rerun; map unchanged except the cover (98% to 100%, from the added counsel line).
 - All 18 pages viewed at 60 dpi (pages 1, 9, 14, 17, 18 again after the fixes); the 18 overlay pages viewed at 40 dpi, and overlay page 1 (cover against the filed cover) at 150 dpi.
 - Fixed:
   - p. 3 (Statement of Jurisdiction): "28 U.S.C. §§ 1651" broke between the two section signs ("§" at the line end, "§ 1651" on the next line). The no-break rule matched only a single sign; it is now `[§¶]+ \S+`, so "§§ 1651" stays whole.

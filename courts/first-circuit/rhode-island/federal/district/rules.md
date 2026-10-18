@@ -18,11 +18,11 @@ Re-check cadence: re-check annually each December 1 (the court's amendments take
 | FRCP-11 | Fed. R. Civ. P. 11 (signing) | https://www.law.cornell.edu/rules/frcp/rule_11 |
 | FRCP-12 | Fed. R. Civ. P. 12 (defenses; motion to dismiss) | https://www.law.cornell.edu/rules/frcp/rule_12 |
 | FRCP-38 | Fed. R. Civ. P. 38 (jury demand) | https://www.law.cornell.edu/rules/frcp/rule_38 |
-| EX-C1 | Complaint, Nightingale v. City of Providence, 1:26-cv-00213 (Robinson & Clapham) | `complaint/exemplars/SOURCE.md` |
-| EX-C2 | Complaint, Melo v. Lifespan Physician Group of Mass., 1:26-cv-00539 (Law Offices of Peter N. Wasylyk; Schubert Jonckheer & Kolbe) | `complaint/exemplars/SOURCE.md` |
-| EX-C3 | Complaint, Gifford v. Beacon Mutual Ins. Co., 1:26-cv-00340 (Leone Law LLC; Ahdoot & Wolfson) | `complaint/exemplars/SOURCE.md` |
-| EX-M1 | Memorandum, Tablada v. Rocket Mortgage, 1:26-cv-00118, ECF 7 (Brock and Scott, PLLC) | `motion-brief/exemplars/SOURCE.md` |
-| EX-M2 | Memorandum, United States v. Amore, 1:25-cv-00639, ECF 26-1 (R.I. Office of the Attorney General) | `motion-brief/exemplars/SOURCE.md` |
+| EX-C1 | Complaint, Nightingale v. City of Providence, 1:26-cv-00213 (Robinson & Clapham) | `complaint/usage/SOURCE.md` |
+| EX-C2 | Complaint, Melo v. Lifespan Physician Group of Mass., 1:26-cv-00539 (Law Offices of Peter N. Wasylyk; Schubert Jonckheer & Kolbe) | `complaint/usage/SOURCE.md` |
+| EX-C3 | Complaint, Gifford v. Beacon Mutual Ins. Co., 1:26-cv-00340 (Leone Law LLC; Ahdoot & Wolfson) | `complaint/usage/SOURCE.md` |
+| EX-M1 | Memorandum, Tablada v. Rocket Mortgage, 1:26-cv-00118, ECF 7 (Brock and Scott, PLLC) | `motion-brief/usage/SOURCE.md` |
+| EX-M2 | Memorandum, United States v. Amore, 1:25-cv-00639, ECF 26-1 (R.I. Office of the Attorney General) | `motion-brief/usage/SOURCE.md` |
 
 Kinds: **M** = mandated by a court rule (Local Rule or Federal Rule). **C** = convention (the rules leave it open; taken from exemplars of different filers). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

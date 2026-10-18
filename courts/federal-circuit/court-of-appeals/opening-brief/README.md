@@ -2,8 +2,8 @@
 
 - Court: `cafc`, United States Court of Appeals for the Federal Circuit (`courts/federal-circuit/court-of-appeals/`)
 - Doc type: `opening-brief`. Brief of Appellant (FRAP 28(a); Fed. Cir. R. 28(a)); one self-contained folder, no shared files.
-- Exemplar: `exemplars/FILED-EXAMPLE-delfasco-24-1363-opening-brief.pdf` (*Delfasco LLC v. Secretary of the Army*, No. 24-1363, filed 2024-03-26; provenance in `exemplars/SOURCE.md`).
-- Sample: `samples/INPUT-delfasco-opening-brief.md` (transcription of the filed brief, excerpted; see Known gaps).
+- Exemplar: `usage/SAMPLE-cafc-opening-brief-delfasco241363.pdf` (*Delfasco LLC v. Secretary of the Army*, No. 24-1363, filed 2024-03-26; provenance in `usage/SOURCE.md`).
+- Sample: `usage/INPUT-cafc-opening-brief-delfasco.md` (transcription of the filed brief, excerpted; see Known gaps).
 - Status: template built; render, overlay and page review done (below). Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,10 +12,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `cafc-brief`. |
 | `typst/cafc-opening-brief.typ` | Template. Parameter block at the top: `doc-kind`, `word-limit` (14,000), `required-sections` (Fed. Cir. R. 28(a)(5)-(10) order), `needs-standard-of-review`, `addendum = "required"`. |
-| `samples/INPUT-delfasco-opening-brief.md` | Markdown contract sample (frontmatter + body). |
-| `samples/OUTPUT-delfasco-opening-brief.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-appeals/opening-brief samples/INPUT-delfasco-opening-brief.md` (21 pages). |
-| `samples/OVERLAY-delfasco-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-appeals/opening-brief delfasco-opening-brief` (red = ours, blue = filed, black = agree). |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-cafc-opening-brief-delfasco.md` | Markdown contract sample (frontmatter + body). |
+| `usage/OUTPUT-cafc-opening-brief-delfasco.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-appeals/opening-brief usage/INPUT-cafc-opening-brief-delfasco.md` (21 pages). |
+| `usage/OVERLAY-delfasco-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-appeals/opening-brief delfasco-opening-brief` (red = ours, blue = filed, black = agree). |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
 Typst is run by `tools/render.sh` with vendored fonts only (`--ignore-system-fonts`); the sample's embedded fonts are EB Garamond Regular, Italic, Bold, BoldItalic, and nothing else. The build emitted no warnings.
 
@@ -47,7 +47,7 @@ FRAP text is taken from the same compilation (its Federal Rules of Appellate Pro
 
 ## Overlay
 
-`samples/OVERLAY-delfasco-opening-brief.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses):
+`usage/OVERLAY-delfasco-opening-brief.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses):
 
 - p.1 ↔ filed p.27 (64%): the filed addendum cover repeats the caption and proceeding lines.
 - p.2 ↔ p.2 (91%), p.3 ↔ p.3 (61%), p.4 ↔ p.4 (46%): certificate of interest, contents, authorities.
@@ -60,7 +60,7 @@ FRAP text is taken from the same compilation (its Federal Rules of Appellate Pro
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-delfasco-opening-brief.pdf` was rendered at 60 dpi (`pdftoppm -r 60`) and viewed (21 of 21). Pages 2 and 20 were fixed after the first review (duplicate periods in the certificate of interest; missing paragraph break in the Form 19 certificate) and viewed again.
+Every page of `OUTPUT-cafc-opening-brief-delfasco.typst.pdf` was rendered at 60 dpi (`pdftoppm -r 60`) and viewed (21 of 21). Pages 2 and 20 were fixed after the first review (duplicate periods in the certificate of interest; missing paragraph break in the Form 19 certificate) and viewed again.
 
 | Page | Content | Result |
 |---|---|---|
@@ -102,11 +102,11 @@ Every page of `OUTPUT-delfasco-opening-brief.pdf` was rendered at 60 dpi (`pdfto
 
 The typst template is the reference. The LaTeX and docx engines are built from the same markdown contract (`docs/EVAL-LOOP.md`, "Engines").
 
-| Engine | Files | Output (`samples/`) | Pages |
+| Engine | Files | Output (`usage/`) | Pages |
 |---|---|---|---|
-| typst (reference) | `typst/` | `OUTPUT-delfasco-opening-brief.pdf` | 21 |
-| latex | `latex/template.tex`, `latex/cafc.lua`, `latex/render.sh` (tectonic, EB Garamond from `fonts/eb-garamond`) | `OUTPUT-delfasco-opening-brief.latex.pdf` | 21 |
-| docx | `docx/reference.docx` (made by `docx/make-reference.sh` from `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-delfasco-opening-brief.docx` and `.docx.pdf` (LibreOffice 26.8, vendored fonts only) | 21 |
+| typst (reference) | `typst/` | `OUTPUT-cafc-opening-brief-delfasco.typst.pdf` | 21 |
+| latex | `latex/template.tex`, `latex/cafc.lua`, `latex/render.sh` (tectonic, EB Garamond from `fonts/eb-garamond`) | `OUTPUT-cafc-opening-brief-delfasco.latex.pdf` | 21 |
+| docx | `docx/reference.docx` (made by `docx/make-reference.sh` from `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-cafc-opening-brief-delfasco.docx` and `.docx.pdf` (LibreOffice 26.8, vendored fonts only) | 21 |
 
 **Matches the typst layout (latex and docx):** 14 pt EB Garamond throughout, footnotes included; double spacing at the typst baseline pitch (31.43 pt); 1 in margins; the clerk's caption, certificate of interest, contents and authorities with page numbers; Argument labels (I. / A. / 1. / a.); the addendum with its own contents and `Add-` pages; the certificate of compliance (Form 19 wording, box checked) and the certificate of service; page numbers in the footer (roman, arabic, `Add-`).
 
@@ -125,7 +125,7 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 
 ## Verification pass 2026-10-16 (fb-595.26.13)
 
-- Rendered: `sh tools/render.sh courts/federal-circuit/court-of-appeals/opening-brief samples/INPUT-delfasco-opening-brief.md`, exit 0, no typst warnings, 21 pages (same as the committed PDF; the earlier page count was not stale). Overlay rerun: `sh tools/overlay.sh ... delfasco-opening-brief`, exit 0; pairings as listed under Overlay (cover ↔ filed addendum cover 64%, certificate of interest 91%, body pages 47–85%).
+- Rendered: `sh tools/render.sh courts/federal-circuit/court-of-appeals/opening-brief usage/INPUT-cafc-opening-brief-delfasco.md`, exit 0, no typst warnings, 21 pages (same as the committed PDF; the earlier page count was not stale). Overlay rerun: `sh tools/overlay.sh ... delfasco-opening-brief`, exit 0; pairings as listed under Overlay (cover ↔ filed addendum cover 64%, certificate of interest 91%, body pages 47–85%).
 - Viewed: all 21 pages at 60 dpi, then pages 2, 6, 15 and 21 again after the fixes; the overlay pages at 40 dpi; the exemplar's page 1 against our cover (same parts in the same order; the filed cover also prints the Board judges and the date, not reproduced, tier 3).
 - Fixed:
   - Certificate of interest, statement of related cases and certificate of service signed "Is/ John J. O'Brien": the template hard-coded an OCR misreading of "/s/". Now "/s/" (typst and latex).

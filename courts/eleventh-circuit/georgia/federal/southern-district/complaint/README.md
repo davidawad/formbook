@@ -5,14 +5,14 @@ Folder: `courts/eleventh-circuit/georgia/federal/southern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-atlantic-casualty-6-26-cv-00049-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-atlantic-casualty-complaint.md`: full text of the 15-page complaint (caption, paragraphs 1 to 47, prayer, signature). Exhibits A to E are not transcribed. |
-| render | ok: `samples/OUTPUT-atlantic-casualty-complaint.pdf`, 8 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings |
-| overlay | ok: `samples/OVERLAY-atlantic-casualty-complaint.pdf` and `samples/OVERLAY-atlantic-casualty-complaint.txt` (page map) |
+| exemplar | yes: `usage/SAMPLE-gasd-complaint-atlanticcasualty626cv00049.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-gasd-complaint-atlanticcasualty.md`: full text of the 15-page complaint (caption, paragraphs 1 to 47, prayer, signature). Exhibits A to E are not transcribed. |
+| render | ok: `usage/OUTPUT-gasd-complaint-atlanticcasualty.typst.pdf`, 8 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings |
+| overlay | ok: `usage/OVERLAY-atlantic-casualty-complaint.pdf` and `usage/OVERLAY-atlantic-casualty-complaint.txt` (page map) |
 | typeface | face required: none named by the S.D. Ga. rules (LR 5.4, LR 10.1, LR 83.6; text checked 2026-10-14). Substitute: none; EB Garamond kept, since the court names no face (`docs/FONTS.md`). Fit: n/a |
 | pages reviewed | 8 of 8 (re-rendered and every page rasterized at 70 dpi and viewed on 2026-10-14) |
 
-File names: the brief asked for `samples/<id>.md`, `samples/<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` read and write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` by default, so the tool names are used. `tools/` was not edited.
+File names: the brief asked for `usage/<id>.md`, `usage/<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` read and write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` by default, so the tool names are used. `tools/` was not edited.
 
 ## Governing rules
 
@@ -47,7 +47,7 @@ Not verified in this pass: FRCP 8(a) (the template does not check its content); 
 
 ## What the overlay shows
 
-`samples/OVERLAY-atlantic-casualty-complaint.pdf`: each page of our render in red, paired with the exemplar page sharing the most words (blue), multiplied, so text that agrees is black. The pairing is by word overlap, not by page index, and the page map is in the `.txt`. The overlay is a diagnostic, not a score: the exemplar's own page breaks differ from ours, so a red-only or blue-only line is often a line that moved, not a missing line. Word overlap per page is 48% to 79%.
+`usage/OVERLAY-atlantic-casualty-complaint.pdf`: each page of our render in red, paired with the exemplar page sharing the most words (blue), multiplied, so text that agrees is black. The pairing is by word overlap, not by page index, and the page map is in the `.txt`. The overlay is a diagnostic, not a score: the exemplar's own page breaks differ from ours, so a red-only or blue-only line is often a line that moved, not a missing line. Word overlap per page is 48% to 79%.
 
 ## Known gaps and open choices
 
@@ -61,7 +61,7 @@ Not verified in this pass: FRCP 8(a) (the template does not check its content); 
 
 ## Engines
 
-Typst (`typst/`) is the reference. The docx engine is `docx/`: `reference.docx` (rebuilt by `sh docx/make-reference.sh`) and `docx/gasd-complaint.lua`, which builds the cover, caption, lead-in, numbered paragraphs, lettered prayer and signature from the sample's frontmatter. Output: `samples/OUTPUT-atlantic-casualty-complaint.docx`.
+Typst (`typst/`) is the reference. The docx engine is `docx/`: `reference.docx` (rebuilt by `sh docx/make-reference.sh`) and `docx/gasd-complaint.lua`, which builds the cover, caption, lead-in, numbered paragraphs, lettered prayer and signature from the sample's frontmatter. Output: `usage/OUTPUT-gasd-complaint-atlanticcasualty.docx`.
 
 - **Matches typst** (same settings in both templates): US Letter, 1-inch margins, EB Garamond 12 pt; double spacing as an exact 24 pt line pitch, 16.2 pt between paragraphs; single-spaced caption, quotations and signature; the caption as a borderless three-column table (3.1 in, 0.3 in, 3.1 in); "- N -" centered in the footer on every page, page 1 included; numbered paragraphs with a 0.5 in first-line indent; lettered prayer items "(a)" at 0.5 in with text at 0.9 in.
 - **Differs from typst**:

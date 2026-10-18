@@ -4,14 +4,14 @@ Doc type: **adversary-complaint** in the United States Bankruptcy Court for the 
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-griffin-18-00028-adversary-complaint.pdf` (primary; Trustee's complaint, 16 pp.). Second filer, for tier 2: `exemplars/FILED-EXAMPLE-tate-25-06012-adversary-complaint.pdf` (Debtor's complaint, 3 pp.). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-griffin-adversary-complaint.md`: the whole filed complaint, transcribed (see Known gaps for the two additions) |
-| render | ok: `samples/OUTPUT-griffin-adversary-complaint.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-griffin-adversary-complaint.pdf` and `.txt` (`sh tools/overlay.sh`) |
+| exemplar | yes: `usage/SAMPLE-mssb-adversary-complaint-griffin1800028.pdf` (primary; Trustee's complaint, 16 pp.). Second filer, for tier 2: `usage/SAMPLE-mssb-adversary-complaint-tate2506012.pdf` (Debtor's complaint, 3 pp.). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-mssb-adversary-complaint-griffin.md`: the whole filed complaint, transcribed (see Known gaps for the two additions) |
+| render | ok: `usage/OUTPUT-mssb-adversary-complaint-griffin.typst.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
+| overlay | ok: `usage/OVERLAY-griffin-adversary-complaint.pdf` and `.txt` (`sh tools/overlay.sh`) |
 | pages reviewed | 15 of 15 (every page rendered at 60 dpi and viewed, final template) |
 | tier 1 | rules-driven template; asserts that stop the build if counsel e-mail, bar number, telephone or street address, the consent statement, the caption case data, or the title is missing (checked: a sample with no e-mail fails with the rule cited). |
 
-`court.json` and the court-root `typst/`, `samples/` are untouched. Gates `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, which this doc-type folder is not, so they were not run.
+`court.json` and the court-root `typst/`, `usage/` are untouched. Gates `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, which this doc-type folder is not, so they were not run.
 
 ## Files
 
@@ -19,10 +19,10 @@ Doc type: **adversary-complaint** in the United States Bankruptcy Court for the 
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `mssb-adversary-complaint`. |
 | `typst/mssb-adversary-complaint.typ` | Template. Parameters at the top, each with its rule. Rule asserts in `check-meta`. |
-| `samples/INPUT-griffin-adversary-complaint.md` | Markdown contract sample (frontmatter + body). |
-| `samples/OUTPUT-griffin-adversary-complaint.pdf` | `sh tools/render.sh courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/adversary-complaint samples/INPUT-griffin-adversary-complaint.md` |
-| `samples/OVERLAY-griffin-adversary-complaint.pdf`, `.txt` | `sh tools/overlay.sh <this folder> griffin-adversary-complaint` (red = ours, blue = filed, black = agree) |
-| `exemplars/` | Two filed exemplars and `SOURCE.md`. |
+| `usage/INPUT-mssb-adversary-complaint-griffin.md` | Markdown contract sample (frontmatter + body). |
+| `usage/OUTPUT-mssb-adversary-complaint-griffin.typst.pdf` | `sh tools/render.sh courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-mssb-adversary-complaint-griffin.md` |
+| `usage/OVERLAY-griffin-adversary-complaint.pdf`, `.txt` | `sh tools/overlay.sh <this folder> griffin-adversary-complaint` (red = ours, blue = filed, black = agree) |
+| `usage/` | Two filed exemplars and `SOURCE.md`. |
 
 File names follow the file-role convention (`INPUT-`, `OUTPUT-`, `OVERLAY-`), which is what `tools/render.sh` and `tools/overlay.sh` read and write by default. The brief's `<id>.md` / `<id>-overlay.pdf` names would not have matched the tools.
 
@@ -57,12 +57,12 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 Three engines run from one markdown contract. `typst/` is the primary template and the reference for this form. `docx/` was added here. No `latex/` yet.
 
-| Engine | Output in `samples/` | Result |
+| Engine | Output in `usage/` | Result |
 |---|---|---|
-| typst | `OUTPUT-griffin-adversary-complaint.pdf` | unchanged |
-| docx | `OUTPUT-griffin-adversary-complaint.docx` | written and checked for package integrity; `.docx.pdf` BLOCKED (below) |
+| typst | `OUTPUT-mssb-adversary-complaint-griffin.typst.pdf` | unchanged |
+| docx | `OUTPUT-mssb-adversary-complaint-griffin.docx` | written and checked for package integrity; `.docx.pdf` BLOCKED (below) |
 
-Build: `sh docx/make-reference.sh` once (writes `docx/reference.docx` from pandoc's default, with the court's styles and footer), then `sh tools/render.sh --engine docx <this folder> samples/INPUT-griffin-adversary-complaint.md`. The filter is `docx/mssb-adversary-complaint.lua`. The render script's LibreOffice step fails on the box used here; the `.docx` is written before that step.
+Build: `sh docx/make-reference.sh` once (writes `docx/reference.docx` from pandoc's default, with the court's styles and footer), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-mssb-adversary-complaint-griffin.md`. The filter is `docx/mssb-adversary-complaint.lua`. The render script's LibreOffice step fails on the box used here; the `.docx` is written before that step.
 
 What the docx build sets to the typst form (from the same frontmatter). These are settings in the XML and the filter, not a rendered comparison: no page has been rendered (see below).
 
@@ -84,12 +84,12 @@ What differs, by design or by Word:
 
 docx BLOCKED (not verified by a render):
 
-- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF, `tools/check.sh --engine docx`): BLOCKED. LibreOffice cannot start on the box used here. The Debian LibreOffice 25.2 packages (extracted without root, all shared libraries resolved) exit at bootstrap with a `DeploymentException`. No `.docx.pdf` exists, so no page was rendered or viewed (pages reviewed: 0), and `samples/.check-docx.txt` is not written. `tools/check.sh` also needs `yq` and a court folder with `court.json` and `rules.md`, which a doc-type folder does not have.
+- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF, `tools/check.sh --engine docx`): BLOCKED. LibreOffice cannot start on the box used here. The Debian LibreOffice 25.2 packages (extracted without root, all shared libraries resolved) exit at bootstrap with a `DeploymentException`. No `.docx.pdf` exists, so no page was rendered or viewed (pages reviewed: 0), and `usage/.check-docx.txt` is not written. `tools/check.sh` also needs `yq` and a court folder with `court.json` and `rules.md`, which a doc-type folder does not have.
 - The `.docx` has not been opened in Word or LibreOffice. Its package parts are well-formed XML and the zip is valid, which is necessary, not sufficient.
 
 ## Overlay
 
-`samples/OVERLAY-griffin-adversary-complaint.pdf` puts our render (red) over the best-matching page of the filed Griffin complaint (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the final run:
+`usage/OVERLAY-griffin-adversary-complaint.pdf` puts our render (red) over the best-matching page of the filed Griffin complaint (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the final run:
 
 - p.1 ↔ p.1 (69%), p.2–p.5 ↔ same numbers (74–87%): caption and the first numbered paragraphs line up.
 - p.6 ↔ p.6, p.7 ↔ p.7 (60%, 54%): ¶¶ 36–53, which carry the fee table and footnotes.
@@ -99,7 +99,7 @@ docx BLOCKED (not verified by a render):
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-griffin-adversary-complaint.pdf` was rendered at 60 dpi and viewed in its final form.
+Every page of `OUTPUT-mssb-adversary-complaint-griffin.typst.pdf` was rendered at 60 dpi and viewed in its final form.
 
 | Page | Content | Result |
 |---|---|---|

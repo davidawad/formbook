@@ -72,7 +72,7 @@
 }
 
 // Counsel block, upper left, only when the filing has one. The two WVNB complaints read
-// (Protea 2019, see exemplars/SOURCE.md) put counsel at the signature only, so it is optional here.
+// (Protea 2019, see usage/SOURCE.md) put counsel at the signature only, so it is optional here.
 #let counsel-block(meta) = {
   if "counsel" in meta {
     set par(first-line-indent: 0pt, leading: single-leading)

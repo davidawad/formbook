@@ -17,12 +17,12 @@ The primary TRAP PDF (https://www.txcourts.gov/media/1463134/texas-rules-of-appe
 
 ## Exemplar and overlay
 
-- Exemplar: `exemplars/FILED-EXAMPLE-reply-brief.pdf` (10 pages; Scott H. Palmer, P.C.); source in `exemplars/SOURCE.md`.
-- Overlay: `samples/OVERLAY-reply-brief.pdf` and `.txt`. Page map (ours to filed, word overlap): 1-1 cover 73%, 2-2 contents 46%, 3-2 index 50%, 4-3 94%, 5-4 94%, 6-5 75%, 7-6 50%, 8-7 prayer and signature 46%, 9-8 certificates 40%. The filer puts contents and authorities on one page; the template gives each its own page (tier 3).
+- Exemplar: `usage/SAMPLE-texapp-palmerillichinrejr052000920replybrief.pdf` (10 pages; Scott H. Palmer, P.C.); source in `usage/SOURCE.md`.
+- Overlay: `usage/OVERLAY-reply-brief.pdf` and `.txt`. Page map (ours to filed, word overlap): 1-1 cover 73%, 2-2 contents 46%, 3-2 index 50%, 4-3 94%, 5-4 94%, 6-5 75%, 7-6 50%, 8-7 prayer and signature 46%, 9-8 certificates 40%. The filer puts contents and authorities on one page; the template gives each its own page (tier 3).
 
 ## Sample
 
-`samples/INPUT-reply-brief.md` is a full transcription of the filed reply: cover (with ORAL ARGUMENT REQUESTED and ACCELERATED APPEAL), contents, index of authorities, address to the court, First Reply Issue, Second Reply Issue, conclusion and prayer (list), signature, certificate of compliance (generated word count, 1,077 words) and certificate of service with two recipients. The appellant's medical and educational details are bracketed out.
+`usage/INPUT-texapp-reply-brief-sample.md` is a full transcription of the filed reply: cover (with ORAL ARGUMENT REQUESTED and ACCELERATED APPEAL), contents, index of authorities, address to the court, First Reply Issue, Second Reply Issue, conclusion and prayer (list), signature, certificate of compliance (generated word count, 1,077 words) and certificate of service with two recipients. The appellant's medical and educational details are bracketed out.
 
 Render: 9 pages (cover; ii contents; iii index; body 1-6). Every page rendered at 60 dpi and viewed on 2026-10-16; review in `reviews/2026-10-16.md`.
 
@@ -35,6 +35,6 @@ Render: 9 pages (cover; ii contents; iii index; body 1-6). Every page rendered a
 ## Engines
 
 - **typst** (`typst/`): the reference for the form.
-- **docx** (`docx/`): `samples/OUTPUT-reply-brief.docx` and `.docx.pdf` are from the earlier sample and were **not regenerated** on 2026-10-16 (no `soffice` on this box). The docx filter predates the placeholder contract (`{{contents}}`, `{{signature}}`, `{{signer}}`, `{{word-count}}`) and the `authorities` list; a re-render would print the placeholders literally and omit the index. BLOCKED until `docx/texapp.lua` is updated.
+- **docx** (`docx/`): `usage/OUTPUT-texapp-reply-brief-sample.docx` and `.docx.pdf` are from the earlier sample and were **not regenerated** on 2026-10-16 (no `soffice` on this box). The docx filter predates the placeholder contract (`{{contents}}`, `{{signature}}`, `{{signer}}`, `{{word-count}}`) and the `authorities` list; a re-render would print the placeholders literally and omit the index. BLOCKED until `docx/texapp.lua` is updated.
 - BLOCKED: tools/check.sh docx gates 0 to 3 not run (no `checks.yaml`, `rules.md` at the level `check.sh` reads).
 - **latex**: not built for this doc type.

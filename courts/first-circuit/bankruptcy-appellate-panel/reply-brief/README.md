@@ -2,7 +2,7 @@
 
 - Court: United States Bankruptcy Appellate Panel for the First Circuit (`bap1`), folder `courts/first-circuit/bankruptcy-appellate-panel/reply-brief/`
 - Doc type: `reply`
-- Status: **BLOCKED: no exemplar** (re-searched 2026-10-16). No public bap1 reply brief exists on CourtListener (searched under court id `ca1`, where the BAP's dockets are filed; see "Re-search 2026-10-16" below and `exemplars/SOURCE.md`). The template is shared with the opening and answering briefs and received their 2026-10-16 fixes (see `../opening-brief/README.md`, "Template changes from the overlay"); the generic sample was re-rendered and every page viewed. Typst only: `docx/` and `latex/` were not touched.
+- Status: **BLOCKED: no exemplar** (re-searched 2026-10-16). No public bap1 reply brief exists on CourtListener (searched under court id `ca1`, where the BAP's dockets are filed; see "Re-search 2026-10-16" below and `usage/SOURCE.md`). The template is shared with the opening and answering briefs and received their 2026-10-16 fixes (see `../opening-brief/README.md`, "Template changes from the overlay"); the generic sample was re-rendered and every page viewed. Typst only: `docx/` and `latex/` were not touched.
 
 Summary line for the PM: `exemplar=no render=ok overlay=blocked pages_reviewed=7`
 
@@ -38,14 +38,14 @@ The [BAP guide](https://www.bap1.uscourts.gov/sites/bap1/files/BAP_Guide.pdf) §
 
 ## Sample and overlay (before 2026-10-16)
 
-- `samples/INPUT-generic-reply-brief.md`: fictional, rule-structured, not a transcription of any filing. Frontmatter is the schema.
-- `samples/OUTPUT-generic-reply-brief.pdf`: rendered with `sh tools/render.sh courts/first-circuit/bankruptcy-appellate-panel/reply-brief samples/INPUT-generic-reply-brief.md`. Renders clean (no typst warnings).
-- Overlay: `sh tools/overlay.sh courts/first-circuit/bankruptcy-appellate-panel/reply-brief generic-reply-brief` **fails**: "no exemplar pdf in exemplars/". There is nothing to overlay against, so no OVERLAY files exist.
+- `usage/INPUT-bap1-reply-brief-generic.md`: fictional, rule-structured, not a transcription of any filing. Frontmatter is the schema.
+- `usage/OUTPUT-bap1-reply-brief-generic.typst.pdf`: rendered with `sh tools/render.sh courts/first-circuit/bankruptcy-appellate-panel/reply-brief usage/INPUT-bap1-reply-brief-generic.md`. Renders clean (no typst warnings).
+- Overlay: `sh tools/overlay.sh courts/first-circuit/bankruptcy-appellate-panel/reply-brief generic-reply-brief` **fails**: "no exemplar pdf in usage/". There is nothing to overlay against, so no OVERLAY files exist.
 
 ## Run 2026-10-15 (bap1 exemplar search)
 
-- Exemplar: none (see `exemplars/SOURCE.md`). CourtListener returns 0 bap1 RECAP documents and 0 bap1 dockets; the bap1 filter is throttled (429) on some queries. The status stays BLOCKED.
-- Render: `sh tools/render.sh` on `samples/INPUT-generic-reply-brief.md` exits 0 (6 pages). Overlay: `sh tools/overlay.sh` exits 1, "no exemplar pdf".
+- Exemplar: none (see `usage/SOURCE.md`). CourtListener returns 0 bap1 RECAP documents and 0 bap1 dockets; the bap1 filter is throttled (429) on some queries. The status stays BLOCKED.
+- Render: `sh tools/render.sh` on `usage/INPUT-bap1-reply-brief-generic.md` exits 0 (6 pages). Overlay: `sh tools/overlay.sh` exits 1, "no exemplar pdf".
 - Pages reviewed this run: 0. The sample was rendered to check the build, not reviewed page by page; the Gate 2 notes below are from the earlier run.
 
 ## Gate 2 review of the generic sample (earlier run, before 2026-10-15)
@@ -57,7 +57,7 @@ Pages were rasterized at 60 dpi and each was checked on a contact sheet. Defects
 
 ## Re-search 2026-10-16 (still BLOCKED)
 
-CourtListener files the First Circuit BAP's dockets under the circuit's court id `ca1`, not `bap1`; the opening and answering exemplars were found that way. Reply-brief searches on 2026-10-16 (by the batch lead, recorded here; details in `exemplars/SOURCE.md`): RECAP full text `"BANKRUPTCY APPELLATE PANEL FOR THE FIRST CIRCUIT" "REPLY BRIEF"` (24 hits, none a bap1 reply brief: mab, mad, prd, prb, med and ca1 circuit filings); `caseName:Blumsack court=ca1` (no reply brief docketed or uploaded in BAP No. MW 23-03); `caseName:Akouete court=ca1` and `caseName:Muszynski court=ca1` (bap1 dockets 24-11, 24-14, 24-16, 26-3; the Muszynski docket, BAP No. PR 24-011, shows "Appellant Charles Muszynski reply brief filed" on 03/07/2025, but the document is not on RECAP); `description:(brief) AND "Bankruptcy Appellate Panel" court=ca1` (none). **BLOCKED: no public bap1 reply brief**, so no transcription and no overlay for this doc type, and tier 2 cannot be judged for it.
+CourtListener files the First Circuit BAP's dockets under the circuit's court id `ca1`, not `bap1`; the opening and answering exemplars were found that way. Reply-brief searches on 2026-10-16 (by the batch lead, recorded here; details in `usage/SOURCE.md`): RECAP full text `"BANKRUPTCY APPELLATE PANEL FOR THE FIRST CIRCUIT" "REPLY BRIEF"` (24 hits, none a bap1 reply brief: mab, mad, prd, prb, med and ca1 circuit filings); `caseName:Blumsack court=ca1` (no reply brief docketed or uploaded in BAP No. MW 23-03); `caseName:Akouete court=ca1` and `caseName:Muszynski court=ca1` (bap1 dockets 24-11, 24-14, 24-16, 26-3; the Muszynski docket, BAP No. PR 24-011, shows "Appellant Charles Muszynski reply brief filed" on 03/07/2025, but the document is not on RECAP); `description:(brief) AND "Bankruptcy Appellate Panel" court=ca1` (none). **BLOCKED: no public bap1 reply brief**, so no transcription and no overlay for this doc type, and tier 2 cannot be judged for it.
 
 ## Template changes from the overlay (2026-10-16)
 
@@ -77,7 +77,7 @@ DOCX and LaTeX: this was a typst-only pass. `docx/` was not touched, so the docx
 
 ## Gate 2 review of the generic sample (2026-10-16, after the template changes)
 
-`samples/OUTPUT-generic-reply-brief.pdf` (7 pages), rendered at 60 dpi and every page viewed. No exemplar to compare with; checked against the rules and against the two filed bap1 briefs of the other doc types.
+`usage/OUTPUT-bap1-reply-brief-generic.typst.pdf` (7 pages), rendered at 60 dpi and every page viewed. No exemplar to compare with; checked against the rules and against the two filed bap1 briefs of the other doc types.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -91,9 +91,9 @@ DOCX and LaTeX: this was a typst-only pass. `docx/` was not touched, so the docx
 
 ## Engines
 
-DOCX (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, every font named explicitly, no theme fonts) and `docx/bap1.lua` (cover, disclosure, contents, authorities, oral-argument statement, the body's heading numbers, the related-cases page and the certificate, with the word limit and required sections checked as in the typst template). `tools/render.sh --engine docx` writes `samples/OUTPUT-generic-reply-brief.docx` and its LibreOffice PDF. The body font in the PDF is EB Garamond only; DejaVu Sans appears for the ballot-box glyphs in the related-cases statement.
+DOCX (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, every font named explicitly, no theme fonts) and `docx/bap1.lua` (cover, disclosure, contents, authorities, oral-argument statement, the body's heading numbers, the related-cases page and the certificate, with the word limit and required sections checked as in the typst template). `tools/render.sh --engine docx` writes `usage/OUTPUT-bap1-reply-brief-generic.docx` and its LibreOffice PDF. The body font in the PDF is EB Garamond only; DejaVu Sans appears for the ballot-box glyphs in the related-cases statement.
 
-Matches the typst output (checked on the LibreOffice PDF against `samples/OUTPUT-generic-*.pdf`, every page): EB Garamond 14 pt; body lines at the typst line pitch (22.25 pt exact); US Letter with 1 in margins; 0.5 in first-line indent, not on the first paragraph after a heading or a front title; centered caps level-1 headings at 19.5 pt and centered bold level-2 headings at 17 pt (the typst 1.4 em and 1.2 em heading sizes); bold left level 3 and 4 headings; cover on its own unnumbered section, its lines within a few points of the typst positions; page numbers from page 2 (typst counts the cover as page 1, so the contents page is page 2); footnote text 14 pt.
+Matches the typst output (checked on the LibreOffice PDF against `usage/OUTPUT-generic-*.pdf`, every page): EB Garamond 14 pt; body lines at the typst line pitch (22.25 pt exact); US Letter with 1 in margins; 0.5 in first-line indent, not on the first paragraph after a heading or a front title; centered caps level-1 headings at 19.5 pt and centered bold level-2 headings at 17 pt (the typst 1.4 em and 1.2 em heading sizes); bold left level 3 and 4 headings; cover on its own unnumbered section, its lines within a few points of the typst positions; page numbers from page 2 (typst counts the cover as page 1, so the contents page is page 2); footnote text 14 pt.
 
 Differs from the typst output:
 - Pagination: 6 pages in the docx against 6 in typst. Page counts match.

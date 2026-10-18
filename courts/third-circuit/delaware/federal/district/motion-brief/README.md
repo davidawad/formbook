@@ -4,10 +4,10 @@ Doc type: **motion brief**, the opening brief (memorandum of points and authorit
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-abramson-safe-life-1-26-cv-00772-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-abramson-motion-brief.md`: the whole 13-page opening brief (cover, contents, table of citations, memorandum through the conclusion, signature block, footnotes 1 and 2) |
-| render | ok: `samples/OUTPUT-abramson-motion-brief.pdf`, 12 pages (cover, contents i, citations ii to iii, body 1 to 8), typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh ...`) |
-| overlay | ok: `samples/OVERLAY-abramson-motion-brief.pdf` and `OVERLAY-abramson-motion-brief.txt` (`sh tools/overlay.sh ...`) |
+| exemplar | yes: `usage/SAMPLE-ded-motion-brief-abramsonsafelife126cv00772.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ded-motion-brief-abramson.md`: the whole 13-page opening brief (cover, contents, table of citations, memorandum through the conclusion, signature block, footnotes 1 and 2) |
+| render | ok: `usage/OUTPUT-ded-motion-brief-abramson.typst.pdf`, 12 pages (cover, contents i, citations ii to iii, body 1 to 8), typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh ...`) |
+| overlay | ok: `usage/OVERLAY-abramson-motion-brief.pdf` and `OVERLAY-abramson-motion-brief.txt` (`sh tools/overlay.sh ...`) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and looked at in its final state) |
 | tier 2 | not judged against two or three filers: one exemplar only (see Known gaps, 1) |
 | typeface | face required: none. LR 5.1.1(a) and LR 7.1.3(a)(2) say "plainly typewritten or printed" and "at least 12 point"; no typeface is named (checked 2026-10-15 against the 2026 rules PDF). Substitute: none; EB Garamond stays (vendored, `fonts/FONTS.md`, "No face named"). Fit: not applicable. |
@@ -52,7 +52,7 @@ Federal rules: Fed. R. Civ. P. 12(b)(6) and 8(a) are cited by the brief, not rep
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/third-circuit/delaware/federal/district/motion-brief samples/INPUT-abramson-motion-brief.md
+sh tools/render.sh courts/third-circuit/delaware/federal/district/motion-brief usage/INPUT-ded-motion-brief-abramson.md
 sh tools/overlay.sh courts/third-circuit/delaware/federal/district/motion-brief abramson-motion-brief
 ```
 
@@ -91,10 +91,10 @@ sh tools/overlay.sh courts/third-circuit/delaware/federal/district/motion-brief 
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form.
-- **docx** (`docx/reference.docx`, `docx/ded.lua`, `docx/build-reference.sh`, `docx/render.sh`): `sh docx/render.sh . samples/INPUT-abramson-motion-brief.md samples/OUTPUT-abramson-motion-brief.docx`, run from the court folder. `render.sh` runs pandoc (`--reference-doc=docx/reference.docx --lua-filter=docx/ded.lua`) and then points the section footers at the footer part pandoc writes. The reference carries the typst form: EB Garamond 13 pt, 27 pt exact line pitch, 1 in margins, 0.5 in first-line indent, single-spaced 13 pt footnotes and headings, centred 13 pt page number. The filter builds the cover (caption with the party column closed by a rule, title, `OF COUNSEL:` and counsel columns, date), the contents and the table of citations as their own sections (lower roman, no footer on the cover), the numbered headings (I., A.) and the signature block. Memorandum pages are Arabic from 1.
+- **docx** (`docx/reference.docx`, `docx/ded.lua`, `docx/build-reference.sh`, `docx/render.sh`): `sh docx/render.sh . usage/INPUT-ded-motion-brief-abramson.md usage/OUTPUT-ded-motion-brief-abramson.docx`, run from the court folder. `render.sh` runs pandoc (`--reference-doc=docx/reference.docx --lua-filter=docx/ded.lua`) and then points the section footers at the footer part pandoc writes. The reference carries the typst form: EB Garamond 13 pt, 27 pt exact line pitch, 1 in margins, 0.5 in first-line indent, single-spaced 13 pt footnotes and headings, centred 13 pt page number. The filter builds the cover (caption with the party column closed by a rule, title, `OF COUNSEL:` and counsel columns, date), the contents and the table of citations as their own sections (lower roman, no footer on the cover), the numbered headings (I., A.) and the signature block. Memorandum pages are Arabic from 1.
 - Differences from typst: the contents and the table of citations list their entries without page numbers. A TOC field fills in its page numbers when Word or LibreOffice updates fields; pandoc cannot compute the table of citations' pages at all. Word and LibreOffice break lines differently from typst, so page breaks in the memorandum will not match the typst pages.
 - Checked here: the `.docx` is a valid zip with well-formed XML parts (CRC read and `xmllint`). Not checked: opening in Word or LibreOffice (LibreOffice is not installed in the build box).
-- docx BLOCKED: every gate check measured on the LibreOffice PDF (`samples/OUTPUT-abramson-motion-brief.docx.pdf`, Gates 0 to 3). No check IDs can be listed: this court folder has no `checks.yaml`. Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
+- docx BLOCKED: every gate check measured on the LibreOffice PDF (`usage/OUTPUT-abramson-motion-brief.docx.pdf`, Gates 0 to 3). No check IDs can be listed: this court folder has no `checks.yaml`. Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
 - docx BLOCKED on tier 1 content, not only on the PDF: the table of citations has no page numbers (LR 7.1.3(b)(1)(B)), and the contents has no page numbers until a field update (LR 7.1.3(b)(1)(A)). Reason: pandoc does not paginate and LibreOffice does not honor TA/TOA fields here, so the page numbers cannot be produced in this box.
 
 [Formbook index](../../../../../README.md) | [Delaware federal index](../README.md)

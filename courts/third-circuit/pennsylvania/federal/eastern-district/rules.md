@@ -13,10 +13,10 @@ Access note: on 2026-10-17 `www.paed.uscourts.gov` rejected direct requests from
 | LCivR | Local Rules of Civil Procedure, E.D. Pa., "Effective July 1, 1995, Including Amendments Effective Through May 8, 2023" (74 pp.) | https://www.paed.uscourts.gov/sites/paed/files/documents/locrules/civil/cvrules.pdf |
 | LR-PAGE | Court page "Local Civil Rules" (lists the 05/08/2023 rules, the 10/08/2024 amendment to Rule 40.1, and two other documents) | https://www.paed.uscourts.gov/local-rules/Local%20Civil%20Rules |
 | FRCP | Federal Rules of Civil Procedure 5, 5.2, 7, 7.1, 8, 10, 11, 38 (LII text) | https://www.law.cornell.edu/rules/frcp/rule_5 (and rule_5.2, rule_7, rule_7.1, rule_8, rule_10, rule_11, rule_38) |
-| EX-MURPHY | Complaint and jury demand, *Murphy v. LexisNexis Risk Solutions, Inc.*, No. 2:26-cv-07848 (The Kim Law Firm) | `complaint/exemplars/` |
-| EX-DOE | Complaint, *Student Doe v. Noem*, No. 5:25-cv-02070 (Ellenberg Law Group) | `complaint/exemplars/` |
-| EX-HARVIE | Motion to dismiss with brief, *Harvie v. Defending America PAC, Inc.*, No. 2:26-cv-05544 (Bochetto & Lentz; Lex Politica) | `motion-brief/exemplars/` |
-| EX-SALAAM | Defendant's motion to dismiss (supporting brief), *Salaam v. Trump*, No. 2:24-cv-05560, Doc. 26-1 (Dhillon Law Group) | `motion-brief/exemplars/` |
+| EX-MURPHY | Complaint and jury demand, *Murphy v. LexisNexis Risk Solutions, Inc.*, No. 2:26-cv-07848 (The Kim Law Firm) | `complaint/usage/` |
+| EX-DOE | Complaint, *Student Doe v. Noem*, No. 5:25-cv-02070 (Ellenberg Law Group) | `complaint/usage/` |
+| EX-HARVIE | Motion to dismiss with brief, *Harvie v. Defending America PAC, Inc.*, No. 2:26-cv-05544 (Bochetto & Lentz; Lex Politica) | `motion-brief/usage/` |
+| EX-SALAAM | Defendant's motion to dismiss (supporting brief), *Salaam v. Trump*, No. 2:24-cv-05560, Doc. 26-1 (Dhillon Law Group) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (FRCP or E.D. Pa. Local Civil Rule). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

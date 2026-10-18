@@ -31,4 +31,4 @@ Kinds: **M** = mandated; **C** = convention; **A** = author responsibility. Cour
 | NED-LEN-001 | A supporting brief is limited to 13,000 words and includes the required certificate of compliance. | NECivR 7.1(d)(1)(A), (d)(3) | M |
 | NED-CERT-002 | Attorney signature and contact block follow NED-CERT-001. | NECivR 11.1(a)(1)(A) | M |
 
-The filed exemplar's Times New Roman face and other visual choices are filer convention, not District rules. See each doc-type `exemplars/SOURCE.md` for searches and tier-2 status.
+The filed exemplar's Times New Roman face and other visual choices are filer convention, not District rules. See each doc-type `usage/SOURCE.md` for searches and tier-2 status.

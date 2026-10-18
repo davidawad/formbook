@@ -5,14 +5,14 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/moti
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-echo-mav-3-25-bk-31122-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-echo-mav-memorandum.md`: pages 1 to 10 of the filing, the signature block and the certificate of service; argument headings B to E without their bodies (see Known gaps 4) |
+| exemplar | yes: `usage/SAMPLE-tneb-motion-brief-echomav325bk31122.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-tneb-motion-brief-echomavmemorandum.md`: pages 1 to 10 of the filing, the signature block and the certificate of service; argument headings B to E without their bodies (see Known gaps 4) |
 | typeface | face required: none (E.D. Tenn. LBR 9004-1(a) names no typeface; checked against the full local rules PDF, 2026-10-15). Font: EB Garamond kept (vendored, `fonts/eb-garamond/`); no court face to substitute. Visual only versus the filed Times New Roman. |
-| render | ok: `samples/OUTPUT-echo-mav-memorandum.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings, pdffonts shows EBGaramond only (2026-10-15) |
-| overlay | ok: `samples/OVERLAY-echo-mav-memorandum.pdf` and `samples/OVERLAY-echo-mav-memorandum.txt` (regenerated 2026-10-15) |
+| render | ok: `usage/OUTPUT-tneb-motion-brief-echomavmemorandum.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings, pdffonts shows EBGaramond only (2026-10-15) |
+| overlay | ok: `usage/OVERLAY-echo-mav-memorandum.pdf` and `usage/OVERLAY-echo-mav-memorandum.txt` (regenerated 2026-10-15) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-15) |
 
-Tools: `sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/motion-brief samples/INPUT-echo-mav-memorandum.md`, then `sh tools/overlay.sh <same dir> echo-mav-memorandum`.
+Tools: `sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-tneb-motion-brief-echomavmemorandum.md`, then `sh tools/overlay.sh <same dir> echo-mav-memorandum`.
 
 ## Governing rules
 
@@ -57,11 +57,11 @@ Primary sources. The E.D. Tenn. local rules were read from the court's PDF on 20
 
 ## Overlay
 
-`samples/OVERLAY-echo-mav-memorandum.pdf`: red is our render, blue is the filed exemplar, black is where both agree. Page pairing (`OVERLAY-echo-mav-memorandum.txt`): our pages 1 to 3 pair with filed pages 1 to 3; our pages 4 to 9 pair with filed pages 5 to 10 (a one-page offset from our page 4 on: the pairing is by words, so a page offset is expected where our pagination differs from the filing's); our page 10 (the certificate) pairs with filed page 22. The word overlap per page is 44% to 86%. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-echo-mav-memorandum.pdf`: red is our render, blue is the filed exemplar, black is where both agree. Page pairing (`OVERLAY-echo-mav-memorandum.txt`): our pages 1 to 3 pair with filed pages 1 to 3; our pages 4 to 9 pair with filed pages 5 to 10 (a one-page offset from our page 4 on: the pairing is by words, so a page offset is expected where our pagination differs from the filing's); our page 10 (the certificate) pairs with filed page 22. The word overlap per page is 44% to 86%. The overlay is a diagnostic, not a score.
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 12 pt, exact 24 pt double lines, 13.8 pt single lines, 1 in margins, section headings bold at the margin, argument headings bold and indented 0.5 in, page number from page 2 through `titlePg`); `docx/tneb-motion-brief.lua` builds the cover, body, signature and the certificate of service (a borderless two-column table). Rendered with `sh tools/render.sh --engine docx <dir> samples/INPUT-echo-mav-memorandum.md` to `samples/OUTPUT-echo-mav-memorandum.docx` and `.docx.pdf` (LibreOffice 26.8.1, 10 pages, pdffonts shows EB Garamond only). Every page of both the `.docx.pdf` and the typst output was rasterized at 60 dpi and viewed (10 of 10, 2026-10-15).
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 12 pt, exact 24 pt double lines, 13.8 pt single lines, 1 in margins, section headings bold at the margin, argument headings bold and indented 0.5 in, page number from page 2 through `titlePg`); `docx/tneb-motion-brief.lua` builds the cover, body, signature and the certificate of service (a borderless two-column table). Rendered with `sh tools/render.sh --engine docx <dir> usage/INPUT-tneb-motion-brief-echomavmemorandum.md` to `usage/OUTPUT-tneb-motion-brief-echomavmemorandum.docx` and `.docx.pdf` (LibreOffice 26.8.1, 10 pages, pdffonts shows EB Garamond only). Every page of both the `.docx.pdf` and the typst output was rasterized at 60 dpi and viewed (10 of 10, 2026-10-15).
 
 - Matches the typst output: letter page, 1 in margins, EB Garamond 12 pt, double-spaced body with a 0.5 in first-line indent, the cover (court, district, division, caption, title) in the same lines, bold section and argument headings in the same positions, the signature block at 3.25 in kept on one page (keep-with-next), the certificate of service with the two served persons side by side, the page number centered from page 2.
 - Differs (tier 2, not chased): line breaks fall one line apart on some pages, so later page breaks move by a line (still 10 pages); LibreOffice places exact-spacing leading above the text, so the text starts about 11 pt lower on each page (the margin is unchanged); heading spacing around the argument headings is pandoc's, a few points less than the typst block spacing; pandoc's smart extension prints curly quotes and dashes where typst prints the sample's straight characters; the cover spacer (about 17 pt) is tuned to the typst title position, not a rule value.

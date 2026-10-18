@@ -1,5 +1,5 @@
 // Motion with brief in support (memorandum), United States Bankruptcy Court for the Western District of
-// Wisconsin (wiwb). Built from the rules; the filed exemplar (../exemplars/SOURCE.md) settles only what they
+// Wisconsin (wiwb). Built from the rules; the filed exemplar (../usage/SOURCE.md) settles only what they
 // leave open. Rules (see ../README.md for quotes, URLs and the verification date):
 //   Fed. R. Bankr. P. 9013 (a motion is written; it states its grounds with particularity and the relief sought),
 //   9004(a)-(b) (legibility; caption elements), 9011 (signature block), 9014 (contested matter, for a motion
@@ -215,7 +215,7 @@
 
 #let wiwb-motion-brief(meta, body) = {
   // Fed. R. Bankr. P. 9013(b) requires the grounds and the relief requested, in substance. It does not require
-  // headings for them: the filed memorandum (../exemplars/SOURCE.md) states both in its own headings, so the
+  // headings for them: the filed memorandum (../usage/SOURCE.md) states both in its own headings, so the
   // template asserts nothing about heading names.
 
   set page(

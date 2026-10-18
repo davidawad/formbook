@@ -4,10 +4,10 @@ Doc type `motion-brief`: the memorandum of law that accompanies a motion under F
 
 ## Status
 
-- Exemplar: yes, one filer (American Honda Finance Corporation, *In re Martin*, Case 20-10454, filed 2021-01-08, 13 pp.). See `exemplars/SOURCE.md`.
-- Render: ok (`sh tools/render.sh <this dir> samples/INPUT-honda-707-memorandum.md`, 12 pages, no typst warnings, EB Garamond only).
-- Overlay: ok (`sh tools/overlay.sh <this dir> honda-707-memorandum`, `samples/OVERLAY-honda-707-memorandum.pdf` and `.txt`).
-- Pages reviewed: 12 of 12 (every page of `samples/OUTPUT-honda-707-memorandum.pdf` rendered at 60 dpi and looked at, after the last template change).
+- Exemplar: yes, one filer (American Honda Finance Corporation, *In re Martin*, Case 20-10454, filed 2021-01-08, 13 pp.). See `usage/SOURCE.md`.
+- Render: ok (`sh tools/render.sh <this dir> usage/INPUT-ilnb-motion-brief-honda707memorandum.md`, 12 pages, no typst warnings, EB Garamond only).
+- Overlay: ok (`sh tools/overlay.sh <this dir> honda-707-memorandum`, `usage/OVERLAY-honda-707-memorandum.pdf` and `.txt`).
+- Pages reviewed: 12 of 12 (every page of `usage/OUTPUT-ilnb-motion-brief-honda707memorandum.typst.pdf` rendered at 60 dpi and looked at, after the last template change).
 - Second filer: not collected.
 
 ## Governing rules
@@ -34,7 +34,7 @@ Verified 2026-10-14. Rule text quoted from the sources; the court's local rules 
 
 ## What the overlay shows
 
-`samples/OVERLAY-honda-707-memorandum.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (`samples/OVERLAY-honda-707-memorandum.txt`):
+`usage/OVERLAY-honda-707-memorandum.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words (`usage/OVERLAY-honda-707-memorandum.txt`):
 
 ```
 ours p.1  filed p.1  word-overlap 91.6%
@@ -84,8 +84,8 @@ Pages 1 to 5 pair one to one. From page 6 our pages pair one page later: the fil
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default; `ilnb.lua` lays out the cover, caption, heading labels and signature block). Built with `sh tools/render.sh --engine docx <this dir> samples/INPUT-honda-707-memorandum.md`.
+DOCX (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default; `ilnb.lua` lays out the cover, caption, heading labels and signature block). Built with `sh tools/render.sh --engine docx <this dir> usage/INPUT-ilnb-motion-brief-honda707memorandum.md`.
 
 - **Matches the typst form (in the styles and filter; not checked against a rendered page):** EB Garamond 13 pt; exact 24 pt line pitch; 0.5 in first-line indent for body text; US Letter with 1 in margins; centred 12 pt PAGE number in the footer; single-spaced block quotations; headings hang with labels "I.", "A.", "1.", "a." added by the filter as text (not list numbering), bold, not capitalised.
 - **Differs or unverified:** the caption is a two-column table whose party column is ruled on the right and bottom, with widths taken from the typst layout (3.4 in, 0.3 in gutter), but its borders are not verified against the typst layout. The signature block stacks the "Dated" line above the signature column (typst sets them side by side). The 15-page limit (ILNB-LIMIT-001) is asserted by the typst build only; the docx has no page count. The docx was validated (zip and XML well-formed; every `pStyle` defined; one footer relation resolves); it was not opened in Word.
-- **BLOCKED:** `docx.pdf` (`samples/OUTPUT-honda-707-memorandum.docx.pdf`) is not produced because `soffice` (LibreOffice) is not installed on this box, so `tools/render.sh --engine docx` stops after writing `samples/OUTPUT-honda-707-memorandum.docx`. Pages reviewed: 0. The docx gates (`tools/check.sh --engine docx`) cannot run; the 15-page check (ILNB-LIMIT-001) and the page-by-page review are not done. Pagination in Word may differ from LibreOffice.
+- **BLOCKED:** `docx.pdf` (`usage/OUTPUT-honda-707-memorandum.docx.pdf`) is not produced because `soffice` (LibreOffice) is not installed on this box, so `tools/render.sh --engine docx` stops after writing `usage/OUTPUT-ilnb-motion-brief-honda707memorandum.docx`. Pages reviewed: 0. The docx gates (`tools/check.sh --engine docx`) cannot run; the 15-page check (ILNB-LIMIT-001) and the page-by-page review are not done. Pagination in Word may differ from LibreOffice.
