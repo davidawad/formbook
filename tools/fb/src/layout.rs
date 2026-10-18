@@ -250,9 +250,10 @@ pub fn pair(input_id: &str, sample_ids: &[String]) -> Option<String> {
     }
 }
 
-const CLI: &str = "usage: fb usage stem|dir|inputs|samples <doc-dir>\n       fb usage input|sample|pair <doc-dir> <id>\n       fb usage output <doc-dir> <id> [typst|latex|docx|docx.pdf]\n       fb usage overlay <doc-dir> <id> [pdf|txt]";
+const CLI: &str = "usage: fb usage stem|dir|inputs|samples|pairs <doc-dir>\n       fb usage input|sample|pair <doc-dir> <id>\n       fb usage output <doc-dir> <id> [typst|latex|docx|docx.pdf]\n       fb usage overlay <doc-dir> <id> [pdf|txt]";
 
 /// `fb usage ...`: print a layout name for the shell side. Paths are printed as the doc dir was given.
+/// `pairs` prints `<SAMPLE.pdf> <OUTPUT.typst.pdf>` once per INPUT id that `pair` matches uniquely.
 pub fn main(args: &[String]) -> Res<ExitCode> {
     let a: Vec<&str> = args.iter().map(String::as_str).collect();
     let (cmd, dir, rest) = match a.as_slice() {
@@ -265,6 +266,17 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         ("dir", []) => vec![show(dir.usage())],
         ("inputs", []) => dir.ids(INPUT),
         ("samples", []) => dir.ids(SAMPLE),
+        ("pairs", []) => {
+            let samples = dir.ids(SAMPLE);
+            dir.ids(INPUT)
+                .iter()
+                .filter_map(|id| {
+                    pair(id, &samples).map(|s| {
+                        format!("{} {}", show(dir.sample(&s)), show(dir.output(id, "typst")))
+                    })
+                })
+                .collect()
+        }
         ("input", [id]) => vec![show(dir.input(id))],
         ("sample", [id]) => vec![show(dir.sample(id))],
         ("pair", [id]) => {
