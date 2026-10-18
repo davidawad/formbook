@@ -20,12 +20,33 @@ fn pinned_tnr_dir() -> Res<PathBuf> {
     Ok(PathBuf::from(p))
 }
 
-/// `fb render <court-dir> <sample.md> [out.pdf]` (Typst engine).
+/// usage/OUTPUT-<stem>-<id>.typst.pdf for usage/INPUT-<stem>-<id>.md (the same stem and id).
+fn default_out(doc: &Path, sample: &Path) -> Res<PathBuf> {
+    let d = crate::layout::Doc::open(doc)?;
+    let file = sample
+        .file_name()
+        .map(|n| n.to_string_lossy().into_owned())
+        .unwrap_or_default();
+    crate::layout::id_of(crate::layout::INPUT, &d.stem, &file)
+        .map(|id| d.output(id, "typst"))
+        .ok_or_else(|| {
+            fail(
+                2,
+                format!(
+                    "fb render: {file} is not {}; name the output PDF",
+                    crate::layout::input_name(&d.stem, "<id>")
+                ),
+            )
+        })
+}
+
+/// `fb render <doc-dir> <usage/INPUT-<stem>-<id>.md> [out.pdf]` (Typst engine); the default output is
+/// usage/OUTPUT-<stem>-<id>.typst.pdf.
 pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
     if args.len() < 2 || args.len() > 3 {
         return Err(fail(
             2,
-            "usage: fb render <court-dir> <sample.md> [out.pdf]",
+            "usage: fb render <doc-dir> <usage/INPUT-<stem>-<id>.md> [out.pdf]",
         ));
     }
     let root = repo_root()?;
@@ -36,25 +57,11 @@ pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
         root.join(court)
     };
     let sample = Path::new(&args[1]);
-    let out = args.get(2).map_or_else(
-        || {
-            let id = sample
-                .file_stem()
-                .and_then(|s| s.to_str())
-                .unwrap_or("sample")
-                .strip_prefix("INPUT-")
-                .unwrap_or("sample");
-            court.join("samples").join(format!("OUTPUT-{id}.pdf"))
-        },
-        |p| {
-            let p = Path::new(p);
-            if p.is_absolute() {
-                p.to_path_buf()
-            } else {
-                root.join(p)
-            }
-        },
-    );
+    let out = match args.get(2) {
+        Some(p) if Path::new(p).is_absolute() => PathBuf::from(p),
+        Some(p) => root.join(p),
+        None => default_out(&court, sample)?,
+    };
     let sample_arg = if sample.is_absolute() {
         sample.to_path_buf()
     } else {
