@@ -76,8 +76,14 @@ pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
         .arg(&court)
         .arg("--font-path")
         .arg(&fonts);
-    if crate::fonts::has_times_exemplar(&root, &court)? {
-        command.arg("--font-path").arg(pinned_tnr_dir()?);
+    // A Times exemplar requires the pinned directory; otherwise it is added when present so scratch
+    // copies (check-selftest mutants) that declare Times New Roman still find it.
+    match pinned_tnr_dir() {
+        Ok(dir) => {
+            command.arg("--font-path").arg(dir);
+        }
+        Err(e) if crate::fonts::has_times_exemplar(&root, &court)? => return Err(e),
+        Err(_) => {}
     }
     let status = command
         .arg("--ignore-system-fonts")

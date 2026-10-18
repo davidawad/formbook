@@ -25,9 +25,11 @@ esac
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
 OUT=${3:-$COURT/usage/$(basename "$SAMPLE" .md | sed 's/^INPUT-/OUTPUT-/').typst.pdf}
+# pinned Times New Roman dirs (macOS, Linux), as fb render pins them; typst skips the absent one
 LOG=$(mktemp)
 typst compile --root "$COURT" \
   --font-path "$ROOT/fonts" --ignore-system-fonts \
+  --font-path /System/Library/Fonts/Supplemental --font-path /usr/share/fonts/truetype/msttcorefonts \
   --package-cache-path "$ROOT/vendor/typst-packages" \
   --input "sample=$SAMPLE" "$COURT/typst/main.typ" "$OUT" 2> "$LOG" ||
   {
