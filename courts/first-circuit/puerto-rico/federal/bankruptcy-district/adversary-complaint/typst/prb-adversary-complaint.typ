@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // no typeface rule in the PR bankruptcy LBRs; Times New Roman substitute per docs/FONTS.md (convention)
+#let font-family = "Liberation Mono"        // no typeface rule in the PR bankruptcy LBRs; matches the audited exemplar (docs/FONTS.md)
 #let type-size = 12pt                   // convention (both exemplars set 12 pt); LBR 9013-1(c)(1) needs 11 pt minimum for notices
 #let page-w = 8.5in                     // LBR 1005-1(b): 8 1/2 x 11 inch
 #let page-h = 11in

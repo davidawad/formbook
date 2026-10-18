@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // CA8-FORM-004: serif, proportional. Vendored in /fonts.
+#let font-family = "Gelasio"          // CA8-FORM-004: serif, proportional. Vendored in /fonts.
 #let font-name = "EB Garamond, 14-point"  // printed in the certificate of compliance (Form 6)
 #let type-size = 14pt                      // CA8-FORM-004: 14-point or larger, everywhere.
 #let body-leading = 0.94em                 // CA8-FORM-003: with the metric-aligned line box below this

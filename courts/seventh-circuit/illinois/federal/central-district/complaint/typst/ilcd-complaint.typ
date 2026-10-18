@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; LR 5.1(B)(2) asks for a plain roman style
+#let font-family = ("Times New Roman", "Liberation Serif")        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; LR 5.1(B)(2) asks for a plain roman style
 #let type-size = 12pt                   // LR 5.1(B)(2): body text 12-point or 14-point
 #let page-margin = 1in                  // LR 5.1(A): approximately one-inch margins on each side, top and bottom
 #let body-leading = 1.345em             // LR 5.1(B)(1): double spacing. Liberation Serif's line box is 0.655em, so 0.655em + 1.345em = 2.0em = 24 pt at 12 pt

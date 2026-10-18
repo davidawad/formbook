@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters
 // ---------------------------------------------------------------------------
-#let font-family = ("Times New Roman", "Liberation Serif")   // no local-rule font found; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = "TeX Gyre Termes"   // Termes matches the audited exemplar (docs/FONTS.md)
 #let type-size = 12pt
 #let page-w = 8.5in
 #let page-h = 11in

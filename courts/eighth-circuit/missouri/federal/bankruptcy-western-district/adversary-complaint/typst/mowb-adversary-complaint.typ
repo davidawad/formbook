@@ -12,7 +12,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"         // Vendored in /fonts. No Missouri or FRBP type rule; see ../README.md, gap 2.
+#let font-family = ("Times New Roman", "Liberation Serif")         // Vendored in /fonts. No Missouri or FRBP type rule; see ../README.md, gap 2.
 #let type-size = 13pt                    // Tier 2: the exemplars are 12 pt Times; EB Garamond needs 13 pt for the same apparent size.
 #let line-pitch = 24pt                   // Tier 2: double spacing, as in the Carlson exemplar (complaint).
 #let body-leading = 1.2em                // Gap between lines of body text: with the 13 pt line box, the line pitch is 24 pt (double spacing).

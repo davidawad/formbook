@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // no local-rule font found; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // no local-rule font found; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt
 #let margin = 1in
 #let body-leading = 1.345em             // double spacing at 12 pt (Liberation Serif line box is 0.655em)

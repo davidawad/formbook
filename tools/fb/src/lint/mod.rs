@@ -1,4 +1,4 @@
-//! `fb lint <doc-dir> [--engine typst|latex|all]`: mechanical bans of CLAUDE.md on a doc dir.
+//! `fb lint <doc-dir> [--engine typst|latex|all]` checks a doc dir; `fb lint fonts` checks audited faces globally.
 //!   (a) ngram      a template file shares a run of 5+ words with a filed exemplar's text, and the run
 //!                  is not rule text (rules.md of the doc dir or an enclosing court folder);
 //!   (b) break/vspace  forced line breaks or literal vertical space outside the parameter block
@@ -6,6 +6,7 @@
 //!   (c) hardbreak/raw-typst/raw-latex  in samples/INPUT-*.md.
 //! Output: `LINT <kind> <file>:<line>: <detail>` per finding, then `RESULT: LINT PASS` or
 //! `RESULT: LINT FAIL (<n> findings)`; exit 1 on findings.
+pub(crate) mod fonts;
 mod input;
 mod ngram;
 mod tex;
@@ -121,6 +122,9 @@ fn rel(dir: &Path, p: &Path) -> String {
 }
 
 pub fn main(args: &[String]) -> Res<ExitCode> {
+    if args == ["fonts"] {
+        return fonts::main();
+    }
     let (dir, engine) = parse_opts(args)?;
     if !dir.is_dir() {
         return Err(fail(

@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // CAVC-FORM-002: proportionally spaced. Vendored in /fonts.
+#let font-family = "Liberation Sans"          // CAVC-FORM-002: proportionally spaced. Vendored in /fonts.
 #let type-size = 14pt                      // CAVC-FORM-002: 13-point or larger. 14 pt, as in the filed exemplar.
 #let body-leading = 0.94em                 // CAVC-FORM-003: with the metric-aligned line box below this
                                            // gives a baseline pitch of about 2.2 x type size (double spacing).

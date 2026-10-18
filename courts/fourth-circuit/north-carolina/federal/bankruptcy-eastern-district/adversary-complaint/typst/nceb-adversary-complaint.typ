@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // no E.D.N.C. typeface rule (FRBP 9004(a): "clearly legible"); Times New Roman substitute per docs/FONTS.md, vendored in fonts/
+#let font-family = "TeX Gyre Schola"        // no E.D.N.C. typeface rule (FRBP 9004(a): "clearly legible"); Schola matches the audited exemplar (docs/FONTS.md)
 #let type-size = 12pt                   // no E.D.N.C. type-size rule; the exemplar is a 12 pt serif
 #let body-leading = 1.345em             // double spacing as in the exemplar: 0.655em line box + 1.345em leading = 24 pt pitch
 #let single-leading = 0.5em             // single spacing: caption, counsel, signature, quotations, table

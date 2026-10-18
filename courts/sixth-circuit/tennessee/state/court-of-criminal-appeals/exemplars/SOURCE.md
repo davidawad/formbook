@@ -15,3 +15,7 @@ Indexed level: `state-appellate`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 23 pp., text layer verified 2026-10-17; posted by ACLU-TN as file-stamped copy | `FILED-EXAMPLE-aclu-bassett-2019-02236-amicus-brief.pdf` | American Civil Liberties Union and ACLU of Tennessee, amici curiae (Thomas H. Castelli, ACLU Foundation of Tennessee) | State v. Christopher Bassett, Jr., No. E2019-02236-CCA-R3-CD | undated | https://www.aclu-tn.org/app/uploads/2023/06/amicus_brief_filestampedcopy.pdf | `24504c09d612e0f3cdd1427fbd665d47ccab7c42a2b5f377463843c1d48d633d` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: searched tncourts.gov appellate rules, capital-case/document archives, and targeted queries for substantive motions, petitions for review, and writ filings. Results were opinions and rules quoting or describing party briefs, not the underlying filings; no additional public filed text-layer PDF was retrieved for the blocked rows. Appellate routes checked against official Tennessee Rules of Appellate Procedure and e-filing rule: https://www.tncourts.gov/rules/rules-appellate-procedure ; https://www.tncourts.gov/courts/supreme-court/rules/supreme-court-rules/rule-46-electronic-filing.

@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a convention; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "EB Garamond"        // LR 5.5(a): a proportional serif; EB Garamond is the vendored face
+#let font-family = "TeX Gyre Schola"        // LR 5.5(a): proportional serif; audited exemplar face per docs/FONTS.md
 #let type-size = 12pt                   // LR 5.5(a): "type not less than elite" (elite = 12 cpi); 12 pt here
 #let page-w = 8.5in                     // LR 5.5(a): letter size
 #let page-h = 11in

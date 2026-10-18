@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"        // Times New Roman substitute per docs/FONTS.md, vendored in fonts/; see README, "Known gaps"
+#let font-family = "TeX Gyre Schola"        // Schola matches the audited exemplar (docs/FONTS.md); see README, "Known gaps"
 #let type-size = 12pt                   // LR 10.1(a): at least 11 point
 #let margin = 1in                       // LR 10.1(a): one inch on all sides
 #let body-leading = 1.645em             // LR 10.1(a): double-spaced; measured on the render (README)

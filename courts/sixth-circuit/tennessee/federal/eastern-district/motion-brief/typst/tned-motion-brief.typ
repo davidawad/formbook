@@ -12,7 +12,7 @@
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"   // LR 5.1 names no typeface; Times New Roman substitute, the default per docs/FONTS.md
+#let font-family = ("Times New Roman", "Liberation Serif")   // LR 5.1 names no typeface; Times New Roman substitute, the default per docs/FONTS.md
 #let type-size = 12pt                   // LR 5.1: no smaller than 12, footnotes included
 #let body-leading = 1.345em             // LR 5.1: double-spaced. Line box 0.655em + leading 1.345em = 24 pt pitch at 12 pt (measured)
 #let single-leading = 0.65em            // LR 5.1: quotations, headings, footnotes may be single-spaced; caption and signature block too

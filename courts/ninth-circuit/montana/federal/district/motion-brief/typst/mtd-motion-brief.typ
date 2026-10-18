@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a named style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"        // MT-FORM-002: a proportionally spaced serif; the only face vendored in fonts/
+#let font-family = "TeX Gyre Schola"        // MT-FORM-002: proportional serif; audited exemplar face per docs/FONTS.md
 #let type-size = 14pt                   // MT-FORM-002: typewritten in 14-point font (L.R. 1.5(a)(2))
 #let line-pitch = 32pt                  // MT-FORM-003: double-spaced (L.R. 1.5(a)(2)); 2 x 16 pt at 14 pt type, see README.md
 #let body-leading = 1.64em              // gap between lines of body text: EB Garamond's line box is 0.65 em, so 1.64 em gives a 32 pt baseline pitch at 14 pt (measured, README.md)

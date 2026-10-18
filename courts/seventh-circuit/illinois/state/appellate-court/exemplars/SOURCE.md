@@ -15,3 +15,7 @@ Indexed level: `state-appellate`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 62 pp., text layer verified 2026-10-17; motion for leave with attached amicus brief | `FILED-EXAMPLE-aclu-il-4-20-0509-amicus-brief.pdf` | ACLU of Illinois et al. (amici curiae) | No. 4-20-0509 (4th Dist.) | 2021-04-15 | https://www.aclu-il.org/app/uploads/2021/04/aclu_et_al_filed_motion_with_brief.pdf | `4b3498e0488989354b4ee064c3f050853708116e843e574627ffa20a4139482d` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: searched Illinois Courts Supreme Court/appellate case and document pages and official forms for petitions for leave to appeal, rehearing petitions, and original writ filings. Official results exposed rules, standardized blank forms, and dispositions, but no filed party PDF matching the remaining blocked rows. Jurisdiction and transfer procedures checked against official Illinois Supreme Court Rules: https://www.illinoiscourts.gov/rules/approved-rules/ ; https://www.illinoiscourts.gov/courts/supreme-court/leave-to-appeal/.

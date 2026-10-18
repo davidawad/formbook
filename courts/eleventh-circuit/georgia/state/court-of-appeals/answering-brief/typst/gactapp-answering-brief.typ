@@ -14,7 +14,7 @@
 // Parameters
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"     // Rule 2 (c) (3) names Times New Roman as a compliant face; Liberation Serif is its metric-compatible substitute (docs/FONTS.md).
+#let font-family = "TeX Gyre Schola"     // Rule 2 (c) (3) names Times New Roman; the audited exemplar uses Schola (docs/FONTS.md).
 #let type-size = 14pt                      // Rule 2 (c) (3): serif, proportionally spaced, 14-point or larger (footnotes included).
 #let body-leading = 1.65em                 // Rule 2 (c) (2): no less than double spacing. With typst's default line box this gives a
                                            // baseline pitch of about 32.3 pt = 2 x the 1.15 em single line of this face at 14 pt.

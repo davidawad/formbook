@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 29 pp., text layer verified 2026-10-17 | `FILED-EXAMPLE-il-municipal-league-arlington-hts-pension-129471-amicus-brief.pdf` | Illinois Municipal League (amicus curiae) | Arlington Heights Police Pension Fund v. Pritzker, No. 129471 | 2023-09-21 | https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/c55c753a-314e-44dd-92cf-ac9575629a80/129471_AMB.pdf | `6bb918615b781b35830ccc37235a1fab5f46d68529641ececc5b4c6e30f644ea` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: searched Illinois Courts Supreme Court/appellate case and document pages and official forms for petitions for leave to appeal, rehearing petitions, and original writ filings. Official results exposed rules, standardized blank forms, and dispositions, but no filed party PDF matching the remaining blocked rows. Jurisdiction and transfer procedures checked against official Illinois Supreme Court Rules: https://www.illinoiscourts.gov/rules/approved-rules/ ; https://www.illinoiscourts.gov/courts/supreme-court/leave-to-appeal/.

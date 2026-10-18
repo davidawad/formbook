@@ -11,7 +11,7 @@
 // filed exemplars (tier 2, convention: 14 pt, double-spaced, one-inch margins).
 #let page-margin = 1in
 #let type-size = 14pt
-#let font-name = "Liberation Serif"       // Times New Roman substitute, the default per docs/FONTS.md
+#let font-name = ("Times New Roman", "Liberation Serif")       // Times New Roman substitute, the default per docs/FONTS.md
 #let body-leading = 1.65em                // line pitch 32 pt at 14 pt: double-spaced (LR 5.6); tuned against the exemplar pitch
 #let single-leading = 0.495em              // caption, signature, service block: one line pitch of about 16 pt at 14 pt
 #let para-indent = 0.5in

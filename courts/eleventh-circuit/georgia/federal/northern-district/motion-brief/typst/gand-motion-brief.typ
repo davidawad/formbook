@@ -9,7 +9,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-name = "Liberation Serif"     // LR 5.1(C) names Times New Roman (14 pt); substitute per docs/FONTS.md, metric-compatible.
+#let font-name = ("Times New Roman", "Liberation Serif")     // LR 5.1(C) names Times New Roman (14 pt); substitute per docs/FONTS.md, metric-compatible.
 #let font-family = font-name
 #let rule-font-name = "Times New Roman" // the face the filer certifies (LR 7.1(D)); not the rendered face
 #let type-size = 14pt                   // LR 5.1(C): Times New Roman at least 14 point; footnotes and quotations too

@@ -16,3 +16,7 @@ Indexed level: `state-supreme`
 | `amicus-brief` — Amicus curiae brief | COLLECTED: 17 pp., text layer verified 2026-10-17; via State Court Report | `FILED-EXAMPLE-ms-state-medical-assn-butler-v-watson-2020-1199-amicus-brief.pdf` | Mississippi State Medical Association (amicus curiae) | In re Initiative Measure No. 65: Butler v. Watson, No. 2020-IA-01199-SCT | 2020-12-18 | https://statecourtreport.org/sites/default/files/fastcase/additionalPdfs/processed/MS%20State%20Medical%20Association%20-Amicus%20Brief%20-12.18.2020.pdf | `948ec210407ba9b35ba3ec52323a04c4b815a5e8294b0b76170b31f549d59091` |
 
 Each `COLLECTED` row is a public filed PDF downloaded from the URL shown, with a text layer verified by `pdftotext` and its SHA-256 recorded; `fb fetch` re-downloads and checks it. A `BLOCKED` row gives the reason no qualifying public filed PDF was obtained.
+
+## Follow-up audit — fb-l129.4 (2026-10-17)
+
+Follow-up L4 search 2026-10-17: queried the Mississippi Supreme Court rules and official case/brief sources for petitions for review, certiorari/interlocutory review, chancery-court appellate briefs, and writ filings. The official-search results did not expose party PDFs matching the blocked types; no new downloadable text-layer filing was retrieved. Procedural routes were checked against the official Mississippi Rules of Appellate Procedure and court materials: https://courts.ms.gov/rules/msrulesofcourt/rules_of_appellate_procedure.pdf ; https://courts.ms.gov/.
