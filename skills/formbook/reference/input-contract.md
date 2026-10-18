@@ -2,7 +2,7 @@
 
 Every template reads ONE file: a YAML frontmatter block between `---` lines, then a markdown body. The template reads it in `typst/main.typ` (`split-frontmatter`, then `yaml(...)` on the block; the body goes through `cmarker` v0.1.10 with `raw-typst: false`, `smart-punctuation: true`).
 
-**The exact keys differ per doc type and per court.** The authority is that doc type's `README.md` section "Markdown contract" (a table of fields) and its `samples/INPUT-*.md`. Verify with `grep -o 'need(meta, "[a-z_]*")\|meta\.[a-z_]*' <doctype>/typst/*.typ | sort -u`: `need(...)` keys are required (the build panics without them), `meta.x` / `meta.at("x"` keys are optional.
+**The exact keys differ per doc type and per court.** The authority is that doc type's `README.md` section "Markdown contract" (a table of fields) and its `usage/INPUT-*.md`. Verify with `grep -o 'need(meta, "[a-z_]*")\|meta\.[a-z_]*' <doctype>/typst/*.typ | sort -u`: `need(...)` keys are required (the build panics without them), `meta.x` / `meta.at("x"` keys are optional.
 
 ## Shared shape
 
@@ -81,7 +81,7 @@ Body rules for this family (`opening-brief`, `answering-brief`, `reply-brief`, c
 | `motion-brief` other courts | Check each README: caption keys vary (`parties`, `caption`), word/page limits vary, some have no TOC/TOA. |
 | `adversary-complaint`, bankruptcy doc types | Same family as `complaint` with the bankruptcy caption; read the README. |
 | `opening-brief` / `answering-brief` / `reply-brief` | Heading numbering is automatic (do not type "I." / "A."); `answering-brief` and `reply-brief` differ from `opening-brief` in `required-sections`, word limit (reply is half) and cover title. |
-| Court-root template (ca9 layout) | Same appellate contract; the folder is the court itself (`typst/` at court root, samples in `samples/`). |
+| Court-root template (ca9 layout) | Same appellate contract; the folder is the court itself (`typst/` at court root, inputs in `usage/`). |
 
 ## Checking a contract you are unsure about
 

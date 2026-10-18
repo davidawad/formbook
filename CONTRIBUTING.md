@@ -47,20 +47,19 @@ Summarised here; the full text is in [AGENTS.md](AGENTS.md) and [docs/EVAL-LOOP.
 
 - Tier 1, the court's mandated form (font and size, margins, spacing, length limits, required sections, certificates, e-filing rules), must be perfect and traceable to a cited rule. Tier 2, professional convention (cover, TOC and TOA, headings, caption, signature block), must look professional, judged against exemplars from different filers. Tier 3, one filer's style, is not chased.
 - Templates are rule-driven and content-agnostic: no case-specific text, no coordinates measured off a filed PDF, no forced line breaks tuned to one document, no system fonts (compile only through `tools/render.sh`, which treats every typst warning as a failure).
-- Look at every rendered page against the exemplar (`tools/overlay.sh`). Never claim a page was reviewed that you did not look at.
+- Look at every rendered page against the exemplar (`just overlay <folder>`; overlays land in the gitignored `.overlay/` and are not committed). Never claim a page was reviewed that you did not look at.
 - Never set `"status": "done"` in a `court.json`. Do not edit other courts, `tools/`, `docs/`, `data/` or any generated tracker file in a unit PR; one PR is one folder.
-- A folder is complete when it has `README.md`, `typst/main.typ` plus a template file, at least one `exemplars/FILED-EXAMPLE-*.pdf` with `exemplars/SOURCE.md`, at least one `samples/INPUT-*.md` with its `OUTPUT-*.pdf` and `OVERLAY-*.pdf`. Copy `courts/first-circuit/court-of-appeals/opening-brief/`.
+- A folder is complete when it has `README.md`, `typst/main.typ` plus a template file, at least one `usage/SAMPLE-<stem>-<id>.pdf` with `usage/SOURCE.md`, at least one `usage/INPUT-<stem>-<id>.md` with its `usage/OUTPUT-<stem>-<id>.typst.pdf`. `<stem>` is `<court alias>-<doctype>`; `<id>` is lowercase `[a-z0-9]+`, no hyphens (see docs/EVAL-LOOP.md, "Folder layout"). `just lint` checks the names. Copy `courts/first-circuit/court-of-appeals/opening-brief/`.
 
 ## How verification works
 
 `sh tools/contribute.sh verify <id>` is the mechanical floor. It fails if:
 
 1. the folder layout above is incomplete, or `SOURCE.md` does not describe every exemplar PDF with a URL;
-2. any `samples/INPUT-*.md` does not render through `tools/render.sh` (any typst warning fails), or its `OUTPUT-*.pdf` is not committed;
-3. an exemplar exists but no `OVERLAY-*.pdf` was produced;
-4. for a `deepen` unit, the longest output is shorter than the doc type's `min_pages` (`data/doctypes.json`);
-5. `typst/` contains text copied from a sample's frontmatter (case numbers, party names, addresses) or prose, or a docket number;
-6. any file outside the unit's folder changed relative to `origin/master`, or a `court.json` changed.
+2. any `usage/INPUT-*.md` does not render through `tools/render.sh` (any typst warning fails), or its `usage/OUTPUT-*.typst.pdf` is not committed;
+3. for a `deepen` unit, the longest output is shorter than the doc type's `min_pages` (`data/doctypes.json`);
+4. `typst/` contains text copied from a sample's frontmatter (case numbers, party names, addresses) or prose, or a docket number;
+5. any file outside the unit's folder changed relative to `origin/master`, or a `court.json` changed.
 
 Passing means the unit is shaped and renders correctly; it does not mean the layout is right. That is the maintainers' review. `submit` reruns `verify` and pastes its output into the PR. `.github/workflows/contribute-verify.yml` reruns it on every PR, but it only runs once a maintainer enables GitHub Actions for the repo.
 
@@ -71,7 +70,7 @@ A maintainer reads the PR body (verify output, exemplar sources, the open tier-2
 ## Licensing and sources of exemplars
 
 - Exemplars must be public court records: filings from a public docket or archive (CourtListener RECAP, the court's own site, a state e-filing portal open to the public). No sealed, restricted, private or client documents. Do not include filings that contain unredacted personal data the court would have required redacted.
-- Record the exact source URL, filer, case, docket number, date filed and date retrieved for every exemplar in that folder's `exemplars/SOURCE.md`. A PR whose exemplar has no source URL fails verification.
+- Record the exact source URL, filer, case, docket number, date filed and date retrieved for every exemplar in that folder's `usage/SOURCE.md`. A PR whose exemplar has no source URL fails verification.
 - Rules text, templates and tools you write are contributed under the repository's license, the GNU GPL v3.0 ([LICENSE](LICENSE)). Quote court rules briefly and cite them; do not paste large copyrighted commentary.
 - Disclose substantial AI assistance in the PR body (the template has a line for it). You are responsible for what your agent submits.
 

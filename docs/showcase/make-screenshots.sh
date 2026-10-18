@@ -1,5 +1,6 @@
 #!/bin/sh
-# Regenerate every image in docs/showcase/ from files committed in this repo.
+# Regenerate every image in docs/showcase/ from files committed in this repo (the overlay is regenerated
+# into the gitignored .overlay/ by tools/overlay.sh first; overlays are never committed).
 # Usage (from anywhere): sh docs/showcase/make-screenshots.sh
 # Needs: pdftoppm (poppler), magick (ImageMagick), typst. Put the formbook toolchain on PATH first:
 #   export PATH="$HOME/.local/share/formbook/env/bin:$PATH"
@@ -39,10 +40,9 @@ typeset() {
   reduce "$W/raw-$2" "$OUT/$2" "$3"
 }
 
-TRES_OUT=$TRES/samples/OUTPUT-tresslar-opening-brief.pdf
-TRES_FILED=$TRES/exemplars/FILED-EXAMPLE-tresslar-26-1367-opening-brief.pdf
-TRES_OVL=$TRES/samples/OVERLAY-tresslar-opening-brief.pdf
-TRES_IN=$TRES/samples/INPUT-tresslar-opening-brief.md
+TRES_OUT=$TRES/usage/OUTPUT-ca3-opening-brief-tresslar.typst.pdf
+TRES_FILED=$TRES/usage/SAMPLE-ca3-opening-brief-tresslar261367.pdf
+TRES_IN=$TRES/usage/INPUT-ca3-opening-brief-tresslar.md
 
 # ---------------------------------------------------------------- hero.png
 grep -v '^#' "$TRES_IN" | head -n 30 | cut -c1-52 > "$W/input.txt"
@@ -66,7 +66,8 @@ TYP
 typeset hero.typ hero.png 96
 
 # ---------------------------------------------------------------- overlay.png
-page "$CAND/samples/OVERLAY-superhuman-complaint.pdf" 2 o 130
+sh tools/overlay.sh "$CAND" superhuman > /dev/null
+page ".overlay/$CAND/OVERLAY-cand-complaint-superhuman.pdf" 2 o 130
 cat > "$W/overlay.typ" << 'TYP'
 #set page(width: auto, height: auto, margin: 14pt, fill: rgb("#f6f4ee"))
 #set text(font: "Libertinus Serif", size: 14pt, fill: rgb("#222"))
@@ -97,14 +98,14 @@ typeset pages.typ pages.png 48
 
 # ---------------------------------------------------------------- courts.png
 cat > "$W/courts.list" << EOF
-$SCOTUS/samples/OUTPUT-in-re-grand-jury.pdf|U.S. Supreme Court: merits brief
-$CA1/samples/OUTPUT-figueroa-opening-brief.pdf|1st Circuit: opening brief
+$SCOTUS/usage/OUTPUT-scotus-merits-brief-inregrandjury.typst.pdf|U.S. Supreme Court: merits brief
+$CA1/usage/OUTPUT-ca1-opening-brief-figueroa.typst.pdf|1st Circuit: opening brief
 $TRES_OUT|3rd Circuit: opening brief
-$CAND/samples/OUTPUT-superhuman-complaint.pdf|N.D. Cal.: complaint
-$MDB/samples/OUTPUT-kapitus-complaint.pdf|D. Md. Bankruptcy: adversary complaint
-$CASUP/samples/OUTPUT-sweetwater-complaint.pdf|California Superior Court: complaint
-$NYS/samples/OUTPUT-valentino.pdf|New York Supreme Court: motion brief
-$TXSC/samples/OUTPUT-hawthorne-brief-on-the-merits.pdf|Texas Supreme Court: brief on the merits
+$CAND/usage/OUTPUT-cand-complaint-superhuman.typst.pdf|N.D. Cal.: complaint
+$MDB/usage/OUTPUT-mdb-adversary-complaint-kapituscomplaint.typst.pdf|D. Md. Bankruptcy: adversary complaint
+$CASUP/usage/OUTPUT-calsuperct-complaint-sweetwater.typst.pdf|California Superior Court: complaint
+$NYS/usage/OUTPUT-nysupct-motion-brief-valentino.typst.pdf|New York Supreme Court: motion brief
+$TXSC/usage/OUTPUT-tex-brief-on-the-merits-hawthorne.typst.pdf|Texas Supreme Court: brief on the merits
 EOF
 n=0
 : > "$W/courts.typ"

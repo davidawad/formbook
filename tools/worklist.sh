@@ -13,8 +13,8 @@
 #   no folder, doctype is `core` for the court's level   -> kind new-template, priority high
 #   no folder, doctype is `extended` for the level       -> kind new-doctype,  priority normal
 #   folder, no typst/*.typ                               -> kind new-template, priority high (exemplar may exist)
-#   folder + template, no exemplars/*.pdf                -> kind add-exemplar, priority high
-#   folder + template + exemplar, longest samples/OUTPUT-*.pdf shorter than the doc type's min_pages
+#   folder + template, no usage/SAMPLE-*.pdf             -> kind add-exemplar, priority high
+#   folder + template + SAMPLE, longest usage/OUTPUT-*.typst.pdf shorter than the doc type's min_pages
 #                                                        -> kind deepen,       priority low
 #   anything else                                        -> complete, not listed
 # Vocabulary: data/doctypes.json. Courts: data/index.json. Court order: data/priority.json.
@@ -48,9 +48,8 @@ max_pages() {
     echo 0
     return
   }
-  for o in "$1"/samples/OUTPUT-*.pdf; do
+  for o in "$1"/usage/OUTPUT-*.typst.pdf; do
     [ -f "$o" ] || continue
-    case $o in *.latex.pdf | *.docx.pdf) continue ;; esac
     p=$(pdfinfo "$o" 2> /dev/null | awk '/^Pages:/ {print $2}')
     [ -n "$p" ] && [ "$p" -gt "$best" ] && best=$p
   done
@@ -63,12 +62,12 @@ jq -r '.courts | to_entries[] | "\(.key)\t\(.value.path)"' data/index.json | whi
     [ -d "$d" ] || continue
     d=${d%/}
     b=${d##*/}
-    case $b in typst | latex | docx | exemplars | samples | reviews) continue ;; esac
+    case $b in typst | latex | docx | usage | reviews) continue ;; esac
     [ -f "$d/court.json" ] && continue # a nested court, not a doc type
     t=0
     for f in "$d"/typst/*.typ; do [ -f "$f" ] && t=1; done
     n=0
-    for f in "$d"/exemplars/*.pdf; do [ -f "$f" ] && n=$((n + 1)); done
+    for f in "$d"/usage/SAMPLE-*.pdf; do [ -f "$f" ] && n=$((n + 1)); done
     printf '%s\t%s\t%s\t%s\t%s\n' "$alias" "$b" "$t" "$n" "$(max_pages "$d")"
   done
 done > "$TMP/facts.tsv"
@@ -98,7 +97,7 @@ jq -n -c --rawfile facts "$TMP/facts.tsv" \
                      note: (if $f.v.n_ex > 0 then "folder has an exemplar but no typst template" else "folder exists but has no typst template and no exemplar" end)}
                   elif $f.v.n_ex == 0 then
                     {alias: $alias, doctype: $f.d, tier: $tier, kind: "add-exemplar", priority: "high",
-                     note: "template exists but no exemplars/*.pdf (BLOCKED: no exemplar)"}
+                     note: "template exists but no usage/SAMPLE-*.pdf (BLOCKED: no exemplar)"}
                   elif $f.v.pages > 0 and $f.v.pages < $min then
                     {alias: $alias, doctype: $f.d, tier: $tier, kind: "deepen", priority: "low",
                      note: "longest sample is \($f.v.pages) pages; a realistic \($f.d) runs about \($min)+"}

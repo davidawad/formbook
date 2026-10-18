@@ -56,7 +56,7 @@ printf '%s\n' "$MATCH" | while IFS=$TAB read -r alias path name; do
     if [ -n "$DT" ]; then
       case $rel in "$DT" | */"$DT") ;; *) continue ;; esac
     fi
-    n=$(ls "$d"/samples/INPUT-*.md 2> /dev/null | wc -l | tr -d ' ')
+    n=$(ls "$d"/usage/INPUT-*.md 2> /dev/null | wc -l | tr -d ' ')
     printf '  doctype: %s\t(%s sample inputs)\t%s\n' "$rel" "$n" "$d"
   done
 done

@@ -28,7 +28,7 @@ jobs:
             | [ $files[] | . as $f
                 | ($courts | map(select(.value.path as $p | $f | startswith($p + "/"))) | sort_by(.value.path | length) | last) as $m
                 | select($m) | ($f | ltrimstr($m.value.path + "/") | split("/")[0]) as $d
-                | select($d | IN("typst","latex","docx","exemplars","samples","reviews") | not)
+                | select($d | IN("typst","latex","docx","usage","reviews") | not)
                 | select($d | test("[.]") | not)
                 | "\($m.key).\($d)" ] | unique[]' data/index.json > units.txt
           cat units.txt

@@ -11,7 +11,7 @@
 # --force-with-lease=<ref>: (expect "does not exist"), so it fails if anyone created the branch first,
 # and the next candidate is tried. A court is unclaimed when no remote court/<alias> branch exists,
 # its court.json on origin/master is not "done", and it is not already up for review on origin/master
-# (rules.md + typst template + samples/.check-typst.txt). Courts under "reference" in data/priority.json
+# (rules.md + typst template + usage/.check-typst.txt). Courts under "reference" in data/priority.json
 # are never picked by --next/--random.
 #
 # Prints:  alias: <alias> / path: <court folder> / branch: court/<alias>
@@ -76,7 +76,7 @@ eligible() {
     echo "$a is done"
     return 1
   }
-  if grep -qxF "$p/rules.md" "$TMP/tree" && grep -qxF "$p/samples/.check-typst.txt" "$TMP/tree" &&
+  if grep -qxF "$p/rules.md" "$TMP/tree" && grep -qxF "$p/usage/.check-typst.txt" "$TMP/tree" &&
     grep -q "^$p/typst/.*\.typ$" "$TMP/tree"; then
     echo "$a is already up for review on $BASE"
     return 1

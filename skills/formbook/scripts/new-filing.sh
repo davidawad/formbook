@@ -2,7 +2,7 @@
 # new-filing.sh: start a filing from a doc type's sample input.
 # Usage (from the repo root): sh skills/formbook/scripts/new-filing.sh <alias> <doctype> <out-dir>
 #   doctype is as printed by find.sh (e.g. complaint, opening-brief; "." for a court-root template).
-# Copies the doc type's first samples/INPUT-*.md to <out-dir>/filing.md and prints the render command.
+# Copies the doc type's first usage/INPUT-*.md to <out-dir>/filing.md and prints the render command.
 # Edit filing.md (frontmatter + body) and delete the sample's case text. The template folder is not touched.
 set -eu
 [ $# -eq 3 ] || { echo "usage: sh skills/formbook/scripts/new-filing.sh <alias> <doctype> <out-dir>" >&2; exit 2; }
@@ -15,8 +15,8 @@ if [ "$(printf '%s\n' "$SEL" | wc -l | tr -d ' ')" -ne 1 ]; then
   printf '%s\n' "$SEL" >&2
   exit 1
 fi
-SRC=$(ls "$SEL"/samples/INPUT-*.md 2>/dev/null | head -1)
-[ -n "$SRC" ] || { echo "new-filing.sh: $SEL has no samples/INPUT-*.md" >&2; exit 1; }
+SRC=$(ls "$SEL"/usage/INPUT-*.md 2>/dev/null | head -1)
+[ -n "$SRC" ] || { echo "new-filing.sh: $SEL has no usage/INPUT-*.md" >&2; exit 1; }
 mkdir -p "$OUT"
 cp "$SRC" "$OUT/filing.md"
 ABS=$(cd "$OUT" && pwd)

@@ -70,7 +70,7 @@ unit_state() { # $1 court_path, $2 doctype
     return
   }
   n=0
-  for f in "$d"/exemplars/*.pdf; do [ -f "$f" ] && n=$((n + 1)); done
+  for f in "$d"/usage/SAMPLE-*.pdf; do [ -f "$f" ] && n=$((n + 1)); done
   [ "$n" -gt 0 ] || {
     echo add-exemplar
     return
@@ -86,9 +86,8 @@ max_pages() {
     echo 0
     return
   }
-  for o in "$1"/samples/OUTPUT-*.pdf; do
+  for o in "$1"/usage/OUTPUT-*.typst.pdf; do
     [ -f "$o" ] || continue
-    case $o in *.latex.pdf | *.docx.pdf) continue ;; esac
     p=$(pdfinfo "$o" 2> /dev/null | awk '/^Pages:/ {print $2}')
     [ -n "$p" ] && [ "$p" -gt "$best" ] && best=$p
   done
@@ -275,7 +274,7 @@ cmd_brief() {
   LEVEL=$(printf '%s' "$U" | jq -r .level)
   WHAT=$(jq -r --arg d "$DT" '.doctypes[$d].what // ""' data/doctypes.json)
   MIN=$(jq -r --arg d "$DT" '.doctypes[$d].min_pages // 2' data/doctypes.json)
-  SIB=$(for s in "$CP"/*/; do [ -d "$s/typst" ] && [ -d "$s/exemplars" ] && printf '%s ' "${s%/}"; done 2> /dev/null || true)
+  SIB=$(for s in "$CP"/*/; do [ -d "$s/typst" ] && [ -d "$s/usage" ] && printf '%s ' "${s%/}"; done 2> /dev/null || true)
 
   cat << EOF
 TASK $ID  [$KIND]
@@ -285,7 +284,7 @@ Doc type means: $WHAT
 
 READ FIRST
   AGENTS.md and docs/EVAL-LOOP.md (quality tiers, banned practices). Reference doc-type folder to copy the
-  structure of: courts/first-circuit/court-of-appeals/opening-brief/  (README.md, typst/, exemplars/, samples/).
+  structure of: courts/first-circuit/court-of-appeals/opening-brief/  (README.md, typst/, usage/).
 EOF
   [ -n "$SIB" ] && printf '  Sibling doc types in this court you can reuse patterns from: %s\n' "$SIB"
   [ -f "$CP/rules.md" ] && echo "  The court's rules, already researched: $CP/rules.md"
@@ -299,17 +298,18 @@ DO (kind $KIND)
   1. Research the governing rules for a $DT in $AL from primary sources (court rules, local rules, clerk's
      form requirements). Note rule number, URL and date verified. These decide the layout (tier 1).
   2. Find 1 to 3 real, public filings of this type in this court (CourtListener RECAP, the court's own
-     site, state e-filing archives). Save the PDFs as $FOLDER/exemplars/FILED-EXAMPLE-<case-slug>-<doctype>.pdf.
-     Public court records only: no sealed, redacted-by-mistake or private documents.
-  3. Write $FOLDER/exemplars/SOURCE.md: for every PDF the file name, filer, case, docket number, date
+     site, state e-filing archives). Save the PDFs as $FOLDER/usage/SAMPLE-$AL-$DT-<id>.pdf (<id>: lowercase
+     [a-z0-9]+, no hyphens, e.g. the case name). Public court records only: no sealed, redacted-by-mistake
+     or private documents.
+  3. Write $FOLDER/usage/SOURCE.md: for every PDF the file name, filer, case, docket number, date
      filed, the exact URL you downloaded it from, date retrieved. See the first-circuit example.
   4. Write the typst template: $FOLDER/typst/main.typ (entry point; reads the sample via
      --input sample=...) plus $FOLDER/typst/<court>-$DT.typ. Rule-driven and content-agnostic: no
      case-specific text, no coordinates measured off the exemplar. Fonts only from fonts/.
-  5. Write $FOLDER/samples/INPUT-<slug>.md (markdown with YAML frontmatter) transcribed from the exemplar,
-     and, if you can, a second structurally different fictional INPUT.
-  6. Render: sh tools/render.sh $FOLDER samples/INPUT-<slug>.md      (any typst warning fails)
-     then: sh tools/overlay.sh $FOLDER <slug>   -> samples/OUTPUT-<slug>.pdf, OVERLAY-<slug>.pdf/.txt
+  5. Write $FOLDER/usage/INPUT-$AL-$DT-<id>.md (markdown with YAML frontmatter) transcribed from the
+     exemplar, and, if you can, a second structurally different fictional INPUT.
+  6. Render: just render $FOLDER      (any typst warning fails) -> usage/OUTPUT-$AL-$DT-<id>.typst.pdf
+     then: just overlay $FOLDER       -> .overlay/$FOLDER/OVERLAY-$AL-$DT-<id>.pdf/.txt (gitignored)
   7. Look at EVERY page of the overlay against the exemplar. Fix tier-1 and tier-2 defects; do not chase tier 3.
   8. Write $FOLDER/README.md: rules table (rule, requirement, where the template uses it), file table,
      frontmatter contract, known gaps. Mark BLOCKED items honestly.
@@ -320,10 +320,10 @@ EOF
 
 DO (kind add-exemplar): the template exists but has no filed exemplar to be judged against.
   1. Find 1 to 3 real, public filings of this doc type in this court by different filers.
-  2. Save as $FOLDER/exemplars/FILED-EXAMPLE-<case-slug>-<doctype>.pdf and record each in
-     $FOLDER/exemplars/SOURCE.md (file, filer, case, docket no., date filed, exact URL, date retrieved).
-  3. Transcribe one exemplar into $FOLDER/samples/INPUT-<slug>.md; render it:
-     sh tools/render.sh $FOLDER samples/INPUT-<slug>.md ; sh tools/overlay.sh $FOLDER <slug>
+  2. Save as $FOLDER/usage/SAMPLE-$AL-$DT-<id>.pdf (<id>: lowercase [a-z0-9]+, no hyphens) and record
+     each in $FOLDER/usage/SOURCE.md (file, filer, case, docket no., date filed, exact URL, date retrieved).
+  3. Transcribe one exemplar into $FOLDER/usage/INPUT-$AL-$DT-<id>.md; render it:
+     just render $FOLDER ; just overlay $FOLDER
   4. Review every overlay page; fix tier-1 and tier-2 defects in $FOLDER/typst/ only.
   5. Update $FOLDER/README.md (remove the BLOCKED: no exemplar line, add the exemplar and findings).
 EOF
@@ -334,7 +334,7 @@ EOF
 DO (kind deepen): the sample is shorter than a realistic $DT (about $MIN+ pages), so layout under real load
 is untested (page breaks, long tables, many footnotes, long headings, certificates).
   1. Read $FOLDER/README.md "Known gaps" and the existing samples.
-  2. Extend or add a samples/INPUT-*.md so the rendered output reaches at least $MIN pages and exercises
+  2. Extend or add a usage/INPUT-*.md so the rendered output reaches at least $MIN pages and exercises
      every section the court requires (tables, footnotes, block quotes, certificates, signature block).
   3. Re-render and re-overlay; fix tier-1 and tier-2 defects in typst/ (content-agnostic fixes only).
   4. Update README.md known gaps.
@@ -422,43 +422,38 @@ cmd_verify() {
   for f in "$F"/typst/*.typ; do [ -f "$f" ] && nt=$((nt + 1)); done
   [ "$nt" -ge 2 ] && ok "layout: typst template file(s) beside main.typ" || bad "layout: expected typst/main.typ plus a template file (found $nt .typ files)"
   ne=0
-  for f in "$F"/exemplars/*.pdf; do [ -f "$f" ] && ne=$((ne + 1)); done
-  [ "$ne" -ge 1 ] && ok "layout: $ne exemplar pdf(s)" || bad "layout: no exemplars/*.pdf (a template without a filed exemplar is BLOCKED, not done)"
-  if [ -s "$F/exemplars/SOURCE.md" ]; then
-    ok "layout: exemplars/SOURCE.md"
-    for f in "$F"/exemplars/*.pdf; do
+  for f in "$F"/usage/SAMPLE-*.pdf; do [ -f "$f" ] && ne=$((ne + 1)); done
+  [ "$ne" -ge 1 ] && ok "layout: $ne SAMPLE pdf(s)" || bad "layout: no usage/SAMPLE-*.pdf (a template without a filed exemplar is BLOCKED, not done)"
+  if [ -s "$F/usage/SOURCE.md" ]; then
+    ok "layout: usage/SOURCE.md"
+    for f in "$F"/usage/SAMPLE-*.pdf; do
       [ -f "$f" ] || continue
       b=$(basename "$f")
-      grep -qF "$b" "$F/exemplars/SOURCE.md" || bad "source: $b is not described in exemplars/SOURCE.md"
+      grep -qF "$b" "$F/usage/SOURCE.md" || bad "source: $b is not described in usage/SOURCE.md"
     done
-    grep -q 'https\?://' "$F/exemplars/SOURCE.md" && ok "source: SOURCE.md records a URL" || bad "source: SOURCE.md has no http(s) URL for the exemplar"
+    grep -q 'https\?://' "$F/usage/SOURCE.md" && ok "source: SOURCE.md records a URL" || bad "source: SOURCE.md has no http(s) URL for the SAMPLE"
   else
-    [ "$ne" -ge 1 ] && bad "layout: exemplars/SOURCE.md missing (every exemplar needs its public source URL)"
+    [ "$ne" -ge 1 ] && bad "layout: usage/SOURCE.md missing (every SAMPLE needs its public source URL)"
   fi
   ni=0
-  for f in "$F"/samples/INPUT-*.md; do [ -f "$f" ] && ni=$((ni + 1)); done
-  [ "$ni" -ge 1 ] && ok "layout: $ni samples/INPUT-*.md" || bad "layout: no samples/INPUT-*.md"
+  for f in "$F"/usage/INPUT-*.md; do [ -f "$f" ] && ni=$((ni + 1)); done
+  [ "$ni" -ge 1 ] && ok "layout: $ni usage/INPUT-*.md" || bad "layout: no usage/INPUT-*.md"
 
-  # 2. render each INPUT; OUTPUT committed; OVERLAY when an exemplar exists
+  # 2. render each INPUT; OUTPUT committed (overlays are generated into the gitignored .overlay/, not checked)
   if have typst; then
-    for f in "$F"/samples/INPUT-*.md; do
+    for f in "$F"/usage/INPUT-*.md; do
       [ -f "$f" ] || continue
       sid=$(basename "$f" .md)
       sid=${sid#INPUT-}
-      if sh tools/render.sh "$F" "samples/INPUT-$sid.md" "$TMP/out-$sid.pdf" > "$TMP/render.log" 2>&1; then
+      if sh tools/render.sh "$F" "usage/INPUT-$sid.md" "$TMP/out-$sid.pdf" > "$TMP/render.log" 2>&1; then
         ok "render: INPUT-$sid.md compiles with no typst warnings"
       else
         bad "render: INPUT-$sid.md failed: $(tail -3 "$TMP/render.log" | tr '\n' ' ')"
       fi
-      [ -s "$F/samples/OUTPUT-$sid.pdf" ] && ok "layout: OUTPUT-$sid.pdf committed" || bad "layout: samples/OUTPUT-$sid.pdf missing for INPUT-$sid.md"
+      [ -s "$F/usage/OUTPUT-$sid.typst.pdf" ] && ok "layout: OUTPUT-$sid.typst.pdf committed" || bad "layout: usage/OUTPUT-$sid.typst.pdf missing for INPUT-$sid.md"
     done
   else
     bad "render: typst not on PATH (run tools/bootstrap.sh and add its bin/ to PATH)"
-  fi
-  if [ "$ne" -ge 1 ]; then
-    nv=0
-    for f in "$F"/samples/OVERLAY-*.pdf; do [ -f "$f" ] && nv=$((nv + 1)); done
-    [ "$nv" -ge 1 ] && ok "overlay: $nv OVERLAY pdf(s) present" || bad "overlay: exemplar exists but no samples/OVERLAY-*.pdf (run tools/overlay.sh)"
   fi
 
   # 3. deepen: page count
@@ -477,7 +472,7 @@ cmd_verify() {
   # 4. no case-specific text in typst/
   probes=$TMP/probes
   : > "$probes"
-  for f in "$F"/samples/INPUT-*.md; do
+  for f in "$F"/usage/INPUT-*.md; do
     [ -f "$f" ] || continue
     # frontmatter string values that identify a case: contain a digit, or are an ALL-CAPS party name
     awk 'NR == 1 && $0 == "---" {fm = 1; next} fm && $0 == "---" {exit} fm {print}' "$f" |
@@ -579,7 +574,7 @@ cmd_submit() {
     echo '```'
     echo
     echo "## Exemplars (public court records)"
-    if [ -s "$F/exemplars/SOURCE.md" ]; then grep -E 'URL|Filer|Case|Docket' "$F/exemplars/SOURCE.md" | head -12; else echo "none recorded"; fi
+    if [ -s "$F/usage/SOURCE.md" ]; then grep -E 'URL|Filer|Case|Docket' "$F/usage/SOURCE.md" | head -12; else echo "none recorded"; fi
     echo
     echo "## Tier-2 findings left open / BLOCKED items"
     echo "(list by page, from the overlay review; or write: none)"

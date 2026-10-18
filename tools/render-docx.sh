@@ -1,7 +1,7 @@
 #!/bin/sh
 # Render one sample to .docx and to the LibreOffice PDF of it (engine "docx").
-# Usage: tools/render-docx.sh <court-dir> <sample.md, relative to the court dir> [out.docx.pdf]
-# Default out: <court>/samples/OUTPUT-<id>.docx.pdf ; the .docx sits beside it as OUTPUT-<id>.docx.
+# Usage: tools/render-docx.sh <doc-dir> <usage/INPUT-<stem>-<id>.md, relative to the doc dir> [out.docx.pdf]
+# Default out: <doc-dir>/usage/OUTPUT-<stem>-<id>.docx.pdf ; the .docx sits beside it as OUTPUT-<stem>-<id>.docx.
 # Gates 0 and 1 are measured on the .docx.pdf (Word may paginate slightly differently; see docs/DOCX.md).
 #
 # Contract (docs/EVAL-LOOP.md, "Engines"):
@@ -13,7 +13,7 @@ set -eu
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
-OUTPDF=${3:-$COURT/samples/OUTPUT-$(basename "$SAMPLE" .md | sed 's/^INPUT-//').docx.pdf}
+OUTPDF=${3:-$COURT/usage/$(basename "$SAMPLE" .md | sed 's/^INPUT-/OUTPUT-/').docx.pdf}
 DOCX=${OUTPDF%.pdf}
 case $DOCX in
   *.docx) ;;

@@ -24,8 +24,8 @@ fails=0
 fresh_copy() { # a clean scratch court folder: $1 = name
   d="$SCRATCH/$1"
   mkdir -p "$d"
-  cp -R "$COURT/typst" "$COURT/samples" "$COURT/checks.yaml" "$COURT/court.json" "$d/"
-  mkdir -p "$d/reviews" "$d/exemplars"
+  cp -R "$COURT/typst" "$COURT/usage" "$COURT/checks.yaml" "$COURT/court.json" "$d/"
+  mkdir -p "$d/reviews"
   echo "$d"
 }
 
