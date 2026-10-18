@@ -97,7 +97,11 @@ pub fn allowed(stem: &str, file: &str) -> bool {
     let stamp = [".check-", ".match-"]
         .iter()
         .any(|p| file.strip_prefix(p).is_some_and(|r| r.ends_with(".txt")));
-    fixed || stamp || [SAMPLE, INPUT, OUTPUT].iter().any(|k| parse(k, stem, file).is_some())
+    fixed
+        || stamp
+        || [SAMPLE, INPUT, OUTPUT]
+            .iter()
+            .any(|k| parse(k, stem, file).is_some())
 }
 
 /// The nearest folder at or above `dir` that holds a court.json.
@@ -139,9 +143,10 @@ impl Doc {
             )
         })?;
         let abs = std::fs::canonicalize(dir).unwrap_or_else(|_| dir.to_path_buf());
-        let doctype = (abs != court)
-            .then(|| abs.file_name().map(|n| n.to_string_lossy().into_owned()))
-            .flatten();
+        let doctype = abs
+            .file_name()
+            .filter(|_| abs != court)
+            .map(|n| n.to_string_lossy().into_owned());
         Ok(Doc {
             dir: dir.to_path_buf(),
             stem: stem_of(&alias(&court)?, doctype.as_deref()),
@@ -230,12 +235,7 @@ pub fn pair(input_id: &str, sample_ids: &[String]) -> Option<String> {
     }
     let scored: Vec<((usize, usize), &String)> = sample_ids
         .iter()
-        .map(|s| {
-            (
-                (common_prefix(input_id, s), common_suffix(input_id, s)),
-                s,
-            )
-        })
+        .map(|s| ((common_prefix(input_id, s), common_suffix(input_id, s)), s))
         .filter(|((p, _), _)| *p >= 3)
         .collect();
     let best = scored.iter().map(|s| s.0).max()?;
@@ -326,15 +326,25 @@ mod tests {
     fn parsing() {
         let s = "calsuperct-sandiego-amicus-brief";
         assert_eq!(
-            parse(OUTPUT, s, "OUTPUT-calsuperct-sandiego-amicus-brief-a1.docx.pdf"),
+            parse(
+                OUTPUT,
+                s,
+                "OUTPUT-calsuperct-sandiego-amicus-brief-a1.docx.pdf"
+            ),
             Some(("a1", ".docx.pdf"))
         );
         assert_eq!(
             parse(OUTPUT, s, "OUTPUT-calsuperct-sandiego-amicus-brief-a1.docx"),
             Some(("a1", ".docx"))
         );
-        assert_eq!(parse(OUTPUT, s, "OUTPUT-calsuperct-sandiego-amicus-brief-a1.pdf"), None);
-        assert_eq!(parse(SAMPLE, "ca9", "SAMPLE-ca9-x.pdf"), Some(("x", ".pdf")));
+        assert_eq!(
+            parse(OUTPUT, s, "OUTPUT-calsuperct-sandiego-amicus-brief-a1.pdf"),
+            None
+        );
+        assert_eq!(
+            parse(SAMPLE, "ca9", "SAMPLE-ca9-x.pdf"),
+            Some(("x", ".pdf"))
+        );
         assert_eq!(parse(SAMPLE, "ca9", "SAMPLE-ca9-x.typst.pdf"), None);
         assert_eq!(parse(INPUT, "ca9", "INPUT-ca9-a-b.md"), None);
         assert_eq!(parse(INPUT, "ca9", "INPUT-ca9-A.md"), None);
@@ -386,11 +396,17 @@ mod tests {
         ]
         .map(String::from)
         .to_vec();
-        assert_eq!(pair("sweetopeningbrief", &s).as_deref(), Some(s[0].as_str()));
+        assert_eq!(
+            pair("sweetopeningbrief", &s).as_deref(),
+            Some(s[0].as_str())
+        );
         assert_eq!(pair("genericopeningbrief", &s), None);
         assert_eq!(pair("rooks", &s), None);
         assert_eq!(pair("rooksreply", &s).as_deref(), Some(s[3].as_str()));
-        assert_eq!(pair("rooks1604003motion", &s).as_deref(), Some(s[2].as_str()));
+        assert_eq!(
+            pair("rooks1604003motion", &s).as_deref(),
+            Some(s[2].as_str())
+        );
         assert_eq!(pair("x", &[]), None);
     }
 
@@ -399,8 +415,15 @@ mod tests {
         let t = std::env::temp_dir().join(format!("fb-layout-{}", std::process::id()));
         let dt = t.join("court/amicus-brief");
         std::fs::create_dir_all(&dt).unwrap();
-        std::fs::write(t.join("court/court.json"), r#"{"alias":"calsuperct-sandiego"}"#).unwrap();
-        assert_eq!(Doc::open(&t.join("court")).unwrap().stem, "calsuperct-sandiego");
+        std::fs::write(
+            t.join("court/court.json"),
+            r#"{"alias":"calsuperct-sandiego"}"#,
+        )
+        .unwrap();
+        assert_eq!(
+            Doc::open(&t.join("court")).unwrap().stem,
+            "calsuperct-sandiego"
+        );
         let d = Doc::open(&dt).unwrap();
         assert_eq!(d.stem, "calsuperct-sandiego-amicus-brief");
         assert_eq!(
