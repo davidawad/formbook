@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ared-complaint-hessequifax326cv00016.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Eastern District of Arkansas (caption has no division line in this filing)
 - Case: *Hess v. Equifax Information Services, LLC and Trans Union, LLC*
 - Docket: No. 3:26-cv-00016-DPM (Document 1)

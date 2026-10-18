@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "msnd-complaint.typ": msnd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-msnd-complaint-haas.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #msnd-complaint(meta, body)

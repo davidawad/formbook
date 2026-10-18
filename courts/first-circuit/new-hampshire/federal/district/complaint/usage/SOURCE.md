@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nhd-complaint-nicholas126cv00879.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, District of New Hampshire
 - Case: *Nicholas v. Federal Express Corporation* (successor by merger to FedEx Ground Package System, Inc.)
 - Docket: No. 1:26-cv-00879-SE-TSM (Document 1)
@@ -18,7 +18,7 @@ Second filer: not collected. Search: CourtListener RECAP, `type=rd`, `court=nhd`
 
 Added 2026-10-17 (fb-595.21.1); supersedes the "Second filer: not collected" note above.
 
-- File: `SAMPLE-nhd-complaint-grant126cv00677.pdf`
+- File: `FILED-EXAMPLE-complaint-2.pdf`
 - Court: United States District Court, District of New Hampshire
 - Case: *Grant v. Allstate Insurance Company* (Thomas Grant, individually and on behalf of all others similarly situated v. Allstate Insurance Company)
 - Docket: No. 1:26-cv-00677 (Document 1)

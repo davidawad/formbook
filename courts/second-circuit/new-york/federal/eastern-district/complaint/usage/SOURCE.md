@@ -2,7 +2,7 @@
 
 | File | Case | Docket | Filer | Date filed | Pages | Fetched |
 |---|---|---|---|---|---|---|
-| `SAMPLE-nyed-complaint-blade126cv06563.pdf` | Blade v. GameStop Inc. et al., E.D.N.Y. | 1:26-cv-06563 | Robert Wisniewski P.C. (counsel for plaintiff Alec Blade) | 2026-10-13 (signed Oct. 8, 2026) | 18 | 2026-10-14 |
+| `FILED-EXAMPLE-complaint.pdf` | Blade v. GameStop Inc. et al., E.D.N.Y. | 1:26-cv-06563 | Robert Wisniewski P.C. (counsel for plaintiff Alec Blade) | 2026-10-13 (signed Oct. 8, 2026) | 18 | 2026-10-14 |
 
 URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.nyed.552637/gov.uscourts.nyed.552637.1.0.pdf
 (RECAP document 1 of the docket https://www.courtlistener.com/docket/74952039/1/blade-v-gamestop-inc/, found by CourtListener search, court=nyed, type=r.)
@@ -14,7 +14,7 @@ Notes:
 
 ## 2. Forsythe v. Carerite Centers Limited Liability Company (added 2026-10-17)
 
-- File: `SAMPLE-nyed-complaint-forsythe226cv06559.pdf`
+- File: `FILED-EXAMPLE-complaint-2.pdf`
 - Court: United States District Court, Eastern District of New York
 - Case: Forsythe v. Carerite Centers Limited Liability Company d/b/a Water's Edge Rehab & Nursing Center at Port Jefferson, No. 2:26-cv-06559-SJB-AYS
 - Docket / document: ECF No. 1 (main document; the civil cover sheet and proposed summons are separate attachments, not included)
@@ -29,7 +29,7 @@ Notes:
 
 ## 3. Mejia v. Hamide NYC Inc (added 2026-10-17)
 
-- File: `SAMPLE-nyed-complaint-mejia126cv06581.pdf`
+- File: `FILED-EXAMPLE-complaint-3.pdf`
 - Court: United States District Court, Eastern District of New York
 - Case: Mejia v. Hamide NYC Inc d/b/a Riva Mediterranean & Turkish Cuisine, Feruz Rezaev, and Ercan Un, No. 1:26-cv-06581
 - Docket / document: ECF No. 1 (main document; consent to sue, civil cover sheet and proposed summons are separate attachments, not included)

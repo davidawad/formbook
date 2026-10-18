@@ -2,8 +2,8 @@
 
 - Court: `cit`, United States Court of International Trade (`courts/federal-circuit/court-of-international-trade/`)
 - Doc type: `complaint`. Pleading under USCIT Rule 7(a)(1); one self-contained folder.
-- Exemplar: `usage/SAMPLE-cit-complaint-trekbicycle2500917.pdf` (*Trek Bicycle Corp. v. United States*, Ct. No. 25-00917, filed 2025-12-23, ECF No. 2, 11 pages; provenance in `usage/SOURCE.md`).
-- Sample: `usage/INPUT-cit-complaint-trekbicycle.md`, transcribed from that complaint (caption, cause of action, parties, jurisdiction, facts, counts I-V, prayer, signature). Sample render is 9 pages against the filed 11.
+- Exemplar: `usage/FILED-EXAMPLE-complaint-4.pdf` (*Trek Bicycle Corp. v. United States*, Ct. No. 25-00917, filed 2025-12-23, ECF No. 2, 11 pages; provenance in `usage/SOURCE.md`).
+- Sample: `usage/INPUT-complaint.md`, transcribed from that complaint (caption, cause of action, parties, jurisdiction, facts, counts I-V, prayer, signature). Sample render is 9 pages against the filed 11.
 - Status: template complete; render, overlay and page review done (below). Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,8 +12,8 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `cit-complaint`. |
 | `typst/cit-complaint.typ` | Template. Parameter block at the top (type size, leading, page, margins, caption widths). |
-| `usage/INPUT-cit-complaint-trekbicycle.md` | Markdown contract sample: YAML frontmatter plus body. |
-| `usage/OUTPUT-cit-complaint-trekbicycle.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-international-trade/complaint usage/INPUT-cit-complaint-trekbicycle.md` (9 pages). |
+| `usage/INPUT-complaint.md` | Markdown contract sample: YAML frontmatter plus body. |
+| `usage/OUTPUT-complaint.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-international-trade/complaint usage/INPUT-complaint.md` (9 pages). |
 | `usage/OVERLAY-trek-bicycle.pdf`, `.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-international-trade/complaint trek-bicycle` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed complaint and `SOURCE.md`. |
 
@@ -66,7 +66,7 @@ Not applicable to the complaint and not in the template: Rule 7(b) motion requir
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-cit-complaint-trekbicycle.typst.pdf` was rendered at 70 dpi and viewed (9 of 9), next to the filed complaint's 11 pages in a contact sheet. Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-complaint.typst.pdf` was rendered at 70 dpi and viewed (9 of 9), next to the filed complaint's 11 pages in a contact sheet. Typst printed no warnings. Fonts embedded: EB Garamond only.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -90,8 +90,8 @@ Typst is the primary engine (`typst/`). The docx engine is in `docx/`. There is 
 |---|---|
 | `docx/make-reference.sh` | Builds `docx/reference.docx` from pandoc's default: EB Garamond 12 pt, 24 pt exact double spacing for body text and list items, single spacing for headings, block quotations and footnotes, letter paper, 1 in margins, a centered PAGE field in the footer. |
 | `docx/cit-complaint.lua` | Pandoc filter: the cover and caption (a borderless table with the ")" column), numbered allegations, lettered list items (a), (b), ..., the signature block. |
-| `usage/OUTPUT-cit-complaint-trekbicycle.docx` | `sh tools/render.sh --engine docx courts/federal-circuit/court-of-international-trade/complaint usage/INPUT-cit-complaint-trekbicycle.md` (writes the `.docx` and the `.docx.pdf`). |
-| `usage/OUTPUT-cit-complaint-trekbicycle.docx.pdf` | LibreOffice 26.8.1 conversion (10 pages). Fonts embedded: EB Garamond only (`pdffonts`). |
+| `usage/OUTPUT-complaint.docx` | `sh tools/render.sh --engine docx courts/federal-circuit/court-of-international-trade/complaint usage/INPUT-complaint.md` (writes the `.docx` and the `.docx.pdf`). |
+| `usage/OUTPUT-complaint.docx.pdf` | LibreOffice 26.8.1 conversion (10 pages). Fonts embedded: EB Garamond only (`pdffonts`). |
 
 **Matches the typst output:** letter paper, 1 in margins, EB Garamond 12 pt, double spacing (24 pt), court name and caption with the ")" column and the court number at right, the title centered, centered bold headings, numbered allegations with the number at 0.5 in, the lettered prayer (a)-(h), the centered page number at the bottom, the `/s/` signature block with the Rule 11(a) lines. Every page of the `.docx.pdf` was rendered at 60 dpi and viewed (10 of 10), and the page text was compared with the typst render (`pdftotext`).
 

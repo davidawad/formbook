@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-tnwb-motion-brief-kenney1800186.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Western District of Tennessee
 - Case: *George J. Kenney, Jr. v. Bayview Loan Servicing, LLC and WeOffer, LLC*, Adv. Proc. No. 18-00186 (underlying Chapter 13 case No. 17-26304)
 - Document: "Memorandum of Law in Support of Bayview's Motion to Dismiss Complaint" (7 pages), Adv. Doc 9. This is the memorandum only. The motion it supports is a separate filing and is not in the exemplar.

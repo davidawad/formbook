@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nhd-complaint.typ": nhd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nhd-complaint-nicholas.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #nhd-complaint(meta, body)

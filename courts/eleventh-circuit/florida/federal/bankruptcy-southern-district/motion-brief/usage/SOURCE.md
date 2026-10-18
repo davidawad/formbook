@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-flsb-motion-brief-lasproalinia1601315.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Document | Defendants' Memorandum on Choice of Law for Plaintiff's Aiding and Abetting Claims and in Support of Motion to Dismiss Same (ECF Doc 49, 23 pages; body pages 1–12; pages 13–15 Exhibit 1, an affidavit; pages 16–23 Exhibit A, a CV and bibliography) |
 | Court | United States Bankruptcy Court, Southern District of Florida, Miami Division |
 | Case | *In re Massa Falida do Banco Cruzeiro do Sul, S.A.*, Case No. 14-22974-BKC-LMI (Chapter 15); *Laspro Consultores Ltda. v. Alinia Corporation and 110 CPS, Inc.*, Adv. No. 16-01315-LMI |

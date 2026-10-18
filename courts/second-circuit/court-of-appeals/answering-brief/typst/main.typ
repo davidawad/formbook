@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ca2-answering-brief.typ": ca2-answering-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ca2-answering-brief-finkelman.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-answering-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ca2-answering-brief(meta, body)

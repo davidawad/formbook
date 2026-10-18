@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-kyed-complaint-dubyajbrands526cv00359.pdf` (11 pages, text layer present) |
+| Exemplar file | `FILED-EXAMPLE-complaint.pdf` (11 pages, text layer present) |
 | Case | *Dubya J Brands, LLC v. Markel Insurance Company*, No. 5:26-cv-00359-REW-MAS (E.D. Ky., Lexington) |
 | Document | Complaint, RECAP docket entry 1 (the entry text reads "COMPLAINT ... filed by Dubya J Brands, LLC. (Attachments: # 1 Civil Cover Sheet, # 2 Exhibit A ...)") |
 | Filer | Plaintiff Dubya J Brands, LLC, by counsel McWherter Scott & Bobbitt, PLC (Clinton H. Scott) |

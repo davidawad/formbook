@@ -2,7 +2,7 @@
 
 Doc type: **complaint**, United States District Court for the District of New Jersey (`njd`).
 
-## 1. `SAMPLE-njd-complaint-dglgroup226cv13086.pdf` (primary)
+## 1. `FILED-EXAMPLE-complaint.pdf` (primary)
 
 - Court: United States District Court, District of New Jersey (Judge stamp on page 1: `SDW-SDA`)
 - Case: *DGL Group Ltd. v. GoLabs, Inc.*
@@ -14,7 +14,7 @@ Doc type: **complaint**, United States District Court for the District of New Je
 - Date fetched: 2026-10-14
 - Text layer: yes (`pdftotext` yields text; embedded TrueType, body 12 pt)
 
-## 2. `SAMPLE-njd-complaint-gomez225cv02242.pdf` (second filer)
+## 2. `FILED-EXAMPLE-complaint-2.pdf` (second filer)
 
 - Court: United States District Court, District of New Jersey
 - Case: *Gomez v. Town of West New York, New Jersey*

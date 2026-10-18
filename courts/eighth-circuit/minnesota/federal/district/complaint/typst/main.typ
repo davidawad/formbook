@@ -2,6 +2,6 @@
 //   sh tools/render.sh courts/eighth-circuit/minnesota/federal/district/complaint usage/<id>.md usage/<id>.pdf
 #import "mnd-complaint.typ": mnd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-mnd-complaint-3m.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #mnd-complaint(meta, body)

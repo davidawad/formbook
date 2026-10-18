@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-lawd-complaint-louisianadentalimplantlab626cv00025.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Western District of Louisiana (Lafayette Division)
 - Case: *Louisiana Dental Implant Lab, LLC v. JDentalCare SRL*
 - Docket: No. 6:26-cv-00025-RRS-DJA (Document 1)

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-flnd-complaint-winton326cv05081.pdf` (9 pages, text layer present, Times New Roman 14 pt body)
+- File: `FILED-EXAMPLE-complaint.pdf` (9 pages, text layer present, Times New Roman 14 pt body)
 - Court: United States District Court, Northern District of Florida, Pensacola Division
 - Case: *Chase Winton v. Safety Holdings Inc. d/b/a SambaSafety*
 - Docket: No. 3:26-cv-05081-MCR-ZCB (from the ECF header on every page; the filed caption's case-number line is blank)

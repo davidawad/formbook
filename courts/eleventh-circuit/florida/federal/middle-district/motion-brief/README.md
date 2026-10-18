@@ -5,10 +5,10 @@ Folder: `courts/eleventh-circuit/florida/federal/middle-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-flmd-motion-brief-phillip826cv02634.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-flmd-motion-brief-phillipmotiontodismiss.md` (a portion of the 19-page filing; see "Excerpt") |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (a portion of the 19-page filing; see "Excerpt") |
 | typeface | Face required: **Book Antiqua** (LR 1.08(a); the filed exemplar is set in Book Antiqua for the body). Vendored substitute: **TeX Gyre Pagella** (visual only, `docs/FONTS.md`). See "Typeface" below. |
-| render | ok: `usage/OUTPUT-flmd-motion-brief-phillipmotiontodismiss.typst.pdf`, 14 pages (13 with EB Garamond; the wider substitute adds a page), typst 0.15.0, no warnings, `pdffonts`: TeX Gyre Pagella embedded |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages (13 with EB Garamond; the wider substitute adds a page), typst 0.15.0, no warnings, `pdffonts`: TeX Gyre Pagella embedded |
 | overlay | ok: `usage/OVERLAY-phillip-motion-to-dismiss.pdf` and `OVERLAY-phillip-motion-to-dismiss.txt` |
 | pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed after the font change) |
 
@@ -89,7 +89,7 @@ Every page was rendered with `pdftoppm -r 60`, montaged two per image, and viewe
 | Engine | Status |
 |---|---|
 | typst | primary; unchanged by this section |
-| docx | built: `docx/reference.docx` (made by `sh ../complaint/docx/make-reference.sh docx/reference.docx motion`), `docx/flmd-motion-brief.lua`, `docx/render.sh`. Output `usage/OUTPUT-flmd-motion-brief-phillipmotiontodismiss.docx` (valid zip, well-formed XML, text check below). `OUTPUT-flmd-motion-brief-phillipmotiontodismiss.docx.pdf`: **BLOCKED** (no LibreOffice on this box; see the complaint README, "Engines"). |
+| docx | built: `docx/reference.docx` (made by `sh ../complaint/docx/make-reference.sh docx/reference.docx motion`), `docx/flmd-motion-brief.lua`, `docx/render.sh`. Output `usage/OUTPUT-motion-brief.docx` (valid zip, well-formed XML, text check below). `OUTPUT-flmd-motion-brief-phillipmotiontodismiss.docx.pdf`: **BLOCKED** (no LibreOffice on this box; see the complaint README, "Engines"). |
 | latex | not built |
 
 What matches the typst template (by rule): Letter, 1-inch margins; main text 14-point, double-spaced; indented body paragraphs, not numbered; headings levels 1 to 4 (level 1 and 2 centered bold, level 3 bold left, level 4 bold italic left); lettered lists; the caption and cover; the signature block at 3 inches, kept as one block; the Local Rule 3.01(g) certificate before the signature; the certificate of service after it, kept together; page numbers bottom center from page two.

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "cod-complaint.typ": cod-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-cod-complaint-walton.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #cod-complaint(meta, body)

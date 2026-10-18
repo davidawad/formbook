@@ -5,9 +5,9 @@ Folder: `courts/sixth-circuit/ohio/federal/northern-district/complaint/` (one se
 
 | Item | Status |
 |---|---|
-| exemplar | yes: 2 filers. `usage/SAMPLE-ohnd-complaint-wagner126cv02669.pdf` (12 pp, transcribed) and `usage/SAMPLE-ohnd-complaint-miller526cv02517.pdf` (31 pp, second filer). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-ohnd-complaint-wagner.md`: the whole 12-page filing (caption, all 26 numbered paragraphs, lettered sub-items, prayer, signature). |
-| render | ok: `usage/OUTPUT-ohnd-complaint-wagner.typst.pdf`, 11 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
+| exemplar | yes: 2 filers. `usage/FILED-EXAMPLE-complaint.pdf` (12 pp, transcribed) and `usage/FILED-EXAMPLE-complaint-2.pdf` (31 pp, second filer). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-complaint.md`: the whole 12-page filing (caption, all 26 numbered paragraphs, lettered sub-items, prayer, signature). |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
 | overlay | ok: `usage/OVERLAY-wagner-complaint.pdf` and `usage/OVERLAY-wagner-complaint.txt` (paired against the Wagner exemplar). |
 | pages reviewed | 11 of 11 (every page of the current PDF rendered at 60 dpi and viewed after the last template change). |
 | content check | every word of the sample body appears in the PDF, in order; the only difference is "non-compliant", which the render breaks at its hyphen (the two halves are present). |

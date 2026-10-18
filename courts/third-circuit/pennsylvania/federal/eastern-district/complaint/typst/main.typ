@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "paed-complaint.typ": paed-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-paed-complaint-murphy.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #paed-complaint(meta, body)

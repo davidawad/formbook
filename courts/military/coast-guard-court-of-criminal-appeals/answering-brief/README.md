@@ -2,8 +2,8 @@
 
 - Court: U.S. Coast Guard Court of Criminal Appeals (CGCCA).
 - Doc type: the Government's answer, listed by the court as "Government Answer" (Rule 18(d): "An answer by the United States shall be filed no later than 30 days after the filing of an appellant's brief"; R. 17.2(a) "Answer Briefs").
-- Exemplar: `usage/SAMPLE-uscgcoca-answering-brief-steen1464.pdf`, an 8-page extract of *United States v. Steen*, Docket No. 1464, Answer to Appellant's Assignments of Error on Behalf of the United States, filed 6 May 2019 by Appellate Government Counsel (Commandant (CG-LMJ)); published by the court (source, page map: `usage/SOURCE.md`). Found on the fourth pass (2026-10-16, bead fb-595.20.21).
-- Samples: `usage/INPUT-uscgcoca-answering-brief-steen.md` (transcription); `usage/INPUT-uscgcoca-answering-brief-smoke.md` (placeholder, kept).
+- Exemplar: `usage/FILED-EXAMPLE-answering-brief.pdf`, an 8-page extract of *United States v. Steen*, Docket No. 1464, Answer to Appellant's Assignments of Error on Behalf of the United States, filed 6 May 2019 by Appellate Government Counsel (Commandant (CG-LMJ)); published by the court (source, page map: `usage/SOURCE.md`). Found on the fourth pass (2026-10-16, bead fb-595.20.21).
+- Samples: `usage/INPUT-answering-brief.md` (transcription); `usage/INPUT-answering-brief-2.md` (placeholder, kept).
 - Template: `typst/uscgcoca-answering-brief.typ`; identical to `../opening-brief/typst/uscgcoca-opening-brief.typ` except the default title ("ANSWER TO APPELLANT'S ASSIGNMENTS OF ERROR ON BEHALF OF THE UNITED STATES", as filed).
 - Status (2026-10-16): render ok (8 pages); overlay ok; every page reviewed. No `checks.yaml`; `tools/check.sh` not run. `court.json` untouched.
 
@@ -28,7 +28,7 @@ The same rules and the same parameter mapping as `../opening-brief/README.md` ("
 
 ## Page review (Gate 2), 2026-10-16
 
-All 8 pages of `OUTPUT-uscgcoca-answering-brief-steen.typst.pdf` and all 8 of `OVERLAY-steen-answering-brief.pdf` rasterized at 60 dpi and viewed. Fonts: Liberation Serif Regular, Bold, Italic only; no typst warnings.
+All 8 pages of `OUTPUT-answering-brief.typst.pdf` and all 8 of `OVERLAY-steen-answering-brief.pdf` rasterized at 60 dpi and viewed. Fonts: Liberation Serif Regular, Bold, Italic only; no typst warnings.
 
 | Page | Result |
 |---|---|
@@ -43,7 +43,7 @@ All 8 pages of `OUTPUT-uscgcoca-answering-brief-steen.typst.pdf` and all 8 of `O
 
 1. TOC/TOA and summary of argument over 30 pages (R. 17.3) not generated; word limit printed, not enforced; word count approximate unless `word_count` is given.
 2. The 2019 exemplar has no word certificate; the template adds it per R. 17.3 (2025).
-3. The docx engine was not changed in this pass and still builds the earlier EB Garamond form; `usage/OUTPUT-uscgcoca-answering-brief-smoke.docx*` come from it. The `signature` list form used by the Steen sample is typst-only for now.
+3. The docx engine was not changed in this pass and still builds the earlier EB Garamond form; `usage/OUTPUT-answering-brief-2.docx*` come from it. The `signature` list form used by the Steen sample is typst-only for now.
 4. No `checks.yaml`; `tools/check.sh` not run.
 
 ## Engines

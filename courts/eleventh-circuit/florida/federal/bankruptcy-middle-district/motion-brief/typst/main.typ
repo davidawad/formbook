@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "flmb-motion-brief.typ": flmb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-flmb-motion-brief-machaikmotion.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #flmb-motion-brief(meta, body)

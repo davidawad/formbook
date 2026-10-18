@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-gamb-motion-brief-gordon1407017.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.gamb.341504/gov.uscourts.gamb.341504.63.0.pdf (RECAP archive copy of ECF Doc. 63) |
 | Court | United States Bankruptcy Court, Middle District of Georgia, Valdosta Division |
 | Case | *Gordon, as Trustee for Alpha Protective Services, Inc. v. American Pawn Shop, Inc. et al.*, Adv. Pro. No. 14-07017; *In re Alpha Protective Services, Inc.*, Bankr. Case No. 12-70482 (Chapter 7) |

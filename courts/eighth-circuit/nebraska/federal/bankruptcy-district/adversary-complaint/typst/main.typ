@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nebraskab-adversary-complaint.typ": nebraskab-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nebraskab-adversary-complaint-interbake.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #nebraskab-complaint(meta, body)

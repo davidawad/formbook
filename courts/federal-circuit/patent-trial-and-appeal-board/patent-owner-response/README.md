@@ -5,14 +5,14 @@ Doc type `patent-owner-response` of court `ptab`. Self-contained folder, like `.
 **Status: rendered and overlaid against one filed exemplar; tier 2 NOT finished (one filer only).** The tier-1 form (font, margins, spacing, length, certificates) is built from the rules and checked by eye on all 13 rendered pages. The tier-2 comparison needs a second filer's response and none was found (see `usage/SOURCE.md`, search record). Until then this doc type is not a pass on tier 2.
 
 ```sh
-sh tools/render.sh courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response usage/INPUT-ptab-patent-owner-response-juniperipr.md   # -> usage/OUTPUT-ptab-patent-owner-response-juniperipr.typst.pdf
+sh tools/render.sh courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response usage/INPUT-patent-owner-response.md   # -> usage/OUTPUT-patent-owner-response.typst.pdf
 sh tools/overlay.sh courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response juniper-ipr                    # -> usage/OVERLAY-juniper-ipr.pdf and .txt
 ```
 
 | Item | Status |
 |---|---|
 | exemplar | yes: one filed response, Swarm Technology (patent owner), IPR2021-01445. Second filer: not found. |
-| render | ok: `usage/OUTPUT-ptab-patent-owner-response-juniperipr.typst.pdf`, 13 pages, Liberation Serif embedded, no typst warnings |
+| render | ok: `usage/OUTPUT-patent-owner-response.typst.pdf`, 13 pages, Liberation Serif embedded, no typst warnings |
 | overlay | ok: `usage/OVERLAY-juniper-ipr.pdf` and `.txt`, against the Swarm exemplar (passed explicitly) |
 | pages reviewed | 13 (every page of the render viewed as PNG at 70 dpi) |
 | typeface | face required: Times New Roman, 14-pt (§ 42.6(a)(2)(ii)) → vendored substitute: `Liberation Serif` (`fonts/liberation-serif`, metric-compatible, per `docs/FONTS.md`) → embedded: LiberationSerif only (`pdffonts`) |
@@ -21,9 +21,9 @@ sh tools/overlay.sh courts/federal-circuit/patent-trial-and-appeal-board/patent-
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-ptab-patent-owner-response-juniperswarmipr202101445.pdf` | Filed response, Swarm Technology v. Juniper Networks (IPR2021-01445). 65 pages. Used for the sample and the overlay. |
+| `usage/FILED-EXAMPLE-patent-owner-response.pdf` | Filed response, Swarm Technology v. Juniper Networks (IPR2021-01445). 65 pages. Used for the sample and the overlay. |
 | `usage/SOURCE.md` | URL, case, filer, date, fetch date, and the search record (including the second-filer search that found nothing). |
-| `usage/INPUT-ptab-patent-owner-response-juniperipr.md` | Markdown transcription, verbatim from the exemplar: caption, introduction, the ’004 patent overview with footnotes, prosecution history, claim construction, level of skill, the Hall-Ellis section, conclusion, signature, and the word-count and service certificates. About 2,300 words of body. Not the whole response (see Gaps). |
+| `usage/INPUT-patent-owner-response.md` | Markdown transcription, verbatim from the exemplar: caption, introduction, the ’004 patent overview with footnotes, prosecution history, claim construction, level of skill, the Hall-Ellis section, conclusion, signature, and the word-count and service certificates. About 2,300 words of body. Not the whole response (see Gaps). |
 | `typst/main.typ` | Entry point; reads the sample and its YAML frontmatter. |
 | `typst/ptab-patent-owner-response.typ` | Template: `patent-owner-response(meta, body)`. The petition template with the response wording and the response word-limit citation. Every number traces to a rule (`PTAB-POR-…` IDs below). |
 
@@ -57,7 +57,7 @@ Same as the petition (`../petition/README.md`, "Markdown contract"): YAML frontm
 
 ## Review (Gate 2 equivalent, recorded)
 
-Rendered `usage/OUTPUT-ptab-patent-owner-response-juniperipr.typst.pdf` (13 pages) and viewed every page as PNG (70 dpi): cover (p.1), contents (i), body pages 1–9, word-count certificate, certificate of service. Checked: page size, margins, double spacing, block paragraph indents, heading styles and numbering, footnotes at 14 pt, running header, signature block placement, the conclusion kept with its signature block. No layout defect found in tier 1.
+Rendered `usage/OUTPUT-patent-owner-response.typst.pdf` (13 pages) and viewed every page as PNG (70 dpi): cover (p.1), contents (i), body pages 1–9, word-count certificate, certificate of service. Checked: page size, margins, double spacing, block paragraph indents, heading styles and numbering, footnotes at 14 pt, running header, signature block placement, the conclusion kept with its signature block. No layout defect found in tier 1.
 
 Tier-2 findings, compared against the Swarm exemplar only (one filer, so none can be called a convention; all are OPEN, not judged):
 
@@ -87,10 +87,10 @@ Tier-2 findings, compared against the Swarm exemplar only (one filer, so none ca
 | Engine | Folder | State |
 |---|---|---|
 | typst (primary) | `typst/` | rendered and reviewed (above) |
-| docx | `docx/` | `.docx` built (`usage/OUTPUT-ptab-patent-owner-response-juniperipr.docx`); `.docx.pdf` BLOCKED; no page reviewed |
+| docx | `docx/` | `.docx` built (`usage/OUTPUT-patent-owner-response.docx`); `.docx.pdf` BLOCKED; no page reviewed |
 | latex | none | not in this brief |
 
-Build: `sh docx/make-reference.sh docx/reference.docx` rebuilds the reference (committed). `sh tools/render.sh --engine docx courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response usage/INPUT-ptab-patent-owner-response-juniperipr.md` writes the `.docx`; its LibreOffice step needs `soffice`.
+Build: `sh docx/make-reference.sh docx/reference.docx` rebuilds the reference (committed). `sh tools/render.sh --engine docx courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response usage/INPUT-patent-owner-response.md` writes the `.docx`; its LibreOffice step needs `soffice`.
 
 What matches typst (set in the XML; no rendered page has been seen yet):
 

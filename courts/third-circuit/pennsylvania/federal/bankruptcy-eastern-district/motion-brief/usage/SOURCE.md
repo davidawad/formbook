@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-paeb-motion-brief-henry2600106.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Eastern District of Pennsylvania (`paeb`)
 - Case: *Sheila Henry v. US Bank Trust Co., N.A., as Trustee* (Adv. No. 26-00106), main case *In re Sheila Henry*, Case No. 25-13169-djb, Chapter 13
 - Document: Doc 10, "Defendant's Memorandum of Law in Support of Defendant's Motion to Dismiss Complaint to Determine the Validity, Priority, or Extent of any Lien of U.S. Bank Trust Co., N.A." (10 pages). The motion itself (the Doc 9 or earlier filing) is not in this exemplar, so the memorandum stands in for the motion-with-memorandum structure.

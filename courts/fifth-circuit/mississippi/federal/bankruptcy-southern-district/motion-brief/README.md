@@ -4,9 +4,9 @@ Doc type: **motion-brief**: the memorandum brief that supports a motion, in the 
 
 | Item | Status |
 |---|---|
-| exemplar | yes, one filer: `usage/SAMPLE-mssb-motion-brief-lentz1906038.pdf` (Dkt 48, "Memorandum in Support of Motion for Summary Judgment", 15 pp., defendant's counsel). The motion itself is not in the exemplar, and the memorandum states no docket reference. See `usage/SOURCE.md` and Known gaps. |
-| sample md | `usage/INPUT-mssb-motion-brief-lentz.md`: the whole memorandum, transcribed, with the signature block and the certificate of service |
-| render | ok: `usage/OUTPUT-mssb-motion-brief-lentz.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
+| exemplar | yes, one filer: `usage/FILED-EXAMPLE-motion-brief.pdf` (Dkt 48, "Memorandum in Support of Motion for Summary Judgment", 15 pp., defendant's counsel). The motion itself is not in the exemplar, and the memorandum states no docket reference. See `usage/SOURCE.md` and Known gaps. |
+| sample md | `usage/INPUT-motion-brief.md`: the whole memorandum, transcribed, with the signature block and the certificate of service |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-lentz-motion-brief.pdf` and `.txt` (`sh tools/overlay.sh`) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed, final template) |
 | tier 1 | rules-driven template; asserts that stop the build if the title, the docket reference (`related_docket`), the caption case data, or counsel's e-mail, Bar number, telephone or street address is missing (checked: a sample with no docket reference fails with the rule cited). |
@@ -19,8 +19,8 @@ Doc type: **motion-brief**: the memorandum brief that supports a motion, in the 
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `mssb-motion-brief`. |
 | `typst/mssb-motion-brief.typ` | Template. Parameters at the top, each with its rule. Rule asserts in `check-meta`. |
-| `usage/INPUT-mssb-motion-brief-lentz.md` | Markdown contract sample (frontmatter + body). |
-| `usage/OUTPUT-mssb-motion-brief-lentz.typst.pdf` | `sh tools/render.sh courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/motion-brief usage/INPUT-mssb-motion-brief-lentz.md` |
+| `usage/INPUT-motion-brief.md` | Markdown contract sample (frontmatter + body). |
+| `usage/OUTPUT-motion-brief.typst.pdf` | `sh tools/render.sh courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/motion-brief usage/INPUT-motion-brief.md` |
 | `usage/OVERLAY-lentz-motion-brief.pdf`, `.txt` | `sh tools/overlay.sh <this folder> lentz-motion-brief` (red = ours, blue = filed, black = agree) |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -63,10 +63,10 @@ Three engines run from one markdown contract. `typst/` is the primary template a
 
 | Engine | Output in `usage/` | Result |
 |---|---|---|
-| typst | `OUTPUT-mssb-motion-brief-lentz.typst.pdf` | unchanged |
-| docx | `OUTPUT-mssb-motion-brief-lentz.docx` | written and checked for package integrity; `.docx.pdf` BLOCKED (below) |
+| typst | `OUTPUT-motion-brief.typst.pdf` | unchanged |
+| docx | `OUTPUT-motion-brief.docx` | written and checked for package integrity; `.docx.pdf` BLOCKED (below) |
 
-Build: `sh docx/make-reference.sh` once (writes `docx/reference.docx`), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-mssb-motion-brief-lentz.md`. The filter is `docx/mssb-motion-brief.lua`. The render script's LibreOffice step fails on the box used here; the `.docx` is written before that step.
+Build: `sh docx/make-reference.sh` once (writes `docx/reference.docx`), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`. The filter is `docx/mssb-motion-brief.lua`. The render script's LibreOffice step fails on the box used here; the `.docx` is written before that step.
 
 What the docx build sets to the typst form (from the same frontmatter). These are settings in the XML and the filter, not a rendered comparison: no page has been rendered (see below).
 
@@ -106,7 +106,7 @@ docx BLOCKED (not verified by a render):
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-mssb-motion-brief-lentz.typst.pdf` was rendered at 60 dpi and viewed in its final form.
+Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed in its final form.
 
 | Page | Content | Result |
 |---|---|---|

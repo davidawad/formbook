@@ -9,6 +9,6 @@
 #set text(font: font-family, size: type-size, lang: "en", hyphenate: false)
 #set par(leading: body-leading, spacing: 0pt, justify: false, first-line-indent: 0pt)
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ndb-motion-brief-elliottmemo.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ndb-motion-brief(meta, body)

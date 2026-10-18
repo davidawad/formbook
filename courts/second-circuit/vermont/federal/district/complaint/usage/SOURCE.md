@@ -1,6 +1,6 @@
 # Exemplar source: complaint (D. Vt.)
 
-- File: `SAMPLE-vtd-complaint-bonges226cv283.pdf` (11 pages, text layer present; Times New Roman; no pleading-paper line numbers)
+- File: `FILED-EXAMPLE-complaint.pdf` (11 pages, text layer present; Times New Roman; no pleading-paper line numbers)
 - Case: *Bonges v. Town of Milton and Chris Taylor*, No. 2:26-cv-00283 (D. Vt.)
 - Document: Complaint, ECF No. 1 (header: "Document 1, Filed 08/18/26")
 - Filer: Plaintiff Henry Bonges, by counsel James M. Diaz (Darby Kolter & Roberts LLP) and Jared K. Carter (Kingsbury Law)
@@ -11,9 +11,9 @@
 - Found by: CourtListener search API, `type=r`, `court=vtd`, `available_only=on`, query "complaint", sorted by filing date.
 - Other complaint found in the same search, not saved: *United States v. State of Vermont*, No. 2:26-cv-00272 (filed 2026-08-10 by the United States, Document 1, 18 pages, Times New Roman, text layer present). It is a second filer for tier-2 comparison; it was not used for the sample.
 
-## 2. SAMPLE-vtd-complaint-unitedstates226cv272.pdf
+## 2. FILED-EXAMPLE-complaint-2.pdf
 
-- File: `SAMPLE-vtd-complaint-unitedstates226cv272.pdf` (18 pages, text layer present, produced by Microsoft Word for Microsoft 365; Times New Roman; no pleading-paper line numbers)
+- File: `FILED-EXAMPLE-complaint-2.pdf` (18 pages, text layer present, produced by Microsoft Word for Microsoft 365; Times New Roman; no pleading-paper line numbers)
 - Court: United States District Court for the District of Vermont
 - Case: *United States v. State of Vermont, Vermont State Colleges, University of Vermont and State Agricultural College, and Vermont Student Assistance Corporation*, No. 2:26-cv-00272 (D. Vt.)
 - Document: Complaint, ECF No. 1 (header: "2:26-cv-00272-kjd Document 1 Filed 08/10/26")

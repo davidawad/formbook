@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ganb-motion-brief-kapitusstanfield2302003.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Court | United States Bankruptcy Court, Northern District of Georgia, Gainesville Division |
 | Case | *Kapitus Servicing, Inc. v. William Virgil Stanfield*, Adv. Pro. No. 23-02003-jrs (main case 22-20337-jrs, Chapter 13) |
 | Document | Global Resources LLC's Motion to Dismiss All Counterclaims, with Memorandum of Law, Argument and Certificate of Service. ECF Doc 38, 10 pages. |

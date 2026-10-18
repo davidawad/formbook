@@ -5,9 +5,9 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district/motio
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-tnmb-motion-brief-lemehnoname325ap90071.pdf` (1 filer, the defendant; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-tnmb-motion-brief-nngmtdmemo.md`: the full 8-page memorandum with its three footnotes, transcribed from the text layer |
-| render | ok: `usage/OUTPUT-tnmb-motion-brief-nngmtdmemo.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, the defendant; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: the full 8-page memorandum with its three footnotes, transcribed from the text layer |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | typeface | Rules name no face (LBR 5005-3(a): "All filings shall be clearly legible in 12-point font"). Vendored family: `EB Garamond` (`docs/FONTS.md`, "No face named"). Exemplar is Times New Roman: EB Garamond is visual only against it, not metric-compatible. |
 | overlay | ok: `usage/OVERLAY-nng-mtd-memo.pdf` and `usage/OVERLAY-nng-mtd-memo.txt` (`tools/overlay.sh`) |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed after the last template change) |

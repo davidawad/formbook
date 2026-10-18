@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-lamd-complaint-parker325cv01162.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Middle District of Louisiana
 - Case: *Beatrice M. Parker v. BASF Corporation*
 - Docket: No. 3:25-cv-01162-SDD-EWD (Document 1)

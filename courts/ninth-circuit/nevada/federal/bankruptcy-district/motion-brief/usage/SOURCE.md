@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nvb-motion-brief-epicahumanhealth2650579.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, District of Nevada
 - Case: *In re Epica Human Health LLC*, Case No. BK-26-50579-gs (Chapter 11, involuntary); related case *In re Epica International, Inc.*, No. 26-50580-gs
 - Document: Motion for Reconsideration of Order, to Amend Judgment or for New Hearing Pursuant to FRBP 9023, 9024, and 7052, with memorandum of points and authorities and certificate of service, 10 pages (ECF Doc 79)

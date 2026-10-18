@@ -2,7 +2,7 @@
 
 Both are public court records posted by the Supreme Court of California on its website. Both were fetched 2026-10-14 from the document pages linked below, then the PDFs were downloaded directly. Both PDFs have a text layer (`pdftotext` yields text).
 
-## 1. `SAMPLE-cal-petition-for-review-quachs275121.pdf` (primary; used for the sample)
+## 1. `FILED-EXAMPLE-petition-for-review.pdf` (primary; used for the sample)
 
 | | |
 |---|---|
@@ -15,7 +15,7 @@ Both are public court records posted by the Supreme Court of California on its w
 | PDF URL | https://supreme.courts.ca.gov/sites/default/files/supremecourt/default/documents/1-10-s275121-resp-pet-rev-062022.pdf |
 | Why chosen | It has the rule 8.504(b)(1) opening (a statement of the issues presented, before the introduction), a generated-looking table of contents and table of authorities, a certificate of compliance stating the font and word count, and a proof of service. Typeface 13-point Century Schoolbook (per its own certificate). |
 
-## 2. `SAMPLE-cal-petition-for-review-hoehns277510.pdf` (second filer; kept for tier-2 comparison, not transcribed)
+## 2. `FILED-EXAMPLE-petition-for-review-2.pdf` (second filer; kept for tier-2 comparison, not transcribed)
 
 | | |
 |---|---|
@@ -38,5 +38,5 @@ Both are public court records posted by the Supreme Court of California on its w
 
 | File | SHA-256 |
 |---|---|
-| `SAMPLE-cal-petition-for-review-hoehns277510.pdf` | `5e7493d6502293b40ec9f3f5dc35640c2b17446d64e26a1a30ca6536b03cb873` |
-| `SAMPLE-cal-petition-for-review-quachs275121.pdf` | `2843ed448e0f28d2b7da70f3ddae11926472426fe6391c8cdb55dcac3d70e240` |
+| `FILED-EXAMPLE-petition-for-review-2.pdf` | `5e7493d6502293b40ec9f3f5dc35640c2b17446d64e26a1a30ca6536b03cb873` |
+| `FILED-EXAMPLE-petition-for-review.pdf` | `2843ed448e0f28d2b7da70f3ddae11926472426fe6391c8cdb55dcac3d70e240` |

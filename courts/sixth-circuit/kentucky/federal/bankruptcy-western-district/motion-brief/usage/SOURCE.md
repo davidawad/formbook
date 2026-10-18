@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-kywb-motion-brief-insightterminalvcityofoakland2403007.pdf` (the whole 77-page attachment, unaltered; 3.1 MB; text layer present). The filed memorandum is **PDF pages 2 to 27**; page 28 is its certificate of service; pages 29 to 77 are further exhibits. Page 1 is the attachment's slip sheet.
+- File: `FILED-EXAMPLE-motion-brief.pdf` (the whole 77-page attachment, unaltered; 3.1 MB; text layer present). The filed memorandum is **PDF pages 2 to 27**; page 28 is its certificate of service; pages 29 to 77 are further exhibits. Page 1 is the attachment's slip sheet.
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.kywb.364860/gov.uscourts.kywb.364860.25.1.pdf (CourtListener RECAP copy of Dkt. 25, Attachment 1, "Exhibit 1" to the motion). Docket page: https://www.courtlistener.com/docket/68326645/
 - Court: United States Bankruptcy Court, Western District of Kentucky, Louisville Division.
 - Case: *Insight Terminal Solutions, LLC, as the Reorganized Debtor v. City of Oakland*, Adv. Proc. No. 24-03007-jal (Judge Joan A. Lloyd). Main case: *In re Insight Terminal Solutions, LLC, et al.*, No. 19-32231 (jointly administered), Chapter 11.

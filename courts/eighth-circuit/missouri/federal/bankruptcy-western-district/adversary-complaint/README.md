@@ -4,9 +4,9 @@ Doc type: **adversary-complaint**, the complaint that starts an adversary procee
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 2 filers: `usage/SAMPLE-mowb-adversary-complaint-carlson2504017.pdf` (35 pp, Enterprise Bank and Trust, 2025) and `usage/SAMPLE-mowb-adversary-complaint-standley1903015.pdf` (7 pp, Standley Enterprises, 2019). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-mowb-adversary-complaint-enterprisecarlsoncomplaint.md` (a portion of the Carlson complaint, see gap 6) |
-| render | ok: `usage/OUTPUT-mowb-adversary-complaint-enterprisecarlsoncomplaint.typst.pdf`, 10 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
+| exemplar | yes, 2 filers: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (35 pp, Enterprise Bank and Trust, 2025) and `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (7 pp, Standley Enterprises, 2019). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-adversary-complaint.md` (a portion of the Carlson complaint, see gap 6) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 10 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
 | typeface | no face named by the court's rules (checked 2026-10-14); EB Garamond kept, per `docs/FONTS.md` rule 3 |
 | overlay | fail (2026-10-14): `tools/overlay.sh` cannot run, because `usage/` holds only `SOURCE.md` and the filed PDFs are not in this snapshot. The `OVERLAY-enterprise-carlson-complaint.txt` shown is from the earlier run; no `.pdf` overlay exists. |
 | pages reviewed | 10 of 10 (every page of the 2026-10-14 render rasterized at 60 dpi and viewed) |
@@ -86,7 +86,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for this doc type. Unchanged by the docx work.
-- **docx** (`docx/`): `reference.docx` (built by `sh docx/make-reference.sh`: styles, US Letter, 1 inch margins, centred PAGE footer) and `mowb.lua` (caption, numbering, lettered lists, signature block and certificate). Output: `usage/OUTPUT-mowb-adversary-complaint-enterprisecarlsoncomplaint.docx` and `.docx.pdf` (`sh tools/render.sh --engine docx <this folder> usage/INPUT-mowb-adversary-complaint-enterprisecarlsoncomplaint.md`).
+- **docx** (`docx/`): `reference.docx` (built by `sh docx/make-reference.sh`: styles, US Letter, 1 inch margins, centred PAGE footer) and `mowb.lua` (caption, numbering, lettered lists, signature block and certificate). Output: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (`sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`).
   - **Matches typst:** US Letter, 1 inch margins, EB Garamond 13 pt (the declared face; a machine without it substitutes silently, so install it to open the file as designed), caption rows with the ")" column, numbered paragraphs 1 to 42 with WHEREFORE unnumbered, lettered (a), (b) lists, headings I., II. (continuous), the consent statement before the first heading, the signature block with "Respectfully submitted," and the certificate of service.
   - **Differs from typst:** the body is set at an exact 24 pt line pitch with 15.6 pt between paragraphs, which reads looser than the typst body. The Carlson sample is 12 pages in docx and 10 in typst. The signature block is kept together (`keepNext`), so it moves to page 12 with the certificate.
   - **Checked:** the `.docx.pdf` is the LibreOffice 26.8.1 conversion (fonts embedded: EB Garamond only). Every page (1-12) was rendered at 60 dpi and viewed beside the typst pages. The `.docx` was not opened in Word.

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "cal-opening-brief-on-the-merits.typ": cal-opening-brief-on-the-merits, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-cal-opening-brief-on-the-merits-mccune.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-opening-brief-on-the-merits.md"))
 #let (meta, body) = split-frontmatter(src)
 #cal-opening-brief-on-the-merits(meta, body)

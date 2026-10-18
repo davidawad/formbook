@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "tnwd-motion-brief.typ": tnwd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-tnwd-motion-brief-gonzalezmemorandum.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #tnwd-motion-brief(meta, body)

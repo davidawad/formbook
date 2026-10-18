@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-utd-complaint-fastre126cv00060.pdf` |
+| File | `FILED-EXAMPLE-complaint.pdf` |
 | Court | United States District Court for the District of Utah (`utd`) |
 | Case | *Fastre v. Weber County* |
 | Docket no. | 1:26-cv-00060-TS-CMR |

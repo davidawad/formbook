@@ -1,6 +1,6 @@
 # Filed exemplar
 
-- Filename: `SAMPLE-texcrimapp-opening-brief-becerrapd028022.pdf`
+- Filename: `FILED-EXAMPLE-opening-brief.pdf`
 - Case: *State v. Joe Luis Becerra*, No. PD-0280-22
 - Filer: State of Texas; Ryan Calvert, Assistant District Attorney, Brazos County
 - Date filed: October 25, 2022 (accepted by the Court of Criminal Appeals on October 25, 2022)

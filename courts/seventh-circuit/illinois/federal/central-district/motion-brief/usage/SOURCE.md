@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ilcd-motion-brief-ives326cv03158.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Central District of Illinois, Springfield Division
 - Case: *Jeanne Ives v. JB Pritzker, et al.*
 - Docket: No. 3:26-cv-03158-SEM-DJQ (Document 13)

@@ -2,7 +2,7 @@
 
 Two filed complaints from two filers, for the tier-2 comparison (docs/EVAL-LOOP.md). The first is the primary exemplar (the sample transcribes it); the second is the second filer.
 
-## 1. Primary: `SAMPLE-miwd-complaint-googlecalhoun125cv724.pdf`
+## 1. Primary: `FILED-EXAMPLE-complaint.pdf`
 
 - Court: United States District Court, Western District of Michigan, Southern Division
 - Case: *Google v. Calhoun County, et al.*
@@ -14,7 +14,7 @@ Two filed complaints from two filers, for the tier-2 comparison (docs/EVAL-LOOP.
 - Date fetched: 2026-10-14
 - Public court record (RECAP). Used only as a visual and structural reference.
 
-## 2. Second filer: `SAMPLE-miwd-complaint-coheninterlochen126cv2598.pdf`
+## 2. Second filer: `FILED-EXAMPLE-complaint-2.pdf`
 
 - Court: United States District Court, Western District of Michigan, Southern Division
 - Case: *Cohen v. Interlochen Center for the Arts, et al.*

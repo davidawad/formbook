@@ -5,9 +5,9 @@ Folder: `courts/tenth-circuit/utah/federal/district/motion-brief/`. Self-contain
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-utd-motion-brief-millerstormont225cv00857.pdf` (22 pages, text layer; `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-utd-motion-brief-millermotiontodismiss.md` (abridged transcription of the exemplar, see Known gaps) |
-| render | ok: `usage/OUTPUT-utd-motion-brief-millermotiontodismiss.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (22 pages, text layer; `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (abridged transcription of the exemplar, see Known gaps) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | typeface | face required: **none** (DUCivR 10-1(3) names no typeface; checked against the December 2023 text, 2026-10-15). Substitute: none needed. Font: **EB Garamond** kept (`docs/FONTS.md`: a court naming no face keeps EB Garamond). Not metric-compatible with any Times; not applicable here. |
 | overlay | ok: `usage/OVERLAY-miller-motion-to-dismiss.pdf` and `usage/OVERLAY-miller-motion-to-dismiss.txt` (`tools/overlay.sh`, exemplar passed as the third argument: see Render and overlay) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-15 in the fonts pass, no change to the template) |
@@ -56,7 +56,7 @@ Not produced by this template: a proposed order (DUCivR 7-1, separate filing), a
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/tenth-circuit/utah/federal/district/motion-brief usage/INPUT-utd-motion-brief-millermotiontodismiss.md
+sh tools/render.sh courts/tenth-circuit/utah/federal/district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/tenth-circuit/utah/federal/district/motion-brief miller-motion-to-dismiss /path/to/exemplar.pdf
 ```
 
@@ -101,7 +101,7 @@ Pages reviewed: 12 of 12.
 
 ## Engines
 
-**docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` (pandoc's reference with the styles, footer and section of `typst/utd-motion-brief.typ`), and the filter `docx/utd-motion-brief.lua` (cover with counsel block and caption, heading labels "I." and "A.", numbered and bulleted lists, table of contents and table of authorities, page breaks before the contents and before the memorandum, signature block). `sh tools/render.sh --engine docx <folder> usage/INPUT-utd-motion-brief-millermotiontodismiss.md` writes `usage/OUTPUT-utd-motion-brief-millermotiontodismiss.docx`.
+**docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` (pandoc's reference with the styles, footer and section of `typst/utd-motion-brief.typ`), and the filter `docx/utd-motion-brief.lua` (cover with counsel block and caption, heading labels "I." and "A.", numbered and bulleted lists, table of contents and table of authorities, page breaks before the contents and before the memorandum, signature block). `sh tools/render.sh --engine docx <folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx`.
 
 - Matches the typst form: Letter; top margin 1 1/2 in, others 1 in; EB Garamond 13 pt; exact 26 pt line spacing for body text; first-line indent 0.5 in; headings centred bold capitals (level 1), bold with "I." at the margin (level 2), bold with "A." indented half an inch (level 3); lists numbered "1." and bulleted at 0.5 in; footnotes at 13 pt, single spaced; centred page number on every page; caption with the judge; motion, contents, authorities and memorandum in the same order.
 - Differs: the caption and signature are Word tables; the table of contents and table of authorities are written as text (below); the typst page-number column is not reproduced.

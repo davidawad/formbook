@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "cacb-motion-brief.typ": cacb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-cacb-motion-brief-jamescapitaladvisors.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #cacb-motion-brief(meta, body)

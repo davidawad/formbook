@@ -6,7 +6,7 @@ Status: **exemplar=yes** (one filed brief on appeal, public text-based PDF).
 
 | Field | Value |
 |---|---|
-| File | `usage/SAMPLE-bia-brief-on-appeal-abredacted.pdf` |
+| File | `usage/FILED-EXAMPLE-brief-on-appeal.pdf` |
 | sha256 | `6717c3780461886e63df84ca8888aafc10e7ed77db7d543b5961d7c7daf955ae` |
 | URL (PDF) | `https://cgrs.uclawsf.edu/sites/default/files/2019.12.16_A-B-%20BIA%20Brief_Redacted.pdf` |
 | Landing page | `https://cgrs.uclawsf.edu/en/legal-document/respondents-brief-board-immigration-appeals-matter-b` (titled "Respondent's Brief to the Board of Immigration Appeals in Matter of A-B-") |
@@ -28,7 +28,7 @@ Status: **exemplar=yes** (one filed brief on appeal, public text-based PDF).
 
 ## Transcription
 
-`usage/INPUT-bia-brief-on-appeal-ab20191216.md`. It is the text of the filed brief with no edits to wording. The Argument (filed pp. 10–47) is omitted and marked in the text. Caption and counsel details come from the filed cover; the signature block has the signer's name and firm from the filed copy. The service fields are placeholders, because the filed copy has no certificate.
+`usage/INPUT-brief-on-appeal.md`. It is the text of the filed brief with no edits to wording. The Argument (filed pp. 10–47) is omitted and marked in the text. Caption and counsel details come from the filed cover; the signature block has the signer's name and firm from the filed copy. The service fields are placeholders, because the filed copy has no certificate.
 
 ## Searches (2026-10-14)
 

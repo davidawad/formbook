@@ -4,17 +4,17 @@ Doc type: **motion-brief**: the memorandum of law in support of a motion in the 
 
 | Item | Status |
 |---|---|
-| exemplar | yes, one filer: `usage/SAMPLE-ctd-motion-brief-whitfield326cv00324.pdf` (see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ctd-motion-brief-whitfield.md`: cover and caption, table of contents and table of authorities (generated), Preliminary Statement, Legal Standards, Argument A and B with footnotes 1 and 2, Conclusion, signature blocks, certification of service. Argument C and D are not transcribed (see Known gaps). |
-| render | ok: `usage/OUTPUT-ctd-motion-brief-whitfield.typst.pdf`, 11 pages (cover, TOC i, TOA ii, body 1 to 6, signature 7, certification 8), typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Italic and Bold, embedded), no typst warnings |
+| exemplar | yes, one filer: `usage/FILED-EXAMPLE-motion-brief.pdf` (see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: cover and caption, table of contents and table of authorities (generated), Preliminary Statement, Legal Standards, Argument A and B with footnotes 1 and 2, Conclusion, signature blocks, certification of service. Argument C and D are not transcribed (see Known gaps). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages (cover, TOC i, TOA ii, body 1 to 6, signature 7, certification 8), typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Italic and Bold, embedded), no typst warnings |
 | typeface | no face named by the rules; EB Garamond kept (vendored, embedded). See Known gaps 4 |
-| overlay | ok: `usage/OVERLAY-whitfield-motion-brief.pdf` and `OVERLAY-whitfield-motion-brief.txt` (pairs by text; exemplar PDF `usage/SAMPLE-ctd-motion-brief-whitfield326cv00324.pdf` fetched from the SOURCE.md URL on 2026-10-15) |
+| overlay | ok: `usage/OVERLAY-whitfield-motion-brief.pdf` and `OVERLAY-whitfield-motion-brief.txt` (pairs by text; exemplar PDF `usage/FILED-EXAMPLE-motion-brief.pdf` fetched from the SOURCE.md URL on 2026-10-15) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi to PNG and viewed on 2026-10-15) |
 
 Commands (run with `export PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/second-circuit/connecticut/federal/district/motion-brief usage/INPUT-ctd-motion-brief-whitfield.md
+sh tools/render.sh courts/second-circuit/connecticut/federal/district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/second-circuit/connecticut/federal/district/motion-brief whitfield-motion-brief
 ```
 
@@ -93,7 +93,7 @@ Primary sources, fetched 2026-10-14:
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion-brief.lua` writes the cover, the table of contents, the table of authorities, the body (numbered headings, numbered lists, footnotes, block quotations), the signature block and the certification; `docx/render.sh` (run by `tools/render-docx.sh`) makes two passes: the first is converted to PDF, the printed page of each heading and of each authority is found in its text (`pagemap.awk`), and the second pass writes those page numbers into the table of contents and the table of authorities. Output: `usage/OUTPUT-ctd-motion-brief-whitfield.docx` and `.docx.pdf` (LibreOffice 26.8, `pdffonts`: EBGaramond Regular, Italic and Bold, embedded), 11 pages, the same count as the typst render (cover, TOC i, TOA ii, body 1 to 8).
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion-brief.lua` writes the cover, the table of contents, the table of authorities, the body (numbered headings, numbered lists, footnotes, block quotations), the signature block and the certification; `docx/render.sh` (run by `tools/render-docx.sh`) makes two passes: the first is converted to PDF, the printed page of each heading and of each authority is found in its text (`pagemap.awk`), and the second pass writes those page numbers into the table of contents and the table of authorities. Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8, `pdffonts`: EBGaramond Regular, Italic and Bold, embedded), 11 pages, the same count as the typst render (cover, TOC i, TOA ii, body 1 to 8).
 
 - Matches the typst output: US Letter; 1 in margins; EB Garamond 12 pt; cover with the court, the caption table (party column ruled right and bottom, case number, date and the title in bold capitals), no page number; roman pages for the contents and the authorities, arabic from 1 in the body; headings level 1 centred and bold capitals, level 2 to 4 with the labels A., 1., a. hanging; body double spaced (27.6 pt pitch, measured on the PDF) with a 0.5 in first-line indent; block quotations single spaced and indented; footnotes at 10 pt; lists numbered 1) and 2); signature block with "BY: /s/" for each signer; certification of service on its own block, flush, with the signer at right; "passim" for an authority on seven or more pages.
 - Differs from typst: the TOC and TOA are written as text (not as Word TOC and TOA fields), with the page numbers of the LibreOffice PDF; Word may paginate a line or two differently and so move a number, and the page numbers are not updated when the document is edited in Word. The TOA page of an authority is found by searching the text of its first 40 characters on each body page (a short form such as "12(b)(6)" is found wherever it appears on a page, which is the same authority in this sample); typst counts the link itself. Body pages 1 to 4 break where typst's do; from body page 5 the docx runs about two lines behind typst (the Gillam quotation ends on body page 5 in the docx, on page 4 in typst). Text sits lower in exact-spaced lines than in typst (see the complaint's Engines note). The oral-argument legend is written in the cover footer (CTD-FIRST-003); the sample has none, so the legend path was not exercised.

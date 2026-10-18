@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/california/federal/eastern-district/motion-brief/`
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-caed-motion-brief-wine226cv02243.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-caed-motion-brief-wine.md`: caption, notice of motion (pages 1 to 2 of the filing) and its signature, the table of contents and table of authorities (in full), memorandum introduction and facts (part), Rule 12(e) argument (part), conclusion and signature. Memorandum Part III.A to III.C are not transcribed (see Known gaps). |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: caption, notice of motion (pages 1 to 2 of the filing) and its signature, the table of contents and table of authorities (in full), memorandum introduction and facts (part), Rule 12(e) argument (part), conclusion and signature. Memorandum Part III.A to III.C are not transcribed (see Known gaps). |
 | typeface | face required: none in the E.D. Cal. Local Rules (checked, 2026-10-14; the local-rules text itself was not re-fetched on 2026-10-15). Judge standing orders may set a face or size; the assigned judge's standing order (TLN Civil Standing Order) was not read, so it is not verified. Font: **EB Garamond** (kept; `docs/FONTS.md` "No face named"). Metric-compatible: n/a. Visual only: EB Garamond is not Times. |
-| render | ok: `usage/OUTPUT-caed-motion-brief-wine.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -Italic embedded), no warnings (`sh tools/render.sh <this folder> usage/INPUT-caed-motion-brief-wine.md`) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -Italic embedded), no warnings (`sh tools/render.sh <this folder> usage/INPUT-motion-brief.md`) |
 | overlay | ok: `usage/OVERLAY-wine-motion-brief.pdf` and `usage/OVERLAY-wine-motion-brief.txt` (`sh tools/overlay.sh <this folder> wine-motion-brief`) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -89,8 +89,8 @@ Defects found and fixed during review: the signature block sat alone on a page (
 
 ### docx (checked with LibreOffice only; Word is not available here)
 
-- Build: `sh docx/build-reference.sh docx/reference.docx` (styles, the numbered-line header frame, the footer, page borders, the final section); render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-caed-motion-brief-wine.md` writes `usage/OUTPUT-caed-motion-brief-wine.docx` and `.docx.pdf` (8 pages; EB Garamond regular, bold and italic embedded).
-- Pages viewed: all 8 pages of `OUTPUT-caed-motion-brief-wine.docx.pdf` at 60 dpi, in the final build.
+- Build: `sh docx/build-reference.sh docx/reference.docx` (styles, the numbered-line header frame, the footer, page borders, the final section); render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (8 pages; EB Garamond regular, bold and italic embedded).
+- Pages viewed: all 8 pages of `OUTPUT-motion-brief.docx.pdf` at 60 dpi, in the final build.
 - No typst `OUTPUT` PDF exists in `usage/` for this sample; the comparison is with the typst template source and the README above.
 - Page numbers as in typst: the notice and the cover in arabic from 1; the table of contents and table of authorities in roman (i, ii, iii); the memorandum in arabic from 1. Three sections (`docx/caed-motion-brief.lua`), each with the header and footer of the final section (`docx/fix-sections.pl`).
 - Table of contents: `docx/render.sh` converts the docx once with LibreOffice, finds each memorandum heading's page, writes the numbers into the table, builds again, and fails if a third conversion would move a number. Word may paginate differently; the numbers are the LibreOffice ones.

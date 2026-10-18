@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cod-complaint-walton126cv01127.pdf` |
+| File | `FILED-EXAMPLE-complaint.pdf` |
 | Court | United States District Court for the District of Colorado |
 | Case | *Walton v. Protecto Wrap Company* |
 | Docket no. | 1:26-cv-01127-NRN |

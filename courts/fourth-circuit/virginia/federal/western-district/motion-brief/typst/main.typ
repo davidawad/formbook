@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "vawd-motion-brief.typ": vawd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-vawd-motion-brief-fitch.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief-2.md"))
 #let (meta, body) = split-frontmatter(src)
 #vawd-motion-brief(meta, body)

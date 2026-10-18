@@ -2,7 +2,7 @@
 
 Doc type: **motion-brief** (memorandum of law in support of a Rule 12(b) motion to dismiss), United States District Court for the District of New Jersey (`njd`).
 
-## 1. `SAMPLE-njd-motion-brief-karre226cv06421.pdf` (primary)
+## 1. `FILED-EXAMPLE-motion-brief.pdf` (primary)
 
 - Court: United States District Court, District of New Jersey (judge initials `WJM-CF` in the case number)
 - Case: *Karre v. E*Trade Securities LLC, et al.*
@@ -14,7 +14,7 @@ Doc type: **motion-brief** (memorandum of law in support of a Rule 12(b) motion 
 - Date fetched: 2026-10-14
 - Text layer: yes (embedded Times New Roman, body 14 pt)
 
-## 2. `SAMPLE-njd-motion-brief-zeines225cv13335.pdf` (second filer)
+## 2. `FILED-EXAMPLE-motion-brief-2.pdf` (second filer)
 
 - Court: United States District Court, District of New Jersey (judge initials `JXN-LDW`)
 - Case: *Zeines v. Blejer, et al.*

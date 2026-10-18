@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/virginia/federal/bankruptcy-eastern-district/adve
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-vaeb-adversary-complaint-deboervmorris2603003.pdf` (1 filer, counsel for creditors; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-vaeb-adversary-complaint-deboer.md`: caption, jurisdiction, parties, background, Count I (with the payments table), the first three paragraphs of Count II, the prayer, the signature block and the certificate of service. Paragraphs 36 to 55 of Count II are omitted (the exemplar is 16 pages; the sample is 9). |
-| render | ok: `usage/OUTPUT-vaeb-adversary-complaint-deboer.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer, counsel for creditors; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md`: caption, jurisdiction, parties, background, Count I (with the payments table), the first three paragraphs of Count II, the prayer, the signature block and the certificate of service. Paragraphs 36 to 55 of Count II are omitted (the exemplar is 16 pages; the sample is 9). |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-deboer-adversary-complaint.pdf` and `.txt` (page map below) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on the final build; the caption was also checked at 110 dpi) |
 

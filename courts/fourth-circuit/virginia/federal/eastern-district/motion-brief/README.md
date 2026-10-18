@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/virginia/federal/eastern-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-vaed-motion-brief-keppel426cv00112.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-vaed-motion-brief-keppel.md` (abridged transcription of the 12-page memorandum; see Known gaps) |
-| render | ok: `usage/OUTPUT-vaed-motion-brief-keppel.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (abridged transcription of the 12-page memorandum; see Known gaps) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | typeface | Rule names no face: L.R. 7(F)(3) says "12 point Roman style or 10 pitch Courier style". Any proportional serif is allowed, so the template keeps EB Garamond (`docs/FONTS.md`: no court-named face). Metric note: none needed. Font re-checked 2026-10-14 (`pdffonts`: EB Garamond only). |
 | overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF, and `usage/` holds only `SOURCE.md` (the PDF is not in this snapshot). Old `OVERLAY-keppel-motion-brief.txt` is from an earlier run and is not current. |
 | pages reviewed | 9 of 9 (re-rendered 2026-10-14; every page rasterized at 70 dpi and viewed) |
@@ -81,7 +81,7 @@ Notes on what the rules do not say:
 
 ## Engines
 
-DOCX (`docx/`): `reference.docx` from `docx/build-reference.sh`, filter `docx/vaed-motion-brief.lua`. Output `usage/OUTPUT-vaed-motion-brief-keppel.docx` and `.docx.pdf` (LibreOffice conversion). Pages reviewed: 9 of 9 in the docx PDF (pages 1 to 8 on the first render, page 9 again after a fix to the served list) and 9 of 9 in the typst PDF, at 60 dpi.
+DOCX (`docx/`): `reference.docx` from `docx/build-reference.sh`, filter `docx/vaed-motion-brief.lua`. Output `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion). Pages reviewed: 9 of 9 in the docx PDF (pages 1 to 8 on the first render, page 9 again after a fix to the served list) and 9 of 9 in the typst PDF, at 60 dpi.
 
 - Matches the typst form: EB Garamond 12 pt only (`pdffonts`); letter, 1 in margins; body at an exact 24 pt pitch; 0.5 in first-line indent; caption party box and case number; underlined bold title; headings with hanging labels (level 2 at 0, level 3 at 0.5 in); the last paragraph kept with the signature block; certificate of service on its own page; centered PAGE number at 12 pt. Nine pages in both, with the same page breaks, including the conclusion moving to page 8.
 - Differs: the court heading is single-spaced in the docx (see the complaint's Engines note). The docx's first page holds about two more body lines than typst's for that reason. The served list is followed by the "Date" line slightly closer than in typst. Footnotes: none in the sample; the footnote style is 12 pt single-spaced, not tested. LibreOffice breaks lines after hyphens in some citations where typst does not.

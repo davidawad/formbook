@@ -4,7 +4,7 @@ Two filed exemplars (different filers). Both are public court records from the B
 
 ## 1. Griffin (primary; sample source)
 
-- File: `SAMPLE-mssb-adversary-complaint-griffin1800028.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Southern District of Mississippi
 - Case: *Stephen Smith, as Chapter 7 Trustee for the Bankruptcy Estate of Bobby Joe Griffin v. Global Client Solutions, LLC, et al.*
 - Bankruptcy case: No. 18-00602-NPO (Chapter 7, Debtor Bobby Joe Griffin). Adversary No. 18-00028-NPO.
@@ -18,7 +18,7 @@ Two filed exemplars (different filers). Both are public court records from the B
 
 ## 2. Tate (second filer; tier-2 comparison)
 
-- File: `SAMPLE-mssb-adversary-complaint-tate2506012.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf`
 - Court: United States Bankruptcy Court, Southern District of Mississippi
 - Case: *Pamela Cherrye Tate v. Cash Cow / EZ Cash* (Southern Fast Loans of Mississippi, Inc.)
 - Bankruptcy case: No. 20-50491-KMS (Chapter 13, Debtors Corey Renee Tate and Pamela Cherrye Tate). Adversary No. 25-06012-KMS.

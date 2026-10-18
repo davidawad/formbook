@@ -4,7 +4,7 @@ Both files are memoranda in support of a Rule 12(b)(6) motion to dismiss, filed 
 
 ## 1. Primary exemplar (the one the sample is transcribed from)
 
-- File: `SAMPLE-lamd-motion-brief-firsthorizon326cv00182.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Middle District of Louisiana
 - Case: *First Horizon Corporation v. Karl Hoefer and DMMS Holdings, LLC*
 - Docket: No. 3:26-cv-00182-BAJ-EWD (Document 7-1, the memorandum attached to Document 7)
@@ -17,7 +17,7 @@ Both files are memoranda in support of a Rule 12(b)(6) motion to dismiss, filed 
 
 ## 2. Second filer (tier-2 comparison; not transcribed)
 
-- File: `SAMPLE-lamd-motion-brief-carpenter326cv00791.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Court: United States District Court, Middle District of Louisiana
 - Case: *Charles Curtis Carpenter v. Nancy Landry, et al.*
 - Docket: No. 3:26-cv-00791-SDD-RLB (Document 20-1)

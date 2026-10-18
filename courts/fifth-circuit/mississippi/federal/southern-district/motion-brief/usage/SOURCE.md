@@ -3,7 +3,7 @@
 Date fetched for every file below: 2026-10-14. All are public court records, downloaded from the RECAP archive
 (CourtListener's copy of PACER documents, storage.courtlistener.com). Each PDF is text-based: `pdftotext` reads it.
 
-## SAMPLE-mssd-motion-brief-bryant324cv00260.pdf (primary: the sample and the overlay use this file)
+## FILED-EXAMPLE-motion-brief.pdf (primary: the sample and the overlay use this file)
 
 - URL fetched: https://storage.courtlistener.com/recap/gov.uscourts.mssd.124854/gov.uscourts.mssd.124854.10.0.pdf
 - Docket page: https://www.courtlistener.com/docket/68518473/10/bryant-v-rosenberg/
@@ -14,7 +14,7 @@ Date fetched for every file below: 2026-10-14. All are public court records, dow
 - Date filed: 07/22/2024 (ECF header "Filed 07/22/24")
 - Notes: the filing carries two footnotes (on page 1). The text layer shows italics on only a few spans (for example "Federal Rules of Civil Procedure", "Favre v. Sharpe", "Twombly", "Cook v. Mardi Gras Casino", "Prescott", "See e.g."); most case names are roman in the filing. The sample italicizes case names per L.U.Civ.R. 7(b)(5)(C) (see the README, gaps). The ECF header is not part of the sample.
 
-## SAMPLE-mssd-motion-brief-petrini125cv00233.pdf (second filer; for the tier-2 comparison; not transcribed)
+## FILED-EXAMPLE-motion-brief-2.pdf (second filer; for the tier-2 comparison; not transcribed)
 
 - URL fetched: https://storage.courtlistener.com/recap/gov.uscourts.mssd.129977/gov.uscourts.mssd.129977.67.0.pdf
 - Docket page: https://www.courtlistener.com/docket/70906957/67/petrini-v-city-of-biloxi-mississippi/

@@ -7,10 +7,10 @@ One doc type only. Self-contained: `usage/`, `usage/`, `typst/`, this README.
 
 | Item | Result |
 |---|---|
-| Exemplar | yes: `usage/SAMPLE-scotus-amicus-brief-loperbright22451.pdf` (NSSF, merits-stage amicus for petitioners, No. 22-451, filed 2023-07-24) |
-| Sample | `usage/INPUT-scotus-amicus-brief-nssf.md` (excerpt: cover, both tables, Introduction, Summary, Argument I and I.A, I.B to the Guedes discussion, Conclusion, signature, Rule 33.1(h) certificate) |
+| Exemplar | yes: `usage/FILED-EXAMPLE-amicus-brief-2.pdf` (NSSF, merits-stage amicus for petitioners, No. 22-451, filed 2023-07-24) |
+| Sample | `usage/INPUT-amicus-brief.md` (excerpt: cover, both tables, Introduction, Summary, Argument I and I.A, I.B to the Guedes discussion, Conclusion, signature, Rule 33.1(h) certificate) |
 | Typeface | Rule 33.1(b) names the Century family. Substitute: **TeX Gyre Schola** (`font-family`; `docs/FONTS.md`). Metric-compatible per upstream, not checked against a commercial Century file here. |
-| Render | ok: `sh tools/render.sh courts/supreme-court-of-the-united-states/amicus-brief usage/INPUT-scotus-amicus-brief-nssf.md` writes `usage/OUTPUT-scotus-amicus-brief-nssf.typst.pdf` (14 pages, TeX Gyre Schola only, no typst warnings; was 11 pages in EB Garamond) |
+| Render | ok: `sh tools/render.sh courts/supreme-court-of-the-united-states/amicus-brief usage/INPUT-amicus-brief.md` writes `usage/OUTPUT-amicus-brief.typst.pdf` (14 pages, TeX Gyre Schola only, no typst warnings; was 11 pages in EB Garamond) |
 | Overlay | ok: `sh tools/overlay.sh courts/supreme-court-of-the-united-states/amicus-brief nssf-amicus-brief` writes `usage/OVERLAY-nssf-amicus-brief.pdf` and `.txt` |
 | Pages reviewed | 14 of 14 (final render, rasterized with `pdftoppm -r 80` and viewed) |
 | Open | No tier-1 typeface gap. The docx BLOCKED items stay (see Engines). Not BLOCKED: the exemplar exists. |
@@ -66,13 +66,13 @@ The body is markdown: `#` for the section headings (Introduction, Summary, Argum
 
 ## Overlay
 
-`OVERLAY-nssf-amicus-brief.pdf` (red = our render, blue = filed exemplar, black = both), run against `usage/SAMPLE-scotus-amicus-brief-loperbright22451.pdf` (27 pages). Our cover (p.1) matches the filed cover at 97.8%, our TOC (p.2) at 83.0%. The body pages match at 25.0-100%; the lowest is our p.4 (sub-point A) at 25.0%, which pairs with a filed page holding different text. This is the expected result for an excerpt on a different page size: the filed brief is letter-size, our render is the 6 1/8 x 9 1/4 booklet. The overlay is a diagnostic, not a layout pass.
+`OVERLAY-nssf-amicus-brief.pdf` (red = our render, blue = filed exemplar, black = both), run against `usage/FILED-EXAMPLE-amicus-brief-2.pdf` (27 pages). Our cover (p.1) matches the filed cover at 97.8%, our TOC (p.2) at 83.0%. The body pages match at 25.0-100%; the lowest is our p.4 (sub-point A) at 25.0%, which pairs with a filed page holding different text. This is the expected result for an excerpt on a different page size: the filed brief is letter-size, our render is the 6 1/8 x 9 1/4 booklet. The overlay is a diagnostic, not a layout pass.
 
 Names differ from the brief's default: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `OVERLAY-<id>.pdf/.txt`, which is what the shared tools read. The brief's `usage/<id>.pdf` and `<id>-overlay.*` names were not used.
 
 ## Page review (final render, 14 pages, TeX Gyre Schola)
 
-Rasterized at `pdftoppm -r 80`, each page viewed (pages 1-14 of `usage/OUTPUT-scotus-amicus-brief-nssf.typst.pdf`).
+Rasterized at `pdftoppm -r 80`, each page viewed (pages 1-14 of `usage/OUTPUT-amicus-brief.typst.pdf`).
 
 1. Cover: one page, counsel block and date on the page with a visible gap above the counsel block (see the cover defect below).
 2. TOC (roman i): entries and page numbers match the body (Introduction 1, Summary 2, Argument 3, I.A 4, I.B 6, Conclusion 8).
@@ -112,7 +112,7 @@ Defects found and fixed in review:
 
 ## Engines
 
-Engine status (this box, after the font change): typst `ok`; latex `ok`: `usage/OUTPUT-scotus-amicus-brief-nssf.latex.pdf`, 14 pages, embedded fonts TeX Gyre Schola only (not page-reviewed; the review above is the typst render). docx: `usage/OUTPUT-scotus-amicus-brief-nssf.docx` regenerated with TeX Gyre Schola; `.docx.pdf` NOT rendered, because `soffice` is not installed on this box (`tools/render-docx.sh` stops at its conversion step). Neither engine has a checks.yaml gate run yet.
+Engine status (this box, after the font change): typst `ok`; latex `ok`: `usage/OUTPUT-amicus-brief.latex.pdf`, 14 pages, embedded fonts TeX Gyre Schola only (not page-reviewed; the review above is the typst render). docx: `usage/OUTPUT-amicus-brief.docx` regenerated with TeX Gyre Schola; `.docx.pdf` NOT rendered, because `soffice` is not installed on this box (`tools/render-docx.sh` stops at its conversion step). Neither engine has a checks.yaml gate run yet.
 
 - **latex/** (`template.tex`, `brief.lua`): booklet page 6 1/8 by 9 1/4 in., text field 4 1/8 by 7 1/8 in., 12-point type on 14-point baselines, 10/12-point notes, cover, roman TOC and TOA, arabic body, signature, certificate. The TOA page list is generated from `\label`s on each citation (Lua filter), with each page printed once and "passim" at six or more pages. Fonts: TeX Gyre Schola from `fonts/tex-gyre-schola` via `fontdir` (`\setmainfont{texgyreschola}`, the file base name, as the fontspec glob needs).
 - **What differs from typst:** the LaTeX render is 14 pages, the same as typst. The docx cover and certificate are plainer than the typst cover.

@@ -3,7 +3,7 @@
 Date fetched for every file below: 2026-10-14. All are public court records, downloaded from the RECAP archive
 (CourtListener's copy of PACER documents, storage.courtlistener.com). Each PDF is text-based: `pdftotext` reads it.
 
-## SAMPLE-mssd-complaint-mariano125cv00363.pdf (primary: the sample and the overlay use this file)
+## FILED-EXAMPLE-complaint.pdf (primary: the sample and the overlay use this file)
 
 - URL fetched: https://storage.courtlistener.com/recap/gov.uscourts.mssd.131543/gov.uscourts.mssd.131543.1.0.pdf
 - Docket page: https://www.courtlistener.com/docket/71988265/1/mariano-v-enviva-llc/
@@ -14,7 +14,7 @@ Date fetched for every file below: 2026-10-14. All are public court records, dow
 - Date filed: 12/03/2025 (ECF header "Filed 12/03/25")
 - Notes: the counsel block has no fax number (see the complaint README, gaps). The ECF header at the top of each page is not part of the sample.
 
-## SAMPLE-mssd-complaint-myers126cv00266.pdf (second filer; for the tier-2 comparison; not transcribed)
+## FILED-EXAMPLE-complaint-2.pdf (second filer; for the tier-2 comparison; not transcribed)
 
 - URL fetched: https://storage.courtlistener.com/recap/gov.uscourts.mssd.135967/gov.uscourts.mssd.135967.1.0.pdf
 - Docket page: https://www.courtlistener.com/docket/74790183/1/myers-v-pfizer-inc/

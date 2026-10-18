@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "casd-motion-brief.typ": casd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-casd-motion-brief-sager.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #casd-motion-brief(meta, body)

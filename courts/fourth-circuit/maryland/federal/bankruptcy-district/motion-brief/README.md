@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/maryland/federal/bankruptcy-district/motion-brief
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-mdb-motion-brief-engelhorn2500159.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-mdb-motion-brief-engelhornmemorandum.md` (an abridged transcription, see "Transcription") |
-| render | ok: `usage/OUTPUT-mdb-motion-brief-engelhornmemorandum.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (an abridged transcription, see "Transcription") |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-engelhorn-memorandum.pdf` and `usage/OVERLAY-engelhorn-memorandum.txt` (12 sample pages paired with 22 exemplar pages) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; pages 1-8 in the render before the final signature change, which does not touch them; pages 9-12 in the final render) |
 
@@ -98,12 +98,12 @@ The same markdown renders through three engines. Typst (`typst/`) is the referen
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-mdb-motion-brief-engelhornmemorandum.typst.pdf` (12 pp) | reference |
-| docx | `OUTPUT-mdb-motion-brief-engelhornmemorandum.docx` and `OUTPUT-mdb-motion-brief-engelhornmemorandum.docx.pdf` (12 pp, LibreOffice) | rendered; BLOCKED lines below |
+| typst | `OUTPUT-motion-brief.typst.pdf` (12 pp) | reference |
+| docx | `OUTPUT-motion-brief.docx` and `OUTPUT-motion-brief.docx.pdf` (12 pp, LibreOffice) | rendered; BLOCKED lines below |
 
 ```sh
 sh docx/make-reference.sh     # rebuilds docx/reference.docx from pandoc's default reference document
-sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/bankruptcy-district/motion-brief usage/INPUT-mdb-motion-brief-engelhornmemorandum.md
+sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md
 ```
 
 **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/mdb-motion-brief.lua`).
@@ -112,7 +112,7 @@ sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/bankrupt
 - *Differs (tier 2):* body lines break at other words, so the page breaks differ by a few lines. The heading "B. Equitable Remand" and its first paragraph stay on p. 8 in the docx; typst moves both to p. 9 as one block. The certificate's service recipients are spaced about 12 pt apart in the docx, a little tighter than typst. The Tenacity Investment block ends on p. 11 in the docx and on p. 12 in typst; the certificate's signature lines are on p. 12 in both.
 - *Not verified:* the `.docx` has not been opened in Microsoft Word (no Word on this box). LibreOffice converts it without error, and it is a valid zip with well-formed XML parts (`unzip -t`, `xmllint` on every `.xml` and `.rels` part). Word may paginate slightly differently (docs/DOCX.md).
 - *Gate status:* this court folder has no `checks.yaml`, so `tools/check.sh --engine docx` was not run and no pass stamp was written. The review is by eye.
-- *Pages reviewed:* 12 of 12. Every page of `usage/OUTPUT-mdb-motion-brief-engelhornmemorandum.docx.pdf` was rendered at 60 dpi and viewed beside the same page of the typst render, on the final build.
+- *Pages reviewed:* 12 of 12. Every page of `usage/OUTPUT-motion-brief.docx.pdf` was rendered at 60 dpi and viewed beside the same page of the typst render, on the final build.
 - *Build notes:* as for the adversary complaint: no `unzip` or `zip` on this box (stand-ins outside the repo), and a one-time `soffice` retry on a fresh profile.
 
 BLOCKED: docx-word-open: not opened in Microsoft Word (not installed on this box); LibreOffice opens and converts the file without error.

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "wvsd-motion-brief.typ": memorandum, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-wvsd-motion-brief-castro.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #memorandum(meta, body)

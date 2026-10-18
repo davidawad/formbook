@@ -6,9 +6,9 @@ Status: exemplar **yes**; template renders with the repo's `tools/render.sh` (no
 
 ## Layout
 
-- `usage/SAMPLE-ca10-opening-brief-lymanvhenderson264014.pdf`: the real filed brief. Provenance in `usage/SOURCE.md`.
-- `usage/INPUT-ca10-opening-brief-lymanvhenderson.md`: the markdown sample (frontmatter + body). A **portion** of the brief: cover, TOC, TOA, prior-appeals statement, jurisdictional statement, issues, a portion of the statement of the case, a portion of the summary, standard of review, Argument I, conclusion, oral-argument statement, certificates, attachments index.
-- `usage/OUTPUT-ca10-opening-brief-lymanvhenderson.typst.pdf`: `sh tools/render.sh courts/tenth-circuit/court-of-appeals/opening-brief usage/INPUT-ca10-opening-brief-lymanvhenderson.md` (13 pages).
+- `usage/FILED-EXAMPLE-opening-brief.pdf`: the real filed brief. Provenance in `usage/SOURCE.md`.
+- `usage/INPUT-opening-brief.md`: the markdown sample (frontmatter + body). A **portion** of the brief: cover, TOC, TOA, prior-appeals statement, jurisdictional statement, issues, a portion of the statement of the case, a portion of the summary, standard of review, Argument I, conclusion, oral-argument statement, certificates, attachments index.
+- `usage/OUTPUT-opening-brief.typst.pdf`: `sh tools/render.sh courts/tenth-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md` (13 pages).
 - `usage/OVERLAY-lyman-v-henderson-opening-brief.pdf` and `-overlay.txt`: `sh tools/overlay.sh courts/tenth-circuit/court-of-appeals/opening-brief lyman-v-henderson-opening-brief`.
 - `typst/main.typ` (entrypoint) and `typst/ca10-opening-brief.typ` (template). The template is the ca9 engine (cmarker markdown, TOC/TOA by typst introspection) with ca10 cover, statements and certificates.
 
@@ -130,8 +130,8 @@ The overlay is a diagnostic. Red is our render, blue is the filed page, black is
 
 ## Engines
 
-- **typst** (primary): `typst/`, output `usage/OUTPUT-ca10-opening-brief-lymanvhenderson.typst.pdf`.
-- **latex** (`latex/template.tex` + `latex/ca10-opening-brief.lua`): output `usage/OUTPUT-ca10-opening-brief-lymanvhenderson.latex.pdf`, 19 pages against typst's 13. Matches the 14-pt EB Garamond type, 31.43-pt double spacing, 1-inch margins, roman front matter and arabic body, cover on one page, TOC and TOA with page references, and the certificates. Known differences: pagination is longer; footnote text on some pages runs wide (not yet fixed); the TOC wrap indent is not hung; the signature block is not kept with the last paragraph.
+- **typst** (primary): `typst/`, output `usage/OUTPUT-opening-brief.typst.pdf`.
+- **latex** (`latex/template.tex` + `latex/ca10-opening-brief.lua`): output `usage/OUTPUT-opening-brief.latex.pdf`, 19 pages against typst's 13. Matches the 14-pt EB Garamond type, 31.43-pt double spacing, 1-inch margins, roman front matter and arabic body, cover on one page, TOC and TOA with page references, and the certificates. Known differences: pagination is longer; footnote text on some pages runs wide (not yet fixed); the TOC wrap indent is not hung; the signature block is not kept with the last paragraph.
 - **docx**: not built yet (see the court-level PR notes). LibreOffice is not installed on this box; a Debian-package extraction was started but not verified.
 
 ## Typeface (fonts pass, 2026-10-15)

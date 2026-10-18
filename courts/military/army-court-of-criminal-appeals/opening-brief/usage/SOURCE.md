@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-acca-opening-brief-akbar20050514.pdf` (11 pages, an extract; see page map) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (11 pages, an extract; see page map) |
 | Case | *United States v. Sergeant (E-5) Hasan K. Akbar*, U.S. Army Court of Criminal Appeals, Docket No. ARMY 20050514 |
 | Document | Brief on Behalf of Appellant (assignments of error and argument), 483 numbered pages plus index (502 PDF pages) |
 | Filer | Defense Appellate Division, U.S. Army Legal Services Agency: MAJ Timothy Thomas, CPT Shay Stanford, LTC Jonathan F. Potter, MAJ Bradley M. Voorhees, COL Mark Tellitocci |
@@ -23,7 +23,7 @@ Page map of the extract (built with `pdfseparate` and `pdfunite`):
 | 8-10 | 499-501 | 481-483 | Assignments LVII and LVIII, closing prayer, signature blocks |
 | 11 | 502 | unnumbered | Certificate of Service (form with check boxes) |
 
-The index (source pp. 1-18), brief pp. 2-16 and 23-480 are left out. The sample `usage/INPUT-acca-opening-brief-akbar.md` transcribes exactly the extracted pages (extract p. 1 from the page image).
+The index (source pp. 1-18), brief pp. 2-16 and 23-480 are left out. The sample `usage/INPUT-opening-brief.md` transcribes exactly the extracted pages (extract p. 1 from the page image).
 
 Caveat: filed under the pre-2019 ACCA rules (set in Courier). The current rules (effective 15 January 2019, see `../README.md`) govern the template; the exemplar settles only what they leave open.
 

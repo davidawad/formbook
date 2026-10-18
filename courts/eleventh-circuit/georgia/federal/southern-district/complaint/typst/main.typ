@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "gasd-complaint.typ": gasd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-gasd-complaint-atlanticcasualty.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #gasd-complaint(meta, body)

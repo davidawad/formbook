@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-hid-motion-brief-usvhawaii125cv00179.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court for the District of Hawai‘i
 - Case: *United States of America v. State of Hawai‘i, et al.*, Civil No. 1:25-cv-00179-HG-WRP (Judge Helen Gillmor)
 - Document: Defendants' Motion for Judgment on the Pleadings; Memorandum in Support of Motion; Appendices A–B; Certificate of Service. The PDF is the two ECF entries as one file: Document 22 (the motion, 2 pages) and Document 22-1 (the memorandum, 33 pages), 35 pages in all. The memorandum's TOC, TOA, body (25 pages) and conclusion are in it. The copy has no certificate of service and no appendices, though the caption names both.

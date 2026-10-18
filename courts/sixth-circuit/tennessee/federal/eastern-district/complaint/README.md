@@ -5,9 +5,9 @@ Folder: `courts/sixth-circuit/tennessee/federal/eastern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-tned-complaint-simpsonexperian126cv00138.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-tned-complaint-simpson.md` (the whole filing's text, with partly illegible paragraphs marked) |
-| render | ok (re-run 2026-10-15): `usage/OUTPUT-tned-complaint-simpson.typst.pdf`, 10 pages, typst 0.15.0, `tools/render.sh` with vendored fonts only, no warnings; `pdffonts`: EB Garamond Regular and Bold embedded |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the whole filing's text, with partly illegible paragraphs marked) |
+| render | ok (re-run 2026-10-15): `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, `tools/render.sh` with vendored fonts only, no warnings; `pdffonts`: EB Garamond Regular and Bold embedded |
 | overlay | ok (re-run 2026-10-15): `usage/OVERLAY-simpson-complaint.pdf` and `OVERLAY-simpson-complaint.txt` (page map) |
 | pages reviewed | 10 of 10 (re-rendered and re-viewed 2026-10-15 at 60 dpi; the spacing defect found on the first pass is fixed and re-checked) |
 | typeface | face required: none (LR 5.1) → EB Garamond kept (no substitute) → visual only for the exemplar's Times-like face |
@@ -71,7 +71,7 @@ Every page was rasterized at 60 dpi and viewed. The first render had collided pa
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for this section.
-- **docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `tned-complaint.lua` sets the caption, numbered paragraphs, lettered items, signature block). Rendered with `tools/render.sh --engine docx`: `usage/OUTPUT-tned-complaint-simpson.docx` and `usage/OUTPUT-tned-complaint-simpson.docx.pdf` (LibreOffice, 10 pages, EB Garamond from `fonts/`). Pages reviewed: 10 of 10 at 60 dpi, each compared with the typst output.
+- **docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `tned-complaint.lua` sets the caption, numbered paragraphs, lettered items, signature block). Rendered with `tools/render.sh --engine docx`: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice, 10 pages, EB Garamond from `fonts/`). Pages reviewed: 10 of 10 at 60 dpi, each compared with the typst output.
   - Matches: letter paper, 1-inch margins, 24-pt double spacing, 12-pt EB Garamond, court title, caption (parties left with right and bottom rules, case number and title right), numbered paragraphs with a 0.5-inch first-line indent, lettered prayer items (a), (b), ..., heading sizes and styles (the typst template's 1.4 em, 1.2 em and 1 em), WHEREFORE lead-ins kept with their list, signature block, page number as the only footer text. Paragraph text and numbering are the same on every page.
   - Differs (tier 2, not chased): the 24-pt exact line places each line's text about 4.6 pt lower than typst, so the page breaks fall in different places. Paragraph 74 starts page 7 in the docx (page 6 in typst), and the PRAYER FOR RELIEF heading starts page 10 in the docx (page 9 in typst). Page count is the same (10). Word may break pages differently again.
   - BLOCKED: none. `sh tools/check.sh <court-dir> --engine docx` cannot run for this doc-type folder: it expects `checks.yaml` and `court.json` in the court folder, which this folder does not have (see Known gaps, item 10). No gate was edited to make it pass.

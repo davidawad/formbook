@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-gasd-motion-brief-harper125cv00203.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Southern District of Georgia, Augusta Division
 - Case: *Harper v. Barrett Financial LLC, et al.*
 - Docket: Civil Action No. 1:25-CV-00203-JRH-BKE (RECAP document 16, attachment 1)

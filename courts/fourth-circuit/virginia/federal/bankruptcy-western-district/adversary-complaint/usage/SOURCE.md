@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-vawb-adversary-complaint-rosen2406016.pdf` (4 pages, text layer present, `pdftotext` reads it)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (4 pages, text layer present, `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.vawb.282430/gov.uscourts.vawb.282430.1.0.pdf (RECAP copy; docket page https://www.courtlistener.com/docket/68982498/1/james-alan-rosen-and-robin-leslie-rosen-adversary-proceeding/)
 - Court: United States Bankruptcy Court, Western District of Virginia (`vawb`)
 - Case: *James Alan Rosen v. Texas Guaranteed Student Loan Corporation (n/k/a Trellis)*, adversary proceeding, bankruptcy case No. 23-61235 (Chapter 7; Debtors James Alan Rosen and Robin Leslie Rosen)

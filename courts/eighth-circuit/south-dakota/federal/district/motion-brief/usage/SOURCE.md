@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-sdd-motion-brief-loneeagle526cv05068.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, District of South Dakota (Western Division)
 - Case: *Lone Eagle v. South Dakota Board of Minerals and Environment, et al.*
 - Docket: No. 5:26-cv-05068-RAL, Document 23

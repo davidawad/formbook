@@ -1,6 +1,6 @@
 # Exemplar source: answering-brief, United States Bankruptcy Appellate Panel for the Eighth Circuit (bap8)
 
-## SAMPLE-bap8-answering-brief-swackhammer226006.pdf
+## FILED-EXAMPLE-answering-brief.pdf
 
 | Field | Value |
 |---|---|

@@ -2,7 +2,7 @@
 
 Doc type: adversary complaint, United States Bankruptcy Court, Eastern District of Washington (`waeb`).
 
-## 1. `SAMPLE-waeb-adversary-complaint-icap2580041.pdf`
+## 1. `FILED-EXAMPLE-adversary-complaint.pdf`
 
 - Court: United States Bankruptcy Court, Eastern District of Washington
 - Case: *Miller and Freeman, as Co-Trustees of the iCap Trust v. Liang* (adversary, within the jointly administered iCap Enterprises Inc. chapter 11 case, Lead Case No. 23-01243-WLH11)
@@ -15,7 +15,7 @@ Doc type: adversary complaint, United States Bankruptcy Court, Eastern District 
 - Text layer: yes (`pdftotext` yields text; checked on all 18 pages)
 - Public court record (RECAP). Used as a visual and structural reference only.
 
-## 2. `SAMPLE-waeb-adversary-complaint-cleelum2580033.pdf`
+## 2. `FILED-EXAMPLE-adversary-complaint-2.pdf`
 
 - Court: United States Bankruptcy Court, Eastern District of Washington (Yakima Division)
 - Case: *City of Cle Elum v. (defendants)*, adversary within Chapter 9 Case No. 25-01128-WLH9

@@ -2,7 +2,7 @@
 
 Two filed motion-to-dismiss briefs from two filers, for the tier-2 comparison (docs/EVAL-LOOP.md). The first is the primary exemplar (the sample transcribes it); the second is the second filer.
 
-## 1. Primary: `SAMPLE-miwd-motion-brief-valenzuelaalliance126cv1694.pdf`
+## 1. Primary: `FILED-EXAMPLE-motion-brief.pdf`
 
 - Court: United States District Court, Western District of Michigan, Southern Division
 - Case: *Valenzuela v. Alliance Cloud Services, LLC*
@@ -14,7 +14,7 @@ Two filed motion-to-dismiss briefs from two filers, for the tier-2 comparison (d
 - Date fetched: 2026-10-14
 - Public court record (RECAP). Used only as a visual and structural reference.
 
-## 2. Second filer: `SAMPLE-miwd-motion-brief-coddingtonskopos125cv100.pdf`
+## 2. Second filer: `FILED-EXAMPLE-motion-brief-2.pdf`
 
 - Court: United States District Court, Western District of Michigan
 - Case: *Coddington v. Skopos Financial, LLC d/b/a Reprise Financial*

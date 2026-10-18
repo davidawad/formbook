@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/guam/federal/bankruptcy-district/adversary-complai
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-gub-adversary-complaint-archbishopagana1900001.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-gub-adversary-complaint-archbishopaganacomplaint.md`: the complaint's body as filed (paragraphs 1 to 19, the prayer, the signing line), with the counsel block, caption and signature; exhibits not transcribed (see Known gaps) |
-| render | ok: `usage/OUTPUT-gub-adversary-complaint-archbishopaganacomplaint.typst.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md`: the complaint's body as filed (paragraphs 1 to 19, the prayer, the signing line), with the counsel block, caption and signature; exhibits not transcribed (see Known gaps) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
 | typeface | face required: none (GNLR 5.1 and the Bankr. L.R. text, read 2026-10-15, name no face or point size) → vendored substitute: none; **EB Garamond** is the no-face default (`docs/FONTS.md`) → metric-compatible: n/a |
 | overlay | ok: `usage/OVERLAY-archbishop-agana-complaint.pdf` and `.txt` (pages 1 to 4 each paired with filed pages 1 to 4); the filed exemplar was re-fetched from the RECAP URL in `usage/SOURCE.md` and matches its SHA-256; the PDF is kept outside the repo, since no court tracks exemplar PDFs in git |
 | pages reviewed | 4 of 4 (re-rendered 2026-10-15 and every page rasterised at 60 dpi and viewed; layout unchanged) |
@@ -80,7 +80,7 @@ Pages reviewed: 4 of 4.
 
 ### docx (build 2026-10-15, LibreOffice not installed)
 
-Files: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/gub-adversary-complaint.lua` (cover, caption, numbering, signature). Sample output: `usage/OUTPUT-gub-adversary-complaint-archbishopaganacomplaint.docx`. Checked: valid zip, every XML part well-formed (xmllint). Not rendered: no page of the docx was looked at (pages_reviewed = 0).
+Files: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/gub-adversary-complaint.lua` (cover, caption, numbering, signature). Sample output: `usage/OUTPUT-adversary-complaint.docx`. Checked: valid zip, every XML part well-formed (xmllint). Not rendered: no page of the docx was looked at (pages_reviewed = 0).
 
 What the XML sets (in `styles.xml`, `sectPr` and the footer part; set, not rendered):
 - EB Garamond 12 pt everywhere; body, headings and numbered paragraphs on an exact 24 pt line pitch (double spacing; 28 lines fill the body area).

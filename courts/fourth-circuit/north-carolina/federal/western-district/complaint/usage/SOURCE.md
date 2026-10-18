@@ -1,6 +1,6 @@
 # Exemplar source
 
-- **File:** `SAMPLE-ncwd-complaint-bell324cv00012.pdf` (27 pages, text layer present, `pdftotext` yields text)
+- **File:** `FILED-EXAMPLE-complaint.pdf` (27 pages, text layer present, `pdftotext` yields text)
 - **URL fetched from:** https://storage.courtlistener.com/recap/gov.uscourts.ncwd.114598/gov.uscourts.ncwd.114598.1.0.pdf
 - **Docket page:** https://www.courtlistener.com/docket/68142963/1/bell-v-craft-revolution-llc/
 - **Found via:** CourtListener RECAP search (`type=rd`, `court=ncwd`, q "complaint" "jury trial demanded"); the search hit is the main document of entry 1

@@ -4,9 +4,9 @@ Doc type: **motion brief** (a brief or memorandum in support of a motion, under 
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-arwb-motion-brief-lowryfarms124bk70535.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-arwb-motion-brief-lowrystaybrief.md`: the whole brief (pages 1 to 8 of the exemplar, caption through certificate of service); the exhibits (pages 9 to 59) are not transcribed |
-| render | ok: `usage/OUTPUT-arwb-motion-brief-lowrystaybrief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: the whole brief (pages 1 to 8 of the exemplar, caption through certificate of service); the exhibits (pages 9 to 59) are not transcribed |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-lowry-stay-brief.pdf` and `usage/OVERLAY-lowry-stay-brief.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change; word-overlap scan clean on the final render) |
 | typeface | face required: **none** found (the FRBP and the W.D./E.D. Ark. local rules and ECF procedures retrieved on 2026-10-14 name no face, size or font; see gap 3). Vendored substitute: **EB Garamond** (kept, as `docs/FONTS.md` says for a court that names no face). Metric-compatible: n/a. Re-checked 2026-10-14: render ok, `pdffonts` shows `EBGaramond-Regular`, `-Bold` and `-Italic` embedded, 8 pages, all 8 pages viewed. |
@@ -81,17 +81,17 @@ Gate 2 rows: pages 1 to 8 pass for layout. Tier-2 findings (conventions a clerk 
 
 | Engine | Output | What matches the typst template | What differs |
 |---|---|---|---|
-| typst (primary) | `usage/OUTPUT-arwb-motion-brief-lowrystaybrief.typst.pdf` | (the reference) | (the reference) |
-| docx | `usage/OUTPUT-arwb-motion-brief-lowrystaybrief.docx`, `.docx.pdf` (LibreOffice) | US Letter; 1 in margins; EB Garamond 13 pt (embedded in the PDF); exact 24 pt double spacing; 0.5 in first-line indent; bold court title; caption as a borderless table (debtor left, case number and chapter right); bold capitals title; argument headings I., A., 1., a. with a hanging label; the factor lists (1), (2), ...; single-spaced signature block at 3.25 in; the certificate of service; a plain centred page number | 9 pages, typst 8: the conclusion keeps with the signature block (a signature is never alone at the top of a page), and the certificate of service stays together as one block, so the last page starts later; the text of a factor item starts at 1.0 in on every line (typst puts the first line's text at about 1.25 in); the gaps before the signature and the certificate are paragraph spacing |
+| typst (primary) | `usage/OUTPUT-motion-brief.typst.pdf` | (the reference) | (the reference) |
+| docx | `usage/OUTPUT-motion-brief.docx`, `.docx.pdf` (LibreOffice) | US Letter; 1 in margins; EB Garamond 13 pt (embedded in the PDF); exact 24 pt double spacing; 0.5 in first-line indent; bold court title; caption as a borderless table (debtor left, case number and chapter right); bold capitals title; argument headings I., A., 1., a. with a hanging label; the factor lists (1), (2), ...; single-spaced signature block at 3.25 in; the certificate of service; a plain centred page number | 9 pages, typst 8: the conclusion keeps with the signature block (a signature is never alone at the top of a page), and the certificate of service stays together as one block, so the last page starts later; the text of a factor item starts at 1.0 in on every line (typst puts the first line's text at about 1.25 in); the gaps before the signature and the certificate are paragraph spacing |
 
-docx: all 9 pages of `OUTPUT-arwb-motion-brief-lowrystaybrief.docx.pdf` were rendered at 60 dpi and compared with the typst pages (side by side and as a grid). Gate result: no BLOCKED items. `tools/check.sh` was not run for the docx engine (no stamp; see the court README). Word was not available: open the `.docx` in Word once to confirm there is no repair prompt, and install EB Garamond on the reader's machine, or Word substitutes a font silently (`docs/DOCX.md`).
+docx: all 9 pages of `OUTPUT-motion-brief.docx.pdf` were rendered at 60 dpi and compared with the typst pages (side by side and as a grid). Gate result: no BLOCKED items. `tools/check.sh` was not run for the docx engine (no stamp; see the court README). Word was not available: open the `.docx` in Word once to confirm there is no repair prompt, and install EB Garamond on the reader's machine, or Word substitutes a font silently (`docs/DOCX.md`).
 
-Source: `docx/build-reference.sh` builds `docx/reference.docx` (run it from `docx/`: `sh build-reference.sh reference.docx`); `docx/arwb-motion-brief.lua` lays out the markdown contract. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-arwb-motion-brief-lowrystaybrief.md`.
+Source: `docx/build-reference.sh` builds `docx/reference.docx` (run it from `docx/`: `sh build-reference.sh reference.docx`); `docx/arwb-motion-brief.lua` lays out the markdown contract. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`.
 
 ## Commands
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/motion-brief usage/INPUT-arwb-motion-brief-lowrystaybrief.md
+sh tools/render.sh courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/motion-brief lowry-stay-brief
 ```

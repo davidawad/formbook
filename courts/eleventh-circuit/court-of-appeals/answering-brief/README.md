@@ -81,11 +81,11 @@ Body: `# Heading` is a section (bold, capitals, centered). Sub-headings are numb
 From the repo root, with `export PATH="$HOME/tb/bin:$PATH"` (typst 0.15.0, poppler, ImageMagick, gawk, jq):
 
 ```sh
-sh tools/render.sh courts/eleventh-circuit/court-of-appeals/answering-brief usage/INPUT-ca11-answering-brief-naacpvbyrd2512813.md
+sh tools/render.sh courts/eleventh-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md
 sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/answering-brief naacp-v-byrd-25-12813
 ```
 
-Render result: `usage/OUTPUT-ca11-answering-brief-naacpvbyrd2512813.typst.pdf`, 14 pages, no typst warnings, embedded fonts only EB Garamond Regular, Italic and Bold.
+Render result: `usage/OUTPUT-answering-brief.typst.pdf`, 14 pages, no typst warnings, embedded fonts only EB Garamond Regular, Italic and Bold.
 
 Word count: 1,428 by the template; 1,428 by an independent `awk` count of the markdown body (same exclusions).
 
@@ -158,20 +158,20 @@ Nothing is marked OK without a render and a look.
 
 ## Verification pass 2026-10-16 (fb-595.26.11)
 
-- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/answering-brief usage/INPUT-ca11-answering-brief-naacpvbyrd2512813.md` exits 0, no typst warnings, 14 pages (the committed PDF also had 14). Fonts embedded: EB Garamond Regular, Italic, Bold only.
+- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md` exits 0, no typst warnings, 14 pages (the committed PDF also had 14). Fonts embedded: EB Garamond Regular, Italic, Bold only.
 - Viewed: all 14 pages at 60 dpi after each fix (the last time pages 2-14 as a contact sheet, since only the cover changed); the exemplar's page 1 against our cover; the 14 overlay pages at 40 dpi.
 - Overlay: rerun; `usage/OVERLAY-naacp-v-byrd-25-12813.pdf` and `.txt` rewritten (table above).
 - Defect fixed (tier 1): the Table of Contents, the Table of Authorities and the Certificate of Compliance were single-spaced. 11th Cir. R. 32-3 (HB, re-read 2026-10-16) allows single spacing only for the cover, the certificate of service, direct quotes, headings and footnotes, and names the two tables as double-spaced. Entries now use the body leading inside and between entries. The short Statutes page (iv) now carries the last three cases too.
 - Defect fixed (transcription, tier 1 on the cover): the sample put Abha Khanna at the Washington office and dropped two telephone numbers. The exemplar lists Khanna in Seattle with (206) 656-0177 and the Washington lawyers with (202) 968-4490. The sample now has three counsel groups, each with its telephone (FRAP 32(a)(2)(F)).
 - Defect fixed (tier 2): with three groups stacked in the right half, the cover only fitted with zero spacing and the rules touched the text. Two or more counsel groups now sit side by side across the full width (up to three per row), as the exemplar sets them; one group keeps the half-page indent.
 - latex: the same counsel layout added (`latex/template.tex`, `latex/ca11.lua`: `counsel_multi`); before it, the latex cover spilled onto a second page. `sh tools/render.sh --engine latex ...` exits 0, 14 pages; pages 1-2 viewed. The latex tables are still single-spaced: OPEN.
-- docx: not rebuilt (no LibreOffice on this box), so `OUTPUT-ca11-answering-brief-naacpvbyrd2512813.docx` and `.docx.pdf` predate the corrected counsel lines and the double-spaced tables: OPEN.
+- docx: not rebuilt (no LibreOffice on this box), so `OUTPUT-answering-brief.docx` and `.docx.pdf` predate the corrected counsel lines and the double-spaced tables: OPEN.
 - Remaining gaps: one exemplar; no `checks.yaml`; the signature block's wrapped firm line; the rest of "Known gaps".
 
 ## Engines
 
 The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
-outputs are `usage/OUTPUT-ca11-answering-brief-naacpvbyrd2512813.latex.pdf`, `.docx` and `.docx.pdf`.
+outputs are `usage/OUTPUT-answering-brief.latex.pdf`, `.docx` and `.docx.pdf`.
 
 - **latex** (`latex/template.tex`, `latex/ca11.lua`, `latex/render.sh`). Matches: EB Garamond 14 pt, double spacing,
   one-inch margins, the cover with its double rules, the statement regarding oral argument, the table of contents

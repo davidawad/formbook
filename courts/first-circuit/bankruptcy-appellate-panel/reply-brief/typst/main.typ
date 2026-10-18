@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "bap1-reply.typ": bap1-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-bap1-reply-brief-generic.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-reply-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #bap1-brief(meta, body)

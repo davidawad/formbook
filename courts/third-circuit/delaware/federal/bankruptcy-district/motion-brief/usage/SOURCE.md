@@ -1,6 +1,6 @@
 # Exemplar source: motion to dismiss memorandum in an adversary proceeding, Bankruptcy Court D. Del.
 
-- File: `SAMPLE-deb-motion-brief-bumblebeetrentjason1951146.pdf` (14 pages, text layer present)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (14 pages, text layer present)
 - URL fetched from: https://www.courtlistener.com/docket/16555620/13/old-bbp-inc-adversary-proceeding/
   (RECAP document `gov.uscourts.deb.179214.13.0.pdf`, fetched from `storage.courtlistener.com`)
 - Case: *Trent Jason v. Bumble Bee Foods, LLC*, Adv. Pro. No. 19-51146 (LSS), in *In re Bumble Bee Parent, Inc., et al.*, Case No. 19-12502 (LSS) (jointly administered), United States Bankruptcy Court for the District of Delaware
@@ -11,7 +11,7 @@
 - Search record: searches for a filed Delaware bankruptcy motion-and-memorandum on CourtListener turned up many party memoranda. Rejected: the Stanziale v. Khan memorandum (12-50740, Doc 36) because it is a scanned image with no text layer; the Chorches v. U.S. Bank and Forman v. Moran Towing "Memorandum" entries because they are the court's own opinions, not a party's brief. This one is a party memorandum, is text-based, and runs 14 pages.
 - Counsel emails: the filed cover does not show email addresses. LR 7007-2(a)(i) requires them. The template prints whatever the sample's frontmatter supplies, so a filing sample for another party must include them.
 
-## 2. Second filer: `SAMPLE-deb-motion-brief-sun2551975.pdf`
+## 2. Second filer: `FILED-EXAMPLE-motion-brief-2.pdf`
 
 - Court: United States Bankruptcy Court for the District of Delaware (`deb`)
 - Case: *PCT Litigation Trust v. Yuchen "Justin" Sun and Polo Digital Assets Ltd*, Adv. No. 25-51975 (JKS), in *In re Prime Core Technologies Inc., et al.*, Chapter 11, Case No. 23-11161 (JKS) (jointly administered)

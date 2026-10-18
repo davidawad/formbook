@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-scb-adversary-complaint-joye2580012.pdf` (9 pages, text layer present; `pdftotext` reads it; fonts are Times, embedded by Word/Acrobat)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (9 pages, text layer present; `pdftotext` reads it; fonts are Times, embedded by Word/Acrobat)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.scb.316746/gov.uscourts.scb.316746.1.0_2.pdf (CourtListener RECAP; docket page https://www.courtlistener.com/docket/69703871/)
 - Court: United States Bankruptcy Court, District of South Carolina
 - Case: *Janet B. Haigler, Chapter 7 Trustee for Joye Roofing, LLC v. Derek Joye, by and through his personal representative Donna H. Joye, and Donna H. Joye*

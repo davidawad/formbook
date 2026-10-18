@@ -5,9 +5,9 @@ Folder: `courts/seventh-circuit/wisconsin/federal/eastern-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-wied-motion-brief-nocams226cv01863.pdf` (14 pp.; the overlay reference). Second filer: `SAMPLE-wied-motion-brief-schmidt226cv00611.pdf` (9 pp.). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-wied-motion-brief-nocams.md` (the whole brief, transcribed from the text layer) |
-| render | ok (re-run 2026-10-15): `usage/OUTPUT-wied-motion-brief-nocams.typst.pdf`, 12 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular, Bold, Italic, BoldItalic only (embedded), no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (14 pp.; the overlay reference). Second filer: `FILED-EXAMPLE-motion-brief-2.pdf` (9 pp.). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md` (the whole brief, transcribed from the text layer) |
+| render | ok (re-run 2026-10-15): `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular, Bold, Italic, BoldItalic only (embedded), no warnings |
 | overlay | fail (2026-10-15): `tools/overlay.sh` exits 1, `no exemplar pdf in usage/`. The filed PDFs are not in this snapshot (`usage/` holds `SOURCE.md` only). The earlier `OVERLAY-nocams-motion-brief.*` files are from a run with the PDFs present and are not regenerated |
 | pages reviewed | 12 of 12 (re-rendered 2026-10-15 and each page viewed at 60 dpi in montage) |
 
@@ -60,7 +60,7 @@ Not produced by this template (separate filings, not part of the brief): the mot
 6. **Page limit not enforced.** Civil L.R. 7(f) limits the principal brief to 30 pages. The template cannot count pages against the limit; the reviewer must check the rendered page count.
 7. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and a `rules.md` in the court directory. This doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review below is the Gate 2 equivalent for this doc type.
 
-## Review of the rendered pages (`usage/OUTPUT-wied-motion-brief-nocams.typst.pdf`, 12 pages)
+## Review of the rendered pages (`usage/OUTPUT-motion-brief.typst.pdf`, 12 pages)
 
 Rendered at 60 dpi, viewed in montage (pages 1 to 4, 5 to 8, 9 to 12) after the last template change.
 

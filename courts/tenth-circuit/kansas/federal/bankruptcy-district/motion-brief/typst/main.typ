@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ksb-motion-brief.typ": ksb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ksb-motion-brief-williamsoncomcastmemorandum.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ksb-motion-brief(meta, body)

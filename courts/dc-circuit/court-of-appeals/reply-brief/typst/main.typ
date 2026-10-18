@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "cadc-reply-brief.typ": cadc-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-cadc-reply-brief-rosenkellogg.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-reply-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #cadc-brief(meta, body)

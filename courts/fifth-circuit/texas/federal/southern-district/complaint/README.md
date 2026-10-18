@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/texas/federal/southern-district/complaint/` (new o
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-txsd-complaint-schott426cv08325.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-txsd-complaint-schott.md` (portions of the 14-page filing; see the sample's header) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (portions of the 14-page filing; see the sample's header) |
 | typeface | face required by the retrieved rules: none named (LR10.2, Judge Hanks Procs. 7.A, Galveston f.). Substitute: none; **EB Garamond kept** (`docs/FONTS.md`, "No face named"). Embedded: EB Garamond only (`pdffonts`). |
-| render | ok (re-run 2026-10-14): `usage/OUTPUT-txsd-complaint-schott.typst.pdf`, 8 pages, typst 0.15.0, `tools/render.sh`, vendored fonts only, no warnings |
+| render | ok (re-run 2026-10-14): `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, `tools/render.sh`, vendored fonts only, no warnings |
 | overlay | ok (re-run 2026-10-14): `usage/OVERLAY-schott-complaint.pdf` and `usage/OVERLAY-schott-complaint.txt` |
 | pages reviewed | 8 of 8 (re-rendered at 60 dpi and every page viewed on 2026-10-14; the layout is unchanged from the earlier review, which is listed below) |
 | BLOCKED | none |
@@ -75,7 +75,7 @@ Not produced by this template (separate filings that may be required with the fi
 
 ## Engines
 
-**docx** (`docx/`; `usage/OUTPUT-txsd-complaint-schott.docx` and `usage/OUTPUT-txsd-complaint-schott.docx.pdf`, the LibreOffice conversion that was checked). Files: `reference.docx` (from `docx/build-reference.sh`: EB Garamond 13 pt set in the styles and the theme, exact 26 pt line pitch, Letter, 1-inch margins, centered PAGE field); `txsd.lua` (court title, box caption, title, numbered paragraphs, lettered items, signature block and certificates, all read from the sample; `NUMBERED = true` here); `render.sh` (the two-pass wrapper that `tools/render-docx.sh` calls).
+**docx** (`docx/`; `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf`, the LibreOffice conversion that was checked). Files: `reference.docx` (from `docx/build-reference.sh`: EB Garamond 13 pt set in the styles and the theme, exact 26 pt line pitch, Letter, 1-inch margins, centered PAGE field); `txsd.lua` (court title, box caption, title, numbered paragraphs, lettered items, signature block and certificates, all read from the sample; `NUMBERED = true` here); `render.sh` (the two-pass wrapper that `tools/render-docx.sh` calls).
 
 - Matches the typst form: only EB Garamond is embedded (`pdffonts`); 13 pt; 1-inch margins on Letter; double spacing (26 pt pitch) with paragraphs at the same pitch as typst; numbered paragraphs with a 0.5-inch first line; lettered items at 1 inch; prayer letters at 0.5 inch with text at 1.25 inch; signature block at 3.25 inch; page number centered at the foot. 8 pages, as typst.
 - Differs (not blocking): (1) LibreOffice places the extra leading of an exact line above the glyphs; typst places it below. Text sits about 11 to 13 pt lower on each page; line pitch and margins are the same. Word was not run. (2) Lettered items are 26 pt apart (typst 21.5 pt); an exact 26 pt line cannot give a smaller gap. (3) Some lines break at a different word from typst (1,905 words against 1,904). (4) The caption's first line is about 3 pt lower than typst's.

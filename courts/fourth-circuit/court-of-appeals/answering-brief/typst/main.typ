@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ca4-answering-brief.typ": ca4-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ca4-answering-brief-chapman.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-answering-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ca4-brief(meta, body)

@@ -2,8 +2,8 @@
 
 - Court: `mnb`, United States Bankruptcy Court, District of Minnesota (`courts/eighth-circuit/minnesota/federal/bankruptcy-district/`)
 - Doc type: `motion-brief`, a notice of hearing and motion with a supporting memorandum of law (D. Minn. LBR 9013-1(a)).
-- Exemplar: `usage/SAMPLE-mnb-motion-brief-mend2260407motiontoconvert.pdf` (*In re MEnD Correctional Care, PLLC*, BKY No. 22-60407, ECF Doc 49, filed 2023-01-20, 17 pages; provenance in `usage/SOURCE.md`).
-- Sample: `usage/INPUT-mnb-motion-brief-mendmotiontoconvert.md` (transcribed from the exemplar).
+- Exemplar: `usage/FILED-EXAMPLE-motion-brief-2.pdf` (*In re MEnD Correctional Care, PLLC*, BKY No. 22-60407, ECF Doc 49, filed 2023-01-20, 17 pages; provenance in `usage/SOURCE.md`).
+- Sample: `usage/INPUT-motion-brief.md` (transcribed from the exemplar).
 - Status: template and sample kept from master; the README, exemplar, render, and overlay were added in this pass. Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,8 +12,8 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `mnb-motion-brief`. |
 | `typst/mnb-motion-brief.typ` | Template. Caption, notice and motion (numbered paragraphs), memorandum part split at `<!-- memorandum -->`, verification, signature block from frontmatter. |
-| `usage/INPUT-mnb-motion-brief-mendmotiontoconvert.md` | Markdown contract sample: YAML frontmatter (notice title, memorandum title, lead-in, caption, date, signature) plus the body. |
-| `usage/OUTPUT-mnb-motion-brief-mendmotiontoconvert.typst.pdf` | `sh tools/render.sh courts/eighth-circuit/minnesota/federal/bankruptcy-district/motion-brief usage/INPUT-mnb-motion-brief-mendmotiontoconvert.md` (11 pages, typst 0.15.0, no warnings). |
+| `usage/INPUT-motion-brief.md` | Markdown contract sample: YAML frontmatter (notice title, memorandum title, lead-in, caption, date, signature) plus the body. |
+| `usage/OUTPUT-motion-brief.typst.pdf` | `sh tools/render.sh courts/eighth-circuit/minnesota/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md` (11 pages, typst 0.15.0, no warnings). |
 | `usage/OVERLAY-mend-motion-to-convert.pdf`, `.txt` | `sh tools/overlay.sh <this folder> mend-motion-to-convert`. Red = our render, blue = filed exemplar, black = both agree. |
 | `usage/` | The filed motion and `SOURCE.md`. |
 
@@ -51,7 +51,7 @@ The exemplar's proposed order (filed p.17) has no counterpart in the sample.
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-mnb-motion-brief-mendmotiontoconvert.typst.pdf` was rendered at 70 dpi and viewed (11 of 11) as PNG. Pages 5 and 10 were also rendered at 150 dpi and the foot of each viewed. The overlay sheet was viewed as a contact sheet (all 11 pages present). The comparison against the filed pages is the overlay pairing above; no separate side-by-side images were made in this pass.
+Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 70 dpi and viewed (11 of 11) as PNG. Pages 5 and 10 were also rendered at 150 dpi and the foot of each viewed. The overlay sheet was viewed as a contact sheet (all 11 pages present). The comparison against the filed pages is the overlay pairing above; no separate side-by-side images were made in this pass.
 
 | Page | Content | Result |
 |---|---|---|
@@ -84,11 +84,11 @@ Tier-2 findings (OPEN or ACCEPTED): pages 5 and 10 (OPEN). The bottom margin is 
 
 | Engine | Folder | Output in `usage/` | State |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-mnb-motion-brief-mendmotiontoconvert.typst.pdf` | template, unchanged by the docx work; no PDF in the snapshot |
+| typst (primary) | `typst/` | `OUTPUT-motion-brief.typst.pdf` | template, unchanged by the docx work; no PDF in the snapshot |
 | latex | `latex/` | none | not built |
-| docx | `docx/` | `OUTPUT-mnb-motion-brief-mendmotiontoconvert.docx`, `OUTPUT-mnb-motion-brief-mendmotiontoconvert.docx.pdf` | built (below) |
+| docx | `docx/` | `OUTPUT-motion-brief.docx`, `OUTPUT-motion-brief.docx.pdf` | built (below) |
 
-The docx build: `sh tools/render.sh --engine docx motion-brief usage/INPUT-mnb-motion-brief-mendmotiontoconvert.md`. It runs `docx/render.sh` (pandoc, the Lua filter `docx/mnb-motion-brief.lua`, and `docx/reference.docx`). `docx/make-reference.sh` rebuilds the reference. The PDF is LibreOffice 26.8.1 with the vendored fonts only.
+The docx build: `sh tools/render.sh --engine docx motion-brief usage/INPUT-motion-brief.md`. It runs `docx/render.sh` (pandoc, the Lua filter `docx/mnb-motion-brief.lua`, and `docx/reference.docx`). `docx/make-reference.sh` rebuilds the reference. The PDF is LibreOffice 26.8.1 with the vendored fonts only.
 
 What matches the typst output: letter paper with 1 in margins; EB Garamond 12 pt, embedded and the only font; body double-spaced at a 24 pt line pitch with a half-inch first-line indent; numbered notice paragraphs and unnumbered memorandum paragraphs; the caption (court title, debtor box with 0.75 pt rules, indented "Debtor.", the centred bold title); the notice's signature block with its firm lines and "By: /s/"; the verification and its signature; the memorandum on a new page with its own caption; block quotations single-spaced and indented; lettered lists; centred bold section headings; a centred page number in the footer. The notice runs 8 pages and the memorandum 3, as in typst (11 in both).
 
@@ -103,4 +103,4 @@ docx BLOCKED items:
 - The docx gates do not run yet: this court has no `rules.md` or `checks.yaml`, so `tools/check.sh --engine docx` has no checks to run. Nothing is stamped.
 - Word: not opened (no Word on this box). The renderer checks the zip and the XML parts; LibreOffice converts the file without a repair step.
 
-Page review (docx): all 11 pages of `OUTPUT-mnb-motion-brief-mendmotiontoconvert.docx.pdf` were rendered at 60 dpi and viewed against the typst render. No page has an open defect that is not in the list above.
+Page review (docx): all 11 pages of `OUTPUT-motion-brief.docx.pdf` were rendered at 60 dpi and viewed against the typst render. No page has an open defect that is not in the list above.

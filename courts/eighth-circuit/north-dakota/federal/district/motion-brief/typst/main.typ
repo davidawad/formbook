@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ndd-motion-brief.typ": ndd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ndd-motion-brief-dmshealthmotiontodismiss.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ndd-motion-brief(meta, body)

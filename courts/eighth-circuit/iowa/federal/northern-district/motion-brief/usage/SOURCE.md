@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-iand-motion-brief-gharavischwab625cv02074.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Northern District of Iowa, Eastern Division
 - Case: *Nima Gharavi v. Allyson Schwab*
 - Docket: No. 6:25-cv-02074-LTS-KEM (Document 13-1: attachment 1 to the motion to dismiss, ECF 13)

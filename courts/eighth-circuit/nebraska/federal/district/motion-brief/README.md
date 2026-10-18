@@ -5,9 +5,9 @@ Folder: `courts/eighth-circuit/nebraska/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 1 filer: `usage/SAMPLE-ned-motion-brief-sandoval426cv03089.pdf` (see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ned-motion-brief-sandoval.md` (the whole 16-page brief's text, from the introduction through the certificates) |
-| render | ok: `usage/OUTPUT-ned-motion-brief-sandoval.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes, 1 filer: `usage/FILED-EXAMPLE-motion-brief.pdf` (see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (the whole 16-page brief's text, from the introduction through the certificates) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-sandoval-motion-brief.pdf` and `OVERLAY-sandoval-motion-brief.txt` (page map) |
 | pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed in the final state) |
 | typeface | face required: none (NECivR names no typeface). Substitute: none; EB Garamond kept (no-face default, `docs/FONTS.md`). Fit: n/a. Exemplar is Times New Roman, a filer's choice (see Known gaps, 1). |
@@ -87,14 +87,14 @@ Checked on 2026-10-14. NECivR 12.1 (a motion to dismiss suspends the time to ans
 
 Defects found in review and fixed before this render: the footer's long title wrapped into the page number, so it is now a two-row footer; a multi-line heading was double-spaced inside a single-spaced gap, so its last line ran into the next heading (fixed by single-spacing headings); the signature block was split from the conclusion onto its own page (fixed by keeping the last paragraph with the signature).
 
-File names follow `tools/render.sh` and `tools/overlay.sh` (and CLAUDE.md's role prefixes): `INPUT-ned-motion-brief-sandoval.md` (input), `OUTPUT-ned-motion-brief-sandoval.typst.pdf` (our render), `OVERLAY-sandoval-motion-brief.pdf` and `.txt` (the comparison). The brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools write.
+File names follow `tools/render.sh` and `tools/overlay.sh` (and CLAUDE.md's role prefixes): `INPUT-motion-brief.md` (input), `OUTPUT-motion-brief.typst.pdf` (our render), `OVERLAY-sandoval-motion-brief.pdf` and `.txt` (the comparison). The brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools write.
 
 ## Engines
 
 | Engine | Folder | Output in `usage/` | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-ned-motion-brief-sandoval.typst.pdf` (13 pages; not in the snapshot, rendered for comparison only) | the reference |
-| docx | `docx/` (`reference.docx` from `make-reference.sh`, and `ned-motion-brief.lua`) | `OUTPUT-ned-motion-brief-sandoval.docx` and `OUTPUT-ned-motion-brief-sandoval.docx.pdf` (14 pages, LibreOffice 26.8.1 headless) | rendered; every page of the `.docx.pdf` viewed against the typst render |
+| typst (primary) | `typst/` | `OUTPUT-motion-brief.typst.pdf` (13 pages; not in the snapshot, rendered for comparison only) | the reference |
+| docx | `docx/` (`reference.docx` from `make-reference.sh`, and `ned-motion-brief.lua`) | `OUTPUT-motion-brief.docx` and `OUTPUT-motion-brief.docx.pdf` (14 pages, LibreOffice 26.8.1 headless) | rendered; every page of the `.docx.pdf` viewed against the typst render |
 
 **Matches typst** (checked on the LibreOffice PDF): EB Garamond 12 pt (embedded, `pdffonts`); double spacing at 24 pt; 1-inch margins on US Letter; the two court-title lines; the caption as a table with a right and a bottom rule on the party column, "v." between the parties, the case number and the bold title; the lead-in paragraph; unnumbered body paragraphs with a half-inch first-line indent; the facts list numbered 1., 2., ... with a hanging indent; level-1 headings centered in bold capitals, level-2 bold and level-3 bold italic, both with a hanging indent; block quotations single-spaced and indented a half inch on both sides; the signature block at 3.25 in, kept with the conclusion; the certificate of compliance (the word count and software, from the frontmatter) and the certificate of service (recipients at a half-inch indent); the footer from page 2 on (page number, title in capitals, "Case No.") and no footer on page 1.
 

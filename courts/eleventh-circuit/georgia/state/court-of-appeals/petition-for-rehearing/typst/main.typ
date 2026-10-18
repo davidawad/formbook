@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "gactapp-petition-for-rehearing.typ": gactapp-petition-for-rehearing, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-gactapp-petition-for-rehearing-rehearingsample.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-petition-for-rehearing.md"))
 #let (meta, body) = split-frontmatter(src)
 #gactapp-petition-for-rehearing(meta, body)

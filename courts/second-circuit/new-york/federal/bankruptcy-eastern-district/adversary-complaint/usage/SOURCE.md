@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nyeb-adversary-complaint-toyvation12643344.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Eastern District of New York (`nyeb`)
 - Case: *Toyvation, LLC v. Abraham Roth, Roth & Company LLP d/b/a Roth & Co., Shulem Rosenbaum a/k/a Shulim Rosenbaum, Dovy Gartenhaus and Leah Lieber*
 - Docket: Bankr. No. 1-26-43344-ess (Chapter 11, debtor Toyvation, LLC); adversary proceeding 1-26-01152 (per the CourtListener docket record; the adversary number does not appear on the filed complaint, see README.md)
@@ -16,7 +16,7 @@ Second filer: not collected in this pass. The brief asks for one exemplar per do
 
 ## 2. Second filer (added 2026-10-17)
 
-- File: `SAMPLE-nyeb-adversary-complaint-trumpvillage12601071.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf`
 - Court: United States Bankruptcy Court, Eastern District of New York (`nyeb`)
 - Case: *Trump Village Section 4, Inc. and Igor Oberman v. Jacob Vaynshteyn*, Adv. Pro. No. 1-26-01071-ess (ECF header), relating to Chapter 7 Case No. 1-26-40732-ess (debtor Jacob Vaynshteyn)
 - Document: "Complaint to Determine that Specified Debt is Nondischargable" [sic] (ECF Doc. 1 in the adversary proceeding, main document only; the exhibits 1-1 to 1-6 are not included), 11 pages; counsel block top left, caption with the `In re` debtor block, "-against-", "Adversary Case No." and "Bankruptcy Judge" left blank on the filed copy, numbered paragraphs, centred headings, PRAYER FOR RELIEF, "Dated:" with date and place, "/s/" signature block

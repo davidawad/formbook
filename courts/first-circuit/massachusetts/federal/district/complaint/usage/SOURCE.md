@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-mad-complaint-doorsystems2614133.pdf` (18 pages, text layer present) |
+| File | `FILED-EXAMPLE-complaint.pdf` (18 pages, text layer present) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.mad.306024/gov.uscourts.mad.306024.1.0.pdf (RECAP archive; docket page https://www.courtlistener.com/docket/74765307/1/door-systems-inc-v-door-systems-inc/) |
 | Case | *Door Systems, Inc. v. Door Systems, Inc.* |
 | Court | United States District Court, District of Massachusetts |
@@ -32,7 +32,7 @@ Added 2026-10-17 (fb-595.21.1): the "checked, not saved" second filer above, now
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-mad-complaint-clere126cv14437.pdf` (9 pages, text layer present; Word-generated; Times New Roman body) |
+| File | `FILED-EXAMPLE-complaint-2.pdf` (9 pages, text layer present; Word-generated; Times New Roman body) |
 | Court | United States District Court, District of Massachusetts |
 | Case | *Clere v. Delta Air Lines, Inc.* |
 | Docket no. | 1:26-cv-14437-ADB (Document 1; caption "Docket No.: 26-" left blank by the filer) |

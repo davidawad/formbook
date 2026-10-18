@@ -4,9 +4,9 @@ Doc type: **adversary complaint** (the complaint that starts an adversary procee
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-mieb-adversary-complaint-griffin2604189.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-mieb-adversary-complaint-griffin.md` (the whole 7-page complaint, transcribed; filed wording kept) |
-| render | ok: `usage/OUTPUT-mieb-adversary-complaint-griffin.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (the whole 7-page complaint, transcribed; filed wording kept) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-griffin-adversary-complaint.pdf` and `-overlay.txt` (`tools/overlay.sh`, see "Overlay" below) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -26,7 +26,7 @@ Verified 2026-10-14. Each rule is quoted or closely paraphrased from the source 
 | MIEB-PLEAD-001 | Fed. R. Bankr. P. 7008(a) | The complaint states the basis for the court's jurisdiction and "must state whether the pleader does or does not consent to the entry of final orders or judgment by the bankruptcy court." Fed. R. Civ. P. 8 applies. | FRBP 7008, https://www.law.cornell.edu/rules/frbp/rule_7008 (checked 2026-10-14) | Author content (the sample's "JURISDICTION AND VENUE" section). The template does not check the wording. |
 | MIEB-PLEAD-002 | Fed. R. Bankr. P. 7001 | The kind of adversary proceeding (here, to recover money or property, 7001(a), and to avoid transfers under 11 U.S.C. §§ 544, 548 and 550). | FRBP 7001, https://www.law.cornell.edu/rules/frbp/rule_7001 (checked 2026-10-14) | Author content. The template does not classify the claims. |
 | MIEB-PLEAD-003 | Fed. R. Civ. P. 10(b), applied by FRBP 7010 and 7008 | Claims in numbered paragraphs, each limited as far as practicable to a single set of circumstances. | FRCP 10, https://www.law.cornell.edu/rules/frcp/rule_10 (checked 2026-10-14) | Every body paragraph is numbered by the template (`body()`), counting from 1 across the counts. A paragraph beginning WHEREFORE is a prayer and is not numbered. |
-| MIEB-BODY-001 | Exemplar convention (tier 2) | Section headings centered, bold, in capitals (JURISDICTION AND VENUE, PARTIES, GENERAL ALLEGATIONS, COUNT I …); count subtitles centered and bold. | The exemplar, `usage/SAMPLE-mieb-adversary-complaint-griffin2604189.pdf` | `# ` and `## ` chunks. |
+| MIEB-BODY-001 | Exemplar convention (tier 2) | Section headings centered, bold, in capitals (JURISDICTION AND VENUE, PARTIES, GENERAL ALLEGATIONS, COUNT I …); count subtitles centered and bold. | The exemplar, `usage/FILED-EXAMPLE-adversary-complaint.pdf` | `# ` and `## ` chunks. |
 | MIEB-SIG-001 | LBR 9004-1(b); exemplar convention | The date at the left, the signer and the signature block at the right; the signer's name, firm, address, phone and email. | LBR 9004-1(b); the exemplar | `signature()`. |
 
 Not produced by this template (separate filings or exhibits; the rule text above does not put them inside the complaint): the adversary proceeding cover sheet, the summons (Fed. R. Bankr. P. 7004), the filing fee, and any exhibits.
@@ -48,7 +48,7 @@ Not produced by this template (separate filings or exhibits; the rule text above
 
 ## Overlay
 
-`tools/overlay.sh` reads and writes `OUTPUT-<id>.pdf` / `OVERLAY-<id>.pdf` and `.txt`; this doc type uses the names the brief asks for (`usage/<id>.pdf`, `usage/<id>-overlay.pdf`, `usage/<id>-overlay.txt`). The overlay was run on a copy named `OUTPUT-mieb-adversary-complaint-griffin.typst.pdf`, and its outputs were renamed to the `<id>-overlay` names; the copy was deleted. Red = our render, blue = the filed exemplar, black = both. The page map pairs sample pages with exemplar pages by word overlap:
+`tools/overlay.sh` reads and writes `OUTPUT-<id>.pdf` / `OVERLAY-<id>.pdf` and `.txt`; this doc type uses the names the brief asks for (`usage/<id>.pdf`, `usage/<id>-overlay.pdf`, `usage/<id>-overlay.txt`). The overlay was run on a copy named `OUTPUT-adversary-complaint.typst.pdf`, and its outputs were renamed to the `<id>-overlay` names; the copy was deleted. Red = our render, blue = the filed exemplar, black = both. The page map pairs sample pages with exemplar pages by word overlap:
 
 | ours | filed | word overlap |
 |---|---|---|
@@ -91,7 +91,7 @@ Pages reviewed: 8 of 8.
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` builds `reference.docx`; `mieb-adversary-complaint.lua` writes the caption, the numbered body and the signature block; `render.sh` assembles the file. Sample `griffin-adversary-complaint` renders to `usage/OUTPUT-mieb-adversary-complaint-griffin.docx` (`sh tools/render.sh --engine docx`), a valid zip with no duplicate entries and well-formed XML.
+docx (`docx/`): `build-reference.sh` builds `reference.docx`; `mieb-adversary-complaint.lua` writes the caption, the numbered body and the signature block; `render.sh` assembles the file. Sample `griffin-adversary-complaint` renders to `usage/OUTPUT-adversary-complaint.docx` (`sh tools/render.sh --engine docx`), a valid zip with no duplicate entries and well-formed XML.
 
 - **Matches the typst template (set in the reference, read from the source of `typst/mieb-adversary-complaint.typ`):** EB Garamond (the vendored family, named `EB Garamond` in the styles) at 14 pt; exact 28 pt line pitch for the body (the pitch the typst README measured); no first-line indent; letter paper; 1 in margins; footer "N of M" centered at 14 pt (PAGE and NUMPAGES fields with cached result); headings centered and bold, kept with the next paragraph; signature block "Dated" left, signer right (4752 / 4608 twips, the typst grid widths).
 - **Differs from typst:** the caption rules are paragraph borders and the two-column caption is a borderless table; single-spaced caption lines use Word's `auto` 240 spacing, not the typst 0.3 em leading, and paragraph spacing is zero in both (the typst gap was not measured against Word). Numbers are typed as text by the filter, as typst does. Typst `#` headings sit one line of space above and below; the docx headings have none (exact 28 pt lines).

@@ -4,7 +4,7 @@ Date fetched for all files below: 2026-10-14. Source: CourtListener RECAP (publi
 
 ## Exemplar 1 (primary; used for the overlay)
 
-- File: `SAMPLE-insd-complaint-lightningrod126cv00830.pdf` (17 pages, text layer yes)
+- File: `FILED-EXAMPLE-complaint.pdf` (17 pages, text layer yes)
 - Court: United States District Court, Southern District of Indiana, Indianapolis Division
 - Case: *Lightning Rod Mutual Insurance Company v. Her Home Design Build, LLC, et al.*
 - Docket: No. 1:26-cv-00830-JRS-TAB, Document 1
@@ -16,7 +16,7 @@ Date fetched for all files below: 2026-10-14. Source: CourtListener RECAP (publi
 
 ## Exemplar 2 (second filer, for tier 2)
 
-- File: `SAMPLE-insd-complaint-cook126cv00315.pdf` (17 pages, text layer yes)
+- File: `FILED-EXAMPLE-complaint-2.pdf` (17 pages, text layer yes)
 - Case: *Cook v. Jennings County School Corporation, et al.*
 - Docket: No. 1:26-cv-00315-SEB-TAB, Document 1
 - Filer: Plaintiffs Benjamin Cook and Sarah Cook, by counsel CohenMalad, LLP (Gregory L. Laker)

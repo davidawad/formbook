@@ -4,7 +4,7 @@ Two exemplars from different filers. The first is the primary one; the second is
 
 ## 1. Howard v. City of Douglas Utility Dept. (primary)
 
-- File: `SAMPLE-gasb-motion-brief-howard2305004.pdf` (7 pages, text layer present, `pdftotext` reads it; Times fonts not embedded)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (7 pages, text layer present, `pdftotext` reads it; Times fonts not embedded)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.gasb.340787/gov.uscourts.gasb.340787.12.0.pdf (RECAP copy of ECF 12; docket https://www.courtlistener.com/docket/68122081/12/howard-v-city-of-douglas-utility-dept/)
 - Court: United States Bankruptcy Court, Southern District of Georgia, Waycross Division (Judge Michele J. Kim)
 - Case: *Howard v. City of Douglas Utility Dept.*, Adv. Pro. No. 23-05004, in Chapter 13 Case No. 23-50574-MJK
@@ -16,7 +16,7 @@ Two exemplars from different filers. The first is the primary one; the second is
 
 ## 2. Pruco Life Insurance Co. v. Hirsch (second filer, memorandum only)
 
-- File: `SAMPLE-gasb-motion-brief-prucohirsch2304021.pdf` (27 pages, text layer present; Times and Helvetica fonts, none embedded)
+- File: `FILED-EXAMPLE-motion-brief-2.pdf` (27 pages, text layer present; Times and Helvetica fonts, none embedded)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.gasb.340983/gov.uscourts.gasb.340983.29.0.pdf (RECAP copy of ECF 29; docket https://www.courtlistener.com/docket/68208886/29/pruco-life-insurance-company-v-hirsch/)
 - Court: United States Bankruptcy Court, Southern District of Georgia, Savannah Division
 - Case: *Pruco Life Insurance Co. v. Hirsch et al.*, Adv. Pro. No. 23-04021-EJC, in Chapter 7 Case No. 23-40569-EJC

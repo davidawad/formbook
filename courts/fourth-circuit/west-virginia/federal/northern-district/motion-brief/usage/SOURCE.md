@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-wvnd-motion-brief-wvriversamsted126cv00046.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.wvnd.63412/gov.uscourts.wvnd.63412.8.0_2.pdf (RECAP copy; docket page https://www.courtlistener.com/docket/73232774/ ) |
 | Court | U.S. District Court, Northern District of West Virginia (Clarksburg Division) |
 | Case name | *West Virginia Rivers Coalition and West Virginia Highlands Conservancy v. Amsted Graphite Materials LLC* |

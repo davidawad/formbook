@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-flnd-motion-brief-kinsale426cv00294.pdf` (12 pages, text layer present, Times New Roman 14 pt body)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (12 pages, text layer present, Times New Roman 14 pt body)
 - Court: United States District Court, Northern District of Florida, Tallahassee Division
 - Case: *Kinsale Insurance Company v. Militant Security, LLC, and Shannon Jones, as Parent and Natural Guardian of AS, a minor*
 - Docket: No. 4:26-cv-00294-RH-MAF (ECF header on every page)

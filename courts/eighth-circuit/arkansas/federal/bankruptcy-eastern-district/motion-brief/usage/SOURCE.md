@@ -1,12 +1,12 @@
 # Exemplars: motion with memorandum (areb, Eastern District of Arkansas)
 
-Exemplar saved: `SAMPLE-areb-motion-brief-stewart323ap01057.pdf` (8 pages, the whole of RECAP document 5, copied as filed).
+Exemplar saved: `FILED-EXAMPLE-motion-brief.pdf` (8 pages, the whole of RECAP document 5, copied as filed).
 
 The filing is a motion to dismiss an adversary proceeding. It contains the motion (numbered grounds, WHEREFORE clause), the argument and authorities that serve as the memorandum, the service argument, a signature block and a certificate of service. A separately filed brief in support was looked for in this court's RECAP results and not found as an available PDF, so this is the motion with its memorandum in one document.
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-areb-motion-brief-stewart323ap01057.pdf` |
+| Exemplar file | `FILED-EXAMPLE-motion-brief.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.areb.304198/gov.uscourts.areb.304198.5.0.pdf (RECAP doc 5; docket page https://www.courtlistener.com/docket/67882634/5/bradford-wayne-stewart-adversary-proceeding/) |
 | Case name / docket no. | *Stewart v. Navient Solutions, LLC*, Adv. No. 3:23-ap-01057, E.D. Ark., Northern Division. Underlying Chapter 11 case No. 3:20-bk-14509. |
 | Filer | Defendants Navient Solutions, LLC and Navient Credit Finance Corporation, by J. Brad Moore, Wetzel and Moore, P.A. |

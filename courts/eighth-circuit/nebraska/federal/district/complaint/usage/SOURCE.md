@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ned-complaint-goldenstein826cv00593.pdf` (12 pages, text layer present: `pdftotext` yields text; fonts Times New Roman, embedded) |
+| File | `FILED-EXAMPLE-complaint.pdf` (12 pages, text layer present: `pdftotext` yields text; fonts Times New Roman, embedded) |
 | Fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ned.113192/gov.uscourts.ned.113192.1.0.pdf (RECAP archive copy of PACER document 1) |
 | Docket page | https://www.courtlistener.com/docket/74922062/1/goldenstein-v-ashland-city-of/ |
 | Case | *Goldenstein v. City of Ashland, Nebraska*, No. 8:26-cv-00593 (D. Neb.) |
@@ -20,7 +20,7 @@
 - Wells v. Camacho, No. 8:26-cv-00582 (19 pp.), Kelley v. Kiewit Corp., No. 8:26-cv-00496 (41 pp.), Chretien v. Kiewit Corp., No. 8:26-cv-00488 (31 pp.). Not downloaded.
 - Pro se complaints (Holmes v. State of Nebraska, No. 8:26-cv-00555, and the Bayson complaint, No. 4:26-cv-03344) were skipped: not attorney-drafted, so not representative of the filer conventions the template is judged against.
 
-## SAMPLE-ned-complaint-harrison826cv00501.pdf
+## FILED-EXAMPLE-complaint-2.pdf
 
 - Case: *Harrison v. Bang*, No. 8:26-cv-00501, Document 1.
 - Filer: plaintiff Steven Harrison, represented by Adam J. Sipple.

@@ -5,12 +5,12 @@ Folder: `courts/eighth-circuit/south-dakota/federal/bankruptcy-district/adversar
 
 | Item | Status |
 |---|---|
-| exemplar | yes: 3 real filings from 3 different filers, see `usage/SOURCE.md`. Primary: `usage/SAMPLE-sdb-adversary-complaint-chaseabrams0805003.pdf` (creditor). Also `…richards-14-01006…` (debtors) and `…pierce-bekuto-11-04028…` (trustee). |
+| exemplar | yes: 3 real filings from 3 different filers, see `usage/SOURCE.md`. Primary: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (creditor). Also `…richards-14-01006…` (debtors) and `…pierce-bekuto-11-04028…` (trustee). |
 | typeface | **No face required; EB Garamond kept.** Bankr. D.S.D. R. 9004-1(a)(1) (June 2024 local rules, text checked with `pdftotext`) requires "one simple font" and names no face. The only face named in the local rules is Appendix 1F's creditor-mailing-list bullet ("Universal, Times New Roman, or Courier"), which governs the mailing list, not this document. So no substitute from `docs/FONTS.md` is needed: the template keeps EB Garamond (the "No face named" row). Fit: n/a. Re-checked 2026-10-14 (fonts pass, `fb-595.7.5.21`). |
-| sample md | `usage/INPUT-sdb-adversary-complaint-chaseabrams.md`: transcribed from the primary exemplar (all of it: caption, three headings, 16 allegations, the prayer, the signature). `usage/INPUT-sdb-adversary-complaint-fictionaljointdebtors.md`: FICTIONAL, for structure (joint debtors, fka, two plaintiffs, two defendants, two claims under different subsections, a 4-item prayer). |
-| render | ok: `usage/OUTPUT-sdb-adversary-complaint-chaseabrams.typst.pdf` (2 pages) and `usage/OUTPUT-sdb-adversary-complaint-fictionaljointdebtors.typst.pdf` (2 pages). typst 0.15.0, `tools/render.sh`, vendored EB Garamond only (pdffonts: EBGaramond-Regular and -Bold, embedded), zero typst warnings. |
+| sample md | `usage/INPUT-adversary-complaint.md`: transcribed from the primary exemplar (all of it: caption, three headings, 16 allegations, the prayer, the signature). `usage/INPUT-adversary-complaint-2.md`: FICTIONAL, for structure (joint debtors, fka, two plaintiffs, two defendants, two claims under different subsections, a 4-item prayer). |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf` (2 pages) and `usage/OUTPUT-adversary-complaint-2.typst.pdf` (2 pages). typst 0.15.0, `tools/render.sh`, vendored EB Garamond only (pdffonts: EBGaramond-Regular and -Bold, embedded), zero typst warnings. |
 | overlay | ok: `usage/OVERLAY-chase-abrams.pdf` and `usage/OVERLAY-chase-abrams.txt` (page map: p.1 ↔ p.1 80.2 %, p.2 ↔ p.2 74.3 % word overlap; a diagnostic, not a score). |
-| pages reviewed | 4 of 4 for the current PDFs: 2 pages of `OUTPUT-sdb-adversary-complaint-chaseabrams.typst.pdf` and 2 of `OUTPUT-sdb-adversary-complaint-fictionaljointdebtors.typst.pdf`, each rasterized at 60 dpi and viewed after its last change. Exemplar pages 1 and 3 were viewed for comparison (page 2 was not viewed as a page image; its text was read with pdftotext). |
+| pages reviewed | 4 of 4 for the current PDFs: 2 pages of `OUTPUT-adversary-complaint.typst.pdf` and 2 of `OUTPUT-adversary-complaint-2.typst.pdf`, each rasterized at 60 dpi and viewed after its last change. Exemplar pages 1 and 3 were viewed for comparison (page 2 was not viewed as a page image; its text was read with pdftotext). |
 
 ## File names (deviation from the brief)
 
@@ -77,8 +77,8 @@ Markdown contract (frontmatter; the body is blank-line-separated chunks):
 
 Reviewed after the last change, every page of each PDF, at 60 dpi, next to the exemplar pages where they correspond. sha256 of the reviewed PDFs (the review is stale if these change):
 
-- `usage/OUTPUT-sdb-adversary-complaint-chaseabrams.typst.pdf`: `c5b24368c4095ddaf1a09acf672198d9b1ff8d183e078ab3a0d196b21920229c` (re-rendered 2026-10-14 with typst 0.15.0; same 2 pages, same text; the bytes differ from the earlier render only in the PDF's timestamps)
-- `usage/OUTPUT-sdb-adversary-complaint-fictionaljointdebtors.typst.pdf`: `a60daa41ac0c34e003a5211618d91ba6bee21a8b631de7d664ff5bd6f6426d84` (re-rendered 2026-10-14; the consent line from the earlier review is present. Recheck with `sha256sum` before landing.)
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: `c5b24368c4095ddaf1a09acf672198d9b1ff8d183e078ab3a0d196b21920229c` (re-rendered 2026-10-14 with typst 0.15.0; same 2 pages, same text; the bytes differ from the earlier render only in the PDF's timestamps)
+- `usage/OUTPUT-adversary-complaint-2.typst.pdf`: `a60daa41ac0c34e003a5211618d91ba6bee21a8b631de7d664ff5bd6f6426d84` (re-rendered 2026-10-14; the consent line from the earlier review is present. Recheck with `sha256sum` before landing.)
 
 ### sample chase-abrams (transcribed)
 
@@ -113,9 +113,9 @@ Reviewed after the last change, every page of each PDF, at 60 dpi, next to the e
 
 ## Engines
 
-Typst (`typst/`) is the primary engine and the reference for the court's form. This section covers the docx engine: `docx/reference.docx` (built by `docx/make-reference.sh`) and `docx/sdb-adversary-complaint.lua`, following `docs/DOCX.md`. Run: `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-sdb-adversary-complaint-chaseabrams.md` (and the same for `INPUT-sdb-adversary-complaint-fictionaljointdebtors.md`).
+Typst (`typst/`) is the primary engine and the reference for the court's form. This section covers the docx engine: `docx/reference.docx` (built by `docx/make-reference.sh`) and `docx/sdb-adversary-complaint.lua`, following `docs/DOCX.md`. Run: `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-adversary-complaint.md` (and the same for `INPUT-adversary-complaint-2.md`).
 
-- **Written:** `usage/OUTPUT-sdb-adversary-complaint-chaseabrams.docx` and `usage/OUTPUT-sdb-adversary-complaint-fictionaljointdebtors.docx` (pandoc, from the same frontmatter and body as the typst renders). Each is a valid zip of well-formed XML parts; the render then stops at the LibreOffice conversion (see BLOCKED).
+- **Written:** `usage/OUTPUT-adversary-complaint.docx` and `usage/OUTPUT-adversary-complaint-2.docx` (pandoc, from the same frontmatter and body as the typst renders). Each is a valid zip of well-formed XML parts; the render then stops at the LibreOffice conversion (see BLOCKED).
 - **Matches the typst form (by construction, not yet by look):** US Letter, 1 inch margins; EB Garamond 12 pt; line pitch 13.8 pt exact (the typst leading, measured on the typst render with `pdftohtml -xml`); 0.5 inch first-line indent on numbered allegations; the caption as a borderless three-column table (party, `)` column, numbers) with the debtor block, `Debtor.`/`Debtors.`, `Adv. No.` on the first plaintiff row, `v.`, and the party designations right-aligned; the title; the lead-in paragraph without indent; paragraph numbers from 1, not numbered after the PRAYER heading; the signature at 3.25 inch; a 10 pt centered page number (PAGE field) in the footer.
 - **Differs or unverified:** the same list as the motion's (caption table borders and row heights, Word's spacing between paragraphs, pandoc list indentation) has not been looked at on a page image. The complaint has no keep-with-next on the last paragraph, as in the typst template. A `##` heading is a heading in docx (not numbered); typst would number it. No sample uses `##`.
 - **BLOCKED (docx.pdf checks, all of `check.sh --engine docx` Gates 0 to 3):** the LibreOffice PDF of each `.docx` cannot be made on this box (`soffice` not installed; conda-forge has no LibreOffice; the Debian LibreOffice packages fail to start: LibreOffice's internal `libi18nlangtag` and `libjvm*` libraries are not in them). So no `.docx.pdf` exists, no page was rendered or reviewed in the docx engine, and no `.check-docx.txt` stamp is written. Owner: whoever has a box with LibreOffice; rerun `sh tools/render.sh --engine docx` there, then review every page of both.

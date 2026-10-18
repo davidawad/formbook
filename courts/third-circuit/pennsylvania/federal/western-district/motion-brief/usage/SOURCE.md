@@ -3,9 +3,9 @@
 Date fetched for every item: **2026-10-14**. All are public court records (RECAP copies of PACER filings).
 How they were found: CourtListener search API (`https://www.courtlistener.com/api/rest/v4/search/?q=%22memorandum+of+law+in+support%22+%22motion+to+dismiss%22&court=pawd&type=r`), then the RECAP storage URL of each document.
 
-## 1. Primary exemplar (transcribed into `usage/INPUT-pawd-motion-brief-albrightmemorandum.md`)
+## 1. Primary exemplar (transcribed into `usage/INPUT-motion-brief.md`)
 
-File: `SAMPLE-pawd-motion-brief-albright321cv00112memorandum.pdf` (23 pages, text layer present)
+File: `FILED-EXAMPLE-motion-brief.pdf` (23 pages, text layer present)
 
 | Field | Value |
 |---|---|
@@ -18,7 +18,7 @@ File: `SAMPLE-pawd-motion-brief-albright321cv00112memorandum.pdf` (23 pages, tex
 
 ## 2. Second filer, for the tier-2 comparison (saved, not transcribed)
 
-File: `SAMPLE-pawd-motion-brief-northamericandental223cv01202memorandum.pdf` (22 pages, text layer present)
+File: `FILED-EXAMPLE-motion-brief-2.pdf` (22 pages, text layer present)
 
 | Field | Value |
 |---|---|

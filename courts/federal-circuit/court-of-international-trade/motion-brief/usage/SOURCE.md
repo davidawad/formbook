@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cit-motion-brief-bghedelstahl562motion.pdf` (58 pages: proposed order, motion, memorandum, certificate) |
+| File | `FILED-EXAMPLE-motion-brief.pdf` (58 pages: proposed order, motion, memorandum, certificate) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.cit.19273/gov.uscourts.cit.19273.26.0.pdf (CourtListener RECAP archive) |
 | Docket page | https://www.courtlistener.com/docket/72326657/ (CourtListener docket ID 72326657; the case is indexed as opened 2026-02-25; entry 26 is dated by its ECF header) |
 | Case name | *BGH Edelstahl Siegen GmbH v. United States* |
@@ -21,7 +21,7 @@ Entry added 2026-10-17 for a file that was already in the folder without a sourc
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cit-motion-brief-shelterforest2300144.pdf` (26 pages, 363,045 bytes) |
+| File | `FILED-EXAMPLE-motion-brief-2.pdf` (26 pages, 363,045 bytes) |
 | Court | United States Court of International Trade |
 | Case | *Shelter Forest International Acquisition, Inc. v. United States*, Court No. 23-00144 (docket 1:23-cv-00144-MAB), before Chief Judge Mark A. Barnett |
 | Document | ECF No. 51, Greatriver Wood Co., Ltd.'s "Rule 56.2 Motion for Judgment on the Agency Record" (pp. 1-2), memorandum with caption (p. 3), table of contents (p. 4), table of authorities (p. 5) and body through the conclusion (p. 23), proposed order (pp. 24-25), certificate of compliance, 5,991 words (p. 26). Public version (business proprietary information removed). |

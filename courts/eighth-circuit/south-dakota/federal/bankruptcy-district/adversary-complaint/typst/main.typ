@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "sdb-adversary-complaint.typ": sdb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-sdb-adversary-complaint-chaseabrams.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #sdb-adversary-complaint(meta, body)

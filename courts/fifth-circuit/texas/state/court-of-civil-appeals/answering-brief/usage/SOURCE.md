@@ -1,6 +1,6 @@
 # Exemplar sources
 
-## SAMPLE-texapp-answering-brief-sample.pdf (used for the overlay and the transcribed sample)
+## FILED-EXAMPLE-answering-brief.pdf (used for the overlay and the transcribed sample)
 
 - Document: Appellee's Brief on the Merits, 58 pages (cover, contents, index of authorities, argument).
 - Filer: Karen M. Billingham, Law Office of Karen M Billingham, PC (counsel for Appellee Veronica Powell-Johnson). A different filer from the two appellant exemplars.

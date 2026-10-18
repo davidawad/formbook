@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/california/federal/eastern-district/complaint/` (s
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-caed-complaint-morganbrothers126cv07747.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-caed-complaint-morgan.md`: caption, paragraphs 1 to 35 (pages 1 to 11 of the filing), the prayer (1 to 12), signature, jury demand. Paragraphs 36 to 85 and Counts 1 to 8 are not transcribed (see Known gaps) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: caption, paragraphs 1 to 35 (pages 1 to 11 of the filing), the prayer (1 to 12), signature, jury demand. Paragraphs 36 to 85 and Counts 1 to 8 are not transcribed (see Known gaps) |
 | typeface | face required: none (no E.D. Cal. local rule or Fed. R. Civ. P. 10 names a face). Filed exemplar is Times New Roman, which is not a requirement. Font: **EB Garamond** (kept; `docs/FONTS.md` "No face named"). Metric-compatible: n/a. Visual only: EB Garamond is not Times. |
-| render | ok: `usage/OUTPUT-caed-complaint-morgan.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, EBGaramond-Bold embedded), no warnings (`sh tools/render.sh <this folder> usage/INPUT-caed-complaint-morgan.md`) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, EBGaramond-Bold embedded), no warnings (`sh tools/render.sh <this folder> usage/INPUT-complaint.md`) |
 | overlay | ok: `usage/OVERLAY-morgan-complaint.pdf` and `usage/OVERLAY-morgan-complaint.txt` (`sh tools/overlay.sh <this folder> morgan-complaint`) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; pages 1 to 10 were viewed before a footer-title and signature-line fix, and that fix is confined to the footer text and the signature block, which pages 11 and 12 show in their final form) |
 
@@ -95,8 +95,8 @@ Defects found and fixed during review: the signer's name printed three times (sa
 
 ### docx (checked with LibreOffice only; Word is not available here)
 
-- Build: `sh docx/build-reference.sh docx/reference.docx` (styles, the numbered-line header frame, the footer, page borders); render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-caed-complaint-morgan.md` writes `usage/OUTPUT-caed-complaint-morgan.docx` and `usage/OUTPUT-caed-complaint-morgan.docx.pdf` (12 pages; EB Garamond embedded, no other face).
-- Pages viewed: all 12 pages of `OUTPUT-caed-complaint-morgan.docx.pdf` at 60 dpi, in the final build.
+- Build: `sh docx/build-reference.sh docx/reference.docx` (styles, the numbered-line header frame, the footer, page borders); render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (12 pages; EB Garamond embedded, no other face).
+- Pages viewed: all 12 pages of `OUTPUT-complaint.docx.pdf` at 60 dpi, in the final build.
 - No typst `OUTPUT` PDF exists in `usage/` for this sample, so the docx was compared with the typst template source and the rules above, not with a typst render page by page.
 - Matches the typst template: numbers 1 to 28 on every page (a header frame, not Word's line numbering, so blank lines are numbered too); exact 24 pt double spacing; 13.8 pt single spacing for counsel, caption and signature; counsel on lines 1 to 7 and the court title on line 8; the ruled party column of the caption; the footer with the description and the page number on one line; the lead-in on page 2.
 - Differs from typst: the signature blocks (13.8 pt single) sit between numbered lines rather than on them; the pleading rules are page borders around the text area, not lines drawn the full page height; the caption's right column wraps by LibreOffice's line breaking.

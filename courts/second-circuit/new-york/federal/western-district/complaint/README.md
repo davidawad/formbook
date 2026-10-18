@@ -5,9 +5,9 @@ Folder: `courts/second-circuit/new-york/federal/western-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nywd-complaint-kerrick626cv06006.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nywd-complaint-kerrick.md` (the whole complaint text, from the text layer; see Known gaps) |
-| render | ok: `usage/OUTPUT-nywd-complaint-kerrick.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the whole complaint text, from the text layer; see Known gaps) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-kerrick-complaint.pdf` and `usage/OVERLAY-kerrick-complaint.txt` (`tools/overlay.sh`) |
 | pages reviewed | 9 of 9 rendered at 60 dpi and viewed (pages 2, 3, 4 and 6 were viewed before the caption-width and emphasis-escape fixes; neither touches those pages, which have no caption or emphasis; see the review below) |
 
@@ -76,7 +76,7 @@ Every page was rendered with `pdftoppm -r 60` and viewed.
 From the repo root, with the toolchain on PATH (see the brief's install lines):
 
 ```sh
-sh tools/render.sh courts/second-circuit/new-york/federal/western-district/complaint usage/INPUT-nywd-complaint-kerrick.md
+sh tools/render.sh courts/second-circuit/new-york/federal/western-district/complaint usage/INPUT-complaint.md
 sh tools/overlay.sh courts/second-circuit/new-york/federal/western-district/complaint kerrick-complaint
 ```
 
@@ -84,9 +84,9 @@ sh tools/overlay.sh courts/second-circuit/new-york/federal/western-district/comp
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt body pitch, 15.6 pt single lines, 1 in margins, centered page-number footer); `docx/nywd-complaint.lua` builds the caption, the numbered paragraphs (number, tab, text), the lettered items, the unnumbered paragraphs (`::`) and the signature block as Word paragraphs and tables. Output: `usage/OUTPUT-nywd-complaint-kerrick.docx` and `usage/OUTPUT-nywd-complaint-kerrick.docx.pdf` (LibreOffice; converts with no error; 9 pages).
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt body pitch, 15.6 pt single lines, 1 in margins, centered page-number footer); `docx/nywd-complaint.lua` builds the caption, the numbered paragraphs (number, tab, text), the lettered items, the unnumbered paragraphs (`::`) and the signature block as Word paragraphs and tables. Output: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice; converts with no error; 9 pages).
 
 - Matches typst: page size and margins, font and size, double spacing, paragraph numbering 1 to 66, lettered items, caption layout (court title, parties box with rules, title and `Civil Action No.`, jury legend), signature block, centered page numbers. Pagination matches the typst render page for page (each page starts with the same paragraph in both).
 - Differs: the number is followed by a tab to 1 in (typst: a 0.5 em gap); the space above the signature block and the caption is a few points different where a page starts with it; Word and LibreOffice place text in exact-height lines a few points lower than typst does.
-- Pages looked at: all 9 pages of `usage/OUTPUT-nywd-complaint-kerrick.docx.pdf`, side by side with the typst render at 60 dpi.
+- Pages looked at: all 9 pages of `usage/OUTPUT-complaint.docx.pdf`, side by side with the typst render at 60 dpi.
 - BLOCKED: `tools/check.sh --engine docx` cannot run for this folder: there is no `checks.yaml` (and no `court.json` at the doc-type level), so every Gate 0 to 3 check ID is BLOCKED, not passed. No stamp is written.

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-pawb-adversary-complaint-snydervbiros2302020.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Western District of Pennsylvania
 - Case: *Shanni Snyder, as assignee of Robert Slone, Chapter 7 Trustee for U Lock Inc. v. Christine Biros and Biros Irrevocable Life Insurance Trust*, Adv. Proc. No. 23-02020 (main case *In re U Lock Inc.*, Bankruptcy No. 22-20823-GLT, Chapter 7)
 - Document: Adversary Complaint (13 pages), Counts I to VI (preference, recovery, fraudulent transfer, avoidance)

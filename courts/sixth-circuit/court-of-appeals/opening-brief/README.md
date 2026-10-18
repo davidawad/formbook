@@ -4,10 +4,10 @@ Doc type `opening-brief` of `courts/sixth-circuit/court-of-appeals`. Self-contai
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-ca6-opening-brief-netchoicevskrmetti255660.pdf` | Real filed Sixth Circuit appellant's brief (text-based PDF, 90 pp.). |
+| `usage/FILED-EXAMPLE-opening-brief.pdf` | Real filed Sixth Circuit appellant's brief (text-based PDF, 90 pp.). |
 | `usage/SOURCE.md` | URL fetched, case, docket, filer, date filed, date fetched. |
-| `usage/INPUT-ca6-opening-brief-netchoice.md` | Markdown transcription (excerpt) of the exemplar: frontmatter (cover, disclosure, oral-argument statement, designation, authorities) and body. |
-| `usage/OUTPUT-ca6-opening-brief-netchoice.typst.pdf` | `sh tools/render.sh courts/sixth-circuit/court-of-appeals/opening-brief usage/INPUT-ca6-opening-brief-netchoice.md` |
+| `usage/INPUT-opening-brief.md` | Markdown transcription (excerpt) of the exemplar: frontmatter (cover, disclosure, oral-argument statement, designation, authorities) and body. |
+| `usage/OUTPUT-opening-brief.typst.pdf` | `sh tools/render.sh courts/sixth-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md` |
 | `usage/OVERLAY-netchoice-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/sixth-circuit/court-of-appeals/opening-brief netchoice-opening-brief` |
 | `typst/main.typ` | Entry point; reads `--input sample=...`. |
 | `typst/ca6-opening-brief.typ` | Template `ca6-brief(meta, md)`. Content-agnostic; the numbers are named parameters traced to the rules. |
@@ -68,7 +68,7 @@ Font difference: the exemplar is Palatino Linotype; the template is EB Garamond 
 
 ## Page review (Gate 2)
 
-All 18 pages of `usage/OUTPUT-ca6-opening-brief-netchoice.typst.pdf` were rasterised at `pdftoppm -r 60` and viewed. Findings and their fixes:
+All 18 pages of `usage/OUTPUT-opening-brief.typst.pdf` were rasterised at `pdftoppm -r 60` and viewed. Findings and their fixes:
 
 | Page (printed) | Finding | Fix |
 |---|---|---|
@@ -108,7 +108,7 @@ Same rules and numbers as the typst template; the typst output is the reference 
 
 ## Verification pass 2026-10-16 (fb-595.26.6)
 
-- Re-rendered `usage/OUTPUT-ca6-opening-brief-netchoice.typst.pdf` with `tools/render.sh` (exit 0, no typst warnings): 18 pages, the same count as the committed render; before the fixes below its text was identical to the committed PDF, so it was not stale. Overlay rerun; map unchanged except the cover (98% to 100%, from the added counsel line).
+- Re-rendered `usage/OUTPUT-opening-brief.typst.pdf` with `tools/render.sh` (exit 0, no typst warnings): 18 pages, the same count as the committed render; before the fixes below its text was identical to the committed PDF, so it was not stale. Overlay rerun; map unchanged except the cover (98% to 100%, from the added counsel line).
 - All 18 pages viewed at 60 dpi (pages 1, 9, 14, 17, 18 again after the fixes); the 18 overlay pages viewed at 40 dpi, and overlay page 1 (cover against the filed cover) at 150 dpi.
 - Fixed:
   - p. 3 (Statement of Jurisdiction): "28 U.S.C. §§ 1651" broke between the two section signs ("§" at the line end, "§ 1651" on the next line). The no-break rule matched only a single sign; it is now `[§¶]+ \S+`, so "§§ 1651" stays whole.

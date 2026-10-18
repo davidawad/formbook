@@ -72,7 +72,7 @@ From the repo root:
 
 ```sh
 export PATH=/work/artifacts/bin:$PATH   # only if typst, poppler and magick are not installed system-wide
-sh tools/render.sh courts/ninth-circuit/california/state/superior-court/motion-brief usage/INPUT-calsuperct-motion-brief-aclufresno.md
+sh tools/render.sh courts/ninth-circuit/california/state/superior-court/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/ninth-circuit/california/state/superior-court/motion-brief aclu-fresno-motion-brief
 ```
 
@@ -80,9 +80,9 @@ The render fails on any typst warning. The font is the vendored `Liberation Seri
 
 ## Samples and exemplar
 
-- `usage/INPUT-calsuperct-motion-brief-aclufresno.md`: an excerpt transcribed from the exemplar. It has the caption, the notice (all of it, with the signature block), the introduction (in full), factual background sections A and B (in part), argument sections A and B (in part, with the block quotation from *Fredericks*), and the conclusion (in full). The exemplar has no proof of service. Its footnotes 3-8 and most of the memorandum (about 14 pages in the original) are not transcribed. The footnote text is abbreviated (the URLs are dropped).
-- `usage/OUTPUT-calsuperct-motion-brief-aclufresno.typst.pdf`: the render, 9 pages (caption and notice on pages 1-2, tables on pages 3-4, memorandum on pages 5-9). The memorandum runs 5 pages (CRC 3.1113(d): at most 15).
-- `usage/OVERLAY-aclu-fresno-motion-brief.pdf` and `-overlay.txt`: the red/blue overlay against `usage/SAMPLE-calsuperct-motion-brief-acluvcityoffresno24cecg01635.pdf`. Page map from `overlay.sh`:
+- `usage/INPUT-motion-brief.md`: an excerpt transcribed from the exemplar. It has the caption, the notice (all of it, with the signature block), the introduction (in full), factual background sections A and B (in part), argument sections A and B (in part, with the block quotation from *Fredericks*), and the conclusion (in full). The exemplar has no proof of service. Its footnotes 3-8 and most of the memorandum (about 14 pages in the original) are not transcribed. The footnote text is abbreviated (the URLs are dropped).
+- `usage/OUTPUT-motion-brief.typst.pdf`: the render, 9 pages (caption and notice on pages 1-2, tables on pages 3-4, memorandum on pages 5-9). The memorandum runs 5 pages (CRC 3.1113(d): at most 15).
+- `usage/OVERLAY-aclu-fresno-motion-brief.pdf` and `-overlay.txt`: the red/blue overlay against `usage/FILED-EXAMPLE-motion-brief.pdf`. Page map from `overlay.sh`:
 
   ```
   ours p.1  filed p.1   word-overlap 80.2%

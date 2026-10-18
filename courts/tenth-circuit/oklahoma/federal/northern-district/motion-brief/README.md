@@ -4,10 +4,10 @@ Doc type: **motion with brief in support** (one filed document: a motion to dism
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-oknd-motion-brief-gideon425cv00450.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-oknd-motion-brief-gideonmotiontodismiss.md`: the full filing (caption, motion, summary, facts, standard, three propositions, GTCA section, conclusion, signature, footnotes 1-2, certificate of service) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: the full filing (caption, motion, summary, facts, standard, three propositions, GTCA section, conclusion, signature, footnotes 1-2, certificate of service) |
 | typeface | face required: none (LGnR2-4(a) sets a 12-pt floor and names no face). Substitute: none needed; **EB Garamond kept** (`docs/FONTS.md`: "no face named"). Fit: not metric-compatible with the Times exemplar; visual only. |
-| render | ok: `usage/OUTPUT-oknd-motion-brief-gideonmotiontodismiss.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond Regular, Bold, Italic, BoldItalic embedded |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond Regular, Bold, Italic, BoldItalic embedded |
 | overlay | ok: `usage/OVERLAY-gideon-motion-to-dismiss.pdf` and `usage/OVERLAY-gideon-motion-to-dismiss.txt` |
 | pages reviewed | 12 of 12 (every page rendered at 70 dpi and viewed, fonts pass; see the table below) |
 
@@ -52,7 +52,7 @@ Not produced by this template: the proposed order (LCvR7-1(c), "A separate propo
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief usage/INPUT-oknd-motion-brief-gideonmotiontodismiss.md
+sh tools/render.sh courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief gideon-motion-to-dismiss
 ```
 
@@ -98,10 +98,10 @@ Reviewed pages: 12 of 12.
 
 ## Engines
 
-DOCX engine (`docx/`: `reference.docx`, `oknd-motion-brief.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief usage/INPUT-oknd-motion-brief-gideonmotiontodismiss.md`.
+DOCX engine (`docx/`: `reference.docx`, `oknd-motion-brief.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief usage/INPUT-motion-brief.md`.
 
 - **Matches the typst form:** EB Garamond 13 pt body and footnotes (footnote text single-spaced), 12 pt centered page number, 1 in margins on letter paper, double-spaced body with 0.5 in first-line indent, the cover (two-line court name, caption with rule, bold centered title), level-1 headings centered bold caps and unnumbered, levels 2-5 labeled I., A., 1., a. with hanging indents, single-spaced block quotations indented 0.5 in both sides, the signature block, and the certificate of service on its own page.
 - **Differs from typst:** line pitch is "double" rather than exactly 24 pt. The caption and signature block are Word tables. Heading labels are typed text. Heading spacing is 12 pt before and after at single line spacing. Word may paginate differently.
 - **Not built (fails loudly):** `toc_toa: true` (indexed TOC and TOA, LCvR7-1(d)) stops the filter with an error. The committed sample is 12 pages and does not use it. Authority links (`toa:KEY`) are written as plain text.
-- **Output:** `usage/OUTPUT-oknd-motion-brief-gideonmotiontodismiss.docx` is written. `render-docx.sh` then exits 1 (see below).
+- **Output:** `usage/OUTPUT-motion-brief.docx` is written. `render-docx.sh` then exits 1 (see below).
 - **BLOCKED:** `docx.pdf` (LibreOffice PDF, check gates 0-3): `soffice` is not installed on this box and cannot be installed without root or conda-forge. Visual review of the docx pages: needs the same PDF; 0 docx pages reviewed. `unzip` is not installed, so the zip-integrity step of `tools/render-docx.sh` fails after the `.docx` is written. The XML parts were checked instead with `ziptool` and `xmllint` (15 of 15 well-formed). Opening in Word and LibreOffice without a repair prompt: not done. TOC and TOA: BLOCKED for any brief over 15 pages (see above).

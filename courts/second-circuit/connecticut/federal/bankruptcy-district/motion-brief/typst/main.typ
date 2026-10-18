@@ -6,7 +6,7 @@
 // Page and text settings live here (set rules inside a function do not reach the page).
 #import "ctb-motion-brief.typ": cover, toc, toa, body-text, signature, split-frontmatter, font-family, type-size, body-leading, margin
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ctb-motion-brief-pillsburymemorandum.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 
 // Each heading is shown as its body, with block spacing: a heading never ends a page (sticky).

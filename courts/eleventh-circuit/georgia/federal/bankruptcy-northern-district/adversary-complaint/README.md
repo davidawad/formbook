@@ -4,9 +4,9 @@ Doc type: **adversary complaint** in an adversary proceeding in the United State
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 1 filer: `usage/SAMPLE-ganb-adversary-complaint-gatetruckinfletcher2505046.pdf` (see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ganb-adversary-complaint-fletcher2505046.md`, the whole filing (caption, 38 numbered paragraphs, prayer, signature, certificate) |
-| render | ok: `usage/OUTPUT-ganb-adversary-complaint-fletcher2505046.typst.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
+| exemplar | yes, 1 filer: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md`, the whole filing (caption, 38 numbered paragraphs, prayer, signature, certificate) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
 | overlay | ok: `usage/OVERLAY-fletcher-25-05046.pdf` and `OVERLAY-fletcher-25-05046.txt`, made 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not committed; see gaps 11) |
 | pages reviewed | 6 of 6 re-rendered and viewed 2026-10-14 (fonts pass; the face did not change, see Typeface below) |
 
@@ -72,7 +72,7 @@ Body:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-ganb-adversary-complaint-fletcher2505046.md
+sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/adversary-complaint fletcher-25-05046
 ```
 
@@ -101,8 +101,8 @@ Reviewed pages: 6 of 6.
 
 | Engine | Result here | Output |
 |---|---|---|
-| typst (primary, `typst/`) | unchanged by this work | `usage/OUTPUT-ganb-adversary-complaint-fletcher2505046.typst.pdf` |
-| docx (`docx/`) | `.docx` built and XML-checked; `.docx.pdf` **not produced** (no LibreOffice in this box), so no page was rendered or reviewed | `usage/OUTPUT-ganb-adversary-complaint-fletcher2505046.docx` |
+| typst (primary, `typst/`) | unchanged by this work | `usage/OUTPUT-adversary-complaint.typst.pdf` |
+| docx (`docx/`) | `.docx` built and XML-checked; `.docx.pdf` **not produced** (no LibreOffice in this box), so no page was rendered or reviewed | `usage/OUTPUT-adversary-complaint.docx` |
 
 `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference: EB Garamond 13 pt; body text 1.5 spaced (exact 22.4 pt, the typst pitch); half-inch first-line indent; footnotes 11 pt; letter page, 1-inch margins; centered 11 pt page number. `docx/ganb-adversary-complaint.lua` builds the first page (caption as a borderless table: 3.4 in, 0.3 in ")" column, the rest; 0.4 in gap for the filing stamp; rule; title), numbers the allegations and letters the prayer as typed text (number at ½ in, text at 0.8 in), and builds the signature and certificate blocks in the right half of the page, as the typst template does.
 

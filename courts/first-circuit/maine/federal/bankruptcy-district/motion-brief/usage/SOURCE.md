@@ -1,8 +1,8 @@
 # Exemplar source
 
-## 1. `SAMPLE-meb-motion-brief-mattson2420188.pdf` (primary: transcribed in `usage/`)
+## 1. `FILED-EXAMPLE-motion-brief.pdf` (primary: transcribed in `usage/`)
 
-- File: `SAMPLE-meb-motion-brief-mattson2420188.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, District of Maine
 - Case: *In re Kevin J. Mattson*, Chapter 7, Case No. 24-20188 PGC
 - Document: Motion for Removal of Chapter 7 Trustee, Pursuant to 11 U.S.C. §§ 105 and 324, and Request for Expedited Determination (38 pages; the motion carries its own statement of facts and argument, i.e. the memorandum is incorporated, Fed. R. Bankr. P. 9013)
@@ -14,7 +14,7 @@
 - Text layer: yes (`pdftotext` reads the body; Times Roman and Courier fonts, non-embedded)
 - Public court record (RECAP). Used as a visual and structural reference only.
 
-## 2. `SAMPLE-meb-motion-brief-wheeling1310670.pdf` (second filer, tier-2 comparison)
+## 2. `FILED-EXAMPLE-motion-brief-2.pdf` (second filer, tier-2 comparison)
 
 - Court: United States Bankruptcy Court, District of Maine
 - Case: *In re Montreal Maine & Atlantic Railway Ltd.*, Chapter 11, Case No. 13-10670
@@ -28,4 +28,4 @@
 - sha256: 6995343572c6c2341056d318efc2b83854e614076dc3b0a49360a5f5ac798a3f
 - Public court record. Used as a visual and structural reference only.
 
-The scanned `SAMPLE-meb-motion-brief-wheeling1310670.pdf` is replaced for font and text-layer comparison by the text-based `SAMPLE-meb-motion-brief-mattson2420188.pdf`. See the primary-exemplar record above for its public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
+The scanned `FILED-EXAMPLE-motion-brief-2.pdf` is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-motion-brief.pdf`. See the primary-exemplar record above for its public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

@@ -6,10 +6,10 @@ Template for the reply brief of an appellant in the U.S. Court of Appeals for th
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-ca5-reply-brief-fisher2610536.pdf` | Filed exemplar: Reply of Plaintiff-Appellant Ellen Mae Fisher, *Fisher v. Texas Tech University Regents*, No. 26-10536 (5th Cir.), filed 2026-08-17, 37 pages, text layer present. |
+| `usage/FILED-EXAMPLE-reply-brief.pdf` | Filed exemplar: Reply of Plaintiff-Appellant Ellen Mae Fisher, *Fisher v. Texas Tech University Regents*, No. 26-10536 (5th Cir.), filed 2026-08-17, 37 pages, text layer present. |
 | `usage/SOURCE.md` | Where the exemplar came from, the docket number, the filer, the date filed and the date fetched. |
-| `usage/INPUT-ca5-reply-brief-fisher.md` | Markdown transcription of an excerpt of the exemplar: front matter, the procedural background, Argument point A, the conclusion, the signature, the certificate of compliance and the certificate of service. Follows the markdown contract of the ninth-circuit sample (frontmatter, `# Heading` sections, `toa:` citation links, `[^n]` footnotes). |
-| `usage/OUTPUT-ca5-reply-brief-fisher.typst.pdf` | Render of the sample (10 pages). |
+| `usage/INPUT-reply-brief.md` | Markdown transcription of an excerpt of the exemplar: front matter, the procedural background, Argument point A, the conclusion, the signature, the certificate of compliance and the certificate of service. Follows the markdown contract of the ninth-circuit sample (frontmatter, `# Heading` sections, `toa:` citation links, `[^n]` footnotes). |
+| `usage/OUTPUT-reply-brief.typst.pdf` | Render of the sample (10 pages). |
 | `usage/OVERLAY-fisher-reply-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map from `tools/overlay.sh`. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca5-reply-brief.typ` | The template: `ca5-reply-brief(meta, md)`. |
@@ -17,7 +17,7 @@ Template for the reply brief of an appellant in the U.S. Court of Appeals for th
 Build (from the repo root, with typst 0.15.0 on PATH):
 
 ```sh
-sh tools/render.sh courts/fifth-circuit/court-of-appeals/reply-brief usage/INPUT-ca5-reply-brief-fisher.md
+sh tools/render.sh courts/fifth-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md
 sh tools/overlay.sh courts/fifth-circuit/court-of-appeals/reply-brief fisher-reply-brief
 ```
 
@@ -128,8 +128,8 @@ Defects found and fixed during the first review (2026-10-14): none needed a chan
 
 ## Status
 
-- exemplar: yes (`usage/SAMPLE-ca5-reply-brief-fisher2610536.pdf`)
-- render: ok (`usage/OUTPUT-ca5-reply-brief-fisher.typst.pdf`, 10 pages, no typst warnings)
+- exemplar: yes (`usage/FILED-EXAMPLE-reply-brief.pdf`)
+- render: ok (`usage/OUTPUT-reply-brief.typst.pdf`, 10 pages, no typst warnings)
 - overlay: ok (`usage/OVERLAY-fisher-reply-brief.pdf`, page map in `-overlay.txt`)
 - pages reviewed: 10 of 10
 

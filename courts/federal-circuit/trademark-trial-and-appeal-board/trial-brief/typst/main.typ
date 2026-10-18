@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ttab-trial-brief.typ": ttab-trial-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ttab-trial-brief-treefrogrebuttalbrief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-trial-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ttab-trial-brief(meta, body)

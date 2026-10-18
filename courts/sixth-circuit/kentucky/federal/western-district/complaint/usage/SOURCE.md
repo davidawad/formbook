@@ -5,7 +5,7 @@ Exemplars are public filings from CourtListener RECAP (storage.courtlistener.com
 
 ## Used for the sample and the overlay
 
-- File: `SAMPLE-kywd-complaint-lott326cv653.pdf` (12 pages)
+- File: `FILED-EXAMPLE-complaint.pdf` (12 pages)
 - Court: United States District Court, Western District of Kentucky, Louisville Division
 - Case: *Lott v. Jefferson County Public Schools*, No. 3:26-cv-00653-RGJ (judge initials RGJ)
 - Document: Complaint and Demand for Jury Trial (Document 1; no filing stamp on the pages; the docket entry is dated 2026-08-21)
@@ -16,7 +16,7 @@ Exemplars are public filings from CourtListener RECAP (storage.courtlistener.com
 
 ## Second filer (tier-2 comparison; not transcribed)
 
-- File: `SAMPLE-kywd-complaint-scales326cv807.pdf` (6 pages)
+- File: `FILED-EXAMPLE-complaint-2.pdf` (6 pages)
 - Case: *Scales v. Ford Motor Company*, No. 3:26-cv-00807-CHB (Louisville Division)
 - Document: Complaint and Demand for Jury Trial (Document 1), filed 2026-10-07, "Filed 10/07/26" on every page
 - Filer: Plaintiff Tirell Scales, by counsel
@@ -28,7 +28,7 @@ https://storage.courtlistener.com/recap/gov.uscourts.kywd.147545/gov.uscourts.ky
 
 ## Additional filer (second tier-2 exemplar)
 
-- File: `SAMPLE-kywd-complaint-scales326cv807.pdf` (6 pages; text layer present)
+- File: `FILED-EXAMPLE-complaint-2.pdf` (6 pages; text layer present)
 - Case: *Scales v. Ford Motor Company*, No. 3:26-cv-00807-CHB
 - Document: Complaint and Demand for Jury Trial (Document 1)
 - Filer: Plaintiff Tirell Scales, by counsel

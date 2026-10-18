@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ncmd-complaint.typ": ncmd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ncmd-complaint-prillaman.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #ncmd-complaint(meta, body)

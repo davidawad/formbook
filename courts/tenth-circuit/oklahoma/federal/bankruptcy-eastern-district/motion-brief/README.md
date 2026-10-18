@@ -4,9 +4,9 @@
 - Doc type: `motion-brief`. A brief filed in support of a motion or objection (not a motion, not a complaint).
 - Engine: typst only. No latex or docx files for this doc type yet.
 - Exemplars: two public filings from different filers, in `usage/` (provenance in `usage/SOURCE.md`):
-  - `SAMPLE-okeb-motion-brief-gpnb2480617closingbrief.pdf`: Great Plains National Bank's closing brief (creditor's counsel), Chapter 11, filed 2025-04-28, 22 pages.
-  - `SAMPLE-okeb-motion-brief-brooks1580927trusteebrief.pdf`: Chapter 13 standing trustee's brief in support of objection to claim, filed 2017-02-02, 4 pages.
-- Samples: `usage/INPUT-okeb-motion-brief-gpnbclosingbrief.md` (excerpt, 22 pages filed, transcribed in part; see Gaps) and `usage/INPUT-okeb-motion-brief-brookstrusteebrief.md` (complete).
+  - `FILED-EXAMPLE-motion-brief-2.pdf`: Great Plains National Bank's closing brief (creditor's counsel), Chapter 11, filed 2025-04-28, 22 pages.
+  - `FILED-EXAMPLE-motion-brief.pdf`: Chapter 13 standing trustee's brief in support of objection to claim, filed 2017-02-02, 4 pages.
+- Samples: `usage/INPUT-motion-brief-2.md` (excerpt, 22 pages filed, transcribed in part; see Gaps) and `usage/INPUT-motion-brief.md` (complete).
 - Status: template, samples, renders, overlays and page review done (below). Not reviewed by a human. `court.json` untouched, no status set.
 
 ## Files
@@ -15,8 +15,8 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `okeb-motion-brief`. |
 | `typst/okeb-motion-brief.typ` | Template. Caption, body, headings, numbered paragraphs, signature block, optional certificate. Parameter block at the top. |
-| `usage/INPUT-okeb-motion-brief-gpnbclosingbrief.md` | Markdown sample with YAML frontmatter (caption, counsel, signature, certificate, excerpt note). |
-| `usage/INPUT-okeb-motion-brief-brookstrusteebrief.md` | Same, for the trustee's brief. |
+| `usage/INPUT-motion-brief-2.md` | Markdown sample with YAML frontmatter (caption, counsel, signature, certificate, excerpt note). |
+| `usage/INPUT-motion-brief.md` | Same, for the trustee's brief. |
 | `usage/OUTPUT-<id>.pdf` | `sh tools/render.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-<id>.md`. Great Plains: 11 pages. Brooks: 3 pages. |
 | `usage/OVERLAY-<id>.pdf`, `.txt` | `sh tools/overlay.sh <court>/motion-brief <id> <exemplar.pdf>`. Red = ours, blue = filed, black = both. The `.txt` is the page map. |
 | `usage/` | The two filed PDFs and `SOURCE.md`. |
@@ -77,7 +77,7 @@ Docx engine (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.
 
 Differences from typst: Word's line breaking and the caption table's border rendering are not checked; the typst vertical gaps are approximated with paragraph spacing; the body stays ragged right, as in the typst form. A certificate body given as markdown is split into paragraphs at line breaks in the frontmatter.
 
-BLOCKED (docx engine, `usage/OUTPUT-okeb-motion-brief-brookstrusteebrief.docx` and `usage/OUTPUT-okeb-motion-brief-gpnbclosingbrief.docx` are written and valid XML, but the rest cannot run here):
+BLOCKED (docx engine, `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief-2.docx` are written and valid XML, but the rest cannot run here):
 - `docx.pdf` (Gates 0 and 1 on the LibreOffice PDF): soffice not installed on this box, and LibreOffice cannot be installed here (no conda-forge package, no root). `tools/render-docx.sh` fails at its soffice step.
 - Visual review of the docx pages: BLOCKED for the same reason; pages reviewed: 0.
 - Word open check (no repair prompt): not done, no Word here.

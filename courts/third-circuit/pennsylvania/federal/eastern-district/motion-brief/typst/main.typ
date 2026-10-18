@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "paed-motion-brief.typ": paed-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-paed-motion-brief-harviemotiontodismiss.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #paed-motion-brief(meta, body)

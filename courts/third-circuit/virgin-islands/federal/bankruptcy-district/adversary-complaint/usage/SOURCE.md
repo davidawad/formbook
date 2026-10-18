@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| File | `SAMPLE-vib-adversary-complaint-springelglobalbank0903071.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | Document | First Amended Complaint Against Global Bank of Commerce Limited to Recover Pre-Petition Fraudulent Transfers and Preferential Transfers and Objection to Claim |
 | Court | United States Bankruptcy Court, District of the Virgin Islands, Division of St. Thomas and St. John (the caption reads "District Court of the Virgin Islands, Bankruptcy Division") |
 | Case | *In re Innovative Communication Corporation*, Chapter 11, Case No. 07-30012 (JKF); Adv. Proc. No. 09-03071 (*Stan Springel, Chapter 11 Trustee v. Global Bank of Commerce Limited*) |

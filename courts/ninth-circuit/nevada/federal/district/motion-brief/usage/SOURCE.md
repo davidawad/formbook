@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nvd-motion-brief-lynch226cv00895.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.nvd.180465/gov.uscourts.nvd.180465.5.0.pdf (RECAP copy of ECF No. 5) |
 | CourtListener docket | https://www.courtlistener.com/docket/72808707/ (search result: `docketNumber` 2:26-cv-00895) |
 | Case | *Ossiris Lynch v. Granbury at Valley Vista Homeowners Association* |

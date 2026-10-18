@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ded-complaint-bostonscientificatraverse126cv01294.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court for the District of Delaware (`ded`)
 - Case: *Boston Scientific Corporation and Boston Scientific Medical Device Limited v. Atraverse Medical, Inc.*
 - Docket: No. 1:26-cv-01294-UNA (Document 1; the "UNA" suffix means no judge was assigned at filing; the caption carries "C.A. No." blank)
@@ -16,7 +16,7 @@ Found by: CourtListener REST search (`/api/rest/v4/search/?type=r&court=ded`, `q
 
 Second filer: not saved (the brief asks for one exemplar per doc type). Darcy v. The Chemours Company, No. 1:26-cv-01299 (22 pages, filed 2026-10-08 by Ryan Darcy, a putative class action, CID fonts, Microsoft Print to PDF) is a text-layer candidate for the tier-2 second filer; see ../README.md.
 
-## 2. Second filer: `SAMPLE-ded-complaint-maynepharma125cv00670.pdf`
+## 2. Second filer: `FILED-EXAMPLE-complaint-2.pdf`
 
 - Court: United States District Court for the District of Delaware (`ded`)
 - Case: *Mayne Pharma LLC v. TherapeuticsMD, Inc.*

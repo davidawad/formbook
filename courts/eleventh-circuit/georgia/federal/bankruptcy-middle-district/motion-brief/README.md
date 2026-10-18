@@ -4,9 +4,9 @@ Doc type: **motion-brief** (a written motion under FRBP 9013 with its memorandum
 
 | Item | Status |
 |---|---|
-| exemplar | yes, partial: `usage/SAMPLE-gamb-motion-brief-gordon1407017.pdf` is the supporting **memorandum** (not the motion itself; see gaps). 1 filer; see `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-gamb-motion-brief-gordonmemorandum.md` (caption, title, Statement of the Case, Statement of the Facts with footnote, Issues, Argument IV.A and IV.B, Conclusion, signature block, certificate of service with placeholders) |
-| render | ok: `usage/OUTPUT-gamb-motion-brief-gordonmemorandum.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes, partial: `usage/FILED-EXAMPLE-motion-brief.pdf` is the supporting **memorandum** (not the motion itself; see gaps). 1 filer; see `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md` (caption, title, Statement of the Case, Statement of the Facts with footnote, Issues, Argument IV.A and IV.B, Conclusion, signature block, certificate of service with placeholders) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-gordon-memorandum.pdf` and `OVERLAY-gordon-memorandum.txt` |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; page 1 viewed again after the caption fix; all 10 re-rendered and viewed again 2026-10-14 in the fonts pass, no change) |
 
@@ -56,11 +56,11 @@ Not produced by this template, and why:
 Build and check (from the repo root, with the toolchain on PATH: `export PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/motion-brief usage/INPUT-gamb-motion-brief-gordonmemorandum.md
+sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/motion-brief gordon-memorandum
 ```
 
-- `usage/OUTPUT-gamb-motion-brief-gordonmemorandum.typst.pdf` is the render. The names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-` and `OVERLAY-`), not the brief's `<id>.pdf` and `<id>-overlay.pdf`, because those tools are shared and fix the names.
+- `usage/OUTPUT-motion-brief.typst.pdf` is the render. The names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-` and `OVERLAY-`), not the brief's `<id>.pdf` and `<id>-overlay.pdf`, because those tools are shared and fix the names.
 - `usage/OVERLAY-gordon-memorandum.pdf` (red = our render, blue = exemplar, black = both) and `.txt`. The page map pairs pages by word overlap. Our pages 1-3 pair with filed pages 1-3, and our page 10 (certificate) pairs with filed page 16 at 17%, which is low because the certificate is not in the exemplar. The overlay is a diagnostic, not a score.
 
 ## Visual review (Gate 2 record, all 10 pages, rendered at 60 dpi and viewed)
@@ -98,10 +98,10 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-di
 The typst template above is the primary engine. The docx engine is in `docx/`: `reference.docx` (built by `docx/make-reference.sh`), `gamb.lua` (the caption, the title, the date line, the signature blocks and the certificate of service) and `render.sh` (pandoc with `--from markdown+smart-fancy_lists`, so the typed "(A)", "(i)" labels of the block quotations stay text). Build and check:
 
 ```sh
-sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/motion-brief usage/INPUT-gamb-motion-brief-gordonmemorandum.md
+sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/motion-brief usage/INPUT-motion-brief.md
 ```
 
-This writes `usage/OUTPUT-gamb-motion-brief-gordonmemorandum.docx` and `usage/OUTPUT-gamb-motion-brief-gordonmemorandum.docx.pdf` (LibreOffice 26.8, EB Garamond from `fonts/eb-garamond`).
+This writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8, EB Garamond from `fonts/eb-garamond`).
 
 - **Matches the typst render:** EB Garamond 13 pt, footnotes 12 pt single-spaced; letter; 1-inch margins; body double-spaced (24 pt exact) with a half-inch first-line indent; headings centered bold (level 1, 18 pt), bold (level 2, 16 pt), bold italic (level 3); block quotations indented 0.75 in on both sides and single-spaced; the Form 416D caption as a table with a rule on the right and bottom of the party column; the court lines and title; the signature blocks after the date line; the certificate of service after them; a centered page number on every page. Footnotes are Word footnotes.
 - **Differs:** the docx PDF is 10 pages, the same as typst. Pagination and line breaks are LibreOffice's, not typst's, so individual page breaks differ (see the page starts in the review above). Quotation paragraphs have a 6 pt space before each (typst: 12 pt above and below the whole quotation, none between its paragraphs). The docx PDF page 10 starts with the end of the conclusion, and the date line, signature and certificate follow on it; the typst page 10 starts with the date line. Word may paginate differently again (docs/DOCX.md).

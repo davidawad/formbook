@@ -5,7 +5,7 @@
 // measured off an exemplar, no forced line breaks. The body is markdown rendered by cmarker; the metadata
 // comes from the YAML frontmatter of the same file (schema: ../README.md).
 //
-// Open choices the filed exemplar settles (usage/SAMPLE-kyeb-motion-brief-williams2460490.pdf, and
+// Open choices the filed exemplar settles (usage/FILED-EXAMPLE-motion-brief.pdf, and
 // see ../README.md): single-spaced body with a gap between paragraphs; numbered paragraphs; a judge line in
 // the caption; the title between two rules; the "/s/" signature block with a rule under the signer's name,
 // repeated in the certificate of service; NOTICE after the signature and before the certificate.

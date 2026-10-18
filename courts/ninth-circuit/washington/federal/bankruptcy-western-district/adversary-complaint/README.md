@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/washington/federal/bankruptcy-western-district/adv
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-wawb-adversary-complaint-harborcustom2404037.pdf` (primary, 24 pp., Polsinelli / Levene Neale) and `usage/SAMPLE-wawb-adversary-complaint-burdette2501017.pdf` (second filer, 7 pp., K&L Gates). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-wawb-adversary-complaint-harborcustomcomplaint.md` (a portion of the 24-page filing: cover, jurisdiction, parties, factual allegations, Counts I to V, prayer, signature). |
-| render | ok: `usage/OUTPUT-wawb-adversary-complaint-harborcustomcomplaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: all `EBGaramond-*`), no warnings. |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (primary, 24 pp., Polsinelli / Levene Neale) and `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (second filer, 7 pp., K&L Gates). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-adversary-complaint.md` (a portion of the 24-page filing: cover, jurisdiction, parties, factual allegations, Counts I to V, prayer, signature). |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: all `EBGaramond-*`), no warnings. |
 | overlay | ok: `usage/OVERLAY-harbor-custom-complaint.pdf` and `usage/OVERLAY-harbor-custom-complaint.txt` (page map). |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed; page 9 re-rendered and viewed after the signature-block fix, pages 1 to 8 unaffected by that change). |
 
@@ -15,8 +15,8 @@ Commands (from the repo root; the tools name outputs `OUTPUT-<id>` and `OVERLAY-
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
-sh tools/render.sh courts/ninth-circuit/washington/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-wawb-adversary-complaint-harborcustomcomplaint.md
-sh tools/overlay.sh courts/ninth-circuit/washington/federal/bankruptcy-western-district/adversary-complaint harbor-custom-complaint usage/SAMPLE-wawb-adversary-complaint-harborcustom2404037.pdf
+sh tools/render.sh courts/ninth-circuit/washington/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-adversary-complaint.md
+sh tools/overlay.sh courts/ninth-circuit/washington/federal/bankruptcy-western-district/adversary-complaint harbor-custom-complaint usage/FILED-EXAMPLE-adversary-complaint.pdf
 ```
 
 ## Governing rules
@@ -94,7 +94,7 @@ The overlay is a diagnostic, not a score. Overlap is lowest on page 1 (54.7%), t
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/complaint.lua` writes the body (counsel, judge, court title, caption, numbered paragraphs, lettered prayer, signature); `docx/render.sh` (run by `tools/render-docx.sh`) fills the bottom notation from the frontmatter. Output: `usage/OUTPUT-wawb-adversary-complaint-harborcustomcomplaint.docx` and `.docx.pdf` (LibreOffice 26.8), 9 pages; all 9 pages rendered at 60 dpi and viewed (`reviews/docx.md`).
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/complaint.lua` writes the body (counsel, judge, court title, caption, numbered paragraphs, lettered prayer, signature); `docx/render.sh` (run by `tools/render-docx.sh`) fills the bottom notation from the frontmatter. Output: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice 26.8), 9 pages; all 9 pages rendered at 60 dpi and viewed (`reviews/docx.md`).
 
 - Matches the typst output: letter; margins (top 1 in, bottom 48 pt, left 1.5 in, right 0.75 in); EB Garamond 12 pt (`pdffonts`: EBGaramond only); 28 numbers on a 24 pt grid; pleading rules (double at left, single at right); counsel top left on lines 1 to 10 and judge and chapter top right; court title; caption with the debtor block, the parties, a rule right and bottom, the adversary number and the title at right; page break after the caption; numbered paragraphs; prayer lettered A. to J. with the text at 0.9 in; bottom notation on every page (title and page number left, counsel right); the signature block kept whole.
 - Differs from typst: the numbers and the bottom notation are floating text boxes in the header and footer, not body flow; the caption party column is 3.2 in (typst 3.0 in) because at 3.0 in the parties ran past line 28 in LibreOffice; paragraph numbers are typed text, not a Word list, so they do not renumber on edit; page breaks follow LibreOffice (the prayer and the signature block fall on different lines than typst, the signature block is on page 9 in both); Word may paginate differently.

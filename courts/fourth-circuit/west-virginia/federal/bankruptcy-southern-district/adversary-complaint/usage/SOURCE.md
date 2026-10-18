@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-wvsb-adversary-complaint-blackjewel1930289doc334.pdf` (23 pages) |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` (23 pages) |
 | URL fetched | https://cases.ra.kroll.com/blackjewel/Home-DownloadPDF?id1=MTE2NTUyMQ%3D%3D&id2=0 |
 | Host | Kroll Restructuring Administration (claims agent site for *Blackjewel, L.L.C., et al.*), a public copy of the ECF document |
 | Case | *In re Blackjewel, L.L.C., et al.*, Case No. 3:19-bk-30289, Bankr. S.D. W. Va. (jointly administered; Chapter 11) |

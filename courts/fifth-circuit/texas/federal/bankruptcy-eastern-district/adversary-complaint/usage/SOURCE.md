@@ -1,6 +1,6 @@
 # Exemplar source: adversary complaint (E.D. Tex. Bankr., Sherman Division)
 
-- File: `SAMPLE-txeb-adversary-complaint-lrk96simpson2504019.pdf` (15 pages, text layer present)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (15 pages, text layer present)
 - Case: *LRK-96 LLC v. Simpson*, Adv. Proc. No. 25-04019 (main case: In re Dana Brenton Simpson, Chapter 11, No. 24-42912), U.S. Bankruptcy Court, E.D. Tex., Sherman Division
 - Document: Doc 1, "COMPLAINT", the adversary complaint itself (not its exhibits or cover sheet)
 - Filer: H. Brandon Jones, Bonds Ellis Eppich Schafer Jones LLP, for Plaintiff LRK-96 LLC

@@ -1,6 +1,6 @@
 # Exemplar source: Georgia Supreme Court, response to an emergency petition and motion (motion-brief type)
 
-- **File:** `SAMPLE-ga-motion-brief-democraticpartyofgeorgias23m0376.pdf` (46 pages, letter; text-based: `pdftotext` yields the text, fonts embedded). The whole filing, copied unchanged.
+- **File:** `FILED-EXAMPLE-motion-brief.pdf` (46 pages, letter; text-based: `pdftotext` yields the text, fonts embedded). The whole filing, copied unchanged.
 - **Fetched from:** https://www.democracydocket.com/wp-content/uploads/2022/11/2022.11.23-Response-to-Pet.-for-Writ-of-Cert.-S23M0376-KH745067x9D7F4.pdf
 - **Case:** *Georgia Republican Party, et al. v. Democratic Party of Georgia, DSCC, and Warnock for Georgia*, Supreme Court of Georgia, **Case No. S23M0376** (motion number, per the page header "Case S23M0376"); Court of Appeals docket **A23E0013**.
 - **Document:** "Opposition to Emergency Petition for Writ of Certiorari and Emergency Motion to Stay", filed 2022-11-23 (page header "Filed 11/23/2022").
@@ -15,4 +15,4 @@
 
 | File | SHA-256 |
 |---|---|
-| `SAMPLE-ga-motion-brief-democraticpartyofgeorgias23m0376.pdf` | `d15479d0c1d57219a2c98aa00127e23700e58c2a80e3f73af12fe5ede8656459` |
+| `FILED-EXAMPLE-motion-brief.pdf` | `d15479d0c1d57219a2c98aa00127e23700e58c2a80e3f73af12fe5ede8656459` |

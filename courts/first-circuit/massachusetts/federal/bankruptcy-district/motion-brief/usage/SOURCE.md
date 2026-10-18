@@ -1,6 +1,6 @@
 # Exemplar source: motion with memorandum (mab)
 
-- File: `SAMPLE-mab-motion-brief-saintann2604027.pdf` (15 pages, text layer present)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (15 pages, text layer present)
 - Court: United States Bankruptcy Court, District of Massachusetts (Central Division)
 - Case: *Roy v. The Sisters of Saint Ann d/b/a Anna Maria College*, Adv. Proc. No. 26-04027-EDK, in *In re The Sisters of Saint Ann d/b/a Anna Maria College*, Ch. 11 No. 26-40758-EDK
 - Document: Doc. 6, "Debtor's Motion to Dismiss Adversary Complaint Pursuant to Fed. R. Civ. P. 12(b)(6)", with the argument in the same document (no separate memorandum; see README)
@@ -16,7 +16,7 @@
 
 Added 2026-10-17 (fb-595.21.1).
 
-- File: `SAMPLE-mab-motion-brief-shsack2101093.pdf` (32 pages, text layer present; Acrobat PDFMaker 21 for Word; Times New Roman body)
+- File: `FILED-EXAMPLE-motion-brief-2.pdf` (32 pages, text layer present; Acrobat PDFMaker 21 for Word; Times New Roman body)
 - Court: United States Bankruptcy Court, District of Massachusetts (Eastern Division)
 - Case: *NESV Ice, LLC, et al. v. SHS ACK, LLC*, Adv. Proc. No. 21-1093, in *In re NESV Ice, LLC, et al.*, Ch. 11 Case No. 21-11226 (CJP), jointly administered
 - Document: Doc. 5, "SHS ACK, LLC's Memorandum of Law in Support of Its Motion to Dismiss the Complaint" (Fed. R. Civ. P. 12(b)(6) via Fed. R. Bankr. P. 7012(b)); a separate memorandum filed with the motion (the motion itself is Doc. 4), unlike the Saint Ann exemplar, which argues inside the motion. Ends with a certificate of service (p. 32).

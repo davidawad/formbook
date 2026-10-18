@@ -8,10 +8,10 @@ Doc type `adversary-complaint`, under [`../`](../) (the bankruptcy district cour
 |---|---|
 | `typst/main.typ` | Entry point. Reads `--input sample=...`, splits frontmatter, calls the template. |
 | `typst/vib-adversary-complaint.typ` | The template: `complaint(meta, md)`. Every number is a named parameter or traces to a rule. |
-| `usage/INPUT-vib-adversary-complaint-springelfirstamended.md` | Transcription of the filed First Amended Complaint, with the frontmatter contract below. Two sentences are marked `ADDED` (see VIB-AC-JURIS). |
-| `usage/OUTPUT-vib-adversary-complaint-springelfirstamended.typst.pdf` | Our render (`tools/render.sh`). 10 pages. |
+| `usage/INPUT-adversary-complaint.md` | Transcription of the filed First Amended Complaint, with the frontmatter contract below. Two sentences are marked `ADDED` (see VIB-AC-JURIS). |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | Our render (`tools/render.sh`). 10 pages. |
 | `usage/OVERLAY-springel-first-amended.pdf` / `.txt` | Red (ours) / blue (filed) overlay and the page map (`tools/overlay.sh`). |
-| `usage/SAMPLE-vib-adversary-complaint-springelglobalbank0903071.pdf` | The filed exemplar (13 pp., text layer). |
+| `usage/FILED-EXAMPLE-adversary-complaint.pdf` | The filed exemplar (13 pp., text layer). |
 | `usage/SOURCE.md` | Where it came from, filer, case, date filed, URL, date fetched. |
 
 File names follow the tools, not the brief: `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` reads that name and writes `OVERLAY-<id>.pdf/.txt`. The sample is `INPUT-<id>.md` so the file role is in the name (CLAUDE.md).
@@ -19,7 +19,7 @@ File names follow the tools, not the brief: `tools/render.sh` writes `usage/OUTP
 Build and check (from the repo root):
 
 ```sh
-sh tools/render.sh courts/third-circuit/virgin-islands/federal/bankruptcy-district/adversary-complaint usage/INPUT-vib-adversary-complaint-springelfirstamended.md
+sh tools/render.sh courts/third-circuit/virgin-islands/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/third-circuit/virgin-islands/federal/bankruptcy-district/adversary-complaint springel-first-amended
 ```
 
@@ -72,11 +72,11 @@ Markdown body: each numbered paragraph is a markdown list item (`1. ...`). The t
 | p.9 | p.11 | 54.4% |
 | p.10 | p.12 | 45.6% |
 
-The filed document is 13 pages and ours is 10, so later pages drift (the page pairing is by word overlap, so a page that is shorter in ours pairs with a later filed page). Differences that matter for tier 1 or 2 are: the filed document's ECF stamp (not ours), its firm document ID line in the footer (not ours), and its line breaks (tier 3, not chased). The overlay PDF itself was not opened by eye in this pass; the page map above is word-overlap only. The layout claims in "Pages reviewed" come from the rendered pages of `OUTPUT-vib-adversary-complaint-springelfirstamended.typst.pdf`.
+The filed document is 13 pages and ours is 10, so later pages drift (the page pairing is by word overlap, so a page that is shorter in ours pairs with a later filed page). Differences that matter for tier 1 or 2 are: the filed document's ECF stamp (not ours), its firm document ID line in the footer (not ours), and its line breaks (tier 3, not chased). The overlay PDF itself was not opened by eye in this pass; the page map above is word-overlap only. The layout claims in "Pages reviewed" come from the rendered pages of `OUTPUT-adversary-complaint.typst.pdf`.
 
 ## Pages reviewed (Gate 2, this PDF)
 
-All 10 pages of `usage/OUTPUT-vib-adversary-complaint-springelfirstamended.typst.pdf` were rendered at 60 dpi and looked at:
+All 10 pages of `usage/OUTPUT-adversary-complaint.typst.pdf` were rendered at 60 dpi and looked at:
 
 - p.1: cover. Caption, title and first paragraph on one page. Fixed in this pass: caption lines were indented by the paragraph indent (now zero inside the caption); the footer wrapped to three lines and ran into the bottom margin (now a short `footer` field).
 - p.2: headings (PARTIES, JURISDICTION) were larger than the body (set to the body size); paragraphs 1–4.

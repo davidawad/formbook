@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ctd-complaint-forzano326cv00665.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, District of Connecticut
 - Case: *Michelle & Jarett Forzano v. General Motors, LLC*
 - Docket: No. 3:26-cv-00665-KAD (Document 1)
@@ -23,7 +23,7 @@ Other filers checked for a second reference (not saved, because the brief asks f
 
 ## 2. Whitfield class action complaint (added 2026-10-17)
 
-- File: `SAMPLE-ctd-complaint-whitfield326cv00324.pdf`
+- File: `FILED-EXAMPLE-complaint-3.pdf`
 - Court: United States District Court, District of Connecticut
 - Case: *Anthony Whitfield and Rochelle Ribeiro White v. MedGuard Alert, Inc.* (putative class action, TCPA)
 - Docket: No. 3:26-cv-324 (Document 1; the stamp reads "Case 3:26-cv-00324")
@@ -38,7 +38,7 @@ Other filers checked for a second reference (not saved, because the brief asks f
 
 ## 3. Patel complaint (added 2026-10-17)
 
-- File: `SAMPLE-ctd-complaint-patel325cv01916.pdf`
+- File: `FILED-EXAMPLE-complaint-2.pdf`
 - Court: United States District Court, District of Connecticut
 - Case: *Niravkumar Vitthalbhai Patel v. Experian Information Solutions, Inc. and LexisNexis Risk Solutions, Inc.* (FCRA)
 - Docket: No. 3:25-cv-01916 (Document 1)

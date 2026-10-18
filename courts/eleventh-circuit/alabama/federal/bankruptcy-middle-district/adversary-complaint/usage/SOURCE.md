@@ -1,6 +1,6 @@
 # Exemplar source: adversary-complaint (almb)
 
-- File: `SAMPLE-almb-adversary-complaint-southeasternstud.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Fetched from: `https://storage.courtlistener.com/recap/gov.uscourts.almb.196680/gov.uscourts.almb.196680.1.0.pdf` (CourtListener RECAP archive, document 1 of the adversary docket). The docket page is `https://www.courtlistener.com/docket/5181913/1/southeastern-stud-and-components-inc-adversary-proceeding/`.
 - Case: *J. Lester Alexander, III, Chapter 7 Trustee v. The Mill Steel Company, Mill Steel Birmingham, LLC and MSSES Holdings, LLC*, Adv. Proc. No. 15-03014, in bankruptcy case *In re Southeastern Stud and Components, Inc.*, Case No. 14-32906-DHW-7 (Bankr. M.D. Ala., Northern Division).
 - Title on the document: "Adversary Complaint for a Declaratory Judgment to Determine the Validity, Extent and Priority of Liens and Disallow the Proof of Claim of MSSES Holdings, LLC".
@@ -11,11 +11,11 @@
 
 ## Filer count (tier 2)
 
-Two public almb adversary complaints are now saved. `SAMPLE-almb-adversary-complaint-plantbae2403037.pdf` is a text-layer filing from a different filer and is designated as the replacement font/text exemplar for both scanned Southeastern Stud records below. The eval-loop rule asks for 2 or 3 exemplars from different filers for tier 2; those two filers are now represented. See `../README.md`, Gaps, for any remaining comparison limits.
+Two public almb adversary complaints are now saved. `FILED-EXAMPLE-adversary-complaint-2.pdf` is a text-layer filing from a different filer and is designated as the replacement font/text exemplar for both scanned Southeastern Stud records below. The eval-loop rule asks for 2 or 3 exemplars from different filers for tier 2; those two filers are now represented. See `../README.md`, Gaps, for any remaining comparison limits.
 
 ## Replacement for the audited scanned exemplars
 
-- File: `SAMPLE-almb-adversary-complaint-plantbae2403037.pdf` (8 pages)
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf` (8 pages)
 - Court: United States Bankruptcy Court, Middle District of Alabama, Northern Division
 - Case: *Plant Bae, LLC v. QuickBridge Funding LLC*, Adv. No. 24-03037, in *In re Plant Bae, LLC*, Case No. 24-30639, Chapter 11
 - Document: Doc. 1, Complaint (automatic-stay violations; damages and injunctive relief)
@@ -28,7 +28,7 @@ Two public almb adversary complaints are now saved. `SAMPLE-almb-adversary-compl
 - Text layer: yes (`pdftotext` extracts the 8-page complaint); `pdffonts` reports embedded Times New Roman, Liberation Sans, and standard fonts.
 - Public filing: CourtListener RECAP copy.
 
-This text-layer Times New Roman filing replaces the scanned `SAMPLE-almb-adversary-complaint-southeasternstud1503014.pdf` and `SAMPLE-almb-adversary-complaint-southeasternstud.pdf` for font/text-layer comparison. The originals are retained as historical source material.
+This text-layer Times New Roman filing replaces the scanned `FILED-EXAMPLE-adversary-complaint-3.pdf` and `FILED-EXAMPLE-adversary-complaint.pdf` for font/text-layer comparison. The originals are retained as historical source material.
 
 ## Searches tried
 

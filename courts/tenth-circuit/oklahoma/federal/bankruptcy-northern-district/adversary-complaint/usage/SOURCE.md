@@ -1,6 +1,6 @@
 # Exemplar source: adversary complaint, N.D. Okla. Bankruptcy Court (oknb)
 
-**Status: exemplar=yes.** One filed adversary complaint from this court, text-based, saved as `SAMPLE-oknb-adversary-complaint-retherford0901059.pdf`.
+**Status: exemplar=yes.** One filed adversary complaint from this court, text-based, saved as `FILED-EXAMPLE-adversary-complaint.pdf`.
 
 | Field | Value |
 |---|---|

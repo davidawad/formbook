@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "waed-complaint.typ": waed-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-waed-complaint-plenty.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #waed-complaint(meta, body)

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "casd-complaint.typ": casd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-casd-complaint-bachman.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #casd-complaint(meta, body)

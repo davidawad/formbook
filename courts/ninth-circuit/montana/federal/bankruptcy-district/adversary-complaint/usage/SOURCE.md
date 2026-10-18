@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-mtb-adversary-complaint-bache925ap09005.pdf` (4 pages, text layer present; `pdftotext` reads it; fonts are Times New Roman and Courier, some Helvetica and not embedded)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (4 pages, text layer present; `pdftotext` reads it; fonts are Times New Roman and Courier, some Helvetica and not embedded)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.mtb.87374/gov.uscourts.mtb.87374.1.0.pdf (RECAP archive copy of docket entry 1; the CourtListener docket is https://www.courtlistener.com/docket/69943483/1/britani-nichole-bache-and-jason-robert-bache-adversary-proceeding/)
 - Court: United States Bankruptcy Court for the District of Montana (judge suffix BPH; the case-number prefix is the filing division under LBR 9004-1)
 - Case: *Robert G. Drummond, Chapter 13 Standing Trustee v. Teri A. Noble*, Adversary No. 9:25-ap-09005-BPH, in *In re Britani Nichole Bache and Jason Robert Bache*, Bankr. No. 9:23-bk-90138-BPH

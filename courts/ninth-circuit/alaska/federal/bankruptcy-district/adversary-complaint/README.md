@@ -28,12 +28,12 @@ Not used, and why: LBR 7001-1 (applies D. Alaska Civil L.R. 7.1 etc. in adversar
 
 ## Exemplar
 
-- `usage/SAMPLE-akb-adversary-complaint-battleyfurie1890016.pdf`: Complaint for Avoidance and Recovery of Payments, Adv. Proc. No. 18-90016, filed May 14, 2018 by the Chapter 7 Trustee's counsel. 3 pages, text layer present. Only one exemplar (see gaps).
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf`: Complaint for Avoidance and Recovery of Payments, Adv. Proc. No. 18-90016, filed May 14, 2018 by the Chapter 7 Trustee's counsel. 3 pages, text layer present. Only one exemplar (see gaps).
 - Provenance, searches and caveats: `usage/SOURCE.md`.
 
 ## Sample
 
-- `usage/INPUT-akb-adversary-complaint-battleyfuriecomplaint.md`: transcription of the whole filing: attorney block, caption (debtor, plaintiff, defendants; case numbers), title and subtitle, lead-in, all 11 allegations under 3 headings (I, II, III.A), the table (Table 3.2), the request for relief (A.-D.), the signature block.
+- `usage/INPUT-adversary-complaint.md`: transcription of the whole filing: attorney block, caption (debtor, plaintiff, defendants; case numbers), title and subtitle, lead-in, all 11 allegations under 3 headings (I, II, III.A), the table (Table 3.2), the request for relief (A.-D.), the signature block.
 - Frontmatter follows the field contract of the cand samples (`counsel`, `caption.parties`, `brief_title`, `lead_in`, `signature`). New fields for this court: `brief_subtitle`, `consent`, `date` (optional).
 - Two things are not transcription: (1) the `consent` value, a placeholder `Plaintiff [does / does not] consent ...` added because the filing has no consent statement and the template requires one; (2) the Typst output prints the placeholder text, so the sample PDF is not a finished filing. An author must replace it.
 - The template numbers the allegations itself (1, 2, 3 ...). The filing numbers them by section (1, 1.2, 2.1, 3.2); the sample does not reproduce those numbers.
@@ -42,11 +42,11 @@ Not used, and why: LBR 7001-1 (applies D. Alaska Civil L.R. 7.1 etc. in adversar
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env "tb")
-sh tools/render.sh courts/ninth-circuit/alaska/federal/bankruptcy-district/adversary-complaint usage/INPUT-akb-adversary-complaint-battleyfuriecomplaint.md
+sh tools/render.sh courts/ninth-circuit/alaska/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/ninth-circuit/alaska/federal/bankruptcy-district/adversary-complaint battley-furie-complaint
 ```
 
-- `usage/OUTPUT-akb-adversary-complaint-battleyfuriecomplaint.typst.pdf`: 3 pages. typst compiled with no warnings. Fonts: EBGaramond-Regular and EBGaramond-Bold, embedded (vendored only).
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: 3 pages. typst compiled with no warnings. Fonts: EBGaramond-Regular and EBGaramond-Bold, embedded (vendored only).
 - `usage/OVERLAY-battley-furie-complaint.pdf` and `.txt`: red = our render, blue = filed exemplar, black = both. The page pairing is by word overlap: ours p.1 ↔ filed p.1 (77%), p.2 ↔ p.2 (61%), p.3 ↔ p.3 (53%).
 - File-name note: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `OVERLAY-<id>.pdf`/`.txt` (repo convention). The brief's `<id>.pdf` and `<id>-overlay.pdf` names are not used, because the shared tools fix these names.
 - Line pitch measured with `pdftotext -bbox` on page 2: baselines 90.6, 114.6, 138.6 pt, a 24 pt pitch (double spacing).
@@ -78,7 +78,7 @@ Reviewed pages: 3 of 3.
 |---|---|---|---|---|
 | adversary-complaint | none: LBR 9004-1(a)(7) says "twelve (12) point or ten (10) pitch type" and names no face (text checked 2026-10-14 from the 12/2024 LBR PDF, `pdftotext`) | none; kept EB Garamond (`EB Garamond`, SIL OFL 1.1) | n/a | the exemplar's Times New Roman is the filer's choice, not a rule |
 
-The filed exemplar is set in Times New Roman, but no rule requires it, so the court-named-face substitution (`docs/FONTS.md`) does not apply here. Render check: `pdffonts` on `usage/OUTPUT-akb-adversary-complaint-battleyfuriecomplaint.typst.pdf` shows `EBGaramond-Regular` and `EBGaramond-Bold`, embedded, and no other face.
+The filed exemplar is set in Times New Roman, but no rule requires it, so the court-named-face substitution (`docs/FONTS.md`) does not apply here. Render check: `pdffonts` on `usage/OUTPUT-adversary-complaint.typst.pdf` shows `EBGaramond-Regular` and `EBGaramond-Bold`, embedded, and no other face.
 7. **Paragraph numbering.** The template numbers paragraphs continuously (Fed. R. Civ. P. 10(b)); the filed exemplar numbers by section. The sample's numbers differ from the filing's.
 8. **Length.** The exemplar is 3 pages, so the sample is 3 pages; the 8-14 page target applies to longer exemplars and does not apply here.
 9. **One exemplar.** The eval-loop tier 2 rule asks for 2 or 3 filings from different filers. Only one adversary complaint from this court was fetched; the other complaints found (Gebhardt v. Aegis 16-90020; Cook Inlet 17-90028, 17-90059) were not reachable in this run (HTTP 202 throttling). Tier 2 is therefore not judged against a second filer.

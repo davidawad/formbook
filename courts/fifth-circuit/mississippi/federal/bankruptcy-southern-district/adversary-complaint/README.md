@@ -4,9 +4,9 @@ Doc type: **adversary-complaint** in the United States Bankruptcy Court for the 
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-mssb-adversary-complaint-griffin1800028.pdf` (primary; Trustee's complaint, 16 pp.). Second filer, for tier 2: `usage/SAMPLE-mssb-adversary-complaint-tate2506012.pdf` (Debtor's complaint, 3 pp.). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-mssb-adversary-complaint-griffin.md`: the whole filed complaint, transcribed (see Known gaps for the two additions) |
-| render | ok: `usage/OUTPUT-mssb-adversary-complaint-griffin.typst.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (primary; Trustee's complaint, 16 pp.). Second filer, for tier 2: `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (Debtor's complaint, 3 pp.). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-adversary-complaint.md`: the whole filed complaint, transcribed (see Known gaps for the two additions) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-griffin-adversary-complaint.pdf` and `.txt` (`sh tools/overlay.sh`) |
 | pages reviewed | 15 of 15 (every page rendered at 60 dpi and viewed, final template) |
 | tier 1 | rules-driven template; asserts that stop the build if counsel e-mail, bar number, telephone or street address, the consent statement, the caption case data, or the title is missing (checked: a sample with no e-mail fails with the rule cited). |
@@ -19,8 +19,8 @@ Doc type: **adversary-complaint** in the United States Bankruptcy Court for the 
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `mssb-adversary-complaint`. |
 | `typst/mssb-adversary-complaint.typ` | Template. Parameters at the top, each with its rule. Rule asserts in `check-meta`. |
-| `usage/INPUT-mssb-adversary-complaint-griffin.md` | Markdown contract sample (frontmatter + body). |
-| `usage/OUTPUT-mssb-adversary-complaint-griffin.typst.pdf` | `sh tools/render.sh courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-mssb-adversary-complaint-griffin.md` |
+| `usage/INPUT-adversary-complaint.md` | Markdown contract sample (frontmatter + body). |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-adversary-complaint.md` |
 | `usage/OVERLAY-griffin-adversary-complaint.pdf`, `.txt` | `sh tools/overlay.sh <this folder> griffin-adversary-complaint` (red = ours, blue = filed, black = agree) |
 | `usage/` | Two filed exemplars and `SOURCE.md`. |
 
@@ -59,10 +59,10 @@ Three engines run from one markdown contract. `typst/` is the primary template a
 
 | Engine | Output in `usage/` | Result |
 |---|---|---|
-| typst | `OUTPUT-mssb-adversary-complaint-griffin.typst.pdf` | unchanged |
-| docx | `OUTPUT-mssb-adversary-complaint-griffin.docx` | written and checked for package integrity; `.docx.pdf` BLOCKED (below) |
+| typst | `OUTPUT-adversary-complaint.typst.pdf` | unchanged |
+| docx | `OUTPUT-adversary-complaint.docx` | written and checked for package integrity; `.docx.pdf` BLOCKED (below) |
 
-Build: `sh docx/make-reference.sh` once (writes `docx/reference.docx` from pandoc's default, with the court's styles and footer), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-mssb-adversary-complaint-griffin.md`. The filter is `docx/mssb-adversary-complaint.lua`. The render script's LibreOffice step fails on the box used here; the `.docx` is written before that step.
+Build: `sh docx/make-reference.sh` once (writes `docx/reference.docx` from pandoc's default, with the court's styles and footer), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`. The filter is `docx/mssb-adversary-complaint.lua`. The render script's LibreOffice step fails on the box used here; the `.docx` is written before that step.
 
 What the docx build sets to the typst form (from the same frontmatter). These are settings in the XML and the filter, not a rendered comparison: no page has been rendered (see below).
 
@@ -99,7 +99,7 @@ docx BLOCKED (not verified by a render):
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-mssb-adversary-complaint-griffin.typst.pdf` was rendered at 60 dpi and viewed in its final form.
+Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and viewed in its final form.
 
 | Page | Content | Result |
 |---|---|---|

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-cacb-motion-brief-jamescapitaladvisors223bk14820bb.pdf` (11 pages, text layer present; pages 1-7 and 10-11 are text, page 9 is a scanned image, rotated 180 degrees, of the declaration's last paragraphs and signature)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (11 pages, text layer present; pages 1-7 and 10-11 are text, page 9 is a scanned image, rotated 180 degrees, of the declaration's last paragraphs and signature)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.cacb.1968732/gov.uscourts.cacb.1968732.48.0.pdf (RECAP document; docket page https://www.courtlistener.com/docket/67651461/48/james-capital-advisors-inc/)
 - Court: United States Bankruptcy Court, Central District of California, Los Angeles Division (Hon. Sheri Bluebond)
 - Case: *In re James Capital Advisors, Inc.*, Chapter 7 (petition filed July 31, 2023)
@@ -26,7 +26,7 @@ Searched for a text-based, public motion with a memorandum of points and authori
 
 A second filed C.D. Cal. bankruptcy motion with a memorandum, from a filer other than a Danning Gill trustee (for example, a creditor's or debtor's motion, such as Zions Bancorporation's remand motion, 8:26-ap-01060 Doc 16), would give a second tier-2 comparison.
 
-- File: `SAMPLE-cacb-motion-brief-lordon225bk19832.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Filer: Debtor Lordon Enterprises, Inc., by Salvato Boufadel LLP (Misty Perry Isaacson and Joseph Boufadel)
 - Case: *In re Lordon Enterprises, Inc.*, No. 2:25-bk-19832-BR (Doc. 71)
 - Date filed: 2026-02-02

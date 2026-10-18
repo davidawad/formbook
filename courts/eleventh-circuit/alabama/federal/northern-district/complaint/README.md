@@ -2,8 +2,8 @@
 
 - Court: `alnd`, United States District Court for the Northern District of Alabama (`courts/eleventh-circuit/alabama/federal/northern-district/`)
 - Doc type: `complaint`. Original complaint, Southern Division; numbered paragraphs, caption, counts, prayer, signature block.
-- Exemplar: `usage/SAMPLE-alnd-complaint-sec226cv01586.pdf` (*The Southeastern Conference v. Louisiana State University, et al.*, No. 2:26-cv-01586-ACA, Doc. 1, filed 2026-09-03, 29 pages; provenance in `usage/SOURCE.md`). Re-downloaded from CourtListener RECAP on 2026-10-14.
-- Sample: `usage/INPUT-alnd-complaint-sec.md` (transcription of selected pages; see Known gaps).
+- Exemplar: `usage/FILED-EXAMPLE-complaint.pdf` (*The Southeastern Conference v. Louisiana State University, et al.*, No. 2:26-cv-01586-ACA, Doc. 1, filed 2026-09-03, 29 pages; provenance in `usage/SOURCE.md`). Re-downloaded from CourtListener RECAP on 2026-10-14.
+- Sample: `usage/INPUT-complaint.md` (transcription of selected pages; see Known gaps).
 - Status: template present, render and overlay re-run on 2026-10-14 (fonts pass: no face named by the court's rules, so EB Garamond stays; see Typeface); every page of the render reviewed (10 of 10). Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,8 +12,8 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `alnd-complaint`. |
 | `typst/alnd-complaint.typ` | Template. Parameter block at the top: typeface (EB Garamond 13 pt), double spacing (24 pt pitch), margins, paragraph indent, caption column width. |
-| `usage/INPUT-alnd-complaint-sec.md` | Markdown contract sample: YAML frontmatter (court, caption, title, lead-in, date line, signature) plus the numbered body. |
-| `usage/OUTPUT-alnd-complaint-sec.typst.pdf` | `sh tools/render.sh courts/eleventh-circuit/alabama/federal/northern-district/complaint usage/INPUT-alnd-complaint-sec.md` (10 pages). |
+| `usage/INPUT-complaint.md` | Markdown contract sample: YAML frontmatter (court, caption, title, lead-in, date line, signature) plus the numbered body. |
+| `usage/OUTPUT-complaint.typst.pdf` | `sh tools/render.sh courts/eleventh-circuit/alabama/federal/northern-district/complaint usage/INPUT-complaint.md` (10 pages). |
 | `usage/OVERLAY-sec-complaint.pdf`, `OVERLAY-sec-complaint.txt` | `sh tools/overlay.sh courts/eleventh-circuit/alabama/federal/northern-district/complaint sec-complaint` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -69,7 +69,7 @@ Pairing is by word overlap; low scores (below 40%) on pages 4 to 6 and 9 are the
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-alnd-complaint-sec.typst.pdf` was rasterized (`pdftoppm -r 60`) and viewed: 10 of 10. Typst printed no warnings. Only EB Garamond is embedded. A scan of the text positions of every page (`pdftotext -bbox`) found no line pair closer than 12 pt.
+Every page of `OUTPUT-complaint.typst.pdf` was rasterized (`pdftoppm -r 60`) and viewed: 10 of 10. Typst printed no warnings. Only EB Garamond is embedded. A scan of the text positions of every page (`pdftotext -bbox`) found no line pair closer than 12 pt.
 
 | Page | Content | Result |
 |---|---|---|
@@ -92,7 +92,7 @@ Tier-2 findings (OPEN or ACCEPTED):
 
 ## Engines
 
-The docx engine (`docx/`: `make-reference.sh` builds `reference.docx`, `alnd-complaint.lua` builds the cover, the numbered paragraphs and the signature block) renders `usage/OUTPUT-alnd-complaint-sec.docx` and `.docx.pdf` (the LibreOffice conversion). Every page of the `.docx.pdf` (10 of 10) was rasterized (`pdftoppm -r 60`) and compared with the typst render of the same sample.
+The docx engine (`docx/`: `make-reference.sh` builds `reference.docx`, `alnd-complaint.lua` builds the cover, the numbered paragraphs and the signature block) renders `usage/OUTPUT-complaint.docx` and `.docx.pdf` (the LibreOffice conversion). Every page of the `.docx.pdf` (10 of 10) was rasterized (`pdftoppm -r 60`) and compared with the typst render of the same sample.
 
 | Item | typst (primary) | docx |
 |---|---|---|
@@ -117,7 +117,7 @@ docx BLOCKED items:
 
 ## Known gaps
 
-1. The sample is a transcription of selected parts of the 29-page exemplar. The frontmatter comment in `INPUT-alnd-complaint-sec.md` lists which paragraphs and sections are transcribed; Count II and the pages between are not. The template numbers the allegations itself, so the sample numbers run from 1 and do not match the filed paragraph numbers.
+1. The sample is a transcription of selected parts of the 29-page exemplar. The frontmatter comment in `INPUT-complaint.md` lists which paragraphs and sections are transcribed; Count II and the pages between are not. The template numbers the allegations itself, so the sample numbers run from 1 and do not match the filed paragraph numbers.
 2. The sample has no certificate of service. A complaint is served with the summons under Rule 4, so the template has no certificate block; the template does not render one.
 3. The class-action legend (LR 23.1) is supported but not exercised: the sample is not a class action, so the legend is absent from its caption.
 4. Italics of case names are not in the exemplar's text layer and are not transcribed; the sample's case names are plain text.

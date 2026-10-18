@@ -8,9 +8,9 @@ Court: U.S. Navy-Marine Corps Court of Criminal Appeals (`nmcca`). Doc type: ope
 |---|---|
 | `typst/nmcca-opening-brief.typ` | The template: `nmcca-opening-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule ID below. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
-| `usage/SAMPLE-nmcca-opening-brief-miles201300272.pdf` | The filed exemplar (appellant's brief, *U.S. v. Miles*, NMCCA No. 201300272, 2013). Provenance in `usage/SOURCE.md`. |
-| `usage/INPUT-nmcca-opening-brief-miles.md` | Transcription of part of that exemplar (cover, index source, assignments, jurisdiction, statement of the case, the opening facts, summary, Argument I, conclusion, signature, certificate). |
-| `usage/OUTPUT-nmcca-opening-brief-miles.typst.pdf` | Our render of the sample (12 pages). |
+| `usage/FILED-EXAMPLE-opening-brief.pdf` | The filed exemplar (appellant's brief, *U.S. v. Miles*, NMCCA No. 201300272, 2013). Provenance in `usage/SOURCE.md`. |
+| `usage/INPUT-opening-brief.md` | Transcription of part of that exemplar (cover, index source, assignments, jurisdiction, statement of the case, the opening facts, summary, Argument I, conclusion, signature, certificate). |
+| `usage/OUTPUT-opening-brief.typst.pdf` | Our render of the sample (12 pages). |
 | `usage/OVERLAY-miles-opening-brief.pdf`, `.txt` | Red (ours) / blue (filed) overlay and the page map. |
 
 File names follow the repo tools, not the shorter names in the brief: `tools/render.sh` writes `OUTPUT-<id>.pdf`, `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf/.txt`, so the id is `miles-opening-brief`.
@@ -19,7 +19,7 @@ Build and overlay (from the repo root, with the toolchain on PATH):
 
 ```sh
 D=courts/military/navy-marine-corps-court-of-criminal-appeals/opening-brief
-sh tools/render.sh $D usage/INPUT-nmcca-opening-brief-miles.md     # -> usage/OUTPUT-nmcca-opening-brief-miles.typst.pdf
+sh tools/render.sh $D usage/INPUT-opening-brief.md     # -> usage/OUTPUT-opening-brief.typst.pdf
 sh tools/overlay.sh $D miles-opening-brief                     # -> usage/OVERLAY-miles-opening-brief.pdf and .txt
 ```
 
@@ -62,7 +62,7 @@ https://stjececmsdusgva001.blob.core.usgovcloudapi.net/public/documents/2022_NMC
 - CourtListener NMCCA filings: the search at `courtlistener.com` returned HTTP 403 to the fetch tool; web search for NMCCA appellant's briefs on CourtListener returned no brief.
 - Navy JAG NMCCA page (`jag.navy.mil/.../code-05/nmcca/`): lists the docket, opinions and oral arguments; no briefs.
 - Web searches for NMCCA appellant's briefs: found the Miles brief (used here) and unpublished NMCCA opinions only.
-- The Miles brief was also found on a third-party mirror (`mirror.hep.gg`), now a 404; the ncsfreedom copy was used. It is saved as `usage/SAMPLE-nmcca-opening-brief-miles201300272.pdf` (fetched again 2026-10-14; 63 pages, created 17 Dec 2013, as `usage/SOURCE.md` describes), which the overlay reads.
+- The Miles brief was also found on a third-party mirror (`mirror.hep.gg`), now a 404; the ncsfreedom copy was used. It is saved as `usage/FILED-EXAMPLE-opening-brief.pdf` (fetched again 2026-10-14; 63 pages, created 17 Dec 2013, as `usage/SOURCE.md` describes), which the overlay reads.
 
 ## Exemplar: what it settles and what it does not
 
@@ -70,7 +70,7 @@ The exemplar is a 2013 filing: 12-point Times New Roman, single-spaced, under th
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-nmcca-opening-brief-miles.typst.pdf` (12 pages) was rendered at 60 dpi with `pdftoppm -r 60` and looked at. The table is from the pass of 2026-10-14 that ran after the footnote-size fix (see "Changed 2026-10-14"). PDF page n is body page n-2 for n of 3 and up; the index prints roman "ii".
+Every page of `OUTPUT-opening-brief.typst.pdf` (12 pages) was rendered at 60 dpi with `pdftoppm -r 60` and looked at. The table is from the pass of 2026-10-14 that ran after the footnote-size fix (see "Changed 2026-10-14"). PDF page n is body page n-2 for n of 3 and up; the index prints roman "ii".
 
 | PDF page | Content | Finding |
 |---|---|---|
@@ -90,7 +90,7 @@ Overlay: `OVERLAY-miles-opening-brief.txt` pairs each sample page with the filed
 ## Changed 2026-10-14
 
 - **Footnote size.** The footnote entries rendered at about 12 pt (glyph boxes 15.5 pt high against 18.3 pt for body text), not the 14 pt Rule 17(c) requires for footnotes. Both templates now set `footnote.entry` text to `type-size`. Footnote boxes now match body text (18.3 pt). Page count is unchanged (12). Layout moved: the signature block now sits with the conclusion.
-- **Exemplar restored.** `usage/SAMPLE-nmcca-opening-brief-miles201300272.pdf` was missing from this folder, so the overlay could not run. It is the file `SOURCE.md` describes.
+- **Exemplar restored.** `usage/FILED-EXAMPLE-opening-brief.pdf` was missing from this folder, so the overlay could not run. It is the file `SOURCE.md` describes.
 
 ## Known gaps
 
@@ -111,9 +111,9 @@ Overlay: `OVERLAY-miles-opening-brief.txt` pairs each sample page with the filed
 
 ### docx (`docx/`)
 
-Files: `docx/reference.docx` (built by `sh docx/build-reference.sh reference.docx`: EB Garamond 14 pt with the font named explicitly in the styles and theme, exact 33.6 pt body spacing, exact 16.8 pt single spacing, 0.5 in first-line indent, letter page, 1 in margins, centred PAGE footer), `docx/nmcca.lua` (cover, caption, index, signature block and certificate; heading labels per NMCCA-CONT-004), `docx/render.sh` (two layout passes so the index page numbers come from the PDF). Render: `sh tools/render.sh --engine docx <this-folder> usage/INPUT-nmcca-opening-brief-miles.md`.
+Files: `docx/reference.docx` (built by `sh docx/build-reference.sh reference.docx`: EB Garamond 14 pt with the font named explicitly in the styles and theme, exact 33.6 pt body spacing, exact 16.8 pt single spacing, 0.5 in first-line indent, letter page, 1 in margins, centred PAGE footer), `docx/nmcca.lua` (cover, caption, index, signature block and certificate; heading labels per NMCCA-CONT-004), `docx/render.sh` (two layout passes so the index page numbers come from the PDF). Render: `sh tools/render.sh --engine docx <this-folder> usage/INPUT-opening-brief.md`.
 
-Matches the typst output: the typeface (`pdffonts` on `OUTPUT-nmcca-opening-brief-miles.docx.pdf`: EBGaramond Regular, Italic, Bold, BoldItalic, all embedded; no Noto, Aptos or Calibri), the 14 pt size of body, footnotes and headings, the line pitch (33.6 pt body, 16.8 pt single, measured on both PDFs), the cover layout and its 2 in bottom margin (the counsel block sits at the foot of the cover), the index on its own page numbered "ii" (cover counted, not printed), the body numbered from 1, the Argument labels (I., A., 1., a.) with hanging indents and bold italic Argument points, the signature block, and the certificate on its own page.
+Matches the typst output: the typeface (`pdffonts` on `OUTPUT-opening-brief.docx.pdf`: EBGaramond Regular, Italic, Bold, BoldItalic, all embedded; no Noto, Aptos or Calibri), the 14 pt size of body, footnotes and headings, the line pitch (33.6 pt body, 16.8 pt single, measured on both PDFs), the cover layout and its 2 in bottom margin (the counsel block sits at the foot of the cover), the index on its own page numbered "ii" (cover counted, not printed), the body numbered from 1, the Argument labels (I., A., 1., a.) with hanging indents and bold italic Argument points, the signature block, and the certificate on its own page.
 
 Differs from the typst output:
 

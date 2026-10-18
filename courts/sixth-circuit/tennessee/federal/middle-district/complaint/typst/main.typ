@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "tnmd-complaint.typ": tnmd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-tnmd-complaint-doge.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #tnmd-complaint(meta, body)

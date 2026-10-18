@@ -5,10 +5,10 @@ Folder: `courts/tenth-circuit/oklahoma/federal/eastern-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-oked-motion-brief-ffrf625cv00094.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-oked-motion-brief-ffrfmotiontodismiss.md`: a transcription of pages 1 to 11 and 15 to 17 of the 17-page filing (pages 12 to 14 are marked omitted in the sample; footnote 5 is not transcribed) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: a transcription of pages 1 to 11 and 15 to 17 of the 17-page filing (pages 12 to 14 are marked omitted in the sample; footnote 5 is not transcribed) |
 | typeface | no face named by the court's rules (LCvR 5.2(a); checked 2026-10-15). EB Garamond stays, per `docs/FONTS.md` ("No face named"). See gap 4 |
-| render | ok: `usage/OUTPUT-oked-motion-brief-ffrfmotiontodismiss.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings. Re-rendered 2026-10-15; `pdffonts` shows EBGaramond Regular, Bold and Italic embedded |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings. Re-rendered 2026-10-15; `pdffonts` shows EBGaramond Regular, Bold and Italic embedded |
 | overlay | ok, re-run 2026-10-15 against the exemplar fetched from the URL in `usage/SOURCE.md` (the PDF is not in the repo; passed to `tools/overlay.sh` as its third argument): `usage/OVERLAY-ffrf-motion-to-dismiss.pdf` and `.txt`; pairing worked (word overlap 39% to 93% per page) |
 | pages reviewed | 11 of 11 (every page re-rendered at 60 dpi and viewed on 2026-10-15) |
 | tier 2 | not judged against two filers: one exemplar only (gap 1) |
@@ -58,7 +58,7 @@ Not checked against a rule: the certificate of service and the "Date:" line are 
 8. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at its root. This doc-type folder has neither, and the brief forbids changing `tools/`. Render and overlay were run, and the review below is the Gate 2 equivalent for this doc type.
 9. **Tool output names.** `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `.txt`. The brief named `<id>.pdf` and `<id>-overlay.pdf`. The tools' names are used because `overlay.sh` reads `OUTPUT-<id>.pdf`.
 
-## Review of the rendered pages (current PDF, `OUTPUT-oked-motion-brief-ffrfmotiontodismiss.typst.pdf`)
+## Review of the rendered pages (current PDF, `OUTPUT-motion-brief.typst.pdf`)
 
 Compared with the exemplar's corresponding pages (exemplar page numbers in the right column).
 
@@ -87,5 +87,5 @@ Typst is the primary engine. The DOCX engine is pandoc with `docx/reference.docx
 
 - Matches the typst form: EB Garamond 12 pt; body at an exact 24 pt pitch with a 0.5 in first-line indent; 1 in margins; single-spaced headings' second lines, block quotations, footnotes and signature block; the caption as a bordered cell beside the case number and judge; the certificate of service on a new page.
 - Differs: Word may paginate differently from typst; the caption box is a table cell border, which Word and LibreOffice draw slightly differently; the TOC and TOA (LCvR 7.1(c), gap 2) are not produced by either engine; the "keep the conclusion with the signature" rule is a Word keep-with-next chain, which LibreOffice may break differently.
-- DOCX BLOCKED items: `docx.pdf` (the LibreOffice PDF) is not produced: `soffice` is not installed on the box and cannot be installed without root. `tools/render-docx.sh` fails at its zip-integrity step because `unzip` is not installed, so `usage/OUTPUT-oked-motion-brief-ffrfmotiontodismiss.docx` is written but the command exits 1 before the PDF step. The XML parts of the written `.docx` were checked with `ziptool` and `xmllint` (17 of 17 well formed). Visual review of the docx pages: not done (no renderer); pages reviewed = 0. Not verified: that the file opens in Word or LibreOffice without a repair prompt.
+- DOCX BLOCKED items: `docx.pdf` (the LibreOffice PDF) is not produced: `soffice` is not installed on the box and cannot be installed without root. `tools/render-docx.sh` fails at its zip-integrity step because `unzip` is not installed, so `usage/OUTPUT-motion-brief.docx` is written but the command exits 1 before the PDF step. The XML parts of the written `.docx` were checked with `ziptool` and `xmllint` (17 of 17 well formed). Visual review of the docx pages: not done (no renderer); pages reviewed = 0. Not verified: that the file opens in Word or LibreOffice without a repair prompt.
 - Gate 0/1/2/3 for the docx engine are not run (`tools/check.sh --engine docx` needs the `.docx.pdf`).

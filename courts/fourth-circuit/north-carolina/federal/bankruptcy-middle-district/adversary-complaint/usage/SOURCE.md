@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ncmb-adversary-complaint-andersonnovus2406026.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Middle District of North Carolina (Winston-Salem Division)
 - Case: *Brian R. Anderson, Chapter 7 Trustee for Chadley Management Inc. v. Novus Capital Funding LLC*, adversary proceeding 24-06026, main case In re Chadley Management Inc., No. 22-50726 (Chapter 7)
 - Document: Complaint (34 pages with Exhibits A and B; the complaint body is pages 1 to 10), filed as Doc 1

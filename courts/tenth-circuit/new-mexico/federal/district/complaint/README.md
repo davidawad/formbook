@@ -5,9 +5,9 @@ Folder: `courts/tenth-circuit/new-mexico/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nmd-complaint-pillow126cv03383.pdf` (1 filer, counsel-filed; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nmd-complaint-pillow.md` (a portion of the 15-page filing; see Known gaps) |
-| render | ok: `usage/OUTPUT-nmd-complaint-pillow.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer, counsel-filed; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (a portion of the 15-page filing; see Known gaps) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-pillow-complaint.pdf` and `OVERLAY-pillow-complaint.txt` (`tools/overlay.sh`) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
 

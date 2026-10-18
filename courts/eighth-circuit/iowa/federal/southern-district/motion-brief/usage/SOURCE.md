@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-iasd-motion-brief-hanfling426cv00213.pdf` (40 pages, text layer present; `pdftotext` reads it, Times New Roman embedded)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (40 pages, text layer present; `pdftotext` reads it, Times New Roman embedded)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.iasd.94306/gov.uscourts.iasd.94306.14.1.pdf (CourtListener RECAP, docket 4:26-cv-00213-RGE-HCA, document 14-1)
 - Court: United States District Court, Southern District of Iowa, Central Division
 - Case: *Hanfling v. Grinnell College*, Case No. 4:26-cv-00213-RGE-HCA (plaintiff Eyal Hanfling, individually and on behalf of others similarly situated)

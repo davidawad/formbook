@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "idb-adversary-complaint.typ": idb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-idb-adversary-complaint-cutting.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #idb-adversary-complaint(meta, body)

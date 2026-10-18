@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nysb-adversary-complaint.typ": nysb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nysb-adversary-complaint-celsiuscomplaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #nysb-adversary-complaint(meta, body)

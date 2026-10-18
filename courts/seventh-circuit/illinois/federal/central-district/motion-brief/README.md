@@ -5,9 +5,9 @@ Folder: `courts/seventh-circuit/illinois/federal/central-district/motion-brief/`
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ilcd-motion-brief-ives326cv03158.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ilcd-motion-brief-ivesmemorandum.md` (a portion of the memorandum: cover, introduction, background, legal standard, the opening of Points I to III, conclusion, signature, certificate) |
-| render | ok: `usage/OUTPUT-ilcd-motion-brief-ivesmemorandum.typst.pdf`, 9 pages (cover, contents i, authorities ii, body 1 to 5, certificate 6), typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (a portion of the memorandum: cover, introduction, background, legal standard, the opening of Points I to III, conclusion, signature, certificate) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages (cover, contents i, authorities ii, body 1 to 5, certificate 6), typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-ives-memorandum.pdf` and `OVERLAY-ives-memorandum.txt` |
 | pages reviewed | 9 of 9, every page rendered at 60 dpi and viewed. The conclusion was moved onto the signature page after pages 1 to 7 were viewed; those pages are unchanged by the move. Re-rendered and re-viewed 2026-10-15 in the fonts pass (no font change); that pass found gap 10 on page 5, which the earlier review had passed. |
 
@@ -80,7 +80,7 @@ The overlay (`OVERLAY-ives-memorandum.txt`) pairs our pages 1 to 9 with the file
 
 ## Engines
 
-**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/ilcd.lua` lays out the cover, caption, contents and authorities, the body, the signature block and the certificate of compliance, in three sections (cover without a page number; contents and authorities in roman numerals; body and certificate in arabic from 1). Built by `sh tools/render.sh --engine docx <this folder> usage/INPUT-ilcd-motion-brief-ivesmemorandum.md`, which writes `usage/OUTPUT-ilcd-motion-brief-ivesmemorandum.docx`.
+**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/ilcd.lua` lays out the cover, caption, contents and authorities, the body, the signature block and the certificate of compliance, in three sections (cover without a page number; contents and authorities in roman numerals; body and certificate in arabic from 1). Built by `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx`.
 
 - Matches the typst form: EB Garamond 12 pt body; exact 24 pt (double) line pitch; 0.5 in first-line indent; letter paper, 1 in margins; the three numbering sections; level 1 to 4 heading styles (centered caps; bold hanging indents for levels 2 and 3; bold italic for level 4); single-spaced, indented block quotations; footnotes 10 pt single; the counsel block at 3.25 in; "Dated" and "Respectfully submitted," on one line; the conclusion kept with the signature block (keep-with-next). The certificate's word count is the typst count of the body markdown (1771 for this sample, the same figure as the typst render).
 - Differs or unverified: the footer's section references use the relationship id `rId9` that pandoc 3.6.4 gives the footer part in this reference (checked on the output; a different pandoc may renumber it, which would break the section footers, so re-check after a pandoc change). The caption's ")" marks are one per caption line as written, not one per wrapped line (BLOCKED, see below). The keep-with-next chain for the conclusion is set but not verified by a render. Footnote 1 prints its text in this engine (the typst gap 10 does not apply here). EB Garamond must be installed on the machine that opens the file.

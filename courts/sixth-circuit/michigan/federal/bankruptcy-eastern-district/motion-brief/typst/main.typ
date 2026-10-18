@@ -4,7 +4,7 @@
 //     typst/main.typ out.pdf
 #import "mieb-motion-brief.typ": motion-body, motion-doc, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-mieb-motion-brief-heitmann.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 
 #show: motion-doc.with(meta)

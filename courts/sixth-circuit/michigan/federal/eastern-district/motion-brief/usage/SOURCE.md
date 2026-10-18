@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-mied-motion-brief-soboleski226cv11195.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Eastern District of Michigan, Southern Division
 - Case: *Victoria Soboleski v. Earth Protect LLC*
 - Docket: No. 2:26-cv-11195-LVP-KGA

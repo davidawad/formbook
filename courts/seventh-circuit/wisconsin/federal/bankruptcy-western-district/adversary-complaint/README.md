@@ -38,13 +38,13 @@ The court's published local rules page (`https://ecf.wiwb.uscourts.gov/wiwb/Deci
 
 ## Exemplar
 
-- `usage/SAMPLE-wiwb-adversary-complaint-wenzel31500105.pdf`: "Complaint Determining the Validity of a Claimed Lien under Rule 7001(2)", *Wenzel v. Green Tree Servicing LLC*, adversary 3-15-00105 (underlying Bankr. No. 13-15445), filed by the debtor's counsel July 17, 2015. 3 pages, text layer present. Provenance and searches are in `usage/SOURCE.md`.
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf`: "Complaint Determining the Validity of a Claimed Lien under Rule 7001(2)", *Wenzel v. Green Tree Servicing LLC*, adversary 3-15-00105 (underlying Bankr. No. 13-15445), filed by the debtor's counsel July 17, 2015. 3 pages, text layer present. Provenance and searches are in `usage/SOURCE.md`.
 - **Only one exemplar.** The eval loop wants two or three from different filers before tier 2 is judged. Searches for a second one are in `usage/SOURCE.md`: none found with a text layer. Tier 2 is therefore judged against one filing and the rules, not against a set.
 - The exemplar predates the 2016 amendment to Rule 7008(a). It states that the proceeding is "core" and has no consent statement. The template requires the consent statement (see Known gaps).
 
 ## Sample
 
-- `usage/INPUT-wiwb-adversary-complaint-wenzelcomplaint.md`: a transcription of the exemplar's caption, title, every body paragraph (1–17), the prayer for relief, and the signature block, with the sample's `caption`, `signature` and `date` frontmatter. The body is transcribed as the filer wrote it; section headings are typed; paragraph numbers are not (the template numbers them).
+- `usage/INPUT-adversary-complaint.md`: a transcription of the exemplar's caption, title, every body paragraph (1–17), the prayer for relief, and the signature block, with the sample's `caption`, `signature` and `date` frontmatter. The body is transcribed as the filer wrote it; section headings are typed; paragraph numbers are not (the template numbers them).
 - **One added paragraph.** Paragraph 5, "Plaintiff does not consent to the entry of final orders or judgment by the bankruptcy court.", is not in the exemplar. It is added so the sample meets the 2016 rule (Fed. R. Bankr. P. 7008(a)). The choice of "does not" is the sample's; the template does not decide it. Because of this paragraph, the sample's numbering runs one higher than the exemplar from paragraph 5 onward.
 - The sample's frontmatter also carries `authorities:` (one entry, unused by this template). Keep it or drop it; the template ignores it.
 
@@ -52,11 +52,11 @@ The court's published local rules page (`https://ecf.wiwb.uscourts.gov/wiwb/Deci
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-wiwb-adversary-complaint-wenzelcomplaint.md
+sh tools/render.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/adversary-complaint wenzel-complaint
 ```
 
-- File names follow the repo's tools, not the brief's shorthand: `usage/INPUT-wiwb-adversary-complaint-wenzelcomplaint.md` (the sample), `usage/OUTPUT-wiwb-adversary-complaint-wenzelcomplaint.typst.pdf` (our render, default name from `tools/render.sh`), `usage/OVERLAY-wenzel-complaint.pdf` and `.txt` (from `tools/overlay.sh`).
+- File names follow the repo's tools, not the brief's shorthand: `usage/INPUT-adversary-complaint.md` (the sample), `usage/OUTPUT-adversary-complaint.typst.pdf` (our render, default name from `tools/render.sh`), `usage/OVERLAY-wenzel-complaint.pdf` and `.txt` (from `tools/overlay.sh`).
 - Typst compiled with no warnings (`render.sh` fails on any). `pdffonts` shows only the vendored EB Garamond (regular and bold, embedded as Identity-H).
 - The overlay pairs pages by word overlap: ours p.1–3 ↔ filed p.1–3 (word overlap 77%, 77%, 74%). Red is our render, blue the exemplar, black both. The pages do not line up exactly because the exemplar's text is set in Times and the caption and paragraph breaks differ. It is a diagnostic, not a score.
 
@@ -83,7 +83,7 @@ Reviewed pages: 3 of 3.
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/wiwb.lua` lays out the cover, caption, numbered allegations, prayer and signature. Built with `sh tools/render.sh --engine docx <this dir> usage/INPUT-wiwb-adversary-complaint-wenzelcomplaint.md`, which writes `usage/OUTPUT-wiwb-adversary-complaint-wenzelcomplaint.docx`.
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/wiwb.lua` lays out the cover, caption, numbered allegations, prayer and signature. Built with `sh tools/render.sh --engine docx <this dir> usage/INPUT-adversary-complaint.md`, which writes `usage/OUTPUT-adversary-complaint.docx`.
 
 - **Matches the typst form (by its parameters, not seen on a page):** EB Garamond 12 pt; body lines at 24 pt exact (the typst baseline pitch); first-line indent 0.5 in; allegations numbered 1., 2., ... with the text at 1 in; prayer items (a), (b), ... with a hanging label; level-1 headings bold capitals, centred; caption with a 3.4 in party column, right and bottom rules on it, and "Adversary Case No." at the right; title centred bold; signature block in the right 3.1 in column that does not break across pages; 11 pt centred page number; letter paper, 1 in margins. The court name and "Respectfully submitted," are the template's text, as in the typst form.
 - **Differs or unverified:** the numbers are typed text, not Word list numbering (they do not renumber on edit). The caption rules are table borders, and the "Adversary Case No." and "/s/" blanks are underscores, so their length depends on the font. The title and date metadata are printed once, on the cover and in the signature block (pandoc's own title block is suppressed). Word and LibreOffice may space the caption table differently from typst; not compared.

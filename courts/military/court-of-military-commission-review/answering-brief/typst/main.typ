@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "mc-answering-brief.typ": mc-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-mc-answering-brief-hicks.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-answering-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #mc-brief(meta, body)

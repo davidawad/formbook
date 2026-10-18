@@ -31,7 +31,7 @@ Still no exemplar. Searches this pass: CourtListener REST (anonymous, `type=r`):
 
 ## Resolved 2026-10-16 (bead fb-595.20.22)
 
-### SAMPLE-bap9-reply-brief-beavor251050.pdf (primary)
+### FILED-EXAMPLE-reply-brief.pdf (primary)
 
 - URL: https://storage.courtlistener.com/recap/gov.uscourts.ca9.22121/gov.uscourts.ca9.22121.20.0.pdf
 - Court: United States Bankruptcy Appellate Panel of the Ninth Circuit
@@ -44,7 +44,7 @@ Still no exemplar. Searches this pass: CourtListener REST (anonymous, `type=r`):
 - Format: born-digital (Word, Acrobat Distiller 24.0); embedded Times New Roman PS (regular, bold, italic) and Century Schoolbook italic subsets; text layer extracts cleanly. 14 pt, double spaced, with footnotes and block quotations.
 - How found: CourtListener RECAP search API (`type=r`). BAP dockets are filed under the circuit's court id, `ca9`, with the short number (ca9 "25-1050" here).
 - Why this one: counsel-filed, born-digital, complete, with three heading levels, footnotes and block quotations. Its title names the plural appellants and the brief it replies to, which showed the template's fixed title could not identify the filing parties (see `../README.md`).
-- Used for: the transcription `usage/INPUT-bap9-reply-brief-beavor.md` (abridged), the render `usage/OUTPUT-bap9-reply-brief-beavor.typst.pdf`, the overlay `usage/OVERLAY-beavor-reply-brief.pdf` and `.txt`.
+- Used for: the transcription `usage/INPUT-reply-brief.md` (abridged), the render `usage/OUTPUT-reply-brief.typst.pdf`, the overlay `usage/OVERLAY-beavor-reply-brief.pdf` and `.txt`.
 
 ### Alternate exemplars (different filers, tier 2), not saved
 
@@ -52,7 +52,7 @@ Still no exemplar. Searches this pass: CourtListener REST (anonymous, `type=r`):
 - *Reznick v. U.S. Trustee*, BAP No. CC-22-1128, Appellant's Reply Brief, 16 PDF pages, pro per, a scan (OmniPage OCR). URL: https://storage.courtlistener.com/recap/gov.uscourts.ca9.21514/gov.uscourts.ca9.21514.47.0.pdf. Not viewed or compared (pro per scan; the two above cover the comparison).
 - The answering-brief alternate *Hujazi v. Wirum* (BAP No. NC-14-1030, see `../../answering-brief/usage/SOURCE.md`) was also compared for the cover caption.
 
-## SAMPLE-bap9-reply-brief-moehlingsc261081.pdf
+## FILED-EXAMPLE-reply-brief-3.pdf
 
 - Filer: appellant Steven M. Moehling, pro se.
 - Case: *Moehling v. Select Portfolio Servicing, Inc.*, BAP No. SC-26-1081.

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nmid-motion-brief-imperialpacific24cv00001.pdf` (19 pages; Word 2016 document with embedded TrueType fonts; text layer present: `pdftotext` reads it)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (19 pages; Word 2016 document with embedded TrueType fonts; text layer present: `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.nmid.6427/gov.uscourts.nmid.6427.61.1.pdf (CourtListener RECAP; docket https://www.courtlistener.com/docket/68279516/61/1/imperial-pacific-international-cnmi-llc-v-commonwealth-of-the-northern/, found through the CourtListener search API with `court=nmid`)
 - Court: United States District Court for the Northern Mariana Islands
 - Case: *Imperial Pacific International (CNMI) LLC v. Commonwealth of the Northern Mariana Islands, et al.*

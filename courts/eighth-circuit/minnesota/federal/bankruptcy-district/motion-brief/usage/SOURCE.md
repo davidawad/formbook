@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-mnb-motion-brief-mend2260407motiontoconvert.pdf` (17 pages) |
+| File | `FILED-EXAMPLE-motion-brief-2.pdf` (17 pages) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.mnb.483189/gov.uscourts.mnb.483189.49.0.pdf (CourtListener RECAP archive) |
 | Docket page | https://www.courtlistener.com/docket/66577095/mend-correctional-care-pllc/ (RECAP document 483189) |
 | Case name | *In re MEnD Correctional Care, PLLC* (chapter 11) |
@@ -16,7 +16,7 @@
 
 ## Second filer (tier-2 comparison)
 
-- File: `SAMPLE-mnb-motion-brief-localmotion2131539.pdf` (12 pages; motion and memorandum, with proposed order)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (12 pages; motion and memorandum, with proposed order)
 - Case: *In re Local Motion MN, LLC*, Case No. 21-31539-KAC, Chapter 11
 - Document: Debtor's Notice of Hearing and Motion to Approve Settlement Agreement with Pan Yue, Doc. 135
 - Filer: Debtor Local Motion MN, LLC, by John D. Lamey III, Lamey Law Firm, P.A.

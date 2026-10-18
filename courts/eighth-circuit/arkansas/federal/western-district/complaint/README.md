@@ -5,10 +5,10 @@ Folder: `courts/eighth-circuit/arkansas/federal/western-district/complaint/` (se
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-arwd-complaint-little526cv05256.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-arwd-complaint-little.md` (the whole 10-page filing, transcribed; paragraph numbers are the template's) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the whole 10-page filing, transcribed; paragraph numbers are the template's) |
 | typeface | face required: **none**. LR 5.5(a) says "type not less than elite" and names no face (searched the consolidated local rules, 66 pp., 2026-10-14). Vendored substitute: **not needed**; kept **EB Garamond** (`fonts/eb-garamond/`), as the fonts policy allows for a court that names no face. Metric class: n/a. The filed exemplar is Times New Roman with Century Schoolbook headings (tier 2, not chased; see gap 1). |
-| render | ok (re-rendered 2026-10-14): `usage/OUTPUT-arwd-complaint-little.typst.pdf`, 9 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings; `pdffonts`: EBGaramond Regular/Bold/Italic only |
+| render | ok (re-rendered 2026-10-14): `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings; `pdffonts`: EBGaramond Regular/Bold/Italic only |
 | overlay | ok (regenerated 2026-10-14): `usage/OVERLAY-little-complaint.pdf` and `OVERLAY-little-complaint.txt`, against the filed exemplar re-fetched from the URL in `usage/SOURCE.md` (the PDF is not committed in this tree; see gap 10) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on 2026-10-14) |
 
@@ -54,9 +54,9 @@ The typst template above is the primary engine. The docx engine is in `docx/`; i
 
 - `docx/build-reference.sh` builds `docx/reference.docx`: EB Garamond 12 pt, double spacing as an exact 27.6 pt line, 0.5 in first-line indent, letter page with 1 in margins, the page number centered 0.4 in from the bottom, and single-spaced styles for the caption, court title and signature. Run `sh docx/build-reference.sh docx/reference.docx` (needs pandoc, zip, unzip and xmllint).
 - `docx/arwd-complaint.lua` turns the same markdown into Word: the court title and caption as borderless tables of exact width, the title in bold capitals, numbered paragraphs (the filter numbers them, as typst does), lettered lists, `^ ` unnumbered paragraphs, headings, and the signature block.
-- `sh tools/render.sh --engine docx <this folder> usage/INPUT-arwd-complaint-little.md` writes `usage/OUTPUT-arwd-complaint-little.docx`. The `.docx.pdf` step did not run (see BLOCKED below).
+- `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx`. The `.docx.pdf` step did not run (see BLOCKED below).
 
-**What matches** (checked on the .docx XML and its text, not by eye): font and size, the 27.6 pt line pitch, margins, the first-line indent, the caption and signature table widths, the page-number footer, and the word sequence: every word of `INPUT-arwd-complaint-little.md` appears in the .docx in the same order.
+**What matches** (checked on the .docx XML and its text, not by eye): font and size, the 27.6 pt line pitch, margins, the first-line indent, the caption and signature table widths, the page-number footer, and the word sequence: every word of `INPUT-complaint.md` appears in the .docx in the same order.
 
 **What differs:** Word breaks lines and places page breaks differently from typst, so pagination is not the same. The number is followed by a tab to the 1.0 in stop (typst: 0.3 in after the number). Lettered items hang from 0.5 in with text at 1.0 in (typst's body indent is about 1.07 in). Stacked headings (COUNT I over STRICT LIABILITY) are one "Heading Continued" paragraph, not Word headings. The caption and signature tables hold plain text, so no italics inside them.
 

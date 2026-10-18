@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "cit-complaint.typ": cit-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-cit-complaint-trekbicycle.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #cit-complaint(meta, body)

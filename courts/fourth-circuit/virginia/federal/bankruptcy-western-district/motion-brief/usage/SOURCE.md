@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-vawb-motion-brief-thomas1705010.pdf` (19 pages, text layer present, `pdftotext` reads it)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (19 pages, text layer present, `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.vawb.254556/gov.uscourts.vawb.254556.4.0.pdf (RECAP copy; docket page https://www.courtlistener.com/docket/6132481/4/thomas-v-midland-funding-llc/)
 - Court: United States Bankruptcy Court, Western District of Virginia, Harrisonburg Division (`vawb`)
 - Case: *Karen M. Thomas, et al. v. Midland Funding, LLC, and Midland Credit Management, Inc.*, adversary proceedings Nos. 17-AP-05009 and 17-AP-05010 (ECF header `Case 17-05010`), underlying Chapter 13 cases No. 16-50612 (Thomas) and No. 16-50396 (Brooks and Gillespie-Brooks)

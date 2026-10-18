@@ -19,7 +19,7 @@ No case-specific text, coordinates or forced line breaks are in the template: th
 
 ## What the overlay shows
 
-Sample: `usage/INPUT-flnb-adversary-complaint-ochlockonee.md` (transcription of the filed complaint, 10 pages, Doc 1 of Adv. No. 25-05002-KKS). Render: `usage/OUTPUT-flnb-adversary-complaint-ochlockonee.typst.pdf` (9 pages). Overlay: `usage/OVERLAY-ochlockonee.pdf` (red = our render, blue = filed exemplar, black = both) with page map `usage/OVERLAY-ochlockonee.txt`.
+Sample: `usage/INPUT-adversary-complaint.md` (transcription of the filed complaint, 10 pages, Doc 1 of Adv. No. 25-05002-KKS). Render: `usage/OUTPUT-adversary-complaint.typst.pdf` (9 pages). Overlay: `usage/OVERLAY-ochlockonee.pdf` (red = our render, blue = filed exemplar, black = both) with page map `usage/OVERLAY-ochlockonee.txt`.
 
 - Line pitch matches the filing: about 32 pt baseline-to-baseline at 14 pt double-spaced (the filing is 32.2 pt).
 - Layout: caption, title, numbered paragraphs, claim headings and subtitles, prayer, counsel and signature block all land in the same order as filed.
@@ -39,7 +39,7 @@ Sample: `usage/INPUT-flnb-adversary-complaint-ochlockonee.md` (transcription of 
 
 ## Engines
 
-Word (`docx/`) is built next to the typst template: `docx/reference.docx` (made by `docx/make-reference.sh`), `docx/flnb-adversary-complaint.lua` (caption, title, signature block), `docx/render.sh` (pandoc with the reference and the filter, lettered sub-items kept as paragraphs). Build: `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-flnb-adversary-complaint-ochlockonee.md` writes `usage/OUTPUT-flnb-adversary-complaint-ochlockonee.docx` and `OUTPUT-flnb-adversary-complaint-ochlockonee.docx.pdf` (LibreOffice 26.8). Checked on the LibreOffice PDF; Word was not available.
+Word (`docx/`) is built next to the typst template: `docx/reference.docx` (made by `docx/make-reference.sh`), `docx/flnb-adversary-complaint.lua` (caption, title, signature block), `docx/render.sh` (pandoc with the reference and the filter, lettered sub-items kept as paragraphs). Build: `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx` and `OUTPUT-flnb-adversary-complaint-ochlockonee.docx.pdf` (LibreOffice 26.8). Checked on the LibreOffice PDF; Word was not available.
 
 - **Matches typst:** EB Garamond 14 pt; 32.2 pt line pitch for body text (the same pitch as the typst render); single 15.4 pt lines in the caption, counsel and signature blocks; 1-inch margins on letter paper; centred page number on every page; caption, title and signature block in the same order and at the same positions (within about 3 pt on page 1); signature block at 45% of the text width, kept with the last paragraph of the body.
 - **Differs from typst (docx is the one that follows the template's own intent; typst/ is not changed here):**

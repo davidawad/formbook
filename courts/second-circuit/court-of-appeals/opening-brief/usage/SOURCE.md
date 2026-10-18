@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca2-opening-brief-munafo253142.pdf` (28 pages, text-based; pdftotext yields text) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (28 pages, text-based; pdftotext yields text) |
 | Court | United States Court of Appeals for the Second Circuit |
 | Case | *United States v. Munafo* |
 | Docket | No. 25-3142-cr |
@@ -16,11 +16,11 @@ Found through the CourtListener search API (`type=rd`, `court=ca2`), which lists
 
 Filer note: this is a single-filer exemplar (one Federal Public Defender brief). `usage/` should hold two or three exemplars from different filers before tier-2 conventions are judged (docs/EVAL-LOOP.md); this doc type has one, so tier-2 judgments are provisional. See `../README.md`.
 
-## 2. Second filer: `SAMPLE-ca2-opening-brief-internetarchive231260.pdf`
+## 2. Second filer: `FILED-EXAMPLE-opening-brief-2.pdf`
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca2-opening-brief-internetarchive231260.pdf` (74 pages, 612 x 792 pt, text-based: every page yields text with pdftotext; fonts Times New Roman, embedded) |
+| File | `FILED-EXAMPLE-opening-brief-2.pdf` (74 pages, 612 x 792 pt, text-based: every page yields text with pdftotext; fonts Times New Roman, embedded) |
 | Court | United States Court of Appeals for the Second Circuit |
 | Case | *Hachette Book Group, Inc. v. Internet Archive* |
 | Docket | No. 23-1260 (S.D.N.Y. No. 1:20-cv-4160, Hon. John G. Koeltl) |

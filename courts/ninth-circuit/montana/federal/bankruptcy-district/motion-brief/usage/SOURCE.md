@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-mtb-motion-brief-mohler1960025.pdf` (6 pages, text layer present; Times New Roman, not embedded)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (6 pages, text layer present; Times New Roman, not embedded)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.mtb.82243/gov.uscourts.mtb.82243.48.0_1_1.pdf (RECAP archive copy of docket entry 48)
 - Court: United States Bankruptcy Court for the District of Montana (judge suffix BPH)
 - Case: *In re Donna Mohler and Sean Mohler*, Chapter 7, Case No. 19-60025-BPH

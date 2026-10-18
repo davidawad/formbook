@@ -10,7 +10,7 @@ Kept at EB Garamond, the no-face default in `docs/FONTS.md`. Checked: LR 7007-2 
 
 ## Exemplar
 
-- `usage/SAMPLE-deb-adversary-complaint-zohariiitilton1950390.pdf`: Complaint of Lynn Tilton and the Patriarch & Octaluna Entities for Equitable Subordination, Adv. Pro. No. 19-50390 (KBO), Doc 7, filed 11/12/2019 (dated October 1, 2019). 80 pages, text layer present (paragraph numbers are not in the text layer but are on the page image). The RECAP copy is the public redacted version. Source and search record: `usage/SOURCE.md`.
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf`: Complaint of Lynn Tilton and the Patriarch & Octaluna Entities for Equitable Subordination, Adv. Pro. No. 19-50390 (KBO), Doc 7, filed 11/12/2019 (dated October 1, 2019). 80 pages, text layer present (paragraph numbers are not in the text layer but are on the page image). The RECAP copy is the public redacted version. Source and search record: `usage/SOURCE.md`.
 - Filer: Lynn Tilton and the Patriarch and Octaluna entities, by Cole Schotz P.C. and Gibson, Dunn & Crutcher LLP.
 
 ## Governing rules (verified 2026-10-14)
@@ -30,8 +30,8 @@ The rules were fetched and read on 2026-10-14. The court's own PDF URL is reject
 ## Layout
 
 - `typst/main.typ` (entry point), `typst/deb-adversary-complaint.typ` (template). Parameters at the top.
-- `usage/INPUT-deb-adversary-complaint-zohar.md`: frontmatter (caption, title, date, preamble, signature blocks) plus the body. Body paragraphs are numbered automatically (FRCP 10(b)). Unnumbered: headings; lists; the WHEREFORE clause and lettered prayer items; and editorial notes in italic brackets (`*[...]*`), which mark omitted text.
-- `usage/OUTPUT-deb-adversary-complaint-zohar.typst.pdf` (10 pages); `usage/OVERLAY-zohar-adversary-complaint.pdf` and `.txt`.
+- `usage/INPUT-adversary-complaint.md`: frontmatter (caption, title, date, preamble, signature blocks) plus the body. Body paragraphs are numbered automatically (FRCP 10(b)). Unnumbered: headings; lists; the WHEREFORE clause and lettered prayer items; and editorial notes in italic brackets (`*[...]*`), which mark omitted text.
+- `usage/OUTPUT-adversary-complaint.typst.pdf` (10 pages); `usage/OVERLAY-zohar-adversary-complaint.pdf` and `.txt`.
 
 Naming: as in the motion-brief README: `OUTPUT-` and `OVERLAY-` are the names `tools/render.sh` and `tools/overlay.sh` use.
 
@@ -78,9 +78,9 @@ Layout as reviewed: caption and preamble (1–2), preliminary statement (2–6),
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference for the form. Rendered sample: `usage/OUTPUT-deb-adversary-complaint-zohar.typst.pdf`.
+- **typst** (primary, `typst/`): the reference for the form. Rendered sample: `usage/OUTPUT-adversary-complaint.typst.pdf`.
 - **latex**: not built (`latex/` is empty).
-- **docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default reference: EB Garamond 12 pt, double spacing (Word "double", line 480 auto), 0.5 in first-line indent on body text, 1 in margins on letter paper, centered PAGE number in the footer, black bold headings, 10 pt single footnotes, and the paragraph styles "Centered", "CenteredBody" and "Single". `docx/deb.lua` builds from the frontmatter the court line, the Form 416 caption (two tables, with the rule at the right and bottom of the party column), the title, the numbered allegations, the centered italic notes, the lettered prayer items and the signature block. Build: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/deb.lua usage/INPUT-deb-adversary-complaint-zohar.md -o usage/OUTPUT-deb-adversary-complaint-zohar.docx`.
+- **docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default reference: EB Garamond 12 pt, double spacing (Word "double", line 480 auto), 0.5 in first-line indent on body text, 1 in margins on letter paper, centered PAGE number in the footer, black bold headings, 10 pt single footnotes, and the paragraph styles "Centered", "CenteredBody" and "Single". `docx/deb.lua` builds from the frontmatter the court line, the Form 416 caption (two tables, with the rule at the right and bottom of the party column), the title, the numbered allegations, the centered italic notes, the lettered prayer items and the signature block. Build: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/deb.lua usage/INPUT-adversary-complaint.md -o usage/OUTPUT-adversary-complaint.docx`.
 - **docx: matches** the typst form: page size and margins, the face and size, the first-line indent, the paragraph numbering (typed "n." and a tab, as in typst), the caption layout, the centered headings, the italic notes, the page-number footer.
 - **docx: differs**:
   - Line pitch. The typst body pitch is 24.06 pt for 12 pt type (measured on the motion brief render; the same `body-leading` is used here). Word's double is two line heights of the font, not measured here. The docx will run longer than the typst pages, and no page count is compared.

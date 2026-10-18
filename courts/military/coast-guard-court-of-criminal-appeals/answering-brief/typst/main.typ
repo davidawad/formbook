@@ -2,7 +2,7 @@
 //   sh tools/render.sh courts/military/coast-guard-court-of-criminal-appeals/answering-brief usage/<id>.md
 #import "uscgcoca-answering-brief.typ": uscgcoca-brief
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-uscgcoca-answering-brief-smoke.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-answering-brief-2.md"))
 #let m = src.match(regex("^---\r?\n([\\s\\S]*?)\r?\n---[ \t]*\r?\n"))
 #if m == none { panic("uscgcoca: the sample must start with a YAML frontmatter block") }
 #uscgcoca-brief(yaml(bytes(m.captures.at(0))), src.slice(m.end))

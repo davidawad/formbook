@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-oked-complaint-barrick623cv00129.pdf` |
+| File | `FILED-EXAMPLE-complaint.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.oked.34387/gov.uscourts.oked.34387.2.0.pdf (CourtListener RECAP storage) |
 | Case | *Barrick v. Board of County Commissioners of McCurtain County, Oklahoma, et al.* |
 | Court | United States District Court, Eastern District of Oklahoma |

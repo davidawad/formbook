@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-okwb-adversary-complaint-ruzycki2601003.pdf` (12 pages) |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` (12 pages) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.okwb.328044/gov.uscourts.okwb.328044.1.0.pdf (CourtListener RECAP archive) |
 | Docket page | https://www.courtlistener.com/docket/72186797/1/ians-enterprise-llc-v-ruzycki/ (entry 1; docket https://www.courtlistener.com/docket/72186797/ians-enterprise-llc-v-ruzycki/) |
 | Case name | *Ian's Enterprise, LLC v. Ruzycki* (Bankr. W.D. Okla.), adversary no. 26-01003 |

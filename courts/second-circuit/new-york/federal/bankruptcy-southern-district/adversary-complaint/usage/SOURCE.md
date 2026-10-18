@@ -3,7 +3,7 @@
 Two filed complaints from two different filers, both public court records (CourtListener RECAP), both text-based
 (`pdftotext` reads them; Times fonts embedded). Fetched 2026-10-14 with curl.
 
-## 1. `SAMPLE-nysb-adversary-complaint-celsius2404018.pdf` (primary; used for the sample)
+## 1. `FILED-EXAMPLE-adversary-complaint.pdf` (primary; used for the sample)
 
 - Court: United States Bankruptcy Court, Southern District of New York
 - Case: *Celsius Network Limited and Celsius Network LLC (Post-Effective Date Debtors) v. Tether Limited et al.*,
@@ -16,7 +16,7 @@ Two filed complaints from two different filers, both public court records (Court
 - Docket: https://www.courtlistener.com/docket/69033248/1/celsius-network-llc-adversary-proceeding/
 - Date fetched: 2026-10-14
 
-## 2. `SAMPLE-nysb-adversary-complaint-ehrenfeld1901128.pdf` (second filer; structure comparison)
+## 2. `FILED-EXAMPLE-adversary-complaint-2.pdf` (second filer; structure comparison)
 
 - Court: United States Bankruptcy Court, Southern District of New York
 - Case: *The Lawyers' Fund for Client Protection of the State of New York v. Samuel Ehrenfeld*, Adv. Pro. No. 19-01128,

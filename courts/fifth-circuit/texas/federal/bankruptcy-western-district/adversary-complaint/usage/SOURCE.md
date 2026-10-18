@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-txwb-adversary-complaint-osherow2501073.pdf` (14 pages, text layer present; `pdftotext` reads it)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (14 pages, text layer present; `pdftotext` reads it)
 - Fetched from: https://storage.courtlistener.com/recap/gov.uscourts.txwb.377954/gov.uscourts.txwb.377954.1.0_2.pdf (RECAP copy of the ECF document)
 - Docket page: https://www.courtlistener.com/docket/72093838/1/randolph-n-osherow-chapter-7-trustee-v-max/
 - Court: United States Bankruptcy Court, Western District of Texas, Austin Division

@@ -7,10 +7,10 @@ The two exemplars are different kinds of contested-matter paper from different f
 ## Layout
 
 - `typst/main.typ` entrypoint; `typst/idb-motion-brief.typ` template (parameters at the top, each cited to the rule or the convention it follows).
-- `usage/INPUT-idb-motion-brief-ziegler.md` and `usage/INPUT-idb-motion-brief-redline.md` transcribed samples.
+- `usage/INPUT-motion-brief-2.md` and `usage/INPUT-motion-brief.md` transcribed samples.
 - `usage/OUTPUT-<id>.pdf` our renders (ziegler 9 pages, redline 6 pages), from `sh tools/render.sh <this-dir> usage/INPUT-<id>.md`.
 - `usage/OVERLAY-<id>.pdf` and `.txt`, from `sh tools/overlay.sh <this-dir> <id> usage/SAMPLE-...pdf`. The exemplar is passed explicitly: with no third argument `overlay.sh` takes the first exemplar in `ls` order (redline), which is the wrong one for the ziegler sample.
-- `usage/SAMPLE-idb-motion-brief-ziegler2040042.pdf` (9 pages) and `usage/SAMPLE-idb-motion-brief-redline2400388.pdf` (17 pages; the motion is pages 1-7).
+- `usage/FILED-EXAMPLE-motion-brief-2.pdf` (9 pages) and `usage/FILED-EXAMPLE-motion-brief.pdf` (17 pages; the motion is pages 1-7).
 
 ## Markdown contract
 
@@ -113,7 +113,7 @@ No OPEN tier-2 rows.
 - The redline exemplar's source URL was not recorded when the file was committed (see `usage/SOURCE.md`).
 - Case names: Ziegler has no italics in its text layer, so that sample has none; the redline sample italicizes case names as filed.
 - No `rules.md` or `checks.yaml` in this folder, so `tools/check.sh` gates have not been run here.
-- The docx engine (`docx/`) was not touched in this pass and still follows the earlier contract: it letters `- ` items, has no `[^id]` footnotes, no `: ` paragraphs, no `notice`, `judge`, `by`, `lines_below` or `service_signature`, and puts the signature at the end. `usage/OUTPUT-idb-motion-brief-ziegler.docx` is from the earlier sample. The latex engine has no folder for this doc type.
+- The docx engine (`docx/`) was not touched in this pass and still follows the earlier contract: it letters `- ` items, has no `[^id]` footnotes, no `: ` paragraphs, no `notice`, `judge`, `by`, `lines_below` or `service_signature`, and puts the signature at the end. `usage/OUTPUT-motion-brief-2.docx` is from the earlier sample. The latex engine has no folder for this doc type.
 
 ## Engines
 

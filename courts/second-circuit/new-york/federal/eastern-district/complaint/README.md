@@ -5,10 +5,10 @@ Folder: `courts/second-circuit/new-york/federal/eastern-district/complaint/` (se
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nyed-complaint-blade126cv06563.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nyed-complaint-blade.md`: a transcription of selected passages of that filing (caption, opening, parties and jurisdiction, Claims I to VI, prayer, jury demand line, signature). |
-| render | ok: `usage/OUTPUT-nyed-complaint-blade.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`). Re-rendered 2026-10-15; `pdffonts` shows only EB Garamond (Regular, Italic, Bold), all embedded. |
-| overlay | ok: `usage/OVERLAY-blade-complaint.pdf` (red = ours, blue = filed) and `usage/OVERLAY-blade-complaint.txt` (page map). Regenerated 2026-10-15 from `usage/SAMPLE-nyed-complaint-blade126cv06563.pdf`, restored from the URL in `usage/SOURCE.md` (18 pages, as recorded). |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: a transcription of selected passages of that filing (caption, opening, parties and jurisdiction, Claims I to VI, prayer, jury demand line, signature). |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`). Re-rendered 2026-10-15; `pdffonts` shows only EB Garamond (Regular, Italic, Bold), all embedded. |
+| overlay | ok: `usage/OVERLAY-blade-complaint.pdf` (red = ours, blue = filed) and `usage/OVERLAY-blade-complaint.txt` (page map). Regenerated 2026-10-15 from `usage/FILED-EXAMPLE-complaint.pdf`, restored from the URL in `usage/SOURCE.md` (18 pages, as recorded). |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-checked 2026-10-15). |
 | tier-2 exemplars | 1 filer. EVAL-LOOP asks for 2 or 3 filers; not met (see Known gaps). |
 
@@ -64,7 +64,7 @@ Not retrieved, so not asserted: the EDNY ECF Rules and Instructions (the PDF-for
 6. **Paragraph spacing.** Paragraphs are separated only by the double-space line, with no extra gap. This matches the exemplar's look; it is a tier-2 choice.
 7. **No automated check.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. The Gate 2 review below is the only review of this PDF. No `checks.yaml` exists.
 
-## Review of the rendered pages (current PDF, `OUTPUT-nyed-complaint-blade.typst.pdf`)
+## Review of the rendered pages (current PDF, `OUTPUT-complaint.typst.pdf`)
 
 Compared with the exemplar page that the overlay pairs with each page (`OVERLAY-blade-complaint.txt`); pages 1 to 3 pair with the same page number, pages 4 to 9 do not, because the sample skips passages of the filing.
 
@@ -84,7 +84,7 @@ Overlay (word-overlap pairing, not a score): page 3 pairs with the lowest overla
 
 ## Engines
 
-DOCX (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond 12 pt, exact 24 pt body spacing, 0.5 in first-line indent, 1 in margins, centered PAGE footer); `nyed-complaint.lua` builds the counsel block, caption table, title, numbered paragraphs (number at 0.5 in, tab to 1 in), prayer letters, and signature block. Samples: `usage/OUTPUT-nyed-complaint-blade.docx` and `.docx.pdf` (LibreOffice conversion, no errors; opened in LibreOffice, not Word).
+DOCX (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond 12 pt, exact 24 pt body spacing, 0.5 in first-line indent, 1 in margins, centered PAGE footer); `nyed-complaint.lua` builds the counsel block, caption table, title, numbered paragraphs (number at 0.5 in, tab to 1 in), prayer letters, and signature block. Samples: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice conversion, no errors; opened in LibreOffice, not Word).
 
 - Matches the typst output: font and size, 24 pt double spacing, margins, caption layout and rules, heading styles, numbering positions, prayer indents, signature block, page-number footer. Pages reviewed: 10 of 10 (`docx-01` to `docx-10` at 60 dpi, compared with the typst pages).
 - Differs: 10 pages in docx, 9 in typst. Line breaks and per-page line counts differ between LibreOffice and typst (docx pages carry 25 to 28 text lines, typst 28 to 30); the mandated line pitch is the same in both. Paragraph numbers are typed text, not a Word list, so a paragraph inserted in Word must be renumbered by hand.

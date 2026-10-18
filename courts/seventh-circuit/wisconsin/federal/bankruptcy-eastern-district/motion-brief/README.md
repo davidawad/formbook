@@ -4,8 +4,8 @@ Governs a motion in an adversary proceeding or contested matter, with a memorand
 
 ## Exemplar
 
-- `usage/SAMPLE-wieb-motion-brief-vongermetenvlindblom2202024.pdf`: Gray & Associates, L.L.P. for the defendants, "Motion ... to Dismiss Adversary Complaint" with notice of motion and "Brief in Support of Motion to Dismiss Adversary Complaint", Adv. No. 22-02024-rmb, filed 04/08/2022 (38 pp. including Exhibits A-G). Provenance and checksum in `usage/SOURCE.md`.
-- Sample: `usage/INPUT-wieb-motion-brief-vongermetenmotion.md` (portion transcription; citations not checked against reporters; see the header of the sample). Render: `usage/OUTPUT-wieb-motion-brief-vongermetenmotion.typst.pdf` (11 pp.). Overlay: `usage/OVERLAY-vongermeten-motion.pdf` and `.txt`.
+- `usage/FILED-EXAMPLE-motion-brief.pdf`: Gray & Associates, L.L.P. for the defendants, "Motion ... to Dismiss Adversary Complaint" with notice of motion and "Brief in Support of Motion to Dismiss Adversary Complaint", Adv. No. 22-02024-rmb, filed 04/08/2022 (38 pp. including Exhibits A-G). Provenance and checksum in `usage/SOURCE.md`.
+- Sample: `usage/INPUT-motion-brief.md` (portion transcription; citations not checked against reporters; see the header of the sample). Render: `usage/OUTPUT-motion-brief.typst.pdf` (11 pp.). Overlay: `usage/OVERLAY-vongermeten-motion.pdf` and `.txt`.
 
 ## Governing rules (verified 2026-10-14)
 
@@ -67,14 +67,14 @@ No: an exemplar was found (CourtListener RECAP, E.D. Wis. adversary 22-02024). T
 
 ## Build
 
-    sh tools/render.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-wieb-motion-brief-vongermetenmotion.md courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/motion-brief/usage/OUTPUT-wieb-motion-brief-vongermetenmotion.typst.pdf
+    sh tools/render.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-motion-brief.md courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/motion-brief/usage/OUTPUT-motion-brief.typst.pdf
 
-The overlay step is run on a temporary `OUTPUT-wieb-motion-brief-vongermetenmotion.typst.pdf` copy, and its outputs are renamed to `OVERLAY-vongermeten-motion.pdf` and `.txt`, as for the complaint.
+The overlay step is run on a temporary `OUTPUT-motion-brief.typst.pdf` copy, and its outputs are renamed to `OVERLAY-vongermeten-motion.pdf` and `.txt`, as for the complaint.
 
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the court's form.
-- **docx** (`docx/reference.docx`, `docx/build-reference.sh`, `docx/wieb.lua`): pandoc on a reference.docx built from pandoc's default (EB Garamond 12 pt, exact 24 pt line pitch, 1 in margins on letter paper, centered PAGE footer, bold centered level-1 headings, bold level-2, italic level-3, body paragraphs with a 0.5 in first-line indent, numbered paragraphs typed by the drafter). The filter lays out the notice of motion (page 1), the motion and the brief in support (each with its own caption), and the certificate of service, split at the `%%BRIEF%%` line. The captions and signature blocks are styled paragraphs with tab stops; no tables; the only raw openxml is the page breaks. Every case word comes from the frontmatter. Built to `usage/OUTPUT-wieb-motion-brief-vongermetenmotion.docx`; the zip and XML parts were checked (`unzip -tq`, `xmllint --noout`).
+- **docx** (`docx/reference.docx`, `docx/build-reference.sh`, `docx/wieb.lua`): pandoc on a reference.docx built from pandoc's default (EB Garamond 12 pt, exact 24 pt line pitch, 1 in margins on letter paper, centered PAGE footer, bold centered level-1 headings, bold level-2, italic level-3, body paragraphs with a 0.5 in first-line indent, numbered paragraphs typed by the drafter). The filter lays out the notice of motion (page 1), the motion and the brief in support (each with its own caption), and the certificate of service, split at the `%%BRIEF%%` line. The captions and signature blocks are styled paragraphs with tab stops; no tables; the only raw openxml is the page breaks. Every case word comes from the frontmatter. Built to `usage/OUTPUT-motion-brief.docx`; the zip and XML parts were checked (`unzip -tq`, `xmllint --noout`).
   - Matches the typst form: font and size, double spacing, margins, page order (notice, motion, brief, certificate), the caption order, the notice text and objection period from frontmatter, the "Respectfully submitted" and "/s/" signature blocks, the certificate text.
   - Differs or unverified: the typst caption is a two-column grid with a vertically centred right column; the docx approximates it with tab stops and puts the adversary number on the "v." row. Its rules are paragraph borders, not checked against typst's lines. The numbered-paragraph layout is a pleading convention, not the typst enum layout. The motion's signature block is kept together but not with the preceding paragraph (the typst template does not do this either; see the Known gaps above). Word's line breaks may differ from typst's.
   - BLOCKED on this box: `soffice` (LibreOffice) is not installed, so `usage/OUTPUT-vongermeten-motion.docx.pdf` was not produced and the docx Gates 0 to 3 cannot run. No page was rendered or reviewed (0 pages). Not opened in Word. The typst template has no table of contents or table of authorities, so the TOC/TOA field caveat does not apply to this doc type.

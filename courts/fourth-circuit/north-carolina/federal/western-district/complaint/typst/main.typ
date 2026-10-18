@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ncwd-complaint.typ": ncwd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ncwd-complaint-bell.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #ncwd-complaint(meta, body)

@@ -1,14 +1,14 @@
 # Motion with memorandum of points and authorities (U.S. Bankruptcy Court, D. Hawaii)
 
-Motion to dismiss an adversary complaint, with a consolidated memorandum of points and authorities, in the Typst engine (`typst/`), rendered from one markdown sample (`usage/INPUT-hib-motion-brief-fieldrolloffs.md`).
+Motion to dismiss an adversary complaint, with a consolidated memorandum of points and authorities, in the Typst engine (`typst/`), rendered from one markdown sample (`usage/INPUT-motion-brief.md`).
 
 | File | Role |
 |---|---|
 | `typst/main.typ`, `typst/hib-motion-brief.typ` | Template (entry point and rule-driven layout) |
-| `usage/INPUT-hib-motion-brief-fieldrolloffs.md` | Markdown input, transcribed from the filed exemplar (frontmatter = caption, counsel, hearing, signature, authorities) |
-| `usage/OUTPUT-hib-motion-brief-fieldrolloffs.typst.pdf` | Our render (`tools/render.sh`), 12 pages |
+| `usage/INPUT-motion-brief.md` | Markdown input, transcribed from the filed exemplar (frontmatter = caption, counsel, hearing, signature, authorities) |
+| `usage/OUTPUT-motion-brief.typst.pdf` | Our render (`tools/render.sh`), 12 pages |
 | `usage/OVERLAY-field-rolloffs-motion-brief.pdf` / `.txt` | Red (ours) / blue (filed) overlay and page map (`tools/overlay.sh`) |
-| `usage/SAMPLE-hib-motion-brief-fieldvrolloffs1890035.pdf` | The filed exemplar (127 ECF pages; memorandum pages 1-106 are ECF pp. 22-127) |
+| `usage/FILED-EXAMPLE-motion-brief.pdf` | The filed exemplar (127 ECF pages; memorandum pages 1-106 are ECF pp. 22-127) |
 | `usage/SOURCE.md` | Filer, case, date filed, URL, date retrieved |
 
 Engines: typst only. No latex or docx engine is delivered for this doc type.
@@ -65,7 +65,7 @@ The overlay is diagnostic (tier 3), not a score. Filed pages the sample does not
 
 ## Engines
 
-The docx engine is `docx/make-reference.sh` (builds `docx/reference.docx`) and `docx/hib-motion-brief.lua` (cover, caption, heading labels and signature). The line "Engines: typst only" above predates this section. Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-hib-motion-brief-fieldrolloffs.md`, which writes `usage/OUTPUT-hib-motion-brief-fieldrolloffs.docx`.
+The docx engine is `docx/make-reference.sh` (builds `docx/reference.docx`) and `docx/hib-motion-brief.lua` (cover, caption, heading labels and signature). The line "Engines: typst only" above predates this section. Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx`.
 
 What the docx sets (in `styles.xml` and `sectPr`; set, not rendered):
 

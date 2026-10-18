@@ -1,14 +1,14 @@
 # Court of Appeals of Georgia (`gactapp`): appellant's brief (`opening-brief`)
 
-Exemplar: **yes** (`usage/SAMPLE-gactapp-opening-brief-campbellvtaylora26a1103.pdf`, Appellant's Brief in *Campbell v. Taylor*, No. A26A1103, filed January 26, 2026 by Jody D. Peterman, LLC; source in `usage/SOURCE.md`). The sample is a transcription of it.
+Exemplar: **yes** (`usage/FILED-EXAMPLE-opening-brief.pdf`, Appellant's Brief in *Campbell v. Taylor*, No. A26A1103, filed January 26, 2026 by Jody D. Peterman, LLC; source in `usage/SOURCE.md`). The sample is a transcription of it.
 
 ## Status of each output
 
 | Item | Result |
 |---|---|
 | `usage/` | 1 filed brief, text PDF, 18 pages, court e-filing stamp "Case A26A1103 Filed 01/26/2026" on every page |
-| `usage/INPUT-gactapp-opening-brief-fictional.md` | transcription of the whole filed brief (cover, table of authorities, all sections, signature, certificate of service). The id still says "fictional": it was kept so the existing docx outputs keep their names (see Engines) |
-| render (`tools/render.sh`) | ok: `usage/OUTPUT-gactapp-opening-brief-fictional.typst.pdf`, 17 pages, exit 0, zero typst warnings, Liberation Serif (regular, bold, italic, bold italic) embedded |
+| `usage/INPUT-opening-brief.md` | transcription of the whole filed brief (cover, table of authorities, all sections, signature, certificate of service). The id still says "fictional": it was kept so the existing docx outputs keep their names (see Engines) |
+| render (`tools/render.sh`) | ok: `usage/OUTPUT-opening-brief.typst.pdf`, 17 pages, exit 0, zero typst warnings, Liberation Serif (regular, bold, italic, bold italic) embedded |
 | overlay (`tools/overlay.sh`) | ok: `usage/OVERLAY-fictional-opening-brief.pdf` and `.txt` |
 | pages reviewed | 17 of 17 (every page rendered at 60 dpi and looked at), plus the 18 exemplar pages |
 
@@ -65,4 +65,4 @@ Frontmatter: `case_number`; `caption` (two sides: `names`, `designation`); `proc
 
 ## Engines
 
-docx (`docx/`: `reference.docx`, `gactapp-brief.lua`, `render.sh`). **Not regenerated in this pass**: this box has no LibreOffice (`soffice`), so `OUTPUT-gactapp-opening-brief-fictional.docx` and `.docx.pdf` are still renders of the earlier synthetic sample, and the docx form still has the old numbering (unnumbered cover, roman contents), no Rule 24 certification and no certificate of service. These are open docx items (`BLOCKED` until rerun with `soffice`): Rule 24 (e) numbering, Rule 24 (f) (1) certification, Rule 6 certificate, the new frontmatter keys (`signature.signers`, `authorities`, `service`). latex: none in this court.
+docx (`docx/`: `reference.docx`, `gactapp-brief.lua`, `render.sh`). **Not regenerated in this pass**: this box has no LibreOffice (`soffice`), so `OUTPUT-opening-brief.docx` and `.docx.pdf` are still renders of the earlier synthetic sample, and the docx form still has the old numbering (unnumbered cover, roman contents), no Rule 24 certification and no certificate of service. These are open docx items (`BLOCKED` until rerun with `soffice`): Rule 24 (e) numbering, Rule 24 (f) (1) certification, Rule 6 certificate, the new frontmatter keys (`signature.signers`, `authorities`, `service`). latex: none in this court.

@@ -29,14 +29,14 @@ Not applied, because the rule is conditional and the judge has not been shown to
 
 Two filed exemplars, from different filers. The first is primary; the second is for the tier-2 comparison.
 
-1. **`usage/SAMPLE-gasb-motion-brief-howard2305004.pdf`** (primary): Defendant's Motion to Dismiss Adversarial Complaint and Memorandum of Law in Support, ECF 12, *Howard v. City of Douglas Utility Dept.*, Adv. Pro. No. 23-05004, Chapter 13 No. 23-50574, Waycross Division (Judge Michele J. Kim). 7 pages, text layer present. Filed Jan. 5, 2024 by Freeman Mathis & Gary, LLP (Brian S. Goldberg) for the City of Douglas Utility Department. Its embedded document title is a SharePoint draft path, but the RECAP entry is the filed document.
-2. **`usage/SAMPLE-gasb-motion-brief-prucohirsch2304021.pdf`** (second filer): Memorandum of Law in Support of Motion to Dismiss Crossclaim, ECF 29, *Pruco Life Insurance Co. v. Hirsch et al.*, Adv. Pro. No. 23-04021-EJC, Savannah Division. 27 pages, text layer present. Filed Mar. 1, 2024 by Jones & Walden LLC (Leon S. Jones) for Judith Hirsch. **The memorandum only**: the motion it supports (ECF 28) is not on RECAP, so the notice-of-motion part of this doc type is not shown by this exemplar. Used for memorandum style, not for the caption.
+1. **`usage/FILED-EXAMPLE-motion-brief.pdf`** (primary): Defendant's Motion to Dismiss Adversarial Complaint and Memorandum of Law in Support, ECF 12, *Howard v. City of Douglas Utility Dept.*, Adv. Pro. No. 23-05004, Chapter 13 No. 23-50574, Waycross Division (Judge Michele J. Kim). 7 pages, text layer present. Filed Jan. 5, 2024 by Freeman Mathis & Gary, LLP (Brian S. Goldberg) for the City of Douglas Utility Department. Its embedded document title is a SharePoint draft path, but the RECAP entry is the filed document.
+2. **`usage/FILED-EXAMPLE-motion-brief-2.pdf`** (second filer): Memorandum of Law in Support of Motion to Dismiss Crossclaim, ECF 29, *Pruco Life Insurance Co. v. Hirsch et al.*, Adv. Pro. No. 23-04021-EJC, Savannah Division. 27 pages, text layer present. Filed Mar. 1, 2024 by Jones & Walden LLC (Leon S. Jones) for Judith Hirsch. **The memorandum only**: the motion it supports (ECF 28) is not on RECAP, so the notice-of-motion part of this doc type is not shown by this exemplar. Used for memorandum style, not for the caption.
 
 Provenance and searches: `usage/SOURCE.md`.
 
 ## Sample
 
-- `usage/INPUT-gasb-motion-brief-howard.md` transcribes the whole of the primary exemplar: caption (with the trustee block), the introduction, the three argument headings (A, B, C) with their text, the conclusion with its four requests, the signature block and the certificate of service.
+- `usage/INPUT-motion-brief.md` transcribes the whole of the primary exemplar: caption (with the trustee block), the introduction, the three argument headings (A, B, C) with their text, the conclusion with its four requests, the signature block and the certificate of service.
 - Transcription choices: the filing's paragraph symbol "⁋" is written as "¶"; the filing's "(Emphasis added.)" in the § 106(a)(3) quotation is kept, but the emphasis it refers to is not reproduced (pdftotext does not show italics, and the emphasis is not marked in the transcription). Typos in the filing ("Federal Rule of Procedure 12(b)(6)", "Plaintiff's Attorney", "the Bankruptcy code") are kept as written.
 - Frontmatter schema for this doc type: same as `../adversary-complaint/README.md`, plus `trustee` (optional list of lines under the debtor block), `judge` (optional), `certificate` (`document`, `method`, `service` list; required by LR 5.1), and `submitted_on` as the date phrase after "This".
 
@@ -45,11 +45,11 @@ Provenance and searches: `usage/SOURCE.md`.
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
 D=courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/motion-brief
-sh tools/render.sh $D usage/INPUT-gasb-motion-brief-howard.md     # -> usage/OUTPUT-gasb-motion-brief-howard.typst.pdf
+sh tools/render.sh $D usage/INPUT-motion-brief.md     # -> usage/OUTPUT-motion-brief.typst.pdf
 sh tools/overlay.sh $D howard-motion-brief $D/usage/SAMPLE-howard-23-05004-motion-brief.pdf
 ```
 
-- `usage/OUTPUT-gasb-motion-brief-howard.typst.pdf`: 7 pages. Typst compiled with no warnings. Only the vendored EB Garamond is embedded.
+- `usage/OUTPUT-motion-brief.typst.pdf`: 7 pages. Typst compiled with no warnings. Only the vendored EB Garamond is embedded.
 - `usage/OVERLAY-howard-motion-brief.pdf` and `.txt`: red = our render, blue = the filed exemplar, black = both. The page map pairs ours p.1-7 with filed p.1-7; word overlap 62-100%. Diagnostic only: the exemplar is set in Times with a different caption rule, so text lines do not coincide.
 - File names follow the tools (`OUTPUT-`, `OVERLAY-`, `INPUT-`), not the brief's `<id>.pdf` / `<id>-overlay.pdf` names.
 
@@ -83,7 +83,7 @@ Pages reviewed: 7 of 7.
 
 ## Engines
 
-The docx engine (`docx/`: `reference.docx` from `make-reference.sh`, and `gasb-motion-brief.lua`) is built next to the typst template. Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/motion-brief usage/INPUT-gasb-motion-brief-howard.md` (from the repository root) writes `usage/OUTPUT-gasb-motion-brief-howard.docx` and its LibreOffice PDF `usage/OUTPUT-gasb-motion-brief-howard.docx.pdf`.
+The docx engine (`docx/`: `reference.docx` from `make-reference.sh`, and `gasb-motion-brief.lua`) is built next to the typst template. Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/motion-brief usage/INPUT-motion-brief.md` (from the repository root) writes `usage/OUTPUT-motion-brief.docx` and its LibreOffice PDF `usage/OUTPUT-motion-brief.docx.pdf`.
 
 - **Matches typst:** EB Garamond 13 pt throughout (embedded in the LibreOffice PDF); body double-spaced (exact 24 pt) with a half-inch first-line indent; 1-inch margins on letter paper; the court title, the caption table with the trustee block and the rule under and beside the left cell, the chapter, case number, judge and adversary number at right, the title in bold capitals; headings bold, single-spaced, with the labels I., A., 1., a. hanging half an inch and each level half an inch deeper; numbered paragraphs (the conclusion's requests); footnotes at 13 pt; the signature block; the certificate of service (its method sentence, the service list at 24 pt a line (typst sets it about 34 pt a line; not a rule, not copied), the signature block); a page number on every page (11 pt, centered).
 - **Differs from typst:** (1) the list numbers are left-aligned at half an inch with the text hanging at 0.75 in; typst right-aligns each number. (2) Word and LibreOffice paginate slightly differently; the page count here is the LibreOffice PDF's (7 pages, the same as typst). (3) The docx does not embed EB Garamond: a machine that opens the `.docx` in Word needs EB Garamond installed, or Word substitutes a font. (4) The caption rules are Word table borders (0.75 pt), not typst's 0.7 pt lines. (5) The heading labels are typed text (I., A., ...) written by the filter, not Word list numbering, so they do not renumber if the author adds a heading in Word. (6) pandoc does not write the YAML title as a title block (the caption carries it); the core "title" property is not set.

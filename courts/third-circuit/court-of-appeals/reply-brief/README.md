@@ -6,15 +6,15 @@ Rule-driven typst form for an appellant's reply brief (FRAP 28(c)). Rule texts w
 |---|---|
 | `typst/ca3-reply-brief.typ` | The template: `ca3-reply-brief(meta, md)`. Content-agnostic; the numbers are named parameters at the top. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
-| `usage/INPUT-ca3-reply-brief-afp.md` | Transcription of the filed exemplar (cover data, TOA, Introduction, part of Argument I.A.1, Conclusion, signature). A portion of the real brief, not all of it. |
-| `usage/OUTPUT-ca3-reply-brief-afp.typst.pdf` | `sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief usage/INPUT-ca3-reply-brief-afp.md`. 9 pages. |
+| `usage/INPUT-reply-brief.md` | Transcription of the filed exemplar (cover data, TOA, Introduction, part of Argument I.A.1, Conclusion, signature). A portion of the real brief, not all of it. |
+| `usage/OUTPUT-reply-brief.typst.pdf` | `sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md`. 9 pages. |
 | `usage/OVERLAY-afp-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/third-circuit/court-of-appeals/reply-brief afp-reply-brief`. Red = ours, blue = filed, black = both. |
-| `usage/SAMPLE-ca3-reply-brief-afp262469.pdf`, `usage/SOURCE.md` | The filed reply brief (AFP, 3d Cir. 26-2469, Dkt. 30) and its provenance. |
+| `usage/FILED-EXAMPLE-reply-brief.pdf`, `usage/SOURCE.md` | The filed reply brief (AFP, 3d Cir. 26-2469, Dkt. 30) and its provenance. |
 
 Build (from the repo root, with the toolchain on `PATH`):
 
 ```sh
-sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief usage/INPUT-ca3-reply-brief-afp.md
+sh tools/render.sh courts/third-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md
 sh tools/overlay.sh courts/third-circuit/court-of-appeals/reply-brief afp-reply-brief
 ```
 
@@ -84,7 +84,7 @@ Pages reviewed: 9 of 9.
 
 ## Verification pass 2026-10-16 (fb-595.26.3)
 
-- Rendered: `sh tools/render.sh ... usage/INPUT-ca3-reply-brief-afp.md`, exit 0, no typst warnings, 9 pages (the same count as the first pass). Overlay rerun: `usage/OVERLAY-afp-reply-brief.pdf`, 9 pages; pairs and percentages unchanged (cover 86.8%, TOC 31.2%, TOA 36.5%, body 35-84%, certificates 57.4% and 57.6%).
+- Rendered: `sh tools/render.sh ... usage/INPUT-reply-brief.md`, exit 0, no typst warnings, 9 pages (the same count as the first pass). Overlay rerun: `usage/OVERLAY-afp-reply-brief.pdf`, 9 pages; pairs and percentages unchanged (cover 86.8%, TOC 31.2%, TOA 36.5%, body 35-84%, certificates 57.4% and 57.6%).
 - Viewed: all 9 pages of the OUTPUT at 60 dpi, the 9 overlay pages at 40 dpi (as one contact sheet), the exemplar's page 1 against our cover, and the exemplar's certificate pages 34-35.
 - Defect fixed (tier 2), cover: the two counsel groups were stacked in the right half of the page, so the cover fit only with the spacing between its parts at or near zero (the rules touched the text above and below them). Two or more counsel groups now sit side by side, two to a row, across the full width, as on the filed cover; one group still sits in the right half. The cover now fits with clear space around every rule. The template still sets no coordinates; the spacing is the largest that fits.
 - Defect fixed (tier 2; FRAP 32(a)(4) exempts only quotations, headings and footnotes from double spacing): the certificate of compliance and the certificate of service were single-spaced with no paragraph indent. The filed certificates (AFP pp. 34-35, and those of the other two ca3 filers, Tresslar and Binder) are double-spaced with a first-line indent. The certificate text now uses the body leading and indent. Page count unchanged (9).

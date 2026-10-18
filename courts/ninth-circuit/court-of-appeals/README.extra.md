@@ -16,7 +16,7 @@
 Build and check (from the repo root):
 
 ```sh
-sh tools/render.sh courts/ninth-circuit/court-of-appeals usage/INPUT-ca9-genericopeningbrief.md   # -> usage/OUTPUT-ca9-genericopeningbrief.typst.pdf
+sh tools/render.sh courts/ninth-circuit/court-of-appeals usage/INPUT-opening-brief-2.md   # -> usage/OUTPUT-opening-brief-2.typst.pdf
 sh tools/check.sh courts/ninth-circuit/court-of-appeals                                     # gates 0-3
 sh tools/check-selftest.sh courts/ninth-circuit/court-of-appeals                            # does the checker catch breakage?
 ```

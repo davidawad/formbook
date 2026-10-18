@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "fisc-motion-brief.typ": fisc-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-fisc-motion-brief-accuracyconcernsmisc1902.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #fisc-motion-brief(meta, body)

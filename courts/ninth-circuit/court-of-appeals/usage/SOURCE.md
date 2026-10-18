@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca9-sweetvmcmahon261136openingbrief.pdf` |
+| File | `FILED-EXAMPLE-opening-brief.pdf` |
 | Filer | Defendants-Appellants U.S. Department of Education and Secretary Linda McMahon; U.S. Department of Justice counsel |
 | Case | *Sweet v. McMahon*, No. 26-1136 |
 | Document | Opening Brief for Appellants, DktEntry 23.1, 54 pages |
@@ -18,7 +18,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca9-acaconnects2115430openingbrief.pdf` |
+| File | `FILED-EXAMPLE-opening-brief-3.pdf` |
 | Filer | Plaintiffs-Appellants ACA Connects, CTIA, NCTA, and USTelecom, through Latham & Watkins LLP and Kellogg, Hansen, Todd, Figel & Frederick, P.L.L.C. (different filer from Sweet) |
 | Case | *ACA Connects—America's Communications Association v. Becerra*, No. 21-15430 |
 | Document | Opening Brief of Plaintiffs-Appellants, DktEntry 9, 97 pages |

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nmid-complaint-ewing1600034.pdf` (12 pages, text layer present: `pdftotext` reads it; Word-generated, embedded fonts)
+- File: `FILED-EXAMPLE-complaint.pdf` (12 pages, text layer present: `pdftotext` reads it; Word-generated, embedded fonts)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.nmid.5451.2.0.pdf (CourtListener RECAP; docket page https://www.courtlistener.com/docket/6082335/2/ewing-v-imperial-pacific-international-cnmi-llc/, found through the CourtListener search API with `court=nmid`)
 - Court: United States District Court for the Northern Mariana Islands
 - Case: *Ewing v. Imperial Pacific International (CNMI), LLC*

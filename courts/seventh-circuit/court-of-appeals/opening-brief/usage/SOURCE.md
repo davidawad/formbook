@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca7-opening-brief-torres222830.pdf` (55 pages, text layer; pages 2-4 are fillable Circuit Rule 26.1 disclosure forms with no text layer) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (55 pages, text layer; pages 2-4 are fillable Circuit Rule 26.1 disclosure forms with no text layer) |
 | Case | *Norberto Torres v. Kent Brookman, et al.* |
 | Court | U.S. Court of Appeals for the Seventh Circuit |
 | Docket | No. 22-2830 (appeal from S.D. Ill. No. 3:19-cv-00248) |

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "wawd-complaint.typ": wawd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-wawd-complaint-ironleaf.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #wawd-complaint(meta, body)

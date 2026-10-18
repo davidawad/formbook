@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "txnb-adversary-complaint.typ": txnb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-txnb-adversary-complaint-primeassetvprimalend.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #txnb-adversary-complaint(meta, body)

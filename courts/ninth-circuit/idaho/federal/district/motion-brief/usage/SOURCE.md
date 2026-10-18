@@ -4,7 +4,7 @@ All three exemplars are public RECAP copies of attachment 1 to the motion in Dis
 
 Fetched: 2026-10-14.
 
-## 1. `SAMPLE-idd-motion-brief-tarbellgroup125cv00144.pdf` (primary; transcribed in usage/ and used for the overlay)
+## 1. `FILED-EXAMPLE-motion-brief.pdf` (primary; transcribed in usage/ and used for the overlay)
 
 - Case: *United States ex rel. The Tarbell Group, LLC v. Western Association of Fish and Wildlife Agencies and Unknown John or Jane Does*, No. 1:25-cv-00144-DCN (D. Idaho)
 - Document: Document 27-1, "Defendant's Memorandum in Support of Motion to Dismiss [Doc. 26]" (14 pages)
@@ -12,7 +12,7 @@ Fetched: 2026-10-14.
 - Date filed: 06/09/26 (stamped on every page)
 - Fetched from: https://storage.courtlistener.com/recap/gov.uscourts.idd.56557/gov.uscourts.idd.56557.27.1.pdf (CourtListener RECAP, docket id 56557)
 
-## 2. `SAMPLE-idd-motion-brief-anderson224cv00341.pdf` (second filer; tier-2 comparison)
+## 2. `FILED-EXAMPLE-motion-brief-2.pdf` (second filer; tier-2 comparison)
 
 - Case: *Anderson v. Interpath Laboratory, Inc. and Praxis Health, P.C.*, No. 2:24-cv-00341-AKB (D. Idaho)
 - Document: Document 47-1, "Memorandum in Support of Defendants' Motion to Dismiss First Amended Complaint" (18 pages)
@@ -20,7 +20,7 @@ Fetched: 2026-10-14.
 - Date filed: 09/04/26
 - Fetched from: https://storage.courtlistener.com/recap/gov.uscourts.idd.55131/gov.uscourts.idd.55131.47.1.pdf (CourtListener RECAP, docket id 55131)
 
-## 3. `SAMPLE-idd-motion-brief-robinson124cv00306.pdf` (third filer; tier-2 comparison)
+## 3. `FILED-EXAMPLE-motion-brief-3.pdf` (third filer; tier-2 comparison)
 
 - Case: *Robinson v. Labrador*, No. 1:24-cv-00306-DCN (D. Idaho)
 - Document: Document 214-1, "Memorandum in Support of Centurion, LLC's Motion to Dismiss Plaintiffs' Amended Class Action Complaint for Declaratory and Injunctive Relief [Dkt. 209]" (15 pages)

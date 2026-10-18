@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "mtb-adversary-complaint.typ": mtb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-mtb-adversary-complaint-bachenoblecomplaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #mtb-adversary-complaint(meta, body)

@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/california/federal/central-district/motion-brief/`
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-cacd-motion-brief-backgrid219cv09309.pdf` (1 filer: defendant's counsel, Greenberg Traurig; filed 2020; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-cacd-motion-brief-backgrid.md` (portions of the 31-page filing; see below) |
-| render | ok: `usage/OUTPUT-cacd-motion-brief-backgrid.typst.pdf`, 11 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only, no typst warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer: defendant's counsel, Greenberg Traurig; filed 2020; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (portions of the 31-page filing; see below) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only, no typst warnings |
 | overlay | ok: `usage/OVERLAY-backgrid-motion-brief.pdf` and `usage/OVERLAY-backgrid-motion-brief.txt` (page map below) |
 | pages reviewed | 11 of 11: every page rendered at 60 dpi and viewed at the final template state |
 
@@ -83,7 +83,7 @@ The overlap is a diagnostic, not a score. The sample transcribes portions of the
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx`, `cacd-motion-brief.lua` is the filter, `render.sh` fills the footer from the sample). Checked with LibreOffice only; Word was not available. Render: `sh tools/render.sh --engine docx motion-brief usage/INPUT-cacd-motion-brief-backgrid.md`, which gives `OUTPUT-cacd-motion-brief-backgrid.docx` and `.docx.pdf` (9 pages, all viewed).
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx`, `cacd-motion-brief.lua` is the filter, `render.sh` fills the footer from the sample). Checked with LibreOffice only; Word was not available. Render: `sh tools/render.sh --engine docx motion-brief usage/INPUT-motion-brief.md`, which gives `OUTPUT-motion-brief.docx` and `.docx.pdf` (9 pages, all viewed).
 
 - Matches the typst output: EB Garamond 14 pt; exact 24 pt body pitch on the 28-line grid; numbered lines and pleading rules as in the complaint; cover with no page number and no footer; caption with the hearing lines; notice and memorandum numbered from 1 and the tables in roman (checked in the PDF: i, ii, then 1 to 5); memorandum headings numbered I., II., A. by the filter; certificate of compliance on its own page with the word count.
 - Differs: the pleading rules are page borders around the text area; the tables and signature blocks are tables; the cover's court title sits on line 9 (the typst template's counsel block measures a little differently); bullets for `-` items as above.

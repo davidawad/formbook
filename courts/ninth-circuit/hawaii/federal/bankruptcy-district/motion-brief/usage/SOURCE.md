@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-hib-motion-brief-fieldvrolloffs1890035.pdf` (127 ECF pages; ECF p. 1 is the main-case caption page, ECF p. 2 the adversary caption, the table of contents and table of authorities follow, the memorandum's own pages are numbered 1 to 106 (ECF pp. 22 to 127), and the signature is on numbered p. 106 (ECF p. 127))
+- File: `FILED-EXAMPLE-motion-brief.pdf` (127 ECF pages; ECF p. 1 is the main-case caption page, ECF p. 2 the adversary caption, the table of contents and table of authorities follow, the memorandum's own pages are numbered 1 to 106 (ECF pp. 22 to 127), and the signature is on numbered p. 106 (ECF p. 127))
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.hib.91120/gov.uscourts.hib.91120.19.0.pdf (CourtListener RECAP)
 - Court: United States Bankruptcy Court, District of Hawaii
 - Case: *Dane S. Field, Chapter 7 Trustee for the Estate of Rolloffs Hawaii, LLC v. TrashMasters, LLC, et al.*, Adv. Pro. No. 18-90035 (main case: In re Rolloffs Hawaii, LLC, Bk. No. 16-01294, Chapter 7; Hon. Robert J. Faris)

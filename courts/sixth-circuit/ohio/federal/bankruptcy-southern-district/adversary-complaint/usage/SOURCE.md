@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ohsb-adversary-complaint-caudill225ap02053.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | URL fetched | https://storage.courtlistener.com/recap/gov.uscourts.ohsb.851047/gov.uscourts.ohsb.851047.1.0.pdf |
 | Docket page | https://www.courtlistener.com/docket/71381132/1/caudill-v-pc-infinity-llc/ (CourtListener docket 71381132) |
 | Case | *Caudill v. PC Infinity LLC* (In re Cusitech, LLC), Case No. 23-53233 (Chapter 7), Adv. Pro. No. 2:25-ap-02053 |

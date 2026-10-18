@@ -2,7 +2,7 @@
 
 Both exemplars are public court records: documents filed on the docket of the U.S. Court of Appeals for the Second Circuit and published through the RECAP archive. Each was found through the CourtListener search API (`/api/rest/v4/search/`, `type=r`, `court=ca2`, query "reply brief") and downloaded from the RECAP storage link below. Date fetched for both: 2026-10-14.
 
-## 1. Primary: `SAMPLE-ca2-reply-brief-lowemoneylion26655.pdf`
+## 1. Primary: `FILED-EXAMPLE-reply-brief.pdf`
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,7 @@ Both exemplars are public court records: documents filed on the docket of the U.
 | Date fetched | 2026-10-14 |
 | Text layer | yes (`pdftotext` yields the full text; set in Century Schoolbook, which its own certificate of compliance states is 14-point) |
 
-## 2. Second filer, for conventions: `SAMPLE-ca2-reply-brief-alisigwe24960.pdf`
+## 2. Second filer, for conventions: `FILED-EXAMPLE-reply-brief-2.pdf`
 
 | Field | Value |
 |---|---|

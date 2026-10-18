@@ -5,9 +5,9 @@ Folder: `courts/eighth-circuit/iowa/federal/southern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-iasd-complaint-white426cv00430.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-iasd-complaint-white.md`: a transcription of the filing (caption, paragraphs 1 to 61, Division I, relief, jury demand, signature). Monell (Division II) and Division III are not transcribed. |
-| render | ok: `usage/OUTPUT-iasd-complaint-white.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: a transcription of the filing (caption, paragraphs 1 to 61, Division I, relief, jury demand, signature). Monell (Division II) and Division III are not transcribed. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
 | overlay | ok: `usage/OVERLAY-white-complaint.pdf` and `OVERLAY-white-complaint.txt` (page map) |
 | typeface | face required by the court: **none** (LR 10(b) has no typeface or point-size rule; checked 2026-10-14 in the PDF text, see Governing rules). Vendored substitute: none needed; **EB Garamond kept** (`docs/FONTS.md`: a court that names no face gets EB Garamond). Metric compatibility: n/a. Tier 2 question on the exemplar's Times New Roman, Known gaps 2. |
 | pages reviewed | 11 of 11, on the final PDF (sha256 `f94d58a6...`, see the review table below) |
@@ -114,7 +114,7 @@ Doc type `complaint`, in this folder. The typst template above is the primary en
 |---|---|
 | typst | `typst/`, as above. |
 | latex | not built in this change (`latex/` has no template for this doc type). |
-| docx | `docx/reference.docx` (built by `docx/make-reference.sh`) and `docx/iasd-complaint.lua`. `usage/OUTPUT-iasd-complaint-white.docx` is written by `tools/render.sh --engine docx`. The `.docx.pdf` is **not produced**: LibreOffice cannot be installed on the box that built this (not on conda-forge, no root), so the LibreOffice-based checks are BLOCKED. Pages reviewed as rendered PDF: 0. |
+| docx | `docx/reference.docx` (built by `docx/make-reference.sh`) and `docx/iasd-complaint.lua`. `usage/OUTPUT-complaint.docx` is written by `tools/render.sh --engine docx`. The `.docx.pdf` is **not produced**: LibreOffice cannot be installed on the box that built this (not on conda-forge, no root), so the LibreOffice-based checks are BLOCKED. Pages reviewed as rendered PDF: 0. |
 
 **docx: what the template sets, from the same parameters as the typst form.** Letter paper, 1-inch margins; EB Garamond 12 pt, the body at 24 pt exact line spacing (double) with a half-inch first-line indent; headings level 1 centered bold capitals, level 2 centered bold, level 3 bold at the margin; the caption as a borderless table with a right and bottom rule on the party column (3.25 in, as typst); the court title and the case number and title as in the typst cover; numbered paragraphs (1., 2., ...) typed by the filter, unnumbered after "Requested Relief" and "Jury Demand"; lettered relief (a), (b), ... with the text at the next tab stop; the signature block at 3.45 in; the filing note at the margin; footer page number centered, arabic from 1. The `.docx` passes the zip and XML checks in `tools/render-docx.sh` and reads back in pandoc with the same text. It has **not** been opened in Word or LibreOffice, so "no repair prompt" is unverified.
 

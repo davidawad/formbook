@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cacd-complaint-alarcon226cv11868.pdf` |
+| File | `FILED-EXAMPLE-complaint.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.cacd.1042868/gov.uscourts.cacd.1042868.1.0.pdf (docket: https://www.courtlistener.com/docket/74948951/1/alarcon-v-the-coca-cola-company/) |
 | Case | *Alarcon v. The Coca-Cola Company* |
 | Court | U.S. District Court, Central District of California |
@@ -15,7 +15,7 @@
 
 Filer count for tier 2: this is the only complaint saved for cacd. The CourtListener search also found other cacd complaints (Greenberg v. Creative Artists Agency, 2:26-cv-11882, Dkt. 1, 10 pp., Harmon Seidman & Bruss; Huemen, Inc. v. Ludo Fact USA, 5:23-cv-00516, Dkt. 1, 10 pp.). They were not saved because the brief asks for one exemplar per doc type; see README.md.
 
-- File: `SAMPLE-cacd-complaint-greenberg226cv11882.pdf`
+- File: `FILED-EXAMPLE-complaint-2.pdf`
 - Filer: Plaintiffs Jill Greenberg and Jill Greenberg Studio, Inc., by Amanda L. Bruss of Harmon Seidman & Bruss, LLC
 - Case: *Greenberg v. Creative Artists Agency LLC*, No. 2:26-cv-11882 (Doc. 1)
 - Date filed: 2026-10-12

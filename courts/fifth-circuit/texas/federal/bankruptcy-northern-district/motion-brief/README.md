@@ -8,9 +8,9 @@ Exemplar: Shook adversary 26-03089 (Bankr. N.D. Tex., Dallas Division), Doc 9, "
 | Item | Status |
 |---|---|
 | typeface | face required: none (L.B.R. revised 12/1/2025 and 12/1/16 name no face for motions or briefs). Substitute: none; **EB Garamond** kept (`docs/FONTS.md`, "No face named"). Metric note: none needed. |
-| exemplar | yes: `usage/SAMPLE-txnb-motion-brief-ruxtonvshook2603089.pdf` (the whole 9-page filing, text layer present) |
-| sample md | `usage/INPUT-txnb-motion-brief-ruxtonvshook.md`: a transcription of the whole filing: caption, counsel block, the body (sections I to IX), the signature, the certificate of conference and the certificate of service |
-| render | ok: `tools/render.sh` (typst 0.15.0, vendored EB Garamond only, no warnings) writes `usage/OUTPUT-txnb-motion-brief-ruxtonvshook.typst.pdf`, 8 pages |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (the whole 9-page filing, text layer present) |
+| sample md | `usage/INPUT-motion-brief.md`: a transcription of the whole filing: caption, counsel block, the body (sections I to IX), the signature, the certificate of conference and the certificate of service |
+| render | ok: `tools/render.sh` (typst 0.15.0, vendored EB Garamond only, no warnings) writes `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages |
 | overlay | ok: `tools/overlay.sh` writes `usage/OVERLAY-ruxton-v-shook.pdf` and `.txt`; every rendered page is paired with a filed page (see the page map in the `.txt`) |
 | pages reviewed | 8 of 8 (every page of the final render rasterized at 80 dpi and viewed after the last template change) |
 
@@ -64,7 +64,7 @@ The local rules copy is dated "Revised 12/1/16". A later revision may exist on t
 5. **Proposed order not generated.** L.B.R. 7007-1(c) requires it as a separate exhibit. It is a separate document, to be drafted separately.
 6. **Certificate of conference.** L.B.R. 7007-1(a) exempts motions to dismiss from the conference requirement. The template writes a certificate only when the frontmatter gives one, so a motion to dismiss can omit it.
 7. **Font.** No typeface rule was found for motions in either the 2016 or the 2025 local-rules text, so the face is not court-named and EB Garamond at 12 pt is kept (`docs/FONTS.md`, "No face named"). It is smaller in apparent size than Times New Roman at 12 pt. Re-check if the court names a face in a later revision.
-8. **Output PDFs.** `usage/OUTPUT-txnb-motion-brief-ruxtonvshook.typst.pdf` and `usage/OVERLAY-ruxton-v-shook.pdf` (with `.txt`) are written where the tools put them. Regenerate with `sh tools/render.sh <this-folder> usage/INPUT-txnb-motion-brief-ruxtonvshook.md` and `sh tools/overlay.sh <this-folder> ruxton-v-shook`.
+8. **Output PDFs.** `usage/OUTPUT-motion-brief.typst.pdf` and `usage/OVERLAY-ruxton-v-shook.pdf` (with `.txt`) are written where the tools put them. Regenerate with `sh tools/render.sh <this-folder> usage/INPUT-motion-brief.md` and `sh tools/overlay.sh <this-folder> ruxton-v-shook`.
 9. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and `tools/` is out of scope for this box. The gates were not run.
 10. **Signature block.** The template prints "Respectfully submitted," above the firm name; the filing's block is the same in substance. The filing's certificate of conference is written in the template's single-spaced certificate style.
 
@@ -84,7 +84,7 @@ The local rules copy is dated "Revised 12/1/16". A later revision may exist on t
 
 ## Engines
 
-**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`) and `docx/txnb-motion-brief.lua`. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-txnb-motion-brief-ruxtonvshook.md` writes `usage/OUTPUT-txnb-motion-brief-ruxtonvshook.docx` and `.docx.pdf` (9 pages; the typst output is 8).
+**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`) and `docx/txnb-motion-brief.lua`. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (9 pages; the typst output is 8).
 
 - Matches typst: US Letter with 1 in margins; EB Garamond 12 pt (`pdffonts` shows only EB Garamond); body double-spaced at a 24 pt line pitch, 0.5 in first-line indent, unnumbered paragraphs; counsel block and Form 416 caption as in the adversary folder; court title and the bold title at 24 pt pitch; headings (level 1 centered bold, level 2 bold, level 3 bold italic); lists numbered "1." and a tab; signature block kept together ("Dated", "Respectfully submitted", firm, "By: /s/", bar lines); certificate of conference and certificate of service, each a centered bold uppercase heading, unindented paragraphs, "/s/" right aligned, kept together; 10 pt page number centered in the footer.
 - Differs: (1) pagination: the text of each 24 pt line sits about 4 pt lower in LibreOffice than in typst, so each page carries slightly fewer lines of body text. The result is a 9-page `.docx.pdf` against the 8-page typst output: the signature block starts page 8 and the certificate of service is on page 9. The margins are unchanged. (2) Word's natural line height for EB Garamond may differ from LibreOffice's, so Word may paginate differently. (3) Paragraph numbers are not used in a motion (as in the typst template).

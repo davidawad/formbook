@@ -4,9 +4,9 @@ Doc type `reply-brief` for court `ca8` (folder `courts/eighth-circuit/court-of-a
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-ca8-reply-brief-delgadomidland241786.pdf` | Real filed reply brief, 8th Cir. No. 24-1786 (19 pp.). Provenance in `usage/SOURCE.md`. |
-| `usage/INPUT-ca8-reply-brief-delgadomidland.md` | Transcription of that brief (frontmatter = cover, counsel, signature, certificates, authorities; body = argument, conclusion, footnotes). |
-| `usage/OUTPUT-ca8-reply-brief-delgadomidland.typst.pdf` | `sh tools/render.sh courts/eighth-circuit/court-of-appeals/reply-brief usage/INPUT-ca8-reply-brief-delgadomidland.md` (18 pages). |
+| `usage/FILED-EXAMPLE-reply-brief.pdf` | Real filed reply brief, 8th Cir. No. 24-1786 (19 pp.). Provenance in `usage/SOURCE.md`. |
+| `usage/INPUT-reply-brief.md` | Transcription of that brief (frontmatter = cover, counsel, signature, certificates, authorities; body = argument, conclusion, footnotes). |
+| `usage/OUTPUT-reply-brief.typst.pdf` | `sh tools/render.sh courts/eighth-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md` (18 pages). |
 | `usage/OVERLAY-delgado-midland.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eighth-circuit/court-of-appeals/reply-brief delgado-midland` (red = ours, blue = filed, black = both). |
 | `typst/main.typ` | Entry point: reads the sample named by `--input sample=...`. |
 | `typst/ca8-reply-brief.typ` | Template `ca8-reply-brief(meta, md)`. Content-agnostic; the numbers are named parameters at the top. |
@@ -58,7 +58,7 @@ Body: `# Heading` is a section (centered); `##` A.; `###` 1.; `####` a.; `#####`
 
 ## Pages reviewed (Gate 2)
 
-All 18 pages of `usage/OUTPUT-ca8-reply-brief-delgadomidland.typst.pdf` were rasterized at 60 dpi (`pdftoppm -r 60`) and viewed. Findings and fixes made:
+All 18 pages of `usage/OUTPUT-reply-brief.typst.pdf` were rasterized at 60 dpi (`pdftoppm -r 60`) and viewed. Findings and fixes made:
 
 | Page (PDF) | Finding | Result |
 |---|---|---|
@@ -72,7 +72,7 @@ All 18 pages of `usage/OUTPUT-ca8-reply-brief-delgadomidland.typst.pdf` were ras
 
 ## Verification pass 2026-10-16 (fb-595.26.8)
 
-- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/reply-brief usage/INPUT-ca8-reply-brief-delgadomidland.md` exit 0, no typst warnings, 18 pages (same as the committed PDF), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0); pairings unchanged (40% to 100%, as above).
+- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md` exit 0, no typst warnings, 18 pages (same as the committed PDF), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0); pairings unchanged (40% to 100%, as above).
 - Viewed: all 18 pages at 60 dpi, the exemplar's page 1 against our cover, and all 18 overlay pages at 40 dpi. Pages 17 and 18 viewed again after the fixes; the text of pages 1-16 is unchanged by them.
 - Fixed (tier 2): the signature under both certificates was set in markup with `\` breaks, so each line picked up a leading space and the three lines stepped to the right. It is now one `cert-sig` block, flush left from mid-page like the signature block, with the role line from `signature.role` (default "Counsel for Appellant") instead of fixed text.
 - Fixed (tier 2): "(EB Garamond, 14-point)" was boxed as one unit and dropped to its own line, leaving a short line above. Only each comma-separated part is kept together now, so "14-point" still never breaks at the hyphen.

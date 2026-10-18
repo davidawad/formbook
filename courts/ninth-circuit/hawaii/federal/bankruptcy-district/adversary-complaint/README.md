@@ -1,14 +1,14 @@
 # Adversary complaint (U.S. Bankruptcy Court, D. Hawaii)
 
-Complaint initiating an adversary proceeding, in the Typst engine (`typst/`), rendered from one markdown sample (`usage/INPUT-hib-adversary-complaint-hawaiibrewery.md`).
+Complaint initiating an adversary proceeding, in the Typst engine (`typst/`), rendered from one markdown sample (`usage/INPUT-adversary-complaint.md`).
 
 | File | Role |
 |---|---|
 | `typst/main.typ`, `typst/hib-adversary-complaint.typ` | Template (entry point and rule-driven layout) |
-| `usage/INPUT-hib-adversary-complaint-hawaiibrewery.md` | Markdown input, transcribed from the filed exemplar (frontmatter = caption, counsel, signature) |
-| `usage/OUTPUT-hib-adversary-complaint-hawaiibrewery.typst.pdf` | Our render (`tools/render.sh`), 10 pages |
+| `usage/INPUT-adversary-complaint.md` | Markdown input, transcribed from the filed exemplar (frontmatter = caption, counsel, signature) |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | Our render (`tools/render.sh`), 10 pages |
 | `usage/OVERLAY-hawaii-brewery-adversary-complaint.pdf` / `.txt` | Red (ours) / blue (filed) overlay and page map (`tools/overlay.sh`) |
-| `usage/SAMPLE-hib-adversary-complaint-hawaiibrewery2690013.pdf` | The filed exemplar (26 pages; cover sheet pp. 1-2, complaint pp. 3-26) |
+| `usage/FILED-EXAMPLE-adversary-complaint-3.pdf` | The filed exemplar (26 pages; cover sheet pp. 1-2, complaint pp. 3-26) |
 | `usage/SOURCE.md` | Filer, case, date filed, URL, date retrieved |
 
 Engines: typst only. No latex or docx engine is delivered for this doc type.
@@ -67,7 +67,7 @@ LBR 7016-1(b) (scheduling conference on filing of a complaint) also applies to t
 
 ## Engines
 
-The docx engine is `docx/make-reference.sh` (builds `docx/reference.docx`) and `docx/hib-adversary-complaint.lua` (cover, caption and signature). The line "Engines: typst only" above predates this section. Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-hib-adversary-complaint-hawaiibrewery.md`, which writes `usage/OUTPUT-hib-adversary-complaint-hawaiibrewery.docx`. The sample used is `INPUT-hib-adversary-complaint-hawaiibrewery.md`, the one named by the typst OUTPUT naming above.
+The docx engine is `docx/make-reference.sh` (builds `docx/reference.docx`) and `docx/hib-adversary-complaint.lua` (cover, caption and signature). The line "Engines: typst only" above predates this section. Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`, which writes `usage/OUTPUT-adversary-complaint.docx`. The sample used is `INPUT-adversary-complaint.md`, the one named by the typst OUTPUT naming above.
 
 What the docx sets (in `styles.xml` and `sectPr`; set, not rendered):
 

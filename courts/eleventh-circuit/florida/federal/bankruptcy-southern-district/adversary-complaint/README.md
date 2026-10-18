@@ -2,7 +2,7 @@
 
 Court: United States Bankruptcy Court, Southern District of Florida (`flsb`). Doc type: adversary complaint commencing an adversary proceeding.
 
-**exemplar=yes.** Filed exemplar: `usage/SAMPLE-flsb-adversary-complaint-slottproseo2401328.pdf` (see `usage/SOURCE.md`).
+**exemplar=yes.** Filed exemplar: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (see `usage/SOURCE.md`).
 
 ## Governing rules
 
@@ -28,15 +28,15 @@ PDF text layer: L.R. 9004-1(a)(1) requires text-searchable PDF. Typst output has
 |---|---|
 | `typst/flsb-adversary-complaint.typ` | Template: `flsb-adversary-complaint(meta, body)`. Content-agnostic; every case word comes from the sample's frontmatter. |
 | `typst/main.typ` | Entry point: reads `sample=` and calls the template. |
-| `usage/INPUT-flsb-adversary-complaint-slottcomplaint.md` | Transcription of the exemplar's text (caption, jurisdiction and parties, background, Count I, WHEREFORE items, reservation, signature). |
-| `usage/OUTPUT-flsb-adversary-complaint-slottcomplaint.typst.pdf` | Our render (`tools/render.sh`). |
+| `usage/INPUT-adversary-complaint.md` | Transcription of the exemplar's text (caption, jurisdiction and parties, background, Count I, WHEREFORE items, reservation, signature). |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | Our render (`tools/render.sh`). |
 | `usage/OVERLAY-slott-complaint.pdf`, `.txt` | Red (ours) / blue (filed) overlay and page map (`tools/overlay.sh`). |
 | `usage/` | The filed PDF and `SOURCE.md`. |
 
 Commands, run from the repo root with the toolchain on `PATH`:
 
 ```sh
-sh tools/render.sh courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-flsb-adversary-complaint-slottcomplaint.md
+sh tools/render.sh courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/adversary-complaint slott-complaint
 ```
 
@@ -53,7 +53,7 @@ What the rules drive, and the exemplar does not:
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-flsb-adversary-complaint-slottcomplaint.typst.pdf` was rendered at 60 dpi and looked at. `pages_reviewed=5`.
+Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and looked at. `pages_reviewed=5`.
 
 | Page | Result |
 |---|---|
@@ -81,7 +81,7 @@ Defects found and fixed while reviewing:
 
 ## Engines
 
-Word (`docx/`): pandoc with `docx/reference.docx` (built by `docx/make-reference.sh`, from pandoc's default) and `docx/flsb-adversary-complaint.lua`; `docx/render.sh` writes `usage/OUTPUT-flsb-adversary-complaint-slottcomplaint.docx`. Run `sh tools/render.sh --engine docx <this dir> usage/INPUT-flsb-adversary-complaint-slottcomplaint.md`.
+Word (`docx/`): pandoc with `docx/reference.docx` (built by `docx/make-reference.sh`, from pandoc's default) and `docx/flsb-adversary-complaint.lua`; `docx/render.sh` writes `usage/OUTPUT-adversary-complaint.docx`. Run `sh tools/render.sh --engine docx <this dir> usage/INPUT-adversary-complaint.md`.
 
 What matches the typst output: EB Garamond 12 pt; 1-inch margins on letter paper; double spacing (24 pt exact) for body paragraphs with a half-inch first-line indent; single-spaced caption, title, signature block and block quotations; 10-point footnotes; centered page number; the caption (court, division or blank line, debtor, parties, case and adversary numbers) as a borderless table; paragraph numbers 1 to 28 with the opening paragraph and WHEREFORE unnumbered; lettered items (a)–(f) at a half-inch left indent; headings kept with the next paragraph.
 

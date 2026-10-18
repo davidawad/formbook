@@ -2,15 +2,15 @@
 
 Doc type: **adversary complaint** (FRBP 7001) in the United States Bankruptcy Court for the District of Arizona (`arb`, Ninth Circuit). Folder: `courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint/`.
 
-**Typst exemplar and overlay added (2026-10-17).** `usage/SAMPLE-arb-adversary-complaint-woodnick20260109.pdf` is a public RECAP adversary complaint filed by Woodnick Law, PLLC. `usage/INPUT-arb-adversary-complaint-woodnickcomplaint.md` transcribes its complaint text and is rendered as `usage/OUTPUT-arb-adversary-complaint-woodnickcomplaint.typst.pdf`; the visual comparison is `usage/OVERLAY-woodnick-complaint.pdf`. The sample includes the filed caption's blank adversary-number field and omits its separate certificate-of-service block, which the current Typst template does not generate. The full source and retrieval record are in `usage/SOURCE.md`.
+**Typst exemplar and overlay added (2026-10-17).** `usage/FILED-EXAMPLE-adversary-complaint.pdf` is a public RECAP adversary complaint filed by Woodnick Law, PLLC. `usage/INPUT-adversary-complaint.md` transcribes its complaint text and is rendered as `usage/OUTPUT-adversary-complaint.typst.pdf`; the visual comparison is `usage/OVERLAY-woodnick-complaint.pdf`. The sample includes the filed caption's blank adversary-number field and omits its separate certificate-of-service block, which the current Typst template does not generate. The full source and retrieval record are in `usage/SOURCE.md`.
 
 This is one filer, so the review records visible differences as accepted open choices; it does not establish conventions across different filers. A second exemplar from a different filer is still needed for a full tier-2 convention review.
 
 | Item | Status |
 |---|---|
 | exemplar | yes: Woodnick Law, PLLC, Doc. 28 (Jan. 9, 2026); one filer only |
-| sample md | `usage/INPUT-arb-adversary-complaint-woodnickcomplaint.md` (transcribed; 7 rendered pages); `usage/INPUT-arb-adversary-complaint-genericcomplaint.md` (fictional; 5 pages) |
-| render | ok: `usage/OUTPUT-arb-adversary-complaint-woodnickcomplaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings |
+| sample md | `usage/INPUT-adversary-complaint.md` (transcribed; 7 rendered pages); `usage/INPUT-adversary-complaint-2.md` (fictional; 5 pages) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings |
 | typeface | face required: none. LRBP 9004-1(g) (checked on azb.uscourts.gov, 2026-10-15) says "a proportional font size no smaller than 13 point" and names no face. EB Garamond kept; no vendored substitute needed. Not metric-compatible with Times New Roman, and not changed to it |
 | overlay | generated: `usage/OVERLAY-woodnick-complaint.pdf` and `.txt` |
 | pages reviewed | filed exemplar: 9 of 9; Typst output: 7 of 7 (rasterised at 100 dpi and viewed); see `reviews/2026-10-17.md` |
@@ -74,8 +74,8 @@ Not generated, and why: the adversary cover sheet (Official Form 104 with the ci
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env, see the brief)
-sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint usage/INPUT-arb-adversary-complaint-genericcomplaint.md
-sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint usage/INPUT-arb-adversary-complaint-woodnickcomplaint.md
+sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint-2.md
+sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint woodnick-complaint
 ```
 
@@ -88,7 +88,7 @@ sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adv
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `arb-complaint.lua` builds the caption, numbered allegations, lettered prayer and signature; `render.sh` runs pandoc and fills the footer). Rendered: `usage/OUTPUT-arb-adversary-complaint-genericcomplaint.docx` and `usage/OUTPUT-arb-adversary-complaint-genericcomplaint.docx.pdf` (LibreOffice 26.2 conversion, 4 pages). `pdffonts`: EB Garamond Regular, Bold and Italic only.
+DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `arb-complaint.lua` builds the caption, numbered allegations, lettered prayer and signature; `render.sh` runs pandoc and fills the footer). Rendered: `usage/OUTPUT-adversary-complaint-2.docx` and `usage/OUTPUT-adversary-complaint-2.docx.pdf` (LibreOffice 26.2 conversion, 4 pages). `pdffonts`: EB Garamond Regular, Bold and Italic only.
 
 Matches the typst form (every page of the `.docx.pdf` rendered at 60 dpi and viewed: pages 1 to 4 of 4):
 - Letter paper; margins top 1 in, left 1.5 in, right 0.75 in, bottom 0.67 in; line numbers 1 to 28 on the 24 pt grid (one page-anchored text box in the header, so the body keeps its 28 lines); double rule at the left text edge and single rule at the right (`pgBorders`).

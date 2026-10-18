@@ -4,11 +4,11 @@ Doc type: **complaint** (original or amended) in the United States District Cour
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-azd-complaint-harod226cv05215.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-azd-complaint-harodfac.md`: the whole First Amended Complaint, caption to certificate of service |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: the whole First Amended Complaint, caption to certificate of service |
 | typeface | face required: **none** (LRCiv 7.1(b)(1) names a size and a pitch, not a face; see Governing rules) → **EB Garamond** (vendored, OFL; no substitute). Not metric-compatible with Times, so line count is not the Times line count. |
-| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-azd-complaint-harodfac.typst.pdf`, 8 pages, typst 0.15.0, `tools/render.sh`, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular and -Bold embedded), no warnings, exit 0 |
-| overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `usage/SAMPLE-azd-complaint-harod226cv05215.pdf`, which is not in this snapshot (not in git, not on disk). No `OVERLAY-harod-fac.pdf` was produced. `OVERLAY-harod-fac.txt` is the earlier page map, not regenerated. |
+| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, `tools/render.sh`, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular and -Bold embedded), no warnings, exit 0 |
+| overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `usage/FILED-EXAMPLE-complaint.pdf`, which is not in this snapshot (not in git, not on disk). No `OVERLAY-harod-fac.pdf` was produced. `OVERLAY-harod-fac.txt` is the earlier page map, not regenerated. |
 | pages reviewed | 8 of 8 (re-viewed 2026-10-15 at 60 dpi, every page; no layout change from the render before) |
 
 File names follow the repo's tools: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf`, the overlay `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default.
@@ -55,7 +55,7 @@ Not produced by this template (separate filings or documents the sample does not
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/ninth-circuit/arizona/federal/district/complaint usage/INPUT-azd-complaint-harodfac.md
+sh tools/render.sh courts/ninth-circuit/arizona/federal/district/complaint usage/INPUT-complaint.md
 sh tools/overlay.sh courts/ninth-circuit/arizona/federal/district/complaint harod-fac
 ```
 
@@ -89,8 +89,8 @@ The overlay page map (ours to filed, by word overlap): p.1→1 (78%), p.2→2, p
 ## Engines
 
 **docx** (LibreOffice only; Word was not available, so "opens in Word without a repair prompt" is not verified).
-`docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt, exact 24 pt lines, letter, margins as in the typst template, PAGE field in the footer). `docx/azd-complaint.lua` builds the cover, caption, numbered allegations, lettered relief items, signature and certificate. `sh tools/render.sh --engine docx <this folder> usage/INPUT-azd-complaint-harodfac.md` writes `usage/OUTPUT-azd-complaint-harodfac.docx` and `.docx.pdf`: 8 pages; fonts embedded EBGaramond-Regular and -Bold only.
+`docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt, exact 24 pt lines, letter, margins as in the typst template, PAGE field in the footer). `docx/azd-complaint.lua` builds the cover, caption, numbered allegations, lettered relief items, signature and certificate. `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx` and `.docx.pdf`: 8 pages; fonts embedded EBGaramond-Regular and -Bold only.
 
 - Matches typst: body and caption in EB Garamond 13 pt; 28 numbered lines on a 24 pt grid; counsel from line 1; court title on line 7; caption ruled right and below; allegations numbered; pages 1 to 8 viewed at 60 dpi (all 8), and the left pleading rule checked at 150 dpi (double).
-- Differs, and why: (1) the pleading numbers 1 to 28 are a floating text box in the header (Word and LibreOffice place it from the page edge, not from the text); (2) the two pleading rules are page borders around the text area, so they run from the top to the bottom margin, not the full page height as in typst; (3) the caption row height is estimated from the number of wrapped lines, so the grid below it can differ by a line from typst; (4) no typst PDF is in `usage/` for this doc type (`OUTPUT-azd-complaint-harodfac.typst.pdf` is not in this snapshot), so the docx was compared with the typst template and the review above, not with a rendered typst page.
+- Differs, and why: (1) the pleading numbers 1 to 28 are a floating text box in the header (Word and LibreOffice place it from the page edge, not from the text); (2) the two pleading rules are page borders around the text area, so they run from the top to the bottom margin, not the full page height as in typst; (3) the caption row height is estimated from the number of wrapped lines, so the grid below it can differ by a line from typst; (4) no typst PDF is in `usage/` for this doc type (`OUTPUT-complaint.typst.pdf` is not in this snapshot), so the docx was compared with the typst template and the review above, not with a rendered typst page.
 - BLOCKED: `tools/check.sh <folder> --engine docx` cannot run on a doc-type folder: it reads `court.json` and `checks.yaml` from the folder it is given (exit 2). No stamp is written. Every Gate 1 rule check in `checks.yaml` is therefore not run for docx; the observations above are not a gate result.

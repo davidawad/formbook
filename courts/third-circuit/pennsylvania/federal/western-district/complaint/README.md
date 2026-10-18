@@ -5,13 +5,13 @@ Folder: `courts/third-circuit/pennsylvania/federal/western-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-pawd-complaint-cragle226cv02200.pdf` (primary, transcribed) and `usage/SAMPLE-pawd-complaint-snee222cv00119.pdf` (second filer, saved for comparison, not transcribed). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-pawd-complaint-cragle.md` (the whole filing: caption, 46 numbered paragraphs, four counts, prayers, jury demands, signature) |
-| render | ok: `usage/OUTPUT-pawd-complaint-cragle.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings (`tools/render.sh` exit 0) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (primary, transcribed) and `usage/FILED-EXAMPLE-complaint-2.pdf` (second filer, saved for comparison, not transcribed). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-complaint.md` (the whole filing: caption, 46 numbered paragraphs, four counts, prayers, jury demands, signature) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings (`tools/render.sh` exit 0) |
 | overlay | ok: `usage/OVERLAY-cragle-complaint.pdf` and `usage/OVERLAY-cragle-complaint.txt` (`tools/overlay.sh` exit 0) |
 | pages reviewed | 12 of 12: every page rendered at 60 dpi (`pdftoppm -r 60`) and viewed after the last template change |
 
-File names: the brief asked for `usage/<id>.md`, `usage/<id>.pdf` and `usage/<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` (not edited, per the brief) write and read `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so those names are used. The sample is `INPUT-pawd-complaint-cragle.md`, so its id is `cragle-complaint`.
+File names: the brief asked for `usage/<id>.md`, `usage/<id>.pdf` and `usage/<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` (not edited, per the brief) write and read `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so those names are used. The sample is `INPUT-complaint.md`, so its id is `cragle-complaint`.
 
 ## Governing rules
 
@@ -87,6 +87,6 @@ Earlier review passes found and fixed: paragraphs running into one another (bloc
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the court's form.
-- **docx** (`docx/reference.docx`, `docx/pawd.lua`, `docx/build-reference.sh`; sample `usage/OUTPUT-pawd-complaint-cragle.docx`): built with pandoc 3.6.4 on the reference. Matches the typst template: EB Garamond 13 pt, exact 26 pt (double) line pitch, 1 in margins on US Letter, 0.5 in first-line indent, paragraphs numbered 1 to 46 by the filter (number, tab, text), counts and sections centered in bold, sub-heads flush left, lettered prayer items with a hanging letter, the court heading, the caption (a borderless table: parties, ")" column, case number and jury demand in the right column), the title, the "Dated:" line and the signature block at 3 in, page number centered in the footer.
+- **docx** (`docx/reference.docx`, `docx/pawd.lua`, `docx/build-reference.sh`; sample `usage/OUTPUT-complaint.docx`): built with pandoc 3.6.4 on the reference. Matches the typst template: EB Garamond 13 pt, exact 26 pt (double) line pitch, 1 in margins on US Letter, 0.5 in first-line indent, paragraphs numbered 1 to 46 by the filter (number, tab, text), counts and sections centered in bold, sub-heads flush left, lettered prayer items with a hanging letter, the court heading, the caption (a borderless table: parties, ")" column, case number and jury demand in the right column), the title, the "Dated:" line and the signature block at 3 in, page number centered in the footer.
 - Differences from typst: the caption rows are spaced by the table, not the typst grid (a few points per row differ); paragraph numbers and lettered items are typed text, not Word lists; the page number is the PAGE field, which needs no update.
 - **BLOCKED** (docx): no `checks.yaml` exists for this court, so no gate check ID can be listed. Every check measured on `usage/OUTPUT-cragle-complaint.docx.pdf` is BLOCKED with the reason "LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked". The `.docx` passes the package checks run here (ziptool reads every entry, xmllint on every XML part, no duplicate style ids); it was not opened in Word or LibreOffice.

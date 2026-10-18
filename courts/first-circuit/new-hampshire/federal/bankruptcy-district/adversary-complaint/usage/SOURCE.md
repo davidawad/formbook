@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nhb-adversary-complaint-smithpjcurrier2401019.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, District of New Hampshire (`nhb`)
 - Case: *In re Detail Design Builders, LLC*, Case No. 22-10577-MAF (Chapter 7); adversary proceeding *Smith v. PJ Currier Lumber Co., Inc.*, Adv. Pro. No. 24-01019-MAF
 - Document: Complaint (Doc. 1), 9 pages, captioned "COMPLAINT", Counts I to IV (preference, fraudulent transfer, recovery, disallowance)

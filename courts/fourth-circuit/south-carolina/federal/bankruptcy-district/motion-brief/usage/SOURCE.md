@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-scb-motion-brief-ard2580005.pdf` (8 pages, text layer present; `pdftotext` reads it; Times, embedded by Word/Acrobat)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (8 pages, text layer present; `pdftotext` reads it; Times, embedded by Word/Acrobat)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.scb.316163/gov.uscourts.scb.316163.9.0.pdf (CourtListener RECAP; docket page https://www.courtlistener.com/docket/69576077/)
 - Court: United States Bankruptcy Court, District of South Carolina
 - Case: *Jacqueline Elizabeth Ard v. Zeidman's Jewelry & Loan of Southfield* (adversary), within Chapter 13 No. 24-03611-jd (debtors Jacqueline Elizabeth Ard and Terry Frank Nicola)

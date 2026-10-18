@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-moeb-motion-brief-qmaxx2041063motiontoabstain.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Court: United States Bankruptcy Court, Eastern District of Missouri, Eastern Division (`moeb`)
 - Case: *In re QMAXX Products Group, Inc.*, Case No. 20-41063-659 (Chapter 11, involuntary; Hon. Kathy Surratt-States)
 - Document: Motion to Abstain (titled "MOTION TO ABSTAIN"; Doc 17), 5 pages. It is a motion with numbered paragraphs and five footnotes, and it reserves the right to file a memorandum (¶ 11). No memorandum was filed with it in the RECAP copy.
@@ -21,7 +21,7 @@
 
 ## Second filer (tier-2 comparison)
 
-- File: `SAMPLE-moeb-motion-brief-gutierrez23andme2504043.pdf` (11 pages)
+- File: `FILED-EXAMPLE-motion-brief-3.pdf` (11 pages)
 - Case: *23andMe Holding Co., et al. v. Hector Gutierrez*, Adv. No. 25-04043 (main case 25-40976-357)
 - Document: Debtors' motion to dismiss pro se adversary complaint, Doc. 22
 - Filer: Debtors 23andMe Holding Co. et al., by counsel Cozen O'Connor (verify firm and signer on filing signature page)

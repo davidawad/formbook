@@ -5,10 +5,10 @@ Folder: `courts/eighth-circuit/missouri/federal/western-district/motion-brief/` 
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-mowd-motion-brief-mannon626cv03197.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-mowd-motion-brief-mannonsuggestions.md` (an excerpt: cover, introduction, Sections I.A to I.C and VIII, certificate; see Known gaps) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (an excerpt: cover, introduction, Sections I.A to I.C and VIII, certificate; see Known gaps) |
 | typeface | face required by the rules: none (see Governing rules). Substitute: none; EB Garamond kept (`docs/FONTS.md`, "No face named"). Metric note: n/a. |
-| render | ok: `usage/OUTPUT-mowd-motion-brief-mannonsuggestions.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`; re-rendered 2026-10-14, `pdffonts`: EB Garamond Regular, Bold and Italic embedded) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`; re-rendered 2026-10-14, `pdffonts`: EB Garamond Regular, Bold and Italic embedded) |
 | overlay | fail: `usage/OVERLAY-mannon-suggestions.pdf` not regenerated. `usage/` holds only `SOURCE.md` in this snapshot (no `SAMPLE-*.pdf`), so `tools/overlay.sh` exits 1. The `.txt` page map is from an earlier run. |
 | pages reviewed | 9 of 9 (re-rendered 2026-10-14 and every page viewed at 60 dpi; the template did not change) |
 
@@ -90,8 +90,8 @@ Page numbers: the cover is unnumbered, the contents and authorities are i and ii
 
 ## Engines
 
-- **typst** (`typst/`, primary): `usage/OUTPUT-mowd-motion-brief-mannonsuggestions.typst.pdf`, 9 pages.
-- **docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh reference.docx`), `mowd-motion-brief.lua` (cover, contents, authorities, headings, body, signature, certificate) and `render.sh`, which owns the build. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-mowd-motion-brief-mannonsuggestions.md` writes `usage/OUTPUT-mowd-motion-brief-mannonsuggestions.docx` and `usage/OUTPUT-mowd-motion-brief-mannonsuggestions.docx.pdf` (LibreOffice 26.8.1; 10 pages). LibreOffice must see `fonts/` (EB Garamond) through fontconfig.
+- **typst** (`typst/`, primary): `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages.
+- **docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh reference.docx`), `mowd-motion-brief.lua` (cover, contents, authorities, headings, body, signature, certificate) and `render.sh`, which owns the build. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8.1; 10 pages). LibreOffice must see `fonts/` (EB Garamond) through fontconfig.
 - **latex**: not built for this doc type (`latex/` is empty).
 
 Sections (the docx has three, as the typst output has three page-number sequences): the cover with no number; the contents and the authorities in lower-case roman; the body from 1, with the signature block and the certificate of service.

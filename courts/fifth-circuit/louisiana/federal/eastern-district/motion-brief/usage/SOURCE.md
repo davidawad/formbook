@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-laed-motion-brief-walker226cv00726.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Eastern District of Louisiana
 - Case: *Walker v. AmeriGas Propane, L.P.*
 - Docket: No. 2:26-cv-00726-EEF-DPC (Document 18-1)

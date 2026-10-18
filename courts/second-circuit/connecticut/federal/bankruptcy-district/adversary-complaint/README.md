@@ -5,10 +5,10 @@ Folder: `courts/second-circuit/connecticut/federal/bankruptcy-district/adversary
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ctb-adversary-complaint-despins1stdibs2505088.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ctb-adversary-complaint-1stdibscomplaint.md` (the complaint's text, paragraphs 1 to 34 and the prayer; Schedule A and footnotes omitted) |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (the complaint's text, paragraphs 1 to 34 and the prayer; Schedule A and footnotes omitted) |
 | typeface | face required: none by the bankruptcy rules (see "Typeface and size" below). Vendored substitute: **EB Garamond** (kept; no court face to substitute). Fit: n/a. The district Arial order is an open question (gap 2). |
-| render | ok: `usage/OUTPUT-ctb-adversary-complaint-1stdibscomplaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 (re-rendered 2026-10-15; `pdffonts` shows only the three EB Garamond faces, all embedded) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 (re-rendered 2026-10-15; `pdffonts` shows only the three EB Garamond faces, all embedded) |
 | overlay | ok: `usage/OVERLAY-1stdibs-complaint.pdf` and `OVERLAY-1stdibs-complaint.txt` (re-run 2026-10-15 against the saved exemplar) |
 | pages reviewed | 7 of 7 (every page rendered at 70 dpi and viewed on 2026-10-15) |
 
@@ -56,7 +56,7 @@ Typeface and size: no rule that governs this court sets a typeface. Local Bankr.
 8. **Caption.** The debtor footnote marker ("1") after "HO WAN KWOK, et al." is not reproduced; the template has no footnote in the caption.
 9. **Check scripts.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither, and `tools/` is out of scope for this box. The gates were not run. Render and overlay were run, and the page review below is the Gate 2 equivalent.
 
-## Review of the rendered pages (`usage/OUTPUT-ctb-adversary-complaint-1stdibscomplaint.typst.pdf`, 7 pages)
+## Review of the rendered pages (`usage/OUTPUT-adversary-complaint.typst.pdf`, 7 pages)
 
 Every page rendered at 60 dpi and viewed after the final template change (heading spacing and the e-signer line). Re-viewed 2026-10-15 at 70 dpi after the re-render (no template change; same EB Garamond layout, same 7 pages).
 
@@ -72,10 +72,10 @@ Overlay: our pages pair with the exemplar's pages 4 to 12 by shared words (word 
 
 ## Engines
 
-**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `ctb-adversary-complaint.lua`, `render.sh`; output `usage/OUTPUT-ctb-adversary-complaint-1stdibscomplaint.docx` and `usage/OUTPUT-ctb-adversary-complaint-1stdibscomplaint.docx.pdf`, the LibreOffice conversion):
+**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `ctb-adversary-complaint.lua`, `render.sh`; output `usage/OUTPUT-adversary-complaint.docx` and `usage/OUTPUT-adversary-complaint.docx.pdf`, the LibreOffice conversion):
 
 - Matches the typst output: letter, 1 inch margins; EB Garamond 12 point (`pdffonts` on the docx PDF shows only EB Garamond, embedded); double spacing at 24 pt; caption box with right and bottom rules; court name, title; numbered paragraphs from the first heading, none under PRAYER FOR RELIEF; centred `#` headings, bold left `##` headings; the docket line in the header and the page number in the footer from page 2 on (page 1 has neither); the signature block.
 - Differs (tier 2, accepted): no blank line between body paragraphs (typst leaves about 16 pt); the prayer's list uses Word's list indentation; the first-page layout runs one line longer, so the docx is 8 pages against typst's 7 (the same content falls on pages 2 to 8).
 - Word has not been run here. The `.docx` was checked only by LibreOffice (converts without error; every XML part well-formed).
 - BLOCKED: `tools/check.sh` (Gates 0 to 3, every check ID): cannot run on this doc-type folder. It reads `court.json` and `checks.yaml` at the court level (`courts/second-circuit/connecticut/federal/bankruptcy-district/`), and this box does not produce those files. No `usage/.check-docx.txt` was written.
-- Pages reviewed: all 8 pages of `OUTPUT-ctb-adversary-complaint-1stdibscomplaint.docx.pdf` were rendered at 60 dpi and viewed, and compared with all 7 pages of the typst render.
+- Pages reviewed: all 8 pages of `OUTPUT-adversary-complaint.docx.pdf` were rendered at 60 dpi and viewed, and compared with all 7 pages of the typst render.

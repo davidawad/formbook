@@ -4,9 +4,9 @@ Doc type: **motion** (a written motion, with a brief in support, filed in one do
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-mieb-motion-brief-heitmann2441956.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-mieb-motion-brief-heitmann.md` (an excerpt of the brief; the motion and the certificate are complete) |
-| render | ok: `usage/OUTPUT-mieb-motion-brief-heitmann.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (an excerpt of the brief; the motion and the certificate are complete) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-heitmann-motion-brief.pdf` and `-overlay.txt` (`tools/overlay.sh`, see "Overlay" below) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -45,7 +45,7 @@ Verified 2026-10-14. Federal rules are quoted or closely paraphrased from the Le
 
 ## Overlay
 
-`tools/overlay.sh` reads and writes `OUTPUT-<id>.pdf` / `OVERLAY-<id>.pdf` and `.txt`; this doc type uses the names the brief asks for (`usage/<id>.pdf`, `usage/<id>-overlay.pdf`, `usage/<id>-overlay.txt`). The overlay was run on a copy named `OUTPUT-mieb-motion-brief-heitmann.typst.pdf`, and its outputs were renamed; the copy was deleted. Red = our render, blue = the filed exemplar, black = both. The page map:
+`tools/overlay.sh` reads and writes `OUTPUT-<id>.pdf` / `OVERLAY-<id>.pdf` and `.txt`; this doc type uses the names the brief asks for (`usage/<id>.pdf`, `usage/<id>-overlay.pdf`, `usage/<id>-overlay.txt`). The overlay was run on a copy named `OUTPUT-motion-brief.typst.pdf`, and its outputs were renamed; the copy was deleted. Red = our render, blue = the filed exemplar, black = both. The page map:
 
 | ours | filed | word overlap |
 |---|---|---|
@@ -89,7 +89,7 @@ Pages reviewed: 8 of 8.
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` builds `reference.docx`; `mieb-motion-brief.lua` splits the body into the documents of the filing, writes each caption, and the signature blocks; `render.sh` writes the `---` separators as `DOCSEP` (so pandoc does not read them as rules or YAML) and assembles the file. Sample `heitmann-motion-brief` renders to `usage/OUTPUT-mieb-motion-brief-heitmann.docx` (`sh tools/render.sh --engine docx`), a valid zip with no duplicate entries and well-formed XML.
+docx (`docx/`): `build-reference.sh` builds `reference.docx`; `mieb-motion-brief.lua` splits the body into the documents of the filing, writes each caption, and the signature blocks; `render.sh` writes the `---` separators as `DOCSEP` (so pandoc does not read them as rules or YAML) and assembles the file. Sample `heitmann-motion-brief` renders to `usage/OUTPUT-motion-brief.docx` (`sh tools/render.sh --engine docx`), a valid zip with no duplicate entries and well-formed XML.
 
 - **Matches the typst template (set in the reference, read from the source of `typst/mieb-motion-brief.typ`):** EB Garamond at 14 pt; exact 28 pt body pitch (double spacing); 0.5 in first-line indent for body paragraphs; letter paper; 1 in margins; footer "N of M" centered at 14 pt (PAGE and NUMPAGES fields); Heading 1 centered and bold, Heading 2 bold, Heading 3 bold italic, all kept with the next paragraph; footnote text and block quotations 14 pt single spaced; each document starts on a new page with its own caption; "Dated" left and "Respectfully submitted" right in the signature block (4752 / 4608 twips).
 - **Differs from typst:** the caption rules are paragraph borders and the caption is a borderless table; single-spaced lines use Word's `auto` 240 spacing rather than the typst 0.3 em leading; the typst heading spacing above and below (one line) is not reproduced, so headings sit on the double-spaced grid only; the footnote and block-quote spacing is not measured against typst. The markdown is the same, so footnotes are pandoc's native ones and their numbering runs across the filing, as in typst.

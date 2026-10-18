@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nysd-complaint-sacchi26cv08973.pdf` (20 pages, text layer present, `pdftotext` reads it) |
+| File | `FILED-EXAMPLE-complaint.pdf` (20 pages, text layer present, `pdftotext` reads it) |
 | Case | *John Sacchi v. WeBull Financial LLC, et al.* (putative class action) |
 | Court | United States District Court, Southern District of New York |
 | Docket no. | 1:26-cv-08973 (page header: `Case 1:26-cv-08973 Document 1 Filed 10/11/26`) |
@@ -33,7 +33,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nysd-complaint-sec26cv08626.pdf` (12 pages, letter, native text layer from Word via Acrobat PDFMaker, `pdftotext` reads it; not scanned) |
+| File | `FILED-EXAMPLE-complaint-2.pdf` (12 pages, letter, native text layer from Word via Acrobat PDFMaker, `pdftotext` reads it; not scanned) |
 | Case | *Securities and Exchange Commission v. Mukesh Asudani* |
 | Court | United States District Court, Southern District of New York |
 | Docket no. | 1:26-cv-08626 (page header: `Case 1:26-cv-08626 Document 1 Filed 09/30/26`; caption reads "26 Civ. 8626") |

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "mowd-motion-brief.typ": mowd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-mowd-motion-brief-mannonsuggestions.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #mowd-motion-brief(meta, body)

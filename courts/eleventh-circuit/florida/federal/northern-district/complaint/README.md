@@ -5,9 +5,9 @@ Folder: `courts/eleventh-circuit/florida/federal/northern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-flnd-complaint-winton326cv05081.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-flnd-complaint-winton.md`: the whole 9-page complaint, transcribed (word-diff against the filing: body text identical; differences are caption, title, signature and running headers, which the frontmatter or the template supplies) |
-| render | ok: `usage/OUTPUT-flnd-complaint-winton.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (pdffonts), no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: the whole 9-page complaint, transcribed (word-diff against the filing: body text identical; differences are caption, title, signature and running headers, which the frontmatter or the template supplies) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (pdffonts), no warnings |
 | overlay | ok: `usage/OVERLAY-winton-complaint.pdf` and `OVERLAY-winton-complaint.txt` |
 | typeface | face required: **none named** (Loc. R. 5.1(C) says "at least 14-point font"; checked 2026-10-14 against the local rules PDF). Substitute: none; **EB Garamond** kept, as `docs/FONTS.md` "No face named" requires. Not metric-compatible with the exemplar's Times New Roman (known gap 2). |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-checked 2026-10-14 after the fonts pass, same 9 pages, same overlay map) |
@@ -90,11 +90,11 @@ typst (`typst/`) is the reference. The docx engine (`docx/`) follows it; the LaT
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-flnd-complaint-winton.typst.pdf` (9 pp) | reference |
-| docx | `OUTPUT-flnd-complaint-winton.docx` and `OUTPUT-flnd-complaint-winton.docx.pdf` (9 pp) | ok: rendered with LibreOffice 26.8.1; every page compared with the typst page at 60 dpi |
+| typst | `OUTPUT-complaint.typst.pdf` (9 pp) | reference |
+| docx | `OUTPUT-complaint.docx` and `OUTPUT-flnd-complaint-winton.docx.pdf` (9 pp) | ok: rendered with LibreOffice 26.8.1; every page compared with the typst page at 60 dpi |
 
 ```sh
-sh tools/render.sh --engine docx courts/eleventh-circuit/florida/federal/northern-district/complaint usage/INPUT-flnd-complaint-winton.md
+sh tools/render.sh --engine docx courts/eleventh-circuit/florida/federal/northern-district/complaint usage/INPUT-complaint.md
 ```
 
 `docx/reference.docx` is built by `docx/make-reference.sh` (pandoc's default reference, restyled); `docx/render.sh` runs pandoc on the sample; `docx/flnd-complaint.lua` builds the cover, the numbering, the lists and the signature block. The sample is read as CommonMark with smart punctuation, the reading typst's cmarker gives (pandoc's markdown reader pairs a star page's `*` with a later `*` and adds a no-break space after "No.").

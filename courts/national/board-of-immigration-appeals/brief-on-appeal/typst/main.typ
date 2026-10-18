@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "bia-brief-on-appeal.typ": bia-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-bia-brief-on-appeal-ab20191216.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-brief-on-appeal.md"))
 #let (meta, body) = split-frontmatter(src)
 #bia-brief(meta, body)

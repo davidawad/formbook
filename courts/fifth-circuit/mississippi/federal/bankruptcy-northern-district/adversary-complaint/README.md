@@ -77,7 +77,7 @@ A local-rule text, or a filed complaint from this court, would settle each of th
 
 ## Engines
 
-Docx engine (`docx/`): `reference.docx` (built by `docx/make-reference.sh`), `msnb-adversary-complaint.lua` (counsel block, court title, caption rows, numbered allegations, lettered and prayer items, signature block), and `render.sh` (the pandoc call; `tools/render-docx.sh` uses it). Renders: `usage/OUTPUT-msnb-adversary-complaint-communitybankloancare.docx` and `.docx.pdf` (3 pages, LibreOffice 26.8).
+Docx engine (`docx/`): `reference.docx` (built by `docx/make-reference.sh`), `msnb-adversary-complaint.lua` (counsel block, court title, caption rows, numbered allegations, lettered and prayer items, signature block), and `render.sh` (the pandoc call; `tools/render-docx.sh` uses it). Renders: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (3 pages, LibreOffice 26.8).
 
 | Item | Typst (primary) | Docx | Note |
 |---|---|---|---|
@@ -97,4 +97,4 @@ Differences, by design:
 BLOCKED / not verified for docx:
 - Gates 0 to 3 cannot run: no `rules.md` or `checks.yaml` in this court yet, and `yq` is not on the box.
 - Opened in LibreOffice only (the PDF conversion succeeded); not opened in Microsoft Word.
-- The README's older note about `usage/INPUT-synthetic-adversary-complaint.md` is stale: that file is not in the folder, so only `INPUT-msnb-adversary-complaint-communitybankloancare.md` renders. No second sample exists for Gate 3.
+- The README's older note about `usage/INPUT-synthetic-adversary-complaint.md` is stale: that file is not in the folder, so only `INPUT-adversary-complaint.md` renders. No second sample exists for Gate 3.

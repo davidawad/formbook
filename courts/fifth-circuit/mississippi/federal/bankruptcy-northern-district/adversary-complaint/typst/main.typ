@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "msnb-adversary-complaint.typ": msnb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-msnb-adversary-complaint-communitybankloancare.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #msnb-adversary-complaint(meta, body)

@@ -8,7 +8,7 @@ Court: U.S. Navy-Marine Corps Court of Criminal Appeals (`nmcca`). Doc type: ans
 
 - Template: built and rendered. Typst only (`typst/`). `latex/` and `docx/` are not in this folder.
 - Exemplar: **none**. No public filed NMCCA answer was found (search trail in `usage/SOURCE.md`). The template follows the rules and the appellant's format, not a filed answer.
-- Sample: `usage/INPUT-nmcca-answering-brief-sample.md` is **synthetic**. Names, numbers, dates and citations are placeholders in brackets, and the issues and argument are generic. It is not a transcription of any filed brief, so it does not show what a real NMCCA answer looks like.
+- Sample: `usage/INPUT-answering-brief.md` is **synthetic**. Names, numbers, dates and citations are placeholders in brackets, and the issues and argument are generic. It is not a transcription of any filed brief, so it does not show what a real NMCCA answer looks like.
 - Overlay: **not produced**. `tools/overlay.sh` needs a filed exemplar PDF to compare against, and there is none (it exits 1: "no exemplar pdf").
 - Not reviewed by a human. `court.json` untouched.
 
@@ -18,15 +18,15 @@ Court: U.S. Navy-Marine Corps Court of Criminal Appeals (`nmcca`). Doc type: ans
 |---|---|
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits the frontmatter from the body, calls the template. |
 | `typst/nmcca-answering-brief.typ` | The template: `nmcca-answering-brief(meta, md)`. Content-agnostic; the layout values are named parameters at the top. |
-| `usage/INPUT-nmcca-answering-brief-sample.md` | Synthetic sample (frontmatter + body). Caption, assignments of error, jurisdiction, statement of the case and of the facts, summary, argument with standard of review, conclusion, signature, certificate. About 6 pages of body. |
-| `usage/OUTPUT-nmcca-answering-brief-sample.typst.pdf` | Our render of the sample (8 pages: cover, index, body 1-5, certificate on 6). |
+| `usage/INPUT-answering-brief.md` | Synthetic sample (frontmatter + body). Caption, assignments of error, jurisdiction, statement of the case and of the facts, summary, argument with standard of review, conclusion, signature, certificate. About 6 pages of body. |
+| `usage/OUTPUT-answering-brief.typst.pdf` | Our render of the sample (8 pages: cover, index, body 1-5, certificate on 6). |
 | `usage/SOURCE.md` | The exemplar search. No PDF. |
 
 Build (from the repo root, with the toolchain on PATH):
 
 ```sh
 D=courts/military/navy-marine-corps-court-of-criminal-appeals/answering-brief
-sh tools/render.sh $D usage/INPUT-nmcca-answering-brief-sample.md     # -> usage/OUTPUT-nmcca-answering-brief-sample.typst.pdf
+sh tools/render.sh $D usage/INPUT-answering-brief.md     # -> usage/OUTPUT-answering-brief.typst.pdf
 sh tools/overlay.sh $D answering-brief                     # fails: no exemplar PDF
 ```
 
@@ -60,7 +60,7 @@ The template fails the build (with a message) if:
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-nmcca-answering-brief-sample.typst.pdf` (8 pages) was rendered at 60 dpi (`pdftoppm -r 60`) and looked at after the final edit (the argument-heading fix). Pages 1-8 were all reviewed, and no page was skipped. Re-reviewed 2026-10-14 after the footnote-size fix: the sample has no footnotes, so the layout did not change.
+Every page of `OUTPUT-answering-brief.typst.pdf` (8 pages) was rendered at 60 dpi (`pdftoppm -r 60`) and looked at after the final edit (the argument-heading fix). Pages 1-8 were all reviewed, and no page was skipped. Re-reviewed 2026-10-14 after the footnote-size fix: the sample has no footnotes, so the layout did not change.
 
 | PDF page | Content | Finding |
 |---|---|---|
@@ -80,7 +80,7 @@ Overlay: not produced. `sh tools/overlay.sh` exits 1 on 2026-10-15 (and on 2026-
 ## Known gaps
 
 - **No exemplar, no overlay.** The layout is built from the rules alone. A filed NMCCA answer would settle the open choices below and should be added to `usage/` with a `SOURCE.md` row. Until then the template is not tier-2 checked.
-- **Sample is synthetic.** `usage/INPUT-nmcca-answering-brief-sample.md` uses placeholders; it is not a transcription and must not be read as a filed brief.
+- **Sample is synthetic.** `usage/INPUT-answering-brief.md` uses placeholders; it is not a transcription and must not be read as a filed brief.
 - **Table of authorities** is not generated (NMCCA-CONT-002). Not needed for a sample this size; a real answer over 10,000 words needs one.
 - **Word count** is not computed or checked against the 15,000-word limit (NMCCA-FORM-005; applicability to answers in NMCCA-ANS-003).
 - **Argument point labels** are not repeated in the index.
@@ -96,9 +96,9 @@ Overlay: not produced. `sh tools/overlay.sh` exits 1 on 2026-10-15 (and on 2026-
 
 ### docx (`docx/`)
 
-Files: `docx/reference.docx` (built by `sh docx/build-reference.sh reference.docx`: the same reference as the opening brief, EB Garamond 14 pt named in the styles and theme, exact 33.6 pt body and 16.8 pt single spacing, 1 in margins, centred PAGE footer), `docx/nmcca.lua`, `docx/render.sh` (two layout passes for the index page numbers). Render: `sh tools/render.sh --engine docx <this-folder> usage/INPUT-nmcca-answering-brief-sample.md`.
+Files: `docx/reference.docx` (built by `sh docx/build-reference.sh reference.docx`: the same reference as the opening brief, EB Garamond 14 pt named in the styles and theme, exact 33.6 pt body and 16.8 pt single spacing, 1 in margins, centred PAGE footer), `docx/nmcca.lua`, `docx/render.sh` (two layout passes for the index page numbers). Render: `sh tools/render.sh --engine docx <this-folder> usage/INPUT-answering-brief.md`.
 
-Matches the typst output: typeface (`pdffonts` on `OUTPUT-nmcca-answering-brief-sample.docx.pdf`: EBGaramond Regular, Italic, Bold, BoldItalic, all embedded), sizes and line pitch, cover and caption, index on its own page numbered "ii", body from 1, Argument labels and italics, signature block, certificate.
+Matches the typst output: typeface (`pdffonts` on `OUTPUT-answering-brief.docx.pdf`: EBGaramond Regular, Italic, Bold, BoldItalic, all embedded), sizes and line pitch, cover and caption, index on its own page numbered "ii", body from 1, Argument labels and italics, signature block, certificate.
 
 Differs from the typst output: the same exact-spacing placement as the opening brief (first lines sit a few points lower than in typst), 9 pages in docx against 8 in typst, and the index page numbers are static text from a first layout pass. The sample is synthetic (placeholders), so the layout is checked, not any filed brief. Word has not been used here (LibreOffice only).
 

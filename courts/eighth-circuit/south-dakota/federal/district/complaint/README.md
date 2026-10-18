@@ -5,10 +5,10 @@ Folder: `courts/eighth-circuit/south-dakota/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-sdd-complaint-knosp526cv05092.pdf` (1 filer, pro se; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-sdd-complaint-knosp.md` (the filed content of the exemplar; see below) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer, pro se; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the filed content of the exemplar; see below) |
 | typeface | face required: **none** (D.S.D. Civ. LR 83.4 says only "Fonts must be at least 12-point"; checked in the official PDF 2026-10-14). Substitute: none; **EB Garamond** kept, as `docs/FONTS.md` says for a court that names no face. Fit: n/a. |
-| render | ok: `usage/OUTPUT-sdd-complaint-knosp.typst.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond-Regular and -Bold embedded |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond-Regular and -Bold embedded |
 | overlay | ok: `usage/OVERLAY-knosp-complaint.pdf` and `OVERLAY-knosp-complaint.txt`, built against the filed exemplar fetched from the RECAP URL in `usage/SOURCE.md` (the PDF is not in `usage/` in this snapshot; pass it as the third argument to `tools/overlay.sh`) |
 | pages reviewed | 3 of 3 (every page rendered at 60 dpi and viewed again on 2026-10-14 after the fonts-pass re-render) |
 | tier 2 | not met to the eval-loop standard: one filer, and that filer is pro se (see Known gaps) |
@@ -86,7 +86,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ## Engines
 
-Typst is the primary engine (`typst/`). The DOCX engine is `docx/`: pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`) and the filter `docx/sdd-complaint.lua`. Its output is `usage/OUTPUT-sdd-complaint-knosp.docx`; the LibreOffice PDF of it (`OUTPUT-sdd-complaint-knosp.docx.pdf`) was not produced (see BLOCKED).
+Typst is the primary engine (`typst/`). The DOCX engine is `docx/`: pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`) and the filter `docx/sdd-complaint.lua`. Its output is `usage/OUTPUT-complaint.docx`; the LibreOffice PDF of it (`OUTPUT-sdd-complaint-knosp.docx.pdf`) was not produced (see BLOCKED).
 
 What the docx follows from the same rules as the typst template (checked in the style and section XML, not on a render):
 
@@ -113,5 +113,5 @@ Differences and open items:
 
 docx BLOCKED items:
 
-- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF of `OUTPUT-sdd-complaint-knosp.docx`): **BLOCKED**. LibreOffice is not on conda-forge and apt needs root. The Debian trixie LibreOffice 25.2.3 debs, extracted without root into a private prefix, abort at UNO bootstrap (`terminate called after throwing an instance of 'com::sun::star::uno::RuntimeException'`, also for `soffice --version`); the cause was not found. No `.docx.pdf` exists, so no docx Gate 0 to 3 result and no docx page was reviewed.
+- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF of `OUTPUT-complaint.docx`): **BLOCKED**. LibreOffice is not on conda-forge and apt needs root. The Debian trixie LibreOffice 25.2.3 debs, extracted without root into a private prefix, abort at UNO bootstrap (`terminate called after throwing an instance of 'com::sun::star::uno::RuntimeException'`, also for `soffice --version`); the cause was not found. No `.docx.pdf` exists, so no docx Gate 0 to 3 result and no docx page was reviewed.
 - Word: the `.docx` was not opened in Word (not available here), so the "opens without a repair prompt" check is not done. The package parts are well-formed XML (`xmllint`).

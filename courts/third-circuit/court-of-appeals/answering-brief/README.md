@@ -4,9 +4,9 @@ One self-contained folder for one document type. Built by fb-595.28.19 from one 
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-ca3-answering-brief-bindervcoldwellbanker241997.pdf` | The filed exemplar (appellee brief, 30 pp., text layer). Provenance in `usage/SOURCE.md`. |
-| `usage/INPUT-ca3-answering-brief-binder.md` | Markdown transcription of a portion of the exemplar (cover, disclosure, headings, tables, jurisdiction, issue, statement of the case, standard of review, most of Argument I, part of II and III, conclusion, signature, certificates). Frontmatter follows the ca9 contract plus one new field, `disclosure`. |
-| `usage/OUTPUT-ca3-answering-brief-binder.typst.pdf` | `sh tools/render.sh courts/third-circuit/court-of-appeals/answering-brief usage/INPUT-ca3-answering-brief-binder.md` |
+| `usage/FILED-EXAMPLE-answering-brief.pdf` | The filed exemplar (appellee brief, 30 pp., text layer). Provenance in `usage/SOURCE.md`. |
+| `usage/INPUT-answering-brief.md` | Markdown transcription of a portion of the exemplar (cover, disclosure, headings, tables, jurisdiction, issue, statement of the case, standard of review, most of Argument I, part of II and III, conclusion, signature, certificates). Frontmatter follows the ca9 contract plus one new field, `disclosure`. |
+| `usage/OUTPUT-answering-brief.typst.pdf` | `sh tools/render.sh courts/third-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md` |
 | `usage/OVERLAY-binder-answering-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/third-circuit/court-of-appeals/answering-brief binder-answering-brief` (red = ours, blue = filed, black = both). |
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...`. |
 | `typst/ca3-answering-brief.typ` | The template: `ca3-answering-brief(meta, md)`. Content-agnostic; no case text, no coordinates from the exemplar, no forced line breaks. |
@@ -76,7 +76,7 @@ The sample is 2,421 words of the exemplar's 4,185; the body is 11 pages, within 
 ```sh
 export PATH="$HOME/.local/share/formbook/env/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq
 cd <repo root>
-sh tools/render.sh courts/third-circuit/court-of-appeals/answering-brief usage/INPUT-ca3-answering-brief-binder.md
+sh tools/render.sh courts/third-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md
 sh tools/overlay.sh courts/third-circuit/court-of-appeals/answering-brief binder-answering-brief
 ```
 
@@ -90,7 +90,7 @@ sh tools/overlay.sh courts/third-circuit/court-of-appeals/answering-brief binder
 
 ## Verification pass 2026-10-16 (fb-595.26.3)
 
-- Rendered: `sh tools/render.sh ... usage/INPUT-ca3-answering-brief-binder.md`, exit 0, no typst warnings, 20 pages (the same count as the first pass). Overlay rerun: `usage/OVERLAY-binder-answering-brief.pdf`, 20 pages; pairs and percentages as described above (cover 86.9%, disclosure 67.8%, TOC 72.4%, TOA 44.8% and 6.9%, body 40-69%, filed p. 28 paired twice).
+- Rendered: `sh tools/render.sh ... usage/INPUT-answering-brief.md`, exit 0, no typst warnings, 20 pages (the same count as the first pass). Overlay rerun: `usage/OVERLAY-binder-answering-brief.pdf`, 20 pages; pairs and percentages as described above (cover 86.9%, disclosure 67.8%, TOC 72.4%, TOA 44.8% and 6.9%, body 40-69%, filed p. 28 paired twice).
 - Viewed: all 20 pages of the OUTPUT at 60 dpi, the 20 overlay pages at 40 dpi (as one contact sheet), and the exemplar's pages 1 and 2 against our cover and disclosure statement (same elements and order; the exemplar's disclosure is single-spaced, as ours is).
 - Defect fixed (tier 2): in the TOC (PDF p. 3), the page number "5" of Argument I wrapped onto a line of its own, below the leader. TOC rows are now a two-column grid (title and leader, then a fixed 2.6em page-number column), so the number stays on the last line of its entry. After the fix only PDF page 3 changed (every other page is pixel-identical to the pre-fix render); page 3 was viewed again: every number sits on its entry's last line.
 - Defect fixed (tier 2; FRAP 32(a)(4) exempts only quotations, headings and footnotes from double spacing): the four certificates (PDF pp. 17-20) were single-spaced with no paragraph indent. The filed certificates of all three ca3 filers seen (Binder pp. 28-30, Tresslar pp. 44-47, AFP reply pp. 34-35) are double-spaced with a first-line indent. The certificate text now uses the body leading and indent; the signature blocks stay single-spaced. Page count unchanged (20); pp. 17-20 viewed again. The disclosure statement stays single-spaced, as in the exemplar (p. 2).

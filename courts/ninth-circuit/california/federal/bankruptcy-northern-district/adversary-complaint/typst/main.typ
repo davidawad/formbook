@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "canb-adversary-complaint.typ": canb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-canb-adversary-complaint-appalachian.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #canb-adversary-complaint(meta, body)

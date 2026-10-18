@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-uscgcoca-answering-brief-steen1464.pdf` (8 pages, an extract; see page map) |
+| File | `FILED-EXAMPLE-answering-brief.pdf` (8 pages, an extract; see page map) |
 | Case | *United States v. Boatswain's Mate Third Class (E-4) Justin D. Steen, U.S. Coast Guard*, CGCCA Docket No. 1464, CGCMSP 24978 |
 | Document | "Answer to Appellant's Assignments of Error on Behalf of the United States", 19 pp. |
 | Filer | Appellate Government Counsel, Commandant (CG-LMJ): Stephen P. McCleary and LT Z. N. Godsey, USCG |
@@ -23,7 +23,7 @@ Page map of the extract:
 | 7 | 18 | End of the sufficiency argument, Conclusion, Prayer for Relief, two signature blocks |
 | 8 | 19 | Certificate of Service |
 
-Source pp. 7-17 are left out. `usage/INPUT-uscgcoca-answering-brief-steen.md` transcribes exactly the extracted pages.
+Source pp. 7-17 are left out. `usage/INPUT-answering-brief.md` transcribes exactly the extracted pages.
 
 ## First pass (2026-10-14): superseded record
 
@@ -94,7 +94,7 @@ New routes only. Result: **found**. The court's own "Appellate Briefs" page and 
 
 Not used: the other 37 downloaded filings (older rules, broken text, merits-only, or other doc types: replies, habeas, Art. 62).
 
-## 2. Second exemplar: `SAMPLE-uscgcoca-answering-brief-weiser1469.pdf`
+## 2. Second exemplar: `FILED-EXAMPLE-answering-brief-3.pdf`
 
 | Field | Value |
 |---|---|

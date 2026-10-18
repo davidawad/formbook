@@ -1,6 +1,6 @@
 # Exemplar source: motion-brief (D. Vt.)
 
-- File: `SAMPLE-vtd-motion-brief-blackberrycoulter522cv98.pdf` (25 pages, text layer present; Times New Roman; body double-spaced; footnotes present)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (25 pages, text layer present; Times New Roman; body double-spaced; footnotes present)
 - Case: *BlackBerry Corporation and Cylance Inc. v. Kaylan Brown Coulter*, No. 5:22-cv-00098 (D. Vt.)
 - Document: "Defendant's Memorandum of Law in Support of Her Motion to Dismiss All Claims or Stay Proceeding" (ECF No. 16; header "Document 16, Filed 05/13/22"); the motion itself is ECF No. 15.
 - Filer: Defendant Kaylan Brown Coulter, by counsel Eric D. Jones, Matthew A. Zidovsky and Justin G. Sherman (Langrock Sperry & Wool, LLP)
@@ -11,9 +11,9 @@
 - Found by: CourtListener search API, `type=r`, `court=vtd`, `available_only=on`, query "memorandum in support" "motion to dismiss". Other candidates in the same search: *PhRMA v. Arel*, 2:25-cv-00600 (ECF 21, memorandum as attachment 1; the download returned no file, so not used); *Bingham Brook v. Verdantas*, 2:26-cv-00223 (memorandum as attachment 1, not downloaded).
 - Dated 2022: it predates the court's current Local Rules (LocalRules-20260420.pdf). The formatting rule (L.R. 10) is the same text in both; the page limit is in L.R. 7(a)(4) of the current rules.
 
-## 2. SAMPLE-vtd-motion-brief-verdantas226cv223.pdf
+## 2. FILED-EXAMPLE-motion-brief-3.pdf
 
-- File: `SAMPLE-vtd-motion-brief-verdantas226cv223.pdf` (9 pages, text layer present, produced from Word via macOS Quartz PDFContext; Times New Roman; body double-spaced; footnotes single-spaced)
+- File: `FILED-EXAMPLE-motion-brief-3.pdf` (9 pages, text layer present, produced from Word via macOS Quartz PDFContext; Times New Roman; body double-spaced; footnotes single-spaced)
 - Court: United States District Court for the District of Vermont
 - Case: *Bingham Brook, LLC v. Blackburn Architects, P.C., Verdantas, LLC, et al.*, No. 2:26-cv-00223 (D. Vt.)
 - Document: "Defendant Verdantas LLC's Memorandum in Support of Motion to Dismiss", ECF No. 15-1 (attachment 1 to the motion, ECF No. 15; header "2:26-cv-00223-mkl Document 15-1 Filed 07/07/26")
@@ -25,9 +25,9 @@
 - sha256: `0960e6392e3f6c37762206a36ef8dc29301a279c838b23d952e19bb5d0cf4d5f`
 - Found by: CourtListener web search (`https://www.courtlistener.com/?type=r&q="memorandum of law" "motion to dismiss"&court=vtd&available_only=on`), the docket-entry page giving the storage link. (The search API was rate-limited on 2026-10-17.)
 
-## 3. SAMPLE-vtd-motion-brief-clark226cv234.pdf
+## 3. FILED-EXAMPLE-motion-brief-2.pdf
 
-- File: `SAMPLE-vtd-motion-brief-clark226cv234.pdf` (12 pages, text layer present, produced by Acrobat PDFMaker 26 for Word; Times New Roman; body double-spaced)
+- File: `FILED-EXAMPLE-motion-brief-2.pdf` (12 pages, text layer present, produced by Acrobat PDFMaker 26 for Word; Times New Roman; body double-spaced)
 - Court: United States District Court for the District of Vermont
 - Case: *Poitras v. Clark*, No. 2:26-cv-00234 (D. Vt.)
 - Document: "Defendant's Motion to Dismiss Personal Capacity Claims", ECF No. 17, a motion that contains its memorandum of law (heading "MEMORANDUM OF LAW" after the motion paragraph; L.R. 7(a)(2) allows a motion to "contain" the memorandum). Header "2:26-cv-00234-wks Document 17 Filed 07/30/26".

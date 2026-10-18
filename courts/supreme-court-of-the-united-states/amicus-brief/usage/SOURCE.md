@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-scotus-amicus-brief-loperbright22451.pdf`
+- File: `FILED-EXAMPLE-amicus-brief-2.pdf`
 - Court: Supreme Court of the United States
 - Case: *Loper Bright Enterprises v. Raimondo* (Secretary of Commerce), No. 22-451 (merits stage)
 - Document: Brief for National Shooting Sports Foundation, Inc. as Amicus Curiae in Support of Petitioners (27 pages, letter-size PDF of a booklet-format brief; Century Schoolbook text)
@@ -13,7 +13,7 @@
 - Public court record (supremecourt.gov docket file); no sealed or restricted material.
 - sha256 (computed 2026-10-17): 9169d45fbac40e38793ebac84f1deac1b5dda583923de973ee0533340282c04f
 
-## 2. `SAMPLE-scotus-amicus-brief-chamberofcommerce22451.pdf` (second filer, tier-2 comparison)
+## 2. `FILED-EXAMPLE-amicus-brief.pdf` (second filer, tier-2 comparison)
 
 - Court: Supreme Court of the United States
 - Case: *Loper Bright Enterprises v. Raimondo*, No. 22-451 (merits stage)
@@ -25,7 +25,7 @@
 - sha256: 126ad84e71fd0155223308f00efe4edc26b78614f22389a1642abe4c2b402497
 - Notes: "other amicus" class (8,000 words, light green on paper).
 
-## 3. `SAMPLE-scotus-amicus-brief-westvirginia22451.pdf` (third filer, tier-2 comparison)
+## 3. `FILED-EXAMPLE-amicus-brief-3.pdf` (third filer, tier-2 comparison)
 
 - Court: Supreme Court of the United States
 - Case: *Loper Bright Enterprises v. Raimondo*, No. 22-451 (merits stage)

@@ -5,10 +5,10 @@ Folder: `courts/eleventh-circuit/alabama/federal/southern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-alsd-complaint-frankenmuth126cv228.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-alsd-complaint-frankenmuth.md` (the complaint's caption, body, four counts, prayer, jury waiver and signature; the service list on the exemplar's last page is not transcribed) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the complaint's caption, body, four counts, prayer, jury waiver and signature; the service list on the exemplar's last page is not transcribed) |
 | typeface | face required: none (S.D. Ala. Gen. L.R. 5(a)(2) asks for "a plain, Roman style (or similar) font"; no face is named). Substitute: **EB Garamond** (kept, as the brief's rule for courts that name no face). Fit: n/a. See Known gaps 1. |
-| render | ok: `usage/OUTPUT-alsd-complaint-frankenmuth.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings; re-rendered 2026-10-14, `pdffonts` shows `EBGaramond-Regular`, `-Bold`, `-Italic` embedded (no other face) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings; re-rendered 2026-10-14, `pdffonts` shows `EBGaramond-Regular`, `-Bold`, `-Italic` embedded (no other face) |
 | overlay | ok: `usage/OVERLAY-frankenmuth-complaint.pdf` and `OVERLAY-frankenmuth-complaint.txt` (`tools/overlay.sh`), re-run 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not stored in the folder; see `usage/SOURCE.md`) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed on 2026-10-14, after the typeface check) |
 
@@ -87,7 +87,7 @@ The word-overlap figures are 50 to 79 percent. The low figures come from differe
 
 ## Engines
 
-The typst template is the reference. The docx engine is `docx/reference.docx` (built by `docx/make-reference.sh`) with the Lua filter `docx/alsd-complaint.lua`; it renders with `sh tools/render.sh --engine docx <this folder> usage/INPUT-alsd-complaint-frankenmuth.md`, which writes `usage/OUTPUT-alsd-complaint-frankenmuth.docx` and `usage/OUTPUT-alsd-complaint-frankenmuth.docx.pdf` (LibreOffice 26.8.0.3 converts the file; 11 pages, the same count as the typst render). The fonts must be installed for LibreOffice: EB Garamond from `fonts/eb-garamond/`; `pdffonts` shows only the three EB Garamond faces.
+The typst template is the reference. The docx engine is `docx/reference.docx` (built by `docx/make-reference.sh`) with the Lua filter `docx/alsd-complaint.lua`; it renders with `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`, which writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8.0.3 converts the file; 11 pages, the same count as the typst render). The fonts must be installed for LibreOffice: EB Garamond from `fonts/eb-garamond/`; `pdffonts` shows only the three EB Garamond faces.
 
 | Element | Typst | DOCX |
 |---|---|---|
@@ -106,4 +106,4 @@ What differs:
 - The numbers of the allegations are followed by a tab, so the text of a numbered paragraph starts about 0.15 in further right than in the typst render.
 - The signature block is alone on the last page in both engines (open item 3 above).
 
-DOCX BLOCKED items: none. This folder has no `checks.yaml`, so `tools/check.sh --engine docx` does not run here; the docx PDF was reviewed page by page instead (every page of `OUTPUT-alsd-complaint-frankenmuth.docx.pdf`, against the typst render). The `.docx` was converted by LibreOffice without error but was not opened in Microsoft Word, so the Word repair check is not done.
+DOCX BLOCKED items: none. This folder has no `checks.yaml`, so `tools/check.sh --engine docx` does not run here; the docx PDF was reviewed page by page instead (every page of `OUTPUT-complaint.docx.pdf`, against the typst render). The `.docx` was converted by LibreOffice without error but was not opened in Microsoft Word, so the Word repair check is not done.

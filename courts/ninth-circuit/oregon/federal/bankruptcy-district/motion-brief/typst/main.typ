@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "orb-motion-brief.typ": orb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-orb-motion-brief-sheehymotion.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #orb-motion-brief(meta, body)

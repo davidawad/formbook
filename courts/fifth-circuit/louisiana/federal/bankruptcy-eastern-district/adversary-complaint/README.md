@@ -5,9 +5,9 @@ Folder: `courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/adve
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-laeb-adversary-complaint-babincrescent2401028.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-laeb-adversary-complaint-babincrescentcomplaint.md` (a portion of the complaint: caption, lead-in, jurisdiction, parties, background, Counts I, II and X, prayer, signature; see gap 9) |
-| render | ok: `usage/OUTPUT-laeb-adversary-complaint-babincrescentcomplaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (a portion of the complaint: caption, lead-in, jurisdiction, parties, background, Counts I, II and X, prayer, signature; see gap 9) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-babin-crescent-complaint.pdf` and `usage/OVERLAY-babin-crescent-complaint.txt` |
 | typeface | EB Garamond, 12 pt. No rule names a face, so `docs/FONTS.md` "No face named" applies and the template keeps EB Garamond (gap 2) |
 | pages reviewed | 8 of 8 (re-rendered and every page viewed at 60 dpi on 2026-10-14, fonts pass; output unchanged) |

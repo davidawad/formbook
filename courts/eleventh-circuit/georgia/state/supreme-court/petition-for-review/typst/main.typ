@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ga-petition-for-review.typ": ga-petition-for-review, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ga-petition-for-review-dpgemergencypetition.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-petition-for-review.md"))
 #let (meta, body) = split-frontmatter(src)
 #ga-petition-for-review(meta, body)

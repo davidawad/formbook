@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-caed-complaint-morganbrothers126cv07747.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Eastern District of California, Fresno Division
 - Case: *Morgan Brothers, Incorporated v. Ronald D. Morgan, Inc.*
 - Docket: No. 1:26-cv-07747-JLT-SAB (Document 1)
@@ -18,7 +18,7 @@ Other E.D. Cal. complaints checked for this doc type (not saved; the brief asks 
 
 Second filer: not collected in this pass. EVAL-LOOP's tier-2 rule asks for two or three filers; that is recorded as an open item in `../README.md`.
 
-- File: `SAMPLE-caed-complaint-kennedy126cv07817.pdf`
+- File: `FILED-EXAMPLE-complaint-2.pdf`
 - Filer: Plaintiff Jeremiah Kennedy, by Jibrael S. Hindi, Law Offices of Jibrael S. Hindi
 - Case: *Kennedy v. Thrive Causemetics, Inc.*, No. 1:26-cv-07817-HBK (Doc. 1)
 - Date filed: 2026-09-24

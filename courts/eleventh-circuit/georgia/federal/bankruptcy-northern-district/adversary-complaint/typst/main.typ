@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ganb-adversary-complaint.typ": ganb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ganb-adversary-complaint-fletcher2505046.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #ganb-adversary-complaint(meta, body)

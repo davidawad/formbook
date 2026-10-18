@@ -6,8 +6,8 @@ Doc type: the appellee's principal brief, which the Fifth Circuit calls the "Bri
 Status of this doc type:
 
 - exemplar: yes (one filed brief, see `usage/SOURCE.md`)
-- sample: `usage/INPUT-ca5-answering-brief-dawes.md` (a transcribed portion, 14 rendered pages)
-- render: ok (`sh tools/render.sh courts/fifth-circuit/court-of-appeals/answering-brief usage/INPUT-ca5-answering-brief-dawes.md`, no typst warnings)
+- sample: `usage/INPUT-answering-brief.md` (a transcribed portion, 14 rendered pages)
+- render: ok (`sh tools/render.sh courts/fifth-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md`, no typst warnings)
 - overlay: ok (`usage/OVERLAY-dawes-answering-brief.pdf`, `-overlay.txt`)
 - pages reviewed: 14 of 14 rendered (every page rasterized at 60 dpi and looked at; see the review log)
 
@@ -50,12 +50,12 @@ Word limit in the sample: 1,333 words, counted by the template from the sample m
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-ca5-answering-brief-dawesvcityofdallas2510979.pdf` | The filed exemplar: Brief of Appellee City of Dallas, Document 38, 62 pages, text-based (pdftotext yields the text). |
+| `usage/FILED-EXAMPLE-answering-brief.pdf` | The filed exemplar: Brief of Appellee City of Dallas, Document 38, 62 pages, text-based (pdftotext yields the text). |
 | `usage/SOURCE.md` | Where it came from, the docket, the filer, the date filed and fetched. |
 | `typst/main.typ` | Entry point. Reads `--input sample=...` and calls the template. |
 | `typst/ca5-answering-brief.typ` | The template, `ca5-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top, each tied to a rule ID above. |
-| `usage/INPUT-ca5-answering-brief-dawes.md` | Markdown for the exemplar: frontmatter (cover, counsel, certificates, authorities) and a portion of the body. |
-| `usage/OUTPUT-ca5-answering-brief-dawes.typst.pdf` | Render of the sample, 14 pages. |
+| `usage/INPUT-answering-brief.md` | Markdown for the exemplar: frontmatter (cover, counsel, certificates, authorities) and a portion of the body. |
+| `usage/OUTPUT-answering-brief.typst.pdf` | Render of the sample, 14 pages. |
 | `usage/OVERLAY-dawes-answering-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map. |
 
 ## Markdown contract (differences from ca9)

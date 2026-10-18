@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "vid-complaint.typ": vid-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-vid-complaint-henry.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #vid-complaint(meta, body)

@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ksb-adversary-complaint-rebeinsandyroadfarms2507014.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ksb.280252/gov.uscourts.ksb.280252.1.0.pdf (CourtListener RECAP archive; docket page https://www.courtlistener.com/docket/69864546/rebein-v-panhandle-eastern-pipe-line-company-lp/) |
 | Case name | *Rebein v. Panhandle Eastern Pipe Line Company, LP* (Adversary Proceeding) |
 | Main case | *In re Sandy Road Farms, LLC*, Case No. 22-40446, Chapter 7 (converted from Chapter 11) |

@@ -5,10 +5,10 @@ Folder: `courts/third-circuit/new-jersey/federal/bankruptcy-district/adversary-c
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-njb-adversary-complaint-supor2601475.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-njb-adversary-complaint-supor.md` (excerpt: caption, parties, jurisdiction, paragraphs 6 to 23, paragraphs 198 to 214, WHEREFORE and signature; see Known gaps) |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (excerpt: caption, parties, jurisdiction, paragraphs 6 to 23, paragraphs 198 to 214, WHEREFORE and signature; see Known gaps) |
 | typeface | face required: none. Substitute: none needed; EB Garamond (`docs/FONTS.md`, "No face named"). Metric: n/a. Checked 2026-10-15 against the D.N.J. Local Bankruptcy Rules package (as posted, 2025): no typeface or point-size text in it, and LBR 1001-1's 2015 comment says an unincorporated Local Civil Rule does not apply. Judges' preferences (Judges' Info tab) were not checked. |
-| render | ok: `usage/OUTPUT-njb-adversary-complaint-supor.typst.pdf`, 8 pages, typst 0.15.0, embedded fonts EB Garamond only (`pdffonts`), no warnings (re-rendered 2026-10-15) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, embedded fonts EB Garamond only (`pdffonts`), no warnings (re-rendered 2026-10-15) |
 | overlay | ok: `usage/OVERLAY-supor-adversary-complaint.pdf` and `OVERLAY-supor-adversary-complaint.txt` (re-run 2026-10-15) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed on 2026-10-15; the only later edit is a comment in the template, and the text of the render is unchanged) |
 
@@ -57,7 +57,7 @@ Not produced by this template (separate filings): the adversary cover sheet (LBR
 8. **Italics.** The exemplar's text layer has no italic markup, so case names are roman in the sample. The template italicizes `*...*` when a sample carries it.
 9. **Check scripts not run.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
 
-## Review of the rendered pages (OUTPUT-njb-adversary-complaint-supor.typst.pdf, 8 pages)
+## Review of the rendered pages (OUTPUT-adversary-complaint.typst.pdf, 8 pages)
 
 - Page 1: counsel block top left, court name, the LBR 9004-1 caption note, the debtor block and case data, the adversary block, and the title "COMPLAINT". Nothing spills. Pass.
 - Page 2: lead-in (unnumbered), THE PARTIES heading, paragraphs 1 to 5, JURISDICTION AND VENUE heading with the start of paragraph 6 on the same page (the heading is kept with its paragraph; the paragraph breaks across the page). Pass.

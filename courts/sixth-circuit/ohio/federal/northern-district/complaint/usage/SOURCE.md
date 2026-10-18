@@ -3,7 +3,7 @@
 Public court records (PACER RECAP copies on CourtListener). Used as visual and structural references only.
 Two filers, so the tier-2 comparison is not one filer's house style.
 
-## 1. `SAMPLE-ohnd-complaint-wagner126cv02669.pdf` (the sample is transcribed from this one)
+## 1. `FILED-EXAMPLE-complaint.pdf` (the sample is transcribed from this one)
 
 - Court: United States District Court, Northern District of Ohio
 - Case: *Wagner v. Schofield Properties, LLC*, No. 1:26-cv-02669
@@ -15,7 +15,7 @@ Two filers, so the tier-2 comparison is not one filer's house style.
 - Date fetched: 2026-10-14
 - Text layer: yes (`pdftotext` yields text; Times New Roman, embedded)
 
-## 2. `SAMPLE-ohnd-complaint-miller526cv02517.pdf` (second filer; used for tier-2 comparison, not transcribed)
+## 2. `FILED-EXAMPLE-complaint-2.pdf` (second filer; used for tier-2 comparison, not transcribed)
 
 - Court: United States District Court, Northern District of Ohio, Eastern Division
 - Case: *Miller v. Krupnick*, No. 5:26-cv-02517

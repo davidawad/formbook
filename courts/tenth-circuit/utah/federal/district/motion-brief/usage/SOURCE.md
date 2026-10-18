@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-utd-motion-brief-millerstormont225cv00857.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Court | United States District Court for the District of Utah, Central Division (`utd`) |
 | Case | *Miller v. Stormont* (Hon. Charles A. Stormont, Utah district judge, sued in his personal capacity, with other defendants) |
 | Docket no. | 2:25-cv-00857-DAO (Judge Daphne A. Oberg) |
@@ -38,7 +38,7 @@ Not usable as motions: *Sullivan v. Tang* and *Morris v. Young* (the RECAP PDFs 
 
 The Miller exemplar is flagged for Charter. The saved Adams memorandum is a same-court, same-document-type public filing with an extractable text layer and embedded Times New Roman. It is a selected replacement for the Miller font-audit item, although it comes from the Utah Attorney General's office, as does Miller. Miller's current sample remains paired with its source until rebuilt against Adams.
 
-- File: `SAMPLE-utd-motion-brief-adams225cv00438.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Docket: 2:25-cv-00438-DBB-JCB, ECF No. 31
 - Filer: Tooele County School District, through Assistant Utah Attorney General Katherine Bushman
 - PDF: https://storage.courtlistener.com/recap/gov.uscourts.utd.156973/gov.uscourts.utd.156973.31.0.pdf

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-mowd-motion-brief-mannon626cv03197.pdf` (22 pages, text layer present; `pdffonts` shows embedded Times New Roman)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (22 pages, text layer present; `pdffonts` shows embedded Times New Roman)
 - Court: United States District Court for the Western District of Missouri, Southern Division
 - Case: *Leslie Dennis Mannon v. Laclede County, Missouri, et al.*
 - Docket: No. 6:26-cv-03197-MBB (Document 25)

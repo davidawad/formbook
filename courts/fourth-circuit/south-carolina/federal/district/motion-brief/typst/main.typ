@@ -3,6 +3,6 @@
 //     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/INPUT-<id>.md typst/main.typ out.pdf
 #import "scd-motion-brief.typ": scd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-scd-motion-brief-cobb.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #scd-motion-brief(meta, body)

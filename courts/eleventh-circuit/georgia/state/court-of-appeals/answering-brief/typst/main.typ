@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "gactapp-answering-brief.typ": gactapp-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-gactapp-answering-brief-fictional.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-answering-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #gactapp-brief(meta, body)

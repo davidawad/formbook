@@ -5,10 +5,10 @@ Folder: `courts/third-circuit/new-jersey/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `usage/SAMPLE-njd-complaint-dglgroup226cv13086.pdf` (Kasowitz LLP, primary) and `usage/SAMPLE-njd-complaint-gomez225cv02242.pdf` (Law Offices of Richard Malagiere). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-njd-complaint-dglgroup.md` (full transcription of the 12-page DGL complaint, numbering left to the template) |
+| exemplar | yes, two filers: `usage/FILED-EXAMPLE-complaint.pdf` (Kasowitz LLP, primary) and `usage/FILED-EXAMPLE-complaint-2.pdf` (Law Offices of Richard Malagiere). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-complaint.md` (full transcription of the 12-page DGL complaint, numbering left to the template) |
 | typeface | Face required: **none**. The rules that govern this document (Fed. R. Civ. P. 10, 38; L.Civ.R. 10.1, 11.1, 11.2, 38.1) name no typeface, and L.Civ.R. 7.2(d) governs briefs only. Kept: **EB Garamond** (the default in `docs/FONTS.md`); no substitute applies. Both exemplars use Times New Roman 12 pt, so the look differs (Known gaps 1). |
-| render | ok: `usage/OUTPUT-njd-complaint-dglgroup.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Italic, -Bold), no warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Italic, -Bold), no warnings |
 | overlay | ok: `usage/OVERLAY-dgl-group-complaint.pdf` and `.txt` (against the DGL exemplar; see below) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the fonts pass; the template is unchanged by that pass, the render is the same) |
 

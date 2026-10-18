@@ -8,9 +8,9 @@ Status: exemplar = yes; typeface = none named by the rules, EB Garamond kept (fo
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-ca7-answering-brief-craigvcityofrichmond261864.pdf` | Filed Brief of Appellees, *Craig v. City of Richmond*, No. 26-1864 (7th Cir.), May 21, 2026. Provenance in `usage/SOURCE.md`. |
-| `usage/INPUT-ca7-answering-brief-craig.md` | Transcription of that brief (partial, see "Known gaps"). Frontmatter = cover, caption, counsel, signature, service list, authorities. |
-| `usage/OUTPUT-ca7-answering-brief-craig.typst.pdf` | Render, 14 pages. |
+| `usage/FILED-EXAMPLE-answering-brief.pdf` | Filed Brief of Appellees, *Craig v. City of Richmond*, No. 26-1864 (7th Cir.), May 21, 2026. Provenance in `usage/SOURCE.md`. |
+| `usage/INPUT-answering-brief.md` | Transcription of that brief (partial, see "Known gaps"). Frontmatter = cover, caption, counsel, signature, service list, authorities. |
+| `usage/OUTPUT-answering-brief.typst.pdf` | Render, 14 pages. |
 | `usage/OVERLAY-craig-answering-brief.pdf`, `.txt` | Red/blue overlay against the exemplar, and the page map. |
 | `typst/ca7-answering-brief.typ` | The template: `ca7-brief(meta, md)`. Content-agnostic. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
@@ -19,7 +19,7 @@ Status: exemplar = yes; typeface = none named by the rules, EB Garamond kept (fo
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # micromamba env: typst 0.15.0, poppler, imagemagick, gawk, jq
-sh tools/render.sh courts/seventh-circuit/court-of-appeals/answering-brief usage/INPUT-ca7-answering-brief-craig.md
+sh tools/render.sh courts/seventh-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md
 sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/answering-brief craig-answering-brief
 ```
 
@@ -75,7 +75,7 @@ The rules for this doc type were checked as follows:
 
 ## Pages reviewed (Gate 2)
 
-All 14 pages of `usage/OUTPUT-ca7-answering-brief-craig.typst.pdf` were rasterized at 60 dpi (`pdftoppm -r 60`) and looked at:
+All 14 pages of `usage/OUTPUT-answering-brief.typst.pdf` were rasterized at 60 dpi (`pdftoppm -r 60`) and looked at:
 
 PDF page (printed folio) and what it shows:
 
@@ -102,14 +102,14 @@ Fonts pass, 2026-10-15: the sample was re-rendered (14 pages, `pdffonts`: EB Gar
 
 ## Verification pass 2026-10-16 (fb-595.26.7)
 
-- Rendered: `sh tools/render.sh ... usage/INPUT-ca7-answering-brief-craig.md`, exit 0, no typst warnings, 14 pages (the committed OUTPUT was also 14 pages). Re-rendered after each fix.
+- Rendered: `sh tools/render.sh ... usage/INPUT-answering-brief.md`, exit 0, no typst warnings, 14 pages (the committed OUTPUT was also 14 pages). Re-rendered after each fix.
 - Viewed: all 14 pages at `pdftoppm -r 60`, one PNG at a time; pages 1 and 11–14 again after the fixes (pages 2–10 are text-identical to the first render, checked page by page with `pdftotext -layout`). Exemplar page 1 compared with our cover; exemplar pages 31–34 (signature, certificates) viewed. All 14 overlay pages viewed at `-r 40`.
 - Overlay: regenerated (the exemplar is now in `usage/`). Cover and TOC 100%, TOA 41%, body 45–69%, conclusion page 34%, certificates 80–90%. Margins and text block coincide; differences are face and size (EB Garamond vs Times New Roman, both 12 pt) and omitted text.
 - Fixed:
   - Template: counsel, signature and service address lines were forced italic; the exemplar sets them roman with only the "Counsel for / Attorneys for" lines italic. Lines are now set as given, and markdown `*...*` in a line is honoured.
   - Template: the certificate of service's signature block stood alone on PDF page 14. The last counsel group served is now kept with the signature block.
   - Sample: the service list was mis-transcribed (Bever and Fecht merged under BBFCS; Gritton and Freel missing). It now has the six groups as filed (exemplar pp. 33–34); the role lines are marked italic in the markdown, as printed.
-- Remaining gaps: as in "Known gaps" (Rule 26.1 statement, partial transcription, one exemplar in the overlay). The service certificate's wording and the signature position (left, not right as filed) are the template's, not the filer's (tier 3). The latex engine was re-rendered from the corrected sample (exit 0, 14 pages) but its pages were not viewed in this pass. The docx outputs were not rebuilt (no LibreOffice on this box), so `OUTPUT-ca7-answering-brief-craig.docx` and `.docx.pdf` predate the service-list correction.
+- Remaining gaps: as in "Known gaps" (Rule 26.1 statement, partial transcription, one exemplar in the overlay). The service certificate's wording and the signature position (left, not right as filed) are the template's, not the filer's (tier 3). The latex engine was re-rendered from the corrected sample (exit 0, 14 pages) but its pages were not viewed in this pass. The docx outputs were not rebuilt (no LibreOffice on this box), so `OUTPUT-answering-brief.docx` and `.docx.pdf` predate the service-list correction.
 
 ## Changes made during review
 
@@ -123,6 +123,6 @@ Fonts pass, 2026-10-15: the sample was re-rendered (14 pages, `pdffonts`: EB Gar
 ## Engines
 
 - **typst** (`typst/`): primary. Roman address lines and the service-signature keep changed 2026-10-16 (see "Verification pass").
-- **latex** (`latex/template.tex`, `latex/ca7-answering-brief.lua`): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 26.9 pt double spacing, one-inch margins, no hyphenation. The Argument's point headings are centered small capitals; other headings use A. / 1. / a. / (1). Cover, TOC, TOA, signers block (`/s/` and bar numbers) and both certificates follow the typst frontmatter fields. Output `usage/OUTPUT-ca7-answering-brief-craig.latex.pdf`, 14 pages (typst: 14). Differences: the cover is not fitted to the page, so its final date line and rule may sit differently; the TOC shows the short certificate title, not the full typst heading. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
-- **docx** (`docx/`): `build-reference.sh` (reference styles, EB Garamond 12 pt, exact 26.9 pt double spacing, 11 pt footnotes), `ca7-answering-brief.lua` (cover, TOC, TOA, signature and certificates as styled paragraphs), `render.sh` (sections with roman front matter and arabic body, PAGE footers, and a two-pass TOC/TOA page map read from the LibreOffice PDF), `pagemap.awk`. Output `usage/OUTPUT-ca7-answering-brief-craig.docx` and `.docx.pdf`, 14 pages (typst: 14); the certificate word count is 2,579, the same as typst. Matches typst: the face, sizes, spacing, one-inch margins, cover lines and counsel, roman and arabic folios, the centered Argument point headings, the TOC and TOA entries with page numbers, both certificates. Differences: the cover is spaced by hand (typst fits it to the page); the TOA page list comes from a text search of the PDF, so a short-form cite (`Allen`) also counts unlinked mentions (Allen: 1, 4, 5, 6, 7; typst 1, 4, 5, 6); the TOC and TOA are static text, not fields, and Word may paginate a page number differently; the compliance certificate omits the typst "using Typst" clause (no word processor is named in the frontmatter). Opened in LibreOffice without error; not opened in Word. BLOCKED: `tools/check.sh --engine docx` cannot run: no `checks.yaml` and no `court.json` in this folder or the court (exit 2), so no Gate 1 check ID can be reported; Gate 2 has no `reviews/` file.
+- **latex** (`latex/template.tex`, `latex/ca7-answering-brief.lua`): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 26.9 pt double spacing, one-inch margins, no hyphenation. The Argument's point headings are centered small capitals; other headings use A. / 1. / a. / (1). Cover, TOC, TOA, signers block (`/s/` and bar numbers) and both certificates follow the typst frontmatter fields. Output `usage/OUTPUT-answering-brief.latex.pdf`, 14 pages (typst: 14). Differences: the cover is not fitted to the page, so its final date line and rule may sit differently; the TOC shows the short certificate title, not the full typst heading. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
+- **docx** (`docx/`): `build-reference.sh` (reference styles, EB Garamond 12 pt, exact 26.9 pt double spacing, 11 pt footnotes), `ca7-answering-brief.lua` (cover, TOC, TOA, signature and certificates as styled paragraphs), `render.sh` (sections with roman front matter and arabic body, PAGE footers, and a two-pass TOC/TOA page map read from the LibreOffice PDF), `pagemap.awk`. Output `usage/OUTPUT-answering-brief.docx` and `.docx.pdf`, 14 pages (typst: 14); the certificate word count is 2,579, the same as typst. Matches typst: the face, sizes, spacing, one-inch margins, cover lines and counsel, roman and arabic folios, the centered Argument point headings, the TOC and TOA entries with page numbers, both certificates. Differences: the cover is spaced by hand (typst fits it to the page); the TOA page list comes from a text search of the PDF, so a short-form cite (`Allen`) also counts unlinked mentions (Allen: 1, 4, 5, 6, 7; typst 1, 4, 5, 6); the TOC and TOA are static text, not fields, and Word may paginate a page number differently; the compliance certificate omits the typst "using Typst" clause (no word processor is named in the frontmatter). Opened in LibreOffice without error; not opened in Word. BLOCKED: `tools/check.sh --engine docx` cannot run: no `checks.yaml` and no `court.json` in this folder or the court (exit 2), so no Gate 1 check ID can be reported; Gate 2 has no `reviews/` file.
 

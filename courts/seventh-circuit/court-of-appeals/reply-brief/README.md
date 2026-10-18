@@ -34,18 +34,18 @@ its rules.
 |---|---|
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits the frontmatter, calls the template. |
 | `typst/ca7-reply-brief.typ` | The template: `ca7-reply-brief(meta, md)`. Content-agnostic. Every number is a named parameter at the top and traces to a rule ID above. |
-| `usage/INPUT-ca7-reply-brief-actnow.md` | Markdown transcribed from the primary exemplar (cover, the body through Point II.A, the headings of II.B, II.C and III with transcription notes, the conclusion, the certificate metadata). A portion, not the whole brief. |
-| `usage/OUTPUT-ca7-reply-brief-actnow.typst.pdf` | `sh tools/render.sh courts/seventh-circuit/court-of-appeals/reply-brief usage/INPUT-ca7-reply-brief-actnow.md`. 12 pages. |
+| `usage/INPUT-reply-brief.md` | Markdown transcribed from the primary exemplar (cover, the body through Point II.A, the headings of II.B, II.C and III with transcription notes, the conclusion, the certificate metadata). A portion, not the whole brief. |
+| `usage/OUTPUT-reply-brief.typst.pdf` | `sh tools/render.sh courts/seventh-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md`. 12 pages. |
 | `usage/OVERLAY-act-now-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/reply-brief act-now-reply-brief`. Red = ours, blue = filed, black = both. |
-| `usage/SAMPLE-ca7-reply-brief-actnowvdoe262473.pdf` | Primary exemplar: the whole 19-page reply brief, 26-2473. |
-| `usage/SAMPLE-ca7-reply-brief-dambrosio252231.pdf` | Second filer, for the tier-2 cross-check: a motion (pp. 1-3) with the reply brief attached (pp. 4-17). |
+| `usage/FILED-EXAMPLE-reply-brief.pdf` | Primary exemplar: the whole 19-page reply brief, 26-2473. |
+| `usage/FILED-EXAMPLE-reply-brief-2.pdf` | Second filer, for the tier-2 cross-check: a motion (pp. 1-3) with the reply brief attached (pp. 4-17). |
 | `usage/SOURCE.md` | Filer, case, docket, date filed, URL, date fetched, for both. |
 
 Build, from the repo root:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (see the setup note in the PR)
-sh tools/render.sh courts/seventh-circuit/court-of-appeals/reply-brief usage/INPUT-ca7-reply-brief-actnow.md
+sh tools/render.sh courts/seventh-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md
 sh tools/overlay.sh courts/seventh-circuit/court-of-appeals/reply-brief act-now-reply-brief
 ```
 
@@ -77,7 +77,7 @@ included; the cover, TOC, TOA and certificates are not.
 
 ## Visual review (Gate 2 by eye)
 
-All 12 pages of `OUTPUT-ca7-reply-brief-actnow.typst.pdf` were rasterized at 60 dpi and viewed. Pages 9-10 were re-viewed after the
+All 12 pages of `OUTPUT-reply-brief.typst.pdf` were rasterized at 60 dpi and viewed. Pages 9-10 were re-viewed after the
 signature-block fix.
 
 | PDF page | Printed page | Content | Finding |
@@ -114,13 +114,13 @@ in the word processor the brief was typed in.
 
 ## Verification pass 2026-10-16 (fb-595.26.7)
 
-- Rendered: `sh tools/render.sh ... usage/INPUT-ca7-reply-brief-actnow.md`, exit 0, no typst warnings, 12 pages (the committed OUTPUT was also 12 pages). Re-rendered after each fix.
+- Rendered: `sh tools/render.sh ... usage/INPUT-reply-brief.md`, exit 0, no typst warnings, 12 pages (the committed OUTPUT was also 12 pages). Re-rendered after each fix.
 - Viewed: all 12 pages at `pdftoppm -r 60`, one PNG at a time; pages 1, 2 and 9–12 again after the fixes (pages 3–8 are text-identical to the first render, checked page by page with `pdftotext -layout`). Exemplar page 1 compared with our cover. All 12 overlay pages viewed at `-r 40`.
 - Overlay: regenerated against the ACT NOW exemplar. Cover 94%, TOC 88% (was 63%), TOA 36%, body pages 59–92%, conclusion page 39%, certificates 46% and 63%. Margins and text block coincide; differences are the face (EB Garamond vs Times New Roman) and omitted text.
 - Fixed:
   - Template: cover counsel lines and signature lines were forced italic; the exemplar sets them roman, with only the admission parentheticals and the "Attorneys for" note italic. Lines and names are now set as given; markdown `*...*` is honoured (the sample marks the two parentheticals).
   - Sample: the TOC numbered the conclusion "III." because Points II.B, II.C and III were left out of the transcription; the filed TOC has "IV. Conclusion". Their headings are now transcribed (text from the filed TOC), each followed by a bracketed transcription note, so the TOC has the filed structure. The certificate word count moves from 2,085 to 2,160.
-- Remaining gaps: as in "Known gaps" (gray cover question, typeface, portion only, no automated gates). The latex engine was re-rendered (exit 0, 12 pages) but its pages were not viewed in this pass. The docx outputs were not rebuilt (no LibreOffice on this box), so `OUTPUT-ca7-reply-brief-actnow.docx` and `.docx.pdf` predate the added headings (their 2,085 word count and TOC are the old sample's).
+- Remaining gaps: as in "Known gaps" (gray cover question, typeface, portion only, no automated gates). The latex engine was re-rendered (exit 0, 12 pages) but its pages were not viewed in this pass. The docx outputs were not rebuilt (no LibreOffice on this box), so `OUTPUT-reply-brief.docx` and `.docx.pdf` predate the added headings (their 2,085 word count and TOC are the old sample's).
 
 ## Known gaps
 
@@ -153,6 +153,6 @@ in the word processor the brief was typed in.
 ## Engines
 
 - **typst** (`typst/`): primary. Roman counsel and signature lines changed 2026-10-16 (see "Verification pass").
-- **latex** (`latex/template.tex`, `latex/ca7-reply-brief.lua`): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 27.7 pt double spacing, one-inch margins, no hyphenation. TOC lists point headings down to level 3 (`toc_depth` 3). Counsel groups with `column: right` and `counsel_note` are handled; the certificates include the paper-copy and unregistered-participant paragraphs. Output `usage/OUTPUT-ca7-reply-brief-actnow.latex.pdf`, 12 pages (typst: 12; re-rendered 2026-10-16 from the sample with the added headings, pages not viewed). Differences: the cover spacing is hand-set; the certificate of compliance wording is written for LaTeX rather than copied from the typst text. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
-- **docx** (`docx/`): `build-reference.sh` (reference styles, EB Garamond 12 pt, exact 27.7 pt double spacing, 11 pt footnotes), `ca7-reply-brief.lua` (cover with the counsel in two columns and the closing double rule, TOC of the body headings, TOA, signature and certificates), `render.sh` (sections with roman front matter (the cover counts as i) and arabic body, PAGE footers, and a two-pass TOC/TOA page map read from the LibreOffice PDF), `pagemap.awk`. Output `usage/OUTPUT-ca7-reply-brief-actnow.docx` and `.docx.pdf`, 12 pages (typst: 12); the certificate word count is 2,085, the same as typst. Matches typst: the face and sizes, spacing, margins, cover and its numbering, TOC (body headings only, as typst), TOA with page numbers, the certificates and the service page break. Differences: the cover is spaced by hand; the TOA page list comes from a text search of the PDF; the TOC is static text, not a field; the compliance certificate omits the typst "using Typst" clause (no word processor is named in the frontmatter). Opened in LibreOffice without error; not opened in Word. BLOCKED: `tools/check.sh --engine docx` cannot run: no `checks.yaml` and no `court.json` in this folder or the court (exit 2), so no Gate 1 check ID can be reported; Gate 2 has no `reviews/` file.
+- **latex** (`latex/template.tex`, `latex/ca7-reply-brief.lua`): EB Garamond 12 pt from the vendored `fonts/`, 11 pt footnotes, 27.7 pt double spacing, one-inch margins, no hyphenation. TOC lists point headings down to level 3 (`toc_depth` 3). Counsel groups with `column: right` and `counsel_note` are handled; the certificates include the paper-copy and unregistered-participant paragraphs. Output `usage/OUTPUT-reply-brief.latex.pdf`, 12 pages (typst: 12; re-rendered 2026-10-16 from the sample with the added headings, pages not viewed). Differences: the cover spacing is hand-set; the certificate of compliance wording is written for LaTeX rather than copied from the typst text. Gates not run: the court has no `checks.yaml` or `rules.md` yet.
+- **docx** (`docx/`): `build-reference.sh` (reference styles, EB Garamond 12 pt, exact 27.7 pt double spacing, 11 pt footnotes), `ca7-reply-brief.lua` (cover with the counsel in two columns and the closing double rule, TOC of the body headings, TOA, signature and certificates), `render.sh` (sections with roman front matter (the cover counts as i) and arabic body, PAGE footers, and a two-pass TOC/TOA page map read from the LibreOffice PDF), `pagemap.awk`. Output `usage/OUTPUT-reply-brief.docx` and `.docx.pdf`, 12 pages (typst: 12); the certificate word count is 2,085, the same as typst. Matches typst: the face and sizes, spacing, margins, cover and its numbering, TOC (body headings only, as typst), TOA with page numbers, the certificates and the service page break. Differences: the cover is spaced by hand; the TOA page list comes from a text search of the PDF; the TOC is static text, not a field; the compliance certificate omits the typst "using Typst" clause (no word processor is named in the frontmatter). Opened in LibreOffice without error; not opened in Word. BLOCKED: `tools/check.sh --engine docx` cannot run: no `checks.yaml` and no `court.json` in this folder or the court (exit 2), so no Gate 1 check ID can be reported; Gate 2 has no `reviews/` file.
 

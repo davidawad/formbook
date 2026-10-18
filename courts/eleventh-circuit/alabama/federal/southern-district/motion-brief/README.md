@@ -5,10 +5,10 @@ Folder: `courts/eleventh-circuit/alabama/federal/southern-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-alsd-motion-brief-jacksonvshell22cv478.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-alsd-motion-brief-shell.md` (caption, title, introduction, factual background, argument I to IV, V (partly), VI, conclusion, signature, certificate of service added by us; several passages elided, see Known gaps) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (caption, title, introduction, factual background, argument I to IV, V (partly), VI, conclusion, signature, certificate of service added by us; several passages elided, see Known gaps) |
 | typeface | face required: none (S.D. Ala. Gen. L.R. 5(a)(2) asks for "a plain, Roman style (or similar) font"; no face is named). Substitute: **EB Garamond** (kept, as the brief's rule for courts that name no face). Fit: n/a. See Known gaps 1. |
-| render | ok: `usage/OUTPUT-alsd-motion-brief-shell.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings; re-rendered 2026-10-14, `pdffonts` shows `EBGaramond-Regular`, `-Bold`, `-Italic` embedded (no other face) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings; re-rendered 2026-10-14, `pdffonts` shows `EBGaramond-Regular`, `-Bold`, `-Italic` embedded (no other face) |
 | overlay | ok: `usage/OVERLAY-shell-motion-brief.pdf` and `OVERLAY-shell-motion-brief.txt` (`tools/overlay.sh`), re-run 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not stored in the folder; see `usage/SOURCE.md`) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed on 2026-10-14, after the typeface check) |
 
@@ -84,7 +84,7 @@ The pairing is not in order because the sample elides the exemplar's pages 8 to 
 
 ## Engines
 
-The typst template is the reference. The docx engine is `docx/reference.docx` (built by `docx/make-reference.sh`) with the Lua filter `docx/alsd-motion-brief.lua`; it renders with `sh tools/render.sh --engine docx <this folder> usage/INPUT-alsd-motion-brief-shell.md`, which writes `usage/OUTPUT-alsd-motion-brief-shell.docx` and `usage/OUTPUT-alsd-motion-brief-shell.docx.pdf` (LibreOffice 26.8.0.3 converts the file; 8 pages, the same count as the typst render). The fonts must be installed for LibreOffice: EB Garamond from `fonts/eb-garamond/`; `pdffonts` shows only the EB Garamond faces.
+The typst template is the reference. The docx engine is `docx/reference.docx` (built by `docx/make-reference.sh`) with the Lua filter `docx/alsd-motion-brief.lua`; it renders with `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8.0.3 converts the file; 8 pages, the same count as the typst render). The fonts must be installed for LibreOffice: EB Garamond from `fonts/eb-garamond/`; `pdffonts` shows only the EB Garamond faces.
 
 | Element | Typst | DOCX |
 |---|---|---|
@@ -103,4 +103,4 @@ What differs:
 - The CONCLUSION heading and its paragraph move to page 8 in the DOCX, with the signature block and the certificate of service; the typst render keeps them on page 7. The signature block and certificate are on the last page in both engines (open item 6 above).
 - The space between the title of the paper and the first heading is set by measurement of the typst render (a blank line of 16.2 pt in `alsd-motion-brief.lua`), not by a rule.
 
-DOCX BLOCKED items: none. This folder has no `checks.yaml`, so `tools/check.sh --engine docx` does not run here; the docx PDF was reviewed page by page instead (every page of `OUTPUT-alsd-motion-brief-shell.docx.pdf`, against the typst render). The `.docx` was converted by LibreOffice without error but was not opened in Microsoft Word, so the Word repair check is not done.
+DOCX BLOCKED items: none. This folder has no `checks.yaml`, so `tools/check.sh --engine docx` does not run here; the docx PDF was reviewed page by page instead (every page of `OUTPUT-motion-brief.docx.pdf`, against the typst render). The `.docx` was converted by LibreOffice without error but was not opened in Microsoft Word, so the Word repair check is not done.

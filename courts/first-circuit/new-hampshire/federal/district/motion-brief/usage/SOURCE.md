@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nhd-motion-brief-jonas126cv00600.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, District of New Hampshire
 - Case: *Jonas v. Ayotte* (Marilyn C. Jonas and Gordon-Darby Holdings, Inc. v. Kelly Ayotte, in her official capacity as Governor, et al.)
 - Docket: Civil No. 1:26-cv-00600-LM-TSM (Document 14)
@@ -18,7 +18,7 @@ Second filer: not collected. CourtListener RECAP search (`type=rd`, `court=nhd`,
 
 Added 2026-10-17 (fb-595.21.1); supersedes the "Second filer: not collected" note above.
 
-- File: `SAMPLE-nhd-motion-brief-cocacola126cv00115.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Court: United States District Court, District of New Hampshire
 - Case: *U.S. Equal Employment Opportunity Commission v. Coca-Cola Beverages Northeast, Inc.*
 - Docket: Civil Action No. 1:26-cv-00115-PB-AJ (Document 6-1, the memorandum attached to the motion at Document 6)

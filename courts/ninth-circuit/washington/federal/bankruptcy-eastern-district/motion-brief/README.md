@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/mot
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-waeb-motion-brief-1min2580007motiontodismissmemorandum.pdf` (AP Defendants' memorandum supporting a motion to dismiss, Bush Kornfeld LLP and Eisenhower Carlson PLLC, filed 2025-02-19, 42 pages). One filer only. See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-waeb-motion-brief-1minmotiontodismissmemorandum.md`: caption, opening paragraph, Preliminary Statement, paragraphs 1 to 26 with Factual Background sections A and B, the Conclusion and the signature blocks. Paragraphs 27 to 101 and the Applicable Standards and Argument are not transcribed (see Known gaps). |
-| render | ok: `usage/OUTPUT-waeb-motion-brief-1minmotiontodismissmemorandum.typst.pdf`, 14 pages, letter, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-waeb-motion-brief-1minmotiontodismissmemorandum.md`). |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (AP Defendants' memorandum supporting a motion to dismiss, Bush Kornfeld LLP and Eisenhower Carlson PLLC, filed 2025-02-19, 42 pages). One filer only. See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md`: caption, opening paragraph, Preliminary Statement, paragraphs 1 to 26 with Factual Background sections A and B, the Conclusion and the signature blocks. Paragraphs 27 to 101 and the Applicable Standards and Argument are not transcribed (see Known gaps). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages, letter, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-motion-brief.md`). |
 | overlay | ok: `usage/OVERLAY-1min-motion-to-dismiss-memorandum.pdf` (14 pages) and `usage/OVERLAY-1min-motion-to-dismiss-memorandum.txt` (page map), from `sh tools/overlay.sh <this dir> 1min-motion-to-dismiss-memorandum <exemplar>` (2026-10-15). The exemplar PDF is not in the checkout; it was fetched from its CourtListener URL in `usage/SOURCE.md` (sha256 matches the recorded value). See Overlay. |
 | pages reviewed | 14 of 14 (2026-10-15: every rendered page rasterized at 70 dpi and viewed as a contact sheet, unchanged font). Earlier review 2026-10-14 at 70 dpi. |
 | typeface | LBR 9004-1(a)(3) names no face; EB Garamond kept (2026-10-15 check of the rule text). See Typeface. |
@@ -125,7 +125,7 @@ Page 1 pairs with the exemplar's signature page because both carry counsel names
 
 ## Commands
 
-- Render: `sh tools/render.sh courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-waeb-motion-brief-1minmotiontodismissmemorandum.md` (exit 0, no warnings; output `usage/OUTPUT-waeb-motion-brief-1minmotiontodismissmemorandum.typst.pdf`).
+- Render: `sh tools/render.sh courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-motion-brief.md` (exit 0, no warnings; output `usage/OUTPUT-motion-brief.typst.pdf`).
 - Overlay: `sh tools/overlay.sh courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/motion-brief 1min-motion-to-dismiss-memorandum` (writes `usage/OVERLAY-1min-motion-to-dismiss-memorandum.pdf` and `.txt`).
 - Toolchain: typst 0.15.0, poppler 26.09.0 (`pdftoppm`), ImageMagick 7.1.2, installed with micromamba from conda-forge into `$HOME/tb`.
 
@@ -133,7 +133,7 @@ Page 1 pairs with the exemplar's signature page because both carry counsel names
 
 ## Engines
 
-docx (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, double-spaced footnotes as the typst motion template), `motion-brief.lua` (the markdown contract to judge line, cover, caption, numbered paragraphs, lettered lists and the signature blocks), `render.sh` (pandoc, then the footer title). Render: `sh tools/render.sh --engine docx <this dir> usage/INPUT-waeb-motion-brief-1minmotiontodismissmemorandum.md` writes `usage/OUTPUT-waeb-motion-brief-1minmotiontodismissmemorandum.docx` and `.docx.pdf` (LibreOffice 26.8; `pdffonts` shows EB Garamond only). Pages: docx 14, typst 14.
+docx (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, double-spaced footnotes as the typst motion template), `motion-brief.lua` (the markdown contract to judge line, cover, caption, numbered paragraphs, lettered lists and the signature blocks), `render.sh` (pandoc, then the footer title). Render: `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8; `pdffonts` shows EB Garamond only). Pages: docx 14, typst 14.
 
 What matches the typst output (`typst/`): letter, 1 in margins; EB Garamond 14 pt throughout; body lines on the typst line pitch (31.4 pt, exact spacing); footnotes double-spaced; counsel side by side, judge line, court title and caption with its rules on page 1; numbered paragraphs, (a) lists and A. headings; footer `MEMORANDUM ISO MOTION TO DISMISS n`; signature blocks after the conclusion, the date kept with the blocks, the excerpt and conclusion kept together.
 

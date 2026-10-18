@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "pawb-motion-brief.typ": pawb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-pawb-motion-brief-bernsteinbriefinsupport.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #pawb-motion-brief(meta, body)

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-tnwd-motion-brief-gonzalezcarrollcounty126cv02199.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Western District of Tennessee, Western Division (as captioned on the filing; the case number carries the Eastern (Jackson) office prefix `1:`)
 - Case: *Gonzalez v. Carroll County, TN* (CourtListener title; Eric D. Gonzalez v. Hollow Rock-Bruceton Special School District, et al.)
 - Docket: No. 1:26-cv-02199-STA-jay (Document 13-1, attachment 1 to Document 13, the motion to dismiss)

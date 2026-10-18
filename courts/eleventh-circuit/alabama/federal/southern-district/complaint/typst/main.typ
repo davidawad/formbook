@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "alsd-complaint.typ": alsd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-alsd-complaint-frankenmuth.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #alsd-complaint(meta, body)

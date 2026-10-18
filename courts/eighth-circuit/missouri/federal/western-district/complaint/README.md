@@ -5,10 +5,10 @@ Folder: `courts/eighth-circuit/missouri/federal/western-district/complaint/` (se
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-mowd-complaint-johnson426cv00380.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-mowd-complaint-johnson.md` (an excerpt of the 60-page filing, see Known gaps) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (an excerpt of the 60-page filing, see Known gaps) |
 | typeface | face required by the rules: none (see Governing rules). Substitute: none; EB Garamond kept (`docs/FONTS.md`, "No face named"). Metric note: n/a. |
-| render | ok: `usage/OUTPUT-mowd-complaint-johnson.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`; re-rendered 2026-10-14, `pdffonts`: EB Garamond Regular and Bold embedded) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`; re-rendered 2026-10-14, `pdffonts`: EB Garamond Regular and Bold embedded) |
 | overlay | fail: `usage/OVERLAY-johnson-complaint.pdf` not regenerated. `usage/` holds only `SOURCE.md` in this snapshot (no `SAMPLE-*.pdf`), so `tools/overlay.sh` exits 1. The `.txt` page map is from an earlier run. |
 | pages reviewed | 10 of 10 (re-rendered 2026-10-14 and every page viewed at 60 dpi; the template did not change) |
 
@@ -86,8 +86,8 @@ Why 13 pt and not 12 pt: at 13 pt the EB Garamond x-height is about that of Time
 
 ## Engines
 
-- **typst** (`typst/`, primary): `usage/OUTPUT-mowd-complaint-johnson.typst.pdf`, 10 pages.
-- **docx** (`docx/`): `reference.docx` (styles and page setup, built by `sh docx/build-reference.sh reference.docx`) and `mowd-complaint.lua` (cover, caption, numbered paragraphs, lists, signature block). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-mowd-complaint-johnson.md` writes `usage/OUTPUT-mowd-complaint-johnson.docx` and `usage/OUTPUT-mowd-complaint-johnson.docx.pdf` (LibreOffice 26.8.1; 11 pages). LibreOffice must see `fonts/` (EB Garamond) through fontconfig, or the PDF substitutes a face.
+- **typst** (`typst/`, primary): `usage/OUTPUT-complaint.typst.pdf`, 10 pages.
+- **docx** (`docx/`): `reference.docx` (styles and page setup, built by `sh docx/build-reference.sh reference.docx`) and `mowd-complaint.lua` (cover, caption, numbered paragraphs, lists, signature block). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8.1; 11 pages). LibreOffice must see `fonts/` (EB Garamond) through fontconfig, or the PDF substitutes a face.
 - **latex**: not built for this doc type (`latex/` is empty).
 
 What matches the typst form (every page of the docx PDF viewed at 60 dpi, next to the typst page):

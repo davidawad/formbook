@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-okd-complaint-pilfziriax526cv01440.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Western District of Oklahoma (CourtListener `okwd`)
 - Case: *Public Interest Legal Foundation, Inc. v. Ziriax*
 - Docket: No. 5:26-cv-01440-HE (Document 1; CourtListener docket 73489937, the page at https://www.courtlistener.com/docket/73489937/)

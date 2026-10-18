@@ -2,18 +2,18 @@
 
 - Court: `ca9`, Court of Appeals for the Ninth Circuit (`courts/ninth-circuit/court-of-appeals/`)
 - Doc type: `answering-brief`. One self-contained folder: its own template, exemplar and sample. It does not touch the court-root `typst/`, `usage/` or `rules.md`, which hold the opening brief.
-- Exemplar: `usage/SAMPLE-ca9-answering-brief-newsomvtrump253727.pdf` (*Newsom v. Trump*, No. 25-3727, Answering Brief of Plaintiffs-Appellees, DktEntry 63.1, filed 2025-09-02; 71 pages; text-based). Provenance in `usage/SOURCE.md`.
-- Sample: `usage/INPUT-ca9-answering-brief-newsom.md`: an excerpt of the filed brief (see Known gaps). Rendered to 15 pages (14 before the 2026-10-16 pass; see the end of this file).
+- Exemplar: `usage/FILED-EXAMPLE-answering-brief.pdf` (*Newsom v. Trump*, No. 25-3727, Answering Brief of Plaintiffs-Appellees, DktEntry 63.1, filed 2025-09-02; 71 pages; text-based). Provenance in `usage/SOURCE.md`.
+- Sample: `usage/INPUT-answering-brief.md`: an excerpt of the filed brief (see Known gaps). Rendered to 15 pages (14 before the 2026-10-16 pass; see the end of this file).
 - Status: template built, sample rendered, overlay made, all 15 pages viewed (2026-10-16 pass, below). Not reviewed by a human. `court.json` untouched.
 
 ## Files
 
 | Path | What |
 |---|---|
-| `typst/main.typ` | Entry point; reads `--input sample=...` (default `usage/INPUT-ca9-answering-brief-newsom.md`) and calls `ca9-answering-brief`. |
+| `typst/main.typ` | Entry point; reads `--input sample=...` (default `usage/INPUT-answering-brief.md`) and calls `ca9-answering-brief`. |
 | `typst/ca9-answering-brief.typ` | Template. A copy of the ca9 opening-brief template (`../typst/ca9-brief.typ`) with four changes: the header says answering brief; the Statement of Related Cases page is generated only when the metadata has a `related_cases` map (Circuit Rule 28-2.6, see below); `toc-depth` is 5 (all argument levels); the function is named `ca9-answering-brief`. The page geometry, type, cover, TOA, Form 8 and addendum code are unchanged. |
-| `usage/INPUT-ca9-answering-brief-newsom.md` | Markdown contract sample (frontmatter + body). |
-| `usage/OUTPUT-ca9-answering-brief-newsom.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/court-of-appeals/answering-brief usage/INPUT-ca9-answering-brief-newsom.md` (15 pages). |
+| `usage/INPUT-answering-brief.md` | Markdown contract sample (frontmatter + body). |
+| `usage/OUTPUT-answering-brief.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md` (15 pages). |
 | `usage/OVERLAY-newsom-answering-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/court-of-appeals/answering-brief newsom-answering-brief`. |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -52,7 +52,7 @@ Primary sources, read on 2026-10-14 in the Ninth Circuit's "FRAP, Ninth Circuit 
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-ca9-answering-brief-newsom.typst.pdf` was rendered at 60 dpi and viewed (15 of 15, 2026-10-16). Typst printed no warnings. Fonts embedded: EB Garamond only (Regular, Italic, Bold, Bold Italic). Page numbers below are PDF pages; the brief's own page numbers are printed on the page.
+Every page of `OUTPUT-answering-brief.typst.pdf` was rendered at 60 dpi and viewed (15 of 15, 2026-10-16). Typst printed no warnings. Fonts embedded: EB Garamond only (Regular, Italic, Bold, Bold Italic). Page numbers below are PDF pages; the brief's own page numbers are printed on the page.
 
 | PDF page | Content | Result |
 |---|---|---|
@@ -96,13 +96,13 @@ The same markdown renders through three engines. Typst (`typst/`) is the referen
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-ca9-answering-brief-newsom.typst.pdf` (15 pp) | reference |
-| latex | `OUTPUT-ca9-answering-brief-newsom.latex.pdf` (15 pp) | ok: rendered, every page compared with the typst page |
-| docx | `OUTPUT-ca9-answering-brief-newsom.docx`; no `.docx.pdf` | BLOCKED: no LibreOffice on this box (below) |
+| typst | `OUTPUT-answering-brief.typst.pdf` (15 pp) | reference |
+| latex | `OUTPUT-answering-brief.latex.pdf` (15 pp) | ok: rendered, every page compared with the typst page |
+| docx | `OUTPUT-answering-brief.docx`; no `.docx.pdf` | BLOCKED: no LibreOffice on this box (below) |
 
 ```sh
-sh tools/render.sh --engine latex courts/ninth-circuit/court-of-appeals/answering-brief usage/INPUT-ca9-answering-brief-newsom.md
-sh tools/render.sh --engine docx  courts/ninth-circuit/court-of-appeals/answering-brief usage/INPUT-ca9-answering-brief-newsom.md
+sh tools/render.sh --engine latex courts/ninth-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md
+sh tools/render.sh --engine docx  courts/ninth-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md
 ```
 
 **latex** (`latex/template.tex`, `latex/ca9.lua`, `latex/render.sh`). This is the reply-brief LaTeX engine (see `../reply-brief/README.md`, "Engines") with the answering limits: `ca9.lua` checks the 14,000-word limit of Circuit Rule 32-1(a) and lists five heading levels in the table of contents, as the typst answering template does. `render.sh` owns the build: pandoc writes the `.tex`, then tectonic compiles it twice so the tables take their page numbers from the first pass. Fonts come only from `fonts/eb-garamond`; the PDF embeds the four EB Garamond faces and nothing else, on US Letter.

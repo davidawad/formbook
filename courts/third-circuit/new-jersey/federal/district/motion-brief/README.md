@@ -5,10 +5,10 @@ Folder: `courts/third-circuit/new-jersey/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `usage/SAMPLE-njd-motion-brief-karre226cv06421.pdf` (McGuireWoods LLP, primary, 22 pages) and `usage/SAMPLE-njd-motion-brief-zeines225cv13335.pdf` (Freedman Normand Friedland LLP, 13 pages). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-njd-motion-brief-karremotiontodismiss.md`: the cover, the Introduction, Statement of Facts, Legal Standard, Point I, and the Conclusion with signature, transcribed from the Karre memorandum. Points II to IV are omitted and marked in the text. |
+| exemplar | yes, two filers: `usage/FILED-EXAMPLE-motion-brief.pdf` (McGuireWoods LLP, primary, 22 pages) and `usage/FILED-EXAMPLE-motion-brief-2.pdf` (Freedman Normand Friedland LLP, 13 pages). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md`: the cover, the Introduction, Statement of Facts, Legal Standard, Point I, and the Conclusion with signature, transcribed from the Karre memorandum. Points II to IV are omitted and marked in the text. |
 | typeface | Face required: **Times New Roman 14 pt** as the reference proportional face in L.Civ.R. 7.2(d) ("such as Times New Roman 14"; the rule also allows Courier New 12). Substitute: **Liberation Serif** (vendored; metric-compatible with Times New Roman, see `docs/FONTS.md`). Visual match, not pitch-identical: see Known gaps 1. |
-| render | ok: `usage/OUTPUT-njd-motion-brief-karremotiontodismiss.typst.pdf`, 11 pages (cover, table of contents `i`, table of authorities `ii`-`iii`, body 1-7), typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Italic, -Bold), no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages (cover, table of contents `i`, table of authorities `ii`-`iii`, body 1-7), typst 0.15.0, vendored Liberation Serif only (`pdffonts`: LiberationSerif, -Italic, -Bold), no warnings |
 | overlay | ok: `usage/OVERLAY-karre-motion-to-dismiss.pdf` and `.txt` (against the Karre exemplar; see below) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the fonts pass; open items are marked OPEN in the Gate 2 table) |
 

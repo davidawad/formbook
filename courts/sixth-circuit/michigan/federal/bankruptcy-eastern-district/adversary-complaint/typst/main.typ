@@ -4,7 +4,7 @@
 //     typst/main.typ out.pdf
 #import "mieb-adversary-complaint.typ": complaint-body, complaint-doc, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-mieb-adversary-complaint-griffin.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, md) = split-frontmatter(src)
 
 #show: complaint-doc.with(meta)

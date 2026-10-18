@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "tnwd-complaint.typ": tnwd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-tnwd-complaint-coran.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #tnwd-complaint(meta, body)

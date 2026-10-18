@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "moeb-motion-brief.typ": moeb-motion, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-moeb-motion-brief-qmaxxabstain.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief-2.md"))
 #let (meta, body) = split-frontmatter(src)
 #moeb-motion(meta, body)

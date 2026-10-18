@@ -8,9 +8,9 @@ Not a court-level `court.json` status change: this folder does not set `status` 
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-cafc-answering-brief-inreablynx261333.pdf` | Brief for Appellee, Director of the USPTO, *In re Ablynx N.V., Sanofi*, No. 26-1333, filed 2026-08-14 (38 pp.). Provenance in `usage/SOURCE.md`. |
-| `usage/INPUT-cafc-answering-brief-ablynx.md` | Markdown transcription (front matter + a portion of the body, Statement of the Issue through Conclusion, with the signature and both certificates). |
-| `usage/OUTPUT-cafc-answering-brief-ablynx.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-appeals/answering-brief usage/INPUT-cafc-answering-brief-ablynx.md` (14 pages). |
+| `usage/FILED-EXAMPLE-answering-brief.pdf` | Brief for Appellee, Director of the USPTO, *In re Ablynx N.V., Sanofi*, No. 26-1333, filed 2026-08-14 (38 pp.). Provenance in `usage/SOURCE.md`. |
+| `usage/INPUT-answering-brief.md` | Markdown transcription (front matter + a portion of the body, Statement of the Issue through Conclusion, with the signature and both certificates). |
+| `usage/OUTPUT-answering-brief.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md` (14 pages). |
 | `usage/OVERLAY-ablynx-answering-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-appeals/answering-brief ablynx-answering-brief` (red = our render, blue = exemplar). |
 | `typst/main.typ` | Entry point; reads `--input sample=...`, splits the frontmatter, calls the template. |
 | `typst/cafc-answering-brief.typ` | Template `cafc-brief(meta, md)`. Structure copied from `courts/ninth-circuit/court-of-appeals/typst/ca9-brief.typ`; numbers and forms are the Federal Circuit's. |
@@ -77,9 +77,9 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 
 | Engine | Files | Output (`usage/`) | Pages |
 |---|---|---|---|
-| typst (reference) | `typst/` | `OUTPUT-cafc-answering-brief-ablynx.typst.pdf` | 14 |
-| latex | `latex/template.tex`, `latex/cafc.lua`, `latex/render.sh` (tectonic) | `OUTPUT-cafc-answering-brief-ablynx.latex.pdf` | 15 |
-| docx | `docx/reference.docx` (`docx/make-reference.sh`, `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-cafc-answering-brief-ablynx.docx` and `.docx.pdf` | 14 |
+| typst (reference) | `typst/` | `OUTPUT-answering-brief.typst.pdf` | 14 |
+| latex | `latex/template.tex`, `latex/cafc.lua`, `latex/render.sh` (tectonic) | `OUTPUT-answering-brief.latex.pdf` | 15 |
+| docx | `docx/reference.docx` (`docx/make-reference.sh`, `docx/styles.xml.in`), `docx/cafc-docx.lua`, `docx/render.sh`, `docx/pages.sh` | `OUTPUT-answering-brief.docx` and `.docx.pdf` | 14 |
 
 **Matches the typst layout:** 14 pt EB Garamond, double spacing at the typst pitch (32.13 pt, 0.99em leading); 1 in margins; the cover; contents and authorities with page numbers; the Roman section headings (I. to V.) hanging at the margin with the A./1. sub-headings; the statement of related cases; the certificate of compliance with the signature under it; the certificate of service; the footers (roman then arabic).
 
@@ -99,7 +99,7 @@ The typst template is the reference. The LaTeX and docx engines are built from t
 
 ## Verification pass 2026-10-16 (fb-595.26.13)
 
-- Rendered: `sh tools/render.sh courts/federal-circuit/court-of-appeals/answering-brief usage/INPUT-cafc-answering-brief-ablynx.md`, exit 0, no typst warnings. Before the fixes it gave 13 pages (same as the committed PDF); after them, 14. Overlay rerun, exit 0: cover 92%, claim page ↔ filed p. 2 88%, front matter 33–73%, body 41–89%, certificates ↔ filed pp. 37–38.
+- Rendered: `sh tools/render.sh courts/federal-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md`, exit 0, no typst warnings. Before the fixes it gave 13 pages (same as the committed PDF); after them, 14. Overlay rerun, exit 0: cover 92%, claim page ↔ filed p. 2 88%, front matter 33–73%, body 41–89%, certificates ↔ filed pp. 37–38.
 - Viewed: all 13 pages before the fixes and all 14 after, at 60 dpi; the overlay pages at 40 dpi; the exemplar's pages 1 and 2 against ours.
 - Fixed:
   - Missing representative claim (tier 1). Fed. Cir. R. 32(a)(3) (Rules of Practice, Oct. 6, 2026 compilation, p. 145, fetched 2026-10-16): when the language of a patent or application is at issue, each principal brief carries exemplary claims inside the front cover or right after it. The exemplar has it on p. 2. New optional `patent_claims` / `patent_claims_heading` frontmatter, rendered on unnumbered single-spaced page(s) after the cover (typst and latex); the sample now transcribes claim 51 and "Appx151." (the subscript n of "(X)n" is set as plain text).

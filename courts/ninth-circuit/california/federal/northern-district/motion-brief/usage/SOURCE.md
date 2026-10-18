@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-cand-motion-brief-tsiakimmaidu16cv7189.pdf` (17 pages, text layer present, `pdftotext` reads it)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (17 pages, text layer present, `pdftotext` reads it)
 - URL fetched from: https://turtletalk.blog/wp-content/uploads/2020/04/12-us-motion-to-dismiss.pdf (a PDF hosted by the turtletalk.blog post; the filing itself is a public court record)
 - Court: United States District Court, Northern District of California (caption), San Francisco Division
 - Case: *Tsi Akim Maidu of Taylorsville Rancheria v. United States Department of the Interior, et al.*
@@ -23,7 +23,7 @@ Searched for a text-based, public N.D. Cal. motion. Options found: an EFF motion
 - Justia `cases.justia.com` PDFs: HTTP 403 to curl.
 - Not retrieved from the box: CourtListener itself (403).
 
-- File: `SAMPLE-cand-motion-brief-americafirst325cv03372.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Filer: Amicus America First Legal Foundation, by JW Howard/Attorneys, Ltd. and Boyden Gray PLLC
 - Case: *Leigh v. Newsom*, No. 3:25-cv-03372-JSC (Doc. 10-1)
 - Date filed: 2025-04-23

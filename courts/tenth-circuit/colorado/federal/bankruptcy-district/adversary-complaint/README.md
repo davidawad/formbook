@@ -4,9 +4,9 @@ Doc type: **complaint in an adversary proceeding** (FRBP 7001, 7008(a), 7010; Fe
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-cob-adversary-complaint-golec2401083.pdf` (Complaint to Determine Dischargeability of Debt, § 523(a)(6), 5 pp., seven plaintiffs, two firms). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-cob-adversary-complaint-golec.md`: full transcription of the 5-page filing (caption, jurisdiction, two claims, reservation, prayer, both signature blocks). Second sample: `usage/INPUT-cob-adversary-complaint-reitmair.md` (pro se, existing, kept; no exemplar). |
-| render | ok: `usage/OUTPUT-cob-adversary-complaint-golec.typst.pdf` (7 pp.), `usage/OUTPUT-cob-adversary-complaint-reitmair.typst.pdf` (9 pp.), typst 0.15.0, vendored EB Garamond, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (Complaint to Determine Dischargeability of Debt, § 523(a)(6), 5 pp., seven plaintiffs, two firms). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-adversary-complaint.md`: full transcription of the 5-page filing (caption, jurisdiction, two claims, reservation, prayer, both signature blocks). Second sample: `usage/INPUT-adversary-complaint-2.md` (pro se, existing, kept; no exemplar). |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf` (7 pp.), `usage/OUTPUT-adversary-complaint-2.typst.pdf` (9 pp.), typst 0.15.0, vendored EB Garamond, no warnings |
 | overlay | ok: `usage/OVERLAY-golec-adversary-complaint.pdf` and `OVERLAY-golec-adversary-complaint.txt` |
 | pages reviewed | 16 of 16 (Golec 7 and reitmair 9 rendered at 60 dpi and viewed as PNG after the last template change) |
 
@@ -52,7 +52,7 @@ Not encoded: a certificate of service (none in the Golec exemplar; the reitmair 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
 D=courts/tenth-circuit/colorado/federal/bankruptcy-district/adversary-complaint
-sh tools/render.sh $D usage/INPUT-cob-adversary-complaint-golec.md
+sh tools/render.sh $D usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh $D golec-adversary-complaint $D/usage/SAMPLE-golec-24-01083-adversary-complaint.pdf
 ```
 
@@ -93,7 +93,7 @@ sh tools/overlay.sh $D golec-adversary-complaint $D/usage/SAMPLE-golec-24-01083-
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `cob.lua` builds the caption, the generated consent paragraph, the signature tables). Render: `sh tools/render.sh --engine docx <doc-folder> usage/INPUT-cob-adversary-complaint-golec.md` writes `usage/OUTPUT-cob-adversary-complaint-golec.docx` and `.docx.pdf` (LibreOffice 26.8.1, vendored EB Garamond).
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `cob.lua` builds the caption, the generated consent paragraph, the signature tables). Render: `sh tools/render.sh --engine docx <doc-folder> usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice 26.8.1, vendored EB Garamond).
 
 - Matches the typst reference: court title and adversary caption (debtor block left, case number and chapter right, parties with a blank `Adv. Proc. No.`), 13 pt EB Garamond, letter, 1.5 in top margin and 1 in elsewhere, double spacing (exact 24 pt), 0.5 in first-line indent, consent paragraph as paragraph 1, lettered `(a)` to `(f)` items with the typst item spacing, both signature blocks, 11 pt centered page number. Page count 7 = typst 7. All 7 docx pages and all 7 typst pages were rasterized at 60 dpi and viewed.
 - Differs from typst (tier 2 or renderer, not a mandated-form miss):

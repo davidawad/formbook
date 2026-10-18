@@ -1,13 +1,13 @@
 # Exemplars: motion-brief (nynb)
 
-**Status: exemplar found (1 of 2 or 3 wanted).** `SAMPLE-nynb-motion-brief-efconsultingvgecc1090175.pdf` is a real,
+**Status: exemplar found (1 of 2 or 3 wanted).** `FILED-EXAMPLE-motion-brief-2.pdf` is a real,
 public, text-based memorandum of law in support of a motion to dismiss, filed in this court in an adversary proceeding.
-The sample (`usage/INPUT-nynb-motion-brief-sample.md`) is an excerpt transcription of it. Only one filer is on file, so tier 2 is
+The sample (`usage/INPUT-motion-brief.md`) is an excerpt transcription of it. Only one filer is on file, so tier 2 is
 judged against this single exemplar; a second memorandum from a different filer is still wanted.
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nynb-motion-brief-efconsultingvgecc1090175.pdf` |
+| File | `FILED-EXAMPLE-motion-brief-2.pdf` |
 | Source URL | https://storage.courtlistener.com/recap/gov.uscourts.nynb.316142/gov.uscourts.nynb.316142.6.0.pdf |
 | Docket page | https://www.courtlistener.com/docket/4325831/6/ef-consulting-llc-v-general-electric-capital-corporation/ (CourtListener RECAP) |
 | Court | United States Bankruptcy Court, N.D.N.Y. |
@@ -58,7 +58,7 @@ the answering-papers form.
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nynb-motion-brief-efconsulting1090175.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Source URL | https://storage.courtlistener.com/recap/gov.uscourts.nynb.316142.13.0.pdf (link taken from the docket page https://www.courtlistener.com/docket/4325831/ef-consulting-llc-v-general-electric-capital-corporation/, entry 13, "Main Document", "Uploaded March 9, 2011") |
 | Court | United States Bankruptcy Court, N.D.N.Y. |
 | Case | *EF Consulting LLC and Oasis HC LLC v. General Electric Capital Corporation* |

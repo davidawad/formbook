@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-scotus-merits-brief-inregrandjury211397.pdf`
+- File: `FILED-EXAMPLE-merits-brief.pdf`
 - Document: "Brief for the Petitioner" (merits brief for a petitioner), with the cover "On Writ of Certiorari to the United States Court of Appeals for the Ninth Circuit"
 - Case: *In re Grand Jury*, No. 21-1397 (Supreme Court of the United States)
 - Docket: 21-1397
@@ -13,7 +13,7 @@
 
 Only one exemplar is held for this doc type. A second filer's merits brief (a respondent's brief) was not yet located; the tier-2 comparison in the README is therefore against one filer.
 
-## 2. `SAMPLE-scotus-merits-brief-unitedstates211397.pdf` (second filer, tier-2 comparison)
+## 2. `FILED-EXAMPLE-merits-brief-3.pdf` (second filer, tier-2 comparison)
 
 - Court: Supreme Court of the United States
 - Case: *In re Grand Jury*, No. 21-1397 (on writ of certiorari to the Ninth Circuit)
@@ -25,7 +25,7 @@ Only one exemplar is held for this doc type. A second filer's merits brief (a re
 - sha256: d8b0b48488a613b0e220662555d30944a07b7185cf7bf83370b2fd4f34c29591
 - Notes: a Solicitor General filing (gray cover on paper, Rule 33.1(e)); its table of authorities uses "passim", which Rule 34.2 (2026 text) says should not be used. A respondent's brief: Rule 24.2 lets it omit items 24.1(a), (d)-(g); it still carries a Question Presented page.
 
-## 3. `SAMPLE-scotus-merits-brief-loperbright22451.pdf` (third filer, tier-2 comparison)
+## 3. `FILED-EXAMPLE-merits-brief-2.pdf` (third filer, tier-2 comparison)
 
 - Court: Supreme Court of the United States
 - Case: *Loper Bright Enterprises v. Raimondo*, No. 22-451 (on writ of certiorari to the D.C. Circuit)

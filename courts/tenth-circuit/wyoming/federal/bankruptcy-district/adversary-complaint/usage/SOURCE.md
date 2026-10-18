@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-wyb-adversary-complaint-millervwaterworks2002029.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, District of Wyoming (`wyb`)
 - Case: *David L. Miller, Trustee of the Chapter 7 Bankruptcy Estate of Dynamic Custom Homes, LLC v. Water Works, Inc.*
 - Adversary proceeding: 20-02029 (main case 20-20086, Chapter 7, Judge Cathleen D. Parker)

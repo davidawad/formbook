@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "hib-motion-brief.typ": hib-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-hib-motion-brief-fieldrolloffs.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #hib-motion-brief(meta, body)

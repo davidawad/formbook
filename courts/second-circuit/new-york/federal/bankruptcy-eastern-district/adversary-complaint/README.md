@@ -5,9 +5,9 @@ Folder: `courts/second-circuit/new-york/federal/bankruptcy-eastern-district/adve
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nyeb-adversary-complaint-toyvation12643344.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nyeb-adversary-complaint-toyvation.md` (the whole complaint: caption, 69 numbered paragraphs, five cause headings, prayer, signature) |
-| render | ok: `usage/OUTPUT-nyeb-adversary-complaint-toyvation.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (the whole complaint: caption, 69 numbered paragraphs, five cause headings, prayer, signature) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-toyvation-adversary-complaint.pdf` and `usage/OVERLAY-toyvation-adversary-complaint.txt` |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed in its final state) |
 
@@ -83,7 +83,7 @@ Pages reviewed: 9 of 9.
 
 ## Engines
 
-docx (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (pandoc default, styles replaced, footer with a centred page number, letter page with 1 in margins); `docx/nyeb-adversary-complaint.lua` builds the cover, caption, numbered allegations, prayer and signature. `tools/render.sh --engine docx` uses the default path of `tools/render-docx.sh`. Output: `usage/OUTPUT-nyeb-adversary-complaint-toyvation.docx` and `.docx.pdf` (LibreOffice, 9 pages). Reviewed: 9 of 9 pages of the `.docx.pdf`, against the typst render (9 pages) at 60 dpi. LibreOffice converts the file with no error; `pdffonts` shows EB Garamond embedded.
+docx (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (pandoc default, styles replaced, footer with a centred page number, letter page with 1 in margins); `docx/nyeb-adversary-complaint.lua` builds the cover, caption, numbered allegations, prayer and signature. `tools/render.sh --engine docx` uses the default path of `tools/render-docx.sh`. Output: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice, 9 pages). Reviewed: 9 of 9 pages of the `.docx.pdf`, against the typst render (9 pages) at 60 dpi. LibreOffice converts the file with no error; `pdffonts` shows EB Garamond embedded.
 
 - **Matches typst:** letter paper, 1 in margins; EB Garamond 12 pt; body on a 24 pt pitch with a 0.5 in first-line indent; caption with the rules, the `In re` / `Case No.` / `Chapter` block, the adversary block with `Adv. Pro. No.` and the title; numbered allegations (number at 0.5 in, text at 1 in, wrapped lines back at 1 in); unnumbered lead-in; prayer lettered (a) to (e); WHEREFORE kept with the prayer; signature block kept with the last prayer item; centred page number.
 - **Differs:** paragraph numbers and prayer letters are typed text followed by a tab, not Word list numbering, so they do not renumber if a paragraph is added in Word. Exact line spacing puts glyphs a few points lower than typst's line box, so lines on a page sit up to about 5 pt lower, and page breaks differ (in the docx, prayer item (d) ends page 8 and (e) moves with the signature to page 9). The title is in the caption only: it is not written to the document properties.

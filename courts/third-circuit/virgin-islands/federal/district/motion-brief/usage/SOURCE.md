@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-vid-motion-brief-wooten123cv00012.pdf` (11 pages, text layer present)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (11 pages, text layer present)
 - Court: District Court of the Virgin Islands, Division of St. Croix
 - Case: *Wooten v. Limetree Bay Terminals, LLC, et al.*, No. 1:23-cv-00012-WAL-EAH
 - Document: Defendant Ocean Point's Memorandum of Law in Support of Its Motion to Dismiss the First Amended Complaint (ECF 14), under Fed. R. Civ. P. 12(b)(6). The motion itself is ECF 13 and is not saved.
@@ -20,7 +20,7 @@ It is a memorandum, not the notice-of-motion packet. The notice is a separate fi
 - CourtListener REST search (`type=r`, `court=vid`, `q="memorandum in support" "motion to dismiss"`): returned storage paths for Appleton v. Saintnals (1:25-cv-00032, ECF 14), Ohno v. Brooks, Lynch v. Donnelly, Port Hamilton and Wooten. Appleton ECF 14 is 7 pages; Wooten is the best length match.
 - WebSearch: "District of the Virgin Islands motion to dismiss memorandum of law pdf": returned Superior Court filings and opinions; no federal brief.
 
-## 2. Second filer: `SAMPLE-vid-motion-brief-gvi325cv00050.pdf`
+## 2. Second filer: `FILED-EXAMPLE-motion-brief-2.pdf`
 
 - Court: District Court of the Virgin Islands, Division of St. Thomas and St. John (`vid`)
 - Case: *United States of America v. The Government of the Virgin Islands, et al.*, No. 3:25-cv-00050-ER-GAT

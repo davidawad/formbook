@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nyed-complaint.typ": nyed-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nyed-complaint-blade.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #nyed-complaint(meta, body)

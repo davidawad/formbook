@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-njb-adversary-complaint-supor2601475.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, District of New Jersey (`njb`)
 - Case: *Supor Properties Enterprises LLC, et al. v. Everest Blue Capital LLC and Does I-V*
 - Bankruptcy case: No. 24-13427 (SLM), jointly administered, Chapter 11 (Hon. Stacey L. Meisel)
@@ -15,7 +15,7 @@
 
 Second filer: not collected. Tier 2 (2 or 3 filers) is not met for this doc type; see `../README.md`.
 
-## 2. Second filer: `SAMPLE-njb-adversary-complaint-orcafunding2601421.pdf`
+## 2. Second filer: `FILED-EXAMPLE-adversary-complaint-3.pdf`
 
 - Court: United States Bankruptcy Court, District of New Jersey (`njb`)
 - Case: *OrcaFunding LLC v. David Arthur Shabsels*, Adv. Pro. No. 26-01421 (CMG), in *In re David Arthur Shabsels*, Chapter 11, Case No. 26-16530 (CMG)
@@ -30,7 +30,7 @@ Second filer: not collected. Tier 2 (2 or 3 filers) is not met for this doc type
 - sha256: `544353a33d5b67ff7d106a205e3d5611de2673e23f46d2093df8464739941708`
 - Different party and counsel from Supor (K&L Gates).
 
-## 3. Third filer: `SAMPLE-njb-adversary-complaint-goldberg2601030.pdf`
+## 3. Third filer: `FILED-EXAMPLE-adversary-complaint-2.pdf`
 
 - Court: United States Bankruptcy Court, District of New Jersey (`njb`)
 - Case: *Michael Goldberg, as Plan Administrator for 20230930-DK-Butterfly-1, Inc. f/k/a Bed Bath & Beyond, Inc. v. Internal Revenue Service*, Adv. Pro. No. 26-01030 (VFP), in *In re 20230930-DK-Butterfly-1, Inc.*, Chapter 11, Case No. 23-13359 (VFP) (jointly administered)

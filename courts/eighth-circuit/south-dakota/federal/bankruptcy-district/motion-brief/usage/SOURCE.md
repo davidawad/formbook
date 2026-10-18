@@ -5,7 +5,7 @@ Fetched 2026-10-14 from CourtListener RECAP (`storage.courtlistener.com/recap/..
 
 | File | Case | Docket | Filer (counsel) | Date filed | Pages | Fetched from |
 |---|---|---|---|---|---|---|
-| `SAMPLE-sdb-motion-brief-northernbeefpackers1310118.pdf` (**the sample is transcribed from this one**) | *In re Northern Beef Packers Limited Partnership* (Bankr. D.S.D., Ch. 11, Hon. Charles L. Nail, Jr.) | Bankr. No. 13-10118, Doc 134 ("Brief filed by White Oak Global Advisors LLC", docketed as a memorandum in support of Doc 45, the debtor's motion for interim and final financing orders, cash collateral and adequate protection, and Doc 41, the application to employ Lincoln Partners Advisors LLC) | White Oak Global Advisors, LLC, as agent for the lenders (Roger W. Damgaard, Woods, Fuller, Shultz & Smith P.C.; Stephen R. Tetro II and Mark D. Rasmussen, Chapman and Cutler LLP, pro hac vice). Lender, not the debtor. | 2013-08-07 (`Filed: 08/07/13` in the PDF header; docket entry entered 08/07/2013) | 15 | https://storage.courtlistener.com/recap/gov.uscourts.sdb.47175.134.0.pdf ; docket https://www.courtlistener.com/docket/4555765/134/northern-beef-packers-limited-partnership/ |
+| `FILED-EXAMPLE-motion-brief.pdf` (**the sample is transcribed from this one**) | *In re Northern Beef Packers Limited Partnership* (Bankr. D.S.D., Ch. 11, Hon. Charles L. Nail, Jr.) | Bankr. No. 13-10118, Doc 134 ("Brief filed by White Oak Global Advisors LLC", docketed as a memorandum in support of Doc 45, the debtor's motion for interim and final financing orders, cash collateral and adequate protection, and Doc 41, the application to employ Lincoln Partners Advisors LLC) | White Oak Global Advisors, LLC, as agent for the lenders (Roger W. Damgaard, Woods, Fuller, Shultz & Smith P.C.; Stephen R. Tetro II and Mark D. Rasmussen, Chapman and Cutler LLP, pro hac vice). Lender, not the debtor. | 2013-08-07 (`Filed: 08/07/13` in the PDF header; docket entry entered 08/07/2013) | 15 | https://storage.courtlistener.com/recap/gov.uscourts.sdb.47175.134.0.pdf ; docket https://www.courtlistener.com/docket/4555765/134/northern-beef-packers-limited-partnership/ |
 
 sha256 of the exemplar PDF: `87fca48b6639d415a0075c2471f0ff1f58b8b12523e0eea6a978a51bd214bcd8`.
 
@@ -54,7 +54,7 @@ Not tried: PACER (the official source, not reachable from this box). CourtListen
 
 ## Transcription
 
-`usage/INPUT-sdb-motion-brief-northernbeefpackers.md` is a transcription of the whole filing (all 15 pages, including footnotes 1 to 3 and the conclusion and signature). Differences from the PDF, each deliberate:
+`usage/INPUT-motion-brief.md` is a transcription of the whole filing (all 15 pages, including footnotes 1 to 3 and the conclusion and signature). Differences from the PDF, each deliberate:
 
 - The debtor's SSN/ITIN is shown as the last four digits (`TIN xx-xxx0200`) in the caption, not the full number printed in the PDF (Fed. R. Bankr. P. 9037 and Bankr. D.S.D. R. 9004-2).
 - Footnotes 1 to 3 are not supported by the template. Each is printed as its own paragraph directly after the paragraph that carries its marker, beginning with the superscript number.

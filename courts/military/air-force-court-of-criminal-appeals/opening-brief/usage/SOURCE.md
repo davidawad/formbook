@@ -2,7 +2,7 @@
 
 Both exemplars are text-based (`pdftotext` yields the body, caption, tables and certificates). Both came from the AFCCA website's published appellate filings (redacted, public record). CourtListener was not searched directly in this run (the exemplars were found by web search and fetched from the AFCCA site).
 
-## Exemplar 1: `SAMPLE-afcca-opening-brief-douglas40324.pdf` (13 pages; primary, used by `usage/INPUT-afcca-opening-brief-douglas.md`)
+## Exemplar 1: `FILED-EXAMPLE-opening-brief.pdf` (13 pages; primary, used by `usage/INPUT-opening-brief.md`)
 
 | Field | Value |
 |---|---|
@@ -17,7 +17,7 @@ Both exemplars are text-based (`pdftotext` yields the body, caption, tables and 
 | Public record | Yes: published by the AFCCA as an appellate filing (redacted version). |
 | Notes | No table of contents or table of authorities (under 30 pages). Footnotes 1–4 are in the filing. |
 
-## Exemplar 2: `SAMPLE-afcca-opening-brief-howard40478.pdf` (12 pages; excerpt, used by `usage/INPUT-afcca-opening-brief-howard.md`)
+## Exemplar 2: `FILED-EXAMPLE-opening-brief-2.pdf` (12 pages; excerpt, used by `usage/INPUT-opening-brief-2.md`)
 
 | Field | Value |
 |---|---|

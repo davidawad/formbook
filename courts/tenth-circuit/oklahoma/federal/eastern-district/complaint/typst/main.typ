@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "oked-complaint.typ": oked-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-oked-complaint-barrick.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #oked-complaint(meta, body)

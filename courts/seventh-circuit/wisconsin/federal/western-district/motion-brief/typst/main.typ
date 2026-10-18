@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "wiwd-motion-brief.typ": wiwd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-wiwd-motion-brief-dronemotiontodismiss.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #wiwd-motion-brief(meta, body)

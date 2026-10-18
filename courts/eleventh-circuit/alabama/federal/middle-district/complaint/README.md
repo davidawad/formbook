@@ -5,9 +5,9 @@ Folder: `courts/eleventh-circuit/alabama/federal/middle-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: two filed complaints from different filers, `usage/SAMPLE-almd-complaint-allstatelg126cv00215.pdf` and `usage/SAMPLE-almd-complaint-firsthorizon224cv00605.pdf` (see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-almd-complaint-allstate.md`: the whole Allstate complaint (caption, paragraphs 1 to 44, jury demand, signature block, service note), transcribed from the text layer |
-| render | ok: `usage/OUTPUT-almd-complaint-allstate.typst.pdf`, 14 pages, `tools/render.sh` exit 0, no typst warnings, embedded fonts EB Garamond only |
+| exemplar | yes: two filed complaints from different filers, `usage/FILED-EXAMPLE-complaint.pdf` and `usage/FILED-EXAMPLE-complaint-2.pdf` (see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: the whole Allstate complaint (caption, paragraphs 1 to 44, jury demand, signature block, service note), transcribed from the text layer |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 14 pages, `tools/render.sh` exit 0, no typst warnings, embedded fonts EB Garamond only |
 | overlay | ok: `usage/OVERLAY-allstate-complaint.pdf` and `usage/OVERLAY-allstate-complaint.txt` (against the Allstate exemplar) |
 | pages reviewed | 14 of 14: every page rendered at 60 dpi and viewed after the last template change |
 
@@ -62,8 +62,8 @@ Accepted differences in the Gate-2 sense (one line each, no further action):
 
 ## Engines
 
-- **typst** (primary): `typst/`, unchanged. Renders `usage/OUTPUT-almd-complaint-allstate.typst.pdf` (14 pages).
-- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`), `docx/almd.lua`. Writes `usage/OUTPUT-almd-complaint-allstate.docx` from `usage/INPUT-almd-complaint-allstate.md`. Needs pandoc, unzip, zip, xmllint and perl on PATH, and EB Garamond installed where the file is opened.
+- **typst** (primary): `typst/`, unchanged. Renders `usage/OUTPUT-complaint.typst.pdf` (14 pages).
+- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`), `docx/almd.lua`. Writes `usage/OUTPUT-complaint.docx` from `usage/INPUT-complaint.md`. Needs pandoc, unzip, zip, xmllint and perl on PATH, and EB Garamond installed where the file is opened.
   - Matches the typst values, set in the reference and the filter: EB Garamond 14 pt; US Letter with 1-inch margins; body lines double-spaced at 32.2 pt exact, 0.5 in first-line indent, 23.1 pt between paragraphs; section heads centered and bold, single-spaced at 16.1 pt; the FRCP 10(a) caption as a borderless three-column table (3.4 in, 0.15 in, 2.95 in); the signature block with "/s/", the service note; a centered page number in the footer. Lettered items ("a.") are kept as typed text, as the typst template prints them.
   - Differs or unknown: none checked on a rendered page yet (see BLOCKED). Word and LibreOffice may break lines and pages differently from typst; the docx has no line numbers, pleading rules or cover page, because the complaint template has none.
   - Checked so far: the package unzips, every XML part is well formed, and the text reads back in order (`pandoc -f docx -t plain`).

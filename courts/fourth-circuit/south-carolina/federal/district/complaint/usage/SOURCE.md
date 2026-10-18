@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-scd-complaint-millervwafflehouse226cv04339.pdf` |
+| File | `FILED-EXAMPLE-complaint.pdf` |
 | Court | United States District Court, District of South Carolina, Charleston Division |
 | Case | *Tara Miller v. Waffle House, Inc.* |
 | Docket no. | 2:26-cv-04339-RMG-WSB |

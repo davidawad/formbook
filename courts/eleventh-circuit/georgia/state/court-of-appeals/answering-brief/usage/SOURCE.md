@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-gactapp-answering-brief-campbellvtaylora26a1103.pdf` (11 pages, text PDF, Word for Microsoft 365; Century Schoolbook) |
+| File | `FILED-EXAMPLE-answering-brief.pdf` (11 pages, text PDF, Word for Microsoft 365; Century Schoolbook) |
 | Original URL | https://www.gaappeals.gov/wp-content/uploads/2026/04/A26A1103-BRIEF-OF-APPELLEE-EE.pdf |
 | Fetched from | https://web.archive.org/web/2026id_/https://www.gaappeals.gov/wp-content/uploads/2026/04/A26A1103-BRIEF-OF-APPELLEE-EE.pdf (Internet Archive copy; gaappeals.gov returns HTTP 403 to this box) |
 | Case | Doris Campbell v. Kaye Smith, as the Administrator of the Estate of Susan Taylor |
@@ -18,4 +18,4 @@ Verified: `pdftotext` yields the full text; `pdfinfo` 11 pages; court stamp and 
 
 | File | SHA-256 |
 |---|---|
-| `SAMPLE-gactapp-answering-brief-campbellvtaylora26a1103.pdf` | `de5177b95d5872c1e50c034126f1e73561405ea663732b1aaf1eb652dc404903` |
+| `FILED-EXAMPLE-answering-brief.pdf` | `de5177b95d5872c1e50c034126f1e73561405ea663732b1aaf1eb652dc404903` |

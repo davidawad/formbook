@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-arwb-motion-brief-lowryfarms124bk70535.pdf` (59 pages; the brief is pages 1 to 8, pages 9 to 59 are attached state-court exhibits; text layer present)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (59 pages; the brief is pages 1 to 8, pages 9 to 59 are attached state-court exhibits; text layer present)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.arwb.175501/gov.uscourts.arwb.175501.117.0.pdf (CourtListener RECAP, docket entry 117)
 - Court: United States Bankruptcy Court, Western District of Arkansas, El Dorado Division
 - Case: *In re Lowry Farms, Inc.*, Case No. 1:24-bk-70535, chapter 7

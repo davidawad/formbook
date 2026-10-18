@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ilnd-motion-brief-tahboub125cv12614.pdf` (21 pages, text layer present; `pdftotext` reads it)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (21 pages, text layer present; `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.ilnd.488138/gov.uscourts.ilnd.488138.25.0.pdf (CourtListener RECAP; docket page https://www.courtlistener.com/docket/71659411/tahboub-v-northwestern-university/)
 - Court: United States District Court, Northern District of Illinois, Eastern Division
 - Case: *Northwestern Graduate Workers for Palestine (GW4P), Ifeayin Eziamaka Ogbuli, and Marwa Tahboub v. Northwestern University*

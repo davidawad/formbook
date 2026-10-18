@@ -1,13 +1,13 @@
 # Exemplars: adversary-complaint (nynb)
 
-**Status: exemplar found (1 of 2 or 3 wanted).** `SAMPLE-nynb-adversary-complaint-fangiovvehifax1550001.pdf` is a
-real, public, text-based adversary complaint filed in this court. The sample (`usage/INPUT-nynb-adversary-complaint-sample.md`) is a
+**Status: exemplar found (1 of 2 or 3 wanted).** `FILED-EXAMPLE-adversary-complaint.pdf` is a
+real, public, text-based adversary complaint filed in this court. The sample (`usage/INPUT-adversary-complaint.md`) is a
 transcription of it. Only one filer is on file, so tier 2 is judged against this single exemplar; a second complaint from
 a different filer is still wanted (see "Other candidates").
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nynb-adversary-complaint-fangiovvehifax1550001.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | Source URL | https://storage.courtlistener.com/recap/gov.uscourts.nynb.349360/gov.uscourts.nynb.349360.1.0.pdf |
 | Docket page | https://www.courtlistener.com/docket/5164695/1/fangio-trustee-v-vehifax-corp/ (CourtListener RECAP, Adversary case 15-50001-5) |
 | Court | United States Bankruptcy Court, N.D.N.Y. |
@@ -58,7 +58,7 @@ the "Stevens, Adv. No. 26-90046" candidate listed above under "Other candidates"
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nynb-adversary-complaint-stevensvevepark2690046.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint-2.pdf` |
 | Source URL | https://storage.courtlistener.com/recap/gov.uscourts.nynb.403424/gov.uscourts.nynb.403424.1.0.pdf |
 | Court | United States Bankruptcy Court, N.D.N.Y. |
 | Case | *Fred Stevens, as Plan Administrator v. Evepark London LP* |

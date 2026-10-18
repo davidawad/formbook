@@ -3,7 +3,7 @@
 Both were retrieved from the CourtListener RECAP archive (public PACER records), via the CourtListener search API
 (`https://www.courtlistener.com/api/rest/v4/search/?court=ca7&type=rd`), on 2026-10-14. Both PDFs have a text layer.
 
-## 1. SAMPLE-ca7-reply-brief-actnowvdoe262473.pdf (primary exemplar)
+## 1. FILED-EXAMPLE-reply-brief.pdf (primary exemplar)
 
 | Field | Value |
 |---|---|
@@ -15,7 +15,7 @@ Both were retrieved from the CourtListener RECAP archive (public PACER records),
 | Fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ca7.57206/gov.uscourts.ca7.57206.29.0.pdf |
 | Docket page | https://www.courtlistener.com/docket/73624914/29/act-now-coalition-v-educ/ |
 
-## 2. SAMPLE-ca7-reply-brief-dambrosio252231.pdf (second filer, for tier-2 cross-check)
+## 2. FILED-EXAMPLE-reply-brief-2.pdf (second filer, for tier-2 cross-check)
 
 | Field | Value |
 |---|---|

@@ -4,7 +4,7 @@ Document type: memorandum of law in support of a motion to dismiss (Fed. R. Civ.
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-mad-motion-brief-diazsmithcollege326cv12246.pdf` (12 pages, text layer present; body in Times New Roman, footnotes in Times New Roman) |
+| File | `FILED-EXAMPLE-motion-brief.pdf` (12 pages, text layer present; body in Times New Roman, footnotes in Times New Roman) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.mad.300739/gov.uscourts.mad.300739.11.0.pdf (RECAP archive, document 11) |
 | Case | *Diaz v. The Trustees of Smith College d/b/a Smith College* |
 | Court | United States District Court, District of Massachusetts |
@@ -32,7 +32,7 @@ Added 2026-10-17 (fb-595.21.1): the "checked, not saved" second filer above, now
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-mad-motion-brief-starr126cv10838.pdf` (12 pages, text layer present; Acrobat PDFMaker 22 for Word; Times New Roman body) |
+| File | `FILED-EXAMPLE-motion-brief-2.pdf` (12 pages, text layer present; Acrobat PDFMaker 22 for Word; Times New Roman body) |
 | Court | United States District Court, District of Massachusetts |
 | Case | *Ferrini v. Allied World Assurance Company (U.S.), Inc., et al.* |
 | Docket no. | 1:26-cv-10838-LTS (Document 49) |

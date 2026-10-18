@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "tax-petition.typ": tax-petition, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-tax-petition-generic.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-petition-2.md"))
 #let (meta, body) = split-frontmatter(src)
 #tax-petition(meta, body)

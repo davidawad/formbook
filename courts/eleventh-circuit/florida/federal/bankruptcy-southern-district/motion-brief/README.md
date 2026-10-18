@@ -2,7 +2,7 @@
 
 Court: United States Bankruptcy Court, Southern District of Florida (`flsb`). Doc type: motion brief under Fed. R. Bankr. P. 9013 with its memorandum (filed in an adversary proceeding).
 
-**exemplar=yes, with a scope limit.** Filed exemplar: `usage/SAMPLE-flsb-motion-brief-lasproalinia1601315.pdf`. It is the **memorandum in support of a motion to dismiss** (ECF 49, 2017), not the motion itself (ECF 29). See `usage/SOURCE.md`.
+**exemplar=yes, with a scope limit.** Filed exemplar: `usage/FILED-EXAMPLE-motion-brief.pdf`. It is the **memorandum in support of a motion to dismiss** (ECF 49, 2017), not the motion itself (ECF 29). See `usage/SOURCE.md`.
 
 ## Governing rules
 
@@ -26,15 +26,15 @@ PDF text layer: L.R. 9004-1(a)(1) requires text-searchable PDF; the output has o
 |---|---|
 | `typst/flsb-motion-brief.typ` | Template: `flsb-motion-brief(meta, body)`. Content-agnostic; case words come from the sample's frontmatter. |
 | `typst/main.typ` | Entry point. |
-| `usage/INPUT-flsb-motion-brief-aliniamemorandum.md` | Transcription of the exemplar: caption, title, body (pages 1–12), footnotes 1–2, conclusion, signature block, certificate of service with service list. |
-| `usage/OUTPUT-flsb-motion-brief-aliniamemorandum.typst.pdf` | Our render. |
+| `usage/INPUT-motion-brief.md` | Transcription of the exemplar: caption, title, body (pages 1–12), footnotes 1–2, conclusion, signature block, certificate of service with service list. |
+| `usage/OUTPUT-motion-brief.typst.pdf` | Our render. |
 | `usage/OVERLAY-alinia-memorandum.pdf`, `.txt` | Red/blue overlay and page map. |
 | `usage/` | The filed PDF and `SOURCE.md`. |
 
 Commands, from the repo root with the toolchain on `PATH`:
 
 ```sh
-sh tools/render.sh courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/motion-brief usage/INPUT-flsb-motion-brief-aliniamemorandum.md
+sh tools/render.sh courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/motion-brief alinia-memorandum
 ```
 
@@ -46,7 +46,7 @@ Pairings from `usage/OVERLAY-alinia-memorandum.txt` (word overlap, a diagnostic,
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-flsb-motion-brief-aliniamemorandum.typst.pdf` (10 pages) was rendered at 60 dpi and looked at. `pages_reviewed=10`.
+Every page of `OUTPUT-motion-brief.typst.pdf` (10 pages) was rendered at 60 dpi and looked at. `pages_reviewed=10`.
 
 | Page | Result |
 |---|---|
@@ -80,7 +80,7 @@ Defects found and fixed while reviewing:
 
 ## Engines
 
-Word (`docx/`): pandoc with `docx/reference.docx` (built by `docx/make-reference.sh`, from pandoc's default) and `docx/flsb-motion-brief.lua`; `docx/render.sh` writes `usage/OUTPUT-flsb-motion-brief-aliniamemorandum.docx`. Run `sh tools/render.sh --engine docx <this dir> usage/INPUT-flsb-motion-brief-aliniamemorandum.md`.
+Word (`docx/`): pandoc with `docx/reference.docx` (built by `docx/make-reference.sh`, from pandoc's default) and `docx/flsb-motion-brief.lua`; `docx/render.sh` writes `usage/OUTPUT-motion-brief.docx`. Run `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md`.
 
 What matches the typst output: EB Garamond 12 pt; 1-inch margins on letter paper; double spacing (24 pt exact) for body paragraphs with a half-inch first-line indent; single-spaced caption, block quotations, signature block (indented three inches) and certificates; 10-point footnotes; centered page number; the caption as a borderless table with "Case No.", "Chapter" and "Adv. Case No." labels; centered bold section headings (level 1 in capitals) and kept with the next paragraph; lettered and roman parentheticals at a half-inch left indent; the Certificate of Conferral when `conferral:` is given; the Certificate of Service with its service list.
 

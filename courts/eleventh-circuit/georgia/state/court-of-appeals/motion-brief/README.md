@@ -1,14 +1,14 @@
 # Georgia Court of Appeals (gactapp): motion-brief
 
-Doc type: any motion filed in the Court of Appeals (Rule 41; emergency motions Rule 40 (b)). Exemplar: **yes** (`usage/SAMPLE-gactapp-motion-brief-statevdpg2022cv372734.pdf`, the State of Georgia's Emergency Motion for Supersedeas in *State of Georgia v. Democratic Party of Georgia, Inc., DSCC, and Warnock for Georgia*, filed November 21, 2022 by the Office of the Attorney General and Robbins Alloy Belinfante Littlefield, LLC). The Court of Appeals number is blank ("No. ____") on the filed cover, as emergency motions are filed before docketing; the file name uses the trial-court number (Fulton Superior Court 2022-CV-372734). Source: `usage/SOURCE.md`. Nothing here sets a `court.json` status.
+Doc type: any motion filed in the Court of Appeals (Rule 41; emergency motions Rule 40 (b)). Exemplar: **yes** (`usage/FILED-EXAMPLE-motion-brief.pdf`, the State of Georgia's Emergency Motion for Supersedeas in *State of Georgia v. Democratic Party of Georgia, Inc., DSCC, and Warnock for Georgia*, filed November 21, 2022 by the Office of the Attorney General and Robbins Alloy Belinfante Littlefield, LLC). The Court of Appeals number is blank ("No. ____") on the filed cover, as emergency motions are filed before docketing; the file name uses the trial-court number (Fulton Superior Court 2022-CV-372734). Source: `usage/SOURCE.md`. Nothing here sets a `court.json` status.
 
 ## Status
 
 | Item | Result |
 |---|---|
 | `usage/` | 1 filed motion, text PDF, 29 pages (Century Schoolbook; Democracy Docket's diagonal "retrieved from" watermark is in the text layer, so `pdftotext` shows stray letters) |
-| `usage/INPUT-gactapp-motion-brief-motionsample.md` | transcription of filed pages i-11 and 19-24: cover, tables, Introduction, Jurisdiction, Background, Argument I.A, II, Conclusion, signature, certificate of service. Argument I.B (filed pages 12-19) is omitted. Id kept for the existing docx outputs |
-| render | ok: `usage/OUTPUT-gactapp-motion-brief-motionsample.typst.pdf`, 15 pages, exit 0, no warnings, Liberation Serif embedded |
+| `usage/INPUT-motion-brief.md` | transcription of filed pages i-11 and 19-24: cover, tables, Introduction, Jurisdiction, Background, Argument I.A, II, Conclusion, signature, certificate of service. Argument I.B (filed pages 12-19) is omitted. Id kept for the existing docx outputs |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 15 pages, exit 0, no warnings, Liberation Serif embedded |
 | overlay | ok: `usage/OVERLAY-motion-sample.pdf` / `.txt` |
 | pages reviewed | 15 of 15 at 60 dpi, plus the 29 exemplar pages |
 
@@ -58,4 +58,4 @@ Separate cover page by default (`cover_page`, default true; both filed exemplars
 1. Word count not computed or checked against 4,200.
 2. The exemplar's counsel are set in two columns on the cover and signature page; ours stack them (tier 3).
 3. Only one conformed signature is underlined; extra signers in `signer` lines are plain text.
-4. docx: **not regenerated** (no `soffice` on this box). `OUTPUT-gactapp-motion-brief-motionsample.docx` / `.docx.pdf` are renders of the old synthetic sample and the docx form still prints the old word-count certificate and starts the body on the cover. Open docx items: Rule 24 (f) (1) wording, underlined signature, cover page, `toc` / `authorities`, `service.paragraphs`.
+4. docx: **not regenerated** (no `soffice` on this box). `OUTPUT-motion-brief.docx` / `.docx.pdf` are renders of the old synthetic sample and the docx form still prints the old word-count certificate and starts the body on the cover. Open docx items: Rule 24 (f) (1) wording, underlined signature, cover page, `toc` / `authorities`, `service.paragraphs`.

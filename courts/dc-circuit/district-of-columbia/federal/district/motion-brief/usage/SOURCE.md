@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-dcd-motion-brief-estrada126cv00603.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | URL fetched | https://storage.courtlistener.com/recap/gov.uscourts.dcd.289744/gov.uscourts.dcd.289744.9.1.pdf |
 | Docket page | https://www.courtlistener.com/docket/72326945/estrada-v-american-university/ (ECF 9, attachment 1) |
 | Case | *Estrada v. American University and Brad Knight* |
@@ -19,7 +19,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-dcd-motion-brief-fec126cv01498.pdf` |
+| File | `FILED-EXAMPLE-motion-brief-2.pdf` |
 | Court | United States District Court for the District of Columbia |
 | Case | *David Esrati v. Federal Election Commission* |
 | Docket no. | 1:26-cv-01498-CJN (ECF header) |

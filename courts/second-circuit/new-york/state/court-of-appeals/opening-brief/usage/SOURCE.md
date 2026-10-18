@@ -1,6 +1,6 @@
 # Exemplar source
 
-- **File:** `SAMPLE-ny-opening-brief-peoplevtrumpentrepreneurapl201600115.pdf` (156 pages, letter, text layer present; `pdffonts`: Times New Roman, 14-point body per the brief's own certificate)
+- **File:** `FILED-EXAMPLE-opening-brief.pdf` (156 pages, letter, text layer present; `pdffonts`: Times New Roman, 14-point body per the brief's own certificate)
 - **SHA-256:** `75b9be9b78a6695d0bf1aff6a7f87576e8175b96be8463b01d3a230dedea863b`
 - **URL fetched:** https://ag.ny.gov/sites/default/files/appeal_brief_and_addendum.pdf (hosted by the New York Attorney General's website)
 - **Case:** *People of the State of New York v. Trump Entrepreneur Initiative LLC f/k/a Trump University LLC, et al.*, Court of Appeals of the State of New York, APL-2016-00115 (New York County Clerk's Index No. 451463/13)

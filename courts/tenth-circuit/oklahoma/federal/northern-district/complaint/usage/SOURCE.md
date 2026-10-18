@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-oknd-complaint-lord426cv00407.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Northern District of Oklahoma
 - Case: *Lord v. New American Manufacturing LLC, et al.*
 - Docket: No. 4:26-cv-00407-MTS (Document 1)

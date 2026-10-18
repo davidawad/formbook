@@ -1,6 +1,6 @@
 # Exemplar source: adversary complaint, Bankruptcy Court D. Del.
 
-- File: `SAMPLE-deb-adversary-complaint-zohariiitilton1950390.pdf` (80 pages, text layer present)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (80 pages, text layer present)
 - URL fetched from: https://www.courtlistener.com/docket/16276330/7/zohar-iii-corp/
   (RECAP document `gov.uscourts.deb.178016.7.0_3.pdf`, fetched from `storage.courtlistener.com`)
 - Case: *Lynn Tilton, et al. v. MBIA Inc., et al.*, Adv. Pro. No. 19-50390 (KBO), in *In re Zohar III, Corp., et al.*, Case No. 18-10512 (KBO) (jointly administered), United States Bankruptcy Court for the District of Delaware
@@ -10,7 +10,7 @@
 - Date fetched: 2026-10-14
 - Search record: the CourtListener search API (`/api/rest/v4/search/?type=rd&court=deb`) returned several "Adversary Complaint" entries; most were sealed or had no stored file. This one had a stored, text-based PDF and is a complaint for equitable subordination, which fits this court's adversary-complaint form.
 
-## 2. Second filer: `SAMPLE-deb-adversary-complaint-giuliano2650942.pdf`
+## 2. Second filer: `FILED-EXAMPLE-adversary-complaint-2.pdf`
 
 - Court: United States Bankruptcy Court for the District of Delaware (`deb`)
 - Case: *Alfred T. Giuliano, as Chapter 7 Trustee of the Estate of Innovate Labs LLC v. Adam Fisk, et al.*, Adv. Proc. No. 26-50942 (JKS), in *In re Innovate Labs LLC*, Chapter 7, Case No. 24-12283 (JKS)

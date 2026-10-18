@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-ndb-motion-brief-elliott2407012.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ndb.45702/gov.uscourts.ndb.45702.36.0.pdf (RECAP; docket page https://www.courtlistener.com/docket/69040519/doeling-v-elliott/) |
 | Court | United States Bankruptcy Court, District of North Dakota (`ndb`) |
 | Case | *Doeling v. Elliott* (Gene W. Doeling, Chapter 7 trustee, v. Andy Baron Elliott and Sandra Leah Elliott), Adversary No. 24-07012; main case Bky. No. 21-30420, Chapter 7 |

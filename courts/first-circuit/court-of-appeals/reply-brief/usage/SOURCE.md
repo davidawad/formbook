@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca1-reply-brief-warner241414.pdf` (21 pages) |
+| File | `FILED-EXAMPLE-reply-brief.pdf` (21 pages) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ca1.51585/gov.uscourts.ca1.51585.00108200871.0.pdf (CourtListener RECAP archive) |
 | Docket page | https://www.courtlistener.com/docket/69348585/warner-v-steiner/ (the CourtListener title; the brief's own caption is "Elizabeth F. Warner, Plaintiff-Appellant, v. Louis DeJoy, Postmaster General of the United States Postal Service, Defendant-Appellee") |
 | Case name | *Warner v. DeJoy* (caption on the brief) |
@@ -14,11 +14,11 @@
 | Text layer | Yes: `pdftotext` yields the whole brief (the running header "Case: 24-1414 Document ..." is text too and is not transcribed). |
 | Public record | Yes: a public filing in a federal appeal, downloaded from the RECAP archive. |
 
-## 2. SAMPLE-ca1-reply-brief-odonovan241200.pdf
+## 2. FILED-EXAMPLE-reply-brief-2.pdf
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca1-reply-brief-odonovan241200.pdf` (36 pages, 0.2 MB) |
+| File | `FILED-EXAMPLE-reply-brief-2.pdf` (36 pages, 0.2 MB) |
 | Court | United States Court of Appeals for the First Circuit |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ca1.51341/gov.uscourts.ca1.51341.108141420.0.pdf (CourtListener RECAP archive) |
 | Docket page | https://www.courtlistener.com/docket/68447702/united-states-v-odonovan/ |

@@ -1,6 +1,6 @@
 # Exemplar source: opening-brief, United States Bankruptcy Appellate Panel for the Eighth Circuit (bap8)
 
-**Exemplar: yes.** `SAMPLE-bap8-opening-brief-fisette116012.pdf` is a real, public, text-based Brief of Appellant filed in this court. The copy is the full 68-page filing, unmodified.
+**Exemplar: yes.** `FILED-EXAMPLE-opening-brief.pdf` is a real, public, text-based Brief of Appellant filed in this court. The copy is the full 68-page filing, unmodified.
 
 | Field | Value |
 |---|---|

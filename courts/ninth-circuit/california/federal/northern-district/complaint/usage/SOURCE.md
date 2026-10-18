@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-cand-complaint-superhuman326cv11711.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Northern District of California
 - Case: *Superhuman Platform Inc. v. 1mind AI, Inc.*
 - Docket: No. 3:26-cv-11711 (Document 1)
@@ -15,7 +15,7 @@
 Second filer: not collected in this pass. The brief asks for one exemplar per doc type; EVAL-LOOP's tier-2 rule
 (2 or 3 filers) is not met here and is recorded in README.md.
 
-- File: `SAMPLE-cand-complaint-frasco321cv00757.pdf`
+- File: `FILED-EXAMPLE-complaint-2.pdf`
 - Filer: Plaintiff Erica Frasco, by Wagstaffe, von Loewenfeldt, Busch & Radwick LLP; Lowey Dannenberg, P.C.; and Labaton Sucharow LLP
 - Case: *Frasco v. Flo Health, Inc.*, No. 3:21-cv-00757-SK (Doc. 1)
 - Date filed: 2021-01-29

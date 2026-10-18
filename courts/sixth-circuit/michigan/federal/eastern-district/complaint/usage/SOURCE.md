@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-mied-complaint-musiclaa526cv13851.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Eastern District of Michigan, Southern Division
 - Case: *Music L.A.A., Inc. d/b/a LAA Music and Zac Hiller v. SHEIN US Services, LLC, et al.*
 - Docket: No. 5:26-cv-13851-JEL-DRG (CourtListener lists it as 2:26-cv-13851; the stamp on the filing reads 5:26-cv-13851)

@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-acca-answering-brief-akbar20050514.pdf` (11 pages, an extract; see page map) |
+| File | `FILED-EXAMPLE-answering-brief.pdf` (11 pages, an extract; see page map) |
 | Case | *United States v. Sergeant Hasan K. Akbar*, U.S. Army Court of Criminal Appeals, Docket No. 20050514 (Army) |
 | Document | Brief on Behalf of Appellee (the United States' answer to the assignments of error), 218 numbered pages plus tables (233 PDF pages) |
 | Filer | Government Appellate Division, U.S. Army Legal Services Agency: CPT Joshua W. Johnson, CPT Nicole L. Fish, MAJ Adam S. Kazin, MAJ Christopher B. Burgess |
@@ -22,7 +22,7 @@ Page map of the extract (built with `pdfseparate` and `pdfunite`):
 | 2-8 | 16-22 | 1-7 | Statement of the Case, Statement of Facts (The Crimes) |
 | 9-11 | 231-233 | 216-218 | Assignment LVIII and its Law and Argument; Conclusion and signatures; Certificate of Service and Filing |
 
-The source's pp. 2-15 (table of contents, table of authorities) and brief pp. 8-215 are left out. The sample `usage/INPUT-acca-answering-brief-akbar.md` transcribes exactly the extracted pages.
+The source's pp. 2-15 (table of contents, table of authorities) and brief pp. 8-215 are left out. The sample `usage/INPUT-answering-brief.md` transcribes exactly the extracted pages.
 
 Caveat: the brief was filed under the pre-2019 ACCA rules (set in Courier). The current rules (effective 15 January 2019, see `../README.md`) govern the template; the exemplar settles only what they leave open.
 

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ca9-reply-brief.typ": ca9-reply-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ca9-reply-brief-blproductions.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-reply-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ca9-reply-brief(meta, body)

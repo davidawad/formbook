@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-mtd-complaint-fscknudsen924cv00067.pdf` (48 pages, text layer present, `pdftotext` reads it)
+- File: `FILED-EXAMPLE-complaint.pdf` (48 pages, text layer present, `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.mtd.76728/gov.uscourts.mtd.76728.1.0.pdf (the CourtListener RECAP archive, docket `gov.uscourts.mtd.76728`)
 - Court: United States District Court for the District of Montana, Missoula Division
 - Case: *Free Speech Coalition, Inc. et al. v. Austin Knudsen, in his official capacity as Attorney General of the State of Montana*

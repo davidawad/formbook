@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ganb-adversary-complaint-gatetruckinfletcher2505046.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | Court | United States Bankruptcy Court, Northern District of Georgia |
 | Case | *Gate Truckin Xpress, LLC v. Lamar Deante Fletcher*, Adv. Pro. No. 25-05046-jrs (main case 24-62473-jrs; the filing's caption says Chapter 7) |
 | Document | Complaint Against Dischargeability of Debt under 11 USC § 523(a)(2)(A) and 11 USC § 523(a)(4), ECF Doc 1, 6 pages. The certificate of service calls it an "Amended Complaint". |

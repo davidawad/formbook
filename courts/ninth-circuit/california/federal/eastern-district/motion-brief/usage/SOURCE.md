@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-caed-motion-brief-wine226cv02243.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Eastern District of California (Sacramento)
 - Case: *Daniel C. Wine v. Morning Law Group, P.C.*
 - Docket: No. 2:26-cv-02243-TLN-CSK (Document 9)
@@ -18,7 +18,7 @@ Other E.D. Cal. motions to dismiss checked (not saved; the brief asks for one ex
 
 Second filer: not collected in this pass. EVAL-LOOP's tier-2 rule asks for two or three filers; the Wilce motion is the second candidate and is recorded as an open item in `../README.md`.
 
-- File: `SAMPLE-caed-motion-brief-wilce226cv02465.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Filer: Defendant Willow Health Services, Inc., by George LLP (Keith J. Wesley and Anthony T. Lombardo)
 - Case: *Wilce v. Willow Health Services, Inc.*, No. 2:26-cv-02465-DAD-AC (Doc. 7)
 - Date filed: 2026-08-28

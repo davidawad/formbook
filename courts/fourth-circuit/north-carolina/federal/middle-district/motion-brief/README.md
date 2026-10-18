@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/north-carolina/federal/middle-district/motion-bri
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ncmd-motion-brief-braham26cv00455.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ncmd-motion-brief-brahamlabcorpbrief.md` (a portion: cover, Introduction, Background, Standards of Review, the start of Argument A.1, Conclusion, signature, certificates; see gap 4) |
-| render | ok: `usage/OUTPUT-ncmd-motion-brief-brahamlabcorpbrief.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (a portion: cover, Introduction, Background, Standards of Review, the start of Argument A.1, Conclusion, signature, certificates; see gap 4) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-braham-labcorp-brief.pdf` and `OVERLAY-braham-labcorp-brief.txt` |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; see the table below) |
 | tier 2 | one exemplar only, so tier 2 is not judged against two or three filers (see gaps) |
@@ -54,11 +54,11 @@ Not used, and why: LR 7.3(b) (contents of the motion, not the brief), LR 7.3(e) 
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/fourth-circuit/north-carolina/federal/middle-district/motion-brief usage/INPUT-ncmd-motion-brief-brahamlabcorpbrief.md
+sh tools/render.sh courts/fourth-circuit/north-carolina/federal/middle-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/middle-district/motion-brief braham-labcorp-brief
 ```
 
-- `usage/OUTPUT-ncmd-motion-brief-brahamlabcorpbrief.typst.pdf`: 10 pages. typst compiled with no warnings. Fonts: EBGaramond-Regular, -Italic, -Bold only (`pdffonts`).
+- `usage/OUTPUT-motion-brief.typst.pdf`: 10 pages. typst compiled with no warnings. Fonts: EBGaramond-Regular, -Italic, -Bold only (`pdffonts`).
 - `usage/OVERLAY-braham-labcorp-brief.pdf` and `.txt`: red is our render, blue the exemplar, black where both agree. Page map: ours p.1 ↔ filed p.1 (cover); p.2 ↔ p.2 (contents); p.3 ↔ p.3 (authorities); p.4 to p.8 ↔ filed p.8 to p.14 (the memorandum); p.9 ↔ filed p.31 (signature); p.10 ↔ filed p.33 (certificate of service). The overlay is a diagnostic, not a score: the exemplar's page breaks, footers and line grid are not the same as ours.
 
 ## Visual review (every page rendered at 60 dpi and looked at)
@@ -93,9 +93,9 @@ Reviewed pages: 10 of 10. The cover (page 1), the argument page (5) and the sign
 
 ## Engines
 
-Checked on the final renders of `usage/OUTPUT-ncmd-motion-brief-brahamlabcorpbrief.docx.pdf` (10 pages, LibreOffice) against `usage/OUTPUT-ncmd-motion-brief-brahamlabcorpbrief.typst.pdf` (typst, 10 pages). Every page of the docx PDF was rendered at 60 dpi and viewed: pages 1 to 10 (cover, table of contents, table of authorities, body pages 1 to 6, certificates). The `.docx` passes `unzip -tq`.
+Checked on the final renders of `usage/OUTPUT-motion-brief.docx.pdf` (10 pages, LibreOffice) against `usage/OUTPUT-motion-brief.typst.pdf` (typst, 10 pages). Every page of the docx PDF was rendered at 60 dpi and viewed: pages 1 to 10 (cover, table of contents, table of authorities, body pages 1 to 6, certificates). The `.docx` passes `unzip -tq`.
 
-- **docx** (`docx/reference.docx`, `docx/make-reference.sh --brief`, `docx/ncmd-motion-brief.lua`, `docx/render.sh`). Output: `usage/OUTPUT-ncmd-motion-brief-brahamlabcorpbrief.docx` and `.docx.pdf`. Not opened in Word.
+- **docx** (`docx/reference.docx`, `docx/make-reference.sh --brief`, `docx/ncmd-motion-brief.lua`, `docx/render.sh`). Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`. Not opened in Word.
   - *Matches typst:* EB Garamond only (embedded fonts: Regular, Bold, Italic); letter paper and margins as in typst; body on a 23.0 pt pitch; the cover with the caption; a table of contents and a table of authorities with dot leaders and page numbers; front matter in lower roman (i, ii) and the body in arabic from 1; the heading labels I., A., 1.; case names italic in the authorities; the signature blocks for both signers; the certificate of word count and the certificate of service; page count 10, the same as typst.
   - *Page numbers:* checked against the body. The table of contents and authorities gave the same page for every heading and authority as the text search of the rendered PDF.
   - *Differs:* the table of contents and table of authorities are paragraphs with page numbers computed from the LibreOffice layout, not TOC or TA fields. Word may paginate differently, and the numbers would then need regenerating. One citation form (the full cite of *Twombly*) was not found on any page. The authority is still listed on page 5 from its short cite, which the render confirmed. The caption table and the spacing of the certificates differ slightly from typst.

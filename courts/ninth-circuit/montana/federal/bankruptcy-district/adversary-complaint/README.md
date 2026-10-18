@@ -32,23 +32,23 @@ Not generated, and why: the adversary cover sheet (Official Form 1040, FRBP 7003
 
 ## Exemplar
 
-- `usage/SAMPLE-mtb-adversary-complaint-bache925ap09005.pdf`: Complaint, *Robert G. Drummond, Chapter 13 Standing Trustee v. Teri A. Noble*, Adv. No. 9:25-ap-09005-BPH, in *In re Bache*, No. 9:23-bk-90138-BPH. 4 pages, filed April 25, 2025, by the Chapter 13 Standing Trustee. Text layer present.
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf`: Complaint, *Robert G. Drummond, Chapter 13 Standing Trustee v. Teri A. Noble*, Adv. No. 9:25-ap-09005-BPH, in *In re Bache*, No. 9:23-bk-90138-BPH. 4 pages, filed April 25, 2025, by the Chapter 13 Standing Trustee. Text layer present.
 - Provenance and searches: `usage/SOURCE.md`.
 - The exemplar was filed under the previous local rules. It is double-spaced (measured pitch 23.4 pt on page 2 from `pdftotext -bbox`), Times, Courier and Helvetica fonts (sizes not measured). The double spacing agrees with the current LBR 5005-2(a)(5) and (a)(2). The template follows the current text.
 
 ## Sample
 
-- `usage/INPUT-mtb-adversary-complaint-bachenoblecomplaint.md`: transcription of all 4 pages. Frontmatter carries the caption, counsel block, title, signature and the certificate of mailing (the addressee lines are from the exemplar). The ECF header and footer lines (`9:25-ap-09005-BPH Doc#: 1 Filed: ...`) are not transcribed; the template prints its own page numbers.
+- `usage/INPUT-adversary-complaint.md`: transcription of all 4 pages. Frontmatter carries the caption, counsel block, title, signature and the certificate of mailing (the addressee lines are from the exemplar). The ECF header and footer lines (`9:25-ap-09005-BPH Doc#: 1 Filed: ...`) are not transcribed; the template prints its own page numbers.
 
 ## Render and overlay
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/ninth-circuit/montana/federal/bankruptcy-district/adversary-complaint usage/INPUT-mtb-adversary-complaint-bachenoblecomplaint.md
+sh tools/render.sh courts/ninth-circuit/montana/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/ninth-circuit/montana/federal/bankruptcy-district/adversary-complaint bache-noble-complaint
 ```
 
-- `usage/OUTPUT-mtb-adversary-complaint-bachenoblecomplaint.typst.pdf`: 4 pages. `render.sh` fails on any typst warning; none. Fonts (`pdffonts`): EB Garamond Regular, Italic, Bold, all embedded (vendored).
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: 4 pages. `render.sh` fails on any typst warning; none. Fonts (`pdffonts`): EB Garamond Regular, Italic, Bold, all embedded (vendored).
 - `usage/OVERLAY-bache-noble-complaint.pdf` and `.txt`: red = our render, blue = exemplar, black = both. Page map (word-overlap pairing, coarse): ours p.1 ↔ filed p.1 (73.0%), p.2 ↔ p.2 (68.2%), p.3 ↔ p.3 (71.8%), p.4 ↔ p.4 (84.0%). The layers will not coincide on text lines: the font is different (EB Garamond vs Times), so the overlay is a diagnostic, not a score.
 
 ## Visual review (all 4 pages rendered at 60 dpi and looked at)

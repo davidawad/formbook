@@ -1,6 +1,6 @@
 # Exemplar source: motion with memorandum, W.D.N.C. bankruptcy court
 
-- **Exemplar file:** `SAMPLE-ncwb-motion-brief-hayesappliedmachinery2503091.pdf` (11 pages)
+- **Exemplar file:** `FILED-EXAMPLE-motion-brief.pdf` (11 pages)
 - **Fetched from:** https://storage.courtlistener.com/recap/gov.uscourts.ncwb.215217/gov.uscourts.ncwb.215217.28.0.pdf (RECAP archive copy of Doc 28; found by CourtListener RECAP search with `court=ncwb`, `type=rd`, query "motion to dismiss" "adversary proceeding")
 - **Case:** *Cole Hayes, Chapter 7 Trustee v. Hyatt Corporation, et al.*, Adv. No. 25-03091 (Bankr. W.D.N.C., Charlotte Division), in the Chapter 7 case of Applied Machinery Rentals, LLC, Case No. 23-30461
 - **Document:** Motion of Hyatt Corporation to Dismiss First Amended Complaint for Failure to State a Claim Upon Which Relief Can Be Granted, with the Notice of Hearing (pp. 10-11), Doc 28

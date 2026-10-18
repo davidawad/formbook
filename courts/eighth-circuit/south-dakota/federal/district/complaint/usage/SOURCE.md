@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-sdd-complaint-knosp526cv05092.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, District of South Dakota (Rapid City Division)
 - Case: *Knosp v. Equifax Information Services, LLC, et al.*
 - Docket: No. 5:26-cv-05092-CCT, Document 1

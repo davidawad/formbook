@@ -5,9 +5,9 @@ Folder: `courts/eleventh-circuit/georgia/federal/middle-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-gamd-motion-brief-brooks516cv00123.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-gamd-motion-brief-brooks.md` (the whole 9-page brief, transcribed; see Known gaps) |
-| render | ok: `usage/OUTPUT-gamd-motion-brief-brooks.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (the whole 9-page brief, transcribed; see Known gaps) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-brooks-motion-brief.pdf` and `OVERLAY-brooks-motion-brief.txt` |
 | typeface | face required: **none** (M.D. Ga. Local Rules name no typeface); font: **EB Garamond** (vendored, kept per `docs/FONTS.md`, "No face named"); not a substitution, so no metric question arises |
 | pages reviewed | 9 of 9 (re-rendered 2026-10-14 with no template change; every page rendered at 60 dpi and viewed) |
@@ -55,11 +55,11 @@ Not produced by this template: the motion (a separate document), the proposed or
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/eleventh-circuit/georgia/federal/middle-district/motion-brief usage/INPUT-gamd-motion-brief-brooks.md
+sh tools/render.sh courts/eleventh-circuit/georgia/federal/middle-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/motion-brief brooks-motion-brief
 ```
 
-- The render writes `usage/OUTPUT-gamd-motion-brief-brooks.typst.pdf` (the default name in `tools/render.sh`); the overlay writes `OVERLAY-brooks-motion-brief.pdf` and `.txt` (the tool's names; the brief's `<id>-overlay` names were not used, because the tool reads and writes these).
+- The render writes `usage/OUTPUT-motion-brief.typst.pdf` (the default name in `tools/render.sh`); the overlay writes `OVERLAY-brooks-motion-brief.pdf` and `.txt` (the tool's names; the brief's `<id>-overlay` names were not used, because the tool reads and writes these).
 - Red = our render, blue = exemplar, black = both. The page map pairs pages by word overlap: ours 1-7 pair with filed 1-7; ours 8 pairs with filed 9 and ours 9 with filed 8, because the exemplar's certificate page and signature page are split in the filing and our signature block falls on page 8 (see Known gaps). The overlay is a diagnostic, not a score.
 
 ## Visual review (Gate 2 record, all 9 pages, rendered at 60 dpi and looked at)
@@ -94,7 +94,7 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/moti
 
 ## Engines
 
-`typst/` is the reference. The docx engine is `docx/` (`reference.docx` for the styles, page setup and footers; `gamd-motion-brief.lua` for the cover, caption, `[[signature]]` blocks and the body). Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/middle-district/motion-brief usage/INPUT-gamd-motion-brief-brooks.md` writes `usage/OUTPUT-gamd-motion-brief-brooks.docx` and `usage/OUTPUT-gamd-motion-brief-brooks.docx.pdf` (LibreOffice 26.8 converts; EB Garamond from `fonts/` must be installed for LibreOffice, see `docs/FONTS.md`).
+`typst/` is the reference. The docx engine is `docx/` (`reference.docx` for the styles, page setup and footers; `gamd-motion-brief.lua` for the cover, caption, `[[signature]]` blocks and the body). Render: `sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/middle-district/motion-brief usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8 converts; EB Garamond from `fonts/` must be installed for LibreOffice, see `docs/FONTS.md`).
 
 | Layout | docx | Note |
 |---|---|---|
@@ -108,6 +108,6 @@ sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/middle-district/moti
 | Signature block | "Respectfully submitted," at 3 in, firm and signers, address and "Attorneys for" flush left | At each `[[signature]]` line and at the end if there is no marker. |
 | Page number | Centred 12 pt from page 2; page 1 has none | `titlePg` with an empty first-page footer. |
 
-- **Pages reviewed:** all 9 pages of `OUTPUT-gamd-motion-brief-brooks.docx.pdf` were rendered at 60 dpi and compared with the typst output page by page (side-by-side). Pages 1 and 2 match in form. From page 3 the page breaks differ (a line or two per page adds up): Argument III starts on page 4 in the docx and on page 3 in typst. LibreOffice also splits footnote 4 across pages 5 and 6 (typst keeps it on page 5), and the certificate of service starts on page 9 (typst: page 8). The page count is the same, 9.
+- **Pages reviewed:** all 9 pages of `OUTPUT-motion-brief.docx.pdf` were rendered at 60 dpi and compared with the typst output page by page (side-by-side). Pages 1 and 2 match in form. From page 3 the page breaks differ (a line or two per page adds up): Argument III starts on page 4 in the docx and on page 3 in typst. LibreOffice also splits footnote 4 across pages 5 and 6 (typst keeps it on page 5), and the certificate of service starts on page 9 (typst: page 8). The page count is the same, 9.
 - **Checks:** `tools/check.sh --engine docx` was not run (same reason as the complaint, gap 10). The docx is not BLOCKED on any tier-1 point in this list. Not verified: opening the `.docx` in Microsoft Word (no Word here); LibreOffice converts it without error, but no GUI repair prompt was checked.
 - **Pagination:** Word and LibreOffice may break lines and footnotes differently from each other and from typst (`docs/DOCX.md`). Do not force page breaks to match.

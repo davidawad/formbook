@@ -4,9 +4,9 @@ Doc-type folder for the Eleventh Circuit, `opening-brief` (one self-contained fo
 
 | Item | Status |
 |---|---|
-| Exemplar | yes: `usage/SAMPLE-ca11-opening-brief-hillvclaytoncounty2312884.pdf` (see `usage/SOURCE.md`) |
-| Sample markdown | `usage/INPUT-ca11-opening-brief-hill.md`, a partial transcription of the exemplar (cover, CIP, oral argument, jurisdiction, issues, case, argument II.A/II.B, conclusion, certificates) |
-| Render | ok: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief usage/INPUT-ca11-opening-brief-hill.md` gives 16 pages, no typst warnings |
+| Exemplar | yes: `usage/FILED-EXAMPLE-opening-brief.pdf` (see `usage/SOURCE.md`) |
+| Sample markdown | `usage/INPUT-opening-brief.md`, a partial transcription of the exemplar (cover, CIP, oral argument, jurisdiction, issues, case, argument II.A/II.B, conclusion, certificates) |
+| Render | ok: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md` gives 16 pages, no typst warnings |
 | Overlay | ok (2026-10-16): `sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/opening-brief hill-opening-brief` writes `usage/OVERLAY-hill-opening-brief.pdf` and `.txt` (16 pages paired) |
 | Typeface | face required: none named (FRAP 32(a)(5)(A)); no substitute; EB Garamond kept |
 | Pages reviewed | 16 of 16 re-rendered 2026-10-16 and viewed one by one at 60 dpi (see "Verification pass 2026-10-16") |
@@ -99,25 +99,25 @@ Defects found during review and fixed in this pass: the signature block stood al
 
 ## Verification pass 2026-10-16 (fb-595.26.11)
 
-- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief usage/INPUT-ca11-opening-brief-hill.md` exits 0, no typst warnings, 16 pages (the committed PDF also had 16). Fonts embedded: EB Garamond Regular, Italic, Bold only.
+- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md` exits 0, no typst warnings, 16 pages (the committed PDF also had 16). Fonts embedded: EB Garamond Regular, Italic, Bold only.
 - Viewed: all 16 pages at 60 dpi, before and after the fix; the exemplar's page 1 against our cover; the 16 overlay pages at 40 dpi.
 - Overlay: rerun; `usage/OVERLAY-hill-opening-brief.pdf` and `.txt` rewritten. Pages 1-5 pair with exemplar pages 1-5 (58-86%); page 8 (the short Rules page of the TOA) still pairs at 1.4%, a pairing artifact.
 - Defect fixed (tier 2): body paragraphs had no first-line indent, so with double spacing a new paragraph could not be told from a continued one (exemplar and convention indent them). Cause: the `set par(first-line-indent: 0pt)` for the oral-argument statement was not scoped and carried into the body. It is now scoped; body paragraphs indent 0.5 in, and the oral-argument statement indents too. Page count unchanged; the Standard of Review paragraph now ends on page 3 and the TOA page for *Managed Care* moved from 2 to 3, as the TOA shows.
 - Remaining gaps: a citation line that follows a block quote is a new markdown paragraph, so it is indented (the exemplar sets it flush left); tier 3, left. The rest of "Known gaps" stands (no `checks.yaml`, one exemplar, CIP placement, asterisk position).
-- latex: `sh tools/render.sh --engine latex ...` rebuilt `OUTPUT-ca11-opening-brief-hill.latex.pdf` (exit 0, 16 pages); its pages were not reviewed in this pass. docx outputs untouched (no LibreOffice on this box).
+- latex: `sh tools/render.sh --engine latex ...` rebuilt `OUTPUT-opening-brief.latex.pdf` (exit 0, 16 pages); its pages were not reviewed in this pass. docx outputs untouched (no LibreOffice on this box).
 
 ## Build
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst, poppler, imagemagick, gawk, jq (micromamba, conda-forge)
-sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief usage/INPUT-ca11-opening-brief-hill.md
+sh tools/render.sh courts/eleventh-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md
 sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/opening-brief hill-opening-brief
 ```
 
 ## Engines
 
 The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
-outputs are `usage/OUTPUT-ca11-opening-brief-hill.latex.pdf`, `.docx` and `.docx.pdf`.
+outputs are `usage/OUTPUT-opening-brief.latex.pdf`, `.docx` and `.docx.pdf`.
 
 - **latex** (`latex/template.tex`, `latex/ca11.lua`, `latex/render.sh`). Matches: EB Garamond 14 pt from `fonts/`,
   double spacing, one-inch margins, the cover, the C-1 and C-2 pages of the certificate of interested persons,

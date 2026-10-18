@@ -1,6 +1,6 @@
 # Exemplar source: motion with incorporated memorandum, Bankruptcy Court M.D. La. (lamb)
 
-Exemplar: `SAMPLE-lamb-motion-brief-kologik2410311.pdf`, pages 1-19 of 42 (unaltered pages of the filed PDF).
+Exemplar: `FILED-EXAMPLE-motion-brief.pdf`, pages 1-19 of 42 (unaltered pages of the filed PDF).
 
 | Field | Value |
 |---|---|
@@ -12,7 +12,7 @@ Exemplar: `SAMPLE-lamb-motion-brief-kologik2410311.pdf`, pages 1-19 of 42 (unalt
 | Filer | Debtors Kologik, LLC; Kologik Capital, LLC; Kologik Capital II, LLC, by proposed counsel Kelly Hart Pitre (Louis M. Phillips, #10505; second block: Erin K. Arnold, Amelia L. Hurt, New Orleans) |
 | Date filed | 04/23/2024 (ECF stamp "Filed 04/23/24 Entered 04/23/24 15:48:16") |
 | Date fetched | 2026-10-14 |
-| Local file | `SAMPLE-lamb-motion-brief-kologik2410311.pdf`: pages 1-19 extracted from the 42-page fetched PDF (`pdfseparate` and `pdfunite`, no page changed). SHA-256 of the fetched 42-page file `d2716b3cb128a8982a2b30996b702ac405ac04af323a8b1d84f87b4b445fe909`; of the 19-page file `c17a354c04d90297db846271de08a2ca3855b99098336d6735e8aecae1b5e116`. Restored 2026-10-14: the PDF was missing from the tree, so the overlay could not run. |
+| Local file | `FILED-EXAMPLE-motion-brief.pdf`: pages 1-19 extracted from the 42-page fetched PDF (`pdfseparate` and `pdfunite`, no page changed). SHA-256 of the fetched 42-page file `d2716b3cb128a8982a2b30996b702ac405ac04af323a8b1d84f87b4b445fe909`; of the 19-page file `c17a354c04d90297db846271de08a2ca3855b99098336d6735e8aecae1b5e116`. Restored 2026-10-14: the PDF was missing from the tree, so the overlay could not run. |
 | Pages kept | 1-19 (the motion, its Basis for Relief, Conclusion and signature). Pages 20-42 of Doc. 8 (the proposed Interim Order and Final Order) are not in the exemplar. |
 | Text | Text-based PDF (`pdftotext` extracts the full text). |
 
@@ -38,7 +38,7 @@ Differences the overlay will show, all in the filing itself: no LR 9013-1(b)(2) 
 
 ## Transcription
 
-`../usage/INPUT-lamb-motion-brief-motionbriefsample.md` transcribes exemplar pp. 1-19 in full, including the Material Terms table, all nine footnotes, the block quotation of 11 U.S.C. § 363(c)(2) and the signature block. Changes from the filed text, all for layout or for the template's frontmatter:
+`../usage/INPUT-motion-brief.md` transcribes exemplar pp. 1-19 in full, including the Material Terms table, all nine footnotes, the block quotation of 11 U.S.C. § 363(c)(2) and the signature block. Changes from the filed text, all for layout or for the template's frontmatter:
 
 - The footnote 3 marker (UCC-1 caveat) is attached in ¶ 7 instead of inside the table cell (a typst footnote inside a table cell printed the footnote on the wrong page). The footnote text is unchanged.
 - The table cell text for the adequate-protection and carve-out rows keeps the filed sub-items (a.-c., A.-B., (A)-(B)) as run-in text, not as separate lines.

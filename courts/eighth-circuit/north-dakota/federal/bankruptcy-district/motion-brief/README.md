@@ -5,16 +5,16 @@ Folder: `courts/eighth-circuit/north-dakota/federal/bankruptcy-district/motion-b
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ndb-motion-brief-elliott2407012.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ndb-motion-brief-elliottmemo.md` (full transcription of the 10-page memorandum: caption, 27 numbered paragraphs, headings, one footnote, block quotations, signature) |
-| render | ok: `usage/OUTPUT-ndb-motion-brief-elliottmemo.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (full transcription of the 10-page memorandum: caption, 27 numbered paragraphs, headings, one footnote, block quotations, signature) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-elliott-memo.pdf` and `usage/OVERLAY-elliott-memo.txt` (page map) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; pages 9 and 10 re-viewed after the signature change) |
 
 Commands (run from /work/repo with the toolchain on PATH):
 
 ```
-sh tools/render.sh courts/eighth-circuit/north-dakota/federal/bankruptcy-district/motion-brief usage/INPUT-ndb-motion-brief-elliottmemo.md
+sh tools/render.sh courts/eighth-circuit/north-dakota/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/eighth-circuit/north-dakota/federal/bankruptcy-district/motion-brief elliott-memo
 ```
 
@@ -53,7 +53,7 @@ No type-size, margin, or spacing rule appears in the 2023 bankruptcy local rules
 
 ## Sample
 
-`usage/INPUT-ndb-motion-brief-elliottmemo.md` transcribes the complete 10-page memorandum: caption, all 27 numbered paragraphs (numbering checked against the exemplar: 1 to 27), the three quotations, the continuation paragraphs, the footnote, and the signature block. Wording, punctuation, and the filer's own typos are kept as filed (for example the stray quotation mark in paragraph 24 and "Defendant’s" in paragraph 10). Differences from the filed document:
+`usage/INPUT-motion-brief.md` transcribes the complete 10-page memorandum: caption, all 27 numbered paragraphs (numbering checked against the exemplar: 1 to 27), the three quotations, the continuation paragraphs, the footnote, and the signature block. Wording, punctuation, and the filer's own typos are kept as filed (for example the stray quotation mark in paragraph 24 and "Defendant’s" in paragraph 10). Differences from the filed document:
 
 - The ECF header is not reproduced.
 - The exhibits (Kaler affidavit, Exhibits 1 to 8) are referenced, not included, as in the filing.
@@ -90,7 +90,7 @@ The overlay is a diagnostic, not a score. The lower overlap on pages 7 to 10 com
 
 ## Review of the rendered pages (Gate 2 rows)
 
-Every page of `usage/OUTPUT-ndb-motion-brief-elliottmemo.typst.pdf` was rendered at 60 dpi and viewed. Defects found and fixed during the review:
+Every page of `usage/OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed. Defects found and fixed during the review:
 
 - Paragraph spacing collided across block boundaries (same fault as the complaint). Fixed with `below: body-leading` on every body block.
 - Pitch: first pass 24 pt; changed to Word's double spacing, 27.6 pt, to match the exemplar's line count per page (10 pages, as the exemplar).

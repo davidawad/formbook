@@ -4,9 +4,9 @@ Doc type: **adversary complaint** commencing an adversary proceeding in the Unit
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 1 filer: `usage/SAMPLE-nywb-adversary-complaint-wallachrothstein11101078.pdf` (8 pages, text layer present; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nywb-adversary-complaint-wallachrothsteincomplaint.md` (transcribed in full: caption, lead-in, every section, all five counts, prayer, signature) |
-| render | ok: `usage/OUTPUT-nywb-adversary-complaint-wallachrothsteincomplaint.typst.pdf`, 8 pages, letter size, typst 0.15.0, vendored EB Garamond only (embedded), no typst warnings |
+| exemplar | yes, 1 filer: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (8 pages, text layer present; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (transcribed in full: caption, lead-in, every section, all five counts, prayer, signature) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, letter size, typst 0.15.0, vendored EB Garamond only (embedded), no typst warnings |
 | overlay | ok: `usage/OVERLAY-wallach-rothstein-complaint.pdf` and `.txt` (page map below) |
 | typeface | Face required by the rules: none named (LBR 9004-1 requires only "plainly and legibly written"; re-checked 2026-10-15). Vendored substitute: none needed, so EB Garamond is kept (`docs/FONTS.md`, "No face named"). Metric fit: n/a. |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; see Gate 2 table) |
@@ -64,7 +64,7 @@ The pages line up one-to-one. Our paragraph numbers are the template's (1 to 47,
 
 ## Gate 2: visual review (current PDF)
 
-Reviewed sha256 of `usage/OUTPUT-nywb-adversary-complaint-wallachrothsteincomplaint.typst.pdf`: `e7619466e3b1546d8a54b7791575abff181ee70db1296ed073c4e2a09d4f7eca` (re-rendered 2026-10-15 with typst 0.15.0 after the typeface check; the template is unchanged). Each page was rendered at 60 dpi and viewed again on 2026-10-15, all 8 pages; the 2026-10-14 pixel-identity check was not repeated against the earlier file.
+Reviewed sha256 of `usage/OUTPUT-adversary-complaint.typst.pdf`: `e7619466e3b1546d8a54b7791575abff181ee70db1296ed073c4e2a09d4f7eca` (re-rendered 2026-10-15 with typst 0.15.0 after the typeface check; the template is unchanged). Each page was rendered at 60 dpi and viewed again on 2026-10-15, all 8 pages; the 2026-10-14 pixel-identity check was not repeated against the earlier file.
 
 The exemplar pages were compared through their text layer (`pdftotext -bbox` for positions) and the overlay pairing; they were not rendered to images for this review, so layout claims about the exemplar are from its text positions.
 
@@ -97,7 +97,7 @@ The exemplar pages were compared through their text layer (`pdftotext -bbox` for
 ```
 export PATH="$HOME/tb/bin:$PATH"
 D=courts/second-circuit/new-york/federal/bankruptcy-western-district/adversary-complaint
-sh tools/render.sh $D usage/INPUT-nywb-adversary-complaint-wallachrothsteincomplaint.md
+sh tools/render.sh $D usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh $D wallach-rothstein-complaint
 ```
 
@@ -105,7 +105,7 @@ File names follow the tools and CLAUDE.md contract (`INPUT-`, `OUTPUT-`, `OVERLA
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` (styles, footer, page setup into `reference.docx`), `nywb-adversary-complaint.lua` (cover, caption, numbered allegations, prayer, signature), `render.sh` (pandoc, then the court's styles, footer and section restored into the package). Output: `usage/OUTPUT-nywb-adversary-complaint-wallachrothsteincomplaint.docx` and `.docx.pdf` (LibreOffice conversion, 8 pages, letter). The `.docx` converts in LibreOffice without error or repair prompt (checked 2026-10-15); not opened in Word.
+docx (`docx/`): `build-reference.sh` (styles, footer, page setup into `reference.docx`), `nywb-adversary-complaint.lua` (cover, caption, numbered allegations, prayer, signature), `render.sh` (pandoc, then the court's styles, footer and section restored into the package). Output: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice conversion, 8 pages, letter). The `.docx` converts in LibreOffice without error or repair prompt (checked 2026-10-15); not opened in Word.
 
 - Matches the typst output: letter paper, one-inch margins, EB Garamond 12 pt embedded (LibreOffice finds it from the user's font directory), 27.6 pt exact double spacing, 0.5 in first-line indent, numbered allegations at the same numbers, the caption grid (debtor, adversary parties, right rule and bottom rule, case number, chapter, judge, adversary number, bold title), block quotations, the lettered prayer, the signature block, page number centered from page 1. Page starts agree with typst for pages 1 to 4; by page 8 the docx is within two paragraphs of the typst page (typst p.8 starts at the prayer; docx p.8 also starts at the prayer).
 - Differs: headings are set at 12 pt bold (typst's heading elements are larger by default; the size is not a rule of the court). Caption row spacing is approximate (typst's stack spacing is reproduced with exact-height rows). Word may paginate differently.

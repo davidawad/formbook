@@ -16,10 +16,10 @@ Every requirement below cites one of these. LBR page numbers are the printed pag
 | FRBP | Federal Rules of Bankruptcy Procedure, as restyled eff. Dec. 1, 2024: Rules 7001, 7003, 7007, 7007.1, 7008, 7010, 7012, 9004, 9011, 9013, 9037 (LII text) | https://www.law.cornell.edu/rules/frbp/rule_9004 (and `rule_7001`, `rule_7003`, `rule_7007`, `rule_7007.1`, `rule_7008`, `rule_7010`, `rule_7012`, `rule_9011`, `rule_9013`, `rule_9037`) |
 | FRCP | Federal Rules of Civil Procedure 7, 8, 10, applied in adversary proceedings by FRBP 7007, 7008, 7010 (LII text) | https://www.law.cornell.edu/rules/frcp/rule_10 (and `rule_7`, `rule_8`) |
 | F416D | Official Form 416D (12/15), "Caption for Use in Adversary Proceeding" | https://www.uscourts.gov/sites/default/files/form_b416d_0.pdf |
-| EX-TOY | `adversary-complaint/usage/SAMPLE-nyeb-adversary-complaint-toyvation12643344.pdf` (Toyvation, LLC, by Solomon Rosengarten). Visual reference only. | local; see that folder's `SOURCE.md` |
-| EX-WIL | `motion-brief/usage/SAMPLE-nyeb-motion-brief-empirestategrandcouncil2601072.pdf` (Brooklyn Masonic Temple LLC, by Williams LLP). Visual reference only. | local; see that folder's `SOURCE.md` |
-| EX-SCH | `motion-brief/usage/SAMPLE-nyeb-motion-brief-schaya12643344.pdf` (Israel Schaya, by Forchelli Deegan Terrana LLP; a reply in support of a Rule 2004 motion, In re Toyvation LLC, ECF Doc. 16). Visual reference only. | local; see that folder's `SOURCE.md` |
-| EX-TVS | `adversary-complaint/usage/SAMPLE-nyeb-adversary-complaint-trumpvillage12601071.pdf` (Trump Village Section 4, Inc. and Igor Oberman, by Daniel S. Szalkiewicz / Veridian Legal P.C.; Adv. Pro. No. 1-26-01071-ess, ECF Doc. 1). Visual reference only. | local; see that folder's `SOURCE.md` |
+| EX-TOY | `adversary-complaint/usage/FILED-EXAMPLE-adversary-complaint.pdf` (Toyvation, LLC, by Solomon Rosengarten). Visual reference only. | local; see that folder's `SOURCE.md` |
+| EX-WIL | `motion-brief/usage/FILED-EXAMPLE-motion-brief.pdf` (Brooklyn Masonic Temple LLC, by Williams LLP). Visual reference only. | local; see that folder's `SOURCE.md` |
+| EX-SCH | `motion-brief/usage/FILED-EXAMPLE-motion-brief-2.pdf` (Israel Schaya, by Forchelli Deegan Terrana LLP; a reply in support of a Rule 2004 motion, In re Toyvation LLC, ECF Doc. 16). Visual reference only. | local; see that folder's `SOURCE.md` |
+| EX-TVS | `adversary-complaint/usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (Trump Village Section 4, Inc. and Igor Oberman, by Daniel S. Szalkiewicz / Veridian Legal P.C.; Adv. Pro. No. 1-26-01071-ess, ECF Doc. 1). Visual reference only. | local; see that folder's `SOURCE.md` |
 
 Kinds: **M** = mandated by a court rule (FRBP, FRCP as incorporated, E.D.N.Y. LBR, General Order, Judges' Procedures). **C** = convention (the rules leave it open; taken from the exemplars). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable (content the lawyer must supply).
 

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "kyeb-motion-brief.typ": kyeb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-kyeb-motion-brief-generic.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief-2.md"))
 #let (meta, body) = split-frontmatter(src)
 #kyeb-motion-brief(meta, body)

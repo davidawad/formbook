@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/oregon/federal/bankruptcy-district/adversary-compl
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-orb-adversary-complaint-greenoregon2603055.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-orb-adversary-complaint-greenoregoncomplaint.md` (a portion of the 76-page filing; see Known gaps) |
-| render | ok: `usage/OUTPUT-orb-adversary-complaint-greenoregoncomplaint.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (a portion of the 76-page filing; see Known gaps) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-green-oregon-complaint.pdf` and `OVERLAY-green-oregon-complaint.txt` |
 | pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed; pages 2, 10, 11 also at 110 dpi after the layout fixes) |
 
@@ -73,7 +73,7 @@ Not verified in this run: the text of FRBP 7001, 7003, 7004, 7008 (the sample qu
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (EB Garamond, exact 24 pt body lines, 13.8 pt single lines, letter with 1 in top and bottom and 0.75 in sides, "TITLE / Page N of M" footer); `docx/orb-complaint.lua` with `docx/orb-common.lua` writes the cover, the caption table, the numbered allegations, the lettered prayer and the signature block; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in capitals. Output: `usage/OUTPUT-orb-adversary-complaint-greenoregoncomplaint.docx` and `.docx.pdf` (LibreOffice 26.8.1), 14 pages, all 14 viewed at 60 dpi (review: `reviews/2026-10-15-docx.md`).
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (EB Garamond, exact 24 pt body lines, 13.8 pt single lines, letter with 1 in top and bottom and 0.75 in sides, "TITLE / Page N of M" footer); `docx/orb-complaint.lua` with `docx/orb-common.lua` writes the cover, the caption table, the numbered allegations, the lettered prayer and the signature block; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in capitals. Output: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice 26.8.1), 14 pages, all 14 viewed at 60 dpi (review: `reviews/2026-10-15-docx.md`).
 
 - Matches the typst output: letter; margins; EB Garamond 12 pt with the headings at typst's default heading sizes (about 17 pt level 1, 14.5 pt level 2); body double-spaced; 0.5 in first-line indent; numbered allegations; the LBR 9004-2(c) caption with one ")" per party line; the counsel block and the court title; the footer; lettered prayer items A., B., ...; the date and the signature block 3 in from the left margin.
 - Differs from typst: the paragraph numbers are typed by the filter, not Word auto-numbering; the number of ")" marks is estimated from the width of each party line (Word does not report it to the filter), so it can be one line off for another party name; the number is followed by a tab to 1.0 in, typst's text starts about 0.1 in earlier. Pagination: LibreOffice puts 14 pages where typst puts 13; the typst reference runs its numbered paragraphs together (no paragraph break between allegations), which is also why it is shorter. The docx separates them.

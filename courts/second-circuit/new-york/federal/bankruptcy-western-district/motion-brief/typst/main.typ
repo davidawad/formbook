@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nywb-motion-brief.typ": nywb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nywb-motion-brief-continentalrochestermemo.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #nywb-motion-brief(meta, body)

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "gud-motion-brief.typ": gud-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-gud-motion-brief-leonguerreromemorandum.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #gud-motion-brief(meta, body)

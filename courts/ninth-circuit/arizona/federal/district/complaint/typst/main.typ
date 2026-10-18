@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "azd-complaint.typ": azd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-azd-complaint-harodfac.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #azd-complaint(meta, body)

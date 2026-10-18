@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca5-opening-brief-candel2520366.pdf` |
+| File | `FILED-EXAMPLE-opening-brief.pdf` |
 | Document | Brief of Appellant Candel & Partners SAS (docket entry 19, 59 pages) |
 | Case | *Candel & Partners SAS v. ExxonMobil Corporation* |
 | Court | U.S. Court of Appeals for the Fifth Circuit |
@@ -18,7 +18,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca5-opening-brief-motorola2610747.pdf` |
+| File | `FILED-EXAMPLE-opening-brief-2.pdf` |
 | Document | Brief of Defendant-Appellant Advanced Standard Communication, L.L.C. (Document 56, 27 pages) |
 | Case | *Motorola Mobility, L.L.C. v. Advanced Standard Communication, L.L.C.* |
 | Court | U.S. Court of Appeals for the Fifth Circuit |
@@ -30,4 +30,4 @@
 | SHA-256 | `4b6e271b990751dfdeb3797426804fc8e0eb9d8b6b9dc388d183db6ee5155b38` |
 | Text layer | Yes (`pdftotext`); PDF has 27 pages. |
 
-Used for: the cover, certificate of interested persons, oral-argument statement, table of contents and table of authorities structure, the statement of jurisdiction, issues, case, summary and the opening of the argument, the conclusion, signature, certificate of service and certificate of compliance (transcribed in `../usage/INPUT-ca5-opening-brief-candel.md`).
+Used for: the cover, certificate of interested persons, oral-argument statement, table of contents and table of authorities structure, the statement of jurisdiction, issues, case, summary and the opening of the argument, the conclusion, signature, certificate of service and certificate of compliance (transcribed in `../usage/INPUT-opening-brief.md`).

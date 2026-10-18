@@ -4,10 +4,10 @@ Doc type: **motion brief**, here the memorandum of law in support of a Fed. R. C
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-kyed-motion-brief-seitz225cv00166.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-kyed-motion-brief-seitzdiscordmemo.md`: caption, introduction, background, legal standard, part of the argument (Section 230), conclusion, signature, certificate of service |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: caption, introduction, background, legal standard, part of the argument (Section 230), conclusion, signature, certificate of service |
 | typeface | face required: none (LR 5.2(a) asks for "at least 12-point proportionately-spaced font"; rule text read 2026-10-15) -> substitute: none, EB Garamond kept (`docs/FONTS.md`, "No face named") -> not applicable |
-| render | ok (re-run 2026-10-15): `usage/OUTPUT-kyed-motion-brief-seitzdiscordmemo.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EB Garamond Regular, Bold, Italic and BoldItalic embedded), no warnings |
+| render | ok (re-run 2026-10-15): `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EB Garamond Regular, Bold, Italic and BoldItalic embedded), no warnings |
 | overlay | fail (re-run 2026-10-15): `tools/overlay.sh` exits 1 because `usage/SAMPLE-*.pdf` is not in this checkout. The `OVERLAY-seitz-discord-memo.txt` committed earlier was not regenerated; no `OVERLAY-seitz-discord-memo.pdf` is in `usage/` |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change; re-viewed 2026-10-15 after the re-render, no change) |
 | BLOCKED | none |
@@ -88,7 +88,7 @@ Not produced (separate filings): the motion (LR 7.1(a)), the proposed order (LR 
 Render and overlay, run after `export PATH="$HOME/tb/bin:$PATH"` (typst 0.15.0 from the micromamba env):
 
 ```sh
-sh tools/render.sh courts/sixth-circuit/kentucky/federal/eastern-district/motion-brief usage/INPUT-kyed-motion-brief-seitzdiscordmemo.md
+sh tools/render.sh courts/sixth-circuit/kentucky/federal/eastern-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/eastern-district/motion-brief seitz-discord-memo
 ```
 
@@ -101,7 +101,7 @@ A layout defect found and fixed during the build: with `spacing: 0pt` between pa
 DOCX engine (`docx/build-reference.sh` builds `docx/reference.docx`; `docx/kyed-motion-brief.lua` builds the caption, the keep-together of the conclusion with the signature block, the signature line and the certificate). Checked structurally only (see below).
 
 - **Matches the typst form (reference settings):** US Letter; 1 in margins on all sides (`w:pgMar` 1440); EB Garamond (vendored) at 12 pt in the document defaults and every style used; body text at an exact 24 pt line pitch with a 0.5 in first-line indent; block quotation single spaced, 0.75 in each side; headings: centered caps (level 1), bold hanging at 0.5 in (level 2), bold indented (level 3), bold italic indented (level 4); footnotes are pandoc's native footnotes at 12 pt, single spaced; centered 12 pt page number in the footer; "Dated:" at the margin and "Respectfully submitted," at a 3.4 in tab stop; the conclusion keeps with the signature block (`keepNext`); the certificate of service starts on a new page, its service blocks single spaced.
-- **Differs from typst:** the footnote separator is pandoc's default rule, not typst's 30% rule; the certificate service blocks use single spacing from the font metrics, not typst's added leading (about 13.8 pt per line in the typst render); pagination is not measured (typst gives 11 pages for `usage/OUTPUT-kyed-motion-brief-seitzdiscordmemo.typst.pdf`; the docx page count is unknown). No table of contents or table of authorities is produced (see the rules table).
+- **Differs from typst:** the footnote separator is pandoc's default rule, not typst's 30% rule; the certificate service blocks use single spacing from the font metrics, not typst's added leading (about 13.8 pt per line in the typst render); pagination is not measured (typst gives 11 pages for `usage/OUTPUT-motion-brief.typst.pdf`; the docx page count is unknown). No table of contents or table of authorities is produced (see the rules table).
 - **BLOCKED:** `docx=blocked`. `docx.pdf` / page review: `soffice` (LibreOffice) is not installed on this box, so `usage/OUTPUT-seitz-discord-memo.docx.pdf` was not produced and no page was rendered or viewed (`pages_reviewed=0`). Font embedding and substitution in LibreOffice, and the no-repair-prompt check in Word and LibreOffice, are not verified.
 
 

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-prb-motion-brief-perezcruz2000126.pdf`
+- File: `FILED-EXAMPLE-motion-brief-4.pdf`
 - Court: United States Bankruptcy Court, District of Puerto Rico (`prb`)
 - Case: *Tamara Perez Cruz v. Oriental Bank, et al.*, Adv. No. 20-00126, in Case No. 11-03499 (MCF), Chapter 13
 - Document: "Amended Motion for Summary Judgment and Memorandum of Law in Support Thereof" (10 pages; ECF Doc. 30 of the adversary)
@@ -15,7 +15,7 @@ Second filer: not collected. The brief asks for one exemplar per doc type; the o
 
 ## 2. Second filer (added 2026-10-17, fb-595.21.1)
 
-- File: `SAMPLE-prb-motion-brief-gdb1000139.pdf`
+- File: `FILED-EXAMPLE-motion-brief-3.pdf`
 - Court: United States Bankruptcy Court, District of Puerto Rico (`prb`)
 - Case: *Government Development Bank of Puerto Rico v. Vicky Rodríguez Torres*, Adv. Proc. 10-00139 (BKT-7), in Bankruptcy Case 09-10864 (BKT), Chapter 7
 - Docket / document: adversary Doc. 22 (RECAP docket text: "Memorandum of law in Support of Plaintiff's Motion for Summary Judgment (related document(s): 21) filed by SONIA COLON COLON, ANDRES C GORBEA DEL VALLE on behalf of GOVERNMENT DEVELOPMENT BANK ... (Entered: 10/18/2010)"). The motion itself is Doc. 21 (3 pages), not included.
@@ -31,4 +31,4 @@ Second filer: not collected. The brief asks for one exemplar per doc type; the o
 
 ## Replacement for the audited non-redistributable-font exemplar
 
-The audited `SAMPLE-prb-motion-brief-perezcruz2000126.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `SAMPLE-prb-motion-brief-gdb1000139.pdf` from a different filer. See the second-filer record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
+The audited `FILED-EXAMPLE-motion-brief-4.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-motion-brief-3.pdf` from a different filer. See the second-filer record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

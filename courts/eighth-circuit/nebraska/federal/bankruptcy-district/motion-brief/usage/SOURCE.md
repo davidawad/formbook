@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nebraskab-motion-brief-kellyzuhlke2404011.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Document | Brief in Opposition to Motion for a Summary Judgment (ECF Doc 123 in the adversary, 9 pages, with a certificate of service on page 9) |
 | Court | United States Bankruptcy Court, District of Nebraska (`nebraskab`) |
 | Case | *Kelly, Chapter 7 Trustee v. Zuhlke*, Adv. Pro. 24-04011-BSK, main case *In re Zuhlke*, Case No. BK 24-40267-BSK (Chapter 7) |

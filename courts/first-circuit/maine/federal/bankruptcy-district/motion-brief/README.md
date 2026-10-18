@@ -4,9 +4,9 @@ Doc type: **motion with incorporated memorandum** (a contested-matter motion und
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-meb-motion-brief-mattson2420188.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-meb-motion-brief-mattson.md`: a portion of the 38-page filing (caption, introduction, facts ¶¶ 1–46, Section F, Sections IV and V, WHEREFORE, signature, certificate). Pages 10 to 33 of the filing are not transcribed; footnotes are not transcribed. |
-| render | ok: `usage/OUTPUT-meb-motion-brief-mattson.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: a portion of the 38-page filing (caption, introduction, facts ¶¶ 1–46, Section F, Sections IV and V, WHEREFORE, signature, certificate). Pages 10 to 33 of the filing are not transcribed; footnotes are not transcribed. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-mattson-motion-brief.pdf` and `.txt` (page map below) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; pages 1–2 and 9–10 after their last fix) |
 
@@ -97,11 +97,11 @@ Defects found and fixed during review: (1) paragraphs in the opening block drawn
 
 ## Engines
 
-Typst is the primary engine. This section covers the docx engine (`docx/`): pandoc 3.6.4 with `docx/reference.docx` (the page setup and styles; rebuild with `sh docx/make-reference.sh docx`) and the Lua filter `docx/meb-motion-brief.lua` (the cover, caption, numbered paragraphs, relief, signature and certificate of service). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-meb-motion-brief-mattson.md`.
+Typst is the primary engine. This section covers the docx engine (`docx/`): pandoc 3.6.4 with `docx/reference.docx` (the page setup and styles; rebuild with `sh docx/make-reference.sh docx`) and the Lua filter `docx/meb-motion-brief.lua` (the cover, caption, numbered paragraphs, relief, signature and certificate of service). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`.
 
 | Output | Result |
 |---|---|
-| `usage/OUTPUT-meb-motion-brief-mattson.docx` | written; zip and well-formed XML parts pass the `render-docx.sh` integrity check |
+| `usage/OUTPUT-motion-brief.docx` | written; zip and well-formed XML parts pass the `render-docx.sh` integrity check |
 | `usage/OUTPUT-mattson-motion-brief.docx.pdf` | **not produced**: LibreOffice does not start in the build environment (see BLOCKED below) |
 | pages reviewed in the docx PDF | 0 of 11 (there is no PDF to render; the typst pages are the reference) |
 

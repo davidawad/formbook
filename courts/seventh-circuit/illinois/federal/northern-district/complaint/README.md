@@ -5,9 +5,9 @@ Folder: `courts/seventh-circuit/illinois/federal/northern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ilnd-complaint-uniontankcar126cv10014.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ilnd-complaint-uniontankcar.md`: caption, numbered paragraphs 1 to 40 with Count I, prayer, jury demand, signature. Counts II to IX and the rest of the case list in paragraph 19 are not transcribed (see Known gaps). |
-| render | ok: `usage/OUTPUT-ilnd-complaint-uniontankcar.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: caption, numbered paragraphs 1 to 40 with Count I, prayer, jury demand, signature. Counts II to IX and the rest of the case list in paragraph 19 are not transcribed (see Known gaps). |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-union-tank-car-complaint.pdf` and `OVERLAY-union-tank-car-complaint.txt` (page map) |
 | typeface | face required: none (N.D. Ill. LR 5.2(e) names no typeface; checked against the consolidated rules text, 2026-10-15). Vendored substitute: not needed; stays **EB Garamond** (the court-named-face rule in `docs/FONTS.md` does not apply). Metric compatibility: n/a. |
 | pages reviewed | 11 of 11 (re-rendered 2026-10-15 and every page rendered at 60 dpi and viewed) |
@@ -16,7 +16,7 @@ Build (from the repo root, with the toolchain on `PATH`):
 
 ```sh
 D=courts/seventh-circuit/illinois/federal/northern-district/complaint
-sh tools/render.sh $D usage/INPUT-ilnd-complaint-uniontankcar.md     # -> usage/OUTPUT-ilnd-complaint-uniontankcar.typst.pdf
+sh tools/render.sh $D usage/INPUT-complaint.md     # -> usage/OUTPUT-complaint.typst.pdf
 sh tools/overlay.sh $D union-tank-car-complaint               # -> usage/OVERLAY-union-tank-car-complaint.{pdf,txt}
 ```
 
@@ -85,7 +85,7 @@ Primary sources, fetched 2026-10-14.
 
 ## Engines
 
-**docx** (`docx/build-reference.sh` builds `docx/reference.docx`; `docx/ilnd.lua` is the filter; `usage/OUTPUT-ilnd-complaint-uniontankcar.docx` is the output of `tools/render.sh --engine docx`).
+**docx** (`docx/build-reference.sh` builds `docx/reference.docx`; `docx/ilnd.lua` is the filter; `usage/OUTPUT-complaint.docx` is the output of `tools/render.sh --engine docx`).
 
 - Matches the typst form: EB Garamond 12 pt body; exact 27.6 pt (double) body lines; first-line indent 0.5 in, justified; headings single-spaced with one double line above and below and kept with the next paragraph; front matter and signature lines single (13.8 pt); footnotes 11 pt single; US Letter with 1 in margins; the page number centered in the footer on every page (numbering from 1, as the typst template).
 - Numbered paragraphs 1, 2, ... and prayer items (a), (b), ... are typed text, not Word list numbering.

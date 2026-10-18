@@ -1,6 +1,6 @@
 # Brief on the merits
 
-Typst template for a petitioner's brief on the merits in the Supreme Court of Texas (`typst/main.typ`, module `typst/tex-brief-on-the-merits.typ`). The sample is transcribed from the filed *State of Texas v. F.M.V.*, No. 25-0792 brief on the merits (`usage/SAMPLE-tex-brief-on-the-merits-hawthorne250792.pdf`), every section of the filed brief with the argument excerpted. Rendered output: `usage/OUTPUT-tex-brief-on-the-merits-hawthorne.typst.pdf` (18 pages); overlay on the filed brief: `usage/OVERLAY-hawthorne-brief-on-the-merits.pdf` and `.txt`.
+Typst template for a petitioner's brief on the merits in the Supreme Court of Texas (`typst/main.typ`, module `typst/tex-brief-on-the-merits.typ`). The sample is transcribed from the filed *State of Texas v. F.M.V.*, No. 25-0792 brief on the merits (`usage/FILED-EXAMPLE-brief-on-the-merits.pdf`), every section of the filed brief with the argument excerpted. Rendered output: `usage/OUTPUT-brief-on-the-merits.typst.pdf` (18 pages); overlay on the filed brief: `usage/OVERLAY-hawthorne-brief-on-the-merits.pdf` and `.txt`.
 
 ## Layout
 
@@ -40,13 +40,13 @@ Template fixes from the deeper sample: same as the petition template (shared cod
 - Index of authorities page numbers are typed in frontmatter and must be re-measured whenever the text moves.
 - Rule 9.4(e)-(g) and 9.5 were not re-read against primary text this session.
 - The sample's certificate of compliance drops the filer's "relying on the word count of the software" wording, since the template supplies the count.
-- docx (`docx/tex.lua`) was not changed: no signature block from frontmatter `signature`, count still split at "Respectfully submitted", no `rules_edition` or order check. No `soffice` on this box, so `usage/OUTPUT-tex-brief-on-the-merits-hawthorne.docx` and `.docx.pdf` were NOT regenerated and are stale against the extended INPUT.
+- docx (`docx/tex.lua`) was not changed: no signature block from frontmatter `signature`, count still split at "Respectfully submitted", no `rules_edition` or order check. No `soffice` on this box, so `usage/OUTPUT-brief-on-the-merits.docx` and `.docx.pdf` were NOT regenerated and are stale against the extended INPUT.
 
 [Formbook index](../../../../../../README.md)
 
 ## Engines
 
-**docx** (`docx/`: `render.sh` runs two pandoc passes, `tex.lua` is the filter, `reference.docx` comes from `build-reference.sh`). Checked on the LibreOffice PDF (`usage/OUTPUT-tex-brief-on-the-merits-hawthorne.docx.pdf`). The `.docx` opened in LibreOffice without a repair prompt; Word was not available and not checked. `checks.yaml` and `rules.md` do not exist yet, so `tools/check.sh --engine docx` cannot run.
+**docx** (`docx/`: `render.sh` runs two pandoc passes, `tex.lua` is the filter, `reference.docx` comes from `build-reference.sh`). Checked on the LibreOffice PDF (`usage/OUTPUT-brief-on-the-merits.docx.pdf`). The `.docx` opened in LibreOffice without a repair prompt; Word was not available and not checked. `checks.yaml` and `rules.md` do not exist yet, so `tools/check.sh --engine docx` cannot run.
 
 Matches the typst form: Liberation Serif 14 pt; exact 32.2 pt double and 16.2 pt single line pitch (same as typst, measured with `pdftotext -bbox`); 1 in margins on letter; cover unnumbered and without a footer; front matter in lower roman from ii; body in arabic from 1; cover lead-counsel block at the bottom margin; the contents with dot leaders and page numbers from the layout (PAGEREF fields, filled from a first pass); the index of authorities from the frontmatter page numbers; word count on the markdown source with the typst rules (1,148 words here, limit 15,000). The contents page numbers equal typst's on this sample. Page count: 12 in both.
 

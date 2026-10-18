@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/texas/federal/northern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-txnd-complaint-lillyvbrown326cv03514.pdf` (Eli Lilly, non-class complaint); second filer `usage/SAMPLE-txnd-complaint-burkesbsw326cv03570.pdf` (Burkes, class complaint). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-txnd-complaint-lilly.md` (a portion of the 35-page filing: caption, sections I to III of the general allegations, cause of action 1, prayer, jury demand, signature) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (Eli Lilly, non-class complaint); second filer `usage/FILED-EXAMPLE-complaint-2.pdf` (Burkes, class complaint). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-complaint.md` (a portion of the 35-page filing: caption, sections I to III of the general allegations, cause of action 1, prayer, jury demand, signature) |
 | typeface | face required: none (LR 7.2 sets the size, 12 pt or larger; LR 10.1 names no face) -> vendored substitute: EB Garamond (the default, `fonts/eb-garamond/`) -> fit: n/a, no court-named face to match. The filed exemplars use Times New Roman; see Known gaps 2. |
-| render | ok: `usage/OUTPUT-txnd-complaint-lilly.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; `pdffonts` shows EBGaramond-Regular and EBGaramond-Bold embedded) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; `pdffonts` shows EBGaramond-Regular and EBGaramond-Bold embedded) |
 | overlay | ok: `usage/OVERLAY-lilly-complaint.pdf` and `usage/OVERLAY-lilly-complaint.txt` (page map; regenerated 2026-10-14 against the Lilly exemplar fetched from the URL in `usage/SOURCE.md`; the exemplar PDF is not committed) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-14 after the re-render) |
 | file names | the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (the names `tools/render.sh` and `tools/overlay.sh` use); the brief's `<id>.pdf` and `<id>-overlay.pdf` were not used, to keep the tools unchanged |
@@ -56,7 +56,7 @@ Red is our render, blue is the filed exemplar, black is where they agree. The pa
 9. **Case-name italics.** The text layer carries no italic markup, so case names are not italicized in the sample. The template italicizes `*...*` markdown, so future samples can carry italics.
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape. The brief forbids editing `tools/`, so the gates were not run. The page review above is the Gate 2 equivalent.
 
-## Review of the rendered pages (`usage/OUTPUT-txnd-complaint-lilly.typst.pdf`, 10 pages)
+## Review of the rendered pages (`usage/OUTPUT-complaint.typst.pdf`, 10 pages)
 
 Each page was rendered at 60 dpi and viewed after the last template change.
 
@@ -77,10 +77,10 @@ Earlier review rounds found and fixed: court-title and caption lines overlapping
 
 | Engine | Folder | Output in `usage/` | State |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-txnd-complaint-lilly.typst.pdf` | the reference (see the review above) |
-| docx | `docx/` | `OUTPUT-txnd-complaint-lilly.docx`, `OUTPUT-txnd-complaint-lilly.docx.pdf` | `.docx` built and valid (zip and XML checks pass); `.docx.pdf` BLOCKED |
+| typst (primary) | `typst/` | `OUTPUT-complaint.typst.pdf` | the reference (see the review above) |
+| docx | `docx/` | `OUTPUT-complaint.docx`, `OUTPUT-txnd-complaint-lilly.docx.pdf` | `.docx` built and valid (zip and XML checks pass); `.docx.pdf` BLOCKED |
 
-The docx is built by pandoc (3.6.4) from `docx/reference.docx` and `docx/txnd-complaint.lua`. `reference.docx` is made by `sh docx/make-reference.sh` from `docx/styles.xml`. The cover, the caption, the title, the numbered paragraphs and the signature block are built by the filter from the frontmatter. Command: `sh tools/render.sh --engine docx <court>/complaint usage/INPUT-txnd-complaint-lilly.md`.
+The docx is built by pandoc (3.6.4) from `docx/reference.docx` and `docx/txnd-complaint.lua`. `reference.docx` is made by `sh docx/make-reference.sh` from `docx/styles.xml`. The cover, the caption, the title, the numbered paragraphs and the signature block are built by the filter from the frontmatter. Command: `sh tools/render.sh --engine docx <court>/complaint usage/INPUT-complaint.md`.
 
 What follows the typst template, by construction (the styles and the filter carry the typst parameters; no docx page has been seen, so none of this is a visual claim):
 

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-tnmd-complaint-doge326cv01418.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Middle District of Tennessee (Nashville Division)
 - Case: *DOGE LLC v. Hardee’s Restaurants LLC and CKE Restaurants Holdings, Inc.*
 - Docket: No. 3:26-cv-01418 (Document 1)

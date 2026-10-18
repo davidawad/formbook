@@ -2,7 +2,7 @@
 
 Two filed Rule 12(b)(6) motions in the District of Maine, from two filers. Public court records (RECAP); used only as visual and structural references.
 
-## 1. `SAMPLE-med-motion-brief-ngiramahoro226cv00342.pdf` (primary: transcribed in `usage/`)
+## 1. `FILED-EXAMPLE-motion-brief.pdf` (primary: transcribed in `usage/`)
 
 - Court: United States District Court, District of Maine
 - Case: *R.N., by and through Merline Ngiramahoro v. Xavier Botana and Portland Public Schools*
@@ -14,7 +14,7 @@ Two filed Rule 12(b)(6) motions in the District of Maine, from two filers. Publi
 - Date fetched: 2026-10-14
 - Note: the filing has no certificate of service in the text layer (FRCP 5(d)(1)(B) does not require one for CM/ECF service).
 
-## 2. `SAMPLE-med-motion-brief-arndt226cv00117.pdf` (second filer, tier-2 comparison)
+## 2. `FILED-EXAMPLE-motion-brief-2.pdf` (second filer, tier-2 comparison)
 
 - Court: United States District Court, District of Maine
 - Case: *Arndt v. Town of Freeport*

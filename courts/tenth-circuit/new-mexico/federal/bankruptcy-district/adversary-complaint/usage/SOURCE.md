@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nmb-adversary-complaint-johnsonvmarker2401003.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | Court | United States Bankruptcy Court, District of New Mexico (`nmb`) |
 | Case | In re Lawrence Edward Marker, Case No. 23-11087-j13 (Chapter 13) |
 | Adversary | Amanda Johnson v. Lawrence Edward Marker, Adv. No. 24-01003-j |
@@ -32,7 +32,7 @@ Checked 2026-10-14: each has a text layer (pdftotext returns words). The Sanchez
 
 The Johnson exemplar is flagged for EquityA. The saved Quorum complaint is a public filing in the same court and document type, with a text layer (3,890 extracted words) and Times New Roman. It is the selected replacement for the Johnson font-audit item. Johnson remains paired with the existing sample until its transcription is rebuilt against Quorum.
 
-- File: `SAMPLE-nmb-adversary-complaint-quorumhealthresources1801028.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf`
 - Case: *Quorum Health Resources, LLC v. Bailey* (Otero County Hospital Association), Adv. No. 18-01028
 - Filer: Quorum Health Resources, LLC
 - Date filed: 2018-05-17

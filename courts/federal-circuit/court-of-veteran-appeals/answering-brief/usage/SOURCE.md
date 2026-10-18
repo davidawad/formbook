@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-cavc-answering-brief-fulton190320.pdf` (16 pages, text-based) |
+| Exemplar file | `FILED-EXAMPLE-answering-brief.pdf` (16 pages, text-based) |
 | URL fetched | https://efiling.uscourts.cavc.gov/docs1/01206324956 |
 | Court | United States Court of Appeals for Veterans Claims (CAVC) |
 | Case | *Donald R. Fulton v. Robert L. Wilkie, Secretary of Veterans Affairs* |
@@ -23,7 +23,7 @@ Party note (2026-10-17): in every CAVC appeal the appellee is the Secretary of V
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-cavc-answering-brief-penney191814.pdf` (19 pages, text-based; embedded Arial) |
+| Exemplar file | `FILED-EXAMPLE-answering-brief-2.pdf` (19 pages, text-based; embedded Arial) |
 | URL fetched | https://efiling.uscourts.cavc.gov/cmecf/servlet/TransportRoom?servlet=ShowDoc%2F01206519435 |
 | Court | United States Court of Appeals for Veterans Claims (CAVC) |
 | Case | *Ralph Penney v. Robert L. Wilkie, Secretary of Veterans Affairs* |
@@ -41,7 +41,7 @@ Found by a web search on 2026-10-17 that returned the efiling document ID.
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-cavc-answering-brief-rundell194044.pdf` (21 pages, text-based; Arial, partly embedded) |
+| Exemplar file | `FILED-EXAMPLE-answering-brief-3.pdf` (21 pages, text-based; Arial, partly embedded) |
 | URL fetched | https://efiling.uscourts.cavc.gov/cmecf/servlet/TransportRoom?servlet=ShowDoc%2F01206854603 |
 | Court | United States Court of Appeals for Veterans Claims (CAVC) |
 | Case | *Craig S. Rundell v. Robert L. Wilkie, Secretary of Veterans Affairs* |

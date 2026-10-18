@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-gactapp-motion-brief-statevdpg2022cv372734.pdf` (29 pages, text PDF, Acrobat PDFMaker for Word; Century Schoolbook) |
+| File | `FILED-EXAMPLE-motion-brief.pdf` (29 pages, text PDF, Acrobat PDFMaker for Word; Century Schoolbook) |
 | URL | https://www.democracydocket.com/wp-content/uploads/2022/11/2022-11-21-States-Emergency-Motion-for-Supersedeas15.pdf |
 | Case | State of Georgia (Defendant-Appellant) v. Democratic Party of Georgia, Inc., DSCC, and Warnock for Georgia (Plaintiffs-Appellees) |
 | Docket | Court of Appeals of Georgia: number blank on the filed cover ("No. ____"; emergency motions are filed before an appeal number issues, and Rule 40 (b) motions are not shown on the court's docket search). Trial court: Superior Court of Fulton County No. 2022-CV-372734, used in the file name |
@@ -19,4 +19,4 @@ Why this one: no docketed Court of Appeals motion with an A-number was found as 
 
 | File | SHA-256 |
 |---|---|
-| `SAMPLE-gactapp-motion-brief-statevdpg2022cv372734.pdf` | `1554ad62f148038cd23d07888a9a360154826fcfc9a88dc2ca010ea6a33506b6` |
+| `FILED-EXAMPLE-motion-brief.pdf` | `1554ad62f148038cd23d07888a9a360154826fcfc9a88dc2ca010ea6a33506b6` |

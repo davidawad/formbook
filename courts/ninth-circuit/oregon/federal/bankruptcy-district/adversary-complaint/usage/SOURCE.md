@@ -2,7 +2,7 @@
 
 | File | Court | Case / adversary | Filer | Filed | Fetched | URL |
 |---|---|---|---|---|---|---|
-| `SAMPLE-orb-adversary-complaint-greenoregon2603055.pdf` | United States Bankruptcy Court, D. Oregon | In re Green Oregon Enterprises, Inc., Case No. 24-31948-dwh7; Adv. Proc. No. 26-03055-dwh | Candace Amborn, Chapter 7 Trustee (counsel: Jordan Ramis PC, Russell D. Garrett and Learon John Bird) | 2026-07-10 (ECF Doc 1, 76 pages) | 2026-10-14 | https://storage.courtlistener.com/recap/gov.uscourts.orb.547755/gov.uscourts.orb.547755.1.0.pdf |
+| `FILED-EXAMPLE-adversary-complaint.pdf` | United States Bankruptcy Court, D. Oregon | In re Green Oregon Enterprises, Inc., Case No. 24-31948-dwh7; Adv. Proc. No. 26-03055-dwh | Candace Amborn, Chapter 7 Trustee (counsel: Jordan Ramis PC, Russell D. Garrett and Learon John Bird) | 2026-07-10 (ECF Doc 1, 76 pages) | 2026-10-14 | https://storage.courtlistener.com/recap/gov.uscourts.orb.547755/gov.uscourts.orb.547755.1.0.pdf |
 
 Docket page: https://www.courtlistener.com/docket/73603995/green-oregon-enterprises-inc-adversary-proceeding/ (RECAP, court `orb`).
 

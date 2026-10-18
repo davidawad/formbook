@@ -2,7 +2,7 @@
 
 Two filed petitions from different filers, both text-based PDFs, both public through RECAP. The tier-2 comparison in the README uses both.
 
-## 1. `SAMPLE-ptab-petition-salesforcewsouipr202200154.pdf` (used for the sample)
+## 1. `FILED-EXAMPLE-petition.pdf` (used for the sample)
 
 | Field | Value |
 |---|---|
@@ -16,7 +16,7 @@ Two filed petitions from different filers, both text-based PDFs, both public thr
 | Pages | 73, text-based, Times New Roman |
 | Caveat | The "Case 6:20-cv-01167-ADA Document 51-1 Filed 11/19/21 Page n of 73" line on each page is the district-court ECF header, not part of the PTAB petition. |
 
-## 2. `SAMPLE-ptab-petition-huaweiwsouipr202100689.pdf` (second filer, tier-2 comparison)
+## 2. `FILED-EXAMPLE-petition-2.pdf` (second filer, tier-2 comparison)
 
 | Field | Value |
 |---|---|

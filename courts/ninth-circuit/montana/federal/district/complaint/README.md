@@ -35,13 +35,13 @@ Not used: L.R. 7.1 (motions and briefs) applies to motions, not to the complaint
 
 ## Exemplar
 
-- `usage/SAMPLE-mtd-complaint-fscknudsen924cv00067.pdf`: Complaint and Demand for Jury Trial, *Free Speech Coalition, Inc. v. Knudsen*, No. 9:24-cv-00067-DWM (D. Mont., Missoula Division). 48 pages, filed by the plaintiffs' counsel May 14, 2024 (ECF 1). Text layer present (`pdffonts` shows embedded Times New Roman; `pdftotext` reads it).
+- `usage/FILED-EXAMPLE-complaint.pdf`: Complaint and Demand for Jury Trial, *Free Speech Coalition, Inc. v. Knudsen*, No. 9:24-cv-00067-DWM (D. Mont., Missoula Division). 48 pages, filed by the plaintiffs' counsel May 14, 2024 (ECF 1). Text layer present (`pdffonts` shows embedded Times New Roman; `pdftotext` reads it).
 - Provenance, searches and the caveats are in `usage/SOURCE.md`.
 - Only one exemplar. The eval-loop rule for tier 2 asks for two or three from different filers. Not done (see gaps).
 
 ## Sample
 
-- `usage/INPUT-mtd-complaint-fscknudsen.md` is a transcription of the exemplar: the cover (counsel, court title, caption, title), the lead-in, the introduction (¶¶ 1–9), jurisdiction and venue (¶¶ 10–11), parties (¶¶ 12–16, with headings "PARTIES" and "I. Plaintiffs"), the prayer for relief (lettered A–D), the demand for jury trial, the signature block, and footnote 1.
+- `usage/INPUT-complaint.md` is a transcription of the exemplar: the cover (counsel, court title, caption, title), the lead-in, the introduction (¶¶ 1–9), jurisdiction and venue (¶¶ 10–11), parties (¶¶ 12–16, with headings "PARTIES" and "I. Plaintiffs"), the prayer for relief (lettered A–D), the demand for jury trial, the signature block, and footnote 1.
 - It is an excerpt. Paragraphs 17–102 and Counts 1–5 (¶¶ 103–107) are not transcribed, so the sample numbering stops at ¶ 16. The sample's numbering is therefore a prefix of the filed numbering, which is what the overlay pairs.
 - Caption typo: the filing reads "Stat of Montana"; the sample reads "State of Montana". Everything else is transcribed as filed.
 - The sample renders to 9 pages (the target is 8–14 when the exemplar is that long; the exemplar is 48 pages).
@@ -58,11 +58,11 @@ Not used: L.R. 7.1 (motions and briefs) applies to motions, not to the complaint
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/ninth-circuit/montana/federal/district/complaint usage/INPUT-mtd-complaint-fscknudsen.md
+sh tools/render.sh courts/ninth-circuit/montana/federal/district/complaint usage/INPUT-complaint.md
 sh tools/overlay.sh courts/ninth-circuit/montana/federal/district/complaint fsc-knudsen-complaint
 ```
 
-- `usage/OUTPUT-mtd-complaint-fscknudsen.typst.pdf`: 9 pages. Typst compiled with no warnings (`render.sh` fails on any warning). Only the vendored font: `pdffonts` shows EBGaramond-Regular, -Italic and -Bold, all embedded.
+- `usage/OUTPUT-complaint.typst.pdf`: 9 pages. Typst compiled with no warnings (`render.sh` fails on any warning). Only the vendored font: `pdffonts` shows EBGaramond-Regular, -Italic and -Bold, all embedded.
 - Line pitch (measured with `pdftotext -bbox`, page 2): 32.06 pt between body lines, the double-spacing of a 14-point line. EB Garamond's line box is 0.65 em, so `body-leading = 1.64em` gives the pitch and `gap = line-pitch - 0.65em` separates blocks.
 - `usage/OVERLAY-fsc-knudsen-complaint.pdf` and `.txt` (the tools' naming: `OVERLAY-<id>` and `OUTPUT-<id>`, the same convention as the other courts; red = our render, blue = exemplar, black = both). The page map: ours p.1–7 ↔ filed p.1–7 (word overlap 67–89%); ours p.8–9 ↔ filed p.47 (the prayer and signature), since the sample's last pages are the filed prayer and signature. The overlay is a diagnostic, not a score: the exemplar's cover uses a different counsel layout (two columns) and the filed body is Times New Roman, so the text lines will not coincide.
 
@@ -106,7 +106,7 @@ Reviewed pages: 9 of 9.
 
 **docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx` from `reference-styles.xml`), `mtd-complaint.lua` (cover, caption, numbered paragraphs, prayer letters, signature), `fonts.conf`.
 
-Render: `export FONTCONFIG_FILE=$PWD/docx/fonts.conf` (the LibreOffice conversion must see the vendored EB Garamond; without it LibreOffice substitutes another serif), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-mtd-complaint-fscknudsen.md`. Output: `usage/OUTPUT-mtd-complaint-fscknudsen.docx` and `.docx.pdf` (9 pages).
+Render: `export FONTCONFIG_FILE=$PWD/docx/fonts.conf` (the LibreOffice conversion must see the vendored EB Garamond; without it LibreOffice substitutes another serif), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`. Output: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (9 pages).
 
 - Matches the typst output: EB Garamond 14 pt; exact 32 pt double spacing; 1 in margins on Letter; page number centred at the foot from the cover; two-column counsel block; court title; caption with a right and bottom rule on the party cell; numbered paragraphs with the number at 0.5 in; prayer items lettered A. to D. at 0.5 in; unnumbered `%` paragraphs; footnotes at 14 pt single-spaced; signature block. Page count: 9, as typst.
 - Differs: pagination is LibreOffice's (prayer item D starts p.9; typst keeps A. to D. on p.8). Exact line spacing puts each text line about 5 to 9 pt lower than typst. Word may paginate differently.

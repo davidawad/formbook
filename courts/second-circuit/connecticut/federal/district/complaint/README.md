@@ -4,17 +4,17 @@ Doc type: **complaint** (Complaint and Demand for Jury Trial) in the United Stat
 
 | Item | Status |
 |---|---|
-| exemplar | yes, one filer: `usage/SAMPLE-ctd-complaint-forzano326cv00665.pdf` (see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ctd-complaint-forzano.md`, the whole filing: caption, lead-in, all 66 paragraphs, five causes of action, prayer, jury demand, signature block |
-| render | ok: `usage/OUTPUT-ctd-complaint-forzano.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular and Bold, embedded), no typst warnings |
+| exemplar | yes, one filer: `usage/FILED-EXAMPLE-complaint.pdf` (see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`, the whole filing: caption, lead-in, all 66 paragraphs, five causes of action, prayer, jury demand, signature block |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond Regular and Bold, embedded), no typst warnings |
 | typeface | no face named by the rules; EB Garamond kept (vendored, embedded). See Known gaps 2 |
-| overlay | ok: `usage/OVERLAY-forzano-complaint.pdf` and `OVERLAY-forzano-complaint.txt` (pairs by text; exemplar PDF `usage/SAMPLE-ctd-complaint-forzano326cv00665.pdf` fetched from the SOURCE.md URL on 2026-10-15) |
+| overlay | ok: `usage/OVERLAY-forzano-complaint.pdf` and `OVERLAY-forzano-complaint.txt` (pairs by text; exemplar PDF `usage/FILED-EXAMPLE-complaint.pdf` fetched from the SOURCE.md URL on 2026-10-15) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi to PNG and viewed on 2026-10-15) |
 
 Commands (run with `export PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/second-circuit/connecticut/federal/district/complaint usage/INPUT-ctd-complaint-forzano.md
+sh tools/render.sh courts/second-circuit/connecticut/federal/district/complaint usage/INPUT-complaint.md
 sh tools/overlay.sh courts/second-circuit/connecticut/federal/district/complaint forzano-complaint
 ```
 
@@ -89,7 +89,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (EB Garamond 12 pt, exact 27.6 pt double-spaced lines, 1 in margins, centred page number from page 2); `docx/complaint.lua` writes the cover (court, caption table with its rules), the numbered paragraphs (typed numbers), the lettered and bulleted lists and the signature block. Output: `usage/OUTPUT-ctd-complaint-forzano.docx` and `.docx.pdf` (LibreOffice 26.8, `pdffonts`: EBGaramond Regular and Bold, embedded), 11 pages, the same count as the typst render.
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (EB Garamond 12 pt, exact 27.6 pt double-spaced lines, 1 in margins, centred page number from page 2); `docx/complaint.lua` writes the cover (court, caption table with its rules), the numbered paragraphs (typed numbers), the lettered and bulleted lists and the signature block. Output: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice 26.8, `pdffonts`: EBGaramond Regular and Bold, embedded), 11 pages, the same count as the typst render.
 
 - Matches the typst output: US Letter; 1 in margins; EB Garamond 12 pt; every body line on the 27.6 pt pitch (measured on the PDF: 27.6 pt between body lines, as in typst); no widow control, as in typst, so the page breaks fall where typst's do; caption with the party column ruled right and bottom and the case number, date, title and jury demand at right; unnumbered lead-in, prayer and jury demand; lettered prayer items (a) to (h); bullets in paragraph 19; signature block at the right with "Dated" at left; no page number on page 1.
 - Differs from typst: in Word and LibreOffice an exact-spaced line puts its text lower in the line box than typst does, so the first line of each page (and the court title) sits about 14 pt lower; the paragraph pitch is unchanged. The paragraph number is followed by a tab stop at 1 in, where typst's text position follows the width of the number; the sample's numbers are one or two digits, so the text starts at the same place. Table borders are drawn by Word and by LibreOffice slightly differently; judged on the LibreOffice PDF.

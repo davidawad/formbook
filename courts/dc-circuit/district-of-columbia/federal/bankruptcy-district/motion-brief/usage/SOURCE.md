@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-dcb-motion-brief-swainlanding2510013.pdf` (7 pages, text layer present: `pdftotext` reads it; `pdffonts` lists Times-Roman, Times-Bold, Times-Italic and Courier, none embedded)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (7 pages, text layer present: `pdftotext` reads it; `pdffonts` lists Times-Roman, Times-Bold, Times-Italic and Courier, none embedded)
 - Court: United States Bankruptcy Court for the District of Columbia (`dcb`)
 - Case: *Swain Landing LaPlata JC, LLC v. Catherine Swain and Percy Swain*, adversary proceeding, in the chapter 11 case of *Swain Landing LaPlata JC, LLC*, No. 25-184 ELG (the ECF header reads `Case 25-10013-ELG Doc 5`; the caption reads "Adversary No. 18-00173 MMH" and "Case No. 25-184 ELG")
 - Document: Defendants' Catherine Swain and Percy Swain's Motion to Dismiss Adversary Complaint and Memorandum in Support (ECF Doc 5). Rule 12(b)(1) (Rooker-Feldman) and 12(b)(6) grounds, with a memorandum, a certificate of service
@@ -23,7 +23,7 @@
 
 ## 2. Second filer: Webster v. R13 Community Partners LLC (defendants' motion to dismiss)
 
-- File: `SAMPLE-dcb-motion-brief-r132510053.pdf` (18 pages)
+- File: `FILED-EXAMPLE-motion-brief-2.pdf` (18 pages)
 - Court: United States Bankruptcy Court for the District of Columbia (`dcb`)
 - Case: *Wendell W. Webster, chapter 7 Trustee v. R13 Community Partners LLC, et al.*, Adv. No. 25-10053-ELG, in the chapter 7 case of *Broughton Construction Co., LLC*, No. 23-00378-ELG
 - Docket / document: Doc 12, "DEFENDANTS' MOTION TO DISMISS AND BRIEF IN SUPPORT" (FRBP 7012 / FRCP 12(b)(6); introduction, background, argument, conclusion, signature, certificate of service; motion and brief combined in one paper, as LBR 9013-1(e)(2) permits)

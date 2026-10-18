@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "mtb-motion-brief.typ": mtb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-mtb-motion-brief-mohlertrusteesalemotion.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #mtb-motion-brief(meta, body)

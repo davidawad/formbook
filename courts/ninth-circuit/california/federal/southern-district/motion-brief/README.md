@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/california/federal/southern-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-casd-motion-brief-sager326cv03372.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-casd-motion-brief-sager.md` (a portion of the 42-page attachment: cover, TOC, TOA, introduction, factual background, standard of review, arguments I, II and III, conclusion, signature) |
-| render | ok: `usage/OUTPUT-casd-motion-brief-sager.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (a portion of the 42-page attachment: cover, TOC, TOA, introduction, factual background, standard of review, arguments I, II and III, conclusion, signature) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-sager-motion-brief.pdf` and `OVERLAY-sager-motion-brief.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; the cover was re-checked after the last change; all 8 re-viewed on 2026-10-15 in the typeface pass, no template change) |
 
@@ -75,7 +75,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ### docx
 
-Built by `docx/make-reference.sh` (writes `docx/reference.docx` from pandoc's default reference) and `docx/casd.lua` (the filter). Sample: `usage/OUTPUT-casd-motion-brief-sager.docx` (zip and XML parts checked with `unzip -t` and `xmllint`; the LibreOffice PDF was not made).
+Built by `docx/make-reference.sh` (writes `docx/reference.docx` from pandoc's default reference) and `docx/casd.lua` (the filter). Sample: `usage/OUTPUT-motion-brief.docx` (zip and XML parts checked with `unzip -t` and `xmllint`; the LibreOffice PDF was not made).
 
 Set in `styles.xml` and `sectPr` only, **not rendered** (no LibreOffice on the build box):
 

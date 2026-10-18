@@ -5,9 +5,9 @@ Doc type `adversary-complaint` (FRBP 7001 adversary proceeding, commenced by com
 ## Status
 
 - Exemplar: yes, one filer (RMW Acquisition Company, LLC, Adv. 13-01437, filed 2013-12-27, 14 pp.). See `usage/SOURCE.md`.
-- Render: ok (`sh tools/render.sh <this dir> usage/INPUT-ilnb-adversary-complaint-rmwcomplaint.md`, 13 pages, no typst warnings, EB Garamond only).
+- Render: ok (`sh tools/render.sh <this dir> usage/INPUT-adversary-complaint.md`, 13 pages, no typst warnings, EB Garamond only).
 - Overlay: ok (`sh tools/overlay.sh <this dir> rmw-complaint`, `usage/OVERLAY-rmw-complaint.pdf` and `.txt`).
-- Pages reviewed: 13 of 13 (every page of `usage/OUTPUT-ilnb-adversary-complaint-rmwcomplaint.typst.pdf` rendered at 60 dpi and looked at, after the last template change).
+- Pages reviewed: 13 of 13 (every page of `usage/OUTPUT-adversary-complaint.typst.pdf` rendered at 60 dpi and looked at, after the last template change).
 - Second filer: not collected. A candidate is listed in `usage/SOURCE.md` but was not downloaded.
 
 ## Governing rules
@@ -86,8 +86,8 @@ Pages 1 to 7 pair one to one. From page 8 the pairing is one page later: our pag
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default; `ilnb.lua` lays out the cover, caption, numbered paragraphs, prayer and signature). Built with `sh tools/render.sh --engine docx <this dir> usage/INPUT-ilnb-adversary-complaint-rmwcomplaint.md`.
+DOCX (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default; `ilnb.lua` lays out the cover, caption, numbered paragraphs, prayer and signature). Built with `sh tools/render.sh --engine docx <this dir> usage/INPUT-adversary-complaint.md`.
 
 - **Matches the typst form (in the styles and filter; not checked against a rendered page):** EB Garamond 13 pt; exact 24 pt line pitch; 0.5 in first-line indent; US Letter with 1 in margins; centred 12 pt PAGE number in the footer; level-1 headings centred bold capitals, level-2 bold, level-3 bold italic; numbered body paragraphs; lettered prayer items.
 - **Differs or unverified:** the caption is a two-column table whose party column is ruled on the right and bottom, with widths taken from the typst layout (3.4 in, 0.3 in gutter), but its borders are not verified against the typst layout. The signature block stacks the "Dated" and city lines above the signature column (typst sets them side by side). Footnotes and body text are pandoc's own footnote and paragraph handling. The docx `.docx` was validated (zip and XML well-formed; every `pStyle` defined; one footer relation resolves); it was not opened in Word.
-- **BLOCKED:** `docx.pdf` (`usage/OUTPUT-rmw-complaint.docx.pdf`) is not produced because `soffice` (LibreOffice) is not installed on this box, so `tools/render.sh --engine docx` stops after writing `usage/OUTPUT-ilnb-adversary-complaint-rmwcomplaint.docx`. Pages reviewed: 0. The docx gates (`tools/check.sh --engine docx`) cannot run. Pagination in Word may differ from LibreOffice.
+- **BLOCKED:** `docx.pdf` (`usage/OUTPUT-rmw-complaint.docx.pdf`) is not produced because `soffice` (LibreOffice) is not installed on this box, so `tools/render.sh --engine docx` stops after writing `usage/OUTPUT-adversary-complaint.docx`. Pages reviewed: 0. The docx gates (`tools/check.sh --engine docx`) cannot run. Pagination in Word may differ from LibreOffice.

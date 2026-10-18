@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| Saved file | `SAMPLE-ctb-motion-brief-despinspillsbury2405014.pdf` |
+| Saved file | `FILED-EXAMPLE-motion-brief.pdf` |
 | Court | United States Bankruptcy Court, District of Connecticut (Bridgeport Division) |
 | Case | *Luc A. Despins, Chapter 11 Trustee v. Pillsbury Winthrop Shaw Pittman LLP*, Adv. Pro. No. 24-05014 (JAM); main case *In re Ho Wan Kwok, et al.*, Case No. 22-50073 (JAM) (Jointly Administered) |
 | Document | Doc. 11-1: Memorandum of Law in Support of Defendant Pillsbury Winthrop Shaw Pittman LLP's Motion to Dismiss the Complaint (22 pp.; attachment to Doc. 11, the motion) |
@@ -29,7 +29,7 @@ The brief asks for one exemplar per doc type, so only the first is saved. A seco
 
 | Item | Value |
 |---|---|
-| Saved file | `SAMPLE-ctb-motion-brief-hamiltonaca2405249.pdf` |
+| Saved file | `FILED-EXAMPLE-motion-brief-2.pdf` |
 | Court | United States Bankruptcy Court, District of Connecticut |
 | Case | *Luc A. Despins, Chapter 11 Trustee v. ACA Capital Group Ltd., et al.*, Adv. Pro. No. 24-05249 (JAM); main case *In re Ho Wan Kwok, et al.*, Case No. 22-50073 (JAM) (Jointly Administered) |
 | Document | Doc. 86-1: Memorandum of Law in Support of Motion, by Defendants Hamilton Capital Holding Limited, Hamilton Investment Management Limited, Hamilton Opportunity Fund SPC, and William Je, to Dismiss Complaint (29 pp.: cover, table of contents, table of authorities i-v, body 1-22, signature, certificate of service) |

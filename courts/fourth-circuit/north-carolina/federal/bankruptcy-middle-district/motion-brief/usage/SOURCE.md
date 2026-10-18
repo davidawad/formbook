@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ncmb-motion-brief-eastwoodbryant2502009.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Middle District of North Carolina (Greensboro Division)
 - Case: *Eastwood Construction Partners, LLC d/b/a Eastwood Homes v. James Lawrence Bryant, Jr. and Sharon Renea Bryant*, adversary proceeding 25-02009, main case No. 25-10147 (Chapter 7)
 - Document: "Plaintiff Eastwood Construction Partners, LLC's Brief in Support of Its Motion for Summary Judgment" (27 pages, including the certificate of service on page 27), filed as Doc 32

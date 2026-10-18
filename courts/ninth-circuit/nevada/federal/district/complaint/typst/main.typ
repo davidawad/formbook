@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nvd-complaint.typ": nvd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nvd-complaint-williams.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #nvd-complaint(meta, body)

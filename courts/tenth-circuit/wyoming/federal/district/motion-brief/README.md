@@ -2,8 +2,8 @@
 
 - Court: `wyd`, United States District Court for the District of Wyoming (`courts/tenth-circuit/wyoming/federal/district/`)
 - Doc type: `motion-brief`. A memorandum in support of a dispositive motion (Fed. R. Civ. P. 12(b)(6), 12(b)(7) and 19), filed with the motion itself as a separate document.
-- Exemplar: `usage/SAMPLE-wyd-motion-brief-elizondo126cv00263.pdf` (*Elizondo v. Alger*, No. 1:26-cv-00263-SWS, Document 8, filed 2026-10-05, 12 pages; provenance in `usage/SOURCE.md`). One filer (defendant's counsel). The motion (Document 7) is not in the exemplar, so the sample is the memorandum only.
-- Sample: `usage/INPUT-wyd-motion-brief-elizondo.md` (transcription of the whole memorandum from the introduction through the conclusion, with the signature block and certificate of service in the frontmatter).
+- Exemplar: `usage/FILED-EXAMPLE-motion-brief-3.pdf` (*Elizondo v. Alger*, No. 1:26-cv-00263-SWS, Document 8, filed 2026-10-05, 12 pages; provenance in `usage/SOURCE.md`). One filer (defendant's counsel). The motion (Document 7) is not in the exemplar, so the sample is the memorandum only.
+- Sample: `usage/INPUT-motion-brief.md` (transcription of the whole memorandum from the introduction through the conclusion, with the signature block and certificate of service in the frontmatter).
 - Status: template, sample, render, overlay and page review done 2026-10-14 (below). Fonts pass 2026-10-15: the rule names no face, so the template keeps EB Garamond (see Typeface); render, overlay and all 9 pages re-checked. `court.json` untouched.
 
 ## Files
@@ -12,8 +12,8 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `wyd-motion-brief`. |
 | `typst/wyd-motion-brief.typ` | Template. Parameter block at the top: EB Garamond 13 pt, double spacing (`body-leading = 1.05em`), one-inch margins, 8½ × 11, `page-limit = 25`. |
-| `usage/INPUT-wyd-motion-brief-elizondo.md` | Markdown contract sample (frontmatter: caption, attorney block, date, signature, certificate; body: `#` headings, paragraphs, a numbered conclusion). |
-| `usage/OUTPUT-wyd-motion-brief-elizondo.typst.pdf` | `sh tools/render.sh courts/tenth-circuit/wyoming/federal/district/motion-brief usage/INPUT-wyd-motion-brief-elizondo.md` (9 pages, no typst warnings). |
+| `usage/INPUT-motion-brief.md` | Markdown contract sample (frontmatter: caption, attorney block, date, signature, certificate; body: `#` headings, paragraphs, a numbered conclusion). |
+| `usage/OUTPUT-motion-brief.typst.pdf` | `sh tools/render.sh courts/tenth-circuit/wyoming/federal/district/motion-brief usage/INPUT-motion-brief.md` (9 pages, no typst warnings). |
 | `usage/OVERLAY-elizondo-motion-brief.pdf`, `OVERLAY-elizondo-motion-brief.txt` | `sh tools/overlay.sh courts/tenth-circuit/wyoming/federal/district/motion-brief elizondo-motion-brief` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. The PDF is re-downloaded from the URL in `SOURCE.md`; it is not in git. |
 
@@ -47,7 +47,7 @@ The rule names no face, so the template keeps EB Garamond at 13 pt. The filed ex
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-wyd-motion-brief-elizondo.typst.pdf` was rendered at 60 dpi and viewed (9 of 9). Pages were viewed in pairs; the paired images were rendered from the final PDF after the last template change.
+Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed (9 of 9). Pages were viewed in pairs; the paired images were rendered from the final PDF after the last template change.
 
 | Page | Content | Result |
 |---|---|---|
@@ -80,7 +80,7 @@ Tier-2 findings (OPEN or ACCEPTED):
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form. Pages reviewed for this section: 9 of 9 (typst render, 60 dpi).
-- **docx** (`docx/`): `docx/reference.docx` (pandoc on it; EB Garamond 13 pt, exact 26 pt line pitch, 1 in margins, centered PAGE footer, borderless tables for the attorney block and caption), `docx/build-reference.sh` (rebuilds the reference; uses `ziptool`, since this box has no `unzip` or `zip`), `docx/wyd.lua` (builds the attorney block, court name, caption with the one-inch designations, title, the "I." and "A." headings with hanging numbers, the centered CONCLUSION, the numbered relief, the signature block and the certificate of service from the frontmatter, following `typst/wyd-motion-brief.typ`). Build from this folder: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/wyd.lua usage/INPUT-wyd-motion-brief-elizondo.md -o usage/OUTPUT-wyd-motion-brief-elizondo.docx`. The `.docx` passes the zip and XML checks (every part `xmllint --noout`); it has not been opened in Word or LibreOffice.
+- **docx** (`docx/`): `docx/reference.docx` (pandoc on it; EB Garamond 13 pt, exact 26 pt line pitch, 1 in margins, centered PAGE footer, borderless tables for the attorney block and caption), `docx/build-reference.sh` (rebuilds the reference; uses `ziptool`, since this box has no `unzip` or `zip`), `docx/wyd.lua` (builds the attorney block, court name, caption with the one-inch designations, title, the "I." and "A." headings with hanging numbers, the centered CONCLUSION, the numbered relief, the signature block and the certificate of service from the frontmatter, following `typst/wyd-motion-brief.typ`). Build from this folder: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/wyd.lua usage/INPUT-motion-brief.md -o usage/OUTPUT-motion-brief.docx`. The `.docx` passes the zip and XML checks (every part `xmllint --noout`); it has not been opened in Word or LibreOffice.
 - **docx differences from typst:** the relief items are typed numbers with a hanging indent, not Word list numbering; the caption and attorney block are tables, which Word and LibreOffice may draw slightly differently from typst; the line pitch is exact 26 pt, not Word's "double"; the typst 25-page assertion (LR 7.1(b)(2)(B)) is not reproduced in the docx, so the page limit is checked only on the typst render and on the LibreOffice PDF once it can be produced.
-- **docx not built:** `usage/INPUT-wyd-motion-brief-elizondomemo.md` (the earlier memorandum transcription). The typst template cannot render it (its frontmatter has `date`, not `dated`, and no `certificate`), so there is no typst form to match and no `OUTPUT-elizondo-memo.docx`.
+- **docx not built:** `usage/INPUT-motion-brief-2.md` (the earlier memorandum transcription). The typst template cannot render it (its frontmatter has `date`, not `dated`, and no `certificate`), so there is no typst form to match and no `OUTPUT-elizondo-memo.docx`.
 - **docx BLOCKED:** every gate check measured on the LibreOffice PDF of the `.docx` (`usage/OUTPUT-elizondo-motion-brief.docx.pdf`) is BLOCKED. This folder has no `checks.yaml` (the court folder has none), so there are no check IDs to list, and `tools/check.sh` cannot run for `wyd` on any engine. Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.

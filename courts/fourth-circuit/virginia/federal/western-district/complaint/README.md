@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/virginia/federal/western-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `usage/SAMPLE-vawd-complaint-extremedriver325cv00099.pdf` (9 pages, counsel, box caption) and `usage/SAMPLE-vawd-complaint-moler725cv00937.pdf` (33 pages, counsel, ")" caption). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-vawd-complaint-extremedriver.md`: a full transcription of the 9-page complaint (all 40 numbered paragraphs, both counts, prayer, signature). |
-| render | ok: `usage/OUTPUT-vawd-complaint-extremedriver.typst.pdf`, 8 pages, letter, typst 0.15.0, EB Garamond only (embedded), no warnings. |
+| exemplar | yes, two filers: `usage/FILED-EXAMPLE-complaint.pdf` (9 pages, counsel, box caption) and `usage/FILED-EXAMPLE-complaint-2.pdf` (33 pages, counsel, ")" caption). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-complaint.md`: a full transcription of the 9-page complaint (all 40 numbered paragraphs, both counts, prayer, signature). |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, letter, typst 0.15.0, EB Garamond only (embedded), no warnings. |
 | overlay | ok: `usage/OVERLAY-extreme-driver-complaint.pdf` and `.txt`. |
 | pages reviewed | 8 of 8 (each page rendered at 60 dpi and viewed after the last layout change; page 1 re-checked after the final edit). |
 
@@ -108,7 +108,7 @@ The overlay is a diagnostic, not a score. It shows the difference in position, n
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/vawd-complaint.lua` builds the cover, the caption, the numbered allegations, the lettered prayer and the signature block. Rendered with `sh tools/render.sh --engine docx complaint usage/INPUT-vawd-complaint-extremedriver.md` (LibreOffice PDF: `usage/OUTPUT-vawd-complaint-extremedriver.docx.pdf`).
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/vawd-complaint.lua` builds the cover, the caption, the numbered allegations, the lettered prayer and the signature block. Rendered with `sh tools/render.sh --engine docx complaint usage/INPUT-complaint.md` (LibreOffice PDF: `usage/OUTPUT-complaint.docx.pdf`).
 
 - Matches the typst form: EB Garamond 13 pt (embedded, pdffonts shows EBGaramond only), 1 in margins on letter, 27.6 pt double spacing, 0.5 in first-line indent, centered three-line court title, box caption with the file number opposite, numbered paragraphs (headings and the WHEREFORE clause unnumbered), prayer items a., b., ..., signature block at 3.25 in, centered page number at 12 pt.
 - Differs: the LibreOffice PDF runs 9 pages (typst 8): Word-style keep-with-next on headings and the exact line pitch paginate a little longer. The ")" marks of the parens caption (not used by this sample) are sized from the text length, not measured.

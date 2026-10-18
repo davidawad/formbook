@@ -1,12 +1,12 @@
 # Exemplar source: appellant's brief (opening brief)
 
-**Result: one filed exemplar saved.** `SAMPLE-nyappdiv-opening-brief-hussaincr231493.pdf`.
+**Result: one filed exemplar saved.** `FILED-EXAMPLE-opening-brief.pdf`.
 
 ## Exemplar 1
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nyappdiv-opening-brief-hussaincr231493.pdf` (93 pages, text layer present, fonts not embedded) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (93 pages, text layer present, fonts not embedded) |
 | Case | *People v. Nauman Hussain* |
 | Court | Supreme Court of the State of New York, Appellate Division, **Third** Department |
 | Docket | A.D. No. CR-23-1493 (NYSCEF; trial court: Schoharie County, Lynch, J.) |

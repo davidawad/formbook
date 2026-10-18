@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-gub-motion-brief-campos2000001.pdf` (11 pages, text layer present; Word-generated, fonts Times New Roman and Calibri) |
+| File | `FILED-EXAMPLE-motion-brief.pdf` (11 pages, text layer present; Word-generated, fonts Times New Roman and Calibri) |
 | Court | United States Bankruptcy Court, District of Guam (the caption reads "UNITED STATES DISTRICT COURT, DISTRICT COURT OF GUAM") |
 | Case | *Gina Ann Perez Campos and Jason Paul Castro Campos v. Joseph Lopez and Marie Lopez, 888 Guam LLC dba Clean Shot Guam*, Adv. Proc. No. 20-00001, main case No. 19-00090 (Chapter 7 after conversion; stipulated dismissal May 2020) |
 | Filer | Defendants Joseph and Marie Lopez and 888 Guam LLC dba Clean Shot Guam, by the Law Offices of Minakshi V. Hemlani, P.C. (Tamuning, Guam) |

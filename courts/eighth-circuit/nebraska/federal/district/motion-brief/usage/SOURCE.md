@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ned-motion-brief-sandoval426cv03089.pdf` (16 pages; text layer present, fonts Times New Roman and Times New Roman Italic, embedded) |
+| File | `FILED-EXAMPLE-motion-brief.pdf` (16 pages; text layer present, fonts Times New Roman and Times New Roman Italic, embedded) |
 | Fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ned.110740/gov.uscourts.ned.110740.12.0.pdf (RECAP archive copy of PACER document 12) |
 | Docket page | https://www.courtlistener.com/docket/72500032/sandoval-v-peden/ |
 | Case | *Sandoval v. Peden*, No. 4:26-cv-03089 (D. Neb.), Judge Gerrard (JMG) |

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "txed-complaint.typ": txed-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-txed-complaint-pacsec3.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #txed-complaint(meta, body)

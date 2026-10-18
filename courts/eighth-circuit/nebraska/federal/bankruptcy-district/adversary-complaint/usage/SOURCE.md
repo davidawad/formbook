@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nebraskab-adversary-complaint-metainterbake1808283.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint-2.pdf` |
 | Document | Complaint to Avoid and Recover Transfers Pursuant to 11 U.S.C. §§ 547 and 550 and to Disallow Claims Pursuant to 11 U.S.C. § 502 (ECF Doc 1, 9 pages) |
 | Court | United States Bankruptcy Court, District of Nebraska (`nebraskab`) |
 | Case | *META Advisors LLC on behalf of G-Estate Management Company, Inc. v. Interbake Foods LLC*, Adv. Pro. (adversary no. 18-08283), main case *In re Gordmans Stores, Inc.*, Case No. 17-80304 (TLS), Chapter 11, jointly administered |
@@ -19,7 +19,7 @@ Public court record. The exemplar's ECF header and footnote 1 (debtor list) are 
 
 The brief asks for one exemplar per doc type. The second filer above is read for conventions only. The search also found *Myers v. Stehlik*, Adv. 21-04025 (Doc 1, 15 pages, text layer), and *Kelly v. Zuhlke* Doc 1; they were not saved. Tier-2 review is therefore against one filer, and this is a known gap (see `../README.md`).
 
-## SAMPLE-nebraskab-adversary-complaint-kelly2404011.pdf
+## FILED-EXAMPLE-adversary-complaint.pdf
 
 - Case: *Kelly, Chapter 7 Trustee v. Zuhlke*, Adv. No. 24-04011, Document 1.
 - Filer: Philip M. Kelly, Chapter 7 trustee, represented by separate counsel from the META Advisors exemplar above.

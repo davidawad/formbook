@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-gactapp-opening-brief-campbellvtaylora26a1103.pdf` (18 pages, text PDF, Foxit; Times New Roman) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (18 pages, text PDF, Foxit; Times New Roman) |
 | Original URL | https://www.gaappeals.gov/wp-content/uploads/2026/04/A26A1103-BRIEF-OF-APPELLANT-NT.pdf (the court's own posting of briefs in argued cases) |
 | Fetched from | https://web.archive.org/web/2026id_/https://www.gaappeals.gov/wp-content/uploads/2026/04/A26A1103-BRIEF-OF-APPELLANT-NT.pdf (Internet Archive copy; gaappeals.gov returns HTTP 403 to this box) |
 | Case | Doris Campbell v. Clinton Taylor and Kaye E. Smith, as Administrator of the Estate of Susan Taylor |
@@ -20,4 +20,4 @@ How it was found: web search for "Court of Appeals of Georgia" brief of appellan
 
 | File | SHA-256 |
 |---|---|
-| `SAMPLE-gactapp-opening-brief-campbellvtaylora26a1103.pdf` | `fdaa90428fa058337a210ea5992973c47a6dfdc1563d8deac0ef7d3086847451` |
+| `FILED-EXAMPLE-opening-brief.pdf` | `fdaa90428fa058337a210ea5992973c47a6dfdc1563d8deac0ef7d3086847451` |

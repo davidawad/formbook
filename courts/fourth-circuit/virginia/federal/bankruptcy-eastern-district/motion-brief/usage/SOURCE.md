@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-vaeb-motion-brief-amirivvaziri2601002.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Eastern District of Virginia (Alexandria Division)
 - Case: *Amiri v. Vaziri*, Adv. Proc. No. 26-01002-BFK, main case *In re Abtin Vaziri*, Chapter 7, No. 25-12110-BFK
 - Document: Motion for Summary Judgment and Memorandum in Support (19 pages), Doc 18

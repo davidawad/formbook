@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "calctapp-answering-brief.typ": calctapp-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-calctapp-answering-brief-brownrespondentsbrief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-answering-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #calctapp-brief(meta, body)

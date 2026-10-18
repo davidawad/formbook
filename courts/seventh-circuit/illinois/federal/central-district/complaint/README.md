@@ -5,9 +5,9 @@ Folder: `courts/seventh-circuit/illinois/federal/central-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ilcd-complaint-thomas226cv02194.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ilcd-complaint-thomas.md` (the whole complaint, transcribed; slurs and profanity bracketed) |
-| render | ok: `usage/OUTPUT-ilcd-complaint-thomas.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the whole complaint, transcribed; slurs and profanity bracketed) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-thomas-complaint.pdf` and `OVERLAY-thomas-complaint.txt` |
 | pages reviewed | 12 of 12, every page rendered at 60 dpi and viewed in its final state; re-rendered and re-viewed 2026-10-15 in the fonts pass (no font change) |
 
@@ -79,7 +79,7 @@ The overlay (`OVERLAY-thomas-complaint.txt`) pairs our pages 1 to 12 with the fi
 
 ## Engines
 
-**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/ilcd.lua` lays out the cover, caption, numbered paragraphs, lettered prayer items and signature block. Built by `sh tools/render.sh --engine docx <this folder> usage/INPUT-ilcd-complaint-thomas.md`, which writes `usage/OUTPUT-ilcd-complaint-thomas.docx`.
+**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/ilcd.lua` lays out the cover, caption, numbered paragraphs, lettered prayer items and signature block. Built by `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`, which writes `usage/OUTPUT-complaint.docx`.
 
 - Matches the typst form: EB Garamond 12 pt body; exact 24 pt (double) line pitch; 0.5 in first-line indent; letter paper with 1 in margins; centered page number on every page; cover order (court title, caption, title, "EQUITABLE RELIEF" marking when set); paragraphs numbered 1 to 113 by the filter; prayer items lettered (a) to (h); "Dated", "Respectfully submitted," and each "/s/" block with the typed details.
 - Differs or unverified: the caption's ")" marks are one per caption line as written, not one per line a long name wraps onto (the typst grid counts wrapped lines; the docx cannot). The paragraph number and the lettered label each end at a tab stop at 1 in (typst sets a fixed gap after the label, so the text start varies with the label width). Single-spaced lines are exact 13.8 pt, which approximates typst's single leading. The caption table is set without borders; its layout is not compared with typst. EB Garamond must be installed on the machine that opens the file, or Word substitutes a face silently.

@@ -2,8 +2,8 @@
 
 - Court: `nvb`, United States Bankruptcy Court, District of Nevada (`courts/ninth-circuit/nevada/federal/bankruptcy-district/`)
 - Doc type: `motion-brief`. A contested-matter motion in the main case, with its legal memorandum in the same paper (LR 9014(c)(1)); the motion here is a Rule 59(e)/60(b) motion for reconsideration.
-- Exemplar: `usage/SAMPLE-nvb-motion-brief-epicahumanhealth2650579.pdf` (*In re Epica Human Health LLC*, Case No. BK-26-50579-gs, Motion for Reconsideration, filed 2026-07-16, ECF 79; provenance in `usage/SOURCE.md`). One filer only; see Gaps.
-- Sample: `usage/INPUT-nvb-motion-brief-epicamotionreconsideration.md` (transcribed from the exemplar; 10 pages rendered, the exemplar's 10).
+- Exemplar: `usage/FILED-EXAMPLE-motion-brief.pdf` (*In re Epica Human Health LLC*, Case No. BK-26-50579-gs, Motion for Reconsideration, filed 2026-07-16, ECF 79; provenance in `usage/SOURCE.md`). One filer only; see Gaps.
+- Sample: `usage/INPUT-motion-brief.md` (transcribed from the exemplar; 10 pages rendered, the exemplar's 10).
 - Status: template, render, overlay and page review done (below). `court.json` untouched; no status set.
 
 ## Files
@@ -12,8 +12,8 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `nvb-motion-brief`. |
 | `typst/nvb-motion-brief.typ` | Template. Parameter block at the top, with the rule each traces to. Footnotes, block quotations, lists, headings and the signature are handled here. |
-| `usage/INPUT-nvb-motion-brief-epicamotionreconsideration.md` | Markdown contract sample: frontmatter (counsel, debtor, case number, chapter, title, hearing, date, signature); body with headings, paragraphs, one footnote, a block quotation, and a certificate of service. |
-| `usage/OUTPUT-nvb-motion-brief-epicamotionreconsideration.typst.pdf` | `sh tools/render.sh <court>/motion-brief usage/INPUT-nvb-motion-brief-epicamotionreconsideration.md` (10 pages, EB Garamond only, no typst warnings). |
+| `usage/INPUT-motion-brief.md` | Markdown contract sample: frontmatter (counsel, debtor, case number, chapter, title, hearing, date, signature); body with headings, paragraphs, one footnote, a block quotation, and a certificate of service. |
+| `usage/OUTPUT-motion-brief.typst.pdf` | `sh tools/render.sh <court>/motion-brief usage/INPUT-motion-brief.md` (10 pages, EB Garamond only, no typst warnings). |
 | `usage/OVERLAY-epica-motion-reconsideration.pdf`, `.txt` | `sh tools/overlay.sh <court>/motion-brief epica-motion-reconsideration` (red = ours, blue = filed, black = both agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -49,7 +49,7 @@ Choices the rules leave open (tier 2 or 3, not asserted mechanically): the cover
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-nvb-motion-brief-epicamotionreconsideration.typst.pdf` was rasterized at 60 dpi and viewed (10 of 10), against the filed exemplar page of the same number.
+Every page of `OUTPUT-motion-brief.typst.pdf` was rasterized at 60 dpi and viewed (10 of 10), against the filed exemplar page of the same number.
 
 | Page | Content | Result |
 |---|---|---|
@@ -76,7 +76,7 @@ Every page of `OUTPUT-nvb-motion-brief-epicamotionreconsideration.typst.pdf` was
 
 ## Engines
 
-docx (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx` from pandoc's default reference) and the filter `docx/nvb-motion-brief.lua`. Rendered with `sh tools/render.sh --engine docx <this folder> usage/INPUT-nvb-motion-brief-epicamotionreconsideration.md`: `usage/OUTPUT-nvb-motion-brief-epicamotionreconsideration.docx` and its LibreOffice PDF `.docx.pdf` (11 pages; the typst render is 10). Page review: `reviews/2026-10-15-docx.md` (every page viewed).
+docx (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx` from pandoc's default reference) and the filter `docx/nvb-motion-brief.lua`. Rendered with `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`: `usage/OUTPUT-motion-brief.docx` and its LibreOffice PDF `.docx.pdf` (11 pages; the typst render is 10). Page review: `reviews/2026-10-15-docx.md` (every page viewed).
 
 What matches the typst output:
 - US Letter; top margin 1 in; left 1.5 in; right 0.75 in; bottom 48 pt; the text area is 28 lines at exact 24 pt.

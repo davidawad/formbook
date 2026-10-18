@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-moed-complaint-carreaga426cv00743.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Eastern District of Missouri (Eastern Division)
 - Case: *Carreaga v. Hogan Truck Leasing, LLC, et al.*
 - Docket: No. 4:26-cv-00743-AGF (Doc. 1)

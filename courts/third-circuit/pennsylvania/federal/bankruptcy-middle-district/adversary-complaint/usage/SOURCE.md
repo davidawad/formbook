@@ -1,6 +1,6 @@
 # Exemplar source: adversary-complaint (pamb)
 
-- File: `SAMPLE-pamb-adversary-complaint-webbsheils520ap00078.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Fetched from: `https://storage.courtlistener.com/recap/gov.uscourts.pamb.270156/gov.uscourts.pamb.270156.1.0.pdf` (CourtListener RECAP archive, document 1 of the adversary docket; found through the CourtListener search API, `type=rd`, `court=pamb`).
 - Case: *Sheils, Jr. v. National Debt Relief, LLC*, Adversary No. 5:20-ap-00078-MJC, in bankruptcy case *In re Joseph Ryan Webb*, Chapter 7, Case No. 5-20-00695 (M.D. Pa. Bankr.). Title on the document: "Trustee's Complaint for Turnover of Funds".
 - Docket no.: 5:20-ap-00078-MJC (adversary); 5-20-00695 (main case).

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "arwb-motion-brief.typ": arwb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-arwb-motion-brief-lowrystaybrief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #arwb-motion-brief(meta, body)

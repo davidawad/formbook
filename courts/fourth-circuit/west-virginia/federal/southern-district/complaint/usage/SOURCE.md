@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-wvsd-complaint-castro223cv00598.pdf` (35 pages, ECF stamp on every page)
+- File: `FILED-EXAMPLE-complaint.pdf` (35 pages, ECF stamp on every page)
 - Court: United States District Court, Southern District of West Virginia (Charleston Division)
 - Case: *John Anthony Castro v. Secretary of State Andrew Warner and Donald John Trump*
 - Docket: No. 2:23-cv-00598 (Honorable Irene C. Berger), ECF No. 1

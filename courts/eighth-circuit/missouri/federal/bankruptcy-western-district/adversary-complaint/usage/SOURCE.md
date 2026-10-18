@@ -2,7 +2,7 @@
 
 ## Primary exemplar (used for the sample and the overlay)
 
-- File: `SAMPLE-mowb-adversary-complaint-carlson2504017.pdf` (35 pages, text layer present, serif fonts embedded)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (35 pages, text layer present, serif fonts embedded)
 - Court: United States Bankruptcy Court, Western District of Missouri (Kansas City)
 - Case: *Enterprise Bank and Trust v. Bradley James Carlson*, Adv. Pro. No. 25-04017 (main case Bankr. No. 4:24-bk-40261-CAN, Chapter 7)
 - Document: Complaint to Determine Dischargeability of Debt (ECF Doc 1)
@@ -14,7 +14,7 @@
 
 ## Second filer (tier-2 comparison, not overlaid)
 
-- File: `SAMPLE-mowb-adversary-complaint-standley1903015.pdf` (7 pages)
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf` (7 pages)
 - Case: *Standley Enterprises, Inc. v. Shift Capital Income Fund LP*, Adv. Proc. No. 19-03015 (main case 19-30439-btf11)
 - Filer: Plaintiff Standley Enterprises, Inc. (no counsel block on the first page)
 - Date filed: 2019-11-05 (ECF stamp "Filed 11/05/19")
@@ -30,4 +30,4 @@
 
 ## Replacement for the audited non-redistributable-font exemplar
 
-The audited `SAMPLE-mowb-adversary-complaint-standley1903015.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `SAMPLE-mowb-adversary-complaint-carlson2504017.pdf` from a different filer. See the primary-exemplar record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
+The audited `FILED-EXAMPLE-adversary-complaint-2.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-adversary-complaint.pdf` from a different filer. See the primary-exemplar record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

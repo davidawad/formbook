@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/hawaii/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-hid-motion-brief-usvhawaii125cv00179.pdf` (1 filer, the State of Hawai‘i defendants; a Rule 12(c) motion, not 12(b); see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-hid-motion-brief-usvhawaii.md`: an excerpt of the memorandum (Background, Legal Standard, the first part of Argument A, Conclusion) and the motion paragraphs, caption and signature |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, the State of Hawai‘i defendants; a Rule 12(c) motion, not 12(b); see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: an excerpt of the memorandum (Background, Legal Standard, the first part of Argument A, Conclusion) and the motion paragraphs, caption and signature |
 | typeface | Times New Roman required (LR 10.2(a)(2)) → **Liberation Serif** (vendored substitute, `fonts/liberation-serif/`, metric-compatible). Embedded per `pdffonts`: LiberationSerif Regular, Italic, Bold. |
-| render | ok: `usage/OUTPUT-hid-motion-brief-usvhawaii.typst.pdf`, 14 pages (same as the EB Garamond render), typst 0.15.0, vendored fonts only, no typst warnings. Body baseline pitch measured at 32.33 pt (was 32.27 pt in EB Garamond). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages (same as the EB Garamond render), typst 0.15.0, vendored fonts only, no typst warnings. Body baseline pitch measured at 32.33 pt (was 32.27 pt in EB Garamond). |
 | overlay | **fail**: `tools/overlay.sh` needs `usage/SAMPLE-*.pdf`, which is not in this snapshot (`usage/` holds `SOURCE.md` only). `usage/OVERLAY-*` is stale (from EB Garamond) and must be regenerated once the exemplar PDF is restored. |
 | pages reviewed | 14 of 14 rendered at 50 dpi and viewed as a contact sheet after the font change; body text not read at full resolution |
 
@@ -90,7 +90,7 @@ Convention (tier 2; from the exemplar): the certificate of service in the captio
 
 ### docx (`docx/`)
 
-- Built by `docx/make-reference.sh` (writes `docx/reference.docx`) and `docx/hid.lua` (pandoc filter). `sh tools/render.sh --engine docx <this folder> usage/INPUT-hid-motion-brief-usvhawaii.md` writes `usage/OUTPUT-hid-motion-brief-usvhawaii.docx`.
+- Built by `docx/make-reference.sh` (writes `docx/reference.docx`) and `docx/hid.lua` (pandoc filter). `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx`.
 - Set in styles.xml, sectPr and footer1.xml (not rendered here): Liberation Serif 14 pt throughout (footnotes too); body at exact 32.3 pt line pitch with 0.5 in first-line indent; headings bold, single-spaced (level 1 "I.", level 2 "A.", level 3 "1.", hanging 0.5 in); counsel block 12 pt single-spaced; US Letter with 1 in margins; centered "- n -" footer (PAGE field).
 - Written by the filter: counsel block and caption box as tables (rule at the right and bottom of the parties box), with "No.", the upper-case title and "Judge:" at the right; the motion paragraphs (unnumbered) and their dated line and signature; a page break, then "MEMORANDUM IN SUPPORT OF MOTION"; memorandum headings numbered I., A., 1.; the signature at the end of the memorandum; the certificate of service on its own page (when `service.certificate` is true). Footnotes and block quotations are pandoc's.
 - Differs from typst: one page-number section, so the typst roman front matter (i, ii) and the arabic restart at 1 are not reproduced; table cell metrics are Word's; line and page breaks may differ in Word.

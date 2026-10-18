@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nyeb-motion-brief-empirestategrandcouncil2601072.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Eastern District of New York (`nyeb`)
 - Case: *Lori Lapin Jones, solely as Chapter 7 Trustee of the Estate of Empire State Grand Council Ancient and Accepted Scottish Rite Masons, Inc. v. Brooklyn Masonic Temple LLC and R4 RE LLC*
 - Docket: Bankr. No. 25-45914-ESS (Chapter 7, debtor Empire State Grand Council Ancient and Accepted Scottish Rite Masons Inc); adversary proceeding 26-01072-ESS (CourtListener docket 73214026)
@@ -16,7 +16,7 @@ Second filer: not collected in this pass. The brief asks for one exemplar per do
 
 ## 2. Second filer (added 2026-10-17)
 
-- File: `SAMPLE-nyeb-motion-brief-schaya12643344.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Court: United States Bankruptcy Court, Eastern District of New York (`nyeb`)
 - Case: *In re Toyvation LLC*, Bankr. No. 26-43344-ess (Chapter 11), a contested matter in the main case (not an adversary proceeding)
 - Document: "Reply in Further Support of Israel Schaya's Motion of for an Order Pursuant to Rule 2004 of the Federal Rules of Bankruptcy Procedure Authorizing Examinations and Directing Production of Documents" (ECF Doc. 16, per the ECF header on every page), 6 pages; counsel block top left, caption, "TO: THE HONORABLE ELIZABETH S. STONG", ARGUMENT with unnumbered run-in subheadings and numbered paragraphs, CONCLUSION, WHEREFORE paragraph, signature block. It is a reply brief, not an opening memorandum of law; it is used as the second filer's motion paper for tier-2 conventions (caption, counsel block, headings, signature).

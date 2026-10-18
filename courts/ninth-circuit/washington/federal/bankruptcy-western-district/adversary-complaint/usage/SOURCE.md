@@ -2,7 +2,7 @@
 
 Primary exemplar (the one the sample is transcribed from):
 
-- File: `SAMPLE-wawb-adversary-complaint-harborcustom2404037.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Western District of Washington at Tacoma
 - Case: *Harbor Custom Development, Inc., Belfair Apartments, LLC, and Pacific Ridge CMS, LLC v. Sound Capital Construction Fund, LLC, et al.*; main case *In re Harbor Custom Development, Inc., et al.*, No. 23-42180-MJH (jointly administered)
 - Adversary: No. 24-04037-MJH (Document 1); Judge Mary Jo Heston
@@ -17,7 +17,7 @@ Primary exemplar (the one the sample is transcribed from):
 
 Second filer (tier-2 cross-check):
 
-- File: `SAMPLE-wawb-adversary-complaint-burdette2501017.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf`
 - Case: *Burdette v. QBSI, a Xerox Corporation*, Adv. No. 25-01017-TWD (Document 1); main case *In re Wireless Advocates, LLC*, No. 23-10117-TWD; Judge Timothy W. Dore
 - Document: Complaint to Avoid and Recover Preferential Transfers Pursuant to 11 U.S.C. §§ 547 and 550 and to Disallow Claims Pursuant to 11 U.S.C. § 502 (7 pages)
 - Filer: Plaintiff Virginia Burdette, chapter 7 trustee, by K&L Gates LLP (Michael J. Gearin, Brian T. Peterson, Michael W. Meredith)

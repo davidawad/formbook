@@ -5,9 +5,9 @@ Folder: `courts/dc-circuit/district-of-columbia/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-dcd-complaint-terredusoleil126cv03510.pdf` (one filer, see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-dcd-complaint-terredusoleil.md`: caption, lead-in, allegations 1 to 38 (exemplar pages 1 to 10) and the last two allegations 87 and 88 (exemplar page 27), prayer for relief and signature block |
-| render | ok: `usage/OUTPUT-dcd-complaint-terredusoleil.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer, see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: caption, lead-in, allegations 1 to 38 (exemplar pages 1 to 10) and the last two allegations 87 and 88 (exemplar page 27), prayer for relief and signature block |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-terre-du-soleil-complaint.pdf` and `OVERLAY-terre-du-soleil-complaint.txt` |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -84,7 +84,7 @@ Defects found during review and fixed in the template (before the final render):
 
 ## Engines
 
-The typst template (`typst/`) is the reference. The docx engine is `docx/` (`reference.docx` from `make-reference.sh`, and `complaint.lua`), rendered by `sh tools/render.sh --engine docx complaint usage/INPUT-dcd-complaint-terredusoleil.md` into `usage/OUTPUT-dcd-complaint-terredusoleil.docx` and `usage/OUTPUT-dcd-complaint-terredusoleil.docx.pdf` (the PDF is LibreOffice 26.8.1.1; the vendored EB Garamond is installed for it). The docx.pdf is 12 pages; every page was rendered at 60 dpi and compared with the typst render (11 pages).
+The typst template (`typst/`) is the reference. The docx engine is `docx/` (`reference.docx` from `make-reference.sh`, and `complaint.lua`), rendered by `sh tools/render.sh --engine docx complaint usage/INPUT-complaint.md` into `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (the PDF is LibreOffice 26.8.1.1; the vendored EB Garamond is installed for it). The docx.pdf is 12 pages; every page was rendered at 60 dpi and compared with the typst render (11 pages).
 
 - **What matches the rules:** US Letter, 1-inch margins; 12-point EB Garamond throughout (headings and the caption too, LCvR 5.1(d)); double spacing at an exact 24-pt pitch; the caption (party block closed by a rule on the right and bottom, "Civil Action No.", the title, the jury line when set); numbered paragraphs (Fed. R. Civ. P. 10(b)); lettered prayer items; the signature block; a centered arabic page number on every page, page 1 included.
 - **What differs from typst, and why:**

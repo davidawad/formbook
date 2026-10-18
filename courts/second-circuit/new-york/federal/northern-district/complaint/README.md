@@ -5,10 +5,10 @@ Folder: `courts/second-circuit/new-york/federal/northern-district/complaint/` (s
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nynd-complaint-golub126cv01490.pdf` (1 filer: plaintiff's counsel Capezza Hill, LLP; see `usage/SOURCE.md`; re-fetched from the RECAP URL 2026-10-15, 28 pages) |
-| sample md | `usage/INPUT-nynd-complaint-golub.md`: caption and lead-in, preliminary statement, parties, jurisdiction and venue, factual allegations I to V, first cause of action, prayer, jury demand, signature block (filed ¶¶ 1 to 61 and 140 to 149; see Known gaps 5) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer: plaintiff's counsel Capezza Hill, LLP; see `usage/SOURCE.md`; re-fetched from the RECAP URL 2026-10-15, 28 pages) |
+| sample md | `usage/INPUT-complaint.md`: caption and lead-in, preliminary statement, parties, jurisdiction and venue, factual allegations I to V, first cause of action, prayer, jury demand, signature block (filed ¶¶ 1 to 61 and 140 to 149; see Known gaps 5) |
 | typeface | face required: none (L.R. 10.1 names no typeface; checked against the 2025 edition text 2026-10-15). Vendored substitute: none needed; **EB Garamond** (`docs/FONTS.md`, "No face named" row). Fit: n/a. |
-| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-nynd-complaint-golub.typst.pdf`, 8 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular, Bold, Italic only, all embedded; no warnings |
+| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular, Bold, Italic only, all embedded; no warnings |
 | overlay | ok (re-run 2026-10-15): `usage/OVERLAY-golub-complaint.pdf` and `OVERLAY-golub-complaint.txt` (the tools' names; see Known gaps 11) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed on 2026-10-15, after the re-render; no template change that day) |
 
@@ -87,7 +87,7 @@ Every page rendered at 60 dpi and looked at after the last template change.
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond 12 pt, letter, 1 in margins, exact 24 pt body lines, centered page number footer, single-spaced caption and signature lines); `nynd-complaint.lua` builds the caption (rule under the party block), the signature block and the numbering (`1.` ... as text and a tab, lettered prayer items `a.` ... ); `render.sh` reads the markdown as CommonMark (`commonmark_x`, as cmarker reads it), so a literal `*` stays literal. Output: `usage/OUTPUT-nynd-complaint-golub.docx` and `.docx.pdf` (LibreOffice, 8 pages, the same count as typst; the .docx converts in LibreOffice without error; not opened in Word).
+docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond 12 pt, letter, 1 in margins, exact 24 pt body lines, centered page number footer, single-spaced caption and signature lines); `nynd-complaint.lua` builds the caption (rule under the party block), the signature block and the numbering (`1.` ... as text and a tab, lettered prayer items `a.` ... ); `render.sh` reads the markdown as CommonMark (`commonmark_x`, as cmarker reads it), so a literal `*` stays literal. Output: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice, 8 pages, the same count as typst; the .docx converts in LibreOffice without error; not opened in Word).
 
 - Matches typst: paper, margins, font, 24 pt line pitch, caption layout, numbered paragraphs, headings' positions, lettered prayer, signature block with bar roll numbers, page numbers. Pages were compared one by one with the typst render (8 of 8 viewed); page breaks differ by a paragraph in places (page 1 ends after paragraph 2 in the .docx and after paragraph 3 in typst; the total is the same).
 - Differs: section headings are 12 pt bold, the body size. Typst's default heading size (1.4 em, about 16.8 pt) is not a choice L.R. 10.1 makes; this is a tier-2 convention call, left as is.

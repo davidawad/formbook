@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "almb-adversary-complaint.typ": almb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-almb-adversary-complaint-southeasternstud.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #almb-adversary-complaint(meta, body)

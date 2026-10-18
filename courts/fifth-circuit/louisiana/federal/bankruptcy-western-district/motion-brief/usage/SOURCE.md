@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-lawb-motion-brief-newcenturyfabricators1450652.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Western District of Louisiana
 - Case: *In re New Century Fabricators, Inc.*, No. 14-50652 (Chapter 11, Judge Robert Summerhays)
 - Document: "JOINDER IN EMERGENCY MOTION TO DISMISS WITH MEMORANDUM IN SUPPORT" (8 pages): a joinder in the receiver's emergency motion to dismiss, with the supporting memorandum in the same filing (background, joinder and support, prayer for relief)

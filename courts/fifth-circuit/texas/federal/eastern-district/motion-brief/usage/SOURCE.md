@@ -4,11 +4,11 @@ Date fetched: 2026-10-14.
 
 | File | Case | Docket | Filer (counsel) | Date filed | Fetched from |
 |---|---|---|---|---|---|
-| `SAMPLE-txed-motion-brief-hcscneuromonitoring526cv00022.pdf` | *Health Care Service Corp. v. Neuromonitoring Associates, LLC* (E.D. Tex., Texarkana Div.) | 5:26-cv-00022-RWS-JBB, Dkt. 53 (Defendants' Motion to Dismiss the Amended Complaint and Request for Judicial Notice; 57 pages incl. TOC/TOA, signature and certificate) | Defendants Neuromonitoring Associates, LLC, Physician Oversight, LLC, and Monitoring Associates, LLC (McDermott Will & Schulte LLP, Matthew L. Knowles, lead attorney; Law Offices of John M. Pickett, Texarkana) | 2026-06-18 | https://litigationtracker.law.georgetown.edu/wp-content/uploads/2026/05/Health-Care-Service-Corporation_2026.06.18_DEFENDANTS-MOTION-TO-DISMISS.pdf |
+| `FILED-EXAMPLE-motion-brief.pdf` | *Health Care Service Corp. v. Neuromonitoring Associates, LLC* (E.D. Tex., Texarkana Div.) | 5:26-cv-00022-RWS-JBB, Dkt. 53 (Defendants' Motion to Dismiss the Amended Complaint and Request for Judicial Notice; 57 pages incl. TOC/TOA, signature and certificate) | Defendants Neuromonitoring Associates, LLC, Physician Oversight, LLC, and Monitoring Associates, LLC (McDermott Will & Schulte LLP, Matthew L. Knowles, lead attorney; Law Offices of John M. Pickett, Texarkana) | 2026-06-18 | https://litigationtracker.law.georgetown.edu/wp-content/uploads/2026/05/Health-Care-Service-Corporation_2026.06.18_DEFENDANTS-MOTION-TO-DISMISS.pdf |
 
 ## Which one the sample uses
 
-`usage/INPUT-txed-motion-brief-hcscmotiontodismiss.md` is an excerpt transcription of Dkt. 53: the caption, the introduction, the background, and the legal standard (brief pages 1 to 10, PDF pages 11 to 20), plus the signature block (page 46) and the certificate of service (page 47). The argument (from brief page 11) is not transcribed. The transcription is marked `excerpt: true` in its frontmatter, which skips the statement-of-issues check (see `../README.md`).
+`usage/INPUT-motion-brief.md` is an excerpt transcription of Dkt. 53: the caption, the introduction, the background, and the legal standard (brief pages 1 to 10, PDF pages 11 to 20), plus the signature block (page 46) and the certificate of service (page 47). The argument (from brief page 11) is not transcribed. The transcription is marked `excerpt: true` in its frontmatter, which skips the statement-of-issues check (see `../README.md`).
 
 ## Provenance and checks
 

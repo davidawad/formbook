@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-flsd-complaint-castellanosderenteria126cv27012.pdf` (11 pages: 7 pages of text, pages 8 to 11 are exhibit scans with no text layer)
+- File: `FILED-EXAMPLE-complaint.pdf` (11 pages: 7 pages of text, pages 8 to 11 are exhibit scans with no text layer)
 - Court: United States District Court, Southern District of Florida
 - Case: *Concepcion Castellanos de Renteria v. TD Bank, National Association*
 - Docket: No. 1:26-cv-27012 (Document 1)

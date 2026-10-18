@@ -5,9 +5,9 @@ Folder: `courts/sixth-circuit/tennessee/federal/middle-district/complaint/` (sel
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-tnmd-complaint-doge326cv01418.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-tnmd-complaint-doge.md` (the whole 12-page filing, transcribed from its text layer; exhibits not included) |
-| render | ok: `usage/OUTPUT-tnmd-complaint-doge.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the whole 12-page filing, transcribed from its text layer; exhibits not included) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-doge-complaint.pdf` and `usage/OVERLAY-doge-complaint.txt` (exemplar pages 1 to 12, sample page 13 paired with exemplar page 12) |
 | typeface | face required: none. LR 7.03(a) requires "at least 12-point font" and names no face, so the court-named-face substitute does not apply. Stays EB Garamond (vendored, visual only), per `docs/FONTS.md` ("No face named"). |
 | pages reviewed | 13 of 13 (re-rendered 2026-10-15 with vendored fonts only, zero warnings; every page rendered at 60 dpi and viewed) |
@@ -84,7 +84,7 @@ Gate 2 rows are recorded here, not in `reviews/` (this doc type has no `reviews/
 
 ## Engines
 
-docx: `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc's default reference) and `docx/tnmd.lua` (caption, signature, numbering). Output: `usage/OUTPUT-tnmd-complaint-doge.docx` and `usage/OUTPUT-tnmd-complaint-doge.docx.pdf` (LibreOffice 26.8.1 conversion). Typst output for comparison: `usage/OUTPUT-tnmd-complaint-doge.typst.pdf`. Both are 13 pages. Every page of both was rasterized at 60 dpi and viewed.
+docx: `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc's default reference) and `docx/tnmd.lua` (caption, signature, numbering). Output: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8.1 conversion). Typst output for comparison: `usage/OUTPUT-complaint.typst.pdf`. Both are 13 pages. Every page of both was rasterized at 60 dpi and viewed.
 
 - Matches typst: letter paper, one-inch margins, EB Garamond 13 pt (the PDF embeds only EB Garamond Regular and Bold), double spacing as an exact 27.6 pt line pitch, single spacing at 15 pt for the court heading, caption, headings and signature, centered page number at the foot (TNMD-FORM-001 to 004). Caption: court lines, party column with a ")" column, "Case No." and "JURY DEMAND" on the right. Title, numbered paragraphs 1 to 61, stacked count headings, lettered prayer items A to H, and the signature block at 3.25 in, kept together with the heading before it. Heading sizes follow the typst default (1.4 em and 1.2 em).
 - Differs (tier 2, or a renderer effect): the ")" column gets one ")" per estimated caption line (typst measures the wrap); recount if the names change. The paragraph text after the number starts at 1.2 in (typst: 0.5 in gap after the number); the number itself is at 0.5 in in both. Exact line spacing in Word and LibreOffice puts each line's text about 12 pt lower in its line box than typst; the line pitch is identical.

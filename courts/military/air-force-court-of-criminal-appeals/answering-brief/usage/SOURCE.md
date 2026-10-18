@@ -2,7 +2,7 @@
 
 Both exemplars are text-based (`pdftotext` yields the body, caption and signature blocks). Both came from the AFCCA website's published appellate filings (redacted, public record). CourtListener was not searched directly in this run (the exemplars were found by web search and fetched from the AFCCA site).
 
-## Exemplar 1: `SAMPLE-afcca-answering-brief-douglas40324.pdf` (12 pages; primary, used by `usage/INPUT-afcca-answering-brief-douglas.md`)
+## Exemplar 1: `FILED-EXAMPLE-answering-brief.pdf` (12 pages; primary, used by `usage/INPUT-answering-brief.md`)
 
 | Field | Value |
 |---|---|
@@ -17,7 +17,7 @@ Both exemplars are text-based (`pdftotext` yields the body, caption and signatur
 | Public record | Yes: published by the AFCCA as an appellate filing (redacted version). |
 | Notes | The filed text ends on p. 10 with "Relying entirely on a", followed directly by the signature block. The transcription keeps that as filed. |
 
-## Exemplar 2: `SAMPLE-afcca-answering-brief-howard40478.pdf` (12 pages; excerpt, used by `usage/INPUT-afcca-answering-brief-howard.md`)
+## Exemplar 2: `FILED-EXAMPLE-answering-brief-2.pdf` (12 pages; excerpt, used by `usage/INPUT-answering-brief-2.md`)
 
 | Field | Value |
 |---|---|

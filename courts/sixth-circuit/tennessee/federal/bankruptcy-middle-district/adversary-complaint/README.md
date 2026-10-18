@@ -5,9 +5,9 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district/adver
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-tnmb-adversary-complaint-lemehnoname325ap90071.pdf` (1 filer, the trustee; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-tnmb-adversary-complaint-lemehnoname.md`: the full 5-page complaint, transcribed from the text layer |
-| render | ok: `usage/OUTPUT-tnmb-adversary-complaint-lemehnoname.typst.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer, the trustee; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md`: the full 5-page complaint, transcribed from the text layer |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | typeface | Rules name no face (LBR 5005-3(a): "clearly legible in 12-point font"). Vendored family: `EB Garamond` (`docs/FONTS.md`, "No face named"). Exemplar is Times New Roman: EB Garamond is visual only against it, not metric-compatible. |
 | overlay | ok: `usage/OVERLAY-lemeh-no-name.pdf` and `usage/OVERLAY-lemeh-no-name.txt` (`tools/overlay.sh`) |
 | pages reviewed | 4 of 4 (every page rendered at 60 dpi and viewed after the last template change) |

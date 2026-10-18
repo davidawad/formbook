@@ -1,6 +1,6 @@
 # Exemplar source
 
-Exemplar: `SAMPLE-wvnb-motion-brief-sheehanvlevine319ap00024motiontodismissmemorandum.pdf` (19 pages, text-based, public).
+Exemplar: `FILED-EXAMPLE-motion-brief-4.pdf` (19 pages, text-based, public).
 
 It is two RECAP documents from one filing, concatenated in ECF order: ECF Doc. 8 (the motion, pages 1-3) then ECF Doc. 8-1 (the memorandum in support, pages 4-19).
 
@@ -19,7 +19,7 @@ It is a filed motion to dismiss, with its memorandum, in this court's adversary 
 
 ## Caveats for the sample
 
-- `usage/INPUT-wvnb-motion-brief-sheehanmotiontodismiss.md` is a verbatim transcription of both documents, including the filer's own typos (e.g. "MARTING" in the caption, "failed to alleged" in the conclusion). The authorities are the filer's and were not checked by us.
+- `usage/INPUT-motion-brief-2.md` is a verbatim transcription of both documents, including the filer's own typos (e.g. "MARTING" in the caption, "failed to alleged" in the conclusion). The authorities are the filer's and were not checked by us.
 - The filed caption has no chapter line and no judge line. The template's chapter line is therefore optional now, and the sample omits it.
 - The filed caption label is "Civil No." for the adversary number and "BK. NO." for the main case; the template prints "Adv. Pro. No." and "Case No.". The overlay shows the difference, and it is left as a template convention.
 

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-flmd-complaint-brachocardella826cv03113.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Middle District of Florida, Tampa Division
 - Case: *Bracho Cardella v. Tilan, et al.*
 - Docket: No. 8:26-cv-03113 (Document 1)

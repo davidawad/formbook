@@ -28,15 +28,15 @@ Note on CA2-CONV-003: FRAP 32(a)(2) puts a color on the cover of paper copies. T
 |---|---|
 | `typst/ca2-opening-brief.typ` | Template: `ca2-opening-brief(meta, md)`. Adapted from the ca9 template's structure; every number is a named parameter at the top and traces to a rule above. |
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...`. |
-| `usage/INPUT-ca2-opening-brief-munafo.md` | Transcribed from the exemplar: cover, tables, jurisdiction, issues, statement of the case, summary, most of Argument I, the start of Argument II, conclusion, certificates. A portion of the brief, not the whole (see Gaps). |
-| `usage/OUTPUT-ca2-opening-brief-munafo.typst.pdf` | Render (19 pages). |
+| `usage/INPUT-opening-brief.md` | Transcribed from the exemplar: cover, tables, jurisdiction, issues, statement of the case, summary, most of Argument I, the start of Argument II, conclusion, certificates. A portion of the brief, not the whole (see Gaps). |
+| `usage/OUTPUT-opening-brief.typst.pdf` | Render (19 pages). |
 | `usage/OVERLAY-munafo-opening-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
 Build (from the repo root, with the toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/second-circuit/court-of-appeals/opening-brief usage/INPUT-ca2-opening-brief-munafo.md
+sh tools/render.sh courts/second-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md
 sh tools/overlay.sh courts/second-circuit/court-of-appeals/opening-brief munafo-opening-brief
 ```
 
@@ -55,7 +55,7 @@ Render output has no typst warnings; fonts are the vendored EB Garamond only.
 
 ## Page review (Gate 2 equivalent, this doc type)
 
-Final render of `OUTPUT-ca2-opening-brief-munafo.typst.pdf`, 19 pages, every page rasterized at 60 dpi and viewed:
+Final render of `OUTPUT-opening-brief.typst.pdf`, 19 pages, every page rasterized at 60 dpi and viewed:
 
 | PDF page (label) | Content | Finding |
 |---|---|---|
@@ -90,12 +90,12 @@ Known, not fixed: after a block quotation, the following paragraph is first-line
 
 Built by `latex/` (`template.tex` + `ca2.lua`) and `docx/` (`reference.docx` from `make-reference.sh`, + `ca2.lua`), against the same frontmatter and sample as the typst template.
 
-- **latex** (`usage/OUTPUT-ca2-opening-brief-munafo.latex.pdf`, 19 pages; typst: 19). Matches: letter, 1-inch margins, EB Garamond 14 pt throughout (vendored, `$fontdir$`), 31.4 pt double spacing, single-spaced footnotes, quotations and headings, the cover's parts, contents and authorities (page numbers computed in two passes, "passim" at seven pages), point and sub-heading labels, signature kept with the last paragraph, both certificates, certificate word count 2,584 (same count as typst). Differs: the cover spreads its parts less than the typst cover (content ends about 1 inch above the bottom margin); body pagination differs by a line or two per page, so some page numbers in the contents differ from typst by one page.
-- **docx** (`usage/OUTPUT-ca2-opening-brief-munafo.docx`, `.docx.pdf` 19 pages, checked on the LibreOffice PDF). Matches: the cover, the section breaks (cover without number; contents and authorities in lower-case roman; body from 1), 14 pt EB Garamond, double spacing, footnote and quotation styles, centered page number, certificates. BLOCKED: `DOCX-TOC-PAGES` and `DOCX-TOA-PAGES`: the contents and authorities list every entry but the page numbers are empty; the page numbers need a second render pass that reads them from the PDF (not built). Cover spacing differs from typst's (no full-page stretch).
+- **latex** (`usage/OUTPUT-opening-brief.latex.pdf`, 19 pages; typst: 19). Matches: letter, 1-inch margins, EB Garamond 14 pt throughout (vendored, `$fontdir$`), 31.4 pt double spacing, single-spaced footnotes, quotations and headings, the cover's parts, contents and authorities (page numbers computed in two passes, "passim" at seven pages), point and sub-heading labels, signature kept with the last paragraph, both certificates, certificate word count 2,584 (same count as typst). Differs: the cover spreads its parts less than the typst cover (content ends about 1 inch above the bottom margin); body pagination differs by a line or two per page, so some page numbers in the contents differ from typst by one page.
+- **docx** (`usage/OUTPUT-opening-brief.docx`, `.docx.pdf` 19 pages, checked on the LibreOffice PDF). Matches: the cover, the section breaks (cover without number; contents and authorities in lower-case roman; body from 1), 14 pt EB Garamond, double spacing, footnote and quotation styles, centered page number, certificates. BLOCKED: `DOCX-TOC-PAGES` and `DOCX-TOA-PAGES`: the contents and authorities list every entry but the page numbers are empty; the page numbers need a second render pass that reads them from the PDF (not built). Cover spacing differs from typst's (no full-page stretch).
 
 ## Verification pass 2026-10-16 (fb-595.26.2)
 
-- Re-rendered `INPUT-ca2-opening-brief-munafo.md` with `tools/render.sh`: exit 0, no warnings, 19 pages (the committed PDF was not stale: same text and page count). Fonts: EB Garamond Regular/Bold/Italic only.
+- Re-rendered `INPUT-opening-brief.md` with `tools/render.sh`: exit 0, no warnings, 19 pages (the committed PDF was not stale: same text and page count). Fonts: EB Garamond Regular/Bold/Italic only.
 - Viewed all 19 pages at 60 dpi, exemplar pages 1-2, and all 19 overlay pages at 40 dpi. The overlay pairing is unchanged (cover 89.1%, body 45-88%, page 5 at 13% as described above).
 - Fixed (tier 1): the cover printed "No. 25-3142-cr" at 14 pt; Local Rule 32.1(a)(1) (fetched 2026-10-16) requires the docket number "in type at least one inch high". Now `docket-size = 72pt`, bold, without "No." (as in the exemplar). Latex `ca2.lua` changed the same way. The cover still fits one page.
 - Fixed (tier 2): the table of authorities sorted statutes as text ("18 U.S.C. § 875(c)" after "§ 3742"); the sort key now compares digit runs by value, so § 875(c) comes first.

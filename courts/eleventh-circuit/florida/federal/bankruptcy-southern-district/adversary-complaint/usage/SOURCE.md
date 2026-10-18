@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-flsb-adversary-complaint-slottproseo2401328.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | Document | Trustee's Complaint to Sell Real Property Pursuant to 11 U.S.C. §363(h) and Distribute Proceeds Pursuant to §363(j) (ECF Doc 1, 9 pages including Exhibits A and B) |
 | Court | United States Bankruptcy Court, Southern District of Florida |
 | Case | *In re Pompano Property Solutions, LLC*, Case No. 24-12395-PDR (Chapter 7); *Slott, Trustee v. Pro Seo LLC*, Adv. No. 24-01328-PDR |

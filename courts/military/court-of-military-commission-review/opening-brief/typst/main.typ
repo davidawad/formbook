@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "mc-opening-brief.typ": mc-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-mc-opening-brief-hicks.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-opening-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #mc-brief(meta, body)

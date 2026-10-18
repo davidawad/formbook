@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-mieb-adversary-complaint-griffin2604189.pdf` (7 pages, text layer present, `pdftotext` reads it)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (7 pages, text layer present, `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.mieb.1033239/gov.uscourts.mieb.1033239.1.0.pdf (CourtListener RECAP; docket page https://www.courtlistener.com/docket/73485225/1/griffin-v-national-debt-relief-llc/)
 - Court: United States Bankruptcy Court, Eastern District of Michigan, Southern Division at Detroit
 - Case: *Deborah L. Griffin v. National Debt Relief LLC*, Adversary Proceeding No. 26-04189-mar (main case *In re Deborah L. Griffin*, No. 25-47309-MAR, Chapter 13, Hon. Mark A. Randon)

@@ -5,6 +5,6 @@
 // <court-dir> here is courts/fifth-circuit/court-of-appeals/reply-brief.
 #import "ca5-reply-brief.typ": ca5-reply-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ca5-reply-brief-fisher.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-reply-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ca5-reply-brief(meta, body)

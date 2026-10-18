@@ -4,9 +4,9 @@ Doc type: **motion-brief**, a Rule 12(b) motion to dismiss with its memorandum i
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ndd-motion-brief-dmshealth323cv00204.pdf` (1 filer, private defendant; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ndd-motion-brief-dmshealthmotiontodismiss.md`: caption, lead-in, sections I to III, V (heading 1, subheading A and its first paragraph), IV, VI, signature and certificate of service. Other argument sections are not transcribed (see gaps). |
-| render | ok: `usage/OUTPUT-ndd-motion-brief-dmshealthmotiontodismiss.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh` exit 0) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, private defendant; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: caption, lead-in, sections I to III, V (heading 1, subheading A and its first paragraph), IV, VI, signature and certificate of service. Other argument sections are not transcribed (see gaps). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh` exit 0) |
 | overlay | ok: `usage/OVERLAY-dms-health-motion-to-dismiss.pdf` and `OVERLAY-dms-health-motion-to-dismiss.txt` |
 | pages reviewed | 9 of 9 (fonts pass 2026-10-14: every page rendered at 50 dpi and viewed again after the font check) |
 | depth | 9 rendered pages against a 26-page exemplar; the target of 8-14 pages is met for the transcribed portion |
@@ -52,9 +52,9 @@ Primary source: D.N.D. Civil Rules (local rules), "Effective October 6, 2025", h
 | Engine | Status | What matches the typst form | What differs / BLOCKED |
 |---|---|---|---|
 | typst (primary) | as above | the reference | none |
-| docx | `usage/OUTPUT-ndd-motion-brief-dmshealthmotiontodismiss.docx` and `.docx.pdf` (10 pages, LibreOffice 26.8.1 PDF, EB Garamond embedded per `pdffonts`; typst is 9) | Letter, 1 in margins, EB Garamond 12 pt, body and headings at 24 pt exact (double), caption as a borderless table with the ")" column, body not numbered, centred PAGE number, headings with the same levels (centred caps, hanging lettered and numbered sub-headings), lettered (a), (b) lists, signature block and certificate of service each kept whole (one unsplittable table row). Checked by rendering all 10 pages to PNG at 60 dpi against the typst pages. | Page breaks are LibreOffice's: the signature block does not fit at the foot of page 8 in docx (it moves to page 9), so the docx runs one page longer than typst. The certificate's text is set as plain text (the sample's certificate has no markdown). Word is not available here: the `.docx` was not opened in Word, so no Word repair-prompt check was run. No gate stamp: `tools/check.sh --engine docx` was not run, because this doc-type folder has no `checks.yaml` or `rules.md`. |
+| docx | `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (10 pages, LibreOffice 26.8.1 PDF, EB Garamond embedded per `pdffonts`; typst is 9) | Letter, 1 in margins, EB Garamond 12 pt, body and headings at 24 pt exact (double), caption as a borderless table with the ")" column, body not numbered, centred PAGE number, headings with the same levels (centred caps, hanging lettered and numbered sub-headings), lettered (a), (b) lists, signature block and certificate of service each kept whole (one unsplittable table row). Checked by rendering all 10 pages to PNG at 60 dpi against the typst pages. | Page breaks are LibreOffice's: the signature block does not fit at the foot of page 8 in docx (it moves to page 9), so the docx runs one page longer than typst. The certificate's text is set as plain text (the sample's certificate has no markdown). Word is not available here: the `.docx` was not opened in Word, so no Word repair-prompt check was run. No gate stamp: `tools/check.sh --engine docx` was not run, because this doc-type folder has no `checks.yaml` or `rules.md`. |
 
-`docx/reference.docx` is built by `docx/make-reference.sh`, and the conversion is `docx/ndd-motion-brief.lua`. The toolchain is as in the complaint's Engines section. Commands: `sh tools/render.sh --engine docx <motion-brief-dir> usage/INPUT-ndd-motion-brief-dmshealthmotiontodismiss.md`.
+`docx/reference.docx` is built by `docx/make-reference.sh`, and the conversion is `docx/ndd-motion-brief.lua`. The toolchain is as in the complaint's Engines section. Commands: `sh tools/render.sh --engine docx <motion-brief-dir> usage/INPUT-motion-brief.md`.
 
 ## Known gaps and open choices
 

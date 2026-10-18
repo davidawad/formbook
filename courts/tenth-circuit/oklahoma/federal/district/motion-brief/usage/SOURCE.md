@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-okd-motion-brief-trupia526cv02422motiontodismiss.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Western District of Oklahoma (CourtListener `okwd`)
 - Case: *Trupia v. City of Oklahoma City, et al.*
 - Docket: No. 5:26-cv-02422-R (Document 5; CourtListener docket 74766714)

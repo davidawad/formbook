@@ -5,9 +5,9 @@ Folder: `courts/eighth-circuit/iowa/federal/northern-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-iand-motion-brief-gharavischwab625cv02074.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-iand-motion-brief-gharavi.md`: the complete memorandum (caption, table of contents, Introduction, Relevant Allegations, Legal Standard, Argument a to e, Conclusion, signature, proof of service) |
-| render | ok: `usage/OUTPUT-iand-motion-brief-gharavi.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: the complete memorandum (caption, table of contents, Introduction, Relevant Allegations, Legal Standard, Argument a to e, Conclusion, signature, proof of service) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | typeface | no face required by the court's rules (LR 10 names none; checked 2026-10-14). EB Garamond 12 pt stays; no vendored substitute applies. See the Governing rules table. |
 | overlay | ok: `usage/OVERLAY-gharavi-motion-brief.pdf` and `.txt` (`tools/overlay.sh`, exemplar passed explicitly). The exemplar PDF is not committed in this snapshot; the overlay used the RECAP copy at the URL in `usage/SOURCE.md` (17 pages). |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed in the typeface pass, 2026-10-14) |
@@ -15,7 +15,7 @@ Folder: `courts/eighth-circuit/iowa/federal/northern-district/motion-brief/`.
 ## Engines
 
 - **typst** (primary): `typst/`; the output and review above.
-- **docx**: `docx/` (`make-reference.sh` builds `reference.docx` from pandoc's default; `motion-brief.lua` writes the court title, caption, table of contents, numbered paragraphs, service lists and signature block; `render.sh` runs pandoc twice, see below). Output: `usage/OUTPUT-iand-motion-brief-gharavi.docx` and `usage/OUTPUT-iand-motion-brief-gharavi.docx.pdf` (LibreOffice 26.8.1 conversion, `tools/render.sh --engine docx`). Pages reviewed: 12 of 12, every page rendered at 60 dpi and viewed (2026-10-15).
+- **docx**: `docx/` (`make-reference.sh` builds `reference.docx` from pandoc's default; `motion-brief.lua` writes the court title, caption, table of contents, numbered paragraphs, service lists and signature block; `render.sh` runs pandoc twice, see below). Output: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8.1 conversion, `tools/render.sh --engine docx`). Pages reviewed: 12 of 12, every page rendered at 60 dpi and viewed (2026-10-15).
   - Matches typst: letter paper with 1-inch margins; EB Garamond 12 pt (embedded in the PDF, no fallback face); double spacing at 24 pt exact; single spacing at 13.8 pt for the title, caption, service lists and signature; half-inch first-line indent; centered bold level-1 headings in caps, bold level-2 headings flush left, italic level-3 headings; the caption with a column of `)` marks; the table of contents on page 1 under the caption, then a page break; NUMBERED paragraphs 1 to 10; the list's items at 0.5 in; the service list single spaced; a centered page number at the foot. Page count is the same as typst (12).
   - Table of contents: a TOC field whose cached entries are written into the file, so every viewer shows them. Page numbers come from a first LibreOffice pass: `render.sh` finds the page holding each heading and writes it into the second pass, and it fails rather than guess if a heading is not found. Checked on the LibreOffice PDF: all 14 entries point to the page that holds their heading. Word shows the cached numbers and renumbers only when its fields are updated; Word may paginate a line or a page differently (docs/DOCX.md).
   - Differs: paragraph numbers and the list numbers are typed text, as in typst, not Word auto-numbering, so an inserted paragraph does not renumber itself.   - Differs: block quotations are single spaced and indented, and typst rounds each quotation up to whole 24 pt lines, which the docx does not. So from page 3 on the docx runs about a line ahead of typst per page. The signature block (fixed together, as in typst) therefore starts page 12 in the docx and sits at the foot of page 11 in typst. The page count is the same.
@@ -70,7 +70,7 @@ Primary sources, fetched 2026-10-14:
 9. **Output names.** `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` reads that name, so the sample is `INPUT-<id>.md` and the outputs are `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt` (the file-role naming of CLAUDE.md, not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief).
 10. **Version of the local rules.** The copy checked is dated "Revised August 1, 2020". No later revision was found in the search; the current posting should be confirmed before the template is treated as final.
 
-## Review of the rendered pages (usage/OUTPUT-iand-motion-brief-gharavi.typst.pdf)
+## Review of the rendered pages (usage/OUTPUT-motion-brief.typst.pdf)
 
 - Page 1: court title, caption with `)` column, Case No., judges, title; table of contents (I to V, a to e, PROOF OF SERVICE) with pages. Pass.
 - Page 2: NOW COMES paragraph; I. INTRODUCTION (two paragraphs); II. RELEVANT ALLEGATIONS 1 to 6 (images marked). Pass.

@@ -5,9 +5,9 @@ Folder: `courts/fifth-circuit/mississippi/federal/southern-district/motion-brief
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-mssd-motion-brief-bryant324cv00260.pdf` (defendant's counsel; see `usage/SOURCE.md`). A second filer is saved too: `usage/SAMPLE-mssd-motion-brief-petrini125cv00233.pdf` (15 pp., not transcribed). |
-| sample md | `usage/INPUT-mssd-motion-brief-bryantmemorandum.md`: the whole memorandum transcribed (filed as 8 pages, with the certificate of service). |
-| render | ok: `usage/OUTPUT-mssd-motion-brief-bryantmemorandum.typst.pdf`, 7 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (defendant's counsel; see `usage/SOURCE.md`). A second filer is saved too: `usage/FILED-EXAMPLE-motion-brief-2.pdf` (15 pp., not transcribed). |
+| sample md | `usage/INPUT-motion-brief.md`: the whole memorandum transcribed (filed as 8 pages, with the certificate of service). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
 | overlay | ok: `usage/OVERLAY-bryant-memorandum.pdf` and `usage/OVERLAY-bryant-memorandum.txt` (`tools/overlay.sh`). |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed; see the review below). |
 
@@ -63,7 +63,7 @@ The local rules say nothing about a table of contents or a table of authorities 
 6. **Signature convention.** The exemplar signs with "s/" (ECF convention) and has no role line ("Attorney for ..."). The template follows the exemplar; the complaint template signs with "/s/" as the complaint exemplar does.
 7. **Table of contents and authorities** are not produced: the local rules do not require them for a memorandum (read above), and the exemplar has none.
 8. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, which a doc-type folder does not have, and the brief bars editing `tools/`. The checks in this README were done by hand: render (no warnings), overlay, the page review below, and two mutant tests: the 38-page mutant (fails as it should) and the complaint's fax mutant (see the complaint README).
-9. **Second exemplar.** `SAMPLE-mssd-motion-brief-petrini125cv00233.pdf` is saved for a tier-2 comparison; the overlay uses the first exemplar (Bryant).
+9. **Second exemplar.** `FILED-EXAMPLE-motion-brief-2.pdf` is saved for a tier-2 comparison; the overlay uses the first exemplar (Bryant).
 10. **Local rule text.** The local rules PDF is dated 2024 in its name and was read as posted on 2026-10-14; I did not check whether any amendment changes L.U.Civ.R. 7.
 
 ## Review of the rendered pages (60 dpi, every page viewed)
@@ -80,7 +80,7 @@ Overlay: the overlay pairs each page of our render with the exemplar page that s
 
 ## Engines
 
-- **docx** (`docx/reference.docx`, built by `docx/build-reference.sh`; filter `docx/mssd-motion-brief.lua`). Samples: `usage/OUTPUT-mssd-motion-brief-bryantmemorandum.docx` and `.docx.pdf` (8 pages; typst is 7). Checked by hand: the LibreOffice PDF was viewed page by page (8 of 8) against the typst render (7 of 7). Opened with LibreOffice only: the conversion succeeds and the parts are well-formed XML; Word was not available and was not checked.
+- **docx** (`docx/reference.docx`, built by `docx/build-reference.sh`; filter `docx/mssd-motion-brief.lua`). Samples: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (8 pages; typst is 7). Checked by hand: the LibreOffice PDF was viewed page by page (8 of 8) against the typst render (7 of 7). Opened with LibreOffice only: the conversion succeeds and the parts are well-formed XML; Word was not available and was not checked.
 - Matches typst: EB Garamond 13 pt text and 12 pt footnotes (embedded in the PDF, no other face), US Letter, 1 in margins, exact 27.6 pt double spacing, 0.5 in first-line indent, single-spaced court title, caption, headings, footnotes and signature block, the caption table, the title in bold underlined caps, section headings centered bold underlined caps, sub-headings bold at the left, native footnotes with a rule above them, the page number centered in the footer, the signature block and the certificate of service.
 - Differs, and why: (1) Pagination: LibreOffice puts exact-spacing leading above the text, so a page holds 23 double-spaced lines where typst holds 24; the memorandum runs to 8 pages instead of 7, and the certificate of service starts alone on page 8. Word may differ again. (2) The 35-page limit of L.U.Civ.R. 7(b)(5) is an assert in the typst template only; the docx page count (8) is far below it, and the limit is not checked by a gate for docx. (3) Case-name italics come from the sample's markdown, as in typst.
 - BLOCKED: page count (tier 1): docx 8 pages (LibreOffice) vs typst 7. The docx line pitch matches typst; the extra page is not reproduced.

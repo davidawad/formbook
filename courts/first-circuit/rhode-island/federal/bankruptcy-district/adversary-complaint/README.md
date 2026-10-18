@@ -4,9 +4,9 @@ Doc type: **adversary complaint** (FRBP 7001 adversary proceeding; FRBP 7008 ple
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `usage/SAMPLE-rib-adversary-complaint-pisaturosunflower19ap01020.pdf` (Chapter 7 trustee, 11 pages) and `usage/SAMPLE-rib-adversary-complaint-ustrusteeziegelmayer18ap01066.pdf` (U.S. Trustee, 9 pages). Provenance in `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-rib-adversary-complaint-pisaturosunflower.md` (full transcription, 66 paragraphs, both counts, prayer, signature); `usage/INPUT-rib-adversary-complaint-ustrusteeziegelmayer.md` (full transcription, 71 paragraphs, one count, prayer, signature; deposition excerpts absent from the exemplar's text layer are placeholders) |
-| render | ok: `usage/OUTPUT-rib-adversary-complaint-pisaturosunflower.typst.pdf` (9 pages), `usage/OUTPUT-rib-adversary-complaint-ustrusteeziegelmayer.typst.pdf` (7 pages). typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings. |
+| exemplar | yes, two filers: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (Chapter 7 trustee, 11 pages) and `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (U.S. Trustee, 9 pages). Provenance in `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-adversary-complaint.md` (full transcription, 66 paragraphs, both counts, prayer, signature); `usage/INPUT-adversary-complaint-2.md` (full transcription, 71 paragraphs, one count, prayer, signature; deposition excerpts absent from the exemplar's text layer are placeholders) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf` (9 pages), `usage/OUTPUT-adversary-complaint-2.typst.pdf` (7 pages). typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings. |
 | overlay | ok: `usage/OVERLAY-pisaturo-sunflower.pdf` and `.txt`; `usage/OVERLAY-ustrustee-ziegelmayer.pdf` and `.txt` |
 | pages reviewed | 16 of 16 (9 + 7), each rendered at 50-60 dpi and viewed after the last template change |
 

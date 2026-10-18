@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/louisiana/federal/western-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-lawd-motion-brief-lewisharriscounty126cv00172.pdf` (1 filer, see `usage/SOURCE.md`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, see `usage/SOURCE.md`) |
 | typeface | face required: none (LR 7.1, 7.8 and 10.1 name no face or size, checked 2026-10-14). Vendored substitute: none needed, EB Garamond kept (`"EB Garamond"`, the no-face default in `docs/FONTS.md`). Fit: n/a. The filed exemplar is set in Times New Roman, which is a filer choice, not a rule. |
-| sample md | `usage/INPUT-lawd-motion-brief-lewis.md`: caption, opening, the TOC and TOA, filed pages 1 to 11 (Background, Law and Argument, Legal Standard, Part II.A and II.B), the conclusion, signature and certificate. Parts II.B (rest), II.C to II.F and Part III are a bracketed note. |
-| render | ok: `usage/OUTPUT-lawd-motion-brief-lewis.typst.pdf`, 10 pages: caption, TOC, TOA, and 7 body pages (the last holds the signature and certificate), typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-lawd-motion-brief-lewis.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: caption, opening, the TOC and TOA, filed pages 1 to 11 (Background, Law and Argument, Legal Standard, Part II.A and II.B), the conclusion, signature and certificate. Parts II.B (rest), II.C to II.F and Part III are a bracketed note. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages: caption, TOC, TOA, and 7 body pages (the last holds the signature and certificate), typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-motion-brief.md`) |
 | overlay | ok: `usage/OVERLAY-lewis-motion-brief.pdf` and `OVERLAY-lewis-motion-brief.txt` (`sh tools/overlay.sh <this dir> lewis-motion-brief`) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
 | tools/check.sh | not run: same reason as `../complaint/README.md` |
@@ -74,9 +74,9 @@ Every page was rendered at 60 dpi and viewed after the last template change.
 
 ## Engines
 
-**docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/lawd-motion-brief.lua`, `docx/render.sh`). Output: `usage/OUTPUT-lawd-motion-brief-lewis.docx`. **The `.docx.pdf` is BLOCKED** (below), so no page of the docx has been checked on a PDF.
+**docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/lawd-motion-brief.lua`, `docx/render.sh`). Output: `usage/OUTPUT-motion-brief.docx`. **The `.docx.pdf` is BLOCKED** (below), so no page of the docx has been checked on a PDF.
 
-- Build: `sh tools/render.sh --engine docx <this dir> usage/INPUT-lawd-motion-brief-lewis.md` runs `docx/render.sh` (pandoc, then the footer part for the front matter), which writes the `.docx`; the step that needs `soffice` then fails. Rebuild the reference with `sh docx/make-reference.sh`.
+- Build: `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md` runs `docx/render.sh` (pandoc, then the footer part for the front matter), which writes the `.docx`; the step that needs `soffice` then fails. Rebuild the reference with `sh docx/make-reference.sh`.
 - *Matches typst (from the template, not measured on a rendered page):* EB Garamond 12 pt; body double spaced at an exact 24 pt pitch with a half-inch first-line indent; letter page with 1-inch margins; the front matter (caption, opening paragraphs, tables) numbered in lowerRoman from `i`, the body arabic from 1 (two sections); level 1 headings centered bold capitals, level 2 bold at the margin, level 3 bold italic; caption, title and subtitle as in the complaint; the table of contents as a TOC field over the heading styles; the table of authorities as entries with dot leaders and page references from the sample's frontmatter, grouped by category ("passim" as given); the signature block; the certificate of service. Every word of the sample is in the `.docx`, except the sample's own list markers (`1.`, `2.`), which are relabeled `(1)`, `(2)` as in typst (checked with pandoc's text export).
 - *Differs:* the list labels and the caption asterisks are typed text and an estimate (as in the complaint). The TOA entries are typed text, not TA fields (see BLOCKED). The TOC is a field, not typed entries.
 - *BLOCKED (docx.pdf and every gate on it):* `soffice` is not installed on this box (no conda-forge package, no root for apt): the `.docx` is written and `render-docx.sh` stops at the conversion. No `.check-docx.txt` stamp exists; there is no `checks.yaml` or `court.json` in this doc-type folder, so `tools/check.sh` does not apply here either.

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nceb-motion-brief-jsmithbarnhill2500084.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Eastern District of North Carolina, New Bern Division
 - Case: *JSmith Civil, LLC v. Barnhill Contracting Company*, Adversary Proceeding No. 25-00084-5-JNC (main case No. 23-02734-5-JNC, chapter 11)
 - Document: "Memorandum of Law in Support of Motion to Dismiss" (12 pages), Doc 9 in the adversary proceeding. The file's PDF title reads "Motion to Dismiss and Memorandum of Law"; the content is the memorandum, and the motion itself (Doc 8) is not in this exemplar.

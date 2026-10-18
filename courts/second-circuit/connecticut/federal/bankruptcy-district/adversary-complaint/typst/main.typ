@@ -5,7 +5,7 @@
 // Page and text settings live here (set rules inside a function do not reach the page).
 #import "ctb-adversary-complaint.typ": ctb-adversary-complaint, split-frontmatter, font-family, type-size, body-leading, margin
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ctb-adversary-complaint-1stdibscomplaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 
 #set page(

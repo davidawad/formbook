@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ord-motion-brief-columbiaveterinaryzoetis326cv01863.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ord.196429/gov.uscourts.ord.196429.3.0.pdf (CourtListener RECAP copy of the ECF document) |
 | How it was found | CourtListener search API, `type=r`, `court=ord`, `q="motion to dismiss" "memorandum"`, sorted by date filed: https://www.courtlistener.com/api/rest/v4/search/?type=r&court=ord&q=%22motion+to+dismiss%22+%22memorandum%22&order_by=dateFiled+desc&page_size=10 |
 | Case | *Columbia Veterinary Hospital v. Zoetis, Inc.* |
@@ -31,7 +31,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ord-motion-brief-kaempfbeckstrom626cv00920.pdf` |
+| File | `FILED-EXAMPLE-motion-brief-2.pdf` |
 | Filer | Defendant Twin Lakes Church, filed by attorney John Kaempf (different filer from Zoetis) |
 | Case | *Beckstrom v. Beckstrom*, No. 6:26-cv-00920-AA |
 | Document | Document 25, Motion to Dismiss and Supporting Memorandum of Law, 8 pages |

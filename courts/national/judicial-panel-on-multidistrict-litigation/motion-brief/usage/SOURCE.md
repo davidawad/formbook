@@ -1,6 +1,6 @@
 # Exemplar source
 
-## 1. `SAMPLE-jpml-motion-brief-chevroletboltbattery20cv07109.pdf` (primary; used for the overlay and the sample)
+## 1. `FILED-EXAMPLE-motion-brief.pdf` (primary; used for the overlay and the sample)
 
 - URL fetched from: https://chimicles.com/wp-content/uploads/2021/01/In-re-Chevrolet-Bolt-Battery-MDL-Filing.pdf
 - Court: Judicial Panel on Multidistrict Litigation (heading "Before the United States Judicial Panel on Multidistrict Litigation"); MDL number blank on the filing ("MDL No. __________"), so none was assigned as of the filing.
@@ -15,7 +15,7 @@
 
 Why this one: the only text-based, public JPML filing found that is a complete § 1407 motion with its memorandum (motion, cover, TOC, TOA, memorandum body with footnotes, signature, certificate). Searched for a motion with a text layer; this one is the best match.
 
-## 2. `SAMPLE-jpml-motion-brief-usplabsdietarysupplementmdl2523.pdf` (second exemplar; motion only)
+## 2. `FILED-EXAMPLE-motion-brief-2.pdf` (second exemplar; motion only)
 
 - URL fetched from: https://www.thesenatorsfirm.com/wp-content/uploads/2023/07/USP-Labs-Motion-1.pdf (a copy hosted by a law firm; the filing itself is a public JPML record)
 - Court: Judicial Panel on Multidistrict Litigation.

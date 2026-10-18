@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nynd-motion-brief-mistry326cv01419.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Northern District of New York
 - Case: *Mistry v. Cornell University*, No. 3:26-cv-1419 (ECC/ML)
 - Docket: No. 3:26-cv-1419, Document 8-1 (memorandum of law, attachment to Document 8, the defendants' motion to dismiss)
@@ -14,9 +14,9 @@
 
 Second filer: not collected in this pass. The brief asks for one exemplar per doc type. Tier 2 (2 or 3 filers) is therefore not yet met; see README.md.
 
-## 2. SAMPLE-nynd-motion-brief-newyork125cv00205.pdf
+## 2. FILED-EXAMPLE-motion-brief-2.pdf
 
-- File: `SAMPLE-nynd-motion-brief-newyork125cv00205.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Court: United States District Court, Northern District of New York
 - Case: *United States v. State of New York*, No. 1:25-cv-205 (AMN) (MJK)
 - Docket: No. 1:25-cv-205, Document 10-1 (memorandum of law, attachment to the defendants' motion to dismiss)
@@ -30,9 +30,9 @@ Second filer: not collected in this pass. The brief asks for one exemplar per do
 - Notes: signature "/s/ Linda Fang"; no bar roll numbers printed.
 - Public court record. Used only as a visual and structural reference.
 
-## 3. SAMPLE-nynd-motion-brief-usa125cv00205.pdf
+## 3. FILED-EXAMPLE-motion-brief-3.pdf
 
-- File: `SAMPLE-nynd-motion-brief-usa125cv00205.pdf`
+- File: `FILED-EXAMPLE-motion-brief-3.pdf`
 - Court: United States District Court, Northern District of New York
 - Case: *United States v. State of New York*, No. 1:25-cv-205-AMN-MJK
 - Docket: No. 1:25-cv-205, Document 24-1

@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ord-complaint-kliewerfender326cv02238.pdf` |
+| File | `FILED-EXAMPLE-complaint.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ord.197289/gov.uscourts.ord.197289.1.0.pdf (CourtListener RECAP copy of the ECF document) |
 | How it was found | CourtListener search API, `type=r`, `court=ord`, `q=complaint`, sorted by date filed: https://www.courtlistener.com/api/rest/v4/search/?type=r&court=ord&q=complaint&order_by=dateFiled+desc&page_size=10 |
 | Case | *Kliewer v. Fender Musical Instruments Corporation* |
@@ -20,7 +20,7 @@
 - The ECF header (case number, "Document 1", "Filed", "Page n of 18") sits in the top margin on every page. It is part of the court's record copy, not the filer's text.
 - The filer's counsel block appears only in the page footers ("NORTHWEST DEBT RESOLUTION" and address). The top of page 1 has no counsel block. LR 10-2(a) puts counsel information in the upper left corner of the first page; the template follows the rule, not this exemplar.
 - Pleading-paper line numbers (1 to 26) run down the left margin of every page. LR 10-1(d), as quoted in the README, says pages must not be numbered down the left margin. The template follows the rule, and this difference is an open question for David (see README).
-- The class-definition, call-log and count sections are long. The sample transcribes only part of the filing (see `usage/INPUT-ord-complaint-kliewer.md`).
+- The class-definition, call-log and count sections are long. The sample transcribes only part of the filing (see `usage/INPUT-complaint.md`).
 
 ## Other candidates found and not saved
 
@@ -33,7 +33,7 @@ The brief asks for one exemplar per doc type. These were seen in the same search
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ord-complaint-lobrown626cv02227.pdf` |
+| File | `FILED-EXAMPLE-complaint-2.pdf` |
 | Filer | Connor Brown, filed by attorneys Viktoria Lo and Stephanie Pollan (different filer from Kliewer) |
 | Case | *Brown v. Lincoln County*, No. 6:26-cv-02227-AP |
 | Document | Document 1, Complaint, 25 pages |

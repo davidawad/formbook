@@ -57,10 +57,10 @@ Build:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick
-sh tools/render.sh courts/national/foreign-intelligence-surveillance-court/motion-brief usage/INPUT-fisc-motion-brief-accuracyconcernsmisc1902.md
-sh tools/render.sh courts/national/foreign-intelligence-surveillance-court/motion-brief usage/INPUT-fisc-motion-brief-yahoodirectives105b0701.md
-sh tools/overlay.sh courts/national/foreign-intelligence-surveillance-court/motion-brief accuracy-concerns-misc-19-02 courts/national/foreign-intelligence-surveillance-court/motion-brief/usage/SAMPLE-fisc-motion-brief-accuracyconcernsmisc1902.pdf
-sh tools/overlay.sh courts/national/foreign-intelligence-surveillance-court/motion-brief yahoo-directives-105b-07-01 courts/national/foreign-intelligence-surveillance-court/motion-brief/usage/SAMPLE-fisc-motion-brief-yahoodirectives105b0701.pdf
+sh tools/render.sh courts/national/foreign-intelligence-surveillance-court/motion-brief usage/INPUT-motion-brief.md
+sh tools/render.sh courts/national/foreign-intelligence-surveillance-court/motion-brief usage/INPUT-motion-brief-2.md
+sh tools/overlay.sh courts/national/foreign-intelligence-surveillance-court/motion-brief accuracy-concerns-misc-19-02 courts/national/foreign-intelligence-surveillance-court/motion-brief/usage/FILED-EXAMPLE-motion-brief.pdf
+sh tools/overlay.sh courts/national/foreign-intelligence-surveillance-court/motion-brief yahoo-directives-105b-07-01 courts/national/foreign-intelligence-surveillance-court/motion-brief/usage/FILED-EXAMPLE-motion-brief-2.pdf
 ```
 
 Naming: the shared tools fix the output names, so outputs follow them rather than the `<id>.pdf` / `<id>-overlay.pdf` pattern in the brief. Render writes `usage/OUTPUT-<id>.pdf`; overlay reads that and writes `usage/OVERLAY-<id>.pdf` and `.txt`.
@@ -69,8 +69,8 @@ Naming: the shared tools fix the output names, so outputs follow them rather tha
 
 | File | Case and filer | Date filed | Sample |
 |---|---|---|---|
-| `usage/SAMPLE-fisc-motion-brief-accuracyconcernsmisc1902.pdf` | Misc. 19-02, Motion to Modify Reporting Period. Government (DOJ National Security Division, Office of Intelligence). | June 4, 2020 (received stamp) | `usage/INPUT-fisc-motion-brief-accuracyconcernsmisc1902.md` |
-| `usage/SAMPLE-fisc-motion-brief-yahoodirectives105b0701.pdf` | No. 105B(g) 07-01, Yahoo! Inc.'s Unclassified Motion under FISC Rule 62. Private party. | September 30, 2013 | `usage/INPUT-fisc-motion-brief-yahoodirectives105b0701.md` |
+| `usage/FILED-EXAMPLE-motion-brief.pdf` | Misc. 19-02, Motion to Modify Reporting Period. Government (DOJ National Security Division, Office of Intelligence). | June 4, 2020 (received stamp) | `usage/INPUT-motion-brief.md` |
+| `usage/FILED-EXAMPLE-motion-brief-2.pdf` | No. 105B(g) 07-01, Yahoo! Inc.'s Unclassified Motion under FISC Rule 62. Private party. | September 30, 2013 | `usage/INPUT-motion-brief-2.md` |
 
 Sources and searches are recorded in `usage/SOURCE.md`. Both exemplars are scans with an OCR text layer, so `overlay.sh` can pair pages by text. Samples are transcriptions: OCR text, checked against the page images, with the handwritten verification date (June 3, 2020) read from the scan.
 

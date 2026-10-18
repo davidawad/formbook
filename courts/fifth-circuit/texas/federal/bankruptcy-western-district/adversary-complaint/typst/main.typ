@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "txwb-adversary-complaint.typ": txwb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-txwb-adversary-complaint-osherowcomplaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #txwb-adversary-complaint(meta, body)

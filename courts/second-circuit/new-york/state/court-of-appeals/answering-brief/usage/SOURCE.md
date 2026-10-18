@@ -1,8 +1,8 @@
 # Exemplar source: New York Court of Appeals answering brief
 
-**Result: exemplar found.** `SAMPLE-ny-answering-brief-peoplevwatkinsapl202300099.pdf` is saved in this folder. It is a filed Brief for Respondent (the answering brief in the Court of Appeals) in *People v. Watkins*, APL-2023-00099.
+**Result: exemplar found.** `FILED-EXAMPLE-answering-brief-2.pdf` is saved in this folder. It is a filed Brief for Respondent (the answering brief in the Court of Appeals) in *People v. Watkins*, APL-2023-00099.
 
-- **File:** `SAMPLE-ny-answering-brief-peoplevwatkinsapl202300099.pdf` (52 pages, letter, text layer present; `pdffonts`: the body and headings are Garamond (regular, italic, bold); Times New Roman, Courier New, Calibri and one other face are also embedded, from the filer's own tables and exhibits)
+- **File:** `FILED-EXAMPLE-answering-brief-2.pdf` (52 pages, letter, text layer present; `pdffonts`: the body and headings are Garamond (regular, italic, bold); Times New Roman, Courier New, Calibri and one other face are also embedded, from the filer's own tables and exhibits)
 - **SHA-256:** `4c92bb7bfcaa50f23cc800310b80d2e1324e72530f0bb8818a25ddfed03188b2`
 - **URL fetched:** <https://statecourtreport.org/sites/default/files/fastcase/additionalPdfs/processed/People%20of%20the%20State%20of%20New%20York%20-Respondent%20Brief%20-01.12.2024.pdf> (a copy hosted by statecourtreport.org; the copy does not show how it was filed)
 - **Case:** *People of the State of New York v. Mark Watkins*, Court of Appeals of the State of New York, APL-2023-00099 (appeal from *People v. Watkins*, 206 A.D.3d 452 (1st Dept. 2022), order of June 9, 2022; judgment of the Supreme Court, New York County, March 26, 2018)
@@ -64,7 +64,7 @@ Date of earlier searches: 2026-10-14.
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ny-answering-brief-peoplevrankinapl202200131.pdf` |
+| File | `FILED-EXAMPLE-answering-brief.pdf` |
 | Court | New York Court of Appeals |
 | Case | *People v. Rankin*, APL 2022-00131 |
 | Document | Brief for Respondent, 48 pages |

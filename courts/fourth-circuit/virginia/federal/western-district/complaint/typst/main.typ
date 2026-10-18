@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "vawd-complaint.typ": vawd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-vawd-complaint-extremedriver.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #vawd-complaint(meta, body)

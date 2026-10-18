@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-kyed-motion-brief-seitz225cv00166.pdf` (26 pages, text layer present) |
+| Exemplar file | `FILED-EXAMPLE-motion-brief.pdf` (26 pages, text layer present) |
 | Case | *Seitz v. Roblox Corporation*, No. 2:25-cv-00166-DLB-CJS (E.D. Ky., Northern Division at Covington) |
 | Document | Memorandum of Law in Support of Defendant Discord Inc.'s Motion to Dismiss (RECAP docket entry 94-1, attachment to the motion at entry 94) |
 | Filer | Defendant Discord Inc., by counsel Stoll Keenon Ogden PLLC (Palmer G. Vance II) |

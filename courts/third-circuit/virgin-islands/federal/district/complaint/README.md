@@ -4,10 +4,10 @@ Doc type: **complaint** in the District Court of the Virgin Islands (`vid`, Divi
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-vid-complaint-henry326cv00038.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-vid-complaint-henry.md` (a partial transcription: see Known gaps 6) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (a partial transcription: see Known gaps 6) |
 | typeface | none required by the rules (VI-FONT-001): EB Garamond kept, no substitute needed |
-| render | ok: `usage/OUTPUT-vid-complaint-henry.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh` treats any warning as failure) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh` treats any warning as failure) |
 | overlay | ok: `usage/OVERLAY-henry-complaint.pdf` and `OVERLAY-henry-complaint.txt` |
 | pages reviewed | 12 of 12 (each page rendered at 70 dpi and viewed; see the review record below) |
 
@@ -90,7 +90,7 @@ Defects found during the review and fixed: (a) a numbered paragraph overlapped t
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form.
-- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/vid.lua`; output `usage/OUTPUT-vid-complaint-henry.docx`): pandoc on a per-court reference.docx, with the caption, title, numbered paragraphs and signature built by the filter from the frontmatter. It matches the typst template in: EB Garamond 12 pt; exact 24 pt (double) line spacing; 1 in margins on letter paper; 0.5 in first-line indent; centered PAGE number in the footer; the court name and division, centered; the caption (parties left, closed by a rule on the right and bottom; `Civil Action No.` at right, blank when `case_number` is empty); the centered bold title; Heading 1 (centered bold), Heading 2 (bold), Heading 3 (bold italic); block quotations single spaced, indented 0.5 in each side; the prayer list kept with the signature block; the signature block as a two-column table that does not split across pages.
+- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/vid.lua`; output `usage/OUTPUT-complaint.docx`): pandoc on a per-court reference.docx, with the caption, title, numbered paragraphs and signature built by the filter from the frontmatter. It matches the typst template in: EB Garamond 12 pt; exact 24 pt (double) line spacing; 1 in margins on letter paper; 0.5 in first-line indent; centered PAGE number in the footer; the court name and division, centered; the caption (parties left, closed by a rule on the right and bottom; `Civil Action No.` at right, blank when `case_number` is empty); the centered bold title; Heading 1 (centered bold), Heading 2 (bold), Heading 3 (bold italic); block quotations single spaced, indented 0.5 in each side; the prayer list kept with the signature block; the signature block as a two-column table that does not split across pages.
 - docx differences (pandoc and Word limits): paragraph numbers are text written by the filter, not Word automatic numbering, so Word will not renumber a paragraph inserted by hand. The typst template has no footnote path; a footnote in a docx would be 10 pt, single spaced. Keep-with-next on the prayer items approximates the typst sticky list; page breaks (including the short page 11 of the typst render) are not guaranteed to match. Caption rules and table row heights differ between Word and LibreOffice. No TOC or TOA in this doc type.
 - Not verified: pagination and appearance. The docx was checked only as a zip whose entries all read and whose XML parts are well formed (`ziptool`, `xmllint`). It has not been opened in Word or LibreOffice, and no `.docx.pdf` was rendered (LibreOffice is not installed on the build box).
 - **BLOCKED** (all checks measured on `usage/OUTPUT-henry-complaint.docx.pdf`): no checks file is readable (this folder and the court folder have no `checks.yaml` or `rules.md`), so the gate check IDs cannot be listed. The rule IDs the template traces to are VI-FORM-001, VI-FORM-002, VI-FONT-001, VI-CONT-001, VI-CONT-002, FRCP-10(a), FRCP-10(b) and FRCP-8(a). Reason for each: LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked.

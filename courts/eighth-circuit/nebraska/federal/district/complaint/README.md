@@ -5,9 +5,9 @@ Folder: `courts/eighth-circuit/nebraska/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 1 filer: `usage/SAMPLE-ned-complaint-goldenstein826cv00593.pdf` (see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ned-complaint-goldenstein.md` (the whole 12-page filing, paragraph numbers left to the template) |
-| render | ok: `usage/OUTPUT-ned-complaint-goldenstein.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes, 1 filer: `usage/FILED-EXAMPLE-complaint.pdf` (see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the whole 12-page filing, paragraph numbers left to the template) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-goldenstein-complaint.pdf` and `OVERLAY-goldenstein-complaint.txt` (page map) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed in the final state) |
 | typeface | face required: none (NECivR names no typeface). Substitute: none; EB Garamond kept (no-face default, `docs/FONTS.md`). Fit: n/a. Exemplar is Times New Roman, a filer's choice (see Known gaps, 1). |
@@ -82,14 +82,14 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 Defects found in review and fixed before this render: headings were drawn over the first line of the paragraph after them; paragraphs ran together with no line between them; a counter displayed inside a block measured one line short and overlapped the next paragraph. Each is fixed in `typst/ned-complaint.typ`.
 
-File names follow `tools/render.sh` and `tools/overlay.sh` (and CLAUDE.md's role prefixes): `INPUT-ned-complaint-goldenstein.md` (input), `OUTPUT-ned-complaint-goldenstein.typst.pdf` (our render), `OVERLAY-goldenstein-complaint.pdf` and `.txt` (the comparison). The brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools write.
+File names follow `tools/render.sh` and `tools/overlay.sh` (and CLAUDE.md's role prefixes): `INPUT-complaint.md` (input), `OUTPUT-complaint.typst.pdf` (our render), `OVERLAY-goldenstein-complaint.pdf` and `.txt` (the comparison). The brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what the tools write.
 
 ## Engines
 
 | Engine | Folder | Output in `usage/` | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-ned-complaint-goldenstein.typst.pdf` (11 pages; not in the snapshot, rendered for comparison only) | the reference |
-| docx | `docx/` (`reference.docx` from `make-reference.sh`, and `ned-complaint.lua`) | `OUTPUT-ned-complaint-goldenstein.docx` and `OUTPUT-ned-complaint-goldenstein.docx.pdf` (12 pages, LibreOffice 26.8.1 headless) | rendered; every page of the `.docx.pdf` viewed against the typst render |
+| typst (primary) | `typst/` | `OUTPUT-complaint.typst.pdf` (11 pages; not in the snapshot, rendered for comparison only) | the reference |
+| docx | `docx/` (`reference.docx` from `make-reference.sh`, and `ned-complaint.lua`) | `OUTPUT-complaint.docx` and `OUTPUT-complaint.docx.pdf` (12 pages, LibreOffice 26.8.1 headless) | rendered; every page of the `.docx.pdf` viewed against the typst render |
 
 **Matches typst** (checked on the LibreOffice PDF): EB Garamond 12 pt (embedded, `pdffonts`); double spacing at 24 pt; 1-inch margins on US Letter; the counsel block; the two court-title lines; the caption as a table with a right and a bottom rule on the party column, "v." between the parties, indented designations, the case number, the bold title, "Jury Trial Demanded" and the trial location; centered bold capitals for level-1 headings; numbered allegations with a half-inch first-line indent; the prayer lettered A., B., ...; the signature block in NECivR 11.1 order with "Dated" at left; the footer from page 2 on (page number centered, the title in capitals, "Case No." at right) and no footer on page 1. The text matches typst word for word (the extracted text of both PDFs, compared without whitespace and footers, differs by one character at a page boundary). Some line breaks fall one word differently from typst.
 

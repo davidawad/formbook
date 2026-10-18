@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ny-answering-brief.typ": ny-answering-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ny-answering-brief-nyansweringbriefsample.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-answering-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ny-answering-brief(meta, body)

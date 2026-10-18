@@ -10,9 +10,9 @@ Status: exemplar saved; transcription rendered; overlay run; every page viewed (
 |---|---|
 | `typst/areb-motion-brief.typ` | Template: `areb-motion-brief(meta, md)`. Every number is a named parameter at the top, and each traces to a rule ID or is marked as a convention. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits the frontmatter from the body, calls the template. |
-| `usage/SAMPLE-areb-motion-brief-stewart323ap01057.pdf` | The filed document (8 pp., RECAP doc 5 copied as filed). |
-| `usage/INPUT-areb-motion-brief-stewartnavient.md` | Transcription of the motion and its memorandum: caption (adversary), motion paragraphs 1-8, argument and authorities, ineffective-service argument, WHEREFORE clause, signature block, service list. Names and text as filed. |
-| `usage/OUTPUT-areb-motion-brief-stewartnavient.typst.pdf` | Our render of the transcription (7 pp.). |
+| `usage/FILED-EXAMPLE-motion-brief.pdf` | The filed document (8 pp., RECAP doc 5 copied as filed). |
+| `usage/INPUT-motion-brief.md` | Transcription of the motion and its memorandum: caption (adversary), motion paragraphs 1-8, argument and authorities, ineffective-service argument, WHEREFORE clause, signature block, service list. Names and text as filed. |
+| `usage/OUTPUT-motion-brief.typst.pdf` | Our render of the transcription (7 pp.). |
 | `usage/OVERLAY-stewart-navient-motion-brief.pdf` / `.txt` | Red (ours) over blue (filed) per page; `.txt` is the page map. |
 | `usage/SOURCE.md` | Source, filer, dates and the search log. |
 
@@ -20,7 +20,7 @@ Build (from the repo root, with `PATH="$HOME/tb/bin:$PATH"` per the box setup):
 
 ```sh
 D=courts/eighth-circuit/arkansas/federal/bankruptcy-eastern-district/motion-brief
-sh tools/render.sh $D usage/INPUT-areb-motion-brief-stewartnavient.md   # -> usage/OUTPUT-areb-motion-brief-stewartnavient.typst.pdf
+sh tools/render.sh $D usage/INPUT-motion-brief.md   # -> usage/OUTPUT-motion-brief.typst.pdf
 sh tools/overlay.sh $D stewart-navient-motion-brief                   # -> usage/OVERLAY-stewart-navient-motion-brief.pdf/.txt
 ```
 
@@ -65,7 +65,7 @@ The overlap is a pairing aid, not a score. The low pairs are the argument pages,
 
 ## Page review (Gate 2)
 
-Rendered 2026-10-14 at 80 dpi, each page beside its filed page where it matters. Every page of `usage/OUTPUT-areb-motion-brief-stewartnavient.typst.pdf` was viewed in its final state (7 of 7).
+Rendered 2026-10-14 at 80 dpi, each page beside its filed page where it matters. Every page of `usage/OUTPUT-motion-brief.typst.pdf` was viewed in its final state (7 of 7).
 
 | Page | Result |
 |---|---|
@@ -107,7 +107,7 @@ Defects found in review and fixed:
 
 Three engines per doc type (`docs/EVAL-LOOP.md`, "Engines"). The typst template above is the primary and is unchanged by the docx work.
 
-**docx** (`docx/`): `reference.docx` (built by `docx/make-reference.sh`, which starts from pandoc's default reference and writes this court's styles, page setup and footer) and `docx/areb.lua` (the caption table, the continuous paragraph numbers, the signature and counsel block, and the certificate of service, with the same wording as the typst template). Build with `sh tools/render.sh --engine docx <this-dir> usage/INPUT-areb-motion-brief-stewartnavient.md`. It writes `usage/OUTPUT-areb-motion-brief-stewartnavient.docx`; pandoc 3.6.4 reads the result back, and the zip and every XML part are well-formed.
+**docx** (`docx/`): `reference.docx` (built by `docx/make-reference.sh`, which starts from pandoc's default reference and writes this court's styles, page setup and footer) and `docx/areb.lua` (the caption table, the continuous paragraph numbers, the signature and counsel block, and the certificate of service, with the same wording as the typst template). Build with `sh tools/render.sh --engine docx <this-dir> usage/INPUT-motion-brief.md`. It writes `usage/OUTPUT-motion-brief.docx`; pandoc 3.6.4 reads the result back, and the zip and every XML part are well-formed.
 
 - **What matches the typst form (by construction, from the same numbers):** US Letter, 1 in margins; EB Garamond 12 pt; body at 22.2 pt exact line pitch (`w:line="444"`, measured from the typst render); single lines at 13.2 pt exact (caption, counsel, signature, certificate parties); page number centred in the footer; caption as a two-column table with a rule under and beside the debtor block, and the adversary block only when the metadata has an adversary number; paragraphs numbered continuously as `N.` with a 0.5 in first-line indent; headings as written; `Respectfully submitted,`, `s/ NAME`, the counsel block, then the certificate of service.
 - **What differs or is unverified:** nothing has been compared visually. LibreOffice (`soffice`) is not installable on this box (no conda-forge package, no root for apt), so no `.docx.pdf` was made and no page was rendered or viewed. The footer distance, the rule weight (0.75 pt against typst's 0.8 pt) and the caption cell padding are approximations of the typst values. Word may paginate differently from the typst output. The font is named `EB Garamond`; Word substitutes silently if it is not installed on the machine that opens the file.

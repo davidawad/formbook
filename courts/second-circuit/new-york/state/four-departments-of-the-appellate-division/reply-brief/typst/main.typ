@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nyappdiv-reply-brief.typ": nyappdiv-reply-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nyappdiv-reply-brief-integratenycreply.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-reply-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #nyappdiv-reply-brief(meta, body)

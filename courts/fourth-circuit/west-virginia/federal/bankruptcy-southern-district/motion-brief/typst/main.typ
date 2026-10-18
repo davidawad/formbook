@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "wvsb-motion-brief.typ": wvsb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-wvsb-motion-brief-blackjeweldoc1938.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #wvsb-motion-brief(meta, body)

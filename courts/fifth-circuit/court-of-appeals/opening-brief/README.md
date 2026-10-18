@@ -6,10 +6,10 @@ Template for the principal brief of an appellant in the U.S. Court of Appeals fo
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-ca5-opening-brief-candel2520366.pdf` | Filed exemplar: Brief of Appellant, *Candel & Partners SAS v. ExxonMobil Corp.*, No. 25-20366 (5th Cir.), filed 2025-11-03, 59 pages, text layer present. |
+| `usage/FILED-EXAMPLE-opening-brief.pdf` | Filed exemplar: Brief of Appellant, *Candel & Partners SAS v. ExxonMobil Corp.*, No. 25-20366 (5th Cir.), filed 2025-11-03, 59 pages, text layer present. |
 | `usage/SOURCE.md` | Where the exemplar came from, the docket number, the filer, the date filed and the date fetched. |
-| `usage/INPUT-ca5-opening-brief-candel.md` | Markdown transcription of the exemplar: front matter, the sections of the brief, footnotes, the conclusion and both certificates. Follows the markdown contract of the ninth-circuit sample (frontmatter, `# Heading` sections, `toa:` citation links, `[^n]` footnotes). |
-| `usage/OUTPUT-ca5-opening-brief-candel.typst.pdf` | Render of the sample (14 pages). |
+| `usage/INPUT-opening-brief.md` | Markdown transcription of the exemplar: front matter, the sections of the brief, footnotes, the conclusion and both certificates. Follows the markdown contract of the ninth-circuit sample (frontmatter, `# Heading` sections, `toa:` citation links, `[^n]` footnotes). |
+| `usage/OUTPUT-opening-brief.typst.pdf` | Render of the sample (14 pages). |
 | `usage/OVERLAY-candel-opening-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map from `tools/overlay.sh`. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca5-opening-brief.typ` | The template: `ca5-opening-brief(meta, md)`. |
@@ -17,8 +17,8 @@ Template for the principal brief of an appellant in the U.S. Court of Appeals fo
 Build (from the repo root, with typst 0.15.0 on PATH):
 
 ```sh
-sh tools/render.sh courts/fifth-circuit/court-of-appeals/opening-brief usage/INPUT-ca5-opening-brief-candel.md
-sh tools/overlay.sh courts/fifth-circuit/court-of-appeals/opening-brief candel-opening-brief usage/SAMPLE-ca5-opening-brief-candel2520366.pdf
+sh tools/render.sh courts/fifth-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md
+sh tools/overlay.sh courts/fifth-circuit/court-of-appeals/opening-brief candel-opening-brief usage/FILED-EXAMPLE-opening-brief.pdf
 ```
 
 Typst runs with the vendored fonts only (`--ignore-system-fonts`); any typst warning fails the render. The font is EB Garamond (`fonts/eb-garamond/`), and cmarker 0.1.10 is vendored under `vendor/typst-packages/`.
@@ -123,8 +123,8 @@ Defects found and fixed during the review:
 
 ## Status
 
-- exemplar: yes (`usage/SAMPLE-ca5-opening-brief-candel2520366.pdf`)
-- render: ok (`usage/OUTPUT-ca5-opening-brief-candel.typst.pdf`, 14 pages, no typst warnings)
+- exemplar: yes (`usage/FILED-EXAMPLE-opening-brief.pdf`)
+- render: ok (`usage/OUTPUT-opening-brief.typst.pdf`, 14 pages, no typst warnings)
 - overlay: ok (`usage/OVERLAY-candel-opening-brief.pdf`, page map in `-overlay.txt`)
 - pages reviewed: 14 of 14
 

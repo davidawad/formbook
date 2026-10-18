@@ -2,9 +2,9 @@
 
 - Court: `bap8`, United States Bankruptcy Appellate Panel for the Eighth Circuit (`courts/eighth-circuit/bankruptcy-appellate-panel/`). Court-root `typst/` and `usage/` are untouched.
 - Doc type: `answering-brief`. Appellee's brief, FRBP 8014(b).
-- **Exemplar: yes.** `usage/SAMPLE-bap8-answering-brief-swackhammer226006.pdf`: Appellees' Brief, *Farm Credit Services of America, PCA v. Swackhammer*, BAP No. 22-6006, filed 2022-12-23 by Robert C. Gainer (Cutler Law Firm, P.C.) for the debtor-appellees (22 pages, text PDF, Word 2021). Found 2026-10-16 in CourtListener RECAP, where BAP dockets sit under court id `ca8` (not `bap8`). Source details in `usage/SOURCE.md`.
-- **Sample: transcription.** `usage/INPUT-bap8-answering-brief-swackhammer226006.md` transcribes the whole filing: cover, summary of the case, oral-argument statement, both certifications, the full body (filing pp. 1-13, all six footnotes and the four block quotations), signature, certificates. The tables are rebuilt by the template from the headings and `toa:` links.
-- Render: ok, `usage/OUTPUT-bap8-answering-brief-swackhammer226006.typst.pdf`, 22 pages (the filing is also 22), typst with no warnings (2026-10-16). `pdffonts`: EB Garamond only.
+- **Exemplar: yes.** `usage/FILED-EXAMPLE-answering-brief.pdf`: Appellees' Brief, *Farm Credit Services of America, PCA v. Swackhammer*, BAP No. 22-6006, filed 2022-12-23 by Robert C. Gainer (Cutler Law Firm, P.C.) for the debtor-appellees (22 pages, text PDF, Word 2021). Found 2026-10-16 in CourtListener RECAP, where BAP dockets sit under court id `ca8` (not `bap8`). Source details in `usage/SOURCE.md`.
+- **Sample: transcription.** `usage/INPUT-answering-brief.md` transcribes the whole filing: cover, summary of the case, oral-argument statement, both certifications, the full body (filing pp. 1-13, all six footnotes and the four block quotations), signature, certificates. The tables are rebuilt by the template from the headings and `toa:` links.
+- Render: ok, `usage/OUTPUT-answering-brief.typst.pdf`, 22 pages (the filing is also 22), typst with no warnings (2026-10-16). `pdffonts`: EB Garamond only.
 - Overlay: ok, `usage/OVERLAY-swackhammer-22-6006.pdf` and `.txt` (2026-10-16). Diagnostic only, see below.
 - Pages reviewed: 22 of 22 as PNG at 60 dpi (2026-10-16), compared with filing pages 1, 2, 5, 8 and 13 rendered at 50 dpi.
 - Superseded: the synthetic sample (`INPUT-synthetic-answering-brief.md`) and its `OUTPUT-` `.pdf`, `.docx`, `.docx.pdf` were removed. The docx outputs for the new sample were **not** made: LibreOffice (`soffice`) is not installed on this box, so `docx/render.sh` cannot run. See Engines.
@@ -14,12 +14,12 @@
 
 | Path | What |
 |---|---|
-| `typst/main.typ` | Entry point; reads `--input sample=...` (default now `usage/INPUT-bap8-answering-brief-swackhammer226006.md`) and calls `bap8-brief`. |
+| `typst/main.typ` | Entry point; reads `--input sample=...` (default now `usage/INPUT-answering-brief.md`) and calls `bap8-brief`. |
 | `typst/bap8-answering-brief.typ` | Template. Parameter block at the top: `doc-kind`, `word-limit` (13,000), `required-sections` (FRBP 8014(b): summary, argument), `needs-standard-of-review = false`. |
-| `usage/INPUT-bap8-answering-brief-swackhammer226006.md` | Transcription of the filed brief (contract below). |
-| `usage/OUTPUT-bap8-answering-brief-swackhammer226006.typst.pdf` | Render (`sh tools/render.sh courts/eighth-circuit/bankruptcy-appellate-panel/answering-brief usage/INPUT-bap8-answering-brief-swackhammer226006.md`). |
+| `usage/INPUT-answering-brief.md` | Transcription of the filed brief (contract below). |
+| `usage/OUTPUT-answering-brief.typst.pdf` | Render (`sh tools/render.sh courts/eighth-circuit/bankruptcy-appellate-panel/answering-brief usage/INPUT-answering-brief.md`). |
 | `usage/OVERLAY-swackhammer-22-6006.pdf`, `.txt` | Overlay (`sh tools/overlay.sh courts/eighth-circuit/bankruptcy-appellate-panel/answering-brief swackhammer-22-6006`). |
-| `usage/SAMPLE-bap8-answering-brief-swackhammer226006.pdf`, `usage/SOURCE.md` | The filed exemplar and its source and search log. |
+| `usage/FILED-EXAMPLE-answering-brief.pdf`, `usage/SOURCE.md` | The filed exemplar and its source and search log. |
 
 ## Template changes this run (2026-10-16)
 
@@ -38,7 +38,7 @@ Same as `opening-brief/README.md` (`case_number`, `caption`, `proceeding`, `brie
 - `caption[].v` (optional, default true): `false` drops the "v." after that side.
 - `preliminary` (optional): markdown with `#` headings for statements placed before the certifications.
 
-Transcription notes for `INPUT-bap8-answering-brief-swackhammer226006.md`:
+Transcription notes for `INPUT-answering-brief.md`:
 - The filing gives no counsel email. The `email` field says "Not stated in the filed brief", as in the opening-brief sample.
 - "Attorneys for Appellees" is printed under counsel's name on the cover, as the second `names` line.
 - The filing's spellings are kept: "§ 1129" in point heading I (the TOC says § 1229), "Schnackenberg"/"Schnakenberg", "Jelling", "let along". The TOC's "JURIDICTIONAL" and "ARGUEMENT" are not reproduced: the template builds the TOC from the body headings, which are spelled correctly in the filing.

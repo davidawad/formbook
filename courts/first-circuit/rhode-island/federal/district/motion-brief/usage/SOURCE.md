@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-rid-motion-brief-tablada126cv00118.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Case | *Amerrisque Tablada v. Rocket Mortgage, LLC, et al.* |
 | Court | United States District Court, District of Rhode Island |
 | Docket no. | 1:26-cv-00118-MSM-AEM (ECF header) |
@@ -22,7 +22,7 @@ Second filer (not saved, for tier 2 later): United States v. Amore, 1:25-cv-0063
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-rid-motion-brief-amore125cv00639.pdf` |
+| File | `FILED-EXAMPLE-motion-brief-2.pdf` |
 | Court | United States District Court, District of Rhode Island |
 | Case | *United States of America v. Gregg M. Amore, in his official capacity as Secretary of State for the State of Rhode Island* |
 | Docket no. | 1:25-cv-00639-MSM-PAS (ECF header of the motion, ECF No. 26) |

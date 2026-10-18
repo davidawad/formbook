@@ -1,6 +1,6 @@
 # Exemplar source
 
-## Primary: `SAMPLE-cob-adversary-complaint-golec2401083.pdf`
+## Primary: `FILED-EXAMPLE-adversary-complaint.pdf`
 
 - Court: United States Bankruptcy Court for the District of Colorado
 - Case: *Golec, et al. v. Weinant*, Adv. Proc. No. 24-01083-MER (main case No. 23-15585 MER, Chapter 7)
@@ -10,7 +10,7 @@
 - Fetched from: https://storage.courtlistener.com/recap/gov.uscourts.cob.519876/gov.uscourts.cob.519876.1.0.pdf (CourtListener RECAP; found by the RECAP search `court=cob`, `type=r`, query "complaint to determine dischargeability")
 - Date fetched: 2026-10-14
 - Text layer: yes (`pdftotext` reads it; embedded fonts).
-- Public court record (RECAP). Transcribed to `usage/INPUT-cob-adversary-complaint-golec.md`; the overlay is `usage/OVERLAY-golec-adversary-complaint.pdf`.
+- Public court record (RECAP). Transcribed to `usage/INPUT-adversary-complaint.md`; the overlay is `usage/OVERLAY-golec-adversary-complaint.pdf`.
 
 ## Second exemplar (not yet saved)
 
@@ -18,7 +18,7 @@ The Golec complaint is the only adversary complaint this folder has. The CourtLi
 
 ## Other samples
 
-- `usage/INPUT-cob-adversary-complaint-reitmair.md` is a pro se complaint (Dawn Reitmair, dated 6/15/2026). It has no exemplar in this folder: its source was not recorded, and it is kept as an existing sample. It is used to show the FRBP 7008(a) "consent missing" flag. It is not a transcription of a filed document this folder holds.
+- `usage/INPUT-adversary-complaint-2.md` is a pro se complaint (Dawn Reitmair, dated 6/15/2026). It has no exemplar in this folder: its source was not recorded, and it is kept as an existing sample. It is used to show the FRBP 7008(a) "consent missing" flag. It is not a transcription of a filed document this folder holds.
 
 ## Searches tried
 

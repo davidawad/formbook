@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Exemplar | `SAMPLE-bap6-answering-brief-chieftainsteel198005.pdf` (15 pages, text layer) |
+| Exemplar | `FILED-EXAMPLE-answering-brief.pdf` (15 pages, text layer) |
 | Case | *In re Chieftain Steel, LLC, et al.*, BAP No. 19-8005, on appeal from the Bankr. W.D. Ky. (Originating Case No. 16-10407, Hon. Joan A. Lloyd) |
 | Document | Appellees' Brief (titled "APPELLEES' BRIEF"). ECF header: "Case: 19-8005 Document: 16". |
 | Filer | Appellee United Cumberland Bank, by Scott A. Bachert, Kerrick Bachert, Bowling Green, Kentucky. |

@@ -2,8 +2,8 @@
 
 - Court: `ca1`, Court of Appeals for the First Circuit (`courts/first-circuit/court-of-appeals/`)
 - Doc type: `answering-brief`. Brief of Appellee (FRAP 28(b)); one self-contained folder, no shared files.
-- Exemplar: `usage/SAMPLE-ca1-answering-brief-griffin231668.pdf` (*Griffin v. Massachusetts Department of Revenue*, No. 23-1668, filed 2024-01-02; provenance in `usage/SOURCE.md`).
-- Sample: `usage/INPUT-ca1-answering-brief-griffin.md` (excerpt of the filed brief; see Known gaps).
+- Exemplar: `usage/FILED-EXAMPLE-answering-brief.pdf` (*Griffin v. Massachusetts Department of Revenue*, No. 23-1668, filed 2024-01-02; provenance in `usage/SOURCE.md`).
+- Sample: `usage/INPUT-answering-brief.md` (excerpt of the filed brief; see Known gaps).
 - Status: template built; render and page review re-done 2026-10-14 (pages below). Overlay PDF not regenerated this run (see Overlay). Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,8 +12,8 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `ca1-brief`. |
 | `typst/ca1-answering-brief.typ` | Template; the same code as the opening-brief template with its parameter block set for an appellee's brief: `word-limit = 13000`, `required-sections` = summary and argument (FRAP 28(b)), `needs-standard-of-review = false`, `addendum = "optional"`. |
-| `usage/INPUT-ca1-answering-brief-griffin.md` | Markdown contract sample (frontmatter + body). |
-| `usage/OUTPUT-ca1-answering-brief-griffin.typst.pdf` | `sh tools/render.sh courts/first-circuit/court-of-appeals/answering-brief usage/INPUT-ca1-answering-brief-griffin.md` (10 pages). |
+| `usage/INPUT-answering-brief.md` | Markdown contract sample (frontmatter + body). |
+| `usage/OUTPUT-answering-brief.typst.pdf` | `sh tools/render.sh courts/first-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md` (10 pages). |
 | `usage/OVERLAY-griffin-answering-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/first-circuit/court-of-appeals/answering-brief griffin-answering-brief`. |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -38,7 +38,7 @@ Primary source: the First Circuit Rulebook, "effective with amendments through J
 
 ## Overlay
 
-This run (2026-10-14): `tools/overlay.sh` could not write the PDF, because `usage/SAMPLE-ca1-answering-brief-griffin231668.pdf` is not in this checkout (`usage/` holds only `SOURCE.md`). The `.txt` page map is unchanged from the earlier run, and the pairings below are from that run.
+This run (2026-10-14): `tools/overlay.sh` could not write the PDF, because `usage/FILED-EXAMPLE-answering-brief.pdf` is not in this checkout (`usage/` holds only `SOURCE.md`). The `.txt` page map is unchanged from the earlier run, and the pairings below are from that run.
 
 `usage/OVERLAY-griffin-answering-brief.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only. Pairings from the last run:
 
@@ -50,7 +50,7 @@ This run (2026-10-14): `tools/overlay.sh` could not write the PDF, because `usag
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-ca1-answering-brief-griffin.typst.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-answering-brief.typst.pdf` was rendered at 60 dpi and viewed (10 of 10). Typst printed no warnings. Fonts embedded: EB Garamond only.
 
 | Page | Content | Result |
 |---|---|---|
@@ -84,15 +84,15 @@ The typst template is the reference. The same sample is rendered in two more eng
 
 | Engine | Folder | Output | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `usage/OUTPUT-ca1-answering-brief-griffin.typst.pdf` (10 pages) | unchanged |
-| latex | `latex/` (`template.tex` + `ca1.lua`, tectonic) | `usage/OUTPUT-ca1-answering-brief-griffin.latex.pdf` (10 pages) | renders; checked by eye, see below |
-| docx | `docx/` (`reference.docx` + `ca1.lua`, pandoc) | `usage/OUTPUT-ca1-answering-brief-griffin.docx` | builds and validates; `.docx.pdf` BLOCKED (no LibreOffice) |
+| typst (primary) | `typst/` | `usage/OUTPUT-answering-brief.typst.pdf` (10 pages) | unchanged |
+| latex | `latex/` (`template.tex` + `ca1.lua`, tectonic) | `usage/OUTPUT-answering-brief.latex.pdf` (10 pages) | renders; checked by eye, see below |
+| docx | `docx/` (`reference.docx` + `ca1.lua`, pandoc) | `usage/OUTPUT-answering-brief.docx` | builds and validates; `.docx.pdf` BLOCKED (no LibreOffice) |
 
 **LaTeX matches** (tier 1): EB Garamond 14 pt from `fonts/` only (`fontdir`), body double-spaced at the typst pitch (31.5 pt), 1 inch margins, footnotes 14 pt, roman front matter, arabic body, the cover (FRAP 32(a)(2)), the TOC and TOA with page numbers from the aux file, the certificates (Form 6 wording and the word count, 1012 words, equal to typst), the signature and the addendum with `Add-N` pages. No addendum in the sample; the addendum is optional here (1st Cir. R. 28.0(b)(1)), so none is rendered.
 
 **LaTeX differs** (tier 2): the body breaks lines and pages a little differently, so the sample is 10 pages against typst's 10. The sub-heading paragraphs keep with the text below them by `\nobreak` only (`needspace` misfired in this box). The signature block is not kept with the last paragraph. Tectonic fetches TeX packages on its first run (cached afterwards).
 
-**DOCX** (`usage/OUTPUT-ca1-answering-brief-griffin.docx`): the word count is 1012, equal to typst. The cover, certificates and signature use the custom styles in `reference.docx`; the sections give roman front matter, arabic body and (addendum briefs) `Add-N`.
+**DOCX** (`usage/OUTPUT-answering-brief.docx`): the word count is 1012, equal to typst. The cover, certificates and signature use the custom styles in `reference.docx`; the sections give roman front matter, arabic body and (addendum briefs) `Add-N`.
 
 BLOCKED (docx):
 - `docx.pdf` checks (every gate on the LibreOffice PDF): BLOCKED, no `soffice` on this box (LibreOffice has no conda-forge package; `docs/DOCX.md`). No `usage/.check-docx.txt` stamp is written.
@@ -102,4 +102,4 @@ BLOCKED (docx):
 - Cover rule lines are not drawn in the docx.
 - The `.docx` is not yet opened in Word or LibreOffice (no LibreOffice here), so the no-repair check is not done.
 
-Build: `sh docx/make-reference.sh none` once (the output is committed), then `sh tools/render.sh --engine latex|docx <court-dir> usage/INPUT-ca1-answering-brief-griffin.md`. The docx command exits non-zero at the LibreOffice step after writing the `.docx`.
+Build: `sh docx/make-reference.sh none` once (the output is committed), then `sh tools/render.sh --engine latex|docx <court-dir> usage/INPUT-answering-brief.md`. The docx command exits non-zero at the LibreOffice step after writing the `.docx`.

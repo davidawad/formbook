@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-moed-motion-brief-harmonypointe426cv00011.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court for the Eastern District of Missouri, Eastern Division
 - Case: *Harmony Pointe, LLC v. City of Cottleville, Missouri, et al.*
 - Docket: No. 4:26-cv-00011-PLC (Doc. 37)

@@ -36,13 +36,13 @@ Not checked by this template (author's responsibility): the complaint must state
 
 ## Exemplar
 
-- `usage/SAMPLE-cacb-adversary-complaint-lpgmarshack826ap01078sc.pdf`: Complaint for avoidance and recovery of preferential, actual and constructive fraudulent, and unauthorized post-petition transfers, and disallowance of claims. 28 pages (26-page complaint, Exhibits 1 and 2). Filed June 30, 2026, Santa Ana Division, by the Chapter 11 trustee (Marshack Hays Wood LLP). Text layer present. Body text is Times New Roman (`TimesNewRomanPS-*`, embedded); exhibits use Arial and Calibri.
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf`: Complaint for avoidance and recovery of preferential, actual and constructive fraudulent, and unauthorized post-petition transfers, and disallowance of claims. 28 pages (26-page complaint, Exhibits 1 and 2). Filed June 30, 2026, Santa Ana Division, by the Chapter 11 trustee (Marshack Hays Wood LLP). Text layer present. Body text is Times New Roman (`TimesNewRomanPS-*`, embedded); exhibits use Arial and Calibri.
 - Provenance and searches: `usage/SOURCE.md`.
 - **Only one exemplar.** Tier 2 (the eval-loop rule) asks for two or three from different filers. Not done: see gaps 9.
 
 ## Sample
 
-- `usage/INPUT-cacb-adversary-complaint-lpgmarshackadversary.md` is a transcription of the exemplar: the double caption and counsel block, the lead-in, the section headings in order (Statement of the Case, Jurisdiction and Venue, Parties, General Allegations A, C, E, F, G, First and Second Claims for Relief, Prayer), the prayer in full, and the signature block. Filing paragraphs 19-31 and 48-52 are not transcribed (the letters in the headings run A, C, E, F, G as filed).
+- `usage/INPUT-adversary-complaint.md` is a transcription of the exemplar: the double caption and counsel block, the lead-in, the section headings in order (Statement of the Case, Jurisdiction and Venue, Parties, General Allegations A, C, E, F, G, First and Second Claims for Relief, Prayer), the prayer in full, and the signature block. Filing paragraphs 19-31 and 48-52 are not transcribed (the letters in the headings run A, C, E, F, G as filed).
 - Paragraph numbers are not transcribed; the template numbers the allegations itself, so the numbers differ from the filing. The filing's cross-references ("Paragraphs 1 through 71") are kept as written and so do not match the template's numbers. This is a transcription artefact, not a template defect.
 - Exhibits 1 and 2 (the transfer charts) are not transcribed.
 
@@ -50,11 +50,11 @@ Not checked by this template (author's responsibility): the complaint must state
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env, see the brief)
-sh tools/render.sh courts/ninth-circuit/california/federal/bankruptcy-central-district/adversary-complaint usage/INPUT-cacb-adversary-complaint-lpgmarshackadversary.md
+sh tools/render.sh courts/ninth-circuit/california/federal/bankruptcy-central-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/ninth-circuit/california/federal/bankruptcy-central-district/adversary-complaint lpg-marshack-adversary
 ```
 
-- `usage/OUTPUT-cacb-adversary-complaint-lpgmarshackadversary.typst.pdf`: 11 pages, letter (10 with EB Garamond; Times New Roman is wider, so the sample grew by a page). Typst compiled with no warnings (`render.sh` fails on any). Fonts: Liberation Serif only (vendored); `pdffonts` shows `LiberationSerif`, `-Italic`, `-Bold`, `-BoldItalic`, embedded.
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: 11 pages, letter (10 with EB Garamond; Times New Roman is wider, so the sample grew by a page). Typst compiled with no warnings (`render.sh` fails on any). Fonts: Liberation Serif only (vendored); `pdffonts` shows `LiberationSerif`, `-Italic`, `-Bold`, `-BoldItalic`, embedded.
 - Line pitch measured with `pdftotext -bbox-layout` on page 4 (double-spaced body) and page 1 (single-spaced counsel): 24.00 pt and 12.00 pt. The leading is set per face (`body-leading` 1.345 em, `single-leading` 0.345 em), because Liberation Serif's line box is 0.655 em. Numbered lines run 1 to 28 down the margin.
 - `usage/OVERLAY-lpg-marshack-adversary.pdf` and `.txt`: red = our render, blue = exemplar, black = both. Page map: ours 1-3 ↔ filed 1-3 (about 81-85% word overlap); ours 4-11 ↔ filed 5, 9, 11, 13, 13, 20, 21, 21 (27-64%). The map is coarse (word sets, not layout): the exemplar's body is at a different pagination and carries pleading-paper line numbers in the same grid, so the layers align on the cover and drift after it. The overlay is a diagnostic, not a score.
 - Naming: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the brief's `<id>.pdf` / `<id>-overlay.pdf` names do not match `tools/`; the tools' names are used).
@@ -100,7 +100,7 @@ Defects found and fixed during review (for the record): the first render had a 1
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` builds `reference.docx`; `cacb-adversary.lua` lays out the cover, caption, numbered allegations, prayer and signature). Built with `sh tools/render.sh --engine docx`; `usage/OUTPUT-cacb-adversary-complaint-lpgmarshackadversary.docx` and `.docx.pdf` are the output. Checked with LibreOffice only (Word is not available here).
+**docx** (`docx/`: `build-reference.sh` builds `reference.docx`; `cacb-adversary.lua` lays out the cover, caption, numbered allegations, prayer and signature). Built with `sh tools/render.sh --engine docx`; `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` are the output. Checked with LibreOffice only (Word is not available here).
 
 - Matches the typst template: letter; left margin 1.5 in, right 0.75 in, top 1 in, bottom 47 pt (28 numbered lines of 24 pt take 672 pt); Liberation Serif 12 pt; 24 pt double and 12 pt single pitch; 28 pleading numbers; two vertical rules; counsel block on lines 1-7 and the court title on line 8; double caption; the cover on page 1 and the body from page 2; allegations numbered in the body; WHEREFORE unnumbered; prayer items numbered 1-19 across the claim groups; the last prayer group kept with the signature block; footer with the page number, the title and the adversary number.
 - Differs or is limited: the 28 numbers are a text box in the header, not Word line numbering (line numbering would also number the single-spaced lines). Single-spaced tables (counsel, caption) are not rounded to the 24 pt grid, so an odd number of their lines shifts the grid by 12 pt below them. The bottom margin is 1 pt less than the typst template so that the caption rule fits. The footer title and adversary number are document properties (SUBJECT, COMMENTS) set from the sample's frontmatter; a file whose properties are edited in Word will show the edited values. The font name is Liberation Serif, as in the typst template; the rule text names Times New Roman, and Word substitutes a font where Liberation Serif is not installed (decision for David: rename the font in `build-reference.sh`).

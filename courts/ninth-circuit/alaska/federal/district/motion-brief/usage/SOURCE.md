@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-akd-motion-brief-naec325cv00038.pdf` (42 pages, text layer present, `pdftotext` reads it)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (42 pages, text layer present, `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.akd.75657/gov.uscourts.akd.75657.57.1.pdf (CourtListener RECAP archive, attachment 57-1 of the docket)
 - Court: United States District Court for the District of Alaska
 - Case: *Northern Alaska Environmental Center v. Trump*, et al. (intervenor-defendants: American Petroleum Institute, et al.)
@@ -26,7 +26,7 @@ The memorandum runs 42 pages. Local Civil Rule 7.4(a)(1) limits a Rule 12(b) mem
 
 ## Additional exemplar (different filer)
 
-- File: `SAMPLE-akd-motion-brief-usao325cv00141.pdf` (19 pages; text layer present)
+- File: `FILED-EXAMPLE-motion-brief-2.pdf` (19 pages; text layer present)
 - Court: United States District Court for the District of Alaska
 - Case: *Launch Alaska v. Department of the Navy, Office of Naval Research*
 - Docket: No. 3:25-cv-00141-GMS, Document 15

@@ -2,7 +2,7 @@
 
 Fetched 2026-10-14. Both are public court records from CourtListener RECAP (the free archive of PACER documents), downloaded from `storage.courtlistener.com`. Both have a text layer (`pdftotext` reads them).
 
-## 1. SAMPLE-ianb-adversary-complaint-hanrahancomstar2509028.pdf (6 pages)
+## 1. FILED-EXAMPLE-adversary-complaint-2.pdf (6 pages)
 
 | Item | Value |
 |---|---|
@@ -16,7 +16,7 @@ Fetched 2026-10-14. Both are public court records from CourtListener RECAP (the 
 | Found by | CourtListener search API, `type=rd`, `court=ianb`, query "Adversary case complaint": docket entry "Adversary case 25-09028. Complaint by Renee K. Hanrahan against Comstar Supply, Inc." |
 | Notes | The signature block is on page 6 as visible text in the page image; `pdftotext` does not return it, so it was transcribed from the page image. The filing has no Adversary Cover Sheet attached (the cover sheet, Director's Form 1040, is a separate attachment on RECAP entry 1.1 in this docket, not part of this PDF). |
 
-## 2. SAMPLE-ianb-adversary-complaint-childersroche2509079.pdf (4 pages)
+## 2. FILED-EXAMPLE-adversary-complaint.pdf (4 pages)
 
 | Item | Value |
 |---|---|

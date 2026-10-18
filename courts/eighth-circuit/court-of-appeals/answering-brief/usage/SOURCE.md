@@ -4,7 +4,7 @@ One filed exemplar, a public court record (RECAP copy of a PACER document).
 
 | File | Case | Docket | Filer | Document | Date filed | URL | Date fetched |
 |---|---|---|---|---|---|---|---|
-| `SAMPLE-ca8-answering-brief-banksvcostar253320.pdf` | *Desmond Banks v. CoStar Realty Information, Inc.* (8th Cir.), on appeal from E.D. Mo. No. 4:25-cv-00564-CMS | 25-3320 | CoStar Realty Information, Inc., defendant-appellee (counsel: Baker & Hostetler LLP) | Response Brief for Appellee CoStar Realty Information, Inc., 58 pages (certificate of compliance: 11,620 words; certificate dated April 29, 2026) | 2026-04-30 (CourtListener docket entry 04/30/2026 02:16 PM, "w/service 04/30/2026") | https://storage.courtlistener.com/recap/gov.uscourts.ca8.113264/gov.uscourts.ca8.113264.00805509246.0.pdf | 2026-10-14 |
+| `FILED-EXAMPLE-answering-brief.pdf` | *Desmond Banks v. CoStar Realty Information, Inc.* (8th Cir.), on appeal from E.D. Mo. No. 4:25-cv-00564-CMS | 25-3320 | CoStar Realty Information, Inc., defendant-appellee (counsel: Baker & Hostetler LLP) | Response Brief for Appellee CoStar Realty Information, Inc., 58 pages (certificate of compliance: 11,620 words; certificate dated April 29, 2026) | 2026-04-30 (CourtListener docket entry 04/30/2026 02:16 PM, "w/service 04/30/2026") | https://storage.courtlistener.com/recap/gov.uscourts.ca8.113264/gov.uscourts.ca8.113264.00805509246.0.pdf | 2026-10-14 |
 
 How it was found: CourtListener's RECAP search API, `https://www.courtlistener.com/api/rest/v4/search/?type=r&court=ca8&q=%22brief+for+appellee%22&order_by=dateFiled+desc`, filtered to "BRIEF FILED - APPELLEE BRIEF" entries. The docket entry text reads "Length: 11,620 words". The PDF has embedded text (`pdffonts`: TrueType, `pdftotext` yields the text).
 
@@ -16,7 +16,7 @@ Only one filer's brief is on file, so tier 2 (professional convention) is judged
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca8-answering-brief-anywhereremax242143.pdf` (67 pages) |
+| File | `FILED-EXAMPLE-answering-brief-2.pdf` (67 pages) |
 | Case / docket | *Rhonda Burnett, et al. v. National Association of Realtors, et al.*, consolidated Nos. 24-2143, 24-2168, 24-2391 |
 | Document | Anywhere and RE/MAX's Response Brief |
 | Filer | Anywhere Real Estate Inc. and RE/MAX, LLC, by Aaron D. Van Oort, Faegre Drinker Biddle & Reath LLP, et al. |
@@ -30,7 +30,7 @@ Only one filer's brief is on file, so tier 2 (professional convention) is judged
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca8-answering-brief-minnesotasimon262679.pdf` (72 pages) |
+| File | `FILED-EXAMPLE-answering-brief-3.pdf` (72 pages) |
 | Case / docket | *United States of America v. Steve Simon et al.*, No. 26-2679 |
 | Document | Brief for Defendants-Appellees Steve Simon and Minnesota |
 | Filer | Steve Simon and the State of Minnesota, by counsel for the Minnesota Attorney General |

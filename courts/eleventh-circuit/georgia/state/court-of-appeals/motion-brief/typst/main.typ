@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "gactapp-motion-brief.typ": gactapp-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-gactapp-motion-brief-motionsample.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #gactapp-motion-brief(meta, body)

@@ -2,7 +2,7 @@
 
 One filed exemplar, found 2026-10-15 on CourtListener RECAP. It is a public court record. Only one filer is saved so far; EVAL-LOOP asks for two or three from different filers before tier 2 can be judged (see the README, gap 1).
 
-## 1. `SAMPLE-kyeb-motion-brief-williams2460490.pdf` (8 pages, text layer present)
+## 1. `FILED-EXAMPLE-motion-brief.pdf` (8 pages, text layer present)
 
 - File URL (fetched): https://storage.courtlistener.com/recap/gov.uscourts.kyeb.330792/gov.uscourts.kyeb.330792.36.0.pdf
 - Docket page: https://www.courtlistener.com/docket/68564913/36/michael-jason-williams/ (CourtListener docket 68564913, entry 36)
@@ -36,7 +36,7 @@ Not tried: PACER (requires an account and fees; not used by this box), and the c
 
 ## Additional filer (candidate second tier-2 exemplar; motion without a separately filed memorandum)
 
-- File: `SAMPLE-kyeb-motion-brief-wellsfargo1870393.pdf` (33 pages; text layer present)
+- File: `FILED-EXAMPLE-motion-brief-3.pdf` (33 pages; text layer present)
 - Case: CourtListener docket 18-70393-tnw; caption identifies underlying case 18-10393
 - Document: Wells Fargo Bank, N.A., Motion for Relief from the Automatic Stay and for Abandonment (Document 12); motion pages are 1–5, remaining pages include a proof of claim and loan documents
 - Filer: Wells Fargo Bank, N.A., by counsel Joel K. Jensen (Lerner, Sampson & Rothfuss)

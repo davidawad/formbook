@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "utb-motion-brief.typ": utb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-utb-motion-brief-plaza106motiontodismiss.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #utb-motion-brief(meta, body)

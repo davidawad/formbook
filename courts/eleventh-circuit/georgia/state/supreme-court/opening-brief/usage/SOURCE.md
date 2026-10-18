@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ga-opening-brief-clarkvleighs26a0349.pdf` |
+| File | `FILED-EXAMPLE-opening-brief.pdf` |
 | URL fetched from | <https://statecourtreport.org/sites/default/files/2026-06/clark-brief.pdf> (hosted by State Court Report; the original filing is on the Court's SCED e-filing system, which this box cannot reach) |
 | Case | *Charles Clark et al. v. Thomas B. Leigh, M.D. et al.* (Bibb State Court No. 20SCCV091967) |
 | Docket no. | S26A0349 (Supreme Court of Georgia) |
@@ -14,10 +14,10 @@
 | Text layer | Yes: `pdftotext` returns the text; body face embedded is Century Schoolbook (`pdffonts`) |
 | Public record | Yes: a brief filed in an appeal to the Supreme Court of Georgia, republished by State Court Report |
 
-Used for: cover and counsel block, table of contents and authorities, jurisdictional statement, enumeration of errors, statement of the case, summary of argument, the argument's opening, conclusion, word-count statement, signature block and certificate of service (see `usage/INPUT-ga-opening-brief-clark.md`).
+Used for: cover and counsel block, table of contents and authorities, jurisdictional statement, enumeration of errors, statement of the case, summary of argument, the argument's opening, conclusion, word-count statement, signature block and certificate of service (see `usage/INPUT-opening-brief.md`).
 
 ## SHA-256 checksums
 
 | File | SHA-256 |
 |---|---|
-| `SAMPLE-ga-opening-brief-clarkvleighs26a0349.pdf` | `599399cc1225dfb35bfbfe76cdb6f229241816b2ffee1fa036034e7b7da0d47c` |
+| `FILED-EXAMPLE-opening-brief.pdf` | `599399cc1225dfb35bfbfe76cdb6f229241816b2ffee1fa036034e7b7da0d47c` |

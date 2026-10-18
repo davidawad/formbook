@@ -2,8 +2,8 @@
 
 - Court: `bap9` (United States Bankruptcy Appellate Panel of the Ninth Circuit), folder `courts/ninth-circuit/bankruptcy-appellate-panel/reply-brief/`
 - Template: `typst/bap9-reply-brief.typ` (entry `typst/main.typ`)
-- Exemplar: `usage/SAMPLE-bap9-reply-brief-beavor251050.pdf` (see `usage/SOURCE.md`)
-- Samples: `usage/INPUT-bap9-reply-brief-beavor.md`, a transcription of the exemplar (abridged), rendered to `usage/OUTPUT-bap9-reply-brief-beavor.typst.pdf`, overlay `usage/OVERLAY-beavor-reply-brief.pdf` and `.txt`; and `usage/INPUT-bap9-reply-brief-fictional.md` (fictional), rendered to `usage/OUTPUT-bap9-reply-brief-fictional.typst.pdf`
+- Exemplar: `usage/FILED-EXAMPLE-reply-brief.pdf` (see `usage/SOURCE.md`)
+- Samples: `usage/INPUT-reply-brief.md`, a transcription of the exemplar (abridged), rendered to `usage/OUTPUT-reply-brief.typst.pdf`, overlay `usage/OVERLAY-beavor-reply-brief.pdf` and `.txt`; and `usage/INPUT-reply-brief-2.md` (fictional), rendered to `usage/OUTPUT-reply-brief-2.typst.pdf`
 - Status of this doc type:
   - **Exemplar found (2026-10-16).** *Beavor v. Reno City Center Owner, LLC*, BAP case 25-1050, "Appellants' Reply to Brief of Appellee Reno City Center Owner, LLC", filed August 29, 2025 by Greenberg Glusker Fields Claman & Machtinger LLP for the appellants. Born-digital, complete. Alternates from different filers: *Moehling v. Select Portfolio Servicing* (BAP No. SC-26-1081, pro se) and, for the cover caption, the answering-brief alternate *Hujazi v. Wirum* (BAP No. NC-14-1030); compared, not saved.
   - The Beavor sample is abridged: 15 rendered pages against the filer's 23 (see the sample's header comment). The fictional sample is kept as it was.
@@ -57,13 +57,13 @@ The same seven changes as in `../answering-brief/README.md` ("Template changes f
 7. Certificate of service with unregistered parties: the BAP sample certificate's sentence on CM/ECF service of registered parties was missing; now printed before the mailing sentence (Beavor has one non-CM/ECF participant).
 8. Reply only: `authorities` is required (FRBP 8014(c), see "Gap").
 
-Re-rendered after the changes: `OUTPUT-bap9-reply-brief-beavor.typst.pdf` (15 pages) and `OUTPUT-bap9-reply-brief-fictional.typst.pdf` (6 pages, unchanged page count).
+Re-rendered after the changes: `OUTPUT-reply-brief.typst.pdf` (15 pages) and `OUTPUT-reply-brief-2.typst.pdf` (6 pages, unchanged page count).
 
-## Sample (`usage/INPUT-bap9-reply-brief-beavor.md`)
+## Sample (`usage/INPUT-reply-brief.md`)
 
 A transcription of the exemplar, abridged, from the PDF's text layer: the cover; I. Standard of Review; II. Argument part A in full (a) and (b), with footnotes 1-3 and the block quotation; part B, the first two paragraphs of B(a) with footnote 4, and B(b) in full with its block quotation; III. Conclusion; signature; compliance certificate and certificate of service (the one non-CM/ECF participant is in `service.unregistered`). Omitted, as the header comment says: the rest of B(a) (filed pages 7-13), footnotes 5-6, the CM/ECF service list and the server's declaration. The table of authorities is generated from the excerpt, so it lists only the authorities cited in it (17 of the filer's 27). Three heading levels: level 1 "I." sections, level 2 "A."/"B.", level 3 "a)"/"b)". The compliance certificate states the template's count for the excerpt, 2,324 words; the filer's states 3,542 for the whole brief.
 
-## Sample (`usage/INPUT-bap9-reply-brief-fictional.md`)
+## Sample (`usage/INPUT-reply-brief-2.md`)
 
 Fictional. About 350 words of body text (478 words including frontmatter). Two argument headings and a conclusion. Compliance and service certificates only. Written to the rules, not transcribed.
 
@@ -124,7 +124,7 @@ Tier-2 comparison with the alternates: Moehling (pro se; pages 1-2 viewed) and H
 ## Re-check 2026-10-15 (bead fb-595.20.9)
 
 - Re-searched for an exemplar (CourtListener with `court=bap9`, paced; web search). None found. Searches are logged in `usage/SOURCE.md`.
-- Re-rendered `usage/INPUT-bap9-reply-brief-fictional.md` with `sh tools/render.sh`: 6 pages, exit 0. Every page rendered at 60 dpi and viewed; layout unchanged from the review above. The PDF was moved to `/work/artifacts/bap9/` and is not committed.
+- Re-rendered `usage/INPUT-reply-brief-2.md` with `sh tools/render.sh`: 6 pages, exit 0. Every page rendered at 60 dpi and viewed; layout unchanged from the review above. The PDF was moved to `/work/artifacts/bap9/` and is not committed.
 - `sh tools/overlay.sh` exits 1 (`no exemplar pdf`). Overlay: not produced.
 - Status unchanged: **BLOCKED: no public exemplar.**
 ## Engines

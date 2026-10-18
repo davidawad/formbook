@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-insb-motion-brief-easternlivestock1093904.pdf` (7 pages, text layer present: `pdftotext` reads the whole body. The body is embedded TimesNewRoman (subset, `pdffonts`), with LiberationSans and base-14 fonts also listed by the producer. It is a text PDF, not an image scan.)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (7 pages, text layer present: `pdftotext` reads the whole body. The body is embedded TimesNewRoman (subset, `pdffonts`), with LiberationSans and base-14 fonts also listed by the producer. It is a text PDF, not an image scan.)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.insb.561894/gov.uscourts.insb.561894.588.0.pdf (RECAP copy of the docket entry; the docket is https://www.courtlistener.com/docket/4265883/588/eastern-livestock-co-llc/)
 - Court: United States Bankruptcy Court, Southern District of Indiana, New Albany Division
 - Case: *In re Eastern Livestock Co., LLC*, Chapter 11, Case No. 10-93904-BHL-11

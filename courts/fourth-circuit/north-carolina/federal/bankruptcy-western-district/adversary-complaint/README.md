@@ -25,13 +25,13 @@ Rules not used here, with reasons: LR 9013-1(c) (certificate of service) applies
 
 ## Exemplar
 
-- `usage/SAMPLE-ncwb-adversary-complaint-providencegccchase1603271.pdf`: Adversary Complaint for Declaratory Judgment and Injunctive Relief, *Providence Real Estate Venture, LLC v. GCC-Chase, LLC, et al.*, Adv. Proc. No. 16-03271 (Bankr. W.D.N.C., Charlotte Division). 15 pages, Doc 1, filed May 4, 2016 by the plaintiff.
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf`: Adversary Complaint for Declaratory Judgment and Injunctive Relief, *Providence Real Estate Venture, LLC v. GCC-Chase, LLC, et al.*, Adv. Proc. No. 16-03271 (Bankr. W.D.N.C., Charlotte Division). 15 pages, Doc 1, filed May 4, 2016 by the plaintiff.
 - Provenance and searches: `usage/SOURCE.md`.
 - Fonts in the exemplar: TimesNewRoman, Times-BoldItalic and Courier, not embedded. The exemplar is in Times at 12 point.
 
 ## Sample
 
-- `usage/INPUT-ncwb-adversary-complaint-gccchase1603271.md` transcribes the exemplar's caption, counsel block, opening paragraph, ¶¶ 1-20 (parties, jurisdiction, venue, core proceedings), a bracketed note that ¶¶ 21-56 (general allegations) are omitted, Count I (¶¶ 57-71), Count II (¶¶ 72-84), both prayers and the signature block. Text is verbatim, including the exemplar's own slips (for example "if Defendants' do not cease" in ¶ 80, and no period after "Purchase Agreement" in ¶ 84).
+- `usage/INPUT-adversary-complaint.md` transcribes the exemplar's caption, counsel block, opening paragraph, ¶¶ 1-20 (parties, jurisdiction, venue, core proceedings), a bracketed note that ¶¶ 21-56 (general allegations) are omitted, Count I (¶¶ 57-71), Count II (¶¶ 72-84), both prayers and the signature block. Text is verbatim, including the exemplar's own slips (for example "if Defendants' do not cease" in ¶ 80, and no period after "Purchase Agreement" in ¶ 84).
 - Frontmatter drives every case word: `court`, `district`, `division`, `debtor`, `adversary`, `caption.parties`, `title`, `signature`.
 - Page-map note: the template numbers nothing. The author types the paragraph numbers (escaped as `1\.` so they are not read as list markers), so the numbers in the sample are the exemplar's own.
 
@@ -39,11 +39,11 @@ Rules not used here, with reasons: LR 9013-1(c) (certificate of service) applies
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-ncwb-adversary-complaint-gccchase1603271.md
+sh tools/render.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-western-district/adversary-complaint gcc-chase-16-03271
 ```
 
-- `usage/OUTPUT-ncwb-adversary-complaint-gccchase1603271.typst.pdf`: 8 pages, letter. Compiled with no typst warnings (`render.sh` fails on any). `pdffonts`: EBGaramond-Regular, -Italic, -Bold, all embedded. No system fonts.
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: 8 pages, letter. Compiled with no typst warnings (`render.sh` fails on any). `pdffonts`: EBGaramond-Regular, -Italic, -Bold, all embedded. No system fonts.
 - `usage/OVERLAY-gcc-chase-16-03271.pdf` and `.txt`: red = our render, blue = filed exemplar, black = both. Page map from the tool: ours p.1, 2, 3 pair with filed p.1, 2, 3 (word overlap 70.5%, 65.7%, 48.9%); ours p.4-8 pair with filed p.11-15, which is correct for the text transcribed (Count I and II), but the filed pages 4-10 (¶¶ 21-56) are absent from our sample, so the overlay shows missing text there, not a rendering difference. The overlay is a diagnostic, not a score.
 - File names: the brief asked for `usage/<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. The tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, and the brief's own tools use those names, so the repo's naming (`INPUT-`, `OUTPUT-`, `OVERLAY-`) is followed.
 
@@ -80,10 +80,10 @@ Typst (`typst/`) is the reference. The docx engine is built here (`docx/`: `refe
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-ncwb-adversary-complaint-gccchase1603271.typst.pdf` (8 pp) | reference |
-| docx | `OUTPUT-ncwb-adversary-complaint-gccchase1603271.docx` (16 KB) and `OUTPUT-ncwb-adversary-complaint-gccchase1603271.docx.pdf` (LibreOffice, 10 pp) | ok: converted without error; all 10 pages of the `.docx.pdf` rendered at 60 dpi and looked at, and typst pages 1 to 8 looked at beside them |
+| typst | `OUTPUT-adversary-complaint.typst.pdf` (8 pp) | reference |
+| docx | `OUTPUT-adversary-complaint.docx` (16 KB) and `OUTPUT-adversary-complaint.docx.pdf` (LibreOffice, 10 pp) | ok: converted without error; all 10 pages of the `.docx.pdf` rendered at 60 dpi and looked at, and typst pages 1 to 8 looked at beside them |
 
-Rebuild and render: `sh docx/make-reference.sh`, then `sh tools/render.sh --engine docx <this folder> usage/INPUT-ncwb-adversary-complaint-gccchase1603271.md`.
+Rebuild and render: `sh docx/make-reference.sh`, then `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`.
 
 - *Matches typst:* US Letter; one-inch margins; EB Garamond 12 pt only (`pdffonts`: EBGaramond Regular, Bold and Italic, all embedded); body double-spaced at exact 24 pt, half-inch first-line indent, 16 pt after each paragraph (the typst paragraph spacing); headings centered and bold (levels 1 and 2), level 3 bold; the court title, the two-box caption with its rules and "Adv. Proc. No.", the title; the signature block (Dated on the left, the lines from 2.8 in); a centered page number on every page.
 - *Differs (tier 2, not chased):* body line breaks fall at other words in LibreOffice, so page breaks fall at other paragraphs: 10 pages against typst's 8. Page 1 ends before the first numbered paragraph (the "PARTIES" heading moves with ¶ 1). The signature block runs from page 9 onto page 10, where eight lines stand alone; typst breaks its block between pages 7 and 8. The caption rules are table borders, which Word may draw slightly differently (not checked in Word).

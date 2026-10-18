@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-mdd-motion-brief-hylton126cv02698.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Case | *Hylton v. Somerset County Board of Education, et al.* |
 | Court | United States District Court, District of Maryland (`mdd`) |
 | Docket no. | 1:26-cv-02698-MJM (Hon. Matthew J. Maddox) |

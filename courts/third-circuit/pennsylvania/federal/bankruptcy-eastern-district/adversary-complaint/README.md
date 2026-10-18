@@ -5,9 +5,9 @@ Folder: `courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/a
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `usage/SAMPLE-paeb-adversary-complaint-tigreaper2600204.pdf` (Kang Haggerty LLC, filed 2026-09-21) and `usage/SAMPLE-paeb-adversary-complaint-krueger2600127.pdf` (Salzmann Hughes PC, filed 2026-03-24). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-paeb-adversary-complaint-kruegercomplaint.md` (the full filing text, ¶¶ 1 to 88, relief, signature, certificate of service); `usage/INPUT-paeb-adversary-complaint-tigreapercomplaint.md` (an excerpt: caption, ¶¶ 1 to 23, Counts I to V, prayer, signature; see Known gaps) |
-| render | ok: `usage/OUTPUT-paeb-adversary-complaint-kruegercomplaint.typst.pdf` (12 pages), `usage/OUTPUT-paeb-adversary-complaint-tigreapercomplaint.typst.pdf` (9 pages); typst 0.15.0, vendored EB Garamond only, `--ignore-system-fonts`, no warnings |
+| exemplar | yes, two filers: `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (Kang Haggerty LLC, filed 2026-09-21) and `usage/FILED-EXAMPLE-adversary-complaint.pdf` (Salzmann Hughes PC, filed 2026-03-24). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-adversary-complaint.md` (the full filing text, ¶¶ 1 to 88, relief, signature, certificate of service); `usage/INPUT-adversary-complaint-2.md` (an excerpt: caption, ¶¶ 1 to 23, Counts I to V, prayer, signature; see Known gaps) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf` (12 pages), `usage/OUTPUT-adversary-complaint-2.typst.pdf` (9 pages); typst 0.15.0, vendored EB Garamond only, `--ignore-system-fonts`, no warnings |
 | overlay | ok: `usage/OVERLAY-krueger-complaint.pdf` and `.txt` (against the Krueger exemplar); `usage/OVERLAY-tig-reaper-complaint.pdf` and `.txt` (against the TIG exemplar) |
 | pages reviewed | 12 of 12 (Krueger) and 9 of 9 (TIG). Every page was rasterized at 60 dpi and viewed after the last template change. |
 
@@ -15,7 +15,7 @@ Build (from the repo root, PATH per the box setup):
 
 ```sh
 D=courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/adversary-complaint
-sh tools/render.sh $D usage/INPUT-paeb-adversary-complaint-kruegercomplaint.md
+sh tools/render.sh $D usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh $D krueger-complaint $D/usage/SAMPLE-krueger-26-00127-adversary-complaint.pdf
 ```
 
@@ -64,7 +64,7 @@ No E.D. Pa. rule on the typeface, type size, margins, line spacing or page limit
 
 ## Gate 2 review (final renders, every page viewed)
 
-Krueger, 12 pages (`usage/OUTPUT-paeb-adversary-complaint-kruegercomplaint.typst.pdf`):
+Krueger, 12 pages (`usage/OUTPUT-adversary-complaint.typst.pdf`):
 
 - p. 1: court title, caption (colons aligned), title, lead-in, Parties, Jurisdiction headings. Pass.
 - p. 2 to p. 6: numbered ¶¶ 7 to 58, procedural background and factual allegations. Pass.
@@ -72,7 +72,7 @@ Krueger, 12 pages (`usage/OUTPUT-paeb-adversary-complaint-kruegercomplaint.typst
 - p. 11: WHEREFORE, Relief Requested, items (i) to (v), signature block. Pass.
 - p. 12: Certificate of service with the four CM/ECF service blocks, date and signature. Pass.
 
-TIG Reaper, 9 pages (`usage/OUTPUT-paeb-adversary-complaint-tigreapercomplaint.typst.pdf`):
+TIG Reaper, 9 pages (`usage/OUTPUT-adversary-complaint-2.typst.pdf`):
 
 - p. 1: court title, caption (the plaintiffs' name is split into rows and the colons align), title, lead-in, Preliminary Statement ¶¶ 1 to 4. Pass.
 - p. 2 to p. 3: ¶¶ 5 to 19 (parties, jurisdiction and venue, factual background with lettered items (a) and (b)). Pass.

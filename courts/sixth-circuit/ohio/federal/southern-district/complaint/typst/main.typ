@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ohsd-complaint.typ": ohsd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ohsd-complaint-doe.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #ohsd-complaint(meta, body)

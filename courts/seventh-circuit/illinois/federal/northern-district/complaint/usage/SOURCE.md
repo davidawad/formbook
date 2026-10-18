@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ilnd-complaint-uniontankcar126cv10014.pdf` (33 pages, text layer present; `pdftotext` reads it)
+- File: `FILED-EXAMPLE-complaint.pdf` (33 pages, text layer present; `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.ilnd.506335/gov.uscourts.ilnd.506335.1.0.pdf (CourtListener RECAP; docket page https://www.courtlistener.com/docket/74670492/1/union-tank-car-company-v-big-will-enterprises-inc/)
 - Court: United States District Court, Northern District of Illinois, Eastern Division
 - Case: *Union Tank Car Company v. Big Will Enterprises Inc.*

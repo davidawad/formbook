@@ -1,6 +1,6 @@
 # Exemplar source: adversary complaint, W.D.N.C. bankruptcy court
 
-- **Exemplar file:** `SAMPLE-ncwb-adversary-complaint-providencegccchase1603271.pdf` (15 pages)
+- **Exemplar file:** `FILED-EXAMPLE-adversary-complaint.pdf` (15 pages)
 - **Fetched from:** https://storage.courtlistener.com/recap/gov.uscourts.ncwb.189640/gov.uscourts.ncwb.189640.1.0.pdf (RECAP archive copy of the docket entry; found by a CourtListener RECAP search with `court=ncwb`, `type=rd`, query "complaint adversary", at https://www.courtlistener.com/api/rest/v4/search/)
 - **Case:** *Providence Real Estate Venture, LLC v. GCC-Chase, LLC, et al.*, Adv. Proc. No. 16-03271 (Bankr. W.D.N.C., Charlotte Division), in the Chapter 11 case of GCC-Chase, LLC, Case No. 15-31901-LTB
 - **Document:** Adversary Complaint for Declaratory Judgment and Injunctive Relief, Doc 1

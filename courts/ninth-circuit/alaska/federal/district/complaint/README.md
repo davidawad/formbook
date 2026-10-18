@@ -4,16 +4,16 @@ Doc type: **complaint** (verified complaint for injunctive relief, a pleading un
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-akd-complaint-launchalaska325cv00141.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-akd-complaint-launchalaska.md`: an excerpt of the 18-page filing (see Sample) |
-| render | ok: `usage/OUTPUT-akd-complaint-launchalaska.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: an excerpt of the 18-page filing (see Sample) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-launch-alaska-complaint.pdf` and `OVERLAY-launch-alaska-complaint.txt` |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
 
 Build and check (from the repo root, with the toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/ninth-circuit/alaska/federal/district/complaint usage/INPUT-akd-complaint-launchalaska.md
+sh tools/render.sh courts/ninth-circuit/alaska/federal/district/complaint usage/INPUT-complaint.md
 sh tools/overlay.sh courts/ninth-circuit/alaska/federal/district/complaint launch-alaska-complaint
 ```
 
@@ -52,7 +52,7 @@ Not produced by this template (separate filings or the civil cover sheet): the c
 | Face required | None named. L.Civ.R. 7.5(a)(1)(D) asks for a 13-point, proportionally-spaced font "or the equivalent". `docs/FONTS.md` applies only where the rule names a face. |
 | Vendored substitute | Not needed. EB Garamond is kept: `font-family = "EB Garamond"` (`fonts/eb-garamond/`). |
 | Metric fit | Not applicable (no court-named face). |
-| Verified | `pdffonts usage/OUTPUT-akd-complaint-launchalaska.typst.pdf` lists EB Garamond Regular, Bold and Italic only, all embedded (2026-10-15). |
+| Verified | `pdffonts usage/OUTPUT-complaint.typst.pdf` lists EB Garamond Regular, Bold and Italic only, all embedded (2026-10-15). |
 
 ## Layout
 
@@ -68,7 +68,7 @@ Measured from `pdftotext -bbox` on page 2 of the render: consecutive lines of on
 
 ## Sample
 
-`usage/INPUT-akd-complaint-launchalaska.md` is a transcription of the exemplar's text, not the whole filing (18 pages filed, 9 rendered). Included: the counsel block and caption; paragraphs 1 to 9 (Parties, Jurisdiction, and Venue; the first mission paragraphs); paragraphs 40 to 57 and 59 (grant award and administrative appeal), with footnotes 8, 9 and 13 as footnotes 1 to 3; Count I (paragraphs 70 to 80); the prayer for relief; the signature block; the verification. Omitted: paragraphs 10 to 39, 58 and 60 to 69 of the filing (the template numbers the transcribed paragraphs 1 to 39 in order, so the numbers on the render do not match the filed numbers). The excerpt was chosen to keep the render at 8 to 14 pages.
+`usage/INPUT-complaint.md` is a transcription of the exemplar's text, not the whole filing (18 pages filed, 9 rendered). Included: the counsel block and caption; paragraphs 1 to 9 (Parties, Jurisdiction, and Venue; the first mission paragraphs); paragraphs 40 to 57 and 59 (grant award and administrative appeal), with footnotes 8, 9 and 13 as footnotes 1 to 3; Count I (paragraphs 70 to 80); the prayer for relief; the signature block; the verification. Omitted: paragraphs 10 to 39, 58 and 60 to 69 of the filing (the template numbers the transcribed paragraphs 1 to 39 in order, so the numbers on the render do not match the filed numbers). The excerpt was chosen to keep the render at 8 to 14 pages.
 
 ## Overlay
 
@@ -102,7 +102,7 @@ Measured from `pdftotext -bbox` on page 2 of the render: consecutive lines of on
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` (EB Garamond 13 pt, exact 34.5 pt double spacing, letter, 1 in margins); `akd-complaint.lua` builds the cover, numbered paragraphs, Roman-numeral headings, lettered prayer, signature block and verification; `render.sh` runs pandoc and fills the footer (page number, footer title, case number) from the frontmatter. Build: `sh tools/render.sh --engine docx courts/ninth-circuit/alaska/federal/district/complaint usage/INPUT-akd-complaint-launchalaska.md`, which writes `usage/OUTPUT-akd-complaint-launchalaska.docx` and `.docx.pdf` (11 pages, LibreOffice 26.8.1.1; the PDF embeds EB Garamond Regular, Bold and Italic only).
+**docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` (EB Garamond 13 pt, exact 34.5 pt double spacing, letter, 1 in margins); `akd-complaint.lua` builds the cover, numbered paragraphs, Roman-numeral headings, lettered prayer, signature block and verification; `render.sh` runs pandoc and fills the footer (page number, footer title, case number) from the frontmatter. Build: `sh tools/render.sh --engine docx courts/ninth-circuit/alaska/federal/district/complaint usage/INPUT-complaint.md`, which writes `usage/OUTPUT-complaint.docx` and `.docx.pdf` (11 pages, LibreOffice 26.8.1.1; the PDF embeds EB Garamond Regular, Bold and Italic only).
 
 - Checked with LibreOffice only (Word is not available here). Every page of the `.docx.pdf` was rendered at 60 dpi and viewed (11 of 11, after the last change).
 - Matches the typst template: font and size, double spacing, 1 in margins, the cover order (counsel, court, caption, title, statute), numbered paragraphs, Roman-numeral level-1 headings, lettered prayer items, signature block at 2.5 in, verification on its own page, footer with page number, footer title and case number.

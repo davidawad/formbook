@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "wyd-motion-brief.typ": wyd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-wyd-motion-brief-elizondo.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #wyd-motion-brief(meta, body)

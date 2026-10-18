@@ -5,10 +5,10 @@ Folder: `courts/fourth-circuit/north-carolina/federal/eastern-district/motion-br
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nced-motion-brief-johnson526cv00320.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nced-motion-brief-johnsonmemo.md` (the introduction, a portion of the facts, the standard of review, the first point of the argument, the conclusion, the signature block and the certificate of service of a 20-page memorandum) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (the introduction, a portion of the facts, the standard of review, the first point of the argument, the conclusion, the signature block and the certificate of service of a 20-page memorandum) |
 | typeface | no face named by the rule: EB Garamond (vendored default; `docs/FONTS.md`, "No face named"); no substitute applied |
-| render | ok: `usage/OUTPUT-nced-motion-brief-johnsonmemo.typst.pdf`, 8 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
 | overlay | ok: `usage/OVERLAY-johnson-memo.pdf` (red = our render, blue = filed page, black = agreement) and `usage/OVERLAY-johnson-memo.txt` (the page map) |
 | pages reviewed | 8 of 8, every page rendered at 60 dpi and viewed on the final render (table below) |
 | tier 2 | not judged against a second filer: see "Known gaps", item 1 |
@@ -86,7 +86,7 @@ Primary source: United States District Court, Eastern District of North Carolina
 
 ## Engines
 
-The same markdown renders through the typst engine (`typst/`, the reference) and the docx engine (`docx/`). The docx output is `usage/OUTPUT-nced-motion-brief-johnsonmemo.docx` with its LibreOffice PDF `usage/OUTPUT-nced-motion-brief-johnsonmemo.docx.pdf`. Build: `sh docx/make-reference.sh` (the reference), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-nced-motion-brief-johnsonmemo.md`.
+The same markdown renders through the typst engine (`typst/`, the reference) and the docx engine (`docx/`). The docx output is `usage/OUTPUT-motion-brief.docx` with its LibreOffice PDF `usage/OUTPUT-motion-brief.docx.pdf`. Build: `sh docx/make-reference.sh` (the reference), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`.
 
 - *Matches typst (checked on the PDF):* EB Garamond 12 pt, the only face in the PDF (no substitution); letter paper with 1-inch margins (all text inside 72 to 540 pt); body double-spaced at the typst baseline pitch of 27.6 pt, with a 0.5 in first-line indent and no space between paragraphs; the cover and caption as in the complaint, with the "No." line; heading labels as the template prints them: under ARGUMENT, I., II. and A., B.; elsewhere A., B. and 1., 2., each followed by a tab to a hanging indent; level 1 centered bold capitals, level 2 bold with its label at 0, level 3 bold with its label at 0.5 in, all at typst's sizes; footnotes at 12 pt, single-spaced; the dated signature block at 3 in; the certificate of service after the signature, kept on one page with it (Fed. R. Civ. P. 5(d)(1)(B)); the page number centered in the footer, sequential from the cover. Page count is the same as typst (8 pages), and the certificate of service falls on page 8 in both.
 - *Differs:* LibreOffice and typst break some lines at different words, so a few pages hold one line more or less. The footnote 3 paragraph ("Consulting Engineers") splits across pages 6 and 7 in the docx, where typst keeps it whole on page 6, so the CONCLUSION heading is on page 7 in both, but the footnote sits on page 7 in the docx and on page 6 in typst. Heading sizes are set as sizes (about 17 pt and 14.5 pt), because typst's 1.4 em and 1.2 em come from its defaults. The labels are typed text, not Word list numbering, so a Word edit does not renumber them.

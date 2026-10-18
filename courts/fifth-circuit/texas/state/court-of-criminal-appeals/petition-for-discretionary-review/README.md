@@ -18,25 +18,25 @@ The template builds the cover and renders markdown with vendored cmarker. Body t
 Build from the repository root:
 
 ```sh
-sh tools/render.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/petition-for-discretionary-review usage/INPUT-texcrimapp-petition-for-discretionary-review-ukwpdr.md
+sh tools/render.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/petition-for-discretionary-review usage/INPUT-petition-for-discretionary-review.md
 sh tools/overlay.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/petition-for-discretionary-review ukw-pdr
 ```
 
 ## Exemplar
 
-`usage/SAMPLE-texcrimapp-petition-for-discretionary-review-ukwuachupd036617pdr.pdf` is the State's petition in *State v. Ukwuachu*, PD-0366-17 (33 pages), retrieved October 14, 2026 (see `usage/SOURCE.md`). Its body text is single-spaced (16.1 pt baseline pitch), which departs from the double-spacing rule above. The template follows the rule (tier 1), not the exemplar.
+`usage/FILED-EXAMPLE-petition-for-discretionary-review.pdf` is the State's petition in *State v. Ukwuachu*, PD-0366-17 (33 pages), retrieved October 14, 2026 (see `usage/SOURCE.md`). Its body text is single-spaced (16.1 pt baseline pitch), which departs from the double-spacing rule above. The template follows the rule (tier 1), not the exemplar.
 
 This is one filer. Tier 2 calls for two or three filings from different filers, and none was found in this pass.
 
 ## Sample and overlay
 
-`usage/INPUT-texcrimapp-petition-for-discretionary-review-ukwpdr.md` is a transcription of an excerpt of the exemplar: the cover, names of parties, table of contents, index of authorities, oral-argument and case statements, grounds, the factual overview, the opening of Issue One, the prayer, and both certificates. Pages 14 to 21 of the argument are omitted. The render is 11 pages (cover unnumbered, then pages 1 to 10).
+`usage/INPUT-petition-for-discretionary-review.md` is a transcription of an excerpt of the exemplar: the cover, names of parties, table of contents, index of authorities, oral-argument and case statements, grounds, the factual overview, the opening of Issue One, the prayer, and both certificates. Pages 14 to 21 of the argument are omitted. The render is 11 pages (cover unnumbered, then pages 1 to 10).
 
 The red/blue overlay is `usage/OVERLAY-ukw-pdr.pdf`; its page map is `usage/OVERLAY-ukw-pdr.txt`.
 
 ## Page review
 
-Every page of `usage/OUTPUT-texcrimapp-petition-for-discretionary-review-ukwpdr.typst.pdf` (11 pages) was rendered at 100 dpi and viewed on October 14, 2026, after the final render. Footer numbers are shown; the cover has none.
+Every page of `usage/OUTPUT-petition-for-discretionary-review.typst.pdf` (11 pages) was rendered at 100 dpi and viewed on October 14, 2026, after the final render. Footer numbers are shown; the cover has none.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -63,7 +63,7 @@ Every page of `usage/OUTPUT-texcrimapp-petition-for-discretionary-review-ukwpdr.
 
 ## Engines
 
-docx (`docx/render.sh`, `docx/reference.docx` built by `docx/build-reference.sh`, filter `docx/pdr.lua`): `usage/OUTPUT-texcrimapp-petition-for-discretionary-review-ukwpdr.docx` and `OUTPUT-texcrimapp-petition-for-discretionary-review-ukwpdr.docx.pdf` were built. The LibreOffice conversion succeeded and the zip and XML checks passed. The template matches the typst form in its settings: EB Garamond 14 pt; exact 32.2 pt double spacing; 0.5 in first-line indent; 1 in margins on letter; 12 pt footnotes; single-spaced headings, cover, signature and address blocks and contents entries; cover unnumbered and body numbered from 1 as a separate Word section. Dot leaders and contents and index page numbers are literal text, as in typst. The exemplar is single-spaced; the template follows TRAP 9.4 as typst does.
+docx (`docx/render.sh`, `docx/reference.docx` built by `docx/build-reference.sh`, filter `docx/pdr.lua`): `usage/OUTPUT-petition-for-discretionary-review.docx` and `OUTPUT-petition-for-discretionary-review.docx.pdf` were built. The LibreOffice conversion succeeded and the zip and XML checks passed. The template matches the typst form in its settings: EB Garamond 14 pt; exact 32.2 pt double spacing; 0.5 in first-line indent; 1 in margins on letter; 12 pt footnotes; single-spaced headings, cover, signature and address blocks and contents entries; cover unnumbered and body numbered from 1 as a separate Word section. Dot leaders and contents and index page numbers are literal text, as in typst. The exemplar is single-spaced; the template follows TRAP 9.4 as typst does.
 
 Page review (all 12 docx pages against the 11 typst pages, side by side): the sections and order match typst. Differences: the body runs to 11 pages against typst's 10; the last docx page holds only the orphaned "/s/ Sterling Harmon" signature block of the certificate of service, separated from its heading. The table of contents' page numbers are typed text from the sample and do not match the footers in either engine (for example Statement Regarding Oral Argument is listed at 5 and falls on page 3). The font names in the docx PDF were not checked. Word was not available; the file was checked with LibreOffice only.
 

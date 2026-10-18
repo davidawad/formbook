@@ -1,6 +1,6 @@
 # Exemplar source
 
-## `SAMPLE-arb-adversary-complaint-woodnick20260109.pdf`
+## `FILED-EXAMPLE-adversary-complaint.pdf`
 
 - Filer: Woodnick Law, PLLC (Gregg R. Woodnick and Markus Risinger, counsel for Clayton Echard)
 - Case: *In re Laura Owens*, Bankr. D. Ariz. No. 2:25-bk-11801-BKM; Doc. 28, adversary complaint

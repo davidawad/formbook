@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ndd-complaint-bitcanary325cv00181.pdf` (10 pages, text layer present; `pdftotext` reads it)
+- File: `FILED-EXAMPLE-complaint.pdf` (10 pages, text layer present; `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.ndd.69407/gov.uscourts.ndd.69407.1.0_3.pdf (CourtListener RECAP archive, docket id 69407; found with the RECAP search at https://www.courtlistener.com/api/rest/v4/search/?type=r&court=ndd&q=COMPLAINT+against)
 - Court: United States District Court, District of North Dakota (the caption reads "EASTERN DISTRICT OF NORTH DAKOTA")
 - Case: *BitCanary, LLC v. Minecore, LLC, Saamar Siddiqui and George Baltes*
@@ -32,7 +32,7 @@ The search (CourtListener RECAP, `court=ndd`, document type complaint, 2025-2026
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ndd-complaint-travelers126cv00212.pdf` (7 pages) |
+| File | `FILED-EXAMPLE-complaint-2.pdf` (7 pages) |
 | Court | U.S. District Court, District of North Dakota |
 | Case / docket | *Travelers Casualty and Surety Company of America v. Chamley Pipe & Salvage, LLC*, No. 1:26-cv-00212-DLH-CRH, Document 1 |
 | Filer | Plaintiff Travelers Casualty and Surety Company of America, through its counsel of record |

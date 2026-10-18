@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-insb-adversary-complaint-rabobayes2659007.pdf` (7 pages, text layer present: `pdftotext` reads it, `pdffonts` shows embedded TimesNewRomanPSMT)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (7 pages, text layer present: `pdftotext` reads it, `pdffonts` shows embedded TimesNewRomanPSMT)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.insb.780833/gov.uscourts.insb.780833.4.0.pdf (RECAP copy of the docket entry; the docket page is https://www.courtlistener.com/docket/73539236/rabo-agrifinance-llc-v-bayes/)
 - Court: United States Bankruptcy Court, Southern District of Indiana, New Albany Division
 - Case: *Rabo AgriFinance LLC v. Bayes* (adversary) within *In re Jeffery H. Bayes*, Chapter 13

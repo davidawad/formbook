@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ilnb-adversary-complaint-rmwacquisition1301437.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Northern District of Illinois (Eastern Division, Chicago)
 - Case: *RMW Acquisition Company, LLC v. Shelbourne North Water Street, L.P.; Shelbourne Lakeshore Limited; and Chicago Spire, LLC* (adversary proceeding within *In re Shelbourne North Water Street, L.P.*)
 - Docket: Chapter 11 Case No. 13-44315 (JSB); Adv. Pro. No. 13-_____ (JSB) (the adversary number is blank on the filed copy; the CourtListener entry is adversary 13-01437)

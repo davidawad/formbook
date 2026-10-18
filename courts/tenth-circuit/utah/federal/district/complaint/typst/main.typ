@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "utd-complaint.typ": utd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-utd-complaint-fastre.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #utd-complaint(meta, body)

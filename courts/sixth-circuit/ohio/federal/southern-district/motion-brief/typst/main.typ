@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ohsd-motion-brief.typ": ohsd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ohsd-motion-brief-sharpmotiontodismiss.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ohsd-motion-brief(meta, body)

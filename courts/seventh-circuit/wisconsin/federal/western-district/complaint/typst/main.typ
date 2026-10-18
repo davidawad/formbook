@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "wiwd-complaint.typ": wiwd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-wiwd-complaint-olson.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #wiwd-complaint(meta, body)

@@ -32,13 +32,13 @@ Not used, and why:
 
 ## Exemplar
 
-- `usage/SAMPLE-insb-adversary-complaint-rabobayes2659007.pdf`: Amended Complaint (ECF Doc 4), 7 pages, filed July 8, 2026 by Rabo AgriFinance LLC (Womble Bond Dickinson (US) LLP). Text layer present (Word-generated, TimesNewRomanPSMT embedded).
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf`: Amended Complaint (ECF Doc 4), 7 pages, filed July 8, 2026 by Rabo AgriFinance LLC (Womble Bond Dickinson (US) LLP). Text layer present (Word-generated, TimesNewRomanPSMT embedded).
 - Provenance, searches and the caption spelling note are in `usage/SOURCE.md`.
 - One exemplar, one filer. The eval loop's tier-2 rule asks for two or three filed exemplars from different filers; this is a gap (see Known gaps).
 
 ## Sample
 
-- `usage/INPUT-insb-adversary-complaint-rabobayes.md`: the whole amended complaint transcribed, every paragraph, the caption, counts, prayer and signature block. The ECF header is not transcribed (a court stamp, not part of the document). Exhibits A and B are referred to, not attached (as in the filing).
+- `usage/INPUT-adversary-complaint.md`: the whole amended complaint transcribed, every paragraph, the caption, counts, prayer and signature block. The ECF header is not transcribed (a court stamp, not part of the document). Exhibits A and B are referred to, not attached (as in the filing).
 - The markdown contract: YAML frontmatter (`case_number`, `chapter`, `division`, `debtor`, `adversary`, `title`, `lead_in`, `date`, `signature`); `#` headings; a blank line between chunks; `(a)` and `(1)` for lettered and prayer items (shown as `a.` and `1.`); a `>` quotation; a `[...]` bracketed note. A chunk that starts with a lowercase letter continues the paragraph before it, unnumbered (the total after paragraph 16's list).
 - The sample's case-specific content is only in its frontmatter and body. The template holds no case text.
 
@@ -46,11 +46,11 @@ Not used, and why:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-insb-adversary-complaint-rabobayes.md
+sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/adversary-complaint rabo-bayes-adversary-complaint
 ```
 
-- `usage/OUTPUT-insb-adversary-complaint-rabobayes.typst.pdf`: 6 pages. Typst compiled with no warnings (`render.sh` fails on any). Vendored font only: `pdffonts` shows EBGaramond-Regular and -Bold, embedded (Identity-H).
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: 6 pages. Typst compiled with no warnings (`render.sh` fails on any). Vendored font only: `pdffonts` shows EBGaramond-Regular and -Bold, embedded (Identity-H).
 - `usage/OVERLAY-rabo-bayes-adversary-complaint.pdf` and `.txt`: red = our render, blue = exemplar, black = both. The page map pairs pages one to one: ours p.1-6 ↔ filed p.1-6 (word overlap 47-64%). The overlay is a diagnostic, not a score: the exemplar's text sits at a different position on the page (its own spacing and caption layout), so the layers do not coincide line for line.
 - File names: the repo's tools read `OUTPUT-<id>.pdf` and write `OVERLAY-<id>.pdf/.txt` (CLAUDE.md naming), so this folder uses `INPUT-`/`OUTPUT-`/`OVERLAY-`, not the `<id>.pdf` and `<id>-overlay.pdf` in the task brief.
 
@@ -86,5 +86,5 @@ Reviewed pages: 6 of 6 (final state). Earlier passes found and fixed: line overl
 - Matches the typst form, by construction: font and size, double spacing, first-line indent, margins, the page-number footer, the caption and signature text.
 - Differs or is unverified: the allegation number is followed by a tab stop at 1 in (typst uses a 0.3 in gap); the body grid is kept by exact line spacing, not by typst's block rounding, so page breaks may fall differently; the caption rule (0.75 pt, right and bottom) and the borderless signature table are written as XML and not checked against the typst layout.
 - BLOCKED: docx.pdf checks (Gates 0 and 1 on `usage/OUTPUT-rabo-bayes-adversary-complaint.docx.pdf`): not produced, because `soffice` is not installed on this box. No page was rendered or reviewed (pages reviewed 0).
-- `sh tools/render.sh --engine docx` writes `usage/OUTPUT-insb-adversary-complaint-rabobayes.docx`, then fails at the soffice step (expected here). The `.docx` was checked with `unzip -tq` and `xmllint --noout` on every XML part.
+- `sh tools/render.sh --engine docx` writes `usage/OUTPUT-adversary-complaint.docx`, then fails at the soffice step (expected here). The `.docx` was checked with `unzip -tq` and `xmllint --noout` on every XML part.
 - TOC and TOA: none in this doc type.

@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-oked-motion-brief-ffrf625cv00094.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | URL fetched from | https://assets.aclu.org/live/uploads/2025/05/MTD-FFRF-Court-Stamped-Copy.pdf (court-stamped copy, hosted by the ACLU) |
 | Case | *Oklahoma State Department of Education and Ryan Walters v. Freedom From Religion Foundation* |
 | Court | United States District Court, Eastern District of Oklahoma |

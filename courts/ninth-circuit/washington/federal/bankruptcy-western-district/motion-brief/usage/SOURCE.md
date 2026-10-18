@@ -2,7 +2,7 @@
 
 Primary exemplar (the one the sample is transcribed from):
 
-- File: `SAMPLE-wawb-motion-brief-smith2410218.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Western District of Washington at Seattle
 - Case: *In re Melanie A Smith aka M A Smith aka M Smith*, No. 24-10218-CMA (Chapter 7); Judge Christopher M. Alston
 - Document: Debtor's Motion for Determination of Amounts Owing to First and Second Mortgages After Reduction for Statute of Limitations Barred Missed Payments and Charges and Costs and Memorandum in Support (19 pages; the notation, the motion, the memorandum of law, the signature block and the certificate of service)
@@ -16,7 +16,7 @@ Primary exemplar (the one the sample is transcribed from):
 
 Second filer (tier-2 cross-check):
 
-- File: `SAMPLE-wawb-motion-brief-pigida1401248.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Case: *James v. Pigida* (Bankruptcy Estate of Trend Sound Promoter AMG Corp. by Nancy James, trustee v. Volodimyr Pigida et al.), Adv. No. 14-01248-MLB; Judge Marc Barreca
 - Document: Memorandum in Support of Motion for an Order of Partial Summary Judgment (15 pages)
 - Filer: Plaintiff trustee, by The Rigby Law Firm (James Rigby, WSBA No. 9658)

@@ -3,7 +3,7 @@
 Court: United States District Court, Northern District of Indiana (`innd`). Doc type: complaint.
 Both files are public court records (CourtListener RECAP). They are used only as visual and structural references.
 
-## SAMPLE-innd-complaint-blackman226cv85.pdf (sampled; primary exemplar)
+## FILED-EXAMPLE-complaint.pdf (sampled; primary exemplar)
 
 - Case: *Blackman v. ChargePoint, Inc.*, No. 2:26-cv-00085 (Hammond Division); ECF header `2:26-cv-00085-GSL-APR`
 - Document: Document 1, "Class Action Complaint" with jury demand, 13 pages
@@ -13,7 +13,7 @@ Both files are public court records (CourtListener RECAP). They are used only as
 - Date fetched: 2026-10-14
 - Text layer: yes (`pdftotext` yields text; EB Garamond not used by the filer, Times New Roman embedded)
 
-## SAMPLE-innd-complaint-nowak324cv950.pdf (second filer; tier-2 comparison, not transcribed)
+## FILED-EXAMPLE-complaint-2.pdf (second filer; tier-2 comparison, not transcribed)
 
 - Case: *Nowak v. Grand Design RV, LLC*, No. 3:24-cv-00950 (South Bend Division); ECF header `3:24-cv-00950-PPS-SJF`
 - Document: Document 1, "Class Action Complaint", 16 pages

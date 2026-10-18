@@ -2,8 +2,8 @@
 
 - Court: `vawb`, United States Bankruptcy Court for the Western District of Virginia (`courts/fourth-circuit/virginia/federal/bankruptcy-western-district/`)
 - Doc type: `adversary-complaint`. Complaint commencing an adversary proceeding (FRBP 7001); one self-contained folder, no shared files.
-- Exemplar: `usage/SAMPLE-vawb-adversary-complaint-rosen2406016.pdf` (*Rosen v. Texas Guaranteed Student Loan Corp. (n/k/a Trellis)*, Adv. No. 24-06016, filed 2024-05-31; provenance in `usage/SOURCE.md`).
-- Sample: `usage/INPUT-vawb-adversary-complaint-rosen.md`: the whole filed complaint, transcribed, with two changes marked in Known gaps.
+- Exemplar: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (*Rosen v. Texas Guaranteed Student Loan Corp. (n/k/a Trellis)*, Adv. No. 24-06016, filed 2024-05-31; provenance in `usage/SOURCE.md`).
+- Sample: `usage/INPUT-adversary-complaint.md`: the whole filed complaint, transcribed, with two changes marked in Known gaps.
 - Status: template built; render, overlay and a page-by-page review done (below). Not reviewed by a human; `court.json` of the court folder untouched.
 - Exemplar: yes (one filer, one exemplar; the brief asks for one per doc type).
 
@@ -13,8 +13,8 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `vawb-adversary-complaint`. |
 | `typst/vawb-adversary-complaint.typ` | Template. Parameter block at the top, each line tied to a rule or marked as a convention. |
-| `usage/INPUT-vawb-adversary-complaint-rosen.md` | Sample: YAML frontmatter (caption, counsel, signature, service) and the body. |
-| `usage/OUTPUT-vawb-adversary-complaint-rosen.typst.pdf` | `sh tools/render.sh courts/fourth-circuit/virginia/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-vawb-adversary-complaint-rosen.md` (3 pages, no typst warnings). |
+| `usage/INPUT-adversary-complaint.md` | Sample: YAML frontmatter (caption, counsel, signature, service) and the body. |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh courts/fourth-circuit/virginia/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-adversary-complaint.md` (3 pages, no typst warnings). |
 | `usage/OVERLAY-rosen-adversary-complaint.pdf`, `.txt` | `sh tools/overlay.sh courts/fourth-circuit/virginia/federal/bankruptcy-western-district/adversary-complaint rosen-adversary-complaint` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -53,7 +53,7 @@ Diagnostic only, not a score.
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-vawb-adversary-complaint-rosen.typst.pdf` was rendered at 60 dpi and viewed (3 of 3). The first pass showed two defects; both were fixed and the pages re-rendered and re-viewed.
+Every page of `OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and viewed (3 of 3). The first pass showed two defects; both were fixed and the pages re-rendered and re-viewed.
 
 | Page | Content | Result |
 |---|---|---|
@@ -77,7 +77,7 @@ Typst printed no warnings. Fonts embedded: EB Garamond Regular and Bold only.
 ## Engines
 
 - **typst** (primary): as above.
-- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` (pandoc's default reference, its styles replaced, PAGE footer, letter page with a 1.5 in top margin); `docx/vawb-adversary-complaint.lua` writes the court title, caption, salutation, signature block and service addresses as Word paragraphs and tables, and the numbered allegations as text with a hanging indent. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-vawb-adversary-complaint-rosen.md` (LibreOffice PDF).
+- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` (pandoc's default reference, its styles replaced, PAGE footer, letter page with a 1.5 in top margin); `docx/vawb-adversary-complaint.lua` writes the court title, caption, salutation, signature block and service addresses as Word paragraphs and tables, and the numbered allegations as text with a hanging indent. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md` (LibreOffice PDF).
 - docx matches the typst form: EB Garamond 12 pt (embedded as EBGaramond in the PDF); body double spaced at an exact 24 pt pitch; one-inch sides and bottom; caption with the bordered party column and the chapter, case and adversary number on the right; numbers at 0.5 in; page number centered 10 pt; counsel block lower left.
 - docx differs from typst in two places. (1) The title (`COMPLAINT SEEKING STUDENT LOAN DISCHARGE`, from the sample's frontmatter) is printed under the caption; the typst template prints no title, so this is a typst gap for the lead to decide, not a docx choice. (2) The last body paragraph is kept with the signature block (keepNext), and the docx runs to 4 pages where typst runs to 3 (title, and the paragraph and signature block moved to page 4 together).
 - docx BLOCKED: none for the form. `tools/check.sh --engine docx` cannot run on this folder: it needs `court.json` and `checks.yaml` in the court directory, and neither exists yet for `vawb` (the Gate 1 rules are not written). So no check ID is measured for docx; the visual review was done by hand on all 4 docx pages and all 3 typst pages.

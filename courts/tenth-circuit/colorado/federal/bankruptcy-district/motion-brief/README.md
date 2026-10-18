@@ -4,9 +4,9 @@ Doc type: **motion with memorandum** (FRBP 9013) in the United States Bankruptcy
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-cob-motion-brief-katzenberger2601048.pdf` (adversary motion, Point Digital Finance's counsel, 15 pp.). A second filer is saved as `usage/SAMPLE-cob-motion-brief-maverix2616423.pdf` (main-case ex parte motion, Receiver's counsel, 12 pp.), not transcribed. See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-cob-motion-brief-katzenberger.md`: full transcription of the 15-page filing (caption, motion, facts, argument I to VIII, conclusion, signature block, certificate of service). |
-| render | ok: `usage/OUTPUT-cob-motion-brief-katzenberger.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (adversary motion, Point Digital Finance's counsel, 15 pp.). A second filer is saved as `usage/FILED-EXAMPLE-motion-brief-2.pdf` (main-case ex parte motion, Receiver's counsel, 12 pp.), not transcribed. See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md`: full transcription of the 15-page filing (caption, motion, facts, argument I to VIII, conclusion, signature block, certificate of service). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-katzenberger-motion-brief.pdf` and `OVERLAY-katzenberger-motion-brief.txt` |
 | pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -60,7 +60,7 @@ Not used, and why:
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
 D=courts/tenth-circuit/colorado/federal/bankruptcy-district/motion-brief
-sh tools/render.sh $D usage/INPUT-cob-motion-brief-katzenberger.md
+sh tools/render.sh $D usage/INPUT-motion-brief.md
 sh tools/overlay.sh $D katzenberger-motion-brief $D/usage/SAMPLE-katzenberger-26-01048-motion-brief.pdf
 ```
 
@@ -100,7 +100,7 @@ sh tools/overlay.sh $D katzenberger-motion-brief $D/usage/SAMPLE-katzenberger-26
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `cob.lua` builds the caption, the signature table, the heading labels (`I.`, `A.`, `1.`) and the certificate of service). Render: `sh tools/render.sh --engine docx <doc-folder> usage/INPUT-cob-motion-brief-katzenberger.md` writes `usage/OUTPUT-cob-motion-brief-katzenberger.docx` and `.docx.pdf` (LibreOffice 26.8.1, vendored EB Garamond). Footnotes are native Word footnotes.
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `cob.lua` builds the caption, the signature table, the heading labels (`I.`, `A.`, `1.`) and the certificate of service). Render: `sh tools/render.sh --engine docx <doc-folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8.1, vendored EB Garamond). Footnotes are native Word footnotes.
 
 - Matches the typst reference: court title, caption (debtor block, adversary block with its case number), bold capital title, 13 pt EB Garamond, letter, 1.5 in top margin and 1 in elsewhere, double spacing (exact 24 pt), 0.5 in first-line indent, `#` headings centered bold capitals, `##` and `###` headings numbered `I.` and `A.` and hung at the margin, single-spaced block quotation indented 0.5 in both sides, the footnote at 13 pt, the signature block (`Dated:` left, `Respectfully submitted,` and the firm and signer right), the certificate of service after the signature, and the 11 pt centered page number starting at 1. Page count 14 = typst 14. All 14 docx pages and all 14 typst pages were rasterized at 60 dpi and viewed.
 - Differs from typst (renderer or tier 2, not a mandated-form miss):

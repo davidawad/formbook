@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "innd-complaint.typ": innd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-innd-complaint-blackman.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #innd-complaint(meta, body)

@@ -4,9 +4,9 @@ Doc type: **motion with memorandum** (a Rule 12 motion to dismiss and the memora
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ord-motion-brief-columbiaveterinaryzoetis326cv01863.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ord-motion-brief-zoetisrule12motiontodismiss.md`: complete transcription of the 11-page exemplar, plus the generated certificate of service: 12 rendered pages |
-| render | ok: `usage/OUTPUT-ord-motion-brief-zoetisrule12motiontodismiss.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: complete transcription of the 11-page exemplar, plus the generated certificate of service: 12 rendered pages |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | typeface | face required: none (LR 10-1 text read 2026-10-15 names no typeface; only the 12-pt minimum). Vendored substitute: none needed; **EB Garamond kept** (the rule allows any proportional face). Fit: n/a. Font list unchanged in this pass. |
 | overlay | **fail** this pass: `usage/SAMPLE-*.pdf` is not in this snapshot, so `tools/overlay.sh` could not run. The `usage/OVERLAY-zoetis-rule-12-motion-to-dismiss.txt` on disk is from an earlier run; no `.pdf` is on disk. |
 | pages reviewed | 12 of 12 this pass (every page rasterized at 60 dpi and viewed after the re-render) |
@@ -61,7 +61,7 @@ Not produced by this template (separate filings, not part of the motion): the pr
 Run from the repo root (`export PATH="$HOME/tb/bin:$PATH"` first):
 
 ```sh
-sh tools/render.sh courts/ninth-circuit/oregon/federal/district/motion-brief usage/INPUT-ord-motion-brief-zoetisrule12motiontodismiss.md
+sh tools/render.sh courts/ninth-circuit/oregon/federal/district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/ninth-circuit/oregon/federal/district/motion-brief zoetis-rule-12-motion-to-dismiss
 ```
 
@@ -102,7 +102,7 @@ The overlay is a diagnostic: red = our render only, blue = the filed exemplar on
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion.lua` writes the cover (counsel, court title, caption table with the legend), the body, the signature block and the certificate of service; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in the footer. Output: `usage/OUTPUT-ord-motion-brief-zoetisrule12motiontodismiss.docx` and `.docx.pdf` (LibreOffice 26.8), 12 pages, all 12 rendered at 60 dpi and viewed (`reviews/docx.md`). The typst output is also 12 pages.
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion.lua` writes the cover (counsel, court title, caption table with the legend), the body, the signature block and the certificate of service; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in the footer. Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8), 12 pages, all 12 rendered at 60 dpi and viewed (`reviews/docx.md`). The typst output is also 12 pages.
 
 - Matches the typst output: letter; one inch on all four sides; EB Garamond 13 pt (embedded in the PDF); double spacing as an exact 24 pt line and single spacing as an exact 13 pt line; counsel block; court title; caption with the case number at the page center and the legend under the title; headings at typst's default sizes (level 1 18 pt centered, level 2 15.5 pt bold and left, level 3 13 pt bold and indented); block quotations single-spaced and indented; footer "Page n - TITLE" at 12 pt; the last paragraph kept with the signature; certificate of service on its own page.
 - Differs from typst: the docx is built from the markdown with Word styles, so line breaks in the signature column and the page breaks follow LibreOffice (Word may move a line); the signature's phone line wraps at the same place as typst. No tables of contents or authorities (as typst).

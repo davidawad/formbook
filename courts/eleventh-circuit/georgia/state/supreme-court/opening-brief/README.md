@@ -4,7 +4,7 @@ Doc type: the appellant's principal brief in a direct appeal (Ga. Sup. Ct. R. 19
 
 | Check | Result |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ga-opening-brief-clarkvleighs26a0349.pdf` (see `usage/SOURCE.md`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-opening-brief.pdf` (see `usage/SOURCE.md`) |
 | render | ok: `tools/render.sh` (typst, `--ignore-system-fonts`, no warnings); 15 pages; only TeX Gyre Schola embedded (`pdffonts`) |
 | overlay | ok: `usage/OVERLAY-clark.pdf` and `OVERLAY-clark.txt` (`tools/overlay.sh`) |
 | pages reviewed | 15 of 15, each rendered to PNG at 60 dpi and looked at |
@@ -50,8 +50,8 @@ The rules do not prescribe cover contents for briefs. The layout follows the exe
 ## Files
 
 - `typst/main.typ`: entry point. `typst/ga-opening-brief.typ`: template, `ga-brief(meta, body)`.
-- `usage/INPUT-ga-opening-brief-clark.md`: markdown transcription of the exemplar (frontmatter for cover, counsel, signature, service and authorities; body from the exemplar's text). Parts not transcribed are marked `[Omitted from this transcription: ...]`.
-- `usage/OUTPUT-ga-opening-brief-clark.typst.pdf`: render. `usage/OVERLAY-clark.pdf` and `OVERLAY-clark.txt`: red (ours), blue (filed), black (both) comparison, and the page map.
+- `usage/INPUT-opening-brief.md`: markdown transcription of the exemplar (frontmatter for cover, counsel, signature, service and authorities; body from the exemplar's text). Parts not transcribed are marked `[Omitted from this transcription: ...]`.
+- `usage/OUTPUT-opening-brief.typst.pdf`: render. `usage/OVERLAY-clark.pdf` and `OVERLAY-clark.txt`: red (ours), blue (filed), black (both) comparison, and the page map.
 - File names follow the tools (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.md` / `<id>-overlay.pdf` names in the bead. The tools hardcode the names.
 
 ## What the overlay shows
@@ -85,7 +85,7 @@ Each rendered page was checked. Defects found and fixed during the review:
 
 ## Engines
 
-Typst is the primary engine (above). The DOCX engine is `docx/`, the same files as `answering-brief/docx/`: `build-reference.sh` writes `reference.docx`; `ga-brief.lua` builds the cover, TOC, TOA, closing, certificate and the sections; `render.sh` makes two renders so the TOC and TOA numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> usage/INPUT-ga-opening-brief-clark.md`: `usage/OUTPUT-ga-opening-brief-clark.docx` and `usage/OUTPUT-clark.docx.pdf` (LibreOffice 26.8.1).
+Typst is the primary engine (above). The DOCX engine is `docx/`, the same files as `answering-brief/docx/`: `build-reference.sh` writes `reference.docx`; `ga-brief.lua` builds the cover, TOC, TOA, closing, certificate and the sections; `render.sh` makes two renders so the TOC and TOA numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> usage/INPUT-opening-brief.md`: `usage/OUTPUT-opening-brief.docx` and `usage/OUTPUT-clark.docx.pdf` (LibreOffice 26.8.1).
 
 | | docx | typst |
 |---|---|---|

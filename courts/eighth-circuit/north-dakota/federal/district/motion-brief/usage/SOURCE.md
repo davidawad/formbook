@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ndd-motion-brief-dmshealth323cv00204.pdf` (26 pages, text layer present; `pdftotext` reads it)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (26 pages, text layer present; `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.ndd.62094/gov.uscourts.ndd.62094.42.0.pdf (CourtListener RECAP archive, docket id 62094; RECAP search at https://www.courtlistener.com/api/rest/v4/search/?type=r&court=ndd&q=MOTION+to+Dismiss+for+Failure+to+State+a+Claim+memorandum)
 - Court: United States District Court, District of North Dakota, Eastern Division
 - Case: *In re DMS Health Technologies, Inc., Data Breach Litigation* (consolidated; the plaintiffs are Stacy Kolkind and Constance Boyd)
@@ -31,7 +31,7 @@ The RECAP search for motions to dismiss in this court returned several candidate
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ndd-motion-brief-teigen125cv00207.pdf` (36 pages) |
+| File | `FILED-EXAMPLE-motion-brief-2.pdf` (36 pages) |
 | Court | U.S. District Court, District of North Dakota |
 | Case / docket | *Hoefer v. Teigen*, No. 1:25-cv-00207-DLH-CRH, Document 13 |
 | Document | Defendants' Memorandum of Law in Support of Motion to Dismiss |

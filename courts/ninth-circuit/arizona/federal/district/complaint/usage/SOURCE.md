@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-azd-complaint-harod226cv05215.pdf` (11 pages, text layer present, Times New Roman embedded)
+- File: `FILED-EXAMPLE-complaint.pdf` (11 pages, text layer present, Times New Roman embedded)
 - Court: United States District Court for the District of Arizona
 - Case: *Harod v. Southwest Airlines Co.* (removed from Maricopa County Superior Court)
 - Docket no.: No. 2:26-cv-05215 (caption: `2:26-cv-05215-JFM`; ECF header on every page: `Case 2:26-cv-05215-DWL`). The two judge initials differ on the filed document itself; the sample uses the caption.

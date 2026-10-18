@@ -4,9 +4,9 @@ Doc type: **adversary complaint** (a complaint in an adversary proceeding) in th
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-arwb-adversary-complaint-rice125ap07020.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-arwb-adversary-complaint-ricetrusteecomplaint.md`: caption, paragraphs 1 to 45, prayer, signature block (a portion of the 18-page filing) |
-| render | ok: `usage/OUTPUT-arwb-adversary-complaint-ricetrusteecomplaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md`: caption, paragraphs 1 to 45, prayer, signature block (a portion of the 18-page filing) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-rice-trustee-complaint.pdf` and `usage/OVERLAY-rice-trustee-complaint.txt` |
 | pages reviewed | 9 of 9. Every page was rendered at 60 dpi and viewed. Pages 8 and 9 were viewed after the last change (the prayer moved to page 9); pages 1 to 7 were viewed before it, and their paragraph positions were re-checked by text. Word-overlap scan clean. |
 | typeface | face required: **none** found (the FRBP and the W.D./E.D. Ark. local rules and ECF procedures retrieved on 2026-10-14 name no face, size or font; see gap 2). Vendored substitute: **EB Garamond** (kept, as `docs/FONTS.md` says for a court that names no face). Metric-compatible: n/a. Re-checked 2026-10-14: render ok, `pdffonts` shows `EBGaramond-Regular` and `EBGaramond-Bold` embedded, 9 pages, all 9 pages viewed. |
@@ -94,17 +94,17 @@ Gate 2 rows: pages 1 to 9 pass; no OPEN rows for layout. Tier-2 findings (conven
 
 | Engine | Output | What matches the typst template | What differs |
 |---|---|---|---|
-| typst (primary) | `usage/OUTPUT-arwb-adversary-complaint-ricetrusteecomplaint.typst.pdf` | (the reference) | (the reference) |
-| docx | `usage/OUTPUT-arwb-adversary-complaint-ricetrusteecomplaint.docx`, `.docx.pdf` (LibreOffice) | 9 pages, as typst; US Letter; 1 in margins; EB Garamond 13 pt (embedded in the PDF); exact 24 pt double spacing; 0.5 in first-line indent; court title; caption as a borderless table (debtor and parties left, case numbers right, 0.2 in gutter); centred bold capitals section headings kept with the next paragraph; numbered paragraphs 1, 2, ...; the prayer kept with the signature block; `- n -` footer | the text after a paragraph number starts at a tab stop at 1.0 in (typst: 0.3 in after the number, so the start moves with the width of the number); the gaps between caption groups are paragraph spacing of the same size, not blank lines |
+| typst (primary) | `usage/OUTPUT-adversary-complaint.typst.pdf` | (the reference) | (the reference) |
+| docx | `usage/OUTPUT-adversary-complaint.docx`, `.docx.pdf` (LibreOffice) | 9 pages, as typst; US Letter; 1 in margins; EB Garamond 13 pt (embedded in the PDF); exact 24 pt double spacing; 0.5 in first-line indent; court title; caption as a borderless table (debtor and parties left, case numbers right, 0.2 in gutter); centred bold capitals section headings kept with the next paragraph; numbered paragraphs 1, 2, ...; the prayer kept with the signature block; `- n -` footer | the text after a paragraph number starts at a tab stop at 1.0 in (typst: 0.3 in after the number, so the start moves with the width of the number); the gaps between caption groups are paragraph spacing of the same size, not blank lines |
 
-docx: all 9 pages of `OUTPUT-arwb-adversary-complaint-ricetrusteecomplaint.docx.pdf` were rendered at 60 dpi and compared with the typst pages (side by side). Gate result: no BLOCKED items. `tools/check.sh` was not run for the docx engine: the checks are per court folder (see the court README), so this doc type has no stamp. Word was not available to open the file: it must be opened in Word once to confirm there is no repair prompt, and the reader needs EB Garamond installed, or Word substitutes a font silently (`docs/DOCX.md`).
+docx: all 9 pages of `OUTPUT-adversary-complaint.docx.pdf` were rendered at 60 dpi and compared with the typst pages (side by side). Gate result: no BLOCKED items. `tools/check.sh` was not run for the docx engine: the checks are per court folder (see the court README), so this doc type has no stamp. Word was not available to open the file: it must be opened in Word once to confirm there is no repair prompt, and the reader needs EB Garamond installed, or Word substitutes a font silently (`docs/DOCX.md`).
 
-Source: `docx/build-reference.sh` builds `docx/reference.docx` (run it from `docx/`: `sh build-reference.sh reference.docx`); `docx/arwb-adversary-complaint.lua` lays out the markdown contract. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-arwb-adversary-complaint-ricetrusteecomplaint.md`.
+Source: `docx/build-reference.sh` builds `docx/reference.docx` (run it from `docx/`: `sh build-reference.sh reference.docx`); `docx/arwb-adversary-complaint.lua` lays out the markdown contract. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`.
 
 ## Commands
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-arwb-adversary-complaint-ricetrusteecomplaint.md
+sh tools/render.sh courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/adversary-complaint rice-trustee-complaint
 ```

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "okwd-motion-brief.typ": okwd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-okwd-motion-brief-trupia.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #okwd-motion-brief(meta, body)

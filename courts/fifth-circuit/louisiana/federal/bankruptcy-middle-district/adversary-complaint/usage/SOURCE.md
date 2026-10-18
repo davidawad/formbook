@@ -4,8 +4,8 @@ Status: **two filed exemplars**, both public RECAP copies of Doc. 1 (the complai
 
 | File | Adversary | Main case | Filer (counsel) | Filed / entered | Pages | Text layer |
 |---|---|---|---|---|---|---|
-| `SAMPLE-lamb-adversary-complaint-hoven1901027.pdf` | *Pull-A-Part, LLC v. Hoven*, Adv. 19-01027, Doc. 1 | 19-10514 (chapter 7) | Andrew Murrell Law Firm (J. Andrew Murrell) for Pull-A-Part, LLC, plaintiff | Filed 08/13/2019 (entered 08/13/2019 14:26:26) | 5 | yes: Word 2016 export, Calibri and Times, all pages extract |
-| `SAMPLE-lamb-adversary-complaint-criss1801006.pdf` | *Criss v. Criss*, Adv. 18-01006, Doc. 1 | 17-11210 (chapter 7) | Grand Law Firm, LLC (Trenton A. Grand; Robert W. Hoke) for Sinarta Criss, plaintiff | Filed 03/16/2018 (entered 03/16/2018 16:45:52) | 2 | yes: Word 2016 export, Times, all pages extract |
+| `FILED-EXAMPLE-adversary-complaint-2.pdf` | *Pull-A-Part, LLC v. Hoven*, Adv. 19-01027, Doc. 1 | 19-10514 (chapter 7) | Andrew Murrell Law Firm (J. Andrew Murrell) for Pull-A-Part, LLC, plaintiff | Filed 08/13/2019 (entered 08/13/2019 14:26:26) | 5 | yes: Word 2016 export, Calibri and Times, all pages extract |
+| `FILED-EXAMPLE-adversary-complaint.pdf` | *Criss v. Criss*, Adv. 18-01006, Doc. 1 | 17-11210 (chapter 7) | Grand Law Firm, LLC (Trenton A. Grand; Robert W. Hoke) for Sinarta Criss, plaintiff | Filed 03/16/2018 (entered 03/16/2018 16:45:52) | 2 | yes: Word 2016 export, Times, all pages extract |
 
 Two different filers, as the tier-2 standard asks. Both filings are older than the 2022 local rules this template is built from, so they settle conventions the rules leave open, not compliance with the current rules.
 
@@ -19,7 +19,7 @@ Both documents are public court records as RECAP-uploaded PDFs. Personal identif
 ## How they were used
 
 - Structure only: an unnumbered opening paragraph before the first numbered allegation (both), numbered allegations (both), an unnumbered WHEREFORE paragraph (both), and a counsel signature block with `/s/` and the firm name (both). Both put the caption in a Form 416 style, with case, chapter and adversary numbers at the right. Neither has section headings, a certificate, a proposed order, a consent statement, or a cover sheet.
-- No text, coordinates or line breaks from either filing is in any template. The sample `usage/INPUT-lamb-adversary-complaint-adversarycomplaintsample.md` is fictitious and only mirrors the structure.
+- No text, coordinates or line breaks from either filing is in any template. The sample `usage/INPUT-adversary-complaint.md` is fictitious and only mirrors the structure.
 
 ## Searches (2026-10-15)
 

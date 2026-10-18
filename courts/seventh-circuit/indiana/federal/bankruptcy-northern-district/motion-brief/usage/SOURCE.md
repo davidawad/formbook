@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-innb-motion-brief-riverterrace1411829.pdf` (13 pages, text layer present; `pdffonts` shows embedded TimesNewRoman, Bold and Italic, `pdftotext` reads it)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (13 pages, text layer present; `pdffonts` shows embedded TimesNewRoman, Bold and Italic, `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.innb.362606.318.0.pdf (CourtListener RECAP document, Doc 318)
 - Found via: CourtListener API search `court_id:innb "brief in support"` (`https://www.courtlistener.com/api/rest/v4/search/?q=court_id%3Ainnb%20%22brief%20in%20support%22&type=r`, HTTP 200). Downloaded with curl from the storage URL above.
 - Court: United States Bankruptcy Court, Northern District of Indiana, Fort Wayne Division

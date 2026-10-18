@@ -5,11 +5,11 @@ Folder: `courts/fifth-circuit/texas/federal/western-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `usage/SAMPLE-txwd-complaint-lilly526cv05147.pdf` (counsel-drafted, used for the sample) and `usage/SAMPLE-txwd-complaint-callier326cv01039.pdf` (self-represented, not transcribed). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-txwd-complaint-lillyfirstamended.md` (an excerpt of the 35-page filing: caption, parties, jurisdiction, opening general allegations, the first count, prayer in part, jury demand, signature). |
+| exemplar | yes, two filers: `usage/FILED-EXAMPLE-complaint.pdf` (counsel-drafted, used for the sample) and `usage/FILED-EXAMPLE-complaint-2.pdf` (self-represented, not transcribed). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-complaint.md` (an excerpt of the 35-page filing: caption, parties, jurisdiction, opening general allegations, the first count, prayer in part, jury demand, signature). |
 | typeface | face required: none (CV-10(a) names no face). Substitute: none needed; **EB Garamond** kept (`docs/FONTS.md`, "No face named"). Embedded: EB Garamond Regular and Bold only (`pdffonts`, 2026-10-14). |
-| render | ok: `usage/OUTPUT-txwd-complaint-lillyfirstamended.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14). |
-| overlay | ok: `usage/OVERLAY-lilly-first-amended-complaint.pdf` and `.txt` (see "Overlay" below), regenerated 2026-10-14 against `usage/SAMPLE-txwd-complaint-lilly526cv05147.pdf`. That PDF was missing from the checkout and was fetched from the URL in `usage/SOURCE.md`. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14). |
+| overlay | ok: `usage/OVERLAY-lilly-first-amended-complaint.pdf` and `.txt` (see "Overlay" below), regenerated 2026-10-14 against `usage/FILED-EXAMPLE-complaint.pdf`. That PDF was missing from the checkout and was fetched from the URL in `usage/SOURCE.md`. |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; all 9 viewed again on the 2026-10-14 re-render). |
 | gates | `tools/check.sh` not run: it expects a court folder with `court.json` and `rules.md`, which this doc-type folder does not have, and the brief forbids editing `tools/`. |
 
@@ -89,7 +89,7 @@ Reviewed pages: 9 of 9.
 
 ## Engines
 
-docx (`docx/`): `render.sh` runs pandoc with `reference.docx` (built by `build-reference.sh`) and `txwd-complaint.lua`, then patches the list definitions pandoc writes. Output: `usage/OUTPUT-txwd-complaint-lillyfirstamended.docx` and `.docx.pdf` (LibreOffice). Opened and checked in LibreOffice only; Word was not checked.
+docx (`docx/`): `render.sh` runs pandoc with `reference.docx` (built by `build-reference.sh`) and `txwd-complaint.lua`, then patches the list definitions pandoc writes. Output: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice). Opened and checked in LibreOffice only; Word was not checked.
 
 - Matches the typst form: EB Garamond 13 pt (embedded: EB Garamond Regular and Bold only), letter with 1 in margins, double spacing as exact 26 pt lines and single as exact 15.6 pt, caption as a borderless table (party column, § column, case column), numbered paragraphs (Word list numbering, numbers at 0.5 in), headings centred bold (level 1 and 2) and left bold (level 3), centred count lines, unnumbered prayer lead-in, signature table kept on one page, centred PAGE number.
 - Differs: LibreOffice draws the glyphs at the bottom of each exact 26 pt line, so the first line of each page sits about 12 pt lower than in typst and a page holds 24 lines (typst 25 to 26). The sample is 10 pages as docx and 9 as typst. Margins are unchanged. Not a tier-1 difference (CV-10 fixes double spacing, not lines per page).

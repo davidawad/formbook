@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-alnd-motion-brief-sec226cv01586.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Northern District of Alabama, Southern Division
 - Case: *The Southeastern Conference v. Rousse, et al.* (Louisiana State University defendants)
 - Docket: No. 2:26-cv-01586-ACA (CourtListener RECAP, Document 27-1)

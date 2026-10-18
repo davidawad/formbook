@@ -2,7 +2,7 @@
 
 Court: United States District Court, Western District of Texas (txwd). Doc type: motion-brief (a Rule 12 motion to dismiss with its brief in support).
 
-## `SAMPLE-txwd-motion-brief-lulac126cv00729.pdf` (used for the sample)
+## `FILED-EXAMPLE-motion-brief.pdf` (used for the sample)
 
 - Case: *League of Latin American Citizens, et al. v. Jane Nelson, in her official capacity as Texas Secretary of State, et al.*, No. 1:26-cv-00729-ADA-SH (Austin Division)
 - Document: "Defendant Paul Adams's Rule 12 Motion to Dismiss, and Brief in Support" (22 pages, ECF/Document 28). Cover page, table of contents, table of authorities, introduction, grounds for relief, argument, prayer, signature block, certificate of service.

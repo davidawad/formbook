@@ -2,8 +2,8 @@
 
 - Court: `mab`, United States Bankruptcy Court for the District of Massachusetts (`courts/first-circuit/massachusetts/federal/bankruptcy-district/`)
 - Doc type: `motion-brief` (motion under Fed. R. Bankr. P. 9013 with its supporting argument; here, a Rule 12(b)(6) motion to dismiss an adversary complaint)
-- Exemplar: `usage/SAMPLE-mab-motion-brief-saintann2604027.pdf` (*Roy v. The Sisters of Saint Ann d/b/a Anna Maria College*, Adv. Proc. No. 26-04027-EDK, Doc. 6, filed 2026-09-21, 15 pages; provenance in `usage/SOURCE.md`). The argument is inside the motion; there is no separate memorandum in the filing.
-- Sample: `usage/INPUT-mab-motion-brief-saintannmotiontodismiss.md` (full transcription of the filed motion, pages 1-15, with footnotes 1-3 and the certificate of service and service list).
+- Exemplar: `usage/FILED-EXAMPLE-motion-brief.pdf` (*Roy v. The Sisters of Saint Ann d/b/a Anna Maria College*, Adv. Proc. No. 26-04027-EDK, Doc. 6, filed 2026-09-21, 15 pages; provenance in `usage/SOURCE.md`). The argument is inside the motion; there is no separate memorandum in the filing.
+- Sample: `usage/INPUT-motion-brief.md` (full transcription of the filed motion, pages 1-15, with footnotes 1-3 and the certificate of service and service list).
 - Status: template built, rendered, overlaid and page-reviewed (12 of 12 pages). Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,8 +12,8 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...`, splits frontmatter, calls `mab-motion-brief`. |
 | `typst/mab-motion-brief.typ` | Template. Caption (Rule 9004(b)), numbered paragraphs (MLBR 9013-1(a)), headings, tables, lists, footnotes, signature with the date beside it, certificate of service, service list. |
-| `usage/INPUT-mab-motion-brief-saintannmotiontodismiss.md` | Markdown sample: frontmatter (division, debtor, chapter, case numbers, parties, title, date, signature groups) and the body. |
-| `usage/OUTPUT-mab-motion-brief-saintannmotiontodismiss.typst.pdf` | `sh tools/render.sh courts/first-circuit/massachusetts/federal/bankruptcy-district/motion-brief usage/INPUT-mab-motion-brief-saintannmotiontodismiss.md` (12 pages). |
+| `usage/INPUT-motion-brief.md` | Markdown sample: frontmatter (division, debtor, chapter, case numbers, parties, title, date, signature groups) and the body. |
+| `usage/OUTPUT-motion-brief.typst.pdf` | `sh tools/render.sh courts/first-circuit/massachusetts/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md` (12 pages). |
 | `usage/OVERLAY-saint-ann-motion-to-dismiss.pdf`, `.txt` | `sh tools/overlay.sh courts/first-circuit/massachusetts/federal/bankruptcy-district/motion-brief saint-ann-motion-to-dismiss` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -53,7 +53,7 @@ Typeface (checked 2026-10-14): face required: none. MLBR Appendix 8(c) asks for 
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-mab-motion-brief-saintannmotiontodismiss.typst.pdf` was rendered at 60 dpi and viewed (12 of 12). Typst printed no warnings. Fonts embedded: EB Garamond Regular, Bold and Italic only.
+Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed (12 of 12). Typst printed no warnings. Fonts embedded: EB Garamond Regular, Bold and Italic only.
 
 | Page | Content | Result |
 |---|---|---|

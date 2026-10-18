@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-laed-complaint-buckles226cv01954.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Eastern District of Louisiana
 - Case: *Buckles v. IDScan.net, Inc.*
 - Docket: No. 2:26-cv-01954-CJB-KWR (Document 1)

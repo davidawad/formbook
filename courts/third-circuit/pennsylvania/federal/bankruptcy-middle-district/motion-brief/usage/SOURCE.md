@@ -1,6 +1,6 @@
 # Exemplar source: motion-brief (pamb)
 
-- File: `SAMPLE-pamb-motion-brief-mullen522bk00237.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Fetched from: `https://storage.courtlistener.com/recap/gov.uscourts.pamb.273556/gov.uscourts.pamb.273556.32.0.pdf` (CourtListener RECAP archive, document 32; found through the CourtListener search API, `type=rd`, `court=pamb`).
 - Case: *In re James Mullen* (a/k/a James Robert Mullen, James Mullen), Chapter 13, Case No. 5-22-00237-MJC (M.D. Pa. Bankr.).
 - Title on the document: "Brief in Support of Debtor's Motion to Deem Bankruptcy Filing Effective as of February 4, 2022".
@@ -31,7 +31,7 @@ The Mullen PDF is flagged for Liberation Sans in the font audit and is an OCR/te
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-pamb-motion-brief-madeam522bk01575.pdf` |
+| File | `FILED-EXAMPLE-motion-brief-2.pdf` |
 | Court | U.S. Bankruptcy Court for the Middle District of Pennsylvania |
 | Case | *In re Alfredo F. Madeam, Jr.*, Chapter 13, No. 5-22-bk-01575-MJC |
 | Document | Memorandum of Law in Support of Trustee's Motion to Dismiss, ECF Doc. 33 (7 pages) |

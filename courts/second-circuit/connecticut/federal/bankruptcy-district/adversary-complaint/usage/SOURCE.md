@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| Saved file | `SAMPLE-ctb-adversary-complaint-despins1stdibs2505088.pdf` |
+| Saved file | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | Court | United States Bankruptcy Court, District of Connecticut (Bridgeport Division) |
 | Case | *Luc A. Despins, Chapter 11 Trustee v. 1stdibs.com Inc.*, Adv. Proc. No. 25-05088 (JAM); main case *In re Ho Wan Kwok, et al.*, Case No. 22-50073 (JAM) (Jointly Administered) |
 | Document | Doc. 1: Complaint of Chapter 11 Trustee Seeking Avoidance and Recovery of Postpetition Transfers (pp. 3-13), preceded by the Adversary Proceeding Cover Sheet, Form B1040 (pp. 1-2) |
@@ -29,7 +29,7 @@ The brief asks for one exemplar per doc type, so only the first is saved. A seco
 
 | Item | Value |
 |---|---|
-| Saved file | `SAMPLE-ctb-adversary-complaint-novakekrealestate2502003.pdf` |
+| Saved file | `FILED-EXAMPLE-adversary-complaint-3.pdf` |
 | Court | United States Bankruptcy Court, District of Connecticut (Hartford Division) |
 | Case | *Anthony S. Novak, Chapter 7 Trustee for the Estate of Alan E. Waskowicz v. EK Real Estate Fund I, LLC and EasyKnock, Inc.*, Adv. Pro. No. 25-02003; main case *In re Alan E. Waskowicz*, Case No. 23-20091 (JJT), Chapter 7 |
 | Document | Doc. 1: Complaint (turnover under 11 U.S.C. §§ 541, 543), 3 pp. The Adversary Proceeding Cover Sheet is a separate attachment (Doc. 1-1) and is not saved. |
@@ -47,7 +47,7 @@ The brief asks for one exemplar per doc type, so only the first is saved. A seco
 
 | Item | Value |
 |---|---|
-| Saved file | `SAMPLE-ctb-adversary-complaint-lottousbanktrust2403015.pdf` |
+| Saved file | `FILED-EXAMPLE-adversary-complaint-2.pdf` |
 | Court | United States Bankruptcy Court, District of Connecticut (New Haven Division) |
 | Case | *Michael Henry Lotto v. U.S. Bank Trust National Association, not in its individual capacity but solely as owner trustee for RCF 2 Acquisition Trust; Selene Finance LP; Discover Bank*, Adv. Pro. No. 24-03015; main case *In re Michael Henry Lotto*, Case No. 24-30774 (AMN), Chapter 13 |
 | Document | Doc. 1: Adversary Complaint (lien validity and valuation, 11 U.S.C. § 506; five counts), 16 pp. Attachments (Form B1040 cover sheet, Exhibits A-F) not saved. |

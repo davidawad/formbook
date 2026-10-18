@@ -5,10 +5,10 @@ Court for the Northern District of Indiana (`innd`). Folder: `courts/seventh-cir
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-innd-motion-brief-mcgonigle125cv398.pdf` (sampled; 15 pages), plus `usage/SAMPLE-innd-motion-brief-nowak324cv950.pdf` (second filer; 20 pages). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-innd-motion-brief-mcgonigle.md`: the whole memorandum transcribed (caption, I–IV headings with A/B and 1–3 sub-headings, 13 footnotes, one block quotation, conclusion, signature block, certificate of service). |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (sampled; 15 pages), plus `usage/FILED-EXAMPLE-motion-brief-2.pdf` (second filer; 20 pages). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md`: the whole memorandum transcribed (caption, I–IV headings with A/B and 1–3 sub-headings, 13 footnotes, one block quotation, conclusion, signature block, certificate of service). |
 | typeface | No face named by the rule: EB Garamond (vendored), per `docs/FONTS.md` ("No face named"). Embedded per `pdffonts`: EBGaramond Regular, Bold, Italic, BoldItalic. See Known gaps 1. |
-| render | ok: `usage/OUTPUT-innd-motion-brief-mcgonigle.typst.pdf`, 13 pages, typst 0.15.0, vendored fonts only, no warnings (re-rendered 2026-10-15) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 13 pages, typst 0.15.0, vendored fonts only, no warnings (re-rendered 2026-10-15) |
 | overlay | ok: `usage/OVERLAY-mcgonigle-motion-brief.pdf` and `OVERLAY-mcgonigle-motion-brief.txt` (rebuilt 2026-10-15) |
 | pages reviewed | 13 of 13 (every page rasterized and viewed on the 2026-10-15 build) |
 
@@ -100,7 +100,7 @@ Overlay: `usage/OVERLAY-mcgonigle-motion-brief.txt` pairs our pages 1–13 with 
 
 ## Engines
 
-DOCX (`docx/`): pandoc on `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx`) with the filter `docx/innd.lua`. Output: `usage/OUTPUT-innd-motion-brief-mcgonigle.docx`.
+DOCX (`docx/`): pandoc on `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx`) with the filter `docx/innd.lua`. Output: `usage/OUTPUT-motion-brief.docx`.
 
 - Matches the typst form: EB Garamond 12 pt body, exact 27.6 pt double line pitch, 0.5 in first-line indent, 1 in margins on letter paper, 10 pt single-spaced footnotes, 13.8 pt single lines in the caption and signature, centered page-number footer, headings (level 1 centered caps, level 2 bold, level 3 bold italic), single-spaced block quotes, "1." labelled lists, caption table with a right and bottom rule on the party column, certificate of service after the signature.
 - Differs or unverified: paragraph gap (19.8 pt) is set as space-after; the signature and certificate blocks are tables, so they are not kept on one page with the last paragraph as typst does (no keep-with-next); the list tab stop approximates typst's label gap; table border weights and cell padding are not compared against the typst layout.

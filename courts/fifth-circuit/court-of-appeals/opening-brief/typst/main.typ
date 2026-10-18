@@ -5,6 +5,6 @@
 // <court-dir> here is courts/fifth-circuit/court-of-appeals/opening-brief.
 #import "ca5-opening-brief.typ": ca5-opening-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ca5-opening-brief-candel.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-opening-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ca5-opening-brief(meta, body)

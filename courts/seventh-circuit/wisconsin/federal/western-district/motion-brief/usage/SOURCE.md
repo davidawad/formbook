@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-wiwd-motion-brief-drone326cv00539.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Western District of Wisconsin
 - Case: *Drone v. Nilsestuen et al.*
 - Docket: No. 3:26-cv-00539-jdp (Document 58)

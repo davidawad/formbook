@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ared-complaint.typ": ared-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ared-complaint-hessequifax.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #ared-complaint(meta, body)

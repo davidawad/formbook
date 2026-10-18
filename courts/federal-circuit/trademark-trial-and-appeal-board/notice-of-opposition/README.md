@@ -7,9 +7,9 @@ Doc type `notice-of-opposition` under the Trademark Trial and Appeal Board (`cou
 | Item | State |
 |---|---|
 | Exemplar | yes: two filers (Brink Biologics 2022, text-based; Vitamin World 2006, mostly scanned). See `usage/SOURCE.md` |
-| Sample | `usage/INPUT-ttab-notice-of-opposition-brink.md`: the Brink notice, transcribed in full (caption, applications block, Counts I-III, prayer, signature). The ESTTA cover and the two exhibits are not transcribed; slip sheets for the exhibits are generated |
-| Render (typst) | ok: `sh tools/render.sh courts/federal-circuit/trademark-trial-and-appeal-board/notice-of-opposition usage/INPUT-ttab-notice-of-opposition-brink.md` writes `usage/OUTPUT-ttab-notice-of-opposition-brink.typst.pdf`, 8 pages, no typst warnings, fonts EB Garamond only (embedded) |
-| Overlay | ok: `sh tools/overlay.sh <dir> brink-notice-of-opposition <dir>/usage/SAMPLE-ttab-notice-of-opposition-brinkbiologics91274910.pdf` writes `usage/OVERLAY-brink-notice-of-opposition.pdf` and `.txt` |
+| Sample | `usage/INPUT-notice-of-opposition.md`: the Brink notice, transcribed in full (caption, applications block, Counts I-III, prayer, signature). The ESTTA cover and the two exhibits are not transcribed; slip sheets for the exhibits are generated |
+| Render (typst) | ok: `sh tools/render.sh courts/federal-circuit/trademark-trial-and-appeal-board/notice-of-opposition usage/INPUT-notice-of-opposition.md` writes `usage/OUTPUT-notice-of-opposition.typst.pdf`, 8 pages, no typst warnings, fonts EB Garamond only (embedded) |
+| Overlay | ok: `sh tools/overlay.sh <dir> brink-notice-of-opposition <dir>/usage/FILED-EXAMPLE-notice-of-opposition.pdf` writes `usage/OVERLAY-brink-notice-of-opposition.pdf` and `.txt` |
 | Pages reviewed | 8 of 8 (every page of the current `OUTPUT-` PDF rendered at 60 dpi and looked at; see "Page review") |
 | Check gates (`tools/check.sh`) | not run (box task: no tracker, no gates in this unit) |
 
@@ -66,7 +66,7 @@ The overlay is a diagnostic. Differences in leading, the exact position of the c
 
 ## Page review
 
-Every page of `OUTPUT-ttab-notice-of-opposition-brink.typst.pdf` (8 pages) was rendered at 60 dpi and looked at, after the final template change.
+Every page of `OUTPUT-notice-of-opposition.typst.pdf` (8 pages) was rendered at 60 dpi and looked at, after the final template change.
 
 | Page | Content | Finding |
 |---|---|---|
@@ -91,7 +91,7 @@ Defects found and fixed in the process: (1) overlapping lines, from the default 
 
 ## Engines
 
-The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference.sh` (the `reference.docx`: EB Garamond 12 pt, double-spaced body at 24 pt exact, half-inch first-line indent, single-spaced footnotes and block quotations, headings at the typst template's default sizes) and `docx/ttab-notice.lua` (the USPTO heading, the applications block, the caption table, the title, the signature block kept together, one slip sheet per exhibit). Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-ttab-notice-of-opposition-brink.md` writes `usage/OUTPUT-ttab-notice-of-opposition-brink.docx` and `.docx.pdf`.
+The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference.sh` (the `reference.docx`: EB Garamond 12 pt, double-spaced body at 24 pt exact, half-inch first-line indent, single-spaced footnotes and block quotations, headings at the typst template's default sizes) and `docx/ttab-notice.lua` (the USPTO heading, the applications block, the caption table, the title, the signature block kept together, one slip sheet per exhibit). Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-notice-of-opposition.md` writes `usage/OUTPUT-notice-of-opposition.docx` and `.docx.pdf`.
 
 | Item | docx vs typst |
 |---|---|
@@ -100,7 +100,7 @@ The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference
 | Pagination | The typst sample runs 8 pages; the docx runs 9. The signature block is kept on one page, which moves it to page 7; the typst block fits on page 6. Word will paginate slightly differently again (line height of the single-spaced lines) |
 | Exhibit slip sheets | A one-cell table of exact height, vertically centered; the same page as the typst slip sheet |
 
-BLOCKED (docx): `check.sh --engine docx` cannot run on this folder: the checks read `checks.yaml` and `court.json` in the court root, and this doc-type folder has neither (the court root has `court.json` but no `checks.yaml`). So no gate ID is green or red for this engine; the render and the page-by-page review are the only checks made. Pages reviewed: every page of `OUTPUT-ttab-notice-of-opposition-brink.docx.pdf` (9 pages) was rendered at 60 dpi and compared with the typst pages.
+BLOCKED (docx): `check.sh --engine docx` cannot run on this folder: the checks read `checks.yaml` and `court.json` in the court root, and this doc-type folder has neither (the court root has `court.json` but no `checks.yaml`). So no gate ID is green or red for this engine; the render and the page-by-page review are the only checks made. Pages reviewed: every page of `OUTPUT-notice-of-opposition.docx.pdf` (9 pages) was rendered at 60 dpi and compared with the typst pages.
 
 ## Searches
 

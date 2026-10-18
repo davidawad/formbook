@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "kyeb-adversary-complaint.typ": kyeb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-kyeb-adversary-complaint-kennedycambrian1951200.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #kyeb-adversary-complaint(meta, body)

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "gud-complaint.typ": gud-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-gud-complaint-capfa.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #gud-complaint(meta, body)

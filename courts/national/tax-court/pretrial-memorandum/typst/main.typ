@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "tax-pretrial-memorandum.typ": tax-pretrial-memorandum, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-tax-pretrial-memorandum-generic.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-pretrial-memorandum-2.md"))
 #let (meta, body) = split-frontmatter(src)
 #tax-pretrial-memorandum(meta, body)

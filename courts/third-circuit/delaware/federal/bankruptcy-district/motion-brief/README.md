@@ -6,8 +6,8 @@ Court: United States Bankruptcy Court for the District of Delaware (`deb`). Path
 
 ## Exemplar
 
-- `usage/SAMPLE-deb-motion-brief-bumblebeetrentjason1951146.pdf`: Memorandum of Law in Support of Defendant's Motion to Dismiss the Complaint, Adv. Pro. No. 19-51146 (LSS), filed 02/17/2020 by Bumble Bee Foods, LLC. 14 pages. Source and search record: `usage/SOURCE.md`.
-- The sample transcribes the full memorandum (`usage/INPUT-deb-motion-brief-bumblebee.md`), including the cover and counsel block, the TOC and TOA sections, all argument headings, the block-quoted transcript, footnotes 1–7, the conclusion, and the signature.
+- `usage/FILED-EXAMPLE-motion-brief.pdf`: Memorandum of Law in Support of Defendant's Motion to Dismiss the Complaint, Adv. Pro. No. 19-51146 (LSS), filed 02/17/2020 by Bumble Bee Foods, LLC. 14 pages. Source and search record: `usage/SOURCE.md`.
+- The sample transcribes the full memorandum (`usage/INPUT-motion-brief.md`), including the cover and counsel block, the TOC and TOA sections, all argument headings, the block-quoted transcript, footnotes 1–7, the conclusion, and the signature.
 
 ## Governing rules (verified 2026-10-14)
 
@@ -28,14 +28,14 @@ The local rules PDF was fetched through the fetch tool, which saved it locally; 
 ## Layout
 
 - `typst/main.typ` (entry point), `typst/deb-motion-brief.typ` (template). Parameters at the top of the template, each with its rule.
-- `usage/INPUT-deb-motion-brief-bumblebee.md`: frontmatter (caption, title, date, counsel, signature blocks) plus the body in markdown. Footnotes use markdown `[^n]`; headings: `#` centred section, `##` argument heading, `###` table of authorities (centred, kept out of the TOC).
-- `usage/OUTPUT-deb-motion-brief-bumblebee.typst.pdf`: render (12 pages, Liberation Serif embedded; was 11 pages in EB Garamond). `usage/OVERLAY-bumble-bee-motion-brief.pdf` and `.txt`: overlay (not regenerated; see Overlay).
+- `usage/INPUT-motion-brief.md`: frontmatter (caption, title, date, counsel, signature blocks) plus the body in markdown. Footnotes use markdown `[^n]`; headings: `#` centred section, `##` argument heading, `###` table of authorities (centred, kept out of the TOC).
+- `usage/OUTPUT-motion-brief.typst.pdf`: render (12 pages, Liberation Serif embedded; was 11 pages in EB Garamond). `usage/OVERLAY-bumble-bee-motion-brief.pdf` and `.txt`: overlay (not regenerated; see Overlay).
 
 Naming: the brief asks for `usage/<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, and the overlay reads the `OUTPUT-` name. The tool names are used so the overlay runs unmodified.
 
 ## Overlay (red = ours, blue = filed; `OVERLAY-bumble-bee-motion-brief.txt`)
 
-**Not regenerated.** `tools/overlay.sh` exits 1 here: `usage/` has no `SAMPLE-*.pdf` (only `SOURCE.md`), and the RECAP download in `SOURCE.md` returned an error page, not a PDF. The table below is from the earlier 11-page EB Garamond render and no longer matches `OUTPUT-deb-motion-brief-bumblebee.typst.pdf`. Re-run `sh tools/overlay.sh` once the exemplar is in place.
+**Not regenerated.** `tools/overlay.sh` exits 1 here: `usage/` has no `SAMPLE-*.pdf` (only `SOURCE.md`), and the RECAP download in `SOURCE.md` returned an error page, not a PDF. The table below is from the earlier 11-page EB Garamond render and no longer matches `OUTPUT-motion-brief.typst.pdf`. Re-run `sh tools/overlay.sh` once the exemplar is in place.
 
 Old page map (EB Garamond, 11 pages), our page to filed page, by word overlap:
 
@@ -81,12 +81,12 @@ Pages 1–11 as reviewed in the final render: cover (1), TOC (2), table of autho
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference for the form. Rendered sample: `usage/OUTPUT-deb-motion-brief-bumblebee.typst.pdf`.
+- **typst** (primary, `typst/`): the reference for the form. Rendered sample: `usage/OUTPUT-motion-brief.typst.pdf`.
 - **latex**: not built (`latex/` is empty).
-- **docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default reference: Times New Roman 12 pt (LR 7007-2(a)(ii)), double spacing (Word "double", line 480 auto), 0.5 in first-line indent on body text, 1 in margins on letter paper, centered PAGE number in the footer, black bold headings (level 3 in capitals), 10 pt single footnotes, and the paragraph styles "Centered", "CenteredBody" and "Single". `docx/deb.lua` builds from the frontmatter the cover (court line, Form 416 caption, title, party designation, date and counsel), the table of contents, the body and the signature block. Build: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/deb.lua usage/INPUT-deb-motion-brief-bumblebee.md -o usage/OUTPUT-deb-motion-brief-bumblebee.docx`.
+- **docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default reference: Times New Roman 12 pt (LR 7007-2(a)(ii)), double spacing (Word "double", line 480 auto), 0.5 in first-line indent on body text, 1 in margins on letter paper, centered PAGE number in the footer, black bold headings (level 3 in capitals), 10 pt single footnotes, and the paragraph styles "Centered", "CenteredBody" and "Single". `docx/deb.lua` builds from the frontmatter the cover (court line, Form 416 caption, title, party designation, date and counsel), the table of contents, the body and the signature block. Build: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/deb.lua usage/INPUT-motion-brief.md -o usage/OUTPUT-motion-brief.docx`.
 - **docx: matches** the typst form: page size and margins, the face and size, the first-line indent, the block quotes single-spaced and indented, the caption layout, the centered headings, the page-number footer, footnotes at the end of each page, the table of authorities as typed text (as in typst).
 - **docx: differs**:
-  - Line pitch. The typst body pitch is 24.06 pt for 12 pt type (measured on page 4 of `OUTPUT-deb-motion-brief-bumblebee.typst.pdf`). Word's double is two line heights of the font, not measured here. The docx will run longer than the typst pages.
+  - Line pitch. The typst body pitch is 24.06 pt for 12 pt type (measured on page 4 of `OUTPUT-motion-brief.typst.pdf`). Word's double is two line heights of the font, not measured here. The docx will run longer than the typst pages.
   - Table of contents: a TOC field over levels 1 and 2, with its entries cached but no page numbers. Word or LibreOffice shows the page numbers after the field is updated (select all, F9). The typst contents page carries page numbers.
   - The date and the counsel block sit at the foot of the cover as two frames anchored to the bottom margin. This is a Word frame placement; it was not checked in LibreOffice.
   - The table of authorities is typed text with no page numbers, as the typst sample is.

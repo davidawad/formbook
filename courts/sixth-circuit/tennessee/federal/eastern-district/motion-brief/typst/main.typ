@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "tned-motion-brief.typ": tned-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-tned-motion-brief-brockington.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #tned-motion-brief(meta, body)

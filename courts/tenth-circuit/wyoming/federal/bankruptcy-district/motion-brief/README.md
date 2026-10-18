@@ -5,9 +5,9 @@ Folder: `courts/tenth-circuit/wyoming/federal/bankruptcy-district/motion-brief/`
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-wyb-motion-brief-teardropvdevon2002057.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-wyb-motion-brief-teardropmemo.md` (caption, the Nature of the Case, the undisputed facts, the Applicable Law through the Maverick paragraph, the Attorney Fees and Conclusion, the relief list, the signature and the certificate; pages 10 to 12 of the filed memorandum are omitted and marked in the sample) |
-| render | ok: `usage/OUTPUT-wyb-motion-brief-teardropmemo.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (embedded as EBGaramond-Regular/Italic/Bold), no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (caption, the Nature of the Case, the undisputed facts, the Applicable Law through the Maverick paragraph, the Attorney Fees and Conclusion, the relief list, the signature and the certificate; pages 10 to 12 of the filed memorandum are omitted and marked in the sample) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (embedded as EBGaramond-Regular/Italic/Bold), no warnings |
 | overlay | ok: `usage/OVERLAY-tear-drop-memo.pdf` and `usage/OVERLAY-tear-drop-memo.txt` (every page paired with a filed page, 40% to 87% word overlap; pages 8 and 9 of the render pair with exemplar pages 13 and 14 because the sample omits exemplar pages 10 to 12) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change) |
 | BLOCKED | none. Tier 2 is not judged against two or three filers yet (see Known gaps). |
@@ -51,7 +51,7 @@ Not produced by this template: the motion itself and its notice of hearing (LBR 
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # or the bootstrap toolchain
-sh tools/render.sh courts/tenth-circuit/wyoming/federal/bankruptcy-district/motion-brief usage/INPUT-wyb-motion-brief-teardropmemo.md
+sh tools/render.sh courts/tenth-circuit/wyoming/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/tenth-circuit/wyoming/federal/bankruptcy-district/motion-brief tear-drop-memo
 ```
 
@@ -87,7 +87,7 @@ sh tools/overlay.sh courts/tenth-circuit/wyoming/federal/bankruptcy-district/mot
 
 ## Engines
 
-**docx** (`docx/reference.docx` + `docx/wyb-motion-brief.lua`; output `usage/OUTPUT-wyb-motion-brief-teardropmemo.docx`).
+**docx** (`docx/reference.docx` + `docx/wyb-motion-brief.lua`; output `usage/OUTPUT-motion-brief.docx`).
 
 - Matches: EB Garamond 13 pt body, 1 in margins, letter paper, exact 26 pt (double) line pitch, 0.5 in first-line indent, bold centered court title, caption table with the party rule and bottom rule and case information on the right, counsel block 11 pt single spaced, page number footer 11 pt centered, footnote text 13 pt.
 - Differs: the filter lays out the cover in a table with plain-text caption values (no inline markdown in caption parties), and the pleading-paper paragraph numbers and lettered prayer items are typed text, not Word list numbering. Heading and signature keep-together uses keepNext, so Word and LibreOffice may break pages differently.

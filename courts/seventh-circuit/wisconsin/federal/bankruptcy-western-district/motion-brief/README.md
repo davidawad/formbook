@@ -7,9 +7,9 @@ Status: exemplar=yes (one filer), render=ok (19 pages, typst 0.15.0, no warnings
 ## What is here
 
 - **Template**: `typst/main.typ` (entry) and `typst/wiwb-motion-brief.typ` (layout). No case-specific text: every name, number, title and date comes from the sample's frontmatter.
-- **Exemplar**: `usage/SAMPLE-wiwb-motion-brief-johnson1810327.pdf`, Hiawatha National Bank's Post-Trial Memorandum of Law in Support of its Motion to Dismiss, *In re Johnson*, No. 18-10327-12, filed by Eckberg Lammers, P.C. (Amanda K. Schlitz), March 16, 2018. 19 pages, Times New Roman, text layer. Details and provenance in `usage/SOURCE.md`.
-- **Sample**: `usage/INPUT-wiwb-motion-brief-hiawathamemorandum.md` is a **full transcription of that exemplar** (all 19 pages): court name, short-title caption, designation, opening paragraph, JURISDICTION AND VENUE, BACKGROUND (paragraphs 1-27), ARGUMENT with subheadings A-G, five block quotations (ten paragraphs), a five-item bulleted list, both footnotes, CONCLUSION, and the signature block. Compared word by word with `pdftotext` of the exemplar: no missing text. The exemplar has no certificate of service, notice of hearing or proposed order, so the sample has none. The id `hiawatha-memorandum` is kept (it already names this filing, and the docx engine's `OUTPUT-wiwb-motion-brief-hiawathamemorandum.docx` uses it).
-- **Outputs**: `usage/OUTPUT-wiwb-motion-brief-hiawathamemorandum.typst.pdf`, `usage/OVERLAY-hiawatha-memorandum.pdf` and `.txt`. The stale `usage/OUTPUT-constructed-motion-brief.pdf` (no matching input) was removed in this pass.
+- **Exemplar**: `usage/FILED-EXAMPLE-motion-brief.pdf`, Hiawatha National Bank's Post-Trial Memorandum of Law in Support of its Motion to Dismiss, *In re Johnson*, No. 18-10327-12, filed by Eckberg Lammers, P.C. (Amanda K. Schlitz), March 16, 2018. 19 pages, Times New Roman, text layer. Details and provenance in `usage/SOURCE.md`.
+- **Sample**: `usage/INPUT-motion-brief.md` is a **full transcription of that exemplar** (all 19 pages): court name, short-title caption, designation, opening paragraph, JURISDICTION AND VENUE, BACKGROUND (paragraphs 1-27), ARGUMENT with subheadings A-G, five block quotations (ten paragraphs), a five-item bulleted list, both footnotes, CONCLUSION, and the signature block. Compared word by word with `pdftotext` of the exemplar: no missing text. The exemplar has no certificate of service, notice of hearing or proposed order, so the sample has none. The id `hiawatha-memorandum` is kept (it already names this filing, and the docx engine's `OUTPUT-motion-brief.docx` uses it).
+- **Outputs**: `usage/OUTPUT-motion-brief.typst.pdf`, `usage/OVERLAY-hiawatha-memorandum.pdf` and `.txt`. The stale `usage/OUTPUT-constructed-motion-brief.pdf` (no matching input) was removed in this pass.
 
 ## Governing rules
 
@@ -47,11 +47,11 @@ Federal rule text was read on the Legal Information Institute pages (https://www
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/motion-brief usage/INPUT-wiwb-motion-brief-hiawathamemorandum.md
+sh tools/render.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/motion-brief hiawatha-memorandum
 ```
 
-- `usage/OUTPUT-wiwb-motion-brief-hiawathamemorandum.typst.pdf`: 19 pages (the exemplar is 19). Typst compiled with no warnings. `pdffonts`: EBGaramond-Regular, -Bold, -Italic only, all embedded.
+- `usage/OUTPUT-motion-brief.typst.pdf`: 19 pages (the exemplar is 19). Typst compiled with no warnings. `pdffonts`: EBGaramond-Regular, -Bold, -Italic only, all embedded.
 - `usage/OVERLAY-hiawatha-memorandum.pdf` / `.txt`: ours red, filed blue. Page map (word overlap, a diagnostic, not a score): every page pairs with the same filed page, 1→1 through 19→19. Overlap 74% (p.1), 80% (p.2), 91-93% (p.3-4), 72-82% (p.5-7), 46-67% (p.8-14, where our pages run about one paragraph behind), 80% (p.15), 85-96% (p.16-19). Before this pass the map skipped filed pages 9 and 12 and the signature stood alone on page 19.
 
 ## Changes in this pass (fb-595.38.3)
@@ -102,7 +102,7 @@ Reviewed pages: 19 of 19 (OUTPUT) and 19 of 19 (OVERLAY).
 
 Note (fb-595.38.3): the DOCX notes below were written against the earlier typst form. The typst caption now follows Official Form 416B (no rules, Case No. at right) and the signature is no longer alone on the last page; the docx engine was not changed in this pass and still draws the older caption.
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/wiwb.lua` lays out the cover, caption, enumerated items and signature block; body paragraphs, headings, block quotations and footnotes are pandoc's own, styled from the reference. Built with `sh tools/render.sh --engine docx <this dir> usage/INPUT-wiwb-motion-brief-hiawathamemorandum.md`, which writes `usage/OUTPUT-wiwb-motion-brief-hiawathamemorandum.docx`.
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/wiwb.lua` lays out the cover, caption, enumerated items and signature block; body paragraphs, headings, block quotations and footnotes are pandoc's own, styled from the reference. Built with `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx`.
 
 - **Matches the typst form (by its parameters, not seen on a page):** EB Garamond 12 pt; body at 27.6 pt exact line pitch (double spacing, as the typst leading gives); first-line indent 0.5 in; paragraphs not numbered; level-1 headings bold capitals, centred; level-2 headings bold, left, with a 0.4 in hanging indent; block quotations 0.5 in on both sides, single-spaced; footnotes 10 pt single-spaced; enumerated items with a hanging label; caption with the "In re:" block and its left and bottom rules; title centred bold; signature block in the right 3.1 in column that does not break across pages; 11 pt centred page number; letter paper, 1 in margins. The sample has no adversary caption, so no party column or adversary number is drawn, as the typst form does for it.
 - **Differs or unverified:** the enumerated items are typed labels (1., 2., ...), not Word list numbering. Block quotations and the paragraph gap after them are approximated with exact spacing, not typst's spacing rule. The caption rules are table borders. The "By: /s/" line is plain text, not a drawn line. The title and date metadata are printed once, on the cover and in the signature block. Word and LibreOffice may paginate differently; not compared.

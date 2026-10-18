@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nmib-motion-brief-imperialpacific24bk00002.pdf` (31 pages, text layer present: `pdftotext` reads it, `pdffonts` shows embedded fonts)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (31 pages, text layer present: `pdftotext` reads it, `pdffonts` shows embedded fonts)
 - Court: United States District Court for the Northern Mariana Islands, Bankruptcy Division (the caption; the court's bankruptcy unit)
 - Case: *In re Imperial Pacific International (CNMI), LLC*, Chapter 11, No. 1:24-bk-00002 (the caption reads "Case No. 1:24-0bk-00002"; Hon. Ramona V. Manglona)
 - Document: Document No. 49, "Memorandum of Law in Support of Motion by Judgment Creditors Joshua Gray and U.S.A. Fanter for Entry of an Order Under 11 U.S.C. §§ 361, 362 and 541" (memorandum only; the motion itself is a separate filing and is not in this file)

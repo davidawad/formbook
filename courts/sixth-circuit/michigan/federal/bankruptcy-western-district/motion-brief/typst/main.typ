@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "miwb-motion-brief.typ": miwb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-miwb-motion-brief-cluchey.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #miwb-motion-brief(meta, body)

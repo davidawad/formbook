@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Saved file | `SAMPLE-calsuperct-sandiego-motion-brief-atamianolaplex37202400018492.pdf` (pages 1-24 of the packet below: notice of motion, table of contents, table of authorities, memorandum through the signature block) |
+| Saved file | `FILED-EXAMPLE-motion-brief.pdf` (pages 1-24 of the packet below: notice of motion, table of contents, table of authorities, memorandum through the signature block) |
 | URL fetched from | https://docs.simpluris.com/websites/7daec45f-cb53-4706-bad7-f7d98756b79c/documents/27f78e7c-8c42-4967-959a-e336e1449233/Motion%20for%20Attorneys%20Fees%20Costs%20and%20Service%20Awards.pdf (copy of the filed packet posted by Simpluris, Inc., the claims administrator in the case) |
 | Full packet | 98 pages: notice and motion (pp. 1-3), TOC and TOA (pp. 4-8), memorandum (pp. 9-24), declarations of Abbas Kazerounian, Jason A. Ibey, Gil Melili, Pamela E. Prescott, Miray Atamian and Christopher Leung, proof of service (pp. 25-98). Only pp. 1-24 are saved; the declarations are a separate doc type. |
 | Case name | Miray Atamian, Individually and On Behalf of All Others Similarly Situated v. Olaplex, Inc.; and Olaplex Holdings, Inc. |

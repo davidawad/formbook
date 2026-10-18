@@ -10,7 +10,7 @@ Re-check cadence: the Practice Manual is updated chapter by chapter (each page f
 |---|---|---|
 | CFR | 8 C.F.R. § 1003.3 (notice of appeal; briefs, (c)(1)), LII text read 2026-10-17 | https://www.law.cornell.edu/cfr/text/8/1003.3 |
 | PM | Board of Immigration Appeals Practice Manual, edition assembled 2024-11-19 (164 pages; Chapter 3 "last updated June 1, 2023"; Chapter 4 "last updated August 12, 2024"). Cited by chapter and section. **Copy limits:** the official text is at https://www.justice.gov/eoir/reference-materials/bia, which returned HTTP 403 to this box on 2026-10-17 (also via the Wayback Machine). The copy read is the PDF of the Manual mirrored by Human Rights First (its footers name the justice.gov page as the source). Any later EOIR update is not reflected. | https://resources.humanrightsfirst.org/wp-content/uploads/2025/01/BIA-practice-manual-jan.-2025.pdf |
-| EX-ab | `brief-on-appeal/usage/SAMPLE-bia-brief-on-appeal-abredacted.pdf` (Respondent A-B-, by Benjamin Winograd, Immigrant & Refugee Appellate Center, with CGRS) | local |
+| EX-ab | `brief-on-appeal/usage/FILED-EXAMPLE-brief-on-appeal.pdf` (Respondent A-B-, by Benjamin Winograd, Immigrant & Refugee Appellate Center, with CGRS) | local |
 
 Kinds: **M** = mandated by regulation or by a "must" in the Practice Manual (the Board rejects or may reject non-conforming filings). **C** = convention or a Practice Manual preference ("should", "preferred"). **T** = project/tooling rule. **A** = author responsibility.
 

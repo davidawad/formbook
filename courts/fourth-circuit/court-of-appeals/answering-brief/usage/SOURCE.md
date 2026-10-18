@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca4-answering-brief-chapmanvmsp241766.pdf` |
+| File | `FILED-EXAMPLE-answering-brief.pdf` |
 | Document | "Brief of Appellee" (Fourth Circuit ECF Doc. 28), 45 pages, text-based PDF |
 | Case | *Derek Chapman v. Maryland Department of State Police, Office of the State Fire Marshal*, No. 24-1766 (4th Cir.), on appeal from the U.S. District Court for the District of Maryland |
 | Docket no. | 24-1766 |
@@ -32,7 +32,7 @@ Public court record (RECAP). Used as a visual and structural reference only; no 
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca4-answering-brief-plannedparenthoodphillip211043.pdf` |
+| File | `FILED-EXAMPLE-answering-brief-2.pdf` |
 | URL | https://affordablecareactlitigation.com/wp-content/uploads/2021/05/4c-appellees-brief.pdf |
 | Filer | Plaintiffs-Appellees Planned Parenthood South Atlantic and related appellees, through Mayer Brown LLP, Planned Parenthood Federation of America, and Burnette, Shutt & McDaniel, PA |
 | Case | *Planned Parenthood South Atlantic, et al. v. Phillip*, No. 21-1043 |

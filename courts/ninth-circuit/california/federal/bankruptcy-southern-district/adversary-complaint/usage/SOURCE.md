@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-casb-adversary-complaint-steakhousepartners0990163.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Southern District of California (casb)
 - Case: *Steakhouse Partners, Inc., et al. v. T. Scott Avila, in his capacity as Creditor Trustee of the Class IV Creditor Trust*, adversary proceeding No. 09-90163, in the chapter 11 cases Nos. 08-4147-11 and related cases (jointly administered)
 - Document: Complaint to Surcharge Collateral of the Class IV Creditor Trust (13 pages: pages 1–2 are Form B 104, the Adversary Proceeding Cover Sheet; pages 3–13 are the complaint). The sample transcribes pages 3–13.
@@ -16,7 +16,7 @@ Caveats:
 - The caption is the Form 416 layout of a 2009 filing; the template follows it, not the 2009 numbering.
 - Only one filer is collected for this doc type. EVAL-LOOP tier 2 asks for two or three filers; see `../README.md`.
 
-- File: `SAMPLE-casb-adversary-complaint-stika2590036.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf`
 - Filer: Plaintiff Matthew Stika
 - Case: *Stika v. Alegria*, No. 25-90036-CL (Doc. 1)
 - Document: adversary complaint, 3-page scanned PDF

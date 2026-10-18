@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-flmb-adversary-complaint-onefatfrog626ap00095.pdf` (12 pages, text layer present, `pdftotext` yields the full text) |
+| File | `FILED-EXAMPLE-adversary-complaint-2.pdf` (12 pages, text layer present, `pdftotext` yields the full text) |
 | Fetched from | https://storage.courtlistener.com/recap/gov.uscourts.flmb.1430695/gov.uscourts.flmb.1430695.1.0.pdf (RECAP) |
 | Docket page | https://www.courtlistener.com/docket/73386936/1/one-fat-frog-incorporated-adversary-proceeding/ |
 | Case | *L. Todd Budgen, as Trustee in Possession of One Fat Frog, Incorporated v. Paul Baugher*, Adv. No. 6:26-ap-00095-LVV, U.S. Bankruptcy Court, M.D. Fla., Orlando Division (main case *In re One Fat Frog, Incorporated*, No. 6:24-bk-2620-LVV, Chapter 11, Subchapter V) |
@@ -18,7 +18,7 @@ Other flmb adversary complaints located in the same search and not saved (one ex
 
 ## Replacement for the audited non-redistributable-font exemplar
 
-- File: `SAMPLE-flmb-adversary-complaint-lopescastillo626ap00089.pdf` (8 pages)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (8 pages)
 - Court: United States Bankruptcy Court, Middle District of Florida, Orlando Division
 - Case: *Guilherme Lopes De Sousa and Lopes Law PLLC v. Ricardo Castillo Molina*, Adv. No. 6:26-ap-00089-TPG
 - Document: Doc. 1, Complaint Objecting to Debtor's Discharge
@@ -30,4 +30,4 @@ Other flmb adversary complaints located in the same search and not saved (one ex
 - Text layer: yes; `pdftotext` yields the complaint. Poppler reports embedded CID TrueType fonts with generic names and several embedded Liberation Sans text elements; the body font identity is not asserted as Times New Roman.
 - Public filing: CourtListener RECAP copy.
 
-This public text-based adversary complaint replaces the audited `SAMPLE-flmb-adversary-complaint-onefatfrog626ap00095.pdf` (Calisto) for font and text-layer comparison. The original remains in the directory as historical source material.
+This public text-based adversary complaint replaces the audited `FILED-EXAMPLE-adversary-complaint-2.pdf` (Calisto) for font and text-layer comparison. The original remains in the directory as historical source material.

@@ -1,6 +1,6 @@
 # Exemplar source: motion brief (memorandum in support of a motion), M.D. Pa.
 
-## `SAMPLE-pamd-motion-brief-orndorff126cv02944.pdf`
+## `FILED-EXAMPLE-motion-brief.pdf`
 
 - Court: United States District Court, Middle District of Pennsylvania
 - Case: *Barry L. Orndorff v. Cumberland County, et al.*, No. 1:26-cv-02944-JPW
@@ -17,7 +17,7 @@
 - The brief has no table of contents or table of authorities, although it runs past 15 pages with its certificates. The sample does not reproduce that issue; see `../README.md`, gap 3.
 - A second filer was not found. CourtListener search (two queries, 2026-10-14) returned no motion-to-dismiss brief of 15 pages or fewer from this court. A short brief in support of a bifurcation motion (Bland v. Humana Inc., No. 1:26-cv-00659, 15 pp., filed 2026-05-20) was seen but is not a Rule 12(b) memorandum, so it was not saved.
 
-## 2. `SAMPLE-pamd-motion-brief-schmidt124cv00294.pdf` (second filer)
+## 2. `FILED-EXAMPLE-motion-brief-2.pdf` (second filer)
 
 - Court: United States District Court for the Middle District of Pennsylvania (`pamd`)
 - Case: *Voter Reference Foundation, LLC v. Albert Schmidt, in his official capacity as Secretary of the Commonwealth*

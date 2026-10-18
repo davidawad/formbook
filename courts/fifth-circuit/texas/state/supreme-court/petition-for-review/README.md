@@ -1,6 +1,6 @@
 # Petition for review
 
-Typst template for a petition for review in the Supreme Court of Texas (`typst/main.typ`, module `typst/tex-petition-for-review.typ`). The sample is transcribed from the filed *State of Texas v. F.M.V.*, No. 25-0792 petition (`usage/SAMPLE-tex-petition-for-review-hawthorne250792.pdf`), with every section of the filed petition and the argument excerpted. Rendered output: `usage/OUTPUT-tex-petition-for-review-hawthorne.typst.pdf` (16 pages); overlay on the filed petition: `usage/OVERLAY-hawthorne-petition-for-review.pdf` and `.txt`.
+Typst template for a petition for review in the Supreme Court of Texas (`typst/main.typ`, module `typst/tex-petition-for-review.typ`). The sample is transcribed from the filed *State of Texas v. F.M.V.*, No. 25-0792 petition (`usage/FILED-EXAMPLE-petition-for-review.pdf`), with every section of the filed petition and the argument excerpted. Rendered output: `usage/OUTPUT-petition-for-review.typst.pdf` (16 pages); overlay on the filed petition: `usage/OVERLAY-hawthorne-petition-for-review.pdf` and `.txt`.
 
 ## Layout
 
@@ -43,13 +43,13 @@ Index of authorities page numbers re-measured from this render with `pdftotext` 
 - The Rule 53.2(l) appendix documents themselves (court of appeals opinion, judgment, statutes) are not produced; only the appendix index is.
 - Rule 9.4(e)-(g) and 9.5 were not re-read against primary text this session (the TRAP PDF is 403).
 - The sample's certificate of compliance wording drops the filer's "created in Microsoft Word ... relying on the word count of the software" sentence, since the count comes from the template.
-- docx (`docx/tex.lua`) was not changed: it still uses the 4,500-word limit, splits the count at "Respectfully submitted", has no signature block from frontmatter `signature` and no `rules_edition`. No `soffice` on this box, so `usage/OUTPUT-tex-petition-for-review-hawthorne.docx` and `.docx.pdf` were NOT regenerated and are stale against the extended INPUT.
+- docx (`docx/tex.lua`) was not changed: it still uses the 4,500-word limit, splits the count at "Respectfully submitted", has no signature block from frontmatter `signature` and no `rules_edition`. No `soffice` on this box, so `usage/OUTPUT-petition-for-review.docx` and `.docx.pdf` were NOT regenerated and are stale against the extended INPUT.
 
 [Formbook index](../../../../../../README.md)
 
 ## Engines
 
-**docx** (`docx/`: `render.sh` runs two pandoc passes, `tex.lua` is the filter, `reference.docx` comes from `build-reference.sh`). Checked on the LibreOffice PDF (`usage/OUTPUT-tex-petition-for-review-hawthorne.docx.pdf`). The `.docx` opened in LibreOffice without a repair prompt; Word was not available and not checked. `checks.yaml` and `rules.md` do not exist yet, so `tools/check.sh --engine docx` cannot run.
+**docx** (`docx/`: `render.sh` runs two pandoc passes, `tex.lua` is the filter, `reference.docx` comes from `build-reference.sh`). Checked on the LibreOffice PDF (`usage/OUTPUT-petition-for-review.docx.pdf`). The `.docx` opened in LibreOffice without a repair prompt; Word was not available and not checked. `checks.yaml` and `rules.md` do not exist yet, so `tools/check.sh --engine docx` cannot run.
 
 Matches the typst form: Liberation Serif 14 pt; exact 32.2 pt double and 16.2 pt single line pitch (same as typst); 1 in margins on letter; cover unnumbered and without a footer; front matter in lower roman from ii; body in arabic from 1; cover lead-counsel block at the bottom margin; the contents with dot leaders and page numbers from the layout (PAGEREF fields, filled from a first pass); the index of authorities from the frontmatter page numbers; word count on the markdown source with the typst rules (656 words here, limit 4,500). Page count: 10 in both.
 

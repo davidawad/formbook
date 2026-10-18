@@ -5,19 +5,19 @@ Folder: `courts/ninth-circuit/idaho/federal/district/complaint/` (self-contained
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-idd-complaint-tarazonacastro126cv00521.pdf` (primary) and `usage/SAMPLE-idd-complaint-wilcox126cv00443.pdf` (second filer). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-idd-complaint-tarazonacastro.md` (excerpts of the 19-page filing; the parties, the facts, Counts I to III, the prayer, the jury demand and the signature; see Known gaps) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (primary) and `usage/FILED-EXAMPLE-complaint-2.pdf` (second filer). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-complaint.md` (excerpts of the 19-page filing; the parties, the facts, Counts I to III, the prayer, the jury demand and the signature; see Known gaps) |
 | typeface | face required: none (LR 5.2(a) sets only a 12-point minimum; checked on the Court's site 2026-10-15). Substitute: none needed; EB Garamond kept. Fit: n/a. |
-| render | ok: `usage/OUTPUT-idd-complaint-tarazonacastro.typst.pdf`, 9 pages, letter, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold embedded only, no warnings |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, letter, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold embedded only, no warnings |
 | overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF (`usage/SAMPLE-tarazona-castro-…pdf`), which is not in this snapshot (`usage/` holds only `SOURCE.md`). The `.txt` page map and the `.pdf` from the earlier run are stale against this render; regenerate once the exemplar is restored. |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on the 2026-10-15 re-render; no template change since the last review) |
 
 ## Commands
 
 ```
-sh tools/render.sh courts/ninth-circuit/idaho/federal/district/complaint usage/INPUT-idd-complaint-tarazonacastro.md
+sh tools/render.sh courts/ninth-circuit/idaho/federal/district/complaint usage/INPUT-complaint.md
 sh tools/overlay.sh courts/ninth-circuit/idaho/federal/district/complaint tarazona-castro-complaint \
-  courts/ninth-circuit/idaho/federal/district/complaint/usage/SAMPLE-idd-complaint-tarazonacastro126cv00521.pdf
+  courts/ninth-circuit/idaho/federal/district/complaint/usage/FILED-EXAMPLE-complaint.pdf
 ```
 
 File names follow the tools, not the brief's shorthand: `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf` and `.txt`. The sample is `INPUT-<id>.md` and the id is `tarazona-castro-complaint`. `tools/` is not edited.
@@ -74,7 +74,7 @@ The sample is an excerpt, and the page pairing is by words, so the lower overlap
 
 ## Page review (Gate 2 equivalent)
 
-Every page of `OUTPUT-idd-complaint-tarazonacastro.typst.pdf` was rendered at 60 dpi and viewed after the last template change.
+Every page of `OUTPUT-complaint.typst.pdf` was rendered at 60 dpi and viewed after the last template change.
 
 | Page | Result |
 |---|---|
@@ -112,7 +112,7 @@ Compared with `SAMPLE-tarazona-castro-…` and `SAMPLE-wilcox-…`:
 
 ## Engines
 
-Docx engine (`docx/`): `make-reference.sh` builds `docx/reference.docx` (run once; it unpacks in a temp dir), `idd.lua` writes the cover, the numbered paragraphs, the lettered prayer items and the signature block. Output: `usage/OUTPUT-idd-complaint-tarazonacastro.docx`.
+Docx engine (`docx/`): `make-reference.sh` builds `docx/reference.docx` (run once; it unpacks in a temp dir), `idd.lua` writes the cover, the numbered paragraphs, the lettered prayer items and the signature block. Output: `usage/OUTPUT-complaint.docx`.
 
 What the docx sets (in styles.xml, sectPr and footer1.xml; set, not rendered: no LibreOffice on the build box):
 - Page: US Letter, 1 inch margins, footer 0.4 inch from the bottom edge.

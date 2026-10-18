@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nynd-complaint.typ": nynd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nynd-complaint-golub.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #nynd-complaint(meta, body)

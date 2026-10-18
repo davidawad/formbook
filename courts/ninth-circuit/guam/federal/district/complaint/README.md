@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/guam/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-gud-complaint-capfa25cv00020.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-gud-complaint-capfa.md` (full transcription of the 10-page complaint, from the OCR text layer, obvious OCR errors corrected) |
-| render | ok: `usage/OUTPUT-gud-complaint-capfa.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (full transcription of the 10-page complaint, from the OCR text layer, obvious OCR errors corrected) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-capfa-complaint.pdf` and `usage/OVERLAY-capfa-complaint.txt` (`sh tools/overlay.sh`) |
 | typeface | face required: none (GNLR 5.1(a), 2022: no typeface or point size). Substitute: n/a; EB Garamond kept, the default when a court names no face (`docs/FONTS.md`). Visual only: EB Garamond is the template's own face, not a court-named one. |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed; page 9 viewed again after the signature-column change; all 9 viewed again on 2026-10-15 for the fonts pass, no change) |
@@ -83,7 +83,7 @@ Tier 2 is **not** judged (one filer only; see gap 1). OPEN items for tier 2: the
 
 ### docx (pandoc; `docx/`)
 
-Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once and committed) and `docx/gud.lua` (cover, caption, numbered paragraphs, lettered items, addresses, signature blocks; body text and headings stay pandoc's). `sh tools/render.sh --engine docx` writes `usage/OUTPUT-gud-complaint-capfa.docx`.
+Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once and committed) and `docx/gud.lua` (cover, caption, numbered paragraphs, lettered items, addresses, signature blocks; body text and headings stay pandoc's). `sh tools/render.sh --engine docx` writes `usage/OUTPUT-complaint.docx`.
 
 Set in `styles.xml` and `sectPr`, **not rendered** (no LibreOffice on the build box, so no page of the docx has been looked at):
 

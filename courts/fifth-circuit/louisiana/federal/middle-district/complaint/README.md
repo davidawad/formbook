@@ -5,9 +5,9 @@ Folder: `courts/fifth-circuit/louisiana/federal/middle-district/complaint/`. Cou
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-lamd-complaint-parker325cv01162.pdf` (one counsel-filed complaint; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-lamd-complaint-parker.md` (the whole 5-page filing, transcribed) |
-| render | ok: `usage/OUTPUT-lamd-complaint-parker.typst.pdf`, 5 pages, `tools/render.sh`, typst 0.15.0, vendored EB Garamond only, no typst warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one counsel-filed complaint; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the whole 5-page filing, transcribed) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 5 pages, `tools/render.sh`, typst 0.15.0, vendored EB Garamond only, no typst warnings |
 | overlay | ok: `usage/OVERLAY-parker-complaint.pdf` and `usage/OVERLAY-parker-complaint.txt` (`tools/overlay.sh`, page map below). The exemplar PDF is not in this snapshot; the overlay ran against a fresh copy from the CourtListener URL in `usage/SOURCE.md` (5 pages, Document 1, 12/31/25 stamp, checked) |
 | typeface | face required: **none** (LR 10(a)(1): "standard 12-point typeface"). Font kept: **EB Garamond** (no substitute: the rule names no face). Fit: n/a. See Known gaps 2 |
 | pages reviewed | 5 of 5 (every page rendered at 60 dpi and viewed after the last template change; re-checked on the fonts pass, 2026-10-14, no change to the template) |
@@ -91,7 +91,7 @@ Tier-2 conventions (judged against the one exemplar available; see Known gaps): 
 
 ### docx (`docx/`)
 
-Files: `docx/reference.docx` (built by `sh docx/build-reference.sh <out.docx>`) and `docx/lamd-complaint.lua` (the cover, caption table, numbered paragraphs, prayer list and signature block, built from the sample's frontmatter as `typst/lamd-complaint.typ` does). `tools/render.sh --engine docx` writes `usage/OUTPUT-lamd-complaint-parker.docx` and `usage/OUTPUT-lamd-complaint-parker.docx.pdf` (LibreOffice 26.2, headless). Word was not run here.
+Files: `docx/reference.docx` (built by `sh docx/build-reference.sh <out.docx>`) and `docx/lamd-complaint.lua` (the cover, caption table, numbered paragraphs, prayer list and signature block, built from the sample's frontmatter as `typst/lamd-complaint.typ` does). `tools/render.sh --engine docx` writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.2, headless). Word was not run here.
 
 - Matches the typst form: EB Garamond 12 pt in every body, heading and caption style (`pdffonts` on the `.docx.pdf`: EB Garamond Regular and Bold, embedded; no theme or system face in the Latin text), exact 24 pt line pitch, 1 in margins, letter, centered PAGE number 0.6 in from the bottom edge, court name, caption (party column, `CIVIL ACTION NO.` with judge initials), bold centered title, centered caps section headings, centered bold count headings, bold left sub-headings, first-line indent, numbered paragraphs, the prayer list kept with the signature block. 5 pages, as the typst render.
 - Differs from typst: the paragraph numbers and bullets are typed text (`1.` then a tab), not Word auto-numbering, so Word does not renumber them if paragraphs are inserted; the caption is a borderless table; in LibreOffice an exact 24 pt line places the extra leading above the glyphs, so the first line of each page sits lower than in the typst render (about 11 pt by `pdftotext -bbox`). Pagination of the 5-page sample matches; Word may paginate differently (`docs/DOCX.md`).

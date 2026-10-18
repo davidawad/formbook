@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nvb-adversary-complaint-lovatovsasson2605033.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, District of Nevada
 - Case: *Christina W. Lovato, Chapter 7 Trustee v. Uzi Sasson and Bdalcom, LLC*, Adversary No. 26-05033-gs, in the chapter 7 case *In re Meta Materials Inc.*, Case No. 24-50792-gs
 - Document: Complaint (Fraudulent Transfers), 11 U.S.C. § 548, 10 pages (ECF Doc 1)

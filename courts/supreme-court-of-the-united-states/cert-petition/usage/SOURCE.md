@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-scotus-cert-petition-fisher14981.pdf` (374 pages, 1.8 MB, complete file: petition pp. 1-43, then Appendix A-G) |
+| File | `FILED-EXAMPLE-cert-petition.pdf` (374 pages, 1.8 MB, complete file: petition pp. 1-43, then Appendix A-G) |
 | URL fetched from | <https://lyldenlawnews.com/wp-content/uploads/2015/02/Fisher-II-cert-petition-2-10-15.pdf> |
 | Case | *Fisher v. University of Texas at Austin*, Supreme Court No. 14-981 (on petition from the Fifth Circuit, No. 09-50822) |
 | Docket page | <https://www.supremecourt.gov/docketfiles/14-981.htm>: "Petition for a writ of certiorari filed. (Response due March 16, 2015)" |
@@ -20,7 +20,7 @@ It is a typed, counsel-drafted petition in booklet form, with a text layer, and 
 - supremecourt.gov DocketPDF search results (2018-2026, e.g. 25-5935, 25-6104, 25-5509, 25-7189, 25-7604, 25-5675, 24-6977, 25-6083): handwritten or form-based pro se petitions on the Court's fill-in template. Their text layers are OCR noise, so they cannot serve as typed exemplars.
 - Searches for 2024-2026 counsel-drafted petitions (Institute for Justice, ACLU, Cato, "Counsel of Record" with "RULE 29.6"): no typed counsel petition came up. A 2025 counsel petition is the better exemplar if one can be found, and would be a welcome replacement.
 
-## 2. `SAMPLE-scotus-cert-petition-loperbright22451.pdf` (second filer, tier-2 comparison)
+## 2. `FILED-EXAMPLE-cert-petition-2.pdf` (second filer, tier-2 comparison)
 
 | Field | Value |
 |---|---|

@@ -5,9 +5,9 @@ Folder: `courts/fifth-circuit/louisiana/federal/eastern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-laed-complaint-buckles226cv01954.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-laed-complaint-buckles.md` (a portion of the 21-page filing; see known gap 7) |
-| render | ok: `usage/OUTPUT-laed-complaint-buckles.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (a portion of the 21-page filing; see known gap 7) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-buckles-complaint.pdf` and `OVERLAY-buckles-complaint.txt` (page map; re-run 2026-10-14 against a copy of the exemplar fetched from the URL in `usage/SOURCE.md`, not committed) |
 | typeface | Rule names no face (LR 10.1 "standard font"). EB Garamond kept, per `docs/FONTS.md` ("No face named"). Not metric-compatible with the exemplar's Times New Roman; see known gap 1. |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed in its final state; re-checked 2026-10-14 after the fonts pass, no change to the template) |
@@ -86,7 +86,7 @@ The pairing is loose after page 3 because the sample skips filed pages (the brea
 4. **Caption fields.** LR 10.1 requires the Section and the judge and magistrate. The exemplar shows neither a Section line nor a magistrate line. The template draws labelled blanks for an unassigned case, as LR 10.1 asks, so the tier-2 difference from the exemplar is a deliberate choice.
 5. **LR 9.2, last paragraph** (complaints "must be on forms furnished by the clerk or substantially similar to those forms"). The sentence sits under the Social Security rule. It is read here as not applying to a general civil complaint, which is how the exemplar was filed. **Question for David:** confirm that reading. If it applies, the template needs the clerk's form.
 6. **Not produced:** the civil cover sheet (JS-44 / LR 10.1), the summons, and any Rule 7.1 disclosure. These are separate filings.
-7. **Sample is a portion.** `INPUT-laed-complaint-buckles.md` transcribes the cover and caption, the introduction, parties, jurisdiction, factual background (parts A and B only), class allegations, tolling, the first and second claims, the prayer, the jury demand and the signature. It omits the breach-notification and data-security parts of the facts (filed ¶¶ 31 to 37) and the third to fifth claims. The template numbers from 1, so the numbers do not match the filed ones: our ¶ 23 is the start of filed ¶ 38, and our ¶¶ 24 to 29 are filed ¶¶ 39 to 44.
+7. **Sample is a portion.** `INPUT-complaint.md` transcribes the cover and caption, the introduction, parties, jurisdiction, factual background (parts A and B only), class allegations, tolling, the first and second claims, the prayer, the jury demand and the signature. It omits the breach-notification and data-security parts of the facts (filed ¶¶ 31 to 37) and the third to fifth claims. The template numbers from 1, so the numbers do not match the filed ones: our ¶ 23 is the start of filed ¶ 38, and our ¶¶ 24 to 29 are filed ¶¶ 39 to 44.
 8. **Output and overlay names.** `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf` and `OVERLAY-<id>.txt`. The brief named them `<id>.pdf` and `<id>-overlay.pdf`; the tools were not edited, so the tool names are used.
 9. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`. This doc-type folder has neither, and the brief forbids editing `tools/`. Render and overlay ran; the Gate 2 review is the page review below, not a check stamp.
 10. **Caption rule box.** The party column is closed by a right and a bottom rule, not by a column of ")" marks as in some filings. This is a convention (both forms are seen), recorded as accepted.
@@ -109,7 +109,7 @@ The pairing is loose after page 3 because the sample skips filed pages (the brea
 
 ## Engines
 
-Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default, `laed-complaint.lua` is the filter, and `render.sh` runs pandoc (`tools/render-docx.sh` calls it). Output: `usage/OUTPUT-laed-complaint-buckles.docx`. The LibreOffice PDF, `usage/OUTPUT-buckles-complaint.docx.pdf`, was not produced (see BLOCKED).
+Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default, `laed-complaint.lua` is the filter, and `render.sh` runs pandoc (`tools/render-docx.sh` calls it). Output: `usage/OUTPUT-complaint.docx`. The LibreOffice PDF, `usage/OUTPUT-buckles-complaint.docx.pdf`, was not produced (see BLOCKED).
 
 | Engine | Status |
 |---|---|
@@ -127,7 +127,7 @@ Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` ma
 
 **docx BLOCKED items**
 
-- `docx.pdf`, Gates 0 and 1 and the page review: BLOCKED. The LibreOffice 25.2 build unpacked from Debian trixie debs (no root here) aborts at startup with `com::sun::star::uno::DeploymentException`: the extracted packages have no `libdeploymentlo.so`. No PDF was produced, so no check ran. Unblock: install LibreOffice so it runs on this box, then `sh tools/render.sh --engine docx <this folder> usage/INPUT-laed-complaint-buckles.md`.
+- `docx.pdf`, Gates 0 and 1 and the page review: BLOCKED. The LibreOffice 25.2 build unpacked from Debian trixie debs (no root here) aborts at startup with `com::sun::star::uno::DeploymentException`: the extracted packages have no `libdeploymentlo.so`. No PDF was produced, so no check ran. Unblock: install LibreOffice so it runs on this box, then `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`.
 - `tools/check.sh --engine docx`: not run. It needs `court.json` and `rules.md` in the folder (known gap 9). The check stamp `usage/.check-docx.txt` was not written.
 - The LibreOffice conversion needs EB Garamond visible to fontconfig. `fonts/eb-garamond/` is vendored for typst; install it for the user running the check (DOCX.md, "Fonts").
 

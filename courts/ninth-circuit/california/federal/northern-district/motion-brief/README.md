@@ -29,13 +29,13 @@ Not used, and why: Civil L.R. 7-2(c) (proposed order) and 7-5 (declarations) are
 
 ## Exemplar
 
-- `usage/SAMPLE-cand-motion-brief-tsiakimmaidu16cv7189.pdf`: Notice of Motion and Motion to Dismiss or Transfer, with Memorandum of Points and Authorities. 17 pages. Filed by the Federal Defendants (U.S. Attorney's Office, N.D. Cal.), April 20, 2017. Text layer present (`pdffonts` shows embedded Times, `pdftotext` reads it).
+- `usage/FILED-EXAMPLE-motion-brief.pdf`: Notice of Motion and Motion to Dismiss or Transfer, with Memorandum of Points and Authorities. 17 pages. Filed by the Federal Defendants (U.S. Attorney's Office, N.D. Cal.), April 20, 2017. Text layer present (`pdffonts` shows embedded Times, `pdftotext` reads it).
 - Provenance, searches and the caveat about the ECF header are in `usage/SOURCE.md`.
 - Only one exemplar. The eval-loop tier 2 rule asks for two or three from different filers; not done (see gaps).
 
 ## Sample
 
-- `usage/INPUT-cand-motion-brief-tsiakimmaidumotiontodismiss.md` is a transcription of the exemplar: caption and counsel block, notice of motion, relief sought, issues, the memorandum's introduction, facts, Argument III.A (venue) and III.B.1 (legal standard), the conclusion, and the signature block. Footnotes 1 and 2 are included.
+- `usage/INPUT-motion-brief.md` is a transcription of the exemplar: caption and counsel block, notice of motion, relief sought, issues, the memorandum's introduction, facts, Argument III.A (venue) and III.B.1 (legal standard), the conclusion, and the signature block. Footnotes 1 and 2 are included.
 - It stops after III.B.1. Argument III.B.2-4 (sovereign immunity, agency failure to act, statute of limitations) are not transcribed, to keep the render within the 8-14 page target. The exemplar's pages 9-12 of the memorandum are therefore absent; the overlay shows this.
 - Frontmatter follows the ca9 contract in shape (`authorities:` registry, `toa:KEY` links, footnotes, `#` headings) with the N.D. Cal. fields (`court`, `counsel`, `caption`, `hearing`, `footer_title`). Headings are numbered by the template (I., A., 1., a.); the sample types no numbers.
 
@@ -43,11 +43,11 @@ Not used, and why: Civil L.R. 7-2(c) (proposed order) and 7-5 (declarations) are
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/ninth-circuit/california/federal/northern-district/motion-brief usage/INPUT-cand-motion-brief-tsiakimmaidumotiontodismiss.md
+sh tools/render.sh courts/ninth-circuit/california/federal/northern-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/ninth-circuit/california/federal/northern-district/motion-brief tsi-akim-maidu-motion-to-dismiss
 ```
 
-- `usage/OUTPUT-cand-motion-brief-tsiakimmaidumotiontodismiss.typst.pdf`: 10 pages (was 12 in EB Garamond at 13 pt). Typst compiled with no warnings (`render.sh` fails on any warning). Only vendored fonts: `pdffonts` shows LiberationSerif, -Italic, -Bold, embedded. Body line pitch measured at 24.0 pt with `pdftotext -bbox-layout` (`body-leading` retuned from 0.54em to 1.09em for the new face).
+- `usage/OUTPUT-motion-brief.typst.pdf`: 10 pages (was 12 in EB Garamond at 13 pt). Typst compiled with no warnings (`render.sh` fails on any warning). Only vendored fonts: `pdffonts` shows LiberationSerif, -Italic, -Bold, embedded. Body line pitch measured at 24.0 pt with `pdftotext -bbox-layout` (`body-leading` retuned from 0.54em to 1.09em for the new face).
 - Overlay: **not generated**. `usage/` has no PDF in this snapshot, so `tools/overlay.sh` exits 1. `usage/OVERLAY-tsi-akim-maidu-motion-to-dismiss.txt` is the stale page map from the EB Garamond render and does not match the current render; it should be regenerated once the exemplar PDF is restored.
 
 ## Visual review (all 10 pages of the Liberation Serif render, rendered at 70 dpi and looked at)
@@ -85,7 +85,7 @@ Reviewed pages: 10 of 10.
 
 ## Engines
 
-Docx engine: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/cand.lua` (cover, caption, case number, title, signature block; the body is pandoc's). Sample build: `usage/OUTPUT-cand-motion-brief-tsiakimmaidumotiontodismiss.docx` (valid zip, every XML part well-formed). Not rendered: no LibreOffice on the build box, so **pages reviewed = 0**. `make-reference.sh` needs `unzip` and `zip`, which the build box lacks; it was run with a stand-in built on libzip's `ziptool` (outside the repo).
+Docx engine: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/cand.lua` (cover, caption, case number, title, signature block; the body is pandoc's). Sample build: `usage/OUTPUT-motion-brief.docx` (valid zip, every XML part well-formed). Not rendered: no LibreOffice on the build box, so **pages reviewed = 0**. `make-reference.sh` needs `unzip` and `zip`, which the build box lacks; it was run with a stand-in built on libzip's `ziptool` (outside the repo).
 
 What the docx sets (in `styles.xml`, `document.xml` and the footer part; not rendered):
 - Liberation Serif 12 pt in the document defaults, black text; footnotes 12 pt, single spaced.

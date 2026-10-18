@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "almb-motion-brief.typ": almb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-almb-motion-brief-syntheticstaymotion.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief-2.md"))
 #let (meta, body) = split-frontmatter(src)
 #almb-motion-brief(meta, body)

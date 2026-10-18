@@ -4,7 +4,7 @@
 
 | File | URL fetched | Case | Docket no. | Filer | Date filed | Date fetched |
 |---|---|---|---|---|---|---|
-| `SAMPLE-msnd-complaint-haasoutdoors125cv184.pdf` (20 pp, text layer: Times New Roman, pleading format of counsel's firm) | https://storage.courtlistener.com/recap/gov.uscourts.msnd.51682/gov.uscourts.msnd.51682.1.0.pdf (docket page: https://www.courtlistener.com/docket/71937576/1/haas-outdoors-inc-v-ariat-international-inc/) | *Haas Outdoors, Inc. v. Ariat International, Inc.* | 1:25-cv-00184-SA-DAS (N.D. Miss., Aberdeen Division) | Plaintiff Haas Outdoors, Inc. (counsel: Jones Walker LLP), "Verified Complaint for Copyright Infringement", ECF 1 | 2025-11-19 | 2026-10-14 |
+| `FILED-EXAMPLE-complaint.pdf` (20 pp, text layer: Times New Roman, pleading format of counsel's firm) | https://storage.courtlistener.com/recap/gov.uscourts.msnd.51682/gov.uscourts.msnd.51682.1.0.pdf (docket page: https://www.courtlistener.com/docket/71937576/1/haas-outdoors-inc-v-ariat-international-inc/) | *Haas Outdoors, Inc. v. Ariat International, Inc.* | 1:25-cv-00184-SA-DAS (N.D. Miss., Aberdeen Division) | Plaintiff Haas Outdoors, Inc. (counsel: Jones Walker LLP), "Verified Complaint for Copyright Infringement", ECF 1 | 2025-11-19 | 2026-10-14 |
 
 The PDF is a RECAP copy of the public docket entry (CourtListener, from PACER). Its text layer was checked with `pdftotext`.
 

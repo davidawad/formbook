@@ -5,9 +5,9 @@ Folder: `courts/second-circuit/vermont/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-vtd-complaint-bonges226cv283.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-vtd-complaint-bonges.md`: the whole 11-page filing (84 numbered paragraphs, caption, headings, prayer, signature), transcribed from the text layer |
-| render | ok: `usage/OUTPUT-vtd-complaint-bonges.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: the whole 11-page filing (84 numbered paragraphs, caption, headings, prayer, signature), transcribed from the text layer |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-bonges-complaint.pdf` and `usage/OVERLAY-bonges-complaint.txt` (page map) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; see the review below) |
 
@@ -67,7 +67,7 @@ Not produced by this template (separate filings that go with a first filing): th
 7. **Overlay pairing.** The overlay pairs by shared words. Our page 12 (the signature) pairs with the exemplar's page 11, which carries the same signature; the word overlap there is lower because the page has little text. The overlay is a diagnostic, not a score.
 8. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court directory with `court.json` and `rules.md`, which this doc-type folder does not have, and `tools/` is not part of this work. Render and overlay were run; the review below is the per-page check for this doc type.
 
-## Review of the rendered pages (`usage/OUTPUT-vtd-complaint-bonges.typst.pdf`, 12 pages, viewed at 60 dpi)
+## Review of the rendered pages (`usage/OUTPUT-complaint.typst.pdf`, 12 pages, viewed at 60 dpi)
 
 - Page 1: court title, caption with the party column and the right column (case number, COMPLAINT, JURY TRIAL DEMANDED), INTRODUCTION heading, paragraphs 1 to 4. Pass.
 - Page 2: paragraphs 5 to 11, PARTIES heading, Plaintiff and Defendants subheadings. Pass.
@@ -86,7 +86,7 @@ Pages reviewed: 12 of 12.
 
 ## Engines
 
-DOCX engine (`docx/`: `build-reference.sh` makes `reference.docx`; `vtd-complaint.lua` is the filter). The render is `usage/OUTPUT-vtd-complaint-bonges.docx` and `usage/OUTPUT-vtd-complaint-bonges.docx.pdf` (LibreOffice conversion, no errors). The `.docx.pdf` has 12 pages; all 12 were viewed side by side with the typst render at 60 dpi.
+DOCX engine (`docx/`: `build-reference.sh` makes `reference.docx`; `vtd-complaint.lua` is the filter). The render is `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice conversion, no errors). The `.docx.pdf` has 12 pages; all 12 were viewed side by side with the typst render at 60 dpi.
 
 - Matches the typst output: letter paper, 1 in margins; EB Garamond 13 pt (no theme font); body text at an exact 26 pt pitch (double); caption, counsel and signature lines at an exact 15 pt pitch; the caption as a table with the party column closed by a right and a bottom rule, the blank caption rows at 6.5 pt as in the typst line stack; the court title; headings (centered bold capitals, centered bold, bold italic at the margin) with 17.5 pt above and none below; numbered paragraphs 1 to 84, numbered by the filter (0.5 in indent); the unnumbered WHEREFORE clause; the prayer lettered A. to E. with a hanging indent; the signature block at 2.9 in, kept together; a centered arabic page number in the footer. The text of the `.docx.pdf` matches the typst PDF word for word (checked with `pdftotext`; the only differences are reading order in the caption).
 - Differs: the docx runs the prayer list onto page 12 (the WHEREFORE clause ends page 11), so the signature block shares page 12 with the prayer; typst keeps the prayer on page 11 and the signature alone on page 12. The docx caption's right column is a few points taller (exact line spacing puts the leading inside the last title line). Word may paginate differently from LibreOffice.

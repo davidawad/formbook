@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/nevada/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nvd-complaint-williams226cv00801.pdf` (one filer, see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nvd-complaint-williams.md` (the whole 14-page complaint, transcribed) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer, see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the whole 14-page complaint, transcribed) |
 | typeface | face required: **none** (LR IA 10-1(a)(3) sets size only: "Text must be size 12 font or larger"; read 2026-10-15 from the court's 2020 local rules PDF). Substitute: none needed; **EB Garamond** kept (no-face default, `docs/FONTS.md`). Fit: n/a. Embedded: EBGaramond Regular, Bold, Italic, BoldItalic (`pdffonts`). |
-| render | ok: `usage/OUTPUT-nvd-complaint-williams.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
 | overlay | ok: `usage/OVERLAY-williams-complaint.pdf` and `.txt` (pairing by word overlap; see below; re-run 2026-10-15) |
 | pages reviewed | 14 of 14 (every page rasterized at 60 dpi and viewed on 2026-10-15; p.9 and p.12 re-checked after the heading-spacing change) |
 | BLOCKED | none. Tier-2 coverage is short of the eval loop's "two or three filers" (see Known gaps 1). |
@@ -58,7 +58,7 @@ Not produced by this template (separate filings or content the author writes): t
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
 D=courts/ninth-circuit/nevada/federal/district/complaint
-sh tools/render.sh $D usage/INPUT-nvd-complaint-williams.md   # -> usage/OUTPUT-nvd-complaint-williams.typst.pdf
+sh tools/render.sh $D usage/INPUT-complaint.md   # -> usage/OUTPUT-complaint.typst.pdf
 sh tools/overlay.sh $D williams-complaint                    # -> usage/OVERLAY-williams-complaint.pdf and .txt
 ```
 
@@ -104,7 +104,7 @@ Naming: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`, with th
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/complaint.lua` writes the cover and the body; `docx/render.sh` (run by `tools/render-docx.sh`) puts the sample's `footer_title` into the footer. Output: `usage/OUTPUT-nvd-complaint-williams.docx` and `.docx.pdf` (LibreOffice 26.8), 14 pages, all 14 rendered at 60 dpi and viewed.
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/complaint.lua` writes the cover and the body; `docx/render.sh` (run by `tools/render-docx.sh`) puts the sample's `footer_title` into the footer. Output: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice 26.8), 14 pages, all 14 rendered at 60 dpi and viewed.
 
 - Matches the typst output: letter; margins 1 in top and bottom, 1.5 in left, 1 in right; EB Garamond 13 pt; 28 numbers on a 462-twip grid, body lines on the numbers (checked on the PDF: body baselines within 0.1 pt of a number); double rule at the left and single at the right (`w:pgBorders`); caption box with the parties, the case number, the title, JURY DEMAND under the title and the claims list; single-spaced counsel and signature block; "-N-" footer with the title; the unnumbered prayer and jury demand.
 - Differs from typst: the 28 numbers sit in a header text box, not section line numbering (`w:lnNumType` skips the caption table, so it would not number every line); paragraph numbers are typed by the filter, not Word auto-numbering; the caption box is sized to its text (the body starts on page 2); page breaks follow LibreOffice, Word may move a line.

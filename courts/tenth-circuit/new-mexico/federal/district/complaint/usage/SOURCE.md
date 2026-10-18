@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nmd-complaint-pillow126cv03383.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court for the District of New Mexico (`nmd`)
 - Case: *Pillow v. Sig Sauer, Inc.*
 - Docket: No. 1:26-cv-03383 (Document 1)

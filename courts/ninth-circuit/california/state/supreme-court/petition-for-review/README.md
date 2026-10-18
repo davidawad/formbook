@@ -8,11 +8,11 @@ Status: exemplar found (two filed petitions); typst template renders the sample 
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-cal-petition-for-review-quachs275121.pdf` | Primary exemplar (filed 2022-06-20, petitioner's counsel The Vora Law Firm). Used for the transcription and the overlay. |
-| `usage/SAMPLE-cal-petition-for-review-hoehns277510.pdf` | Second filer (filed 2022-11-28, Kazan McClain). Not transcribed; kept for the tier-2 comparison. |
+| `usage/FILED-EXAMPLE-petition-for-review.pdf` | Primary exemplar (filed 2022-06-20, petitioner's counsel The Vora Law Firm). Used for the transcription and the overlay. |
+| `usage/FILED-EXAMPLE-petition-for-review-2.pdf` | Second filer (filed 2022-11-28, Kazan McClain). Not transcribed; kept for the tier-2 comparison. |
 | `usage/SOURCE.md` | URLs fetched, case, docket, filer, date filed, date fetched, and why each was chosen. |
-| `usage/INPUT-cal-petition-for-review-quachs275121.md` | Markdown transcription of a PORTION of the Quach petition (cover, tables, issues, part of introduction, statement, reasons, conclusion, certificate of compliance, proof of service). |
-| `usage/OUTPUT-cal-petition-for-review-quachs275121.typst.pdf` | Render of the sample: `sh tools/render.sh <this dir> usage/INPUT-cal-petition-for-review-quachs275121.md`. 13 pages. |
+| `usage/INPUT-petition-for-review.md` | Markdown transcription of a PORTION of the Quach petition (cover, tables, issues, part of introduction, statement, reasons, conclusion, certificate of compliance, proof of service). |
+| `usage/OUTPUT-petition-for-review.typst.pdf` | Render of the sample: `sh tools/render.sh <this dir> usage/INPUT-petition-for-review.md`. 13 pages. |
 | `usage/OVERLAY-quach-s275121.pdf`, `-overlay.txt` | Red/blue test against the Quach exemplar (see below). |
 | `typst/main.typ` | Entrypoint: reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/cal-petition-for-review.typ` | The template: `cal-petition(meta, md)`. Content-agnostic; every number is a named parameter at the top and traces to a rule or a stated style choice. |
@@ -21,7 +21,7 @@ Build and overlay (from the repo root):
 
 ```sh
 D=courts/ninth-circuit/california/state/supreme-court/petition-for-review
-sh tools/render.sh $D usage/INPUT-cal-petition-for-review-quachs275121.md
+sh tools/render.sh $D usage/INPUT-petition-for-review.md
 sh tools/overlay.sh $D quach-s275121 $D/usage/SAMPLE-quach-s275121-petition-for-review.pdf
 ```
 
@@ -109,7 +109,7 @@ The pairing in the current render (TeX Gyre Schola; `-overlay.txt`): sample p.1 
 
 ## Verification pass 2026-10-16 (fb-595.26.15)
 
-- Rendered `usage/INPUT-cal-petition-for-review-quachs275121.md` with `tools/render.sh` (typst): exit 0, no warnings, 13 pages before and after the fixes (the committed OUTPUT was not stale in page count). Fonts (`pdffonts`): TeX Gyre Schola regular, bold, italic, embedded, nothing else.
+- Rendered `usage/INPUT-petition-for-review.md` with `tools/render.sh` (typst): exit 0, no warnings, 13 pages before and after the fixes (the committed OUTPUT was not stale in page count). Fonts (`pdffonts`): TeX Gyre Schola regular, bold, italic, embedded, nothing else.
 - Viewed all 13 pages at 60 dpi before the fixes and all 13 again after them. Compared the exemplar's page 1 with our cover. Overlay re-run against the Quach exemplar and all 13 overlay pages viewed: pairing as in "Overlay" above (cover 84%).
 - Fixed, page 1 (cover): the counsel block sat in a column fixed at half the text width, so "(SBN 266728)", "(SBN 323482)" and "Suite 300" wrapped onto lines of their own. It now sits against the right margin and is as wide as its widest line (at least half the text width), as in the exemplar. The address lines are upright (they were italic), the telephone carries "Telephone:", and the party represented is printed under the block (new required field `represents`, rule 8.74(c)(1)); the cover had no "Attorneys for …" line before.
 - Fixed, page 2 (TOC): a wrapped entry ("Following Morgan, … Applies to") ran into the page-number column. Page numbers now sit in their own column; wrapped lines stop short of it.

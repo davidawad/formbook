@@ -4,7 +4,7 @@ One filed motion, combined with its supporting memorandum in a single document a
 
 | File | Case | Docket | Filer | Date filed | Date fetched |
 |---|---|---|---|---|---|
-| `SAMPLE-utb-motion-brief-plaza1062602063.pdf` | *Plaza 106, LLC v. First Utah Bank*, Adv. No. 26-02063 (Bankr. D. Utah) | 26-02063, Doc 32 | Plaza 106, LLC, Plaintiff and Counterclaim Defendant, by Valerga LLP (Brody Valerga); "Motion to Dismiss Counts One and Three of First Utah Bank's Counterclaim, and Memorandum in Support" | 2026-07-06 | 2026-10-14 |
+| `FILED-EXAMPLE-motion-brief.pdf` | *Plaza 106, LLC v. First Utah Bank*, Adv. No. 26-02063 (Bankr. D. Utah) | 26-02063, Doc 32 | Plaza 106, LLC, Plaintiff and Counterclaim Defendant, by Valerga LLP (Brody Valerga); "Motion to Dismiss Counts One and Three of First Utah Bank's Counterclaim, and Memorandum in Support" | 2026-07-06 | 2026-10-14 |
 
 Source: https://www.courtlistener.com/docket/73210741/plaza-106-llc-adversary-proceeding/ (Doc 32; RECAP path `recap/gov.uscourts.utb.478798/gov.uscourts.utb.478798.32.0.pdf`). Found through the CourtListener search API (`/api/rest/v4/search/?type=rd&court=utb`), query "memorandum motion dismiss".
 

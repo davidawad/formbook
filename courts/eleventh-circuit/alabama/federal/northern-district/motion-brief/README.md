@@ -2,8 +2,8 @@
 
 - Court: `alnd`, United States District Court for the Northern District of Alabama (`courts/eleventh-circuit/alabama/federal/northern-district/`)
 - Doc type: `motion-brief`. The memorandum that accompanies a Rule 12(b) motion, with a table of contents and a table of authorities, the body, the signature block and a certificate of service.
-- Exemplar: `usage/SAMPLE-alnd-motion-brief-sec226cv01586.pdf` (*The Southeastern Conference v. Rousse, et al.*, No. 2:26-cv-01586-ACA, Doc. 27-1, filed 2026-09-25, 33 pages; provenance in `usage/SOURCE.md`). Re-downloaded from CourtListener RECAP on 2026-10-14. The companion motion (Doc. 27) is a separate filing and is not part of this exemplar.
-- Sample: `usage/INPUT-alnd-motion-brief-sec.md` (excerpt of the memorandum; see Known gaps).
+- Exemplar: `usage/FILED-EXAMPLE-motion-brief.pdf` (*The Southeastern Conference v. Rousse, et al.*, No. 2:26-cv-01586-ACA, Doc. 27-1, filed 2026-09-25, 33 pages; provenance in `usage/SOURCE.md`). Re-downloaded from CourtListener RECAP on 2026-10-14. The companion motion (Doc. 27) is a separate filing and is not part of this exemplar.
+- Sample: `usage/INPUT-motion-brief.md` (excerpt of the memorandum; see Known gaps).
 - Status: template present, render and overlay re-run on 2026-10-14 (fonts pass: no face named by the court's rules, so EB Garamond stays; see Typeface), one layout defect fixed (below); every page of the render reviewed (10 of 10). Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,8 +12,8 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `alnd-motion-brief`. |
 | `typst/alnd-motion-brief.typ` | Template. Parameter block at the top: typeface (EB Garamond 13 pt), double spacing (24 pt pitch), paragraph spacing, margins, headings, table of contents and table of authorities built from the body's links. |
-| `usage/INPUT-alnd-motion-brief-sec.md` | Markdown contract sample: YAML frontmatter (court, caption, case number, title, date line, signature, certificate, authorities) plus the body in markdown. Citations to authorities are links of the form `[text](toa:key)`. |
-| `usage/OUTPUT-alnd-motion-brief-sec.typst.pdf` | `sh tools/render.sh courts/eleventh-circuit/alabama/federal/northern-district/motion-brief usage/INPUT-alnd-motion-brief-sec.md` (10 pages: cover, TOC `i`, TOA `ii`, body 1 to 7). |
+| `usage/INPUT-motion-brief.md` | Markdown contract sample: YAML frontmatter (court, caption, case number, title, date line, signature, certificate, authorities) plus the body in markdown. Citations to authorities are links of the form `[text](toa:key)`. |
+| `usage/OUTPUT-motion-brief.typst.pdf` | `sh tools/render.sh courts/eleventh-circuit/alabama/federal/northern-district/motion-brief usage/INPUT-motion-brief.md` (10 pages: cover, TOC `i`, TOA `ii`, body 1 to 7). |
 | `usage/OVERLAY-sec-motion-brief.pdf`, `OVERLAY-sec-motion-brief.txt` | `sh tools/overlay.sh courts/eleventh-circuit/alabama/federal/northern-district/motion-brief sec-motion-brief` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -76,7 +76,7 @@ Pairing is by word overlap, not by layout: the low score for p.3 (table of autho
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-alnd-motion-brief-sec.typst.pdf` was rasterized (`pdftoppm -r 60`) and viewed: 10 of 10. Typst printed no warnings. Only EB Garamond is embedded. The page numbers in the table of contents and the table of authorities come from the live layout, so they were read off the final render.
+Every page of `OUTPUT-motion-brief.typst.pdf` was rasterized (`pdftoppm -r 60`) and viewed: 10 of 10. Typst printed no warnings. Only EB Garamond is embedded. The page numbers in the table of contents and the table of authorities come from the live layout, so they were read off the final render.
 
 | Page | Content | Result |
 |---|---|---|
@@ -98,7 +98,7 @@ Tier-2 findings (OPEN or ACCEPTED):
 
 ## Engines
 
-The docx engine (`docx/`: `make-reference.sh` builds `reference.docx`; `alnd-motion-brief.lua` builds the cover, the contents, the authorities, the body's heading labels, the signature block and the certificate; `render.sh` runs two passes, see below) renders `usage/OUTPUT-alnd-motion-brief-sec.docx` and `.docx.pdf` (the LibreOffice conversion). Every page of the `.docx.pdf` (10 of 10) was rasterized (`pdftoppm -r 60`) and compared with the typst render of the same sample.
+The docx engine (`docx/`: `make-reference.sh` builds `reference.docx`; `alnd-motion-brief.lua` builds the cover, the contents, the authorities, the body's heading labels, the signature block and the certificate; `render.sh` runs two passes, see below) renders `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (the LibreOffice conversion). Every page of the `.docx.pdf` (10 of 10) was rasterized (`pdftoppm -r 60`) and compared with the typst render of the same sample.
 
 Two passes for the contents and the authorities: pass 1 writes the heading texts and the citation texts; LibreOffice renders it; `pdftotext` finds the body page of each (`pages.awk`: a heading or citation is found on the page where it starts, also when it runs on into the next page); pass 2 writes the page numbers into the contents and the authorities. The body pages are the same in both passes, which the contents page numbers were checked against.
 

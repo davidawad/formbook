@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-txwb-motion-brief-minnsvarriale2301036.pdf` (21 pages, text layer present; `pdftotext` reads it)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (21 pages, text layer present; `pdftotext` reads it)
 - Fetched from: https://storage.courtlistener.com/recap/gov.uscourts.txwb.361834/gov.uscourts.txwb.361834.17.0_1.pdf (RECAP copy of ECF Doc #17, docket entry "Dismiss Case (Adversary)")
 - Court: United States Bankruptcy Court, Western District of Texas, Austin Division
 - Case: *Minns Firm Clients v. Varriale, et al.*, Adv. Pro. No. 23-01036-smr, in *In re Just One Dime Coaching, LLC*, Case No. 22-10783-smr (Chapter 7)

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nywb-motion-brief-continentalrochester2302014.pdf` (32 pages; text layer present, `pdftotext` yields text; fonts are Times New Roman, not embedded)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (32 pages; text layer present, `pdftotext` yields text; fonts are Times New Roman, not embedded)
 - Court: United States Bankruptcy Court, Western District of New York
 - Case: *In re The Diocese of Rochester*, Case No. 19-20905 (PRW), Chapter 11; adversary proceeding *The Continental Insurance Company v. The Diocese of Rochester*, Adv. Proc. No. 23-02014 (PRW)
 - Document: "Memorandum of Law in Support of: (I) The Diocese of Rochester's Motion to Dismiss the Adversary Complaint of The Continental Insurance Company; and (II) The Diocese of Rochester's Objection to the Application of The Continental Insurance Company for Allowance and Payment of Alleged Administrative Expense Priority Claims" (ECF Doc 9 in the adversary, `Doc 9, Filed 12/22/23`)
@@ -14,7 +14,7 @@ Second filer: not found in this pass. The adversary complaint in this same proce
 
 ## 2. Official Committee of Unsecured Creditors: consolidated motion to dismiss (same adversary, different filer)
 
-- File: `SAMPLE-nywb-motion-brief-creditorscommittee2302014.pdf` (24 pages; text layer present, `pdftotext` yields text; fonts Helvetica, Helvetica-Bold and Courier variants not embedded, LiberationSans subset embedded; 679,058 bytes)
+- File: `FILED-EXAMPLE-motion-brief-3.pdf` (24 pages; text layer present, `pdftotext` yields text; fonts Helvetica, Helvetica-Bold and Courier variants not embedded, LiberationSans subset embedded; 679,058 bytes)
 - Court: United States Bankruptcy Court, Western District of New York
 - Case: *In re The Diocese of Rochester*, Case No. 19-20905, Chapter 11; adversary proceeding *The Continental Insurance Company v. The Diocese of Rochester*, Adv. Proc. No. 23-02014 (ECF stamp `Case 2-23-02014-PRW`)
 - Document: "The Official Committee of Unsecured Creditors' Consolidated Motion to Dismiss the Complaint in Adversary Proceeding Number 23-AP-2014 and to Deny Continental Insurance Company's Application for Allowance and Payment of Administrative Expense Priority Claims for Debtor's Breach of Continental Settlement Agreement" (ECF Doc 10 in the adversary, `Doc 10, Filed 12/22/23`). A motion with argument: caption, table of contents, table of authorities, preliminary statement, background, argument, joinder, conclusion, signature.
@@ -27,7 +27,7 @@ Second filer: not found in this pass. The adversary complaint in this same proce
 
 ## 3. The Continental Insurance Company: omnibus reply and objection to the motions to dismiss (same adversary, opposing party)
 
-- File: `SAMPLE-nywb-motion-brief-continentalinsurance2302014.pdf` (17 pages; text layer present, `pdftotext` yields text; fonts TimesNewRomanPS-BoldMT, Times-Italic, Times-BoldItalic and Courier variants, not embedded; 297,924 bytes)
+- File: `FILED-EXAMPLE-motion-brief-2.pdf` (17 pages; text layer present, `pdftotext` yields text; fonts TimesNewRomanPS-BoldMT, Times-Italic, Times-BoldItalic and Courier variants, not embedded; 297,924 bytes)
 - Court: United States Bankruptcy Court, Western District of New York
 - Case: same as entry 2 (Adv. Proc. No. 23-02014; ECF stamp `Case 2-23-02014-PRW`)
 - Document: "Continental's Omnibus Reply in Support of Application for Allowance and Payment of Administrative Expense Priority Claims and Objection to Motions to Dismiss Adversary Complaint for Debtor's Breach of Continental Settlement Agreement" (ECF Doc 15 in the adversary, `Doc 15, Filed 01/16/24`). An opposition brief on the motions: caption, numbered roman-numeral sections (I. Introduction, II. ...), signature; no table of contents.

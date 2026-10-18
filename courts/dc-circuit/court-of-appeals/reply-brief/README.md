@@ -2,8 +2,8 @@
 
 - Court: `cadc`, United States Court of Appeals for the District of Columbia Circuit (`courts/dc-circuit/court-of-appeals/`)
 - Doc type: `reply-brief`. Reply brief of the appellant (FRAP 28(c)). One self-contained folder; no shared files touched.
-- Exemplar: `usage/SAMPLE-cadc-reply-brief-rosenkellogg245158.pdf` (*Rosen-Kellogg v. Mayorkas*, No. 24-5158, filed 2025-02-28; provenance in `usage/SOURCE.md`).
-- Sample: `usage/INPUT-cadc-reply-brief-rosenkellogg.md`, a full transcription of the filed 16-page brief (see Known gaps for what differs).
+- Exemplar: `usage/FILED-EXAMPLE-reply-brief.pdf` (*Rosen-Kellogg v. Mayorkas*, No. 24-5158, filed 2025-02-28; provenance in `usage/SOURCE.md`).
+- Sample: `usage/INPUT-reply-brief.md`, a full transcription of the filed 16-page brief (see Known gaps for what differs).
 - Status: template built; render, overlay, and a page-by-page review done (below). Not reviewed by a human. `court.json` and the court-root `typst/` and `usage/` are untouched.
 
 ## Files
@@ -12,8 +12,8 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `cadc-brief`. |
 | `typst/cadc-reply-brief.typ` | Template. Helpers copied from the ca9 template (cmarker body, TOC and TOA built from introspection, cover-fit loop, `toa:` links); rule parameters and certificates rewritten for the D.C. Circuit. |
-| `usage/INPUT-cadc-reply-brief-rosenkellogg.md` | Markdown contract sample: frontmatter plus the brief body. |
-| `usage/OUTPUT-cadc-reply-brief-rosenkellogg.typst.pdf` | `sh tools/render.sh courts/dc-circuit/court-of-appeals/reply-brief usage/INPUT-cadc-reply-brief-rosenkellogg.md` (15 pages). |
+| `usage/INPUT-reply-brief.md` | Markdown contract sample: frontmatter plus the brief body. |
+| `usage/OUTPUT-reply-brief.typst.pdf` | `sh tools/render.sh courts/dc-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md` (15 pages). |
 | `usage/OVERLAY-rosen-kellogg-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/dc-circuit/court-of-appeals/reply-brief rosen-kellogg-reply-brief`. |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -64,7 +64,7 @@ The pairings are close throughout. The typeface is now the metric-compatible sub
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-cadc-reply-brief-rosenkellogg.typst.pdf` was rendered at 60 dpi (`pdftoppm -r 60`) and viewed after the font change (2026-10-15): **15 of 15 pages reviewed**. Typst printed no warnings. Fonts embedded: Liberation Serif (Regular, Bold, Italic, BoldItalic) only.
+Every page of `OUTPUT-reply-brief.typst.pdf` was rendered at 60 dpi (`pdftoppm -r 60`) and viewed after the font change (2026-10-15): **15 of 15 pages reviewed**. Typst printed no warnings. Fonts embedded: Liberation Serif (Regular, Bold, Italic, BoldItalic) only.
 
 | PDF page | Printed | Content | Result |
 |---|---|---|---|
@@ -108,9 +108,9 @@ The typst template is the reference. The LaTeX and DOCX engines are built from t
 Build commands, from the repo root:
 
 - LaTeX (tectonic; reruns until the contents and authorities settle):
-  `sh courts/dc-circuit/court-of-appeals/reply-brief/latex/render.sh courts/dc-circuit/court-of-appeals/reply-brief usage/INPUT-cadc-reply-brief-rosenkellogg.md courts/dc-circuit/court-of-appeals/reply-brief/usage/OUTPUT-cadc-reply-brief-rosenkellogg.latex.pdf`
+  `sh courts/dc-circuit/court-of-appeals/reply-brief/latex/render.sh courts/dc-circuit/court-of-appeals/reply-brief usage/INPUT-reply-brief.md courts/dc-circuit/court-of-appeals/reply-brief/usage/OUTPUT-reply-brief.latex.pdf`
 - DOCX (run from the court folder):
-  `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/cadc.lua usage/INPUT-cadc-reply-brief-rosenkellogg.md -o usage/OUTPUT-cadc-reply-brief-rosenkellogg.docx`
+  `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/cadc.lua usage/INPUT-reply-brief.md -o usage/OUTPUT-reply-brief.docx`
 
 **LaTeX matches the typst output (tier 1):** Liberation Serif 14 pt from `fonts/`, 1 in margins, body line pitch 25.9 pt and single 14.2 pt (measured on the typst render; body lines agree within 1 pt), cover in the same order and positions, roman contents and authorities, arabic body from 1, Certificate of Compliance with the template's count (2,175 words, the same count as typst, computed by `render.sh` from the markdown), Certificate of Service, signature block kept with the last paragraph, I. / A. / 1. / a. heading labels under "Argument", 14 pt footnotes.
 
@@ -130,7 +130,7 @@ Build commands, from the repo root:
 
 ## Verification pass 2026-10-16 (fb-595.26.12)
 
-- Rendered: `sh tools/render.sh .../reply-brief usage/INPUT-cadc-reply-brief-rosenkellogg.md` exits 0, no typst warnings, 15 pages (the committed PDF had been 16 pages and was stale). Overlay rerun (`tools/overlay.sh ... rosen-kellogg-reply-brief`): same page map as the table above; the cover now overlaps 85%.
+- Rendered: `sh tools/render.sh .../reply-brief usage/INPUT-reply-brief.md` exits 0, no typst warnings, 15 pages (the committed PDF had been 16 pages and was stale). Overlay rerun (`tools/overlay.sh ... rosen-kellogg-reply-brief`): same page map as the table above; the cover now overlaps 85%.
 - Viewed: all 15 pages at 60 dpi before the fixes, pp. 1-3 again after each fix, and all 15 pages (contact sheet) of the final render; all 15 overlay pages at 40 dpi; the exemplar's page 1 against our cover.
 - Rules checked in the D.C. Circuit rules PDF (as amended through 2025-12-04; it downloaded on 2026-10-16, so the "returned 404" note under Known gaps is out of date): Circuit Rule 28(a)(8) and 28(a)(2) (rows added to the rules table).
 - Fixed (tier 1): the cover had no oral-argument statement. The exemplar says "ORAL ARGUMENT SCHEDULED FOR APRIL 10, 2025" and Circuit Rule 28(a)(8) requires it. The template now prints the optional `oral_argument` field in capitals at the top of the cover (typst and latex), and the sample's frontmatter carries it.

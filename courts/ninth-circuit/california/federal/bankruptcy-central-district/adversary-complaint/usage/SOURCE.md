@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-cacb-adversary-complaint-lpgmarshack826ap01078sc.pdf` (28 pages: the 26-page complaint, Exhibits 1 and 2 as pages 27-28; text layer present, `pdftotext` reads it)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (28 pages: the 26-page complaint, Exhibits 1 and 2 as pages 27-28; text layer present, `pdftotext` reads it)
 - URL fetched from: https://casedocs.omniagentsolutions.com/cmsvol2/pub_47488/43eee56d-5d4a-4880-af6a-ee7b1775022d_1.pdf (public docket document hosted by the claims agent for the Litigation Practice Group chapter 11 case)
 - Court: United States Bankruptcy Court, Central District of California, Santa Ana Division
 - Case: *Richard A. Marshack, Trustee of the LPG Liquidation Trust v. Choice Administrators Insurance Services, Inc., et al.* (adversary proceeding within *In re The Litigation Practice Group P.C.*)
@@ -27,7 +27,7 @@ Searched for a text-based, public complaint filed in an adversary proceeding in 
 - `casedocs.omniagentsolutions.com/.../df09f702-...-2632.pdf`: Order approving stipulation (Doc 2632, LPG case, June 11, 2026). An order, not a complaint.
 - `about.ag/pics/bk/656.pdf` and `692.pdf` (Tulving Company, 8:14-bk-11492-ES): Chapter 7 trustee motions on the court-approved form F 2016-2.2 (cash disbursements). Forms, not memoranda.
 
-- File: `SAMPLE-cacb-adversary-complaint-girardi221ap01155.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf`
 - Filer: Plaintiff Elissa Miller, by Ronald N. Richards, Law Offices of Ronald Richards & Associates, APC
 - Case: *Elissa Miller v. Erika Girardi, et al.*, No. 2:21-ap-01155-BR (Doc. 1)
 - Document: 31-page adversary complaint

@@ -5,9 +5,9 @@ Folder: `courts/tenth-circuit/oklahoma/federal/western-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-okwd-motion-brief-trupia526cv02422.pdf` (one filer, a defendant's municipal counsel; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-okwd-motion-brief-trupia.md`: the whole motion and brief, caption, signature and certificate of mailing |
-| render | ok: `usage/OUTPUT-okwd-motion-brief-trupia.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer, a defendant's municipal counsel; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: the whole motion and brief, caption, signature and certificate of mailing |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-trupia-motion-brief.pdf` and `OVERLAY-trupia-motion-brief.txt` (`sh tools/overlay.sh`) |
 | pages reviewed | 8 of 8, every page rasterized at 60 dpi and viewed after the last template change (pages 2 to 4 re-checked after the indent fix) |
 
@@ -66,11 +66,11 @@ https://okwd.uscourts.gov/local-rules (current edition `LocalRules2026.pdf`, eff
 
 ## Engines
 
-**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (styles, letter page with 1 in margins, centered PAGE footer); `docx/okwd-motion-brief.lua` builds the cover, caption, body, lettered list items, the signature block and the certificate of mailing. Render: `sh tools/render.sh --engine docx courts/tenth-circuit/oklahoma/federal/western-district/motion-brief usage/INPUT-okwd-motion-brief-trupia.md`.
+**docx** (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (styles, letter page with 1 in margins, centered PAGE footer); `docx/okwd-motion-brief.lua` builds the cover, caption, body, lettered list items, the signature block and the certificate of mailing. Render: `sh tools/render.sh --engine docx courts/tenth-circuit/oklahoma/federal/western-district/motion-brief usage/INPUT-motion-brief.md`.
 
 - Matches the typst template: EB Garamond 13 pt; exact 26 pt line pitch (double); 17.55 pt after each paragraph; 0.5 in first-line indent; level-1 headings bold centered capitals, level-2 bold left, level-3 bold italic left; single 15 pt blocks for the caption, signature and certificate recipients; `JURY TRIAL DEMANDED` at the right of the caption when set; signature and certificate kept together.
 - Differs from typst: the caption, signature and certificate are borderless tables (one ")" paragraph per caption line, not measured against wrapped names); lists are typed labels, not Word list numbering; the certificate statement is taken as markdown inlines (italics kept, other markup as pandoc reads it); footnote text is exact 26 pt, as the typst body leading would set it.
-- Word check: `usage/OUTPUT-okwd-motion-brief-trupia.docx` was written. Every XML part passes `xmllint --noout` and pandoc reads it back (`pandoc -f docx -t plain`). Word itself has not been run.
+- Word check: `usage/OUTPUT-motion-brief.docx` was written. Every XML part passes `xmllint --noout` and pandoc reads it back (`pandoc -f docx -t plain`). Word itself has not been run.
 - BLOCKED, `docx.pdf` (LibreOffice PDF, Gates 0 and 1 on the docx): `soffice` is not installed on this box and cannot be installed here (no conda-forge package, no root). `usage/OUTPUT-trupia-motion-brief.docx.pdf` does not exist.
 - BLOCKED, `tools/render-docx.sh` integrity step: `unzip` and `zip` are not installed. The render prints `render-docx.sh: 43: unzip: not found`, then `render-docx.sh: .../OUTPUT-trupia-motion-brief.docx is not a valid zip`, and exits 1 after writing the .docx. `reference.docx` was built with `ziptool` (libzip) instead.
 - BLOCKED, visual review of the docx pages: no LibreOffice, so no docx page was rendered or viewed (pages reviewed: 0 of 8). The typst pages were reviewed (8 of 8) as the template reference only; that is not a docx review.

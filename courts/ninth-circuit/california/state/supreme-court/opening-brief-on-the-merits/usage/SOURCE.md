@@ -4,14 +4,14 @@ Two exemplars, from two different filers (the eval loop asks for 2 or 3 for tier
 
 | Exemplar | Case | Filer |
 |---|---|---|
-| `SAMPLE-cal-opening-brief-on-the-merits-peoplevmccunes276303.pdf` | *People v. McCune*, S276303 | Kaiya R. Pirolo |
-| `SAMPLE-cal-opening-brief-on-the-merits-peoplevpattons279670.pdf` | *People v. Patton*, S279670 | Jonathan E. Demson |
+| `FILED-EXAMPLE-opening-brief-on-the-merits.pdf` | *People v. McCune*, S276303 | Kaiya R. Pirolo |
+| `FILED-EXAMPLE-opening-brief-on-the-merits-2.pdf` | *People v. Patton*, S279670 | Jonathan E. Demson |
 
 ## Exemplar 2: People v. Patton (S279670)
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cal-opening-brief-on-the-merits-peoplevpattons279670.pdf` |
+| File | `FILED-EXAMPLE-opening-brief-on-the-merits-2.pdf` |
 | Court | Supreme Court of the State of California |
 | Case | *People v. Ramon Patton* (Supreme Court No. S279670; Court of Appeal No. B320352; Superior Court No. TA144611, Los Angeles County) |
 | Document | Appellant's Opening Brief on the Merits, 37 pages, with the Table of Contents and Table of Authorities, the Certificate of Word Count and the Proof of Service |
@@ -28,7 +28,7 @@ Its cover uses the same block of Supreme Court No. / Court of Appeal No. / Super
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cal-opening-brief-on-the-merits-peoplevmccunes276303.pdf` |
+| File | `FILED-EXAMPLE-opening-brief-on-the-merits.pdf` |
 | Court | Supreme Court of the State of California |
 | Case | *People v. Scotlane McCune* (Supreme Court No. S276303; Court of Appeal No. A163579; Napa County Superior Court No. CR183930) |
 | Document | Appellant's Opening Brief on the Merits, 57 pages, with the Certification of Word Count (p. 54) and Attorney's Proof of Service (p. 55), plus the court's e-service proof of service (p. 57) |
@@ -45,5 +45,5 @@ Two filers are on file (Pirolo, Demson): the minimum the eval loop asks for tier
 
 | File | SHA-256 |
 |---|---|
-| `SAMPLE-cal-opening-brief-on-the-merits-peoplevmccunes276303.pdf` | `b3b22b7218874c44b5dcdaaa42eb892d10df1e0bb00253afaec936fc23799a36` |
-| `SAMPLE-cal-opening-brief-on-the-merits-peoplevpattons279670.pdf` | `82fc7198053791031a97dc4ba81624b9e912a44acb029813837ca2e2247da681` |
+| `FILED-EXAMPLE-opening-brief-on-the-merits.pdf` | `b3b22b7218874c44b5dcdaaa42eb892d10df1e0bb00253afaec936fc23799a36` |
+| `FILED-EXAMPLE-opening-brief-on-the-merits-2.pdf` | `82fc7198053791031a97dc4ba81624b9e912a44acb029813837ca2e2247da681` |

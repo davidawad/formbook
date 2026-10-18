@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/california/federal/bankruptcy-southern-district/ad
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-casb-adversary-complaint-steakhousepartners0990163.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-casb-adversary-complaint-steakhousepartnerscomplaint.md`: the complaint in full (caption, paragraphs 1 to 38, the claim headings, the prayer and the signature block) |
-| render | ok: `usage/OUTPUT-casb-adversary-complaint-steakhousepartnerscomplaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md`: the complaint in full (caption, paragraphs 1 to 38, the claim headings, the prayer and the signature block) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-steakhouse-partners-complaint.pdf` and `.txt` (pages paired by word overlap; 61 to 97%) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change; see the review table) |
 
@@ -48,7 +48,7 @@ Not verified against primary text, so not asserted as a rule by this template: t
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, jq, gawk (micromamba env at ~/tb)
-sh tools/render.sh courts/ninth-circuit/california/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-casb-adversary-complaint-steakhousepartnerscomplaint.md
+sh tools/render.sh courts/ninth-circuit/california/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/ninth-circuit/california/federal/bankruptcy-southern-district/adversary-complaint steakhouse-partners-complaint
 ```
 
@@ -91,9 +91,9 @@ Pages 2 to 10 were rendered and looked at before the footer change; the footer c
 
 ## Engines
 
-**docx** (`docx/`): `sh tools/render.sh --engine docx courts/ninth-circuit/california/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-casb-adversary-complaint-steakhousepartnerscomplaint.md` writes `usage/OUTPUT-casb-adversary-complaint-steakhousepartnerscomplaint.docx` and `.docx.pdf` (LibreOffice PDF, 11 pages, EB Garamond embedded). Built by `docx/build-reference.sh` (reference.docx), `docx/render.sh` (sets the footer from the frontmatter) and `docx/casb-adversary-complaint.lua`.
+**docx** (`docx/`): `sh tools/render.sh --engine docx courts/ninth-circuit/california/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice PDF, 11 pages, EB Garamond embedded). Built by `docx/build-reference.sh` (reference.docx), `docx/render.sh` (sets the footer from the frontmatter) and `docx/casb-adversary-complaint.lua`.
 
 - Matches the typst output in the mandated form: EB Garamond 12 pt, 24 pt line pitch on the body and the numbered lines, 28 line numbers on the grid, double and single pleading rules, the three-line footer (page, title, case number), the counsel block from line 1, the caption, numbered allegations, lettered lists, the signature block.
 - Differs: the numbers are a framed header block and the rules are page borders (double rule 14 pt from the text, single 7 pt from it), not the typst background; the footer and rules are placed by Word/LibreOffice layout, not by coordinates. Checked with LibreOffice only (Word is not available here).
-- No typst `OUTPUT-casb-adversary-complaint-steakhousepartnerscomplaint.typst.pdf` exists in `usage/` in this snapshot, so there is no typst page to compare against; the pages were judged against the typst template.
+- No typst `OUTPUT-adversary-complaint.typst.pdf` exists in `usage/` in this snapshot, so there is no typst page to compare against; the pages were judged against the typst template.
 - BLOCKED: `tools/check.sh <this folder> --engine docx` exits 2 (`court.json` and `checks.yaml` are missing from this doc-type folder; they are court-level files and were not created). No gate result is claimed. Gate 0 was checked by hand for word presence only (every body word is in the PDF text; only frontmatter keys are absent, as expected).

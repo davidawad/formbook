@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-wyd-motion-brief-elizondo126cv00263.pdf`
+- File: `FILED-EXAMPLE-motion-brief-3.pdf`
 - Court: United States District Court for the District of Wyoming (`wyd`)
 - Case: *Luis Elizondo v. Tucker Alger*
 - Docket: No. 1:26-cv-00263-SWS (ECF header "Case 1:26-cv-00263-SWS Document 8"; CourtListener docket `/docket/74762691/`)

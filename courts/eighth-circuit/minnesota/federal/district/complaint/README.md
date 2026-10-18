@@ -11,9 +11,9 @@ Status: template built and rendered; overlay built; every page of the current PD
 |---|---|
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...` and splits its frontmatter from its body. |
 | `typst/mnd-complaint.typ` | The template: caption, lead-in, numbered allegations, headings, lettered prayer items, signature. Every case word comes from the sample. |
-| `usage/SAMPLE-mnd-complaint-3mvsaintgobain14cv00128.pdf` | Real filed complaint (Dkt. 1, filed 2014-01-14), public RECAP copy. Source record: `usage/SOURCE.md`. |
-| `usage/INPUT-mnd-complaint-3m.md` | Markdown transcription of the exemplar, in the frontmatter contract below (caption, every heading, all 36 numbered paragraphs, the jury demand, the prayer, the signature block). |
-| `usage/OUTPUT-mnd-complaint-3m.typst.pdf` | Our render of the sample (13 pages). |
+| `usage/FILED-EXAMPLE-complaint.pdf` | Real filed complaint (Dkt. 1, filed 2014-01-14), public RECAP copy. Source record: `usage/SOURCE.md`. |
+| `usage/INPUT-complaint.md` | Markdown transcription of the exemplar, in the frontmatter contract below (caption, every heading, all 36 numbered paragraphs, the jury demand, the prayer, the signature block). |
+| `usage/OUTPUT-complaint.typst.pdf` | Our render of the sample (13 pages). |
 | `usage/OVERLAY-3m-complaint.pdf` and `.txt` | Red/blue overlay of our render against the exemplar, and its page map. |
 
 ## Rules (primary sources)
@@ -73,7 +73,7 @@ From the repository root (the toolchain is in `$HOME/tb/bin`, see the brief):
 
 ```
 D=courts/eighth-circuit/minnesota/federal/district/complaint
-sh tools/render.sh $D usage/INPUT-mnd-complaint-3m.md "$PWD/$D/usage/OUTPUT-3m-complaint.pdf"
+sh tools/render.sh $D usage/INPUT-complaint.md "$PWD/$D/usage/OUTPUT-3m-complaint.pdf"
 # overlay.sh reads and writes the OUTPUT-/OVERLAY- names; use a temporary copy, then rename:
 cp $D/usage/OUTPUT-3m-complaint.pdf $D/usage/OUTPUT-3m-complaint.pdf
 sh tools/overlay.sh $D 3m-complaint
@@ -99,7 +99,7 @@ Every page of the current PDF was rendered at 60 dpi and viewed. Pages were comp
 - Final review, pages 1 to 13 on the current PDF: page 1 (court name, caption, lead-in, PARTIES, paragraphs 1 to 3): PASS. Page 2 (paragraphs 4 to 7, JURISDICTION AND VENUE, PATENTS-IN-SUIT): PASS. Page 3 (paragraphs 8 to 12, COUNT I heading and sub-heading): PASS. Page 4 (paragraphs 12 to 15, indirect-infringement sub-heading): PASS. Page 5 (paragraphs 15 to 16): PASS. Page 6 (paragraphs 16 to 18): PASS. Page 7 (paragraphs 19 to 21): PASS. Page 8 (paragraphs 21 to 26, COUNT II): PASS. Page 9 (paragraphs 26 to 28): PASS. Page 10 (paragraphs 28 to 30): PASS. Page 11 (paragraphs 31 to 34, the 271(c) sub-heading at the top): PASS. Page 12 (paragraphs 34 to 36, DEMAND, PRAYER, items A and B): PASS. Page 13 (prayer items C to E, date, signature block): PASS.
 - Page 1 has a few lines of white space at the foot: the heading "JURISDICTION AND VENUE" is kept with its first paragraph, which does not fit. ACCEPTED: keep-with-next is the intended behaviour.
 
-- Fonts pass (fb-595.7.5.13): font list checked against the rule, no face named, so EB Garamond kept (no change to the template). Re-rendered with `tools/render.sh` (exit 0, no warnings, 13 pages); `pdffonts`: EB Garamond Regular and Bold embedded only. Overlay re-run against the exemplar (`usage/SAMPLE-mnd-complaint-3mvsaintgobain14cv00128.pdf`, 14 pages, fetched from the URL in `usage/SOURCE.md`). Every page of the new render viewed again: PASS.
+- Fonts pass (fb-595.7.5.13): font list checked against the rule, no face named, so EB Garamond kept (no change to the template). Re-rendered with `tools/render.sh` (exit 0, no warnings, 13 pages); `pdffonts`: EB Garamond Regular and Bold embedded only. Overlay re-run against the exemplar (`usage/FILED-EXAMPLE-complaint.pdf`, 14 pages, fetched from the URL in `usage/SOURCE.md`). Every page of the new render viewed again: PASS.
 
 Pages reviewed: 13 of 13.
 
@@ -115,11 +115,11 @@ Pages reviewed: 13 of 13.
 
 ## Engines
 
-The docx engine (`docx/`) is built from `docx/make-reference.sh` (pandoc's default reference document, restyled) and `docx/mnd-complaint.lua` (front page, caption table, numbering, prayer items, signature block). Outputs: `usage/OUTPUT-mnd-complaint-3m.docx` and `usage/OUTPUT-mnd-complaint-3m.docx.pdf` (LibreOffice 25.2 conversion). Typst stays the primary engine; the latex engine is not built for this folder.
+The docx engine (`docx/`) is built from `docx/make-reference.sh` (pandoc's default reference document, restyled) and `docx/mnd-complaint.lua` (front page, caption table, numbering, prayer items, signature block). Outputs: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 25.2 conversion). Typst stays the primary engine; the latex engine is not built for this folder.
 
 - **Matches the typst form:** EB Garamond 13 pt throughout; 1-inch margins on letter paper; double spacing at the typst pitch (29.9 pt exact, checked on every page of the PDF); centred bold headings with a double line above and below; first-line indent 0.5 inch with unindented paragraphs after headings; numbered allegations 1 to 36 (checked in the PDF text); lettered prayer items hanging from the letter; caption (party column between rules, "Civil No. ____", bold title); signature block (date left, firm and signer right); page number centred in the bottom margin.
 - **Differs:** pagination. Word's exact line spacing gives each line its full 29.9 pt box, while typst adds leading only between lines, so a page holds 21 lines in docx and 22 in typst. The complaint runs 14 pages in docx against 13 in typst, and the signature block falls alone on page 14. Same pitch, one line less per page; the rule does not set a page count.
 - **Differs:** the typeface is rendered by LibreOffice; kerning and line breaks differ slightly from typst.
 - **docx BLOCKED items:** none for the mandated form. No check IDs exist yet for this folder (no `checks.yaml`), so `tools/check.sh --engine docx` has nothing to run; the Gate 2 review of the docx PDF is recorded below.
 
-Review log (docx): every page of `usage/OUTPUT-mnd-complaint-3m.docx.pdf` (14 pages) was rendered at 60 dpi and viewed against the typst pages: pages 1 to 14 PASS on form (caption, headings, numbering, prayer, signature); page 14 carries only the signature block (pagination note above). The `.docx` opens in LibreOffice without a repair prompt; Word was not available to check.
+Review log (docx): every page of `usage/OUTPUT-complaint.docx.pdf` (14 pages) was rendered at 60 dpi and viewed against the typst pages: pages 1 to 14 PASS on form (caption, headings, numbering, prayer, signature); page 14 carries only the signature block (pagination note above). The `.docx` opens in LibreOffice without a repair prompt; Word was not available to check.

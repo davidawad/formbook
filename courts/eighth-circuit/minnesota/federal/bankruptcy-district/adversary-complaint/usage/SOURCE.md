@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-mnb-adversary-complaint-magnetation1705086complaint.pdf` (13 pages) |
+| File | `FILED-EXAMPLE-adversary-complaint-2.pdf` (13 pages) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.mnb.437974/gov.uscourts.mnb.437974.1.0.pdf (CourtListener RECAP archive) |
 | Docket page | https://www.courtlistener.com/docket/50275399/magnetation-llc-adversary-proceeding/ |
 | Case name | *Magnetation LLC, et al. v. Northern Minnesota Water Conditioning, Inc. dba Range Water Conditioning* (Adversary Proceeding) |
@@ -16,7 +16,7 @@
 
 ## Second filer (tier-2 comparison)
 
-- File: `SAMPLE-mnb-adversary-complaint-manty1904106.pdf` (7 pages)
+- File: `FILED-EXAMPLE-adversary-complaint-3.pdf` (7 pages)
 - Case: *Nauni Manty, Chapter 7 Trustee v. ASKNET, Inc.*, Adv. No. 19-04106 (main case WYNIT Distribution, LLC, et al., No. 17-42726 et al.)
 - Filer: Chapter 7 Trustee Nauni Jo Manty, by counsel Jacqueline J. Williams, Manty & Associates, P.A.
 - Date filed: 2019-04-16 (ECF header)

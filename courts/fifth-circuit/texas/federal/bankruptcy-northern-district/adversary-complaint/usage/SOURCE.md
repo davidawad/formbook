@@ -1,6 +1,6 @@
 # Exemplars: adversary-complaint (txnb)
 
-## SAMPLE-txnb-adversary-complaint-primeassetvprimalend2609001.pdf
+## FILED-EXAMPLE-adversary-complaint.pdf
 
 | Field | Value |
 |---|---|
@@ -15,4 +15,4 @@
 | URL (PDF) | https://storage.courtlistener.com/recap/gov.uscourts.txnb.537491/gov.uscourts.txnb.537491.1.0.pdf |
 | Found by | CourtListener search, `court=txnb`, `type=r`, "adversary complaint", run 2026-10-14 (HTTP 200 this run; the earlier notes that the API timed out and returned 403 no longer hold). |
 
-The exemplar file is the whole filing as downloaded. The sample transcribes part of it (see `usage/INPUT-txnb-adversary-complaint-primeassetvprimalend.md` and the README).
+The exemplar file is the whole filing as downloaded. The sample transcribes part of it (see `usage/INPUT-adversary-complaint.md` and the README).

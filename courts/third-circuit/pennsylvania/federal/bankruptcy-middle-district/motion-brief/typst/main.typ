@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "pamb-motion-brief.typ": pamb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-pamb-motion-brief-mullendeemeffective.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #pamb-motion-brief(meta, body)

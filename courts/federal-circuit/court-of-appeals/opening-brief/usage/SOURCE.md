@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cafc-opening-brief-delfasco241363.pdf` (38 pages; ECF Doc. 8) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (38 pages; ECF Doc. 8) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.cafc.21174/gov.uscourts.cafc.21174.8.0.pdf (CourtListener RECAP archive) |
 | Docket page | https://www.courtlistener.com/docket/68514283/8/delfasco-llc-v-secretary-of-the-army/ |
 | Case name | *Delfasco LLC v. Secretary of the Army* (appeal from the Armed Services Board of Contract Appeals, ASBCA Nos. 63280, 63402) |
@@ -19,7 +19,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cafc-opening-brief-vidstream242265.pdf` (95 pages; ECF Document 11) |
+| File | `FILED-EXAMPLE-opening-brief-2.pdf` (95 pages; ECF Document 11) |
 | Court | U.S. Court of Appeals for the Federal Circuit |
 | Case | *VidStream LLC v. Twitter, Inc.*, No. 2024-2265 (appeal from N.D. Tex. No. 3:16-cv-00764-N, Judge David C. Godbey) |
 | Document | "OPENING BRIEF OF PLAINTIFF-APPELLANT VIDSTREAM, LLC" |
@@ -33,4 +33,4 @@
 
 ## Replacement for the audited scanned exemplar
 
-The audited `SAMPLE-cafc-opening-brief-delfasco241363.pdf` (scanned pages with an OCR text layer) is replaced for font and text-layer comparison by the text-based `SAMPLE-cafc-opening-brief-vidstream242265.pdf` from a different filer. See the second-filer record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
+The audited `FILED-EXAMPLE-opening-brief.pdf` (scanned pages with an OCR text layer) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-opening-brief-2.pdf` from a different filer. See the second-filer record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

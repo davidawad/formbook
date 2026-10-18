@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca5-reply-brief-fisher2610536.pdf` |
+| File | `FILED-EXAMPLE-reply-brief.pdf` |
 | Document | Reply of Plaintiff-Appellant Ellen Mae Fisher (docket entry 53, 37 pages) |
 | Case | *Fisher v. Texas Tech University Regents* |
 | Court | U.S. Court of Appeals for the Fifth Circuit |
@@ -18,7 +18,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca5-reply-brief-eeochoustonfunding1220220.pdf` |
+| File | `FILED-EXAMPLE-reply-brief-2.pdf` |
 | Document | Appellant EEOC's Reply Brief (Document 00511898259, 22 pages) |
 | Case | *Equal Employment Opportunity Commission v. Houston Funding Ltd. II, et al.* |
 | Court | U.S. Court of Appeals for the Fifth Circuit |
@@ -34,4 +34,4 @@ Note on the date: the CourtListener search index lists this entry as filed 2026-
 
 Other candidate considered and not saved: *Anderton v. Dallas Independent School District*, No. 25-11351 (5th Cir.), Doc. 45, Appellant's reply (21 pages, Times New Roman and Bookman; RECAP `gov.uscourts.ca5.227848.45.0.pdf`). It is a different filer and would serve as a second exemplar for the tier-2 check, but the one exemplar in this folder is enough for the template's current scope.
 
-Used for: the cover, the table of contents and table of authorities structure, the procedural background, Argument point A (transcribed in `../usage/INPUT-ca5-reply-brief-fisher.md`), the conclusion, the signature, the certificate of compliance and the certificate of service. Not transcribed: Argument points B to H and the remaining body pages (see the README's "Known gaps").
+Used for: the cover, the table of contents and table of authorities structure, the procedural background, Argument point A (transcribed in `../usage/INPUT-reply-brief.md`), the conclusion, the signature, the certificate of compliance and the certificate of service. Not transcribed: Argument points B to H and the remaining body pages (see the README's "Known gaps").

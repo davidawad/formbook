@@ -5,10 +5,10 @@ Folder: `courts/second-circuit/new-york/federal/eastern-district/motion-brief/` 
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `usage/SAMPLE-nyed-motion-brief-force120cv02578memorandum.pdf` (Ropes & Gray for Qatar National Bank, 47 pp.) and `usage/SAMPLE-nyed-motion-brief-saldarriaga120cv03529memorandum.pdf` (counsel for a Florida state official, 34 pp.). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-nyed-motion-brief-forcememorandum.md`: selected passages of the Force memorandum (preliminary statement, Argument I.A to I.C, II, conclusion, certificate of service), with the template's frontmatter. |
-| render | ok: `usage/OUTPUT-nyed-motion-brief-forcememorandum.typst.pdf`, 10 pages (cover, TOC, TOA, body 1 to 7), typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`). Re-rendered 2026-10-15; `pdffonts` shows only EB Garamond (Regular, Italic, Bold), all embedded. |
-| overlay | ok: `usage/OVERLAY-force-memorandum.pdf` (red = ours, blue = filed) and `usage/OVERLAY-force-memorandum.txt` (page map). The overlay reads the first exemplar in name order (Force). Regenerated 2026-10-15 from `usage/SAMPLE-nyed-motion-brief-force120cv02578memorandum.pdf` (47 pages, restored from the URL in `usage/SOURCE.md`). |
+| exemplar | yes, two filers: `usage/FILED-EXAMPLE-motion-brief.pdf` (Ropes & Gray for Qatar National Bank, 47 pp.) and `usage/FILED-EXAMPLE-motion-brief-2.pdf` (counsel for a Florida state official, 34 pp.). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md`: selected passages of the Force memorandum (preliminary statement, Argument I.A to I.C, II, conclusion, certificate of service), with the template's frontmatter. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages (cover, TOC, TOA, body 1 to 7), typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`). Re-rendered 2026-10-15; `pdffonts` shows only EB Garamond (Regular, Italic, Bold), all embedded. |
+| overlay | ok: `usage/OVERLAY-force-memorandum.pdf` (red = ours, blue = filed) and `usage/OVERLAY-force-memorandum.txt` (page map). The overlay reads the first exemplar in name order (Force). Regenerated 2026-10-15 from `usage/FILED-EXAMPLE-motion-brief.pdf` (47 pages, restored from the URL in `usage/SOURCE.md`). |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; the PDF was re-rendered after the last template change and the new page images match the reviewed ones; all 10 re-viewed 2026-10-15). |
 | word count | 1792 words by the template's count (see Known gaps 1). |
 | tier-2 exemplars | 2 filers (EVAL-LOOP minimum). |
@@ -68,7 +68,7 @@ Not retrieved, so not asserted: Fed. R. Civ. P. 5(b) (the certificate of service
 7. **No automated check.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. The word-limit panic and the footnote and link panics are the only mechanical checks; the Gate 2 review below is the review of this PDF.
 8. **Pages of the Force argument omitted.** The sample transcribes selected passages (about 1,800 words of a 40-page body). The overlay pairs pages by words, so pages with omitted text pair with lower overlap.
 
-## Review of the rendered pages (current PDF, `OUTPUT-nyed-motion-brief-forcememorandum.typst.pdf`)
+## Review of the rendered pages (current PDF, `OUTPUT-motion-brief.typst.pdf`)
 
 Compared with the Force exemplar (the overlay pair) and, for the caption and TOC, the Saldarriaga exemplar. Page numbers are the PDF page numbers, with the printed page number in brackets.
 
@@ -89,7 +89,7 @@ Overlay: pages pair with the Force pages listed in `OVERLAY-force-memorandum.txt
 
 ## Engines
 
-DOCX (`docx/`): `build-reference.sh` builds `reference.docx` (three sections: cover without a number, front matter in roman, body in arabic from 1; EB Garamond 12 pt; 10 pt footnotes; exact 24 pt body spacing; headings with hanging labels; 1 in margins). `nyed-motion-brief.lua` builds the cover, the TOC, the TOA, the signature block, the certificate of compliance (word count from the markdown) and the certificate of service. `render.sh` makes two passes: it lays the body out, reads the page of each heading and each cited authority from the LibreOffice PDF, and writes those numbers into the TOC and TOA. Samples: `usage/OUTPUT-nyed-motion-brief-forcememorandum.docx` and `.docx.pdf` (LibreOffice conversion, no errors; opened in LibreOffice, not Word).
+DOCX (`docx/`): `build-reference.sh` builds `reference.docx` (three sections: cover without a number, front matter in roman, body in arabic from 1; EB Garamond 12 pt; 10 pt footnotes; exact 24 pt body spacing; headings with hanging labels; 1 in margins). `nyed-motion-brief.lua` builds the cover, the TOC, the TOA, the signature block, the certificate of compliance (word count from the markdown) and the certificate of service. `render.sh` makes two passes: it lays the body out, reads the page of each heading and each cited authority from the LibreOffice PDF, and writes those numbers into the TOC and TOA. Samples: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion, no errors; opened in LibreOffice, not Word).
 
 - Matches the typst output: 10 pages (cover, TOC, TOA, body 1 to 6, certificate of service), the cover layout, caption rules, section numbering, TOC with dot leaders and levels, TOA grouped with dot leaders, body spacing and indents, footnote size, signature and certificates, word count (1792). Pages reviewed: 10 of 10 (`docx-01` to `docx-10` at 60 dpi).
 - Differs: body page breaks follow LibreOffice, so some TOA page numbers differ from the typst TOA (for example Waldman p. 3 in docx, p. 2 in typst; 18 U.S.C. § 2334(a) p. 4, typst p. 3). The docx numbers are the ones found in the docx PDF.

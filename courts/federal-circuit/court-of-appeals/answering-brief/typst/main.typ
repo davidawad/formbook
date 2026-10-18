@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "cafc-answering-brief.typ": cafc-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-cafc-answering-brief-ablynx.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-answering-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #cafc-brief(meta, body)

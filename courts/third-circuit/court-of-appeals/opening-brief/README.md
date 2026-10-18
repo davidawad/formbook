@@ -9,7 +9,7 @@ Status: exemplar=yes, sample=yes (one), typst render=ok, overlay=ok. latex built
 From the repo root, with typst 0.15.0 on PATH (`render.sh` runs typst with `--ignore-system-fonts`, the vendored fonts only, and treats any warning as failure):
 
 ```sh
-sh tools/render.sh courts/third-circuit/court-of-appeals/opening-brief usage/INPUT-ca3-opening-brief-tresslar.md   # -> usage/OUTPUT-ca3-opening-brief-tresslar.typst.pdf
+sh tools/render.sh courts/third-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md   # -> usage/OUTPUT-opening-brief.typst.pdf
 sh tools/overlay.sh courts/third-circuit/court-of-appeals/opening-brief tresslar-opening-brief            # -> -overlay.pdf and -overlay.txt
 ```
 
@@ -17,7 +17,7 @@ Layout: `usage/` (one filed brief and `SOURCE.md`), `usage/` (markdown, rendered
 
 ## Exemplar
 
-`usage/SAMPLE-ca3-opening-brief-tresslar261367.pdf`, Brief of Appellant (Lisa Tresslar, No. 26-1367, 3d Cir., filed 2026-07-27, The Gold Law Firm, P.C.). Source, search, and the second filer consulted (*Gaia Gardens*, No. 26-2749) are in `usage/SOURCE.md`.
+`usage/FILED-EXAMPLE-opening-brief.pdf`, Brief of Appellant (Lisa Tresslar, No. 26-1367, 3d Cir., filed 2026-07-27, The Gold Law Firm, P.C.). Source, search, and the second filer consulted (*Gaia Gardens*, No. 26-2749) are in `usage/SOURCE.md`.
 
 Searches: CourtListener RECAP search (`/api/rest/v4/search/`, court=ca3, type=r, "opening brief"), which returned several appellant briefs; two were downloaded and checked for a text layer and a complete brief structure. The Tresslar filing was chosen for its complete section order and the fact that it is one filer, not a combined brief with a long addendum.
 
@@ -89,7 +89,7 @@ What it shows, and what it does not. Cover and front matter line up well: page 1
 
 ## Review (Gate 2 record)
 
-Every page of `usage/OUTPUT-ca3-opening-brief-tresslar.typst.pdf` (18 pages, PDF page numbers below; printed folios are 1-10 for PDF pages 5-14 and i-iv for PDF pages 2-4) was rendered to PNG at 60 dpi and looked at in the first pass. Findings and what was done:
+Every page of `usage/OUTPUT-opening-brief.typst.pdf` (18 pages, PDF page numbers below; printed folios are 1-10 for PDF pages 5-14 and i-iv for PDF pages 2-4) was rendered to PNG at 60 dpi and looked at in the first pass. Findings and what was done:
 
 | PDF page | Finding | Action |
 |---|---|---|
@@ -122,7 +122,7 @@ Word count in the compliance certificate (2,155 in the 2026-10-16 render; 2,157 
 
 ## Verification pass 2026-10-16 (fb-595.26.3)
 
-- Rendered: `sh tools/render.sh ... usage/INPUT-ca3-opening-brief-tresslar.md`, exit 0, no typst warnings, 18 pages (the same count as the first pass). Overlay rerun: `usage/OVERLAY-tresslar-opening-brief.pdf`, 18 pages; pairs and percentages unchanged (cover 93.8%, TOC 60.2%, certificates 58.6-97.2%, body 30-55%). TOA page 2 (our p. 4, one entry) pairs at 4.3%.
+- Rendered: `sh tools/render.sh ... usage/INPUT-opening-brief.md`, exit 0, no typst warnings, 18 pages (the same count as the first pass). Overlay rerun: `usage/OVERLAY-tresslar-opening-brief.pdf`, 18 pages; pairs and percentages unchanged (cover 93.8%, TOC 60.2%, certificates 58.6-97.2%, body 30-55%). TOA page 2 (our p. 4, one entry) pairs at 4.3%.
 - Viewed: all 18 pages of the OUTPUT at 60 dpi, the 18 overlay pages at 40 dpi (as one contact sheet), and the exemplar's page 1 against our cover (same order of elements; the exemplar is Times New Roman and puts counsel at the left margin, tier 3).
 - Checked: footnote 1 (p. 11) is set at 14 pt (word boxes as tall as the body text); the cover fits page 1; TOC page numbers match the body headings; no heading is left at the foot of a page.
 - Defect fixed: the TOC page number was a content-sized box after a `1fr` leader, so a title that ran to the margin would still push the number onto its own line (latent; not visible in this sample). TOC rows are now a two-column grid (title and leader, then the page number), as in the reply-brief template. After the fix only PDF page 2 changed (every other page is pixel-identical to the pre-fix render); page 2 was viewed again.

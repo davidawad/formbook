@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-innb-adversary-complaint-vendraminhenry1303061.pdf` (10 pages, text layer present; `pdffonts` shows embedded TimesNewRomanPS-Bold and LiberationSans, `pdftotext` reads it)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (10 pages, text layer present; `pdffonts` shows embedded TimesNewRomanPS-Bold and LiberationSans, `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.innb.352692.1.0.pdf (CourtListener RECAP document, Doc 1)
 - Found via: CourtListener API search `court_id:innb` (`https://www.courtlistener.com/api/rest/v4/search/?q=court_id%3Ainnb%20complaint&type=r`, HTTP 200). The docket page itself returned HTTP 403 to WebFetch; the document was downloaded with curl from the storage URL above.
 - Court: United States Bankruptcy Court, Northern District of Indiana, South Bend Division
@@ -24,7 +24,7 @@
 
 ## Exemplar 2 (second filer; tier-2 comparison)
 
-- File: `SAMPLE-innb-adversary-complaint-fischer0801025.pdf` (2 pages; text layer)
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf` (2 pages; text layer)
 - Case: *Fischer, Trustee v. Radio Shack Credit Services*, Adv. No. 08-01025, Bankr. N.D. Ind., Fort Wayne Division, Doc. 1, Complaint
 - Filer: Trustee (different filer from Exemplar 1)
 - Date filed: 2008-02-06

@@ -4,16 +4,16 @@ Doc type: **motion-brief**: a Rule 12(b) motion to dismiss with its memorandum o
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-akd-motion-brief-naec325cv00038.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-akd-motion-brief-naecmotiontodismiss.md`: an excerpt of the 42-page memorandum (see Sample) |
-| render | ok: `usage/OUTPUT-akd-motion-brief-naecmotiontodismiss.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: an excerpt of the 42-page memorandum (see Sample) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-naec-motion-to-dismiss.pdf` and `OVERLAY-naec-motion-to-dismiss.txt` |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
 
 Build and check (from the repo root, with the toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/ninth-circuit/alaska/federal/district/motion-brief usage/INPUT-akd-motion-brief-naecmotiontodismiss.md
+sh tools/render.sh courts/ninth-circuit/alaska/federal/district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/ninth-circuit/alaska/federal/district/motion-brief naec-motion-to-dismiss
 ```
 
@@ -44,7 +44,7 @@ Not generated: the notice of motion; a proposed order (not required for Rule 12 
 | Face required | None named. L.Civ.R. 7.5(a)(1)(D) asks for a 13-point, proportionally-spaced font "or the equivalent". `docs/FONTS.md` applies only where the rule names a face. The exemplar's Times look is not a requirement. |
 | Vendored substitute | Not needed. EB Garamond is kept: `font-family = "EB Garamond"` (`fonts/eb-garamond/`). |
 | Metric fit | Not applicable (no court-named face). |
-| Verified | `pdffonts usage/OUTPUT-akd-motion-brief-naecmotiontodismiss.typst.pdf` lists EB Garamond Regular, Bold and Italic only, all embedded (2026-10-15). |
+| Verified | `pdffonts usage/OUTPUT-motion-brief.typst.pdf` lists EB Garamond Regular, Bold and Italic only, all embedded (2026-10-15). |
 
 ## Layout
 
@@ -60,7 +60,7 @@ Single line 17.0 pt, double 34.5 pt at 13 pt (see the complaint README). The TOC
 
 ## Sample
 
-`usage/INPUT-akd-motion-brief-naecmotiontodismiss.md` transcribes the exemplar memorandum's caption, counsel block, title and signature block; its Introduction (complete); Background, section I (the Outer Continental Shelf Lands Act, complete); the Legal Standard (complete, with footnote 5 of the filing as the footnote); the opening of Argument section I and its sub-section A (first paragraph); and the Conclusion. Omitted: Background sections II and III (and the filing's footnotes 3 and 4, which belong to Background III); Argument I.B, II and III; the rest of Argument I.A after its first paragraph. The filed table of contents and table of authorities are **not** transcribed as printed: the template rebuilds both from the sample (the filed page numbers are not reproduced because they refer to the full filing). The sample's table of authorities covers the authorities cited in the excerpt only (18 authorities: 11 cases, 4 statutes, 1 rule, 2 regulations). The filing itself is 42 pages; the excerpt renders to 11 pages.
+`usage/INPUT-motion-brief.md` transcribes the exemplar memorandum's caption, counsel block, title and signature block; its Introduction (complete); Background, section I (the Outer Continental Shelf Lands Act, complete); the Legal Standard (complete, with footnote 5 of the filing as the footnote); the opening of Argument section I and its sub-section A (first paragraph); and the Conclusion. Omitted: Background sections II and III (and the filing's footnotes 3 and 4, which belong to Background III); Argument I.B, II and III; the rest of Argument I.A after its first paragraph. The filed table of contents and table of authorities are **not** transcribed as printed: the template rebuilds both from the sample (the filed page numbers are not reproduced because they refer to the full filing). The sample's table of authorities covers the authorities cited in the excerpt only (18 authorities: 11 cases, 4 statutes, 1 rule, 2 regulations). The filing itself is 42 pages; the excerpt renders to 11 pages.
 
 ## Overlay
 
@@ -98,7 +98,7 @@ Single line 17.0 pt, double 34.5 pt at 13 pt (see the complaint README). The TOC
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` (EB Garamond 13 pt, double body text, single headings and contents, letter, 1 in margins, footer inside the bottom margin); `akd-motion-brief.lua` builds the cover, contents, authorities, the section break (cover, contents and authorities in lower roman, the memorandum from 1), the numbered headings with their labels, the signature block and the certificate (only when the frontmatter has one); `find-pages.awk` finds the printed page of every heading and citation in a rendered pass; `render.sh` runs pandoc, converts each pass with LibreOffice and repeats until the page numbers stop changing (at most four passes). Build: `sh tools/render.sh --engine docx courts/ninth-circuit/alaska/federal/district/motion-brief usage/INPUT-akd-motion-brief-naecmotiontodismiss.md`, which writes `usage/OUTPUT-akd-motion-brief-naecmotiontodismiss.docx` and `.docx.pdf` (11 pages; the PDF embeds EB Garamond Regular, Bold and Italic only).
+**docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` (EB Garamond 13 pt, double body text, single headings and contents, letter, 1 in margins, footer inside the bottom margin); `akd-motion-brief.lua` builds the cover, contents, authorities, the section break (cover, contents and authorities in lower roman, the memorandum from 1), the numbered headings with their labels, the signature block and the certificate (only when the frontmatter has one); `find-pages.awk` finds the printed page of every heading and citation in a rendered pass; `render.sh` runs pandoc, converts each pass with LibreOffice and repeats until the page numbers stop changing (at most four passes). Build: `sh tools/render.sh --engine docx courts/ninth-circuit/alaska/federal/district/motion-brief usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (11 pages; the PDF embeds EB Garamond Regular, Bold and Italic only).
 
 - Checked with LibreOffice only (Word is not available here). Every page of the `.docx.pdf` was rendered at 60 dpi and viewed (11 of 11, after the last change). The contents page numbers were checked against the pages where the headings fall; the authorities page numbers against the pages where each linked citation falls.
 - Matches the typst template: font and size, double spacing, 1 in margins, the cover, the contents with dot leaders, the table of authorities grouped as Cases, Statutes, Rules, Regulations (passim at seven pages or more), the roman then arabic page numbering, the labelled headings (I., A., 1., a.), the block quotation, the footnotes and the signature block.

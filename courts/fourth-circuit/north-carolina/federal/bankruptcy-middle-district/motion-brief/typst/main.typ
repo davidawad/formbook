@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ncmb-motion-brief.typ": ncmb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ncmb-motion-brief-eastwoodmsjbrief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ncmb-motion-brief(meta, body)

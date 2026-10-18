@@ -2,7 +2,7 @@
 
 Two filed complaints from two different filers, as the eval-loop tier-2 rule asks (docs/EVAL-LOOP.md). Both are public court records copied from a public host; neither was obtained from PACER or CourtListener (both returned HTTP 403 to this box).
 
-## 1. `SAMPLE-kyeb-adversary-complaint-foxvbiden2206032.pdf` (16 pages, text layer present)
+## 1. `FILED-EXAMPLE-adversary-complaint-2.pdf` (16 pages, text layer present)
 
 - URL fetched from: https://oversight.house.gov/wp-content/uploads/2023/10/US-Bankruptcy-Court-Complaint.pdf
 - Catalog record (same document, govinfo): https://www.govinfo.gov/app/details/GOVPUB-JU14-PURL-gpo219471
@@ -15,7 +15,7 @@ Two filed complaints from two different filers, as the eval-loop tier-2 rule ask
 - Date fetched: 2026-10-14
 - Note: the copy hosted by the House Oversight Committee is the same filing that govinfo catalogs. The defendant is a private individual; the document is a public record.
 
-## 2. `SAMPLE-kyeb-adversary-complaint-kennedycambrian1951200.pdf` (17 pages, text layer present; 14 transcribed)
+## 2. `FILED-EXAMPLE-adversary-complaint.pdf` (17 pages, text layer present; 14 transcribed)
 
 - URL fetched from: https://document.epiq11.com/document/getdocumentbycode?docId=3955467&projectCode=CDC (Epiq document server for the Cambrian Holding claims docket)
 - Court: United States Bankruptcy Court, Eastern District of Kentucky, Lexington Division

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ord-complaint.typ": ord-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ord-complaint-kliewer.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #ord-complaint(meta, body)

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-hid-complaint-sffa125cv00450.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court for the District of Hawaii
 - Case: *Students for Fair Admissions v. Trustees of the Estate of Bernice Pauahi Bishop d/b/a Kamehameha Schools*
 - Docket: Civil Action No. 1:25-cv-00450, Document 1 (56 pages)

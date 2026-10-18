@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca8-opening-brief-wolters262459.pdf` (35 pages) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (35 pages) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ca8.115131/gov.uscourts.ca8.115131.00805608189.0.pdf (CourtListener RECAP archive) |
 | Docket page | https://www.courtlistener.com/docket/73653227/00805608189/chris-wolters-v-sweepsteaks-limited/ |
 | Case name | *Chris Wolters v. Sweepsteaks Limited d/b/a Stake.us* (*Wolters v. Sweepsteaks Limited*) |
@@ -20,7 +20,7 @@ Search path (for the record): CourtListener search API, `type=rd`, `court=ca8`, 
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca8-opening-brief-messamer222600.pdf` (46 pages) |
+| File | `FILED-EXAMPLE-opening-brief-2.pdf` (46 pages) |
 | URL | https://www.courthousenews.com/wp-content/uploads/2023/06/8th-Circuit-appellan-brief-Nieters-v-Holtan.pdf |
 | Case / docket | *Mark Nieters v. Brandon Holtan et al.*, No. 22-2600, appeal from S.D. Iowa, Central Division |
 | Filer | Plaintiff-Appellant Mark Nieters, by Gina Messamer and Jessica Donels, Parrish Kruidenier Dunn Gentry Brown Bergmann & Messamer L.L.P. |
@@ -33,7 +33,7 @@ Search path (for the record): CourtListener search API, `type=rd`, `court=ca8`, 
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca8-opening-brief-unitedstates262679.pdf` (83 pages) |
+| File | `FILED-EXAMPLE-opening-brief-3.pdf` (83 pages) |
 | URL | https://storage.courtlistener.com/recap/gov.uscourts.ca8.115359/gov.uscourts.ca8.115359.00805599533.0_1.pdf |
 | Case / docket | *United States of America v. Steve Simon et al.*, No. 26-2679 |
 | Filer | United States of America, Plaintiff-Appellant |
@@ -44,4 +44,4 @@ Search path (for the record): CourtListener search API, `type=rd`, `court=ca8`, 
 
 ## Replacement for the audited non-redistributable-font exemplar
 
-The audited `SAMPLE-ca8-opening-brief-wolters262459.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `SAMPLE-ca8-opening-brief-messamer222600.pdf` from a different filer. See the second-filer record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
+The audited `FILED-EXAMPLE-opening-brief.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-opening-brief-2.pdf` from a different filer. See the second-filer record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

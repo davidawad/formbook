@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "rib-adversary-complaint.typ": rib-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-rib-adversary-complaint-pisaturosunflower.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #rib-adversary-complaint(meta, body)

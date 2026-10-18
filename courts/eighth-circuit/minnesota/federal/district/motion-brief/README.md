@@ -11,9 +11,9 @@ Status: template built and rendered; overlay built; every page of the current PD
 |---|---|
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...` and splits its frontmatter from its body. |
 | `typst/mnd-motion-brief.typ` | The template: caption, body, headings, footnotes, signature, certificate of compliance. Every case word comes from the sample. |
-| `usage/SAMPLE-mnd-motion-brief-adamsvinnes26cv02415.pdf` | Real filed memorandum (Dkt. 37, filed 2026-09-22), public RECAP copy. Source record: `usage/SOURCE.md`. |
-| `usage/INPUT-mnd-motion-brief-adams.md` | Markdown transcription of the exemplar, in the frontmatter contract below (caption, all headings, body, two footnotes, signature block). |
-| `usage/OUTPUT-mnd-motion-brief-adams.typst.pdf` | Our render of the sample (13 pages). |
+| `usage/FILED-EXAMPLE-motion-brief.pdf` | Real filed memorandum (Dkt. 37, filed 2026-09-22), public RECAP copy. Source record: `usage/SOURCE.md`. |
+| `usage/INPUT-motion-brief.md` | Markdown transcription of the exemplar, in the frontmatter contract below (caption, all headings, body, two footnotes, signature block). |
+| `usage/OUTPUT-motion-brief.typst.pdf` | Our render of the sample (13 pages). |
 | `usage/OVERLAY-adams-motion-brief.pdf` and `.txt` | Red/blue overlay of our render against the exemplar, and its page map. |
 
 ## Rules (primary sources)
@@ -79,7 +79,7 @@ From the repository root (the toolchain is in `$HOME/tb/bin`, see the brief):
 
 ```
 D=courts/eighth-circuit/minnesota/federal/district/motion-brief
-sh tools/render.sh $D usage/INPUT-mnd-motion-brief-adams.md "$PWD/$D/usage/OUTPUT-adams-motion-brief.pdf"
+sh tools/render.sh $D usage/INPUT-motion-brief.md "$PWD/$D/usage/OUTPUT-adams-motion-brief.pdf"
 # overlay.sh reads and writes the OUTPUT-/OVERLAY- names; use a temporary copy, then rename:
 cp $D/usage/OUTPUT-adams-motion-brief.pdf $D/usage/OUTPUT-adams-motion-brief.pdf
 sh tools/overlay.sh $D adams-motion-brief
@@ -107,7 +107,7 @@ Every page of the current PDF was rendered at 60 dpi and viewed. Pages were comp
 - Round 2 (final render): pages 1 to 13 reviewed again. Page 1 (caption, title, first paragraphs): PASS. Pages 2 to 11 (body, headings A to E, footnotes 1 and 2 at 13 point): PASS. Page 12 (conclusion, signature block): PASS. Page 13 (certificate of compliance): PASS.
 - Level-3 headings ("A.", "D.", ...) use a hanging indent (the exemplar has a tab at the same place): ACCEPTED, tier 2 choice.
 
-- Fonts pass (fb-595.7.5.13): font list checked against LR 7.1(h)(1), no face named, so EB Garamond kept (no change to the template). Re-rendered with `tools/render.sh` (exit 0, no warnings, 13 pages); `pdffonts`: EB Garamond Regular, Bold and Italic embedded only. Overlay re-run against the exemplar (`usage/SAMPLE-mnd-motion-brief-adamsvinnes26cv02415.pdf`, 13 pages, fetched from the URL in `usage/SOURCE.md`). Every page of the new render viewed again: PASS.
+- Fonts pass (fb-595.7.5.13): font list checked against LR 7.1(h)(1), no face named, so EB Garamond kept (no change to the template). Re-rendered with `tools/render.sh` (exit 0, no warnings, 13 pages); `pdffonts`: EB Garamond Regular, Bold and Italic embedded only. Overlay re-run against the exemplar (`usage/FILED-EXAMPLE-motion-brief.pdf`, 13 pages, fetched from the URL in `usage/SOURCE.md`). Every page of the new render viewed again: PASS.
 
 Pages reviewed: 13 of 13.
 
@@ -124,10 +124,10 @@ Pages reviewed: 13 of 13.
 
 ## Engines
 
-The docx engine (`docx/`) is built from `docx/make-reference.sh` (pandoc's default reference document, restyled) and `docx/mnd-motion-brief.lua` (front page, caption table, signature block, certificate of compliance with the 12,000-word check). Outputs: `usage/OUTPUT-mnd-motion-brief-adams.docx` and `usage/OUTPUT-mnd-motion-brief-adams.docx.pdf` (LibreOffice 25.2 conversion). Typst stays the primary engine; the latex engine is not built for this folder.
+The docx engine (`docx/`) is built from `docx/make-reference.sh` (pandoc's default reference document, restyled) and `docx/mnd-motion-brief.lua` (front page, caption table, signature block, certificate of compliance with the 12,000-word check). Outputs: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 25.2 conversion). Typst stays the primary engine; the latex engine is not built for this folder.
 
 - **Matches the typst form:** EB Garamond 13 pt throughout, footnotes included (native footnotes, 13 pt single-spaced); 1-inch margins on letter paper; double spacing at the typst pitch (29.9 pt exact); first-line indent 0.5 inch, with the first paragraph after a heading unindented, as typst does; level 1 headings centred and bold; level 2 and 3 headings single-spaced, bold and hanging; caption with the court file number, bold title and rule line; signature block; certificate of compliance on its own page with the word count and software from the frontmatter; page number centred in the bottom margin.
 - **Differs:** pagination. Word's exact line spacing gives each line its full 29.9 pt box, while typst adds leading only between lines, so a page holds 21 lines in docx and 22 in typst. The memorandum runs 14 pages in docx against 13 in typst; the signature block moves to its own page 13 with the body ending on page 12. The word limit is a word count, not a page count, so this does not affect compliance.
 - **docx BLOCKED items:** none for the mandated form. No check IDs exist yet for this folder (no `checks.yaml`), so `tools/check.sh --engine docx` has nothing to run; the Gate 2 review of the docx PDF is recorded below.
 
-Review log (docx): every page of `usage/OUTPUT-mnd-motion-brief-adams.docx.pdf` (14 pages) was rendered at 60 dpi and viewed against the typst pages: pages 1 to 14 PASS on form (caption, headings, footnotes, signature block, certificate). The `.docx` opens in LibreOffice without a repair prompt; Word was not available to check.
+Review log (docx): every page of `usage/OUTPUT-motion-brief.docx.pdf` (14 pages) was rendered at 60 dpi and viewed against the typst pages: pages 1 to 14 PASS on form (caption, headings, footnotes, signature block, certificate). The `.docx` opens in LibreOffice without a repair prompt; Word was not available to check.

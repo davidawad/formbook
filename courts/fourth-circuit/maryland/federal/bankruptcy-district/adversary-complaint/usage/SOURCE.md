@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-mdb-adversary-complaint-kapitus2600188.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, District of Maryland (Greenbelt Division)
 - Case: *Kapitus Servicing, Inc. v. Mohi-Ud-Din*, Adv. Pro. No. 26-00188 (main case No. 26-14436, Chapter 7)
 - Document: Doc 1, "Complaint to Determine Non-Dischargeability of Debt Owed to Kapitus Servicing, Inc." (19 pages), under 11 U.S.C. § 523(a)(2), (a)(4) and (a)(6)

@@ -1,6 +1,6 @@
 # Exemplars: complaint (calsuperct)
 
-## SAMPLE-calsuperct-complaint-peoplevsweetwatercare25cu033612n.pdf
+## FILED-EXAMPLE-complaint.pdf
 
 | Field | Value |
 |---|---|
@@ -16,5 +16,5 @@
 
 Considered and not stored:
 
-- `courts/ninth-circuit/california/state/superior-court/san-diego-county/usage/SAMPLE-calsuperct-sandiego-sdsuperiorpeoplevsunhealthcarecomplaint.pdf`: a 2005 CA DOJ complaint in San Diego Superior Court on pleading paper. It has no `SOURCE.md` in its folder, so its URL cannot be recorded here. Same filer (the AG) as the stored exemplar.
+- `courts/ninth-circuit/california/state/superior-court/san-diego-county/usage/FILED-EXAMPLE-complaint.pdf`: a 2005 CA DOJ complaint in San Diego Superior Court on pleading paper. It has no `SOURCE.md` in its folder, so its URL cannot be recorded here. Same filer (the AG) as the stored exemplar.
 - https://wehoonline.com/wp-content/uploads/2025/01/Amended_Complaint_1st.pdf: an amended complaint on the Judicial Council form PLD-PI-001, Los Angeles Superior Court. It is a form, not pleading paper, so it does not show the complaint layout.

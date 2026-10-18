@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/virginia/federal/western-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `usage/SAMPLE-vawd-motion-brief-fitch626cv00001.pdf` (26 pages; Woods Rogers for Centra Health; box caption) and `usage/SAMPLE-vawd-motion-brief-azimi326cv00001.pdf` (9 pages; TimberlakeSmith for two defendants; ")" caption). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-vawd-motion-brief-fitch.md`: a portion of the Fitch brief (caption, introduction, the Background, the Legal Standard, the opening of the Argument, its sections 2 and 3, the Conclusion, the signature block). It renders to 12 pages. `usage/INPUT-vawd-motion-brief-azimi.md`: the whole Azimi memorandum, with its certificate of service (9 pages). |
-| render | ok: `usage/OUTPUT-vawd-motion-brief-fitch.typst.pdf` (12 pages) and `usage/OUTPUT-vawd-motion-brief-azimi.typst.pdf` (9 pages), letter, typst 0.15.0, EB Garamond only (embedded), no warnings. |
+| exemplar | yes, two filers: `usage/FILED-EXAMPLE-motion-brief-2.pdf` (26 pages; Woods Rogers for Centra Health; box caption) and `usage/FILED-EXAMPLE-motion-brief.pdf` (9 pages; TimberlakeSmith for two defendants; ")" caption). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief-2.md`: a portion of the Fitch brief (caption, introduction, the Background, the Legal Standard, the opening of the Argument, its sections 2 and 3, the Conclusion, the signature block). It renders to 12 pages. `usage/INPUT-motion-brief.md`: the whole Azimi memorandum, with its certificate of service (9 pages). |
+| render | ok: `usage/OUTPUT-motion-brief-2.typst.pdf` (12 pages) and `usage/OUTPUT-motion-brief.typst.pdf` (9 pages), letter, typst 0.15.0, EB Garamond only (embedded), no warnings. |
 | overlay | ok: `usage/OVERLAY-fitch-motion-brief.pdf` and `.txt`; `usage/OVERLAY-azimi-motion-brief.pdf` and `.txt`. |
 | pages reviewed | 21 of 21: the Fitch sample pages 1 to 12, and the Azimi sample pages 1 to 9, each rendered at 60 dpi and viewed after the last layout change. |
 

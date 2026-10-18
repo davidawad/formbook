@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-hib-adversary-complaint-hawaiibrewery2690013.pdf` (26 pages; text layer present; Adversary Proceeding Cover Sheet on pp. 1-2, Complaint pp. 3-26)
+- File: `FILED-EXAMPLE-adversary-complaint-3.pdf` (26 pages; text layer present; Adversary Proceeding Cover Sheet on pp. 1-2, Complaint pp. 3-26)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.hib.100601/gov.uscourts.hib.100601.1.0.pdf (CourtListener RECAP; the exhibit "Lease Agreement" is a separate file, `...100601.1.1.pdf`, and is not saved)
 - Court: United States Bankruptcy Court, District of Hawaii
 - Case: *Hawaii Brewery Development Co., Inc. v. Hawaiian Springs, LLC, Leonite Fund I, LP, and Robert L. Stevens*, Adv. Pro. No. 26-90013 (main case: Bk. No. 26-00311, Chapter 11, Subchapter V, Hon. Robert J. Faris)

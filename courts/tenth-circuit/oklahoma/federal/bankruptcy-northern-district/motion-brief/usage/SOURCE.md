@@ -1,6 +1,6 @@
 # Exemplar source: motion with memorandum, N.D. Okla. Bankruptcy Court (oknb)
 
-**Status: exemplar=yes.** One filed motion with its argument in the same document and a prescribed notice of opportunity for hearing, text-based, saved as `SAMPLE-oknb-motion-brief-okf2411060.pdf`.
+**Status: exemplar=yes.** One filed motion with its argument in the same document and a prescribed notice of opportunity for hearing, text-based, saved as `FILED-EXAMPLE-motion-brief.pdf`.
 
 | Field | Value |
 |---|---|

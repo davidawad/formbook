@@ -5,9 +5,9 @@ Folder: `courts/second-circuit/new-york/federal/bankruptcy-eastern-district/moti
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nyeb-motion-brief-empirestategrandcouncil2601072.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nyeb-motion-brief-bmtmemorandummotiontodismiss.md` (the whole memorandum: counsel block, caption, headings, bulleted list, block quotations, signature) |
-| render | ok: `usage/OUTPUT-nyeb-motion-brief-bmtmemorandummotiontodismiss.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (the whole memorandum: counsel block, caption, headings, bulleted list, block quotations, signature) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-bmt-memorandum-motion-to-dismiss.pdf` and `usage/OVERLAY-bmt-memorandum-motion-to-dismiss.txt` |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed in its final state) |
 
@@ -85,7 +85,7 @@ Pages reviewed: 9 of 9.
 
 ## Engines
 
-docx (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (pandoc default, styles replaced, footer with the matter number at the left and the page number on the centre tab, letter page with 1 in margins); `docx/nyeb-motion-brief.lua` builds the counsel block, caption, title, bullets, quotations and signature. `docx/render.sh` is the court's build (it runs pandoc with `--from markdown+smart-fancy_lists` and puts the frontmatter `matter_number` into the footer). Output: `usage/OUTPUT-nyeb-motion-brief-bmtmemorandummotiontodismiss.docx` and `.docx.pdf` (LibreOffice, 9 pages). Reviewed: 9 of 9 pages of the `.docx.pdf`, against the typst render (9 pages) at 60 dpi. LibreOffice converts the file with no error; `pdffonts` shows EB Garamond embedded.
+docx (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (pandoc default, styles replaced, footer with the matter number at the left and the page number on the centre tab, letter page with 1 in margins); `docx/nyeb-motion-brief.lua` builds the counsel block, caption, title, bullets, quotations and signature. `docx/render.sh` is the court's build (it runs pandoc with `--from markdown+smart-fancy_lists` and puts the frontmatter `matter_number` into the footer). Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice, 9 pages). Reviewed: 9 of 9 pages of the `.docx.pdf`, against the typst render (9 pages) at 60 dpi. LibreOffice converts the file with no error; `pdffonts` shows EB Garamond embedded.
 
 - **Matches typst:** letter paper, 1 in margins; EB Garamond 12 pt; counsel block single spaced at the top left; court title; caption with the rules, `v.` between the parties and `Adv. Pro. No.` at the right; the title centred and bold; body on a 24 pt pitch with a 0.5 in first-line indent; `#` headings centred bold, `##` bold left, `###` bold italic left; bullets with a hanging indent; block quotations single spaced, indented 1 in on each side; "(a)", "(1)" and "(A)" in quotations stay text (fancy lists are off, as in typst); the conclusion kept with the signature block; footer with the matter number and a centred page number.
 - **Differs:** bullets are typed `•` with a tab, not Word list numbering. Exact line spacing puts glyphs a few points lower than typst's line box, so body lines on later pages sit about 11 pt lower than typst (the page count is 9 in both, but the page breaks differ slightly). LibreOffice wraps the first party name in the caption differently in one place: `EMPIRE STATE GRAND COUNCIL ANCIENT AND` breaks before `AND` in the 3.8 in names column, where typst keeps `AND` on the line.

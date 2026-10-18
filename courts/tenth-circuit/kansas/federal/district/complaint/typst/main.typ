@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ksd-complaint.typ": ksd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ksd-complaint-jenkins.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #ksd-complaint(meta, body)

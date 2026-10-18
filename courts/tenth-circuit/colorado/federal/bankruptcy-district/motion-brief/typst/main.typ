@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "cob-motion-brief.typ": cob-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-cob-motion-brief-katzenberger.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #cob-motion-brief(meta, body)

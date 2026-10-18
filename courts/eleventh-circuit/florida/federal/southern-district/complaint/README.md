@@ -5,9 +5,9 @@ Folder: `courts/eleventh-circuit/florida/federal/southern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-flsd-complaint-castellanosderenteria126cv27012.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-flsd-complaint-castellanos.md` (the full text of the exemplar's 7 text pages; exhibit slip pages 8 to 11 are scans and not transcribed) |
-| render | ok: `usage/OUTPUT-flsd-complaint-castellanos.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh ... usage/INPUT-flsd-complaint-castellanos.md`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the full text of the exemplar's 7 text pages; exhibit slip pages 8 to 11 are scans and not transcribed) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh ... usage/INPUT-complaint.md`) |
 | overlay | ok: `usage/OVERLAY-castellanos-complaint.pdf` and `usage/OVERLAY-castellanos-complaint.txt` (`sh tools/overlay.sh ... castellanos-complaint`) |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass re-render; template unchanged) |
 
@@ -80,8 +80,8 @@ Each page was rendered at 60 dpi and viewed on 2026-10-14, after the fonts-pass 
 
 ## Engines
 
-- typst (primary): `typst/`, `usage/OUTPUT-flsd-complaint-castellanos.typst.pdf`, 7 pages.
-- docx: `docx/make-reference.sh` builds `docx/reference.docx` (pandoc's default reference, with the court's styles and footer); `docx/flsd.lua` builds the caption, the numbered paragraphs and the signature block. Written by `sh tools/render.sh --engine docx <this folder> usage/INPUT-flsd-complaint-castellanos.md`: `usage/OUTPUT-flsd-complaint-castellanos.docx` and `usage/OUTPUT-flsd-complaint-castellanos.docx.pdf` (LibreOffice 26.8.1, headless). 7 pages. Pandoc 3.12.1.
+- typst (primary): `typst/`, `usage/OUTPUT-complaint.typst.pdf`, 7 pages.
+- docx: `docx/make-reference.sh` builds `docx/reference.docx` (pandoc's default reference, with the court's styles and footer); `docx/flsd.lua` builds the caption, the numbered paragraphs and the signature block. Written by `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8.1, headless). 7 pages. Pandoc 3.12.1.
 - latex: not built for this doc type.
 
 What matches typst (every page of the `.docx.pdf` rendered at 60 dpi and compared with the typst page, 2026-10-15): letter paper; 1 in margins; EB Garamond 12 pt throughout (embedded as EB Garamond); body text double-spaced at an exact 27.6 pt pitch with a 0.5 in first-line indent; the caption (court name, centered docket line, style at the left in a 3.25 in column, the "/" closer, centered bold title); numbered paragraphs 1 to 45 with the WHEREFORE and jury-demand paragraphs unnumbered; level-1 headings centered bold capitals, level-2 centered bold, level-3 bold at the left; the signature block single-spaced at 3.5 in; the page number centered at the bottom from page 1.

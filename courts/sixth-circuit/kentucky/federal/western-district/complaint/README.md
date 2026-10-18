@@ -5,9 +5,9 @@ Folder: `courts/sixth-circuit/kentucky/federal/western-district/complaint/` (sel
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-kywd-complaint-lott326cv653.pdf` (12 pages, 1 filer; see `usage/SOURCE.md`). Second filer saved for comparison: `usage/SAMPLE-kywd-complaint-scales326cv807.pdf` (6 pages). |
-| sample md | `usage/INPUT-kywd-complaint-lott.md`: the whole filed complaint (caption, headings, all 68 paragraphs, prayer, jury demand, both signature blocks). |
-| render | ok: `usage/OUTPUT-kywd-complaint-lott.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> usage/INPUT-kywd-complaint-lott.md`). |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (12 pages, 1 filer; see `usage/SOURCE.md`). Second filer saved for comparison: `usage/FILED-EXAMPLE-complaint-2.pdf` (6 pages). |
+| sample md | `usage/INPUT-complaint.md`: the whole filed complaint (caption, headings, all 68 paragraphs, prayer, jury demand, both signature blocks). |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> usage/INPUT-complaint.md`). |
 | overlay | ok: `usage/OVERLAY-lott-complaint.pdf` and `usage/OVERLAY-lott-complaint.txt` (`sh tools/overlay.sh <this-dir> lott-complaint <exemplar>`). |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed). Page 1 was viewed again after the caption-column width change; pages 2 to 10 were viewed before it. That change moved only the caption, and the page count stayed at 10. |
 | checks | `tools/check.sh` is not run for this folder (it expects a court folder with `court.json` and `rules.md`; the brief forbids touching `tools/`). The review below is the Gate 2 equivalent. |
@@ -55,7 +55,7 @@ Not verified in this pass, and not asserted by the template: Fed. R. Civ. P. 8(a
 8. **Length.** The render (10 pages) is shorter than the exemplar (12 pages). The likely cause is leading and the caption layout, not missing text, but the word-level comparison was not run as a gate (Gate 0 is a `check.sh` function and was not run here). The overlay's word-overlap figures are the only text comparison made.
 9. **File names.** `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `.txt`; these are the names the tools use, so they are the names used here (not `<id>.pdf` or `<id>-overlay.pdf`).
 
-## Review of the rendered pages (usage/OUTPUT-kywd-complaint-lott.typst.pdf)
+## Review of the rendered pages (usage/OUTPUT-complaint.typst.pdf)
 
 - Page 1: court title (3 lines), caption with ")" column, CASE NO. on the vs. row, title centered; numbered paragraphs 1 to 4 start on the page; footer page number. Pass.
 - Page 2: heading III (JURISDICTION AND VENUE) centered; paragraphs 5 to 15 numbered and double spaced; no heading at the foot of the page. Pass.
@@ -72,7 +72,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ## Engines
 
-**docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh reference.docx`), `kywd-complaint.lua` (court title, caption table, paragraph numbers, signature blocks, jury demand), `render.sh` (pandoc, then the reference's styles, page setup and footer are restored into the output). Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-kywd-complaint-lott.md`. It writes `usage/OUTPUT-kywd-complaint-lott.docx` and then stops at the soffice step (see BLOCKED).
+**docx** (`docx/`): `reference.docx` (built by `sh docx/build-reference.sh reference.docx`), `kywd-complaint.lua` (court title, caption table, paragraph numbers, signature blocks, jury demand), `render.sh` (pandoc, then the reference's styles, page setup and footer are restored into the output). Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-complaint.md`. It writes `usage/OUTPUT-complaint.docx` and then stops at the soffice step (see BLOCKED).
 
 What matches typst (set in `reference.docx`):
 - Letter paper, 1 in margins on all four sides (LR 5.2(a)).

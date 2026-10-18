@@ -39,7 +39,7 @@ The earlier template required a chapter line, a counsel block at top, and a fixe
 - `service.parties` is optional; the list is printed only when given.
 - Level-1 and level-2 headings are set to the body size. The default heading size (1.4 em) leaked through the show rule.
 
-The fictional sample (`usage/INPUT-wvnb-motion-brief-example.md`) renders unchanged except for the heading size.
+The fictional sample (`usage/INPUT-motion-brief.md`) renders unchanged except for the heading size.
 
 ## Fonts and layout
 
@@ -50,13 +50,13 @@ The fictional sample (`usage/INPUT-wvnb-motion-brief-example.md`) renders unchan
 
 ## What the samples show
 
-**`usage/INPUT-wvnb-motion-brief-sheehanmotiontodismiss.md`** is a verbatim transcription of the exemplar: the motion (ECF 8) and the memorandum (ECF 8-1), in filing order. It has the caption, the relief paragraph, the memorandum's introduction, factual allegations (with a block quote and a second block quote), argument I-III with subsections A-D, a conclusion, a signature block with party lines, four footnotes and a certificate of service. Its render is 11 pages, with footnotes and italics.
+**`usage/INPUT-motion-brief-2.md`** is a verbatim transcription of the exemplar: the motion (ECF 8) and the memorandum (ECF 8-1), in filing order. It has the caption, the relief paragraph, the memorandum's introduction, factual allegations (with a block quote and a second block quote), argument I-III with subsections A-D, a conclusion, a signature block with party lines, four footnotes and a certificate of service. Its render is 11 pages, with footnotes and italics.
 
-**`usage/INPUT-wvnb-motion-brief-example.md`** is **fictional** and was kept from the earlier pass: a transferee's motion to dismiss Counts I and II under FRCP 12(b)(6). It exercises the template's negative-notice box, a counsel block at top and a certificate listing parties; the filed exemplar has none of these. Its render is 4 pages. Its authorities (*Iqbal*, *Twombly*) are real, but their reporter and pin cites were written from memory and not checked.
+**`usage/INPUT-motion-brief.md`** is **fictional** and was kept from the earlier pass: a transferee's motion to dismiss Counts I and II under FRCP 12(b)(6). It exercises the template's negative-notice box, a counsel block at top and a certificate listing parties; the filed exemplar has none of these. Its render is 4 pages. Its authorities (*Iqbal*, *Twombly*) are real, but their reporter and pin cites were written from memory and not checked.
 
 File names: `tools/render.sh` writes `OUTPUT-<id>.pdf`; `tools/overlay.sh` reads that name and writes `OVERLAY-<id>.pdf` and `.txt`. The transcription's id is `sheehan-motion-to-dismiss`.
 
-Render: `sh tools/render.sh <this-dir> usage/INPUT-wvnb-motion-brief-sheehanmotiontodismiss.md` → `OUTPUT-wvnb-motion-brief-sheehanmotiontodismiss.typst.pdf`, 11 pages, embedded EB Garamond only, no warnings. The fictional sample rendered to `OUTPUT-wvnb-motion-brief-example.typst.pdf`, 4 pages, the same way.
+Render: `sh tools/render.sh <this-dir> usage/INPUT-motion-brief-2.md` → `OUTPUT-motion-brief-2.typst.pdf`, 11 pages, embedded EB Garamond only, no warnings. The fictional sample rendered to `OUTPUT-motion-brief.typst.pdf`, 4 pages, the same way.
 
 ## Overlay
 
@@ -127,5 +127,5 @@ Ordered by page. None blocks render or overlay; all are for the eval loop's tier
 
 - Matches the typst form: EB Garamond 12 pt (the only face in the PDF, checked with `pdffonts`), exact 18 pt body line pitch (the typst pitch, measured from the typst PDF), 0.5 in first-line indent, letter, 1 in margins, 10 pt centered page-number footer, level 1 centered capitals, level 2 centered bold, level 3 left bold, native footnotes at 10 pt, block quotes indented 1 em on each side, the caption box with its right and bottom rules, the boxed negative notice, the signature in the 3.2 in column, and the certificate of service on its own page.
 - Differs: the single-spaced blocks use exact 11.4 pt; the footnote separator is pandoc's default rule, not the 30% rule of the typst form; the level-1 capitals are typed into the file by the filter; the Sheehan sample runs 12 pages in the docx against 11 in typst (the same pitch, with different line breaks and one heading held to the next page).
-- Reviewed: every page of `OUTPUT-wvnb-motion-brief-sheehanmotiontodismiss.docx.pdf` (12) and `OUTPUT-wvnb-motion-brief-example.docx.pdf` (4), each against the typst page at 60 dpi.
+- Reviewed: every page of `OUTPUT-motion-brief-2.docx.pdf` (12) and `OUTPUT-motion-brief.docx.pdf` (4), each against the typst page at 60 dpi.
 - BLOCKED: `tools/check.sh --engine docx` cannot run: this snapshot has no `checks.yaml` for this court (exit 2, `Error: open .../checks.yaml: no such file or directory`). No check IDs were authored. Word is not available here, so the `.docx` is verified only by LibreOffice (converts without error; the XML parts are well-formed); no Word repair check was run.

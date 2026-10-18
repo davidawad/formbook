@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-msnb-adversary-complaint-communitybankloancare2001059.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | Court | United States Bankruptcy Court, N.D. Mississippi (`msnb`) |
 | Case | *Community Bank of Mississippi v. LoanCare, LLC, Margaret B. Hall and William L. Fava, Trustee* (main case *In re Margaret B. Hall*, No. 20-12866-JDW) |
 | Adversary docket | 20-01059-JDW |

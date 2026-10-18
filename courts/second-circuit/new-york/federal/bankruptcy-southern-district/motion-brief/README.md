@@ -37,20 +37,20 @@ checked in this run.
 
 ## Files
 
-- `usage/SAMPLE-nysb-motion-brief-revlon2201167.pdf` (primary: Debtors' memorandum in support of their motion to dismiss
+- `usage/FILED-EXAMPLE-motion-brief.pdf` (primary: Debtors' memorandum in support of their motion to dismiss
   the adversary complaint, Paul Weiss / MoloLamken / Kaplan Rice, ECF Doc. 16, 68 pages, filed Dec. 5, 2022) and
-  `usage/SAMPLE-nysb-motion-brief-celsiustether2404018.pdf` (second filer: Tether defendants' memorandum in support of
+  `usage/FILED-EXAMPLE-motion-brief-2.pdf` (second filer: Tether defendants' memorandum in support of
   their motion to dismiss, Kramer Levin, ECF Doc. 33, 57 pages, dated Jan. 17, 2025). See `usage/SOURCE.md`.
-- `usage/INPUT-nysb-motion-brief-revlonmemorandum.md`: an excerpt transcribed from the primary exemplar: the preliminary statement (¶¶1-8), the
+- `usage/INPUT-motion-brief.md`: an excerpt transcribed from the primary exemplar: the preliminary statement (¶¶1-8), the
   first part of the statement of facts (¶¶9-14, sub-heading A) and the first point of the argument (¶¶31-33, renumbered 15-17
   here). Sections B-E of the facts, the rest of the argument and the table of authorities are not transcribed.
-- `usage/OUTPUT-nysb-motion-brief-revlonmemorandum.typst.pdf`: 10 pages (cover, contents, 8 body pages). `usage/OVERLAY-revlon-memorandum.pdf` and `.txt`.
+- `usage/OUTPUT-motion-brief.typst.pdf`: 10 pages (cover, contents, 8 body pages). `usage/OVERLAY-revlon-memorandum.pdf` and `.txt`.
 - As for the complaint, the sample uses the repo's `INPUT-`, `OUTPUT-`, `OVERLAY-` names, so the tools work unchanged.
 
 ## Commands (from the repo root)
 
-    sh tools/render.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief usage/INPUT-nysb-motion-brief-revlonmemorandum.md
-    sh tools/overlay.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief revlon-memorandum courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief/usage/SAMPLE-nysb-motion-brief-revlon2201167.pdf
+    sh tools/render.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief usage/INPUT-motion-brief.md
+    sh tools/overlay.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief revlon-memorandum courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief/usage/FILED-EXAMPLE-motion-brief.pdf
 
 The third argument is required here. With no exemplar named, `tools/overlay.sh` takes the first `usage/*.pdf` alphabetically, which is the Tether memorandum (`celsius-tether`), and the match falls to about 12% per page. The Revlon memorandum is the overlay reference.
 

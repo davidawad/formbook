@@ -1,6 +1,6 @@
 # Filed exemplar
 
-- Filename: `SAMPLE-texcrimapp-petition-for-discretionary-review-ukwuachupd036617pdr.pdf`
+- Filename: `FILED-EXAMPLE-petition-for-discretionary-review.pdf`
 - Case: *State v. Samuel Ukwuachu*, No. PD-0366-17
 - Filer: State of Texas; Sterling Harmon, Chief Appellate Assistant Criminal District Attorney, McLennan County
 - Date filed: April 20, 2017 (transmitted and accepted by the Court of Criminal Appeals on April 20, 2017)

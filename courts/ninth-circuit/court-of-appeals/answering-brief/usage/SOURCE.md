@@ -1,6 +1,6 @@
 # Exemplar source: ca9 answering brief
 
-- **File:** `SAMPLE-ca9-answering-brief-newsomvtrump253727.pdf` (71 pages, letter; text-based: `pdftotext` yields the brief's text, fonts embedded)
+- **File:** `FILED-EXAMPLE-answering-brief.pdf` (71 pages, letter; text-based: `pdftotext` yields the brief's text, fonts embedded)
 - **Fetched from:** https://storage.courtlistener.com/recap/gov.uscourts.ca9.4e2731d4-cbd8-4803-a59f-a1d0c6023daf/gov.uscourts.ca9.4e2731d4-cbd8-4803-a59f-a1d0c6023daf.63.0.pdf
 - **Docket page (CourtListener, RECAP):** https://www.courtlistener.com/docket/70527602/63/newsom-et-al-v-trump-et-al/ (docket 70527602)
 - **Case:** *Gavin Newsom, et al. v. Donald J. Trump, et al.*, No. 25-3727 (9th Cir.), on appeal from N.D. Cal. No. 3:25-cv-04870 (Breyer, J.)
@@ -16,7 +16,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca9-answering-brief-bonta2115430.pdf` |
+| File | `FILED-EXAMPLE-answering-brief-2.pdf` |
 | Filer | Defendant-Appellee Rob Bonta, California Attorney General, through the California Department of Justice (different filer from Newsom and the State of California) |
 | Case | *ACA Connects—America's Communications Association v. Bonta*, No. 21-15430 |
 | Document | Answering Brief, DktEntry 30, 232 pages |

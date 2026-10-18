@@ -4,7 +4,7 @@ Fetched 2026-10-14. Both are public court records from CourtListener RECAP, down
 
 Neither exemplar is a complete "motion with memorandum" in one PDF. The N.D. Iowa filings found either attach the brief to a motion (Gray) or argue the grounds in the motion itself without a separate brief (VeroBlue). The template covers both shapes; see `../README.md`.
 
-## 1. SAMPLE-ianb-motion-brief-mcquillenfirstsecurity2009040.pdf (3 pages): the memorandum only
+## 1. FILED-EXAMPLE-motion-brief.pdf (3 pages): the memorandum only
 
 | Item | Value |
 |---|---|
@@ -17,7 +17,7 @@ Neither exemplar is a complete "motion with memorandum" in one PDF. The N.D. Iow
 | Found by | CourtListener search API, `type=rd`, `court=ianb`, query "Brief" filtered to descriptions containing "Motion" (entry: "Motion to Dismiss Adversary Proceeding Filed by James A. Gray. (Attachments: # 1 Brief)") |
 | Notes | The search result carried no case name or date; the caption on the brief itself supplies the case, the number, and the filer. Typeset in Times New Roman (per `pdffonts`). |
 
-## 2. SAMPLE-ianb-motion-brief-veroblue1909015.pdf (6 pages): motion with facts, no separate brief
+## 2. FILED-EXAMPLE-motion-brief-2.pdf (6 pages): motion with facts, no separate brief
 
 | Item | Value |
 |---|---|

@@ -10,9 +10,9 @@ Status: exemplar saved; transcription rendered; overlay run; every page viewed (
 |---|---|
 | `typst/areb-adversary-complaint.typ` | Template: `areb-complaint(meta, md)`. Every number is a named parameter at the top, and each traces to a rule ID or is marked as a convention. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits the frontmatter from the body, calls the template. |
-| `usage/SAMPLE-areb-adversary-complaint-watkins426ap01015.pdf` | The filed document (9 pp.): the B1040 cover sheet and the complaint through its signature. State-court exhibits A and B were removed. |
-| `usage/INPUT-areb-adversary-complaint-watkins.md` | Transcription of the complaint: caption, numbered paragraphs 1-29 under the filed headings, prayer, signature block. Names and text as filed. |
-| `usage/OUTPUT-areb-adversary-complaint-watkins.typst.pdf` | Our render of the transcription (6 pp.). |
+| `usage/FILED-EXAMPLE-adversary-complaint.pdf` | The filed document (9 pp.): the B1040 cover sheet and the complaint through its signature. State-court exhibits A and B were removed. |
+| `usage/INPUT-adversary-complaint.md` | Transcription of the complaint: caption, numbered paragraphs 1-29 under the filed headings, prayer, signature block. Names and text as filed. |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | Our render of the transcription (6 pp.). |
 | `usage/OVERLAY-watkins-adversary-complaint.pdf` / `.txt` | Red (ours) over blue (filed) per page; `.txt` is the page map. |
 | `usage/SOURCE.md` | Source, filer, dates and the search log. |
 
@@ -20,7 +20,7 @@ Build (from the repo root, with `PATH="$HOME/tb/bin:$PATH"` per the box setup):
 
 ```sh
 D=courts/eighth-circuit/arkansas/federal/bankruptcy-eastern-district/adversary-complaint
-sh tools/render.sh $D usage/INPUT-areb-adversary-complaint-watkins.md     # -> usage/OUTPUT-areb-adversary-complaint-watkins.typst.pdf
+sh tools/render.sh $D usage/INPUT-adversary-complaint.md     # -> usage/OUTPUT-adversary-complaint.typst.pdf
 sh tools/overlay.sh $D watkins-adversary-complaint                     # -> usage/OVERLAY-watkins-adversary-complaint.pdf/.txt
 ```
 
@@ -44,7 +44,7 @@ Verified 2026-10-14 against the sources below. Federal rule text came from the L
 
 Court-specific findings, to be read before editing the template:
 
-- **No local rule covers form of papers.** The complete set (`LocalRules.pdf`, 17 pages) has rules 1001-1, 1020-1, 2015-1, 2072-1, 2090-1, 2090-2, 3015-1, 5001-2, 5005-4, 7033-1, 9015-1 and 9019-1. None sets font, size, margins, spacing or page limits for pleadings. It has no Rule 7001 local rule and no Rule 9013-1 local rule. The layout therefore comes from the federal rules plus conventions, and the tier-2 bar falls to the exemplar (`usage/SAMPLE-areb-adversary-complaint-watkins426ap01015.pdf`).
+- **No local rule covers form of papers.** The complete set (`LocalRules.pdf`, 17 pages) has rules 1001-1, 1020-1, 2015-1, 2072-1, 2090-1, 2090-2, 3015-1, 5001-2, 5005-4, 7033-1, 9015-1 and 9019-1. None sets font, size, margins, spacing or page limits for pleadings. It has no Rule 7001 local rule and no Rule 9013-1 local rule. The layout therefore comes from the federal rules plus conventions, and the tier-2 bar falls to the exemplar (`usage/FILED-EXAMPLE-adversary-complaint.pdf`).
 - **Local Rule 5005-4 is the only court-specific format rule.** It applies to all filings, electronic or not.
 - Proposed orders: Local Rule 9019-1 governs consent orders only. It is not used by this template.
 
@@ -65,7 +65,7 @@ The overlap is a pairing aid, not a score. The low pairs are pages where the fil
 
 ## Page review (Gate 2)
 
-Rendered 2026-10-14 at 80 dpi, each page beside its filed page. Every page of `usage/OUTPUT-areb-adversary-complaint-watkins.typst.pdf` was viewed in its final state (6 of 6).
+Rendered 2026-10-14 at 80 dpi, each page beside its filed page. Every page of `usage/OUTPUT-adversary-complaint.typst.pdf` was viewed in its final state (6 of 6).
 
 | Page | Result |
 |---|---|
@@ -115,7 +115,7 @@ Defects found in review and fixed:
 
 Three engines per doc type (`docs/EVAL-LOOP.md`, "Engines"). The typst template above is the primary and is unchanged by the docx work.
 
-**docx** (`docx/`): `reference.docx` (built by `docx/make-reference.sh`, which starts from pandoc's default reference and writes this court's styles, page setup and footer) and `docx/areb.lua` (the caption table, the continuous paragraph numbers, the signature and counsel block, with the same wording as the typst template). Build with `sh tools/render.sh --engine docx <this-dir> usage/INPUT-areb-adversary-complaint-watkins.md`. It writes `usage/OUTPUT-areb-adversary-complaint-watkins.docx`; pandoc 3.6.4 reads the result back, and the zip and every XML part are well-formed.
+**docx** (`docx/`): `reference.docx` (built by `docx/make-reference.sh`, which starts from pandoc's default reference and writes this court's styles, page setup and footer) and `docx/areb.lua` (the caption table, the continuous paragraph numbers, the signature and counsel block, with the same wording as the typst template). Build with `sh tools/render.sh --engine docx <this-dir> usage/INPUT-adversary-complaint.md`. It writes `usage/OUTPUT-adversary-complaint.docx`; pandoc 3.6.4 reads the result back, and the zip and every XML part are well-formed.
 
 - **What matches the typst form (by construction, from the same numbers):** US Letter, 1 in margins; EB Garamond 12 pt; body at 22.2 pt exact line pitch (`w:line="444"`, measured from the typst render); single lines at 13.2 pt exact (caption, counsel, signature); page number centred in the footer; caption as a two-column table with a rule under and beside the debtor block; paragraphs numbered continuously as `N.` with a 0.5 in first-line indent; headings as written (not upper-cased); `Respectfully submitted,`, `s/ NAME` and the counsel block after the body.
 - **What differs or is unverified:** nothing has been compared visually. LibreOffice (`soffice`) is not installable on this box (no conda-forge package, no root for apt), so no `.docx.pdf` was made and no page was rendered or viewed. The footer distance, the rule weight (0.75 pt against typst's 0.8 pt) and the caption cell padding are approximations of the typst values. Word may paginate differently from the typst output. The font is named `EB Garamond`; Word substitutes silently if it is not installed on the machine that opens the file.

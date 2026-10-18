@@ -5,10 +5,10 @@ Folder: `courts/fourth-circuit/west-virginia/federal/southern-district/motion-br
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-wvsd-motion-brief-castro223cv00598.pdf` (1 filer, a state party; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-wvsd-motion-brief-castro.md` (a portion of the filing: caption, Introduction through Point III, Conclusion, signature; see Known gaps) |
-| render | ok: `usage/OUTPUT-wvsd-motion-brief-castro.typst.pdf`, 12 pages (caption page plus body numbered 1 to 11), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; the same page count and the same overlay map as before) |
-| overlay | ok: `usage/OVERLAY-castro-motion-brief.pdf` and `OVERLAY-castro-motion-brief.txt` (re-run 2026-10-14 against `usage/SAMPLE-wvsd-motion-brief-castro223cv00598.pdf`, restored from the URL in `usage/SOURCE.md`; the file was missing from the snapshot, 24 pages, sha256 `e3906afa18128f556017c7baedc36c667ae7404a627c97864a9ba4dd0516b0ae`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, a state party; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (a portion of the filing: caption, Introduction through Point III, Conclusion, signature; see Known gaps) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages (caption page plus body numbered 1 to 11), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14; the same page count and the same overlay map as before) |
+| overlay | ok: `usage/OVERLAY-castro-motion-brief.pdf` and `OVERLAY-castro-motion-brief.txt` (re-run 2026-10-14 against `usage/FILED-EXAMPLE-motion-brief.pdf`, restored from the URL in `usage/SOURCE.md`; the file was missing from the snapshot, 24 pages, sha256 `e3906afa18128f556017c7baedc36c667ae7404a627c97864a9ba4dd0516b0ae`) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed on 2026-10-14) |
 
 File names: the tools write `OUTPUT-<id>.pdf` (render) and `OVERLAY-<id>.pdf/.txt` (overlay) by default, so those are the names used here. The brief's `<id>.pdf` and `<id>-overlay.pdf` names were not used, because `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf`.

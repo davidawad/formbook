@@ -4,7 +4,7 @@ Date fetched for all files below: 2026-10-14. Source: CourtListener RECAP (publi
 
 ## Exemplar 1 (primary; used for the overlay)
 
-- File: `SAMPLE-insd-motion-brief-uindy126cv01669.pdf` (10 pages, text layer yes)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (10 pages, text layer yes)
 - Court: United States District Court, Southern District of Indiana, Indianapolis Division
 - Case: *University of Indianapolis v. The Trustees of Indiana University*
 - Docket: No. 1:26-cv-01669 (ECF header: JRO-MKK; caption: JPH-MKK), Document 19
@@ -15,7 +15,7 @@ Date fetched for all files below: 2026-10-14. Source: CourtListener RECAP (publi
 
 ## Exemplar 2 (second filer, for tier 2)
 
-- File: `SAMPLE-insd-motion-brief-midwestrenewable126cv00632.pdf` (10 pages, text layer yes)
+- File: `FILED-EXAMPLE-motion-brief-2.pdf` (10 pages, text layer yes)
 - Case: *Midwest Renewable Energy Association, Inc., et al. v. Zay, et al.*
 - Docket: No. 1:26-cv-00632-RLY-MKK, Document 11
 - Document: "Defendants' Memorandum in Support of Their Motion to Dismiss"

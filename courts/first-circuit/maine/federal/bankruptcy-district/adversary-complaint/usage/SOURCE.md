@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-meb-adversary-complaint-manhart2601006.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, District of Maine
 - Case: *Manhart, Chapter 7 Trustee v. Johnson*, Adv. Proc. No. 26-01006 (main case *In re Roland Ty Pease*, Ch. 7, No. 25-10255 MAF)
 - Document: Complaint (5 pages), Doc 1 of the adversary proceeding

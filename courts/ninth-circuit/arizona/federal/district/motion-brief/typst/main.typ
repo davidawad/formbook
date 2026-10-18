@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "azd-motion.typ": azd-motion, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-azd-motion-brief-evanchomtd.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #azd-motion(meta, body)

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-dcb-adversary-complaint-webstervsquarefunding2510054.pdf` (13 pages, text layer present: `pdffonts` shows embedded TimesNewRomanPSMT and Times-Roman/Bold/Italic; `pdftotext` reads it)
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf` (13 pages, text layer present: `pdffonts` shows embedded TimesNewRomanPSMT and Times-Roman/Bold/Italic; `pdftotext` reads it)
 - Court: United States Bankruptcy Court for the District of Columbia (`dcb`)
 - Case: *Wendell Webster, chapter 7 trustee v. Square Funding LLC d/b/a Square Advance*, Adv. Proc. No. 25-10054-ELG, in the chapter 7 case of *Broughton Construction Co., LLC*, No. 23-378-ELG (the caption says "Case No. 23-378-ELG"; the ECF header says `Case 25-10054-ELG`)
 - Document: Complaint (ECF Doc 1), five counts: fraudulent conveyance (11 U.S.C. § 548, two counts), D.C. Code § 28-3105, conversion, and unjust enrichment
@@ -22,7 +22,7 @@
 
 ## 2. Second filer: Woodcrest Condominiums IX, LLC v. Welch Family Limited Partnership Five
 
-- File: `SAMPLE-dcb-adversary-complaint-woodcrest2510036.pdf` (25 pages)
+- File: `FILED-EXAMPLE-adversary-complaint-3.pdf` (25 pages)
 - Court: United States Bankruptcy Court for the District of Columbia (`dcb`)
 - Case: *Woodcrest Condominiums IX, LLC v. Welch Family Limited Partnership Five*, Adv. Proc. No. 25-10036-ELG (ECF header; the caption leaves "Adv. Pro. No. ____" blank), in the chapter 11 case of *Woodcrest Condominiums IX, LLC*, No. 25-00265 (ELG)
 - Docket / document: Doc 1, "COMPLAINT"
@@ -37,7 +37,7 @@
 
 ## 3. Third filer: Bolog v. Swain Landing LaPlata JC, LLC
 
-- File: `SAMPLE-dcb-adversary-complaint-bolog2510019.pdf` (8 pages)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (8 pages)
 - Court: United States Bankruptcy Court for the District of Columbia (`dcb`)
 - Case: *Erik D. Bolog v. Swain Landing LaPlata JC, LLC*, Adversary Proceeding No. 25-10019-ELG (ECF header; caption "No. ______"), in the case of *Swain Landing LaPlata JC, LLC*, No. 25-184-ELG
 - Docket / document: Doc 1, "ADVERSARY PROCEEDING AGAINST SWAIN LANDING LAPLATA JC, LLC" (the complaint; with a DEMAND FOR JURY TRIAL)

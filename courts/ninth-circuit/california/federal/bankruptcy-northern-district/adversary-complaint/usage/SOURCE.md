@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-canb-adversary-complaint-appalachian23305642603029.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Northern District of California, San Francisco Division
 - Case: *The Roman Catholic Archbishop of San Francisco* (Debtor), Chapter 11, Case No. 23-30564 (Hon. Dennis Montali); adversary proceeding *Appalachian Insurance Company v. The Roman Catholic Archbishop of San Francisco*, Adversary No. 26-03029
 - Document: Appalachian Insurance Company's Complaint for Declaratory Judgment and Equitable Reimbursement and Demand for Jury Trial (31 pages, ECF Doc 1 of the adversary proceeding)
@@ -13,7 +13,7 @@
 
 Second filer: not saved in this pass (the brief asks for one exemplar per doc type). EVAL-LOOP's tier-2 rule (2 or 3 filers) is therefore not met yet; see README.md. The search also returned other adversary filings in this court (for example 26-03039 Goldberg v. United States, 26-03016 Callaway), which were not checked for pleading format and not saved.
 
-- File: `SAMPLE-canb-adversary-complaint-schneider0905109.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf`
 - Filer: Plaintiff Saeed Fazeli
 - Case: *Saeed Fazeli v. Michael J. Schneider*, No. 09-05109 (Doc. 1)
 - Document: adversary complaint with Clerk cover sheet

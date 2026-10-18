@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/virginia/federal/eastern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-vaed-complaint-tamaris126cv03298.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-vaed-complaint-tamaris.md` (transcription of selected parts of the 23-page filing; see Known gaps) |
-| render | ok: `usage/OUTPUT-vaed-complaint-tamaris.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (transcription of selected parts of the 23-page filing; see Known gaps) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | typeface | Rule names no face: L.R. 7(F)(3) says "12 point Roman style or 10 pitch Courier style". Any proportional serif is allowed, so the template keeps EB Garamond (`docs/FONTS.md`: no court-named face). Metric note: none needed. Font re-checked 2026-10-14 (`pdffonts`: EB Garamond only). |
 | overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF, and `usage/` holds only `SOURCE.md` (the PDF is not in this snapshot). Old `OVERLAY-tamaris-complaint.txt` is from an earlier run and is not current. |
 | pages reviewed | 8 of 8 (re-rendered 2026-10-14; every page rasterized at 70 dpi and viewed) |
@@ -80,7 +80,7 @@ Not produced by this template (separate filings that may be required with a firs
 
 ## Engines
 
-DOCX (`docx/`): `reference.docx` from `docx/build-reference.sh`, filter `docx/vaed-complaint.lua`. Output `usage/OUTPUT-vaed-complaint-tamaris.docx` and `.docx.pdf` (LibreOffice conversion). Pages reviewed: 8 of 8 in the docx PDF and 8 of 8 in the typst PDF, at 60 dpi.
+DOCX (`docx/`): `reference.docx` from `docx/build-reference.sh`, filter `docx/vaed-complaint.lua`. Output `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice conversion). Pages reviewed: 8 of 8 in the docx PDF and 8 of 8 in the typst PDF, at 60 dpi.
 
 - Matches the typst form: EB Garamond 12 pt only (`pdffonts`); letter, 1 in margins; body at an exact 24 pt pitch; 0.5 in first-line indent; caption party box with four rules and the case number at right; numbered allegations; lettered prayer items with a hanging indent; signature block single-spaced at 3.25 in and kept together; centered PAGE number at 12 pt. Page breaks fall in the same places on all 8 pages.
 - Differs: the court heading is single-spaced (13.8 pt) in the docx. The typst court heading renders at about 23 pt pitch, although its comment says single, so the typst caption sits lower on page 1. The number-to-text gap is a tab stop at 1 in (typst: 0.25 in after the number). LibreOffice breaks a line after the hyphen in "1-8" where typst does not.

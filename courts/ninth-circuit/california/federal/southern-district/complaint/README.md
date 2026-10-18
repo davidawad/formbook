@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/california/federal/southern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-casd-complaint-bachman326cv04862.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-casd-complaint-bachman.md` (a portion of the 35-page filing, see its header comment) |
-| render | ok: `usage/OUTPUT-casd-complaint-bachman.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (a portion of the 35-page filing, see its header comment) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-bachman-complaint.pdf` and `OVERLAY-bachman-complaint.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; pages 6 to 8 re-viewed after the last template change; all 8 re-viewed on 2026-10-15 in the typeface pass, no template change) |
 
@@ -77,7 +77,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ### docx
 
-Built by `docx/make-reference.sh` (writes `docx/reference.docx` from pandoc's default reference) and `docx/casd.lua` (the filter). Sample: `usage/OUTPUT-casd-complaint-bachman.docx` (zip and XML parts checked with `unzip -t` and `xmllint`; the LibreOffice PDF was not made).
+Built by `docx/make-reference.sh` (writes `docx/reference.docx` from pandoc's default reference) and `docx/casd.lua` (the filter). Sample: `usage/OUTPUT-complaint.docx` (zip and XML parts checked with `unzip -t` and `xmllint`; the LibreOffice PDF was not made).
 
 Set in `styles.xml` and `sectPr` only, **not rendered** (no LibreOffice on the build box):
 

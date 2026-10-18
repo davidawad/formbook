@@ -5,19 +5,19 @@ Folder: `courts/ninth-circuit/idaho/federal/district/motion-brief/` (self-contai
 
 | Item | Status |
 |---|---|
-| exemplar | yes: three filings, `usage/SAMPLE-idd-motion-brief-tarbellgroup125cv00144.pdf` (primary; transcribed and used for the overlay), `…-anderson-2-24-cv-00341-motion-brief.pdf`, `…-robinson-1-24-cv-00306-motion-brief.pdf`. See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-idd-motion-brief-tarbell.md` (the full text of the 14-page memorandum, with its footnotes, headings and signature; the certificate of service is in frontmatter; see Known gaps) |
+| exemplar | yes: three filings, `usage/FILED-EXAMPLE-motion-brief.pdf` (primary; transcribed and used for the overlay), `…-anderson-2-24-cv-00341-motion-brief.pdf`, `…-robinson-1-24-cv-00306-motion-brief.pdf`. See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md` (the full text of the 14-page memorandum, with its footnotes, headings and signature; the certificate of service is in frontmatter; see Known gaps) |
 | typeface | face required: none (LR 5.2(a) sets only a 12-point minimum; LR 7.1(a)(2) names no face; checked on the Court's site 2026-10-15). Substitute: none needed; EB Garamond kept. Fit: n/a. |
-| render | ok: `usage/OUTPUT-idd-motion-brief-tarbell.typst.pdf`, 11 pages, letter, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold embedded only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, letter, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold embedded only, no warnings |
 | overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF (`usage/SAMPLE-tarbell-group-…pdf`), which is not in this snapshot (`usage/` holds only `SOURCE.md`). The `.txt` page map is from the earlier run and is stale against this render; regenerate once the exemplar is restored. |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed on the 2026-10-15 re-render; no template change since the last review) |
 
 ## Commands
 
 ```
-sh tools/render.sh courts/ninth-circuit/idaho/federal/district/motion-brief usage/INPUT-idd-motion-brief-tarbell.md
+sh tools/render.sh courts/ninth-circuit/idaho/federal/district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/ninth-circuit/idaho/federal/district/motion-brief tarbell-motion-brief \
-  courts/ninth-circuit/idaho/federal/district/motion-brief/usage/SAMPLE-idd-motion-brief-tarbellgroup125cv00144.pdf
+  courts/ninth-circuit/idaho/federal/district/motion-brief/usage/FILED-EXAMPLE-motion-brief.pdf
 ```
 
 File names follow the tools, not the brief's shorthand: `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf` and `.txt`. The sample is `INPUT-<id>.md` and the id is `tarbell-motion-brief`. `tools/` is not edited.
@@ -78,7 +78,7 @@ The pairs are close but not aligned page for page: our render is 11 pages and th
 
 ## Page review (Gate 2 equivalent)
 
-Every page of `OUTPUT-idd-motion-brief-tarbell.typst.pdf` was rendered at 60 dpi and viewed after the last template change.
+Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed after the last template change.
 
 | Page | Result |
 |---|---|
@@ -116,7 +116,7 @@ Every page of `OUTPUT-idd-motion-brief-tarbell.typst.pdf` was rendered at 60 dpi
 
 ## Engines
 
-Docx engine (`docx/`): `make-reference.sh` builds `docx/reference.docx` (run once; it unpacks in a temp dir), `idd.lua` writes the cover, the signature block and the certificate of service. Output: `usage/OUTPUT-idd-motion-brief-tarbell.docx`.
+Docx engine (`docx/`): `make-reference.sh` builds `docx/reference.docx` (run once; it unpacks in a temp dir), `idd.lua` writes the cover, the signature block and the certificate of service. Output: `usage/OUTPUT-motion-brief.docx`.
 
 What the docx sets (in styles.xml, sectPr and footer1.xml; set, not rendered: no LibreOffice on the build box):
 - Page: US Letter, 1 inch margins, footer 0.4 inch from the bottom edge.

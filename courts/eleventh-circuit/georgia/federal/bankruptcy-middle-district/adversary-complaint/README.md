@@ -4,9 +4,9 @@ Doc type: **adversary-complaint** (a complaint commencing an adversary proceedin
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-gamb-adversary-complaint-galardi2205008.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-gamb-adversary-complaint-galardicomplaint.md` (caption, all 96 numbered paragraphs, prayer, signature block) |
-| render | ok: `usage/OUTPUT-gamb-adversary-complaint-galardicomplaint.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (caption, all 96 numbered paragraphs, prayer, signature block) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-galardi-complaint.pdf` and `OVERLAY-galardi-complaint.txt` |
 | pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed; pages 1-2 and 13-14 viewed again after the final changes; all 14 re-rendered and viewed again 2026-10-14 in the fonts pass, no change) |
 
@@ -55,11 +55,11 @@ Not produced by this template, and why:
 Build and check (from the repo root, with the toolchain on PATH: `export PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-gamb-adversary-complaint-galardicomplaint.md
+sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint galardi-complaint
 ```
 
-- `usage/OUTPUT-gamb-adversary-complaint-galardicomplaint.typst.pdf` is the render. The file names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-` and `OVERLAY-` prefixes), not the `<id>.pdf` and `<id>-overlay.pdf` names in the task brief, because those tools are shared and fix the names.
+- `usage/OUTPUT-adversary-complaint.typst.pdf` is the render. The file names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-` and `OVERLAY-` prefixes), not the `<id>.pdf` and `<id>-overlay.pdf` names in the task brief, because those tools are shared and fix the names.
 - `usage/OVERLAY-galardi-complaint.pdf` (red = our render, blue = exemplar, black = both) and `.txt` (the page map). The page map pairs pages by word overlap, which is coarse: our pages 3-4 pair with filed pages 4 and 6, and so on. It is a diagnostic, not a score.
 
 ## Visual review (Gate 2 record, all 14 pages, rendered at 60 dpi and viewed)
@@ -99,10 +99,10 @@ Numbering check: the sample's COUNT I begins at ¶63 and COUNT II at ¶81, which
 The typst template above is the primary engine. The docx engine is in `docx/`: `reference.docx` (built by `docx/make-reference.sh`), `gamb.lua` (the caption, the title, the numbering of the paragraphs, the "(a)" sub-items, the WHEREFORE and the signature blocks) and `render.sh` (pandoc with `--from markdown+smart-fancy_lists`, so a typed "(a)" stays text). Build and check:
 
 ```sh
-sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-gamb-adversary-complaint-galardicomplaint.md
+sh tools/render.sh --engine docx courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-adversary-complaint.md
 ```
 
-This writes `usage/OUTPUT-gamb-adversary-complaint-galardicomplaint.docx` and `usage/OUTPUT-gamb-adversary-complaint-galardicomplaint.docx.pdf` (LibreOffice 26.8, EB Garamond from `fonts/eb-garamond`).
+This writes `usage/OUTPUT-adversary-complaint.docx` and `usage/OUTPUT-adversary-complaint.docx.pdf` (LibreOffice 26.8, EB Garamond from `fonts/eb-garamond`).
 
 - **Matches the typst render:** EB Garamond 13 pt; letter; 1-inch margins; body double-spaced (24 pt exact) with a half-inch first-line indent; headings centered bold (level 1), bold (level 2), bold italic (level 3); the Form 416D caption as a table with a rule on the right and bottom of the party column; the court lines and title; paragraphs after the first heading numbered 1, 2, ... ; "(a)" sub-items with a hanging label; the WHEREFORE paragraph kept with the signature blocks; a centered page number on every page.
 - **Differs:** the docx PDF is 16 pages against 14 for typst. LibreOffice places the first line of an exact 24 pt line about 6 pt lower than typst, so a page holds about one line fewer. The WHEREFORE and signature chain moves as one, so page 15 holds only ¶ 96. No rule sets a page count here. Word may paginate differently again (docs/DOCX.md). The numbers are typed text, as in the typst template, not Word list numbering.

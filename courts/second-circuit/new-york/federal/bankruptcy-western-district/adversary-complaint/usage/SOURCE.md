@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nywb-adversary-complaint-wallachrothstein11101078.pdf` (8 pages; text layer present, `pdftotext` yields text; fonts are Helvetica, not embedded)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (8 pages; text layer present, `pdftotext` yields text; fonts are Helvetica, not embedded)
 - Court: United States Bankruptcy Court, Western District of New York
 - Case: *In re Nanodynamics, Inc.*, Case No. 09-13438K (Chapter 7, Hon. Michael J. Kaplan); adversary proceeding *Wallach v. Rothstein*, Adv. Pro. No. 11-01078 (MJK)
 - Document: "Adversary Complaint for (i) Avoidance and Recovery of Preferential and Fraudulent Transfers and (ii) Disallowance of Claims" (ECF Doc 1 in the adversary; `Doc 1, Filed 07/13/11`)
@@ -16,7 +16,7 @@ Second filer: not collected in this pass. Other nywb adversary complaints checke
 
 ## 2. Advisory Trust Group (RDC Liquidating Trust) v. Tracelink Inc.
 
-- File: `SAMPLE-nywb-adversary-complaint-advisorytrust22202037.pdf` (10 pages; text layer present, `pdftotext` yields text; fonts Helvetica and Courier variants, not embedded; 175,719 bytes)
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf` (10 pages; text layer present, `pdftotext` yields text; fonts Helvetica and Courier variants, not embedded; 175,719 bytes)
 - Court: United States Bankruptcy Court, Western District of New York
 - Case: *In re Rochester Drug Co-Operative, Inc.*, Case No. 20-20230 (PRW), Chapter 11; adversary proceeding Adv. Proc. No. 2-22-02037 (PRW) (ECF stamp `Case 2-22-02037-PRW`). CourtListener's docket title for this number is "Advisory Trust Group, LLC v. TXX Services, Inc."; the filed complaint itself names the defendant as Tracelink Inc.
 - Document: "Complaint for Avoidance and Recovery of Preferential Transfers and Objection to Claims" (ECF Doc 1 in the adversary; `Doc 1, Filed 02/03/22`). Includes a Rule 7008 consent statement (¶ 8).
@@ -29,7 +29,7 @@ Second filer: not collected in this pass. Other nywb adversary complaints checke
 
 ## 3. The Diocese of Rochester v. The Continental Insurance Company et al.
 
-- File: `SAMPLE-nywb-adversary-complaint-rochesterdiocese21902021.pdf` (13 pages; text layer present, `pdftotext` yields text; fonts Times-Roman, Times-Bold, Helvetica not embedded, LiberationSans subset embedded; 230,205 bytes)
+- File: `FILED-EXAMPLE-adversary-complaint-3.pdf` (13 pages; text layer present, `pdftotext` yields text; fonts Times-Roman, Times-Bold, Helvetica not embedded, LiberationSans subset embedded; 230,205 bytes)
 - Court: United States Bankruptcy Court, Western District of New York
 - Case: *In re The Diocese of Rochester*, Case No. 19-20905, Chapter 11; adversary proceeding No. 2-19-02021 (PRW) (ECF stamp `Case 2-19-02021-PRW`)
 - Document: "Complaint" (breach of contract and declaratory judgment against the Diocese's insurers; ECF Doc 1 in the adversary, `Doc 1, Filed 11/14/19`). States "core proceeding" (¶ 20); no Rule 7008 consent statement found in the text layer.

@@ -5,9 +5,9 @@ Folder: `courts/fifth-circuit/louisiana/federal/eastern-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-laed-motion-brief-walker226cv00726.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-laed-motion-brief-walker.md` (the whole memorandum, 9 pages in the filing) |
-| render | ok: `usage/OUTPUT-laed-motion-brief-walker.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (the whole memorandum, 9 pages in the filing) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-walker-motion-brief.pdf` and `OVERLAY-walker-motion-brief.txt` (page map; re-run 2026-10-14 against a copy of the exemplar fetched from the URL in `usage/SOURCE.md`, not committed) |
 | page limit | LR 7.7 (25 pages) is enforced by the build: a 27-page test memorandum fails with the rule's message (checked 2026-10-14) |
 | typeface | Rule names no face (LR 10.1 "standard font"). EB Garamond kept, per `docs/FONTS.md` ("No face named"). Not metric-compatible with the exemplar's Times New Roman; see known gap 1. |
@@ -106,7 +106,7 @@ Our pages 4 to 8 pair with filed pages 5 to 9, so filed page 4 is not paired wit
 
 ## Engines
 
-Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default, `laed-motion-brief.lua` is the filter, and `render.sh` runs pandoc (`tools/render-docx.sh` calls it). Output: `usage/OUTPUT-laed-motion-brief-walker.docx`. The LibreOffice PDF, `usage/OUTPUT-walker-motion-brief.docx.pdf`, was not produced (see BLOCKED).
+Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default, `laed-motion-brief.lua` is the filter, and `render.sh` runs pandoc (`tools/render-docx.sh` calls it). Output: `usage/OUTPUT-motion-brief.docx`. The LibreOffice PDF, `usage/OUTPUT-walker-motion-brief.docx.pdf`, was not produced (see BLOCKED).
 
 | Engine | Status |
 |---|---|
@@ -124,7 +124,7 @@ Typst is the primary engine. The DOCX engine is `docx/`: `build-reference.sh` ma
 
 **docx BLOCKED items**
 
-- `docx.pdf`, Gates 0 and 1, the LR 7.7 page count and the page review: BLOCKED. The LibreOffice 25.2 build unpacked from Debian trixie debs (no root here) aborts at startup with `com::sun::star::uno::DeploymentException`: the extracted packages have no `libdeploymentlo.so`. No PDF was produced, so no check ran. Unblock: install LibreOffice so it runs on this box, then `sh tools/render.sh --engine docx <this folder> usage/INPUT-laed-motion-brief-walker.md`.
+- `docx.pdf`, Gates 0 and 1, the LR 7.7 page count and the page review: BLOCKED. The LibreOffice 25.2 build unpacked from Debian trixie debs (no root here) aborts at startup with `com::sun::star::uno::DeploymentException`: the extracted packages have no `libdeploymentlo.so`. No PDF was produced, so no check ran. Unblock: install LibreOffice so it runs on this box, then `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`.
 - `tools/check.sh --engine docx`: not run. It needs `court.json` and `rules.md` in the folder (known gap 9). The check stamp `usage/.check-docx.txt` was not written.
 - The LibreOffice conversion needs EB Garamond visible to fontconfig (DOCX.md, "Fonts").
 

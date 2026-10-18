@@ -7,12 +7,12 @@ Exemplar: one real, text-layer filed memorandum in support of a motion, from thi
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-sdb-motion-brief-northernbeefpackers1310118.pdf` (15 pages, one filer), sourced in `usage/SOURCE.md` |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (15 pages, one filer), sourced in `usage/SOURCE.md` |
 | typeface | **No face required; EB Garamond kept.** Bankr. D.S.D. R. 9004-1(a)(1) (June 2024 local rules, text checked with `pdftotext`) requires "one simple font" and names no face. The only face named in the local rules is Appendix 1F's creditor-mailing-list bullet ("Universal, Times New Roman, or Courier"), which governs the mailing list, not this document. So no substitute from `docs/FONTS.md` is needed: the template keeps EB Garamond (the "No face named" row). Fit: n/a. Re-checked 2026-10-14 (fonts pass, `fb-595.7.5.21`). |
-| sample md | `usage/INPUT-sdb-motion-brief-northernbeefpackers.md`: transcription of the whole filing (caption, title, body, footnotes 1 to 3, conclusion, signature). TIN shown as last four digits. |
-| render | ok: `usage/OUTPUT-sdb-motion-brief-northernbeefpackers.typst.pdf` (9 pages), `tools/render.sh`, vendored EB Garamond only, zero typst warnings. |
+| sample md | `usage/INPUT-motion-brief.md`: transcription of the whole filing (caption, title, body, footnotes 1 to 3, conclusion, signature). TIN shown as last four digits. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` (9 pages), `tools/render.sh`, vendored EB Garamond only, zero typst warnings. |
 | overlay | ok: `usage/OVERLAY-northern-beef-packers.pdf` and `.txt` (`tools/overlay.sh`); page pairing by text: ours 1-9 with filed 1, 2, 5, 7, 8, 10, 12, 14, 15. |
-| pages reviewed | 9 of 9 of `OUTPUT-sdb-motion-brief-northernbeefpackers.typst.pdf`, each rasterized at 70 dpi and viewed in its final state. |
+| pages reviewed | 9 of 9 of `OUTPUT-motion-brief.typst.pdf`, each rasterized at 70 dpi and viewed in its final state. |
 
 ## Governing rules
 
@@ -72,7 +72,7 @@ Markdown contract (frontmatter; the body is blank-line-separated chunks):
 
 ## Gate 2 review (current PDF)
 
-sha256 of `usage/OUTPUT-sdb-motion-brief-northernbeefpackers.typst.pdf`: `d865e31d3bec85be518f1c573fe183b5533201b8fcb915c54e69b5c77afd922b` (re-rendered and re-reviewed 2026-10-15; 9 pages, all 9 viewed as PNG at 60 dpi; same content as the 2026-10-14 render)
+sha256 of `usage/OUTPUT-motion-brief.typst.pdf`: `d865e31d3bec85be518f1c573fe183b5533201b8fcb915c54e69b5c77afd922b` (re-rendered and re-reviewed 2026-10-15; 9 pages, all 9 viewed as PNG at 60 dpi; same content as the 2026-10-14 render)
 
 Pairing from `usage/OVERLAY-northern-beef-packers.txt` (by text): ours 1 = filed 1; ours 2 = filed 2; ours 3 = filed 5; ours 4 = filed 7; ours 5 = filed 8; ours 6 = filed 10; ours 7 = filed 12; ours 8 = filed 14; ours 9 = filed 15. Word overlap per page: 89%, 56%, 54%, 53%, 63%, 67%, 53%, 72%, 62%. Word overlap is low on most pages because our render is single spaced and the filing is double spaced, so the same words sit on fewer, longer pages; it is a pairing aid, not a score.
 
@@ -105,9 +105,9 @@ OPEN (tier 2, decision for David): **line spacing.** The filing is double spaced
 
 ## Engines
 
-Typst (`typst/`) is the primary engine and the reference for the court's form. This section covers the docx engine: `docx/reference.docx` (built by `docx/make-reference.sh`) and `docx/sdb-motion-brief.lua`, following `docs/DOCX.md`. Run: `sh tools/render.sh --engine docx motion-brief usage/INPUT-sdb-motion-brief-northernbeefpackers.md`.
+Typst (`typst/`) is the primary engine and the reference for the court's form. This section covers the docx engine: `docx/reference.docx` (built by `docx/make-reference.sh`) and `docx/sdb-motion-brief.lua`, following `docs/DOCX.md`. Run: `sh tools/render.sh --engine docx motion-brief usage/INPUT-motion-brief.md`.
 
-- **Written:** `usage/OUTPUT-sdb-motion-brief-northernbeefpackers.docx` (pandoc, from the same frontmatter and body as the typst render). It is a valid zip of well-formed XML parts; the render then stops at the LibreOffice conversion (see BLOCKED).
+- **Written:** `usage/OUTPUT-motion-brief.docx` (pandoc, from the same frontmatter and body as the typst render). It is a valid zip of well-formed XML parts; the render then stops at the LibreOffice conversion (see BLOCKED).
 - **Matches the typst form (by construction, not yet by look):** US Letter, 1 inch margins; EB Garamond 12 pt; line pitch 13.8 pt exact (the typst leading, measured on the typst render with `pdftohtml -xml`); 0.5 inch first-line indent on body paragraphs; headings centered bold (`#`) and bold left (`##`); caption as a borderless three-column table with the typst row structure (party, `)` column, numbers), `Bankr. No.`, `Chapter`, `Hon.` and hearing lines, debtor blocks, `Debtor.`/`Debtors.`; the title; the opening sentence (movant, relief, basis); the signature at 3.25 inch with the last paragraph kept with it; the certificate when the frontmatter gives one; a 10 pt centered page number (PAGE field) in the footer; footnotes at 10 pt.
 - **Differs or unverified:** the caption table's borders and row heights, the spacing collapse between paragraphs and blocks (Word adds before and after spacing; typst uses the larger), and the list indentation (pandoc numbering, not typst's) have not been looked at on a page image. The Word-native pagination may differ from typst's; the docx pages cannot be counted here.
 - **BLOCKED (docx.pdf checks, all of `check.sh --engine docx` Gates 0 to 3):** the LibreOffice PDF of the `.docx` cannot be made on this box. `soffice` is not installed; conda-forge has no LibreOffice package; the Debian LibreOffice packages install but fail to start because LibreOffice's internal `libi18nlangtag` and `libjvm*` libraries are not in them. So no `.docx.pdf` exists, no page was rendered or reviewed in the docx engine, and no `.check-docx.txt` stamp is written. Owner: whoever has a box with LibreOffice; rerun `sh tools/render.sh --engine docx` there, then review every page.
@@ -115,5 +115,5 @@ Typst (`typst/`) is the primary engine and the reference for the court's form. T
 ## Loop log
 
 - Iteration 1: built the template from the rules; rendered a fictional main-case sample. Exemplar search: no usable filing found; BLOCKED.
-- Iteration 2 (2026-10-14): new CourtListener search (sdb, RECAP) found *Northern Beef Packers*, Doc 134, a 15-page text-layer memorandum in support of a debtor's motion. Added the judge and hearing lines to the caption (optional frontmatter). Transcribed the filing as `usage/INPUT-sdb-motion-brief-northernbeefpackers.md` (replacing the fictional sample). Rendered (9 pages), overlaid, and viewed all 9 pages. Fixed one defect the overlay review exposed: the signature block stood alone on page 9; a final body paragraph now stays with the signature block.
-- Iteration 3 (2026-10-15, depth pass): checked the transcription against the exemplar text layer (`pdftotext` of the 15-page filing): every content word of the filing appears in `usage/INPUT-sdb-motion-brief-northernbeefpackers.md` except running headers (`district`, `document`, `united`, `dated`) and words split across line ends (`longterm`, `nondefault`, `openended`, `oversecured`). The transcription already carries the full structure (caption, title, headings, footnotes, conclusion, signature block), so no depth was added. Re-rendered (9 pages, typst, no warnings, EB Garamond only embedded) and re-ran the overlay against the filing fetched to a scratch directory (sha256 matches `SOURCE.md`); viewed pages 1 to 9. No template defect found. OPEN spacing item above is unchanged and is for David to decide.
+- Iteration 2 (2026-10-14): new CourtListener search (sdb, RECAP) found *Northern Beef Packers*, Doc 134, a 15-page text-layer memorandum in support of a debtor's motion. Added the judge and hearing lines to the caption (optional frontmatter). Transcribed the filing as `usage/INPUT-motion-brief.md` (replacing the fictional sample). Rendered (9 pages), overlaid, and viewed all 9 pages. Fixed one defect the overlay review exposed: the signature block stood alone on page 9; a final body paragraph now stays with the signature block.
+- Iteration 3 (2026-10-15, depth pass): checked the transcription against the exemplar text layer (`pdftotext` of the 15-page filing): every content word of the filing appears in `usage/INPUT-motion-brief.md` except running headers (`district`, `document`, `united`, `dated`) and words split across line ends (`longterm`, `nondefault`, `openended`, `oversecured`). The transcription already carries the full structure (caption, title, headings, footnotes, conclusion, signature block), so no depth was added. Re-rendered (9 pages, typst, no warnings, EB Garamond only embedded) and re-ran the overlay against the filing fetched to a scratch directory (sha256 matches `SOURCE.md`); viewed pages 1 to 9. No template defect found. OPEN spacing item above is unchanged and is for David to decide.

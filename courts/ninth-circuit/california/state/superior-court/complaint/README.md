@@ -65,7 +65,7 @@ From the repo root:
 
 ```sh
 export PATH=/work/artifacts/bin:$PATH   # only if typst, poppler and magick are not installed system-wide
-sh tools/render.sh courts/ninth-circuit/california/state/superior-court/complaint usage/INPUT-calsuperct-complaint-sweetwater.md
+sh tools/render.sh courts/ninth-circuit/california/state/superior-court/complaint usage/INPUT-complaint.md
 sh tools/overlay.sh courts/ninth-circuit/california/state/superior-court/complaint sweetwater-complaint
 ```
 
@@ -73,9 +73,9 @@ The render fails on any typst warning. The font is the vendored `Liberation Seri
 
 ## Samples and exemplar
 
-- `usage/INPUT-calsuperct-complaint-sweetwater.md`: transcribed from the exemplar: caption, first page, the introduction (paragraphs 1-3), the first and second causes of action (paragraphs 75-80, abridged), the prayer (items 1-12) and the signature. Paragraphs 4-74 and the rest of the causes of action are not transcribed. Footnote 10 of the exemplar is transcribed as a footnote.
-- `usage/OUTPUT-calsuperct-complaint-sweetwater.typst.pdf`: the render, 5 pages.
-- `usage/OVERLAY-sweetwater-complaint.pdf` and `-overlay.txt`: the red/blue overlay against `usage/SAMPLE-calsuperct-complaint-peoplevsweetwatercare25cu033612n.pdf`. The page map from `overlay.sh`:
+- `usage/INPUT-complaint.md`: transcribed from the exemplar: caption, first page, the introduction (paragraphs 1-3), the first and second causes of action (paragraphs 75-80, abridged), the prayer (items 1-12) and the signature. Paragraphs 4-74 and the rest of the causes of action are not transcribed. Footnote 10 of the exemplar is transcribed as a footnote.
+- `usage/OUTPUT-complaint.typst.pdf`: the render, 5 pages.
+- `usage/OVERLAY-sweetwater-complaint.pdf` and `-overlay.txt`: the red/blue overlay against `usage/FILED-EXAMPLE-complaint.pdf`. The page map from `overlay.sh`:
 
   ```
   ours p.1  filed p.1   word-overlap 72.1%

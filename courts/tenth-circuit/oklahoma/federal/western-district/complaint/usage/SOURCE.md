@@ -1,6 +1,6 @@
 # Exemplar source
 
-- **File:** `SAMPLE-okwd-complaint-caskey526cv02533.pdf` (19 pages, text layer present; `pdftotext` yields the full text)
+- **File:** `FILED-EXAMPLE-complaint.pdf` (19 pages, text layer present; `pdftotext` yields the full text)
 - **Court:** United States District Court for the Western District of Oklahoma (`okwd`)
 - **Case:** *Caskey v. Southwest Airlines Co.*, No. CIV 5:26-cv-02533-PRW
 - **Document:** Dkt. 1, Complaint (the Civil Cover Sheet attachment is not included here)

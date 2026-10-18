@@ -2,7 +2,7 @@
 
 | File | Case | Docket | Filer | Date filed | Fetched |
 |---|---|---|---|---|---|
-| `SAMPLE-ca3-reply-brief-afp262469.pdf` | *Americans For Prosperity Foundation, et al. v. Albence, et al.* | 3d Cir. No. 26-2469 (D. Del. No. 1:26-cv-00445-JLH) | Appellants Americans For Prosperity Foundation and Americans for Prosperity (counsel: Baker & Hostetler LLP) | 2026-08-04 (Dkt. 30, "Reply Brief for Appellants") | 2026-10-14 |
+| `FILED-EXAMPLE-reply-brief.pdf` | *Americans For Prosperity Foundation, et al. v. Albence, et al.* | 3d Cir. No. 26-2469 (D. Del. No. 1:26-cv-00445-JLH) | Appellants Americans For Prosperity Foundation and Americans for Prosperity (counsel: Baker & Hostetler LLP) | 2026-08-04 (Dkt. 30, "Reply Brief for Appellants") | 2026-10-14 |
 
 - Docket page: https://www.courtlistener.com/docket/73496568/30/americans-for-prosperity-foundation-v-anthony-albence/
 - PDF fetched from: https://storage.courtlistener.com/recap/gov.uscourts.ca3.128444/gov.uscourts.ca3.128444.30.0.pdf
@@ -19,7 +19,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca3-reply-brief-unitedstates262028.pdf` |
+| File | `FILED-EXAMPLE-reply-brief-2.pdf` |
 | Court | U.S. Court of Appeals for the Third Circuit |
 | Case | *United States of America v. Griselle LaCosta-Franco* (appeal from an order suppressing evidence, E.D. Pa. Crim. No. 26-027) |
 | Docket / document | No. 26-2028; CourtListener RECAP document 38 (`gov.uscourts.ca3.127928.38.0`) |

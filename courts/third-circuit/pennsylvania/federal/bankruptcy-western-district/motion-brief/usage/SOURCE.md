@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-pawb-motion-brief-bernsteinvmeyerunkovic2102063.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Western District of Pennsylvania
 - Case: *Robert S. Bernstein, as Plan Administrator for the Creditors Trust under the Debtor's confirmed Plan v. Meyer, Unkovic & Scott LLP and Robert E. Dauer, Jr.*, Adv. Proc. No. 21-02063 (main case *In re 5171 Campbells Land Co., Inc.*, Bankr. Case No. 19-22715-CMB, Chapter 11)
 - Document: Brief in Support of Motion to Dismiss (19 pages, ECF Adv. Doc. 26). The motion itself is ECF Adv. Doc. 25 (Motion to Dismiss Adversary Proceeding, with an exhibit certificate of meet and confer and proposed order); this exemplar is the brief.

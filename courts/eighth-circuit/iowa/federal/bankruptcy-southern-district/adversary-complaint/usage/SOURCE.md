@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-iasb-adversary-complaint-sturm2501022.pdf` (8 pages: pages 1-2 are the Adversary Proceeding Cover Sheet, Official Form 1040; pages 3-8 are the complaint)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (8 pages: pages 1-2 are the Adversary Proceeding Cover Sheet, Official Form 1040; pages 3-8 are the complaint)
 - Court: United States Bankruptcy Court, Southern District of Iowa
 - Case: *South Story Bank & Trust v. Lindsay Sturm and Sean Sturm*, Chapter 7, main case 25-01022-lmj7; adversary proceeding no. 25-30028 (number as shown on the CourtListener docket entry; the filed copy's adversary number line is blank)
 - Document: Complaint Objecting to Dischargeability of Debt (11 U.S.C. § 523(a)(6)), with cover sheet

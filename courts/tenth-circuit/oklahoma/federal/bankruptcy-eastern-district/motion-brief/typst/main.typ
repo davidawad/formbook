@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "okeb-motion-brief.typ": okeb-motion-brief, split-frontmatter, inl
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-okeb-motion-brief-gpnbclosingbrief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief-2.md"))
 #let (meta, body) = split-frontmatter(src)
 #okeb-motion-brief(meta, inl(body))

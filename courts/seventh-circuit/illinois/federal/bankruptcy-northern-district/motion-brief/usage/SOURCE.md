@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ilnb-motion-brief-americanhondamartin2010454.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Northern District of Illinois (Eastern Division, Chicago), Judge Baer
 - Case: *In re Brian Martin*, Chapter 7, Case No. 20-10454
 - Document: American Honda Finance Corporation's Memorandum of Law in Support of Its Motion to Dismiss (13 pages), Document 30 (the motion itself is a separate filing and is not in the exemplar)

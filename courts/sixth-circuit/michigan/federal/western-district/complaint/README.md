@@ -5,9 +5,9 @@ Folder: `courts/sixth-circuit/michigan/federal/western-district/complaint/`. Sel
 
 | Item | Status |
 |---|---|
-| exemplar | yes: 2 filers, `usage/SAMPLE-miwd-complaint-googlecalhoun125cv724.pdf` (primary, Goodman Hurwitz & James) and `usage/SAMPLE-miwd-complaint-coheninterlochen126cv2598.pdf` (second filer, Flood Law). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-miwd-complaint-google.md`: a portion of the 42-page filing (7 rendered pages) |
-| render | ok: `usage/OUTPUT-miwd-complaint-google.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: 2 filers, `usage/FILED-EXAMPLE-complaint.pdf` (primary, Goodman Hurwitz & James) and `usage/FILED-EXAMPLE-complaint-2.pdf` (second filer, Flood Law). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-complaint.md`: a portion of the 42-page filing (7 rendered pages) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-google-complaint.pdf` and `usage/OVERLAY-google-complaint.txt` (against the primary exemplar) |
 | typeface | rule names no face (LCivR 10.1 sets size only; checked against the rule text 2026-10-15). Stays EB Garamond (vendored, `fonts/eb-garamond/`); no substitute applies. Embedded: EB Garamond only (`pdffonts`). |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed 2026-10-15; see the review below) |
@@ -15,8 +15,8 @@ Folder: `courts/sixth-circuit/michigan/federal/western-district/complaint/`. Sel
 Build, from the repo root (`PATH` must include the toolchain, see the brief's setup):
 
 ```sh
-sh tools/render.sh courts/sixth-circuit/michigan/federal/western-district/complaint usage/INPUT-miwd-complaint-google.md
-sh tools/overlay.sh courts/sixth-circuit/michigan/federal/western-district/complaint google-complaint usage/SAMPLE-miwd-complaint-googlecalhoun125cv724.pdf
+sh tools/render.sh courts/sixth-circuit/michigan/federal/western-district/complaint usage/INPUT-complaint.md
+sh tools/overlay.sh courts/sixth-circuit/michigan/federal/western-district/complaint google-complaint usage/FILED-EXAMPLE-complaint.pdf
 ```
 
 `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `.txt`. The brief names these `<id>.pdf` and `<id>-overlay.pdf`; the tools (which this box must not edit) use the `OUTPUT-`/`OVERLAY-` names, so those are what is delivered.
@@ -91,7 +91,7 @@ CourtListener search for W.D. Mich. complaints (`court=miwd`, RECAP `type=r`, fi
 
 ## Engines
 
-DOCX (`docx/`): `sh tools/render.sh --engine docx <this folder> usage/INPUT-miwd-complaint-google.md` writes `usage/OUTPUT-miwd-complaint-google.docx` (pandoc + `docx/reference.docx` from `docx/build-reference.sh` + `docx/miwd-complaint.lua`, which builds the cover, caption, counsel block, numbered paragraphs and signature). The zip has no duplicate entries and every XML part is well formed (checked 2026-10-15). The `.docx.pdf` step did not run: soffice is not installed on this box.
+DOCX (`docx/`): `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx` (pandoc + `docx/reference.docx` from `docx/build-reference.sh` + `docx/miwd-complaint.lua`, which builds the cover, caption, counsel block, numbered paragraphs and signature). The zip has no duplicate entries and every XML part is well formed (checked 2026-10-15). The `.docx.pdf` step did not run: soffice is not installed on this box.
 
 - **Matches the typst reference (set in reference.docx and the filter):** letter paper, 1 in margins, EB Garamond 12 pt (vendored; the only font named in the styles), exact 24 pt line pitch for body text, exact 13.8 pt single lines for the caption, counsel and signature, 0.5 in first-line indent, numbered paragraphs 1. onward until the request for relief, lettered items A. onward, headings centered (level 1 bold caps, level 2 bold, level 3 regular), no page number on the cover, centered page number from page 2.
 - **Differs from typst:**

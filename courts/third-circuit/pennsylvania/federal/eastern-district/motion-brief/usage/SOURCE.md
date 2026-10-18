@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Saved file | `SAMPLE-paed-motion-brief-harvie226cv05544.pdf` (38 pages; text layer present; pdffonts: TimesNewRomanPS embedded, Aptos on the first page) |
+| Saved file | `FILED-EXAMPLE-motion-brief.pdf` (38 pages; text layer present; pdffonts: TimesNewRomanPS embedded, Aptos on the first page) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.paed.659151/gov.uscourts.paed.659151.10.0.pdf (RECAP document 10 of docket 2:26-cv-05544; CourtListener search result for "Harvie v. Defending America PAC, Inc.": the case was opened 2026-08-05; this motion is dated 10/06/26) |
 | Case | *Harvie v. Defending America PAC, Inc.* |
 | Court | United States District Court, E.D. Pa. |
@@ -24,9 +24,9 @@ CourtListener REST search, `type=r`, `court_id:paed`, query `"motion to dismiss"
 
 The tier-2 rule asks for two or three exemplars from different filers. Only one motion exemplar was saved (one per doc type, per the brief). **Tier 2 is judged against one filer only.** See the README, "Known gaps".
 
-The overlay pairs against `SAMPLE-paed-motion-brief-harvie226cv05544.pdf` (the first `usage/*.pdf` in the folder).
+The overlay pairs against `FILED-EXAMPLE-motion-brief.pdf` (the first `usage/*.pdf` in the folder).
 
-## 2. Second filer: `SAMPLE-paed-motion-brief-trump224cv05560.pdf`
+## 2. Second filer: `FILED-EXAMPLE-motion-brief-2.pdf`
 
 | Field | Value |
 |---|---|

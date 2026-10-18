@@ -5,10 +5,10 @@ Folder: `courts/seventh-circuit/wisconsin/federal/western-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-wiwd-complaint-olson326cv01012.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-wiwd-complaint-olson.md` (a portion of the 34-page filing: caption, sections I to IV in part, prayer A to F, jury demand, signature) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (a portion of the 34-page filing: caption, sections I to IV in part, prayer A to F, jury demand, signature) |
 | typeface | Face required by the rules: **none named** (W.D. Wis. LR list and Briefing Guidelines checked; see "Not verified" below). Vendored substitute: none needed. Font kept: **EB Garamond** (`docs/FONTS.md`, "No face named"). Times substitute `Liberation Serif` is vendored but not used, since no rule asks for Times. |
-| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-wiwd-complaint-olson.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (pdffonts: EB Garamond Regular, Bold, BoldItalic, all embedded), no warnings |
+| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (pdffonts: EB Garamond Regular, Bold, BoldItalic, all embedded), no warnings |
 | overlay | **not re-run**: the filed exemplar PDF is not in `usage/` in this snapshot (only `SOURCE.md`), so `tools/overlay.sh` cannot run. `usage/OVERLAY-olson-complaint.txt` is the page map from an earlier run against the filed PDF; `OVERLAY-olson-complaint.pdf` is not in the snapshot. |
 | pages reviewed | 9 of 9 re-rendered at 60 dpi and viewed 2026-10-15 (see the review section) |
 
@@ -74,7 +74,7 @@ The overlay is a diagnostic, not a score. Pages 2 to 6 of the sample are paired 
 8. **Not run: `tools/check.sh`, `tools/check-selftest.sh`, `tools/tracker.sh`.** These expect a court folder with `court.json` and `rules.md` in the court directory; this doc-type folder has neither. The brief forbids running the tracker and editing `tools/`. The render and overlay steps were run; the review below is the Gate 2 equivalent.
 9. **Medical detail omitted** from the transcription (filed paragraphs on the plaintiff's health are not transcribed).
 
-## Review of the rendered pages (`OUTPUT-wiwd-complaint-olson.typst.pdf`, 9 pages)
+## Review of the rendered pages (`OUTPUT-complaint.typst.pdf`, 9 pages)
 
 Each page rendered at 60 dpi and viewed after the last template change.
 

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-lawd-motion-brief-lewisharriscounty126cv00172.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Western District of Louisiana (Alexandria Division)
 - Case: *Kim Carlson Lewis, et al. v. Harris County, Texas, et al.*
 - Docket: No. 1:26-cv-00172-DDD-JPM (Document 32-1)

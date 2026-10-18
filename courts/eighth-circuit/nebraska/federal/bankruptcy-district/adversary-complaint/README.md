@@ -5,9 +5,9 @@ Folder: `courts/eighth-circuit/nebraska/federal/bankruptcy-district/adversary-co
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nebraskab-adversary-complaint-metainterbake1808283.pdf` (1 filer, 9 pages; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nebraskab-adversary-complaint-interbake.md` (the whole complaint body and the caption, the signature block, the prayer; the exemplar's footnote 1 is not transcribed, see Known gaps) |
-| render | ok: `usage/OUTPUT-nebraskab-adversary-complaint-interbake.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (1 filer, 9 pages; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (the whole complaint body and the caption, the signature block, the prayer; the exemplar's footnote 1 is not transcribed, see Known gaps) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-interbake-adversary-complaint.pdf` and `OVERLAY-interbake-adversary-complaint.txt` (page map) |
 | typeface | no face required by the rules (checked 2026-10-14, see Decisions); EB Garamond kept, no substitute from `docs/FONTS.md` applies |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last change; see the review section) |
@@ -63,13 +63,13 @@ Body: `# SECTION` (level 1), `## Subheading` (level 2), blank-line-separated par
 
 ## Engines
 
-Three engines, one markdown sample (`usage/INPUT-nebraskab-adversary-complaint-interbake.md`). The typst template is the reference for the layout.
+Three engines, one markdown sample (`usage/INPUT-adversary-complaint.md`). The typst template is the reference for the layout.
 
 | Engine | Files | Status |
 |---|---|---|
-| typst (primary) | `typst/`, `usage/OUTPUT-nebraskab-adversary-complaint-interbake.typst.pdf` | rendered (see above) |
+| typst (primary) | `typst/`, `usage/OUTPUT-adversary-complaint.typst.pdf` | rendered (see above) |
 | latex | none in this folder | not built |
-| docx | `docx/` (`reference.docx`, `nebraskab-adversary-complaint.lua`, `build-reference.sh`, `render.sh`), `usage/OUTPUT-nebraskab-adversary-complaint-interbake.docx` | `.docx` written; `.docx.pdf` BLOCKED (below) |
+| docx | `docx/` (`reference.docx`, `nebraskab-adversary-complaint.lua`, `build-reference.sh`, `render.sh`), `usage/OUTPUT-adversary-complaint.docx` | `.docx` written; `.docx.pdf` BLOCKED (below) |
 
 **docx, what matches the typst template** (the same values, set as Word styles in `reference.docx`): US Letter, 1 in margins; EB Garamond 13 pt; body double spaced (26 pt exact) with a 0.5 in first-line indent; caption, signature and footnotes single spaced (14.3 pt exact); footnotes 11 pt; page number centered in the footer, 11 pt. Caption: the court name, the *In re* block with a rule under it, the parties with "v.", and the chapter, case and adversary lines on the right, in a borderless three-column table (3.4 in, 0.25 in gutter, 2.85 in). Level-1 headings centered bold capitals; level-2 headings centered bold. Allegations numbered 1, 2, ... from the first heading to the prayer; the intro and the prayer unnumbered. Prayer items lettered (a), (b), ... with a hanging indent. The signature block (Dated; Respectfully submitted; each signer) is kept on one page. The FRBP 7008(a) consent check and the § no-break spacing are the same as in the typst template.
 

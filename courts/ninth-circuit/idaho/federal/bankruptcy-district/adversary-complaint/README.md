@@ -5,10 +5,10 @@ Complete doc-type folder: template, sample, exemplar, render, overlay. Court-lev
 ## Layout
 
 - `typst/main.typ` entrypoint; `typst/idb-adversary-complaint.typ` template (parameters at the top; each is cited to the rule it follows).
-- `usage/INPUT-idb-adversary-complaint-cutting.md` transcribed sample (frontmatter: caption, counsel, lead-in, signature; body: `## ` headings, numbered allegations, `# COUNT` and `# PRAYER` headings, `- ` lettered items).
-- `usage/OUTPUT-idb-adversary-complaint-cutting.typst.pdf` our render (9 pages), from `sh tools/render.sh <this-dir> usage/INPUT-idb-adversary-complaint-cutting.md`.
+- `usage/INPUT-adversary-complaint.md` transcribed sample (frontmatter: caption, counsel, lead-in, signature; body: `## ` headings, numbered allegations, `# COUNT` and `# PRAYER` headings, `- ` lettered items).
+- `usage/OUTPUT-adversary-complaint.typst.pdf` our render (9 pages), from `sh tools/render.sh <this-dir> usage/INPUT-adversary-complaint.md`.
 - `usage/OVERLAY-cutting-adversary-complaint.pdf` and `.txt`, from `sh tools/overlay.sh <this-dir> cutting-adversary-complaint`.
-- `usage/SAMPLE-idb-adversary-complaint-cutting2507006.pdf` the filed complaint (32 pages); provenance in `usage/SOURCE.md`.
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf` the filed complaint (32 pages); provenance in `usage/SOURCE.md`.
 
 ## Rules followed (primary sources, fetched 2026-10-14)
 

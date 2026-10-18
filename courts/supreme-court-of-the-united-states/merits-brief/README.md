@@ -28,7 +28,7 @@ Source: Rules of the Supreme Court of the United States, adopted February 17, 20
 ## Layout
 
 - `typst/main.typ` entry; `typst/merits-brief.typ` the template (content-agnostic; all numbers are named parameters at the top).
-- `usage/INPUT-scotus-merits-brief-inregrandjury.md` the sample (markdown with a YAML frontmatter). Its contract, in brief:
+- `usage/INPUT-merits-brief.md` the sample (markdown with a YAML frontmatter). Its contract, in brief:
   - frontmatter: `docket`, `caption` (lines), `proceeding`, `brief_title`, `counsel` (groups of `names` and `lines`; put `*Counsel of Record*` as a name line under the counsel of record), `questions`, `parties`, optional `disclosure`, `authorities` (key: `{kind, name, cite}`; `cite` optional; kinds `case`, `constitution`, `statute`, `regulation`, `rule`, `other`), `signature` (`signer`, `lines`), optional `date`.
   - body: `# HEADING` is a centered bold section heading; `## I. Point` and `### A. Subpoint` are hanging-indent headings. Type the numbers yourself (not generated). Headings are typed in capitals by the author.
   - citations: `[*Upjohn Co. v. United States*, 449 U.S. 383, 389 (1981)](toa:upjohn)`. Every `toa:` key must be in `authorities`, and every authority must be cited (the template panics otherwise).
@@ -39,15 +39,15 @@ Source: Rules of the Supreme Court of the United States, adopted February 17, 20
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick
-sh tools/render.sh courts/supreme-court-of-the-united-states/merits-brief usage/INPUT-scotus-merits-brief-inregrandjury.md
+sh tools/render.sh courts/supreme-court-of-the-united-states/merits-brief usage/INPUT-merits-brief.md
 sh tools/overlay.sh courts/supreme-court-of-the-united-states/merits-brief in-re-grand-jury
 ```
 
-`render.sh` ran with `--ignore-system-fonts` and produced no typst warnings. Output: `usage/OUTPUT-scotus-merits-brief-inregrandjury.typst.pdf`, 16 pages at 441 x 666 pt (13 pages in EB Garamond before the change; the wider Century-family face runs longer). Fonts embedded: TeXGyreSchola Regular, Bold, Italic only (`pdffonts`).
+`render.sh` ran with `--ignore-system-fonts` and produced no typst warnings. Output: `usage/OUTPUT-merits-brief.typst.pdf`, 16 pages at 441 x 666 pt (13 pages in EB Garamond before the change; the wider Century-family face runs longer). Fonts embedded: TeXGyreSchola Regular, Bold, Italic only (`pdffonts`).
 
 ## Exemplar
 
-- `usage/SAMPLE-scotus-merits-brief-inregrandjury211397.pdf`: "Brief for the Petitioner", *In re Grand Jury*, No. 21-1397, filed by the petitioner (counsel of record Daniel B. Levin, Munger, Tolles & Olson LLP). 53 pages. Text layer present. Set in New Century Schoolbook (embedded Type 1C), the Rule 33.1(b) family. Source and fetch record in `usage/SOURCE.md`. The PDF was re-fetched from the URL in that file on 2026-10-15 (it was missing from the snapshot).
+- `usage/FILED-EXAMPLE-merits-brief.pdf`: "Brief for the Petitioner", *In re Grand Jury*, No. 21-1397, filed by the petitioner (counsel of record Daniel B. Levin, Munger, Tolles & Olson LLP). 53 pages. Text layer present. Set in New Century Schoolbook (embedded Type 1C), the Rule 33.1(b) family. Source and fetch record in `usage/SOURCE.md`. The PDF was re-fetched from the URL in that file on 2026-10-15 (it was missing from the snapshot).
 - Only one filer. A second merits brief (a respondent's, or a different petitioner's) was not located, so the tier-2 comparison is against one exemplar. This is a gap against the two-or-three-filers bar in the tier rules.
 
 Exemplar format facts (for comparison, not copied): the e-filed PDF is US Letter (612 x 792 pt) with the booklet-proportioned text block centered on the page. The template renders the booklet size itself, as Rule 33.1(a) requires.
@@ -79,7 +79,7 @@ The overlay is a diagnostic, not a score. The low pairings on pages 5, 15 and 16
 
 ## Gate 2: page-by-page visual review
 
-Every page of `OUTPUT-scotus-merits-brief-inregrandjury.typst.pdf` (16 pages, TeX Gyre Schola) was rasterized at 80 dpi and viewed on the final render.
+Every page of `OUTPUT-merits-brief.typst.pdf` (16 pages, TeX Gyre Schola) was rasterized at 80 dpi and viewed on the final render.
 
 - p.1 cover: docket top, court, caption, proceeding, title, counsel groups in two columns at the foot. One page. Accepted.
 - p.2 questions presented (roman i): alone on the page, as Rule 24.1(a) requires. Accepted.
@@ -115,7 +115,7 @@ Every page of `OUTPUT-scotus-merits-brief-inregrandjury.typst.pdf` (16 pages, Te
 
 ## Engines
 
-Engine status (this box, after the font change): typst `ok`, 16 pages; latex `ok`: `usage/OUTPUT-scotus-merits-brief-inregrandjury.latex.pdf`, 17 pages, embedded fonts TeX Gyre Schola only (not page-reviewed; the review above is the typst render). docx: `usage/OUTPUT-scotus-merits-brief-inregrandjury.docx` regenerated with TeX Gyre Schola; `.docx.pdf` NOT rendered, because `soffice` is not installed on this box.
+Engine status (this box, after the font change): typst `ok`, 16 pages; latex `ok`: `usage/OUTPUT-merits-brief.latex.pdf`, 17 pages, embedded fonts TeX Gyre Schola only (not page-reviewed; the review above is the typst render). docx: `usage/OUTPUT-merits-brief.docx` regenerated with TeX Gyre Schola; `.docx.pdf` NOT rendered, because `soffice` is not installed on this box.
 
 - **latex/** (`template.tex`, `brief.lua`): same booklet geometry and type as the amicus latex. The cover, questions presented and parties pages, TOC, TOA, headings and certificate are built in `brief.lua`. Citations are the body's `toa:<key>` links; each gets a label, and the TOA lists its pages once each. Fonts: TeX Gyre Schola via `fontdir` (`\setmainfont{texgyreschola}`).
 - **What differs from typst:** the LaTeX render is 17 pages to typst's 16; the front matter runs longer. Point headings keep the numerals written in the sample.

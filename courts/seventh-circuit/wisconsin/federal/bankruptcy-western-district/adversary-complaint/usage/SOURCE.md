@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-wiwb-adversary-complaint-wenzel31500105.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | Court | United States Bankruptcy Court, Western District of Wisconsin |
 | Case | *Wenzel v. Green Tree Servicing LLC* (In re Theodore Charles Wenzel, Bankr. No. 13-15445) |
 | Adversary number | 3-15-00105 |

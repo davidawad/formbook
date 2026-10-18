@@ -5,9 +5,9 @@ Folder: `courts/sixth-circuit/michigan/federal/western-district/motion-brief/`. 
 
 | Item | Status |
 |---|---|
-| exemplar | yes: 2 filers, `usage/SAMPLE-miwd-motion-brief-valenzuelaalliance126cv1694.pdf` (primary, Barnes & Thornburg for Alliance Cloud) and `usage/SAMPLE-miwd-motion-brief-coddingtonskopos125cv100.pdf` (second filer, Biles Wilson for Skopos). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-miwd-motion-brief-valenzuelabrief.md`: the full 11-page filing's body (concise statement through conclusion, footnote, signature); TOC generated; TOA not transcribed |
-| render | ok: `usage/OUTPUT-miwd-motion-brief-valenzuelabrief.typst.pdf`, 8 pages (cover, contents, 6 body pages), typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: 2 filers, `usage/FILED-EXAMPLE-motion-brief.pdf` (primary, Barnes & Thornburg for Alliance Cloud) and `usage/FILED-EXAMPLE-motion-brief-2.pdf` (second filer, Biles Wilson for Skopos). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md`: the full 11-page filing's body (concise statement through conclusion, footnote, signature); TOC generated; TOA not transcribed |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages (cover, contents, 6 body pages), typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-valenzuela-brief.pdf` and `usage/OVERLAY-valenzuela-brief.txt` (against the primary exemplar) |
 | typeface | rule names no face (LCivR 10.1 sets size only; checked against the rule text 2026-10-15). Stays EB Garamond (vendored, `fonts/eb-garamond/`); no substitute applies. Embedded: EB Garamond only (`pdffonts`). |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed 2026-10-15; see the review below) |
@@ -15,8 +15,8 @@ Folder: `courts/sixth-circuit/michigan/federal/western-district/motion-brief/`. 
 Build, from the repo root (`PATH` must include the toolchain):
 
 ```sh
-sh tools/render.sh courts/sixth-circuit/michigan/federal/western-district/motion-brief usage/INPUT-miwd-motion-brief-valenzuelabrief.md
-sh tools/overlay.sh courts/sixth-circuit/michigan/federal/western-district/motion-brief valenzuela-brief usage/SAMPLE-miwd-motion-brief-valenzuelaalliance126cv1694.pdf
+sh tools/render.sh courts/sixth-circuit/michigan/federal/western-district/motion-brief usage/INPUT-motion-brief.md
+sh tools/overlay.sh courts/sixth-circuit/michigan/federal/western-district/motion-brief valenzuela-brief usage/FILED-EXAMPLE-motion-brief.pdf
 ```
 
 The tools write `usage/OUTPUT-<id>.pdf` and `usage/OVERLAY-<id>.pdf`/`.txt`. The brief names these `<id>.pdf` and `<id>-overlay.pdf`; the tools (which this box must not edit) use the `OUTPUT-`/`OVERLAY-` names, so those are what is delivered.
@@ -99,7 +99,7 @@ CourtListener search for W.D. Mich. motions and briefs in support of a motion to
 
 ## Engines
 
-DOCX (`docx/`): `sh tools/render.sh --engine docx <this folder> usage/INPUT-miwd-motion-brief-valenzuelabrief.md` writes `usage/OUTPUT-miwd-motion-brief-valenzuelabrief.docx` (pandoc + `docx/reference.docx` from `docx/build-reference.sh` + `docx/miwd-motion-brief.lua`: cover, contents, numbered headings, signature). Three sections: the cover (empty footer), the contents (lower roman), the brief (arabic from 1). The zip has no duplicate entries and every XML part is well formed (checked 2026-10-15). The `.docx.pdf` step did not run: soffice is not installed on this box.
+DOCX (`docx/`): `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx` (pandoc + `docx/reference.docx` from `docx/build-reference.sh` + `docx/miwd-motion-brief.lua`: cover, contents, numbered headings, signature). Three sections: the cover (empty footer), the contents (lower roman), the brief (arabic from 1). The zip has no duplicate entries and every XML part is well formed (checked 2026-10-15). The `.docx.pdf` step did not run: soffice is not installed on this box.
 
 - **Matches the typst reference (set in reference.docx and the filter):** letter paper, 1 in margins, EB Garamond 12 pt (vendored; code styles use vendored Liberation Mono), exact 24 pt body pitch, exact 13.8 pt single lines for the caption, block quotations, footnotes and signature, 0.5 in first-line indent, footnotes 12 pt, heading numbers I., A., 1., a. with hanging indents, the caption with its rule, "ORAL ARGUMENT REQUESTED" at the right of the caption, the title centered below the caption, the signature block kept as one unbreakable row.
 - **Differs from typst:**

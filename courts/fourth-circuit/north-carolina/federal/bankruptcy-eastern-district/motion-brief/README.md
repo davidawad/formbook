@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/north-carolina/federal/bankruptcy-eastern-distric
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nceb-motion-brief-jsmithbarnhill2500084.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nceb-motion-brief-barnhillmemo.md`: the whole 12-page memorandum transcribed (caption, headings, body, quotations, signature, certificate of service) |
-| render | ok: `usage/OUTPUT-nceb-motion-brief-barnhillmemo.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: the whole 12-page memorandum transcribed (caption, headings, body, quotations, signature, certificate of service) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | typeface | rules name no face: EB Garamond kept (`docs/FONTS.md`, "No face named"); no substitute needed. Checked 2026-10-14 against the NCEB Local Rules and Administrative Guide (see Typography). |
 | overlay | ok: `usage/OVERLAY-barnhill-memo.pdf` and `usage/OVERLAY-barnhill-memo.txt` (page map; exemplar copy fetched from CourtListener RECAP on 2026-10-14, 12 pages, matching `usage/SOURCE.md`) |
 | pages reviewed | 10 of 10 (fonts pass, 2026-10-14: every page rendered at 70 dpi and viewed after the re-render) |
@@ -83,7 +83,7 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body.
 
 ## Engines
 
-**docx** (`docx/`: `make-reference.sh` builds `reference.docx`; `nceb-motion-brief.lua` adds the caption with "In re:", the signature block and the certificate of service, and turns a numbered list inside a block quotation into labelled paragraphs). Outputs: `usage/OUTPUT-nceb-motion-brief-barnhillmemo.docx` and `usage/OUTPUT-nceb-motion-brief-barnhillmemo.docx.pdf` (the LibreOffice PDF, the file checked).
+**docx** (`docx/`: `make-reference.sh` builds `reference.docx`; `nceb-motion-brief.lua` adds the caption with "In re:", the signature block and the certificate of service, and turns a numbered list inside a block quotation into labelled paragraphs). Outputs: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (the LibreOffice PDF, the file checked).
 
 What matches the typst output: letter page, 1-inch margins; EB Garamond 12 pt (embedded as EBGaramond Regular, Bold and Italic); body double-spaced at 24 pt exact with a 0.5-inch first-line indent; level 1 headings centered bold caps; level 2 headings bold, flush left, with a 0.5-inch hanging indent; block quotations indented 1 inch both sides and single-spaced, including the numbered list inside the quotation; caption with the rule on its right and bottom edges and the case, chapter and adversary lines; signature block with the date, "Respectfully submitted," at 3 inches, the `/s/` signers and the role line, kept together; certificate of service on its own page with the served lines indented 1 inch and the signer at 3 inches; centered page-number footer.
 
@@ -94,6 +94,6 @@ What differs (tier 2, recorded, not changed):
 - The certificate's space before the signer is a little smaller than in typst.
 - Word is not available here, so the `.docx` was not opened in Word. LibreOffice converted it without error. `unzip -t` passes and all 17 XML parts pass `xmllint --noout`.
 
-Pages reviewed: all 11 pages of `usage/OUTPUT-nceb-motion-brief-barnhillmemo.docx.pdf`, each rendered at 60 dpi and viewed after the last change; typst comparison pages 1 to 10 of the typst render (rendered to /tmp, not to `usage/`).
+Pages reviewed: all 11 pages of `usage/OUTPUT-motion-brief.docx.pdf`, each rendered at 60 dpi and viewed after the last change; typst comparison pages 1 to 10 of the typst render (rendered to /tmp, not to `usage/`).
 
 No docx item is BLOCKED. The court folder has no `checks.yaml`, so no check IDs apply to this doc type yet; the page review above is the only check.

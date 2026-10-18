@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Saved file | `SAMPLE-paed-complaint-murphy226cv07848.pdf` (22 pages, text layer present, pdffonts: TimesNewRoman embedded) |
+| Saved file | `FILED-EXAMPLE-complaint.pdf` (22 pages, text layer present, pdffonts: TimesNewRoman embedded) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.paed.663619/gov.uscourts.paed.663619.1.0.pdf (RECAP document 1 of docket 2:26-cv-07848, reached from https://www.courtlistener.com/docket/74955140/1/murphy-v-lexisnexis-risk-solutions-inc/) |
 | Case | *Murphy v. LexisNexis Risk Solutions, Inc.* |
 | Court | United States District Court, E.D. Pa. |
@@ -28,9 +28,9 @@ CourtListener REST search, `type=r`, `court_id:paed`, query `short_description:c
 
 The tier-2 rule asks for two or three exemplars from different filers. The brief asks for one saved exemplar per doc type. The second-filer candidates (Evenstad, Johnson) were located and their text layers confirmed but not saved, so **tier 2 is judged against one filer only** (see the README, "Known gaps").
 
-The overlay pairs against `SAMPLE-paed-complaint-murphy226cv07848.pdf` (the first `usage/*.pdf` in the folder).
+The overlay pairs against `FILED-EXAMPLE-complaint.pdf` (the first `usage/*.pdf` in the folder).
 
-## 2. Second filer: `SAMPLE-paed-complaint-doe525cv02070.pdf`
+## 2. Second filer: `FILED-EXAMPLE-complaint-2.pdf`
 
 | Field | Value |
 |---|---|

@@ -2,7 +2,7 @@
 
 | File | Case | Docket | Filer | Date filed | Date fetched | URL |
 |---|---|---|---|---|---|---|
-| `SAMPLE-nmcca-opening-brief-miles201300272.pdf` | *United States v. Gregory T. Miles* (LCpl, USMC) | NMCCA No. 201300272 (Panel No. 3) | Jared A. Hernandez, Lieutenant, JAGC, USN, Appellate Defense Counsel, Navy-Marine Corps Appellate Review Activity (for the Appellant) | 16 December 2013 (certificate of filing and service; PDF created 17 Dec 2013) | 2026-10-14 | https://ncsfreedom.org/wp-content/uploads/2019/12/Miles-brief.pdf |
+| `FILED-EXAMPLE-opening-brief.pdf` | *United States v. Gregory T. Miles* (LCpl, USMC) | NMCCA No. 201300272 (Panel No. 3) | Jared A. Hernandez, Lieutenant, JAGC, USN, Appellate Defense Counsel, Navy-Marine Corps Appellate Review Activity (for the Appellant) | 16 December 2013 (certificate of filing and service; PDF created 17 Dec 2013) | 2026-10-14 | https://ncsfreedom.org/wp-content/uploads/2019/12/Miles-brief.pdf |
 
 Notes on provenance:
 

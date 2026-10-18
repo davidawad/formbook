@@ -4,9 +4,9 @@ Doc type: **adversary complaint** (commencing an adversary proceeding) in the Un
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-meb-adversary-complaint-manhart2601006.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-meb-adversary-complaint-manhart.md` (the whole 5-page complaint, transcribed) |
-| render | ok: `usage/OUTPUT-meb-adversary-complaint-manhart.typst.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (the whole 5-page complaint, transcribed) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-manhart-adversary-complaint.pdf` and `.txt` (page map below) |
 | pages reviewed | 4 of 4 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -85,11 +85,11 @@ Defects found and fixed during review: (1) paragraphs drawn over each other (a b
 
 ## Engines
 
-Typst is the primary engine. This section covers the docx engine (`docx/`): pandoc 3.6.4 with `docx/reference.docx` (the page setup and styles; rebuild with `sh docx/make-reference.sh docx`) and the Lua filter `docx/meb-adversary-complaint.lua` (the cover, caption, numbered paragraphs, relief and signature). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-meb-adversary-complaint-manhart.md`.
+Typst is the primary engine. This section covers the docx engine (`docx/`): pandoc 3.6.4 with `docx/reference.docx` (the page setup and styles; rebuild with `sh docx/make-reference.sh docx`) and the Lua filter `docx/meb-adversary-complaint.lua` (the cover, caption, numbered paragraphs, relief and signature). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`.
 
 | Output | Result |
 |---|---|
-| `usage/OUTPUT-meb-adversary-complaint-manhart.docx` | written; zip and well-formed XML parts pass the `render-docx.sh` integrity check |
+| `usage/OUTPUT-adversary-complaint.docx` | written; zip and well-formed XML parts pass the `render-docx.sh` integrity check |
 | `usage/OUTPUT-manhart-adversary-complaint.docx.pdf` | **not produced**: LibreOffice does not start in the build environment (see BLOCKED below) |
 | pages reviewed in the docx PDF | 0 of 4 (there is no PDF to render; the typst pages are the reference) |
 

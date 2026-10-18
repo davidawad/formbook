@@ -2,6 +2,6 @@
 //   sh tools/render.sh courts/tenth-circuit/new-mexico/federal/bankruptcy-district/motion-brief usage/<id>.md
 #import "nmb-motion-brief.typ": nmb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nmb-motion-brief-fictional.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief-2.md"))
 #let (meta, body) = split-frontmatter(src)
 #nmb-motion-brief(meta, body)

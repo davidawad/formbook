@@ -5,9 +5,9 @@ Folder: `courts/fifth-circuit/mississippi/federal/northern-district/motion-brief
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-msnd-motion-brief-stokes325cv307.pdf` (1 filer, 12 pp; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-msnd-motion-brief-stokes.md` (transcription of the brief: caption, the introduction, facts, standard, the argument with its three headings, conclusion, footnotes 1–3, the signature block and the OF COUNSEL block) |
-| render | ok: `usage/OUTPUT-msnd-motion-brief-stokes.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-msnd-motion-brief-stokes.md`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, 12 pp; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (transcription of the brief: caption, the introduction, facts, standard, the argument with its three headings, conclusion, footnotes 1–3, the signature block and the OF COUNSEL block) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-motion-brief.md`) |
 | overlay | ok: `usage/OVERLAY-stokes-motion-brief.pdf` and `OVERLAY-stokes-motion-brief.txt` (`sh tools/overlay.sh <this dir> stokes-motion-brief`) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -61,7 +61,7 @@ Primary sources: the joint 2024 Local Civil Rules for the Southern and Northern 
 8. **Gates.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md`; this doc-type folder does not have that shape, and the brief forbids touching `tools/`. The gates were not run. Render, overlay and the page review above are the checks for this doc type.
 9. **Footnote 1 is long** (a judicial-notice cite and a parenthetical). It is set at 11 pt, as the rule allows.
 
-## Review of the rendered pages (`OUTPUT-msnd-motion-brief-stokes.typst.pdf`, 11 pages)
+## Review of the rendered pages (`OUTPUT-motion-brief.typst.pdf`, 11 pages)
 
 - Page 1: court title, caption (party column closed by a rule; the right column with "CIVIL ACTION NO.: 3:25-cv-307-GHD-RP"), the title, and the introduction. Pass.
 - Page 2: FACTS heading and the first two fact paragraphs with footnotes 1 and 2 at the foot of the page. Pass.
@@ -85,7 +85,7 @@ The page review checks the layout of the render. Text fidelity to the exemplar r
 
 Two engines are built from the same sample: typst (primary, `typst/`) and docx (`docx/`). This doc type has no latex template yet.
 
-**docx** (`docx/`): `docx/reference.docx` (rebuilt by `sh docx/make-reference.sh`), the Lua filter `docx/msnd-motion-brief.lua`, and `docx/render.sh` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> usage/INPUT-msnd-motion-brief-stokes.md`; it writes `usage/OUTPUT-msnd-motion-brief-stokes.docx` and `usage/OUTPUT-msnd-motion-brief-stokes.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`).
+**docx** (`docx/`): `docx/reference.docx` (rebuilt by `sh docx/make-reference.sh`), the Lua filter `docx/msnd-motion-brief.lua`, and `docx/render.sh` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md`; it writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`).
 
 What matches typst, checked on the LibreOffice PDF:
 

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-gamd-complaint-solen521cv00196.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Middle District of Georgia (Macon Division)
 - Case: *Solen v. Hopebridge, LLC*
 - Docket: No. 5:21-cv-00196-TES (Judge Tilman E. Self, III); Document 1

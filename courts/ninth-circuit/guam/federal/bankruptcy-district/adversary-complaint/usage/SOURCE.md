@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-gub-adversary-complaint-archbishopagana1900001.pdf` (23 pages, text layer present, `pdffonts`: Times, Helvetica, Calibri) |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` (23 pages, text layer present, `pdffonts`: Times, Helvetica, Calibri) |
 | Court | United States Bankruptcy Court, District of Guam (the caption reads "IN THE DISTRICT COURT OF GUAM, TERRITORY OF GUAM, BANKRUPTCY DIVISION") |
 | Case | *Official Committee of Unsecured Creditors v. Archbishop of Agaña, a Corporation Sole*, Adv. Proc. No. 19-00001, main case No. 19-00010 (Chapter 11) |
 | Filer | Official Committee of Unsecured Creditors, by Stinson Leonard Street LLP (Robert T. Kugler, Edwin H. Caldie, Andrew J. Glasnovich; Minneapolis) |

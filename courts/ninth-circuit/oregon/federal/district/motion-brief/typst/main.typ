@@ -5,6 +5,6 @@
 //     typst/main.typ out.pdf
 #import "ord-motion-brief.typ": ord-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ord-motion-brief-zoetisrule12motiontodismiss.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ord-motion-brief(meta, body)

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-arwd-motion-brief-gasper326cv03048.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Western District of Arkansas, Harrison Division
 - Case: *Kurk Gasper v. Steven L. Bruce and Steven Bruce & Associates*
 - Docket: No. 3:26-cv-03048 (Document 7; the motion itself is Document 6)

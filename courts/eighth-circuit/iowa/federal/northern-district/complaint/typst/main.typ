@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "iand-complaint.typ": iand-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-iand-complaint-iowarotocast.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #iand-complaint(meta, body)

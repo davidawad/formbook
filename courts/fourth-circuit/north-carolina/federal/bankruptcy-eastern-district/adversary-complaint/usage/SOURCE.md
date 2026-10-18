@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nceb-adversary-complaint-jsmithsecondwind2500159.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Eastern District of North Carolina, New Bern Division
 - Case: *JSmith Civil, LLC v. Second Wind Consultants, Inc.*, Adversary Proceeding No. 25-00159-5-JNC (main case No. 23-02734-5-JNC, chapter 11)
 - Document: Complaint (38 pages), Doc 1 in the adversary proceeding

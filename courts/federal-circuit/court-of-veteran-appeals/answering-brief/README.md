@@ -2,17 +2,17 @@
 
 - Court: `cavc`, United States Court of Appeals for Veterans Claims (`courts/federal-circuit/court-of-veteran-appeals/`)
 - Doc type: `answering-brief`, the Secretary's brief (Vet. App. R. 28(b), 32). The appellant's brief is `../opening-brief/`.
-- Exemplar: `usage/SAMPLE-cavc-answering-brief-fulton190320.pdf` (*Fulton v. Wilkie*, Vet. App. No. 19-0320, filed 2019-11-18, VA Office of General Counsel). Provenance in `usage/SOURCE.md`. One exemplar only: see Known gaps.
+- Exemplar: `usage/FILED-EXAMPLE-answering-brief.pdf` (*Fulton v. Wilkie*, Vet. App. No. 19-0320, filed 2019-11-18, VA Office of General Counsel). Provenance in `usage/SOURCE.md`. One exemplar only: see Known gaps.
 - Status: template built, rendered, overlay generated, every page reviewed (Gate 2 below). Not reviewed by a human. `court.json` untouched; no status set.
 
 ## Files
 
 | Path | What |
 |---|---|
-| `typst/main.typ` | Entry point; reads `--input sample=...` (default `usage/INPUT-cavc-answering-brief-fulton.md`) and calls `cavc-answering-brief`. |
+| `typst/main.typ` | Entry point; reads `--input sample=...` (default `usage/INPUT-answering-brief.md`) and calls `cavc-answering-brief`. |
 | `typst/cavc-answering-brief.typ` | Template. Same layout code as `../opening-brief/typst/`; `required-sections` is the Rule 28(b) list (summary, argument, conclusion). |
-| `usage/INPUT-cavc-answering-brief-fulton.md` | Markdown sample: frontmatter and a transcribed portion of the brief. |
-| `usage/OUTPUT-cavc-answering-brief-fulton.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-veteran-appeals/answering-brief usage/INPUT-cavc-answering-brief-fulton.md` (11 pages). |
+| `usage/INPUT-answering-brief.md` | Markdown sample: frontmatter and a transcribed portion of the brief. |
+| `usage/OUTPUT-answering-brief.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-veteran-appeals/answering-brief usage/INPUT-answering-brief.md` (11 pages). |
 | `usage/OVERLAY-fulton-answering-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-veteran-appeals/answering-brief fulton-answering-brief` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -49,7 +49,7 @@ Checked and not applicable: no word limit and no certificate of compliance under
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-cavc-answering-brief-fulton.typst.pdf` was rendered at 60 dpi and viewed (11 of 11). Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-answering-brief.typst.pdf` was rendered at 60 dpi and viewed (11 of 11). Typst printed no warnings. Fonts embedded: EB Garamond only.
 
 | Page | Content | Result |
 |---|---|---|
@@ -68,11 +68,11 @@ Every page of `OUTPUT-cavc-answering-brief-fulton.typst.pdf` was rendered at 60 
 
 | Engine | Folder | Output in `usage/` | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-cavc-answering-brief-fulton.typst.pdf` | rendered; Gate 2 above |
-| docx | `docx/` | `OUTPUT-cavc-answering-brief-fulton.docx` (pandoc, `docx/reference.docx`, `docx/cavc.lua`) | `.docx` written; `.docx.pdf` not produced (BLOCKED, below) |
+| typst (primary) | `typst/` | `OUTPUT-answering-brief.typst.pdf` | rendered; Gate 2 above |
+| docx | `docx/` | `OUTPUT-answering-brief.docx` (pandoc, `docx/reference.docx`, `docx/cavc.lua`) | `.docx` written; `.docx.pdf` not produced (BLOCKED, below) |
 | latex | `—` | none | not built |
 
-Build: `sh docx/make-reference.sh` regenerates `docx/reference.docx` from pandoc's default reference; `sh tools/render.sh --engine docx courts/federal-circuit/court-of-veteran-appeals/answering-brief usage/INPUT-cavc-answering-brief-fulton.md` writes the `.docx`. No `checks.yaml` exists for this court yet. `tools/check.sh --engine docx` exits 2 here (no `court.json` in the doc-type folder, and no `yq` on this box), so no gate ran on either engine.
+Build: `sh docx/make-reference.sh` regenerates `docx/reference.docx` from pandoc's default reference; `sh tools/render.sh --engine docx courts/federal-circuit/court-of-veteran-appeals/answering-brief usage/INPUT-answering-brief.md` writes the `.docx`. No `checks.yaml` exists for this court yet. `tools/check.sh --engine docx` exits 2 here (no `court.json` in the doc-type folder, and no `yq` on this box), so no gate ran on either engine.
 
 **docx matches the typst template:**
 

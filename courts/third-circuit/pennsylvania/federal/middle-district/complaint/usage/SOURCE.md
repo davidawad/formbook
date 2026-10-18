@@ -2,7 +2,7 @@
 
 Public court records (RECAP). Used only as visual and structural references. Two filers, so tier 2 can be judged against two exemplars.
 
-## 1. `SAMPLE-pamd-complaint-dillow426cv03021.pdf` (primary; the sample is transcribed from this one)
+## 1. `FILED-EXAMPLE-complaint.pdf` (primary; the sample is transcribed from this one)
 
 - Court: United States District Court, Middle District of Pennsylvania
 - Case: *Jason Dillow v. DRT Transportation, LLC*, No. 4:26-cv-03021-JPW
@@ -14,7 +14,7 @@ Public court records (RECAP). Used only as visual and structural references. Two
 - Text layer: yes (`pdftotext` yields text; Times New Roman, embedded). Type size 14 pt, about 32 pt line pitch.
 - Caption style: colon (":") column.
 
-## 2. `SAMPLE-pamd-complaint-anderson426cv03004.pdf` (second filer; not transcribed, used for the tier-2 comparison)
+## 2. `FILED-EXAMPLE-complaint-2.pdf` (second filer; not transcribed, used for the tier-2 comparison)
 
 - Court: United States District Court, Middle District of Pennsylvania
 - Case: *John Anderson Construction, Inc. v. Encompass Pipeline, LLC*, No. 4:26-cv-03004-MWB (patent infringement)

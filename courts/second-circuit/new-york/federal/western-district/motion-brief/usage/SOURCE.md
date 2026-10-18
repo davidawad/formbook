@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nywd-motion-brief-kerrick626cv06006.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Western District of New York
 - Case: *Kerrick v. Town of Gorham*, No. 6:26-cv-06006 (MAV)
 - Docket: No. 6:26-cv-06006 (Document 6-9; attachment 9 to Document 6, the Motion to Dismiss for Failure to State a Claim)
@@ -16,7 +16,7 @@ Second filer: not collected in this pass. The brief asks for one exemplar per do
 
 ## 2. Second filer (added 2026-10-17)
 
-- File: `SAMPLE-nywd-motion-brief-newyork625cv06226.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Court: United States District Court, Western District of New York
 - Case: *United States v. City of Rochester*, No. 6:25-cv-06226 (FPG-MJP)
 - Docket: document number not shown on this copy (no CM/ECF header stamp; it is the PDFMaker file as submitted). Clearinghouse catalogs it in this case.

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-prb-adversary-complaint-organicpower2000055.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, District of Puerto Rico (`prb`)
 - Case: *Organic Power, LLC v. U.S. Small Business Administration and Jovita Carranza, as Administrator of the U.S. Small Business Administration*, Adv. Proc. No. 20-00055, in Bankr. Case No. 19-01789 (ESL), Chapter 11
 - Document: Adversary proceeding cover sheet (Form B1040), then "Complaint for Declaratory Judgment, Writ of Mandamus, and Injunctive Relief" (pages 3 to 26 of the 96-page PDF; the rest is exhibits A and B and the rest of the filing package). Document 1 of the adversary.
@@ -15,7 +15,7 @@ Second filer: not collected. Two other bankruptcy-court adversary complaints on 
 
 ## 2. Second filer (added 2026-10-17, fb-595.21.1)
 
-- File: `SAMPLE-prb-adversary-complaint-noriegacolombani2200026.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf`
 - Court: United States Bankruptcy Court, District of Puerto Rico (`prb`)
 - Case: *Orlando Noriega Colombani v. Cooperativa de Ahorro y Crédito de Rincón, a/k/a Coop A/C Rincón*, Adv. Proc. No. 22-00026, in Bankr. Case No. 20-03954-MCF, Chapter 13
 - Docket / document: adversary Doc. 1 (RECAP docket entry text: "Adversary case 22-00026. 21 (Validity, priority or extent of lien or other interest in property): Complaint by ORLANDO NORIEGA COLOMBANI against COOPERATIVA DE AHORRO Y CREDITO DE RINCON ... (VARGAS MUNIZ, CARLOS) (Entered: 05/05/2022)")
@@ -31,4 +31,4 @@ Second filer: not collected. Two other bankruptcy-court adversary complaints on 
 
 ## Replacement for the audited non-redistributable-font exemplar
 
-The audited `SAMPLE-prb-adversary-complaint-noriegacolombani2200026.pdf` (Leelawadee UI Semilight) is replaced for font and text-layer comparison by the text-based `SAMPLE-prb-adversary-complaint-organicpower2000055.pdf` from a different filer. See the primary-exemplar record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
+The audited `FILED-EXAMPLE-adversary-complaint-2.pdf` (Leelawadee UI Semilight) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-adversary-complaint.pdf` from a different filer. See the primary-exemplar record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

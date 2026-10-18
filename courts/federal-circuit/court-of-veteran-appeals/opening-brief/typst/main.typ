@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "cavc-opening-brief.typ": cavc-opening-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-cavc-opening-brief-chavez.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-opening-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #cavc-opening-brief(meta, body)

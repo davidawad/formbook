@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-gud-complaint-capfa25cv00020.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court of Guam (`gud`)
 - Case: *CaPFA Capital Corporation v. DB Insurance Company Limited*
 - Docket: No. 1:25-cv-00020 (CIVIL CASE NO. 25-00020), Document 1
@@ -14,7 +14,7 @@
 
 ## Additional exemplar (different filer)
 
-- File: `SAMPLE-gud-complaint-janedoe26cv00017.pdf` (28 pages; searchable text)
+- File: `FILED-EXAMPLE-complaint-2.pdf` (28 pages; searchable text)
 - Court: District Court of Guam
 - Case: *Jane Doe v. Guam Visitors Bureau, et al.*
 - Docket: No. 1:26-cv-00017, Document 1
@@ -28,7 +28,7 @@
 
 ## Third exemplar
 
-- File: `SAMPLE-gud-complaint-us26cv00028.pdf` (6 pages; searchable text)
+- File: `FILED-EXAMPLE-complaint-3.pdf` (6 pages; searchable text)
 - Court: District Court of Guam
 - Case: *United States of America v. Jeida Guam, Inc.*
 - Docket: No. 1:26-cv-00028, Document 1

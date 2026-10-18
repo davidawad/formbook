@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "wyd-complaint.typ": wyd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-wyd-complaint-onq.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #wyd-complaint(meta, body)

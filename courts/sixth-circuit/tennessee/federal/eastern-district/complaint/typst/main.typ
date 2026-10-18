@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "tned-complaint.typ": tned-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-tned-complaint-simpson.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #tned-complaint(meta, body)

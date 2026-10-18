@@ -5,9 +5,9 @@ Folder: `courts/tenth-circuit/utah/federal/district/complaint/`. Self-contained:
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-utd-complaint-fastre126cv00060.pdf` (15 pages, text layer; `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-utd-complaint-fastre.md` (abridged transcription of the exemplar, see Known gaps) |
-| render | ok: `usage/OUTPUT-utd-complaint-fastre.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (15 pages, text layer; `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (abridged transcription of the exemplar, see Known gaps) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | typeface | face required: **none** (DUCivR 10-1(3) names no typeface; checked against the December 2023 text, 2026-10-15). Substitute: none needed. Font: **EB Garamond** kept (`docs/FONTS.md`: a court naming no face keeps EB Garamond). Not metric-compatible with any Times; not applicable here. |
 | overlay | ok: `usage/OVERLAY-fastre-complaint.pdf` and `usage/OVERLAY-fastre-complaint.txt` (`tools/overlay.sh`, exemplar passed as the third argument: see Render and overlay) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-15 in the fonts pass, no change to the template) |
@@ -54,7 +54,7 @@ Not produced by this template (separate filings or documents, not part of the co
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/tenth-circuit/utah/federal/district/complaint usage/INPUT-utd-complaint-fastre.md
+sh tools/render.sh courts/tenth-circuit/utah/federal/district/complaint usage/INPUT-complaint.md
 sh tools/overlay.sh courts/tenth-circuit/utah/federal/district/complaint fastre-complaint /path/to/exemplar.pdf
 ```
 
@@ -96,7 +96,7 @@ Pages reviewed: 9 of 9.
 
 ## Engines
 
-**docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` (pandoc's reference with the styles, footer and section of `typst/utd-complaint.typ`), and the filter `docx/utd-complaint.lua` (cover with counsel block and caption table, numbering of the allegations, numbered prayer items, signature block). `sh tools/render.sh --engine docx <folder> usage/INPUT-utd-complaint-fastre.md` writes `usage/OUTPUT-utd-complaint-fastre.docx`.
+**docx** (`docx/`): `docx/reference.docx`, built by `docx/build-reference.sh` (pandoc's reference with the styles, footer and section of `typst/utd-complaint.typ`), and the filter `docx/utd-complaint.lua` (cover with counsel block and caption table, numbering of the allegations, numbered prayer items, signature block). `sh tools/render.sh --engine docx <folder> usage/INPUT-complaint.md` writes `usage/OUTPUT-complaint.docx`.
 
 - Matches the typst form: Letter; top margin 1 1/2 in, others 1 in; EB Garamond 13 pt; exact 26 pt line spacing for body text; first-line indent 0.5 in; numbered allegations 1 to 53 (none under the Prayer or Jury Demand headings); headings centred bold capitals (level 1) and centred bold (level 2), left bold (level 3); centred page number on every page; caption table with the rule at the right and bottom; "JURY DEMANDED" under the title; signature block.
 - Differs: the caption and signature are Word tables (border and row heights differ slightly between Word and LibreOffice); allegation numbers are typed text, not a list field (they do not renumber when a paragraph is inserted by hand); the spacing between the number and the text is a tab stop, not the typst gap.

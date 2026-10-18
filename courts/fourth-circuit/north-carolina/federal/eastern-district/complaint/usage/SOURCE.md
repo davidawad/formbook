@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nced-complaint-powell526cv00667.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Eastern District of North Carolina, Western Division (`nced`)
 - Case: *Latega Powell v. North Carolina Department of Transportation, et al.*
 - Docket: No. 5:26-cv-00667-FL (Document 1); the "-FL" suffix is the judge-initials suffix printed on the filing

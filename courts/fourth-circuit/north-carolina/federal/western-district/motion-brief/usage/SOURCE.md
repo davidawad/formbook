@@ -1,6 +1,6 @@
 # Exemplar source
 
-- **File:** `SAMPLE-ncwd-motion-brief-noble526cv00006.pdf` (25 pages, text layer present, `pdftotext` yields text)
+- **File:** `FILED-EXAMPLE-motion-brief.pdf` (25 pages, text layer present, `pdftotext` yields text)
 - **URL fetched from:** https://storage.courtlistener.com/recap/gov.uscourts.ncwd.122373/gov.uscourts.ncwd.122373.6.0.pdf
 - **Docket page:** https://www.courtlistener.com/docket/72130574/6/noble-v-town-of-mooresville/
 - **Found via:** CourtListener RECAP search (`type=rd`, `court=ncwd`, q "memorandum in support" "motion to dismiss"); the hit is the document entitled "MEMORANDUM in Support re 5 MOTION to Dismiss" (the memorandum, not the motion)

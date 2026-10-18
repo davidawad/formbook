@@ -1,12 +1,12 @@
 # Exemplar source: Appellate Division answering brief (respondent's brief)
 
-**Result: one filed exemplar saved (search pass 2026-10-16, fb-595.26.22).** `SAMPLE-nyappdiv-answering-brief-nycla202203908.pdf`. The earlier passes (2026-10-14, 2026-10-15) found none; their record is kept below.
+**Result: one filed exemplar saved (search pass 2026-10-16, fb-595.26.22).** `FILED-EXAMPLE-answering-brief.pdf`. The earlier passes (2026-10-14, 2026-10-15) found none; their record is kept below.
 
 ## Exemplar 1
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nyappdiv-answering-brief-nycla202203908.pdf` (52 pages, US letter, text layer present; made in Microsoft Word 2019, NYSCEF stamp added with iText; `pdffonts`: Times New Roman family embedded, Bookman Old Style, Arial Bold, Courier for the stamp) |
+| File | `FILED-EXAMPLE-answering-brief.pdf` (52 pages, US letter, text layer present; made in Microsoft Word 2019, NYSCEF stamp added with iText; `pdffonts`: Times New Roman family embedded, Bookman Old Style, Arial Bold, Courier for the stamp) |
 | Case | *New York County Lawyers Association, et al. v. The State of New York, et al.* (plaintiffs-respondents: the bar associations; defendant-respondent: the State; defendants-appellants: the City of New York, its Department of Finance and its Commissioner) |
 | Court | Supreme Court of the State of New York, Appellate Division, **First** Department |
 | Docket | Appellate No. 2022-03908 (New York County Clerk's Index No. 156916/2021); NYSCEF Doc. No. 17 |

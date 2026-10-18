@@ -8,17 +8,17 @@ Doc type folder for a complaint commencing an adversary proceeding. Engine: typs
 |---|---|
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...` |
 | `typst/utb-adversary-complaint.typ` | The template: parameters, caption, numbered allegations, prayer, signature, verification |
-| `usage/INPUT-utb-adversary-complaint-plaza106verifiedcomplaint.md` | Our transcription of the Plaza 106 verified complaint (frontmatter + body) |
-| `usage/OUTPUT-utb-adversary-complaint-plaza106verifiedcomplaint.typst.pdf` | Our render, `sh tools/render.sh`, 9 pages |
-| `usage/OVERLAY-plaza106-verified-complaint.pdf` / `.txt` | Red (ours) / blue (filed) / black (both) overlay against `SAMPLE-utb-adversary-complaint-plaza1062602063.pdf`, and the page map |
-| `usage/SAMPLE-utb-adversary-complaint-plaza1062602063.pdf` | Filed exemplar, Doc 1, 19 pp. |
-| `usage/SAMPLE-utb-adversary-complaint-clauson2302053.pdf` | Second filed exemplar (different filer), Doc 1, 19 pp. with exhibits; not overlaid |
+| `usage/INPUT-adversary-complaint.md` | Our transcription of the Plaza 106 verified complaint (frontmatter + body) |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | Our render, `sh tools/render.sh`, 9 pages |
+| `usage/OVERLAY-plaza106-verified-complaint.pdf` / `.txt` | Red (ours) / blue (filed) / black (both) overlay against `FILED-EXAMPLE-adversary-complaint.pdf`, and the page map |
+| `usage/FILED-EXAMPLE-adversary-complaint.pdf` | Filed exemplar, Doc 1, 19 pp. |
+| `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` | Second filed exemplar (different filer), Doc 1, 19 pp. with exhibits; not overlaid |
 
 Commands (run from the repo root, toolchain on PATH):
 
 ```
-sh tools/render.sh courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint usage/INPUT-utb-adversary-complaint-plaza106verifiedcomplaint.md
-sh tools/overlay.sh courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint plaza106-verified-complaint courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint/usage/SAMPLE-utb-adversary-complaint-plaza1062602063.pdf
+sh tools/render.sh courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md
+sh tools/overlay.sh courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint plaza106-verified-complaint courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint/usage/FILED-EXAMPLE-adversary-complaint.pdf
 ```
 
 `overlay.sh` with no third argument picks the first PDF in `usage/` alphabetically, which is the Clauson filing. Pass the Plaza file explicitly to overlay the sample in this folder.
@@ -60,7 +60,7 @@ The overlay compares our render with the Plaza 106 filing (Doc 1, 19 pp.) page b
 
 ## Engines
 
-The typst template is the primary form. The DOCX engine is in `docx/` (`reference.docx`, `utb-adversary-complaint.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint usage/INPUT-utb-adversary-complaint-plaza106verifiedcomplaint.md`.
+The typst template is the primary form. The DOCX engine is in `docx/` (`reference.docx`, `utb-adversary-complaint.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/utah/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md`.
 
 **What the docx matches** (the same mandated form as the typst template): EB Garamond 12 pt; exact 24 pt line pitch; 0.5 in first-line indent; letter paper with a 1.5 in top margin and 1 in other margins; centred bold level-1 and level-2 headings; 12 pt single-spaced footnotes; a bottom-centre page number (PAGE field in the footer). The cover is built from the same metadata: counsel block, court title, Form 416D caption (a borderless table with a right and a bottom rule on the party column), title. Numbered allegations: the filter types `1.`, `2.`, ... at 0.5 in with the text at 0.9 in on the first line (a tab stop); the lead-in and the WHEREFORE paragraph are unnumbered; the prayer items `A.`-`H.` hang at 0.9 in. Signature block and verification are borderless tables.
 
@@ -68,6 +68,6 @@ The typst template is the primary form. The DOCX engine is in `docx/` (`referenc
 
 **BLOCKED for the docx engine** (not done on this box):
 - `docx.pdf` (`usage/OUTPUT-plaza106-verified-complaint.docx.pdf`, the LibreOffice PDF on which Gates 0 and 1 are measured): BLOCKED, `soffice` not installed on the box (no conda-forge package, no root).
-- Zip integrity step of `tools/render-docx.sh` (`unzip -tq`): BLOCKED, `unzip` not installed on the box. `tools/render.sh --engine docx` wrote `usage/OUTPUT-utb-adversary-complaint-plaza106verifiedcomplaint.docx` and then exited 1 with `render-docx.sh: unzip: not found` and `not a valid zip`. As a substitute, every XML and rels part was checked with `ziptool` and `xmllint --noout`: all well-formed.
+- Zip integrity step of `tools/render-docx.sh` (`unzip -tq`): BLOCKED, `unzip` not installed on the box. `tools/render.sh --engine docx` wrote `usage/OUTPUT-adversary-complaint.docx` and then exited 1 with `render-docx.sh: unzip: not found` and `not a valid zip`. As a substitute, every XML and rels part was checked with `ziptool` and `xmllint --noout`: all well-formed.
 - Visual review of the docx pages (opened in LibreOffice or Word, no repair prompt): BLOCKED, no LibreOffice and no Word. Pages reviewed: 0. The typst render (9 pages) was reviewed page by page; the docx was not.
 - `sh tools/check.sh <dir> --engine docx` not run to a pass: it needs the `.docx.pdf` (see above), so no `.check-docx.txt` stamp is written.

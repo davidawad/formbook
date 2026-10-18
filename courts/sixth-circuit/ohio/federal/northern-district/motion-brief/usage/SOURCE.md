@@ -3,7 +3,7 @@
 Public court records (PACER RECAP copies on CourtListener). Used as visual and structural references only.
 Two filers (the United States, and an individual defendant), so the tier-2 comparison is not one filer's house style.
 
-## 1. `SAMPLE-ohnd-motion-brief-hammill325cv00462.pdf` (the sample is transcribed from this one)
+## 1. `FILED-EXAMPLE-motion-brief.pdf` (the sample is transcribed from this one)
 
 - Court: United States District Court, Northern District of Ohio, Western Division
 - Case: *Hammill Manufacturing Co. v. United States of America*, No. 3:25-cv-00462-JJH (Helmick, J.)
@@ -15,7 +15,7 @@ Two filers (the United States, and an individual defendant), so the tier-2 compa
 - Date fetched: 2026-10-14
 - Text layer: yes (Times New Roman embedded; footnotes 1 to 3)
 
-## 2. `SAMPLE-ohnd-motion-brief-kinzie125cv01217.pdf` (second filer; used for tier-2 comparison, not transcribed)
+## 2. `FILED-EXAMPLE-motion-brief-2.pdf` (second filer; used for tier-2 comparison, not transcribed)
 
 - Court: United States District Court, Northern District of Ohio, Eastern Division
 - Case: *Kinzie Advanced Polymers, LLC v. Hermanowski, et al.*, No. 1:25-cv-01217-CEF

@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca6-reply-brief-smithvpamtransport245549.pdf` |
+| File | `FILED-EXAMPLE-reply-brief.pdf` |
 | Fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ca6.151627/gov.uscourts.ca6.151627.25.0.pdf |
 | Docket page | https://www.courtlistener.com/docket/69171410/25/thomas-smith-v-pam-transport-inc/ |
 | Court | United States Court of Appeals for the Sixth Circuit |
@@ -27,7 +27,7 @@ headings are in the same face.
 
 ## Additional filer
 
-- File: `SAMPLE-ca6-reply-brief-csvmccrumb241364.pdf` (19 pages, text layer)
+- File: `FILED-EXAMPLE-reply-brief-2.pdf` (19 pages, text layer)
 - Case: *C.S. v. Craig McCrumb et al.*, No. 24-1364
 - Document: Reply Brief of Appellant, Document 32
 - Filer: Plaintiff-Appellant C.S., by Michael F. Smith (The Smith Appellate Law Firm), John R. Monroe (John Monroe Law, P.C.), and Eugene Volokh

@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca1-opening-brief-figueroa241311.pdf` (61 pages) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (61 pages) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ca1.51456/gov.uscourts.ca1.51456.00108262984.1.pdf (CourtListener RECAP archive) |
 | Docket page | https://www.courtlistener.com/docket/70808615/united-states-v-figueroa/ |
 | Case name | *United States v. Mark Anthony Figueroa* (the brief's caption: "United States, Appellee v. Mark Anthony Figueroa, Defendant - Appellant") |
@@ -14,11 +14,11 @@
 | Text layer | Yes: `pdftotext` yields the body, cover, TOC, TOA, certificates. The addendum pages (PDF pp. 48-61) are scanned images with no text layer. |
 | Public record | Yes: a public filing in a federal appeal, downloaded from the RECAP archive. |
 
-## 2. SAMPLE-ca1-opening-brief-acadia221394.pdf
+## 2. FILED-EXAMPLE-opening-brief-2.pdf
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca1-opening-brief-acadia221394.pdf` (75 pages, 1.3 MB) |
+| File | `FILED-EXAMPLE-opening-brief-2.pdf` (75 pages, 1.3 MB) |
 | Court | United States Court of Appeals for the First Circuit |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ca1.49242/gov.uscourts.ca1.49242.107914956.1.pdf (CourtListener RECAP archive) |
 | Docket page | https://www.courtlistener.com/docket/66616324/mundell-v-acadia-hospital-corp/ |

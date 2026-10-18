@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cadc-reply-brief-rosenkellogg245158.pdf` (16 pages, text layer present) |
+| File | `FILED-EXAMPLE-reply-brief.pdf` (16 pages, text layer present) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.cadc.41025/gov.uscourts.cadc.41025.01208715578.0.pdf (CourtListener RECAP archive) |
 | Found via | CourtListener search API, `type=r&court=cadc&q="reply brief for appellant"`, result: appellant's reply brief, 16 pages |
 | Docket page | https://www.courtlistener.com/docket/68849363/talisha-rosen-kellogg-v-kristi-noem/ (CourtListener title; the brief's own caption reads "Talisha L. Rosen-Kellogg v. Alejandro Mayorkas, Secretary, U.S. Department of Homeland Security") |
@@ -18,11 +18,11 @@
 
 Note: the exemplar's own certificate says it is set in "Times New Roman 14 point". The template in this folder sets EB Garamond, the only serif face vendored in `fonts/` (see README, Known gaps).
 
-## 2. SAMPLE-cadc-reply-brief-doe167081.pdf
+## 2. FILED-EXAMPLE-reply-brief-2.pdf
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cadc-reply-brief-doe167081.pdf` (50 pages, 0.2 MB) |
+| File | `FILED-EXAMPLE-reply-brief-2.pdf` (50 pages, 0.2 MB) |
 | Court | United States Court of Appeals for the District of Columbia Circuit |
 | Case | *John Doe, a.k.a. Kidane v. Federal Democratic Republic of Ethiopia*, No. 16-7081 (appeal from D.D.C. No. 1:14-cv-00372, Judge Randolph D. Moss) |
 | Docket/document | ECF stamp "USCA Case #16-7081 Document #1653005 Filed: 12/27/2016" |

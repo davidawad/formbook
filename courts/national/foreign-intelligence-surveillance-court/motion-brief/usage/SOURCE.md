@@ -2,7 +2,7 @@
 
 Both are publicly released FISC filings posted by the court at fisc.uscourts.gov ("Public Filings"). Both are scanned pages with an OCR text layer (pdftotext yields text; the scan is image-based). Date fetched for both: 2026-10-14.
 
-## 1. SAMPLE-fisc-motion-brief-accuracyconcernsmisc1902.pdf
+## 1. FILED-EXAMPLE-motion-brief.pdf
 
 - URL: https://www.fisc.uscourts.gov/sites/default/files/FISC%20Misc%2019%2002%20Motion%20to%20Modify%20Reporting%20Period%20June%204%202020%20200714.pdf
 - Case: In re Accuracy Concerns Regarding FBI Matters Submitted to the FISC
@@ -12,7 +12,7 @@ Both are publicly released FISC filings posted by the court at fisc.uscourts.gov
 - Date filed: June 4, 2020 (received stamp on p. 1: "2020 JUN -4 PM 1:01")
 - Verification: Dawn M. Browning, Deputy General Counsel, Federal Bureau of Investigation, 28 U.S.C. § 1746
 
-## 2. SAMPLE-fisc-motion-brief-yahoodirectives105b0701.pdf
+## 2. FILED-EXAMPLE-motion-brief-2.pdf
 
 - URL: https://www.fisc.uscourts.gov/sites/default/files/105B%28g%29%2007-01%20Motion-3.pdf
 - Case: In re Directives Pursuant to Section 105B of the Foreign Intelligence Surveillance Act

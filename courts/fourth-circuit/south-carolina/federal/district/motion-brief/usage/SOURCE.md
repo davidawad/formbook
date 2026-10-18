@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-scd-motion-brief-cobbvcharlestoncountyschooldistrict225cv08752.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Court | United States District Court, District of South Carolina, Charleston Division |
 | Case | *United States ex rel. John Cobb v. Charleston County School District* |
 | Docket no. | 2:25-cv-08752-DCN |

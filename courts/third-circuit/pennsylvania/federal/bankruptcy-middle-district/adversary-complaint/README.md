@@ -25,14 +25,14 @@ Not used: the Official Form 416A/416D text itself was not retrieved; the caption
 
 ## Exemplar
 
-- `usage/SAMPLE-pamb-adversary-complaint-webbsheils520ap00078.pdf`: "Trustee's Complaint for Turnover of Funds", Robert P. Sheils, Jr., Esquire, Chapter 7 Trustee, against National Debt Relief, LLC. Adversary No. 5:20-ap-00078-MJC; main case *In re Joseph Ryan Webb*, Case No. 5-20-00695. Filed 2020-11-18. 3 pages, text layer present (`pdftotext` reads it; Helvetica non-embedded, Liberation Sans embedded).
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf`: "Trustee's Complaint for Turnover of Funds", Robert P. Sheils, Jr., Esquire, Chapter 7 Trustee, against National Debt Relief, LLC. Adversary No. 5:20-ap-00078-MJC; main case *In re Joseph Ryan Webb*, Case No. 5-20-00695. Filed 2020-11-18. 3 pages, text layer present (`pdftotext` reads it; Helvetica non-embedded, Liberation Sans embedded).
 - Provenance, searches and the reasons this one was chosen are in `usage/SOURCE.md`.
 - Only one exemplar. The eval-loop tier-2 rule asks for two or three from different filers. Not met; see gaps.
 - The filed copy has no FRBP 7008(a) jurisdiction statement and leaves the adversary number blank. The template adds the statement (see PAMB-ADV-004); the sample fills it with bracketed placeholders for the pleader to choose.
 
 ## Sample
 
-- `usage/INPUT-pamb-adversary-complaint-webbtrusteeturnover.md`: the complete text of the exemplar (caption, title, the lead-in, allegations 1 to 11, the fee table, the prayer and the signature block). The caption spelling "JOSPEH" is kept as filed.
+- `usage/INPUT-adversary-complaint.md`: the complete text of the exemplar (caption, title, the lead-in, allegations 1 to 11, the fee table, the prayer and the signature block). The caption spelling "JOSPEH" is kept as filed.
 - Frontmatter fields: `court`, `debtor` (name, chapter, case_number), `adversary_number` (blank), `caption` (sides with names and designation), `title`, `jurisdiction` (district, core, consent), `signature` (firm, signer, id, lines). Optional: `date` (printed as "Dated:").
 - The sample is 3 pages in the exemplar and 4 in the render. The depth target (8 to 14 pages) applies to exemplars of that length; this one is 3 pages, so the sample is the whole document.
 
@@ -40,11 +40,11 @@ Not used: the Official Form 416A/416D text itself was not retrieved; the caption
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq
-sh tools/render.sh courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-pamb-adversary-complaint-webbtrusteeturnover.md
+sh tools/render.sh courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/adversary-complaint webb-trustee-turnover
 ```
 
-- File names follow the tools, not the brief's `<id>-overlay` form: `usage/OUTPUT-pamb-adversary-complaint-webbtrusteeturnover.typst.pdf` (our render; 4 pages; typst with no warnings), `usage/OVERLAY-webb-trustee-turnover.pdf` and `.txt` (red = ours, blue = filed, black = both). The sample is `usage/INPUT-pamb-adversary-complaint-webbtrusteeturnover.md` (no `INPUT-` prefix; `render.sh` strips only `INPUT-` when naming the output).
+- File names follow the tools, not the brief's `<id>-overlay` form: `usage/OUTPUT-adversary-complaint.typst.pdf` (our render; 4 pages; typst with no warnings), `usage/OVERLAY-webb-trustee-turnover.pdf` and `.txt` (red = ours, blue = filed, black = both). The sample is `usage/INPUT-adversary-complaint.md` (no `INPUT-` prefix; `render.sh` strips only `INPUT-` when naming the output).
 - Fonts: `pdffonts` shows EBGaramond-Regular and -Bold embedded, nothing else.
 - Overlay page map: ours p.1 ↔ filed p.1 (42%), p.2 ↔ p.2 (54%), p.3 ↔ p.2 (35%), p.4 ↔ p.3 (78%). The pairing is by word overlap and coarse; the filed copy is the same text on fewer pages, and the render's extra page is the prayer and signature moved together by the sticky rule. The overlay is a diagnostic, not a score.
 
@@ -74,7 +74,7 @@ Pages reviewed: 4 of 4.
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference. Reviewed: 4 of 4 pages of the render of `usage/INPUT-pamb-adversary-complaint-webbtrusteeturnover.md` (checked at 60 dpi in /tmp, not written to usage/).
+- **typst** (primary, `typst/`): the reference. Reviewed: 4 of 4 pages of the render of `usage/INPUT-adversary-complaint.md` (checked at 60 dpi in /tmp, not written to usage/).
 - **docx** (`docx/`): `build-reference.sh <out.docx> 11 center` builds `docx/reference.docx` (pandoc's default reference, changed in place: EB Garamond 13 pt, exact 24 pt line pitch, 0.5 in first-line indent, US Letter, 1 in margins, centered PAGE footer at 11 pt, centered bold caps level-1 headings, 1 pt table grid, footnotes 13 pt single). `docx/pamb.lua` builds the caption (borderless table with the rule under the debtor block and the vertical rule), the title, the Statement of Jurisdiction, the numbered allegations, the prayer kept with the signature, and the signature block at 3.3 in. Built from the court folder with `pandoc --from markdown+smart --to docx --reference-doc=adversary-complaint/docx/reference.docx --lua-filter=adversary-complaint/docx/pamb.lua adversary-complaint/usage/INPUT-webb-trustee-turnover.md -o adversary-complaint/usage/OUTPUT-webb-trustee-turnover.docx`.
   - Matches the typst template: page setup, font, line pitch, indents, caption layout, the fee table grid, the signature position, the page number. Checked by reading the .docx back (pandoc text read-back, every paragraph style defined, `ziptool` reads all 17 entries, `xmllint` on all 17 XML parts). Not checked visually.
   - Differs (pandoc and Word limits): the allegation numbers are typed text (number, tab, text), not a Word list, so they do not renumber when edited; the caption and signature cells are plain text (no markdown inside them); the blank "Adversary No." line is an underlined run of no-break spaces; the title is not written to the document properties (pandoc's title block is suppressed); footnotes are 13 pt single-spaced (the template inherits the body pitch; the samples have no footnotes).

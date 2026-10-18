@@ -1,6 +1,6 @@
 # Exemplar source
 
-- **File:** `SAMPLE-nyappdiv-reply-brief-integratenyc202202719.pdf` (38 pages, letter, text layer present; `pdffonts`: TimesNewRomanPSMT and TimesNewRomanPS-BoldMT for the body (not embedded), with Albertus, Olde English, Arial and Courier faces for headings and the NYSCEF stamp; the copy was re-exported by Aspose from an iOS device)
+- **File:** `FILED-EXAMPLE-reply-brief.pdf` (38 pages, letter, text layer present; `pdffonts`: TimesNewRomanPSMT and TimesNewRomanPS-BoldMT for the body (not embedded), with Albertus, Olde English, Arial and Courier faces for headings and the NYSCEF stamp; the copy was re-exported by Aspose from an iOS device)
 - **SHA-256:** `4db65b7dc719043489b630197f6cf745e96c1a686f6debd42882a7b647ef3c8e`
 - **URL fetched:** https://publiccounsel.org/wp-content/uploads/2021/12/2022_02719_IntegrateNYC_Inc_et_al_REPLY_BRIEF_36.pdf (hosted by Public Counsel, the filer's own website)
 - **Court:** Supreme Court of the State of New York, Appellate Division, First Department (one of the four departments that make up this court)

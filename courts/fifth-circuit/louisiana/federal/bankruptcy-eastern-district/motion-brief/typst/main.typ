@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "laeb-motion-brief.typ": laeb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-laeb-motion-brief-crosbymsjmemo.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #laeb-motion-brief(meta, body)

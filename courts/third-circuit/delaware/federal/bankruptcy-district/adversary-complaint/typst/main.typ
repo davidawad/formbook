@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "deb-adversary-complaint.typ": deb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-deb-adversary-complaint-zohar.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #deb-adversary-complaint(meta, body)

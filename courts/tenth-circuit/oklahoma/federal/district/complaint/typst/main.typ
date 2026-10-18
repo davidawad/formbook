@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "okd-complaint.typ": okd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-okd-complaint-pilfziriax.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #okd-complaint(meta, body)

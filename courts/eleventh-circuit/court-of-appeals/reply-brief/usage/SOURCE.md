@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Exemplar file | `SAMPLE-ca11-reply-brief-jgvnorthfield2512276.pdf` |
+| Exemplar file | `FILED-EXAMPLE-reply-brief.pdf` |
 | Case | *J.G. v. Northfield Insurance Company*, No. 25-12276 (11th Cir.); appeal from the N.D. Ga. |
 | Court docket no. | 25-12276-E (intervenor appeal; the district court docket is not stated on the cover) |
 | Document | ECF Doc. 23: "Reply Brief of Appellant Northfield Insurance Company" (14 pages) |

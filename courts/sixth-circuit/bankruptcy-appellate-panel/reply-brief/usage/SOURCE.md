@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Exemplar | `SAMPLE-bap6-reply-brief-chieftainsteel198005.pdf` (12 pages, text layer) |
+| Exemplar | `FILED-EXAMPLE-reply-brief.pdf` (12 pages, text layer) |
 | Case | *In re Chieftain Steel, LLC, et al.*, BAP No. 19-8005, on appeal from the Bankr. W.D. Ky. (Originating Case No. 16-10407, Hon. Joan A. Lloyd) |
 | Document | Appellants' Reply Brief. ECF header: "Case: 19-8005 Document: 19". |
 | Filer | Appellants Dinsmore & Shohl LLP, Bingham Greenebaum Doll LLP, Fox Rothschild LLP, and Phoenix Management Services, LLC. Signed by Kyle W. Miller and James R. Irving (BGD) and Ellen Arvin Kennedy (Dinsmore, "with permission"). |

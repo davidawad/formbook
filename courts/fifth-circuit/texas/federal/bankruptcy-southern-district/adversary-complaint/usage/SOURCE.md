@@ -1,6 +1,6 @@
 # Exemplar source: adversary-complaint (S.D. Tex. Bankruptcy)
 
-- File: `SAMPLE-txsb-adversary-complaint-campmystic2603604.pdf` (15 pages, text layer present; pdftotext yields text)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (15 pages, text layer present; pdftotext yields text)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.txsb.499223/gov.uscourts.txsb.499223.1.0_1.pdf
 - Docket (CourtListener): https://www.courtlistener.com/docket/73726734/1/camp-mystic-llc-v-those-listed-on-appendix-a-to-the-compl/
 - Court: United States Bankruptcy Court, Southern District of Texas (txsb), Houston Division

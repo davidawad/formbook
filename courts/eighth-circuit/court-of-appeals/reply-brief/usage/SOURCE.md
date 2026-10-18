@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca8-reply-brief-delgadomidland241786.pdf` |
+| File | `FILED-EXAMPLE-reply-brief.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ca8.108715/gov.uscourts.ca8.108715.805084760.0.pdf (CourtListener RECAP, found by a CourtListener v4 search for "REPLY BRIEF OF APPELLANT" in court `ca8`) |
 | Court | U.S. Court of Appeals for the Eighth Circuit |
 | Case name | *Diana Delgado v. Midland Credit Management, Inc.* |
@@ -15,13 +15,13 @@
 
 ## Replacement for the audited non-redistributable-font exemplar
 
-The audited `SAMPLE-ca8-reply-brief-lindell241608.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `SAMPLE-ca8-reply-brief-delgadomidland241786.pdf` from a different filer. See the primary-exemplar record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
+The audited `FILED-EXAMPLE-reply-brief-2.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-reply-brief.pdf` from a different filer. See the primary-exemplar record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
 
 ## Second filer
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca8-reply-brief-lindell241608.pdf` (15 pages) |
+| File | `FILED-EXAMPLE-reply-brief-2.pdf` (15 pages) |
 | URL | https://storage.courtlistener.com/recap/gov.uscourts.ca8.108528/gov.uscourts.ca8.108528.805031396.0.pdf |
 | Case / docket | *Robert Zeidman v. Lindell Management LLC*, No. 24-1608 (appeal from D. Minn. No. 0:23-cv-01433) |
 | Filer | Lindell Management LLC, respondent-appellant; counsel Douglas G. Wardlow and Thomas F. Miller |

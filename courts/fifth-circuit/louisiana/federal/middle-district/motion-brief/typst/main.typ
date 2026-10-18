@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "lamd-motion-brief.typ": lamd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-lamd-motion-brief-firsthorizonmotiontodismiss.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #lamd-motion-brief(meta, body)

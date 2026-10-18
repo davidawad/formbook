@@ -4,10 +4,10 @@ Doc type: **motion with memorandum** (a motion under FRBP 9013, with the grounds
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 2 filers, each partial: `usage/SAMPLE-ianb-motion-brief-mcquillenfirstsecurity2009040.pdf` (3 pp.: the brief in support of a motion to dismiss; the motion itself is not in RECAP) and `usage/SAMPLE-ianb-motion-brief-veroblue1909015.pdf` (6 pp.: a motion to strike with its grounds and facts; no separate brief). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-ianb-motion-brief-mcquillengraybrief.md` (3 rendered pages; the whole brief) and `usage/INPUT-ianb-motion-brief-verobluemotion.md` (5 rendered pages; the whole motion) |
+| exemplar | yes, 2 filers, each partial: `usage/FILED-EXAMPLE-motion-brief.pdf` (3 pp.: the brief in support of a motion to dismiss; the motion itself is not in RECAP) and `usage/FILED-EXAMPLE-motion-brief-2.pdf` (6 pp.: a motion to strike with its grounds and facts; no separate brief). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md` (3 rendered pages; the whole brief) and `usage/INPUT-motion-brief-2.md` (5 rendered pages; the whole motion) |
 | typeface | face required: none (no N.D. Iowa or FRBP rule names one; checked 2026-10-14 against the 2024 Local Rules PDF, Rules 5005-1 and 9004-1 and a full-text search for font, typeface and point size). Substitute: none needed. Font kept: **EB Garamond** (vendored). Not metric-compatible with any court-named face, because none is named. |
-| render | ok: `usage/OUTPUT-ianb-motion-brief-mcquillengraybrief.typst.pdf` (3 pp.) and `usage/OUTPUT-ianb-motion-brief-verobluemotion.typst.pdf` (5 pp.), re-rendered 2026-10-14 with `tools/render.sh` (typst 0.15.0, vendored fonts only, exit 0, no warnings); `pdffonts` shows EB Garamond only, embedded |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` (3 pp.) and `usage/OUTPUT-motion-brief-2.typst.pdf` (5 pp.), re-rendered 2026-10-14 with `tools/render.sh` (typst 0.15.0, vendored fonts only, exit 0, no warnings); `pdffonts` shows EB Garamond only, embedded |
 | overlay | **not regenerated 2026-10-14: fail.** `tools/overlay.sh` needs the filed exemplar PDFs, and `usage/` holds only `SOURCE.md` in this snapshot (no PDF on the box, none in git history). The `OVERLAY-*.txt` maps are from an earlier run and were not rebuilt. |
 | pages reviewed | 8 of 8 rendered sample pages (3 + 5), each rendered at 60 dpi and viewed on 2026-10-14 after the font pass (the font did not change; this is the re-check) |
 | check.sh | not run: same reason as `../adversary-complaint/README.md` (no `court.json` or `rules.md` in a doc-type folder). Not a stamp. |
@@ -46,8 +46,8 @@ Rule text for N.D. Iowa is taken from the current PDF parts linked on https://ww
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
-sh tools/render.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief usage/INPUT-ianb-motion-brief-mcquillengraybrief.md
-sh tools/overlay.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief mcquillen-gray-brief usage/SAMPLE-ianb-motion-brief-mcquillenfirstsecurity2009040.pdf
+sh tools/render.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief usage/INPUT-motion-brief.md
+sh tools/overlay.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief mcquillen-gray-brief usage/FILED-EXAMPLE-motion-brief.pdf
 # same for veroblue-motion with its exemplar
 ```
 

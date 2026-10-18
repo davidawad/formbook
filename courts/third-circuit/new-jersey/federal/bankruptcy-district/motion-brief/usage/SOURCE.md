@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-njb-motion-brief-cushing2601099.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, District of New Jersey (`njb`)
 - Case: *David Cushing v. Lakeview Loan Servicing, LLC*
 - Bankruptcy case: No. 25-22945, Chapter 13 (Hon. Andrew B. Altenburg Jr.)

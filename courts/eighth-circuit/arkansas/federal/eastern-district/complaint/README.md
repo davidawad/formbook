@@ -4,9 +4,9 @@ Doc type: **complaint** in the United States District Court for the Eastern Dist
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ared-complaint-hessequifax326cv00016.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ared-complaint-hessequifax.md` (the whole complaint, 89 numbered paragraphs, prayer, signature; OCR typos corrected, see gap 9) |
-| render | ok: `usage/OUTPUT-ared-complaint-hessequifax.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the whole complaint, 89 numbered paragraphs, prayer, signature; OCR typos corrected, see gap 9) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | typeface | face required: **none** (E.D. Ark. LR 5.5(a) sets a type-size minimum, "elite", and names no face) → **EB Garamond** kept (no substitute needed; visual-only for any Times expectation) |
 | overlay | not regenerated on 2026-10-14: the filed exemplar PDF is absent from this snapshot (only `usage/SOURCE.md` is tracked), so `overlay.sh` exits 1. `usage/OVERLAY-hess-equifax.txt` is from the earlier run. |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed; pages 1 to 8 before the signature-block fix, page 9 after it) |
@@ -49,7 +49,7 @@ Not produced by this template (separate filings, not part of the complaint): civ
 
 ## Exemplar
 
-`usage/SAMPLE-ared-complaint-hessequifax326cv00016.pdf`: *Hess v. Equifax Information Services, LLC and Trans Union, LLC*, No. 3:26-cv-00016-DPM, "Class Action Complaint and Demand for Jury Trial", 11 pages, filed 2026-01-12 by Plaintiff's counsel Stein Saks, PLLC. Provenance, search trail and the rejected candidates are in `usage/SOURCE.md`.
+`usage/FILED-EXAMPLE-complaint.pdf`: *Hess v. Equifax Information Services, LLC and Trans Union, LLC*, No. 3:26-cv-00016-DPM, "Class Action Complaint and Demand for Jury Trial", 11 pages, filed 2026-01-12 by Plaintiff's counsel Stein Saks, PLLC. Provenance, search trail and the rejected candidates are in `usage/SOURCE.md`.
 
 The sample is the whole filing: 89 paragraphs as numbered in the exemplar, with the prayer items (a) to (h). The template's numbering reproduces the filed numbers (the first page of the overlay shows ¶ 1 to 7 at the same place; the signature page shows the prayer).
 
@@ -58,7 +58,7 @@ The sample is the whole filing: 89 paragraphs as numbered in the exemplar, with 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env in $HOME/tb)
 D=courts/eighth-circuit/arkansas/federal/eastern-district/complaint
-sh tools/render.sh $D usage/INPUT-ared-complaint-hessequifax.md $D/usage/OUTPUT-hess-equifax.pdf
+sh tools/render.sh $D usage/INPUT-complaint.md $D/usage/OUTPUT-hess-equifax.pdf
 sh tools/overlay.sh $D hess-equifax $D/usage/SAMPLE-hess-equifax-3-26-cv-00016-complaint.pdf
 ```
 
@@ -82,9 +82,9 @@ The overlay is a diagnostic, not a score. Its page map (`OVERLAY-hess-equifax.tx
 
 ## Engines
 
-**typst** (primary): the section above; `usage/OUTPUT-ared-complaint-hessequifax.typst.pdf`, 9 pages, reviewed page by page.
+**typst** (primary): the section above; `usage/OUTPUT-complaint.typst.pdf`, 9 pages, reviewed page by page.
 
-**docx**: `docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt; 24 pt exact double spacing; 0.5 in first-line indent; headings on the same 24 pt grid, level 1 centered bold capitals, level 2 centered bold, level 3 bold italic; 1-inch margins; a centered page-number footer at 11 pt). `docx/complaint.lua` adds what pandoc does not: the court title, the caption table (rules at right and bottom of the party column), the case number and title, numbered paragraphs (1 to 89, a `~ ` paragraph is unnumbered), lettered lists "(a)", the lead-in, and the signature block. Built with `sh tools/render.sh --engine docx <this folder> usage/INPUT-ared-complaint-hessequifax.md`, which writes `usage/OUTPUT-ared-complaint-hessequifax.docx`.
+**docx**: `docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt; 24 pt exact double spacing; 0.5 in first-line indent; headings on the same 24 pt grid, level 1 centered bold capitals, level 2 centered bold, level 3 bold italic; 1-inch margins; a centered page-number footer at 11 pt). `docx/complaint.lua` adds what pandoc does not: the court title, the caption table (rules at right and bottom of the party column), the case number and title, numbered paragraphs (1 to 89, a `~ ` paragraph is unnumbered), lettered lists "(a)", the lead-in, and the signature block. Built with `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`, which writes `usage/OUTPUT-complaint.docx`.
 
 | Item | Result |
 |---|---|

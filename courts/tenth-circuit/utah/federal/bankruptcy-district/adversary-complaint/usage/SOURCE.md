@@ -4,8 +4,8 @@ Two filed complaints, from different filers, both public RECAP documents on Cour
 
 | File | Case | Docket | Filer | Date filed | Date fetched |
 |---|---|---|---|---|---|
-| `SAMPLE-utb-adversary-complaint-plaza1062602063.pdf` | *Plaza 106, LLC v. First Utah Bank*, Adv. No. 26-02063 (Bankr. D. Utah, Central Div.) | 26-02063 (bankr. no. 25-bk-25459-PH) | Plaza 106, LLC, debtor in possession, by Valerga Lawyers (Brody Valerga); "Verified Complaint" | 2026-04-17 | 2026-10-14 |
-| `SAMPLE-utb-adversary-complaint-clauson2302053.pdf` | *Thomson v. Clauson*, Adv. No. 23-02053 (Bankr. D. Utah) | 23-02053 (bankr. no. 21-23249) | Michael Thomson, Chapter 7 trustee, by Greenberg Traurig, LLP (Michael F. Thomson, Carson Heninger) | 2023-07-26 | 2026-10-14 |
+| `FILED-EXAMPLE-adversary-complaint.pdf` | *Plaza 106, LLC v. First Utah Bank*, Adv. No. 26-02063 (Bankr. D. Utah, Central Div.) | 26-02063 (bankr. no. 25-bk-25459-PH) | Plaza 106, LLC, debtor in possession, by Valerga Lawyers (Brody Valerga); "Verified Complaint" | 2026-04-17 | 2026-10-14 |
+| `FILED-EXAMPLE-adversary-complaint-2.pdf` | *Thomson v. Clauson*, Adv. No. 23-02053 (Bankr. D. Utah) | 23-02053 (bankr. no. 21-23249) | Michael Thomson, Chapter 7 trustee, by Greenberg Traurig, LLP (Michael F. Thomson, Carson Heninger) | 2023-07-26 | 2026-10-14 |
 
 Source URLs (CourtListener docket pages; the PDFs were fetched from the RECAP archive):
 
@@ -19,4 +19,4 @@ Other candidates considered and not kept: Bundy (24-02130, Doc 1, 55 pp. with ex
 ## Notes for reviewers
 
 - Neither filing contains the FRBP 7008(a) statement of consent to final orders by the bankruptcy court (see `../README.md`, gap ADV-7008). This is a finding about the filings, not a reason to omit the statement from the template.
-- The sample (`../usage/INPUT-utb-adversary-complaint-plaza106verifiedcomplaint.md`) transcribes the Plaza 106 filing, which is the exemplar the overlay uses.
+- The sample (`../usage/INPUT-adversary-complaint.md`) transcribes the Plaza 106 filing, which is the exemplar the overlay uses.

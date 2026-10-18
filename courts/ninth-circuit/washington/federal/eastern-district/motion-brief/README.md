@@ -6,9 +6,9 @@ Folder: `courts/ninth-circuit/washington/federal/eastern-district/motion-brief/`
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-waed-motion-brief-hartsock426cv05098motiontodismiss.pdf` (25 pp., ECF No. 4; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-waed-motion-brief-hartsockmotiontodismiss.md` (an excerpt, 11 rendered pages; see below) |
-| render | ok: `usage/OUTPUT-waed-motion-brief-hartsockmotiontodismiss.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (25 pp., ECF No. 4; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (an excerpt, 11 rendered pages; see below) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-hartsock-motion-to-dismiss.pdf` and `OVERLAY-hartsock-motion-to-dismiss.txt` |
 | typeface | face required: none named by LCivR 10(d) (serif or traditional Roman; proportionately spaced, 14 pt or more; or monospaced). Vendored substitute: not needed, EB Garamond kept (any proportional serif meets the rule). Fit: n/a. Font list: `EB Garamond`, embedded (`pdffonts`). |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; pages 2 to 9 and 11 after the last footer change, as a contact sheet; all 11 again on the fonts pass) |
@@ -98,7 +98,7 @@ The overlay is a diagnostic, not a score. The sample pairs with the filed pages 
 
 ### docx (`docx/`)
 
-Build and render: `sh docx/build-reference.sh docx/reference.docx` (the reference is generated), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-waed-motion-brief-hartsockmotiontodismiss.md`, which writes `usage/OUTPUT-waed-motion-brief-hartsockmotiontodismiss.docx` and `usage/OUTPUT-waed-motion-brief-hartsockmotiontodismiss.docx.pdf` (LibreOffice 26.8 conversion; EB Garamond embedded). `docx/motion-brief.lua` lays out the caption (with the hearing notation), the table of contents, the memorandum and the signature block; `docx/pleading.lua` holds the shared helpers. `docx/render.sh` runs two passes: pass 1 writes the headings it finds and their pages come from its PDF; pass 2 writes the table of contents with those pages and must paginate like pass 1.
+Build and render: `sh docx/build-reference.sh docx/reference.docx` (the reference is generated), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8 conversion; EB Garamond embedded). `docx/motion-brief.lua` lays out the caption (with the hearing notation), the table of contents, the memorandum and the signature block; `docx/pleading.lua` holds the shared helpers. `docx/render.sh` runs two passes: pass 1 writes the headings it finds and their pages come from its PDF; pass 2 writes the table of contents with those pages and must paginate like pass 1.
 
 What matches the typst output (checked on the LibreOffice PDF, 11 pages, the same first line on every page, and the same TOC pages: I 3, II 4, III 6, IV 7, A 7, B 7, V 10, certificate 11):
 

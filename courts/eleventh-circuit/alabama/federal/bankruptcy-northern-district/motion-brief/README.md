@@ -3,7 +3,7 @@
 - Court: `alnb`, United States Bankruptcy Court for the Northern District of Alabama (`courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district/`)
 - Doc type: `motion-brief` (a motion in an adversary proceeding, with the argument set out in the motion; Fed. R. Bankr. P. 9013, 9014, 7012(b))
 - Engine: typst (primary). `latex/` and `docx/` are not built for this doc type.
-- Exemplars: `usage/` holds two public filings from different filers (see `usage/SOURCE.md`). The overlay uses the first one (`SAMPLE-alnb-motion-brief-dombrowskivamericanestate1780079.pdf`, the United States' motion to dismiss, 11 pp.), which is the tier-2 primary. The second is Wright (defendant NCS's Rule 12(b)(6) motion, 8 pp.).
+- Exemplars: `usage/` holds two public filings from different filers (see `usage/SOURCE.md`). The overlay uses the first one (`FILED-EXAMPLE-motion-brief.pdf`, the United States' motion to dismiss, 11 pp.), which is the tier-2 primary. The second is Wright (defendant NCS's Rule 12(b)(6) motion, 8 pp.).
 
 ## Files
 
@@ -11,8 +11,8 @@
 |---|---|
 | `typst/main.typ` | Entry point. Reads `--input sample=...` and calls `alnb-motion-brief`. |
 | `typst/alnb-motion-brief.typ` | Template. Court title, caption, title, Roman-numeral and lettered section headings, unnumbered body paragraphs, footnotes, signature block, certificate of service. Parameter block at the top. |
-| `usage/INPUT-alnb-motion-brief-dombrowski.md` | Transcription of the Dombrowski motion, all 11 pages of text (frontmatter + body). Frontmatter fields: `court`, `caption` (list of `left`/`right` line blocks), `title`, `signature` (`date`, `lead`, `signer`, `lines`, `of_counsel`), `certificate` (`text`, `served` as a list of party line-lists, `signer`, `signer_lines`). |
-| `usage/OUTPUT-alnb-motion-brief-dombrowski.typst.pdf` | `sh tools/render.sh <dir> usage/INPUT-alnb-motion-brief-dombrowski.md`, where `<dir>` is this folder. 9 pages. |
+| `usage/INPUT-motion-brief.md` | Transcription of the Dombrowski motion, all 11 pages of text (frontmatter + body). Frontmatter fields: `court`, `caption` (list of `left`/`right` line blocks), `title`, `signature` (`date`, `lead`, `signer`, `lines`, `of_counsel`), `certificate` (`text`, `served` as a list of party line-lists, `signer`, `signer_lines`). |
+| `usage/OUTPUT-motion-brief.typst.pdf` | `sh tools/render.sh <dir> usage/INPUT-motion-brief.md`, where `<dir>` is this folder. 9 pages. |
 | `usage/OVERLAY-dombrowski-motion-brief.pdf`, `.txt` | `sh tools/overlay.sh <dir> dombrowski-motion-brief`. Red = our render, blue = filed exemplar, black = both. `.txt` is the page map. |
 | `usage/` | Two filed motions (Dombrowski 11 pp.; Wright 8 pp.) and `SOURCE.md`. |
 
@@ -63,8 +63,8 @@ Known differences that are not template faults:
 
 ## Engines
 
-- **typst** (primary): `typst/`, `usage/OUTPUT-alnb-motion-brief-dombrowski.typst.pdf` (9 pages).
-- **docx**: `docx/` (`make-reference.sh` builds `reference.docx`; `alnb.lua` adds the court title, caption table, title, signature block and certificate of service with the served parties). Output `usage/OUTPUT-alnb-motion-brief-dombrowski.docx` and `.docx.pdf` (LibreOffice conversion, 10 pages, every page rendered and looked at).
+- **typst** (primary): `typst/`, `usage/OUTPUT-motion-brief.typst.pdf` (9 pages).
+- **docx**: `docx/` (`make-reference.sh` builds `reference.docx`; `alnb.lua` adds the court title, caption table, title, signature block and certificate of service with the served parties). Output `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion, 10 pages, every page rendered and looked at).
 - **latex**: not built for this doc type.
 
 What matches the typst form (12 pt EB Garamond, 1-inch margins, letter, 24 pt exact body leading, half-inch first-line indent, unnumbered paragraphs, centered Roman-numeral headings and flush-left lettered headings with a 0.5-inch indent, footnotes, single-spaced caption and signature block, the certificate of service heading, centered page-number footer).

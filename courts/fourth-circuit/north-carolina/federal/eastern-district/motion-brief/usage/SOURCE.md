@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nced-motion-brief-johnson526cv00320.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Eastern District of North Carolina, Southern Division (`nced`)
 - Case: *Pamela Denise Johnson v. Consumer Portfolio Services, Inc., et al.*
 - Docket: No. 5:26-cv-00320-D-RN (Document 24), as printed on the filing

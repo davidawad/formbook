@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-gasb-adversary-complaint-masterlending2604010.pdf` (8 pages, text layer present, `pdftotext` reads it; Times New Roman and Courier, none embedded)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (8 pages, text layer present, `pdftotext` reads it; Times New Roman and Courier, none embedded)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.gasb.349965/gov.uscourts.gasb.349965.1.0.pdf (RECAP copy of ECF 1; docket page https://www.courtlistener.com/docket/73342608/1/master-lending-group-llc-adversary-proceeding/)
 - Court: United States Bankruptcy Court, Southern District of Georgia, Savannah Division
 - Case: *Caron v. Synergy Homes of Georgia, LLC, et al.* (Adv. Pro. No. 26-04010-EJC), within the Chapter 7 case *In re Master Lending Group, LLC*, No. 23-40569-EJC

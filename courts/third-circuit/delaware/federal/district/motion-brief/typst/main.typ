@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ded-motion-brief.typ": ded-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ded-motion-brief-abramson.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ded-motion-brief(meta, body)

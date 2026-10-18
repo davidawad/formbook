@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "iand-motion-brief.typ": iand-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-iand-motion-brief-gharavi.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #iand-motion-brief(meta, body)

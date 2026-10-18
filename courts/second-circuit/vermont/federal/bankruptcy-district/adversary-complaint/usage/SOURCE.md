@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-vtb-adversary-complaint-fouracrevaxos2301001.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, District of Vermont
 - Case: *Diana M. Fouracre v. Axos Bank and World Business Lenders, LLC*, Adv. Proc. No. 23-01001, in the chapter 13 case *In re Diana M. Fouracre*, No. 22-10129
 - Document: Complaint to Determine Amount and Validity of Debt and Mortgage Lien and Other Asserted Causes of Action (Doc. 1, 18 pages)
@@ -11,9 +11,9 @@
 - Text layer: yes (`pdftotext` yields text; embedded Times New Roman Bold and Helvetica/Courier Type 1 fonts)
 - Public court record (RECAP). Used as a structural and content reference; the sample transcribes it (see `../README.md`).
 
-## 2. SAMPLE-vtb-adversary-complaint-committee2601005.pdf
+## 2. FILED-EXAMPLE-adversary-complaint-2.pdf
 
-- File: `SAMPLE-vtb-adversary-complaint-committee2601005.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf`
 - Court: United States Bankruptcy Court, District of Vermont
 - Case: *The Official Committee of Unsecured Creditors v. Roman Catholic Diocese of Burlington, Vermont, et al.*, Adv. Proc. No. 26-01005, in the chapter 11 case *In re Roman Catholic Diocese of Burlington, Vermont*, No. 24-10205 (HZC)
 - Document: Complaint for Declaratory Relief, Avoidance of Fraudulent Transfers, and Turnover (Doc. 1, 27 pages; printed page numbers run to 23 because the caption's defendant list fills the first pages)
@@ -24,9 +24,9 @@
 - Text layer: yes (Microsoft Word for Microsoft 365 output; body Times New Roman 12 pt, double-spaced at 24 pt, 1 inch left margin; counsel block at the top left of page 1 above the court name; title in the right column of the caption)
 - sha256: c879ed9f00649ca14fb1f3438b4dc073f35f256dcee4f9a88a14862af61b32fc
 
-## 3. SAMPLE-vtb-adversary-complaint-springfield2001004.pdf
+## 3. FILED-EXAMPLE-adversary-complaint-3.pdf
 
-- File: `SAMPLE-vtb-adversary-complaint-springfield2001004.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint-3.pdf`
 - Court: United States Bankruptcy Court, District of Vermont
 - Case: *Springfield Medical Care Systems, Inc. v. Jovita Carranza, in her capacity as Administrator for the U.S. Small Business Administration*, Adv. Proc. No. 20-01004, in the chapter 11 case *In re Springfield Medical Care Systems, Inc.*, No. 19-10285
 - Document: Verified Complaint (Doc. 1, 13 pages; pages 1 to 12 the complaint, page 13 the verification, scanned image with no text layer)

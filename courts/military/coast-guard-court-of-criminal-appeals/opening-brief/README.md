@@ -2,8 +2,8 @@
 
 - Court: U.S. Coast Guard Court of Criminal Appeals (CGCCA), `courts/military/coast-guard-court-of-criminal-appeals/`.
 - Doc type: the appellant's brief, which the CGCCA lists as "Appellant's Assignments of Error" (Rule 18(a); Rule 17.2(a) "Assignment of Error Briefs").
-- Exemplar: `usage/SAMPLE-uscgcoca-opening-brief-steen1464.pdf`, an 8-page extract of *United States v. Steen*, Dkt. 1464, Appellant's Assignment of Error and Brief, dated 4 April 2019, published by the court (source and page map: `usage/SOURCE.md`). Found on the fourth pass (2026-10-16, bead fb-595.20.21) via the Internet Archive.
-- Samples: `usage/INPUT-uscgcoca-opening-brief-steen.md` (transcription of the extract); `usage/INPUT-uscgcoca-opening-brief-smoke.md` (placeholder, kept).
+- Exemplar: `usage/FILED-EXAMPLE-opening-brief.pdf`, an 8-page extract of *United States v. Steen*, Dkt. 1464, Appellant's Assignment of Error and Brief, dated 4 April 2019, published by the court (source and page map: `usage/SOURCE.md`). Found on the fourth pass (2026-10-16, bead fb-595.20.21) via the Internet Archive.
+- Samples: `usage/INPUT-opening-brief.md` (transcription of the extract); `usage/INPUT-opening-brief-2.md` (placeholder, kept).
 - Template: `typst/uscgcoca-opening-brief.typ` (entry `typst/main.typ`).
 - Status (2026-10-16): rule text read and applied; render ok (8 pages); overlay ok; every page reviewed. No `checks.yaml`, so `tools/check.sh` was not run and no stamp is claimed. `court.json` untouched.
 
@@ -47,7 +47,7 @@ The text block, margins and line pitch coincide closely: the filer used Times Ne
 
 ## Page review (Gate 2), 2026-10-16
 
-All 8 pages of `OUTPUT-uscgcoca-opening-brief-steen.typst.pdf` and all 8 of `OVERLAY-steen-opening-brief.pdf` rasterized at 60 dpi and viewed. Fonts: Liberation Serif Regular, Bold, Italic, BoldItalic only; no typst warnings.
+All 8 pages of `OUTPUT-opening-brief.typst.pdf` and all 8 of `OVERLAY-steen-opening-brief.pdf` rasterized at 60 dpi and viewed. Fonts: Liberation Serif Regular, Bold, Italic, BoldItalic only; no typst warnings.
 
 | Page | Result |
 |---|---|
@@ -64,7 +64,7 @@ All 8 pages of `OUTPUT-uscgcoca-opening-brief-steen.typst.pdf` and all 8 of `OVE
 1. TOC, table of authorities and summary of argument for briefs over 30 pages (R. 17.3) are not generated or checked; the 20,000-word limit is printed, not enforced.
 2. The word count is computed from the markdown and is approximate (footnote labels and markup removed); give `word_count` to certify an exact figure.
 3. The exemplar was filed under the 2019 edition, which had no word-count certificate; the template adds it because R. 17.3 (2025) requires it.
-4. The docx engine (`docx/`) was not changed in this pass (bead scope); it still builds the earlier EB Garamond form, and `usage/OUTPUT-uscgcoca-opening-brief-smoke.docx*` come from it.
+4. The docx engine (`docx/`) was not changed in this pass (bead scope); it still builds the earlier EB Garamond form, and `usage/OUTPUT-opening-brief-2.docx*` come from it.
 5. No `checks.yaml`; `tools/check.sh` not run.
 
 ## Engines

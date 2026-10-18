@@ -4,9 +4,9 @@ Doc type: **complaint commencing an adversary proceeding** in the United States 
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-innb-adversary-complaint-vendraminhenry1303061.pdf` (one filer: a creditor-plaintiff; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-innb-adversary-complaint-vendraminhenry.md`: the whole filed text (10 pages of exemplar), transcribed as filed |
-| render | ok: `usage/OUTPUT-innb-adversary-complaint-vendraminhenry.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (one filer: a creditor-plaintiff; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md`: the whole filed text (10 pages of exemplar), transcribed as filed |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
 | overlay | ok: `usage/OVERLAY-vendramin-henry-adversary-complaint.pdf` and `.txt` (exit 0) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -51,7 +51,7 @@ Not produced by this template (separate filings; no rule was checked for them): 
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env at ~/tb)
-sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-innb-adversary-complaint-vendraminhenry.md
+sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/adversary-complaint vendramin-henry-adversary-complaint
 ```
 
@@ -90,7 +90,7 @@ File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf` (it stri
 
 ## Engines
 
-DOCX engine (`docx/`): `reference.docx` built by `docx/build-reference.sh`, filter `docx/innb.lua`. Output `usage/OUTPUT-innb-adversary-complaint-vendraminhenry.docx`.
+DOCX engine (`docx/`): `reference.docx` built by `docx/build-reference.sh`, filter `docx/innb.lua`. Output `usage/OUTPUT-adversary-complaint.docx`.
 
 - Matches the typst form: EB Garamond 13 pt body; exact 24 pt line pitch; 0.5 in first-line indent; US Letter with 1 in margins; single-spaced caption, counsel, signature and footnote text; centred page number (11 pt) in the footer; court title, debtor block, parties block with the adversary number, title, lead-in, numbered paragraphs (numbered by the filter, not the sample), lettered sub-items and WHEREFORE unnumbered; signature block in one unbreakable row. Everything case-specific comes from the frontmatter.
 - Differs or unverified: the caption rules and cell paddings are approximations of the typst stroke and inset values and have not been compared on a page. Single spacing is Word's "single", not typst's 0.2 em leading. The "By:" line is underlined spaces, not a drawn line. The signature block does not carry the last paragraph to the next page (same open item as typst, page 9 of the typst render); it is not fixed here. The font must be installed on the machine that opens the file (Word substitutes silently otherwise).

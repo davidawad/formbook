@@ -1,6 +1,6 @@
 # Exemplar source: bap1 answering brief
 
-**Status: exemplar found (2026-10-16).** `SAMPLE-bap1-answering-brief-blumsackmw2303.pdf`, details under "Resolved 2026-10-16" below. The earlier status was "BLOCKED: no exemplar"; the search history that led to it is kept below.
+**Status: exemplar found (2026-10-16).** `FILED-EXAMPLE-answering-brief.pdf`, details under "Resolved 2026-10-16" below. The earlier status was "BLOCKED: no exemplar"; the search history that led to it is kept below.
 
 ## Searches tried (2026-10-14 and 2026-10-15)
 
@@ -22,7 +22,7 @@
 
 The earlier searches filtered on CourtListener court id `bap1`, which has opinions only. CourtListener files the First Circuit BAP's dockets under the circuit's court id `ca1`: BAP No. MW 23-03 is ca1 docket "23-3". Found with the CourtListener RECAP search API (`type=r`, `court=ca1`, `caseName:Blumsack`).
 
-### SAMPLE-bap1-answering-brief-blumsackmw2303.pdf (primary exemplar)
+### FILED-EXAMPLE-answering-brief.pdf (primary exemplar)
 
 - Court: United States Bankruptcy Appellate Panel for the First Circuit
 - Case: *Blumsack v. Harrington, United States Trustee (In re Scott H. Blumsack, d/b/a Mass Athletics, LLC)*
@@ -34,7 +34,7 @@ The earlier searches filtered on CourtListener court id `bap1`, which has opinio
 - Date retrieved: 2026-10-16. The file is the original as downloaded, unmodified (sha256 a99075c50ee105a68416cec747c4656f5d97d02227f94c344e36aba1e01623a3).
 - Text layer and fonts: born-digital (Acrobat PDFMaker 23 for Word, stamped by the judiciary's iText ECF header). Body in Garamond 14 pt (embedded), baseline pitch about 31.5 pt (double spaced); case names italic. Text extracts cleanly with `pdftotext`.
 - No statement regarding interested parties: the filer is a governmental party, which 1st Cir. BAP L.R. 8014-1(a)(3) exempts.
-- Used for: the transcription `usage/INPUT-bap1-answering-brief-blumsack.md`, the render `usage/OUTPUT-bap1-answering-brief-blumsack.typst.pdf` and the overlay `usage/OVERLAY-blumsack-answering-brief.pdf`/`.txt`.
+- Used for: the transcription `usage/INPUT-answering-brief.md`, the render `usage/OUTPUT-answering-brief.typst.pdf` and the overlay `usage/OVERLAY-blumsack-answering-brief.pdf`/`.txt`.
 
 ### Alternate exemplar (different filer, same case; not saved here)
 

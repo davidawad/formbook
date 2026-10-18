@@ -4,10 +4,10 @@ Doc type: **motion brief**, a memorandum of law in support of a motion to dismis
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-vid-motion-brief-wooten123cv00012.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-vid-motion-brief-wooten.md` (the whole memorandum: caption, introduction, legal standard, argument, conclusion, signature, certificate of service) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (the whole memorandum: caption, introduction, legal standard, argument, conclusion, signature, certificate of service) |
 | typeface | none required by the rules (VI-FONT-001): EB Garamond kept, no substitute needed |
-| render | ok: `usage/OUTPUT-vid-motion-brief-wooten.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-wooten-motion-brief.pdf` and `OVERLAY-wooten-motion-brief.txt` |
 | pages reviewed | 9 of 9 (each page rendered at 70 dpi and viewed; see the review record below) |
 
@@ -82,7 +82,7 @@ Defects found during the review and fixed: (a) the caption repeated "v." as a pa
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form.
-- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/vid.lua`; output `usage/OUTPUT-vid-motion-brief-wooten.docx`): pandoc on a per-court reference.docx, with the caption, title, signature block and certificate of service built by the filter from the frontmatter. It matches the typst template in: EB Garamond 12 pt; exact 24 pt (double) line spacing; 1 in margins on letter paper; 0.5 in first-line indent of body paragraphs; centered PAGE number in the footer; the court name and division, centered; the caption (parties left, closed by a rule on the right and bottom; the frontmatter `number_label` and `case_number` at right); the centered bold title; Heading 1 (centered bold), Heading 2 (bold), Heading 3 (bold italic); block quotations single spaced, indented 0.5 in each side; the list kept with what follows; the signature block as a two-column table that does not split; the certificate of service (centered bold title, text, right-aligned `/s/` line) after the signature.
+- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/vid.lua`; output `usage/OUTPUT-motion-brief.docx`): pandoc on a per-court reference.docx, with the caption, title, signature block and certificate of service built by the filter from the frontmatter. It matches the typst template in: EB Garamond 12 pt; exact 24 pt (double) line spacing; 1 in margins on letter paper; 0.5 in first-line indent of body paragraphs; centered PAGE number in the footer; the court name and division, centered; the caption (parties left, closed by a rule on the right and bottom; the frontmatter `number_label` and `case_number` at right); the centered bold title; Heading 1 (centered bold), Heading 2 (bold), Heading 3 (bold italic); block quotations single spaced, indented 0.5 in each side; the list kept with what follows; the signature block as a two-column table that does not split; the certificate of service (centered bold title, text, right-aligned `/s/` line) after the signature.
 - docx differences (pandoc and Word limits): body paragraphs are not numbered in this doc type, as in the typst template. Keep-with-next approximates the typst sticky list and the sticky certificate title; page breaks are not guaranteed to match the typst render (9 pages). Caption rules and table row heights differ between Word and LibreOffice. No TOC or TOA in this doc type.
 - Not verified: pagination and appearance. The docx was checked only as a zip whose entries all read and whose XML parts are well formed (`ziptool`, `xmllint`). It has not been opened in Word or LibreOffice, and no `.docx.pdf` was rendered (LibreOffice is not installed on the build box).
 - **BLOCKED** (all checks measured on `usage/OUTPUT-wooten-motion-brief.docx.pdf`): no checks file is readable (this folder and the court folder have no `checks.yaml` or `rules.md`), so the gate check IDs cannot be listed. The rule IDs the template traces to are VI-FORM-001, VI-FORM-002, VI-FONT-001, VI-CONT-001, VI-CONT-002, VI-CONT-003, FRCP-10(a) and FRCP-12(b)(6). Reason for each: LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked.

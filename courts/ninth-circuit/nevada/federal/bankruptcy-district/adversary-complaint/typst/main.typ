@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nvb-adversary-complaint.typ": nvb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nvb-adversary-complaint-lovatovsassoncomplaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #nvb-adversary-complaint(meta, body)

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "areb-adversary-complaint.typ": areb-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-areb-adversary-complaint-watkins.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #areb-complaint(meta, body)

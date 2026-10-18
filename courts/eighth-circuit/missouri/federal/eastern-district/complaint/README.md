@@ -5,9 +5,9 @@ Folder: `courts/eighth-circuit/missouri/federal/eastern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-moed-complaint-carreaga426cv00743.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-moed-complaint-carreaga.md` (a transcription of the filing, 10 rendered pages; see "Sample" below) |
-| render | ok: `usage/OUTPUT-moed-complaint-carreaga.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (a transcription of the filing, 10 rendered pages; see "Sample" below) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-carreaga-complaint.pdf` and `usage/OVERLAY-carreaga-complaint.txt` (page map) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
 | BLOCKED | none |

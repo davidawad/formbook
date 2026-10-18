@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "vtd-complaint.typ": vtd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-vtd-complaint-bonges.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #vtd-complaint(meta, body)

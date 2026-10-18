@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "cacd-complaint.typ": cacd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-cacd-complaint-alarcon.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #cacd-complaint(meta, body)

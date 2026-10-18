@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "vaed-complaint.typ": vaed-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-vaed-complaint-tamaris.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #vaed-complaint(meta, body)

@@ -5,10 +5,10 @@ Folder: `courts/tenth-circuit/new-mexico/federal/bankruptcy-district/adversary-c
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nmb-adversary-complaint-johnsonvmarker2401003.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nmb-adversary-complaint-johnsonvmarkercomplaint.md`: the whole filing (10 pages), transcribed from the text layer |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md`: the whole filing (10 pages), transcribed from the text layer |
 | typeface | No face named (FRBP 9004 and NM LBR, 2023 edition, read in full 2026-10-15; neither names a typeface, font size or spacing). Keeps EB Garamond (`docs/FONTS.md`, "No face named"). Not a substitution: no metric or visual check applies. |
-| render | ok (re-run 2026-10-15, `sh tools/render.sh`): `usage/OUTPUT-nmb-adversary-complaint-johnsonvmarkercomplaint.typst.pdf`, 9 pages, letter, EB Garamond only (`pdffonts`: `EBGaramond-Regular`, `EBGaramond-Bold`, embedded), no typst warnings |
+| render | ok (re-run 2026-10-15, `sh tools/render.sh`): `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, letter, EB Garamond only (`pdffonts`: `EBGaramond-Regular`, `EBGaramond-Bold`, embedded), no typst warnings |
 | overlay | ok (re-run 2026-10-15, `sh tools/overlay.sh`): `usage/OVERLAY-johnson-v-marker-complaint.pdf` and `OVERLAY-johnson-v-marker-complaint.txt`. The exemplar PDF is not in `usage/` in this snapshot; the run passed a copy fetched from the URL in `usage/SOURCE.md` (sha256 `fea81f88d4b89acffd7e08a90a9bf7eebca9a095e52ba387ab476e383b064eeb`, 10 pages, 2,966 words) as the optional third argument. |
 | pages reviewed | 9 of 9 (re-rendered 2026-10-15; every page rasterized at 60 dpi and viewed) |
 | check.sh / selftest | not run: `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/` |

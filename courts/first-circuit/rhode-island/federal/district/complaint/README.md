@@ -5,9 +5,9 @@ Folder: `courts/first-circuit/rhode-island/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-rid-complaint-nightingale126cv00213.pdf` (1 filer, 11 pages; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-rid-complaint-nightingale.md`: the whole filing, converted from the exemplar's text layer and corrected by hand (100 numbered paragraphs, 3 headings per count, prayer, signature). Paragraph numbers are the template's, not transcribed. |
-| render | ok: `usage/OUTPUT-rid-complaint-nightingale.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer, 11 pages; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: the whole filing, converted from the exemplar's text layer and corrected by hand (100 numbered paragraphs, 3 headings per count, prayer, signature). Paragraph numbers are the template's, not transcribed. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-nightingale-complaint.pdf` and `usage/OVERLAY-nightingale-complaint.txt` |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -81,7 +81,7 @@ LOG:
 
 **typst** is the reference and is unchanged by the docx work.
 
-**docx** (`docx/reference.docx` built by `docx/make-reference.sh`; `docx/rid-complaint.lua` for the cover, the numbered allegations and the signature block). Output: `usage/OUTPUT-rid-complaint-nightingale.docx` and `usage/OUTPUT-rid-complaint-nightingale.docx.pdf` (LibreOffice, 11 pages). Status: converts without error; every page of the docx PDF was viewed at 60 dpi beside the typst page of the same sample (pages_reviewed = 11). Not opened in Microsoft Word (not available here); the file is a valid zip with well-formed XML parts.
+**docx** (`docx/reference.docx` built by `docx/make-reference.sh`; `docx/rid-complaint.lua` for the cover, the numbered allegations and the signature block). Output: `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice, 11 pages). Status: converts without error; every page of the docx PDF was viewed at 60 dpi beside the typst page of the same sample (pages_reviewed = 11). Not opened in Microsoft Word (not available here); the file is a valid zip with well-formed XML parts.
 
 - *Matches typst (checked on the LibreOffice PDF):* US Letter, 1-inch margins; EB Garamond 12 pt (the only font embedded); double spacing at exact 27.6 pt; single spacing at 13.8 pt for the caption, headings, counsel and signature blocks; the caption (party column with the rule on the right and below, "C.A. No.", JURY TRIAL DEMANDED); the court title and the title of the paper; allegations numbered 1. to 100. with a first-line indent and the number followed by a tab; the WHEREFORE prayer unnumbered; headings (level 1 and 2 centered, level 2 bold italic, level 3 bold at the left); the signature block in the same column, with "/s/" and bar numbers, kept on one page, and the same gaps as typst (measured on the PDF); page number centered at the bottom of every page, arabic from 1. Every body line starts on the same baseline as typst's, offset by a constant 3 pt.
 - *Differs (tier 2, not blocking):* (a) LibreOffice wraps a few body lines one word differently from typst, so some pages end a line or two earlier or later; the docx PDF has 11 pages as typst does, but COUNT VI begins page 11 in the docx and page 10 in typst. (b) Every line sits about 3 pt lower than in the typst PDF (LibreOffice's baseline for exact line spacing), including the top of page 1. (c) The number of a three-digit allegation (paragraph 100) is followed by a tab stop at 1.9 in in Word, so its text starts 11 pt left of typst's (typst sets 0.3 in after the number). (d) The paragraph numbers are typed labels, not Word list numbering (no visible difference; a list would renumber itself if an allegation were inserted).

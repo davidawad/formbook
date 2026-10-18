@@ -1,6 +1,6 @@
 # Exemplar source: motion with argument and authorities (E.D. Tex. Bankr., Sherman Division)
 
-- File: `SAMPLE-txeb-motion-brief-balloutwisner2104121.pdf` (8 pages, text layer present)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (8 pages, text layer present)
 - Case: *Ballout Real Estate, LLC v. Wisner*, Adv. No. 21-04121 (main case: In re Greg N. Wisner and Dana P. Wisner, Chapter 7, No. 21-41120), U.S. Bankruptcy Court, E.D. Tex., Sherman Division
 - Document: Doc 11, "DEFENDANTS' MOTION TO DISMISS COUNT OF COMPLAINT SEEKING DECLARATORY JUDGMENT REGARDING DISCHARGE AND DISCHARGEABILITY OF A DEBT UNDER 11 U.S.C. §§ 727 & 523". One document: the motion, the argument and authorities (¶¶ 15 to 25), the prayer, and the certificate of service. No separate memorandum and no proposed order in this document.
 - Filer: John Paul Stanford, Quilling, Selander, Lownds, Winslett & Moser, P.C., for Defendants Greg N. Wisner and Dana P. Wisner

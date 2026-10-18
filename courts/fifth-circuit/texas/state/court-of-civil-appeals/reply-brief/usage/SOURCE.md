@@ -1,6 +1,6 @@
 # Exemplar sources
 
-## SAMPLE-texapp-reply-brief-sample.pdf (used for the overlay and the transcribed sample)
+## FILED-EXAMPLE-reply-brief.pdf (used for the overlay and the transcribed sample)
 
 - Document: Appellant's Reply Brief, 10 pages (cover, contents, 7 pages of reply and certificates, plus a table of authorities).
 - Filer: Scott H. Palmer, P.C. (Niles Illich, Rebekah Perlstein; counsel for Appellant J.R.). Same filer as the opening-brief exemplar.

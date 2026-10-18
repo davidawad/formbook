@@ -5,11 +5,11 @@ Folder: `courts/fifth-circuit/texas/federal/western-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, one filer: `usage/SAMPLE-txwd-motion-brief-lulac126cv00729.pdf` (Dallas County Election Administrator's Rule 12 motion and brief, 22 pages). See `usage/SOURCE.md`. The second-filer check is not met: see gap 1. |
-| sample md | `usage/INPUT-txwd-motion-brief-lulacrule12motiontodismiss.md` (an excerpt: cover, table of contents, introduction, grounds, argument A, B.1 to B.3, part of C, prayer, signature block, certificate of service). |
+| exemplar | yes, one filer: `usage/FILED-EXAMPLE-motion-brief.pdf` (Dallas County Election Administrator's Rule 12 motion and brief, 22 pages). See `usage/SOURCE.md`. The second-filer check is not met: see gap 1. |
+| sample md | `usage/INPUT-motion-brief.md` (an excerpt: cover, table of contents, introduction, grounds, argument A, B.1 to B.3, part of C, prayer, signature block, certificate of service). |
 | typeface | face required: none (CV-10(a) names no face). Substitute: none needed; **EB Garamond** kept (`docs/FONTS.md`, "No face named"). Embedded: EB Garamond Regular and Bold only (`pdffonts`, 2026-10-14). |
-| render | ok: `usage/OUTPUT-txwd-motion-brief-lulacrule12motiontodismiss.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14). |
-| overlay | ok: `usage/OVERLAY-lulac-rule-12-motion-to-dismiss.pdf` and `.txt` (see "Overlay"), regenerated 2026-10-14 against `usage/SAMPLE-txwd-motion-brief-lulac126cv00729.pdf`. That PDF was missing from the checkout and was fetched from the URL in `usage/SOURCE.md`. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14). |
+| overlay | ok: `usage/OVERLAY-lulac-rule-12-motion-to-dismiss.pdf` and `.txt` (see "Overlay"), regenerated 2026-10-14 against `usage/FILED-EXAMPLE-motion-brief.pdf`. That PDF was missing from the checkout and was fetched from the URL in `usage/SOURCE.md`. |
 | pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed on the final build; all 14 viewed again on the 2026-10-14 re-render). |
 | gates | `tools/check.sh` not run: it expects a court folder with `court.json` and `rules.md`, which this doc-type folder does not have, and the brief forbids editing `tools/`. |
 
@@ -93,7 +93,7 @@ Reviewed pages: 14 of 14.
 
 ## Engines
 
-docx (`docx/`): `render.sh` runs pandoc in two passes with `reference.docx` (built by `build-reference.sh`) and `txwd-motion-brief.lua`, then patches the list definitions pandoc writes. Pass 1 renders the document with LibreOffice and finds each heading's page; pass 2 writes the table of contents with those page numbers. Output: `usage/OUTPUT-txwd-motion-brief-lulacrule12motiontodismiss.docx` and `.docx.pdf` (LibreOffice). Opened and checked in LibreOffice only; Word was not checked.
+docx (`docx/`): `render.sh` runs pandoc in two passes with `reference.docx` (built by `build-reference.sh`) and `txwd-motion-brief.lua`, then patches the list definitions pandoc writes. Pass 1 renders the document with LibreOffice and finds each heading's page; pass 2 writes the table of contents with those page numbers. Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice). Opened and checked in LibreOffice only; Word was not checked.
 
 - Matches the typst form: EB Garamond 13 pt (embedded: EB Garamond Regular and Bold only), letter with 1 in margins, double spacing (exact 26 pt) and single (exact 15.6 pt) for the caption, headings, block quotations, signature and certificate, the cover title double-spaced, the caption as a borderless table, level 1 headings centred bold and levels 2 and 3 left bold, 0.5 in first-line indent, block quotation indented 0.5 in each side, signature table kept on one page, certificate of service after the signature, centred PAGE number, table of contents on its own page with dot leaders.
 - Differs: LibreOffice draws the glyphs at the bottom of each exact 26 pt line, so a page holds 24 lines (typst 25 to 26); both are 14 pages, with different breaks: in docx the signature block follows the prayer on page 13 and the certificate is on page 14; in typst the prayer is on page 13 and the signature block and certificate are on page 14. Margins are unchanged.

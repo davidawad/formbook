@@ -8,10 +8,10 @@ Doc type `motion-brief`, under [`../`](../) (the bankruptcy district court). A m
 |---|---|
 | `typst/main.typ` | Entry point. Reads `--input sample=...`, splits frontmatter, calls the template. |
 | `typst/vib-motion-brief.typ` | The template: `motion(meta, md)`. Every number is a named parameter or traces to a rule. |
-| `usage/INPUT-vib-motion-brief-prossermotiontodismiss.md` | An EXCERPT (8 of 60 pages of the filing, see below) transcribed from the filed omnibus memorandum: cover, preliminary statement, factual background A and B.1–B.2 with footnotes, conclusion, signature. |
-| `usage/OUTPUT-vib-motion-brief-prossermotiontodismiss.typst.pdf` | Our render (`tools/render.sh`). 8 pages. |
+| `usage/INPUT-motion-brief.md` | An EXCERPT (8 of 60 pages of the filing, see below) transcribed from the filed omnibus memorandum: cover, preliminary statement, factual background A and B.1–B.2 with footnotes, conclusion, signature. |
+| `usage/OUTPUT-motion-brief.typst.pdf` | Our render (`tools/render.sh`). 8 pages. |
 | `usage/OVERLAY-prosser-motion-to-dismiss.pdf` / `.txt` | Red (ours) / blue (filed) overlay and the page map (`tools/overlay.sh`). |
-| `usage/SAMPLE-vib-motion-brief-prosserchristies2103001.pdf` | The filed exemplar (60 pp., text layer). |
+| `usage/FILED-EXAMPLE-motion-brief.pdf` | The filed exemplar (60 pp., text layer). |
 | `usage/SOURCE.md` | Where it came from, filer, case, date filed, URL, date fetched. |
 
 File names follow the tools: `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`. The sample is `INPUT-<id>.md` (file role in the name, CLAUDE.md).
@@ -19,7 +19,7 @@ File names follow the tools: `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`. The sam
 Build and check (from the repo root):
 
 ```sh
-sh tools/render.sh courts/third-circuit/virgin-islands/federal/bankruptcy-district/motion-brief usage/INPUT-vib-motion-brief-prossermotiontodismiss.md
+sh tools/render.sh courts/third-circuit/virgin-islands/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/third-circuit/virgin-islands/federal/bankruptcy-district/motion-brief prosser-motion-to-dismiss
 ```
 
@@ -77,7 +77,7 @@ The overlay is a diagnostic and was not opened by eye in this pass. The page pai
 
 ## Pages reviewed (Gate 2, this PDF)
 
-All 8 pages of `usage/OUTPUT-vib-motion-brief-prossermotiontodismiss.typst.pdf` were rendered at 60 dpi and looked at:
+All 8 pages of `usage/OUTPUT-motion-brief.typst.pdf` were rendered at 60 dpi and looked at:
 
 - p.1: cover. Fixed in this pass: the second counsel block spilled to page 2 (fixed by tightening the spacing between the cover's parts, widening the caption's left column to 3.9 in, and widening the counsel column). The Hunton block now fits, with its last line close to the footer.
 - p.2: TOC. Fixed in this pass: the entries wrapped with the leader and page number in the wrong place (now the text wraps before the leader); the TOC labels were one step behind (the counter was read before the heading stepped it; now read after), and the sample had typed letters into its headings, doubling the labels (removed from the sample).

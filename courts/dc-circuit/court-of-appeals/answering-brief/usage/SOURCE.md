@@ -13,15 +13,15 @@
 | Found via | CourtListener API search (`type=r`, `court=cadc`, description "APPELLEE BRIEF") |
 | Date fetched | 2026-10-14 |
 
-The filing is public (a public RECAP document in a federal appellate docket). Only the exemplar's text is transcribed; see `usage/INPUT-cadc-answering-brief-wilson.md`.
+The filing is public (a public RECAP document in a federal appellate docket). Only the exemplar's text is transcribed; see `usage/INPUT-answering-brief.md`.
 
 Other D.C. Circuit appellee briefs in the same search (not used): No. 25-5055 (Harris v. Bessent, private appellee, 12,972 words), No. 25-5418 (DC v. Trump, 149 pages).
 
-## 2. SAMPLE-cadc-answering-brief-newyork195125.pdf
+## 2. FILED-EXAMPLE-answering-brief-2.pdf
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cadc-answering-brief-newyork195125.pdf` (111 pages, 1.6 MB; brief pp. 1-94 of the PDF, then a statutory addendum and certificate of service) |
+| File | `FILED-EXAMPLE-answering-brief-2.pdf` (111 pages, 1.6 MB; brief pp. 1-94 of the PDF, then a statutory addendum and certificate of service) |
 | Court | United States Court of Appeals for the District of Columbia Circuit |
 | Case | *State of New York, et al. v. U.S. Department of Labor, et al.*, No. 19-5125 (appeal from the U.S. District Court for the District of Columbia) |
 | Docket/document | ECF stamp "USCA Case #19-5125 Document #1801284 Filed: 08/08/2019" |

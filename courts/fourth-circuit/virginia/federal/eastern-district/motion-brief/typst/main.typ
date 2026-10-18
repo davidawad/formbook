@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "vaed-motion-brief.typ": vaed-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-vaed-motion-brief-keppel.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #vaed-motion-brief(meta, body)

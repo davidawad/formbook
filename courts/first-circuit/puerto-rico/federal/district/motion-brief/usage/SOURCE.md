@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-prd-motion-brief-franklincalifornia314cv01518.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Fetched from | https://www.mintz.com/sites/default/files/viewpoints/orig/45/2014/07/PR-Commonwealth-Motion-to-Dismiss1.pdf (a law-firm host; the filing itself is public ECF material) |
 | Court | United States District Court, District of Puerto Rico |
 | Case | *Franklin California Tax-Free Trust, et al. v. The Commonwealth of Puerto Rico, et al.* |
@@ -20,7 +20,7 @@ Limits: one filer and one judge. The 2014 local rules applied when it was filed.
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-prd-motion-brief-condevidal314cv01253.pdf` |
+| File | `FILED-EXAMPLE-motion-brief-2.pdf` |
 | Fetched from | https://lambdalegal.org/wp-content/uploads/2014/09/dkt._44_-_2014.9.15_-_plaintiffs_memorandum_in_support_of_their_motion_for_summary_judgment.pdf (Lambda Legal's copy of the ECF filing; located through the site's media index https://lambdalegal.org/wp-json/wp/v2/media?search=dkt) |
 | Court | United States District Court, District of Puerto Rico |
 | Case | *Ada Mercedes Conde Vidal, et al. v. Alejandro J. García Padilla, et al.* |

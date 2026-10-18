@@ -28,11 +28,11 @@ Kinds: **M** mandated by a court rule; **C** convention (taken from the filed ex
 |---|---|
 | `typst/armfor-opening-brief.typ` | The template: `armfor-opening-brief(meta, md)`. Content-agnostic: no case text, no coordinates, no forced line breaks, the vendored EB Garamond only (`fallback: false`). |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
-| `usage/INPUT-armfor-opening-brief-pinkerton.md` | The markdown transcription of the Pinkerton brief: frontmatter (caption, four counsel, signature, service, authorities), then the granted issue, jurisdiction, the case, the facts (A to E), the summary, the Argument (point I with its standard of review, and sub-heading B with its first path), the conclusion, and five footnotes. About half of the filed text; the rest of the Argument (point I.B, Paths 2 and beyond, and sub-heading C and D) is omitted. |
-| `usage/OUTPUT-armfor-opening-brief-pinkerton.typst.pdf` | The render: 15 pages (cover, index, two pages of authorities, nine pages of body, two certificates). |
+| `usage/INPUT-opening-brief.md` | The markdown transcription of the Pinkerton brief: frontmatter (caption, four counsel, signature, service, authorities), then the granted issue, jurisdiction, the case, the facts (A to E), the summary, the Argument (point I with its standard of review, and sub-heading B with its first path), the conclusion, and five footnotes. About half of the filed text; the rest of the Argument (point I.B, Paths 2 and beyond, and sub-heading C and D) is omitted. |
+| `usage/OUTPUT-opening-brief.typst.pdf` | The render: 15 pages (cover, index, two pages of authorities, nine pages of body, two certificates). |
 | `usage/OVERLAY-pinkerton-opening-brief.pdf`, `.txt` | The red/blue comparison and its page map. |
-| `usage/SAMPLE-armfor-opening-brief-pinkerton260225.pdf` | Filed exemplar 1 (Army, 2026). |
-| `usage/SAMPLE-armfor-opening-brief-muller190230.pdf` | Filed exemplar 2 (Air Force, 2019 Term), for the tier-2 cross-check. |
+| `usage/FILED-EXAMPLE-opening-brief.pdf` | Filed exemplar 1 (Army, 2026). |
+| `usage/FILED-EXAMPLE-opening-brief-2.pdf` | Filed exemplar 2 (Air Force, 2019 Term), for the tier-2 cross-check. |
 | `usage/SOURCE.md` | URL, case, docket, filer, date filed, date fetched, for both exemplars. |
 
 File names follow the repository's file-role convention (`INPUT-`, `OUTPUT-`, `OVERLAY-`) because `tools/render.sh` and `tools/overlay.sh` read and write those names by default; see the same note in `../petition-supplement/README.md`.
@@ -41,19 +41,19 @@ Commands, from the repository root:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # toolchain from the box setup (typst 0.15.0, poppler, ImageMagick)
-sh tools/render.sh courts/military/court-of-appeals-for-the-armed-forces/opening-brief usage/INPUT-armfor-opening-brief-pinkerton.md
-sh tools/overlay.sh courts/military/court-of-appeals-for-the-armed-forces/opening-brief pinkerton-opening-brief courts/military/court-of-appeals-for-the-armed-forces/opening-brief/usage/SAMPLE-armfor-opening-brief-pinkerton260225.pdf
+sh tools/render.sh courts/military/court-of-appeals-for-the-armed-forces/opening-brief usage/INPUT-opening-brief.md
+sh tools/overlay.sh courts/military/court-of-appeals-for-the-armed-forces/opening-brief pinkerton-opening-brief courts/military/court-of-appeals-for-the-armed-forces/opening-brief/usage/FILED-EXAMPLE-opening-brief.pdf
 ```
 
 The overlay takes the Pinkerton exemplar as its third argument because the sample is transcribed from it; by default it would compare against the first exemplar by name (Muller).
 
 ## Results
 
-- Render: **ok**. `tools/render.sh` ran and wrote `usage/OUTPUT-armfor-opening-brief-pinkerton.typst.pdf` with no typst warnings. Fonts: `EBGaramond-Regular`, `-Bold`, `-Italic`, all embedded.
+- Render: **ok**. `tools/render.sh` ran and wrote `usage/OUTPUT-opening-brief.typst.pdf` with no typst warnings. Fonts: `EBGaramond-Regular`, `-Bold`, `-Italic`, all embedded.
 - Overlay: **ok**. `tools/overlay.sh` ran against the Pinkerton exemplar and wrote `OVERLAY-pinkerton-opening-brief.pdf`. The page map (`OVERLAY-pinkerton-opening-brief.txt`) pairs our cover, index and authorities with the exemplar's first pages, and pairs each body page with the exemplar page it shares the most words with (ours PDF p.5 to p.15 with filed p.5, 8, 9, 10, 12, 7, 13, 15, 23, 25, 26). The overlay is a diagnostic, not a score.
 - Pages reviewed: **15 of 15**. Each page of the current PDF was rendered at 60 dpi and looked at. The certificate page (PDF p.14) was re-rendered and re-viewed after its one fix.
 
-## Gate 2: visual review of `usage/OUTPUT-armfor-opening-brief-pinkerton.typst.pdf`
+## Gate 2: visual review of `usage/OUTPUT-opening-brief.typst.pdf`
 
 "Overlay pairs with" is the Pinkerton exemplar's PDF page that the overlay paired with this page (`OVERLAY-pinkerton-opening-brief.txt`). "body" is the page number printed in the footer.
 

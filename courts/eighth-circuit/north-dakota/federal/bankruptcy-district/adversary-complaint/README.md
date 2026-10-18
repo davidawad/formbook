@@ -5,16 +5,16 @@ Folder: `courts/eighth-circuit/north-dakota/federal/bankruptcy-district/adversar
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ndb-adversary-complaint-bourbonstreet2307012.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ndb-adversary-complaint-bourbonstreet.md` (full transcription of the 9-page filing, plus the consent statement in the frontmatter; see "Sample") |
-| render | ok: `usage/OUTPUT-ndb-adversary-complaint-bourbonstreet.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (full transcription of the 9-page filing, plus the consent statement in the frontmatter; see "Sample") |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-bourbon-street.pdf` and `usage/OVERLAY-bourbon-street.txt` (page map) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; pages 1-7 viewed on the render before the consent change, page 8 viewed after the final change) |
 
 Commands (run from /work/repo with the toolchain on PATH):
 
 ```
-sh tools/render.sh courts/eighth-circuit/north-dakota/federal/bankruptcy-district/adversary-complaint usage/INPUT-ndb-adversary-complaint-bourbonstreet.md
+sh tools/render.sh courts/eighth-circuit/north-dakota/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/eighth-circuit/north-dakota/federal/bankruptcy-district/adversary-complaint bourbon-street
 ```
 
@@ -52,7 +52,7 @@ Nothing in the rules sets a font, a size beyond legibility, or a line spacing fo
 
 ## Sample
 
-`usage/INPUT-ndb-adversary-complaint-bourbonstreet.md` transcribes the complete 9-page filing: caption, lead-in, all 39 numbered paragraphs, the three counts with their headings and WHEREFORE clauses, and the signature block. The transcription keeps the filing's wording and punctuation. Differences from the filed document:
+`usage/INPUT-adversary-complaint.md` transcribes the complete 9-page filing: caption, lead-in, all 39 numbered paragraphs, the three counts with their headings and WHEREFORE clauses, and the signature block. The transcription keeps the filing's wording and punctuation. Differences from the filed document:
 
 - `consent_statement` is a test value, supplied in the frontmatter. The filed complaint does not contain a consent statement. The statement is required by FRBP 7008(a) and the wording is counsel's choice; the sample's text is only a stand-in to exercise the field.
 - The bracketed "[Signature on Following Page]" line is not transcribed (the template places the signature).
@@ -89,7 +89,7 @@ The overlay is a diagnostic, not a score. Differences in the lower-overlap pages
 
 ## Review of the rendered pages (Gate 2 rows)
 
-Every page of `usage/OUTPUT-ndb-adversary-complaint-bourbonstreet.typst.pdf` was rendered at 60 dpi and viewed. Defects found during the review and fixed in the template are listed first.
+Every page of `usage/OUTPUT-adversary-complaint.typst.pdf` was rendered at 60 dpi and viewed. Defects found during the review and fixed in the template are listed first.
 
 Fixed during review:
 - Paragraph spacing: blocks did not add the leading after their last line, so paragraphs collided and headings overlapped the text before them. Fixed by `below: body-leading` on every body block.

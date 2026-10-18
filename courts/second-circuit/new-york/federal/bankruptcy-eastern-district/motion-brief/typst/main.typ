@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nyeb-motion-brief.typ": nyeb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nyeb-motion-brief-bmtmemorandummotiontodismiss.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #nyeb-motion-brief(meta, body)

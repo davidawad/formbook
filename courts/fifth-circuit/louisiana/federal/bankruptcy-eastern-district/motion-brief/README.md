@@ -5,9 +5,9 @@ Folder: `courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/moti
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-laeb-motion-brief-crosbymarine261018.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-laeb-motion-brief-crosbymsjmemo.md` (the memorandum's caption, title, background, argument, conclusion, signature and certificate; the 28-page exemplar is abridged in its argument, see gap 8) |
-| render | ok: `usage/OUTPUT-laeb-motion-brief-crosbymsjmemo.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (the memorandum's caption, title, background, argument, conclusion, signature and certificate; the 28-page exemplar is abridged in its argument, see gap 8) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-crosby-msj-memo.pdf` and `usage/OVERLAY-crosby-msj-memo.txt` |
 | typeface | EB Garamond, 12 pt. No rule names a face, so `docs/FONTS.md` "No face named" applies and the template keeps EB Garamond (gap 2) |
 | pages reviewed | 8 of 8 (re-rendered and every page viewed at 60 dpi on 2026-10-14, fonts pass; output unchanged) |

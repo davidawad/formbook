@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "fiscr-amicus-brief.typ": fiscr-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-fiscr-amicus-brief-donohue.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-amicus-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #fiscr-brief(meta, body)

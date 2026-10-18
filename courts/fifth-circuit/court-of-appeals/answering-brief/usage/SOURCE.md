@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ca5-answering-brief-dawesvcityofdallas2510979.pdf`
+- File: `FILED-EXAMPLE-answering-brief.pdf`
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.ca5.226089/gov.uscourts.ca5.226089.38.0.pdf (RECAP copy of Document 38 on the docket; CourtListener docket id 73342939)
 - Case name: Dawes v. City of Dallas, et al.
 - Docket no.: No. 25-10979 (United States Court of Appeals for the Fifth Circuit)
@@ -13,7 +13,7 @@
 
 ## Second filer
 
-- File: `SAMPLE-ca5-answering-brief-rliatmaritime2330078.pdf`
+- File: `FILED-EXAMPLE-answering-brief-2.pdf`
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.ca5.212199/gov.uscourts.ca5.212199.45.0.pdf (RECAP copy of Document 45)
 - Case name: *A & T Maritime Logistics Incorporated v. RLI Insurance Company*
 - Docket no.: No. 23-30078 (United States Court of Appeals for the Fifth Circuit)

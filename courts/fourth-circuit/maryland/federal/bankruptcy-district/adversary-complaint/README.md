@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-co
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-mdb-adversary-complaint-kapitus2600188.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-mdb-adversary-complaint-kapituscomplaint.md` (an abridged transcription, see "Transcription") |
-| render | ok: `usage/OUTPUT-mdb-adversary-complaint-kapituscomplaint.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (an abridged transcription, see "Transcription") |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-kapitus-complaint.pdf` and `usage/OVERLAY-kapitus-complaint.txt` (13 sample pages paired with 19 exemplar pages) |
 | pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -105,12 +105,12 @@ The same markdown renders through three engines. Typst (`typst/`) is the referen
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-mdb-adversary-complaint-kapituscomplaint.typst.pdf` (13 pp) | reference |
-| docx | `OUTPUT-mdb-adversary-complaint-kapituscomplaint.docx` and `OUTPUT-mdb-adversary-complaint-kapituscomplaint.docx.pdf` (13 pp, LibreOffice) | rendered; BLOCKED lines below |
+| typst | `OUTPUT-adversary-complaint.typst.pdf` (13 pp) | reference |
+| docx | `OUTPUT-adversary-complaint.docx` and `OUTPUT-adversary-complaint.docx.pdf` (13 pp, LibreOffice) | rendered; BLOCKED lines below |
 
 ```sh
 sh docx/make-reference.sh     # rebuilds docx/reference.docx from pandoc's default reference document
-sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-complaint usage/INPUT-mdb-adversary-complaint-kapituscomplaint.md
+sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/bankruptcy-district/adversary-complaint usage/INPUT-adversary-complaint.md
 ```
 
 **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/mdb-adversary-complaint.lua`).
@@ -119,7 +119,7 @@ sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/bankrupt
 - *Differs (tier 2):* body lines break at other words, so some pages carry a line more or less than typst and a few page breaks move (page 4 onward, most visibly at pp. 4, 12 and 13). Prayer item C is split between pp. 12 and 13 in the docx; typst keeps it whole on p. 12. The caption rule sits closer to the next party line than in typst.
 - *Not verified:* the `.docx` has not been opened in Microsoft Word (no Word on this box). LibreOffice converts it without error, and it is a valid zip with well-formed XML parts (`unzip -t`, `xmllint` on every `.xml` and `.rels` part). Word may paginate slightly differently (docs/DOCX.md).
 - *Gate status:* this court folder has no `checks.yaml`, so `tools/check.sh --engine docx` was not run and no pass stamp was written. The review is by eye.
-- *Pages reviewed:* 13 of 13. Every page of `usage/OUTPUT-mdb-adversary-complaint-kapituscomplaint.docx.pdf` was rendered at 60 dpi and viewed beside the same page of the typst render, on the final build.
+- *Pages reviewed:* 13 of 13. Every page of `usage/OUTPUT-adversary-complaint.docx.pdf` was rendered at 60 dpi and viewed beside the same page of the typst render, on the final build.
 - *Build notes:* this box has no `unzip` or `zip`, so the reference build and the zip check used stand-ins outside the repo, built on the toolchain's `ziptool`. The first `soffice` run with a fresh profile exits 81; a wrapper retried it once.
 
 BLOCKED: docx-word-open: not opened in Microsoft Word (not installed on this box); LibreOffice opens and converts the file without error.

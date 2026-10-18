@@ -2,7 +2,7 @@
 
 - Court: `cavc`, United States Court of Appeals for Veterans Claims (`courts/federal-circuit/court-of-veteran-appeals/`)
 - Doc type: `opening-brief`, the appellant's principal brief (Vet. App. R. 28(a), 32). The Secretary's brief is `../answering-brief/`.
-- Exemplar: `usage/SAMPLE-cavc-opening-brief-chavez197391.pdf` (*Chavez v. Wilkie*, Vet. App. No. 19-7391, filed 2020-06-22, private counsel). Provenance in `usage/SOURCE.md`. One exemplar only: see Known gaps.
+- Exemplar: `usage/FILED-EXAMPLE-opening-brief.pdf` (*Chavez v. Wilkie*, Vet. App. No. 19-7391, filed 2020-06-22, private counsel). Provenance in `usage/SOURCE.md`. One exemplar only: see Known gaps.
 - Status: template built, rendered, overlay generated, every page reviewed (Gate 2 below). Not reviewed by a human. `court.json` untouched; no status set.
 - Every page is the court's own form; no case-specific text in the template.
 
@@ -10,10 +10,10 @@
 
 | Path | What |
 |---|---|
-| `typst/main.typ` | Entry point; reads `--input sample=...` (default `usage/INPUT-cavc-opening-brief-chavez.md`) and calls `cavc-opening-brief`. |
+| `typst/main.typ` | Entry point; reads `--input sample=...` (default `usage/INPUT-opening-brief.md`) and calls `cavc-opening-brief`. |
 | `typst/cavc-opening-brief.typ` | Template. Parameter block at the top: font and size, leading, margins, `page-limit = 30`, `required-sections` (Rule 28(a) order). |
-| `usage/INPUT-cavc-opening-brief-chavez.md` | Markdown sample: frontmatter (caption, counsel, signature, service, authorities registry) and a transcribed portion of the brief. |
-| `usage/OUTPUT-cavc-opening-brief-chavez.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-veteran-appeals/opening-brief usage/INPUT-cavc-opening-brief-chavez.md` (15 pages). |
+| `usage/INPUT-opening-brief.md` | Markdown sample: frontmatter (caption, counsel, signature, service, authorities registry) and a transcribed portion of the brief. |
+| `usage/OUTPUT-opening-brief.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-veteran-appeals/opening-brief usage/INPUT-opening-brief.md` (15 pages). |
 | `usage/OVERLAY-chavez-opening-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-veteran-appeals/opening-brief chavez-opening-brief` (red = ours, blue = filed, black = agree). |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
@@ -55,7 +55,7 @@ Checked and not applicable: Rule 32 sets no word limit and no certificate of com
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-cavc-opening-brief-chavez.typst.pdf` was rendered at 60 dpi and viewed (15 of 15). Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-opening-brief.typst.pdf` was rendered at 60 dpi and viewed (15 of 15). Typst printed no warnings. Fonts embedded: EB Garamond only.
 
 | Page | Content | Result |
 |---|---|---|
@@ -77,11 +77,11 @@ Every page of `OUTPUT-cavc-opening-brief-chavez.typst.pdf` was rendered at 60 dp
 
 | Engine | Folder | Output in `usage/` | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-cavc-opening-brief-chavez.typst.pdf` | rendered; Gate 2 above |
-| docx | `docx/` | `OUTPUT-cavc-opening-brief-chavez.docx` (pandoc, `docx/reference.docx`, `docx/cavc.lua`) | `.docx` written; `.docx.pdf` not produced (BLOCKED, below) |
+| typst (primary) | `typst/` | `OUTPUT-opening-brief.typst.pdf` | rendered; Gate 2 above |
+| docx | `docx/` | `OUTPUT-opening-brief.docx` (pandoc, `docx/reference.docx`, `docx/cavc.lua`) | `.docx` written; `.docx.pdf` not produced (BLOCKED, below) |
 | latex | `—` | none | not built |
 
-Build: `sh docx/make-reference.sh` regenerates `docx/reference.docx` from pandoc's default reference; `sh tools/render.sh --engine docx courts/federal-circuit/court-of-veteran-appeals/opening-brief usage/INPUT-cavc-opening-brief-chavez.md` writes the `.docx`. No `checks.yaml` exists for this court yet. `tools/check.sh --engine docx` exits 2 here (no `court.json` in the doc-type folder, and no `yq` on this box), so no gate ran on either engine.
+Build: `sh docx/make-reference.sh` regenerates `docx/reference.docx` from pandoc's default reference; `sh tools/render.sh --engine docx courts/federal-circuit/court-of-veteran-appeals/opening-brief usage/INPUT-opening-brief.md` writes the `.docx`. No `checks.yaml` exists for this court yet. `tools/check.sh --engine docx` exits 2 here (no `court.json` in the doc-type folder, and no `yq` on this box), so no gate ran on either engine.
 
 **docx matches the typst template:**
 

@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca4-opening-brief-netchoicevjones261252.pdf` |
+| File | `FILED-EXAMPLE-opening-brief.pdf` |
 | URL fetched from | https://netchoice.org/wp-content/uploads/2026/04/Virginia-Opening-Brief.pdf (a copy of the public filing, hosted by NetChoice; found by web search) |
 | Case | *NetChoice v. Jones* (caption: NETCHOICE, Plaintiff-Appellee, v. JAY JONES, in his official capacity as Attorney General of the Commonwealth of Virginia, Defendant-Appellant) |
 | Court / docket | U.S. Court of Appeals for the Fourth Circuit, No. 26-1252 (appeal from E.D. Va., No. 1:25-cv-02067) |
@@ -24,7 +24,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca4-opening-brief-plaintiffow241288.pdf` |
+| File | `FILED-EXAMPLE-opening-brief-2.pdf` |
 | URL | https://jlc.org/sites/default/files/attachments/2024-06/2024.06.13%20Appellant%27s%20Opening%20Br..pdf |
 | Filer | Plaintiff-Appellant O.W., through Makiba A. Gaines of Polaris Law Firm |
 | Case | *O.W. v. Carr, et al.*, No. 24-1288 |

@@ -2,7 +2,7 @@
 
 exemplar=yes. One filed exemplar is saved here.
 
-## SAMPLE-wiwb-motion-brief-johnson1810327.pdf
+## FILED-EXAMPLE-motion-brief.pdf
 
 - **Document:** Hiawatha National Bank's Post-Trial Memorandum of Law in Support of its Motion to Dismiss, *In re Mark Eugene Johnson*, Case No. 18-10327-12 (Bankr. W.D. Wis.), a chapter 12 case. A contested matter in the main case (Fed. R. Bankr. P. 9014), not an adversary proceeding.
 - **Filer:** Eckberg Lammers, P.C. (Hudson, Wis.), Amanda K. Schlitz, for creditor Hiawatha National Bank. Dated March 16, 2018.
@@ -10,7 +10,7 @@ exemplar=yes. One filed exemplar is saved here.
 - **Obtained from:** not recorded. The file entered the repo in the harvest merge `9239ac7` ("merge harvest-batch-1792027302"), which kept no download URL or date. A PACER/RECAP copy of docket 18-10327 is the likely source (unverified). The file is kept as committed and was not re-downloaded in this pass. **Open:** record the URL when the docket is next fetched.
 - **Contents:** court name, short-title caption (In re / debtor / "Debtor." at left; Case No. at right), designation in bold capitals, an opening paragraph, JURISDICTION AND VENUE and BACKGROUND (numbered paragraphs 1-27), ARGUMENT with lettered subheadings A-G, block quotations, a bulleted list, two footnotes, CONCLUSION, and a signature block (date at left; firm, "By: s/" signature, bar number, address, telephone, e-mail at right). No certificate of service, notice of motion or proposed order in this filing.
 
-The sample `usage/INPUT-wiwb-motion-brief-hiawathamemorandum.md` is a full-text transcription of this exemplar (checked word by word against `pdftotext` on 2026-10-16: the only differences are straight versus curly apostrophes in two block quotations and footnote markers).
+The sample `usage/INPUT-motion-brief.md` is a full-text transcription of this exemplar (checked word by word against `pdftotext` on 2026-10-16: the only differences are straight versus curly apostrophes in two block quotations and footnote markers).
 
 ## Only one filer
 

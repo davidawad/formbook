@@ -1,6 +1,6 @@
 # Exemplar source: adversary complaint (mab)
 
-- File: `SAMPLE-mab-adversary-complaint-lassman2601083.pdf` (5 pages, text layer present)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (5 pages, text layer present)
 - Court: United States Bankruptcy Court, District of Massachusetts (Eastern Division)
 - Case: *Lassman v. Paul W. Marks Co. Inc.*, Adv. Proc. No. 26-01083, in *In re The Good Guys Provision Co. Inc.*, Ch. 7 No. 24-12269-CJP
 - Document: Doc. 1, "Adversary Complaint" (preference action, 11 U.S.C. §§ 547, 550)
@@ -18,7 +18,7 @@
 
 Added 2026-10-17 (fb-595.21.1).
 
-- File: `SAMPLE-mab-adversary-complaint-shamrock2101060.pdf` (16 pages)
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf` (16 pages)
 - Court: United States Bankruptcy Court, District of Massachusetts (Eastern Division)
 - Case: *Shamrock Finance LLC v. Burke et al.* (CourtListener caption "Shamrock Finance LLC v. Burke"), Adv. Proc. No. 21-01060, in *In re Shamrock Finance LLC*, Ch. 11 Case No. 21-10315-FJB
 - Document: Doc. 1, "Complaint to Avoid Unperfected Security Interests Pursuant to 11 U.S.C. § 544(a) and to Preserve Avoided Lien for the Benefit of the Estate Pursuant to 11 U.S.C. § 551"; contains the FRBP 7008 consent statement (¶ 85: "Shamrock states that it does consent to the entry of ...")

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-casd-complaint-bachman326cv04862.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Southern District of California
 - Case: *Bachman v. Chosen Foods, LLC*
 - Docket: No. 3:26-cv-04862-AJB-MMP (Document 1)
@@ -14,7 +14,7 @@
 
 Second filer: not collected in this pass. The CourtListener results also listed Novick v. Capricor Therapeutics (3:26-cv-05568, Pomerantz LLP) and Alo, LLC v. Derco (3:26-cv-04957, Name Game IP, PC) as S.D. Cal. complaints from 2026. A second filer is needed for a tier-2 comparison against 2 or 3 filers; that is not met here (see README.md, gap 1).
 
-- File: `SAMPLE-casd-complaint-bosa301cv01179.pdf`
+- File: `FILED-EXAMPLE-complaint-2.pdf`
 - Filer: Plaintiff Bosa Development
 - Case: *Bosa Development v. Shell Oil Company*, No. 3:01-cv-01179-W-CGA (Doc. 1)
 - Date filed: 2001-06-29

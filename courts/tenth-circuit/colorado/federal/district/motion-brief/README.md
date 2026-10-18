@@ -4,9 +4,9 @@ Doc type: **motion-brief** in the United States District Court for the District 
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-cod-motion-brief-sussman126cv02065.pdf` (one filer: Sussman v. Miller, Defendants' motion; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-cod-motion-brief-sussmanmotiontodismiss.md` (a transcription of part of the 16-page filing; see Known gaps) |
-| render | ok: `usage/OUTPUT-cod-motion-brief-sussmanmotiontodismiss.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer: Sussman v. Miller, Defendants' motion; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (a transcription of part of the 16-page filing; see Known gaps) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-sussman-motion-to-dismiss.pdf` and `usage/OVERLAY-sussman-motion-to-dismiss.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -15,7 +15,7 @@ File names: the sample is `INPUT-<id>.md`, the render is `OUTPUT-<id>.pdf` and t
 Commands (from the repo root, with `PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/tenth-circuit/colorado/federal/district/motion-brief usage/INPUT-cod-motion-brief-sussmanmotiontodismiss.md
+sh tools/render.sh courts/tenth-circuit/colorado/federal/district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/tenth-circuit/colorado/federal/district/motion-brief sussman-motion-to-dismiss
 ```
 
@@ -68,7 +68,7 @@ Page limits: the 2025 local rules set none for district-court motions (the only 
 9. **Not produced.** Proposed order (LCivR 7.1(g): a separate document with its own caption), any notice of hearing or related filing.
 10. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the page review below is the Gate 2 equivalent.
 
-## Review of the rendered pages (`OUTPUT-cod-motion-brief-sussmanmotiontodismiss.typst.pdf`, 8 pages)
+## Review of the rendered pages (`OUTPUT-motion-brief.typst.pdf`, 8 pages)
 
 - Page 1: caption (plaintiff, `v.`, three defendants), title MOTION TO DISMISS, lead-in, CERTIFICATE OF COMPLIANCE, I. INTRODUCTION heading and first lines. Footer page number. Pass.
 - Page 2: INTRODUCTION end; II. STANDARD OF REVIEW; III. ALLEGED FACTS; first paragraphs; footnote 1 at the foot of the page, 12 pt. Pass.
@@ -83,7 +83,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `cod.lua` sets the caption, section numbers, the certificates and the signature block). `sh tools/render.sh --engine docx courts/tenth-circuit/colorado/federal/district/motion-brief usage/INPUT-cod-motion-brief-sussmanmotiontodismiss.md` writes `OUTPUT-cod-motion-brief-sussmanmotiontodismiss.docx` and `OUTPUT-cod-motion-brief-sussmanmotiontodismiss.docx.pdf` (LibreOffice 26.8.1; `pdffonts`: EB Garamond only, embedded).
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `cod.lua` sets the caption, section numbers, the certificates and the signature block). `sh tools/render.sh --engine docx courts/tenth-circuit/colorado/federal/district/motion-brief usage/INPUT-motion-brief.md` writes `OUTPUT-motion-brief.docx` and `OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8.1; `pdffonts`: EB Garamond only, embedded).
 
 - Matches the typst output: 8 pages, the same as typst. Letter paper; margins as the complaint; 12 pt EB Garamond with 24 pt exact line pitch; caption and title as the complaint; section headings numbered by the template (I. centred caps; A., 1. with a hanging number, as typst); the conferral certificate and the certificate of service (centred bold headings, the party block indented and single spaced); footnotes at 12 pt, single spaced, with superscript references; the block quotation single spaced and indented one inch each side; centred page number in the footer.
 - Differs: (a) pagination. Same cause as the complaint: about one line less per page in LibreOffice, so page breaks fall one or two lines earlier (for example page 4 starts with "Plaintiff brings various claims", page 7 starts with "Plaintiff asserts that the deputies"); the page count is the same. Word may break pages differently again. (b) Footnote separator and number spacing are LibreOffice's defaults, not typst's; they look the same at 60 dpi.

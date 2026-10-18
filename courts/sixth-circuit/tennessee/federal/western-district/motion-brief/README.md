@@ -5,10 +5,10 @@ Folder: `courts/sixth-circuit/tennessee/federal/western-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-tnwd-motion-brief-gonzalezcarrollcounty126cv02199.pdf` (1 filer; see `usage/SOURCE.md`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | typeface | **Times New Roman** named by the W.D. Tenn. CM/ECF manual, section "Setting up PDF Reader and Converting to PDF": "The court only allows use of the following fonts ... Times New Roman, Arial, and Courier New. Size of font must be (at least) 12 point." LR 7.1(b) itself names no face. Substitute: **Liberation Serif** (`docs/FONTS.md`, metric-compatible with Times New Roman). EB Garamond is not used. |
-| sample md | `usage/INPUT-tnwd-motion-brief-gonzalezmemorandum.md` (the whole 9-page filing: caption, background, standard, argument I to IV, conclusion, signature block, certificate of service) |
-| render | ok: `usage/OUTPUT-tnwd-motion-brief-gonzalezmemorandum.typst.pdf`, 9 pages, typst 0.15.0, vendored Liberation Serif only (re-rendered 2026-10-15; `pdffonts`: only LiberationSerif embedded), no warnings |
+| sample md | `usage/INPUT-motion-brief.md` (the whole 9-page filing: caption, background, standard, argument I to IV, conclusion, signature block, certificate of service) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored Liberation Serif only (re-rendered 2026-10-15; `pdffonts`: only LiberationSerif embedded), no warnings |
 | overlay | ok: `usage/OVERLAY-gonzalez-memorandum.pdf` and `usage/OVERLAY-gonzalez-memorandum.txt` (page map) |
 | pages reviewed | 9 of 9 (every page of the 2026-10-15 render rasterized at 60 dpi and viewed)
 
@@ -88,7 +88,7 @@ Each page was rasterized with `pdftoppm -r 60` after the last template change an
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `tnwd-motion-brief.lua` sets the caption, point headings with hung labels, block quotations, the signature block and the certificate of service). Rendered with `sh tools/render.sh --engine docx motion-brief usage/INPUT-tnwd-motion-brief-gonzalezmemorandum.md` to `usage/OUTPUT-tnwd-motion-brief-gonzalezmemorandum.docx` and `.docx.pdf` (LibreOffice). Reviewed: all 9 pages of the `.docx.pdf` against all 9 pages of the typst output, at 60 dpi.
+DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `tnwd-motion-brief.lua` sets the caption, point headings with hung labels, block quotations, the signature block and the certificate of service). Rendered with `sh tools/render.sh --engine docx motion-brief usage/INPUT-motion-brief.md` to `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice). Reviewed: all 9 pages of the `.docx.pdf` against all 9 pages of the typst output, at 60 dpi.
 
 - Matches typst: Liberation Serif 12 pt; double spacing 27.6 pt and single 13.8 pt; one-inch margins; caption and `No.` line; title; body unnumbered and double spaced with the ½-inch first-line indent; section headings centred; point headings (I., II., ...) with the label at the margin and the text wrapped under it; block quotations single spaced; the signature block on page 8 with the conclusion, and the certificate of service on page 9, as in typst; page numbers centred. Page count is 9 in both.
 - Differs (ACCEPTED, tier 2): the caption's `)` column is a cell rule (as in the complaint); a few lines break differently (the caption's party names, the bold title line, point heading II), and some pages hold one line more or fewer than typst (line counts per page are within three lines of typst); the signature block is not forced to a page, so Word may move it.

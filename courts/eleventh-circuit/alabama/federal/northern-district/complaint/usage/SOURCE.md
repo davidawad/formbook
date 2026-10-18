@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-alnd-complaint-sec226cv01586.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Northern District of Alabama, Southern Division
 - Case: *The Southeastern Conference v. Louisiana State University, et al.*
 - Docket: No. 2:26-cv-01586-ACA (CourtListener RECAP, Document 1)

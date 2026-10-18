@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-dcd-complaint-terredusoleil126cv03510.pdf` |
+| File | `FILED-EXAMPLE-complaint.pdf` |
 | URL fetched | https://storage.courtlistener.com/recap/gov.uscourts.dcd.297436/gov.uscourts.dcd.297436.1.0.pdf |
 | Docket page | https://www.courtlistener.com/docket/74934336/terre-du-soleil-ltd-v-united-states-small-business-administration/ (entry 1) |
 | Case | *Terre du Soleil, Ltd. d/b/a Auberge du Soleil v. United States Small Business Administration, et al.* |
@@ -19,7 +19,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-dcd-complaint-smp126cv00336.pdf` |
+| File | `FILED-EXAMPLE-complaint-2.pdf` |
 | Court | United States District Court for the District of Columbia |
 | Case | *SMP (Senate Majority PAC) v. Federal Election Commission* |
 | Docket no. | 1:26-cv-00336 (D.D.C.); the complaint's caption leaves "Civil Action No." blank. The number is from the FEC's case page title "SMP v. FEC (26-336)", where this complaint is listed, and from the ECF header "Case 1:26-cv-00336-BAH" on later filings in the case posted on the same page. |

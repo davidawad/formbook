@@ -4,9 +4,9 @@ Doc type: **motion with a memorandum of law**, filed in an adversary proceeding 
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 1 filer: `usage/SAMPLE-ganb-motion-brief-kapitusstanfield2302003.pdf` (see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ganb-motion-brief-kapitus2302003.md`, the whole filing (motion, memorandum, certificate) |
-| render | ok: `usage/OUTPUT-ganb-motion-brief-kapitus2302003.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
+| exemplar | yes, 1 filer: `usage/FILED-EXAMPLE-motion-brief.pdf` (see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`, the whole filing (motion, memorandum, certificate) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
 | overlay | ok: `usage/OVERLAY-kapitus-23-02003.pdf` and `OVERLAY-kapitus-23-02003.txt`, made 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not committed; see gaps 11) |
 | pages reviewed | 7 of 7 re-rendered and viewed 2026-10-14 (fonts pass; the face did not change, see Typeface below) |
 
@@ -79,7 +79,7 @@ Body:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/motion-brief usage/INPUT-ganb-motion-brief-kapitus2302003.md
+sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/motion-brief kapitus-23-02003
 ```
 
@@ -108,8 +108,8 @@ Reviewed pages: 7 of 7.
 
 | Engine | Result here | Output |
 |---|---|---|
-| typst (primary, `typst/`) | unchanged by this work | `usage/OUTPUT-ganb-motion-brief-kapitus2302003.typst.pdf` |
-| docx (`docx/`) | `.docx` built and XML-checked; `.docx.pdf` **not produced** (no LibreOffice in this box), so no page was rendered or reviewed | `usage/OUTPUT-ganb-motion-brief-kapitus2302003.docx` |
+| typst (primary, `typst/`) | unchanged by this work | `usage/OUTPUT-motion-brief.typst.pdf` |
+| docx (`docx/`) | `.docx` built and XML-checked; `.docx.pdf` **not produced** (no LibreOffice in this box), so no page was rendered or reviewed | `usage/OUTPUT-motion-brief.docx` |
 
 `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference: EB Garamond 13 pt; body text 1.5 spaced (exact 22.4 pt); half-inch first-line indent; block quotations single-spaced and indented ½ in on each side; footnotes 11 pt; letter page, 1-inch margins; centered 11 pt page number. `docx/ganb-motion-brief.lua` builds the first page (caption as a borderless table: 3.4 in, 0.3 in ")" column, the rest; 0.4 in gap for the filing stamp; rule; title), passes the body through as written (no paragraph numbers, as the typst template), and builds the signature and certificate blocks in the right half of the page. Certificate text keeps the body first-line indent, as the typst template does.
 

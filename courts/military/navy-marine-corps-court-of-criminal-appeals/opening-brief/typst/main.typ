@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nmcca-opening-brief.typ": nmcca-opening-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nmcca-opening-brief-miles.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-opening-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #nmcca-opening-brief(meta, body)

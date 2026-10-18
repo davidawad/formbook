@@ -3,6 +3,6 @@
 // The sample is read from the folder; the template lives in hid-motion-brief.typ.
 #import "hid-motion-brief.typ": hid-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-hid-motion-brief-usvhawaii.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #hid-motion-brief(meta, body)

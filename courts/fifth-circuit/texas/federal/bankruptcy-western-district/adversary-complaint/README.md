@@ -5,9 +5,9 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-western-district/adversar
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-txwb-adversary-complaint-osherow2501073.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-txwb-adversary-complaint-osherowcomplaint.md` (a portion of the 14-page filing, see Known gaps) |
-| render | ok: `usage/OUTPUT-txwb-adversary-complaint-osherowcomplaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (a portion of the 14-page filing, see Known gaps) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-osherow-complaint.pdf` and `OVERLAY-osherow-complaint.txt` |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and all 9 pages viewed again on 2026-10-14, font unchanged) |
 
@@ -87,7 +87,7 @@ Not produced by this template (separate filings with the complaint, not part of 
 
 ## Engines
 
-**docx** (`docx/`): `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-txwb-adversary-complaint-osherowcomplaint.md` runs pandoc with `docx/txwb-adversary-complaint.lua` on `docx/reference.docx`, then LibreOffice (`soffice --headless --convert-to pdf`). `docx/reference.docx` is rebuilt from `docx/reference-parts/` by `sh docx/build-reference.sh`. EB Garamond must be installed for LibreOffice (`fonts/eb-garamond`). Checked on `usage/OUTPUT-txwb-adversary-complaint-osherowcomplaint.docx.pdf`, 9 of 9 pages rendered at 60 dpi and viewed beside the typst pages.
+**docx** (`docx/`): `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-adversary-complaint.md` runs pandoc with `docx/txwb-adversary-complaint.lua` on `docx/reference.docx`, then LibreOffice (`soffice --headless --convert-to pdf`). `docx/reference.docx` is rebuilt from `docx/reference-parts/` by `sh docx/build-reference.sh`. EB Garamond must be installed for LibreOffice (`fonts/eb-garamond`). Checked on `usage/OUTPUT-adversary-complaint.docx.pdf`, 9 of 9 pages rendered at 60 dpi and viewed beside the typst pages.
 
 | Layout | Matches typst | Differs (docx against typst, same sample) |
 |---|---|---|

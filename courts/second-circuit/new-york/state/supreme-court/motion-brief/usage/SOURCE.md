@@ -1,4 +1,4 @@
-# Exemplar source: SAMPLE-nysupct-motion-brief-valentino6526052020.pdf
+# Exemplar source: FILED-EXAMPLE-motion-brief.pdf
 
 | Field | Value |
 |---|---|

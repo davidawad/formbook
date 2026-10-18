@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nvd-complaint-williams226cv00801.pdf` |
+| File | `FILED-EXAMPLE-complaint.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.nvd.180252/gov.uscourts.nvd.180252.1.0.pdf (RECAP copy of ECF No. 1) |
 | CourtListener docket | https://www.courtlistener.com/docket/72509967/ (search result: `docketNumber` 2:26-cv-00801) |
 | Case | *Shanita Williams v. Comoto Holdings, Inc.* |

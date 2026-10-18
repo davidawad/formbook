@@ -5,9 +5,9 @@ Folder: `courts/eighth-circuit/iowa/federal/southern-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-iasd-motion-brief-hanfling426cv00213.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-iasd-motion-brief-hanflingbrief.md`: a transcription of the cover, the introduction, the factual background (with the privacy-policy block quotation and footnotes 1 to 3), the start of Argument I, the conclusion, and the signature block. Argument I's first paragraphs and Arguments II to IV are not transcribed. |
-| render | ok: `usage/OUTPUT-iasd-motion-brief-hanflingbrief.typst.pdf`, 9 pages (cover, TOC, TOA, body pages 1 to 6), typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: a transcription of the cover, the introduction, the factual background (with the privacy-policy block quotation and footnotes 1 to 3), the start of Argument I, the conclusion, and the signature block. Argument I's first paragraphs and Arguments II to IV are not transcribed. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages (cover, TOC, TOA, body pages 1 to 6), typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
 | overlay | ok: `usage/OVERLAY-hanfling-brief.pdf` and `OVERLAY-hanfling-brief.txt` (page map) |
 | typeface | face required by the court: **none** (LR 10(b) has no typeface or point-size rule; checked 2026-10-14 in the PDF text, see Governing rules). Vendored substitute: none needed; **EB Garamond kept** (`docs/FONTS.md`: a court that names no face gets EB Garamond). Metric compatibility: n/a. Tier 2 question on the exemplar's Times New Roman, Known gaps 4. |
 | pages reviewed | 9 of 9, on the final PDF (sha256 `bdd908b4...`, see the review table below) |
@@ -111,7 +111,7 @@ Doc type `motion-brief`, in this folder. The typst template above is the primary
 |---|---|
 | typst | `typst/`, as above. |
 | latex | not built in this change (`latex/` has no template for this doc type). |
-| docx | `docx/reference.docx` (built by `docx/make-reference.sh`), `docx/iasd-motion-brief.lua` and `docx/render.sh` (pandoc, then the footer part is wired into the front-matter section). `usage/OUTPUT-iasd-motion-brief-hanflingbrief.docx` is written by `tools/render.sh --engine docx`. The `.docx.pdf` is **not produced**: LibreOffice cannot be installed on the box that built this (not on conda-forge, no root), so the LibreOffice-based checks are BLOCKED. Pages reviewed as rendered PDF: 0. |
+| docx | `docx/reference.docx` (built by `docx/make-reference.sh`), `docx/iasd-motion-brief.lua` and `docx/render.sh` (pandoc, then the footer part is wired into the front-matter section). `usage/OUTPUT-motion-brief.docx` is written by `tools/render.sh --engine docx`. The `.docx.pdf` is **not produced**: LibreOffice cannot be installed on the box that built this (not on conda-forge, no root), so the LibreOffice-based checks are BLOCKED. Pages reviewed as rendered PDF: 0. |
 
 **docx: what the template sets, from the same parameters as the typst form.** Letter paper, 1-inch margins; EB Garamond 12 pt; body at 24 pt exact line spacing with a half-inch first-line indent; footnotes and block quotations single-spaced at 12 pt (the block quotation indented 0.5 in on both sides); level 1 headings centered bold capitals; levels 2 to 4 bold with a hanging label (`I.`, `A.`, `1.`, typed by the filter, a half inch hanging); the front matter (cover, table of contents, table of authorities) in its own section numbered `i`, `ii`, ..., and the body numbered from 1 at the bottom centre; the cover caption as a borderless table with a right and bottom rule on the party column, the case number, the title, and `ORAL ARGUMENT REQUESTED` when `oral_argument` is true; the table of authorities grouped Cases, Statutes, Rules, Other Authorities, built from the `toa:` links, each authority's name in italics; the signature block with the date at the margin and the lines at 3.45 in. The `.docx` passes the zip and XML checks in `tools/render-docx.sh` and reads back in pandoc with the same text and footnotes. It has **not** been opened in Word or LibreOffice, so "no repair prompt" is unverified.
 

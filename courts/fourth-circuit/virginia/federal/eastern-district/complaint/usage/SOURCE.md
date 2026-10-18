@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-vaed-complaint-tamaris126cv03298.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Eastern District of Virginia (Alexandria Division)
 - Case: *Tamaris (Gibraltar) Limited v. Rogonov, et al.*
 - Docket: No. 1:26-cv-03298 (Document 1)
@@ -14,7 +14,7 @@
 
 ## Replacement exemplar: *Warren v. Bloomberg Industry Group, Inc.*
 
-- File: `SAMPLE-vaed-complaint-warren126cv03349.pdf` (14 pages)
+- File: `FILED-EXAMPLE-complaint-2.pdf` (14 pages)
 - Court: United States District Court, Eastern District of Virginia, Alexandria Division
 - Case: *Samuel Warren v. Bloomberg Industry Group, Inc.*
 - Docket: No. 1:26-cv-03349-MSN-LRV, Document 1
@@ -28,4 +28,4 @@
 - Text layer: yes; `pdftotext` yields all 14 pages (3,440 words). Embedded Times New Roman family (`pdffonts`: TimesNewRomanPSMT, TimesNewRomanPS-BoldMT, TimesNewRomanPS-ItalicMT).
 - Public filing: CourtListener RECAP copy.
 
-This text-based Times New Roman filing replaces the scanned `SAMPLE-vaed-complaint-tamaris126cv03298.pdf` for font and text-layer comparison. The Tamaris file is retained as historical source material. Tier 2 can now compare two filers; the Warren complaint is the replacement reference.
+This text-based Times New Roman filing replaces the scanned `FILED-EXAMPLE-complaint.pdf` for font and text-layer comparison. The Tamaris file is retained as historical source material. Tier 2 can now compare two filers; the Warren complaint is the replacement reference.

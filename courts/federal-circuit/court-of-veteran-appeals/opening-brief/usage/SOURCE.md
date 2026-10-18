@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-cavc-opening-brief-chavez197391.pdf` (20 pages, text-based) |
+| Exemplar file | `FILED-EXAMPLE-opening-brief.pdf` (20 pages, text-based) |
 | URL fetched | https://efiling.uscourts.cavc.gov/cmecf/servlet/TransportRoom?servlet=ShowDoc%2F01206902039 |
 | Court | United States Court of Appeals for Veterans Claims (CAVC) |
 | Case | *Adrian A. Chavez v. Robert L. Wilkie, Secretary of Veterans Affairs* |
@@ -21,7 +21,7 @@ Other appellant's briefs seen but not used: Gray (No. 13-3339, a law-firm copy a
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-cavc-opening-brief-butler207621.pdf` (11 pages, text-based; Microsoft Word for Microsoft 365; Times New Roman) |
+| Exemplar file | `FILED-EXAMPLE-opening-brief-2.pdf` (11 pages, text-based; Microsoft Word for Microsoft 365; Times New Roman) |
 | URL fetched | https://efiling.uscourts.cavc.gov/cmecf/servlet/TransportRoom?servlet=ShowDoc%2F01207705781 |
 | Court | United States Court of Appeals for Veterans Claims (CAVC) |
 | Case | *Monte D. Butler v. Denis McDonough, Secretary of Veterans Affairs* |
@@ -39,7 +39,7 @@ Listed as "seen but not used" in entry 1; fetched and verified on 2026-10-17. No
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-cavc-opening-brief-guzman210009.pdf` (37 pages, text-based; creator "PrintServer200"; embedded Times New Roman) |
+| Exemplar file | `FILED-EXAMPLE-opening-brief-3.pdf` (37 pages, text-based; creator "PrintServer200"; embedded Times New Roman) |
 | URL fetched | https://efiling.uscourts.cavc.gov/cmecf/servlet/TransportRoom?servlet=ShowDoc%2F01208048483 |
 | Court | United States Court of Appeals for Veterans Claims (CAVC) |
 | Case | *Maria V. Guzman v. Denis McDonough, Secretary, Dept. of Veterans Affairs* |
@@ -55,4 +55,4 @@ Listed as "seen but not used" in entry 1 (ShowDoc 01208048483); fetched and veri
 
 ## Replacement for the audited Garamond exemplar
 
-The audited `SAMPLE-cavc-opening-brief-chavez197391.pdf` (Garamond) is replaced for font and text-layer comparison by `SAMPLE-cavc-opening-brief-butler207621.pdf` and `SAMPLE-cavc-opening-brief-guzman210009.pdf`, both text-based filings from different filers. See the preceding records for their public filing URLs, filers, dockets, dates, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
+The audited `FILED-EXAMPLE-opening-brief.pdf` (Garamond) is replaced for font and text-layer comparison by `FILED-EXAMPLE-opening-brief-2.pdf` and `FILED-EXAMPLE-opening-brief-3.pdf`, both text-based filings from different filers. See the preceding records for their public filing URLs, filers, dockets, dates, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

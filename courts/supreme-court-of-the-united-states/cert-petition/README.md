@@ -2,16 +2,16 @@
 
 - Court: `scotus`, Supreme Court of the United States (`courts/supreme-court-of-the-united-states/`)
 - Doc type: `cert-petition`. Petition for a writ of certiorari in booklet format (Rules 14, 33.1, 34). One self-contained folder, no shared files.
-- Exemplar: `usage/SAMPLE-scotus-cert-petition-fisher14981.pdf` (*Fisher v. University of Texas at Austin*, No. 14-981, filed 2015-02-10; provenance in `usage/SOURCE.md`).
-- Sample: `usage/INPUT-scotus-cert-petition-fisher.md`, a transcription of the filed petition's cover, front pages, opening, Statement A and Part III, with signature and certificate (see Known gaps, 2).
+- Exemplar: `usage/FILED-EXAMPLE-cert-petition.pdf` (*Fisher v. University of Texas at Austin*, No. 14-981, filed 2015-02-10; provenance in `usage/SOURCE.md`).
+- Sample: `usage/INPUT-cert-petition.md`, a transcription of the filed petition's cover, front pages, opening, Statement A and Part III, with signature and certificate (see Known gaps, 2).
 
 ## Status
 
 | Item | Result |
 |---|---|
-| Exemplar | yes: `usage/SAMPLE-scotus-cert-petition-fisher14981.pdf` (re-downloaded 2026-10-14 from the URL in `SOURCE.md`; 374 pages, the first 43 are the petition; `SOURCE.md` records no checksum; sha256 of the copy in the folder is `0ea2c1627b3fe6d969d3b104e6f49bdf27e78f847ac034b9198d3b49fd71f24a`, fetched again 2026-10-15) |
-| Sample | `usage/INPUT-scotus-cert-petition-fisher.md` (kept from the earlier pass; excerpt, 14 rendered pages) |
-| Render | ok (2026-10-15): `sh tools/render.sh courts/supreme-court-of-the-united-states/cert-petition usage/INPUT-scotus-cert-petition-fisher.md` writes `usage/OUTPUT-scotus-cert-petition-fisher.typst.pdf` (14 pages, exit 0, no typst warnings, `--ignore-system-fonts`) |
+| Exemplar | yes: `usage/FILED-EXAMPLE-cert-petition.pdf` (re-downloaded 2026-10-14 from the URL in `SOURCE.md`; 374 pages, the first 43 are the petition; `SOURCE.md` records no checksum; sha256 of the copy in the folder is `0ea2c1627b3fe6d969d3b104e6f49bdf27e78f847ac034b9198d3b49fd71f24a`, fetched again 2026-10-15) |
+| Sample | `usage/INPUT-cert-petition.md` (kept from the earlier pass; excerpt, 14 rendered pages) |
+| Render | ok (2026-10-15): `sh tools/render.sh courts/supreme-court-of-the-united-states/cert-petition usage/INPUT-cert-petition.md` writes `usage/OUTPUT-cert-petition.typst.pdf` (14 pages, exit 0, no typst warnings, `--ignore-system-fonts`) |
 | Fonts | `pdffonts`: TeXGyreSchola-Regular, -Bold, -Italic embedded (CID Type 0C, subset). No EB Garamond or system face in the output. |
 | Overlay | ok (2026-10-15): `sh tools/overlay.sh courts/supreme-court-of-the-united-states/cert-petition fisher-cert-petition` writes `usage/OVERLAY-fisher-cert-petition.pdf` and `.txt` (14 pages) |
 | Pages reviewed | 14 of 14 (2026-10-15: every page of the render rasterized with `pdftoppm -r 70` and viewed as PNG) |
@@ -28,15 +28,15 @@ None for typst. The typeface blocker recorded in the earlier pass was wrong: `fo
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...`, calls `scotus-cert-petition`. |
 | `typst/scotus-cert-petition-cert-petition.typ` | Template. Parameter block at the top: `word-limit` (9,000), `typeface`, sizes, leading, the 6 1/8 x 9 1/4 inch booklet page and its margins. |
-| `usage/INPUT-scotus-cert-petition-fisher.md` | Markdown sample: frontmatter (cover, counsel, authorities) plus body. |
-| `usage/OUTPUT-scotus-cert-petition-fisher.typst.pdf` | Our render (14 pages). |
+| `usage/INPUT-cert-petition.md` | Markdown sample: frontmatter (cover, counsel, authorities) plus body. |
+| `usage/OUTPUT-cert-petition.typst.pdf` | Our render (14 pages). |
 | `usage/OVERLAY-fisher-cert-petition.pdf`, `.txt` | Red/blue comparison against the filed exemplar and the page map. |
 | `usage/` | The filed exemplar and `SOURCE.md`. |
 
 Build (from the repo root, with the toolchain on `PATH`):
 
 ```sh
-sh tools/render.sh courts/supreme-court-of-the-united-states/cert-petition usage/INPUT-scotus-cert-petition-fisher.md
+sh tools/render.sh courts/supreme-court-of-the-united-states/cert-petition usage/INPUT-cert-petition.md
 sh tools/overlay.sh courts/supreme-court-of-the-united-states/cert-petition fisher-cert-petition
 ```
 
@@ -69,7 +69,7 @@ Primary source: *Rules of the Supreme Court of the United States*, effective Mar
 
 ## Page review (Gate 2)
 
-Render with TeX Gyre Schola, 14 pages (`usage/OUTPUT-scotus-cert-petition-fisher.typst.pdf`). Each page rasterized with `pdftoppm -r 70` and viewed.
+Render with TeX Gyre Schola, 14 pages (`usage/OUTPUT-cert-petition.typst.pdf`). Each page rasterized with `pdftoppm -r 70` and viewed.
 
 | Page | Content | Result |
 |---|---|---|

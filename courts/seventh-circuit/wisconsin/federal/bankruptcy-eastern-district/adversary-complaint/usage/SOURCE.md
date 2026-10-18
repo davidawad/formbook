@@ -1,6 +1,6 @@
 # Exemplar source: adversary complaint (E.D. Wis. Bankruptcy)
 
-- File: `SAMPLE-wieb-adversary-complaint-layngvclarke2202003.pdf` (11 pp., text layer, sha256 057da484e0c75ad7dd05afe306360c7c7d0feeff9bb3169791e83ff41db7e65e)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (11 pp., text layer, sha256 057da484e0c75ad7dd05afe306360c7c7d0feeff9bb3169791e83ff41db7e65e)
 - URL fetched: https://storage.courtlistener.com/recap/gov.uscourts.wieb.442466/gov.uscourts.wieb.442466.1.0.pdf
   (RECAP document 1 on the adversary docket; found through the CourtListener search API, `court=wieb`, query "adversary complaint"; the CourtListener docket page was not needed)
 - Case: *Layng v. Clarke* (In re Marissa J. Clarke), Adversary No. 22-02003-kmp, Bankr. E.D. Wis.; main case No. 21-25517-kmp, Chapter 7

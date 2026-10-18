@@ -5,9 +5,9 @@ Folder: `courts/second-circuit/new-york/federal/western-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nywd-motion-brief-kerrick626cv06006.pdf` (Defendants' memorandum, one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nywd-motion-brief-kerrick.md` (the memorandum's text from the text layer, body complete except footnotes; see Known gaps) |
-| render | ok: `usage/OUTPUT-nywd-motion-brief-kerrick.typst.pdf`, 13 pages (cover, table of contents, 11 pages of text), typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (Defendants' memorandum, one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (the memorandum's text from the text layer, body complete except footnotes; see Known gaps) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 13 pages (cover, table of contents, 11 pages of text), typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-kerrick-motion-brief.pdf` and `usage/OVERLAY-kerrick-motion-brief.txt` |
 | pages reviewed | 13 of 13 rendered at 60 dpi and viewed, in the final state (pages 1 to 9 viewed before the last text change, which does not reach them; pages 10 to 13 re-viewed after it) |
 
@@ -81,7 +81,7 @@ Every page was rendered with `pdftoppm -r 60` and viewed. PDF page numbers are u
 From the repo root, with the toolchain on PATH (see the brief's install lines):
 
 ```sh
-sh tools/render.sh courts/second-circuit/new-york/federal/western-district/motion-brief usage/INPUT-nywd-motion-brief-kerrick.md
+sh tools/render.sh courts/second-circuit/new-york/federal/western-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/second-circuit/new-york/federal/western-district/motion-brief kerrick-motion-brief
 ```
 
@@ -89,9 +89,9 @@ sh tools/overlay.sh courts/second-circuit/new-york/federal/western-district/moti
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond, exact 24 pt body pitch, 15.6 pt single lines, headings at 17, 14.5 and 12 pt, three footers: none on the cover, lower roman on the table of contents, arabic from 1 on the body); `docx/nywd-motion-brief.lua` builds the cover, the table of contents (a TOC field with cached entries and dot leaders), the numbered headings (I., II., A.), the block quotations and the signature block; `docx/render.sh` runs two passes so that the table of contents shows page numbers: pass 1 is converted to PDF, each heading is found on its page, and pass 2 writes the `.docx`. Output: `usage/OUTPUT-nywd-motion-brief-kerrick.docx` and `usage/OUTPUT-nywd-motion-brief-kerrick.docx.pdf` (LibreOffice; converts with no error; 13 pages).
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond, exact 24 pt body pitch, 15.6 pt single lines, headings at 17, 14.5 and 12 pt, three footers: none on the cover, lower roman on the table of contents, arabic from 1 on the body); `docx/nywd-motion-brief.lua` builds the cover, the table of contents (a TOC field with cached entries and dot leaders), the numbered headings (I., II., A.), the block quotations and the signature block; `docx/render.sh` runs two passes so that the table of contents shows page numbers: pass 1 is converted to PDF, each heading is found on its page, and pass 2 writes the `.docx`. Output: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice; converts with no error; 13 pages).
 
 - Matches typst: the 13-page layout, cover contents, the table of contents entries and their page numbers (all 16 match the typst render), roman and arabic numbering, heading sizes per level, body pitch, block quotation, signature block.
 - Differs: the table of contents is a Word TOC field whose page numbers were computed from the LibreOffice PDF; Word may paginate slightly differently, and an update of the field in Word would regenerate the entries from the headings. A heading's label is followed by a tab (text aligned at 0.5 in for level 2 and 1 in for level 3); typst leaves a small gap. The cover's counsel block and the space above the signature block differ by a few points. No table of authorities (as in typst; see Known gaps).
-- Pages looked at: all 13 pages of `usage/OUTPUT-nywd-motion-brief-kerrick.docx.pdf`, side by side with the typst render at 60 dpi.
+- Pages looked at: all 13 pages of `usage/OUTPUT-motion-brief.docx.pdf`, side by side with the typst render at 60 dpi.
 - BLOCKED: `tools/check.sh --engine docx` cannot run for this folder: there is no `checks.yaml` (and no `court.json` at the doc-type level), so every Gate 0 to 3 check ID is BLOCKED, not passed. No stamp is written.

@@ -3,8 +3,8 @@
 - Court: United States Bankruptcy Appellate Panel for the First Circuit (`bap1`), folder `courts/first-circuit/bankruptcy-appellate-panel/opening-brief/`
 - Doc type: `opening`
 - Status (2026-10-16):
-  - **Exemplar found.** Brief for Appellant, Scott H. Blumsack, BAP No. MW 23-03, filed May 5, 2023 by Dmitry Lev, Law Offices of D. Lev, PC (`usage/SAMPLE-bap1-opening-brief-blumsackmw2303.pdf`, born-digital). Found on CourtListener under court id `ca1` (docket 23-3); details in `usage/SOURCE.md`. The earlier status was "BLOCKED: no exemplar".
-  - Transcribed (abridged) to `usage/INPUT-bap1-opening-brief-blumsack.md`, rendered (22 pages) and overlaid; every page reviewed (Gate 2 below, no OPEN rows).
+  - **Exemplar found.** Brief for Appellant, Scott H. Blumsack, BAP No. MW 23-03, filed May 5, 2023 by Dmitry Lev, Law Offices of D. Lev, PC (`usage/FILED-EXAMPLE-opening-brief.pdf`, born-digital). Found on CourtListener under court id `ca1` (docket 23-3); details in `usage/SOURCE.md`. The earlier status was "BLOCKED: no exemplar".
+  - Transcribed (abridged) to `usage/INPUT-opening-brief.md`, rendered (22 pages) and overlaid; every page reviewed (Gate 2 below, no OPEN rows).
   - Template fixed from the overlay: body double spacing (tier 1), the interested-parties statement and the Official-Form layout of both L.R. 8014-1 statements (tier 1), cover debtor line and party (tier 1), heading and TOA conventions (tier 2). See "Template changes from the overlay".
   - **Tier 2 cannot be finished**: only one filer per doc type exists publicly; tier 2 was judged against two filers in the same case (this brief and the U.S. Trustee's answering brief).
   - Typst only: `docx/` and `latex/` were not touched in this pass (the docx engine still has the pre-fix behavior).
@@ -43,14 +43,14 @@ The [BAP guide](https://www.bap1.uscourts.gov/sites/bap1/files/BAP_Guide.pdf) §
 
 ## Sample and overlay (before 2026-10-16)
 
-- `usage/INPUT-bap1-opening-brief-generic.md`: fictional, rule-structured, not a transcription of any filing. Frontmatter is the schema.
-- `usage/OUTPUT-bap1-opening-brief-generic.typst.pdf`: rendered with `sh tools/render.sh courts/first-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-bap1-opening-brief-generic.md`. Renders clean (no typst warnings).
+- `usage/INPUT-opening-brief-2.md`: fictional, rule-structured, not a transcription of any filing. Frontmatter is the schema.
+- `usage/OUTPUT-opening-brief-2.typst.pdf`: rendered with `sh tools/render.sh courts/first-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-opening-brief-2.md`. Renders clean (no typst warnings).
 - Overlay: `sh tools/overlay.sh courts/first-circuit/bankruptcy-appellate-panel/opening-brief generic-opening-brief` **fails**: "no exemplar pdf in usage/". There is nothing to overlay against, so no OVERLAY files exist.
 
 ## Run 2026-10-15 (bap1 exemplar search)
 
 - Exemplar: none (see `usage/SOURCE.md`). CourtListener returns 0 bap1 RECAP documents and 0 bap1 dockets; the bap1 filter is throttled (429) on some queries. The status stays BLOCKED.
-- Render: `sh tools/render.sh` on `usage/INPUT-bap1-opening-brief-generic.md` exits 0 (10 pages). Overlay: `sh tools/overlay.sh` exits 1, "no exemplar pdf".
+- Render: `sh tools/render.sh` on `usage/INPUT-opening-brief-2.md` exits 0 (10 pages). Overlay: `sh tools/overlay.sh` exits 1, "no exemplar pdf".
 - Pages reviewed this run: 0. The sample was rendered to check the build, not reviewed page by page; the Gate 2 notes below are from the earlier run.
 
 ## Gate 2 review of the generic sample (earlier run, before 2026-10-15)
@@ -62,7 +62,7 @@ Pages were rasterized at 60 dpi and each was checked on a contact sheet. Defects
 
 ## Exemplar search (resolved 2026-10-16)
 
-Found: `usage/SAMPLE-bap1-opening-brief-blumsackmw2303.pdf`, the Brief for Appellant, Scott H. Blumsack, BAP No. MW 23-03, filed May 5, 2023 by Dmitry Lev (Law Offices of D. Lev, PC). The earlier searches (kept above and in `usage/SOURCE.md`) filtered on CourtListener court id `bap1`, which holds opinions only; the BAP's dockets are filed under `ca1` (MW 23-03 is ca1 docket "23-3"). Alternate, different filer: the U.S. Trustee's answering brief in the same appeal (saved in `../answering-brief/usage/`). No second opening brief from another filer was found. **Tier 2 is therefore judged against two filers in one case (this opening brief and the U.S. Trustee's answering brief), not against 2 or 3 opening briefs; EVAL-LOOP: "A court with fewer than 2 exemplars cannot finish tier 2; say so."**
+Found: `usage/FILED-EXAMPLE-opening-brief.pdf`, the Brief for Appellant, Scott H. Blumsack, BAP No. MW 23-03, filed May 5, 2023 by Dmitry Lev (Law Offices of D. Lev, PC). The earlier searches (kept above and in `usage/SOURCE.md`) filtered on CourtListener court id `bap1`, which holds opinions only; the BAP's dockets are filed under `ca1` (MW 23-03 is ca1 docket "23-3"). Alternate, different filer: the U.S. Trustee's answering brief in the same appeal (saved in `../answering-brief/usage/`). No second opening brief from another filer was found. **Tier 2 is therefore judged against two filers in one case (this opening brief and the U.S. Trustee's answering brief), not against 2 or 3 opening briefs; EVAL-LOOP: "A court with fewer than 2 exemplars cannot finish tier 2; say so."**
 
 ## Template changes from the overlay (2026-10-16)
 
@@ -82,18 +82,18 @@ DOCX and LaTeX: this was a typst-only pass. `docx/` was not touched, so the docx
 
 ## Sample
 
-- `usage/INPUT-bap1-opening-brief-blumsack.md`: a transcription of the exemplar, abridged (the header comment lists what is excerpted and omitted: cover, oral-argument statement, Jurisdictional Statement through the start of Argument I, the end of Argument I, the start of II, III with a) and b), Conclusion, signature, the two L.R. 8014-1 statements; the certificate of service is omitted). Text from the PDF's own text layer. Frontmatter uses the new `debtor`, `party` and `interested_parties` fields. Rendered to `usage/OUTPUT-bap1-opening-brief-blumsack.typst.pdf` (22 pages) with `sh tools/render.sh courts/first-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-bap1-opening-brief-blumsack.md`: exit 0, no typst warnings. The compliance certificate states the transcription's own count (3181 words); the filer's certificate states 8,284 for the whole brief.
-- `usage/INPUT-bap1-opening-brief-generic.md` (fictional) is kept as it was and re-rendered with the changed template (12 pages, every page viewed).
+- `usage/INPUT-opening-brief.md`: a transcription of the exemplar, abridged (the header comment lists what is excerpted and omitted: cover, oral-argument statement, Jurisdictional Statement through the start of Argument I, the end of Argument I, the start of II, III with a) and b), Conclusion, signature, the two L.R. 8014-1 statements; the certificate of service is omitted). Text from the PDF's own text layer. Frontmatter uses the new `debtor`, `party` and `interested_parties` fields. Rendered to `usage/OUTPUT-opening-brief.typst.pdf` (22 pages) with `sh tools/render.sh courts/first-circuit/bankruptcy-appellate-panel/opening-brief usage/INPUT-opening-brief.md`: exit 0, no typst warnings. The compliance certificate states the transcription's own count (3181 words); the filer's certificate states 8,284 for the whole brief.
+- `usage/INPUT-opening-brief-2.md` (fictional) is kept as it was and re-rendered with the changed template (12 pages, every page viewed).
 
 ## Overlay
 
-`sh tools/overlay.sh courts/first-circuit/bankruptcy-appellate-panel/opening-brief blumsack-opening-brief courts/first-circuit/bankruptcy-appellate-panel/opening-brief/usage/SAMPLE-bap1-opening-brief-blumsackmw2303.pdf` exits 0 and writes `usage/OVERLAY-blumsack-opening-brief.pdf` (22 pages) and `.txt`.
+`sh tools/overlay.sh courts/first-circuit/bankruptcy-appellate-panel/opening-brief blumsack-opening-brief courts/first-circuit/bankruptcy-appellate-panel/opening-brief/usage/FILED-EXAMPLE-opening-brief.pdf` exits 0 and writes `usage/OVERLAY-blumsack-opening-brief.pdf` (22 pages) and `.txt`.
 
 Page map (ours → filed, word overlap): 1→1 (77%), 2→2 (72%), 3→3 (35%), 4→4 (19%), 5→6 (46%), 6→7 (48%), 7→8 (56%), 8→9 (59%), 9→10 (79%), 10→11 (86%), 11→12 (65%), 12→13 (62%), 13→14 (47%), 14→24 (30%), 15→25 (69%), 16→30 (68%), 17→33 (75%), 18→34 (86%), 19→39 (57%), 20→35 (21%), 21→36 (75%), 22→37 (63%). The filer's body is Courier New at about 12 pt, so its lines hold more words than ours; the pairing is by shared words, and pages 14→24 and 19→39 (our signature against the filer's certificate-of-service signature) are nearest matches, not page-for-page claims.
 
 ## Gate 2 review (2026-10-16, every page rendered at 60 dpi and viewed with its paired exemplar page and overlay page)
 
-Sample `blumsack-opening-brief`, `usage/OUTPUT-bap1-opening-brief-blumsack.typst.pdf` (22 pages). Tier 2 compared against two filers (this filer and the U.S. Trustee's answering brief); see "Exemplar search".
+Sample `blumsack-opening-brief`, `usage/OUTPUT-opening-brief.typst.pdf` (22 pages). Tier 2 compared against two filers (this filer and the U.S. Trustee's answering brief); see "Exemplar search".
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -120,13 +120,13 @@ Sample `blumsack-opening-brief`, `usage/OUTPUT-bap1-opening-brief-blumsack.typst
 | 21 | exemplar p.36 | Statement regarding related cases in the form of Official Form 1: caption, bold title with the rule cite, checkboxes, signature block with address and telephone, date. Was a bare page with no caption or signature before. | FIXED |
 | 22 | exemplar p.37 | Statement regarding interested parties (Official Form 2), same layout; was missing before. | FIXED |
 
-No OPEN rows. Generic sample (`OUTPUT-bap1-opening-brief-generic.typst.pdf`, 12 pages) re-rendered after the changes and every page viewed: cover, TOC, TOA with leaders, oral-argument statement, body double spaced, signature under the Conclusion on p.9, certificate, both statements one page each. No defect found.
+No OPEN rows. Generic sample (`OUTPUT-opening-brief-2.typst.pdf`, 12 pages) re-rendered after the changes and every page viewed: cover, TOC, TOA with leaders, oral-argument statement, body double spaced, signature under the Conclusion on p.9, certificate, both statements one page each. No defect found.
 
 Summary of the tier-2 comparison against the alternate exemplar (U.S. Trustee's brief, viewed: cover p.1, TOC p.2, TOA p.3, oral-argument p.7, body p.8 and p.21, certificate p.35, related cases p.36): both filers center the court name and caption on the cover with the brief title in bold capitals and counsel at the bottom; both set level-1 headings as centered bold capitals at body size and level-2 points left, bold, numbered, with hanging indent; both use dot leaders in the TOC and TOA; both repeat the caption on the related-cases statement and sign it with the address block. The template follows each of these. The two differ on front-matter numbering (arabic vs roman), TOA layout (one line vs case name on its own line), signature placement and certificate placement; those are left as one filer's style.
 
 ## Engines
 
-DOCX (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, every font named explicitly, no theme fonts) and `docx/bap1.lua` (cover, disclosure, contents, authorities, oral-argument statement, the body's heading numbers, the related-cases page and the certificate, with the word limit and required sections checked as in the typst template). `tools/render.sh --engine docx` writes `usage/OUTPUT-bap1-opening-brief-generic.docx` and its LibreOffice PDF. The body font in the PDF is EB Garamond only; DejaVu Sans appears for the ballot-box glyphs in the related-cases statement.
+DOCX (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, every font named explicitly, no theme fonts) and `docx/bap1.lua` (cover, disclosure, contents, authorities, oral-argument statement, the body's heading numbers, the related-cases page and the certificate, with the word limit and required sections checked as in the typst template). `tools/render.sh --engine docx` writes `usage/OUTPUT-opening-brief-2.docx` and its LibreOffice PDF. The body font in the PDF is EB Garamond only; DejaVu Sans appears for the ballot-box glyphs in the related-cases statement.
 
 Matches the typst output (checked on the LibreOffice PDF against `usage/OUTPUT-generic-*.pdf`, every page): EB Garamond 14 pt; body lines at the typst line pitch (22.25 pt exact); US Letter with 1 in margins; 0.5 in first-line indent, not on the first paragraph after a heading or a front title; centered caps level-1 headings at 19.5 pt and centered bold level-2 headings at 17 pt (the typst 1.4 em and 1.2 em heading sizes); bold left level 3 and 4 headings; cover on its own unnumbered section, its lines within a few points of the typst positions; page numbers from page 2 (typst counts the cover as page 1, so the contents page is page 2); footnote text 14 pt.
 

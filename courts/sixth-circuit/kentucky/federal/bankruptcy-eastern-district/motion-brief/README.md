@@ -2,9 +2,9 @@
 
 Doc type: **motion** with a memorandum in support (FRBP 9013; KYEB LBR 9013-1). Court: United States Bankruptcy Court for the Eastern District of Kentucky. Folder: `courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/motion-brief/`.
 
-**Exemplar: yes, one filer.** `usage/SAMPLE-kyeb-motion-brief-williams2460490.pdf` is the motion with memorandum in support filed 09/11/2024 by Harley-Davidson dba Eaglemark Savings Bank in *In re Michael Jason Williams*, Case No. 24-60490 (London Division). It is a public RECAP copy; provenance is in `usage/SOURCE.md`. The template was revised against it on 2026-10-15 (fb-595.20.14). Tier 2 needs a second filer (see gap 1), so tier 2 is not finished.
+**Exemplar: yes, one filer.** `usage/FILED-EXAMPLE-motion-brief.pdf` is the motion with memorandum in support filed 09/11/2024 by Harley-Davidson dba Eaglemark Savings Bank in *In re Michael Jason Williams*, Case No. 24-60490 (London Division). It is a public RECAP copy; provenance is in `usage/SOURCE.md`. The template was revised against it on 2026-10-15 (fb-595.20.14). Tier 2 needs a second filer (see gap 1), so tier 2 is not finished.
 
-Status: exemplar=yes (one filer), render=ok (`usage/OUTPUT-kyeb-motion-brief-williams2460490.typst.pdf`, 3 pages; `usage/OUTPUT-kyeb-motion-brief-generic.typst.pdf`, 3 pages), overlay=ok (`usage/OVERLAY-williams-24-60490.pdf` and `.txt`), pages reviewed 3 of 3 for the transcribed sample and 3 of 3 for the fictional sample, each rendered at 60 dpi and viewed. Nothing here sets `court.json` status.
+Status: exemplar=yes (one filer), render=ok (`usage/OUTPUT-motion-brief.typst.pdf`, 3 pages; `usage/OUTPUT-motion-brief-2.typst.pdf`, 3 pages), overlay=ok (`usage/OVERLAY-williams-24-60490.pdf` and `.txt`), pages reviewed 3 of 3 for the transcribed sample and 3 of 3 for the fictional sample, each rendered at 60 dpi and viewed. Nothing here sets `court.json` status.
 
 ## What the exemplar changed (2026-10-15)
 
@@ -58,8 +58,8 @@ Version: the local rules text is the PDF at `kyeb.uscourts.gov/sites/kyeb/files/
 
 ## Samples
 
-- `usage/INPUT-kyeb-motion-brief-williams2460490.md`: a **transcription** of the exemplar's motion, memorandum, NOTICE and certificate of service (filing pages 1 to 4; text copied, typos included). Pages 5 to 8 of the filing are a mailing matrix and are not part of the motion, so they are not transcribed. This is the sample the overlay compares.
-- `usage/INPUT-kyeb-motion-brief-generic.md`: **fictional**. The parties, dates, hearing and citations are invented; the citation is a placeholder for layout only. It exercises a debtor caption with an adversary number, a hearing block, typed headings, a lettered-style list (now printed as numbered paragraphs), a footnote, a signature block and a certificate of service. It is a layout test, not a transcription and not an exemplar.
+- `usage/INPUT-motion-brief.md`: a **transcription** of the exemplar's motion, memorandum, NOTICE and certificate of service (filing pages 1 to 4; text copied, typos included). Pages 5 to 8 of the filing are a mailing matrix and are not part of the motion, so they are not transcribed. This is the sample the overlay compares.
+- `usage/INPUT-motion-brief-2.md`: **fictional**. The parties, dates, hearing and citations are invented; the citation is a placeholder for layout only. It exercises a debtor caption with an adversary number, a hearing block, typed headings, a lettered-style list (now printed as numbered paragraphs), a footnote, a signature block and a certificate of service. It is a layout test, not a transcription and not an exemplar.
 
 Length: the exemplar's motion is 4 pages (its full file is 8 pages with the matrix). The transcribed sample renders at 3 pages, because the single spacing is tighter than the filing's and the certificate fits on one page with its signature. The 8-to-14-page guidance in the bead does not apply to this filing.
 
@@ -67,14 +67,14 @@ Length: the exemplar's motion is 4 pages (its full file is 8 pages with the matr
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-kyeb-motion-brief-williams2460490.md
+sh tools/render.sh courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/motion-brief williams-24-60490
-sh tools/render.sh courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-kyeb-motion-brief-generic.md
+sh tools/render.sh courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-motion-brief-2.md
 ```
 
-- `usage/OUTPUT-kyeb-motion-brief-williams2460490.typst.pdf`: 3 pages, render ran with no typst warnings. `pdffonts`: EB Garamond Regular and Bold, embedded (no system fonts).
+- `usage/OUTPUT-motion-brief.typst.pdf`: 3 pages, render ran with no typst warnings. `pdffonts`: EB Garamond Regular and Bold, embedded (no system fonts).
 - `usage/OVERLAY-williams-24-60490.pdf` and `.txt`: the overlay pairs our pages 1, 2 and 3 with the filing's pages 1, 2 and 3. The filing's page 4 (the signature block that the filing itself overflows onto) has no counterpart in our render, and its pages 5 to 8 (the matrix) are not paired. The overlay is a diagnostic, not a score; no visual claim below comes from it alone.
-- `usage/OUTPUT-kyeb-motion-brief-generic.typst.pdf`: 3 pages, no typst warnings.
+- `usage/OUTPUT-motion-brief-2.typst.pdf`: 3 pages, no typst warnings.
 
 ## Gate 2 visual review (williams sample, final render, 3 pages, 60 dpi, each viewed, compared with the filing's pages 1 to 3)
 
@@ -126,4 +126,4 @@ Pages reviewed: 3 of 3 (fictional sample).
 - **typst** (primary): `typst/`, unchanged.
 - **docx**: `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 13 pt, exact 24 pt body line pitch, 0.5 in first-line indent, 1 in margins on US Letter, single-spaced caption, notice of hearing, signature and footnotes, 12 pt centered PAGE footer). `docx/kyeb-motion-brief.lua` builds the caption table, court and title lines, the notice of hearing (under the title, as in the typst form), the signature block and the certificate of service. Headings are the author's markdown headings; lists are lettered a., b., c.
 - **Differs from typst**: (a) the caption rules come from the table style: the rule under the right column and the rule between the two caption rows are drawn too (typst draws them under the left column only). (b) Line and page breaks follow Word or LibreOffice font metrics, not typst's.
-- **BLOCKED (docx.pdf gates, Gates 0 to 3 on `OUTPUT-<id>.docx.pdf`)**: LibreOffice (`soffice`) is not installed on the box used for this build, so the LibreOffice PDF was not produced and no page was reviewed in the docx engine. `usage/OUTPUT-kyeb-motion-brief-generic.docx` was produced and checked only for a valid zip and well-formed XML parts; it has not been opened in Word or LibreOffice. The motion has no filed exemplar (see the BLOCKED line above), so the docx layout is no more verified than the typst layout.
+- **BLOCKED (docx.pdf gates, Gates 0 to 3 on `OUTPUT-<id>.docx.pdf`)**: LibreOffice (`soffice`) is not installed on the box used for this build, so the LibreOffice PDF was not produced and no page was reviewed in the docx engine. `usage/OUTPUT-motion-brief-2.docx` was produced and checked only for a valid zip and well-formed XML parts; it has not been opened in Word or LibreOffice. The motion has no filed exemplar (see the BLOCKED line above), so the docx layout is no more verified than the typst layout.

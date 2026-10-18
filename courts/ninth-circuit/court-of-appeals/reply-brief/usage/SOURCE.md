@@ -20,7 +20,7 @@ Known limits of this exemplar: the filing has two signature blocks (Barvir for M
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca9-reply-brief-sanfrancisco2315087.pdf` |
+| File | `FILED-EXAMPLE-reply-brief-2.pdf` |
 | Filer | Defendants-Appellants City and County of San Francisco, through City Attorney David Chiu and counsel (different filer from B & L Productions and its counsel) |
 | Case | *Coalition on Homelessness v. City and County of San Francisco*, No. 23-15087 |
 | Document | Appellants' Reply Brief (Preliminary Injunction Appeal), DktEntry 54, 36 pages |

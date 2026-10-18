@@ -5,9 +5,9 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-western-district/motion-b
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-txwb-motion-brief-minnsvarriale2301036.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-txwb-motion-brief-oakesmotion.md` (a portion of the 21-page filing, see Known gaps) |
-| render | ok: `usage/OUTPUT-txwb-motion-brief-oakesmotion.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (a portion of the 21-page filing, see Known gaps) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-oakes-motion.pdf` and `OVERLAY-oakes-motion.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and all 8 pages viewed again on 2026-10-14, font unchanged) |
 
@@ -90,7 +90,7 @@ Not produced by this template: a separate memorandum of points and authorities (
 
 ## Engines
 
-**docx** (`docx/`): `sh tools/render.sh --engine docx motion-brief usage/INPUT-txwb-motion-brief-oakesmotion.md` runs pandoc with `docx/txwb-motion-brief.lua` on `docx/reference.docx`, then LibreOffice (`soffice --headless --convert-to pdf`). `docx/reference.docx` is rebuilt from `docx/reference-parts/` by `sh docx/build-reference.sh`. EB Garamond must be installed for LibreOffice (`fonts/eb-garamond`). Checked on `usage/OUTPUT-txwb-motion-brief-oakesmotion.docx.pdf`, 8 of 8 pages rendered at 60 dpi and viewed beside the typst pages.
+**docx** (`docx/`): `sh tools/render.sh --engine docx motion-brief usage/INPUT-motion-brief.md` runs pandoc with `docx/txwb-motion-brief.lua` on `docx/reference.docx`, then LibreOffice (`soffice --headless --convert-to pdf`). `docx/reference.docx` is rebuilt from `docx/reference-parts/` by `sh docx/build-reference.sh`. EB Garamond must be installed for LibreOffice (`fonts/eb-garamond`). Checked on `usage/OUTPUT-motion-brief.docx.pdf`, 8 of 8 pages rendered at 60 dpi and viewed beside the typst pages.
 
 | Layout | Matches typst | Differs (docx against typst, same sample) |
 |---|---|---|

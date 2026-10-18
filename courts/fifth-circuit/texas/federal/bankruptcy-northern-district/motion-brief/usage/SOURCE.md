@@ -1,6 +1,6 @@
 # Exemplars: motion-brief (txnb)
 
-## SAMPLE-txnb-motion-brief-ruxtonvshook2603089.pdf
+## FILED-EXAMPLE-motion-brief.pdf
 
 | Field | Value |
 |---|---|
@@ -14,6 +14,6 @@
 | URL (PDF) | https://storage.courtlistener.com/recap/gov.uscourts.txnb.547118/gov.uscourts.txnb.547118.9.0.pdf |
 | Found by | CourtListener search, `court=txnb`, `type=r`, "motion to dismiss" brief, run 2026-10-14 (HTTP 200). |
 
-The exemplar file is the whole filing as downloaded. The sample transcribes all of it (see `usage/INPUT-txnb-motion-brief-ruxtonvshook.md`).
+The exemplar file is the whole filing as downloaded. The sample transcribes all of it (see `usage/INPUT-motion-brief.md`).
 
 A second candidate from the same search, Abri Care Group LLC v. Gutnicki (adversary 26-03007, Doc 11, a 21-page brief in support of a motion to dismiss), was not used: this exemplar is a combined motion and brief, which matches the template's "motion and brief in support" form.

@@ -1,6 +1,6 @@
 # Exemplar source
 
-Exemplar: `SAMPLE-wvnb-adversary-complaint-proteavckrlaw119ap00056.pdf` (5 pages, text-based, public).
+Exemplar: `FILED-EXAMPLE-adversary-complaint.pdf` (5 pages, text-based, public).
 
 - Court: United States Bankruptcy Court, N.D. West Virginia (wvnb).
 - Case: *Protea Biosciences, Inc. and Protea Biosciences Group, Inc. v. CKR Law LLP*, adversary proceeding No. 1:19-ap-00056 (main cases 1:17-bk-1200 and 1:17-bk-1201, Chapter 11, Judge Flatley).
@@ -24,4 +24,4 @@ It is a filed complaint in this court, with the caption, the Rule 7001 jurisdict
 
 ## Caveat
 
-The exemplar is an actual filing. The transcription in `usage/INPUT-wvnb-adversary-complaint-protea.md` copies its text, including the blank "Adversary No." line on the filed caption. The number 1:19-ap-00056 appears only in the ECF page header, which the template does not reproduce.
+The exemplar is an actual filing. The transcription in `usage/INPUT-adversary-complaint.md` copies its text, including the blank "Adversary No." line on the filed caption. The number 1:19-ap-00056 appears only in the ECF page header, which the template does not reproduce.

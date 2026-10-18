@@ -4,7 +4,7 @@ Both files are public filings posted by the court itself on its website (Supplem
 
 | Field | Exemplar 1 (primary, used for the sample and the overlay) | Exemplar 2 (tier-2 cross-check) |
 |---|---|---|
-| File | `SAMPLE-armfor-petition-supplement-cooper260258.pdf` (25 pages) | `SAMPLE-armfor-petition-supplement-hernandez260263.pdf` (20 pages) |
+| File | `FILED-EXAMPLE-petition-supplement.pdf` (25 pages) | `FILED-EXAMPLE-petition-supplement-2.pdf` (20 pages) |
 | URL fetched from | https://www.armfor.uscourts.gov/briefs/2025Term/Cooper260258Supplement.pdf | https://www.armfor.uscourts.gov/briefs/2025Term/Hernandez260263Supplement.pdf |
 | Case name | *United States v. Keith A. Cooper*, Airman First Class (E-3), U.S. Air Force | *United States v. Jaime C. Hernandez*, Master Sergeant (E-8), U.S. Marine Corps |
 | Docket no. | USCA Dkt. No. 26-0258/AF (Crim. App. Dkt. No. ACM 40791) | USCA Dkt. No. 26-0263/MC (Crim. App. Dkt. No. 202500071) |

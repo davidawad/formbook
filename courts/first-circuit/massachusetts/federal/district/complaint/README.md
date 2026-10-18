@@ -5,9 +5,9 @@ Folder: `courts/first-circuit/massachusetts/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-mad-complaint-doorsystems2614133.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-mad-complaint-doorsystems.md`: the whole filing (97 numbered paragraphs, Counts I to VI, prayer A to Q, jury demand, signature). Transcribed from the text layer of the exemplar. |
-| render | ok: `usage/OUTPUT-mad-complaint-doorsystems.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh courts/first-circuit/massachusetts/federal/district/complaint usage/INPUT-mad-complaint-doorsystems.md`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: the whole filing (97 numbered paragraphs, Counts I to VI, prayer A to Q, jury demand, signature). Transcribed from the text layer of the exemplar. |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh courts/first-circuit/massachusetts/federal/district/complaint usage/INPUT-complaint.md`) |
 | overlay | ok: `usage/OVERLAY-door-systems-complaint.pdf` and `OVERLAY-door-systems-complaint.txt` (`sh tools/overlay.sh courts/first-circuit/massachusetts/federal/district/complaint door-systems-complaint`) |
 | typeface | No face named by the court's rules: EB Garamond kept (`docs/FONTS.md`, "No face named"). Fonts pass 2026-10-14: re-rendered with vendored fonts only, `pdffonts` shows EB Garamond only, no warnings. |
 | pages reviewed | 14 of 14 (fonts pass 2026-10-14: every page rendered at 60 dpi and viewed; earlier review at the last template change) |
@@ -82,7 +82,7 @@ Defects found in review and fixed (all in `mad-complaint.typ`):
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond only, 13 pt, 1 in margins, US Letter, page number in the footer). `complaint.lua` builds the caption (a two-cell table with the party rule), the title and the signature block as Word paragraphs in named styles, the prayer letters (A to Q) and the jury demand. `render.sh` runs pandoc and adds the Word numbering for the allegations (pandoc drops numbering it does not write). Checked on the LibreOffice PDF `usage/OUTPUT-mad-complaint-doorsystems.docx.pdf` (every page viewed at 60 dpi, against the typst render). Word was not checked; the `.docx` was opened with LibreOffice only.
+docx (`docx/`): `build-reference.sh` builds `reference.docx` (EB Garamond only, 13 pt, 1 in margins, US Letter, page number in the footer). `complaint.lua` builds the caption (a two-cell table with the party rule), the title and the signature block as Word paragraphs in named styles, the prayer letters (A to Q) and the jury demand. `render.sh` runs pandoc and adds the Word numbering for the allegations (pandoc drops numbering it does not write). Checked on the LibreOffice PDF `usage/OUTPUT-complaint.docx.pdf` (every page viewed at 60 dpi, against the typst render). Word was not checked; the `.docx` was opened with LibreOffice only.
 
 Matches the typst form: EB Garamond only (no fallback face); body lines at a 24 pt pitch; headings at the typst sizes (18 pt level 1, 15.5 pt level 2, bold caps); single lines at 14.3 pt; numbered paragraphs at 0.5 in with the text after the number; prayer letters hanging; jury demand and signature block kept together; footer page number centered at 12 pt. Justified text is hyphenated (`autoHyphenation`), as typst hyphenates. Like the typst render, no space is added between paragraphs or around headings.
 

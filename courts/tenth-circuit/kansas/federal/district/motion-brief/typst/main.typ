@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ksd-motion-brief.typ": ksd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ksd-motion-brief-blatnick.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ksd-motion-brief(meta, body)

@@ -3,6 +3,6 @@
 //     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/INPUT-<id>.md typst/main.typ out.pdf
 #import "scd-complaint.typ": scd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-scd-complaint-miller.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #scd-complaint(meta, body)

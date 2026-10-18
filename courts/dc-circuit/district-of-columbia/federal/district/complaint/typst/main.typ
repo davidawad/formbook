@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "dcd-complaint.typ": dcd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-dcd-complaint-terredusoleil.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #dcd-complaint(meta, body)

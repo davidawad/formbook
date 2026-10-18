@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-uscgcoca-opening-brief-steen1464.pdf` (8 pages, an extract; see page map) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (8 pages, an extract; see page map) |
 | Case | *United States v. Boatswain's Mate Third Class Justin D. Steen, U.S. Coast Guard*, CGCCA Dkt. 1464, Case No. SP 24978 |
 | Document | "Appellant's Assignment of Error and Brief", 31 pp. as published (redacted; the published copy ends at the Conclusion, with no signature or certificate page) |
 | Filer | Appellate defense counsel for the appellant (signature page not in the published copy) |
@@ -25,7 +25,7 @@ Page map of the extract (`pdfseparate` / `pdfunite`):
 | 6 | 12 | Argument I: Standard of review, Analysis (numbered quotation), heading A |
 | 7-8 | 30-31 | End of Argument II (C.), Conclusion |
 
-Source pp. 4-9 and 13-29 are left out. `usage/INPUT-uscgcoca-opening-brief-steen.md` transcribes exactly the extracted pages.
+Source pp. 4-9 and 13-29 are left out. `usage/INPUT-opening-brief.md` transcribes exactly the extracted pages.
 
 ## First pass (2026-10-14): superseded record
 
@@ -92,7 +92,7 @@ New routes only. Result: **found**. The court's own "Appellate Briefs" page and 
 
 Not used: the other 37 downloaded filings (older rules, broken text, merits-only, or other doc types: replies, habeas, Art. 62).
 
-## 2. Second filer: `SAMPLE-uscgcoca-opening-brief-rodriguez1450.pdf`
+## 2. Second filer: `FILED-EXAMPLE-opening-brief-3.pdf`
 
 | Field | Value |
 |---|---|

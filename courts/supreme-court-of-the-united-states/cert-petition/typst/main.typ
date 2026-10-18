@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "scotus-cert-petition-cert-petition.typ": scotus-cert-petition, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-scotus-cert-petition-fisher.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-cert-petition.md"))
 #let (meta, body) = split-frontmatter(src)
 #scotus-cert-petition(meta, body)

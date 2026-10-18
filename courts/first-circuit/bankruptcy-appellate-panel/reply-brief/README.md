@@ -38,14 +38,14 @@ The [BAP guide](https://www.bap1.uscourts.gov/sites/bap1/files/BAP_Guide.pdf) §
 
 ## Sample and overlay (before 2026-10-16)
 
-- `usage/INPUT-bap1-reply-brief-generic.md`: fictional, rule-structured, not a transcription of any filing. Frontmatter is the schema.
-- `usage/OUTPUT-bap1-reply-brief-generic.typst.pdf`: rendered with `sh tools/render.sh courts/first-circuit/bankruptcy-appellate-panel/reply-brief usage/INPUT-bap1-reply-brief-generic.md`. Renders clean (no typst warnings).
+- `usage/INPUT-reply-brief.md`: fictional, rule-structured, not a transcription of any filing. Frontmatter is the schema.
+- `usage/OUTPUT-reply-brief.typst.pdf`: rendered with `sh tools/render.sh courts/first-circuit/bankruptcy-appellate-panel/reply-brief usage/INPUT-reply-brief.md`. Renders clean (no typst warnings).
 - Overlay: `sh tools/overlay.sh courts/first-circuit/bankruptcy-appellate-panel/reply-brief generic-reply-brief` **fails**: "no exemplar pdf in usage/". There is nothing to overlay against, so no OVERLAY files exist.
 
 ## Run 2026-10-15 (bap1 exemplar search)
 
 - Exemplar: none (see `usage/SOURCE.md`). CourtListener returns 0 bap1 RECAP documents and 0 bap1 dockets; the bap1 filter is throttled (429) on some queries. The status stays BLOCKED.
-- Render: `sh tools/render.sh` on `usage/INPUT-bap1-reply-brief-generic.md` exits 0 (6 pages). Overlay: `sh tools/overlay.sh` exits 1, "no exemplar pdf".
+- Render: `sh tools/render.sh` on `usage/INPUT-reply-brief.md` exits 0 (6 pages). Overlay: `sh tools/overlay.sh` exits 1, "no exemplar pdf".
 - Pages reviewed this run: 0. The sample was rendered to check the build, not reviewed page by page; the Gate 2 notes below are from the earlier run.
 
 ## Gate 2 review of the generic sample (earlier run, before 2026-10-15)
@@ -77,7 +77,7 @@ DOCX and LaTeX: this was a typst-only pass. `docx/` was not touched, so the docx
 
 ## Gate 2 review of the generic sample (2026-10-16, after the template changes)
 
-`usage/OUTPUT-bap1-reply-brief-generic.typst.pdf` (7 pages), rendered at 60 dpi and every page viewed. No exemplar to compare with; checked against the rules and against the two filed bap1 briefs of the other doc types.
+`usage/OUTPUT-reply-brief.typst.pdf` (7 pages), rendered at 60 dpi and every page viewed. No exemplar to compare with; checked against the rules and against the two filed bap1 briefs of the other doc types.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -91,7 +91,7 @@ DOCX and LaTeX: this was a typst-only pass. `docx/` was not touched, so the docx
 
 ## Engines
 
-DOCX (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, every font named explicitly, no theme fonts) and `docx/bap1.lua` (cover, disclosure, contents, authorities, oral-argument statement, the body's heading numbers, the related-cases page and the certificate, with the word limit and required sections checked as in the typst template). `tools/render.sh --engine docx` writes `usage/OUTPUT-bap1-reply-brief-generic.docx` and its LibreOffice PDF. The body font in the PDF is EB Garamond only; DejaVu Sans appears for the ballot-box glyphs in the related-cases statement.
+DOCX (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, every font named explicitly, no theme fonts) and `docx/bap1.lua` (cover, disclosure, contents, authorities, oral-argument statement, the body's heading numbers, the related-cases page and the certificate, with the word limit and required sections checked as in the typst template). `tools/render.sh --engine docx` writes `usage/OUTPUT-reply-brief.docx` and its LibreOffice PDF. The body font in the PDF is EB Garamond only; DejaVu Sans appears for the ballot-box glyphs in the related-cases statement.
 
 Matches the typst output (checked on the LibreOffice PDF against `usage/OUTPUT-generic-*.pdf`, every page): EB Garamond 14 pt; body lines at the typst line pitch (22.25 pt exact); US Letter with 1 in margins; 0.5 in first-line indent, not on the first paragraph after a heading or a front title; centered caps level-1 headings at 19.5 pt and centered bold level-2 headings at 17 pt (the typst 1.4 em and 1.2 em heading sizes); bold left level 3 and 4 headings; cover on its own unnumbered section, its lines within a few points of the typst positions; page numbers from page 2 (typst counts the cover as page 1, so the contents page is page 2); footnote text 14 pt.
 

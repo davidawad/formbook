@@ -2,8 +2,8 @@
 
 - Court: `bap9` (United States Bankruptcy Appellate Panel of the Ninth Circuit), folder `courts/ninth-circuit/bankruptcy-appellate-panel/answering-brief/`
 - Template: `typst/bap9-answering-brief.typ` (entry `typst/main.typ`)
-- Exemplar: `usage/SAMPLE-bap9-answering-brief-kleincc251042.pdf` (see `usage/SOURCE.md`)
-- Samples: `usage/INPUT-bap9-answering-brief-klein.md`, a transcription of the exemplar, rendered to `usage/OUTPUT-bap9-answering-brief-klein.typst.pdf`, overlay `usage/OVERLAY-klein-answering-brief.pdf` and `.txt`; and `usage/INPUT-bap9-answering-brief-fictional.md` (fictional), rendered to `usage/OUTPUT-bap9-answering-brief-fictional.typst.pdf`
+- Exemplar: `usage/FILED-EXAMPLE-answering-brief.pdf` (see `usage/SOURCE.md`)
+- Samples: `usage/INPUT-answering-brief.md`, a transcription of the exemplar, rendered to `usage/OUTPUT-answering-brief.typst.pdf`, overlay `usage/OVERLAY-klein-answering-brief.pdf` and `.txt`; and `usage/INPUT-answering-brief-2.md` (fictional), rendered to `usage/OUTPUT-answering-brief-2.typst.pdf`
 - Status of this doc type:
   - **Exemplar found (2026-10-16).** *Klein v. Sharp*, BAP No. CC-25-1042, Appellee's Answering Brief filed May 2, 2025 by Pachulski Stang Ziehl & Jones LLP for the chapter 11 trustee. Born-digital, complete. Alternate from a different filer: *Hujazi v. Wirum*, BAP No. NC-14-1030 (McKenna Long & Aldridge LLP), compared for tier 2, not saved.
   - The Klein sample transcribes the whole body (the brief is short: 1,598 words by the filer's count). The fictional sample is kept as it was.
@@ -55,13 +55,13 @@ Each change is rule-driven or a tier-2 convention seen across filers; none copie
 6. **Table of authorities sorted numbers digit by digit** ("28 U.S.C. § 1334" before "§ 157"). Digit runs now compare by value. Klein's own table has the digit-by-digit order; the Beavor reply table has numeric order; numeric is the professional choice.
 7. **Certificate of service with unregistered parties** dropped the BAP sample certificate's middle sentence (registered parties served through CM/ECF). Both sentences are now printed (Litigants Manual Rev'd 01/26, sample certificate, manual p. 60). Klein has no unregistered parties, so it is not affected; shown on the Beavor reply sample.
 
-Re-rendered after the changes: `OUTPUT-bap9-answering-brief-klein.typst.pdf` (14 pages) and `OUTPUT-bap9-answering-brief-fictional.typst.pdf` (now 11 pages; was 10, from the heading spacing).
+Re-rendered after the changes: `OUTPUT-answering-brief.typst.pdf` (14 pages) and `OUTPUT-answering-brief-2.typst.pdf` (now 11 pages; was 10, from the heading spacing).
 
-## Sample (`usage/INPUT-bap9-answering-brief-klein.md`)
+## Sample (`usage/INPUT-answering-brief.md`)
 
 A transcription of the exemplar, not a fictional sample. The whole body is transcribed: the introductory paragraph, sections I-VI with the filer's numbering and upper-case titles, the five Statement-of-the-Case sub-headings, the signature, the compliance certificate and the interested-parties certification, all from the PDF's text layer. Case names and order titles in italics as filed. Omitted, as stated in the file's header comment: the bold-underlined defined terms (plain text here) and the filer's related-cases certification (BAP R. 8015(a)-1(b) asks it of the appellant's opening brief, so the template does not print one for an appellee). The filing has no certificate of service; the template prints its standard one. Authorities are linked with `toa:` keys, so the table of authorities is generated from the body. The compliance certificate states the template's count, 1,801 words; the filer's certificate states 1,598 (Word's count; ours is a whitespace-token count that includes citations and headings).
 
-## Sample (`usage/INPUT-bap9-answering-brief-fictional.md`)
+## Sample (`usage/INPUT-answering-brief-2.md`)
 
 Fictional. About 950 words of body text. Sections: summary of argument; argument with sub-headings; conclusion. No statements of jurisdiction, issues or the case (correct under FRBP 8014(b)). Interested-parties certificate only. Written to the rules, not transcribed.
 
@@ -131,7 +131,7 @@ Tier-2 comparison with the alternate (Hujazi, viewed pages 1, 2, 4, 5, 6, 7): Hu
 ## Re-check 2026-10-15 (bead fb-595.20.9)
 
 - Re-searched for an exemplar (CourtListener with `court=bap9`, paced; web search). None found. Searches are logged in `usage/SOURCE.md`.
-- Re-rendered `usage/INPUT-bap9-answering-brief-fictional.md` with `sh tools/render.sh`: 10 pages, exit 0. Every page rendered at 60 dpi and viewed; layout unchanged from the review above. The PDF was moved to `/work/artifacts/bap9/` and is not committed.
+- Re-rendered `usage/INPUT-answering-brief-2.md` with `sh tools/render.sh`: 10 pages, exit 0. Every page rendered at 60 dpi and viewed; layout unchanged from the review above. The PDF was moved to `/work/artifacts/bap9/` and is not committed.
 - `sh tools/overlay.sh` exits 1 (`no exemplar pdf`). Overlay: not produced.
 - Status unchanged: **BLOCKED: no public exemplar.**
 ## Engines

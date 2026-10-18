@@ -5,9 +5,9 @@ Folder: `courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/m
 
 | Item | Status |
 |---|---|
-| exemplar | yes, one filer: `usage/SAMPLE-paeb-motion-brief-henry2600106.pdf` (Eckert Seamans Cherin & Mellott, LLC for U.S. Bank Trust Co., N.A.; filed 2026-03-16). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-paeb-motion-brief-henrymemorandum.md`: the full memorandum (caption, lead-in, Sections I to V, signature) |
-| render | ok: `usage/OUTPUT-paeb-motion-brief-henrymemorandum.typst.pdf`, 8 pages; typst 0.15.0, vendored EB Garamond only, `--ignore-system-fonts`, no warnings |
+| exemplar | yes, one filer: `usage/FILED-EXAMPLE-motion-brief.pdf` (Eckert Seamans Cherin & Mellott, LLC for U.S. Bank Trust Co., N.A.; filed 2026-03-16). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md`: the full memorandum (caption, lead-in, Sections I to V, signature) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages; typst 0.15.0, vendored EB Garamond only, `--ignore-system-fonts`, no warnings |
 | overlay | ok: `usage/OVERLAY-henry-memorandum.pdf` and `.txt` |
 | pages reviewed | 8 of 8. Every page was rasterized at 60 dpi and viewed after the last template change. |
 
@@ -15,7 +15,7 @@ Build (from the repo root, PATH per the box setup):
 
 ```sh
 D=courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/motion-brief
-sh tools/render.sh $D usage/INPUT-paeb-motion-brief-henrymemorandum.md
+sh tools/render.sh $D usage/INPUT-motion-brief.md
 sh tools/overlay.sh $D henry-memorandum $D/usage/SAMPLE-henry-26-00106-motion-brief.pdf
 ```
 

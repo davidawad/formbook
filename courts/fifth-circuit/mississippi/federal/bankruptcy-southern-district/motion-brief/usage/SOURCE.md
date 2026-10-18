@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-mssb-motion-brief-lentz1906038.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Southern District of Mississippi (Southern Division)
 - Case: *Kimberly R. Lentz, as Chapter 7 Trustee for the Bankruptcy Estate of Gary D. Walls & Laura C. Walls v. National Debt Relief, LLC*
 - Bankruptcy case: No. 19-51191-KMS (Chapter 7, Debtors Gary D. Walls and Laura C. Walls). Adversary No. 19-06038-KMS.

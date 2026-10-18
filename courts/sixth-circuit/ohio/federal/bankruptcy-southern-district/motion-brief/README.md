@@ -5,9 +5,9 @@ Folder: `courts/sixth-circuit/ohio/federal/bankruptcy-southern-district/motion-b
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ohsb-motion-brief-actualbrewing219bk50813.pdf` (1 filer, the U.S. Trustee; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ohsb-motion-brief-actualbrewingustmotion.md` (full transcription of the motion and memorandum, all ten footnotes and the certificate of service; the exemplar's mailing matrix is not transcribed) |
-| render | ok: `usage/OUTPUT-ohsb-motion-brief-actualbrewingustmotion.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular and -Bold, embedded), no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, the U.S. Trustee; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (full transcription of the motion and memorandum, all ten footnotes and the certificate of service; the exemplar's mailing matrix is not transcribed) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular and -Bold, embedded), no warnings |
 | typeface | Face required: none. The LBRs name no face for filings (S.D. Ohio LBR 9004-1(b): "at least 10-12 font size"). Substitute: none, EB Garamond kept (checked 2026-10-15 against the LBR PDF). Metric note: not applicable. |
 | overlay | ok: `usage/OVERLAY-actual-brewing-ust-motion.pdf` and `OVERLAY-actual-brewing-ust-motion.txt` (page map below). Run 2026-10-15 against the exemplar fetched from the CourtListener URL in `usage/SOURCE.md` to `/tmp`; the PDF is not kept in the repo |
 | pages reviewed | 7 of 7 (re-rendered 2026-10-15 with no template change; every page rendered at 60 dpi and viewed) |
@@ -90,9 +90,9 @@ Defects found and fixed during this review (for the record): (1) the space after
 
 ## Engines
 
-Engine status: typst `OUTPUT-ohsb-motion-brief-actualbrewingustmotion.typst.pdf` (above); docx built, not checked (see BLOCKED below); latex not built.
+Engine status: typst `OUTPUT-motion-brief.typst.pdf` (above); docx built, not checked (see BLOCKED below); latex not built.
 
-**docx** (`docx/`): `docx/build-reference.sh` writes `docx/reference.docx` (styles, page setup, footer page number); `docx/render.sh` runs pandoc with `docx/ohsb-motion-brief.lua` (caption table, unnumbered paragraphs, lettered quotations, signature blocks, certificate address blocks) and restores the reference styles and section. Output: `usage/OUTPUT-ohsb-motion-brief-actualbrewingustmotion.docx`. Checked by the tool here: the zip has no duplicate entries and every XML part is well formed (`tools/render-docx.sh` ran these before the LibreOffice step).
+**docx** (`docx/`): `docx/build-reference.sh` writes `docx/reference.docx` (styles, page setup, footer page number); `docx/render.sh` runs pandoc with `docx/ohsb-motion-brief.lua` (caption table, unnumbered paragraphs, lettered quotations, signature blocks, certificate address blocks) and restores the reference styles and section. Output: `usage/OUTPUT-motion-brief.docx`. Checked by the tool here: the zip has no duplicate entries and every XML part is well formed (`tools/render-docx.sh` ran these before the LibreOffice step).
 
 What the reference sets, the same values as the typst template (read back from `styles.xml` and `sectPr`):
 

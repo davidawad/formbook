@@ -8,16 +8,16 @@ Doc type folder for a motion filed with its supporting memorandum in one documen
 |---|---|
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...` |
 | `typst/utb-motion-brief.typ` | The template: parameters, counsel block, Form 416D-style caption, body (headings, paragraphs, lists), signature, certificate markers |
-| `usage/INPUT-utb-motion-brief-plaza106motiontodismiss.md` | Our transcription of the Plaza 106 motion to dismiss and memorandum (Doc 32): caption, headings, body, signature, certificate of compliance, certificate of service |
-| `usage/OUTPUT-utb-motion-brief-plaza106motiontodismiss.typst.pdf` | Our render, `sh tools/render.sh`, 13 pages |
-| `usage/OVERLAY-plaza106-motion-to-dismiss.pdf` / `.txt` | Red (ours) / blue (filed) / black (both) overlay against `SAMPLE-utb-motion-brief-plaza1062602063.pdf`, and the page map |
-| `usage/SAMPLE-utb-motion-brief-plaza1062602063.pdf` | Filed exemplar, Doc 32, 16 pp. |
+| `usage/INPUT-motion-brief.md` | Our transcription of the Plaza 106 motion to dismiss and memorandum (Doc 32): caption, headings, body, signature, certificate of compliance, certificate of service |
+| `usage/OUTPUT-motion-brief.typst.pdf` | Our render, `sh tools/render.sh`, 13 pages |
+| `usage/OVERLAY-plaza106-motion-to-dismiss.pdf` / `.txt` | Red (ours) / blue (filed) / black (both) overlay against `FILED-EXAMPLE-motion-brief.pdf`, and the page map |
+| `usage/FILED-EXAMPLE-motion-brief.pdf` | Filed exemplar, Doc 32, 16 pp. |
 
 Commands (run from the repo root, toolchain on PATH):
 
 ```
-sh tools/render.sh courts/tenth-circuit/utah/federal/bankruptcy-district/motion-brief usage/INPUT-utb-motion-brief-plaza106motiontodismiss.md
-sh tools/overlay.sh courts/tenth-circuit/utah/federal/bankruptcy-district/motion-brief plaza106-motion-to-dismiss courts/tenth-circuit/utah/federal/bankruptcy-district/motion-brief/usage/SAMPLE-utb-motion-brief-plaza1062602063.pdf
+sh tools/render.sh courts/tenth-circuit/utah/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md
+sh tools/overlay.sh courts/tenth-circuit/utah/federal/bankruptcy-district/motion-brief plaza106-motion-to-dismiss courts/tenth-circuit/utah/federal/bankruptcy-district/motion-brief/usage/FILED-EXAMPLE-motion-brief.pdf
 ```
 
 Pass the exemplar explicitly: `overlay.sh` with no third argument uses the first PDF in `usage/`, and this folder has only one.
@@ -58,7 +58,7 @@ The overlay compares our render (13 pp.) with the Plaza 106 motion (Doc 32, 16 p
 
 ## Engines
 
-The typst template is the primary form. The DOCX engine is in `docx/` (`reference.docx`, `utb-motion-brief.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/utah/federal/bankruptcy-district/motion-brief usage/INPUT-utb-motion-brief-plaza106motiontodismiss.md`.
+The typst template is the primary form. The DOCX engine is in `docx/` (`reference.docx`, `utb-motion-brief.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/utah/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md`.
 
 **What the docx matches** (the same mandated form as the typst template): EB Garamond 12 pt; exact 24 pt line pitch; 0.5 in first-line indent on body paragraphs; letter paper with a 1.5 in top margin and 1 in other margins; centred bold level-1 headings and bold left-aligned level-2 and level-3 headings; 12 pt single-spaced footnotes; a bottom-centre page number (PAGE field in the footer). The cover is built from the same metadata: counsel block, court title, Form 416D caption with the third-party group (a borderless table with a right and a bottom rule on the party column), title. Body paragraphs are not numbered. The signature block follows the paragraph before `[[SIGNATURE]]`, and that paragraph is kept with it (keep-with-next). `[[PAGEBREAK]]` starts the certificates on a new page.
 
@@ -66,6 +66,6 @@ The typst template is the primary form. The DOCX engine is in `docx/` (`referenc
 
 **BLOCKED for the docx engine** (not done on this box):
 - `docx.pdf` (`usage/OUTPUT-plaza106-motion-to-dismiss.docx.pdf`, the LibreOffice PDF on which Gates 0 and 1 are measured): BLOCKED, `soffice` not installed on the box (no conda-forge package, no root).
-- Zip integrity step of `tools/render-docx.sh` (`unzip -tq`): BLOCKED, `unzip` not installed on the box. `tools/render.sh --engine docx` wrote `usage/OUTPUT-utb-motion-brief-plaza106motiontodismiss.docx` and then exited 1 with `render-docx.sh: unzip: not found` and `not a valid zip`. As a substitute, every XML and rels part was checked with `ziptool` and `xmllint --noout`: all well-formed.
+- Zip integrity step of `tools/render-docx.sh` (`unzip -tq`): BLOCKED, `unzip` not installed on the box. `tools/render.sh --engine docx` wrote `usage/OUTPUT-motion-brief.docx` and then exited 1 with `render-docx.sh: unzip: not found` and `not a valid zip`. As a substitute, every XML and rels part was checked with `ziptool` and `xmllint --noout`: all well-formed.
 - Visual review of the docx pages (LibreOffice or Word, no repair prompt): BLOCKED, no LibreOffice and no Word. Pages reviewed: 0. The typst render (13 pages) was reviewed page by page; the docx was not.
 - `sh tools/check.sh <dir> --engine docx` not run to a pass: it needs the `.docx.pdf` (see above), so no `.check-docx.txt` stamp is written.

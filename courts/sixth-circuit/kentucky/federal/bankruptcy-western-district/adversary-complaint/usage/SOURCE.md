@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-kywb-adversary-complaint-keatsvspecialized2103007.pdf` (8 pages, complete; text layer present, `pdftotext` reads it; Helvetica not embedded).
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (8 pages, complete; text layer present, `pdftotext` reads it; Helvetica not embedded).
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.kywb.349241/gov.uscourts.kywb.349241.1.0.pdf (CourtListener RECAP copy of the filing). Docket page: https://www.courtlistener.com/docket/43034224/1/keats-v-specialized-attorney-services-inc/
 - Court: United States Bankruptcy Court, Western District of Kentucky, Louisville Division.
 - Case: *Robert W. Keats, Chapter 7 Trustee v. Specialized Attorney Services Inc.* (adversary proceeding). Main case: *In re M&P Collections, Inc. and F&M Law Firm, P.S.C.*, No. 19-30311-acs (jointly administered with No. 19-30312), Chapter 7.

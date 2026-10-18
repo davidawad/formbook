@@ -3,7 +3,7 @@
 - Court: `alnb`, United States Bankruptcy Court for the Northern District of Alabama (`courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district/`)
 - Doc type: `adversary-complaint` (commencing an adversary proceeding, Fed. R. Bankr. P. 7001 and 7003)
 - Engine: typst (primary). `latex/` and `docx/` are not built for this doc type.
-- Exemplars: `usage/` holds two public filings from different filers (see `usage/SOURCE.md`). The overlay uses the first one (`SAMPLE-alnb-adversary-complaint-bcicapitalvmontalbano2100015.pdf`), which is the tier-2 primary.
+- Exemplars: `usage/` holds two public filings from different filers (see `usage/SOURCE.md`). The overlay uses the first one (`FILED-EXAMPLE-adversary-complaint.pdf`), which is the tier-2 primary.
 
 ## Files
 
@@ -11,8 +11,8 @@
 |---|---|
 | `typst/main.typ` | Entry point. Reads `--input sample=...` and calls `alnb-adversary-complaint`. |
 | `typst/alnb-adversary-complaint.typ` | Template. Caption, title, numbered allegations, headings, WHEREFORE prayers, signature block. Parameter block at the top. |
-| `usage/INPUT-alnb-adversary-complaint-bcicapitalmontalbano.md` | Transcription of the BCI complaint (frontmatter + body). Frontmatter fields: `court`, `caption` (list of `left`/`right` line blocks), `title`, `lead_in`, `consent`, `signature` (`date`, `signers`, `firm`, `address`, `contact`, `role`). |
-| `usage/OUTPUT-alnb-adversary-complaint-bcicapitalmontalbano.typst.pdf` | `sh tools/render.sh <dir> usage/INPUT-alnb-adversary-complaint-bcicapitalmontalbano.md`, where `<dir>` is this folder. 6 pages. |
+| `usage/INPUT-adversary-complaint.md` | Transcription of the BCI complaint (frontmatter + body). Frontmatter fields: `court`, `caption` (list of `left`/`right` line blocks), `title`, `lead_in`, `consent`, `signature` (`date`, `signers`, `firm`, `address`, `contact`, `role`). |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | `sh tools/render.sh <dir> usage/INPUT-adversary-complaint.md`, where `<dir>` is this folder. 6 pages. |
 | `usage/OVERLAY-bci-capital-montalbano.pdf`, `.txt` | `sh tools/overlay.sh <dir> bci-capital-montalbano`. Red = our render, blue = filed exemplar, black = both. `.txt` is the page map. |
 | `usage/` | Two filed complaints (BCI 7 pp.; Garner 3 pp.) and `SOURCE.md`. |
 
@@ -65,8 +65,8 @@ The template was present on master, but its render was broken, so it was changed
 
 ## Engines
 
-- **typst** (primary): `typst/`, `usage/OUTPUT-alnb-adversary-complaint-bcicapitalmontalbano.typst.pdf` (6 pages).
-- **docx**: `docx/` (`make-reference.sh` builds `reference.docx`; `alnb.lua` adds the court title, caption table, numbered allegations, consent statement and signature block). Output `usage/OUTPUT-alnb-adversary-complaint-bcicapitalmontalbano.docx` and `.docx.pdf` (LibreOffice conversion, 7 pages, every page rendered and looked at).
+- **typst** (primary): `typst/`, `usage/OUTPUT-adversary-complaint.typst.pdf` (6 pages).
+- **docx**: `docx/` (`make-reference.sh` builds `reference.docx`; `alnb.lua` adds the court title, caption table, numbered allegations, consent statement and signature block). Output `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (LibreOffice conversion, 7 pages, every page rendered and looked at).
 - **latex**: not built for this doc type.
 
 What matches the typst form (12 pt EB Garamond, 1-inch margins, letter, 24 pt exact body leading, half-inch first-line indent, numbered allegations with the consent statement as paragraph 1, centered headings, centered page-number footer, single-spaced caption/court title/signature block, the ")" column of the caption, footnotes).

@@ -3,7 +3,7 @@
 Two filed memoranda from two different filers, both public court records (CourtListener RECAP), both text-based
 (`pdftotext` reads them; Times fonts embedded). Fetched 2026-10-14 with curl.
 
-## 1. `SAMPLE-nysb-motion-brief-revlon2201167.pdf` (primary; used for the sample)
+## 1. `FILED-EXAMPLE-motion-brief.pdf` (primary; used for the sample)
 
 - Court: United States Bankruptcy Court, Southern District of New York
 - Case: *AIMCO CLO 10 Ltd., et al. v. Revlon, Inc., et al.*, Adv. Pro. No. 22-01167 (DSJ), in *In re Revlon, Inc., et al.*,
@@ -17,7 +17,7 @@ Two filed memoranda from two different filers, both public court records (CourtL
 - Docket: https://www.courtlistener.com/docket/65650767/ (AIMCO CLO 10 Ltd. v. Revlon, Inc.)
 - Date fetched: 2026-10-14
 
-## 2. `SAMPLE-nysb-motion-brief-celsiustether2404018.pdf` (second filer; structure comparison)
+## 2. `FILED-EXAMPLE-motion-brief-2.pdf` (second filer; structure comparison)
 
 - Court: United States Bankruptcy Court, Southern District of New York
 - Case: *Celsius Network Limited and Celsius Network LLC (Post-Effective Date Debtors) v. Tether Limited et al.*,

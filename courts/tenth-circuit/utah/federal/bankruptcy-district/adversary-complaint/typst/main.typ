@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "utb-adversary-complaint.typ": utb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-utb-adversary-complaint-plaza106verifiedcomplaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #utb-adversary-complaint(meta, body)

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-tnwb-adversary-complaint-brewers2505046.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Western District of Tennessee (Eastern Division)
 - Case: *Brewer's Lawn Care and Property Preservation, LLC v. Idea 247, Inc., Justin Leto and Larry Bassuk*, Adv. Proc. No. 25-05046, main case No. 25-10771-JLC (Chapter 11, Subchapter V)
 - Document: Complaint (21 pages), Doc 1, "COMPLAINT"

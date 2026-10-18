@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-alsd-motion-brief-jacksonvshell22cv478.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Southern District of Alabama, Southern Division
 - Case: *Essence Jackson v. Shell Chemical LP*
 - Docket: No. 1:22-cv-00478-TFM-N (caption reads "Civil Action No. 22-004478-CG-N"); Document 12

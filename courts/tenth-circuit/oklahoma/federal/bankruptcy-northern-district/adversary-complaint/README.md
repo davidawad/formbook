@@ -28,16 +28,16 @@ LBR 9004-1(A) (court's local rules, "Updated March 21, 2025"; the rule text as q
 
 ## Exemplar
 
-`usage/SAMPLE-oknb-adversary-complaint-retherford0901059.pdf`: the complaint in *Atlas Telephone Company, Inc. v. Retherford*, Adv. No. 09-01059-M (Bankr. N.D. Okla., main case 09-01996-M, Chapter 7), filed July 1, 2009 by Mark A. Craige (MorrelSaffaCraige, P.C.) for four plaintiffs. 8 pages, text-based (body text extracts; EB Garamond is not used by the filer; the fonts are embedded LiberationSans and Helvetica). Source, searches, and the candidates rejected (three scanned complaints, a trustee's avoidance complaint, short student-loan complaints) are in `usage/SOURCE.md`.
+`usage/FILED-EXAMPLE-adversary-complaint.pdf`: the complaint in *Atlas Telephone Company, Inc. v. Retherford*, Adv. No. 09-01059-M (Bankr. N.D. Okla., main case 09-01996-M, Chapter 7), filed July 1, 2009 by Mark A. Craige (MorrelSaffaCraige, P.C.) for four plaintiffs. 8 pages, text-based (body text extracts; EB Garamond is not used by the filer; the fonts are embedded LiberationSans and Helvetica). Source, searches, and the candidates rejected (three scanned complaints, a trustee's avoidance complaint, short student-loan complaints) are in `usage/SOURCE.md`.
 
 Only one exemplar from this court, from one filer. Tier 2 is therefore judged against this filing and the rules, not against two or three filers. A second filer was not found on the public record reachable from this box.
 
 ## Sample
 
-- `usage/INPUT-oknb-adversary-complaint-sample.md` is a **transcription** of the exemplar (not synthetic). Its frontmatter says so. Parties, numbers and facts are the filer's; they are typed from the PDF's text layer, with the filer's own spelling and punctuation kept (for example "SFR" and "f/k/a/").
+- `usage/INPUT-adversary-complaint.md` is a **transcription** of the exemplar (not synthetic). Its frontmatter says so. Parties, numbers and facts are the filer's; they are typed from the PDF's text layer, with the filer's own spelling and punctuation kept (for example "SFR" and "f/k/a/").
 - Jurisdiction paragraphs (the filing's own ¶¶ 1-2) are generated from the frontmatter (`jurisdiction`, `core`), so the sample does not repeat them. The filer's paragraph numbers are not typed; the template numbers the body.
 - Length: 8 rendered pages, inside the 8-14 page target for an exemplar that long.
-- Naming: `INPUT-oknb-adversary-complaint-sample.md` / `OUTPUT-oknb-adversary-complaint-sample.typst.pdf` / `OVERLAY-adversary-complaint.pdf` and `.txt`, as the tools read and write them.
+- Naming: `INPUT-adversary-complaint.md` / `OUTPUT-adversary-complaint.typst.pdf` / `OVERLAY-adversary-complaint.pdf` and `.txt`, as the tools read and write them.
 
 ### Where the transcription departs from the filing
 
@@ -49,11 +49,11 @@ Only one exemplar from this court, from one filer. Tier 2 is therefore judged ag
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-oknb-adversary-complaint-sample.md
+sh tools/render.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/adversary-complaint adversary-complaint
 ```
 
-- render: **ok**. `usage/OUTPUT-oknb-adversary-complaint-sample.typst.pdf`, 8 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular and -Bold only, embedded.
+- render: **ok**. `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular and -Bold only, embedded.
 - overlay: **ok**. The filed PDF is not in this checkout; it was fetched from the RECAP URL in `usage/SOURCE.md` to a scratch directory (8 pages, matching the record) and passed to `tools/overlay.sh` as its third argument. `usage/OVERLAY-adversary-complaint.pdf` and `.txt` written. Word overlap per page, as the tool reports it: p.1 58.5%, p.2 85.3%, p.3 90.2%, p.4 82.4%, p.5 70.9%, p.6 52.9%, p.7 35.6%, p.8 60.7%. The overlay is a diagnostic, not a score. The lowest pages are 7 (35.6%) and 6 (52.9%); I did not chase the cause in this pass, and I do not claim it is line breaks.
 
 ## Visual review (Gate 2, all 8 pages rendered at 70 dpi and looked at)

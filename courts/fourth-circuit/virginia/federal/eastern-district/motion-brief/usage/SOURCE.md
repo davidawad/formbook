@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-vaed-motion-brief-keppel426cv00112.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Eastern District of Virginia (Newport News Division)
 - Case: *Keppel v. Jefferson Science Associates, LLC, et al.*
 - Docket: No. 4:26-cv-00112-MSD-LRL (Document 11)

@@ -4,9 +4,9 @@ Doc type **complaint**, folder `courts/fourth-circuit/south-carolina/federal/dis
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-scd-complaint-millervwafflehouse226cv04339.pdf` (1 filer: plaintiff's counsel; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-scd-complaint-miller.md` (the full 10-page filing transcribed: caption, all numbered paragraphs, headings, the three causes of action, prayer, jury demand, signature block) |
-| render | ok: `usage/OUTPUT-scd-complaint-miller.typst.pdf`, 8 pages, typst 0.15.0, vendored Liberation Serif only (embedded per `pdffonts`), no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer: plaintiff's counsel; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the full 10-page filing transcribed: caption, all numbered paragraphs, headings, the three causes of action, prayer, jury demand, signature block) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored Liberation Serif only (embedded per `pdffonts`), no warnings |
 | overlay | ok: `usage/OVERLAY-miller-complaint.pdf` and `usage/OVERLAY-miller-complaint.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
 | tier-1 font (L.R. 1.05(B)) | Met: Times New Roman (one of the three faces the rule names) set as its metric-compatible substitute **Liberation Serif** (see Known gaps) |
@@ -38,7 +38,7 @@ Render and overlay (from the repo root; the doc-type folder is the court dir):
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
 D=courts/fourth-circuit/south-carolina/federal/district/complaint
-sh tools/render.sh $D usage/INPUT-scd-complaint-miller.md     # -> usage/OUTPUT-scd-complaint-miller.typst.pdf
+sh tools/render.sh $D usage/INPUT-complaint.md     # -> usage/OUTPUT-complaint.typst.pdf
 sh tools/overlay.sh $D miller-complaint                      # -> usage/OVERLAY-miller-complaint.{pdf,txt}
 ```
 
@@ -80,11 +80,11 @@ typst (`typst/`) is the reference. The docx engine (`docx/`) was built to its fo
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-scd-complaint-miller.typst.pdf` (8 pp.) | reference |
-| docx | `OUTPUT-scd-complaint-miller.docx` and `OUTPUT-scd-complaint-miller.docx.pdf` (9 pp.) | ok: LibreOffice converts it without error; all 9 pages of the `.docx.pdf` viewed at 60 dpi, set beside the typst pages |
+| typst | `OUTPUT-complaint.typst.pdf` (8 pp.) | reference |
+| docx | `OUTPUT-complaint.docx` and `OUTPUT-complaint.docx.pdf` (9 pp.) | ok: LibreOffice converts it without error; all 9 pages of the `.docx.pdf` viewed at 60 dpi, set beside the typst pages |
 
 ```sh
-sh tools/render.sh --engine docx courts/fourth-circuit/south-carolina/federal/district/complaint usage/INPUT-scd-complaint-miller.md
+sh tools/render.sh --engine docx courts/fourth-circuit/south-carolina/federal/district/complaint usage/INPUT-complaint.md
 sh docx/make-reference.sh     # rebuilds docx/reference.docx (run from the doc-type folder)
 ```
 

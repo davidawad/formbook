@@ -4,7 +4,7 @@ Doc type: the appellee's brief in a direct appeal (Ga. Sup. Ct. R. 19(2), 20(1))
 
 | Check | Result |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ga-answering-brief-clarkvleighs26a0349.pdf` (see `usage/SOURCE.md`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-answering-brief.pdf` (see `usage/SOURCE.md`) |
 | render | ok: `tools/render.sh` (typst, `--ignore-system-fonts`, no warnings); 12 pages; only TeX Gyre Schola embedded (`pdffonts`) |
 | overlay | ok: `usage/OVERLAY-clark.pdf` and `OVERLAY-clark.txt` (`tools/overlay.sh`) |
 | pages reviewed | 12 of 12, each rendered to PNG at 60 dpi and looked at |
@@ -30,8 +30,8 @@ As the opening brief: Century Schoolbook is the rule-named face (Rule 16(2) size
 ## Files
 
 - `typst/main.typ`: entry point. `typst/ga-answering-brief.typ`: template, `ga-brief(meta, body)` (same code as the opening-brief template).
-- `usage/INPUT-ga-answering-brief-clark.md`: transcription of the appellee's brief. The statement of the case (to the amended judgment) and the opening of argument I are transcribed; the rest is marked `[Omitted from this transcription: ...]`. The block quotation of O.C.G.A. § 51-13-1 is omitted.
-- `usage/OUTPUT-ga-answering-brief-clark.typst.pdf`, `usage/OVERLAY-clark.pdf`, `usage/OVERLAY-clark.txt`.
+- `usage/INPUT-answering-brief.md`: transcription of the appellee's brief. The statement of the case (to the amended judgment) and the opening of argument I are transcribed; the rest is marked `[Omitted from this transcription: ...]`. The block quotation of O.C.G.A. § 51-13-1 is omitted.
+- `usage/OUTPUT-answering-brief.typst.pdf`, `usage/OVERLAY-clark.pdf`, `usage/OVERLAY-clark.txt`.
 
 ## What the overlay shows
 
@@ -59,7 +59,7 @@ Red is our render only, blue is the filed exemplar only, black is both. Pages ar
 
 ## Engines
 
-Typst is the primary engine (above). The DOCX engine is `docx/`: `build-reference.sh` writes `reference.docx` (TeX Gyre Schola 13 pt, exact line pitches that match the typst render, 1-in margins, letter paper, 11-pt footnotes, the page number in the footer); `ga-brief.lua` builds the cover, table of contents, table of authorities, closing and certificate, and the three sections (cover without folio, roman front matter, arabic body); `render.sh` makes two renders, so the TOC and TOA page numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> usage/INPUT-ga-answering-brief-clark.md`: `usage/OUTPUT-ga-answering-brief-clark.docx` and `usage/OUTPUT-clark.docx.pdf` (LibreOffice 26.8.1, `soffice --headless --convert-to pdf`). It needs pandoc (3.12.1), LibreOffice (`soffice`), poppler (`pdfinfo`, `pdftotext`), perl, zip, unzip and xmllint; the other doc types use the same folder layout.
+Typst is the primary engine (above). The DOCX engine is `docx/`: `build-reference.sh` writes `reference.docx` (TeX Gyre Schola 13 pt, exact line pitches that match the typst render, 1-in margins, letter paper, 11-pt footnotes, the page number in the footer); `ga-brief.lua` builds the cover, table of contents, table of authorities, closing and certificate, and the three sections (cover without folio, roman front matter, arabic body); `render.sh` makes two renders, so the TOC and TOA page numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> usage/INPUT-answering-brief.md`: `usage/OUTPUT-answering-brief.docx` and `usage/OUTPUT-clark.docx.pdf` (LibreOffice 26.8.1, `soffice --headless --convert-to pdf`). It needs pandoc (3.12.1), LibreOffice (`soffice`), poppler (`pdfinfo`, `pdftotext`), perl, zip, unzip and xmllint; the other doc types use the same folder layout.
 
 | | docx | typst |
 |---|---|---|

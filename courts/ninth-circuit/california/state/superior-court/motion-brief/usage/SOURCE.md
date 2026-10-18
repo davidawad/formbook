@@ -2,7 +2,7 @@
 
 Motion-brief here means the notice of motion and motion, combined with the memorandum of points and authorities, in one document (CRC 3.1112(c), 3.1113).
 
-## SAMPLE-calsuperct-motion-brief-acluvcityoffresno24cecg01635.pdf
+## FILED-EXAMPLE-motion-brief.pdf
 
 | Field | Value |
 |---|---|

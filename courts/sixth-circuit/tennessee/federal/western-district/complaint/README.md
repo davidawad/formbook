@@ -5,14 +5,14 @@ Folder: `courts/sixth-circuit/tennessee/federal/western-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-tnwd-complaint-coranperry226cv03285.pdf` (1 filer; see `usage/SOURCE.md`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
 | typeface | **Times New Roman** named by the W.D. Tenn. CM/ECF manual, section "Setting up PDF Reader and Converting to PDF": "The court only allows use of the following fonts ... Times New Roman, Arial, and Courier New. Size of font must be (at least) 12 point." LR 7.1(b) itself names no face. Substitute: **Liberation Serif** (`docs/FONTS.md`, metric-compatible with Times New Roman). EB Garamond is not used. |
-| sample md | `usage/INPUT-tnwd-complaint-coran.md` (a portion of the 26-page filing: caption, opening sections, paragraphs 1 to 46, prayer, jury demand, signature, verifications) |
-| render | ok: `usage/OUTPUT-tnwd-complaint-coran.typst.pdf`, 14 pages (the second verification alone on p. 14), typst 0.15.0, vendored Liberation Serif only (re-rendered 2026-10-15; `pdffonts`: only LiberationSerif embedded), no warnings |
+| sample md | `usage/INPUT-complaint.md` (a portion of the 26-page filing: caption, opening sections, paragraphs 1 to 46, prayer, jury demand, signature, verifications) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 14 pages (the second verification alone on p. 14), typst 0.15.0, vendored Liberation Serif only (re-rendered 2026-10-15; `pdffonts`: only LiberationSerif embedded), no warnings |
 | overlay | ok: `usage/OVERLAY-coran-complaint.pdf` and `usage/OVERLAY-coran-complaint.txt` (page map) |
 | pages reviewed | 14 of 14 (every page of the 2026-10-15 render rasterized at 60 dpi and viewed)
 
-File names follow the tools' defaults (`render.sh` writes `usage/OUTPUT-<id>.pdf` and `overlay.sh` reads it and writes `usage/OVERLAY-<id>.pdf`/`.txt`), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief. The sample is `usage/INPUT-tnwd-complaint-coran.md`, so `<id>` is `coran-complaint`.
+File names follow the tools' defaults (`render.sh` writes `usage/OUTPUT-<id>.pdf` and `overlay.sh` reads it and writes `usage/OVERLAY-<id>.pdf`/`.txt`), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief. The sample is `usage/INPUT-complaint.md`, so `<id>` is `coran-complaint`.
 
 ## Governing rules
 
@@ -93,7 +93,7 @@ Each page was rasterized with `pdftoppm -r 60` after the last template change an
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `tnwd-complaint.lua` sets the caption, numbered allegations, prayer, signature and verifications). Rendered with `sh tools/render.sh --engine docx complaint usage/INPUT-tnwd-complaint-coran.md` to `usage/OUTPUT-tnwd-complaint-coran.docx` and `.docx.pdf` (LibreOffice). Reviewed: all 14 pages of the `.docx.pdf` against all 14 pages of the typst output, at 60 dpi.
+DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `tnwd-complaint.lua` sets the caption, numbered allegations, prayer, signature and verifications). Rendered with `sh tools/render.sh --engine docx complaint usage/INPUT-complaint.md` to `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice). Reviewed: all 14 pages of the `.docx.pdf` against all 14 pages of the typst output, at 60 dpi.
 
 - Matches typst: Liberation Serif 12 pt throughout (footnotes too); double spacing at 27.6 pt and single at 13.8 pt; one-inch margins; caption and case-number/JURY DEMAND line; court title; title; numbered allegations at ½ inch with the text at the tab; lead-in unnumbered; lettered prayer (a) to (n) at ½ inch; signature block kept together; each verification kept together with its rule; page numbers centred. Page count is 14 in both; the last page (second verification) is the same in both. Body lines sit at the same pitch as typst; from the court title onward every line is about 3.2 pt lower than typst (the court title lines themselves), with no drift down the page.
 - Differs (ACCEPTED, tier 2): the caption's `)` column is a cell rule at the right of the party column; the first court-title line sits about 3 pt lower; LibreOffice breaks some lines differently from typst, so a page holds one or two lines more or fewer on some pages (line counts per page are within three lines of typst); footnote entries are set with a little more space between them.

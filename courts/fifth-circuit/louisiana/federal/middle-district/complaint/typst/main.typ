@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "lamd-complaint.typ": lamd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-lamd-complaint-parker.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #lamd-complaint(meta, body)

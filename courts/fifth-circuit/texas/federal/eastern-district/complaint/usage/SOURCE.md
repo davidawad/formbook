@@ -4,12 +4,12 @@ Date fetched for both: 2026-10-14.
 
 | File | Case | Docket | Filer (counsel) | Date filed | Fetched from |
 |---|---|---|---|---|---|
-| `SAMPLE-txed-complaint-pacsec3lumen225cv00668.pdf` | *PacSec3, LLC v. Lumen Technologies, Inc.* (E.D. Tex., Marshall Div.) | 2:25-cv-00668, Dkt. 1 | Plaintiff PacSec3, LLC (Ramey LLP, William P. Ramey, III) | 2025-06-30 | https://cdn.lawlytics.com/law-media/uploads/2360/335701/original/COMPLAINT---PacSec-v.-Lumen.pdf |
-| `SAMPLE-txed-complaint-wetrohacom215cv00416.pdf` | *Wetro LAN LLC v. Hacom LLC* (E.D. Tex., Marshall Div.) | 2:15-cv-00416, Dkt. 1 | Plaintiff Wetro LAN LLC (Austin Hansley P.L.L.C., Austin Hansley and Brandon LaPray) | 2015-03-23 | https://eff.org/files/2015/06/26/wetro_lan_v_hacom_complaint.pdf |
+| `FILED-EXAMPLE-complaint.pdf` | *PacSec3, LLC v. Lumen Technologies, Inc.* (E.D. Tex., Marshall Div.) | 2:25-cv-00668, Dkt. 1 | Plaintiff PacSec3, LLC (Ramey LLP, William P. Ramey, III) | 2025-06-30 | https://cdn.lawlytics.com/law-media/uploads/2360/335701/original/COMPLAINT---PacSec-v.-Lumen.pdf |
+| `FILED-EXAMPLE-complaint-2.pdf` | *Wetro LAN LLC v. Hacom LLC* (E.D. Tex., Marshall Div.) | 2:15-cv-00416, Dkt. 1 | Plaintiff Wetro LAN LLC (Austin Hansley P.L.L.C., Austin Hansley and Brandon LaPray) | 2015-03-23 | https://eff.org/files/2015/06/26/wetro_lan_v_hacom_complaint.pdf |
 
 ## Which one the sample uses
 
-`usage/INPUT-txed-complaint-pacsec3.md` is the transcription of the PacSec3 complaint (the 2025 filing, the one the template is checked against with `overlay.sh`, because it is the first `usage/*.pdf` in name order). The Wetro complaint is a second filer, kept for the tier-2 comparison of conventions (caption, numbered paragraphs, prayer, signature). It is from 2015, so its layout is older than the current rules.
+`usage/INPUT-complaint.md` is the transcription of the PacSec3 complaint (the 2025 filing, the one the template is checked against with `overlay.sh`, because it is the first `usage/*.pdf` in name order). The Wetro complaint is a second filer, kept for the tier-2 comparison of conventions (caption, numbered paragraphs, prayer, signature). It is from 2015, so its layout is older than the current rules.
 
 ## Provenance and checks
 

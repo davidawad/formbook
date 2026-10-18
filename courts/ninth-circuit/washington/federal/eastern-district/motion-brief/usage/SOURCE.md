@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-waed-motion-brief-hartsock426cv05098motiontodismiss.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Eastern District of Washington (Richland)
 - Case: *Hartsock v. Battelle Memorial Institute*, Judge Thomas O. Rice
 - Docket: No. 4:26-cv-05098-TOR (ECF No. 4)

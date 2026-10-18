@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-idb-adversary-complaint-cutting2507006.pdf` (32 pages, letter, text layer present; the ECF header reads "Case 25-07006-NGH, Doc 1, Filed 12/18/25")
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (32 pages, letter, text layer present; the ECF header reads "Case 25-07006-NGH, Doc 1, Filed 12/18/25")
 - Court: United States Bankruptcy Court for the District of Idaho (`idb`)
 - Case: *Acting United States Trustee, Region 18 v. Shawn Cutting and Janine Cutting*, Adv. No. 25-07006-NGH, in the chapter 7 case *In re Shawn Cutting and Janine Cutting*, Case No. 25-20068-NGH
 - Document: Complaint Objecting to Discharge Under 11 U.S.C. § 727(a) (ECF Doc 1), with Counts I through XI

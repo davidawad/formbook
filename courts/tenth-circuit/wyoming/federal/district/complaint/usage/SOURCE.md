@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-wyd-complaint-onqfinancial126cv00277.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court for the District of Wyoming (`wyd`)
 - Case: *On Q Financial, LLC v. Jorns & Associates LLC and Justin Ward Jorns*
 - Docket: No. 1:26-cv-00277 (ECF header "Case 1:26-cv-00277 Document 1"; CourtListener docket `/docket/74863293/`)

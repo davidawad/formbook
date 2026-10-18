@@ -4,9 +4,9 @@ Doc type: **motion with memorandum**, one filed document: the motion (FRBP 9013)
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `usage/SAMPLE-rib-motion-brief-hidalgoastrue12ap01039.pdf` (complete: motion, memorandum, certificate; U.S. Attorney for the Commissioner of Social Security; 9 pages) and `usage/SAMPLE-rib-motion-brief-donovanchristiana17ap01028.pdf` (memorandum only, creditor's counsel; 13 pages; the motion itself was not retrievable). Provenance in `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-rib-motion-brief-hidalgoastrue.md`: full transcription of the Hidalgo filing (motion, memorandum with its two footnotes, conclusion, signature, "Of Counsel", certificate). Case-name italics are added; the text layer does not carry the typeface. Quotation marks are restored where the text layer garbled them. Spelling "Judgement" is kept as filed. |
-| render | ok: `usage/OUTPUT-rib-motion-brief-hidalgoastrue.typst.pdf`, 9 pages. typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings. |
+| exemplar | yes, two filers: `usage/FILED-EXAMPLE-motion-brief.pdf` (complete: motion, memorandum, certificate; U.S. Attorney for the Commissioner of Social Security; 9 pages) and `usage/FILED-EXAMPLE-motion-brief-2.pdf` (memorandum only, creditor's counsel; 13 pages; the motion itself was not retrievable). Provenance in `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md`: full transcription of the Hidalgo filing (motion, memorandum with its two footnotes, conclusion, signature, "Of Counsel", certificate). Case-name italics are added; the text layer does not carry the typeface. Quotation marks are restored where the text layer garbled them. Spelling "Judgement" is kept as filed. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages. typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings. |
 | overlay | ok: `usage/OVERLAY-hidalgo-astrue.pdf` and `.txt`. The Donovan memorandum is not overlaid (it is a memorandum alone, not a complete motion-brief). |
 | pages reviewed | 9 of 9, each rendered at 60 dpi and viewed after the last template change |
 
@@ -99,7 +99,7 @@ Every page of the sample was rendered at 60 dpi and viewed after the last templa
 
 **docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, which names every font so no theme font falls back to Aptos or Calibri) and `docx/rib-motion-brief.lua` (caption, unnumbered paragraphs, "1." lists, response language, signature blocks, memorandum part, certificate of service, all from the frontmatter and the `---` separator). Render: `sh tools/render.sh --engine docx motion-brief usage/INPUT-<id>.md`.
 
-Matches the typst output (every page of `usage/OUTPUT-rib-motion-brief-hidalgoastrue.docx.pdf` was viewed, side by side with `usage/OUTPUT-rib-motion-brief-hidalgoastrue.typst.pdf`):
+Matches the typst output (every page of `usage/OUTPUT-motion-brief.docx.pdf` was viewed, side by side with `usage/OUTPUT-motion-brief.typst.pdf`):
 
 - EB Garamond 12 pt, footnotes 10 pt (single spaced, at the foot of the page), page number 11 pt centered; letter paper, 1 in margins. `pdffonts` shows only EB Garamond, embedded.
 - Double spacing is exact 24 pt lines; single spacing (caption, response language, quotations, signature, certificate) is exact 13.8 pt, the pitch measured on the typst output.

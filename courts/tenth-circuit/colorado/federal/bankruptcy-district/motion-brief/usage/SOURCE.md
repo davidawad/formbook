@@ -1,6 +1,6 @@
 # Exemplar source
 
-## Primary: `SAMPLE-cob-motion-brief-katzenberger2601048.pdf`
+## Primary: `FILED-EXAMPLE-motion-brief.pdf`
 
 - Court: United States Bankruptcy Court for the District of Colorado
 - Case: *Katzenberger v. Point Digital Finance Inc.*, Adv. Proc. No. 26-01048-MER (main case No. 25-17421-MER, Chapter 13)
@@ -12,7 +12,7 @@
 - Text layer: yes (`pdftotext` reads it; embedded fonts).
 - Public court record (RECAP). Used as the structural and tier-2 reference.
 
-## Second filer (found, not transcribed): `SAMPLE-cob-motion-brief-maverix2616423.pdf`
+## Second filer (found, not transcribed): `FILED-EXAMPLE-motion-brief-2.pdf`
 
 - Court: United States Bankruptcy Court for the District of Colorado, main case
 - Case: *In re Maverix LLC*, Case No. 26-16423-MER, Chapter 11

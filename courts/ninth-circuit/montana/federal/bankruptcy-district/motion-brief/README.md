@@ -31,13 +31,13 @@ Sources, all read on 2026-10-14:
 
 ## Exemplar
 
-- `usage/SAMPLE-mtb-motion-brief-mohler1960025.pdf`: Chapter 7 Trustee's Motion to Approve a Short Sale of Real Property Free and Clear of Liens and Interests Pursuant to 11 U.S.C. § 363 and Carve Out Agreement Between Secured Lender and the Estate, with Notice of Opportunity to Respond, and certificate of service. 6 pages, filed July 31, 2019, by Darcy M. Crum, Chapter 7 Trustee. Text layer present.
+- `usage/FILED-EXAMPLE-motion-brief.pdf`: Chapter 7 Trustee's Motion to Approve a Short Sale of Real Property Free and Clear of Liens and Interests Pursuant to 11 U.S.C. § 363 and Carve Out Agreement Between Secured Lender and the Estate, with Notice of Opportunity to Respond, and certificate of service. 6 pages, filed July 31, 2019, by Darcy M. Crum, Chapter 7 Trustee. Text layer present.
 - Provenance and searches: `usage/SOURCE.md`.
 - Two other archived hits were rejected: a pro se debtor's motion to disqualify (17-61231, Doc 44; format not comparable) and court memoranda of decision (not filer documents).
 
 ## Sample
 
-- `usage/INPUT-mtb-motion-brief-mohlertrusteesalemotion.md`: transcription of the exemplar: counsel block, court title, caption, title, the opening paragraph, ¶¶ 1-16 with the block quotation (¶ 5) and the settlement table (¶ 11), the WHEREFORE paragraph, the signature block, the certificate of service and its addressee list. The notice of opportunity to respond is not in the sample: the template prints it from the rule.
+- `usage/INPUT-motion-brief.md`: transcription of the exemplar: counsel block, court title, caption, title, the opening paragraph, ¶¶ 1-16 with the block quotation (¶ 5) and the settlement table (¶ 11), the WHEREFORE paragraph, the signature block, the certificate of service and its addressee list. The notice of opportunity to respond is not in the sample: the template prints it from the rule.
 - The exhibits the motion refers to (A: Buy-Sell Agreement; B: estimated settlement statement; C: secured creditor's consent letter) are not in the exemplar and not transcribed.
 - The certificate's addressee list is the two-column service list flattened into one column in reading order (`pdftotext` crop of each column). One right-column line, "Kirkland, WA 98083-0788", has no determinable owner in the text layer and is not transcribed.
 - `response_days: 21` is set in the frontmatter, not the 14-day default, because the motion is a § 363 sale. See gap 6.
@@ -46,11 +46,11 @@ Sources, all read on 2026-10-14:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/ninth-circuit/montana/federal/bankruptcy-district/motion-brief usage/INPUT-mtb-motion-brief-mohlertrusteesalemotion.md
+sh tools/render.sh courts/ninth-circuit/montana/federal/bankruptcy-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/ninth-circuit/montana/federal/bankruptcy-district/motion-brief mohler-trustee-sale-motion
 ```
 
-- `usage/OUTPUT-mtb-motion-brief-mohlertrusteesalemotion.typst.pdf`: 8 pages. `render.sh` fails on any typst warning; none. Fonts (`pdffonts`): EB Garamond Regular, Italic, Bold, all embedded (vendored).
+- `usage/OUTPUT-motion-brief.typst.pdf`: 8 pages. `render.sh` fails on any typst warning; none. Fonts (`pdffonts`): EB Garamond Regular, Italic, Bold, all embedded (vendored).
 - `usage/OVERLAY-mohler-trustee-sale-motion.pdf` and `.txt`: red = our render, blue = exemplar, black = both. Page map (word-overlap pairing, coarse): ours p.1 ↔ filed p.1 (79.0%), p.2 ↔ p.2 (65.4%), p.3 ↔ p.3 (73.1%), p.4 ↔ p.4 (75.5%), p.5 ↔ p.5 (62.5%); ours p.6-8 pair with filed p.6 at low overlap (29.7%, 37.2%, 24.1%), because our notice and the certificate run longer than the exemplar's last page. The layers will not coincide on text lines: the font differs (EB Garamond vs Times). The overlay is a diagnostic, not a score.
 
 ## Visual review (all 8 pages rendered at 60 dpi and looked at)

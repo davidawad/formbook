@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ndd-complaint.typ": ndd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ndd-complaint-bitcanary.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #ndd-complaint(meta, body)

@@ -5,9 +5,9 @@ Folder: `courts/fifth-circuit/mississippi/federal/northern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-msnd-complaint-haasoutdoors125cv184.pdf` (1 filer, 20 pp; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-msnd-complaint-haas.md` (transcription of the complaint's caption, parties, jurisdiction, background, Counts I–III, prayer, jury demand and signature; the figures are noted, not reproduced) |
-| render | ok: `usage/OUTPUT-msnd-complaint-haas.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-msnd-complaint-haas.md`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer, 20 pp; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (transcription of the complaint's caption, parties, jurisdiction, background, Counts I–III, prayer, jury demand and signature; the figures are noted, not reproduced) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-complaint.md`) |
 | overlay | ok: `usage/OVERLAY-haas-complaint.pdf` and `OVERLAY-haas-complaint.txt` (`sh tools/overlay.sh <this dir> haas-complaint`) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -57,7 +57,7 @@ The court's own local rules are the N.D. and S.D. Mississippi Local Uniform Civi
 7. **Not produced:** civil cover sheet, corporate disclosure statement (L.U.Civ.R. 7(c)), summons, and the filing fee.
 8. **Gates.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md`; this doc-type folder does not have that shape, and the brief forbids touching `tools/`. The gates were not run. Render, overlay and the page review above are the checks for this doc type.
 
-## Review of the rendered pages (`OUTPUT-msnd-complaint-haas.typst.pdf`, 11 pages)
+## Review of the rendered pages (`OUTPUT-complaint.typst.pdf`, 11 pages)
 
 - Page 1: court title lines 1–3, caption with the party column closed by a rule and the right column (case number, jury demand), title centered, lead-in, paragraphs 1–5 on the double-spaced grid. Pass.
 - Page 2: BACKGROUND and Haas' Intellectual Property headings, paragraphs 6–7 with footnote 1 at the foot of the page, "Defendant's Infringing Products" heading with paragraph 8. Pass.
@@ -81,7 +81,7 @@ The page review checks the layout of the render. Text fidelity to the exemplar r
 
 Two engines are built from the same sample: typst (primary, `typst/`) and docx (`docx/`). This doc type has no latex template yet.
 
-**docx** (`docx/`): `docx/reference.docx` (rebuilt by `sh docx/make-reference.sh`), the Lua filter `docx/msnd-complaint.lua`, and `docx/render.sh` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> usage/INPUT-msnd-complaint-haas.md`; it writes `usage/OUTPUT-msnd-complaint-haas.docx` and `usage/OUTPUT-msnd-complaint-haas.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`).
+**docx** (`docx/`): `docx/reference.docx` (rebuilt by `sh docx/make-reference.sh`), the Lua filter `docx/msnd-complaint.lua`, and `docx/render.sh` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> usage/INPUT-complaint.md`; it writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`).
 
 What matches typst, checked on the LibreOffice PDF:
 

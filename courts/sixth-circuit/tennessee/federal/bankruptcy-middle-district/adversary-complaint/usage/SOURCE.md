@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-tnmb-adversary-complaint-lemehnoname325ap90071.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Middle District of Tennessee (Nashville Division)
 - Case: *Eva M. Lemeh, Trustee v. No Name Group, LLC*, Adv. Proc. No. 3:25-ap-90071, in *In re Streamline Production Group, LLC*, Case No. 3:23-bk-02638 (Chapter 7, Judge Walker)
 - Document: Complaint (5 pages), Doc. 1, "successor liability/alter ego" (one claim for relief; prayer; signature)

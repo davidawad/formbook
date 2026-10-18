@@ -16,12 +16,12 @@ The primary TRAP PDF (https://www.txcourts.gov/media/1463134/texas-rules-of-appe
 
 ## Exemplar and overlay
 
-- Exemplar: `usage/SAMPLE-texapp-answering-brief-sample.pdf` (58 pages; Karen M. Billingham, Law Office of Karen M Billingham, PC); source in `usage/SOURCE.md`.
+- Exemplar: `usage/FILED-EXAMPLE-answering-brief.pdf` (58 pages; Karen M. Billingham, Law Office of Karen M Billingham, PC); source in `usage/SOURCE.md`.
 - Overlay: `usage/OVERLAY-answering-brief.pdf` and `.txt`. Page map (ours to filed, word overlap): 1-1 cover 69%, 2-2 supplemental counsel 83%, 3-3 contents 33%, 4-5 index 49%, 5-7 oral argument 76%, 6-8 statement of the case 50%, 7-23 facts 24%, 8-24 objections 31%, 9-28 summary 36%, 10-29 standard of review 55%, 11-31 Reply Issue I 72%, 12-45 and 13-45 Reply Issue III 43% and 50%, 14-49 prayer 53%, 15-51 signature and compliance 33%, 16-51 service 42%. The filer's running footer "Appellee's Brief Page n of 57", its single arabic page sequence and its "Other potential authorities" group are tier 3 and not copied.
 
 ## Sample
 
-`usage/INPUT-texapp-answering-brief-sample.md` transcribes the exemplar's structure: cover, supplemental list of appellant's counsel, contents, index of authorities (22 authorities in two groups), statement regarding oral argument, statement of the case (a two-column label/text table, as filed), abbreviations and record references, statement of facts (the procedural items only), objections to and motion to strike appendices, summary of argument (with a list), argument (standard of review; Reply Issue I, Point B; Reply Issues III and IV, each with its issue statement as a block quotation), conclusion and prayer (list), signature, certificate of compliance (numbered, generated word count) and certificate of service. The parties' personal and medical detail is omitted and marked in brackets.
+`usage/INPUT-answering-brief.md` transcribes the exemplar's structure: cover, supplemental list of appellant's counsel, contents, index of authorities (22 authorities in two groups), statement regarding oral argument, statement of the case (a two-column label/text table, as filed), abbreviations and record references, statement of facts (the procedural items only), objections to and motion to strike appendices, summary of argument (with a list), argument (standard of review; Reply Issue I, Point B; Reply Issues III and IV, each with its issue statement as a block quotation), conclusion and prayer (list), signature, certificate of compliance (numbered, generated word count) and certificate of service. The parties' personal and medical detail is omitted and marked in brackets.
 
 Render: 16 pages (cover; ii-iv: supplemental counsel, contents, index; body 1-12). Every page rendered at 60 dpi and viewed on 2026-10-16; review in `reviews/2026-10-16.md`.
 
@@ -36,6 +36,6 @@ Render: 16 pages (cover; ii-iv: supplemental counsel, contents, index; body 1-12
 ## Engines
 
 - **typst** (`typst/`): the reference for the form.
-- **docx** (`docx/`): `usage/OUTPUT-texapp-answering-brief-sample.docx` and `.docx.pdf` are from the earlier 8-page sample and were **not regenerated** on 2026-10-16 (no `soffice` on this box). The docx filter predates the placeholder contract (`{{contents}}`, `{{identity}}`, `{{signature}}`, `{{signer}}`, `{{word-count}}`) and the frontmatter `identity` and `authorities` lists, so a re-render would print the placeholders literally and omit the identity list and the index. BLOCKED until `docx/texapp.lua` is updated.
+- **docx** (`docx/`): `usage/OUTPUT-answering-brief.docx` and `.docx.pdf` are from the earlier 8-page sample and were **not regenerated** on 2026-10-16 (no `soffice` on this box). The docx filter predates the placeholder contract (`{{contents}}`, `{{identity}}`, `{{signature}}`, `{{signer}}`, `{{word-count}}`) and the frontmatter `identity` and `authorities` lists, so a re-render would print the placeholders literally and omit the identity list and the index. BLOCKED until `docx/texapp.lua` is updated.
 - BLOCKED: tools/check.sh docx gates 0 to 3 not run (no `checks.yaml`, `rules.md` at the level `check.sh` reads).
 - **latex**: not built for this doc type.

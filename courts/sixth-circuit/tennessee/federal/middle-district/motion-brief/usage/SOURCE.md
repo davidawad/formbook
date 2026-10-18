@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-tnmd-motion-brief-veris326cv00918.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Middle District of Tennessee (Nashville Division)
 - Case: *Veris Home Technology LLC d/b/a AXISS Audio v. Michael Bovaird, et al.*
 - Docket: No. 3:26-cv-00918 (Document 21; the memorandum supports Document 20, the motion to dismiss)

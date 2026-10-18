@@ -1,6 +1,6 @@
 # Exemplar source: bap1 opening brief
 
-**Status: exemplar found (2026-10-16).** `SAMPLE-bap1-opening-brief-blumsackmw2303.pdf`, details under "Resolved 2026-10-16" below. The earlier status was "BLOCKED: no exemplar"; the search history that led to it is kept below.
+**Status: exemplar found (2026-10-16).** `FILED-EXAMPLE-opening-brief.pdf`, details under "Resolved 2026-10-16" below. The earlier status was "BLOCKED: no exemplar"; the search history that led to it is kept below.
 
 ## Searches tried (2026-10-14 and 2026-10-15)
 
@@ -22,7 +22,7 @@
 
 The earlier searches filtered on CourtListener court id `bap1`, which has opinions only. CourtListener files the First Circuit BAP's dockets under the circuit's court id `ca1`: BAP No. MW 23-03 is ca1 docket "23-3". Found with the CourtListener RECAP search API (`type=r`, `court=ca1`, `caseName:Blumsack`).
 
-### SAMPLE-bap1-opening-brief-blumsackmw2303.pdf (primary exemplar)
+### FILED-EXAMPLE-opening-brief.pdf (primary exemplar)
 
 - Court: United States Bankruptcy Appellate Panel for the First Circuit
 - Case: *Blumsack v. Harrington, United States Trustee (In re Scott H. Blumsack)*
@@ -33,7 +33,7 @@ The earlier searches filtered on CourtListener court id `bap1`, which has opinio
 - URL: https://storage.courtlistener.com/recap/gov.uscourts.ca1.2190/gov.uscourts.ca1.2190.1147641.0.pdf
 - Date retrieved: 2026-10-16. The file is the original as downloaded, unmodified (sha256 7ec15d50d0f0e8487a6e70c9e81a2145313fc055d30ba0107d8a5b01d64d0db5).
 - Text layer and fonts: born-digital (Microsoft Word for Microsoft 365, stamped by the judiciary's iText ECF header). Body in Courier New (monospaced, about 12 pt, baseline pitch about 27 pt, i.e. double spaced); cover, TOC, TOA and certificates in Times New Roman; case names underlined. Text extracts cleanly with `pdftotext`.
-- Used for: the transcription `usage/INPUT-bap1-opening-brief-blumsack.md`, the render `usage/OUTPUT-bap1-opening-brief-blumsack.typst.pdf` and the overlay `usage/OVERLAY-blumsack-opening-brief.pdf`/`.txt`.
+- Used for: the transcription `usage/INPUT-opening-brief.md`, the render `usage/OUTPUT-opening-brief.typst.pdf` and the overlay `usage/OVERLAY-blumsack-opening-brief.pdf`/`.txt`.
 
 ### Alternate exemplar (different filer, same case; not saved here)
 

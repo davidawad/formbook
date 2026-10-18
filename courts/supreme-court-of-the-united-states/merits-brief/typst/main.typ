@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "merits-brief.typ": merits-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-scotus-merits-brief-inregrandjury.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-merits-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #merits-brief(meta, body)

@@ -5,9 +5,9 @@ Folder: `courts/seventh-circuit/wisconsin/federal/eastern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-wied-complaint-taylor226cv01900.pdf` (13 pp., counsel-filed); second filer `SAMPLE-wied-complaint-testolin226cv01895.pdf` (9 pp., pleading paper). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-wied-complaint-taylor.md` (the whole filing, transcribed from the text layer) |
-| render | ok (re-run 2026-10-15): `usage/OUTPUT-wied-complaint-taylor.typst.pdf`, 11 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold only (embedded), no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (13 pp., counsel-filed); second filer `FILED-EXAMPLE-complaint-2.pdf` (9 pp., pleading paper). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-complaint.md` (the whole filing, transcribed from the text layer) |
+| render | ok (re-run 2026-10-15): `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular and Bold only (embedded), no warnings |
 | overlay | fail (2026-10-15): `tools/overlay.sh` exits 1, `no exemplar pdf in usage/`. The filed PDFs are not in this snapshot (`usage/` holds `SOURCE.md` only). The earlier `OVERLAY-taylor-complaint.*` files are from a run with the PDFs present and are not regenerated |
 | pages reviewed | 11 of 11 (re-rendered 2026-10-15 and each page viewed at 60 dpi in montage) |
 
@@ -65,7 +65,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 9. **Overlay pairing.** The Taylor exemplar and the render differ in pagination (the exemplar is 13 pages; ours is 11) because of the font, so the overlay pairs pages by word overlap, not index. The overlay is a diagnostic, not a score.
 10. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and a `rules.md` in the court directory. This doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review below is the Gate 2 equivalent for this doc type.
 
-## Review of the rendered pages (`usage/OUTPUT-wied-complaint-taylor.typst.pdf`, 11 pages)
+## Review of the rendered pages (`usage/OUTPUT-complaint.typst.pdf`, 11 pages)
 
 Rendered at 60 dpi and viewed page by page after the last template change (paragraph spacing).
 

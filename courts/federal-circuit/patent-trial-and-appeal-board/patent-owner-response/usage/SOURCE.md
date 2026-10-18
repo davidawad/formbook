@@ -2,7 +2,7 @@
 
 One filed patent owner response, text-based PDF. Tier 2 needs 2 or 3 exemplars from different filers (`docs/EVAL-LOOP.md`); only one was found, so tier 2 cannot be finished here (see the README).
 
-## 1. `SAMPLE-ptab-patent-owner-response-juniperswarmipr202101445.pdf` (used for the sample and the overlay)
+## 1. `FILED-EXAMPLE-patent-owner-response.pdf` (used for the sample and the overlay)
 
 | Field | Value |
 |---|---|
@@ -23,7 +23,7 @@ One filed patent owner response, text-based PDF. Tier 2 needs 2 or 3 exemplars f
 - uspto.gov Board papers (`sites/default/files/documents/IPR2021-01124Paper*.pdf`): only Paper 13 (a judgment) is hosted.
 - Web search (2026-10-14): found the Juniper response above. A second search for a different filer's response returned nothing usable (other hits were decisions, replies, or preliminary responses).
 
-## 2. `SAMPLE-ptab-patent-owner-response-omnimedsciipr202100453.pdf` (second filer, tier-2 comparison)
+## 2. `FILED-EXAMPLE-patent-owner-response-2.pdf` (second filer, tier-2 comparison)
 
 | Field | Value |
 |---|---|

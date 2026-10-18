@@ -5,9 +5,9 @@ Folder: `courts/tenth-circuit/colorado/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-cod-complaint-walton126cv01127.pdf` (one filer: Walton v. Protecto Wrap Co.; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-cod-complaint-walton.md` (a transcription of part of the 16-page filing; see Known gaps) |
-| render | ok: `usage/OUTPUT-cod-complaint-walton.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer: Walton v. Protecto Wrap Co.; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (a transcription of part of the 16-page filing; see Known gaps) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-walton-complaint.pdf` and `usage/OVERLAY-walton-complaint.txt` |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -16,7 +16,7 @@ File names: the sample is `INPUT-<id>.md`, the render is `OUTPUT-<id>.pdf` and t
 Commands (from the repo root, with `PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/tenth-circuit/colorado/federal/district/complaint usage/INPUT-cod-complaint-walton.md
+sh tools/render.sh courts/tenth-circuit/colorado/federal/district/complaint usage/INPUT-complaint.md
 sh tools/overlay.sh courts/tenth-circuit/colorado/federal/district/complaint walton-complaint
 ```
 
@@ -71,7 +71,7 @@ Not in the local rules and therefore not asserted: a page limit (none for compla
 8. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape; the brief forbids touching `tools/`. Render and overlay were run; the page review in this README is the Gate 2 equivalent for this doc type.
 9. **Signer name.** The exemplar's `By: /s/ Name` line is kept as `sig_line`; the signer's name then appears again under it, as in the filing.
 
-## Review of the rendered pages (`OUTPUT-cod-complaint-walton.typst.pdf`, 10 pages)
+## Review of the rendered pages (`OUTPUT-complaint.typst.pdf`, 10 pages)
 
 - Page 1: court name, civil action line, party block, title, lead-in and the preliminary statement; the PARTIES heading moves to page 2 with its paragraph (no heading left at the foot). Footer page number. No spill. Pass.
 - Page 2: PARTIES heading and paragraphs 1–5; JURISDICTION AND VENUE heading and paragraphs 6–10. Pass.
@@ -88,7 +88,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `cod.lua` sets the caption, numbering, lettered items and signature block). `sh tools/render.sh --engine docx courts/tenth-circuit/colorado/federal/district/complaint usage/INPUT-cod-complaint-walton.md` writes `OUTPUT-cod-complaint-walton.docx` and `OUTPUT-cod-complaint-walton.docx.pdf` (LibreOffice 26.8.1; `pdffonts`: EB Garamond only, embedded).
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx`; `cod.lua` sets the caption, numbering, lettered items and signature block). `sh tools/render.sh --engine docx courts/tenth-circuit/colorado/federal/district/complaint usage/INPUT-complaint.md` writes `OUTPUT-complaint.docx` and `OUTPUT-complaint.docx.pdf` (LibreOffice 26.8.1; `pdffonts`: EB Garamond only, embedded).
 
 - Matches the typst output: 10 pages, the same as typst. Letter paper; top margin 1½ in, other margins 1 in; 12 pt EB Garamond; 24 pt exact line pitch (double spacing); caption (court lines, `Civil Action No.`, party block with indented designations and `v.`, bold centred title) within about 4 pt of the typst positions; numbered paragraphs at the first-line indent; centred bold level 1 and 2 headings; the § 1981 block quotation single spaced and indented 1 in each side; lettered prayer items A.–F.; signature block kept together; centred page number in the footer.
 - Differs: (a) pagination. LibreOffice places text in exact-height lines a little lower and applies widow/orphan control differently, so the docx holds about one line less per page; page breaks fall one or two lines earlier, and `JURY TRIAL DEMAND` moves from page 9 (typst) to page 10 (docx), with the signature block. Word may break pages differently again. (b) The paragraph number is followed by an en space where typst uses 0.5 em, so some line ends differ. (c) Typeface and sizes are the same, but the docx is not gated: see below.

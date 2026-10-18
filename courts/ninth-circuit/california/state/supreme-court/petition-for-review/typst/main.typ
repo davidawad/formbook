@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "cal-petition-for-review.typ": cal-petition, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-cal-petition-for-review-quachs275121.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-petition-for-review.md"))
 #let (meta, body) = split-frontmatter(src)
 #cal-petition(meta, body)

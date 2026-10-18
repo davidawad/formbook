@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-flsd-motion-brief-slackmidland126cv25201.pdf` (11 pages, all with a text layer)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (11 pages, all with a text layer)
 - Court: United States District Court, Southern District of Florida (Miami Division)
 - Case: *Chelsea Slack v. Midland Credit Management, Inc.*
 - Docket: No. 1:26-cv-25201-BB (Case No. 26-cv-25201-BLOOM/Elfenbein); Document 16

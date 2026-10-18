@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "idb-motion-brief.typ": idb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-idb-motion-brief-ziegler.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief-2.md"))
 #let (meta, body) = split-frontmatter(src)
 #idb-motion-brief(meta, body)

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-wiwd-complaint-olson326cv01012.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Western District of Wisconsin
 - Case: *Olson v. Milk Specialties Company d/b/a Actus Nutrition*
 - Docket: No. 3:26-cv-01012 (Document 1)
@@ -17,7 +17,7 @@ Second filer: not collected. Other W.D. Wis. complaints found in the same search
 
 ## Exemplar 2 (second filer; tier-2 comparison)
 
-- File: `SAMPLE-wiwd-complaint-iconocare326cv01023.pdf` (7 pages; text layer)
+- File: `FILED-EXAMPLE-complaint-2.pdf` (7 pages; text layer)
 - Case: *Iconocare Strategic Branding LLC v. Attwill Medical Solutions Sterilflow L.P.*, No. 3:26-cv-01023 (W.D. Wis.), Doc. 1, Complaint
 - Filer: Plaintiff Iconocare Strategic Branding LLC, by Allison Reimann (different filer from Exemplar 1)
 - Date filed: 2026-10-13

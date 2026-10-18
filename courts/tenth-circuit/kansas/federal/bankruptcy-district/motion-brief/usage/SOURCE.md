@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ksb-motion-brief-williamsonsocialnetworking2005036.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ksb.285276/gov.uscourts.ksb.285276.8.0.pdf (CourtListener RECAP archive; docket page https://www.courtlistener.com/docket/73313996/social-networking-technology-inc-adversary-proceeding/) |
 | Case name | *Williamson v. Comcast Spotlight, LP* (Adversary Proceeding) |
 | Main case | *In re Social Networking Technology, Inc.*, Case No. 18-10177, Chapter 7 |

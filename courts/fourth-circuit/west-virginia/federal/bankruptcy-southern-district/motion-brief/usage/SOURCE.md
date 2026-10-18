@@ -6,7 +6,7 @@ Both exemplars are public copies of ECF documents in the same case. Both are tex
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-wvsb-motion-brief-blackjewel1930289doc1938.pdf` (21 pages: 15-page motion plus a 6-page Core/2002 service list, Doc. 1938-1) |
+| File | `FILED-EXAMPLE-motion-brief-2.pdf` (21 pages: 15-page motion plus a 6-page Core/2002 service list, Doc. 1938-1) |
 | URL fetched | https://appvoices.org/resources/minereclamation/Blackjewel_1938.pdf |
 | Host | Appalachian Voices (third-party host of a public ECF copy) |
 | Case | *In re Blackjewel, L.L.C., et al.*, Case No. 3:19-bk-30289, Bankr. S.D. W. Va. (jointly administered; Chapter 11; Judge Frank W. Volk per caption) |
@@ -20,7 +20,7 @@ Both exemplars are public copies of ECF documents in the same case. Both are tex
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-wvsb-motion-brief-blackjewel1930289doc1196.pdf` (10 pages: 5-page motion plus 5-page proposed order, Doc. 1196-1) |
+| File | `FILED-EXAMPLE-motion-brief.pdf` (10 pages: 5-page motion plus 5-page proposed order, Doc. 1196-1) |
 | URL fetched | https://appvoices.org/resources/minereclamation/Blackjewel_10072019_emergency%20motion.pdf |
 | Host | Appalachian Voices (third-party host of a public ECF copy) |
 | Case | *In re Blackjewel, L.L.C., et al.*, Case No. 19-30289, Bankr. S.D. W. Va. (jointly administered) |

@@ -5,9 +5,9 @@ Folder: `courts/sixth-circuit/ohio/federal/northern-district/motion-brief/` (one
 
 | Item | Status |
 |---|---|
-| exemplar | yes: 2 filers. `usage/SAMPLE-ohnd-motion-brief-hammill325cv00462.pdf` (15 pp, U.S. Government, transcribed) and `usage/SAMPLE-ohnd-motion-brief-kinzie125cv01217.pdf` (29 pp, an individual defendant, with a table of contents and table of authorities; not transcribed). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-ohnd-motion-brief-hammill.md`: the whole 15-page memorandum (caption, every section, three footnotes, signature). |
-| render | ok: `usage/OUTPUT-ohnd-motion-brief-hammill.typst.pdf`, 14 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
+| exemplar | yes: 2 filers. `usage/FILED-EXAMPLE-motion-brief.pdf` (15 pp, U.S. Government, transcribed) and `usage/FILED-EXAMPLE-motion-brief-2.pdf` (29 pp, an individual defendant, with a table of contents and table of authorities; not transcribed). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md`: the whole 15-page memorandum (caption, every section, three footnotes, signature). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 14 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
 | overlay | ok: `usage/OVERLAY-hammill-motion-brief.pdf` and `usage/OVERLAY-hammill-motion-brief.txt` (paired against the Hammill exemplar). |
 | pages reviewed | 14 of 14 (every page of the current PDF rendered at 60 dpi and viewed after the last template change). |
 | content check | every word of the sample body and of its three footnotes appears in the PDF (compared as word counts, because footnotes sit at the foot of the page and dashes split at line ends; the body's word order was not compared). |

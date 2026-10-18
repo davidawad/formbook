@@ -5,9 +5,9 @@ Folder: `courts/third-circuit/pennsylvania/federal/western-district/motion-brief
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-pawd-motion-brief-albright321cv00112memorandum.pdf` (primary, transcribed in part) and `usage/SAMPLE-pawd-motion-brief-northamericandental223cv01202memorandum.pdf` (second filer, saved for comparison, not transcribed). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-pawd-motion-brief-albrightmemorandum.md` (an excerpt: caption, introduction with footnote 2, part of the factual background, legal standard, the punitive-damages section, signature block; see Known gaps) |
-| render | ok: `usage/OUTPUT-pawd-motion-brief-albrightmemorandum.typst.pdf`, 8 pages (caption page, TOC page ii, body pages 1 to 6), typst 0.15.0, vendored EB Garamond only, no typst warnings (`tools/render.sh` exit 0) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (primary, transcribed in part) and `usage/FILED-EXAMPLE-motion-brief-2.pdf` (second filer, saved for comparison, not transcribed). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md` (an excerpt: caption, introduction with footnote 2, part of the factual background, legal standard, the punitive-damages section, signature block; see Known gaps) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages (caption page, TOC page ii, body pages 1 to 6), typst 0.15.0, vendored EB Garamond only, no typst warnings (`tools/render.sh` exit 0) |
 | overlay | ok: `usage/OVERLAY-albright-memorandum.pdf` and `usage/OVERLAY-albright-memorandum.txt` (`tools/overlay.sh` exit 0) |
 | pages reviewed | 8 of 8: every page rendered at 60 dpi (`pdftoppm -r 60`) and viewed after the last template change |
 
@@ -79,6 +79,6 @@ Earlier review passes found and fixed: headings larger than the body text (the h
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the court's form.
-- **docx** (`docx/reference.docx`, `docx/pawd.lua`, `docx/build-reference.sh`; sample `usage/OUTPUT-pawd-motion-brief-albrightmemorandum.docx`): built with pandoc 3.6.4 on the reference. Matches the typst template: EB Garamond 13 pt, exact 26 pt (double) line pitch, 1 in margins on US Letter, 0.5 in first-line indent, footnotes at the body size and single-spaced, headings numbered by the filter (I., A., 1., a.) with the typst indents, block quotations indented 1 in on both sides, the caption (a borderless table), the title, the "Date:" line and the signature block at 3 in, page number centered in the footer from 1 at the Introduction.
+- **docx** (`docx/reference.docx`, `docx/pawd.lua`, `docx/build-reference.sh`; sample `usage/OUTPUT-motion-brief.docx`): built with pandoc 3.6.4 on the reference. Matches the typst template: EB Garamond 13 pt, exact 26 pt (double) line pitch, 1 in margins on US Letter, 0.5 in first-line indent, footnotes at the body size and single-spaced, headings numbered by the filter (I., A., 1., a.) with the typst indents, block quotations indented 1 in on both sides, the caption (a borderless table), the title, the "Date:" line and the signature block at 3 in, page number centered in the footer from 1 at the Introduction.
 - Differences from typst: the contents page has no printed roman number (the caption page and the contents share a section without a footer, because a second footer needs a relationship id that pandoc assigns at build time); the contents entries have no page numbers (a TOC field, updated in Word or LibreOffice); the caption rows are spaced by the table, not the typst grid.
 - **BLOCKED** (docx): no `checks.yaml` exists for this court, so no gate check ID can be listed. Every check measured on `usage/OUTPUT-albright-memorandum.docx.pdf` is BLOCKED with the reason "LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked". Also BLOCKED: the contents page numbers (TOC field, needs a field update, and LibreOffice cannot be run here to check them). The `.docx` passes the package checks run here (ziptool reads every entry, xmllint on every XML part, no duplicate style ids); it was not opened in Word or LibreOffice.

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-wyb-motion-brief-teardropvdevon2002057.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, District of Wyoming (`wyb`)
 - Case: *Tear Drop Cattle Company LLC v. Devon Energy Production Company, L.P.* (third-party defendant Carbon Creek Energy, LLC)
 - Adversary proceeding: 20-02057 (lead bankruptcy case 19-20699, US Realm Powder River, LLC f/k/a Moriah Powder River, LLC)

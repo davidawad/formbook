@@ -5,10 +5,10 @@ Folder: `courts/third-circuit/new-jersey/federal/bankruptcy-district/motion-brie
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-njb-motion-brief-cushing2601099.pdf` (1 filer; see `usage/SOURCE.md`). Its pages 1 and 2 are a notice of motion, not a brief; the brief runs on pages 3 to 13 |
-| sample md | `usage/INPUT-njb-motion-brief-cushing.md` (excerpt of the combined response and motion: caption, preliminary statement, facts, legal standard, res judicata, Rooker-Feldman, conclusion, signature; see Known gaps) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`). Its pages 1 and 2 are a notice of motion, not a brief; the brief runs on pages 3 to 13 |
+| sample md | `usage/INPUT-motion-brief.md` (excerpt of the combined response and motion: caption, preliminary statement, facts, legal standard, res judicata, Rooker-Feldman, conclusion, signature; see Known gaps) |
 | typeface | face required: none. Substitute: none needed; EB Garamond (`docs/FONTS.md`, "No face named"). Metric: n/a. Checked 2026-10-15 against the D.N.J. Local Bankruptcy Rules package (as posted, 2025): no typeface or point-size text in it, and LBR 1001-1's 2015 comment says an unincorporated Local Civil Rule does not apply. Judges' preferences (Judges' Info tab) were not checked. |
-| render | ok: `usage/OUTPUT-njb-motion-brief-cushing.typst.pdf`, 8 pages, typst 0.15.0, embedded fonts EB Garamond only (`pdffonts`), no warnings (re-rendered 2026-10-15) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, embedded fonts EB Garamond only (`pdffonts`), no warnings (re-rendered 2026-10-15) |
 | overlay | ok: `usage/OVERLAY-cushing-motion-brief.pdf` and `OVERLAY-cushing-motion-brief.txt` (re-run 2026-10-15) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed on 2026-10-15; the only later edit is a comment in the template, and the text of the render is unchanged) |
 
@@ -55,7 +55,7 @@ Not produced by this template: the notice of motion (LBR 9013-1(a)(1)), certific
 8. **No table of contents.** The template does not generate one. The exemplar's combined pleading has none. Whether the court's judges expect one for a longer brief is a question for the judges' preferences (LBR 1001-1 comment), not a rule.
 9. **Check scripts not run.** As for the adversary complaint: `tools/check.sh` is not run for this doc-type shape and the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent.
 
-## Review of the rendered pages (OUTPUT-njb-motion-brief-cushing.typst.pdf, 8 pages)
+## Review of the rendered pages (OUTPUT-motion-brief.typst.pdf, 8 pages)
 
 - Page 1: counsel block, court name, the LBR 9004-1 caption note, the debtor block (case number, chapter 13, judge, hearing date), the adversary block, the bold title and the lead-in. Nothing spills. Pass.
 - Page 2: PRELIMINARY STATEMENT and the first paragraphs of STATEMENT OF FACTS. Pass.

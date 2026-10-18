@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cit-complaint-trekbicycle.pdf` (11 pages) |
+| File | `FILED-EXAMPLE-complaint.pdf` (11 pages) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.cit.17932/gov.uscourts.cit.17932.2.0_1.pdf (CourtListener RECAP archive) |
 | Docket page | https://www.courtlistener.com/docket/72071361/2/trek-bicycle-corporation-v-united-states/ |
 | Case name | *Trek Bicycle Corporation v. United States* |
@@ -15,13 +15,13 @@
 | Public record | Yes: a public filing in the Court of International Trade, downloaded from the RECAP archive. |
 | Filers | One filer only. Tier 2 needs 2 or 3 filers; see the complaint README, Known gaps. |
 
-Note (2026-10-17): `SAMPLE-cit-complaint-trekbicycle2500917.pdf` is a byte-identical copy of `SAMPLE-cit-complaint-trekbicycle.pdf` (both sha256 `48b81bc952ee8e9434aa5aa2ce6cb74efb1efc19c4a2b64600845e09ece72920`). It is the same filer, so it does not count as a second exemplar.
+Note (2026-10-17): `FILED-EXAMPLE-complaint-4.pdf` is a byte-identical copy of `FILED-EXAMPLE-complaint.pdf` (both sha256 `48b81bc952ee8e9434aa5aa2ce6cb74efb1efc19c4a2b64600845e09ece72920`). It is the same filer, so it does not count as a second exemplar.
 
 ## 2. Sahamitr Pressure Container PLC v. United States (White & Case LLP)
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cit-complaint-sahamitr2200107.pdf` (10 pages, 276,844 bytes) |
+| File | `FILED-EXAMPLE-complaint-3.pdf` (10 pages, 276,844 bytes) |
 | Court | United States Court of International Trade |
 | Case | *Sahamitr Pressure Container PLC v. United States*, Court No. 22-00107 (docket 1:22-cv-00107) |
 | Document | ECF No. 2, "Complaint" (pp. 1-8), then "Certificate of Service" (p. 9) and "Notice to Interested Parties" under Rule 3(f) (p. 10). A 28 U.S.C. § 1581(c) action contesting Commerce's final results of the first antidumping administrative review on steel propane cylinders from Thailand. |
@@ -36,7 +36,7 @@ Note (2026-10-17): `SAMPLE-cit-complaint-trekbicycle2500917.pdf` is a byte-ident
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cit-complaint-deerparkglycine2400016.pdf` (10 pages, 1,187,112 bytes) |
+| File | `FILED-EXAMPLE-complaint-2.pdf` (10 pages, 1,187,112 bytes) |
 | Court | United States Court of International Trade |
 | Case | *Deer Park Glycine, LLC v. United States*, Court No. 24-00016 (docket 1:24-cv-00016) |
 | Document | ECF No. 2, "Complaint" (pp. 1-5), then Exhibit 1, an assignment and assumption agreement (pp. 6-10). A 28 U.S.C. § 1581(c) action contesting Commerce's rejection of a scope ruling application (glycine). |

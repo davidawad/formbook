@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-mdd-complaint-grecco126cv03723.pdf` |
+| File | `FILED-EXAMPLE-complaint.pdf` |
 | Case | *Michael Grecco Productions, Inc. v. New Century Foundation, et al.* |
 | Court | United States District Court, District of Maryland (`mdd`), Northern Division |
 | Docket no. | 1:26-cv-03723-BAH (Hon. Brendan A. Hurson) |

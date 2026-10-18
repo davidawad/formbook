@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "gamb-adversary-complaint.typ": gamb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-gamb-adversary-complaint-galardicomplaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #gamb-adversary-complaint(meta, body)

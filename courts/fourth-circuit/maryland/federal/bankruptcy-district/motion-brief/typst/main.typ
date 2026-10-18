@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "mdb-motion-brief.typ": mdb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-mdb-motion-brief-engelhornmemorandum.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #mdb-motion-brief(meta, body)

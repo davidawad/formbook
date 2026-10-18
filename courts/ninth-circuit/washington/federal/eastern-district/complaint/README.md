@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/washington/federal/eastern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-waed-complaint-plenty226cv00258.pdf` (primary, 12 pp.) and `usage/SAMPLE-waed-complaint-price225cv00410.pdf` (second filer, 5 pp.); see `usage/SOURCE.md` |
-| sample md | `usage/INPUT-waed-complaint-plenty.md` (transcription of all 12 pages; footnotes not transcribed, see gaps) |
-| render | ok: `usage/OUTPUT-waed-complaint-plenty.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (primary, 12 pp.) and `usage/FILED-EXAMPLE-complaint-2.pdf` (second filer, 5 pp.); see `usage/SOURCE.md` |
+| sample md | `usage/INPUT-complaint.md` (transcription of all 12 pages; footnotes not transcribed, see gaps) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-plenty-complaint.pdf` and `OVERLAY-plenty-complaint.txt` |
 | typeface | face required: none named by LCivR 10(d) (serif or traditional Roman; proportionately spaced, 14 pt or more; or monospaced). Vendored substitute: not needed, EB Garamond kept (any proportional serif meets the rule). Fit: n/a. Font list: `EB Garamond`, embedded (`pdffonts`). |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change, and again on the fonts pass) |
@@ -97,7 +97,7 @@ The overlay is a diagnostic, not a score. It shows the filed text runs longer th
 
 ### docx (`docx/`)
 
-Build and render: `sh docx/build-reference.sh docx/reference.docx` (the reference is generated, so it can be rebuilt), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-waed-complaint-plenty.md`, which writes `usage/OUTPUT-waed-complaint-plenty.docx` and `usage/OUTPUT-waed-complaint-plenty.docx.pdf` (LibreOffice 26.8 conversion; EB Garamond embedded, `pdffonts`). `docx/complaint.lua` lays out the cover, caption and signature block (`docx/pleading.lua`, shared helpers) and numbers the paragraphs; `docx/render.sh` fills the footer title from `footer_title`.
+Build and render: `sh docx/build-reference.sh docx/reference.docx` (the reference is generated, so it can be rebuilt), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-complaint.md`, which writes `usage/OUTPUT-complaint.docx` and `usage/OUTPUT-complaint.docx.pdf` (LibreOffice 26.8 conversion; EB Garamond embedded, `pdffonts`). `docx/complaint.lua` lays out the cover, caption and signature block (`docx/pleading.lua`, shared helpers) and numbers the paragraphs; `docx/render.sh` fills the footer title from `footer_title`.
 
 What matches the typst output (checked on the LibreOffice PDF, 9 pages, the same page count and the same first line on every page):
 

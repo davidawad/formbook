@@ -4,11 +4,11 @@ Doc type `opening-brief-on-the-merits` for the California Supreme Court (`court.
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-cal-opening-brief-on-the-merits-peoplevmccunes276303.pdf` | Filed appellant's opening brief on the merits, 57 pages, text layer present (Pirolo). |
-| `usage/SAMPLE-cal-opening-brief-on-the-merits-peoplevpattons279670.pdf` | Filed appellant's opening brief on the merits, 37 pages, text layer present (Demson). |
+| `usage/FILED-EXAMPLE-opening-brief-on-the-merits.pdf` | Filed appellant's opening brief on the merits, 57 pages, text layer present (Pirolo). |
+| `usage/FILED-EXAMPLE-opening-brief-on-the-merits-2.pdf` | Filed appellant's opening brief on the merits, 37 pages, text layer present (Demson). |
 | `usage/SOURCE.md` | URL, case, filer, date filed and date fetched for both exemplars. |
-| `usage/INPUT-cal-opening-brief-on-the-merits-mccune.md` | Transcription of a portion of the McCune brief: cover, TOC and TOA (built from the markdown), Issue Presented, Introduction, part of the Statement of the Case, most of Argument I.A and part of I.B, Conclusion, word-count certificate, attorney's proof of service. |
-| `usage/OUTPUT-cal-opening-brief-on-the-merits-mccune.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/supreme-court/opening-brief-on-the-merits usage/INPUT-cal-opening-brief-on-the-merits-mccune.md`. 15 pages, TeX Gyre Schola only (embedded). |
+| `usage/INPUT-opening-brief-on-the-merits.md` | Transcription of a portion of the McCune brief: cover, TOC and TOA (built from the markdown), Issue Presented, Introduction, part of the Statement of the Case, most of Argument I.A and part of I.B, Conclusion, word-count certificate, attorney's proof of service. |
+| `usage/OUTPUT-opening-brief-on-the-merits.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/supreme-court/opening-brief-on-the-merits usage/INPUT-opening-brief-on-the-merits.md`. 15 pages, TeX Gyre Schola only (embedded). |
 | `usage/OVERLAY-mccune-opening-brief-on-the-merits.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/california/state/supreme-court/opening-brief-on-the-merits mccune-opening-brief-on-the-merits`. Red = ours, blue = filed, black = both. The `.txt` is the page map. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
 | `typst/cal-opening-brief-on-the-merits.typ` | The template: `cal-opening-brief-on-the-merits(meta, md)`. Parameters at the top; each traces to a rule or is a style choice. Structure copied from `courts/ninth-circuit/california/state/courts-of-appeal/opening-brief/typst/calctapp-opening-brief.typ` (same rule family), not its numbers. |
@@ -37,13 +37,13 @@ Verified 2026-10-14 against the courts.ca.gov rule pages. The pages were read th
 
 ## Overlay
 
-Overlay of `OUTPUT-cal-opening-brief-on-the-merits-mccune.typst.pdf` against the McCune exemplar (`overlay.sh` takes the first file in `usage/`, which is McCune). Pages are paired by word overlap (`overlay.txt`): cover 1 to 1 (79%), TOC 2 to 2 (68%), TOA 3 to 4 (42%), 4 to 7 (35%), body 5 to 10 (52%), 6 to 11 (54%), 7 to 12 (72%), 8 to 13 (48%), 9 to 19 (63%), 10 to 20 (55%), 11 to 22 (80%), 12 to 23 (52%), conclusion and signature 13 to 53 (59%), certificate 14 to 54 (77%), proof of service 15 to 55 (72%) (pairs as of the 2026-10-16 render). Word overlap is low where the sample is a portion; it is a diagnostic, not a score.
+Overlay of `OUTPUT-opening-brief-on-the-merits.typst.pdf` against the McCune exemplar (`overlay.sh` takes the first file in `usage/`, which is McCune). Pages are paired by word overlap (`overlay.txt`): cover 1 to 1 (79%), TOC 2 to 2 (68%), TOA 3 to 4 (42%), 4 to 7 (35%), body 5 to 10 (52%), 6 to 11 (54%), 7 to 12 (72%), 8 to 13 (48%), 9 to 19 (63%), 10 to 20 (55%), 11 to 22 (80%), 12 to 23 (52%), conclusion and signature 13 to 53 (59%), certificate 14 to 54 (77%), proof of service 15 to 55 (72%) (pairs as of the 2026-10-16 render). Word overlap is low where the sample is a portion; it is a diagnostic, not a score.
 
 The sample is a portion, so its body pages pair with the filed pages they came from, and the filed pages it did not transcribe show as blue in the overlay. The cover and certificates line up by content.
 
 ## Page review (Gate 2 record)
 
-All 15 pages of `OUTPUT-cal-opening-brief-on-the-merits-mccune.typst.pdf` were rendered at 60 dpi and viewed as images. Pages 5–7 were viewed before the footnote fix on page 8; that fix moved text only on pages 8 onward, so they were not re-viewed. Pages 2–4 and 8 were re-checked by text after the final edits, and the TOC page numbers match the rendered headings (Issue 5, Introduction 5, Statement of the Case 8, Argument 9, Conclusion 12).
+All 15 pages of `OUTPUT-opening-brief-on-the-merits.typst.pdf` were rendered at 60 dpi and viewed as images. Pages 5–7 were viewed before the footnote fix on page 8; that fix moved text only on pages 8 onward, so they were not re-viewed. Pages 2–4 and 8 were re-checked by text after the final edits, and the TOC page numbers match the rendered headings (Issue 5, Introduction 5, Statement of the Case 8, Argument 9, Conclusion 12).
 
 Font change (fonts pass, EB Garamond → TeX Gyre Schola): the page count stayed at 15, and the TOC and TOA page numbers still match the rendered headings and citations. All 15 pages of the new `OUTPUT` were rendered at 70 dpi and viewed again, in two-page montages.
 
@@ -62,7 +62,7 @@ Open choices, recorded here so the reviewer can see them:
 
 ## Verification pass 2026-10-16 (fb-595.26.15)
 
-- Rendered `usage/INPUT-cal-opening-brief-on-the-merits-mccune.md` with `tools/render.sh` (typst): exit 0, no warnings, 15 pages before and after the fixes (the committed OUTPUT was not stale in page count). Fonts (`pdffonts`): TeX Gyre Schola regular, bold, italic, embedded, nothing else.
+- Rendered `usage/INPUT-opening-brief-on-the-merits.md` with `tools/render.sh` (typst): exit 0, no warnings, 15 pages before and after the fixes (the committed OUTPUT was not stale in page count). Fonts (`pdffonts`): TeX Gyre Schola regular, bold, italic, embedded, nothing else.
 - Viewed all 15 pages at 60 dpi before the fixes and all 15 again after them. Compared both exemplars' page 1 (McCune, Patton) with our cover. Overlay re-run against the McCune exemplar and all 15 overlay pages viewed: pairing as in "Overlay" above.
 - Fixed, page 1 (cover): the court heading was bold and wrapped ("… OF THE STATE OF / CALIFORNIA"). It is now regular weight, as in the McCune exemplar (Patton sets it bold, but on a shorter line), and fits on one line.
 - Fixed, page 2 (TOC): the wrapped entry "A. Proposition 8 and the Subsequent Victim Restitution" ran into the page-number column. Page numbers now sit in their own column; wrapped lines stop short of it.

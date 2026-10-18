@@ -1,11 +1,11 @@
 # Exemplar sources: answering brief (USCMCR)
 
-The first row is the primary exemplar: `usage/INPUT-mc-answering-brief-hicks.md` is transcribed from it, and `tools/overlay.sh` is run against it.
+The first row is the primary exemplar: `usage/INPUT-answering-brief.md` is transcribed from it, and `tools/overlay.sh` is run against it.
 The second row is a second answering-type filing in the same case from the other side. It is kept for comparison only, not transcribed.
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-mc-answering-brief-hicks13004.pdf` (49 pages, text-based; `pdftotext` yields the text; 9.3 MB) |
+| File | `FILED-EXAMPLE-answering-brief.pdf` (49 pages, text-based; `pdftotext` yields the text; 9.3 MB) |
 | URL fetched from | https://ccrjustice.org/sites/default/files/assets/Hicks%20v.%20United%20States%20-%20Gvt.%20Brief%20Re%20Jurisdiction%20(Dec.%2019,%202013).pdf (hosted by the Center for Constitutional Rights) |
 | Case | *David M. Hicks v. United States*, U.S. Court of Military Commission Review, CMCR Case No. 13-004 |
 | Document | "Brief of the United States on the Court's Lack of Authority to Hear This Case" |
@@ -16,7 +16,7 @@ The second row is a second answering-type filing in the same case from the other
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-mc-answering-brief-hicks13004answerappellant.pdf` (26 pages, text-based) |
+| File | `FILED-EXAMPLE-answering-brief-2.pdf` (26 pages, text-based) |
 | URL fetched from | https://ccrjustice.org/sites/default/files/assets/Answer%20Brief%20Re%20Jurisdiction%20(Jan.%2010,%202014).pdf |
 | Case | *David M. Hicks v. United States*, CMCR Case No. 13-004 |
 | Document | "Answer Brief Re Jurisdiction" (the appellant's answer to the government's December 19, 2013 brief) |
@@ -28,4 +28,4 @@ Public record: both filings were served in the case and posted by the counsel's 
 
 ## Font-audit text-layer verification
 
-The audit inventory labels `SAMPLE-mc-answering-brief-hicks13004answerappellant.pdf` as having no text layer, but local inspection contradicts that label: `pdftotext` extracts 8,111 words from this 26-page PDF. The government brief `SAMPLE-mc-answering-brief-hicks13004.pdf` yields 16,497 words across 49 pages. Both public filings in CMCR Case No. 13-004 are text-based answering-type briefs and use Times-Roman; the appellant's answer is the text-layer replacement reference for its audit row, and the government brief is the saved text-layer alternate. Neither requires an image-scan replacement.
+The audit inventory labels `FILED-EXAMPLE-answering-brief-2.pdf` as having no text layer, but local inspection contradicts that label: `pdftotext` extracts 8,111 words from this 26-page PDF. The government brief `FILED-EXAMPLE-answering-brief.pdf` yields 16,497 words across 49 pages. Both public filings in CMCR Case No. 13-004 are text-based answering-type briefs and use Times-Roman; the appellant's answer is the text-layer replacement reference for its audit row, and the government brief is the saved text-layer alternate. Neither requires an image-scan replacement.

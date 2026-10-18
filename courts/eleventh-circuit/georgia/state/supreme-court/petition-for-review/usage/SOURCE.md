@@ -1,6 +1,6 @@
 # Exemplar source: Georgia Supreme Court, petition for certiorari (emergency)
 
-- **File:** `SAMPLE-ga-petition-for-review-democraticpartyofgeorgiaa230012.pdf` (34 pages, letter; text-based: `pdftotext` yields the text, fonts embedded). These are pages 1–34 of the 476-page package, cut with ghostscript so the exhibits (pages 35–476) are not carried. Pages 35+ are Exhibits A–C and are not part of the petition.
+- **File:** `FILED-EXAMPLE-petition-for-review.pdf` (34 pages, letter; text-based: `pdftotext` yields the text, fonts embedded). These are pages 1–34 of the 476-page package, cut with ghostscript so the exhibits (pages 35–476) are not carried. Pages 35+ are Exhibits A–C and are not part of the petition.
 - **Fetched from:** https://democracydocket.com/wp-content/uploads/2022/11/RNC-NRSC-GAGOP-Supreme-Court-Filing-Package.pdf
 - **Case:** *Democratic Party of Georgia, Inc., DSCC, and Warnock for Georgia v. State of Georgia*, Supreme Court of Georgia, Court of Appeals docket **A230012** (caption "CASE NO. A230012"; the Supreme Court number is blank on the filed copy, "NO. 22-________"). Underlying action: Fulton County Superior Court.
 - **Document:** "Emergency Petition for Writ of Certiorari and Emergency Motion to Stay the Superior Court's Declaratory and Injunctive Relief", by Intervenors Georgia Republican Party, Inc., National Republican Senatorial Committee, and Republican National Committee. Certificate of service dated 22 November 2022.
@@ -15,4 +15,4 @@
 
 | File | SHA-256 |
 |---|---|
-| `SAMPLE-ga-petition-for-review-democraticpartyofgeorgiaa230012.pdf` | `97ead098ef9b42db7c3d7159ad63037f16b939c556b108ed21fe2ebb5275e1c8` |
+| `FILED-EXAMPLE-petition-for-review.pdf` | `97ead098ef9b42db7c3d7159ad63037f16b939c556b108ed21fe2ebb5275e1c8` |

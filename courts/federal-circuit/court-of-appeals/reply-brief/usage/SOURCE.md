@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cafc-reply-brief-gemvruppmarine20261817.pdf` |
+| File | `FILED-EXAMPLE-reply-brief.pdf` |
 | Court | U.S. Court of Appeals for the Federal Circuit |
 | Case | *GEM Products, LLC v. Rupp Marine, Inc.*, No. 2026-1817 |
 | Below | U.S. District Court, S.D. Fla., No. 2:25-cv-14047-DMM (Hon. Donald M. Middlebrooks) |
@@ -24,7 +24,7 @@ The filing is marked "PENDING COMPLIANCE REVIEW" on the docket. The copy is the 
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cafc-reply-brief-topbrand242191.pdf` (45 pages; ECF Document 24) |
+| File | `FILED-EXAMPLE-reply-brief-2.pdf` (45 pages; ECF Document 24) |
 | Court | U.S. Court of Appeals for the Federal Circuit |
 | Case | *Top Brand LLC, Sky Creations LLC, E Star LLC, Flying Star LLC, John Ngan v. Cozy Comfort Company LLC, Brian Speciale, Michael Speciale*, No. 2024-2191 (appeal from D. Ariz. No. 2:21-cv-00597-SPL, Judge Steven P. Logan) |
 | Document | "REPLY BRIEF FOR APPELLANTS" |

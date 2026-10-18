@@ -2,8 +2,8 @@
 
 - Court: `acca`, U.S. Army Court of Criminal Appeals (`courts/military/army-court-of-criminal-appeals/`)
 - Doc type: `answering-brief`. The United States' answer to the appellant's assignments of error. ACCA Rule 17.1(a): pleadings "raising or addressing" an assignment of error follow Rule 13 and Appendix A, so the answer uses the Appendix A form with the appellee's title.
-- Exemplar: `usage/SAMPLE-acca-answering-brief-akbar20050514.pdf`, an 11-page extract of *United States v. Akbar*, Army Dkt. 20050514, Brief on Behalf of Appellee, filed 29 November 2010 by the Government Appellate Division (source, page map: `usage/SOURCE.md`). Found on the fourth search pass (2026-10-16, bead fb-595.20.20).
-- Samples: `usage/INPUT-acca-answering-brief-akbar.md` (transcription of the extract); `usage/INPUT-acca-answering-brief-fictional.md` (FICTIONAL fixture, kept).
+- Exemplar: `usage/FILED-EXAMPLE-answering-brief.pdf`, an 11-page extract of *United States v. Akbar*, Army Dkt. 20050514, Brief on Behalf of Appellee, filed 29 November 2010 by the Government Appellate Division (source, page map: `usage/SOURCE.md`). Found on the fourth search pass (2026-10-16, bead fb-595.20.20).
+- Samples: `usage/INPUT-answering-brief.md` (transcription of the extract); `usage/INPUT-answering-brief-2.md` (FICTIONAL fixture, kept).
 - Template: `typst/acca-answering-brief.typ` (entry `typst/main.typ`). Same as `../opening-brief/typst/acca-opening-brief.typ` except the title ("BRIEF ON BEHALF OF APPELLEE", as the filer titles it) and the default certificate recipient (the Defense Appellate Division).
 - Status (2026-10-16): rule text retrieved and applied. Render ok (11 pages), overlay ok, every page reviewed. `tools/check.sh` not run (no `checks.yaml`). `court.json` untouched.
 
@@ -12,10 +12,10 @@
 | Path | What |
 |---|---|
 | `typst/main.typ`, `typst/acca-answering-brief.typ` | Entry point and template. |
-| `usage/INPUT-acca-answering-brief-akbar.md` | Transcription of the extract (caption page, brief pp. 1-7, 216-218). Names the filer blacked out are written `[redacted]`. |
-| `usage/OUTPUT-acca-answering-brief-akbar.typst.pdf` | `sh tools/render.sh courts/military/army-court-of-criminal-appeals/answering-brief usage/INPUT-acca-answering-brief-akbar.md` (11 pages). |
+| `usage/INPUT-answering-brief.md` | Transcription of the extract (caption page, brief pp. 1-7, 216-218). Names the filer blacked out are written `[redacted]`. |
+| `usage/OUTPUT-answering-brief.typst.pdf` | `sh tools/render.sh courts/military/army-court-of-criminal-appeals/answering-brief usage/INPUT-answering-brief.md` (11 pages). |
 | `usage/OVERLAY-akbar-answering-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/military/army-court-of-criminal-appeals/answering-brief akbar-answering-brief`. |
-| `usage/INPUT-acca-answering-brief-fictional.md`, `OUTPUT-acca-answering-brief-fictional.typst.pdf` | FICTIONAL fixture and render (4 pages). No overlay. |
+| `usage/INPUT-answering-brief-2.md`, `OUTPUT-answering-brief-2.typst.pdf` | FICTIONAL fixture and render (4 pages). No overlay. |
 | `usage/SOURCE.md` | Exemplar record, page map, search passes. |
 
 Markdown contract: the same as the opening brief (`../opening-brief/README.md`, "Markdown contract"); the certificate's default `recipient` is "the Defense Appellate Division".
@@ -46,7 +46,7 @@ The filer is Courier 12 pt with smaller footnotes (pre-2019); ours is 14 pt Time
 
 ## Page review (Gate 2), 2026-10-16
 
-Every page of `OUTPUT-acca-answering-brief-akbar.typst.pdf` (11) and `OVERLAY-akbar-answering-brief.pdf` (11) rasterized at 60 dpi and viewed. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only. No typst warnings.
+Every page of `OUTPUT-answering-brief.typst.pdf` (11) and `OVERLAY-akbar-answering-brief.pdf` (11) rasterized at 60 dpi and viewed. Fonts embedded: Liberation Serif Regular, Bold, Italic, BoldItalic only. No typst warnings.
 
 | Page | Content | Result |
 |---|---|---|
@@ -61,7 +61,7 @@ Every page of `OUTPUT-acca-answering-brief-akbar.typst.pdf` (11) and `OVERLAY-ak
 1. TOC/TOA (R. 17.3(a)) not generated; 50-page limit not checked.
 2. Exemplar predates the 2019 rules (Courier, separate caption page). No post-2019 ACCA answer found.
 3. No `checks.yaml`; `tools/check.sh` not run.
-4. The docx engine was not changed in this pass and still builds the old EB Garamond 12 pt cover-page form; `usage/OUTPUT-acca-answering-brief-fictional.docx` is from that form.
+4. The docx engine was not changed in this pass and still builds the old EB Garamond 12 pt cover-page form; `usage/OUTPUT-answering-brief-2.docx` is from that form.
 
 ## History
 

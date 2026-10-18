@@ -2,7 +2,7 @@
 
 Two filed complaints, from two filers (EVAL-LOOP tier 2 wants two or three).
 
-## 1. `SAMPLE-gand-complaint-serveco426cv00299.pdf` (primary; used for the sample)
+## 1. `FILED-EXAMPLE-complaint.pdf` (primary; used for the sample)
 
 - Court: United States District Court, Northern District of Georgia (Rome Division)
 - Case: *ServeCo North America LLC v. Gumersindo Martinez*, No. 4:26-cv-00299-WMR (Document 1)
@@ -14,7 +14,7 @@ Two filed complaints, from two filers (EVAL-LOOP tier 2 wants two or three).
 - Text layer: yes (`pdftotext` yields the text; Times New Roman embedded)
 - Public court record (RECAP). Used only as a visual and structural reference.
 
-## 2. `SAMPLE-gand-complaint-washington426cv00302.pdf` (second filer; not used for the sample)
+## 2. `FILED-EXAMPLE-complaint-2.pdf` (second filer; not used for the sample)
 
 - Court: United States District Court, Northern District of Georgia (Rome Division)
 - Case: *Washington v. United Recovery and Remarketing, LLC*, No. 4:26-cv-00302-WMR-JHR (Document 1)

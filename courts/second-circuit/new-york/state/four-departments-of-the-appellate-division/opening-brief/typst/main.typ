@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nyappdiv-opening-brief.typ": nyappdiv-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nyappdiv-opening-brief-synthetic.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-opening-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #nyappdiv-brief(meta, body)

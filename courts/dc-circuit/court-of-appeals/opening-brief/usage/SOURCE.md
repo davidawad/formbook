@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cadc-opening-brief-centrovbessent255181.pdf` (83 pages, text layer; sha256 `19cca474f69f9815…63b8`) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (83 pages, text layer; sha256 `19cca474f69f9815…63b8`) |
 | URL fetched from | https://www.citizen.org/wp-content/uploads/2025.06.27-Opening-Brief.pdf (Public Citizen's copy of the ECF-stamped filing; the stamp reads "USCA Case #25-5181 Document #2122737 Filed: 06/27/2025") |
 | Case name | *Centro de Trabajadores Unidos, et al. v. Scott Bessent, et al.* |
 | Docket no. | 25-5181 (D.C. Circuit); district court No. 1:25-cv-00677-DLF (D.D.C.) |
@@ -26,11 +26,11 @@ A second appellant's principal brief in this court, filed by the Department of J
 - CourtListener search API for D.C. Circuit briefs ("Brief for Appellant", "Oral Argument Not Yet Scheduled"); returned mostly orders and amicus filings.
 - Five CourtListener RECAP PDFs from the first search (Nos. 25-5157, 25-5181, 25-5055, 26-5070 orders): orders, not briefs.
 
-## 2. SAMPLE-cadc-opening-brief-hegseth265070.pdf
+## 2. FILED-EXAMPLE-opening-brief-2.pdf
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cadc-opening-brief-hegseth265070.pdf` (71 pages) |
+| File | `FILED-EXAMPLE-opening-brief-2.pdf` (71 pages) |
 | Court | United States Court of Appeals for the District of Columbia Circuit |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.cadc.42904/gov.uscourts.cadc.42904.01208832639.0.pdf (CourtListener RECAP archive; the URL recorded as a cross-check in the section above) |
 | Case name | *Kelly v. Hegseth* (caption: "Mark Kelly, United States Senator Representing the State of Arizona, Plaintiff-Appellee, v. Pete Hegseth, in his Official Capacity as Secretary of Defense; U.S. Department of Defense; John C. Phelan, in his Official Capacity as Secretary of the Navy; U.S. Department of the Navy, Defendants-Appellants") |

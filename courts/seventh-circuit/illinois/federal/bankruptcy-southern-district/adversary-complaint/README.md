@@ -25,13 +25,13 @@ Not generated, on purpose: the summons (docketed automatically, ILSB-AP-001); th
 
 ## Exemplar
 
-- `usage/SAMPLE-ilsb-adversary-complaint-garguladeighan2003052.pdf`: Complaint, Doc 1 in Adv. No. 20-03052-lkg, 33 pages. Filed 11/23/2020 by the United States Trustee for Region 10 (Nancy J. Gargula, by Mark D. Skaggs, Trial Attorney). Text layer present (`pdftotext` reads it). Body in Times (not embedded). Caption uses a ")" column.
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf`: Complaint, Doc 1 in Adv. No. 20-03052-lkg, 33 pages. Filed 11/23/2020 by the United States Trustee for Region 10 (Nancy J. Gargula, by Mark D. Skaggs, Trial Attorney). Text layer present (`pdftotext` reads it). Body in Times (not embedded). Caption uses a ")" column.
 - Provenance, searches and the caveats are in `usage/SOURCE.md`.
 - Only one exemplar. The eval-loop tier-2 rule asks for two or three from different filers; the search found only short turnover and form complaints from other filers (listed in SOURCE.md) and they were not kept.
 
 ## Sample
 
-- `usage/INPUT-ilsb-adversary-complaint-gargula.md` is a transcription of the exemplar: the caption, the lead-in, the jurisdiction and party paragraphs, the procedural history, the factual heading and paragraphs 22 to 30, Count I's first paragraphs and prayer, Count III's paragraphs and prayer, and the signature and attorney blocks. Paragraph 21, paragraphs 31 to 104 and 110 to 162, and parts of 165 to 185 are not transcribed (the exemplar is 33 pages; the sample is 7 pages). The omitted parts are listed in the sample's frontmatter comment. The template numbers the paragraphs, so the sample's numbers run from 1.
+- `usage/INPUT-adversary-complaint.md` is a transcription of the exemplar: the caption, the lead-in, the jurisdiction and party paragraphs, the procedural history, the factual heading and paragraphs 22 to 30, Count I's first paragraphs and prayer, Count III's paragraphs and prayer, and the signature and attorney blocks. Paragraph 21, paragraphs 31 to 104 and 110 to 162, and parts of 165 to 185 are not transcribed (the exemplar is 33 pages; the sample is 7 pages). The omitted parts are listed in the sample's frontmatter comment. The template numbers the paragraphs, so the sample's numbers run from 1.
 - Frontmatter fields are described below, then `typst/` and the sample's markdown contract.
 
 ### Frontmatter (`usage/*.md`)
@@ -66,12 +66,12 @@ Not generated, on purpose: the summons (docketed automatically, ILSB-AP-001); th
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-ilsb-adversary-complaint-gargula.md
+sh tools/render.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/seventh-circuit/illinois/federal/bankruptcy-southern-district/adversary-complaint gargula-adversary-complaint
 ```
 
 - `typst/main.typ` is the entry point; `typst/ilsb-adversary-complaint.typ` is the template. Vendored fonts only (EB Garamond); `tools/render.sh` uses `--ignore-system-fonts` and fails on any typst warning. The render compiled with no warnings.
-- `usage/OUTPUT-ilsb-adversary-complaint-gargula.typst.pdf`: 7 pages. `pdffonts`: EBGaramond-Regular and -Bold, embedded.
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: 7 pages. `pdffonts`: EBGaramond-Regular and -Bold, embedded.
 - `usage/OVERLAY-gargula-adversary-complaint.pdf` and `.txt`: red is our render, blue the exemplar, black both. The page map (by word overlap): ours p.1-3 to filed p.1-3, ours p.4 to filed p.5, ours p.5 to filed p.23, p.6 to p.32, p.7 to p.33. The overlay is a diagnostic, not a score: the exemplar is Times in a different layout, so the layers will not line up on text.
 
 Naming: `tools/render.sh` and `tools/overlay.sh` write and read `usage/OUTPUT-<id>.pdf`, `usage/OVERLAY-<id>.pdf` and `.txt` (the repo's tool names), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief. The tools are shared and were not edited.
@@ -108,5 +108,5 @@ Reviewed pages: 7 of 7.
 - **typst** (primary, `typst/`): the reference for the form.
 - **latex** (`latex/`): see `latex/`; not changed by this section.
 - **docx** (`docx/reference.docx`, `docx/ilsb.lua`, `docx/build-reference.sh`): pandoc on reference.docx, EB Garamond 12 pt, exact 24 pt body line pitch, 0.5 in first-line indent, 1 in margins, letter, "Page x of y" footer (PAGE and NUMPAGES fields). `ilsb.lua` lays out the caption (a table with a right and a bottom rule), court title, title, lead-in, numbered paragraphs (typed by the filter, numbers from 1), prayer items (`A.` with a hanging indent), signature table and attorney block, and the Summary of Exhibits; every case word comes from the frontmatter. Matches the typst form in: font and size, body pitch, margins, indent, paragraph numbering, prayer layout, page-number footer, page order. Differs or is unverified: the single-spacing gaps and the caption and signature table spacing are approximate (Word table and style metrics, not measured against typst); footnote text is 12 pt single-spaced (typst's footnote size was not checked); the numbered paragraph tab stop is the default 0.5 in grid, not the typst 0.3 in gap.
-- docx checks: `usage/OUTPUT-ilsb-adversary-complaint-gargula.docx` was written and validated (zip test and well-formed XML in every part). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `usage/OUTPUT-gargula-adversary-complaint.docx.pdf` was not produced and the docx Gate 0 to 3 checks (`tools/check.sh --engine docx`) cannot run. No page was rendered or reviewed (pages reviewed 0). The `.docx` has not been opened in Word or LibreOffice.
+- docx checks: `usage/OUTPUT-adversary-complaint.docx` was written and validated (zip test and well-formed XML in every part). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `usage/OUTPUT-gargula-adversary-complaint.docx.pdf` was not produced and the docx Gate 0 to 3 checks (`tools/check.sh --engine docx`) cannot run. No page was rendered or reviewed (pages reviewed 0). The `.docx` has not been opened in Word or LibreOffice.
 - Blocked or unverified docx items: the docx.pdf render and page review (blocked on soffice); cover and caption table borders not verified against the typst layout; the page count and page breaks in Word may differ from typst.

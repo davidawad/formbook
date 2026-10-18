@@ -4,10 +4,10 @@ Doc type: **adversary complaint** (a complaint commencing an adversary proceedin
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ncmb-adversary-complaint-andersonnovus2406026.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ncmb-adversary-complaint-novuscomplaint.md`: caption, title, lead-in, every heading, all 41 numbered paragraphs, the three footnotes, the prayer A to F, the signature block (exhibits not transcribed) |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md`: caption, title, lead-in, every heading, all 41 numbered paragraphs, the three footnotes, the prayer A to F, the signature block (exhibits not transcribed) |
 | typeface | face required: none. The 2022 local rules, the 2025 comment draft and the 2026 rules (`Local Rules 1.1.26.pdf`) name no typeface, point size or spacing (read 2026-10-14); FRBP 9004(a) requires only "clearly legible". Substitute: none needed; the template keeps EB Garamond, the "No face named" row of `docs/FONTS.md`. See gap 3. |
-| render | ok (re-rendered 2026-10-14): `usage/OUTPUT-ncmb-adversary-complaint-novuscomplaint.typst.pdf`, 8 pages, typst 0.15.0, `tools/render.sh` (vendored fonts only, zero typst warnings); `pdffonts`: EB Garamond Regular, Bold and Italic embedded |
+| render | ok (re-rendered 2026-10-14): `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, `tools/render.sh` (vendored fonts only, zero typst warnings); `pdffonts`: EB Garamond Regular, Bold and Italic embedded |
 | overlay | ok (re-run 2026-10-14): `usage/OVERLAY-novus-complaint.pdf` and `usage/OVERLAY-novus-complaint.txt`. The filed exemplar is not committed, so it is passed as the third argument (see Render and overlay) |
 | pages reviewed | 8 of 8 (2026-10-14: every page rendered at 80 dpi with `pdftoppm` and viewed) |
 
@@ -75,7 +75,7 @@ Gate 2 rows: `OK` = viewed and acceptable. No `OPEN` rows. The one accepted diff
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-ncmb-adversary-complaint-novuscomplaint.md
+sh tools/render.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint novus-complaint <path-to>/SAMPLE-anderson-novus-24-06026-adversary-complaint.pdf
 ```
 
@@ -89,11 +89,11 @@ Typst (`typst/`) is the reference. The docx engine (`docx/`) is checked page by 
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-ncmb-adversary-complaint-novuscomplaint.typst.pdf` (8 pp) | reference |
-| docx | `OUTPUT-ncmb-adversary-complaint-novuscomplaint.docx` and `OUTPUT-ncmb-adversary-complaint-novuscomplaint.docx.pdf` (9 pp) | ok: rendered with `tools/render.sh --engine docx`; the LibreOffice PDF converted without error; all 9 pages viewed beside the typst pages |
+| typst | `OUTPUT-adversary-complaint.typst.pdf` (8 pp) | reference |
+| docx | `OUTPUT-adversary-complaint.docx` and `OUTPUT-adversary-complaint.docx.pdf` (9 pp) | ok: rendered with `tools/render.sh --engine docx`; the LibreOffice PDF converted without error; all 9 pages viewed beside the typst pages |
 
 ```sh
-sh tools/render.sh --engine docx courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-ncmb-adversary-complaint-novuscomplaint.md
+sh tools/render.sh --engine docx courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/adversary-complaint usage/INPUT-adversary-complaint.md
 ```
 
 **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/ncmb-adversary-complaint.lua`). `make-reference.sh` builds the reference from pandoc's default: EB Garamond 13 pt; body at an exact 24 pt line pitch with a 0.5 in first-line indent; headings; footnote and block-quote styles; letter page with 1-inch margins; a centered page number on every page. The Lua filter builds what pandoc does not write: the cover (court lines, a caption table with the ")" column and closing rule, the title), the numbered paragraphs, the lettered prayer, the sub-items, native footnotes whose text is in the frontmatter, and the signature block kept together at 3.25 in.
@@ -102,7 +102,7 @@ sh tools/render.sh --engine docx courts/fourth-circuit/north-carolina/federal/ba
 - *Differs:* line and page breaks. The docx is 9 pages against 8. The signature block, with "Respectfully submitted", falls alone on docx page 9; typst keeps it on page 8 under the prayer. Word may break lines differently again. Word counts agree within 5 words (2,296 against 2,291).
 - *Not built:* no certificate, because the complaint has none (the sample has no service frontmatter).
 - *Word:* not opened in Word. `unzip -t` and xmllint pass on every XML part and every style used in the body is defined; LibreOffice converted it without error.
-- *Pages reviewed:* 9 of 9 pages of `OUTPUT-ncmb-adversary-complaint-novuscomplaint.docx.pdf`, each viewed beside typst page 1 to 8 (page 9 has no typst counterpart).
+- *Pages reviewed:* 9 of 9 pages of `OUTPUT-adversary-complaint.docx.pdf`, each viewed beside typst page 1 to 8 (page 9 has no typst counterpart).
 
 
 See also: [[motion-brief]] (the other doc type in this court), `../../../../../../README.md` for the formbook index.

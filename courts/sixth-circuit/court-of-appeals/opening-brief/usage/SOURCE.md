@@ -19,7 +19,7 @@ Only the brief's structure and the text of its opening pages were transcribed in
 
 ## Additional filer
 
-- File: `SAMPLE-ca6-opening-brief-jbkcabinet215074.pdf` (74 pages, text layer)
+- File: `FILED-EXAMPLE-opening-brief-2.pdf` (74 pages, text layer)
 - Case: *J.B.-K. et al. v. Secretary of the Kentucky Cabinet for Health and Family Services et al.*, No. 21-5074
 - Document: Brief of Plaintiffs-Appellants, Document 17
 - Filer: Minor plaintiffs and class representatives, by Richard Frank Dawahare and Douglas L. McSwain and Thomas E. Travis of Wyatt, Tarrant & Combs, LLP

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "dcd-motion-brief.typ": dcd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-dcd-motion-brief-estradamotiontodismiss.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #dcd-motion-brief(meta, body)

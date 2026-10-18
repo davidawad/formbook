@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-arwd-complaint-little526cv05256.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Western District of Arkansas, Fayetteville Division
 - Case: *John David Little v. Church & Dwight Co., Inc.*
 - Docket: No. 5:26-cv-05256-DCF (Document 2)

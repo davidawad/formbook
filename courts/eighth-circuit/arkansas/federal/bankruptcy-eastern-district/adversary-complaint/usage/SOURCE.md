@@ -1,6 +1,6 @@
 # Exemplars: adversary complaint (areb, Eastern District of Arkansas)
 
-Exemplar saved: `SAMPLE-areb-adversary-complaint-watkins426ap01015.pdf` (9 pages).
+Exemplar saved: `FILED-EXAMPLE-adversary-complaint.pdf` (9 pages).
 
 - Pages 1-2: the B1040 adversary proceeding cover sheet, filed with the complaint.
 - Pages 3-9: the complaint, through the signature block. The complaint body is 7 pages.
@@ -8,7 +8,7 @@ Exemplar saved: `SAMPLE-areb-adversary-complaint-watkins426ap01015.pdf` (9 pages
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-areb-adversary-complaint-watkins426ap01015.pdf` |
+| Exemplar file | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.areb.315556/gov.uscourts.areb.315556.1.0.pdf (RECAP document 1, 22 pp.; docket page https://www.courtlistener.com/docket/73210980/1/franks-v-watkins-ii/) |
 | Case name / docket no. | *Franks et al. v. Watkins* (CourtListener caption "Bruce Watkins, II and Heida Farque Watkins - Adversary Proceeding"), Adv. No. 4:26-ap-01015, E.D. Ark., Central Division. Underlying Chapter 7 case No. 4:25-bk-10241 (Judge Rucker, per the cover sheet). |
 | Filer | Plaintiffs (Margie Geniece Franks; Benny Rex Harper and Martha Ruth Harper, trustees; the Estate of William (Dub) Henry Harper; and others), by Branch T. Fields, Lax, Vaughan, Fortson, Rowe & Threet, P.A. |

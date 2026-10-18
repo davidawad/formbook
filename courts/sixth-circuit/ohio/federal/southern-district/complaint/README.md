@@ -5,9 +5,9 @@ Folder: `courts/sixth-circuit/ohio/federal/southern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ohsd-complaint-doevcolumbus226cv00684.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ohsd-complaint-doe.md` (partial transcription, see Known gaps) |
-| render | ok: `usage/OUTPUT-ohsd-complaint-doe.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (partial transcription, see Known gaps) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
 | overlay | ok: `usage/OVERLAY-doe-complaint.pdf` and `OVERLAY-doe-complaint.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed in the final layout) |
 
@@ -70,7 +70,7 @@ Pages reviewed in the final layout: 1 (caption, parties), 2 (numbered parties an
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default (EB Garamond 12 pt, exact 24 pt double spacing, one-inch margins, centred PAGE footer, heading and paragraph styles). `ohsd.lua` sets the court title, the caption table, the numbered allegations, the prayer, the signature block and the certificate (none here). Render: `usage/OUTPUT-ohsd-complaint-doe.docx` and `.docx.pdf` (LibreOffice 26.8.1, EB Garamond embedded), 8 pages. Reviewed: all 8 pages of the `.docx.pdf` and all 8 pages of the typst render, at 60 dpi, in the final state.
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default (EB Garamond 12 pt, exact 24 pt double spacing, one-inch margins, centred PAGE footer, heading and paragraph styles). `ohsd.lua` sets the court title, the caption table, the numbered allegations, the prayer, the signature block and the certificate (none here). Render: `usage/OUTPUT-complaint.docx` and `.docx.pdf` (LibreOffice 26.8.1, EB Garamond embedded), 8 pages. Reviewed: all 8 pages of the `.docx.pdf` and all 8 pages of the typst render, at 60 dpi, in the final state.
 
 - Matches typst: letter paper, margins, EB Garamond 12 pt, 24 pt body pitch, the page count (8), the court title and caption (page 1 caption lines within 0.1 pt of the typst baselines), the PARTIES heading and first allegation (within about 1 pt), numbered allegations with a 0.5 in first-line indent and text at 1 in, count headings, the prayer, the signature block, the centred page number.
 - Differs (tier 2, not chased): line breaks differ on most pages (LibreOffice shaping: for example allegation 2 breaks after "sexual-"). Page breaks differ: the docx ends page 2 after allegation 14, and the prayer for relief moves to page 8 whole (kept with its items), where typst keeps it on page 7. Pages 3 and 5 end short because of widow control. The caption spacing constants differ between the complaint and motion-brief `ohsd.lua` (the left column is taller here, the right column in the motion); both are measured against the typst output.

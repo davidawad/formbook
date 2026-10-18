@@ -35,18 +35,18 @@ Judge-specific chambers practices may add requirements; not checked in this run.
 
 ## Files
 
-- `usage/SAMPLE-nysb-adversary-complaint-celsius2404018.pdf` (primary, Quinn Emanuel for the Post-Effective Date
-  Celsius Debtors, filed Aug. 9, 2024) and `usage/SAMPLE-nysb-adversary-complaint-ehrenfeld1901128.pdf` (second
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf` (primary, Quinn Emanuel for the Post-Effective Date
+  Celsius Debtors, filed Aug. 9, 2024) and `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (second
   filer, the NY Attorney General for The Lawyers' Fund, filed May 3, 2019, 4 pages). See `usage/SOURCE.md`.
-- `usage/INPUT-nysb-adversary-complaint-celsiuscomplaint.md`: transcribed from the primary exemplar: the caption and counsel frontmatter, paragraphs
+- `usage/INPUT-adversary-complaint.md`: transcribed from the primary exemplar: the caption and counsel frontmatter, paragraphs
   1-31, the prayer and the first signature group. Not the whole pleading (30 pages).
-- `usage/OUTPUT-nysb-adversary-complaint-celsiuscomplaint.typst.pdf`: 11 pages (cover + 10). `usage/OVERLAY-celsius-complaint.pdf` and `.txt`.
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: 11 pages (cover + 10). `usage/OVERLAY-celsius-complaint.pdf` and `.txt`.
 - The brief named the sample `usage/<id>.md` and `<id>.pdf`, and `<id>-overlay.pdf`. The repo's tools and file-role names
   (`INPUT-`, `OUTPUT-`, `OVERLAY-`) are used instead, so `tools/render.sh` and `tools/overlay.sh` work unchanged.
 
 ## Commands (from the repo root)
 
-    sh tools/render.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-nysb-adversary-complaint-celsiuscomplaint.md
+    sh tools/render.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/adversary-complaint usage/INPUT-adversary-complaint.md
     sh tools/overlay.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/adversary-complaint celsius-complaint
 
 The render is a clean typst compile with the vendored fonts (no warnings).

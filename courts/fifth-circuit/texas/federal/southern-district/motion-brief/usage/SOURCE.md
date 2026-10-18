@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-txsd-motion-brief-dangelas426cv04908.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Southern District of Texas, Houston Division (Judge Charles Eskridge)
 - Case: *Dangelas v. Chicago Crystal Ball, LLC (Idaho), et al.*
 - Docket: No. 4:26-cv-04908 (Document 46)

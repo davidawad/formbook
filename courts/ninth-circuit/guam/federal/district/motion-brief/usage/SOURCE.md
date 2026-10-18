@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-gud-motion-brief-leonguerrero25cv00030.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court of Guam (`gud`)
 - Case: *Leon Guerrero v. Moylan* (removed from the Superior Court of Guam, No. CV0190-25)
 - Docket: No. 1:25-cv-00030, Document 13-1 (Memorandum in Support of Motion to Strike or to Dismiss Counterclaim; 12 pages)

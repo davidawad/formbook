@@ -5,7 +5,7 @@ Exemplars are public filings from CourtListener RECAP (storage.courtlistener.com
 
 ## Used for the sample and the overlay
 
-- File: `SAMPLE-kywd-motion-brief-zoeller325cv740.pdf` (19 pages; the memorandum, Document 4-1)
+- File: `FILED-EXAMPLE-motion-brief-2.pdf` (19 pages; the memorandum, Document 4-1)
 - Court: United States District Court, Western District of Kentucky, Louisville Division
 - Case: *Zoeller v. Baker* (Officer Walter Baker, et al.), Civil Action No. 3:25-CV-00740-DJH
 - Document: Memorandum of Law Supporting Defendants Bullitt County Sheriff Walt Sholar and Bullitt County Sheriff's Office Motion to Dismiss
@@ -15,13 +15,13 @@ Exemplars are public filings from CourtListener RECAP (storage.courtlistener.com
 
 ## Same motion, companion document (not transcribed)
 
-- File: `SAMPLE-kywd-motion-brief-zoeller325cv740motion.pdf` (2 pages; Document 4-0, the motion itself, with its certificate of service)
+- File: `FILED-EXAMPLE-motion-brief-3.pdf` (2 pages; Document 4-0, the motion itself, with its certificate of service)
 - Source URL: https://storage.courtlistener.com/recap/gov.uscourts.kywd.141830/gov.uscourts.kywd.141830.4.0.pdf
 - Filed 2026-01-19 with the memorandum above.
 
 ## Second filer (tier-2 comparison; not transcribed)
 
-- File: `SAMPLE-kywd-motion-brief-glantz326cv454.pdf` (30 pages; the memorandum of law, Document 11-1)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (30 pages; the memorandum of law, Document 11-1)
 - Court: United States District Court, Western District of Kentucky, Louisville Division
 - Case: *N. Glantz & Son, LLC v. Cleanlife Energy LLC*, No. 3:26-cv-00454-GNS
 - Document: Defendant's Memorandum of Law in Support of Motion to Dismiss (the motion itself is Document 11, not saved)
@@ -31,7 +31,7 @@ Exemplars are public filings from CourtListener RECAP (storage.courtlistener.com
 
 ## Additional filer (second tier-2 exemplar)
 
-- File: `SAMPLE-kywd-motion-brief-glantz326cv454.pdf` (30 pages; text layer present)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (30 pages; text layer present)
 - Case: *N. Glantz & Son, LLC v. Cleanlife Energy LLC*, No. 3:26-cv-00454-GNS
 - Document: Defendant's Memorandum of Law in Support of Motion to Dismiss (Document 11-1)
 - Filer: Defendant Cleanlife Energy LLC, by counsel F. Maximilian Czernin (Squire Patton Boggs (US) LLP) and B. Scott Jones (Reminger Co., LPA)

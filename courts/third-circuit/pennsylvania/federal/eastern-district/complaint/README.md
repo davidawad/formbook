@@ -4,10 +4,10 @@ Doc type: **complaint** (complaint and jury demand) in the United States Distric
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-paed-complaint-murphy226cv07848.pdf` (one filer, counsel-filed; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-paed-complaint-murphy.md` (a portion of the 22-page filing; see the frontmatter comment) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer, counsel-filed; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (a portion of the 22-page filing; see the frontmatter comment) |
 | typeface | face required: **none** (the E.D. Pa. local civil rules name no face; see Governing rules). Font: **EB Garamond** (vendored), kept under `docs/FONTS.md` "No face named"; no substitution made. `pdffonts` on the 2026-10-15 render: only EB Garamond embedded (Regular, Bold, BoldItalic) |
-| render | ok (re-run 2026-10-15): `usage/OUTPUT-paed-complaint-murphy.typst.pdf`, 10 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings |
+| render | ok (re-run 2026-10-15): `usage/OUTPUT-complaint.typst.pdf`, 10 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings |
 | overlay | **fail** (re-run 2026-10-15): `tools/overlay.sh` exits 1 because `usage/` holds only `SOURCE.md`; the filed PDF named there is not in this snapshot. `usage/OVERLAY-murphy-complaint.txt` is the earlier page map, not regenerated; no `OVERLAY-murphy-complaint.pdf` exists |
 | pages reviewed | 10 of 10 (re-rendered 2026-10-15 at 60 dpi; every page looked at, none changed) |
 | tier 1 (mandated form) | checked against the rules below; no mandated typography exists in the E.D. Pa. local rules |
@@ -53,7 +53,7 @@ Not produced by this template (separate filings the Clerk needs with the complai
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/third-circuit/pennsylvania/federal/eastern-district/complaint usage/INPUT-paed-complaint-murphy.md
+sh tools/render.sh courts/third-circuit/pennsylvania/federal/eastern-district/complaint usage/INPUT-complaint.md
 sh tools/overlay.sh courts/third-circuit/pennsylvania/federal/eastern-district/complaint murphy-complaint
 ```
 
@@ -96,6 +96,6 @@ Defects found during review and fixed in the template:
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form.
-- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/paed.lua`): pandoc on a reference with the template's typography (EB Garamond 12 pt, exact 24 pt line pitch, 0.5 in first-line indent, 1 in margins on US Letter, centered page number, centered and bold headings with level 3 in bold italic at the margin, single-spaced caption and counsel block). The Lua filter builds what pandoc cannot write from the markdown contract: the cover (court title, caption table with its column of colons, title of the pleading), the lead-in, the numbered allegations (numbers typed by the filter, so the numbering runs from 1; a paragraph opening with WHEREFORE is not numbered), the lettered lists `(a)`, and the signature block. Output: `usage/OUTPUT-paed-complaint-murphy.docx`. Built with `sh docx/build-reference.sh docx/reference.docx` and `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/paed.lua usage/INPUT-paed-complaint-murphy.md -o usage/OUTPUT-paed-complaint-murphy.docx`. Checked only as a zip of well-formed XML (every entry read, every XML part passes `xmllint --noout`). Not opened in Word or LibreOffice.
+- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/paed.lua`): pandoc on a reference with the template's typography (EB Garamond 12 pt, exact 24 pt line pitch, 0.5 in first-line indent, 1 in margins on US Letter, centered page number, centered and bold headings with level 3 in bold italic at the margin, single-spaced caption and counsel block). The Lua filter builds what pandoc cannot write from the markdown contract: the cover (court title, caption table with its column of colons, title of the pleading), the lead-in, the numbered allegations (numbers typed by the filter, so the numbering runs from 1; a paragraph opening with WHEREFORE is not numbered), the lettered lists `(a)`, and the signature block. Output: `usage/OUTPUT-complaint.docx`. Built with `sh docx/build-reference.sh docx/reference.docx` and `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/paed.lua usage/INPUT-complaint.md -o usage/OUTPUT-complaint.docx`. Checked only as a zip of well-formed XML (every entry read, every XML part passes `xmllint --noout`). Not opened in Word or LibreOffice.
 - **docx differs from typst**: the caption's right cell is top-aligned (typst centers it vertically); the numbers are typed text, so Word does not renumber them when a paragraph is inserted; the space between blocks is one 24 pt line where typst uses 16.2 pt; pagination is Word's, so page breaks and the gaps that typst's unbreakable paragraphs leave at page foot differ.
 - **docx BLOCKED**: this court folder has no checks file (no `checks.yaml`), so no gate check ID can be listed. Gates 0 to 3 on `usage/OUTPUT-murphy-complaint.docx.pdf` are BLOCKED. Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.

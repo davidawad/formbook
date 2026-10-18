@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-lawb-adversary-complaint-andrusvcgboats1905061.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Western District of Louisiana (Lafayette Division)
 - Case: *Elizabeth G. Andrus, Trustee v. C & G Boats, Inc.*, Adv. Proc. No. 19-05061, main case *In re Rooster Petroleum, LLC*, No. 17-50708 (Chapter 7)
 - Document: Complaint (8 pages), "COMPLAINT": avoidance and recovery of preferential transfers (11 U.S.C. §§ 547, 550) and disallowance of claims (§ 502(d))

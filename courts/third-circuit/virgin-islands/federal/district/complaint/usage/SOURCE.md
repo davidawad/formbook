@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-vid-complaint-henry326cv00038.pdf` (20 pages, text layer present; `pdffonts` shows embedded Times New Roman, Calibri and Arial on the pleading and exhibit pages)
+- File: `FILED-EXAMPLE-complaint.pdf` (20 pages, text layer present; `pdffonts` shows embedded Times New Roman, Calibri and Arial on the pleading and exhibit pages)
 - Court: District Court of the Virgin Islands, Division of St. Thomas and St. John
 - Case: *Henry v. Brooks*, No. 3:26-cv-00038-ER-GAT (the caption carries "Civil Action No. ____": the number is assigned on filing and is blank on the filed copy)
 - Document: Complaint for Declaratory and Injunctive Relief (ECF 1), with the caption and the signature block of counsel for plaintiffs
@@ -20,7 +20,7 @@ It is a complaint in this court, filed by a private party, with a text layer, a 
 - CourtListener docket pages and clearinghouse.net: HTTP 403 to curl and WebFetch.
 - govinfo / vid.uscourts.gov: opinions only, no filed complaints.
 
-## 2. Second filer: `SAMPLE-vid-complaint-unitedstates325cv00050.pdf`
+## 2. Second filer: `FILED-EXAMPLE-complaint-2.pdf`
 
 - Court: District Court of the Virgin Islands, Division of St. Thomas and St. John (`vid`)
 - Case: *United States of America v. The Government of the Virgin Islands, the Virgin Islands Police Department, and Mario Brooks, in his official capacity as Police Commissioner*

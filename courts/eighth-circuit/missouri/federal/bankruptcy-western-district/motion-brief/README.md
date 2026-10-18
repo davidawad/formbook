@@ -6,9 +6,9 @@ The exemplars are *separate* memoranda filed with a motion to dismiss (the motio
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 2 filers: `usage/SAMPLE-mowb-motion-brief-barnhart1304184.pdf` (4 pp, MOHELA, 2014) and `usage/SAMPLE-mowb-motion-brief-lewallen0505013.pdf` (5 pp, Green Tree Servicing and U.S. Bank, 2005). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-mowb-motion-brief-barnhartmohelamemorandum.md` (the whole memorandum, 4 pages) |
-| render | ok: `usage/OUTPUT-mowb-motion-brief-barnhartmohelamemorandum.typst.pdf`, 4 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
+| exemplar | yes, 2 filers: `usage/FILED-EXAMPLE-motion-brief.pdf` (4 pp, MOHELA, 2014) and `usage/FILED-EXAMPLE-motion-brief-2.pdf` (5 pp, Green Tree Servicing and U.S. Bank, 2005). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-motion-brief.md` (the whole memorandum, 4 pages) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 4 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
 | typeface | no face named by the court's rules (checked 2026-10-14); EB Garamond kept, per `docs/FONTS.md` rule 3 |
 | overlay | fail (2026-10-14): `tools/overlay.sh` cannot run, because `usage/` holds only `SOURCE.md` and the filed PDF is not in this snapshot. The `OVERLAY-barnhart-mohela-memorandum.txt` shown is from the earlier run; no `.pdf` overlay exists. |
 | pages reviewed | 4 of 4 (every page of the 2026-10-14 render rasterized at 60 dpi and viewed) |
@@ -83,7 +83,7 @@ Not produced by this template (separate filings, not part of the memorandum): th
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for this doc type. Unchanged by the docx work.
-- **docx** (`docx/`): `reference.docx` (built by `sh docx/make-reference.sh`: styles, US Letter, 1 inch margins, centred PAGE footer) and `mowb.lua` (caption, roman and lettered headings, numbered lists, signature block and certificate). Output: `usage/OUTPUT-mowb-motion-brief-barnhartmohelamemorandum.docx` and `.docx.pdf` (`sh tools/render.sh --engine docx <this folder> usage/INPUT-mowb-motion-brief-barnhartmohelamemorandum.md`).
+- **docx** (`docx/`): `reference.docx` (built by `sh docx/make-reference.sh`: styles, US Letter, 1 inch margins, centred PAGE footer) and `mowb.lua` (caption, roman and lettered headings, numbered lists, signature block and certificate). Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (`sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`).
   - **Matches typst:** US Letter, 1 inch margins, EB Garamond 13 pt (declared; install it to open as designed), the caption and court title, the title, single spacing with a blank line between paragraphs, first-line indents, roman (I., II.) and lettered (A., B.) headings, numbered lists, signature block and certificate of service, page-number footer.
   - **Differs from typst:** 5 pages in docx against 4 in typst. The body line spacing is looser, so the Conclusion and signature run over, and the certificate of service falls alone on page 5. Nothing is forced with page breaks.
   - **Checked:** the `.docx.pdf` is the LibreOffice 26.8.1 conversion (fonts embedded: EB Garamond only). Every page (1-5) was rendered at 60 dpi and viewed beside the typst pages. The `.docx` was not opened in Word.

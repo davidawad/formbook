@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ohsd-complaint-doevcolumbus226cv00684.pdf` (53 PDF pages: complaint pp. 1–20, then state-court exhibits pp. 21–53; only the complaint is in the sample)
+- File: `FILED-EXAMPLE-complaint.pdf` (53 PDF pages: complaint pp. 1–20, then state-court exhibits pp. 21–53; only the complaint is in the sample)
 - Court: United States District Court, Southern District of Ohio, Eastern Division (Columbus)
 - Case: *Jane Doe v. City of Columbus, et al.*
 - Docket: No. 2:26-cv-00684 (CourtListener docket 73448655), Document 1
@@ -18,7 +18,7 @@ The Doe PDF is flagged for Garamond. A possible same-court, same-document-type t
 
 ## Redaction in the transcription
 
-The complaint is a pseudonymous civil action by a sexual-assault survivor. The sample (`usage/INPUT-ohsd-complaint-doe.md`) keeps the caption, the parties, jurisdiction, the count headings, the prayer, the jury demand and the signature block, and transcribes a few allegations verbatim. The factual narrative of the 1994 offence (complaint ¶¶ 31–64) and the detail of the count paragraphs that restate it is replaced by a bracketed note. This is a deliberate choice; the filing itself remains public.
+The complaint is a pseudonymous civil action by a sexual-assault survivor. The sample (`usage/INPUT-complaint.md`) keeps the caption, the parties, jurisdiction, the count headings, the prayer, the jury demand and the signature block, and transcribes a few allegations verbatim. The factual narrative of the 1994 offence (complaint ¶¶ 31–64) and the detail of the count paragraphs that restate it is replaced by a bracketed note. This is a deliberate choice; the filing itself remains public.
 
 ## Second filer
 

@@ -2,9 +2,9 @@
 
 Public court records (PACER RECAP copies on CourtListener). Fetched 2026-10-14 by the CourtListener search API (`type=r`, `court=wawd`, `q="COMPLAINT"`, filed 2026-09-18 to 2026-10-09) and the RECAP storage URLs below. Used only as a visual and structural reference.
 
-## Filing 1 (primary, `usage/INPUT-wawd-complaint-ironleaf.md` is transcribed from it)
+## Filing 1 (primary, `usage/INPUT-complaint.md` is transcribed from it)
 
-- File: `SAMPLE-wawd-complaint-ironleaf226cv03537.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Western District of Washington, at Seattle
 - Case: *Ironleaf Capital, L.P. v. Ironleaf Equity Partners LLC*
 - Docket: No. 2:26-cv-03537 (Document 1; no judge assigned in the caption)
@@ -17,7 +17,7 @@ Public court records (PACER RECAP copies on CourtListener). Fetched 2026-10-14 b
 
 ## Filing 2 (second filer, for the tier-2 comparison; not transcribed)
 
-- File: `SAMPLE-wawd-complaint-materia226cv03656.pdf`
+- File: `FILED-EXAMPLE-complaint-2.pdf`
 - Case: *Materia Music, Inc. v. Davidson* (Christopher Davidson p/k/a DJ Cutman)
 - Docket: No. 2:26-cv-03656-GJL (Document 1)
 - Document: Complaint for Copyright Infringement, Jury Demand (10 pages)

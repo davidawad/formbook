@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-akb-adversary-complaint-battleyfurie1890016.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | Court | United States Bankruptcy Court, District of Alaska (`akb`) |
 | Case | *Kenneth W. Battley, Trustee v. Furie Operating Alaska, LLC and Cornucopia Oil & Gas Company LLC*, Adv. Proc. No. 18-90016 (main case *In re Aurora Gas LLC*, No. 16-00130) |
 | Document | Complaint for Avoidance and Recovery of Payments (Bankruptcy Code §§ 549 and 550), docket entry 1, 3 pages |

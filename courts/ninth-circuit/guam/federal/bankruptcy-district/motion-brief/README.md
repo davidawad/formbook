@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/guam/federal/bankruptcy-district/motion-brief/`. E
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-gub-motion-brief-campos2000001.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-gub-motion-brief-camposmotiontodismiss.md`: the whole filed document (caption, notice of motion, procedural history, legal standard, argument I to III, conclusion, two footnotes, signature) |
-| render | ok: `usage/OUTPUT-gub-motion-brief-camposmotiontodismiss.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: the whole filed document (caption, notice of motion, procedural history, legal standard, argument I to III, conclusion, two footnotes, signature) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
 | typeface | face required: none (GNLR 5.1 and the Bankr. L.R. text, read 2026-10-15, name no face or point size) → vendored substitute: none; **EB Garamond** is the no-face default (`docs/FONTS.md`) → metric-compatible: n/a |
 | overlay | ok: `usage/OVERLAY-campos-motion-to-dismiss.pdf` and `.txt` (each sample page paired with the same-numbered filed page, all 11); the filed exemplar was re-fetched from the RECAP URL in `usage/SOURCE.md` and matches its SHA-256; the PDF is kept outside the repo, since no court tracks exemplar PDFs in git |
 | pages reviewed | 11 of 11 (re-rendered 2026-10-15 and every page rasterised at 60 dpi and viewed; the layout is unchanged from the record below) |
@@ -83,7 +83,7 @@ Pages reviewed: 11 of 11.
 
 ### docx (build 2026-10-15, LibreOffice not installed)
 
-Files: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/gub-motion-brief.lua` (cover, caption, signature). Sample output: `usage/OUTPUT-gub-motion-brief-camposmotiontodismiss.docx`. Checked: valid zip, every XML part well-formed (xmllint). Not rendered: no page of the docx was looked at (pages_reviewed = 0).
+Files: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/gub-motion-brief.lua` (cover, caption, signature). Sample output: `usage/OUTPUT-motion-brief.docx`. Checked: valid zip, every XML part well-formed (xmllint). Not rendered: no page of the docx was looked at (pages_reviewed = 0).
 
 What the XML sets (in `styles.xml`, `sectPr` and the footer part; set, not rendered):
 - EB Garamond 13 pt everywhere; body on an exact 26 pt line pitch (double spacing).

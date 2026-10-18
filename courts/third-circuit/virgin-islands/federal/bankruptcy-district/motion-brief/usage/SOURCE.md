@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| File | `SAMPLE-vib-motion-brief-prosserchristies2103001.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Document | Omnibus Memorandum of Law in Support of Motion to Dismiss Complaint Pursuant to Fed. R. Bankr. P. 7012 (60 pp.) |
 | Court | United States Bankruptcy Court, District of the Virgin Islands, Division of St. Thomas and St. John, Bankruptcy Division |
 | Case | *In re Jeffrey J. Prosser*, Chapter 7, Case No. 06-30009; Adv. Pro. No. 3:21-ap-03001 (MFW) (*Oakland Benta, Jeffrey J. Prosser, and Dawn E. Prosser v. Christie's Inc., Charles Antin, Fox Rothschild LLP, Yann Geron, William H. Stassen, David M. Nissman, and James P. Carroll*) |

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-casb-motion-brief-stikaalegria2590036.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Southern District of California, San Diego Division (casb)
 - Case: *Matthew Stika v. Omar Alegria*, adversary proceeding No. 25-90036-CL, in the chapter 7 case No. 24-04888-CL7 (debtor Omar Alegria)
 - Document: Defendant's Motion to Dismiss Adversary Complaint for Failure to State a Claim Upon Which Relief Can Be Granted, with its points and authorities in the same filing (5 pages; the caption, the motion, the two grounds with their authorities, and the conclusion)

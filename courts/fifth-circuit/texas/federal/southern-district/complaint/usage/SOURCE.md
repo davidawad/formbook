@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-txsd-complaint-schott426cv08325.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Southern District of Texas
 - Case: *Schott v. Federal Express Corporation* (successor by merger to FedEx Ground Package System, Inc.)
 - Docket: No. 4:26-cv-08325 (Document 1)

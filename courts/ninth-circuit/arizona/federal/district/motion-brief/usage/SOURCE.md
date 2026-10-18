@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-azd-motion-brief-evancho426cv00363.pdf` (17 pages, text layer present; pdffonts shows Times New Roman and Georgia/Cambria in the letterhead)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (17 pages, text layer present; pdffonts shows Times New Roman and Georgia/Cambria in the letterhead)
 - Court: United States District Court for the District of Arizona
 - Case: *Evancho v. City of Tucson, et al.*
 - Docket no.: No. 4:26-cv-00363-RM (ECF header on every page: `Case 4:26-cv-00363-RM Document 8`; caption `CASE NO: 4:26-CV-00363-RM`)

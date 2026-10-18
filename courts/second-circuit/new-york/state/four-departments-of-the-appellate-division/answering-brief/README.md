@@ -4,8 +4,8 @@ Status: **exemplar found** (2026-10-16): a First Department respondent's brief, 
 
 | Gate | Result |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nyappdiv-answering-brief-nycla202203908.pdf` (First Dept, NYSCEF Doc. 17, filed 2023-04-19, Kramer Levin for plaintiffs-respondents) |
-| render | ok: `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/answering-brief usage/INPUT-nyappdiv-answering-brief-nycla202203908answering.md`, 19 pages, EB Garamond Regular/Bold/Italic only, no typst warnings (2026-10-16) |
+| exemplar | yes: `usage/FILED-EXAMPLE-answering-brief.pdf` (First Dept, NYSCEF Doc. 17, filed 2023-04-19, Kramer Levin for plaintiffs-respondents) |
+| render | ok: `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/answering-brief usage/INPUT-answering-brief.md`, 19 pages, EB Garamond Regular/Bold/Italic only, no typst warnings (2026-10-16) |
 | overlay | ok: `sh tools/overlay.sh …/answering-brief nycla-2022-03908-answering`, wrote `usage/OVERLAY-nycla-2022-03908-answering.pdf` and `.txt` (2026-10-16) |
 | pages reviewed | 19 of 19 (every page rasterized at 60 dpi and viewed, 2026-10-16); overlay viewed as a 40 dpi contact sheet, pages 1, 5 and 12 at 100 dpi |
 
@@ -33,12 +33,12 @@ Rule dates: 1250.8 as read is dated 9/17/2018 (LII). No later amendment was seen
 
 ## Folders
 
-- `typst/main.typ`: entry point; reads `sample=` from `--input` (default `usage/INPUT-nyappdiv-answering-brief-nycla202203908answering.md`).
+- `typst/main.typ`: entry point; reads `sample=` from `--input` (default `usage/INPUT-answering-brief.md`).
 - `typst/nyappdiv-answering-brief.typ`: the template, `nyappdiv-answering-brief(meta, md)`. Copied from `../reply-brief/typst/nyappdiv-reply-brief.typ` (cover, TOC, TOA with page references, signature, printing statement, blank affidavit of service) with these changes: word limit 14,000 (1250.8(f)(2)); headings outside the Argument are lettered A., 1. (the exemplar's Counterstatement of Facts) while Argument points stay I., A.; point headings in capitals only under the Argument; the docket is printed as written; a caption side may carry its own `joiner` ("– and –"); an optional `closing` line in the signature block.
-- `usage/INPUT-nyappdiv-answering-brief-nycla202203908answering.md`: partial transcription of the exemplar (see "Sample").
-- `usage/OUTPUT-nyappdiv-answering-brief-nycla202203908answering.typst.pdf`: render output (19 pages).
+- `usage/INPUT-answering-brief.md`: partial transcription of the exemplar (see "Sample").
+- `usage/OUTPUT-answering-brief.typst.pdf`: render output (19 pages).
 - `usage/OVERLAY-nycla-2022-03908-answering.pdf`, `.txt`: overlay on the exemplar and its page map.
-- `usage/SAMPLE-nyappdiv-answering-brief-nycla202203908.pdf`, `usage/SOURCE.md`: the exemplar, its source and the search record.
+- `usage/FILED-EXAMPLE-answering-brief.pdf`, `usage/SOURCE.md`: the exemplar, its source and the search record.
 
 ## Markdown contract (frontmatter)
 
@@ -62,7 +62,7 @@ Body: `#` section (centered, bold, capitals); `##` under the Argument is a point
 
 ## Sample
 
-`usage/INPUT-nyappdiv-answering-brief-nycla202203908answering.md` is the filer's text, partly transcribed: the cover; the opening paragraph and its footnote; the Preliminary Statement's first four paragraphs and its last; the Counterstatement of Question Presented (complete); from the Counterstatement of Facts, the start of A., the start of B., the start of C., the first and the last two paragraphs of D.; the Argument's standard-of-review paragraph; Point I (complete); Point II.A's first two paragraphs; II.B's first two paragraphs and the first paragraph of its footnote; II.C's first two paragraphs; the Conclusion and the signature block. Everything else is left out, so the render is 19 pages against the exemplar's 52, and its word count (2,873) is the sample's, not the filed 10,394. Footnotes are renumbered (the exemplar's footnote 3 is footnote 2). The exemplar's typo "CLPR 3211(e)" is kept in the text; the TOA entry reads "CPLR 3211(e)", as the exemplar's TOA does.
+`usage/INPUT-answering-brief.md` is the filer's text, partly transcribed: the cover; the opening paragraph and its footnote; the Preliminary Statement's first four paragraphs and its last; the Counterstatement of Question Presented (complete); from the Counterstatement of Facts, the start of A., the start of B., the start of C., the first and the last two paragraphs of D.; the Argument's standard-of-review paragraph; Point I (complete); Point II.A's first two paragraphs; II.B's first two paragraphs and the first paragraph of its footnote; II.C's first two paragraphs; the Conclusion and the signature block. Everything else is left out, so the render is 19 pages against the exemplar's 52, and its word count (2,873) is the sample's, not the filed 10,394. Footnotes are renumbered (the exemplar's footnote 3 is footnote 2). The exemplar's typo "CLPR 3211(e)" is kept in the text; the TOA entry reads "CPLR 3211(e)", as the exemplar's TOA does.
 
 ## What the overlay shows
 

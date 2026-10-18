@@ -3,9 +3,9 @@
 - Court: `afcca`, U.S. Air Force Court of Criminal Appeals (`courts/military/air-force-court-of-criminal-appeals/`)
 - Doc type: `answering-brief`. The United States' answer to the appellant's assignments of error (AFCCA Rule 18.3: "Answer briefs ... will follow the same format as assignments of error and respond separately to each assigned error"). One self-contained folder; no shared files.
 - Exemplars: two, from the same two filer pairs as the opening-brief folder (`usage/SOURCE.md`):
-  - `SAMPLE-afcca-answering-brief-douglas40324.pdf` (*United States v. Douglas*, ACM 40324 (f rev), 3 June 2024, Government Trial and Appellate Operations Division, signed by Mary Ellen Payne). The whole answer. Primary: the overlay defaults to it.
-  - `SAMPLE-afcca-answering-brief-howard40478.pdf` (*United States v. Howard*, ACM 40478 (f rev), 29 October 2024, GTAOD: G. Matt Osborn, Mary Ellen Payne, Matthew D. Talcott). The cover, index, table of authorities, issues presented and start of the statement of the case.
-- Samples: `usage/INPUT-afcca-answering-brief-douglas.md` (full transcription, 10 pages rendered) and `usage/INPUT-afcca-answering-brief-howard.md` (excerpt, 3 pages rendered; `excerpt: true`).
+  - `FILED-EXAMPLE-answering-brief.pdf` (*United States v. Douglas*, ACM 40324 (f rev), 3 June 2024, Government Trial and Appellate Operations Division, signed by Mary Ellen Payne). The whole answer. Primary: the overlay defaults to it.
+  - `FILED-EXAMPLE-answering-brief-2.pdf` (*United States v. Howard*, ACM 40478 (f rev), 29 October 2024, GTAOD: G. Matt Osborn, Mary Ellen Payne, Matthew D. Talcott). The cover, index, table of authorities, issues presented and start of the statement of the case.
+- Samples: `usage/INPUT-answering-brief.md` (full transcription, 10 pages rendered) and `usage/INPUT-answering-brief-2.md` (excerpt, 3 pages rendered; `excerpt: true`).
 - Status: template built; render, overlay and page review done for both samples (below). Fonts pass, 2026-10-14: the typeface stays EB Garamond (Known gaps, 1); both renders and both overlays re-run; every page re-viewed. The `SAMPLE-*.pdf` files named above are not in this snapshot, so the overlays were run against extracts of the page ranges `usage/SOURCE.md` cites, fetched from the URLs there and kept outside the repo. Not reviewed by a human. `court.json` and the court root are untouched.
 
 ## Files
@@ -14,8 +14,8 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `afcca-brief`. |
 | `typst/afcca-answering-brief.typ` | Template. Identical to `opening-brief/typst/afcca-opening-brief.typ` except `doc-kind = "answering-brief"`. The prayer check (WHEREFORE) applies only to `opening-brief`. |
-| `usage/INPUT-afcca-answering-brief-douglas.md` | Full transcription of the Douglas answer. |
-| `usage/INPUT-afcca-answering-brief-howard.md` | Excerpt of the Howard answer: counsel block, issues presented, start of the statement of the case. |
+| `usage/INPUT-answering-brief.md` | Full transcription of the Douglas answer. |
+| `usage/INPUT-answering-brief-2.md` | Excerpt of the Howard answer: counsel block, issues presented, start of the statement of the case. |
 | `usage/OUTPUT-<id>.pdf` | `sh tools/render.sh courts/military/air-force-court-of-criminal-appeals/answering-brief usage/<id>.md` |
 | `usage/OVERLAY-<id>.pdf`, `OVERLAY-<id>.txt` | `sh tools/overlay.sh courts/military/air-force-court-of-criminal-appeals/answering-brief <id> [exemplar.pdf]` (red = ours, blue = filed, black = agree). |
 | `usage/` | The two filed exemplars and `SOURCE.md`. |

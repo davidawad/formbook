@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ded-motion-brief-abramsonsafelife126cv00772.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court for the District of Delaware (`ded`)
 - Case: *Stewart Abramson v. Safe Life Policy, LLC*
 - Docket: No. 1:26-cv-00772-MN (Document 13; C.A. No. 26-772-MN, Judge Maryellen Noreika)
@@ -20,7 +20,7 @@ Other candidates with an available RECAP PDF, not saved (the brief asks for one 
 - CEA Industries, Inc. v. 10X Capital Partners LLC, No. 1:26-cv-00595, opening brief (26 pages), filed 2026-05-22 by 10X Capital Partners LLC.
 These are the candidates for the tier-2 second and third filers; see ../README.md.
 
-## 2. Second filer: `SAMPLE-ded-motion-brief-panini126cv00849.pdf`
+## 2. Second filer: `FILED-EXAMPLE-motion-brief-2.pdf`
 
 - Court: United States District Court for the District of Delaware (`ded`)
 - Case: *Zane Murdock v. Panini America, Inc. & NFL Properties LLC*

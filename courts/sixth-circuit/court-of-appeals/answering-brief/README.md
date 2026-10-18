@@ -4,10 +4,10 @@ Folder: `courts/sixth-circuit/court-of-appeals/answering-brief/`. Status: **temp
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-ca6-answering-brief-bruneau231761.pdf` | The filed exemplar: Brief of Defendants-Appellees Midland County and Gladwin County, 6th Cir. No. 23-1761, Doc. 40, filed 2024-01-31. 56 pp., text layer present. |
+| `usage/FILED-EXAMPLE-answering-brief.pdf` | The filed exemplar: Brief of Defendants-Appellees Midland County and Gladwin County, 6th Cir. No. 23-1761, Doc. 40, filed 2024-01-31. 56 pp., text layer present. |
 | `usage/SOURCE.md` | Where it came from, who filed it, and the errors seen in it. |
-| `usage/INPUT-ca6-answering-brief-bruneau.md` | Markdown transcription (a portion, see its header). Markdown contract below. |
-| `usage/OUTPUT-ca6-answering-brief-bruneau.typst.pdf` | Render of the sample: 14 pages. |
+| `usage/INPUT-answering-brief.md` | Markdown transcription (a portion, see its header). Markdown contract below. |
+| `usage/OUTPUT-answering-brief.typst.pdf` | Render of the sample: 14 pages. |
 | `usage/OVERLAY-bruneau-answering-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). Page map below. |
 | `typst/main.typ` | Entry point. Reads `--input sample=...`, splits frontmatter, calls the template. |
 | `typst/ca6-answering-brief.typ` | The template `ca6-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or cites a rule. |
@@ -16,7 +16,7 @@ Build (from the repo root; the same commands for any sample):
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
-sh tools/render.sh courts/sixth-circuit/court-of-appeals/answering-brief usage/INPUT-ca6-answering-brief-bruneau.md
+sh tools/render.sh courts/sixth-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md
 sh tools/overlay.sh courts/sixth-circuit/court-of-appeals/answering-brief bruneau-answering-brief
 ```
 
@@ -106,7 +106,7 @@ Same rules and numbers as the typst template (the reference). **latex** (`latex/
 
 ## Verification pass 2026-10-16 (fb-595.26.6)
 
-- Re-rendered `usage/OUTPUT-ca6-answering-brief-bruneau.typst.pdf` with `tools/render.sh` (exit 0, no typst warnings): 14 pages, the same count as the committed render; before the fixes below its text was identical to the committed PDF (not stale). Overlay rerun: same page map as before (cover 92%, conclusion 81%, body 22–56%).
+- Re-rendered `usage/OUTPUT-answering-brief.typst.pdf` with `tools/render.sh` (exit 0, no typst warnings): 14 pages, the same count as the committed render; before the fixes below its text was identical to the committed PDF (not stale). Overlay rerun: same page map as before (cover 92%, conclusion 81%, body 22–56%).
 - All 14 pages viewed at 60 dpi (pages 12–14 again after the fixes); the 14 overlay pages viewed at 40 dpi, and overlay page 1 (cover against the filed cover) at 150 dpi.
 - Fixed:
   - p. 7 (certificate of compliance), tier 1: the word count included the Statement in Support of Oral Argument, which FRAP 32(f) excludes. A top-level section whose heading names oral argument is now left out of the count: 1,199 became 1,146.

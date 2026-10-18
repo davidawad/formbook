@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ohsd-motion-brief-sharpvwilmington126cv00448.pdf` (8 pages)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (8 pages)
 - Court: United States District Court, Southern District of Ohio, Western Division at Cincinnati
 - Case: *Jessica Sharp, et al. v. City of Wilmington, Ohio, et al.* (removed from the Clinton County Court of Common Pleas)
 - Docket: No. 1:26-cv-00448-JPH (Judge Jeffery P. Hopkins), CourtListener docket 73298038, Document 8

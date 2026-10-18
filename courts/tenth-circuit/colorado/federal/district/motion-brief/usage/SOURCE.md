@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-cod-motion-brief-sussman126cv02065.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Court | United States District Court for the District of Colorado |
 | Case | *Sussman v. Miller* |
 | Docket no. | 1:26-cv-02065-MDB |

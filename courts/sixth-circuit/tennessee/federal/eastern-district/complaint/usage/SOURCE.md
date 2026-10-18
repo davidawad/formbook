@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-tned-complaint-simpsonexperian126cv00138.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Eastern District of Tennessee
 - Case: *Simpson v. Experian Information Solutions, Inc., et al.*
 - Docket: No. 1:26-cv-00138-CLC-CHS (Document 1)

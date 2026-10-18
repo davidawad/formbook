@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ared-motion-brief-campbellensurety426cv00387.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Eastern District of Arkansas, Central Division
 - Case: *Campbell v. Ensurety Ventures, LLC d/b/a Omega Auto Care*
 - Docket: No. 4:26-CV-387-LPR (Document 10)

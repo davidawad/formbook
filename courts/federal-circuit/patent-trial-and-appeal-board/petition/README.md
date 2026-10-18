@@ -5,9 +5,9 @@ Doc type `petition` of court `ptab` (Patent Trial and Appeal Board, `courts/fede
 **Status: rendered (render=ok), overlaid (overlay=ok), all 14 pages reviewed. Tier 2 is still open.** The rules require 14-point Times New Roman (37 C.F.R. § 42.6(a)(2)(ii)). Times New Roman is not vendored; the template uses Liberation Serif, the vendored metric-compatible stand-in (gap 1). Both filed exemplars are present and their source records are in `usage/SOURCE.md`. Tier 2 compares against the two exemplars; the open items are in the review below.
 
 ```sh
-sh tools/render.sh courts/federal-circuit/patent-trial-and-appeal-board/petition usage/INPUT-ptab-petition-salesforceipr.md   # -> usage/OUTPUT-ptab-petition-salesforceipr.typst.pdf
+sh tools/render.sh courts/federal-circuit/patent-trial-and-appeal-board/petition usage/INPUT-petition.md   # -> usage/OUTPUT-petition.typst.pdf
 sh tools/overlay.sh courts/federal-circuit/patent-trial-and-appeal-board/petition salesforce-ipr \
-  courts/federal-circuit/patent-trial-and-appeal-board/petition/usage/SAMPLE-ptab-petition-salesforcewsouipr202200154.pdf
+  courts/federal-circuit/patent-trial-and-appeal-board/petition/usage/FILED-EXAMPLE-petition.pdf
 # -> usage/OVERLAY-salesforce-ipr.pdf and .txt
 ```
 
@@ -18,7 +18,7 @@ The tools name outputs `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (the court-wide 
 | Item | Status |
 |---|---|
 | exemplar | yes: two filed petitions from two filers (Salesforce, Huawei) |
-| render | ok: `usage/OUTPUT-ptab-petition-salesforceipr.typst.pdf`, 14 pages, Liberation Serif embedded, no typst warnings |
+| render | ok: `usage/OUTPUT-petition.typst.pdf`, 14 pages, Liberation Serif embedded, no typst warnings |
 | overlay | ok: `usage/OVERLAY-salesforce-ipr.pdf` and `.txt`, against the Salesforce exemplar |
 | pages reviewed | 14 (every page of the render viewed as PNG at 70 dpi) |
 | typeface | face required: Times New Roman, 14-pt (§ 42.6(a)(2)(ii)) → vendored substitute: `Liberation Serif` (`fonts/liberation-serif`, metric-compatible, per `docs/FONTS.md`) → embedded: LiberationSerif only (`pdffonts`) |
@@ -27,10 +27,10 @@ The tools name outputs `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (the court-wide 
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-ptab-petition-salesforcewsouipr202200154.pdf` | Filed petition, Salesforce v. WSOU (IPR2022-00154). Used for the sample and the overlay. |
-| `usage/SAMPLE-ptab-petition-huaweiwsouipr202100689.pdf` | Filed petition, Huawei v. WSOU (IPR2021-00689). Second filer, for tier-2 comparison. |
+| `usage/FILED-EXAMPLE-petition.pdf` | Filed petition, Salesforce v. WSOU (IPR2022-00154). Used for the sample and the overlay. |
+| `usage/FILED-EXAMPLE-petition-2.pdf` | Filed petition, Huawei v. WSOU (IPR2021-00689). Second filer, for tier-2 comparison. |
 | `usage/SOURCE.md` | URL, case, filer, date, date fetched, search record for both. |
-| `usage/INPUT-ptab-petition-salesforceipr.md` | Markdown transcription of the Salesforce petition: cover data, introduction, mandatory notices, requirements, relief, overview, POSITA, claim construction, prior art, conclusion. About 2,100 words. |
+| `usage/INPUT-petition.md` | Markdown transcription of the Salesforce petition: cover data, introduction, mandatory notices, requirements, relief, overview, POSITA, claim construction, prior art, conclusion. About 2,100 words. |
 | `typst/main.typ` | Entry point; reads the sample and its YAML frontmatter. |
 | `typst/ptab-petition.typ` | Template: `petition(meta, body)`. Content-agnostic; every number traces to a rule (`PTAB-PET-…` IDs below). |
 
@@ -76,7 +76,7 @@ Body: `# Heading` is a level-1 section (numbered I., II. …, centered, capitals
 
 ## Review (Gate 2 equivalent, recorded)
 
-Rendered `usage/OUTPUT-ptab-petition-salesforceipr.typst.pdf` (14 pages: cover, contents i, body 1–10, word-count certificate, certificate of service) and viewed every page as PNG (70 dpi). Checked: page size, margins, double spacing, indents of paragraphs and of the claim quotation, heading styles and numbering, the bullet counsel list, running header, signature block, the conclusion kept with its signature block, and both certificates. No tier-1 layout defect found.
+Rendered `usage/OUTPUT-petition.typst.pdf` (14 pages: cover, contents i, body 1–10, word-count certificate, certificate of service) and viewed every page as PNG (70 dpi). Checked: page size, margins, double spacing, indents of paragraphs and of the claim quotation, heading styles and numbering, the bullet counsel list, running header, signature block, the conclusion kept with its signature block, and both certificates. No tier-1 layout defect found.
 
 Calibration (unchanged from the earlier draft): baseline pitch with Liberation Serif at 14 pt is 9.17 pt + `par.leading`; double spacing is `double-leading` = 1.64 em (about 32 pt pitch), which the render measures.
 
@@ -105,10 +105,10 @@ Tier-2 findings, compared against the two filed petitions (both are the same doc
 | Engine | Folder | State |
 |---|---|---|
 | typst (primary) | `typst/` | rendered and reviewed (above) |
-| docx | `docx/` | `.docx` built (`usage/OUTPUT-ptab-petition-salesforceipr.docx`); `.docx.pdf` BLOCKED; no page reviewed |
+| docx | `docx/` | `.docx` built (`usage/OUTPUT-petition.docx`); `.docx.pdf` BLOCKED; no page reviewed |
 | latex | none | not in this brief |
 
-Build: `sh docx/make-reference.sh docx/reference.docx` rebuilds the reference (committed). `sh tools/render.sh --engine docx courts/federal-circuit/patent-trial-and-appeal-board/petition usage/INPUT-ptab-petition-salesforceipr.md` writes the `.docx`; its LibreOffice step needs `soffice`.
+Build: `sh docx/make-reference.sh docx/reference.docx` rebuilds the reference (committed). `sh tools/render.sh --engine docx courts/federal-circuit/patent-trial-and-appeal-board/petition usage/INPUT-petition.md` writes the `.docx`; its LibreOffice step needs `soffice`.
 
 What matches typst (set in the XML; no rendered page has been seen yet):
 

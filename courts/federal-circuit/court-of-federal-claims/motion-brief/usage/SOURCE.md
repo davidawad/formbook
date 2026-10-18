@@ -12,7 +12,7 @@
 
 ## Exemplar 2 (added 2026-10-17, fb-595.21.1)
 
-- File: `SAMPLE-uscfc-motion-brief-unitedstates26458.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Case: *Sublime Systems, Inc. v. United States*, No. 1:26-cv-00458-EDK (U.S. Court of Federal Claims; Judge Kaplan), breach of a Department of Energy cooperative agreement (not a bid protest)
 - Docket / document: Doc. 11, "Defendant's Motion to Dismiss and in the Alternative Motion to Strike" (RCFC 12(b)(6) and 12(f)), with its appendix (Index to the Appendix p. 45, Appx pages pp. 46-92). Cover p. 1, table of authorities pp. 2-5 (i-iv), motion and argument pp. 6-43 (1-38), signature p. 44 (39). No table of contents and no certificate of service in the filing.
 - Filer: defendant the United States (U.S. Department of Justice, Civil Division, Commercial Litigation Branch; Matthew D. Lewis, Trial Attorney, signing; of counsel Brighton Springer, U.S. Department of Energy). Different party and counsel from exemplar 1 (Oracle America, Inc. / Arnold & Porter).
@@ -25,4 +25,4 @@
 
 ## Replacement for the audited scanned exemplar
 
-The audited `SAMPLE-uscfc-motion-brief-oracle181880c.pdf` (scanned pages with an OCR text layer) is replaced for font and text-layer comparison by the text-based `SAMPLE-uscfc-motion-brief-unitedstates26458.pdf`. See Exemplar 2 above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
+The audited `FILED-EXAMPLE-motion-brief.pdf` (scanned pages with an OCR text layer) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-motion-brief-2.pdf`. See Exemplar 2 above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

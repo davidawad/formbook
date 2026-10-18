@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/california/federal/bankruptcy-northern-district/ad
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-canb-adversary-complaint-appalachian23305642603029.pdf` (31 pages, one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-canb-adversary-complaint-appalachian.md` (a portion of the complaint: caption and counsel, nature of the action, jurisdiction, parties, first cause of action, prayer, jury demand, signature) |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (31 pages, one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (a portion of the complaint: caption and counsel, nature of the action, jurisdiction, parties, first cause of action, prayer, jury demand, signature) |
 | typeface | face required: none. Civil L.R. 3-4(c)(2)(A) asks for "a standard, proportionally spaced font (e.g., Times New Roman or Century Schoolbook)"; the names are examples. Vendored font kept: **EB Garamond** (no substitute switch; see Typeface below) |
-| render | ok: `usage/OUTPUT-canb-adversary-complaint-appalachian.typst.pdf`, 9 pages, typst 0.15.0 (micromamba, 2026-10-15), vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Bold, BoldItalic embedded), zero warnings (`tools/render.sh`) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 9 pages, typst 0.15.0 (micromamba, 2026-10-15), vendored EB Garamond only (`pdffonts`: EBGaramond Regular, Bold, BoldItalic embedded), zero warnings (`tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-appalachian-adversary-complaint.pdf` and `.txt` (`tools/overlay.sh`), run 2026-10-15 against `usage/SAMPLE-…pdf`, re-fetched from the URL in `usage/SOURCE.md` (the file was missing from the snapshot) |
 | pages reviewed | 9 of 9 (every page rasterised at 60 dpi and viewed on 2026-10-15; the page layout is unchanged from the earlier review) |
 | tier 2 | not judged against 2 or 3 filers yet: one exemplar only (see Known gaps 1) |

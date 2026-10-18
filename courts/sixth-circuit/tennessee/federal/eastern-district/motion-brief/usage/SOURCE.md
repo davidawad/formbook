@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-tned-motion-brief-brockingtonsweetemmaline126cv00065.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Eastern District of Tennessee, at Chattanooga
 - Case: *Brockington v. Sweet Emmaline Cheesecakes Franchise, LLC*
 - Docket: No. 1:26-cv-00065-TRM-MJD (Document 11, the memorandum; the motion to dismiss is Document 10)
@@ -17,7 +17,7 @@ Second filer: not collected. The search also returned ABC IP, LLC v. Hoffman, No
 
 ## Additional filer (second tier-2 exemplar)
 
-- File: `SAMPLE-tned-motion-brief-abciphoffman125cv00389.pdf` (23 pages; text layer present)
+- File: `FILED-EXAMPLE-motion-brief-2.pdf` (23 pages; text layer present)
 - Case: *ABC IP, LLC, et al. v. Hoffman, et al.*, No. 1:25-cv-00389-CLC-CHS
 - Document: Defendants' Brief in Support of Partial Motion to Dismiss (Document 50)
 - Filer: Defendants Timothy Hoffman and Hoffman Tactical, LLC, by counsel

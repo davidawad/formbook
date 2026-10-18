@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-flmd-motion-brief-phillip826cv02634.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Middle District of Florida, Tampa Division
 - Case: *Phillip v. The Michaels Organization, LLC, et al.*
 - Docket: No. 8:26-cv-02634-SDM-AEP (Document 17)

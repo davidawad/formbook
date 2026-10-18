@@ -4,9 +4,9 @@ Status: exemplar found, template built and rendered, sample reviewed page by pag
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-cadc-opening-brief-centrovbessent255181.pdf` | Filed appellants' principal brief, No. 25-5181 (June 27, 2025). Provenance in `usage/SOURCE.md`. |
-| `usage/INPUT-cadc-opening-brief-centro.md` | Transcription of the exemplar: frontmatter with its cover, certificate, glossary, authorities and signature, and a portion of the body (introduction through the start of argument, then conclusion). |
-| `usage/OUTPUT-cadc-opening-brief-centro.typst.pdf` | Render of the sample. 15 pages. |
+| `usage/FILED-EXAMPLE-opening-brief.pdf` | Filed appellants' principal brief, No. 25-5181 (June 27, 2025). Provenance in `usage/SOURCE.md`. |
+| `usage/INPUT-opening-brief.md` | Transcription of the exemplar: frontmatter with its cover, certificate, glossary, authorities and signature, and a portion of the body (introduction through the start of argument, then conclusion). |
+| `usage/OUTPUT-opening-brief.typst.pdf` | Render of the sample. 15 pages. |
 | `usage/OVERLAY-centro-opening-brief.pdf`, `-overlay.txt` | Red/blue overlay of the render on the exemplar, and the page map. |
 | `typst/cadc-opening-brief.typ` | The template: `dc-brief(meta, body)`. Content-agnostic; every number is a named parameter at the top. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
@@ -14,7 +14,7 @@ Status: exemplar found, template built and rendered, sample reviewed page by pag
 Build (from the repo root; the vendored fonts only):
 
 ```sh
-sh tools/render.sh courts/dc-circuit/court-of-appeals/opening-brief usage/INPUT-cadc-opening-brief-centro.md
+sh tools/render.sh courts/dc-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md
 sh tools/overlay.sh courts/dc-circuit/court-of-appeals/opening-brief centro-opening-brief
 ```
 
@@ -84,7 +84,7 @@ Page map (`usage/OVERLAY-centro-opening-brief.txt`): sample p.1 → exemplar p.1
 
 ## Review record (Gate 2)
 
-Re-reviewed 2026-10-15 after the font change to TeX Gyre Schola: every page of `usage/OUTPUT-cadc-opening-brief-centro.typst.pdf` (15 pages) was rendered at 60 dpi and viewed, checked against the exemplar's layout and the rules above. The table is that review. Before the change the render was 14 pages in EB Garamond; the body now runs one page longer.
+Re-reviewed 2026-10-15 after the font change to TeX Gyre Schola: every page of `usage/OUTPUT-opening-brief.typst.pdf` (15 pages) was rendered at 60 dpi and viewed, checked against the exemplar's layout and the rules above. The table is that review. Before the change the render was 14 pages in EB Garamond; the body now runs one page longer.
 
 | Page | Content | Finding |
 |---|---|---|
@@ -137,15 +137,15 @@ Three engines per doc type (`docs/EVAL-LOOP.md`, "Engines"). The typst template 
 
 | Engine | Folder | Output | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `usage/OUTPUT-cadc-opening-brief-centro.typst.pdf` | rendered, reviewed (Known gaps above) |
-| latex | `latex/` (`render.sh`, `template.tex`, `cadc.lua`) | `usage/OUTPUT-cadc-opening-brief-centro.latex.pdf` | rendered, 15 pages, same count as typst |
-| docx | `docx/` (`reference.docx`, `cadc.lua`, `make-reference.sh`) | `usage/OUTPUT-cadc-opening-brief-centro.docx` | `.docx` written and XML-validated; `.docx.pdf` not produced (see below) |
+| typst (primary) | `typst/` | `usage/OUTPUT-opening-brief.typst.pdf` | rendered, reviewed (Known gaps above) |
+| latex | `latex/` (`render.sh`, `template.tex`, `cadc.lua`) | `usage/OUTPUT-opening-brief.latex.pdf` | rendered, 15 pages, same count as typst |
+| docx | `docx/` (`reference.docx`, `cadc.lua`, `make-reference.sh`) | `usage/OUTPUT-opening-brief.docx` | `.docx` written and XML-validated; `.docx.pdf` not produced (see below) |
 
 Build:
 
 ```sh
-sh tools/render.sh --engine latex courts/dc-circuit/court-of-appeals/opening-brief usage/INPUT-cadc-opening-brief-centro.md
-sh tools/render.sh --engine docx courts/dc-circuit/court-of-appeals/opening-brief usage/INPUT-cadc-opening-brief-centro.md
+sh tools/render.sh --engine latex courts/dc-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md
+sh tools/render.sh --engine docx courts/dc-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md
 ```
 
 `latex/render.sh` runs tectonic until the aux and toc files settle, so the table of contents and table of authorities carry the page numbers of the PDF. `tools/render-latex.sh` alone (single pass) would print placeholder page numbers and must not be used for this engine.
@@ -163,7 +163,7 @@ sh tools/render.sh --engine docx courts/dc-circuit/court-of-appeals/opening-brie
 
 ## Verification pass 2026-10-16 (fb-595.26.12)
 
-- Rendered: `sh tools/render.sh .../opening-brief usage/INPUT-cadc-opening-brief-centro.md` exits 0, no typst warnings, 15 pages (the committed PDF had been 14 pages and was stale; the 15-page review above matches the re-render). Overlay rerun: same page map as above; overlaps unchanged except p.12 (71.7%) and p.13 (33.3%), where the conclusion moved to the signature page.
+- Rendered: `sh tools/render.sh .../opening-brief usage/INPUT-opening-brief.md` exits 0, no typst warnings, 15 pages (the committed PDF had been 14 pages and was stale; the 15-page review above matches the re-render). Overlay rerun: same page map as above; overlaps unchanged except p.12 (71.7%) and p.13 (33.3%), where the conclusion moved to the signature page.
 - Viewed: all 15 pages at 60 dpi before the fixes, the changed pages after each fix, and all 15 pages of the final render; all 15 overlay pages at 40 dpi (contact sheet); exemplar pages 1-8 against our cover, certificate, contents and authorities.
 - Fixed (tier 2), in `typst/cadc-opening-brief.typ`:
   - Certificate of parties: paragraphs ran together (no indent, no gap). They now take the body's first-line indent, as in the exemplar.

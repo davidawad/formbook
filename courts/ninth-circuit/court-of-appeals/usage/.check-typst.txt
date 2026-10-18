@@ -1,3 +1,3 @@
 PASS
-95c749dca5874da1f51503a6601e5f146df009177ad233c5ab313b5391dab27c  usage/OUTPUT-ca9-genericopeningbrief.typst.pdf
-65c4b138e1daa70d68d20ec9e634b6b5513949cdea285c21a11b3a22919a307f  usage/OUTPUT-ca9-sweetopeningbrief.typst.pdf
+95c749dca5874da1f51503a6601e5f146df009177ad233c5ab313b5391dab27c  usage/OUTPUT-opening-brief-2.typst.pdf
+65c4b138e1daa70d68d20ec9e634b6b5513949cdea285c21a11b3a22919a307f  usage/OUTPUT-opening-brief.typst.pdf

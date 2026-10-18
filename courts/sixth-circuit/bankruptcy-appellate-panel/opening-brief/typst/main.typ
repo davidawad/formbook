@@ -4,7 +4,7 @@
 //     typst/main.typ out.pdf
 #import "bap6-opening-brief.typ": *
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-bap6-opening-brief-chieftainsteel198005.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-opening-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #show: brief-style
 #brief(meta, body)

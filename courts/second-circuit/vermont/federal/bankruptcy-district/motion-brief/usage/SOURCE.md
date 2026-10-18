@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-vtb-motion-brief-rcdioceseburlington2601005.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Court: United States Bankruptcy Court, District of Vermont
 - Case: *The Official Committee of Unsecured Creditors v. Roman Catholic Diocese of Burlington, Vermont*, Adv. No. 26-01005, in the chapter 11 case *In re Roman Catholic Diocese of Burlington, Vermont*, No. 24-10205-HZC
 - Document: Diocese's Motion to Dismiss Complaint (Doc. 11, 9 pages; the docket text reads "Motion to Dismiss Adversary Proceeding")
@@ -11,9 +11,9 @@
 - Text layer: yes (`pdftotext` yields text; Times New Roman and Times New Roman Bold/Italic embedded, with Courier and Liberation Sans for the caption and headers)
 - Public court record (RECAP). Used as a structural and content reference; the sample transcribes it (see `../README.md`).
 
-## 2. SAMPLE-vtb-motion-brief-parishdefendants2601005.pdf
+## 2. FILED-EXAMPLE-motion-brief.pdf
 
-- File: `SAMPLE-vtb-motion-brief-parishdefendants2601005.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, District of Vermont
 - Case: *The Official Committee of Unsecured Creditors v. Roman Catholic Diocese of Burlington, Vermont, et al.*, Adv. Proc. No. 26-01005 hzc, in the chapter 11 case *In re Roman Catholic Diocese of Burlington, Vermont*, No. 24-10205 hzc
 - Document: Motion to Dismiss and Supporting Memorandum of Law (Doc. 13, 15 pages; motion and memorandum named together in the title, as Vt. LBR 9013-5(a) requires for a single document)

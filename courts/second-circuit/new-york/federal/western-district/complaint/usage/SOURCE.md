@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nywd-complaint-kerrick626cv06006.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Western District of New York
 - Case: *Kerrick v. Town of Gorham*, No. 6:26-cv-06006 (MAV)
 - Docket: No. 6:26-cv-06006 (Document 1-2; the complaint, filed as attachment 2 to Document 1; Document 1-1 is the JS-44 civil cover sheet)
@@ -16,7 +16,7 @@ Second filer: not collected in this pass. The brief asks for one exemplar per do
 
 ## 2. Second filer (added 2026-10-17)
 
-- File: `SAMPLE-nywd-complaint-nifla124cv00514.pdf`
+- File: `FILED-EXAMPLE-complaint-2.pdf`
 - Court: United States District Court, Western District of New York
 - Case: *National Institute for Family and Life Advocates v. James*, No. 1:24-cv-00514 (JLS)
 - Docket: Document 1 (stamped "Case 1:24-cv-00514-JLS Document 1 Filed 05/24/24 Page N of 70")

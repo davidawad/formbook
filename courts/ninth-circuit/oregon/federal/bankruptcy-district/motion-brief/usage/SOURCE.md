@@ -2,7 +2,7 @@
 
 | File | Court | Case / adversary | Filer | Filed | Fetched | URL |
 |---|---|---|---|---|---|---|
-| `SAMPLE-orb-motion-brief-sheehy2603009.pdf` | United States Bankruptcy Court, D. Oregon | In re Kevin Marcel Sheehy, Originating Case No. 25-33351-thp7; Adv. Proc. No. 26-03009-thp (Dirksen v. Sheehy) | James Dirksen, individually and as authorized representative of Equity Trust Company James Dirksen IRA 200200966 (counsel: Elevate Law Group, Nicholas J. Henderson, OSB No. 074027) | 2026-04-22 (ECF Doc 21, 5 pages) | 2026-10-14 | https://storage.courtlistener.com/recap/gov.uscourts.orb.543652/gov.uscourts.orb.543652.21.0.pdf |
+| `FILED-EXAMPLE-motion-brief.pdf` | United States Bankruptcy Court, D. Oregon | In re Kevin Marcel Sheehy, Originating Case No. 25-33351-thp7; Adv. Proc. No. 26-03009-thp (Dirksen v. Sheehy) | James Dirksen, individually and as authorized representative of Equity Trust Company James Dirksen IRA 200200966 (counsel: Elevate Law Group, Nicholas J. Henderson, OSB No. 074027) | 2026-04-22 (ECF Doc 21, 5 pages) | 2026-10-14 | https://storage.courtlistener.com/recap/gov.uscourts.orb.543652/gov.uscourts.orb.543652.21.0.pdf |
 
 Docket page: https://www.courtlistener.com/docket/72170996/dirksen-v-sheehy/ (RECAP, court `orb`).
 

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-oknd-motion-brief-gideon425cv00450.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Northern District of Oklahoma
 - Case: *Gideon v. McCall, et al.*
 - Docket: No. 4:25-cv-00450-JFH-JFJ (Document 43)

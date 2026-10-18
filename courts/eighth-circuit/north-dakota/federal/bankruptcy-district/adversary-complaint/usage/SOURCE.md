@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-ndb-adversary-complaint-bourbonstreet2307012.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ndb.45169/gov.uscourts.ndb.45169.1.0.pdf (RECAP; docket page https://www.courtlistener.com/docket/67758638/bourbon-street-llc-adversary-proceeding/) |
 | Court | United States Bankruptcy Court, District of North Dakota (`ndb`) |
 | Case | *Bourbon Street LLC v. Byzfunder NY LLC d/b/a Byzfunder*, Adversary No. 23-07012 (main case In re Bourbon Street LLC, Bky. No. 23-30246, Chapter 11, Subchapter V) |

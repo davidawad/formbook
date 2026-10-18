@@ -27,12 +27,12 @@ Not used, and why:
 
 ## Exemplar
 
-- `usage/SAMPLE-kywb-adversary-complaint-keatsvspecialized2103007.pdf`: Complaint to Recover Preferential Transfers, Robert W. Keats, Chapter 7 Trustee v. Specialized Attorney Services Inc., Adv. Proc. No. 21-03007-acs (main case No. 19-30311-acs, jointly administered). Filed January 26, 2021 by the trustee's counsel, Fowler Bell PLLC. 8 pages.
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf`: Complaint to Recover Preferential Transfers, Robert W. Keats, Chapter 7 Trustee v. Specialized Attorney Services Inc., Adv. Proc. No. 21-03007-acs (main case No. 19-30311-acs, jointly administered). Filed January 26, 2021 by the trustee's counsel, Fowler Bell PLLC. 8 pages.
 - Provenance, searches and the caveat are in `usage/SOURCE.md`.
 
 ## Sample
 
-- `usage/INPUT-kywb-adversary-complaint-keatsvspecialized.md`: a transcription of the whole filing, all 26 allegations under the three headings (Nature of the Case, Jurisdiction and Venue, Background; Count I; Count II), the relief requested, the signature block and Exhibit A. The frontmatter carries the caption fields, the signature and the exhibit table (`exhibits`). Lines beginning `~ ` are unnumbered (the lead-in and the prayer's "WHEREFORE"). Relief items are a markdown ordered list, lettered A., B., C. by the template.
+- `usage/INPUT-adversary-complaint.md`: a transcription of the whole filing, all 26 allegations under the three headings (Nature of the Case, Jurisdiction and Venue, Background; Count I; Count II), the relief requested, the signature block and Exhibit A. The frontmatter carries the caption fields, the signature and the exhibit table (`exhibits`). Lines beginning `~ ` are unnumbered (the lead-in and the prayer's "WHEREFORE"). Relief items are a markdown ordered list, lettered A., B., C. by the template.
 - The frontmatter comment records what is not transcribed: the ECF header and footer and the document-control number on the last page are system output and not reproduced.
 - Transcription check: the text was copied from the PDF text layer and checked against the source by eye; the only known text-layer oddity is "to the 2 Acquired Firm Shareholders" in ¶7, transcribed as printed. The Exhibit A total is transcribed as printed ("$245,955.065"); see gaps.
 
@@ -41,11 +41,11 @@ Not used, and why:
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
 cd /work/repo
-sh tools/render.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-kywb-adversary-complaint-keatsvspecialized.md
+sh tools/render.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-adversary-complaint.md
 sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/adversary-complaint keats-v-specialized
 ```
 
-- `usage/OUTPUT-kywb-adversary-complaint-keatsvspecialized.typst.pdf`: 7 pages. Typst compiled with no warnings (`render.sh` fails on any warning). `pdffonts`: EBGaramond-Regular and -Bold only, embedded. Named `OUTPUT-` (the name `tools/render.sh` writes by default and `tools/overlay.sh` reads); the brief's `<id>.pdf` name was not used because the tool contract is fixed.
+- `usage/OUTPUT-adversary-complaint.typst.pdf`: 7 pages. Typst compiled with no warnings (`render.sh` fails on any warning). `pdffonts`: EBGaramond-Regular and -Bold only, embedded. Named `OUTPUT-` (the name `tools/render.sh` writes by default and `tools/overlay.sh` reads); the brief's `<id>.pdf` name was not used because the tool contract is fixed.
 - `usage/OVERLAY-keats-v-specialized.pdf` and `OVERLAY-keats-v-specialized.txt`: red = our render, blue = exemplar, black = both. The page map pairs pages by word overlap: ours p.1–3 ↔ filed p.1–3 (76–83%); ours p.4 ↔ p.4 (55%); p.5–6 ↔ p.5–6 (49%, 48%); p.7 ↔ p.8 (63%, our page 7 is the exhibit, the filed exhibit is page 8). The overlay is a diagnostic, not a score: the filing is set in a different face and at a different line length, so text lines will not coincide.
 
 ## Visual review (Gate 2 record: all 7 pages, final render at 60 dpi, looked at)
@@ -75,7 +75,7 @@ sh tools/overlay.sh courts/sixth-circuit/kentucky/federal/bankruptcy-western-dis
 
 ## Engines
 
-The docx engine (`docx/`) is built, and its `.docx` renders, but its LibreOffice PDF was not made (see BLOCKED). Build: `sh docx/build-reference.sh docx/reference.docx` (pandoc default reference, styles and footer replaced). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-kywb-adversary-complaint-keatsvspecialized.md`, which writes `usage/OUTPUT-kywb-adversary-complaint-keatsvspecialized.docx` and then fails at the `soffice` step. `docx/render.sh` (called by `tools/render-docx.sh`) runs pandoc with `docx/kywb-adversary-complaint.lua`, puts back the reference's styles and page setup, and checks the zip and XML parts.
+The docx engine (`docx/`) is built, and its `.docx` renders, but its LibreOffice PDF was not made (see BLOCKED). Build: `sh docx/build-reference.sh docx/reference.docx` (pandoc default reference, styles and footer replaced). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-adversary-complaint.md`, which writes `usage/OUTPUT-adversary-complaint.docx` and then fails at the `soffice` step. `docx/render.sh` (called by `tools/render-docx.sh`) runs pandoc with `docx/kywb-adversary-complaint.lua`, puts back the reference's styles and page setup, and checks the zip and XML parts.
 
 What matches the typst form (set in `docx/reference.docx`; read from its XML, not from a rendering):
 

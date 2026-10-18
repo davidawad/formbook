@@ -2,7 +2,7 @@
 
 Two filed briefs in support of a Rule 12(b) motion, from two filers (EVAL-LOOP tier 2 wants two or three).
 
-## 1. `SAMPLE-gand-motion-brief-durand126cv03458.pdf` (primary; used for the sample)
+## 1. `FILED-EXAMPLE-motion-brief.pdf` (primary; used for the sample)
 
 - Court: United States District Court, Northern District of Georgia (Atlanta Division)
 - Case: *Durand v. Hayes*, No. 1:26-cv-03458-SDG (Document 17)
@@ -14,7 +14,7 @@ Two filed briefs in support of a Rule 12(b) motion, from two filers (EVAL-LOOP t
 - Text layer: yes. Times New Roman embedded.
 - Public court record (RECAP). Used only as a visual and structural reference.
 
-## 2. `SAMPLE-gand-motion-brief-electronicmaintenance126cv03121memorandum.pdf` (second filer; not used for the sample)
+## 2. `FILED-EXAMPLE-motion-brief-2.pdf` (second filer; not used for the sample)
 
 - Court: United States District Court, Northern District of Georgia (Atlanta Division)
 - Case: *Electronic Maintenance Associates, Inc. v. First Horizon Bank Corp.*, No. 1:26-cv-03121-ELR (Document 4-1)

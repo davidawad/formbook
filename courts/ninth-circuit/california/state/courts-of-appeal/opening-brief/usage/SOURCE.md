@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-calctapp-opening-brief-kirkvcityofmorganhillh048745.pdf` |
+| File | `FILED-EXAMPLE-opening-brief.pdf` |
 | Court | Court of Appeal of the State of California, Sixth Appellate District |
 | Case | *G. Mitchell Kirk, et al. v. City of Morgan Hill, et al.* |
 | Court of Appeal case no. | H048745 (superior court no. 19CV346360, Santa Clara County) |
@@ -20,7 +20,7 @@ Only one filer is available so far. The eval loop wants 2 or 3 exemplars from di
 
 | File | SHA-256 |
 |---|---|
-| `SAMPLE-calctapp-opening-brief-kirkvcityofmorganhillh048745.pdf` | `1531b7f0181fbeda4beb56877ea4c8ddf45c5291a39e5e0955f1a63dfb48d199` |
+| `FILED-EXAMPLE-opening-brief.pdf` | `1531b7f0181fbeda4beb56877ea4c8ddf45c5291a39e5e0955f1a63dfb48d199` |
 
 ## Opening-brief replacement identified; file retrieval blocked
 

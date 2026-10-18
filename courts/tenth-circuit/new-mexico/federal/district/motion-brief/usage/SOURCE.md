@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nmd-motion-brief-turner126cv03220.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court for the District of New Mexico (`nmd`)
 - Case: *Turner v. City of Rio Rancho* (removed from the state court; joint caption with Sandoval County as co-defendant)
 - Docket: No. 1:26-cv-03220 JMR/GJF (Document 5)

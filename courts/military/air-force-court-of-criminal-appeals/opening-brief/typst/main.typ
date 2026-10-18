@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "afcca-opening-brief.typ": afcca-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-afcca-opening-brief-douglas.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-opening-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #afcca-brief(meta, body)

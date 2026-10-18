@@ -20,13 +20,13 @@ font:
 
 samples:
   - id: sweet
-    md: usage/INPUT-ca9-sweetopeningbrief.md
-    pdf: usage/OUTPUT-ca9-sweetopeningbrief.typst.pdf
-    exemplar: usage/SAMPLE-ca9-sweetvmcmahon261136openingbrief.pdf
+    md: usage/INPUT-opening-brief.md
+    pdf: usage/OUTPUT-opening-brief.typst.pdf
+    exemplar: usage/FILED-EXAMPLE-opening-brief.pdf
   - id: generic
-    md: usage/INPUT-ca9-genericopeningbrief.md
-    pdf: usage/OUTPUT-ca9-genericopeningbrief.typst.pdf
-    exemplar: usage/SAMPLE-ca9-sweetvmcmahon261136openingbrief.pdf
+    md: usage/INPUT-opening-brief-2.md
+    pdf: usage/OUTPUT-opening-brief-2.typst.pdf
+    exemplar: usage/FILED-EXAMPLE-opening-brief.pdf
 
 # Numbers the checks use. Each is a rule or a stated tolerance, never a measurement off the exemplar.
 params:

@@ -6,9 +6,9 @@ A respondent's brief on appeal to the Board. The template was built from the rul
 
 | Item | Result |
 |---|---|
-| Exemplar | yes: `usage/SAMPLE-bia-brief-on-appeal-abredacted.pdf` (*Matter of A-B-*, respondent's brief filed 2019-12-16; public copy, docket redacted). Source and rejected candidates in [`usage/SOURCE.md`](usage/SOURCE.md). |
+| Exemplar | yes: `usage/FILED-EXAMPLE-brief-on-appeal.pdf` (*Matter of A-B-*, respondent's brief filed 2019-12-16; public copy, docket redacted). Source and rejected candidates in [`usage/SOURCE.md`](usage/SOURCE.md). |
 | Typeface | Times New Roman (preferred, ch. 3.3(c)(7)) → **Liberation Serif** (vendored, metric-compatible; `docs/FONTS.md`). Embedded per `pdffonts`: LiberationSerif Regular, Bold, Italic. No EB Garamond. |
-| Render | ok: `usage/OUTPUT-bia-brief-on-appeal-ab20191216.typst.pdf`, 13 pages (was 12 in EB Garamond: the body grew from 9 to 10 pages, certificate now p. 13). `sh tools/render.sh` exited 0 with no typst warnings. |
+| Render | ok: `usage/OUTPUT-brief-on-appeal.typst.pdf`, 13 pages (was 12 in EB Garamond: the body grew from 9 to 10 pages, certificate now p. 13). `sh tools/render.sh` exited 0 with no typst warnings. |
 | Overlay | ok: `usage/OVERLAY-AB-2019-12-16.pdf` and `.txt`. `sh tools/overlay.sh` wrote both. Pairs: our pp. 1–12 with filed pp. 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 52. Our p. 13 (certificate) has no filed counterpart. |
 | Pages reviewed | 13 of 13, each page rendered to PNG at 60 dpi and looked at after the font change. |
 
@@ -57,14 +57,14 @@ Verified 2026-10-14. Sources:
 
 - `typst/main.typ`: entry point. Reads `--input sample=...`, splits the frontmatter, calls the template.
 - `typst/bia-brief-on-appeal.typ`: the template, `bia-brief(meta, md)`. Parameters at the top, each with its rule.
-- `usage/SAMPLE-bia-brief-on-appeal-abredacted.pdf`: the filed brief (public copy). `usage/SOURCE.md` has its URL, filer, date and checksum.
-- `usage/INPUT-bia-brief-on-appeal-ab20191216.md`: transcription of the exemplar (frontmatter plus body).
-- `usage/OUTPUT-bia-brief-on-appeal-ab20191216.typst.pdf`: render. Command: `sh tools/render.sh courts/national/board-of-immigration-appeals/brief-on-appeal usage/INPUT-bia-brief-on-appeal-ab20191216.md`.
+- `usage/FILED-EXAMPLE-brief-on-appeal.pdf`: the filed brief (public copy). `usage/SOURCE.md` has its URL, filer, date and checksum.
+- `usage/INPUT-brief-on-appeal.md`: transcription of the exemplar (frontmatter plus body).
+- `usage/OUTPUT-brief-on-appeal.typst.pdf`: render. Command: `sh tools/render.sh courts/national/board-of-immigration-appeals/brief-on-appeal usage/INPUT-brief-on-appeal.md`.
 - `usage/OVERLAY-AB-2019-12-16.pdf` and `.txt`: overlay and page map. Command: `sh tools/overlay.sh courts/national/board-of-immigration-appeals/brief-on-appeal AB-2019-12-16`.
 
 ## Engines
 
-**docx** (`docx/`: `reference.docx` from `build-reference.sh`, `bia.lua`, `render.sh`). Render: `sh tools/render.sh --engine docx <folder> usage/INPUT-bia-brief-on-appeal-ab20191216.md`. Output: `usage/OUTPUT-bia-brief-on-appeal-ab20191216.docx` and `.docx.pdf` (LibreOffice). Pages checked: 13 of 13, each rendered at 60 dpi and compared with the typst copy.
+**docx** (`docx/`: `reference.docx` from `build-reference.sh`, `bia.lua`, `render.sh`). Render: `sh tools/render.sh --engine docx <folder> usage/INPUT-brief-on-appeal.md`. Output: `usage/OUTPUT-brief-on-appeal.docx` and `.docx.pdf` (LibreOffice). Pages checked: 13 of 13, each rendered at 60 dpi and compared with the typst copy.
 
 - **Matches typst:** Liberation Serif 12 pt; double spacing at an exact 28.75 pt pitch (measured from the typst render); 1 in margins on US letter; first-line indent on body paragraphs, none on the first paragraph after a heading; H1 bold caps, left, 17 pt (typst 1.4 em); footnotes 12 pt, single spaced; footer with the page number centred and `A#` at the right; cover and contents unnumbered; body numbered from the Introduction as page 1; certificate of service on its own page; signature block and counsel block as in typst.
 - **Differs:** the counsel block sits in a frame at the foot of the cover, and its role line ("Counsel for Respondent") sits under it, not beside it at the top right. The custody box is in the top-right table cell, about 0.4 in lower than in typst. Lists are double spaced (typst's list pitch is tighter; the Manual prefers double spacing). Page breaks differ in places (Word and LibreOffice keep-with-next and widow rules), so the body runs to 13 pages in both, with different breaks.

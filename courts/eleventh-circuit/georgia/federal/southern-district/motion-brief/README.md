@@ -5,9 +5,9 @@ Folder: `courts/eleventh-circuit/georgia/federal/southern-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-gasd-motion-brief-harper125cv00203.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-gasd-motion-brief-harpermemorandummtd.md`: caption, Introduction, Statement of Facts, Argument A to I (all headings; paragraphs abbreviated in part, see Known gaps), Conclusion, signature, certificate of service |
-| render | ok: `usage/OUTPUT-gasd-motion-brief-harpermemorandummtd.typst.pdf`, 11 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: caption, Introduction, Statement of Facts, Argument A to I (all headings; paragraphs abbreviated in part, see Known gaps), Conclusion, signature, certificate of service |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, `tools/render.sh`, vendored EB Garamond only, no typst warnings |
 | overlay | ok: `usage/OVERLAY-harper-memorandum-mtd.pdf` and `usage/OVERLAY-harper-memorandum-mtd.txt` (page map) |
 | typeface | face required: none named by the S.D. Ga. rules (LR 5.4, LR 10.1, LR 83.6; text checked 2026-10-14). Substitute: none; EB Garamond kept, since the court names no face (`docs/FONTS.md`). Fit: n/a |
 | pages reviewed | 11 of 11 (re-rendered and every page rasterized at 70 dpi and viewed on 2026-10-14) |
@@ -62,7 +62,7 @@ File names: as in the complaint folder, the tools' default names (`OUTPUT-`, `OV
 
 ## Engines
 
-Typst (`typst/`) is the reference. The docx engine is `docx/`: `reference.docx` (rebuilt by `sh docx/make-reference.sh`) and `docx/gasd-motion-brief.lua`, which builds the court title, caption, title, numbered headings, signature block and certificate of service from the sample's frontmatter. Output: `usage/OUTPUT-gasd-motion-brief-harpermemorandummtd.docx`.
+Typst (`typst/`) is the reference. The docx engine is `docx/`: `reference.docx` (rebuilt by `sh docx/make-reference.sh`) and `docx/gasd-motion-brief.lua`, which builds the court title, caption, title, numbered headings, signature block and certificate of service from the sample's frontmatter. Output: `usage/OUTPUT-motion-brief.docx`.
 
 - **Matches typst** (same settings in both templates): US Letter, 1-inch margins, EB Garamond 12 pt; double spacing as an exact 24 pt line pitch, 16.2 pt between paragraphs; single-spaced caption, quotations, signature and address blocks; the caption as a borderless three-column table (3.1 in, 0.3 in, 3.1 in); "- N -" centered in the footer on every page; first-line indent 0.5 in; quotations indented 0.75 in on both sides; footnotes in 12 pt single spacing (Word-native footnotes); signature block at 3.2 in; the certificate of service on its own page with the caption repeated (LR 5.1).
 - **Differs from typst**:

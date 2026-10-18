@@ -6,8 +6,8 @@
 
 | Gate | Result |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nyappdiv-opening-brief-hussaincr231493.pdf` (Third Dept, NYSCEF Doc. 39, filed 2024-03-29; see `usage/SOURCE.md`) |
-| render | ok: `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/opening-brief usage/INPUT-nyappdiv-opening-brief-synthetic.md`, 11 pages, EB Garamond only, no typst warnings (2026-10-16) |
+| exemplar | yes: `usage/FILED-EXAMPLE-opening-brief.pdf` (Third Dept, NYSCEF Doc. 39, filed 2024-03-29; see `usage/SOURCE.md`) |
+| render | ok: `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/opening-brief usage/INPUT-opening-brief.md`, 11 pages, EB Garamond only, no typst warnings (2026-10-16) |
 | overlay | ok: `sh tools/overlay.sh …/opening-brief synthetic-opening-brief`, wrote `usage/OVERLAY-synthetic-opening-brief.pdf` and `.txt` (2026-10-16) |
 | pages reviewed | 11 of 11 (every page rasterized at 60 dpi and viewed, 2026-10-16). Exemplar: pages 1–48 viewed as contact sheets (2026-10-15); 49–93 not viewed |
 
@@ -43,7 +43,7 @@ What the exemplar settled (and what the template now does):
 
 ## Verification pass 2026-10-16 (fb-595.26.22)
 
-- Render: `sh tools/render.sh …/opening-brief usage/INPUT-nyappdiv-opening-brief-synthetic.md`, exit 0, no typst warnings, 11 pages, EB Garamond Regular/Bold/Italic only (`pdffonts`). The committed PDF before this pass was stale (9 pages); the README's 11 pages was right.
+- Render: `sh tools/render.sh …/opening-brief usage/INPUT-opening-brief.md`, exit 0, no typst warnings, 11 pages, EB Garamond Regular/Bold/Italic only (`pdffonts`). The committed PDF before this pass was stale (9 pages); the README's 11 pages was right.
 - Pages viewed: 11 of 11 at 60 dpi, before and after the fixes. Exemplar page 1 viewed against our cover. Overlay pages viewed as a 40 dpi contact sheet and page 1 singly.
 - Overlay: `sh tools/overlay.sh …/opening-brief synthetic-opening-brief`, exit 0. Pairs cover, TOC and TOA with exemplar pages 1–3 (13–27% overlap); body pages pair with unrelated exemplar pages (9–19%), as expected for a synthetic sample.
 - Defects fixed:
@@ -60,10 +60,10 @@ What the exemplar settled (and what the template now does):
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `nyappdiv-brief`. |
 | `typst/nyappdiv-opening-brief.typ` | Template. Parameter block at the top: `court-lines`, `word-limit` (14,000), `footnotes-allowed` (false), `required-sections`. |
-| `usage/INPUT-nyappdiv-opening-brief-synthetic.md` | Markdown contract sample, invented parties and record cites; structure follows the exemplar; labelled SYNTHETIC in its frontmatter. |
-| `usage/OUTPUT-nyappdiv-opening-brief-synthetic.typst.pdf` | Render output, 11 pages. |
+| `usage/INPUT-opening-brief.md` | Markdown contract sample, invented parties and record cites; structure follows the exemplar; labelled SYNTHETIC in its frontmatter. |
+| `usage/OUTPUT-opening-brief.typst.pdf` | Render output, 11 pages. |
 | `usage/OVERLAY-synthetic-opening-brief.pdf`, `.txt` | Overlay of our render on the exemplar, page map in `.txt`. |
-| `usage/SAMPLE-nyappdiv-opening-brief-hussaincr231493.pdf` | The filed exemplar (Third Dept). |
+| `usage/FILED-EXAMPLE-opening-brief.pdf` | The filed exemplar (Third Dept). |
 | `usage/SOURCE.md` | URL, case, docket, filer, filing date, date fetched, sha256, and what the exemplar shows. |
 
 [Formbook index](../../../../../../README.md) | [Court folder](../README.md)

@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/adv
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-waeb-adversary-complaint-icap2580041.pdf` (Bush Kornfeld LLP for co-trustees, 2025-09-26) and `usage/SAMPLE-waeb-adversary-complaint-cleelum2580033.pdf` (Stoel Rives LLP for the City of Cle Elum, Chapter 9, 2025-08-13). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-waeb-adversary-complaint-icap.md`: caption, paragraphs 1 to 35 (Counts I and II), prayer, signature, Exhibit 1 and Exhibit 2 (full tables). Counts III and IV are not transcribed (see Known gaps). |
-| render | ok: `usage/OUTPUT-waeb-adversary-complaint-icap.typst.pdf`, 17 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-waeb-adversary-complaint-icap.md usage/OUTPUT-waeb-adversary-complaint-icap.typst.pdf`). |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (Bush Kornfeld LLP for co-trustees, 2025-09-26) and `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (Stoel Rives LLP for the City of Cle Elum, Chapter 9, 2025-08-13). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-adversary-complaint.md`: caption, paragraphs 1 to 35 (Counts I and II), prayer, signature, Exhibit 1 and Exhibit 2 (full tables). Counts III and IV are not transcribed (see Known gaps). |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 17 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-adversary-complaint.md usage/OUTPUT-adversary-complaint.typst.pdf`). |
 | overlay | ok: `usage/OVERLAY-icap-adversary-complaint.pdf` and `usage/OVERLAY-icap-adversary-complaint.txt` (`tools/overlay.sh` with the iCap exemplar as third argument, 2026-10-15; see Overlay). The exemplar PDF is not in the checkout; it was fetched from its CourtListener URL in `usage/SOURCE.md` into a scratch directory for the run. |
 | pages reviewed | 17 of 17 (2026-10-15: every page rasterized at 70 dpi and viewed as a contact sheet, unchanged font; earlier 60 dpi review 2026-10-14). |
 | typeface | LBR 9004-1(a)(3) names no face; EB Garamond kept (2026-10-15 check of the rule text). See Typeface. |
@@ -94,7 +94,7 @@ Not produced by this template (separate filings, may be required with the first 
 
 ## Engines
 
-docx (`docx/`): `reference.docx` (built by `docx/build-reference.sh`), `complaint.lua` (the markdown contract to cover, caption, numbered paragraphs, lettered lists, signature block and exhibits), `render.sh` (pandoc, then the footer title). Render: `sh tools/render.sh --engine docx <this dir> usage/INPUT-waeb-adversary-complaint-icap.md` writes `usage/OUTPUT-waeb-adversary-complaint-icap.docx` and `usage/OUTPUT-waeb-adversary-complaint-icap.docx.pdf` (LibreOffice 26.8; `pdffonts` shows EB Garamond only). Pages: docx 17, typst 17.
+docx (`docx/`): `reference.docx` (built by `docx/build-reference.sh`), `complaint.lua` (the markdown contract to cover, caption, numbered paragraphs, lettered lists, signature block and exhibits), `render.sh` (pandoc, then the footer title). Render: `sh tools/render.sh --engine docx <this dir> usage/INPUT-adversary-complaint.md` writes `usage/OUTPUT-adversary-complaint.docx` and `usage/OUTPUT-adversary-complaint.docx.pdf` (LibreOffice 26.8; `pdffonts` shows EB Garamond only). Pages: docx 17, typst 17.
 
 What matches the typst output (`typst/`): letter, 1 in margins; EB Garamond 14 pt throughout; body lines on the typst line pitch (31.4 pt, exact spacing); counsel, caption, signature and table lines single-spaced (about 20 pt); footnotes single-spaced as in the typst complaint template; footer `COMPLAINT n`; counsel side by side and the caption with its rules on page 1; court title with the typst blank lines; numbered paragraphs, (a) lists and A. headings; each exhibit on its own page with the header row repeated; signature block after the prayer, kept with the closing paragraph and the date.
 

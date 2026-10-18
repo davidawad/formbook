@@ -7,8 +7,8 @@ Doc type `opening-brief` for the U.S. Court of Appeals for the Fourth Circuit (c
 | Item | Result |
 |---|---|
 | Exemplar | yes: filed Opening Brief of Appellant, *NetChoice v. Jones*, No. 26-1252, filed 04/15/2026 (see `usage/SOURCE.md`) |
-| Sample | `usage/INPUT-ca4-opening-brief-netchoice.md`: 13 rendered pages (typst), excerpted from a 66-page filed brief |
-| Render | ok: `sh tools/render.sh courts/fourth-circuit/court-of-appeals/opening-brief usage/INPUT-ca4-opening-brief-netchoice.md`; exit 0, no typst warnings, embedded fonts are TeX Gyre Schola only (`pdffonts`) |
+| Sample | `usage/INPUT-opening-brief.md`: 13 rendered pages (typst), excerpted from a 66-page filed brief |
+| Render | ok: `sh tools/render.sh courts/fourth-circuit/court-of-appeals/opening-brief usage/INPUT-opening-brief.md`; exit 0, no typst warnings, embedded fonts are TeX Gyre Schola only (`pdffonts`) |
 | Overlay | ok: `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/opening-brief netchoice-opening-brief`; wrote `usage/OVERLAY-netchoice-opening-brief.pdf` and `.txt` |
 | Pages reviewed | 13 of 13 typst pages (every page rendered at 60 dpi and viewed after the font change; the TOC was viewed again after the page-number fix). 16 of 16 LaTeX pages viewed (see Engines). |
 | Gate 2 | open: none in the typst render. The typeface gap is closed (see Typeface). LaTeX layout items are under Engines. |
@@ -77,7 +77,7 @@ From `usage/OVERLAY-netchoice-opening-brief.txt`: our pages 1–13 paired with t
 
 ## Page review (Gate 2 input)
 
-Every page of `usage/OUTPUT-ca4-opening-brief-netchoice.typst.pdf` was rendered at 60 dpi and viewed after the font change. Folios are the printed ones.
+Every page of `usage/OUTPUT-opening-brief.typst.pdf` was rendered at 60 dpi and viewed after the font change. Folios are the printed ones.
 
 | PDF page | Folio | Content | Finding |
 |---|---|---|---|
@@ -101,11 +101,11 @@ Searches (2026-10-14): CourtListener and RECAP for 4th Cir. opening briefs; the 
 
 ## Engines
 
-Three renderings of the same markdown (`usage/INPUT-ca4-opening-brief-netchoice.md`). The typst template is the reference.
+Three renderings of the same markdown (`usage/INPUT-opening-brief.md`). The typst template is the reference.
 
-**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `usage/OUTPUT-ca4-opening-brief-netchoice.latex.pdf`, 16 pages (14 before the font change to Schola), every page rendered at 50 dpi and viewed; re-rendered and viewed again at 40 dpi on 2026-10-16 after the cover change. Layout items the font change exposed, not fixed here: the last Table of Authorities line ("Va. Code § 59.1-584") falls alone onto page iii, and the "REQUEST FOR ORAL ARGUMENT" heading sits at the foot of page 9 with its text on page 10. Matches: TeX Gyre Schola only (vendored, 14 pt text and footnotes), body double-spaced at the typst pitch (31.43 pt), 1-inch margins, 0.5-inch first-line indent, roman folios for the cover-less front matter and arabic from the body, the cover on one page with counsel in two columns (one group: right half), contents and authorities built from the frontmatter and the `toa:` links (passim from seven pages), the signature block kept with the last paragraph, and the certificate of compliance word count (1,523, the same as typst's count). Differs: the cover's spacing is a fixed gap (typst scales the gap to fit the page); paragraph and heading spacing differ slightly, so body page breaks and the folios in the contents and authorities differ from typst by a line or two per page. Not checked by `check.sh` (no `checks.yaml` in this court).
+**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `usage/OUTPUT-opening-brief.latex.pdf`, 16 pages (14 before the font change to Schola), every page rendered at 50 dpi and viewed; re-rendered and viewed again at 40 dpi on 2026-10-16 after the cover change. Layout items the font change exposed, not fixed here: the last Table of Authorities line ("Va. Code § 59.1-584") falls alone onto page iii, and the "REQUEST FOR ORAL ARGUMENT" heading sits at the foot of page 9 with its text on page 10. Matches: TeX Gyre Schola only (vendored, 14 pt text and footnotes), body double-spaced at the typst pitch (31.43 pt), 1-inch margins, 0.5-inch first-line indent, roman folios for the cover-less front matter and arabic from the body, the cover on one page with counsel in two columns (one group: right half), contents and authorities built from the frontmatter and the `toa:` links (passim from seven pages), the signature block kept with the last paragraph, and the certificate of compliance word count (1,523, the same as typst's count). Differs: the cover's spacing is a fixed gap (typst scales the gap to fit the page); paragraph and heading spacing differ slightly, so body page breaks and the folios in the contents and authorities differ from typst by a line or two per page. Not checked by `check.sh` (no `checks.yaml` in this court).
 
-**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `usage/OUTPUT-ca4-opening-brief-netchoice.docx` is written; the `.docx.pdf` is not, because LibreOffice is not installed (see BLOCKED). Matches in the styles: TeX Gyre Schola 14 pt, body at 31.43 pt exact, 0.5-inch first-line indent, single-spaced headings and block quotations, 1-inch margins, three sections (cover without folio, front matter in roman, body in arabic). The contents and the table of authorities are Word fields (`TOC`, `TA` on each citation, `TOA` per category). Certificate word count 1,523.
+**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `usage/OUTPUT-opening-brief.docx` is written; the `.docx.pdf` is not, because LibreOffice is not installed (see BLOCKED). Matches in the styles: TeX Gyre Schola 14 pt, body at 31.43 pt exact, 0.5-inch first-line indent, single-spaced headings and block quotations, 1-inch margins, three sections (cover without folio, front matter in roman, body in arabic). The contents and the table of authorities are Word fields (`TOC`, `TA` on each citation, `TOA` per category). Certificate word count 1,523.
 
 BLOCKED (docx):
 - All gates on `usage/OUTPUT-netchoice-opening-brief.docx.pdf`: LibreOffice (`soffice`) is not on this box and conda-forge has no package. A Debian `libreoffice-writer-nogui` 25.2.3 was unpacked without root under `~/apt-lo` and its `soffice.bin` segfaulted at start-up; not resolved.
@@ -116,7 +116,7 @@ BLOCKED (docx):
 
 ## Verification pass 2026-10-16 (fb-595.26.4)
 
-- Rendered: `sh tools/render.sh … usage/INPUT-ca4-opening-brief-netchoice.md` exit 0, no typst warnings, TeX Gyre Schola only (`pdffonts`). 13 pages, the same count as the committed PDF (the "14 rendered pages" in the status table was stale and is corrected).
+- Rendered: `sh tools/render.sh … usage/INPUT-opening-brief.md` exit 0, no typst warnings, TeX Gyre Schola only (`pdffonts`). 13 pages, the same count as the committed PDF (the "14 rendered pages" in the status table was stale and is corrected).
 - Overlay: `sh tools/overlay.sh … netchoice-opening-brief` exit 0; page map unchanged (see Overlay map). All 13 overlay pages viewed: the cover now lines up with the filed cover's two counsel columns; body pages pair as listed, with the expected partial matches of an excerpt.
 - Pages viewed: 13 of 13 typst pages at 60 dpi, plus the exemplar's page 1 against our cover. After the fix, page 1 was viewed again; pages 2–13 are pixel-identical to the first render (`compare -metric AE`).
 - Fixed (template): cover counsel was one narrow column in the right half, with every office line italic and indented, so addresses and postal codes wrapped. Two or more counsel groups now sit side by side in two columns, roman, as on the filed cover (gap 5 closed). Sample: the cover address lines are split as filed (street / city), the three McGuireWoods names are one per line, and "Counsel for Defendant-Appellant" is italic in the markdown.

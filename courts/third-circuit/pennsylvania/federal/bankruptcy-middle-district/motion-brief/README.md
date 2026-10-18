@@ -25,7 +25,7 @@ Sources, all fetched 2026-10-14:
 
 ## Exemplar
 
-- `usage/SAMPLE-pamb-motion-brief-mullen522bk00237.pdf`: "Brief in Support of Debtor's Motion to Deem Bankruptcy Filing Effective as of February 4, 2022", James Mullen, Chapter 13 debtor, Case No. 5-22-00237, by counsel Tullio DeLuca, Esq. Filed 2022-05-16. 8 pages, text layer present (embedded none; Times and Helvetica standard fonts, Liberation Sans embedded).
+- `usage/FILED-EXAMPLE-motion-brief.pdf`: "Brief in Support of Debtor's Motion to Deem Bankruptcy Filing Effective as of February 4, 2022", James Mullen, Chapter 13 debtor, Case No. 5-22-00237, by counsel Tullio DeLuca, Esq. Filed 2022-05-16. 8 pages, text layer present (embedded none; Times and Helvetica standard fonts, Liberation Sans embedded).
 - Provenance and searches: `usage/SOURCE.md`.
 - The exemplar is the **brief**. Its motion (the debtor's Motion to Deem Bankruptcy Filing Nunc Pro Tune, filed 2022-04-16) is not in this folder. The template covers the caption, title, memorandum, signature, and certificate of service of the brief.
 - Only one exemplar of a motion memorandum from this court with a text layer. The eval-loop tier-2 rule asks for two or three from different filers. Not met; see gaps.
@@ -33,7 +33,7 @@ Sources, all fetched 2026-10-14:
 
 ## Sample
 
-- `usage/INPUT-pamb-motion-brief-mullendeemeffective.md`: the caption, title, the lead-in, the four sections (Statement of Facts, Question Presented, Argument, Conclusion) with the argument in full, the signature block and the certificate of service. The filed certificate does not state which entity each served person represents; the sample's `represents` fields are bracketed placeholders.
+- `usage/INPUT-motion-brief.md`: the caption, title, the lead-in, the four sections (Statement of Facts, Question Presented, Argument, Conclusion) with the argument in full, the signature block and the certificate of service. The filed certificate does not state which entity each served person represents; the sample's `represents` fields are bracketed placeholders.
 - Frontmatter: `court`, `debtor` (name, chapter, case_number), `title`, `signature` (signer, lines), `date` (printed on the certificate), `certificate_of_service` (date, method, served list, signer). Optional: `word_count` (prints the L.B.R. 9013-2(b) certificate).
 - Headings: top level numbered I., II., ...; second level A., B., ...; third level 1., 2., ... The template numbers them; the author does not type numbers. The filed copy uses roman numerals at the top level (confirmed on the page image).
 
@@ -41,11 +41,11 @@ Sources, all fetched 2026-10-14:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq
-sh tools/render.sh courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/motion-brief usage/INPUT-pamb-motion-brief-mullendeemeffective.md
+sh tools/render.sh courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/motion-brief mullen-deem-effective
 ```
 
-- File names follow the tools: `usage/OUTPUT-pamb-motion-brief-mullendeemeffective.typst.pdf` (our render; 7 pages; typst with no warnings), `usage/OVERLAY-mullen-deem-effective.pdf` and `.txt` (red = ours, blue = filed, black = both).
+- File names follow the tools: `usage/OUTPUT-motion-brief.typst.pdf` (our render; 7 pages; typst with no warnings), `usage/OVERLAY-mullen-deem-effective.pdf` and `.txt` (red = ours, blue = filed, black = both).
 - Fonts: `pdffonts` shows EBGaramond-Regular, -Bold, -Italic embedded.
 - Overlay page map: ours p.1-4 ↔ filed p.1-4 (89%, 75%, 61%, 49%); ours p.5 ↔ filed p.6 (59%); ours p.6 ↔ p.7 (73%); ours p.7 ↔ p.8 (74%). The filed brief has one page more of body than ours; the overlay is a diagnostic, not a score, and the typefaces differ.
 
@@ -79,7 +79,7 @@ Pages reviewed: 7 of 7.
 
 ## Engines
 
-- **typst** (primary, `typst/`): the reference. Reviewed: 7 of 7 pages of the render of `usage/INPUT-pamb-motion-brief-mullendeemeffective.md` (checked at 60 dpi in /tmp, not written to usage/).
+- **typst** (primary, `typst/`): the reference. Reviewed: 7 of 7 pages of the render of `usage/INPUT-motion-brief.md` (checked at 60 dpi in /tmp, not written to usage/).
 - **docx** (`docx/`): `build-reference.sh <out.docx> 13 left` builds `docx/reference.docx` (pandoc's default reference, changed in place: EB Garamond 13 pt, exact 24 pt line pitch, 0.5 in first-line indent, US Letter, 1 in margins, centered PAGE footer at 13 pt, level-1 headings bold caps with a hanging label, 1 pt table grid, footnotes 13 pt single). `docx/pamb.lua` builds the caption (borderless table with the rule under the debtor block and the vertical rule), the title, the numbered heading labels (I., A., 1., a. typed by the filter, with a tab), the prayer kept with the signature, the signature block at 3.3 in, the certificate of service, and the word-count certificate when `word_count` is given. Built from the court folder with `pandoc --from markdown+smart --to docx --reference-doc=motion-brief/docx/reference.docx --lua-filter=motion-brief/docx/pamb.lua motion-brief/usage/INPUT-mullen-deem-effective.md -o motion-brief/usage/OUTPUT-mullen-deem-effective.docx`.
   - Matches the typst template: page setup, font, line pitch, indents, caption layout, heading labels and their position, certificate and signature layout, the page number. Checked by reading the .docx back (pandoc text read-back, every paragraph style defined, `ziptool` reads all 17 entries, `xmllint` on all 17 XML parts). Not checked visually.
   - Differs (pandoc and Word limits): heading labels are typed text, not a Word list, so they do not renumber when a heading is added; the caption and signature cells are plain text; the title is not written to the document properties; footnotes are 13 pt single-spaced (the template inherits the body pitch; the sample has no footnotes); the 15-page limit of L.B.R. 9013-2(a) is enforced by the typst template (it stops the build) and is NOT enforced by the docx (a page count is not measured here); no table of contents or table of authorities (the typst template does not generate them either).

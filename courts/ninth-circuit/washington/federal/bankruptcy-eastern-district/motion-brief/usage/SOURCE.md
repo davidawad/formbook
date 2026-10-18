@@ -2,7 +2,7 @@
 
 Doc type: motion with memorandum of authorities, United States Bankruptcy Court, Eastern District of Washington (`waeb`), FRBP 9013 and LBR 9013-1.
 
-## 1. `SAMPLE-waeb-motion-brief-1min2580007motiontodismissmemorandum.pdf`
+## 1. `FILED-EXAMPLE-motion-brief.pdf`
 
 - Court: United States Bankruptcy Court, Eastern District of Washington
 - Case: *Lan Cai et al. v. Hotel at Southport, LLC, Twelfth Floor, LLC, and 1 Min, LLC* (adversary within the jointly administered 1 Min, LLC chapter 11 case, Lead Case No. 24-01519)
@@ -21,7 +21,7 @@ Doc type: motion with memorandum of authorities, United States Bankruptcy Court,
 - Web search for "Eastern District of Washington" bankruptcy motion memorandum "LBR 9013": returned only LBR 9013-1 text and forms; no filed memorandum.
 - Justia form pages for EDWA (LF 9013 and LF 9013.2) are forms, not filings, and were not used as exemplars.
 
-## 2. `SAMPLE-waeb-motion-brief-astriahealth2180005.pdf`
+## 2. `FILED-EXAMPLE-motion-brief-2.pdf`
 
 - Court: United States Bankruptcy Court, Eastern District of Washington
 - Case: *Astria Health v. Cerner Corporation*, adversary proceeding within *In re Astria Health*, Chapter 11, Case No. 19-01189-WLH11

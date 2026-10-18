@@ -5,18 +5,18 @@ Folder layout: one self-contained folder per doc type, so this folder holds its 
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-ca2-answering-brief-rapaport252247.pdf` | A real filed brief for appellee (Second Circuit No. 25-2247), text layer present. |
+| `usage/FILED-EXAMPLE-answering-brief-2.pdf` | A real filed brief for appellee (Second Circuit No. 25-2247), text layer present. |
 | `usage/SOURCE.md` | Where it came from, who filed it, dates, and what it shows. |
 | `typst/ca2-answering-brief.typ` | The template: `ca2-answering-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
-| `usage/INPUT-ca2-answering-brief-finkelman.md` | Transcription of the exemplar: cover, counterstatement, summary, standard of review, part of Argument I.A, conclusion, signature, certificates. A portion, not the whole brief. |
-| `usage/OUTPUT-ca2-answering-brief-finkelman.typst.pdf` | Render of the sample (12 pages). |
+| `usage/INPUT-answering-brief.md` | Transcription of the exemplar: cover, counterstatement, summary, standard of review, part of Argument I.A, conclusion, signature, certificates. A portion, not the whole brief. |
+| `usage/OUTPUT-answering-brief.typst.pdf` | Render of the sample (12 pages). |
 | `usage/OVERLAY-finkelman-answering-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar (`tools/overlay.sh`). |
 
 Build (from the repo root, with the toolchain on `PATH`):
 
 ```sh
-sh tools/render.sh courts/second-circuit/court-of-appeals/answering-brief usage/INPUT-ca2-answering-brief-finkelman.md
+sh tools/render.sh courts/second-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md
 sh tools/overlay.sh courts/second-circuit/court-of-appeals/answering-brief finkelman-answering-brief
 ```
 
@@ -91,12 +91,12 @@ Rendered at `pdftoppm -r 60` and read page by page: 12 of 12 pages reviewed.
 
 Built by `latex/` (`template.tex` + `ca2.lua`, the same template as the other doc types with `DOC = "answering"`) and `docx/` (`reference.docx` from `make-reference.sh`, + `ca2.lua`).
 
-- **latex** (`usage/OUTPUT-ca2-answering-brief-finkelman.latex.pdf`, 13 pages; typst: 12). Matches: the cover and its counsel block, the heading structure and labels, contents and authorities with computed page numbers, the certificates (type-volume and typeface wording; certificate of service because `service.certificate: true`), certificate word count 1,428 (same as typst). Differs: one page longer than typst, from the heading spacing in the Counterstatement; the cover spreads less.
-- **docx** (`usage/OUTPUT-ca2-answering-brief-finkelman.docx`, `.docx.pdf` 13 pages). Matches: the cover, sections and numbering, styles, certificates, word count 1,428. BLOCKED: `DOCX-TOC-PAGES` and `DOCX-TOA-PAGES` (contents and authorities have no page numbers; see the opening brief's README).
+- **latex** (`usage/OUTPUT-answering-brief.latex.pdf`, 13 pages; typst: 12). Matches: the cover and its counsel block, the heading structure and labels, contents and authorities with computed page numbers, the certificates (type-volume and typeface wording; certificate of service because `service.certificate: true`), certificate word count 1,428 (same as typst). Differs: one page longer than typst, from the heading spacing in the Counterstatement; the cover spreads less.
+- **docx** (`usage/OUTPUT-answering-brief.docx`, `.docx.pdf` 13 pages). Matches: the cover, sections and numbering, styles, certificates, word count 1,428. BLOCKED: `DOCX-TOC-PAGES` and `DOCX-TOA-PAGES` (contents and authorities have no page numbers; see the opening brief's README).
 
 ## Verification pass 2026-10-16 (fb-595.26.2)
 
-- Re-rendered `INPUT-ca2-answering-brief-finkelman.md` with `tools/render.sh`: exit 0, no warnings, 12 pages (the committed PDF was not stale: same text and page count). Fonts: EB Garamond Regular/Bold/Italic only.
+- Re-rendered `INPUT-answering-brief.md` with `tools/render.sh`: exit 0, no warnings, 12 pages (the committed PDF was not stale: same text and page count). Fonts: EB Garamond Regular/Bold/Italic only.
 - Viewed all 12 pages at 60 dpi, the exemplar's page 1, and all 12 overlay pages at 40 dpi. The overlay pairing is unchanged (cover 91.8%, body 73-91%, TOC/TOA 35%/18%, certificates 45-49%).
 - Fixed (tier 1): the cover printed the docket number at 14 pt; Local Rule 32.1(a)(1) requires type at least one inch high. Now `docket-size = 72pt` (typst) and `\fontsize{72}{80}` (latex `ca2.lua`). The cover still fits one page.
 - Fixed (tier 1): the word limit was 13,000 (FRAP); Local Rule 32.1(a)(4)(A), now fetched, sets 14,000 for a principal brief. Limit and certificate wording (FRAP 32(a)(7)(B) and LR 32.1(a)(4)(A)) updated in typst and latex.

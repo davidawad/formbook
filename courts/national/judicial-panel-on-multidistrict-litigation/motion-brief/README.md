@@ -28,12 +28,12 @@ Conventions (not required by the rules; the filed exemplar has them): the table 
 
 Two real filed JPML documents, from different filers:
 
-- `usage/SAMPLE-jpml-motion-brief-chevroletboltbattery20cv07109.pdf`: the Torres plaintiffs' Motion for Transfer and Memorandum of Law, filed January 22, 2021 (pp. 1–25 of a 387-page compilation). Used for the sample and the overlay. Full citation and provenance in `usage/SOURCE.md`.
-- `usage/SAMPLE-jpml-motion-brief-usplabsdietarysupplementmdl2523.pdf`: USPlabs, LLC's Motion for Transfer, MDL No. 2523, filed January 13, 2014 (3 pages; its brief in support is not in the file). Consulted for the motion's caption and numbered-paragraph structure. Not overlaid.
+- `usage/FILED-EXAMPLE-motion-brief.pdf`: the Torres plaintiffs' Motion for Transfer and Memorandum of Law, filed January 22, 2021 (pp. 1–25 of a 387-page compilation). Used for the sample and the overlay. Full citation and provenance in `usage/SOURCE.md`.
+- `usage/FILED-EXAMPLE-motion-brief-2.pdf`: USPlabs, LLC's Motion for Transfer, MDL No. 2523, filed January 13, 2014 (3 pages; its brief in support is not in the file). Consulted for the motion's caption and numbered-paragraph structure. Not overlaid.
 
 ## Sample
 
-`usage/INPUT-jpml-motion-brief-chevroletbolt.md`. Frontmatter (the case fields: `heading`, `mdl_no`, `in_re`, `motion_title`, `brief_title`, `counsel`, `counsel_role`, `date`, `signature`, `authorities`), then the **motion** markdown, then the line `<!-- memorandum -->`, then the **memorandum** markdown. The marker is the only way the template tells the two case documents apart.
+`usage/INPUT-motion-brief.md`. Frontmatter (the case fields: `heading`, `mdl_no`, `in_re`, `motion_title`, `brief_title`, `counsel`, `counsel_role`, `date`, `signature`, `authorities`), then the **motion** markdown, then the line `<!-- memorandum -->`, then the **memorandum** markdown. The marker is the only way the template tells the two case documents apart.
 
 Transcribed from the exemplar: the motion (both paragraphs); the memorandum's opening paragraph; I. Introduction (the five-action list and the two procedural paragraphs); II. Nature of the Actions (three paragraphs); III. Argument (the three lead paragraphs, including the § 1407 standard and its citations); III.B (the lead paragraph); III.B.1 and III.B.1.a (with footnotes 1–3, verbatim); IV. Conclusion; and the signature and certificate text (the same wording as the exemplar).
 
@@ -45,11 +45,11 @@ The table of authorities is generated from the `toa:` links in the sample, so it
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # micromamba env: typst 0.15.0, poppler, ImageMagick, gawk, jq
-sh tools/render.sh courts/national/judicial-panel-on-multidistrict-litigation/motion-brief usage/INPUT-jpml-motion-brief-chevroletbolt.md
+sh tools/render.sh courts/national/judicial-panel-on-multidistrict-litigation/motion-brief usage/INPUT-motion-brief.md
 sh tools/overlay.sh courts/national/judicial-panel-on-multidistrict-litigation/motion-brief chevrolet-bolt
 ```
 
-- `usage/OUTPUT-jpml-motion-brief-chevroletbolt.typst.pdf`: 11 pages, letter size. Typst compiled with no warnings (`render.sh` fails on any). Fonts: EB Garamond Regular, Italic and Bold only, embedded (`pdffonts`). The tools write `OUTPUT-<id>` and `OVERLAY-<id>` by default; the brief asked for `<id>.pdf` and `<id>-overlay.pdf`. I used the tools as they are and did not change them.
+- `usage/OUTPUT-motion-brief.typst.pdf`: 11 pages, letter size. Typst compiled with no warnings (`render.sh` fails on any). Fonts: EB Garamond Regular, Italic and Bold only, embedded (`pdffonts`). The tools write `OUTPUT-<id>` and `OVERLAY-<id>` by default; the brief asked for `<id>.pdf` and `<id>-overlay.pdf`. I used the tools as they are and did not change them.
 - Line pitch, measured with `pdftotext -bbox` on body page 6 (PDF p. 6): baselines 24.0 pt apart; 27 lines per page.
 - `usage/OVERLAY-chevrolet-bolt.pdf` and `OVERLAY-chevrolet-bolt.txt`: red = our render, blue = the exemplar, black = both. The page map pairs pages by word overlap, which is coarse: ours p.1–3 ↔ filed p.1–3 (98–100%), ours p.4 ↔ filed p.4 (TOC), ours p.5 ↔ filed p.6 (our TOA is shorter than the filed one), ours p.6 ↔ filed p.8 (body start), ours p.9 ↔ filed p.17 (both Argument III.B), ours p.10 ↔ filed p.18. Our p.11 (memorandum signature) pairs with filed p.2 (the motion's signature), which is a mis-pairing: the memorandum's signature is at filed p.24. The overlay is a diagnostic, not a score.
 

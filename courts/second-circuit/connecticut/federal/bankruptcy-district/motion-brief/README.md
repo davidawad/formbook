@@ -5,10 +5,10 @@ Folder: `courts/second-circuit/connecticut/federal/bankruptcy-district/motion-br
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ctb-motion-brief-despinspillsbury2405014.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ctb-motion-brief-pillsburymemorandum.md` (cover, table of contents and authorities, preliminary statement, facts, legal standard, the first argument heading and paragraphs 10 to 13, conclusion; footnotes omitted) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (cover, table of contents and authorities, preliminary statement, facts, legal standard, the first argument heading and paragraphs 10 to 13, conclusion; footnotes omitted) |
 | typeface | face required: none by the bankruptcy rules (see "Typeface and size" below). Vendored substitute: **EB Garamond** (kept; no court face to substitute). Fit: n/a. The district Arial order is an open question (gap 2 in `../adversary-complaint/README.md`). |
-| render | ok: `usage/OUTPUT-ctb-motion-brief-pillsburymemorandum.typst.pdf`, 8 pages (cover, 2 front-matter pages numbered i and ii, 5 body pages numbered 1 to 5), typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 (re-rendered 2026-10-15; `pdffonts` shows only the three EB Garamond faces, all embedded) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages (cover, 2 front-matter pages numbered i and ii, 5 body pages numbered 1 to 5), typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 (re-rendered 2026-10-15; `pdffonts` shows only the three EB Garamond faces, all embedded) |
 | overlay | ok: `usage/OVERLAY-pillsbury-memorandum.pdf` and `OVERLAY-pillsbury-memorandum.txt` (re-run 2026-10-15 against the saved exemplar) |
 | pages reviewed | 8 of 8 (every page rendered at 70 dpi and viewed on 2026-10-15, after the re-render) |
 
@@ -61,7 +61,7 @@ Typeface and size: no rule that governs this court sets a typeface. Local Bankr.
 9. **Check scripts.** As in `../adversary-complaint/README.md` (gap 9): `tools/check.sh` expects `court.json` and `rules.md`, which this doc-type folder does not have, and `tools/` is out of scope for this box. The gates were not run.
 10. **Table of contents weight.** The outline entries come out bold, because typst repeats the heading's show rule in the outline. The exemplar's entries are regular weight. A cosmetic difference, not a rule point; fixing it needs an outline entry show rule in `main.typ`.
 
-## Review of the rendered pages (`usage/OUTPUT-ctb-motion-brief-pillsburymemorandum.typst.pdf`, 8 pages)
+## Review of the rendered pages (`usage/OUTPUT-motion-brief.typst.pdf`, 8 pages)
 
 Re-viewed 2026-10-15 at 70 dpi after the re-render (no template change; same EB Garamond layout, same 8 pages). Findings below stand.
 
@@ -78,11 +78,11 @@ Overlay: pages pair with the exemplar's pages 1, 2, 5, 6, 8, 10, 12 and 22 by sh
 
 ## Engines
 
-**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `ctb-motion-brief.lua`, `render.sh`, `pagemap.awk`; output `usage/OUTPUT-ctb-motion-brief-pillsburymemorandum.docx` and `usage/OUTPUT-ctb-motion-brief-pillsburymemorandum.docx.pdf`, the LibreOffice conversion):
+**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `ctb-motion-brief.lua`, `render.sh`, `pagemap.awk`; output `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf`, the LibreOffice conversion):
 
 - Matches the typst output: letter, 1 inch margins; EB Garamond 12 point (embedded, only EB Garamond in `pdffonts`); double spacing at 24 pt; caption box; title; the cover's footer carries "ORAL ARGUMENT REQUESTED" in the lower margin; three sections as in typst (cover without number; table of contents and authorities in lower roman; body from 1); the docket line and page number from page 2 on; numbered paragraphs from the first heading, with lettered items at 0.5 inch and not numbered; centred `#` and bold left `##` headings; the signature blocks side by side.
 - The table of contents page numbers come from a first pass (`render.sh` converts it, finds each heading's page in the PDF text, and checks the second pass gives the same map). The table of authorities uses the frontmatter pages, as typst does.
 - Differs (tier 2, accepted): no blank line between body paragraphs (typst leaves about 16 pt); the table of contents entries are regular weight (typst's are bold); the authorities have no leader dots; the body runs one page longer (6 pages against typst's 5), because the header takes more of the top margin and the signature block moves to its own page. Pages 4 to 9 of the docx PDF are body and signature, and the total is 9 pages against typst's 8.
 - Word has not been run here. The `.docx` was checked only by LibreOffice (converts without error; every XML part well-formed).
 - BLOCKED: `tools/check.sh` (Gates 0 to 3, every check ID): cannot run on this doc-type folder. It reads `court.json` and `checks.yaml` at the court level (`courts/second-circuit/connecticut/federal/bankruptcy-district/`), and this box does not produce those files. No `usage/.check-docx.txt` was written.
-- Pages reviewed: all 9 pages of `OUTPUT-ctb-motion-brief-pillsburymemorandum.docx.pdf` were rendered at 60 dpi and viewed, and compared with all 8 pages of the typst render.
+- Pages reviewed: all 9 pages of `OUTPUT-motion-brief.docx.pdf` were rendered at 60 dpi and viewed, and compared with all 8 pages of the typst render.

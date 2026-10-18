@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/west-virginia/federal/southern-district/complaint
 
 | Item | Status |
 |---|---|
-| exemplar | yes, with limits: `usage/SAMPLE-wvsd-complaint-castro223cv00598.pdf` (35 pages, **image-only**, filed **pro se**; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-wvsd-complaint-castro.md` (a portion: caption, opening, Sections I and II, Injunctive Relief, signature, verification; see Known gaps) |
-| render | ok: `usage/OUTPUT-wvsd-complaint-castro.typst.pdf`, 9 pages (caption page, table of contents, body numbered 1 to 6 with the signature, verification), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14) |
+| exemplar | yes, with limits: `usage/FILED-EXAMPLE-complaint.pdf` (35 pages, **image-only**, filed **pro se**; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (a portion: caption, opening, Sections I and II, Injunctive Relief, signature, verification; see Known gaps) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages (caption page, table of contents, body numbered 1 to 6 with the signature, verification), typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-14) |
 | overlay | ran 2026-10-14, produced `usage/OVERLAY-castro-complaint.pdf` and `.txt`; **not a meaningful comparison**: the exemplar has no text layer, so every page pairs at 0 to 2.6% word overlap (see Overlay). The exemplar was restored from the URL in `usage/SOURCE.md` (35 pages, sha256 `a84eea9daf59bafce0ed8d23b8bb33771f6f79f0bee02deccaf1de4c95ee62f0`) because it was missing from the snapshot |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on 2026-10-14) |
 

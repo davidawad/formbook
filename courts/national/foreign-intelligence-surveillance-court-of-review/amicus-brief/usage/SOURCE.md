@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-fiscr-amicus-brief-certificationofquestionsfiscr1801.pdf` |
+| Exemplar file | `FILED-EXAMPLE-amicus-brief.pdf` |
 | Case | *In re Certification of Questions of Law to the Foreign Intelligence Surveillance Court of Review* |
 | Docket | FISCR 18-01 (certified from FISC; the Court of Review's own number) |
 | Document | Brief of Amicus Curiae (court-appointed amicus; 46 PDF pages, printed pp. i-32 plus scanned signature and certificate pages) |
@@ -21,7 +21,7 @@
 
 Search scope: the court's public-filings index (pages 0-12 read, the FISCR 16-01, 18-01, 18-02, 20-01 and Misc. 20-02 entries), the FISCR and Amici Curiae pages, and CourtListener (no FISCR amicus hits). No second filer's operative amicus brief was found in that scope, so the template is tier-2 checked against this one exemplar only; see README.md. The Reporters Committee brief is a proposed attachment with a different caption layout and is not used for comparison.
 
-## 2. `SAMPLE-fiscr-amicus-brief-reporterscommitteefiscr1801.pdf` (second filer, tier-2 comparison; added 2026-10-17)
+## 2. `FILED-EXAMPLE-amicus-brief-2.pdf` (second filer, tier-2 comparison; added 2026-10-17)
 
 | Field | Value |
 |---|---|

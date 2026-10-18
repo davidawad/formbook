@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca10-opening-brief-lymanvhenderson264014.pdf` |
+| File | `FILED-EXAMPLE-opening-brief.pdf` |
 | Document | Appellant's Opening Brief (ECF/Document 12 on the docket; 67 pages in the RECAP copy, of which the brief is pages 1-31 and the rest is Attachments 1-2, the district court's memorandum decision and judgment) |
 | Case | *Lyman v. Henderson* (Phil Lyman, Plaintiff-Appellant, v. Deidre Henderson, Lt. Governor of Utah, Defendant-Appellee) |
 | Court | U.S. Court of Appeals for the Tenth Circuit |

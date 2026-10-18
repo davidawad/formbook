@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-msnb-motion-brief-clanton2611416.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Court | United States Bankruptcy Court, N.D. Mississippi (`msnb`) |
 | Case | *In re Melvin Scott Clanton and Andrea Doler Clanton*, Chapter 12, No. 26-11416-SDM |
 | Document | Doc. 39, "Fairport Asset Management REO 2, LLC's Motion for Relief from the Automatic Stay and Abandonment or, in the Alternative, for Adequate Protection" (14 pages; exhibits are separate attachments) |

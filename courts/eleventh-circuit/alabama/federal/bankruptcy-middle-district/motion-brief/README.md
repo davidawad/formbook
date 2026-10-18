@@ -2,16 +2,16 @@
 
 Doc-type folder for a motion with its grounds in numbered paragraphs (a contested matter in the main case). Engine: typst (`typst/`). Parent court: [`../README.md`](../README.md).
 
-- Exemplars: **two** (see `usage/SOURCE.md`). Primary: `SAMPLE-almb-motion-brief-eburystreet2410499.pdf` (Bankruptcy Administrator's Motion to Dismiss, Britt B. Griggs, 12 pages). Second filer, tier 2 only: `SAMPLE-almb-motion-brief-wheat1803041.pdf` (U.S. Attorney's memorandum of law in an adversary proceeding, 19 pages).
-- Transcribed sample: `usage/INPUT-almb-motion-brief-ebury.md`, the whole of the Ebury Street motion: caption, LBR 1017-2 notice legend, title, introduction, paragraphs 1-41 (with the filer's own numbering, including the jump from 16 to 21 and the repeated 39 and 40), the bulleted list in paragraph 3, six headings, prayer, signature block, certificate of service and the full service list (4 mail, 16 CM/ECF).
-- Render: `usage/OUTPUT-almb-motion-brief-ebury.typst.pdf`, **12 pages**, EB Garamond only (embedded; `pdffonts`), no typst warnings. `sh tools/render.sh <this-dir> usage/INPUT-almb-motion-brief-ebury.md`. **render=ok** (2026-10-16).
+- Exemplars: **two** (see `usage/SOURCE.md`). Primary: `FILED-EXAMPLE-motion-brief.pdf` (Bankruptcy Administrator's Motion to Dismiss, Britt B. Griggs, 12 pages). Second filer, tier 2 only: `FILED-EXAMPLE-motion-brief-3.pdf` (U.S. Attorney's memorandum of law in an adversary proceeding, 19 pages).
+- Transcribed sample: `usage/INPUT-motion-brief.md`, the whole of the Ebury Street motion: caption, LBR 1017-2 notice legend, title, introduction, paragraphs 1-41 (with the filer's own numbering, including the jump from 16 to 21 and the repeated 39 and 40), the bulleted list in paragraph 3, six headings, prayer, signature block, certificate of service and the full service list (4 mail, 16 CM/ECF).
+- Render: `usage/OUTPUT-motion-brief.typst.pdf`, **12 pages**, EB Garamond only (embedded; `pdffonts`), no typst warnings. `sh tools/render.sh <this-dir> usage/INPUT-motion-brief.md`. **render=ok** (2026-10-16).
 - Overlay: `usage/OVERLAY-ebury-motion-brief.pdf` and `.txt` via `sh tools/overlay.sh <this-dir> ebury-motion-brief`. **overlay=ok** (2026-10-16). The tool takes the first PDF in `usage/` by name, which is the Ebury Street motion.
-- Synthetic sample kept: `usage/INPUT-almb-motion-brief-syntheticstaymotion.md` (invented, bracketed placeholders), re-rendered after the template fixes: `usage/OUTPUT-almb-motion-brief-syntheticstaymotion.typst.pdf`, 6 pages (5 before the double-spacing fix), no warnings.
+- Synthetic sample kept: `usage/INPUT-motion-brief-2.md` (invented, bracketed placeholders), re-rendered after the template fixes: `usage/OUTPUT-motion-brief-2.typst.pdf`, 6 pages (5 before the double-spacing fix), no warnings.
 
 ## Engines
 
 - **typst** (primary): `typst/`, as above.
-- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`) and `docx/almb-motion-brief.lua` (the court title, caption, title, signature block and certificate of service; the body stays pandoc's). `sh tools/render.sh --engine docx <this-dir> usage/INPUT-almb-motion-brief-syntheticstaymotion.md` writes `usage/OUTPUT-almb-motion-brief-syntheticstaymotion.docx`, then stops: `soffice` is not on the build box, so no `.docx.pdf` exists.
+- **docx**: `docx/reference.docx` (built by `sh docx/make-reference.sh`) and `docx/almb-motion-brief.lua` (the court title, caption, title, signature block and certificate of service; the body stays pandoc's). `sh tools/render.sh --engine docx <this-dir> usage/INPUT-motion-brief-2.md` writes `usage/OUTPUT-motion-brief-2.docx`, then stops: `soffice` is not on the build box, so no `.docx.pdf` exists.
 - **docx now lags the typst form** (the docx files were not touched in this pass): (a) level-1 headings are 18 pt caps in the docx, body size and as-written case in typst; (b) the docx filter does not read the new frontmatter fields `notice`, `certificate_signature`, `service` or `signature.closing`, so the LBR 1017-2 / 9007-1 legend and the LBR 9013-3 service list are missing from a docx render of the Ebury sample; (c) the docx was never rendered to pages, so line breaks, page count and caption spacing are unchecked. Earlier notes (reference styles: letter, 1 in margins, EB Garamond 13 pt, exact 24 pt double spacing, 0.5 in first-line indent, boxed caption table, keep-with-next prayer, certificate on its own page, "-N-" footer) still describe the docx.
 - **docx BLOCKED** (see `docs/DOCX.md`): Gates 0-2 on the `.docx.pdf` need `soffice`, which is not installed (conda-forge has no LibreOffice). `pages_reviewed=0` for docx. `tools/check.sh` for any engine is also blocked for this court: it has no `checks.yaml` yet.
 
@@ -53,7 +53,7 @@ Same page count (12 vs 12). Our body runs about one page shorter (13 pt EB Garam
 
 ## Gate 2 review (2026-10-16)
 
-Every page of `OUTPUT-almb-motion-brief-ebury.typst.pdf` (12) and `OVERLAY-ebury-motion-brief.pdf` (12) was rendered to PNG and viewed; every page of `OUTPUT-almb-motion-brief-syntheticstaymotion.typst.pdf` (6) was viewed after the template changes. **pages_reviewed=12** (Ebury output; 12 overlay pages and 6 synthetic pages also viewed).
+Every page of `OUTPUT-motion-brief.typst.pdf` (12) and `OVERLAY-ebury-motion-brief.pdf` (12) was rendered to PNG and viewed; every page of `OUTPUT-motion-brief-2.typst.pdf` (6) was viewed after the template changes. **pages_reviewed=12** (Ebury output; 12 overlay pages and 6 synthetic pages also viewed).
 
 | Page | Finding | Tier | Status |
 |---|---|---|---|

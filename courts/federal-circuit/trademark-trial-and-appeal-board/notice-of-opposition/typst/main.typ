@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ttab-notice-of-opposition.typ": ttab-notice-of-opposition, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ttab-notice-of-opposition-brink.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-notice-of-opposition.md"))
 #let (meta, body) = split-frontmatter(src)
 #ttab-notice-of-opposition(meta, body)

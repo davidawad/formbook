@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-iand-complaint-iowarotocastfuse226cv01019.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Northern District of Iowa, Eastern Division
 - Case: *Iowa Rotocast Plastics, Inc. d/b/a Grizzly Coolers v. FUSE, LLC*
 - Docket: No. 2:26-cv-01019 (Document 1)

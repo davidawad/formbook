@@ -1,6 +1,6 @@
 # Exemplar source: motion-brief (S.D. Tex. Bankruptcy)
 
-- File: `SAMPLE-txsb-motion-brief-cmgfunding2603633.pdf` (15 pages, text layer present)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (15 pages, text layer present)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.txsb.499822/gov.uscourts.txsb.499822.5.0.pdf
 - Docket (CourtListener): https://www.courtlistener.com/docket/74704304/5/cmg-funding-2025-llc-v-cristbal-m-galindo-pc-dba-galindo-law-firm-e/
 - Court: United States Bankruptcy Court, Southern District of Texas (txsb), Houston Division

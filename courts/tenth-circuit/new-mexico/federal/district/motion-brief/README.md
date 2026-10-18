@@ -5,9 +5,9 @@ Folder: `courts/tenth-circuit/new-mexico/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nmd-motion-brief-turner126cv03220.pdf` (1 filer, counsel-filed; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nmd-motion-brief-turnermotion.md` (the whole 13-page motion, with its footnote 1 omitted; see Known gaps) |
-| render | ok: `usage/OUTPUT-nmd-motion-brief-turnermotion.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, counsel-filed; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (the whole 13-page motion, with its footnote 1 omitted; see Known gaps) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
 | overlay | ok: `usage/OVERLAY-turner-motion.pdf` and `OVERLAY-turner-motion.txt` (`tools/overlay.sh`) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change) |
 

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-gasd-complaint-atlanticcasualty626cv00049.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Southern District of Georgia, Statesboro Division
 - Case: *Atlantic Casualty Insurance Company v. Jennings-Deloach Warehouse Company LLC*
 - Docket: No. 6:26-cv-00049-RSB-CLR (Document 1)

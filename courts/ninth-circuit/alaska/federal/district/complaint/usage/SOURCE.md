@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-akd-complaint-launchalaska325cv00141.pdf` (18 pages, text layer present, `pdftotext` reads it)
+- File: `FILED-EXAMPLE-complaint.pdf` (18 pages, text layer present, `pdftotext` reads it)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.akd.76659/gov.uscourts.akd.76659.1.0.pdf (CourtListener RECAP archive; the docket is 3:25-cv-00141-GMS)
 - Court: United States District Court for the District of Alaska
 - Case: *Launch Alaska v. Department of the Navy, Office of Naval Research*
@@ -25,7 +25,7 @@ The additional NAEC complaint below is from a different plaintiff filer than the
 
 ## Additional exemplar (different filer)
 
-- File: `SAMPLE-akd-complaint-naec325cv00038.pdf` (46 pages; text layer present)
+- File: `FILED-EXAMPLE-complaint-2.pdf` (46 pages; text layer present)
 - Court: United States District Court for the District of Alaska
 - Case: *Northern Alaska Environmental Center, et al. v. Trump, et al.*
 - Docket: No. 3:25-cv-00038-SLG, Document 1

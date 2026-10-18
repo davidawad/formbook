@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-tnwd-complaint-coranperry226cv03285.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Western District of Tennessee, Western Division
 - Case: *Coran v. Perry* (Christy Coran p/k/a "Gangsta Gold" and Latonya Pierce p/k/a "MC Money" v. Carlos Duan Perry p/k/a "DJ Sound")
 - Docket: No. 2:26-cv-03285-BCL-atc (Document 1)

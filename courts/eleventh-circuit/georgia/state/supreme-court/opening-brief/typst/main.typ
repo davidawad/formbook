@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ga-opening-brief.typ": ga-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ga-opening-brief-clark.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-opening-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ga-brief(meta, body)

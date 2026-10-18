@@ -4,7 +4,7 @@
 //     typst/main.typ out.pdf
 #import "ptab-petition.typ": petition
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ptab-petition-salesforceipr.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-petition.md"))
 #let m = src.match(regex("^---\r?\n([\\s\\S]*?)\r?\n---[ \t]*\r?\n"))
 #if m == none { panic("the sample must start with a YAML frontmatter block") }
 #let meta = yaml(bytes(m.captures.at(0)))

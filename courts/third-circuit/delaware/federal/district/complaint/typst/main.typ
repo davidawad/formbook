@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ded-complaint.typ": ded-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ded-complaint-bostonscientific.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #ded-complaint(meta, body)

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "kywd-complaint.typ": kywd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-kywd-complaint-lott.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #kywd-complaint(meta, body)

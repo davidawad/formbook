@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "orb-adversary-complaint.typ": orb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-orb-adversary-complaint-greenoregoncomplaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #orb-adversary-complaint(meta, body)

@@ -1,6 +1,6 @@
 # Exemplar source
 
-## SAMPLE-arb-motion-brief-titansolar24bk04978.pdf
+## FILED-EXAMPLE-motion-brief.pdf
 
 - **Document:** Trustee's Stipulated Motion to Compromise Claims Among Affiliated Estates [F.R.B.P. 9019], with the incorporated Memorandum of Points and Authorities (motion with memorandum in one filing, the form LRBP 9013-1(a) requires).
 - **Court:** United States Bankruptcy Court, District of Arizona (`arb`, Ninth Circuit). Phoenix division.
@@ -12,7 +12,7 @@
 - **URL:** https://www.azb.uscourts.gov/sites/azb/files/Trustee%27s%20Stipulated%20Motion%20To%20Compromise%20Claims%20Among%20Affiliated%20Estates.pdf
   (linked from the court's case page https://www.azb.uscourts.gov/re-titan-solar-power-inc-and-its-affiliates, which lists the Titan trustees' filings).
 - **Date fetched:** October 14, 2026 (curl to `/work/artifacts/fetch-stretto/m762.pdf`, then copied here unchanged).
-- **Why this one:** It is a filed D. Ariz. motion with a memorandum, public and text-based, 11 pages. The transcription (`usage/INPUT-arb-motion-brief-titanmotion.md`) covers pp. 1–9 and the signature page; Exhibit A is not transcribed (see README gap 3).
+- **Why this one:** It is a filed D. Ariz. motion with a memorandum, public and text-based, 11 pages. The transcription (`usage/INPUT-motion-brief.md`) covers pp. 1–9 and the signature page; Exhibit A is not transcribed (see README gap 3).
 
 ## Other searches for this doc type (2026-10-14)
 

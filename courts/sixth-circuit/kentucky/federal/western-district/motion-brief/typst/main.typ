@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "kywd-motion-brief.typ": kywd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-kywd-motion-brief-zoellermemorandum.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #kywd-motion-brief(meta, body)

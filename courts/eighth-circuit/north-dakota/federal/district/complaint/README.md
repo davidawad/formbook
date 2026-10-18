@@ -4,9 +4,9 @@ Doc type: **complaint** in the United States District Court for the District of 
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ndd-complaint-bitcanary325cv00181.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ndd-complaint-bitcanary.md`: the whole complaint (all 96 numbered paragraphs, counts I to VII, prayers, jury demand, signature) |
-| render | ok: `usage/OUTPUT-ndd-complaint-bitcanary.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh` exit 0) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: the whole complaint (all 96 numbered paragraphs, counts I to VII, prayers, jury demand, signature) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh` exit 0) |
 | overlay | ok: `usage/OVERLAY-bitcanary-complaint.pdf` and `OVERLAY-bitcanary-complaint.txt` |
 | pages reviewed | 9 of 9 (fonts pass 2026-10-14: every page rendered at 50 dpi and viewed again after the font check) |
 | depth | 9 rendered pages against a 10-page exemplar |
@@ -52,9 +52,9 @@ Not produced by this template (separate filings, not part of the complaint, and 
 | Engine | Status | What matches the typst form | What differs / BLOCKED |
 |---|---|---|---|
 | typst (primary) | as above | the reference | none |
-| docx | `usage/OUTPUT-ndd-complaint-bitcanary.docx` and `.docx.pdf` (9 pages, LibreOffice 26.8.1 PDF, EB Garamond embedded per `pdffonts`) | Letter, 1 in margins, EB Garamond 12 pt, body and headings at 24 pt exact (double), caption as a borderless table with the ")" column, numbered allegations, lettered (a), (b) lists, centred PAGE number, signature block kept whole (one unsplittable table row). Checked by rendering all 9 pages to PNG at 60 dpi against the typst pages. | Paragraph flow is LibreOffice's, so page breaks differ from typst (for example, BACKGROUND starts on page 3 in docx, page 2 in typst). Word is not available here: the `.docx` was not opened in Word, so no Word repair-prompt check was run. No gate stamp: `tools/check.sh --engine docx` was not run, because this doc-type folder has no `checks.yaml` or `rules.md` and the gates cannot run here. |
+| docx | `usage/OUTPUT-complaint.docx` and `.docx.pdf` (9 pages, LibreOffice 26.8.1 PDF, EB Garamond embedded per `pdffonts`) | Letter, 1 in margins, EB Garamond 12 pt, body and headings at 24 pt exact (double), caption as a borderless table with the ")" column, numbered allegations, lettered (a), (b) lists, centred PAGE number, signature block kept whole (one unsplittable table row). Checked by rendering all 9 pages to PNG at 60 dpi against the typst pages. | Paragraph flow is LibreOffice's, so page breaks differ from typst (for example, BACKGROUND starts on page 3 in docx, page 2 in typst). Word is not available here: the `.docx` was not opened in Word, so no Word repair-prompt check was run. No gate stamp: `tools/check.sh --engine docx` was not run, because this doc-type folder has no `checks.yaml` or `rules.md` and the gates cannot run here. |
 
-`docx/reference.docx` is built by `docx/make-reference.sh` (pandoc's package, with styles, Letter page setup and footer replaced). The conversion is `docx/ndd-complaint.lua`, applied by `tools/render-docx.sh` with `SOFFICE` pointing at a LibreOffice that can see the vendored fonts (`FONTCONFIG_FILE` naming `fonts/` only). Commands: `sh tools/render.sh --engine docx <complaint-dir> usage/INPUT-ndd-complaint-bitcanary.md`.
+`docx/reference.docx` is built by `docx/make-reference.sh` (pandoc's package, with styles, Letter page setup and footer replaced). The conversion is `docx/ndd-complaint.lua`, applied by `tools/render-docx.sh` with `SOFFICE` pointing at a LibreOffice that can see the vendored fonts (`FONTCONFIG_FILE` naming `fonts/` only). Commands: `sh tools/render.sh --engine docx <complaint-dir> usage/INPUT-complaint.md`.
 
 ## Known gaps and open choices
 

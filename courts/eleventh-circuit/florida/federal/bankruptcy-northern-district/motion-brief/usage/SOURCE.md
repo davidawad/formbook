@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-flnb-motion-brief-rooks1604003motion.pdf` (4 pages, text layer present, `pdftotext` yields the full text) |
+| File | `FILED-EXAMPLE-motion-brief.pdf` (4 pages, text layer present, `pdftotext` yields the full text) |
 | Fetched from | https://storage.courtlistener.com/recap/gov.uscourts.flnb.119443/gov.uscourts.flnb.119443.40.0.pdf (RECAP) |
 | Docket page | https://www.courtlistener.com/docket/33305592/ (Rooks, Jr. v. Equinox Capital) |
 | Case | *Julian Rodney Rooks, Jr. and Barbara Rooks v. Equinox Capital, Licensed by the United States Small Business Administration, et al.*, Adv. Pro. No. 16-04003-KKS, U.S. Bankruptcy Court, N.D. Fla., Tallahassee Division (main case No. 16-40025-KKS, Chapter 7) |

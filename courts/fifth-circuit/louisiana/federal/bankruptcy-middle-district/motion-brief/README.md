@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/motio
 
 | Item | Status |
 |---|---|
-| exemplar | **yes**: `usage/SAMPLE-lamb-motion-brief-kologik2410311.pdf`, pp. 1-19 of Doc. 8 in *In re Kologik, LLC, et al.*, No. 24-10311 (Bankr. M.D. La.), filed 04/23/2024. Source, fetch date, checksums and the reason for choosing it are in `usage/SOURCE.md`. The PDF was missing from the tree until re-fetched on 2026-10-14. |
+| exemplar | **yes**: `usage/FILED-EXAMPLE-motion-brief.pdf`, pp. 1-19 of Doc. 8 in *In re Kologik, LLC, et al.*, No. 24-10311 (Bankr. M.D. La.), filed 04/23/2024. Source, fetch date, checksums and the reason for choosing it are in `usage/SOURCE.md`. The PDF was missing from the tree until re-fetched on 2026-10-14. |
 | typeface | Rule names **no face**: LR 5005-2(b) requires "12-point font and be double-spaced" (2022 local rules); LR 9013-5(b) requires "12 point font" for proposed orders. Neither names a typeface (read from the court's PDF 2026-10-14). Keeps **EB Garamond** (vendored, OFL). |
-| sample md | `usage/INPUT-lamb-motion-brief-motionbriefsample.md`: a transcription of exemplar pp. 1-19 (caption, Material Terms table, nine footnotes, block quotation, prayer, signature). Placeholders only in the hearing fields (see gap 2). |
-| render | ok (re-run 2026-10-14): `sh tools/render.sh` exit 0, no typst output; `usage/OUTPUT-lamb-motion-brief-motionbriefsample.typst.pdf`, 18 pages, letter, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -Italic, all embedded). |
+| sample md | `usage/INPUT-motion-brief.md`: a transcription of exemplar pp. 1-19 (caption, Material Terms table, nine footnotes, block quotation, prayer, signature). Placeholders only in the hearing fields (see gap 2). |
+| render | ok (re-run 2026-10-14): `sh tools/render.sh` exit 0, no typst output; `usage/OUTPUT-motion-brief.typst.pdf`, 18 pages, letter, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -Italic, all embedded). |
 | overlay | ok (re-run 2026-10-14): `sh tools/overlay.sh` exit 0 once the exemplar was restored; `usage/OVERLAY-motion-brief-sample.pdf` (18 pages) and `.txt` (page map). |
 | pages reviewed | 18 of 18 (re-run 2026-10-14): every page of the re-rendered output viewed as PNG at 100 dpi. Page 18 is the signature block alone (gap 4, OPEN). |
 | tier 1 (mandated form) | Pass on the rule points the template checks: letter size, 12 pt, double-spaced body, legible vendored font, caption, notice, contact block (LR 9013-1(a)), footer page numbers. The 15-page memorandum limit (LR 9013-2) is not checked by the template; this exemplar is 18 pages including the motion. See gap 1. |
@@ -67,7 +67,7 @@ Changes made in this pass (all in `typst/lamb-motion-brief.typ`): tables single-
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
 D=courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/motion-brief
-sh tools/render.sh $D usage/INPUT-lamb-motion-brief-motionbriefsample.md        # -> usage/OUTPUT-lamb-motion-brief-motionbriefsample.typst.pdf
+sh tools/render.sh $D usage/INPUT-motion-brief.md        # -> usage/OUTPUT-motion-brief.typst.pdf
 sh tools/overlay.sh $D motion-brief-sample                        # -> usage/OVERLAY-motion-brief-sample.pdf/.txt
 ```
 
@@ -119,10 +119,10 @@ Pitch: 24.06 pt on the body lines of page 2 (unchanged from the earlier calibrat
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh`, `reference.docx`, `lamb-motion-brief.lua`; `usage/OUTPUT-lamb-motion-brief-motionbriefsample.docx` is written by `sh tools/render.sh --engine docx`).
+DOCX (`docx/`: `build-reference.sh`, `reference.docx`, `lamb-motion-brief.lua`; `usage/OUTPUT-motion-brief.docx` is written by `sh tools/render.sh --engine docx`).
 
 - Matches the typst form: EB Garamond 12 pt, exact 24 pt (double) body lines, single-spaced footnotes, block quotations, caption, table cells and signature block; 1 in margins on letter; centred PAGE number in the footer; Form 416 style caption; notice of motion and opportunity for hearing (LR 9013-1(b)(2)) with the same wording; headings centred bold capitals (level 1), bold (level 2), bold italic (level 3).
 - Differs: the "NOTICE" and caption are built by the filter from frontmatter; table cells are single-spaced by a table pass, not by the table style. Footnotes are Word-native footnotes (footnote text 12 pt, single). Pagination follows the renderer (Word and LibreOffice can break lines differently).
 - No TOC or TOA in this form, so no field-update caveat applies.
-- Not run here: no LibreOffice on this box, so no `.docx.pdf` and no page was viewed. `OUTPUT-lamb-motion-brief-motionbriefsample.docx` was validated only as a zip with well-formed XML parts.
+- Not run here: no LibreOffice on this box, so no `.docx.pdf` and no page was viewed. `OUTPUT-motion-brief.docx` was validated only as a zip with well-formed XML parts.
 - BLOCKED: docx.pdf gates (tools/check.sh --engine docx, Gates 0-3 on `usage/OUTPUT-motion-brief-sample.docx.pdf`): LibreOffice (`soffice`) is not installed on this box, so no PDF can be made and the stamp `.check-docx.txt` is not written.

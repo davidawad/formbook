@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/north-carolina/federal/bankruptcy-eastern-distric
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nceb-adversary-complaint-jsmithsecondwind2500159.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nceb-adversary-complaint-jsmithcomplaint.md`: an excerpt of the 38-page complaint (caption, introduction, jurisdiction, parties, factual allegations, part of the First Claim, prayer, signature); see Known gaps |
-| render | ok: `usage/OUTPUT-nceb-adversary-complaint-jsmithcomplaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md`: an excerpt of the 38-page complaint (caption, introduction, jurisdiction, parties, factual allegations, part of the First Claim, prayer, signature); see Known gaps |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | typeface | rules name no face: EB Garamond kept (`docs/FONTS.md`, "No face named"); no substitute needed. Checked 2026-10-14 against the NCEB Local Rules and Administrative Guide (see Typography). |
 | overlay | ok: `usage/OVERLAY-jsmith-complaint.pdf` and `usage/OVERLAY-jsmith-complaint.txt` (page map; exemplar copy fetched from CourtListener RECAP on 2026-10-14, 38 pages, matching `usage/SOURCE.md`) |
 | pages reviewed | 8 of 8 (fonts pass, 2026-10-14: every page rendered at 70 dpi and viewed after the re-render) |
@@ -88,7 +88,7 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body.
 
 ## Engines
 
-**docx** (`docx/`: `make-reference.sh` builds `reference.docx`; `nceb-adversary-complaint.lua` adds the caption, the numbered allegations and the signature block). Outputs: `usage/OUTPUT-nceb-adversary-complaint-jsmithcomplaint.docx` and `usage/OUTPUT-nceb-adversary-complaint-jsmithcomplaint.docx.pdf` (the LibreOffice PDF, the file checked).
+**docx** (`docx/`: `make-reference.sh` builds `reference.docx`; `nceb-adversary-complaint.lua` adds the caption, the numbered allegations and the signature block). Outputs: `usage/OUTPUT-adversary-complaint.docx` and `usage/OUTPUT-adversary-complaint.docx.pdf` (the LibreOffice PDF, the file checked).
 
 What matches the typst output: letter page, 1-inch margins; EB Garamond 12 pt (embedded as EBGaramond Regular, Bold and Italic); body double-spaced at 24 pt exact; allegations numbered 1 to N at the margin, lettered items indented 0.5 inch; centered court lines, division, caption table with a rule on its right and bottom edges, the case, chapter and adversary lines, centered title; block quotations indented 1 inch both sides and single-spaced, with their lettered list inside the indent; tables single-spaced; signature block at 3 inches with the `s/` signature and the role line kept together; centered page-number footer.
 
@@ -99,6 +99,6 @@ What differs (tier 2, recorded, not changed):
 - Heading spacing differs by a few points; table header rows repeat when a table breaks across pages (Word's convention for header rows).
 - Word is not available here, so the `.docx` was not opened in Word. LibreOffice converted it without error. `unzip -t` passes and all 17 XML parts pass `xmllint --noout`.
 
-Pages reviewed: all 9 pages of `usage/OUTPUT-nceb-adversary-complaint-jsmithcomplaint.docx.pdf`, each rendered at 60 dpi and viewed after the last change; typst comparison pages 1 to 8 of the typst render (rendered to /tmp, not to `usage/`).
+Pages reviewed: all 9 pages of `usage/OUTPUT-adversary-complaint.docx.pdf`, each rendered at 60 dpi and viewed after the last change; typst comparison pages 1 to 8 of the typst render (rendered to /tmp, not to `usage/`).
 
 No docx item is BLOCKED. The court folder has no `checks.yaml`, so no check IDs apply to this doc type yet; the page review above is the only check.

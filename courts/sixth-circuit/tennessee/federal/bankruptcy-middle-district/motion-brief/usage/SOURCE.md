@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-tnmb-motion-brief-lemehnoname325ap90071.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, Middle District of Tennessee (Nashville Division)
 - Case: *Eva M. Lemeh, Trustee v. No Name Group, LLC*, Adv. Proc. No. 3:25-ap-90071, in *In re Streamline Production Group, LLC*, Case No. 3:23-bk-02638 (Chapter 7, Judge Walker)
 - Document: Memorandum of Law in Support of Motion to Dismiss Adversary Proceeding (8 pages, with three footnotes), Doc. 9. The motion itself (Doc. 8, 2 pages) is a separate filing and is not in this PDF.

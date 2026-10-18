@@ -19,7 +19,7 @@ This is a public court filing. The file is kept unchanged in this folder.
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca4-reply-brief-dojinretrump182486.pdf` |
+| File | `FILED-EXAMPLE-reply-brief-2.pdf` |
 | URL | https://www.ca4.uscourts.gov/docs/pdfs/18-2486/18-2486_replybrief.pdf |
 | Filer | Petitioner, United States Department of Justice (Civil Division, Appellate Staff) |
 | Case | *In re Donald J. Trump*, No. 18-2486 |
@@ -30,4 +30,4 @@ This is a public court filing. The file is kept unchanged in this folder.
 
 ## Replacement for the audited non-redistributable-font exemplar
 
-The audited `SAMPLE-ca4-reply-brief-dojinretrump182486.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `SAMPLE-ca4-reply-brief-dncdeluca261532.pdf` from a different filer. See the additional-exemplar record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.
+The audited `FILED-EXAMPLE-reply-brief-2.pdf` (Garamond) is replaced for font and text-layer comparison by the text-based `FILED-EXAMPLE-reply-brief.pdf` from a different filer. See the additional-exemplar record above for the public filing URL, filer, docket, date, and retrieval details. The original is retained as historical source material; it is not the selected font-audit exemplar.

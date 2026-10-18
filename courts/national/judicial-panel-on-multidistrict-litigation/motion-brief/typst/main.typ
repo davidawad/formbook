@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "jpml-motion-brief.typ": jpml-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-jpml-motion-brief-chevroletbolt.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #jpml-motion-brief(meta, body)

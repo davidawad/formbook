@@ -5,10 +5,10 @@ Folder: `courts/sixth-circuit/michigan/federal/eastern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-mied-complaint-musiclaa526cv13851.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-mied-complaint-musiclaa.md` (the whole 12-page complaint, transcribed) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the whole 12-page complaint, transcribed) |
 | typeface | required: none (LR 5.1(a)(3) sets 14 pt for proportional type and names no face); vendored substitute: none needed; font kept: **EB Garamond** (`docs/FONTS.md`, "No face named"). Visual-only: the exemplar is Times New Roman, not a rule. |
-| render | ok: `usage/OUTPUT-mied-complaint-musiclaa.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
 | embedded fonts | `pdffonts`: EBGaramond-Regular, -Bold, -BoldItalic only (all embedded) |
 | overlay | ok: `usage/OVERLAY-music-laa-complaint.pdf` and `OVERLAY-music-laa-complaint.txt` (re-run 2026-10-15) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed on 2026-10-15) |
@@ -74,7 +74,7 @@ Defects found and fixed during this review (the template at the time of the fina
 
 Built 2026-10-15 with `docx/build-reference.sh`, `docx/mied-complaint.lua` and tools/render.sh --engine docx (pandoc 3.6.4).
 
-**docx: BLOCKED (not passed).** `usage/OUTPUT-mied-complaint-musiclaa.docx` is written and valid (no duplicate zip entries, every XML part well formed). The `.docx.pdf` step did not run: LibreOffice (`soffice`) is not installed on this box, so `tools/render-docx.sh` exits 1 at the conversion. The docx.pdf checks (Gates 0 to 3 on the LibreOffice PDF) and the page-by-page visual review are BLOCKED, and no `usage/.check-docx.txt` stamp is written. Pages reviewed: 0.
+**docx: BLOCKED (not passed).** `usage/OUTPUT-complaint.docx` is written and valid (no duplicate zip entries, every XML part well formed). The `.docx.pdf` step did not run: LibreOffice (`soffice`) is not installed on this box, so `tools/render-docx.sh` exits 1 at the conversion. The docx.pdf checks (Gates 0 to 3 on the LibreOffice PDF) and the page-by-page visual review are BLOCKED, and no `usage/.check-docx.txt` stamp is written. Pages reviewed: 0.
 
 What the docx matches, as set in `docx/reference.docx` and the filter (checked in the XML, not on a page):
 - US Letter, 1 in margins on all sides (`w:pgSz`, `w:pgMar`), the same as the typst template.

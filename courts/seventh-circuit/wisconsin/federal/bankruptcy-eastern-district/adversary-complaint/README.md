@@ -4,8 +4,8 @@ Governs an adversary complaint filed in the United States Bankruptcy Court for t
 
 ## Exemplar
 
-- `usage/SAMPLE-wieb-adversary-complaint-layngvclarke2202003.pdf`: the U.S. Trustee's complaint to deny a Chapter 7 discharge, *Layng v. Clarke* (In re Marissa J. Clarke), Adv. No. 22-02003-kmp, filed 01/13/2022 (11 pp.). Provenance and checksum in `usage/SOURCE.md`.
-- Sample: `usage/INPUT-wieb-adversary-complaint-layngclarke.md` (full transcription, 87 numbered paragraphs, 9 rendered pages). Render: `usage/OUTPUT-wieb-adversary-complaint-layngclarke.typst.pdf`. Overlay: `usage/OVERLAY-layng-clarke.pdf` and `usage/OVERLAY-layng-clarke.txt`.
+- `usage/FILED-EXAMPLE-adversary-complaint.pdf`: the U.S. Trustee's complaint to deny a Chapter 7 discharge, *Layng v. Clarke* (In re Marissa J. Clarke), Adv. No. 22-02003-kmp, filed 01/13/2022 (11 pp.). Provenance and checksum in `usage/SOURCE.md`.
+- Sample: `usage/INPUT-adversary-complaint.md` (full transcription, 87 numbered paragraphs, 9 rendered pages). Render: `usage/OUTPUT-adversary-complaint.typst.pdf`. Overlay: `usage/OVERLAY-layng-clarke.pdf` and `usage/OVERLAY-layng-clarke.txt`.
 
 ## Governing rules (verified 2026-10-14)
 
@@ -56,14 +56,14 @@ No: an exemplar was found (CourtListener RECAP, E.D. Wis. adversary 22-02003). T
 
 ## Build
 
-    sh tools/render.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/adversary-complaint usage/INPUT-wieb-adversary-complaint-layngclarke.md courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/adversary-complaint/usage/OUTPUT-wieb-adversary-complaint-layngclarke.typst.pdf
+    sh tools/render.sh courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/adversary-complaint usage/INPUT-adversary-complaint.md courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/adversary-complaint/usage/OUTPUT-adversary-complaint.typst.pdf
 
 The overlay step (`tools/overlay.sh`) reads `usage/OUTPUT-<id>.pdf`. The sample render is named `<id>.pdf` as specified, so the overlay is run on a temporary `OUTPUT-<id>.pdf` copy, and its outputs are renamed to `<id>-overlay.pdf` and `<id>-overlay.txt`.
 
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the court's form.
-- **docx** (`docx/reference.docx`, `docx/build-reference.sh`, `docx/wieb.lua`): pandoc on a reference.docx built from pandoc's default (EB Garamond 12 pt, exact 24 pt line pitch, 1 in margins on letter paper, centered PAGE footer, bold centered level-1 headings, bold level-2, italic level-3, no first-line indent on body paragraphs, numbered paragraphs typed by the drafter with the text at 1 in). The caption, consent sentence and signature block are styled paragraphs with tab stops; no tables and no forced line breaks. Every case word comes from the frontmatter. Built to `usage/OUTPUT-wieb-adversary-complaint-layngclarke.docx`; the zip and XML parts were checked (`unzip -tq`, `xmllint --noout`).
+- **docx** (`docx/reference.docx`, `docx/build-reference.sh`, `docx/wieb.lua`): pandoc on a reference.docx built from pandoc's default (EB Garamond 12 pt, exact 24 pt line pitch, 1 in margins on letter paper, centered PAGE footer, bold centered level-1 headings, bold level-2, italic level-3, no first-line indent on body paragraphs, numbered paragraphs typed by the drafter with the text at 1 in). The caption, consent sentence and signature block are styled paragraphs with tab stops; no tables and no forced line breaks. Every case word comes from the frontmatter. Built to `usage/OUTPUT-adversary-complaint.docx`; the zip and XML parts were checked (`unzip -tq`, `xmllint --noout`).
   - Matches the typst form: font and size, double spacing, margins, the caption order (court, debtor and case, rule, parties with adversary number, rule, title), the consent sentence, the "/s/" signature block at 3.25 in, numbered paragraphs.
   - Differs or unverified: the typst caption is a two-column grid with a vertically centred right column; the docx puts the case number on the debtor row and the adversary number on the "v." row, and its rules are paragraph borders. The numbered-paragraph layout (number at 0.5 in, text at 1 in) is a pleading convention, not the typst enum layout. Word's line breaks may differ from typst's. The signature block is kept together but not with the preceding paragraph.
   - BLOCKED on this box: `soffice` (LibreOffice) is not installed, so `usage/OUTPUT-layng-clarke.docx.pdf` was not produced and the docx Gates 0 to 3 cannot run. No page was rendered or reviewed (0 pages). Not opened in Word. The typst template has no table of contents or table of authorities, so the TOC/TOA field caveat does not apply to this doc type.

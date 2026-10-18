@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nhb-motion-brief-oldcold1511400.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, District of New Hampshire (`nhb`)
 - Case: *In re Old Cold, LLC*, Bk. No. 15-11400-CJP (Chapter 11)
 - Document: "Mission Product Holdings, Inc.'s Memorandum of Law in Support of Its Motion for Payment of Administrative Claim" (Doc. 685), 15 pages, with footnotes, a certificate of service and a service list

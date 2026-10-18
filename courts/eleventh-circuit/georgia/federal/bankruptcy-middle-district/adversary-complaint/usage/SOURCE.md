@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-gamb-adversary-complaint-galardi2205008.pdf` |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.gamb.402337/gov.uscourts.gamb.402337.1.0.pdf (RECAP archive copy of ECF Doc. 1) |
 | Docket page | https://www.courtlistener.com/docket/63262380/1/galardi-jr-v-galardi/ |
 | Court | United States Bankruptcy Court, Middle District of Georgia, Macon Division |

@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nmb-motion-brief-romancatholic1813027.pdf` |
+| File | `FILED-EXAMPLE-motion-brief.pdf` |
 | Court | United States Bankruptcy Court, District of New Mexico (`nmb`) |
 | Case | In re Roman Catholic Church of the Archdiocese of Santa Fe, a New Mexico corporation sole, Case No. 18-13027-t11 (Chapter 11). Main case, contested matter; no adversary number. |
 | Document | Memorandum of Points and Authorities in Support of Motion of the Official Committee of Unsecured Creditors (i) for exclusive and irrevocable authority to commence, prosecute, and settle adversary proceedings on behalf of the bankruptcy estate against certain diocese-related entities; and (ii) to compel the debtor to produce information revealing the ten parishes with the largest purported interests in the Deposit and Loan Fund (ECF Doc. 383, 54 pages) |

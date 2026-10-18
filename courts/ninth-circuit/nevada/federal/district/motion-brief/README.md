@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/nevada/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-nvd-motion-brief-lynch226cv00895.pdf` (one filer, see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-nvd-motion-brief-lynchmotiontodismiss.md` (the whole 11-page motion: motion, memorandum, conclusion, signature, certificate of service) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer, see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (the whole 11-page motion: motion, memorandum, conclusion, signature, certificate of service) |
 | typeface | face required: **none** (LR IA 10-1(a)(3) sets size only: "Text must be size 12 font or larger"; read 2026-10-15 from the court's 2020 local rules PDF). Substitute: none needed; **EB Garamond** kept (no-face default, `docs/FONTS.md`). Fit: n/a. Embedded: EBGaramond Regular, Bold, Italic (`pdffonts`). |
-| render | ok: `usage/OUTPUT-nvd-motion-brief-lynchmotiontodismiss.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
 | overlay | ok: `usage/OVERLAY-lynch-motion-to-dismiss.pdf` and `.txt` (pairing by word overlap; see below; re-run 2026-10-15) |
 | pages reviewed | 11 of 11 (every page rasterized at 60 dpi and viewed on 2026-10-15) |
 | BLOCKED | none. Tier-2 coverage is short of the eval loop's "two or three filers" (see Known gaps 1). |
@@ -59,7 +59,7 @@ Not produced by this template: the proposed order (LR 7-2(f) applies only if the
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
 D=courts/ninth-circuit/nevada/federal/district/motion-brief
-sh tools/render.sh $D usage/INPUT-nvd-motion-brief-lynchmotiontodismiss.md   # -> usage/OUTPUT-nvd-motion-brief-lynchmotiontodismiss.typst.pdf
+sh tools/render.sh $D usage/INPUT-motion-brief.md   # -> usage/OUTPUT-motion-brief.typst.pdf
 sh tools/overlay.sh $D lynch-motion-to-dismiss                   # -> usage/OVERLAY-lynch-motion-to-dismiss.pdf and .txt
 ```
 
@@ -102,7 +102,7 @@ Reviewed pages: 11 of 11.
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion-brief.lua` writes the cover, the memorandum, the signature block and the certificate of service; `docx/render.sh` (run by `tools/render-docx.sh`). Output: `usage/OUTPUT-nvd-motion-brief-lynchmotiontodismiss.docx` and `.docx.pdf` (LibreOffice 26.8), 11 pages, all 11 rendered at 60 dpi and viewed.
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion-brief.lua` writes the cover, the memorandum, the signature block and the certificate of service; `docx/render.sh` (run by `tools/render-docx.sh`). Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8), 11 pages, all 11 rendered at 60 dpi and viewed.
 
 - Matches the typst output: the same page as the complaint (letter; margins; EB Garamond 13 pt; 28 numbers on a 462-twip grid; pleading rules); caption box with the separator "vs." and the title in bold; the memorandum on the grid after the caption on page 1; centered caps for level 1 headings and hanging bold for levels 2 and 3; the certificate of service on its own page, with the recipients at 0.5 in and the signature at 2.6 in; page number alone in the footer.
 - Differs from typst: the 28 numbers sit in a header text box (see the complaint's Engines note); block quotations are a borderless table cell indented 0.5 in on both sides, with the row at least the grid-rounded height of an estimate, so the text after a quotation stays on the grid (an over-estimate leaves a little white space under the quotation); a quotation's "(b)" and "(a)" markers are typed as the author wrote them; page breaks follow LibreOffice.

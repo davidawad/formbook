@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ilsd-complaint-prolifeactionleague326cv01087.pdf` (20 pages; text layer present, Times New Roman and Arial embedded, `pdftotext` reads the body)
+- File: `FILED-EXAMPLE-complaint.pdf` (20 pages; text layer present, Times New Roman and Arial embedded, `pdftotext` reads the body)
 - Court: United States District Court, Southern District of Illinois
 - Case: *Pro-Life Action League, Illinois Right to Life, and Illinois Right to Life Action v. Illinois Pro-Life Action, and Right to Life Action*
 - Docket: No. 3:26-cv-01087-NJR (Document 1)

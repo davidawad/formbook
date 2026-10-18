@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "flnb-adversary-complaint.typ": complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-flnb-adversary-complaint-ochlockonee.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-adversary-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #complaint(meta, body)

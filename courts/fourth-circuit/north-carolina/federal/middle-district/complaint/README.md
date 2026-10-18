@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/north-carolina/federal/middle-district/complaint/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ncmd-complaint-prillaman26cv01154.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ncmd-complaint-prillaman.md` (the whole complaint text, 78 allegations, prayer, signature) |
-| render | ok: `usage/OUTPUT-ncmd-complaint-prillaman.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md` (the whole complaint text, 78 allegations, prayer, signature) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-prillaman-complaint.pdf` and `OVERLAY-prillaman-complaint.txt` |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; see the table below) |
 | tier 2 | one exemplar only, so tier 2 is not judged against two or three filers (see gaps) |
@@ -54,11 +54,11 @@ Not produced by this template (separate papers, not the complaint): the civil co
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/fourth-circuit/north-carolina/federal/middle-district/complaint usage/INPUT-ncmd-complaint-prillaman.md
+sh tools/render.sh courts/fourth-circuit/north-carolina/federal/middle-district/complaint usage/INPUT-complaint.md
 sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/middle-district/complaint prillaman-complaint
 ```
 
-- `usage/OUTPUT-ncmd-complaint-prillaman.typst.pdf`: 11 pages. typst compiled with no warnings. Fonts: EBGaramond-Regular, -Italic, -Bold only (`pdffonts`).
+- `usage/OUTPUT-complaint.typst.pdf`: 11 pages. typst compiled with no warnings. Fonts: EBGaramond-Regular, -Italic, -Bold only (`pdffonts`).
 - `usage/OVERLAY-prillaman-complaint.pdf` and `.txt`: red is our render, blue the exemplar, black where both agree. The page map pairs pages by word overlap: ours p.1 to p.11 pair with filed p.1, 3, 4, 6, 8, 9, 11, 12, 14, 15, 15. The overlay is a diagnostic, not a score: the exemplar is Times with a different line grid, so the lines will not coincide.
 
 ## Visual review (every page rendered at 60 dpi and looked at)
@@ -93,9 +93,9 @@ Reviewed pages: 11 of 11. Pages 1 to 9 were reviewed on the render that carried 
 
 ## Engines
 
-Checked on the final renders of `usage/OUTPUT-ncmd-complaint-prillaman.docx.pdf` (12 pages, LibreOffice) against `usage/OUTPUT-ncmd-complaint-prillaman.typst.pdf` (typst, 11 pages). Every page of both PDFs was rendered at 60 dpi and viewed: docx pages 1 to 12, typst pages 1 to 11.
+Checked on the final renders of `usage/OUTPUT-complaint.docx.pdf` (12 pages, LibreOffice) against `usage/OUTPUT-complaint.typst.pdf` (typst, 11 pages). Every page of both PDFs was rendered at 60 dpi and viewed: docx pages 1 to 12, typst pages 1 to 11.
 
-- **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/ncmd-complaint.lua`, `docx/render.sh`). Output: `usage/OUTPUT-ncmd-complaint-prillaman.docx` and `.docx.pdf`. The `.docx` passes `unzip -tq` and every XML part is well formed (`xmllint`). LibreOffice converted it without error. Not opened in Word.
+- **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/ncmd-complaint.lua`, `docx/render.sh`). Output: `usage/OUTPUT-complaint.docx` and `.docx.pdf`. The `.docx` passes `unzip -tq` and every XML part is well formed (`xmllint`). LibreOffice converted it without error. Not opened in Word.
   - *Matches typst:* EB Garamond 13 pt (the PDF embeds only EB Garamond; OpenSymbol is used only for the bullets of the list on page 9); letter paper; top margin 1.25 in and the other margins 1 in; body on a 23.0 pt line pitch (measured); the caption with the party column closed by a right and a bottom rule; numbered allegations 1 to 78 with the prayer unnumbered; the prayer, WHEREFORE line, list and signature block kept together (docx page 12, as typst page 11); the footnote at the foot of its page; page number centred in the footer.
   - *Differs:* 12 pages against typst's 11. Headings take a little more space, so the page breaks fall earlier (docx page 1 ends in paragraph 4, typst page 1 ends after paragraph 4). The footnote sits on page 6 of the docx and page 5 of typst. Paragraph numbers are typed text with a tab, not Word list numbering. The bullets are a LibreOffice list.
   - *BLOCKED:* none found. This folder has no `checks.yaml`, so no gate ID exists to block; the review above is by eye.

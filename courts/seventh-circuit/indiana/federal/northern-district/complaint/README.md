@@ -5,10 +5,10 @@ Folder: `courts/seventh-circuit/indiana/federal/northern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-innd-complaint-blackman226cv85.pdf` (sampled; 13 pages), plus `usage/SAMPLE-innd-complaint-nowak324cv950.pdf` (second filer, 16 pages). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-innd-complaint-blackman.md`: the whole 13-page filing transcribed (caption, headings, 66 numbered paragraphs, lettered subparagraphs, prayer, jury demand, signature). |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (sampled; 13 pages), plus `usage/FILED-EXAMPLE-complaint-2.pdf` (second filer, 16 pages). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-complaint.md`: the whole 13-page filing transcribed (caption, headings, 66 numbered paragraphs, lettered subparagraphs, prayer, jury demand, signature). |
 | typeface | No face named by the rule: EB Garamond (vendored), per `docs/FONTS.md` ("No face named"). Embedded per `pdffonts`: EBGaramond Regular and Bold. See Known gaps 1. |
-| render | ok: `usage/OUTPUT-innd-complaint-blackman.typst.pdf`, 13 pages, typst 0.15.0, vendored fonts only, no warnings (re-rendered 2026-10-15) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 13 pages, typst 0.15.0, vendored fonts only, no warnings (re-rendered 2026-10-15) |
 | overlay | ok: `usage/OVERLAY-blackman-complaint.pdf` and `OVERLAY-blackman-complaint.txt` (rebuilt 2026-10-15) |
 | pages reviewed | 13 of 13 (every page rasterized and viewed on the 2026-10-15 build) |
 
@@ -94,7 +94,7 @@ Overlay: `usage/OVERLAY-blackman-complaint.txt` pairs our pages 1–13 one to on
 
 ## Engines
 
-DOCX (`docx/`): pandoc on `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx`) with the filter `docx/innd.lua`. Output: `usage/OUTPUT-innd-complaint-blackman.docx`.
+DOCX (`docx/`): pandoc on `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx`) with the filter `docx/innd.lua`. Output: `usage/OUTPUT-complaint.docx`.
 
 - Matches the typst form: EB Garamond 12 pt body, exact 27.6 pt double line pitch, 0.5 in first-line indent, 1 in margins on letter paper, 10 pt single-spaced footnotes, 13.8 pt single lines in the caption and signature, centered page-number footer, numbered paragraphs counted in the filter, "a." lettered lists, "A." prayer items, caption table with a right and bottom rule on the party column.
 - Differs or unverified: paragraph gap (19.8 pt) is set as space-after; the signature block is a table, so it is not kept on one page with the last paragraph as typst does (no keep-with-next); the numbered-paragraph tab stop (1 in) approximates typst's label gap; table border weights and cell padding are not compared against the typst layout.

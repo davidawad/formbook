@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nysd-motion-brief-minerva26cv06789.pdf` (17 pages; text layer present, from an OCR paper-capture; `pdftotext` reads it with some OCR errors, which the sample corrects by reading the page images' text as printed) |
+| File | `FILED-EXAMPLE-motion-brief.pdf` (17 pages; text layer present, from an OCR paper-capture; `pdftotext` reads it with some OCR errors, which the sample corrects by reading the page images' text as printed) |
 | Case | *Minerva Bunkering Pte Ltd. v. Ashfaque J. Rahman and Mahween Rahman* (in admiralty) |
 | Court | United States District Court, Southern District of New York |
 | Docket no. | 1:26-cv-06789-VEC (page header: `Document 14 Filed 08/28/26`) |
@@ -34,7 +34,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-nysd-motion-brief-garg26cv07025.pdf` (30 pages, letter, native text layer from Word via Acrobat PDFMaker, `pdftotext` reads it cleanly; not scanned) |
+| File | `FILED-EXAMPLE-motion-brief-2.pdf` (30 pages, letter, native text layer from Word via Acrobat PDFMaker, `pdftotext` reads it cleanly; not scanned) |
 | Case | *Better Home & Finance Holding Company v. Vishal Garg* |
 | Court | United States District Court, Southern District of New York |
 | Docket no. | 1:26-cv-07025-CM (page header: `Case 1:26-cv-07025-CM Document 41 Filed 09/08/26`) |

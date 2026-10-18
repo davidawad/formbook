@@ -4,10 +4,10 @@ Doc type `reply-brief` of court `nyappdiv` (folder: `courts/second-circuit/new-y
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-nyappdiv-reply-brief-integratenyc202202719.pdf` | Real filed reply brief, First Department, No. 2022-02719 (NYSCEF Doc. 36), text layer present |
+| `usage/FILED-EXAMPLE-reply-brief.pdf` | Real filed reply brief, First Department, No. 2022-02719 (NYSCEF Doc. 36), text layer present |
 | `usage/SOURCE.md` | URL fetched, case, docket, filer, date filed, date fetched, why this exemplar, its limits |
-| `usage/INPUT-nyappdiv-reply-brief-integratenycreply.md` | Markdown transcription of part of the exemplar (see "Known gaps", item 2) |
-| `usage/OUTPUT-nyappdiv-reply-brief-integratenycreply.typst.pdf` | `sh tools/render.sh … usage/INPUT-nyappdiv-reply-brief-integratenycreply.md` (13 pages) |
+| `usage/INPUT-reply-brief.md` | Markdown transcription of part of the exemplar (see "Known gaps", item 2) |
+| `usage/OUTPUT-reply-brief.typst.pdf` | `sh tools/render.sh … usage/INPUT-reply-brief.md` (13 pages) |
 | `usage/OVERLAY-integratenyc-reply.pdf`, `.txt` | `sh tools/overlay.sh … integratenyc-reply` (red = our render, blue = filed exemplar page, black = both) |
 | `typst/main.typ` | Entry point (reads the sample named by `--input sample=`) |
 | `typst/nyappdiv-reply-brief.typ` | The template, `nyappdiv-reply-brief(meta, md)`. Structure adapted from `courts/second-circuit/new-york/state/court-of-appeals/opening-brief/typst/`; numbers and rules are Part 1250's |
@@ -15,7 +15,7 @@ Doc type `reply-brief` of court `nyappdiv` (folder: `courts/second-circuit/new-y
 Build (from the repo root, toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/reply-brief usage/INPUT-nyappdiv-reply-brief-integratenycreply.md
+sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/reply-brief usage/INPUT-reply-brief.md
 sh tools/overlay.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/reply-brief integratenyc-reply
 ```
 
@@ -104,7 +104,7 @@ Searches run on 2026-10-14:
 
 ## Verification pass 2026-10-16 (fb-595.26.22)
 
-- Render: `sh tools/render.sh …/reply-brief usage/INPUT-nyappdiv-reply-brief-integratenycreply.md`, exit 0, no typst warnings, 13 pages (same as the committed PDF), EB Garamond Regular/Bold/Italic only.
+- Render: `sh tools/render.sh …/reply-brief usage/INPUT-reply-brief.md`, exit 0, no typst warnings, 13 pages (same as the committed PDF), EB Garamond Regular/Bold/Italic only.
 - Pages viewed: 13 of 13 at 60 dpi; page 2 (the TOC) viewed again after the fix below. The text of pages 3–13 is identical to the committed render (`pdftotext` diff). Overlay pages viewed as a 40 dpi contact sheet, with page 4 (body) at 100 dpi.
 - Overlay: `sh tools/overlay.sh …/reply-brief integratenyc-reply`, exit 0; the page map is unchanged (table above). On body pages our lines run close to the filed ones; the drift over a page is under a line.
 - Defect fixed: **TOC page numbers on wrapped entries** sat on the first line of the title while the dot leader ended on the last line (Points I and II, and both A. sub-points). The page-number column is now bottom-aligned (`toc-entry`), so the number ends the leader. Tier 2.

@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-calctapp-answering-brief-brownc095798.pdf` |
+| File | `FILED-EXAMPLE-answering-brief.pdf` |
 | Document | Respondent's Brief (the California Court of Appeal term for the answering brief) |
 | Case | *Teresa Brown v. California Department of Corrections and Rehabilitation* |
 | Court | Court of Appeal of the State of California, Third Appellate District |
@@ -24,4 +24,4 @@ Notes:
 
 | File | SHA-256 |
 |---|---|
-| `SAMPLE-calctapp-answering-brief-brownc095798.pdf` | `79ff3179d736e4749a7f5a32aa9ba526ac86c417de450ecf31efa1ac6bd0678f` |
+| `FILED-EXAMPLE-answering-brief.pdf` | `79ff3179d736e4749a7f5a32aa9ba526ac86c417de450ecf31efa1ac6bd0678f` |

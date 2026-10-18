@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "mied-complaint.typ": mied-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-mied-complaint-musiclaa.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #mied-complaint(meta, body)

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "scotus-amicus-brief-amicus-brief.typ": scotus-amicus-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-scotus-amicus-brief-nssf.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-amicus-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #scotus-amicus-brief(meta, body)

@@ -5,10 +5,10 @@ Folder: `courts/eighth-circuit/arkansas/federal/western-district/motion-brief/` 
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-arwd-motion-brief-gasper326cv03048.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-arwd-motion-brief-gasper.md` (the whole 11-page brief, transcribed) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (the whole 11-page brief, transcribed) |
 | typeface | face required: **none**. LR 5.5(a) says "type not less than elite" and names no face (searched the consolidated local rules, 66 pp., 2026-10-14). Vendored substitute: **not needed**; kept **EB Garamond** (`fonts/eb-garamond/`), as the fonts policy allows for a court that names no face. Metric class: n/a. The filed exemplar is Times New Roman (tier 2, not chased; see gap 2). |
-| render | ok (re-rendered 2026-10-14): `usage/OUTPUT-arwd-motion-brief-gasper.typst.pdf`, 10 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings; `pdffonts`: EBGaramond Regular/Bold/Italic only |
+| render | ok (re-rendered 2026-10-14): `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings; `pdffonts`: EBGaramond Regular/Bold/Italic only |
 | overlay | ok (regenerated 2026-10-14): `usage/OVERLAY-gasper-motion-brief.pdf` and `OVERLAY-gasper-motion-brief.txt`, against the filed exemplar re-fetched from the URL in `usage/SOURCE.md` (the PDF is not committed in this tree; see gap 10) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-14) |
 
@@ -60,9 +60,9 @@ The typst template above is the primary engine. The docx engine is in `docx/`; i
 
 - `docx/build-reference.sh` builds `docx/reference.docx`: EB Garamond 12 pt, double spacing as an exact 27.6 pt line, 0.5 in first-line indent, letter page with 1 in margins, "Page n of N" centered 0.4 in from the bottom, and single-spaced styles for the caption, court title, closing, signature and certificate, plus the single-spaced block quotation. Run `sh docx/build-reference.sh docx/reference.docx` (needs pandoc, zip, unzip and xmllint).
 - `docx/arwd-motion-brief.lua` turns the same markdown into Word: the court title and caption as borderless tables of exact width, the title in bold, unnumbered body paragraphs, capitalized level-1 headings, block quotations, numbered lists ("1."), the closing and signature block kept with the last paragraph, and the certificate of service when the frontmatter has one.
-- `sh tools/render.sh --engine docx <this folder> usage/INPUT-arwd-motion-brief-gasper.md` writes `usage/OUTPUT-arwd-motion-brief-gasper.docx`. The `.docx.pdf` step did not run (see BLOCKED below).
+- `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md` writes `usage/OUTPUT-motion-brief.docx`. The `.docx.pdf` step did not run (see BLOCKED below).
 
-**What matches** (checked on the .docx XML and its text, not by eye): font and size, the 27.6 pt line pitch, margins, the first-line indent, the block-quotation indents, the caption and closing table widths, the page-number footer fields, and the word sequence: every word of `INPUT-arwd-motion-brief-gasper.md` appears in the .docx in the same order.
+**What matches** (checked on the .docx XML and its text, not by eye): font and size, the 27.6 pt line pitch, margins, the first-line indent, the block-quotation indents, the caption and closing table widths, the page-number footer fields, and the word sequence: every word of `INPUT-motion-brief.md` appears in the .docx in the same order.
 
 **What differs:** Word breaks lines and places page breaks differently from typst, so pagination is not the same, and "Page n of N" is a field that Word and LibreOffice fill in at layout. Numbered items hang from 0.5 in with text at 1.0 in (typst's body indent is about 1.07 in). Stacked headings are one "Heading Continued" paragraph, not Word headings. The caption, closing and certificate tables hold plain text. The certificate heading is a level-1 heading, so Word lists it in the outline.
 

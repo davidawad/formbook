@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ilsb-motion-brief-garguladeighan2006018.pdf` (20 pages; sha256 `0aebccd34bd13884de94a7166e3e196e94cb1326cfa39d02ac5707ac7e4f7e1e`)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (20 pages; sha256 `0aebccd34bd13884de94a7166e3e196e94cb1326cfa39d02ac5707ac7e4f7e1e`)
 - Court: United States Bankruptcy Court, Southern District of Illinois (Effingham Division, per the caption of Doc 18 on the same docket; the attachment itself has no caption)
 - Case: *Gargula v. Deighan Law LLC, et al.* (Nancy J. Gargula, United States Trustee, v. Deighan Law LLC f/k/a Law Solutions Chicago LLC d/b/a UpRight Law LLC and James E. Ford), Adversary No. 20-06018-lkg, in the Chapter 7 case *In re Burns*, No. 19-60349
 - Document: Memorandum in Support of Motion to Withdraw (Doc 15-1), an attachment to the defendants' Motion to Withdraw the Reference (Doc 15, not fetched). A brief supporting a motion, the doc type of this folder. Text layer: yes (Times family, Times-Italic for case names).
@@ -12,14 +12,14 @@
 
 ## What is transcribed
 
-`usage/INPUT-ilsb-motion-brief-gargula.md` transcribes:
+`usage/INPUT-motion-brief.md` transcribes:
 
 - pages 1 to 10 of the filing, through Argument V.A.3 (footnotes 1 to 29, all of which sit on those pages; footnote 1 is moved from the title to the first sentence of the body, because the template's title is plain text);
 - the Conclusion and the signature block (pages 19 and 20).
 
 Pages 10 (from Argument V.A.4) to 19 (the end of Part V.C) are not transcribed. The sample says so in a visible note before the Conclusion. Footnotes 30 to 38 sit on those pages and are omitted with them.
 
-The rendered sample is 10 pages (`usage/OUTPUT-ilsb-motion-brief-gargula.typst.pdf`).
+The rendered sample is 10 pages (`usage/OUTPUT-motion-brief.typst.pdf`).
 
 ## Gaps between the transcription and the filing
 

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-nynd-complaint-golub126cv01490.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Northern District of New York
 - Case: *Golub v. Coll*, No. 1:26-cv-1490 (ECC/DJS)
 - Docket: No. 1:26-cv-1490, Document 1
@@ -14,9 +14,9 @@
 
 Second filer: not collected in this pass. The brief asks for one exemplar per doc type. Tier 2 (2 or 3 filers) is therefore not yet met; see README.md.
 
-## 2. SAMPLE-nynd-complaint-taal325cv00335.pdf
+## 2. FILED-EXAMPLE-complaint-2.pdf
 
-- File: `SAMPLE-nynd-complaint-taal325cv00335.pdf`
+- File: `FILED-EXAMPLE-complaint-2.pdf`
 - Court: United States District Court, Northern District of New York
 - Case: *Taal v. Trump*, No. 3:25-cv-335 (ECC/ML) (the clerk's stamp in the caption reads "3:25-cv-335 (EEC/ML)"; the CM/ECF header reads "Case 3:25-cv-00335-ECC-ML")
 - Docket: No. 3:25-cv-335, Document 1

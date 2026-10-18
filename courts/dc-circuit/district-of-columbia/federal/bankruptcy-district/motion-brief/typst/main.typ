@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "dcb-motion-brief.typ": dcb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-dcb-motion-brief-swainlanding.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #dcb-motion-brief(meta, body)

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-mieb-motion-brief-heitmann2441956.pdf` (24 pages: motion, brief in support, notice and opportunity to respond, certificate of service; text layer present)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (24 pages: motion, brief in support, notice and opportunity to respond, certificate of service; text layer present)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.mieb.991399/gov.uscourts.mieb.991399.106.0.pdf (CourtListener RECAP, `gov.uscourts.mieb.991399`, ECF Doc 106)
 - Court: United States Bankruptcy Court, Eastern District of Michigan, Southern Division
 - Case: *In re Brandon Heitmann*, Case No. 24-41956-MAR, Chapter 13, Hon. Mark A. Randon

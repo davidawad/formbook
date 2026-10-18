@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "rid-complaint.typ": rid-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-rid-complaint-nightingale.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #rid-complaint(meta, body)

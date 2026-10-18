@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-mc-opening-brief-hicks13004.pdf` (19 pages, text-based: `pdftotext` yields the text) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (19 pages, text-based: `pdftotext` yields the text) |
 | URL fetched from | https://ccrjustice.org/sites/default/files/assets/Hicks_v._UnitedStates_Appeal%20Brief%282013-11-05%29.pdf (hosted by the Center for Constitutional Rights) |
 | Case | *David M. Hicks v. United States*, U.S. Court of Military Commission Review, CMCR Case No. 13-004 |
 | Document | "Brief on Behalf of Appellant" (cover reads "CMCR Case No. _______", blank; the number 13-004 is taken from the government's answering brief in the same case) |
@@ -15,9 +15,9 @@ Not used from this source: the appendix and the motion to attach, which are not 
 
 ## Font-audit replacement designation
 
-The OCR-scanned `SAMPLE-mc-opening-brief-unitedstates14001.pdf` is replaced for font/text-layer comparison by the text-based `SAMPLE-mc-opening-brief-hicks13004.pdf` from a different filer. The Hicks brief's source details appear above. The al-Qosi brief below is an additional text-extractable comparison filing; it was produced with OCR and is not the selected font reference. The United States original is retained as historical source material.
+The OCR-scanned `FILED-EXAMPLE-opening-brief-3.pdf` is replaced for font/text-layer comparison by the text-based `FILED-EXAMPLE-opening-brief.pdf` from a different filer. The Hicks brief's source details appear above. The al-Qosi brief below is an additional text-extractable comparison filing; it was produced with OCR and is not the selected font reference. The United States original is retained as historical source material.
 
-## 2. Second filer: `SAMPLE-mc-opening-brief-unitedstates14001.pdf`
+## 2. Second filer: `FILED-EXAMPLE-opening-brief-3.pdf`
 
 | Field | Value |
 |---|---|
@@ -34,7 +34,7 @@ The OCR-scanned `SAMPLE-mc-opening-brief-unitedstates14001.pdf` is replaced for 
 
 Different party (the United States as appellant) and office (prosecution) from Hicks (defense). About 10.0 MB.
 
-## 3. Third filer: `SAMPLE-mc-opening-brief-alqosi17001.pdf`
+## 3. Third filer: `FILED-EXAMPLE-opening-brief-2.pdf`
 
 | Field | Value |
 |---|---|

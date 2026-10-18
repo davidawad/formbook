@@ -6,8 +6,8 @@ Complaint commencing an adversary proceeding in the U.S. Bankruptcy Court for th
 |---|---|
 | Template | `typst/main.typ`, `typst/okeb-adversary-complaint.typ` (rule-driven, no case text) |
 | Exemplars | 2 filed PDFs in `usage/`, both from one filer (the Chapter 7 trustee's counsel). See `usage/SOURCE.md` |
-| Sample | `usage/INPUT-okeb-adversary-complaint-apachecomplaint.md`, transcribed from `SAMPLE-okeb-adversary-complaint-loudvapache2608003.pdf` (word set checked against the filed text) |
-| Render | `usage/OUTPUT-okeb-adversary-complaint-apachecomplaint.typst.pdf`, 6 pages, `sh tools/render.sh` (no typst warnings) |
+| Sample | `usage/INPUT-adversary-complaint.md`, transcribed from `FILED-EXAMPLE-adversary-complaint.pdf` (word set checked against the filed text) |
+| Render | `usage/OUTPUT-adversary-complaint.typst.pdf`, 6 pages, `sh tools/render.sh` (no typst warnings) |
 | Overlay | `usage/OVERLAY-apache-complaint.pdf` and `.txt`, `sh tools/overlay.sh` (see "Overlay") |
 | Gate stamp | none: `checks.yaml` and `tools/check.sh` do not exist for this doc type yet |
 
@@ -59,7 +59,7 @@ Body (cmarker): paragraphs are unnumbered and first-line indented. An ordered li
 
 ## Overlay
 
-`usage/OVERLAY-apache-complaint.pdf` compares our render with `SAMPLE-okeb-adversary-complaint-loudvapache2608003.pdf` (the default exemplar: `tools/overlay.sh` takes the first PDF in `usage/`). Red is our render, blue is the filed page, black is both. Pages pair by shared words: our pages 1 to 6 map to filed pages 1 to 6 (word overlap 52% to 81%; `usage/OVERLAY-apache-complaint.txt`). The overlay is a diagnostic, not a score.
+`usage/OVERLAY-apache-complaint.pdf` compares our render with `FILED-EXAMPLE-adversary-complaint.pdf` (the default exemplar: `tools/overlay.sh` takes the first PDF in `usage/`). Red is our render, blue is the filed page, black is both. Pages pair by shared words: our pages 1 to 6 map to filed pages 1 to 6 (word overlap 52% to 81%; `usage/OVERLAY-apache-complaint.txt`). The overlay is a diagnostic, not a score.
 
 What it shows:
 
@@ -93,7 +93,7 @@ Docx engine (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.
 
 Differences from typst: Word's line breaking and the caption table's border rendering are not checked; the typst vertical gaps are approximated with paragraph spacing; the typst form's ragged-right body is kept.
 
-BLOCKED (docx engine, `usage/OUTPUT-okeb-adversary-complaint-apachecomplaint.docx` is written and valid XML, but the rest cannot run here):
+BLOCKED (docx engine, `usage/OUTPUT-adversary-complaint.docx` is written and valid XML, but the rest cannot run here):
 - `docx.pdf` (Gates 0 and 1 on the LibreOffice PDF): soffice not installed on this box, and LibreOffice cannot be installed here (no conda-forge package, no root). `tools/render-docx.sh` fails at its soffice step.
 - Visual review of the docx pages: BLOCKED for the same reason; pages reviewed: 0.
 - Word open check (no repair prompt): not done, no Word here.

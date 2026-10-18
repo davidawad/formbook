@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-prd-complaint-condevidal314cv01253.pdf` |
+| File | `FILED-EXAMPLE-complaint.pdf` |
 | Fetched from | https://lambdalegal.org/wp-content/uploads/2014/06/conde_pr_20140625_amended-complaint_0.pdf (linked from the case page https://lambdalegal.org/legal_document/conde_pr_20140625_amended-complaint/) |
 | Court | United States District Court, District of Puerto Rico |
 | Case | *Ada Mercedes Conde Vidal, et al. v. Alejandro J. García Padilla, et al.* |
@@ -21,7 +21,7 @@ Only one exemplar is in this folder. The brief asks for a filed example and the 
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-prd-complaint-unitedstates312cv02039.pdf` |
+| File | `FILED-EXAMPLE-complaint-2.pdf` |
 | Fetched from | https://justice.gov/iso/opa/resources/647201212211524505748.pdf (U.S. Department of Justice; case page https://justice.gov/crt/case/united-states-v-commonwealth-puerto-rico) |
 | Court | United States District Court, District of Puerto Rico |
 | Case | *United States of America v. Commonwealth of Puerto Rico and Puerto Rico Police Department* |

@@ -8,10 +8,10 @@ Status: exemplar=yes, render=ok, overlay=ok, pages_reviewed=16 of 16. Full depth
 
 | Path | What |
 |---|---|
-| `usage/SAMPLE-calctapp-answering-brief-brownc095798.pdf` | Filed respondent's brief, Third District, C095798 (March 21, 2024). Text-based. |
+| `usage/FILED-EXAMPLE-answering-brief.pdf` | Filed respondent's brief, Third District, C095798 (March 21, 2024). Text-based. |
 | `usage/SOURCE.md` | URL, case, docket, filer, date filed, date fetched. |
-| `usage/INPUT-calctapp-answering-brief-brownrespondentsbrief.md` | Markdown transcription of the exemplar (frontmatter = cover and certificate data; body = the excerpt). |
-| `usage/OUTPUT-calctapp-answering-brief-brownrespondentsbrief.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/courts-of-appeal/answering-brief usage/INPUT-calctapp-answering-brief-brownrespondentsbrief.md` (16 pages). |
+| `usage/INPUT-answering-brief.md` | Markdown transcription of the exemplar (frontmatter = cover and certificate data; body = the excerpt). |
+| `usage/OUTPUT-answering-brief.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/courts-of-appeal/answering-brief usage/INPUT-answering-brief.md` (16 pages). |
 | `usage/OVERLAY-brown-respondents-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/california/state/courts-of-appeal/answering-brief brown-respondents-brief`. |
 | `typst/main.typ` | Entry point (reads the sample named by `--input sample=...`). |
 | `typst/calctapp-answering-brief.typ` | The template: `calctapp-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top and traces to a rule or a style choice. |
@@ -21,7 +21,7 @@ Build (from the repo root; the toolchain is `typst` 0.15.0, poppler, ImageMagick
 ```sh
 export PATH="$HOME/.local/share/formbook/env/bin:$PATH"
 D=courts/ninth-circuit/california/state/courts-of-appeal/answering-brief
-sh tools/render.sh $D usage/INPUT-calctapp-answering-brief-brownrespondentsbrief.md
+sh tools/render.sh $D usage/INPUT-answering-brief.md
 sh tools/overlay.sh $D brown-respondents-brief
 ```
 
@@ -96,7 +96,7 @@ Docx engine (`docx/`), built 2026-10-15. `docx/make-reference.sh` builds `docx/r
 
 Differs from typst: no certificate of interested entities, table of contents, table of authorities, certificate of compliance or certificate of service; the cover is paragraphs (no rules, no caption grid); the signature block is paragraphs (no "Respectfully submitted" or signature line).
 
-BLOCKED (docx engine, `usage/OUTPUT-calctapp-answering-brief-brownrespondentsbrief.docx`):
+BLOCKED (docx engine, `usage/OUTPUT-answering-brief.docx`):
 - `docx.pdf` gates 0-3: BLOCKED, reason: `soffice` is not installed on the build box, so `tools/render-docx.sh` stops at the conversion step and no `.docx.pdf` exists. Pages reviewed for docx: 0.
 - Certificate of interested entities: not generated. Reason: not yet written.
 - TOC and TOA: not generated (typst builds both with page numbers). Reason: no TOC/TOA filter yet; LibreOffice does not honor TA/TOA fields (docs/DOCX.md).
@@ -104,7 +104,7 @@ BLOCKED (docx engine, `usage/OUTPUT-calctapp-answering-brief-brownrespondentsbri
 
 ## Verification pass 2026-10-16 (fb-595.26.16)
 
-- Rendered with `sh tools/render.sh .../answering-brief usage/INPUT-calctapp-answering-brief-brownrespondentsbrief.md`: exit 0, no typst warnings, 16 pages (the committed PDF was also 16 pages, so it was not stale). `pdffonts`: EB Garamond Regular, Italic and Bold only. Committed PDF: `603456c5fb07fa93…`.
+- Rendered with `sh tools/render.sh .../answering-brief usage/INPUT-answering-brief.md`: exit 0, no typst warnings, 16 pages (the committed PDF was also 16 pages, so it was not stale). `pdffonts`: EB Garamond Regular, Italic and Bold only. Committed PDF: `603456c5fb07fa93…`.
 - Viewed all 16 pages at 60 dpi (pages 1, 3, 15 and 16 again after the fixes), and the 16 overlay pages at 40 dpi. Our cover was compared with the exemplar's page 1 (90% word overlap).
 - Overlay rerun (`tools/overlay.sh`): pairings unchanged from the "Overlay" section above.
 - Fixed, in `typst/calctapp-answering-brief.typ`:

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-casd-motion-brief-sager326cv03372.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Southern District of California
 - Case: *Sager v. Cetera Financial Group, Inc.*
 - Docket: No. 3:26-cv-03372-RSH-VET (Document 16-1, the memorandum of points and authorities attached to Document 16, the Rule 12(b)(6) motion to dismiss)
@@ -14,7 +14,7 @@
 
 Second filer: not collected in this pass. The memorandum is one filer's brief; a tier-2 comparison needs a second S.D. Cal. motion to dismiss memorandum from a different filer (README.md, gap 1).
 
-- File: `SAMPLE-casd-motion-brief-dipito321cv01205.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Filer: Plaintiff Dipito LLC, by Michael A. Alfred, Law Office of Michael A. Alfred
 - Case: *Dipito LLC v. Manheim Riverside*, No. 3:21-cv-01205-H-JLB (Doc. 52)
 - Document: opposition to BMW Financial Services' motion to dismiss, 11 pages

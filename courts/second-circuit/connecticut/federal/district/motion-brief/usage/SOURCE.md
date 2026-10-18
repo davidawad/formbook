@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ctd-motion-brief-whitfield326cv00324.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, District of Connecticut
 - Case: *Anthony Whitfield and Rochelle Ribeiro White v. MedGuard Alert, Inc.* (putative class action, TCPA)
 - Docket: No. 3:26-cv-00324-KAD (Document 10-1, the memorandum; the motion itself is Document 10)
@@ -22,7 +22,7 @@ Other filers checked for a second reference (not saved; one exemplar per doc typ
 
 ## 2. Succow v. Bondi, federal defendant's memorandum (added 2026-10-17)
 
-- File: `SAMPLE-ctd-motion-brief-bondi325cv00250.pdf`
+- File: `FILED-EXAMPLE-motion-brief-2.pdf`
 - Court: United States District Court, District of Connecticut
 - Case: *Zachary Succow et al. v. Pamela Jo Bondi et al.* (Second Amendment challenge)
 - Docket: No. 3:25-cv-00250-SVN (Document 57-1; the motion itself is Document 57)
@@ -37,7 +37,7 @@ Other filers checked for a second reference (not saved; one exemplar per doc typ
 
 ## 3. Schuster v. Liberty Bank, memorandum on partial motion to dismiss (added 2026-10-17)
 
-- File: `SAMPLE-ctd-motion-brief-libertybank326cv00247.pdf`
+- File: `FILED-EXAMPLE-motion-brief-3.pdf`
 - Court: United States District Court, District of Connecticut
 - Case: *Bethany Schuster v. Liberty Bank* (FMLA, removed from Connecticut Superior Court)
 - Docket: No. 3:26-cv-00247-SFR (Document 18-1)

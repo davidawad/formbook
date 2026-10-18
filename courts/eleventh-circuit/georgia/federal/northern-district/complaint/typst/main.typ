@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "gand-complaint.typ": gand-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-gand-complaint-serveco.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #gand-complaint(meta, body)

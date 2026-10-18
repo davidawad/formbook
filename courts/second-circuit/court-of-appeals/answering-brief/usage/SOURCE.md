@@ -21,11 +21,11 @@ Observations recorded for the README, from the filed copy itself:
 - The cover has no color in the ECF copy; the court requires a red cover for an appellee's paper copies (FRAP 32(a)(2)).
 - The brief has no corporate disclosure statement (the filer is an individual) and no statement regarding oral argument.
 
-## 2. Second filer: `SAMPLE-ca2-answering-brief-hachette231260.pdf`
+## 2. Second filer: `FILED-EXAMPLE-answering-brief.pdf`
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca2-answering-brief-hachette231260.pdf` (75 pages, 612 x 792 pt, text-based: every page yields text with pdftotext; body in Times, fonts embedded) |
+| File | `FILED-EXAMPLE-answering-brief.pdf` (75 pages, 612 x 792 pt, text-based: every page yields text with pdftotext; body in Times, fonts embedded) |
 | Court | United States Court of Appeals for the Second Circuit |
 | Case | *Hachette Book Group, Inc. v. Internet Archive* |
 | Docket no. | 23-1260 (appeal from the S.D.N.Y.) |

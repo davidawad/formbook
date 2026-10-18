@@ -2,8 +2,8 @@
 
 - Court: `bap9` (United States Bankruptcy Appellate Panel of the Ninth Circuit), folder `courts/ninth-circuit/bankruptcy-appellate-panel/opening-brief/`
 - Template: `typst/bap9-opening-brief.typ` (entry `typst/main.typ`)
-- Exemplar: `usage/SAMPLE-bap9-opening-brief-meridiansc161227.pdf` (see `usage/SOURCE.md`)
-- Sample: `usage/INPUT-bap9-opening-brief-meridian.md`, a transcription of the exemplar, rendered to `usage/OUTPUT-bap9-opening-brief-meridian.typst.pdf`; overlay `usage/OVERLAY-meridian-opening-brief.pdf` and `.txt`
+- Exemplar: `usage/FILED-EXAMPLE-opening-brief.pdf` (see `usage/SOURCE.md`)
+- Sample: `usage/INPUT-opening-brief.md`, a transcription of the exemplar, rendered to `usage/OUTPUT-opening-brief.typst.pdf`; overlay `usage/OVERLAY-meridian-opening-brief.pdf` and `.txt`
 - Status of this doc type:
   - **Exemplar found.** `County of Imperial Treasurer-Tax Collector v. Stadtmueller (In re RW Meridian LLC)`, BAP No. SC-16-1227, appellant's opening brief dated and filed October 7, 2016. It is a scan (200 ppi JBIG2 images) with an invisible OCR text layer, not a born-digital PDF; the overlay pairs pages by that OCR text, and the OCR has errors (see the sample's header comment).
   - The sample is a transcription (cover, tables, a substantial run of body, signature, certificates). It is abridged: 14 rendered pages, the filer's 41-page brief is not transcribed in full. Omitted: the Argument after § A.1 (sub-parts 2-9), footnotes 2-3, the Summary's paragraph on the sale date, the Procedural History's June 2016 supplemental-briefing and hearing sentences, and the service list.
@@ -36,7 +36,7 @@ Secondary fetch: https://www.law.cornell.edu/rules/frbp/rule_8015 (fetched 2026-
 
 Goal: a real filed appellant's opening brief from this court, public, with text.
 
-Found: `usage/SAMPLE-bap9-opening-brief-meridiansc161227.pdf`, from https://www.cacttc.org/assets/documents/3%20-%20meridian%20appellants%20bap%20brief.pdf (the California Association of County Treasurers and Tax Collectors' copy). Details and caveats are in `usage/SOURCE.md`.
+Found: `usage/FILED-EXAMPLE-opening-brief.pdf`, from https://www.cacttc.org/assets/documents/3%20-%20meridian%20appellants%20bap%20brief.pdf (the California Association of County Treasurers and Tax Collectors' copy). Details and caveats are in `usage/SOURCE.md`.
 
 Searches that did not find a brief of this type from the BAP (the same searches are recorded for the other two types):
 
@@ -68,13 +68,13 @@ Built from BAP-FORM-001 to -003 and BAP-COVER-001. Parameters at the top of the 
 - Required headings: the build fails if a required section has none of its titles as a level-1 heading.
 - Word limit: the build fails above 13,000 words (body only).
 
-## Sample (`usage/INPUT-bap9-opening-brief-meridian.md`)
+## Sample (`usage/INPUT-opening-brief.md`)
 
 A transcription of the exemplar, not a fictional sample. The filer's headings and wording are kept; OCR errors were corrected against the page images (the cover, the first body page and page 8 were checked by eye). Frontmatter carries the caption, counsel, the eleven interested parties, the authorities, and `related_cases: none`, as filed. Authorities are cited with `toa:` links, so the table of authorities is generated from the body. Body: about 1,780 words (the template's count: 1,782 in the compliance certificate).
 
 The compliance certificate reports the transcription's word count (1,782). The filer's certificate states 10,462 for the whole brief; that figure is not reproduced because the sample is abridged.
 
-File naming: the sample is `INPUT-bap9-opening-brief-meridian.md`; the fictional sample it replaces is removed. The id is the case short name and the doc type, following the tools' `INPUT-`/`OUTPUT-`/`OVERLAY-` convention.
+File naming: the sample is `INPUT-opening-brief.md`; the fictional sample it replaces is removed. The id is the case short name and the doc type, following the tools' `INPUT-`/`OUTPUT-`/`OVERLAY-` convention.
 
 ## Overlay
 

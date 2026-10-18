@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-ncmd-motion-brief-braham26cv00455.pdf` |
+| Exemplar file | `FILED-EXAMPLE-motion-brief.pdf` |
 | Case | *Braham v. Laboratory Corporation of America Holdings*, No. 1:26-cv-00455-TDS-JGM (M.D.N.C.) |
 | Document | Document 68, "Brief in Support of Defendant Laboratory Corporation of America Holdings's Motion to Dismiss for Lack of Subject-Matter Jurisdiction Under Fed. R. Civ. P. 12(b)(1) and Failure to State a Claim Under Fed. R. Civ. P. 12(b)(6)", 33 pages (table of contents, table of authorities, memorandum, signature, certificate of word count, certificate of service) |
 | Filer | Defendant Laboratory Corporation of America Holdings (counsel: Mark C. Nielsen, Groom Law Group, Chartered; Kasi W. Robinson, N.C. State Bar No. 52439, Brooks, Pierce, McLendon, Humphrey & Leonard, LLP) |

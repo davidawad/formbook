@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "nmcca-answering-brief.typ": nmcca-answering-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-nmcca-answering-brief-sample.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-answering-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #nmcca-answering-brief(meta, body)

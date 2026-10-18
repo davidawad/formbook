@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-laeb-motion-brief-crosbymarine261018.pdf` (28 pages; no cover page; the memorandum begins on PDF page 1) |
+| File | `FILED-EXAMPLE-motion-brief.pdf` (28 pages; no cover page; the memorandum begins on PDF page 1) |
 | Court | United States Bankruptcy Court, Eastern District of Louisiana (`laeb`) |
 | Case | *In re Crosby Marine Transportation, LLC*, No. 26-10678 (Chapter 11, jointly administered, Complex Case, Section A); *Crosby Tugs, L.L.C., et al. v. Meged Funding Group A/K/A Meged Funding Group Corp, et al.*, Adv. Proc. No. 26-1018 |
 | Document | Memorandum in Support of Motion for Summary Judgment (Doc 414-1 in case 26-10678; attachment 1 to the Motion for Summary Judgment, Doc 414) |

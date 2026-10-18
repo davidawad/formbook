@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca3-answering-brief-bindervcoldwellbanker241997.pdf` |
+| File | `FILED-EXAMPLE-answering-brief.pdf` |
 | Court | U.S. Court of Appeals for the Third Circuit |
 | Case | *Neil Binder v. Coldwell Banker Real Estate LLC* |
 | Docket no. | 24-1997 |
@@ -19,7 +19,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca3-answering-brief-unitedstates213031.pdf` |
+| File | `FILED-EXAMPLE-answering-brief-2.pdf` |
 | Court | U.S. Court of Appeals for the Third Circuit |
 | Case | *United States of America v. Erik Matthew Harris* (on appeal from W.D. Pa. No. 2:19-cr-00313) |
 | Docket no. | 21-3031, Document 38 (66 pages) |

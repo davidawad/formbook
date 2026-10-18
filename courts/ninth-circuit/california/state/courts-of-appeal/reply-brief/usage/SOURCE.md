@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-calctapp-reply-brief-kirkvcityofmorganhillh048745.pdf` |
+| File | `FILED-EXAMPLE-reply-brief.pdf` |
 | Court | Court of Appeal of the State of California, Sixth Appellate District |
 | Case | *G. Mitchell Kirk, et al. v. City of Morgan Hill, et al.* |
 | Court of Appeal case no. | H048745 (superior court no. 19CV346360, Santa Clara County) |
@@ -20,7 +20,7 @@ Only one filer is available for this doc type so far. The eval loop wants 2 or 3
 
 | File | SHA-256 |
 |---|---|
-| `SAMPLE-calctapp-reply-brief-kirkvcityofmorganhillh048745.pdf` | `ba49e7978cbcbd0dfaf42c011bfb789927c0e97c181ab45c58a0a5174e5af1d0` |
+| `FILED-EXAMPLE-reply-brief.pdf` | `ba49e7978cbcbd0dfaf42c011bfb789927c0e97c181ab45c58a0a5174e5af1d0` |
 
 ## Selected font-audit replacement
 
@@ -28,7 +28,7 @@ The Kirk reply brief is flagged for Garamond. The additional filed reply brief b
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-calctapp-reply-brief-yumorikakuh034059.pdf` |
+| File | `FILED-EXAMPLE-reply-brief-2.pdf` |
 | Court | California Court of Appeal, Sixth Appellate District |
 | Case | *Yvonne Wong v. Tai Jing, Jia Ma, and Yelp! Inc.*, No. H034059 |
 | Document | Appellants' Reply Brief, 23 pages |

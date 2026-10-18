@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-gamd-motion-brief-brooks516cv00123.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Middle District of Georgia (Macon Division)
 - Case: *Brooks v. Wilkinson County, Georgia*, et al.
 - Docket: No. 5:16-cv-00123-LJA; Document 10-1 (the brief; the motion itself is Document 10)

@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "txnb-motion-brief.typ": txnb-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-txnb-motion-brief-ruxtonvshook.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #txnb-motion-brief(meta, body)

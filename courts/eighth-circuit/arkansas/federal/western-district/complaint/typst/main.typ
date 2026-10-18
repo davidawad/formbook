@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "arwd-complaint.typ": arwd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-arwd-complaint-little.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #arwd-complaint(meta, body)

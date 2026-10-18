@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ilcd-motion-brief.typ": ilcd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ilcd-motion-brief-ivesmemorandum.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #ilcd-motion-brief(meta, body)

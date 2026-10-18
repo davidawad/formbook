@@ -1,14 +1,14 @@
 # Court of Appeals of Georgia (`gactapp`): reply brief (`reply-brief`)
 
-Exemplar: **yes** (`usage/SAMPLE-gactapp-reply-brief-chapmanvmartaa26a2158.pdf`, Appellant's Reply Brief in *Chapman v. Metropolitan Atlanta Rapid Transit Authority*, No. A26A2158, filed August 3, 2026 by Keith Foster (The Foster Firm, LLC) and Ralph Goldberg (Goldberg & Cuvillier, P.C.); source in `usage/SOURCE.md`). A third filer, different from the opening- and answering-brief exemplars. The sample transcribes the whole brief.
+Exemplar: **yes** (`usage/FILED-EXAMPLE-reply-brief.pdf`, Appellant's Reply Brief in *Chapman v. Metropolitan Atlanta Rapid Transit Authority*, No. A26A2158, filed August 3, 2026 by Keith Foster (The Foster Firm, LLC) and Ralph Goldberg (Goldberg & Cuvillier, P.C.); source in `usage/SOURCE.md`). A third filer, different from the opening- and answering-brief exemplars. The sample transcribes the whole brief.
 
 ## Status of each output
 
 | Item | Result |
 |---|---|
 | `usage/` | 1 filed brief, text PDF, 10 pages, court e-filing stamp on every page |
-| `usage/INPUT-gactapp-reply-brief-fictional.md` | transcription: cover, table of cited authorities (cases and other authority), argument III with the nested *Graves*/*Garner* quotation, conclusion, both footnotes, certificate of service. Id kept for the existing docx outputs |
-| render | ok: `usage/OUTPUT-gactapp-reply-brief-fictional.typst.pdf`, 9 pages, exit 0, no warnings, Liberation Serif embedded |
+| `usage/INPUT-reply-brief.md` | transcription: cover, table of cited authorities (cases and other authority), argument III with the nested *Graves*/*Garner* quotation, conclusion, both footnotes, certificate of service. Id kept for the existing docx outputs |
+| render | ok: `usage/OUTPUT-reply-brief.typst.pdf`, 9 pages, exit 0, no warnings, Liberation Serif embedded |
 | overlay | ok: `usage/OVERLAY-fictional-reply-brief.pdf` / `.txt` |
 | pages reviewed | 9 of 9 at 60 dpi, plus the 10 exemplar pages |
 

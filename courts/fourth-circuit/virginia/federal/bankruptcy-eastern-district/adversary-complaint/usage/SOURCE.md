@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-vaeb-adversary-complaint-deboervmorris2603003.pdf`
+- File: `FILED-EXAMPLE-adversary-complaint.pdf`
 - Court: United States Bankruptcy Court, Eastern District of Virginia (Richmond Division)
 - Case: *DeBoer v. Morris*, Adv. Proc. No. 26-03003-KLP, main case *In re Brandon Scott Morris*, Chapter 7, No. 25-32198-KLP
 - Document: Complaint Objecting to Dischargeability of Debt and/or Objection to Discharge (16 pages), Doc 1

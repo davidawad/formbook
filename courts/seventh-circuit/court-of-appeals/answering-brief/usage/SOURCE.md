@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Saved file | `SAMPLE-ca7-answering-brief-craigvcityofrichmond261864.pdf` |
+| Saved file | `FILED-EXAMPLE-answering-brief.pdf` |
 | Fetched from | https://storage.courtlistener.com/recap/gov.uscourts.ca7.56504/gov.uscourts.ca7.56504.18.0.pdf |
 | Docket page | https://www.courtlistener.com/docket/73436176/18/tushawn-craig-v-city-of-richmond-indiana/ |
 | Case | *Tushawn Craig, et al. v. City of Richmond, Indiana*, No. 26-1864 (7th Cir.) |
@@ -22,7 +22,7 @@
 
 ## Exemplar 2 (second filer; tier-2 comparison)
 
-- File: `SAMPLE-ca7-answering-brief-carter252127.pdf` (37 pages; text layer)
+- File: `FILED-EXAMPLE-answering-brief-2.pdf` (37 pages; text layer)
 - Case: *Rashaan Carter v. SP Plus Corporation*, No. 25-2127 (7th Cir.), ECF 19, "Appellee's Brief and Supplemental Appendix"
 - Filer: Plaintiff/Appellee Rashaan Carter, by James B. Zouras and Stephan Zouras, LLC (different filer from Exemplar 1)
 - Date filed: 2025-11-03

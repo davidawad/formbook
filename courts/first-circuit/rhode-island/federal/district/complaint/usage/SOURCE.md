@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-rid-complaint-nightingale126cv00213.pdf` |
+| File | `FILED-EXAMPLE-complaint.pdf` |
 | Case | *Sharon Nightingale v. City of Providence, et al.* |
 | Court | United States District Court, District of Rhode Island |
 | Docket no. | 1:26-cv-00213-JJM-AEM (ECF header) |
@@ -22,7 +22,7 @@ Second filer (not saved, for tier 2 later): Melo v. Lifespan Physician Group of 
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-rid-complaint-melo126cv00539.pdf` |
+| File | `FILED-EXAMPLE-complaint-3.pdf` |
 | Court | United States District Court, District of Rhode Island |
 | Case | *Maria Melo, on behalf of herself and all others similarly situated v. Lifespan Physician Group of Massachusetts, Inc. d/b/a Brown Health Medical Group-MA* |
 | Docket no. | 1:26-cv-00539-MRD-PAS (ECF header) |
@@ -39,7 +39,7 @@ Second filer (not saved, for tier 2 later): Melo v. Lifespan Physician Group of 
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-rid-complaint-gifford126cv00340.pdf` |
+| File | `FILED-EXAMPLE-complaint-2.pdf` |
 | Court | United States District Court, District of Rhode Island |
 | Case | *Meagan Gifford v. The Beacon Mutual Insurance Company* |
 | Docket no. | 1:26-cv-00340-MSM-AEM (ECF header) |

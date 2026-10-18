@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-alsd-complaint-frankenmuth126cv228.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Southern District of Alabama, Southern Division
 - Case: *Frankenmuth Insurance Company v. H5K Company, LLC, Ryan Hess, and Amber Hess*
 - Docket: No. 1:26-cv-228 (Document 1)

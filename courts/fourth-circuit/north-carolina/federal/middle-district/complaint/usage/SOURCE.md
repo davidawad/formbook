@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Exemplar file | `SAMPLE-ncmd-complaint-prillaman26cv01154.pdf` |
+| Exemplar file | `FILED-EXAMPLE-complaint.pdf` |
 | Case | *Prillaman v. Wake Forest University*, No. 1:26-cv-01154 (M.D.N.C.) (caption: "Civil Action No. 26-1154") |
 | Document | Document 1, "Complaint (Jury Trial Demanded)", 16 pages |
 | Filer | Carol Prillaman, Plaintiff (counsel: Randolph M. James, N.C. Bar #10,000) |

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-iasb-motion-brief-foods1402689.pdf` (13 pages)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (13 pages)
 - Court: United States Bankruptcy Court, Southern District of Iowa
 - Case: *In re Foods, Inc. dba Dahl's Foods*, Chapter 11, No. 14-02689-als11 (Debtor and Debtor in Possession)
 - Document: "Debtor's Emergency Motion for Order Authorizing Debtor to Honor Pre-Petition Obligations to Employees and Brief in Support" (a first-day motion; the motion and its supporting brief are one document, with the verifications and certificate of service)

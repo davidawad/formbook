@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-gactapp-reply-brief-chapmanvmartaa26a2158.pdf` (10 pages, text PDF, Word 2013; Times) |
+| File | `FILED-EXAMPLE-reply-brief.pdf` (10 pages, text PDF, Word 2013; Times) |
 | Original URL | https://www.gaappeals.gov/wp-content/uploads/2026/09/A26A2158-REPLY-BRIEF-NT.pdf |
 | Fetched from | https://web.archive.org/web/2026id_/https://www.gaappeals.gov/wp-content/uploads/2026/09/A26A2158-REPLY-BRIEF-NT.pdf (Internet Archive copy; gaappeals.gov returns HTTP 403 to this box) |
 | Case | Heidi Chapman v. Metropolitan Atlanta Rapid Transit Authority |
@@ -18,4 +18,4 @@ Verified: `pdftotext` yields the full text; `pdfinfo` 10 pages. Chosen over the 
 
 | File | SHA-256 |
 |---|---|
-| `SAMPLE-gactapp-reply-brief-chapmanvmartaa26a2158.pdf` | `fb1ead789dd5f5b9bf4447636e4906f19b72ecb0501dd9bd698b13c4f70bbae0` |
+| `FILED-EXAMPLE-reply-brief.pdf` | `fb1ead789dd5f5b9bf4447636e4906f19b72ecb0501dd9bd698b13c4f70bbae0` |

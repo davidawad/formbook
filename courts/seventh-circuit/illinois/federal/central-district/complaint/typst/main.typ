@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "ilcd-complaint.typ": ilcd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ilcd-complaint-thomas.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #ilcd-complaint(meta, body)

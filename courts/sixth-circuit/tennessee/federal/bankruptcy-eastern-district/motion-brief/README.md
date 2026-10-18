@@ -5,14 +5,14 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/moti
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-tneb-motion-brief-echomav325bk31122.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-tneb-motion-brief-echomavmemorandum.md`: pages 1 to 10 of the filing, the signature block and the certificate of service; argument headings B to E without their bodies (see Known gaps 4) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: pages 1 to 10 of the filing, the signature block and the certificate of service; argument headings B to E without their bodies (see Known gaps 4) |
 | typeface | face required: none (E.D. Tenn. LBR 9004-1(a) names no typeface; checked against the full local rules PDF, 2026-10-15). Font: EB Garamond kept (vendored, `fonts/eb-garamond/`); no court face to substitute. Visual only versus the filed Times New Roman. |
-| render | ok: `usage/OUTPUT-tneb-motion-brief-echomavmemorandum.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings, pdffonts shows EBGaramond only (2026-10-15) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings, pdffonts shows EBGaramond only (2026-10-15) |
 | overlay | ok: `usage/OVERLAY-echo-mav-memorandum.pdf` and `usage/OVERLAY-echo-mav-memorandum.txt` (regenerated 2026-10-15) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed on 2026-10-15) |
 
-Tools: `sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-tneb-motion-brief-echomavmemorandum.md`, then `sh tools/overlay.sh <same dir> echo-mav-memorandum`.
+Tools: `sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-motion-brief.md`, then `sh tools/overlay.sh <same dir> echo-mav-memorandum`.
 
 ## Governing rules
 
@@ -61,7 +61,7 @@ Primary sources. The E.D. Tenn. local rules were read from the court's PDF on 20
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 12 pt, exact 24 pt double lines, 13.8 pt single lines, 1 in margins, section headings bold at the margin, argument headings bold and indented 0.5 in, page number from page 2 through `titlePg`); `docx/tneb-motion-brief.lua` builds the cover, body, signature and the certificate of service (a borderless two-column table). Rendered with `sh tools/render.sh --engine docx <dir> usage/INPUT-tneb-motion-brief-echomavmemorandum.md` to `usage/OUTPUT-tneb-motion-brief-echomavmemorandum.docx` and `.docx.pdf` (LibreOffice 26.8.1, 10 pages, pdffonts shows EB Garamond only). Every page of both the `.docx.pdf` and the typst output was rasterized at 60 dpi and viewed (10 of 10, 2026-10-15).
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 12 pt, exact 24 pt double lines, 13.8 pt single lines, 1 in margins, section headings bold at the margin, argument headings bold and indented 0.5 in, page number from page 2 through `titlePg`); `docx/tneb-motion-brief.lua` builds the cover, body, signature and the certificate of service (a borderless two-column table). Rendered with `sh tools/render.sh --engine docx <dir> usage/INPUT-motion-brief.md` to `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice 26.8.1, 10 pages, pdffonts shows EB Garamond only). Every page of both the `.docx.pdf` and the typst output was rasterized at 60 dpi and viewed (10 of 10, 2026-10-15).
 
 - Matches the typst output: letter page, 1 in margins, EB Garamond 12 pt, double-spaced body with a 0.5 in first-line indent, the cover (court, district, division, caption, title) in the same lines, bold section and argument headings in the same positions, the signature block at 3.25 in kept on one page (keep-with-next), the certificate of service with the two served persons side by side, the page number centered from page 2.
 - Differs (tier 2, not chased): line breaks fall one line apart on some pages, so later page breaks move by a line (still 10 pages); LibreOffice places exact-spacing leading above the text, so the text starts about 11 pt lower on each page (the margin is unchanged); heading spacing around the argument headings is pandoc's, a few points less than the typst block spacing; pandoc's smart extension prints curly quotes and dashes where typst prints the sample's straight characters; the cover spacer (about 17 pt) is tuned to the typst title position, not a rule value.

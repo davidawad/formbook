@@ -4,10 +4,10 @@ Doc type: **adversary complaint** (a complaint in an adversary proceeding, FRBP 
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 2 filers: `usage/SAMPLE-ianb-adversary-complaint-hanrahancomstar2509028.pdf` (6 pp.) and `usage/SAMPLE-ianb-adversary-complaint-childersroche2509079.pdf` (4 pp.). See `usage/SOURCE.md`. |
-| sample md | `usage/INPUT-ianb-adversary-complaint-hanrahancomstar.md` (5 rendered pages; transcribes the whole filing) and `usage/INPUT-ianb-adversary-complaint-childersroche.md` (4 rendered pages; transcribes the whole filing) |
+| exemplar | yes, 2 filers: `usage/FILED-EXAMPLE-adversary-complaint-2.pdf` (6 pp.) and `usage/FILED-EXAMPLE-adversary-complaint.pdf` (4 pp.). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-adversary-complaint-2.md` (5 rendered pages; transcribes the whole filing) and `usage/INPUT-adversary-complaint.md` (4 rendered pages; transcribes the whole filing) |
 | typeface | face required: none (no N.D. Iowa or FRBP rule names one; checked 2026-10-14 against the 2024 Local Rules PDF, Rules 5005-1 and 9004-1 and a full-text search for font, typeface and point size). Substitute: none needed. Font kept: **EB Garamond** (vendored). Not metric-compatible with any court-named face, because none is named. |
-| render | ok: `usage/OUTPUT-ianb-adversary-complaint-hanrahancomstar.typst.pdf` (5 pp.) and `usage/OUTPUT-ianb-adversary-complaint-childersroche.typst.pdf` (4 pp.), re-rendered 2026-10-14 with `tools/render.sh` (typst 0.15.0, vendored fonts only, exit 0, no warnings); `pdffonts` shows EB Garamond only, embedded |
+| render | ok: `usage/OUTPUT-adversary-complaint-2.typst.pdf` (5 pp.) and `usage/OUTPUT-adversary-complaint.typst.pdf` (4 pp.), re-rendered 2026-10-14 with `tools/render.sh` (typst 0.15.0, vendored fonts only, exit 0, no warnings); `pdffonts` shows EB Garamond only, embedded |
 | overlay | **not regenerated 2026-10-14: fail.** `tools/overlay.sh` needs the filed exemplar PDFs, and `usage/` holds only `SOURCE.md` in this snapshot (no PDF on the box, none in git history). The `OVERLAY-*.txt` maps are from an earlier run and were not rebuilt. |
 | pages reviewed | 9 of 9 rendered sample pages (5 + 4), each rendered at 60 dpi and viewed on 2026-10-14 after the font pass (the font did not change; this is the re-check) |
 | check.sh | not run: `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder has neither (see gap 9). Not a stamp. |
@@ -40,8 +40,8 @@ Rule text for N.D. Iowa is taken from the current PDF parts linked on https://ww
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, micromamba env (see brief)
-sh tools/render.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-ianb-adversary-complaint-hanrahancomstar.md
-sh tools/overlay.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint hanrahan-comstar usage/SAMPLE-ianb-adversary-complaint-hanrahancomstar2509028.pdf
+sh tools/render.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-adversary-complaint-2.md
+sh tools/overlay.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint hanrahan-comstar usage/FILED-EXAMPLE-adversary-complaint-2.pdf
 # same for childers-roche with its exemplar
 ```
 

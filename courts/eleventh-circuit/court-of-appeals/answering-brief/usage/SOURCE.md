@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca11-answering-brief-naacpvbyrd2512813.pdf` |
+| File | `FILED-EXAMPLE-answering-brief.pdf` |
 | URL fetched from | https://assets.aclu.org/live/uploads/2024/02/NAACP-Plaintiffs-Brief-12.31.2025.pdf (ACLU-hosted copy of the filing) |
 | Case | *Florida State Conference of Branches and Youth Units of the NAACP, et al. v. Byrd, et al.* (consolidated with No. 24-11892) |
 | Court | United States Court of Appeals for the Eleventh Circuit |

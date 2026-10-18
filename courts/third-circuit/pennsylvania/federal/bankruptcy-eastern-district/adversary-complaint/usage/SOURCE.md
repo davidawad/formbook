@@ -2,7 +2,7 @@
 
 Two filed adversary complaints, from two filers, both in the United States Bankruptcy Court for the Eastern District of Pennsylvania (`paeb`). Both fetched from CourtListener RECAP (public court records; used only as visual and structural references).
 
-## 1. `SAMPLE-paeb-adversary-complaint-tigreaper2600204.pdf`
+## 1. `FILED-EXAMPLE-adversary-complaint-2.pdf`
 
 - Court: United States Bankruptcy Court, E.D. Pennsylvania
 - Case: *TIG Reaper LLC, et al. v. Bank Midwest* (Adv. Proc. No. 26-00204), main case *In re TIG Reaper LLC, et al.*, Case No. 26-13937, Chapter 11
@@ -14,7 +14,7 @@ Two filed adversary complaints, from two filers, both in the United States Bankr
 - Text layer: yes (`pdftotext` yields text)
 - Producer: Microsoft Word, modified by iText (court-filed PDF)
 
-## 2. `SAMPLE-paeb-adversary-complaint-krueger2600127.pdf`
+## 2. `FILED-EXAMPLE-adversary-complaint.pdf`
 
 - Court: United States Bankruptcy Court, E.D. Pennsylvania
 - Case: *Russell Krueger & Sarah Krueger v. Jonathan A. Gordon* (Adv. No. 26-____, the number is blank on the filed copy), main case *In re Jonathan A. Gordon*, Case No. 25-15216-pmm, Chapter 7

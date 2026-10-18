@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-mdb-motion-brief-engelhorn2500159.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States Bankruptcy Court, District of Maryland (Baltimore Division)
 - Case: *Engelhorn, et al. v. Bolog, et al.*, Adv. Proc. No. 25-00159 (the adversary proceeding arises from a Subchapter V case of Swain Landing LaPlata JC, LLC, filed in the District of Columbia, No. 25-184-ELG)
 - Document: Doc 43-1, "Memorandum in Support of Motion for Abstention and Remand" (22 pages). It is the memorandum attached to the plaintiffs' motion at Doc 43; the motion itself is not in this file. Under FRBP 9013 and Local Rule 9013-2 the memorandum is the "brief memorandum of fact and law" that accompanies the motion.

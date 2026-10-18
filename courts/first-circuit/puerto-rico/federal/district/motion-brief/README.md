@@ -4,9 +4,9 @@ Doc type folder for a Rule 12(b) motion to dismiss with the memorandum of law in
 
 | | |
 |---|---|
-| Exemplar | **yes**: `usage/SAMPLE-prd-motion-brief-franklincalifornia314cv01518.pdf` (Motion to Dismiss, ECF 10, and Memorandum of Law, ECF 10-1, No. 3:14-cv-01518-FAB, filed 07/21/2014, text-based, 37 pages). Provenance in `usage/SOURCE.md`. |
-| Sample | `usage/INPUT-prd-motion-brief-franklinmemorandum.md` (transcription of a portion: caption, counsel block, title, lead-in, Introduction, Background, Standard of Review, Argument I in full, Argument II.A in full, II.B through its second paragraph, footnotes 1–2, Conclusion, signature block, certificate of service) |
-| Render | `usage/OUTPUT-prd-motion-brief-franklinmemorandum.typst.pdf`, **10 pages** (cover, TOC `i`, TOA `ii`, body 1–7), no typst warnings (`sh tools/render.sh courts/first-circuit/puerto-rico/federal/district/motion-brief usage/INPUT-prd-motion-brief-franklinmemorandum.md`) |
+| Exemplar | **yes**: `usage/FILED-EXAMPLE-motion-brief.pdf` (Motion to Dismiss, ECF 10, and Memorandum of Law, ECF 10-1, No. 3:14-cv-01518-FAB, filed 07/21/2014, text-based, 37 pages). Provenance in `usage/SOURCE.md`. |
+| Sample | `usage/INPUT-motion-brief.md` (transcription of a portion: caption, counsel block, title, lead-in, Introduction, Background, Standard of Review, Argument I in full, Argument II.A in full, II.B through its second paragraph, footnotes 1–2, Conclusion, signature block, certificate of service) |
+| Render | `usage/OUTPUT-motion-brief.typst.pdf`, **10 pages** (cover, TOC `i`, TOA `ii`, body 1–7), no typst warnings (`sh tools/render.sh courts/first-circuit/puerto-rico/federal/district/motion-brief usage/INPUT-motion-brief.md`) |
 | Overlay | `usage/OVERLAY-franklin-memorandum.pdf` and `.txt` (`sh tools/overlay.sh courts/first-circuit/puerto-rico/federal/district/motion-brief franklin-memorandum`) |
 | Pages reviewed | 10 of 10 (rendered at 60 dpi and looked at; headings re-checked on the final render) |
 | Typeface | face required by the rules: **none named** (L.Civ.R. 7 sets a point size, 12 pt for a proportional font; secondary read, see below) → substitute: **EB Garamond** (no face named, `docs/FONTS.md`) → metric-compatible: n/a, visual only. The exemplar is set in Times New Roman, but an exemplar does not set a rule. Font list unchanged in `typst/prd-motion-brief.typ`. |
@@ -71,12 +71,12 @@ The same markdown renders through typst (`typst/`, the reference) and docx (`doc
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-prd-motion-brief-franklinmemorandum.typst.pdf` (10 pp: cover, TOC `i`, TOA `ii`, body 1 to 7) | reference |
-| docx | `OUTPUT-prd-motion-brief-franklinmemorandum.docx`, `OUTPUT-prd-motion-brief-franklinmemorandum.docx.pdf` (10 pp: cover, TOC `i`, body 1 to 8) | **BLOCKED** (table of authorities, below); the rest rendered |
+| typst | `OUTPUT-motion-brief.typst.pdf` (10 pp: cover, TOC `i`, TOA `ii`, body 1 to 7) | reference |
+| docx | `OUTPUT-motion-brief.docx`, `OUTPUT-motion-brief.docx.pdf` (10 pp: cover, TOC `i`, body 1 to 8) | **BLOCKED** (table of authorities, below); the rest rendered |
 
 ```sh
 sh docx/make-reference.sh                                   # docx/reference.docx (needs pandoc, perl, unzip, zip, xmllint)
-sh tools/render.sh --engine docx courts/first-circuit/puerto-rico/federal/district/motion-brief usage/INPUT-prd-motion-brief-franklinmemorandum.md
+sh tools/render.sh --engine docx courts/first-circuit/puerto-rico/federal/district/motion-brief usage/INPUT-motion-brief.md
 ```
 
 `docx/render.sh` owns the build: pandoc writes the document, then the table-of-contents page numbers are cached from a LibreOffice pass over the same document (LibreOffice computes the `PAGEREF` fields itself; Word shows the cached numbers until fields are updated).
@@ -85,6 +85,6 @@ sh tools/render.sh --engine docx courts/first-circuit/puerto-rico/federal/distri
 
 - *Matches typst:* EB Garamond 12 pt (Regular, Bold and Italic embedded, the vendored face); double spacing at 24 pt exact for the memorandum; single spacing for the caption, counsel blocks, footnotes, the signature groups and the certificate; 1-inch margins; the cover with no page number; the table of contents in lower-roman numbering (`i`), with dot leaders and page numbers, and the body from `1`; heading labels I., A., 1., a. hanging under the heading text; footnotes at 12 pt; the caption and the counsel blocks two to a row; the signature block with "Respectfully submitted," and "Dated:" on one line and the groups two to a row; the certificate of service with the CM/ECF sentence.
 - *Differs:* line breaks fall at different words, and the first line of each exact-spaced block sits about 11 pt lower than in typst (LibreOffice sets exact-height text at the bottom of its line), so each body page holds about one line fewer. The body therefore runs about one page longer, and the signature groups and the certificate run from body page 7 onto body page 8 (typst keeps them all on body page 7). Table-of-contents entries are set at 13.2 pt pitch, as typst sets them. Long headings wrap where typst keeps them on one line (for example level-2 headings). Footnote separators use Word's default rule, not the typst 30% rule.
-- *Pages reviewed:* all 10 pages of `OUTPUT-prd-motion-brief-franklinmemorandum.docx.pdf` were rendered at 60 dpi and set beside the typst pages (cover, TOC, body 1 to 7 against the docx pages 1 to 9, and the docx page 10).
+- *Pages reviewed:* all 10 pages of `OUTPUT-motion-brief.docx.pdf` were rendered at 60 dpi and set beside the typst pages (cover, TOC, body 1 to 7 against the docx pages 1 to 9, and the docx page 10).
 - *BLOCKED:* `BLOCKED: no check ID (no checks.yaml in this folder): table of authorities`: the TOA is not built. Word TA/TOA fields are not honored by LibreOffice (docs/DOCX.md), and a text TOA needs the page of every citation from a first pass, which this build does not do for the TOA (only for the TOC). The `toa:` links are shown as plain text. The typst TOA (`ii`) therefore has no docx counterpart.
 - *Not opened in Word:* the `.docx` is a valid zip with well-formed XML parts and LibreOffice opens and converts it; Word has not been run, so the no-repair check in Word is not done. Word may paginate the TOC differently; its cached numbers come from LibreOffice.

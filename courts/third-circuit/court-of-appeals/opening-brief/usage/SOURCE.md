@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca3-opening-brief-tresslar261367.pdf` (70 pp.; the brief is pp. 1-42, then the Joint Appendix Volume I cover and index) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (70 pp.; the brief is pp. 1-42, then the Joint Appendix Volume I cover and index) |
 | Case name | *Lisa Tresslar v. J. Jermaine Greene, Sr., et al.* |
 | Court / docket | U.S. Court of Appeals for the Third Circuit, No. 26-1367 |
 | Filing | Brief of Appellant (with Joint Appendix Vol. I, Appx0001-Appx0022) |
@@ -25,7 +25,7 @@ For the tier-2 cross-check the template also looked at a second filer's appellan
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca3-opening-brief-harris213031.pdf` (73 pp.; the brief with Appendix Volume I, Appx1-9, bound in) |
+| File | `FILED-EXAMPLE-opening-brief-2.pdf` (73 pp.; the brief with Appendix Volume I, Appx1-9, bound in) |
 | Court | U.S. Court of Appeals for the Third Circuit |
 | Case | *United States of America v. Erik Matthew Harris* (on appeal from W.D. Pa. No. 2:19-cr-00313) |
 | Docket / document | No. 21-3031, Document 25-1 (ECF header "Case: 21-3031 Document: 25-1 Page: 1 Date Filed: 04/06/2022") |

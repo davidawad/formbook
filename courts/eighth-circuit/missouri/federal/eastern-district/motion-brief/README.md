@@ -5,9 +5,9 @@ Folder: `courts/eighth-circuit/missouri/federal/eastern-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-moed-motion-brief-harmonypointe426cv00011.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-moed-motion-brief-harmonypointe.md` (a transcription of the filing, 9 rendered pages; see "Sample" below) |
-| render | ok: `usage/OUTPUT-moed-motion-brief-harmonypointe.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (a transcription of the filing, 9 rendered pages; see "Sample" below) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-harmony-pointe-motion-brief.pdf` and `usage/OVERLAY-harmony-pointe-motion-brief.txt` (page map) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last change to the sample) |
 | BLOCKED | none |

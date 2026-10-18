@@ -5,9 +5,9 @@ Folder: `courts/sixth-circuit/ohio/federal/bankruptcy-southern-district/adversar
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ohsb-adversary-complaint-caudill225ap02053.pdf` (1 filer, the chapter 7 trustee; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ohsb-adversary-complaint-caudillpcinfinity.md` (full transcription of the 10-page filing, Exhibit A included) |
-| render | ok: `usage/OUTPUT-ohsb-adversary-complaint-caudillpcinfinity.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular and -Bold, embedded), no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-adversary-complaint.pdf` (1 filer, the chapter 7 trustee; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-adversary-complaint.md` (full transcription of the 10-page filing, Exhibit A included) |
+| render | ok: `usage/OUTPUT-adversary-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular and -Bold, embedded), no warnings |
 | typeface | Face required: none. The LBRs name no face for filings (S.D. Ohio LBR 9004-1(b): "at least 10-12 font size"). Substitute: none, EB Garamond kept (checked 2026-10-15 against the LBR PDF). Metric note: not applicable. |
 | overlay | ok: `usage/OVERLAY-caudill-pc-infinity.pdf` and `OVERLAY-caudill-pc-infinity.txt` (page map below). Run 2026-10-15 against the exemplar fetched from the CourtListener URL in `usage/SOURCE.md` to `/tmp`; the PDF is not kept in the repo |
 | pages reviewed | 8 of 8 (re-rendered 2026-10-15 with no template change; every page rendered at 60 dpi and viewed) |
@@ -94,9 +94,9 @@ Earlier defects found and fixed during this review (for the record): overlapping
 
 ## Engines
 
-Engine status: typst `OUTPUT-ohsb-adversary-complaint-caudillpcinfinity.typst.pdf` (above); docx built, not checked (see BLOCKED below); latex not built.
+Engine status: typst `OUTPUT-adversary-complaint.typst.pdf` (above); docx built, not checked (see BLOCKED below); latex not built.
 
-**docx** (`docx/`): `docx/build-reference.sh` writes `docx/reference.docx` (styles, page setup, footer page number); `docx/render.sh` runs pandoc with `docx/ohsb-adversary-complaint.lua` (caption table, numbered paragraphs, signature block) and restores the reference styles and section. Output: `usage/OUTPUT-ohsb-adversary-complaint-caudillpcinfinity.docx`. Checked by the tool here: the zip has no duplicate entries and every XML part is well formed (`tools/render-docx.sh` ran these before the LibreOffice step).
+**docx** (`docx/`): `docx/build-reference.sh` writes `docx/reference.docx` (styles, page setup, footer page number); `docx/render.sh` runs pandoc with `docx/ohsb-adversary-complaint.lua` (caption table, numbered paragraphs, signature block) and restores the reference styles and section. Output: `usage/OUTPUT-adversary-complaint.docx`. Checked by the tool here: the zip has no duplicate entries and every XML part is well formed (`tools/render-docx.sh` ran these before the LibreOffice step).
 
 What the reference sets, the same values as the typst template (read back from `styles.xml` and `sectPr`):
 

@@ -2,7 +2,7 @@
 
 Public court record (PACER RECAP copy on CourtListener). Fetched 2026-10-14. Used only as a visual and structural reference.
 
-- File: `SAMPLE-wawd-motion-brief-hoffman226cv03102.pdf`
+- File: `FILED-EXAMPLE-motion-brief.pdf`
 - Court: United States District Court, Western District of Washington, at Seattle
 - Case: *Hoffman v. 4 Pillar Consulting, LLC* (aka 4 Pillar Consulting Holdings, LLC; 4 Pillar Consulting Syndication, LLC), removed from state court 2026-08-31
 - Docket: No. 2:26-cv-03102-LK (Document 12); the Honorable Lauren King

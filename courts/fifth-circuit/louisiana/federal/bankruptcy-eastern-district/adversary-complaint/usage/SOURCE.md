@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| File | `SAMPLE-laeb-adversary-complaint-babincrescent2401028.pdf` (19 pages; the complaint begins on PDF page 3 after the Form B1040 cover sheet on pages 1-2) |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` (19 pages; the complaint begins on PDF page 3 after the Form B1040 cover sheet on pages 1-2) |
 | Court | United States Bankruptcy Court, Eastern District of Louisiana (`laeb`) |
 | Case | *Babin, Jr. v. Crescent Drilling & Production, Inc.*, Adv. Proc. No. 24-01028, in *In re Martin Energy, LLC*, No. 23-10898 (Chapter 7), Section A (Judge Grabill) |
 | Document | Complaint (ECF Doc. 1 in the adversary), with Adversary Proceeding Cover Sheet (Form B1040) and Exhibit A (MSA) |
@@ -20,7 +20,7 @@ Other candidates found and not saved (the brief asks for one exemplar per doc ty
 
 ## Replacement for the audited non-redistributable-font exemplar
 
-- File: `SAMPLE-laeb-adversary-complaint-crosbytugs2601083.pdf` (6 pages)
+- File: `FILED-EXAMPLE-adversary-complaint-2.pdf` (6 pages)
 - Case: *Crosby Tugs, L.L.C. v. Pelican Marine Logistics, LLC*, Adv. No. 26-01083
 - Document: Doc. 1, Complaint
 - Filer: Crosby Tugs, L.L.C., by counsel Michael D. Rubenstein, Liskow & Lewis
@@ -31,4 +31,4 @@ Other candidates found and not saved (the brief asks for one exemplar per doc ty
 - Text layer: yes; `pdftotext` yields the complaint. Its body uses Times-Roman (unembedded), so it is a text-layer Times-family comparison, not a Times New Roman font-embedding reference.
 - Public filing: CourtListener RECAP copy.
 
-This public, text-based complaint replaces the audited `SAMPLE-laeb-adversary-complaint-babincrescent2401028.pdf` (Garamond) for font and text-layer comparison. The Babin PDF is retained as historical source material.
+This public, text-based complaint replaces the audited `FILED-EXAMPLE-adversary-complaint.pdf` (Garamond) for font and text-layer comparison. The Babin PDF is retained as historical source material.

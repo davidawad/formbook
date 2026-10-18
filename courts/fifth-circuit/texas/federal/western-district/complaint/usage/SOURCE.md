@@ -2,7 +2,7 @@
 
 Court: United States District Court, Western District of Texas (txwd). Doc type: complaint.
 
-## 1. `SAMPLE-txwd-complaint-lilly526cv05147.pdf` (used for the sample)
+## 1. `FILED-EXAMPLE-complaint.pdf` (used for the sample)
 
 - Case: *Eli Lilly and Company v. Astra LLC d/b/a Astra Peptides, et al.*, No. 5:26-cv-05147-FB (San Antonio Division)
 - Document: First Amended Complaint, with jury trial demanded (35 pages). ECF/Document 6.
@@ -13,7 +13,7 @@ Court: United States District Court, Western District of Texas (txwd). Doc type:
 - Text layer: yes (`pdftotext -layout` reads it; Times New Roman embedded).
 - Public court record (RECAP). Used as a structural reference only.
 
-## 2. `SAMPLE-txwd-complaint-callier326cv01039.pdf` (second filer, not transcribed)
+## 2. `FILED-EXAMPLE-complaint-2.pdf` (second filer, not transcribed)
 
 - Case: *Brandon Callier v. Referrals Tech Inc. d/b/a All Web Referrals, et al.*, No. EP-26-cv-01039-LS (El Paso Division; header "3:26-cv-01039")
 - Document: Plaintiff's Original Complaint (19 pages). Document 3.

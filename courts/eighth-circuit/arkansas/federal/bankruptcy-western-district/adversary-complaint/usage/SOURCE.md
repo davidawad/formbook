@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-arwb-adversary-complaint-rice125ap07020.pdf` (18 pages, text layer present; Times New Roman embedded)
+- File: `FILED-EXAMPLE-adversary-complaint.pdf` (18 pages, text layer present; Times New Roman embedded)
 - URL fetched from: https://storage.courtlistener.com/recap/gov.uscourts.arwb.178184/gov.uscourts.arwb.178184.1.0.pdf (CourtListener RECAP; the storage path is `recap/gov.uscourts.arwb.178184/`, the document is docket entry 1 of the adversary proceeding)
 - Court: United States Bankruptcy Court, Western District of Arkansas, El Dorado Division
 - Case: *M. Randy Rice, Trustee v. F & T Labor Consultants, LLC, et al.*, Adv. Pro. No. 1:25-ap-07020, in the chapter 7 case *In re Lowry Farms, Inc.*, Case No. 1:24-bk-70535

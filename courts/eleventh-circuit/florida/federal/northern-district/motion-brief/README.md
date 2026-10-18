@@ -5,9 +5,9 @@ Folder: `courts/eleventh-circuit/florida/federal/northern-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-flnd-motion-brief-kinsale426cv00294.pdf` (1 filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-flnd-motion-brief-kinsalemotion.md`: the whole 12-page motion and memorandum, transcribed (word-diff against the filing: body text identical; differences are caption, title, signature and running headers) |
-| render | ok: `usage/OUTPUT-flnd-motion-brief-kinsalemotion.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (pdffonts), no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: the whole 12-page motion and memorandum, transcribed (word-diff against the filing: body text identical; differences are caption, title, signature and running headers) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (pdffonts), no warnings |
 | overlay | ok: `usage/OVERLAY-kinsale-motion.pdf` and `OVERLAY-kinsale-motion.txt` |
 | typeface | face required: **none named** (Loc. R. 5.1(C) says "at least 14-point font"; checked 2026-10-14 against the local rules PDF). Substitute: none; **EB Garamond** kept, as `docs/FONTS.md` "No face named" requires. Not metric-compatible with the exemplar's Times New Roman (known gap 2). |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change; re-checked 2026-10-14 after the fonts pass, same 12 pages, same overlay map) |
@@ -93,11 +93,11 @@ typst (`typst/`) is the reference. The docx engine (`docx/`) follows it; the LaT
 
 | Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-flnd-motion-brief-kinsalemotion.typst.pdf` (12 pp) | reference |
-| docx | `OUTPUT-flnd-motion-brief-kinsalemotion.docx` and `OUTPUT-flnd-motion-brief-kinsalemotion.docx.pdf` (12 pp) | ok: rendered with LibreOffice 26.8.1; every page compared with the typst page at 60 dpi |
+| typst | `OUTPUT-motion-brief.typst.pdf` (12 pp) | reference |
+| docx | `OUTPUT-motion-brief.docx` and `OUTPUT-flnd-motion-brief-kinsalemotion.docx.pdf` (12 pp) | ok: rendered with LibreOffice 26.8.1; every page compared with the typst page at 60 dpi |
 
 ```sh
-sh tools/render.sh --engine docx courts/eleventh-circuit/florida/federal/northern-district/motion-brief usage/INPUT-flnd-motion-brief-kinsalemotion.md
+sh tools/render.sh --engine docx courts/eleventh-circuit/florida/federal/northern-district/motion-brief usage/INPUT-motion-brief.md
 ```
 
 `docx/reference.docx` is built by `docx/make-reference.sh`; `docx/render.sh` runs pandoc on the sample, reading it as CommonMark with smart punctuation (so "at *7" keeps its literal star, as in typst); `docx/flnd-motion-brief.lua` builds the cover, the signature block and its place before the certificate of service.

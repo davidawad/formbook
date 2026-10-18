@@ -3,9 +3,9 @@
 Date fetched for every item: **2026-10-14**. All three are public court records (RECAP copies of PACER filings).
 How they were found: CourtListener search API (`https://www.courtlistener.com/api/rest/v4/search/?q=%22complaint%22+%22jury+trial+demanded%22&court=pawd&type=r`), then the RECAP storage URL of each document.
 
-## 1. Primary exemplar (transcribed into `usage/INPUT-pawd-complaint-cragle.md`)
+## 1. Primary exemplar (transcribed into `usage/INPUT-complaint.md`)
 
-File: `SAMPLE-pawd-complaint-cragle226cv02200.pdf` (11 pages, text layer present, `pdftotext` yields text)
+File: `FILED-EXAMPLE-complaint.pdf` (11 pages, text layer present, `pdftotext` yields text)
 
 | Field | Value |
 |---|---|
@@ -19,7 +19,7 @@ File: `SAMPLE-pawd-complaint-cragle226cv02200.pdf` (11 pages, text layer present
 
 ## 2. Second filer, for the tier-2 comparison (saved, not transcribed)
 
-File: `SAMPLE-pawd-complaint-snee222cv00119.pdf` (41 pages, text layer present)
+File: `FILED-EXAMPLE-complaint-2.pdf` (41 pages, text layer present)
 
 | Field | Value |
 |---|---|

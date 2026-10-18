@@ -5,9 +5,9 @@ Folder: `courts/fourth-circuit/virginia/federal/bankruptcy-eastern-district/moti
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-vaeb-motion-brief-amirivvaziri2601002.pdf` (1 filer, defendant's counsel; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-vaeb-motion-brief-amirimotionforsummaryjudgment.md`: caption, opening, the full Statement of Undisputed Material Facts (28 numbered paragraphs), the Standard of Review, the Visa prepaid card and family support sections, the Conclusion and the signature. The asset-sale, means-test, gambling and garnishment sections are omitted (the exemplar is 19 pages; the sample is 12). |
-| render | ok: `usage/OUTPUT-vaeb-motion-brief-amirimotionforsummaryjudgment.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, defendant's counsel; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md`: caption, opening, the full Statement of Undisputed Material Facts (28 numbered paragraphs), the Standard of Review, the Visa prepaid card and family support sections, the Conclusion and the signature. The asset-sale, means-test, gambling and garnishment sections are omitted (the exemplar is 19 pages; the sample is 12). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-amiri-motion-for-summary-judgment.pdf` and `.txt` (page map below) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; pages 8 to 12 on the final build, pages 1 to 7 on a build that differs only from page 8 onward in heading levels) |
 

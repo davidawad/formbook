@@ -4,7 +4,7 @@ The document type is a motion with its memorandum of law (FRBP 9013; Local Rule 
 
 ## Primary exemplar (used for the sample and the overlay)
 
-- File: `SAMPLE-mowb-motion-brief-barnhart1304184.pdf` (4 pages, text layer present, embedded Calibri body text, Arial in the caption block)
+- File: `FILED-EXAMPLE-motion-brief.pdf` (4 pages, text layer present, embedded Calibri body text, Arial in the caption block)
 - Court: United States Bankruptcy Court, Western District of Missouri (Kansas City), Honorable Cynthia A. Norton
 - Case: *Barnhart, Jr. v. U.S. Department of Education et al.*, Adv. No. 13-04184 (main case 10-45064, Chapter 7)
 - Document: MOHELA's Memorandum in Support of its Motion to Dismiss, or in the Alternative, to Require a More Definite Statement (ECF Doc 19)
@@ -16,7 +16,7 @@ The document type is a motion with its memorandum of law (FRBP 9013; Local Rule 
 
 ## Second filer (tier-2 comparison, not overlaid)
 
-- File: `SAMPLE-mowb-motion-brief-lewallen0505013.pdf` (5 pages, text layer present, Times New Roman embedded)
+- File: `FILED-EXAMPLE-motion-brief-2.pdf` (5 pages, text layer present, Times New Roman embedded)
 - Court: W.D. Mo. Bankruptcy, Adv. No. 05-05013-jwv (main case 04-50195, Chapter 13)
 - Case: *Lewallen v. Green Tree Servicing, LLC et al.*
 - Document: Memorandum in Support of Defendants' Motion to Dismiss Plaintiff's Complaint or, in the Alternative, to Compel Arbitration (ECF Doc 16)

@@ -4,9 +4,9 @@ Doc type: **complaint** in the United States District Court for the District of 
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-ded-complaint-bostonscientificatraverse126cv01294.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-ded-complaint-bostonscientific.md`: the whole 8-page complaint (caption, title, allegations under their headings, prayer, jury demand, signature block, footnote 1) |
-| render | ok: `usage/OUTPUT-ded-complaint-bostonscientific.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh ...`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-complaint.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-complaint.md`: the whole 8-page complaint (caption, title, allegations under their headings, prayer, jury demand, signature block, footnote 1) |
+| render | ok: `usage/OUTPUT-complaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh ...`) |
 | overlay | ok: `usage/OVERLAY-boston-scientific-complaint.pdf` and `OVERLAY-boston-scientific-complaint.txt` (`sh tools/overlay.sh ...`) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and looked at after the last template change) |
 | tier 2 | not judged against two or three filers: one exemplar only (see Known gaps, 1) |
@@ -52,7 +52,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/third-circuit/delaware/federal/district/complaint usage/INPUT-ded-complaint-bostonscientific.md
+sh tools/render.sh courts/third-circuit/delaware/federal/district/complaint usage/INPUT-complaint.md
 sh tools/overlay.sh courts/third-circuit/delaware/federal/district/complaint boston-scientific-complaint
 ```
 
@@ -86,7 +86,7 @@ sh tools/overlay.sh courts/third-circuit/delaware/federal/district/complaint bos
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form.
-- **docx** (`docx/reference.docx`, `docx/ded.lua`, `docx/build-reference.sh`): `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/ded.lua usage/INPUT-ded-complaint-bostonscientific.md -o usage/OUTPUT-ded-complaint-bostonscientific.docx`, run from the court folder. The reference carries the typst form: EB Garamond 13 pt, 27 pt exact line pitch, 1 in margins, 0.5 in first-line indent, single-spaced 13 pt footnotes, centred 13 pt page number. The filter builds the caption (borderless table, `C.A. No.` and `JURY TRIAL DEMANDED` at right), the title, the lead-in, the numbered allegations, the lettered prayer and the signature block. Differences: paragraph numbers are typed text (number and em space), not a Word list; the caption has no rule, as in the typst template; Word and LibreOffice break lines differently from typst.
+- **docx** (`docx/reference.docx`, `docx/ded.lua`, `docx/build-reference.sh`): `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/ded.lua usage/INPUT-complaint.md -o usage/OUTPUT-complaint.docx`, run from the court folder. The reference carries the typst form: EB Garamond 13 pt, 27 pt exact line pitch, 1 in margins, 0.5 in first-line indent, single-spaced 13 pt footnotes, centred 13 pt page number. The filter builds the caption (borderless table, `C.A. No.` and `JURY TRIAL DEMANDED` at right), the title, the lead-in, the numbered allegations, the lettered prayer and the signature block. Differences: paragraph numbers are typed text (number and em space), not a Word list; the caption has no rule, as in the typst template; Word and LibreOffice break lines differently from typst.
 - Checked here: the `.docx` is a valid zip with well-formed XML parts (CRC read and `xmllint`). Not checked: opening in Word or LibreOffice (LibreOffice is not installed in the build box).
 - docx BLOCKED: every gate check measured on the LibreOffice PDF (`usage/OUTPUT-boston-scientific-complaint.docx.pdf`, Gates 0 to 3). No check IDs can be listed: this court folder has no `checks.yaml`. Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
 

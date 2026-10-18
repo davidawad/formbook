@@ -32,4 +32,4 @@ Result: no filed NMCCA answer brief found. The only answer-side filings located 
 
 Not checked: CourtListener RECAP search (its search page is not reachable from the fetch tool; see `../../opening-brief/README.md`), and the NMCCA docket itself.
 
-What this means for the template: the layout comes from Rule 18.4(a) and the appellant's format (Rule 18.1(b), Appendix I), not from a filed answer. `usage/INPUT-nmcca-answering-brief-sample.md` is therefore a synthetic sample with placeholder names, not a transcription. See `../README.md`.
+What this means for the template: the layout comes from Rule 18.4(a) and the appellant's format (Rule 18.1(b), Appendix I), not from a filed answer. `usage/INPUT-answering-brief.md` is therefore a synthetic sample with placeholder names, not a transcription. See `../README.md`.

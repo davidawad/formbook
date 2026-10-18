@@ -9,8 +9,8 @@ Doc type: the complaint that commences an adversary proceeding (FRBP 7001, 7003;
 | `usage/` | Two filed complaints from different filers, with `SOURCE.md` (URLs, filers, dates). |
 | `typst/ilcb-adversary-complaint.typ` | The template: `ilcb-adversary-complaint(meta, md)`. Content-agnostic; each number is a named parameter at the top. |
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...`. |
-| `usage/INPUT-ilcb-adversary-complaint-i80.md` | Transcribed from the first exemplar (I80 Equipment, First Midwest Bank), with the FRBP 7008 consent sentence added (see Gaps). |
-| `usage/OUTPUT-ilcb-adversary-complaint-i80.typst.pdf` | Our render (10 pages). |
+| `usage/INPUT-adversary-complaint.md` | Transcribed from the first exemplar (I80 Equipment, First Midwest Bank), with the FRBP 7008 consent sentence added (see Gaps). |
+| `usage/OUTPUT-adversary-complaint.typst.pdf` | Our render (10 pages). |
 | `usage/OVERLAY-i80-adversary-complaint.pdf`, `.txt` | Red/blue overlay against the first exemplar, and the page map. |
 
 File names follow the repo's role convention (`INPUT-`, `OUTPUT-`, `OVERLAY-`) because `tools/render.sh` and `tools/overlay.sh` read and write those names. The brief's `<id>.md` / `<id>-overlay.pdf` names were not used for that reason.
@@ -18,8 +18,8 @@ File names follow the repo's role convention (`INPUT-`, `OUTPUT-`, `OVERLAY-`) b
 Build (from the repo root, with the toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/seventh-circuit/illinois/federal/bankruptcy-central-district/adversary-complaint usage/INPUT-ilcb-adversary-complaint-i80.md
-sh tools/overlay.sh courts/seventh-circuit/illinois/federal/bankruptcy-central-district/adversary-complaint i80-adversary-complaint courts/seventh-circuit/illinois/federal/bankruptcy-central-district/adversary-complaint/usage/SAMPLE-ilcb-adversary-complaint-i80firstmidwest1808003.pdf
+sh tools/render.sh courts/seventh-circuit/illinois/federal/bankruptcy-central-district/adversary-complaint usage/INPUT-adversary-complaint.md
+sh tools/overlay.sh courts/seventh-circuit/illinois/federal/bankruptcy-central-district/adversary-complaint i80-adversary-complaint courts/seventh-circuit/illinois/federal/bankruptcy-central-district/adversary-complaint/usage/FILED-EXAMPLE-adversary-complaint.pdf
 ```
 
 The overlay takes the exemplar as an explicit argument, because its default (the alphabetically first exemplar) is the 3-page Erickson complaint, not the 9-page I80 complaint the sample comes from.
@@ -85,7 +85,7 @@ Fonts pass, 2026-10-15: no court rule names a face, so the face stays EB Garamon
 ## Engines
 
 - **typst** (primary): unchanged by the docx work. The typst render of the sample is 10 pages.
-- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` (pandoc's default reference, restyled: EB Garamond 13 pt, exact 28.4 pt body pitch, 0.5 in first-line indent, Letter with 1 in margins, centered PAGE footer, custom styles for the caption, title, signature and counsel lines). `docx/ilcb-adversary-complaint.lua` writes the court heading, the caption (a borderless three-column table), the title and the signature block. Rendered with `tools/render.sh --engine docx`: `usage/OUTPUT-ilcb-adversary-complaint-i80.docx` and `.docx.pdf` (10 pages). Converted by LibreOffice (`soffice --headless`) with no error and no repair; the zip and every XML part validate. Not opened in Word.
+- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` (pandoc's default reference, restyled: EB Garamond 13 pt, exact 28.4 pt body pitch, 0.5 in first-line indent, Letter with 1 in margins, centered PAGE footer, custom styles for the caption, title, signature and counsel lines). `docx/ilcb-adversary-complaint.lua` writes the court heading, the caption (a borderless three-column table), the title and the signature block. Rendered with `tools/render.sh --engine docx`: `usage/OUTPUT-adversary-complaint.docx` and `.docx.pdf` (10 pages). Converted by LibreOffice (`soffice --headless`) with no error and no repair; the zip and every XML part validate. Not opened in Word.
 - **Matches typst**: typeface and size, line pitch, first-line indent, no space between body paragraphs, margins, page-number position, caption layout, title, numbered paragraphs, the "(i)" sub-paragraphs (printed as typed, not as Word lists), the signature block with the last paragraph kept with it, and the counsel lines. Pages 1 to 10 viewed at 60 dpi against the typst render (10 of 10).
 - **Differs (tier 2)**: level-1 headings (INTRODUCTION and the other `#` sections) are centered bold 13 pt in the docx, as the template's own comment says. The typst render prints them left-aligned and larger (about 18 pt). The docx headings are not made larger. Exact line spacing puts the first line of each page slightly lower than the typst render. No table of contents, table of authorities or CM/ECF header, as in typst.
 - **docx BLOCKED**: `sh tools/check.sh <this folder> --engine docx` cannot run. It exits 2 because this folder has no `court.json` and no `checks.yaml`, so no check ID ran and no `.check-docx.txt` stamp was written. Not a pass.

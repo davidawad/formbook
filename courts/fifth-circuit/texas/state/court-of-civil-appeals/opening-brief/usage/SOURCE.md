@@ -1,6 +1,6 @@
 # Exemplar sources
 
-## SAMPLE-texapp-opening-brief-sample.pdf (used for the overlay and the transcribed sample)
+## FILED-EXAMPLE-opening-brief.pdf (used for the overlay and the transcribed sample)
 
 - Document: Appellant's Opening Brief, 68 pages (the copy the filer posted, titled "without Appendix A").
 - Filer: Scott H. Palmer, P.C. (Niles Illich, Rebekah Perlstein; counsel for Appellant J.R.).

@@ -21,25 +21,25 @@ The front matter (identity, contents, index) is numbered in lower-case roman. Th
 Build from the repository root:
 
 ```sh
-sh tools/render.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/opening-brief usage/INPUT-texcrimapp-opening-brief-becerramerits.md
+sh tools/render.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/opening-brief usage/INPUT-opening-brief.md
 sh tools/overlay.sh courts/fifth-circuit/texas/state/court-of-criminal-appeals/opening-brief becerra-merits
 ```
 
 ## Exemplar
 
-`usage/SAMPLE-texcrimapp-statebecerrapd028022answeringbrief.pdf` is the State's brief on the merits in *State v. Becerra*, PD-0280-22 (54 pages), retrieved October 14, 2026 (see `usage/SOURCE.md`). Its body is double-spaced, consistent with the rule.
+`usage/FILED-EXAMPLE-opening-brief.pdf` is the State's brief on the merits in *State v. Becerra*, PD-0280-22 (54 pages), retrieved October 14, 2026 (see `usage/SOURCE.md`). Its body is double-spaced, consistent with the rule.
 
 This is one filer. Tier 2 calls for two or three filings from different filers, and none was found in this pass.
 
 ## Sample and overlay
 
-`usage/INPUT-texcrimapp-opening-brief-becerramerits.md` is a transcription of an excerpt of the exemplar: the cover, identity of parties and counsel, table of contents, index of authorities, the statements of oral argument, the case, and procedural history, the statement of facts through Maria Nava's testimony, the prayer, and both certificates. The argument, summary, and response are omitted. The render is 11 pages (cover unnumbered, front matter i–iii, body 1–7).
+`usage/INPUT-opening-brief.md` is a transcription of an excerpt of the exemplar: the cover, identity of parties and counsel, table of contents, index of authorities, the statements of oral argument, the case, and procedural history, the statement of facts through Maria Nava's testimony, the prayer, and both certificates. The argument, summary, and response are omitted. The render is 11 pages (cover unnumbered, front matter i–iii, body 1–7).
 
 The red/blue overlay is `usage/OVERLAY-becerra-merits.pdf`; its page map is `usage/OVERLAY-becerra-merits.txt`.
 
 ## Page review
 
-Every page of `usage/OUTPUT-texcrimapp-opening-brief-becerramerits.typst.pdf` (11 pages) was rendered at 100 dpi and viewed on October 14, 2026, after the final render. Footer numbers are shown; the cover has none.
+Every page of `usage/OUTPUT-opening-brief.typst.pdf` (11 pages) was rendered at 100 dpi and viewed on October 14, 2026, after the final render. Footer numbers are shown; the cover has none.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -66,7 +66,7 @@ Every page of `usage/OUTPUT-texcrimapp-opening-brief-becerramerits.typst.pdf` (1
 
 ## Engines
 
-docx (`docx/render.sh`, `docx/reference.docx` built by `docx/build-reference.sh`, filter `docx/brief.lua`): `usage/OUTPUT-texcrimapp-opening-brief-becerramerits.docx` and `OUTPUT-texcrimapp-opening-brief-becerramerits.docx.pdf` were built. The LibreOffice conversion succeeded and the zip and XML checks passed. The template matches the typst form in its settings: EB Garamond 14 pt; exact 32.2 pt double spacing; 0.5 in first-line indent; 1 in margins on letter; 12 pt footnotes; single-spaced headings, cover, identity, contents and index; cover unnumbered; front matter in lower-case roman, body from page 1, as separate Word sections. Dot leaders and contents and index page numbers are literal text, as in typst.
+docx (`docx/render.sh`, `docx/reference.docx` built by `docx/build-reference.sh`, filter `docx/brief.lua`): `usage/OUTPUT-opening-brief.docx` and `OUTPUT-opening-brief.docx.pdf` were built. The LibreOffice conversion succeeded and the zip and XML checks passed. The template matches the typst form in its settings: EB Garamond 14 pt; exact 32.2 pt double spacing; 0.5 in first-line indent; 1 in margins on letter; 12 pt footnotes; single-spaced headings, cover, identity, contents and index; cover unnumbered; front matter in lower-case roman, body from page 1, as separate Word sections. Dot leaders and contents and index page numbers are literal text, as in typst.
 
 Page review (all 12 docx pages against the 11 typst pages, side by side): the front matter, body and certificates are in the same order. Differences: the body runs to 8 pages against typst's 7, because the signature block and the certificate of compliance spill onto body page 8; the body headings and the certificate headings are set smaller than typst's; the front matter's identity and contents layout differs from typst's. The font names in the docx PDF were not checked. Word was not available; the file was checked with LibreOffice only.
 

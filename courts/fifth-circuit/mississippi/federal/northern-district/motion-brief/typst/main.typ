@@ -4,6 +4,6 @@
 //     typst/main.typ out.pdf
 #import "msnd-motion-brief.typ": msnd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-msnd-motion-brief-stokes.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))
 #let (meta, body) = split-frontmatter(src)
 #msnd-motion-brief(meta, body)

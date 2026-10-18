@@ -5,9 +5,9 @@ Folder: `courts/second-circuit/vermont/federal/bankruptcy-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-vtb-motion-brief-rcdioceseburlington2601005.pdf` (one filer; see `usage/SOURCE.md`) |
-| sample md | `usage/INPUT-vtb-motion-brief-diocese.md` (the filed motion, transcribed in full: caption, all 20 numbered paragraphs, the block quotation, the argument headings, the signature block) |
-| render | ok: `usage/OUTPUT-vtb-motion-brief-diocese.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief-2.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-motion-brief.md` (the filed motion, transcribed in full: caption, all 20 numbered paragraphs, the block quotation, the argument headings, the signature block) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | overlay | ok: `usage/OVERLAY-diocese-motion-brief.pdf` and `OVERLAY-diocese-motion-brief.txt` (page map from `tools/overlay.sh`; pages paired one to one) |
 | pages reviewed | 9 of 9 (each page rendered at 60 dpi and viewed; see the review below; re-rendered and all 9 pages viewed again 2026-10-15, no font change) |
 
@@ -49,7 +49,7 @@ Primary sources, fetched 2026-10-14. The local rules are the Local Bankruptcy Ru
 
 ## Review of the rendered pages (Gate 2 equivalent)
 
-Every page of `OUTPUT-vtb-motion-brief-diocese.typst.pdf` was rendered at 60 dpi and viewed. Result per page:
+Every page of `OUTPUT-motion-brief.typst.pdf` was rendered at 60 dpi and viewed. Result per page:
 
 - Page 1: caption (court, debtor block, plaintiff and first defendants), the defendant list continues. Pass.
 - Page 2: defendant list continues to the rule. Pass.
@@ -79,7 +79,7 @@ Defects found and fixed during the review: the introduction was numbered (two pa
 
 ## Engines
 
-docx (`docx/`: `build-reference.sh` builds `reference.docx`; `vtb.lua` writes the caption table, the numbering (first 2 paragraphs unnumbered, as the frontmatter says), the quotations, the lettered items and the signature). Render: `usage/OUTPUT-vtb-motion-brief-diocese.docx` and `.docx.pdf` (LibreOffice conversion, EB Garamond embedded, 10 pages; all 10 pages viewed beside the typst render, `/work/artifacts/vtb/motion-brief/`). The `.docx` converts in LibreOffice with no error.
+docx (`docx/`: `build-reference.sh` builds `reference.docx`; `vtb.lua` writes the caption table, the numbering (first 2 paragraphs unnumbered, as the frontmatter says), the quotations, the lettered items and the signature). Render: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion, EB Garamond embedded, 10 pages; all 10 pages viewed beside the typst render, `/work/artifacts/vtb/motion-brief/`). The `.docx` converts in LibreOffice with no error.
 
 - Matches the typst output: letter page, 1 in margins, EB Garamond 12 pt, body at the typst 2.0 pitch (exact 27.84 pt), single-spaced caption, footnote-style quotation and signature, 0.5 in first-line indent, centered bold headings, bold italic left argument headings, centered page number, the caption table with its rules.
 - Differs: the docx is 10 pages, the typst render is 9. The caption (defendant list) runs over three pages in both, but line breaks follow LibreOffice's EB Garamond metrics, so the body is about one-third of a page longer and the conclusion and signature block move to page 10. The last body paragraph is kept with the signature block (Word-native keep-with-next); typst does not do this. Heading spacing is approximated from the typst `above`/`below` values.

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-mowd-complaint-johnson426cv00380.pdf` (60 pages, text layer present; `pdffonts` shows embedded Times New Roman)
+- File: `FILED-EXAMPLE-complaint.pdf` (60 pages, text layer present; `pdffonts` shows embedded Times New Roman)
 - Court: United States District Court for the Western District of Missouri (caption carries no division line)
 - Case: *Steve Johnson and Lisa Marie Johnson, d/b/a Steve Johnson Farm, et al. v. The Mosaic Company, et al.*
 - Docket: No. 4:26-cv-00380-FJG (Document 1)

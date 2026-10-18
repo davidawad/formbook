@@ -3,6 +3,6 @@
 // Vendored fonts only (--ignore-system-fonts); any typst warning fails the render.
 #import "laed-complaint.typ": laed-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-laed-complaint-buckles.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-complaint.md"))
 #let (meta, body) = split-frontmatter(src)
 #laed-complaint(meta, body)

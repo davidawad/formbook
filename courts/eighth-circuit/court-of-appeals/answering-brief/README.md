@@ -4,16 +4,16 @@ Doc type `answering-brief` of court `ca8`. One self-contained folder: exemplar, 
 
 | Item | Path | Status |
 |---|---|---|
-| Exemplar (filed, text-based PDF) | `usage/SAMPLE-ca8-answering-brief-banksvcostar253320.pdf` (source: `usage/SOURCE.md`) | yes |
-| Sample markdown | `usage/INPUT-ca8-answering-brief-bankscostarresponse.md` | yes |
-| Rendered sample | `usage/OUTPUT-ca8-answering-brief-bankscostarresponse.typst.pdf` (14 pages) | render=ok |
+| Exemplar (filed, text-based PDF) | `usage/FILED-EXAMPLE-answering-brief.pdf` (source: `usage/SOURCE.md`) | yes |
+| Sample markdown | `usage/INPUT-answering-brief.md` | yes |
+| Rendered sample | `usage/OUTPUT-answering-brief.typst.pdf` (14 pages) | render=ok |
 | Overlay (red = ours, blue = filed) | `usage/OVERLAY-banks-costar-response.pdf`, `usage/OVERLAY-banks-costar-response.txt` | overlay=ok |
 | Template | `typst/main.typ` (entry), `typst/ca8-answering-brief.typ` | |
 
 Build (from the repo root; the toolchain is typst 0.15.0, poppler, ImageMagick):
 
 ```sh
-sh tools/render.sh courts/eighth-circuit/court-of-appeals/answering-brief usage/INPUT-ca8-answering-brief-bankscostarresponse.md
+sh tools/render.sh courts/eighth-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md
 sh tools/overlay.sh courts/eighth-circuit/court-of-appeals/answering-brief banks-costar-response
 ```
 
@@ -46,7 +46,7 @@ Tier 2 (conventions) is judged against the exemplar only: cover arrangement, hea
 
 ## Markdown contract
 
-One `.md` file: YAML frontmatter, then the body. The template builds the cover, front matter, TOC, TOA, signature block and both certificates. Full field list in the frontmatter of `usage/INPUT-ca8-answering-brief-bankscostarresponse.md`. Required: `case_number`, `caption`, `proceeding`, `brief_title`, `counsel` (each group may carry its own `phone`, printed under that group), `phone` (only when no counsel group has one; printed under the last group), `signature`, `date`, `virus_check`, `summary`, `authorities` (when the body cites any). Optional: `judge`, `district_court_case`, `disclosure` (omit when the party is not a nongovernmental corporation).
+One `.md` file: YAML frontmatter, then the body. The template builds the cover, front matter, TOC, TOA, signature block and both certificates. Full field list in the frontmatter of `usage/INPUT-answering-brief.md`. Required: `case_number`, `caption`, `proceeding`, `brief_title`, `counsel` (each group may carry its own `phone`, printed under that group), `phone` (only when no counsel group has one; printed under the last group), `signature`, `date`, `virus_check`, `summary`, `authorities` (when the body cites any). Optional: `judge`, `district_court_case`, `disclosure` (omit when the party is not a nongovernmental corporation).
 
 - Headings: `# Heading` is a centered bold section (Statement, Argument, Conclusion). Argument point headings are numbered automatically (I., A., 1., a.); do not type the numbers. Level 2 outside the Argument is A., level 3 is 1., and so on.
 - Citations: `[*Case v. Name*, 1 F.4th 2 (8th Cir. 2026)](toa:key)`. Every `toa:` key must be in `authorities:`, or the build stops. Each link is recorded with the page it starts on for the TOA.
@@ -94,7 +94,7 @@ The sample's word count (1,193) and the filed brief's (11,620) are different bec
 
 ## Verification pass 2026-10-16 (fb-595.26.8)
 
-- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/answering-brief usage/INPUT-ca8-answering-brief-bankscostarresponse.md` exit 0, no typst warnings, 14 pages (unchanged from the committed PDF before this pass), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0): cover 100%, summary 100%, disclosure 83%, TOC 52%, TOA 29% and 16%, body 50-76%, conclusion page 30%, certificates 85% and 100%.
+- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/answering-brief usage/INPUT-answering-brief.md` exit 0, no typst warnings, 14 pages (unchanged from the committed PDF before this pass), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0): cover 100%, summary 100%, disclosure 83%, TOC 52%, TOA 29% and 16%, body 50-76%, conclusion page 30%, certificates 85% and 100%.
 - Viewed: all 14 pages at 60 dpi, the exemplar's page 1 against our cover, and all 14 overlay pages at 40 dpi. Pages 1 and 13 viewed again after the fixes below; the text of pages 2-12 and 14 is unchanged by them.
 - Fixed (tier 1, FRAP 32(a)(2)(F)): the cover printed one telephone number, under the Chicago group, and it was the Washington number; the Chicago number (312) 416-6200 was missing. The template took a single top-level `phone` and appended it to the last group. Counsel groups now take their own `phone` (top-level `phone` remains the fallback), and the sample gives each group its number as filed. The latex and docx filters read the per-group `phone` the same way (latex re-rendered and its cover viewed; docx not rebuilt, no `soffice`).
 - Fixed (sample): an unused footnote definition (`[^kastenmeier]`, left over from trimming) was counted in the certified word count. Removed; the certificate now states 1,193 words (was 1,219).

@@ -1,6 +1,6 @@
 # Exemplar source
 
-- File: `SAMPLE-ilcd-complaint-thomas226cv02194.pdf`
+- File: `FILED-EXAMPLE-complaint.pdf`
 - Court: United States District Court, Central District of Illinois, Urbana Division
 - Case: *Raphael Thomas v. TCC Wireless, LLC*
 - Docket: No. 2:26-cv-02194 (Document 1)

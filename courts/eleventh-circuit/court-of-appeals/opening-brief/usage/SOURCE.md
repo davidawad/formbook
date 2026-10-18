@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-ca11-opening-brief-hillvclaytoncounty2312884.pdf` |
+| File | `FILED-EXAMPLE-opening-brief.pdf` |
 | Document | Appellant's Opening Brief (44 pages, ECF Doc. 33) |
 | Case | *Tiana Hill v. Clayton County, Georgia, et al.*, No. 23-12884 (11th Cir.) |
 | Court below | U.S. District Court, N.D. Ga., Atlanta Division, Civil Action No. 1:21-CV-05300-TWT |

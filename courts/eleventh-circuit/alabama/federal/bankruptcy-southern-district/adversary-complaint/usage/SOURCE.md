@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-alsb-adversary-complaint-hester2301002complaint.pdf` (6 pages, text layer) |
+| File | `FILED-EXAMPLE-adversary-complaint.pdf` (6 pages, text layer) |
 | URL fetched from | https://storage.courtlistener.com/recap/gov.uscourts.alsb.159485/gov.uscourts.alsb.159485.1.0_4.pdf (CourtListener RECAP archive) |
 | Docket page | https://www.courtlistener.com/docket/66705494/1/lucas-allen-hester-adversary-proceeding/ |
 | Case name | *Hester v. U.S. Department of Education*, Adv. No. 23-01002 (main case 22-12523, Chapter 7) |

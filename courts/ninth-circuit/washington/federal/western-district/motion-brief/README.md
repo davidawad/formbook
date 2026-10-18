@@ -5,9 +5,9 @@ Folder: `courts/ninth-circuit/washington/federal/western-district/motion-brief/`
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/SAMPLE-wawd-motion-brief-hoffman226cv03102.pdf` (one filer; see `usage/SOURCE.md`). Tier 2 is not judged against two or three filers; see gaps. |
-| sample md | `usage/INPUT-wawd-motion-brief-hoffmanmotiontodismiss.md`: caption, noting data, table of contents, the introduction through Argument II, the conclusion, the word-count certificate, signature, and certificate of service. Argument III and IV, and the table of authorities, are not transcribed (see gaps). |
-| render | ok: `usage/OUTPUT-wawd-motion-brief-hoffmanmotiontodismiss.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings. |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`). Tier 2 is not judged against two or three filers; see gaps. |
+| sample md | `usage/INPUT-motion-brief.md`: caption, noting data, table of contents, the introduction through Argument II, the conclusion, the word-count certificate, signature, and certificate of service. Argument III and IV, and the table of authorities, are not transcribed (see gaps). |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings. |
 | overlay | ok: `usage/OVERLAY-hoffman-motion-to-dismiss.pdf` and `usage/OVERLAY-hoffman-motion-to-dismiss.txt`. |
 | pages reviewed | 12 of 12: every page rendered at 60 dpi and viewed in its final state. |
 | typeface | Face required: **none**. LCR 10(e)(1) requires "a proportionally spaced font" and names no face, so no substitute is needed and EB Garamond is kept (`FONTS.md`: no face named). Checked against the rule text, 2026-10-15. Metric fit: n/a. The filed motion embeds Times New Roman (tier-2 question, gap 6). |
@@ -72,7 +72,7 @@ Pairing and word overlap: our p1 to filed p1 (96%), p2 to p2 (98%), p3 to p10 (9
 
 ## Engines
 
-**docx** (`docx/`; `usage/OUTPUT-wawd-motion-brief-hoffmanmotiontodismiss.docx` and `.docx.pdf`, the LibreOffice conversion). Built by `docx/build-reference.sh` (reference.docx with the styles, the header with the 27 line numbers and the pleading rules, and a footer placeholder), `docx/motion-brief.lua` (cover, caption, table of contents, body, word-count certificate, signature block and certificate of service as OpenXML) and `docx/render.sh` (pandoc reads the sample as CommonMark, as cmarker does, so a Westlaw star page such as "*2" stays literal; the bottom notation is written from the frontmatter).
+**docx** (`docx/`; `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`, the LibreOffice conversion). Built by `docx/build-reference.sh` (reference.docx with the styles, the header with the 27 line numbers and the pleading rules, and a footer placeholder), `docx/motion-brief.lua` (cover, caption, table of contents, body, word-count certificate, signature block and certificate of service as OpenXML) and `docx/render.sh` (pandoc reads the sample as CommonMark, as cmarker does, so a Westlaw star page such as "*2" stays literal; the bottom notation is written from the frontmatter).
 
 Matches the typst output (checked on the rendered pages, not by a gate):
 - Letter page; 1 in top and bottom margins, 1.5 in left, 1 in right; 27 numbered lines at exact 24 pt.

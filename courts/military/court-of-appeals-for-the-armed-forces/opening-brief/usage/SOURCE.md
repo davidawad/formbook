@@ -4,7 +4,7 @@ Both files are public filings posted by the court on its website (Granted Cases 
 
 | Field | Exemplar 1 (the sample is transcribed from this one, and the overlay uses it) | Exemplar 2 (tier-2 cross-check) |
 |---|---|---|
-| File | `SAMPLE-armfor-opening-brief-pinkerton260225.pdf` (26 pages) | `SAMPLE-armfor-opening-brief-muller190230.pdf` (58 pages) |
+| File | `FILED-EXAMPLE-opening-brief.pdf` (26 pages) | `FILED-EXAMPLE-opening-brief-2.pdf` (58 pages) |
 | URL fetched from | https://www.armfor.uscourts.gov/briefs/2026Term/Pinkerton260225AppellantBrief.pdf | https://www.armfor.uscourts.gov/newcaaf/briefs/2019Term/Muller190230AppellantBrief.pdf |
 | Case name | *United States v. Jonathan R. Pinkerton*, Specialist (E-4), United States Army | *United States v. Jordan R. Muller*, Airman First Class (E-3), U.S. Air Force |
 | Docket no. | USCA Dkt. No. 26-0225/AR (Crim. App. Dkt. No. 20240353) | Crim. App. No. 39323 (printed on the cover). USCA docket not printed on the cover; 19-0230 is inferred from the court's file name `Muller190230`. |
