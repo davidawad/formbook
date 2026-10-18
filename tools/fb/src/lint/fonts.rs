@@ -139,7 +139,7 @@ fn audit(root: &Path) -> Res<Vec<(PathBuf, String)>> {
         .ok_or_else(|| fail(2, "font audit has no exemplars map"))?;
     let mut docs = BTreeMap::<String, Vec<String>>::new();
     for (path, record) in entries {
-        let Some((doc, _)) = path.split_once("/exemplars/") else {
+        let Some(doc) = crate::fonts::audit_doc(path) else {
             continue;
         };
         let face = record.get("face").and_then(Value::as_str).unwrap_or("");

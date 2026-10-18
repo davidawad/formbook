@@ -1,14 +1,17 @@
-//! `fb lint <doc-dir> [--engine typst|latex|all]` checks a doc dir; `fb lint fonts` checks audited faces globally.
-//!   (a) ngram      a template file shares a run of 5+ words with a filed exemplar's text, and the run
+//! `fb lint <doc-dir> [--engine typst|latex|all]` checks a doc dir; `fb lint fonts` checks audited faces
+//! globally; `fb lint paths` checks the usage/ layout under courts/ (see paths.rs).
+//!   (a) ngram      a template file shares a run of 5+ words with a filed SAMPLE's text, and the run
 //!                  is not rule text (rules.md of the doc dir or an enclosing court folder);
 //!   (b) break/vspace  forced line breaks or literal vertical space outside the parameter block
 //!                  (typst/*.typ; the body of latex/*.tex);
-//!   (c) hardbreak/raw-typst/raw-latex  in samples/INPUT-*.md.
+//!   (c) hardbreak/raw-typst/raw-latex  in usage/INPUT-<stem>-<id>.md;
+//!   (d) path       the layout rule of `fb lint paths`, for the doc dir and the folders under it.
 //! Output: `LINT <kind> <file>:<line>: <detail>` per finding, then `RESULT: LINT PASS` or
 //! `RESULT: LINT FAIL (<n> findings)`; exit 1 on findings.
 pub(crate) mod fonts;
 mod input;
 mod ngram;
+pub(crate) mod paths;
 mod tex;
 mod typst;
 
@@ -122,8 +125,10 @@ fn rel(dir: &Path, p: &Path) -> String {
 }
 
 pub fn main(args: &[String]) -> Res<ExitCode> {
-    if args == ["fonts"] {
-        return fonts::main();
+    match args {
+        [a] if a == "fonts" => return fonts::main(),
+        [a] if a == "paths" => return paths::main(),
+        _ => {}
     }
     let (dir, engine) = parse_opts(args)?;
     if !dir.is_dir() {
@@ -136,8 +141,9 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     let mut exemplar = ngram::Corpus::default();
     let mut rules: HashSet<String> = HashSet::new();
     for d in &chain {
-        for pdf in crate::fetch::exemplar_pdfs(&d.join("exemplars")) {
-            exemplar.add(&pdftotext(&d.join("exemplars").join(pdf))?);
+        let usage = d.join(crate::layout::USAGE_DIR);
+        for pdf in crate::fetch::sample_pdfs(&usage) {
+            exemplar.add(&pdftotext(&usage.join(pdf))?);
         }
         if let Ok(t) = std::fs::read_to_string(d.join("rules.md")) {
             rules.extend(ngram::grams(&t));
@@ -155,17 +161,18 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             _ => {}
         }
     }
-    for p in files(&dir.join("samples"), &["md"]) {
-        if p.file_name()
-            .is_some_and(|n| n.to_string_lossy().starts_with("INPUT-"))
-        {
-            let text = std::fs::read_to_string(&p)
-                .map_err(|e| fail(2, format!("fb lint: {}: {e}", p.display())))?;
-            found.extend(input::check(&rel(&dir, &p), &text));
-        }
+    let doc = crate::layout::Doc::open(&dir)?;
+    for id in doc.ids(crate::layout::INPUT) {
+        let p = doc.input(&id);
+        let text = std::fs::read_to_string(&p)
+            .map_err(|e| fail(2, format!("fb lint: {}: {e}", p.display())))?;
+        found.extend(input::check(&rel(&dir, &p), &text));
     }
     found.iter().for_each(|f| println!("{f}"));
-    match found.len() {
+    let (_, path_findings) = paths::check_tree(&dir, &dir);
+    path_findings.iter().for_each(|f| println!("{f}"));
+    let total = found.len() + path_findings.len();
+    match total {
         0 => {
             println!("RESULT: LINT PASS");
             Ok(ExitCode::SUCCESS)

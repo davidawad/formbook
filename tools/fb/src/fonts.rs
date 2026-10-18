@@ -228,8 +228,7 @@ pub fn has_times_exemplar(root: &Path, doc: &Path) -> Res<bool> {
             .and_then(Value::as_str)
             .unwrap_or("")
             .to_ascii_lowercase();
-        audit_doc(path) == Some(&*rel)
-            && (body.contains("timesnewroman") || body == "times")
+        audit_doc(path) == Some(&*rel) && (body.contains("timesnewroman") || body == "times")
     }))
 }
 

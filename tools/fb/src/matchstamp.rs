@@ -72,12 +72,7 @@ struct Pair {
 }
 
 /// Pair the samples; skipped samples come back as messages (an error with --sample).
-fn plan(
-    o: &Opts,
-    stem: &str,
-    ids: &[String],
-    samples: &[String],
-) -> Res<(Vec<Pair>, Vec<String>)> {
+fn plan(o: &Opts, stem: &str, ids: &[String], samples: &[String]) -> Res<(Vec<Pair>, Vec<String>)> {
     let ids: Vec<String> = match &o.sample {
         Some(s) if !ids.contains(s) => {
             return Err(fail(
@@ -101,8 +96,7 @@ fn plan(
                     .to_string_lossy()
                     .into_owned(),
             ),
-            None => layout::pair(&id, samples)
-                .map(|s| Doc::rel(&layout::sample_name(stem, &s))),
+            None => layout::pair(&id, samples).map(|s| Doc::rel(&layout::sample_name(stem, &s))),
         };
         match (ex, &o.sample) {
             (Some(exemplar), _) => pairs.push(Pair {

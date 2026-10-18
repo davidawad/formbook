@@ -1,5 +1,5 @@
-//! `fb fetch <doc-dir> [--all-missing-only] [--record]`: download the exemplars SOURCE.md names and
-//! verify every exemplar's SHA-256 against SOURCE.md.
+//! `fb fetch <doc-dir> [--all-missing-only] [--record]`: download the filed SAMPLEs usage/SOURCE.md names
+//! and verify every SAMPLE's SHA-256 against SOURCE.md.
 //!
 //! A missing PDF is downloaded with curl (to a temporary name, kept only when it is a PDF and its hash
 //! matches the recorded one; an unrecorded hash is written into SOURCE.md). A PDF on disk is checked:
@@ -163,13 +163,13 @@ fn one(o: &Opts, ex: &Path, e: &Entry, text: &mut String) -> Line {
     }
 }
 
-/// FILED-EXAMPLE-*.pdf files in a directory, sorted.
-pub fn exemplar_pdfs(ex: &Path) -> Vec<String> {
+/// SAMPLE-*.pdf files in a usage/ directory, sorted.
+pub fn sample_pdfs(ex: &Path) -> Vec<String> {
     let mut v: Vec<String> = std::fs::read_dir(ex)
         .map(|rd| {
             rd.filter_map(|d| d.ok())
                 .map(|d| d.file_name().to_string_lossy().into_owned())
-                .filter(|n| n.starts_with("FILED-EXAMPLE-") && n.ends_with(".pdf"))
+                .filter(|n| n.starts_with("SAMPLE-") && n.ends_with(".pdf"))
                 .collect()
         })
         .unwrap_or_default();
@@ -179,16 +179,13 @@ pub fn exemplar_pdfs(ex: &Path) -> Vec<String> {
 
 pub fn main(args: &[String]) -> Res<ExitCode> {
     let o = parse_opts(args)?;
-    let ex = o.dir.join("exemplars");
+    let ex = o.dir.join(crate::layout::USAGE_DIR);
     let src = ex.join("SOURCE.md");
     let orig = std::fs::read_to_string(&src)
         .map_err(|e| fail(2, format!("fb fetch: {}: {e}", src.display())))?;
     let entries = source::parse(&orig);
     if entries.is_empty() {
-        println!(
-            "{} names no FILED-EXAMPLE-*.pdf: nothing to fetch",
-            src.display()
-        );
+        println!("{} names no SAMPLE-*.pdf: nothing to fetch", src.display());
     }
     let mut text = orig.clone();
     let mut lines: Vec<Line> = Vec::new();
@@ -200,7 +197,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             .unwrap_or_else(|| e.clone());
         lines.push(one(&o, &ex, &cur, &mut text));
     }
-    for n in exemplar_pdfs(&ex) {
+    for n in sample_pdfs(&ex) {
         if !entries.iter().any(|e| e.name == n) {
             lines.push(line("UNLISTED", &n, "on disk but not named in SOURCE.md"));
         }

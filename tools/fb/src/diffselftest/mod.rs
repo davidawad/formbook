@@ -19,6 +19,7 @@ mod mutate;
 mod noise;
 
 use crate::diff::{diff_measured, Report, Tol};
+use crate::layout::{self, Doc};
 use crate::measure::{self, Measured};
 use crate::{fail, Res};
 use mutate::{Block, Warp};
@@ -85,7 +86,7 @@ fn render(root: &Path, o: &Opts, md: &str, out: &Path) -> Res<()> {
     Ok(())
 }
 
-/// A mutated markdown written next to the samples (the template's root is the doc dir) and removed again.
+/// A mutated markdown written into usage/ next to the inputs (the template's root is the doc dir) and removed again.
 struct TempMd(PathBuf);
 impl Drop for TempMd {
     fn drop(&mut self) {
@@ -153,11 +154,12 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         .replace('/', "_");
     let scratch = root.join("out/diff-selftest").join(rel).join(&o.engine);
     std::fs::create_dir_all(&scratch).map_err(|e| io(&scratch, e))?;
+    let doc = Doc::open(&o.doc)?;
     let sample = match &o.sample {
         Some(s) => s.clone(),
-        None => first_sample(&o.doc)?,
+        None => first_sample(&doc)?,
     };
-    let md = format!("samples/INPUT-{sample}.md");
+    let md = Doc::rel(&layout::input_name(&doc.stem, &sample));
     let src = std::fs::read_to_string(o.doc.join(&md)).map_err(|e| io(&o.doc.join(&md), e))?;
     println!(
         "diff-selftest {} sample {sample} engine {}",
@@ -248,7 +250,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         ("forced-line-break", mutate::force_break(&src, p1, 6)),
     ];
     for (name, text) in content {
-        let rel_md = format!("samples/.diff-selftest-{name}.md");
+        let rel_md = Doc::rel(&format!(".diff-selftest-{name}.md"));
         let tmp = TempMd(o.doc.join(&rel_md));
         std::fs::write(&tmp.0, text).map_err(|e| io(&tmp.0, e))?;
         let out = scratch.join(format!("{name}.pdf"));
@@ -270,22 +272,17 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     }
 }
 
-fn first_sample(doc: &Path) -> Res<String> {
-    let dir = doc.join("samples");
-    let mut ids: Vec<String> = std::fs::read_dir(&dir)
-        .map_err(|e| io(&dir, e))?
-        .flatten()
-        .filter_map(|e| {
-            let n = e.file_name().to_string_lossy().into_owned();
-            n.strip_prefix("INPUT-")
-                .and_then(|s| s.strip_suffix(".md"))
-                .map(str::to_string)
-        })
-        .collect();
-    ids.sort();
-    ids.into_iter()
-        .next()
-        .ok_or_else(|| fail(2, format!("fb: no samples/INPUT-*.md in {}", doc.display())))
+fn first_sample(doc: &Doc) -> Res<String> {
+    doc.ids(layout::INPUT).into_iter().next().ok_or_else(|| {
+        fail(
+            2,
+            format!(
+                "fb: no {} in {}",
+                Doc::rel(&layout::input_name(&doc.stem, "*")),
+                doc.dir.display()
+            ),
+        )
+    })
 }
 
 /// Civil date (UTC) of now, for the tolerance record.

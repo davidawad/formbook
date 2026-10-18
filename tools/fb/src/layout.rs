@@ -179,14 +179,6 @@ impl Doc {
         ids_in(&self.usage(), kind, &self.stem)
     }
 
-    /// Sorted SAMPLE file names.
-    pub fn sample_files(&self) -> Vec<String> {
-        self.ids(SAMPLE)
-            .iter()
-            .map(|id| sample_name(&self.stem, id))
-            .collect()
-    }
-
     /// `<root>/.overlay/<doc path relative to root>`.
     pub fn overlay_dir(&self, root: &Path) -> PathBuf {
         let abs = std::fs::canonicalize(&self.dir).unwrap_or_else(|_| self.dir.clone());

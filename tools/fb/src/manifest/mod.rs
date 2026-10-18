@@ -87,11 +87,11 @@ pub fn doctype_lines(root: &Path) -> Res<String> {
     Ok(Order::render(rows.into_iter().flatten().collect()))
 }
 
-/// A subfolder is a doc type when it is no court of its own and holds typst/, samples/ or exemplars/.
+/// A subfolder is a doc type when it is no court of its own and holds typst/ or usage/.
 fn is_doctype(p: &Path) -> bool {
     p.is_dir()
         && !p.join("court.json").is_file()
-        && ["typst", "samples", "exemplars"]
+        && ["typst", crate::layout::USAGE_DIR]
             .iter()
             .any(|s| p.join(s).is_dir())
 }

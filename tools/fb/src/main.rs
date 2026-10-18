@@ -5,6 +5,7 @@ mod diff;
 mod diffselftest;
 mod fetch;
 mod fonts;
+mod layout;
 mod lint;
 mod manifest;
 mod matchstamp;
@@ -34,7 +35,8 @@ fn main() -> ExitCode {
         "fonts" => fonts::main(rest),
         "lint" => lint::main(rest),
         "match-stamp" => matchstamp::main(rest),
-        _ => Err(fail(2, "usage: fb check|render|fonts|manifest|tracker|readmes|measure|diff|fetch|lint|match-stamp|diff-selftest ...")),
+        "usage" => layout::main(rest),
+        _ => Err(fail(2, "usage: fb check|render|fonts|manifest|tracker|readmes|measure|diff|fetch|lint|match-stamp|diff-selftest|usage ...")),
     };
     result.unwrap_or_else(|e| {
         eprintln!("{}", e.msg);

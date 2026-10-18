@@ -1,4 +1,4 @@
-//! Rule (c): samples/INPUT-*.md is plain markdown. No hard line breaks inside a paragraph (two
+//! Rule (c): usage/INPUT-<stem>-<id>.md is plain markdown. No hard line breaks inside a paragraph (two
 //! trailing spaces or a trailing backslash), no raw typst (`#name(`, `#name[`, `#name.`, a typst
 //! keyword such as `#set ` or a break such as `#pagebreak`; a ```{=typst} block) and no raw LaTeX
 //! (`\command`, a ```{=latex} block). Markdown escapes (`\.`, `\-`, `\\`), `# Heading` lines,
@@ -242,7 +242,7 @@ Last line with trailing spaces \x20
 
     #[test]
     fn findings() {
-        let f = check("samples/INPUT-x.md", MD);
+        let f = check("usage/INPUT-ca9-x.md", MD);
         let got: Vec<(usize, &str, &str)> = f
             .iter()
             .map(|x| (x.line, x.kind, x.detail.as_str()))

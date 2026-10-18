@@ -167,10 +167,19 @@ mod tests {
             stamp_entry_id(s, "usage/OUTPUT-ca9-opening-brief-a.docx"),
             Some("a")
         );
-        assert_eq!(stamp_entry_id(s, "usage/OUTPUT-ca9-opening-brief-a.pdf"), None);
+        assert_eq!(
+            stamp_entry_id(s, "usage/OUTPUT-ca9-opening-brief-a.pdf"),
+            None
+        );
         assert_eq!(stamp_entry_id(s, "usage/OUTPUT-ca9-a.typst.pdf"), None);
-        assert_eq!(stamp_entry_id(s, "samples/OUTPUT-ca9-opening-brief-a.typst.pdf"), None);
-        assert_eq!(stamp_entry_id(s, "usage/OUTPUT-ca9-opening-brief-.typst.pdf"), None);
+        assert_eq!(
+            stamp_entry_id(s, "samples/OUTPUT-ca9-opening-brief-a.typst.pdf"),
+            None
+        );
+        assert_eq!(
+            stamp_entry_id(s, "usage/OUTPUT-ca9-opening-brief-.typst.pdf"),
+            None
+        );
     }
 
     #[test]
