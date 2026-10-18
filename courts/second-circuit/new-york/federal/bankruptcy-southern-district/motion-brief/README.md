@@ -37,28 +37,28 @@ checked in this run.
 
 ## Files
 
-- `exemplars/FILED-EXAMPLE-revlon-22-01167-motion-brief.pdf` (primary: Debtors' memorandum in support of their motion to dismiss
+- `usage/SAMPLE-nysb-motion-brief-revlon2201167.pdf` (primary: Debtors' memorandum in support of their motion to dismiss
   the adversary complaint, Paul Weiss / MoloLamken / Kaplan Rice, ECF Doc. 16, 68 pages, filed Dec. 5, 2022) and
-  `exemplars/FILED-EXAMPLE-celsius-tether-24-04018-motion-brief.pdf` (second filer: Tether defendants' memorandum in support of
-  their motion to dismiss, Kramer Levin, ECF Doc. 33, 57 pages, dated Jan. 17, 2025). See `exemplars/SOURCE.md`.
-- `samples/INPUT-revlon-memorandum.md`: an excerpt transcribed from the primary exemplar: the preliminary statement (¶¶1-8), the
+  `usage/SAMPLE-nysb-motion-brief-celsiustether2404018.pdf` (second filer: Tether defendants' memorandum in support of
+  their motion to dismiss, Kramer Levin, ECF Doc. 33, 57 pages, dated Jan. 17, 2025). See `usage/SOURCE.md`.
+- `usage/INPUT-nysb-motion-brief-revlonmemorandum.md`: an excerpt transcribed from the primary exemplar: the preliminary statement (¶¶1-8), the
   first part of the statement of facts (¶¶9-14, sub-heading A) and the first point of the argument (¶¶31-33, renumbered 15-17
   here). Sections B-E of the facts, the rest of the argument and the table of authorities are not transcribed.
-- `samples/OUTPUT-revlon-memorandum.pdf`: 10 pages (cover, contents, 8 body pages). `samples/OVERLAY-revlon-memorandum.pdf` and `.txt`.
+- `usage/OUTPUT-nysb-motion-brief-revlonmemorandum.typst.pdf`: 10 pages (cover, contents, 8 body pages). `usage/OVERLAY-revlon-memorandum.pdf` and `.txt`.
 - As for the complaint, the sample uses the repo's `INPUT-`, `OUTPUT-`, `OVERLAY-` names, so the tools work unchanged.
 
 ## Commands (from the repo root)
 
-    sh tools/render.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief samples/INPUT-revlon-memorandum.md
-    sh tools/overlay.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief revlon-memorandum courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief/exemplars/FILED-EXAMPLE-revlon-22-01167-motion-brief.pdf
+    sh tools/render.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief usage/INPUT-nysb-motion-brief-revlonmemorandum.md
+    sh tools/overlay.sh courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief revlon-memorandum courts/second-circuit/new-york/federal/bankruptcy-southern-district/motion-brief/usage/SAMPLE-nysb-motion-brief-revlon2201167.pdf
 
-The third argument is required here. With no exemplar named, `tools/overlay.sh` takes the first `exemplars/*.pdf` alphabetically, which is the Tether memorandum (`celsius-tether`), and the match falls to about 12% per page. The Revlon memorandum is the overlay reference.
+The third argument is required here. With no exemplar named, `tools/overlay.sh` takes the first `usage/*.pdf` alphabetically, which is the Tether memorandum (`celsius-tether`), and the match falls to about 12% per page. The Revlon memorandum is the overlay reference.
 
 The render is a clean typst compile with the vendored fonts (no warnings).
 
 ## Overlay
 
-`samples/OVERLAY-revlon-memorandum.txt` (ours -> filed page with the most words in common):
+`usage/OVERLAY-revlon-memorandum.txt` (ours -> filed page with the most words in common):
 
     ours p.1 -> p.1 (92.9%)   ours p.2 -> p.2 (29.6%, the contents page)   ours p.3 -> p.13 (93.5%)   ours p.4 -> p.14 (91.9%)
     ours p.5 -> p.15 (90.5%)  ours p.6 -> p.16 (90.3%)  ours p.7 -> p.17 (61.0%)  ours p.8 -> p.18 (52.1%)
@@ -102,7 +102,7 @@ pattern, which here is empty, and a pattern cannot depend on the enclosing secti
 - The sample is an excerpt (the rest of the argument is not transcribed), so the overlay compares partial pages.
 - Type size and spacing rest on the exemplar and on the origin rule (SDNY Civil Rule 11.1), not on fetched text. Judges'
   chambers rules were not checked.
-- Tier 2 asks for 2-3 filers: two memoranda are in `exemplars/` (Debtors, Tether). The template is built from the first.
+- Tier 2 asks for 2-3 filers: two memoranda are in `usage/` (Debtors, Tether). The template is built from the first.
 
 ## BLOCKED
 

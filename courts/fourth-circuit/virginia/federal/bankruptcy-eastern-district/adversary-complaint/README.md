@@ -5,10 +5,10 @@ Folder: `courts/fourth-circuit/virginia/federal/bankruptcy-eastern-district/adve
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-deboer-v-morris-26-03003-adversary-complaint.pdf` (1 filer, counsel for creditors; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-deboer-adversary-complaint.md`: caption, jurisdiction, parties, background, Count I (with the payments table), the first three paragraphs of Count II, the prayer, the signature block and the certificate of service. Paragraphs 36 to 55 of Count II are omitted (the exemplar is 16 pages; the sample is 9). |
-| render | ok: `samples/OUTPUT-deboer-adversary-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-deboer-adversary-complaint.pdf` and `.txt` (page map below) |
+| exemplar | yes: `usage/SAMPLE-vaeb-adversary-complaint-deboervmorris2603003.pdf` (1 filer, counsel for creditors; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-vaeb-adversary-complaint-deboer.md`: caption, jurisdiction, parties, background, Count I (with the payments table), the first three paragraphs of Count II, the prayer, the signature block and the certificate of service. Paragraphs 36 to 55 of Count II are omitted (the exemplar is 16 pages; the sample is 9). |
+| render | ok: `usage/OUTPUT-vaeb-adversary-complaint-deboer.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-deboer-adversary-complaint.pdf` and `.txt` (page map below) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on the final build; the caption was also checked at 110 dpi) |
 
 File names follow the repo's role-prefix convention (`INPUT-`, `OUTPUT-`, `OVERLAY-`) because `tools/render.sh` and `tools/overlay.sh` read and write those names by default. The brief's `<id>.md` / `<id>-overlay.pdf` names were not used for that reason.
@@ -47,9 +47,9 @@ Not produced by this template (separate filings that may be required with the co
 - Signature block: date at left; firm, "By: /s/" and the signer at right, counsel's lines below.
 - Certificate of service: centered heading, form wording, the service list in two columns, and the signature.
 
-## Overlay (`samples/OVERLAY-deboer-adversary-complaint.pdf`)
+## Overlay (`usage/OVERLAY-deboer-adversary-complaint.pdf`)
 
-Red is our render, blue is the filed exemplar, black is where they agree. The overlay pairs each page with the exemplar page sharing the most words (`samples/OVERLAY-deboer-adversary-complaint.txt`):
+Red is our render, blue is the filed exemplar, black is where they agree. The overlay pairs each page with the exemplar page sharing the most words (`usage/OVERLAY-deboer-adversary-complaint.txt`):
 
 ```
 ours p.1  filed p.1  word-overlap 63.6%

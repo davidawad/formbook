@@ -2,8 +2,8 @@
 
 - Court: `bap9` (United States Bankruptcy Appellate Panel of the Ninth Circuit), folder `courts/ninth-circuit/bankruptcy-appellate-panel/reply-brief/`
 - Template: `typst/bap9-reply-brief.typ` (entry `typst/main.typ`)
-- Exemplar: `exemplars/FILED-EXAMPLE-beavor-25-1050-reply-brief.pdf` (see `exemplars/SOURCE.md`)
-- Samples: `samples/INPUT-beavor-reply-brief.md`, a transcription of the exemplar (abridged), rendered to `samples/OUTPUT-beavor-reply-brief.pdf`, overlay `samples/OVERLAY-beavor-reply-brief.pdf` and `.txt`; and `samples/INPUT-fictional-reply-brief.md` (fictional), rendered to `samples/OUTPUT-fictional-reply-brief.pdf`
+- Exemplar: `usage/SAMPLE-bap9-reply-brief-beavor251050.pdf` (see `usage/SOURCE.md`)
+- Samples: `usage/INPUT-bap9-reply-brief-beavor.md`, a transcription of the exemplar (abridged), rendered to `usage/OUTPUT-bap9-reply-brief-beavor.typst.pdf`, overlay `usage/OVERLAY-beavor-reply-brief.pdf` and `.txt`; and `usage/INPUT-bap9-reply-brief-fictional.md` (fictional), rendered to `usage/OUTPUT-bap9-reply-brief-fictional.typst.pdf`
 - Status of this doc type:
   - **Exemplar found (2026-10-16).** *Beavor v. Reno City Center Owner, LLC*, BAP case 25-1050, "Appellants' Reply to Brief of Appellee Reno City Center Owner, LLC", filed August 29, 2025 by Greenberg Glusker Fields Claman & Machtinger LLP for the appellants. Born-digital, complete. Alternates from different filers: *Moehling v. Select Portfolio Servicing* (BAP No. SC-26-1081, pro se) and, for the cover caption, the answering-brief alternate *Hujazi v. Wirum* (BAP No. NC-14-1030); compared, not saved.
   - The Beavor sample is abridged: 15 rendered pages against the filer's 23 (see the sample's header comment). The fictional sample is kept as it was.
@@ -42,7 +42,7 @@ History (2026-10-14): FRBP 8014(a) and (b) and the manual's §VIII.5 set out con
 
 ## Exemplar search (resolved 2026-10-16)
 
-The earlier passes searched CourtListener with `court=bap9` and found nothing. CourtListener files BAP9 dockets under the circuit's court id `ca9` with the short number (ca9 "25-1050" here; ca9 "25-1042" = BAP No. CC-25-1042). The earlier note ruling out *Hujazi v. Wirum* as a Ninth Circuit appeal was wrong (it is BAP No. NC-14-1030; corrected in `exemplars/SOURCE.md`). Searching RECAP (`type=r`) under `ca9` found three reply candidates: Beavor (counsel, born-digital, chosen), Moehling (pro se) and Reznick (pro per, a scan). Details in `exemplars/SOURCE.md`.
+The earlier passes searched CourtListener with `court=bap9` and found nothing. CourtListener files BAP9 dockets under the circuit's court id `ca9` with the short number (ca9 "25-1050" here; ca9 "25-1042" = BAP No. CC-25-1042). The earlier note ruling out *Hujazi v. Wirum* as a Ninth Circuit appeal was wrong (it is BAP No. NC-14-1030; corrected in `usage/SOURCE.md`). Searching RECAP (`type=r`) under `ca9` found three reply candidates: Beavor (counsel, born-digital, chosen), Moehling (pro se) and Reznick (pro per, a scan). Details in `usage/SOURCE.md`.
 
 ## Template changes from the overlay
 
@@ -57,13 +57,13 @@ The same seven changes as in `../answering-brief/README.md` ("Template changes f
 7. Certificate of service with unregistered parties: the BAP sample certificate's sentence on CM/ECF service of registered parties was missing; now printed before the mailing sentence (Beavor has one non-CM/ECF participant).
 8. Reply only: `authorities` is required (FRBP 8014(c), see "Gap").
 
-Re-rendered after the changes: `OUTPUT-beavor-reply-brief.pdf` (15 pages) and `OUTPUT-fictional-reply-brief.pdf` (6 pages, unchanged page count).
+Re-rendered after the changes: `OUTPUT-bap9-reply-brief-beavor.typst.pdf` (15 pages) and `OUTPUT-bap9-reply-brief-fictional.typst.pdf` (6 pages, unchanged page count).
 
-## Sample (`samples/INPUT-beavor-reply-brief.md`)
+## Sample (`usage/INPUT-bap9-reply-brief-beavor.md`)
 
 A transcription of the exemplar, abridged, from the PDF's text layer: the cover; I. Standard of Review; II. Argument part A in full (a) and (b), with footnotes 1-3 and the block quotation; part B, the first two paragraphs of B(a) with footnote 4, and B(b) in full with its block quotation; III. Conclusion; signature; compliance certificate and certificate of service (the one non-CM/ECF participant is in `service.unregistered`). Omitted, as the header comment says: the rest of B(a) (filed pages 7-13), footnotes 5-6, the CM/ECF service list and the server's declaration. The table of authorities is generated from the excerpt, so it lists only the authorities cited in it (17 of the filer's 27). Three heading levels: level 1 "I." sections, level 2 "A."/"B.", level 3 "a)"/"b)". The compliance certificate states the template's count for the excerpt, 2,324 words; the filer's states 3,542 for the whole brief.
 
-## Sample (`samples/INPUT-fictional-reply-brief.md`)
+## Sample (`usage/INPUT-bap9-reply-brief-fictional.md`)
 
 Fictional. About 350 words of body text (478 words including frontmatter). Two argument headings and a conclusion. Compliance and service certificates only. Written to the rules, not transcribed.
 
@@ -72,7 +72,7 @@ File naming follows the tools (`INPUT-` / `OUTPUT-` / `OVERLAY-`), as in the ope
 
 ## Overlay
 
-`sh tools/overlay.sh courts/ninth-circuit/bankruptcy-appellate-panel/reply-brief beavor-reply-brief` exits 0 (one PDF in `exemplars/`) and writes `samples/OVERLAY-beavor-reply-brief.pdf` (15 pages) and `.txt`.
+`sh tools/overlay.sh courts/ninth-circuit/bankruptcy-appellate-panel/reply-brief beavor-reply-brief` exits 0 (one PDF in `usage/`) and writes `usage/OVERLAY-beavor-reply-brief.pdf` (15 pages) and `.txt`.
 
 Page map (ours → filed page, word overlap): 1→1 (100%), 2→2 (42%), 3→4 (40%), 4→5 (96%), 5→6 (69%), 6→7 (58%), 7→8 (54%), 8→8 (48%), 9→9 (64%), 10→10 (69%), 11→11 (66%), 12→18 (56%), 13→19 (45%), 14→19 (49%), 15→22 (20%). Our 11 body pages hold the excerpt; from page 12 on the pairing is the nearest filed page (the omitted filed pages 12-17 have no counterpart). Low overlap on the TOC and TOA is expected (the excerpt has fewer entries).
 
@@ -123,13 +123,13 @@ Tier-2 comparison with the alternates: Moehling (pro se; pages 1-2 viewed) and H
 
 ## Re-check 2026-10-15 (bead fb-595.20.9)
 
-- Re-searched for an exemplar (CourtListener with `court=bap9`, paced; web search). None found. Searches are logged in `exemplars/SOURCE.md`.
-- Re-rendered `samples/INPUT-fictional-reply-brief.md` with `sh tools/render.sh`: 6 pages, exit 0. Every page rendered at 60 dpi and viewed; layout unchanged from the review above. The PDF was moved to `/work/artifacts/bap9/` and is not committed.
+- Re-searched for an exemplar (CourtListener with `court=bap9`, paced; web search). None found. Searches are logged in `usage/SOURCE.md`.
+- Re-rendered `usage/INPUT-bap9-reply-brief-fictional.md` with `sh tools/render.sh`: 6 pages, exit 0. Every page rendered at 60 dpi and viewed; layout unchanged from the review above. The PDF was moved to `/work/artifacts/bap9/` and is not committed.
 - `sh tools/overlay.sh` exits 1 (`no exemplar pdf`). Overlay: not produced.
 - Status unchanged: **BLOCKED: no public exemplar.**
 ## Engines
 
-docx (`docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/bap9.lua` builds the cover, front matter, signature and certificates from the frontmatter; output `samples/OUTPUT-<id>.docx`).
+docx (`docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/bap9.lua` builds the cover, front matter, signature and certificates from the frontmatter; output `usage/OUTPUT-<id>.docx`).
 
 - Matches the typst form: US Letter with 1 in margins; EB Garamond 14 pt (font name declared; it must be installed where the file is opened); double spacing as exact 36.5 pt lines, the typst 1.3em gap between paragraphs, 0.5 in first-line indent; single-spaced headings, quotations, footnotes, table entries, signature and certificates; centered bold level-1 headings, bold left level-2 and level-3 headings with hanging indent. Three sections: cover with no footer, front matter in lower roman from i, body and certificates in arabic from 1. The filter applies the same word limit and required-heading checks as the typst template and passes the body word count to the compliance certificate (the opening and reply counts, 1,782 and 344, match the figures recorded in those READMEs).
 - Differs from the typst form: (1) the table of contents is a TOC field whose cached result lists the headings without page numbers; Word or LibreOffice shows page numbers after a field update. (2) The table of authorities lists the cited authorities without page numbers in every viewer (LibreOffice does not honor TA/TOA fields), so it has no dot leaders. (3) Line breaks and page breaks follow Word or LibreOffice, not the typst render. (4) The last body paragraph is kept with the signature block (KeepWithNext); certificates are not forced onto one page.
@@ -138,4 +138,4 @@ docx (`docx/build-reference.sh` builds `docx/reference.docx` from pandoc's defau
 - The .docx was validated for a valid zip, well-formed XML in every part, three sections with footer references, and every paragraph style defined in styles.xml. It has not been opened in Word or LibreOffice.
 ## Render check 2026-10-15
 
-Re-rendered `samples/OUTPUT-fictional-*.pdf` with `sh tools/render.sh` (exit 0, no typst warnings). `sh tools/overlay.sh` exits 1 again: no exemplar pdf. Every page rendered at 60 dpi and viewed: answering-brief 10 of 10, reply-brief 6 of 6. No template changes in this pass. Still BLOCKED on the exemplar; search log appended to `exemplars/SOURCE.md`.
+Re-rendered `usage/OUTPUT-fictional-*.pdf` with `sh tools/render.sh` (exit 0, no typst warnings). `sh tools/overlay.sh` exits 1 again: no exemplar pdf. Every page rendered at 60 dpi and viewed: answering-brief 10 of 10, reply-brief 6 of 6. No template changes in this pass. Still BLOCKED on the exemplar; search log appended to `usage/SOURCE.md`.

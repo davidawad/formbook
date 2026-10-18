@@ -4,9 +4,9 @@ Doc type: the appellant's reply brief (Ga. Sup. Ct. R. 19(3), 20(2)). Court `ga`
 
 | Check | Result |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-clark-v-leigh-S26A0349-reply-brief.pdf` (see `exemplars/SOURCE.md`) |
+| exemplar | yes: `usage/SAMPLE-ga-reply-brief-clarkvleighs26a0349.pdf` (see `usage/SOURCE.md`) |
 | render | ok: `tools/render.sh` (typst, `--ignore-system-fonts`, no warnings); 14 pages; only TeX Gyre Schola embedded (`pdffonts`) |
-| overlay | ok: `samples/OVERLAY-clark.pdf` and `OVERLAY-clark.txt` (`tools/overlay.sh`) |
+| overlay | ok: `usage/OVERLAY-clark.pdf` and `OVERLAY-clark.txt` (`tools/overlay.sh`) |
 | pages reviewed | 14 of 14, each rendered to PNG at 60 dpi and looked at (certificate page re-checked after the Rule 14 fix) |
 
 ## Governing rules
@@ -31,8 +31,8 @@ As the opening brief: TeX Gyre Schola as the substitute for the Century Schoolbo
 ## Files
 
 - `typst/main.typ`: entry point. `typst/ga-reply-brief.typ`: template, `ga-brief(meta, body)` (same code as the opening-brief template).
-- `samples/INPUT-clark.md`: transcription of the reply. The opening paragraph and section I are transcribed in full; section II.A and II.B are transcribed; section II.C.3 starts. The rest is marked `[Omitted from this transcription: ...]`. The reply has no introduction in the exemplar, so the body starts with the opening paragraph and section I.
-- `samples/OUTPUT-clark.pdf`, `samples/OVERLAY-clark.pdf`, `samples/OVERLAY-clark.txt`.
+- `usage/INPUT-ga-reply-brief-clark.md`: transcription of the reply. The opening paragraph and section I are transcribed in full; section II.A and II.B are transcribed; section II.C.3 starts. The rest is marked `[Omitted from this transcription: ...]`. The reply has no introduction in the exemplar, so the body starts with the opening paragraph and section I.
+- `usage/OUTPUT-ga-reply-brief-clark.typst.pdf`, `usage/OVERLAY-clark.pdf`, `usage/OVERLAY-clark.txt`.
 
 ## What the overlay shows
 
@@ -62,7 +62,7 @@ Red is our render only, blue is the filed exemplar only, black is both. Pages ar
 
 ## Engines
 
-Typst is the primary engine (above). The DOCX engine is `docx/`, the same design as `answering-brief/docx/`: `build-reference.sh` writes `reference.docx`; `ga-brief.lua` builds the cover, TOC, TOA, closing, certificate and the sections; `render.sh` makes two renders so the TOC and TOA numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> samples/INPUT-clark.md`: `samples/OUTPUT-clark.docx` and `samples/OUTPUT-clark.docx.pdf` (LibreOffice 26.8.1).
+Typst is the primary engine (above). The DOCX engine is `docx/`, the same design as `answering-brief/docx/`: `build-reference.sh` writes `reference.docx`; `ga-brief.lua` builds the cover, TOC, TOA, closing, certificate and the sections; `render.sh` makes two renders so the TOC and TOA numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> usage/INPUT-ga-reply-brief-clark.md`: `usage/OUTPUT-ga-reply-brief-clark.docx` and `usage/OUTPUT-clark.docx.pdf` (LibreOffice 26.8.1).
 
 | | docx | typst |
 |---|---|---|
@@ -73,11 +73,11 @@ Typst is the primary engine (above). The DOCX engine is `docx/`, the same design
 | TOC, TOA | numbers agree with the typst output on every entry | same |
 | Closing, certificate | same | same |
 
-Checked: every page of `OUTPUT-clark.docx.pdf` was rendered (60 dpi) and set beside the typst page; the TOC and TOA numbers agree with the typst output.
+Checked: every page of `OUTPUT-ga-reply-brief-clark.docx.pdf` was rendered (60 dpi) and set beside the typst page; the TOC and TOA numbers agree with the typst output.
 
 What differs:
 
-- The sample cites `toa:s51-13-1` in the body but has no `authorities:` entry for it. The docx warns on stderr for each such citation and leaves it out of the TOA; typst leaves it out silently. Add the authority to the sample (not done here: `samples/` is an input).
+- The sample cites `toa:s51-13-1` in the body but has no `authorities:` entry for it. The docx warns on stderr for each such citation and leaves it out of the TOA; typst leaves it out silently. Add the authority to the sample (not done here: `usage/` is an input).
 - Front-matter numbers and Word: see answering-brief.
 - Run-in heading spacing: see answering-brief.
 

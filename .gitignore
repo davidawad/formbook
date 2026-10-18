@@ -7,3 +7,6 @@ out/
 .beads/
 .claude/worktrees/
 /tools/fb/target/
+
+# generated overlays (tools/overlay.sh, just overlay); never committed
+.overlay/

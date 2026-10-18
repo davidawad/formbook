@@ -1,13 +1,13 @@
 # California Court of Appeal: appellant's reply brief
 
-Doc type `reply-brief` for the California Courts of Appeal (`court.json` alias `calctapp`). This folder is self-contained. The court-root `typst/` and `samples/` are untouched, and so is the sibling `opening-brief/` folder. Nothing here is a gate stamp: there is no `checks.yaml` for this doc type yet, so no mechanical Gate 0 or Gate 1 has run.
+Doc type `reply-brief` for the California Courts of Appeal (`court.json` alias `calctapp`). This folder is self-contained. The court-root `typst/` and `usage/` are untouched, and so is the sibling `opening-brief/` folder. Nothing here is a gate stamp: there is no `checks.yaml` for this doc type yet, so no mechanical Gate 0 or Gate 1 has run.
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-kirk-v-city-of-morgan-hill-H048745-reply-brief.pdf` | Filed Appellants' Reply Brief, Sixth District, 33 pages, text layer present. Source and filer in `exemplars/SOURCE.md`. |
-| `samples/INPUT-kirk-reply-brief.md` | Transcription of a portion of the exemplar: cover, tables, Introduction, the first part of Argument I (with its footnotes), Conclusion, certificate of word count and proof of service. Frontmatter carries the cover, counsel, signature, service and authorities. |
-| `samples/OUTPUT-kirk-reply-brief.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/courts-of-appeal/reply-brief samples/INPUT-kirk-reply-brief.md`. 15 pages, EB Garamond only (`pdffonts`). |
-| `samples/OVERLAY-kirk-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/california/state/courts-of-appeal/reply-brief kirk-reply-brief`. Red = ours, blue = filed, black = both. The `.txt` is the page map. |
+| `usage/SAMPLE-calctapp-reply-brief-kirkvcityofmorganhillh048745.pdf` | Filed Appellants' Reply Brief, Sixth District, 33 pages, text layer present. Source and filer in `usage/SOURCE.md`. |
+| `usage/INPUT-calctapp-reply-brief-kirk.md` | Transcription of a portion of the exemplar: cover, tables, Introduction, the first part of Argument I (with its footnotes), Conclusion, certificate of word count and proof of service. Frontmatter carries the cover, counsel, signature, service and authorities. |
+| `usage/OUTPUT-calctapp-reply-brief-kirk.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/courts-of-appeal/reply-brief usage/INPUT-calctapp-reply-brief-kirk.md`. 15 pages, EB Garamond only (`pdffonts`). |
+| `usage/OVERLAY-kirk-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/california/state/courts-of-appeal/reply-brief kirk-reply-brief`. Red = ours, blue = filed, black = both. The `.txt` is the page map. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
 | `typst/calctapp-reply-brief.typ` | The template: `calctapp-reply-brief(meta, md)`. Copied from the `opening-brief` template, which is rule-driven and content-agnostic; the reply-specific parts are the metadata and the sample, not the layout. Parameters at the top; each traces to a rule or is a style choice. |
 
@@ -36,7 +36,7 @@ Verified 2026-10-14 against the courts.ca.gov rule pages (rule 8.204 and rule 8.
 - **The e-filing stamp.** The exemplar's "Document received by the CA 6th District Court of Appeal" header is not reproduced: it is an e-filing stamp, not part of the brief's text.
 - **Font.** Century Schoolbook is the preferred face under Rule 8.74(b)(1), not a required one; the rule allows any proportional serif. EB Garamond stays. `fonts/tex-gyre-schola/` is vendored and could replace it if David decides the preference should win; not changed here.
 
-## Gate 2: visual review of `samples/OUTPUT-kirk-reply-brief.pdf`
+## Gate 2: visual review of `usage/OUTPUT-calctapp-reply-brief-kirk.typst.pdf`
 
 Reviewed 2026-10-14 at 60 dpi, every page (15 of 15), against the exemplar pages the overlay pairs them with. Pages were rendered to `/work/artifacts/reply-review/` and read one by one. Re-reviewed 2026-10-16, every page, after the fixes listed at the end; the committed PDF is `4a8049844f8c46a8…`.
 
@@ -81,7 +81,7 @@ Docx engine (`docx/`), built 2026-10-15. `docx/make-reference.sh` builds `docx/r
 
 Differs from typst: no table of contents or table of authorities (no fields, no page numbers); no certificate of word count and no proof of service; the cover is paragraphs, not the caption grid; the signature block is paragraphs, not a grid. The body pitch is the typst pitch, which measures about 1.95 times the 13 pt size; that is double spacing, not the 1.5 this README states for Rule 8.74(b)(2). Flagged for David to check, not changed here.
 
-BLOCKED (docx engine, `samples/OUTPUT-kirk-reply-brief.docx`):
+BLOCKED (docx engine, `usage/OUTPUT-calctapp-reply-brief-kirk.docx`):
 - `docx.pdf` gates 0-3: BLOCKED, reason: `soffice` is not installed on the build box, so `tools/render-docx.sh` stops at the conversion step and no `.docx.pdf` exists. Pages reviewed for docx: 0.
 - TOC: not generated (typst builds it with page numbers). Reason: no TOC/TOA filter yet.
 - TOA: not generated. Reason: no TOA filter yet; LibreOffice does not honor TA/TOA fields (docs/DOCX.md).
@@ -89,7 +89,7 @@ BLOCKED (docx engine, `samples/OUTPUT-kirk-reply-brief.docx`):
 
 ## Verification pass 2026-10-16 (fb-595.26.16)
 
-- Rendered with `sh tools/render.sh .../reply-brief samples/INPUT-kirk-reply-brief.md`: exit 0, no typst warnings, 15 pages (the committed PDF was also 15 pages, so it was not stale). `pdffonts`: EB Garamond Regular, Italic and Bold only.
+- Rendered with `sh tools/render.sh .../reply-brief usage/INPUT-calctapp-reply-brief-kirk.md`: exit 0, no typst warnings, 15 pages (the committed PDF was also 15 pages, so it was not stale). `pdffonts`: EB Garamond Regular, Italic and Bold only.
 - Viewed all 15 pages at 60 dpi, and the 15 overlay pages at 40 dpi. Our cover was compared with the exemplar's page 1 (97% word overlap).
 - Overlay rerun (`tools/overlay.sh`): pairings unchanged from the table above.
 - Fixed, in `typst/calctapp-reply-brief.typ` (the same two fixes as `opening-brief`, whose template this one copies):

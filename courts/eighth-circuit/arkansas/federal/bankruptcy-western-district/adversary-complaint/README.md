@@ -4,10 +4,10 @@ Doc type: **adversary complaint** (a complaint in an adversary proceeding) in th
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-rice-1-25-ap-07020-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-rice-trustee-complaint.md`: caption, paragraphs 1 to 45, prayer, signature block (a portion of the 18-page filing) |
-| render | ok: `samples/OUTPUT-rice-trustee-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-rice-trustee-complaint.pdf` and `samples/OVERLAY-rice-trustee-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-arwb-adversary-complaint-rice125ap07020.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-arwb-adversary-complaint-ricetrusteecomplaint.md`: caption, paragraphs 1 to 45, prayer, signature block (a portion of the 18-page filing) |
+| render | ok: `usage/OUTPUT-arwb-adversary-complaint-ricetrusteecomplaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-rice-trustee-complaint.pdf` and `usage/OVERLAY-rice-trustee-complaint.txt` |
 | pages reviewed | 9 of 9. Every page was rendered at 60 dpi and viewed. Pages 8 and 9 were viewed after the last change (the prayer moved to page 9); pages 1 to 7 were viewed before it, and their paragraph positions were re-checked by text. Word-overlap scan clean. |
 | typeface | face required: **none** found (the FRBP and the W.D./E.D. Ark. local rules and ECF procedures retrieved on 2026-10-14 name no face, size or font; see gap 2). Vendored substitute: **EB Garamond** (kept, as `docs/FONTS.md` says for a court that names no face). Metric-compatible: n/a. Re-checked 2026-10-14: render ok, `pdffonts` shows `EBGaramond-Regular` and `EBGaramond-Bold` embedded, 9 pages, all 9 pages viewed. |
 
@@ -45,7 +45,7 @@ Not produced by this template (separate filings that may accompany a first compl
 
 ## Overlay (what it shows)
 
-`samples/OVERLAY-rice-trustee-complaint.pdf`: red is our render, blue is the filed exemplar, black is both. The page map (`samples/OVERLAY-rice-trustee-complaint.txt`) pairs each of our pages with the filed page sharing the most words:
+`usage/OVERLAY-rice-trustee-complaint.pdf`: red is our render, blue is the filed exemplar, black is both. The page map (`usage/OVERLAY-rice-trustee-complaint.txt`) pairs each of our pages with the filed page sharing the most words:
 
 | Our page | Filed page | Note |
 |---|---|---|
@@ -66,7 +66,7 @@ The overlay is a diagnostic, not a score. The two layers will not coincide on te
 1. **W.D. Ark. local rules (open question for David).** The local rules that govern form for this court were not retrievable from this box: the court's site (arwb.uscourts.gov, arb.uscourts.gov) returned 404 or a WAF rejection for the rule PDFs I guessed, and the courtrules.net index is behind a Cloudflare challenge (HTTP 403). The rule PDFs that did load were Local Rule 5001-2 (Clerk's office location, read in full) and the joint rule 1001-1 (matters not covered; read from a search snippet). No W.D. Ark. local rule on the form, size, font or caption of a bankruptcy pleading was read. The template therefore follows FRBP 7010, 9004 and Official Form 416, and the exemplar. If the local rules add a format requirement (for example a font, a size or a line count), it must be checked against the local text before this doc type is called complete.
 2. **Font.** EB Garamond (vendored) at 13 pt. No rule read names a typeface, so no court substitute applies (`docs/FONTS.md`: "No face named" → EB Garamond); the filed exemplar is Times New Roman, which is the filer's choice, not a rule. Liberation Serif would be the substitute if a rule named Times New Roman. EB Garamond sets narrower than Times: at 12 pt its lines ran about 100 characters against about 88 in the exemplar, so 13 pt was used to match the line length. Whether the court wants Times is a question for David.
 3. **Caption form.** The caption follows Rule 7010's "substantially conform to Form 416" and the adversary-caption layout as described by the official form's text in search results (Form 416D). The form itself was not fetched from uscourts.gov, so the exact field placement is by description, not by the form.
-4. **Second filer not saved.** EVAL-LOOP's tier-2 rule asks for two or three filers. The second one found is Kapitus Servicing, Inc. as agent for Kapitus LLC v. Rogers, Adv. Pro. No. 6:24-ap-07053 (Hot Springs, a creditor's complaint, 19 pages, Times, text layer present; RECAP `recap/gov.uscourts.arwb.176714/`). It is recorded in `exemplars/SOURCE.md` but not saved, because the brief asks for one exemplar per doc type and `tools/overlay.sh` takes the first PDF in `exemplars/` by name. Tier 2 is therefore **not** judged against two filers yet.
+4. **Second filer not saved.** EVAL-LOOP's tier-2 rule asks for two or three filers. The second one found is Kapitus Servicing, Inc. as agent for Kapitus LLC v. Rogers, Adv. Pro. No. 6:24-ap-07053 (Hot Springs, a creditor's complaint, 19 pages, Times, text layer present; RECAP `recap/gov.uscourts.arwb.176714/`). It is recorded in `usage/SOURCE.md` but not saved, because the brief asks for one exemplar per doc type and `tools/overlay.sh` takes the first PDF in `usage/` by name. Tier 2 is therefore **not** judged against two filers yet.
 5. **Partial sample.** The sample is paragraphs 1 to 45, the prayer and the signature block. Paragraphs 46 to 73 (the transfers to Ferrell and Torres, the claims for relief and the turnover requests) and filed pages 12 to 17 are not transcribed, to keep the render at the 8 to 14 page target. The sample is therefore not the whole complaint.
 6. **Transcription choices.** The ECF header is not reproduced (the court adds it). The exemplar's text layer reads `(334) 922+0293` for Scott D. McCoy's telephone; the sample has `(334) 922-0293` (the `+` looks like an OCR-style slip in the text layer; not checked against the image). The filer's spelling is kept as filed, including "Kimerly Renee Ferrell" in paragraph 10.
 7. **No check scripts run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. The render and overlay were run; the page review below is the Gate 2 equivalent for this doc type.
@@ -94,17 +94,17 @@ Gate 2 rows: pages 1 to 9 pass; no OPEN rows for layout. Tier-2 findings (conven
 
 | Engine | Output | What matches the typst template | What differs |
 |---|---|---|---|
-| typst (primary) | `samples/OUTPUT-rice-trustee-complaint.pdf` | (the reference) | (the reference) |
-| docx | `samples/OUTPUT-rice-trustee-complaint.docx`, `.docx.pdf` (LibreOffice) | 9 pages, as typst; US Letter; 1 in margins; EB Garamond 13 pt (embedded in the PDF); exact 24 pt double spacing; 0.5 in first-line indent; court title; caption as a borderless table (debtor and parties left, case numbers right, 0.2 in gutter); centred bold capitals section headings kept with the next paragraph; numbered paragraphs 1, 2, ...; the prayer kept with the signature block; `- n -` footer | the text after a paragraph number starts at a tab stop at 1.0 in (typst: 0.3 in after the number, so the start moves with the width of the number); the gaps between caption groups are paragraph spacing of the same size, not blank lines |
+| typst (primary) | `usage/OUTPUT-arwb-adversary-complaint-ricetrusteecomplaint.typst.pdf` | (the reference) | (the reference) |
+| docx | `usage/OUTPUT-arwb-adversary-complaint-ricetrusteecomplaint.docx`, `.docx.pdf` (LibreOffice) | 9 pages, as typst; US Letter; 1 in margins; EB Garamond 13 pt (embedded in the PDF); exact 24 pt double spacing; 0.5 in first-line indent; court title; caption as a borderless table (debtor and parties left, case numbers right, 0.2 in gutter); centred bold capitals section headings kept with the next paragraph; numbered paragraphs 1, 2, ...; the prayer kept with the signature block; `- n -` footer | the text after a paragraph number starts at a tab stop at 1.0 in (typst: 0.3 in after the number, so the start moves with the width of the number); the gaps between caption groups are paragraph spacing of the same size, not blank lines |
 
-docx: all 9 pages of `OUTPUT-rice-trustee-complaint.docx.pdf` were rendered at 60 dpi and compared with the typst pages (side by side). Gate result: no BLOCKED items. `tools/check.sh` was not run for the docx engine: the checks are per court folder (see the court README), so this doc type has no stamp. Word was not available to open the file: it must be opened in Word once to confirm there is no repair prompt, and the reader needs EB Garamond installed, or Word substitutes a font silently (`docs/DOCX.md`).
+docx: all 9 pages of `OUTPUT-arwb-adversary-complaint-ricetrusteecomplaint.docx.pdf` were rendered at 60 dpi and compared with the typst pages (side by side). Gate result: no BLOCKED items. `tools/check.sh` was not run for the docx engine: the checks are per court folder (see the court README), so this doc type has no stamp. Word was not available to open the file: it must be opened in Word once to confirm there is no repair prompt, and the reader needs EB Garamond installed, or Word substitutes a font silently (`docs/DOCX.md`).
 
-Source: `docx/build-reference.sh` builds `docx/reference.docx` (run it from `docx/`: `sh build-reference.sh reference.docx`); `docx/arwb-adversary-complaint.lua` lays out the markdown contract. Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-rice-trustee-complaint.md`.
+Source: `docx/build-reference.sh` builds `docx/reference.docx` (run it from `docx/`: `sh build-reference.sh reference.docx`); `docx/arwb-adversary-complaint.lua` lays out the markdown contract. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-arwb-adversary-complaint-ricetrusteecomplaint.md`.
 
 ## Commands
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/adversary-complaint samples/INPUT-rice-trustee-complaint.md
+sh tools/render.sh courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-arwb-adversary-complaint-ricetrusteecomplaint.md
 sh tools/overlay.sh courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/adversary-complaint rice-trustee-complaint
 ```

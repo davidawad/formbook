@@ -1,15 +1,15 @@
 # txsd: motion-brief
 
 Doc type: **motion-brief**: a Rule 12(b)(1) and 12(b)(6) motion to dismiss with its memorandum in one document (the Houston Division form; the Galveston Division form, which forbids a separate memorandum, is not the same document).
-Folder: `courts/fifth-circuit/texas/federal/southern-district/motion-brief/` (the court-root `typst/` and `samples/` are untouched).
+Folder: `courts/fifth-circuit/texas/federal/southern-district/motion-brief/` (the court-root `typst/` and `usage/` are untouched).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-dangelas-4-26-cv-04908-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-dangelas-motion-brief.md` (portions of the 22-page filing; see the sample's header) |
+| exemplar | yes: `usage/SAMPLE-txsd-motion-brief-dangelas426cv04908.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-txsd-motion-brief-dangelas.md` (portions of the 22-page filing; see the sample's header) |
 | typeface | face required by the retrieved rules: none named (LR10.2, Judge Hanks Procs. 7.A, Galveston f.). Substitute: none; **EB Garamond kept** (`docs/FONTS.md`, "No face named"). Embedded: EB Garamond only (`pdffonts`). |
-| render | ok (re-run 2026-10-14): `samples/OUTPUT-dangelas-motion-brief.pdf`, 10 pages, typst 0.15.0, `tools/render.sh`, vendored fonts only, no warnings |
-| overlay | ok (re-run 2026-10-14): `samples/OVERLAY-dangelas-motion-brief.pdf` and `samples/OVERLAY-dangelas-motion-brief.txt` |
+| render | ok (re-run 2026-10-14): `usage/OUTPUT-txsd-motion-brief-dangelas.typst.pdf`, 10 pages, typst 0.15.0, `tools/render.sh`, vendored fonts only, no warnings |
+| overlay | ok (re-run 2026-10-14): `usage/OVERLAY-dangelas-motion-brief.pdf` and `usage/OVERLAY-dangelas-motion-brief.txt` |
 | pages reviewed | 10 of 10 (re-rendered at 60 dpi and every page viewed on 2026-10-14; the layout is unchanged from the earlier review, which is listed below) |
 | BLOCKED | none for the template. The table of authorities is not produced (see Known gaps 3). |
 
@@ -44,7 +44,7 @@ Folder: `courts/fifth-circuit/texas/federal/southern-district/motion-brief/` (th
 
 ## What the overlay shows
 
-Word-overlap per page (see `samples/OVERLAY-dangelas-motion-brief.txt`): ours 1 with filed 1 (86%), 2 with 2 (55%), 3 with 5 (54%), 4 with 7 (54%), 5 with 8 (65%), 6 with 9 (55%), 7 with 20 (45%), 8 with 20 (42%), 9 with 22 (39%), 10 with 22 (18%). Our pages 1 and 2 match the exemplar's cover and contents; pages 3 to 6 match the introduction through the summary; pages 7 to 10 pair with the exemplar's last pages (the argument's end and the certificates) because the sample's argument is shorter than the filing's. The overlay is a diagnostic, not a score.
+Word-overlap per page (see `usage/OVERLAY-dangelas-motion-brief.txt`): ours 1 with filed 1 (86%), 2 with 2 (55%), 3 with 5 (54%), 4 with 7 (54%), 5 with 8 (65%), 6 with 9 (55%), 7 with 20 (45%), 8 with 20 (42%), 9 with 22 (39%), 10 with 22 (18%). Our pages 1 and 2 match the exemplar's cover and contents; pages 3 to 6 match the introduction through the summary; pages 7 to 10 pair with the exemplar's last pages (the argument's end and the certificates) because the sample's argument is shorter than the filing's. The overlay is a diagnostic, not a score.
 
 ## Known gaps and open choices
 
@@ -73,7 +73,7 @@ Word-overlap per page (see `samples/OVERLAY-dangelas-motion-brief.txt`): ours 1 
 
 ## Engines
 
-**docx** (`docx/`; `samples/OUTPUT-dangelas-motion-brief.docx` and `samples/OUTPUT-dangelas-motion-brief.docx.pdf`, the LibreOffice conversion that was checked). Files: `reference.docx` (from `docx/build-reference.sh`: EB Garamond 13 pt set in the styles and the theme, exact 26 pt line pitch, Letter, 1-inch margins, centered PAGE field); `txsd.lua` (court title, section caption, title, the table of contents, lettered and numbered items, signature block and certificates, all read from the sample; `NUMBERED = false` here); `render.sh` (two passes: the page of each heading is read from the LibreOffice layout of pass 1 and written into the TOC's PAGEREF results in pass 2; bookmarks `_Toc1` to `_Toc13`).
+**docx** (`docx/`; `usage/OUTPUT-txsd-motion-brief-dangelas.docx` and `usage/OUTPUT-txsd-motion-brief-dangelas.docx.pdf`, the LibreOffice conversion that was checked). Files: `reference.docx` (from `docx/build-reference.sh`: EB Garamond 13 pt set in the styles and the theme, exact 26 pt line pitch, Letter, 1-inch margins, centered PAGE field); `txsd.lua` (court title, section caption, title, the table of contents, lettered and numbered items, signature block and certificates, all read from the sample; `NUMBERED = false` here); `render.sh` (two passes: the page of each heading is read from the LibreOffice layout of pass 1 and written into the TOC's PAGEREF results in pass 2; bookmarks `_Toc1` to `_Toc13`).
 
 - Matches the typst form: only EB Garamond is embedded; 13 pt; 1-inch margins on Letter; double spacing (26 pt pitch); section caption with the § column and one row per line at typst's pitch; the title; a TOC field whose page numbers equal the typst TOC's (3, 3, 4, 4, 5, 6, 7, 7, 7, 8, 9, 9, 9); signature block at 3.25 inch; certificates under level-1 headings; page number centered at the foot. 10 pages, as typst.
 - Differs (not blocking): (1) LibreOffice places the extra leading of an exact line above the glyphs; typst places it below. Text sits about 11 to 13 pt lower on each page; line pitch and margins are the same. Word was not run. (2) The title keeps the typographic apostrophe (pandoc's smart punctuation) where typst prints a straight one. (3) Some lines break at a different word from typst, so a few page ends move by a line. (4) Word can paginate differently; the TOC numbers are from the LibreOffice layout and can be refreshed in Word with Update Field.

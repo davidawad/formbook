@@ -1,5 +1,5 @@
 -- Adversary complaint, United States Bankruptcy Court, District of Arizona (arb), DOCX engine.
--- The markdown contract (samples/INPUT-*.md, see ../README.md) -> Word, on reference.docx.
+-- The markdown contract (usage/INPUT-*.md, see ../README.md) -> Word, on reference.docx.
 -- Built here as raw OOXML, the same layout as typst/arb-adversary-complaint.typ:
 --   filer block from line 1 (LRBP 9004-1(a)); court title on line 8; the dual caption as a table with a right
 --   and a bottom rule on the debtor and party cells (LRBP 9004-1(c)); numbered allegations (Fed. R. Civ. P. 10(b));

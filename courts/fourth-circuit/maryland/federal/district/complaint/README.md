@@ -4,16 +4,16 @@ Doc type: **complaint** (original complaint) in the United States District Court
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-grecco-1-26-cv-03723-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-grecco-complaint.md` (about two-thirds of the 16-page filing's text, the rest omitted paragraph by paragraph; see the sample's frontmatter) |
+| exemplar | yes: `usage/SAMPLE-mdd-complaint-grecco126cv03723.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-mdd-complaint-grecco.md` (about two-thirds of the 16-page filing's text, the rest omitted paragraph by paragraph; see the sample's frontmatter) |
 | typeface | Rule names Times New Roman (LR-102.2.b, "Times New Roman or larger typeface"). Substitute: **Liberation Serif** (vendored; metric-compatible per `docs/FONTS.md`, not checked against a Times New Roman file on this box). Text 12 pt, footnotes 10 pt. |
-| render | ok: `samples/OUTPUT-grecco-complaint.pdf`, 11 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: `LiberationSerif`, `LiberationSerif-Bold`), no warnings |
-| overlay | ok: `samples/OVERLAY-grecco-complaint.pdf` and `samples/OVERLAY-grecco-complaint.txt`, against the filed exemplar fetched from the RECAP URL in `exemplars/SOURCE.md` and checked against its SHA-256 (the exemplar PDF is not committed in this snapshot; it is passed to `tools/overlay.sh` as the third argument) |
+| render | ok: `usage/OUTPUT-mdd-complaint-grecco.typst.pdf`, 11 pages, typst 0.15.0, vendored Liberation Serif only (`pdffonts`: `LiberationSerif`, `LiberationSerif-Bold`), no warnings |
+| overlay | ok: `usage/OVERLAY-grecco-complaint.pdf` and `usage/OVERLAY-grecco-complaint.txt`, against the filed exemplar fetched from the RECAP URL in `usage/SOURCE.md` and checked against its SHA-256 (the exemplar PDF is not committed in this snapshot; it is passed to `tools/overlay.sh` as the third argument) |
 | pages reviewed | 11 of 11 (every page rendered at 70 dpi and viewed after the last template change) |
-| render command | `sh tools/render.sh courts/fourth-circuit/maryland/federal/district/complaint samples/INPUT-grecco-complaint.md` |
+| render command | `sh tools/render.sh courts/fourth-circuit/maryland/federal/district/complaint usage/INPUT-mdd-complaint-grecco.md` |
 | overlay command | `sh tools/overlay.sh courts/fourth-circuit/maryland/federal/district/complaint grecco-complaint` |
 
-File names: the brief asks for `samples/<id>.md`, `<id>.pdf` and `<id>-overlay.*`. The repo's tools read `INPUT-<id>.md` and write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` by default, so the names follow the tools (as in the ca9 and cand folders); the tools were not edited.
+File names: the brief asks for `usage/<id>.md`, `<id>.pdf` and `<id>-overlay.*`. The repo's tools read `INPUT-<id>.md` and write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` by default, so the names follow the tools (as in the ca9 and cand folders); the tools were not edited.
 
 ## Governing rules
 
@@ -54,13 +54,13 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Overlay
 
-`samples/OVERLAY-grecco-complaint.pdf`: red = our render, blue = the filed exemplar, black = both. Pages are paired by word overlap, as the tool does. The pairing is coarse here: the sample skips filed paragraphs (see the frontmatter), so later sample pages pair with later filed pages that share the most words (ours p.5 with filed p.6, ours p.8 with filed p.11, ours p.9 with filed p.13, ours p.10 with filed p.15, ours p.11 with filed p.16). Word overlap is 38-61%. The overlay is a diagnostic, not a score; the visible differences that matter are the caption (the filed caption has no party addresses, LR-102.2.a) and the paragraph numbers (the filed numbers are not transcribed).
+`usage/OVERLAY-grecco-complaint.pdf`: red = our render, blue = the filed exemplar, black = both. Pages are paired by word overlap, as the tool does. The pairing is coarse here: the sample skips filed paragraphs (see the frontmatter), so later sample pages pair with later filed pages that share the most words (ours p.5 with filed p.6, ours p.8 with filed p.11, ours p.9 with filed p.13, ours p.10 with filed p.15, ours p.11 with filed p.16). Word overlap is 38-61%. The overlay is a diagnostic, not a score; the visible differences that matter are the caption (the filed caption has no party addresses, LR-102.2.a) and the paragraph numbers (the filed numbers are not transcribed).
 
 ## Known gaps and open choices
 
 1. **Font and size (LR-102.2.b).** The rule asks for 12-point text and 10-point footnotes "in Times New Roman or larger typeface." The template now sets Liberation Serif (the `docs/FONTS.md` substitute for Times New Roman) at exactly the rule's 12 pt, with 10 pt footnotes. The earlier 13 pt EB Garamond was a stand-in for Times at 12 pt and is retired, since the rule's own size applies to the Times-named face. Effects: the body leading was re-measured for Liberation Serif's line box (double-spaced pitch 27.6 pt, single 13.9 pt, both from `pdftotext -bbox`), and the render went from 12 pages to 11. Liberation Serif is metric-compatible with Times New Roman per `docs/FONTS.md`; that metric claim is the vendored family's, not checked here against a Times New Roman file.
 2. **Caption addresses (LR-102.2.a).** The filed caption lists names only. The rule requires names and addresses of all parties, and the county of a Maryland party. The template enforces this; the sample adds the addresses the complaint itself gives (¶ 9 for the plaintiff; ¶¶ 16 and 20 for New Century and Taylor) and "Frederick County, Maryland" for Taylor: the complaint gives Frederick, Maryland (¶ 20) and does not name the county, so the county is inferred from the city and should be confirmed. For New Century the only address in the complaint is its registered agent's; it is given as such. This is the most visible difference from the exemplar, and the exemplar is not a tier-1 model on this point.
-3. **One exemplar only.** EVAL-LOOP tier 2 asks for two or three filers. The search and the candidates not saved (Yukich v. USA Fencing, Mestek v. 1987 Machinery) are in `exemplars/SOURCE.md`.
+3. **One exemplar only.** EVAL-LOOP tier 2 asks for two or three filers. The search and the candidates not saved (Yukich v. USA Fencing, Mestek v. 1987 Machinery) are in `usage/SOURCE.md`.
 4. **Partial sample.** The filed text runs to paragraph 97; the sample transcribes about two-thirds of it (the omitted paragraphs are listed in the sample's frontmatter). Images in the filed document (the photograph and the screenshot) are omitted; the text around them is kept.
 5. **Paragraph numbers.** The template numbers the paragraphs from 1. The filed numbers are not transcribed and do not match.
 6. **Ragged right.** Body text is left-aligned, not justified. The exemplar's justification cannot be read from the text layer; this is a convention, not a rule.
@@ -88,11 +88,11 @@ Reviewed pages: 11 of 11 (rendered at 70 dpi, viewed as 2×2 montages after the 
 
 ## Engines
 
-**typst** is the reference (`typst/`, `samples/OUTPUT-grecco-complaint.pdf`, 11 pages). **latex**: not built for this doc type. **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/mdd-complaint.lua`): built and rendered with LibreOffice (`samples/OUTPUT-grecco-complaint.docx`, `samples/OUTPUT-grecco-complaint.docx.pdf`, 12 pages).
+**typst** is the reference (`typst/`, `usage/OUTPUT-mdd-complaint-grecco.typst.pdf`, 11 pages). **latex**: not built for this doc type. **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/mdd-complaint.lua`): built and rendered with LibreOffice (`usage/OUTPUT-mdd-complaint-grecco.docx`, `usage/OUTPUT-mdd-complaint-grecco.docx.pdf`, 12 pages).
 
 - *Reviewed:* all 12 pages of the docx PDF at 60 dpi (4 per montage, after the last change), and all 11 typst pages paired beside the docx page at 60 dpi. Pages reviewed: 12 of 12 (docx).
 - *Matches typst (seen on the pages):* the embedded fonts are Liberation Serif regular and bold only, as in typst; double spacing at 27.6 pt; 1-inch margins; the cover (court, caption with addresses and county, "Case No." line, title, lead-in); numbered paragraphs with the number then a tab; no number on page 1 and a centered page number from page 2; headings as the template sets them, with level-4 cause sub-titles in bold; lettered prayer items (a) to (g) with hanging indent; the signature block in the right half, with "Respectfully submitted,", kept with the jury demand.
 - *Differs (tier 2):* pagination. The docx is 12 pages, the typst output 11; body lines break at other words, so page breaks fall one or two lines apart. The jury demand and signature block sit alone on page 12 (kept together), where typst fits them on page 11. Number gap: a tab stop at 1.0 in, not a fixed 0.3 in after each number (typst's gap varies with the number's width). The declared font is Liberation Serif, as in typst; the rule names Times New Roman, and a Word user without Liberation Serif gets a substitute. That choice is David's.
 - *Not verified:* the .docx has not been opened in Word, so the no-repair check in Word is not done. LibreOffice converted it without error. Both the zip and the XML parts were checked.
 - *Gates:* `tools/check.sh` does not run on this folder (no `court.json`/`rules.md` in the doc-type folder); the tier-1 items above were checked by eye on the pages, not by a gate.
-- *Rebuild:* `sh docx/make-reference.sh`, then `sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/district/complaint samples/INPUT-grecco-complaint.md`.
+- *Rebuild:* `sh docx/make-reference.sh`, then `sh tools/render.sh --engine docx courts/fourth-circuit/maryland/federal/district/complaint usage/INPUT-mdd-complaint-grecco.md`.

@@ -5,11 +5,11 @@ Folder: `courts/third-circuit/new-jersey/federal/bankruptcy-district/adversary-c
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-supor-26-01475-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-supor-adversary-complaint.md` (excerpt: caption, parties, jurisdiction, paragraphs 6 to 23, paragraphs 198 to 214, WHEREFORE and signature; see Known gaps) |
+| exemplar | yes: `usage/SAMPLE-njb-adversary-complaint-supor2601475.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-njb-adversary-complaint-supor.md` (excerpt: caption, parties, jurisdiction, paragraphs 6 to 23, paragraphs 198 to 214, WHEREFORE and signature; see Known gaps) |
 | typeface | face required: none. Substitute: none needed; EB Garamond (`docs/FONTS.md`, "No face named"). Metric: n/a. Checked 2026-10-15 against the D.N.J. Local Bankruptcy Rules package (as posted, 2025): no typeface or point-size text in it, and LBR 1001-1's 2015 comment says an unincorporated Local Civil Rule does not apply. Judges' preferences (Judges' Info tab) were not checked. |
-| render | ok: `samples/OUTPUT-supor-adversary-complaint.pdf`, 8 pages, typst 0.15.0, embedded fonts EB Garamond only (`pdffonts`), no warnings (re-rendered 2026-10-15) |
-| overlay | ok: `samples/OVERLAY-supor-adversary-complaint.pdf` and `OVERLAY-supor-adversary-complaint.txt` (re-run 2026-10-15) |
+| render | ok: `usage/OUTPUT-njb-adversary-complaint-supor.typst.pdf`, 8 pages, typst 0.15.0, embedded fonts EB Garamond only (`pdffonts`), no warnings (re-rendered 2026-10-15) |
+| overlay | ok: `usage/OVERLAY-supor-adversary-complaint.pdf` and `OVERLAY-supor-adversary-complaint.txt` (re-run 2026-10-15) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed on 2026-10-15; the only later edit is a comment in the template, and the text of the render is unchanged) |
 
 File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `OVERLAY-<id>.pdf/.txt`, so the brief's `<id>.pdf` and `<id>-overlay.pdf` are named that way here. The sample is `INPUT-<id>.md` for the same reason.
@@ -57,7 +57,7 @@ Not produced by this template (separate filings): the adversary cover sheet (LBR
 8. **Italics.** The exemplar's text layer has no italic markup, so case names are roman in the sample. The template italicizes `*...*` when a sample carries it.
 9. **Check scripts not run.** `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review above is the Gate 2 equivalent for this doc type.
 
-## Review of the rendered pages (OUTPUT-supor-adversary-complaint.pdf, 8 pages)
+## Review of the rendered pages (OUTPUT-njb-adversary-complaint-supor.typst.pdf, 8 pages)
 
 - Page 1: counsel block top left, court name, the LBR 9004-1 caption note, the debtor block and case data, the adversary block, and the title "COMPLAINT". Nothing spills. Pass.
 - Page 2: lead-in (unnumbered), THE PARTIES heading, paragraphs 1 to 5, JURISDICTION AND VENUE heading with the start of paragraph 6 on the same page (the heading is kept with its paragraph; the paragraph breaks across the page). Pass.
@@ -76,4 +76,4 @@ Overlay (`OVERLAY-supor-adversary-complaint.txt`): pages 1 to 5 pair with the sa
 - **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/njb.lua`): pandoc on `reference.docx`. Matches the typst template: EB Garamond 14 pt, exact 25.2 pt line pitch and 9.8 pt paragraph gap (both measured on the typst output, not on a filed PDF), 0.5 in first-line indent, 1 in margins on letter paper, 12 pt centered page number in the footer, the cover (counsel block, court name, LBR 9004-1 note, caption tables with the right and bottom rules, title, page break before the body), body paragraphs numbered 1 to n, prayer items lettered (a) to (d), bracketed notes centered and italic, signature block in a borderless table.
 - Differs from typst: paragraph numbers and prayer letters are typed text written by the filter, not Word numbering (a paragraph inserted in Word does not renumber the rest); cover and signature text is plain (italics in the frontmatter are dropped there); caption and signature rules are Word table borders, which Word and LibreOffice draw slightly differently; line breaks and page numbers may differ in Word from the typst pages.
 - Not built on the docx: no TOC or TOA (none in this template).
-- BLOCKED: LibreOffice (`soffice`) is not installed in the build box, so `samples/OUTPUT-supor-adversary-complaint.docx.pdf` cannot be produced, and the Gate 0 CONTENT, Gate 1 RULES, Gate 2 VISUAL REVIEW and Gate 3 GENERALIZATION checks cannot be run on it. No `checks.yaml` exists for `njb` yet, so there are no check IDs to list. Reason for every item: LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked. The `.docx` passes the zip and XML well-formedness checks; it has not been rendered or viewed.
+- BLOCKED: LibreOffice (`soffice`) is not installed in the build box, so `usage/OUTPUT-supor-adversary-complaint.docx.pdf` cannot be produced, and the Gate 0 CONTENT, Gate 1 RULES, Gate 2 VISUAL REVIEW and Gate 3 GENERALIZATION checks cannot be run on it. No `checks.yaml` exists for `njb` yet, so there are no check IDs to list. Reason for every item: LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked. The `.docx` passes the zip and XML well-formedness checks; it has not been rendered or viewed.

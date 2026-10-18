@@ -5,11 +5,11 @@ Folder: `courts/ninth-circuit/guam/federal/bankruptcy-district/adversary-complai
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-archbishop-agana-19-00001-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-archbishop-agana-complaint.md`: the complaint's body as filed (paragraphs 1 to 19, the prayer, the signing line), with the counsel block, caption and signature; exhibits not transcribed (see Known gaps) |
-| render | ok: `samples/OUTPUT-archbishop-agana-complaint.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
+| exemplar | yes: `usage/SAMPLE-gub-adversary-complaint-archbishopagana1900001.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-gub-adversary-complaint-archbishopaganacomplaint.md`: the complaint's body as filed (paragraphs 1 to 19, the prayer, the signing line), with the counsel block, caption and signature; exhibits not transcribed (see Known gaps) |
+| render | ok: `usage/OUTPUT-gub-adversary-complaint-archbishopaganacomplaint.typst.pdf`, 4 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
 | typeface | face required: none (GNLR 5.1 and the Bankr. L.R. text, read 2026-10-15, name no face or point size) → vendored substitute: none; **EB Garamond** is the no-face default (`docs/FONTS.md`) → metric-compatible: n/a |
-| overlay | ok: `samples/OVERLAY-archbishop-agana-complaint.pdf` and `.txt` (pages 1 to 4 each paired with filed pages 1 to 4); the filed exemplar was re-fetched from the RECAP URL in `exemplars/SOURCE.md` and matches its SHA-256; the PDF is kept outside the repo, since no court tracks exemplar PDFs in git |
+| overlay | ok: `usage/OVERLAY-archbishop-agana-complaint.pdf` and `.txt` (pages 1 to 4 each paired with filed pages 1 to 4); the filed exemplar was re-fetched from the RECAP URL in `usage/SOURCE.md` and matches its SHA-256; the PDF is kept outside the repo, since no court tracks exemplar PDFs in git |
 | pages reviewed | 4 of 4 (re-rendered 2026-10-15 and every page rasterised at 60 dpi and viewed; layout unchanged) |
 
 Section 9 of the brief asks for a target of 8 to 14 pages. The filed complaint's body is 4 pages (the ECF pages 1 to 4 of 23); the other 19 pages are Exhibit A and the Statement's Exhibits 8 to 10, which are property tables. The template renders the body at the exemplar's length. Nothing was padded to reach 8 pages.
@@ -56,7 +56,7 @@ Official Form 416A (the full caption for a complaint) was not read: `uscourts.go
 3. **Cover sheet and summons (GUB-CMP-006)** are separate filings and not generated.
 4. **Pleading line numbers.** GNLR 5.1 does not require them; they follow the exemplar, which is one filer's practice. A second filer's complaint would show whether the court expects them. Not judged.
 5. **Font.** EB Garamond (vendored, OFL), 12 pt. No rule read names a typeface (GNLR 5.1; Bankr. L.R. text checked 2026-10-15), so EB Garamond stays, per `docs/FONTS.md`. The exemplar is Times 12 pt. EB Garamond sets smaller at the same size, so the render looks a little lighter than the exemplar.
-6. **Exemplar count.** Only one filer's complaint was found on the RECAP copy of the gub docket (see `exemplars/SOURCE.md`). Tier 2 is not judged against a second filer.
+6. **Exemplar count.** Only one filer's complaint was found on the RECAP copy of the gub docket (see `usage/SOURCE.md`). Tier 2 is not judged against a second filer.
 7. **Footer.** Page number and the paper's title in 10 pt. GNLR 5.1(a) asks only for the page number; the title is a convention.
 8. **Adversary number.** Printed on the first page under "Adv. Proc. No." (the exemplar leaves it blank, since the complaint is the first filing). The number comes from the ECF header of the exemplar, `Case 19-00001`.
 9. **Court name.** The complaint's caption reads "IN THE DISTRICT COURT OF GUAM, TERRITORY OF GUAM, BANKRUPTCY DIVISION"; the motion's reads "UNITED STATES DISTRICT COURT, DISTRICT COURT OF GUAM". The court's own form GUB 9073-1 reads "District Court of Guam, Bankruptcy Division". The complaint template follows the complaint exemplar.
@@ -80,7 +80,7 @@ Pages reviewed: 4 of 4.
 
 ### docx (build 2026-10-15, LibreOffice not installed)
 
-Files: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/gub-adversary-complaint.lua` (cover, caption, numbering, signature). Sample output: `samples/OUTPUT-archbishop-agana-complaint.docx`. Checked: valid zip, every XML part well-formed (xmllint). Not rendered: no page of the docx was looked at (pages_reviewed = 0).
+Files: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/gub-adversary-complaint.lua` (cover, caption, numbering, signature). Sample output: `usage/OUTPUT-gub-adversary-complaint-archbishopaganacomplaint.docx`. Checked: valid zip, every XML part well-formed (xmllint). Not rendered: no page of the docx was looked at (pages_reviewed = 0).
 
 What the XML sets (in `styles.xml`, `sectPr` and the footer part; set, not rendered):
 - EB Garamond 12 pt everywhere; body, headings and numbered paragraphs on an exact 24 pt line pitch (double spacing; 28 lines fill the body area).

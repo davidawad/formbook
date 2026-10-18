@@ -1,15 +1,15 @@
 # Adversary complaint (U.S. Bankruptcy Court, D. Hawaii)
 
-Complaint initiating an adversary proceeding, in the Typst engine (`typst/`), rendered from one markdown sample (`samples/INPUT-hawaii-brewery-adversary-complaint.md`).
+Complaint initiating an adversary proceeding, in the Typst engine (`typst/`), rendered from one markdown sample (`usage/INPUT-hib-adversary-complaint-hawaiibrewery.md`).
 
 | File | Role |
 |---|---|
 | `typst/main.typ`, `typst/hib-adversary-complaint.typ` | Template (entry point and rule-driven layout) |
-| `samples/INPUT-hawaii-brewery-adversary-complaint.md` | Markdown input, transcribed from the filed exemplar (frontmatter = caption, counsel, signature) |
-| `samples/OUTPUT-hawaii-brewery-adversary-complaint.pdf` | Our render (`tools/render.sh`), 10 pages |
-| `samples/OVERLAY-hawaii-brewery-adversary-complaint.pdf` / `.txt` | Red (ours) / blue (filed) overlay and page map (`tools/overlay.sh`) |
-| `exemplars/FILED-EXAMPLE-hawaii-brewery-26-90013-adversary-complaint.pdf` | The filed exemplar (26 pages; cover sheet pp. 1-2, complaint pp. 3-26) |
-| `exemplars/SOURCE.md` | Filer, case, date filed, URL, date retrieved |
+| `usage/INPUT-hib-adversary-complaint-hawaiibrewery.md` | Markdown input, transcribed from the filed exemplar (frontmatter = caption, counsel, signature) |
+| `usage/OUTPUT-hib-adversary-complaint-hawaiibrewery.typst.pdf` | Our render (`tools/render.sh`), 10 pages |
+| `usage/OVERLAY-hawaii-brewery-adversary-complaint.pdf` / `.txt` | Red (ours) / blue (filed) overlay and page map (`tools/overlay.sh`) |
+| `usage/SAMPLE-hib-adversary-complaint-hawaiibrewery2690013.pdf` | The filed exemplar (26 pages; cover sheet pp. 1-2, complaint pp. 3-26) |
+| `usage/SOURCE.md` | Filer, case, date filed, URL, date retrieved |
 
 Engines: typst only. No latex or docx engine is delivered for this doc type.
 
@@ -44,7 +44,7 @@ LBR 7016-1(b) (scheduling conference on filing of a complaint) also applies to t
 
 ## What the overlay shows
 
-`samples/OVERLAY-hawaii-brewery-adversary-complaint.pdf` (red = our render, blue = filed exemplar, black = both). Page pairing by text (`OVERLAY-hawaii-brewery-adversary-complaint.txt`):
+`usage/OVERLAY-hawaii-brewery-adversary-complaint.pdf` (red = our render, blue = filed exemplar, black = both). Page pairing by text (`OVERLAY-hawaii-brewery-adversary-complaint.txt`):
 
 | Our page | Filed page | Word overlap | Reading |
 |---|---|---|---|
@@ -60,14 +60,14 @@ LBR 7016-1(b) (scheduling conference on filing of a complaint) also applies to t
 2. **Division (FRBP 7008).** FRBP 7008 requires the allegation of jurisdiction to name "the district and division where it is pending." The exemplar's ¶ 10 names the case and district but not a division. The sample follows the exemplar. Open: whether this court's complaints must state a division.
 3. **Certificate of service (LBR 9013-3).** None in the sample; the exemplar transcribed has none. LBR 9013-3(a) requires a certificate of service unless Rule 7005 governs service and every party served is a registered ECF user. A complaint is served with the summons under FRBP 7004, so whether 9013-3 applies is unclear. Open: needs a ruling on the complaint's service method before a certificate block is added.
 4. **Body abridged.** The sample transcribes ¶¶ 1-63, the first block quotation, the prayer ¶¶ A-H and the signature; ¶¶ 64-133 and the Lease (Exhibit A) are marked as omitted in the sample text. The exemplar is 24 pages of complaint; the sample is 10 pages, inside the 8-14 page band.
-5. **One filer only.** Tier 2 is judged against one exemplar (Hawaii Brewery Development Co., Adv. 26-90013). A second filer was identified (Collins v. Hughes Network Systems, LLC, Adv. 24-90002, Square One Legal, 9 pp.) but not saved, per `exemplars/SOURCE.md`. Tier 2 therefore cannot be fully judged; this is stated, not hidden.
+5. **One filer only.** Tier 2 is judged against one exemplar (Hawaii Brewery Development Co., Adv. 26-90013). A second filer was identified (Collins v. Hughes Network Systems, LLC, Adv. 24-90002, Square One Legal, 9 pp.) but not saved, per `usage/SOURCE.md`. Tier 2 therefore cannot be fully judged; this is stated, not hidden.
 6. **Typeface.** The local rules name no typeface (HIB-ADV-FONT-001), so the template keeps EB Garamond (vendored), as `docs/FONTS.md` prescribes for a court that names no face. The exemplar is Calibri (one filer; tier 3).
 
 [Court README](../README.md)
 
 ## Engines
 
-The docx engine is `docx/make-reference.sh` (builds `docx/reference.docx`) and `docx/hib-adversary-complaint.lua` (cover, caption and signature). The line "Engines: typst only" above predates this section. Build: `sh tools/render.sh --engine docx <this folder> samples/INPUT-hawaii-brewery-adversary-complaint.md`, which writes `samples/OUTPUT-hawaii-brewery-adversary-complaint.docx`. The sample used is `INPUT-hawaii-brewery-adversary-complaint.md`, the one named by the typst OUTPUT naming above.
+The docx engine is `docx/make-reference.sh` (builds `docx/reference.docx`) and `docx/hib-adversary-complaint.lua` (cover, caption and signature). The line "Engines: typst only" above predates this section. Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-hib-adversary-complaint-hawaiibrewery.md`, which writes `usage/OUTPUT-hib-adversary-complaint-hawaiibrewery.docx`. The sample used is `INPUT-hib-adversary-complaint-hawaiibrewery.md`, the one named by the typst OUTPUT naming above.
 
 What the docx sets (in `styles.xml` and `sectPr`; set, not rendered):
 

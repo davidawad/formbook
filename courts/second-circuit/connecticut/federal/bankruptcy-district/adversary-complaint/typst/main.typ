@@ -1,11 +1,11 @@
 // Entry point. Compile with the doc-type folder as --root; tools/render.sh does it:
 //   typst compile --root <doc-type-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=samples/INPUT-NAME.md \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/INPUT-NAME.md \
 //     typst/main.typ out.pdf
 // Page and text settings live here (set rules inside a function do not reach the page).
 #import "ctb-adversary-complaint.typ": ctb-adversary-complaint, split-frontmatter, font-family, type-size, body-leading, margin
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-1stdibs-complaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ctb-adversary-complaint-1stdibscomplaint.md"))
 #let (meta, body) = split-frontmatter(src)
 
 #set page(

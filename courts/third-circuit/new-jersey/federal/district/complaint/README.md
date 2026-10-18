@@ -5,11 +5,11 @@ Folder: `courts/third-circuit/new-jersey/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `exemplars/FILED-EXAMPLE-dgl-group-2-26-cv-13086-complaint.pdf` (Kasowitz LLP, primary) and `exemplars/FILED-EXAMPLE-gomez-2-25-cv-02242-complaint.pdf` (Law Offices of Richard Malagiere). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-dgl-group-complaint.md` (full transcription of the 12-page DGL complaint, numbering left to the template) |
+| exemplar | yes, two filers: `usage/SAMPLE-njd-complaint-dglgroup226cv13086.pdf` (Kasowitz LLP, primary) and `usage/SAMPLE-njd-complaint-gomez225cv02242.pdf` (Law Offices of Richard Malagiere). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-njd-complaint-dglgroup.md` (full transcription of the 12-page DGL complaint, numbering left to the template) |
 | typeface | Face required: **none**. The rules that govern this document (Fed. R. Civ. P. 10, 38; L.Civ.R. 10.1, 11.1, 11.2, 38.1) name no typeface, and L.Civ.R. 7.2(d) governs briefs only. Kept: **EB Garamond** (the default in `docs/FONTS.md`); no substitute applies. Both exemplars use Times New Roman 12 pt, so the look differs (Known gaps 1). |
-| render | ok: `samples/OUTPUT-dgl-group-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Italic, -Bold), no warnings |
-| overlay | ok: `samples/OVERLAY-dgl-group-complaint.pdf` and `.txt` (against the DGL exemplar; see below) |
+| render | ok: `usage/OUTPUT-njd-complaint-dglgroup.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Italic, -Bold), no warnings |
+| overlay | ok: `usage/OVERLAY-dgl-group-complaint.pdf` and `.txt` (against the DGL exemplar; see below) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the fonts pass; the template is unchanged by that pass, the render is the same) |
 
 File names follow the role convention used by `tools/render.sh` and `tools/overlay.sh`: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf`, the overlay `OVERLAY-<id>.pdf` and `.txt`, with `<id>` = `dgl-group-complaint`.
@@ -66,7 +66,7 @@ Paragraph count: 36 numbered paragraphs, matching the DGL exemplar's count.
 
 ## Overlay (`tools/overlay.sh`)
 
-- Against the DGL exemplar (the default, `exemplars/*.pdf | head -1`): our pages 1-4 pair with filed pages 1-4, and our pages 5-11 with filed pages 6-12. The one-page shift from page 5 is pagination: the exemplar's pages carry less text than ours at this spacing (a tier-3 difference, logged, not chased). Word overlap 52.5% to 88.7%. Diagnostic only.
+- Against the DGL exemplar (the default, `usage/*.pdf | head -1`): our pages 1-4 pair with filed pages 1-4, and our pages 5-11 with filed pages 6-12. The one-page shift from page 5 is pagination: the exemplar's pages carry less text than ours at this spacing (a tier-3 difference, logged, not chased). Word overlap 52.5% to 88.7%. Diagnostic only.
 - Against the Gomez exemplar (third argument; run once, output then overwritten by the DGL run): word overlap 5% to 17%, as expected for a different case; not a score. Layout comparison (counsel top-left, centered bold title, boxed caption with the bold title on the right, numbered double-spaced paragraphs, centered bold headings) was made by eye from the rasterized pages of both exemplars.
 
 ## Known gaps and open choices
@@ -83,7 +83,7 @@ Paragraph count: 36 numbered paragraphs, matching the DGL exemplar's count.
 - **typst** (primary, `typst/`): the reference for the form.
 - **docx** (`docx/reference.docx`, `docx/build-reference.sh`, `docx/njd.lua`): pandoc on a reference.docx restyled to the typst form: EB Garamond 12 pt, exact 27.6 pt (double) line spacing, 0.5 in first-line indent, letter page with 1 in margins, centered PAGE number on every page (the cover is page 1, as in typst). The filter builds the counsel block, the court title, the caption as a borderless table (party column closed by a right and a bottom rule, `Civil Action No.`, judge line, bold caps title), the signature table, and the certification on its own page (page break before the title). Body paragraphs are numbered in the text (`N.` then a tab, from the same `unnumbered_prefixes` rule as typst); prayer items are lettered (`a.`, `b.`). Known differences: paragraph numbers are typed text, not Word list numbering, so an edit in Word does not renumber them; list indents follow pandoc's numbering defaults; the table borders and the cell padding differ slightly from typst in Word and LibreOffice. The font is EB Garamond, as in typst: Word needs it installed (it is vendored in `fonts/`), or Word substitutes silently.
 - **latex**: not built for this court yet (`latex/` is empty).
-- Build: `sh docx/build-reference.sh docx/reference.docx`, then from the court folder `pandoc --from markdown+smart --to docx --reference-doc=complaint/docx/reference.docx --lua-filter=complaint/docx/njd.lua complaint/samples/INPUT-dgl-group-complaint.md -o complaint/samples/OUTPUT-dgl-group-complaint.docx`. The output passes a zip read of every entry and `xmllint --noout` on every XML part; the relationships point at parts that exist.
+- Build: `sh docx/build-reference.sh docx/reference.docx`, then from the court folder `pandoc --from markdown+smart --to docx --reference-doc=complaint/docx/reference.docx --lua-filter=complaint/docx/njd.lua complaint/usage/INPUT-dgl-group-complaint.md -o complaint/usage/OUTPUT-dgl-group-complaint.docx`. The output passes a zip read of every entry and `xmllint --noout` on every XML part; the relationships point at parts that exist.
 - **BLOCKED (docx):** the `.docx.pdf` cannot be produced or checked, because LibreOffice cannot run in the build box (`soffice` is not installed; the partial extraction does not run). So no docx gate can be measured, and the pages of the docx were not rendered or viewed (`pages reviewed: 0`). The court has no `checks.yaml` (none is readable in this folder or the court folder), so no gate check IDs can be listed. The requirement IDs the typst template cites (`NJD-FORM-001`, `NJD-FORM-002`, `NJD-FORM-003`: margins, face and size, spacing) are the ones that would be measured on the `.docx.pdf`; all three are BLOCKED for this reason. The typst render was checked page by page (11 of 11) as the reference.
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)

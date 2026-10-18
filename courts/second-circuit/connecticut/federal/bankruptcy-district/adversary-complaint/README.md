@@ -5,11 +5,11 @@ Folder: `courts/second-circuit/connecticut/federal/bankruptcy-district/adversary
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-despins-1stdibs-25-05088-adversary-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-1stdibs-complaint.md` (the complaint's text, paragraphs 1 to 34 and the prayer; Schedule A and footnotes omitted) |
+| exemplar | yes: `usage/SAMPLE-ctb-adversary-complaint-despins1stdibs2505088.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ctb-adversary-complaint-1stdibscomplaint.md` (the complaint's text, paragraphs 1 to 34 and the prayer; Schedule A and footnotes omitted) |
 | typeface | face required: none by the bankruptcy rules (see "Typeface and size" below). Vendored substitute: **EB Garamond** (kept; no court face to substitute). Fit: n/a. The district Arial order is an open question (gap 2). |
-| render | ok: `samples/OUTPUT-1stdibs-complaint.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 (re-rendered 2026-10-15; `pdffonts` shows only the three EB Garamond faces, all embedded) |
-| overlay | ok: `samples/OVERLAY-1stdibs-complaint.pdf` and `OVERLAY-1stdibs-complaint.txt` (re-run 2026-10-15 against the saved exemplar) |
+| render | ok: `usage/OUTPUT-ctb-adversary-complaint-1stdibscomplaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 (re-rendered 2026-10-15; `pdffonts` shows only the three EB Garamond faces, all embedded) |
+| overlay | ok: `usage/OVERLAY-1stdibs-complaint.pdf` and `OVERLAY-1stdibs-complaint.txt` (re-run 2026-10-15 against the saved exemplar) |
 | pages reviewed | 7 of 7 (every page rendered at 70 dpi and viewed on 2026-10-15) |
 
 File names follow the repo's convention (`INPUT-` for the markdown, `OUTPUT-` for our render, `OVERLAY-` for the comparison), because `tools/render.sh` and `tools/overlay.sh` read and write those names. The brief's `<id>.md` / `<id>-overlay.pdf` form is not what the tools produce.
@@ -46,7 +46,7 @@ Typeface and size: no rule that governs this court sets a typeface. Local Bankr.
 
 ## Known gaps and open choices
 
-1. **One exemplar.** The brief asks for one filed document per doc type, so tier 2 is not judged against two or three filers. Candidates are listed in `exemplars/SOURCE.md`. Vereen v. Scruggs (25-03007, a different filer) is the second filer to check.
+1. **One exemplar.** The brief asks for one filed document per doc type, so tier 2 is not judged against two or three filers. Candidates are listed in `usage/SOURCE.md`. Vereen v. Scruggs (25-03007, a different filer) is the second filer to check.
 2. **Typeface.** The one face-naming text found is the district court's Electronic Filing Order (revised 1/17/2018, https://ctd.uscourts.gov/sites/default/files/Electronic%20Filing%20Order%2C%20revised%201.17.2018.pdf). It says "All documents in this case will be filed electronically ... All documents must be typewritten using Arial bold 12 point font, double spaced. Pleadings must comply with all applicable provisions of D. Conn. L. Civ. R. 10(a)." It is a single district judge's order "in this case", not a rule of the bankruptcy court, and Local Bankr. R. 5005-1 (March 16, 2026) adopts only D. Conn. L. Civ. R. 10, which names no face. The template keeps EB Garamond 12 point (Garamond is the default; the vendored Arial substitute, Liberation Sans, is in `fonts/liberation-sans/`). The exemplar uses a serif face. **Question for David:** does the bankruptcy court apply the district order's Arial bold to adversary pleadings? If yes, switch `font-family` in `typst/ctb-adversary-complaint.typ` to `"Liberation Sans"` (docs/FONTS.md, Arial row), re-render, and re-check the page count (metric-compatible). Verified text: D. Conn. L. Civ. R. 10 (as amended Nov. 7, 2016) read in the 2020 compilation (https://ctd.uscourts.gov/sites/default/files/Revised-Local-Rules-11-04-2020.pdf); the 2026 compilation linked earlier (`Current-Revised-Local-Rules-9.4.26.pdf`) returned HTTP 404 on 2026-10-15 and was not read.
 3. **Statement on final orders (FRBP 7008(a)).** The exemplar has no statement on consent to final orders. The sample's jurisdiction paragraph says "The Trustee [does not consent]" as a bracketed placeholder, not a fact of the filing. The rule requires one of the two choices, so the choice is counsel's. Remove the brackets once the choice is made.
 4. **Paragraph numbers.** The template numbers paragraphs from 1 (the exemplar's count is one lower up to the consent paragraph, then the same). The realleging paragraph says "paragraphs 1-34" to match this sample's count; recount if the sample changes.
@@ -56,7 +56,7 @@ Typeface and size: no rule that governs this court sets a typeface. Local Bankr.
 8. **Caption.** The debtor footnote marker ("1") after "HO WAN KWOK, et al." is not reproduced; the template has no footnote in the caption.
 9. **Check scripts.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither, and `tools/` is out of scope for this box. The gates were not run. Render and overlay were run, and the page review below is the Gate 2 equivalent.
 
-## Review of the rendered pages (`samples/OUTPUT-1stdibs-complaint.pdf`, 7 pages)
+## Review of the rendered pages (`usage/OUTPUT-ctb-adversary-complaint-1stdibscomplaint.typst.pdf`, 7 pages)
 
 Every page rendered at 60 dpi and viewed after the final template change (heading spacing and the e-signer line). Re-viewed 2026-10-15 at 70 dpi after the re-render (no template change; same EB Garamond layout, same 7 pages).
 
@@ -72,10 +72,10 @@ Overlay: our pages pair with the exemplar's pages 4 to 12 by shared words (word 
 
 ## Engines
 
-**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `ctb-adversary-complaint.lua`, `render.sh`; output `samples/OUTPUT-1stdibs-complaint.docx` and `samples/OUTPUT-1stdibs-complaint.docx.pdf`, the LibreOffice conversion):
+**docx** (`docx/`: `reference.docx`, `build-reference.sh`, `ctb-adversary-complaint.lua`, `render.sh`; output `usage/OUTPUT-ctb-adversary-complaint-1stdibscomplaint.docx` and `usage/OUTPUT-ctb-adversary-complaint-1stdibscomplaint.docx.pdf`, the LibreOffice conversion):
 
 - Matches the typst output: letter, 1 inch margins; EB Garamond 12 point (`pdffonts` on the docx PDF shows only EB Garamond, embedded); double spacing at 24 pt; caption box with right and bottom rules; court name, title; numbered paragraphs from the first heading, none under PRAYER FOR RELIEF; centred `#` headings, bold left `##` headings; the docket line in the header and the page number in the footer from page 2 on (page 1 has neither); the signature block.
 - Differs (tier 2, accepted): no blank line between body paragraphs (typst leaves about 16 pt); the prayer's list uses Word's list indentation; the first-page layout runs one line longer, so the docx is 8 pages against typst's 7 (the same content falls on pages 2 to 8).
 - Word has not been run here. The `.docx` was checked only by LibreOffice (converts without error; every XML part well-formed).
-- BLOCKED: `tools/check.sh` (Gates 0 to 3, every check ID): cannot run on this doc-type folder. It reads `court.json` and `checks.yaml` at the court level (`courts/second-circuit/connecticut/federal/bankruptcy-district/`), and this box does not produce those files. No `samples/.check-docx.txt` was written.
-- Pages reviewed: all 8 pages of `OUTPUT-1stdibs-complaint.docx.pdf` were rendered at 60 dpi and viewed, and compared with all 7 pages of the typst render.
+- BLOCKED: `tools/check.sh` (Gates 0 to 3, every check ID): cannot run on this doc-type folder. It reads `court.json` and `checks.yaml` at the court level (`courts/second-circuit/connecticut/federal/bankruptcy-district/`), and this box does not produce those files. No `usage/.check-docx.txt` was written.
+- Pages reviewed: all 8 pages of `OUTPUT-ctb-adversary-complaint-1stdibscomplaint.docx.pdf` were rendered at 60 dpi and viewed, and compared with all 7 pages of the typst render.

@@ -17,11 +17,11 @@ Re-check cadence: re-check annually each January 1 (the court's local-rule amend
 | FRCP-11 | Fed. R. Civ. P. 11(a) (signature; address, e-mail, telephone) | https://www.law.cornell.edu/rules/frcp/rule_11 |
 | FRCP-38 | Fed. R. Civ. P. 38(b) (jury demand) | https://www.law.cornell.edu/rules/frcp/rule_38 |
 | FRCP-5.2 | Fed. R. Civ. P. 5.2(a) (redacted filings) | https://www.law.cornell.edu/rules/frcp/rule_5.2 |
-| EX-C1 | Complaint exemplar: Golub v. Coll, No. 1:26-cv-1490, Doc. 1 (plaintiff, Capezza Hill, LLP). See `complaint/exemplars/SOURCE.md`. | local |
-| EX-M1 | Motion-brief exemplar: Mistry v. Cornell University, No. 3:26-cv-1419, Doc. 8-1 (defendants, Bond, Schoeneck & King, PLLC). See `motion-brief/exemplars/SOURCE.md`. | local |
-| EX-C2 | Complaint exemplar: Taal v. Trump, No. 3:25-cv-335, Doc. 1 (plaintiffs, Eric Lee; American-Arab Anti-Discrimination Committee; Davis Ndanusa Ikhlas & Saleem LLP; Project TAHA). See `complaint/exemplars/SOURCE.md`. | local |
-| EX-M2 | Motion-brief exemplar: United States v. State of New York, No. 1:25-cv-205, Doc. 10-1 (defendants, New York State Attorney General). See `motion-brief/exemplars/SOURCE.md`. | local |
-| EX-M3 | Motion-brief exemplar: United States v. State of New York, No. 1:25-cv-205, Doc. 24-1 (plaintiff United States, DOJ Civil Division, Federal Programs Branch; combined L.R. 7.1(c) opposition/cross-motion brief). See `motion-brief/exemplars/SOURCE.md`. | local |
+| EX-C1 | Complaint exemplar: Golub v. Coll, No. 1:26-cv-1490, Doc. 1 (plaintiff, Capezza Hill, LLP). See `complaint/usage/SOURCE.md`. | local |
+| EX-M1 | Motion-brief exemplar: Mistry v. Cornell University, No. 3:26-cv-1419, Doc. 8-1 (defendants, Bond, Schoeneck & King, PLLC). See `motion-brief/usage/SOURCE.md`. | local |
+| EX-C2 | Complaint exemplar: Taal v. Trump, No. 3:25-cv-335, Doc. 1 (plaintiffs, Eric Lee; American-Arab Anti-Discrimination Committee; Davis Ndanusa Ikhlas & Saleem LLP; Project TAHA). See `complaint/usage/SOURCE.md`. | local |
+| EX-M2 | Motion-brief exemplar: United States v. State of New York, No. 1:25-cv-205, Doc. 10-1 (defendants, New York State Attorney General). See `motion-brief/usage/SOURCE.md`. | local |
+| EX-M3 | Motion-brief exemplar: United States v. State of New York, No. 1:25-cv-205, Doc. 24-1 (plaintiff United States, DOJ Civil Division, Federal Programs Branch; combined L.R. 7.1(c) opposition/cross-motion brief). See `motion-brief/usage/SOURCE.md`. | local |
 
 Kinds: **M** = mandated by a court rule (N.D.N.Y. Local Rule or Federal Rule of Civil Procedure). **C** = convention (the rules leave it open; taken from the filed exemplars). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

@@ -24,7 +24,7 @@ Local rules text: the court's "Local Bankruptcy Rules" compilation (PRLBRs-2013,
 
 ## What the overlay shows
 
-`samples/OVERLAY-perez-cruz-msj.pdf` (red: our render; blue: the filed exemplar; black: both agree) and `.txt` (page map). Pages pair by text: ours p.1-8 -> filed p.1, 2, 4, 5, 6, 7, 8, 9. Filed p.3 is not the best match for any of our pages, so it is unpaired in the map. The exemplar is 10 pages and the render is 8. The sample transcribes the whole memorandum and notice, so the difference is in face and spacing, not omitted text. Layout is not a line-for-line match, so the overlay is a text-content comparison.
+`usage/OVERLAY-perez-cruz-msj.pdf` (red: our render; blue: the filed exemplar; black: both agree) and `.txt` (page map). Pages pair by text: ours p.1-8 -> filed p.1, 2, 4, 5, 6, 7, 8, 9. Filed p.3 is not the best match for any of our pages, so it is unpaired in the map. The exemplar is 10 pages and the render is 8. The sample transcribes the whole memorandum and notice, so the difference is in face and spacing, not omitted text. Layout is not a line-for-line match, so the overlay is a text-content comparison.
 
 ## Known gaps
 
@@ -34,8 +34,8 @@ Local rules text: the court's "Local Bankruptcy Rules" compilation (PRLBRs-2013,
 4. **Certificate of service (LBR 9013-3(a)).** The certificate is the exemplar's text. It names counsel for plaintiff, the chapter 13 trustee and the U.S. Trustee's office, and gives the first-class mail address for plaintiff's counsel; it does not list every party served. Not checked against the case's docket of parties.
 5. **Not templated (separate papers, or not in the exemplar):** the notice of motion and hearing date, any certification or declaration (the exemplar relies on a separate statement of uncontested facts at Dk. No. 28), the proposed order, and the urgent-motion certification (LBR 9013-1(a)(1)).
 6. **Table of contents and table of authorities.** None is generated and the LBR 9013-2 text checked does not require one. Judges' preferences are not checked.
-7. **Typeface.** No PR bankruptcy rule sets a typeface or size. The template uses EB Garamond 12 pt, the convention both exemplars follow at 12 pt; the exemplar's text is Garamond (embedded, per `exemplars/SOURCE.md`), so it is a close face match.
-8. **Second exemplar not collected.** `exemplars/SOURCE.md` records that the only other PR bankruptcy motion-with-memorandum found was a PROMESA district-court filing, which does not match this folder. Tier 2 is judged against one filer. This is OPEN.
+7. **Typeface.** No PR bankruptcy rule sets a typeface or size. The template uses EB Garamond 12 pt, the convention both exemplars follow at 12 pt; the exemplar's text is Garamond (embedded, per `usage/SOURCE.md`), so it is a close face match.
+8. **Second exemplar not collected.** `usage/SOURCE.md` records that the only other PR bankruptcy motion-with-memorandum found was a PROMESA district-court filing, which does not match this folder. Tier 2 is judged against one filer. This is OPEN.
 9. **Footnote numbering.** Footnotes are written as `[^n]` markers with `[^n]:` definitions in the sample; typst numbers them in order of appearance, so the sample's numbers must run in order. A footnote marker inside bold or italic text would split the formatting; none is in the sample.
 
 ## Gate 2 review
@@ -47,7 +47,7 @@ Local rules text: the court's "Local Bankruptcy Rules" compilation (PRLBRs-2013,
 
 ## Engines
 
-docx: `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt double pitch, 13.8 pt single lines, 0.5 in first-line indent, footnotes 12 pt single, block quotations single and indented 0.5 in both sides, 1 in margins, PAGE field in the footer); `docx/prb-motion-brief.lua` builds the caption table, the title, the lead-in, the response-time NOTICE, the certificate of service (when the frontmatter has one) and the signature block. Headings, paragraphs and footnotes are pandoc's native Word elements. Checked on `samples/OUTPUT-perez-cruz-msj.docx.pdf` and `samples/OUTPUT-perez-cruz-osj.docx.pdf` (LibreOffice). Opened with LibreOffice only; Word was not checked.
+docx: `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt double pitch, 13.8 pt single lines, 0.5 in first-line indent, footnotes 12 pt single, block quotations single and indented 0.5 in both sides, 1 in margins, PAGE field in the footer); `docx/prb-motion-brief.lua` builds the caption table, the title, the lead-in, the response-time NOTICE, the certificate of service (when the frontmatter has one) and the signature block. Headings, paragraphs and footnotes are pandoc's native Word elements. Checked on `usage/OUTPUT-prb-motion-brief-perezcruzmsj.docx.pdf` and `usage/OUTPUT-prb-motion-brief-perezcruzosj.docx.pdf` (LibreOffice). Opened with LibreOffice only; Word was not checked.
 
 Matches the typst form (measured on the PDFs): US Letter, one-inch margins, EB Garamond 12 pt, body line pitch 24.0 pt and single-line pitch 13.8 pt in both, page counts 8 = 8 (msj) and 9 = 9 (osj), caption, bold capital level-1 headings, italic level-3 sub-point, footnote numbering, block quotations, the NOTICE and certificate, `/s/` signature block.
 

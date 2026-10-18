@@ -2,18 +2,18 @@
 
 Doc type: **motion** (FRBP 9013) with the memorandum of points and authorities that LRBP 9013-1(a) requires, in the United States Bankruptcy Court for the District of Arizona (`arb`, Ninth Circuit). Folder: `courts/ninth-circuit/arizona/federal/bankruptcy-district/motion-brief/`. The same folder serves a motion in an adversary proceeding (dual caption) and a contested matter in the main case (single caption).
 
-**Exemplar: yes.** A filed motion with memorandum from this court, Doc 762 in the *Titan Solar* jointly administered case (2:24-bk-04978-MCW), is saved as `exemplars/FILED-EXAMPLE-titan-solar-24-bk-04978-motion-brief.pdf`. Provenance is in `exemplars/SOURCE.md`. The sample is a transcription of it (`samples/INPUT-titan-motion.md`).
+**Exemplar: yes.** A filed motion with memorandum from this court, Doc 762 in the *Titan Solar* jointly administered case (2:24-bk-04978-MCW), is saved as `usage/SAMPLE-arb-motion-brief-titansolar24bk04978.pdf`. Provenance is in `usage/SOURCE.md`. The sample is a transcription of it (`usage/INPUT-arb-motion-brief-titanmotion.md`).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-titan-solar-24-bk-04978-motion-brief.pdf` (Doc 762, filed 10/23/25, 11 pages, one filer; `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-titan-motion.md` (transcription of pp. 1–9 of the exemplar: caption, numbered factual paragraphs, two tables, footnotes 1–10, memorandum argument, prayer, joinder and signature blocks; Exhibit A not transcribed) |
-| render | ok: `samples/OUTPUT-titan-motion.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings. Command: `sh tools/render.sh … samples/INPUT-titan-motion.md` exit 0 |
-| overlay | ok: `samples/OVERLAY-titan-motion.pdf` and `.txt` (page map: ours p.1–4 pair with filed p.1–4, word overlap 74%–89%; ours p.5–8 pair with filed p.5, 7, 8, 9, overlap 44%–65%; filed p.6 is unpaired, the page holding the table sits between them). Command: `sh tools/overlay.sh … titan-motion` exit 0. Re-run 2026-10-15: exit 1, "no exemplar pdf": `exemplars/FILED-EXAMPLE-titan-solar-24-bk-04978-motion-brief.pdf` is not in this checkout (git tracks only `exemplars/SOURCE.md`), so the overlay could not be regenerated; the committed `OVERLAY-titan-motion.txt` is from an earlier run |
+| exemplar | yes: `usage/SAMPLE-arb-motion-brief-titansolar24bk04978.pdf` (Doc 762, filed 10/23/25, 11 pages, one filer; `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-arb-motion-brief-titanmotion.md` (transcription of pp. 1–9 of the exemplar: caption, numbered factual paragraphs, two tables, footnotes 1–10, memorandum argument, prayer, joinder and signature blocks; Exhibit A not transcribed) |
+| render | ok: `usage/OUTPUT-arb-motion-brief-titanmotion.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings. Command: `sh tools/render.sh … usage/INPUT-arb-motion-brief-titanmotion.md` exit 0 |
+| overlay | ok: `usage/OVERLAY-titan-motion.pdf` and `.txt` (page map: ours p.1–4 pair with filed p.1–4, word overlap 74%–89%; ours p.5–8 pair with filed p.5, 7, 8, 9, overlap 44%–65%; filed p.6 is unpaired, the page holding the table sits between them). Command: `sh tools/overlay.sh … titan-motion` exit 0. Re-run 2026-10-15: exit 1, "no exemplar pdf": `usage/SAMPLE-arb-motion-brief-titansolar24bk04978.pdf` is not in this checkout (git tracks only `usage/SOURCE.md`), so the overlay could not be regenerated; the committed `OVERLAY-titan-motion.txt` is from an earlier run |
 | typeface | face required: none. LRBP 9004-1(g) (checked on azb.uscourts.gov, 2026-10-15) says "a proportional font size no smaller than 13 point" and names no face. EB Garamond kept; no vendored substitute needed. The filed exemplar is Times New Roman, but the rule does not require it, so the template is not changed to it |
 | pages reviewed | 8 of 8 (every page of the OUTPUT rasterised at 110 dpi and viewed in its final state; re-reviewed 2026-10-15 at 60 dpi, 8 of 8, after the re-render) |
 
-Note on file names: the tools default to `samples/OUTPUT-<id>.pdf` and `samples/OVERLAY-<id>.pdf`/`.txt`, and `overlay.sh` reads `OUTPUT-<id>.pdf`. The sample id changed from `generic-motion` to `titan-motion`, and the fictional `samples/INPUT-generic-motion.md` was replaced by the transcription. The shared tools were not changed.
+Note on file names: the tools default to `usage/OUTPUT-<id>.pdf` and `usage/OVERLAY-<id>.pdf`/`.txt`, and `overlay.sh` reads `OUTPUT-<id>.pdf`. The sample id changed from `generic-motion` to `titan-motion`, and the fictional `usage/INPUT-generic-motion.md` was replaced by the transcription. The shared tools were not changed.
 
 ## Governing rules
 
@@ -37,7 +37,7 @@ Each rule is quoted or closely paraphrased from the cited source. The date is th
 
 Authorities cited in the sample (Bankruptcy Code §§ 547, 548, 550; *Twombly*; *Iqbal*; Fed. R. Bankr. P. 7012(b)) are written for the structure of the sample. They were not checked against the reporters or the Code in this session, and the sample is not a filing. Do not copy them into a real filing without checking.
 
-The sample now transcribes a real motion (`samples/INPUT-titan-motion.md`); its authorities are the exemplar's own (*A & C Properties*, *Woodson*, *Schmitt*, *Newman v. Stein*, *Pennsylvania Truck Lines*, *Planned Protective Services*). They are transcribed as filed and were not re-verified here.
+The sample now transcribes a real motion (`usage/INPUT-arb-motion-brief-titanmotion.md`); its authorities are the exemplar's own (*A & C Properties*, *Woodson*, *Schmitt*, *Newman v. Stein*, *Pennsylvania Truck Lines*, *Planned Protective Services*). They are transcribed as filed and were not re-verified here.
 
 Not produced: certificate of service (LRBP 9013-1(k); author-written when needed), notice of hearing (author-written; the exemplar's own notice is a separate filing, Doc 765 in the same case), proposed order (LRBP 9013-1(e)), table of contents and table of authorities (no rule read here requires them; see gap 4), and the attachments that LRBP 9013-1 excludes from the page count (the exemplar's Exhibit A).
 
@@ -82,12 +82,12 @@ Not produced: certificate of service (LRBP 9013-1(k); author-written when needed
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env, see the brief)
-sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/motion-brief samples/INPUT-titan-motion.md
+sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/motion-brief usage/INPUT-arb-motion-brief-titanmotion.md
 sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/motion-brief titan-motion
 ```
 
 - Render: exit 0, no typst warnings, 8 pages (letter). Fonts embedded: EBGaramond-Regular, -Italic, -Bold.
-- Overlay: exit 0; `samples/OVERLAY-titan-motion.pdf`. Pairing by word overlap, from `OVERLAY-titan-motion.txt`: sample pp. 1–4 to filed pp. 1–4 (74–89%); sample pp. 5–8 to filed pp. 5, 7, 8, 9 (44–65%). The lower overlap from p.5 is the pagination difference, not a missing passage: the sample reaches the signature page one page before the filing does.
+- Overlay: exit 0; `usage/OVERLAY-titan-motion.pdf`. Pairing by word overlap, from `OVERLAY-titan-motion.txt`: sample pp. 1–4 to filed pp. 1–4 (74–89%); sample pp. 5–8 to filed pp. 5, 7, 8, 9 (44–65%). The lower overlap from p.5 is the pagination difference, not a missing passage: the sample reaches the signature page one page before the filing does.
 - Page-limit mutation test (from the earlier fictional-sample review, template unchanged in this respect): a temporary 27-page sample fails the build with "27 pages; LRBP 9013-1(b) allows 15". The 8-page sample passes.
 - Page review (110 dpi, all 8 pages, final state):
   - p.1 filer block, court title, caption with the relief line, opening paragraph, memorandum heading, "I. Factual Background", paragraph 1 with its list to follow: pass.
@@ -102,7 +102,7 @@ sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/mot
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `arb-motion.lua` builds the filer block, the caption (one caption in the main case, a dual caption in an adversary), the headings with their labels, lists and tables; `render.sh` runs pandoc with `-fancy_lists` (the sample's `a.` and `i.` labels stay as typed text, as in typst) and fills the footer). Rendered: `samples/OUTPUT-titan-motion.docx` and `samples/OUTPUT-titan-motion.docx.pdf` (LibreOffice 26.2 conversion, 9 pages). `pdffonts`: EB Garamond Regular, Bold and Italic only.
+DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `arb-motion.lua` builds the filer block, the caption (one caption in the main case, a dual caption in an adversary), the headings with their labels, lists and tables; `render.sh` runs pandoc with `-fancy_lists` (the sample's `a.` and `i.` labels stay as typed text, as in typst) and fills the footer). Rendered: `usage/OUTPUT-arb-motion-brief-titanmotion.docx` and `usage/OUTPUT-arb-motion-brief-titanmotion.docx.pdf` (LibreOffice 26.2 conversion, 9 pages). `pdffonts`: EB Garamond Regular, Bold and Italic only.
 
 Matches the typst form (every page of the `.docx.pdf` rendered at 60 dpi and viewed: pages 1 to 9 of 9):
 - Letter paper; margins and the 28 pleading lines as in `arb-motion.typ`, with the numbers in one header text box and the rules from `pgBorders`.
@@ -117,6 +117,6 @@ Differs from the typst form:
 - The table column widths come from a per-character model measured on the typst render; a font metric that differs in Word can still wrap a figure.
 - Not opened in Word (no Word here). The header text box and page borders are verified in LibreOffice only.
 
-BLOCKED: none. The tier-2 items are the ones above; the exemplar is a single filer (see `exemplars/SOURCE.md`).
+BLOCKED: none. The tier-2 items are the ones above; the exemplar is a single filer (see `usage/SOURCE.md`).
 
 `tools/check.sh` cannot run on this folder: it needs `court.json` and `checks.yaml` at the court root, and neither is in the doc-type folder. The render and page review above stand in for it.

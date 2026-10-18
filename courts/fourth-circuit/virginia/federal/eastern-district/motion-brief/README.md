@@ -5,11 +5,11 @@ Folder: `courts/fourth-circuit/virginia/federal/eastern-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-keppel-4-26-cv-00112-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-keppel-motion-brief.md` (abridged transcription of the 12-page memorandum; see Known gaps) |
-| render | ok: `samples/OUTPUT-keppel-motion-brief.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/SAMPLE-vaed-motion-brief-keppel426cv00112.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-vaed-motion-brief-keppel.md` (abridged transcription of the 12-page memorandum; see Known gaps) |
+| render | ok: `usage/OUTPUT-vaed-motion-brief-keppel.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | typeface | Rule names no face: L.R. 7(F)(3) says "12 point Roman style or 10 pitch Courier style". Any proportional serif is allowed, so the template keeps EB Garamond (`docs/FONTS.md`: no court-named face). Metric note: none needed. Font re-checked 2026-10-14 (`pdffonts`: EB Garamond only). |
-| overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF, and `exemplars/` holds only `SOURCE.md` (the PDF is not in this snapshot). Old `OVERLAY-keppel-motion-brief.txt` is from an earlier run and is not current. |
+| overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF, and `usage/` holds only `SOURCE.md` (the PDF is not in this snapshot). Old `OVERLAY-keppel-motion-brief.txt` is from an earlier run and is not current. |
 | pages reviewed | 9 of 9 (re-rendered 2026-10-14; every page rasterized at 70 dpi and viewed) |
 
 ## Governing rules
@@ -56,7 +56,7 @@ Notes on what the rules do not say:
 
 ## Known gaps and open choices
 
-1. **Tier 2 is judged against one filer only.** The brief and EVAL-LOOP ask for 2 or 3 filers. Found and not saved: *Ballentine v. Hall*, No. 1:26-cv-02331-RDA-IDD (E.D. Va., Alexandria), Document 11, 17 pages, filed 2026-08-12, the National Center for Missing & Exploited Children's memorandum in support of its motion to dismiss (see `exemplars/SOURCE.md`). It was not saved because the overlay pairs against the first file in `exemplars/`, which would then be Ballentine for the sample's Keppel text. Recorded as an open gap for David.
+1. **Tier 2 is judged against one filer only.** The brief and EVAL-LOOP ask for 2 or 3 filers. Found and not saved: *Ballentine v. Hall*, No. 1:26-cv-02331-RDA-IDD (E.D. Va., Alexandria), Document 11, 17 pages, filed 2026-08-12, the National Center for Missing & Exploited Children's memorandum in support of its motion to dismiss (see `usage/SOURCE.md`). It was not saved because the overlay pairs against the first file in `usage/`, which would then be Ballentine for the sample's Keppel text. Recorded as an open gap for David.
 2. **The sample is abridged.** Marked in the sample where it matters: the block quotations from *Cory* and *Baldwin* are omitted (marked "[Block quotations ... omitted from this transcription.]"); the *Sloane*, *Harless*, and *Cretella* citations are omitted (marked); the Goulmamine discussion is reduced to its first citation; the Thompson and McGuire discussion is not transcribed; Background paragraphs are partial; Argument II's and III's paragraphs are transcribed as read. Footnotes 1 and 2 of the filing are not transcribed. The template sets footnote text to 12 point, but the markdown contract has no footnote syntax yet, so footnotes are not tested.
 3. **Font.** Tier 1 asks for a 12 point Roman face. The rule names no face ("Roman style"), so `docs/FONTS.md` keeps EB Garamond. The exemplar is Times-style. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the exemplar. The point size meets the rule; the apparent size does not. Open question for David: if "Roman style" is read as Times New Roman, the substitute is Liberation Serif (metric-compatible, `docs/FONTS.md`) and the template should switch. Not switched here, because the rule does not name Times (recorded as ACCEPTED).
 4. **Signature mark.** The exemplar's "/s/" line is transcribed as "/s/ Kristina H. Vaquera", as the filing shows it.
@@ -81,7 +81,7 @@ Notes on what the rules do not say:
 
 ## Engines
 
-DOCX (`docx/`): `reference.docx` from `docx/build-reference.sh`, filter `docx/vaed-motion-brief.lua`. Output `samples/OUTPUT-keppel-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion). Pages reviewed: 9 of 9 in the docx PDF (pages 1 to 8 on the first render, page 9 again after a fix to the served list) and 9 of 9 in the typst PDF, at 60 dpi.
+DOCX (`docx/`): `reference.docx` from `docx/build-reference.sh`, filter `docx/vaed-motion-brief.lua`. Output `usage/OUTPUT-vaed-motion-brief-keppel.docx` and `.docx.pdf` (LibreOffice conversion). Pages reviewed: 9 of 9 in the docx PDF (pages 1 to 8 on the first render, page 9 again after a fix to the served list) and 9 of 9 in the typst PDF, at 60 dpi.
 
 - Matches the typst form: EB Garamond 12 pt only (`pdffonts`); letter, 1 in margins; body at an exact 24 pt pitch; 0.5 in first-line indent; caption party box and case number; underlined bold title; headings with hanging labels (level 2 at 0, level 3 at 0.5 in); the last paragraph kept with the signature block; certificate of service on its own page; centered PAGE number at 12 pt. Nine pages in both, with the same page breaks, including the conclusion moving to page 8.
 - Differs: the court heading is single-spaced in the docx (see the complaint's Engines note). The docx's first page holds about two more body lines than typst's for that reason. The served list is followed by the "Date" line slightly closer than in typst. Footnotes: none in the sample; the footnote style is 12 pt single-spaced, not tested. LibreOffice breaks lines after hyphens in some citations where typst does not.

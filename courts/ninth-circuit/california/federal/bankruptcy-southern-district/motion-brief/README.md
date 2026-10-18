@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/california/federal/bankruptcy-southern-district/mo
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-stika-alegria-25-90036-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-stika-alegria-motion-to-dismiss.md`: the motion in full (caption, motion paragraph, POINTS AND AUTHORITIES with sections I and II, CONCLUSION, signature). 5 pages, the same length as the exemplar. |
-| render | ok: `samples/OUTPUT-stika-alegria-motion-to-dismiss.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-stika-alegria-motion-to-dismiss.pdf` and `.txt` (pages paired one to one; 34 to 95% word overlap, the last page is the signature alone) |
+| exemplar | yes: `usage/SAMPLE-casb-motion-brief-stikaalegria2590036.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-casb-motion-brief-stikaalegriamotiontodismiss.md`: the motion in full (caption, motion paragraph, POINTS AND AUTHORITIES with sections I and II, CONCLUSION, signature). 5 pages, the same length as the exemplar. |
+| render | ok: `usage/OUTPUT-casb-motion-brief-stikaalegriamotiontodismiss.typst.pdf`, 5 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-stika-alegria-motion-to-dismiss.pdf` and `.txt` (pages paired one to one; 34 to 95% word overlap, the last page is the signature alone) |
 | pages reviewed | 5 of 5 (every page rendered at 60 dpi and viewed after the last template change; see the review table) |
 
 The sample is the exemplar's length (5 pages), so the 8-to-14-page target does not apply: the transcription is complete, and nothing has been padded.
@@ -50,7 +50,7 @@ Not verified against primary text, so not asserted as a rule: the font (EB Garam
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, jq, gawk (micromamba env at ~/tb)
-sh tools/render.sh courts/ninth-circuit/california/federal/bankruptcy-southern-district/motion-brief samples/INPUT-stika-alegria-motion-to-dismiss.md
+sh tools/render.sh courts/ninth-circuit/california/federal/bankruptcy-southern-district/motion-brief usage/INPUT-casb-motion-brief-stikaalegriamotiontodismiss.md
 sh tools/overlay.sh courts/ninth-circuit/california/federal/bankruptcy-southern-district/motion-brief stika-alegria-motion-to-dismiss
 ```
 
@@ -84,10 +84,10 @@ Every page rendered at 60 dpi and looked at.
 
 ## Engines
 
-**docx** (`docx/`): `sh tools/render.sh --engine docx courts/ninth-circuit/california/federal/bankruptcy-southern-district/motion-brief samples/INPUT-stika-alegria-motion-to-dismiss.md` writes `samples/OUTPUT-stika-alegria-motion-to-dismiss.docx` and `.docx.pdf` (LibreOffice PDF, 5 pages, EB Garamond embedded). Built by `docx/build-reference.sh` (reference.docx), `docx/render.sh` (sets the footer from the frontmatter) and `docx/casb-motion-brief.lua`.
+**docx** (`docx/`): `sh tools/render.sh --engine docx courts/ninth-circuit/california/federal/bankruptcy-southern-district/motion-brief usage/INPUT-casb-motion-brief-stikaalegriamotiontodismiss.md` writes `usage/OUTPUT-casb-motion-brief-stikaalegriamotiontodismiss.docx` and `.docx.pdf` (LibreOffice PDF, 5 pages, EB Garamond embedded). Built by `docx/build-reference.sh` (reference.docx), `docx/render.sh` (sets the footer from the frontmatter) and `docx/casb-motion-brief.lua`.
 
 - Matches the typst output in the mandated form: EB Garamond 12 pt, 24 pt line pitch, 28 line numbers on the grid, pleading rules, the three-line footer, the counsel block, the caption, first-line indents, headings numbered I., A. as in the typst template, the signature block.
 - Differs: (1) the numbers and rules are built as in the adversary folder (framed header, page borders). (2) A single-spaced block quotation has no grid rounding (typst rounds it to whole numbered lines); the text after a quotation can sit half a line off the numbers (seen on page 4). (3) The heading chain (POINTS AND AUTHORITIES, then the first heading, then its paragraph) moves to page 2 as a unit, leaving lines 22 to 28 of page 1 blank, as in typst. Checked with LibreOffice only.
 - `toc: true` is not built by this engine: the filter stops with an error. BLOCKED: TOC and TOA checks (no table of contents or authorities is produced; the sample has `toc: false`).
-- No typst `OUTPUT-stika-alegria-motion-to-dismiss.pdf` exists in `samples/` in this snapshot, so there is no typst page to compare against.
+- No typst `OUTPUT-casb-motion-brief-stikaalegriamotiontodismiss.typst.pdf` exists in `usage/` in this snapshot, so there is no typst page to compare against.
 - BLOCKED: `tools/check.sh <this folder> --engine docx` exits 2 (`court.json` and `checks.yaml` are missing from this doc-type folder; not created). No gate result is claimed. Gate 0 checked by hand for word presence only (every body word is in the PDF text).

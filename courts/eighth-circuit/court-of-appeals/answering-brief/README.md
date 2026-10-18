@@ -4,16 +4,16 @@ Doc type `answering-brief` of court `ca8`. One self-contained folder: exemplar, 
 
 | Item | Path | Status |
 |---|---|---|
-| Exemplar (filed, text-based PDF) | `exemplars/FILED-EXAMPLE-banks-v-costar-25-3320-answering-brief.pdf` (source: `exemplars/SOURCE.md`) | yes |
-| Sample markdown | `samples/INPUT-banks-costar-response.md` | yes |
-| Rendered sample | `samples/OUTPUT-banks-costar-response.pdf` (14 pages) | render=ok |
-| Overlay (red = ours, blue = filed) | `samples/OVERLAY-banks-costar-response.pdf`, `samples/OVERLAY-banks-costar-response.txt` | overlay=ok |
+| Exemplar (filed, text-based PDF) | `usage/SAMPLE-ca8-answering-brief-banksvcostar253320.pdf` (source: `usage/SOURCE.md`) | yes |
+| Sample markdown | `usage/INPUT-ca8-answering-brief-bankscostarresponse.md` | yes |
+| Rendered sample | `usage/OUTPUT-ca8-answering-brief-bankscostarresponse.typst.pdf` (14 pages) | render=ok |
+| Overlay (red = ours, blue = filed) | `usage/OVERLAY-banks-costar-response.pdf`, `usage/OVERLAY-banks-costar-response.txt` | overlay=ok |
 | Template | `typst/main.typ` (entry), `typst/ca8-answering-brief.typ` | |
 
 Build (from the repo root; the toolchain is typst 0.15.0, poppler, ImageMagick):
 
 ```sh
-sh tools/render.sh courts/eighth-circuit/court-of-appeals/answering-brief samples/INPUT-banks-costar-response.md
+sh tools/render.sh courts/eighth-circuit/court-of-appeals/answering-brief usage/INPUT-ca8-answering-brief-bankscostarresponse.md
 sh tools/overlay.sh courts/eighth-circuit/court-of-appeals/answering-brief banks-costar-response
 ```
 
@@ -46,7 +46,7 @@ Tier 2 (conventions) is judged against the exemplar only: cover arrangement, hea
 
 ## Markdown contract
 
-One `.md` file: YAML frontmatter, then the body. The template builds the cover, front matter, TOC, TOA, signature block and both certificates. Full field list in the frontmatter of `samples/INPUT-banks-costar-response.md`. Required: `case_number`, `caption`, `proceeding`, `brief_title`, `counsel` (each group may carry its own `phone`, printed under that group), `phone` (only when no counsel group has one; printed under the last group), `signature`, `date`, `virus_check`, `summary`, `authorities` (when the body cites any). Optional: `judge`, `district_court_case`, `disclosure` (omit when the party is not a nongovernmental corporation).
+One `.md` file: YAML frontmatter, then the body. The template builds the cover, front matter, TOC, TOA, signature block and both certificates. Full field list in the frontmatter of `usage/INPUT-ca8-answering-brief-bankscostarresponse.md`. Required: `case_number`, `caption`, `proceeding`, `brief_title`, `counsel` (each group may carry its own `phone`, printed under that group), `phone` (only when no counsel group has one; printed under the last group), `signature`, `date`, `virus_check`, `summary`, `authorities` (when the body cites any). Optional: `judge`, `district_court_case`, `disclosure` (omit when the party is not a nongovernmental corporation).
 
 - Headings: `# Heading` is a centered bold section (Statement, Argument, Conclusion). Argument point headings are numbered automatically (I., A., 1., a.); do not type the numbers. Level 2 outside the Argument is A., level 3 is 1., and so on.
 - Citations: `[*Case v. Name*, 1 F.4th 2 (8th Cir. 2026)](toa:key)`. Every `toa:` key must be in `authorities:`, or the build stops. Each link is recorded with the page it starts on for the TOA.
@@ -56,7 +56,7 @@ One `.md` file: YAML frontmatter, then the body. The template builds the cover, 
 
 ## What the overlay shows
 
-`samples/OVERLAY-banks-costar-response.pdf` puts our render (red) over the filed exemplar page (blue), pages paired by word overlap; black is where both agree. The page map is in `-overlay.txt`. It is a diagnostic, not a score: the sample is a portion of a 58-page brief, so the pages after the first few pair with the exemplar's pages where the same text appears, and where a page has no counterpart the red stands alone. Overlap by page: cover 100%, summary 100%, disclosure 83%, TOC 52% (different entries and page numbers), TOA 29% and 16% (the sample cites a subset), body 50-76%, conclusion 30%, certificates 85-100%.
+`usage/OVERLAY-banks-costar-response.pdf` puts our render (red) over the filed exemplar page (blue), pages paired by word overlap; black is where both agree. The page map is in `-overlay.txt`. It is a diagnostic, not a score: the sample is a portion of a 58-page brief, so the pages after the first few pair with the exemplar's pages where the same text appears, and where a page has no counterpart the red stands alone. Overlap by page: cover 100%, summary 100%, disclosure 83%, TOC 52% (different entries and page numbers), TOA 29% and 16% (the sample cites a subset), body 50-76%, conclusion 30%, certificates 85-100%.
 
 ## Render review (Gate 2 equivalent, recorded by hand)
 
@@ -77,7 +77,7 @@ The sample's word count (1,193) and the filed brief's (11,620) are different bec
 - **Cover color (FRAP 32(a)(2)).** The appellee's cover must be red. That applies to paper copies only, and the rendered PDF is white, like the filed exemplar. The paper printer must use a red cover stock.
 - **Addendum (8th Cir. R. 28A(g)(3), (5)).** The appellee's addendum is a separate electronic filing. The template does not generate one; a sample with an `# Addendum` heading would render it as ordinary body text. Count the addendum separately.
 - **Statement of the standard of review and statement of issues.** Not required for an appellee (FRAP 28(b)(4)), so the sample omits the standard of review. Both can be added as body headings.
-- **Tier 2 judged on one filer.** Only one filer's appellee brief is on file (Banks v. CoStar, a Baker & Hostetler filing). A second filer's brief is needed before any choice can be called a convention rather than that filer's style. Burnett v. Spring Way Center (No. 24-2168, Faegre Drinker) is the candidate noted in `exemplars/SOURCE.md`.
+- **Tier 2 judged on one filer.** Only one filer's appellee brief is on file (Banks v. CoStar, a Baker & Hostetler filing). A second filer's brief is needed before any choice can be called a convention rather than that filer's style. Burnett v. Spring Way Center (No. 24-2168, Faegre Drinker) is the candidate noted in `usage/SOURCE.md`.
 - **Gates 0 and 1 are not wired.** This doc type has no `checks.yaml`, `rules.md` or `reviews/` yet, so `tools/check.sh` does not apply and no pass stamp is written. Those belong with the court-level rules work.
 - **Passim.** The TOA lists every page, as the exemplar does. The rules do not call for "passim" and the template does not use it.
 - **Font.** EB Garamond is the vendored serif (SIL OFL 1.1, `fonts/eb-garamond/`). The exemplar is set in Calisto MT; FRAP 32(a)(5)(A) requires serif, 14 pt, and nothing about the face beyond that.
@@ -94,7 +94,7 @@ The sample's word count (1,193) and the filed brief's (11,620) are different bec
 
 ## Verification pass 2026-10-16 (fb-595.26.8)
 
-- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/answering-brief samples/INPUT-banks-costar-response.md` exit 0, no typst warnings, 14 pages (unchanged from the committed PDF before this pass), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0): cover 100%, summary 100%, disclosure 83%, TOC 52%, TOA 29% and 16%, body 50-76%, conclusion page 30%, certificates 85% and 100%.
+- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/answering-brief usage/INPUT-ca8-answering-brief-bankscostarresponse.md` exit 0, no typst warnings, 14 pages (unchanged from the committed PDF before this pass), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0): cover 100%, summary 100%, disclosure 83%, TOC 52%, TOA 29% and 16%, body 50-76%, conclusion page 30%, certificates 85% and 100%.
 - Viewed: all 14 pages at 60 dpi, the exemplar's page 1 against our cover, and all 14 overlay pages at 40 dpi. Pages 1 and 13 viewed again after the fixes below; the text of pages 2-12 and 14 is unchanged by them.
 - Fixed (tier 1, FRAP 32(a)(2)(F)): the cover printed one telephone number, under the Chicago group, and it was the Washington number; the Chicago number (312) 416-6200 was missing. The template took a single top-level `phone` and appended it to the last group. Counsel groups now take their own `phone` (top-level `phone` remains the fallback), and the sample gives each group its number as filed. The latex and docx filters read the per-group `phone` the same way (latex re-rendered and its cover viewed; docx not rebuilt, no `soffice`).
 - Fixed (sample): an unused footnote definition (`[^kastenmeier]`, left over from trimming) was counted in the certified word count. Removed; the certificate now states 1,193 words (was 1,219).
@@ -107,4 +107,4 @@ The sample's word count (1,193) and the filed brief's (11,620) are different bec
 
 - **typst** (primary, `typst/`): the reference for the court's form.
 - **latex** (`latex/template.tex`, `latex/ca8.lua`): tectonic (XeTeX) with the vendored EB Garamond; the same page order, 14 pt type, 31.4 pt double spacing, 1 in margins, centered page numbers, TOC and TOA with page numbers (TOA pages collected from a first pass), certificates. Differences: body is shorter in places (page breaks differ from typst by a few lines, so TOC page numbers differ); the LaTeX certificate of compliance uses the source word count (see the PR for the reconciliation with the typst figure); cover and heading spacing are approximate, not measured per page. The filter and template in this folder are the same as the other two briefs apart from the `CFG` block in `ca8.lua` and the cover/signature/certificate macros in `template.tex`.
-- **docx** (`docx/reference.docx`, `docx/ca8.lua`, `docx/build-reference.sh`): pandoc on reference.docx (EB Garamond 14 pt, exact 31.4 pt line spacing, 1 in margins, PAGE footer). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `samples/OUTPUT-<id>.docx.pdf` cannot be produced and the docx checks (Gates 0 to 3) cannot run. Known limits, per docs/DOCX.md: the table of contents is a TOC field (page numbers appear after field update); the table of authorities lists authorities without page numbers (a TOA field needs the same update, and LibreOffice does not honor it); cover and certificates are plain centered paragraphs, not the typst layout.
+- **docx** (`docx/reference.docx`, `docx/ca8.lua`, `docx/build-reference.sh`): pandoc on reference.docx (EB Garamond 14 pt, exact 31.4 pt line spacing, 1 in margins, PAGE footer). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `usage/OUTPUT-<id>.docx.pdf` cannot be produced and the docx checks (Gates 0 to 3) cannot run. Known limits, per docs/DOCX.md: the table of contents is a TOC field (page numbers appear after field update); the table of authorities lists authorities without page numbers (a TOA field needs the same update, and LibreOffice does not honor it); cover and certificates are plain centered paragraphs, not the typst layout.

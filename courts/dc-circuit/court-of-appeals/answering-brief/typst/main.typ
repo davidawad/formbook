@@ -1,9 +1,9 @@
 // Entrypoint. Compile with the doc-type folder as --root; tools/render.sh does it:
 //   typst compile --root <doctype-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=samples/NAME.md \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
 //     typst/main.typ out.pdf
 #import "cadc-answering-brief.typ": cadc-answering-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-wilson.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-cadc-answering-brief-wilson.md"))
 #let (meta, body) = split-frontmatter(src)
 #cadc-answering-brief(meta, body)

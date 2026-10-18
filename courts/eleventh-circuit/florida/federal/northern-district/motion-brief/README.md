@@ -5,10 +5,10 @@ Folder: `courts/eleventh-circuit/florida/federal/northern-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-kinsale-4-26-cv-00294-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-kinsale-motion.md`: the whole 12-page motion and memorandum, transcribed (word-diff against the filing: body text identical; differences are caption, title, signature and running headers) |
-| render | ok: `samples/OUTPUT-kinsale-motion.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (pdffonts), no warnings |
-| overlay | ok: `samples/OVERLAY-kinsale-motion.pdf` and `OVERLAY-kinsale-motion.txt` |
+| exemplar | yes: `usage/SAMPLE-flnd-motion-brief-kinsale426cv00294.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-flnd-motion-brief-kinsalemotion.md`: the whole 12-page motion and memorandum, transcribed (word-diff against the filing: body text identical; differences are caption, title, signature and running headers) |
+| render | ok: `usage/OUTPUT-flnd-motion-brief-kinsalemotion.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (pdffonts), no warnings |
+| overlay | ok: `usage/OVERLAY-kinsale-motion.pdf` and `OVERLAY-kinsale-motion.txt` |
 | typeface | face required: **none named** (Loc. R. 5.1(C) says "at least 14-point font"; checked 2026-10-14 against the local rules PDF). Substitute: none; **EB Garamond** kept, as `docs/FONTS.md` "No face named" requires. Not metric-compatible with the exemplar's Times New Roman (known gap 2). |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed after the last template change; re-checked 2026-10-14 after the fonts pass, same 12 pages, same overlay map) |
 | BLOCKED | none (an exemplar was found) |
@@ -50,7 +50,7 @@ The sample's own count: **2,308 words**, from the lead-in paragraph through the 
 
 ## What the overlay shows
 
-`samples/OVERLAY-kinsale-motion.pdf` (red = our render, blue = filed exemplar, black = both). Each page pairs with the same-numbered filed page:
+`usage/OVERLAY-kinsale-motion.pdf` (red = our render, blue = filed exemplar, black = both). Each page pairs with the same-numbered filed page:
 
     ours p.1-p.12 pair with filed p.1-p.12; word overlap 94.8, 86.8, 84.2, 78.1, 78.7, 75.6, 75.3, 70.6, 77.9, 79.8, 79.4, 86.2 %
 
@@ -91,13 +91,13 @@ Fixed during review: (1) the signature block moved before the certificate of ser
 
 typst (`typst/`) is the reference. The docx engine (`docx/`) follows it; the LaTeX engine is not built for this doc type.
 
-| Engine | Output (`samples/`) | Status |
+| Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-kinsale-motion.pdf` (12 pp) | reference |
-| docx | `OUTPUT-kinsale-motion.docx` and `OUTPUT-kinsale-motion.docx.pdf` (12 pp) | ok: rendered with LibreOffice 26.8.1; every page compared with the typst page at 60 dpi |
+| typst | `OUTPUT-flnd-motion-brief-kinsalemotion.typst.pdf` (12 pp) | reference |
+| docx | `OUTPUT-flnd-motion-brief-kinsalemotion.docx` and `OUTPUT-flnd-motion-brief-kinsalemotion.docx.pdf` (12 pp) | ok: rendered with LibreOffice 26.8.1; every page compared with the typst page at 60 dpi |
 
 ```sh
-sh tools/render.sh --engine docx courts/eleventh-circuit/florida/federal/northern-district/motion-brief samples/INPUT-kinsale-motion.md
+sh tools/render.sh --engine docx courts/eleventh-circuit/florida/federal/northern-district/motion-brief usage/INPUT-flnd-motion-brief-kinsalemotion.md
 ```
 
 `docx/reference.docx` is built by `docx/make-reference.sh`; `docx/render.sh` runs pandoc on the sample, reading it as CommonMark with smart punctuation (so "at *7" keeps its literal star, as in typst); `docx/flnd-motion-brief.lua` builds the cover, the signature block and its place before the certificate of service.

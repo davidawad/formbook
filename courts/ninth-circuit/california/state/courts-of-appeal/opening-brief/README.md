@@ -1,13 +1,13 @@
 # California Court of Appeal: appellant's opening brief
 
-Doc type `opening-brief` for the California Courts of Appeal (`court.json` alias `calctapp`). This folder is self-contained. The court-root `typst/` and `samples/` (none of ours) are untouched, and nothing here is a gate stamp: there is no `checks.yaml` for this doc type yet, so no mechanical Gate 0 or Gate 1 has run.
+Doc type `opening-brief` for the California Courts of Appeal (`court.json` alias `calctapp`). This folder is self-contained. The court-root `typst/` and `usage/` (none of ours) are untouched, and nothing here is a gate stamp: there is no `checks.yaml` for this doc type yet, so no mechanical Gate 0 or Gate 1 has run.
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-kirk-v-city-of-morgan-hill-H048745-opening-brief.pdf` | Filed appellant's opening brief, Sixth District, 40 pages, text layer present. Source and filer in `exemplars/SOURCE.md`. |
-| `samples/INPUT-kirk-opening-brief.md` | Transcription of a portion of the exemplar (cover, tables, statements, part of the argument, conclusion, certificates). Frontmatter carries the cover, counsel, signature, service and authorities. |
-| `samples/OUTPUT-kirk-opening-brief.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/courts-of-appeal/opening-brief samples/INPUT-kirk-opening-brief.md`. 14 pages, EB Garamond only. |
-| `samples/OVERLAY-kirk-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/california/state/courts-of-appeal/opening-brief kirk-opening-brief`. Red = ours, blue = filed, black = both. |
+| `usage/SAMPLE-calctapp-opening-brief-kirkvcityofmorganhillh048745.pdf` | Filed appellant's opening brief, Sixth District, 40 pages, text layer present. Source and filer in `usage/SOURCE.md`. |
+| `usage/INPUT-calctapp-opening-brief-kirk.md` | Transcription of a portion of the exemplar (cover, tables, statements, part of the argument, conclusion, certificates). Frontmatter carries the cover, counsel, signature, service and authorities. |
+| `usage/OUTPUT-calctapp-opening-brief-kirk.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/california/state/courts-of-appeal/opening-brief usage/INPUT-calctapp-opening-brief-kirk.md`. 14 pages, EB Garamond only. |
+| `usage/OVERLAY-kirk-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/ninth-circuit/california/state/courts-of-appeal/opening-brief kirk-opening-brief`. Red = ours, blue = filed, black = both. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`. |
 | `typst/calctapp-opening-brief.typ` | The template: `calctapp-opening-brief(meta, md)`. Parameters at the top; each traces to a rule or is a style choice. |
 
@@ -42,7 +42,7 @@ Rule numbers marked "as summarized" or "not fetched" are not confirmed against t
 - **Font.** Century Schoolbook is the preferred face under Rule 8.74(b)(1), not a required one; the rule allows any proportional serif. EB Garamond stays. `fonts/tex-gyre-schola/` (the Century Schoolbook substitute in `docs/FONTS.md`) is vendored and could be used if David decides the preference should win; that is a change to this template, not made here. The render is checked for the 13 pt size and the embedded font names (`pdffonts`: EB Garamond only).
 - **Heading scheme.** Roman, A, 1, a is used both in the statements and in the argument, matching the exemplar's table of contents. The exemplar's point headings are bold and hang under the label, which the template does too.
 
-## Gate 2: visual review of `samples/OUTPUT-kirk-opening-brief.pdf`
+## Gate 2: visual review of `usage/OUTPUT-calctapp-opening-brief-kirk.typst.pdf`
 
 Reviewed 2026-10-14 at 60 dpi, every page, against the exemplar pages the overlay pairs them with. The sha256 of the PDF reviewed is `d080562998b92f3d…` (first 16 hex digits). Later re-renders change the hash only through the embedded creation timestamp: the extracted text is identical across renders (checked with `pdftotext -layout`), so the review stood until 2026-10-16. The 2026-10-16 pass changed the text of pages 2 and 8 and re-reviewed every page (see the section at the end); the committed PDF is `ccd7ae226a3ef893…`.
 
@@ -91,7 +91,7 @@ Docx engine (`docx/`), built 2026-10-15. `docx/make-reference.sh` builds `docx/r
 
 Differs from typst: no table of contents or table of authorities (no fields, no page numbers); no certificate of word count and no proof of service; the cover is paragraphs, not the caption grid; the signature block is paragraphs, not a grid. The body pitch is the typst pitch, which measures about 1.95 times the 13 pt size; that is double spacing, not the 1.5 this README states for Rule 8.74(b)(2). Flagged for David to check, not changed here.
 
-BLOCKED (docx engine, `samples/OUTPUT-kirk-opening-brief.docx`):
+BLOCKED (docx engine, `usage/OUTPUT-calctapp-opening-brief-kirk.docx`):
 - `docx.pdf` gates 0-3: BLOCKED, reason: `soffice` is not installed on the build box, so `tools/render-docx.sh` stops at the conversion step and no `.docx.pdf` exists. Pages reviewed for docx: 0.
 - TOC: not generated (typst builds it with page numbers). Reason: no TOC/TOA filter yet.
 - TOA: not generated. Reason: no TOA filter yet; LibreOffice does not honor TA/TOA fields (docs/DOCX.md).
@@ -99,7 +99,7 @@ BLOCKED (docx engine, `samples/OUTPUT-kirk-opening-brief.docx`):
 
 ## Verification pass 2026-10-16 (fb-595.26.16)
 
-- Rendered with `sh tools/render.sh .../opening-brief samples/INPUT-kirk-opening-brief.md`: exit 0, no typst warnings, 14 pages (the committed PDF was also 14 pages, so it was not stale). `pdffonts`: EB Garamond Regular, Italic and Bold only.
+- Rendered with `sh tools/render.sh .../opening-brief usage/INPUT-calctapp-opening-brief-kirk.md`: exit 0, no typst warnings, 14 pages (the committed PDF was also 14 pages, so it was not stale). `pdffonts`: EB Garamond Regular, Italic and Bold only.
 - Viewed all 14 pages at 60 dpi, and the 14 overlay pages at 40 dpi. Our cover was compared with the exemplar's page 1.
 - Overlay rerun (`tools/overlay.sh`): pairings unchanged from the table above (cover 86% word overlap, certificate of word count 90%).
 - Fixed, in `typst/calctapp-opening-brief.typ`:

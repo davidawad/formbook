@@ -3,7 +3,7 @@
 - Court: `alnb`, United States Bankruptcy Court for the Northern District of Alabama (`courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district/`)
 - Doc type: `adversary-complaint` (commencing an adversary proceeding, Fed. R. Bankr. P. 7001 and 7003)
 - Engine: typst (primary). `latex/` and `docx/` are not built for this doc type.
-- Exemplars: `exemplars/` holds two public filings from different filers (see `exemplars/SOURCE.md`). The overlay uses the first one (`FILED-EXAMPLE-bci-capital-v-montalbano-21-00015-adversary-complaint.pdf`), which is the tier-2 primary.
+- Exemplars: `usage/` holds two public filings from different filers (see `usage/SOURCE.md`). The overlay uses the first one (`SAMPLE-alnb-adversary-complaint-bcicapitalvmontalbano2100015.pdf`), which is the tier-2 primary.
 
 ## Files
 
@@ -11,10 +11,10 @@
 |---|---|
 | `typst/main.typ` | Entry point. Reads `--input sample=...` and calls `alnb-adversary-complaint`. |
 | `typst/alnb-adversary-complaint.typ` | Template. Caption, title, numbered allegations, headings, WHEREFORE prayers, signature block. Parameter block at the top. |
-| `samples/INPUT-bci-capital-montalbano.md` | Transcription of the BCI complaint (frontmatter + body). Frontmatter fields: `court`, `caption` (list of `left`/`right` line blocks), `title`, `lead_in`, `consent`, `signature` (`date`, `signers`, `firm`, `address`, `contact`, `role`). |
-| `samples/OUTPUT-bci-capital-montalbano.pdf` | `sh tools/render.sh <dir> samples/INPUT-bci-capital-montalbano.md`, where `<dir>` is this folder. 6 pages. |
-| `samples/OVERLAY-bci-capital-montalbano.pdf`, `.txt` | `sh tools/overlay.sh <dir> bci-capital-montalbano`. Red = our render, blue = filed exemplar, black = both. `.txt` is the page map. |
-| `exemplars/` | Two filed complaints (BCI 7 pp.; Garner 3 pp.) and `SOURCE.md`. |
+| `usage/INPUT-alnb-adversary-complaint-bcicapitalmontalbano.md` | Transcription of the BCI complaint (frontmatter + body). Frontmatter fields: `court`, `caption` (list of `left`/`right` line blocks), `title`, `lead_in`, `consent`, `signature` (`date`, `signers`, `firm`, `address`, `contact`, `role`). |
+| `usage/OUTPUT-alnb-adversary-complaint-bcicapitalmontalbano.typst.pdf` | `sh tools/render.sh <dir> usage/INPUT-alnb-adversary-complaint-bcicapitalmontalbano.md`, where `<dir>` is this folder. 6 pages. |
+| `usage/OVERLAY-bci-capital-montalbano.pdf`, `.txt` | `sh tools/overlay.sh <dir> bci-capital-montalbano`. Red = our render, blue = filed exemplar, black = both. `.txt` is the page map. |
+| `usage/` | Two filed complaints (BCI 7 pp.; Garner 3 pp.) and `SOURCE.md`. |
 
 ## Governing rules
 
@@ -30,11 +30,11 @@ Retrieved 2026-10-14.
 
 No N.D. Ala. local rule sets a typeface, type size, margin, line spacing, or page limit for a complaint. The template's type size (12 pt), margins (1 in), and double-spacing are style choices, following the exemplars (see the comment block at the top of `alnb-adversary-complaint.typ`).
 
-Gap: the 2023 local-rules PDF that `exemplars/SOURCE.md` cites as read in full was not reachable through the court's website in this run (the index page links HTML rule pages, not a PDF). The rules above are the ones checked. Local rule pages 2 and 3 of the index were not opened.
+Gap: the 2023 local-rules PDF that `usage/SOURCE.md` cites as read in full was not reachable through the court's website in this run (the index page links HTML rule pages, not a PDF). The rules above are the ones checked. Local rule pages 2 and 3 of the index were not opened.
 
 ## Overlay
 
-`samples/OVERLAY-bci-capital-montalbano.pdf` pairs our six pages with the BCI complaint's seven pages (page pairs in `samples/OVERLAY-bci-capital-montalbano.txt`: ours p.1-3 with filed p.1-3, ours p.4 with filed p.5, ours p.5 with filed p.6, ours p.6 with filed p.7). Word overlap per page runs from 59% to 89%. Expected differences, by page:
+`usage/OVERLAY-bci-capital-montalbano.pdf` pairs our six pages with the BCI complaint's seven pages (page pairs in `usage/OVERLAY-bci-capital-montalbano.txt`: ours p.1-3 with filed p.1-3, ours p.4 with filed p.5, ours p.5 with filed p.6, ours p.6 with filed p.7). Word overlap per page runs from 59% to 89%. Expected differences, by page:
 
 - Page 1: caption, title and court lines agree. The consent allegation (1) is red only: it is rule-required and absent from the filed BCI text.
 - Pages 2-5: numbered allegations, the `Facts` and `Count One`/`Count Two` headings, the WHEREFORE prayers and footnotes agree in text. Paragraph numbers are shifted by +1 from the filed text because of the consent allegation. The realleges references were adjusted to match (`paragraphs 1 through 26` and `1 through 30` in the sample; the filed text says `1 through 25` and `1 through 29`).
@@ -57,7 +57,7 @@ The template was present on master, but its render was broken, so it was changed
 
 - **Consent statement is not in the filed exemplar.** The BCI complaint has no Rule 7008(a) statement, and neither does the Garner complaint. The template renders it because the rule requires it. The sample's text ("Plaintiff does not consent...") is a sample choice, not the filer's.
 - **No certificate of service.** Neither exemplar has one. Service of a complaint runs under Rule 7004 (summons), not a certificate, so the template has no certificate block.
-- **Second filer not overlaid.** The overlay tool pairs against the first `exemplars/*.pdf` only. The Garner complaint (3 pp., filed by debtor-plaintiff's counsel, with an `OF COUNSEL` block and a caption that carries the Chapter 13 debtors' masked SSNs) is the tier-2 comparison for the caption and signature. It is compared by reading, not by overlay.
+- **Second filer not overlaid.** The overlay tool pairs against the first `usage/*.pdf` only. The Garner complaint (3 pp., filed by debtor-plaintiff's counsel, with an `OF COUNSEL` block and a caption that carries the Chapter 13 debtors' masked SSNs) is the tier-2 comparison for the caption and signature. It is compared by reading, not by overlay.
 - **Caption fill-ins.** The `Adv. Pro. No. 21-_____` line is a blank as in the filed text. The sample does not fill it.
 - **No e-filing rules.** The court's CM/ECF filing requirements are not encoded (only the physical layout is).
 
@@ -65,8 +65,8 @@ The template was present on master, but its render was broken, so it was changed
 
 ## Engines
 
-- **typst** (primary): `typst/`, `samples/OUTPUT-bci-capital-montalbano.pdf` (6 pages).
-- **docx**: `docx/` (`make-reference.sh` builds `reference.docx`; `alnb.lua` adds the court title, caption table, numbered allegations, consent statement and signature block). Output `samples/OUTPUT-bci-capital-montalbano.docx` and `.docx.pdf` (LibreOffice conversion, 7 pages, every page rendered and looked at).
+- **typst** (primary): `typst/`, `usage/OUTPUT-alnb-adversary-complaint-bcicapitalmontalbano.typst.pdf` (6 pages).
+- **docx**: `docx/` (`make-reference.sh` builds `reference.docx`; `alnb.lua` adds the court title, caption table, numbered allegations, consent statement and signature block). Output `usage/OUTPUT-alnb-adversary-complaint-bcicapitalmontalbano.docx` and `.docx.pdf` (LibreOffice conversion, 7 pages, every page rendered and looked at).
 - **latex**: not built for this doc type.
 
 What matches the typst form (12 pt EB Garamond, 1-inch margins, letter, 24 pt exact body leading, half-inch first-line indent, numbered allegations with the consent statement as paragraph 1, centered headings, centered page-number footer, single-spaced caption/court title/signature block, the ")" column of the caption, footnotes).

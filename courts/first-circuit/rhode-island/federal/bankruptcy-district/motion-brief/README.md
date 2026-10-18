@@ -4,13 +4,13 @@ Doc type: **motion with memorandum**, one filed document: the motion (FRBP 9013)
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `exemplars/FILED-EXAMPLE-hidalgo-astrue-12-ap-01039-motion-brief.pdf` (complete: motion, memorandum, certificate; U.S. Attorney for the Commissioner of Social Security; 9 pages) and `exemplars/FILED-EXAMPLE-donovan-christiana-17-ap-01028-motion-brief.pdf` (memorandum only, creditor's counsel; 13 pages; the motion itself was not retrievable). Provenance in `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-hidalgo-astrue.md`: full transcription of the Hidalgo filing (motion, memorandum with its two footnotes, conclusion, signature, "Of Counsel", certificate). Case-name italics are added; the text layer does not carry the typeface. Quotation marks are restored where the text layer garbled them. Spelling "Judgement" is kept as filed. |
-| render | ok: `samples/OUTPUT-hidalgo-astrue.pdf`, 9 pages. typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings. |
-| overlay | ok: `samples/OVERLAY-hidalgo-astrue.pdf` and `.txt`. The Donovan memorandum is not overlaid (it is a memorandum alone, not a complete motion-brief). |
+| exemplar | yes, two filers: `usage/SAMPLE-rib-motion-brief-hidalgoastrue12ap01039.pdf` (complete: motion, memorandum, certificate; U.S. Attorney for the Commissioner of Social Security; 9 pages) and `usage/SAMPLE-rib-motion-brief-donovanchristiana17ap01028.pdf` (memorandum only, creditor's counsel; 13 pages; the motion itself was not retrievable). Provenance in `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-rib-motion-brief-hidalgoastrue.md`: full transcription of the Hidalgo filing (motion, memorandum with its two footnotes, conclusion, signature, "Of Counsel", certificate). Case-name italics are added; the text layer does not carry the typeface. Quotation marks are restored where the text layer garbled them. Spelling "Judgement" is kept as filed. |
+| render | ok: `usage/OUTPUT-rib-motion-brief-hidalgoastrue.typst.pdf`, 9 pages. typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings. |
+| overlay | ok: `usage/OVERLAY-hidalgo-astrue.pdf` and `.txt`. The Donovan memorandum is not overlaid (it is a memorandum alone, not a complete motion-brief). |
 | pages reviewed | 9 of 9, each rendered at 60 dpi and viewed after the last template change |
 
-File names: the brief asked for `samples/<id>.md`, `<id>.pdf` and `<id>-overlay.*`. The repo's file-role convention and the tools fix the names instead: `INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`. `tools/overlay.sh` reads `OUTPUT-<id>.pdf`, so the tool's names were kept.
+File names: the brief asked for `usage/<id>.md`, `<id>.pdf` and `<id>-overlay.*`. The repo's file-role convention and the tools fix the names instead: `INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`. `tools/overlay.sh` reads `OUTPUT-<id>.pdf`, so the tool's names were kept.
 
 ## Governing rules
 
@@ -29,7 +29,7 @@ Primary sources. Local rules: the District of Rhode Island Bankruptcy Court's Lo
 | LBR 9013-2 | Motion practice (action without hearing, emergency motions). | Not generated. |
 | Certificate of service | Filed motions carry a certificate of service. Rule cite not verified this session. | `certificate` frontmatter (date, recipients). Its text follows the Hidalgo filing's CM/ECF certificate. |
 
-Searches and what they settled: CourtListener RECAP search (`court=rib`, `type=r`, adversary dockets, queries "motion to dismiss" "memorandum" and "memorandum of law in support"). Two text-based filings from different filers, with a memorandum, were kept (table in `exemplars/SOURCE.md`). The Hidalgo filing is the only complete motion-with-memorandum in one document that was found; Donovan is a memorandum alone. The Donovan motion (entry 7.0) did not download (the storage path returned an error page).
+Searches and what they settled: CourtListener RECAP search (`court=rib`, `type=r`, adversary dockets, queries "motion to dismiss" "memorandum" and "memorandum of law in support"). Two text-based filings from different filers, with a memorandum, were kept (table in `usage/SOURCE.md`). The Hidalgo filing is the only complete motion-with-memorandum in one document that was found; Donovan is a memorandum alone. The Donovan motion (entry 7.0) did not download (the storage path returned an error page).
 
 ## Layout
 
@@ -51,7 +51,7 @@ Searches and what they settled: CourtListener RECAP search (`court=rib`, `type=r
 
 ## Overlay: what it shows
 
-`samples/OVERLAY-hidalgo-astrue.pdf`: red = our render, blue = the Hidalgo exemplar, black = both. The page map (`OVERLAY-hidalgo-astrue.txt`) pairs each of our pages with the exemplar page sharing the most words:
+`usage/OVERLAY-hidalgo-astrue.pdf`: red = our render, blue = the Hidalgo exemplar, black = both. The page map (`OVERLAY-hidalgo-astrue.txt`) pairs each of our pages with the exemplar page sharing the most words:
 
 | Ours | Filed | Overlap | Note |
 |---|---|---|---|
@@ -97,9 +97,9 @@ Every page of the sample was rendered at 60 dpi and viewed after the last templa
 
 ## Engines
 
-**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, which names every font so no theme font falls back to Aptos or Calibri) and `docx/rib-motion-brief.lua` (caption, unnumbered paragraphs, "1." lists, response language, signature blocks, memorandum part, certificate of service, all from the frontmatter and the `---` separator). Render: `sh tools/render.sh --engine docx motion-brief samples/INPUT-<id>.md`.
+**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, which names every font so no theme font falls back to Aptos or Calibri) and `docx/rib-motion-brief.lua` (caption, unnumbered paragraphs, "1." lists, response language, signature blocks, memorandum part, certificate of service, all from the frontmatter and the `---` separator). Render: `sh tools/render.sh --engine docx motion-brief usage/INPUT-<id>.md`.
 
-Matches the typst output (every page of `samples/OUTPUT-hidalgo-astrue.docx.pdf` was viewed, side by side with `samples/OUTPUT-hidalgo-astrue.pdf`):
+Matches the typst output (every page of `usage/OUTPUT-rib-motion-brief-hidalgoastrue.docx.pdf` was viewed, side by side with `usage/OUTPUT-rib-motion-brief-hidalgoastrue.typst.pdf`):
 
 - EB Garamond 12 pt, footnotes 10 pt (single spaced, at the foot of the page), page number 11 pt centered; letter paper, 1 in margins. `pdffonts` shows only EB Garamond, embedded.
 - Double spacing is exact 24 pt lines; single spacing (caption, response language, quotations, signature, certificate) is exact 13.8 pt, the pitch measured on the typst output.

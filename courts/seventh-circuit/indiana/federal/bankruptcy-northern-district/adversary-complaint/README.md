@@ -4,13 +4,13 @@ Doc type: **complaint commencing an adversary proceeding** in the United States 
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-vendramin-henry-13-03061-adversary-complaint.pdf` (one filer: a creditor-plaintiff; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-vendramin-henry-adversary-complaint.md`: the whole filed text (10 pages of exemplar), transcribed as filed |
-| render | ok: `samples/OUTPUT-vendramin-henry-adversary-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
-| overlay | ok: `samples/OVERLAY-vendramin-henry-adversary-complaint.pdf` and `.txt` (exit 0) |
+| exemplar | yes: `usage/SAMPLE-innb-adversary-complaint-vendraminhenry1303061.pdf` (one filer: a creditor-plaintiff; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-innb-adversary-complaint-vendraminhenry.md`: the whole filed text (10 pages of exemplar), transcribed as filed |
+| render | ok: `usage/OUTPUT-innb-adversary-complaint-vendraminhenry.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
+| overlay | ok: `usage/OVERLAY-vendramin-henry-adversary-complaint.pdf` and `.txt` (exit 0) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
 
-This is a doc-type folder, not a court folder: `court.json`, `STATUS.md` and the court-root `typst/` and `samples/` are untouched, and nothing here sets a status.
+This is a doc-type folder, not a court folder: `court.json`, `STATUS.md` and the court-root `typst/` and `usage/` are untouched, and nothing here sets a status.
 
 ## Governing rules
 
@@ -51,7 +51,7 @@ Not produced by this template (separate filings; no rule was checked for them): 
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env at ~/tb)
-sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/adversary-complaint samples/INPUT-vendramin-henry-adversary-complaint.md
+sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-innb-adversary-complaint-vendraminhenry.md
 sh tools/overlay.sh courts/seventh-circuit/indiana/federal/bankruptcy-northern-district/adversary-complaint vendramin-henry-adversary-complaint
 ```
 
@@ -78,7 +78,7 @@ File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf` (it stri
 ## Known gaps and open choices
 
 1. **Typeface and size (INNB-FORM-005).** Neither B-5005-2 nor FRBP 9004(a) names one. The exemplar is Times New Roman. Only EB Garamond is vendored (no system fonts allowed), so the template uses EB Garamond at 13 pt, the same choice as the ca9 templates. Whether the court would accept Garamond is a question for David.
-2. **One exemplar.** The eval-loop tier-2 rule asks for two or three filers. A second filer is available: Fischer, Trustee v. Radio Shack Credit Services, adv. 08-01025 (Doc 1, filed 02/06/08, two pages, a trustee filing). It was read and not saved (see `exemplars/SOURCE.md`). It would be the second filer for tier 2 if the box has room to add it.
+2. **One exemplar.** The eval-loop tier-2 rule asks for two or three filers. A second filer is available: Fischer, Trustee v. Radio Shack Credit Services, adv. 08-01025 (Doc 1, filed 02/06/08, two pages, a trustee filing). It was read and not saved (see `usage/SOURCE.md`). It would be the second filer for tier 2 if the box has room to add it.
 3. **Jurisdiction and consent statements (INNB-PLD-001).** FRBP 7008(a) requires them, and the template does not check for them. The exemplar does not include them, so the sample does not either. A real filing should carry them; the template does not generate them, because they are case-specific.
 4. **Form 416D caption.** Rule 7010 requires a caption that "substantially conform[s]" to Form 416. The official form text was not retrieved (the uscourts.gov form page returned HTTP 404; search summaries describe Form 416D). The layout here follows those summaries. This is the main unverified element of the caption.
 5. **Cover sheet, summons, fee, service.** Not generated. The FRBP 7003 text available was a stub ("Fed. R. Civ. P. 3 applies"); whether an adversary cover sheet is required was not verified, so nothing is asserted about it.
@@ -90,7 +90,7 @@ File names follow the tools: `tools/render.sh` writes `OUTPUT-<id>.pdf` (it stri
 
 ## Engines
 
-DOCX engine (`docx/`): `reference.docx` built by `docx/build-reference.sh`, filter `docx/innb.lua`. Output `samples/OUTPUT-vendramin-henry-adversary-complaint.docx`.
+DOCX engine (`docx/`): `reference.docx` built by `docx/build-reference.sh`, filter `docx/innb.lua`. Output `usage/OUTPUT-innb-adversary-complaint-vendraminhenry.docx`.
 
 - Matches the typst form: EB Garamond 13 pt body; exact 24 pt line pitch; 0.5 in first-line indent; US Letter with 1 in margins; single-spaced caption, counsel, signature and footnote text; centred page number (11 pt) in the footer; court title, debtor block, parties block with the adversary number, title, lead-in, numbered paragraphs (numbered by the filter, not the sample), lettered sub-items and WHEREFORE unnumbered; signature block in one unbreakable row. Everything case-specific comes from the frontmatter.
 - Differs or unverified: the caption rules and cell paddings are approximations of the typst stroke and inset values and have not been compared on a page. Single spacing is Word's "single", not typst's 0.2 em leading. The "By:" line is underlined spaces, not a drawn line. The signature block does not carry the last paragraph to the next page (same open item as typst, page 9 of the typst render); it is not fixed here. The font must be installed on the machine that opens the file (Word substitutes silently otherwise).

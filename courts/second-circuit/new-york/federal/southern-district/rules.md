@@ -12,10 +12,10 @@ Re-check cadence: re-check annually each December 1 (Federal Rules amendments ta
 | ECF | SDNY Electronic Case Filing Rules, effective February 2, 2026 (41 pages, sha256 `355d3125f5eb8078d6202b7bd96fbd85ccdb0410f25696cb6619964190d5e0bd`). Linked from https://www.nysd.uscourts.gov/rules/ecf-related-instructions. | https://www.nysd.uscourts.gov/sites/default/files/pdf/ecf_rules/ECF%20Rules%20February%202%202026%20FINAL%20v2.pdf |
 | DOB | Rules for the Division of Business Among District Judges, S.D.N.Y., effective February 12, 2026 (sha256 `c4c66d57cec8dc9d132f30621911f29154b37e192b7d6b4682329cb24952a184`) | https://www.nysd.uscourts.gov/sites/default/files/local_rules/2026-2-12%20SDNY%20Rules%20for%20the%20Division%20of%20Business.pdf |
 | FRCP | Federal Rules of Civil Procedure 5.2, 7, 7.1, 8, 10, 11, 12, 38 (Cornell LII, read 2026-10-17) | https://www.law.cornell.edu/rules/frcp/rule_5.2 , .../rule_7 , .../rule_7.1 , .../rule_8 , .../rule_10 , .../rule_11 , .../rule_12 , .../rule_38 |
-| EX-C1 | Complaint exemplar 1: Sacchi v. WeBull Financial LLC, 1:26-cv-08973, Doc. 1 (filer: plaintiff, Simoni Consumers Class Action Law Offices) | `complaint/exemplars/SOURCE.md` entry 1 |
-| EX-C2 | Complaint exemplar 2: SEC v. Asudani, 1:26-cv-08626, Doc. 1 (filer: SEC, New York Regional Office staff counsel) | `complaint/exemplars/SOURCE.md` entry 2 |
-| EX-M1 | Motion brief exemplar 1: Minerva Bunkering Pte Ltd. v. Rahman, 1:26-cv-06789-VEC, Doc. 14 (filer: defendants, Holland & Knight LLP) | `motion-brief/exemplars/SOURCE.md` entry 1 |
-| EX-M2 | Motion brief exemplar 2: Better Home & Finance Holding Co. v. Garg, 1:26-cv-07025-CM, Doc. 41 (filer: defendant, Quinn Emanuel Urquhart & Sullivan, LLP) | `motion-brief/exemplars/SOURCE.md` entry 2 |
+| EX-C1 | Complaint exemplar 1: Sacchi v. WeBull Financial LLC, 1:26-cv-08973, Doc. 1 (filer: plaintiff, Simoni Consumers Class Action Law Offices) | `complaint/usage/SOURCE.md` entry 1 |
+| EX-C2 | Complaint exemplar 2: SEC v. Asudani, 1:26-cv-08626, Doc. 1 (filer: SEC, New York Regional Office staff counsel) | `complaint/usage/SOURCE.md` entry 2 |
+| EX-M1 | Motion brief exemplar 1: Minerva Bunkering Pte Ltd. v. Rahman, 1:26-cv-06789-VEC, Doc. 14 (filer: defendants, Holland & Knight LLP) | `motion-brief/usage/SOURCE.md` entry 1 |
+| EX-M2 | Motion brief exemplar 2: Better Home & Finance Holding Co. v. Garg, 1:26-cv-07025-CM, Doc. 41 (filer: defendant, Quinn Emanuel Urquhart & Sullivan, LLP) | `motion-brief/usage/SOURCE.md` entry 2 |
 
 Kinds: **M** = mandated by a court rule (Joint Local Rules, SDNY ECF Rules, Division of Business Rules, or the FRCP). **C** = convention (from the exemplars or common practice; the rules leave it open). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

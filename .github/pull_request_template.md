@@ -8,7 +8,7 @@ Paste the output of `sh tools/contribute.sh verify <id>` (the RESULT line must b
 
 ## Exemplars (public court records)
 
-For each exemplar: filer, case, docket number, source URL (also in `exemplars/SOURCE.md`).
+For each exemplar: filer, case, docket number, source URL (also in `usage/SOURCE.md`).
 
 ## Open tier-2 findings and BLOCKED items
 

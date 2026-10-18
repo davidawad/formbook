@@ -1,14 +1,14 @@
 # lamd: motion-brief
 
 Doc type: **motion-brief**, i.e. the memorandum in support of a Rule 12(b)(6) motion to dismiss, in the United States District Court for the Middle District of Louisiana (`lamd`).
-Folder: `courts/fifth-circuit/louisiana/federal/middle-district/motion-brief/`. Court-root `typst/` and `samples/` are not touched.
+Folder: `courts/fifth-circuit/louisiana/federal/middle-district/motion-brief/`. Court-root `typst/` and `usage/` are not touched.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `exemplars/FILED-EXAMPLE-first-horizon-3-26-cv-00182-motion-brief.pdf` (primary; the sample is transcribed from it) and `exemplars/FILED-EXAMPLE-carpenter-3-26-cv-00791-motion-brief.pdf` (second filer, tier-2 comparison only). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-first-horizon-motion-to-dismiss.md`: caption, pages 1 to 8 and 17 to 20 of the 20-page memorandum, signature, certificate of service. Pages 9 to 16 are not transcribed (see Known gaps). |
-| render | ok: `samples/OUTPUT-first-horizon-motion-to-dismiss.pdf`, 11 pages, `tools/render.sh`, typst 0.15.0, vendored EB Garamond only, no typst warnings |
-| overlay | ok: `samples/OVERLAY-first-horizon-motion-to-dismiss.pdf` and `.txt`, run against the First Horizon exemplar (`tools/overlay.sh <dir> first-horizon-motion-to-dismiss exemplars/FILED-EXAMPLE-first-horizon-3-26-cv-00182-motion-brief.pdf`; the default would pick the Carpenter file, which sorts first). The exemplar PDF is not in this snapshot; the overlay ran against a fresh copy from the CourtListener URL in `exemplars/SOURCE.md` (20 pages, Document 7-1, 02/26/26 stamp, checked) |
+| exemplar | yes, two filers: `usage/SAMPLE-lamd-motion-brief-firsthorizon326cv00182.pdf` (primary; the sample is transcribed from it) and `usage/SAMPLE-lamd-motion-brief-carpenter326cv00791.pdf` (second filer, tier-2 comparison only). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-lamd-motion-brief-firsthorizonmotiontodismiss.md`: caption, pages 1 to 8 and 17 to 20 of the 20-page memorandum, signature, certificate of service. Pages 9 to 16 are not transcribed (see Known gaps). |
+| render | ok: `usage/OUTPUT-lamd-motion-brief-firsthorizonmotiontodismiss.typst.pdf`, 11 pages, `tools/render.sh`, typst 0.15.0, vendored EB Garamond only, no typst warnings |
+| overlay | ok: `usage/OVERLAY-first-horizon-motion-to-dismiss.pdf` and `.txt`, run against the First Horizon exemplar (`tools/overlay.sh <dir> first-horizon-motion-to-dismiss usage/SAMPLE-lamd-motion-brief-firsthorizon326cv00182.pdf`; the default would pick the Carpenter file, which sorts first). The exemplar PDF is not in this snapshot; the overlay ran against a fresh copy from the CourtListener URL in `usage/SOURCE.md` (20 pages, Document 7-1, 02/26/26 stamp, checked) |
 | typeface | face required: **none** (LR 10(a)(1): "standard 12-point typeface"). Font kept: **EB Garamond** (no substitute: the rule names no face). Fit: n/a. See Known gaps 3 |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed after the last template change; pages 1 to 9 were not affected by the last change, which touched only the signature column on pages 10 and 11; re-checked on the fonts pass, 2026-10-14, no change to the template) |
 | gates | `tools/check.sh` and `tools/check-selftest.sh` not run (same reason as the complaint folder). No `court.json` or stamp written. |
@@ -51,7 +51,7 @@ Primary source: M.D. La. Local Civil Rules, "2022 Local Rules" (effective 2022-0
 
 ## Overlay (red = ours, blue = filed; pages paired by word overlap)
 
-From `samples/OVERLAY-first-horizon-motion-to-dismiss.txt`:
+From `usage/OVERLAY-first-horizon-motion-to-dismiss.txt`:
 
 ```
 ours p.1  filed p.1   word-overlap 93.7%
@@ -121,7 +121,7 @@ Open for the tier-2 decision: the side-by-side counsel columns (First Horizon) a
 
 ### docx (`docx/`)
 
-Files: `docx/reference.docx` (built by `sh docx/build-reference.sh <out.docx>`) and `docx/lamd-motion-brief.lua` (the cover, caption table, title, signature block at the `[[signature]]` marker, the `/s/` lines in the signature column and the block quotes, built as `typst/lamd-motion-brief.typ` does). `tools/render.sh --engine docx` writes `samples/OUTPUT-first-horizon-motion-to-dismiss.docx` and `.docx.pdf` (LibreOffice 26.2, headless). Word was not run here.
+Files: `docx/reference.docx` (built by `sh docx/build-reference.sh <out.docx>`) and `docx/lamd-motion-brief.lua` (the cover, caption table, title, signature block at the `[[signature]]` marker, the `/s/` lines in the signature column and the block quotes, built as `typst/lamd-motion-brief.typ` does). `tools/render.sh --engine docx` writes `usage/OUTPUT-lamd-motion-brief-firsthorizonmotiontodismiss.docx` and `.docx.pdf` (LibreOffice 26.2, headless). Word was not run here.
 
 - Matches the typst form: EB Garamond 12 pt, Regular, Bold and Italic (`pdffonts` on the `.docx.pdf`: embedded, no theme or system face in the Latin text), exact 24 pt line pitch, double spaced body with a 0.5 in first-line indent and no space between paragraphs (as the typst render), 1 in margins, letter, centered PAGE number 0.6 in from the bottom edge, caption and title as in typst, section headings as typst (centered caps, bold left, bold indented), the signature block single spaced at 2.5 in with the conclusion kept on its page, the certificate after it. 11 pages, as the typst render.
 - Differs from typst: the typst headings have 6.5 pt of space above and below; the docx headings have none. With that space LibreOffice paginates this sample to 12 pages (one body line fewer per page), so the space was dropped to keep the 11-page pagination. Headings sit tight to the text. The block quotes are single spaced at 1 in on both sides as in typst (none in the sample). Footnotes are not in the sample and not in the template (same as the typst folder).

@@ -29,7 +29,7 @@ Kinds: **M** mandated by rule; **C** convention (rules leave open); **A** filer 
 | CA7-CERT-003 | M | A certificate of service is required when applicable under FRAP 25(d); electronic service under the appellate system is governed by Circuit Rule 25. | FRAP 25(d); Circuit Rule 25 |
 | CA7-ELEC-001 | M | Electronically filed documents must comply with the Court's electronic filing procedures and PDF requirements. | Circuit Rule 25 and Court's ECF procedures, CA7 PDF |
 | CA7-ELEC-002 | M | Every filing is signed as required by FRAP 32(d) and Circuit Rule 25; electronic signature follows the Court's ECF procedures. | FRAP 32(d); Circuit Rule 25 |
-| CA7-CONT-001 | C | Page numbering, cover arrangement, and typography beyond the express requirements above follow common appellate practice; these choices are compared across the filed examples and are not asserted as mandates. | Rules leave these choices open; exemplars identified in the corresponding `exemplars/SOURCE.md` files |
+| CA7-CONT-001 | C | Page numbering, cover arrangement, and typography beyond the express requirements above follow common appellate practice; these choices are compared across the filed examples and are not asserted as mandates. | Rules leave these choices open; exemplars identified in the corresponding `usage/SOURCE.md` files |
 
 ## Document-type differences
 

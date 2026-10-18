@@ -5,11 +5,11 @@ Folder: `courts/tenth-circuit/oklahoma/federal/eastern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-barrick-6-23-cv-00129-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-barrick-complaint.md`: a transcription of pages 1 to 6, 18 to 19, 21 and 22 to 23 of the 23-page filing, with the omitted paragraphs marked in the sample |
+| exemplar | yes: `usage/SAMPLE-oked-complaint-barrick623cv00129.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-oked-complaint-barrick.md`: a transcription of pages 1 to 6, 18 to 19, 21 and 22 to 23 of the 23-page filing, with the omitted paragraphs marked in the sample |
 | typeface | no face named by the court's rules (LCvR 5.2(a); checked 2026-10-15). EB Garamond stays, per `docs/FONTS.md` ("No face named"). See gap 2 |
-| render | ok: `samples/OUTPUT-barrick-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings. Re-rendered 2026-10-15; `pdffonts` shows EBGaramond Regular, Bold and Italic embedded |
-| overlay | ran 2026-10-15, wrote `samples/OVERLAY-barrick-complaint.pdf` and `.txt`, exit 0. The exemplar PDF is not in the repo, so it was fetched from the URL in `exemplars/SOURCE.md` and passed to `tools/overlay.sh` as its third argument. **The pairing failed**: 9 of 10 sample pages paired at 0.0% word overlap, so the overlay is not a usable comparison for this exemplar (see gap 4) |
+| render | ok: `usage/OUTPUT-oked-complaint-barrick.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings. Re-rendered 2026-10-15; `pdffonts` shows EBGaramond Regular, Bold and Italic embedded |
+| overlay | ran 2026-10-15, wrote `usage/OVERLAY-barrick-complaint.pdf` and `.txt`, exit 0. The exemplar PDF is not in the repo, so it was fetched from the URL in `usage/SOURCE.md` and passed to `tools/overlay.sh` as its third argument. **The pairing failed**: 9 of 10 sample pages paired at 0.0% word overlap, so the overlay is not a usable comparison for this exemplar (see gap 4) |
 | pages reviewed | 10 of 10 (every page re-rendered at 60 dpi and viewed on 2026-10-15) |
 | tier 2 | not judged against two filers: one exemplar only (gap 1) |
 
@@ -57,9 +57,9 @@ Not checked against a rule: the 8½ × 11 paper size is the typst `us-letter` de
 8. **Caption `)` column.** The exemplar uses a column of `)` marks. Both this template and the motion's caption box are the exemplar's convention for each doc type. Two EDOK filers are needed before either is called a convention for the court (tier 2).
 9. **Footer type size.** The page number is 12 pt. LCvR 5.2(a) applies the 12-point minimum to the print style. The page number in the exemplar image looks smaller, so the template is above the exemplar here (observation from the image, not measured).
 10. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at its root. This doc-type folder has neither, and the brief forbids changing `tools/`. Render and overlay were run, and the review below is the Gate 2 equivalent for this doc type.
-11. **Tool output names.** `tools/render.sh` writes `samples/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `samples/OVERLAY-<id>.pdf` and `.txt`. The brief named `<id>.pdf` and `<id>-overlay.pdf`. The tools' names are used, because `overlay.sh` reads `OUTPUT-<id>.pdf`.
+11. **Tool output names.** `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `.txt`. The brief named `<id>.pdf` and `<id>-overlay.pdf`. The tools' names are used, because `overlay.sh` reads `OUTPUT-<id>.pdf`.
 
-## Review of the rendered pages (current PDF, `OUTPUT-barrick-complaint.pdf`)
+## Review of the rendered pages (current PDF, `OUTPUT-oked-complaint-barrick.typst.pdf`)
 
 Every page was rendered at 60 dpi and viewed after the last template change. Compared with exemplar pages where the sample transcribes them.
 
@@ -86,5 +86,5 @@ Typst is the primary engine. The DOCX engine is pandoc with `docx/reference.docx
 
 - Matches the typst form: EB Garamond 12 pt; body at an exact 24 pt pitch with a 0.5 in first-line indent; 1 in margins; single-spaced caption, headings' second lines, block quotations and signature block; the caption as a borderless table (party column 3.5 in, ")" column, right column for the case number and legends).
 - Differs: Word may paginate differently from typst (line breaking, table row heights); the caption rows use a fixed 13.8 pt height as in typst; the heading "keep with next" and widow control are Word's; no typeface is named by the court, so the same EB Garamond is used (gap 2).
-- DOCX BLOCKED items: `docx.pdf` (the LibreOffice PDF) is not produced: `soffice` is not installed on the box and cannot be installed without root. `tools/render-docx.sh` also fails at its zip-integrity step because `unzip` is not installed, so `samples/OUTPUT-barrick-complaint.docx` is written but the command exits 1 before the PDF step. The XML parts of the written `.docx` were checked with `ziptool` and `xmllint` (17 of 17 well formed). Visual review of the docx pages: not done (no renderer); pages reviewed = 0. Not verified: that the file opens in Word or LibreOffice without a repair prompt.
+- DOCX BLOCKED items: `docx.pdf` (the LibreOffice PDF) is not produced: `soffice` is not installed on the box and cannot be installed without root. `tools/render-docx.sh` also fails at its zip-integrity step because `unzip` is not installed, so `usage/OUTPUT-oked-complaint-barrick.docx` is written but the command exits 1 before the PDF step. The XML parts of the written `.docx` were checked with `ziptool` and `xmllint` (17 of 17 well formed). Visual review of the docx pages: not done (no renderer); pages reviewed = 0. Not verified: that the file opens in Word or LibreOffice without a repair prompt.
 - Gate 0/1/2/3 for the docx engine are not run (`tools/check.sh --engine docx` needs the `.docx.pdf`).

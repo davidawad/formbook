@@ -5,12 +5,12 @@ Folder: `courts/sixth-circuit/michigan/federal/eastern-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-soboleski-2-26-cv-11195-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-soboleski-motion-brief.md` (partial transcription, see Known gaps) |
+| exemplar | yes: `usage/SAMPLE-mied-motion-brief-soboleski226cv11195.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-mied-motion-brief-soboleski.md` (partial transcription, see Known gaps) |
 | typeface | required: none (LR 5.1(a)(3) sets 14 pt for proportional type and names no face); vendored substitute: none needed; font kept: **EB Garamond** (`docs/FONTS.md`, "No face named"). Visual-only: the exemplar is Times New Roman, not a rule. |
-| render | ok: `samples/OUTPUT-soboleski-motion-brief.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| render | ok: `usage/OUTPUT-mied-motion-brief-soboleski.typst.pdf`, 15 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
 | embedded fonts | `pdffonts`: EBGaramond-Regular, -Bold, -Italic only (all embedded) |
-| overlay | ok: `samples/OVERLAY-soboleski-motion-brief.pdf` and `OVERLAY-soboleski-motion-brief.txt` (re-run 2026-10-15) |
+| overlay | ok: `usage/OVERLAY-soboleski-motion-brief.pdf` and `OVERLAY-soboleski-motion-brief.txt` (re-run 2026-10-15) |
 | pages reviewed | 15 of 15 (every page rendered at 60 dpi and viewed on 2026-10-15) |
 
 ## Governing rules
@@ -51,7 +51,7 @@ Rule text: the E.D. Mich. local rules PDF (`https://www.mied.uscourts.gov/PDFs/L
 5. **Page numbers.** The motion is numbered 1 and 2; the brief cover is unnumbered; the front matter is roman from ii; the body restarts at 1. The exemplar follows the same pattern, but its motion pages and cover are not transcribed page-for-page, so the page numbers in the TOC follow our render, not the exemplar's.
 6. **Contents.** Generated from the body headings with `outline()`; page numbers are typst's. The exemplar's contents are not matched line-for-line (its heading wording is the same).
 7. **Caption.** Party block closed by a right and bottom rule (same choice as the complaint); the judge lines are at right.
-8. **Sample file names.** The brief asked for `samples/<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. `tools/overlay.sh` reads `samples/OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf`, and CLAUDE.md requires the INPUT-/OUTPUT-/OVERLAY- names, so this folder follows the repo convention. Flagged for the PM.
+8. **Sample file names.** The brief asked for `usage/<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. `tools/overlay.sh` reads `usage/OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf`, and CLAUDE.md requires the INPUT-/OUTPUT-/OVERLAY- names, so this folder follows the repo convention. Flagged for the PM.
 9. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` are court-level gates and this doc-type folder is not that shape; the brief forbids editing `tools/`. Render and overlay were run; the review below is the Gate 2 equivalent for this doc type.
 10. **Overlay.** The overlay map pairs each render page with the exemplar page sharing the most words; the pairing is by text, not index, so the page numbers on the overlay map are not the filed page numbers. Diagnostic, not a score.
 
@@ -76,7 +76,7 @@ Defects found and fixed during this review:
 
 Built 2026-10-15 with `docx/build-reference.sh`, `docx/mied-motion-brief.lua`, and `docx/render.sh` (the court's own build: it maps the section footers to the ids pandoc writes), run by tools/render.sh --engine docx (pandoc 3.6.4).
 
-**docx: BLOCKED (not passed).** `samples/OUTPUT-soboleski-motion-brief.docx` is written and valid (no duplicate zip entries, every XML part well formed). The `.docx.pdf` step did not run: LibreOffice (`soffice`) is not installed on this box, so `tools/render-docx.sh` exits 1 at the conversion. The docx.pdf checks and the page-by-page visual review are BLOCKED, and no `samples/.check-docx.txt` stamp is written. Pages reviewed: 0.
+**docx: BLOCKED (not passed).** `usage/OUTPUT-mied-motion-brief-soboleski.docx` is written and valid (no duplicate zip entries, every XML part well formed). The `.docx.pdf` step did not run: LibreOffice (`soffice`) is not installed on this box, so `tools/render-docx.sh` exits 1 at the conversion. The docx.pdf checks and the page-by-page visual review are BLOCKED, and no `usage/.check-docx.txt` stamp is written. Pages reviewed: 0.
 
 Blocked items, by check area (docs/DOCX.md):
 - docx.pdf / page review: soffice not installed on this box.

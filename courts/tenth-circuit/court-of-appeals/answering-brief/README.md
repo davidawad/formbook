@@ -3,13 +3,13 @@
 - Court: U.S. Court of Appeals for the Tenth Circuit (`ca10`)
 - Doc type: `answering-brief` (appellee's brief, no cross-appeal)
 - Status: template and one transcribed sample. Not a finished court. Not in the tracker.
-- Layout: self-contained folder. `exemplars/`, `samples/`, `typst/` and this README all live here.
+- Layout: self-contained folder. `usage/`, `usage/`, `typst/` and this README all live here.
 
 ## Result
 
-- exemplar=yes: `exemplars/FILED-EXAMPLE-willey-sweetwater-25-8027-answering-brief.pdf` (filed appellee brief, 63 pages, text layer present; see `exemplars/SOURCE.md`)
-- render=ok: `samples/OUTPUT-willey-answering-brief.pdf` (13 pages since 2026-10-16, no typst warnings, vendored fonts only)
-- overlay=ok: `samples/OVERLAY-willey-answering-brief.pdf` and `-overlay.txt`
+- exemplar=yes: `usage/SAMPLE-ca10-answering-brief-willeysweetwater258027.pdf` (filed appellee brief, 63 pages, text layer present; see `usage/SOURCE.md`)
+- render=ok: `usage/OUTPUT-ca10-answering-brief-willey.typst.pdf` (13 pages since 2026-10-16, no typst warnings, vendored fonts only)
+- overlay=ok: `usage/OVERLAY-willey-answering-brief.pdf` and `-overlay.txt`
 - pages reviewed: 13 of 13 in the 2026-10-16 pass (`pdftoppm -r 60`, every page viewed)
 
 ## Governing rules
@@ -78,21 +78,21 @@ From the repo root:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq
-sh tools/render.sh courts/tenth-circuit/court-of-appeals/answering-brief samples/INPUT-willey-answering-brief.md
+sh tools/render.sh courts/tenth-circuit/court-of-appeals/answering-brief usage/INPUT-ca10-answering-brief-willey.md
 sh tools/overlay.sh courts/tenth-circuit/court-of-appeals/answering-brief willey-answering-brief
-pdftoppm -r 60 -png courts/tenth-circuit/court-of-appeals/answering-brief/samples/OUTPUT-willey-answering-brief.pdf <out-dir>/p
+pdftoppm -r 60 -png courts/tenth-circuit/court-of-appeals/answering-brief/usage/OUTPUT-ca10-answering-brief-willey.typst.pdf <out-dir>/p
 ```
 
 `tools/check.sh` and `tools/check-selftest.sh` have no `checks.yaml` for this layout, so they were not run.
 
 ## Sample
 
-- `samples/INPUT-willey-answering-brief.md`: a transcription of part of the exemplar for visual comparison, not the whole brief. It carries the cover, the TOC/TOA data, the jurisdictional statement, the issues, the statement of the case (I. Factual Background, II. Procedural Background), the conclusion, the statement of counsel as to oral argument, and the certificates. The Argument (Parts I-III) and the Summary of Argument are omitted.
+- `usage/INPUT-ca10-answering-brief-willey.md`: a transcription of part of the exemplar for visual comparison, not the whole brief. It carries the cover, the TOC/TOA data, the jurisdictional statement, the issues, the statement of the case (I. Factual Background, II. Procedural Background), the conclusion, the statement of counsel as to oral argument, and the certificates. The Argument (Parts I-III) and the Summary of Argument are omitted.
 - The certificate of compliance states 1,802 words (1,775 before the conclusion's first sentences were restored on 2026-10-16). That is the sample body's own approximate count, not the 12,524 words of the filed brief.
 
 ## Overlay
 
-`samples/OVERLAY-willey-answering-brief.pdf`: red is our render, blue is the exemplar, black is both. Pages are paired by word overlap; the pairing is a diagnostic. Our sample is a portion, so the map pairs each sample page with a different exemplar page (for example, the TOA page with exemplar page 60, the statement of counsel). The overlay shows layout, not a score.
+`usage/OVERLAY-willey-answering-brief.pdf`: red is our render, blue is the exemplar, black is both. Pages are paired by word overlap; the pairing is a diagnostic. Our sample is a portion, so the map pairs each sample page with a different exemplar page (for example, the TOA page with exemplar page 60, the statement of counsel). The overlay shows layout, not a score.
 
 ## Known gaps
 
@@ -118,11 +118,11 @@ pdftoppm -r 60 -png courts/tenth-circuit/court-of-appeals/answering-brief/sample
 - **Unverified claim, not used.** A secondary Typelaw blog post says the Tenth Circuit requires Century Schoolbook. No court-published text found says so, so the template does not follow it. The filed exemplars use different faces (Oliver reply: Century Schoolbook; Lyman opening: Times New Roman), which is consistent with the rules naming none.
 - **Substitute: none; EB Garamond kept** (vendored, `fonts/eb-garamond/`), per the fonts policy: a court whose rules name no face keeps EB Garamond. Set in the template as `font-family`.
 - **Compatibility:** not applicable (no named face to match). Pagination is therefore not checked against a Times or Century filing; the length gate uses the word count, not the page count.
-- **Renders (2026-10-15):** `tools/render.sh` with vendored fonts only, zero warnings; `pdffonts` shows only EB Garamond (Regular, Bold, Italic). Page counts unchanged. Every page rasterised at 60 dpi and viewed. Overlay regenerated against the filed exemplar (downloaded from the CourtListener URL in `exemplars/SOURCE.md`; the PDF is not committed to the repo).
+- **Renders (2026-10-15):** `tools/render.sh` with vendored fonts only, zero warnings; `pdffonts` shows only EB Garamond (Regular, Bold, Italic). Page counts unchanged. Every page rasterised at 60 dpi and viewed. Overlay regenerated against the filed exemplar (downloaded from the CourtListener URL in `usage/SOURCE.md`; the PDF is not committed to the repo).
 
 ## Engines
 
-Typst is the primary engine. The DOCX engine (`docx/build-reference.sh`, `docx/ca10.lua`, `docx/reference.docx`) renders the same sample through pandoc and LibreOffice; the PDF is `samples/OUTPUT-willey-answering-brief.docx.pdf`.
+Typst is the primary engine. The DOCX engine (`docx/build-reference.sh`, `docx/ca10.lua`, `docx/reference.docx`) renders the same sample through pandoc and LibreOffice; the PDF is `usage/OUTPUT-ca10-answering-brief-willey.docx.pdf`.
 
 **Matches the typst output** (as of 2026-10-15; the typst cover became one page on 2026-10-16, see below): 14-point EB Garamond throughout; letter paper with 1 in margins; the two-page cover (page i unnumbered, page ii numbered `ii`, centered caption, counsel and phone, oral-argument line as written in the frontmatter); the contents on `iii` and the table of authorities with the prior-appeals statement on `iv`; body numbered from 1; double-spaced body (exact 556 twips, 27.8 pt, against typst's measured 28 pt) with a 0.5 in first-line indent; centered bold body H1 in its own case, bold left H2 with a 0.5 in hanging indent; single-spaced footnotes at 14 pt; the signature block and the "By:" service signature at 3.25 in; the statement of counsel as to oral argument; the compliance, digital-submission and service certificates, each on its own page, in typst's order; the word count (1,775, computed as typst's `count-words` does).
 
@@ -133,7 +133,7 @@ Typst is the primary engine. The DOCX engine (`docx/build-reference.sh`, `docx/c
 **BLOCKED items (docx):**
 - Contents page numbers (`toc-section`, rows for every heading and certificate): the docx entries have no page numbers. A page-number field needs an update in Word or LibreOffice, and this headless pipeline does not update fields (docs/DOCX.md, "Table of contents"). A first-pass render could supply them; not done here.
 - Table of authorities page numbers (`toa-section`, `pages-cited`): same cause, and the TOA field route is not honored by LibreOffice (docs/DOCX.md, "Table of authorities"). The docx lists every authority of the four kinds, as typst does, with dot leaders and no page numbers.
-- Page count (tier 1, checked on `samples/OUTPUT-willey-answering-brief.docx.pdf`): 15 pages against the typst 14; cause and the attempts are described above.
+- Page count (tier 1, checked on `usage/OUTPUT-ca10-answering-brief-willey.docx.pdf`): 15 pages against the typst 14; cause and the attempts are described above.
 - Certificate of compliance, item 2 (program name): the typst template prints "using Typst". The docx prints "using a proportionally spaced word processor", as the rule requires the filer to name the program. The filer must replace it with the program name before filing; the template cannot know it.
 
 **Other notes:** the cover is two sections, page i with no footer and page ii with a roman footer starting at 2, so the footer reads `ii`, `iii`, `iv`, then arabic from 1 in the body. The word limit is 13,000 for a principal brief (FRAP 32(a)(7)(B)(i)); the sample's 1,775 words are within it.
@@ -149,5 +149,5 @@ Typst is the primary engine. The DOCX engine (`docx/build-reference.sh`, `docx/c
   4. **First paragraph after a heading not indented** (the oral-argument statement, the first paragraph of each section). The exemplar indents them (filed pp. 10, 60). The paragraph indent now applies to all paragraphs.
   5. TOC and TOA had no page-column heading and the dot leaders ran into the entry ("Background:."). Added "Page" / "Page(s)" and a small gap before the leader.
   6. Sample: the conclusion began mid-sentence ("Willeys failed ..."): the first sentences on filed p. 57 were dropped at the page break. Restored. Case names in the oral-argument statement set in italics, as filed.
-- DOCX outputs not touched (no LibreOffice on this box). The docx engine still makes the two-page cover; `OUTPUT-willey-answering-brief.docx.pdf` (15 pages) is now out of step with the typst render.
+- DOCX outputs not touched (no LibreOffice on this box). The docx engine still makes the two-page cover; `OUTPUT-ca10-answering-brief-willey.docx.pdf` (15 pages) is now out of step with the typst render.
 - Remaining gaps: Known gaps 1-3, 5, 6 above (cover colour, length not enforced, local rule texts not fetched, no glossary or disclosure, partial sample); no `checks.yaml`.

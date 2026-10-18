@@ -5,18 +5,18 @@ Folder: `courts/ninth-circuit/washington/federal/bankruptcy-western-district/adv
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-harbor-custom-24-04037-adversary-complaint.pdf` (primary, 24 pp., Polsinelli / Levene Neale) and `exemplars/FILED-EXAMPLE-burdette-25-01017-adversary-complaint.pdf` (second filer, 7 pp., K&L Gates). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-harbor-custom-complaint.md` (a portion of the 24-page filing: cover, jurisdiction, parties, factual allegations, Counts I to V, prayer, signature). |
-| render | ok: `samples/OUTPUT-harbor-custom-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: all `EBGaramond-*`), no warnings. |
-| overlay | ok: `samples/OVERLAY-harbor-custom-complaint.pdf` and `samples/OVERLAY-harbor-custom-complaint.txt` (page map). |
+| exemplar | yes: `usage/SAMPLE-wawb-adversary-complaint-harborcustom2404037.pdf` (primary, 24 pp., Polsinelli / Levene Neale) and `usage/SAMPLE-wawb-adversary-complaint-burdette2501017.pdf` (second filer, 7 pp., K&L Gates). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-wawb-adversary-complaint-harborcustomcomplaint.md` (a portion of the 24-page filing: cover, jurisdiction, parties, factual allegations, Counts I to V, prayer, signature). |
+| render | ok: `usage/OUTPUT-wawb-adversary-complaint-harborcustomcomplaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: all `EBGaramond-*`), no warnings. |
+| overlay | ok: `usage/OVERLAY-harbor-custom-complaint.pdf` and `usage/OVERLAY-harbor-custom-complaint.txt` (page map). |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed; page 9 re-rendered and viewed after the signature-block fix, pages 1 to 8 unaffected by that change). |
 
 Commands (from the repo root; the tools name outputs `OUTPUT-<id>` and `OVERLAY-<id>`, see Known gaps):
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
-sh tools/render.sh courts/ninth-circuit/washington/federal/bankruptcy-western-district/adversary-complaint samples/INPUT-harbor-custom-complaint.md
-sh tools/overlay.sh courts/ninth-circuit/washington/federal/bankruptcy-western-district/adversary-complaint harbor-custom-complaint exemplars/FILED-EXAMPLE-harbor-custom-24-04037-adversary-complaint.pdf
+sh tools/render.sh courts/ninth-circuit/washington/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-wawb-adversary-complaint-harborcustomcomplaint.md
+sh tools/overlay.sh courts/ninth-circuit/washington/federal/bankruptcy-western-district/adversary-complaint harbor-custom-complaint usage/SAMPLE-wawb-adversary-complaint-harborcustom2404037.pdf
 ```
 
 ## Governing rules
@@ -81,24 +81,24 @@ The overlay is a diagnostic, not a score. Overlap is lowest on page 1 (54.7%), t
 
 ## Known gaps and open choices
 
-1. **Two filers.** The primary is Harbor Custom (Polsinelli, 24 pp.); Burdette (K&L Gates, 7 pp.) is the second filer. Both are in `exemplars/` and in SOURCE.md. The brief names one exemplar per doc type; the second is saved for the tier-2 cross-check. The second's caption layout (single left column, "Adv. Proc. No." at right) is not the one the template follows.
+1. **Two filers.** The primary is Harbor Custom (Polsinelli, 24 pp.); Burdette (K&L Gates, 7 pp.) is the second filer. Both are in `usage/` and in SOURCE.md. The brief names one exemplar per doc type; the second is saved for the tier-2 cross-check. The second's caption layout (single left column, "Adv. Proc. No." at right) is not the one the template follows.
 2. **Font.** The rule names no face (LBR 9004-1(a): "a standard embedded font"), so EB Garamond stays under `docs/FONTS.md`. Both exemplars are Times New Roman, which is filer convention. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the filing. The 12-point minimum is met.
 3. **Footer type size.** The bottom notation is 11 pt (the minimum the rule allows), not 10 pt as in the N.D. Cal. template, because LBR 9004-1(a) sets 11 or 12 pt for the pleading and carries no footer exception.
 4. **Pleading rules.** The double rule at the left and the single rule at the right are the template's pleading convention (copied from the N.D. Cal. template). The rules do not require them; the exemplar's rules could not be read from the text layer.
 5. **Paragraph numbering.** The template numbers paragraphs 1 to 50 continuously. The filing restarts numbering within each count. A complaint's numbering is the filer's choice under FRCP 10(b) (paragraphs numbered, not in which order); recorded here, not asserted.
 6. **Letters in the prayer.** The sample letters the prayer items A to J (the exemplar's convention); the rules do not specify it.
-7. **Output names.** `tools/render.sh` writes `samples/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `samples/OVERLAY-<id>.pdf` and `.txt`; the brief's `<id>.pdf` and `<id>-overlay.pdf` names were not used so the tools work unchanged. The sample is `INPUT-<id>.md`, as the court-of-appeals samples are.
+7. **Output names.** `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `.txt`; the brief's `<id>.pdf` and `<id>-overlay.pdf` names were not used so the tools work unchanged. The sample is `INPUT-<id>.md`, as the court-of-appeals samples are.
 8. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc type is a folder inside a court, so the gates were not run, and no pass stamp was written. Render and overlay were run; the page review above is the visual check.
 9. **Sample is a portion.** The sample carries the cover, jurisdiction, parties, the factual allegations through the Sound Equity Texas loans, Counts I to V, the prayer and the signature. The filing's later factual sections (the Athene transfers, the Kenyon declaration, the Surcharge facts) are not transcribed, and the sample's Count V paragraphs are a close transcription, not a verbatim copy of every line. The sample runs 9 pages against the filing's 24.
 10. **Local rule timing.** Local-rule text was read from the 2023 clean PDF on the court's site; the court's 2026 proposed amendments were read and do not change LBR 9004-1. If the court adopts a different LBR 9004-1 before the next review, this README needs updating.
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/complaint.lua` writes the body (counsel, judge, court title, caption, numbered paragraphs, lettered prayer, signature); `docx/render.sh` (run by `tools/render-docx.sh`) fills the bottom notation from the frontmatter. Output: `samples/OUTPUT-harbor-custom-complaint.docx` and `.docx.pdf` (LibreOffice 26.8), 9 pages; all 9 pages rendered at 60 dpi and viewed (`reviews/docx.md`).
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/complaint.lua` writes the body (counsel, judge, court title, caption, numbered paragraphs, lettered prayer, signature); `docx/render.sh` (run by `tools/render-docx.sh`) fills the bottom notation from the frontmatter. Output: `usage/OUTPUT-wawb-adversary-complaint-harborcustomcomplaint.docx` and `.docx.pdf` (LibreOffice 26.8), 9 pages; all 9 pages rendered at 60 dpi and viewed (`reviews/docx.md`).
 
 - Matches the typst output: letter; margins (top 1 in, bottom 48 pt, left 1.5 in, right 0.75 in); EB Garamond 12 pt (`pdffonts`: EBGaramond only); 28 numbers on a 24 pt grid; pleading rules (double at left, single at right); counsel top left on lines 1 to 10 and judge and chapter top right; court title; caption with the debtor block, the parties, a rule right and bottom, the adversary number and the title at right; page break after the caption; numbered paragraphs; prayer lettered A. to J. with the text at 0.9 in; bottom notation on every page (title and page number left, counsel right); the signature block kept whole.
 - Differs from typst: the numbers and the bottom notation are floating text boxes in the header and footer, not body flow; the caption party column is 3.2 in (typst 3.0 in) because at 3.0 in the parties ran past line 28 in LibreOffice; paragraph numbers are typed text, not a Word list, so they do not renumber on edit; page breaks follow LibreOffice (the prayer and the signature block fall on different lines than typst, the signature block is on page 9 in both); Word may paginate differently.
 - Fonts: run with a `FONTCONFIG_FILE` that lists only the repo's `fonts/` directory, or LibreOffice substitutes silently.
 - Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML, every style it uses is defined, and the placeholders in the footer are all filled.
 
-BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml` at the court level, and a doc-type folder has neither; it exits 2 (`jq: Could not open file .../court.json`), so the gates did not run and `samples/.check-docx.txt` was not written.
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml` at the court level, and a doc-type folder has neither; it exits 2 (`jq: Could not open file .../court.json`), so the gates did not run and `usage/.check-docx.txt` was not written.

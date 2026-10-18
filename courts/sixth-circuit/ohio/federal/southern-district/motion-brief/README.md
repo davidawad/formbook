@@ -5,10 +5,10 @@ Folder: `courts/sixth-circuit/ohio/federal/southern-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-sharp-v-wilmington-1-26-cv-00448-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-sharp-motion-to-dismiss.md` (full transcription of the 8-page filing) |
-| render | ok: `samples/OUTPUT-sharp-motion-to-dismiss.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
-| overlay | ok: `samples/OVERLAY-sharp-motion-to-dismiss.pdf` and `OVERLAY-sharp-motion-to-dismiss.txt` |
+| exemplar | yes: `usage/SAMPLE-ohsd-motion-brief-sharpvwilmington126cv00448.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ohsd-motion-brief-sharpmotiontodismiss.md` (full transcription of the 8-page filing) |
+| render | ok: `usage/OUTPUT-ohsd-motion-brief-sharpmotiontodismiss.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
+| overlay | ok: `usage/OVERLAY-sharp-motion-to-dismiss.pdf` and `OVERLAY-sharp-motion-to-dismiss.txt` |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed in the final layout) |
 
 File names follow `tools/overlay.sh` and CLAUDE.md (see the complaint README for the reasoning).
@@ -46,7 +46,7 @@ The S.D. Ohio local rules put no page limit on a motion and no font or point siz
 
 ## Overlay
 
-`samples/OVERLAY-sharp-motion-to-dismiss.pdf`: red is our render, blue is the filed exemplar, black where both agree. Pages pair one to one: our pages 1 to 7 pair with filed pages 1, 2, 3, 4, 6, 6, 7. Word overlap is 96% on page 1, 93% on page 2, 72% on page 3, 57% on page 4, 48% on page 5, 50% on page 6, and 63% on page 7. The overlap falls from page 3 on; I did not work out why (the page-by-page line breaks would need a line-level comparison). The overlay is a diagnostic, not a score.
+`usage/OVERLAY-sharp-motion-to-dismiss.pdf`: red is our render, blue is the filed exemplar, black where both agree. Pages pair one to one: our pages 1 to 7 pair with filed pages 1, 2, 3, 4, 6, 6, 7. Word overlap is 96% on page 1, 93% on page 2, 72% on page 3, 57% on page 4, 48% on page 5, 50% on page 6, and 63% on page 7. The overlap falls from page 3 on; I did not work out why (the page-by-page line breaks would need a line-level comparison). The overlay is a diagnostic, not a score.
 
 ## Review findings (rendered pages, 60 dpi)
 
@@ -71,7 +71,7 @@ Pages reviewed in the final layout: 1 (caption, motion and its signature), 2 (me
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default (EB Garamond 12 pt, exact 24 pt double spacing, one-inch margins, centred PAGE footer, heading and paragraph styles). `ohsd.lua` sets the court title, the caption table, the motion's own signature (undated, after the first paragraph), the memorandum page break, the closing signature, and the certificate of service. Render: `samples/OUTPUT-sharp-motion-to-dismiss.docx` and `.docx.pdf` (LibreOffice 26.8.1, EB Garamond embedded), 7 pages, the same count as the typst render. Reviewed: all 7 pages of the `.docx.pdf` and all 7 pages of the typst render, at 60 dpi, in the final state.
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default (EB Garamond 12 pt, exact 24 pt double spacing, one-inch margins, centred PAGE footer, heading and paragraph styles). `ohsd.lua` sets the court title, the caption table, the motion's own signature (undated, after the first paragraph), the memorandum page break, the closing signature, and the certificate of service. Render: `usage/OUTPUT-ohsd-motion-brief-sharpmotiontodismiss.docx` and `.docx.pdf` (LibreOffice 26.8.1, EB Garamond embedded), 7 pages, the same count as the typst render. Reviewed: all 7 pages of the `.docx.pdf` and all 7 pages of the typst render, at 60 dpi, in the final state.
 
 - Matches typst: letter paper, margins, EB Garamond 12 pt, 24 pt body pitch, the page count (7), the court title and caption, the motion paragraph and its signature on page 1 (signature lines 24 pt apart as in typst), the memorandum starting on page 2, the section headings, the closing and certificate on page 7, the centred page number.
 - Differs (tier 2, not chased): line breaks differ on most pages; the break after page 4 is one line later in the docx, so page 5 starts at a different sentence; the body text on page 1 starts about 6 pt lower than typst (the caption spacing constant, measured); the certificate heading has a little more space above it than in typst.

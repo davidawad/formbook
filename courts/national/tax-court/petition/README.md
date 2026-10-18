@@ -1,12 +1,12 @@
 # Tax Court: petition (Rule 34(b))
 
-**Exemplar: 1 of 2 filers.** One real filed petition is in `exemplars/`: *Lawrence v. Commissioner*, Tax Court Docket No. 20370-09 (pro se, amended petition, Form 1 items; 52 pages, OCR text layer added). Source and search history: [exemplars/SOURCE.md](exemplars/SOURCE.md). Tier 2 is judged against this one filer only, which `docs/EVAL-LOOP.md` says cannot finish tier 2; a second petition from a different filer is still needed.
+**Exemplar: 1 of 2 filers.** One real filed petition is in `usage/`: *Lawrence v. Commissioner*, Tax Court Docket No. 20370-09 (pro se, amended petition, Form 1 items; 52 pages, OCR text layer added). Source and search history: [usage/SOURCE.md](usage/SOURCE.md). Tier 2 is judged against this one filer only, which `docs/EVAL-LOOP.md` says cannot finish tier 2; a second petition from a different filer is still needed.
 
 | Check | Result |
 |---|---|
-| Exemplar | yes: `exemplars/FILED-EXAMPLE-lawrence-20370-09-petition.pdf` (1 filer) |
-| Render (`tools/render.sh`) | ok: `samples/OUTPUT-lawrence-20370-09-petition.pdf`, 8 pages, EB Garamond only, no typst warnings. `samples/OUTPUT-generic-petition.pdf` (fictional sample, 3 pages) still renders as before |
-| Overlay (`tools/overlay.sh`) | ok: `samples/OVERLAY-lawrence-20370-09-petition.pdf` and `.txt` (page map: pages 2 to 7 pair with filed pages 2, 3, 4, 6, 7, 8; page 1 and page 8 pair with filed page 51, because the caption and signature text is mostly unreadable in the OCR) |
+| Exemplar | yes: `usage/SAMPLE-tax-petition-lawrence2037009.pdf` (1 filer) |
+| Render (`tools/render.sh`) | ok: `usage/OUTPUT-tax-petition-lawrence2037009.typst.pdf`, 8 pages, EB Garamond only, no typst warnings. `usage/OUTPUT-tax-petition-generic.typst.pdf` (fictional sample, 3 pages) still renders as before |
+| Overlay (`tools/overlay.sh`) | ok: `usage/OVERLAY-lawrence-20370-09-petition.pdf` and `.txt` (page map: pages 2 to 7 pair with filed pages 2, 3, 4, 6, 7, 8; page 1 and page 8 pair with filed page 51, because the caption and signature text is mostly unreadable in the OCR) |
 | Pages reviewed | 8 of 8 for the transcribed sample (Gate 2, below); 3 of 3 for the fictional sample |
 
 ## What is here
@@ -15,21 +15,21 @@
 |---|---|
 | `typst/tax-petition.typ` | The template: `tax-petition(meta, body)`. Every number is a named parameter at the top, and each traces to a rule. |
 | `typst/main.typ` | Entry point. Reads `--input sample=...`, splits frontmatter from body, calls the template. |
-| `samples/INPUT-lawrence-20370-09-petition.md` | Transcribed from the exemplar: caption, Form 1 items 1 to 6, sections I to IV (pages 1 to 8 of the filing, in page order), the omitted pages marked, the prayer and the signature block (page 51). The filer's text is reproduced for layout only. Address and telephone are placeholders. |
-| `samples/OUTPUT-lawrence-20370-09-petition.pdf` | The render of that sample. |
-| `samples/OVERLAY-lawrence-20370-09-petition.pdf`, `.txt` | The red/blue overlay against the exemplar, and its page map. |
-| `samples/INPUT-generic-petition.md` | Fictional sample: two petitioners, the notice of deficiency, assignments of error, facts, special matters, the prayer, the signature block. Kept as a second, structurally different sample. |
-| `samples/OUTPUT-generic-petition.pdf` | The render of the fictional sample. |
-| `exemplars/FILED-EXAMPLE-lawrence-20370-09-petition.pdf`, `exemplars/SOURCE.md` | The exemplar (filed as Exhibit 6 to a public bankruptcy filing) and its source record. |
+| `usage/INPUT-tax-petition-lawrence2037009.md` | Transcribed from the exemplar: caption, Form 1 items 1 to 6, sections I to IV (pages 1 to 8 of the filing, in page order), the omitted pages marked, the prayer and the signature block (page 51). The filer's text is reproduced for layout only. Address and telephone are placeholders. |
+| `usage/OUTPUT-tax-petition-lawrence2037009.typst.pdf` | The render of that sample. |
+| `usage/OVERLAY-lawrence-20370-09-petition.pdf`, `.txt` | The red/blue overlay against the exemplar, and its page map. |
+| `usage/INPUT-tax-petition-generic.md` | Fictional sample: two petitioners, the notice of deficiency, assignments of error, facts, special matters, the prayer, the signature block. Kept as a second, structurally different sample. |
+| `usage/OUTPUT-tax-petition-generic.typst.pdf` | The render of the fictional sample. |
+| `usage/SAMPLE-tax-petition-lawrence2037009.pdf`, `usage/SOURCE.md` | The exemplar (filed as Exhibit 6 to a public bankruptcy filing) and its source record. |
 
 Naming: the repo tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, and read the `INPUT-<id>.md` file name. This folder follows that, not the `<id>.pdf` names in the task brief.
 
 Build (from the repo root, with the toolchain on PATH):
 
 ```sh
-sh tools/render.sh courts/national/tax-court/petition samples/INPUT-lawrence-20370-09-petition.md
+sh tools/render.sh courts/national/tax-court/petition usage/INPUT-tax-petition-lawrence2037009.md
 sh tools/overlay.sh courts/national/tax-court/petition lawrence-20370-09-petition
-sh tools/render.sh courts/national/tax-court/petition samples/INPUT-generic-petition.md
+sh tools/render.sh courts/national/tax-court/petition usage/INPUT-tax-petition-generic.md
 ```
 
 ## Governing rules
@@ -87,7 +87,7 @@ The page number is not typst's `footer`. In typst 0.15 the footer's position did
 
 ## Gate 2: visual review of the current PDF
 
-Reviewed 2026-10-14. sha256 of `samples/OUTPUT-generic-petition.pdf`: `89edd40d9cbfd0c4eeebb68d212b2dbb2702b5004a1baf9c1fc089a0a7c69e2c` (re-rendered 2026-10-14 for the fonts pass; the face is unchanged, and the pages were looked at again). Every page was rendered at 60 dpi and looked at. Page 1 is compared with the rules, since there is no exemplar.
+Reviewed 2026-10-14. sha256 of `usage/OUTPUT-tax-petition-generic.typst.pdf`: `89edd40d9cbfd0c4eeebb68d212b2dbb2702b5004a1baf9c1fc089a0a7c69e2c` (re-rendered 2026-10-14 for the fonts pass; the face is unchanged, and the pages were looked at again). Every page was rendered at 60 dpi and looked at. Page 1 is compared with the rules, since there is no exemplar.
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -99,7 +99,7 @@ No row is `OPEN`. The overlay (tier 3, a diagnostic) cannot be produced without 
 
 ## Gate 2 for the transcribed sample (Lawrence exemplar), 2026-10-15
 
-Reviewed 2026-10-15. sha256 of `samples/OUTPUT-lawrence-20370-09-petition.pdf`: `3a403f42895d3dd6df530b6fbea9c181f94116c7e5cf7b51c49a4e3143b57c32`. Every page was rendered at 60 dpi (`pdftoppm -r 60`) and looked at, after the last edit. Compared with the exemplar's pages as read from the scans (exemplar page numbers are the filing's own "Page X of 52").
+Reviewed 2026-10-15. sha256 of `usage/OUTPUT-tax-petition-lawrence2037009.typst.pdf`: `3a403f42895d3dd6df530b6fbea9c181f94116c7e5cf7b51c49a4e3143b57c32`. Every page was rendered at 60 dpi (`pdftoppm -r 60`) and looked at, after the last edit. Compared with the exemplar's pages as read from the scans (exemplar page numbers are the filing's own "Page X of 52").
 
 | Page | Compared with | Finding | Status |
 |---|---|---|---|
@@ -116,7 +116,7 @@ No row is `OPEN`. The sample transcribes pages 1 to 8 and 51 of the 52-page peti
 
 ## Gate 2 for the fictional sample
 
-Unchanged from 2026-10-14 (the earlier pass above, sha256 `89edd40d...` of the old `OUTPUT-generic-petition.pdf`). It has no exemplar, so no overlay exists for it.
+Unchanged from 2026-10-14 (the earlier pass above, sha256 `89edd40d...` of the old `OUTPUT-tax-petition-generic.typst.pdf`). It has no exemplar, so no overlay exists for it.
 
 ## Open choices and gaps
 
@@ -130,7 +130,7 @@ Unchanged from 2026-10-14 (the earlier pass above, sha256 `89edd40d...` of the o
 
 ## Engines
 
-**docx** (`docx/reference.docx` from `docx/build-reference.sh`, and `docx/tax-petition.lua`). Output: `samples/OUTPUT-generic-petition.docx` and `samples/OUTPUT-generic-petition.docx.pdf` (LibreOffice conversion, 3 pages).
+**docx** (`docx/reference.docx` from `docx/build-reference.sh`, and `docx/tax-petition.lua`). Output: `usage/OUTPUT-tax-petition-generic.docx` and `usage/OUTPUT-tax-petition-generic.docx.pdf` (LibreOffice conversion, 3 pages).
 
 - Matches the typst output: EB Garamond 14 pt throughout (`pdffonts` shows only EBGaramond-Regular and EBGaramond-Bold); letter, 1 in side margins, 1 in top and bottom; double spacing as exact 24.1 pt lines and single as exact 14.7 pt; 0.5 in first-line indent; caption with the ")" column and "Docket No."; centered bold headings; signature block with the rule above the name; centered page number. Page breaks are the same as the typst render (6(d) ends page 2, 6(e) starts page 3). Word text of both renders matches.
 - Differs: the caption, title and signature block are built by the filter as borderless tables, so their positions differ from typst by a few points. The page number sits at the footer distance (0.75 in), not at typst's exact 55.8 pt from the edge.

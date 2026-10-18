@@ -1,15 +1,15 @@
 # caed: complaint
 
 Doc type: **complaint** in the United States District Court for the Eastern District of California (`caed`).
-Folder: `courts/ninth-circuit/california/federal/eastern-district/complaint/` (self-contained; the court root's `typst/` and `samples/` are not touched).
+Folder: `courts/ninth-circuit/california/federal/eastern-district/complaint/` (self-contained; the court root's `typst/` and `usage/` are not touched).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-morgan-brothers-1-26-cv-07747-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-morgan-complaint.md`: caption, paragraphs 1 to 35 (pages 1 to 11 of the filing), the prayer (1 to 12), signature, jury demand. Paragraphs 36 to 85 and Counts 1 to 8 are not transcribed (see Known gaps) |
+| exemplar | yes: `usage/SAMPLE-caed-complaint-morganbrothers126cv07747.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-caed-complaint-morgan.md`: caption, paragraphs 1 to 35 (pages 1 to 11 of the filing), the prayer (1 to 12), signature, jury demand. Paragraphs 36 to 85 and Counts 1 to 8 are not transcribed (see Known gaps) |
 | typeface | face required: none (no E.D. Cal. local rule or Fed. R. Civ. P. 10 names a face). Filed exemplar is Times New Roman, which is not a requirement. Font: **EB Garamond** (kept; `docs/FONTS.md` "No face named"). Metric-compatible: n/a. Visual only: EB Garamond is not Times. |
-| render | ok: `samples/OUTPUT-morgan-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, EBGaramond-Bold embedded), no warnings (`sh tools/render.sh <this folder> samples/INPUT-morgan-complaint.md`) |
-| overlay | ok: `samples/OVERLAY-morgan-complaint.pdf` and `samples/OVERLAY-morgan-complaint.txt` (`sh tools/overlay.sh <this folder> morgan-complaint`) |
+| render | ok: `usage/OUTPUT-caed-complaint-morgan.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, EBGaramond-Bold embedded), no warnings (`sh tools/render.sh <this folder> usage/INPUT-caed-complaint-morgan.md`) |
+| overlay | ok: `usage/OVERLAY-morgan-complaint.pdf` and `usage/OVERLAY-morgan-complaint.txt` (`sh tools/overlay.sh <this folder> morgan-complaint`) |
 | pages reviewed | 12 of 12 (every page rendered at 60 dpi and viewed; pages 1 to 10 were viewed before a footer-title and signature-line fix, and that fix is confined to the footer text and the signature block, which pages 11 and 12 show in their final form) |
 
 File names: the tools name files by role (`INPUT-` is the markdown, `OUTPUT-` is our render, `OVERLAY-` is the comparison). This folder follows them rather than the `<id>.md` / `<id>-overlay.pdf` names in the brief, because `tools/render.sh`, `tools/overlay.sh` and `CLAUDE.md` read those names.
@@ -57,11 +57,11 @@ Not produced by this template (separate filings that accompany a complaint): the
 
 ## Overlay
 
-`samples/OVERLAY-morgan-complaint.pdf`: our render in red, the filed exemplar in blue, multiplied (black where both agree), one page per sample page, each paired with the exemplar page sharing the most words. `OVERLAY-morgan-complaint.txt` has the pairing and word-overlap percentages. The overlay is a diagnostic, not a score. The sample is an excerpt: pages 1 to 9 pair with exemplar pages 1 to 10 at 46 to 77 percent word overlap, and pages 10 to 12 pair with exemplar pages 24, 25 and 27 (the prayer and signature) at 55 to 79 percent. The lower pairs (pages 5, 9 and 12) are where the excerpt skips pages, not where the template differs.
+`usage/OVERLAY-morgan-complaint.pdf`: our render in red, the filed exemplar in blue, multiplied (black where both agree), one page per sample page, each paired with the exemplar page sharing the most words. `OVERLAY-morgan-complaint.txt` has the pairing and word-overlap percentages. The overlay is a diagnostic, not a score. The sample is an excerpt: pages 1 to 9 pair with exemplar pages 1 to 10 at 46 to 77 percent word overlap, and pages 10 to 12 pair with exemplar pages 24, 25 and 27 (the prayer and signature) at 55 to 79 percent. The lower pairs (pages 5, 9 and 12) are where the excerpt skips pages, not where the template differs.
 
 ## Known gaps and open choices
 
-1. **One exemplar.** The brief asks for one exemplar per doc type. EVAL-LOOP's tier-2 rule asks for two or three filers. Other E.D. Cal. complaints were found by CourtListener search (not saved; see `exemplars/SOURCE.md`): Kennedy v. Thrive Causemetics (1:26-cv-07817, class action, 10 pp.) and others. Tier 2 is therefore **not** judged against two filers yet.
+1. **One exemplar.** The brief asks for one exemplar per doc type. EVAL-LOOP's tier-2 rule asks for two or three filers. Other E.D. Cal. complaints were found by CourtListener search (not saved; see `usage/SOURCE.md`): Kennedy v. Thrive Causemetics (1:26-cv-07817, class action, 10 pp.) and others. Tier 2 is therefore **not** judged against two filers yet.
 2. **Font.** No E.D. Cal. rule names a typeface or type size. The exemplar is Times New Roman 12 pt. This template uses EB Garamond, the only font vendored in `fonts/`. EB Garamond at 12 pt has a smaller x-height than Times at 12 pt. This is an open choice for David (a vendored Times-metric font would remove the difference); it is not a rule failure.
 3. **Excerpt.** The sample transcribes paragraphs 1 to 35 (exemplar pages 1 to 11), the prayer (exemplar pages 24 to 25), the signature and the jury demand (pages 26 to 27). Paragraphs 36 to 85 and Counts 1 to 8 (exemplar pages 11 to 23) are not transcribed. The filed paragraph numbers match the sample's (they are the filed numbers), so the sample's numbering is the filing's own up to paragraph 35. The filing's signature appears twice (after the prayer and after the jury demand); the sample carries both.
 4. **Footer.** The exemplar centers the page number on its own line with the title below. L.R. 130(d) says the number and the description are on the same line, so the template follows the rule. This differs from the exemplar on purpose.
@@ -95,9 +95,9 @@ Defects found and fixed during review: the signer's name printed three times (sa
 
 ### docx (checked with LibreOffice only; Word is not available here)
 
-- Build: `sh docx/build-reference.sh docx/reference.docx` (styles, the numbered-line header frame, the footer, page borders); render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-morgan-complaint.md` writes `samples/OUTPUT-morgan-complaint.docx` and `samples/OUTPUT-morgan-complaint.docx.pdf` (12 pages; EB Garamond embedded, no other face).
-- Pages viewed: all 12 pages of `OUTPUT-morgan-complaint.docx.pdf` at 60 dpi, in the final build.
-- No typst `OUTPUT` PDF exists in `samples/` for this sample, so the docx was compared with the typst template source and the rules above, not with a typst render page by page.
+- Build: `sh docx/build-reference.sh docx/reference.docx` (styles, the numbered-line header frame, the footer, page borders); render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-caed-complaint-morgan.md` writes `usage/OUTPUT-caed-complaint-morgan.docx` and `usage/OUTPUT-caed-complaint-morgan.docx.pdf` (12 pages; EB Garamond embedded, no other face).
+- Pages viewed: all 12 pages of `OUTPUT-caed-complaint-morgan.docx.pdf` at 60 dpi, in the final build.
+- No typst `OUTPUT` PDF exists in `usage/` for this sample, so the docx was compared with the typst template source and the rules above, not with a typst render page by page.
 - Matches the typst template: numbers 1 to 28 on every page (a header frame, not Word's line numbering, so blank lines are numbered too); exact 24 pt double spacing; 13.8 pt single spacing for counsel, caption and signature; counsel on lines 1 to 7 and the court title on line 8; the ruled party column of the caption; the footer with the description and the page number on one line; the lead-in on page 2.
 - Differs from typst: the signature blocks (13.8 pt single) sit between numbered lines rather than on them; the pleading rules are page borders around the text area, not lines drawn the full page height; the caption's right column wraps by LibreOffice's line breaking.
 - BLOCKED: `sh tools/check.sh <this folder> --engine docx` cannot run: it reads `court.json`, `checks.yaml` and `reviews/` in the folder, and this folder has none (the court has no `rules.md` yet; not created here). Exit 2, no stamp written. Gates 0 to 3 are therefore not run for docx; the pages were checked by eye only.

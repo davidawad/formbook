@@ -11,10 +11,10 @@ Re-check cadence: re-check annually each December 1 and whenever the court posts
 | LR | Local Rules of the U.S. District Court for the District of Massachusetts, "Effective September 8, 2026", "Including Amendments Through September 8, 2026" (combined PDF, 174 pp.; the court's rules page links it as current). Supersedes the 11-1-19 combined copy cited in the doc-type READMEs; the passages quoted here from LR 3.1, 5.1, 5.4, 7.1 and 56.1 appear with the same wording in both copies (compared 2026-10-17). | https://www.mad.uscourts.gov/general/pdf/local-rules/Combined%20Local%20Rules.pdf (linked from https://www.mad.uscourts.gov/general/rules-home.htm) |
 | ECF | CM/ECF Case Management/Electronic Case Files Administrative Procedures, "As Amended Through July, 2011" (the version linked from the court's CM/ECF page; LR 5.4(b) requires compliance) | https://www.mad.uscourts.gov/caseinfo/pdf/ECFadminProc.pdf (linked from https://www.mad.uscourts.gov/caseinfo/cmecf-general.htm) |
 | FRCP | Federal Rules of Civil Procedure, Rules 5, 5.2, 7, 7.1, 8, 10, 11, 38 | https://www.law.cornell.edu/rules/frcp/rule_5 (and `rule_5.2`, `rule_7`, `rule_7.1`, `rule_8`, `rule_10`, `rule_11`, `rule_38`) |
-| EX-C1 | Complaint: Door Systems, Inc. v. Door Systems, Inc., 1:26-cv-14133, Doc. 1 (Hamilton, Brook, Smith & Reynolds) | `complaint/exemplars/SOURCE.md` |
-| EX-C2 | Complaint: Clere v. Delta Air Lines, Inc., 1:26-cv-14437, Doc. 1 (Brody, Hardoon, Perkins & Kesten) | `complaint/exemplars/SOURCE.md` |
-| EX-M1 | Memorandum: Diaz v. Trustees of Smith College, 3:26-cv-12246, Doc. 11 (Seyfarth Shaw) | `motion-brief/exemplars/SOURCE.md` |
-| EX-M2 | Memorandum: Ferrini v. Allied World Assurance Co., 1:26-cv-10838, Doc. 49, for Starr Surplus Lines (Hinshaw & Culbertson) | `motion-brief/exemplars/SOURCE.md` |
+| EX-C1 | Complaint: Door Systems, Inc. v. Door Systems, Inc., 1:26-cv-14133, Doc. 1 (Hamilton, Brook, Smith & Reynolds) | `complaint/usage/SOURCE.md` |
+| EX-C2 | Complaint: Clere v. Delta Air Lines, Inc., 1:26-cv-14437, Doc. 1 (Brody, Hardoon, Perkins & Kesten) | `complaint/usage/SOURCE.md` |
+| EX-M1 | Memorandum: Diaz v. Trustees of Smith College, 3:26-cv-12246, Doc. 11 (Seyfarth Shaw) | `motion-brief/usage/SOURCE.md` |
+| EX-M2 | Memorandum: Ferrini v. Allied World Assurance Co., 1:26-cv-10838, Doc. 49, for Starr Surplus Lines (Hinshaw & Culbertson) | `motion-brief/usage/SOURCE.md` |
 
 Kinds: **M** = mandated by a court rule (FRCP, Local Rules, or the ECF Administrative Procedures the Local Rules incorporate). **C** = convention (seen across exemplars of different filers; the rules leave it open). **T** = project/tooling rule. **A** = author responsibility, not machine-checkable.
 

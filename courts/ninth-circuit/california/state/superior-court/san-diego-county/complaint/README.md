@@ -6,7 +6,7 @@ Status: **typst only**. latex and docx are not built for this doc type. Exemplar
 
 ## Exemplar
 
-`exemplars/FILED-EXAMPLE-sweetwater-25CU033612N-complaint.pdf`: the Attorney General's complaint in *People v. Sweetwater Care OpCo, LLC, et al.*, Case No. 25CU033612N, filed in this court on 2025-06-23 (39 pages, text-based). Provenance in `exemplars/SOURCE.md`. The brief suggested a People v. Sun Healthcare complaint; no San Diego filing under that name was found (see Searches).
+`usage/SAMPLE-calsuperct-sandiego-complaint-sweetwater25cu033612n.pdf`: the Attorney General's complaint in *People v. Sweetwater Care OpCo, LLC, et al.*, Case No. 25CU033612N, filed in this court on 2025-06-23 (39 pages, text-based). Provenance in `usage/SOURCE.md`. The brief suggested a People v. Sun Healthcare complaint; no San Diego filing under that name was found (see Searches).
 
 ## Governing rules
 
@@ -73,22 +73,22 @@ Body: a paragraph beginning with a number and a period escapes the period (`1\.`
 
 ## Sample
 
-`samples/INPUT-sweetwater-complaint.md`: transcribed from the exemplar. It covers the caption and attorney block (abridged to the lines that fit on lines 1-7: the Chief and Senior AAG lines are dropped), the introduction (¶¶ 1-9), the parties (¶¶ 10-16), ¶ 14 through subparagraph c)(v), and the signature block. It is an **excerpt**: the exemplar's remaining paragraphs (¶ 14 c)(vi) onward, causes of action, prayer) are not transcribed. Its signature block is the template's, placed after ¶ 16, not the exemplar's signature page.
+`usage/INPUT-calsuperct-sandiego-complaint-sweetwater.md`: transcribed from the exemplar. It covers the caption and attorney block (abridged to the lines that fit on lines 1-7: the Chief and Senior AAG lines are dropped), the introduction (¶¶ 1-9), the parties (¶¶ 10-16), ¶ 14 through subparagraph c)(v), and the signature block. It is an **excerpt**: the exemplar's remaining paragraphs (¶ 14 c)(vi) onward, causes of action, prayer) are not transcribed. Its signature block is the template's, placed after ¶ 16, not the exemplar's signature page.
 
-Files and names: the shared tools name files `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what `tools/render.sh` and `tools/overlay.sh` write). `<id>` is `sweetwater-complaint`; the input is `INPUT-sweetwater-complaint.md`, which the tools strip to the id.
+Files and names: the shared tools name files `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the brief's `<id>.pdf` and `<id>-overlay.pdf` names are not what `tools/render.sh` and `tools/overlay.sh` write). `<id>` is `sweetwater-complaint`; the input is `INPUT-calsuperct-sandiego-complaint-sweetwater.md`, which the tools strip to the id.
 
 ## Commands
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
-sh tools/render.sh courts/ninth-circuit/california/state/superior-court/san-diego-county/complaint samples/INPUT-sweetwater-complaint.md
+sh tools/render.sh courts/ninth-circuit/california/state/superior-court/san-diego-county/complaint usage/INPUT-calsuperct-sandiego-complaint-sweetwater.md
 sh tools/overlay.sh courts/ninth-circuit/california/state/superior-court/san-diego-county/complaint sweetwater-complaint
 ```
 
 ## Results
 
-- **render=ok.** `samples/OUTPUT-sweetwater-complaint.pdf`, 10 pages, US Letter. typst exit 0, no warnings (the render tool fails on any). Fonts: vendored Liberation Serif only (`--ignore-system-fonts`).
-- **overlay=ok.** `samples/OVERLAY-sweetwater-complaint.pdf` and `OVERLAY-sweetwater-complaint.txt`. Page map: ours p.1-p.7 match filed p.1-p.7 (word overlap 73-85%); ours p.8 matches filed p.9; ours p.9 matches filed p.10; ours p.10 (signature) matches filed p.39 at 30%, as expected for a signature page the excerpt does not reproduce. The overlay is a diagnostic, not a score.
+- **render=ok.** `usage/OUTPUT-calsuperct-sandiego-complaint-sweetwater.typst.pdf`, 10 pages, US Letter. typst exit 0, no warnings (the render tool fails on any). Fonts: vendored Liberation Serif only (`--ignore-system-fonts`).
+- **overlay=ok.** `usage/OVERLAY-sweetwater-complaint.pdf` and `OVERLAY-sweetwater-complaint.txt`. Page map: ours p.1-p.7 match filed p.1-p.7 (word overlap 73-85%); ours p.8 matches filed p.9; ours p.9 matches filed p.10; ours p.10 (signature) matches filed p.39 at 30%, as expected for a signature page the excerpt does not reproduce. The overlay is a diagnostic, not a score.
 
 ### Gate 2 review: every page rendered at 60 dpi and looked at
 
@@ -127,7 +127,7 @@ sh tools/overlay.sh courts/ninth-circuit/california/state/superior-court/san-die
 
 **typst** is the primary form (above). **docx** (`docx/`) and **latex** (not built) are secondary.
 
-**docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default (Liberation Serif 12 pt; body lines exact 24 pt; letter; top 1 in, bottom 46 pt, left 1.5 in, right 0.5 in; footer with a printed rule, a PAGE field and the title at 10 pt; line numbers restart each page; page borders as double left and single right rules). `calsuperct-sandiego-complaint.lua` builds the first page (attorney block in a 168 pt row, fee label, court title, caption table with its rules), the jury line and the signature block from the frontmatter. `render.sh` runs pandoc and fills the footer title from `footer_title`. Output: `samples/OUTPUT-sweetwater-complaint.docx`.
+**docx** (`docx/`): `build-reference.sh` makes `docx/reference.docx` from pandoc's default (Liberation Serif 12 pt; body lines exact 24 pt; letter; top 1 in, bottom 46 pt, left 1.5 in, right 0.5 in; footer with a printed rule, a PAGE field and the title at 10 pt; line numbers restart each page; page borders as double left and single right rules). `calsuperct-sandiego-complaint.lua` builds the first page (attorney block in a 168 pt row, fee label, court title, caption table with its rules), the jury line and the signature block from the frontmatter. `render.sh` runs pandoc and fills the footer title from `footer_title`. Output: `usage/OUTPUT-calsuperct-sandiego-complaint-sweetwater.docx`.
 
 - Matches typst: font and size, exact 24 pt grid, margins, attorney block height, court title on line 8, caption layout, footer, signature block.
 - Differs (Word and LibreOffice paginate differently; judge on a render, not on this list):
@@ -136,5 +136,5 @@ sh tools/overlay.sh courts/ninth-circuit/california/state/superior-court/san-die
   - Footnotes are single-spaced (CRC 2.108(3) allows it); typst double-spaces them.
   - Caption indents come from the leading spaces in the frontmatter, read from the sample file.
   - The attorney row is "at least" 168 pt: a longer block grows the row instead of failing as typst does.
-- BLOCKED (docx.pdf gates): LibreOffice is not installed on this box, so `samples/OUTPUT-sweetwater-complaint.docx.pdf` cannot be made and Gates 0-3 on the docx.pdf were not run. No docx page was viewed (`pages_reviewed=0`).
+- BLOCKED (docx.pdf gates): LibreOffice is not installed on this box, so `usage/OUTPUT-sweetwater-complaint.docx.pdf` cannot be made and Gates 0-3 on the docx.pdf were not run. No docx page was viewed (`pages_reviewed=0`).
 - BLOCKED by construction: CRC 2.108 consecutive numbering on every line of every page. Table rows (attorney block, caption) are not numbered by Word section numbering, so page 1 lines 1-10 cannot pass without a per-page numbered frame. Not verifiable here.

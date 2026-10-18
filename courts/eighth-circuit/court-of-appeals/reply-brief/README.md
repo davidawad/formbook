@@ -1,13 +1,13 @@
 # Eighth Circuit Court of Appeals: reply brief
 
-Doc type `reply-brief` for court `ca8` (folder `courts/eighth-circuit/court-of-appeals/`). One self-contained folder per doc type; the court-root `typst/` and `samples/` (ca8 court folder, not this one) are untouched.
+Doc type `reply-brief` for court `ca8` (folder `courts/eighth-circuit/court-of-appeals/`). One self-contained folder per doc type; the court-root `typst/` and `usage/` (ca8 court folder, not this one) are untouched.
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-delgado-midland-24-1786-reply-brief.pdf` | Real filed reply brief, 8th Cir. No. 24-1786 (19 pp.). Provenance in `exemplars/SOURCE.md`. |
-| `samples/INPUT-delgado-midland.md` | Transcription of that brief (frontmatter = cover, counsel, signature, certificates, authorities; body = argument, conclusion, footnotes). |
-| `samples/OUTPUT-delgado-midland.pdf` | `sh tools/render.sh courts/eighth-circuit/court-of-appeals/reply-brief samples/INPUT-delgado-midland.md` (18 pages). |
-| `samples/OVERLAY-delgado-midland.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eighth-circuit/court-of-appeals/reply-brief delgado-midland` (red = ours, blue = filed, black = both). |
+| `usage/SAMPLE-ca8-reply-brief-delgadomidland241786.pdf` | Real filed reply brief, 8th Cir. No. 24-1786 (19 pp.). Provenance in `usage/SOURCE.md`. |
+| `usage/INPUT-ca8-reply-brief-delgadomidland.md` | Transcription of that brief (frontmatter = cover, counsel, signature, certificates, authorities; body = argument, conclusion, footnotes). |
+| `usage/OUTPUT-ca8-reply-brief-delgadomidland.typst.pdf` | `sh tools/render.sh courts/eighth-circuit/court-of-appeals/reply-brief usage/INPUT-ca8-reply-brief-delgadomidland.md` (18 pages). |
+| `usage/OVERLAY-delgado-midland.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eighth-circuit/court-of-appeals/reply-brief delgado-midland` (red = ours, blue = filed, black = both). |
 | `typst/main.typ` | Entry point: reads the sample named by `--input sample=...`. |
 | `typst/ca8-reply-brief.typ` | Template `ca8-reply-brief(meta, md)`. Content-agnostic; the numbers are named parameters at the top. |
 
@@ -50,7 +50,7 @@ Body: `# Heading` is a section (centered); `##` A.; `###` 1.; `####` a.; `#####`
 
 ## What the overlay shows
 
-`samples/OVERLAY-delgado-midland.pdf` puts our render (red) over the filed brief (blue), page by page. Pages are paired by word overlap (`-overlay.txt`), not by index. The pairing scores run 40% to 100% (page 1: 100%, page 2: 90%, page 17: 40%). The differences are layout, not content:
+`usage/OVERLAY-delgado-midland.pdf` puts our render (red) over the filed brief (blue), page by page. Pages are paired by word overlap (`-overlay.txt`), not by index. The pairing scores run 40% to 100% (page 1: 100%, page 2: 90%, page 17: 40%). The differences are layout, not content:
 
 - The filed brief is Word output in Georgia; ours is EB Garamond with typst's line breaking, so lines and page breaks fall differently and the pages do not coincide.
 - Pages 1-2 (cover, contents) overlay closely. Our TOA runs 3 pages (ii-iv) against the filed 2; the page numbers in the TOA and TOC therefore differ from the filed ones.
@@ -58,7 +58,7 @@ Body: `# Heading` is a section (centered); `##` A.; `###` 1.; `####` a.; `#####`
 
 ## Pages reviewed (Gate 2)
 
-All 18 pages of `samples/OUTPUT-delgado-midland.pdf` were rasterized at 60 dpi (`pdftoppm -r 60`) and viewed. Findings and fixes made:
+All 18 pages of `usage/OUTPUT-ca8-reply-brief-delgadomidland.typst.pdf` were rasterized at 60 dpi (`pdftoppm -r 60`) and viewed. Findings and fixes made:
 
 | Page (PDF) | Finding | Result |
 |---|---|---|
@@ -72,7 +72,7 @@ All 18 pages of `samples/OUTPUT-delgado-midland.pdf` were rasterized at 60 dpi (
 
 ## Verification pass 2026-10-16 (fb-595.26.8)
 
-- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/reply-brief samples/INPUT-delgado-midland.md` exit 0, no typst warnings, 18 pages (same as the committed PDF), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0); pairings unchanged (40% to 100%, as above).
+- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/reply-brief usage/INPUT-ca8-reply-brief-delgadomidland.md` exit 0, no typst warnings, 18 pages (same as the committed PDF), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0); pairings unchanged (40% to 100%, as above).
 - Viewed: all 18 pages at 60 dpi, the exemplar's page 1 against our cover, and all 18 overlay pages at 40 dpi. Pages 17 and 18 viewed again after the fixes; the text of pages 1-16 is unchanged by them.
 - Fixed (tier 2): the signature under both certificates was set in markup with `\` breaks, so each line picked up a leading space and the three lines stepped to the right. It is now one `cert-sig` block, flush left from mid-page like the signature block, with the role line from `signature.role` (default "Counsel for Appellant") instead of fixed text.
 - Fixed (tier 2): "(EB Garamond, 14-point)" was boxed as one unit and dropped to its own line, leaving a short line above. Only each comma-separated part is kept together now, so "14-point" still never breaks at the hyphen.
@@ -93,4 +93,4 @@ All 18 pages of `samples/OUTPUT-delgado-midland.pdf` were rasterized at 60 dpi (
 
 - **typst** (primary, `typst/`): the reference for the court's form.
 - **latex** (`latex/template.tex`, `latex/ca8.lua`): tectonic (XeTeX) with the vendored EB Garamond; the same page order, 14 pt type, 31.4 pt double spacing, 1 in margins, centered page numbers, TOC and TOA with page numbers (TOA pages collected from a first pass), certificates. Differences: body is shorter in places (page breaks differ from typst by a few lines, so TOC page numbers differ); the LaTeX certificate of compliance uses the source word count (see the PR for the reconciliation with the typst figure); cover and heading spacing are approximate, not measured per page. The filter and template in this folder are the same as the other two briefs apart from the `CFG` block in `ca8.lua` and the cover/signature/certificate macros in `template.tex`.
-- **docx** (`docx/reference.docx`, `docx/ca8.lua`, `docx/build-reference.sh`): pandoc on reference.docx (EB Garamond 14 pt, exact 31.4 pt line spacing, 1 in margins, PAGE footer). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `samples/OUTPUT-<id>.docx.pdf` cannot be produced and the docx checks (Gates 0 to 3) cannot run. Known limits, per docs/DOCX.md: the table of contents is a TOC field (page numbers appear after field update); the table of authorities lists authorities without page numbers (a TOA field needs the same update, and LibreOffice does not honor it); cover and certificates are plain centered paragraphs, not the typst layout.
+- **docx** (`docx/reference.docx`, `docx/ca8.lua`, `docx/build-reference.sh`): pandoc on reference.docx (EB Garamond 14 pt, exact 31.4 pt line spacing, 1 in margins, PAGE footer). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `usage/OUTPUT-<id>.docx.pdf` cannot be produced and the docx checks (Gates 0 to 3) cannot run. Known limits, per docs/DOCX.md: the table of contents is a TOC field (page numbers appear after field update); the table of authorities lists authorities without page numbers (a TOA field needs the same update, and LibreOffice does not honor it); cover and certificates are plain centered paragraphs, not the typst layout.

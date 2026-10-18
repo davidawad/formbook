@@ -4,10 +4,10 @@ Doc type **motion-brief**: the memorandum in support of a Rule 12(b) motion to d
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-cobb-v-charleston-county-school-district-2-25-cv-08752-motion-brief.pdf` (1 filer: defendant's counsel; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-cobb-motion-brief.md` (the full 7-page memorandum transcribed: caption, cover title, Introduction, Legal Standard, Argument with block quotation, Conclusion, footnote 1, signature block) |
-| render | ok: `samples/OUTPUT-cobb-motion-brief.pdf`, 6 pages, typst 0.15.0, vendored Liberation Serif only (embedded per `pdffonts`), no warnings |
-| overlay | ok: `samples/OVERLAY-cobb-motion-brief.pdf` and `samples/OVERLAY-cobb-motion-brief.txt` |
+| exemplar | yes: `usage/SAMPLE-scd-motion-brief-cobbvcharlestoncountyschooldistrict225cv08752.pdf` (1 filer: defendant's counsel; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-scd-motion-brief-cobb.md` (the full 7-page memorandum transcribed: caption, cover title, Introduction, Legal Standard, Argument with block quotation, Conclusion, footnote 1, signature block) |
+| render | ok: `usage/OUTPUT-scd-motion-brief-cobb.typst.pdf`, 6 pages, typst 0.15.0, vendored Liberation Serif only (embedded per `pdffonts`), no warnings |
+| overlay | ok: `usage/OVERLAY-cobb-motion-brief.pdf` and `usage/OVERLAY-cobb-motion-brief.txt` |
 | pages reviewed | 6 of 6 (every page rendered at 60 dpi and viewed after the last template change) |
 | tier-1 font (L.R. 1.05(B)) | Met: Times New Roman (one of the three faces the rule names) set as its metric-compatible substitute **Liberation Serif** (see Known gaps) |
 
@@ -38,8 +38,8 @@ Render and overlay (from the repo root; the doc-type folder is the court dir):
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
 D=courts/fourth-circuit/south-carolina/federal/district/motion-brief
-sh tools/render.sh $D samples/INPUT-cobb-motion-brief.md     # -> samples/OUTPUT-cobb-motion-brief.pdf
-sh tools/overlay.sh $D cobb-motion-brief                      # -> samples/OVERLAY-cobb-motion-brief.{pdf,txt}
+sh tools/render.sh $D usage/INPUT-scd-motion-brief-cobb.md     # -> usage/OUTPUT-scd-motion-brief-cobb.typst.pdf
+sh tools/overlay.sh $D cobb-motion-brief                      # -> usage/OVERLAY-cobb-motion-brief.{pdf,txt}
 ```
 
 File names follow the tools (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.pdf` / `<id>-overlay.pdf` form in the brief, because `tools/overlay.sh` reads `OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.{pdf,txt}`.
@@ -80,13 +80,13 @@ CourtListener search API, `court=scd`, `type=rd`, query `"MOTION to Dismiss" "12
 
 typst (`typst/`) is the reference. The docx engine (`docx/`) was built to its form and every page was compared with the typst page.
 
-| Engine | Output (`samples/`) | Status |
+| Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-cobb-motion-brief.pdf` (6 pp.) | reference |
-| docx | `OUTPUT-cobb-motion-brief.docx` and `OUTPUT-cobb-motion-brief.docx.pdf` (7 pp.) | ok: LibreOffice converts it without error; all 7 pages of the `.docx.pdf` viewed at 60 dpi, set beside the typst pages 1 to 6 |
+| typst | `OUTPUT-scd-motion-brief-cobb.typst.pdf` (6 pp.) | reference |
+| docx | `OUTPUT-scd-motion-brief-cobb.docx` and `OUTPUT-scd-motion-brief-cobb.docx.pdf` (7 pp.) | ok: LibreOffice converts it without error; all 7 pages of the `.docx.pdf` viewed at 60 dpi, set beside the typst pages 1 to 6 |
 
 ```sh
-sh tools/render.sh --engine docx courts/fourth-circuit/south-carolina/federal/district/motion-brief samples/INPUT-cobb-motion-brief.md
+sh tools/render.sh --engine docx courts/fourth-circuit/south-carolina/federal/district/motion-brief usage/INPUT-scd-motion-brief-cobb.md
 sh docx/make-reference.sh     # rebuilds docx/reference.docx (run from the doc-type folder)
 ```
 
@@ -98,6 +98,6 @@ sh docx/make-reference.sh     # rebuilds docx/reference.docx (run from the doc-t
   - The block quotation is single-spaced and indented a half inch on both sides. Typst sets it double-spaced. L.R. 1.05(E) allows indented quotations to be single-spaced, so the docx follows the rule text; the typst form is not wrong, but the two differ here.
   - The title is centered on two lines. Typst's title wraps with its first line running to the full measure.
   - Signature block lines are Word's 13.8 pt single; typst's are tighter.
-  - **Typst footnotes are below the rule minimum.** Measured on `OUTPUT-cobb-motion-brief.pdf`, footnote text is about 9 pt tall (glyph box 9.3 pt), against 13.3 pt for the 12-pt docx footnote. L.R. 1.05(C) sets 12 pt for footnotes. The typst template needs its footnote size fixed; it was not changed here.
+  - **Typst footnotes are below the rule minimum.** Measured on `OUTPUT-scd-motion-brief-cobb.typst.pdf`, footnote text is about 9 pt tall (glyph box 9.3 pt), against 13.3 pt for the 12-pt docx footnote. L.R. 1.05(C) sets 12 pt for footnotes. The typst template needs its footnote size fixed; it was not changed here.
 - *Not verified:* opening in Microsoft Word (no Word on this box). The `.docx` is a valid zip with well-formed XML parts, and LibreOffice converts it without a conversion error.
 - *BLOCKED:* none. This court has no `checks.yaml`, so no check ID was run against the docx; the review is by eye.

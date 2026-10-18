@@ -5,11 +5,11 @@ Folder: `courts/fourth-circuit/west-virginia/federal/northern-district/motion-br
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-wv-rivers-amsted-1-26-cv-00046-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-amsted-motion-brief.md` (a portion of the 26-page memorandum; see below) |
+| exemplar | yes: `usage/SAMPLE-wvnd-motion-brief-wvriversamsted126cv00046.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-wvnd-motion-brief-amsted.md` (a portion of the 26-page memorandum; see below) |
 | typeface | Liberation Serif (vendored; the Times New Roman substitute, metric-compatible), 12 point. LR Civ P 7.02(a) names Times New Roman, Courier New or Arial. Was EB Garamond. |
-| render | ok: `samples/OUTPUT-amsted-motion-brief.pdf`, 8 pages (8 before the font change), typst 0.15.0, vendored Liberation Serif only, `pdffonts`: LiberationSerif, -Bold, -Italic embedded, no warnings |
-| overlay | ok: `samples/OVERLAY-amsted-motion-brief.pdf` and `samples/OVERLAY-amsted-motion-brief.txt`, run against the RECAP copy in `exemplars/SOURCE.md` (the exemplar PDF is not in this checkout, so the tool's default `exemplars/*.pdf` lookup fails; pass the file as the third argument) |
+| render | ok: `usage/OUTPUT-wvnd-motion-brief-amsted.typst.pdf`, 8 pages (8 before the font change), typst 0.15.0, vendored Liberation Serif only, `pdffonts`: LiberationSerif, -Bold, -Italic embedded, no warnings |
+| overlay | ok: `usage/OVERLAY-amsted-motion-brief.pdf` and `usage/OVERLAY-amsted-motion-brief.txt`, run against the RECAP copy in `usage/SOURCE.md` (the exemplar PDF is not in this checkout, so the tool's default `usage/*.pdf` lookup fails; pass the file as the third argument) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the font change) |
 | page limit | the template asserts the memorandum (everything before the certificate of service) is at most 25 pages (LR Civ P 7.02(a)); the sample is 7 pages before the certificate |
 
@@ -53,7 +53,7 @@ Primary sources: the Local Rules of the Northern District of West Virginia (the 
 
 ## What the sample is (and is not)
 
-`samples/INPUT-amsted-motion-brief.md` transcribes the memorandum's opening paragraphs, the statement of facts with its footnotes 1 to 3, the legal standard, the start of Argument I and Argument II (the text of the filing, cut at the paragraph where Argument II's footnote 6 would appear, which is not transcribed), a bracketed note for the filing's pages 8 to 22, the conclusion, the signature block and the certificate of service. Footnotes 4 and 6 of the filing are not transcribed. Case names are italicized by convention, because the exemplar's text layer carries no italics. The certificate's served list is the template's form, not the exemplar's words (see known gaps).
+`usage/INPUT-wvnd-motion-brief-amsted.md` transcribes the memorandum's opening paragraphs, the statement of facts with its footnotes 1 to 3, the legal standard, the start of Argument I and Argument II (the text of the filing, cut at the paragraph where Argument II's footnote 6 would appear, which is not transcribed), a bracketed note for the filing's pages 8 to 22, the conclusion, the signature block and the certificate of service. Footnotes 4 and 6 of the filing are not transcribed. Case names are italicized by convention, because the exemplar's text layer carries no italics. The certificate's served list is the template's form, not the exemplar's words (see known gaps).
 
 ## Known gaps and open choices
 
@@ -77,11 +77,11 @@ Primary sources: the Local Rules of the Northern District of West Virginia (the 
 - Page 7: the end of the conclusion; "DATED: August 5, 2026", "Respectfully submitted,", "s/ Peter Raupp", counsel lines with the e-mail and telephone. The page carries only the closing and signature (see gap 2). Pass, with the note.
 - Page 8: CERTIFICATE OF SERVICE on its own page with the caption repeated; the statement; the served list; "s/ Peter Raupp" and the role line. Pass.
 
-Overlay (`samples/OVERLAY-amsted-motion-brief.txt`): pages 1–5 pair with the same filed pages (95.6%, 85.8%, 79.3%, 68.9%, 50.2% word overlap); page 6 and page 7 pair with filed page 24 (the sample skips filed pages 8 to 22), page 8 with filed page 26 (the certificate). The pairing is a diagnostic, not a score.
+Overlay (`usage/OVERLAY-amsted-motion-brief.txt`): pages 1–5 pair with the same filed pages (95.6%, 85.8%, 79.3%, 68.9%, 50.2% word overlap); page 6 and page 7 pair with filed page 24 (the sample skips filed pages 8 to 22), page 8 with filed page 26 (the certificate). The pairing is a diagnostic, not a score.
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` builds `reference.docx`; `wvnd-motion-brief.lua` writes the caption, the heading numbers, the signature block and the certificate). Output: `samples/OUTPUT-amsted-motion-brief.docx` and `.docx.pdf` (LibreOffice PDF). Pages reviewed: 8 of 8, every page rendered at 60 dpi and viewed.
+DOCX (`docx/`: `build-reference.sh` builds `reference.docx`; `wvnd-motion-brief.lua` writes the caption, the heading numbers, the signature block and the certificate). Output: `usage/OUTPUT-wvnd-motion-brief-amsted.docx` and `.docx.pdf` (LibreOffice PDF). Pages reviewed: 8 of 8, every page rendered at 60 dpi and viewed.
 
 - Matches the typst form: Liberation Serif 12 pt (`pdffonts`: LiberationSerif only), letter, 1 in margins, body double spaced at an exact 24 pt pitch, 0.5 in first-line indent, the caption with a ")" column (each line an exact 13.8 pt row; the case number beside its row), the brief title bold and centered, level 1 headings centered bold underlined, level 2 headings "I." with a hanging label, signature block at 3.25 in ("DATED:", "Respectfully submitted,", the "s/" line), footnotes native and 11 pt single spaced, page number centered at the foot, the certificate of service on its own page with the caption repeated.
 - Differs: the gap after a heading number is a tab stop (typst: a grid cell). Levels 3 and 4 do not occur in the sample; they are set as hanging labels at 0.5 in and 1 in (typst: grid cells, not checked). Pagination differs slightly (docx memorandum 7 pages, typst 7 pages; the certificate is page 8 in both).

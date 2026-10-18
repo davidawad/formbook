@@ -21,7 +21,7 @@ Kinds: **M** mandated by rule; **C** convention; **T** project requirement; **A*
 | CANB-CONT-001 | Adversary proceeding is commenced by complaint stating claims and relief. | FRBP 7003, 7008; FRCP 8 | M |
 | CANB-CONT-002 | Caption identifies the court, parties, case and proceeding; complaint body uses numbered allegations. | FRBP 9004; FRCP 10(a)-(b) via FRBP 7010 | M |
 | CANB-CONT-003 | Initiating adversary complaint is accompanied by a completed Clerk-prescribed Adversary Proceeding Cover Sheet. | CANB-LBR, BLR 7003-1 | M |
-| CANB-FORM-002 | Caption and visible pleading-paper choices follow patterns seen across the two filed complaint examples when no rule controls them. | `exemplars/SOURCE.md`, cross-filer comparison | C |
+| CANB-FORM-002 | Caption and visible pleading-paper choices follow patterns seen across the two filed complaint examples when no rule controls them. | `usage/SOURCE.md`, cross-filer comparison | C |
 
 ### Adversary complaint
 

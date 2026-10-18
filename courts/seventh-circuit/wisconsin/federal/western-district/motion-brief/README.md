@@ -5,11 +5,11 @@ Folder: `courts/seventh-circuit/wisconsin/federal/western-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-drone-3-26-cv-00539-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-drone-motion-to-dismiss.md` (the whole brief: caption, opening, Parts I and II, conclusion, signature) |
+| exemplar | yes: `usage/SAMPLE-wiwd-motion-brief-drone326cv00539.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-wiwd-motion-brief-dronemotiontodismiss.md` (the whole brief: caption, opening, Parts I and II, conclusion, signature) |
 | typeface | Face required by the rules: **none named** (W.D. Wis. LR list and Briefing Guidelines checked; see "Not verified" below). Vendored substitute: none needed. Font kept: **EB Garamond** (`docs/FONTS.md`, "No face named"). Century substitute `TeX Gyre Schola` is vendored but not used, since no rule asks for Century. |
-| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-drone-motion-to-dismiss.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (pdffonts: EB Garamond Regular, Bold, BoldItalic, all embedded), no warnings |
-| overlay | **not re-run**: the filed exemplar PDF is not in `exemplars/` in this snapshot (only `SOURCE.md`), so `tools/overlay.sh` cannot run. `samples/OVERLAY-drone-motion-to-dismiss.txt` is the page map from an earlier run against the filed PDF; `OVERLAY-drone-motion-to-dismiss.pdf` is not in the snapshot. |
+| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-wiwd-motion-brief-dronemotiontodismiss.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (pdffonts: EB Garamond Regular, Bold, BoldItalic, all embedded), no warnings |
+| overlay | **not re-run**: the filed exemplar PDF is not in `usage/` in this snapshot (only `SOURCE.md`), so `tools/overlay.sh` cannot run. `usage/OVERLAY-drone-motion-to-dismiss.txt` is the page map from an earlier run against the filed PDF; `OVERLAY-drone-motion-to-dismiss.pdf` is not in the snapshot. |
 | pages reviewed | 7 of 7 re-rendered at 60 dpi and viewed 2026-10-15 (see the review section) |
 
 File names: the brief asks for `<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` read and write the role-prefixed names (`INPUT-`, `OUTPUT-`, `OVERLAY-`), so those are used here (see CLAUDE.md, "File roles are in the name").
@@ -72,7 +72,7 @@ The overlay is a diagnostic, not a score. The sample is the whole brief, so the 
 7. **Paragraph numbering.** Briefs are not numbered; the sample's paragraphs are unnumbered and the exemplar's are too.
 8. **Not run: `tools/check.sh`, `tools/check-selftest.sh`, `tools/tracker.sh`.** The same reason as the complaint folder: these expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither, and the brief forbids running the tracker and editing `tools/`.
 
-## Review of the rendered pages (`OUTPUT-drone-motion-to-dismiss.pdf`, 7 pages)
+## Review of the rendered pages (`OUTPUT-wiwd-motion-brief-dronemotiontodismiss.typst.pdf`, 7 pages)
 
 Each page rendered at 60 dpi and viewed after the last template change.
 
@@ -110,7 +110,7 @@ What differs from typst (not verified in a rendered docx):
 - Headings use keep-with-next and keep-lines; that is not checked against a render.
 
 BLOCKED (docx):
-- `docx.pdf` and the page-by-page review: `soffice` (LibreOffice) is not installed on this box and cannot be installed here. Gates 0 and 1 cannot run on `samples/OUTPUT-drone-motion-to-dismiss.docx.pdf`.
+- `docx.pdf` and the page-by-page review: `soffice` (LibreOffice) is not installed on this box and cannot be installed here. Gates 0 and 1 cannot run on `usage/OUTPUT-drone-motion-to-dismiss.docx.pdf`.
 - `tools/render-docx.sh` integrity check: `unzip` is not installed on this box, so the script exits 1 at its zip test, before `soffice`. Checked by hand instead: the `.docx` lists 17 parts and every `.xml` and `.rels` part is well formed (`xmllint`), and pandoc reads its text back in order.
 - TOC and TOA: not produced. The typst template does not produce them and the brief is under 10 pages in the sample.
 - Pleading line numbers: not in the typst template, so not built.

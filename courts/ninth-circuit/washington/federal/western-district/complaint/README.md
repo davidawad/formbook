@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/washington/federal/western-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-ironleaf-2-26-cv-03537-complaint.pdf` (primary) and `exemplars/FILED-EXAMPLE-materia-2-26-cv-03656-complaint.pdf` (second filer, structure only). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-ironleaf-complaint.md`: the whole filed complaint (11 pages as filed; 10 rendered), transcribed from the text layer. |
-| render | ok: `samples/OUTPUT-ironleaf-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings. |
-| overlay | ok: `samples/OVERLAY-ironleaf-complaint.pdf` and `samples/OVERLAY-ironleaf-complaint.txt`. |
+| exemplar | yes: `usage/SAMPLE-wawd-complaint-ironleaf226cv03537.pdf` (primary) and `usage/SAMPLE-wawd-complaint-materia226cv03656.pdf` (second filer, structure only). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-wawd-complaint-ironleaf.md`: the whole filed complaint (11 pages as filed; 10 rendered), transcribed from the text layer. |
+| render | ok: `usage/OUTPUT-wawd-complaint-ironleaf.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings. |
+| overlay | ok: `usage/OVERLAY-ironleaf-complaint.pdf` and `usage/OVERLAY-ironleaf-complaint.txt`. |
 | pages reviewed | 10 of 10: every page rendered at 60 dpi and viewed in its final state (footer crop also checked at 150 dpi). |
 | typeface | Face required: **none**. LCR 10(e)(1) requires "a proportionally spaced font" and names no face, so no substitute is needed and EB Garamond is kept (`FONTS.md`: no face named). Checked against the rule text, 2026-10-15. Metric fit: n/a. Both filed exemplars embed Times New Roman (tier-2 question, gap 1). |
 
@@ -47,7 +47,7 @@ Not produced by this template (separate filings): the civil cover sheet (JS-44),
 
 ## Overlay
 
-`sh tools/overlay.sh courts/ninth-circuit/washington/federal/western-district/complaint ironleaf-complaint` pairs each rendered page with the exemplar page sharing the most words (`exemplars/*.pdf`, first in name order, i.e. the Ironleaf filing). The overlay is a diagnostic, not a score.
+`sh tools/overlay.sh courts/ninth-circuit/washington/federal/western-district/complaint ironleaf-complaint` pairs each rendered page with the exemplar page sharing the most words (`usage/*.pdf`, first in name order, i.e. the Ironleaf filing). The overlay is a diagnostic, not a score.
 
 Word overlap per page (rendered page vs filed page): p1 77%, p2 86%, p3 77%, p4 69%, p5 63%, p6 58%, p7 82%, p8 67%, p9 51%, p10 43% (p10 pairs with filed p9, the best word match: the prayer, jury demand and signature sit on pages 9 and 10 of both). Pages 9 and 10 overlap least because the sample reflows the prayer and signature; the content matches.
 
@@ -61,12 +61,12 @@ Word overlap per page (rendered page vs filed page): p1 77%, p2 86%, p3 77%, p4 
 6. **Caption.** The party column is closed by a rule (right and bottom) rather than a column of ")" marks. Both appear in W.D. Wash. filings; recorded as an accepted tier-2 convention.
 7. **Second filer, tier 2.** Two filers are saved (Ironleaf and Materia). The Materia filing has the same caption structure (case number at right of the caption) and the same bottom notation (firm block at right). It was checked by its text layer only; its body is not transcribed.
 8. **Case names** are not italic in the sample: the text layer of the exemplar has no italic markup, so the transcription is roman. The template italicizes `*...*` markdown.
-9. **Output file names.** `tools/render.sh` writes `samples/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `samples/OVERLAY-<id>.pdf` and `.txt` (the repo's naming rule; the overlay tool reads `OUTPUT-<id>.pdf` by name). The brief's `<id>.pdf` and `<id>-overlay.pdf` names do not match the tools, so the tools' names are used.
+9. **Output file names.** `tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `.txt` (the repo's naming rule; the overlay tool reads `OUTPUT-<id>.pdf` by name). The brief's `<id>.pdf` and `<id>-overlay.pdf` names do not match the tools, so the tools' names are used.
 10. **Judge line.** The Ironleaf complaint has no judge assigned; the template prints the judge's name on line 1 only when the frontmatter gives one.
 
 ## Engines
 
-**docx** (`docx/`; `samples/OUTPUT-ironleaf-complaint.docx` and `.docx.pdf`, the LibreOffice conversion). Built by `docx/build-reference.sh` (reference.docx with the styles, the header with the 27 line numbers and the pleading rules, and a footer placeholder), `docx/complaint.lua` (cover, caption, numbered allegations, prayer and signature block as OpenXML) and `docx/render.sh` (pandoc reads the sample as CommonMark, as cmarker does; the bottom notation is written from the frontmatter).
+**docx** (`docx/`; `usage/OUTPUT-wawd-complaint-ironleaf.docx` and `.docx.pdf`, the LibreOffice conversion). Built by `docx/build-reference.sh` (reference.docx with the styles, the header with the 27 line numbers and the pleading rules, and a footer placeholder), `docx/complaint.lua` (cover, caption, numbered allegations, prayer and signature block as OpenXML) and `docx/render.sh` (pandoc reads the sample as CommonMark, as cmarker does; the bottom notation is written from the frontmatter).
 
 Matches the typst output (checked on the rendered pages, not by a gate):
 - Letter page; 1 in top and bottom margins, 1.5 in left, 1 in right; 27 numbered lines at exact 24 pt, so body text sits on the numbers.

@@ -2,7 +2,7 @@
 
 Doc type: **motion** (notice of motion with memorandum of points and authorities, one filed document). Court: United States District Court for the Northern District of California. Folder: `courts/ninth-circuit/california/federal/northern-district/motion-brief/`.
 
-Status: exemplar=listed in `exemplars/SOURCE.md` but the PDF is **not in this snapshot**; render=ok (Liberation Serif, 10 pages); overlay=fail (no exemplar PDF, `tools/overlay.sh` exits 1); pages reviewed 10 of 10 after the font change. Not a court-level `court.json` status; nothing here sets `status`.
+Status: exemplar=listed in `usage/SOURCE.md` but the PDF is **not in this snapshot**; render=ok (Liberation Serif, 10 pages); overlay=fail (no exemplar PDF, `tools/overlay.sh` exits 1); pages reviewed 10 of 10 after the font change. Not a court-level `court.json` status; nothing here sets `status`.
 
 Typeface: Civil L.R. 3-4(c)(2)(A)-(B) names Times New Roman and Century Schoolbook as examples of a standard proportional font. The template uses **Liberation Serif** (vendored Times New Roman substitute, metric-compatible, `docs/FONTS.md`) at 12 pt, replacing EB Garamond at 13 pt. The filed exemplar is Times.
 
@@ -20,7 +20,7 @@ Source: N.D. Cal. Civil Local Rules, full text (PDF, "Effective October 2, 2026"
 | CAND-FIRST-001 | Civil L.R. 3-4(a)(1) | Counsel's name, address, telephone, email and state bar number, upper left, with the party represented and its status. | cover, `counsel` + `counsel_role` |
 | CAND-FIRST-002 | Civil L.R. 3-4(a)(3) | Starting on the eighth line (unless counsel identification needs more space): court title, title of the action, case number with the judge's initials, and the title of the paper. | cover (court title, caption, `case_number`) |
 | CAND-FIRST-003 | Civil L.R. 7-2(b)(1), 7-4(a)(1) | The noticed hearing date and time on the first page, in the space opposite the caption and below the case number. | caption right column, `hearing` |
-| CAND-CONT-001 | Civil L.R. 7-2(b)(2)-(4), 7-4(a)(3)-(5) | Notice of motion in the first paragraph; a concise statement of relief in the second; then the points and authorities: statement of issues, succinct statement of facts, argument citing authorities. | body (author-written, see `samples/`) |
+| CAND-CONT-001 | Civil L.R. 7-2(b)(2)-(4), 7-4(a)(3)-(5) | Notice of motion in the first paragraph; a concise statement of relief in the second; then the points and authorities: statement of issues, succinct statement of facts, argument citing authorities. | body (author-written, see `usage/`) |
 | CAND-CONT-002 | Civil L.R. 7-2(b), 7-4(b) | Motion in one filed document not exceeding 25 pages (text limit for the points and authorities). Not checked by the template: no page counter exists yet. | not enforced |
 | CAND-CONT-003 | Civil L.R. 7-4(a)(2) | Table of contents and table of authorities when the brief is more than 10 pages. The template always produces both (generated from headings and `toa:` links). | `toc-section`, `toa-section` |
 | CAND-CONT-004 | Civil L.R. 3-4(d) | Citation to authorities: parallel U.S.C. citation for Acts of Congress, C.F.R. title/section and date for regulations, U.S./S. Ct./L. Ed. for Supreme Court cases, F./F. Supp./F.R.D. for other federal courts, official or regional reporter for state courts. Not checked by the template; authorities are written by the author. | not enforced |
@@ -29,13 +29,13 @@ Not used, and why: Civil L.R. 7-2(c) (proposed order) and 7-5 (declarations) are
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-tsi-akim-maidu-16-cv-7189-motion-brief.pdf`: Notice of Motion and Motion to Dismiss or Transfer, with Memorandum of Points and Authorities. 17 pages. Filed by the Federal Defendants (U.S. Attorney's Office, N.D. Cal.), April 20, 2017. Text layer present (`pdffonts` shows embedded Times, `pdftotext` reads it).
-- Provenance, searches and the caveat about the ECF header are in `exemplars/SOURCE.md`.
+- `usage/SAMPLE-cand-motion-brief-tsiakimmaidu16cv7189.pdf`: Notice of Motion and Motion to Dismiss or Transfer, with Memorandum of Points and Authorities. 17 pages. Filed by the Federal Defendants (U.S. Attorney's Office, N.D. Cal.), April 20, 2017. Text layer present (`pdffonts` shows embedded Times, `pdftotext` reads it).
+- Provenance, searches and the caveat about the ECF header are in `usage/SOURCE.md`.
 - Only one exemplar. The eval-loop tier 2 rule asks for two or three from different filers; not done (see gaps).
 
 ## Sample
 
-- `samples/INPUT-tsi-akim-maidu-motion-to-dismiss.md` is a transcription of the exemplar: caption and counsel block, notice of motion, relief sought, issues, the memorandum's introduction, facts, Argument III.A (venue) and III.B.1 (legal standard), the conclusion, and the signature block. Footnotes 1 and 2 are included.
+- `usage/INPUT-cand-motion-brief-tsiakimmaidumotiontodismiss.md` is a transcription of the exemplar: caption and counsel block, notice of motion, relief sought, issues, the memorandum's introduction, facts, Argument III.A (venue) and III.B.1 (legal standard), the conclusion, and the signature block. Footnotes 1 and 2 are included.
 - It stops after III.B.1. Argument III.B.2-4 (sovereign immunity, agency failure to act, statute of limitations) are not transcribed, to keep the render within the 8-14 page target. The exemplar's pages 9-12 of the memorandum are therefore absent; the overlay shows this.
 - Frontmatter follows the ca9 contract in shape (`authorities:` registry, `toa:KEY` links, footnotes, `#` headings) with the N.D. Cal. fields (`court`, `counsel`, `caption`, `hearing`, `footer_title`). Headings are numbered by the template (I., A., 1., a.); the sample types no numbers.
 
@@ -43,12 +43,12 @@ Not used, and why: Civil L.R. 7-2(c) (proposed order) and 7-5 (declarations) are
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/ninth-circuit/california/federal/northern-district/motion-brief samples/INPUT-tsi-akim-maidu-motion-to-dismiss.md
+sh tools/render.sh courts/ninth-circuit/california/federal/northern-district/motion-brief usage/INPUT-cand-motion-brief-tsiakimmaidumotiontodismiss.md
 sh tools/overlay.sh courts/ninth-circuit/california/federal/northern-district/motion-brief tsi-akim-maidu-motion-to-dismiss
 ```
 
-- `samples/OUTPUT-tsi-akim-maidu-motion-to-dismiss.pdf`: 10 pages (was 12 in EB Garamond at 13 pt). Typst compiled with no warnings (`render.sh` fails on any warning). Only vendored fonts: `pdffonts` shows LiberationSerif, -Italic, -Bold, embedded. Body line pitch measured at 24.0 pt with `pdftotext -bbox-layout` (`body-leading` retuned from 0.54em to 1.09em for the new face).
-- Overlay: **not generated**. `exemplars/` has no PDF in this snapshot, so `tools/overlay.sh` exits 1. `samples/OVERLAY-tsi-akim-maidu-motion-to-dismiss.txt` is the stale page map from the EB Garamond render and does not match the current render; it should be regenerated once the exemplar PDF is restored.
+- `usage/OUTPUT-cand-motion-brief-tsiakimmaidumotiontodismiss.typst.pdf`: 10 pages (was 12 in EB Garamond at 13 pt). Typst compiled with no warnings (`render.sh` fails on any warning). Only vendored fonts: `pdffonts` shows LiberationSerif, -Italic, -Bold, embedded. Body line pitch measured at 24.0 pt with `pdftotext -bbox-layout` (`body-leading` retuned from 0.54em to 1.09em for the new face).
+- Overlay: **not generated**. `usage/` has no PDF in this snapshot, so `tools/overlay.sh` exits 1. `usage/OVERLAY-tsi-akim-maidu-motion-to-dismiss.txt` is the stale page map from the EB Garamond render and does not match the current render; it should be regenerated once the exemplar PDF is restored.
 
 ## Visual review (all 10 pages of the Liberation Serif render, rendered at 70 dpi and looked at)
 
@@ -77,7 +77,7 @@ Reviewed pages: 10 of 10.
 5. **Footer size.** 11 pt. The rule's type-size floor applies to text, footnotes and quotations; the footer is the paper identification.
 6. **Judge standing orders** can change the form (3-4(c)(2) says "unless a Judge's standing order ... requires otherwise"). Not reflected.
 7. **Page limit (CAND-CONT-002).** The template does not count pages. The sample renders to 10 pages; the 25-page limit is for the author.
-8. **Tier 2 exemplars.** One exemplar only. The eval loop asks for two or three from different filers before tier 2 is judged. Not done. Searches tried are in `exemplars/SOURCE.md`.
+8. **Tier 2 exemplars.** One exemplar only. The eval loop asks for two or three from different filers before tier 2 is judged. Not done. Searches tried are in `usage/SOURCE.md`.
 9. **Partial sample.** Argument III.B.2-4 not transcribed (see Sample).
 10. **Certificates.** None generated (see Governing rules).
 11. **Heading numbering.** Numbering is done by the template from heading level (I., A., 1., a.), not typed by the author; the TOC and TOA follow the same numbers.
@@ -85,7 +85,7 @@ Reviewed pages: 10 of 10.
 
 ## Engines
 
-Docx engine: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/cand.lua` (cover, caption, case number, title, signature block; the body is pandoc's). Sample build: `samples/OUTPUT-tsi-akim-maidu-motion-to-dismiss.docx` (valid zip, every XML part well-formed). Not rendered: no LibreOffice on the build box, so **pages reviewed = 0**. `make-reference.sh` needs `unzip` and `zip`, which the build box lacks; it was run with a stand-in built on libzip's `ziptool` (outside the repo).
+Docx engine: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/cand.lua` (cover, caption, case number, title, signature block; the body is pandoc's). Sample build: `usage/OUTPUT-cand-motion-brief-tsiakimmaidumotiontodismiss.docx` (valid zip, every XML part well-formed). Not rendered: no LibreOffice on the build box, so **pages reviewed = 0**. `make-reference.sh` needs `unzip` and `zip`, which the build box lacks; it was run with a stand-in built on libzip's `ziptool` (outside the repo).
 
 What the docx sets (in `styles.xml`, `document.xml` and the footer part; not rendered):
 - Liberation Serif 12 pt in the document defaults, black text; footnotes 12 pt, single spaced.

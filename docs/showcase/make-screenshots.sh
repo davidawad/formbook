@@ -1,11 +1,14 @@
-#!/bin/sh
-# Regenerate every image in docs/showcase/ from files committed in this repo.
+#!/usr/bin/env bash
+# Regenerate every image in docs/showcase/ from files committed in this repo (the overlay is regenerated
+# into the gitignored .overlay/ by tools/overlay.sh first; overlays are never committed).
 # Usage (from anywhere): sh docs/showcase/make-screenshots.sh
 # Needs: pdftoppm (poppler), magick (ImageMagick), typst. Put the formbook toolchain on PATH first:
 #   export PATH="$HOME/.local/share/formbook/env/bin:$PATH"
 # Layout and labels are typeset by typst with its bundled fonts (--ignore-system-fonts), so output
 # does not depend on installed fonts. Page images come from pdftoppm at fixed resolution.
-set -eu
+# Strict mode. pipefail only where the shell has it (bash, macOS sh); Debian's dash lacks it.
+# shellcheck shell=sh disable=SC3040
+set -e -u; (set -o pipefail) 2> /dev/null && set -o pipefail
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 OUT=$ROOT/docs/showcase
 export PATH="$HOME/.local/share/formbook/env/bin:$PATH"
@@ -15,8 +18,10 @@ for t in pdftoppm magick typst; do
     exit 1
   }
 done
-W=$(mktemp -d)
-trap 'rm -rf "$W"' EXIT
+# recursive delete of one directory; an empty path aborts instead of deleting the wrong thing
+safe_rmdir() { rm -r -f -- "${1:?safe_rmdir: empty path}"; }
+W=$(mktemp -d) || exit 1
+trap 'safe_rmdir "$W"' EXIT
 cd "$ROOT"
 
 # Source documents.
@@ -33,19 +38,18 @@ TXSC=courts/fifth-circuit/texas/state/supreme-court/brief-on-the-merits
 page() { pdftoppm -r "${4:-110}" -f "$2" -l "$2" -png -singlefile "$1" "$W/$3"; }
 # reduce SRC DST COLORS: palette-reduce and strip metadata (smaller, reproducible)
 reduce() { magick "$1" -strip -colors "$3" -define png:exclude-chunks=date,time "$2"; }
-# typeset FILE.typ OUT.png COLORS
-typeset() {
+# compose FILE.typ OUT.png COLORS: typeset FILE.typ with typst, then palette-reduce into docs/showcase/
+compose() {
   (cd "$W" && typst compile --root "$W" --ignore-system-fonts --format png --ppi 72 "$1" "$W/raw-$2")
   reduce "$W/raw-$2" "$OUT/$2" "$3"
 }
 
-TRES_OUT=$TRES/samples/OUTPUT-tresslar-opening-brief.pdf
-TRES_FILED=$TRES/exemplars/FILED-EXAMPLE-tresslar-26-1367-opening-brief.pdf
-TRES_OVL=$TRES/samples/OVERLAY-tresslar-opening-brief.pdf
-TRES_IN=$TRES/samples/INPUT-tresslar-opening-brief.md
+TRES_OUT=$TRES/usage/OUTPUT-ca3-opening-brief-tresslar.typst.pdf
+TRES_FILED=$TRES/usage/SAMPLE-ca3-opening-brief-tresslar261367.pdf
+TRES_IN=$TRES/usage/INPUT-ca3-opening-brief-tresslar.md
 
 # ---------------------------------------------------------------- hero.png
-grep -v '^#' "$TRES_IN" | head -n 30 | cut -c1-52 > "$W/input.txt"
+awk '/^#/ { next } ++n <= 30' "$TRES_IN" | cut -c1-52 > "$W/input.txt"
 page "$TRES_OUT" 1 h-ours 100
 page "$TRES_FILED" 1 h-filed 100
 cat > "$W/hero.typ" << 'TYP'
@@ -63,10 +67,11 @@ cat > "$W/hero.typ" << 'TYP'
   frame(image("h-filed.png", height: 100%)),
   lab[markdown in], [], lab[formbook (Typst)], [], lab[filed with the court])
 TYP
-typeset hero.typ hero.png 96
+compose hero.typ hero.png 96
 
 # ---------------------------------------------------------------- overlay.png
-page "$CAND/samples/OVERLAY-superhuman-complaint.pdf" 2 o 130
+sh tools/overlay.sh "$CAND" superhuman > /dev/null
+page ".overlay/$CAND/OVERLAY-cand-complaint-superhuman.pdf" 2 o 130
 cat > "$W/overlay.typ" << 'TYP'
 #set page(width: auto, height: auto, margin: 14pt, fill: rgb("#f6f4ee"))
 #set text(font: "Libertinus Serif", size: 14pt, fill: rgb("#222"))
@@ -76,7 +81,7 @@ cat > "$W/overlay.typ" << 'TYP'
   #text(fill: rgb("#d00000"), weight: "bold")[red] = only in our render · #text(fill: rgb("#0044cc"), weight: "bold")[blue] = only in the filed exemplar · black = both agree
 ]
 TYP
-typeset overlay.typ overlay.png 64
+compose overlay.typ overlay.png 64
 
 # ---------------------------------------------------------------- pages.png
 n=0
@@ -93,18 +98,18 @@ cat > "$W/pages.typ" << 'TYP'
     box(stroke: 0.8pt + rgb("#999"), image("p" + str(i + 1) + ".png", width: 215pt)),
     names.at(i)))))
 TYP
-typeset pages.typ pages.png 48
+compose pages.typ pages.png 48
 
 # ---------------------------------------------------------------- courts.png
 cat > "$W/courts.list" << EOF
-$SCOTUS/samples/OUTPUT-in-re-grand-jury.pdf|U.S. Supreme Court: merits brief
-$CA1/samples/OUTPUT-figueroa-opening-brief.pdf|1st Circuit: opening brief
+$SCOTUS/usage/OUTPUT-scotus-merits-brief-inregrandjury.typst.pdf|U.S. Supreme Court: merits brief
+$CA1/usage/OUTPUT-ca1-opening-brief-figueroa.typst.pdf|1st Circuit: opening brief
 $TRES_OUT|3rd Circuit: opening brief
-$CAND/samples/OUTPUT-superhuman-complaint.pdf|N.D. Cal.: complaint
-$MDB/samples/OUTPUT-kapitus-complaint.pdf|D. Md. Bankruptcy: adversary complaint
-$CASUP/samples/OUTPUT-sweetwater-complaint.pdf|California Superior Court: complaint
-$NYS/samples/OUTPUT-valentino.pdf|New York Supreme Court: motion brief
-$TXSC/samples/OUTPUT-hawthorne-brief-on-the-merits.pdf|Texas Supreme Court: brief on the merits
+$CAND/usage/OUTPUT-cand-complaint-superhuman.typst.pdf|N.D. Cal.: complaint
+$MDB/usage/OUTPUT-mdb-adversary-complaint-kapituscomplaint.typst.pdf|D. Md. Bankruptcy: adversary complaint
+$CASUP/usage/OUTPUT-calsuperct-complaint-sweetwater.typst.pdf|California Superior Court: complaint
+$NYS/usage/OUTPUT-nysupct-motion-brief-valentino.typst.pdf|New York Supreme Court: motion brief
+$TXSC/usage/OUTPUT-tex-brief-on-the-merits-hawthorne.typst.pdf|Texas Supreme Court: brief on the merits
 EOF
 n=0
 : > "$W/courts.typ"
@@ -122,7 +127,7 @@ cat >> "$W/courts.typ" << 'TYP'
     box(stroke: 0.8pt + rgb("#999"), image("c" + str(i + 1) + ".png", width: 215pt)),
     labels.at(i)))))
 TYP
-typeset courts.typ courts.png 48
+compose courts.typ courts.png 48
 
 # ---------------------------------------------------------------- folder.png
 {
@@ -135,6 +140,6 @@ cat > "$W/folder.typ" << 'TYP'
 #set text(font: "DejaVu Sans Mono", size: 13pt, fill: rgb("#223"))
 #raw(read("tree.txt"), lang: none)
 TYP
-typeset folder.typ folder.png 16
+compose folder.typ folder.png 16
 
 ls -l "$OUT"/*.png

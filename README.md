@@ -6,10 +6,10 @@
 
 formbook is an open collection of court-filing templates, one folder per court and document type (opening brief, complaint, motion brief, and so on). Templates are written in [Typst](https://typst.app) and take markdown with a YAML header; the template generates the cover or caption, tables of contents and authorities, spacing, fonts, certificates and signature block that the court's rules call for.
 
-Every template is checked against public record: each folder carries a real filed exemplar PDF (with its source URL), a markdown input sample, our rendered output PDF, and a red/blue overlay PDF that lays our render over the filed exemplar. As of this checkout:
+Every template is checked against public record: each folder's `usage/` carries a real filed exemplar PDF (`SAMPLE-*.pdf`, with its source URL in `SOURCE.md`), a markdown input (`INPUT-*.md`) and our rendered output PDF (`OUTPUT-*.typst.pdf`). `just overlay <folder>` lays our render over the filed exemplar as a red/blue overlay PDF (generated on demand into the gitignored `.overlay/`, not committed). As of this checkout:
 
 - 479 folders have a Typst template (`typst/main.typ`), across 233 courts (federal, state, bankruptcy, and the U.S. Supreme Court).
-- 453 folders have at least one filed exemplar PDF (558 PDFs in all); 446 have an overlay against it.
+- 453 folders have at least one filed exemplar PDF (558 PDFs in all).
 - More pictures, and the command that regenerates each: [docs/showcase.md](docs/showcase.md). Per-court progress is in the [index](#index) at the bottom.
 
 These templates are not legal advice and do not check your arguments or citations. Verify every output against the court's current rules before you file; the court index below marks what is finished and what is still in progress.
@@ -26,7 +26,7 @@ The loop that prompt runs:
 sh tools/contribute.sh pick            # get a unit; you take the one you are given
 sh tools/contribute.sh claim <id>      # atomic claim (branch contrib/<id>, or a draft PR from a fork)
 sh tools/contribute.sh brief <id>      # prints the exact task
-sh tools/contribute.sh verify <id>     # mechanical floor: layout, renders, exemplar source, overlay
+sh tools/contribute.sh verify <id>     # mechanical floor: layout, renders, exemplar source
 sh tools/contribute.sh submit <id>     # reruns verify, opens the PR
 ```
 
@@ -822,7 +822,7 @@ In scope but with a location the circuit map cannot place; no folder is created 
 
 ## License
 
-GNU General Public License v3.0 (see [LICENSE](LICENSE)) for the templates, tools and skill. The filed exemplars under `courts/**/exemplars/` are public court records reproduced for reference; each folder's `SOURCE.md` names its docket and source.
+GNU General Public License v3.0 (see [LICENSE](LICENSE)) for the templates, tools and skill. The filed exemplars (`courts/**/usage/SAMPLE-*.pdf`) are public court records reproduced for reference; each folder's `SOURCE.md` names its docket and source.
 
 ## Tracker
 

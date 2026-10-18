@@ -10,10 +10,10 @@ Re-check cadence: re-check annually each December 1 (when amendments to the Fede
 |---|---|---|
 | LR | Local Rules of the United States District Court for the District of Maine, title page "These rules are current as of April 1, 2025" (163-page PDF, PDF creation date 2026-06-24), including Appendix B "Administrative Procedures Governing the Filing and Service by Electronic Means". The court site returned "Request Rejected" (HTTP 404) to every direct download on 2026-10-17, so the text was read from the Internet Archive capture of the official URL dated 2026-07-29 (sha256 131911bf...2232). Page numbers below are the printed page numbers. | https://www.med.uscourts.gov/sites/med/files/LocalRules.pdf (read via https://web.archive.org/web/20260729204053id_/https://www.med.uscourts.gov/sites/med/files/LocalRules.pdf) |
 | FRCP | Federal Rules of Civil Procedure 5(d)(1)(B), 7(b)(1), 7.1, 8(a), 10(a)-(b), 11(a) (LII text) | https://www.law.cornell.edu/rules/frcp/rule_5, .../rule_7, .../rule_7.1, .../rule_8, .../rule_10, .../rule_11 |
-| EX-C1 | Complaint exemplar: Taco Barr, LLC (Brann & Isaacson), No. 2:26-cv-00470, ECF 1 | `complaint/exemplars/SOURCE.md` §1 |
-| EX-C2 | Complaint exemplar: Austin Jacob Gagne (Island Justice; Consumer Attorneys), No. 2:26-cv-00301, ECF 1 | `complaint/exemplars/SOURCE.md` §2 |
-| EX-M1 | Motion exemplar: Botana and Portland Public Schools (Drummond Woodsum), No. 2:26-cv-00342, ECF 3 | `motion-brief/exemplars/SOURCE.md` §1 |
-| EX-M2 | Motion exemplar: Town of Freeport (Bernstein Shur), No. 2:26-cv-00117, ECF 7 | `motion-brief/exemplars/SOURCE.md` §2 |
+| EX-C1 | Complaint exemplar: Taco Barr, LLC (Brann & Isaacson), No. 2:26-cv-00470, ECF 1 | `complaint/usage/SOURCE.md` §1 |
+| EX-C2 | Complaint exemplar: Austin Jacob Gagne (Island Justice; Consumer Attorneys), No. 2:26-cv-00301, ECF 1 | `complaint/usage/SOURCE.md` §2 |
+| EX-M1 | Motion exemplar: Botana and Portland Public Schools (Drummond Woodsum), No. 2:26-cv-00342, ECF 3 | `motion-brief/usage/SOURCE.md` §1 |
+| EX-M2 | Motion exemplar: Town of Freeport (Bernstein Shur), No. 2:26-cv-00117, ECF 7 | `motion-brief/usage/SOURCE.md` §2 |
 
 Kinds: **M** = mandated by a court rule (FRCP or D. Me. Local Rule). **C** = convention (the rules leave it open; taken from the exemplars, with the filers that show it). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

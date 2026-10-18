@@ -4,10 +4,10 @@ Status of this doc type: **exemplar found, template built, render and overlay ru
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-jg-v-northfield-25-12276-reply-brief.pdf` | The filed reply (ECF Doc. 23, 14 pp., text layer present). Provenance in `exemplars/SOURCE.md`. |
-| `samples/INPUT-jg-v-northfield-reply-brief.md` | Transcription of the whole reply: cover, every heading, all argument, conclusion, signature, certificates. Frontmatter holds the cover, counsel, authorities. |
-| `samples/OUTPUT-jg-v-northfield-reply-brief.pdf` | `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief samples/INPUT-jg-v-northfield-reply-brief.md` (14 pp.) |
-| `samples/OVERLAY-jg-v-northfield-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/reply-brief jg-v-northfield-reply-brief` (red = ours, blue = filed, black = agree). |
+| `usage/SAMPLE-ca11-reply-brief-jgvnorthfield2512276.pdf` | The filed reply (ECF Doc. 23, 14 pp., text layer present). Provenance in `usage/SOURCE.md`. |
+| `usage/INPUT-ca11-reply-brief-jgvnorthfield.md` | Transcription of the whole reply: cover, every heading, all argument, conclusion, signature, certificates. Frontmatter holds the cover, counsel, authorities. |
+| `usage/OUTPUT-ca11-reply-brief-jgvnorthfield.typst.pdf` | `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief usage/INPUT-ca11-reply-brief-jgvnorthfield.md` (14 pp.) |
+| `usage/OVERLAY-jg-v-northfield-reply-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/reply-brief jg-v-northfield-reply-brief` (red = ours, blue = filed, black = agree). |
 | `typst/main.typ` | Entry point: reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca11-reply-brief.typ` | The template `ca11-reply-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
 
@@ -47,7 +47,7 @@ A sample is one `.md` file: a YAML frontmatter block (metadata), then the body. 
 
 ## Overlay (the red/blue test)
 
-`samples/OVERLAY-jg-v-northfield-reply-brief.pdf`, 14 pages, pages paired by word overlap with the filed exemplar (`-overlay.txt`):
+`usage/OVERLAY-jg-v-northfield-reply-brief.pdf`, 14 pages, pages paired by word overlap with the filed exemplar (`-overlay.txt`):
 
 | ours | filed | word-overlap |
 |---|---|---|
@@ -98,9 +98,9 @@ Pages reviewed: 14 of 14. Every page was rendered and viewed.
 
 ## Verification pass 2026-10-16 (fb-595.26.11)
 
-- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief samples/INPUT-jg-v-northfield-reply-brief.md` exits 0, no typst warnings, 14 pages (the committed PDF also had 14).
+- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief usage/INPUT-ca11-reply-brief-jgvnorthfield.md` exits 0, no typst warnings, 14 pages (the committed PDF also had 14).
 - Viewed: all 14 pages at 60 dpi (pages 2-3 again after the fix); the exemplar's page 1 against our cover; the 14 overlay pages at 40 dpi.
-- Overlay: rerun; `samples/OVERLAY-jg-v-northfield-reply-brief.pdf` and `.txt` rewritten. Every page still pairs with the same-numbered filed page, 57.6-92.6% (table above unchanged).
+- Overlay: rerun; `usage/OVERLAY-jg-v-northfield-reply-brief.pdf` and `.txt` rewritten. Every page still pairs with the same-numbered filed page, 57.6-92.6% (table above unchanged).
 - Defect fixed (tier 1, 11th Cir. R. 32-3): in the TOC and TOA the space between entries (0.3em, 0.6em, 0.7em) was less than the double-spaced leading inside an entry, so consecutive one-line entries were not double-spaced. Both tables now use the body leading between entries. Page count unchanged.
 - Remaining gaps: as listed under "Known gaps" (one exemplar, CIP question, TOC entry I. one-dot leader, signature block single-spaced). latex rebuilt (`--engine latex`, exit 0, 14 pages), its pages not reviewed in this pass; docx untouched (no LibreOffice).
 
@@ -108,15 +108,15 @@ Pages reviewed: 14 of 14. Every page was rendered and viewed.
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief samples/INPUT-jg-v-northfield-reply-brief.md
+sh tools/render.sh courts/eleventh-circuit/court-of-appeals/reply-brief usage/INPUT-ca11-reply-brief-jgvnorthfield.md
 sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/reply-brief jg-v-northfield-reply-brief
-pdftoppm -r 60 -png courts/eleventh-circuit/court-of-appeals/reply-brief/samples/OUTPUT-jg-v-northfield-reply-brief.pdf /tmp/pages/p
+pdftoppm -r 60 -png courts/eleventh-circuit/court-of-appeals/reply-brief/usage/OUTPUT-ca11-reply-brief-jgvnorthfield.typst.pdf /tmp/pages/p
 ```
 
 ## Engines
 
 The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
-outputs are `samples/OUTPUT-jg-v-northfield-reply-brief.latex.pdf`, `.docx` and `.docx.pdf`.
+outputs are `usage/OUTPUT-ca11-reply-brief-jgvnorthfield.latex.pdf`, `.docx` and `.docx.pdf`.
 
 - **latex** (`latex/template.tex`, `latex/ca11.lua`, `latex/render.sh`). Matches: EB Garamond 14 pt, double spacing,
   one-inch margins, the centered cover, the table of contents (with the Table of Authorities and the certificates

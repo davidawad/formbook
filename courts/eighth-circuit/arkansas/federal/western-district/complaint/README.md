@@ -1,15 +1,15 @@
 # arwd: complaint
 
 Doc type: **complaint** in the United States District Court for the Western District of Arkansas (`arwd`).
-Folder: `courts/eighth-circuit/arkansas/federal/western-district/complaint/` (self-contained; the court-root `typst/` and `samples/` are not touched).
+Folder: `courts/eighth-circuit/arkansas/federal/western-district/complaint/` (self-contained; the court-root `typst/` and `usage/` are not touched).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-little-5-26-cv-05256-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-little-complaint.md` (the whole 10-page filing, transcribed; paragraph numbers are the template's) |
+| exemplar | yes: `usage/SAMPLE-arwd-complaint-little526cv05256.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-arwd-complaint-little.md` (the whole 10-page filing, transcribed; paragraph numbers are the template's) |
 | typeface | face required: **none**. LR 5.5(a) says "type not less than elite" and names no face (searched the consolidated local rules, 66 pp., 2026-10-14). Vendored substitute: **not needed**; kept **EB Garamond** (`fonts/eb-garamond/`), as the fonts policy allows for a court that names no face. Metric class: n/a. The filed exemplar is Times New Roman with Century Schoolbook headings (tier 2, not chased; see gap 1). |
-| render | ok (re-rendered 2026-10-14): `samples/OUTPUT-little-complaint.pdf`, 9 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings; `pdffonts`: EBGaramond Regular/Bold/Italic only |
-| overlay | ok (regenerated 2026-10-14): `samples/OVERLAY-little-complaint.pdf` and `OVERLAY-little-complaint.txt`, against the filed exemplar re-fetched from the URL in `exemplars/SOURCE.md` (the PDF is not committed in this tree; see gap 10) |
+| render | ok (re-rendered 2026-10-14): `usage/OUTPUT-arwd-complaint-little.typst.pdf`, 9 pages, typst 0.15.0, `--ignore-system-fonts`, no warnings; `pdffonts`: EBGaramond Regular/Bold/Italic only |
+| overlay | ok (regenerated 2026-10-14): `usage/OVERLAY-little-complaint.pdf` and `OVERLAY-little-complaint.txt`, against the filed exemplar re-fetched from the URL in `usage/SOURCE.md` (the PDF is not committed in this tree; see gap 10) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on 2026-10-14) |
 
 File names follow the repo's roles (`INPUT-`, `OUTPUT-`, `OVERLAY-`) because `tools/render.sh` and `tools/overlay.sh` read and write those names.
@@ -54,9 +54,9 @@ The typst template above is the primary engine. The docx engine is in `docx/`; i
 
 - `docx/build-reference.sh` builds `docx/reference.docx`: EB Garamond 12 pt, double spacing as an exact 27.6 pt line, 0.5 in first-line indent, letter page with 1 in margins, the page number centered 0.4 in from the bottom, and single-spaced styles for the caption, court title and signature. Run `sh docx/build-reference.sh docx/reference.docx` (needs pandoc, zip, unzip and xmllint).
 - `docx/arwd-complaint.lua` turns the same markdown into Word: the court title and caption as borderless tables of exact width, the title in bold capitals, numbered paragraphs (the filter numbers them, as typst does), lettered lists, `^ ` unnumbered paragraphs, headings, and the signature block.
-- `sh tools/render.sh --engine docx <this folder> samples/INPUT-little-complaint.md` writes `samples/OUTPUT-little-complaint.docx`. The `.docx.pdf` step did not run (see BLOCKED below).
+- `sh tools/render.sh --engine docx <this folder> usage/INPUT-arwd-complaint-little.md` writes `usage/OUTPUT-arwd-complaint-little.docx`. The `.docx.pdf` step did not run (see BLOCKED below).
 
-**What matches** (checked on the .docx XML and its text, not by eye): font and size, the 27.6 pt line pitch, margins, the first-line indent, the caption and signature table widths, the page-number footer, and the word sequence: every word of `INPUT-little-complaint.md` appears in the .docx in the same order.
+**What matches** (checked on the .docx XML and its text, not by eye): font and size, the 27.6 pt line pitch, margins, the first-line indent, the caption and signature table widths, the page-number footer, and the word sequence: every word of `INPUT-arwd-complaint-little.md` appears in the .docx in the same order.
 
 **What differs:** Word breaks lines and places page breaks differently from typst, so pagination is not the same. The number is followed by a tab to the 1.0 in stop (typst: 0.3 in after the number). Lettered items hang from 0.5 in with text at 1.0 in (typst's body indent is about 1.07 in). Stacked headings (COUNT I over STRICT LIABILITY) are one "Heading Continued" paragraph, not Word headings. The caption and signature tables hold plain text, so no italics inside them.
 
@@ -66,7 +66,7 @@ The typst template above is the primary engine. The docx engine is in `docx/`; i
 
 ## What the overlay shows
 
-`samples/OVERLAY-little-complaint.pdf`: red = our render, blue = the filed exemplar, black = both. Pages are paired by word overlap (`OVERLAY-little-complaint.txt`): ours 1-3 ↔ filed 1-3 (84 %, 74 %, 91 %), ours 4 ↔ filed 5 (89 %), ours 5-9 ↔ filed 6-10 (62 % to 91 %). The exemplar is on a 28.9-pt pitch with an ECF header; our render is on 27.6 pt with no header, so text lines do not coincide and the blue ECF header never matches. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-little-complaint.pdf`: red = our render, blue = the filed exemplar, black = both. Pages are paired by word overlap (`OVERLAY-little-complaint.txt`): ours 1-3 ↔ filed 1-3 (84 %, 74 %, 91 %), ours 4 ↔ filed 5 (89 %), ours 5-9 ↔ filed 6-10 (62 % to 91 %). The exemplar is on a 28.9-pt pitch with an ECF header; our render is on 27.6 pt with no header, so text lines do not coincide and the blue ECF header never matches. The overlay is a diagnostic, not a score.
 
 
 ## Gate 2: visual review (every page rendered at 60 dpi and viewed)
@@ -88,7 +88,7 @@ Bugs found and fixed during review (kept here so the next change does not reintr
 ## Known gaps and open choices
 
 1. **Font and "elite".** LR 5.5(a) says "type not less than elite" and names no typeface, so the fonts policy (`docs/FONTS.md`) keeps EB Garamond here; no substitute is substituted. Elite is a 12-characters-per-inch typewriter pitch; for a proportional face the usual reading is a 12-point type size. The template uses EB Garamond at 12 pt. EB Garamond sets smaller than Times New Roman at the same size; the filed exemplar is Times New Roman (body) with Century Schoolbook (headings). Choosing Liberation Serif or TeX Gyre Schola would be a tier-2 convention choice, not a rule requirement, so it is not made here. **Needs David's call** if the clerk reads "elite" as a pitch limit for proportional type, or if the court wants the exemplar's faces.
-2. **One exemplar.** Tier 2 asks for 2 or 3 filers; only Little v. Church & Dwight is saved. Other complaints found (Sullivan v. Goodyear, Kiefer Sage v. Pro-Gard, Saeidi) are listed in `exemplars/SOURCE.md`. Tier 2 is therefore judged against one filer.
+2. **One exemplar.** Tier 2 asks for 2 or 3 filers; only Little v. Church & Dwight is saved. Other complaints found (Sullivan v. Goodyear, Kiefer Sage v. Pro-Gard, Saeidi) are listed in `usage/SOURCE.md`. Tier 2 is therefore judged against one filer.
 3. **Class actions.** LR 23.1 requires the caption legend "Complaint - Class Action" and a "Class Action Allegations" paragraph. Not implemented: no `legend` field exists yet. Add it to the template before using it for a class complaint.
 4. **Jury demand.** The exemplar demands a jury inside the prayer (item d). The template adds no separate jury-demand caption line. Fed. R. Civ. P. 38(b) requires only a demand in a pleading, which the prayer provides; no W.D. Ark. local rule was found that sets a separate form (LR 5.5 and the consolidated rules were read).
 5. **Counsel block at the top of page 1.** The exemplar has none (the Arkansas form does not call for one); the template has none.
@@ -96,4 +96,4 @@ Bugs found and fixed during review (kept here so the next change does not reintr
 7. **Exemplar typos transcribed as printed**: "FAYETTEVILLE DIVISON" and "distribute and cleaner" (paragraphs 3 and 17), and a missing final period in paragraph 12. The sample keeps them so the overlay compares like with like.
 8. **Not checked by the template**: the 14-day deadline (LR 7.2(b)) and the rules on separate filings. The template produces the complaint only.
 9. **Checks not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` at the court root; this doc-type folder is not that shape, and the brief forbids editing `tools/`. The Gate 2 table above is the review for this doc type.
-10. **Exemplar PDF not in the tree.** `exemplars/SOURCE.md` records the CourtListener URL, but the `FILED-EXAMPLE-*.pdf` file was never committed (the exemplar row above said it was). On 2026-10-14 it was re-fetched from that URL into a scratch directory (`/work/artifacts/arwd-exemplars/`), not the repo, and used for the overlay. Commit it to `exemplars/` if the repo is to rebuild the overlay offline.
+10. **Exemplar PDF not in the tree.** `usage/SOURCE.md` records the CourtListener URL, but the `SAMPLE-*.pdf` file was never committed (the exemplar row above said it was). On 2026-10-14 it was re-fetched from that URL into a scratch directory (`/work/artifacts/arwd-exemplars/`), not the repo, and used for the overlay. Commit it to `usage/` if the repo is to rebuild the overlay offline.

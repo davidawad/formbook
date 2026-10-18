@@ -5,14 +5,14 @@ Folder: `courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/adver
 
 | Item | Status |
 |---|---|
-| exemplar | **yes, 2 filed exemplars from 2 filers**, both text-based RECAP copies of Doc. 1: `exemplars/FILED-EXAMPLE-hoven-19-01027-adversary-complaint.pdf` (Murrell Law Firm for Pull-A-Part, LLC; filed 08/13/2019; 5 pp) and `exemplars/FILED-EXAMPLE-criss-18-01006-adversary-complaint.pdf` (Grand Law Firm for Sinarta Criss; filed 03/16/2018; 2 pp). Sources, searches and rejected candidates (two scanned PDFs, several unavailable) are in `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-adversary-complaint-sample.md`: **fictitious**. Mirrors the two exemplars' structure (unnumbered opening paragraph, numbered allegations, unnumbered WHEREFORE, counsel signature). No text is taken from either filing. |
+| exemplar | **yes, 2 filed exemplars from 2 filers**, both text-based RECAP copies of Doc. 1: `usage/SAMPLE-lamb-adversary-complaint-hoven1901027.pdf` (Murrell Law Firm for Pull-A-Part, LLC; filed 08/13/2019; 5 pp) and `usage/SAMPLE-lamb-adversary-complaint-criss1801006.pdf` (Grand Law Firm for Sinarta Criss; filed 03/16/2018; 2 pp). Sources, searches and rejected candidates (two scanned PDFs, several unavailable) are in `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-lamb-adversary-complaint-adversarycomplaintsample.md`: **fictitious**. Mirrors the two exemplars' structure (unnumbered opening paragraph, numbered allegations, unnumbered WHEREFORE, counsel signature). No text is taken from either filing. |
 | typeface | Rule names **no face**: LR 5005-2(b) requires "12-point font and be double-spaced" (2022 local rules, read from the court's PDF 2026-10-14). Keeps **EB Garamond** (vendored, OFL). Not a substitute case: no court-named face in `docs/FONTS.md`. Both exemplars are in Times (Word export); the choice stays EB Garamond per `docs/FONTS.md` ("no face named"). |
-| render | ok (2026-10-15): `sh tools/render.sh` exit 0, no warnings, `samples/OUTPUT-adversary-complaint-sample.pdf`, **4 pages**, letter, typst 0.15.0; `pdffonts`: EBGaramond-Regular, -Bold, -Italic, all embedded. Body pitch 31.32 pt (see LAMB-FORM-003). |
-| overlay | ok (2026-10-15): `sh tools/overlay.sh $D adversary-complaint-sample $D/exemplars/FILED-EXAMPLE-hoven-19-01027-adversary-complaint.pdf` exit 0; `samples/OVERLAY-adversary-complaint-sample.pdf` (4 pages) and `.txt`. Compared against Hoven (the longer exemplar). The default (no third argument) picks the first file in `exemplars/` by name, which is Criss. |
-| pages reviewed | **4 of 4** of `OUTPUT-adversary-complaint-sample.pdf` rasterised with `pdftoppm -r 60` and viewed on 2026-10-15; **4 of 4** of `OVERLAY-adversary-complaint-sample.pdf` viewed at the same resolution. Findings in the visual review table below. |
+| render | ok (2026-10-15): `sh tools/render.sh` exit 0, no warnings, `usage/OUTPUT-lamb-adversary-complaint-adversarycomplaintsample.typst.pdf`, **4 pages**, letter, typst 0.15.0; `pdffonts`: EBGaramond-Regular, -Bold, -Italic, all embedded. Body pitch 31.32 pt (see LAMB-FORM-003). |
+| overlay | ok (2026-10-15): `sh tools/overlay.sh $D adversary-complaint-sample $D/usage/SAMPLE-hoven-19-01027-adversary-complaint.pdf` exit 0; `usage/OVERLAY-adversary-complaint-sample.pdf` (4 pages) and `.txt`. Compared against Hoven (the longer exemplar). The default (no third argument) picks the first file in `usage/` by name, which is Criss. |
+| pages reviewed | **4 of 4** of `OUTPUT-lamb-adversary-complaint-adversarycomplaintsample.typst.pdf` rasterised with `pdftoppm -r 60` and viewed on 2026-10-15; **4 of 4** of `OVERLAY-adversary-complaint-sample.pdf` viewed at the same resolution. Findings in the visual review table below. |
 
-File names. The brief asks for `samples/<id>.md`, `samples/<id>.pdf` and `<id>-overlay.pdf`. The repo tools read and write `samples/OUTPUT-<id>.pdf` and `samples/OVERLAY-<id>.pdf/.txt`, and `tools/` is not to be edited, so the tool names are used.
+File names. The brief asks for `usage/<id>.md`, `usage/<id>.pdf` and `<id>-overlay.pdf`. The repo tools read and write `usage/OUTPUT-<id>.pdf` and `usage/OVERLAY-<id>.pdf/.txt`, and `tools/` is not to be edited, so the tool names are used.
 
 ## Governing rules
 
@@ -61,8 +61,8 @@ Not checked by the template, and listed as author responsibilities: the wording 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
 D=courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/adversary-complaint
-sh tools/render.sh $D samples/INPUT-adversary-complaint-sample.md        # -> samples/OUTPUT-adversary-complaint-sample.pdf
-sh tools/overlay.sh $D adversary-complaint-sample $D/exemplars/FILED-EXAMPLE-hoven-19-01027-adversary-complaint.pdf
+sh tools/render.sh $D usage/INPUT-lamb-adversary-complaint-adversarycomplaintsample.md        # -> usage/OUTPUT-lamb-adversary-complaint-adversarycomplaintsample.typst.pdf
+sh tools/overlay.sh $D adversary-complaint-sample $D/usage/SAMPLE-hoven-19-01027-adversary-complaint.pdf
 ```
 
 Render (2026-10-15): `pdfinfo` reports 4 pages, us-letter. `pdffonts` lists EBGaramond-Regular, -Bold and -Italic only, all embedded. `render.sh` exits 0 with no typst output.
@@ -73,7 +73,7 @@ The overlay PDF's page size is 240.9 × 311.8 pt, not letter. That comes from `t
 
 ## Visual review (Gate 2 record, 2026-10-15, 60 dpi, every page viewed)
 
-Sample (`OUTPUT-adversary-complaint-sample.pdf`, 4 pages):
+Sample (`OUTPUT-lamb-adversary-complaint-adversarycomplaintsample.typst.pdf`, 4 pages):
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -82,7 +82,7 @@ Sample (`OUTPUT-adversary-complaint-sample.pdf`, 4 pages):
 | 3 | Allegations 11-18 | OK. |
 | 4 | Allegations 19-20, unnumbered WHEREFORE paragraph, `Dated:` line, "Respectfully submitted," signature block with `/s/` and counsel lines | OK. The `/s/` line wraps at the bar number; the wrap is in the sample text. |
 
-Overlay (`OVERLAY-adversary-complaint-sample.pdf`, against Hoven; page map in `samples/OVERLAY-adversary-complaint-sample.txt`):
+Overlay (`OVERLAY-adversary-complaint-sample.pdf`, against Hoven; page map in `usage/OVERLAY-adversary-complaint-sample.txt`):
 
 | Our page | Paired filed page | Word overlap | Finding |
 |---|---|---|---|
@@ -121,10 +121,10 @@ Exemplar layout checked on the same pages (60 dpi): both exemplars use an unnumb
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh`, `reference.docx`, `lamb-adversary-complaint.lua`; `samples/OUTPUT-adversary-complaint-sample.docx` is written by `sh tools/render.sh --engine docx`).
+DOCX (`docx/`: `build-reference.sh`, `reference.docx`, `lamb-adversary-complaint.lua`; `usage/OUTPUT-lamb-adversary-complaint-adversarycomplaintsample.docx` is written by `sh tools/render.sh --engine docx`).
 
 - Matches the typst form: EB Garamond 12 pt, exact 24 pt (double) line pitch, 1 in margins on letter, centred PAGE number in the footer, Form 416 caption with a rule at the right and bottom of the left cell, centred court name and title, `(a)` lettered prayer, signature block with `Dated:` on the left.
 - Differs: paragraph numbers ("1.", "2.") and "(a)" letters are typed text generated by the filter, not Word list numbering, so they do not renumber if a paragraph is inserted by hand in Word. Pagination follows the renderer (Word and LibreOffice can break lines differently).
 - Frontmatter fields are checked by the filter (same list as typst); the `consent` check (LAMB-CONT-001) is the same.
-- Not run here: no LibreOffice on this box, so no `.docx.pdf` and no page was viewed. `OUTPUT-adversary-complaint-sample.docx` was validated only as a zip with well-formed XML parts (see the render output).
-- BLOCKED: docx.pdf gates (tools/check.sh --engine docx, Gates 0-3 on `samples/OUTPUT-adversary-complaint-sample.docx.pdf`): LibreOffice (`soffice`) is not installed on this box, so no PDF can be made and the stamp `.check-docx.txt` is not written.
+- Not run here: no LibreOffice on this box, so no `.docx.pdf` and no page was viewed. `OUTPUT-lamb-adversary-complaint-adversarycomplaintsample.docx` was validated only as a zip with well-formed XML parts (see the render output).
+- BLOCKED: docx.pdf gates (tools/check.sh --engine docx, Gates 0-3 on `usage/OUTPUT-adversary-complaint-sample.docx.pdf`): LibreOffice (`soffice`) is not installed on this box, so no PDF can be made and the stamp `.check-docx.txt` is not written.

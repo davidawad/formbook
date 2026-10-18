@@ -2,8 +2,8 @@
 
 - Court: `mnb`, United States Bankruptcy Court, District of Minnesota (`courts/eighth-circuit/minnesota/federal/bankruptcy-district/`)
 - Doc type: `adversary-complaint`, the complaint that commences an adversary proceeding (Fed. R. Bankr. P. 7001).
-- Exemplar: `exemplars/FILED-EXAMPLE-magnetation-17-05086-complaint.pdf` (*Magnetation LLC v. Northern Minnesota Water Conditioning, Inc.*, Adv. No. 17-05086, filed 2017-05-03, 13 pages; provenance in `exemplars/SOURCE.md`).
-- Sample: `samples/INPUT-magnetation-complaint.md` (transcribed from the exemplar).
+- Exemplar: `usage/SAMPLE-mnb-adversary-complaint-magnetation1705086complaint.pdf` (*Magnetation LLC v. Northern Minnesota Water Conditioning, Inc.*, Adv. No. 17-05086, filed 2017-05-03, 13 pages; provenance in `usage/SOURCE.md`).
+- Sample: `usage/INPUT-mnb-adversary-complaint-magnetationcomplaint.md` (transcribed from the exemplar).
 - Status: template and sample kept from master; the README, exemplar, render, and overlay were added in this pass. Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,10 +12,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `mnb-adversary-complaint`. |
 | `typst/mnb-adversary-complaint.typ` | Template. Caption (debtor and adversary boxes), numbered paragraphs, lettered lists, signature block from frontmatter. |
-| `samples/INPUT-magnetation-complaint.md` | Markdown contract sample: YAML frontmatter (title, lead-in, caption, date, signature) plus the body. |
-| `samples/OUTPUT-magnetation-complaint.pdf` | `sh tools/render.sh courts/eighth-circuit/minnesota/federal/bankruptcy-district/adversary-complaint samples/INPUT-magnetation-complaint.md` (11 pages, typst 0.15.0, no warnings). |
-| `samples/OVERLAY-magnetation-complaint.pdf`, `.txt` | `sh tools/overlay.sh <this folder> magnetation-complaint`. Red = our render, blue = filed exemplar, black = both agree. |
-| `exemplars/` | The filed complaint and `SOURCE.md`. |
+| `usage/INPUT-mnb-adversary-complaint-magnetationcomplaint.md` | Markdown contract sample: YAML frontmatter (title, lead-in, caption, date, signature) plus the body. |
+| `usage/OUTPUT-mnb-adversary-complaint-magnetationcomplaint.typst.pdf` | `sh tools/render.sh courts/eighth-circuit/minnesota/federal/bankruptcy-district/adversary-complaint usage/INPUT-mnb-adversary-complaint-magnetationcomplaint.md` (11 pages, typst 0.15.0, no warnings). |
+| `usage/OVERLAY-magnetation-complaint.pdf`, `.txt` | `sh tools/overlay.sh <this folder> magnetation-complaint`. Red = our render, blue = filed exemplar, black = both agree. |
+| `usage/` | The filed complaint and `SOURCE.md`. |
 
 ## Governing rules
 
@@ -39,7 +39,7 @@ No D. Minn. local rule in the complete compilation numbers 7008 or 7010 (the 700
 
 ## Overlay
 
-`samples/OVERLAY-magnetation-complaint.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. The overlay is a diagnostic, not a score. Pairings from the last run:
+`usage/OVERLAY-magnetation-complaint.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. The overlay is a diagnostic, not a score. Pairings from the last run:
 
 - Sample p.1 ↔ filed p.1 (67%): caption and opening paragraph line up.
 - p.2 ↔ p.2 (48%) and p.3 ↔ p.4 (48%): jurisdiction and parties. The filed paragraphs flow differently, so the pages drift.
@@ -50,7 +50,7 @@ The exemplar has no Exhibit A (the statement of account); see Known gaps.
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-magnetation-complaint.pdf` was rendered at 70 dpi and viewed (11 of 11) as PNG; the overlay sheets were viewed as contact sheets (all 11 pages present). The comparison against the filed pages is the overlay pairing above; no separate side-by-side images were made in this pass.
+Every page of `OUTPUT-mnb-adversary-complaint-magnetationcomplaint.typst.pdf` was rendered at 70 dpi and viewed (11 of 11) as PNG; the overlay sheets were viewed as contact sheets (all 11 pages present). The comparison against the filed pages is the overlay pairing above; no separate side-by-side images were made in this pass.
 
 | Page | Content | Result |
 |---|---|---|
@@ -78,13 +78,13 @@ Tier-2 findings (OPEN or ACCEPTED): the page-3 gap above (OPEN); the page-10 gap
 
 ## Engines
 
-| Engine | Folder | Output in `samples/` | State |
+| Engine | Folder | Output in `usage/` | State |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-magnetation-complaint.pdf` | template, unchanged by the docx work; no PDF in the snapshot |
+| typst (primary) | `typst/` | `OUTPUT-mnb-adversary-complaint-magnetationcomplaint.typst.pdf` | template, unchanged by the docx work; no PDF in the snapshot |
 | latex | `latex/` | none | not built |
-| docx | `docx/` | `OUTPUT-magnetation-complaint.docx`, `OUTPUT-magnetation-complaint.docx.pdf` | built (below) |
+| docx | `docx/` | `OUTPUT-mnb-adversary-complaint-magnetationcomplaint.docx`, `OUTPUT-mnb-adversary-complaint-magnetationcomplaint.docx.pdf` | built (below) |
 
-The docx build: `sh tools/render.sh --engine docx adversary-complaint samples/INPUT-magnetation-complaint.md`. It runs `docx/render.sh` (pandoc, the Lua filter `docx/mnb-adversary-complaint.lua`, and `docx/reference.docx`). `docx/make-reference.sh` rebuilds the reference. The PDF is LibreOffice 26.8.1 with the vendored fonts only.
+The docx build: `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-mnb-adversary-complaint-magnetationcomplaint.md`. It runs `docx/render.sh` (pandoc, the Lua filter `docx/mnb-adversary-complaint.lua`, and `docx/reference.docx`). `docx/make-reference.sh` rebuilds the reference. The PDF is LibreOffice 26.8.1 with the vendored fonts only.
 
 What matches the typst output: letter paper with 1 in margins; EB Garamond 12 pt, embedded and the only font; body double-spaced at a 24 pt line pitch with a half-inch first-line indent; numbered paragraphs (numbers typed into the text, as the typst template does) and an unnumbered WHEREFORE; the caption (court title, debtor and adversary boxes with 0.75 pt rules, indented designations, the title in the adversary column, an 18 pt gap); the spacing between its rows matches typst's to about 1 pt; centred bold caps headings; lettered lists (A., B., ...) at the typst indents; the signature block; a centred page number in the footer.
 
@@ -98,4 +98,4 @@ docx BLOCKED items:
 - The docx gates do not run yet: this court has no `rules.md` or `checks.yaml`, so `tools/check.sh --engine docx` has no checks to run. Nothing is stamped.
 - Word: not opened (no Word on this box). The renderer checks the zip and the XML parts; LibreOffice converts the file without a repair step.
 
-Page review (docx): all 10 pages of `OUTPUT-magnetation-complaint.docx.pdf` were rendered at 60 dpi and viewed against the typst render. No page has an open defect that is not in the list above.
+Page review (docx): all 10 pages of `OUTPUT-mnb-adversary-complaint-magnetationcomplaint.docx.pdf` were rendered at 60 dpi and viewed against the typst render. No page has an open defect that is not in the list above.

@@ -5,11 +5,11 @@ Folder: `courts/first-circuit/new-hampshire/federal/bankruptcy-district/adversar
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-smith-pj-currier-24-01019-adversary-complaint.pdf` (one filer, see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-smith-adversary-complaint.md`: the full complaint (introduction through reservation of rights, all four counts, paragraphs 1 to 40), signature block; no certificate of service (an initiating complaint has none, LBR 7103) |
+| exemplar | yes: `usage/SAMPLE-nhb-adversary-complaint-smithpjcurrier2401019.pdf` (one filer, see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nhb-adversary-complaint-smith.md`: the full complaint (introduction through reservation of rights, all four counts, paragraphs 1 to 40), signature block; no certificate of service (an initiating complaint has none, LBR 7103) |
 | typeface | face required: none (no NH local rule names a typeface; see gap 1). Font used: EB Garamond (vendored, the court-names-no-face default in `docs/FONTS.md`). Not a substitution: nothing to match. |
-| render | ok: `samples/OUTPUT-smith-adversary-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EB Garamond Regular and Bold embedded), no warnings (`tools/render.sh`, re-run 2026-10-14) |
-| overlay | ok: `samples/OVERLAY-smith-adversary-complaint.pdf` and `samples/OVERLAY-smith-adversary-complaint.txt` (re-run 2026-10-14). The filed PDF is not in this checkout (`exemplars/` holds only `SOURCE.md`); the overlay was run against the copy fetched from the URL in `exemplars/SOURCE.md` (9 pages, matching the record) |
+| render | ok: `usage/OUTPUT-nhb-adversary-complaint-smith.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`: EB Garamond Regular and Bold embedded), no warnings (`tools/render.sh`, re-run 2026-10-14) |
+| overlay | ok: `usage/OVERLAY-smith-adversary-complaint.pdf` and `usage/OVERLAY-smith-adversary-complaint.txt` (re-run 2026-10-14). The filed PDF is not in this checkout (`usage/` holds only `SOURCE.md`); the overlay was run against the copy fetched from the URL in `usage/SOURCE.md` (9 pages, matching the record) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed on the 2026-10-14 re-render; no template change, so the review matches the earlier one) |
 
 File names follow the tools' contract (`render.sh` writes `OUTPUT-<id>.pdf`, `overlay.sh` reads it and writes `OVERLAY-<id>.pdf`/`.txt`), not the bare `<id>.md` / `<id>.pdf` names in the task brief.
@@ -45,7 +45,7 @@ Primary sources, fetched 2026-10-14. Federal rules from the Legal Information In
 
 ## What the overlay shows
 
-`samples/OVERLAY-smith-adversary-complaint.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by word overlap; the page map is in `OVERLAY-smith-adversary-complaint.txt`:
+`usage/OVERLAY-smith-adversary-complaint.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by word overlap; the page map is in `OVERLAY-smith-adversary-complaint.txt`:
 
 ```
 ours p.1 filed p.1 word-overlap 75.8%   ours p.6 filed p.6 word-overlap 74.5%
@@ -86,7 +86,7 @@ No findings were recorded in `reviews/` (this doc type has no `reviews/` folder)
 
 ## Engines
 
-docx (`docx/`: `build-reference.sh`, `reference.docx`, `nhb.lua`; output `samples/OUTPUT-smith-adversary-complaint.docx` and `.docx.pdf`, LibreOffice PDF, 9 pages, EB Garamond only):
+docx (`docx/`: `build-reference.sh`, `reference.docx`, `nhb.lua`; output `usage/OUTPUT-nhb-adversary-complaint-smith.docx` and `.docx.pdf`, LibreOffice PDF, 9 pages, EB Garamond only):
 
 - Matches the typst form: EB Garamond 12 pt; body at an exact 27.6 pt line pitch (measured on the typst PDF); 0.5 in first-line indent; 6 pt after each paragraph; letter paper, 1 in margins; centered PAGE number; court lines at the typst's 10.8 pt pitch; the two caption tables with right and bottom rules; numbered paragraphs 1 to 40 with unnumbered INTRODUCTION, RESERVATION OF RIGHTS and WHEREFORE paragraphs; lettered sub-items indented; the signature block kept with the last paragraph. Page count 9 = 9.
 - Differs: line breaking in LibreOffice moves a line or two per page, so page 2 begins with paragraph 2 where the typst page 2 begins with the JURISDICTION heading. "TIMOTHY P. SMITH, CHAPTER 7 TRUSTEE" wraps in the signature block (the typst block does not). The blank adversary number is a tab with an underscore leader, not a drawn rule. The transfer schedule is flattened, as in the typst form.

@@ -32,7 +32,10 @@ fn collect_pdfs(dir: &Path, out: &mut Vec<PathBuf>) -> std::io::Result<()> {
         } else if p.extension().and_then(|s| s.to_str()) == Some("pdf")
             && p.file_name()
                 .and_then(|s| s.to_str())
-                .is_some_and(|s| s.starts_with("FILED-EXAMPLE-"))
+                .is_some_and(|s| s.starts_with("SAMPLE-"))
+            && p.parent()
+                .and_then(|d| d.file_name())
+                .is_some_and(|d| d == crate::layout::USAGE_DIR)
         {
             out.push(p);
         }
@@ -195,12 +198,18 @@ fn times_doc_dirs(root: &Path) -> Res<Vec<PathBuf>> {
             .unwrap_or("")
             .to_ascii_lowercase();
         if body.contains("timesnewroman") || body == "times" {
-            if let Some((doc, _)) = rel.split_once("/exemplars/") {
+            if let Some(doc) = audit_doc(rel) {
                 dirs.insert(root.join(doc));
             }
         }
     }
     Ok(dirs.into_iter().collect())
+}
+
+/// The doc folder of a font-audit key `<doc>/usage/SAMPLE-<stem>-<id>.pdf`.
+pub fn audit_doc(key: &str) -> Option<&str> {
+    let (doc, file) = key.rsplit_once(&format!("/{}/", crate::layout::USAGE_DIR))?;
+    file.starts_with("SAMPLE-").then_some(doc)
 }
 
 pub fn has_times_exemplar(root: &Path, doc: &Path) -> Res<bool> {
@@ -219,8 +228,7 @@ pub fn has_times_exemplar(root: &Path, doc: &Path) -> Res<bool> {
             .and_then(Value::as_str)
             .unwrap_or("")
             .to_ascii_lowercase();
-        path.starts_with(&format!("{rel}/exemplars/"))
-            && (body.contains("timesnewroman") || body == "times")
+        audit_doc(path) == Some(&*rel) && (body.contains("timesnewroman") || body == "times")
     }))
 }
 
@@ -361,8 +369,23 @@ fn audit_additions() -> Res<std::process::ExitCode> {
         fs::write(&p, text).map_err(|e| fail(2, format!("{}: {e}", p.display())))?;
     }
     println!(
-        "audited {} new FILED-EXAMPLE PDFs with pdffonts and pdftohtml",
+        "audited {} new SAMPLE PDFs with pdffonts and pdftohtml",
         additions.len()
     );
     Ok(std::process::ExitCode::SUCCESS)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn audit_keys() {
+        assert_eq!(
+            audit_doc("courts/x/opening-brief/usage/SAMPLE-ca9-opening-brief-a1.pdf"),
+            Some("courts/x/opening-brief")
+        );
+        assert_eq!(audit_doc("courts/x/exemplars/FILED-EXAMPLE-a.pdf"), None);
+        assert_eq!(audit_doc("courts/x/usage/OUTPUT-ca9-a.typst.pdf"), None);
+    }
 }

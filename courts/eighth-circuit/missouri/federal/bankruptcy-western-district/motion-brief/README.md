@@ -6,11 +6,11 @@ The exemplars are *separate* memoranda filed with a motion to dismiss (the motio
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 2 filers: `exemplars/FILED-EXAMPLE-barnhart-13-04184-motion-brief.pdf` (4 pp, MOHELA, 2014) and `exemplars/FILED-EXAMPLE-lewallen-05-05013-motion-brief.pdf` (5 pp, Green Tree Servicing and U.S. Bank, 2005). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-barnhart-mohela-memorandum.md` (the whole memorandum, 4 pages) |
-| render | ok: `samples/OUTPUT-barnhart-mohela-memorandum.pdf`, 4 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
+| exemplar | yes, 2 filers: `usage/SAMPLE-mowb-motion-brief-barnhart1304184.pdf` (4 pp, MOHELA, 2014) and `usage/SAMPLE-mowb-motion-brief-lewallen0505013.pdf` (5 pp, Green Tree Servicing and U.S. Bank, 2005). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-mowb-motion-brief-barnhartmohelamemorandum.md` (the whole memorandum, 4 pages) |
+| render | ok: `usage/OUTPUT-mowb-motion-brief-barnhartmohelamemorandum.typst.pdf`, 4 pages, typst 0.15.0, EB Garamond only (vendored), no warnings |
 | typeface | no face named by the court's rules (checked 2026-10-14); EB Garamond kept, per `docs/FONTS.md` rule 3 |
-| overlay | fail (2026-10-14): `tools/overlay.sh` cannot run, because `exemplars/` holds only `SOURCE.md` and the filed PDF is not in this snapshot. The `OVERLAY-barnhart-mohela-memorandum.txt` shown is from the earlier run; no `.pdf` overlay exists. |
+| overlay | fail (2026-10-14): `tools/overlay.sh` cannot run, because `usage/` holds only `SOURCE.md` and the filed PDF is not in this snapshot. The `OVERLAY-barnhart-mohela-memorandum.txt` shown is from the earlier run; no `.pdf` overlay exists. |
 | pages reviewed | 4 of 4 (every page of the 2026-10-14 render rasterized at 60 dpi and viewed) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`INPUT-`, `OUTPUT-`, `OVERLAY-`). The overlay tool writes `OVERLAY-<id>.pdf`; it does not write `<id>-overlay.pdf`.
@@ -56,7 +56,7 @@ Not produced by this template (separate filings, not part of the memorandum): th
 
 ## Overlay
 
-`sh tools/overlay.sh courts/eighth-circuit/missouri/federal/bankruptcy-western-district/motion-brief barnhart-mohela-memorandum`. The first exemplar in `exemplars/` is Barnhart. The page map from the final run (`samples/OVERLAY-barnhart-mohela-memorandum.txt`): ours p.1 to p.4 pair with filed pp. 1 to 4 (word overlap 64.4%, 70.1%, 60.4%, 28.4%). Page 4 is low (28%) because our page 4 holds the certificate of service, which the filed memorandum does not have, and the filed page 4 is short. The overlay is a diagnostic, not a score. The visible differences are tier-3: the filed document is in Calibri/Arial and has a different caption spacing.
+`sh tools/overlay.sh courts/eighth-circuit/missouri/federal/bankruptcy-western-district/motion-brief barnhart-mohela-memorandum`. The first exemplar in `usage/` is Barnhart. The page map from the final run (`usage/OVERLAY-barnhart-mohela-memorandum.txt`): ours p.1 to p.4 pair with filed pp. 1 to 4 (word overlap 64.4%, 70.1%, 60.4%, 28.4%). Page 4 is low (28%) because our page 4 holds the certificate of service, which the filed memorandum does not have, and the filed page 4 is short. The overlay is a diagnostic, not a score. The visible differences are tier-3: the filed document is in Calibri/Arial and has a different caption spacing.
 
 ## Gate 2 review (current PDF, every page rendered at 60 dpi and viewed)
 
@@ -83,7 +83,7 @@ Not produced by this template (separate filings, not part of the memorandum): th
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for this doc type. Unchanged by the docx work.
-- **docx** (`docx/`): `reference.docx` (built by `sh docx/make-reference.sh`: styles, US Letter, 1 inch margins, centred PAGE footer) and `mowb.lua` (caption, roman and lettered headings, numbered lists, signature block and certificate). Output: `samples/OUTPUT-barnhart-mohela-memorandum.docx` and `.docx.pdf` (`sh tools/render.sh --engine docx <this folder> samples/INPUT-barnhart-mohela-memorandum.md`).
+- **docx** (`docx/`): `reference.docx` (built by `sh docx/make-reference.sh`: styles, US Letter, 1 inch margins, centred PAGE footer) and `mowb.lua` (caption, roman and lettered headings, numbered lists, signature block and certificate). Output: `usage/OUTPUT-mowb-motion-brief-barnhartmohelamemorandum.docx` and `.docx.pdf` (`sh tools/render.sh --engine docx <this folder> usage/INPUT-mowb-motion-brief-barnhartmohelamemorandum.md`).
   - **Matches typst:** US Letter, 1 inch margins, EB Garamond 13 pt (declared; install it to open as designed), the caption and court title, the title, single spacing with a blank line between paragraphs, first-line indents, roman (I., II.) and lettered (A., B.) headings, numbered lists, signature block and certificate of service, page-number footer.
   - **Differs from typst:** 5 pages in docx against 4 in typst. The body line spacing is looser, so the Conclusion and signature run over, and the certificate of service falls alone on page 5. Nothing is forced with page breaks.
   - **Checked:** the `.docx.pdf` is the LibreOffice 26.8.1 conversion (fonts embedded: EB Garamond only). Every page (1-5) was rendered at 60 dpi and viewed beside the typst pages. The `.docx` was not opened in Word.

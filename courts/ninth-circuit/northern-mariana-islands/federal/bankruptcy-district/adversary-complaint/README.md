@@ -8,10 +8,10 @@ Folder: `courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-distri
 | Item | Status |
 |---|---|
 | exemplar | no (BLOCKED: no exemplar; see the searches below) |
-| sample md | `samples/INPUT-synthetic-complaint.md` (synthetic; placeholder names, numbers and dates; not a transcription of any filing) |
-| render | ok: `samples/OUTPUT-synthetic-complaint.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
+| sample md | `usage/INPUT-nmib-adversary-complaint-syntheticcomplaint.md` (synthetic; placeholder names, numbers and dates; not a transcription of any filing) |
+| render | ok: `usage/OUTPUT-nmib-adversary-complaint-syntheticcomplaint.typst.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings |
 | typeface | face required: none (LR 5.2(a): "serif font"); font kept: EB Garamond (serif, vendored); no substitute needed |
-| overlay | fail: `tools/overlay.sh` needs an exemplar PDF in `exemplars/`; none exists, so no overlay was produced |
+| overlay | fail: `tools/overlay.sh` needs an exemplar PDF in `usage/`; none exists, so no overlay was produced |
 | pages reviewed | 3 of 3 (every page rendered at 60 dpi and viewed on 2026-10-15) |
 
 ## Searches tried (for an exemplar)
@@ -72,10 +72,10 @@ Not generated here: the summons (Form 287 adversary summons, FRBP 7004), the cov
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
-sh tools/render.sh courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district/adversary-complaint samples/INPUT-synthetic-complaint.md
+sh tools/render.sh courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district/adversary-complaint usage/INPUT-nmib-adversary-complaint-syntheticcomplaint.md
 ```
 
-The overlay command (`sh tools/overlay.sh <court-dir>`) exits 2 here with `tools/overlay.sh: 16: 2: parameter not set` (2026-10-14, run for real): it needs `exemplars/*.pdf`. Nothing was produced.
+The overlay command (`sh tools/overlay.sh <court-dir>`) exits 2 here with `tools/overlay.sh: 16: 2: parameter not set` (2026-10-14, run for real): it needs `usage/*.pdf`. Nothing was produced.
 
 ## Visual review (Gate 2 record, all 3 pages, rendered at 60 dpi and viewed)
 
@@ -121,15 +121,15 @@ The required batch task prompted another search for a public filed complaint:
 
 Result: no public filed adversary complaint found. The missing artifact is still a blocker for sample transcription, a valid exemplar overlay, and a comparison-based all-page review. The existing synthetic output was rasterized at 100 dpi and all three pages were inspected on 2026-10-17 for its own layout only; that inspection is not a substitute for comparison to a filed exemplar. No overlay was produced.
 
-Re-verified this session: `sh tools/render.sh` exit 0, `samples/OUTPUT-synthetic-complaint.pdf`, 3 pages, EB Garamond only (`pdffonts`). All 3 pages rasterized at 60 dpi (`pdftoppm -r 60`) and viewed: page 1 caption and title, page 2 paragraphs 1 to 11 and sub-heading, page 3 claim, prayer, jury demand and signature. No template change. `sh tools/overlay.sh <dir>` exit 2 (`parameter not set`, no exemplar PDF). The overlay stays not produced.
+Re-verified this session: `sh tools/render.sh` exit 0, `usage/OUTPUT-nmib-adversary-complaint-syntheticcomplaint.typst.pdf`, 3 pages, EB Garamond only (`pdffonts`). All 3 pages rasterized at 60 dpi (`pdftoppm -r 60`) and viewed: page 1 caption and title, page 2 paragraphs 1 to 11 and sub-heading, page 3 claim, prayer, jury demand and signature. No template change. `sh tools/overlay.sh <dir>` exit 2 (`parameter not set`, no exemplar PDF). The overlay stays not produced.
 ## Engines
 
 - **typst** (primary): `typst/`, as above.
-- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 13 pt, exact 24 pt line spacing, 0.5 in first-line indent, letter, margins 1.5 in top and bottom, 1.3 in left, 1 in right, pleading rules as page borders, line numbers 1 to 24 restarting each page, page number centered in the footer). `docx/nmib-adversary-complaint.lua` writes the cover, the Form 416D caption table, the numbered allegations (the "::" lead-in is unnumbered) and the signature block. Built 2026-10-15: `samples/OUTPUT-synthetic-complaint.docx` written by `tools/render.sh --engine docx`; `unzip -tq` OK; every XML part `xmllint --noout` OK.
+- **docx**: `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (EB Garamond 13 pt, exact 24 pt line spacing, 0.5 in first-line indent, letter, margins 1.5 in top and bottom, 1.3 in left, 1 in right, pleading rules as page borders, line numbers 1 to 24 restarting each page, page number centered in the footer). `docx/nmib-adversary-complaint.lua` writes the cover, the Form 416D caption table, the numbered allegations (the "::" lead-in is unnumbered) and the signature block. Built 2026-10-15: `usage/OUTPUT-nmib-adversary-complaint-syntheticcomplaint.docx` written by `tools/render.sh --engine docx`; `unzip -tq` OK; every XML part `xmllint --noout` OK.
 - **Matches the typst form:** typeface and size, double spacing, indents, margins, pleading rules, numbers 1 to 24, page number, numbered paragraphs, caption layout (a table with a right and bottom rule), title and signature.
 - **Differs from the typst form:**
   - Word's line numbering skips tables, so the caption and signature table rows carry no line numbers (typst numbers every line).
   - The counsel block and the caption are single spaced, so they are not on the 24-point grid, and Word numbers each single-spaced line.
   - The typst footer also prints the footer title and the case number. The docx footer comes from `reference.docx` and carries only the page number, because the case number is case-specific and the footer is static.
   - Word and LibreOffice paginate differently; the page where a line falls may differ.
-- **BLOCKED (docx.pdf gates 0 and 1, and the page review):** LibreOffice (`soffice`) is not installed on this box, so `samples/OUTPUT-synthetic-complaint.docx.pdf` was not made and no page of the `.docx` was viewed. The `.docx` was not opened in Word either. Checks that cannot pass by construction: the footer case-number line, and line numbers on the caption and signature tables.
+- **BLOCKED (docx.pdf gates 0 and 1, and the page review):** LibreOffice (`soffice`) is not installed on this box, so `usage/OUTPUT-synthetic-complaint.docx.pdf` was not made and no page of the `.docx` was viewed. The `.docx` was not opened in Word either. Checks that cannot pass by construction: the footer case-number line, and line numbers on the caption and signature tables.

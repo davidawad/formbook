@@ -3,7 +3,7 @@
 - Court: `alnb`, United States Bankruptcy Court for the Northern District of Alabama (`courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district/`)
 - Doc type: `motion-brief` (a motion in an adversary proceeding, with the argument set out in the motion; Fed. R. Bankr. P. 9013, 9014, 7012(b))
 - Engine: typst (primary). `latex/` and `docx/` are not built for this doc type.
-- Exemplars: `exemplars/` holds two public filings from different filers (see `exemplars/SOURCE.md`). The overlay uses the first one (`FILED-EXAMPLE-dombrowski-v-american-estate-17-80079-motion-brief.pdf`, the United States' motion to dismiss, 11 pp.), which is the tier-2 primary. The second is Wright (defendant NCS's Rule 12(b)(6) motion, 8 pp.).
+- Exemplars: `usage/` holds two public filings from different filers (see `usage/SOURCE.md`). The overlay uses the first one (`SAMPLE-alnb-motion-brief-dombrowskivamericanestate1780079.pdf`, the United States' motion to dismiss, 11 pp.), which is the tier-2 primary. The second is Wright (defendant NCS's Rule 12(b)(6) motion, 8 pp.).
 
 ## Files
 
@@ -11,10 +11,10 @@
 |---|---|
 | `typst/main.typ` | Entry point. Reads `--input sample=...` and calls `alnb-motion-brief`. |
 | `typst/alnb-motion-brief.typ` | Template. Court title, caption, title, Roman-numeral and lettered section headings, unnumbered body paragraphs, footnotes, signature block, certificate of service. Parameter block at the top. |
-| `samples/INPUT-dombrowski-motion-brief.md` | Transcription of the Dombrowski motion, all 11 pages of text (frontmatter + body). Frontmatter fields: `court`, `caption` (list of `left`/`right` line blocks), `title`, `signature` (`date`, `lead`, `signer`, `lines`, `of_counsel`), `certificate` (`text`, `served` as a list of party line-lists, `signer`, `signer_lines`). |
-| `samples/OUTPUT-dombrowski-motion-brief.pdf` | `sh tools/render.sh <dir> samples/INPUT-dombrowski-motion-brief.md`, where `<dir>` is this folder. 9 pages. |
-| `samples/OVERLAY-dombrowski-motion-brief.pdf`, `.txt` | `sh tools/overlay.sh <dir> dombrowski-motion-brief`. Red = our render, blue = filed exemplar, black = both. `.txt` is the page map. |
-| `exemplars/` | Two filed motions (Dombrowski 11 pp.; Wright 8 pp.) and `SOURCE.md`. |
+| `usage/INPUT-alnb-motion-brief-dombrowski.md` | Transcription of the Dombrowski motion, all 11 pages of text (frontmatter + body). Frontmatter fields: `court`, `caption` (list of `left`/`right` line blocks), `title`, `signature` (`date`, `lead`, `signer`, `lines`, `of_counsel`), `certificate` (`text`, `served` as a list of party line-lists, `signer`, `signer_lines`). |
+| `usage/OUTPUT-alnb-motion-brief-dombrowski.typst.pdf` | `sh tools/render.sh <dir> usage/INPUT-alnb-motion-brief-dombrowski.md`, where `<dir>` is this folder. 9 pages. |
+| `usage/OVERLAY-dombrowski-motion-brief.pdf`, `.txt` | `sh tools/overlay.sh <dir> dombrowski-motion-brief`. Red = our render, blue = filed exemplar, black = both. `.txt` is the page map. |
+| `usage/` | Two filed motions (Dombrowski 11 pp.; Wright 8 pp.) and `SOURCE.md`. |
 
 ## Governing rules
 
@@ -31,11 +31,11 @@ Retrieved 2026-10-14. Text checked on Cornell LII; the "as amended" dates are th
 
 Neither motion exemplar's caption, body or certificate is a rule text; the exemplars settle only what the rules leave open (heading style, caption layout, the signature block, the service list). The template's type size (12 pt), margins (1 in), double spacing and page-number footer are style choices, not rule requirements.
 
-Gap: the 2023 local-rules PDF that `exemplars/SOURCE.md` cites as read in full was not reachable through the court's website in this run (the index page links HTML rule pages, not a PDF). No N.D. Ala. local rule that the template relies on was found on those pages. Local rule pages 2 and 3 of the index were not opened.
+Gap: the 2023 local-rules PDF that `usage/SOURCE.md` cites as read in full was not reachable through the court's website in this run (the index page links HTML rule pages, not a PDF). No N.D. Ala. local rule that the template relies on was found on those pages. Local rule pages 2 and 3 of the index were not opened.
 
 ## Overlay
 
-`samples/OVERLAY-dombrowski-motion-brief.pdf` pairs our nine pages with the Dombrowski motion (page pairs in `samples/OVERLAY-dombrowski-motion-brief.txt`). Word overlap per page runs from 37% to 91%. The pages that disagree most are our pages 7 and 8, which carry the end of the argument, the signature block, and the certificate; the filed certificate is on page 11 and the filed signature on page 10.
+`usage/OVERLAY-dombrowski-motion-brief.pdf` pairs our nine pages with the Dombrowski motion (page pairs in `usage/OVERLAY-dombrowski-motion-brief.txt`). Word overlap per page runs from 37% to 91%. The pages that disagree most are our pages 7 and 8, which carry the end of the argument, the signature block, and the certificate; the filed certificate is on page 11 and the filed signature on page 10.
 
 Expected differences, by page:
 
@@ -55,7 +55,7 @@ Known differences that are not template faults:
 - **Italics not transcribed.** Case names and signals are italic in the filed motion. `pdftotext` cannot see italics, so the sample does not italicize them. The overlay cannot show this difference.
 - **Certificate of conference.** The Wright motion has one (counsel's conferral and opposition statement, dated and signed). The template does not render one: nothing in the Dombrowski exemplar requires it, and no N.D. Ala. local rule requiring it was located in this run.
 - **Running footer.** The Wright exemplar carries the document title and "Page n" in its footer. The template uses a page-number-only footer, as the adversary complaint does.
-- **Second filer not overlaid.** The overlay tool pairs against the first `exemplars/*.pdf` only. The Wright motion is the tier-2 comparison for the caption (its `§` column and its ADVERSARY NO. line differ from Dombrowski's `)` column) and the signature block (`By:` line, OF COUNSEL block). It is compared by reading, not by overlay.
+- **Second filer not overlaid.** The overlay tool pairs against the first `usage/*.pdf` only. The Wright motion is the tier-2 comparison for the caption (its `§` column and its ADVERSARY NO. line differ from Dombrowski's `)` column) and the signature block (`By:` line, OF COUNSEL block). It is compared by reading, not by overlay.
 - **Case-number style.** Dombrowski uses `Case No.` on the first caption line; Wright uses `CASE NO:`. The sample follows Dombrowski.
 - **No e-filing rules.** The court's CM/ECF filing requirements are not encoded (only the physical layout is).
 
@@ -63,8 +63,8 @@ Known differences that are not template faults:
 
 ## Engines
 
-- **typst** (primary): `typst/`, `samples/OUTPUT-dombrowski-motion-brief.pdf` (9 pages).
-- **docx**: `docx/` (`make-reference.sh` builds `reference.docx`; `alnb.lua` adds the court title, caption table, title, signature block and certificate of service with the served parties). Output `samples/OUTPUT-dombrowski-motion-brief.docx` and `.docx.pdf` (LibreOffice conversion, 10 pages, every page rendered and looked at).
+- **typst** (primary): `typst/`, `usage/OUTPUT-alnb-motion-brief-dombrowski.typst.pdf` (9 pages).
+- **docx**: `docx/` (`make-reference.sh` builds `reference.docx`; `alnb.lua` adds the court title, caption table, title, signature block and certificate of service with the served parties). Output `usage/OUTPUT-alnb-motion-brief-dombrowski.docx` and `.docx.pdf` (LibreOffice conversion, 10 pages, every page rendered and looked at).
 - **latex**: not built for this doc type.
 
 What matches the typst form (12 pt EB Garamond, 1-inch margins, letter, 24 pt exact body leading, half-inch first-line indent, unnumbered paragraphs, centered Roman-numeral headings and flush-left lettered headings with a 0.5-inch indent, footnotes, single-spaced caption and signature block, the certificate of service heading, centered page-number footer).

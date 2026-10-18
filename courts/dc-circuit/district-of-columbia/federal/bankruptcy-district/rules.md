@@ -21,11 +21,11 @@ Re-check cadence: re-check annually each December 1 (Federal Bankruptcy Rules am
 | FRBP-9013 | Fed. R. Bankr. P. 9013 (motions: form and service) | https://www.law.cornell.edu/rules/frbp/rule_9013 |
 | FRBP-9037 | Fed. R. Bankr. P. 9037 (privacy protection) | https://www.law.cornell.edu/rules/frbp/rule_9037 |
 | FRCP-10 | Fed. R. Civ. P. 10 (as applied by FRBP 7010) | https://www.law.cornell.edu/rules/frcp/rule_10 |
-| EX-A1 | Adversary complaint, Webster v. Square Funding, Adv. 25-10054 (The VerStandig Law Firm) | `adversary-complaint/exemplars/SOURCE.md` |
-| EX-A2 | Adversary complaint, Woodcrest Condominiums IX v. Welch Family LP Five, Adv. 25-10036 (Whiteford, Taylor & Preston) | `adversary-complaint/exemplars/SOURCE.md` |
-| EX-A3 | Adversary complaint, Bolog v. Swain Landing LaPlata JC, Adv. 25-10019 (Cadwalader, Wickersham & Taft) | `adversary-complaint/exemplars/SOURCE.md` |
-| EX-M1 | Motion to dismiss with memorandum, Swain Landing LaPlata JC v. Swain, Adv. 25-10013, Doc 5 (McNamee Hosea, P.A.) | `motion-brief/exemplars/SOURCE.md` |
-| EX-M2 | Motion to dismiss and brief in support, Webster v. R13 Community Partners, Adv. 25-10053, Doc 12 (Squire Patton Boggs) | `motion-brief/exemplars/SOURCE.md` |
+| EX-A1 | Adversary complaint, Webster v. Square Funding, Adv. 25-10054 (The VerStandig Law Firm) | `adversary-complaint/usage/SOURCE.md` |
+| EX-A2 | Adversary complaint, Woodcrest Condominiums IX v. Welch Family LP Five, Adv. 25-10036 (Whiteford, Taylor & Preston) | `adversary-complaint/usage/SOURCE.md` |
+| EX-A3 | Adversary complaint, Bolog v. Swain Landing LaPlata JC, Adv. 25-10019 (Cadwalader, Wickersham & Taft) | `adversary-complaint/usage/SOURCE.md` |
+| EX-M1 | Motion to dismiss with memorandum, Swain Landing LaPlata JC v. Swain, Adv. 25-10013, Doc 5 (McNamee Hosea, P.A.) | `motion-brief/usage/SOURCE.md` |
+| EX-M2 | Motion to dismiss and brief in support, Webster v. R13 Community Partners, Adv. 25-10053, Doc 12 (Squire Patton Boggs) | `motion-brief/usage/SOURCE.md` |
 
 Kinds: **M** = mandated by a court rule (Local Bankruptcy Rule, LBR appendix, or Federal Rule). **C** = convention (the rules leave it open; taken from exemplars). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 
@@ -112,4 +112,4 @@ Findings:
 
 ## Exemplars
 
-Adversary complaint: EX-A1 (Webster, The VerStandig Law Firm), EX-A2 (Woodcrest, Whiteford, Taylor & Preston), EX-A3 (Bolog, Cadwalader, Wickersham & Taft). Motion: EX-M1 (Swain, McNamee Hosea), EX-M2 (R13, Squire Patton Boggs). EX-A2, EX-A3 and EX-M2 were added on 2026-10-17 from CourtListener RECAP storage (see each `exemplars/SOURCE.md`).
+Adversary complaint: EX-A1 (Webster, The VerStandig Law Firm), EX-A2 (Woodcrest, Whiteford, Taylor & Preston), EX-A3 (Bolog, Cadwalader, Wickersham & Taft). Motion: EX-M1 (Swain, McNamee Hosea), EX-M2 (R13, Squire Patton Boggs). EX-A2, EX-A3 and EX-M2 were added on 2026-10-17 from CourtListener RECAP storage (see each `usage/SOURCE.md`).

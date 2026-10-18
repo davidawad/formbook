@@ -11,10 +11,10 @@ Access note: `www.uscg.mil` returns HTTP 403 to this box (and to the WebFetch to
 | Tag | Source | URL |
 |---|---|---|
 | CGCCA-R | United States Coast Guard Rules of Appellate Procedure, "Rev. 03/25", published together with the Joint Rules of Appellate Procedure (JRAP) effective 27 May 2024 (JRAP text in bold) (33 pp., PDF created 2025-03-26) | https://www.uscg.mil/Portals/0/Headquarters/Legal/cca/CGCCA%20Rules%20of%20Appellate%20Procedure%20with%20JRAP%20(March%202025).pdf (read from https://web.archive.org/web/20250428115614/https://www.uscg.mil/Portals/0/Headquarters/Legal/cca/CGCCA%20Rules%20of%20Appellate%20Procedure%20with%20JRAP%20(March%202025).pdf) |
-| EX-STEEN-OB | Assignment of error and brief, *United States v. Steen*, Dkt. 1464 (appellate defense counsel; signature page not published) | `opening-brief/exemplars/` |
-| EX-RODRIGUEZ | Assignments of error and brief on behalf of the appellant, *United States v. Rodriguez*, Dkt. 1450 (civilian defense counsel James S. Trieschmann), 2017 | `opening-brief/exemplars/` |
-| EX-STEEN-AB | Answer to assignments of error on behalf of the United States, *United States v. Steen*, Dkt. 1464 (Appellate Government Counsel, CG-LMJ) | `answering-brief/exemplars/` |
-| EX-WEISER | Answer and brief on behalf of the United States, *United States v. Weiser*, Dkt. 1469 (Appellate Government Counsel, CG-LMJ), 2020 | `answering-brief/exemplars/` |
+| EX-STEEN-OB | Assignment of error and brief, *United States v. Steen*, Dkt. 1464 (appellate defense counsel; signature page not published) | `opening-brief/usage/` |
+| EX-RODRIGUEZ | Assignments of error and brief on behalf of the appellant, *United States v. Rodriguez*, Dkt. 1450 (civilian defense counsel James S. Trieschmann), 2017 | `opening-brief/usage/` |
+| EX-STEEN-AB | Answer to assignments of error on behalf of the United States, *United States v. Steen*, Dkt. 1464 (Appellate Government Counsel, CG-LMJ) | `answering-brief/usage/` |
+| EX-WEISER | Answer and brief on behalf of the United States, *United States v. Weiser*, Dkt. 1469 (Appellate Government Counsel, CG-LMJ), 2020 | `answering-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (CGCCA Rules or JRAP). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 
@@ -77,5 +77,5 @@ Findings that differ from what many templates assume:
 
 ## Not verified
 
-- Whether the Steen copies in `exemplars/` (8 pages each) are complete; their `SOURCE.md` describes longer published documents.
+- Whether the Steen copies in `usage/` (8 pages each) are complete; their `SOURCE.md` describes longer published documents.
 - The JRAP marking (bold type) does not survive `pdftotext`; the "(JRAP text)" tags above are assigned from the matching wording in the AFCCA edition of the JRAP read in this pass, not from the bold marking.

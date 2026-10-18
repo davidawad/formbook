@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-eastern-district/adversar
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-lrk-96-simpson-25-04019-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-lrk-96-simpson-complaint.md` (the whole 15-page filing, text transcribed, paragraph numbers left to the template) |
-| render | ok: `samples/OUTPUT-lrk-96-simpson-complaint.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-lrk-96-simpson-complaint.pdf` and `OVERLAY-lrk-96-simpson-complaint.txt` (page map) |
+| exemplar | yes: `usage/SAMPLE-txeb-adversary-complaint-lrk96simpson2504019.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-txeb-adversary-complaint-lrk96simpsoncomplaint.md` (the whole 15-page filing, text transcribed, paragraph numbers left to the template) |
+| render | ok: `usage/OUTPUT-txeb-adversary-complaint-lrk96simpsoncomplaint.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-lrk-96-simpson-complaint.pdf` and `OVERLAY-lrk-96-simpson-complaint.txt` (page map) |
 | typeface | face required: none (the 2022 E.D. Tex. Bankr. local rules name no typeface; checked 2026-10-14). Font: EB Garamond (vendored, kept). No substitute applies. |
 | pages reviewed | 13 of 13 (every page rendered at 60 dpi and viewed after the last template change) |
 
@@ -38,7 +38,7 @@ No font, type size, margin, paper, or spacing rule was found in FRBP 7010, FRBP 
 
 ## What the overlay shows
 
-`OVERLAY-lrk-96-simpson-complaint.pdf`: red is our render (`OUTPUT-lrk-96-simpson-complaint.pdf`), blue is the filed page, black is where they agree. Pages are paired by shared words, so the map in `OVERLAY-lrk-96-simpson-complaint.txt` pairs our page 1 with filed page 1, and later pages drift by one or two pages because our render has fewer lines per page than the filing (13 pages against 15). The word-overlap figures (50% to 86%) are a diagnostic, not a score. The visible differences are the typeface (EB Garamond against Times New Roman), the body's line length, and the footer's small capitals.
+`OVERLAY-lrk-96-simpson-complaint.pdf`: red is our render (`OUTPUT-txeb-adversary-complaint-lrk96simpsoncomplaint.typst.pdf`), blue is the filed page, black is where they agree. Pages are paired by shared words, so the map in `OVERLAY-lrk-96-simpson-complaint.txt` pairs our page 1 with filed page 1, and later pages drift by one or two pages because our render has fewer lines per page than the filing (13 pages against 15). The word-overlap figures (50% to 86%) are a diagnostic, not a score. The visible differences are the typeface (EB Garamond against Times New Roman), the body's line length, and the footer's small capitals.
 
 ## Page review (Gate 2 equivalent; 13 of 13 pages)
 
@@ -77,8 +77,8 @@ CourtListener RECAP search with `court=txeb`, `type=r`, queries "adversary proce
 
 ## Engines
 
-Typst is the primary engine (above). The docx engine is in `docx/`: `reference.docx` (built by `docx/make-reference.sh`), `txeb-adversary-complaint.lua` (the caption, court title, signature block, allegation numbers), and `render.sh` (pandoc, then the footer title). Output: `samples/OUTPUT-lrk-96-simpson-complaint.docx`. The latex engine is not built for this folder.
+Typst is the primary engine (above). The docx engine is in `docx/`: `reference.docx` (built by `docx/make-reference.sh`), `txeb-adversary-complaint.lua` (the caption, court title, signature block, allegation numbers), and `render.sh` (pandoc, then the footer title). Output: `usage/OUTPUT-txeb-adversary-complaint-lrk96simpsoncomplaint.docx`. The latex engine is not built for this folder.
 
 - **Matches the typst form (built from the typst values; no docx page has been rendered or looked at):** EB Garamond 12 pt; letter paper with 1-inch margins; body double spaced at exact 24 pt; allegation numbers with a half-inch first-line indent and the text after a tab; the caption as a borderless table of exact 14.5 pt rows with the § column; the court title and the bold centered title; the Roman-numeral headings centered and the count headings indented; single-spaced block quotations indented 0.75 in both sides; the prayer items; the signature block with "Dated" at the left and the signer from 3 in; footer "TITLE ... PAGE n OF N" with PAGE and NUMPAGES fields.
 - **Differs from typst:** pagination is set by Word and LibreOffice, not typst (line breaks, kerning and the heading gaps are approximations of the typst values, not measured); the footer's page count is a field, updated by the application; the "Dated" line uses a tab stop, not a grid; the footer title comes from `footer_title` in the sample by `render.sh`, not from the template. The docx has no bookmarks or tagged PDF.
-- **docx BLOCKED:** the `.docx.pdf` checks cannot run here. LibreOffice (`soffice`) is not installable in this image (conda-forge has no LibreOffice package; no root, no apt), so `samples/OUTPUT-lrk-96-simpson-complaint.docx.pdf` is not produced and Gates 0 to 3 on the docx PDF (`tools/check.sh --engine docx`) are BLOCKED. Gate 2 (every page rendered and looked at) is not done for the docx. The `.docx` opens with pandoc and is a valid zip of well-formed XML; it has not been opened in Word or LibreOffice.
+- **docx BLOCKED:** the `.docx.pdf` checks cannot run here. LibreOffice (`soffice`) is not installable in this image (conda-forge has no LibreOffice package; no root, no apt), so `usage/OUTPUT-lrk-96-simpson-complaint.docx.pdf` is not produced and Gates 0 to 3 on the docx PDF (`tools/check.sh --engine docx`) are BLOCKED. Gate 2 (every page rendered and looked at) is not done for the docx. The `.docx` opens with pandoc and is a valid zip of well-formed XML; it has not been opened in Word or LibreOffice.

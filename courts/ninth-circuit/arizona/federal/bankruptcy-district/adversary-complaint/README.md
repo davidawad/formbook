@@ -2,20 +2,20 @@
 
 Doc type: **adversary complaint** (FRBP 7001) in the United States Bankruptcy Court for the District of Arizona (`arb`, Ninth Circuit). Folder: `courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint/`.
 
-**Typst exemplar and overlay added (2026-10-17).** `exemplars/FILED-EXAMPLE-woodnick-2026-01-09.pdf` is a public RECAP adversary complaint filed by Woodnick Law, PLLC. `samples/INPUT-woodnick-complaint.md` transcribes its complaint text and is rendered as `samples/OUTPUT-woodnick-complaint.pdf`; the visual comparison is `samples/OVERLAY-woodnick-complaint.pdf`. The sample includes the filed caption's blank adversary-number field and omits its separate certificate-of-service block, which the current Typst template does not generate. The full source and retrieval record are in `exemplars/SOURCE.md`.
+**Typst exemplar and overlay added (2026-10-17).** `usage/SAMPLE-arb-adversary-complaint-woodnick20260109.pdf` is a public RECAP adversary complaint filed by Woodnick Law, PLLC. `usage/INPUT-arb-adversary-complaint-woodnickcomplaint.md` transcribes its complaint text and is rendered as `usage/OUTPUT-arb-adversary-complaint-woodnickcomplaint.typst.pdf`; the visual comparison is `usage/OVERLAY-woodnick-complaint.pdf`. The sample includes the filed caption's blank adversary-number field and omits its separate certificate-of-service block, which the current Typst template does not generate. The full source and retrieval record are in `usage/SOURCE.md`.
 
 This is one filer, so the review records visible differences as accepted open choices; it does not establish conventions across different filers. A second exemplar from a different filer is still needed for a full tier-2 convention review.
 
 | Item | Status |
 |---|---|
 | exemplar | yes: Woodnick Law, PLLC, Doc. 28 (Jan. 9, 2026); one filer only |
-| sample md | `samples/INPUT-woodnick-complaint.md` (transcribed; 7 rendered pages); `samples/INPUT-generic-complaint.md` (fictional; 5 pages) |
-| render | ok: `samples/OUTPUT-woodnick-complaint.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings |
+| sample md | `usage/INPUT-arb-adversary-complaint-woodnickcomplaint.md` (transcribed; 7 rendered pages); `usage/INPUT-arb-adversary-complaint-genericcomplaint.md` (fictional; 5 pages) |
+| render | ok: `usage/OUTPUT-arb-adversary-complaint-woodnickcomplaint.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (Regular, Italic, Bold), no warnings |
 | typeface | face required: none. LRBP 9004-1(g) (checked on azb.uscourts.gov, 2026-10-15) says "a proportional font size no smaller than 13 point" and names no face. EB Garamond kept; no vendored substitute needed. Not metric-compatible with Times New Roman, and not changed to it |
-| overlay | generated: `samples/OVERLAY-woodnick-complaint.pdf` and `.txt` |
+| overlay | generated: `usage/OVERLAY-woodnick-complaint.pdf` and `.txt` |
 | pages reviewed | filed exemplar: 9 of 9; Typst output: 7 of 7 (rasterised at 100 dpi and viewed); see `reviews/2026-10-17.md` |
 
-Note on file names: the brief asked for `samples/<id>.pdf` and `samples/<id>-overlay.pdf`. The shared tools write `samples/OUTPUT-<id>.pdf` and `samples/OVERLAY-<id>.pdf`/`.txt` (the repo's naming for file roles), and `overlay.sh` reads `OUTPUT-<id>.pdf`. The tools were not changed, so this folder follows the tools' names.
+Note on file names: the brief asked for `usage/<id>.pdf` and `usage/<id>-overlay.pdf`. The shared tools write `usage/OUTPUT-<id>.pdf` and `usage/OVERLAY-<id>.pdf`/`.txt` (the repo's naming for file roles), and `overlay.sh` reads `OUTPUT-<id>.pdf`. The tools were not changed, so this folder follows the tools' names.
 
 ## Governing rules
 
@@ -58,7 +58,7 @@ Not generated, and why: the adversary cover sheet (Official Form 104 with the ci
 
 ## Known gaps and open choices
 
-1. **One exemplar.** Tier 2 (conventions a clerk expects) cannot be distinguished from one filer's style. The Woodnick Law complaint provides a filed comparison, but a second filer is needed to establish shared conventions (see `exemplars/SOURCE.md`).
+1. **One exemplar.** Tier 2 (conventions a clerk expects) cannot be distinguished from one filer's style. The Woodnick Law complaint provides a filed comparison, but a second filer is needed to establish shared conventions (see `usage/SOURCE.md`).
 2. **Font size.** The rule names no typeface, so EB Garamond is kept (see the typeface row above). Times New Roman is the usual Arizona choice; EB Garamond sets smaller at the same size. The 13-point minimum is met; the apparent size is smaller than Times 13.
 3. **Court title on line 8.** Convention. LRBP 9004-1(a) fixes line 1 for the filer block and says nothing about the title's line.
 4. **Prayer lead-in can be separated from its list.** When a list starts near the foot of a page, its introduction ("WHEREFORE … judgment:") can stay on the page while the list moves to the next, because the list and signature are kept together. The sample shows this on page 4 and 5. Not fixed.
@@ -74,8 +74,8 @@ Not generated, and why: the adversary cover sheet (Official Form 104 with the ci
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env, see the brief)
-sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint samples/INPUT-generic-complaint.md
-sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint samples/INPUT-woodnick-complaint.md
+sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint usage/INPUT-arb-adversary-complaint-genericcomplaint.md
+sh tools/render.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint usage/INPUT-arb-adversary-complaint-woodnickcomplaint.md
 sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adversary-complaint woodnick-complaint
 ```
 
@@ -83,12 +83,12 @@ sh tools/overlay.sh courts/ninth-circuit/arizona/federal/bankruptcy-district/adv
 - Baseline pitch on body pages measured with `pdftotext -bbox` at 24.0 pt.
 - Page review (60 dpi, every page): p.1 filer block, court title, dual caption, first paragraphs: pass (after moving the lead-in out of the numbered paragraphs and separating the debtor and party rows). p.2 jurisdiction, parties, paragraphs 2–8, ends with blank lines before a heading group: pass. p.3 factual background and the first claim heading kept with its paragraph: pass. p.4 claims, prayer heading and "WHEREFORE" with the list on p.5: pass with gap 4 above. p.5 list (a)–(e) and the signature block: pass.
 - The generic sample render above is the earlier fictional sample; it has no overlay.
-- The filed Woodnick sample render is 7 pages (letter), with no Typst warnings and only vendored EB Garamond Regular, Italic, and Bold embedded. Its overlay was generated; the script's page pairing diagnostics are in `samples/OVERLAY-woodnick-complaint.txt`.
+- The filed Woodnick sample render is 7 pages (letter), with no Typst warnings and only vendored EB Garamond Regular, Italic, and Bold embedded. Its overlay was generated; the script's page pairing diagnostics are in `usage/OVERLAY-woodnick-complaint.txt`.
 - The Woodnick exemplar was rasterized at 100 dpi and all 9 pages were viewed. The final Typst output was rasterized at 100 dpi and all 7 pages were viewed. Page findings and the final PDF hash are in `reviews/2026-10-17.md`.
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `arb-complaint.lua` builds the caption, numbered allegations, lettered prayer and signature; `render.sh` runs pandoc and fills the footer). Rendered: `samples/OUTPUT-generic-complaint.docx` and `samples/OUTPUT-generic-complaint.docx.pdf` (LibreOffice 26.2 conversion, 4 pages). `pdffonts`: EB Garamond Regular, Bold and Italic only.
+DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `arb-complaint.lua` builds the caption, numbered allegations, lettered prayer and signature; `render.sh` runs pandoc and fills the footer). Rendered: `usage/OUTPUT-arb-adversary-complaint-genericcomplaint.docx` and `usage/OUTPUT-arb-adversary-complaint-genericcomplaint.docx.pdf` (LibreOffice 26.2 conversion, 4 pages). `pdffonts`: EB Garamond Regular, Bold and Italic only.
 
 Matches the typst form (every page of the `.docx.pdf` rendered at 60 dpi and viewed: pages 1 to 4 of 4):
 - Letter paper; margins top 1 in, left 1.5 in, right 0.75 in, bottom 0.67 in; line numbers 1 to 28 on the 24 pt grid (one page-anchored text box in the header, so the body keeps its 28 lines); double rule at the left text edge and single rule at the right (`pgBorders`).

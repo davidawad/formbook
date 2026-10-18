@@ -33,13 +33,13 @@ Not used, and why:
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-eastern-livestock-10-93904-motion-brief.pdf`: Motion to Set Aside Order Granting Fifth Third's Request for Rule 2004 Examination of Your Community Bank (ECF Doc 588), 7 pages, filed July 1, 2011 by a non-party bank. Text-based (embedded TimesNewRoman).
-- Provenance, searches and the era note are in `exemplars/SOURCE.md`.
+- `usage/SAMPLE-insb-motion-brief-easternlivestock1093904.pdf`: Motion to Set Aside Order Granting Fifth Third's Request for Rule 2004 Examination of Your Community Bank (ECF Doc 588), 7 pages, filed July 1, 2011 by a non-party bank. Text-based (embedded TimesNewRoman).
+- Provenance, searches and the era note are in `usage/SOURCE.md`.
 - One exemplar, one filer, and a 2011 filing. The eval loop's tier-2 rule asks for two or three filed exemplars from different filers; this is a gap (see Known gaps).
 
 ## Sample
 
-- `samples/INPUT-eastern-livestock-motion-set-aside.md`: the whole motion transcribed as filed: caption, title, the motion paragraphs, Sections I, II and III with citations and both block quotations, the conclusion, the date line and signature block, and the certificate of service.
+- `usage/INPUT-insb-motion-brief-easternlivestockmotionsetaside.md`: the whole motion transcribed as filed: caption, title, the motion paragraphs, Sections I, II and III with citations and both block quotations, the conclusion, the date line and signature block, and the certificate of service.
 - The markdown contract: YAML frontmatter (`case_number`, `chapter`, `division`, `debtor`, `title`, `date_line`, `signature`, `certificate`); `#` headings for level 1 (centered, e.g. CONCLUSION), `##` for level 2 (bold, e.g. the Section headings); a `>` block quotation; every other blank-line chunk is a paragraph with a first-line indent (a chunk starting "Id." or with a digit is flush left).
 - Not transcribed: italics for case names and signals (the sample is plain text), because the exemplar's italic markup is not in its text layer. Footnotes: none in the filing.
 - The template holds no case text.
@@ -48,12 +48,12 @@ Not used, and why:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/motion-brief samples/INPUT-eastern-livestock-motion-set-aside.md
+sh tools/render.sh courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/motion-brief usage/INPUT-insb-motion-brief-easternlivestockmotionsetaside.md
 sh tools/overlay.sh courts/seventh-circuit/indiana/federal/bankruptcy-southern-district/motion-brief eastern-livestock-motion-set-aside
 ```
 
-- `samples/OUTPUT-eastern-livestock-motion-set-aside.pdf`: 8 pages (7 pages of motion and signature, 1 certificate page). Typst compiled with no warnings (`render.sh` fails on any). Vendored font only: EBGaramond-Regular and -Bold, embedded (Identity-H).
-- `samples/OVERLAY-eastern-livestock-motion-set-aside.pdf` and `.txt`: red = our render, blue = exemplar, black = both. Page map: ours p.1-6 ↔ filed p.1-6 (word overlap 52-86%); ours p.7 ↔ filed p.6 (34%: the conclusion and signature page, which is short in the filing, while ours carries the signature in a different place); ours p.8 ↔ filed p.7 (91%: the certificate). The overlay is a diagnostic, not a score; the layers do not coincide line for line because of the typeface and spacing.
+- `usage/OUTPUT-insb-motion-brief-easternlivestockmotionsetaside.typst.pdf`: 8 pages (7 pages of motion and signature, 1 certificate page). Typst compiled with no warnings (`render.sh` fails on any). Vendored font only: EBGaramond-Regular and -Bold, embedded (Identity-H).
+- `usage/OVERLAY-eastern-livestock-motion-set-aside.pdf` and `.txt`: red = our render, blue = exemplar, black = both. Page map: ours p.1-6 ↔ filed p.1-6 (word overlap 52-86%); ours p.7 ↔ filed p.6 (34%: the conclusion and signature page, which is short in the filing, while ours carries the signature in a different place); ours p.8 ↔ filed p.7 (91%: the certificate). The overlay is a diagnostic, not a score; the layers do not coincide line for line because of the typeface and spacing.
 - File names: `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (CLAUDE.md naming and the tools' defaults), not the `<id>.pdf` and `<id>-overlay.pdf` in the task brief.
 
 ## Visual review (Gate 2 record, all 8 pages, rendered at 60 dpi and looked at)
@@ -73,7 +73,7 @@ Reviewed pages: 8 of 8. Pages 2-5 were reviewed on the render before the signatu
 
 ## Known gaps and open choices
 
-1. **Tier-2 exemplars.** One exemplar, one filer, from 2011. The eval loop asks for two or three filed exemplars from different filers. Not done; a current S.D. Ind. bankruptcy motion with a hosted, text-based PDF would be needed. Searches tried are in `exemplars/SOURCE.md`.
+1. **Tier-2 exemplars.** One exemplar, one filer, from 2011. The eval loop asks for two or three filed exemplars from different filers. Not done; a current S.D. Ind. bankruptcy motion with a hosted, text-based PDF would be needed. Searches tried are in `usage/SOURCE.md`.
 2. **Case-name italics.** The sample is plain text: case names and signals are not italic. The filing's convention is italic (not checked against the image; the text layer has no italic markup). A tier-2 gap until the sample is marked up.
 3. **Certificate of service form.** B-9013-2(b) requires conformity with the court's form, which was not fetched. The wording is the exemplar's.
 4. **Font.** No face named by the rules (checked 2026-10-15); EB Garamond at 12 pt is kept. Not a Times New Roman template, because the rules do not require one.
@@ -88,6 +88,6 @@ Reviewed pages: 8 of 8. Pages 2-5 were reviewed on the render before the signatu
 
 - Matches the typst form, by construction: font and size, double spacing, first-line indent, margins, the page-number footer, the caption, signature and certificate text.
 - Differs or is unverified: the body grid is kept by exact line spacing, not by typst's block rounding, so page breaks may fall differently; the caption rule (0.75 pt, right and bottom) is written as XML and not checked against the typst layout; the signature block is paragraphs indented 3 in, not a table.
-- BLOCKED: docx.pdf checks (Gates 0 and 1 on `samples/OUTPUT-eastern-livestock-motion-set-aside.docx.pdf`): not produced, because `soffice` is not installed on this box. No page was rendered or reviewed (pages reviewed 0).
-- `sh tools/render.sh --engine docx` writes `samples/OUTPUT-eastern-livestock-motion-set-aside.docx`, then fails at the soffice step (expected here). The `.docx` was checked with `unzip -tq` and `xmllint --noout` on every XML part.
+- BLOCKED: docx.pdf checks (Gates 0 and 1 on `usage/OUTPUT-eastern-livestock-motion-set-aside.docx.pdf`): not produced, because `soffice` is not installed on this box. No page was rendered or reviewed (pages reviewed 0).
+- `sh tools/render.sh --engine docx` writes `usage/OUTPUT-insb-motion-brief-easternlivestockmotionsetaside.docx`, then fails at the soffice step (expected here). The `.docx` was checked with `unzip -tq` and `xmllint --noout` on every XML part.
 - TOC and TOA: none in this doc type.

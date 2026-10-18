@@ -16,10 +16,10 @@ Re-check cadence: re-check annually each December 1 (national rule amendments) a
 | SO24-4 | Standing Order 2024-04 (May 24, 2024), on "MLBR Appendix 8, Rule 7" and imaged signatures (pre-2025 numbering; see Finding 3) | court file https://www.mab.uscourts.gov/sites/mab/files/Standing%20Order%202024-04.pdf; read from https://web.archive.org/web/20250118221322id_/https://www.mab.uscourts.gov/sites/mab/files/Standing%20Order%202024-04.pdf |
 | FRBP | Federal Rules of Bankruptcy Procedure 7003, 7007.1, 7008, 7010, 9004, 9011, 9013 (restyled, eff. Dec. 1, 2024) | https://www.law.cornell.edu/rules/frbp/rule_7008 (and `rule_7003`, `rule_7007.1`, `rule_7010`, `rule_9004`, `rule_9011`, `rule_9013`) |
 | FRCP | Federal Rules of Civil Procedure 5(d)(1)(B), 8(a), 10(a)-(b) (applied by FRBP 7005, 7008, 7010) | https://www.law.cornell.edu/rules/frcp/rule_5, `rule_8`, `rule_10` |
-| EX-A1 | Adversary complaint: Lassman v. Paul W. Marks Co., Adv. 26-01083, Doc. 1 (Harris Beach Murtha Cullina) | `adversary-complaint/exemplars/SOURCE.md` |
-| EX-A2 | Adversary complaint: Shamrock Finance LLC v. Burke et al., Adv. 21-01060, Doc. 1 (Wayne M. Gray) | `adversary-complaint/exemplars/SOURCE.md` |
-| EX-M1 | Motion: Roy v. Sisters of Saint Ann, Adv. 26-04027, Doc. 6 (Holland & Knight) | `motion-brief/exemplars/SOURCE.md` |
-| EX-M2 | Memorandum: NESV Ice, LLC v. SHS ACK, LLC, Adv. 21-1093, Doc. 5 (Curran Antonelli) | `motion-brief/exemplars/SOURCE.md` |
+| EX-A1 | Adversary complaint: Lassman v. Paul W. Marks Co., Adv. 26-01083, Doc. 1 (Harris Beach Murtha Cullina) | `adversary-complaint/usage/SOURCE.md` |
+| EX-A2 | Adversary complaint: Shamrock Finance LLC v. Burke et al., Adv. 21-01060, Doc. 1 (Wayne M. Gray) | `adversary-complaint/usage/SOURCE.md` |
+| EX-M1 | Motion: Roy v. Sisters of Saint Ann, Adv. 26-04027, Doc. 6 (Holland & Knight) | `motion-brief/usage/SOURCE.md` |
+| EX-M2 | Memorandum: NESV Ice, LLC v. SHS ACK, LLC, Adv. 21-1093, Doc. 5 (Curran Antonelli) | `motion-brief/usage/SOURCE.md` |
 
 Kinds: **M** = mandated by a court rule (FRBP, MLBR, Appendix 8, or the EAP the MLBR incorporates). **C** = convention (seen across exemplars of different filers; the rules leave it open). **T** = project/tooling rule. **A** = author responsibility, not machine-checkable.
 

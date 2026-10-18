@@ -19,10 +19,11 @@ Scope: one court folder per claim. Do not edit another court's folder or shared 
 
 ## Do the work
 
-- Court templates follow `docs/EVAL-LOOP.md` exactly. Reference implementation: `courts/ninth-circuit/court-of-appeals/`. Copy its structure (`rules.md`, `checks.yaml`, `typst/`, `latex/`, `docx/`, `exemplars/` with `SOURCE.md`, `samples/`, `reviews/`, `LOG.md`, `README.extra.md`), not its numbers.
+- Court templates follow `docs/EVAL-LOOP.md` exactly. Reference implementation: `courts/ninth-circuit/court-of-appeals/`. Copy its structure (`rules.md`, `checks.yaml`, `typst/`, `latex/`, `docx/`, `usage/` with `SOURCE.md`, `reviews/`, `LOG.md`, `README.extra.md`), not its numbers.
 - Quality tiers decide where to spend effort: tier 1 (the court's mandated form: font, margins, spacing, length, cover contents, required sections, certificates, e-filing PDF rules) must be perfect; tier 2 (conventions a clerk expects) must look professional, judged against 2 or 3 filed exemplars from different filers; tier 3 (matching one filer exactly) is not chased. The overlay is a diagnostic, not a score. Stop when tiers 1 and 2 pass.
-- File roles are in the name, so anyone browsing can tell input, output and comparison apart: `exemplars/FILED-EXAMPLE-*.pdf` (the real filing), `samples/INPUT-<id>.md` (markdown we feed in), `samples/OUTPUT-<id>.pdf` (our render), `samples/OVERLAY-<id>.pdf` and `.txt` (red/blue comparison). The tools read and write these names by default.
-- Three engines per court: `typst/` (primary), `latex/`, `docx/`; outputs `samples/OUTPUT-<id>.pdf`, `OUTPUT-<id>.latex.pdf`, `OUTPUT-<id>.docx`, `OUTPUT-<id>.docx.pdf`. `tools/render.sh` and `tools/check.sh` take `--engine typst|latex|docx`. DOCX limits: `docs/DOCX.md`.
+- Every doc folder (a court folder, or a doc-type folder under one) keeps its inputs, outputs and filed examples in ONE folder, `usage/`, and the file role is in the name: `SAMPLE-<stem>-<id>.pdf` (a real filing), `INPUT-<stem>-<id>.md` (markdown we feed in), `OUTPUT-<stem>-<id>.typst.pdf` (our render of the INPUT with the same `<id>`), plus `SOURCE.md` (where each SAMPLE came from) and optional `MASKS.json`. `<stem>` is the court alias (`ca9`) in a court folder and `<alias>-<doctype>` (`ca1-opening-brief`) in a doc-type folder; `<id>` is lowercase `[a-z0-9]+`, no hyphens. SAMPLE ids are independent of INPUT ids. `fb usage` prints any of these names; `fb lint paths` (`just lint`) rejects anything else. There is no `samples/` or `exemplars/` folder.
+- Overlays (red/blue comparison) are never committed: `just overlay <dir>` (tools/overlay.sh) writes them to the gitignored `.overlay/<doc path>/OVERLAY-<stem>-<id>.pdf` and `.txt`.
+- Three engines per court: `typst/` (primary), `latex/`, `docx/`; outputs `usage/OUTPUT-<stem>-<id>.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`. `tools/render.sh` and `tools/check.sh` take `--engine typst|latex|docx`. The top-level `justfile` wraps the common runs (`just render|overlay|check|diff <dir>`, `just render-all|overlay-all|check-all`, `just lint`). DOCX limits: `docs/DOCX.md`.
 - The court's own rules (primary sources, cited with URL, rule number and date verified) decide the layout. The filed exemplar only settles what the rules leave open.
 - Banned, no exceptions:
   - case-specific text, coordinates measured off a filed PDF, or forced line breaks in a template;
@@ -41,8 +42,8 @@ Scope: one court folder per claim. Do not edit another court's folder or shared 
 5. Commit on the claimed branch `court/<alias>`, push it, and open a PR against `master` titled `court(<alias>): typst/latex/docx templates`. The body contains:
    - the tier-1 `check.sh` RESULT line for each engine (typst, latex, docx);
    - the `check-selftest.sh` result;
-   - the path of the overlay PDF (`samples/OVERLAY-<id>.pdf`);
-   - the exemplars used, with the filer of each (from `exemplars/SOURCE.md`);
+   - the overlay pages you reviewed (`just overlay <dir>` writes `.overlay/<doc path>/OVERLAY-<stem>-<id>.pdf`; it is not committed, so attach or describe it);
+   - the SAMPLEs used, with the filer of each (from `usage/SOURCE.md`);
    - the remaining tier-2 findings, by page (`OPEN` or `ACCEPTED` rows of the Gate 2 review);
    - the docx `BLOCKED` items: each failing check ID and why (a docx may be delivered BLOCKED or partial; silently missing is not acceptable, and the same holds for latex).
    Never merge your own PR. Do not delete the claim branch.

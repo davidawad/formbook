@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/guam/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-capfa-25-cv-00020-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-capfa-complaint.md` (full transcription of the 10-page complaint, from the OCR text layer, obvious OCR errors corrected) |
-| render | ok: `samples/OUTPUT-capfa-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-capfa-complaint.pdf` and `samples/OVERLAY-capfa-complaint.txt` (`sh tools/overlay.sh`) |
+| exemplar | yes: `usage/SAMPLE-gud-complaint-capfa25cv00020.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-gud-complaint-capfa.md` (full transcription of the 10-page complaint, from the OCR text layer, obvious OCR errors corrected) |
+| render | ok: `usage/OUTPUT-gud-complaint-capfa.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
+| overlay | ok: `usage/OVERLAY-capfa-complaint.pdf` and `usage/OVERLAY-capfa-complaint.txt` (`sh tools/overlay.sh`) |
 | typeface | face required: none (GNLR 5.1(a), 2022: no typeface or point size). Substitute: n/a; EB Garamond kept, the default when a court names no face (`docs/FONTS.md`). Visual only: EB Garamond is the template's own face, not a court-named one. |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed; page 9 viewed again after the signature-column change; all 9 viewed again on 2026-10-15 for the fonts pass, no change) |
 
@@ -51,7 +51,7 @@ No rule in the 2022 GNLR sets a typeface, a point size, a margin, or a page limi
 
 ## Known gaps and open choices
 
-1. **One exemplar, one filer.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers; this is not met. A second D. Guam complaint with a text layer was found and not saved: *Jane Doe v. Guam Visitors Bureau*, 1:26-cv-00017, Doc. 1 (Razzano Walsh & Torres, 28 pages; RECAP `gov.uscourts.gud.19220.1.0.pdf`). Saving it as `exemplars/FILED-EXAMPLE-doe-26-cv-00017-complaint.pdf` is the next step before tier 2 can be judged. Also seen and not used: *United States v. Jeida Guam*, 1:26-cv-00028, Doc. 1 (USAO, 6 pages, text; a government collection complaint, a different kind of filer) and *Ishizuka v. United States*, 1:26-cv-00033, Doc. 1 (a scan with no text layer; not used).
+1. **One exemplar, one filer.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers; this is not met. A second D. Guam complaint with a text layer was found and not saved: *Jane Doe v. Guam Visitors Bureau*, 1:26-cv-00017, Doc. 1 (Razzano Walsh & Torres, 28 pages; RECAP `gov.uscourts.gud.19220.1.0.pdf`). Saving it as `usage/SAMPLE-doe-26-cv-00017-complaint.pdf` is the next step before tier 2 can be judged. Also seen and not used: *United States v. Jeida Guam*, 1:26-cv-00028, Doc. 1 (USAO, 6 pages, text; a government collection complaint, a different kind of filer) and *Ishizuka v. United States*, 1:26-cv-00033, Doc. 1 (a scan with no text layer; not used).
 2. **Typeface.** No court-named face. GNLR 5.1 (2022, text read with `pdftotext` on 2026-10-15) sets no typeface or point size, so the template keeps EB Garamond, the face `docs/FONTS.md` gives a court that names none. The exemplar is set in Times New Roman, and EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the exemplar. Whether the clerk expects Times is a convention question for David, not a rule; it is the open tier-2 item.
 3. **Margins.** 1 in. on every side; the GNLR sets no margin. Convention, not measured off the exemplar.
 4. **Pleading-paper line numbers.** The exemplar (CaPFA) uses numbered lines 1 to 28 down the left margin, with rules. GNLR 5.1 does not require them, so this template does not number lines. Recorded as ACCEPTED.
@@ -83,7 +83,7 @@ Tier 2 is **not** judged (one filer only; see gap 1). OPEN items for tier 2: the
 
 ### docx (pandoc; `docx/`)
 
-Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once and committed) and `docx/gud.lua` (cover, caption, numbered paragraphs, lettered items, addresses, signature blocks; body text and headings stay pandoc's). `sh tools/render.sh --engine docx` writes `samples/OUTPUT-capfa-complaint.docx`.
+Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once and committed) and `docx/gud.lua` (cover, caption, numbered paragraphs, lettered items, addresses, signature blocks; body text and headings stay pandoc's). `sh tools/render.sh --engine docx` writes `usage/OUTPUT-gud-complaint-capfa.docx`.
 
 Set in `styles.xml` and `sectPr`, **not rendered** (no LibreOffice on the build box, so no page of the docx has been looked at):
 

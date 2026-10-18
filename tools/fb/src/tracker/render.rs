@@ -23,7 +23,7 @@ pub struct Agg {
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct DAgg {
     pub n: u32,
-    pub items: [u32; 5],
+    pub items: [u32; 4],
     pub complete: u32,
     pub gates: u32,
 }
@@ -74,7 +74,7 @@ impl DAgg {
             n: add(self.n, 1),
             items: std::array::from_fn(|i| add(self.items[i], d.bits[i])),
             complete: add(self.complete, complete(&d.bits)),
-            gates: add(self.gates, d.bits[5]),
+            gates: add(self.gates, d.bits[4]),
         }
     }
 
@@ -128,9 +128,9 @@ fn aggrow(label: &str, a: &Agg) -> String {
 }
 
 fn daggrow(label: &str, a: &DAgg) -> String {
-    let [t, s, r, e, o] = a.items;
+    let [t, s, r, e] = a.items;
     format!(
-        "| {label} | {} | {t} | {s} | {r} | {e} | {o} | {} | {}% | {} |",
+        "| {label} | {} | {t} | {s} | {r} | {e} | {} | {}% | {} |",
         a.n,
         a.complete,
         pct1(a.complete, a.n),
@@ -169,8 +169,8 @@ pub fn dsummary(ds: &[DocType]) -> Vec<String> {
     let gs = groups(ds, |d| d.group.as_str(), DAgg::bump);
     let total = gs.iter().fold(DAgg::default(), |t, (_, a)| t.merge(*a));
     table(
-        "| Group | Doc types | Template | Sample | Render | Exemplar | Overlay | Typst complete | % complete | Gates pass |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| Group | Doc types | Template | Sample | Render | Exemplar | Typst complete | % complete | Gates pass |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
         &gs,
         total,
         daggrow,
@@ -250,8 +250,8 @@ pub fn num(c: char) -> String {
 }
 
 /// "**complete**", or the missing items in checklist order.
-pub fn verdict(bits: &[u32; 6]) -> String {
-    const NAMES: [&str; 5] = ["template", "sample", "render", "exemplar", "overlay"];
+pub fn verdict(bits: &[u32; 5]) -> String {
+    const NAMES: [&str; 4] = ["template", "sample", "render", "exemplar"];
     if complete(bits) == 1 {
         return "**complete**".into();
     }
@@ -265,9 +265,9 @@ pub fn verdict(bits: &[u32; 6]) -> String {
 }
 
 fn dtrow(d: &DocType) -> String {
-    let [t, _, r, _, o, g] = d.bits;
+    let [t, _, r, _, g] = d.bits;
     format!(
-        "| {} | [{}]({}) | {} | {} | {} | {} | {} | {} | {} |",
+        "| {} | [{}]({}) | {} | {} | {} | {} | {} | {} |",
         d.alias,
         d.doctype,
         d.path,
@@ -275,7 +275,6 @@ fn dtrow(d: &DocType) -> String {
         num(d.samples),
         yes(r),
         num(d.exemplars),
-        yes(o),
         if g == 1 { "pass" } else { "—" },
         verdict(&d.bits)
     )
@@ -283,8 +282,8 @@ fn dtrow(d: &DocType) -> String {
 
 pub fn doctypes(ds: &[DocType]) -> Vec<String> {
     with_head(
-        "| Alias | Doc type | Template | Samples | Render | Exemplars | Overlay | Gates | Typst |",
-        "|---|---|---|---:|---|---:|---|---|---|",
+        "| Alias | Doc type | Template | Samples | Render | Exemplars | Gates | Typst |",
+        "|---|---|---|---:|---|---:|---|---|",
         ds.iter().map(dtrow),
     )
 }

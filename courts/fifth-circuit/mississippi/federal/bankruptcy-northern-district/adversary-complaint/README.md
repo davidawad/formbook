@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district/a
 
 | Item | Status |
 |---|---|
-| exemplar | **no**: `BLOCKED: no exemplar`. See `exemplars/SOURCE.md` for the searches tried. |
-| sample md | `samples/INPUT-synthetic-adversary-complaint.md`. Synthetic content; not a transcription. |
-| render | ok: `samples/OUTPUT-synthetic-adversary-complaint.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-community-bank-loancare.pdf` and `.txt` (`sh tools/overlay.sh`, 3 pages). The filed PDF was re-downloaded into `exemplars/` from the URL in `exemplars/SOURCE.md` (the saved copy was missing from this snapshot). |
+| exemplar | **no**: `BLOCKED: no exemplar`. See `usage/SOURCE.md` for the searches tried. |
+| sample md | `usage/INPUT-synthetic-adversary-complaint.md`. Synthetic content; not a transcription. |
+| render | ok: `usage/OUTPUT-msnb-adversary-complaint-synthetic.typst.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-community-bank-loancare.pdf` and `.txt` (`sh tools/overlay.sh`, 3 pages). The filed PDF was re-downloaded into `usage/` from the URL in `usage/SOURCE.md` (the saved copy was missing from this snapshot). |
 | pages reviewed | 3 of 3 (every page rendered at 60 dpi and viewed after the last template change) |
 
 ## Governing rules
@@ -77,7 +77,7 @@ A local-rule text, or a filed complaint from this court, would settle each of th
 
 ## Engines
 
-Docx engine (`docx/`): `reference.docx` (built by `docx/make-reference.sh`), `msnb-adversary-complaint.lua` (counsel block, court title, caption rows, numbered allegations, lettered and prayer items, signature block), and `render.sh` (the pandoc call; `tools/render-docx.sh` uses it). Renders: `samples/OUTPUT-community-bank-loancare.docx` and `.docx.pdf` (3 pages, LibreOffice 26.8).
+Docx engine (`docx/`): `reference.docx` (built by `docx/make-reference.sh`), `msnb-adversary-complaint.lua` (counsel block, court title, caption rows, numbered allegations, lettered and prayer items, signature block), and `render.sh` (the pandoc call; `tools/render-docx.sh` uses it). Renders: `usage/OUTPUT-msnb-adversary-complaint-communitybankloancare.docx` and `.docx.pdf` (3 pages, LibreOffice 26.8).
 
 | Item | Typst (primary) | Docx | Note |
 |---|---|---|---|
@@ -97,4 +97,4 @@ Differences, by design:
 BLOCKED / not verified for docx:
 - Gates 0 to 3 cannot run: no `rules.md` or `checks.yaml` in this court yet, and `yq` is not on the box.
 - Opened in LibreOffice only (the PDF conversion succeeded); not opened in Microsoft Word.
-- The README's older note about `samples/INPUT-synthetic-adversary-complaint.md` is stale: that file is not in the folder, so only `INPUT-community-bank-loancare.md` renders. No second sample exists for Gate 3.
+- The README's older note about `usage/INPUT-synthetic-adversary-complaint.md` is stale: that file is not in the folder, so only `INPUT-msnb-adversary-complaint-communitybankloancare.md` renders. No second sample exists for Gate 3.

@@ -5,10 +5,10 @@ Complete doc-type folder: template, sample, exemplar, render, overlay. Court-lev
 ## Layout
 
 - `typst/main.typ` entrypoint; `typst/idb-adversary-complaint.typ` template (parameters at the top; each is cited to the rule it follows).
-- `samples/INPUT-cutting-adversary-complaint.md` transcribed sample (frontmatter: caption, counsel, lead-in, signature; body: `## ` headings, numbered allegations, `# COUNT` and `# PRAYER` headings, `- ` lettered items).
-- `samples/OUTPUT-cutting-adversary-complaint.pdf` our render (9 pages), from `sh tools/render.sh <this-dir> samples/INPUT-cutting-adversary-complaint.md`.
-- `samples/OVERLAY-cutting-adversary-complaint.pdf` and `.txt`, from `sh tools/overlay.sh <this-dir> cutting-adversary-complaint`.
-- `exemplars/FILED-EXAMPLE-cutting-25-07006-adversary-complaint.pdf` the filed complaint (32 pages); provenance in `exemplars/SOURCE.md`.
+- `usage/INPUT-idb-adversary-complaint-cutting.md` transcribed sample (frontmatter: caption, counsel, lead-in, signature; body: `## ` headings, numbered allegations, `# COUNT` and `# PRAYER` headings, `- ` lettered items).
+- `usage/OUTPUT-idb-adversary-complaint-cutting.typst.pdf` our render (9 pages), from `sh tools/render.sh <this-dir> usage/INPUT-idb-adversary-complaint-cutting.md`.
+- `usage/OVERLAY-cutting-adversary-complaint.pdf` and `.txt`, from `sh tools/overlay.sh <this-dir> cutting-adversary-complaint`.
+- `usage/SAMPLE-idb-adversary-complaint-cutting2507006.pdf` the filed complaint (32 pages); provenance in `usage/SOURCE.md`.
 
 ## Rules followed (primary sources, fetched 2026-10-14)
 
@@ -25,7 +25,7 @@ Complete doc-type folder: template, sample, exemplar, render, overlay. Court-lev
 - Fed. R. Bankr. P. 9004(a)-(b) (legibility, paper size) and 9013/9014 are cited in the motion template; not fetched here.
 - Local rules index (all listed rules): https://www.id.uscourts.gov/bankruptcy/forms_fees_rules/Rules.cfm, complete packet: http://www.id.uscourts.gov/content_fetcher/print_pdf_packet.cfml?Court_Unit=Bankruptcy&Content_Type=Rule. The index shows the rules as revised and adopted January 5, 2026; the exemplar was filed December 18, 2025, under the rules in force then. No effective dates appear on the rule pages, so the rule versions here may differ from those in force on 2025-12-18. Verify before relying on a version-specific point.
 
-## What the overlay shows (`samples/OVERLAY-cutting-adversary-complaint.pdf`)
+## What the overlay shows (`usage/OVERLAY-cutting-adversary-complaint.pdf`)
 
 Red is our render, blue is the filed exemplar, black is where they agree. The overlay pairs each of our 9 pages with the filed page sharing the most words (`.txt` page map):
 

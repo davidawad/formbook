@@ -4,11 +4,11 @@ Doc type: **complaint** in the United States District Court for the Eastern Dist
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-hess-equifax-3-26-cv-00016-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-hess-equifax.md` (the whole complaint, 89 numbered paragraphs, prayer, signature; OCR typos corrected, see gap 9) |
-| render | ok: `samples/OUTPUT-hess-equifax.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/SAMPLE-ared-complaint-hessequifax326cv00016.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ared-complaint-hessequifax.md` (the whole complaint, 89 numbered paragraphs, prayer, signature; OCR typos corrected, see gap 9) |
+| render | ok: `usage/OUTPUT-ared-complaint-hessequifax.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | typeface | face required: **none** (E.D. Ark. LR 5.5(a) sets a type-size minimum, "elite", and names no face) → **EB Garamond** kept (no substitute needed; visual-only for any Times expectation) |
-| overlay | not regenerated on 2026-10-14: the filed exemplar PDF is absent from this snapshot (only `exemplars/SOURCE.md` is tracked), so `overlay.sh` exits 1. `samples/OVERLAY-hess-equifax.txt` is from the earlier run. |
+| overlay | not regenerated on 2026-10-14: the filed exemplar PDF is absent from this snapshot (only `usage/SOURCE.md` is tracked), so `overlay.sh` exits 1. `usage/OVERLAY-hess-equifax.txt` is from the earlier run. |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed; pages 1 to 8 before the signature-block fix, page 9 after it) |
 
 ## Governing rules
@@ -49,7 +49,7 @@ Not produced by this template (separate filings, not part of the complaint): civ
 
 ## Exemplar
 
-`exemplars/FILED-EXAMPLE-hess-equifax-3-26-cv-00016-complaint.pdf`: *Hess v. Equifax Information Services, LLC and Trans Union, LLC*, No. 3:26-cv-00016-DPM, "Class Action Complaint and Demand for Jury Trial", 11 pages, filed 2026-01-12 by Plaintiff's counsel Stein Saks, PLLC. Provenance, search trail and the rejected candidates are in `exemplars/SOURCE.md`.
+`usage/SAMPLE-ared-complaint-hessequifax326cv00016.pdf`: *Hess v. Equifax Information Services, LLC and Trans Union, LLC*, No. 3:26-cv-00016-DPM, "Class Action Complaint and Demand for Jury Trial", 11 pages, filed 2026-01-12 by Plaintiff's counsel Stein Saks, PLLC. Provenance, search trail and the rejected candidates are in `usage/SOURCE.md`.
 
 The sample is the whole filing: 89 paragraphs as numbered in the exemplar, with the prayer items (a) to (h). The template's numbering reproduces the filed numbers (the first page of the overlay shows ¶ 1 to 7 at the same place; the signature page shows the prayer).
 
@@ -58,8 +58,8 @@ The sample is the whole filing: 89 paragraphs as numbered in the exemplar, with 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env in $HOME/tb)
 D=courts/eighth-circuit/arkansas/federal/eastern-district/complaint
-sh tools/render.sh $D samples/INPUT-hess-equifax.md $D/samples/OUTPUT-hess-equifax.pdf
-sh tools/overlay.sh $D hess-equifax $D/exemplars/FILED-EXAMPLE-hess-equifax-3-26-cv-00016-complaint.pdf
+sh tools/render.sh $D usage/INPUT-ared-complaint-hessequifax.md $D/usage/OUTPUT-hess-equifax.pdf
+sh tools/overlay.sh $D hess-equifax $D/usage/SAMPLE-hess-equifax-3-26-cv-00016-complaint.pdf
 ```
 
 The tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`. This doc type's file names follow the brief (`<id>.pdf`, `<id>-overlay.pdf`, `<id>-overlay.txt`), so the outputs were renamed after the overlay ran. `tools/` was not edited.
@@ -82,22 +82,22 @@ The overlay is a diagnostic, not a score. Its page map (`OVERLAY-hess-equifax.tx
 
 ## Engines
 
-**typst** (primary): the section above; `samples/OUTPUT-hess-equifax.pdf`, 9 pages, reviewed page by page.
+**typst** (primary): the section above; `usage/OUTPUT-ared-complaint-hessequifax.typst.pdf`, 9 pages, reviewed page by page.
 
-**docx**: `docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt; 24 pt exact double spacing; 0.5 in first-line indent; headings on the same 24 pt grid, level 1 centered bold capitals, level 2 centered bold, level 3 bold italic; 1-inch margins; a centered page-number footer at 11 pt). `docx/complaint.lua` adds what pandoc does not: the court title, the caption table (rules at right and bottom of the party column), the case number and title, numbered paragraphs (1 to 89, a `~ ` paragraph is unnumbered), lettered lists "(a)", the lead-in, and the signature block. Built with `sh tools/render.sh --engine docx <this folder> samples/INPUT-hess-equifax.md`, which writes `samples/OUTPUT-hess-equifax.docx`.
+**docx**: `docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt; 24 pt exact double spacing; 0.5 in first-line indent; headings on the same 24 pt grid, level 1 centered bold capitals, level 2 centered bold, level 3 bold italic; 1-inch margins; a centered page-number footer at 11 pt). `docx/complaint.lua` adds what pandoc does not: the court title, the caption table (rules at right and bottom of the party column), the case number and title, numbered paragraphs (1 to 89, a `~ ` paragraph is unnumbered), lettered lists "(a)", the lead-in, and the signature block. Built with `sh tools/render.sh --engine docx <this folder> usage/INPUT-ared-complaint-hessequifax.md`, which writes `usage/OUTPUT-ared-complaint-hessequifax.docx`.
 
 | Item | Result |
 |---|---|
 | The `.docx` opens | Checked as a zip with well-formed XML parts and read back with pandoc (text in order, 89 numbered paragraphs, prayer (a) to (h), signature). Not opened in Word or LibreOffice. |
 | Built to the typst values | Font face and size, double spacing, margins, caption rules, numbering, lettered list, signature block, page number: set in the reference and filter as above. Not compared with the typst pages. |
 | Visual review (Gate 2) | Not done. No page of the docx has been rendered or looked at. |
-| BLOCKED: `docx.pdf` checks | `soffice` could not be installed in the build box (conda-forge has no `libreoffice` package on 2026-10-15), so `samples/OUTPUT-hess-equifax.docx.pdf` was not produced. Gates 0 and 1 and the Gate 2 page review, which docs/DOCX.md measures on the LibreOffice PDF, cannot run. The docx is delivered without them. |
+| BLOCKED: `docx.pdf` checks | `soffice` could not be installed in the build box (conda-forge has no `libreoffice` package on 2026-10-15), so `usage/OUTPUT-hess-equifax.docx.pdf` was not produced. Gates 0 and 1 and the Gate 2 page review, which docs/DOCX.md measures on the LibreOffice PDF, cannot run. The docx is delivered without them. |
 | Word substitution | The font is EB Garamond (vendored in `fonts/`). Word substitutes silently when the font is not installed on the machine that opens the file. |
 | Caption and signature | Built as tables, so table-border rendering differs between Word and LibreOffice (docs/DOCX.md). Not judged. |
 
 ## Known gaps and open choices
 
-1. **Only one exemplar.** The brief asks for one per doc type; EVAL-LOOP's tier-2 rule asks for two or three filers. Tier 2 is therefore **not** judged against two filers. The second E.D. Ark. complaint is the next pick (see `exemplars/SOURCE.md` for the candidates and the rejected state-court removal attachments).
+1. **Only one exemplar.** The brief asks for one per doc type; EVAL-LOOP's tier-2 rule asks for two or three filers. Tier 2 is therefore **not** judged against two filers. The second E.D. Ark. complaint is the next pick (see `usage/SOURCE.md` for the candidates and the rejected state-court removal attachments).
 2. **Font.** EB Garamond (vendored, OFL) at 12 pt, the only font vendored in `fonts/`. The exemplar is a scan with a Times-like text layer. Garamond sets smaller than Times at the same point size. The 12-point size is the working equivalent of the rule's "elite" minimum (LR 5.5(a)). Whether the court wants a Times-metric font is a question for David.
 3. **Arkansas bar number (LR 5.5(c)(1)).** The rule requires the Arkansas Supreme Court identification number, "or other Supreme Court identification number, if applicable". The exemplar's counsel is an out-of-state lawyer and gives no bar number, so the sample carries none. The template does not assert the number: a sample for an Arkansas-admitted filer must add `Ark. Bar No. ...` to `signature.lines`. Recorded as an open question.
 4. **"Elite" (LR 5.5(a)).** Elite is a fixed-pitch measure (12 characters per inch). The rule's text applies to typewritten papers; a proportional font at 12 pt is the working equivalent here, not measured. Recorded as an interpretation.

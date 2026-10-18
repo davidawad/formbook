@@ -18,9 +18,9 @@ Every requirement below cites one of these tags. All were fetched on 2026-10-17;
 | BRIEF-PAGE | Clerk's Office instructions "How To Appeal A Civil Case: Brief and appendix" ("Last modified at 1/31/2014"): word limits, typeface wording, cover colors, official caption. A clerk's instruction page, not a rule; where it conflicts with LR, LR governs. | https://www.ca2.uscourts.gov/clerk/case_filing/appealing_a_case/civil_case/brief_and_appendix.html |
 | FRAP | Federal Rules of Appellate Procedure, Rules 25, 26.1, 28, 32 (Cornell LII copy) | https://www.law.cornell.edu/rules/frap/rule_32 , https://www.law.cornell.edu/rules/frap/rule_28 , https://www.law.cornell.edu/rules/frap/rule_25 , https://www.law.cornell.edu/rules/frap/rule_26.1 |
 | FRAP-PDF | "Federal Rules of Appellate Procedure with Forms, December 1, 2024", as posted on the court's rules page; cross-checked against FRAP for Rules 26.1(d), 32(a)(4), 32(a)(5), 32(a)(7). sha256 `d61711eca8e1f65955d12f1b7d29d4cc453d9ee1e30c4fff6c54b23f113454f6` | https://www.ca2.uscourts.gov/clerk/case_filing/rules/pdf/Federal%20Rules%20of%20Appellate%20Procedure%20-%20December%201,%202024.pdf |
-| EX-OB | Opening-brief exemplars, `opening-brief/exemplars/` (see its `SOURCE.md`) | local |
-| EX-AB | Answering-brief exemplars, `answering-brief/exemplars/` | local |
-| EX-RB | Reply-brief exemplars, `reply-brief/exemplars/` | local |
+| EX-OB | Opening-brief exemplars, `opening-brief/usage/` (see its `SOURCE.md`) | local |
+| EX-AB | Answering-brief exemplars, `answering-brief/usage/` | local |
+| EX-RB | Reply-brief exemplars, `reply-brief/usage/` | local |
 
 Kinds: **M** = mandated by a court rule (FRAP or a Second Circuit Local Rule; for BRIEF-PAGE, a clerk's instruction, marked as such). **C** = convention (the rules leave it open; taken from the exemplars of different filers). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 
@@ -117,7 +117,7 @@ IDs are stable. Never renumber; retire an ID by marking it `(withdrawn)`.
 
 ## Doc type: opening-brief
 
-The appellant's principal brief. Exemplars: `opening-brief/exemplars/SOURCE.md` (Munafo / Federal Public Defender, N.D.N.Y.; Internet Archive / Morrison & Foerster and EFF).
+The appellant's principal brief. Exemplars: `opening-brief/usage/SOURCE.md` (Munafo / Federal Public Defender, N.D.N.Y.; Internet Archive / Morrison & Foerster and EFF).
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
@@ -131,7 +131,7 @@ The appellant's principal brief. Exemplars: `opening-brief/exemplars/SOURCE.md` 
 
 ## Doc type: answering-brief
 
-The appellee's principal brief. Exemplars: `answering-brief/exemplars/SOURCE.md` (Finkelman / Law Office of Max Rodriguez PLLC; Hachette et al. / Davis Wright Tremaine and Oppenheim + Zebrak).
+The appellee's principal brief. Exemplars: `answering-brief/usage/SOURCE.md` (Finkelman / Law Office of Max Rodriguez PLLC; Hachette et al. / Davis Wright Tremaine and Oppenheim + Zebrak).
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
@@ -144,7 +144,7 @@ The appellee's principal brief. Exemplars: `answering-brief/exemplars/SOURCE.md`
 
 ## Doc type: reply-brief
 
-The appellant's reply brief. Exemplars: `reply-brief/exemplars/SOURCE.md` (MoneyLion / McGuireWoods and Cooley; Alisigwe / Federal Defenders of New York).
+The appellant's reply brief. Exemplars: `reply-brief/usage/SOURCE.md` (MoneyLion / McGuireWoods and Cooley; Alisigwe / Federal Defenders of New York).
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|

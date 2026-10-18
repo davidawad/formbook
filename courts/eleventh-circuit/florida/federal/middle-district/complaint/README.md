@@ -5,11 +5,11 @@ Folder: `courts/eleventh-circuit/florida/federal/middle-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-bracho-cardella-8-26-cv-03113-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-bracho-complaint.md` (the whole 10-page complaint, transcribed from the text layer) |
+| exemplar | yes: `usage/SAMPLE-flmd-complaint-brachocardella826cv03113.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-flmd-complaint-bracho.md` (the whole 10-page complaint, transcribed from the text layer) |
 | typeface | Face required: **Times New Roman** (LR 1.08(b); the filed exemplar is set in Times New Roman). Vendored substitute: **Liberation Serif** (metric-compatible, `docs/FONTS.md`). Metric-compatible. See "Typeface" below. |
-| render | ok: `samples/OUTPUT-bracho-complaint.pdf`, 9 pages (same count as with EB Garamond), typst 0.15.0, no warnings, `pdffonts`: Liberation Serif embedded |
-| overlay | ok: `samples/OVERLAY-bracho-complaint.pdf` and `OVERLAY-bracho-complaint.txt` |
+| render | ok: `usage/OUTPUT-flmd-complaint-bracho.typst.pdf`, 9 pages (same count as with EB Garamond), typst 0.15.0, no warnings, `pdffonts`: Liberation Serif embedded |
+| overlay | ok: `usage/OVERLAY-bracho-complaint.pdf` and `OVERLAY-bracho-complaint.txt` |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the font change) |
 
 ## Governing rules
@@ -87,7 +87,7 @@ No overflow, no orphaned headings. Caption, headings and signature block are as 
 | Engine | Status |
 |---|---|
 | typst | primary; unchanged by this section |
-| docx | built: `docx/reference.docx` (made by `docx/make-reference.sh complaint`), `docx/flmd-complaint.lua`, `docx/render.sh`. Output `samples/OUTPUT-bracho-complaint.docx` (valid zip, well-formed XML, text check below). `OUTPUT-bracho-complaint.docx.pdf`: **BLOCKED** (no LibreOffice on this box, see below). |
+| docx | built: `docx/reference.docx` (made by `docx/make-reference.sh complaint`), `docx/flmd-complaint.lua`, `docx/render.sh`. Output `usage/OUTPUT-flmd-complaint-bracho.docx` (valid zip, well-formed XML, text check below). `OUTPUT-flmd-complaint-bracho.docx.pdf`: **BLOCKED** (no LibreOffice on this box, see below). |
 | latex | not built |
 
 What matches the typst template (by rule): Letter, 1-inch margins; main text Times New Roman 14-point (LR 1.08(b)); double-spaced; the court-title and caption block (FRCP 10(a)); numbered paragraphs (FRCP 10(b)) with a 0.5-inch first-line indent; lettered lists (a), (b), ...; the indented, unnumbered jury demand; the signature block at 3 inches; page numbers bottom center from page two (`titlePg`, no footer on page one).
@@ -105,8 +105,8 @@ Checks run on the `.docx` (not a PDF gate): every word of the markdown body is i
 
 BLOCKED (docx tier 1 gates, `docs/DOCX.md`):
 
-- `OUTPUT-bracho-complaint.docx.pdf` could not be made: `tools/render-docx.sh` calls `soffice`, which is not installed. LibreOffice 25.2 was unpacked from the Debian packages into a private prefix without root; it stops during UNO bootstrap (`RuntimeException`), so no PDF exists. Gates 0 and 1 and the Gate 2 page review were not run on a docx PDF; pages reviewed: 0.
+- `OUTPUT-flmd-complaint-bracho.docx.pdf` could not be made: `tools/render-docx.sh` calls `soffice`, which is not installed. LibreOffice 25.2 was unpacked from the Debian packages into a private prefix without root; it stops during UNO bootstrap (`RuntimeException`), so no PDF exists. Gates 0 and 1 and the Gate 2 page review were not run on a docx PDF; pages reviewed: 0.
 - Word has not been used to open the file (no Word here). The package is a valid zip with well-formed XML parts.
 - `tools/render-docx.sh` runs LibreOffice with the system font configuration, not the vendored fonts that `docs/FONTS.md` rule 2 requires. That is in `tools/` (out of this change's scope) and should be fixed there before the docx PDF gates can count.
 
-To rebuild: `sh docx/make-reference.sh docx/reference.docx complaint`, then `sh tools/render.sh --engine docx <court-dir>/complaint samples/INPUT-bracho-complaint.md`.
+To rebuild: `sh docx/make-reference.sh docx/reference.docx complaint`, then `sh tools/render.sh --engine docx <court-dir>/complaint usage/INPUT-flmd-complaint-bracho.md`.

@@ -1,15 +1,15 @@
 # W.D. Mo. (mowd): complaint
 
 Doc type: **complaint** in the United States District Court for the Western District of Missouri (`mowd`).
-Folder: `courts/eighth-circuit/missouri/federal/western-district/complaint/` (self-contained; the court-root `typst/` and `samples/` are not touched).
+Folder: `courts/eighth-circuit/missouri/federal/western-district/complaint/` (self-contained; the court-root `typst/` and `usage/` are not touched).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-johnson-4-26-cv-00380-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-johnson-complaint.md` (an excerpt of the 60-page filing, see Known gaps) |
+| exemplar | yes: `usage/SAMPLE-mowd-complaint-johnson426cv00380.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-mowd-complaint-johnson.md` (an excerpt of the 60-page filing, see Known gaps) |
 | typeface | face required by the rules: none (see Governing rules). Substitute: none; EB Garamond kept (`docs/FONTS.md`, "No face named"). Metric note: n/a. |
-| render | ok: `samples/OUTPUT-johnson-complaint.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`; re-rendered 2026-10-14, `pdffonts`: EB Garamond Regular and Bold embedded) |
-| overlay | fail: `samples/OVERLAY-johnson-complaint.pdf` not regenerated. `exemplars/` holds only `SOURCE.md` in this snapshot (no `FILED-EXAMPLE-*.pdf`), so `tools/overlay.sh` exits 1. The `.txt` page map is from an earlier run. |
+| render | ok: `usage/OUTPUT-mowd-complaint-johnson.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`; re-rendered 2026-10-14, `pdffonts`: EB Garamond Regular and Bold embedded) |
+| overlay | fail: `usage/OVERLAY-johnson-complaint.pdf` not regenerated. `usage/` holds only `SOURCE.md` in this snapshot (no `SAMPLE-*.pdf`), so `tools/overlay.sh` exits 1. The `.txt` page map is from an earlier run. |
 | pages reviewed | 10 of 10 (re-rendered 2026-10-14 and every page viewed at 60 dpi; the template did not change) |
 
 File names: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf` and the overlay `OVERLAY-<id>.{pdf,txt}`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default (the brief's `<id>.pdf` / `<id>-overlay.pdf` would not be found by the overlay tool).
@@ -86,8 +86,8 @@ Why 13 pt and not 12 pt: at 13 pt the EB Garamond x-height is about that of Time
 
 ## Engines
 
-- **typst** (`typst/`, primary): `samples/OUTPUT-johnson-complaint.pdf`, 10 pages.
-- **docx** (`docx/`): `reference.docx` (styles and page setup, built by `sh docx/build-reference.sh reference.docx`) and `mowd-complaint.lua` (cover, caption, numbered paragraphs, lists, signature block). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-johnson-complaint.md` writes `samples/OUTPUT-johnson-complaint.docx` and `samples/OUTPUT-johnson-complaint.docx.pdf` (LibreOffice 26.8.1; 11 pages). LibreOffice must see `fonts/` (EB Garamond) through fontconfig, or the PDF substitutes a face.
+- **typst** (`typst/`, primary): `usage/OUTPUT-mowd-complaint-johnson.typst.pdf`, 10 pages.
+- **docx** (`docx/`): `reference.docx` (styles and page setup, built by `sh docx/build-reference.sh reference.docx`) and `mowd-complaint.lua` (cover, caption, numbered paragraphs, lists, signature block). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-mowd-complaint-johnson.md` writes `usage/OUTPUT-mowd-complaint-johnson.docx` and `usage/OUTPUT-mowd-complaint-johnson.docx.pdf` (LibreOffice 26.8.1; 11 pages). LibreOffice must see `fonts/` (EB Garamond) through fontconfig, or the PDF substitutes a face.
 - **latex**: not built for this doc type (`latex/` is empty).
 
 What matches the typst form (every page of the docx PDF viewed at 60 dpi, next to the typst page):
@@ -105,4 +105,4 @@ docx BLOCKED items: none for the mandated form. Not checked: Word itself (not in
 
 ## Overlay
 
-`samples/OVERLAY-johnson-complaint.pdf` (red = our render, blue = exemplar, black = both) and `OVERLAY-johnson-complaint.txt` (page map). Pages are paired by word overlap: ours p.1 to p.10 pair with filed p.1, 3, 4, 50, 51, 52, 55, 58, 58, 59. The pairing is coarse because the sample is an excerpt; the exemplar's pleading page layout is not reproduced (no pleading paper), so the lines will not coincide. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-johnson-complaint.pdf` (red = our render, blue = exemplar, black = both) and `OVERLAY-johnson-complaint.txt` (page map). Pages are paired by word overlap: ours p.1 to p.10 pair with filed p.1, 3, 4, 50, 51, 52, 55, 58, 58, 59. The pairing is coarse because the sample is an excerpt; the exemplar's pleading page layout is not reproduced (no pleading paper), so the lines will not coincide. The overlay is a diagnostic, not a score.

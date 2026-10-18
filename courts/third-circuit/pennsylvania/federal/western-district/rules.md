@@ -13,10 +13,10 @@ Access note: on 2026-10-17 `www.pawd.uscourts.gov` answered this box with a "Req
 | LCvR | Local Rules of Court, W.D. Pa., "Effective: November 1, 2016" (file `lrmanual20181101.pdf`, 130 pp., the current "PAWD Local Rules of Court") | https://www.pawd.uscourts.gov/sites/pawd/files/lrmanual20181101.pdf (read from https://web.archive.org/web/20250523014052/https://www.pawd.uscourts.gov/sites/pawd/files/lrmanual20181101.pdf) |
 | LR-PAGE | Court page "Local Rules" (links LCvR; effective date) | https://web.archive.org/web/20260618011942/https://www.pawd.uscourts.gov/court-info/local-rules-and-orders/local-rules |
 | FRCP | Federal Rules of Civil Procedure 5, 5.2, 7, 7.1, 8, 10, 11, 38 (LII text) | https://www.law.cornell.edu/rules/frcp/rule_5 (and rule_5.2, rule_7, rule_7.1, rule_8, rule_10, rule_11, rule_38) |
-| EX-CRAGLE | Complaint, *Cragle v. AVI Foodsystems, Inc.*, No. 2:26-cv-02200 (Law Offices of Joel Sansone, for plaintiff Robert Cragle) | `complaint/exemplars/` |
-| EX-SNEE | Complaint (class action), *Snee v. Philips North America LLC*, No. 2:22-cv-00119 (David Pastor, for plaintiff Thomas Snee) | `complaint/exemplars/` |
-| EX-ALBRIGHT | Memorandum in support of motion to dismiss, *Albright v. Concurrent Technologies Corp.*, No. 3:21-cv-00112 (Buchanan Ingersoll & Rooney, for CTC, CTC Foundation and EVC) | `motion-brief/exemplars/` |
-| EX-NADM | Memorandum in support of motion to dismiss, *North American Dental Management, LLC v. Phillips*, No. 2:23-cv-01202 (James C. Bookhout, for P1 Dental MSO and Prairie Capital) | `motion-brief/exemplars/` |
+| EX-CRAGLE | Complaint, *Cragle v. AVI Foodsystems, Inc.*, No. 2:26-cv-02200 (Law Offices of Joel Sansone, for plaintiff Robert Cragle) | `complaint/usage/` |
+| EX-SNEE | Complaint (class action), *Snee v. Philips North America LLC*, No. 2:22-cv-00119 (David Pastor, for plaintiff Thomas Snee) | `complaint/usage/` |
+| EX-ALBRIGHT | Memorandum in support of motion to dismiss, *Albright v. Concurrent Technologies Corp.*, No. 3:21-cv-00112 (Buchanan Ingersoll & Rooney, for CTC, CTC Foundation and EVC) | `motion-brief/usage/` |
+| EX-NADM | Memorandum in support of motion to dismiss, *North American Dental Management, LLC v. Phillips*, No. 2:23-cv-01202 (James C. Bookhout, for P1 Dental MSO and Prairie Capital) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (FRCP or W.D. Pa. LCvR). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

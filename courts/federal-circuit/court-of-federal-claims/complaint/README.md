@@ -1,15 +1,15 @@
 # United States Court of Federal Claims: complaint
 
-Doc-type folder for the Court of Federal Claims (`uscfc`), complaint. Self-contained: `exemplars/`, `samples/`, `typst/`, this README.
+Doc-type folder for the Court of Federal Claims (`uscfc`), complaint. Self-contained: `usage/`, `usage/`, `typst/`, this README.
 
 ## Status
 
 | Item | Result |
 |---|---|
-| Exemplar | yes: one filed complaint (Design Build, LLC, No. 1:26-cv-01361, filed 2026-09-15). See `exemplars/SOURCE.md`. |
+| Exemplar | yes: one filed complaint (Design Build, LLC, No. 1:26-cv-01361, filed 2026-09-15). See `usage/SOURCE.md`. |
 | Typeface | Rule names no face (RCFC 5.5(c)(2): text and footnotes no smaller than 12 point). Keeps EB Garamond; no vendored substitute applied. Visual-only comparison to the exemplar's Times New Roman, see Known gaps 1. |
-| Render | ok: `sh tools/render.sh courts/federal-circuit/court-of-federal-claims/complaint samples/INPUT-design-build-llc-26-1361.md`; exit 0, no typst warnings, EB Garamond only (`pdffonts`). 13 pages (re-rendered 2026-10-16). |
-| Overlay | ok: `sh tools/overlay.sh courts/federal-circuit/court-of-federal-claims/complaint design-build-llc-26-1361`; exit 0, wrote `OVERLAY-…pdf` and `OVERLAY-….txt`. The exemplar PDF was restored from the URL in `exemplars/SOURCE.md` and matches its SHA-256. |
+| Render | ok: `sh tools/render.sh courts/federal-circuit/court-of-federal-claims/complaint usage/INPUT-uscfc-complaint-designbuildllc261361.md`; exit 0, no typst warnings, EB Garamond only (`pdffonts`). 13 pages (re-rendered 2026-10-16). |
+| Overlay | ok: `sh tools/overlay.sh courts/federal-circuit/court-of-federal-claims/complaint design-build-llc-26-1361`; exit 0, wrote `OVERLAY-…pdf` and `OVERLAY-….txt`. The exemplar PDF was restored from the URL in `usage/SOURCE.md` and matches its SHA-256. |
 | Pages reviewed | 13 of 13. Every page of the final render rasterized at 60 dpi (`pdftoppm -r 60`) and looked at, 2026-10-16 (earlier: 50 dpi, 2026-10-14). |
 | Tier 2 vs. a second filer | not done (one exemplar only). |
 
@@ -67,8 +67,8 @@ The map pairs by text, so it is approximate. Our pages 1–6 pair with exemplar 
 
 ## Samples
 
-- `samples/INPUT-design-build-llc-26-1361.md`: transcription of the exemplar (caption, Nature of the Action, Parties, Jurisdiction and Venue, The Contract, factual background ¶¶ 15–29 and 41–42 in full, COFDs ¶¶ 49–56, Count I ¶¶ 57–65, prayer, signature, certificate of service). Paragraphs 30–40 and 43–48 are not transcribed, and the sample says so in a bracketed note. The exemplar is 18 pages; the sample renders to 13.
-- `samples/OUTPUT-design-build-llc-26-1361.pdf`: render (13 pages). Named `OUTPUT-` and `OVERLAY-` because `tools/render.sh` and `tools/overlay.sh` use those names by default.
+- `usage/INPUT-uscfc-complaint-designbuildllc261361.md`: transcription of the exemplar (caption, Nature of the Action, Parties, Jurisdiction and Venue, The Contract, factual background ¶¶ 15–29 and 41–42 in full, COFDs ¶¶ 49–56, Count I ¶¶ 57–65, prayer, signature, certificate of service). Paragraphs 30–40 and 43–48 are not transcribed, and the sample says so in a bracketed note. The exemplar is 18 pages; the sample renders to 13.
+- `usage/OUTPUT-uscfc-complaint-designbuildllc261361.typst.pdf`: render (13 pages). Named `OUTPUT-` and `OVERLAY-` because `tools/render.sh` and `tools/overlay.sh` use those names by default.
 
 ## Known gaps
 
@@ -81,7 +81,7 @@ The map pairs by text, so it is approximate. Our pages 1–6 pair with exemplar 
 
 ## Engines
 
-The docx engine is `docx/` (`make-reference.sh` builds `reference.docx`; `uscfc-complaint.lua` adds the caption, the signature block, the certificate and the prayer-list indents). Render: `sh tools/render.sh --engine docx courts/federal-circuit/court-of-federal-claims/complaint samples/INPUT-design-build-llc-26-1361.md` writes `samples/OUTPUT-design-build-llc-26-1361.docx` and its LibreOffice PDF (LibreOffice 26.8.1; on the render box `fonts/eb-garamond` was linked into fontconfig, see docs/DOCX.md).
+The docx engine is `docx/` (`make-reference.sh` builds `reference.docx`; `uscfc-complaint.lua` adds the caption, the signature block, the certificate and the prayer-list indents). Render: `sh tools/render.sh --engine docx courts/federal-circuit/court-of-federal-claims/complaint usage/INPUT-uscfc-complaint-designbuildllc261361.md` writes `usage/OUTPUT-uscfc-complaint-designbuildllc261361.docx` and its LibreOffice PDF (LibreOffice 26.8.1; on the render box `fonts/eb-garamond` was linked into fontconfig, see docs/DOCX.md).
 
 | Matches the typst render | Differs from it |
 |---|---|
@@ -96,7 +96,7 @@ The docx engine is `docx/` (`make-reference.sh` builds `reference.docx`; `uscfc-
 
 ## Verification pass 2026-10-16 (fb-595.26.14)
 
-- Rendered: `sh tools/render.sh … samples/INPUT-design-build-llc-26-1361.md`, exit 0, no typst warnings, EB Garamond only. 13 pages, as before (the committed PDF was not stale in page count).
+- Rendered: `sh tools/render.sh … usage/INPUT-uscfc-complaint-designbuildllc261361.md`, exit 0, no typst warnings, EB Garamond only. 13 pages, as before (the committed PDF was not stale in page count).
 - Viewed: all 13 pages at 60 dpi, before and after the fixes; exemplar pages 1, 17 and 18 at 50 dpi; all 13 overlay pages.
 - Overlay: `sh tools/overlay.sh … design-build-llc-26-1361` rerun, exit 0; same page pairing as above. It shows our caption sits slightly lower, our lines drift against the exemplar's down each page (different face and leading), and the exemplar's caption names are bold (tier 3).
 - Fixed:
@@ -108,7 +108,7 @@ The docx engine is `docx/` (`make-reference.sh` builds `reference.docx`; `uscfc-
 ## Build and check (from the repo root)
 
 ```sh
-sh tools/render.sh courts/federal-circuit/court-of-federal-claims/complaint samples/INPUT-design-build-llc-26-1361.md
+sh tools/render.sh courts/federal-circuit/court-of-federal-claims/complaint usage/INPUT-uscfc-complaint-designbuildllc261361.md
 sh tools/overlay.sh courts/federal-circuit/court-of-federal-claims/complaint design-build-llc-26-1361
 ```
 

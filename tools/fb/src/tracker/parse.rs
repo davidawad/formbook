@@ -3,6 +3,8 @@
 //! Mirrors tools/tracker.bend: lines split on '\n' only, fields on '|'; a court line needs at
 //! least seven fields and a doc-type line at least five (extra fields are ignored, shorter lines
 //! dropped). Flags are compared as characters (Unicode scalar values, as Bend's String holds them).
+//! Overlays are no longer committed, so neither flag string carries an overlay character: courts have
+//! seven checklist items, doc types four.
 
 /// Court status, in increasing order of completion.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -24,7 +26,7 @@ impl Status {
     }
 }
 
-/// One court line. `engines` is `None` when the flags have fewer than eight characters: bend then
+/// One court line. `engines` is `None` when the flags have fewer than seven characters: bend then
 /// scores the court as todo/0 even when court.json says done, and prints no checklist items.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Court {
@@ -38,8 +40,8 @@ pub struct Court {
     pub items: String,
 }
 
-/// One doc-type line. `bits` = template, sample, render, exemplar, overlay, gates (0/1 each);
-/// `samples` / `exemplars` are the raw count characters.
+/// One doc-type line. `bits` = template, sample, render, exemplar, gates (0/1 each);
+/// `samples` / `exemplars` are the raw count characters (INPUT files, SAMPLEs named in SOURCE.md).
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct DocType {
     pub alias: String,
@@ -48,7 +50,7 @@ pub struct DocType {
     pub path: String,
     pub samples: char,
     pub exemplars: char,
-    pub bits: [u32; 6],
+    pub bits: [u32; 5],
 }
 
 fn is(c: char, k: char) -> u32 {
@@ -73,16 +75,19 @@ fn bit(x: u32) -> char {
     }
 }
 
-/// `round(items / 8 * 100)` with halves rounded up, as integer arithmetic.
+/// Court checklist items: rules, sources, inputs, typst, latex, docx, review.
+pub const ITEMS: u32 = 7;
+
+/// `round(items / 7 * 100)` with halves rounded up, as integer arithmetic.
 pub fn percent(items: u32) -> u32 {
-    (items * 100 + 4) / 8
+    (items * 200 + ITEMS) / (2 * ITEMS)
 }
 
 /// Status, percent, engine states and checklist bits from the manual field and the flags.
 pub fn score(manual: &str, flags: &str) -> (Status, u32, Option<[char; 3]>, String) {
     let cs: Vec<char> = flags.chars().collect();
-    let [r, e, s, t, l, d, o, v] = match cs.get(..8) {
-        Some(&[r, e, s, t, l, d, o, v]) => [r, e, s, t, l, d, o, v],
+    let [r, e, s, t, l, d, v] = match cs.get(..7) {
+        Some(&[r, e, s, t, l, d, v]) => [r, e, s, t, l, d, v],
         _ => return (Status::Todo, 0, None, String::new()),
     };
     let xs = [
@@ -92,11 +97,10 @@ pub fn score(manual: &str, flags: &str) -> (Status, u32, Option<[char; 3]>, Stri
         is(t, '2'),
         is(l, '2'),
         is(d, '2'),
-        is(o, '1'),
         is(v, '1'),
     ];
     let present: u32 = xs.iter().sum();
-    let any = cs[..8].iter().any(|&c| c != '0');
+    let any = cs[..7].iter().any(|&c| c != '0');
     let status = if manual == "done" {
         Status::Done
     } else if xs[0] * xs[3] == 1 {
@@ -138,15 +142,12 @@ pub fn court(line: &str) -> Option<Court> {
     })
 }
 
-/// Doc-type bits from the flags; `None` (line dropped) for fewer than five characters.
-pub fn doc_bits(flags: &str) -> Option<(char, char, [u32; 6])> {
-    let cs: Vec<char> = flags.chars().take(5).collect();
+/// Doc-type bits from the flags (template, inputs, render, sources; a fifth review character is
+/// ignored); `None` (line dropped) for fewer than four characters.
+pub fn doc_bits(flags: &str) -> Option<(char, char, [u32; 5])> {
+    let cs: Vec<char> = flags.chars().take(4).collect();
     match cs[..] {
-        [t, s, r, e, o] => Some((
-            s,
-            e,
-            [is(t, '1'), nz(s), nz(r), nz(e), is(o, '1'), is(r, '2')],
-        )),
+        [t, s, r, e] => Some((s, e, [is(t, '1'), nz(s), nz(r), nz(e), is(r, '2')])),
         _ => None,
     }
 }
@@ -169,9 +170,9 @@ pub fn doctype(line: &str) -> Option<DocType> {
     })
 }
 
-/// 1 iff template, sample, render, exemplar and overlay are all present.
-pub fn complete(bits: &[u32; 6]) -> u32 {
-    bits[..5].iter().product()
+/// 1 iff template, sample, render and exemplar are all present.
+pub fn complete(bits: &[u32; 5]) -> u32 {
+    bits[..4].iter().product()
 }
 
 pub fn courts(text: &str) -> Vec<Court> {
@@ -193,62 +194,41 @@ mod tests {
 
     #[test]
     fn status_rules() {
-        assert_eq!(st("todo", "00000000"), ("todo", 0, "00000000".into()));
+        assert_eq!(st("todo", "0000000"), ("todo", 0, "0000000".into()));
+        assert_eq!(st("todo", "0100000"), ("in progress", 0, "0000000".into()));
         assert_eq!(
-            st("todo", "01000000"),
-            ("in progress", 0, "00000000".into())
+            st("todo", "1002000"),
+            ("up for review", 29, "1001000".into())
         );
-        assert_eq!(
-            st("todo", "10020000"),
-            ("up for review", 25, "10010000".into())
-        );
-        assert_eq!(
-            st("todo", "10200000"),
-            ("in progress", 25, "10100000".into())
-        );
-        assert_eq!(
-            st("todo", "00020000"),
-            ("in progress", 13, "00010000".into())
-        );
-        assert_eq!(st("done", "00000000"), ("done", 100, "00000000".into()));
-        assert_eq!(
-            st("in progress", "00000000"),
-            ("todo", 0, "00000000".into())
-        );
-        assert_eq!(
-            st("Done", "11111111"),
-            ("in progress", 38, "10000011".into())
-        );
-        // fewer than eight flags: todo, 0, no items, even when done
-        assert_eq!(st("done", "1922222"), ("todo", 0, String::new()));
+        assert_eq!(st("todo", "1020000"), ("in progress", 29, "1010000".into()));
+        assert_eq!(st("todo", "0002000"), ("in progress", 14, "0001000".into()));
+        assert_eq!(st("done", "0000000"), ("done", 100, "0000000".into()));
+        assert_eq!(st("in progress", "0000000"), ("todo", 0, "0000000".into()));
+        assert_eq!(st("Done", "1111111"), ("in progress", 29, "1000001".into()));
+        // fewer than seven flags: todo, 0, no items, even when done
+        assert_eq!(st("done", "192222"), ("todo", 0, String::new()));
         // extra characters are ignored; any non-'0' character counts as present
-        assert_eq!(st("todo", "000000001"), ("todo", 0, "00000000".into()));
-        assert_eq!(
-            st("todo", "0x000000"),
-            ("in progress", 13, "01000000".into())
-        );
+        assert_eq!(st("todo", "00000001"), ("todo", 0, "0000000".into()));
+        assert_eq!(st("todo", "0x00000"), ("in progress", 14, "0100000".into()));
     }
 
     #[test]
     fn percent_rounds_halves_up() {
-        let got: Vec<u32> = (0..=8).map(percent).collect();
-        assert_eq!(got, [0, 13, 25, 38, 50, 63, 75, 88, 100]);
+        let got: Vec<u32> = (0..=7).map(percent).collect();
+        assert_eq!(got, [0, 14, 29, 43, 57, 71, 86, 100]);
         assert_eq!(
-            st("todo", "19922211"),
-            ("up for review", 100, "11111111".into())
+            st("todo", "1992221"),
+            ("up for review", 100, "1111111".into())
         );
-        assert_eq!(
-            st("todo", "12900110"),
-            ("in progress", 50, "11100010".into())
-        );
+        assert_eq!(st("todo", "1290010"), ("in progress", 43, "1110000".into()));
     }
 
     #[test]
-    fn exemplar_counts() {
-        let it = |e: char| st("todo", &format!("0{e}000000")).2;
+    fn source_counts() {
+        let it = |e: char| st("todo", &format!("0{e}00000")).2;
         assert_eq!(
             [it('0'), it('1'), it('2'), it('9')],
-            ["00000000", "00000000", "01000000", "01000000"]
+            ["0000000", "0000000", "0100000", "0100000"]
         );
     }
 
@@ -256,7 +236,7 @@ mod tests {
     fn court_fields() {
         assert!(court("").is_none());
         assert!(court("a|g|l|n|p|todo").is_none());
-        let c = court("a|g|l|n|p|todo|00012000|extra").unwrap();
+        let c = court("a|g|l|n|p|todo|0001200|extra").unwrap();
         assert_eq!(c.engines, Some(['1', '2', '0']));
         assert_eq!((c.alias.as_str(), c.status), ("a", Status::InProgress));
         let e = court("a||l|n|p|done|").unwrap();
@@ -268,13 +248,13 @@ mod tests {
 
     #[test]
     fn doctype_bits() {
-        assert_eq!(doc_bits("111110"), Some(('1', '1', [1, 1, 1, 1, 1, 0])));
-        assert_eq!(doc_bits("19291"), Some(('9', '9', [1, 1, 1, 1, 1, 1])));
-        assert_eq!(doc_bits("01000"), Some(('1', '0', [0, 1, 0, 0, 0, 0])));
-        assert_eq!(doc_bits("1111"), None);
+        assert_eq!(doc_bits("11110"), Some(('1', '1', [1, 1, 1, 1, 0])));
+        assert_eq!(doc_bits("1929"), Some(('9', '9', [1, 1, 1, 1, 1])));
+        assert_eq!(doc_bits("01001"), Some(('1', '0', [0, 1, 0, 0, 0])));
+        assert_eq!(doc_bits("111"), None);
         assert!(doctype("a|g|dt|p").is_none());
-        assert!(doctype("a|g|dt|p|1111").is_none());
-        assert_eq!(complete(&[1, 1, 1, 1, 1, 0]), 1);
-        assert_eq!(complete(&[1, 1, 1, 1, 0, 1]), 0);
+        assert!(doctype("a|g|dt|p|111").is_none());
+        assert_eq!(complete(&[1, 1, 1, 1, 0]), 1);
+        assert_eq!(complete(&[1, 1, 1, 0, 1]), 0);
     }
 }

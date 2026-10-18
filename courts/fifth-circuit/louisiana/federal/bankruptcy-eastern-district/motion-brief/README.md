@@ -5,15 +5,15 @@ Folder: `courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/moti
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-crosby-marine-26-1018-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-crosby-msj-memo.md` (the memorandum's caption, title, background, argument, conclusion, signature and certificate; the 28-page exemplar is abridged in its argument, see gap 8) |
-| render | ok: `samples/OUTPUT-crosby-msj-memo.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-crosby-msj-memo.pdf` and `samples/OVERLAY-crosby-msj-memo.txt` |
+| exemplar | yes: `usage/SAMPLE-laeb-motion-brief-crosbymarine261018.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-laeb-motion-brief-crosbymsjmemo.md` (the memorandum's caption, title, background, argument, conclusion, signature and certificate; the 28-page exemplar is abridged in its argument, see gap 8) |
+| render | ok: `usage/OUTPUT-laeb-motion-brief-crosbymsjmemo.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-crosby-msj-memo.pdf` and `usage/OVERLAY-crosby-msj-memo.txt` |
 | typeface | EB Garamond, 12 pt. No rule names a face, so `docs/FONTS.md` "No face named" applies and the template keeps EB Garamond (gap 2) |
 | pages reviewed | 8 of 8 (re-rendered and every page viewed at 60 dpi on 2026-10-14, fonts pass; output unchanged) |
 | BLOCKED | none |
 
-File names: the brief's `samples/<id>.md` and `samples/<id>-overlay.pdf` are written as `INPUT-<id>.md` and `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default (CLAUDE.md, "File roles are in the name").
+File names: the brief's `usage/<id>.md` and `usage/<id>-overlay.pdf` are written as `INPUT-<id>.md` and `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default (CLAUDE.md, "File roles are in the name").
 
 ## Governing rules
 
@@ -46,7 +46,7 @@ Not produced by this template: the ECF header line ("Case 26-10678 Doc 414-1 Fil
 - Certificate of service (optional, `certificate` frontmatter): centered bold heading, the certificate text, and the signer's "/s/" line.
 - Footer: "Page X of Y" centered, 11 pt.
 
-## Overlay (`samples/OVERLAY-crosby-msj-memo.pdf`)
+## Overlay (`usage/OVERLAY-crosby-msj-memo.pdf`)
 
 `tools/overlay.sh` pairs our pages with the best-matching exemplar pages by shared words (`OVERLAY-crosby-msj-memo.txt`):
 

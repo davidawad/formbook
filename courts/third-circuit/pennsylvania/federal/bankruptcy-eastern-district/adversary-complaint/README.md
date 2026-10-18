@@ -5,30 +5,30 @@ Folder: `courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/a
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `exemplars/FILED-EXAMPLE-tig-reaper-26-00204-adversary-complaint.pdf` (Kang Haggerty LLC, filed 2026-09-21) and `exemplars/FILED-EXAMPLE-krueger-26-00127-adversary-complaint.pdf` (Salzmann Hughes PC, filed 2026-03-24). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-krueger-complaint.md` (the full filing text, ¶¶ 1 to 88, relief, signature, certificate of service); `samples/INPUT-tig-reaper-complaint.md` (an excerpt: caption, ¶¶ 1 to 23, Counts I to V, prayer, signature; see Known gaps) |
-| render | ok: `samples/OUTPUT-krueger-complaint.pdf` (12 pages), `samples/OUTPUT-tig-reaper-complaint.pdf` (9 pages); typst 0.15.0, vendored EB Garamond only, `--ignore-system-fonts`, no warnings |
-| overlay | ok: `samples/OVERLAY-krueger-complaint.pdf` and `.txt` (against the Krueger exemplar); `samples/OVERLAY-tig-reaper-complaint.pdf` and `.txt` (against the TIG exemplar) |
+| exemplar | yes, two filers: `usage/SAMPLE-paeb-adversary-complaint-tigreaper2600204.pdf` (Kang Haggerty LLC, filed 2026-09-21) and `usage/SAMPLE-paeb-adversary-complaint-krueger2600127.pdf` (Salzmann Hughes PC, filed 2026-03-24). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-paeb-adversary-complaint-kruegercomplaint.md` (the full filing text, ¶¶ 1 to 88, relief, signature, certificate of service); `usage/INPUT-paeb-adversary-complaint-tigreapercomplaint.md` (an excerpt: caption, ¶¶ 1 to 23, Counts I to V, prayer, signature; see Known gaps) |
+| render | ok: `usage/OUTPUT-paeb-adversary-complaint-kruegercomplaint.typst.pdf` (12 pages), `usage/OUTPUT-paeb-adversary-complaint-tigreapercomplaint.typst.pdf` (9 pages); typst 0.15.0, vendored EB Garamond only, `--ignore-system-fonts`, no warnings |
+| overlay | ok: `usage/OVERLAY-krueger-complaint.pdf` and `.txt` (against the Krueger exemplar); `usage/OVERLAY-tig-reaper-complaint.pdf` and `.txt` (against the TIG exemplar) |
 | pages reviewed | 12 of 12 (Krueger) and 9 of 9 (TIG). Every page was rasterized at 60 dpi and viewed after the last template change. |
 
 Build (from the repo root, PATH per the box setup):
 
 ```sh
 D=courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/adversary-complaint
-sh tools/render.sh $D samples/INPUT-krueger-complaint.md
-sh tools/overlay.sh $D krueger-complaint $D/exemplars/FILED-EXAMPLE-krueger-26-00127-adversary-complaint.pdf
+sh tools/render.sh $D usage/INPUT-paeb-adversary-complaint-kruegercomplaint.md
+sh tools/overlay.sh $D krueger-complaint $D/usage/SAMPLE-krueger-26-00127-adversary-complaint.pdf
 ```
 
-File names follow the tools, which read and write `INPUT-`, `OUTPUT-` and `OVERLAY-` names by default (`tools/render.sh` writes `samples/OUTPUT-<id>.pdf`, `tools/overlay.sh` reads it and writes `samples/OVERLAY-<id>.pdf` and `.txt`). The brief's `<id>.md` / `<id>-overlay.pdf` names were not used so that the tools work unchanged.
+File names follow the tools, which read and write `INPUT-`, `OUTPUT-` and `OVERLAY-` names by default (`tools/render.sh` writes `usage/OUTPUT-<id>.pdf`, `tools/overlay.sh` reads it and writes `usage/OVERLAY-<id>.pdf` and `.txt`). The brief's `<id>.md` / `<id>-overlay.pdf` names were not used so that the tools work unchanged.
 
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form.
 - **latex**: not built for this doc type yet (`latex/` is empty).
-- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/paeb.lua`): pandoc on a reference.docx built from pandoc's default (EB Garamond 12 pt, exact 24 pt line pitch, no space between paragraphs, 0.5 in first-line indent, 1 in margins on letter paper, centered PAGE footer). Build: `sh docx/build-reference.sh docx/reference.docx`, then from the court folder `pandoc --from markdown+smart --to docx --reference-doc=<D>/docx/reference.docx --lua-filter=<D>/docx/paeb.lua <D>/samples/INPUT-<id>.md -o <D>/samples/OUTPUT-<id>.docx`.
+- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/paeb.lua`): pandoc on a reference.docx built from pandoc's default (EB Garamond 12 pt, exact 24 pt line pitch, no space between paragraphs, 0.5 in first-line indent, 1 in margins on letter paper, centered PAGE footer). Build: `sh docx/build-reference.sh docx/reference.docx`, then from the court folder `pandoc --from markdown+smart --to docx --reference-doc=<D>/docx/reference.docx --lua-filter=<D>/docx/paeb.lua <D>/usage/INPUT-<id>.md -o <D>/usage/OUTPUT-<id>.docx`.
   - Matches the typst template: the two-line bold court title; the caption as a borderless three-column table (party names, colons, `Chapter` / `Case No.` / `Adv. Proc. No.`) with the 1.2 in designation indent; numbered allegations with unnumbered WHEREFORE clauses; lettered or roman lists from the sample's `list_numbering`; bold capitals centered level-1 headings and bold level-2 and level-3 headings kept with the text after them; the signature block (Dated at left; firm, `By: /s/` and the lines at right) with the last paragraph kept on its page; the optional certificate of service kept on one page.
   - Differs from typst (pandoc and Word limits, not chosen): the caption and signature are Word tables, so their borders and cell padding are Word's; the heading spacing is 6 pt before and after the heading line (typst's measured offset is about 6.5 pt); the list text starts at 1.1 in (typst places it by the marker width plus 0.4 in); footnotes are at body size because the typst template sets no footnote size (no sample has a footnote); line breaks and page breaks follow Word's layout, so the page count of the typst render (12, 9 and 8 pages for the three samples) is not reproduced.
-  - Checks: the docx passes the zip and XML checks only (every zip entry reads, every XML part is well formed). No `checks.yaml` exists for this court, so there is no list of gate check IDs to read. BLOCKED: every gate check on `samples/OUTPUT-<id>.docx.pdf` (the Gate 0 to 3 checks, none readable here): LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
+  - Checks: the docx passes the zip and XML checks only (every zip entry reads, every XML part is well formed). No `checks.yaml` exists for this court, so there is no list of gate check IDs to read. BLOCKED: every gate check on `usage/OUTPUT-<id>.docx.pdf` (the Gate 0 to 3 checks, none readable here): LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
 
 ## Governing rules
 
@@ -64,7 +64,7 @@ No E.D. Pa. rule on the typeface, type size, margins, line spacing or page limit
 
 ## Gate 2 review (final renders, every page viewed)
 
-Krueger, 12 pages (`samples/OUTPUT-krueger-complaint.pdf`):
+Krueger, 12 pages (`usage/OUTPUT-paeb-adversary-complaint-kruegercomplaint.typst.pdf`):
 
 - p. 1: court title, caption (colons aligned), title, lead-in, Parties, Jurisdiction headings. Pass.
 - p. 2 to p. 6: numbered ¶¶ 7 to 58, procedural background and factual allegations. Pass.
@@ -72,7 +72,7 @@ Krueger, 12 pages (`samples/OUTPUT-krueger-complaint.pdf`):
 - p. 11: WHEREFORE, Relief Requested, items (i) to (v), signature block. Pass.
 - p. 12: Certificate of service with the four CM/ECF service blocks, date and signature. Pass.
 
-TIG Reaper, 9 pages (`samples/OUTPUT-tig-reaper-complaint.pdf`):
+TIG Reaper, 9 pages (`usage/OUTPUT-paeb-adversary-complaint-tigreapercomplaint.typst.pdf`):
 
 - p. 1: court title, caption (the plaintiffs' name is split into rows and the colons align), title, lead-in, Preliminary Statement ¶¶ 1 to 4. Pass.
 - p. 2 to p. 3: ¶¶ 5 to 19 (parties, jurisdiction and venue, factual background with lettered items (a) and (b)). Pass.

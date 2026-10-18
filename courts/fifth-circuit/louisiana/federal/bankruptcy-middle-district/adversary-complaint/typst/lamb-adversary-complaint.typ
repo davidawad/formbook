@@ -104,7 +104,7 @@
 /// Split the body into blank-line-separated chunks and typeset each by its first characters.
 /// Convention (LAMB-CONT-002): a chunk starting "WHEREFORE" is an unnumbered prayer lead-in.
 /// The opening chunk, when it is not a heading, is an unnumbered lead-in too: both filed
-/// M.D. La. complaints in exemplars/ leave it unnumbered (Hoven; Criss), and the
+/// M.D. La. complaints in usage/ leave it unnumbered (Hoven; Criss), and the
 /// numbered allegations start after it.
 #let body-blocks(body) = {
   let chunks = body.replace("\r\n", "\n").split("\n\n").map(s => s.trim()).filter(s => s != "")

@@ -12,8 +12,8 @@ Access note: on 2026-10-17 `www.jagcnet.army.mil` returned an HTTP 403 page for 
 |---|---|---|
 | ACCA-R | United States Army Court of Criminal Appeals Rules of Appellate Procedure, "Effective: 15 January 2019", "Published Together with the Joint Rules of Appellate Procedure" (JRAP in boldface) (68 pp., scanned with OCR text layer) | https://www.jagcnet.army.mil/Home/assets/pdf/court/RulesofCourt.pdf (read from https://web.archive.org/web/20250729125903/https://www.jagcnet.army.mil/Home/assets/pdf/court/RulesofCourt.pdf) |
 | APP-A | ACCA-R Appendix A, "Format for Brief on Behalf of Appellant" | same PDF |
-| EX-AKBAR-OB | Brief on behalf of appellant, *United States v. Akbar*, ARMY 20050514 (Defense Appellate Division), 2010 | `opening-brief/exemplars/` |
-| EX-AKBAR-AB | Brief on behalf of appellee, *United States v. Akbar*, ARMY 20050514 (Government Appellate Division), 2010 | `answering-brief/exemplars/` |
+| EX-AKBAR-OB | Brief on behalf of appellant, *United States v. Akbar*, ARMY 20050514 (Defense Appellate Division), 2010 | `opening-brief/usage/` |
+| EX-AKBAR-AB | Brief on behalf of appellee, *United States v. Akbar*, ARMY 20050514 (Government Appellate Division), 2010 | `answering-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (ACCA Rules or JRAP). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

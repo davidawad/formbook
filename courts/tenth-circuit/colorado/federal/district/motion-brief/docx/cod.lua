@@ -1,5 +1,5 @@
 -- D. Colo. motion to dismiss with its memorandum, DOCX engine (docs/DOCX.md): the markdown contract of
--- samples/INPUT-<id>.md -> Word. Mirrors typst/cod-motion-brief.typ: court lines, "Civil Action No.", party
+-- usage/INPUT-<id>.md -> Word. Mirrors typst/cod-motion-brief.typ: court lines, "Civil Action No.", party
 -- block with "v." between sides, bold centred title, lead-in, optional certificate of compliance, the body
 -- (sections numbered by the template: I. centred caps; A., 1., a. with a hanging number; body paragraphs
 -- double spaced with a first-line indent; block quotations single spaced, indented one inch each side;

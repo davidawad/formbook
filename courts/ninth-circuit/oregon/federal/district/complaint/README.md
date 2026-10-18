@@ -5,11 +5,11 @@ Folder: `courts/ninth-circuit/oregon/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-kliewer-fender-3-26-cv-02238-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-kliewer-complaint.md`: partial transcription, 8 rendered pages (see Known gaps) |
-| render | ok: `samples/OUTPUT-kliewer-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/SAMPLE-ord-complaint-kliewerfender326cv02238.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ord-complaint-kliewer.md`: partial transcription, 8 rendered pages (see Known gaps) |
+| render | ok: `usage/OUTPUT-ord-complaint-kliewer.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | typeface | face required: none (LR 10-1 text read 2026-10-15 names no typeface; only the 12-pt minimum). Vendored substitute: none needed; **EB Garamond kept** (the rule allows any proportional face). Fit: n/a. Font list unchanged in this pass. |
-| overlay | **fail** this pass: `exemplars/FILED-EXAMPLE-*.pdf` is not in this snapshot, so `tools/overlay.sh` could not run. The `samples/OVERLAY-kliewer-complaint.txt` on disk is from an earlier run; no `.pdf` is on disk. |
+| overlay | **fail** this pass: `usage/SAMPLE-*.pdf` is not in this snapshot, so `tools/overlay.sh` could not run. The `usage/OVERLAY-kliewer-complaint.txt` on disk is from an earlier run; no `.pdf` is on disk. |
 | pages reviewed | 8 of 8 this pass (every page rasterized at 60 dpi and viewed after the re-render) |
 | check.sh / check-selftest.sh | not run: they expect a court root with `court.json` and `rules.md`, and this is a doc-type folder; the brief forbids touching `tools/` |
 
@@ -61,7 +61,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 Run from the repo root (`export PATH="$HOME/tb/bin:$PATH"` first; typst 0.15.0, poppler, ImageMagick):
 
 ```sh
-sh tools/render.sh courts/ninth-circuit/oregon/federal/district/complaint samples/INPUT-kliewer-complaint.md
+sh tools/render.sh courts/ninth-circuit/oregon/federal/district/complaint usage/INPUT-ord-complaint-kliewer.md
 sh tools/overlay.sh courts/ninth-circuit/oregon/federal/district/complaint kliewer-complaint
 ```
 
@@ -84,7 +84,7 @@ The overlay is a diagnostic, not a score: red = our render only, blue = the file
 
 ## Known gaps and open choices
 
-1. **One exemplar, one filer.** The brief asks for one exemplar per doc type; the tier-2 rule in CLAUDE.md asks for two or three filers. Candidates are listed in `exemplars/SOURCE.md` (Brown v. Lincoln County, 25 pages, counsel-filed). Not done.
+1. **One exemplar, one filer.** The brief asks for one exemplar per doc type; the tier-2 rule in CLAUDE.md asks for two or three filers. Candidates are listed in `usage/SOURCE.md` (Brown v. Lincoln County, 25 pages, counsel-filed). Not done.
 2. **The sample is partial.** The filing is 18 pages. The sample omits the rest of the class allegations (the Rule 23(b) and exclusion paragraphs), Counts 2 to 8, and the injunctive-relief count; the call table is cut to two rows with a bracketed note (the filed table runs to about 60 entries). The sample is 8 rendered pages, below the 8–14 target because the sample is partial. Paragraph numbers follow the sample's own sequence and differ from the filed numbers in places: the block quotation in paragraph 3 is a separate paragraph in the sample, and the exemplar's text layer scrambles some paragraph breaks.
 3. **Pleading line numbers (LR 10-1(d)).** The exemplar carries line numbers 1–26 down the left margin. The template draws none, following the rule as quoted from the LR 10 page. This is an open question for David: if the court still expects pleading paper, a 28-line variant would need a different grid (the LR 10-1(b) double-spacing and the 1-inch margins would still apply).
 4. **Font size.** LR 10-1(c) sets 12 pt as the floor, and the template uses 13 pt for the body. The only serif face vendored is EB Garamond, which sets smaller than Times New Roman at the same point size, so 13 pt keeps the apparent size close to the exemplar. The footer is 12 pt. Both are choices, not rule text; flagged for David.
@@ -97,13 +97,13 @@ The overlay is a diagnostic, not a score: red = our render only, blue = the file
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/complaint.lua` writes the cover (counsel, court title, caption table), the numbered paragraphs, the lettered lists and the signature block; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in the footer. Output: `samples/OUTPUT-kliewer-complaint.docx` and `.docx.pdf` (LibreOffice 26.8), 9 pages, all 9 rendered at 60 dpi and viewed (`reviews/docx.md`). The typst output is 8 pages.
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/complaint.lua` writes the cover (counsel, court title, caption table), the numbered paragraphs, the lettered lists and the signature block; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in the footer. Output: `usage/OUTPUT-ord-complaint-kliewer.docx` and `.docx.pdf` (LibreOffice 26.8), 9 pages, all 9 rendered at 60 dpi and viewed (`reviews/docx.md`). The typst output is 8 pages.
 
 - Matches the typst output: letter; one inch on all four sides; EB Garamond 13 pt (embedded in the PDF); double spacing as an exact 24 pt line and single spacing as an exact 13 pt line; counsel block upper left; court title centered; caption with the case number at the page center; title in capitals; DEMAND FOR JURY TRIAL under it; headings at typst's default sizes (level 1 18 pt, level 2 15.5 pt); numbered paragraphs with a 0.5 in indent; lettered (a), (b) lists with a hanging indent; footer "COMPLAINT - n" at 12 pt; DATED and signature block.
 - Differs from typst: paragraph numbers are typed by the filter, not Word auto-numbering (they will not renumber in Word after an edit); the markdown table is full width with rules (typst's is narrower); the docx runs one page longer, so the last prayer item and the signature fall alone on page 9 (kept together on purpose; Gate 2 OPEN row in `reviews/docx.md`); page breaks follow LibreOffice and Word may move a line.
 - Fonts: the PDF is correct only when LibreOffice sees the vendored `fonts/` and no substitute face. This box has no system EB Garamond, so run the render with a `FONTCONFIG_FILE` that lists only the repo's `fonts/` directory.
 - Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML (checked by `render-docx.sh`) and converts in LibreOffice without error; no GUI repair prompt was observed (headless).
 
-BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and this doc-type folder has neither (it exits 2 before any gate runs), so the gates did not run and `samples/.check-docx.txt` was not written. The Gate 2 record for the docx is `reviews/docx.md`.
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and this doc-type folder has neither (it exits 2 before any gate runs), so the gates did not run and `usage/.check-docx.txt` was not written. The Gate 2 record for the docx is `reviews/docx.md`.
 
 [District index](../README.md) | [Formbook index](../../../../../../README.md)

@@ -5,10 +5,10 @@ Folder: `courts/fourth-circuit/south-carolina/federal/bankruptcy-district/motion
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-ard-25-80005-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-ard-zeidmans.md`: the whole 8-page filing transcribed (SC LBR 7012-1 notice, caption, motion, facts, argument with A./B. and 1./2. sub-headings, footnote 1, conclusion, signature) |
-| render | ok: `samples/OUTPUT-ard-zeidmans.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> samples/INPUT-ard-zeidmans.md`) |
-| overlay | ok: `samples/OVERLAY-ard-zeidmans.pdf` and `samples/OVERLAY-ard-zeidmans.txt` (`sh tools/overlay.sh <this-dir> ard-zeidmans`) |
+| exemplar | yes: `usage/SAMPLE-scb-motion-brief-ard2580005.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-scb-motion-brief-ardzeidmans.md`: the whole 8-page filing transcribed (SC LBR 7012-1 notice, caption, motion, facts, argument with A./B. and 1./2. sub-headings, footnote 1, conclusion, signature) |
+| render | ok: `usage/OUTPUT-scb-motion-brief-ardzeidmans.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh <this-dir> usage/INPUT-scb-motion-brief-ardzeidmans.md`) |
+| overlay | ok: `usage/OVERLAY-ard-zeidmans.pdf` and `usage/OVERLAY-ard-zeidmans.txt` (`sh tools/overlay.sh <this-dir> ard-zeidmans`) |
 | typeface | face required: **none** (the FRBP and the SC LBR cited below name no typeface; the exemplar's Times New Roman is a filer's choice, which the rules do not require). Vendored substitute: **EB Garamond** (kept, no court face). Fit: n/a. Re-checked 2026-10-14 in the fonts pass: `pdffonts` shows only EB Garamond embedded. The SC LBR PDF could not be read through WebFetch that day, so its no-typeface reading rests on the 2026-10-14 fetch recorded below, not on a re-read. |
 | pages reviewed | 8 of 8 (every page rasterized at 60 dpi and viewed after the last template change; re-viewed 2026-10-14 in the fonts pass) |
 
@@ -53,7 +53,7 @@ Not generated: a proposed order (SC LBR 9013-1(a) asks for one with non-adversar
 
 ## Known gaps and open choices
 
-1. **One exemplar only.** The second filer found (*Milledge v. Carolina Acceptance*, Adv. No. 22-80001-jw, Doc 23, 7 pp., 2022, Moore Bradley Myers) is recorded in `exemplars/SOURCE.md`, not saved. Tier-2 comparison against two or three filers is **not** done.
+1. **One exemplar only.** The second filer found (*Milledge v. Carolina Acceptance*, Adv. No. 22-80001-jw, Doc 23, 7 pp., 2022, Moore Bradley Myers) is recorded in `usage/SOURCE.md`, not saved. Tier-2 comparison against two or three filers is **not** done.
 2. **Typeface and size.** As in the complaint: the rules name none; EB Garamond at 13 pt; the exemplar is Times New Roman. A choice for David.
 3. **Certificate of service (SC LBR 9013-3(a)) is not generated.** The rule requires one with every motion. The exemplar as filed (8 pages) has no certificate, so the filing either carried it as a separate docket entry or missed it. The template does not produce one; a filing needs its certificate added as a separate document or a template section. This is an open item for David: whether the template should produce a certificate by default.
 4. **Notice page signature.** The notice's signature block falls alone on page 2, as in the exemplar (its page 2 also opens with the BEST LAW signature block). Kept as the filed layout.
@@ -81,7 +81,7 @@ Gate 2 rows: the review above. There is no `reviews/` folder for this doc type.
 
 ## Engines
 
-**docx** (`docx/`; `samples/OUTPUT-ard-zeidmans.docx` and `samples/OUTPUT-ard-zeidmans.docx.pdf`, 8 pages in LibreOffice). `sh docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt; body at a 24 pt exact pitch; single lines at 19.56 pt exact; 1-inch margins; centered PAGE footer at 12 pt). `docx/scb-motion-brief.lua` builds the caption (")" column), the title line, the SC LBR 7012-1 notice page, the facts numbered inside the `numbered_section`, the A./1. headings, the lettered lists, footnotes (native), and the signature block kept with the last two blocks. Render: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-ard-zeidmans.md`.
+**docx** (`docx/`; `usage/OUTPUT-scb-motion-brief-ardzeidmans.docx` and `usage/OUTPUT-scb-motion-brief-ardzeidmans.docx.pdf`, 8 pages in LibreOffice). `sh docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 13 pt; body at a 24 pt exact pitch; single lines at 19.56 pt exact; 1-inch margins; centered PAGE footer at 12 pt). `docx/scb-motion-brief.lua` builds the caption (")" column), the title line, the SC LBR 7012-1 notice page, the facts numbered inside the `numbered_section`, the A./1. headings, the lettered lists, footnotes (native), and the signature block kept with the last two blocks. Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-scb-motion-brief-ardzeidmans.md`.
 
 Matches typst: typeface and size, margins, the 24 pt body pitch, the ")" caption and its rows (17 pt), the title line, the notice page (the notice text runs onto page 2 in the docx, with its signature block there; typst leaves the signature block alone on page 2, as its gap 4 records), facts numbering, A./1. heading labels, the lettered lists, the footnote, block quotations, the centered page number.
 
@@ -95,13 +95,13 @@ Differs:
 
 No BLOCKED items. The court folder has no check IDs for this doc type, and no docx-only limit fails a requirement of the form.
 
-Pages reviewed: 8 of 8 of `samples/OUTPUT-ard-zeidmans.docx.pdf`, each viewed at 60 dpi beside the typst render (`/tmp/scb-motion-brief/typst.pdf`, not in the repo), and line positions checked with `pdftotext -bbox-layout`.
+Pages reviewed: 8 of 8 of `usage/OUTPUT-scb-motion-brief-ardzeidmans.docx.pdf`, each viewed at 60 dpi beside the typst render (`/tmp/scb-motion-brief/typst.pdf`, not in the repo), and line positions checked with `pdftotext -bbox-layout`.
 
 ## Reproduce
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/fourth-circuit/south-carolina/federal/bankruptcy-district/motion-brief samples/INPUT-ard-zeidmans.md
+sh tools/render.sh courts/fourth-circuit/south-carolina/federal/bankruptcy-district/motion-brief usage/INPUT-scb-motion-brief-ardzeidmans.md
 sh tools/overlay.sh courts/fourth-circuit/south-carolina/federal/bankruptcy-district/motion-brief ard-zeidmans
 ```
 

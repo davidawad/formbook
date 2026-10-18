@@ -1,17 +1,17 @@
 # W.D. Pa. (pawd): complaint
 
 Doc type **complaint** in the United States District Court for the Western District of Pennsylvania (`pawd`, Third Circuit).
-Folder: `courts/third-circuit/pennsylvania/federal/western-district/complaint/`. Built by the wave-3 unit fb-595.31.16 (Haiku); the court root `typst/` and `samples/` were not touched.
+Folder: `courts/third-circuit/pennsylvania/federal/western-district/complaint/`. Built by the wave-3 unit fb-595.31.16 (Haiku); the court root `typst/` and `usage/` were not touched.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-cragle-2-26-cv-02200-complaint.pdf` (primary, transcribed) and `exemplars/FILED-EXAMPLE-snee-2-22-cv-00119-complaint.pdf` (second filer, saved for comparison, not transcribed). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-cragle-complaint.md` (the whole filing: caption, 46 numbered paragraphs, four counts, prayers, jury demands, signature) |
-| render | ok: `samples/OUTPUT-cragle-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings (`tools/render.sh` exit 0) |
-| overlay | ok: `samples/OVERLAY-cragle-complaint.pdf` and `samples/OVERLAY-cragle-complaint.txt` (`tools/overlay.sh` exit 0) |
+| exemplar | yes: `usage/SAMPLE-pawd-complaint-cragle226cv02200.pdf` (primary, transcribed) and `usage/SAMPLE-pawd-complaint-snee222cv00119.pdf` (second filer, saved for comparison, not transcribed). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-pawd-complaint-cragle.md` (the whole filing: caption, 46 numbered paragraphs, four counts, prayers, jury demands, signature) |
+| render | ok: `usage/OUTPUT-pawd-complaint-cragle.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no typst warnings (`tools/render.sh` exit 0) |
+| overlay | ok: `usage/OVERLAY-cragle-complaint.pdf` and `usage/OVERLAY-cragle-complaint.txt` (`tools/overlay.sh` exit 0) |
 | pages reviewed | 12 of 12: every page rendered at 60 dpi (`pdftoppm -r 60`) and viewed after the last template change |
 
-File names: the brief asked for `samples/<id>.md`, `samples/<id>.pdf` and `samples/<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` (not edited, per the brief) write and read `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so those names are used. The sample is `INPUT-cragle-complaint.md`, so its id is `cragle-complaint`.
+File names: the brief asked for `usage/<id>.md`, `usage/<id>.pdf` and `usage/<id>-overlay.pdf`. `tools/render.sh` and `tools/overlay.sh` (not edited, per the brief) write and read `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so those names are used. The sample is `INPUT-pawd-complaint-cragle.md`, so its id is `cragle-complaint`.
 
 ## Governing rules
 
@@ -51,7 +51,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## What the overlay shows
 
-`samples/OVERLAY-cragle-complaint.pdf`: each page is red (our render) multiplied over blue (the filed exemplar's page with the most shared words). Black is where both agree. The page pairing is by word overlap, not index (`samples/OVERLAY-cragle-complaint.txt` lists the pairs). Final map: ours p.1 to filed p.1 (95%), p.2 to p.2 (83%), p.3 to p.3 (75%), p.4 to p.4 (76%), p.5 to p.5 (74%), p.6 to p.6 (60%), p.7 to p.7 (73%), p.8 to p.9 (74%), p.9 to p.10 (54%), p.10 to p.8 (56%), p.11 to p.9 (68%), p.12 to p.11 (53%). The overlay is a diagnostic, not a score. Pages 8 to 12 pair with a later or earlier filed page because the sample's count breaks fall on different pages from the filing's.
+`usage/OVERLAY-cragle-complaint.pdf`: each page is red (our render) multiplied over blue (the filed exemplar's page with the most shared words). Black is where both agree. The page pairing is by word overlap, not index (`usage/OVERLAY-cragle-complaint.txt` lists the pairs). Final map: ours p.1 to filed p.1 (95%), p.2 to p.2 (83%), p.3 to p.3 (75%), p.4 to p.4 (76%), p.5 to p.5 (74%), p.6 to p.6 (60%), p.7 to p.7 (73%), p.8 to p.9 (74%), p.9 to p.10 (54%), p.10 to p.8 (56%), p.11 to p.9 (68%), p.12 to p.11 (53%). The overlay is a diagnostic, not a score. Pages 8 to 12 pair with a later or earlier filed page because the sample's count breaks fall on different pages from the filing's.
 
 ## Known gaps and open choices
 
@@ -87,6 +87,6 @@ Earlier review passes found and fixed: paragraphs running into one another (bloc
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the court's form.
-- **docx** (`docx/reference.docx`, `docx/pawd.lua`, `docx/build-reference.sh`; sample `samples/OUTPUT-cragle-complaint.docx`): built with pandoc 3.6.4 on the reference. Matches the typst template: EB Garamond 13 pt, exact 26 pt (double) line pitch, 1 in margins on US Letter, 0.5 in first-line indent, paragraphs numbered 1 to 46 by the filter (number, tab, text), counts and sections centered in bold, sub-heads flush left, lettered prayer items with a hanging letter, the court heading, the caption (a borderless table: parties, ")" column, case number and jury demand in the right column), the title, the "Dated:" line and the signature block at 3 in, page number centered in the footer.
+- **docx** (`docx/reference.docx`, `docx/pawd.lua`, `docx/build-reference.sh`; sample `usage/OUTPUT-pawd-complaint-cragle.docx`): built with pandoc 3.6.4 on the reference. Matches the typst template: EB Garamond 13 pt, exact 26 pt (double) line pitch, 1 in margins on US Letter, 0.5 in first-line indent, paragraphs numbered 1 to 46 by the filter (number, tab, text), counts and sections centered in bold, sub-heads flush left, lettered prayer items with a hanging letter, the court heading, the caption (a borderless table: parties, ")" column, case number and jury demand in the right column), the title, the "Dated:" line and the signature block at 3 in, page number centered in the footer.
 - Differences from typst: the caption rows are spaced by the table, not the typst grid (a few points per row differ); paragraph numbers and lettered items are typed text, not Word lists; the page number is the PAGE field, which needs no update.
-- **BLOCKED** (docx): no `checks.yaml` exists for this court, so no gate check ID can be listed. Every check measured on `samples/OUTPUT-cragle-complaint.docx.pdf` is BLOCKED with the reason "LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked". The `.docx` passes the package checks run here (ziptool reads every entry, xmllint on every XML part, no duplicate style ids); it was not opened in Word or LibreOffice.
+- **BLOCKED** (docx): no `checks.yaml` exists for this court, so no gate check ID can be listed. Every check measured on `usage/OUTPUT-cragle-complaint.docx.pdf` is BLOCKED with the reason "LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked". The `.docx` passes the package checks run here (ziptool reads every entry, xmllint on every XML part, no duplicate style ids); it was not opened in Word or LibreOffice.

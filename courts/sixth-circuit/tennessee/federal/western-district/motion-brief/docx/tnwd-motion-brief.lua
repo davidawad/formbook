@@ -1,5 +1,5 @@
 -- W.D. Tenn. memorandum in support of a motion (motion-brief), DOCX engine (docs/DOCX.md): the markdown contract of
--- samples/INPUT-<id>.md -> Word. Mirrors typst/tnwd-motion-brief.typ: court title (single), caption (parties with a
+-- usage/INPUT-<id>.md -> Word. Mirrors typst/tnwd-motion-brief.typ: court title (single), caption (parties with a
 -- rule at the right of the party column, the file number opposite), the title, the body (paragraphs unnumbered,
 -- double spaced, first line indented), section headings (centred bold), point headings (the label hung at the
 -- margin, the text wrapped under it), block quotations (single spaced), the signature block (kept together), and

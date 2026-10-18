@@ -5,10 +5,10 @@ Folder: `courts/eighth-circuit/iowa/federal/southern-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-hanfling-4-26-cv-00213-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-hanfling-brief.md`: a transcription of the cover, the introduction, the factual background (with the privacy-policy block quotation and footnotes 1 to 3), the start of Argument I, the conclusion, and the signature block. Argument I's first paragraphs and Arguments II to IV are not transcribed. |
-| render | ok: `samples/OUTPUT-hanfling-brief.pdf`, 9 pages (cover, TOC, TOA, body pages 1 to 6), typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
-| overlay | ok: `samples/OVERLAY-hanfling-brief.pdf` and `OVERLAY-hanfling-brief.txt` (page map) |
+| exemplar | yes: `usage/SAMPLE-iasd-motion-brief-hanfling426cv00213.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-iasd-motion-brief-hanflingbrief.md`: a transcription of the cover, the introduction, the factual background (with the privacy-policy block quotation and footnotes 1 to 3), the start of Argument I, the conclusion, and the signature block. Argument I's first paragraphs and Arguments II to IV are not transcribed. |
+| render | ok: `usage/OUTPUT-iasd-motion-brief-hanflingbrief.typst.pdf`, 9 pages (cover, TOC, TOA, body pages 1 to 6), typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
+| overlay | ok: `usage/OVERLAY-hanfling-brief.pdf` and `OVERLAY-hanfling-brief.txt` (page map) |
 | typeface | face required by the court: **none** (LR 10(b) has no typeface or point-size rule; checked 2026-10-14 in the PDF text, see Governing rules). Vendored substitute: none needed; **EB Garamond kept** (`docs/FONTS.md`: a court that names no face gets EB Garamond). Metric compatibility: n/a. Tier 2 question on the exemplar's Times New Roman, Known gaps 4. |
 | pages reviewed | 9 of 9, on the final PDF (sha256 `bdd908b4...`, see the review table below) |
 | `tools/check.sh` | not run: a doc-type folder is not a court folder (see Known gaps) |
@@ -56,7 +56,7 @@ Not produced by this template (separate papers): the motion itself, any proposed
 
 ## The overlay
 
-`samples/OVERLAY-hanfling-brief.pdf`: red = our render, blue = the filed exemplar, black = both agree. The filed PDF is not stored in `exemplars/` in this snapshot (only `SOURCE.md`), so the overlay was built against a copy fetched from the URL in `exemplars/SOURCE.md` on 2026-10-14 (40 pages, sha256 `a4e6ad619db6cc47f523b3fd86638097c9832a5386c91fa486b623a66586264a`). Pages are paired by word overlap (`OVERLAY-hanfling-brief.txt`):
+`usage/OVERLAY-hanfling-brief.pdf`: red = our render, blue = the filed exemplar, black = both agree. The filed PDF is not stored in `usage/` in this snapshot (only `SOURCE.md`), so the overlay was built against a copy fetched from the URL in `usage/SOURCE.md` on 2026-10-14 (40 pages, sha256 `a4e6ad619db6cc47f523b3fd86638097c9832a5386c91fa486b623a66586264a`). Pages are paired by word overlap (`OVERLAY-hanfling-brief.txt`):
 
 | ours | filed | overlap |
 |---|---|---|
@@ -100,7 +100,7 @@ Every page is recorded above; none is `OPEN`.
 6. **Exemplars: one filer.** EVAL-LOOP tier 2 asks for two or three filers. The search (CourtListener RECAP, `type=r`, `court=iasd`, query "motion to dismiss") found Randolph v. Iowa Health System (4:26-cv-00347), whose PDF is a Central District of Illinois filing (4:26-cv-04110), so it was rejected. Hanfling is the only S.D. Iowa brief used. Tier 2 is therefore **not judged against two filers** for this doc type.
 7. **Sample excerpt.** The sample is the cover, the introduction, the factual background, the start of Argument I (from the paragraph beginning "A plaintiff must plead facts," which is the exemplar's page 7; the paragraphs before it on page 6 are not transcribed), and the conclusion, with the signature. Arguments I (the rest), II, III and IV are not transcribed; the authorities cited only there are not in the TOA. The TOA is therefore a partial list of the sample's authorities, not the exemplar's full TOA.
 8. **Tool checks not run.** Same reason as the complaint: `tools/check.sh` expects a court folder.
-9. **File names.** The brief asked for `samples/<id>.md`, `samples/<id>.pdf` and `<id>-overlay.pdf`. The repo's file-role names are used instead: `samples/INPUT-<id>.md` (input), `samples/OUTPUT-<id>.pdf` (render), `samples/OVERLAY-<id>.pdf` and `.txt` (overlay), because `tools/render.sh` and `tools/overlay.sh` read and write those names by default and are shared tools.
+9. **File names.** The brief asked for `usage/<id>.md`, `usage/<id>.pdf` and `<id>-overlay.pdf`. The repo's file-role names are used instead: `usage/INPUT-<id>.md` (input), `usage/OUTPUT-<id>.pdf` (render), `usage/OVERLAY-<id>.pdf` and `.txt` (overlay), because `tools/render.sh` and `tools/overlay.sh` read and write those names by default and are shared tools.
 10. **Argument I has no subheadings in the sample**, so the `A.`/`B.` heading levels are not exercised by this sample. They are exercised by the CAND motion template, which is the same heading code.
 
 ## Engines
@@ -111,7 +111,7 @@ Doc type `motion-brief`, in this folder. The typst template above is the primary
 |---|---|
 | typst | `typst/`, as above. |
 | latex | not built in this change (`latex/` has no template for this doc type). |
-| docx | `docx/reference.docx` (built by `docx/make-reference.sh`), `docx/iasd-motion-brief.lua` and `docx/render.sh` (pandoc, then the footer part is wired into the front-matter section). `samples/OUTPUT-hanfling-brief.docx` is written by `tools/render.sh --engine docx`. The `.docx.pdf` is **not produced**: LibreOffice cannot be installed on the box that built this (not on conda-forge, no root), so the LibreOffice-based checks are BLOCKED. Pages reviewed as rendered PDF: 0. |
+| docx | `docx/reference.docx` (built by `docx/make-reference.sh`), `docx/iasd-motion-brief.lua` and `docx/render.sh` (pandoc, then the footer part is wired into the front-matter section). `usage/OUTPUT-iasd-motion-brief-hanflingbrief.docx` is written by `tools/render.sh --engine docx`. The `.docx.pdf` is **not produced**: LibreOffice cannot be installed on the box that built this (not on conda-forge, no root), so the LibreOffice-based checks are BLOCKED. Pages reviewed as rendered PDF: 0. |
 
 **docx: what the template sets, from the same parameters as the typst form.** Letter paper, 1-inch margins; EB Garamond 12 pt; body at 24 pt exact line spacing with a half-inch first-line indent; footnotes and block quotations single-spaced at 12 pt (the block quotation indented 0.5 in on both sides); level 1 headings centered bold capitals; levels 2 to 4 bold with a hanging label (`I.`, `A.`, `1.`, typed by the filter, a half inch hanging); the front matter (cover, table of contents, table of authorities) in its own section numbered `i`, `ii`, ..., and the body numbered from 1 at the bottom centre; the cover caption as a borderless table with a right and bottom rule on the party column, the case number, the title, and `ORAL ARGUMENT REQUESTED` when `oral_argument` is true; the table of authorities grouped Cases, Statutes, Rules, Other Authorities, built from the `toa:` links, each authority's name in italics; the signature block with the date at the margin and the lines at 3.45 in. The `.docx` passes the zip and XML checks in `tools/render-docx.sh` and reads back in pandoc with the same text and footnotes. It has **not** been opened in Word or LibreOffice, so "no repair prompt" is unverified.
 
@@ -126,5 +126,5 @@ Doc type `motion-brief`, in this folder. The typst template above is the primary
 **docx: BLOCKED** (`docs/DOCX.md`, "Checking a docx"):
 - `IASD-TOC-001` (LR 10(b)(4), a subject-matter table of contents on the first page): the table of contents has no page numbers, so the check that the entries point at the right pages cannot pass. The placement (page ii, after the cover, as in typst and the exemplar) is the same question as Known gap 1.
 - The table of authorities page numbers, and the `passim` entries (five or more pages): BLOCKED, because a TOA field is not built and the page of each citation is not computed (LibreOffice does not honor the TA/TOA fields, `docs/DOCX.md`).
-- `tools/check.sh --engine docx` (Gates 0 to 3 on `samples/OUTPUT-hanfling-brief.docx.pdf`): BLOCKED, because the `.docx.pdf` cannot be made here (no LibreOffice). No `.check-docx.txt` stamp is written.
+- `tools/check.sh --engine docx` (Gates 0 to 3 on `usage/OUTPUT-hanfling-brief.docx.pdf`): BLOCKED, because the `.docx.pdf` cannot be made here (no LibreOffice). No `.check-docx.txt` stamp is written.
 - The page review of the `.docx` in LibreOffice and Word (`docs/DOCX.md`, step 3): BLOCKED for the same reason; no page was looked at.

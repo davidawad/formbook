@@ -1,9 +1,9 @@
 // Entry point. Compile with the doc-type folder as --root; tools/render.sh does it:
 //   typst compile --root <doctype-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=samples/INPUT-NAME.md \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/INPUT-NAME.md \
 //     typst/main.typ out.pdf
 #import "utd-complaint.typ": utd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-sample.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-utd-complaint-fastre.md"))
 #let (meta, body) = split-frontmatter(src)
 #utd-complaint(meta, body)

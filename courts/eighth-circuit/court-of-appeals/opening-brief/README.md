@@ -1,10 +1,10 @@
 # Eighth Circuit (ca8): opening brief (appellant's principal brief)
 
 - Court: `ca8`, United States Court of Appeals for the Eighth Circuit (`courts/eighth-circuit/court-of-appeals/`)
-- Doc type: `opening-brief`. Brief of Appellant (FRAP 28(a)); one self-contained folder. The court-root `typst/` and `samples/` (the ca8 court's own stubs) are untouched.
-- Exemplar: `exemplars/FILED-EXAMPLE-wolters-26-2459-opening-brief.pdf` (*Wolters v. Sweepsteaks Limited d/b/a Stake.us*, No. 26-2459, filed 2026-09-11; provenance in `exemplars/SOURCE.md`).
-- Sample: `samples/INPUT-wolters-opening-brief.md`: a transcription of the filed brief's cover, summary, disclosure, jurisdiction, issues, part of the statement of the case, part of the argument, conclusion, signature and certificates. It is an excerpt, not the whole brief (see Known gaps).
-- Render: `samples/OUTPUT-wolters-opening-brief.pdf`, 15 pages.
+- Doc type: `opening-brief`. Brief of Appellant (FRAP 28(a)); one self-contained folder. The court-root `typst/` and `usage/` (the ca8 court's own stubs) are untouched.
+- Exemplar: `usage/SAMPLE-ca8-opening-brief-wolters262459.pdf` (*Wolters v. Sweepsteaks Limited d/b/a Stake.us*, No. 26-2459, filed 2026-09-11; provenance in `usage/SOURCE.md`).
+- Sample: `usage/INPUT-ca8-opening-brief-wolters.md`: a transcription of the filed brief's cover, summary, disclosure, jurisdiction, issues, part of the statement of the case, part of the argument, conclusion, signature and certificates. It is an excerpt, not the whole brief (see Known gaps).
+- Render: `usage/OUTPUT-ca8-opening-brief-wolters.typst.pdf`, 15 pages.
 - Status: template built; render, overlay and page review done (below). Not reviewed by a human. `court.json` untouched.
 
 ## Files
@@ -13,10 +13,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `ca8-brief`. |
 | `typst/ca8-opening-brief.typ` | Template. Parameter block at the top: `doc-kind`, `word-limit` (13,000), `required-sections`, `needs-standard-of-review`, `addendum = "separate"`. |
-| `samples/INPUT-wolters-opening-brief.md` | Markdown contract sample (frontmatter + body). |
-| `samples/OUTPUT-wolters-opening-brief.pdf` | `sh tools/render.sh courts/eighth-circuit/court-of-appeals/opening-brief samples/INPUT-wolters-opening-brief.md` (15 pages, EB Garamond only). |
-| `samples/OVERLAY-wolters-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eighth-circuit/court-of-appeals/opening-brief wolters-opening-brief` (red = ours, blue = filed, black = both agree). |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-ca8-opening-brief-wolters.md` | Markdown contract sample (frontmatter + body). |
+| `usage/OUTPUT-ca8-opening-brief-wolters.typst.pdf` | `sh tools/render.sh courts/eighth-circuit/court-of-appeals/opening-brief usage/INPUT-ca8-opening-brief-wolters.md` (15 pages, EB Garamond only). |
+| `usage/OVERLAY-wolters-opening-brief.pdf`, `-overlay.txt` | `sh tools/overlay.sh courts/eighth-circuit/court-of-appeals/opening-brief wolters-opening-brief` (red = ours, blue = filed, black = both agree). |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
 ## Governing rules
 
@@ -44,7 +44,7 @@ Not verified and not produced: the cover colour (FRAP 32(a)(2) and any circuit r
 
 ## Overlay
 
-`samples/OVERLAY-wolters-opening-brief.pdf` puts our render (red) over the best-matching filed page (blue). Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses):
+`usage/OVERLAY-wolters-opening-brief.pdf` puts our render (red) over the best-matching filed page (blue). Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses):
 
 - Sample p.1 ↔ filed p.1 (88%), p.2 ↔ p.2 (93%): cover and summary.
 - p.3 ↔ p.3 (64%), p.4 ↔ p.4 (45%), p.5 ↔ p.5 (34%): disclosure page, table of contents, first table-of-authorities page. Our TOC and TOA are generated, so the word sets differ from the filed pages; expected.
@@ -59,7 +59,7 @@ Not verified and not produced: the cover colour (FRAP 32(a)(2) and any circuit r
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-wolters-opening-brief.pdf` was rendered at 60 dpi and viewed (15 of 15) on the last render. Typst printed no warnings. Fonts embedded: EB Garamond (Regular, Bold, Italic) only.
+Every page of `OUTPUT-ca8-opening-brief-wolters.typst.pdf` was rendered at 60 dpi and viewed (15 of 15) on the last render. Typst printed no warnings. Fonts embedded: EB Garamond (Regular, Bold, Italic) only.
 
 | Page | Content | Result |
 |---|---|---|
@@ -83,7 +83,7 @@ Pages 1-12 and 14-15 were viewed on the render before the last edit. The last ed
 
 ## Verification pass 2026-10-16 (fb-595.26.8)
 
-- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/opening-brief samples/INPUT-wolters-opening-brief.md` exit 0, no typst warnings, 15 pages (same as the committed PDF), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0); the page pairings and overlaps are the same as listed under "Overlay" above.
+- Rendered: `sh tools/render.sh courts/eighth-circuit/court-of-appeals/opening-brief usage/INPUT-ca8-opening-brief-wolters.md` exit 0, no typst warnings, 15 pages (same as the committed PDF), fonts EB Garamond Regular/Bold/Italic only. Overlay re-run (`tools/overlay.sh`, exit 0); the page pairings and overlaps are the same as listed under "Overlay" above.
 - Viewed: all 15 pages at 60 dpi, the exemplar's page 1 against our cover, and all 15 overlay pages at 40 dpi. Page 14 viewed again (60 dpi and 150 dpi) after the fix; the text of every other page is unchanged by it.
 - Fixed (tier 2): in the certificate of compliance, the second checkbox item wrapped its second line under the box instead of under the text. Each checkbox item is now a paragraph with a hanging indent the width of the box and its gap.
 - Checked, no defect: cover on one page; summary of the case one page, first item (8th Cir. R. 28A(i)(1)); TOC and TOA page numbers match the body; no heading stranded at a page foot; page numbering roman i-v then arabic 1-9. The pilcrow in record cites ("3 ¶ 11") is EB Garamond's own glyph.
@@ -105,4 +105,4 @@ Pages 1-12 and 14-15 were viewed on the render before the last edit. The last ed
 
 - **typst** (primary, `typst/`): the reference for the court's form.
 - **latex** (`latex/template.tex`, `latex/ca8.lua`): tectonic (XeTeX) with the vendored EB Garamond; the same page order, 14 pt type, 31.4 pt double spacing, 1 in margins, centered page numbers, TOC and TOA with page numbers (TOA pages collected from a first pass), certificates. Differences: body is shorter in places (page breaks differ from typst by a few lines, so TOC page numbers differ); the LaTeX certificate of compliance uses the source word count (see the PR for the reconciliation with the typst figure); cover and heading spacing are approximate, not measured per page. The filter and template in this folder are the same as the other two briefs apart from the `CFG` block in `ca8.lua` and the cover/signature/certificate macros in `template.tex`.
-- **docx** (`docx/reference.docx`, `docx/ca8.lua`, `docx/build-reference.sh`): pandoc on reference.docx (EB Garamond 14 pt, exact 31.4 pt line spacing, 1 in margins, PAGE footer). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `samples/OUTPUT-<id>.docx.pdf` cannot be produced and the docx checks (Gates 0 to 3) cannot run. Known limits, per docs/DOCX.md: the table of contents is a TOC field (page numbers appear after field update); the table of authorities lists authorities without page numbers (a TOA field needs the same update, and LibreOffice does not honor it); cover and certificates are plain centered paragraphs, not the typst layout.
+- **docx** (`docx/reference.docx`, `docx/ca8.lua`, `docx/build-reference.sh`): pandoc on reference.docx (EB Garamond 14 pt, exact 31.4 pt line spacing, 1 in margins, PAGE footer). BLOCKED on this box: LibreOffice (`soffice`) is not installed, so `usage/OUTPUT-<id>.docx.pdf` cannot be produced and the docx checks (Gates 0 to 3) cannot run. Known limits, per docs/DOCX.md: the table of contents is a TOC field (page numbers appear after field update); the table of authorities lists authorities without page numbers (a TOA field needs the same update, and LibreOffice does not honor it); cover and certificates are plain centered paragraphs, not the typst layout.

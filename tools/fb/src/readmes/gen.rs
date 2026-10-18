@@ -4,21 +4,20 @@
 use serde_json::{Map, Value};
 use std::collections::{BTreeSet, HashMap};
 
-const FLAGS: [&str; 8] = [
+const FLAGS: [&str; 7] = [
     "`rules.md` present",
-    "`exemplars/SOURCE.md` names at least 2 filed exemplars (different filers)",
-    "`samples/` has at least 2 .md samples",
-    "typst engine passes (`samples/.check-typst.txt` valid)",
-    "latex engine passes (`samples/.check-latex.txt` valid)",
-    "docx engine passes (`samples/.check-docx.txt` valid)",
-    "overlay present (`samples/OVERLAY-*.txt`)",
+    "`usage/SOURCE.md` names at least 2 filed SAMPLEs (different filers)",
+    "`usage/` has at least 2 INPUT .md samples",
+    "typst engine passes (`usage/.check-typst.txt` valid)",
+    "latex engine passes (`usage/.check-latex.txt` valid)",
+    "docx engine passes (`usage/.check-docx.txt` valid)",
     "a review file in `reviews/`",
 ];
 
 const HEAD: &str =
     "| Court | Alias | Status | Typst | LaTeX | DOCX | % |\n|---|---|---|---|---|---|---:|";
 
-/// One tracker row: status, percent, typst, latex, docx, items (8 bits).
+/// One tracker row: status, percent, typst, latex, docx, items (7 bits).
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Row {
     pub st: String,
@@ -239,8 +238,7 @@ impl Inputs<'_> {
                 "- `typst/` Typst template (primary)",
                 "- `latex/` LaTeX template",
                 "- `docx/` Word template (reference.docx + filters)",
-                "- `exemplars/` real filed examples from different filers (PDF) and `SOURCE.md`",
-                "- `samples/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`",
+                "- `usage/` filed examples `SAMPLE-<stem>-<id>.pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<stem>-<id>.md`; renders `OUTPUT-<stem>-<id>.typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf`; stamps `.check-<engine>.txt`",
             ]
             .map(String::from),
         );

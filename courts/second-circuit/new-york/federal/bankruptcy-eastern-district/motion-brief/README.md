@@ -5,10 +5,10 @@ Folder: `courts/second-circuit/new-york/federal/bankruptcy-eastern-district/moti
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-empire-state-grand-council-26-01072-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-bmt-memorandum-motion-to-dismiss.md` (the whole memorandum: counsel block, caption, headings, bulleted list, block quotations, signature) |
-| render | ok: `samples/OUTPUT-bmt-memorandum-motion-to-dismiss.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-bmt-memorandum-motion-to-dismiss.pdf` and `samples/OVERLAY-bmt-memorandum-motion-to-dismiss.txt` |
+| exemplar | yes: `usage/SAMPLE-nyeb-motion-brief-empirestategrandcouncil2601072.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nyeb-motion-brief-bmtmemorandummotiontodismiss.md` (the whole memorandum: counsel block, caption, headings, bulleted list, block quotations, signature) |
+| render | ok: `usage/OUTPUT-nyeb-motion-brief-bmtmemorandummotiontodismiss.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-bmt-memorandum-motion-to-dismiss.pdf` and `usage/OVERLAY-bmt-memorandum-motion-to-dismiss.txt` |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed in its final state) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief (see the adversary-complaint README for the reason).
@@ -48,7 +48,7 @@ No E.D.N.Y. rule read in this pass sets a font, size, margin, page limit, or a t
 
 ## What the overlay shows
 
-`samples/OVERLAY-bmt-memorandum-motion-to-dismiss.pdf`: red is our render, blue is the filed exemplar, black is where they agree. The page map (`.txt`) pairs our 9 pages with exemplar pages by shared words: 1 to 1 (53.1%), 2 to 4 (59.4%), 3 to 5 (79.8%), 4 to 6 (79.5%), 5 to 8 (57.2%), 6 to 9 (75.2%), 7 to 10 (92.4%), 8 to 11 (90.8%), 9 to 13 (68.9%). The exemplar is 13 pages, and the pairs are not one-to-one because the page breaks differ. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-bmt-memorandum-motion-to-dismiss.pdf`: red is our render, blue is the filed exemplar, black is where they agree. The page map (`.txt`) pairs our 9 pages with exemplar pages by shared words: 1 to 1 (53.1%), 2 to 4 (59.4%), 3 to 5 (79.8%), 4 to 6 (79.5%), 5 to 8 (57.2%), 6 to 9 (75.2%), 7 to 10 (92.4%), 8 to 11 (90.8%), 9 to 13 (68.9%). The exemplar is 13 pages, and the pairs are not one-to-one because the page breaks differ. The overlay is a diagnostic, not a score.
 
 ## Known gaps and open choices
 
@@ -85,9 +85,9 @@ Pages reviewed: 9 of 9.
 
 ## Engines
 
-docx (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (pandoc default, styles replaced, footer with the matter number at the left and the page number on the centre tab, letter page with 1 in margins); `docx/nyeb-motion-brief.lua` builds the counsel block, caption, title, bullets, quotations and signature. `docx/render.sh` is the court's build (it runs pandoc with `--from markdown+smart-fancy_lists` and puts the frontmatter `matter_number` into the footer). Output: `samples/OUTPUT-bmt-memorandum-motion-to-dismiss.docx` and `.docx.pdf` (LibreOffice, 9 pages). Reviewed: 9 of 9 pages of the `.docx.pdf`, against the typst render (9 pages) at 60 dpi. LibreOffice converts the file with no error; `pdffonts` shows EB Garamond embedded.
+docx (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference (pandoc default, styles replaced, footer with the matter number at the left and the page number on the centre tab, letter page with 1 in margins); `docx/nyeb-motion-brief.lua` builds the counsel block, caption, title, bullets, quotations and signature. `docx/render.sh` is the court's build (it runs pandoc with `--from markdown+smart-fancy_lists` and puts the frontmatter `matter_number` into the footer). Output: `usage/OUTPUT-nyeb-motion-brief-bmtmemorandummotiontodismiss.docx` and `.docx.pdf` (LibreOffice, 9 pages). Reviewed: 9 of 9 pages of the `.docx.pdf`, against the typst render (9 pages) at 60 dpi. LibreOffice converts the file with no error; `pdffonts` shows EB Garamond embedded.
 
 - **Matches typst:** letter paper, 1 in margins; EB Garamond 12 pt; counsel block single spaced at the top left; court title; caption with the rules, `v.` between the parties and `Adv. Pro. No.` at the right; the title centred and bold; body on a 24 pt pitch with a 0.5 in first-line indent; `#` headings centred bold, `##` bold left, `###` bold italic left; bullets with a hanging indent; block quotations single spaced, indented 1 in on each side; "(a)", "(1)" and "(A)" in quotations stay text (fancy lists are off, as in typst); the conclusion kept with the signature block; footer with the matter number and a centred page number.
 - **Differs:** bullets are typed `•` with a tab, not Word list numbering. Exact line spacing puts glyphs a few points lower than typst's line box, so body lines on later pages sit about 11 pt lower than typst (the page count is 9 in both, but the page breaks differ slightly). LibreOffice wraps the first party name in the caption differently in one place: `EMPIRE STATE GRAND COUNCIL ANCIENT AND` breaks before `AND` in the 3.8 in names column, where typst keeps `AND` on the line.
-- **docx BLOCKED (not run):** `tools/check.sh <doc-type-dir> --engine docx` (Gates 0 to 3) cannot run for this folder. It reads `court.json` and `checks.yaml` at the court root, and this court has no `checks.yaml` yet. No `samples/.check-docx.txt` stamp is written. The page review above and the font and page-size checks stand in for Gate 2 only; they are not a Gate 1 pass.
+- **docx BLOCKED (not run):** `tools/check.sh <doc-type-dir> --engine docx` (Gates 0 to 3) cannot run for this folder. It reads `court.json` and `checks.yaml` at the court root, and this court has no `checks.yaml` yet. No `usage/.check-docx.txt` stamp is written. The page review above and the font and page-size checks stand in for Gate 2 only; they are not a Gate 1 pass.
 - **Not checked in Word:** no Word is available here. The file was opened and converted in LibreOffice.

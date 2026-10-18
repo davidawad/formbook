@@ -2,8 +2,8 @@
 
 - Court: `mab`, United States Bankruptcy Court for the District of Massachusetts (`courts/first-circuit/massachusetts/federal/bankruptcy-district/`)
 - Doc type: `adversary-complaint` (complaint commencing an adversary proceeding, Fed. R. Bankr. P. 7001 and 7003)
-- Exemplar: `exemplars/FILED-EXAMPLE-lassman-26-01083-adversary-complaint.pdf` (*Lassman v. Paul W. Marks Co. Inc.*, Adv. Proc. No. 26-01083, Doc. 1, filed 2026-08-20; provenance in `exemplars/SOURCE.md`). Filer: the Chapter 7 trustee of the Good Guys Provision Co. Inc. estate, a preference action.
-- Sample: `samples/INPUT-lassman-adversary-complaint.md` (full transcription of the 5-page filing, with the additions listed under Gaps).
+- Exemplar: `usage/SAMPLE-mab-adversary-complaint-lassman2601083.pdf` (*Lassman v. Paul W. Marks Co. Inc.*, Adv. Proc. No. 26-01083, Doc. 1, filed 2026-08-20; provenance in `usage/SOURCE.md`). Filer: the Chapter 7 trustee of the Good Guys Provision Co. Inc. estate, a preference action.
+- Sample: `usage/INPUT-mab-adversary-complaint-lassman.md` (full transcription of the 5-page filing, with the additions listed under Gaps).
 - Status: template built, rendered, overlaid and page-reviewed. Not reviewed by a human; `court.json` untouched.
 
 ## Files
@@ -12,10 +12,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...`, splits frontmatter from body, calls `mab-adversary-complaint`. |
 | `typst/mab-adversary-complaint.typ` | Template. Parameters at the top, each tied to a rule. Caption, numbered paragraphs, tables, lists, signature, date. |
-| `samples/INPUT-lassman-adversary-complaint.md` | Markdown sample: YAML frontmatter (division, debtor, chapter, case number, parties, title, date, signature groups) and the body. |
-| `samples/OUTPUT-lassman-adversary-complaint.pdf` | `sh tools/render.sh courts/first-circuit/massachusetts/federal/bankruptcy-district/adversary-complaint samples/INPUT-lassman-adversary-complaint.md` (4 pages). |
-| `samples/OVERLAY-lassman-adversary-complaint.pdf`, `.txt` | `sh tools/overlay.sh courts/first-circuit/massachusetts/federal/bankruptcy-district/adversary-complaint lassman-adversary-complaint` (red = ours, blue = filed, black = agree). |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-mab-adversary-complaint-lassman.md` | Markdown sample: YAML frontmatter (division, debtor, chapter, case number, parties, title, date, signature groups) and the body. |
+| `usage/OUTPUT-mab-adversary-complaint-lassman.typst.pdf` | `sh tools/render.sh courts/first-circuit/massachusetts/federal/bankruptcy-district/adversary-complaint usage/INPUT-mab-adversary-complaint-lassman.md` (4 pages). |
+| `usage/OVERLAY-lassman-adversary-complaint.pdf`, `.txt` | `sh tools/overlay.sh courts/first-circuit/massachusetts/federal/bankruptcy-district/adversary-complaint lassman-adversary-complaint` (red = ours, blue = filed, black = agree). |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
 File names follow the repo's role convention: `INPUT-` for the markdown we feed in, `OUTPUT-` for our render, `OVERLAY-` for the comparison. The tools write and read these names by default.
 
@@ -41,7 +41,7 @@ Typeface (checked 2026-10-14): face required: none. MLBR Appendix 8(c) says "a p
 
 ## Overlay
 
-`samples/OVERLAY-lassman-adversary-complaint.pdf` puts our render (red) over the best-matching exemplar page (blue). Pages are paired by word overlap. Diagnostic only, not a score. Pairings from the last run:
+`usage/OVERLAY-lassman-adversary-complaint.pdf` puts our render (red) over the best-matching exemplar page (blue). Pages are paired by word overlap. Diagnostic only, not a score. Pairings from the last run:
 
 - ours p.1 ↔ filed p.1 (69%): caption, title, Parties. The filed caption is set in Times and has the ECF header; ours is in EB Garamond with the same layout.
 - ours p.2 ↔ filed p.2 (61%): Jurisdiction and Venue, General Allegations, the transfer table.
@@ -50,7 +50,7 @@ Typeface (checked 2026-10-14): face required: none. MLBR Appendix 8(c) says "a p
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-lassman-adversary-complaint.pdf` was rendered at 60 dpi and viewed (4 of 4). Typst printed no warnings. Fonts embedded: EB Garamond Regular and Bold only.
+Every page of `OUTPUT-mab-adversary-complaint-lassman.typst.pdf` was rendered at 60 dpi and viewed (4 of 4). Typst printed no warnings. Fonts embedded: EB Garamond Regular and Bold only.
 
 | Page | Content | Result |
 |---|---|---|

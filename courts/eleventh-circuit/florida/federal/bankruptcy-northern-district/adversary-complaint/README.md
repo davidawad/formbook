@@ -19,7 +19,7 @@ No case-specific text, coordinates or forced line breaks are in the template: th
 
 ## What the overlay shows
 
-Sample: `samples/INPUT-ochlockonee.md` (transcription of the filed complaint, 10 pages, Doc 1 of Adv. No. 25-05002-KKS). Render: `samples/OUTPUT-ochlockonee.pdf` (9 pages). Overlay: `samples/OVERLAY-ochlockonee.pdf` (red = our render, blue = filed exemplar, black = both) with page map `samples/OVERLAY-ochlockonee.txt`.
+Sample: `usage/INPUT-flnb-adversary-complaint-ochlockonee.md` (transcription of the filed complaint, 10 pages, Doc 1 of Adv. No. 25-05002-KKS). Render: `usage/OUTPUT-flnb-adversary-complaint-ochlockonee.typst.pdf` (9 pages). Overlay: `usage/OVERLAY-ochlockonee.pdf` (red = our render, blue = filed exemplar, black = both) with page map `usage/OVERLAY-ochlockonee.txt`.
 
 - Line pitch matches the filing: about 32 pt baseline-to-baseline at 14 pt double-spaced (the filing is 32.2 pt).
 - Layout: caption, title, numbered paragraphs, claim headings and subtitles, prayer, counsel and signature block all land in the same order as filed.
@@ -32,14 +32,14 @@ Sample: `samples/INPUT-ochlockonee.md` (transcription of the filed complaint, 10
 - **Hanging paragraph numbers.** Paragraph numbers are typed as in the filing (`1)`), with a first-line indent. Filing numbers are not auto-generated, so a paragraph inserted into a transcription must be renumbered by hand.
 - **Adversary cover sheet** (LBR 7001-1; Official Form B 1040) and **summons** are separate filings and are not part of this template.
 - **Filed-text quirks** are transcribed as filed: the third claim heading reads "III. VI. THIRD CLAIM FOR RELIEF" (filing error), and sub-items (a)-(e) are plain paragraphs.
-- **Second filer not used.** White Wilson Medical Center, PA v. Austin Business Finance LLC (Adv. 25-04007-KKS, 20 pp.) was located, but it is a complaint for temporary injunctive relief that starts with the Official Form cover sheet, so it is recorded in `exemplars/SOURCE.md` and not used for overlay.
+- **Second filer not used.** White Wilson Medical Center, PA v. Austin Business Finance LLC (Adv. 25-04007-KKS, 20 pp.) was located, but it is a complaint for temporary injunctive relief that starts with the Official Form cover sheet, so it is recorded in `usage/SOURCE.md` and not used for overlay.
 - **Pages reviewed.** All 9 pages of the final render were viewed as PNG (montages at 70-80 dpi): pages 1, 5, 6 and 9, then pages 2, 3, 4, 7 and 8, after the layout fixes (heading stickiness, caption column).
 
 [Court index](../README.md)
 
 ## Engines
 
-Word (`docx/`) is built next to the typst template: `docx/reference.docx` (made by `docx/make-reference.sh`), `docx/flnb-adversary-complaint.lua` (caption, title, signature block), `docx/render.sh` (pandoc with the reference and the filter, lettered sub-items kept as paragraphs). Build: `sh tools/render.sh --engine docx adversary-complaint samples/INPUT-ochlockonee.md` writes `samples/OUTPUT-ochlockonee.docx` and `OUTPUT-ochlockonee.docx.pdf` (LibreOffice 26.8). Checked on the LibreOffice PDF; Word was not available.
+Word (`docx/`) is built next to the typst template: `docx/reference.docx` (made by `docx/make-reference.sh`), `docx/flnb-adversary-complaint.lua` (caption, title, signature block), `docx/render.sh` (pandoc with the reference and the filter, lettered sub-items kept as paragraphs). Build: `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-flnb-adversary-complaint-ochlockonee.md` writes `usage/OUTPUT-flnb-adversary-complaint-ochlockonee.docx` and `OUTPUT-flnb-adversary-complaint-ochlockonee.docx.pdf` (LibreOffice 26.8). Checked on the LibreOffice PDF; Word was not available.
 
 - **Matches typst:** EB Garamond 14 pt; 32.2 pt line pitch for body text (the same pitch as the typst render); single 15.4 pt lines in the caption, counsel and signature blocks; 1-inch margins on letter paper; centred page number on every page; caption, title and signature block in the same order and at the same positions (within about 3 pt on page 1); signature block at 45% of the text width, kept with the last paragraph of the body.
 - **Differs from typst (docx is the one that follows the template's own intent; typst/ is not changed here):**

@@ -5,7 +5,7 @@ use std::fs;
 use std::path::Path;
 use std::process::ExitCode;
 
-const DOCTYPE_INTRO: &str = "\nTypst per doc type (a doc type is complete with template, sample, render, exemplar and overlay; per-doc-type rows in STATUS.md):\n\n";
+const DOCTYPE_INTRO: &str = "\nTypst per doc type (a doc type is complete with template, sample, render and exemplar; per-doc-type rows in STATUS.md):\n\n";
 
 pub fn main(args: &[String]) -> Res<ExitCode> {
     match args {
@@ -85,8 +85,8 @@ fn status_md(s: &tracker::Sections) -> String {
         &s.status,
         "\n## Typst per doc type: summary\n\n",
         "One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself as \"(court root)\" when it has its own `typst/main.typ`. ",
-        "Complete = all five present, each keyed on committed text so a checkout without PDFs counts the same: Typst template (`typst/main.typ`), sample (`samples/INPUT-*.md`), render (template and sample committed), ",
-        "exemplar (named in `exemplars/SOURCE.md`), overlay (`samples/OVERLAY-*.txt`). Gates = `tools/check.sh` left a valid typst stamp (shown, not required).\n\n",
+        "Complete = all four present, each keyed on committed text so a checkout without PDFs counts the same: Typst template (`typst/main.typ`), sample (`usage/INPUT-<stem>-<id>.md`), render (template and sample committed), ",
+        "exemplar (a `SAMPLE-<stem>-<id>.pdf` named in `usage/SOURCE.md`). Overlays are generated on demand into `.overlay/` and are not counted. Gates = `tools/check.sh` left a valid typst stamp (shown, not required).\n\n",
         &s.dsummary,
         "\n## Typst per doc type\n\n",
         &s.doctypes,

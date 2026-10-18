@@ -5,10 +5,10 @@ Folder: `courts/tenth-circuit/new-mexico/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-pillow-1-26-cv-03383-complaint.pdf` (1 filer, counsel-filed; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-pillow-complaint.md` (a portion of the 15-page filing; see Known gaps) |
-| render | ok: `samples/OUTPUT-pillow-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-pillow-complaint.pdf` and `OVERLAY-pillow-complaint.txt` (`tools/overlay.sh`) |
+| exemplar | yes: `usage/SAMPLE-nmd-complaint-pillow126cv03383.pdf` (1 filer, counsel-filed; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nmd-complaint-pillow.md` (a portion of the 15-page filing; see Known gaps) |
+| render | ok: `usage/OUTPUT-nmd-complaint-pillow.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`) |
+| overlay | ok: `usage/OVERLAY-pillow-complaint.pdf` and `OVERLAY-pillow-complaint.txt` (`tools/overlay.sh`) |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change) |
 
 File names: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (the sample id is the `.md` name). The brief's `<id>-overlay` names are not what `tools/overlay.sh` writes, so the tool's names are used.
@@ -46,7 +46,7 @@ Primary sources, fetched 2026-10-14.
 
 ## Overlay
 
-`samples/OVERLAY-pillow-complaint.pdf`: each page of our render is shown in red and paired with the filed page sharing the most words (blue; black where they agree). The pairing is by text, not by index. The page map is in `OVERLAY-pillow-complaint.txt`:
+`usage/OVERLAY-pillow-complaint.pdf`: each page of our render is shown in red and paired with the filed page sharing the most words (blue; black where they agree). The pairing is by text, not by index. The page map is in `OVERLAY-pillow-complaint.txt`:
 
 ```
 ours p.1  filed p.1  word-overlap 77.6%

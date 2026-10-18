@@ -1,15 +1,15 @@
 # Georgia Court of Appeals (gactapp): petition-for-rehearing
 
-Doc type: Georgia has no petition for rehearing; the closest real type is the **motion for reconsideration** (Rule 37). Exemplar: **yes** (`exemplars/FILED-EXAMPLE-sierra-club-v-psc-A21A1129-petition-for-rehearing.pdf`, Appellant's Motion for Reconsideration with its Brief in Support, *Sierra Club, Inc. v. Georgia Public Service Commission*, No. A21A1129, filed November 3, 2021 by Robert B. Jackson, IV, LLC and Sierra Club, Inc.; source in `exemplars/SOURCE.md`). Nothing here sets a `court.json` status.
+Doc type: Georgia has no petition for rehearing; the closest real type is the **motion for reconsideration** (Rule 37). Exemplar: **yes** (`usage/SAMPLE-gactapp-petition-for-rehearing-sierraclubvpsca21a1129.pdf`, Appellant's Motion for Reconsideration with its Brief in Support, *Sierra Club, Inc. v. Georgia Public Service Commission*, No. A21A1129, filed November 3, 2021 by Robert B. Jackson, IV, LLC and Sierra Club, Inc.; source in `usage/SOURCE.md`). Nothing here sets a `court.json` status.
 
 ## Status
 
 | Item | Result |
 |---|---|
-| `exemplars/` | 1 filing, text PDF, 15 pages: the motion (pages 1-2), its certificate of service (3), then the brief in support (4-15), each with its own cover; court e-filing stamp "Case A21A1129 Filed 11/03/2021" on every page |
-| `samples/INPUT-rehearing-sample.md` | transcription of the whole brief in support (filed pages 4-15). The two-page motion itself is not transcribed: it is a short request that refers to the brief. Id kept for the existing docx outputs |
-| render | ok: `samples/OUTPUT-rehearing-sample.pdf`, 11 pages, exit 0, no warnings, Liberation Serif embedded |
-| overlay | ok: `samples/OVERLAY-rehearing-sample.pdf` / `.txt` |
+| `usage/` | 1 filing, text PDF, 15 pages: the motion (pages 1-2), its certificate of service (3), then the brief in support (4-15), each with its own cover; court e-filing stamp "Case A21A1129 Filed 11/03/2021" on every page |
+| `usage/INPUT-gactapp-petition-for-rehearing-rehearingsample.md` | transcription of the whole brief in support (filed pages 4-15). The two-page motion itself is not transcribed: it is a short request that refers to the brief. Id kept for the existing docx outputs |
+| render | ok: `usage/OUTPUT-gactapp-petition-for-rehearing-rehearingsample.typst.pdf`, 11 pages, exit 0, no warnings, Liberation Serif embedded |
+| overlay | ok: `usage/OVERLAY-rehearing-sample.pdf` / `.txt` |
 | pages reviewed | 11 of 11 at 60 dpi, plus the 15 exemplar pages |
 
 ## Governing rules (primary source, read 2026-10-16)

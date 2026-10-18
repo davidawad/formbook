@@ -5,11 +5,11 @@ Folder: `courts/tenth-circuit/new-mexico/federal/bankruptcy-district/adversary-c
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-johnson-v-marker-24-01003-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-johnson-v-marker-complaint.md`: the whole filing (10 pages), transcribed from the text layer |
+| exemplar | yes: `usage/SAMPLE-nmb-adversary-complaint-johnsonvmarker2401003.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nmb-adversary-complaint-johnsonvmarkercomplaint.md`: the whole filing (10 pages), transcribed from the text layer |
 | typeface | No face named (FRBP 9004 and NM LBR, 2023 edition, read in full 2026-10-15; neither names a typeface, font size or spacing). Keeps EB Garamond (`docs/FONTS.md`, "No face named"). Not a substitution: no metric or visual check applies. |
-| render | ok (re-run 2026-10-15, `sh tools/render.sh`): `samples/OUTPUT-johnson-v-marker-complaint.pdf`, 9 pages, letter, EB Garamond only (`pdffonts`: `EBGaramond-Regular`, `EBGaramond-Bold`, embedded), no typst warnings |
-| overlay | ok (re-run 2026-10-15, `sh tools/overlay.sh`): `samples/OVERLAY-johnson-v-marker-complaint.pdf` and `OVERLAY-johnson-v-marker-complaint.txt`. The exemplar PDF is not in `exemplars/` in this snapshot; the run passed a copy fetched from the URL in `exemplars/SOURCE.md` (sha256 `fea81f88d4b89acffd7e08a90a9bf7eebca9a095e52ba387ab476e383b064eeb`, 10 pages, 2,966 words) as the optional third argument. |
+| render | ok (re-run 2026-10-15, `sh tools/render.sh`): `usage/OUTPUT-nmb-adversary-complaint-johnsonvmarkercomplaint.typst.pdf`, 9 pages, letter, EB Garamond only (`pdffonts`: `EBGaramond-Regular`, `EBGaramond-Bold`, embedded), no typst warnings |
+| overlay | ok (re-run 2026-10-15, `sh tools/overlay.sh`): `usage/OVERLAY-johnson-v-marker-complaint.pdf` and `OVERLAY-johnson-v-marker-complaint.txt`. The exemplar PDF is not in `usage/` in this snapshot; the run passed a copy fetched from the URL in `usage/SOURCE.md` (sha256 `fea81f88d4b89acffd7e08a90a9bf7eebca9a095e52ba387ab476e383b064eeb`, 10 pages, 2,966 words) as the optional third argument. |
 | pages reviewed | 9 of 9 (re-rendered 2026-10-15; every page rasterized at 60 dpi and viewed) |
 | check.sh / selftest | not run: `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/` |
 
@@ -54,7 +54,7 @@ Not verified against the rule text in this pass (cited from memory; check before
 
 1. **Typeface.** No rule in the bankruptcy rules or the NM local rules sets a typeface (re-checked 2026-10-15 against the full text of the 2023 NM LBR PDF and FRBP 9004). EB Garamond is the only vendored serif (`fonts/`); the filed exemplar is Equity-A-style serif at 12 pt for the body and Helvetica for the footer. The body reads a little smaller than the exemplar because EB Garamond has a smaller x-height than Equity at 12 pt. Logged as a convention choice, not a rule defect.
 2. **Paper and margins.** The rules cited here do not give a margin or paper size; the template uses letter and 1 inch. The exemplar's margins were not measured, and no coordinate was taken from it.
-3. **One exemplar only.** The brief asks for one exemplar per doc type, so tier 2 is judged against one filer. Two more text-layer complaints from this court exist in the public RECAP set (Quorum Health v. Bailey, Adv. 18-01028; Montoya v. Goldstein, Adv. 20-01027; listed in `exemplars/SOURCE.md`). They were not saved here, so the tier-2 check against two or three filers is not done. Open for David: save one or both as `exemplars/` files and judge tier 2 against them.
+3. **One exemplar only.** The brief asks for one exemplar per doc type, so tier 2 is judged against one filer. Two more text-layer complaints from this court exist in the public RECAP set (Quorum Health v. Bailey, Adv. 18-01028; Montoya v. Goldstein, Adv. 20-01027; listed in `usage/SOURCE.md`). They were not saved here, so the tier-2 check against two or three filers is not done. Open for David: save one or both as `usage/` files and judge tier 2 against them.
 4. **Exemplar e-mail.** The filed signature block has no e-mail line, which LBR 9011-1(a) requires. The sample carries a bracketed placeholder for the e-mail line, and the template prints it. The template follows the rule, not the exemplar.
 5. **Consent statement.** The filed complaint does not state consent to final orders (FRBP 7008(a), 7012(b), see NM LBR 7016-1(a)). The template does not add one; it is author content. The consent paragraph's wording needs checking against FRBP 7008(a) before any real use.
 6. **Case names are roman.** The text layer has no italic markup, so the sample's case names are roman. The template italicizes `*...*` from markdown; a sample that marks italics will show them.
@@ -82,10 +82,10 @@ Gate 2 rows are recorded here, not in `reviews/`, because this doc type has no c
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `nmb-filter.lua` builds the caption, numbered paragraphs, lettered sub-items, signature and certificate from the frontmatter). Output: `samples/OUTPUT-<id>.docx` (produced and zip/XML-validated; see the render check below).
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx` from pandoc's default; `nmb-filter.lua` builds the caption, numbered paragraphs, lettered sub-items, signature and certificate from the frontmatter). Output: `usage/OUTPUT-<id>.docx` (produced and zip/XML-validated; see the render check below).
 
 - Matches the typst form: EB Garamond 12 pt; exact 24 pt (double) line spacing; letter paper, 1 in margins; numbered paragraphs with a 0.5 in first-line indent and renumbered by the filter; lettered sub-items with a hanging indent; 15 pt single-spaced block quotations indented 0.75 in each side; caption table (court, debtor block, case number, party block with right and bottom rule, adversary number, title); signature block at 3.25 in; footnotes 10 pt; footer "Page X of Y" (PAGE and NUMPAGES fields).
 - Differs: the typst footer's left-hand title is not in the docx footer, because the footer is part of the reference and the title is case text from the frontmatter (a `render.sh` could add it; not done). Table borders, the "By:" leader line (tab leader, not a 2.6 in rule) and pagination differ between Word and LibreOffice. Word substitutes silently if EB Garamond is not installed on the machine that opens the file (`docs/FONTS.md`).
 - No TOC or TOA in these forms, so no field-update caveat applies.
 - Validation run here: `sh docx/build-reference.sh reference.docx` (unzip -tq and xmllint on every XML part: no errors); `sh tools/render.sh --engine docx` wrote the `.docx` and passed the zip and XML-well-formedness checks, then stopped at the soffice step.
-- BLOCKED (docx.pdf gates 0 and 1, and the visual check of every page): LibreOffice (`soffice`) is not installed on this box, so no `samples/OUTPUT-<id>.docx.pdf` exists and no docx page was rendered or looked at. `tools/check.sh --engine docx` cannot pass until it is run where soffice exists. Not claimed as passed.
+- BLOCKED (docx.pdf gates 0 and 1, and the visual check of every page): LibreOffice (`soffice`) is not installed on this box, so no `usage/OUTPUT-<id>.docx.pdf` exists and no docx page was rendered or looked at. `tools/check.sh --engine docx` cannot pass until it is run where soffice exists. Not claimed as passed.

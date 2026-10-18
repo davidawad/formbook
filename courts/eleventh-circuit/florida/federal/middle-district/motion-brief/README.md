@@ -5,11 +5,11 @@ Folder: `courts/eleventh-circuit/florida/federal/middle-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-phillip-8-26-cv-02634-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-phillip-motion-to-dismiss.md` (a portion of the 19-page filing; see "Excerpt") |
+| exemplar | yes: `usage/SAMPLE-flmd-motion-brief-phillip826cv02634.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-flmd-motion-brief-phillipmotiontodismiss.md` (a portion of the 19-page filing; see "Excerpt") |
 | typeface | Face required: **Book Antiqua** (LR 1.08(a); the filed exemplar is set in Book Antiqua for the body). Vendored substitute: **TeX Gyre Pagella** (visual only, `docs/FONTS.md`). See "Typeface" below. |
-| render | ok: `samples/OUTPUT-phillip-motion-to-dismiss.pdf`, 14 pages (13 with EB Garamond; the wider substitute adds a page), typst 0.15.0, no warnings, `pdffonts`: TeX Gyre Pagella embedded |
-| overlay | ok: `samples/OVERLAY-phillip-motion-to-dismiss.pdf` and `OVERLAY-phillip-motion-to-dismiss.txt` |
+| render | ok: `usage/OUTPUT-flmd-motion-brief-phillipmotiontodismiss.typst.pdf`, 14 pages (13 with EB Garamond; the wider substitute adds a page), typst 0.15.0, no warnings, `pdffonts`: TeX Gyre Pagella embedded |
+| overlay | ok: `usage/OVERLAY-phillip-motion-to-dismiss.pdf` and `OVERLAY-phillip-motion-to-dismiss.txt` |
 | pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed after the font change) |
 
 ## Governing rules
@@ -89,7 +89,7 @@ Every page was rendered with `pdftoppm -r 60`, montaged two per image, and viewe
 | Engine | Status |
 |---|---|
 | typst | primary; unchanged by this section |
-| docx | built: `docx/reference.docx` (made by `sh ../complaint/docx/make-reference.sh docx/reference.docx motion`), `docx/flmd-motion-brief.lua`, `docx/render.sh`. Output `samples/OUTPUT-phillip-motion-to-dismiss.docx` (valid zip, well-formed XML, text check below). `OUTPUT-phillip-motion-to-dismiss.docx.pdf`: **BLOCKED** (no LibreOffice on this box; see the complaint README, "Engines"). |
+| docx | built: `docx/reference.docx` (made by `sh ../complaint/docx/make-reference.sh docx/reference.docx motion`), `docx/flmd-motion-brief.lua`, `docx/render.sh`. Output `usage/OUTPUT-flmd-motion-brief-phillipmotiontodismiss.docx` (valid zip, well-formed XML, text check below). `OUTPUT-flmd-motion-brief-phillipmotiontodismiss.docx.pdf`: **BLOCKED** (no LibreOffice on this box; see the complaint README, "Engines"). |
 | latex | not built |
 
 What matches the typst template (by rule): Letter, 1-inch margins; main text 14-point, double-spaced; indented body paragraphs, not numbered; headings levels 1 to 4 (level 1 and 2 centered bold, level 3 bold left, level 4 bold italic left); lettered lists; the caption and cover; the signature block at 3 inches, kept as one block; the Local Rule 3.01(g) certificate before the signature; the certificate of service after it, kept together; page numbers bottom center from page two.
@@ -103,4 +103,4 @@ What differs from typst:
 
 Checks run on the `.docx` (not a PDF gate): every word of the markdown body is in the docx text in order (2804 of 2804 words, including the certificate of service after the signature; `pandoc -t plain`, with smart-punctuation no-break spaces and ellipses normalized).
 
-BLOCKED (docx tier 1 gates, `docs/DOCX.md`): `OUTPUT-phillip-motion-to-dismiss.docx.pdf` could not be made (LibreOffice not runnable here, see the complaint README). Gates 0 and 1 and the Gate 2 page review were not run on a docx PDF; pages reviewed: 0. The sample is an excerpt (see gap 2 above), so the 25-page limit (LR 3.01(b)) is not tested by any engine.
+BLOCKED (docx tier 1 gates, `docs/DOCX.md`): `OUTPUT-flmd-motion-brief-phillipmotiontodismiss.docx.pdf` could not be made (LibreOffice not runnable here, see the complaint README). Gates 0 and 1 and the Gate 2 page review were not run on a docx PDF; pages reviewed: 0. The sample is an excerpt (see gap 2 above), so the 25-page limit (LR 3.01(b)) is not tested by any engine.

@@ -1,25 +1,25 @@
 # United States Court of Federal Claims: motion-brief
 
-A motion for judgment on the administrative record (RCFC 52.1(c)) with its memorandum of law, the form used in bid protests. This folder is one self-contained doc type under the court (`uscfc`). The court-root `typst/` and `samples/` are not touched.
+A motion for judgment on the administrative record (RCFC 52.1(c)) with its memorandum of law, the form used in bid protests. This folder is one self-contained doc type under the court (`uscfc`). The court-root `typst/` and `usage/` are not touched.
 
-Status: **exemplar = yes** (in `exemplars/`), **typeface = EB Garamond, kept** (the rules name no face; see Decisions), **render = ok** (re-rendered 2026-10-16, 13 pages, EB Garamond only, 13 of 13 pages viewed at 60 dpi), **overlay = ok** (rerun 2026-10-16 against a rebuilt OCR text-layer copy; see "Verification pass 2026-10-16"). The brief is a full-depth form; the sample is an excerpt of a 72-page memorandum (13 rendered pages). Not a complete reproduction of the filing.
+Status: **exemplar = yes** (in `usage/`), **typeface = EB Garamond, kept** (the rules name no face; see Decisions), **render = ok** (re-rendered 2026-10-16, 13 pages, EB Garamond only, 13 of 13 pages viewed at 60 dpi), **overlay = ok** (rerun 2026-10-16 against a rebuilt OCR text-layer copy; see "Verification pass 2026-10-16"). The brief is a full-depth form; the sample is an excerpt of a 72-page memorandum (13 rendered pages). Not a complete reproduction of the filing.
 
 ## Layout
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-oracle-18-1880C-motion-brief.pdf` | The filed package: motion (Doc. 59, pp. 1-3), memorandum (Doc. 59-1, pp. 4-75), proposed order (Doc. 59-2, pp. 76-78). |
-| `exemplars/SOURCE.md` | Where it came from, filer, dates, and the search log. |
-| `samples/INPUT-oracle-memorandum.md` | Markdown transcription of the memorandum (excerpt). Frontmatter per the contract below. |
-| `samples/OUTPUT-oracle-memorandum.pdf` | Our render (`tools/render.sh`). |
-| `samples/OVERLAY-oracle-memorandum.pdf` / `.txt` | Red (ours) / blue (filed) overlay and page map (`tools/overlay.sh`). |
+| `usage/SAMPLE-uscfc-motion-brief-oracle181880c.pdf` | The filed package: motion (Doc. 59, pp. 1-3), memorandum (Doc. 59-1, pp. 4-75), proposed order (Doc. 59-2, pp. 76-78). |
+| `usage/SOURCE.md` | Where it came from, filer, dates, and the search log. |
+| `usage/INPUT-uscfc-motion-brief-oraclememorandum.md` | Markdown transcription of the memorandum (excerpt). Frontmatter per the contract below. |
+| `usage/OUTPUT-uscfc-motion-brief-oraclememorandum.typst.pdf` | Our render (`tools/render.sh`). |
+| `usage/OVERLAY-oracle-memorandum.pdf` / `.txt` | Red (ours) / blue (filed) overlay and page map (`tools/overlay.sh`). |
 | `typst/main.typ` | Entry point: reads the sample, splits the frontmatter, calls the template. |
 | `typst/uscfc-motion-brief.typ` | The template: `uscfc-brief(meta, md)`. Content-agnostic. |
 
 Build and check (from the repo root):
 
 ```sh
-sh tools/render.sh courts/federal-circuit/court-of-federal-claims/motion-brief samples/INPUT-oracle-memorandum.md
+sh tools/render.sh courts/federal-circuit/court-of-federal-claims/motion-brief usage/INPUT-uscfc-motion-brief-oraclememorandum.md
 sh tools/overlay.sh courts/federal-circuit/court-of-federal-claims/motion-brief oracle-memorandum /work/artifacts/uscfc-motion-brief/oracle-18-1880C-textlayer.pdf
 ```
 
@@ -96,7 +96,7 @@ Body:
 
 - The filing is text-based only on pp. 1-3 (the motion). The memorandum (pp. 4-75) and the proposed order (pp. 76-78) are scanned images with no text layer.
 - The sample was transcribed from an OCR (tesseract 5.5.3, 300 dpi, `--psm 6`) of the scanned pages. The cover (p. 4) was checked against the image; the email address in the OCR was wrong and is corrected (craig.holman@arnoldporter.com). Other passages were not checked against the images one by one. Redacted passages are omitted. The sample is a visual comparison, not a certified copy.
-- The overlay (`tools/overlay.sh`) pairs pages by extracted text, so a scanned exemplar gives no pairing without a text layer. An OCR text-layer copy was built from the same images and the native text of pp. 1-3 (`/work/artifacts/uscfc-motion-brief/oracle-18-1880C-textlayer.pdf`, 78 pages, outside the repo), and passed to the overlay as its third argument. The filed file in `exemplars/` is unchanged.
+- The overlay (`tools/overlay.sh`) pairs pages by extracted text, so a scanned exemplar gives no pairing without a text layer. An OCR text-layer copy was built from the same images and the native text of pp. 1-3 (`/work/artifacts/uscfc-motion-brief/oracle-18-1880C-textlayer.pdf`, 78 pages, outside the repo), and passed to the overlay as its third argument. The filed file in `usage/` is unchanged.
 
 ## Overlay
 
@@ -142,7 +142,7 @@ After fixes 2-4 the re-render was checked by text extraction (pp. 1, 10, and the
 
 ## Engines
 
-The docx engine is `docx/`: `make-reference.sh` builds `reference.docx` (EB Garamond 12 pt, 26.46 pt exact double spacing as the typst render measures it, 15.6 pt single lines, headings, footnotes, letter page with 1-inch margins); `uscfc-motion-brief.lua` adds the cover, the table of contents and table of authorities, the heading numbers, the signature block and the certificate; `render.sh` owns the build (see below). Render: `sh tools/render.sh --engine docx courts/federal-circuit/court-of-federal-claims/motion-brief samples/INPUT-oracle-memorandum.md` writes `samples/OUTPUT-oracle-memorandum.docx` and its LibreOffice PDF (LibreOffice 26.8.1; the render box links `fonts/eb-garamond` into fontconfig, see docs/DOCX.md).
+The docx engine is `docx/`: `make-reference.sh` builds `reference.docx` (EB Garamond 12 pt, 26.46 pt exact double spacing as the typst render measures it, 15.6 pt single lines, headings, footnotes, letter page with 1-inch margins); `uscfc-motion-brief.lua` adds the cover, the table of contents and table of authorities, the heading numbers, the signature block and the certificate; `render.sh` owns the build (see below). Render: `sh tools/render.sh --engine docx courts/federal-circuit/court-of-federal-claims/motion-brief usage/INPUT-uscfc-motion-brief-oraclememorandum.md` writes `usage/OUTPUT-uscfc-motion-brief-oraclememorandum.docx` and its LibreOffice PDF (LibreOffice 26.8.1; the render box links `fonts/eb-garamond` into fontconfig, see docs/DOCX.md).
 
 | Matches the typst render | Differs from it |
 |---|---|
@@ -159,7 +159,7 @@ The docx engine is `docx/`: `make-reference.sh` builds `reference.docx` (EB Gara
 
 ## Verification pass 2026-10-16 (fb-595.26.14)
 
-- Rendered: `sh tools/render.sh … samples/INPUT-oracle-memorandum.md`, exit 0, no typst warnings, EB Garamond only. 13 pages (cover, TOC i, TOA ii, body 1-10), the same count as the committed PDF.
+- Rendered: `sh tools/render.sh … usage/INPUT-uscfc-motion-brief-oraclememorandum.md`, exit 0, no typst warnings, EB Garamond only. 13 pages (cover, TOC i, TOA ii, body 1-10), the same count as the committed PDF.
 - Viewed: all 13 pages at 60 dpi, before and after the fixes; exemplar pp. 3, 4 and 75 at 50 dpi; all 13 overlay pages.
 - Overlay: the OCR text-layer copy named above (`/work/artifacts/...`) is no longer on the box. Run without it, `tools/overlay.sh` paired 11 of 13 pages with the wrong filed page (overlap 5-12%), because pp. 4-78 of the exemplar are scans. The copy was rebuilt outside the repo (`/tmp/uscfc-textlayer.pdf`, which is not kept): native pp. 1-3, plus pp. 4-78 OCR'd with tesseract 5 (conda-forge, `--psm 6`, 300 dpi). `sh tools/overlay.sh … oracle-memorandum /tmp/uscfc-textlayer.pdf` exited 0, and the page map is the same as in the Overlay table (cover 80.3%, p. 12 61.4%, p. 9 40.0%; the other pages unchanged). In the overlay the body lines drift apart down each page (different face and leading), and the exemplar's caption box, redaction bars and "REDACTED VERSION" stamp are absent from ours (tier 3 / not template content).
 - Fixed:

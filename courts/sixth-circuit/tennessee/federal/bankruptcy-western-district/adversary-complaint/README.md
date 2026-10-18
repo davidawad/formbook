@@ -5,10 +5,10 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adve
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-brewers-25-05046-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-brewers-adversary-complaint.md` (21-page complaint transcribed: caption, intro, paragraphs 1–70 with transfer tables and footnotes, the prayer and the signature; paragraphs 71–116 omitted and marked in the sample) |
-| render | ok: `samples/OUTPUT-brewers-adversary-complaint.pdf`, 11 pages, US Letter, typst 0.15.0, vendored EB Garamond only, no typst warnings |
-| overlay | ok: `samples/OVERLAY-brewers-adversary-complaint.pdf` and `samples/OVERLAY-brewers-adversary-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-tnwb-adversary-complaint-brewers2505046.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-tnwb-adversary-complaint-brewers.md` (21-page complaint transcribed: caption, intro, paragraphs 1–70 with transfer tables and footnotes, the prayer and the signature; paragraphs 71–116 omitted and marked in the sample) |
+| render | ok: `usage/OUTPUT-tnwb-adversary-complaint-brewers.typst.pdf`, 11 pages, US Letter, typst 0.15.0, vendored EB Garamond only, no typst warnings |
+| overlay | ok: `usage/OVERLAY-brewers-adversary-complaint.pdf` and `usage/OVERLAY-brewers-adversary-complaint.txt` |
 | pages reviewed | 11 of 11 (every page of the final render rasterized at 60 dpi and viewed) |
 | tier 2 | not met: one filer only (see Known gaps 1) |
 | typeface | face required by the rules: none (Known gaps 2) -> vendored substitute: none needed, EB Garamond kept per `docs/FONTS.md` ("No face named") -> not applicable |
@@ -16,7 +16,7 @@ Folder: `courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adve
 Commands (from the repo root, with `export PATH="$HOME/tb/bin:$PATH"`):
 
 ```sh
-sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adversary-complaint samples/INPUT-brewers-adversary-complaint.md
+sh tools/render.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adversary-complaint usage/INPUT-tnwb-adversary-complaint-brewers.md
 sh tools/overlay.sh courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/adversary-complaint brewers-adversary-complaint
 ```
 
@@ -106,7 +106,7 @@ Open tier-2 findings: none that block the layout. The items above (Known gaps 2�
 
 ## Engines
 
-docx (`docx/build-reference.sh` -> `docx/reference.docx`, filter `docx/tnwb.lua`; render `sh tools/render.sh --engine docx`; judged on `samples/OUTPUT-brewers-adversary-complaint.docx.pdf`, the LibreOffice conversion):
+docx (`docx/build-reference.sh` -> `docx/reference.docx`, filter `docx/tnwb.lua`; render `sh tools/render.sh --engine docx`; judged on `usage/OUTPUT-tnwb-adversary-complaint-brewers.docx.pdf`, the LibreOffice conversion):
 
 - Matches the typst output: 11 pages in both; EB Garamond only (`pdffonts`, no fallback face); US Letter, 1 in margins; double spacing (exact 23.9 pt, so 27 lines per page as in typst at 24 pt); single-spaced court heading, caption (with the section-mark column), signature block and parties; numbered allegations at 0.5 in with text at 1 in; lettered prayer with a hanging indent; centered caps, centered bold and left bold headings; transfer tables centered, auto width, ruled, header row repeated across pages; footnotes at 10 pt; page number centered in the footer. Pages reviewed: 11 of 11 (every page of the final docx.pdf rasterized at 60 dpi and viewed, compared with the typst pages).
 - Differs (tier 2, not chased): (1) pagination: LibreOffice places exact-spaced text about 4 pt lower and table rows are 14.3 pt against typst's 13.8 pt, so a few page breaks fall a line or two away from typst (for example the transfer table of paragraph 31 starts on page 5 and ends on page 6 in the docx, and entirely on page 5 in typst); (2) the firm name in the signature block wraps to three lines in LibreOffice (typst: two); (3) footnote leading is exact 11.5 pt; (4) cell text of the transfer tables is plain text (markdown emphasis inside a table cell is not carried over); (5) no PDF bookmarks.

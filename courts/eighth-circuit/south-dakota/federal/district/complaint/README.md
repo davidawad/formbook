@@ -5,11 +5,11 @@ Folder: `courts/eighth-circuit/south-dakota/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-knosp-5-26-cv-05092-complaint.pdf` (1 filer, pro se; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-knosp-complaint.md` (the filed content of the exemplar; see below) |
+| exemplar | yes: `usage/SAMPLE-sdd-complaint-knosp526cv05092.pdf` (1 filer, pro se; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-sdd-complaint-knosp.md` (the filed content of the exemplar; see below) |
 | typeface | face required: **none** (D.S.D. Civ. LR 83.4 says only "Fonts must be at least 12-point"; checked in the official PDF 2026-10-14). Substitute: none; **EB Garamond** kept, as `docs/FONTS.md` says for a court that names no face. Fit: n/a. |
-| render | ok: `samples/OUTPUT-knosp-complaint.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond-Regular and -Bold embedded |
-| overlay | ok: `samples/OVERLAY-knosp-complaint.pdf` and `OVERLAY-knosp-complaint.txt`, built against the filed exemplar fetched from the RECAP URL in `exemplars/SOURCE.md` (the PDF is not in `exemplars/` in this snapshot; pass it as the third argument to `tools/overlay.sh`) |
+| render | ok: `usage/OUTPUT-sdd-complaint-knosp.typst.pdf`, 3 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond-Regular and -Bold embedded |
+| overlay | ok: `usage/OVERLAY-knosp-complaint.pdf` and `OVERLAY-knosp-complaint.txt`, built against the filed exemplar fetched from the RECAP URL in `usage/SOURCE.md` (the PDF is not in `usage/` in this snapshot; pass it as the third argument to `tools/overlay.sh`) |
 | pages reviewed | 3 of 3 (every page rendered at 60 dpi and viewed again on 2026-10-14 after the fonts-pass re-render) |
 | tier 2 | not met to the eval-loop standard: one filer, and that filer is pro se (see Known gaps) |
 
@@ -54,7 +54,7 @@ No certificate of service is printed for the complaint: the complaint is served 
 
 ## Overlay (red/blue test)
 
-`samples/OVERLAY-knosp-complaint.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words, not by index (see `samples/OVERLAY-knosp-complaint.txt`):
+`usage/OVERLAY-knosp-complaint.pdf`: red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words, not by index (see `usage/OVERLAY-knosp-complaint.txt`):
 
 - our p.1 over filed p.1 (41.6% word overlap)
 - our p.2 over filed p.4 (49.4%)
@@ -70,7 +70,7 @@ The pairing is partial: the exemplar is a 7-page form whose entries sit on pages
 4. **Sub-paragraph "A." became paragraph 2.** The form's "A. The federal statutes at issue..." is a separate paragraph in the sample and is numbered 2 by the template. This is the template's rule (each paragraph numbered), not a transcription error.
 5. **Redactions.** Plaintiff's street address, telephone and e-mail are `[redacted]` in the sample, and the signature block shows the city only. Defendants' service addresses are kept (they are the registered-agent addresses). No SSN, birth date or financial-account number appears (LR 5.2).
 6. **Jury demand.** The form's jury box is ambiguous in the text layer ("|^| Yes |_| No"). The docket text on CourtListener says "COMPLAINT with Jury Demand", so `jury_demand: true`.
-7. **Signing date.** The text layer of the "Date of signing" line is illegible. The sample uses "July 21, 2026", the filing date stamped in the header, and says so in `exemplars/SOURCE.md`.
+7. **Signing date.** The text layer of the "Date of signing" line is illegible. The sample uses "July 21, 2026", the filing date stamped in the header, and says so in `usage/SOURCE.md`.
 8. **Font.** LR 83.4 names no typeface, so EB Garamond stays (see the typeface row above). The filed exemplar is in a Times-style face. That is a filer's convention, not a rule, so no Times substitute (Liberation Serif) is used. EB Garamond's x-height is smaller, so the text looks smaller than the exemplar at the same 12 pt. The 12-point minimum is met.
 9. **Caption.** The party column is closed by a right and bottom rule, not the ")" column of the form. Both are seen in filings; recorded as a tier-2 choice.
 10. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md` and are not run here; the brief says not to touch `tools/`. Render and overlay were run, and every page was reviewed.
@@ -86,7 +86,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ## Engines
 
-Typst is the primary engine (`typst/`). The DOCX engine is `docx/`: pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`) and the filter `docx/sdd-complaint.lua`. Its output is `samples/OUTPUT-knosp-complaint.docx`; the LibreOffice PDF of it (`OUTPUT-knosp-complaint.docx.pdf`) was not produced (see BLOCKED).
+Typst is the primary engine (`typst/`). The DOCX engine is `docx/`: pandoc with `docx/reference.docx` (built by `docx/build-reference.sh`) and the filter `docx/sdd-complaint.lua`. Its output is `usage/OUTPUT-sdd-complaint-knosp.docx`; the LibreOffice PDF of it (`OUTPUT-sdd-complaint-knosp.docx.pdf`) was not produced (see BLOCKED).
 
 What the docx follows from the same rules as the typst template (checked in the style and section XML, not on a render):
 
@@ -113,5 +113,5 @@ Differences and open items:
 
 docx BLOCKED items:
 
-- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF of `OUTPUT-knosp-complaint.docx`): **BLOCKED**. LibreOffice is not on conda-forge and apt needs root. The Debian trixie LibreOffice 25.2.3 debs, extracted without root into a private prefix, abort at UNO bootstrap (`terminate called after throwing an instance of 'com::sun::star::uno::RuntimeException'`, also for `soffice --version`); the cause was not found. No `.docx.pdf` exists, so no docx Gate 0 to 3 result and no docx page was reviewed.
+- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF of `OUTPUT-sdd-complaint-knosp.docx`): **BLOCKED**. LibreOffice is not on conda-forge and apt needs root. The Debian trixie LibreOffice 25.2.3 debs, extracted without root into a private prefix, abort at UNO bootstrap (`terminate called after throwing an instance of 'com::sun::star::uno::RuntimeException'`, also for `soffice --version`); the cause was not found. No `.docx.pdf` exists, so no docx Gate 0 to 3 result and no docx page was reviewed.
 - Word: the `.docx` was not opened in Word (not available here), so the "opens without a repair prompt" check is not done. The package parts are well-formed XML (`xmllint`).

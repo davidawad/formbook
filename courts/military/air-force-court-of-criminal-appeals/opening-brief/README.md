@@ -2,11 +2,11 @@
 
 - Court: `afcca`, U.S. Air Force Court of Criminal Appeals (`courts/military/air-force-court-of-criminal-appeals/`)
 - Doc type: `opening-brief`. Brief on behalf of appellant (AFCCA Appendix A; the assignments-of-error brief). One self-contained folder; no shared files.
-- Exemplars: two, from two filer pairs (`exemplars/SOURCE.md`):
-  - `FILED-EXAMPLE-douglas-40324-opening-brief.pdf` (*United States v. Douglas*, ACM 40324 (f rev), filed 26 April 2024, Maj Bruha). Full brief and certificate. Primary: the overlay defaults to it.
-  - `FILED-EXAMPLE-howard-40478-opening-brief.pdf` (*United States v. Howard*, ACM 40478 (f rev), filed 29 September 2024, Maj Blyth). Front matter (cover, TOC, TOA), assignments of error, start of the statement of facts, certificate. The only one of the two with a TOC and TOA.
-- Samples: `samples/INPUT-douglas-opening-brief.md` (full transcription, 13 pages rendered) and `samples/INPUT-howard-opening-brief.md` (excerpt, 7 pages rendered; `excerpt: true`).
-- Status: template built; render, overlay and page review done for both samples (below). Fonts pass, 2026-10-14: the typeface stays EB Garamond (Known gaps, 1); both renders and both overlays re-run; every page re-viewed. The `FILED-EXAMPLE-*.pdf` files named above are not in this snapshot, so the overlays were run against extracts of the page ranges `exemplars/SOURCE.md` cites, fetched from the URLs there and kept outside the repo. Not reviewed by a human. `court.json` and the court root are untouched.
+- Exemplars: two, from two filer pairs (`usage/SOURCE.md`):
+  - `SAMPLE-afcca-opening-brief-douglas40324.pdf` (*United States v. Douglas*, ACM 40324 (f rev), filed 26 April 2024, Maj Bruha). Full brief and certificate. Primary: the overlay defaults to it.
+  - `SAMPLE-afcca-opening-brief-howard40478.pdf` (*United States v. Howard*, ACM 40478 (f rev), filed 29 September 2024, Maj Blyth). Front matter (cover, TOC, TOA), assignments of error, start of the statement of facts, certificate. The only one of the two with a TOC and TOA.
+- Samples: `usage/INPUT-afcca-opening-brief-douglas.md` (full transcription, 13 pages rendered) and `usage/INPUT-afcca-opening-brief-howard.md` (excerpt, 7 pages rendered; `excerpt: true`).
+- Status: template built; render, overlay and page review done for both samples (below). Fonts pass, 2026-10-14: the typeface stays EB Garamond (Known gaps, 1); both renders and both overlays re-run; every page re-viewed. The `SAMPLE-*.pdf` files named above are not in this snapshot, so the overlays were run against extracts of the page ranges `usage/SOURCE.md` cites, fetched from the URLs there and kept outside the repo. Not reviewed by a human. `court.json` and the court root are untouched.
 
 ## Files
 
@@ -14,13 +14,13 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `afcca-brief`. |
 | `typst/afcca-opening-brief.typ` | Template. Parameter block at the top: `doc-kind`, `required-sections`, `roman-sections`, `index-threshold` (30), `page-limit` (50). The other copy (`answering-brief/typst/afcca-answering-brief.typ`) is identical except `doc-kind`. |
-| `samples/INPUT-douglas-opening-brief.md` | Full transcription of the Douglas brief and certificate (markdown contract: frontmatter + body). |
-| `samples/INPUT-howard-opening-brief.md` | Excerpt of the Howard brief: cover with counsel, TOC, TOA, assignments of error, statement of the case, start of the statement of facts, certificate. |
-| `samples/OUTPUT-<id>.pdf` | `sh tools/render.sh courts/military/air-force-court-of-criminal-appeals/opening-brief samples/<id>.md`. The tools' naming: `OUTPUT-`, not `<id>.pdf`. |
-| `samples/OVERLAY-<id>.pdf`, `OVERLAY-<id>.txt` | `sh tools/overlay.sh courts/military/air-force-court-of-criminal-appeals/opening-brief <id> [exemplar.pdf]` (red = ours, blue = filed, black = agree). The tool's naming: `OVERLAY-`, not `<id>-overlay.pdf`. |
-| `exemplars/` | The two filed exemplars and `SOURCE.md`. |
+| `usage/INPUT-afcca-opening-brief-douglas.md` | Full transcription of the Douglas brief and certificate (markdown contract: frontmatter + body). |
+| `usage/INPUT-afcca-opening-brief-howard.md` | Excerpt of the Howard brief: cover with counsel, TOC, TOA, assignments of error, statement of the case, start of the statement of facts, certificate. |
+| `usage/OUTPUT-<id>.pdf` | `sh tools/render.sh courts/military/air-force-court-of-criminal-appeals/opening-brief usage/<id>.md`. The tools' naming: `OUTPUT-`, not `<id>.pdf`. |
+| `usage/OVERLAY-<id>.pdf`, `OVERLAY-<id>.txt` | `sh tools/overlay.sh courts/military/air-force-court-of-criminal-appeals/opening-brief <id> [exemplar.pdf]` (red = ours, blue = filed, black = agree). The tool's naming: `OVERLAY-`, not `<id>-overlay.pdf`. |
+| `usage/` | The two filed exemplars and `SOURCE.md`. |
 
-The Howard overlay is run against its own exemplar (`exemplars/FILED-EXAMPLE-howard-40478-opening-brief.pdf`) because the tool's default is the first file in the folder.
+The Howard overlay is run against its own exemplar (`usage/SAMPLE-afcca-opening-brief-howard40478.pdf`) because the tool's default is the first file in the folder.
 
 ## Governing rules
 
@@ -46,9 +46,9 @@ Two checks are text heuristics: the standard-of-review check is "the body contai
 
 ## Overlay
 
-Pages are paired by word overlap, not by index (the tool's map is in `samples/OVERLAY-<id>.txt`). Pairings are only as good as that measure: a TOC repeats the words of the assignments of error, so it pairs with an AOE page.
+Pages are paired by word overlap, not by index (the tool's map is in `usage/OVERLAY-<id>.txt`). Pairings are only as good as that measure: a TOC repeats the words of the assignments of error, so it pairs with an AOE page.
 
-`samples/OVERLAY-douglas-opening-brief.pdf` (13 pages, against the Douglas exemplar, which is the default): every page pairs with the filed page of the same number.
+`usage/OVERLAY-douglas-opening-brief.pdf` (13 pages, against the Douglas exemplar, which is the default): every page pairs with the filed page of the same number.
 
 - p.1-4 ↔ filed p.1-4 (97-100%): caption, assignments of error, the additional statement of the case.
 - p.5-8 ↔ filed p.5-8 (72-93%): the argument; differences are line breaks and where footnotes fall.
@@ -56,7 +56,7 @@ Pages are paired by word overlap, not by index (the tool's map is in `samples/OV
 - p.12 ↔ filed p.12 (68%): the WHEREFORE and the signature block.
 - p.13 ↔ filed p.13 (94%): the certificate page of the filing, which is `FILED-EXAMPLE` p.13 of the exemplar.
 
-`samples/OVERLAY-howard-opening-brief.pdf` (7 pages, against the Howard exemplar, passed explicitly): p.1 ↔ filed p.1 (cover, 100%); p.2 (our TOC) ↔ filed p.8 (the filed AOE page, 71%: the TOC repeats the AOE words); p.3 (our TOA) ↔ filed p.4 (17%: our TOA lists only the authorities the excerpt cites, the filed TOA is a long list in a different layout); p.4 ↔ filed p.8 (75%: the AOE page); p.5-6 ↔ filed p.9-10 (65%: the statement of the case and facts); p.7 ↔ filed p.12 (97%: the certificate).
+`usage/OVERLAY-howard-opening-brief.pdf` (7 pages, against the Howard exemplar, passed explicitly): p.1 ↔ filed p.1 (cover, 100%); p.2 (our TOC) ↔ filed p.8 (the filed AOE page, 71%: the TOC repeats the AOE words); p.3 (our TOA) ↔ filed p.4 (17%: our TOA lists only the authorities the excerpt cites, the filed TOA is a long list in a different layout); p.4 ↔ filed p.8 (75%: the AOE page); p.5-6 ↔ filed p.9-10 (65%: the statement of the case and facts); p.7 ↔ filed p.12 (97%: the certificate).
 
 Diagnostic only, not a score. Reading the Howard exemplar makes poppler print "xref" warnings (the source has broken cross-reference entries); the renders and the pairings are unaffected.
 

@@ -7,8 +7,8 @@ Engines section of ../README.md), so this file is the Gate 2 record for the docx
 
 ## sample zoetis-rule-12-motion-to-dismiss docx
 
-- pdf: `samples/OUTPUT-zoetis-rule-12-motion-to-dismiss.docx.pdf`, sha256 `6d813f664694e6704c25f84125b50e309cc08cec895262b05ec6e205596b81f8`, 12 pages, letter, EB Garamond embedded
-- docx: `samples/OUTPUT-zoetis-rule-12-motion-to-dismiss.docx`, sha256 `00f7a099179ea52c6dd1cc011ddc5d8e470434454254d073f12a98250e08abad`
+- pdf: `usage/OUTPUT-zoetis-rule-12-motion-to-dismiss.docx.pdf`, sha256 `6d813f664694e6704c25f84125b50e309cc08cec895262b05ec6e205596b81f8`, 12 pages, letter, EB Garamond embedded
+- docx: `usage/OUTPUT-zoetis-rule-12-motion-to-dismiss.docx`, sha256 `00f7a099179ea52c6dd1cc011ddc5d8e470434454254d073f12a98250e08abad`
 - pages reviewed: 12 of 12
 
 | Page | Content | Finding |

@@ -33,10 +33,10 @@ The local rules text was read from the Feb. 2025 PDF on 2026-10-14. The court al
 
 ## Samples and exemplars
 
-- `samples/INPUT-dlp-hronis-complaint.md`: transcription of the DLP Funding complaint (Doc 1, 10 pages) in `exemplars/FILED-EXAMPLE-dlp-hronis-complaint.pdf`. Caption, headings, 33 numbered paragraphs, prayer, signature blocks.
-- `samples/OUTPUT-dlp-hronis-complaint.pdf`: our render. 9 pages, Liberation Serif only (`pdffonts`: LiberationSerif Regular, Italic, Bold embedded), no typst warnings. The pre-change EB Garamond render was also 9 pages, so the substitute did not change the length.
-- `samples/OVERLAY-dlp-hronis-complaint.pdf` and `.txt`: red = ours, blue = filed, black = both. Pages are paired by word overlap; the `.txt` lists the pairs (ours p.1 to p.9 against filed p.1, p.3 to p.10). Page 1 pairs with filed page 1 (67.8%). Later pages pair at 80 to 90% word overlap, and our page 9 (signatures only) pairs with filed p.10 at 46.8%. The overlay is a diagnostic, not a score.
-- `exemplars/FILED-EXAMPLE-kaur-grewal-complaint.pdf` (second filer, 6 pages): checked for convention only. It shares the footer title with the DLP filing (see gaps).
+- `usage/INPUT-caeb-adversary-complaint-dlphroniscomplaint.md`: transcription of the DLP Funding complaint (Doc 1, 10 pages) in `usage/SAMPLE-caeb-adversary-complaint-dlphroniscomplaint.pdf`. Caption, headings, 33 numbered paragraphs, prayer, signature blocks.
+- `usage/OUTPUT-caeb-adversary-complaint-dlphroniscomplaint.typst.pdf`: our render. 9 pages, Liberation Serif only (`pdffonts`: LiberationSerif Regular, Italic, Bold embedded), no typst warnings. The pre-change EB Garamond render was also 9 pages, so the substitute did not change the length.
+- `usage/OVERLAY-dlp-hronis-complaint.pdf` and `.txt`: red = ours, blue = filed, black = both. Pages are paired by word overlap; the `.txt` lists the pairs (ours p.1 to p.9 against filed p.1, p.3 to p.10). Page 1 pairs with filed page 1 (67.8%). Later pages pair at 80 to 90% word overlap, and our page 9 (signatures only) pairs with filed p.10 at 46.8%. The overlay is a diagnostic, not a score.
+- `usage/SAMPLE-caeb-adversary-complaint-kaurgrewalcomplaint.pdf` (second filer, 6 pages): checked for convention only. It shares the footer title with the DLP filing (see gaps).
 
 Every page of the render (9 of 9) was rendered to PNG and viewed. The rows are not recorded in a `reviews/` file because this doc type has no `checks.yaml` yet.
 
@@ -53,9 +53,9 @@ Every page of the render (9 of 9) was rendered to PNG and viewed. The rows are n
 
 ## Engines
 
-**typst** is the primary engine (unchanged). No typst render exists for the sample (`samples/` has no `OUTPUT-dlp-hronis-complaint.pdf`), so the docx below was compared with the template's parameters and the rules, not with a typst page.
+**typst** is the primary engine (unchanged). No typst render exists for the sample (`usage/` has no `OUTPUT-caeb-adversary-complaint-dlphroniscomplaint.typst.pdf`), so the docx below was compared with the template's parameters and the rules, not with a typst page.
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `sh tools/render.sh --engine docx <this folder> samples/INPUT-dlp-hronis-complaint.md` writes `samples/OUTPUT-dlp-hronis-complaint.docx` and `.docx.pdf`. Lua filter: `docx/caeb.lua`.
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `sh tools/render.sh --engine docx <this folder> usage/INPUT-caeb-adversary-complaint-dlphroniscomplaint.md` writes `usage/OUTPUT-caeb-adversary-complaint-dlphroniscomplaint.docx` and `.docx.pdf`. Lua filter: `docx/caeb.lua`.
 
 - Matches typst: Liberation Serif 13 pt; exact 24 pt lines on a 28-line grid; numbers 1 to 28 in a page-anchored text box in the header (not a line-numbering field, so the numbers stay on blank lines too); letter paper; margins 1 in top, 0.667 in bottom, 1.5 in left, 0.75 in right; the pleading rules; caption table with the party box ruled right and bottom; page number bottom center; "Page total" (NUMPAGES) upper left of page 1; page 1 ends at the caption; numbered paragraphs; (a), (b) lists; unnumbered WHEREFORE; headings kept with the next paragraph; signature blocks kept together.
 - Differs: single-spaced lines (counsel, caption, signature) are exact 14 pt, not typst's looser leading, so after a single-spaced block the text can sit between two numbers (visible on page 9). Pleading rules are page borders over the text area, not full-height lines. Lettered items indent slightly differently. Quotations are single spaced at 14 pt.

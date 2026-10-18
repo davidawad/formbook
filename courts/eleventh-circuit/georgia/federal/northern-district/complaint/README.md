@@ -7,10 +7,10 @@ Folder: `courts/eleventh-circuit/georgia/federal/northern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-serveco-4-26-cv-00299-complaint.pdf` (primary, 30 pages, counsel-filed); second filer `exemplars/FILED-EXAMPLE-washington-4-26-cv-00302-complaint.pdf` (22 pages, counsel-filed). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-serveco-complaint.md` (a portion of the Serveco complaint; see Sample below) |
-| render | ok: `samples/OUTPUT-serveco-complaint.pdf`, 13 pages, typst 0.15.0, vendored fonts only (`pdffonts`: LiberationSerif and LiberationSerif-Bold embedded), no typst warnings. sha256 `685b8a7ee217f80058a3bcd9705e7f0684a0c53ae3226e2da4e75642b45604fb`. |
-| overlay | ok: `samples/OVERLAY-serveco-complaint.pdf` and `OVERLAY-serveco-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-gand-complaint-serveco426cv00299.pdf` (primary, 30 pages, counsel-filed); second filer `usage/SAMPLE-gand-complaint-washington426cv00302.pdf` (22 pages, counsel-filed). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-gand-complaint-serveco.md` (a portion of the Serveco complaint; see Sample below) |
+| render | ok: `usage/OUTPUT-gand-complaint-serveco.typst.pdf`, 13 pages, typst 0.15.0, vendored fonts only (`pdffonts`: LiberationSerif and LiberationSerif-Bold embedded), no typst warnings. sha256 `685b8a7ee217f80058a3bcd9705e7f0684a0c53ae3226e2da4e75642b45604fb`. |
+| overlay | ok: `usage/OVERLAY-serveco-complaint.pdf` and `OVERLAY-serveco-complaint.txt` |
 | pages reviewed | 12 of 12, each rendered at 60 dpi and viewed in the final PDF |
 
 File names: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `OVERLAY-<id>.pdf` and `.txt`. The brief's `<id>.pdf` and `<id>-overlay.pdf` names differ from the tools' names; the tools are shared and may not be edited, so the tools' names are used.
@@ -45,7 +45,7 @@ M = mandated by a rule (tier 1). C = convention (tier 2). A = author responsibil
 - Signature: "Dated:" line, `/s/` signer, attorney names with bar numbers, firm, address, telephone, emails, role.
 - No counsel block at the top left: both N.D. Ga. complaint exemplars put counsel's identification in the signature block, which LR 5.1(G) allows.
 
-## Sample (`samples/INPUT-serveco-complaint.md`)
+## Sample (`usage/INPUT-gand-complaint-serveco.md`)
 
 A transcription of the Serveco complaint (exemplar pp. 1–8, 24–25, 28–30): caption, the lead-in, Nature of the Action (¶¶ 1–7), The Parties (¶¶ 8–10), Jurisdiction and Venue (¶¶ 11–22, with footnote 1), Factual Background A and B (¶¶ 23–30), Count III (¶¶ 87–93), Prayer for Relief (items A–I), Demand for Jury Trial, and the signature block. Paragraphs 31–86, Counts I, II and IV, and the exemplar's footnotes other than footnote 1 are not transcribed. The template numbers the sample's paragraphs from 1, so its numbers differ from the filed numbers (the filed Count III starts at ¶ 87; the sample's at ¶ 31).
 
@@ -87,7 +87,7 @@ Rows are per the final PDF (sha256 above). The tier-2 comparison is against one 
 
 ### docx (`docx/`)
 
-Files: `docx/reference.docx` (built once by `docx/make-reference.sh` from pandoc's default reference, so the styles are reproducible) and `docx/gand-complaint.lua` (the filter: the cover, the caption table, the numbered allegations, the lettered prayer items, the signature block). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-serveco-complaint.md` writes `samples/OUTPUT-serveco-complaint.docx` and, when LibreOffice is available, `OUTPUT-serveco-complaint.docx.pdf`.
+Files: `docx/reference.docx` (built once by `docx/make-reference.sh` from pandoc's default reference, so the styles are reproducible) and `docx/gand-complaint.lua` (the filter: the cover, the caption table, the numbered allegations, the lettered prayer items, the signature block). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-gand-complaint-serveco.md` writes `usage/OUTPUT-gand-complaint-serveco.docx` and, when LibreOffice is available, `OUTPUT-gand-complaint-serveco.docx.pdf`.
 
 **Checked so far:** the `.docx` builds with pandoc 3.12.1, every part is well-formed XML (`render-docx.sh` checks this), every paragraph style it uses exists in the reference, and the section carries US Letter with 1 in margins and the PAGE footer. The text reads back in the same order as the markdown (`pandoc -f docx -t plain`). **No page of the `.docx` has been rendered or looked at**, so no visual claim is made for it.
 

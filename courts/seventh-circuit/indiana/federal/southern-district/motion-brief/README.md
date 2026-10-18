@@ -1,14 +1,14 @@
 # insd: motion-brief
 
 Doc type: **brief in support of a Rule 12 motion** (a motion to dismiss with its memorandum, or a partial motion with a Rule 12(e) request) in the United States District Court for the Southern District of Indiana (`insd`).
-Folder: `courts/seventh-circuit/indiana/federal/southern-district/motion-brief/` (self-contained; the court-root `typst/` and `samples/` are not touched).
+Folder: `courts/seventh-circuit/indiana/federal/southern-district/motion-brief/` (self-contained; the court-root `typst/` and `usage/` are not touched).
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 2 filers: `exemplars/FILED-EXAMPLE-uindy-1-26-cv-01669-motion-brief.pdf` (primary, used for the overlay; IU's partial motion and Rule 12(e) brief) and `exemplars/FILED-EXAMPLE-midwest-renewable-1-26-cv-00632-motion-brief.pdf` (second filer, state commissioners' motion to dismiss memorandum). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-uindy-motion-brief.md` (the whole brief: introduction, discussion A to C, conclusion, signature). Footnote 1 is not transcribed. |
-| render | ok: `samples/OUTPUT-uindy-motion-brief.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-uindy-motion-brief.pdf` and `OVERLAY-uindy-motion-brief.txt` (run as `sh tools/overlay.sh <this-dir> uindy-motion-brief <exemplar>`) |
+| exemplar | yes, 2 filers: `usage/SAMPLE-insd-motion-brief-uindy126cv01669.pdf` (primary, used for the overlay; IU's partial motion and Rule 12(e) brief) and `usage/SAMPLE-insd-motion-brief-midwestrenewable126cv00632.pdf` (second filer, state commissioners' motion to dismiss memorandum). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-insd-motion-brief-uindy.md` (the whole brief: introduction, discussion A to C, conclusion, signature). Footnote 1 is not transcribed. |
+| render | ok: `usage/OUTPUT-insd-motion-brief-uindy.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-uindy-motion-brief.pdf` and `OVERLAY-uindy-motion-brief.txt` (run as `sh tools/overlay.sh <this-dir> uindy-motion-brief <exemplar>`) |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed after the last template change) |
 
 ## Governing rules
@@ -54,7 +54,7 @@ As for the complaint (`../complaint/README.md`), with these differences: `number
 9. **Gates not run.** As for the complaint: `tools/check.sh` expects a court folder with `court.json` and `rules.md`.
 10. **File names.** As for the complaint: `INPUT-`, `OUTPUT-`, `OVERLAY-` names, as the shared tools use.
 
-## Review of the rendered pages (OUTPUT-uindy-motion-brief.pdf)
+## Review of the rendered pages (OUTPUT-insd-motion-brief-uindy.typst.pdf)
 
 - Page 1: court title on three lines; caption; title centered; INTRODUCTION heading; the opening paragraphs. Pass.
 - Page 2: the third and fourth paragraphs of the introduction; the "Separately" paragraph; the DISCUSSION heading moved to page 3 (no heading at the foot of a page). Pass.
@@ -72,5 +72,5 @@ Typst is the primary engine. The DOCX engine (`docx/`: `build-reference.sh`, `re
 - **Matches the typst form (by construction, not by page review):** EB Garamond 12 pt body; exact 24 pt (double) line pitch with one line between paragraphs; 0.5 in first-line indent on every body paragraph (paragraphs are not numbered); 1 in margins on letter paper; centered bold headings (Heading 1) and left bold headings (Heading 3); single-spaced block quotes indented 0.5 in on both sides; single-spaced caption, court lines, title and signature block (signature indented 3.25 in); centered PAGE footer from page 1.
 - **Differs or unverified:** footnotes are 10 pt single spaced (L.R. 5-1(b)); the typst template has no footnote handling and the sample has none. The lettered conclusion items "(a)" to "(d)" are plain paragraphs, as in typst. The caption table's cell borders are off (none); the caption lines keep their leading spaces as written in the frontmatter. The signature block is kept together with keep-with-next, which approximates `breakable: false`.
 - **Fonts:** EB Garamond is not installed by the build; the machine that opens the file must have it (vendored in `fonts/`).
-- **BLOCKED:** `samples/OUTPUT-uindy-motion-brief.docx.pdf` is not produced (LibreOffice `soffice` is not installed on this box, so `tools/render-docx.sh` stops at the conversion step after writing and validating the `.docx`). No page has been rendered or reviewed for the docx engine (0 pages). The cover and caption table borders are not verified against the typst layout. Gate 0 and 1 for docx are not run.
-- **Build:** `sh docx/build-reference.sh docx/reference.docx`, then `sh tools/render.sh --engine docx <this-dir> samples/INPUT-uindy-motion-brief.md`.
+- **BLOCKED:** `usage/OUTPUT-uindy-motion-brief.docx.pdf` is not produced (LibreOffice `soffice` is not installed on this box, so `tools/render-docx.sh` stops at the conversion step after writing and validating the `.docx`). No page has been rendered or reviewed for the docx engine (0 pages). The cover and caption table borders are not verified against the typst layout. Gate 0 and 1 for docx are not run.
+- **Build:** `sh docx/build-reference.sh docx/reference.docx`, then `sh tools/render.sh --engine docx <this-dir> usage/INPUT-insd-motion-brief-uindy.md`.

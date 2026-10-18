@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # check-selftest.sh: does the checker actually catch defects? Mutation test for tools/check.sh.
 #
 # Usage: tools/check-selftest.sh <court-dir>
@@ -10,7 +10,9 @@
 #
 # Content mutants change the markdown that is rendered (but not the markdown the checks compare against).
 # Layout mutants change the template in a scratch copy of the court folder.
-set -u
+# Strict mode. pipefail only where the shell has it (bash, macOS sh); Debian's dash lacks it.
+# shellcheck shell=sh disable=SC3040
+set -e -u; (set -o pipefail) 2> /dev/null && set -o pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 COURT=$(cd "${1:?usage: tools/check-selftest.sh <court-dir>}" && pwd)
 ALIAS=$(jq -r .alias "$COURT/court.json")
@@ -24,8 +26,8 @@ fails=0
 fresh_copy() { # a clean scratch court folder: $1 = name
   d="$SCRATCH/$1"
   mkdir -p "$d"
-  cp -R "$COURT/typst" "$COURT/samples" "$COURT/checks.yaml" "$COURT/court.json" "$d/"
-  mkdir -p "$d/reviews" "$d/exemplars"
+  cp -R "$COURT/typst" "$COURT/usage" "$COURT/checks.yaml" "$COURT/court.json" "$d/"
+  mkdir -p "$d/reviews"
   echo "$d"
 }
 
@@ -56,10 +58,12 @@ mutant() {
       return
     }
   fi
-  out=$(sh "$ROOT/tools/check.sh" "$d" --no-render --only "$SAMPLE" 2>&1)
+  out=$(sh "$ROOT/tools/check.sh" "$d" --no-render --only "$SAMPLE" 2>&1) || true # a mutant is meant to fail the checker
   missed=""
   for id in $want; do
-    printf '%s\n' "$out" | grep -q "^  FAIL  $id " || missed="$missed $id"
+    grep -q "^  FAIL  $id " << EOF || missed="$missed $id"
+$out
+EOF
   done
   if [ -z "$missed" ]; then
     echo "caught   $name  (failed: $want)"
@@ -82,7 +86,7 @@ mutant single-spaced "CA9-FORM-003" layout 's/^#let body-leading = 0.94em/#let b
 mutant small-type "CA9-FORM-004" layout 's/^#let type-size = 14pt/#let type-size = 12pt/'
 mutant narrow-margins "CA9-FORM-002" layout 's/^#let page-margin = 1in/#let page-margin = 0.8in/'
 mutant left-aligned-headings "CA9-FORM-009" layout 's/align(center, text(size: 1.15em, strong(upper(it.body))))/align(left, text(size: 1.15em, strong(upper(it.body))))/'
-mutant wrong-font "CA9-FORM-007" layout 's/^#let font-family = "EB Garamond"/#let font-family = "DejaVu Sans Mono"/'
+mutant wrong-font "CA9-FORM-007" layout 's/^#let font-family = ("Times New Roman", "Liberation Serif")/#let font-family = "DejaVu Sans Mono"/'
 mutant footnotes-small "CA9-FORM-004" layout 's/set text(size: type-size)   \/\/ typst/set text(size: 11pt)   \/\/ typst/'
 mutant no-footnote-size "CA9-FORM-004" layout 's/^    set text(size: type-size).*$//'
 mutant wrong-word-count "CA9-CERT-002" layout 's/This brief contains #group-digits(words) words/This brief contains #group-digits(words + 7) words/'

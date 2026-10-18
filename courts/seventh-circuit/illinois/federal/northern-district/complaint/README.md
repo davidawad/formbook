@@ -5,10 +5,10 @@ Folder: `courts/seventh-circuit/illinois/federal/northern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-union-tank-car-1-26-cv-10014-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-union-tank-car-complaint.md`: caption, numbered paragraphs 1 to 40 with Count I, prayer, jury demand, signature. Counts II to IX and the rest of the case list in paragraph 19 are not transcribed (see Known gaps). |
-| render | ok: `samples/OUTPUT-union-tank-car-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-union-tank-car-complaint.pdf` and `OVERLAY-union-tank-car-complaint.txt` (page map) |
+| exemplar | yes: `usage/SAMPLE-ilnd-complaint-uniontankcar126cv10014.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ilnd-complaint-uniontankcar.md`: caption, numbered paragraphs 1 to 40 with Count I, prayer, jury demand, signature. Counts II to IX and the rest of the case list in paragraph 19 are not transcribed (see Known gaps). |
+| render | ok: `usage/OUTPUT-ilnd-complaint-uniontankcar.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-union-tank-car-complaint.pdf` and `OVERLAY-union-tank-car-complaint.txt` (page map) |
 | typeface | face required: none (N.D. Ill. LR 5.2(e) names no typeface; checked against the consolidated rules text, 2026-10-15). Vendored substitute: not needed; stays **EB Garamond** (the court-named-face rule in `docs/FONTS.md` does not apply). Metric compatibility: n/a. |
 | pages reviewed | 11 of 11 (re-rendered 2026-10-15 and every page rendered at 60 dpi and viewed) |
 
@@ -16,8 +16,8 @@ Build (from the repo root, with the toolchain on `PATH`):
 
 ```sh
 D=courts/seventh-circuit/illinois/federal/northern-district/complaint
-sh tools/render.sh $D samples/INPUT-union-tank-car-complaint.md     # -> samples/OUTPUT-union-tank-car-complaint.pdf
-sh tools/overlay.sh $D union-tank-car-complaint               # -> samples/OVERLAY-union-tank-car-complaint.{pdf,txt}
+sh tools/render.sh $D usage/INPUT-ilnd-complaint-uniontankcar.md     # -> usage/OUTPUT-ilnd-complaint-uniontankcar.typst.pdf
+sh tools/overlay.sh $D union-tank-car-complaint               # -> usage/OVERLAY-union-tank-car-complaint.{pdf,txt}
 ```
 
 File names follow the tools, not the brief: `tools/render.sh` writes `OUTPUT-<id>.pdf` for a sample named `<id>.md`, and `tools/overlay.sh` writes `OVERLAY-<id>.pdf` and `.txt`. The brief's `<id>.pdf` and `<id>-overlay.pdf` names would not be found by the tools.
@@ -85,9 +85,9 @@ Primary sources, fetched 2026-10-14.
 
 ## Engines
 
-**docx** (`docx/build-reference.sh` builds `docx/reference.docx`; `docx/ilnd.lua` is the filter; `samples/OUTPUT-union-tank-car-complaint.docx` is the output of `tools/render.sh --engine docx`).
+**docx** (`docx/build-reference.sh` builds `docx/reference.docx`; `docx/ilnd.lua` is the filter; `usage/OUTPUT-ilnd-complaint-uniontankcar.docx` is the output of `tools/render.sh --engine docx`).
 
 - Matches the typst form: EB Garamond 12 pt body; exact 27.6 pt (double) body lines; first-line indent 0.5 in, justified; headings single-spaced with one double line above and below and kept with the next paragraph; front matter and signature lines single (13.8 pt); footnotes 11 pt single; US Letter with 1 in margins; the page number centered in the footer on every page (numbering from 1, as the typst template).
 - Numbered paragraphs 1, 2, ... and prayer items (a), (b), ... are typed text, not Word list numbering.
 - Differs or unverified: the caption box (a table with a rule on its right and bottom) and the signature block (a borderless table) are not checked against the typst layout; the numbers and letters use the default tab stops, not the template's 0.25 in gap; the last body paragraph is kept with the signature block by keep-with-next only.
-- BLOCKED: `OUTPUT-union-tank-car-complaint.docx.pdf` is not produced because `soffice` is not installed on this box, so `tools/check.sh --engine docx` (Gates 0 to 3 on the .docx.pdf) cannot run. No page has been rendered or reviewed for the docx engine (pages reviewed: 0). The check that the .docx opens in Word and LibreOffice without a repair prompt is not done. What was verified: the .docx is a valid zip and every XML part is well formed; the text reads back in the right order (pandoc readback).
+- BLOCKED: `OUTPUT-ilnd-complaint-uniontankcar.docx.pdf` is not produced because `soffice` is not installed on this box, so `tools/check.sh --engine docx` (Gates 0 to 3 on the .docx.pdf) cannot run. No page has been rendered or reviewed for the docx engine (pages reviewed: 0). The check that the .docx opens in Word and LibreOffice without a repair prompt is not done. What was verified: the .docx is a valid zip and every XML part is well formed; the text reads back in the right order (pandoc readback).

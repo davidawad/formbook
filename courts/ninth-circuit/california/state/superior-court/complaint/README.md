@@ -65,7 +65,7 @@ From the repo root:
 
 ```sh
 export PATH=/work/artifacts/bin:$PATH   # only if typst, poppler and magick are not installed system-wide
-sh tools/render.sh courts/ninth-circuit/california/state/superior-court/complaint samples/INPUT-sweetwater-complaint.md
+sh tools/render.sh courts/ninth-circuit/california/state/superior-court/complaint usage/INPUT-calsuperct-complaint-sweetwater.md
 sh tools/overlay.sh courts/ninth-circuit/california/state/superior-court/complaint sweetwater-complaint
 ```
 
@@ -73,9 +73,9 @@ The render fails on any typst warning. The font is the vendored `Liberation Seri
 
 ## Samples and exemplar
 
-- `samples/INPUT-sweetwater-complaint.md`: transcribed from the exemplar: caption, first page, the introduction (paragraphs 1-3), the first and second causes of action (paragraphs 75-80, abridged), the prayer (items 1-12) and the signature. Paragraphs 4-74 and the rest of the causes of action are not transcribed. Footnote 10 of the exemplar is transcribed as a footnote.
-- `samples/OUTPUT-sweetwater-complaint.pdf`: the render, 5 pages.
-- `samples/OVERLAY-sweetwater-complaint.pdf` and `-overlay.txt`: the red/blue overlay against `exemplars/FILED-EXAMPLE-people-v-sweetwater-care-25CU033612N-complaint.pdf`. The page map from `overlay.sh`:
+- `usage/INPUT-calsuperct-complaint-sweetwater.md`: transcribed from the exemplar: caption, first page, the introduction (paragraphs 1-3), the first and second causes of action (paragraphs 75-80, abridged), the prayer (items 1-12) and the signature. Paragraphs 4-74 and the rest of the causes of action are not transcribed. Footnote 10 of the exemplar is transcribed as a footnote.
+- `usage/OUTPUT-calsuperct-complaint-sweetwater.typst.pdf`: the render, 5 pages.
+- `usage/OVERLAY-sweetwater-complaint.pdf` and `-overlay.txt`: the red/blue overlay against `usage/SAMPLE-calsuperct-complaint-peoplevsweetwatercare25cu033612n.pdf`. The page map from `overlay.sh`:
 
   ```
   ours p.1  filed p.1   word-overlap 72.1%
@@ -85,9 +85,9 @@ The render fails on any typst warning. The font is the vendored `Liberation Seri
   ours p.5  filed p.39  word-overlap 65.4%
   ```
 
-  The map is a text-similarity pairing, not a score. Pages 3-5 pair with the exemplar's later pages because the sample is an excerpt. The overlay is a diagnostic (tier 3). The exemplar PDF is not stored in the repo (`exemplars/` holds `SOURCE.md` only); this overlay was run against a copy fetched from the URL in `exemplars/SOURCE.md` on 2026-10-15, kept outside the repo.
+  The map is a text-similarity pairing, not a score. Pages 3-5 pair with the exemplar's later pages because the sample is an excerpt. The overlay is a diagnostic (tier 3). The exemplar PDF is not stored in the repo (`usage/` holds `SOURCE.md` only); this overlay was run against a copy fetched from the URL in `usage/SOURCE.md` on 2026-10-15, kept outside the repo.
 
-- Exemplar and sources: `exemplars/SOURCE.md`.
+- Exemplar and sources: `usage/SOURCE.md`.
 
 ## Gate 2: page review (sample `sweetwater-complaint`, 5 pages, `pdftoppm -r 70`, Liberation Serif)
 
@@ -121,7 +121,7 @@ Every page passes. CRC 2.111 is met on every page.
 
 ### docx (built, not rendered here)
 
-Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once) and the Lua filter `docx/calsuperct.lua`. `tools/render.sh --engine docx` writes `samples/OUTPUT-<id>.docx`; the LibreOffice PDF step is BLOCKED on this box (see below).
+Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once) and the Lua filter `docx/calsuperct.lua`. `tools/render.sh --engine docx` writes `usage/OUTPUT-<id>.docx`; the LibreOffice PDF step is BLOCKED on this box (see below).
 
 What the docx sets (in `styles.xml`, `sectPr`, `footer1.xml`, or the filter). Set in styles.xml/sectPr, not rendered:
 

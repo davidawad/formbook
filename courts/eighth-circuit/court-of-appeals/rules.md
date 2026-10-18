@@ -9,7 +9,7 @@ Alias `ca8`. Scope: opening, answering, and reply briefs filed in the United Sta
 | CA8-LR | Eighth Circuit Rules of Appellate Procedure | https://www.ca8.uscourts.gov/sites/ca8/files/Eighth%20Circuit%20Local%20Rules%206.17.24.pdf | Revised June 17, 2024; current copy linked from https://www.ca8.uscourts.gov/rules-procedures |
 | FRAP | Federal Rules of Appellate Procedure | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-appellate-procedure | Current rules page checked 2026-10-17; see Rules 25, 26.1, 28, 30, 32 |
 | POINTERS | Clerk's Pointers on Preparing Briefs | https://www.ca8.uscourts.gov/sites/ca8/files/Pointers%20on%20Preparing%20Briefs.pdf | Current court publication linked from https://www.ca8.uscourts.gov/rules-procedures; dated April 7, 2025 in the doc-type READMEs |
-| EXEMPLARS | Public filed briefs in each `exemplars/` directory under the three brief folders | Local files; source URLs and SHA-256 values are in each folder's `exemplars/SOURCE.md` | Retrieved 2026-10-14 to 2026-10-17; visual convention only |
+| EXEMPLARS | Public filed briefs in each `usage/` directory under the three brief folders | Local files; source URLs and SHA-256 values are in each folder's `usage/SOURCE.md` | Retrieved 2026-10-14 to 2026-10-17; visual convention only |
 
 Kinds: **M** = required by rule; **C** = convention where rules leave a choice; **T** = repository contract; **A** = filer responsibility. When a local rule adds to FRAP, the local rule controls within this circuit.
 
@@ -42,7 +42,7 @@ Kinds: **M** = required by rule; **C** = convention where rules leave a choice; 
 | CA8-CONT-005 | For each issue, the statement of issues identifies up to four most apposite cases and the apposite constitutional and statutory provisions. | 8th Cir. R. 28A(i)(2), CA8-LR p. 21, verified 2026-10-17 | M |
 | CA8-CONT-006 | Record citations use the circuit format, including `R. Doc. 12, at 3` and, where applicable, `App. 25`. | 8th Cir. R. 28A(j), CA8-LR p. 21, verified 2026-10-17 | M |
 | CA8-CONT-007 | The appellant's addendum is filed with the brief; the electronic addendum is a separate document. | 8th Cir. R. 28A(g)(1)-(5), CA8-LR pp. 19-20, verified 2026-10-17 | M |
-| CA8-CONT-008 | The top-level heading hierarchy, page numbering, contents style, and certificate placement follow common practice in the opening-brief exemplars; no additional arrangement is asserted as mandatory. | `opening-brief/exemplars/SOURCE.md`, retrieved 2026-10-14 and 2026-10-17 | C |
+| CA8-CONT-008 | The top-level heading hierarchy, page numbering, contents style, and certificate placement follow common practice in the opening-brief exemplars; no additional arrangement is asserted as mandatory. | `opening-brief/usage/SOURCE.md`, retrieved 2026-10-14 and 2026-10-17 | C |
 
 ## Answering brief (appellee)
 
@@ -51,7 +51,7 @@ Kinds: **M** = required by rule; **C** = convention where rules leave a choice; 
 | CA8-CONT-009 | The appellee's brief includes the parts listed in FRAP 28(a)(1)-(8) and (10), except the jurisdictional statement, issues, case statement, and standard of review are omitted unless the appellee is dissatisfied with the appellant's treatment. | FRAP 28(b)(1)-(4), Rule 28(b), verified 2026-10-17 | M |
 | CA8-CONT-010 | An appellee may file an addendum of no more than 15 pages as a separate electronic document. | 8th Cir. R. 28A(g)(3), (5), CA8-LR pp. 19-20, verified 2026-10-17 | M (if filed) |
 | CA8-CONT-011 | Cover color for paper copies is red. Electronic PDF cover remains plain white. | FRAP 32(a)(2), Rule 32(a)(2), verified 2026-10-17 | M (paper copies) |
-| CA8-CONT-012 | Heading levels, TOC/TOA grouping, and certificate placement follow the answering-brief exemplars where not fixed by a rule. | `answering-brief/exemplars/SOURCE.md`, retrieved 2026-10-14 and 2026-10-17 | C |
+| CA8-CONT-012 | Heading levels, TOC/TOA grouping, and certificate placement follow the answering-brief exemplars where not fixed by a rule. | `answering-brief/usage/SOURCE.md`, retrieved 2026-10-14 and 2026-10-17 | C |
 
 ## Reply brief (appellant or petitioner)
 
@@ -60,7 +60,7 @@ Kinds: **M** = required by rule; **C** = convention where rules leave a choice; 
 | CA8-CONT-013 | Reply is limited to responding to the appellee's arguments. | FRAP 28(c), Rule 28(c), verified 2026-10-17 | M |
 | CA8-LEN-003 | Reply brief type volume does not exceed half the principal brief's applicable limit (6,500 words or 650 lines when the principal limit is 13,000 words or 1,300 lines). | FRAP 32(a)(7)(B)(ii), Rule 32(a)(7)(B)(ii); 8th Cir. R. 28A(i), verified 2026-10-17 | M |
 | CA8-CONT-014 | Cover color for paper copies is gray. Electronic PDF cover remains plain white. | FRAP 32(a)(2), Rule 32(a)(2), verified 2026-10-17 | M (paper copies) |
-| CA8-CONT-015 | TOC/TOA conventions, heading hierarchy, and placement of signature and certificates follow the reply-brief exemplars where not fixed by a rule. | `reply-brief/exemplars/SOURCE.md`, retrieved 2026-10-14 | C |
+| CA8-CONT-015 | TOC/TOA conventions, heading hierarchy, and placement of signature and certificates follow the reply-brief exemplars where not fixed by a rule. | `reply-brief/usage/SOURCE.md`, retrieved 2026-10-14 | C |
 
 ## Author responsibilities
 

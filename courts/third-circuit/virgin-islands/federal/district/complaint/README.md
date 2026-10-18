@@ -4,11 +4,11 @@ Doc type: **complaint** in the District Court of the Virgin Islands (`vid`, Divi
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-henry-3-26-cv-00038-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-henry-complaint.md` (a partial transcription: see Known gaps 6) |
+| exemplar | yes: `usage/SAMPLE-vid-complaint-henry326cv00038.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-vid-complaint-henry.md` (a partial transcription: see Known gaps 6) |
 | typeface | none required by the rules (VI-FONT-001): EB Garamond kept, no substitute needed |
-| render | ok: `samples/OUTPUT-henry-complaint.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh` treats any warning as failure) |
-| overlay | ok: `samples/OVERLAY-henry-complaint.pdf` and `OVERLAY-henry-complaint.txt` |
+| render | ok: `usage/OUTPUT-vid-complaint-henry.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh` treats any warning as failure) |
+| overlay | ok: `usage/OVERLAY-henry-complaint.pdf` and `OVERLAY-henry-complaint.txt` |
 | pages reviewed | 12 of 12 (each page rendered at 70 dpi and viewed; see the review record below) |
 
 ## Governing rules
@@ -47,7 +47,7 @@ Not produced by this template (separate filings): the civil cover sheet, the sum
 
 ## Overlay
 
-`samples/OVERLAY-henry-complaint.pdf` and `.txt` are the red/blue test: red is our render, blue is the filed exemplar, black is both agreeing. The pairing is by word overlap, not by index, and the page map is in the `.txt`. Pairs: ours p.1 ↔ filed p.1 (59.8%), p.2 ↔ p.2 (51.3%), p.3 ↔ p.4, p.4 ↔ p.9, p.5 ↔ p.11, p.6 ↔ p.13, p.7 ↔ p.15, p.8 ↔ p.16, p.9 ↔ p.17, p.10 ↔ p.18, p.11 ↔ p.19, p.12 ↔ p.20. Pages 3 to 11 pair with later filed pages because the sample omits filed paragraphs (Known gaps 6). The overlay is a diagnostic, not a score: the exemplar is on Times in a fuller form, and the render uses EB Garamond, so the text lines will not coincide.
+`usage/OVERLAY-henry-complaint.pdf` and `.txt` are the red/blue test: red is our render, blue is the filed exemplar, black is both agreeing. The pairing is by word overlap, not by index, and the page map is in the `.txt`. Pairs: ours p.1 ↔ filed p.1 (59.8%), p.2 ↔ p.2 (51.3%), p.3 ↔ p.4, p.4 ↔ p.9, p.5 ↔ p.11, p.6 ↔ p.13, p.7 ↔ p.15, p.8 ↔ p.16, p.9 ↔ p.17, p.10 ↔ p.18, p.11 ↔ p.19, p.12 ↔ p.20. Pages 3 to 11 pair with later filed pages because the sample omits filed paragraphs (Known gaps 6). The overlay is a diagnostic, not a score: the exemplar is on Times in a fuller form, and the render uses EB Garamond, so the text lines will not coincide.
 
 ## Known gaps and open choices
 
@@ -90,7 +90,7 @@ Defects found during the review and fixed: (a) a numbered paragraph overlapped t
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form.
-- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/vid.lua`; output `samples/OUTPUT-henry-complaint.docx`): pandoc on a per-court reference.docx, with the caption, title, numbered paragraphs and signature built by the filter from the frontmatter. It matches the typst template in: EB Garamond 12 pt; exact 24 pt (double) line spacing; 1 in margins on letter paper; 0.5 in first-line indent; centered PAGE number in the footer; the court name and division, centered; the caption (parties left, closed by a rule on the right and bottom; `Civil Action No.` at right, blank when `case_number` is empty); the centered bold title; Heading 1 (centered bold), Heading 2 (bold), Heading 3 (bold italic); block quotations single spaced, indented 0.5 in each side; the prayer list kept with the signature block; the signature block as a two-column table that does not split across pages.
+- **docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/vid.lua`; output `usage/OUTPUT-vid-complaint-henry.docx`): pandoc on a per-court reference.docx, with the caption, title, numbered paragraphs and signature built by the filter from the frontmatter. It matches the typst template in: EB Garamond 12 pt; exact 24 pt (double) line spacing; 1 in margins on letter paper; 0.5 in first-line indent; centered PAGE number in the footer; the court name and division, centered; the caption (parties left, closed by a rule on the right and bottom; `Civil Action No.` at right, blank when `case_number` is empty); the centered bold title; Heading 1 (centered bold), Heading 2 (bold), Heading 3 (bold italic); block quotations single spaced, indented 0.5 in each side; the prayer list kept with the signature block; the signature block as a two-column table that does not split across pages.
 - docx differences (pandoc and Word limits): paragraph numbers are text written by the filter, not Word automatic numbering, so Word will not renumber a paragraph inserted by hand. The typst template has no footnote path; a footnote in a docx would be 10 pt, single spaced. Keep-with-next on the prayer items approximates the typst sticky list; page breaks (including the short page 11 of the typst render) are not guaranteed to match. Caption rules and table row heights differ between Word and LibreOffice. No TOC or TOA in this doc type.
 - Not verified: pagination and appearance. The docx was checked only as a zip whose entries all read and whose XML parts are well formed (`ziptool`, `xmllint`). It has not been opened in Word or LibreOffice, and no `.docx.pdf` was rendered (LibreOffice is not installed on the build box).
-- **BLOCKED** (all checks measured on `samples/OUTPUT-henry-complaint.docx.pdf`): no checks file is readable (this folder and the court folder have no `checks.yaml` or `rules.md`), so the gate check IDs cannot be listed. The rule IDs the template traces to are VI-FORM-001, VI-FORM-002, VI-FONT-001, VI-CONT-001, VI-CONT-002, FRCP-10(a), FRCP-10(b) and FRCP-8(a). Reason for each: LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked.
+- **BLOCKED** (all checks measured on `usage/OUTPUT-henry-complaint.docx.pdf`): no checks file is readable (this folder and the court folder have no `checks.yaml` or `rules.md`), so the gate check IDs cannot be listed. The rule IDs the template traces to are VI-FORM-001, VI-FORM-002, VI-FONT-001, VI-CONT-001, VI-CONT-002, FRCP-10(a), FRCP-10(b) and FRCP-8(a). Reason for each: LibreOffice cannot run in the build box, so the .docx.pdf cannot be produced or checked.

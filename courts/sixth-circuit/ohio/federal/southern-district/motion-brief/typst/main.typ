@@ -1,9 +1,9 @@
 // Entry point. Compile with the court folder as --root; tools/render.sh does it:
 //   typst compile --root <court-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=samples/NAME.md \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
 //     typst/main.typ out.pdf
 #import "ohsd-motion-brief.typ": ohsd-motion-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-sharp-motion-to-dismiss.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ohsd-motion-brief-sharpmotiontodismiss.md"))
 #let (meta, body) = split-frontmatter(src)
 #ohsd-motion-brief(meta, body)

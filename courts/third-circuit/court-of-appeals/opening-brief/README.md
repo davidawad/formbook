@@ -1,6 +1,6 @@
 # Court of Appeals for the Third Circuit: opening brief of an appellant
 
-Doc type `opening-brief` for court `ca3`. Self-contained: exemplar, sample, template and rules live here. Court-root `typst/` and `samples/` (none for ca3 yet) are not touched.
+Doc type `opening-brief` for court `ca3`. Self-contained: exemplar, sample, template and rules live here. Court-root `typst/` and `usage/` (none for ca3 yet) are not touched.
 
 Status: exemplar=yes, sample=yes (one), typst render=ok, overlay=ok. latex built (see Engines); docx written, its PDF checks BLOCKED (no LibreOffice).
 
@@ -9,15 +9,15 @@ Status: exemplar=yes, sample=yes (one), typst render=ok, overlay=ok. latex built
 From the repo root, with typst 0.15.0 on PATH (`render.sh` runs typst with `--ignore-system-fonts`, the vendored fonts only, and treats any warning as failure):
 
 ```sh
-sh tools/render.sh courts/third-circuit/court-of-appeals/opening-brief samples/INPUT-tresslar-opening-brief.md   # -> samples/OUTPUT-tresslar-opening-brief.pdf
+sh tools/render.sh courts/third-circuit/court-of-appeals/opening-brief usage/INPUT-ca3-opening-brief-tresslar.md   # -> usage/OUTPUT-ca3-opening-brief-tresslar.typst.pdf
 sh tools/overlay.sh courts/third-circuit/court-of-appeals/opening-brief tresslar-opening-brief            # -> -overlay.pdf and -overlay.txt
 ```
 
-Layout: `exemplars/` (one filed brief and `SOURCE.md`), `samples/` (markdown, rendered PDF, overlay), `typst/main.typ` (entry point, reads `--input sample=`), `typst/ca3-opening-brief.typ` (the template: `ca3-opening-brief(meta, md)`). The template has no case-specific text; every number is a named parameter at the top or traces to a rule.
+Layout: `usage/` (one filed brief and `SOURCE.md`), `usage/` (markdown, rendered PDF, overlay), `typst/main.typ` (entry point, reads `--input sample=`), `typst/ca3-opening-brief.typ` (the template: `ca3-opening-brief(meta, md)`). The template has no case-specific text; every number is a named parameter at the top or traces to a rule.
 
 ## Exemplar
 
-`exemplars/FILED-EXAMPLE-tresslar-26-1367-opening-brief.pdf`, Brief of Appellant (Lisa Tresslar, No. 26-1367, 3d Cir., filed 2026-07-27, The Gold Law Firm, P.C.). Source, search, and the second filer consulted (*Gaia Gardens*, No. 26-2749) are in `exemplars/SOURCE.md`.
+`usage/SAMPLE-ca3-opening-brief-tresslar261367.pdf`, Brief of Appellant (Lisa Tresslar, No. 26-1367, 3d Cir., filed 2026-07-27, The Gold Law Firm, P.C.). Source, search, and the second filer consulted (*Gaia Gardens*, No. 26-2749) are in `usage/SOURCE.md`.
 
 Searches: CourtListener RECAP search (`/api/rest/v4/search/`, court=ca3, type=r, "opening brief"), which returned several appellant briefs; two were downloaded and checked for a text layer and a complete brief structure. The Tresslar filing was chosen for its complete section order and the fact that it is one filer, not a combined brief with a long addendum.
 
@@ -81,7 +81,7 @@ A sample is one `.md` file: a YAML frontmatter block followed by the body. The t
 
 Body: `# Heading` is a section. Required: `# Statement of the Case`, a heading containing `Standard of Review`, `# Argument`, `# Conclusion`. Sub-headings are numbered automatically: do not type "A." or "I." in a heading (the sample had this error and the TOC showed "A. A."). Citations link to the registry as `[*Flora v. County of Luzerne*, 776 F.3d 169 (3d Cir. 2015)](toa:flora)`. Footnotes use `[^key]`. Block quotations use `>`.
 
-## Overlay (`samples/OVERLAY-tresslar-opening-brief.pdf`)
+## Overlay (`usage/OVERLAY-tresslar-opening-brief.pdf`)
 
 Red = our render, blue = the filed exemplar, black = both (`tools/overlay.sh`, pages paired by word overlap).
 
@@ -89,7 +89,7 @@ What it shows, and what it does not. Cover and front matter line up well: page 1
 
 ## Review (Gate 2 record)
 
-Every page of `samples/OUTPUT-tresslar-opening-brief.pdf` (18 pages, PDF page numbers below; printed folios are 1-10 for PDF pages 5-14 and i-iv for PDF pages 2-4) was rendered to PNG at 60 dpi and looked at in the first pass. Findings and what was done:
+Every page of `usage/OUTPUT-ca3-opening-brief-tresslar.typst.pdf` (18 pages, PDF page numbers below; printed folios are 1-10 for PDF pages 5-14 and i-iv for PDF pages 2-4) was rendered to PNG at 60 dpi and looked at in the first pass. Findings and what was done:
 
 | PDF page | Finding | Action |
 |---|---|---|
@@ -118,11 +118,11 @@ Word count in the compliance certificate (2,155 in the 2026-10-16 render; 2,157 
 
 - **typst** (`typst/`): primary, unchanged.
 - **latex** (`latex/template.tex`, `latex/ca3.lua`; built by `tools/render-latex.sh` with tectonic, two passes): 14 pt EB Garamond from the vendored `fonts/`, double spaced, 1 inch margins, roman front matter and arabic body, one-page cover, table of contents and table of authorities read from the previous pass, each certificate on its own page. Differs from typst: 17 pages against typst's 18 (line breaks and keep-with-next rules differ); the certificate of compliance names LaTeX where typst names Typst (`prepared_with` is not set in the sample); the heading layout is checked by eye on a contact sheet, not by Gate 2. Tier 1 is not signed off for this engine.
-- **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`): writes `samples/OUTPUT-<id>.docx`. `docx.pdf` checks are **BLOCKED**: LibreOffice (`soffice`) has no conda-forge package and is not installed on this box. Items the docx does not yet provide (not checked, not claimed): table of contents page numbers (a TOC field, not updated); table of authorities page numbers (names and citations only); footer page numbers and the roman/arabic sections; the cover's exact placement; first-line indents on body paragraphs; centered point headings (the opening brief has none).
+- **docx** (`docx/reference.docx` from `docx/make-reference.sh`, `docx/ca3.lua`): writes `usage/OUTPUT-<id>.docx`. `docx.pdf` checks are **BLOCKED**: LibreOffice (`soffice`) has no conda-forge package and is not installed on this box. Items the docx does not yet provide (not checked, not claimed): table of contents page numbers (a TOC field, not updated); table of authorities page numbers (names and citations only); footer page numbers and the roman/arabic sections; the cover's exact placement; first-line indents on body paragraphs; centered point headings (the opening brief has none).
 
 ## Verification pass 2026-10-16 (fb-595.26.3)
 
-- Rendered: `sh tools/render.sh ... samples/INPUT-tresslar-opening-brief.md`, exit 0, no typst warnings, 18 pages (the same count as the first pass). Overlay rerun: `samples/OVERLAY-tresslar-opening-brief.pdf`, 18 pages; pairs and percentages unchanged (cover 93.8%, TOC 60.2%, certificates 58.6-97.2%, body 30-55%). TOA page 2 (our p. 4, one entry) pairs at 4.3%.
+- Rendered: `sh tools/render.sh ... usage/INPUT-ca3-opening-brief-tresslar.md`, exit 0, no typst warnings, 18 pages (the same count as the first pass). Overlay rerun: `usage/OVERLAY-tresslar-opening-brief.pdf`, 18 pages; pairs and percentages unchanged (cover 93.8%, TOC 60.2%, certificates 58.6-97.2%, body 30-55%). TOA page 2 (our p. 4, one entry) pairs at 4.3%.
 - Viewed: all 18 pages of the OUTPUT at 60 dpi, the 18 overlay pages at 40 dpi (as one contact sheet), and the exemplar's page 1 against our cover (same order of elements; the exemplar is Times New Roman and puts counsel at the left margin, tier 3).
 - Checked: footnote 1 (p. 11) is set at 14 pt (word boxes as tall as the body text); the cover fits page 1; TOC page numbers match the body headings; no heading is left at the foot of a page.
 - Defect fixed: the TOC page number was a content-sized box after a `1fr` leader, so a title that ran to the margin would still push the number onto its own line (latent; not visible in this sample). TOC rows are now a two-column grid (title and leader, then the page number), as in the reply-brief template. After the fix only PDF page 2 changed (every other page is pixel-identical to the pre-fix render); page 2 was viewed again.

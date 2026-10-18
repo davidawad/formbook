@@ -2,8 +2,8 @@
 
 - Court: `bap9` (United States Bankruptcy Appellate Panel of the Ninth Circuit), folder `courts/ninth-circuit/bankruptcy-appellate-panel/opening-brief/`
 - Template: `typst/bap9-opening-brief.typ` (entry `typst/main.typ`)
-- Exemplar: `exemplars/FILED-EXAMPLE-meridian-SC-16-1227-opening-brief.pdf` (see `exemplars/SOURCE.md`)
-- Sample: `samples/INPUT-meridian-opening-brief.md`, a transcription of the exemplar, rendered to `samples/OUTPUT-meridian-opening-brief.pdf`; overlay `samples/OVERLAY-meridian-opening-brief.pdf` and `.txt`
+- Exemplar: `usage/SAMPLE-bap9-opening-brief-meridiansc161227.pdf` (see `usage/SOURCE.md`)
+- Sample: `usage/INPUT-bap9-opening-brief-meridian.md`, a transcription of the exemplar, rendered to `usage/OUTPUT-bap9-opening-brief-meridian.typst.pdf`; overlay `usage/OVERLAY-meridian-opening-brief.pdf` and `.txt`
 - Status of this doc type:
   - **Exemplar found.** `County of Imperial Treasurer-Tax Collector v. Stadtmueller (In re RW Meridian LLC)`, BAP No. SC-16-1227, appellant's opening brief dated and filed October 7, 2016. It is a scan (200 ppi JBIG2 images) with an invisible OCR text layer, not a born-digital PDF; the overlay pairs pages by that OCR text, and the OCR has errors (see the sample's header comment).
   - The sample is a transcription (cover, tables, a substantial run of body, signature, certificates). It is abridged: 14 rendered pages, the filer's 41-page brief is not transcribed in full. Omitted: the Argument after § A.1 (sub-parts 2-9), footnotes 2-3, the Summary's paragraph on the sale date, the Procedural History's June 2016 supplemental-briefing and hearing sentences, and the service list.
@@ -36,7 +36,7 @@ Secondary fetch: https://www.law.cornell.edu/rules/frbp/rule_8015 (fetched 2026-
 
 Goal: a real filed appellant's opening brief from this court, public, with text.
 
-Found: `exemplars/FILED-EXAMPLE-meridian-SC-16-1227-opening-brief.pdf`, from https://www.cacttc.org/assets/documents/3%20-%20meridian%20appellants%20bap%20brief.pdf (the California Association of County Treasurers and Tax Collectors' copy). Details and caveats are in `exemplars/SOURCE.md`.
+Found: `usage/SAMPLE-bap9-opening-brief-meridiansc161227.pdf`, from https://www.cacttc.org/assets/documents/3%20-%20meridian%20appellants%20bap%20brief.pdf (the California Association of County Treasurers and Tax Collectors' copy). Details and caveats are in `usage/SOURCE.md`.
 
 Searches that did not find a brief of this type from the BAP (the same searches are recorded for the other two types):
 
@@ -68,17 +68,17 @@ Built from BAP-FORM-001 to -003 and BAP-COVER-001. Parameters at the top of the 
 - Required headings: the build fails if a required section has none of its titles as a level-1 heading.
 - Word limit: the build fails above 13,000 words (body only).
 
-## Sample (`samples/INPUT-meridian-opening-brief.md`)
+## Sample (`usage/INPUT-bap9-opening-brief-meridian.md`)
 
 A transcription of the exemplar, not a fictional sample. The filer's headings and wording are kept; OCR errors were corrected against the page images (the cover, the first body page and page 8 were checked by eye). Frontmatter carries the caption, counsel, the eleven interested parties, the authorities, and `related_cases: none`, as filed. Authorities are cited with `toa:` links, so the table of authorities is generated from the body. Body: about 1,780 words (the template's count: 1,782 in the compliance certificate).
 
 The compliance certificate reports the transcription's word count (1,782). The filer's certificate states 10,462 for the whole brief; that figure is not reproduced because the sample is abridged.
 
-File naming: the sample is `INPUT-meridian-opening-brief.md`; the fictional sample it replaces is removed. The id is the case short name and the doc type, following the tools' `INPUT-`/`OUTPUT-`/`OVERLAY-` convention.
+File naming: the sample is `INPUT-bap9-opening-brief-meridian.md`; the fictional sample it replaces is removed. The id is the case short name and the doc type, following the tools' `INPUT-`/`OUTPUT-`/`OVERLAY-` convention.
 
 ## Overlay
 
-`sh tools/overlay.sh courts/ninth-circuit/bankruptcy-appellate-panel/opening-brief meridian-opening-brief` exits 0 and writes `samples/OVERLAY-meridian-opening-brief.pdf` (14 pages) and `.txt` (the page map).
+`sh tools/overlay.sh courts/ninth-circuit/bankruptcy-appellate-panel/opening-brief meridian-opening-brief` exits 0 and writes `usage/OVERLAY-meridian-opening-brief.pdf` (14 pages) and `.txt` (the page map).
 
 Page map (ours → filed PDF page, word overlap): 1→1 (70%), 2→2 (40%), 3→5 (26%), 4→7 (63%), 5→3 (48%), 6→8 (51%), 7→9 (37%), 8→9 (44%), 9→11 (41%), 10→13 (34%), 11→14 (35%), 12→36 (29%), 13→37 (61%), 14→40 (45%). Low overlap on the TOC and TOA is expected (their page numbers and layout differ from the filed body). The pairing is by shared words, so pages 8→9 and 12→36 are the body's nearest matches, not a page-for-page claim.
 
@@ -109,7 +109,7 @@ Pages: 14 PDF pages: cover (p1), table of contents (p2), table of authorities (p
 
 ## Engines
 
-docx (`docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/bap9.lua` builds the cover, front matter, signature and certificates from the frontmatter; output `samples/OUTPUT-<id>.docx`).
+docx (`docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/bap9.lua` builds the cover, front matter, signature and certificates from the frontmatter; output `usage/OUTPUT-<id>.docx`).
 
 - Matches the typst form: US Letter with 1 in margins; EB Garamond 14 pt (font name declared; it must be installed where the file is opened); double spacing as exact 36.5 pt lines, the typst 1.3em gap between paragraphs, 0.5 in first-line indent; single-spaced headings, quotations, footnotes, table entries, signature and certificates; centered bold level-1 headings, bold left level-2 and level-3 headings with hanging indent. Three sections: cover with no footer, front matter in lower roman from i, body and certificates in arabic from 1. The filter applies the same word limit and required-heading checks as the typst template and passes the body word count to the compliance certificate (the opening and reply counts, 1,782 and 344, match the figures recorded in those READMEs).
 - Differs from the typst form: (1) the table of contents is a TOC field whose cached result lists the headings without page numbers; Word or LibreOffice shows page numbers after a field update. (2) The table of authorities lists the cited authorities without page numbers in every viewer (LibreOffice does not honor TA/TOA fields), so it has no dot leaders. (3) Line breaks and page breaks follow Word or LibreOffice, not the typst render. (4) The last body paragraph is kept with the signature block (KeepWithNext); certificates are not forced onto one page.

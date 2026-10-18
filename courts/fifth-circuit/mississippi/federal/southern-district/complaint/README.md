@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/mississippi/federal/southern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-mariano-1-25-cv-00363-complaint.pdf` (plaintiff's counsel; see `exemplars/SOURCE.md`). A second filer is saved too: `exemplars/FILED-EXAMPLE-myers-1-26-cv-00266-complaint.pdf` (19 pp., not transcribed). |
-| sample md | `samples/INPUT-mariano-complaint.md`: the whole filing transcribed (10 pages, paragraphs 1 to 56, the prayer, the jury demand and the signature block). |
-| render | ok: `samples/OUTPUT-mariano-complaint.pdf`, 10 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
-| overlay | ok: `samples/OVERLAY-mariano-complaint.pdf` and `samples/OVERLAY-mariano-complaint.txt` (`tools/overlay.sh`). |
+| exemplar | yes: `usage/SAMPLE-mssd-complaint-mariano125cv00363.pdf` (plaintiff's counsel; see `usage/SOURCE.md`). A second filer is saved too: `usage/SAMPLE-mssd-complaint-myers126cv00266.pdf` (19 pp., not transcribed). |
+| sample md | `usage/INPUT-mssd-complaint-mariano.md`: the whole filing transcribed (10 pages, paragraphs 1 to 56, the prayer, the jury demand and the signature block). |
+| render | ok: `usage/OUTPUT-mssd-complaint-mariano.typst.pdf`, 10 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only, no typst warnings. |
+| overlay | ok: `usage/OVERLAY-mariano-complaint.pdf` and `usage/OVERLAY-mariano-complaint.txt` (`tools/overlay.sh`). |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; see the review below). |
 
 The file names follow the tools' conventions (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default and the brief bars editing `tools/`.
@@ -59,7 +59,7 @@ Sources, fetched 2026-10-14:
 5. **Paragraph numbers.** The sample transcribes every numbered paragraph of the exemplar in order (1 to 56), so the template's numbers match the filed numbers. A partial sample would not match.
 6. **Length.** The local rules set no page limit for a complaint; the template does not check one.
 7. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, which a doc-type folder does not have, and the brief bars editing `tools/`. The checks in this README were done by hand: render (no warnings), overlay, the page review below, and two mutant tests (below).
-8. **Second exemplar.** `FILED-EXAMPLE-myers-1-26-cv-00266-complaint.pdf` is saved for a tier-2 comparison but is not transcribed or compared in the overlay (the overlay uses the first exemplar in `exemplars/`, Mariano).
+8. **Second exemplar.** `SAMPLE-mssd-complaint-myers126cv00266.pdf` is saved for a tier-2 comparison but is not transcribed or compared in the overlay (the overlay uses the first exemplar in `usage/`, Mariano).
 9. **Italics.** The complaint has no case names. The template renders `*...*` as italic if a sample needs it.
 10. **Mutant test** (run by hand, failed as it should): the sample with its `fax:` line removed fails with "signature.fax is required (L.U.Civ.R. 11(a))". The 35-page check is in the memorandum template only (see the motion-brief README).
 
@@ -80,7 +80,7 @@ Overlay: the overlay pairs each page of our render with the exemplar page sharin
 
 ## Engines
 
-- **docx** (`docx/reference.docx`, built by `docx/build-reference.sh`; filter `docx/mssd-complaint.lua`). Samples: `samples/OUTPUT-mariano-complaint.docx` and `.docx.pdf` (10 pages, the same as typst). Checked by hand: the LibreOffice PDF was viewed page by page (10 of 10) against the typst render (10 of 10). Opened with LibreOffice only: the conversion succeeds and the parts are well-formed XML; Word was not available and was not checked.
+- **docx** (`docx/reference.docx`, built by `docx/build-reference.sh`; filter `docx/mssd-complaint.lua`). Samples: `usage/OUTPUT-mssd-complaint-mariano.docx` and `.docx.pdf` (10 pages, the same as typst). Checked by hand: the LibreOffice PDF was viewed page by page (10 of 10) against the typst render (10 of 10). Opened with LibreOffice only: the conversion succeeds and the parts are well-formed XML; Word was not available and was not checked.
 - Matches typst: EB Garamond 13 pt (embedded in the PDF, no other face), US Letter, 1 in margins, exact 27.6 pt double spacing (the typst pitch is 27.56 pt), 0.5 in first-line indent, single-spaced court title, caption, headings and signature block (exact 11.7 pt, the typst pitch), the caption table with "CIVIL ACTION NO." on the right, centered bold caps section headings, centered bold count headings, the page number centered in the footer, lettered lists a., b., ... with a hanging indent, the signature block at 3 in.
 - Differs, and why: (1) Paragraph numbers 1 to 56 and list letters are typed text followed by a tab to a style tab stop. pandoc drops the numbering part of a reference.docx, so Word auto-numbering is not available; inserting a paragraph does not renumber the ones after it. (2) Pagination: LibreOffice puts exact-spacing leading above the text, so a page holds 23 double-spaced lines where typst holds 24. The page count matches here (10), but page breaks fall elsewhere; Word may differ again.
 - BLOCKED: none.

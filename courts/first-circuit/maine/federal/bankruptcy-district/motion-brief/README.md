@@ -4,10 +4,10 @@ Doc type: **motion with incorporated memorandum** (a contested-matter motion und
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-mattson-24-20188-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-mattson-motion-brief.md`: a portion of the 38-page filing (caption, introduction, facts ¶¶ 1–46, Section F, Sections IV and V, WHEREFORE, signature, certificate). Pages 10 to 33 of the filing are not transcribed; footnotes are not transcribed. |
-| render | ok: `samples/OUTPUT-mattson-motion-brief.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-mattson-motion-brief.pdf` and `.txt` (page map below) |
+| exemplar | yes: `usage/SAMPLE-meb-motion-brief-mattson2420188.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-meb-motion-brief-mattson.md`: a portion of the 38-page filing (caption, introduction, facts ¶¶ 1–46, Section F, Sections IV and V, WHEREFORE, signature, certificate). Pages 10 to 33 of the filing are not transcribed; footnotes are not transcribed. |
+| render | ok: `usage/OUTPUT-meb-motion-brief-mattson.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-mattson-motion-brief.pdf` and `.txt` (page map below) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; pages 1–2 and 9–10 after their last fix) |
 
 File names: the tools read and write `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt`, so the sample uses those names (not `<id>.md` and `<id>-overlay.pdf` as the brief's layout listed). `<id>` is `mattson-motion-brief`.
@@ -47,7 +47,7 @@ Also referenced by the sample, not enforced by the template: D. Me. LBR 9013-4(a
 
 ## What the overlay shows
 
-`samples/OVERLAY-mattson-motion-brief.pdf`: red is our render, blue is the filed exemplar, black is agreement. The page map (`.txt`):
+`usage/OVERLAY-mattson-motion-brief.pdf`: red is our render, blue is the filed exemplar, black is agreement. The page map (`.txt`):
 
 ```
 ours p.1   filed p.1   word-overlap 93.6%
@@ -97,12 +97,12 @@ Defects found and fixed during review: (1) paragraphs in the opening block drawn
 
 ## Engines
 
-Typst is the primary engine. This section covers the docx engine (`docx/`): pandoc 3.6.4 with `docx/reference.docx` (the page setup and styles; rebuild with `sh docx/make-reference.sh docx`) and the Lua filter `docx/meb-motion-brief.lua` (the cover, caption, numbered paragraphs, relief, signature and certificate of service). Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-mattson-motion-brief.md`.
+Typst is the primary engine. This section covers the docx engine (`docx/`): pandoc 3.6.4 with `docx/reference.docx` (the page setup and styles; rebuild with `sh docx/make-reference.sh docx`) and the Lua filter `docx/meb-motion-brief.lua` (the cover, caption, numbered paragraphs, relief, signature and certificate of service). Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-meb-motion-brief-mattson.md`.
 
 | Output | Result |
 |---|---|
-| `samples/OUTPUT-mattson-motion-brief.docx` | written; zip and well-formed XML parts pass the `render-docx.sh` integrity check |
-| `samples/OUTPUT-mattson-motion-brief.docx.pdf` | **not produced**: LibreOffice does not start in the build environment (see BLOCKED below) |
+| `usage/OUTPUT-meb-motion-brief-mattson.docx` | written; zip and well-formed XML parts pass the `render-docx.sh` integrity check |
+| `usage/OUTPUT-mattson-motion-brief.docx.pdf` | **not produced**: LibreOffice does not start in the build environment (see BLOCKED below) |
 | pages reviewed in the docx PDF | 0 of 11 (there is no PDF to render; the typst pages are the reference) |
 
 **What matches typst** (the same values, set in the reference styles): US Letter with 1 in margins; EB Garamond 12 pt; body lines exactly 24 pt (double spacing); first-line indent 0.5 in; paragraphs numbered 1 to 56 as typed text with a tab (as the typst template does); a list lettered (a), (b) with a hanging indent; the caption as a table with the right and bottom rules of the typst box; the "Relief Requested Without a Hearing" legend when the sample sets it; the title in capitals; level-1 headings centred and kept as typed; the WHEREFORE paragraph and the signature block kept together; the certificate of service on its own page with its service list; the footer "- n -" from a PAGE field.
@@ -115,7 +115,7 @@ Typst is the primary engine. This section covers the docx engine (`docx/`): pand
 - The docx names "EB Garamond" and does not embed it. The font must be installed on the machine that opens the file, or Word substitutes silently.
 - Footnotes are not transcribed in the sample; footnote text inherits 12 pt single spacing from Normal, not checked.
 
-**docx BLOCKED items** (the docx checks run on `samples/OUTPUT-mattson-motion-brief.docx.pdf`):
+**docx BLOCKED items** (the docx checks run on `usage/OUTPUT-mattson-motion-brief.docx.pdf`):
 
 - `BLOCKED: Gate 0 and Gate 1 (tools/check.sh --engine docx)`: no `.docx.pdf` exists, so the page count, the font names and the content gates cannot run. Cause: LibreOffice 25.2 (Debian trixie packages, unpacked without root) stops at bootstrap with a `DeploymentException`, even for `soffice --version`.
 - `BLOCKED: Gate 2 (page review of the docx PDF)`: no pages reviewed, for the same reason.

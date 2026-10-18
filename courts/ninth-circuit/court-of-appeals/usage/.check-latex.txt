@@ -1,0 +1,3 @@
+PASS
+dc781e8fe9d67ed5e97aa2af0eee28b7111b169f35c71ec77f66aca9f80f2778  usage/OUTPUT-ca9-genericopeningbrief.latex.pdf
+25bafae7c263080fdb3bd97c1c8b20780eda43c7b1312d08d3a7eb3cc29075e0  usage/OUTPUT-ca9-sweetopeningbrief.latex.pdf

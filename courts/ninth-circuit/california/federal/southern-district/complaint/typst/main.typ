@@ -1,9 +1,9 @@
 // Entry point. Compile with the court folder as --root; tools/render.sh does it:
 //   typst compile --root <court-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=samples/NAME.md \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
 //     typst/main.typ out.pdf
 #import "casd-complaint.typ": casd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-bachman-complaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-casd-complaint-bachman.md"))
 #let (meta, body) = split-frontmatter(src)
 #casd-complaint(meta, body)

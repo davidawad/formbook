@@ -2,18 +2,18 @@
 
 Doc type `patent-owner-response` of court `ptab`. Self-contained folder, like `../petition/`.
 
-**Status: rendered and overlaid against one filed exemplar; tier 2 NOT finished (one filer only).** The tier-1 form (font, margins, spacing, length, certificates) is built from the rules and checked by eye on all 13 rendered pages. The tier-2 comparison needs a second filer's response and none was found (see `exemplars/SOURCE.md`, search record). Until then this doc type is not a pass on tier 2.
+**Status: rendered and overlaid against one filed exemplar; tier 2 NOT finished (one filer only).** The tier-1 form (font, margins, spacing, length, certificates) is built from the rules and checked by eye on all 13 rendered pages. The tier-2 comparison needs a second filer's response and none was found (see `usage/SOURCE.md`, search record). Until then this doc type is not a pass on tier 2.
 
 ```sh
-sh tools/render.sh courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response samples/INPUT-juniper-ipr.md   # -> samples/OUTPUT-juniper-ipr.pdf
-sh tools/overlay.sh courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response juniper-ipr                    # -> samples/OVERLAY-juniper-ipr.pdf and .txt
+sh tools/render.sh courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response usage/INPUT-ptab-patent-owner-response-juniperipr.md   # -> usage/OUTPUT-ptab-patent-owner-response-juniperipr.typst.pdf
+sh tools/overlay.sh courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response juniper-ipr                    # -> usage/OVERLAY-juniper-ipr.pdf and .txt
 ```
 
 | Item | Status |
 |---|---|
 | exemplar | yes: one filed response, Swarm Technology (patent owner), IPR2021-01445. Second filer: not found. |
-| render | ok: `samples/OUTPUT-juniper-ipr.pdf`, 13 pages, Liberation Serif embedded, no typst warnings |
-| overlay | ok: `samples/OVERLAY-juniper-ipr.pdf` and `.txt`, against the Swarm exemplar (passed explicitly) |
+| render | ok: `usage/OUTPUT-ptab-patent-owner-response-juniperipr.typst.pdf`, 13 pages, Liberation Serif embedded, no typst warnings |
+| overlay | ok: `usage/OVERLAY-juniper-ipr.pdf` and `.txt`, against the Swarm exemplar (passed explicitly) |
 | pages reviewed | 13 (every page of the render viewed as PNG at 70 dpi) |
 | typeface | face required: Times New Roman, 14-pt (§ 42.6(a)(2)(ii)) → vendored substitute: `Liberation Serif` (`fonts/liberation-serif`, metric-compatible, per `docs/FONTS.md`) → embedded: LiberationSerif only (`pdffonts`) |
 
@@ -21,9 +21,9 @@ sh tools/overlay.sh courts/federal-circuit/patent-trial-and-appeal-board/patent-
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-juniper-swarm-IPR2021-01445-patent-owner-response.pdf` | Filed response, Swarm Technology v. Juniper Networks (IPR2021-01445). 65 pages. Used for the sample and the overlay. |
-| `exemplars/SOURCE.md` | URL, case, filer, date, fetch date, and the search record (including the second-filer search that found nothing). |
-| `samples/INPUT-juniper-ipr.md` | Markdown transcription, verbatim from the exemplar: caption, introduction, the ’004 patent overview with footnotes, prosecution history, claim construction, level of skill, the Hall-Ellis section, conclusion, signature, and the word-count and service certificates. About 2,300 words of body. Not the whole response (see Gaps). |
+| `usage/SAMPLE-ptab-patent-owner-response-juniperswarmipr202101445.pdf` | Filed response, Swarm Technology v. Juniper Networks (IPR2021-01445). 65 pages. Used for the sample and the overlay. |
+| `usage/SOURCE.md` | URL, case, filer, date, fetch date, and the search record (including the second-filer search that found nothing). |
+| `usage/INPUT-ptab-patent-owner-response-juniperipr.md` | Markdown transcription, verbatim from the exemplar: caption, introduction, the ’004 patent overview with footnotes, prosecution history, claim construction, level of skill, the Hall-Ellis section, conclusion, signature, and the word-count and service certificates. About 2,300 words of body. Not the whole response (see Gaps). |
 | `typst/main.typ` | Entry point; reads the sample and its YAML frontmatter. |
 | `typst/ptab-patent-owner-response.typ` | Template: `patent-owner-response(meta, body)`. The petition template with the response wording and the response word-limit citation. Every number traces to a rule (`PTAB-POR-…` IDs below). |
 
@@ -57,7 +57,7 @@ Same as the petition (`../petition/README.md`, "Markdown contract"): YAML frontm
 
 ## Review (Gate 2 equivalent, recorded)
 
-Rendered `samples/OUTPUT-juniper-ipr.pdf` (13 pages) and viewed every page as PNG (70 dpi): cover (p.1), contents (i), body pages 1–9, word-count certificate, certificate of service. Checked: page size, margins, double spacing, block paragraph indents, heading styles and numbering, footnotes at 14 pt, running header, signature block placement, the conclusion kept with its signature block. No layout defect found in tier 1.
+Rendered `usage/OUTPUT-ptab-patent-owner-response-juniperipr.typst.pdf` (13 pages) and viewed every page as PNG (70 dpi): cover (p.1), contents (i), body pages 1–9, word-count certificate, certificate of service. Checked: page size, margins, double spacing, block paragraph indents, heading styles and numbering, footnotes at 14 pt, running header, signature block placement, the conclusion kept with its signature block. No layout defect found in tier 1.
 
 Tier-2 findings, compared against the Swarm exemplar only (one filer, so none can be called a convention; all are OPEN, not judged):
 
@@ -70,14 +70,14 @@ Tier-2 findings, compared against the Swarm exemplar only (one filer, so none ca
 
 ## Overlay
 
-`samples/OVERLAY-juniper-ipr.pdf` prints our render in red over the Swarm exemplar in blue (black where both agree). Pages are paired by shared words; the pairing is in `samples/OVERLAY-juniper-ipr.txt`. Our cover (p.1) pairs with filed p.1 and our contents (p.2) with filed p.2. Our body pages 1–7 (render pp.3–9) pair with filed pp.6–13; render p.3 pairs at 100% word overlap. Render pp.10–13 (the conclusion, word-count certificate and service certificate) pair with filed pp.63–65. The filed response's argument sections (its sections V through IX, filed pp.18–57) are not in the sample, so the overlay has no pairing for them. The overlay is a diagnostic, not a score.
+`usage/OVERLAY-juniper-ipr.pdf` prints our render in red over the Swarm exemplar in blue (black where both agree). Pages are paired by shared words; the pairing is in `usage/OVERLAY-juniper-ipr.txt`. Our cover (p.1) pairs with filed p.1 and our contents (p.2) with filed p.2. Our body pages 1–7 (render pp.3–9) pair with filed pp.6–13; render p.3 pairs at 100% word overlap. Render pp.10–13 (the conclusion, word-count certificate and service certificate) pair with filed pp.63–65. The filed response's argument sections (its sections V through IX, filed pp.18–57) are not in the sample, so the overlay has no pairing for them. The overlay is a diagnostic, not a score.
 
 ## Gaps
 
 1. **Font**: the rule names Times New Roman, which is not vendored. The template uses Liberation Serif (`fonts/liberation-serif`, OFL, metric-compatible with Times New Roman) as the vendored stand-in, following the repo's rule for Times-named forms. Embedded names read LiberationSerif, not TimesNewRoman. Pagination matches Times New Roman's metrics, but this is not the named face; the PDF is not claimed to be TNR.
 2. **Word count** is author-supplied (kind A). The frontmatter carries 11,176, which is the **exemplar's certified count**, not a count of the transcribed excerpt. The template only checks the number is at most 14,000.
 3. **Transcription is partial**: the sample covers the introduction through the conclusion, omitting the ’004 figure, most of the argument sections (V through VIII), and the exhibit list. The exemplar runs 65 pages. Gate 0 (every word of the sample in the PDF) is not built.
-4. **Tier 2 cannot be finished**: one filer. CLAUDE.md and EVAL-LOOP require two or three filers. The second-filer search is recorded in `exemplars/SOURCE.md`.
+4. **Tier 2 cannot be finished**: one filer. CLAUDE.md and EVAL-LOOP require two or three filers. The second-filer search is recorded in `usage/SOURCE.md`.
 5. **No mechanical checks**: no `checks.yaml` or `tools/check.sh` run for this folder. Gate 1 is not built.
 6. **Latex engine**: not in this brief's scope. The docx engine is in the Engines section below.
 7. **Source provenance**: the exemplar is the copy republished on ptablitigationblog.com, not the PTAB E2E record.
@@ -87,10 +87,10 @@ Tier-2 findings, compared against the Swarm exemplar only (one filer, so none ca
 | Engine | Folder | State |
 |---|---|---|
 | typst (primary) | `typst/` | rendered and reviewed (above) |
-| docx | `docx/` | `.docx` built (`samples/OUTPUT-juniper-ipr.docx`); `.docx.pdf` BLOCKED; no page reviewed |
+| docx | `docx/` | `.docx` built (`usage/OUTPUT-ptab-patent-owner-response-juniperipr.docx`); `.docx.pdf` BLOCKED; no page reviewed |
 | latex | none | not in this brief |
 
-Build: `sh docx/make-reference.sh docx/reference.docx` rebuilds the reference (committed). `sh tools/render.sh --engine docx courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response samples/INPUT-juniper-ipr.md` writes the `.docx`; its LibreOffice step needs `soffice`.
+Build: `sh docx/make-reference.sh docx/reference.docx` rebuilds the reference (committed). `sh tools/render.sh --engine docx courts/federal-circuit/patent-trial-and-appeal-board/patent-owner-response usage/INPUT-ptab-patent-owner-response-juniperipr.md` writes the `.docx`; its LibreOffice step needs `soffice`.
 
 What matches typst (set in the XML; no rendered page has been seen yet):
 
@@ -111,7 +111,7 @@ What differs from typst:
 
 docx BLOCKED (list these in the PR):
 
-- Gates 0 to 3 on `samples/OUTPUT-juniper-ipr.docx.pdf`: BLOCKED. The build box has no LibreOffice (`libreoffice` is not on conda-forge, and `soffice` is not installed). So there is no PDF, no stamp and no page review.
+- Gates 0 to 3 on `usage/OUTPUT-juniper-ipr.docx.pdf`: BLOCKED. The build box has no LibreOffice (`libreoffice` is not on conda-forge, and `soffice` is not installed). So there is no PDF, no stamp and no page review.
 - Contents page numbers: BLOCKED. LibreOffice does not update TOC fields, so a PDF check cannot pass the contents until a renderer fills them.
 - Header and page-number placement on each body page: unverified (needs the PDF).
 - Opens in Word and LibreOffice without a repair prompt: not checked. Every XML part is well-formed (`xmllint`) and pandoc reads the file back, which is necessary, not sufficient (docs/DOCX.md).

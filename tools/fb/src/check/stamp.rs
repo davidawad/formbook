@@ -1,4 +1,4 @@
-//! Hashes, the engine stamp (samples/.check-<engine>.txt) and the template anchor lookup.
+//! Hashes, the engine stamp (usage/.check-<engine>.txt) and the template anchor lookup.
 use sha2::{Digest, Sha256};
 use std::path::Path;
 
@@ -91,13 +91,13 @@ mod tests {
     #[test]
     fn stamp_order() {
         let shas = vec![
-            "bb  samples/OUTPUT-sweet.pdf".to_string(),
-            "aa  samples/OUTPUT-generic.pdf".to_string(),
-            "cc  samples/OUTPUT-generic.docx".to_string(),
+            "bb  usage/OUTPUT-ca9-sweet.typst.pdf".to_string(),
+            "aa  usage/OUTPUT-ca9-generic.typst.pdf".to_string(),
+            "cc  usage/OUTPUT-ca9-generic.docx".to_string(),
         ];
         assert_eq!(
             stamp_text(&shas),
-            "PASS\ncc  samples/OUTPUT-generic.docx\naa  samples/OUTPUT-generic.pdf\nbb  samples/OUTPUT-sweet.pdf\n"
+            "PASS\ncc  usage/OUTPUT-ca9-generic.docx\naa  usage/OUTPUT-ca9-generic.typst.pdf\nbb  usage/OUTPUT-ca9-sweet.typst.pdf\n"
         );
         assert_eq!(key2("  ab  cd"), "  cd");
         assert_eq!(key2("ab"), "");

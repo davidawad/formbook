@@ -5,10 +5,10 @@ Folder: `courts/first-circuit/new-hampshire/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-nicholas-1-26-cv-00879-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-nicholas-complaint.md`: the whole 14-page complaint, transcribed from the text layer |
-| render | ok: `samples/OUTPUT-nicholas-complaint.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-nicholas-complaint.pdf` and `OVERLAY-nicholas-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-nhd-complaint-nicholas126cv00879.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nhd-complaint-nicholas.md`: the whole 14-page complaint, transcribed from the text layer |
+| render | ok: `usage/OUTPUT-nhd-complaint-nicholas.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-nicholas-complaint.pdf` and `OVERLAY-nicholas-complaint.txt` |
 | typeface | Rule names no face (LR 5.1(a): "a proportionately spaced font ... no less than twelve (12) point"; no typeface named in the section). Vendored substitute: none needed. Kept **EB Garamond** (`fonts/eb-garamond/`). Not metric-compatible with the filing's Times New Roman; not chased (tier 3). |
 | pages reviewed | 14 of 14 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and re-viewed 2026-10-14 with no template change) |
 
@@ -63,7 +63,7 @@ Not produced (separate filings): the civil cover sheet (LR 3.1(b)); the summons 
 11. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape, and the brief forbids editing `tools/`. The render and overlay were run; the page review below is the Gate 2 equivalent for this doc type.
 12. **File names.** The samples are `INPUT-<id>.md` (not `<id>.md`) and the outputs are `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`, because `tools/render.sh` and `tools/overlay.sh` write these names and the brief forbids editing `tools/`.
 
-## Review of the rendered pages (`OUTPUT-nicholas-complaint.pdf`, 60 dpi)
+## Review of the rendered pages (`OUTPUT-nhd-complaint-nicholas.typst.pdf`, 60 dpi)
 
 - Page 1: court title, caption (party block; `C.A. No.`, `JURY TRIAL DEMANDED`), title, lead-in, procedural background (paragraph 1), page number. No spill. Pass.
 - Pages 2 to 4: jurisdiction and venue, parties (paragraphs 2 to 15), facts with Part I (`I. FEDEX CONTRACTS ...`) heading on page 4 with its paragraph (kept together). Pass.
@@ -76,7 +76,7 @@ Defects found in review and fixed (kept here so the template does not regress): 
 
 ## Engines
 
-docx (`docx/build-reference.sh` builds `docx/reference.docx`; filter `docx/nhd-complaint.lua`): `samples/OUTPUT-nicholas-complaint.docx` and `OUTPUT-nicholas-complaint.docx.pdf` (LibreOffice conversion). Matches typst: EB Garamond 12 pt; exact 27.6 pt body pitch; 0.5 in first-line indent; the caption; numbered allegations; lettered lists; the signature block at the 3.25 in indent; centered page number. Page count matches (14 and 14). Word was not available; the file was checked with LibreOffice only.
+docx (`docx/build-reference.sh` builds `docx/reference.docx`; filter `docx/nhd-complaint.lua`): `usage/OUTPUT-nhd-complaint-nicholas.docx` and `OUTPUT-nhd-complaint-nicholas.docx.pdf` (LibreOffice conversion). Matches typst: EB Garamond 12 pt; exact 27.6 pt body pitch; 0.5 in first-line indent; the caption; numbered allegations; lettered lists; the signature block at the 3.25 in indent; centered page number. Page count matches (14 and 14). Word was not available; the file was checked with LibreOffice only.
 
 - BLOCKED: prayer lead-in split from its items. In the docx, "WHEREFORE, Plaintiff ... seeks the following relief:" ends page 13 and items (a) to (d) start page 14; typst keeps the lead-in with its items on page 13. Keep-with-next is not applied to this lead-in.
 - Line wraps differ slightly from typst on most pages, and so do some page breaks; the page count is the same.

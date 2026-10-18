@@ -6,10 +6,31 @@ pub const START: &str = "<!-- fb:generated:start -->";
 pub const END: &str = "<!-- fb:generated:end -->";
 
 /// Checklist wording written by tools/gen_readmes.py before the text keys (fb-9qhl): still generated.
-const RENAMED: [(&str, &str); 2] = [
+/// The usage/ layout (fb-pklq) renamed the folder items again.
+const RENAMED: [(&str, &str); 7] = [
     (
         "`exemplars/` has at least 2 filed PDFs (different filers)",
+        "`usage/SOURCE.md` names at least 2 filed SAMPLEs (different filers)",
+    ),
+    (
         "`exemplars/SOURCE.md` names at least 2 filed exemplars (different filers)",
+        "`usage/SOURCE.md` names at least 2 filed SAMPLEs (different filers)",
+    ),
+    (
+        "`samples/` has at least 2 .md samples",
+        "`usage/` has at least 2 INPUT .md samples",
+    ),
+    (
+        "typst engine passes (`samples/.check-typst.txt` valid)",
+        "typst engine passes (`usage/.check-typst.txt` valid)",
+    ),
+    (
+        "latex engine passes (`samples/.check-latex.txt` valid)",
+        "latex engine passes (`usage/.check-latex.txt` valid)",
+    ),
+    (
+        "docx engine passes (`samples/.check-docx.txt` valid)",
+        "docx engine passes (`usage/.check-docx.txt` valid)",
     ),
     (
         "overlay PDF present (`samples/*-overlay.pdf`)",

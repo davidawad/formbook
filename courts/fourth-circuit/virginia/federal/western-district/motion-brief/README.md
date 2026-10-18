@@ -5,10 +5,10 @@ Folder: `courts/fourth-circuit/virginia/federal/western-district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `exemplars/FILED-EXAMPLE-fitch-6-26-cv-00001-motion-brief.pdf` (26 pages; Woods Rogers for Centra Health; box caption) and `exemplars/FILED-EXAMPLE-azimi-3-26-cv-00001-motion-brief.pdf` (9 pages; TimberlakeSmith for two defendants; ")" caption). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-fitch-motion-brief.md`: a portion of the Fitch brief (caption, introduction, the Background, the Legal Standard, the opening of the Argument, its sections 2 and 3, the Conclusion, the signature block). It renders to 12 pages. `samples/INPUT-azimi-motion-brief.md`: the whole Azimi memorandum, with its certificate of service (9 pages). |
-| render | ok: `samples/OUTPUT-fitch-motion-brief.pdf` (12 pages) and `samples/OUTPUT-azimi-motion-brief.pdf` (9 pages), letter, typst 0.15.0, EB Garamond only (embedded), no warnings. |
-| overlay | ok: `samples/OVERLAY-fitch-motion-brief.pdf` and `.txt`; `samples/OVERLAY-azimi-motion-brief.pdf` and `.txt`. |
+| exemplar | yes, two filers: `usage/SAMPLE-vawd-motion-brief-fitch626cv00001.pdf` (26 pages; Woods Rogers for Centra Health; box caption) and `usage/SAMPLE-vawd-motion-brief-azimi326cv00001.pdf` (9 pages; TimberlakeSmith for two defendants; ")" caption). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-vawd-motion-brief-fitch.md`: a portion of the Fitch brief (caption, introduction, the Background, the Legal Standard, the opening of the Argument, its sections 2 and 3, the Conclusion, the signature block). It renders to 12 pages. `usage/INPUT-vawd-motion-brief-azimi.md`: the whole Azimi memorandum, with its certificate of service (9 pages). |
+| render | ok: `usage/OUTPUT-vawd-motion-brief-fitch.typst.pdf` (12 pages) and `usage/OUTPUT-vawd-motion-brief-azimi.typst.pdf` (9 pages), letter, typst 0.15.0, EB Garamond only (embedded), no warnings. |
+| overlay | ok: `usage/OVERLAY-fitch-motion-brief.pdf` and `.txt`; `usage/OVERLAY-azimi-motion-brief.pdf` and `.txt`. |
 | pages reviewed | 21 of 21: the Fitch sample pages 1 to 12, and the Azimi sample pages 1 to 9, each rendered at 60 dpi and viewed after the last layout change. |
 
 File names: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` and read `INPUT-<id>.md` by default, so the samples and their outputs use those names (not `<id>.pdf`).
@@ -70,7 +70,7 @@ Body:
 
 ## Overlay
 
-`samples/OVERLAY-fitch-motion-brief.pdf` (red is ours; blue is filed; black is where both agree). Pages are paired by shared words. Fitch map:
+`usage/OVERLAY-fitch-motion-brief.pdf` (red is ours; blue is filed; black is where both agree). Pages are paired by shared words. Fitch map:
 
 | Ours | Filed (paired by text) | Word overlap |
 |---|---|---|
@@ -89,7 +89,7 @@ Body:
 
 Ours pp.10 to 12 pair with filed pp.24 to 26, the end of the filed brief, because the sample's last sections (the Argument's sections 2 and 3, the Conclusion, the signature) are also the end of the filed brief. The overlap there is lower because the filed pages carry the rest of the Argument. The pairing is by words, not by position, and the page overlap is not a score.
 
-`samples/OVERLAY-azimi-motion-brief.pdf` (the whole memorandum). Azimi map:
+`usage/OVERLAY-azimi-motion-brief.pdf` (the whole memorandum). Azimi map:
 
 | Ours | Filed (paired by text) | Word overlap |
 |---|---|---|
@@ -149,7 +149,7 @@ Azimi sample (9 pages):
 
 ## Engines
 
-DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/vawd-motion-brief.lua` builds the cover, the caption (box or ")" style), the brief title, the numbered headings (1., a., (i)) with a hanging label, the lettered lists, the native footnotes, the signature block, and the certificate of service. Rendered with `sh tools/render.sh --engine docx motion-brief samples/INPUT-<id>-motion-brief.md` (LibreOffice PDFs: `samples/OUTPUT-<id>-motion-brief.docx.pdf`).
+DOCX (`docx/`): `docx/build-reference.sh` builds `docx/reference.docx` from pandoc's default reference; `docx/vawd-motion-brief.lua` builds the cover, the caption (box or ")" style), the brief title, the numbered headings (1., a., (i)) with a hanging label, the lettered lists, the native footnotes, the signature block, and the certificate of service. Rendered with `sh tools/render.sh --engine docx motion-brief usage/INPUT-<id>-motion-brief.md` (LibreOffice PDFs: `usage/OUTPUT-<id>-motion-brief.docx.pdf`).
 
 - Matches the typst form: EB Garamond 13 pt (embedded), 1 in margins on letter, 27.6 pt double spacing, 0.5 in first-line indent on every paragraph, footnotes at 11 pt single spaced, centered caps section headings, bold numbered sub-headings, block quotations single spaced and indented 0.5 in each side, the signature block at 3.25 in, the certificate of service on its own block, centered page number at 12 pt. The last section is kept with the signature block when it is short (no footnote), as in typst.
 - Differs: pagination of the LibreOffice PDF is longer than typst: azimi 10 pages (typst 9), fitch 12 (typst 12). The last section of azimi moves to the next page with its signature block, leaving page 8 short. Word may paginate differently again.

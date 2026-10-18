@@ -1,25 +1,25 @@
 # miwd: complaint
 
 Doc type: **complaint** in the United States District Court for the Western District of Michigan (`miwd`).
-Folder: `courts/sixth-circuit/michigan/federal/western-district/complaint/`. Self-contained: it does not touch the court root (`court.json`, `typst/`, `samples/`, `exemplars/`).
+Folder: `courts/sixth-circuit/michigan/federal/western-district/complaint/`. Self-contained: it does not touch the court root (`court.json`, `typst/`, `usage/`, `usage/`).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: 2 filers, `exemplars/FILED-EXAMPLE-google-calhoun-1-25-cv-724-complaint.pdf` (primary, Goodman Hurwitz & James) and `exemplars/FILED-EXAMPLE-cohen-interlochen-1-26-cv-2598-complaint.pdf` (second filer, Flood Law). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-google-complaint.md`: a portion of the 42-page filing (7 rendered pages) |
-| render | ok: `samples/OUTPUT-google-complaint.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-google-complaint.pdf` and `samples/OVERLAY-google-complaint.txt` (against the primary exemplar) |
+| exemplar | yes: 2 filers, `usage/SAMPLE-miwd-complaint-googlecalhoun125cv724.pdf` (primary, Goodman Hurwitz & James) and `usage/SAMPLE-miwd-complaint-coheninterlochen126cv2598.pdf` (second filer, Flood Law). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-miwd-complaint-google.md`: a portion of the 42-page filing (7 rendered pages) |
+| render | ok: `usage/OUTPUT-miwd-complaint-google.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-google-complaint.pdf` and `usage/OVERLAY-google-complaint.txt` (against the primary exemplar) |
 | typeface | rule names no face (LCivR 10.1 sets size only; checked against the rule text 2026-10-15). Stays EB Garamond (vendored, `fonts/eb-garamond/`); no substitute applies. Embedded: EB Garamond only (`pdffonts`). |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed 2026-10-15; see the review below) |
 
 Build, from the repo root (`PATH` must include the toolchain, see the brief's setup):
 
 ```sh
-sh tools/render.sh courts/sixth-circuit/michigan/federal/western-district/complaint samples/INPUT-google-complaint.md
-sh tools/overlay.sh courts/sixth-circuit/michigan/federal/western-district/complaint google-complaint exemplars/FILED-EXAMPLE-google-calhoun-1-25-cv-724-complaint.pdf
+sh tools/render.sh courts/sixth-circuit/michigan/federal/western-district/complaint usage/INPUT-miwd-complaint-google.md
+sh tools/overlay.sh courts/sixth-circuit/michigan/federal/western-district/complaint google-complaint usage/SAMPLE-miwd-complaint-googlecalhoun125cv724.pdf
 ```
 
-`tools/render.sh` writes `samples/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `samples/OVERLAY-<id>.pdf` and `.txt`. The brief names these `<id>.pdf` and `<id>-overlay.pdf`; the tools (which this box must not edit) use the `OUTPUT-`/`OVERLAY-` names, so those are what is delivered.
+`tools/render.sh` writes `usage/OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `.txt`. The brief names these `<id>.pdf` and `<id>-overlay.pdf`; the tools (which this box must not edit) use the `OUTPUT-`/`OVERLAY-` names, so those are what is delivered.
 
 ## Governing rules
 
@@ -71,14 +71,14 @@ Tier-2 items that are open choices and are recorded as accepted:
 - **Font (ACCEPTED, fonts pass 2026-10-15).** The exemplars are set in Times New Roman (Google) and Garamond (Cohen). LCivR 10.1 names no typeface, so `docs/FONTS.md` gives no substitute and the template keeps EB Garamond. The Times substitute, Liberation Serif, is vendored, but using it would be a tier-2 style choice, not a rule requirement. EB Garamond has a smaller x-height than Times, so the text looks smaller on the page than the Google exemplar.
 - **Signature.** The Google exemplar signs after the prayer and again after the jury demand. The template prints one signature block, after the jury demand. No rule requires the repeat.
 
-## Overlay (`samples/OVERLAY-google-complaint.pdf`)
+## Overlay (`usage/OVERLAY-google-complaint.pdf`)
 
-Red is our render, blue is the filed exemplar (Google), black is where both agree. Pages are paired by shared words, not by index: ours p.1 with filed p.1 (93.5% word overlap), p.2 with p.2 (70.6%), p.3 with p.5 (56.0%), p.4 with p.6 (42.0%), p.5 with p.9 (65.0%), p.6 with p.15 (61.7%), p.7 with p.41 (69.6%); the mapping is `samples/OVERLAY-google-complaint.txt`. The differences are the typeface, the sample's paragraph numbers (they start at 1 and do not match the filed numbers) and the omitted paragraphs. The overlay is a diagnostic, not a score.
+Red is our render, blue is the filed exemplar (Google), black is where both agree. Pages are paired by shared words, not by index: ours p.1 with filed p.1 (93.5% word overlap), p.2 with p.2 (70.6%), p.3 with p.5 (56.0%), p.4 with p.6 (42.0%), p.5 with p.9 (65.0%), p.6 with p.15 (61.7%), p.7 with p.41 (69.6%); the mapping is `usage/OVERLAY-google-complaint.txt`. The differences are the typeface, the sample's paragraph numbers (they start at 1 and do not match the filed numbers) and the omitted paragraphs. The overlay is a diagnostic, not a score.
 
 ## Known gaps
 
 1. **Sample is a portion.** The filing is 42 pages; the sample carries filed paragraphs 1 to 26, 29 to 38, 41 to 46 and 69 to 75, the request for relief and the jury demand. Paragraph numbers in the sample run from 1.
-2. **One filer per type is the brief's minimum; two are collected.** Both are in `exemplars/`. Gate 2 was done against the primary; the second filer was compared for layout only.
+2. **One filer per type is the brief's minimum; two are collected.** Both are in `usage/`. Gate 2 was done against the primary; the second filer was compared for layout only.
 3. **Font** (above).
 4. **Not produced:** cover sheet (JS-44), summons, Rule 7.1 disclosure, Rule 5.2 redaction (author), certificate of service.
 5. **Checker not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`, and this doc-type folder has neither. The brief forbids editing `tools/`, so the gates were not run; the review above stands in for Gate 2.
@@ -91,7 +91,7 @@ CourtListener search for W.D. Mich. complaints (`court=miwd`, RECAP `type=r`, fi
 
 ## Engines
 
-DOCX (`docx/`): `sh tools/render.sh --engine docx <this folder> samples/INPUT-google-complaint.md` writes `samples/OUTPUT-google-complaint.docx` (pandoc + `docx/reference.docx` from `docx/build-reference.sh` + `docx/miwd-complaint.lua`, which builds the cover, caption, counsel block, numbered paragraphs and signature). The zip has no duplicate entries and every XML part is well formed (checked 2026-10-15). The `.docx.pdf` step did not run: soffice is not installed on this box.
+DOCX (`docx/`): `sh tools/render.sh --engine docx <this folder> usage/INPUT-miwd-complaint-google.md` writes `usage/OUTPUT-miwd-complaint-google.docx` (pandoc + `docx/reference.docx` from `docx/build-reference.sh` + `docx/miwd-complaint.lua`, which builds the cover, caption, counsel block, numbered paragraphs and signature). The zip has no duplicate entries and every XML part is well formed (checked 2026-10-15). The `.docx.pdf` step did not run: soffice is not installed on this box.
 
 - **Matches the typst reference (set in reference.docx and the filter):** letter paper, 1 in margins, EB Garamond 12 pt (vendored; the only font named in the styles), exact 24 pt line pitch for body text, exact 13.8 pt single lines for the caption, counsel and signature, 0.5 in first-line indent, numbered paragraphs 1. onward until the request for relief, lettered items A. onward, headings centered (level 1 bold caps, level 2 bold, level 3 regular), no page number on the cover, centered page number from page 2.
 - **Differs from typst:**
@@ -100,6 +100,6 @@ DOCX (`docx/`): `sh tools/render.sh --engine docx <this folder> samples/INPUT-go
   - The last body paragraph is not set to keep with the signature block (typst does); the signature row itself cannot split.
   - Page-one and page-count measurements (the page count of the typst render is 7; the docx count is not measured).
 - **docx BLOCKED items:**
-  - `docx.pdf / page review`: soffice not installed on this box, so no LibreOffice PDF exists and no page was viewed. Every Gate 0 to 3 check that reads the `.docx.pdf` is blocked, and `samples/.check-docx.txt` is not written.
+  - `docx.pdf / page review`: soffice not installed on this box, so no LibreOffice PDF exists and no page was viewed. Every Gate 0 to 3 check that reads the `.docx.pdf` is blocked, and `usage/.check-docx.txt` is not written.
   - `docx keep-with-signature`: the last paragraph is not kept with the signature (see above), unverified in LibreOffice.
 - Word limits in `docs/DOCX.md` that do not apply: no TOC, TOA or pleading line numbers in this doc type (LCivR 10.1 sets none).

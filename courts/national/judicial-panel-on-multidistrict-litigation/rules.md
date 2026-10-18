@@ -11,7 +11,7 @@ Re-check cadence: whenever the Panel posts revised Rules on its Rules and Proced
 | JR | Rules of Procedure of the United States Judicial Panel on Multidistrict Litigation, effective February 19, 2026 (22 pages). Page numbers are the Rules' printed page numbers. Fetched with the Panel's site as referer (the site rejects bare requests). | https://www.jpml.uscourts.gov/sites/jpml/files/Panel%20Rules%20Effective%202-19-2026.pdf |
 | RP | Rules and Procedures page (lists the 2026 Rules, the adopting order, the redline, 28 U.S.C. § 1407, the FAQ) | https://www.jpml.uscourts.gov/rules-procedures |
 | FRCP | Fed. R. Civ. P. 5.2 (privacy), applied to Panel filings by JR 3.2(e) | https://www.law.cornell.edu/rules/frcp/rule_5.2 |
-| EX-* | Filed exemplars in `motion-brief/exemplars/` (see `SOURCE.md`) | local |
+| EX-* | Filed exemplars in `motion-brief/usage/` (see `SOURCE.md`) | local |
 
 Kinds: **M** = mandated by a Panel Rule. **C** = convention (rules leave it open). **T** = project/tooling rule. **A** = author responsibility, not machine-checkable.
 

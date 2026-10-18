@@ -5,11 +5,11 @@ Folder: `courts/eleventh-circuit/alabama/federal/southern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-frankenmuth-1-26-cv-228-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-frankenmuth-complaint.md` (the complaint's caption, body, four counts, prayer, jury waiver and signature; the service list on the exemplar's last page is not transcribed) |
+| exemplar | yes: `usage/SAMPLE-alsd-complaint-frankenmuth126cv228.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-alsd-complaint-frankenmuth.md` (the complaint's caption, body, four counts, prayer, jury waiver and signature; the service list on the exemplar's last page is not transcribed) |
 | typeface | face required: none (S.D. Ala. Gen. L.R. 5(a)(2) asks for "a plain, Roman style (or similar) font"; no face is named). Substitute: **EB Garamond** (kept, as the brief's rule for courts that name no face). Fit: n/a. See Known gaps 1. |
-| render | ok: `samples/OUTPUT-frankenmuth-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings; re-rendered 2026-10-14, `pdffonts` shows `EBGaramond-Regular`, `-Bold`, `-Italic` embedded (no other face) |
-| overlay | ok: `samples/OVERLAY-frankenmuth-complaint.pdf` and `OVERLAY-frankenmuth-complaint.txt` (`tools/overlay.sh`), re-run 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not stored in the folder; see `exemplars/SOURCE.md`) |
+| render | ok: `usage/OUTPUT-alsd-complaint-frankenmuth.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings; re-rendered 2026-10-14, `pdffonts` shows `EBGaramond-Regular`, `-Bold`, `-Italic` embedded (no other face) |
+| overlay | ok: `usage/OVERLAY-frankenmuth-complaint.pdf` and `OVERLAY-frankenmuth-complaint.txt` (`tools/overlay.sh`), re-run 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not stored in the folder; see `usage/SOURCE.md`) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed on 2026-10-14, after the typeface check) |
 
 File names follow the repo's tools, not the brief's shorthand: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf` (`tools/render.sh` writes it), the overlay `OVERLAY-<id>.pdf` and `.txt` (`tools/overlay.sh` writes them). `<id>` is `frankenmuth-complaint`.
@@ -48,7 +48,7 @@ Not produced by this template (separate filings, not part of the complaint): the
 
 ## Overlay (red/blue)
 
-`samples/OVERLAY-frankenmuth-complaint.pdf` pairs our pages with the filed pages by shared words (`tools/overlay.sh` pairing, not an index match). The pairing in `OVERLAY-frankenmuth-complaint.txt` is:
+`usage/OVERLAY-frankenmuth-complaint.pdf` pairs our pages with the filed pages by shared words (`tools/overlay.sh` pairing, not an index match). The pairing in `OVERLAY-frankenmuth-complaint.txt` is:
 
 ```
 ours p.1  filed p.1   ours p.2  filed p.2   ours p.3  filed p.4   ours p.4  filed p.5
@@ -75,7 +75,7 @@ The word-overlap figures are 50 to 79 percent. The low figures come from differe
 ## Known gaps and open choices
 
 1. **Font.** The rule requires "a plain, Roman style (or similar) font" and names no typeface, so the court-named-face rule (`docs/FONTS.md`) does not apply and the template keeps EB Garamond. The filed exemplar is set in Times New Roman; its substitute would be **Liberation Serif** (metric-compatible), a one-line change to `font-family` in `typst/alsd-complaint.typ` if David wants the filed look. That choice is left open: the rule does not require Times, and the exemplar is one filer's style (tier 3). EB Garamond's x-height is smaller than Times', so the text looks slightly smaller than the exemplar.
-2. **One exemplar.** The brief asks for one filed exemplar per doc type. A second complaint from a different filer (see `exemplars/SOURCE.md`) would be needed to judge tier 2 against 2 or 3 filers.
+2. **One exemplar.** The brief asks for one filed exemplar per doc type. A second complaint from a different filer (see `usage/SOURCE.md`) would be needed to judge tier 2 against 2 or 3 filers.
 3. **Signature page.** The signature block lands alone on page 11 because the transcription ends on a full page. The filed exemplar does not do this: its page 14 carries the jury waiver paragraph above the signature block. The template keeps the signature block unbreakable and does not pull body text onto its page. A clerk may still want at least a few lines of text on the signature page; this is a tier-2 open item, recorded as OPEN.
 4. **Caption layout.** The exemplar uses no ")" column; the template uses one (a common S.D. Ala. form, and the one in the Chapa complaint). The column is a convention choice, recorded as ACCEPTED.
 5. **Quoted clause numbers.** The exemplar quotes its Indemnity Agreement as "3. Indemnification..." and "5. Collateral Security...". The sample writes "(3)" and "(5)" so the markdown does not turn the quote into a list. The quoted words are unchanged. Recorded as ACCEPTED.
@@ -87,7 +87,7 @@ The word-overlap figures are 50 to 79 percent. The low figures come from differe
 
 ## Engines
 
-The typst template is the reference. The docx engine is `docx/reference.docx` (built by `docx/make-reference.sh`) with the Lua filter `docx/alsd-complaint.lua`; it renders with `sh tools/render.sh --engine docx <this folder> samples/INPUT-frankenmuth-complaint.md`, which writes `samples/OUTPUT-frankenmuth-complaint.docx` and `samples/OUTPUT-frankenmuth-complaint.docx.pdf` (LibreOffice 26.8.0.3 converts the file; 11 pages, the same count as the typst render). The fonts must be installed for LibreOffice: EB Garamond from `fonts/eb-garamond/`; `pdffonts` shows only the three EB Garamond faces.
+The typst template is the reference. The docx engine is `docx/reference.docx` (built by `docx/make-reference.sh`) with the Lua filter `docx/alsd-complaint.lua`; it renders with `sh tools/render.sh --engine docx <this folder> usage/INPUT-alsd-complaint-frankenmuth.md`, which writes `usage/OUTPUT-alsd-complaint-frankenmuth.docx` and `usage/OUTPUT-alsd-complaint-frankenmuth.docx.pdf` (LibreOffice 26.8.0.3 converts the file; 11 pages, the same count as the typst render). The fonts must be installed for LibreOffice: EB Garamond from `fonts/eb-garamond/`; `pdffonts` shows only the three EB Garamond faces.
 
 | Element | Typst | DOCX |
 |---|---|---|
@@ -106,4 +106,4 @@ What differs:
 - The numbers of the allegations are followed by a tab, so the text of a numbered paragraph starts about 0.15 in further right than in the typst render.
 - The signature block is alone on the last page in both engines (open item 3 above).
 
-DOCX BLOCKED items: none. This folder has no `checks.yaml`, so `tools/check.sh --engine docx` does not run here; the docx PDF was reviewed page by page instead (every page of `OUTPUT-frankenmuth-complaint.docx.pdf`, against the typst render). The `.docx` was converted by LibreOffice without error but was not opened in Microsoft Word, so the Word repair check is not done.
+DOCX BLOCKED items: none. This folder has no `checks.yaml`, so `tools/check.sh --engine docx` does not run here; the docx PDF was reviewed page by page instead (every page of `OUTPUT-alsd-complaint-frankenmuth.docx.pdf`, against the typst render). The `.docx` was converted by LibreOffice without error but was not opened in Microsoft Word, so the Word repair check is not done.

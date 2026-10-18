@@ -4,10 +4,10 @@ Doc type: **motion with memorandum of law** in the United States Bankruptcy Cour
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 1 filer: `exemplars/FILED-EXAMPLE-continental-rochester-23-02014-motion-brief.pdf` (32 pages, text layer present; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-continental-rochester-memo.md` (10 rendered pages: cover, TOC, body pages 1 to 8) |
-| render | ok: `samples/OUTPUT-continental-rochester-memo.pdf`, 10 pages, letter size, typst 0.15.0, vendored EB Garamond only (embedded), no typst warnings |
-| overlay | ok: `samples/OVERLAY-continental-rochester-memo.pdf` and `.txt` (page map below) |
+| exemplar | yes, 1 filer: `usage/SAMPLE-nywb-motion-brief-continentalrochester2302014.pdf` (32 pages, text layer present; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nywb-motion-brief-continentalrochestermemo.md` (10 rendered pages: cover, TOC, body pages 1 to 8) |
+| render | ok: `usage/OUTPUT-nywb-motion-brief-continentalrochestermemo.typst.pdf`, 10 pages, letter size, typst 0.15.0, vendored EB Garamond only (embedded), no typst warnings |
+| overlay | ok: `usage/OVERLAY-continental-rochester-memo.pdf` and `.txt` (page map below) |
 | typeface | Face required by the rules: none named (LBR 9004-1 requires only "plainly and legibly written"; re-checked 2026-10-15). Vendored substitute: none needed, so EB Garamond is kept (`docs/FONTS.md`, "No face named"). Metric fit: n/a. |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; see Gate 2 table) |
 | tier 2 | **not met**: EVAL-LOOP asks for 2 or 3 filers; only one was found (see Known gaps) |
@@ -43,7 +43,7 @@ Not checked mechanically: the layout values are conventions taken from the filed
 - Body: `#` heading (level 1, centered caps), `##` (level 2), `###` (level 3); paragraphs (not numbered: briefs are not numbered); markdown lists; `*text*` for italics (the sample has none; the exemplar's case-name italics are not in its text layer).
 - Not supported: footnotes (none in the sample), tables, a table of authorities (see Known gaps), raw typst.
 
-## Overlay (`samples/OVERLAY-continental-rochester-memo.pdf`)
+## Overlay (`usage/OVERLAY-continental-rochester-memo.pdf`)
 
 Red is our render, blue is the filed exemplar, black is where both agree. Pages are paired by shared words, not by index, so a partial transcription still lines up. The overlay is a diagnostic, not a score. Page map from `OVERLAY-continental-rochester-memo.txt`:
 
@@ -64,7 +64,7 @@ The overlay is a text pairing: our TOC lists the sections of this sample only, w
 
 ## Gate 2: visual review (current PDF)
 
-Reviewed sha256 of `samples/OUTPUT-continental-rochester-memo.pdf`: `f4a01edf38d6a75ac5e3bd835b9602dc99d56989ebf982a1a26a0dd3b833eaf8` (re-rendered 2026-10-15 with typst 0.15.0 after the typeface check; the template is unchanged). Each page was rendered at 60 dpi and viewed again on 2026-10-15, all 10 pages; the 2026-10-14 pixel-identity check was not repeated against the earlier file.
+Reviewed sha256 of `usage/OUTPUT-nywb-motion-brief-continentalrochestermemo.typst.pdf`: `f4a01edf38d6a75ac5e3bd835b9602dc99d56989ebf982a1a26a0dd3b833eaf8` (re-rendered 2026-10-15 with typst 0.15.0 after the typeface check; the template is unchanged). Each page was rendered at 60 dpi and viewed again on 2026-10-15, all 10 pages; the 2026-10-14 pixel-identity check was not repeated against the earlier file.
 
 Compared with the exemplar page paired by the overlay (see above). The exemplar pages were compared through their text layer (`pdftotext`) and the overlay; they were not rendered to images for this review, so layout claims about the exemplar are from its text positions, not from viewing it.
 
@@ -99,7 +99,7 @@ The exemplar is Times New Roman, 12 pt, and was not compared visually for typefa
 ```
 export PATH="$HOME/tb/bin:$PATH"
 D=courts/second-circuit/new-york/federal/bankruptcy-western-district/motion-brief
-sh tools/render.sh $D samples/INPUT-continental-rochester-memo.md
+sh tools/render.sh $D usage/INPUT-nywb-motion-brief-continentalrochestermemo.md
 sh tools/overlay.sh $D continental-rochester-memo
 ```
 
@@ -107,7 +107,7 @@ File names follow the tools and CLAUDE.md contract (`INPUT-`, `OUTPUT-`, `OVERLA
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` (styles, footer, page setup into `reference.docx`), `nywb-motion-brief.lua` (cover, caption, table of contents, signature block), `toc-pages.pl` (finds the body page of each heading on a rendered PDF), `render.sh` (two passes: pass 1 measures the heading pages with LibreOffice, pass 2 writes the table of contents with those page numbers; sections: cover without footer, table of contents in lower-case roman, body from 1). Output: `samples/OUTPUT-continental-rochester-memo.docx` and `.docx.pdf` (LibreOffice conversion, 10 pages). The `.docx` converts in LibreOffice without error or repair prompt (checked 2026-10-15); not opened in Word.
+docx (`docx/`): `build-reference.sh` (styles, footer, page setup into `reference.docx`), `nywb-motion-brief.lua` (cover, caption, table of contents, signature block), `toc-pages.pl` (finds the body page of each heading on a rendered PDF), `render.sh` (two passes: pass 1 measures the heading pages with LibreOffice, pass 2 writes the table of contents with those page numbers; sections: cover without footer, table of contents in lower-case roman, body from 1). Output: `usage/OUTPUT-nywb-motion-brief-continentalrochestermemo.docx` and `.docx.pdf` (LibreOffice conversion, 10 pages). The `.docx` converts in LibreOffice without error or repair prompt (checked 2026-10-15); not opened in Word.
 
 - Matches the typst output: page count (10) and the body page of every heading (table of contents: PRELIMINARY STATEMENT 1, FACTUAL BACKGROUND 2, ARGUMENT 4, I 4, a 4, b 5, c 6, CONCLUSION 8, the same as the typst numbering); letter paper, one-inch margins, EB Garamond 12 pt, 27.6 pt double spacing, first-line indent on every paragraph (including the first after a heading), level-1 centered bold, level-2 bold and level-3 bold italic with a 0.5 in hanging indent, the cover caption and counsel block, signature block, page numbers centered (none on the cover, roman in the table of contents, arabic from 1 in the body).
 - Differs: headings are 12 pt (typst's heading elements are larger by default; not a court rule). The typst block quotation is double-spaced with a small left indent; the docx block quotation is single-spaced and indented 0.5 in on both sides (the layout the template README describes; tier 2). The table of contents uses dot leaders and 0.4 in level indents but its entry spacing differs slightly from typst. Word may paginate differently, and the Word page numbers in the table of contents may then be off by one (see docs/DOCX.md).

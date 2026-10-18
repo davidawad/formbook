@@ -8,12 +8,12 @@
 ## Checklist
 
 - [ ] `rules.md` present
-- [ ] `exemplars/` has at least 2 filed PDFs (different filers)
-- [ ] `samples/` has at least 2 .md samples
-- [ ] typst engine passes (`samples/.check-typst.txt` valid)
-- [ ] latex engine passes (`samples/.check-latex.txt` valid)
-- [ ] docx engine passes (`samples/.check-docx.txt` valid)
-- [ ] overlay PDF present (`samples/*-overlay.pdf`)
+- [ ] `usage/` has at least 2 filed PDFs (different filers)
+- [ ] `usage/` has at least 2 .md samples
+- [ ] typst engine passes (`usage/.check-typst.txt` valid)
+- [ ] latex engine passes (`usage/.check-latex.txt` valid)
+- [ ] docx engine passes (`usage/.check-docx.txt` valid)
+- [ ] overlay PDF present (`usage/*-overlay.pdf`)
 - [ ] a review file in `reviews/`
 
 Engines: typst `—`, latex `—`, docx `—`.
@@ -35,7 +35,7 @@ Details and the rule text: `opening-brief/README.md`, "Typeface". No LaTeX or DO
 - `typst/` Typst template (primary)
 - `latex/` LaTeX template
 - `docx/` Word template (reference.docx + filters)
-- `exemplars/` real filed examples from different filers (PDF) and `SOURCE.md`
-- `samples/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`
+- `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
+- `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`
 
 [Formbook index](../../../README.md) | [Status table](../../../STATUS.md)

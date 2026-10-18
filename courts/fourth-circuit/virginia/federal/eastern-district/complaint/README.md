@@ -5,11 +5,11 @@ Folder: `courts/fourth-circuit/virginia/federal/eastern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-tamaris-1-26-cv-03298-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-tamaris-complaint.md` (transcription of selected parts of the 23-page filing; see Known gaps) |
-| render | ok: `samples/OUTPUT-tamaris-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/SAMPLE-vaed-complaint-tamaris126cv03298.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-vaed-complaint-tamaris.md` (transcription of selected parts of the 23-page filing; see Known gaps) |
+| render | ok: `usage/OUTPUT-vaed-complaint-tamaris.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | typeface | Rule names no face: L.R. 7(F)(3) says "12 point Roman style or 10 pitch Courier style". Any proportional serif is allowed, so the template keeps EB Garamond (`docs/FONTS.md`: no court-named face). Metric note: none needed. Font re-checked 2026-10-14 (`pdffonts`: EB Garamond only). |
-| overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF, and `exemplars/` holds only `SOURCE.md` (the PDF is not in this snapshot). Old `OVERLAY-tamaris-complaint.txt` is from an earlier run and is not current. |
+| overlay | fail: `tools/overlay.sh` needs the filed exemplar PDF, and `usage/` holds only `SOURCE.md` (the PDF is not in this snapshot). Old `OVERLAY-tamaris-complaint.txt` is from an earlier run and is not current. |
 | pages reviewed | 8 of 8 (re-rendered 2026-10-14; every page rasterized at 70 dpi and viewed) |
 
 ## Governing rules
@@ -57,7 +57,7 @@ Not produced by this template (separate filings that may be required with a firs
 
 ## Known gaps and open choices
 
-1. **Tier 2 is judged against one filer only.** The brief and EVAL-LOOP ask for 2 or 3 filers. Found and not saved: *Warren v. Bloomberg Industry Group, Inc.*, No. 1:26-cv-03349 (E.D. Va., Alexandria), Document 1, 14 pages, filed 2026-10-06 by counsel Adam Nadelhaft (see `exemplars/SOURCE.md`). It was not transcribed. The overlay pairs against the first file in `exemplars/`, so a second file there would change the default pairing. Recorded as an open gap for David.
+1. **Tier 2 is judged against one filer only.** The brief and EVAL-LOOP ask for 2 or 3 filers. Found and not saved: *Warren v. Bloomberg Industry Group, Inc.*, No. 1:26-cv-03349 (E.D. Va., Alexandria), Document 1, 14 pages, filed 2026-10-06 by counsel Adam Nadelhaft (see `usage/SOURCE.md`). It was not transcribed. The overlay pairs against the first file in `usage/`, so a second file there would change the default pairing. Recorded as an open gap for David.
 2. **The sample is a selection, not the whole filing.** It carries the filing's text for the caption and lead-in; the nature of the suit; the parties; jurisdiction and venue (filed ¶¶ 7 to 15); plaintiff's rights (filed ¶¶ 16 to 24, approximately: the text layer of those paragraphs is fragmented, so the numbers were matched by reading, with the enforcement-case citations replaced by "(Citations omitted.)" and the image paragraph 18 omitted); the website facts (filed ¶¶ 36 to 41); Count One (filed ¶¶ 53 to 57), Count Two (filed ¶¶ 62 to 64), Count Three (filed ¶¶ 71 to 75); the prayer (items A to H, with the sub-items of item E condensed); and the signature. Omitted: filed ¶¶ 42 to 52, 58 to 61, 65 to 70 and 76 onward, the rest of the prayer's sub-items, and the exhibit references. The sample numbers its allegations from 1 in order, so its paragraph numbers do not match the filed numbers.
 3. **Font.** Tier 1 asks for a 12 point Roman face. The rule names no face ("Roman style"), so `docs/FONTS.md` keeps EB Garamond. The exemplar is Times-style. EB Garamond at 12 pt has a smaller x-height, so the text looks smaller than the exemplar. The point size meets the rule; the apparent size does not. Open question for David: if "Roman style" is read as Times New Roman, the substitute is Liberation Serif (metric-compatible, `docs/FONTS.md`) and the template should switch. Not switched here, because the rule does not name Times (recorded as ACCEPTED).
 4. **Signature.** The exemplar's signature line carries a handwritten-style mark ("AZ") before the name. The sample writes "By: Attison L. Barnes, III" and does not transcribe the mark.
@@ -80,7 +80,7 @@ Not produced by this template (separate filings that may be required with a firs
 
 ## Engines
 
-DOCX (`docx/`): `reference.docx` from `docx/build-reference.sh`, filter `docx/vaed-complaint.lua`. Output `samples/OUTPUT-tamaris-complaint.docx` and `.docx.pdf` (LibreOffice conversion). Pages reviewed: 8 of 8 in the docx PDF and 8 of 8 in the typst PDF, at 60 dpi.
+DOCX (`docx/`): `reference.docx` from `docx/build-reference.sh`, filter `docx/vaed-complaint.lua`. Output `usage/OUTPUT-vaed-complaint-tamaris.docx` and `.docx.pdf` (LibreOffice conversion). Pages reviewed: 8 of 8 in the docx PDF and 8 of 8 in the typst PDF, at 60 dpi.
 
 - Matches the typst form: EB Garamond 12 pt only (`pdffonts`); letter, 1 in margins; body at an exact 24 pt pitch; 0.5 in first-line indent; caption party box with four rules and the case number at right; numbered allegations; lettered prayer items with a hanging indent; signature block single-spaced at 3.25 in and kept together; centered PAGE number at 12 pt. Page breaks fall in the same places on all 8 pages.
 - Differs: the court heading is single-spaced (13.8 pt) in the docx. The typst court heading renders at about 23 pt pitch, although its comment says single, so the typst caption sits lower on page 1. The number-to-text gap is a tab stop at 1 in (typst: 0.25 in after the number). LibreOffice breaks a line after the hyphen in "1-8" where typst does not.

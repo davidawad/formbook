@@ -5,11 +5,11 @@ Folder: `courts/ninth-circuit/nevada/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-williams-2-26-cv-00801-complaint.pdf` (one filer, see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-williams-complaint.md` (the whole 14-page complaint, transcribed) |
+| exemplar | yes: `usage/SAMPLE-nvd-complaint-williams226cv00801.pdf` (one filer, see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nvd-complaint-williams.md` (the whole 14-page complaint, transcribed) |
 | typeface | face required: **none** (LR IA 10-1(a)(3) sets size only: "Text must be size 12 font or larger"; read 2026-10-15 from the court's 2020 local rules PDF). Substitute: none needed; **EB Garamond** kept (no-face default, `docs/FONTS.md`). Fit: n/a. Embedded: EBGaramond Regular, Bold, Italic, BoldItalic (`pdffonts`). |
-| render | ok: `samples/OUTPUT-williams-complaint.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
-| overlay | ok: `samples/OVERLAY-williams-complaint.pdf` and `.txt` (pairing by word overlap; see below; re-run 2026-10-15) |
+| render | ok: `usage/OUTPUT-nvd-complaint-williams.typst.pdf`, 14 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| overlay | ok: `usage/OVERLAY-williams-complaint.pdf` and `.txt` (pairing by word overlap; see below; re-run 2026-10-15) |
 | pages reviewed | 14 of 14 (every page rasterized at 60 dpi and viewed on 2026-10-15; p.9 and p.12 re-checked after the heading-spacing change) |
 | BLOCKED | none. Tier-2 coverage is short of the eval loop's "two or three filers" (see Known gaps 1). |
 
@@ -58,13 +58,13 @@ Not produced by this template (separate filings or content the author writes): t
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
 D=courts/ninth-circuit/nevada/federal/district/complaint
-sh tools/render.sh $D samples/INPUT-williams-complaint.md   # -> samples/OUTPUT-williams-complaint.pdf
-sh tools/overlay.sh $D williams-complaint                    # -> samples/OVERLAY-williams-complaint.pdf and .txt
+sh tools/render.sh $D usage/INPUT-nvd-complaint-williams.md   # -> usage/OUTPUT-nvd-complaint-williams.typst.pdf
+sh tools/overlay.sh $D williams-complaint                    # -> usage/OVERLAY-williams-complaint.pdf and .txt
 ```
 
 Naming: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`, with the sample named `INPUT-<id>.md`; these follow `tools/render.sh` and `tools/overlay.sh` defaults, which are not changed here.
 
-- `samples/OVERLAY-williams-complaint.pdf`: red = our render, blue = exemplar, black = both. The page map (`.txt`) pairs pages by word overlap: ours p.1 to 14 with filed p.1 to 13 (the last pairing is coarse; the filed document has 14 pages and ours pairs p.14 with p.13 by word overlap). The overlay is a diagnostic, not a score: the exemplar's line numbers and Times text do not coincide with ours, and the ECF header of the exemplar is not reproduced.
+- `usage/OVERLAY-williams-complaint.pdf`: red = our render, blue = exemplar, black = both. The page map (`.txt`) pairs pages by word overlap: ours p.1 to 14 with filed p.1 to 13 (the last pairing is coarse; the filed document has 14 pages and ours pairs p.14 with p.13 by word overlap). The overlay is a diagnostic, not a score: the exemplar's line numbers and Times text do not coincide with ours, and the ECF header of the exemplar is not reproduced.
 
 ## Visual review (Gate 2 record: every page rendered at 60 dpi and viewed)
 
@@ -104,11 +104,11 @@ Naming: the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`, with th
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/complaint.lua` writes the cover and the body; `docx/render.sh` (run by `tools/render-docx.sh`) puts the sample's `footer_title` into the footer. Output: `samples/OUTPUT-williams-complaint.docx` and `.docx.pdf` (LibreOffice 26.8), 14 pages, all 14 rendered at 60 dpi and viewed.
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/complaint.lua` writes the cover and the body; `docx/render.sh` (run by `tools/render-docx.sh`) puts the sample's `footer_title` into the footer. Output: `usage/OUTPUT-nvd-complaint-williams.docx` and `.docx.pdf` (LibreOffice 26.8), 14 pages, all 14 rendered at 60 dpi and viewed.
 
 - Matches the typst output: letter; margins 1 in top and bottom, 1.5 in left, 1 in right; EB Garamond 13 pt; 28 numbers on a 462-twip grid, body lines on the numbers (checked on the PDF: body baselines within 0.1 pt of a number); double rule at the left and single at the right (`w:pgBorders`); caption box with the parties, the case number, the title, JURY DEMAND under the title and the claims list; single-spaced counsel and signature block; "-N-" footer with the title; the unnumbered prayer and jury demand.
 - Differs from typst: the 28 numbers sit in a header text box, not section line numbering (`w:lnNumType` skips the caption table, so it would not number every line); paragraph numbers are typed by the filter, not Word auto-numbering; the caption box is sized to its text (the body starts on page 2); page breaks follow LibreOffice, Word may move a line.
 - Fonts: the PDF is correct only when LibreOffice can see the vendored `fonts/` and no substitute face. This box has no system EB Garamond, so run the check with a `FONTCONFIG_FILE` that lists only the repo's `fonts/` directory; otherwise LibreOffice substitutes silently.
 - Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML with every style it uses defined.
 
-BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and a doc-type folder has neither (this change may not add them), so the gates did not run and `samples/.check-docx.txt` was not written.
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and a doc-type folder has neither (this change may not add them), so the gates did not run and `usage/.check-docx.txt` was not written.

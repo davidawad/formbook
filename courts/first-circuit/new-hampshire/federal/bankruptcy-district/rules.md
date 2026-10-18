@@ -14,8 +14,8 @@ Re-check cadence: re-check annually each December 1 (Bankruptcy Rules amendments
 | FRBP | Federal Rules of Bankruptcy Procedure 5005(a), 7005, 7007.1, 7008, 7010, 9004, 9011(a), 9013, 9037 (restyled, eff. Dec. 1, 2024; LII text) | https://www.law.cornell.edu/rules/frbp/rule_9004 (and .../rule_5005, rule_7005, rule_7007.1, rule_7008, rule_7010, rule_9011, rule_9013, rule_9037) |
 | FRCP | Federal Rules of Civil Procedure 5(d)(1)(B), 8(a), 10(b) (applied by FRBP 7005, 7008, 7010) | https://www.law.cornell.edu/rules/frcp/rule_5, .../rule_8, .../rule_10 |
 | F416 | Official Form 416A "Caption (Full)" and 416D "Caption for Use in Adversary Proceeding" (12/15) | https://www.uscourts.gov/sites/default/files/form_b416a_0.pdf, https://www.uscourts.gov/sites/default/files/form_b416d_0.pdf |
-| EX-A1 | Adversary complaint exemplar: Timothy P. Smith, Ch. 7 Trustee (Sheehan Phinney Bass & Green), Adv. No. 24-01019, Doc 1 | `adversary-complaint/exemplars/SOURCE.md` |
-| EX-M1 | Motion memorandum exemplar: Mission Product Holdings, Inc. (Bernstein, Shur, Sawyer & Nelson), No. 15-11400, Doc 685 | `motion-brief/exemplars/SOURCE.md` |
+| EX-A1 | Adversary complaint exemplar: Timothy P. Smith, Ch. 7 Trustee (Sheehan Phinney Bass & Green), Adv. No. 24-01019, Doc 1 | `adversary-complaint/usage/SOURCE.md` |
+| EX-M1 | Motion memorandum exemplar: Mission Product Holdings, Inc. (Bernstein, Shur, Sawyer & Nelson), No. 15-11400, Doc 685 | `motion-brief/usage/SOURCE.md` |
 
 Kinds: **M** = mandated by a court rule (FRBP, FRCP as applied, or LBR). **C** = convention (rules leave it open; exemplars named). **T** = project/tooling rule of this repo. **A** = author responsibility.
 

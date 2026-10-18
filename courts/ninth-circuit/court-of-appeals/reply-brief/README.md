@@ -1,14 +1,14 @@
 # Ninth Circuit: appellant's reply brief (`ca9` / `reply-brief`)
 
-Self-contained folder for the reply brief of an appellant or petitioner in this court (FRAP 28(c), Circuit Rule 32-1(b)). It does not share files with the principal brief at the court root (`../typst/`, `../samples/`), which is a separate doc type.
+Self-contained folder for the reply brief of an appellant or petitioner in this court (FRAP 28(c), Circuit Rule 32-1(b)). It does not share files with the principal brief at the court root (`../typst/`, `../usage/`), which is a separate doc type.
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-bl-productions-23-55431-reply-brief.pdf` | The filed reply (34 pp., text-based, Garamond embedded). |
-| `exemplars/SOURCE.md` | Where it was fetched from, filer, date filed, date fetched, and the exemplar's known defects. |
-| `samples/INPUT-bl-productions-reply-brief.md` | Transcription of the exemplar: cover, related-cases statement, point I.A, introduction and conclusion. A portion, not the whole reply (it is about 1,960 of the reply's 6,998 counted words). |
-| `samples/OUTPUT-bl-productions-reply-brief.pdf` | The template's render of that sample (14 pages since the 2026-10-16 pass). |
-| `samples/OVERLAY-bl-productions-reply-brief.pdf`, `-overlay.txt` | Red (ours) / blue (filed) overlay, 14 pages, with the page map. |
+| `usage/SAMPLE-ca9-reply-brief-blproductions2355431.pdf` | The filed reply (34 pp., text-based, Garamond embedded). |
+| `usage/SOURCE.md` | Where it was fetched from, filer, date filed, date fetched, and the exemplar's known defects. |
+| `usage/INPUT-ca9-reply-brief-blproductions.md` | Transcription of the exemplar: cover, related-cases statement, point I.A, introduction and conclusion. A portion, not the whole reply (it is about 1,960 of the reply's 6,998 counted words). |
+| `usage/OUTPUT-ca9-reply-brief-blproductions.typst.pdf` | The template's render of that sample (14 pages since the 2026-10-16 pass). |
+| `usage/OVERLAY-bl-productions-reply-brief.pdf`, `-overlay.txt` | Red (ours) / blue (filed) overlay, 14 pages, with the page map. |
 | `typst/main.typ`, `typst/ca9-reply-brief.typ` | The template. Copied from `../typst/` and changed only where the reply rules differ (see below). |
 
 ## Governing rules (verified 2026-10-14)
@@ -43,9 +43,9 @@ Sweet v. McMahon (the principal-brief exemplar at the court root) is a principal
 Commands (from the repo root, with `$HOME/tb/bin` on `PATH` for typst, poppler and ImageMagick):
 
 ```sh
-sh tools/render.sh courts/ninth-circuit/court-of-appeals/reply-brief samples/INPUT-bl-productions-reply-brief.md   # no typst warnings
+sh tools/render.sh courts/ninth-circuit/court-of-appeals/reply-brief usage/INPUT-ca9-reply-brief-blproductions.md   # no typst warnings
 sh tools/overlay.sh courts/ninth-circuit/court-of-appeals/reply-brief bl-productions-reply-brief
-pdftoppm -r 60 -png courts/ninth-circuit/court-of-appeals/reply-brief/samples/OUTPUT-bl-productions-reply-brief.pdf /tmp/p
+pdftoppm -r 60 -png courts/ninth-circuit/court-of-appeals/reply-brief/usage/OUTPUT-ca9-reply-brief-blproductions.typst.pdf /tmp/p
 ```
 
 Render: ok (14 pages, typst 0.15.0, vendored EB Garamond, no warnings; rerun 2026-10-16). Overlay: ok (14 pages, rerun 2026-10-16).
@@ -84,15 +84,15 @@ Defects found in the review and fixed: an Argument sub-heading was typed at leve
 
 The same markdown renders through three engines. Typst (`typst/`) is the reference; the LaTeX and DOCX engines were built to its form and checked against it page by page.
 
-| Engine | Output (`samples/`) | Status |
+| Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-bl-productions-reply-brief.pdf` (14 pp) | reference |
-| latex | `OUTPUT-bl-productions-reply-brief.latex.pdf` (14 pp) | ok: rendered, every page compared with the typst page |
-| docx | `OUTPUT-bl-productions-reply-brief.docx`; no `.docx.pdf` | BLOCKED: no LibreOffice on this box (below) |
+| typst | `OUTPUT-ca9-reply-brief-blproductions.typst.pdf` (14 pp) | reference |
+| latex | `OUTPUT-ca9-reply-brief-blproductions.latex.pdf` (14 pp) | ok: rendered, every page compared with the typst page |
+| docx | `OUTPUT-ca9-reply-brief-blproductions.docx`; no `.docx.pdf` | BLOCKED: no LibreOffice on this box (below) |
 
 ```sh
-sh tools/render.sh --engine latex courts/ninth-circuit/court-of-appeals/reply-brief samples/INPUT-bl-productions-reply-brief.md
-sh tools/render.sh --engine docx  courts/ninth-circuit/court-of-appeals/reply-brief samples/INPUT-bl-productions-reply-brief.md
+sh tools/render.sh --engine latex courts/ninth-circuit/court-of-appeals/reply-brief usage/INPUT-ca9-reply-brief-blproductions.md
+sh tools/render.sh --engine docx  courts/ninth-circuit/court-of-appeals/reply-brief usage/INPUT-ca9-reply-brief-blproductions.md
 ```
 
 **latex** (`latex/template.tex`, `latex/ca9.lua`, `latex/render.sh`). `render.sh` owns the build: pandoc writes the `.tex` from the template and the filter, then tectonic compiles it twice, so the table of contents and the table of authorities take their page numbers from the first pass. Fonts come only from `fonts/eb-garamond` (through `fontdir`). The PDF embeds EBGaramond Regular, Italic, Bold and BoldItalic and nothing else, on US Letter.
@@ -105,7 +105,7 @@ sh tools/render.sh --engine docx  courts/ninth-circuit/court-of-appeals/reply-br
 **docx** (`docx/reference.docx`, `docx/ca9.lua`, `docx/make-reference.sh`). **BLOCKED.**
 
 - *Why:* `soffice` is not installed on this box and conda-forge has no LibreOffice package (`micromamba search` finds none), and there is no root to install it another way. The `.docx.pdf` is therefore not produced and no Gate 0 to 3 check runs on the docx. `tools/render-docx.sh` also needs `unzip`, which `tools/bootstrap.sh` does not install; it was added to the toolchain prefix from conda-forge.
-- *Delivered:* `samples/OUTPUT-bl-productions-reply-brief.docx`. It is a valid zip with well-formed XML (checked by `render-docx.sh`). It has the reference's styles (EB Garamond 14 pt, double-spaced body with a half-inch first-line indent, single-spaced headings, footnotes and block quotations, letter page, 1-inch margins, a centered page-number footer) and the heading labels. It has not been opened in Word or LibreOffice, so the no-repair check is not done.
+- *Delivered:* `usage/OUTPUT-ca9-reply-brief-blproductions.docx`. It is a valid zip with well-formed XML (checked by `render-docx.sh`). It has the reference's styles (EB Garamond 14 pt, double-spaced body with a half-inch first-line indent, single-spaced headings, footnotes and block quotations, letter page, 1-inch margins, a centered page-number footer) and the heading labels. It has not been opened in Word or LibreOffice, so the no-repair check is not done.
 - *BLOCKED check IDs (not built for docx, a missing feature, not a Word limit):* CA9-COVER-001 to -007 (no cover; the caption is a table in Word, and the cover is not built); CA9-CONT-001 (no table of contents field); CA9-CONT-002 (no table of authorities: TA/TOA fields are not written, and LibreOffice does not honor them, see `docs/DOCX.md`); CA9-CERT-001, -003 and -004 (the certificates are not built); CA9-ADD-001 (the addendum is not numbered Add-n); CA9-FORM-008 (the footer counts arabic from the cover, with no roman front matter); CA9-CONT-012 (the labels are typed text, not Word list numbering, and are not measured on a PDF). Every Gate 1 and Gate 2 check is unmeasured for the docx for lack of a PDF.
 - *Rebuild the reference:* `sh docx/make-reference.sh` (from pandoc's default reference document; needs `perl`, `unzip`, `zip` and `xmllint`).
 

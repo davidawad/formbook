@@ -1,7 +1,7 @@
 // Entry point. Compile with the doc-type folder as --root; tools/render.sh does it:
-//   sh tools/render.sh courts/sixth-circuit/michigan/federal/western-district/complaint samples/<id>.md
+//   sh tools/render.sh courts/sixth-circuit/michigan/federal/western-district/complaint usage/<id>.md
 #import "miwd-complaint.typ": miwd-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-google-complaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-miwd-complaint-google.md"))
 #let (meta, body) = split-frontmatter(src)
 #miwd-complaint(meta, body)

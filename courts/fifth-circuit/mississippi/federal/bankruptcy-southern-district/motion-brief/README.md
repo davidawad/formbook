@@ -4,14 +4,14 @@ Doc type: **motion-brief**: the memorandum brief that supports a motion, in the 
 
 | Item | Status |
 |---|---|
-| exemplar | yes, one filer: `exemplars/FILED-EXAMPLE-lentz-19-06038-motion-brief.pdf` (Dkt 48, "Memorandum in Support of Motion for Summary Judgment", 15 pp., defendant's counsel). The motion itself is not in the exemplar, and the memorandum states no docket reference. See `exemplars/SOURCE.md` and Known gaps. |
-| sample md | `samples/INPUT-lentz-motion-brief.md`: the whole memorandum, transcribed, with the signature block and the certificate of service |
-| render | ok: `samples/OUTPUT-lentz-motion-brief.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-lentz-motion-brief.pdf` and `.txt` (`sh tools/overlay.sh`) |
+| exemplar | yes, one filer: `usage/SAMPLE-mssb-motion-brief-lentz1906038.pdf` (Dkt 48, "Memorandum in Support of Motion for Summary Judgment", 15 pp., defendant's counsel). The motion itself is not in the exemplar, and the memorandum states no docket reference. See `usage/SOURCE.md` and Known gaps. |
+| sample md | `usage/INPUT-mssb-motion-brief-lentz.md`: the whole memorandum, transcribed, with the signature block and the certificate of service |
+| render | ok: `usage/OUTPUT-mssb-motion-brief-lentz.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
+| overlay | ok: `usage/OVERLAY-lentz-motion-brief.pdf` and `.txt` (`sh tools/overlay.sh`) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed, final template) |
 | tier 1 | rules-driven template; asserts that stop the build if the title, the docket reference (`related_docket`), the caption case data, or counsel's e-mail, Bar number, telephone or street address is missing (checked: a sample with no docket reference fails with the rule cited). |
 
-`court.json` and the court-root `typst/`, `samples/` are untouched. `tools/check.sh` and `tools/check-selftest.sh` were not run, for the same reason as the complaint folder (they expect `court.json` and `rules.md`).
+`court.json` and the court-root `typst/`, `usage/` are untouched. `tools/check.sh` and `tools/check-selftest.sh` were not run, for the same reason as the complaint folder (they expect `court.json` and `rules.md`).
 
 ## Files
 
@@ -19,10 +19,10 @@ Doc type: **motion-brief**: the memorandum brief that supports a motion, in the 
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `mssb-motion-brief`. |
 | `typst/mssb-motion-brief.typ` | Template. Parameters at the top, each with its rule. Rule asserts in `check-meta`. |
-| `samples/INPUT-lentz-motion-brief.md` | Markdown contract sample (frontmatter + body). |
-| `samples/OUTPUT-lentz-motion-brief.pdf` | `sh tools/render.sh courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/motion-brief samples/INPUT-lentz-motion-brief.md` |
-| `samples/OVERLAY-lentz-motion-brief.pdf`, `.txt` | `sh tools/overlay.sh <this folder> lentz-motion-brief` (red = ours, blue = filed, black = agree) |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-mssb-motion-brief-lentz.md` | Markdown contract sample (frontmatter + body). |
+| `usage/OUTPUT-mssb-motion-brief-lentz.typst.pdf` | `sh tools/render.sh courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/motion-brief usage/INPUT-mssb-motion-brief-lentz.md` |
+| `usage/OVERLAY-lentz-motion-brief.pdf`, `.txt` | `sh tools/overlay.sh <this folder> lentz-motion-brief` (red = ours, blue = filed, black = agree) |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
 File names follow the file-role convention (`INPUT-`, `OUTPUT-`, `OVERLAY-`), which is what `tools/render.sh` and `tools/overlay.sh` read and write by default.
 
@@ -61,12 +61,12 @@ Federal rules: Fed. R. Bankr. P. 9004 read in full on 2026-10-14 from Cornell LI
 
 Three engines run from one markdown contract. `typst/` is the primary template and the reference for this form. `docx/` was added here. No `latex/` yet.
 
-| Engine | Output in `samples/` | Result |
+| Engine | Output in `usage/` | Result |
 |---|---|---|
-| typst | `OUTPUT-lentz-motion-brief.pdf` | unchanged |
-| docx | `OUTPUT-lentz-motion-brief.docx` | written and checked for package integrity; `.docx.pdf` BLOCKED (below) |
+| typst | `OUTPUT-mssb-motion-brief-lentz.typst.pdf` | unchanged |
+| docx | `OUTPUT-mssb-motion-brief-lentz.docx` | written and checked for package integrity; `.docx.pdf` BLOCKED (below) |
 
-Build: `sh docx/make-reference.sh` once (writes `docx/reference.docx`), then `sh tools/render.sh --engine docx <this folder> samples/INPUT-lentz-motion-brief.md`. The filter is `docx/mssb-motion-brief.lua`. The render script's LibreOffice step fails on the box used here; the `.docx` is written before that step.
+Build: `sh docx/make-reference.sh` once (writes `docx/reference.docx`), then `sh tools/render.sh --engine docx <this folder> usage/INPUT-mssb-motion-brief-lentz.md`. The filter is `docx/mssb-motion-brief.lua`. The render script's LibreOffice step fails on the box used here; the `.docx` is written before that step.
 
 What the docx build sets to the typst form (from the same frontmatter). These are settings in the XML and the filter, not a rendered comparison: no page has been rendered (see below).
 
@@ -89,12 +89,12 @@ What differs, by design or by Word:
 
 docx BLOCKED (not verified by a render):
 
-- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF, `tools/check.sh --engine docx`): BLOCKED. LibreOffice cannot start on the box used here. The Debian LibreOffice 25.2 packages (extracted without root, all shared libraries resolved) exit at bootstrap with a `DeploymentException`. No `.docx.pdf` exists, so no page was rendered or viewed (pages reviewed: 0), and `samples/.check-docx.txt` is not written. `tools/check.sh` also needs `yq` and a court folder with `court.json` and `rules.md`, which a doc-type folder does not have.
+- `docx.pdf` (Gates 0 to 3 on the LibreOffice PDF, `tools/check.sh --engine docx`): BLOCKED. LibreOffice cannot start on the box used here. The Debian LibreOffice 25.2 packages (extracted without root, all shared libraries resolved) exit at bootstrap with a `DeploymentException`. No `.docx.pdf` exists, so no page was rendered or viewed (pages reviewed: 0), and `usage/.check-docx.txt` is not written. `tools/check.sh` also needs `yq` and a court folder with `court.json` and `rules.md`, which a doc-type folder does not have.
 - The `.docx` has not been opened in Word or LibreOffice. Its package parts are well-formed XML and the zip is valid, which is necessary, not sufficient.
 
 ## Overlay
 
-`samples/OVERLAY-lentz-motion-brief.pdf` puts our render (red) over the best-matching page of the filed memorandum (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the final run:
+`usage/OVERLAY-lentz-motion-brief.pdf` puts our render (red) over the best-matching page of the filed memorandum (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the final run:
 
 - p.1 ↔ p.1 (58%): caption, title, the start of the introduction and of Part II.
 - p.2 ↔ p.3 (80%): the DNA and DAA quotations. The filed quotations sit on different pages.
@@ -106,7 +106,7 @@ docx BLOCKED (not verified by a render):
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-lentz-motion-brief.pdf` was rendered at 60 dpi and viewed in its final form.
+Every page of `OUTPUT-mssb-motion-brief-lentz.typst.pdf` was rendered at 60 dpi and viewed in its final form.
 
 | Page | Content | Result |
 |---|---|---|

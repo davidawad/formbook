@@ -1,0 +1,10 @@
+# Exemplars: vawd complaint
+
+All files are public court records, downloaded on 2026-10-14 from the RECAP archive of CourtListener (no login; the search was `type=r`, `court=vawd`). Each PDF is the document as filed (the ECF header line is the court's own).
+
+| File | Case | Docket | Filer / counsel | Date filed | Docket entry (CourtListener) | PDF (RECAP archive) | Pages | Used for |
+|---|---|---|---|---|---|---|---|---|
+| `SAMPLE-vawd-complaint-extremedriver325cv00099.pdf` | *Extreme Driver Inc. v. L Fab Enterprises, LLC d/b/a Iron Force, et al.* | 3:25-cv-00099 (W.D. Va., Charlottesville Division) | Plaintiff Extreme Driver Inc.; counsel Clinton H. Brannon, Williams Mullen (per the signature block) | 12/18/2025 | https://www.courtlistener.com/docket/72054779/1/extreme-driver-inc-v-l-fab-enterprises-llc/ (Document 1) | https://storage.courtlistener.com/recap/gov.uscourts.vawd.137296/gov.uscourts.vawd.137296.1.0.pdf | 9 | The sample (`usage/INPUT-vawd-complaint-extremedriver.md`, a full transcription) and the overlay. Box-style caption. |
+| `SAMPLE-vawd-complaint-moler725cv00937.pdf` | *Moler v. Delta Dental of Virginia* | 7:25-cv-00937 (W.D. Va., Roanoke Division) | Plaintiffs Tracy Moler, Linda Goodrich, Megan Seay (class); counsel Ramon Rodriguez, III (per the signature block) | 12/22/2025 | https://www.courtlistener.com/docket/72069096/1/moler-v-delta-dental-of-virginia/ (Document 1) | https://storage.courtlistener.com/recap/gov.uscourts.vawd.137326/gov.uscourts.vawd.137326.1.0.pdf | 33 | Second filer, for tier 2 (a different filer and a different caption style: a column of ")" marks). Not transcribed; not overlaid. |
+
+Why these two: both are text-based (`pdftotext` yields the text), both are counsel-filed, both are from different filers, and their captions differ (box versus ")" column), so a choice that matches both is a convention and one that matches a single file is that filer's habit. Other candidates in the search (for example Cokas, 7:26-cv-00629, whose caption gives the plaintiff's home address, which suggests a self-represented filer; not checked further) were not downloaded.

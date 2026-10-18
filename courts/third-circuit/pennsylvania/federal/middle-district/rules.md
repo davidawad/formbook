@@ -13,10 +13,10 @@ Access note: on 2026-10-17 `www.pamd.uscourts.gov` answered this box with a "Req
 | LR | Local Rules of Court, M.D. Pa., as amended December 1, 2014 (107 pp.; the court's current "Local Rules PDF") | https://www.pamd.uscourts.gov/sites/pamd/files/LR120114.pdf (read from https://web.archive.org/web/20191127182733/https://www.pamd.uscourts.gov/sites/pamd/files/LR120114.pdf) |
 | LR-PAGE | Court page "Local Rules and Orders" (links LR; "last amended December 1, 2014") | https://web.archive.org/web/20250106213904/https://www.pamd.uscourts.gov/court-info/local-rules-and-orders |
 | FRCP | Federal Rules of Civil Procedure 5, 5.2, 7, 7.1, 8, 10, 11, 38 (LII text) | https://www.law.cornell.edu/rules/frcp/rule_5 , .../rule_5.2 , .../rule_7 , .../rule_7.1 , .../rule_8 , .../rule_10 , .../rule_11 , .../rule_38 |
-| EX-ANDERSON | Complaint, *John Anderson Construction, Inc. v. Encompass Pipeline, LLC*, No. 4:26-cv-03004 (Buchanan Ingersoll & Rooney) | `complaint/exemplars/` |
-| EX-DILLOW | Complaint, *Dillow v. DRT Transportation, LLC*, No. 4:26-cv-03021 (George R. Barron) | `complaint/exemplars/` |
-| EX-ORNDORFF | Brief in support of motion to dismiss, *Orndorff v. Cumberland County*, No. 1:26-cv-02944 (Santiago & Associates, for Cumberland County) | `motion-brief/exemplars/` |
-| EX-SCHMIDT | Brief in support of motion to dismiss under Rule 12(h)(3), *Voter Reference Foundation v. Schmidt*, No. 1:24-cv-00294 (Pa. Office of Attorney General and Pa. Department of State) | `motion-brief/exemplars/` |
+| EX-ANDERSON | Complaint, *John Anderson Construction, Inc. v. Encompass Pipeline, LLC*, No. 4:26-cv-03004 (Buchanan Ingersoll & Rooney) | `complaint/usage/` |
+| EX-DILLOW | Complaint, *Dillow v. DRT Transportation, LLC*, No. 4:26-cv-03021 (George R. Barron) | `complaint/usage/` |
+| EX-ORNDORFF | Brief in support of motion to dismiss, *Orndorff v. Cumberland County*, No. 1:26-cv-02944 (Santiago & Associates, for Cumberland County) | `motion-brief/usage/` |
+| EX-SCHMIDT | Brief in support of motion to dismiss under Rule 12(h)(3), *Voter Reference Foundation v. Schmidt*, No. 1:24-cv-00294 (Pa. Office of Attorney General and Pa. Department of State) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (FRCP or M.D. Pa. LR). **C** = convention (from the exemplars; the rules leave it open). **T** = project/tooling rule. **A** = author responsibility, not machine-checkable.
 

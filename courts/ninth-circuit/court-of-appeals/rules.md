@@ -15,7 +15,7 @@ Every requirement below cites one of these. Page numbers are the printed page nu
 | F15 | Form 15, Certificate of Service for Electronic Filing (Rev. 12/01/2018) | https://cdn.ca9.uscourts.gov/datastore/uploads/forms/form15.pdf |
 | F17 | Form 17, Statement of Related Cases Pursuant to Circuit Rule 28-2.6 (New 12/01/2018) | https://cdn.ca9.uscourts.gov/datastore/uploads/forms/form17.pdf |
 | F34 | Form 34, Disclosure Statement under FRAP 26.1 and Circuit Rule 26.1-1 | https://cdn.ca9.uscourts.gov/datastore/uploads/forms/form34.pdf |
-| EX | The filed exemplar in `exemplars/` (Sweet v. McMahon, No. 26-1136, DktEntry 23.1). Visual reference only. | local |
+| EX | The filed exemplar in `usage/` (Sweet v. McMahon, No. 26-1136, DktEntry 23.1). Visual reference only. | local |
 
 Kinds: **M** = mandated by a court rule (FRAP or Ninth Circuit Rule). **C** = convention (taken from the exemplar or common practice; the rules leave it open). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable (content the lawyer must supply).
 

@@ -2,18 +2,18 @@
 
 - Court: `scotus`, Supreme Court of the United States (`courts/supreme-court-of-the-united-states/`)
 - Doc type: `cert-petition`. Petition for a writ of certiorari in booklet format (Rules 14, 33.1, 34). One self-contained folder, no shared files.
-- Exemplar: `exemplars/FILED-EXAMPLE-fisher-14-981-cert-petition.pdf` (*Fisher v. University of Texas at Austin*, No. 14-981, filed 2015-02-10; provenance in `exemplars/SOURCE.md`).
-- Sample: `samples/INPUT-fisher-cert-petition.md`, a transcription of the filed petition's cover, front pages, opening, Statement A and Part III, with signature and certificate (see Known gaps, 2).
+- Exemplar: `usage/SAMPLE-scotus-cert-petition-fisher14981.pdf` (*Fisher v. University of Texas at Austin*, No. 14-981, filed 2015-02-10; provenance in `usage/SOURCE.md`).
+- Sample: `usage/INPUT-scotus-cert-petition-fisher.md`, a transcription of the filed petition's cover, front pages, opening, Statement A and Part III, with signature and certificate (see Known gaps, 2).
 
 ## Status
 
 | Item | Result |
 |---|---|
-| Exemplar | yes: `exemplars/FILED-EXAMPLE-fisher-14-981-cert-petition.pdf` (re-downloaded 2026-10-14 from the URL in `SOURCE.md`; 374 pages, the first 43 are the petition; `SOURCE.md` records no checksum; sha256 of the copy in the folder is `0ea2c1627b3fe6d969d3b104e6f49bdf27e78f847ac034b9198d3b49fd71f24a`, fetched again 2026-10-15) |
-| Sample | `samples/INPUT-fisher-cert-petition.md` (kept from the earlier pass; excerpt, 14 rendered pages) |
-| Render | ok (2026-10-15): `sh tools/render.sh courts/supreme-court-of-the-united-states/cert-petition samples/INPUT-fisher-cert-petition.md` writes `samples/OUTPUT-fisher-cert-petition.pdf` (14 pages, exit 0, no typst warnings, `--ignore-system-fonts`) |
+| Exemplar | yes: `usage/SAMPLE-scotus-cert-petition-fisher14981.pdf` (re-downloaded 2026-10-14 from the URL in `SOURCE.md`; 374 pages, the first 43 are the petition; `SOURCE.md` records no checksum; sha256 of the copy in the folder is `0ea2c1627b3fe6d969d3b104e6f49bdf27e78f847ac034b9198d3b49fd71f24a`, fetched again 2026-10-15) |
+| Sample | `usage/INPUT-scotus-cert-petition-fisher.md` (kept from the earlier pass; excerpt, 14 rendered pages) |
+| Render | ok (2026-10-15): `sh tools/render.sh courts/supreme-court-of-the-united-states/cert-petition usage/INPUT-scotus-cert-petition-fisher.md` writes `usage/OUTPUT-scotus-cert-petition-fisher.typst.pdf` (14 pages, exit 0, no typst warnings, `--ignore-system-fonts`) |
 | Fonts | `pdffonts`: TeXGyreSchola-Regular, -Bold, -Italic embedded (CID Type 0C, subset). No EB Garamond or system face in the output. |
-| Overlay | ok (2026-10-15): `sh tools/overlay.sh courts/supreme-court-of-the-united-states/cert-petition fisher-cert-petition` writes `samples/OVERLAY-fisher-cert-petition.pdf` and `.txt` (14 pages) |
+| Overlay | ok (2026-10-15): `sh tools/overlay.sh courts/supreme-court-of-the-united-states/cert-petition fisher-cert-petition` writes `usage/OVERLAY-fisher-cert-petition.pdf` and `.txt` (14 pages) |
 | Pages reviewed | 14 of 14 (2026-10-15: every page of the render rasterized with `pdftoppm -r 70` and viewed as PNG) |
 | Typeface | Required: Century family, Rule 33.1(b). Substitute: **TeX Gyre Schola** (exact Typst family name, from `docs/FONTS.md`), vendored in `fonts/tex-gyre-schola/`. Class: metric-compatible (the upstream README says its glyph widths follow the Adobe New Century Schoolbook AFMs). The overlay shows 100% word overlap on body pages 6 and 7, but that is not a line-break check. No EB Garamond in this template; the overlay label font (a shared tool) is EB Garamond, which is not part of the court output. |
 | Open | Tier-2 items in the Gate 2 table below. `court.json` untouched. latex and docx engines not built. |
@@ -28,19 +28,19 @@ None for typst. The typeface blocker recorded in the earlier pass was wrong: `fo
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...`, calls `scotus-cert-petition`. |
 | `typst/scotus-cert-petition-cert-petition.typ` | Template. Parameter block at the top: `word-limit` (9,000), `typeface`, sizes, leading, the 6 1/8 x 9 1/4 inch booklet page and its margins. |
-| `samples/INPUT-fisher-cert-petition.md` | Markdown sample: frontmatter (cover, counsel, authorities) plus body. |
-| `samples/OUTPUT-fisher-cert-petition.pdf` | Our render (14 pages). |
-| `samples/OVERLAY-fisher-cert-petition.pdf`, `.txt` | Red/blue comparison against the filed exemplar and the page map. |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-scotus-cert-petition-fisher.md` | Markdown sample: frontmatter (cover, counsel, authorities) plus body. |
+| `usage/OUTPUT-scotus-cert-petition-fisher.typst.pdf` | Our render (14 pages). |
+| `usage/OVERLAY-fisher-cert-petition.pdf`, `.txt` | Red/blue comparison against the filed exemplar and the page map. |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
 Build (from the repo root, with the toolchain on `PATH`):
 
 ```sh
-sh tools/render.sh courts/supreme-court-of-the-united-states/cert-petition samples/INPUT-fisher-cert-petition.md
+sh tools/render.sh courts/supreme-court-of-the-united-states/cert-petition usage/INPUT-scotus-cert-petition-fisher.md
 sh tools/overlay.sh courts/supreme-court-of-the-united-states/cert-petition fisher-cert-petition
 ```
 
-Overlay naming: `tools/overlay.sh` reads `samples/OUTPUT-<id>.pdf` and writes `samples/OVERLAY-<id>.pdf` and `.txt`. The brief named `<id>-overlay.pdf`; the tool's naming is used because `tools/` is shared.
+Overlay naming: `tools/overlay.sh` reads `usage/OUTPUT-<id>.pdf` and writes `usage/OVERLAY-<id>.pdf` and `.txt`. The brief named `<id>-overlay.pdf`; the tool's naming is used because `tools/` is shared.
 
 ## Governing rules
 
@@ -65,11 +65,11 @@ Primary source: *Rules of the Supreme Court of the United States*, effective Mar
 
 ## Overlay
 
-`samples/OVERLAY-fisher-cert-petition.pdf` pairs each page of our render with the best-matching filed page by word overlap (`samples/OVERLAY-fisher-cert-petition.txt` is the page map). It is diagnostic, not a score. Pairing (ours to filed): cover 1 to 1 (84%), Questions Presented 2 to 2 (93%), parties 3 to 3 (100%), TOC 4 to 4 (38%: our TOC is a generated list, the filed page is laid out differently), TOA 5 to 8 (30%: low overlap, not a check), the body 6 to 11, 7 to 12, 8 to 13, 9 to 14 (100%, 100%, 97%, 82%), the Part III pages 10 to 41, 11 to 42, 12 to 43 (68%, 70%, 44%: the best matches fall in the filed petition's last pages, so the pairing is approximate), the signature page 13 to filed 1 (65%: the filed cover shares the counsel names), and the certificate 14 to filed 4 (21%: low overlap, no certificate match).
+`usage/OVERLAY-fisher-cert-petition.pdf` pairs each page of our render with the best-matching filed page by word overlap (`usage/OVERLAY-fisher-cert-petition.txt` is the page map). It is diagnostic, not a score. Pairing (ours to filed): cover 1 to 1 (84%), Questions Presented 2 to 2 (93%), parties 3 to 3 (100%), TOC 4 to 4 (38%: our TOC is a generated list, the filed page is laid out differently), TOA 5 to 8 (30%: low overlap, not a check), the body 6 to 11, 7 to 12, 8 to 13, 9 to 14 (100%, 100%, 97%, 82%), the Part III pages 10 to 41, 11 to 42, 12 to 43 (68%, 70%, 44%: the best matches fall in the filed petition's last pages, so the pairing is approximate), the signature page 13 to filed 1 (65%: the filed cover shares the counsel names), and the certificate 14 to filed 4 (21%: low overlap, no certificate match).
 
 ## Page review (Gate 2)
 
-Render with TeX Gyre Schola, 14 pages (`samples/OUTPUT-fisher-cert-petition.pdf`). Each page rasterized with `pdftoppm -r 70` and viewed.
+Render with TeX Gyre Schola, 14 pages (`usage/OUTPUT-scotus-cert-petition-fisher.typst.pdf`). Each page rasterized with `pdftoppm -r 70` and viewed.
 
 | Page | Content | Result |
 |---|---|---|
@@ -100,7 +100,7 @@ Page numbers: the table numbers the 14 PDF pages in order. The cover (PDF page 1
 4. **Footnotes.** The template styles footnotes at 10 point with 2-point leading, but the excerpt has none, so that path has not been rendered or reviewed.
 5. **Cover colour and paper copies.** Rule 33.1(e) cover colour (white for a petition) and paper-copy binding are not produced; the PDF is plain white. Forty paper copies (Rule 33.1(f)) are not produced.
 6. **Word count.** `count-words` is a markdown token count, not a word-processor count; it has not been cross-checked against the PDF text.
-7. **Exemplar provenance.** The exemplar is a copy from a law-firm site; the docket number is confirmed on supremecourt.gov, but the Court's own DocketPDF copy was not found (see `exemplars/SOURCE.md`).
+7. **Exemplar provenance.** The exemplar is a copy from a law-firm site; the docket number is confirmed on supremecourt.gov, but the Court's own DocketPDF copy was not found (see `usage/SOURCE.md`).
 8. **Exemplar age.** The exemplar is from 2015, before the 2019 booklet and word-limit changes that the template follows. The current rules were read directly from the 2026 PDF; the exemplar only settles layout details the rules leave open.
 9. **Engines.** `latex/` and `docx/` are not built for this doc type. Only typst is in scope for this pass.
 

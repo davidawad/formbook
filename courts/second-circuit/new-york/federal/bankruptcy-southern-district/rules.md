@@ -16,10 +16,10 @@ Re-check cadence: re-check annually each December 1 (when amended Federal Rules 
 | FRCP | Federal Rule of Civil Procedure 10 (applied by FRBP 7010) | https://www.law.cornell.edu/rules/frcp/rule_10 |
 | F416D | Official Form 416D (12/15), Caption for Use in Adversary Proceeding (sha256 a2ed5c2eeba7f1a78c4ae18fb9d9ee97d9586b67bf0e92766c35e85470082834) | https://www.uscourts.gov/file/18775/download |
 | JLR | Local Rules of the U.S. District Courts for the Southern and Eastern Districts of New York, effective January 2, 2026 (Local Civil Rules 1.1, 7.1, 11.1). **Not binding in this court** (see Findings 1); cited only as the origin of the conventions. sha256 439b9e2c67fd4ca1d1be65a7f28ca53707820bcbabb4b459323ade1a773607af | https://www.nysd.uscourts.gov/sites/default/files/local_rules/2026-01-02%20-%20EDNY%20and%20SDNY%20Joint%20Local%20Rules%20As%20Amended.pdf |
-| EX-CEL | Complaint, Celsius Network Ltd. v. Tether Ltd., Adv. Proc. 24-04018 (MG), ECF 1 (Quinn Emanuel) | `adversary-complaint/exemplars/` |
-| EX-EHR | Complaint, Lawyers' Fund for Client Protection v. Ehrenfeld, Adv. Pro. 19-01128 (NY Attorney General) | `adversary-complaint/exemplars/` |
-| EX-REV | Debtors' memorandum in support of motion to dismiss, AIMCO CLO 10 v. Revlon, Adv. Pro. 22-01167 (DSJ), ECF 16 (Paul Weiss et al.) | `motion-brief/exemplars/` |
-| EX-TET | Defendants' memorandum in support of motion to dismiss, Celsius v. Tether, Adv. Proc. 24-04018 (MG), ECF 33 (Kramer Levin) | `motion-brief/exemplars/` |
+| EX-CEL | Complaint, Celsius Network Ltd. v. Tether Ltd., Adv. Proc. 24-04018 (MG), ECF 1 (Quinn Emanuel) | `adversary-complaint/usage/` |
+| EX-EHR | Complaint, Lawyers' Fund for Client Protection v. Ehrenfeld, Adv. Pro. 19-01128 (NY Attorney General) | `adversary-complaint/usage/` |
+| EX-REV | Debtors' memorandum in support of motion to dismiss, AIMCO CLO 10 v. Revlon, Adv. Pro. 22-01167 (DSJ), ECF 16 (Paul Weiss et al.) | `motion-brief/usage/` |
+| EX-TET | Defendants' memorandum in support of motion to dismiss, Celsius v. Tether, Adv. Proc. 24-04018 (MG), ECF 33 (Kramer Levin) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule that binds filers in this court (FRBP, FRCP as applied by FRBP, LBR, the court's ECF Procedures, an Official Form). **C** = convention (the rules leave it open; taken from exemplars of different filers). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

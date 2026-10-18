@@ -5,11 +5,11 @@ Court for the Northern District of Indiana (`innd`). Folder: `courts/seventh-cir
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-mcgonigle-1-25-cv-398-motion-brief.pdf` (sampled; 15 pages), plus `exemplars/FILED-EXAMPLE-nowak-3-24-cv-950-motion-brief.pdf` (second filer; 20 pages). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-mcgonigle-motion-brief.md`: the whole memorandum transcribed (caption, I–IV headings with A/B and 1–3 sub-headings, 13 footnotes, one block quotation, conclusion, signature block, certificate of service). |
+| exemplar | yes: `usage/SAMPLE-innd-motion-brief-mcgonigle125cv398.pdf` (sampled; 15 pages), plus `usage/SAMPLE-innd-motion-brief-nowak324cv950.pdf` (second filer; 20 pages). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-innd-motion-brief-mcgonigle.md`: the whole memorandum transcribed (caption, I–IV headings with A/B and 1–3 sub-headings, 13 footnotes, one block quotation, conclusion, signature block, certificate of service). |
 | typeface | No face named by the rule: EB Garamond (vendored), per `docs/FONTS.md` ("No face named"). Embedded per `pdffonts`: EBGaramond Regular, Bold, Italic, BoldItalic. See Known gaps 1. |
-| render | ok: `samples/OUTPUT-mcgonigle-motion-brief.pdf`, 13 pages, typst 0.15.0, vendored fonts only, no warnings (re-rendered 2026-10-15) |
-| overlay | ok: `samples/OVERLAY-mcgonigle-motion-brief.pdf` and `OVERLAY-mcgonigle-motion-brief.txt` (rebuilt 2026-10-15) |
+| render | ok: `usage/OUTPUT-innd-motion-brief-mcgonigle.typst.pdf`, 13 pages, typst 0.15.0, vendored fonts only, no warnings (re-rendered 2026-10-15) |
+| overlay | ok: `usage/OVERLAY-mcgonigle-motion-brief.pdf` and `OVERLAY-mcgonigle-motion-brief.txt` (rebuilt 2026-10-15) |
 | pages reviewed | 13 of 13 (every page rasterized and viewed on the 2026-10-15 build) |
 
 File names follow `CLAUDE.md` and the `tools/` defaults (`INPUT-`, `OUTPUT-`, `OVERLAY-`); see `../complaint/README.md`.
@@ -74,7 +74,7 @@ Not produced by this template (separate filings): the motion itself, the propose
 4. **Quotation citation.** The citation that follows the block quotation (`2003 TCPA Order, 18 FCC Rcd. 14014 ¶ 166 (emphasis added).`) is a continuation paragraph with an indent; in the filing it continues the text flush left. Tier-2 cosmetic difference.
 5. **Non-breaking spaces.** `¶` and the number after it can break across lines (for example "Compl. ¶ / 62"). The template does not set non-breaking spaces; the filing does not seem to either.
 6. **Page limit not enforced** (see the rules table).
-7. **Second exemplar not compared page by page.** The Nowak memorandum (20 pages) is in `exemplars/`; its first and last pages were read for structure and the certificate was checked, but it was not rendered side by side with our output. Tier-2 rests on the sampled filing and the rules.
+7. **Second exemplar not compared page by page.** The Nowak memorandum (20 pages) is in `usage/`; its first and last pages were read for structure and the certificate was checked, but it was not rendered side by side with our output. Tier-2 rests on the sampled filing and the rules.
 8. **Gate scripts not run** (same reason as the complaint: `tools/check.sh` expects a court folder with `court.json`; the brief forbids touching `tools/`).
 9. **Current local rules unverified** (see Governing rules).
 
@@ -96,11 +96,11 @@ Not produced by this template (separate filings): the motion itself, the propose
 
 Earlier builds had two defects, fixed and re-rendered: (a) a space after a footnote marker was lost ("call.’”¹If"), because the inline renderer trims spaces at its edges (fixed: `seg()` restores the space); (b) the same leading defect as the complaint (fixed: `below: body-leading` on every block).
 
-Overlay: `samples/OVERLAY-mcgonigle-motion-brief.txt` pairs our pages 1–13 with filed pages 1–6 and 8–14. Filed page 7 and filed page 15 are not the best match for any page of ours; filed page 15 is the certificate of service, which our page 13 carries. Word overlap 47–87%. The overlay is a diagnostic, not a score.
+Overlay: `usage/OVERLAY-mcgonigle-motion-brief.txt` pairs our pages 1–13 with filed pages 1–6 and 8–14. Filed page 7 and filed page 15 are not the best match for any page of ours; filed page 15 is the certificate of service, which our page 13 carries. Word overlap 47–87%. The overlay is a diagnostic, not a score.
 
 ## Engines
 
-DOCX (`docx/`): pandoc on `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx`) with the filter `docx/innd.lua`. Output: `samples/OUTPUT-mcgonigle-motion-brief.docx`.
+DOCX (`docx/`): pandoc on `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx`) with the filter `docx/innd.lua`. Output: `usage/OUTPUT-innd-motion-brief-mcgonigle.docx`.
 
 - Matches the typst form: EB Garamond 12 pt body, exact 27.6 pt double line pitch, 0.5 in first-line indent, 1 in margins on letter paper, 10 pt single-spaced footnotes, 13.8 pt single lines in the caption and signature, centered page-number footer, headings (level 1 centered caps, level 2 bold, level 3 bold italic), single-spaced block quotes, "1." labelled lists, caption table with a right and bottom rule on the party column, certificate of service after the signature.
 - Differs or unverified: paragraph gap (19.8 pt) is set as space-after; the signature and certificate blocks are tables, so they are not kept on one page with the last paragraph as typst does (no keep-with-next); the list tab stop approximates typst's label gap; table border weights and cell padding are not compared against the typst layout.

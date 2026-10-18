@@ -1,6 +1,6 @@
 # California Supreme Court: petition for review (`cal`)
 
-Doc-type folder for the California Supreme Court (`cal`, `courts/ninth-circuit/california/state/supreme-court/`). It is self-contained: exemplars, sample, template, and this README. The court root's `typst/` and `samples/` (other doc types) are not touched.
+Doc-type folder for the California Supreme Court (`cal`, `courts/ninth-circuit/california/state/supreme-court/`). It is self-contained: exemplars, sample, template, and this README. The court root's `typst/` and `usage/` (other doc types) are not touched.
 
 Status: exemplar found (two filed petitions); typst template renders the sample with no warnings; overlay generated against the primary exemplar; every page of the sample rendered and inspected (13 of 13; again on 2026-10-16, see "Verification pass"). Latex and docx engines are not built for this doc type.
 
@@ -8,12 +8,12 @@ Status: exemplar found (two filed petitions); typst template renders the sample 
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-quach-s275121-petition-for-review.pdf` | Primary exemplar (filed 2022-06-20, petitioner's counsel The Vora Law Firm). Used for the transcription and the overlay. |
-| `exemplars/FILED-EXAMPLE-hoehn-s277510-petition-for-review.pdf` | Second filer (filed 2022-11-28, Kazan McClain). Not transcribed; kept for the tier-2 comparison. |
-| `exemplars/SOURCE.md` | URLs fetched, case, docket, filer, date filed, date fetched, and why each was chosen. |
-| `samples/INPUT-quach-s275121.md` | Markdown transcription of a PORTION of the Quach petition (cover, tables, issues, part of introduction, statement, reasons, conclusion, certificate of compliance, proof of service). |
-| `samples/OUTPUT-quach-s275121.pdf` | Render of the sample: `sh tools/render.sh <this dir> samples/INPUT-quach-s275121.md`. 13 pages. |
-| `samples/OVERLAY-quach-s275121.pdf`, `-overlay.txt` | Red/blue test against the Quach exemplar (see below). |
+| `usage/SAMPLE-cal-petition-for-review-quachs275121.pdf` | Primary exemplar (filed 2022-06-20, petitioner's counsel The Vora Law Firm). Used for the transcription and the overlay. |
+| `usage/SAMPLE-cal-petition-for-review-hoehns277510.pdf` | Second filer (filed 2022-11-28, Kazan McClain). Not transcribed; kept for the tier-2 comparison. |
+| `usage/SOURCE.md` | URLs fetched, case, docket, filer, date filed, date fetched, and why each was chosen. |
+| `usage/INPUT-cal-petition-for-review-quachs275121.md` | Markdown transcription of a PORTION of the Quach petition (cover, tables, issues, part of introduction, statement, reasons, conclusion, certificate of compliance, proof of service). |
+| `usage/OUTPUT-cal-petition-for-review-quachs275121.typst.pdf` | Render of the sample: `sh tools/render.sh <this dir> usage/INPUT-cal-petition-for-review-quachs275121.md`. 13 pages. |
+| `usage/OVERLAY-quach-s275121.pdf`, `-overlay.txt` | Red/blue test against the Quach exemplar (see below). |
 | `typst/main.typ` | Entrypoint: reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/cal-petition-for-review.typ` | The template: `cal-petition(meta, md)`. Content-agnostic; every number is a named parameter at the top and traces to a rule or a stated style choice. |
 
@@ -21,8 +21,8 @@ Build and overlay (from the repo root):
 
 ```sh
 D=courts/ninth-circuit/california/state/supreme-court/petition-for-review
-sh tools/render.sh $D samples/INPUT-quach-s275121.md
-sh tools/overlay.sh $D quach-s275121 $D/exemplars/FILED-EXAMPLE-quach-s275121-petition-for-review.pdf
+sh tools/render.sh $D usage/INPUT-cal-petition-for-review-quachs275121.md
+sh tools/overlay.sh $D quach-s275121 $D/usage/SAMPLE-quach-s275121-petition-for-review.pdf
 ```
 
 Pass the exemplar explicitly to `overlay.sh`: with no third argument it uses the first exemplar alphabetically (Hoehn), which is not the one the sample was transcribed from.
@@ -103,13 +103,13 @@ The word count in the certificate is computed from the body markdown (headings, 
 
 ## Overlay
 
-`samples/OVERLAY-quach-s275121.pdf` puts each sample page (red) over the exemplar page it matches (blue); black is where both agree. Pages are paired by word overlap (`-overlay.txt`), not by index. It is a diagnostic, not a score. Read it page by page.
+`usage/OVERLAY-quach-s275121.pdf` puts each sample page (red) over the exemplar page it matches (blue); black is where both agree. Pages are paired by word overlap (`-overlay.txt`), not by index. It is a diagnostic, not a score. Read it page by page.
 
 The pairing in the current render (TeX Gyre Schola; `-overlay.txt`): sample p.1 with filed p.1 (cover, 84%); p.2 (TOC) with filed p.2 (47%); p.3 (TOA) with filed p.5 (30%); the issues page (sample p.4) with filed p.8 (87%); the sample's pages 5 to 7 with filed pages 9 to 11 (78% to 81%); sample pages 8 to 13 with filed pages 14, 23, 24, 26, 42 and 78 (38% to 76%). The filed exemplar's body starts on p.8 and ours on p.4, because our TOC and TOA are shorter (they list only what the portion cites). The lower overlaps (sample pp.11 and 12, 38% and 58%) are where the sample skips exemplar text between the parts it transcribed, so the paired filed page holds text the sample does not have. Sample pages 12 and 13 are the certificate of compliance and the proof of service; they pair with filed pages 42 and 78, which are the exemplar's own certificate and proof of service.
 
 ## Verification pass 2026-10-16 (fb-595.26.15)
 
-- Rendered `samples/INPUT-quach-s275121.md` with `tools/render.sh` (typst): exit 0, no warnings, 13 pages before and after the fixes (the committed OUTPUT was not stale in page count). Fonts (`pdffonts`): TeX Gyre Schola regular, bold, italic, embedded, nothing else.
+- Rendered `usage/INPUT-cal-petition-for-review-quachs275121.md` with `tools/render.sh` (typst): exit 0, no warnings, 13 pages before and after the fixes (the committed OUTPUT was not stale in page count). Fonts (`pdffonts`): TeX Gyre Schola regular, bold, italic, embedded, nothing else.
 - Viewed all 13 pages at 60 dpi before the fixes and all 13 again after them. Compared the exemplar's page 1 with our cover. Overlay re-run against the Quach exemplar and all 13 overlay pages viewed: pairing as in "Overlay" above (cover 84%).
 - Fixed, page 1 (cover): the counsel block sat in a column fixed at half the text width, so "(SBN 266728)", "(SBN 323482)" and "Suite 300" wrapped onto lines of their own. It now sits against the right margin and is as wide as its widest line (at least half the text width), as in the exemplar. The address lines are upright (they were italic), the telephone carries "Telephone:", and the party represented is printed under the block (new required field `represents`, rule 8.74(c)(1)); the cover had no "Attorneys for …" line before.
 - Fixed, page 2 (TOC): a wrapped entry ("Following Morgan, … Applies to") ran into the page-number column. Page numbers now sit in their own column; wrapped lines stop short of it.

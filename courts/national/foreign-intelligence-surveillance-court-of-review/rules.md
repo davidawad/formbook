@@ -12,8 +12,8 @@ Re-check cadence: the Rules carry the version footer "May-18" and take effect si
 | RP | FISC/FISCR "Rules of Procedure" page ("Court of Review" link) | https://www.fisc.uscourts.gov/rules-procedure |
 | FRAP-32 | Fed. R. App. P. 32 (form of briefs), as published by LII on 2026-10-17 (includes the 2024 amendment notes) | https://www.law.cornell.edu/rules/frap/rule_32 |
 | FRAP-29 | Fed. R. App. P. 29 (amicus briefs), as published by LII on 2026-10-17 | https://www.law.cornell.edu/rules/frap/rule_29 |
-| EX-donohue | `amicus-brief/exemplars/FILED-EXAMPLE-certification-of-questions-fiscr-18-01-amicus-brief.pdf` (court-appointed amicus Prof. Laura K. Donohue) | local |
-| EX-rcfp | `amicus-brief/exemplars/FILED-EXAMPLE-reporters-committee-fiscr-18-01-amicus-brief.pdf` (volunteer amicus, The Reporters Committee for Freedom of the Press) | local |
+| EX-donohue | `amicus-brief/usage/SAMPLE-fiscr-amicus-brief-certificationofquestionsfiscr1801.pdf` (court-appointed amicus Prof. Laura K. Donohue) | local |
+| EX-rcfp | `amicus-brief/usage/SAMPLE-fiscr-amicus-brief-reporterscommitteefiscr1801.pdf` (volunteer amicus, The Reporters Committee for Freedom of the Press) | local |
 
 Kinds: **M** = mandated by a FISCR Rule or a FRAP provision it incorporates. **C** = convention. **T** = project/tooling rule. **A** = author responsibility.
 

@@ -1,14 +1,14 @@
 # cacd: complaint
 
 Doc type: **complaint** in the United States District Court for the Central District of California (`cacd`).
-Folder: `courts/ninth-circuit/california/federal/central-district/complaint/` (self-contained: `typst/`, `exemplars/`, `samples/`).
+Folder: `courts/ninth-circuit/california/federal/central-district/complaint/` (self-contained: `typst/`, `usage/`, `usage/`).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-alarcon-2-26-cv-11868-complaint.pdf` (1 filer: Plaintiffs' counsel, Kuzyk Law LLP; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-alarcon-complaint.md` (a portion of the 33-page filing; see below) |
-| render | ok: `samples/OUTPUT-alarcon-complaint.pdf`, 8 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -BoldItalic, all embedded), no typst warnings |
-| overlay | ok: `samples/OVERLAY-alarcon-complaint.pdf` and `samples/OVERLAY-alarcon-complaint.txt` (page map below) |
+| exemplar | yes: `usage/SAMPLE-cacd-complaint-alarcon226cv11868.pdf` (1 filer: Plaintiffs' counsel, Kuzyk Law LLP; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-cacd-complaint-alarcon.md` (a portion of the 33-page filing; see below) |
+| render | ok: `usage/OUTPUT-cacd-complaint-alarcon.typst.pdf`, 8 pages, typst 0.15.0 via `tools/render.sh`, vendored EB Garamond only (`pdffonts`: EBGaramond-Regular, -Bold, -BoldItalic, all embedded), no typst warnings |
+| overlay | ok: `usage/OVERLAY-alarcon-complaint.pdf` and `usage/OVERLAY-alarcon-complaint.txt` (page map below) |
 | pages reviewed | 8 of 8: every page rendered at 60 dpi and viewed at the final template state |
 
 File names: the repo tools (`tools/render.sh`, `tools/overlay.sh`) write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.{pdf,txt}`, and `INPUT-<id>.md` is the sample. The `<id>` is `alarcon-complaint`. This follows CLAUDE.md's file-role naming rather than `<id>.pdf`/`<id>-overlay.pdf`.
@@ -85,7 +85,7 @@ Red is our render, blue is the filed page, black is where they agree. The overla
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` makes `reference.docx`, `cacd-complaint.lua` is the filter, `render.sh` fills the footer from the sample). Checked with LibreOffice only; Word was not available. Render: `sh tools/render.sh --engine docx complaint samples/INPUT-alarcon-complaint.md`, which gives `OUTPUT-alarcon-complaint.docx` and `.docx.pdf` (8 pages, all viewed).
+**docx** (`docx/`: `build-reference.sh` makes `reference.docx`, `cacd-complaint.lua` is the filter, `render.sh` fills the footer from the sample). Checked with LibreOffice only; Word was not available. Render: `sh tools/render.sh --engine docx complaint usage/INPUT-cacd-complaint-alarcon.md`, which gives `OUTPUT-cacd-complaint-alarcon.docx` and `.docx.pdf` (8 pages, all viewed).
 
 - Matches the typst output: EB Garamond 14 pt; exact 24 pt line pitch on the 28-line grid; letter size, 1 in top margin; 28 line numbers 1 to 28 on every page (a page-anchored text box in the header); pleading rules (page borders); counsel block single spaced from line 1 with the court title on line 11 in the sample; caption with the party column's right and bottom rules; numbered allegations; headings centered or bold italic; signature block kept together on one page; footer with page number, title and case number.
 - Differs: the pleading rules are page borders around the text area, not full-height lines. The caption and signature block are tables. A title too long for its footer cell wraps to two lines. `-` list items render as bullets, which is what the typst template's `list` produces; the contract text above says lettered (a), (b), which the typst code does not do for `-` items.

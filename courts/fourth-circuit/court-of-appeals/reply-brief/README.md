@@ -7,11 +7,11 @@ Status: exemplar found, template and sample render; overlay generated; every ren
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-dnc-de-luca-26-1532-reply-brief.pdf` | The filed exemplar: *Democracy North Carolina v. De Luca*, No. 26-1532, Reply Brief of Appellants (36 pages, Doc. 34, filed 08/13/2026). Text-based PDF. |
-| `exemplars/SOURCE.md` | URL fetched from, case, docket, filer, dates. |
-| `samples/INPUT-de-luca-reply-brief.md` | Markdown transcription of an excerpt of the exemplar (see "Known gaps"). Frontmatter + body, per the markdown contract below. |
-| `samples/OUTPUT-de-luca-reply-brief.pdf` | `sh tools/render.sh courts/fourth-circuit/court-of-appeals/reply-brief samples/INPUT-de-luca-reply-brief.md` (10 pages). |
-| `samples/OVERLAY-de-luca-reply-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/reply-brief de-luca-reply-brief` (red = ours, blue = filed, black = both). |
+| `usage/SAMPLE-ca4-reply-brief-dncdeluca261532.pdf` | The filed exemplar: *Democracy North Carolina v. De Luca*, No. 26-1532, Reply Brief of Appellants (36 pages, Doc. 34, filed 08/13/2026). Text-based PDF. |
+| `usage/SOURCE.md` | URL fetched from, case, docket, filer, dates. |
+| `usage/INPUT-ca4-reply-brief-deluca.md` | Markdown transcription of an excerpt of the exemplar (see "Known gaps"). Frontmatter + body, per the markdown contract below. |
+| `usage/OUTPUT-ca4-reply-brief-deluca.typst.pdf` | `sh tools/render.sh courts/fourth-circuit/court-of-appeals/reply-brief usage/INPUT-ca4-reply-brief-deluca.md` (10 pages). |
+| `usage/OVERLAY-de-luca-reply-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/reply-brief de-luca-reply-brief` (red = ours, blue = filed, black = both). |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca4-reply-brief.typ` | The template: `ca4-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. Structure copied from `courts/ninth-circuit/court-of-appeals/typst/ca9-brief.typ`; the numbers, cover, certificates and related-cases section are the Fourth Circuit's. |
 
@@ -19,7 +19,7 @@ Build and check (from the repo root):
 
 ```sh
 export PATH="$HOME/.local/share/formbook/env/bin:$PATH"   # tools/bootstrap.sh toolchain
-sh tools/render.sh courts/fourth-circuit/court-of-appeals/reply-brief samples/INPUT-de-luca-reply-brief.md
+sh tools/render.sh courts/fourth-circuit/court-of-appeals/reply-brief usage/INPUT-ca4-reply-brief-deluca.md
 sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/reply-brief de-luca-reply-brief
 ```
 
@@ -94,7 +94,7 @@ Body: `# Heading` is a section (bold, capitals, centered). `## ` is a point head
 
 ## What the overlay shows
 
-`samples/OVERLAY-de-luca-reply-brief.txt` pairs each of our pages with the filed page that shares the most words:
+`usage/OVERLAY-de-luca-reply-brief.txt` pairs each of our pages with the filed page that shares the most words:
 
 ```
 ours p.1  filed p.1   39.2%   (cover)
@@ -151,11 +151,11 @@ Nothing is `OPEN` that blocks the build. The docx and latex engines were not bui
 
 ## Engines
 
-Three renderings of the same markdown (`samples/INPUT-de-luca-reply-brief.md`). The typst template is the reference.
+Three renderings of the same markdown (`usage/INPUT-ca4-reply-brief-deluca.md`). The typst template is the reference.
 
-**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-de-luca-reply-brief.latex.pdf`, 11 pages, every page rendered at 50 dpi and viewed after the font change. Layout item the font change exposed, not fixed here: the "CONCLUSION" heading sits at the foot of page 6 with its text on page 7. Matches: Liberation Serif only, double spacing at the typst pitch, 1-inch margins, the cover with the case number and judge line and counsel's telephone number, contents (addendum headings are kept out of the main contents) and authorities, the Form 6 style certificate of compliance (1,334 words, the same as typst's count) with its signature and date line, and the certificate of service on its own page. The addendum's `Add-N` folios are built but the sample has no addendum. Differs: the cover is tighter (fixed gap); body spacing differs slightly, so page breaks and folios differ from typst. Signature: typst's reply `signature-line` writes `s/` with no leading slash; this engine writes `/s/` as the other briefs do. Confirm which is wanted. Not checked by `check.sh` (no `checks.yaml` in this court).
+**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `usage/OUTPUT-ca4-reply-brief-deluca.latex.pdf`, 11 pages, every page rendered at 50 dpi and viewed after the font change. Layout item the font change exposed, not fixed here: the "CONCLUSION" heading sits at the foot of page 6 with its text on page 7. Matches: Liberation Serif only, double spacing at the typst pitch, 1-inch margins, the cover with the case number and judge line and counsel's telephone number, contents (addendum headings are kept out of the main contents) and authorities, the Form 6 style certificate of compliance (1,334 words, the same as typst's count) with its signature and date line, and the certificate of service on its own page. The addendum's `Add-N` folios are built but the sample has no addendum. Differs: the cover is tighter (fixed gap); body spacing differs slightly, so page breaks and folios differ from typst. Signature: typst's reply `signature-line` writes `s/` with no leading slash; this engine writes `/s/` as the other briefs do. Confirm which is wanted. Not checked by `check.sh` (no `checks.yaml` in this court).
 
-**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `samples/OUTPUT-de-luca-reply-brief.docx` is written; the `.docx.pdf` is not (see BLOCKED). Styles and sections as in the opening brief. Contents and authorities are Word fields. Certificate word count 1,334.
+**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `usage/OUTPUT-ca4-reply-brief-deluca.docx` is written; the `.docx.pdf` is not (see BLOCKED). Styles and sections as in the opening brief. Contents and authorities are Word fields. Certificate word count 1,334.
 
 BLOCKED (docx):
 - All gates on the `.docx.pdf`: no LibreOffice on this box (see the opening brief's README, Engines).
@@ -166,8 +166,8 @@ BLOCKED (docx):
 
 ## Verification pass 2026-10-16 (fb-595.26.4)
 
-- Exemplars: `exemplars/` held two files with the same SHA-256 (`3136a819…`): `FILED-EXAMPLE-dnc-de-luca-26-1532-reply-brief.pdf` (the one `SOURCE.md` and this README name) and an undocumented copy, `FILED-EXAMPLE-de-luca-v-nc-26-1532-reply-brief.pdf`. The copy was removed; `overlay.sh` picks the first PDF in the folder, which is now the documented one.
-- Rendered: `sh tools/render.sh … samples/INPUT-de-luca-reply-brief.md` exit 0, no typst warnings, Liberation Serif only (`pdffonts`). 10 pages, the same count as the committed PDF.
+- Exemplars: `usage/` held two files with the same SHA-256 (`3136a819…`): `SAMPLE-ca4-reply-brief-dncdeluca261532.pdf` (the one `SOURCE.md` and this README name) and an undocumented copy, `SAMPLE-de-luca-v-nc-26-1532-reply-brief.pdf`. The copy was removed; `overlay.sh` picks the first PDF in the folder, which is now the documented one.
+- Rendered: `sh tools/render.sh … usage/INPUT-ca4-reply-brief-deluca.md` exit 0, no typst warnings, Liberation Serif only (`pdffonts`). 10 pages, the same count as the committed PDF.
 - Overlay: `sh tools/overlay.sh … de-luca-reply-brief` exit 0; page map unchanged (table above). All 10 overlay pages viewed. The cover pairs weakly (39%) because the filed cover carries the full caption and "(counsel listed on reverse)"; body pages line up line for line where the text is transcribed.
 - Pages viewed: 10 of 10 typst pages at 60 dpi, plus the exemplar's pages 1 and 2 (cover and counsel list). After the fixes, pp. 1–3 were viewed again (pp. 4–10 are pixel-identical to the first render, `compare -metric AE`).
 - Fixed (template): cover counsel lines were italic and indented; they are now roman and flush, as in the filed counsel list. The `Page` / `Page(s)` underline crossed the descender of the "g"; it now sits lower.

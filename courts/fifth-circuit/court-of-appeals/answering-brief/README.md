@@ -5,10 +5,10 @@ Doc type: the appellee's principal brief, which the Fifth Circuit calls the "Bri
 
 Status of this doc type:
 
-- exemplar: yes (one filed brief, see `exemplars/SOURCE.md`)
-- sample: `samples/INPUT-dawes-answering-brief.md` (a transcribed portion, 14 rendered pages)
-- render: ok (`sh tools/render.sh courts/fifth-circuit/court-of-appeals/answering-brief samples/INPUT-dawes-answering-brief.md`, no typst warnings)
-- overlay: ok (`samples/OVERLAY-dawes-answering-brief.pdf`, `-overlay.txt`)
+- exemplar: yes (one filed brief, see `usage/SOURCE.md`)
+- sample: `usage/INPUT-ca5-answering-brief-dawes.md` (a transcribed portion, 14 rendered pages)
+- render: ok (`sh tools/render.sh courts/fifth-circuit/court-of-appeals/answering-brief usage/INPUT-ca5-answering-brief-dawes.md`, no typst warnings)
+- overlay: ok (`usage/OVERLAY-dawes-answering-brief.pdf`, `-overlay.txt`)
 - pages reviewed: 14 of 14 rendered (every page rasterized at 60 dpi and looked at; see the review log)
 
 Not done: the tier-1 open questions under "Open questions" below. The template does not emit a red cover, and I could not confirm two local-rule points from primary text.
@@ -41,7 +41,7 @@ Verified 2026-10-14. "Primary text" means the rule text was fetched and read; "s
 | CA5-CERT-001 | Certificate of compliance: type-volume (FRAP 32(a)(7)(B)) with the word count, excluding the FRAP 32(f) items | FRAP 32(g)(1), same URL | 2026-10-14, primary text | `certificate-of-compliance()` |
 | CA5-CERT-002 | Certificate of compliance: typeface (FRAP 32(a)(5)) and type style (FRAP 32(a)(6)), with the program and size | FRAP 32(g)(1), same URL | 2026-10-14, primary text | Frontmatter field `prepared_with` |
 | CA5-CERT-003 | Certificate of service; privacy statement | FRAP 25(d) and 25(a)(5), https://www.law.cornell.edu/rules/frap/rule_25 | 2026-10-14, primary text | `certificate-of-service()`, used when `service.certificate: true` |
-| CA5-CERT-004 | Certificate of interested persons, Fifth Circuit Local Rule 28.2.1 (a governmental party may be exempt) | The filed exemplar cites it (`exemplars/SOURCE.md`); the rule text was not found | secondary | Frontmatter field `interested_persons`, printed before the table of contents |
+| CA5-CERT-004 | Certificate of interested persons, Fifth Circuit Local Rule 28.2.1 (a governmental party may be exempt) | The filed exemplar cites it (`usage/SOURCE.md`); the rule text was not found | secondary | Frontmatter field `interested_persons`, printed before the table of contents |
 | CA5-LOCAL-001 | Local Rule 32.3 and Form 6: certificate of compliance; a 2023 notice proposed adding a generative-AI certification | Notice of proposed amendment, https://www.ca5.uscourts.gov/docs/default-source/default-document-library/public-comment-local-rule.pdf (comments closed 4 Jan 2024) | 2026-10-14, primary text of the notice; adoption NOT confirmed | Not implemented: see Open questions |
 
 Word limit in the sample: 1,333 words, counted by the template from the sample markdown. The exemplar's own certificate says 10,199 words; the two numbers are not comparable, because the sample is a portion.
@@ -50,13 +50,13 @@ Word limit in the sample: 1,333 words, counted by the template from the sample m
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-dawes-v-city-of-dallas-25-10979-answering-brief.pdf` | The filed exemplar: Brief of Appellee City of Dallas, Document 38, 62 pages, text-based (pdftotext yields the text). |
-| `exemplars/SOURCE.md` | Where it came from, the docket, the filer, the date filed and fetched. |
+| `usage/SAMPLE-ca5-answering-brief-dawesvcityofdallas2510979.pdf` | The filed exemplar: Brief of Appellee City of Dallas, Document 38, 62 pages, text-based (pdftotext yields the text). |
+| `usage/SOURCE.md` | Where it came from, the docket, the filer, the date filed and fetched. |
 | `typst/main.typ` | Entry point. Reads `--input sample=...` and calls the template. |
 | `typst/ca5-answering-brief.typ` | The template, `ca5-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top, each tied to a rule ID above. |
-| `samples/INPUT-dawes-answering-brief.md` | Markdown for the exemplar: frontmatter (cover, counsel, certificates, authorities) and a portion of the body. |
-| `samples/OUTPUT-dawes-answering-brief.pdf` | Render of the sample, 14 pages. |
-| `samples/OVERLAY-dawes-answering-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map. |
+| `usage/INPUT-ca5-answering-brief-dawes.md` | Markdown for the exemplar: frontmatter (cover, counsel, certificates, authorities) and a portion of the body. |
+| `usage/OUTPUT-ca5-answering-brief-dawes.typst.pdf` | Render of the sample, 14 pages. |
+| `usage/OVERLAY-dawes-answering-brief.pdf`, `-overlay.txt` | Red/blue overlay against the exemplar, and the page map. |
 
 ## Markdown contract (differences from ca9)
 

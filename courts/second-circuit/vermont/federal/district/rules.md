@@ -14,11 +14,11 @@ Every requirement below cites one of these. Page numbers are the printed page nu
 | AP | D. Vt. Administrative Procedures for Electronic Case Filing (ECF), February 2025 (15 pp., sha256 `22f032e1f54ef7444e59168de5067fcb2f4c2552418584f801e73f6c067414a2`). L.R. 5(b) makes compliance mandatory for electronic filings. Fetched 2026-10-17. | https://www.vtd.uscourts.gov/sites/vtd/files/Administrative%20Procedures%20February%202025.pdf |
 | RULES-PAGE | Court's "Local Rules and Orders" page (links both PDFs above). Fetched 2026-10-17 (the site rejects a bare `Mozilla/5.0` user agent; a full browser user agent works). | https://www.vtd.uscourts.gov/court-info/local-rules-and-orders |
 | FRCP | Federal Rules of Civil Procedure 5, 7, 7.1, 8, 10, 11, 38 (LII text, fetched 2026-10-17) | https://www.law.cornell.edu/rules/frcp/rule_5 (and `rule_7`, `rule_7.1`, `rule_8`, `rule_10`, `rule_11`, `rule_38`) |
-| EX-C1 | Complaint exemplar 1: *Bonges v. Town of Milton*, 2:26-cv-00283, ECF 1 (Plaintiff Bonges; Darby Kolter & Roberts LLP and Kingsbury Law) | `complaint/exemplars/SOURCE.md` |
-| EX-C2 | Complaint exemplar 2: *United States v. State of Vermont*, 2:26-cv-00272, ECF 1 (United States; DOJ Civil Division) | `complaint/exemplars/SOURCE.md` |
-| EX-M1 | Motion-brief exemplar 1: *BlackBerry Corp. v. Coulter*, 5:22-cv-00098, ECF 16 (Defendant Coulter; Langrock Sperry & Wool, LLP) | `motion-brief/exemplars/SOURCE.md` |
-| EX-M2 | Motion-brief exemplar 2: *Bingham Brook, LLC v. Verdantas, LLC*, 2:26-cv-00223, ECF 15-1 (Defendant Verdantas; Gardner Preston, PLLC) | `motion-brief/exemplars/SOURCE.md` |
-| EX-M3 | Motion-brief exemplar 3: *Poitras v. Clark*, 2:26-cv-00234, ECF 17 (Defendant Attorney General Clark; Vermont Office of the Attorney General) | `motion-brief/exemplars/SOURCE.md` |
+| EX-C1 | Complaint exemplar 1: *Bonges v. Town of Milton*, 2:26-cv-00283, ECF 1 (Plaintiff Bonges; Darby Kolter & Roberts LLP and Kingsbury Law) | `complaint/usage/SOURCE.md` |
+| EX-C2 | Complaint exemplar 2: *United States v. State of Vermont*, 2:26-cv-00272, ECF 1 (United States; DOJ Civil Division) | `complaint/usage/SOURCE.md` |
+| EX-M1 | Motion-brief exemplar 1: *BlackBerry Corp. v. Coulter*, 5:22-cv-00098, ECF 16 (Defendant Coulter; Langrock Sperry & Wool, LLP) | `motion-brief/usage/SOURCE.md` |
+| EX-M2 | Motion-brief exemplar 2: *Bingham Brook, LLC v. Verdantas, LLC*, 2:26-cv-00223, ECF 15-1 (Defendant Verdantas; Gardner Preston, PLLC) | `motion-brief/usage/SOURCE.md` |
+| EX-M3 | Motion-brief exemplar 3: *Poitras v. Clark*, 2:26-cv-00234, ECF 17 (Defendant Attorney General Clark; Vermont Office of the Attorney General) | `motion-brief/usage/SOURCE.md` |
 
 Kinds: **M** = mandated by a court rule (Local Rule, ECF Administrative Procedures made binding by L.R. 5(b), or FRCP). **C** = convention (the rules leave it open; taken from the exemplars, and the row says which filers show it). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

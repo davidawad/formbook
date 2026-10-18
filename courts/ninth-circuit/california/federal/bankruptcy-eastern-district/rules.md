@@ -21,7 +21,7 @@ Kinds: **M** mandated by rule; **C** convention; **T** project requirement; **A*
 | CAEB-CONT-001 | An adversary proceeding starts by complaint, with claim and demand for relief. | FRBP 7003, 7008; FRCP 8 | M |
 | CAEB-CONT-002 | Complaint caption identifies court, parties and adversary proceeding; allegations are numbered as required for civil pleadings. | FRBP 9004; FRCP 10(a)-(b) via FRBP 7010 | M |
 | CAEB-CONT-003 | Complete the required Adversary Proceeding Cover Sheet (Form B1040) with the initiating complaint. | CAEB-LBR, LBR 7003-1 | M |
-| CAEB-FORM-002 | Visible pleading-paper and caption treatment in the complaint exemplars is a convention where the current local rule leaves that choice open. | `exemplars/SOURCE.md`, cross-filer comparison | C |
+| CAEB-FORM-002 | Visible pleading-paper and caption treatment in the complaint exemplars is a convention where the current local rule leaves that choice open. | `usage/SOURCE.md`, cross-filer comparison | C |
 
 ### Adversary complaint
 

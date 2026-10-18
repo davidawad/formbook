@@ -54,22 +54,22 @@ The body is markdown: `#` is a section (centered bold), `##` a sub-section (bold
 
 ## Samples
 
-- `samples/INPUT-dpg-emergency-petition.md`: transcribed from `exemplars/FILED-EXAMPLE-democratic-party-of-georgia-A230012-petition-for-review.pdf`. Frontmatter from the cover, counsel, certificate and signature. Body is an **excerpt**: Introduction; Jurisdiction; Factual and Procedural Background; Enumeration of Errors; Legal Standard; Argument through the first two sub-sections (a, b); the closing "important issues" paragraph; Conclusion. Omitted: Argument sub-sections c–e and the middle of "Plaintiffs' interpretation". Footnote URLs (perma.cc, twitter) are dropped (Rule 17(3)). Footnotes are condensed to their text.
+- `usage/INPUT-ga-petition-for-review-dpgemergencypetition.md`: transcribed from `usage/SAMPLE-ga-petition-for-review-democraticpartyofgeorgiaa230012.pdf`. Frontmatter from the cover, counsel, certificate and signature. Body is an **excerpt**: Introduction; Jurisdiction; Factual and Procedural Background; Enumeration of Errors; Legal Standard; Argument through the first two sub-sections (a, b); the closing "important issues" paragraph; Conclusion. Omitted: Argument sub-sections c–e and the middle of "Plaintiffs' interpretation". Footnote URLs (perma.cc, twitter) are dropped (Rule 17(3)). Footnotes are condensed to their text.
 - The filed petition has no Questions Presented page before the TOC (its "Enumeration of Errors" carries the question). The sample adds `questions_presented` from that same question text to satisfy Rule 41(2), so the template's page is a rule-driven addition, not an exemplar copy.
-- Render: `samples/OUTPUT-dpg-emergency-petition.pdf`, 12 PDF pages: cover (unnumbered), questions presented (printed 1), TOC (2), body (3–9), Conclusion with the Rule 20(7) statement and signature (10), certificate of service (11).
+- Render: `usage/OUTPUT-ga-petition-for-review-dpgemergencypetition.typst.pdf`, 12 PDF pages: cover (unnumbered), questions presented (printed 1), TOC (2), body (3–9), Conclusion with the Rule 20(7) statement and signature (10), certificate of service (11).
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-democratic-party-of-georgia-A230012-petition-for-review.pdf`: pages 1–34 of the filed package (exhibits cut). Filed by Intervenors (Georgia Republican Party, NRSC, RNC), Court of Appeals docket A230012; certificate of service dated November 22, 2022. This is an **emergency** petition from an interlocutory superior-court order, not a petition from a Court of Appeals decision. Rule 41 applies to both. Provenance: `exemplars/SOURCE.md`.
+- `usage/SAMPLE-ga-petition-for-review-democraticpartyofgeorgiaa230012.pdf`: pages 1–34 of the filed package (exhibits cut). Filed by Intervenors (Georgia Republican Party, NRSC, RNC), Court of Appeals docket A230012; certificate of service dated November 22, 2022. This is an **emergency** petition from an interlocutory superior-court order, not a petition from a Court of Appeals decision. Rule 41 applies to both. Provenance: `usage/SOURCE.md`.
 - No word-count certificate appears on the filed petition (checked: none of its pages carry Rule 20(7) wording). The template adds it because Rule 20(7) requires it.
 
 ## Overlay
 
-`samples/OVERLAY-dpg-emergency-petition.pdf` and `samples/OVERLAY-dpg-emergency-petition.txt` (from `sh tools/overlay.sh`). Red is our render, blue is the filed exemplar page paired by word overlap, black is where they agree. The page map is in the `.txt`. The page map pairs ours p.2 (questions presented) with filed p.13 at 30.6%, which is expected: the filed petition has no questions page before the TOC. Body pages (ours 3–9) pair at 57–78% word overlap. The overlap measures transcription coverage (the sample is an excerpt), not layout. Pages 10–12 (conclusion, certificate) pair at 31–59%, mostly names and addresses.
+`usage/OVERLAY-dpg-emergency-petition.pdf` and `usage/OVERLAY-dpg-emergency-petition.txt` (from `sh tools/overlay.sh`). Red is our render, blue is the filed exemplar page paired by word overlap, black is where they agree. The page map is in the `.txt`. The page map pairs ours p.2 (questions presented) with filed p.13 at 30.6%, which is expected: the filed petition has no questions page before the TOC. Body pages (ours 3–9) pair at 57–78% word overlap. The overlap measures transcription coverage (the sample is an excerpt), not layout. Pages 10–12 (conclusion, certificate) pair at 31–59%, mostly names and addresses.
 
 ## Gate 2: page review (Gate 2 record)
 
-Every page of `samples/OUTPUT-dpg-emergency-petition.pdf` was rasterized at 60 dpi and read. Pages 1–12 reviewed (12 of 12).
+Every page of `usage/OUTPUT-ga-petition-for-review-dpgemergencypetition.typst.pdf` was rasterized at 60 dpi and read. Pages 1–12 reviewed (12 of 12).
 
 | Page (PDF) | Printed | Result |
 |---|---|---|
@@ -103,7 +103,7 @@ Defects found and fixed during the review (not present in the final render):
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (conda-forge)
-sh tools/render.sh courts/eleventh-circuit/georgia/state/supreme-court/petition-for-review samples/INPUT-dpg-emergency-petition.md
+sh tools/render.sh courts/eleventh-circuit/georgia/state/supreme-court/petition-for-review usage/INPUT-ga-petition-for-review-dpgemergencypetition.md
 sh tools/overlay.sh courts/eleventh-circuit/georgia/state/supreme-court/petition-for-review dpg-emergency-petition
 ```
 
@@ -111,7 +111,7 @@ The render fails on any typst warning and on any font outside the vendored set (
 
 ## Engines
 
-Typst is the primary engine (above). The DOCX engine is `docx/`, the same files as `motion-brief/docx/`: `build-reference.sh` writes `reference.docx`; `ga-motion.lua` builds the cover, the questions presented (Rule 41(2), before the TOC), the TOC, closing and certificate; `render.sh` makes two renders so the TOC numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> samples/INPUT-dpg-emergency-petition.md`: `samples/OUTPUT-dpg-emergency-petition.docx` and `.docx.pdf` (LibreOffice 26.8.1).
+Typst is the primary engine (above). The DOCX engine is `docx/`, the same files as `motion-brief/docx/`: `build-reference.sh` writes `reference.docx`; `ga-motion.lua` builds the cover, the questions presented (Rule 41(2), before the TOC), the TOC, closing and certificate; `render.sh` makes two renders so the TOC numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> usage/INPUT-ga-petition-for-review-dpgemergencypetition.md`: `usage/OUTPUT-ga-petition-for-review-dpgemergencypetition.docx` and `.docx.pdf` (LibreOffice 26.8.1).
 
 | | docx | typst |
 |---|---|---|
@@ -124,7 +124,7 @@ Typst is the primary engine (above). The DOCX engine is `docx/`, the same files 
 | Closing | the signature kept on one page | same |
 | Certificate | same; recipients in two columns, the third and later wrapping | same |
 
-Checked: every page of `OUTPUT-dpg-emergency-petition.docx.pdf` was rendered (60 dpi) and set beside the typst page; line positions were measured with `pdftotext -bbox`.
+Checked: every page of `OUTPUT-ga-petition-for-review-dpgemergencypetition.docx.pdf` was rendered (60 dpi) and set beside the typst page; line positions were measured with `pdftotext -bbox`.
 
 What differs:
 

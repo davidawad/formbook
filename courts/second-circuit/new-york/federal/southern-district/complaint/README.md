@@ -5,16 +5,16 @@ Folder: `courts/second-circuit/new-york/federal/southern-district/complaint/`. S
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-sacchi-26-cv-08973-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-sacchi-complaint.md` (a partial transcription of the 20-page filing: the caption, most of the allegations, the causes of action it covers, the prayer and the signature; see Sample) |
+| exemplar | yes: `usage/SAMPLE-nysd-complaint-sacchi26cv08973.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-nysd-complaint-sacchi.md` (a partial transcription of the 20-page filing: the caption, most of the allegations, the causes of action it covers, the prayer and the signature; see Sample) |
 | typeface | face required: **none** (the joint rules name no face; see NYSD-FORM-002). Vendored substitute: **none needed**, EB Garamond kept per `docs/FONTS.md` ("No face named"). Fit: n/a. `pdffonts`: EBGaramond-Regular and -Bold, embedded. |
-| render | ok: `samples/OUTPUT-sacchi-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
-| overlay | ok: `samples/OVERLAY-sacchi-complaint.pdf` and `OVERLAY-sacchi-complaint.txt` (re-generated 2026-10-15 against `exemplars/FILED-EXAMPLE-sacchi-26-cv-08973-complaint.pdf`, the RECAP copy named in `exemplars/SOURCE.md`) |
+| render | ok: `usage/OUTPUT-nysd-complaint-sacchi.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (re-rendered 2026-10-15) |
+| overlay | ok: `usage/OVERLAY-sacchi-complaint.pdf` and `OVERLAY-sacchi-complaint.txt` (re-generated 2026-10-15 against `usage/SAMPLE-nysd-complaint-sacchi26cv08973.pdf`, the RECAP copy named in `usage/SOURCE.md`) |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and looked at, again on 2026-10-15 after the re-render) |
 
-Naming note: the brief asked for `samples/<id>.md` and `<id>-overlay.pdf`. The tools (`tools/render.sh`, `tools/overlay.sh`) and the repo convention use `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so the files follow that. The id is `sacchi-complaint`.
+Naming note: the brief asked for `usage/<id>.md` and `<id>-overlay.pdf`. The tools (`tools/render.sh`, `tools/overlay.sh`) and the repo convention use `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so the files follow that. The id is `sacchi-complaint`.
 
-Not set here: `court.json` status, the court-root `typst/` and `samples/` folders (untouched), `STATUS.md`, the tracker.
+Not set here: `court.json` status, the court-root `typst/` and `usage/` folders (untouched), `STATUS.md`, the tracker.
 
 ## Governing rules
 
@@ -60,7 +60,7 @@ Not produced by this template (separate filings, not verified here): civil cover
 
 ## Sample
 
-- `samples/INPUT-sacchi-complaint.md` transcribes the exemplar's caption, the lead-in, the opening headline, filed paragraphs 1 to 7, 10 to 13, 16 to 20 (jurisdiction, venue, parties), 23 to 28 and 30 and 35 (facts and class allegations, with the class question list), the first and second causes of action (36 to 50), the WHEREFORE paragraph, the prayer for relief, the jury demand and the signature block.
+- `usage/INPUT-nysd-complaint-sacchi.md` transcribes the exemplar's caption, the lead-in, the opening headline, filed paragraphs 1 to 7, 10 to 13, 16 to 20 (jurisdiction, venue, parties), 23 to 28 and 30 and 35 (facts and class allegations, with the class question list), the first and second causes of action (36 to 50), the WHEREFORE paragraph, the prayer for relief, the jury demand and the signature block.
 - Not transcribed: filed paragraphs 8, 9, 14, 15, 21, 22, 29, 31 to 34, and the third to fifth causes of action (51 to 58). These are left out to keep the render at 11 pages; the frontmatter header comment says the same.
 - The filed paragraph numbers are not reproduced (the template numbers from 1). The filing itself repeats "27" after "35"; the template numbers paragraphs in order.
 - Footnotes transcribed: the executive order cite (filed note 2, on paragraph 1; the render numbers it 1) and the New Jersey arbitration note (filed note 4, on paragraph 11; the render numbers it 2). Filed notes 1, 3 and 5 are not transcribed (note 1 repeats the executive order cite under the headline; notes 3 and 5 sit on omitted paragraphs).
@@ -70,12 +70,12 @@ Not produced by this template (separate filings, not verified here): civil cover
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/second-circuit/new-york/federal/southern-district/complaint samples/INPUT-sacchi-complaint.md
+sh tools/render.sh courts/second-circuit/new-york/federal/southern-district/complaint usage/INPUT-nysd-complaint-sacchi.md
 sh tools/overlay.sh courts/second-circuit/new-york/federal/southern-district/complaint sacchi-complaint
 ```
 
-- `samples/OUTPUT-sacchi-complaint.pdf`: 11 pages. typst compiled with no warnings; `render.sh` fails on any warning. Vendored fonts only (`pdffonts`: EBGaramond-Regular and -Bold, embedded).
-- `samples/OVERLAY-sacchi-complaint.pdf` and `.txt`: red = our render, blue = exemplar, black = both agree. Pages are paired by word overlap, which is coarse. The overlay is a diagnostic, not a score. Pages 1 and 2 pair with the filed pages 1 and 2 (81% and 71% overlap). Pages 3 to 7 pair with filed pages 3 to 11 at 33% to 55%, because the sample omits paragraphs and the filed document is 20 pages long. Page 11 (the signature) pairs with filed page 19 at 29%, which is the lowest, because the filed signature page sits on a different page from the sample's.
+- `usage/OUTPUT-nysd-complaint-sacchi.typst.pdf`: 11 pages. typst compiled with no warnings; `render.sh` fails on any warning. Vendored fonts only (`pdffonts`: EBGaramond-Regular and -Bold, embedded).
+- `usage/OVERLAY-sacchi-complaint.pdf` and `.txt`: red = our render, blue = exemplar, black = both agree. Pages are paired by word overlap, which is coarse. The overlay is a diagnostic, not a score. Pages 1 and 2 pair with the filed pages 1 and 2 (81% and 71% overlap). Pages 3 to 7 pair with filed pages 3 to 11 at 33% to 55%, because the sample omits paragraphs and the filed document is 20 pages long. Page 11 (the signature) pairs with filed page 19 at 29%, which is the lowest, because the filed signature page sits on a different page from the sample's.
 
 ## Visual review (Gate 2 record, all 11 pages, rendered at 60 dpi and looked at)
 
@@ -107,7 +107,7 @@ sh tools/overlay.sh courts/second-circuit/new-york/federal/southern-district/com
 
 ## Engines
 
-DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `complaint.lua` builds the caption, the numbering and the signature). Output: `samples/OUTPUT-sacchi-complaint.docx` and `.docx.pdf` (LibreOffice PDF, 9 pages). Opened and converted by LibreOffice without error (no Word here).
+DOCX (`docx/`: `build-reference.sh` makes `reference.docx`; `complaint.lua` builds the caption, the numbering and the signature). Output: `usage/OUTPUT-nysd-complaint-sacchi.docx` and `.docx.pdf` (LibreOffice PDF, 9 pages). Opened and converted by LibreOffice without error (no Word here).
 
 - Matches the typst output: letter paper, 1 in margins; EB Garamond 12 pt (`pdffonts`: EBGaramond-Regular and -Bold, embedded); body double spaced at an exact 24 pt pitch; 0.5 in first-line indent; numbered paragraphs 1, 2, ...; the WHEREFORE paragraph and the jury demand unnumbered; lettered prayer and class questions (a), (b), ...; block quotation indented and single spaced; footnotes single spaced; centered page number at the top; caption with the rule at the right and bottom of the party block; signature block after the jury demand.
 - Differs: docx headings are 12 pt bold (the typst headings render larger). Both meet NYSD-FORM-001; not chased. The docx runs 9 pages against 11 for typst; the cause (heading size, spacing around headings) was not investigated. The caption is a Word table, so border weight may differ slightly in Word.

@@ -2,8 +2,8 @@
 
 - Court: `nvb`, United States Bankruptcy Court, District of Nevada (`courts/ninth-circuit/nevada/federal/bankruptcy-district/`)
 - Doc type: `adversary-complaint`. A complaint commencing an adversary proceeding (FRBP 7001 et seq.), with numbered paragraphs, separate claims for relief, and a prayer.
-- Exemplar: `exemplars/FILED-EXAMPLE-lovato-v-sasson-26-05033-adversary-complaint.pdf` (*Lovato v. Sasson*, Adv. No. 26-05033-gs, filed 2026-08-05; provenance in `exemplars/SOURCE.md`). One filer only; see Gaps.
-- Sample: `samples/INPUT-lovato-v-sasson-complaint.md` (transcribed from the exemplar; 10 pages rendered, the exemplar's 10).
+- Exemplar: `usage/SAMPLE-nvb-adversary-complaint-lovatovsasson2605033.pdf` (*Lovato v. Sasson*, Adv. No. 26-05033-gs, filed 2026-08-05; provenance in `usage/SOURCE.md`). One filer only; see Gaps.
+- Sample: `usage/INPUT-nvb-adversary-complaint-lovatovsassoncomplaint.md` (transcribed from the exemplar; 10 pages rendered, the exemplar's 10).
 - Status: template, render, overlay and page review done (below). `court.json` untouched; no status set.
 
 ## Files
@@ -12,10 +12,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `nvb-adversary-complaint`. |
 | `typst/nvb-adversary-complaint.typ` | Template. Parameter block at the top (type size, leading, line numbers, margins), with the rule each traces to. |
-| `samples/INPUT-lovato-v-sasson-complaint.md` | Markdown contract sample (frontmatter: counsel, debtor, caption parties, case and adversary numbers, title, signature; body: headings, numbered paragraphs, a block quotation, a lettered list, the prayer). |
-| `samples/OUTPUT-lovato-v-sasson-complaint.pdf` | `sh tools/render.sh courts/ninth-circuit/nevada/federal/bankruptcy-district/adversary-complaint samples/INPUT-lovato-v-sasson-complaint.md` (10 pages, EB Garamond only, no typst warnings). |
-| `samples/OVERLAY-lovato-v-sasson-complaint.pdf`, `.txt` | `sh tools/overlay.sh <court>/adversary-complaint lovato-v-sasson-complaint` (red = ours, blue = filed, black = both agree). |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-nvb-adversary-complaint-lovatovsassoncomplaint.md` | Markdown contract sample (frontmatter: counsel, debtor, caption parties, case and adversary numbers, title, signature; body: headings, numbered paragraphs, a block quotation, a lettered list, the prayer). |
+| `usage/OUTPUT-nvb-adversary-complaint-lovatovsassoncomplaint.typst.pdf` | `sh tools/render.sh courts/ninth-circuit/nevada/federal/bankruptcy-district/adversary-complaint usage/INPUT-nvb-adversary-complaint-lovatovsassoncomplaint.md` (10 pages, EB Garamond only, no typst warnings). |
+| `usage/OVERLAY-lovato-v-sasson-complaint.pdf`, `.txt` | `sh tools/overlay.sh <court>/adversary-complaint lovato-v-sasson-complaint` (red = ours, blue = filed, black = both agree). |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
 ## Governing rules
 
@@ -37,7 +37,7 @@ Choices that the rules leave open (tier 2 or 3, not asserted mechanically): the 
 
 ## Overlay
 
-`samples/OVERLAY-lovato-v-sasson-complaint.pdf` puts our render (red) over the best-matching filed page (blue). Pages are paired by word overlap, not index. Diagnostic only, not a score. Pairings from the last run:
+`usage/OVERLAY-lovato-v-sasson-complaint.pdf` puts our render (red) over the best-matching filed page (blue). Pages are paired by word overlap, not index. Diagnostic only, not a score. Pairings from the last run:
 
 - p.1 ↔ filed p.1 (87%), p.2 ↔ p.2 (84%), p.3 ↔ p.3 (87%), p.4 ↔ p.4 (84%): cover, parties, jurisdiction line up.
 - p.5 ↔ p.5 (59%) through p.10 ↔ p.9 (47%): the body lines up with the same passages, but page breaks fall elsewhere because the filed ECF header and its spacing are not reproduced and our text runs with a different line count. Pagination differs; the text does not.
@@ -45,7 +45,7 @@ Choices that the rules leave open (tier 2 or 3, not asserted mechanically): the 
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-lovato-v-sasson-complaint.pdf` was rasterized at 60 dpi and viewed (10 of 10), against the filed exemplar page of the same number.
+Every page of `OUTPUT-nvb-adversary-complaint-lovatovsassoncomplaint.typst.pdf` was rasterized at 60 dpi and viewed (10 of 10), against the filed exemplar page of the same number.
 
 | Page | Content | Result |
 |---|---|---|
@@ -62,7 +62,7 @@ Every page of `OUTPUT-lovato-v-sasson-complaint.pdf` was rasterized at 60 dpi an
 
 ## Gaps
 
-- **One filer only.** The brief asks for one exemplar; EVAL-LOOP tier 2 asks for two or three filers. `exemplars/SOURCE.md` records two other D. Nev. adversary complaints (Adv. 26-05029 and 26-05034, not saved), and a class-action complaint (Adv. 26-05036). Tier 2 is therefore judged against one filer and the result is provisional.
+- **One filer only.** The brief asks for one exemplar; EVAL-LOOP tier 2 asks for two or three filers. `usage/SOURCE.md` records two other D. Nev. adversary complaints (Adv. 26-05029 and 26-05034, not saved), and a class-action complaint (Adv. 26-05036). Tier 2 is therefore judged against one filer and the result is provisional.
 - Tier-2 choices we did not take from the exemplar: the exemplar's Times face (we use EB Garamond, vendored, at 13 pt); its caption rules and the adversary-number placement (ours fills the line from frontmatter).
 - The "Dated" line and the two-firm signature block follow the sample; the exemplar's signature order is not compared line by line.
 - Summons and cover sheet (LR 7003) are not produced; the template is the complaint only.
@@ -70,7 +70,7 @@ Every page of `OUTPUT-lovato-v-sasson-complaint.pdf` was rasterized at 60 dpi an
 
 ## Engines
 
-docx (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx` from pandoc's default reference) and the filter `docx/nvb-adversary-complaint.lua`. Rendered with `sh tools/render.sh --engine docx <this folder> samples/INPUT-lovato-v-sasson-complaint.md`: `samples/OUTPUT-lovato-v-sasson-complaint.docx` and its LibreOffice PDF `.docx.pdf` (10 pages; the typst render is 10 pages). Page review: `reviews/2026-10-15-docx.md` (every page viewed).
+docx (`docx/`): `docx/reference.docx` (built by `sh docx/build-reference.sh docx/reference.docx` from pandoc's default reference) and the filter `docx/nvb-adversary-complaint.lua`. Rendered with `sh tools/render.sh --engine docx <this folder> usage/INPUT-nvb-adversary-complaint-lovatovsassoncomplaint.md`: `usage/OUTPUT-nvb-adversary-complaint-lovatovsassoncomplaint.docx` and its LibreOffice PDF `.docx.pdf` (10 pages; the typst render is 10 pages). Page review: `reviews/2026-10-15-docx.md` (every page viewed).
 
 What matches the typst output:
 - US Letter; top margin 1 in; left 1.5 in; right 0.75 in; bottom 48 pt; the text area is 28 lines at exact 24 pt.
@@ -86,4 +86,4 @@ What differs from typst:
 - Word has not been used to open the file. LibreOffice opens and converts it with no repair prompt. The header text box is Word 2010+ DrawingML (`wps`) without an `mc:AlternateContent` fallback.
 
 BLOCKED:
-BLOCKED: check.sh (all gates, every docx check ID): not runnable in this folder. `tools/check.sh` reads `<court-dir>/court.json`, `<court-dir>/checks.yaml`, `rules.md` and `reviews/`, and this doc-type folder has only the template, samples and exemplars (`court.json` exists only at `../` (the court folder); `checks.yaml` and `rules.md` exist nowhere in this court yet). No docx gate was evaluated, so `samples/.check-docx.txt` is not written and the docx engine is not marked passing.
+BLOCKED: check.sh (all gates, every docx check ID): not runnable in this folder. `tools/check.sh` reads `<court-dir>/court.json`, `<court-dir>/checks.yaml`, `rules.md` and `reviews/`, and this doc-type folder has only the template, samples and exemplars (`court.json` exists only at `../` (the court folder); `checks.yaml` and `rules.md` exist nowhere in this court yet). No docx gate was evaluated, so `usage/.check-docx.txt` is not written and the docx engine is not marked passing.

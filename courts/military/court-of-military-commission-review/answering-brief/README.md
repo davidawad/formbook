@@ -1,6 +1,6 @@
 # USCMCR: brief of the appellee (answering brief)
 
-Status for this doc type: exemplar=yes, render=ok, overlay=ok, pages_reviewed=10 (every page of `samples/OUTPUT-hicks-answering-brief.pdf`, viewed after the last render).
+Status for this doc type: exemplar=yes, render=ok, overlay=ok, pages_reviewed=10 (every page of `usage/OUTPUT-mc-answering-brief-hicks.typst.pdf`, viewed after the last render).
 
 **Tier 1 (the rules' mandated form) is NOT verified.** The governing rules text could not be read (see "Rule basis"), and the typeface the rules call for is not vendored (see "Typeface"). Do not treat this template as passing tier 1.
 
@@ -8,21 +8,21 @@ Status for this doc type: exemplar=yes, render=ok, overlay=ok, pages_reviewed=10
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-hicks-13-004-answering-brief.pdf` | **Primary exemplar.** The United States' brief (Dec. 19, 2013), 49 pages, text-based. |
-| `exemplars/FILED-EXAMPLE-hicks-13-004-answer-appellant.pdf` | Second exemplar, for comparison only: Hicks' "Answer Brief Re Jurisdiction" (Jan. 10, 2014), 26 pages. Not transcribed. |
-| `exemplars/SOURCE.md` | URL, case, filer, date filed, date fetched, for both. |
-| `samples/INPUT-hicks-answering-brief.md` | Markdown transcription of the primary exemplar: cover data, issues and brief answers, jurisdiction, statement of facts A and B (in part), argument I (in part), conclusion, footnotes, certificate data. |
-| `samples/OUTPUT-hicks-answering-brief.pdf` | Our render (9 pages). |
-| `samples/OVERLAY-hicks-answering-brief.pdf`, `.txt` | Red (ours) over blue (filed) overlay, and its page map. |
+| `usage/SAMPLE-mc-answering-brief-hicks13004.pdf` | **Primary exemplar.** The United States' brief (Dec. 19, 2013), 49 pages, text-based. |
+| `usage/SAMPLE-mc-answering-brief-hicks13004answerappellant.pdf` | Second exemplar, for comparison only: Hicks' "Answer Brief Re Jurisdiction" (Jan. 10, 2014), 26 pages. Not transcribed. |
+| `usage/SOURCE.md` | URL, case, filer, date filed, date fetched, for both. |
+| `usage/INPUT-mc-answering-brief-hicks.md` | Markdown transcription of the primary exemplar: cover data, issues and brief answers, jurisdiction, statement of facts A and B (in part), argument I (in part), conclusion, footnotes, certificate data. |
+| `usage/OUTPUT-mc-answering-brief-hicks.typst.pdf` | Our render (9 pages). |
+| `usage/OVERLAY-hicks-answering-brief.pdf`, `.txt` | Red (ours) over blue (filed) overlay, and its page map. |
 | `typst/main.typ` | Entry point. |
 | `typst/mc-answering-brief.typ` | The template: `mc-brief(meta, body)`. Same structure and parameters as the opening-brief template; the two files are kept separate, one per doc type. |
 
 Build and check (from the repo root, with the toolchain on `PATH`):
 
 ```sh
-sh tools/render.sh courts/military/court-of-military-commission-review/answering-brief samples/INPUT-hicks-answering-brief.md
+sh tools/render.sh courts/military/court-of-military-commission-review/answering-brief usage/INPUT-mc-answering-brief-hicks.md
 sh tools/overlay.sh courts/military/court-of-military-commission-review/answering-brief hicks-answering-brief \
-  courts/military/court-of-military-commission-review/answering-brief/exemplars/FILED-EXAMPLE-hicks-13-004-answering-brief.pdf
+  courts/military/court-of-military-commission-review/answering-brief/usage/SAMPLE-mc-answering-brief-hicks13004.pdf
 ```
 
 The overlay needs the explicit third argument. Without it, `tools/overlay.sh` takes the first exemplar in alphabetical order, and that is the Hicks appellant answer (`answer-appellant` sorts before `answering-brief`), not the government brief the sample was transcribed from.
@@ -58,7 +58,7 @@ The filed government brief is set in Times-Roman and Times-Bold in a Word export
 
 ## Overlay (red/blue)
 
-`samples/OVERLAY-hicks-answering-brief.pdf` pairs each of our pages with the filed page sharing the most words, against the government brief (the explicit reference above). Map from `OVERLAY-hicks-answering-brief.txt`:
+`usage/OVERLAY-hicks-answering-brief.pdf` pairs each of our pages with the filed page sharing the most words, against the government brief (the explicit reference above). Map from `OVERLAY-hicks-answering-brief.txt`:
 
 | Our page | Filed page | Word overlap |
 |---|---|---|
@@ -77,7 +77,7 @@ The contents page has low overlap because the filed brief's contents are on its 
 
 ## Page review (Gate 2 stand-in)
 
-Every page of `samples/OUTPUT-hicks-answering-brief.pdf` was rendered at 60 dpi and viewed after the last change.
+Every page of `usage/OUTPUT-mc-answering-brief-hicks.typst.pdf` was rendered at 60 dpi and viewed after the last change.
 
 | PDF page | Content | Finding |
 |---|---|---|
@@ -106,7 +106,7 @@ Fixes made during this review: the same paragraph-spacing and caption-gutter and
 
 ## Engines
 
-**docx** (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default reference, `mc.lua` builds the cover, contents, signature and certificates from the frontmatter). Render: `sh tools/render.sh --engine docx <folder> samples/INPUT-hicks-answering-brief.md` writes `samples/OUTPUT-hicks-answering-brief.docx` and `.docx.pdf` (LibreOffice). Pages reviewed: 10 of 10 (every page of the `.docx.pdf`, each compared with the typst page; the review PNGs are in `/work/artifacts/mc/answering-brief/`, not committed).
+**docx** (`docx/`: `build-reference.sh` builds `reference.docx` from pandoc's default reference, `mc.lua` builds the cover, contents, signature and certificates from the frontmatter). Render: `sh tools/render.sh --engine docx <folder> usage/INPUT-mc-answering-brief-hicks.md` writes `usage/OUTPUT-mc-answering-brief-hicks.docx` and `.docx.pdf` (LibreOffice). Pages reviewed: 10 of 10 (every page of the `.docx.pdf`, each compared with the typst page; the review PNGs are in `/work/artifacts/mc/answering-brief/`, not committed).
 
 - Matches the typst form: Liberation Serif 12 pt (the Times New Roman substitute, `docs/FONTS.md`; `pdffonts` shows only LiberationSerif), 1 in margins, US Letter; caption with the parenthesis column; counsel block; centered bold level-1 headings (17 pt, the size the typst headings render at) and bold hanging level-2/3 headings; footnotes 11 pt; cover and contents unnumbered; body numbered from 1, centered; certificates on their own pages; the signature block kept together.
 - Differs: the word count prints with a thousands separator (13,879), as the filed exemplar does; the typst prints 13879. The issues list "(I)" to "(f)" is a Word numbered list with a hanging indent, not the typst paragraphs. Word may paginate differently from LibreOffice.

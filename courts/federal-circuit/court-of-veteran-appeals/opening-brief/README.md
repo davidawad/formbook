@@ -2,7 +2,7 @@
 
 - Court: `cavc`, United States Court of Appeals for Veterans Claims (`courts/federal-circuit/court-of-veteran-appeals/`)
 - Doc type: `opening-brief`, the appellant's principal brief (Vet. App. R. 28(a), 32). The Secretary's brief is `../answering-brief/`.
-- Exemplar: `exemplars/FILED-EXAMPLE-chavez-19-7391-opening-brief.pdf` (*Chavez v. Wilkie*, Vet. App. No. 19-7391, filed 2020-06-22, private counsel). Provenance in `exemplars/SOURCE.md`. One exemplar only: see Known gaps.
+- Exemplar: `usage/SAMPLE-cavc-opening-brief-chavez197391.pdf` (*Chavez v. Wilkie*, Vet. App. No. 19-7391, filed 2020-06-22, private counsel). Provenance in `usage/SOURCE.md`. One exemplar only: see Known gaps.
 - Status: template built, rendered, overlay generated, every page reviewed (Gate 2 below). Not reviewed by a human. `court.json` untouched; no status set.
 - Every page is the court's own form; no case-specific text in the template.
 
@@ -10,14 +10,14 @@
 
 | Path | What |
 |---|---|
-| `typst/main.typ` | Entry point; reads `--input sample=...` (default `samples/INPUT-chavez-opening-brief.md`) and calls `cavc-opening-brief`. |
+| `typst/main.typ` | Entry point; reads `--input sample=...` (default `usage/INPUT-cavc-opening-brief-chavez.md`) and calls `cavc-opening-brief`. |
 | `typst/cavc-opening-brief.typ` | Template. Parameter block at the top: font and size, leading, margins, `page-limit = 30`, `required-sections` (Rule 28(a) order). |
-| `samples/INPUT-chavez-opening-brief.md` | Markdown sample: frontmatter (caption, counsel, signature, service, authorities registry) and a transcribed portion of the brief. |
-| `samples/OUTPUT-chavez-opening-brief.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-veteran-appeals/opening-brief samples/INPUT-chavez-opening-brief.md` (15 pages). |
-| `samples/OVERLAY-chavez-opening-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-veteran-appeals/opening-brief chavez-opening-brief` (red = ours, blue = filed, black = agree). |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-cavc-opening-brief-chavez.md` | Markdown sample: frontmatter (caption, counsel, signature, service, authorities registry) and a transcribed portion of the brief. |
+| `usage/OUTPUT-cavc-opening-brief-chavez.typst.pdf` | `sh tools/render.sh courts/federal-circuit/court-of-veteran-appeals/opening-brief usage/INPUT-cavc-opening-brief-chavez.md` (15 pages). |
+| `usage/OVERLAY-chavez-opening-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/federal-circuit/court-of-veteran-appeals/opening-brief chavez-opening-brief` (red = ours, blue = filed, black = agree). |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
-Names: the brief asked for `samples/<id>.md`, `<id>.pdf`, `<id>-overlay.pdf`. The tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (overlay.sh hardcodes these), so the tool names are used. The sample has no `INPUT-` prefix, so `<id>` is the file stem.
+Names: the brief asked for `usage/<id>.md`, `<id>.pdf`, `<id>-overlay.pdf`. The tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf/.txt` (overlay.sh hardcodes these), so the tool names are used. The sample has no `INPUT-` prefix, so `<id>` is the file stem.
 
 ## Governing rules
 
@@ -45,7 +45,7 @@ Checked and not applicable: Rule 32 sets no word limit and no certificate of com
 
 ## Overlay
 
-`samples/OVERLAY-chavez-opening-brief.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap (Jaccard), not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses):
+`usage/OVERLAY-chavez-opening-brief.pdf` puts our render (red) over the best-matching filed page (blue); black is where both agree. Pages are paired by word overlap (Jaccard), not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses):
 
 - p.1 ↔ filed p.1 (74%): caption page lines up.
 - p.2 ↔ p.2 (23%) and p.3 ↔ p.2 (42%): TOC and TOA are different layouts from the filed ones; expected.
@@ -55,7 +55,7 @@ Checked and not applicable: Rule 32 sets no word limit and no certificate of com
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-chavez-opening-brief.pdf` was rendered at 60 dpi and viewed (15 of 15). Typst printed no warnings. Fonts embedded: EB Garamond only.
+Every page of `OUTPUT-cavc-opening-brief-chavez.typst.pdf` was rendered at 60 dpi and viewed (15 of 15). Typst printed no warnings. Fonts embedded: EB Garamond only.
 
 | Page | Content | Result |
 |---|---|---|
@@ -75,13 +75,13 @@ Every page of `OUTPUT-chavez-opening-brief.pdf` was rendered at 60 dpi and viewe
 
 ## Engines
 
-| Engine | Folder | Output in `samples/` | Status |
+| Engine | Folder | Output in `usage/` | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-chavez-opening-brief.pdf` | rendered; Gate 2 above |
-| docx | `docx/` | `OUTPUT-chavez-opening-brief.docx` (pandoc, `docx/reference.docx`, `docx/cavc.lua`) | `.docx` written; `.docx.pdf` not produced (BLOCKED, below) |
+| typst (primary) | `typst/` | `OUTPUT-cavc-opening-brief-chavez.typst.pdf` | rendered; Gate 2 above |
+| docx | `docx/` | `OUTPUT-cavc-opening-brief-chavez.docx` (pandoc, `docx/reference.docx`, `docx/cavc.lua`) | `.docx` written; `.docx.pdf` not produced (BLOCKED, below) |
 | latex | `—` | none | not built |
 
-Build: `sh docx/make-reference.sh` regenerates `docx/reference.docx` from pandoc's default reference; `sh tools/render.sh --engine docx courts/federal-circuit/court-of-veteran-appeals/opening-brief samples/INPUT-chavez-opening-brief.md` writes the `.docx`. No `checks.yaml` exists for this court yet. `tools/check.sh --engine docx` exits 2 here (no `court.json` in the doc-type folder, and no `yq` on this box), so no gate ran on either engine.
+Build: `sh docx/make-reference.sh` regenerates `docx/reference.docx` from pandoc's default reference; `sh tools/render.sh --engine docx courts/federal-circuit/court-of-veteran-appeals/opening-brief usage/INPUT-cavc-opening-brief-chavez.md` writes the `.docx`. No `checks.yaml` exists for this court yet. `tools/check.sh --engine docx` exits 2 here (no `court.json` in the doc-type folder, and no `yq` on this box), so no gate ran on either engine.
 
 **docx matches the typst template:**
 

@@ -13,10 +13,10 @@ Access note: on 2026-10-17 `www.vid.uscourts.gov` rejected direct requests from 
 | LRCi | Local Rules of Civil Procedure of the District Court of the Virgin Islands, "Effective February 1, 2026" (filed as ECF 10-1 in Misc. No. 3:25-mc-0003, with the adopting order of January 30, 2026; 45 pp.) | https://www.vid.uscourts.gov/sites/vid/files/local_rules/260130_Local%20Rules%20Civil%20Procedure_effective%202.1.26[ECF%2010-1].pdf |
 | LR-PAGE | Court page "Local Rules" (lists the four rule sets "effective February 1, 2026") | https://www.vid.uscourts.gov/court-info/local-rules-and-orders/local-rules |
 | FRCP | Federal Rules of Civil Procedure 5, 7, 7.1, 8, 10, 11, 38 (LII text) | https://www.law.cornell.edu/rules/frcp/rule_5 (and rule_7, rule_7.1, rule_8, rule_10, rule_11, rule_38) |
-| EX-HENRY | Complaint for declaratory and injunctive relief, *Henry v. Brooks*, No. 3:26-cv-00038 (Waldner Law, P.C.) | `complaint/exemplars/` |
-| EX-USA | Complaint, *United States v. Government of the Virgin Islands*, No. 3:25-cv-00050 (USAO D.V.I. and DOJ Civil Rights Division) | `complaint/exemplars/` |
-| EX-WOOTEN | Memorandum of law in support of motion to dismiss, *Wooten v. Limetree Bay Terminals*, No. 1:23-cv-00012 (Akerman LLP), filed 2023 under the earlier rules | `motion-brief/exemplars/` |
-| EX-GVI | GVI's motion to dismiss under FRCP 12(b)(1), *United States v. Government of the Virgin Islands*, No. 3:25-cv-00050, Doc. 66 (V.I. Department of Justice), filed 2026 under the current rules | `motion-brief/exemplars/` |
+| EX-HENRY | Complaint for declaratory and injunctive relief, *Henry v. Brooks*, No. 3:26-cv-00038 (Waldner Law, P.C.) | `complaint/usage/` |
+| EX-USA | Complaint, *United States v. Government of the Virgin Islands*, No. 3:25-cv-00050 (USAO D.V.I. and DOJ Civil Rights Division) | `complaint/usage/` |
+| EX-WOOTEN | Memorandum of law in support of motion to dismiss, *Wooten v. Limetree Bay Terminals*, No. 1:23-cv-00012 (Akerman LLP), filed 2023 under the earlier rules | `motion-brief/usage/` |
+| EX-GVI | GVI's motion to dismiss under FRCP 12(b)(1), *United States v. Government of the Virgin Islands*, No. 3:25-cv-00050, Doc. 66 (V.I. Department of Justice), filed 2026 under the current rules | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (FRCP or LRCi). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

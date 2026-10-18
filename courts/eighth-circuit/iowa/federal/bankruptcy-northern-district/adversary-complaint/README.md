@@ -4,11 +4,11 @@ Doc type: **adversary complaint** (a complaint in an adversary proceeding, FRBP 
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 2 filers: `exemplars/FILED-EXAMPLE-hanrahan-comstar-25-09028-adversary-complaint.pdf` (6 pp.) and `exemplars/FILED-EXAMPLE-childers-roche-25-09079-adversary-complaint.pdf` (4 pp.). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-hanrahan-comstar.md` (5 rendered pages; transcribes the whole filing) and `samples/INPUT-childers-roche.md` (4 rendered pages; transcribes the whole filing) |
+| exemplar | yes, 2 filers: `usage/SAMPLE-ianb-adversary-complaint-hanrahancomstar2509028.pdf` (6 pp.) and `usage/SAMPLE-ianb-adversary-complaint-childersroche2509079.pdf` (4 pp.). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-ianb-adversary-complaint-hanrahancomstar.md` (5 rendered pages; transcribes the whole filing) and `usage/INPUT-ianb-adversary-complaint-childersroche.md` (4 rendered pages; transcribes the whole filing) |
 | typeface | face required: none (no N.D. Iowa or FRBP rule names one; checked 2026-10-14 against the 2024 Local Rules PDF, Rules 5005-1 and 9004-1 and a full-text search for font, typeface and point size). Substitute: none needed. Font kept: **EB Garamond** (vendored). Not metric-compatible with any court-named face, because none is named. |
-| render | ok: `samples/OUTPUT-hanrahan-comstar.pdf` (5 pp.) and `samples/OUTPUT-childers-roche.pdf` (4 pp.), re-rendered 2026-10-14 with `tools/render.sh` (typst 0.15.0, vendored fonts only, exit 0, no warnings); `pdffonts` shows EB Garamond only, embedded |
-| overlay | **not regenerated 2026-10-14: fail.** `tools/overlay.sh` needs the filed exemplar PDFs, and `exemplars/` holds only `SOURCE.md` in this snapshot (no PDF on the box, none in git history). The `OVERLAY-*.txt` maps are from an earlier run and were not rebuilt. |
+| render | ok: `usage/OUTPUT-ianb-adversary-complaint-hanrahancomstar.typst.pdf` (5 pp.) and `usage/OUTPUT-ianb-adversary-complaint-childersroche.typst.pdf` (4 pp.), re-rendered 2026-10-14 with `tools/render.sh` (typst 0.15.0, vendored fonts only, exit 0, no warnings); `pdffonts` shows EB Garamond only, embedded |
+| overlay | **not regenerated 2026-10-14: fail.** `tools/overlay.sh` needs the filed exemplar PDFs, and `usage/` holds only `SOURCE.md` in this snapshot (no PDF on the box, none in git history). The `OVERLAY-*.txt` maps are from an earlier run and were not rebuilt. |
 | pages reviewed | 9 of 9 rendered sample pages (5 + 4), each rendered at 60 dpi and viewed on 2026-10-14 after the font pass (the font did not change; this is the re-check) |
 | check.sh | not run: `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this doc-type folder has neither (see gap 9). Not a stamp. |
 
@@ -40,12 +40,12 @@ Rule text for N.D. Iowa is taken from the current PDF parts linked on https://ww
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, micromamba env (see brief)
-sh tools/render.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint samples/INPUT-hanrahan-comstar.md
-sh tools/overlay.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint hanrahan-comstar exemplars/FILED-EXAMPLE-hanrahan-comstar-25-09028-adversary-complaint.pdf
+sh tools/render.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint usage/INPUT-ianb-adversary-complaint-hanrahancomstar.md
+sh tools/overlay.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/adversary-complaint hanrahan-comstar usage/SAMPLE-ianb-adversary-complaint-hanrahancomstar2509028.pdf
 # same for childers-roche with its exemplar
 ```
 
-- File names follow the tools, not the brief's `<id>.pdf` / `<id>-overlay.pdf`: `render.sh` writes `samples/OUTPUT-<id>.pdf` and `overlay.sh` writes `samples/OVERLAY-<id>.pdf` and `.txt`. The overlay is passed the exemplar explicitly, because its default is the first PDF in `exemplars/`, which would pair Hanrahan with Childers.
+- File names follow the tools, not the brief's `<id>.pdf` / `<id>-overlay.pdf`: `render.sh` writes `usage/OUTPUT-<id>.pdf` and `overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `.txt`. The overlay is passed the exemplar explicitly, because its default is the first PDF in `usage/`, which would pair Hanrahan with Childers.
 - Overlay pairing (word overlap, from the `.txt` maps):
   - hanrahan-comstar: ours p.1-p.4 ↔ filed p.1-p.3, p.5 (75%, 60%, 59%, 54%); ours p.5 ↔ filed p.5 (41%). The filed signature page (p.6) has no pair; the filing's signature block is on that page.
   - childers-roche: ours p.1-p.4 ↔ filed p.1-p.4 (83%, 81%, 71%, 57%).
@@ -69,13 +69,13 @@ Every sample page was rendered at 60 dpi and looked at, after the last template 
 
 ## Engines
 
-| Engine | Folder | Output in `samples/` | Status |
+| Engine | Folder | Output in `usage/` | Status |
 |---|---|---|---|
 | typst (primary) | `typst/` | `OUTPUT-<id>.pdf` | unchanged |
 | docx | `docx/` | `OUTPUT-<id>.docx` (both samples written); `OUTPUT-<id>.docx.pdf` not written | `.docx` built; `.docx.pdf` **BLOCKED** (below) |
 | latex | `latex/` | none | not built |
 
-**docx build.** `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference (pandoc 3.12.1 from `tools/bootstrap.sh`). `docx/ianb-adversary-complaint.lua` builds the caption and the signature block from the frontmatter (no case text in the filter), numbers the body paragraphs (not those before the first heading, nor those beginning COMES NOW or WHEREFORE), and letters the prayer items. Command: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-<id>.md`. The command writes the `.docx`, then stops because `soffice` is not installed.
+**docx build.** `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference (pandoc 3.12.1 from `tools/bootstrap.sh`). `docx/ianb-adversary-complaint.lua` builds the caption and the signature block from the frontmatter (no case text in the filter), numbers the body paragraphs (not those before the first heading, nor those beginning COMES NOW or WHEREFORE), and letters the prayer items. Command: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-<id>.md`. The command writes the `.docx`, then stops because `soffice` is not installed.
 
 **What matches the typst template** (set from the template's values, and the line pitch measured on the typst PDF, not from a filed copy): EB Garamond 13 pt; 24.05 pt exact line pitch for body and prayer items; half-inch first-line indent; 1-inch margins on letter paper; the caption (3.3 in party box with a right rule and a bottom rule; chapter, case number, adversary number and title on the right); numbered paragraphs with a tab to 0.83 in; lettered prayer items with the text at 1 in; the signature block; a centered "Page X of Y" footer at 10 pt (PAGE and NUMPAGES fields).
 
@@ -95,9 +95,9 @@ Every sample page was rendered at 60 dpi and looked at, after the last template 
 5. **Paragraph numbering rule.** The template numbers every body paragraph after the first heading, except those beginning COMES NOW or WHEREFORE. The exemplars do the same (the Childers exemplar's WHEREFORE paragraph is also unnumbered). A paragraph that should be unnumbered (for example, a block quotation) needs a different form, which the template does not provide.
 6. **No Adversary Cover Sheet.** N.D. Iowa L.R. 7003-1 requires Director's Form 1040 with every complaint. The template does not produce it, and the exemplars' cover sheets are separate attachments. Filed with the complaint, not part of this template.
 7. **Length.** The two exemplars are 6 and 4 pages, so the samples render to 5 and 4 pages. The brief's 8-14 page target is not reachable from these filings; the samples transcribe each filing completely instead.
-8. **Exemplar provenance.** Both are RECAP copies. The Hanrahan signature block is visible only in the page image, so it was transcribed from the picture. See `exemplars/SOURCE.md`.
+8. **Exemplar provenance.** Both are RECAP copies. The Hanrahan signature block is visible only in the page image, so it was transcribed from the picture. See `usage/SOURCE.md`.
 9. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court directory with `court.json` and `rules.md`, and this doc-type folder has neither. The brief forbids touching `tools/` and `court.json`. The gate checks above (the FRBP 7008 keyword, the signature fields) are the only automated checks in this folder.
-10. **Overlay file names.** The brief names `samples/<id>-overlay.pdf`; the tool writes `samples/OVERLAY-<id>.pdf`. The tool's names are used (see Render and overlay).
+10. **Overlay file names.** The brief names `usage/<id>-overlay.pdf`; the tool writes `usage/OVERLAY-<id>.pdf`. The tool's names are used (see Render and overlay).
 11. **Not produced:** the summons and the civil cover sheet. The rules read here do not require either to be part of the complaint document; the summons is a separate issuance by the clerk.
 
 [Formbook index](../../../../../../README.md) | [Iowa](../../../README.md) | [motion-brief](../motion-brief/README.md)

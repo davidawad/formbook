@@ -2,8 +2,8 @@
 
 - Court: `fiscr`, FISCR (`courts/national/foreign-intelligence-surveillance-court-of-review/`)
 - Doc type: `amicus-brief`. A brief of a court-appointed amicus curiae in an FISCR matter, filed under the FISCR Rules of Procedure, Rule 15(d). Publicly released amicus filings only.
-- Exemplar: `exemplars/FILED-EXAMPLE-certification-of-questions-fiscr-18-01-amicus-brief.pdf` (*In re Certification of Questions of Law to the FISCR*, No. FISCR 18-01, filed 2018-02-23 by Prof. Laura K. Donohue, a court-appointed amicus). Provenance in `exemplars/SOURCE.md`.
-- Sample: `samples/INPUT-donohue-amicus-brief.md`, a transcription of the filed brief's real structure with the body excerpted (see Known gaps).
+- Exemplar: `usage/SAMPLE-fiscr-amicus-brief-certificationofquestionsfiscr1801.pdf` (*In re Certification of Questions of Law to the FISCR*, No. FISCR 18-01, filed 2018-02-23 by Prof. Laura K. Donohue, a court-appointed amicus). Provenance in `usage/SOURCE.md`.
+- Sample: `usage/INPUT-fiscr-amicus-brief-donohue.md`, a transcription of the filed brief's real structure with the body excerpted (see Known gaps).
 - Status: template built; rendered, overlaid and every page reviewed (below). `court.json` of the court is untouched and this folder has no status field.
 
 ## Files
@@ -12,10 +12,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `fiscr-brief`. |
 | `typst/fiscr-amicus-brief.typ` | Template. Parameter block at the top: `doc-kind`, `word-limit-appointed` (13,000), `word-limit-other` (6,500), `required-sections`, `needs-standard-of-review = false`, `addendum = "optional"`. |
-| `samples/INPUT-donohue-amicus-brief.md` | Markdown contract sample (frontmatter + body). |
-| `samples/OUTPUT-donohue-amicus-brief.pdf` | `sh tools/render.sh courts/national/foreign-intelligence-surveillance-court-of-review/amicus-brief samples/INPUT-donohue-amicus-brief.md` (13 pages). |
-| `samples/OVERLAY-donohue-amicus-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/national/foreign-intelligence-surveillance-court-of-review/amicus-brief donohue-amicus-brief` (red = ours, blue = filed, black = agree). |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. |
+| `usage/INPUT-fiscr-amicus-brief-donohue.md` | Markdown contract sample (frontmatter + body). |
+| `usage/OUTPUT-fiscr-amicus-brief-donohue.typst.pdf` | `sh tools/render.sh courts/national/foreign-intelligence-surveillance-court-of-review/amicus-brief usage/INPUT-fiscr-amicus-brief-donohue.md` (13 pages). |
+| `usage/OVERLAY-donohue-amicus-brief.pdf`, `.txt` | `sh tools/overlay.sh courts/national/foreign-intelligence-surveillance-court-of-review/amicus-brief donohue-amicus-brief` (red = ours, blue = filed, black = agree). |
+| `usage/` | The filed exemplar and `SOURCE.md`. |
 
 File names follow the repo tools (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.md` / `<id>-overlay.pdf` names in the task brief, because `tools/render.sh` and `tools/overlay.sh` read and write those names.
 
@@ -66,7 +66,7 @@ Cover (page 1, unnumbered); then, in roman numerals from ii: Statement Regarding
 
 ## Overlay
 
-`samples/OVERLAY-donohue-amicus-brief.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses; pdf page indices):
+`usage/OVERLAY-donohue-amicus-brief.pdf` puts our render (red) over the best-matching exemplar page (blue); black is where both agree. Pages are paired by word overlap, not by index. Diagnostic only, not a score. Pairings from the last run (word overlap in parentheses; pdf page indices):
 
 - Ours p.1 ↔ filed p.1 (100%), p.2 ↔ p.2 (100%), p.3 ↔ p.3 (100%): cover, statement regarding oral argument, question presented.
 - p.4 ↔ filed p.5 (30%): table of contents. The filed TOC has its own layout and page numbers; low overlap is expected.
@@ -79,7 +79,7 @@ Cover (page 1, unnumbered); then, in roman numerals from ii: Statement Regarding
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-donohue-amicus-brief.pdf` was rendered at 60 dpi and viewed (13 of 13), after the last template change and again on 2026-10-14 in the fonts pass (no font change; the court names no face). Typst printed no warnings. Fonts embedded (`pdffonts`): EB Garamond only.
+Every page of `OUTPUT-fiscr-amicus-brief-donohue.typst.pdf` was rendered at 60 dpi and viewed (13 of 13), after the last template change and again on 2026-10-14 in the fonts pass (no font change; the court names no face). Typst printed no warnings. Fonts embedded (`pdffonts`): EB Garamond only.
 
 | PDF page | Printed page | Content | Result |
 |---|---|---|---|
@@ -115,13 +115,13 @@ Tier-2 findings (OPEN or ACCEPTED):
 8. Certificate of service: FISCR R. 10(c) requires the time and manner of service. The filed certificate gives the date and the manner but not a time; the sample follows the filed certificate, so no time is printed. The template prints a time when `service.time` is given.
 9. The conclusion, the signature block and both certificates in the filed brief are scanned images with no text layer. The sample transcribes them by reading the page images (pages 44-46 of the PDF). The transcription is not OCR and has not been checked against a second reading. The conclusion is in the sample; the certificates are generated by the template with the template's own wording.
 10. Footnotes 2 and 23 to 26 of the filed brief are not all transcribed (the sample has footnote 1). The filed "Eagan" (for Egan) is kept as filed in the sample.
-11. Only one exemplar is used, from one filer (Prof. Donohue, court-appointed). The Reporters Committee brief in the same docket (a proposed brief attached to a motion, marked "[PROPOSED]") is a second FISCR amicus filing and is not used for comparison (see `exemplars/SOURCE.md`). Tier-2 comparison is against this one exemplar only.
+11. Only one exemplar is used, from one filer (Prof. Donohue, court-appointed). The Reporters Committee brief in the same docket (a proposed brief attached to a motion, marked "[PROPOSED]") is a second FISCR amicus filing and is not used for comparison (see `usage/SOURCE.md`). Tier-2 comparison is against this one exemplar only.
 12. Word limit: the template counts the body the way FRAP 32(f) counts it; it has not been cross-checked against the rendered PDF's text. The 13,000-word limit applies to the court-appointed brief; for a non-appointed amicus the 6,500-word limit applies (the template chooses from `court_appointed`).
 13. The FISCR rules used are the version posted as a PDF on the court's site (footer "May-18"). The rules page's text says its current Rules took effect November 1, 2010, and that text refers to the FISC rules. Which version controls was not resolved; a later amendment was not searched for beyond the court's site.
 
 ## Engines
 
-**docx** (checked with LibreOffice only; Word is not available here). Build: `sh tools/render.sh --engine docx <this folder> samples/INPUT-donohue-amicus-brief.md`, which runs `docx/render.sh`. Files: `docx/build-reference.sh` (writes `docx/reference.docx`: EB Garamond 14 pt, exact double spacing, the front-matter and heading styles, a PAGE footer and an empty cover footer); `docx/fiscr-amicus.lua` (cover, sections, front matter, body, signature, certificates); `docx/pages.sh` and `docx/pages.awk` (find the page of each heading and authority in the LibreOffice PDF). `docx/render.sh` renders pass 1, finds the pages, and writes pass 2 (a third pass only if the page map changed). The table of contents and table of authorities are static text with those page numbers, not TOC/TOA fields. Output: `samples/OUTPUT-donohue-amicus-brief.docx` and `.docx.pdf` (13 pages, every page viewed as PNG at 60 dpi against the typst render). Fonts in the PDF: EB Garamond only.
+**docx** (checked with LibreOffice only; Word is not available here). Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-fiscr-amicus-brief-donohue.md`, which runs `docx/render.sh`. Files: `docx/build-reference.sh` (writes `docx/reference.docx`: EB Garamond 14 pt, exact double spacing, the front-matter and heading styles, a PAGE footer and an empty cover footer); `docx/fiscr-amicus.lua` (cover, sections, front matter, body, signature, certificates); `docx/pages.sh` and `docx/pages.awk` (find the page of each heading and authority in the LibreOffice PDF). `docx/render.sh` renders pass 1, finds the pages, and writes pass 2 (a third pass only if the page map changed). The table of contents and table of authorities are static text with those page numbers, not TOC/TOA fields. Output: `usage/OUTPUT-fiscr-amicus-brief-donohue.docx` and `.docx.pdf` (13 pages, every page viewed as PNG at 60 dpi against the typst render). Fonts in the PDF: EB Garamond only.
 
 What matches typst: page size, one-inch margins, 14 pt body and footnotes, double spacing, single-spaced headings, quotations and front matter; cover lines and their order; roman numbers from ii, arabic from 1 in the body; the same section order; TOC and TOA entries and page numbers (for this render); the word count (1,170, the same as the typst count) and certificate wording.
 

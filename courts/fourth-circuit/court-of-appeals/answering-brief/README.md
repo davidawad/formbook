@@ -6,19 +6,19 @@ One self-contained folder for one document type of the Fourth Circuit. Built for
 |---|---|
 | `typst/ca4-answering-brief.typ` | The template: `ca4-brief(meta, md)`. Content-agnostic; each number is a named parameter at the top or traces to a rule ID below. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits the frontmatter from the body, calls the template. |
-| `samples/INPUT-chapman-answering-brief.md`, `samples/OUTPUT-chapman-answering-brief.pdf` | Transcribed from the exemplar: cover, FRAP 26.1 disclosure statement, table of contents, table of authorities, Questions Presented, part of the Statement of the Case, Summary of Argument, Argument (I, II, II.A), Conclusion, signature, certificates. An excerpt of about 1,734 words of the filed 9,350-word brief. |
-| `samples/OVERLAY-chapman-answering-brief.{pdf,txt}` | Red/blue overlay of the sample on the exemplar (`tools/overlay.sh`) and the page map. |
-| `exemplars/FILED-EXAMPLE-chapman-v-msp-24-1766-answering-brief.pdf` | The filed exemplar (Brief of Appellee, No. 24-1766, March 21, 2025). |
-| `exemplars/SOURCE.md` | Where the exemplar came from, the searches tried, and the SHA-256. |
+| `usage/INPUT-ca4-answering-brief-chapman.md`, `usage/OUTPUT-ca4-answering-brief-chapman.typst.pdf` | Transcribed from the exemplar: cover, FRAP 26.1 disclosure statement, table of contents, table of authorities, Questions Presented, part of the Statement of the Case, Summary of Argument, Argument (I, II, II.A), Conclusion, signature, certificates. An excerpt of about 1,734 words of the filed 9,350-word brief. |
+| `usage/OVERLAY-chapman-answering-brief.{pdf,txt}` | Red/blue overlay of the sample on the exemplar (`tools/overlay.sh`) and the page map. |
+| `usage/SAMPLE-ca4-answering-brief-chapmanvmsp241766.pdf` | The filed exemplar (Brief of Appellee, No. 24-1766, March 21, 2025). |
+| `usage/SOURCE.md` | Where the exemplar came from, the searches tried, and the SHA-256. |
 
 Build and check, from the repo root (the toolchain must be on `PATH`):
 
 ```sh
-sh tools/render.sh courts/fourth-circuit/court-of-appeals/answering-brief samples/INPUT-chapman-answering-brief.md   # -> samples/OUTPUT-chapman-answering-brief.pdf
-sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/answering-brief chapman-answering-brief            # -> samples/OVERLAY-chapman-answering-brief.pdf and .txt
+sh tools/render.sh courts/fourth-circuit/court-of-appeals/answering-brief usage/INPUT-ca4-answering-brief-chapman.md   # -> usage/OUTPUT-ca4-answering-brief-chapman.typst.pdf
+sh tools/overlay.sh courts/fourth-circuit/court-of-appeals/answering-brief chapman-answering-brief            # -> usage/OVERLAY-chapman-answering-brief.pdf and .txt
 ```
 
-Typst runs as `typst compile --root <court-dir> --font-path fonts --ignore-system-fonts --package-cache-path vendor/typst-packages --input sample=samples/NAME.md typst/main.typ out.pdf`. The font (Liberation Serif, OFL) and the cmarker package are vendored; a warning fails the build (`tools/render.sh`).
+Typst runs as `typst compile --root <court-dir> --font-path fonts --ignore-system-fonts --package-cache-path vendor/typst-packages --input sample=usage/NAME.md typst/main.typ out.pdf`. The font (Liberation Serif, OFL) and the cmarker package are vendored; a warning fails the build (`tools/render.sh`).
 
 ## Governing rules
 
@@ -83,7 +83,7 @@ Body: as ca9, with these template-specific rules.
 
 ## What the overlay shows
 
-`overlay.sh` pairs each sample page with the exemplar page sharing the most words, then draws the sample in red and the filed page in blue (black where they agree). Read `samples/OVERLAY-chapman-answering-brief.txt` for the pairs.
+`overlay.sh` pairs each sample page with the exemplar page sharing the most words, then draws the sample in red and the filed page in blue (black where they agree). Read `usage/OVERLAY-chapman-answering-brief.txt` for the pairs.
 
 | Sample page | Paired exemplar page | Read |
 |---|---|---|
@@ -99,7 +99,7 @@ Body: as ca9, with these template-specific rules.
 | 12 Conclusion and signature | 1 (34%, **wrong**) | The pairing picks the cover because the signature block repeats cover words; the filed conclusion is p. 44. A text-pairing limit of `overlay.sh`, not a layout fault. Read this page against exemplar p. 44 by hand. |
 | 13 certificates | 45 (68%) | Correct. |
 
-Overlay: `samples/OVERLAY-chapman-answering-brief.pdf` (13 pages), regenerated after the font change. The overlay PDF was viewed page by page in the 2026-10-16 verification pass (see below); the page map is unchanged.
+Overlay: `usage/OVERLAY-chapman-answering-brief.pdf` (13 pages), regenerated after the font change. The overlay PDF was viewed page by page in the 2026-10-16 verification pass (see below); the page map is unchanged.
 
 ## Pages reviewed
 
@@ -129,11 +129,11 @@ Earlier defects found in review and fixed (still in place):
 
 ## Engines
 
-Three renderings of the same markdown (`samples/INPUT-chapman-answering-brief.md`). The typst template is the reference.
+Three renderings of the same markdown (`usage/INPUT-ca4-answering-brief-chapman.md`). The typst template is the reference.
 
-**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `samples/OUTPUT-chapman-answering-brief.latex.pdf`, 14 pages (12 before the font change), every page rendered at 50 dpi and viewed. Layout items the font change exposed, not fixed here: the Statutes and Rules lists of the TOA fall onto page iii, and the "CONCLUSION" heading sits at the foot of page 7 with its text on page 8. Matches: Liberation Serif only (14 pt text and footnotes), double spacing at the typst pitch, 1-inch margins, the cover with judge and date/party line, the FRAP 26.1 disclosure statement (seven yes/no answers), contents and authorities (the authorities list is built from the `toa:` links), Argument point headings in small capitals, centred, and the Argument-only numbering, the certificate of compliance (1,734 words, the same as typst's count) and the certificate of service on the same page as the compliance certificate when it fits. Differs: the cover is tighter (fixed gap); body paragraph and heading spacing differ slightly, so page breaks and folios differ from typst; the disclosure boxes are drawn rather than glyphs. Not checked by `check.sh` (no `checks.yaml` in this court).
+**LaTeX** (`latex/template.tex`, `latex/ca4.lua`; `sh tools/render.sh --engine latex`): output `usage/OUTPUT-ca4-answering-brief-chapman.latex.pdf`, 14 pages (12 before the font change), every page rendered at 50 dpi and viewed. Layout items the font change exposed, not fixed here: the Statutes and Rules lists of the TOA fall onto page iii, and the "CONCLUSION" heading sits at the foot of page 7 with its text on page 8. Matches: Liberation Serif only (14 pt text and footnotes), double spacing at the typst pitch, 1-inch margins, the cover with judge and date/party line, the FRAP 26.1 disclosure statement (seven yes/no answers), contents and authorities (the authorities list is built from the `toa:` links), Argument point headings in small capitals, centred, and the Argument-only numbering, the certificate of compliance (1,734 words, the same as typst's count) and the certificate of service on the same page as the compliance certificate when it fits. Differs: the cover is tighter (fixed gap); body paragraph and heading spacing differ slightly, so page breaks and folios differ from typst; the disclosure boxes are drawn rather than glyphs. Not checked by `check.sh` (no `checks.yaml` in this court).
 
-**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `samples/OUTPUT-chapman-answering-brief.docx` is written; the `.docx.pdf` is not (see BLOCKED). Styles and sections as in the opening brief. Contents and authorities are Word fields; the TA fields sit after each citation. Certificate word count 1,734.
+**docx** (`docx/reference.docx`, `docx/ca4.lua`; `sh tools/render.sh --engine docx`): `usage/OUTPUT-ca4-answering-brief-chapman.docx` is written; the `.docx.pdf` is not (see BLOCKED). Styles and sections as in the opening brief. Contents and authorities are Word fields; the TA fields sit after each citation. Certificate word count 1,734.
 
 BLOCKED (docx):
 - All gates on the `.docx.pdf`: no LibreOffice on this box (see the opening brief's README, Engines, for what was tried).
@@ -146,7 +146,7 @@ BLOCKED (docx):
 
 ## Verification pass 2026-10-16 (fb-595.26.4)
 
-- Rendered: `sh tools/render.sh … samples/INPUT-chapman-answering-brief.md` exit 0, no typst warnings, Liberation Serif only (`pdffonts`). 13 pages, the same count as the committed PDF; the committed PDF was not stale.
+- Rendered: `sh tools/render.sh … usage/INPUT-ca4-answering-brief-chapman.md` exit 0, no typst warnings, Liberation Serif only (`pdffonts`). 13 pages, the same count as the committed PDF; the committed PDF was not stale.
 - Overlay: `sh tools/overlay.sh … chapman-answering-brief` exit 0; page map unchanged (table above). All 13 overlay pages viewed: cover, TOC and certificates line up with the filed pages; body pages pair with the filed pages listed; p. 5 (TOA overflow) and p. 12 (paired with the cover) are the known non-pairings.
 - Pages viewed: 13 of 13 typst pages at 60 dpi, plus the exemplar's page 1 against our cover. After the fixes, pp. 1, 3 and 4 (the pages the fixes changed; the other ten are pixel-identical to the first render, checked with `compare -metric AE`) were viewed again.
 - Fixed (template): unnumbered sub-headings of the Statement of the Case were flush with their parent in the TOC; they now indent one step under it, as in the filed TOC. The `Page` / `Page(s)` underline crossed the descender of the "g"; it now sits lower (`offset: 0.2em`). Cover counsel lines were italic and indented; they are now roman and flush, as on the filed cover, and the party line takes markdown so the sample sets it italic (`*Attorneys for Appellee*`), as filed.

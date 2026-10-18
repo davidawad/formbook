@@ -4,11 +4,11 @@ Doc type: **motion with memorandum** (a motion under FRBP 9013, with the grounds
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 2 filers, each partial: `exemplars/FILED-EXAMPLE-mcquillen-first-security-20-09040-motion-brief.pdf` (3 pp.: the brief in support of a motion to dismiss; the motion itself is not in RECAP) and `exemplars/FILED-EXAMPLE-veroblue-19-09015-motion-brief.pdf` (6 pp.: a motion to strike with its grounds and facts; no separate brief). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-mcquillen-gray-brief.md` (3 rendered pages; the whole brief) and `samples/INPUT-veroblue-motion.md` (5 rendered pages; the whole motion) |
+| exemplar | yes, 2 filers, each partial: `usage/SAMPLE-ianb-motion-brief-mcquillenfirstsecurity2009040.pdf` (3 pp.: the brief in support of a motion to dismiss; the motion itself is not in RECAP) and `usage/SAMPLE-ianb-motion-brief-veroblue1909015.pdf` (6 pp.: a motion to strike with its grounds and facts; no separate brief). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-ianb-motion-brief-mcquillengraybrief.md` (3 rendered pages; the whole brief) and `usage/INPUT-ianb-motion-brief-verobluemotion.md` (5 rendered pages; the whole motion) |
 | typeface | face required: none (no N.D. Iowa or FRBP rule names one; checked 2026-10-14 against the 2024 Local Rules PDF, Rules 5005-1 and 9004-1 and a full-text search for font, typeface and point size). Substitute: none needed. Font kept: **EB Garamond** (vendored). Not metric-compatible with any court-named face, because none is named. |
-| render | ok: `samples/OUTPUT-mcquillen-gray-brief.pdf` (3 pp.) and `samples/OUTPUT-veroblue-motion.pdf` (5 pp.), re-rendered 2026-10-14 with `tools/render.sh` (typst 0.15.0, vendored fonts only, exit 0, no warnings); `pdffonts` shows EB Garamond only, embedded |
-| overlay | **not regenerated 2026-10-14: fail.** `tools/overlay.sh` needs the filed exemplar PDFs, and `exemplars/` holds only `SOURCE.md` in this snapshot (no PDF on the box, none in git history). The `OVERLAY-*.txt` maps are from an earlier run and were not rebuilt. |
+| render | ok: `usage/OUTPUT-ianb-motion-brief-mcquillengraybrief.typst.pdf` (3 pp.) and `usage/OUTPUT-ianb-motion-brief-verobluemotion.typst.pdf` (5 pp.), re-rendered 2026-10-14 with `tools/render.sh` (typst 0.15.0, vendored fonts only, exit 0, no warnings); `pdffonts` shows EB Garamond only, embedded |
+| overlay | **not regenerated 2026-10-14: fail.** `tools/overlay.sh` needs the filed exemplar PDFs, and `usage/` holds only `SOURCE.md` in this snapshot (no PDF on the box, none in git history). The `OVERLAY-*.txt` maps are from an earlier run and were not rebuilt. |
 | pages reviewed | 8 of 8 rendered sample pages (3 + 5), each rendered at 60 dpi and viewed on 2026-10-14 after the font pass (the font did not change; this is the re-check) |
 | check.sh | not run: same reason as `../adversary-complaint/README.md` (no `court.json` or `rules.md` in a doc-type folder). Not a stamp. |
 
@@ -46,12 +46,12 @@ Rule text for N.D. Iowa is taken from the current PDF parts linked on https://ww
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"
-sh tools/render.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief samples/INPUT-mcquillen-gray-brief.md
-sh tools/overlay.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief mcquillen-gray-brief exemplars/FILED-EXAMPLE-mcquillen-first-security-20-09040-motion-brief.pdf
+sh tools/render.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief usage/INPUT-ianb-motion-brief-mcquillengraybrief.md
+sh tools/overlay.sh courts/eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief mcquillen-gray-brief usage/SAMPLE-ianb-motion-brief-mcquillenfirstsecurity2009040.pdf
 # same for veroblue-motion with its exemplar
 ```
 
-- File names follow the tools (see `../adversary-complaint/README.md`, gap 10): `samples/OUTPUT-<id>.pdf`, `samples/OVERLAY-<id>.pdf` and `.txt`.
+- File names follow the tools (see `../adversary-complaint/README.md`, gap 10): `usage/OUTPUT-<id>.pdf`, `usage/OVERLAY-<id>.pdf` and `.txt`.
 - Overlay pairing (word overlap, from the `.txt` maps):
   - mcquillen-gray-brief: ours p.1-p.2 ↔ filed p.1-p.2 (97%, 95%); ours p.3 ↔ filed p.3 (36%: the certificate page has no counterpart in the filed brief).
   - veroblue-motion: ours p.1 ↔ filed p.1 (81%); p.2 ↔ p.2 (85%); p.3 ↔ p.4 (58%); p.4 ↔ p.5 (59%); p.5 ↔ p.6 (80%). Our render runs one page shorter than the filing, so the page offset is about one page in the middle.
@@ -74,13 +74,13 @@ Every sample page was rendered at 60 dpi and looked at, after the last template 
 
 ## Engines
 
-| Engine | Folder | Output in `samples/` | Status |
+| Engine | Folder | Output in `usage/` | Status |
 |---|---|---|---|
 | typst (primary) | `typst/` | `OUTPUT-<id>.pdf` | unchanged |
 | docx | `docx/` | `OUTPUT-<id>.docx` (both samples written); `OUTPUT-<id>.docx.pdf` not written | `.docx` built; `.docx.pdf` **BLOCKED** (below) |
 | latex | `latex/` | none | not built |
 
-**docx build.** `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference (pandoc 3.12.1 from `tools/bootstrap.sh`). `docx/ianb-motion-brief.lua` builds the caption, the signature block and the certificate of service from the frontmatter (no case text in the filter); it numbers each item of an ordered list (the grounds and facts), restarting the count after every heading, and leaves other paragraphs unnumbered. `#` headings are centered and bold; `##` argument headings are bold and left. Footnotes are pandoc's own. Command: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-<id>.md`. The command writes the `.docx`, then stops because `soffice` is not installed.
+**docx build.** `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference (pandoc 3.12.1 from `tools/bootstrap.sh`). `docx/ianb-motion-brief.lua` builds the caption, the signature block and the certificate of service from the frontmatter (no case text in the filter); it numbers each item of an ordered list (the grounds and facts), restarting the count after every heading, and leaves other paragraphs unnumbered. `#` headings are centered and bold; `##` argument headings are bold and left. Footnotes are pandoc's own. Command: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-<id>.md`. The command writes the `.docx`, then stops because `soffice` is not installed.
 
 **What matches the typst template** (set from the template's values, and the line pitch and footnote size measured on the typst PDF, not from a filed copy): EB Garamond 13 pt; 24.05 pt exact line pitch for body and numbered items; footnotes 11 pt at 12.7 pt single spacing; half-inch first-line indent; 1-inch margins on letter paper; the caption (3.3 in party box with a right rule and a bottom rule; the adversary lines only when `adversary_no` is given); the signature block, with "Dated" only when a date is in the frontmatter; the certificate of service (centered heading, date and manner, italic "/s/" line); a centered "Page X of Y" footer at 10 pt (PAGE and NUMPAGES fields).
 

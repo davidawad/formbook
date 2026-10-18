@@ -6,9 +6,9 @@
 
 | Gate | Result |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-hussain-CR-23-1493-opening-brief.pdf` (Third Dept, NYSCEF Doc. 39, filed 2024-03-29; see `exemplars/SOURCE.md`) |
-| render | ok: `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/opening-brief samples/INPUT-synthetic-opening-brief.md`, 11 pages, EB Garamond only, no typst warnings (2026-10-16) |
-| overlay | ok: `sh tools/overlay.sh …/opening-brief synthetic-opening-brief`, wrote `samples/OVERLAY-synthetic-opening-brief.pdf` and `.txt` (2026-10-16) |
+| exemplar | yes: `usage/SAMPLE-nyappdiv-opening-brief-hussaincr231493.pdf` (Third Dept, NYSCEF Doc. 39, filed 2024-03-29; see `usage/SOURCE.md`) |
+| render | ok: `sh tools/render.sh courts/second-circuit/new-york/state/four-departments-of-the-appellate-division/opening-brief usage/INPUT-nyappdiv-opening-brief-synthetic.md`, 11 pages, EB Garamond only, no typst warnings (2026-10-16) |
+| overlay | ok: `sh tools/overlay.sh …/opening-brief synthetic-opening-brief`, wrote `usage/OVERLAY-synthetic-opening-brief.pdf` and `.txt` (2026-10-16) |
 | pages reviewed | 11 of 11 (every page rasterized at 60 dpi and viewed, 2026-10-16). Exemplar: pages 1–48 viewed as contact sheets (2026-10-15); 49–93 not viewed |
 
 ## Exemplar
@@ -43,7 +43,7 @@ What the exemplar settled (and what the template now does):
 
 ## Verification pass 2026-10-16 (fb-595.26.22)
 
-- Render: `sh tools/render.sh …/opening-brief samples/INPUT-synthetic-opening-brief.md`, exit 0, no typst warnings, 11 pages, EB Garamond Regular/Bold/Italic only (`pdffonts`). The committed PDF before this pass was stale (9 pages); the README's 11 pages was right.
+- Render: `sh tools/render.sh …/opening-brief usage/INPUT-nyappdiv-opening-brief-synthetic.md`, exit 0, no typst warnings, 11 pages, EB Garamond Regular/Bold/Italic only (`pdffonts`). The committed PDF before this pass was stale (9 pages); the README's 11 pages was right.
 - Pages viewed: 11 of 11 at 60 dpi, before and after the fixes. Exemplar page 1 viewed against our cover. Overlay pages viewed as a 40 dpi contact sheet and page 1 singly.
 - Overlay: `sh tools/overlay.sh …/opening-brief synthetic-opening-brief`, exit 0. Pairs cover, TOC and TOA with exemplar pages 1–3 (13–27% overlap); body pages pair with unrelated exemplar pages (9–19%), as expected for a synthetic sample.
 - Defects fixed:
@@ -60,17 +60,17 @@ What the exemplar settled (and what the template now does):
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `nyappdiv-brief`. |
 | `typst/nyappdiv-opening-brief.typ` | Template. Parameter block at the top: `court-lines`, `word-limit` (14,000), `footnotes-allowed` (false), `required-sections`. |
-| `samples/INPUT-synthetic-opening-brief.md` | Markdown contract sample, invented parties and record cites; structure follows the exemplar; labelled SYNTHETIC in its frontmatter. |
-| `samples/OUTPUT-synthetic-opening-brief.pdf` | Render output, 11 pages. |
-| `samples/OVERLAY-synthetic-opening-brief.pdf`, `.txt` | Overlay of our render on the exemplar, page map in `.txt`. |
-| `exemplars/FILED-EXAMPLE-hussain-CR-23-1493-opening-brief.pdf` | The filed exemplar (Third Dept). |
-| `exemplars/SOURCE.md` | URL, case, docket, filer, filing date, date fetched, sha256, and what the exemplar shows. |
+| `usage/INPUT-nyappdiv-opening-brief-synthetic.md` | Markdown contract sample, invented parties and record cites; structure follows the exemplar; labelled SYNTHETIC in its frontmatter. |
+| `usage/OUTPUT-nyappdiv-opening-brief-synthetic.typst.pdf` | Render output, 11 pages. |
+| `usage/OVERLAY-synthetic-opening-brief.pdf`, `.txt` | Overlay of our render on the exemplar, page map in `.txt`. |
+| `usage/SAMPLE-nyappdiv-opening-brief-hussaincr231493.pdf` | The filed exemplar (Third Dept). |
+| `usage/SOURCE.md` | URL, case, docket, filer, filing date, date fetched, sha256, and what the exemplar shows. |
 
 [Formbook index](../../../../../../README.md) | [Court folder](../README.md)
 
 ## Engines
 
-**docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/nyappdiv-opening-brief.lua`; output `samples/OUTPUT-<id>.docx`).
+**docx** (`docx/build-reference.sh`, `docx/reference.docx`, `docx/nyappdiv-opening-brief.lua`; output `usage/OUTPUT-<id>.docx`).
 
 - Matches the typst form: letter, 1 in margins, EB Garamond 14 pt body, double-spaced body with a 0.5 in first-line indent, single-spaced headings, block quotations, signature block and printing statement; centered page number in the footer, none on the cover.
 - Differs: "double" is Word's double spacing (`w:line="480"`), not the typst leading, so line breaks and page counts differ. Word and LibreOffice also paginate differently from each other.
@@ -83,5 +83,5 @@ What the exemplar settled (and what the template now does):
 
 BLOCKED (docx engine, not passable on this box):
 
-- **docx.pdf gates (Gates 0 and 1, `tools/check.sh --engine docx`): BLOCKED.** LibreOffice (`soffice`) is not installed on this box, so no `samples/OUTPUT-<id>.docx.pdf` exists and the check cannot run. Stamp `samples/.check-docx.txt` not written.
+- **docx.pdf gates (Gates 0 and 1, `tools/check.sh --engine docx`): BLOCKED.** LibreOffice (`soffice`) is not installed on this box, so no `usage/OUTPUT-<id>.docx.pdf` exists and the check cannot run. Stamp `usage/.check-docx.txt` not written.
 - **Pages reviewed: 0.** No `.docx` page was rendered or looked at, and the file was not opened in Word or LibreOffice, so no "no repair prompt" result is recorded.

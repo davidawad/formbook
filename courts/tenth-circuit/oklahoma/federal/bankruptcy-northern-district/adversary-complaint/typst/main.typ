@@ -1,9 +1,9 @@
 // Entry point. Compile with the doc-type folder as --root; tools/render.sh does it:
 //   typst compile --root <doc-type-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=samples/NAME.md \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
 //     typst/main.typ out.pdf
 #import "oknb-adversary-complaint.typ": oknb-adversary-complaint, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-adversary-complaint.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-oknb-adversary-complaint-sample.md"))
 #let (meta, body) = split-frontmatter(src)
 #oknb-adversary-complaint(meta, body)

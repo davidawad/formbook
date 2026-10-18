@@ -5,10 +5,10 @@ Folder: `courts/fourth-circuit/north-carolina/federal/middle-district/complaint/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-prillaman-26-cv-01154-complaint.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-prillaman-complaint.md` (the whole complaint text, 78 allegations, prayer, signature) |
-| render | ok: `samples/OUTPUT-prillaman-complaint.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-prillaman-complaint.pdf` and `OVERLAY-prillaman-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-ncmd-complaint-prillaman26cv01154.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ncmd-complaint-prillaman.md` (the whole complaint text, 78 allegations, prayer, signature) |
+| render | ok: `usage/OUTPUT-ncmd-complaint-prillaman.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-prillaman-complaint.pdf` and `OVERLAY-prillaman-complaint.txt` |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; see the table below) |
 | tier 2 | one exemplar only, so tier 2 is not judged against two or three filers (see gaps) |
 
@@ -54,12 +54,12 @@ Not produced by this template (separate papers, not the complaint): the civil co
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/fourth-circuit/north-carolina/federal/middle-district/complaint samples/INPUT-prillaman-complaint.md
+sh tools/render.sh courts/fourth-circuit/north-carolina/federal/middle-district/complaint usage/INPUT-ncmd-complaint-prillaman.md
 sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/middle-district/complaint prillaman-complaint
 ```
 
-- `samples/OUTPUT-prillaman-complaint.pdf`: 11 pages. typst compiled with no warnings. Fonts: EBGaramond-Regular, -Italic, -Bold only (`pdffonts`).
-- `samples/OVERLAY-prillaman-complaint.pdf` and `.txt`: red is our render, blue the exemplar, black where both agree. The page map pairs pages by word overlap: ours p.1 to p.11 pair with filed p.1, 3, 4, 6, 8, 9, 11, 12, 14, 15, 15. The overlay is a diagnostic, not a score: the exemplar is Times with a different line grid, so the lines will not coincide.
+- `usage/OUTPUT-ncmd-complaint-prillaman.typst.pdf`: 11 pages. typst compiled with no warnings. Fonts: EBGaramond-Regular, -Italic, -Bold only (`pdffonts`).
+- `usage/OVERLAY-prillaman-complaint.pdf` and `.txt`: red is our render, blue the exemplar, black where both agree. The page map pairs pages by word overlap: ours p.1 to p.11 pair with filed p.1, 3, 4, 6, 8, 9, 11, 12, 14, 15, 15. The overlay is a diagnostic, not a score: the exemplar is Times with a different line grid, so the lines will not coincide.
 
 ## Visual review (every page rendered at 60 dpi and looked at)
 
@@ -81,7 +81,7 @@ Reviewed pages: 11 of 11. Pages 1 to 9 were reviewed on the render that carried 
 
 ## Known gaps and open choices
 
-1. **One exemplar.** EVAL-LOOP's tier-2 rule asks for two or three filers. The search found three more MDNC complaints with text layers (listed in `exemplars/SOURCE.md`); they are not saved. Tier 2 is therefore **not** judged against two filers yet.
+1. **One exemplar.** EVAL-LOOP's tier-2 rule asks for two or three filers. The search found three more MDNC complaints with text layers (listed in `usage/SOURCE.md`); they are not saved. Tier 2 is therefore **not** judged against two filers yet.
 2. **"Double spaced" versus 27 lines.** The rule requires both double spacing and no more than 27 lines per page. At 13 pt a true double space (about 34 pt pitch) gives only 18 lines per page, which breaks the 27-line cap. The template uses the cap: 23 pt pitch, 27 lines, which is how 27-line filings are normally set. Whether the court reads "double spaced" as a fixed ratio is a question for David.
 3. **Font (typeface: none required; EB Garamond kept).** LR 7.1(a) sets a size floor for a proportional font (13 pt) and names no face. The quoted rule text (NCMD-FORM-002) names no face, so `docs/FONTS.md` ("No face named") keeps EB Garamond. The exemplar is Times New Roman (body) with Century Schoolbook headings, which the rule does not require. The earlier note that the rule's examples are Times-type was not supported by the quoted rule text and has been removed; a court-named face would need a citation first. The x-height is smaller than Times, so the text looks lighter than the exemplar. The filer's own Times choice is a visual-only difference, not a rule difference.
 4. **Caption style.** The party column is closed by a rule (right and bottom) and there is no column of ")" marks as in some filings in this district (Richardson-McGriff, USConnect). Tier-2 choice, recorded as ACCEPTED.
@@ -93,9 +93,9 @@ Reviewed pages: 11 of 11. Pages 1 to 9 were reviewed on the render that carried 
 
 ## Engines
 
-Checked on the final renders of `samples/OUTPUT-prillaman-complaint.docx.pdf` (12 pages, LibreOffice) against `samples/OUTPUT-prillaman-complaint.pdf` (typst, 11 pages). Every page of both PDFs was rendered at 60 dpi and viewed: docx pages 1 to 12, typst pages 1 to 11.
+Checked on the final renders of `usage/OUTPUT-ncmd-complaint-prillaman.docx.pdf` (12 pages, LibreOffice) against `usage/OUTPUT-ncmd-complaint-prillaman.typst.pdf` (typst, 11 pages). Every page of both PDFs was rendered at 60 dpi and viewed: docx pages 1 to 12, typst pages 1 to 11.
 
-- **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/ncmd-complaint.lua`, `docx/render.sh`). Output: `samples/OUTPUT-prillaman-complaint.docx` and `.docx.pdf`. The `.docx` passes `unzip -tq` and every XML part is well formed (`xmllint`). LibreOffice converted it without error. Not opened in Word.
+- **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/ncmd-complaint.lua`, `docx/render.sh`). Output: `usage/OUTPUT-ncmd-complaint-prillaman.docx` and `.docx.pdf`. The `.docx` passes `unzip -tq` and every XML part is well formed (`xmllint`). LibreOffice converted it without error. Not opened in Word.
   - *Matches typst:* EB Garamond 13 pt (the PDF embeds only EB Garamond; OpenSymbol is used only for the bullets of the list on page 9); letter paper; top margin 1.25 in and the other margins 1 in; body on a 23.0 pt line pitch (measured); the caption with the party column closed by a right and a bottom rule; numbered allegations 1 to 78 with the prayer unnumbered; the prayer, WHEREFORE line, list and signature block kept together (docx page 12, as typst page 11); the footnote at the foot of its page; page number centred in the footer.
   - *Differs:* 12 pages against typst's 11. Headings take a little more space, so the page breaks fall earlier (docx page 1 ends in paragraph 4, typst page 1 ends after paragraph 4). The footnote sits on page 6 of the docx and page 5 of typst. Paragraph numbers are typed text with a tab, not Word list numbering. The bullets are a LibreOffice list.
   - *BLOCKED:* none found. This folder has no `checks.yaml`, so no gate ID exists to block; the review above is by eye.

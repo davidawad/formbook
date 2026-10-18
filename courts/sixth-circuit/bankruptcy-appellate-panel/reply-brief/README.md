@@ -1,28 +1,28 @@
 # U.S. Bankruptcy Appellate Panel of the Sixth Circuit (bap6): reply brief
 
-Doc type `reply-brief` of `courts/sixth-circuit/bankruptcy-appellate-panel`. Self-contained: the court-root `typst/` and `samples/` are not touched.
+Doc type `reply-brief` of `courts/sixth-circuit/bankruptcy-appellate-panel`. Self-contained: the court-root `typst/` and `usage/` are not touched.
 
-**Exemplar: yes.** Appellants' Reply Brief, filed 2019-09-12, 12 pages, *In re Chieftain Steel, LLC, et al.*, BAP No. 19-8005 (see "Exemplar" below and `exemplars/SOURCE.md`).
+**Exemplar: yes.** Appellants' Reply Brief, filed 2019-09-12, 12 pages, *In re Chieftain Steel, LLC, et al.*, BAP No. 19-8005 (see "Exemplar" below and `usage/SOURCE.md`).
 
 | Gate | Result |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-chieftain-steel-19-8005-reply-brief.pdf` |
-| render | ok: `sh tools/render.sh courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief samples/INPUT-chieftain-steel-19-8005.md` ran with typst 0.15.0 (vendored fonts), produced `samples/OUTPUT-chieftain-steel-19-8005.pdf` (10 pages), zero warnings |
-| overlay | ok: `sh tools/overlay.sh courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief chieftain-steel-19-8005` wrote `samples/OVERLAY-chieftain-steel-19-8005.pdf` (10 pages) and `.txt` |
+| exemplar | yes: `usage/SAMPLE-bap6-reply-brief-chieftainsteel198005.pdf` |
+| render | ok: `sh tools/render.sh courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief usage/INPUT-bap6-reply-brief-chieftainsteel198005.md` ran with typst 0.15.0 (vendored fonts), produced `usage/OUTPUT-bap6-reply-brief-chieftainsteel198005.typst.pdf` (10 pages), zero warnings |
+| overlay | ok: `sh tools/overlay.sh courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief chieftain-steel-19-8005` wrote `usage/OVERLAY-chieftain-steel-19-8005.pdf` (10 pages) and `.txt` |
 | pages reviewed | 10 of 10 rendered pages viewed as PNG (70 dpi); overlay pages viewed as pairs (80 dpi) |
 
 ## Files
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-chieftain-steel-19-8005-reply-brief.pdf` | The filed brief, public, with a text layer. |
-| `exemplars/SOURCE.md` | URL, case, docket, filer, date filed, date fetched, SHA-256. |
-| `samples/INPUT-chieftain-steel-19-8005.md` | Transcription of the filed brief (see "Exemplar"). |
-| `samples/OUTPUT-chieftain-steel-19-8005.pdf` | `tools/render.sh` output. |
-| `samples/OVERLAY-chieftain-steel-19-8005.pdf`, `.txt` | `tools/overlay.sh` output: red = ours, blue = filed, black = both. The `.txt` maps each of our pages to its best-matching filed page. |
+| `usage/SAMPLE-bap6-reply-brief-chieftainsteel198005.pdf` | The filed brief, public, with a text layer. |
+| `usage/SOURCE.md` | URL, case, docket, filer, date filed, date fetched, SHA-256. |
+| `usage/INPUT-bap6-reply-brief-chieftainsteel198005.md` | Transcription of the filed brief (see "Exemplar"). |
+| `usage/OUTPUT-bap6-reply-brief-chieftainsteel198005.typst.pdf` | `tools/render.sh` output. |
+| `usage/OVERLAY-chieftain-steel-19-8005.pdf`, `.txt` | `tools/overlay.sh` output: red = ours, blue = filed, black = both. The `.txt` maps each of our pages to its best-matching filed page. |
 | `typst/main.typ`, `typst/bap6-reply-brief.typ` | Entry point and template. |
 
-Build (from the repo root, toolchain on PATH): `sh tools/render.sh courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief samples/INPUT-chieftain-steel-19-8005.md`. The render uses only the vendored EB Garamond (`--ignore-system-fonts`); any typst warning fails it.
+Build (from the repo root, toolchain on PATH): `sh tools/render.sh courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief usage/INPUT-bap6-reply-brief-chieftainsteel198005.md`. The render uses only the vendored EB Garamond (`--ignore-system-fonts`); any typst warning fails it.
 
 ## Governing rules
 
@@ -70,9 +70,9 @@ Body: `# Heading` (level 1) sections; `##`, `###`, `####` below. Heading numbers
 
 ## Exemplar
 
-Filed by counsel of record in the case. Appellants' Reply Brief, filed 2019-09-12, 12 pages. *In re Chieftain Steel, LLC, et al.*, BAP No. 19-8005 (appeal from Bankr. W.D. Ky., Originating Case No. 16-10407). Copy: `exemplars/FILED-EXAMPLE-chieftain-steel-19-8005-reply-brief.pdf`; source, dates and hash in `exemplars/SOURCE.md`.
+Filed by counsel of record in the case. Appellants' Reply Brief, filed 2019-09-12, 12 pages. *In re Chieftain Steel, LLC, et al.*, BAP No. 19-8005 (appeal from Bankr. W.D. Ky., Originating Case No. 16-10407). Copy: `usage/SAMPLE-bap6-reply-brief-chieftainsteel198005.pdf`; source, dates and hash in `usage/SOURCE.md`.
 
-Transcription (`samples/INPUT-chieftain-steel-19-8005.md`) covers, in the filed order: the filing's cover, introduction, Argument I (pp. 1–3, abridged), II (pp. 3–4, abridged), III.A (p. 6), III.B (p. 7, abridged), and the conclusion (p. 8).
+Transcription (`usage/INPUT-bap6-reply-brief-chieftainsteel198005.md`) covers, in the filed order: the filing's cover, introduction, Argument I (pp. 1–3, abridged), II (pp. 3–4, abridged), III.A (p. 6), III.B (p. 7, abridged), and the conclusion (p. 8).
 
 Not transcribed: the filed table of authorities (the template generates a TOC and TOA) and the filed certificate of service (replaced by the template's own).
 
@@ -94,7 +94,7 @@ The overlay and the page renders exposed these. All three templates changed the 
 
 ## Page review (Gate 2)
 
-Every page of `samples/OUTPUT-chieftain-steel-19-8005.pdf` (10 pages) was rasterised at 70 dpi and viewed, one page at a time, after the last template change. The overlay pages were viewed as pairs. Findings:
+Every page of `usage/OUTPUT-bap6-reply-brief-chieftainsteel198005.typst.pdf` (10 pages) was rasterised at 70 dpi and viewed, one page at a time, after the last template change. The overlay pages were viewed as pairs. Findings:
 
 - **Overlay: TOC entries.** Long TOC entries wrapped and stranded their page numbers. Fixed in the template (see Template changes).
 - **Case names not italic.** Fixed in the transcription.
@@ -115,7 +115,7 @@ Every page of `samples/OUTPUT-chieftain-steel-19-8005.pdf` (10 pages) was raster
 
 ## Engines
 
-Docx engine (`docx/`, built per `docs/EVAL-LOOP.md` "Engines"). `docx/build-reference.sh` makes `docx/reference.docx` from pandoc's default reference; `docx/render.sh` runs pandoc with `docx/reference.docx` and `docx/bap6-brief.lua` (cover, front matter, certificates, TOC/TOA/TA fields, the rules checks). Build: `sh tools/render.sh --engine docx courts/sixth-circuit/bankruptcy-appellate-panel/<doc-type> samples/INPUT-chieftain-steel-19-8005.md`. Needs pandoc, unzip, zip, xmllint, perl.
+Docx engine (`docx/`, built per `docs/EVAL-LOOP.md` "Engines"). `docx/build-reference.sh` makes `docx/reference.docx` from pandoc's default reference; `docx/render.sh` runs pandoc with `docx/reference.docx` and `docx/bap6-brief.lua` (cover, front matter, certificates, TOC/TOA/TA fields, the rules checks). Build: `sh tools/render.sh --engine docx courts/sixth-circuit/bankruptcy-appellate-panel/<doc-type> usage/INPUT-bap6-reply-brief-chieftainsteel198005.md`. Needs pandoc, unzip, zip, xmllint, perl.
 
 **Matches the typst reference** (typst values measured on `/work/artifacts/bap6/<doc-type>/OUTPUT-chieftain-steel-19-8005.pdf` with `pdftohtml -xml` and `pdftotext -bbox`; docx values read from `styles.xml` and `sectPr`):
 

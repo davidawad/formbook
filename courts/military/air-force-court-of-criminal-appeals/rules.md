@@ -10,10 +10,10 @@ Re-check cadence: re-check annually each December 1 and whenever the court posts
 |---|---|---|
 | AFCCA-R | United States Air Force Court of Criminal Appeals Rules of Practice and Procedure, "Effective 29 June 2026", published with the Joint Rules of Appellate Procedure for Courts of Criminal Appeals (JRAP text in bold type) (55 pp.) | https://afcca.law.af.mil/afcca_data/cp/afcca_rules_of_practice_and_procedure_wjrap_29_jun_2026_2888395.pdf |
 | APP-A | AFCCA-R Appendix A, "Format for Brief on Behalf of Appellant" | same PDF |
-| EX-HOWARD-OB | Brief on behalf of appellant, *United States v. Howard*, No. ACM 40478 (Air Force Appellate Defense Division, Maj Matthew L. Blyth) | `opening-brief/exemplars/` |
-| EX-DOUGLAS-OB | Brief on behalf of appellant (after remand), *United States v. Douglas*, No. ACM 40324 (Appellate Defense Division, Maj Heather M. Bruha) | `opening-brief/exemplars/` |
-| EX-HOWARD-AB | Answer to assignments of error, *United States v. Howard*, No. ACM 40478 (Government Trial and Appellate Operations Division) | `answering-brief/exemplars/` |
-| EX-DOUGLAS-AB | United States answer to assignments of error, *United States v. Douglas*, No. ACM 40324 (Government Trial and Appellate Operations Division) | `answering-brief/exemplars/` |
+| EX-HOWARD-OB | Brief on behalf of appellant, *United States v. Howard*, No. ACM 40478 (Air Force Appellate Defense Division, Maj Matthew L. Blyth) | `opening-brief/usage/` |
+| EX-DOUGLAS-OB | Brief on behalf of appellant (after remand), *United States v. Douglas*, No. ACM 40324 (Appellate Defense Division, Maj Heather M. Bruha) | `opening-brief/usage/` |
+| EX-HOWARD-AB | Answer to assignments of error, *United States v. Howard*, No. ACM 40478 (Government Trial and Appellate Operations Division) | `answering-brief/usage/` |
+| EX-DOUGLAS-AB | United States answer to assignments of error, *United States v. Douglas*, No. ACM 40324 (Government Trial and Appellate Operations Division) | `answering-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (AFCCA Rules or JRAP). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

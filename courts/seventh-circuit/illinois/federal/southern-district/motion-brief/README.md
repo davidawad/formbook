@@ -5,11 +5,11 @@ Folder: `courts/seventh-circuit/illinois/federal/southern-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-shelton-3-26-cv-00213-motion-to-dismiss.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-shelton-motion-to-dismiss.md`: the whole exemplar (caption, motion, brief, conclusion, signature, certificate of service, 12 footnotes) |
+| exemplar | yes: `usage/SAMPLE-ilsd-motion-brief-shelton326cv00213motiontodismiss.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ilsd-motion-brief-sheltonmotiontodismiss.md`: the whole exemplar (caption, motion, brief, conclusion, signature, certificate of service, 12 footnotes) |
 | typeface | face required by rules: **none** (S.D. Ill. LR 7.1(a)(3) sets 12-point font; LR 5.1(a) sets paper and spacing; no typeface named). Vendored substitute: **EB Garamond** (kept, because no face is named). Fit: n/a. |
-| render | ok (re-rendered 2026-10-15): `samples/OUTPUT-shelton-motion-to-dismiss.pdf`, 7 pages, typst 0.15.0, `pdffonts`: EB Garamond only (Regular, Bold, Italic, embedded), no warnings |
-| overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `exemplars/*.pdf`, which is not in this snapshot (only `exemplars/SOURCE.md` is tracked). `samples/OVERLAY-shelton-motion-to-dismiss.txt` is the earlier output and was not regenerated; no `.pdf` overlay is present. |
+| render | ok (re-rendered 2026-10-15): `usage/OUTPUT-ilsd-motion-brief-sheltonmotiontodismiss.typst.pdf`, 7 pages, typst 0.15.0, `pdffonts`: EB Garamond only (Regular, Bold, Italic, embedded), no warnings |
+| overlay | **fail** (2026-10-15): `tools/overlay.sh` needs `usage/*.pdf`, which is not in this snapshot (only `usage/SOURCE.md` is tracked). `usage/OVERLAY-shelton-motion-to-dismiss.txt` is the earlier output and was not regenerated; no `.pdf` overlay is present. |
 | pages reviewed | 7 of 7 (2026-10-15: every page rendered at 60 dpi and viewed; no template change in that pass) |
 | `check.sh` | not run: same reason as `../complaint/README.md` (this doc-type folder is not a court folder with `court.json` and `rules.md`). The review below is the Gate 2 equivalent. |
 
@@ -47,7 +47,7 @@ Local practice not checked: the judges' standing orders and case-management proc
 
 ## Sample
 
-- `samples/INPUT-shelton-motion-to-dismiss.md` transcribes the whole exemplar, its 7 pages: the caption, the opening paragraph, I (Grounds), II (Argument and Authorities, A. The Standard; B. Preemption; C. Damages; D. Jury Trial), III (Conclusion), the signature, the certificate of service, and footnotes 1 to 12.
+- `usage/INPUT-ilsd-motion-brief-sheltonmotiontodismiss.md` transcribes the whole exemplar, its 7 pages: the caption, the opening paragraph, I (Grounds), II (Argument and Authorities, A. The Standard; B. Preemption; C. Damages; D. Jury Trial), III (Conclusion), the signature, the certificate of service, and footnotes 1 to 12.
 - Case names and signals are italic exactly where the filed PDF's italic runs are (the exemplar embeds TimesNewRomanPS-ItalicMT; its italic runs were read with `pdftohtml -xml -i`, `<i>` tags): *Hecker v. Deere & Co.*, *Tierney v. Vahle*, *Metropolitan Life Ins. Co. v. Taylor*, *Hartland Lakeside…*, *Pohl…*, *Olsen…*, *Cannon…*, *FMC Corp. v. Holiday*, *Aetna Health Inc. v. Davila*, *See, e.g.*, *Pilot Life…*, *Di Joseph…*, *Mertens…*, *Massachusetts Mutual…*, *McDougall…*, *Bell Atlantic…*, *Ashcroft v. Iqbal*, *Pilot Life Ins. Co.* (short form). *Id.* does not occur.
 - The sample uses the exemplar's text, including the typed "215e ILCS 155." (footnote 2 gives the complaint paragraphs), "29 U.S.C. § 1001, et seq.," and "Doc. 1-1" as printed.
 - The exemplar's Exhibit A and B are not part of the document (they are attachments); the sample refers to them as the exemplar does.
@@ -68,12 +68,12 @@ Reviewed pages: 7 of 7.
 
 ## Overlay
 
-`sh tools/overlay.sh courts/seventh-circuit/illinois/federal/southern-district/motion-brief shelton-motion-to-dismiss` writes `samples/OVERLAY-shelton-motion-to-dismiss.pdf` and `.txt`. Page map: ours p.1 ↔ filed p.1 (89.7% word overlap), p.2 ↔ p.2 (86.3%), p.3 ↔ p.3 (77.7%), p.4 ↔ p.4 (66.0%), p.5 ↔ p.5 (54.8%), p.6 ↔ p.6 (34.6%: the signature page is short in both, and the exemplar's p.6 has the signature block at a different position), p.7 ↔ p.7 (82.6%). The overlay is a diagnostic: the exemplar's caption is in a § column and its footer carries the title and page, so the two layers differ at those places.
+`sh tools/overlay.sh courts/seventh-circuit/illinois/federal/southern-district/motion-brief shelton-motion-to-dismiss` writes `usage/OVERLAY-shelton-motion-to-dismiss.pdf` and `.txt`. Page map: ours p.1 ↔ filed p.1 (89.7% word overlap), p.2 ↔ p.2 (86.3%), p.3 ↔ p.3 (77.7%), p.4 ↔ p.4 (66.0%), p.5 ↔ p.5 (54.8%), p.6 ↔ p.6 (34.6%: the signature page is short in both, and the exemplar's p.6 has the signature block at a different position), p.7 ↔ p.7 (82.6%). The overlay is a diagnostic: the exemplar's caption is in a § column and its footer carries the title and page, so the two layers differ at those places.
 
 ## Known gaps and open choices
 
 1. **One exemplar, one filer.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search for S.D. Ill. 12(b)(6) motions with a memorandum returned mostly orders and pro se papers. Shelton is the only one found with a complete text layer. Clearinghouse pages (which listed the U.S. v. Illinois motion, 3:25-cv-01691, ECF 18) returned HTTP 403, so that motion was not checked. The tier-2 judgement is against one filer.
-2. **Font.** EB Garamond (vendored, OFL) at 12 pt. The local rules name no typeface (LR 7.1(a)(3) sets "12-point font"), so `docs/FONTS.md` keeps EB Garamond. The exemplar is Times New Roman, 12 pt (`exemplars/SOURCE.md`): a tier-2 convention, not a rule. Liberation Serif (metric-compatible Times substitute) is vendored and would switch the font if David decides the convention outweighs the rule. EB Garamond at 12 pt reads smaller than Times at 12 pt; the rule's minimum is met.
+2. **Font.** EB Garamond (vendored, OFL) at 12 pt. The local rules name no typeface (LR 7.1(a)(3) sets "12-point font"), so `docs/FONTS.md` keeps EB Garamond. The exemplar is Times New Roman, 12 pt (`usage/SOURCE.md`): a tier-2 convention, not a rule. Liberation Serif (metric-compatible Times substitute) is vendored and would switch the font if David decides the convention outweighs the rule. EB Garamond at 12 pt reads smaller than Times at 12 pt; the rule's minimum is met.
 3. **Signature page without body text.** The conclusion ends page 5 and the signature block (kept together with `breakable: false`) falls to page 6 alone. The exemplar keeps the conclusion and the signature on one page. A fix would keep the last body paragraph with the signature (not done: the markdown body is rendered as one document, and a general keep-with-next for the last paragraph is not implemented). Tier 2; recorded as OPEN, not fixed.
 4. **Certificate spacing.** The recipient list is close to "as follows:" (6 pt). The exemplar's certificate spacing was not measured. Tier 2; ACCEPTED.
 5. **Footer.** The exemplar's footer carries the title and "PAGE n" on each page; the template prints a centered page number only. The rules do not require a footer title; ACCEPTED as tier 3 (filer style).
@@ -87,7 +87,7 @@ Reviewed pages: 7 of 7.
 DOCX (`docx/`; built 2026-10-15, not reviewed):
 
 - Files: `docx/build-reference.sh` (same build as `complaint/docx/`: EB Garamond 12 pt, exact 24 pt line pitch, 0.5 in first-line indent, 1 in margins, letter, footnotes 12 pt single, centered PAGE footer, custom styles), `docx/reference.docx` (committed build output), `docx/ilsd.lua` (cover, caption table, headings labelled I., A., 1. by the filter, signature block, certificate of service, from the frontmatter).
-- Output: `samples/OUTPUT-shelton-motion-to-dismiss.docx`, written by `sh tools/render.sh --engine docx courts/seventh-circuit/illinois/federal/southern-district/motion-brief samples/INPUT-shelton-motion-to-dismiss.md`. The `.docx` opens as a valid zip and every XML part is well-formed (`unzip -tq`, `xmllint --noout`). The footer relationship (`footer1.xml`) and its content type are present.
+- Output: `usage/OUTPUT-ilsd-motion-brief-sheltonmotiontodismiss.docx`, written by `sh tools/render.sh --engine docx courts/seventh-circuit/illinois/federal/southern-district/motion-brief usage/INPUT-ilsd-motion-brief-sheltonmotiontodismiss.md`. The `.docx` opens as a valid zip and every XML part is well-formed (`unzip -tq`, `xmllint --noout`). The footer relationship (`footer1.xml`) and its content type are present.
 - Matches the typst form, by construction (not checked on a render): font and size, double spacing, 0.5 in first-line indent, 1 in margins, centered page number, 12 pt footnotes, heading labels and hanging indents, the signature block at 3.0 in, and the certificate of service on its own page with the recipients from the frontmatter.
 - Differs or unverified: the caption ")" column relies on exact 14 pt caption lines in a borderless table; the spacing around the caption, title, signature and certificate is set by style, not measured against typst. The date line and the certificate's right-aligned signer use a right tab at 6.5 in. The typst signature block is kept together (`breakable: false`); the docx signature paragraphs use keep-with-next, which Word and LibreOffice may honour differently. The open tier-2 finding in this folder (the signature block alone on a page, README "Review") may recur.
 - BLOCKED: `docx.pdf` not produced (`soffice` is not installed on this box, and cannot be installed here). The LibreOffice PDF gates (Gates 0 to 3, `sh tools/check.sh --engine docx`) cannot run. The docx.pdf render and page review are the REMAINING work.
@@ -99,9 +99,9 @@ DOCX (`docx/`; built 2026-10-15, not reviewed):
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/seventh-circuit/illinois/federal/southern-district/motion-brief samples/INPUT-shelton-motion-to-dismiss.md
+sh tools/render.sh courts/seventh-circuit/illinois/federal/southern-district/motion-brief usage/INPUT-ilsd-motion-brief-sheltonmotiontodismiss.md
 sh tools/overlay.sh courts/seventh-circuit/illinois/federal/southern-district/motion-brief shelton-motion-to-dismiss
-pdftoppm -r 60 -png courts/seventh-circuit/illinois/federal/southern-district/motion-brief/samples/OUTPUT-shelton-motion-to-dismiss.pdf /tmp/rev/motion/p
+pdftoppm -r 60 -png courts/seventh-circuit/illinois/federal/southern-district/motion-brief/usage/OUTPUT-ilsd-motion-brief-sheltonmotiontodismiss.typst.pdf /tmp/rev/motion/p
 ```
 
 [Doc type index](../../../../../../README.md) · [Southern District](../README.md)

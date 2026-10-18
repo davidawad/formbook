@@ -5,15 +5,15 @@ Folder: `courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/adve
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-babin-crescent-24-01028-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-babin-crescent-complaint.md` (a portion of the complaint: caption, lead-in, jurisdiction, parties, background, Counts I, II and X, prayer, signature; see gap 9) |
-| render | ok: `samples/OUTPUT-babin-crescent-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-babin-crescent-complaint.pdf` and `samples/OVERLAY-babin-crescent-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-laeb-adversary-complaint-babincrescent2401028.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-laeb-adversary-complaint-babincrescentcomplaint.md` (a portion of the complaint: caption, lead-in, jurisdiction, parties, background, Counts I, II and X, prayer, signature; see gap 9) |
+| render | ok: `usage/OUTPUT-laeb-adversary-complaint-babincrescentcomplaint.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-babin-crescent-complaint.pdf` and `usage/OVERLAY-babin-crescent-complaint.txt` |
 | typeface | EB Garamond, 12 pt. No rule names a face, so `docs/FONTS.md` "No face named" applies and the template keeps EB Garamond (gap 2) |
 | pages reviewed | 8 of 8 (re-rendered and every page viewed at 60 dpi on 2026-10-14, fonts pass; output unchanged) |
 | BLOCKED | none |
 
-File names: the brief's `samples/<id>.md` and `samples/<id>-overlay.pdf` are written as `INPUT-<id>.md` and `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default (CLAUDE.md, "File roles are in the name").
+File names: the brief's `usage/<id>.md` and `usage/<id>-overlay.pdf` are written as `INPUT-<id>.md` and `OVERLAY-<id>.pdf/.txt`, because `tools/render.sh` and `tools/overlay.sh` read and write those names by default (CLAUDE.md, "File roles are in the name").
 
 ## Governing rules
 
@@ -48,7 +48,7 @@ Not produced by this template (separate filings or court-generated, not part of 
 - Signature block: "Respectfully submitted," then `BY: /s/ <name>` and each counsel block single-spaced on the right half; blocks separated by "And". The block does not break across pages.
 - Footer: "Page X of Y" centered, 11 pt.
 
-## Overlay (`samples/OVERLAY-babin-crescent-complaint.pdf`)
+## Overlay (`usage/OVERLAY-babin-crescent-complaint.pdf`)
 
 `tools/overlay.sh` pairs our pages with the best-matching exemplar pages by shared words (`OVERLAY-babin-crescent-complaint.txt`):
 

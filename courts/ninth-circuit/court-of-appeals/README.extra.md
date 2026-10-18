@@ -7,21 +7,21 @@
 | `typst/ca9-brief.typ` | The template: `ca9-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
 | `typst/main.typ` | Entry point. Reads the sample named by `--input sample=...`, splits frontmatter from body, calls the template. |
 | `latex/template.tex`, `latex/ca9.lua`, `latex/render.sh` | The LaTeX engine: pandoc reads the same markdown through `ca9.lua` (Argument flags, citations, table of authorities, certificate counts), `template.tex` lays it out, and `render.sh` runs tectonic until the contents and authorities are settled. |
-| `samples/sweet-opening-brief.{md,pdf}` | Transcribed from the exemplar for visual comparison (a portion of the brief, not all of it). |
-| `samples/generic-opening-brief.{md,pdf}` | Fictional, structurally different: the generalization sample. |
+| `usage/sweet-opening-brief.{md,pdf}` | Transcribed from the exemplar for visual comparison (a portion of the brief, not all of it). |
+| `usage/generic-opening-brief.{md,pdf}` | Fictional, structurally different: the generalization sample. |
 | `reviews/` | Recorded visual reviews (Gate 2). |
 | `LOG.md` | One short entry per loop iteration. |
-| `exemplars/` | The filed exemplar. Visual reference only. |
+| `usage/` | The filed exemplar. Visual reference only. |
 
 Build and check (from the repo root):
 
 ```sh
-sh tools/render.sh courts/ninth-circuit/court-of-appeals samples/INPUT-generic-opening-brief.md   # -> samples/OUTPUT-generic-opening-brief.pdf
+sh tools/render.sh courts/ninth-circuit/court-of-appeals usage/INPUT-ca9-genericopeningbrief.md   # -> usage/OUTPUT-ca9-genericopeningbrief.typst.pdf
 sh tools/check.sh courts/ninth-circuit/court-of-appeals                                     # gates 0-3
 sh tools/check-selftest.sh courts/ninth-circuit/court-of-appeals                            # does the checker catch breakage?
 ```
 
-Typst is invoked as `typst compile --root <court-dir> --font-path fonts --ignore-system-fonts --package-cache-path vendor/typst-packages --input sample=samples/NAME.md typst/main.typ out.pdf`. The font and the markdown package are vendored, so a build never depends on what is installed or on the network, and a missing font is an error.
+Typst is invoked as `typst compile --root <court-dir> --font-path fonts --ignore-system-fonts --package-cache-path vendor/typst-packages --input sample=usage/NAME.md typst/main.typ out.pdf`. The font and the markdown package are vendored, so a build never depends on what is installed or on the network, and a missing font is an error.
 
 ## Markdown contract
 

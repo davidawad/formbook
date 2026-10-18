@@ -1,14 +1,14 @@
 # tnmd: complaint
 
 Doc type: **complaint** in the United States District Court for the Middle District of Tennessee (`tnmd`).
-Folder: `courts/sixth-circuit/tennessee/federal/middle-district/complaint/` (self-contained; the court-root `typst/` and `samples/` are not touched).
+Folder: `courts/sixth-circuit/tennessee/federal/middle-district/complaint/` (self-contained; the court-root `typst/` and `usage/` are not touched).
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-doge-3-26-cv-01418-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-doge-complaint.md` (the whole 12-page filing, transcribed from its text layer; exhibits not included) |
-| render | ok: `samples/OUTPUT-doge-complaint.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-doge-complaint.pdf` and `samples/OVERLAY-doge-complaint.txt` (exemplar pages 1 to 12, sample page 13 paired with exemplar page 12) |
+| exemplar | yes: `usage/SAMPLE-tnmd-complaint-doge326cv01418.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-tnmd-complaint-doge.md` (the whole 12-page filing, transcribed from its text layer; exhibits not included) |
+| render | ok: `usage/OUTPUT-tnmd-complaint-doge.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-doge-complaint.pdf` and `usage/OVERLAY-doge-complaint.txt` (exemplar pages 1 to 12, sample page 13 paired with exemplar page 12) |
 | typeface | face required: none. LR 7.03(a) requires "at least 12-point font" and names no face, so the court-named-face substitute does not apply. Stays EB Garamond (vendored, visual only), per `docs/FONTS.md` ("No face named"). |
 | pages reviewed | 13 of 13 (re-rendered 2026-10-15 with vendored fonts only, zero warnings; every page rendered at 60 dpi and viewed) |
 | tier 1 | not gated: `tools/check.sh` expects a court folder with `court.json` and `rules.md`, which this doc-type folder is not, and the brief forbids touching `tools/`. The rule rows below are the tier-1 record. |
@@ -84,7 +84,7 @@ Gate 2 rows are recorded here, not in `reviews/` (this doc type has no `reviews/
 
 ## Engines
 
-docx: `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc's default reference) and `docx/tnmd.lua` (caption, signature, numbering). Output: `samples/OUTPUT-doge-complaint.docx` and `samples/OUTPUT-doge-complaint.docx.pdf` (LibreOffice 26.8.1 conversion). Typst output for comparison: `samples/OUTPUT-doge-complaint.pdf`. Both are 13 pages. Every page of both was rasterized at 60 dpi and viewed.
+docx: `docx/build-reference.sh` (builds `docx/reference.docx` from pandoc's default reference) and `docx/tnmd.lua` (caption, signature, numbering). Output: `usage/OUTPUT-tnmd-complaint-doge.docx` and `usage/OUTPUT-tnmd-complaint-doge.docx.pdf` (LibreOffice 26.8.1 conversion). Typst output for comparison: `usage/OUTPUT-tnmd-complaint-doge.typst.pdf`. Both are 13 pages. Every page of both was rasterized at 60 dpi and viewed.
 
 - Matches typst: letter paper, one-inch margins, EB Garamond 13 pt (the PDF embeds only EB Garamond Regular and Bold), double spacing as an exact 27.6 pt line pitch, single spacing at 15 pt for the court heading, caption, headings and signature, centered page number at the foot (TNMD-FORM-001 to 004). Caption: court lines, party column with a ")" column, "Case No." and "JURY DEMAND" on the right. Title, numbered paragraphs 1 to 61, stacked count headings, lettered prayer items A to H, and the signature block at 3.25 in, kept together with the heading before it. Heading sizes follow the typst default (1.4 em and 1.2 em).
 - Differs (tier 2, or a renderer effect): the ")" column gets one ")" per estimated caption line (typst measures the wrap); recount if the names change. The paragraph text after the number starts at 1.2 in (typst: 0.5 in gap after the number); the number itself is at 0.5 in in both. Exact line spacing in Word and LibreOffice puts each line's text about 12 pt lower in its line box than typst; the line pitch is identical.

@@ -1,41 +1,52 @@
-#!/bin/sh
-# Overlay a rendered sample on its filed exemplar, page by page.
+#!/usr/bin/env bash
+# Overlay a rendered sample on a filed SAMPLE, page by page.
 #   red   = our render only
-#   blue  = filed exemplar only
+#   blue  = filed SAMPLE only
 #   black = both agree (red multiplied over blue)
-# Pages are paired by text, not index: each sample page is matched to the
-# exemplar page sharing the most words, so a partial transcription still
+# Pages are paired by text, not index: each rendered page is matched to the
+# SAMPLE page sharing the most words, so a partial transcription still
 # lines up with the pages it came from.
 #
-# usage: tools/overlay.sh <court-dir> <sample-id> [exemplar.pdf]
-# reads:  <court-dir>/samples/OUTPUT-<sample-id>.pdf (our render)
-# writes: <court-dir>/samples/OVERLAY-<sample-id>.pdf and OVERLAY-<sample-id>.txt (page map)
-set -eu
+# usage: tools/overlay.sh <doc-dir> <id> [SAMPLE.pdf]
+#   <doc-dir> a court folder or a doc-type folder; every name comes from `fb usage` (tools/fb/src/layout.rs)
+# reads:  `fb usage output <doc-dir> <id>`  = <doc-dir>/usage/OUTPUT-<stem>-<id>.typst.pdf (our render)
+#         `fb usage pair <doc-dir> <id>`    = the SAMPLE-<stem>-*.pdf paired with <id>, unless SAMPLE.pdf is given
+# writes: `fb usage overlay <doc-dir> <id> pdf|txt` = <repo>/.overlay/<doc path>/OVERLAY-<stem>-<id>.pdf and .txt
+#         (page map). .overlay/ is gitignored: overlays are generated on demand, never committed.
+# Strict mode. pipefail only where the shell has it (bash, macOS sh); Debian's dash lacks it.
+# shellcheck shell=sh disable=SC3040
+set -e -u; (set -o pipefail) 2> /dev/null && set -o pipefail
 
+ROOT=$(realpath "$(dirname "$0")/..")
+FB="cargo run -q --release --manifest-path $ROOT/tools/fb/Cargo.toml --"
+export FB_ROOT="$ROOT"
 dir=$1
 id=$2
-ours=$dir/samples/OUTPUT-$id.pdf
-ref=${3:-$(ls "$dir"/exemplars/*.pdf | head -1)}
-out=$dir/samples/OVERLAY-$id.pdf
-map=$dir/samples/OVERLAY-$id.txt
+ours=$($FB usage output "$dir" "$id")
+ref=${3:-$($FB usage pair "$dir" "$id")}
+out=$($FB usage overlay "$dir" "$id" pdf)
+map=$($FB usage overlay "$dir" "$id" txt)
 dpi=100
-label_font=$(dirname "$0")/../fonts/eb-garamond/EBGaramond-Regular.otf
+label_font=$ROOT/fonts/eb-garamond/EBGaramond-Regular.otf
 
 [ -f "$ours" ] || {
   echo "no render: $ours (run tools/render.sh first)" >&2
   exit 1
 }
 [ -f "$ref" ] || {
-  echo "no exemplar pdf in $dir/exemplars" >&2
+  echo "no SAMPLE pdf: $ref" >&2
   exit 1
 }
 
-tmp=$(mktemp -d)
-trap 'rm -rf "$tmp"' EXIT
+mkdir -p "$(dirname "$out")"
+# recursive delete of one directory; an empty path aborts instead of deleting the wrong thing
+safe_rmdir() { rm -r -f -- "${1:?safe_rmdir: empty path}"; }
+tmp=$(mktemp -d) || exit 1
+trap 'safe_rmdir "$tmp"' EXIT
 
 pages() { pdfinfo "$1" | awk '/^Pages:/ {print $2}'; }
 words() { # one lowercased word per line, unique, for page $2 of pdf $1
-  pdftotext -f "$2" -l "$2" "$1" - | tr 'A-Z' 'a-z' | tr -cs 'a-z0-9' '\n' |
+  pdftotext -f "$2" -l "$2" "$1" - | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '\n' |
     awk 'length($0) > 3' | sort -u
 }
 
@@ -53,7 +64,7 @@ while [ "$j" -le "$n_ref" ]; do
   j=$((j + 1))
 done
 
-# best exemplar page per sample page: Jaccard similarity of word sets
+# best SAMPLE page per rendered page: Jaccard similarity of word sets
 : > "$map"
 i=1
 while [ "$i" -le "$n_ours" ]; do

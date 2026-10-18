@@ -4,11 +4,11 @@ Doc type: **motion brief**: a brief or memorandum of law in support of a written
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-eastwood-bryant-25-02009-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`). It is a brief in support of a summary judgment motion, not a 9013-1 motion memorandum; see gap 1. |
-| sample md | `samples/INPUT-eastwood-msj-brief.md`: caption, title, introduction, Nature of the Matter, the Statement of Undisputed Facts I to VII with footnotes 1 and 2, the Conclusion, the signature block and the certificate of service. The Argument is not transcribed (gap 2). |
+| exemplar | yes: `usage/SAMPLE-ncmb-motion-brief-eastwoodbryant2502009.pdf` (one filer; see `usage/SOURCE.md`). It is a brief in support of a summary judgment motion, not a 9013-1 motion memorandum; see gap 1. |
+| sample md | `usage/INPUT-ncmb-motion-brief-eastwoodmsjbrief.md`: caption, title, introduction, Nature of the Matter, the Statement of Undisputed Facts I to VII with footnotes 1 and 2, the Conclusion, the signature block and the certificate of service. The Argument is not transcribed (gap 2). |
 | typeface | face required: none. The 2022 local rules, the 2025 comment draft and the 2026 rules (`Local Rules 1.1.26.pdf`) name no typeface, point size or spacing (read 2026-10-14). Substitute: none needed; the template keeps EB Garamond, the "No face named" row of `docs/FONTS.md`. See gap 6. |
-| render | ok (re-rendered 2026-10-14): `samples/OUTPUT-eastwood-msj-brief.pdf`, 11 pages, typst 0.15.0, `tools/render.sh` (vendored fonts only, zero typst warnings); `pdffonts`: EB Garamond Regular, Bold and Italic embedded |
-| overlay | ok (re-run 2026-10-14): `samples/OVERLAY-eastwood-msj-brief.pdf` and `samples/OVERLAY-eastwood-msj-brief.txt`. The filed exemplar is not committed, so it is passed as the third argument (see Render and overlay) |
+| render | ok (re-rendered 2026-10-14): `usage/OUTPUT-ncmb-motion-brief-eastwoodmsjbrief.typst.pdf`, 11 pages, typst 0.15.0, `tools/render.sh` (vendored fonts only, zero typst warnings); `pdffonts`: EB Garamond Regular, Bold and Italic embedded |
+| overlay | ok (re-run 2026-10-14): `usage/OVERLAY-eastwood-msj-brief.pdf` and `usage/OVERLAY-eastwood-msj-brief.txt`. The filed exemplar is not committed, so it is passed as the third argument (see Render and overlay) |
 | pages reviewed | 11 of 11 (2026-10-14: every page rendered at 80 dpi with `pdftoppm` and viewed) |
 
 File names: the shared `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so those names are used rather than `<id>.pdf` and `<id>-overlay.pdf`. `tools/` was not edited.
@@ -82,25 +82,25 @@ Gate 2 rows: `OK` = viewed and acceptable. Open items: gaps 3, 4 and 5 (the rule
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief samples/INPUT-eastwood-msj-brief.md
-sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief eastwood-msj-brief <path-to>/FILED-EXAMPLE-eastwood-bryant-25-02009-motion-brief.pdf
+sh tools/render.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief usage/INPUT-ncmb-motion-brief-eastwoodmsjbrief.md
+sh tools/overlay.sh courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief eastwood-msj-brief <path-to>/SAMPLE-eastwood-bryant-25-02009-motion-brief.pdf
 ```
 
-`exemplars/` holds `SOURCE.md` only: the filed PDF is not committed. Fetch it from the URL in `exemplars/SOURCE.md` into a directory outside the repo and pass it as the third argument, because `overlay.sh` otherwise takes the first PDF in `exemplars/`.
+`usage/` holds `SOURCE.md` only: the filed PDF is not committed. Fetch it from the URL in `usage/SOURCE.md` into a directory outside the repo and pass it as the third argument, because `overlay.sh` otherwise takes the first PDF in `usage/`.
 
-The overlay's page map (`samples/OVERLAY-eastwood-msj-brief.txt`) pairs sample pages 1 to 9 with filed pages 1 to 10 (word overlap 32% to 89%), and sample pages 10 and 11 with filed pages 26 and 27 (79% and 96%): the conclusion, signature and certificate are the same text in both. The gap in the middle (filed pages 11 to 25) is the Argument, which is not transcribed.
+The overlay's page map (`usage/OVERLAY-eastwood-msj-brief.txt`) pairs sample pages 1 to 9 with filed pages 1 to 10 (word overlap 32% to 89%), and sample pages 10 and 11 with filed pages 26 and 27 (79% and 96%): the conclusion, signature and certificate are the same text in both. The gap in the middle (filed pages 11 to 25) is the Argument, which is not transcribed.
 
 ## Engines
 
 Typst (`typst/`) is the reference. The docx engine (`docx/`) is checked page by page against it, on the LibreOffice PDF of the `.docx`. This court has no `checks.yaml`, so no gate check IDs apply and there are no BLOCKED docx items.
 
-| Engine | Output (`samples/`) | Status |
+| Engine | Output (`usage/`) | Status |
 |---|---|---|
-| typst | `OUTPUT-eastwood-msj-brief.pdf` (11 pp) | reference |
-| docx | `OUTPUT-eastwood-msj-brief.docx` and `OUTPUT-eastwood-msj-brief.docx.pdf` (11 pp) | ok: rendered with `tools/render.sh --engine docx`; the LibreOffice PDF converted without error; all 11 pages viewed beside the typst pages |
+| typst | `OUTPUT-ncmb-motion-brief-eastwoodmsjbrief.typst.pdf` (11 pp) | reference |
+| docx | `OUTPUT-ncmb-motion-brief-eastwoodmsjbrief.docx` and `OUTPUT-ncmb-motion-brief-eastwoodmsjbrief.docx.pdf` (11 pp) | ok: rendered with `tools/render.sh --engine docx`; the LibreOffice PDF converted without error; all 11 pages viewed beside the typst pages |
 
 ```sh
-sh tools/render.sh --engine docx courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief samples/INPUT-eastwood-msj-brief.md
+sh tools/render.sh --engine docx courts/fourth-circuit/north-carolina/federal/bankruptcy-middle-district/motion-brief usage/INPUT-ncmb-motion-brief-eastwoodmsjbrief.md
 ```
 
 **docx** (`docx/reference.docx`, `docx/make-reference.sh`, `docx/ncmb-motion-brief.lua`). `make-reference.sh` builds the reference from pandoc's default: EB Garamond 13 pt; body at an exact 24 pt line pitch with a 0.5 in first-line indent; headings (level 1 centered capitals; levels 2 to 5 bold with a 0.5 in hanging label); single-spaced block quotations and footnotes; letter page with 1-inch margins; a centered page number on every page but the first (`w:titlePg` with an empty first-page footer). The Lua filter builds the caption page (court lines, caption table, title, body on the same page), the heading labels (I., A., 1., a.), the numbered lists (label at 0.5 in, text at 1.125 in), the signature block, and the certificate of service on a new page. Footnotes are pandoc's native footnotes.
@@ -109,7 +109,7 @@ sh tools/render.sh --engine docx courts/fourth-circuit/north-carolina/federal/ba
 - *Differs:* line and page breaks. Both PDFs have 11 pages, but the breaks fall at different words, so a page can start at a different heading or sentence (docx page 3 starts at heading II; typst page 3 starts mid-paragraph). The signature block is alone on page 10 in both. Word counts agree within 2 words (2,881 against 2,879).
 - *Not built:* no table of contents or table of authorities (neither the rules nor the exemplar calls for them).
 - *Word:* not opened in Word. `unzip -t` and xmllint pass on every XML part and every style used in the body is defined; LibreOffice converted it without error.
-- *Pages reviewed:* 11 of 11 pages of `OUTPUT-eastwood-msj-brief.docx.pdf`, each viewed beside typst pages 1 to 11.
+- *Pages reviewed:* 11 of 11 pages of `OUTPUT-ncmb-motion-brief-eastwoodmsjbrief.docx.pdf`, each viewed beside typst pages 1 to 11.
 
 
 See also: [[adversary-complaint]] (the other doc type in this court).

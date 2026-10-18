@@ -5,13 +5,13 @@ Doc type: **motion** (a motion with numbered paragraphs, WHEREFORE clause, signa
 | Item | Status |
 |---|---|
 | template | `typst/main.typ` (entry) and `typst/moeb-motion-brief.typ` (template). Built from the court's rules, structured like `../adversary-complaint/typst/`. |
-| exemplar | yes: `exemplars/FILED-EXAMPLE-qmaxx-20-41063-motion-to-abstain.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-qmaxx-abstain.md` (the whole motion, all 11 paragraphs, the five footnotes, the WHEREFORE clause, the signature block and the certificate of service, transcribed from the 5-page exemplar) |
-| render | ok: `samples/OUTPUT-qmaxx-abstain.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`, exit 0) |
-| overlay | ok: `samples/OVERLAY-qmaxx-abstain.pdf` and `samples/OVERLAY-qmaxx-abstain.txt` (page map) |
+| exemplar | yes: `usage/SAMPLE-moeb-motion-brief-qmaxx2041063motiontoabstain.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-moeb-motion-brief-qmaxxabstain.md` (the whole motion, all 11 paragraphs, the five footnotes, the WHEREFORE clause, the signature block and the certificate of service, transcribed from the 5-page exemplar) |
+| render | ok: `usage/OUTPUT-moeb-motion-brief-qmaxxabstain.typst.pdf`, 6 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`tools/render.sh`, exit 0) |
+| overlay | ok: `usage/OVERLAY-qmaxx-abstain.pdf` and `usage/OVERLAY-qmaxx-abstain.txt` (page map) |
 | pages reviewed | 6 of 6 (every page rendered at 60 dpi and viewed; pages 5 and 6 viewed again after the layout fix; see the review table) |
 
-The sample is `INPUT-qmaxx-abstain.md`, so `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-qmaxx-abstain.pdf` and `OVERLAY-qmaxx-abstain.{pdf,txt}`. These are the repo's file-role names (CLAUDE.md), not the `<id>.pdf` names in the brief; the tools fix them.
+The sample is `INPUT-moeb-motion-brief-qmaxxabstain.md`, so `tools/render.sh` and `tools/overlay.sh` write `OUTPUT-moeb-motion-brief-qmaxxabstain.typst.pdf` and `OVERLAY-qmaxx-abstain.{pdf,txt}`. These are the repo's file-role names (CLAUDE.md), not the `<id>.pdf` names in the brief; the tools fix them.
 
 The folder did not exist in this checkout before this pass. Only the adversary-complaint folder of this court was present, and that folder's exemplar and overlay PDFs are not in this snapshot (only the `.txt` page map and the `.md` sample are). This folder is new; the adversary folder is unchanged.
 
@@ -57,7 +57,7 @@ Not produced (separate filings, or the court's own forms): the proposed order (r
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district/motion-brief samples/INPUT-qmaxx-abstain.md
+sh tools/render.sh courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district/motion-brief usage/INPUT-moeb-motion-brief-qmaxxabstain.md
 sh tools/overlay.sh courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district/motion-brief qmaxx-abstain
 ```
 
@@ -65,7 +65,7 @@ Toolchain: `micromamba create -p ~/tb -c conda-forge typst=0.15.0 poppler imagem
 
 ## Overlay (what it shows)
 
-`samples/OVERLAY-qmaxx-abstain.pdf` is red (our render only), blue (the filed exemplar only) and black (both agree). The page map (`samples/OVERLAY-qmaxx-abstain.txt`): ours p.1 ↔ filed p.1 (71.7% word overlap), p.2 ↔ p.2 (76.1%), p.3 ↔ p.3 (86.5%), p.4 ↔ p.4 (90.4%), p.5 ↔ p.5 (50.0%), p.6 ↔ p.5 (51.5%).
+`usage/OVERLAY-qmaxx-abstain.pdf` is red (our render only), blue (the filed exemplar only) and black (both agree). The page map (`usage/OVERLAY-qmaxx-abstain.txt`): ours p.1 ↔ filed p.1 (71.7% word overlap), p.2 ↔ p.2 (76.1%), p.3 ↔ p.3 (86.5%), p.4 ↔ p.4 (90.4%), p.5 ↔ p.5 (50.0%), p.6 ↔ p.5 (51.5%).
 
 The pairing is by word overlap (coarse). The overlay is a diagnostic, not a score. Pages 1–4 pair with their exemplar pages at 71–90% word overlap. The lower overlap on pages 5 and 6 comes from the layout at the end: the exemplar's page 5 carries ¶¶ 10–11, the WHEREFORE, the signature and the certificate; ours puts the WHEREFORE and signature on page 5 and the certificate on page 6. The movant and respondent lines in the caption are the rule-required addition (gap 3), so they differ from the exemplar's caption. The overlay file was checked by viewing page 1 and page 6 as images; the colour split was not measured.
 
@@ -109,10 +109,10 @@ Three engines from one markdown contract. typst is the primary template and is u
 
 | Engine | Folder | Output for `qmaxx-abstain` | Status |
 |---|---|---|---|
-| typst (primary) | `typst/` | `samples/OUTPUT-qmaxx-abstain.pdf` (not in the snapshot; `tools/render.sh`) | unchanged |
-| docx | `docx/` | `samples/OUTPUT-qmaxx-abstain.docx`, `samples/OUTPUT-qmaxx-abstain.docx.pdf` | rendered by LibreOffice; all 6 pages rendered at 60 dpi and viewed |
+| typst (primary) | `typst/` | `usage/OUTPUT-moeb-motion-brief-qmaxxabstain.typst.pdf` (not in the snapshot; `tools/render.sh`) | unchanged |
+| docx | `docx/` | `usage/OUTPUT-moeb-motion-brief-qmaxxabstain.docx`, `usage/OUTPUT-moeb-motion-brief-qmaxxabstain.docx.pdf` | rendered by LibreOffice; all 6 pages rendered at 60 dpi and viewed |
 
-Build: `sh docx/make-reference.sh <absolute path>/docx/reference.docx` rebuilds the reference. `sh tools/render.sh --engine docx <court-dir> samples/INPUT-qmaxx-abstain.md` writes the `.docx` and the LibreOffice PDF. `docx/moeb-motion-brief.lua` builds the caption table, the numbered paragraphs, the signature block and the certificate of service. Footnotes are pandoc's own.
+Build: `sh docx/make-reference.sh <absolute path>/docx/reference.docx` rebuilds the reference. `sh tools/render.sh --engine docx <court-dir> usage/INPUT-moeb-motion-brief-qmaxxabstain.md` writes the `.docx` and the LibreOffice PDF. `docx/moeb-motion-brief.lua` builds the caption table, the numbered paragraphs, the signature block and the certificate of service. Footnotes are pandoc's own.
 
 LibreOffice here is 26.8.1, unpacked from the document-foundation Linux tarball (conda-forge has no LibreOffice). The vendored EB Garamond is installed for the user running LibreOffice (`docs/DOCX.md`).
 
@@ -136,5 +136,5 @@ LibreOffice here is 26.8.1, unpacked from the document-foundation Linux tarball 
 
 **docx BLOCKED items:**
 
-- `samples/INPUT-directory-memorandum.md`: BLOCKED for typst and docx alike. The sample writes footnote markers `[^1]` to `[^n]` but no definitions (no `[^n]: …` lines), so `typst/main.typ` stops with "footnote [^1] has no definition". No `.docx` is produced for it. The sample is not changed here; its footnote text has to come from the filed memorandum.
+- `usage/INPUT-moeb-motion-brief-directorymemorandum.md`: BLOCKED for typst and docx alike. The sample writes footnote markers `[^1]` to `[^n]` but no definitions (no `[^n]: …` lines), so `typst/main.typ` stops with "footnote [^1] has no definition". No `.docx` is produced for it. The sample is not changed here; its footnote text has to come from the filed memorandum.
 - Gate runner (`tools/check.sh --engine docx`): not run, because this court folder has no `rules.md`, `checks.yaml` or `reviews/` yet. BLOCKED: gates 0 to 3 on docx, until those files exist.

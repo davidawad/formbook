@@ -12,11 +12,11 @@ Re-check cadence: re-check annually each December 1 and whenever the court posts
 | SCP | Standard Chambers Procedures (Rev. 1/23/23), printed in USCIT pp. 423-426 | same file as USCIT |
 | FORMS | Appendix of Forms, General Instructions (USCIT pp. 321-322) and "Complaint Allegations" (USCIT pp. 350-351) | same file as USCIT |
 | AO-02-01 | Administrative Order 02-01, "In re Electronic Filing Procedures and Submission of Confidential Information" (the court's Electronic Filing Procedures, "EFPs"), printed in USCIT pp. 434-454 | same file as USCIT |
-| EX-TREK | Complaint, *Trek Bicycle Corp. v. United States*, Ct. No. 25-00917, ECF 2 (Sidley Austin LLP) | `complaint/exemplars/` |
-| EX-SAHAMITR | Complaint, *Sahamitr Pressure Container PLC v. United States*, Ct. No. 22-00107, ECF 2 (White & Case LLP) | `complaint/exemplars/` |
-| EX-DEERPARK | Complaint, *Deer Park Glycine, LLC v. United States*, Ct. No. 24-00016, ECF 2 (Thompson Hine LLP) | `complaint/exemplars/` |
-| EX-BGH | Rule 56.2 motion and memorandum, *BGH Edelstahl Siegen GmbH v. United States*, Ct. No. 26-01186, ECF 26 (DeKieffer & Horgan, PLLC) | `motion-brief/exemplars/` |
-| EX-GREATRIVER | Rule 56.2 motion and memorandum of consolidated plaintiff Greatriver Wood Co., *Shelter Forest Int'l Acquisition, Inc. v. United States*, Ct. No. 23-00144, ECF 51 (Husch Blackwell LLP) | `motion-brief/exemplars/` |
+| EX-TREK | Complaint, *Trek Bicycle Corp. v. United States*, Ct. No. 25-00917, ECF 2 (Sidley Austin LLP) | `complaint/usage/` |
+| EX-SAHAMITR | Complaint, *Sahamitr Pressure Container PLC v. United States*, Ct. No. 22-00107, ECF 2 (White & Case LLP) | `complaint/usage/` |
+| EX-DEERPARK | Complaint, *Deer Park Glycine, LLC v. United States*, Ct. No. 24-00016, ECF 2 (Thompson Hine LLP) | `complaint/usage/` |
+| EX-BGH | Rule 56.2 motion and memorandum, *BGH Edelstahl Siegen GmbH v. United States*, Ct. No. 26-01186, ECF 26 (DeKieffer & Horgan, PLLC) | `motion-brief/usage/` |
+| EX-GREATRIVER | Rule 56.2 motion and memorandum of consolidated plaintiff Greatriver Wood Co., *Shelter Forest Int'l Acquisition, Inc. v. United States*, Ct. No. 23-00144, ECF 51 (Husch Blackwell LLP) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a USCIT rule, the Standard Chambers Procedures or AO 02-01. **C** = convention (the rules leave it open; taken from the exemplars, with the filers that show it). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

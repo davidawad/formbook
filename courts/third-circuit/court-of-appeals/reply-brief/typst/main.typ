@@ -1,9 +1,9 @@
 // Entrypoint. Compile with the doc-type folder as --root; tools/render.sh does it:
 //   typst compile --root <doc-type-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=samples/NAME.md \
+//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
 //     typst/main.typ out.pdf
 #import "ca3-reply-brief.typ": ca3-reply-brief, split-frontmatter
 
-#let src = read("/" + sys.inputs.at("sample", default: "samples/INPUT-afp-reply-brief.md"))
+#let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-ca3-reply-brief-afp.md"))
 #let (meta, body) = split-frontmatter(src)
 #ca3-reply-brief(meta, body)

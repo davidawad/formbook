@@ -9,7 +9,7 @@ Alias `bap8`. Scope: opening, answering, and reply briefs before the United Stat
 | BAP-LR | Local Rules of the United States Bankruptcy Appellate Panel for the Eighth Circuit | https://ecf.ca8.uscourts.gov/newbap/rules/localrules_bapDec2023.pdf | December 2023; linked from https://www.ca8.uscourts.gov/panel-rules-and-publications |
 | FRBP | Federal Rules of Bankruptcy Procedure | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-bankruptcy-procedure | Current rules page checked 2026-10-17; relevant Rules 8014-8016, 8018, 8019, 8022, 8026 |
 | FRAP | Federal Rules of Appellate Procedure | https://www.uscourts.gov/forms-rules/current-rules-practice-procedure/federal-rules-appellate-procedure | Current publication checked 2026-10-17; only where FRBP incorporates it |
-| EXEMPLARS | Public briefs in each `exemplars/` directory under the three brief folders | Local files; provenance, source URLs, and SHA-256 are in each folder's `exemplars/SOURCE.md` | Retrieved dates are recorded per file; visual convention only |
+| EXEMPLARS | Public briefs in each `usage/` directory under the three brief folders | Local files; provenance, source URLs, and SHA-256 are in each folder's `usage/SOURCE.md` | Retrieved dates are recorded per file; visual convention only |
 
 Kinds: **M** = required by rule; **C** = convention; **T** = repository contract; **A** = filer responsibility. The national bankruptcy appellate rules govern generally, supplemented by the BAP's local rules.
 
@@ -37,21 +37,21 @@ Kinds: **M** = required by rule; **C** = convention; **T** = repository contract
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
 | BAP8-CONT-003 | Appellant's brief includes the items listed in FRBP 8014(a): jurisdictional statement, issues, case, argument summary, argument, conclusion, and required appendices/addendum material as applicable. | FRBP 8014(a)(1)-(9), official FRBP source, verified 2026-10-17 | M |
-| BAP8-CONT-004 | Opening-brief order, TOC/TOA presentation, heading hierarchy, and certificate placement follow the opening-brief exemplar where rules leave a choice. | `opening-brief/exemplars/SOURCE.md`, retrieved 2026-10-14 | C |
+| BAP8-CONT-004 | Opening-brief order, TOC/TOA presentation, heading hierarchy, and certificate placement follow the opening-brief exemplar where rules leave a choice. | `opening-brief/usage/SOURCE.md`, retrieved 2026-10-14 | C |
 
 ## Answering brief
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
 | BAP8-CONT-005 | Appellee's brief includes the items listed in FRBP 8014(b), with omitted statements supplied if the appellee is dissatisfied with the appellant's treatment. | FRBP 8014(b), official FRBP source, verified 2026-10-17 | M |
-| BAP8-CONT-006 | Answering-brief order, TOC/TOA presentation, heading hierarchy, and certificate placement follow the answering-brief exemplar where rules leave a choice. | `answering-brief/exemplars/SOURCE.md`, retrieved 2026-10-16 | C |
+| BAP8-CONT-006 | Answering-brief order, TOC/TOA presentation, heading hierarchy, and certificate placement follow the answering-brief exemplar where rules leave a choice. | `answering-brief/usage/SOURCE.md`, retrieved 2026-10-16 | C |
 
 ## Reply brief
 
 | ID | Requirement | Source | Kind |
 |---|---|---|---|
 | BAP8-CONT-007 | Appellant's reply is limited to responding to the appellee's arguments. | FRBP 8014(c), official FRBP source, verified 2026-10-17 | M |
-| BAP8-CONT-008 | Reply-brief order, TOC/TOA presentation, heading hierarchy, and certificate placement follow the reply-brief exemplar when a public filed exemplar is available; otherwise, no visual convention is asserted. | `reply-brief/exemplars/SOURCE.md`, retrieved 2026-10-16; no public reply filing found | C |
+| BAP8-CONT-008 | Reply-brief order, TOC/TOA presentation, heading hierarchy, and certificate placement follow the reply-brief exemplar when a public filed exemplar is available; otherwise, no visual convention is asserted. | `reply-brief/usage/SOURCE.md`, retrieved 2026-10-16; no public reply filing found | C |
 
 ## Author responsibilities
 

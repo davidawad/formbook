@@ -22,7 +22,7 @@ Local rules text is from the court's "Local Bankruptcy Rules" compilation (PRLBR
 
 ## What the overlay shows
 
-`samples/OVERLAY-organic-power-complaint.pdf` (red: our render; blue: the filed exemplar; black: both agree) and `.txt` (page map). The exemplar is the full 96-page RECAP PDF; the overlay pairs each of our 8 pages to the exemplar page with the most shared words:
+`usage/OVERLAY-organic-power-complaint.pdf` (red: our render; blue: the filed exemplar; black: both agree) and `.txt` (page map). The exemplar is the full 96-page RECAP PDF; the overlay pairs each of our 8 pages to the exemplar page with the most shared words:
 
 - ours p.1-5 -> filed p.4, 5, 7, 9, 11 (intro, parties, jurisdiction, facts start);
 - ours p.6-8 -> filed p.24, 25, 26 (prayer and signature).
@@ -31,10 +31,10 @@ The filed pages between 11 and 24 (the body that holds Counts II and III) are no
 
 ## Known gaps
 
-1. **Transcription is condensed.** `samples/INPUT-organic-power-complaint.md` jumps from "V. Count I" to "VIII. Count IV" (the Roman numerals skip VI and VII), so Counts II and III and their headings are missing. It is a partial transcription, not the full complaint. Completing it would add about 12 exemplar pages. Not done in this pass: the sample was kept as the brief asked (not broken, renders, all required structure present).
+1. **Transcription is condensed.** `usage/INPUT-prb-adversary-complaint-organicpowercomplaint.md` jumps from "V. Count I" to "VIII. Count IV" (the Roman numerals skip VI and VII), so Counts II and III and their headings are missing. It is a partial transcription, not the full complaint. Completing it would add about 12 exemplar pages. Not done in this pass: the sample was kept as the brief asked (not broken, renders, all required structure present).
 2. **Signature block (LBR 1005-1(c)).** The rule asks for the client's name and the filer's facsimile number. The sample's block reads "Counsel for Plaintiff" (client not named) and has no fax number. The filed exemplar's block is the same, so the sample reproduces it. Whether to add "Organic Power, LLC" and a fax line is for David to decide; the template prints the lines it is given.
-3. **Second exemplar not collected.** `exemplars/SOURCE.md` records that the only other bankruptcy-court adversary complaints found were scanned images (20-00027) or a pro se upload (23-03241, entry 115). Tier 2 (conventions) is therefore judged against one filer only. This is OPEN.
-4. **Typeface.** No PR bankruptcy rule sets a typeface or size. The template uses EB Garamond 12 pt (the only serif in `fonts/`, and the convention both exemplars follow at 12 pt). The exemplar's text is Times New Roman (embedded, per `exemplars/SOURCE.md`); EB Garamond at the same point size reads smaller, so the render is not a face match.
+3. **Second exemplar not collected.** `usage/SOURCE.md` records that the only other bankruptcy-court adversary complaints found were scanned images (20-00027) or a pro se upload (23-03241, entry 115). Tier 2 (conventions) is therefore judged against one filer only. This is OPEN.
+4. **Typeface.** No PR bankruptcy rule sets a typeface or size. The template uses EB Garamond 12 pt (the only serif in `fonts/`, and the convention both exemplars follow at 12 pt). The exemplar's text is Times New Roman (embedded, per `usage/SOURCE.md`); EB Garamond at the same point size reads smaller, so the render is not a face match.
 5. **Cover sheet and summons** (LBR 7003-1, 7004-2) are separate documents and are not generated.
 6. **Paragraph numbering** restarts for each complaint and is continuous across headings (as in the exemplar); a complaint with amendments is a separate document under LBR 1005-1(d), which requires the word "AMENDMENT" in bold. Not templated; the title field is the place to put it.
 
@@ -46,7 +46,7 @@ The filed pages between 11 and 24 (the body that holds Counts II and III) are no
 
 ## Engines
 
-docx: `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt double pitch, 13.8 pt single lines, 0.5 in first-line indent, 1 in margins, PAGE field in the footer); `docx/prb-complaint.lua` builds the caption table, the numbered paragraphs, the lettered prayer and the signature block from the frontmatter. Checked on `samples/OUTPUT-organic-power-complaint.docx.pdf` (LibreOffice). Opened with LibreOffice only; Word was not checked.
+docx: `docx/build-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt, exact 24 pt double pitch, 13.8 pt single lines, 0.5 in first-line indent, 1 in margins, PAGE field in the footer); `docx/prb-complaint.lua` builds the caption table, the numbered paragraphs, the lettered prayer and the signature block from the frontmatter. Checked on `usage/OUTPUT-prb-adversary-complaint-organicpowercomplaint.docx.pdf` (LibreOffice). Opened with LibreOffice only; Word was not checked.
 
 Matches the typst form (measured on the PDFs): US Letter, one-inch margins, EB Garamond 12 pt, body line pitch 24.0 pt and single-line pitch 13.8 pt in both, 8 pages in both, caption, title and lead-in positions within about 1 pt, numbers then a tab at 1 in, lettered prayer, footer page number, `/s/` signature block.
 

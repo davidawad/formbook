@@ -1,14 +1,14 @@
 # insd: complaint
 
 Doc type: **complaint** in the United States District Court for the Southern District of Indiana (`insd`).
-Folder: `courts/seventh-circuit/indiana/federal/southern-district/complaint/` (self-contained; the court-root `typst/` and `samples/` are not touched).
+Folder: `courts/seventh-circuit/indiana/federal/southern-district/complaint/` (self-contained; the court-root `typst/` and `usage/` are not touched).
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 2 filers: `exemplars/FILED-EXAMPLE-lightning-rod-1-26-cv-00830-complaint.pdf` (primary, used for the overlay) and `exemplars/FILED-EXAMPLE-cook-1-26-cv-00315-complaint.pdf` (second filer, structure only). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-lightning-rod-complaint.md` (caption, parties, jurisdiction, about 49 numbered paragraphs, the coverage section, the prayer and signature; see "Known gaps") |
-| render | ok: `samples/OUTPUT-lightning-rod-complaint.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-lightning-rod-complaint.pdf` and `OVERLAY-lightning-rod-complaint.txt` (run as `sh tools/overlay.sh <this-dir> lightning-rod-complaint <exemplar>`) |
+| exemplar | yes, 2 filers: `usage/SAMPLE-insd-complaint-lightningrod126cv00830.pdf` (primary, used for the overlay) and `usage/SAMPLE-insd-complaint-cook126cv00315.pdf` (second filer, structure only). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-insd-complaint-lightningrod.md` (caption, parties, jurisdiction, about 49 numbered paragraphs, the coverage section, the prayer and signature; see "Known gaps") |
+| render | ok: `usage/OUTPUT-insd-complaint-lightningrod.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-lightning-rod-complaint.pdf` and `OVERLAY-lightning-rod-complaint.txt` (run as `sh tools/overlay.sh <this-dir> lightning-rod-complaint <exemplar>`) |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed after the last template change) |
 
 ## Governing rules
@@ -55,9 +55,9 @@ Not produced by this template: the civil cover sheet, the Rule 7.1 disclosure st
 8. **Caption wording.** The Cook exemplar uses "JURY TRIAL DEMAND" in the caption; the Lightning Rod exemplar does not. The template supports both (`jury_demand`).
 9. **Engines.** Typst only. The latex and docx engines are not built for this doc type.
 10. **Gates not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder is not that shape. The brief forbids editing `tools/` or the court root, so the gates were not run.
-11. **File names.** The brief asked for `samples/<id>.md`, `samples/<id>.pdf` and `<id>-overlay.pdf`. The shared tools (`render.sh`, `overlay.sh`) use `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so the files follow the tools' names.
+11. **File names.** The brief asked for `usage/<id>.md`, `usage/<id>.pdf` and `<id>-overlay.pdf`. The shared tools (`render.sh`, `overlay.sh`) use `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`, so the files follow the tools' names.
 
-## Review of the rendered pages (OUTPUT-lightning-rod-complaint.pdf)
+## Review of the rendered pages (OUTPUT-insd-complaint-lightningrod.typst.pdf)
 
 - Page 1: court title on three lines; caption with a ")" column and the case number; title centered; the lead-in (unnumbered); paragraphs 1 to 6. Pass.
 - Page 2: paragraphs 7 to 15, "JURISDICTION AND VENUE" and "FACTUAL BACKGROUND" centered bold; no heading at the foot of the page. Pass.
@@ -74,5 +74,5 @@ Typst is the primary engine. The DOCX engine (`docx/`: `build-reference.sh`, `re
 - **Matches the typst form (by construction, not by page review):** EB Garamond 12 pt body; exact 24 pt (double) line pitch with one line between paragraphs; 0.5 in first-line indent; 1 in margins on letter paper; numbered paragraphs 1, 2, ... after the first heading (lead-in and WHEREFORE paragraphs unnumbered); centered bold headings (Heading 1) and a left bold heading (Heading 3); single-spaced block quotes indented 0.5 in on both sides; single-spaced caption, court lines, title and signature block (signature indented 3.25 in); centered PAGE footer from page 1.
 - **Differs or unverified:** footnotes are 10 pt single spaced (L.R. 5-1(b)); the typst template has no footnote handling and the sample has none. Numbered paragraphs use a tab stop at 0.88 in, not the typst 0.25 in gap after the number. The prayer list uses pandoc's list indents, not the typst 0.5 in / 0.4 in. The caption table's cell borders are off (none); the caption lines keep their leading spaces as written in the frontmatter. The signature block is kept together with keep-with-next, which approximates `breakable: false`.
 - **Fonts:** EB Garamond is not installed by the build; the machine that opens the file must have it (vendored in `fonts/`).
-- **BLOCKED:** `samples/OUTPUT-lightning-rod-complaint.docx.pdf` is not produced (LibreOffice `soffice` is not installed on this box, so `tools/render-docx.sh` stops at the conversion step after writing and validating the `.docx`). No page has been rendered or reviewed for the docx engine (0 pages). The cover and caption table borders are not verified against the typst layout. Gate 0 and 1 for docx are not run.
-- **Build:** `sh docx/build-reference.sh docx/reference.docx`, then `sh tools/render.sh --engine docx <this-dir> samples/INPUT-lightning-rod-complaint.md`.
+- **BLOCKED:** `usage/OUTPUT-lightning-rod-complaint.docx.pdf` is not produced (LibreOffice `soffice` is not installed on this box, so `tools/render-docx.sh` stops at the conversion step after writing and validating the `.docx`). No page has been rendered or reviewed for the docx engine (0 pages). The cover and caption table borders are not verified against the typst layout. Gate 0 and 1 for docx are not run.
+- **Build:** `sh docx/build-reference.sh docx/reference.docx`, then `sh tools/render.sh --engine docx <this-dir> usage/INPUT-insd-complaint-lightningrod.md`.

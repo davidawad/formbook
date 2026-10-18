@@ -12,8 +12,8 @@ Re-check cadence: re-check annually each December 1 (FRBP amendment date) and wh
 | FRBP | Federal Rules of Bankruptcy Procedure 7003, 7007.1, 7008, 7010, 9004, 9011 (LII text, restyled eff. Dec. 1, 2024) | https://www.law.cornell.edu/rules/frbp/rule_7008 (and rule_7003, rule_7007.1, rule_7010, rule_9004, rule_9011) |
 | FRCP | Federal Rules of Civil Procedure 8, 10 (applied by FRBP 7008, 7010) | https://www.law.cornell.edu/rules/frcp/rule_8 , https://www.law.cornell.edu/rules/frcp/rule_10 |
 | F416D | Official Form 416D, Caption for Use in Adversary Proceeding (12/15) | https://www.uscourts.gov/sites/default/files/form_b416d_0.pdf |
-| EX-SNYDER | Adversary complaint, *Snyder v. Biros*, Adv. No. 23-02020 (Fuchs Law Office and The Lynch Law Group, for plaintiff Shanni Snyder) | `adversary-complaint/exemplars/` |
-| EX-BERNSTEIN | Brief in support of motion to dismiss, *Bernstein v. Meyer, Unkovic & Scott LLP*, Adv. No. 21-02063 (DiBella Weinheimer, for the defendants) | `motion-brief/exemplars/` |
+| EX-SNYDER | Adversary complaint, *Snyder v. Biros*, Adv. No. 23-02020 (Fuchs Law Office and The Lynch Law Group, for plaintiff Shanni Snyder) | `adversary-complaint/usage/` |
+| EX-BERNSTEIN | Brief in support of motion to dismiss, *Bernstein v. Meyer, Unkovic & Scott LLP*, Adv. No. 21-02063 (DiBella Weinheimer, for the defendants) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (FRBP, FRCP as applied, W.PA.LBR). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

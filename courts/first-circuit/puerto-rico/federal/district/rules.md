@@ -12,10 +12,10 @@ Re-check cadence: re-check annually each December 1 (national rule amendments) a
 |---|---|---|
 | LCVR | Local Rules of the United States District Court for the District of Puerto Rico (Civil, Admiralty, Criminal), "Effective with amendments through October 16, 2024", 145 pp. Rules read: 1, 3, 5, 5.2, 7, 7.1, 10, 11, 56. | court file https://www.prd.uscourts.gov/sites/default/files/local_rules/Local%20Rules%2010-16-2024-amended-rule-83A.pdf ; read from https://web.archive.org/web/20260307052350id_/https://www.prd.uscourts.gov/sites/default/files/local_rules/Local%20Rules%2010-16-2024-amended-rule-83A.pdf |
 | FRCP | Federal Rules of Civil Procedure 5(d)(1)(B), 7(b), 7.1, 8(a), 10(a)-(b), 11(a), 38(b) | https://www.law.cornell.edu/rules/frcp/rule_5 (and `rule_7`, `rule_7.1`, `rule_8`, `rule_10`, `rule_11`, `rule_38`) |
-| EX-C1 | Complaint: Conde Vidal v. García Padilla, No. 3:14-cv-01253, Doc. 7 (amended complaint; Lambda Legal, Debevoise & Plimpton) | `complaint/exemplars/SOURCE.md` entry 1 |
-| EX-C2 | Complaint: United States v. Commonwealth of Puerto Rico, No. 3:12-cv-02039, Doc. 1 (U.S. Department of Justice, Civil Rights Division) | `complaint/exemplars/SOURCE.md` entry 2 |
-| EX-M1 | Motion to dismiss with memorandum: Franklin California Tax-Free Trust v. Commonwealth of Puerto Rico, No. 3:14-cv-01518, Docs. 10, 10-1 (Puerto Rico Department of Justice, Kirkland & Ellis) | `motion-brief/exemplars/SOURCE.md` entry 1 |
-| EX-M2 | Memorandum in support of motion for summary judgment: Conde Vidal v. García Padilla, No. 3:14-cv-01253, Doc. 44 (Lambda Legal, Debevoise & Plimpton) | `motion-brief/exemplars/SOURCE.md` entry 2 |
+| EX-C1 | Complaint: Conde Vidal v. García Padilla, No. 3:14-cv-01253, Doc. 7 (amended complaint; Lambda Legal, Debevoise & Plimpton) | `complaint/usage/SOURCE.md` entry 1 |
+| EX-C2 | Complaint: United States v. Commonwealth of Puerto Rico, No. 3:12-cv-02039, Doc. 1 (U.S. Department of Justice, Civil Rights Division) | `complaint/usage/SOURCE.md` entry 2 |
+| EX-M1 | Motion to dismiss with memorandum: Franklin California Tax-Free Trust v. Commonwealth of Puerto Rico, No. 3:14-cv-01518, Docs. 10, 10-1 (Puerto Rico Department of Justice, Kirkland & Ellis) | `motion-brief/usage/SOURCE.md` entry 1 |
+| EX-M2 | Memorandum in support of motion for summary judgment: Conde Vidal v. García Padilla, No. 3:14-cv-01253, Doc. 44 (Lambda Legal, Debevoise & Plimpton) | `motion-brief/usage/SOURCE.md` entry 2 |
 
 Kinds: **M** = mandated by a court rule (FRCP or L.Cv.R.). **C** = convention (seen across exemplars of different filers; the rules leave it open). **T** = project/tooling rule. **A** = author responsibility, not machine-checkable.
 

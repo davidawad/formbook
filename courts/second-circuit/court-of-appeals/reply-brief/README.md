@@ -6,12 +6,12 @@ This folder is self-contained. The court's rules (below) decide the layout; the 
 
 | Path | What |
 |---|---|
-| `exemplars/FILED-EXAMPLE-lowe-moneylion-26-655-reply-brief.pdf` | Primary exemplar: reply brief of defendant-appellant MoneyLion, 2d Cir. No. 26-655, filed 2026-09-10 by counsel. 45 pages, text layer. |
-| `exemplars/FILED-EXAMPLE-alisigwe-24-960-reply-brief.pdf` | Second filer, for conventions only (criminal reply, Federal Defenders of New York). Not transcribed, not overlaid. |
-| `exemplars/SOURCE.md` | URL fetched from, case, docket, filer, date filed, date fetched, for both. |
-| `samples/INPUT-lowe-reply-brief.md` | Transcription of the Lowe exemplar: cover, tables, Introduction, Argument Points I and II.A, Conclusion, signature, certificates. A portion (about 1,600 of the brief's 6,994 words). |
-| `samples/OUTPUT-lowe-reply-brief.pdf` | Render of the sample (14 pages). |
-| `samples/OVERLAY-lowe-reply-brief.pdf`, `.txt` | Red/blue overlay of the render on the Lowe exemplar, and the page map. |
+| `usage/SAMPLE-ca2-reply-brief-lowemoneylion26655.pdf` | Primary exemplar: reply brief of defendant-appellant MoneyLion, 2d Cir. No. 26-655, filed 2026-09-10 by counsel. 45 pages, text layer. |
+| `usage/SAMPLE-ca2-reply-brief-alisigwe24960.pdf` | Second filer, for conventions only (criminal reply, Federal Defenders of New York). Not transcribed, not overlaid. |
+| `usage/SOURCE.md` | URL fetched from, case, docket, filer, date filed, date fetched, for both. |
+| `usage/INPUT-ca2-reply-brief-lowe.md` | Transcription of the Lowe exemplar: cover, tables, Introduction, Argument Points I and II.A, Conclusion, signature, certificates. A portion (about 1,600 of the brief's 6,994 words). |
+| `usage/OUTPUT-ca2-reply-brief-lowe.typst.pdf` | Render of the sample (14 pages). |
+| `usage/OVERLAY-lowe-reply-brief.pdf`, `.txt` | Red/blue overlay of the render on the Lowe exemplar, and the page map. |
 | `typst/main.typ` | Entry point; reads `--input sample=...`, splits frontmatter from body, calls the template. |
 | `typst/ca2-reply-brief.typ` | The template: `ca2-reply-brief(meta, md)`. Content-agnostic; every number is a named parameter at the top or traces to a rule. |
 
@@ -71,12 +71,12 @@ There is no `word_limit_basis`, no addendum, no related-cases statement, no Form
 From the repo root (`PATH` must include the toolchain):
 
 ```sh
-sh tools/render.sh courts/second-circuit/court-of-appeals/reply-brief samples/INPUT-lowe-reply-brief.md
+sh tools/render.sh courts/second-circuit/court-of-appeals/reply-brief usage/INPUT-ca2-reply-brief-lowe.md
 sh tools/overlay.sh courts/second-circuit/court-of-appeals/reply-brief lowe-reply-brief \
-  "$PWD/courts/second-circuit/court-of-appeals/reply-brief/exemplars/FILED-EXAMPLE-lowe-moneylion-26-655-reply-brief.pdf"
+  "$PWD/courts/second-circuit/court-of-appeals/reply-brief/usage/SAMPLE-lowe-moneylion-26-655-reply-brief.pdf"
 ```
 
-The overlay is given the Lowe exemplar explicitly: `overlay.sh` with no third argument takes the first PDF in `exemplars/` alphabetically, which here would be the Alisigwe brief.
+The overlay is given the Lowe exemplar explicitly: `overlay.sh` with no third argument takes the first PDF in `usage/` alphabetically, which here would be the Alisigwe brief.
 
 Render result: `typst compile` with vendored EB Garamond and vendored cmarker 0.1.10, `--ignore-system-fonts`, no warnings, exit 0. `pdffonts` shows only `EBGaramond-Regular`, `-Bold`, `-Italic`, all embedded.
 
@@ -84,7 +84,7 @@ Render result: `typst compile` with vendored EB Garamond and vendored cmarker 0.
 
 ## Overlay (what it shows)
 
-Red is our render; blue is the filed exemplar; black is where they agree. Pages are paired by word overlap, not index (`samples/OVERLAY-lowe-reply-brief.txt`):
+Red is our render; blue is the filed exemplar; black is where they agree. Pages are paired by word overlap, not index (`usage/OVERLAY-lowe-reply-brief.txt`):
 
 | Our page | Filed page | Word overlap | Note |
 |---|---|---|---|
@@ -100,7 +100,7 @@ The overlay is a diagnostic, not a score. It is a word-overlap pairing; it does 
 
 ## Page review
 
-All 14 pages of `samples/OUTPUT-lowe-reply-brief.pdf` were rendered at `pdftoppm -r 60` and looked at. Physical page numbers: 1 cover; 2-4 contents and authorities; 5-12 body (body pages 1-8); 13-14 certificates.
+All 14 pages of `usage/OUTPUT-ca2-reply-brief-lowe.typst.pdf` were rendered at `pdftoppm -r 60` and looked at. Physical page numbers: 1 cover; 2-4 contents and authorities; 5-12 body (body pages 1-8); 13-14 certificates.
 
 | Physical page | Finding | Action |
 |---|---|---|
@@ -131,12 +131,12 @@ All 14 pages of `samples/OUTPUT-lowe-reply-brief.pdf` were rendered at `pdftoppm
 
 Built by `latex/` (`template.tex` + `ca2.lua`, `DOC = "reply"`) and `docx/` (`reference.docx` from `make-reference.sh`, + `ca2.lua`).
 
-- **latex** (`samples/OUTPUT-lowe-reply-brief.latex.pdf`, 14 pages; typst: 14). Matches: the cover with counsel in two columns, the contents and authorities (computed page numbers), the Introduction and Argument headings, the signature block with the date, the certificates of compliance and service (reply wording), word count 1,635. Differs: the cover has no short rules between its parts (the typst cover's rules were dropped to keep it on one page); the typst count is 1,634 against 1,635 here, because typst's counter and the rule text disagree by one token and this count follows the rule.
-- **docx** (`samples/OUTPUT-lowe-reply-brief.docx`, `.docx.pdf` 14 pages). Matches: the cover on one page (counsel in two columns), sections and numbering, the certificates, word count 1,635. BLOCKED: `DOCX-TOC-PAGES` and `DOCX-TOA-PAGES` (see the opening brief's README).
+- **latex** (`usage/OUTPUT-ca2-reply-brief-lowe.latex.pdf`, 14 pages; typst: 14). Matches: the cover with counsel in two columns, the contents and authorities (computed page numbers), the Introduction and Argument headings, the signature block with the date, the certificates of compliance and service (reply wording), word count 1,635. Differs: the cover has no short rules between its parts (the typst cover's rules were dropped to keep it on one page); the typst count is 1,634 against 1,635 here, because typst's counter and the rule text disagree by one token and this count follows the rule.
+- **docx** (`usage/OUTPUT-ca2-reply-brief-lowe.docx`, `.docx.pdf` 14 pages). Matches: the cover on one page (counsel in two columns), sections and numbering, the certificates, word count 1,635. BLOCKED: `DOCX-TOC-PAGES` and `DOCX-TOA-PAGES` (see the opening brief's README).
 
 ## Verification pass 2026-10-16 (fb-595.26.2)
 
-- Re-rendered `INPUT-lowe-reply-brief.md` with `tools/render.sh`: exit 0, no warnings, 14 pages (the committed PDF was not stale: same text and page count). Overlay rerun against the Lowe exemplar; the page map is unchanged.
+- Re-rendered `INPUT-ca2-reply-brief-lowe.md` with `tools/render.sh`: exit 0, no warnings, 14 pages (the committed PDF was not stale: same text and page count). Overlay rerun against the Lowe exemplar; the page map is unchanged.
 - Viewed all 14 pages at 60 dpi, the exemplar's page 1, and all 14 overlay pages at 40 dpi. The cover's 72 pt docket number already met Local Rule 32.1(a)(1).
 - Fixed (tier 2): the table of authorities listed "10 U.S.C. § 987(f)(4)" before the "9 U.S.C." entries (text sort). The sort key now compares digit runs by value; statutes read 9 U.S.C. § 2, § 16(a), § 402(a), then 10 U.S.C. § 987(f)(4).
 - Latex re-rendered (14 pages) and every page viewed. Open latex defects, not fixed: the contents entry for II.A puts its page number past the right margin; statutes still sort as text; the certificate of service's "Date" line is blank; the footnote on page 5 is set close below the text.

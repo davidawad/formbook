@@ -32,7 +32,7 @@ A court PR may deliver docx as BLOCKED or partial if it lists the exact failing 
 
 ## Checking a docx
 
-1. `sh tools/render.sh --engine docx <court-dir> samples/<id>.md` writes `samples/<id>.docx` and `samples/<id>.docx.pdf`.
-2. `sh tools/check.sh <court-dir> --engine docx` runs Gates 0 to 3 on the `.docx.pdf` and writes `samples/.check-docx.txt` only when everything passes.
+1. `sh tools/render.sh --engine docx <doc-dir> usage/INPUT-<stem>-<id>.md` writes `usage/OUTPUT-<stem>-<id>.docx` and `usage/OUTPUT-<stem>-<id>.docx.pdf`.
+2. `sh tools/check.sh <doc-dir> --engine docx` runs Gates 0 to 3 on the `.docx.pdf` and writes `usage/.check-docx.txt` only when everything passes.
 3. Open the `.docx` in LibreOffice (and Word if you have it) and confirm there is no repair prompt. Record that, and every page you looked at, in the review file under `## sample <id> docx`.
 4. Anything that cannot pass goes in the PR as `BLOCKED: <check ID>: <why>` lines.

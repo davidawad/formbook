@@ -11,7 +11,7 @@ Re-check cadence: each time the Court amends its Rules (it posts a revisions not
 | R | Rules of the Supreme Court of the United States, adopted February 17, 2026, effective March 16, 2026 (read: Rules 14, 24, 29, 33, 34, 37). Page numbers are the Rules' printed pages. | https://www.supremecourt.gov/filingandrules/2026RulesoftheCourt_WEB.pdf |
 | CHART | "U.S. Supreme Court: Booklet-Format Specification Chart", effective March 16, 2026 (same word limits and colors as Rule 33.1(g)) | https://www.supremecourt.gov/casehand/BookletFormatSpecificChart2026.pdf |
 | EFG | "Guidelines for the Submission of Documents to the Supreme Court's Electronic Filing System" (March 2026 edition, PDF created 2026-03-09), issued by the Clerk under Rule 29.7 | https://www.supremecourt.gov/filingandrules/ElectronicFilingGuidelines_March2026.pdf |
-| EX-* | The filed exemplars in each doc type's `exemplars/` (see `SOURCE.md` there). Visual reference only. | local |
+| EX-* | The filed exemplars in each doc type's `usage/` (see `SOURCE.md` there). Visual reference only. | local |
 
 Kinds: **M** = mandated by a Rule of the Court (or the Clerk's guidelines that Rule 29.7 makes binding). **C** = convention (from the exemplars or common practice; the Rules leave it open). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

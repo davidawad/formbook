@@ -13,10 +13,10 @@ Access note: on 2026-10-17 `www.ded.uscourts.gov` rejected direct requests from 
 | LR | Local Rules of Civil Practice and Procedure of the U.S. District Court for the District of Delaware, "(Amended Effective September 1, 2026)" (47 pp.) | https://www.ded.uscourts.gov/sites/ded/files/2026%20District%20of%20Delaware%20Revised%20Local%20Rules%20Effective%20September%201.pdf |
 | SO-2019 | Standing Order Regarding Briefing in All Cases, December 9, 2019 (word-count alternative to page limits) | https://www.ded.uscourts.gov/sites/ded/files/Standing%20%20Order_0.pdf |
 | FRCP | Federal Rules of Civil Procedure 5, 7, 7.1, 8, 10, 11, 38 (LII text) | https://www.law.cornell.edu/rules/frcp/rule_5 (and rule_7, rule_7.1, rule_8, rule_10, rule_11, rule_38) |
-| EX-BSC | Complaint for patent infringement, *Boston Scientific Corp. v. Atraverse Medical, Inc.*, No. 1:26-cv-01294 (Fish & Richardson) | `complaint/exemplars/` |
-| EX-MAYNE | Complaint, *Mayne Pharma LLC v. TherapeuticsMD, Inc.*, No. 1:25-cv-00670 (Morris Nichols; Arnold & Porter) | `complaint/exemplars/` |
-| EX-ABRAMSON | Opening brief in support of motion to dismiss, *Abramson v. Safe Life Policy, LLC*, No. 1:26-cv-00772 (Heyman Enerio Gattuso & Hirzel; Fellows Labriola) | `motion-brief/exemplars/` |
-| EX-PANINI | Opening brief in support of motion to dismiss, *Murdock v. Panini America, Inc.*, No. 1:26-cv-00849 (Troutman Pepper Locke) | `motion-brief/exemplars/` |
+| EX-BSC | Complaint for patent infringement, *Boston Scientific Corp. v. Atraverse Medical, Inc.*, No. 1:26-cv-01294 (Fish & Richardson) | `complaint/usage/` |
+| EX-MAYNE | Complaint, *Mayne Pharma LLC v. TherapeuticsMD, Inc.*, No. 1:25-cv-00670 (Morris Nichols; Arnold & Porter) | `complaint/usage/` |
+| EX-ABRAMSON | Opening brief in support of motion to dismiss, *Abramson v. Safe Life Policy, LLC*, No. 1:26-cv-00772 (Heyman Enerio Gattuso & Hirzel; Fellows Labriola) | `motion-brief/usage/` |
+| EX-PANINI | Opening brief in support of motion to dismiss, *Murdock v. Panini America, Inc.*, No. 1:26-cv-00849 (Troutman Pepper Locke) | `motion-brief/usage/` |
 
 Kinds: **M** = mandated by a rule (FRCP, D. Del. LR, or a court-wide standing order). **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

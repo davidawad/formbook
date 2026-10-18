@@ -15,8 +15,8 @@ Re-check cadence: re-check annually each December 1 (national rule amendments) a
 | D-ECF | D. Conn. (District Court) Electronic Filing Policies and Procedures, revised October 3, 2025. 17 pp., sha256 `25549742a84c7e89ce5d216ddbcaf4a0ac493e5683132afedae895b65a4f76a6`. Context only, see Finding 3. | https://www.ctd.uscourts.gov/sites/default/files/Electronic-Filing-Policies-and-Procedures-10.3.25.pdf |
 | FRBP | Federal Rules of Bankruptcy Procedure 7003, 7008, 7010, 9004, 9011, 9013 (as amended Apr. 2, 2024, eff. Dec. 1, 2024) | https://www.law.cornell.edu/rules/frbp/rule_7008, .../rule_7010, .../rule_9004, .../rule_9011, .../rule_9013 |
 | FRCP | Fed. R. Civ. P. 10 (applied by FRBP 7010) | https://www.law.cornell.edu/rules/frcp/rule_10 |
-| EX-AC | `adversary-complaint/exemplars/`: Despins (Neubert, Pepe & Monteith), Novak (Law Offices of Jeffrey Hellman), Lotto (Willcutts & Habib). See that folder's `SOURCE.md`. | local |
-| EX-MB | `motion-brief/exemplars/`: Pillsbury (Green & Sklarz; Pillsbury Winthrop Shaw Pittman), Hamilton defendants (Lazare Potter Giacovas & Moyle). See that folder's `SOURCE.md`. | local |
+| EX-AC | `adversary-complaint/usage/`: Despins (Neubert, Pepe & Monteith), Novak (Law Offices of Jeffrey Hellman), Lotto (Willcutts & Habib). See that folder's `SOURCE.md`. | local |
+| EX-MB | `motion-brief/usage/`: Pillsbury (Green & Sklarz; Pillsbury Winthrop Shaw Pittman), Hamilton defendants (Lazare Potter Giacovas & Moyle). See that folder's `SOURCE.md`. | local |
 
 Kinds: **M** = mandated by a court rule (FRBP, an applied FRCP rule, a Local Bankruptcy Rule, or a District Local Civil Rule that a Local Bankruptcy Rule adopts). **C** = convention (the rules leave it open; taken from exemplars of different filers). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable.
 

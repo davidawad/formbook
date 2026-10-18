@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/guam/federal/district/motion-brief/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-leon-guerrero-25-cv-00030-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-leon-guerrero-memorandum.md` (full transcription of the 12-page memorandum, Doc. 13-1; footnotes 1 and 2 not transcribed, see gaps) |
-| render | ok: `samples/OUTPUT-leon-guerrero-memorandum.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
-| overlay | ok: `samples/OVERLAY-leon-guerrero-memorandum.pdf` and `samples/OVERLAY-leon-guerrero-memorandum.txt` (`sh tools/overlay.sh`) |
+| exemplar | yes: `usage/SAMPLE-gud-motion-brief-leonguerrero25cv00030.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-gud-motion-brief-leonguerreromemorandum.md` (full transcription of the 12-page memorandum, Doc. 13-1; footnotes 1 and 2 not transcribed, see gaps) |
+| render | ok: `usage/OUTPUT-gud-motion-brief-leonguerreromemorandum.typst.pdf`, 11 pages, typst 0.15.0, vendored EB Garamond only, no warnings (`sh tools/render.sh`) |
+| overlay | ok: `usage/OVERLAY-leon-guerrero-memorandum.pdf` and `usage/OVERLAY-leon-guerrero-memorandum.txt` (`sh tools/overlay.sh`) |
 | typeface | face required: none (GNLR 5.1(a), 2022: no typeface or point size; the memorandum's exemplar is Times New Roman, a convention only). Substitute: n/a; EB Garamond kept, the default when a court names no face (`docs/FONTS.md`). Visual only. |
 | pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed; all 11 viewed again on 2026-10-15 for the fonts pass, no change) |
 
@@ -86,7 +86,7 @@ Tier 2 is **not** judged (one filer only; see gap 1). OPEN items for tier 2: the
 
 ### docx (pandoc; `docx/`)
 
-Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once and committed) and `docx/gud.lua` (cover, caption, addresses, signature blocks at each `<!-- signature -->` marker and at the end, the page break before CERTIFICATE; body text and headings stay pandoc's). `sh tools/render.sh --engine docx` writes `samples/OUTPUT-leon-guerrero-memorandum.docx`.
+Built by `docx/make-reference.sh` (writes `docx/reference.docx`, run once and committed) and `docx/gud.lua` (cover, caption, addresses, signature blocks at each `<!-- signature -->` marker and at the end, the page break before CERTIFICATE; body text and headings stay pandoc's). `sh tools/render.sh --engine docx` writes `usage/OUTPUT-gud-motion-brief-leonguerreromemorandum.docx`.
 
 Set in `styles.xml` and `sectPr`, **not rendered** (no LibreOffice on the build box, so no page of the docx has been looked at):
 

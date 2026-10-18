@@ -36,21 +36,21 @@ Same as `petition-for-review/README.md`, except there is no `questions_presented
 
 ## Samples
 
-- `samples/INPUT-dpg-opposition-to-emergency-petition.md`: transcribed from `exemplars/FILED-EXAMPLE-democratic-party-of-georgia-S23M0376-motion-brief.pdf`. Frontmatter from the cover, counsel, signature and certificate. Body is an **excerpt** of about 1,900 words: Introduction (first two paragraphs, plus footnote 1 condensed to its text); the Statement of the Case (two paragraphs); Argument (opening and the first two sub-sections, "Intervenors' improper petition" and "not proven entitlement to a stay", and the merits sub-section through the 2017 amendment); Conclusion. Omitted: the rest of the merits argument, Argument's later sub-sections, and the exhibit list. Footnote URLs (Twitter, perma) are dropped (Rule 17(3)).
-- Render: `samples/OUTPUT-dpg-opposition-to-emergency-petition.pdf`, 10 PDF pages: cover (unnumbered), TOC (printed 1), body (2–7), Conclusion (7), signature block alone on printed page 8, certificate of service (9).
+- `usage/INPUT-ga-motion-brief-dpgoppositiontoemergencypetition.md`: transcribed from `usage/SAMPLE-ga-motion-brief-democraticpartyofgeorgias23m0376.pdf`. Frontmatter from the cover, counsel, signature and certificate. Body is an **excerpt** of about 1,900 words: Introduction (first two paragraphs, plus footnote 1 condensed to its text); the Statement of the Case (two paragraphs); Argument (opening and the first two sub-sections, "Intervenors' improper petition" and "not proven entitlement to a stay", and the merits sub-section through the 2017 amendment); Conclusion. Omitted: the rest of the merits argument, Argument's later sub-sections, and the exhibit list. Footnote URLs (Twitter, perma) are dropped (Rule 17(3)).
+- Render: `usage/OUTPUT-ga-motion-brief-dpgoppositiontoemergencypetition.typst.pdf`, 10 PDF pages: cover (unnumbered), TOC (printed 1), body (2–7), Conclusion (7), signature block alone on printed page 8, certificate of service (9).
 
 ## Exemplar
 
-- `exemplars/FILED-EXAMPLE-democratic-party-of-georgia-S23M0376-motion-brief.pdf`: the whole filing, 46 pages, filed 2022-11-23 in Case No. S23M0376 (Court of Appeals docket A23E0013) by Respondents (Democratic Party of Georgia, DSCC, Warnock for Georgia). It is an **opposition** to an emergency petition and emergency motion, not a motion itself. It is the closest filed Georgia Supreme Court motion-type document found. Provenance: `exemplars/SOURCE.md`.
+- `usage/SAMPLE-ga-motion-brief-democraticpartyofgeorgias23m0376.pdf`: the whole filing, 46 pages, filed 2022-11-23 in Case No. S23M0376 (Court of Appeals docket A23E0013) by Respondents (Democratic Party of Georgia, DSCC, Warnock for Georgia). It is an **opposition** to an emergency petition and emergency motion, not a motion itself. It is the closest filed Georgia Supreme Court motion-type document found. Provenance: `usage/SOURCE.md`.
 - The filed opposition carries no Rule 20(7) word-count certificate. The template adds it.
 
 ## Overlay
 
-`samples/OVERLAY-dpg-opposition-to-emergency-petition.pdf` and `.txt`. Page map (ours → filed, word overlap): 1→1 84%, 2→2 51%, 3→6 68%, 4→8 55%, 5→12 60%, 6→14 74%, 7→15 86%, 8→16 43%, 9→31 20%, 10→44 36%. Overlap measures transcription coverage, not layout. PDF page 9 (the stranded signature page) pairs at 20% because the filed page it matches is a different page of the filing; PDF page 10 (certificate of service) pairs with the filed certificate at 36%, a list of names and addresses.
+`usage/OVERLAY-dpg-opposition-to-emergency-petition.pdf` and `.txt`. Page map (ours → filed, word overlap): 1→1 84%, 2→2 51%, 3→6 68%, 4→8 55%, 5→12 60%, 6→14 74%, 7→15 86%, 8→16 43%, 9→31 20%, 10→44 36%. Overlap measures transcription coverage, not layout. PDF page 9 (the stranded signature page) pairs at 20% because the filed page it matches is a different page of the filing; PDF page 10 (certificate of service) pairs with the filed certificate at 36%, a list of names and addresses.
 
 ## Gate 2: page review
 
-All 10 PDF pages of `samples/OUTPUT-dpg-opposition-to-emergency-petition.pdf` were rasterized at 60 dpi and read (after the final render).
+All 10 PDF pages of `usage/OUTPUT-ga-motion-brief-dpgoppositiontoemergencypetition.typst.pdf` were rasterized at 60 dpi and read (after the final render).
 
 | Page (PDF) | Printed | Result |
 |---|---|---|
@@ -79,7 +79,7 @@ Defects found and fixed during the review (not present in the final render):
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (conda-forge)
-sh tools/render.sh courts/eleventh-circuit/georgia/state/supreme-court/motion-brief samples/INPUT-dpg-opposition-to-emergency-petition.md
+sh tools/render.sh courts/eleventh-circuit/georgia/state/supreme-court/motion-brief usage/INPUT-ga-motion-brief-dpgoppositiontoemergencypetition.md
 sh tools/overlay.sh courts/eleventh-circuit/georgia/state/supreme-court/motion-brief dpg-opposition-to-emergency-petition
 ```
 
@@ -87,7 +87,7 @@ The render fails on any typst warning and on any font outside the vendored set (
 
 ## Engines
 
-Typst is the primary engine (above). The DOCX engine is `docx/`: `build-reference.sh` writes `reference.docx` (the 1.5-spaced measurements of the typst motion: 19.5 pt lines, 7.8 pt after each paragraph, 13-pt headings, 11-pt footnotes, the page number in the footer); `ga-motion.lua` builds the cover, questions presented (petition only), TOC, closing and certificate; `render.sh` makes two renders so the TOC numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> samples/INPUT-dpg-opposition-to-emergency-petition.md`: `samples/OUTPUT-dpg-opposition-to-emergency-petition.docx` and `.docx.pdf` (LibreOffice 26.8.1).
+Typst is the primary engine (above). The DOCX engine is `docx/`: `build-reference.sh` writes `reference.docx` (the 1.5-spaced measurements of the typst motion: 19.5 pt lines, 7.8 pt after each paragraph, 13-pt headings, 11-pt footnotes, the page number in the footer); `ga-motion.lua` builds the cover, questions presented (petition only), TOC, closing and certificate; `render.sh` makes two renders so the TOC numbers come from the docx's own layout. Render with `sh tools/render.sh --engine docx <this folder> usage/INPUT-ga-motion-brief-dpgoppositiontoemergencypetition.md`: `usage/OUTPUT-ga-motion-brief-dpgoppositiontoemergencypetition.docx` and `.docx.pdf` (LibreOffice 26.8.1).
 
 | | docx | typst |
 |---|---|---|
@@ -100,7 +100,7 @@ Typst is the primary engine (above). The DOCX engine is `docx/`: `build-referenc
 | Closing | the word-count sentence, date and signature kept on one page | same |
 | Certificate | same; recipients in two columns, wrapping | same |
 
-Checked: every page of `OUTPUT-dpg-opposition-to-emergency-petition.docx.pdf` was rendered (60 dpi) and set beside the typst page; line positions were measured with `pdftotext -bbox`.
+Checked: every page of `OUTPUT-ga-motion-brief-dpgoppositiontoemergencypetition.docx.pdf` was rendered (60 dpi) and set beside the typst page; line positions were measured with `pdftotext -bbox`.
 
 Measured against typst, the spacing of the transitions that occur in this sample agrees to 1.6 pt or less: level 1 to level 2, body to level 2, level 2 to level 3, and level 2 to body. The space above a heading differs by case (typst adds block spacing that LibreOffice does not), so each case has its own heading style in `reference.docx` (`Heading<n>Body` after body text, the level-1 heading at the top of the body).
 

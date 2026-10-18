@@ -4,11 +4,11 @@ Doc type: **motion with memorandum** (a Rule 12 motion to dismiss and the memora
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-columbia-veterinary-zoetis-3-26-cv-01863-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-zoetis-rule-12-motion-to-dismiss.md`: complete transcription of the 11-page exemplar, plus the generated certificate of service: 12 rendered pages |
-| render | ok: `samples/OUTPUT-zoetis-rule-12-motion-to-dismiss.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/SAMPLE-ord-motion-brief-columbiaveterinaryzoetis326cv01863.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ord-motion-brief-zoetisrule12motiontodismiss.md`: complete transcription of the 11-page exemplar, plus the generated certificate of service: 12 rendered pages |
+| render | ok: `usage/OUTPUT-ord-motion-brief-zoetisrule12motiontodismiss.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
 | typeface | face required: none (LR 10-1 text read 2026-10-15 names no typeface; only the 12-pt minimum). Vendored substitute: none needed; **EB Garamond kept** (the rule allows any proportional face). Fit: n/a. Font list unchanged in this pass. |
-| overlay | **fail** this pass: `exemplars/FILED-EXAMPLE-*.pdf` is not in this snapshot, so `tools/overlay.sh` could not run. The `samples/OVERLAY-zoetis-rule-12-motion-to-dismiss.txt` on disk is from an earlier run; no `.pdf` is on disk. |
+| overlay | **fail** this pass: `usage/SAMPLE-*.pdf` is not in this snapshot, so `tools/overlay.sh` could not run. The `usage/OVERLAY-zoetis-rule-12-motion-to-dismiss.txt` on disk is from an earlier run; no `.pdf` is on disk. |
 | pages reviewed | 12 of 12 this pass (every page rasterized at 60 dpi and viewed after the re-render) |
 | check.sh / check-selftest.sh | not run: they expect a court root with `court.json` and `rules.md`, and this is a doc-type folder; the brief forbids touching `tools/` |
 
@@ -61,7 +61,7 @@ Not produced by this template (separate filings, not part of the motion): the pr
 Run from the repo root (`export PATH="$HOME/tb/bin:$PATH"` first):
 
 ```sh
-sh tools/render.sh courts/ninth-circuit/oregon/federal/district/motion-brief samples/INPUT-zoetis-rule-12-motion-to-dismiss.md
+sh tools/render.sh courts/ninth-circuit/oregon/federal/district/motion-brief usage/INPUT-ord-motion-brief-zoetisrule12motiontodismiss.md
 sh tools/overlay.sh courts/ninth-circuit/oregon/federal/district/motion-brief zoetis-rule-12-motion-to-dismiss
 ```
 
@@ -88,7 +88,7 @@ The overlay is a diagnostic: red = our render only, blue = the filed exemplar on
 
 ## Known gaps and open choices
 
-1. **One exemplar.** The brief asks for one exemplar per doc type; the tier-2 rule in CLAUDE.md asks for two or three filers. A second counsel-filed motion with a combined memorandum is *Beckstrom v. Beckstrom*, 6:26-cv-00920-AA (8 pages, Twin Lakes Church, RECAP `gov.uscourts.ord.193990.25.0_1.pdf`), listed in `exemplars/SOURCE.md`. Not downloaded.
+1. **One exemplar.** The brief asks for one exemplar per doc type; the tier-2 rule in CLAUDE.md asks for two or three filers. A second counsel-filed motion with a combined memorandum is *Beckstrom v. Beckstrom*, 6:26-cv-00920-AA (8 pages, Twin Lakes Church, RECAP `gov.uscourts.ord.193990.25.0_1.pdf`), listed in `usage/SOURCE.md`. Not downloaded.
 2. **TOC and TOA not generated.** LR 7-1(c) requires them for a memorandum over 20 pages. The sample is under 20, so this is not a failure today. The template does not produce them; if a longer memorandum is rendered, add them before filing.
 3. **Page and word limit not counted.** LR 7-2(b)(1) (35 pages or 11,000 words) is not checked. The sample is 11 pages of memorandum.
 4. **Font size.** LR 10-1(c) sets 12 pt as the floor. The template uses 13 pt body text because EB Garamond (the only vendored serif) sets smaller than Times New Roman at the same size. A choice, flagged for David.
@@ -102,13 +102,13 @@ The overlay is a diagnostic: red = our render only, blue = the filed exemplar on
 
 ## Engines
 
-**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion.lua` writes the cover (counsel, court title, caption table with the legend), the body, the signature block and the certificate of service; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in the footer. Output: `samples/OUTPUT-zoetis-rule-12-motion-to-dismiss.docx` and `.docx.pdf` (LibreOffice 26.8), 12 pages, all 12 rendered at 60 dpi and viewed (`reviews/docx.md`). The typst output is also 12 pages.
+**docx** (`docx/`): `sh docx/build-reference.sh docx/reference.docx` builds the reference; `docx/motion.lua` writes the cover (counsel, court title, caption table with the legend), the body, the signature block and the certificate of service; `docx/render.sh` (run by `tools/render-docx.sh`) puts the footer title in the footer. Output: `usage/OUTPUT-ord-motion-brief-zoetisrule12motiontodismiss.docx` and `.docx.pdf` (LibreOffice 26.8), 12 pages, all 12 rendered at 60 dpi and viewed (`reviews/docx.md`). The typst output is also 12 pages.
 
 - Matches the typst output: letter; one inch on all four sides; EB Garamond 13 pt (embedded in the PDF); double spacing as an exact 24 pt line and single spacing as an exact 13 pt line; counsel block; court title; caption with the case number at the page center and the legend under the title; headings at typst's default sizes (level 1 18 pt centered, level 2 15.5 pt bold and left, level 3 13 pt bold and indented); block quotations single-spaced and indented; footer "Page n - TITLE" at 12 pt; the last paragraph kept with the signature; certificate of service on its own page.
 - Differs from typst: the docx is built from the markdown with Word styles, so line breaks in the signature column and the page breaks follow LibreOffice (Word may move a line); the signature's phone line wraps at the same place as typst. No tables of contents or authorities (as typst).
 - Fonts: the PDF is correct only when LibreOffice sees the vendored `fonts/` and no substitute face. This box has no system EB Garamond, so run the render with a `FONTCONFIG_FILE` that lists only the repo's `fonts/` directory.
 - Not verified in Word (only LibreOffice here). The `.docx` is a valid zip of well-formed XML (checked by `render-docx.sh`) and converts in LibreOffice without error; no GUI repair prompt was observed (headless).
 
-BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and this doc-type folder has neither (it exits 2 before any gate runs), so the gates did not run and `samples/.check-docx.txt` was not written. The Gate 2 record for the docx is `reviews/docx.md`.
+BLOCKED: check.sh (Gates 0 to 3, docx): `tools/check.sh` reads `<court-dir>/court.json` and `checks.yaml`, and this doc-type folder has neither (it exits 2 before any gate runs), so the gates did not run and `usage/.check-docx.txt` was not written. The Gate 2 record for the docx is `reviews/docx.md`.
 
 [District index](../README.md) | [Formbook index](../../../../../../README.md)

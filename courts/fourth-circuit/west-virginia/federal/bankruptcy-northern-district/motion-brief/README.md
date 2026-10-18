@@ -2,7 +2,7 @@
 
 Doc type: **motion with memorandum of law** in an adversary proceeding (FRBP 9013; LBR 9013-1(b)). Court: United States Bankruptcy Court for the Northern District of West Virginia. Folder: `courts/fourth-circuit/west-virginia/federal/bankruptcy-northern-district/motion-brief/`.
 
-Status: exemplar=yes (one filer; the exemplar PDF itself is not in this snapshot, see SOURCE.md), render=ok (typst, no warnings, EB Garamond embedded, re-rendered 2026-10-14 for the fonts pass), overlay=fail this pass (`tools/overlay.sh` exits 1: "no exemplar pdf"; the earlier `samples/OVERLAY-sheehan-motion-to-dismiss.txt` is from an earlier pass and was not regenerated), pages reviewed 15 (every page of the three renders, 60 dpi PNG, viewed on 2026-10-14). Nothing here sets `status` in `court.json`.
+Status: exemplar=yes (one filer; the exemplar PDF itself is not in this snapshot, see SOURCE.md), render=ok (typst, no warnings, EB Garamond embedded, re-rendered 2026-10-14 for the fonts pass), overlay=fail this pass (`tools/overlay.sh` exits 1: "no exemplar pdf"; the earlier `usage/OVERLAY-sheehan-motion-to-dismiss.txt` is from an earlier pass and was not regenerated), pages reviewed 15 (every page of the three renders, 60 dpi PNG, viewed on 2026-10-14). Nothing here sets `status` in `court.json`.
 
 Tier 2 is **not** closed: one filer is not the 2-3 the eval loop asks for, and the open findings are listed under "Known gaps". Nothing in this folder is marked done.
 
@@ -39,7 +39,7 @@ The earlier template required a chapter line, a counsel block at top, and a fixe
 - `service.parties` is optional; the list is printed only when given.
 - Level-1 and level-2 headings are set to the body size. The default heading size (1.4 em) leaked through the show rule.
 
-The fictional sample (`samples/INPUT-example-motion-brief.md`) renders unchanged except for the heading size.
+The fictional sample (`usage/INPUT-wvnb-motion-brief-example.md`) renders unchanged except for the heading size.
 
 ## Fonts and layout
 
@@ -50,17 +50,17 @@ The fictional sample (`samples/INPUT-example-motion-brief.md`) renders unchanged
 
 ## What the samples show
 
-**`samples/INPUT-sheehan-motion-to-dismiss.md`** is a verbatim transcription of the exemplar: the motion (ECF 8) and the memorandum (ECF 8-1), in filing order. It has the caption, the relief paragraph, the memorandum's introduction, factual allegations (with a block quote and a second block quote), argument I-III with subsections A-D, a conclusion, a signature block with party lines, four footnotes and a certificate of service. Its render is 11 pages, with footnotes and italics.
+**`usage/INPUT-wvnb-motion-brief-sheehanmotiontodismiss.md`** is a verbatim transcription of the exemplar: the motion (ECF 8) and the memorandum (ECF 8-1), in filing order. It has the caption, the relief paragraph, the memorandum's introduction, factual allegations (with a block quote and a second block quote), argument I-III with subsections A-D, a conclusion, a signature block with party lines, four footnotes and a certificate of service. Its render is 11 pages, with footnotes and italics.
 
-**`samples/INPUT-example-motion-brief.md`** is **fictional** and was kept from the earlier pass: a transferee's motion to dismiss Counts I and II under FRCP 12(b)(6). It exercises the template's negative-notice box, a counsel block at top and a certificate listing parties; the filed exemplar has none of these. Its render is 4 pages. Its authorities (*Iqbal*, *Twombly*) are real, but their reporter and pin cites were written from memory and not checked.
+**`usage/INPUT-wvnb-motion-brief-example.md`** is **fictional** and was kept from the earlier pass: a transferee's motion to dismiss Counts I and II under FRCP 12(b)(6). It exercises the template's negative-notice box, a counsel block at top and a certificate listing parties; the filed exemplar has none of these. Its render is 4 pages. Its authorities (*Iqbal*, *Twombly*) are real, but their reporter and pin cites were written from memory and not checked.
 
 File names: `tools/render.sh` writes `OUTPUT-<id>.pdf`; `tools/overlay.sh` reads that name and writes `OVERLAY-<id>.pdf` and `.txt`. The transcription's id is `sheehan-motion-to-dismiss`.
 
-Render: `sh tools/render.sh <this-dir> samples/INPUT-sheehan-motion-to-dismiss.md` → `OUTPUT-sheehan-motion-to-dismiss.pdf`, 11 pages, embedded EB Garamond only, no warnings. The fictional sample rendered to `OUTPUT-example-motion-brief.pdf`, 4 pages, the same way.
+Render: `sh tools/render.sh <this-dir> usage/INPUT-wvnb-motion-brief-sheehanmotiontodismiss.md` → `OUTPUT-wvnb-motion-brief-sheehanmotiontodismiss.typst.pdf`, 11 pages, embedded EB Garamond only, no warnings. The fictional sample rendered to `OUTPUT-wvnb-motion-brief-example.typst.pdf`, 4 pages, the same way.
 
 ## Overlay
 
-`sh tools/overlay.sh <this-dir> sheehan-motion-to-dismiss` → `samples/OVERLAY-sheehan-motion-to-dismiss.pdf` (11 pages) and `.txt` (page map). Red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words, not index.
+`sh tools/overlay.sh <this-dir> sheehan-motion-to-dismiss` → `usage/OVERLAY-sheehan-motion-to-dismiss.pdf` (11 pages) and `.txt` (page map). Red is our render, blue is the filed exemplar, black is where they agree. Pages are paired by shared words, not index.
 
 Page map (from the `.txt`):
 
@@ -118,14 +118,14 @@ Ordered by page. None blocks render or overlay; all are for the eval loop's tier
 - **Negative notice and proposed order.** The filing has neither. The template does not generate the movant-prepared notices for fixed-period motion types (LBR 9013-1(c)(2)(C)) or the proposed order (LBR 9013-1(c)(1)). Known gaps.
 - **Page limit.** The 25-page limit (WVNB-FMT-001) is documented but not counted, and its source is unverified.
 - **Filer's text.** The transcription keeps the filer's own typos and any irregular citations ("failed to alleged", "MARTING"). The authorities in both samples were not checked. The exemplar's cites are the filer's, not ours.
-- **Tier-2 exemplars.** Only one filer (Sheehan v. Levine, 2019). The eval loop wants two or three filers. Candidates are listed in `exemplars/SOURCE.md`; the best is the 2026 Storj Labs memorandum (ECF 131), which is a standalone memorandum and would need its own transcription.
+- **Tier-2 exemplars.** Only one filer (Sheehan v. Levine, 2019). The eval loop wants two or three filers. Candidates are listed in `usage/SOURCE.md`; the best is the 2026 Storj Labs memorandum (ECF 131), which is a standalone memorandum and would need its own transcription.
 - **Currency.** The local rules text is the 2003 edition. The court's current text was not found.
 
 ## Engines
 
-**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (run `sh docx/build-reference.sh docx/reference.docx`); `docx/wvnb-motion-brief.lua` builds the counsel block, caption, negative notice, signature block and certificate of service. Rendered by `sh tools/render.sh --engine docx <this-dir> samples/INPUT-<id>.md`; the PDF is the LibreOffice conversion.
+**docx** (`docx/`): `build-reference.sh` builds `docx/reference.docx` from pandoc's default reference (run `sh docx/build-reference.sh docx/reference.docx`); `docx/wvnb-motion-brief.lua` builds the counsel block, caption, negative notice, signature block and certificate of service. Rendered by `sh tools/render.sh --engine docx <this-dir> usage/INPUT-<id>.md`; the PDF is the LibreOffice conversion.
 
 - Matches the typst form: EB Garamond 12 pt (the only face in the PDF, checked with `pdffonts`), exact 18 pt body line pitch (the typst pitch, measured from the typst PDF), 0.5 in first-line indent, letter, 1 in margins, 10 pt centered page-number footer, level 1 centered capitals, level 2 centered bold, level 3 left bold, native footnotes at 10 pt, block quotes indented 1 em on each side, the caption box with its right and bottom rules, the boxed negative notice, the signature in the 3.2 in column, and the certificate of service on its own page.
 - Differs: the single-spaced blocks use exact 11.4 pt; the footnote separator is pandoc's default rule, not the 30% rule of the typst form; the level-1 capitals are typed into the file by the filter; the Sheehan sample runs 12 pages in the docx against 11 in typst (the same pitch, with different line breaks and one heading held to the next page).
-- Reviewed: every page of `OUTPUT-sheehan-motion-to-dismiss.docx.pdf` (12) and `OUTPUT-example-motion-brief.docx.pdf` (4), each against the typst page at 60 dpi.
+- Reviewed: every page of `OUTPUT-wvnb-motion-brief-sheehanmotiontodismiss.docx.pdf` (12) and `OUTPUT-wvnb-motion-brief-example.docx.pdf` (4), each against the typst page at 60 dpi.
 - BLOCKED: `tools/check.sh --engine docx` cannot run: this snapshot has no `checks.yaml` for this court (exit 2, `Error: open .../checks.yaml: no such file or directory`). No check IDs were authored. Word is not available here, so the `.docx` is verified only by LibreOffice (converts without error; the XML parts are well-formed); no Word repair check was run.

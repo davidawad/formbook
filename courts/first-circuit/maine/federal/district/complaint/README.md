@@ -5,15 +5,15 @@ Folder: `courts/first-circuit/maine/federal/district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: 2 filers. `exemplars/FILED-EXAMPLE-taco-barr-2-26-cv-00470-complaint.pdf` (primary, transcribed) and `exemplars/FILED-EXAMPLE-gagne-2-26-cv-00301-complaint.pdf` (second filer, compared on caption and signature block). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-taco-barr-complaint.md`: the whole body of the 11-page filing (caption, all 53 numbered paragraphs, claims, prayer, jury demand, signature), transcribed from the text layer. ECF header lines and the exhibits are not included. |
+| exemplar | yes: 2 filers. `usage/SAMPLE-med-complaint-tacobarr226cv00470.pdf` (primary, transcribed) and `usage/SAMPLE-med-complaint-gagne226cv00301.pdf` (second filer, compared on caption and signature block). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-med-complaint-tacobarr.md`: the whole body of the 11-page filing (caption, all 53 numbered paragraphs, claims, prayer, jury demand, signature), transcribed from the text layer. ECF header lines and the exhibits are not included. |
 | typeface | none named: D. Me. LR 10(b)(1) requires "12-point font or larger" and names no face (text read 2026-10-14). Substitute: none needed, EB Garamond kept (`docs/FONTS.md`, "No face named"). Metric-compatible: n/a. Filed exemplars are Times New Roman (tier 3, filer style, not chased). `pdffonts`: EBGaramond-Regular and -Bold embedded. |
-| render | ok: `samples/OUTPUT-taco-barr-complaint.pdf`, 9 pages, `tools/render.sh` with typst 0.15.0, vendored EB Garamond only, no typst warnings (exit 0). |
-| overlay | ok: `samples/OVERLAY-taco-barr-complaint.pdf` and `samples/OVERLAY-taco-barr-complaint.txt` (against the primary exemplar, `taco-barr-2-26-cv-00470`, passed as the exemplar argument to `tools/overlay.sh`). |
+| render | ok: `usage/OUTPUT-med-complaint-tacobarr.typst.pdf`, 9 pages, `tools/render.sh` with typst 0.15.0, vendored EB Garamond only, no typst warnings (exit 0). |
+| overlay | ok: `usage/OVERLAY-taco-barr-complaint.pdf` and `usage/OVERLAY-taco-barr-complaint.txt` (against the primary exemplar, `taco-barr-2-26-cv-00470`, passed as the exemplar argument to `tools/overlay.sh`). |
 | pages reviewed | 9 of 9: every page rendered at 60 dpi and viewed in its final state. |
 | certificate | none in the exemplar; none in the template (not needed for a complaint, see the rules below). |
 
-File names: the brief asked for `samples/<id>.md`; the repo's file-role names are used instead (`INPUT-<id>.md` in, `OUTPUT-<id>.pdf` out, `OVERLAY-<id>.pdf/.txt`), because `tools/render.sh` and `tools/overlay.sh` read and write those names by default.
+File names: the brief asked for `usage/<id>.md`; the repo's file-role names are used instead (`INPUT-<id>.md` in, `OUTPUT-<id>.pdf` out, `OVERLAY-<id>.pdf/.txt`), because `tools/render.sh` and `tools/overlay.sh` read and write those names by default.
 
 ## Governing rules
 
@@ -54,7 +54,7 @@ Primary source: **District of Maine Local Rules, "current as of April 1, 2025"**
 
 ## What the overlay shows
 
-`samples/OVERLAY-taco-barr-complaint.pdf` is red (our render) over blue (the filed exemplar), page by page, pairing each sample page with the exemplar page that shares the most words (`OVERLAY-taco-barr-complaint.txt`). Pages 1 to 3 pair with the same page number (word overlap 85 to 90 %). Pages 4 to 9 pair with exemplar pages 5 to 11 and overlap 36 to 85 %: the pairing is by words, and the sample's page breaks fall differently from the filed pages, because the filing is 11 pages at about 200 words a page and our render is 9 pages at about 250 words a page (EB Garamond sets more words to the line than Times New Roman at the same size). The overlay is a diagnostic, not a score; it shows where our layout and the filed layout differ, and the review above is the Gate 2 record.
+`usage/OVERLAY-taco-barr-complaint.pdf` is red (our render) over blue (the filed exemplar), page by page, pairing each sample page with the exemplar page that shares the most words (`OVERLAY-taco-barr-complaint.txt`). Pages 1 to 3 pair with the same page number (word overlap 85 to 90 %). Pages 4 to 9 pair with exemplar pages 5 to 11 and overlap 36 to 85 %: the pairing is by words, and the sample's page breaks fall differently from the filed pages, because the filing is 11 pages at about 200 words a page and our render is 9 pages at about 250 words a page (EB Garamond sets more words to the line than Times New Roman at the same size). The overlay is a diagnostic, not a score; it shows where our layout and the filed layout differ, and the review above is the Gate 2 record.
 
 ## Known gaps and open choices
 
@@ -91,7 +91,7 @@ Every page rendered at 60 dpi and viewed after the last template change.
 
 ## Engines
 
-docx: `docx/build-reference.sh` builds `docx/reference.docx` (pandoc default, restyled); `docx/med-complaint.lua` builds the caption, signature block and lettered prayer. Output: `samples/OUTPUT-taco-barr-complaint.docx` and `.docx.pdf` (LibreOffice). Opened and converted with LibreOffice only; Word was not checked.
+docx: `docx/build-reference.sh` builds `docx/reference.docx` (pandoc default, restyled); `docx/med-complaint.lua` builds the caption, signature block and lettered prayer. Output: `usage/OUTPUT-med-complaint-tacobarr.docx` and `.docx.pdf` (LibreOffice). Opened and converted with LibreOffice only; Word was not checked.
 
 - Matches typst (every page of both PDFs rendered at 60 dpi and viewed): EB Garamond 13 pt (embedded, `pdffonts` shows EBGaramond Regular and Bold); double spacing as exact 27.6 pt lines with no paragraph gap; 0.5 in first-line indent; paragraphs numbered by a Word list (1., 2., ...), `~` paragraphs unnumbered; single-spaced caption with the party block closed by a rule at right and bottom; court name; bold capitals title; prayer lettered A. to E. with a hanging indent; headings kept with the next line; single-spaced block quote; signature block ("Dated", "/s/"), kept with the jury demand; letter, 1-inch margins; centered page number.
 - Differs: the "Civil Action No." label sits on its own line above the blank rule when the case number is blank (typst puts label and rule on one line); a filled case number is on one line.

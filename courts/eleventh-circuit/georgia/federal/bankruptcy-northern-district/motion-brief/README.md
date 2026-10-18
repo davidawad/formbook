@@ -4,10 +4,10 @@ Doc type: **motion with a memorandum of law**, filed in an adversary proceeding 
 
 | Item | Status |
 |---|---|
-| exemplar | yes, 1 filer: `exemplars/FILED-EXAMPLE-kapitus-stanfield-23-02003-motion-brief.pdf` (see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-kapitus-23-02003.md`, the whole filing (motion, memorandum, certificate) |
-| render | ok: `samples/OUTPUT-kapitus-23-02003.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
-| overlay | ok: `samples/OVERLAY-kapitus-23-02003.pdf` and `OVERLAY-kapitus-23-02003.txt`, made 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not committed; see gaps 11) |
+| exemplar | yes, 1 filer: `usage/SAMPLE-ganb-motion-brief-kapitusstanfield2302003.pdf` (see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ganb-motion-brief-kapitus2302003.md`, the whole filing (motion, memorandum, certificate) |
+| render | ok: `usage/OUTPUT-ganb-motion-brief-kapitus2302003.typst.pdf`, 7 pages, typst 0.15.0, vendored EB Garamond only (embedded), no warnings |
+| overlay | ok: `usage/OVERLAY-kapitus-23-02003.pdf` and `OVERLAY-kapitus-23-02003.txt`, made 2026-10-14 against the RECAP copy of the exemplar (the exemplar PDF is not committed; see gaps 11) |
 | pages reviewed | 7 of 7 re-rendered and viewed 2026-10-14 (fonts pass; the face did not change, see Typeface below) |
 
 ## Typeface
@@ -23,7 +23,7 @@ Not a `court.json` status; nothing here sets `status`. The court-root `README.md
 
 ## File names
 
-The brief asked for `samples/<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. The shared tools write and read `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt` (`tools/render.sh`, `tools/overlay.sh`), so the sample uses those names. `<id>` is `kapitus-23-02003`.
+The brief asked for `usage/<id>.md`, `<id>.pdf` and `<id>-overlay.pdf`. The shared tools write and read `INPUT-<id>.md`, `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt` (`tools/render.sh`, `tools/overlay.sh`), so the sample uses those names. `<id>` is `kapitus-23-02003`.
 
 ## Governing rules
 
@@ -79,11 +79,11 @@ Body:
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/motion-brief samples/INPUT-kapitus-23-02003.md
+sh tools/render.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/motion-brief usage/INPUT-ganb-motion-brief-kapitus2302003.md
 sh tools/overlay.sh courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/motion-brief kapitus-23-02003
 ```
 
-- `samples/OVERLAY-kapitus-23-02003.pdf`: red = our render, blue = filed exemplar, black = both. Page pairing by word overlap (from `OVERLAY-kapitus-23-02003.txt`): ours p.1 ↔ filed p.1 (86.2%), p.2 ↔ p.2 (78.8%), p.3 ↔ p.3 (60.5%), p.4 ↔ p.5 (50.5%), p.5 ↔ p.6 (75.5%), p.6 ↔ p.7 (74.1%), p.7 ↔ p.8 (52.2%). The filed copy has 10 pages and its later pages (9-10, the certificate) are not paired. The exemplar's caption uses ")" and ours does too, so page 1 lines up closely. The overlay is a diagnostic, not a score.
+- `usage/OVERLAY-kapitus-23-02003.pdf`: red = our render, blue = filed exemplar, black = both. Page pairing by word overlap (from `OVERLAY-kapitus-23-02003.txt`): ours p.1 ↔ filed p.1 (86.2%), p.2 ↔ p.2 (78.8%), p.3 ↔ p.3 (60.5%), p.4 ↔ p.5 (50.5%), p.5 ↔ p.6 (75.5%), p.6 ↔ p.7 (74.1%), p.7 ↔ p.8 (52.2%). The filed copy has 10 pages and its later pages (9-10, the certificate) are not paired. The exemplar's caption uses ")" and ours does too, so page 1 lines up closely. The overlay is a diagnostic, not a score.
 
 ## Defects found and fixed (Gate 2 record)
 
@@ -108,8 +108,8 @@ Reviewed pages: 7 of 7.
 
 | Engine | Result here | Output |
 |---|---|---|
-| typst (primary, `typst/`) | unchanged by this work | `samples/OUTPUT-kapitus-23-02003.pdf` |
-| docx (`docx/`) | `.docx` built and XML-checked; `.docx.pdf` **not produced** (no LibreOffice in this box), so no page was rendered or reviewed | `samples/OUTPUT-kapitus-23-02003.docx` |
+| typst (primary, `typst/`) | unchanged by this work | `usage/OUTPUT-ganb-motion-brief-kapitus2302003.typst.pdf` |
+| docx (`docx/`) | `.docx` built and XML-checked; `.docx.pdf` **not produced** (no LibreOffice in this box), so no page was rendered or reviewed | `usage/OUTPUT-ganb-motion-brief-kapitus2302003.docx` |
 
 `docx/make-reference.sh` builds `docx/reference.docx` from pandoc's default reference: EB Garamond 13 pt; body text 1.5 spaced (exact 22.4 pt); half-inch first-line indent; block quotations single-spaced and indented ½ in on each side; footnotes 11 pt; letter page, 1-inch margins; centered 11 pt page number. `docx/ganb-motion-brief.lua` builds the first page (caption as a borderless table: 3.4 in, 0.3 in ")" column, the rest; 0.4 in gap for the filing stamp; rule; title), passes the body through as written (no paragraph numbers, as the typst template), and builds the signature and certificate blocks in the right half of the page. Certificate text keeps the body first-line indent, as the typst template does.
 
@@ -140,5 +140,5 @@ Reviewed pages: 7 of 7.
 9. **The sample is the whole filing** (the motion, memorandum, WHEREFORE, signature and certificate), so the overlay covers all of it.
 10. **Certificate of service optional.** Under Fed. R. Civ. P. 5(d)(1)(B) no certificate is needed for ECF service. The template keeps the certificate as an option because the exemplar has one.
 11. **Local practice not checked:** judge-specific standing orders, and the signature style (`/s/`) beyond the exemplar.
-12. **Exemplar PDF not in the repo.** Only `exemplars/SOURCE.md` is committed. For the 2026-10-14 overlay the RECAP copy was fetched from the URL in `SOURCE.md` into a scratch directory and passed to `tools/overlay.sh` as its third argument. Committing the PDF is a repo decision, not made here.
+12. **Exemplar PDF not in the repo.** Only `usage/SOURCE.md` is committed. For the 2026-10-14 overlay the RECAP copy was fetched from the URL in `SOURCE.md` into a scratch directory and passed to `tools/overlay.sh` as its third argument. Committing the PDF is a repo decision, not made here.
 13. **BLR 5005-1 subsection (f) and the 2019 PDF not retrieved (2026-10-14).** courtrules.net returns HTTP 403; the court's 2019 local-rules PDF returns an 855-byte error page. The font conclusion rests on the excerpts, which name no face; re-check subsection (f) against the court's PDF.

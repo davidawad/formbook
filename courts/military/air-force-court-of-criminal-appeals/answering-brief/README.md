@@ -2,11 +2,11 @@
 
 - Court: `afcca`, U.S. Air Force Court of Criminal Appeals (`courts/military/air-force-court-of-criminal-appeals/`)
 - Doc type: `answering-brief`. The United States' answer to the appellant's assignments of error (AFCCA Rule 18.3: "Answer briefs ... will follow the same format as assignments of error and respond separately to each assigned error"). One self-contained folder; no shared files.
-- Exemplars: two, from the same two filer pairs as the opening-brief folder (`exemplars/SOURCE.md`):
-  - `FILED-EXAMPLE-douglas-40324-answering-brief.pdf` (*United States v. Douglas*, ACM 40324 (f rev), 3 June 2024, Government Trial and Appellate Operations Division, signed by Mary Ellen Payne). The whole answer. Primary: the overlay defaults to it.
-  - `FILED-EXAMPLE-howard-40478-answering-brief.pdf` (*United States v. Howard*, ACM 40478 (f rev), 29 October 2024, GTAOD: G. Matt Osborn, Mary Ellen Payne, Matthew D. Talcott). The cover, index, table of authorities, issues presented and start of the statement of the case.
-- Samples: `samples/INPUT-douglas-answering-brief.md` (full transcription, 10 pages rendered) and `samples/INPUT-howard-answering-brief.md` (excerpt, 3 pages rendered; `excerpt: true`).
-- Status: template built; render, overlay and page review done for both samples (below). Fonts pass, 2026-10-14: the typeface stays EB Garamond (Known gaps, 1); both renders and both overlays re-run; every page re-viewed. The `FILED-EXAMPLE-*.pdf` files named above are not in this snapshot, so the overlays were run against extracts of the page ranges `exemplars/SOURCE.md` cites, fetched from the URLs there and kept outside the repo. Not reviewed by a human. `court.json` and the court root are untouched.
+- Exemplars: two, from the same two filer pairs as the opening-brief folder (`usage/SOURCE.md`):
+  - `SAMPLE-afcca-answering-brief-douglas40324.pdf` (*United States v. Douglas*, ACM 40324 (f rev), 3 June 2024, Government Trial and Appellate Operations Division, signed by Mary Ellen Payne). The whole answer. Primary: the overlay defaults to it.
+  - `SAMPLE-afcca-answering-brief-howard40478.pdf` (*United States v. Howard*, ACM 40478 (f rev), 29 October 2024, GTAOD: G. Matt Osborn, Mary Ellen Payne, Matthew D. Talcott). The cover, index, table of authorities, issues presented and start of the statement of the case.
+- Samples: `usage/INPUT-afcca-answering-brief-douglas.md` (full transcription, 10 pages rendered) and `usage/INPUT-afcca-answering-brief-howard.md` (excerpt, 3 pages rendered; `excerpt: true`).
+- Status: template built; render, overlay and page review done for both samples (below). Fonts pass, 2026-10-14: the typeface stays EB Garamond (Known gaps, 1); both renders and both overlays re-run; every page re-viewed. The `SAMPLE-*.pdf` files named above are not in this snapshot, so the overlays were run against extracts of the page ranges `usage/SOURCE.md` cites, fetched from the URLs there and kept outside the repo. Not reviewed by a human. `court.json` and the court root are untouched.
 
 ## Files
 
@@ -14,11 +14,11 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `afcca-brief`. |
 | `typst/afcca-answering-brief.typ` | Template. Identical to `opening-brief/typst/afcca-opening-brief.typ` except `doc-kind = "answering-brief"`. The prayer check (WHEREFORE) applies only to `opening-brief`. |
-| `samples/INPUT-douglas-answering-brief.md` | Full transcription of the Douglas answer. |
-| `samples/INPUT-howard-answering-brief.md` | Excerpt of the Howard answer: counsel block, issues presented, start of the statement of the case. |
-| `samples/OUTPUT-<id>.pdf` | `sh tools/render.sh courts/military/air-force-court-of-criminal-appeals/answering-brief samples/<id>.md` |
-| `samples/OVERLAY-<id>.pdf`, `OVERLAY-<id>.txt` | `sh tools/overlay.sh courts/military/air-force-court-of-criminal-appeals/answering-brief <id> [exemplar.pdf]` (red = ours, blue = filed, black = agree). |
-| `exemplars/` | The two filed exemplars and `SOURCE.md`. |
+| `usage/INPUT-afcca-answering-brief-douglas.md` | Full transcription of the Douglas answer. |
+| `usage/INPUT-afcca-answering-brief-howard.md` | Excerpt of the Howard answer: counsel block, issues presented, start of the statement of the case. |
+| `usage/OUTPUT-<id>.pdf` | `sh tools/render.sh courts/military/air-force-court-of-criminal-appeals/answering-brief usage/<id>.md` |
+| `usage/OVERLAY-<id>.pdf`, `OVERLAY-<id>.txt` | `sh tools/overlay.sh courts/military/air-force-court-of-criminal-appeals/answering-brief <id> [exemplar.pdf]` (red = ours, blue = filed, black = agree). |
+| `usage/` | The two filed exemplars and `SOURCE.md`. |
 
 The Howard overlay is run against its own exemplar (passed explicitly) because the tool's default is the first file in the folder.
 
@@ -39,11 +39,11 @@ The standard-of-review check is the text heuristic "the body contains 'standard 
 
 ## Overlay
 
-Pages are paired by word overlap, not by index (the tool's map is in `samples/OVERLAY-<id>.txt`).
+Pages are paired by word overlap, not by index (the tool's map is in `usage/OVERLAY-<id>.txt`).
 
-`samples/OVERLAY-douglas-answering-brief.pdf` (10 pages, against the Douglas exemplar, the default): p.1-6 ↔ filed p.1-6 (47-91%): caption, issues, facts, the argument's first pages (the argument is the densest text, and line breaks differ); p.7 ↔ filed p.8 (62%), p.8 ↔ filed p.9 (54%), p.9 ↔ filed p.10 (64%): point II, the Lepore discussion; p.10 ↔ filed p.12 (37%): the last page, the signature block (the filing's last page 12 is the signature; the overlay pairs by words, and this page has few).
+`usage/OVERLAY-douglas-answering-brief.pdf` (10 pages, against the Douglas exemplar, the default): p.1-6 ↔ filed p.1-6 (47-91%): caption, issues, facts, the argument's first pages (the argument is the densest text, and line breaks differ); p.7 ↔ filed p.8 (62%), p.8 ↔ filed p.9 (54%), p.9 ↔ filed p.10 (64%): point II, the Lepore discussion; p.10 ↔ filed p.12 (37%): the last page, the signature block (the filing's last page 12 is the signature; the overlay pairs by words, and this page has few).
 
-`samples/OVERLAY-howard-answering-brief.pdf` (3 pages, against the Howard exemplar, passed explicitly): p.1 ↔ filed p.1 (cover, 75%); p.2 ↔ filed p.11 (61%: the issues presented list); p.3 ↔ filed p.12 (80%: the start of the statement of the case, Articles 90 and 91).
+`usage/OVERLAY-howard-answering-brief.pdf` (3 pages, against the Howard exemplar, passed explicitly): p.1 ↔ filed p.1 (cover, 75%); p.2 ↔ filed p.11 (61%: the issues presented list); p.3 ↔ filed p.12 (80%: the start of the statement of the case, Articles 90 and 91).
 
 Diagnostic only, not a score. Reading the Howard exemplar makes poppler print "xref" warnings (broken cross-reference entries in the source); the renders are unaffected.
 
@@ -64,7 +64,7 @@ Every page of both `OUTPUT-*.pdf` files was rendered at 60 dpi and viewed. Typst
 | 7 | Argument heading II; standard of review; law and analysis; sub-heading A | OK |
 | 8 | Sub-heading A continued; sub-heading B (collateral matter); footnote 3 | OK |
 | 9 | Sub-heading B continued (Lepore; Appellant's argument) | OK |
-| 10 | The last paragraph as filed ("Relying entirely on a"); signature block | ACCEPTED: the filed text ends on this word, before the signature. The transcription keeps it (see `exemplars/SOURCE.md`). |
+| 10 | The last paragraph as filed ("Relying entirely on a"); signature block | ACCEPTED: the filed text ends on this word, before the signature. The transcription keeps it (see `usage/SOURCE.md`). |
 
 **`howard-answering-brief`, 3 of 3 pages:**
 

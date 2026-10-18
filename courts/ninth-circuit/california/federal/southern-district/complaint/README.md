@@ -5,10 +5,10 @@ Folder: `courts/ninth-circuit/california/federal/southern-district/complaint/`.
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-bachman-3-26-cv-04862-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-bachman-complaint.md` (a portion of the 35-page filing, see its header comment) |
-| render | ok: `samples/OUTPUT-bachman-complaint.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-bachman-complaint.pdf` and `OVERLAY-bachman-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-casd-complaint-bachman326cv04862.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-casd-complaint-bachman.md` (a portion of the 35-page filing, see its header comment) |
+| render | ok: `usage/OUTPUT-casd-complaint-bachman.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-bachman-complaint.pdf` and `OVERLAY-bachman-complaint.txt` |
 | pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; pages 6 to 8 re-viewed after the last template change; all 8 re-viewed on 2026-10-15 in the typeface pass, no template change) |
 
 ## Governing rules
@@ -51,7 +51,7 @@ Not checked: CivLR 7.1 and CivLR 3 (the complaint's first-page requirements, if 
 2. **Font.** CivLR 5.1 names Times New Roman only as an example ("a proportional font such as Times New Roman"), so the rule names no face and this template keeps EB Garamond at 14 pt. `fonts/liberation-serif/` (the Times New Roman substitute, metric-compatible per `docs/FONTS.md`) is vendored, so switching is a one-line change in `font-family` if David reads the exemplar's Times as the clerk's convention. EB Garamond has a smaller x-height than Times, so the sample reads smaller than the exemplar even at the same nominal size. Question for David: should the S.D. Cal. templates keep EB Garamond (the rule's text allows any proportional font) or use Liberation Serif (the exemplar's face)?
 3. **Footer type size.** The footer is 10 pt (case number and title). The 14-point rule is written for text; footers are logged as an interpretation, the same as in the cand template.
 4. **Caption.** The party column is closed by a rule (right and bottom), not the column of ")" marks in the exemplar. ACCEPTED as a tier-2 convention choice.
-5. **Overlay names.** `tools/overlay.sh` reads `samples/OUTPUT-<id>.pdf` and writes `samples/OVERLAY-<id>.pdf` and `.txt`; the render is `OUTPUT-<id>.pdf` (the default of `tools/render.sh`). These are the names the tools use, so they are used here in place of `<id>.pdf` and `<id>-overlay.pdf`.
+5. **Overlay names.** `tools/overlay.sh` reads `usage/OUTPUT-<id>.pdf` and writes `usage/OVERLAY-<id>.pdf` and `.txt`; the render is `OUTPUT-<id>.pdf` (the default of `tools/render.sh`). These are the names the tools use, so they are used here in place of `<id>.pdf` and `<id>-overlay.pdf`.
 6. **Overlay pairing.** The sample is a portion of the 35-page filing (paragraphs 1 to 28, the prayer, the jury demand and the signature block; the CLRA venue declaration is not transcribed). The overlay pairs each sample page with the exemplar page sharing the most words; pages 6 to 8 pair with exemplar pages 10, 12 and 33 because the sample skips the filing's pages between. The overlay is a diagnostic, not a score.
 7. **Paragraph numbers differ.** The sample numbers its allegations from 1; the filed numbers are not transcribed.
 8. **Ragged right.** Body text is left-aligned, not justified. The exemplar's justification could not be read from the text layer; not asserted.
@@ -77,7 +77,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 
 ### docx
 
-Built by `docx/make-reference.sh` (writes `docx/reference.docx` from pandoc's default reference) and `docx/casd.lua` (the filter). Sample: `samples/OUTPUT-bachman-complaint.docx` (zip and XML parts checked with `unzip -t` and `xmllint`; the LibreOffice PDF was not made).
+Built by `docx/make-reference.sh` (writes `docx/reference.docx` from pandoc's default reference) and `docx/casd.lua` (the filter). Sample: `usage/OUTPUT-casd-complaint-bachman.docx` (zip and XML parts checked with `unzip -t` and `xmllint`; the LibreOffice PDF was not made).
 
 Set in `styles.xml` and `sectPr` only, **not rendered** (no LibreOffice on the build box):
 

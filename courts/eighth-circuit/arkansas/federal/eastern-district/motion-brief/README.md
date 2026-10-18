@@ -4,11 +4,11 @@ Doc type: **motion-brief**, the brief in support of a Rule 12(b)(6) motion to di
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-campbell-ensurety-4-26-cv-00387-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-campbell-motion-brief.md` (the whole brief: caption, introduction, facts with a table, standard of review, argument A to C with a block quotation, conclusion, signature) |
-| render | ok: `samples/OUTPUT-campbell-motion-brief.pdf`, 7 pages (the exemplar is 8), typst 0.15.0, vendored EB Garamond only, no warnings |
+| exemplar | yes: `usage/SAMPLE-ared-motion-brief-campbellensurety426cv00387.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ared-motion-brief-campbell.md` (the whole brief: caption, introduction, facts with a table, standard of review, argument A to C with a block quotation, conclusion, signature) |
+| render | ok: `usage/OUTPUT-ared-motion-brief-campbell.typst.pdf`, 7 pages (the exemplar is 8), typst 0.15.0, vendored EB Garamond only, no warnings |
 | typeface | face required: **none** (E.D. Ark. LR 5.5(a) sets a type-size minimum, "elite", and names no face) → **EB Garamond** kept (no substitute needed; visual-only for any Times expectation) |
-| overlay | not regenerated on 2026-10-14: the filed exemplar PDF is absent from this snapshot (only `exemplars/SOURCE.md` is tracked), so `overlay.sh` exits 1. `samples/OVERLAY-campbell-motion-brief.txt` is from the earlier run. |
+| overlay | not regenerated on 2026-10-14: the filed exemplar PDF is absent from this snapshot (only `usage/SOURCE.md` is tracked), so `overlay.sh` exits 1. `usage/OVERLAY-campbell-motion-brief.txt` is from the earlier run. |
 | pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed in its final state) |
 
 ## Governing rules
@@ -48,7 +48,7 @@ Each rule was read from its primary text on 2026-10-14.
 
 ## Exemplar
 
-`exemplars/FILED-EXAMPLE-campbell-ensurety-4-26-cv-00387-motion-brief.pdf`: *Campbell v. Ensurety Ventures, LLC d/b/a Omega Auto Care*, No. 4:26-CV-387-LPR, "Defendant's Brief in Support of its Motion to Dismiss", 8 pages, filed 2026-06-15 by Kutak Rock LLP (Niki T. Cung). Provenance, search trail and the second-filer candidates are in `exemplars/SOURCE.md`.
+`usage/SAMPLE-ared-motion-brief-campbellensurety426cv00387.pdf`: *Campbell v. Ensurety Ventures, LLC d/b/a Omega Auto Care*, No. 4:26-CV-387-LPR, "Defendant's Brief in Support of its Motion to Dismiss", 8 pages, filed 2026-06-15 by Kutak Rock LLP (Niki T. Cung). Provenance, search trail and the second-filer candidates are in `usage/SOURCE.md`.
 
 The sample transcribes the whole brief from the text layer. The exemplar's footer carries a firm document number, which is omitted. Case names are roman in the sample: the exemplar embeds no italic font (`pdffonts` lists only Times Roman, Times Bold, Segoe UI and Calibri), so the filed copy has no italics to transcribe.
 
@@ -57,8 +57,8 @@ The sample transcribes the whole brief from the text layer. The exemplar's foote
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env in $HOME/tb)
 D=courts/eighth-circuit/arkansas/federal/eastern-district/motion-brief
-sh tools/render.sh $D samples/INPUT-campbell-motion-brief.md $D/samples/OUTPUT-campbell-motion-brief.pdf
-sh tools/overlay.sh $D campbell-motion-brief $D/exemplars/FILED-EXAMPLE-campbell-ensurety-4-26-cv-00387-motion-brief.pdf
+sh tools/render.sh $D usage/INPUT-ared-motion-brief-campbell.md $D/usage/OUTPUT-campbell-motion-brief.pdf
+sh tools/overlay.sh $D campbell-motion-brief $D/usage/SAMPLE-campbell-ensurety-4-26-cv-00387-motion-brief.pdf
 ```
 
 The tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`. This doc type's file names follow the brief (`<id>.pdf`, `<id>-overlay.pdf`, `<id>-overlay.txt`), so the outputs were renamed after the overlay ran. `tools/` was not edited.
@@ -81,22 +81,22 @@ Earlier renders had two defects, both fixed in the template and re-viewed: parag
 
 ## Engines
 
-**typst** (primary): the section above; `samples/OUTPUT-campbell-motion-brief.pdf`, 7 pages.
+**typst** (primary): the section above; `usage/OUTPUT-ared-motion-brief-campbell.typst.pdf`, 7 pages.
 
-**docx**: `docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt; 24 pt exact double spacing; 0.5 in first-line indent on body paragraphs; headings on the same 24 pt grid: level 1 centered bold capitals, level 2 bold and level 3 bold italic with a 0.5 in hanging indent; table cells single-spaced at 11 pt with a full rule grid; block quotes single-spaced, indented 1 in each side; 1-inch margins; a centered page-number footer at 11 pt). `docx/brief.lua` adds what pandoc does not: the three-line court title, the caption table (rules at right and bottom of the party column), the centered bold title, the roman, lettered and numbered headings (I., A., 1.; a `# ~ ` heading is unnumbered), lists "(1)", and the signature block. Built with `sh tools/render.sh --engine docx <this folder> samples/INPUT-campbell-motion-brief.md`, which writes `samples/OUTPUT-campbell-motion-brief.docx`.
+**docx**: `docx/make-reference.sh` builds `docx/reference.docx` (EB Garamond 12 pt; 24 pt exact double spacing; 0.5 in first-line indent on body paragraphs; headings on the same 24 pt grid: level 1 centered bold capitals, level 2 bold and level 3 bold italic with a 0.5 in hanging indent; table cells single-spaced at 11 pt with a full rule grid; block quotes single-spaced, indented 1 in each side; 1-inch margins; a centered page-number footer at 11 pt). `docx/brief.lua` adds what pandoc does not: the three-line court title, the caption table (rules at right and bottom of the party column), the centered bold title, the roman, lettered and numbered headings (I., A., 1.; a `# ~ ` heading is unnumbered), lists "(1)", and the signature block. Built with `sh tools/render.sh --engine docx <this folder> usage/INPUT-ared-motion-brief-campbell.md`, which writes `usage/OUTPUT-ared-motion-brief-campbell.docx`.
 
 | Item | Result |
 |---|---|
 | The `.docx` opens | Checked as a zip with well-formed XML parts and read back with pandoc (text and heading numbers in order, table, block quote, signature). Not opened in Word or LibreOffice. |
 | Built to the typst values | Font face and size, double spacing, margins, heading levels, table rules, caption rules, page number: set in the reference and filter as above. Not compared with the typst pages. |
 | Visual review (Gate 2) | Not done. No page of the docx has been rendered or looked at. |
-| BLOCKED: `docx.pdf` checks | `soffice` could not be installed in the build box (conda-forge has no `libreoffice` package on 2026-10-15), so `samples/OUTPUT-campbell-motion-brief.docx.pdf` was not produced. Gates 0 and 1 and the Gate 2 page review, which docs/DOCX.md measures on the LibreOffice PDF, cannot run. The docx is delivered without them. |
+| BLOCKED: `docx.pdf` checks | `soffice` could not be installed in the build box (conda-forge has no `libreoffice` package on 2026-10-15), so `usage/OUTPUT-campbell-motion-brief.docx.pdf` was not produced. Gates 0 and 1 and the Gate 2 page review, which docs/DOCX.md measures on the LibreOffice PDF, cannot run. The docx is delivered without them. |
 | Last paragraph with the signature | The typst template keeps the last paragraph on the signature's page. The docx does not set keep-with-next on that paragraph, so the signature can start a page alone. Not fixed: it is a placement rule, and it can only be judged on the LibreOffice PDF, which is BLOCKED. |
 | Word substitution | The font is EB Garamond (vendored in `fonts/`). Word substitutes silently when the font is not installed on the machine that opens the file. |
 
 ## Known gaps and open choices
 
-1. **Only one exemplar.** The brief asks for one per doc type; EVAL-LOOP's tier-2 rule asks for two or three filers. Tier 2 is therefore **not** judged against two filers. The natural second pick is *Leflar v. HP Inc*, No. 4:22-cv-00690, Doc. 11 (22 pages, HP's memorandum brief), noted in `exemplars/SOURCE.md`.
+1. **Only one exemplar.** The brief asks for one per doc type; EVAL-LOOP's tier-2 rule asks for two or three filers. Tier 2 is therefore **not** judged against two filers. The natural second pick is *Leflar v. HP Inc*, No. 4:22-cv-00690, Doc. 11 (22 pages, HP's memorandum brief), noted in `usage/SOURCE.md`.
 2. **Font and length.** EB Garamond (vendored, OFL) at 12 pt, the only font vendored in `fonts/`. The exemplar is Times New Roman, which sets wider than Garamond at the same size, so the render is 7 pages against the exemplar's 8. The brief's target was 8 to 14 pages; 7 is the result of the font, not of omitted text (the whole brief is transcribed). Whether the court wants a Times-metric font is a question for David.
 3. **Single-spaced block quotation and table.** LR 5.5(a) says papers are filed "in double space". The exemplar's block quotation and table are single-spaced, so the template follows the exemplar. A strict reading would require double spacing for quotations; this is an open question for David (recorded as ACCEPTED by convention, not as a rule finding). The table is 11 pt, a convention choice.
 4. **No certificate of service.** Rule 5(d)(1)(B) excuses it for ECF service, and the exemplar has none. A paper served on a non-ECF party would need one; the template does not generate it.

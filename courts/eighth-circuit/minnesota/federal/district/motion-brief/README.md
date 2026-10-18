@@ -3,7 +3,7 @@
 Court: United States District Court for the District of Minnesota (`mnd`), Eighth Circuit.
 Doc type: a memorandum of law supporting a Fed. R. Civ. P. 12(b) motion (the example is a partial motion to dismiss under Rule 12(b)(6)). The memorandum is the only document with a word limit and a certificate; the notice of motion, proposed order and any declaration are separate documents and are not covered here.
 
-Status: template built and rendered; overlay built; every page of the current PDF reviewed (see "Review log"). Not a court-level promotion: this folder does not touch `../court.json`, `../typst/` or `../samples/` (the court-root files), and it does not set any `status`.
+Status: template built and rendered; overlay built; every page of the current PDF reviewed (see "Review log"). Not a court-level promotion: this folder does not touch `../court.json`, `../typst/` or `../usage/` (the court-root files), and it does not set any `status`.
 
 ## Files
 
@@ -11,10 +11,10 @@ Status: template built and rendered; overlay built; every page of the current PD
 |---|---|
 | `typst/main.typ` | Entry point; reads the sample named by `--input sample=...` and splits its frontmatter from its body. |
 | `typst/mnd-motion-brief.typ` | The template: caption, body, headings, footnotes, signature, certificate of compliance. Every case word comes from the sample. |
-| `exemplars/FILED-EXAMPLE-adams-v-innes-26-cv-02415-motion-brief.pdf` | Real filed memorandum (Dkt. 37, filed 2026-09-22), public RECAP copy. Source record: `exemplars/SOURCE.md`. |
-| `samples/INPUT-adams-motion-brief.md` | Markdown transcription of the exemplar, in the frontmatter contract below (caption, all headings, body, two footnotes, signature block). |
-| `samples/OUTPUT-adams-motion-brief.pdf` | Our render of the sample (13 pages). |
-| `samples/OVERLAY-adams-motion-brief.pdf` and `.txt` | Red/blue overlay of our render against the exemplar, and its page map. |
+| `usage/SAMPLE-mnd-motion-brief-adamsvinnes26cv02415.pdf` | Real filed memorandum (Dkt. 37, filed 2026-09-22), public RECAP copy. Source record: `usage/SOURCE.md`. |
+| `usage/INPUT-mnd-motion-brief-adams.md` | Markdown transcription of the exemplar, in the frontmatter contract below (caption, all headings, body, two footnotes, signature block). |
+| `usage/OUTPUT-mnd-motion-brief-adams.typst.pdf` | Our render of the sample (13 pages). |
+| `usage/OVERLAY-adams-motion-brief.pdf` and `.txt` | Red/blue overlay of our render against the exemplar, and its page map. |
 
 ## Rules (primary sources)
 
@@ -50,7 +50,7 @@ Not verified: the ECF Electronic Case Filing Procedures Guide (the PDF requireme
 
 Not chosen (because the exemplar shows a choice the rules leave open, and it is one filer's): the exemplar's Times New Roman, its justification style, its ECF header, and the absence of a certificate in the filed copy (the rule requires one, so the template includes it).
 
-## Frontmatter contract (`samples/<id>.md`)
+## Frontmatter contract (`usage/<id>.md`)
 
 ```
 ---
@@ -79,20 +79,20 @@ From the repository root (the toolchain is in `$HOME/tb/bin`, see the brief):
 
 ```
 D=courts/eighth-circuit/minnesota/federal/district/motion-brief
-sh tools/render.sh $D samples/INPUT-adams-motion-brief.md "$PWD/$D/samples/OUTPUT-adams-motion-brief.pdf"
+sh tools/render.sh $D usage/INPUT-mnd-motion-brief-adams.md "$PWD/$D/usage/OUTPUT-adams-motion-brief.pdf"
 # overlay.sh reads and writes the OUTPUT-/OVERLAY- names; use a temporary copy, then rename:
-cp $D/samples/OUTPUT-adams-motion-brief.pdf $D/samples/OUTPUT-adams-motion-brief.pdf
+cp $D/usage/OUTPUT-adams-motion-brief.pdf $D/usage/OUTPUT-adams-motion-brief.pdf
 sh tools/overlay.sh $D adams-motion-brief
-mv $D/samples/OVERLAY-adams-motion-brief.pdf $D/samples/OVERLAY-adams-motion-brief.pdf
-mv $D/samples/OVERLAY-adams-motion-brief.txt  $D/samples/OVERLAY-adams-motion-brief.txt
-rm $D/samples/OUTPUT-adams-motion-brief.pdf
+mv $D/usage/OVERLAY-adams-motion-brief.pdf $D/usage/OVERLAY-adams-motion-brief.pdf
+mv $D/usage/OVERLAY-adams-motion-brief.txt  $D/usage/OVERLAY-adams-motion-brief.txt
+rm $D/usage/OUTPUT-adams-motion-brief.pdf
 ```
 
 `tools/render.sh` resolves an output path relative to the repository root, so pass an absolute output path (above). The render uses the vendored fonts only (`--ignore-system-fonts`); a typst warning fails the render. Last render: no warnings, 13 pages, EB Garamond embedded (three faces), exit 0.
 
 ## What the overlay shows
 
-`samples/OVERLAY-adams-motion-brief.pdf` is page by page: red is our render, blue is the filed memorandum, black is where both agree. The map (`.txt`) pairs each of our pages with the exemplar page sharing most words. Pages 1 to 8 pair in order; from page 9 our pagination runs one page behind the exemplar's (our pages break at different lines, so each page carries a different block of text). The word-overlap figure is a diagnostic only, not a score.
+`usage/OVERLAY-adams-motion-brief.pdf` is page by page: red is our render, blue is the filed memorandum, black is where both agree. The map (`.txt`) pairs each of our pages with the exemplar page sharing most words. Pages 1 to 8 pair in order; from page 9 our pagination runs one page behind the exemplar's (our pages break at different lines, so each page carries a different block of text). The word-overlap figure is a diagnostic only, not a score.
 
 Expected differences (tier 3, not chased): typeface (Garamond vs Times, so every glyph is red and blue), line breaks, the ECF header, and the absence of a certificate in the exemplar.
 
@@ -107,13 +107,13 @@ Every page of the current PDF was rendered at 60 dpi and viewed. Pages were comp
 - Round 2 (final render): pages 1 to 13 reviewed again. Page 1 (caption, title, first paragraphs): PASS. Pages 2 to 11 (body, headings A to E, footnotes 1 and 2 at 13 point): PASS. Page 12 (conclusion, signature block): PASS. Page 13 (certificate of compliance): PASS.
 - Level-3 headings ("A.", "D.", ...) use a hanging indent (the exemplar has a tab at the same place): ACCEPTED, tier 2 choice.
 
-- Fonts pass (fb-595.7.5.13): font list checked against LR 7.1(h)(1), no face named, so EB Garamond kept (no change to the template). Re-rendered with `tools/render.sh` (exit 0, no warnings, 13 pages); `pdffonts`: EB Garamond Regular, Bold and Italic embedded only. Overlay re-run against the exemplar (`exemplars/FILED-EXAMPLE-adams-v-innes-26-cv-02415-motion-brief.pdf`, 13 pages, fetched from the URL in `exemplars/SOURCE.md`). Every page of the new render viewed again: PASS.
+- Fonts pass (fb-595.7.5.13): font list checked against LR 7.1(h)(1), no face named, so EB Garamond kept (no change to the template). Re-rendered with `tools/render.sh` (exit 0, no warnings, 13 pages); `pdffonts`: EB Garamond Regular, Bold and Italic embedded only. Overlay re-run against the exemplar (`usage/SAMPLE-mnd-motion-brief-adamsvinnes26cv02415.pdf`, 13 pages, fetched from the URL in `usage/SOURCE.md`). Every page of the new render viewed again: PASS.
 
 Pages reviewed: 13 of 13.
 
 ## Known gaps
 
-- Exemplars: one filed memorandum for this doc type (`exemplars/`). The eval loop asks for two or three filers to judge tier 2 against; a second D. Minn. memorandum was not located, so tier-2 judgement rests on one exemplar plus the rules.
+- Exemplars: one filed memorandum for this doc type (`usage/`). The eval loop asks for two or three filers to judge tier 2 against; a second D. Minn. memorandum was not located, so tier-2 judgement rests on one exemplar plus the rules.
 - Searches tried for exemplars: CourtListener RECAP search (rate-limited to about five requests a minute for anonymous use, with 202 responses for long stretches), CourtListener docket pages (public docket HTML and RECAP PDFs, which worked), Justia (403 to this box), Clearinghouse (403), WebSearch (several queries), and the court's own site (its local-rules PDF is behind a request filter that rejects direct download).
 - The word count (`word_count: 3155`) is `wc -w` over the markdown body with markup stripped, which includes headings and footnotes. Word's own count will differ slightly; the certificate must state the number from the software the attorney used (LR 7.1(f)(2)).
 - The certificate's software name is a sample value; the signing attorney must supply theirs.
@@ -124,10 +124,10 @@ Pages reviewed: 13 of 13.
 
 ## Engines
 
-The docx engine (`docx/`) is built from `docx/make-reference.sh` (pandoc's default reference document, restyled) and `docx/mnd-motion-brief.lua` (front page, caption table, signature block, certificate of compliance with the 12,000-word check). Outputs: `samples/OUTPUT-adams-motion-brief.docx` and `samples/OUTPUT-adams-motion-brief.docx.pdf` (LibreOffice 25.2 conversion). Typst stays the primary engine; the latex engine is not built for this folder.
+The docx engine (`docx/`) is built from `docx/make-reference.sh` (pandoc's default reference document, restyled) and `docx/mnd-motion-brief.lua` (front page, caption table, signature block, certificate of compliance with the 12,000-word check). Outputs: `usage/OUTPUT-mnd-motion-brief-adams.docx` and `usage/OUTPUT-mnd-motion-brief-adams.docx.pdf` (LibreOffice 25.2 conversion). Typst stays the primary engine; the latex engine is not built for this folder.
 
 - **Matches the typst form:** EB Garamond 13 pt throughout, footnotes included (native footnotes, 13 pt single-spaced); 1-inch margins on letter paper; double spacing at the typst pitch (29.9 pt exact); first-line indent 0.5 inch, with the first paragraph after a heading unindented, as typst does; level 1 headings centred and bold; level 2 and 3 headings single-spaced, bold and hanging; caption with the court file number, bold title and rule line; signature block; certificate of compliance on its own page with the word count and software from the frontmatter; page number centred in the bottom margin.
 - **Differs:** pagination. Word's exact line spacing gives each line its full 29.9 pt box, while typst adds leading only between lines, so a page holds 21 lines in docx and 22 in typst. The memorandum runs 14 pages in docx against 13 in typst; the signature block moves to its own page 13 with the body ending on page 12. The word limit is a word count, not a page count, so this does not affect compliance.
 - **docx BLOCKED items:** none for the mandated form. No check IDs exist yet for this folder (no `checks.yaml`), so `tools/check.sh --engine docx` has nothing to run; the Gate 2 review of the docx PDF is recorded below.
 
-Review log (docx): every page of `samples/OUTPUT-adams-motion-brief.docx.pdf` (14 pages) was rendered at 60 dpi and viewed against the typst pages: pages 1 to 14 PASS on form (caption, headings, footnotes, signature block, certificate). The `.docx` opens in LibreOffice without a repair prompt; Word was not available to check.
+Review log (docx): every page of `usage/OUTPUT-mnd-motion-brief-adams.docx.pdf` (14 pages) was rendered at 60 dpi and viewed against the typst pages: pages 1 to 14 PASS on form (caption, headings, footnotes, signature block, certificate). The `.docx` opens in LibreOffice without a repair prompt; Word was not available to check.

@@ -1,5 +1,5 @@
 -- Motion with memorandum, United States Bankruptcy Court, District of Arizona (arb), DOCX engine.
--- The markdown contract (samples/INPUT-*.md, see ../README.md) -> Word, on reference.docx, in the layout of
+-- The markdown contract (usage/INPUT-*.md, see ../README.md) -> Word, on reference.docx, in the layout of
 -- typst/arb-motion-brief.typ: the filer block from line 1 (LRBP 9004-1(a)); the court title on line 8; the
 -- caption as a table (LRBP 9004-1(c) dual caption in an adversary, one caption in the main case); headings with
 -- their labels (I., A., 1., a.) hung at the margin; bullets and lists as hanging paragraphs, with the labels the

@@ -4,13 +4,13 @@ Doc type: **adversary complaint** (FRBP 7001 adversary proceeding; FRBP 7008 ple
 
 | Item | Status |
 |---|---|
-| exemplar | yes, two filers: `exemplars/FILED-EXAMPLE-pisaturo-sunflower-19-ap-01020-adversary-complaint.pdf` (Chapter 7 trustee, 11 pages) and `exemplars/FILED-EXAMPLE-ustrustee-ziegelmayer-18-ap-01066-adversary-complaint.pdf` (U.S. Trustee, 9 pages). Provenance in `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-pisaturo-sunflower.md` (full transcription, 66 paragraphs, both counts, prayer, signature); `samples/INPUT-ustrustee-ziegelmayer.md` (full transcription, 71 paragraphs, one count, prayer, signature; deposition excerpts absent from the exemplar's text layer are placeholders) |
-| render | ok: `samples/OUTPUT-pisaturo-sunflower.pdf` (9 pages), `samples/OUTPUT-ustrustee-ziegelmayer.pdf` (7 pages). typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings. |
-| overlay | ok: `samples/OVERLAY-pisaturo-sunflower.pdf` and `.txt`; `samples/OVERLAY-ustrustee-ziegelmayer.pdf` and `.txt` |
+| exemplar | yes, two filers: `usage/SAMPLE-rib-adversary-complaint-pisaturosunflower19ap01020.pdf` (Chapter 7 trustee, 11 pages) and `usage/SAMPLE-rib-adversary-complaint-ustrusteeziegelmayer18ap01066.pdf` (U.S. Trustee, 9 pages). Provenance in `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-rib-adversary-complaint-pisaturosunflower.md` (full transcription, 66 paragraphs, both counts, prayer, signature); `usage/INPUT-rib-adversary-complaint-ustrusteeziegelmayer.md` (full transcription, 71 paragraphs, one count, prayer, signature; deposition excerpts absent from the exemplar's text layer are placeholders) |
+| render | ok: `usage/OUTPUT-rib-adversary-complaint-pisaturosunflower.typst.pdf` (9 pages), `usage/OUTPUT-rib-adversary-complaint-ustrusteeziegelmayer.typst.pdf` (7 pages). typst 0.15.0, vendored EB Garamond only (`pdffonts`), no warnings. |
+| overlay | ok: `usage/OVERLAY-pisaturo-sunflower.pdf` and `.txt`; `usage/OVERLAY-ustrustee-ziegelmayer.pdf` and `.txt` |
 | pages reviewed | 16 of 16 (9 + 7), each rendered at 50-60 dpi and viewed after the last template change |
 
-File names: the brief asked for `samples/<id>.md`, `<id>.pdf` and `<id>-overlay.*`. The repo's file-role convention and the tools fix the names instead: `INPUT-<id>.md` (input), `OUTPUT-<id>.pdf` (our render), `OVERLAY-<id>.pdf`/`.txt` (overlay). `tools/overlay.sh` reads `OUTPUT-<id>.pdf`, so the tool's names were kept.
+File names: the brief asked for `usage/<id>.md`, `<id>.pdf` and `<id>-overlay.*`. The repo's file-role convention and the tools fix the names instead: `INPUT-<id>.md` (input), `OUTPUT-<id>.pdf` (our render), `OVERLAY-<id>.pdf`/`.txt` (overlay). `tools/overlay.sh` reads `OUTPUT-<id>.pdf`, so the tool's names were kept.
 
 ## Governing rules
 
@@ -27,7 +27,7 @@ Primary sources. Local rules: the District of Rhode Island Bankruptcy Court's Lo
 | FRBP 7008(a) (Cornell text) | The complaint's jurisdictional allegations, and a statement whether the pleader consents to final orders or judgment by the bankruptcy court. | Author content; the template does not generate the consent statement (see gaps). |
 | FRCP 10(a)-(b) as applied in adversary proceedings (text not fetched this session) | Caption with court, title and number; claims in numbered paragraphs. | Numbered paragraphs (`allegations()`), caption from frontmatter. |
 
-Searches and what they settled: CourtListener RECAP search (`court=rib`, `type=r`, adversary dockets `-ap-`, results 2012 to 2025) and the entry-1 storage PDFs of those dockets. Two text-based complaints from different filers were kept (table in `exemplars/SOURCE.md`). Freeman v. JPMorgan (19-ap-01026, 24 pages) was skipped: its body is image-only (the text layer holds only the ECF header).
+Searches and what they settled: CourtListener RECAP search (`court=rib`, `type=r`, adversary dockets `-ap-`, results 2012 to 2025) and the entry-1 storage PDFs of those dockets. Two text-based complaints from different filers were kept (table in `usage/SOURCE.md`). Freeman v. JPMorgan (19-ap-01026, 24 pages) was skipped: its body is image-only (the text layer holds only the ECF header).
 
 ## Layout
 
@@ -45,7 +45,7 @@ Searches and what they settled: CourtListener RECAP search (`court=rib`, `type=r
 
 ## Overlay: what it shows
 
-`samples/OVERLAY-<id>.pdf`: red = our render, blue = the filed exemplar, black = both. `OVERLAY-<id>.txt` is the page map (our page to the exemplar page sharing the most words). The overlay is a diagnostic, not a score. The exemplars use Times, with no line numbers; our render uses EB Garamond at 24 pt pitch, so text lines will not coincide. The page map pairs pages by word overlap; a page with a low overlap (for example Pisaturo `ours p.8` to `filed p.10`) means the text pages differ in where the page breaks fall, not that text is missing.
+`usage/OVERLAY-<id>.pdf`: red = our render, blue = the filed exemplar, black = both. `OVERLAY-<id>.txt` is the page map (our page to the exemplar page sharing the most words). The overlay is a diagnostic, not a score. The exemplars use Times, with no line numbers; our render uses EB Garamond at 24 pt pitch, so text lines will not coincide. The page map pairs pages by word overlap; a page with a low overlap (for example Pisaturo `ours p.8` to `filed p.10`) means the text pages differ in where the page breaks fall, not that text is missing.
 
 ## Known gaps and open choices
 
@@ -86,9 +86,9 @@ Every page of both samples was rendered at 50-60 dpi and viewed after the last t
 
 ## Engines
 
-**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, which names every font, so no theme font falls back to Aptos or Calibri) and `docx/rib-adversary-complaint.lua` (caption table, numbered paragraphs, lettered lists, signature block, built from the frontmatter). Render: `sh tools/render.sh --engine docx adversary-complaint samples/INPUT-<id>.md`.
+**docx** (`docx/`): `reference.docx` (built by `docx/build-reference.sh`, which names every font, so no theme font falls back to Aptos or Calibri) and `docx/rib-adversary-complaint.lua` (caption table, numbered paragraphs, lettered lists, signature block, built from the frontmatter). Render: `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-<id>.md`.
 
-Matches the typst output (every page of both samples was viewed, side by side with `samples/OUTPUT-<id>.pdf`):
+Matches the typst output (every page of both samples was viewed, side by side with `usage/OUTPUT-<id>.pdf`):
 
 - EB Garamond 12 pt, footnotes 10 pt, page number 11 pt centered; letter paper, 1 in margins. `pdffonts` shows only EB Garamond, embedded.
 - Double spacing is exact 24 pt lines and single spacing is exact 13.8 pt, the pitch measured on the typst output. Numbered paragraphs (1., 2., ...) have a 0.5 in first-line indent and text at 0.92 in; WHEREFORE paragraphs are unnumbered; lettered lists (a), (b) hang; block quotations are single spaced, indented 0.75 in left and 0.5 in right.

@@ -26,16 +26,16 @@ LBR 9004-1(A) (court's local rules, "Updated March 21, 2025"; the rule text as q
 
 ## Exemplar
 
-`exemplars/FILED-EXAMPLE-OKF-24-11060-motion-brief.pdf`: the **amended joint motion** of OKF, LLC (debtor in possession) and the Official Committee of Unsecured Creditors to surcharge under 11 U.S.C. § 506(c) and exclude fees from a secured claim, with the NOTICE OF OPPORTUNITY FOR HEARING, in *In re OKF, LLC*, Case No. 24-11060-T, Chapter 11. Docket 409, entered September 15, 2025. 15 pages, text-based (4,257 words extract). Counsel: Crowe & Dunlevy (Craige, Sokolosky) for the debtor; Bernstein-Burkley (Kallergis) for the committee. Source, searches and rejected candidates (two scanned motions, one Chapter 15 stay motion) are in `exemplars/SOURCE.md`.
+`usage/SAMPLE-oknb-motion-brief-okf2411060.pdf`: the **amended joint motion** of OKF, LLC (debtor in possession) and the Official Committee of Unsecured Creditors to surcharge under 11 U.S.C. § 506(c) and exclude fees from a secured claim, with the NOTICE OF OPPORTUNITY FOR HEARING, in *In re OKF, LLC*, Case No. 24-11060-T, Chapter 11. Docket 409, entered September 15, 2025. 15 pages, text-based (4,257 words extract). Counsel: Crowe & Dunlevy (Craige, Sokolosky) for the debtor; Bernstein-Burkley (Kallergis) for the committee. Source, searches and rejected candidates (two scanned motions, one Chapter 15 stay motion) are in `usage/SOURCE.md`.
 
 Only one exemplar from this court, from one filer (the joint filing counts as one). Tier 2 is therefore judged against this filing and the rules, not against two or three filers.
 
 ## Sample
 
-- `samples/INPUT-motion-brief.md` is a **transcription of an excerpt** of the exemplar (not synthetic). Its frontmatter says so. Names, numbers and facts are the filers', as filed.
+- `usage/INPUT-oknb-motion-brief-sample.md` is a **transcription of an excerpt** of the exemplar (not synthetic). Its frontmatter says so. Names, numbers and facts are the filers', as filed.
 - The filing is 15 pages. The sample keeps the caption, the report on the sale (Section I), the equities (Section II), the surcharge (Section IV in the filing, Section III in the render), the prayer, the signature block and the certificate. **Section III of the filing (paragraphs 12-22, filing pages 6-10) is omitted** and the body says so in a bracketed note; it is not paraphrased. This keeps the render at 10 pages, inside the 8-14 page target for an exemplar of that length.
 - The notice of opportunity, the caption, the title and the signature block are generated from the frontmatter. The title is the filing's, with "And Notice of Opportunity for Hearing" appended as LBR 9013-1 requires.
-- Naming: `INPUT-motion-brief.md` / `OUTPUT-motion-brief.pdf` / `OVERLAY-motion-brief.pdf` and `.txt`, as the tools read and write them.
+- Naming: `INPUT-oknb-motion-brief-sample.md` / `OUTPUT-oknb-motion-brief-sample.typst.pdf` / `OVERLAY-motion-brief.pdf` and `.txt`, as the tools read and write them.
 
 ### Where the transcription departs from the filing
 
@@ -49,12 +49,12 @@ Only one exemplar from this court, from one filer (the joint filing counts as on
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/motion-brief samples/INPUT-motion-brief.md
+sh tools/render.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/motion-brief usage/INPUT-oknb-motion-brief-sample.md
 sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/bankruptcy-northern-district/motion-brief motion-brief
 ```
 
-- render: **ok**. `samples/OUTPUT-motion-brief.pdf`, 10 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular, -Bold and -Italic, embedded. No system or fallback font after the backtick fix (a stray backtick had pulled in DejaVu Sans Mono).
-- overlay: **ok**. The filed PDF is not in this checkout; it was fetched from the RECAP URL in `exemplars/SOURCE.md` to a scratch directory (15 pages, matching the record) and passed to `tools/overlay.sh` as its third argument. `samples/OVERLAY-motion-brief.pdf` and `.txt` written. Word overlap per page as the tool reports it: ours p.1 vs filed p.13 51.6%; p.2 65.4%; p.3 54.1%; p.4 51.8%; p.5 53.9%; p.6 vs filed p.10 39.7%; p.7 vs filed p.11 46.7%; p.8 vs filed p.12 43.2%; p.9 vs filed p.12 40.9%; p.10 vs filed p.15 25.0%. The overlay is a diagnostic, not a score. The pairing of pages is the tool's, and the page numbers do not line up one to one because of the omission.
+- render: **ok**. `usage/OUTPUT-oknb-motion-brief-sample.typst.pdf`, 10 pages, 612 x 792 pt. typst emitted no warnings (render.sh fails on any). Fonts: EBGaramond-Regular, -Bold and -Italic, embedded. No system or fallback font after the backtick fix (a stray backtick had pulled in DejaVu Sans Mono).
+- overlay: **ok**. The filed PDF is not in this checkout; it was fetched from the RECAP URL in `usage/SOURCE.md` to a scratch directory (15 pages, matching the record) and passed to `tools/overlay.sh` as its third argument. `usage/OVERLAY-motion-brief.pdf` and `.txt` written. Word overlap per page as the tool reports it: ours p.1 vs filed p.13 51.6%; p.2 65.4%; p.3 54.1%; p.4 51.8%; p.5 53.9%; p.6 vs filed p.10 39.7%; p.7 vs filed p.11 46.7%; p.8 vs filed p.12 43.2%; p.9 vs filed p.12 40.9%; p.10 vs filed p.15 25.0%. The overlay is a diagnostic, not a score. The pairing of pages is the tool's, and the page numbers do not line up one to one because of the omission.
 
 ## Visual review (Gate 2, all 10 pages rendered at 70 dpi and looked at)
 

@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-western-district/adversar
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-osherow-25-01073-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-osherow-complaint.md` (a portion of the 14-page filing, see Known gaps) |
-| render | ok: `samples/OUTPUT-osherow-complaint.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-osherow-complaint.pdf` and `OVERLAY-osherow-complaint.txt` |
+| exemplar | yes: `usage/SAMPLE-txwb-adversary-complaint-osherow2501073.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-txwb-adversary-complaint-osherowcomplaint.md` (a portion of the 14-page filing, see Known gaps) |
+| render | ok: `usage/OUTPUT-txwb-adversary-complaint-osherowcomplaint.typst.pdf`, 9 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-osherow-complaint.pdf` and `OVERLAY-osherow-complaint.txt` |
 | pages reviewed | 9 of 9 (every page rendered at 60 dpi and viewed after the last template change; re-rendered and all 9 pages viewed again on 2026-10-14, font unchanged) |
 
 File names follow the tools, not the brief's `<id>.md` shorthand: the sample is `INPUT-<id>.md`, the render `OUTPUT-<id>.pdf` (the default of `tools/render.sh`), and the overlay `OVERLAY-<id>.pdf/.txt` (the default of `tools/overlay.sh`, which reads `OUTPUT-<id>.pdf`).
@@ -74,20 +74,20 @@ Not produced by this template (separate filings with the complaint, not part of 
 5. **Spacing and margins are conventions.** Neither Rule 7010 nor Rule 9004(a) sets them, and no W.D. Tex. adversary-complaint rule was found. Double spacing and one-inch margins follow the exemplar's layout.
 6. **Local rules checked, one edition.** The W.D. Tex. local bankruptcy rules were read from the 2014 redline on txwb.uscourts.gov (fetched 2026-10-14; text extracted with `pdftotext`). No adversary-complaint format rule and no typeface rule for pleadings appears in it. The courtrules.net copy returned HTTP 403, and the redline may be older than the current rules, so the current text is not checked.
 7. **Caption without a § column.** The exemplar uses the IN RE block and a plain party block with no § column; another txwb complaint (Lowe, see SOURCE.md) uses a § column. The template follows the exemplar; both forms appear in the court.
-8. **Second exemplar not saved.** Lowe v. Neugebauer (San Antonio Division, 19 pp.) is a second filer for tier-2 comparison and is not in `exemplars/`; see SOURCE.md.
+8. **Second exemplar not saved.** Lowe v. Neugebauer (San Antonio Division, 19 pp.) is a second filer for tier-2 comparison and is not in `usage/`; see SOURCE.md.
 9. **No cover sheet, summons or disclosure statement** (see Governing rules).
 10. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` need a court folder with `court.json` and `rules.md`, and this doc-type folder is not that shape. Render and overlay were run; the visual review above is the Gate 2 equivalent.
 
 ## Searches and sources
 
-- Overlay (2026-10-14): the exemplar PDF is not committed to the repo (no `exemplars/*.pdf` in any court folder). It was downloaded from the URL in `exemplars/SOURCE.md` to `/work/artifacts/txwb-rules/exemplars/osherow-complaint.pdf` and passed as the third argument of `tools/overlay.sh`.
+- Overlay (2026-10-14): the exemplar PDF is not committed to the repo (no `usage/*.pdf` in any court folder). It was downloaded from the URL in `usage/SOURCE.md` to `/work/artifacts/txwb-rules/usage/osherow-complaint.pdf` and passed as the third argument of `tools/overlay.sh`.
 
-- Exemplar and other complaints: see `exemplars/SOURCE.md`.
+- Exemplar and other complaints: see `usage/SOURCE.md`.
 - Rule text: FRBP 7010 and 9004(a) from Cornell LII, fetched 2026-10-14; W.D. Tex. L.R. 9014-1 from https://www.txwb.uscourts.gov/l-rule-9014-1-contested-matters (via WebFetch, 2026-10-14; the page was summarized, not quoted in full).
 
 ## Engines
 
-**docx** (`docx/`): `sh tools/render.sh --engine docx adversary-complaint samples/INPUT-osherow-complaint.md` runs pandoc with `docx/txwb-adversary-complaint.lua` on `docx/reference.docx`, then LibreOffice (`soffice --headless --convert-to pdf`). `docx/reference.docx` is rebuilt from `docx/reference-parts/` by `sh docx/build-reference.sh`. EB Garamond must be installed for LibreOffice (`fonts/eb-garamond`). Checked on `samples/OUTPUT-osherow-complaint.docx.pdf`, 9 of 9 pages rendered at 60 dpi and viewed beside the typst pages.
+**docx** (`docx/`): `sh tools/render.sh --engine docx adversary-complaint usage/INPUT-txwb-adversary-complaint-osherowcomplaint.md` runs pandoc with `docx/txwb-adversary-complaint.lua` on `docx/reference.docx`, then LibreOffice (`soffice --headless --convert-to pdf`). `docx/reference.docx` is rebuilt from `docx/reference-parts/` by `sh docx/build-reference.sh`. EB Garamond must be installed for LibreOffice (`fonts/eb-garamond`). Checked on `usage/OUTPUT-txwb-adversary-complaint-osherowcomplaint.docx.pdf`, 9 of 9 pages rendered at 60 dpi and viewed beside the typst pages.
 
 | Layout | Matches typst | Differs (docx against typst, same sample) |
 |---|---|---|

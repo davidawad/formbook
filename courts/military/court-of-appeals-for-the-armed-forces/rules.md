@@ -10,10 +10,10 @@ Re-check cadence: re-check annually each October 1 (the court's rule editions ta
 |---|---|---|
 | CAAF-R | Rules of Practice and Procedure, United States Court of Appeals for the Armed Forces, "Effective October 1, 2026" (47 pp., PDF created 2026-09-01) | https://www.armfor.uscourts.gov/newcaaf/library/Rules/Rules2026Oct.pdf |
 | RULES-PAGE | Court page "Rules of Practice and Procedure" (links "2026 Rules (effective 1 Oct 2026)") | https://www.armfor.uscourts.gov/newcaaf/rules.htm |
-| EX-PINKERTON | Brief on behalf of appellant, *United States v. Pinkerton*, USCA Dkt. No. 26-0225 (Army Defense Appellate Division) | `opening-brief/exemplars/` |
-| EX-MULLER | Brief on behalf of appellant, *United States v. Muller*, USCA Dkt. No. 19-0230 (Air Force Appellate Defense Division) | `opening-brief/exemplars/` |
-| EX-COOPER | Supplement to petition for grant of review, *United States v. Cooper*, No. 26-0258 (Air Force Appellate Defense Division) | `petition-supplement/exemplars/` |
-| EX-HERNANDEZ | Supplement to petition for grant of review, *United States v. Hernandez*, No. 26-0263 (Navy-Marine Corps Appellate Defense) | `petition-supplement/exemplars/` |
+| EX-PINKERTON | Brief on behalf of appellant, *United States v. Pinkerton*, USCA Dkt. No. 26-0225 (Army Defense Appellate Division) | `opening-brief/usage/` |
+| EX-MULLER | Brief on behalf of appellant, *United States v. Muller*, USCA Dkt. No. 19-0230 (Air Force Appellate Defense Division) | `opening-brief/usage/` |
+| EX-COOPER | Supplement to petition for grant of review, *United States v. Cooper*, No. 26-0258 (Air Force Appellate Defense Division) | `petition-supplement/usage/` |
+| EX-HERNANDEZ | Supplement to petition for grant of review, *United States v. Hernandez*, No. 26-0263 (Navy-Marine Corps Appellate Defense) | `petition-supplement/usage/` |
 
 Kinds: **M** = mandated by a CAAF rule. **C** = convention (from the exemplars). **T** = project/tooling rule. **A** = author responsibility.
 

@@ -5,16 +5,16 @@ Folder: `courts/eighth-circuit/north-dakota/federal/bankruptcy-district/motion-b
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-elliott-24-07012-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-elliott-memo.md` (full transcription of the 10-page memorandum: caption, 27 numbered paragraphs, headings, one footnote, block quotations, signature) |
-| render | ok: `samples/OUTPUT-elliott-memo.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-elliott-memo.pdf` and `samples/OVERLAY-elliott-memo.txt` (page map) |
+| exemplar | yes: `usage/SAMPLE-ndb-motion-brief-elliott2407012.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-ndb-motion-brief-elliottmemo.md` (full transcription of the 10-page memorandum: caption, 27 numbered paragraphs, headings, one footnote, block quotations, signature) |
+| render | ok: `usage/OUTPUT-ndb-motion-brief-elliottmemo.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-elliott-memo.pdf` and `usage/OVERLAY-elliott-memo.txt` (page map) |
 | pages reviewed | 10 of 10 (every page rendered at 60 dpi and viewed; pages 9 and 10 re-viewed after the signature change) |
 
 Commands (run from /work/repo with the toolchain on PATH):
 
 ```
-sh tools/render.sh courts/eighth-circuit/north-dakota/federal/bankruptcy-district/motion-brief samples/INPUT-elliott-memo.md
+sh tools/render.sh courts/eighth-circuit/north-dakota/federal/bankruptcy-district/motion-brief usage/INPUT-ndb-motion-brief-elliottmemo.md
 sh tools/overlay.sh courts/eighth-circuit/north-dakota/federal/bankruptcy-district/motion-brief elliott-memo
 ```
 
@@ -53,14 +53,14 @@ No type-size, margin, or spacing rule appears in the 2023 bankruptcy local rules
 
 ## Sample
 
-`samples/INPUT-elliott-memo.md` transcribes the complete 10-page memorandum: caption, all 27 numbered paragraphs (numbering checked against the exemplar: 1 to 27), the three quotations, the continuation paragraphs, the footnote, and the signature block. Wording, punctuation, and the filer's own typos are kept as filed (for example the stray quotation mark in paragraph 24 and "Defendant’s" in paragraph 10). Differences from the filed document:
+`usage/INPUT-ndb-motion-brief-elliottmemo.md` transcribes the complete 10-page memorandum: caption, all 27 numbered paragraphs (numbering checked against the exemplar: 1 to 27), the three quotations, the continuation paragraphs, the footnote, and the signature block. Wording, punctuation, and the filer's own typos are kept as filed (for example the stray quotation mark in paragraph 24 and "Defendant’s" in paragraph 10). Differences from the filed document:
 
 - The ECF header is not reproduced.
 - The exhibits (Kaler affidavit, Exhibits 1 to 8) are referenced, not included, as in the filing.
 
 ## Overlay
 
-`samples/OVERLAY-elliott-memo.pdf`: red is our render, blue is the filed exemplar. Pairing by shared words (`OVERLAY-elliott-memo.txt`):
+`usage/OVERLAY-elliott-memo.pdf`: red is our render, blue is the filed exemplar. Pairing by shared words (`OVERLAY-elliott-memo.txt`):
 
 | Our page | Filed page | Word overlap |
 |---|---|---|
@@ -90,7 +90,7 @@ The overlay is a diagnostic, not a score. The lower overlap on pages 7 to 10 com
 
 ## Review of the rendered pages (Gate 2 rows)
 
-Every page of `samples/OUTPUT-elliott-memo.pdf` was rendered at 60 dpi and viewed. Defects found and fixed during the review:
+Every page of `usage/OUTPUT-ndb-motion-brief-elliottmemo.typst.pdf` was rendered at 60 dpi and viewed. Defects found and fixed during the review:
 
 - Paragraph spacing collided across block boundaries (same fault as the complaint). Fixed with `below: body-leading` on every body block.
 - Pitch: first pass 24 pt; changed to Word's double spacing, 27.6 pt, to match the exemplar's line count per page (10 pages, as the exemplar).
@@ -117,7 +117,7 @@ Open tier-2 items for David: the title placement (below the caption, not in the 
 
 ### docx (pandoc, `docx/`)
 
-Built with pandoc from `docx/reference.docx` and the Lua filter `docx/ndb-court-form.lua`, which lays out the cover, numbering, signature and certificate from the same frontmatter as the typst template. `docx/make-reference.sh` regenerates `reference.docx`. Render: `sh tools/render.sh --engine docx <this folder> samples/INPUT-<id>.md` (writes `samples/OUTPUT-<id>.docx`).
+Built with pandoc from `docx/reference.docx` and the Lua filter `docx/ndb-court-form.lua`, which lays out the cover, numbering, signature and certificate from the same frontmatter as the typst template. `docx/make-reference.sh` regenerates `reference.docx`. Render: `sh tools/render.sh --engine docx <this folder> usage/INPUT-<id>.md` (writes `usage/OUTPUT-<id>.docx`).
 
 What matches the typst form (same values, set as Word styles):
 
@@ -136,7 +136,7 @@ What differs or is not checked:
 
 docx BLOCKED items (`docs/DOCX.md`):
 
-- BLOCKED: Gates 0 to 3 on `samples/OUTPUT-<id>.docx.pdf` (`tools/check.sh --engine docx`): `soffice` cannot be run here. LibreOffice is not on conda-forge; the Debian trixie LibreOffice 25.2.3 packages were unpacked without root, but `soffice.bin` aborts at startup with an uncaught `com::sun::star::uno::RuntimeException`. Consequently no `.docx.pdf` was made, no page was rendered or viewed, and `pages_reviewed=0`. The `.docx` is valid (zip test and well-formed XML parts pass) and pandoc reads its text back in order, but nothing visual is claimed for it.
+- BLOCKED: Gates 0 to 3 on `usage/OUTPUT-<id>.docx.pdf` (`tools/check.sh --engine docx`): `soffice` cannot be run here. LibreOffice is not on conda-forge; the Debian trixie LibreOffice 25.2.3 packages were unpacked without root, but `soffice.bin` aborts at startup with an uncaught `com::sun::star::uno::RuntimeException`. Consequently no `.docx.pdf` was made, no page was rendered or viewed, and `pages_reviewed=0`. The `.docx` is valid (zip test and well-formed XML parts pass) and pandoc reads its text back in order, but nothing visual is claimed for it.
 - BLOCKED: the "opens in Word and LibreOffice without a repair prompt" check: not done (no Word here; LibreOffice unavailable).
 
 [Formbook index](../../../../../../README.md) | [Status table](../../../../../../STATUS.md)

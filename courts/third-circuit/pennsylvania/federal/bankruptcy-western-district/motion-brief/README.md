@@ -5,11 +5,11 @@ Folder: `courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/m
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-bernstein-v-meyer-unkovic-21-02063-motion-brief.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-bernstein-brief-in-support.md`: a portion of the 19-page brief (caption, all of I and II, the first six paragraphs of III, all of IV.A.1 and IV.A.2, the first three paragraphs of IV.A.3, all of IV.B and IV.D, the first two paragraphs of IV.C, the conclusion and the signature block). See "Sample" below. |
+| exemplar | yes: `usage/SAMPLE-pawb-motion-brief-bernsteinvmeyerunkovic2102063.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-pawb-motion-brief-bernsteinbriefinsupport.md`: a portion of the 19-page brief (caption, all of I and II, the first six paragraphs of III, all of IV.A.1 and IV.A.2, the first three paragraphs of IV.A.3, all of IV.B and IV.D, the first two paragraphs of IV.C, the conclusion and the signature block). See "Sample" below. |
 | typeface | face required: **none** (LBR 5005-13(b)(4) names Courier only as the size benchmark, "12 Courier or an equivalent font size"; no face is mandated). Substitute: none needed. Used: **EB Garamond** (vendored), 13 pt. Metric-compatible: n/a. See Known gaps 1. |
-| render | ok: `samples/OUTPUT-bernstein-brief-in-support.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
-| overlay | ok: `samples/OVERLAY-bernstein-brief-in-support.pdf` and `.txt` (page map) |
+| render | ok: `usage/OUTPUT-pawb-motion-brief-bernsteinbriefinsupport.typst.pdf`, 10 pages, typst 0.15.0, vendored EB Garamond only, no warnings |
+| overlay | ok: `usage/OVERLAY-bernstein-brief-in-support.pdf` and `.txt` (page map) |
 | pages reviewed | 10 of 10 (every page of the final PDF rendered at 60 dpi and viewed) |
 | check gates | not run: `tools/check.sh` expects a court folder with `court.json` and `rules.md`; this folder is a doc-type folder (see Known gaps) |
 
@@ -57,9 +57,9 @@ Kind: **M** mandated by a rule (tier 1), **C** convention seen in the exemplar (
 
 ## Exemplar and sample
 
-- `exemplars/FILED-EXAMPLE-bernstein-v-meyer-unkovic-21-02063-motion-brief.pdf`: Bernstein, as Plan Administrator for the Creditors Trust, v. Meyer, Unkovic & Scott LLP and Robert E. Dauer, Jr., Adv. Proc. No. 21-02063 (main case 19-22715-CMB, Chapter 11). "Brief in Support of Motion to Dismiss", 19 pages, filed 2021-08-06 by the defendants' counsel (DiBella Weinheimer). Provenance in `exemplars/SOURCE.md`.
+- `usage/SAMPLE-pawb-motion-brief-bernsteinvmeyerunkovic2102063.pdf`: Bernstein, as Plan Administrator for the Creditors Trust, v. Meyer, Unkovic & Scott LLP and Robert E. Dauer, Jr., Adv. Proc. No. 21-02063 (main case 19-22715-CMB, Chapter 11). "Brief in Support of Motion to Dismiss", 19 pages, filed 2021-08-06 by the defendants' counsel (DiBella Weinheimer). Provenance in `usage/SOURCE.md`.
 - The exemplar is the brief only. Its motion is ECF Adv. Doc. 25 (not in this folder). The brief's caption shows "Bankr. Case No." and "Adv. Pro. No."; the template follows Form 416D ("Case No.", "Adv. Proc. No.") as LBR 7010-1(a) requires.
-- `samples/INPUT-bernstein-brief-in-support.md` transcribes the brief in order, verbatim (including the filing's own typos and its citation forms), with footnotes 1 to 5. Omitted from the transcription, to keep the render within the 8 to 14 page target:
+- `usage/INPUT-pawb-motion-brief-bernsteinbriefinsupport.md` transcribes the brief in order, verbatim (including the filing's own typos and its citation forms), with footnotes 1 to 5. Omitted from the transcription, to keep the render within the 8 to 14 page target:
   - III (Statement of the Facts): the paragraphs from "Consistent with its plan, in February 2018, Campbells then purchased the real estate ..." to the end of the section (the closing, the Perkins default history, the "Aside from financing issues" and "Finally" paragraphs).
   - IV.A.3: the paragraphs from "Within the Third Circuit, the application of Section 108(a) ..." to the end of the section (the Fifth Circuit and assignee authority, the equitable-estoppel paragraph, the closing paragraph).
   - IV.C: from "As noted in *Maritrans*..." to the end of the section (the RPC 1.3, 2.1 and 8.4 discussion).
@@ -69,7 +69,7 @@ Kind: **M** mandated by a rule (tier 1), **C** convention seen in the exemplar (
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick (micromamba env)
-sh tools/render.sh courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/motion-brief samples/INPUT-bernstein-brief-in-support.md
+sh tools/render.sh courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/motion-brief usage/INPUT-pawb-motion-brief-bernsteinbriefinsupport.md
 sh tools/overlay.sh courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/motion-brief bernstein-brief-in-support
 ```
 
@@ -107,7 +107,7 @@ Gate 2 rows are recorded here, not in `reviews/`, because this folder has no `re
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form.
-- **docx** (`docx/reference.docx`, `docx/pawb.lua`, `docx/build-reference.sh`; output `samples/OUTPUT-bernstein-brief-in-support.docx`): pandoc 3.6.4 on the reference: EB Garamond 13 pt, exact 26 pt double and 14.95 pt single lines (the pitch measured on the typst render), 1 in margins on US Letter, 0.5 in first-line indent on every body paragraph, headings as in the typst template (level 2 centered bold, level 3 bold, level 4 bold italic), footnotes 13 pt single (pandoc footnotes), block quotes single-spaced and indented 0.5 in on each side, page number centered in the footer. The Lua filter builds the court title, the Form 416D caption (a borderless table with the two boxed cells), the title and the signature block from the frontmatter (the "/s/" on the filing user only).
+- **docx** (`docx/reference.docx`, `docx/pawb.lua`, `docx/build-reference.sh`; output `usage/OUTPUT-pawb-motion-brief-bernsteinbriefinsupport.docx`): pandoc 3.6.4 on the reference: EB Garamond 13 pt, exact 26 pt double and 14.95 pt single lines (the pitch measured on the typst render), 1 in margins on US Letter, 0.5 in first-line indent on every body paragraph, headings as in the typst template (level 2 centered bold, level 3 bold, level 4 bold italic), footnotes 13 pt single (pandoc footnotes), block quotes single-spaced and indented 0.5 in on each side, page number centered in the footer. The Lua filter builds the court title, the Form 416D caption (a borderless table with the two boxed cells), the title and the signature block from the frontmatter (the "/s/" on the filing user only).
 - Differences from typst: the quoted "(a)" list in the block quote is a Word list (pandoc numbering), not typst's list; the caption rules are cell borders, which Word and LibreOffice draw slightly differently; EB Garamond is not embedded, so the machine that opens the file needs it installed; line breaks and page count are whatever Word or LibreOffice produce from these styles, not measured. No table of contents or authorities, as in the typst template.
 - Checked here: `ziptool` reads all 17 parts and `xmllint --noout` passes on every XML part; the docx was not rendered and has no visual review.
-- docx BLOCKED: no checks file is readable (this folder has no `checks.yaml` and no `rules.md`; the `PAWB-MOT-*` IDs in the rules table are rule IDs, not gate checks). Every gate check measured on `samples/<id>.docx.pdf` is BLOCKED: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
+- docx BLOCKED: no checks file is readable (this folder has no `checks.yaml` and no `rules.md`; the `PAWB-MOT-*` IDs in the rules table are rule IDs, not gate checks). Every gate check measured on `usage/<id>.docx.pdf` is BLOCKED: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.

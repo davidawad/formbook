@@ -4,8 +4,8 @@ Reviewer: the docx engine agent, 2026-10-15. Method: `pdftoppm -r 60`, every pag
 
 ## sample smith-motion-memorandum docx
 
-- PDF: `samples/OUTPUT-smith-motion-memorandum.docx.pdf`, sha256 `d2952185cf7f12ddef25a96f213e336bea1d20d3cedc13338c87da6fd0296ad0`
-- DOCX: `samples/OUTPUT-smith-motion-memorandum.docx`, sha256 `55bb04330125384687d0303c1ba23e9136b9259809fcad69d812ca467d3cc7c3`
+- PDF: `usage/OUTPUT-smith-motion-memorandum.docx.pdf`, sha256 `d2952185cf7f12ddef25a96f213e336bea1d20d3cedc13338c87da6fd0296ad0`
+- DOCX: `usage/OUTPUT-smith-motion-memorandum.docx`, sha256 `55bb04330125384687d0303c1ba23e9136b9259809fcad69d812ca467d3cc7c3`
 
 | page | verdict | note |
 |---|---|---|

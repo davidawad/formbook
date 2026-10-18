@@ -5,10 +5,10 @@ Folder: `courts/seventh-circuit/wisconsin/federal/eastern-district/motion-brief/
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-nocams-2-26-cv-01863-motion-brief.pdf` (14 pp.; the overlay reference). Second filer: `FILED-EXAMPLE-schmidt-2-26-cv-00611-motion-brief.pdf` (9 pp.). See `exemplars/SOURCE.md`. |
-| sample md | `samples/INPUT-nocams-motion-brief.md` (the whole brief, transcribed from the text layer) |
-| render | ok (re-run 2026-10-15): `samples/OUTPUT-nocams-motion-brief.pdf`, 12 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular, Bold, Italic, BoldItalic only (embedded), no warnings |
-| overlay | fail (2026-10-15): `tools/overlay.sh` exits 1, `no exemplar pdf in exemplars/`. The filed PDFs are not in this snapshot (`exemplars/` holds `SOURCE.md` only). The earlier `OVERLAY-nocams-motion-brief.*` files are from a run with the PDFs present and are not regenerated |
+| exemplar | yes: `usage/SAMPLE-wied-motion-brief-nocams226cv01863.pdf` (14 pp.; the overlay reference). Second filer: `SAMPLE-wied-motion-brief-schmidt226cv00611.pdf` (9 pp.). See `usage/SOURCE.md`. |
+| sample md | `usage/INPUT-wied-motion-brief-nocams.md` (the whole brief, transcribed from the text layer) |
+| render | ok (re-run 2026-10-15): `usage/OUTPUT-wied-motion-brief-nocams.typst.pdf`, 12 pages, typst 0.15.0, `pdffonts`: EB Garamond Regular, Bold, Italic, BoldItalic only (embedded), no warnings |
+| overlay | fail (2026-10-15): `tools/overlay.sh` exits 1, `no exemplar pdf in usage/`. The filed PDFs are not in this snapshot (`usage/` holds `SOURCE.md` only). The earlier `OVERLAY-nocams-motion-brief.*` files are from a run with the PDFs present and are not regenerated |
 | pages reviewed | 12 of 12 (re-rendered 2026-10-15 and each page viewed at 60 dpi in montage) |
 
 ## Governing rules
@@ -60,7 +60,7 @@ Not produced by this template (separate filings, not part of the brief): the mot
 6. **Page limit not enforced.** Civil L.R. 7(f) limits the principal brief to 30 pages. The template cannot count pages against the limit; the reviewer must check the rendered page count.
 7. **Gate scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and a `rules.md` in the court directory. This doc-type folder is not that shape, and the brief forbids touching `tools/`. Render and overlay were run; the review below is the Gate 2 equivalent for this doc type.
 
-## Review of the rendered pages (`samples/OUTPUT-nocams-motion-brief.pdf`, 12 pages)
+## Review of the rendered pages (`usage/OUTPUT-wied-motion-brief-nocams.typst.pdf`, 12 pages)
 
 Rendered at 60 dpi, viewed in montage (pages 1 to 4, 5 to 8, 9 to 12) after the last template change.
 
@@ -79,7 +79,7 @@ Rendered at 60 dpi, viewed in montage (pages 1 to 4, 5 to 8, 9 to 12) after the 
 | 11 | Taxpayer standing paragraphs, CONCLUSION. | Pass. |
 | 12 | "Dated this 7th day of October, 2026." and the signature block with two signers, address, telephone and e-mail. | Pass. Block alone on the last page (gap 3). |
 
-Gate 2 rows, with the overlay: page-level word overlap is 31% (page 12, the signature page) to 95% (page 1); see `samples/OVERLAY-nocams-motion-brief.txt`. The low pages are the signature page and pages where the exemplar's pagination differs. Not a score.
+Gate 2 rows, with the overlay: page-level word overlap is 31% (page 12, the signature page) to 95% (page 1); see `usage/OVERLAY-nocams-motion-brief.txt`. The low pages are the signature page and pages where the exemplar's pagination differs. Not a score.
 
 ## Engines
 
@@ -87,4 +87,4 @@ Gate 2 rows, with the overlay: page-level word overlap is 31% (page 12, the sign
 
 - **Matches the typst form:** EB Garamond 12 pt body; exact 24 pt (double) line pitch; 0.5 in first-line indent on body paragraphs; letter paper, 1 in margins; centered page number in the footer; centered bold caps for the title and section headings; argument headings ("I. TEXT") bold with the numeral in a 1 in hanging column; sub-headings ("a. Text") bold italic, indented 0.5 in; block quotations single-spaced, indented 0.5 in on each side; caption as a borderless two-column table (3.25 in party column, 0.3 in gutter, case number right); "Dated this ..." and the signature block at a 3.0 in indent. Paragraphs are not numbered. All case text comes from the sample's frontmatter.
 - **Differs or unverified:** the argument-heading numeral uses a tab to a 1 in hanging stop, which is the typst grid; the line breaks and page breaks are not compared with the typst layout. The caption table's borders are set to none; not verified in Word or LibreOffice. Body font EB Garamond is named but not embedded; the machine that opens the file must have it. The brief has no TOC or TOA in the typst template, so the docx has none.
-- **BLOCKED:** the LibreOffice PDF (`samples/OUTPUT-nocams-motion-brief.docx.pdf`) was not produced because `soffice` is not installed on this box (no conda package, no root). Gates 0 and 1 for docx cannot run. No page was rendered or reviewed (pages reviewed: 0). The docx was checked only as a zip with well-formed XML parts and by a pandoc text dump of its order.
+- **BLOCKED:** the LibreOffice PDF (`usage/OUTPUT-nocams-motion-brief.docx.pdf`) was not produced because `soffice` is not installed on this box (no conda package, no root). Gates 0 and 1 for docx cannot run. No page was rendered or reviewed (pages reviewed: 0). The docx was checked only as a zip with well-formed XML parts and by a pandoc text dump of its order.

@@ -1,15 +1,15 @@
 # Motion with memorandum of points and authorities (U.S. Bankruptcy Court, D. Hawaii)
 
-Motion to dismiss an adversary complaint, with a consolidated memorandum of points and authorities, in the Typst engine (`typst/`), rendered from one markdown sample (`samples/INPUT-field-rolloffs-motion-brief.md`).
+Motion to dismiss an adversary complaint, with a consolidated memorandum of points and authorities, in the Typst engine (`typst/`), rendered from one markdown sample (`usage/INPUT-hib-motion-brief-fieldrolloffs.md`).
 
 | File | Role |
 |---|---|
 | `typst/main.typ`, `typst/hib-motion-brief.typ` | Template (entry point and rule-driven layout) |
-| `samples/INPUT-field-rolloffs-motion-brief.md` | Markdown input, transcribed from the filed exemplar (frontmatter = caption, counsel, hearing, signature, authorities) |
-| `samples/OUTPUT-field-rolloffs-motion-brief.pdf` | Our render (`tools/render.sh`), 12 pages |
-| `samples/OVERLAY-field-rolloffs-motion-brief.pdf` / `.txt` | Red (ours) / blue (filed) overlay and page map (`tools/overlay.sh`) |
-| `exemplars/FILED-EXAMPLE-field-v-rolloffs-18-90035-motion-brief.pdf` | The filed exemplar (127 ECF pages; memorandum pages 1-106 are ECF pp. 22-127) |
-| `exemplars/SOURCE.md` | Filer, case, date filed, URL, date retrieved |
+| `usage/INPUT-hib-motion-brief-fieldrolloffs.md` | Markdown input, transcribed from the filed exemplar (frontmatter = caption, counsel, hearing, signature, authorities) |
+| `usage/OUTPUT-hib-motion-brief-fieldrolloffs.typst.pdf` | Our render (`tools/render.sh`), 12 pages |
+| `usage/OVERLAY-field-rolloffs-motion-brief.pdf` / `.txt` | Red (ours) / blue (filed) overlay and page map (`tools/overlay.sh`) |
+| `usage/SAMPLE-hib-motion-brief-fieldvrolloffs1890035.pdf` | The filed exemplar (127 ECF pages; memorandum pages 1-106 are ECF pp. 22-127) |
+| `usage/SOURCE.md` | Filer, case, date filed, URL, date retrieved |
 
 Engines: typst only. No latex or docx engine is delivered for this doc type.
 
@@ -39,7 +39,7 @@ Procedural references in the sample (Fed. R. Civ. P. 8(a), 9(b), 12(b)(6); Fed. 
 
 ## What the overlay shows
 
-`samples/OVERLAY-field-rolloffs-motion-brief.pdf` (red = our render, blue = filed exemplar, black = both). Page pairing by text (`OVERLAY-field-rolloffs-motion-brief.txt`):
+`usage/OVERLAY-field-rolloffs-motion-brief.pdf` (red = our render, blue = filed exemplar, black = both). Page pairing by text (`OVERLAY-field-rolloffs-motion-brief.txt`):
 
 | Our page | Filed page | Word overlap | Reading |
 |---|---|---|---|
@@ -49,7 +49,7 @@ Procedural references in the sample (Fed. R. Civ. P. 8(a), 9(b), 12(b)(6); Fed. 
 | 4 | 10 | 18.5% | Table of authorities, paired with the filed TOA, which begins at filed p. 10. The filed TOA covers the full memorandum; ours lists only the authorities cited in the sample. Tier 3 (content). |
 | 5-9 | 22-26 | 55.0-87.4% | Memorandum pages 1-5 (preliminary statement and factual background). Filed p. 22 is the first memorandum page. Line pitch differs from the filed Times New Roman (filed text not vertically aligned), so the match is by words, not position. Tier 3 (font and leading). |
 | 10-11 | 33-34 | 61.9-67.2% | Argument, pleading standards (Rule 12(b)(6), Twombly, Iqbal). Filed pp. 33-34 are the same section. Tier 3. |
-| 12 | 127 | 49.0% | Conclusion and signature. The filed page 127 carries the Conclusion (per `exemplars/SOURCE.md`, the signature is on numbered p. 106 = ECF p. 127). Tier 2 (signature block layout). |
+| 12 | 127 | 49.0% | Conclusion and signature. The filed page 127 carries the Conclusion (per `usage/SOURCE.md`, the signature is on numbered p. 106 = ECF p. 127). Tier 2 (signature block layout). |
 
 The overlay is diagnostic (tier 3), not a score. Filed pages the sample does not transcribe are not paired.
 
@@ -59,13 +59,13 @@ The overlay is diagnostic (tier 3), not a score. Filed pages the sample does not
 2. **Certificate of compliance (LBR 9013-2(a)(4)).** Not rendered. Needed only if the memorandum relies on the word limit rather than the 25-page limit. The 8-page sample is within the page limit.
 3. **Abridged transcription.** The filed memorandum is 106 pages; the sample transcribes the caption, TOC, TOA, the preliminary statement, the factual background (with the filed table of counts omitted, as bracketed in the sample), the pleading standards, and the conclusion. The sample is 12 pages (8 of memorandum), within the 8-14 page band.
 4. **Type size of the exemplar.** The exemplar (filed 2019) is Times New Roman at roughly 12 pt by the text metrics. It predates the current 14-point rule, so the template follows the current rule (LBR 9004-1(b)(1)) rather than the exemplar, as the exemplar's SOURCE.md notes.
-5. **One filer only.** Tier 2 is judged against one exemplar (Dane S. Field, Chapter 7 Trustee, Adv. 18-90035, Dkt. 19). Per `exemplars/SOURCE.md` a second D. Haw. filing was not found in the search. Tier 2 cannot be fully judged; this is stated, not hidden.
+5. **One filer only.** Tier 2 is judged against one exemplar (Dane S. Field, Chapter 7 Trustee, Adv. 18-90035, Dkt. 19). Per `usage/SOURCE.md` a second D. Haw. filing was not found in the search. Tier 2 cannot be fully judged; this is stated, not hidden.
 
 [Court README](../README.md)
 
 ## Engines
 
-The docx engine is `docx/make-reference.sh` (builds `docx/reference.docx`) and `docx/hib-motion-brief.lua` (cover, caption, heading labels and signature). The line "Engines: typst only" above predates this section. Build: `sh tools/render.sh --engine docx <this folder> samples/INPUT-field-rolloffs-motion-brief.md`, which writes `samples/OUTPUT-field-rolloffs-motion-brief.docx`.
+The docx engine is `docx/make-reference.sh` (builds `docx/reference.docx`) and `docx/hib-motion-brief.lua` (cover, caption, heading labels and signature). The line "Engines: typst only" above predates this section. Build: `sh tools/render.sh --engine docx <this folder> usage/INPUT-hib-motion-brief-fieldrolloffs.md`, which writes `usage/OUTPUT-hib-motion-brief-fieldrolloffs.docx`.
 
 What the docx sets (in `styles.xml` and `sectPr`; set, not rendered):
 

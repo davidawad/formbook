@@ -13,7 +13,7 @@ Every template compiles with the vendored fonts in `fonts/`, plus the one pinned
 Times New Roman Typst renders go through the Rust renderer so it can add the pinned platform directory while retaining `--ignore-system-fonts`:
 
 ```sh
-cargo run -q --manifest-path tools/fb/Cargo.toml -- render <doc-type-dir> samples/INPUT-<id>.md
+cargo run -q --manifest-path tools/fb/Cargo.toml -- render <doc-type-dir> usage/INPUT-<stem>-<id>.md
 ```
 
 `tools/check.sh` routes its Typst render through the same Rust path. For LaTeX, templates select Times New Roman when fontspec finds the installed family and fall back to Liberation Serif otherwise; the Gate 1 font assertion rejects a fallback render for a Times exemplar.

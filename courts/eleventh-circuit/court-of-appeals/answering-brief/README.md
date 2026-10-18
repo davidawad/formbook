@@ -1,6 +1,6 @@
 # Eleventh Circuit: appellee's answer brief (court `ca11`)
 
-Doc type `answering-brief`. Folder layout: `exemplars/` (the filed exemplar and its SOURCE.md), `samples/` (the markdown transcription, the rendered PDF, the overlay), `typst/` (the template). The court-root `typst/` and `samples/` of `court-of-appeals/` belong to the older opening-brief work and are untouched.
+Doc type `answering-brief`. Folder layout: `usage/` (the filed exemplar and its SOURCE.md), `usage/` (the markdown transcription, the rendered PDF, the overlay), `typst/` (the template). The court-root `typst/` and `usage/` of `court-of-appeals/` belong to the older opening-brief work and are untouched.
 
 Status: template and one sample built, rendered and reviewed. Not a complete eval loop: the tools in `tools/check.sh` are not wired to this folder (no `checks.yaml`, no `rules.md`); the requirements below are checked by the reviewer, not by a gate.
 
@@ -10,7 +10,7 @@ Status: template and one sample built, rendered and reviewed. Not a complete eva
 |---|---|---|
 | HB | Eleventh Circuit "Federal Rules of Appellate Procedure and Eleventh Circuit Rules" (bookmarked), Rev. 12/25 (Circuit Rules), with FRAP text as printed in that handbook | https://www.ca11.uscourts.gov/sites/default/files/courtdocs/clk/Rules_Bookmarked.DEC25.pdf |
 | SHELL | Eleventh Circuit sample shell brief, DEC25 (names the "Appellee's Answer Brief" cover form; shows the page-numbering scheme) | https://www.ca11.uscourts.gov/sites/default/files/courtdocs/clk/Sample_Shell_Brief.DEC25.pdf |
-| EX | The filed exemplar in `exemplars/` (see `exemplars/SOURCE.md`) | local |
+| EX | The filed exemplar in `usage/` (see `usage/SOURCE.md`) | local |
 
 What was checked: the rule text was read from HB by text extraction on 2026-10-14. HB is the bookmarked handbook the court's own rules pages point to (found by search; the court's rules index URL returned 404 to this box). It is not checked against any later amendment. Within HB the FRAP pages carry different revision dates: Rule 32(a) is Rev. 12/16 and Rule 32(g) is Rev. 12/24. No other source was used for a number in the template.
 
@@ -81,17 +81,17 @@ Body: `# Heading` is a section (bold, capitals, centered). Sub-headings are numb
 From the repo root, with `export PATH="$HOME/tb/bin:$PATH"` (typst 0.15.0, poppler, ImageMagick, gawk, jq):
 
 ```sh
-sh tools/render.sh courts/eleventh-circuit/court-of-appeals/answering-brief samples/INPUT-naacp-v-byrd-25-12813.md
+sh tools/render.sh courts/eleventh-circuit/court-of-appeals/answering-brief usage/INPUT-ca11-answering-brief-naacpvbyrd2512813.md
 sh tools/overlay.sh courts/eleventh-circuit/court-of-appeals/answering-brief naacp-v-byrd-25-12813
 ```
 
-Render result: `samples/OUTPUT-naacp-v-byrd-25-12813.pdf`, 14 pages, no typst warnings, embedded fonts only EB Garamond Regular, Italic and Bold.
+Render result: `usage/OUTPUT-ca11-answering-brief-naacpvbyrd2512813.typst.pdf`, 14 pages, no typst warnings, embedded fonts only EB Garamond Regular, Italic and Bold.
 
 Word count: 1,428 by the template; 1,428 by an independent `awk` count of the markdown body (same exclusions).
 
 ## Overlay (the red/blue test)
 
-`samples/OVERLAY-naacp-v-byrd-25-12813.pdf`: red = our render only, blue = the exemplar only, black = both agree. Pages are paired by word overlap (`samples/OVERLAY-naacp-v-byrd-25-12813.txt`):
+`usage/OVERLAY-naacp-v-byrd-25-12813.pdf`: red = our render only, blue = the exemplar only, black = both agree. Pages are paired by word overlap (`usage/OVERLAY-naacp-v-byrd-25-12813.txt`):
 
 | ours | filed | word overlap |
 |---|---|---|
@@ -158,20 +158,20 @@ Nothing is marked OK without a render and a look.
 
 ## Verification pass 2026-10-16 (fb-595.26.11)
 
-- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/answering-brief samples/INPUT-naacp-v-byrd-25-12813.md` exits 0, no typst warnings, 14 pages (the committed PDF also had 14). Fonts embedded: EB Garamond Regular, Italic, Bold only.
+- Rendered: `sh tools/render.sh courts/eleventh-circuit/court-of-appeals/answering-brief usage/INPUT-ca11-answering-brief-naacpvbyrd2512813.md` exits 0, no typst warnings, 14 pages (the committed PDF also had 14). Fonts embedded: EB Garamond Regular, Italic, Bold only.
 - Viewed: all 14 pages at 60 dpi after each fix (the last time pages 2-14 as a contact sheet, since only the cover changed); the exemplar's page 1 against our cover; the 14 overlay pages at 40 dpi.
-- Overlay: rerun; `samples/OVERLAY-naacp-v-byrd-25-12813.pdf` and `.txt` rewritten (table above).
+- Overlay: rerun; `usage/OVERLAY-naacp-v-byrd-25-12813.pdf` and `.txt` rewritten (table above).
 - Defect fixed (tier 1): the Table of Contents, the Table of Authorities and the Certificate of Compliance were single-spaced. 11th Cir. R. 32-3 (HB, re-read 2026-10-16) allows single spacing only for the cover, the certificate of service, direct quotes, headings and footnotes, and names the two tables as double-spaced. Entries now use the body leading inside and between entries. The short Statutes page (iv) now carries the last three cases too.
 - Defect fixed (transcription, tier 1 on the cover): the sample put Abha Khanna at the Washington office and dropped two telephone numbers. The exemplar lists Khanna in Seattle with (206) 656-0177 and the Washington lawyers with (202) 968-4490. The sample now has three counsel groups, each with its telephone (FRAP 32(a)(2)(F)).
 - Defect fixed (tier 2): with three groups stacked in the right half, the cover only fitted with zero spacing and the rules touched the text. Two or more counsel groups now sit side by side across the full width (up to three per row), as the exemplar sets them; one group keeps the half-page indent.
 - latex: the same counsel layout added (`latex/template.tex`, `latex/ca11.lua`: `counsel_multi`); before it, the latex cover spilled onto a second page. `sh tools/render.sh --engine latex ...` exits 0, 14 pages; pages 1-2 viewed. The latex tables are still single-spaced: OPEN.
-- docx: not rebuilt (no LibreOffice on this box), so `OUTPUT-naacp-v-byrd-25-12813.docx` and `.docx.pdf` predate the corrected counsel lines and the double-spaced tables: OPEN.
+- docx: not rebuilt (no LibreOffice on this box), so `OUTPUT-ca11-answering-brief-naacpvbyrd2512813.docx` and `.docx.pdf` predate the corrected counsel lines and the double-spaced tables: OPEN.
 - Remaining gaps: one exemplar; no `checks.yaml`; the signature block's wrapped firm line; the rest of "Known gaps".
 
 ## Engines
 
 The typst template is the reference. The latex and docx engines follow the same form (`latex/`, `docx/`); the rendered
-outputs are `samples/OUTPUT-naacp-v-byrd-25-12813.latex.pdf`, `.docx` and `.docx.pdf`.
+outputs are `usage/OUTPUT-ca11-answering-brief-naacpvbyrd2512813.latex.pdf`, `.docx` and `.docx.pdf`.
 
 - **latex** (`latex/template.tex`, `latex/ca11.lua`, `latex/render.sh`). Matches: EB Garamond 14 pt, double spacing,
   one-inch margins, the cover with its double rules, the statement regarding oral argument, the table of contents

@@ -2,8 +2,8 @@
 
 - Court: `wyd`, United States District Court for the District of Wyoming (`courts/tenth-circuit/wyoming/federal/district/`)
 - Doc type: `complaint`. An original complaint with numbered paragraphs, a caption and the attorney information block; no separate certificate (see Governing rules).
-- Exemplar: `exemplars/FILED-EXAMPLE-on-q-financial-1-26-cv-00277-complaint.pdf` (*On Q Financial, LLC v. Jorns & Associates LLC and Justin Ward Jorns*, No. 1:26-cv-00277, filed 2026-09-28, 17 pages; provenance in `exemplars/SOURCE.md`). One filer (plaintiff's counsel). This is one exemplar, not the tier-2 pair of 2 or 3 from different filers; see Known gaps.
-- Sample: `samples/INPUT-onq-complaint.md` (transcription of the complaint from the caption through the prayer for relief, with the signature block in the frontmatter).
+- Exemplar: `usage/SAMPLE-wyd-complaint-onqfinancial126cv00277.pdf` (*On Q Financial, LLC v. Jorns & Associates LLC and Justin Ward Jorns*, No. 1:26-cv-00277, filed 2026-09-28, 17 pages; provenance in `usage/SOURCE.md`). One filer (plaintiff's counsel). This is one exemplar, not the tier-2 pair of 2 or 3 from different filers; see Known gaps.
+- Sample: `usage/INPUT-wyd-complaint-onq.md` (transcription of the complaint from the caption through the prayer for relief, with the signature block in the frontmatter).
 - Status: template and sample present; render, overlay and page review redone 2026-10-14 (below). Fonts pass 2026-10-15: the rule names no face, so the template keeps EB Garamond (see Typeface); render, overlay and all 10 pages re-checked. `court.json` untouched.
 
 ## Files
@@ -12,10 +12,10 @@
 |---|---|
 | `typst/main.typ` | Entry point; reads `--input sample=...` and calls `wyd-complaint`. |
 | `typst/wyd-complaint.typ` | Template. Parameter block at the top: EB Garamond 13 pt, double spacing (`body-leading = 1.05em`), one-inch margins, 8½ × 11. |
-| `samples/INPUT-onq-complaint.md` | Markdown contract sample (frontmatter: caption, attorney block, date, signature; body: paragraphs, headings, numbered allegations, prayer). |
-| `samples/OUTPUT-onq-complaint.pdf` | `sh tools/render.sh courts/tenth-circuit/wyoming/federal/district/complaint samples/INPUT-onq-complaint.md` (10 pages, no typst warnings). |
-| `samples/OVERLAY-onq-complaint.pdf`, `OVERLAY-onq-complaint.txt` | `sh tools/overlay.sh courts/tenth-circuit/wyoming/federal/district/complaint onq-complaint courts/tenth-circuit/wyoming/federal/district/complaint/exemplars/FILED-EXAMPLE-on-q-financial-1-26-cv-00277-complaint.pdf` (red = ours, blue = filed, black = agree). |
-| `exemplars/` | The filed exemplar and `SOURCE.md`. The PDF is re-downloaded from the URL in `SOURCE.md`; it is not in git. |
+| `usage/INPUT-wyd-complaint-onq.md` | Markdown contract sample (frontmatter: caption, attorney block, date, signature; body: paragraphs, headings, numbered allegations, prayer). |
+| `usage/OUTPUT-wyd-complaint-onq.typst.pdf` | `sh tools/render.sh courts/tenth-circuit/wyoming/federal/district/complaint usage/INPUT-wyd-complaint-onq.md` (10 pages, no typst warnings). |
+| `usage/OVERLAY-onq-complaint.pdf`, `OVERLAY-onq-complaint.txt` | `sh tools/overlay.sh courts/tenth-circuit/wyoming/federal/district/complaint onq-complaint courts/tenth-circuit/wyoming/federal/district/complaint/usage/SAMPLE-wyd-complaint-onqfinancial126cv00277.pdf` (red = ours, blue = filed, black = agree). |
+| `usage/` | The filed exemplar and `SOURCE.md`. The PDF is re-downloaded from the URL in `SOURCE.md`; it is not in git. |
 
 ## Governing rules
 
@@ -37,7 +37,7 @@ The rule names no face, so the template keeps EB Garamond at 13 pt. The filed ex
 
 ## Overlay
 
-`samples/OVERLAY-onq-complaint.pdf` puts our render (red) over the best-matching filed page (blue). Pages are paired by word overlap, not by index. Diagnostic only, not a score. Last run:
+`usage/OVERLAY-onq-complaint.pdf` puts our render (red) over the best-matching filed page (blue). Pages are paired by word overlap, not by index. Diagnostic only, not a score. Last run:
 
 - Sample p.1 ↔ filed p.1 (58%): caption, attorney block, title, introduction.
 - p.2 ↔ p.3 (54%), p.3 ↔ p.4 (68%), p.4 ↔ p.5 (48%): jurisdiction, venue, parties and the factual background, which the filed pages carry in the same order.
@@ -46,7 +46,7 @@ The rule names no face, so the template keeps EB Garamond at 13 pt. The filed ex
 
 ## Page review (Gate 2)
 
-Every page of `OUTPUT-onq-complaint.pdf` was rendered at 60 dpi and viewed (10 of 10).
+Every page of `OUTPUT-wyd-complaint-onq.typst.pdf` was rendered at 60 dpi and viewed (10 of 10).
 
 | Page | Content | Result |
 |---|---|---|
@@ -64,7 +64,7 @@ Every page of `OUTPUT-onq-complaint.pdf` was rendered at 60 dpi and viewed (10 o
 Tier-2 findings (OPEN or ACCEPTED):
 
 - p.1 OPEN: the party designations ("Plaintiff,", "Defendants.") sit flush left under the party names. The brief template (`motion-brief/typst/wyd-motion-brief.typ`) indents them one inch, as the Elizondo exemplar does; this complaint template has not been changed to match yet.
-- p.1 ACCEPTED: the typeface is EB Garamond where the filed complaint uses Times-family type (per `exemplars/SOURCE.md`). The rule names no face (LR 10.1(a): "not less than 12 point font"), so `docs/FONTS.md` gives EB Garamond. A Times-family filer convention would be Liberation Serif, but the choice is not a rule requirement; the template uses 13 pt. Decision for David: whether tier 2 should follow the exemplar's Times family.
+- p.1 ACCEPTED: the typeface is EB Garamond where the filed complaint uses Times-family type (per `usage/SOURCE.md`). The rule names no face (LR 10.1(a): "not less than 12 point font"), so `docs/FONTS.md` gives EB Garamond. A Times-family filer convention would be Liberation Serif, but the choice is not a rule requirement; the template uses 13 pt. Decision for David: whether tier 2 should follow the exemplar's Times family.
 - p.1 ACCEPTED: the attorney block sits above the court name, in two columns. LR 10.1(b) requires the block; its position is the template's.
 - p.10 ACCEPTED: the sample stops at the prayer for relief, so the signature block is built from the frontmatter and placed after the prayer. The filed complaint's signature page was not compared line by line in this pass.
 
@@ -78,6 +78,6 @@ Tier-2 findings (OPEN or ACCEPTED):
 ## Engines
 
 - **typst** (primary, `typst/`): the reference for the form. Pages reviewed for this section: 10 of 10 (typst render, 60 dpi).
-- **docx** (`docx/`): `docx/reference.docx` (pandoc on it; EB Garamond 13 pt, exact 26 pt line pitch, 1 in margins, centered PAGE footer, borderless tables for the attorney block and caption), `docx/build-reference.sh` (rebuilds the reference; uses `ziptool`, since this box has no `unzip` or `zip`), `docx/wyd.lua` (builds the attorney block, court name, caption, title, signature block and the numbered allegations and lettered items from the frontmatter and body, following `typst/wyd-complaint.typ`). Build from this folder: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/wyd.lua samples/INPUT-onq-complaint.md -o samples/OUTPUT-onq-complaint.docx`. The `.docx` passes the zip and XML checks (every part `xmllint --noout`); it has not been opened in Word or LibreOffice.
+- **docx** (`docx/`): `docx/reference.docx` (pandoc on it; EB Garamond 13 pt, exact 26 pt line pitch, 1 in margins, centered PAGE footer, borderless tables for the attorney block and caption), `docx/build-reference.sh` (rebuilds the reference; uses `ziptool`, since this box has no `unzip` or `zip`), `docx/wyd.lua` (builds the attorney block, court name, caption, title, signature block and the numbered allegations and lettered items from the frontmatter and body, following `typst/wyd-complaint.typ`). Build from this folder: `pandoc --from markdown+smart --to docx --reference-doc=docx/reference.docx --lua-filter=docx/wyd.lua usage/INPUT-wyd-complaint-onq.md -o usage/OUTPUT-wyd-complaint-onq.docx`. The `.docx` passes the zip and XML checks (every part `xmllint --noout`); it has not been opened in Word or LibreOffice.
 - **docx differences from typst:** paragraph and item numbers are typed text ("1.", "(a)") with a tab, not Word list numbering, so they will not renumber if an allegation is inserted; the caption and attorney block are tables, whose row heights and rule-free layout Word and LibreOffice may draw slightly differently from typst; the line pitch is exact 26 pt, which matches the typst leading at 13 pt but is not Word's "double" setting; headings carry outline levels but no table of contents is generated (the complaint has none).
-- **docx BLOCKED:** every gate check measured on the LibreOffice PDF of the `.docx` (`samples/OUTPUT-onq-complaint.docx.pdf`) is BLOCKED. This folder has no `checks.yaml` (the court folder has none), so there are no check IDs to list, and `tools/check.sh` cannot run for `wyd` on any engine. Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.
+- **docx BLOCKED:** every gate check measured on the LibreOffice PDF of the `.docx` (`usage/OUTPUT-onq-complaint.docx.pdf`) is BLOCKED. This folder has no `checks.yaml` (the court folder has none), so there are no check IDs to list, and `tools/check.sh` cannot run for `wyd` on any engine. Reason: LibreOffice cannot run in the build box, so the `.docx.pdf` cannot be produced or checked.

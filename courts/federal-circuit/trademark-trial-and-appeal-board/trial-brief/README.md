@@ -1,15 +1,15 @@
 # TTAB: brief on the case at final hearing (typst)
 
-Doc type `trial-brief` under the Trademark Trial and Appeal Board (court `ttab`). Self-contained: exemplar, sample, template and this README live in this folder. The court root's `typst/` and `samples/` are not touched. The template covers the main brief, the reply brief and the rebuttal brief; the page limit differs by stage (see the rule table).
+Doc type `trial-brief` under the Trademark Trial and Appeal Board (court `ttab`). Self-contained: exemplar, sample, template and this README live in this folder. The court root's `typst/` and `usage/` are not touched. The template covers the main brief, the reply brief and the rebuttal brief; the page limit differs by stage (see the rule table).
 
 ## Status
 
 | Item | State |
 |---|---|
-| Exemplar | yes, one filer: TreeFrog Development (Opposer's rebuttal brief, 2018). Redacted public version. See `exemplars/SOURCE.md`. Only one trial brief was found; tier 2 (two or three filers) is not met |
-| Sample | `samples/INPUT-treefrog-rebuttal-brief.md`: caption, authorities registry, introduction, section II in full, the start of section III with its statutory block quotation, sections IV and V, conclusion, signature block, certificate of service. Images, sections III(B)-(F) and the rest of the body are not transcribed |
-| Render (typst) | ok: `sh tools/render.sh courts/federal-circuit/trademark-trial-and-appeal-board/trial-brief samples/INPUT-treefrog-rebuttal-brief.md` writes `samples/OUTPUT-treefrog-rebuttal-brief.pdf`, 9 pages (caption i, table of authorities ii, body 1-7), no typst warnings, EB Garamond only |
-| Overlay | ok: `sh tools/overlay.sh <dir> treefrog-rebuttal-brief <dir>/exemplars/FILED-EXAMPLE-treefrog-91232860-trial-brief.pdf` writes `samples/OVERLAY-treefrog-rebuttal-brief.pdf` and `.txt` |
+| Exemplar | yes, one filer: TreeFrog Development (Opposer's rebuttal brief, 2018). Redacted public version. See `usage/SOURCE.md`. Only one trial brief was found; tier 2 (two or three filers) is not met |
+| Sample | `usage/INPUT-ttab-trial-brief-treefrogrebuttalbrief.md`: caption, authorities registry, introduction, section II in full, the start of section III with its statutory block quotation, sections IV and V, conclusion, signature block, certificate of service. Images, sections III(B)-(F) and the rest of the body are not transcribed |
+| Render (typst) | ok: `sh tools/render.sh courts/federal-circuit/trademark-trial-and-appeal-board/trial-brief usage/INPUT-ttab-trial-brief-treefrogrebuttalbrief.md` writes `usage/OUTPUT-ttab-trial-brief-treefrogrebuttalbrief.typst.pdf`, 9 pages (caption i, table of authorities ii, body 1-7), no typst warnings, EB Garamond only |
+| Overlay | ok: `sh tools/overlay.sh <dir> treefrog-rebuttal-brief <dir>/usage/SAMPLE-ttab-trial-brief-treefrog91232860.pdf` writes `usage/OVERLAY-treefrog-rebuttal-brief.pdf` and `.txt` |
 | Pages reviewed | 9 of 9 (every page of the current `OUTPUT-` PDF rendered at 60 dpi and looked at; see "Page review") |
 | Check gates (`tools/check.sh`) | not run (box task: no tracker, no gates in this unit) |
 
@@ -69,7 +69,7 @@ The overlay is a diagnostic. Differences in the table of authorities page number
 
 ## Page review
 
-Every page of `OUTPUT-treefrog-rebuttal-brief.pdf` (9 pages) was rendered at 60 dpi and looked at. Page 1 was re-rendered after one fix (the caption page's date line had the paragraph indent); pages 2-9 are as rendered before that fix, which changed page 1 only.
+Every page of `OUTPUT-ttab-trial-brief-treefrogrebuttalbrief.typst.pdf` (9 pages) was rendered at 60 dpi and looked at. Page 1 was re-rendered after one fix (the caption page's date line had the paragraph indent); pages 2-9 are as rendered before that fix, which changed page 1 only.
 
 | Page | Content | Finding |
 |---|---|---|
@@ -96,7 +96,7 @@ Note: the rendered body has 7 pages (body 1-7 are PDF pages 3-9); the certificat
 
 ## Engines
 
-The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference.sh` (the `reference.docx`: EB Garamond 12 pt, double-spaced body at 24 pt exact, half-inch first-line indent, headings at the typst template's default sizes (16.8, 14.4 and 12 pt), single-spaced block quotations and footnotes), `docx/ttab-trial-brief.lua` (the caption page with the counsel block and date at the foot of the page, the table of authorities, the signature block, the certificate of service), and `docx/render.sh`, which runs the conversion twice or more: pandoc cannot know the pages of the authorities, so each pass converts to PDF with LibreOffice, `docx/toa-pages.sh` finds the body page of every citation, and the next pass lists them. Render: `sh tools/render.sh --engine docx <this-dir> samples/INPUT-treefrog-rebuttal-brief.md` writes `samples/OUTPUT-treefrog-rebuttal-brief.docx` and `.docx.pdf`.
+The docx engine (`docx/`, see `docs/DOCX.md`) is built from `docx/make-reference.sh` (the `reference.docx`: EB Garamond 12 pt, double-spaced body at 24 pt exact, half-inch first-line indent, headings at the typst template's default sizes (16.8, 14.4 and 12 pt), single-spaced block quotations and footnotes), `docx/ttab-trial-brief.lua` (the caption page with the counsel block and date at the foot of the page, the table of authorities, the signature block, the certificate of service), and `docx/render.sh`, which runs the conversion twice or more: pandoc cannot know the pages of the authorities, so each pass converts to PDF with LibreOffice, `docx/toa-pages.sh` finds the body page of every citation, and the next pass lists them. Render: `sh tools/render.sh --engine docx <this-dir> usage/INPUT-ttab-trial-brief-treefrogrebuttalbrief.md` writes `usage/OUTPUT-ttab-trial-brief-treefrogrebuttalbrief.docx` and `.docx.pdf`.
 
 Sections: the caption page and the table of authorities are roman (i, ii); the body is arabic from 1 and the certificate continues it.
 
@@ -109,7 +109,7 @@ Sections: the caption page and the table of authorities are roman (i, ii); the b
 | Certificate of service | Own page, as the typst one; the text is double-spaced and not indented, as the typst paragraph |
 | Pagination | Both 9 pages with the same page labels (i, ii, body 1-6, and the certificate on page 7). Word will paginate slightly differently |
 
-BLOCKED (docx): `check.sh --engine docx` cannot run on this folder for the same reason as the notice (no `checks.yaml` or court-root `court.json` for this doc type). The table of authorities page numbers are verified against the LibreOffice PDF only; a Word page can differ by one. Pages reviewed: every page of `OUTPUT-treefrog-rebuttal-brief.docx.pdf` (9 pages) was rendered at 60 dpi and compared with the typst pages.
+BLOCKED (docx): `check.sh --engine docx` cannot run on this folder for the same reason as the notice (no `checks.yaml` or court-root `court.json` for this doc type). The table of authorities page numbers are verified against the LibreOffice PDF only; a Word page can differ by one. Pages reviewed: every page of `OUTPUT-ttab-trial-brief-treefrogrebuttalbrief.docx.pdf` (9 pages) was rendered at 60 dpi and compared with the typst pages.
 
 ## Searches
 

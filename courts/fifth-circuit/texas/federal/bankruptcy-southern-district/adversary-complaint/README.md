@@ -5,10 +5,10 @@ Folder: `courts/fifth-circuit/texas/federal/bankruptcy-southern-district/adversa
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-camp-mystic-26-03604-adversary-complaint.pdf` (1 filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-camp-mystic.md`: the full body of the complaint (paragraphs 1 to 52, all three counts, the conclusion) and the caption, signature block and debtor footnote. Exemplar footnotes 2 to 4 and Appendix A are not transcribed. |
-| render | ok: `samples/OUTPUT-camp-mystic.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
-| overlay | **not regenerated (fail)**: `tools/overlay.sh` exits 1 because `exemplars/` holds only `SOURCE.md` in this snapshot (the filed PDF is not in the tree or in git). `samples/OVERLAY-camp-mystic.txt` is the page map from the earlier run; no `OVERLAY-camp-mystic.pdf` is present. |
+| exemplar | yes: `usage/SAMPLE-txsb-adversary-complaint-campmystic2603604.pdf` (1 filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-txsb-adversary-complaint-campmystic.md`: the full body of the complaint (paragraphs 1 to 52, all three counts, the conclusion) and the caption, signature block and debtor footnote. Exemplar footnotes 2 to 4 and Appendix A are not transcribed. |
+| render | ok: `usage/OUTPUT-txsb-adversary-complaint-campmystic.typst.pdf`, 13 pages, typst 0.15.0, vendored EB Garamond only, no warnings, exit 0 |
+| overlay | **not regenerated (fail)**: `tools/overlay.sh` exits 1 because `usage/` holds only `SOURCE.md` in this snapshot (the filed PDF is not in the tree or in git). `usage/OVERLAY-camp-mystic.txt` is the page map from the earlier run; no `OVERLAY-camp-mystic.pdf` is present. |
 | pages reviewed | 13 of 13 (fonts pass, 2026-10-14: every page rendered at 60 dpi and viewed on the final layout) |
 
 ## Governing rules
@@ -71,7 +71,7 @@ Not produced by this template (separate filings that may be required with the fi
 
 ## Engines
 
-docx (`docx/`): `build-reference.sh` writes `reference.docx` (styles, footer page number); `complaint.lua` builds the caption, numbered paragraphs, lettered lists and signature block from the sample; `render.sh` runs pandoc, then writes the caption rules and keeps table rows whole. Output: `samples/OUTPUT-camp-mystic.docx` and `.docx.pdf` (LibreOffice, 13 pages; typst is 13 pages).
+docx (`docx/`): `build-reference.sh` writes `reference.docx` (styles, footer page number); `complaint.lua` builds the caption, numbered paragraphs, lettered lists and signature block from the sample; `render.sh` runs pandoc, then writes the caption rules and keeps table rows whole. Output: `usage/OUTPUT-txsb-adversary-complaint-campmystic.docx` and `.docx.pdf` (LibreOffice, 13 pages; typst is 13 pages).
 
 - Matches the typst form: EB Garamond 12 pt; body double spaced as an exact 24 pt line; 1 in margins, letter; 0.5 in first-line indent; numbered paragraphs; headings (centered bold for levels 1 and 2, bold left for level 3); the two-column caption with the right and bottom rules and the case numbers at right; centered page number; footnote text 10 pt (typst measures about 10.2 pt); single-spaced lines at the typst pitch (13.8 pt); signature block kept whole.
 - Differs, and why: the paragraph numbers are typed with a tab, not Word auto-numbering (the numbers are the sample's own); the caption rules are cell borders added by `docx/render.sh`, because pandoc cannot write cell borders and LibreOffice does not draw paragraph borders in a table cell; LibreOffice places exact-line text about 3 pt lower than typst, so a page can hold one line less and a break can fall differently (page counts match on this sample).

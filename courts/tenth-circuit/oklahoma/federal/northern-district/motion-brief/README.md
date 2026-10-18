@@ -4,11 +4,11 @@ Doc type: **motion with brief in support** (one filed document: a motion to dism
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `exemplars/FILED-EXAMPLE-gideon-4-25-cv-00450-motion-brief.pdf` (one filer; see `exemplars/SOURCE.md`) |
-| sample md | `samples/INPUT-gideon-motion-to-dismiss.md`: the full filing (caption, motion, summary, facts, standard, three propositions, GTCA section, conclusion, signature, footnotes 1-2, certificate of service) |
+| exemplar | yes: `usage/SAMPLE-oknd-motion-brief-gideon425cv00450.pdf` (one filer; see `usage/SOURCE.md`) |
+| sample md | `usage/INPUT-oknd-motion-brief-gideonmotiontodismiss.md`: the full filing (caption, motion, summary, facts, standard, three propositions, GTCA section, conclusion, signature, footnotes 1-2, certificate of service) |
 | typeface | face required: none (LGnR2-4(a) sets a 12-pt floor and names no face). Substitute: none needed; **EB Garamond kept** (`docs/FONTS.md`: "no face named"). Fit: not metric-compatible with the Times exemplar; visual only. |
-| render | ok: `samples/OUTPUT-gideon-motion-to-dismiss.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond Regular, Bold, Italic, BoldItalic embedded |
-| overlay | ok: `samples/OVERLAY-gideon-motion-to-dismiss.pdf` and `samples/OVERLAY-gideon-motion-to-dismiss.txt` |
+| render | ok: `usage/OUTPUT-oknd-motion-brief-gideonmotiontodismiss.typst.pdf`, 12 pages, typst 0.15.0, vendored EB Garamond only, no warnings; `pdffonts`: EBGaramond Regular, Bold, Italic, BoldItalic embedded |
+| overlay | ok: `usage/OVERLAY-gideon-motion-to-dismiss.pdf` and `usage/OVERLAY-gideon-motion-to-dismiss.txt` |
 | pages reviewed | 12 of 12 (every page rendered at 70 dpi and viewed, fonts pass; see the table below) |
 
 ## Governing rules
@@ -52,11 +52,11 @@ Not produced by this template: the proposed order (LCvR7-1(c), "A separate propo
 
 ```sh
 export PATH="$HOME/tb/bin:$PATH"   # typst 0.15.0, poppler, ImageMagick, gawk, jq (micromamba env)
-sh tools/render.sh courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief samples/INPUT-gideon-motion-to-dismiss.md
+sh tools/render.sh courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief usage/INPUT-oknd-motion-brief-gideonmotiontodismiss.md
 sh tools/overlay.sh courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief gideon-motion-to-dismiss
 ```
 
-File names follow the tools: `tools/render.sh` writes `samples/OUTPUT-<id>.pdf`; `tools/overlay.sh` writes `samples/OVERLAY-<id>.pdf` and `OVERLAY-<id>.txt`. The brief's `<id>.pdf` / `<id>-overlay.pdf` names do not match the tools, and the tools are not edited here.
+File names follow the tools: `tools/render.sh` writes `usage/OUTPUT-<id>.pdf`; `tools/overlay.sh` writes `usage/OVERLAY-<id>.pdf` and `OVERLAY-<id>.txt`. The brief's `<id>.pdf` / `<id>-overlay.pdf` names do not match the tools, and the tools are not edited here.
 
 The TOC/TOA path is not exercised by the committed sample (the brief is 12 pages). It was tested with a temporary sample (`toc_toa: true`, three authorities, three `toa:` links) that rendered to 15 pages with the TOC on page 2 and the TOA on page 3, and that temporary input was deleted. Re-run it when a brief goes past 15 pages.
 
@@ -98,10 +98,10 @@ Reviewed pages: 12 of 12.
 
 ## Engines
 
-DOCX engine (`docx/`: `reference.docx`, `oknd-motion-brief.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief samples/INPUT-gideon-motion-to-dismiss.md`.
+DOCX engine (`docx/`: `reference.docx`, `oknd-motion-brief.lua`, `build-reference.sh`). Command: `sh tools/render.sh --engine docx courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief usage/INPUT-oknd-motion-brief-gideonmotiontodismiss.md`.
 
 - **Matches the typst form:** EB Garamond 13 pt body and footnotes (footnote text single-spaced), 12 pt centered page number, 1 in margins on letter paper, double-spaced body with 0.5 in first-line indent, the cover (two-line court name, caption with rule, bold centered title), level-1 headings centered bold caps and unnumbered, levels 2-5 labeled I., A., 1., a. with hanging indents, single-spaced block quotations indented 0.5 in both sides, the signature block, and the certificate of service on its own page.
 - **Differs from typst:** line pitch is "double" rather than exactly 24 pt. The caption and signature block are Word tables. Heading labels are typed text. Heading spacing is 12 pt before and after at single line spacing. Word may paginate differently.
 - **Not built (fails loudly):** `toc_toa: true` (indexed TOC and TOA, LCvR7-1(d)) stops the filter with an error. The committed sample is 12 pages and does not use it. Authority links (`toa:KEY`) are written as plain text.
-- **Output:** `samples/OUTPUT-gideon-motion-to-dismiss.docx` is written. `render-docx.sh` then exits 1 (see below).
+- **Output:** `usage/OUTPUT-oknd-motion-brief-gideonmotiontodismiss.docx` is written. `render-docx.sh` then exits 1 (see below).
 - **BLOCKED:** `docx.pdf` (LibreOffice PDF, check gates 0-3): `soffice` is not installed on this box and cannot be installed without root or conda-forge. Visual review of the docx pages: needs the same PDF; 0 docx pages reviewed. `unzip` is not installed, so the zip-integrity step of `tools/render-docx.sh` fails after the `.docx` is written. The XML parts were checked instead with `ziptool` and `xmllint` (15 of 15 well-formed). Opening in Word and LibreOffice without a repair prompt: not done. TOC and TOA: BLOCKED for any brief over 15 pages (see above).

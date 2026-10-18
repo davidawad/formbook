@@ -15,10 +15,10 @@ Re-check cadence: re-check annually each October 1 (37 C.F.R. part 42 is republi
 | CFR-1.4 | 37 C.F.R. § 1.4(d)(2) (S-signature), eCFR as of 2026-10-01 (incorporated by § 42.6(a)(4) through §§ 1.33 and 11.18(a)) | https://www.ecfr.gov/api/versioner/v1/full/2026-10-01/title-37.xml?section=1.4 |
 | TPG | PTAB Consolidated Trial Practice Guide, web edition ("On December 12, 2025, sections II.B.4 and II.D.1.c were deleted and section II.M. and Appendix A-1 were updated"); sections I.C (Electronic Filing), I.D (Mandatory Notices), II.A.3 (Word Count and Page Limits), II.F (Patent Owner Response). The page's archive lists the November 2019 PDF (`tpgnov.pdf`) and a "November 2019, October 2025 webpage" PDF (`trial_practice_guide_nov2019_oct2025_web.pdf`); both were also fetched and the cited passages match. | https://www.uspto.gov/patents/ptab/trial-practice-guide |
 | PTACTS-FAQ | "P-TACTS FAQs", USPTO, PDF created 2025-03-27 (file name dated 2025-03-20), Q. A8 (25 MB upload limit), A10 (document names), D8 (mandatory notices inside the petition), D10 (common petition errors) | https://www.uspto.gov/sites/default/files/documents/p_tacts_faqs_20250320.pdf |
-| EX-SALESFORCE | Petition, *Salesforce.com, Inc. v. WSOU Investments*, IPR2022-00154 (Quinn Emanuel) | `petition/exemplars/` |
-| EX-HUAWEI | Petition, Huawei Technologies v. WSOU Investments, IPR2021-00689 (Fish & Richardson) | `petition/exemplars/` |
-| EX-SWARM | Patent owner response, *Juniper Networks v. Swarm Technology*, IPR2021-01445 (Jennings Strouss & Salmon) | `patent-owner-response/exemplars/` |
-| EX-OMNI | Patent owner response, *Apple Inc. v. Omni MedSci, Inc.*, IPR2021-00453 (Brooks Kushman) | `patent-owner-response/exemplars/` |
+| EX-SALESFORCE | Petition, *Salesforce.com, Inc. v. WSOU Investments*, IPR2022-00154 (Quinn Emanuel) | `petition/usage/` |
+| EX-HUAWEI | Petition, Huawei Technologies v. WSOU Investments, IPR2021-00689 (Fish & Richardson) | `petition/usage/` |
+| EX-SWARM | Patent owner response, *Juniper Networks v. Swarm Technology*, IPR2021-01445 (Jennings Strouss & Salmon) | `patent-owner-response/usage/` |
+| EX-OMNI | Patent owner response, *Apple Inc. v. Omni MedSci, Inc.*, IPR2021-00453 (Brooks Kushman) | `patent-owner-response/usage/` |
 
 Kinds: **M** = mandated by a rule (37 C.F.R. part 42 or a part-1 rule it incorporates). **C** = convention (the rules leave it open; the exemplars that show it are named). **T** = project/tooling rule of this repo. **A** = author responsibility, not machine-checkable (content the filer must supply).
 
@@ -147,6 +147,6 @@ Scope: the patent owner response after institution of an inter partes review (37
 Two filers per doc type are now in hand (2026-10-17):
 
 - petition: EX-SALESFORCE (Quinn Emanuel) and EX-HUAWEI (Fish & Richardson); same patent owner (WSOU), different petitioners and counsel. Both are district-court exhibit copies with an ECF header on each page.
-- patent-owner-response: EX-SWARM (Jennings Strouss & Salmon, PTAB Litigation Blog copy) and EX-OMNI (Brooks Kushman; P-TACTS public download of the response as re-filed as Samsung Ex. 1012 in PGR2025-00064, exhibit label and "PGR2025-00064 Page 000nn" footer added by the re-filer). See `patent-owner-response/exemplars/SOURCE.md`.
+- patent-owner-response: EX-SWARM (Jennings Strouss & Salmon, PTAB Litigation Blog copy) and EX-OMNI (Brooks Kushman; P-TACTS public download of the response as re-filed as Samsung Ex. 1012 in PGR2025-00064, exhibit label and "PGR2025-00064 Page 000nn" footer added by the re-filer). See `patent-owner-response/usage/SOURCE.md`.
 
 Not verified: any PTAB standing order or Board notice beyond the Trial Practice Guide and the P-TACTS FAQ that adds to the paper format; the P-TACTS user guide's PDF requirements (the case-document listing API requires login; the FAQ is the public statement read).

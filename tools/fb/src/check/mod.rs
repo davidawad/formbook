@@ -26,6 +26,7 @@ pub struct Ctx {
     pub ftop: i64,
     pub ph: i64,
     pub second: String,
+    pub stem: String,
     pub env: Env,
 }
 
@@ -100,6 +101,17 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             "fb check: font audit mismatch; run `fb lint fonts`",
         ));
     }
+    let (_, path_findings) = crate::lint::paths::check(std::path::Path::new(&root));
+    if !path_findings.is_empty() {
+        path_findings
+            .iter()
+            .for_each(|finding| eprintln!("{finding}"));
+        return Err(fail(
+            1,
+            "fb check: usage/ layout violations; run `fb lint paths`",
+        ));
+    }
+    let stem = crate::layout::Doc::open(std::path::Path::new(&doc))?.stem;
     let mut env: Env = vec![("LC_ALL".into(), "en_US.UTF-8".into())];
     let alias = court_field(&court, "alias")?;
     let out_dir = format!("{root}/out/check/{alias}/{}", opts::doc_key(&doc, &root));
@@ -125,6 +137,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         ftop: 0,
         ph: 0,
         second: String::new(),
+        stem,
         env,
     };
     c.calib = prepare::calibrate(&c)?;
@@ -157,14 +170,14 @@ fn run(c: &Ctx, alias: &str, only: &str) -> Res<ExitCode> {
         "\nRESULT: {} checks passed, {} failed\n",
         t.pass, t.fail
     ));
-    let stamp = format!("{}/samples/.check-{}.txt", c.doc, c.engine);
+    let stamp = format!("{}/usage/.check-{}.txt", c.doc, c.engine);
     match (t.fail, only.is_empty()) {
         (0, true) => {
             if let Err(e) = std::fs::write(&stamp, stamp::stamp_text(&t.shas)) {
                 eprintln!("tools/check.sh: cannot create {stamp}: {e}");
             }
             out(&format!(
-                "stamp: samples/.check-{}.txt written for engine {}\n",
+                "stamp: usage/.check-{}.txt written for engine {}\n",
                 c.engine, c.engine
             ));
         }
@@ -182,24 +195,34 @@ fn run(c: &Ctx, alias: &str, only: &str) -> Res<ExitCode> {
     }
 }
 
-/// The sample's markdown and PDF (engine-specific name) paths.
+/// The sample's markdown (checks.yaml `md`, usage/INPUT-<stem>-<id>.md) and the engine's render of it
+/// (usage/OUTPUT-<stem>-<id>.<engine>.pdf, from the layout; checks.yaml `pdf` is not consulted).
 fn sample_paths(c: &Ctx, sid: &str) -> Res<(String, String)> {
-    let q = |k: &str| {
-        cfg(
-            &c.env,
-            &c.court,
-            &format!(".samples[] | select(.id == \"{sid}\") | .{k}"),
-        )
-    };
-    let md = format!("{}/{}", c.doc, q("md")?);
-    let pdf = format!("{}/{}", c.doc, q("pdf")?);
-    let base = pdf.strip_suffix(".pdf").unwrap_or(&pdf).to_string();
-    let pdf = match c.engine.as_str() {
-        "latex" => format!("{base}.latex.pdf"),
-        "docx" => format!("{base}.docx.pdf"),
-        _ => pdf,
-    };
-    Ok((md, pdf))
+    let mdrel = cfg(
+        &c.env,
+        &c.court,
+        &format!(".samples[] | select(.id == \"{sid}\") | .md"),
+    )?;
+    Ok((
+        format!("{}/{mdrel}", c.doc),
+        format!("{}/{}", c.doc, render_rel(&c.stem, &mdrel, &c.engine)?),
+    ))
+}
+
+/// usage/OUTPUT-<stem>-<id>.<engine>.pdf for the input usage/INPUT-<stem>-<id>.md.
+fn render_rel(stem: &str, mdrel: &str, engine: &str) -> Res<String> {
+    let file = mdrel.rsplit('/').next().unwrap_or(mdrel);
+    crate::layout::id_of(crate::layout::INPUT, stem, file)
+        .map(|id| crate::layout::Doc::rel(&crate::layout::output_name(stem, id, engine)))
+        .ok_or_else(|| {
+            fail(
+                2,
+                format!(
+                    "fb check: checks.yaml md {mdrel} is not usage/{}",
+                    crate::layout::input_name(stem, "<id>")
+                ),
+            )
+        })
 }
 
 fn sample(c: &Ctx, sid: &str, t: &mut Tally) -> Res<()> {
@@ -340,4 +363,18 @@ fn run_checks(c: &Ctx, s: &Sample, gates: &str, t: &mut Tally) -> Res<()> {
         }
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::render_rel;
+
+    #[test]
+    fn render_paths() {
+        let r = |e: &str| render_rel("ca9", "usage/INPUT-ca9-sweet.md", e).unwrap();
+        assert_eq!(r("typst"), "usage/OUTPUT-ca9-sweet.typst.pdf");
+        assert_eq!(r("latex"), "usage/OUTPUT-ca9-sweet.latex.pdf");
+        assert_eq!(r("docx"), "usage/OUTPUT-ca9-sweet.docx.pdf");
+        assert!(render_rel("ca9", "samples/INPUT-sweet-brief.md", "typst").is_err());
+    }
 }
