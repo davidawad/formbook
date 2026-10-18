@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# Overlay a rendered sample on a filed SAMPLE, page by page.
+# Overlay a rendered sample on its FILED-EXAMPLE, page by page.
 #   red   = our render only
-#   blue  = filed SAMPLE only
+#   blue  = FILED-EXAMPLE only
 #   black = both agree (red multiplied over blue)
 # Pages are paired by text, not index: each rendered page is matched to the
-# SAMPLE page sharing the most words, so a partial transcription still
+# FILED-EXAMPLE page sharing the most words, so a partial transcription still
 # lines up with the pages it came from.
 #
-# usage: tools/overlay.sh <doc-dir> <id> [SAMPLE.pdf]
+# usage: tools/overlay.sh <doc-dir> <id> [FILED-EXAMPLE.pdf]   (<id> = <doctype>[-<n>])
 #   <doc-dir> a court folder or a doc-type folder; every name comes from `fb usage` (tools/fb/src/layout.rs)
-# reads:  `fb usage output <doc-dir> <id>`  = <doc-dir>/usage/OUTPUT-<stem>-<id>.typst.pdf (our render)
-#         `fb usage pair <doc-dir> <id>`    = the SAMPLE-<stem>-*.pdf paired with <id>, unless SAMPLE.pdf is given
-# writes: `fb usage overlay <doc-dir> <id> pdf|txt` = <repo>/.overlay/<doc path>/OVERLAY-<stem>-<id>.pdf and .txt
+# reads:  `fb usage output <doc-dir> <id>`  = <doc-dir>/usage/OUTPUT-<id>.typst.pdf (our render)
+#         `fb usage pair <doc-dir> <id>`    = usage/FILED-EXAMPLE-<id>.pdf (same id), unless a PDF is given
+# writes: `fb usage overlay <doc-dir> <id> pdf|txt` = <repo>/.overlay/<doc path>/OVERLAY-<id>.pdf and .txt
 #         (page map). .overlay/ is gitignored: overlays are generated on demand, never committed.
 # Strict mode. pipefail only where the shell has it (bash, macOS sh); Debian's dash lacks it.
 # shellcheck shell=sh disable=SC3040
@@ -34,7 +34,7 @@ label_font=$ROOT/fonts/eb-garamond/EBGaramond-Regular.otf
   exit 1
 }
 [ -f "$ref" ] || {
-  echo "no SAMPLE pdf: $ref" >&2
+  echo "no FILED-EXAMPLE pdf: $ref" >&2
   exit 1
 }
 
@@ -64,7 +64,7 @@ while [ "$j" -le "$n_ref" ]; do
   j=$((j + 1))
 done
 
-# best SAMPLE page per rendered page: Jaccard similarity of word sets
+# best FILED-EXAMPLE page per rendered page: Jaccard similarity of word sets
 : > "$map"
 i=1
 while [ "$i" -le "$n_ours" ]; do

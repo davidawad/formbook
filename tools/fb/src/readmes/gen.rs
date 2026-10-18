@@ -6,7 +6,7 @@ use std::collections::{BTreeSet, HashMap};
 
 const FLAGS: [&str; 7] = [
     "`rules.md` present",
-    "`usage/SOURCE.md` names at least 2 filed SAMPLEs (different filers)",
+    "`usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)",
     "`usage/` has at least 2 INPUT .md samples",
     "typst engine passes (`usage/.check-typst.txt` valid)",
     "latex engine passes (`usage/.check-latex.txt` valid)",
@@ -238,7 +238,7 @@ impl Inputs<'_> {
                 "- `typst/` Typst template (primary)",
                 "- `latex/` LaTeX template",
                 "- `docx/` Word template (reference.docx + filters)",
-                "- `usage/` filed examples `SAMPLE-<stem>-<id>.pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<stem>-<id>.md`; renders `OUTPUT-<stem>-<id>.typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf`; stamps `.check-<engine>.txt`",
+                "- `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`",
             ]
             .map(String::from),
         );

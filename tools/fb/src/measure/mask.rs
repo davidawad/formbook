@@ -2,7 +2,7 @@
 //! pictures. Built in: the CM/ECF header or footer banner ("Case: 26-1136, 04/09/2026, DktEntry: 23.1,
 //! Page 2 of 54"), clerk stamps ("FILED ... CLERK" blocks in the top right), and text lying on a raster
 //! image (a signature or seal with a text layer). Anything else goes in `usage/MASKS.json`:
-//! `{"SAMPLE-<stem>-x.pdf": [{"page": 1, "bbox": [x0, y0, x1, y1], "why": "clerk stamp"}]}` (`page`
+//! `{"FILED-EXAMPLE-<id>.pdf": [{"page": 1, "bbox": [x0, y0, x1, y1], "why": "clerk stamp"}]}` (`page`
 //! omitted = every page). Those regions are removed from the render too (see diff).
 use super::{Line, Masked, Rect};
 use crate::{fail, Res};

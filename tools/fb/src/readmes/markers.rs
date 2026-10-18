@@ -6,15 +6,19 @@ pub const START: &str = "<!-- fb:generated:start -->";
 pub const END: &str = "<!-- fb:generated:end -->";
 
 /// Checklist wording written by tools/gen_readmes.py before the text keys (fb-9qhl): still generated.
-/// The usage/ layout (fb-pklq) renamed the folder items again.
-const RENAMED: [(&str, &str); 7] = [
+/// The usage/ layout (fb-pklq) renamed the folder items again, and FILED-EXAMPLE- (fb-gzna) the exemplars.
+const RENAMED: [(&str, &str); 8] = [
     (
         "`exemplars/` has at least 2 filed PDFs (different filers)",
-        "`usage/SOURCE.md` names at least 2 filed SAMPLEs (different filers)",
+        "`usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)",
     ),
     (
         "`exemplars/SOURCE.md` names at least 2 filed exemplars (different filers)",
+        "`usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)",
+    ),
+    (
         "`usage/SOURCE.md` names at least 2 filed SAMPLEs (different filers)",
+        "`usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)",
     ),
     (
         "`samples/` has at least 2 .md samples",

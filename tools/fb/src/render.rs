@@ -20,33 +20,34 @@ fn pinned_tnr_dir() -> Res<PathBuf> {
     Ok(PathBuf::from(p))
 }
 
-/// usage/OUTPUT-<stem>-<id>.typst.pdf for usage/INPUT-<stem>-<id>.md (the same stem and id).
+/// usage/OUTPUT-<id>.typst.pdf for usage/INPUT-<id>.md (the same id).
 fn default_out(doc: &Path, sample: &Path) -> Res<PathBuf> {
     let d = crate::layout::Doc::open(doc)?;
     let file = sample
         .file_name()
         .map(|n| n.to_string_lossy().into_owned())
         .unwrap_or_default();
-    crate::layout::id_of(crate::layout::INPUT, &d.stem, &file)
+    crate::layout::id_of(crate::layout::INPUT, &file)
+        .filter(|id| d.accepts(id))
         .map(|id| d.output(id, "typst"))
         .ok_or_else(|| {
             fail(
                 2,
                 format!(
                     "fb render: {file} is not {}; name the output PDF",
-                    crate::layout::input_name(&d.stem, "<id>")
+                    crate::layout::input_name("<doctype>[-<n>]")
                 ),
             )
         })
 }
 
-/// `fb render <doc-dir> <usage/INPUT-<stem>-<id>.md> [out.pdf]` (Typst engine); the default output is
-/// usage/OUTPUT-<stem>-<id>.typst.pdf.
+/// `fb render <doc-dir> <usage/INPUT-<id>.md> [out.pdf]` (Typst engine); the default output is
+/// usage/OUTPUT-<id>.typst.pdf.
 pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
     if args.len() < 2 || args.len() > 3 {
         return Err(fail(
             2,
-            "usage: fb render <doc-dir> <usage/INPUT-<stem>-<id>.md> [out.pdf]",
+            "usage: fb render <doc-dir> <usage/INPUT-<id>.md> [out.pdf]",
         ));
     }
     let root = repo_root()?;

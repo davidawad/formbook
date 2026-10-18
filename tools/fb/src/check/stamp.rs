@@ -91,13 +91,13 @@ mod tests {
     #[test]
     fn stamp_order() {
         let shas = vec![
-            "bb  usage/OUTPUT-ca9-sweet.typst.pdf".to_string(),
-            "aa  usage/OUTPUT-ca9-generic.typst.pdf".to_string(),
-            "cc  usage/OUTPUT-ca9-generic.docx".to_string(),
+            "bb  usage/OUTPUT-opening-brief.typst.pdf".to_string(),
+            "aa  usage/OUTPUT-opening-brief-2.typst.pdf".to_string(),
+            "cc  usage/OUTPUT-opening-brief-2.docx".to_string(),
         ];
         assert_eq!(
             stamp_text(&shas),
-            "PASS\ncc  usage/OUTPUT-ca9-generic.docx\naa  usage/OUTPUT-ca9-generic.typst.pdf\nbb  usage/OUTPUT-ca9-sweet.typst.pdf\n"
+            "PASS\ncc  usage/OUTPUT-opening-brief-2.docx\naa  usage/OUTPUT-opening-brief-2.typst.pdf\nbb  usage/OUTPUT-opening-brief.typst.pdf\n"
         );
         assert_eq!(key2("  ab  cd"), "  cd");
         assert_eq!(key2("ab"), "");

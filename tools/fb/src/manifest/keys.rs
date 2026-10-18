@@ -2,10 +2,10 @@
 //!
 //! Every flag keys on committed TEXT artifacts, never on whether a PDF is on disk, so a checkout without
 //! the binaries (a box snapshot) produces the same manifest as a full one:
-//!   sources    the filed SAMPLEs named in usage/SOURCE.md (`SAMPLE-<stem>-<id>.pdf`)
-//!   inputs     usage/INPUT-<stem>-<id>.md
+//!   sources    the filed examples named in usage/SOURCE.md (`FILED-EXAMPLE-<id>.pdf`)
+//!   inputs     usage/INPUT-<id>.md
 //!   render     the inputs of a render are committed: a template (typst/main.typ for doc types, any
-//!              file in <engine>/ for courts) and at least one usage/INPUT-<stem>-<id>.md
+//!              file in <engine>/ for courts) and at least one usage/INPUT-<id>.md
 //!   pass       a valid stamp usage/.check-<engine>.txt (see `stamp`)
 //!   review     reviews/*.md
 //! Overlays are generated into the gitignored .overlay/ and are not a flag.
@@ -17,10 +17,10 @@ use std::path::Path;
 
 pub const ENGINES: [&str; 3] = layout::ENGINES;
 
-/// Distinct `SAMPLE-<name>.pdf` names in a SOURCE.md, skipping ones that are part of a longer name or
-/// path (`.../other-court/usage/SAMPLE-x.pdf` names another folder's SAMPLE).
+/// Distinct `FILED-EXAMPLE-<id>.pdf` names in a SOURCE.md, skipping ones that are part of a longer
+/// name or path (`.../other-court/usage/FILED-EXAMPLE-x.pdf` names another folder's exemplar).
 pub fn source_samples(text: &str) -> BTreeSet<String> {
-    const P: &str = "SAMPLE-";
+    const P: &str = "FILED-EXAMPLE-";
     let name_char = |c: char| c.is_ascii_alphanumeric() || "._-".contains(c);
     text.match_indices(P)
         .filter(|(i, _)| !text[..*i].ends_with(|c: char| c == '/' || name_char(c)))
@@ -40,24 +40,23 @@ fn sources(dir: &Path) -> char {
     digit(source_samples(&text).len())
 }
 
-/// The INPUT ids of the folder (none when its stem cannot be resolved).
+/// The INPUT ids of the folder (none when it is not under a court.json).
 fn input_ids(dir: &Path) -> Vec<String> {
     Doc::open(dir).map(|d| d.ids(INPUT)).unwrap_or_default()
 }
 
-/// The sample id a stamp entry belongs to: `usage/OUTPUT-<stem>-<id>{.typst.pdf,.latex.pdf,.docx.pdf,.docx}`.
-pub fn stamp_entry_id<'a>(stem: &str, path: &'a str) -> Option<&'a str> {
+/// The sample id a stamp entry belongs to: `usage/OUTPUT-<id>{.typst.pdf,.latex.pdf,.docx.pdf,.docx}`.
+pub fn stamp_entry_id(path: &str) -> Option<&str> {
     let file = path.strip_prefix(USAGE_DIR)?.strip_prefix('/')?;
-    layout::id_of(OUTPUT, stem, file)
+    layout::id_of(OUTPUT, file)
 }
 
 /// A stamp is valid while its first line is PASS, it has more than one line, it lists at least one
-/// file, and every listed file belongs to a committed sample input (usage/INPUT-<stem>-<id>.md). A
+/// file, and every listed file belongs to a committed sample input (usage/INPUT-<id>.md). A
 /// listed file that is on disk must still match its hash; one that is absent (no binaries checked out)
 /// is judged by the text alone.
 pub fn stamp_ok(
     text: &str,
-    stem: &str,
     has_input: impl Fn(&str) -> bool,
     hash_of: impl Fn(&str) -> Option<String>,
 ) -> bool {
@@ -68,8 +67,7 @@ pub fn stamp_ok(
         && text.matches('\n').count() > 1
         && !entries.is_empty()
         && entries.iter().all(|(h, p)| {
-            stamp_entry_id(stem, p).is_some_and(&has_input)
-                && hash_of(p).is_none_or(|got| &got == h)
+            stamp_entry_id(p).is_some_and(&has_input) && hash_of(p).is_none_or(|got| &got == h)
         })
 }
 
@@ -81,7 +79,6 @@ fn stamp(dir: &Path, engine: &str) -> bool {
         .map(|b| {
             stamp_ok(
                 &String::from_utf8_lossy(&b),
-                &doc.stem,
                 |id| doc.input(id).is_file(),
                 |p| sha256_file(&dir.join(p)),
             )
@@ -141,72 +138,63 @@ mod tests {
 
     #[test]
     fn samples_named_in_source() {
-        let src = "## SAMPLE-ca9-avb.pdf\n| File | `SAMPLE-ca9-c1.pdf` (11 pages) |\nagain SAMPLE-ca9-avb.pdf\n\
-                   - `courts/x/usage/SAMPLE-other.pdf`: another folder\nSAMPLE-notapdf.txt\nNO-SAMPLE-x.pdf\n";
+        let src = "## FILED-EXAMPLE-complaint.pdf\n| File | `FILED-EXAMPLE-complaint-2.pdf` (11 pages) |\nagain FILED-EXAMPLE-complaint.pdf\n\
+                   - `courts/x/usage/FILED-EXAMPLE-other.pdf`: another folder\nFILED-EXAMPLE-notapdf.txt\nNO-FILED-EXAMPLE-x.pdf\n";
         let got: Vec<String> = source_samples(src).into_iter().collect();
-        assert_eq!(got, ["SAMPLE-ca9-avb.pdf", "SAMPLE-ca9-c1.pdf"]);
+        assert_eq!(
+            got,
+            [
+                "FILED-EXAMPLE-complaint-2.pdf",
+                "FILED-EXAMPLE-complaint.pdf"
+            ]
+        );
         assert!(source_samples("").is_empty());
     }
 
     #[test]
     fn entry_ids() {
-        let s = "ca9-opening-brief";
+        let id = stamp_entry_id;
         assert_eq!(
-            stamp_entry_id(s, "usage/OUTPUT-ca9-opening-brief-a1.typst.pdf"),
-            Some("a1")
+            id("usage/OUTPUT-opening-brief.typst.pdf"),
+            Some("opening-brief")
         );
         assert_eq!(
-            stamp_entry_id(s, "usage/OUTPUT-ca9-opening-brief-a.latex.pdf"),
-            Some("a")
+            id("usage/OUTPUT-opening-brief-2.latex.pdf"),
+            Some("opening-brief-2")
         );
         assert_eq!(
-            stamp_entry_id(s, "usage/OUTPUT-ca9-opening-brief-a.docx.pdf"),
-            Some("a")
+            id("usage/OUTPUT-opening-brief.docx.pdf"),
+            Some("opening-brief")
         );
-        assert_eq!(
-            stamp_entry_id(s, "usage/OUTPUT-ca9-opening-brief-a.docx"),
-            Some("a")
-        );
-        assert_eq!(
-            stamp_entry_id(s, "usage/OUTPUT-ca9-opening-brief-a.pdf"),
-            None
-        );
-        assert_eq!(stamp_entry_id(s, "usage/OUTPUT-ca9-a.typst.pdf"), None);
-        assert_eq!(
-            stamp_entry_id(s, "samples/OUTPUT-ca9-opening-brief-a.typst.pdf"),
-            None
-        );
-        assert_eq!(
-            stamp_entry_id(s, "usage/OUTPUT-ca9-opening-brief-.typst.pdf"),
-            None
-        );
+        assert_eq!(id("usage/OUTPUT-opening-brief.docx"), Some("opening-brief"));
+        assert_eq!(id("usage/OUTPUT-opening-brief.pdf"), None);
+        assert_eq!(id("samples/OUTPUT-opening-brief.typst.pdf"), None);
+        assert_eq!(id("usage/OUTPUT-.typst.pdf"), None);
     }
 
     #[test]
     fn stamps_judged_without_binaries() {
-        let text = format!("PASS\n{H}  usage/OUTPUT-ca9-a.typst.pdf\n");
-        let input_a = |id: &str| id == "a";
+        let text = format!("PASS\n{H}  usage/OUTPUT-complaint.typst.pdf\n");
+        let input = |id: &str| id == "complaint";
         let ok = |t: &str, i: &dyn Fn(&str) -> bool, h: &dyn Fn(&str) -> Option<String>| {
-            stamp_ok(t, "ca9", i, h)
+            stamp_ok(t, i, h)
         };
         // absent file: the text decides
-        assert!(ok(&text, &input_a, &|_| None));
+        assert!(ok(&text, &input, &|_| None));
         // present and matching, present and stale
-        assert!(ok(&text, &input_a, &|_| Some(H.to_string())));
-        assert!(!ok(&text, &input_a, &|_| Some("0".repeat(64))));
-        // the sample input is gone
+        assert!(ok(&text, &input, &|_| Some(H.to_string())));
+        assert!(!ok(&text, &input, &|_| Some("0".repeat(64))));
+        // the sample input is gone (another folder's stamp names ids with no INPUT here)
         assert!(!ok(&text, &|_| false, &|_| None));
-        // another folder's stem
-        assert!(!stamp_ok(&text, "ca1", input_a, |_| None));
         assert!(!ok(
-            &format!("FAIL\n{H}  usage/OUTPUT-ca9-a.typst.pdf\n"),
-            &input_a,
+            &format!("FAIL\n{H}  usage/OUTPUT-complaint.typst.pdf\n"),
+            &input,
             &|_| None
         ));
-        assert!(!ok("PASS\njunk\n", &input_a, &|_| None));
+        assert!(!ok("PASS\njunk\n", &input, &|_| None));
         assert!(!ok(
-            &format!("PASS\n{H}  usage/OUTPUT-ca9-a.typst.pdf"),
-            &input_a,
+            &format!("PASS\n{H}  usage/OUTPUT-complaint.typst.pdf"),
+            &input,
             &|_| None
         ));
     }

@@ -1,9 +1,9 @@
-//! usage/SOURCE.md: which SAMPLE-*.pdf each record names, its download URL and its recorded
+//! usage/SOURCE.md: which FILED-EXAMPLE-*.pdf each record names, its download URL and its recorded
 //! SHA-256, and writing a missing SHA-256 back in the record's own style.
 //!
 //! SOURCE.md files are hand-written in several styles: key/value tables (`| File | `x.pdf` |` then
 //! `| URL | https://... |`), one wide table with a row per exemplar, `- File:` / `- Fetched from:` lists
-//! (optionally bold labels), and `### SAMPLE-x.pdf` headings. A record starts at a heading naming
+//! (optionally bold labels), and `### FILED-EXAMPLE-x.pdf` headings. A record starts at a heading naming
 //! a file, a `File`-like label naming a file, a wide-table row naming a file, or the first mention of a
 //! file when no record is open; it ends at the next record or heading.
 
@@ -46,17 +46,17 @@ fn is_separator(c: &[String]) -> bool {
         .all(|x| !x.is_empty() && x.chars().all(|ch| matches!(ch, '-' | ':' | ' ')))
 }
 
-/// Every SAMPLE-*.pdf name on a line, in order (not one inside a longer name such as `NO-SAMPLE-x.pdf`).
+/// Every FILED-EXAMPLE-*.pdf name on a line, in order (not one inside a longer name such as `NO-FILED-EXAMPLE-x.pdf`).
 pub fn names(line: &str) -> Vec<String> {
     let mut out = Vec::new();
     let mut rest = line;
-    while let Some(i) = rest.find("SAMPLE-") {
+    while let Some(i) = rest.find("FILED-EXAMPLE-") {
         let tail = &rest[i..];
         let end = tail
             .find(|c: char| !(c.is_ascii_alphanumeric() || matches!(c, '-' | '_' | '.')))
             .unwrap_or(tail.len());
         let cand = tail[..end].trim_end_matches('.');
-        // a path (`../../usage/SAMPLE-x.pdf`) points at another folder
+        // a path (`../../usage/FILED-EXAMPLE-x.pdf`) points at another folder
         let elsewhere = rest[..i].ends_with(|c: char| {
             c == '/' || c.is_ascii_alphanumeric() || matches!(c, '-' | '_' | '.')
         });
@@ -207,7 +207,7 @@ fn records(lines: &[&str]) -> Vec<Rec> {
                     let t = line
                         .trim_start()
                         .trim_start_matches(['-', '*', '+', ' ', '`']);
-                    !ns.is_empty() && (t.starts_with("SAMPLE-") || !open)
+                    !ns.is_empty() && (t.starts_with("FILED-EXAMPLE-") || !open)
                 }
             },
         };

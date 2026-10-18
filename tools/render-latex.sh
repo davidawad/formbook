@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Render one sample to PDF with the court's LaTeX template (engine "latex").
-# Usage: tools/render-latex.sh <doc-dir> <usage/INPUT-<stem>-<id>.md, relative to the doc dir> [out.pdf]
-# Default out: <doc-dir>/usage/OUTPUT-<stem>-<id>.latex.pdf
+# Usage: tools/render-latex.sh <doc-dir> <usage/INPUT-<id>.md, relative to the doc dir> [out.pdf]
+# Default out: <doc-dir>/usage/OUTPUT-<id>.latex.pdf
 #
 # Contract (docs/EVAL-LOOP.md, "Engines"):
 #   <court>/latex/render.sh     if present, it owns the build: sh render.sh <court-dir> <sample.md> <out.pdf>

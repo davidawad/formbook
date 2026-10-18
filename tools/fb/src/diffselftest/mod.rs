@@ -159,7 +159,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         Some(s) => s.clone(),
         None => first_sample(&doc)?,
     };
-    let md = Doc::rel(&layout::input_name(&doc.stem, &sample));
+    let md = Doc::rel(&layout::input_name(&sample));
     let src = std::fs::read_to_string(o.doc.join(&md)).map_err(|e| io(&o.doc.join(&md), e))?;
     println!(
         "diff-selftest {} sample {sample} engine {}",
@@ -278,7 +278,7 @@ fn first_sample(doc: &Doc) -> Res<String> {
             2,
             format!(
                 "fb: no {} in {}",
-                Doc::rel(&layout::input_name(&doc.stem, "*")),
+                Doc::rel(&layout::input_name("*")),
                 doc.dir.display()
             ),
         )

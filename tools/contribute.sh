@@ -219,18 +219,19 @@ DO (kind $KIND)
   1. Research the governing rules for a $DT in $AL from primary sources (court rules, local rules, clerk's
      form requirements). Note rule number, URL and date verified. These decide the layout (tier 1).
   2. Find 1 to 3 real, public filings of this type in this court (CourtListener RECAP, the court's own
-     site, state e-filing archives). Save the PDFs as $FOLDER/usage/SAMPLE-$AL-$DT-<id>.pdf (<id>: lowercase
-     [a-z0-9]+, no hyphens, e.g. the case name). Public court records only: no sealed, redacted-by-mistake
+     site, state e-filing archives). Save the PDFs as $FOLDER/usage/FILED-EXAMPLE-$DT.pdf, then
+     FILED-EXAMPLE-$DT-2.pdf, FILED-EXAMPLE-$DT-3.pdf (no court alias, no case name). Public court records only: no sealed, redacted-by-mistake
      or private documents.
   3. Write $FOLDER/usage/SOURCE.md: for every PDF the file name, filer, case, docket number, date
      filed, the exact URL you downloaded it from, date retrieved. See the first-circuit example.
   4. Write the typst template: $FOLDER/typst/main.typ (entry point; reads the sample via
      --input sample=...) plus $FOLDER/typst/<court>-$DT.typ. Rule-driven and content-agnostic: no
      case-specific text, no coordinates measured off the exemplar. Fonts only from fonts/.
-  5. Write $FOLDER/usage/INPUT-$AL-$DT-<id>.md (markdown with YAML frontmatter) transcribed from the
-     exemplar, and, if you can, a second structurally different fictional INPUT.
-  6. Render: just render $FOLDER      (any typst warning fails) -> usage/OUTPUT-$AL-$DT-<id>.typst.pdf
-     then: just overlay $FOLDER       -> .overlay/$FOLDER/OVERLAY-$AL-$DT-<id>.pdf/.txt (gitignored)
+  5. Write $FOLDER/usage/INPUT-$DT.md (markdown with YAML frontmatter) transcribed from
+     FILED-EXAMPLE-$DT.pdf (same suffix = pair), and, if you can, a second structurally different
+     fictional INPUT-$DT-<n>.md whose <n> has no FILED-EXAMPLE.
+  6. Render: just render $FOLDER      (any typst warning fails) -> usage/OUTPUT-$DT.typst.pdf
+     then: just overlay $FOLDER       -> .overlay/$FOLDER/OVERLAY-$DT.pdf/.txt (gitignored)
   7. Look at EVERY page of the overlay against the exemplar. Fix tier-1 and tier-2 defects; do not chase tier 3.
   8. Write $FOLDER/README.md: rules table (rule, requirement, where the template uses it), file table,
      frontmatter contract, known gaps. Mark BLOCKED items honestly.
@@ -241,9 +242,9 @@ EOF
 
 DO (kind add-exemplar): the template exists but has no filed exemplar to be judged against.
   1. Find 1 to 3 real, public filings of this doc type in this court by different filers.
-  2. Save as $FOLDER/usage/SAMPLE-$AL-$DT-<id>.pdf (<id>: lowercase [a-z0-9]+, no hyphens) and record
+  2. Save as $FOLDER/usage/FILED-EXAMPLE-$DT.pdf (then -2, -3: FILED-EXAMPLE-$DT-2.pdf) and record
      each in $FOLDER/usage/SOURCE.md (file, filer, case, docket no., date filed, exact URL, date retrieved).
-  3. Transcribe one exemplar into $FOLDER/usage/INPUT-$AL-$DT-<id>.md; render it:
+  3. Transcribe FILED-EXAMPLE-$DT-<n>.pdf into $FOLDER/usage/INPUT-$DT-<n>.md (same suffix); render it:
      just render $FOLDER ; just overlay $FOLDER
   4. Review every overlay page; fix tier-1 and tier-2 defects in $FOLDER/typst/ only.
   5. Update $FOLDER/README.md (remove the BLOCKED: no exemplar line, add the exemplar and findings).

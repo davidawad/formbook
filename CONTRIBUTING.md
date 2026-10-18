@@ -49,7 +49,7 @@ Summarised here; the full text is in [AGENTS.md](AGENTS.md) and [docs/EVAL-LOOP.
 - Templates are rule-driven and content-agnostic: no case-specific text, no coordinates measured off a filed PDF, no forced line breaks tuned to one document, no system fonts (compile only through `tools/render.sh`, which treats every typst warning as a failure).
 - Look at every rendered page against the exemplar (`just overlay <folder>`; overlays land in the gitignored `.overlay/` and are not committed). Never claim a page was reviewed that you did not look at.
 - Never set `"status": "done"` in a `court.json`. Do not edit other courts, `tools/`, `docs/`, `data/` or any generated tracker file in a unit PR; one PR is one folder.
-- A folder is complete when it has `README.md`, `typst/main.typ` plus a template file, at least one `usage/SAMPLE-<stem>-<id>.pdf` with `usage/SOURCE.md`, at least one `usage/INPUT-<stem>-<id>.md` with its `usage/OUTPUT-<stem>-<id>.typst.pdf`. `<stem>` is `<court alias>-<doctype>`; `<id>` is lowercase `[a-z0-9]+`, no hyphens (see docs/EVAL-LOOP.md, "Folder layout"). `just lint` checks the names. Copy `courts/first-circuit/court-of-appeals/opening-brief/`.
+- A folder is complete when it has `README.md`, `typst/main.typ` plus a template file, at least one `usage/FILED-EXAMPLE-<doctype>.pdf` with `usage/SOURCE.md`, at least one `usage/INPUT-<doctype>.md` with its `usage/OUTPUT-<doctype>.typst.pdf`. Further copies take a `-<n>` suffix (`FILED-EXAMPLE-<doctype>-2.pdf`); an INPUT pairs with the FILED-EXAMPLE and OUTPUT of the same suffix; no court alias or case name in file names (see docs/EVAL-LOOP.md, "Folder layout"). `just lint` checks the names. Copy `courts/first-circuit/court-of-appeals/opening-brief/`.
 
 ## How verification works
 

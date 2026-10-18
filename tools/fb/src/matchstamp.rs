@@ -1,15 +1,14 @@
 //! `fb match-stamp <doc-dir> [--engine typst|latex|docx] [--sample ID] [--exemplar PDF]`: diff every
-//! sample's render (usage/OUTPUT-<stem>-<id>.<engine>.pdf) against its filed SAMPLE
+//! sample's render (usage/OUTPUT-<id>.<engine>.pdf) against its filed example
 //! (`crate::diff::diff_paths`) and write usage/.match-<engine>.txt (PASS plus the sha256 of every
-//! render and SAMPLE) only when every paired sample passes. Any failure or error removes a stale
+//! render and FILED-EXAMPLE) only when every paired sample passes. Any failure or error removes a stale
 //! stamp. Exit 0 only when stamped.
 //!
-//! Pairing: `--exemplar`, else the SAMPLE-<stem>-<id>.pdf that `crate::layout::pair` picks for the
-//! INPUT id (equal id, else longest shared leading run, ties by shared trailing run). A sample with no
-//! unique SAMPLE is skipped, or is an error when named with `--sample`.
+//! Pairing: `--exemplar`, else FILED-EXAMPLE-<id>.pdf with the INPUT's own id (`crate::layout::pair`).
+//! A sample with no same-id exemplar is skipped, or is an error when named with `--sample`.
 use crate::check::stamp::{sha256, stamp_text};
 use crate::diff::Report;
-use crate::layout::{self, Doc, INPUT, SAMPLE};
+use crate::layout::{self, Doc, FILED, INPUT};
 use crate::{fail, Res};
 use std::path::PathBuf;
 use std::process::ExitCode;
@@ -58,9 +57,9 @@ fn parse_opts(args: &[String]) -> Res<Opts> {
     }
 }
 
-/// usage/OUTPUT-<stem>-<id>.typst.pdf, .latex.pdf or .docx.pdf.
-fn render_name(stem: &str, id: &str, engine: &str) -> String {
-    Doc::rel(&layout::output_name(stem, id, engine))
+/// usage/OUTPUT-<id>.typst.pdf, .latex.pdf or .docx.pdf.
+fn render_name(id: &str, engine: &str) -> String {
+    Doc::rel(&layout::output_name(id, engine))
 }
 
 /// One sample paired with an exemplar; paths relative to the doc dir.
@@ -72,15 +71,12 @@ struct Pair {
 }
 
 /// Pair the samples; skipped samples come back as messages (an error with --sample).
-fn plan(o: &Opts, stem: &str, ids: &[String], samples: &[String]) -> Res<(Vec<Pair>, Vec<String>)> {
+fn plan(o: &Opts, ids: &[String], filed: &[String]) -> Res<(Vec<Pair>, Vec<String>)> {
     let ids: Vec<String> = match &o.sample {
         Some(s) if !ids.contains(s) => {
             return Err(fail(
                 1,
-                format!(
-                    "fb match-stamp: no {}",
-                    Doc::rel(&layout::input_name(stem, s))
-                ),
+                format!("fb match-stamp: no {}", Doc::rel(&layout::input_name(s))),
             ))
         }
         Some(s) => vec![s.clone()],
@@ -96,21 +92,24 @@ fn plan(o: &Opts, stem: &str, ids: &[String], samples: &[String]) -> Res<(Vec<Pa
                     .to_string_lossy()
                     .into_owned(),
             ),
-            None => layout::pair(&id, samples).map(|s| Doc::rel(&layout::sample_name(stem, &s))),
+            None => layout::pair(&id, filed).map(|s| Doc::rel(&layout::filed_name(&s))),
         };
         match (ex, &o.sample) {
             (Some(exemplar), _) => pairs.push(Pair {
-                render: render_name(stem, &id, &o.engine),
+                render: render_name(&id, &o.engine),
                 id,
                 exemplar,
             }),
             (None, Some(_)) => {
                 return Err(fail(
                     1,
-                    format!("fb match-stamp: no unique exemplar for sample {id} (use --exemplar)"),
+                    format!(
+                        "fb match-stamp: no {} for sample {id} (use --exemplar)",
+                        Doc::rel(&layout::filed_name(&id))
+                    ),
                 ))
             }
-            (None, None) => skipped.push(format!("SKIP {id}: no unique exemplar")),
+            (None, None) => skipped.push(format!("SKIP {id}: no {}", layout::filed_name(&id))),
         }
     }
     Ok((pairs, skipped))
@@ -155,7 +154,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     let o = parse_opts(args)?;
     let doc = Doc::open(&o.dir)?;
     let stamp = doc.usage().join(format!(".match-{}.txt", o.engine));
-    let planned = plan(&o, &doc.stem, &doc.ids(INPUT), &doc.ids(SAMPLE));
+    let planned = plan(&o, &doc.ids(INPUT), &doc.ids(FILED));
     let (pairs, skipped) = planned.inspect_err(|_| {
         let _ = std::fs::remove_file(&stamp);
     })?;
@@ -216,66 +215,71 @@ mod tests {
     fn p(id: &str) -> Pair {
         Pair {
             id: id.into(),
-            exemplar: format!("usage/SAMPLE-ca9-{id}.pdf"),
-            render: render_name("ca9", id, "typst"),
+            exemplar: format!("usage/FILED-EXAMPLE-{id}.pdf"),
+            render: render_name(id, "typst"),
         }
     }
 
     #[test]
     fn stamp_only_when_all_pass() {
         let sha = |s: &str| format!("h{}", s.len());
-        let ok = decide(&[(p("a"), Ok(rep(true))), (p("b"), Ok(rep(true)))], sha).unwrap();
+        let ok = decide(
+            &[(p("brief"), Ok(rep(true))), (p("brief-2"), Ok(rep(true)))],
+            sha,
+        )
+        .unwrap();
         assert_eq!(
             ok,
-            "PASS\nh28  usage/OUTPUT-ca9-a.typst.pdf\nh28  usage/OUTPUT-ca9-b.typst.pdf\nh22  usage/SAMPLE-ca9-a.pdf\nh22  usage/SAMPLE-ca9-b.pdf\n"
+            "PASS\nh31  usage/FILED-EXAMPLE-brief-2.pdf\nh29  usage/FILED-EXAMPLE-brief.pdf\nh30  usage/OUTPUT-brief-2.typst.pdf\nh28  usage/OUTPUT-brief.typst.pdf\n"
         );
-        let bad = decide(&[(p("a"), Ok(rep(true))), (p("b"), Ok(rep(false)))], sha).unwrap_err();
+        let bad = decide(
+            &[(p("brief"), Ok(rep(true))), (p("brief-2"), Ok(rep(false)))],
+            sha,
+        )
+        .unwrap_err();
         assert_eq!(
             bad[0],
-            "FAIL b at G2 (usage/OUTPUT-ca9-b.typst.pdf vs usage/SAMPLE-ca9-b.pdf)"
+            "FAIL brief-2 at G2 (usage/OUTPUT-brief-2.typst.pdf vs usage/FILED-EXAMPLE-brief-2.pdf)"
         );
         assert_eq!(bad[1], "  p3: body baseline +1.2pt");
-        let err = decide(&[(p("a"), Err(fail(2, "boom")))], sha).unwrap_err();
-        assert_eq!(err, vec!["ERROR a: boom"]);
+        let err = decide(&[(p("brief"), Err(fail(2, "boom")))], sha).unwrap_err();
+        assert_eq!(err, vec!["ERROR brief: boom"]);
         assert!(decide(&[], sha).is_err());
     }
 
     #[test]
     fn planning() {
         let args = |v: &[&str]| v.iter().map(|s| s.to_string()).collect::<Vec<_>>();
-        let ex = vec!["sweetvmcmahon1".to_string()];
-        let ids = vec!["genericbrief".to_string(), "sweetbrief".to_string()];
+        let ex = vec!["opening-brief".to_string()];
+        let ids = vec!["opening-brief".to_string(), "opening-brief-2".to_string()];
         let o = parse_opts(&args(&["d", "--engine", "latex"])).unwrap();
-        let (pairs, skipped) = plan(&o, "ca9", &ids, &ex).unwrap();
+        let (pairs, skipped) = plan(&o, &ids, &ex).unwrap();
         assert_eq!(pairs.len(), 1);
-        assert_eq!(pairs[0].render, "usage/OUTPUT-ca9-sweetbrief.latex.pdf");
-        assert_eq!(pairs[0].exemplar, "usage/SAMPLE-ca9-sweetvmcmahon1.pdf");
-        assert_eq!(skipped, vec!["SKIP genericbrief: no unique exemplar"]);
-        let o = parse_opts(&args(&["d", "--sample", "genericbrief"])).unwrap();
-        assert!(plan(&o, "ca9", &ids, &ex).is_err());
-        let o = parse_opts(&args(&["d", "--sample", "nope"])).unwrap();
+        assert_eq!(pairs[0].render, "usage/OUTPUT-opening-brief.latex.pdf");
+        assert_eq!(pairs[0].exemplar, "usage/FILED-EXAMPLE-opening-brief.pdf");
         assert_eq!(
-            plan(&o, "ca9", &ids, &ex).unwrap_err().msg,
-            "fb match-stamp: no usage/INPUT-ca9-nope.md"
+            skipped,
+            vec!["SKIP opening-brief-2: no FILED-EXAMPLE-opening-brief-2.pdf"]
+        );
+        let o = parse_opts(&args(&["d", "--sample", "opening-brief-2"])).unwrap();
+        assert!(plan(&o, &ids, &ex).is_err());
+        let o = parse_opts(&args(&["d", "--sample", "opening-brief-9"])).unwrap();
+        assert_eq!(
+            plan(&o, &ids, &ex).unwrap_err().msg,
+            "fb match-stamp: no usage/INPUT-opening-brief-9.md"
         );
         let o = parse_opts(&args(&[
             "d",
             "--sample",
-            "genericbrief",
+            "opening-brief-2",
             "--exemplar",
-            "d/usage/SAMPLE-ca9-x.pdf",
+            "d/usage/FILED-EXAMPLE-opening-brief.pdf",
         ]))
         .unwrap();
-        let (pairs, _) = plan(&o, "ca9", &ids, &ex).unwrap();
-        assert_eq!(pairs[0].exemplar, "usage/SAMPLE-ca9-x.pdf");
-        assert_eq!(
-            render_name("ca9", "x", "docx"),
-            "usage/OUTPUT-ca9-x.docx.pdf"
-        );
-        assert_eq!(
-            render_name("ca9", "x", "typst"),
-            "usage/OUTPUT-ca9-x.typst.pdf"
-        );
+        let (pairs, _) = plan(&o, &ids, &ex).unwrap();
+        assert_eq!(pairs[0].exemplar, "usage/FILED-EXAMPLE-opening-brief.pdf");
+        assert_eq!(render_name("x", "docx"), "usage/OUTPUT-x.docx.pdf");
+        assert_eq!(render_name("x", "typst"), "usage/OUTPUT-x.typst.pdf");
         assert!(parse_opts(&args(&["d", "--engine", "pdf"])).is_err());
     }
 }

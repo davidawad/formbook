@@ -4,9 +4,9 @@
 # Usage: tools/check.sh <court-dir> [--engine typst|latex|docx] [--no-render] [--only SAMPLE_ID]
 #
 # The driver is `fb check` (tools/fb, Rust); the checks themselves are tools/check/lib.sh and the awk files.
-#   --engine  which rendering of the samples to check (default typst): usage/OUTPUT-<stem>-<id>.typst.pdf;
-#             latex checks usage/OUTPUT-<stem>-<id>.latex.pdf, docx checks usage/OUTPUT-<stem>-<id>.docx.pdf
-#             (LibreOffice conversion of OUTPUT-<stem>-<id>.docx). A check in checks.yaml
+#   --engine  which rendering of the samples to check (default typst): usage/OUTPUT-<id>.typst.pdf;
+#             latex checks usage/OUTPUT-<id>.latex.pdf, docx checks usage/OUTPUT-<id>.docx.pdf
+#             (LibreOffice conversion of OUTPUT-<id>.docx). A check in checks.yaml
 #             may carry `engines: [typst]` and `engines_reason:` to run only there; it prints SKIP elsewhere.
 #   On a full green run (no --only) the stamp usage/.check-<engine>.txt is written: PASS plus the sha256 of
 #   every PDF checked (and the .docx). Any failure removes it.

@@ -41,7 +41,7 @@ pub struct Court {
 }
 
 /// One doc-type line. `bits` = template, sample, render, exemplar, gates (0/1 each);
-/// `samples` / `exemplars` are the raw count characters (INPUT files, SAMPLEs named in SOURCE.md).
+/// `samples` / `exemplars` are the raw count characters (INPUT files, FILED-EXAMPLEs named in SOURCE.md).
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct DocType {
     pub alias: String,

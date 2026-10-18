@@ -13,8 +13,8 @@
 #   no folder, doctype is `core` for the court's level   -> kind new-template, priority high
 #   no folder, doctype is `extended` for the level       -> kind new-doctype,  priority normal
 #   folder, no typst/*.typ                               -> kind new-template, priority high (exemplar may exist)
-#   folder + template, no usage/SAMPLE-*.pdf             -> kind add-exemplar, priority high
-#   folder + template + SAMPLE, longest usage/OUTPUT-*.typst.pdf shorter than the doc type's min_pages
+#   folder + template, no usage/FILED-EXAMPLE-*.pdf             -> kind add-exemplar, priority high
+#   folder + template + FILED-EXAMPLE, longest usage/OUTPUT-*.typst.pdf shorter than the doc type's min_pages
 #                                                        -> kind deepen,       priority low
 #   anything else                                        -> complete, not listed
 # Vocabulary: data/doctypes.json. Courts: data/index.json. Court order: data/priority.json.
@@ -71,7 +71,7 @@ jq -r '.courts | to_entries[] | "\(.key)\t\(.value.path)"' data/index.json | whi
     t=0
     for f in "$d"/typst/*.typ; do [ -f "$f" ] && t=1; done
     n=0
-    for f in "$d"/usage/SAMPLE-*.pdf; do [ -f "$f" ] && n=$((n + 1)); done
+    for f in "$d"/usage/FILED-EXAMPLE-*.pdf; do [ -f "$f" ] && n=$((n + 1)); done
     printf '%s\t%s\t%s\t%s\t%s\n' "$alias" "$b" "$t" "$n" "$(max_pages "$d")"
   done
 done > "$TMP/facts.tsv"
@@ -101,7 +101,7 @@ jq -n -c --rawfile facts "$TMP/facts.tsv" \
                      note: (if $f.v.n_ex > 0 then "folder has an exemplar but no typst template" else "folder exists but has no typst template and no exemplar" end)}
                   elif $f.v.n_ex == 0 then
                     {alias: $alias, doctype: $f.d, tier: $tier, kind: "add-exemplar", priority: "high",
-                     note: "template exists but no usage/SAMPLE-*.pdf (BLOCKED: no exemplar)"}
+                     note: "template exists but no usage/FILED-EXAMPLE-*.pdf (BLOCKED: no exemplar)"}
                   elif $f.v.pages > 0 and $f.v.pages < $min then
                     {alias: $alias, doctype: $f.d, tier: $tier, kind: "deepen", priority: "low",
                      note: "longest sample is \($f.v.pages) pages; a realistic \($f.d) runs about \($min)+"}

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Render one sample to .docx and to the LibreOffice PDF of it (engine "docx").
-# Usage: tools/render-docx.sh <doc-dir> <usage/INPUT-<stem>-<id>.md, relative to the doc dir> [out.docx.pdf]
-# Default out: <doc-dir>/usage/OUTPUT-<stem>-<id>.docx.pdf ; the .docx sits beside it as OUTPUT-<stem>-<id>.docx.
+# Usage: tools/render-docx.sh <doc-dir> <usage/INPUT-<id>.md, relative to the doc dir> [out.docx.pdf]
+# Default out: <doc-dir>/usage/OUTPUT-<id>.docx.pdf ; the .docx sits beside it as OUTPUT-<id>.docx.
 # Gates 0 and 1 are measured on the .docx.pdf (Word may paginate slightly differently; see docs/DOCX.md).
 #
 # Contract (docs/EVAL-LOOP.md, "Engines"):

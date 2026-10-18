@@ -2,8 +2,8 @@
 """Build (or refresh) the formbook court tree from data/ (reproducible).
 
 Reads data/courts-db.json, data/scope.json, data/circuits.json. Creates every
-leaf court folder (court.json, empty typst/ latex/ usage/ with
-.gitkeep) and writes data/index.json (alias -> path). Existing court.json files
+leaf court folder (court.json, empty typst/ latex/ with .gitkeep;
+no empty usage/: it appears with the first file it holds) and writes data/index.json (alias -> path). Existing court.json files
 keep their manual fields (status, reviewed_by, notes); nothing here ever writes
 status "done".
 """
@@ -177,7 +177,7 @@ LEVELS = {"supreme", "appellate", "bap", "district", "bankruptcy", "national", "
 for e in entries:
     assert e["level"] in LEVELS, e
     d = D(e["path"])
-    for sub in ("typst", "latex", "usage"):
+    for sub in ("typst", "latex"):
         os.makedirs(os.path.join(d, sub), exist_ok=True)
         gk = os.path.join(d, sub, ".gitkeep")
         if not os.path.exists(gk):

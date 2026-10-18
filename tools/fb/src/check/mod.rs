@@ -26,7 +26,6 @@ pub struct Ctx {
     pub ftop: i64,
     pub ph: i64,
     pub second: String,
-    pub stem: String,
     pub env: Env,
 }
 
@@ -111,7 +110,6 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             "fb check: usage/ layout violations; run `fb lint paths`",
         ));
     }
-    let stem = crate::layout::Doc::open(std::path::Path::new(&doc))?.stem;
     let mut env: Env = vec![("LC_ALL".into(), "en_US.UTF-8".into())];
     let alias = court_field(&court, "alias")?;
     let out_dir = format!("{root}/out/check/{alias}/{}", opts::doc_key(&doc, &root));
@@ -137,7 +135,6 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         ftop: 0,
         ph: 0,
         second: String::new(),
-        stem,
         env,
     };
     c.calib = prepare::calibrate(&c)?;
@@ -195,8 +192,8 @@ fn run(c: &Ctx, alias: &str, only: &str) -> Res<ExitCode> {
     }
 }
 
-/// The sample's markdown (checks.yaml `md`, usage/INPUT-<stem>-<id>.md) and the engine's render of it
-/// (usage/OUTPUT-<stem>-<id>.<engine>.pdf, from the layout; checks.yaml `pdf` is not consulted).
+/// The sample's markdown (checks.yaml `md`, usage/INPUT-<id>.md) and the engine's render of it
+/// (usage/OUTPUT-<id>.<engine>.pdf, from the layout; checks.yaml `pdf` is not consulted).
 fn sample_paths(c: &Ctx, sid: &str) -> Res<(String, String)> {
     let mdrel = cfg(
         &c.env,
@@ -205,21 +202,21 @@ fn sample_paths(c: &Ctx, sid: &str) -> Res<(String, String)> {
     )?;
     Ok((
         format!("{}/{mdrel}", c.doc),
-        format!("{}/{}", c.doc, render_rel(&c.stem, &mdrel, &c.engine)?),
+        format!("{}/{}", c.doc, render_rel(&mdrel, &c.engine)?),
     ))
 }
 
-/// usage/OUTPUT-<stem>-<id>.<engine>.pdf for the input usage/INPUT-<stem>-<id>.md.
-fn render_rel(stem: &str, mdrel: &str, engine: &str) -> Res<String> {
-    let file = mdrel.rsplit('/').next().unwrap_or(mdrel);
-    crate::layout::id_of(crate::layout::INPUT, stem, file)
-        .map(|id| crate::layout::Doc::rel(&crate::layout::output_name(stem, id, engine)))
+/// usage/OUTPUT-<id>.<engine>.pdf for the input usage/INPUT-<id>.md.
+fn render_rel(mdrel: &str, engine: &str) -> Res<String> {
+    let file = mdrel.strip_prefix("usage/").unwrap_or_default();
+    crate::layout::id_of(crate::layout::INPUT, file)
+        .map(|id| crate::layout::Doc::rel(&crate::layout::output_name(id, engine)))
         .ok_or_else(|| {
             fail(
                 2,
                 format!(
                     "fb check: checks.yaml md {mdrel} is not usage/{}",
-                    crate::layout::input_name(stem, "<id>")
+                    crate::layout::input_name("<doctype>[-<n>]")
                 ),
             )
         })
@@ -371,10 +368,10 @@ mod tests {
 
     #[test]
     fn render_paths() {
-        let r = |e: &str| render_rel("ca9", "usage/INPUT-ca9-sweet.md", e).unwrap();
-        assert_eq!(r("typst"), "usage/OUTPUT-ca9-sweet.typst.pdf");
-        assert_eq!(r("latex"), "usage/OUTPUT-ca9-sweet.latex.pdf");
-        assert_eq!(r("docx"), "usage/OUTPUT-ca9-sweet.docx.pdf");
-        assert!(render_rel("ca9", "samples/INPUT-sweet-brief.md", "typst").is_err());
+        let r = |e: &str| render_rel("usage/INPUT-opening-brief-2.md", e).unwrap();
+        assert_eq!(r("typst"), "usage/OUTPUT-opening-brief-2.typst.pdf");
+        assert_eq!(r("latex"), "usage/OUTPUT-opening-brief-2.latex.pdf");
+        assert_eq!(r("docx"), "usage/OUTPUT-opening-brief-2.docx.pdf");
+        assert!(render_rel("samples/INPUT-opening-brief.md", "typst").is_err());
     }
 }

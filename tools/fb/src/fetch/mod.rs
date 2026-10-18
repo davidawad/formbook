@@ -1,5 +1,5 @@
-//! `fb fetch <doc-dir> [--all-missing-only] [--record]`: download the filed SAMPLEs usage/SOURCE.md names
-//! and verify every SAMPLE's SHA-256 against SOURCE.md.
+//! `fb fetch <doc-dir> [--all-missing-only] [--record]`: download the filed examples usage/SOURCE.md names
+//! and verify every FILED-EXAMPLE's SHA-256 against SOURCE.md.
 //!
 //! A missing PDF is downloaded with curl (to a temporary name, kept only when it is a PDF and its hash
 //! matches the recorded one; an unrecorded hash is written into SOURCE.md). A PDF on disk is checked:
@@ -163,13 +163,13 @@ fn one(o: &Opts, ex: &Path, e: &Entry, text: &mut String) -> Line {
     }
 }
 
-/// SAMPLE-*.pdf files in a usage/ directory, sorted.
-pub fn sample_pdfs(ex: &Path) -> Vec<String> {
+/// FILED-EXAMPLE-*.pdf files in a usage/ directory, sorted.
+pub fn filed_pdfs(ex: &Path) -> Vec<String> {
     let mut v: Vec<String> = std::fs::read_dir(ex)
         .map(|rd| {
             rd.filter_map(|d| d.ok())
                 .map(|d| d.file_name().to_string_lossy().into_owned())
-                .filter(|n| n.starts_with("SAMPLE-") && n.ends_with(".pdf"))
+                .filter(|n| n.starts_with("FILED-EXAMPLE-") && n.ends_with(".pdf"))
                 .collect()
         })
         .unwrap_or_default();
@@ -185,7 +185,10 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         .map_err(|e| fail(2, format!("fb fetch: {}: {e}", src.display())))?;
     let entries = source::parse(&orig);
     if entries.is_empty() {
-        println!("{} names no SAMPLE-*.pdf: nothing to fetch", src.display());
+        println!(
+            "{} names no FILED-EXAMPLE-*.pdf: nothing to fetch",
+            src.display()
+        );
     }
     let mut text = orig.clone();
     let mut lines: Vec<Line> = Vec::new();
@@ -197,7 +200,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             .unwrap_or_else(|| e.clone());
         lines.push(one(&o, &ex, &cur, &mut text));
     }
-    for n in sample_pdfs(&ex) {
+    for n in filed_pdfs(&ex) {
         if !entries.iter().any(|e| e.name == n) {
             lines.push(line("UNLISTED", &n, "on disk but not named in SOURCE.md"));
         }

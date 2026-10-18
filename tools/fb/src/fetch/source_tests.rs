@@ -6,7 +6,7 @@ const KV: &str = "# Exemplar source
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-sweet-v-mcmahon-26-1136-opening-brief.pdf` |
+| File | `FILED-EXAMPLE-sweet-v-mcmahon-26-1136-opening-brief.pdf` |
 | URL | https://example.org/a/ED-Opening-Brief.pdf |
 | Docket | https://www.courtlistener.com/docket/1/x/ |
 | SHA-256 | `ED832E885DADABF60DDAF2C8C960C758B2DF5D2B5B2FAE437DF4EF95AB16ABD1` |
@@ -15,7 +15,7 @@ const KV: &str = "# Exemplar source
 
 | Field | Value |
 |---|---|
-| File | `SAMPLE-aca-connects-21-15430-opening-brief.pdf` |
+| File | `FILED-EXAMPLE-aca-connects-21-15430-opening-brief.pdf` |
 | Docket page | https://www.courtlistener.com/docket/2/ |
 | URL fetched from | https://cdn.ca9.uscourts.gov/datastore/21-15430-Opening-brief.pdf |
 | Date retrieved | 2026-10-17 |
@@ -23,23 +23,23 @@ const KV: &str = "# Exemplar source
 
 const LIST: &str = "# Exemplar source
 
-- File: `SAMPLE-gideon-4-25-cv-00450-motion-brief.pdf`
+- File: `FILED-EXAMPLE-gideon-4-25-cv-00450-motion-brief.pdf`
 - Court: United States District Court
 - Fetched from: https://storage.courtlistener.com/recap/x/gov.uscourts.oknd.74003.43.0.pdf (CourtListener RECAP; docket https://www.courtlistener.com/docket/74003/)
 - Date fetched: 2026-10-14
 
-Second filer: not collected; unlike SAMPLE-gideon-4-25-cv-00450-motion-brief.pdf, see README.
+Second filer: not collected; unlike FILED-EXAMPLE-gideon-4-25-cv-00450-motion-brief.pdf, see README.
 ";
 
 const HEAD: &str = "# Exemplars
 
-### SAMPLE-one-1-brief.pdf
+### FILED-EXAMPLE-one-1-brief.pdf
 
 - **Filer:** Someone
 - **URL:** <https://example.org/one.pdf>
 - **SHA-256:** `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`
 
-### SAMPLE-two-2-brief.pdf
+### FILED-EXAMPLE-two-2-brief.pdf
 
 - **Filer:** Someone else
 - **URL:** https://example.org/download?id=2
@@ -49,8 +49,8 @@ const WIDE: &str = "# Exemplars
 
 | File | Case | URL | Date fetched |
 |---|---|---|---|
-| `SAMPLE-banks-25-3320-answering-brief.pdf` | Banks | https://storage.example/banks.pdf | 2026-10-14 |
-| `SAMPLE-burnett-24-2143-answering-brief.pdf` | Burnett | https://storage.example/burnett.pdf | 2026-10-14 |
+| `FILED-EXAMPLE-banks-25-3320-answering-brief.pdf` | Banks | https://storage.example/banks.pdf | 2026-10-14 |
+| `FILED-EXAMPLE-burnett-24-2143-answering-brief.pdf` | Burnett | https://storage.example/burnett.pdf | 2026-10-14 |
 
 How it was found: https://www.courtlistener.com/api/rest/v4/search/?q=x
 ";
@@ -61,7 +61,7 @@ fn key_value_tables() {
     assert_eq!(e.len(), 2);
     assert_eq!(
         e[0].name,
-        "SAMPLE-sweet-v-mcmahon-26-1136-opening-brief.pdf"
+        "FILED-EXAMPLE-sweet-v-mcmahon-26-1136-opening-brief.pdf"
     );
     assert_eq!(
         e[0].url.as_deref(),
@@ -123,8 +123,8 @@ fn wide_table_rows() {
 #[test]
 fn names_on_a_line() {
     assert_eq!(
-        names("see `SAMPLE-a-1.pdf` and SAMPLE-b.pdf. Not SAMPLE-c.txt"),
-        vec!["SAMPLE-a-1.pdf", "SAMPLE-b.pdf"]
+        names("see `FILED-EXAMPLE-a-1.pdf` and FILED-EXAMPLE-b.pdf. Not FILED-EXAMPLE-c.txt"),
+        vec!["FILED-EXAMPLE-a-1.pdf", "FILED-EXAMPLE-b.pdf"]
     );
 }
 
@@ -166,7 +166,7 @@ fn record_hash_after_wide_table() {
     let e = parse(WIDE);
     let out = record_sha(WIDE, &e[0], &h);
     assert!(out.contains(&format!(
-        "2026-10-14 |\n\nSHA-256 of `SAMPLE-banks-25-3320-answering-brief.pdf`: `{h}`\n\nHow"
+        "2026-10-14 |\n\nSHA-256 of `FILED-EXAMPLE-banks-25-3320-answering-brief.pdf`: `{h}`\n\nHow"
     )));
     let again = parse(&out);
     assert_eq!(again[0].sha.as_deref(), Some(h.as_str()));
@@ -176,12 +176,12 @@ fn record_hash_after_wide_table() {
 
 #[test]
 fn mentions_and_paths() {
-    let text = "| Field | Value |\n|---|---|\n| File | `SAMPLE-trek-complaint.pdf` |\n| URL | https://x.org/t.pdf |\n\nNote: `SAMPLE-trek-25-1-complaint.pdf` is a copy (sha256 `eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee`).\n\n`../../usage/SAMPLE-other.pdf` is not an exemplar.\n";
+    let text = "| Field | Value |\n|---|---|\n| File | `FILED-EXAMPLE-trek-complaint.pdf` |\n| URL | https://x.org/t.pdf |\n\nNote: `FILED-EXAMPLE-trek-25-1-complaint.pdf` is a copy (sha256 `eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee`).\n\n`../../usage/FILED-EXAMPLE-other.pdf` is not an exemplar.\n";
     let e = parse(text);
     assert_eq!(e.len(), 2, "{e:?}");
     assert!(e[0].listed);
     assert_eq!(e[0].sha, None, "the copy's hash is not the record's");
-    assert_eq!(e[1].name, "SAMPLE-trek-25-1-complaint.pdf");
+    assert_eq!(e[1].name, "FILED-EXAMPLE-trek-25-1-complaint.pdf");
     assert!(!e[1].listed);
     assert_eq!(e[1].url, None);
     assert_eq!(e[1].sha.as_deref(), Some(&"e".repeat(64)[..]));
@@ -189,7 +189,7 @@ fn mentions_and_paths() {
 
 #[test]
 fn every_recorded_hash_is_kept() {
-    let text = "## 2. SAMPLE-sakar-1-trial-brief.pdf\n\n- URL fetched: https://x.org/b.pdf (bundle sha256 1111111111111111111111111111111111111111111111111111111111111111)\n- sha256 (extract): 2222222222222222222222222222222222222222222222222222222222222222\n";
+    let text = "## 2. FILED-EXAMPLE-sakar-1-trial-brief.pdf\n\n- URL fetched: https://x.org/b.pdf (bundle sha256 1111111111111111111111111111111111111111111111111111111111111111)\n- sha256 (extract): 2222222222222222222222222222222222222222222222222222222222222222\n";
     let e = parse(text);
     assert_eq!(e.len(), 1);
     assert_eq!(e[0].shas, vec!["1".repeat(64), "2".repeat(64)]);
@@ -209,7 +209,7 @@ fn excerpts() {
         "Text layer: yes (text extracted with pdftotext; 14 pages of argument)"
     ));
     assert!(!excerpt_hint("54 pages of 12-point text"));
-    let e = parse("### SAMPLE-h-1.pdf (12 pages; excerpt)\n\n- URL: https://x.org/all.pdf\n\n### SAMPLE-k-2.pdf\n\n- URL: https://x.org/k.pdf\n");
+    let e = parse("### FILED-EXAMPLE-h-1.pdf (12 pages; excerpt)\n\n- URL: https://x.org/all.pdf\n\n### FILED-EXAMPLE-k-2.pdf\n\n- URL: https://x.org/k.pdf\n");
     assert!(e[0].excerpt);
     assert!(!e[1].excerpt);
 }

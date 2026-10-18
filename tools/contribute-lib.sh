@@ -55,7 +55,7 @@ unit_state() { # $1 court_path, $2 doctype
     return
   }
   n=0
-  for f in "$d"/usage/SAMPLE-*.pdf; do [ -f "$f" ] && n=$((n + 1)); done
+  for f in "$d"/usage/FILED-EXAMPLE-*.pdf; do [ -f "$f" ] && n=$((n + 1)); done
   [ "$n" -gt 0 ] || {
     echo add-exemplar
     return
@@ -154,18 +154,18 @@ cmd_verify() {
   for f in "$F"/typst/*.typ; do [ -f "$f" ] && nt=$((nt + 1)); done
   if [ "$nt" -ge 2 ]; then ok "layout: typst template file(s) beside main.typ"; else bad "layout: expected typst/main.typ plus a template file (found $nt .typ files)"; fi
   ne=0
-  for f in "$F"/usage/SAMPLE-*.pdf; do [ -f "$f" ] && ne=$((ne + 1)); done
-  if [ "$ne" -ge 1 ]; then ok "layout: $ne SAMPLE pdf(s)"; else bad "layout: no usage/SAMPLE-*.pdf (a template without a filed exemplar is BLOCKED, not done)"; fi
+  for f in "$F"/usage/FILED-EXAMPLE-*.pdf; do [ -f "$f" ] && ne=$((ne + 1)); done
+  if [ "$ne" -ge 1 ]; then ok "layout: $ne FILED-EXAMPLE pdf(s)"; else bad "layout: no usage/FILED-EXAMPLE-*.pdf (a template without a filed exemplar is BLOCKED, not done)"; fi
   if [ -s "$F/usage/SOURCE.md" ]; then
     ok "layout: usage/SOURCE.md"
-    for f in "$F"/usage/SAMPLE-*.pdf; do
+    for f in "$F"/usage/FILED-EXAMPLE-*.pdf; do
       [ -f "$f" ] || continue
       b=$(basename "$f")
       grep -qF "$b" "$F/usage/SOURCE.md" || bad "source: $b is not described in usage/SOURCE.md"
     done
-    if grep -q 'https\?://' "$F/usage/SOURCE.md"; then ok "source: SOURCE.md records a URL"; else bad "source: SOURCE.md has no http(s) URL for the SAMPLE"; fi
+    if grep -q 'https\?://' "$F/usage/SOURCE.md"; then ok "source: SOURCE.md records a URL"; else bad "source: SOURCE.md has no http(s) URL for the FILED-EXAMPLE"; fi
   else
-    [ "$ne" -ge 1 ] && bad "layout: usage/SOURCE.md missing (every SAMPLE needs its public source URL)"
+    [ "$ne" -ge 1 ] && bad "layout: usage/SOURCE.md missing (every FILED-EXAMPLE needs its public source URL)"
   fi
   ni=0
   for f in "$F"/usage/INPUT-*.md; do [ -f "$f" ] && ni=$((ni + 1)); done

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Render one sample to PDF with the doc folder's typst template (default) or another engine.
-# Usage: tools/render.sh [--engine typst|latex|docx] <doc-dir> <usage/INPUT-<stem>-<id>.md, relative to the doc dir> [out.pdf]
-# Default out: <doc-dir>/usage/OUTPUT-<stem>-<id>.typst.pdf (INPUT and OUTPUT share <stem>-<id>)
-#   latex -> tools/render-latex.sh (OUTPUT-<stem>-<id>.latex.pdf)
-#   docx  -> tools/render-docx.sh  (OUTPUT-<stem>-<id>.docx and .docx.pdf; the PDF is the LibreOffice conversion)
+# Usage: tools/render.sh [--engine typst|latex|docx] <doc-dir> <usage/INPUT-<id>.md, relative to the doc dir> [out.pdf]
+# Default out: <doc-dir>/usage/OUTPUT-<id>.typst.pdf (INPUT and OUTPUT share <id> = <doctype>[-<n>])
+#   latex -> tools/render-latex.sh (OUTPUT-<id>.latex.pdf)
+#   docx  -> tools/render-docx.sh  (OUTPUT-<id>.docx and .docx.pdf; the PDF is the LibreOffice conversion)
 # Typst: fonts are the vendored ones only (--ignore-system-fonts): a missing font is an error,
 # never a silent fallback. Any typst warning is treated as a failure.
 # Strict mode. pipefail only where the shell has it (bash, macOS sh); Debian's dash lacks it.
