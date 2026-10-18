@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Overlay a rendered sample on a filed SAMPLE, page by page.
 #   red   = our render only
 #   blue  = filed SAMPLE only
@@ -13,7 +13,9 @@
 #         `fb usage pair <doc-dir> <id>`    = the SAMPLE-<stem>-*.pdf paired with <id>, unless SAMPLE.pdf is given
 # writes: `fb usage overlay <doc-dir> <id> pdf|txt` = <repo>/.overlay/<doc path>/OVERLAY-<stem>-<id>.pdf and .txt
 #         (page map). .overlay/ is gitignored: overlays are generated on demand, never committed.
-set -eu
+# Strict mode. pipefail only where the shell has it (bash, macOS sh); Debian's dash lacks it.
+# shellcheck shell=sh disable=SC3040
+set -e -u; (set -o pipefail) 2> /dev/null && set -o pipefail
 
 ROOT=$(realpath "$(dirname "$0")/..")
 FB="cargo run -q --release --manifest-path $ROOT/tools/fb/Cargo.toml --"
@@ -37,12 +39,14 @@ label_font=$ROOT/fonts/eb-garamond/EBGaramond-Regular.otf
 }
 
 mkdir -p "$(dirname "$out")"
-tmp=$(mktemp -d)
-trap 'rm -rf "$tmp"' EXIT
+# recursive delete of one directory; an empty path aborts instead of deleting the wrong thing
+safe_rmdir() { rm -r -f -- "${1:?safe_rmdir: empty path}"; }
+tmp=$(mktemp -d) || exit 1
+trap 'safe_rmdir "$tmp"' EXIT
 
 pages() { pdfinfo "$1" | awk '/^Pages:/ {print $2}'; }
 words() { # one lowercased word per line, unique, for page $2 of pdf $1
-  pdftotext -f "$2" -l "$2" "$1" - | tr 'A-Z' 'a-z' | tr -cs 'a-z0-9' '\n' |
+  pdftotext -f "$2" -l "$2" "$1" - | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '\n' |
     awk 'length($0) > 3' | sort -u
 }
 

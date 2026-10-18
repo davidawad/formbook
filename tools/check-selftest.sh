@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # check-selftest.sh: does the checker actually catch defects? Mutation test for tools/check.sh.
 #
 # Usage: tools/check-selftest.sh <court-dir>
@@ -10,7 +10,9 @@
 #
 # Content mutants change the markdown that is rendered (but not the markdown the checks compare against).
 # Layout mutants change the template in a scratch copy of the court folder.
-set -u
+# Strict mode. pipefail only where the shell has it (bash, macOS sh); Debian's dash lacks it.
+# shellcheck shell=sh disable=SC3040
+set -e -u; (set -o pipefail) 2> /dev/null && set -o pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 COURT=$(cd "${1:?usage: tools/check-selftest.sh <court-dir>}" && pwd)
 ALIAS=$(jq -r .alias "$COURT/court.json")
@@ -56,10 +58,12 @@ mutant() {
       return
     }
   fi
-  out=$(sh "$ROOT/tools/check.sh" "$d" --no-render --only "$SAMPLE" 2>&1)
+  out=$(sh "$ROOT/tools/check.sh" "$d" --no-render --only "$SAMPLE" 2>&1) || true # a mutant is meant to fail the checker
   missed=""
   for id in $want; do
-    printf '%s\n' "$out" | grep -q "^  FAIL  $id " || missed="$missed $id"
+    grep -q "^  FAIL  $id " << EOF || missed="$missed $id"
+$out
+EOF
   done
   if [ -z "$missed" ]; then
     echo "caught   $name  (failed: $want)"

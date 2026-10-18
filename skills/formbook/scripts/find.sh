@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # find.sh: locate court folders and the doc types that have a typst template.
 # Usage (from the repo root): sh skills/formbook/scripts/find.sh <alias|text> [doctype]
 #   alias    a key of data/index.json (CourtListener court id, e.g. ca1, cand, nysupct)
@@ -6,7 +6,9 @@
 #   doctype  optional filter on the doc-type folder name (e.g. complaint)
 # Prints per court: "alias<TAB>path<TAB>name", then one "  doctype:" line per subfolder holding typst/main.typ.
 # A court whose template sits at the court root (older layout, e.g. ca9) shows "." as its doc type.
-set -eu
+# Strict mode. pipefail only where the shell has it (bash, macOS sh); Debian's dash lacks it.
+# shellcheck shell=sh disable=SC3040
+set -e -u; (set -o pipefail) 2> /dev/null && set -o pipefail
 [ $# -ge 1 ] || {
   echo "usage: sh skills/formbook/scripts/find.sh <alias|text> [doctype]" >&2
   exit 2
@@ -36,7 +38,7 @@ MATCH=$(printf '%s\n' "$LIST" | awk -F'\t' -v q="$Q" 'tolower($1) == tolower(q)'
 # Fallback: the index can lag the tree; every court folder's court.json carries its own alias.
 [ -n "$MATCH" ] || MATCH=$(find courts -name court.json | while read -r cj; do
   a=$(sed -n 's/^ *"alias": "\(.*\)",$/\1/p' "$cj" | head -1)
-  [ "$(printf %s "$a" | tr A-Z a-z)" = "$(printf %s "$Q" | tr A-Z a-z)" ] || continue
+  [ "$(printf %s "$a" | tr '[:upper:]' '[:lower:]')" = "$(printf %s "$Q" | tr '[:upper:]' '[:lower:]')" ] || continue
   n=$(sed -n 's/^ *"name": "\(.*\)",$/\1/p' "$cj" | head -1)
   printf '%s\t%s\t%s\n' "$a" "$(dirname "$cj")" "$n"
 done)
@@ -56,7 +58,7 @@ printf '%s\n' "$MATCH" | while IFS=$TAB read -r alias path name; do
     if [ -n "$DT" ]; then
       case $rel in "$DT" | */"$DT") ;; *) continue ;; esac
     fi
-    n=$(ls "$d"/usage/INPUT-*.md 2> /dev/null | wc -l | tr -d ' ')
+    n=$(find "$d" -mindepth 2 -maxdepth 2 -path "$d/usage/INPUT-*.md" | wc -l | tr -d ' ')
     printf '  doctype: %s\t(%s sample inputs)\t%s\n' "$rel" "$n" "$d"
   done
 done

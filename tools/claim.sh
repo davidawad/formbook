@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Claim one court for an agent without colliding with other agents.
 #
 # Usage: tools/claim.sh <alias> | --next | --random   [--dry-run]
@@ -16,7 +16,9 @@
 #
 # Prints:  alias: <alias> / path: <court folder> / branch: court/<alias>
 # Next steps (docs: AGENTS.md): git fetch origin court/<alias> && git worktree add .worktrees/<alias> court/<alias>
-set -eu
+# Strict mode. pipefail only where the shell has it (bash, macOS sh); Debian's dash lacks it.
+# shellcheck shell=sh disable=SC3040
+set -e -u; (set -o pipefail) 2> /dev/null && set -o pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
 
@@ -33,7 +35,7 @@ while [ $# -gt 0 ]; do
       exit 2
       ;;
     *)
-      MODE=alias
+      MODE='alias'
       ALIAS=$1
       ;;
   esac
@@ -48,8 +50,11 @@ REMOTE=${CLAIM_REMOTE:-origin}
 BASE=${CLAIM_BASE:-master}
 git fetch -q "$REMOTE" "$BASE"
 SHA=$(git rev-parse "$REMOTE/$BASE")
-TMP=$(mktemp -d)
-trap 'rm -rf "$TMP"' EXIT
+# recursive delete of one directory; an empty path aborts instead of deleting the wrong thing
+# shellcheck disable=SC2329 # invoked from the EXIT trap
+safe_rmdir() { rm -r -f -- "${1:?safe_rmdir: empty path}"; }
+TMP=$(mktemp -d) || exit 1
+trap 'safe_rmdir "$TMP"' EXIT
 git ls-remote --heads "$REMOTE" 'refs/heads/court/*' | sed 's|.*refs/heads/court/||' > "$TMP/claimed"
 git ls-tree -r --name-only "$REMOTE/$BASE" -- courts > "$TMP/tree"
 
@@ -72,7 +77,7 @@ eligible() {
     return 1
   }
   st=$(git show "$REMOTE/$BASE:$p/court.json" | jq -r '.status // "todo"')
-  [ "$st" != done ] || {
+  [ "$st" != "done" ] || {
     echo "$a is done"
     return 1
   }

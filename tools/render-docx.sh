@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Render one sample to .docx and to the LibreOffice PDF of it (engine "docx").
 # Usage: tools/render-docx.sh <doc-dir> <usage/INPUT-<stem>-<id>.md, relative to the doc dir> [out.docx.pdf]
 # Default out: <doc-dir>/usage/OUTPUT-<stem>-<id>.docx.pdf ; the .docx sits beside it as OUTPUT-<stem>-<id>.docx.
@@ -9,8 +9,9 @@
 #   <court>/docx/reference.docx   otherwise: pandoc --reference-doc, plus every <court>/docx/*.lua as a filter.
 # Then: soffice --headless --convert-to pdf. The .docx must also open in Word and LibreOffice without repair:
 # this script checks that it is a valid zip with well-formed XML parts (necessary, not sufficient).
-set -eu
-ROOT=$(cd "$(dirname "$0")/.." && pwd)
+# Strict mode. pipefail only where the shell has it (bash, macOS sh); Debian's dash lacks it.
+# shellcheck shell=sh disable=SC3040
+set -e -u; (set -o pipefail) 2> /dev/null && set -o pipefail
 COURT=$(cd "$1" && pwd)
 SAMPLE=$2
 OUTPDF=${3:-$COURT/usage/$(basename "$SAMPLE" .md | sed 's/^INPUT-/OUTPUT-/').docx.pdf}
@@ -44,19 +45,20 @@ unzip -tq "$DOCX" > /dev/null || {
   echo "render-docx.sh: $DOCX is not a valid zip" >&2
   exit 1
 }
+# recursive delete of one directory; an empty path aborts instead of deleting the wrong thing
+safe_rmdir() { rm -r -f -- "${1:?safe_rmdir: empty path}"; }
+WORK=$(mktemp -d) || exit 1
+trap 'safe_rmdir "$WORK"' EXIT
 if command -v xmllint > /dev/null; then
-  X=$(mktemp -d)
+  X=$WORK/docx-parts
   unzip -q "$DOCX" -d "$X"
   find "$X" -type f \( -name '*.xml' -o -name '*.rels' \) | while IFS= read -r part; do
     xmllint --noout "$part" 2> /dev/null || {
-      echo "render-docx.sh: ${part#$X/} is not well-formed XML" >&2
+      echo "render-docx.sh: ${part#"$X"/} is not well-formed XML" >&2
       exit 1
     }
   done || exit 1
-  rm -rf "$X"
 fi
-WORK=$(mktemp -d)
-trap 'rm -rf "$WORK"' EXIT
 "$SOFFICE" "-env:UserInstallation=file://$WORK/profile" --headless --convert-to pdf --outdir "$WORK" "$DOCX" > "$WORK/soffice.log" 2>&1 || {
   cat "$WORK/soffice.log" >&2
   exit 1

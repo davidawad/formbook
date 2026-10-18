@@ -1,0 +1,19 @@
+{
+  "issues": {},
+  "branches": {
+    "docs/showcase/make-screenshots.sh": 10,
+    "skills/formbook/scripts/find.sh": 23,
+    "skills/formbook/scripts/new-filing.sh": 10,
+    "skills/formbook/scripts/render-filing.sh": 5,
+    "tools/check-selftest.sh": 16,
+    "tools/claim.sh": 22,
+    "tools/contribute-lib.sh": 86,
+    "tools/contribute.sh": 81,
+    "tools/overlay.sh": 11,
+    "tools/render-docx.sh": 20,
+    "tools/render-latex.sh": 17,
+    "tools/render.sh": 8,
+    "tools/worklist.sh": 31
+  },
+  "array_expansions": {}
+}

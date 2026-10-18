@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Generate data/worklist.json: every open unit of work in the formbook tree.
 #
 # Usage: sh tools/worklist.sh [--stdout] [--check]
@@ -19,11 +19,13 @@
 #   anything else                                        -> complete, not listed
 # Vocabulary: data/doctypes.json. Courts: data/index.json. Court order: data/priority.json.
 # Output is deterministic (no timestamps), sorted by id, so regenerating produces a clean diff.
-set -eu
+# Strict mode. pipefail only where the shell has it (bash, macOS sh); Debian's dash lacks it.
+# shellcheck shell=sh disable=SC3040
+set -e -u; (set -o pipefail) 2> /dev/null && set -o pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
 
-MODE=write
+MODE='write'
 for a in "$@"; do
   case $a in
     --stdout) MODE=stdout ;;
@@ -38,8 +40,10 @@ done
 HAVE_PDFINFO=0
 command -v pdfinfo > /dev/null 2>&1 && HAVE_PDFINFO=1
 
-TMP=$(mktemp -d)
-trap 'rm -rf "$TMP"' EXIT
+# recursive delete of one directory; an empty path aborts instead of deleting the wrong thing
+safe_rmdir() { rm -r -f -- "${1:?safe_rmdir: empty path}"; }
+TMP=$(mktemp -d) || exit 1
+trap 'safe_rmdir "$TMP"' EXIT
 
 # longest typst-engine OUTPUT pdf in folder $1, in pages (0 if none or no pdfinfo)
 max_pages() {
@@ -50,7 +54,7 @@ max_pages() {
   }
   for o in "$1"/usage/OUTPUT-*.typst.pdf; do
     [ -f "$o" ] || continue
-    p=$(pdfinfo "$o" 2> /dev/null | awk '/^Pages:/ {print $2}')
+    p=$(pdfinfo "$o" 2> /dev/null | awk '/^Pages:/ {print $2}') || p=""
     [ -n "$p" ] && [ "$p" -gt "$best" ] && best=$p
   done
   echo "$best"
