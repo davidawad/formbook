@@ -190,7 +190,7 @@ Courts under `courts` (375).
 | [United States Bankruptcy Court, S.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-southern-district) | `ilsb` | in progress | — | — | — | 14 |
 | [District Court, C.D. Illinois](seventh-circuit/illinois/federal/central-district) | `ilcd` | in progress | — | — | — | 14 |
 | [District Court, N.D. Illinois](seventh-circuit/illinois/federal/northern-district) | `ilnd` | up for review | — | — | — | 14 |
-| [District Court, S.D. Illinois](seventh-circuit/illinois/federal/southern-district) | `ilsd` | in progress | — | — | — | 14 |
+| [District Court, S.D. Illinois](seventh-circuit/illinois/federal/southern-district) | `ilsd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-northern-district) | `innb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-southern-district) | `insb` | in progress | — | — | — | 14 |
 | [District Court, N.D. Indiana](seventh-circuit/indiana/federal/northern-district) | `innd` | in progress | — | — | — | 14 |
@@ -216,7 +216,7 @@ Courts under `courts` (375).
 | [United States Bankruptcy Court, S.D. Iowa](eighth-circuit/iowa/federal/bankruptcy-southern-district) | `iasb` | in progress | — | — | — | 0 |
 | [District Court, N.D. Iowa](eighth-circuit/iowa/federal/northern-district) | `iand` | in progress | — | — | — | 0 |
 | [District Court, S.D. Iowa](eighth-circuit/iowa/federal/southern-district) | `iasd` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, D. Minnesota](eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Minnesota](eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | up for review | — | — | — | 14 |
 | [District Court, D. Minnesota](eighth-circuit/minnesota/federal/district) | `mnd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Missouri](eighth-circuit/missouri/federal/bankruptcy-eastern-district) | `moeb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Missouri](eighth-circuit/missouri/federal/bankruptcy-western-district) | `mowb` | up for review | — | — | — | 14 |

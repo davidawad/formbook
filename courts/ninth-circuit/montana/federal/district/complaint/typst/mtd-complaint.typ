@@ -19,7 +19,7 @@
 // The vertical gap between two blocks, so that the first line of the next block lands one line-pitch
 // below the last line of the previous one: the pitch minus EB Garamond's 0.65 em line box (measured).
 #let gap = line-pitch - 0.65em
-#let margins = (top: 1in, bottom: 1in, left: 1in, right: 1in)   // MT-FORM-001 (L.R. 1.5(a)(1)): one-inch margins
+#let margins = (top: 1in, bottom: 1in + 4pt, left: 1in, right: 1in)   // MT-FORM-001 (L.R. 1.5(a)(1)): one-inch margins
 #let para-indent = 0.5in                // first-line indent of numbered paragraphs
 #let heading-tab = 0.5in
 #let footer-size = 14pt                 // page number at the foot of every page (MT-FORM-004, L.R. 1.5(a)(3))
@@ -166,12 +166,12 @@
       continue
     } else if t.starts-with("#") {
       cmarker.render(t, raw-typst: false, smart-punctuation: true)
-    } else if t.starts-with("%") {
+    } else if t.starts-with("~ ") {
       // A paragraph the rules leave unnumbered (the prayer's lead-in, the jury demand): `%` marks it.
       // sticky: the paragraph stays with the signature block after it, so a signature never stands alone.
       block(width: 100%, below: gap, sticky: true, {
         set par(leading: body-leading, first-line-indent: 0pt)
-        cmarker.render(t.slice(1).trim(), raw-typst: false, smart-punctuation: true)
+        cmarker.render(t.slice(2).trim(), raw-typst: false, smart-punctuation: true)
       })
     } else if t.starts-with(regex("^[-*+][ \\t]|^\\d+\\.[ \\t]")) {
       // Lists (the prayer's lettered items) are not numbered as paragraphs. A list may break across pages.

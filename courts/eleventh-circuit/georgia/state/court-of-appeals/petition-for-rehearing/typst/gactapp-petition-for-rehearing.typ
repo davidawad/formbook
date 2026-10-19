@@ -18,7 +18,7 @@
 #let type-size = 14pt                   // Rule 2 (c) (3): serif, proportionally spaced, 14-point or larger, footnotes included
 #let body-leading = 1.65em              // Rule 2 (c) (2): no less than double spacing (baseline pitch about 32.3 pt = 2 x the 1.15 em single line at 14 pt)
 #let single-leading = 0.35em            // Rule 2 (c) (2) exclusions: caption, headings, block quotations, footnotes
-#let margins = (top: 1in, bottom: 1in, x: 1in)  // Rule 24 (c): not less than one inch at top, sides and bottom
+#let margins = (top: 1in + 4pt, bottom: 1in + 4pt, x: 1in)  // Rule 24 (c): not less than one inch at top, sides and bottom
 #let para-indent = 0.5in
 #let sig-indent = 3.25in
 #let toc-depth = 3

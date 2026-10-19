@@ -152,7 +152,7 @@
 }
 
 /// The body as one flow of paragraphs. Each blank-line-separated chunk of markdown that is neither a heading
-/// nor a list is one numbered paragraph (Fed. R. Civ. P. 10(b)); a chunk starting with "^^ " is unnumbered text
+/// nor a list is one numbered paragraph (Fed. R. Civ. P. 10(b)); a chunk starting with "~ " is unnumbered text
 /// (a WHEREFORE clause, a jury demand). A footnote definition is merged into the chunk before it, so its
 /// reference and text are rendered together. Paragraph spacing equals the double-spacing pitch, so consecutive
 /// paragraphs keep the same baseline grid as the lines inside them. Headings are sticky blocks (kept with the
@@ -176,8 +176,8 @@
       // Markdown list: lettered items (A., B., ...) through the enum rule set in gand-complaint().
       out += cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
     } else {
-      let unnumbered = t.starts-with("^^ ")
-      let text-md = if unnumbered { t.slice(3) } else { t }
+      let unnumbered = t.starts-with("~ ")
+      let text-md = if unnumbered { t.slice(2) } else { t }
       let lead = if unnumbered {
         h(para-indent)
       } else {
@@ -194,7 +194,7 @@
 #let gand-complaint(meta, body) = {
   set page(
     paper: "us-letter",
-    margin: margin,
+    margin: (top: margin + 4pt, bottom: margin + 4pt, left: margin, right: margin),
     footer: page-footer(),
   )
   set text(font: font-family, size: type-size, lang: "en")

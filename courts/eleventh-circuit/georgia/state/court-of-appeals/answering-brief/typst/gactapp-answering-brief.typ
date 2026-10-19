@@ -139,7 +139,7 @@
 #let gactapp-brief(meta, body) = {
   set document(title: need(meta, "brief_title"))
   // Rule 24 (e): every page numbered sequentially with an Arabic numeral at the bottom; the cover is page 1.
-  set page(paper: "us-letter", margin: page-margin, numbering: "1", number-align: center + bottom)
+  set page(paper: "us-letter", margin: (x: page-margin, top: page-margin + 4pt, bottom: page-margin + 4pt), numbering: "1", number-align: center + bottom)
   set text(font: font-family, size: type-size, lang: "en", hyphenate: false)
   set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: false)
   set heading(numbering: none)
