@@ -103,7 +103,7 @@ Defendant Patrick Cupillari is the principal of Skunk Labs. The other New Jersey
 
 As set forth below, even deeming the allegations of fact contained in the Amended Complaint as true, and considering the exhibits attached to the initial Complaint, and matters of public record, including the pre-petition District Court suits, and exhibits attached to them, the Court should dismiss the Amended Complaint with regard to the New Jersey Based Defendants.
 
-Federal Rule 12(b)(6) allows a party to move for the dismissal of a complaint for "failure to state a claim upon which relief can be granted." To survive a motion to dismiss, "a complaint must contain sufficient factual matter, accepted as true, to 'state a claim to relief that is plausible on its face.'" Tolon v. Hollingsworth LLC, 2023 U.S. Dist. LEXIS 200470, at *2 (W.D. Tex. Nov. 7, 2023) (quoting Ashcroft v. Iqbal, 556 U.S. 662, 678 (2009)). "A claim has facial plausibility when the plaintiff pleads factual content that allows the court to draw the reasonable inference that the defendant is liable for the misconduct alleged." Id. at *3 (quoting Iqbal, 556 U.S. at 678).
+Federal Rule 12(b)(6) allows a party to move for the dismissal of a complaint for "failure to state a claim upon which relief can be granted." To survive a motion to dismiss, "a complaint must contain sufficient factual matter, accepted as true, to 'state a claim to relief that is plausible on its face.'" Tolon v. Hollingsworth LLC, 2023 U.S. Dist. LEXIS 200470, at \*2 (W.D. Tex. Nov. 7, 2023) (quoting Ashcroft v. Iqbal, 556 U.S. 662, 678 (2009)). "A claim has facial plausibility when the plaintiff pleads factual content that allows the court to draw the reasonable inference that the defendant is liable for the misconduct alleged." Id. at \*3 (quoting Iqbal, 556 U.S. at 678).
 
 # THE AMENDED COMPLAINT
 
@@ -141,7 +141,7 @@ Also, here too, the plaintiffs raise allegations inconsistent with earlier parag
 
 Finally, at the very least, the plaintiffs fail to satisfy Rule 8 because they allege only that Brand Builders assisted in the recruitment of the plaintiffs, without any specifics.
 
-The Texas Supreme Court has adopted a version of the Howey test to determine when investment contracts qualify as securities under the Texas Securities Act. Carr v. Barnett, 2022 U.S. Dist. LEXIS 89196, at *16-17 (N.D. Tex. May 18, 2022) (citing Life Partners, Inc. v. Arnold, 464 S.W.3d 660, 670 (Tex. 2015)).
+The Texas Supreme Court has adopted a version of the Howey test to determine when investment contracts qualify as securities under the Texas Securities Act. Carr v. Barnett, 2022 U.S. Dist. LEXIS 89196, at \*16-17 (N.D. Tex. May 18, 2022) (citing Life Partners, Inc. v. Arnold, 464 S.W.3d 660, 670 (Tex. 2015)).
 
 ## As for the Fraudulent Transfer Claim
 
