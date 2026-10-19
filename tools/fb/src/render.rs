@@ -157,6 +157,7 @@ pub fn render_one(
     warnings: Warnings,
 ) -> Res<()> {
     std::env::set_var("SOURCE_DATE_EPOCH", REPRO_EPOCH);
+    std::env::set_var("FORCE_SOURCE_DATE", "1");
     let sample_arg = if sample.is_absolute() {
         sample.to_path_buf()
     } else {

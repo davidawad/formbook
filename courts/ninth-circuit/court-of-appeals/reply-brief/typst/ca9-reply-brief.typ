@@ -527,7 +527,7 @@
     // marker, a thin space, then the note (typst's default runs them together)
     let note = it.note
     let num = numbering(note.numbering, ..counter(footnote).at(note.location()))
-    [#super(num)#h(0.25em)#note.body]
+    block(breakable: false)[#super(num)#h(0.25em)#note.body]   // a note is never split across pages
   }
   show quote.where(block: true): it => block(above: 1em, below: 1em, pad(left: para-indent, right: para-indent, {
     set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.9em)

@@ -550,7 +550,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](courts/ninth-circuit/bankruptcy-appellate-panel) | `bap9` | in progress | — | — | — | 14 |
-| [Court of Appeals for the Ninth Circuit](courts/ninth-circuit/court-of-appeals) | `ca9` | in progress | pass | built | — | 71 |
+| [Court of Appeals for the Ninth Circuit](courts/ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | built | — | 71 |
 
 ### Alaska
 
@@ -844,11 +844,11 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Sixth Circuit | 30 | 0 | 3 | 27 | 0 | 0.0% | 10.0% | 0 | 0 | 0 | 7.9% |
 | Seventh Circuit | 22 | 0 | 5 | 16 | 1 | 0.0% | 22.7% | 0 | 0 | 0 | 13.3% |
 | Eighth Circuit | 39 | 0 | 6 | 32 | 1 | 0.0% | 15.3% | 0 | 0 | 0 | 11.1% |
-| Ninth Circuit | 65 | 0 | 6 | 55 | 4 | 0.0% | 9.2% | 1 | 0 | 0 | 12.7% |
+| Ninth Circuit | 65 | 0 | 7 | 54 | 4 | 0.0% | 10.7% | 1 | 0 | 0 | 12.7% |
 | Tenth Circuit | 34 | 0 | 0 | 31 | 3 | 0.0% | 0.0% | 0 | 0 | 0 | 4.5% |
 | Eleventh Circuit | 32 | 0 | 0 | 32 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 5.6% |
 | D.C. Circuit | 4 | 0 | 2 | 2 | 0 | 0.0% | 50.0% | 0 | 0 | 0 | 14.0% |
-| **Total** | 376 | 0 | 49 | 303 | 24 | 0.0% | 13.0% | 1 | 0 | 0 | 9.5% |
+| **Total** | 376 | 0 | 50 | 302 | 24 | 0.0% | 13.2% | 1 | 0 | 0 | 9.5% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -867,9 +867,9 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 22 |
 | Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 19 |
 | Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 30 |
-| Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 28 |
+| Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 29 |
 | Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 23 |
 | Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 29 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 6 |
-| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 281 |
+| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 282 |
 <!-- tracker:end -->

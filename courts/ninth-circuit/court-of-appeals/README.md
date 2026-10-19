@@ -5,7 +5,7 @@
 - CourtListener: [ca9](https://www.courtlistener.com/?court=ca9)
 - Level: appellate
 - Circuit: `ca9`
-- Status: **in progress** (71%); manual status in `court.json`: `todo`
+- Status: **up for review** (71%); manual status in `court.json`: `todo`
 
 ## Checklist
 
@@ -24,13 +24,13 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 ## Doc folders
 
-2 of 3 doc folders with an INPUT pass the typst eval.
+3 of 3 doc folders with an INPUT pass the typst eval.
 
 | Doc folder | Status | Eval |
 |---|---|---|
 | [(court root)](.) | up for review | pass |
 | [answering-brief](answering-brief) | up for review | pass |
-| [reply-brief](reply-brief) | in progress | not passing |
+| [reply-brief](reply-brief) | up for review | pass |
 
 ## Folders
 
