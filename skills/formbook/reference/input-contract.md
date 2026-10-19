@@ -87,5 +87,5 @@ Body rules for this family (`opening-brief`, `answering-brief`, `reply-brief`, c
 
 1. Read `<doctype>/README.md` "Markdown contract".
 2. `grep -n 'need(meta' <doctype>/typst/*.typ` for required keys.
-3. Render the unmodified sample first (`render-filing.sh`), then change one thing at a time.
+3. Render the unmodified sample first (`just render-filing`), then change one thing at a time.
 4. Make the build fail on purpose (drop one key) to read the exact error message; the messages name the key.

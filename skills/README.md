@@ -33,7 +33,7 @@ Paste or attach `skills/formbook/SKILL.md`, and give the model a shell in a chec
 
 ```sh
 sh tools/bootstrap.sh && export PATH="$HOME/.local/share/formbook/env/bin:$PATH"
-sh skills/formbook/scripts/find.sh ca1
-sh skills/formbook/scripts/new-filing.sh ca1 opening-brief ./out
-sh skills/formbook/scripts/render-filing.sh courts/first-circuit/court-of-appeals/opening-brief ./out/filing.md ./out/filing.pdf
+just find ca1
+just new-filing ca1 opening-brief ./out
+just render-filing courts/first-circuit/court-of-appeals/opening-brief ./out/filing.md ./out/filing.pdf
 ```

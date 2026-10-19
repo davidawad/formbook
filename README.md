@@ -18,16 +18,16 @@ These templates are not legal advice and do not check your arguments or citation
 
 Anyone can point their own AI agent at this repo to add courts and document types. Work is split into small units (one court, one document type) listed in `data/worklist.json`; you take one, build it against a real public exemplar, and open a PR. Paste this into Claude Code, Codex, or any agent with a shell and git:
 
-> Clone github.com/davidawad/formbook and read CONTRIBUTING.md and AGENTS.md. Run `sh tools/bootstrap.sh`, then `sh tools/contribute.sh pick`. Claim the unit it gives you with `sh tools/contribute.sh claim <id>`, do exactly what `sh tools/contribute.sh brief <id>` says inside the claimed worktree, make `sh tools/contribute.sh verify <id>` pass, then `sh tools/contribute.sh submit <id>`. Use only public court records, record every source URL, and look at every rendered page before submitting. If you are blocked on a decision only a human can make, stop and say so in the PR.
+> Clone github.com/davidawad/formbook and read CONTRIBUTING.md and AGENTS.md. Run `sh tools/bootstrap.sh`, then `just contribute pick`. Claim the unit it gives you with `just contribute claim <id>`, do exactly what `just contribute brief <id>` says inside the claimed worktree, make `just contribute verify <id>` pass, then `just contribute submit <id>`. Use only public court records, record every source URL, and look at every rendered page before submitting. If you are blocked on a decision only a human can make, stop and say so in the PR.
 
 The loop that prompt runs:
 
 ```sh
-sh tools/contribute.sh pick            # get a unit; you take the one you are given
-sh tools/contribute.sh claim <id>      # atomic claim (branch contrib/<id>, or a draft PR from a fork)
-sh tools/contribute.sh brief <id>      # prints the exact task
-sh tools/contribute.sh verify <id>     # mechanical floor: layout, renders, exemplar source
-sh tools/contribute.sh submit <id>     # reruns verify, opens the PR
+just contribute pick            # get a unit; you take the one you are given
+just contribute claim <id>      # atomic claim (branch contrib/<id>, or a draft PR from a fork)
+just contribute brief <id>      # prints the exact task
+just contribute verify <id>     # mechanical floor: layout, renders, exemplar source
+just contribute submit <id>     # reruns verify, opens the PR
 ```
 
 **The agent skill.** [`skills/formbook`](skills/formbook/SKILL.md) teaches an agent to use these templates (find the court, start from a sample, render, look at every page) and to write a new one when a court or document type is missing. To install it for Claude Code, symlink it into a skills directory:
@@ -41,14 +41,14 @@ For other agents (Codex, Cursor, a plain LLM with a shell), point them at `skill
 
 ## Use a template
 
-Needs `typst`, poppler and `jq` on your PATH. On Linux, `sh tools/bootstrap.sh` installs the pinned toolchain without root (its micromamba download is linux-64 only; on macOS install typst, poppler and jq with Homebrew instead; the templates rendered here with typst 0.15.1).
+Needs `typst`, poppler, `jq`, `just` and `cargo` (it builds `tools/fb`, which runs every recipe) on your PATH. On Linux, `sh tools/bootstrap.sh` installs the pinned toolchain without root (its micromamba download is linux-64 only; on macOS install typst, poppler, jq and just with Homebrew instead; the templates rendered here with typst 0.15.1).
 
 ```sh
 export PATH="$HOME/.local/share/formbook/env/bin:$PATH"                 # if you used bootstrap.sh
-sh skills/formbook/scripts/find.sh ca1                                   # court folder and the doc types that have a template
-sh skills/formbook/scripts/new-filing.sh ca1 opening-brief ./my-filing   # copies the sample markdown to ./my-filing/filing.md
+just find ca1                                   # court folder and the doc types that have a template
+just new-filing ca1 opening-brief ./my-filing   # copies the sample markdown to ./my-filing/filing.md
 # edit ./my-filing/filing.md: replace every party, fact and cite
-sh skills/formbook/scripts/render-filing.sh courts/first-circuit/court-of-appeals/opening-brief ./my-filing/filing.md ./my-filing/filing.pdf
+just render-filing courts/first-circuit/court-of-appeals/opening-brief ./my-filing/filing.md ./my-filing/filing.pdf
 ```
 
 Then look at every page of the PDF. Each doc type's `README.md` lists its rules, markdown contract and known gaps.

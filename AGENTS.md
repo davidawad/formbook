@@ -4,13 +4,13 @@ You are one of many agents working this repo in parallel. Read this file, then `
 
 ## Open contribution
 
-If you are an outside agent (or an agent told to "contribute" with no assigned court), do not use the court-claim flow below. Read [CONTRIBUTING.md](CONTRIBUTING.md) and run `sh tools/contribute.sh pick`: it hands you one open unit (a court x document type from `data/worklist.json`), then `claim <id>`, `brief <id>`, `verify <id>`, `submit <id>`. Units are claimed as the branch `contrib/<id>`; a court claimed whole (`court/<alias>`) is skipped.
+If you are an outside agent (or an agent told to "contribute" with no assigned court), do not use the court-claim flow below. Read [CONTRIBUTING.md](CONTRIBUTING.md) and run `just contribute pick`: it hands you one open unit (a court x document type from `data/worklist.json`), then `claim <id>`, `brief <id>`, `verify <id>`, `submit <id>`. Units are claimed as the branch `contrib/<id>`; a court claimed whole (`court/<alias>`) is skipped.
 
 ## Pick work
 
 "Run the eval loop on a court" means exactly this, and nothing else needs to be asked:
 
-1. Claim a court: `sh tools/claim.sh --next` (highest-priority unclaimed court; order in `data/priority.json`), or `sh tools/claim.sh --random`, or `sh tools/claim.sh <alias>` for a specific one. It atomically creates the remote branch `court/<alias>` from `origin/master`, so two agents can never take the same court, and prints the alias and the court folder. Add `--dry-run` to see what it would claim without claiming. If it exits non-zero, nothing was claimed.
+1. Claim a court: `just claim --next` (highest-priority unclaimed court; order in `data/priority.json`), or `just claim --random`, or `just claim <alias>` for a specific one. It atomically creates the remote branch `court/<alias>` from `origin/master`, so two agents can never take the same court, and prints the alias and the court folder. Add `--dry-run` to see what it would claim without claiming. If it exits non-zero, nothing was claimed.
 2. Check the claimed branch out in your own worktree: `git fetch origin court/<alias> && git worktree add .worktrees/<alias> court/<alias>`. Work only there, with absolute paths.
 3. Run the full eval loop (`docs/EVAL-LOOP.md`) for all three engines: typst, latex, docx. Tier 1 (mandated form) must be perfect; tier 2 (professional convention) judged against 2 or 3 exemplars from different filers; tier 3 (one filer's style) is not chased.
 4. Push the branch and open a PR against `master` titled `court(<alias>): typst/latex/docx templates`. Body: see "Finish".
@@ -53,6 +53,6 @@ If you are blocked on a decision only David can make (scope, license, which exem
 
 ## Setup
 
-Run `sh tools/bootstrap.sh` once per box. It needs no root: micromamba and conda-forge install typst (pinned 0.15.0), poppler, imagemagick, gawk, jq, go-yq, pandoc and tectonic into `~/.local/share/formbook/env`. It prints every tool's version and exits non-zero if one is missing or wrong. Then put the toolchain on PATH: `export PATH="$HOME/.local/share/formbook/env/bin:$PATH"`. Rerunning is safe.
+Run `sh tools/bootstrap.sh` once per host. It needs no root: micromamba and conda-forge install typst (pinned 0.15.0), poppler, imagemagick, gawk, jq, go-yq, pandoc, tectonic and just into `~/.local/share/formbook/env`. It prints every tool's version and exits non-zero if one is missing or wrong. Then put the toolchain on PATH: `export PATH="$HOME/.local/share/formbook/env/bin:$PATH"`. Rerunning is safe.
 
-Dependencies: typst, poppler (`pdfinfo pdffonts pdftotext pdftohtml pdfimages pdftoppm`), gawk, jq, yq (mikefarah), cargo (builds `tools/fb`, the Rust tool behind `tools/check.sh`, `tools/manifest.sh` and `tools/tracker.sh`; `cargo run` compiles it on first use), `br` (beads_rust); latex engine: pandoc, tectonic or xelatex; docx engine: pandoc, LibreOffice (`soffice`). The bootstrap does not install cargo (use rustup or conda-forge `rust`), `br`, or LibreOffice: conda-forge has no LibreOffice package, so the docx engine needs `soffice` installed another way. Fonts and the cmarker typst package are vendored; nothing is fetched at build time.
+Dependencies: typst, poppler (`pdfinfo pdffonts pdftotext pdftohtml pdfimages pdftoppm`), gawk, jq, yq (mikefarah), cargo (builds `tools/fb`, the Rust tool behind every `just` recipe and the `tools/*.sh` wrappers; `cargo run` compiles it on first use), `br` (beads_rust); latex engine: pandoc, tectonic or xelatex; docx engine: pandoc, LibreOffice (`soffice`). The bootstrap does not install cargo (use rustup or conda-forge `rust`), `br`, or LibreOffice: conda-forge has no LibreOffice package, so the docx engine needs `soffice` installed another way. Fonts and the cmarker typst package are vendored; nothing is fetched at build time.

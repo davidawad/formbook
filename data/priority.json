@@ -1,5 +1,5 @@
 {
-  "_comment": "Claim order for tools/claim.sh --next: the priority list first, then every other court in data/index.json order. Courts listed under reference are never auto-claimed.",
+  "_comment": "Claim order for just claim --next: the priority list first, then every other court in data/index.json order. Courts listed under reference are never auto-claimed.",
   "reference": [
     "ca9"
   ],

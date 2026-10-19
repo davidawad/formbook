@@ -26,20 +26,20 @@ Typst plus poppler is enough to render and look at pages. `tools/check.sh` also 
 
 1. **Find the court.** Aliases are CourtListener court ids (`ca1`, `cand`, `nysupct`, `scotus`). `data/index.json` maps alias to folder; `data/index.json` may lag the tree, so the script also falls back to each folder's `court.json`.
    ```sh
-   sh skills/formbook/scripts/find.sh cand              # court folder + doc types that have a template
-   sh skills/formbook/scripts/find.sh "northern district" complaint
+   just find cand              # court folder + doc types that have a template
+   just find "northern district" complaint
    ```
    A doc type exists only if `<court>/<doctype>/typst/main.typ` exists. Empty `typst/` folders are scaffolds. The ninth circuit (`ca9`) is the reference court with its template at the court root (doc type shown as `.`). See `reference/doc-types.md` for what exists.
    If the court or doc type has no template, go to WRITE. Do not substitute another court's template: caption, length limits and certificates differ per court.
 2. **Start from the sample.**
    ```sh
-   sh skills/formbook/scripts/new-filing.sh cand complaint ./my-filing
+   just new-filing cand complaint ./my-filing
    ```
    This copies the doc type's `usage/INPUT-*.md` to `./my-filing/filing.md` and prints the render command. Read the doc type's `README.md` (rules table, "Markdown contract", known gaps) and `reference/input-contract.md` before editing.
 3. **Fill in the markdown.** Replace every frontmatter value and all body text; the sample is a real filing excerpt, so leave none of its parties, facts or cites behind. Rules of thumb: frontmatter holds metadata only (case number, parties, counsel, title, date, signature, authorities); the body holds headings and prose; do not type paragraph numbers (complaints), the TOC, TOA, certificates or signature block (the template generates them); heading numbers are automatic in appellate briefs but typed by you in the NY motion-brief (check the doc type's README); no tables, images, raw HTML or raw Typst.
 4. **Render.**
    ```sh
-   sh skills/formbook/scripts/render-filing.sh <doctype-dir> ./my-filing/filing.md ./my-filing/filing.pdf
+   just render-filing <doctype-dir> ./my-filing/filing.md ./my-filing/filing.pdf
    ```
    This wrapper stages the file inside the doc-type folder (typst `--root` requires it), calls `tools/render.sh` (vendored fonts, `--ignore-system-fonts`, any warning fails), and cleans up. Equivalent by hand: copy the md to `<doctype-dir>/<name>.md` (not into `usage/`, whose names are linted) and run `sh tools/render.sh <doctype-dir> <name>.md <out.pdf>`, then delete the copy.
 5. **Verify.** Render every page and look at each one: `pdftoppm -r 80 -png filing.pdf pg`, then view all of them (not just page 1). Check: cover/caption fields, TOC page numbers, TOA entries, headings, footnotes on the right page, signature block, certificates, word/page count against the limit in the README. `pdffonts filing.pdf` should list only vendored fonts. Where the court folder has a `checks.yaml` (only `ca9` today), run `sh tools/check.sh courts/ninth-circuit/court-of-appeals` for its mechanical gates (it checks the court's own samples, not your filing).
@@ -51,7 +51,7 @@ Failure of a build is information: read the message. The templates `panic` on a 
 
 Do this only on a branch or worktree; work in one court folder. Start from the nearest finished template for the same doc type, and copy its structure, not its numbers. Full process: `docs/EVAL-LOOP.md`; operating protocol: `AGENTS.md`. Read both first.
 
-1. **Place it.** Folder is `courts/<circuit>/<state>/<federal|state>/<court>/<doctype>/` (look at `find.sh` output for siblings). Claim via `sh tools/claim.sh <alias>` if you are working the repo's queue.
+1. **Place it.** Folder is `courts/<circuit>/<state>/<federal|state>/<court>/<doctype>/` (look at `just find` output for siblings). Claim via `just claim <alias>` if you are working the repo's queue.
 2. **Get the rules from primary sources**: the court's local rules, FRAP/FRCP/CPLR or equivalent, the clerk's filing guide. Record URL, rule number and date read. The rules decide the layout; the filed exemplar settles only what the rules leave open.
 3. **Find 2 or 3 public filed exemplars from different filers** (CourtListener/RECAP, the court's website, a docket). Save into `usage/FILED-EXAMPLE-<doctype>.pdf`, then `FILED-EXAMPLE-<doctype>-2.pdf`, `-3` (`<doctype>` = the folder name; no court alias, no case or party name) and record filename, filer, case, date filed, URL, date retrieved in `usage/SOURCE.md`. Only public, filed documents.
 4. **Transcribe an INPUT sample**: `usage/INPUT-<doctype>[-<n>].md` (the same suffix as the FILED-EXAMPLE it transcribes) with the frontmatter and body of the exemplar (an excerpt is fine; say so in a `#` comment at the top of the frontmatter). Then write a second, structurally different sample (fictional, an `-<n>` with no FILED-EXAMPLE) to prove the template is not tuned to one filing.
@@ -77,15 +77,15 @@ Do this only on a branch or worktree; work in one court folder. Start from the n
 - **`typst emitted warnings; treating as failure`**: the warning text is printed above it. Common: unknown font (a font name that is not vendored; use only what `fonts/` has), deprecated function, unused import. Fix the cause, never filter the warning.
 - **Font not found / wrong font in PDF**: `pdffonts out.pdf`. Only `fonts/` is visible. Add a font by vendoring it with its license, not by installing it system-wide.
 - **cmarker problems**: package is vendored at `vendor/typst-packages` (cmarker 0.1.10); do not let typst fetch it (`--package-cache-path` is set by render.sh). A paragraph starting `1.`, `-`, `+`, `#`, `>` is parsed as a list, heading or quote: escape it (`90\. The record`). `raw-typst` is off, so Typst code in markdown is inert.
-- **`could not read file` / `file not found` for the sample**: the sample path must be inside the doc-type folder (typst `--root`); use `render-filing.sh`.
+- **`could not read file` / `file not found` for the sample**: the sample path must be inside the doc-type folder (typst `--root`); use `just render-filing`.
 - **`missing required metadata field`**: add the key named in the message to the frontmatter; keys differ per doc type (`reference/input-contract.md`).
 - **`toa:` key not in `authorities:`**: every `[cite](toa:key)` needs a registry entry; a link inside a heading is refused.
 - **Cover or heading must fit**: shorten the counsel/party list or heading; templates refuse to shrink type.
 - **Tool missing**: `sh tools/bootstrap.sh --check`; `soffice` problems affect only `--engine docx`.
-- **Alias not found**: try a name fragment (`find.sh "southern district"`), or look in `data/index.json` and `courts/**/court.json`.
+- **Alias not found**: try a name fragment (`just find "southern district"`), or look in `data/index.json` and `courts/**/court.json`.
 
 ## Files in this skill
 
 - `reference/input-contract.md`: frontmatter keys, body conventions, annotated example, per-doc-type differences.
 - `reference/doc-types.md`: doc types that exist, counts, how to regenerate.
-- `scripts/find.sh`, `scripts/new-filing.sh`, `scripts/render-filing.sh`: discover, start, render (POSIX sh, run from repo root).
+- `just find`, `just new-filing`, `just render-filing` (the `fb find`, `fb new-filing`, `fb render-filing` verbs): discover, start, render (run from the repo root).

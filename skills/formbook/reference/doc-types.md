@@ -31,7 +31,7 @@ done | sort | uniq -c | sort -rn
 find courts -path '*/typst/main.typ' | sed 's|/typst/main.typ$||' | sort
 
 # doc types for one court
-sh skills/formbook/scripts/find.sh <alias>
+just find <alias>
 
 # courts that have a given doc type
 find courts -path "*/$DOCTYPE/typst/main.typ" | sed "s|/$DOCTYPE/typst/main.typ$||"

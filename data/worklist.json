@@ -1,4 +1,4 @@
-{"schema": 1, "generated_by": "tools/worklist.sh", "count": 2729, "counts": {"add-exemplar":36,"deepen":29,"new-doctype":2192,"new-template":472},
+{"schema": 1, "generated_by": "fb worklist", "count": 2729, "counts": {"add-exemplar":36,"deepen":29,"new-doctype":2192,"new-template":472},
 "units": [
 {"id":"acca.answering-brief","kind":"add-exemplar","alias":"acca","court_path":"courts/military/army-court-of-criminal-appeals","level":"military","doctype":"answering-brief","title":"Answering brief (appellee's principal brief)","folder":"courts/military/army-court-of-criminal-appeals/answering-brief","status":"open","priority":"high","court_rank":24,"note":"template exists but no exemplars/*.pdf (BLOCKED: no exemplar)"}
 ,{"id":"acca.motion-brief","kind":"new-doctype","alias":"acca","court_path":"courts/military/army-court-of-criminal-appeals","level":"military","doctype":"motion-brief","title":"Motion and supporting memorandum","folder":"courts/military/army-court-of-criminal-appeals/motion-brief","status":"open","priority":"normal","court_rank":24,"note":"no folder yet"}

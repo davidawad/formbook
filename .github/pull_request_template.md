@@ -1,10 +1,10 @@
 ## Work unit
 
-Unit id (`<alias>.<doctype>`, from `sh tools/contribute.sh pick`) and kind:
+Unit id (`<alias>.<doctype>`, from `just contribute pick`) and kind:
 
 ## Verification
 
-Paste the output of `sh tools/contribute.sh verify <id>` (the RESULT line must be PASS).
+Paste the output of `just contribute verify <id>` (the RESULT line must be PASS).
 
 ## Exemplars (public court records)
 

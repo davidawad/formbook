@@ -1,5 +1,5 @@
 {
-  "_comment": "Canonical doc-type vocabulary per court level (levels are data/index.json .courts[].level). A doc-type id is the folder name under a court folder. core = every court of that level should have it (priority high); extended = common filings worth adding next (priority normal). min_pages = a folder whose longest usage/OUTPUT-*.typst.pdf is shorter than this is a 'deepen' unit. Doc types already on disk that are not listed here stay valid; they are never reported as missing. tools/worklist.sh reads this file. Change it by PR; ids are lowercase-hyphenated.",
+  "_comment": "Canonical doc-type vocabulary per court level (levels are data/index.json .courts[].level). A doc-type id is the folder name under a court folder. core = every court of that level should have it (priority high); extended = common filings worth adding next (priority normal). min_pages = a folder whose longest usage/OUTPUT-*.typst.pdf is shorter than this is a 'deepen' unit. Doc types already on disk that are not listed here stay valid; they are never reported as missing. just worklist reads this file. Change it by PR; ids are lowercase-hyphenated.",
   "doctypes": {
     "complaint": {
       "title": "Complaint",

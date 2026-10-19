@@ -131,7 +131,7 @@ All gates green on every sample, for an engine, writes that engine's stamp. A co
 
 ## Adding a court
 
-0. Claim the court (`sh tools/claim.sh --next`, `--random` or an alias; see AGENTS.md) so no other agent works it.
+0. Claim the court (`just claim --next`, `--random` or an alias; see AGENTS.md) so no other agent works it.
 1. `rules.md`: research the current rules from primary sources; number every requirement with a stable ID; mark each M/C/T/A, and group them by tier (tier 1 = the `M` ones). For tier-2 choices, record whether each is a convention (seen across filers) or one filer's style. Note where the court's local rules override the national ones (ca9 does: no disclosure statement in the brief, 14,000 words).
 1a. Exemplars: collect 2 or 3 public filings from **different filers** into `usage/FILED-EXAMPLE-<doctype>[-<n>].pdf` and record each file's source URL (and filer, case, date) in `usage/SOURCE.md`.
 2. `checks.yaml`: one entry per mechanically checkable ID. Reuse the methods in `tools/check/lib.sh`; add a method (one shell function, one `method:` name) only for something new.
@@ -145,7 +145,7 @@ All gates green on every sample, for an engine, writes that engine's stamp. A co
 
 | Tool | Role |
 |---|---|
-| `tools/claim.sh <alias>\|--next\|--random [--dry-run]` | Claim a court by atomically creating remote branch `court/<alias>`. Order in `data/priority.json`. |
+| `just claim <alias>\|--next\|--random [--dry-run]` | Claim a court by atomically creating remote branch `court/<alias>`. Order in `data/priority.json`. |
 | `tools/render.sh [--engine typst\|latex\|docx] <doc-dir> usage/INPUT-<id>.md` | Compile one sample with vendored fonts only; any typst warning fails. Dispatches to `tools/render-latex.sh` / `tools/render-docx.sh`. |
 | `tools/check.sh <court-dir> [--engine E] [--no-render] [--only ID]` | Gates 0 to 3 as far as they can be mechanical, on that engine's PDF. Exit 0 only if every check passes; writes/removes `usage/.check-<engine>.txt`. |
 | `tools/overlay.sh <doc-dir> <id> [FILED-EXAMPLE.pdf]` | Red/blue overlay of `OUTPUT-<id>.typst.pdf` on `FILED-EXAMPLE-<id>.pdf`, into the gitignored `.overlay/`. A diagnostic (tier 3), not a score. |
@@ -162,5 +162,5 @@ The driver (`tools/check.sh`, a thin wrapper around `fb check` in `tools/fb`) is
 - **Output**: for each check, in the order listed, `PASS`/`FAIL` with the requirement ID, the measured value, the expected value, the failing instances, and `template-file:line` found by searching `fix.anchor` in `template`. Exit status 0 iff no check fails.
 - **Semantics that are part of the contract**: the normal form of Gate 0 (lower case, straight quotes, ligatures expanded, all whitespace removed); the footnote numbering rule (numbers follow the order of references in the body); headings placed before the block that follows them; word count by whitespace-delimited tokens, with list markers and footnote references not counted and everything after the `# Addendum` heading excluded; the `-v`-free parameters in `checks.yaml: params`; tolerances only where `checks.yaml` states them.
 - **Parity test**: the Rust validator and the shell checks run by `tools/check.sh` (`tools/check/lib.sh`) must produce the same PASS/FAIL set on both samples and on every mutant in `tools/check-selftest.sh`. Delete the shell checker only when that holds.
-- **What changes for the better**: exact PDF object parsing (real font names and sizes per glyph, real italic flags, link annotations) instead of poppler's word boxes, which lets several calibrations here (the height of a 14 pt word, the footer position) become direct measurements. It must not change what is checked.
+- **What changes for the better**: exact PDF object parsing (real font names and sizes per glyph, real italic flags, link annotations) instead of poppler's word rectangles, which lets several calibrations here (the height of a 14 pt word, the footer position) become direct measurements. It must not change what is checked.
 - **Engines and stamps**: the validator takes the same `--engine` flag, checks `OUTPUT-<id>.latex.pdf` / `.docx.pdf` for the other engines, honors `engines:` in `checks.yaml`, and writes and removes `usage/.check-<engine>.txt` exactly as `tools/check.sh` does (the tracker reads it).

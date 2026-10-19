@@ -257,7 +257,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             if std::fs::read_to_string(&target).ok().as_deref() != Some(text.as_str()) {
                 return Err(fail(
                     1,
-                    "fb worklist: data/worklist.json is stale; run: fb worklist",
+                    "fb worklist: data/worklist.json is stale; run: just worklist",
                 ));
             }
             println!("worklist.json is current");
