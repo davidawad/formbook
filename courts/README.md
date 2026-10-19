@@ -260,7 +260,7 @@ Courts under `courts` (375).
 | [United States District Court for the Northern District of California](ninth-circuit/california/federal/northern-district) | `cand` | in progress | — | — | — | 14 |
 | [United States District Court for the Southern District of California](ninth-circuit/california/federal/southern-district) | `casd` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Guam](ninth-circuit/guam/federal/bankruptcy-district) | `gub` | in progress | — | — | — | 14 |
-| [District Court, D. Guam](ninth-circuit/guam/federal/district) | `gud` | in progress | — | — | — | 14 |
+| [District Court, D. Guam](ninth-circuit/guam/federal/district) | `gud` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Hawaii](ninth-circuit/hawaii/federal/bankruptcy-district) | `hib` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Hawaii](ninth-circuit/hawaii/federal/district) | `hid` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Idaho](ninth-circuit/idaho/federal/bankruptcy-district) | `idb` | in progress | — | — | — | 14 |

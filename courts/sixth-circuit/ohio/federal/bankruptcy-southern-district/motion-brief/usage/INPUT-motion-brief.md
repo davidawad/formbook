@@ -40,7 +40,7 @@ signature:
 
 The Office of the United States Trustee (“U.S. Trustee”) hereby moves this court for an order converting the above entitled Chapter 11 case to Chapter 7 or in the alternative to dismiss, under 11 U.S.C. § 1112(b), Federal Rules of Bankruptcy Procedure 1007, and Local Bankruptcy Rules 1007-1, 1007-2, 1015-2, and 1074-1, because Debtor failed to file Schedules, a Statement of Financial Affairs, a Summary of Certain Liabilities, LBR Form 1015-2, and other bankruptcy documents as required by 11 U.S.C. § 521(a)(1). Other reasons for conversion or dismissal may also exist; however, because Debtor failed to timely file Schedules or Statements a determination as to these matters cannot be made given the lack of information available. In support of this Motion, the U.S. Trustee submits a Memorandum in Support.
 
-{{SIGNATURE}}
+<!-- SIGNATURE -->
 
 # MEMORANDUM IN SUPPORT
 
@@ -108,7 +108,7 @@ The United States Trustee has demonstrated that sufficient cause exits to covert
 
 WHEREFORE, based upon the above, the United States Trustee respectfully requests that this court grant the United States Trustee’s Motion and convert this case to Chapter 7; or in the alternative, dismiss this case; grant judgment in favor of the United States Trustee for any unpaid quarterly fees; and order such other and further relief as it deems appropriate under the circumstances.
 
-{{SIGNATURE}}
+<!-- SIGNATURE -->
 
 # CERTIFICATE OF SERVICE
 

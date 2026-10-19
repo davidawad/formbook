@@ -147,17 +147,17 @@
 // ---------------------------------------------------------------------------
 
 /// Each blank-line-separated chunk of markdown is a heading (kept with the chunk after it), a markdown
-/// list, a body paragraph, or one of two markers: [[SIGNATURE]] places the signature block, [[PAGEBREAK]]
+/// list, a body paragraph, or one of two markers: <!-- SIGNATURE --> places the signature block, <!-- PAGEBREAK -->
 /// starts a new page (the certificates). Paragraphs are not numbered: a memorandum is not an allegation.
 #let body-blocks(meta, body) = {
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "")
   for (i, c) in chunks.enumerate() {
     let t = c.trim()
-    let last-para = i + 1 < chunks.len() and chunks.at(i + 1).trim() == "[[SIGNATURE]]"
-    if t == "[[SIGNATURE]]" {
+    let last-para = i + 1 < chunks.len() and chunks.at(i + 1).trim() == "<!-- SIGNATURE -->"
+    if t == "<!-- SIGNATURE -->" {
       // Emitted with the paragraph before it (see last-para below): every marker follows a paragraph.
       none
-    } else if t == "[[PAGEBREAK]]" {
+    } else if t == "<!-- PAGEBREAK -->" {
       pagebreak(weak: true)
     } else if t.starts-with("#") {
       md(t)
