@@ -1,13 +1,5 @@
 {
   "issues": {},
-  "branches": {
-    "skills/formbook/scripts/find.sh": 23,
-    "skills/formbook/scripts/new-filing.sh": 10,
-    "skills/formbook/scripts/render-filing.sh": 5,
-    "tools/claim.sh": 22,
-    "tools/contribute-lib.sh": 86,
-    "tools/contribute.sh": 80,
-    "tools/worklist.sh": 31
-  },
+  "branches": {},
   "array_expansions": {}
 }

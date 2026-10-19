@@ -3,10 +3,13 @@
 //! `fb readmes` replaces tools/gen_readmes.py. The tools/*.sh that remain are zero-branching `exec` wrappers.
 mod bootstrap;
 mod check;
+mod claim;
+mod contribute;
 mod diff;
 mod diffselftest;
 mod engines;
 mod fetch;
+mod filing;
 mod fonts;
 mod layout;
 mod lint;
@@ -21,6 +24,7 @@ mod selftest;
 mod showcase;
 mod track;
 mod tracker;
+mod worklist;
 
 use std::process::ExitCode;
 
@@ -46,7 +50,13 @@ fn main() -> ExitCode {
         "overlay" => overlay::main(rest),
         "bootstrap" => bootstrap::main(rest),
         "showcase" => showcase::main(rest),
+        "worklist" => worklist::main(rest),
+        "claim" => claim::main(rest),
+        "contribute" => contribute::main(rest),
         "check-selftest" => selftest::main(rest),
+        "find" => filing::find(rest),
+        "new-filing" => filing::new_filing(rest),
+        "render-filing" => filing::render_filing(rest),
         _ => Err(fail(2, "usage: fb check|check-selftest|bootstrap|showcase|render|render-filing|overlay|fonts|manifest|tracker|worklist|claim|contribute|find|new-filing|readmes|measure|diff|fetch|lint|match-stamp|diff-selftest|usage ...")),
     };
     result.unwrap_or_else(|e| {

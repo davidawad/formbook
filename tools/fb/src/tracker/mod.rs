@@ -1,5 +1,5 @@
 //! Completion tracker: the logic of tools/tracker.bend. `compute` turns the two manifests written
-//! by tools/manifest.sh into the five sections bend printed (each line followed by "\n").
+//! by fb manifest into the five sections bend printed (each line followed by "\n").
 mod parse;
 mod render;
 
@@ -18,7 +18,7 @@ fn text(ls: Vec<String>) -> String {
 }
 
 /// `manifest`: lines alias|group|level|name|path|manual|flags; `doctypes`: lines
-/// alias|group|doctype|path|flags (see tools/manifest.sh).
+/// alias|group|doctype|path|flags (see fb manifest).
 pub fn compute(manifest: &str, doctypes: &str) -> Sections {
     let cs = parse::courts(manifest);
     let ds = parse::doctypes(doctypes);
