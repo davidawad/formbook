@@ -18,6 +18,7 @@
 #let single-leading = 0.65em               // quotations, headings, TOC/TOA, certificates: single-spaced (typst's normal line gap).
 #let para-spacing = 0.9em
 #let page-margin = 1in                     // CA10-FORM-002: at least one inch on all four sides (FRAP 32(a)(4)).
+#let page-margin-bottom = page-margin + 4pt   // the last line's descender (about 3 pt at 14 pt) must stay inside the 1-in margin too
 #let para-indent = 0.5in
 #let passim-threshold = 7                  // an authority cited on this many pages or more: "passim".
 
@@ -253,7 +254,7 @@
   #v(0.8em)
   2. This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type style requirements of Fed. R. App. P. 32(a)(6) because:
 
-  #pad(left: 0.4in)[[x] this brief has been prepared in a proportionally spaced typeface using Typst in #int(type-size / 1pt)-point #font-family.]
+  #pad(left: 0.4in)[[x] this brief has been prepared in a proportionally spaced typeface using Typst in #int(type-size / 1pt)-point #font-family.first().]
   #v(1.2em)
   Date: #need(meta, "date").
   #v(1.2em)
@@ -299,7 +300,7 @@
 #let ca10-brief(meta, md) = {
   set document(title: "Answer brief " + need(meta, "case_number"))
   set text(font: font-family, size: type-size, lang: "en", region: "us")
-  set page(paper: "us-letter", margin: page-margin, numbering: front-page-number)
+  set page(paper: "us-letter", margin: (x: page-margin, top: page-margin, bottom: page-margin-bottom), numbering: front-page-number)
   set par(leading: body-leading, spacing: para-spacing, first-line-indent: (amount: para-indent, all: true), justify: false)
   show heading.where(level: 1): it => style-heading-1(it)
   show heading.where(level: 2): it => style-heading-2(it)

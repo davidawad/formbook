@@ -370,7 +370,7 @@
   block(breakable: false, {
     [This reply brief complies with the type-volume limitation of Fed.~R.~App.~P.~32(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed.~R.~App.~P.~32(f).]
     parbreak()
-    [This reply brief complies with the typeface requirements of Fed.~R.~App.~P.~32(a)(5) and the type-style requirements of Fed.~R.~App.~P.~32(a)(6) because it has been prepared in a proportionally spaced typeface, #box[#(type-size-pt)-point] #font-family.]
+    [This reply brief complies with the typeface requirements of Fed.~R.~App.~P.~32(a)(5) and the type-style requirements of Fed.~R.~App.~P.~32(a)(6) because it has been prepared in a proportionally spaced typeface, #box[#(type-size-pt)-point] #font-family.first().]
     cert-signature(meta)
   })
 }

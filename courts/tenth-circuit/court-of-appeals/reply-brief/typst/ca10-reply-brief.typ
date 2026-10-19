@@ -383,7 +383,7 @@
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
   [1. This document complies with the word limit of Fed. R. App. P. 32(a)(7)(B)(ii) because, excluding the parts of the document exempted by Fed. R. App. P. 32(f), this document contains #group-digits(words) words.]
   parbreak()
-  [2. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type style requirements of Fed. R. App. P. 32(a)(6) because this document has been prepared in a proportionally spaced typeface using #meta.at("typeset_with", default: "Typst 0.15.0") in #int(type-size.pt())-point #font-family.]
+  [2. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type style requirements of Fed. R. App. P. 32(a)(6) because this document has been prepared in a proportionally spaced typeface using #meta.at("typeset_with", default: "Typst 0.15.0") in #int(type-size.pt())-point #font-family.first().]
   form-sig-line(meta)
 }
 
