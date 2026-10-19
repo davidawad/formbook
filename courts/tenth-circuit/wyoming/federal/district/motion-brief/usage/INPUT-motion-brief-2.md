@@ -9,11 +9,15 @@ caption:
       designation: "Defendant."
 attorney:
   - ["Seth Shumaker (WSB 6-3818)", "2 N. Main, Ste. 103", "Sheridan, WY 82801", "Tel: 307 675-1233", "sheridanwyolaw@gmail.com", "Attorney for Defendant"]
-date: "2nd day of October 2026"
+dated: "DATED this 2nd day of October 2026."
 signature:
   signer: "Seth Shumaker"
   lines: ["Seth Shumaker WSB 6-3818", "2 N. Main, Ste. 103", "Sheridan, WY 82801", "307 675-1233", "sheridanwyolaw@gmail.com"]
   role: ["Attorney for Defendant"]
+certificate:
+  text: "I certify that on October 2, 2026, I filed the foregoing Defendant Tucker Alger’s Motion to Dismiss Plaintiff’s Complaint and Memorandum in Support with the Clerk of the United States District Court for the District of Wyoming using the Court’s electronic filing system, which served notice upon all counsel of record, including Bradley L. Booke, Attorney for Plaintiff Luis Elizondo."
+  served: ["Bradley L. Booke", "Attorney for Plaintiff Luis Elizondo"]
+  signer: "Seth Shumaker"
 ---
 
 # I. INTRODUCTION
@@ -107,7 +111,3 @@ Defendant Tucker Alger respectfully requests that the Court:
 3. Dismiss under Rule 12(b)(6) Count II and any other claim to the extent it seeks to impose personal liability upon Defendant for the alleged $130,000 debt of Hotel Juliette LLC;
 4. Dismiss Counts III and V under Rule 12(b)(6); and
 5. Grant such other relief as the Court deems just and proper.
-
-# CERTIFICATE OF SERVICE
-
-I certify that on October 2, 2026, I filed the foregoing Defendant Tucker Alger’s Motion to Dismiss Plaintiff’s Complaint and Memorandum in Support with the Clerk of the United States District Court for the District of Wyoming using the Court’s electronic filing system, which served notice upon all counsel of record, including Bradley L. Booke, Attorney for Plaintiff Luis Elizondo.

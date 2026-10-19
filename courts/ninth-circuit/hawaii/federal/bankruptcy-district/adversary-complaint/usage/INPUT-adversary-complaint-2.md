@@ -36,7 +36,7 @@ caption:
       - "HAWAIIAN SPRINGS, LLC, a Delaware limited liability company dba HAWAIIAN SPRINGS WATER; LEONITE FUND I, LP, and ROBERT L. STEVENS, solely in his capacity as an alleged Receiver,"
     designation: "Defendants."
 adversary_number: "Adversary No. 26-_______"
-title: "COMPLAINT"
+paper_title: "COMPLAINT"
 date: "Honolulu, Hawai‘i, May 14, 2026"
 signature:
   - - "/s/ Bosko Petricevic"

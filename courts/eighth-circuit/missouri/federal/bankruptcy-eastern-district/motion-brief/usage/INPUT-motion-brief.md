@@ -20,11 +20,6 @@ hearing:
   - "Response Deadline: December 5, 2016"
 title: "MEMORANDUM IN SUPPORT OF MOTION FOR CONFIRMATION THAT THE AUTOMATIC STAY PURSUANT TO 11 U.S.C. § 362 INCLUDES INDEMNIFIED NON-DEBTOR CO-DEFENDANTS, OR, IN THE ALTERNATIVE, FOR STAY OF PROCEEDINGS PURSUANT TO 11 U.S.C. § 105(a)"
 lead_in: "COMES NOW Directory Distributing Associates, Inc. (“DDA” or “Debtor”), and for its Memorandum in Support of Motion for Confirmation that the Automatic Stay Pursuant to 11 U.S.C. § 362(a) Applies to Indemnified Non-Debtor Co-Defendants, or, in the alternative, for Stay of Proceedings Pursuant to 11 U.S.C. § 105(a) in light of its Voluntary Petition for Bankruptcy (ECF No. 1) filed on October 14, 2016 (the “Memorandum”), respectfully states as follows:"
-footnotes:
-  "1": "This Memorandum is filed subject to and without waiver of any rights of the Debtor, including, but not limited to, the Debtor’s right to review, evaluate, defend, and object to the claims and assertions of any of the plaintiffs or co-defendants."
-  "2": "AT&T Inc. did not join the Notice because it contends that the Krawczyk court lacks personal jurisdiction over it."
-  "3": "The Plaintiffs in Walker are represented by the same counsel as the Plaintiffs in Krawcyzk."
-  "4": "To the contrary, the plaintiffs have made their intention to proceed with discovery even as to DDA clear. On October 25, 2016, Plaintiffs in Krawczyk filed a Response to the Court’s Order Requesting Response on Effect of Bankruptcy Filing by DDA and argued that discovery in that case may proceed against both the debtor and non-debtor parties. Krawczyk Dkt. No. 94 at pp. 3, 9."
 signature:
   date: "December 2, 2016"
   firm: "CARMODY MacDONALD P.C."
@@ -43,17 +38,19 @@ signature:
     - "thr@carmodymacdonald.com"
     - "Attorneys for Debtor"
 certificate:
-  - "The undersigned hereby certifies on the 2nd day of December, 2016, that a true and correct copy of the above and foregoing pleading was served by electronic filing in the CM/ECF system of the United States Bankruptcy Court for the Eastern District of Missouri which will send notification of such filing to the following registered parties in interest:"
-  - "Office of the U.S. Trustee, USTPRegion13.SL.ECF@USDOJ.gov"
-  - "E. Rebecca Case on behalf of Creditor The Globe Building Company, erc@stoneleyton.com, erecf@gmail.com"
-  - "Bonnie L. Clair on behalf of Creditor Wage and Hour Class, blcattymo@summerscomptonwells.com"
-  - "David L. Going on behalf of Interested Party AT&T, dgoing@armstrongteasdale.com, oharmon@armstrongteasdale.com"
-  - "David L. Going on behalf of Interested Party Print Media LLC, dgoing@armstrongteasdale.com, oharmon@armstrongteasdale.com"
-  - "David L. Going on behalf of Interested Party YP Holdings, LLC, dgoing@armstrongteasdale.com, oharmon@armstrongteasdale.com"
-  - "David L. Going on behalf of Interested Party YP LLC, dgoing@armstrongteasdale.com, oharmon@armstrongteasdale.com"
-  - "The undersigned hereby certifies that a true and correct copy of the above and foregoing pleading was served via U.S. Mail, postage prepaid, this 2nd day of December, 2016 to:"
-  - "Steven A. Ginther on behalf of Creditor Missouri Department of Revenue, Missouri Dept. of Revenue, General Counsel’s Office, P.O. Box 475, Jefferson City, MO 65105"
-  - "/s/ Christopher J. Lawhorn"
+  paragraphs:
+    - "The undersigned hereby certifies on the 2nd day of December, 2016, that a true and correct copy of the above and foregoing pleading was served by electronic filing in the CM/ECF system of the United States Bankruptcy Court for the Eastern District of Missouri which will send notification of such filing to the following registered parties in interest:"
+    - "Office of the U.S. Trustee, USTPRegion13.SL.ECF@USDOJ.gov"
+    - "E. Rebecca Case on behalf of Creditor The Globe Building Company, erc@stoneleyton.com, erecf@gmail.com"
+    - "Bonnie L. Clair on behalf of Creditor Wage and Hour Class, blcattymo@summerscomptonwells.com"
+    - "David L. Going on behalf of Interested Party AT&T, dgoing@armstrongteasdale.com, oharmon@armstrongteasdale.com"
+    - "David L. Going on behalf of Interested Party Print Media LLC, dgoing@armstrongteasdale.com, oharmon@armstrongteasdale.com"
+    - "David L. Going on behalf of Interested Party YP Holdings, LLC, dgoing@armstrongteasdale.com, oharmon@armstrongteasdale.com"
+    - "David L. Going on behalf of Interested Party YP LLC, dgoing@armstrongteasdale.com, oharmon@armstrongteasdale.com"
+    - "The undersigned hereby certifies that a true and correct copy of the above and foregoing pleading was served via U.S. Mail, postage prepaid, this 2nd day of December, 2016 to:"
+    - "Steven A. Ginther on behalf of Creditor Missouri Department of Revenue, Missouri Dept. of Revenue, General Counsel’s Office, P.O. Box 475, Jefferson City, MO 65105"
+  date: "December 2, 2016"
+  signature: "/s/ Christopher J. Lawhorn"
 ---
 
 # I. INTRODUCTION
@@ -167,3 +164,11 @@ The stay or injunction against these cases moving forward in Texas and Californi
 For the foregoing reasons, this Court should confirm that the automatic stay applies to plaintiffs’ actions against any indemnified non-debtor co-defendant in both Walker and Krawczyk. Alternatively, this Court should enjoin the parties from proceeding in the Walker and Krawczyk cases under its equitable powers because (i) continuing the actions would irreparably harm DDA’s resources in responding to vast discovery while attempting to administer this estate, and (ii) the non-debtor corporate co-defendants’ liability requires a predicate finding that DDA was the plaintiffs’ employer, a disputed fact in these cases.
 
 %WHEREFORE, the Debtor respectfully requests that this Court grant this Motion and for such other and further relief as this Court deems just and proper.
+
+[^1]: This Memorandum is filed subject to and without waiver of any rights of the Debtor, including, but not limited to, the Debtor’s right to review, evaluate, defend, and object to the claims and assertions of any of the plaintiffs or co-defendants.
+
+[^2]: AT&T Inc. did not join the Notice because it contends that the Krawczyk court lacks personal jurisdiction over it.
+
+[^3]: The Plaintiffs in Walker are represented by the same counsel as the Plaintiffs in Krawcyzk.
+
+[^4]: To the contrary, the plaintiffs have made their intention to proceed with discovery even as to DDA clear. On October 25, 2016, Plaintiffs in Krawczyk filed a Response to the Court’s Order Requesting Response on Effect of Bankruptcy Filing by DDA and argued that discovery in that case may proceed against both the debtor and non-debtor parties. Krawczyk Dkt. No. 94 at pp. 3, 9.

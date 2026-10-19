@@ -46,11 +46,13 @@
   block(width: text-width, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, c)
 }
 
-/// A heading: one numbered line, kept with the text after it (a heading never ends a page).
-#let heading-line(c) = block(width: text-width, height: pitch, above: 0pt, below: 0pt, sticky: true, context {
-  assert(measure(width: text-width, c).height <= pitch, message: "waed-motion-brief: a heading must fit on one numbered line")
-  c
-})
+/// A heading: single spaced, rounded up to whole numbered lines (a long heading wraps onto the next one and
+/// the text after it stays on the grid), kept with the text after it (a heading never ends a page).
+#let heading-line(c) = context {
+  let c1 = { set par(leading: single-leading); c }
+  let h = measure(width: text-width, c1).height
+  block(width: text-width, height: calc.max(1, calc.ceil(h / pitch)) * pitch, above: 0pt, below: 0pt, sticky: true, c1)
+}
 
 // ---------------------------------------------------------------------------
 // Page furniture
