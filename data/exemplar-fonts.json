@@ -6541,11 +6541,11 @@
       ]
     },
     "courts/military/army-court-of-criminal-appeals/answering-brief/usage/FILED-EXAMPLE-answering-brief.pdf": {
-      "body": "",
+      "body": "times",
       "body_share": 0.000,
-      "class": "impossible",
-      "face": "",
-      "why": "no text layer (scanned image)",
+      "class": "approximate",
+      "face": "Times",
+      "why": "Scanned image; its OCR layer declares Times-Roman, so the body face is a Times-family serif.",
       "fonts": [
         "Helvetica",
         "Helvetica-Bold",
@@ -6557,11 +6557,11 @@
       ]
     },
     "courts/military/army-court-of-criminal-appeals/opening-brief/usage/FILED-EXAMPLE-opening-brief.pdf": {
-      "body": "",
+      "body": "times",
       "body_share": 0.000,
-      "class": "impossible",
-      "face": "",
-      "why": "no text layer (scanned image)",
+      "class": "approximate",
+      "face": "Times",
+      "why": "Scanned image; its OCR layer declares Times-Roman, so the body face is a Times-family serif.",
       "fonts": [
         "Helvetica",
         "Helvetica-Bold",
@@ -6717,11 +6717,11 @@
       ]
     },
     "courts/military/court-of-military-commission-review/answering-brief/usage/FILED-EXAMPLE-answering-brief-2.pdf": {
-      "body": "",
+      "body": "times",
       "body_share": 0.000,
-      "class": "impossible",
-      "face": "",
-      "why": "no text layer (scanned image)",
+      "class": "approximate",
+      "face": "Times",
+      "why": "Scanned image; its OCR layer declares Times-Roman, so the body face is a Times-family serif.",
       "fonts": [
         "Helvetica",
         "Helvetica-Bold",
@@ -6733,11 +6733,11 @@
       ]
     },
     "courts/military/court-of-military-commission-review/answering-brief/usage/FILED-EXAMPLE-answering-brief.pdf": {
-      "body": "",
+      "body": "times",
       "body_share": 0.000,
-      "class": "impossible",
-      "face": "",
-      "why": "no text layer (scanned image)",
+      "class": "approximate",
+      "face": "Times",
+      "why": "Scanned image; its OCR layer declares Times-Roman, so the body face is a Times-family serif.",
       "fonts": [
         "Helvetica",
         "Helvetica-Bold",

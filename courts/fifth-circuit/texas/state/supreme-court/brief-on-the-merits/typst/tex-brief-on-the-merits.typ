@@ -5,7 +5,7 @@
 // least 12 point. Rule 9.4(d) lets footnotes, block quotations, short lists and issues
 // be single-spaced. Liberation Serif is the metric clone of Times New Roman, the face of
 // the filed exemplars.
-#let text-font = "Liberation Serif"
+#let font-family = ("Times New Roman", "Liberation Serif")
 #let text-size = 14pt
 #let note-size = 12pt
 
@@ -236,7 +236,7 @@
 
   set document(title: meta.title + ", No. " + meta.case_number, author: sig.name)
   set page(paper: "us-letter", margin: 1in, numbering: none)
-  set text(font: text-font, size: text-size, lang: "en", hyphenate: false)
+  set text(font: font-family, size: text-size, lang: "en", hyphenate: false)
   set par(leading: double, spacing: double, justify: true, first-line-indent: (amount: 0.5in, all: true))
   // Footnote markers drawn as raised digits, not the font's superscript glyphs: Liberation
   // Serif has those only for 1 to 3, so markers from 4 on would come out in another size.

@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 // Parameters (each traces to a rule or a layout choice; see README.md)
 // ---------------------------------------------------------------------------
-#let font-family = "Liberation Serif"   // Style Guide II.A asks for Times New Roman 12 point; Liberation Serif is the metric-compatible substitute (docs/FONTS.md)
+#let font-family = ("Times New Roman", "Liberation Serif")   // Style Guide II.A asks for Times New Roman 12 point; Liberation Serif is the metric-compatible substitute (docs/FONTS.md)
 #let type-size = 12pt              // Style Guide II.A: 12-point font
 #let body-leading = 1.35em         // double spacing: 24 pt baseline pitch at 12 pt in Liberation Serif (README)
 #let single-leading = 0.5em        // counsel, caption, signature block, tables

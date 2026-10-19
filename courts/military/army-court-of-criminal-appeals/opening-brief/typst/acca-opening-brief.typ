@@ -31,7 +31,7 @@
 // Rule parameters
 // ---------------------------------------------------------------------------
 
-#let font-family = "Liberation Serif"      // Rule 13.2 / 17.1(b): Times New Roman (substitute, docs/FONTS.md)
+#let font-family = ("Times New Roman", "Liberation Serif")      // Rule 13.2 / 17.1(b): Times New Roman (substitute, docs/FONTS.md)
 #let type-size = 14pt                      // Rule 13.2 / 17.1(b): 14-point
 #let body-leading = 1.65em                 // Rule 13.2 / 17.1(b): double-spaced (baseline pitch ~2.3 x size)
 #let single-leading = 0.45em               // caption, headings, block quotes, footnotes, signature

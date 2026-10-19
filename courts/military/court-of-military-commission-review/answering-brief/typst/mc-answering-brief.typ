@@ -12,7 +12,7 @@
 // The filed exemplars use Times New Roman, and their certificates cite "Rule 14(e)" for it (and
 // a monospaced 12-cpi option). Times New Roman is substituted by Liberation Serif (docs/FONTS.md,
 // metric-compatible). The primary rule text is not yet verified; see ../README.md "Typeface".
-#let body-font = "Liberation Serif"
+#let body-font = ("Times New Roman", "Liberation Serif")
 #let body-size = 12pt
 #let body-leading = 0.95em    // double-spaced body text
 #let single-leading = 0.5em   // block quotations, headings, captions, cover, signature, certificates
