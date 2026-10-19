@@ -163,7 +163,7 @@
   assert(not md.contains("[^"), message: "footnotes are not supported in the adversary complaint template")
   set page(
     paper: "us-letter",
-    margin: page-margin,
+    margin: (top: page-margin + 4pt, bottom: page-margin, left: page-margin, right: page-margin),
     footer: context align(center, text(size: 10pt)[
       Page #counter(page).display() of #counter(page).final().first()
     ]),

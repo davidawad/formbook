@@ -227,7 +227,7 @@ Courts under `courts` (375).
 | [United States Bankruptcy Court, D. North Dakota](eighth-circuit/north-dakota/federal/bankruptcy-district) | `ndb` | in progress | — | — | — | 14 |
 | [District Court, D. North Dakota](eighth-circuit/north-dakota/federal/district) | `ndd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. South Dakota](eighth-circuit/south-dakota/federal/bankruptcy-district) | `sdb` | in progress | — | — | — | 14 |
-| [District Court, D. South Dakota](eighth-circuit/south-dakota/federal/district) | `sdd` | in progress | — | — | — | 14 |
+| [District Court, D. South Dakota](eighth-circuit/south-dakota/federal/district) | `sdd` | up for review | — | — | — | 14 |
 | [Arkansas Court of Appeals](eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 14 |
 | [Arkansas Supreme Court](eighth-circuit/arkansas/state/supreme-court) | `ark` | in progress | — | — | — | 14 |
 | [Arkansas Workers' Compensation Commission](eighth-circuit/arkansas/state/workers-compensation-commission) | `arkworkcompcom` | todo | — | — | — | 0 |
@@ -266,7 +266,7 @@ Courts under `courts` (375).
 | [United States Bankruptcy Court, D. Idaho](ninth-circuit/idaho/federal/bankruptcy-district) | `idb` | in progress | — | — | — | 14 |
 | [United States District Court for the District of Idaho](ninth-circuit/idaho/federal/district) | `idd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Montana](ninth-circuit/montana/federal/bankruptcy-district) | `mtb` | up for review | — | — | — | 14 |
-| [District Court, D. Montana](ninth-circuit/montana/federal/district) | `mtd` | in progress | — | — | — | 14 |
+| [District Court, D. Montana](ninth-circuit/montana/federal/district) | `mtd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Nevada](ninth-circuit/nevada/federal/bankruptcy-district) | `nvb` | in progress | — | — | — | 14 |
 | [District Court, D. Nevada](ninth-circuit/nevada/federal/district) | `nvd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, Northern Mariana Islands](ninth-circuit/northern-mariana-islands/federal/bankruptcy-district) | `nmib` | in progress | — | — | — | 0 |
