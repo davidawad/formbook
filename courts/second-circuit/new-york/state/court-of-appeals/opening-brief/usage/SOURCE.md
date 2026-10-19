@@ -20,3 +20,15 @@
 
 - The copy is an OCR'd scan (Adobe Paper Capture) with occasional garbled passages in the later pages. The sample transcribes only the early pages and Point I.
 - No affidavit of service and no separately titled statement of related litigation appear in this copy. The template adds both from 500.1(e) and 500.13(a); see `../README.md`.
+
+## Second exemplar (fb-l129.1, 2026-10-18)
+
+- **File:** `FILED-EXAMPLE-opening-brief-2.pdf` (61 pages, letter, 1.7 MB, born-digital text layer verified 2026-10-18 with `pdftotext` on every page; `pdffonts`: embedded Times New Roman, 14-point body per the brief's own printing specifications statement)
+- **SHA-256:** `174a454ae6bdcbd3a980024c33eb3054eaa643ac532d73f39d3de5b302fb9db3`
+- **URL fetched:** https://statecourtreport.org/sites/default/files/2025-11/rensselaer_county-brief.pdf (hosted by State Court Report, Brennan Center for Justice)
+- **Case:** *County of Onondaga v. State of New York* (consolidated county actions over the Even Year Election Law), Court of Appeals of the State of New York, APL-2025-00088 (Fourth Department Docket No. CAE 25-00494)
+- **Document:** Brief for Plaintiffs-Appellants County of Rensselaer et al., an appellant's principal brief. Cover: "To be Submitted by: Carl J. Kempf, III"; "Date Completed: June 11, 2025"; printed by Counsel Press. Printing specifications statement under 22 NYCRR 500.13: Times New Roman 14, double spaced, 11,536 words.
+- **Filer:** Rensselaer County Attorney's Office (Carl J. Kempf, III), for Plaintiffs-Appellants.
+- **Date signed:** June 11, 2025. Date filed: not printed on the copy. Date fetched: 2026-10-18.
+- **Why:** a born-digital brief from a different filer under the current Part 500 rules; the first exemplar is a 13.8 MB OCR'd scan. It is kept because `INPUT-opening-brief.md` was transcribed from it; a later pass can re-transcribe from this file and drop the scan.
+- **Limits:** multi-action consolidated caption continued over the inside cover.

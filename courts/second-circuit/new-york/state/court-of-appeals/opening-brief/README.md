@@ -5,6 +5,7 @@ Doc type `opening-brief` of court `ny` (folder: `courts/second-circuit/new-york/
 | Path | What |
 |---|---|
 | `usage/FILED-EXAMPLE-opening-brief.pdf` | Real filed brief (Respondents-Appellants, APL-2016-00115), text layer present |
+| `usage/FILED-EXAMPLE-opening-brief-2.pdf` | Second filed brief (Plaintiffs-Appellants Rensselaer County, APL-2025-00088), born-digital text layer (fb-l129.1) |
 | `usage/SOURCE.md` | URL fetched, case, docket, filer, date signed, date fetched, why this exemplar, its limits |
 | `usage/INPUT-opening-brief.md` | Markdown transcription of the exemplar (a portion; see below) |
 | `usage/OUTPUT-opening-brief.typst.pdf` | `sh tools/render.sh … usage/INPUT-opening-brief.md` (14 pages) |

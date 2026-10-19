@@ -675,3 +675,8 @@ RESOLVED fladistctapp2/petition-for-review: FILED-EXAMPLE-petition-for-review.pd
 RESOLVED fladistctapp4/petition-for-review: FILED-EXAMPLE-petition-for-review.pdf (fb-l129.1 pass 2, 2026-10-18)
 RESOLVED fladistctapp5/petition-for-review: FILED-EXAMPLE-petition-for-review.pdf (fb-l129.1 pass 2, 2026-10-18)
 BLOCKED fladistctapp6/petition-for-review: no Review Non-Final Agency Action case ever docketed in the 6th DCA; its 2 order-excluding-press petitions are secured on ACIS; no 6th DCA petition on any DOAH docket; ACIS full-text search found only certiorari petitions (fb-l129.1 pass 2, 2026-10-18)
+NOTE ny/opening-brief: added FILED-EXAMPLE-opening-brief-2.pdf (Rensselaer County, APL-2025-00088, 61 pp. born-digital); the 13.8 MB OCR scan stays as FILED-EXAMPLE-opening-brief.pdf because INPUT-opening-brief.md is transcribed from it (fb-l129.1 pass 2, 2026-10-18)
+BLOCKED nyappterm/answering-brief: no public Appellate Term respondent's brief; nycourts/NYSCEF 403, advocacy media libraries and web searches yield none (fb-l129.1 pass 2, 2026-10-18)
+BLOCKED nyappterm/petition-for-discretionary-review: Appellate Term leave applications are unpublished motions; none found on any public host (fb-l129.1 pass 2, 2026-10-18)
+BLOCKED nyappterm/motion-brief: no public Appellate Term motion papers found; nycourts/NYSCEF 403 (fb-l129.1 pass 2, 2026-10-18)
+BLOCKED nyappdiv/petition-for-review: no public EDPL 207 or CPLR 7804(g) transferred petition; nycourts/NYSCEF 403, AG and advocacy archives hold only briefs (fb-l129.1 pass 2, 2026-10-18)
