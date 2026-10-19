@@ -63,17 +63,17 @@ fn io(p: &Path, e: std::io::Error) -> crate::Fail {
     fail(2, format!("fb: {}: {e}", p.display()))
 }
 
-/// Render `md` (relative to the doc dir) with the engine through tools/render.sh.
-fn render(root: &Path, o: &Opts, md: &str, out: &Path) -> Res<()> {
-    let mut c = Command::new("sh");
-    c.arg(root.join("tools/render.sh"))
-        .args(["--engine", &o.engine])
+/// Render `md` (relative to the doc dir) with the engine through `fb render`.
+fn render(_root: &Path, o: &Opts, md: &str, out: &Path) -> Res<()> {
+    let exe = std::env::current_exe().map_err(|e| fail(2, format!("fb: {e}")))?;
+    let mut c = Command::new(exe);
+    c.args(["render", "--engine", &o.engine, "--deny-warnings"])
         .arg(&o.doc)
         .arg(md)
         .arg(out);
     let r = c
         .output()
-        .map_err(|e| fail(2, format!("fb: render.sh: {e}")))?;
+        .map_err(|e| fail(2, format!("fb: render: {e}")))?;
     if !r.status.success() || !out.is_file() {
         return Err(fail(
             2,

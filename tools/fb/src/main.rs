@@ -1,8 +1,10 @@
-//! `fb`: formbook tooling. Subcommands replace the branching of tools/check.sh,
-//! tools/manifest.sh and tools/tracker.sh; `fb readmes` replaces tools/gen_readmes.py.
+//! `fb`: formbook tooling. Subcommands hold the logic that used to be shell: check, check-selftest, render
+//! (typst, latex, docx), overlay, bootstrap, showcase, manifest, tracker, worklist, claim, contribute, find, new-filing, render-filing;
+//! `fb readmes` replaces tools/gen_readmes.py. The tools/*.sh that remain are zero-branching `exec` wrappers.
 mod check;
 mod diff;
 mod diffselftest;
+mod engines;
 mod fetch;
 mod fonts;
 mod layout;
@@ -10,6 +12,7 @@ mod lint;
 mod manifest;
 mod matchstamp;
 mod measure;
+mod proc;
 mod readmes;
 mod render;
 mod track;
@@ -36,7 +39,7 @@ fn main() -> ExitCode {
         "lint" => lint::main(rest),
         "match-stamp" => matchstamp::main(rest),
         "usage" => layout::main(rest),
-        _ => Err(fail(2, "usage: fb check|render|fonts|manifest|tracker|readmes|measure|diff|fetch|lint|match-stamp|diff-selftest|usage ...")),
+        _ => Err(fail(2, "usage: fb check|check-selftest|bootstrap|showcase|render|render-filing|overlay|fonts|manifest|tracker|worklist|claim|contribute|find|new-filing|readmes|measure|diff|fetch|lint|match-stamp|diff-selftest|usage ...")),
     };
     result.unwrap_or_else(|e| {
         eprintln!("{}", e.msg);

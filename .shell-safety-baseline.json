@@ -10,9 +10,6 @@
     "tools/contribute-lib.sh": 86,
     "tools/contribute.sh": 80,
     "tools/overlay.sh": 11,
-    "tools/render-docx.sh": 20,
-    "tools/render-latex.sh": 17,
-    "tools/render.sh": 8,
     "tools/worklist.sh": 31
   },
   "array_expansions": {}

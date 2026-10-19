@@ -20,8 +20,8 @@ fn pinned_tnr_dir() -> Res<PathBuf> {
     Ok(PathBuf::from(p))
 }
 
-/// usage/OUTPUT-<id>.typst.pdf for usage/INPUT-<id>.md (the same id).
-fn default_out(doc: &Path, sample: &Path) -> Res<PathBuf> {
+/// usage/OUTPUT-<id>.<engine>.pdf for usage/INPUT-<id>.md (the same id).
+fn default_out(doc: &Path, sample: &Path, engine: &str) -> Res<PathBuf> {
     let d = crate::layout::Doc::open(doc)?;
     let file = sample
         .file_name()
@@ -29,7 +29,7 @@ fn default_out(doc: &Path, sample: &Path) -> Res<PathBuf> {
         .unwrap_or_default();
     crate::layout::id_of(crate::layout::INPUT, &file)
         .filter(|id| d.accepts(id))
-        .map(|id| d.output(id, "typst"))
+        .map(|id| d.output(id, engine))
         .ok_or_else(|| {
             fail(
                 2,
@@ -41,64 +41,167 @@ fn default_out(doc: &Path, sample: &Path) -> Res<PathBuf> {
         })
 }
 
-/// `fb render <doc-dir> <usage/INPUT-<id>.md> [out.pdf]` (Typst engine); the default output is
-/// usage/OUTPUT-<id>.typst.pdf.
-pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
-    if args.len() < 2 || args.len() > 3 {
-        return Err(fail(
-            2,
-            "usage: fb render <doc-dir> <usage/INPUT-<id>.md> [out.pdf]",
-        ));
+/// Whether a typst warning is tolerated or fails the render.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum Warnings {
+    Allow,
+    Deny,
+}
+
+/// Parsed `fb render` arguments.
+#[derive(Debug, PartialEq)]
+struct Opts {
+    engine: String,
+    warnings: Warnings,
+    pos: Vec<String>,
+}
+
+fn parse_args(args: &[String]) -> Res<Opts> {
+    const USAGE: &str = "usage: fb render [--engine typst|latex|docx] [--deny-warnings] <doc-dir> <usage/INPUT-<id>.md> [out.pdf]";
+    let mut o = Opts {
+        engine: "typst".into(),
+        warnings: Warnings::Allow,
+        pos: vec![],
+    };
+    let mut it = args.iter();
+    while let Some(a) = it.next() {
+        match a.as_str() {
+            "--engine" => o.engine = it.next().ok_or_else(|| fail(2, USAGE))?.clone(),
+            "--deny-warnings" => o.warnings = Warnings::Deny,
+            _ => o.pos.push(a.clone()),
+        }
     }
-    let root = repo_root()?;
-    let court = Path::new(&args[0]);
-    let court = if court.is_absolute() {
-        court.to_path_buf()
+    if !matches!(o.engine.as_str(), "typst" | "latex" | "docx") {
+        return Err(fail(2, format!("fb render: unknown engine {}", o.engine)));
+    }
+    if o.pos.len() < 2 || o.pos.len() > 3 {
+        return Err(fail(2, USAGE));
+    }
+    Ok(o)
+}
+
+fn absolute(root: &Path, p: &str) -> PathBuf {
+    let p = Path::new(p);
+    if p.is_absolute() {
+        p.to_path_buf()
     } else {
-        root.join(court)
-    };
-    let sample = Path::new(&args[1]);
-    let out = match args.get(2) {
-        Some(p) if Path::new(p).is_absolute() => PathBuf::from(p),
-        Some(p) => root.join(p),
-        None => default_out(&court, sample)?,
-    };
-    let sample_arg = if sample.is_absolute() {
-        sample.to_path_buf()
-    } else {
-        court.join(sample)
-    };
-    let sample_rel = sample_arg.strip_prefix(&court).unwrap_or(&sample_arg);
-    let fonts = root.join("fonts");
+        root.join(p)
+    }
+}
+
+/// Compile with typst; with `Warnings::Deny`, any typst warning on stderr is a failure.
+fn typst(root: &Path, court: &Path, sample_rel: &Path, out: &Path, warnings: Warnings) -> Res<()> {
     let mut command = Command::new("typst");
     command
-        .current_dir(&root)
+        .current_dir(root)
         .args(["compile", "--root"])
-        .arg(&court)
+        .arg(court)
         .arg("--font-path")
-        .arg(&fonts);
+        .arg(root.join("fonts"));
     // A Times exemplar requires the pinned directory; otherwise it is added when present so scratch
     // copies (check-selftest mutants) that declare Times New Roman still find it.
     match pinned_tnr_dir() {
         Ok(dir) => {
             command.arg("--font-path").arg(dir);
         }
-        Err(e) if crate::fonts::has_times_exemplar(&root, &court)? => return Err(e),
+        Err(e) if crate::fonts::has_times_exemplar(root, court)? => return Err(e),
         Err(_) => {}
     }
-    let status = command
+    command
         .arg("--ignore-system-fonts")
         .arg("--package-cache-path")
         .arg(root.join("vendor/typst-packages"))
         .arg("--input")
         .arg(format!("sample={}", sample_rel.display()))
         .arg(court.join("typst/main.typ"))
-        .arg(&out)
-        .status()
-        .map_err(|e| fail(2, format!("fb render: cannot run typst: {e}")))?;
-    if !status.success() {
-        return Err(fail(1, format!("fb render: typst failed with {status}")));
+        .arg(out);
+    let spawn = |e: std::io::Error| fail(2, format!("fb render: cannot run typst: {e}"));
+    if warnings == Warnings::Allow {
+        let status = command.status().map_err(spawn)?;
+        return status
+            .success()
+            .then_some(())
+            .ok_or_else(|| fail(1, format!("fb render: typst failed with {status}")));
     }
+    let o = command.output().map_err(spawn)?;
+    let log = String::from_utf8_lossy(&o.stderr);
+    eprint!("{log}");
+    if !o.status.success() {
+        return Err(fail(
+            1,
+            format!("fb render: typst failed with {}", o.status),
+        ));
+    }
+    if log.trim().is_empty() {
+        Ok(())
+    } else {
+        Err(fail(
+            1,
+            "fb render: typst emitted warnings; treating as failure",
+        ))
+    }
+}
+
+/// Render one sample (`sample` is relative to `court`, or absolute) with the engine into `out`.
+pub fn render_one(
+    root: &Path,
+    engine: &str,
+    court: &Path,
+    sample: &Path,
+    out: &Path,
+    warnings: Warnings,
+) -> Res<()> {
+    let sample_arg = if sample.is_absolute() {
+        sample.to_path_buf()
+    } else {
+        court.join(sample)
+    };
+    let sample_rel = sample_arg.strip_prefix(court).unwrap_or(&sample_arg);
+    match engine {
+        "latex" => crate::engines::latex(root, court, &sample_rel.to_string_lossy(), out),
+        "docx" => crate::engines::docx(court, &sample_rel.to_string_lossy(), out),
+        _ => typst(root, court, sample_rel, out, warnings),
+    }
+}
+
+/// `fb render [--engine E] [--deny-warnings] <doc-dir> <usage/INPUT-<id>.md> [out.pdf]`; the default
+/// output is usage/OUTPUT-<id>.<engine>.pdf.
+pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
+    let o = parse_args(args)?;
+    let root = repo_root()?;
+    let court = absolute(&root, &o.pos[0]);
+    let sample = Path::new(&o.pos[1]);
+    let out = match o.pos.get(2) {
+        Some(p) => absolute(&root, p),
+        None => default_out(&court, sample, &o.engine)?,
+    };
+    render_one(&root, &o.engine, &court, sample, &out, o.warnings)?;
     println!("{}", out.display());
     Ok(std::process::ExitCode::SUCCESS)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn v(a: &[&str]) -> Vec<String> {
+        a.iter().map(|s| s.to_string()).collect()
+    }
+
+    #[test]
+    fn engine_and_flags_come_before_positionals() {
+        let o = parse_args(&v(&["--engine", "docx", "--deny-warnings", "d", "s.md"])).unwrap();
+        assert_eq!(o.engine, "docx");
+        assert_eq!(o.warnings, Warnings::Deny);
+        assert_eq!(o.pos, v(&["d", "s.md"]));
+    }
+
+    #[test]
+    fn defaults_to_typst_and_rejects_bad_shapes() {
+        assert_eq!(parse_args(&v(&["d", "s.md"])).unwrap().engine, "typst");
+        assert!(parse_args(&v(&["d"])).is_err());
+        assert!(parse_args(&v(&["a", "b", "c", "d"])).is_err());
+        assert!(parse_args(&v(&["--engine", "tex", "d", "s"])).is_err());
+        assert!(parse_args(&v(&["--engine"])).is_err());
+    }
 }

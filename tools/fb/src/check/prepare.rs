@@ -103,28 +103,17 @@ pub fn prepare(c: &Ctx, sid: &str, md: &str, pdf: &str, w: &str) -> Res<Option<P
                 &c.court,
                 &format!(".samples[] | select(.id == \"{sid}\") | .md"),
             )?;
-            let mut r = if c.engine == "typst" {
-                let mut command = std::process::Command::new(
-                    std::env::current_exe().map_err(|e| io_fail("fb", e))?,
-                );
-                command
-                    .current_dir(&c.root)
-                    .args(["render", &c.doc, mdrel.as_str(), pdf]);
-                command
-            } else {
-                cmd(
-                    &c.env,
-                    "sh",
-                    &[
-                        &format!("{}/tools/render.sh", c.root),
-                        "--engine",
-                        &c.engine,
-                        &c.doc,
-                        &mdrel,
-                        pdf,
-                    ],
-                )
-            };
+            let mut r =
+                std::process::Command::new(std::env::current_exe().map_err(|e| io_fail("fb", e))?);
+            r.envs(c.env.iter().map(|(k, v)| (k.as_str(), v.as_str())));
+            r.current_dir(&c.root).args([
+                "render",
+                "--engine",
+                &c.engine,
+                &c.doc,
+                mdrel.as_str(),
+                pdf,
+            ]);
             r.stdout(Stdio::null());
             super::sh::flush();
             r.status().map_err(|e| io_fail("sh", e))?.success()
