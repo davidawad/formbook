@@ -39,10 +39,12 @@
 
 /// A block of double-spaced text rounded up to whole 24 pt lines. Typst leaves the leading out of a
 /// paragraph's measured height, so an unrounded block would sit on the line above it.
-#let on-grid(c, sticky: false, width: text-width) = context {
-  let h = measure(width: width, c).height
-  block(width: width, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, sticky: sticky, c)
-}
+#let on-grid(c, sticky: false, width: none) = layout(size => {
+  // width none: the width of the column the block sits in (a list item's body is narrower than the text block)
+  let w = if width == none { size.width } else { width }
+  let h = measure(width: w, c).height
+  block(width: w, height: calc.ceil(h / pitch) * pitch, above: 0pt, below: 0pt, sticky: sticky, c)
+})
 
 /// Chunk kinds of the body: headings (# ## ###), directives (:::), lists (1. or -), paragraphs.
 #let kind(c) = {
@@ -179,7 +181,7 @@
         parts.push(v(pitch))
         parts.push(on-grid(heading(level: lvl, outlined: true)[#inl(c.slice(lvl + 1).trim())], sticky: true))
       } else if k == "list" {
-        let items = list-items(c).map(i => on-grid(inl(i), width: text-width - 1in))
+        let items = list-items(c).map(i => on-grid(inl(i)))   // fills the enum body column (indent and body-indent are the 1 in)
         parts.push(enum(numbering: letters, spacing: 0pt, indent: 0.5in, body-indent: 0.5in, ..items))
       } else {
         parts.push(on-grid([#h(para-indent)#inl(c)]))

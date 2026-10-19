@@ -146,7 +146,7 @@
   align(center, text(weight: "bold", "TABLE OF CONTENTS"))
   gap(pitch)
   set par(leading: single-leading, spacing: 0pt)
-  outline(title: none, depth: 3, indent: n => 0.5in * (n - 1))
+  outline(title: none, depth: 3, indent: n => 0.5in * calc.max(0, n - 1))   // n is 0-based: level 1 stays on the margin
 }
 
 // ---------------------------------------------------------------------------

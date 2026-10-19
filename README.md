@@ -107,7 +107,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Department of Justice Board of Immigration Appeals](courts/national/board-of-immigration-appeals) | `bia` | up for review | — | — | — | 14 |
+| [United States Department of Justice Board of Immigration Appeals](courts/national/board-of-immigration-appeals) | `bia` | in progress | — | — | — | 14 |
 | [United States Foreign Intelligence Surveillance Court](courts/national/foreign-intelligence-surveillance-court) | `fisc` | in progress | — | — | — | 14 |
 | [United States Foreign Intelligence Surveillance Court of Review](courts/national/foreign-intelligence-surveillance-court-of-review) | `fiscr` | up for review | — | — | — | 14 |
 | [United States Judicial Panel on Multidistrict Litigation](courts/national/judicial-panel-on-multidistrict-litigation) | `jpml` | up for review | — | — | — | 14 |
@@ -835,7 +835,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 |  | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
 | Federal Circuit and feeder courts | 6 | 0 | 4 | 2 | 0 | 0.0% | 66.6% | 0 | 0 | 0 | 14.0% |
 | Military courts | 6 | 0 | 3 | 3 | 0 | 0.0% | 50.0% | 0 | 0 | 0 | 11.6% |
-| National courts and tribunals | 5 | 0 | 3 | 2 | 0 | 0.0% | 60.0% | 0 | 0 | 0 | 14.0% |
+| National courts and tribunals | 5 | 0 | 2 | 3 | 0 | 0.0% | 40.0% | 0 | 0 | 0 | 14.0% |
 | First Circuit | 23 | 0 | 9 | 10 | 4 | 0.0% | 39.1% | 0 | 0 | 0 | 11.5% |
 | Second Circuit | 23 | 0 | 5 | 14 | 4 | 0.0% | 21.7% | 0 | 0 | 0 | 11.5% |
 | Third Circuit | 23 | 0 | 9 | 10 | 4 | 0.0% | 39.1% | 0 | 0 | 0 | 10.9% |
@@ -848,7 +848,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Tenth Circuit | 34 | 0 | 0 | 31 | 3 | 0.0% | 0.0% | 0 | 0 | 0 | 4.5% |
 | Eleventh Circuit | 32 | 0 | 0 | 32 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 5.6% |
 | D.C. Circuit | 4 | 0 | 2 | 2 | 0 | 0.0% | 50.0% | 0 | 0 | 0 | 14.0% |
-| **Total** | 376 | 0 | 73 | 279 | 24 | 0.0% | 19.4% | 1 | 0 | 0 | 9.5% |
+| **Total** | 376 | 0 | 72 | 280 | 24 | 0.0% | 19.1% | 1 | 0 | 0 | 9.5% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -858,12 +858,12 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Supreme Court of the United States | 3 | 3 | 3 | 3 | 3 | 3 | 100.0% | 0 |
 | Federal Circuit and feeder courts | 13 | 13 | 13 | 13 | 13 | 13 | 100.0% | 10 |
 | Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 91.6% | 8 |
-| National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 3 |
+| National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 2 |
 | First Circuit | 26 | 26 | 26 | 26 | 25 | 25 | 96.1% | 23 |
-| Second Circuit | 32 | 32 | 32 | 32 | 32 | 32 | 100.0% | 18 |
+| Second Circuit | 32 | 32 | 32 | 32 | 32 | 32 | 100.0% | 20 |
 | Third Circuit | 27 | 27 | 27 | 27 | 27 | 27 | 100.0% | 23 |
-| Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 32 |
-| Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 24 |
+| Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 31 |
+| Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 27 |
 | Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 34 |
 | Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 26 |
 | Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 36 |
@@ -871,5 +871,5 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 32 |
 | Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 40 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 6 |
-| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 358 |
+| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 361 |
 <!-- tracker:end -->
