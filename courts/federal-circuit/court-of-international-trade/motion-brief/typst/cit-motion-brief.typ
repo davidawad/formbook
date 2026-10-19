@@ -289,7 +289,7 @@
   align(center, strong(upper[Certificate of Compliance]))
   v(pitch)
   par(first-line-indent: para-indent, leading: body-leading, [
-    This brief has been prepared using a proportionally spaced typeface (#font-family, #str(type-size.pt())-point).
+    This brief has been prepared using a proportionally spaced typeface (#font-family.first(), #str(type-size.pt())-point).
     In accordance with the Standard Chambers Procedures of this Court, the undersigned certifies that
     this brief contains #group-digits(words) words, excluding the parts of the brief exempted by
     Chambers Procedures 2(B)(1)(c). The count includes headings, footnotes and quotations.

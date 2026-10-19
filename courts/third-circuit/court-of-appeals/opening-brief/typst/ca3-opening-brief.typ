@@ -385,7 +385,7 @@
   set par(first-line-indent: para-indent, leading: body-leading, justify: false)
   [This brief complies with the type-volume limitation of Fed. R. App. P. 32(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. App. P. 32(f).]
   parbreak()
-  [This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because it has been prepared in a proportionally spaced typeface using #meta.at("prepared_with", default: "Typst") in font size 14, font style #font-family.]
+  [This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because it has been prepared in a proportionally spaced typeface using #meta.at("prepared_with", default: "Typst") in font size 14, font style #font-family.first().]
   certificate-signature(meta)
 }
 

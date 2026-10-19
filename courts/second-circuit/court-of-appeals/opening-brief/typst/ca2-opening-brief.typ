@@ -400,7 +400,7 @@
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
   [1\. This document complies with the type-volume limit of Fed. R. App. P. 32(a)(7)(B) and Local Rule 32.1(a) because, excluding the parts of the document exempted by Fed. R. App. P. 32(f): this document contains #group-digits(words) words.]
   parbreak()
-  [2\. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type style requirements of Fed. R. App. P. 32(a)(6) because: this document has been prepared in a proportionally spaced typeface using #font-family in #int(type-size.pt())-point type.]
+  [2\. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type style requirements of Fed. R. App. P. 32(a)(6) because: this document has been prepared in a proportionally spaced typeface using #font-family.first() in #int(type-size.pt())-point type.]
   form-sig-line(need(meta, "signature").signer, meta.at("date", default: ""))
 }
 

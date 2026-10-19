@@ -310,7 +310,7 @@
   pagebreak()
   front-title("Certificate of Compliance")
   par(first-line-indent: para-indent, [This brief complies with the type-volume limitation of #kind.limit-cite because it contains #words words, excluding the parts of the brief exempted under Fed. R. Bankr. P. 8015(g).])
-  par(first-line-indent: para-indent, [This brief complies with the typeface and type-style requirements of Fed. R. Bankr. P. 8015(a)(5) and (6) because it has been prepared in a proportionally spaced typeface, #font-family #str(type-size / 1pt)-point, using the vendored font.])
+  par(first-line-indent: para-indent, [This brief complies with the typeface and type-style requirements of Fed. R. Bankr. P. 8015(a)(5) and (6) because it has been prepared in a proportionally spaced typeface, #font-family.first() #str(type-size / 1pt)-point, using the vendored font.])
   v(1.2em)
   // Plain single spacing (as in the L.R. 8014-1 statements below), so the block stays compact.
   block(breakable: false, {
