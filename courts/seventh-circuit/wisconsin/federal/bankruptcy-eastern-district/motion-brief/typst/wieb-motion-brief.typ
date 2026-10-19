@@ -4,7 +4,7 @@
 // No case-specific text, no coordinates measured off the filed exemplar, no forced
 // line breaks. The markdown body is rendered by cmarker; the metadata comes from the
 // YAML frontmatter of the same file (schema: ../README.md, "Markdown contract").
-// The body is split at the line "%%BRIEF%%": above it is the motion, below it the brief.
+// The body is split at the line "<!-- BRIEF -->": above it is the motion, below it the brief.
 
 #import "@preview/cmarker:0.1.10"
 
@@ -18,7 +18,7 @@
 #let single-leading = 0.55em               // caption, headings, blocks, notice: single-spaced.
 #let page-margin = 1in                     // WIEB-FORM-003: one-inch margin on all sides.
 #let para-indent = 0.5in
-#let brief-marker = "%%BRIEF%%"
+#let brief-marker = "<!-- BRIEF -->"
 
 // ---------------------------------------------------------------------------
 // Helpers

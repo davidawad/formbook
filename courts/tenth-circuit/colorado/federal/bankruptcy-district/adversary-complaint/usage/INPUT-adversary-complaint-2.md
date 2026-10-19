@@ -33,7 +33,7 @@ signature:
     - "Email: [redacted]"
 ---
 
-+Plaintiff, Dawn Reitmair, pro se, respectfully states as follows:
+^Plaintiff, Dawn Reitmair, pro se, respectfully states as follows:
 
 # Intent of this Action
 

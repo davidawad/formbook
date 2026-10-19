@@ -373,7 +373,7 @@
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
   [The foregoing brief complies with the type-volume limitation of Circuit Rule 32(c). The brief contains #group-digits(words) words, excluding those parts of the brief exempted by Federal Rule of Appellate Procedure 32(f).]
   parbreak()
-  [This brief complies with the typeface and type-style requirements of Federal Rule of Appellate Procedure 32(a)(5)-(6) and Circuit Rule 32(b) because this brief has been prepared in a proportionally spaced typeface using Typst #str(sys.version) in #font-family #str(int(type-size.pt()))-point font.]
+  [This brief complies with the typeface and type-style requirements of Federal Rule of Appellate Procedure 32(a)(5)-(6) and Circuit Rule 32(b) because this brief has been prepared in a proportionally spaced typeface using Typst #str(sys.version) in #font-family.first() #str(int(type-size.pt()))-point font.]
   form-sig-line(meta)
 }
 

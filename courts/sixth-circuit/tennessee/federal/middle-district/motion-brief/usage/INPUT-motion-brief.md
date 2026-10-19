@@ -100,10 +100,10 @@ Tennessee law governs Veris’s defamation claim because federal courts sitting 
 
 For the foregoing reasons, Gefteas requests that this action be dismissed in its entirety for lack of subject-matter and/or personal jurisdiction. In the alternative, if, and only if, this Court declines to dismiss on jurisdictional grounds, Mr. Gefteas requests that this action be dismissed for improper venue. Finally, if, and only, if this Court finds jurisdiction and proper venue, Gefteas requests that this action be dismissed for failure to state a claim upon which relief can be granted.
 
-@signature
+<!-- signature -->
 
 # CERTIFICATE OF SERVICE
 
 I hereby certify that on the 11th day of September, 2026, I electronically filed the foregoing document with the Clerk of the Court using the CM/ECF system. Notice of this filing will be sent by operation of the Court’s electronic filing system to all attorneys of record registered on the CM/ECF system. All other parties will be served by electronic mail and/or U.S. Mail. Parties may access this filing through the Court’s electronic filing system.
 
-@service
+<!-- service -->

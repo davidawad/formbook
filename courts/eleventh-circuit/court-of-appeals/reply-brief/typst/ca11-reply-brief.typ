@@ -355,7 +355,7 @@
   set par(first-line-indent: para-indent, leading: body-leading, spacing: body-leading, justify: false)
   [1\. This document complies with the word limit of Fed. R. App. P. 32(a)(7)(B) because, excluding the parts of the document exempted by Fed. R. App. P. 32(f) and 11th Cir. R. 32-4, this document contains #group-digits(words) words. This word count was computed from the source text of this document.]
   parbreak()
-  [2\. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because this document has been prepared in a proportionally spaced typeface using Typst in #font-family, #(type-size / 1pt)-point font.]
+  [2\. This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because this document has been prepared in a proportionally spaced typeface using Typst in #font-family.first(), #(type-size / 1pt)-point font.]
   signature-block(meta)
 }
 

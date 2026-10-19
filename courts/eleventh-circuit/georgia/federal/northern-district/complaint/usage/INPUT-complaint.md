@@ -123,7 +123,7 @@ ServeCo is entitled to a declaratory judgment that it holds an implied license t
 
 # Prayer for Relief
 
-^^ WHEREFORE, Plaintiff ServeCo respectfully requests that this Court enter judgment in its favor and against Defendant Martinez as follows:
+~ WHEREFORE, Plaintiff ServeCo respectfully requests that this Court enter judgment in its favor and against Defendant Martinez as follows:
 
 1. Declaring that ServeCo has not infringed and does not infringe, directly or indirectly, literally or under the doctrine of equivalents, any claim of U.S. Patent No. 12,618,781;
 2. Declaring that each claim of U.S. Patent No. 12,618,781 is invalid;
@@ -137,4 +137,4 @@ ServeCo is entitled to a declaratory judgment that it holds an implied license t
 
 # Demand for Jury Trial
 
-^^ Pursuant to Rule 38 of the Federal Rules of Civil Procedure, Plaintiff ServeCo North America LLC demands a trial by jury on all issues so triable.
+~ Pursuant to Rule 38 of the Federal Rules of Civil Procedure, Plaintiff ServeCo North America LLC demands a trial by jury on all issues so triable.

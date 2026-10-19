@@ -221,7 +221,7 @@
 // ---- Entry -------------------------------------------------------------------------------------
 #let ga-brief(meta, body) = {
   set document(title: meta.case_number + " " + meta.brief_title)
-  set page(paper: "us-letter", margin: margin, footer-descent: 0.4in)
+  set page(paper: "us-letter", margin: (x: margin, top: margin + 4pt, bottom: margin + 4pt), footer-descent: 0.4in)
   // Set once for the whole document, not only inside the page wrappers: footnote areas are laid
   // out with the page's own style, and otherwise fall back to typst's default serif.
   set text(font: face, size: body-size, lang: "en")

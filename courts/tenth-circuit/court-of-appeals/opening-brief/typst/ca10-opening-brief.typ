@@ -401,7 +401,7 @@
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
   [This brief complies with the type-volume limitation of Federal Rule of Appellate Procedure 32(a)(7)(B), because it contains #group-digits(words) words, which is no more than the #group-digits(word-limit) words permitted for a principal brief, excluding the parts of the brief exempted by Federal Rule of Appellate Procedure 32(f).]
   parbreak()
-  [The brief also complies with the typeface requirements of Federal Rule of Appellate Procedure 32(a)(5) and the type style requirements of Federal Rule of Appellate Procedure 32(a)(6), because it has been prepared in a proportionally spaced typeface, #font-family, in #int(type-size / 1pt)-point type.]
+  [The brief also complies with the typeface requirements of Federal Rule of Appellate Procedure 32(a)(5) and the type style requirements of Federal Rule of Appellate Procedure 32(a)(6), because it has been prepared in a proportionally spaced typeface, #font-family.first(), in #int(type-size / 1pt)-point type.]
   certificate-signature(meta)
 }
 

@@ -103,7 +103,7 @@
 }
 
 /// Body content: the chunks in order. Paragraphs before the first heading are the lead-in (unnumbered), and so is
-/// any paragraph that starts with "[unnumbered] " (the WHEREFORE paragraph, the jury demand sentence).
+/// any paragraph that starts with "~  " (the WHEREFORE paragraph, the jury demand sentence).
 #let body-content(chunks) = {
   let first = chunks.position(t => t.starts-with("#"))
   for (i, t) in chunks.enumerate() {
@@ -114,8 +114,8 @@
       quote-block(t)
     } else if t.match(regex("^\\d+\\.\\s")) != none {
       list-block(t)
-    } else if t.starts-with("[unnumbered]") {
-      lead-para(t.slice(12).trim())
+    } else if t.starts-with("~ ") {
+      lead-para(t.slice(2).trim())
     } else if first != none and i > first {
       numbered-para(t)
     } else {

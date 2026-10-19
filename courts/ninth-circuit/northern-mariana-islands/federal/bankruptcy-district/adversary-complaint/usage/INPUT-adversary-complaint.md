@@ -75,7 +75,7 @@ Plaintiff incorporates the paragraphs above.
 
 # PRAYER FOR RELIEF
 
-:: WHEREFORE, Plaintiff requests that the Court enter judgment:
+~ WHEREFORE, Plaintiff requests that the Court enter judgment:
 
 1. determining that the debt described above is excepted from discharge under 11 U.S.C. § 523;
 2. awarding the placeholder amount described above;

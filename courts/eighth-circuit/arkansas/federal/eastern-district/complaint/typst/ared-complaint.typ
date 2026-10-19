@@ -176,7 +176,7 @@
 
   set page(
     paper: "us-letter",
-    margin: (top: margin, bottom: margin, left: margin, right: margin),
+    margin: (top: margin + 4pt, bottom: margin, left: margin, right: margin),
     footer: footer-block(),
     footer-descent: 0.35in,
   )

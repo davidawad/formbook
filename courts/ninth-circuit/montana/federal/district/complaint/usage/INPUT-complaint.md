@@ -63,7 +63,7 @@ DCT is harmed by the Act as detailed in this Complaint. The requested declarator
 
 # PRAYER FOR RELIEF
 
-%WHEREFORE, Plaintiffs respectfully request that the Court:
+~ WHEREFORE, Plaintiffs respectfully request that the Court:
 
 1. Permanently enjoin the Attorney General, his officers, agents, servants, employees, and attorneys, and those persons in active concert or participation with them who receive actual notice of the injunction, from participating in the enforcement of the Act;
 1. Declare that the Act violates the First and Fourteenth Amendments to, and the Commerce and Supremacy Clauses of, the United States Constitution and is therefore unenforceable and void;
@@ -72,6 +72,6 @@ DCT is harmed by the Act as detailed in this Complaint. The requested declarator
 
 # DEMAND FOR JURY TRIAL
 
-%Plaintiffs hereby demand a trial by jury on all fact issues in the above-entitled case.
+~ Plaintiffs hereby demand a trial by jury on all fact issues in the above-entitled case.
 
 [^1]: See, e.g., *American Booksellers Foundation v. Sullivan*, 799 F. Supp. 2d 1078 (D. Alaska 2011) (Alaska); *American Booksellers Foundation v. Coakley*, 2010 WL 4273802 (D. Mass. 2010) (Mass.); *PSINet, Inc. v. Chapman*, 362 F.3d 227 (4th Cir. 2004) (Virginia); *American Booksellers Foundation v. Dean*, 342 F.3d 96 (2d Cir. 2003) (Vermont); *Cyberspace Communications, Inc. v. Engler*, 238 F.3d 420 (6th Cir. 2000) (Michigan); *ACLU v. Johnson*, 194 F.3d 1149 (10th Cir. 1999) (New Mexico); *ACLU v. Goddard*, Civ. 00-0505 (D. Ariz. Aug. 11, 2004) (Arizona); *Southeast Booksellers Ass’n v. McMaster*, 282 F. Supp. 2d 389 (D.S.C. 2003) (South Carolina); *American Library Association v. Pataki*, 969 F. Supp. 160 (S.D.N.Y. 1997) (New York).

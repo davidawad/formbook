@@ -369,7 +369,7 @@
   set par(first-line-indent: 0pt, leading: single-leading, spacing: 1em, justify: false)
   [I certify that this brief complies with the type-volume limit of Fed. R. App. P. 32(a)(7)(B), as modified by Cir. R. 32(c). Excluding the parts of the brief exempted by Fed. R. App. P. 32(f), this brief contains #group-digits(words) words.]
   parbreak()
-  [I further certify that this brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6), as modified by Cir. R. 32(b). This brief has been prepared in a proportionally spaced typeface using Typst #sys.version.major.#sys.version.minor.#sys.version.patch in #str(int(type-size.pt()))-point #font-family for the body text and #str(int(note-size.pt()))-point #font-family for the footnotes.]
+  [I further certify that this brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6), as modified by Cir. R. 32(b). This brief has been prepared in a proportionally spaced typeface using Typst #sys.version.major.#sys.version.minor.#sys.version.patch in #str(int(type-size.pt()))-point #font-family.first() for the body text and #str(int(note-size.pt()))-point #font-family.first() for the footnotes.]
   form-sig-line(meta)
 }
 

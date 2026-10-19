@@ -154,7 +154,7 @@ As a direct and proximate result of Defendant IPLA's conduct, PLAL, IRL and IRLA
 
 Defendants' infringement and misleading statements are currently causing irreparable harm to Plaintiffs and Defendants' misconduct threatens to continue unless enjoined.
 
-%Defendant IPLA's very choice of name demonstrates intent to benefit from the decades-old reputation of the Pro-Life Action League and Illinois Right to Life names.
+~ Defendant IPLA's very choice of name demonstrates intent to benefit from the decades-old reputation of the Pro-Life Action League and Illinois Right to Life names.
 
 # COUNT I
 
@@ -182,7 +182,7 @@ Plaintiff PLAL has suffered and will continue to suffer irreparable harm for whi
 
 # PRAYER FOR RELIEF
 
-%WHEREFORE, Plaintiffs respectfully request that the Court enter judgment against Defendants and provide the following relief:
+~ WHEREFORE, Plaintiffs respectfully request that the Court enter judgment against Defendants and provide the following relief:
 
 - 1\. Temporarily, preliminarily, and permanently enjoining Defendants, their officers, agents, servants, employees, and all persons in active concert or participation with them from: (a) using the name "Illinois Pro-Life Action," "IPLA," "Right to Life Action," or any other designation confusingly similar to "Pro-Life Action League," "Illinois Right to Life," or "Illinois Right to Life Action"; (b) using any false or misleading statement, including any false or misleading statement suggesting affiliation with Plaintiffs; (c) mailing, distributing, or publishing any solicitation bearing such marks described in subsection (a) above; and (d) holding themselves out as endorsed by or affiliated with Plaintiffs.
 - 2\. Ordering Defendants to deliver up for destruction all materials bearing the infringing designation(s);

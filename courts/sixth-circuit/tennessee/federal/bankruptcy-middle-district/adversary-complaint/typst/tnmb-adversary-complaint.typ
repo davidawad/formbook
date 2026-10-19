@@ -143,11 +143,11 @@
       })
     } else if t.starts-with(">") {
       block(width: text-width, above: body-leading, below: body-leading, inl(t))
-    } else if t.starts-with("§ ") {
+    } else if t.starts-with("~ ") {
       block(width: text-width, below: body-leading, {
         set par(leading: body-leading, spacing: 0pt)
         h(para-indent)
-        inline-notes(t.slice("§ ".len()), notes)
+        inline-notes(t.slice("~ ".len()), notes)
       })
     } else {
       para-counter.step()

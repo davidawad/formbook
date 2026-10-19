@@ -5,7 +5,7 @@ Courts under `courts/ninth-circuit` (65).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The Ninth Circuit](bankruptcy-appellate-panel) | `bap9` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The Ninth Circuit](bankruptcy-appellate-panel) | `bap9` | up for review | — | — | — | 14 |
 | [Court of Appeals for the Ninth Circuit](court-of-appeals) | `ca9` | up for review | pass | built | — | 71 |
 | [United States Bankruptcy Court, D. Alaska](alaska/federal/bankruptcy-district) | `akb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Alaska](alaska/federal/district) | `akd` | up for review | — | — | — | 14 |
@@ -20,13 +20,13 @@ Courts under `courts/ninth-circuit` (65).
 | [United States District Court for the Northern District of California](california/federal/northern-district) | `cand` | in progress | — | — | — | 14 |
 | [United States District Court for the Southern District of California](california/federal/southern-district) | `casd` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Guam](guam/federal/bankruptcy-district) | `gub` | in progress | — | — | — | 14 |
-| [District Court, D. Guam](guam/federal/district) | `gud` | in progress | — | — | — | 14 |
+| [District Court, D. Guam](guam/federal/district) | `gud` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Hawaii](hawaii/federal/bankruptcy-district) | `hib` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Hawaii](hawaii/federal/district) | `hid` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Idaho](idaho/federal/bankruptcy-district) | `idb` | in progress | — | — | — | 14 |
-| [United States District Court for the District of Idaho](idaho/federal/district) | `idd` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Idaho](idaho/federal/district) | `idd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Montana](montana/federal/bankruptcy-district) | `mtb` | up for review | — | — | — | 14 |
-| [District Court, D. Montana](montana/federal/district) | `mtd` | in progress | — | — | — | 14 |
+| [District Court, D. Montana](montana/federal/district) | `mtd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Nevada](nevada/federal/bankruptcy-district) | `nvb` | in progress | — | — | — | 14 |
 | [District Court, D. Nevada](nevada/federal/district) | `nvd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, Northern Mariana Islands](northern-mariana-islands/federal/bankruptcy-district) | `nmib` | in progress | — | — | — | 0 |

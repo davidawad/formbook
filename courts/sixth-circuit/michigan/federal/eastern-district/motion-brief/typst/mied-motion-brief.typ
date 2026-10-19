@@ -135,15 +135,15 @@
     it.body
   })
 
-  // Split the markdown at its markers: [[brief]] starts the brief, [[body]] starts the numbered text,
-  // [[toc]] places the contents, and CERTIFICATE OF SERVICE closes the body (it is not in the contents).
-  let parts = body.split("[[brief]]")
+  // Split the markdown at its markers: <!-- brief --> starts the brief, <!-- body --> starts the numbered text,
+  // <!-- toc --> places the contents, and CERTIFICATE OF SERVICE closes the body (it is not in the contents).
+  let parts = body.split("<!-- brief -->")
   let motion = parts.at(0)
-  let brief = parts.slice(1).join("[[brief]]")
-  let front-body = brief.split("[[body]]")
+  let brief = parts.slice(1).join("<!-- brief -->")
+  let front-body = brief.split("<!-- body -->")
   let front = front-body.at(0)
-  let main = front-body.slice(1).join("[[body]]")
-  let front-toc = front.split("[[toc]]")
+  let main = front-body.slice(1).join("<!-- body -->")
+  let front-toc = front.split("<!-- toc -->")
   let cert-split = main.split("# CERTIFICATE OF SERVICE")
   let argument = cert-split.at(0)
   let cert = cert-split.slice(1).join("# CERTIFICATE OF SERVICE")
@@ -172,7 +172,7 @@
       md(front-toc.at(0))
       pagebreak()
       contents()
-      md(front-toc.slice(1).join("[[toc]]"))
+      md(front-toc.slice(1).join("<!-- toc -->"))
     } else {
       md(front)
     }

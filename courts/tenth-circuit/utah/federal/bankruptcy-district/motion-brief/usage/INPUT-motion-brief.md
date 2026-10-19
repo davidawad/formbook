@@ -138,17 +138,17 @@ Finally, the theory contradicts Count Three on damages. Count One says the credi
 
 For the foregoing reasons, Plaza 106 respectfully requests that the Court dismiss Count One and Count Three of First Utah Bank's Counterclaim, and grant such further relief as is just.
 
-[[SIGNATURE]]
+<!-- SIGNATURE -->
 
-[[PAGEBREAK]]
+<!-- PAGEBREAK -->
 
 # CERTIFICATE OF COMPLIANCE WITH WORD LIMIT
 
 Pursuant to DUCivR 7-1(a)(4) (incorporated by LBR 1001-1(a)), I certify that this Motion contains 3285 words, excluding the caption, table of contents, table of authorities, signature block, certificate of compliance, and certificate of service, as counted by the word-processing system used to prepare it, and therefore complies with the applicable word limit.
 
-[[SIGNATURE]]
+<!-- SIGNATURE -->
 
-[[PAGEBREAK]]
+<!-- PAGEBREAK -->
 
 # CERTIFICATE OF SERVICE
 

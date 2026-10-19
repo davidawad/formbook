@@ -154,8 +154,8 @@ Courts under `courts` (375).
 | [Texas Judicial Panel on Multidistrict Litigation](fifth-circuit/texas/state/judicial-panel-on-multidistrict-litigation) | `texjpml` | in progress | — | — | — | 14 |
 | [Texas Special Court of Review](fifth-circuit/texas/state/special-court-of-review) | `texreview` | in progress | — | — | — | 14 |
 | [Texas Supreme Court](fifth-circuit/texas/state/supreme-court) | `tex` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Appellate Panel of The Sixth Circuit](sixth-circuit/bankruptcy-appellate-panel) | `bap6` | in progress | — | — | — | 14 |
-| [Court of Appeals for the Sixth Circuit](sixth-circuit/court-of-appeals) | `ca6` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The Sixth Circuit](sixth-circuit/bankruptcy-appellate-panel) | `bap6` | up for review | — | — | — | 14 |
+| [Court of Appeals for the Sixth Circuit](sixth-circuit/court-of-appeals) | `ca6` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Kentucky](sixth-circuit/kentucky/federal/bankruptcy-eastern-district) | `kyeb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Kentucky](sixth-circuit/kentucky/federal/bankruptcy-western-district) | `kywb` | in progress | — | — | — | 0 |
 | [District Court, E.D. Kentucky](sixth-circuit/kentucky/federal/eastern-district) | `kyed` | in progress | — | — | — | 0 |
@@ -172,7 +172,7 @@ Courts under `courts` (375).
 | [United States Bankruptcy Court, M.D. Tennessee](sixth-circuit/tennessee/federal/bankruptcy-middle-district) | `tnmb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Tennessee](sixth-circuit/tennessee/federal/bankruptcy-western-district) | `tnwb` | in progress | — | — | — | 0 |
 | [District Court, E.D. Tennessee](sixth-circuit/tennessee/federal/eastern-district) | `tned` | up for review | — | — | — | 14 |
-| [District Court, M.D. Tennessee](sixth-circuit/tennessee/federal/middle-district) | `tnmd` | in progress | — | — | — | 14 |
+| [District Court, M.D. Tennessee](sixth-circuit/tennessee/federal/middle-district) | `tnmd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Tennessee](sixth-circuit/tennessee/federal/western-district) | `tnwd` | in progress | — | — | — | 0 |
 | [Court of Appeals of Kentucky](sixth-circuit/kentucky/state/court-of-appeals) | `kyctapp` | in progress | — | — | — | 14 |
 | [Kentucky Supreme Court](sixth-circuit/kentucky/state/supreme-court) | `ky` | in progress | — | — | — | 14 |
@@ -184,20 +184,20 @@ Courts under `courts` (375).
 | [Court of Appeals of Tennessee](sixth-circuit/tennessee/state/court-of-appeals) | `tennctapp` | in progress | — | — | — | 14 |
 | [Court of Criminal Appeals of Tennessee](sixth-circuit/tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | in progress | — | — | — | 14 |
 | [Tennessee Supreme Court](sixth-circuit/tennessee/state/supreme-court) | `tenn` | in progress | — | — | — | 14 |
-| [Court of Appeals for the Seventh Circuit](seventh-circuit/court-of-appeals) | `ca7` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Seventh Circuit](seventh-circuit/court-of-appeals) | `ca7` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, C.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-central-district) | `ilcb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-northern-district) | `ilnb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-southern-district) | `ilsb` | in progress | — | — | — | 14 |
 | [District Court, C.D. Illinois](seventh-circuit/illinois/federal/central-district) | `ilcd` | in progress | — | — | — | 14 |
 | [District Court, N.D. Illinois](seventh-circuit/illinois/federal/northern-district) | `ilnd` | up for review | — | — | — | 14 |
-| [District Court, S.D. Illinois](seventh-circuit/illinois/federal/southern-district) | `ilsd` | in progress | — | — | — | 14 |
+| [District Court, S.D. Illinois](seventh-circuit/illinois/federal/southern-district) | `ilsd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-northern-district) | `innb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-southern-district) | `insb` | in progress | — | — | — | 14 |
 | [District Court, N.D. Indiana](seventh-circuit/indiana/federal/northern-district) | `innd` | in progress | — | — | — | 14 |
-| [District Court, S.D. Indiana](seventh-circuit/indiana/federal/southern-district) | `insd` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-eastern-district) | `wieb` | in progress | — | — | — | 14 |
+| [District Court, S.D. Indiana](seventh-circuit/indiana/federal/southern-district) | `insd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-eastern-district) | `wieb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-western-district) | `wiwb` | in progress | — | — | — | 14 |
-| [District Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/eastern-district) | `wied` | in progress | — | — | — | 14 |
+| [District Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/eastern-district) | `wied` | up for review | — | — | — | 14 |
 | [District Court, W.D. Wisconsin](seventh-circuit/wisconsin/federal/western-district) | `wiwd` | up for review | — | — | — | 14 |
 | [Appellate Court of Illinois](seventh-circuit/illinois/state/appellate-court) | `illappct` | in progress | — | — | — | 14 |
 | [Illinois Supreme Court](seventh-circuit/illinois/state/supreme-court) | `ill` | in progress | — | — | — | 14 |
@@ -207,7 +207,7 @@ Courts under `courts` (375).
 | [Court of Appeals of Wisconsin](seventh-circuit/wisconsin/state/court-of-appeals) | `wisctapp` | in progress | — | — | — | 14 |
 | [Wisconsin Supreme Court](seventh-circuit/wisconsin/state/supreme-court) | `wis` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Appellate Panel of The Eighth Circuit](eighth-circuit/bankruptcy-appellate-panel) | `bap8` | up for review | — | — | — | 14 |
-| [Court of Appeals for the Eighth Circuit](eighth-circuit/court-of-appeals) | `ca8` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Eighth Circuit](eighth-circuit/court-of-appeals) | `ca8` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Arkansas](eighth-circuit/arkansas/federal/bankruptcy-eastern-district) | `areb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Arkansas](eighth-circuit/arkansas/federal/bankruptcy-western-district) | `arwb` | in progress | — | — | — | 0 |
 | [United States District Court for the Eastern District of Arkansas](eighth-circuit/arkansas/federal/eastern-district) | `ared` | in progress | — | — | — | 14 |
@@ -216,18 +216,18 @@ Courts under `courts` (375).
 | [United States Bankruptcy Court, S.D. Iowa](eighth-circuit/iowa/federal/bankruptcy-southern-district) | `iasb` | in progress | — | — | — | 0 |
 | [District Court, N.D. Iowa](eighth-circuit/iowa/federal/northern-district) | `iand` | in progress | — | — | — | 0 |
 | [District Court, S.D. Iowa](eighth-circuit/iowa/federal/southern-district) | `iasd` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, D. Minnesota](eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Minnesota](eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | up for review | — | — | — | 14 |
 | [District Court, D. Minnesota](eighth-circuit/minnesota/federal/district) | `mnd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Missouri](eighth-circuit/missouri/federal/bankruptcy-eastern-district) | `moeb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Missouri](eighth-circuit/missouri/federal/bankruptcy-western-district) | `mowb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Missouri](eighth-circuit/missouri/federal/eastern-district) | `moed` | up for review | — | — | — | 14 |
 | [District Court, W.D. Missouri](eighth-circuit/missouri/federal/western-district) | `mowd` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Nebraska](eighth-circuit/nebraska/federal/bankruptcy-district) | `nebraskab` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Nebraska](eighth-circuit/nebraska/federal/bankruptcy-district) | `nebraskab` | up for review | — | — | — | 14 |
 | [United States District Court, Nebraska](eighth-circuit/nebraska/federal/district) | `ned` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. North Dakota](eighth-circuit/north-dakota/federal/bankruptcy-district) | `ndb` | in progress | — | — | — | 14 |
-| [District Court, D. North Dakota](eighth-circuit/north-dakota/federal/district) | `ndd` | in progress | — | — | — | 14 |
+| [District Court, D. North Dakota](eighth-circuit/north-dakota/federal/district) | `ndd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. South Dakota](eighth-circuit/south-dakota/federal/bankruptcy-district) | `sdb` | in progress | — | — | — | 14 |
-| [District Court, D. South Dakota](eighth-circuit/south-dakota/federal/district) | `sdd` | in progress | — | — | — | 14 |
+| [District Court, D. South Dakota](eighth-circuit/south-dakota/federal/district) | `sdd` | up for review | — | — | — | 14 |
 | [Arkansas Court of Appeals](eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 14 |
 | [Arkansas Supreme Court](eighth-circuit/arkansas/state/supreme-court) | `ark` | in progress | — | — | — | 14 |
 | [Arkansas Workers' Compensation Commission](eighth-circuit/arkansas/state/workers-compensation-commission) | `arkworkcompcom` | todo | — | — | — | 0 |
@@ -245,7 +245,7 @@ Courts under `courts` (375).
 | [North Dakota Court of Appeals](eighth-circuit/north-dakota/state/court-of-appeals) | `ndctapp` | in progress | — | — | — | 14 |
 | [North Dakota Supreme Court](eighth-circuit/north-dakota/state/supreme-court) | `nd` | in progress | — | — | — | 14 |
 | [Supreme Court of South Dakota](eighth-circuit/south-dakota/state/supreme-court) | `sd` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Appellate Panel of The Ninth Circuit](ninth-circuit/bankruptcy-appellate-panel) | `bap9` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The Ninth Circuit](ninth-circuit/bankruptcy-appellate-panel) | `bap9` | up for review | — | — | — | 14 |
 | [Court of Appeals for the Ninth Circuit](ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | built | — | 71 |
 | [United States Bankruptcy Court, D. Alaska](ninth-circuit/alaska/federal/bankruptcy-district) | `akb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Alaska](ninth-circuit/alaska/federal/district) | `akd` | up for review | — | — | — | 14 |
@@ -260,13 +260,13 @@ Courts under `courts` (375).
 | [United States District Court for the Northern District of California](ninth-circuit/california/federal/northern-district) | `cand` | in progress | — | — | — | 14 |
 | [United States District Court for the Southern District of California](ninth-circuit/california/federal/southern-district) | `casd` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Guam](ninth-circuit/guam/federal/bankruptcy-district) | `gub` | in progress | — | — | — | 14 |
-| [District Court, D. Guam](ninth-circuit/guam/federal/district) | `gud` | in progress | — | — | — | 14 |
+| [District Court, D. Guam](ninth-circuit/guam/federal/district) | `gud` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Hawaii](ninth-circuit/hawaii/federal/bankruptcy-district) | `hib` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Hawaii](ninth-circuit/hawaii/federal/district) | `hid` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Idaho](ninth-circuit/idaho/federal/bankruptcy-district) | `idb` | in progress | — | — | — | 14 |
-| [United States District Court for the District of Idaho](ninth-circuit/idaho/federal/district) | `idd` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Idaho](ninth-circuit/idaho/federal/district) | `idd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Montana](ninth-circuit/montana/federal/bankruptcy-district) | `mtb` | up for review | — | — | — | 14 |
-| [District Court, D. Montana](ninth-circuit/montana/federal/district) | `mtd` | in progress | — | — | — | 14 |
+| [District Court, D. Montana](ninth-circuit/montana/federal/district) | `mtd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Nevada](ninth-circuit/nevada/federal/bankruptcy-district) | `nvb` | in progress | — | — | — | 14 |
 | [District Court, D. Nevada](ninth-circuit/nevada/federal/district) | `nvd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, Northern Mariana Islands](ninth-circuit/northern-mariana-islands/federal/bankruptcy-district) | `nmib` | in progress | — | — | — | 0 |

@@ -118,7 +118,7 @@
   if c.starts-with("# ") { heading-one(c.slice(2)) }
   else if c.starts-with("## ") { heading-two(c.slice(3)) }
   else if c.starts-with("- ") { items(c, defs) }
-  else if c.starts-with("%") { unnumbered(c.slice(1), defs) }
+  else if c.starts-with("~ ") { unnumbered(c.slice(2), defs) }
   else if c.starts-with("[^") { none }
   else { numbered(c, defs) }
 }

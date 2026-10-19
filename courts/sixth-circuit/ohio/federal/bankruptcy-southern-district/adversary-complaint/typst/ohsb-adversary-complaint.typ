@@ -135,7 +135,7 @@
       heading-block(align(center, text(weight: "bold", t.slice(3))))
     } else if t.starts-with("# ") {
       heading-block(align(center, text(weight: "bold", upper(t.slice(2)))))
-    } else if t == "{{SIGNATURE}}" {
+    } else if t == "<!-- SIGNATURE -->" {
       signature-block(meta)
     } else if t.starts-with("|") {
       block(width: text-width, above: body-leading, below: body-leading,

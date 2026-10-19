@@ -48,7 +48,7 @@ The defendants, Mark Clauss, Christopher Drout and Suzy Lindblom, through their 
 
 WHEREFORE, the defendants request that the Complaint be dismissed in its entirety and with prejudice, and request that the Court bar the plaintiff from filing future adversary complaints against the defendants.
 
-%%BRIEF%%
+<!-- BRIEF -->
 
 # INTRODUCTION
 
@@ -80,7 +80,7 @@ The Supreme Court has held that to survive a motion to dismiss, a plaintiff must
 
 ## A. Plaintiff's Claims are Barred by Binding Precedent from the U.S. District Court for the Eastern District of Wisconsin and the U.S. Court of Appeals for the Seventh Circuit.
 
-Plaintiff has been unsuccessful with these alleged claims in four different courts: (1) the Wisconsin Circuit Court for Racine County; (2) the U.S. District Court for the Eastern District of Wisconsin; (3) the U.S. Court of Appeals for the Seventh Circuit; and (4) the Eastern District Bankruptcy Court of Wisconsin. Again, the plaintiff seeks to collaterally attack the State Court, Federal Court, Appellate Court and Bankruptcy Court orders through this adversary proceeding. As other bankruptcy courts have observed, "[n]othing in the history or structure of the Bankruptcy Code suggests that Congress ever intended the code as simply providing an alternative federal forum for the resolution of state law claims, let alone serving as a forum of last resort when a litigant had been unsuccessful in other courts." *In re Sawyer*, No. 07-10252, 2007 WL 1725621, at *7 (Bankr. E.D. Va. June 13, 2007).
+Plaintiff has been unsuccessful with these alleged claims in four different courts: (1) the Wisconsin Circuit Court for Racine County; (2) the U.S. District Court for the Eastern District of Wisconsin; (3) the U.S. Court of Appeals for the Seventh Circuit; and (4) the Eastern District Bankruptcy Court of Wisconsin. Again, the plaintiff seeks to collaterally attack the State Court, Federal Court, Appellate Court and Bankruptcy Court orders through this adversary proceeding. As other bankruptcy courts have observed, "[n]othing in the history or structure of the Bankruptcy Code suggests that Congress ever intended the code as simply providing an alternative federal forum for the resolution of state law claims, let alone serving as a forum of last resort when a litigant had been unsuccessful in other courts." *In re Sawyer*, No. 07-10252, 2007 WL 1725621, at \*7 (Bankr. E.D. Va. June 13, 2007).
 
 This Court should be bound by the precedential authority of the Seventh Circuit Court of Appeals, which affirmed the dismissal with prejudice order of the U.S. District Court for the Eastern District of Wisconsin with respect to the plaintiff's claims. *Miller v. United States*, 868 F.2d 236, 241 (7th Cir. 1989); *see also U.S. ex rel. Shore v. O'Leary*, 833 F.2d 663, 667 (7th Cir. 1987). Consequently, this Court must follow the precedential authority of the Seventh Circuit and dismiss this adversary proceeding with prejudice.
 

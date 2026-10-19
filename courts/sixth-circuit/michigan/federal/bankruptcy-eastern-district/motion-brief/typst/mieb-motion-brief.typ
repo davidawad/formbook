@@ -19,7 +19,7 @@
 #let body-leading = 1.345em              // MIEB-FORM-003: double spacing (pitch 28 pt at 14 pt type; see ../README.md).
 #let single-leading = 0.3em              // caption, counsel and signature blocks: single spacing (MIEB-FORM-004).
 #let footnote-leading = 0.3em            // footnotes and block quotations are exempt from double spacing (LBR 9029-1(h)).
-#let margins = 1in                       // MIEB-FORM-001: LBR 9029-1(h) "at least 1 inch on the top, sides and bottom".
+#let margins = (x: 1in, top: 1in + 4pt, bottom: 1in + 4pt)  // MIEB-FORM-001: LBR 9029-1(h) "at least 1 inch on the top, sides and bottom".
 #let para-indent = 0.5in                 // first-line indent of body paragraphs.
 
 // ---------------------------------------------------------------------------

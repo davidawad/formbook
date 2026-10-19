@@ -1,0 +1,3 @@
+# ARB-LBR 9004-1(g) (rules.md ARB-FORM-003): right margin at least 1/2 inch; the templates set 3/4 in on the right.
+params:
+  margin_pt: 54

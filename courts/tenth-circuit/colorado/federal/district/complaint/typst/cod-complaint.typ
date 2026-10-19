@@ -43,7 +43,7 @@
 #let kind(c) = {
   if c.starts-with("#") { "heading" }
   else if c.starts-with(">") { "quote" }
-  else if c.starts-with("::") { "unnumbered" }
+  else if c.starts-with("~ ") { "unnumbered" }
   else if c.match(regex("^(\\d+\\.|[-*+]) ")) != none { "list" }
   else { "para" }
 }

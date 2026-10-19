@@ -397,7 +397,7 @@
 #let certificate-of-compliance(meta, words) = {
   heading(level: 1, numbering: none)[Certificate of Compliance]
   set par(first-line-indent: 0pt, leading: body-leading, spacing: body-leading, justify: false)
-  [Pursuant to Rule 32(g) of the Federal Rules of Appellate Procedure, I certify that the foregoing #strong(upper(inl(need(meta, "brief_title")))) complies with (1) the word limit of Rule 32(a)(7)(B) of the Federal Rules of Appellate Procedure because it contains #group-digits(words) words, which is no more than #group-digits(word-limit), and (2) the typeface and type-style requirements of Rule 32(a)(5) and (6) of the Federal Rules of Appellate Procedure because it has been prepared in a proportionally spaced typeface (#font-family) in #(type-size / 1pt)-point.]
+  [Pursuant to Rule 32(g) of the Federal Rules of Appellate Procedure, I certify that the foregoing #strong(upper(inl(need(meta, "brief_title")))) complies with (1) the word limit of Rule 32(a)(7)(B) of the Federal Rules of Appellate Procedure because it contains #group-digits(words) words, which is no more than #group-digits(word-limit), and (2) the typeface and type-style requirements of Rule 32(a)(5) and (6) of the Federal Rules of Appellate Procedure because it has been prepared in a proportionally spaced typeface (#font-family.first()) in #(type-size / 1pt)-point.]
   signature-block(meta)
 }
 

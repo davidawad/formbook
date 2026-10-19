@@ -18,7 +18,7 @@
 #let single-leading = 0.6em             // counsel block, caption, signature, footnotes, tables of contents and authorities: single-spaced
 // The vertical gap between two blocks or paragraphs: the pitch minus EB Garamond's 0.65 em line box.
 #let gap = line-pitch - 0.65em
-#let margins = (top: 1in, bottom: 1in, left: 1in, right: 1in)   // MT-FORM-001 (L.R. 1.5(a)(1)): one-inch margins
+#let margins = (top: 1in + 4pt, bottom: 1in, left: 1in, right: 1in)   // MT-FORM-001 (L.R. 1.5(a)(1)): one-inch margins
 #let para-indent = 0.5in                // first-line indent of body paragraphs
 #let heading-tab = 0.5in
 #let footer-size = 14pt                 // page number at the foot of every page (MT-FORM-004, L.R. 1.5(a)(3))

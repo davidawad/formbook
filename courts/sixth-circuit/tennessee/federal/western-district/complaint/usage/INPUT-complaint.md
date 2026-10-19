@@ -151,7 +151,7 @@ Shortly after the WHY Z MUSIC transaction, Perry told Plaintiffs that their olde
 
 # PRAYER FOR RELIEF
 
-[unnumbered] WHEREFORE, Plaintiffs demand judgment against Perry and respectfully request that the Court grant the following relief, without duplicative recovery for the same injury under more than one Count:
+~ WHEREFORE, Plaintiffs demand judgment against Perry and respectfully request that the Court grant the following relief, without duplicative recovery for the same injury under more than one Count:
 
 1. A declaration that Plaintiffs are joint authors and copyright co-owners of the applicable Works; that neither transferred her interests to Perry; that incorporation of Plaintiff Material into another recording did not transfer or extinguish those rights; and such further relief as is necessary under 28 U.S.C. § 2202;
 2. Actual and compensatory damages, including unpaid amounts and ownership interests due under the parties’ agreements and applicable law, damages caused by Perry’s fiduciary breaches, and damages caused by the unauthorized use of Plaintiffs’ names;
@@ -170,4 +170,4 @@ Shortly after the WHY Z MUSIC transaction, Perry told Plaintiffs that their olde
 
 # DEMAND FOR JURY TRIAL
 
-[unnumbered] Plaintiffs demand a trial by jury on all issues so triable.
+~ Plaintiffs demand a trial by jury on all issues so triable.

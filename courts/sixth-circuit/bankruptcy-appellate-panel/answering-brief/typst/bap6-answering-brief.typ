@@ -20,6 +20,7 @@
 #let body-leading = 1.955em                // FRBP 8015(a)(4): double-spaced. Pitch = 0.655em (Liberation Serif line box) + leading = 2.61em; single = 1.305em (calibration in ../README.md).
 #let single-leading = 0.65em               // headings, block quotations, cover, TOC and TOA: single-spaced (typst default leading).
 #let page-margin = 1in                     // FRBP 8015(a)(4): at least one inch on all four sides.
+#let page-margin-bottom = page-margin + 4pt   // the last line's descender (about 3 pt at 14 pt) must stay inside the 1-in margin too
 #let para-indent = 0.5in
 #let passim-threshold = 7                  // an authority cited on this many pages or more prints "passim" (style)
 #let word-limit = if doc-type == "reply" { 6500 } else { 13000 }   // FRBP 8015(a)(7)(B)(i)-(ii)
@@ -109,7 +110,7 @@
 // ---------------------------------------------------------------------------
 
 #let brief-style(doc) = {
-  set page(paper: "us-letter", margin: page-margin)
+  set page(paper: "us-letter", margin: (x: page-margin, top: page-margin, bottom: page-margin-bottom))
   set text(font: font-family, size: type-size, lang: "en", fallback: false)
   set par(leading: body-leading, spacing: body-leading, first-line-indent: para-indent, justify: false)
   set heading(numbering: none)
@@ -279,7 +280,7 @@
   pagebreak()
   block(breakable: false)[
     #heading(level: 1, outlined: false)[Certificate of Compliance]
-    This #doc-title complies with the type-volume limitation of Fed. R. Bankr. P. 8015(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. Bankr. P. 8015(g). It complies with the typeface requirement of Fed. R. Bankr. P. 8015(a)(5) and the type-style requirement of Fed. R. Bankr. P. 8015(a)(6) because it was prepared in a proportionally spaced typeface, #font-family at #str(type-size / 1pt)-point, with case names in italics.
+    This #doc-title complies with the type-volume limitation of Fed. R. Bankr. P. 8015(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. Bankr. P. 8015(g). It complies with the typeface requirement of Fed. R. Bankr. P. 8015(a)(5) and the type-style requirement of Fed. R. Bankr. P. 8015(a)(6) because it was prepared in a proportionally spaced typeface, #font-family.first() at #str(type-size / 1pt)-point, with case names in italics.
     #signature-block(meta)
   ]
 

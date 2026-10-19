@@ -6,7 +6,7 @@ Courts under `courts/eighth-circuit` (39).
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Appellate Panel of The Eighth Circuit](bankruptcy-appellate-panel) | `bap8` | up for review | — | — | — | 14 |
-| [Court of Appeals for the Eighth Circuit](court-of-appeals) | `ca8` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Eighth Circuit](court-of-appeals) | `ca8` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Arkansas](arkansas/federal/bankruptcy-eastern-district) | `areb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Arkansas](arkansas/federal/bankruptcy-western-district) | `arwb` | in progress | — | — | — | 0 |
 | [United States District Court for the Eastern District of Arkansas](arkansas/federal/eastern-district) | `ared` | in progress | — | — | — | 14 |
@@ -21,10 +21,10 @@ Courts under `courts/eighth-circuit` (39).
 | [United States Bankruptcy Court, W.D. Missouri](missouri/federal/bankruptcy-western-district) | `mowb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Missouri](missouri/federal/eastern-district) | `moed` | up for review | — | — | — | 14 |
 | [District Court, W.D. Missouri](missouri/federal/western-district) | `mowd` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Nebraska](nebraska/federal/bankruptcy-district) | `nebraskab` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Nebraska](nebraska/federal/bankruptcy-district) | `nebraskab` | up for review | — | — | — | 14 |
 | [United States District Court, Nebraska](nebraska/federal/district) | `ned` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. North Dakota](north-dakota/federal/bankruptcy-district) | `ndb` | in progress | — | — | — | 14 |
-| [District Court, D. North Dakota](north-dakota/federal/district) | `ndd` | in progress | — | — | — | 14 |
+| [District Court, D. North Dakota](north-dakota/federal/district) | `ndd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. South Dakota](south-dakota/federal/bankruptcy-district) | `sdb` | in progress | — | — | — | 14 |
 | [District Court, D. South Dakota](south-dakota/federal/district) | `sdd` | in progress | — | — | — | 14 |
 | [Arkansas Court of Appeals](arkansas/state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 14 |

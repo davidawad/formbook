@@ -25,7 +25,7 @@ signature:
 
 # PRELIMINARY STATEMENT
 
-::This is an employment discrimination case arising from Defendant’s discrimination and harassment against Mr. Walton, and the subsequent retaliation he experienced following his opposition to racist treatment, in violation of the Colorado Anti-Discrimination Act, C.R.S. § 24-34-401, et seq. (“CADA”) and 42 U.S.C. § 1981 (“Section 1981”). Mr. Walton, an African-American/Black man, was subjected to race-based discrimination and harassment during his employment with Defendant. After he reported the racist treatment and incidents, Defendant terminated his employment.
+~ This is an employment discrimination case arising from Defendant’s discrimination and harassment against Mr. Walton, and the subsequent retaliation he experienced following his opposition to racist treatment, in violation of the Colorado Anti-Discrimination Act, C.R.S. § 24-34-401, et seq. (“CADA”) and 42 U.S.C. § 1981 (“Section 1981”). Mr. Walton, an African-American/Black man, was subjected to race-based discrimination and harassment during his employment with Defendant. After he reported the racist treatment and incidents, Defendant terminated his employment.
 
 # PARTIES
 
@@ -205,7 +205,7 @@ As a direct and proximate result of Defendant’s above-described actions, Mr. W
 
 # PRAYER FOR RELIEF
 
-::WHEREFORE, Mr. Walton respectfully requests that this Court enter judgment in his favor against Defendant and order the following relief as allowed by law:
+~ WHEREFORE, Mr. Walton respectfully requests that this Court enter judgment in his favor against Defendant and order the following relief as allowed by law:
 
 1. Economic damages;
 2. Compensatory damages;
@@ -216,4 +216,4 @@ As a direct and proximate result of Defendant’s above-described actions, Mr. W
 
 # JURY TRIAL DEMAND
 
-::Plaintiff requests a trial by jury on all issues so triable.
+~ Plaintiff requests a trial by jury on all issues so triable.
