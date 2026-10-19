@@ -235,7 +235,7 @@
   set par(first-line-indent: 0pt, leading: body-leading, justify: false)
   [1. This memorandum complies with the word-count limit of Local Civil Rule 7.1(c) because it contains #count words, excluding the caption, table of contents, table of authorities, signature block and this certificate, as counted by the word-processing program used to prepare it.]
   v(line-pitch * 0.5)
-  [2. This memorandum complies with the formatting requirements of Local Civil Rule 7.1(b) because it is printed in #font-family, #(type-size / 1pt)-point type, with one-inch margins on all sides, and is double-spaced except for headings, footnotes and block quotations.]
+  [2. This memorandum complies with the formatting requirements of Local Civil Rule 7.1(b) because it is printed in #font-family.first(), #(type-size / 1pt)-point type, with one-inch margins on all sides, and is double-spaced except for headings, footnotes and block quotations.]
   block(breakable: false, above: line-pitch, {
     set par(first-line-indent: 0pt, leading: single-leading, justify: false)
     grid(columns: (1fr, 3.2in), [Dated: #meta.at("place", default: "New York, New York")#linebreak()#need(meta, "date")], {
