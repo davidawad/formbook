@@ -279,7 +279,7 @@
   pagebreak()
   block(breakable: false)[
     #heading(level: 1, outlined: false)[Certificate of Compliance]
-    This #doc-title complies with the type-volume limitation of Fed. R. Bankr. P. 8015(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. Bankr. P. 8015(g). It complies with the typeface requirement of Fed. R. Bankr. P. 8015(a)(5) and the type-style requirement of Fed. R. Bankr. P. 8015(a)(6) because it was prepared in a proportionally spaced typeface, #font-family at #str(type-size / 1pt)-point, with case names in italics.
+    This #doc-title complies with the type-volume limitation of Fed. R. Bankr. P. 8015(a)(7)(B) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. Bankr. P. 8015(g). It complies with the typeface requirement of Fed. R. Bankr. P. 8015(a)(5) and the type-style requirement of Fed. R. Bankr. P. 8015(a)(6) because it was prepared in a proportionally spaced typeface, #font-family.first() at #str(type-size / 1pt)-point, with case names in italics.
     #signature-block(meta)
   ]
 

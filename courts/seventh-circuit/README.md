@@ -5,7 +5,7 @@ Courts under `courts/seventh-circuit` (22).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Seventh Circuit](court-of-appeals) | `ca7` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Seventh Circuit](court-of-appeals) | `ca7` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, C.D. Illinois](illinois/federal/bankruptcy-central-district) | `ilcb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Illinois](illinois/federal/bankruptcy-northern-district) | `ilnb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. Illinois](illinois/federal/bankruptcy-southern-district) | `ilsb` | in progress | — | — | — | 14 |
