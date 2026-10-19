@@ -385,7 +385,7 @@
   pagebreak()
   heading(level: 1, numbering: none, outlined: false)[Printing Specifications Statement]
   set par(first-line-indent: para-indent)
-  [This brief was prepared on a computer. The typeface is #font-family, #int(type-size.pt()) point. The body text is double-spaced. Headings, block quotations, and the tables are single-spaced. The brief contains #group-digits(words) words, exclusive of the cover, the tables, the signature block, and any certificate of service, as counted by the word-processing system used to prepare it (22 NYCRR 1250.8(f)(2), (j)).]
+  [This brief was prepared on a computer. The typeface is #font-family.first(), #int(type-size.pt()) point. The body text is double-spaced. Headings, block quotations, and the tables are single-spaced. The brief contains #group-digits(words) words, exclusive of the cover, the tables, the signature block, and any certificate of service, as counted by the word-processing system used to prepare it (22 NYCRR 1250.8(f)(2), (j)).]
   v(0.6em)
   [Signed under 22 NYCRR 130-1.1-a(a), which is also the signer's representation that this statement is accurate.]
   v(1em)

@@ -406,7 +406,7 @@
   [A proportionally spaced typeface was used, as follows:]
   set par(first-line-indent: 0pt, leading: single-leading, justify: false)
   block(above: 0.8em, below: 0.8em, pad(left: para-indent, lines-stack((
-    [Name of typeface: #font-family],
+    [Name of typeface: #font-family.first()],
     [Point size: 14],
     [Line spacing: Double],
   ))))
