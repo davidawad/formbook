@@ -1,3 +1,4 @@
+<!-- fb:generated:start -->
 # Alabama
 
 Courts under `courts/eleventh-circuit/alabama` (9).
@@ -10,8 +11,9 @@ Courts under `courts/eleventh-circuit/alabama` (9).
 | [United States District Court for the Middle District of Alabama](federal/middle-district) | `almd` | todo | — | — | — | 0 |
 | [United States District Court for the Northern District of Alabama](federal/northern-district) | `alnd` | todo | — | — | — | 0 |
 | [United States District Court for the Southern District of Alabama](federal/southern-district) | `alsd` | todo | — | — | — | 0 |
-| [Alabama Court of Civil Appeals](state/court-of-civil-appeals) | `alacivapp` | todo | — | — | — | 0 |
-| [Alabama Court of Criminal Appeals](state/court-of-criminal-appeals) | `alacrimapp` | todo | — | — | — | 0 |
-| [Supreme Court of Alabama](state/supreme-court) | `ala` | todo | — | — | — | 0 |
+| [Alabama Court of Civil Appeals](state/court-of-civil-appeals) | `alacivapp` | in progress | — | — | — | 14 |
+| [Alabama Court of Criminal Appeals](state/court-of-criminal-appeals) | `alacrimapp` | in progress | — | — | — | 14 |
+| [Supreme Court of Alabama](state/supreme-court) | `ala` | in progress | — | — | — | 14 |
 
 [Formbook index](../../../README.md)
+<!-- fb:generated:end -->

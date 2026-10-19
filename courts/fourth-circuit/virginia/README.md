@@ -1,3 +1,4 @@
+<!-- fb:generated:start -->
 # Virginia
 
 Courts under `courts/fourth-circuit/virginia` (6).
@@ -8,7 +9,8 @@ Courts under `courts/fourth-circuit/virginia` (6).
 | [United States Bankruptcy Court, W.D. Virginia](federal/bankruptcy-western-district) | `vawb` | todo | — | — | — | 0 |
 | [District Court, E.D. Virginia](federal/eastern-district) | `vaed` | todo | — | — | — | 0 |
 | [District Court, W.D. Virginia](federal/western-district) | `vawd` | todo | — | — | — | 0 |
-| [Court of Appeals of Virginia](state/court-of-appeals) | `vactapp` | todo | — | — | — | 0 |
-| [Supreme Court of Virginia](state/supreme-court) | `va` | todo | — | — | — | 0 |
+| [Court of Appeals of Virginia](state/court-of-appeals) | `vactapp` | in progress | — | — | — | 14 |
+| [Supreme Court of Virginia](state/supreme-court) | `va` | in progress | — | — | — | 14 |
 
 [Formbook index](../../../README.md)
+<!-- fb:generated:end -->

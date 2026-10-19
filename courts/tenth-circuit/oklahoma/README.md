@@ -1,3 +1,4 @@
+<!-- fb:generated:start -->
 # Oklahoma
 
 Courts under `courts/tenth-circuit/oklahoma` (12).
@@ -11,10 +12,11 @@ Courts under `courts/tenth-circuit/oklahoma` (12).
 | [United States District Court, Oklahoma Eastern](federal/eastern-district) | `oked` | todo | — | — | — | 0 |
 | [United States District Court, Oklahoma Northern](federal/northern-district) | `oknd` | todo | — | — | — | 0 |
 | [United States District Court, Oklahoma Western](federal/western-district) | `okwd` | todo | — | — | — | 0 |
-| [Court of Civil Appeals of Oklahoma](state/court-of-civil-appeals) | `oklacivapp` | todo | — | — | — | 0 |
-| [Court of Criminal Appeals of Oklahoma](state/court-of-criminal-appeals) | `oklacrimapp` | todo | — | — | — | 0 |
+| [Court of Civil Appeals of Oklahoma](state/court-of-civil-appeals) | `oklacivapp` | in progress | — | — | — | 0 |
+| [Court of Criminal Appeals of Oklahoma](state/court-of-criminal-appeals) | `oklacrimapp` | in progress | — | — | — | 14 |
 | [Court on the Judiciary of Oklahoma](state/court-on-the-judiciary) | `oklacoj` | todo | — | — | — | 0 |
 | [Oklahoma Judicial Ethics Advisory Panel](state/judicial-ethics-advisory-panel) | `oklajeap` | todo | — | — | — | 0 |
-| [Supreme Court of Oklahoma](state/supreme-court) | `okla` | todo | — | — | — | 0 |
+| [Supreme Court of Oklahoma](state/supreme-court) | `okla` | in progress | — | — | — | 14 |
 
 [Formbook index](../../../README.md)
+<!-- fb:generated:end -->

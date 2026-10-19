@@ -79,189 +79,189 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Supreme Court of the United States](courts/supreme-court-of-the-united-states) | `scotus` | in progress | — | — | — | 0 |
+| [Supreme Court of the United States](courts/supreme-court-of-the-united-states) | `scotus` | in progress | — | — | — | 14 |
 
 ## Federal Circuit and feeder courts
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Federal Circuit](courts/federal-circuit/court-of-appeals) | `cafc` | todo | — | — | — | 0 |
-| [United States Court of Federal Claims](courts/federal-circuit/court-of-federal-claims) | `uscfc` | todo | — | — | — | 0 |
-| [United States Court of International Trade](courts/federal-circuit/court-of-international-trade) | `cit` | todo | — | — | — | 0 |
-| [United States Court of Veteran Appeals](courts/federal-circuit/court-of-veteran-appeals) | `cavc` | todo | — | — | — | 0 |
-| [Patent Trial and Appeal Board](courts/federal-circuit/patent-trial-and-appeal-board) | `ptab` | in progress | — | — | — | 13 |
-| [Trademark Trial and Appeal Board](courts/federal-circuit/trademark-trial-and-appeal-board) | `ttab` | todo | — | — | — | 0 |
+| [Court of Appeals for the Federal Circuit](courts/federal-circuit/court-of-appeals) | `cafc` | in progress | — | — | — | 14 |
+| [United States Court of Federal Claims](courts/federal-circuit/court-of-federal-claims) | `uscfc` | in progress | — | — | — | 14 |
+| [United States Court of International Trade](courts/federal-circuit/court-of-international-trade) | `cit` | in progress | — | — | — | 14 |
+| [United States Court of Veteran Appeals](courts/federal-circuit/court-of-veteran-appeals) | `cavc` | in progress | — | — | — | 14 |
+| [Patent Trial and Appeal Board](courts/federal-circuit/patent-trial-and-appeal-board) | `ptab` | in progress | — | — | — | 14 |
+| [Trademark Trial and Appeal Board](courts/federal-circuit/trademark-trial-and-appeal-board) | `ttab` | in progress | — | — | — | 14 |
 
 ## Military courts
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [U S Air Force Court of Criminal Appeals](courts/military/air-force-court-of-criminal-appeals) | `afcca` | todo | — | — | — | 0 |
-| [U S Army Court of Criminal Appeals](courts/military/army-court-of-criminal-appeals) | `acca` | todo | — | — | — | 0 |
-| [U S Coast Guard Court of Criminal Appeals](courts/military/coast-guard-court-of-criminal-appeals) | `uscgcoca` | todo | — | — | — | 0 |
-| [United States Court of Appeals For The Armed Forces](courts/military/court-of-appeals-for-the-armed-forces) | `armfor` | todo | — | — | — | 0 |
-| [United States Court of Military Commission Review](courts/military/court-of-military-commission-review) | `mc` | todo | — | — | — | 0 |
+| [U S Air Force Court of Criminal Appeals](courts/military/air-force-court-of-criminal-appeals) | `afcca` | in progress | — | — | — | 14 |
+| [U S Army Court of Criminal Appeals](courts/military/army-court-of-criminal-appeals) | `acca` | in progress | — | — | — | 14 |
+| [U S Coast Guard Court of Criminal Appeals](courts/military/coast-guard-court-of-criminal-appeals) | `uscgcoca` | in progress | — | — | — | 14 |
+| [United States Court of Appeals For The Armed Forces](courts/military/court-of-appeals-for-the-armed-forces) | `armfor` | in progress | — | — | — | 14 |
+| [United States Court of Military Commission Review](courts/military/court-of-military-commission-review) | `mc` | in progress | — | — | — | 14 |
 | [U S Navy Marine Corps Court of Criminal Appeals](courts/military/navy-marine-corps-court-of-criminal-appeals) | `nmcca` | todo | — | — | — | 0 |
 
 ## National courts and tribunals
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Department of Justice Board of Immigration Appeals](courts/national/board-of-immigration-appeals) | `bia` | todo | — | — | — | 0 |
-| [United States Foreign Intelligence Surveillance Court](courts/national/foreign-intelligence-surveillance-court) | `fisc` | todo | — | — | — | 0 |
-| [United States Foreign Intelligence Surveillance Court of Review](courts/national/foreign-intelligence-surveillance-court-of-review) | `fiscr` | todo | — | — | — | 0 |
-| [United States Judicial Panel on Multidistrict Litigation](courts/national/judicial-panel-on-multidistrict-litigation) | `jpml` | todo | — | — | — | 0 |
-| [United States Tax Court](courts/national/tax-court) | `tax` | todo | — | — | — | 0 |
+| [United States Department of Justice Board of Immigration Appeals](courts/national/board-of-immigration-appeals) | `bia` | in progress | — | — | — | 14 |
+| [United States Foreign Intelligence Surveillance Court](courts/national/foreign-intelligence-surveillance-court) | `fisc` | in progress | — | — | — | 14 |
+| [United States Foreign Intelligence Surveillance Court of Review](courts/national/foreign-intelligence-surveillance-court-of-review) | `fiscr` | in progress | — | — | — | 14 |
+| [United States Judicial Panel on Multidistrict Litigation](courts/national/judicial-panel-on-multidistrict-litigation) | `jpml` | in progress | — | — | — | 14 |
+| [United States Tax Court](courts/national/tax-court) | `tax` | in progress | — | — | — | 14 |
 
 ## First Circuit
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The First Circuit](courts/first-circuit/bankruptcy-appellate-panel) | `bap1` | todo | — | — | — | 0 |
-| [Court of Appeals for the First Circuit](courts/first-circuit/court-of-appeals) | `ca1` | todo | — | — | — | 0 |
+| [United States Bankruptcy Appellate Panel of The First Circuit](courts/first-circuit/bankruptcy-appellate-panel) | `bap1` | in progress | — | — | — | 14 |
+| [Court of Appeals for the First Circuit](courts/first-circuit/court-of-appeals) | `ca1` | in progress | — | — | — | 14 |
 
 ### Maine
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Maine](courts/first-circuit/maine/federal/bankruptcy-district) | `meb` | todo | — | — | — | 0 |
-| [District Court, D. Maine](courts/first-circuit/maine/federal/district) | `med` | todo | — | — | — | 0 |
-| [Supreme Judicial Court of Maine](courts/first-circuit/maine/state/supreme-judicial-court) | `me` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Maine](courts/first-circuit/maine/federal/bankruptcy-district) | `meb` | in progress | — | — | — | 14 |
+| [District Court, D. Maine](courts/first-circuit/maine/federal/district) | `med` | in progress | — | — | — | 14 |
+| [Supreme Judicial Court of Maine](courts/first-circuit/maine/state/supreme-judicial-court) | `me` | in progress | — | — | — | 14 |
 
 ### Massachusetts
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Massachusetts](courts/first-circuit/massachusetts/federal/bankruptcy-district) | `mab` | todo | — | — | — | 0 |
-| [District Court, D. Massachusetts](courts/first-circuit/massachusetts/federal/district) | `mad` | todo | — | — | — | 0 |
-| [Massachusetts Appeals Court](courts/first-circuit/massachusetts/state/appeals-court) | `massappct` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Massachusetts](courts/first-circuit/massachusetts/federal/bankruptcy-district) | `mab` | in progress | — | — | — | 14 |
+| [District Court, D. Massachusetts](courts/first-circuit/massachusetts/federal/district) | `mad` | in progress | — | — | — | 14 |
+| [Massachusetts Appeals Court](courts/first-circuit/massachusetts/state/appeals-court) | `massappct` | in progress | — | — | — | 14 |
 | [Massachusetts Appellate Tax Board](courts/first-circuit/massachusetts/state/appellate-tax-board) | `masstaxbd` | todo | — | — | — | 0 |
 | [Massachusetts Department of Industrial Accidents](courts/first-circuit/massachusetts/state/department-of-industrial-accidents) | `maworkcompcom` | todo | — | — | — | 0 |
 | [Massachusetts District Court, Appellate Division](courts/first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` | todo | — | — | — | 0 |
-| [Massachusetts Supreme Judicial Court](courts/first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | todo | — | — | — | 0 |
+| [Massachusetts Supreme Judicial Court](courts/first-circuit/massachusetts/state/supreme-judicial-court) | `mass` | in progress | — | — | — | 14 |
 
 ### New Hampshire
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. New Hampshire](courts/first-circuit/new-hampshire/federal/bankruptcy-district) | `nhb` | todo | — | — | — | 0 |
-| [District Court, D. New Hampshire](courts/first-circuit/new-hampshire/federal/district) | `nhd` | todo | — | — | — | 0 |
-| [Supreme Court of New Hampshire](courts/first-circuit/new-hampshire/state/supreme-court) | `nh` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. New Hampshire](courts/first-circuit/new-hampshire/federal/bankruptcy-district) | `nhb` | in progress | — | — | — | 14 |
+| [District Court, D. New Hampshire](courts/first-circuit/new-hampshire/federal/district) | `nhd` | in progress | — | — | — | 14 |
+| [Supreme Court of New Hampshire](courts/first-circuit/new-hampshire/state/supreme-court) | `nh` | in progress | — | — | — | 14 |
 
 ### Puerto Rico
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Puerto Rico](courts/first-circuit/puerto-rico/federal/bankruptcy-district) | `prb` | todo | — | — | — | 0 |
-| [District Court, D. Puerto Rico](courts/first-circuit/puerto-rico/federal/district) | `prd` | todo | — | — | — | 0 |
-| [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](courts/first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | todo | — | — | — | 0 |
-| [Supreme Court of Puerto Rico](courts/first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Puerto Rico](courts/first-circuit/puerto-rico/federal/bankruptcy-district) | `prb` | in progress | — | — | — | 14 |
+| [District Court, D. Puerto Rico](courts/first-circuit/puerto-rico/federal/district) | `prd` | in progress | — | — | — | 14 |
+| [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](courts/first-circuit/puerto-rico/state/court-of-appeals) | `prapp` | in progress | — | — | — | 14 |
+| [Supreme Court of Puerto Rico](courts/first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | in progress | — | — | — | 14 |
 
 ### Rhode Island
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Rhode Island](courts/first-circuit/rhode-island/federal/bankruptcy-district) | `rib` | todo | — | — | — | 0 |
-| [District Court, D. Rhode Island](courts/first-circuit/rhode-island/federal/district) | `rid` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Rhode Island](courts/first-circuit/rhode-island/federal/bankruptcy-district) | `rib` | in progress | — | — | — | 14 |
+| [District Court, D. Rhode Island](courts/first-circuit/rhode-island/federal/district) | `rid` | in progress | — | — | — | 14 |
 | [Superior Court of Rhode Island](courts/first-circuit/rhode-island/state/superior-court) | `risuperct` | todo | — | — | — | 0 |
-| [Supreme Court of Rhode Island](courts/first-circuit/rhode-island/state/supreme-court) | `ri` | todo | — | — | — | 0 |
+| [Supreme Court of Rhode Island](courts/first-circuit/rhode-island/state/supreme-court) | `ri` | in progress | — | — | — | 14 |
 
 ## Second Circuit
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Second Circuit](courts/second-circuit/court-of-appeals) | `ca2` | todo | — | — | — | 0 |
+| [Court of Appeals for the Second Circuit](courts/second-circuit/court-of-appeals) | `ca2` | in progress | — | — | — | 14 |
 
 ### Connecticut
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Connecticut](courts/second-circuit/connecticut/federal/bankruptcy-district) | `ctb` | todo | — | — | — | 0 |
-| [United States District Court for the District of Connecticut](courts/second-circuit/connecticut/federal/district) | `ctd` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Connecticut](courts/second-circuit/connecticut/federal/bankruptcy-district) | `ctb` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Connecticut](courts/second-circuit/connecticut/federal/district) | `ctd` | in progress | — | — | — | 14 |
 | [Connecticut Compensation Review Board](courts/second-circuit/connecticut/state/compensation-review-board) | `connworkcompcom` | todo | — | — | — | 0 |
-| [Connecticut Court of Appeals](courts/second-circuit/connecticut/state/court-of-appeals) | `connappct` | todo | — | — | — | 0 |
-| [Connecticut Supreme Court](courts/second-circuit/connecticut/state/supreme-court) | `conn` | todo | — | — | — | 0 |
+| [Connecticut Court of Appeals](courts/second-circuit/connecticut/state/court-of-appeals) | `connappct` | in progress | — | — | — | 14 |
+| [Connecticut Supreme Court](courts/second-circuit/connecticut/state/supreme-court) | `conn` | in progress | — | — | — | 14 |
 
 ### New York
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. New York](courts/second-circuit/new-york/federal/bankruptcy-eastern-district) | `nyeb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, N.D. New York](courts/second-circuit/new-york/federal/bankruptcy-northern-district) | `nynb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, S.D. New York](courts/second-circuit/new-york/federal/bankruptcy-southern-district) | `nysb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, W.D. New York](courts/second-circuit/new-york/federal/bankruptcy-western-district) | `nywb` | todo | — | — | — | 0 |
-| [District Court, E.D. New York](courts/second-circuit/new-york/federal/eastern-district) | `nyed` | todo | — | — | — | 0 |
-| [District Court, N.D. New York](courts/second-circuit/new-york/federal/northern-district) | `nynd` | todo | — | — | — | 0 |
-| [District Court, S.D. New York](courts/second-circuit/new-york/federal/southern-district) | `nysd` | todo | — | — | — | 0 |
-| [District Court, W.D. New York](courts/second-circuit/new-york/federal/western-district) | `nywd` | todo | — | — | — | 0 |
-| [Appellate Terms of the Supreme Court of New York](courts/second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, E.D. New York](courts/second-circuit/new-york/federal/bankruptcy-eastern-district) | `nyeb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, N.D. New York](courts/second-circuit/new-york/federal/bankruptcy-northern-district) | `nynb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, S.D. New York](courts/second-circuit/new-york/federal/bankruptcy-southern-district) | `nysb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. New York](courts/second-circuit/new-york/federal/bankruptcy-western-district) | `nywb` | in progress | — | — | — | 14 |
+| [District Court, E.D. New York](courts/second-circuit/new-york/federal/eastern-district) | `nyed` | in progress | — | — | — | 14 |
+| [District Court, N.D. New York](courts/second-circuit/new-york/federal/northern-district) | `nynd` | in progress | — | — | — | 14 |
+| [District Court, S.D. New York](courts/second-circuit/new-york/federal/southern-district) | `nysd` | in progress | — | — | — | 14 |
+| [District Court, W.D. New York](courts/second-circuit/new-york/federal/western-district) | `nywd` | in progress | — | — | — | 14 |
+| [Appellate Terms of the Supreme Court of New York](courts/second-circuit/new-york/state/appellate-terms-of-the-supreme-court) | `nyappterm` | in progress | — | — | — | 14 |
 | [New York Commission of Appeals](courts/second-circuit/new-york/state/commission-of-appeals) | `nycommnapp` | todo | — | — | — | 0 |
 | [Court for the Trial of Impeachments](courts/second-circuit/new-york/state/court-for-the-trial-of-impeachments) | `nyimpct` | todo | — | — | — | 0 |
-| [New York Court of Appeals](courts/second-circuit/new-york/state/court-of-appeals) | `ny` | todo | — | — | — | 0 |
-| [The Four Departments of the Appellate Division](courts/second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | todo | — | — | — | 0 |
+| [New York Court of Appeals](courts/second-circuit/new-york/state/court-of-appeals) | `ny` | in progress | — | — | — | 14 |
+| [The Four Departments of the Appellate Division](courts/second-circuit/new-york/state/four-departments-of-the-appellate-division) | `nyappdiv` | in progress | — | — | — | 14 |
 | [Saratoga Chancery Court](courts/second-circuit/new-york/state/saratoga-chancery-court) | `nychanctsara` | todo | — | — | — | 0 |
 
 ### Vermont
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Vermont](courts/second-circuit/vermont/federal/bankruptcy-district) | `vtb` | todo | — | — | — | 0 |
-| [District Court, D. Vermont](courts/second-circuit/vermont/federal/district) | `vtd` | todo | — | — | — | 0 |
-| [Supreme Court of Vermont](courts/second-circuit/vermont/state/supreme-court) | `vt` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Vermont](courts/second-circuit/vermont/federal/bankruptcy-district) | `vtb` | in progress | — | — | — | 14 |
+| [District Court, D. Vermont](courts/second-circuit/vermont/federal/district) | `vtd` | in progress | — | — | — | 14 |
+| [Supreme Court of Vermont](courts/second-circuit/vermont/state/supreme-court) | `vt` | in progress | — | — | — | 14 |
 
 ## Third Circuit
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Third Circuit](courts/third-circuit/court-of-appeals) | `ca3` | todo | — | — | — | 0 |
+| [Court of Appeals for the Third Circuit](courts/third-circuit/court-of-appeals) | `ca3` | in progress | — | — | — | 14 |
 
 ### Delaware
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Delaware](courts/third-circuit/delaware/federal/bankruptcy-district) | `deb` | todo | — | — | — | 0 |
-| [United States District Court for the District of Delaware](courts/third-circuit/delaware/federal/district) | `ded` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Delaware](courts/third-circuit/delaware/federal/bankruptcy-district) | `deb` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Delaware](courts/third-circuit/delaware/federal/district) | `ded` | in progress | — | — | — | 14 |
 | [Delaware Court of Chancery](courts/third-circuit/delaware/state/court-of-chancery) | `delch` | todo | — | — | — | 0 |
 | [Court on the Judiciary of Delaware](courts/third-circuit/delaware/state/court-on-the-judiciary) | `deljudct` | todo | — | — | — | 0 |
 | [Delaware Family Court](courts/third-circuit/delaware/state/family-court) | `delfamct` | todo | — | — | — | 0 |
-| [Delaware Supreme Court](courts/third-circuit/delaware/state/supreme-court) | `del` | todo | — | — | — | 0 |
+| [Delaware Supreme Court](courts/third-circuit/delaware/state/supreme-court) | `del` | in progress | — | — | — | 14 |
 
 ### New Jersey
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. New Jersey](courts/third-circuit/new-jersey/federal/bankruptcy-district) | `njb` | todo | — | — | — | 0 |
-| [District Court, D. New Jersey](courts/third-circuit/new-jersey/federal/district) | `njd` | todo | — | — | — | 0 |
-| [Supreme Court of New Jersey](courts/third-circuit/new-jersey/state/supreme-court) | `nj` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. New Jersey](courts/third-circuit/new-jersey/federal/bankruptcy-district) | `njb` | in progress | — | — | — | 14 |
+| [District Court, D. New Jersey](courts/third-circuit/new-jersey/federal/district) | `njd` | in progress | — | — | — | 14 |
+| [Supreme Court of New Jersey](courts/third-circuit/new-jersey/state/supreme-court) | `nj` | in progress | — | — | — | 14 |
 | [New Jersey Tax Court](courts/third-circuit/new-jersey/state/tax-court) | `njtaxct` | todo | — | — | — | 0 |
 
 ### Pennsylvania
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district) | `pamb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-western-district) | `pawb` | todo | — | — | — | 0 |
-| [District Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/eastern-district) | `paed` | todo | — | — | — | 0 |
-| [District Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/middle-district) | `pamd` | todo | — | — | — | 0 |
-| [District Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/western-district) | `pawd` | todo | — | — | — | 0 |
-| [Commonwealth Court of Pennsylvania](courts/third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | todo | — | — | — | 0 |
-| [Court of Judicial Discipline of Pennsylvania](courts/third-circuit/pennsylvania/state/court-of-judicial-discipline) | `cjdpa` | todo | — | — | — | 0 |
-| [Superior Court of Pennsylvania](courts/third-circuit/pennsylvania/state/superior-court) | `pasuperct` | todo | — | — | — | 0 |
-| [Supreme Court of Pennsylvania](courts/third-circuit/pennsylvania/state/supreme-court) | `pa` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district) | `pamb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-western-district) | `pawb` | in progress | — | — | — | 14 |
+| [District Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/eastern-district) | `paed` | in progress | — | — | — | 14 |
+| [District Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/middle-district) | `pamd` | in progress | — | — | — | 14 |
+| [District Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/western-district) | `pawd` | in progress | — | — | — | 14 |
+| [Commonwealth Court of Pennsylvania](courts/third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | in progress | — | — | — | 14 |
+| [Court of Judicial Discipline of Pennsylvania](courts/third-circuit/pennsylvania/state/court-of-judicial-discipline) | `cjdpa` | in progress | — | — | — | 0 |
+| [Superior Court of Pennsylvania](courts/third-circuit/pennsylvania/state/superior-court) | `pasuperct` | in progress | — | — | — | 14 |
+| [Supreme Court of Pennsylvania](courts/third-circuit/pennsylvania/state/supreme-court) | `pa` | in progress | — | — | — | 14 |
 
 ### Virgin Islands
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Virgin Islands](courts/third-circuit/virgin-islands/federal/bankruptcy-district) | `vib` | todo | — | — | — | 0 |
-| [District Court, Virgin Islands](courts/third-circuit/virgin-islands/federal/district) | `vid` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Virgin Islands](courts/third-circuit/virgin-islands/federal/bankruptcy-district) | `vib` | in progress | — | — | — | 14 |
+| [District Court, Virgin Islands](courts/third-circuit/virgin-islands/federal/district) | `vid` | in progress | — | — | — | 14 |
 
 ## Fourth Circuit
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Fourth Circuit](courts/fourth-circuit/court-of-appeals) | `ca4` | todo | — | — | — | 0 |
+| [Court of Appeals for the Fourth Circuit](courts/fourth-circuit/court-of-appeals) | `ca4` | in progress | — | — | — | 14 |
 
 ### Maryland
 
@@ -269,8 +269,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Maryland](courts/fourth-circuit/maryland/federal/bankruptcy-district) | `mdb` | todo | — | — | — | 0 |
 | [District Court, D. Maryland](courts/fourth-circuit/maryland/federal/district) | `mdd` | todo | — | — | — | 0 |
-| [Court of Appeals of Maryland](courts/fourth-circuit/maryland/state/court-of-appeals) | `md` | todo | — | — | — | 0 |
-| [Court of Special Appeals of Maryland](courts/fourth-circuit/maryland/state/court-of-special-appeals) | `mdctspecapp` | todo | — | — | — | 0 |
+| [Court of Appeals of Maryland](courts/fourth-circuit/maryland/state/court-of-appeals) | `md` | in progress | — | — | — | 14 |
+| [Court of Special Appeals of Maryland](courts/fourth-circuit/maryland/state/court-of-special-appeals) | `mdctspecapp` | in progress | — | — | — | 14 |
 
 ### North Carolina
 
@@ -282,10 +282,10 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, E.D. North Carolina](courts/fourth-circuit/north-carolina/federal/eastern-district) | `nced` | todo | — | — | — | 0 |
 | [District Court, M.D. North Carolina](courts/fourth-circuit/north-carolina/federal/middle-district) | `ncmd` | todo | — | — | — | 0 |
 | [District Court, W.D. North Carolina](courts/fourth-circuit/north-carolina/federal/western-district) | `ncwd` | todo | — | — | — | 0 |
-| [Court of Appeals of North Carolina](courts/fourth-circuit/north-carolina/state/court-of-appeals) | `ncctapp` | todo | — | — | — | 0 |
+| [Court of Appeals of North Carolina](courts/fourth-circuit/north-carolina/state/court-of-appeals) | `ncctapp` | in progress | — | — | — | 14 |
 | [North Carolina Industrial Commission](courts/fourth-circuit/north-carolina/state/industrial-commission) | `ncworkcompcom` | todo | — | — | — | 0 |
-| [Superior Court of North Carolina](courts/fourth-circuit/north-carolina/state/superior-court) | `ncsuperct` | todo | — | — | — | 0 |
-| [Supreme Court of North Carolina](courts/fourth-circuit/north-carolina/state/supreme-court) | `nc` | todo | — | — | — | 0 |
+| [Superior Court of North Carolina](courts/fourth-circuit/north-carolina/state/superior-court) | `ncsuperct` | in progress | — | — | — | 14 |
+| [Supreme Court of North Carolina](courts/fourth-circuit/north-carolina/state/supreme-court) | `nc` | in progress | — | — | — | 14 |
 
 ### South Carolina
 
@@ -293,9 +293,9 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. South Carolina](courts/fourth-circuit/south-carolina/federal/bankruptcy-district) | `scb` | todo | — | — | — | 0 |
 | [District Court, D. South Carolina](courts/fourth-circuit/south-carolina/federal/district) | `scd` | todo | — | — | — | 0 |
-| [Court of Appeals of South Carolina](courts/fourth-circuit/south-carolina/state/court-of-appeals) | `scctapp` | todo | — | — | — | 0 |
+| [Court of Appeals of South Carolina](courts/fourth-circuit/south-carolina/state/court-of-appeals) | `scctapp` | in progress | — | — | — | 14 |
 | [Court of Chancery of South Carolina](courts/fourth-circuit/south-carolina/state/court-of-chancery) | `ctchansc` | todo | — | — | — | 0 |
-| [Supreme Court of South Carolina](courts/fourth-circuit/south-carolina/state/supreme-court) | `sc` | todo | — | — | — | 0 |
+| [Supreme Court of South Carolina](courts/fourth-circuit/south-carolina/state/supreme-court) | `sc` | in progress | — | — | — | 14 |
 
 ### Virginia
 
@@ -305,8 +305,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, W.D. Virginia](courts/fourth-circuit/virginia/federal/bankruptcy-western-district) | `vawb` | todo | — | — | — | 0 |
 | [District Court, E.D. Virginia](courts/fourth-circuit/virginia/federal/eastern-district) | `vaed` | todo | — | — | — | 0 |
 | [District Court, W.D. Virginia](courts/fourth-circuit/virginia/federal/western-district) | `vawd` | todo | — | — | — | 0 |
-| [Court of Appeals of Virginia](courts/fourth-circuit/virginia/state/court-of-appeals) | `vactapp` | todo | — | — | — | 0 |
-| [Supreme Court of Virginia](courts/fourth-circuit/virginia/state/supreme-court) | `va` | todo | — | — | — | 0 |
+| [Court of Appeals of Virginia](courts/fourth-circuit/virginia/state/court-of-appeals) | `vactapp` | in progress | — | — | — | 14 |
+| [Supreme Court of Virginia](courts/fourth-circuit/virginia/state/supreme-court) | `va` | in progress | — | — | — | 14 |
 
 ### West Virginia
 
@@ -316,14 +316,14 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, S.D. West Virginia](courts/fourth-circuit/west-virginia/federal/bankruptcy-southern-district) | `wvsb` | todo | — | — | — | 0 |
 | [District Court, N.D. West Virginia](courts/fourth-circuit/west-virginia/federal/northern-district) | `wvnd` | todo | — | — | — | 0 |
 | [District Court, S.D. West Virginia](courts/fourth-circuit/west-virginia/federal/southern-district) | `wvsd` | todo | — | — | — | 0 |
-| [Intermediate Court of Appeals of West Virginia](courts/fourth-circuit/west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | todo | — | — | — | 0 |
-| [West Virginia Supreme Court](courts/fourth-circuit/west-virginia/state/supreme-court) | `wva` | todo | — | — | — | 0 |
+| [Intermediate Court of Appeals of West Virginia](courts/fourth-circuit/west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | in progress | — | — | — | 14 |
+| [West Virginia Supreme Court](courts/fourth-circuit/west-virginia/state/supreme-court) | `wva` | in progress | — | — | — | 14 |
 
 ## Fifth Circuit
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Fifth Circuit](courts/fifth-circuit/court-of-appeals) | `ca5` | todo | — | — | — | 0 |
+| [Court of Appeals for the Fifth Circuit](courts/fifth-circuit/court-of-appeals) | `ca5` | in progress | — | — | — | 14 |
 
 ### Louisiana
 
@@ -332,11 +332,11 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, E.D. Louisiana](courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district) | `laeb` | todo | — | — | — | 0 |
 | [United States Bankruptcy Court, M.D. Louisiana](courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district) | `lamb` | todo | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Louisiana](courts/fifth-circuit/louisiana/federal/bankruptcy-western-district) | `lawb` | todo | — | — | — | 0 |
-| [United States District Court Eastern District of Louisiana](courts/fifth-circuit/louisiana/federal/eastern-district) | `laed` | todo | — | — | — | 0 |
-| [District Court, M.D. Louisiana](courts/fifth-circuit/louisiana/federal/middle-district) | `lamd` | todo | — | — | — | 0 |
-| [District Court, W.D. Louisiana](courts/fifth-circuit/louisiana/federal/western-district) | `lawd` | todo | — | — | — | 0 |
-| [Louisiana Court of Appeal](courts/fifth-circuit/louisiana/state/court-of-appeal) | `lactapp` | todo | — | — | — | 0 |
-| [Supreme Court of Louisiana](courts/fifth-circuit/louisiana/state/supreme-court) | `la` | todo | — | — | — | 0 |
+| [United States District Court Eastern District of Louisiana](courts/fifth-circuit/louisiana/federal/eastern-district) | `laed` | in progress | — | — | — | 14 |
+| [District Court, M.D. Louisiana](courts/fifth-circuit/louisiana/federal/middle-district) | `lamd` | in progress | — | — | — | 14 |
+| [District Court, W.D. Louisiana](courts/fifth-circuit/louisiana/federal/western-district) | `lawd` | in progress | — | — | — | 14 |
+| [Louisiana Court of Appeal](courts/fifth-circuit/louisiana/state/court-of-appeal) | `lactapp` | in progress | — | — | — | 14 |
+| [Supreme Court of Louisiana](courts/fifth-circuit/louisiana/state/supreme-court) | `la` | in progress | — | — | — | 14 |
 
 ### Mississippi
 
@@ -344,11 +344,11 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, N.D. Mississippi](courts/fifth-circuit/mississippi/federal/bankruptcy-northern-district) | `msnb` | todo | — | — | — | 0 |
 | [United States Bankruptcy Court, S.D. Mississippi](courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district) | `mssb` | todo | — | — | — | 0 |
-| [District Court, N.D. Mississippi](courts/fifth-circuit/mississippi/federal/northern-district) | `msnd` | todo | — | — | — | 0 |
-| [District Court, S.D. Mississippi](courts/fifth-circuit/mississippi/federal/southern-district) | `mssd` | todo | — | — | — | 0 |
-| [Mississippi Chancery Courts](courts/fifth-circuit/mississippi/state/chancery-courts) | `misschanceryct` | todo | — | — | — | 0 |
-| [Court of Appeals of Mississippi](courts/fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | todo | — | — | — | 0 |
-| [Mississippi Supreme Court](courts/fifth-circuit/mississippi/state/supreme-court) | `miss` | todo | — | — | — | 0 |
+| [District Court, N.D. Mississippi](courts/fifth-circuit/mississippi/federal/northern-district) | `msnd` | in progress | — | — | — | 14 |
+| [District Court, S.D. Mississippi](courts/fifth-circuit/mississippi/federal/southern-district) | `mssd` | in progress | — | — | — | 14 |
+| [Mississippi Chancery Courts](courts/fifth-circuit/mississippi/state/chancery-courts) | `misschanceryct` | in progress | — | — | — | 0 |
+| [Court of Appeals of Mississippi](courts/fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | in progress | — | — | — | 14 |
+| [Mississippi Supreme Court](courts/fifth-circuit/mississippi/state/supreme-court) | `miss` | in progress | — | — | — | 14 |
 
 ### Texas
 
@@ -362,41 +362,41 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [District Court, N.D. Texas](courts/fifth-circuit/texas/federal/northern-district) | `txnd` | todo | — | — | — | 0 |
 | [District Court, S.D. Texas](courts/fifth-circuit/texas/federal/southern-district) | `txsd` | todo | — | — | — | 0 |
 | [District Court, W.D. Texas](courts/fifth-circuit/texas/federal/western-district) | `txwd` | todo | — | — | — | 0 |
-| [Court of Civil Appeals of Texas](courts/fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | todo | — | — | — | 0 |
-| [Court of Criminal Appeals of Texas](courts/fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | todo | — | — | — | 0 |
+| [Court of Civil Appeals of Texas](courts/fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | in progress | — | — | — | 14 |
+| [Court of Criminal Appeals of Texas](courts/fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | in progress | — | — | — | 14 |
 | [Texas Court of Review Tribunal](courts/fifth-circuit/texas/state/court-of-review-tribunal) | `texrevtrib` | todo | — | — | — | 0 |
-| [Texas Judicial Panel on Multidistrict Litigation](courts/fifth-circuit/texas/state/judicial-panel-on-multidistrict-litigation) | `texjpml` | todo | — | — | — | 0 |
-| [Texas Special Court of Review](courts/fifth-circuit/texas/state/special-court-of-review) | `texreview` | todo | — | — | — | 0 |
-| [Texas Supreme Court](courts/fifth-circuit/texas/state/supreme-court) | `tex` | todo | — | — | — | 0 |
+| [Texas Judicial Panel on Multidistrict Litigation](courts/fifth-circuit/texas/state/judicial-panel-on-multidistrict-litigation) | `texjpml` | in progress | — | — | — | 14 |
+| [Texas Special Court of Review](courts/fifth-circuit/texas/state/special-court-of-review) | `texreview` | in progress | — | — | — | 14 |
+| [Texas Supreme Court](courts/fifth-circuit/texas/state/supreme-court) | `tex` | in progress | — | — | — | 14 |
 
 ## Sixth Circuit
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The Sixth Circuit](courts/sixth-circuit/bankruptcy-appellate-panel) | `bap6` | todo | — | — | — | 0 |
-| [Court of Appeals for the Sixth Circuit](courts/sixth-circuit/court-of-appeals) | `ca6` | todo | — | — | — | 0 |
+| [United States Bankruptcy Appellate Panel of The Sixth Circuit](courts/sixth-circuit/bankruptcy-appellate-panel) | `bap6` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Sixth Circuit](courts/sixth-circuit/court-of-appeals) | `ca6` | in progress | — | — | — | 14 |
 
 ### Kentucky
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Kentucky](courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district) | `kyeb` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, E.D. Kentucky](courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district) | `kyeb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Kentucky](courts/sixth-circuit/kentucky/federal/bankruptcy-western-district) | `kywb` | todo | — | — | — | 0 |
 | [District Court, E.D. Kentucky](courts/sixth-circuit/kentucky/federal/eastern-district) | `kyed` | todo | — | — | — | 0 |
-| [District Court, W.D. Kentucky](courts/sixth-circuit/kentucky/federal/western-district) | `kywd` | todo | — | — | — | 0 |
-| [Court of Appeals of Kentucky](courts/sixth-circuit/kentucky/state/court-of-appeals) | `kyctapp` | todo | — | — | — | 0 |
-| [Kentucky Supreme Court](courts/sixth-circuit/kentucky/state/supreme-court) | `ky` | todo | — | — | — | 0 |
+| [District Court, W.D. Kentucky](courts/sixth-circuit/kentucky/federal/western-district) | `kywd` | in progress | — | — | — | 14 |
+| [Court of Appeals of Kentucky](courts/sixth-circuit/kentucky/state/court-of-appeals) | `kyctapp` | in progress | — | — | — | 14 |
+| [Kentucky Supreme Court](courts/sixth-circuit/kentucky/state/supreme-court) | `ky` | in progress | — | — | — | 14 |
 
 ### Michigan
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, E.D. Michigan](courts/sixth-circuit/michigan/federal/bankruptcy-eastern-district) | `mieb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, W.D. Michigan](courts/sixth-circuit/michigan/federal/bankruptcy-western-district) | `miwb` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, W.D. Michigan](courts/sixth-circuit/michigan/federal/bankruptcy-western-district) | `miwb` | in progress | — | — | — | 14 |
 | [District Court, E.D. Michigan](courts/sixth-circuit/michigan/federal/eastern-district) | `mied` | todo | — | — | — | 0 |
 | [District Court, W.D. Michigan](courts/sixth-circuit/michigan/federal/western-district) | `miwd` | todo | — | — | — | 0 |
-| [Michigan Court of Appeals](courts/sixth-circuit/michigan/state/court-of-appeals) | `michctapp` | todo | — | — | — | 0 |
-| [Michigan Supreme Court](courts/sixth-circuit/michigan/state/supreme-court) | `mich` | todo | — | — | — | 0 |
+| [Michigan Court of Appeals](courts/sixth-circuit/michigan/state/court-of-appeals) | `michctapp` | in progress | — | — | — | 14 |
+| [Michigan Supreme Court](courts/sixth-circuit/michigan/state/supreme-court) | `mich` | in progress | — | — | — | 14 |
 
 ### Ohio
 
@@ -404,11 +404,11 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, N.D. Ohio](courts/sixth-circuit/ohio/federal/bankruptcy-northern-district) | `ohnb` | todo | — | — | — | 0 |
 | [United States Bankruptcy Court, S.D. Ohio](courts/sixth-circuit/ohio/federal/bankruptcy-southern-district) | `ohsb` | todo | — | — | — | 0 |
-| [District Court, N.D. Ohio](courts/sixth-circuit/ohio/federal/northern-district) | `ohnd` | todo | — | — | — | 0 |
+| [District Court, N.D. Ohio](courts/sixth-circuit/ohio/federal/northern-district) | `ohnd` | in progress | — | — | — | 14 |
 | [District Court, S.D. Ohio](courts/sixth-circuit/ohio/federal/southern-district) | `ohsd` | todo | — | — | — | 0 |
-| [Ohio Court of Appeals](courts/sixth-circuit/ohio/state/court-of-appeals) | `ohioctapp` | todo | — | — | — | 0 |
-| [Ohio Court of Claims](courts/sixth-circuit/ohio/state/court-of-claims) | `ohioctcl` | todo | — | — | — | 0 |
-| [Ohio Supreme Court](courts/sixth-circuit/ohio/state/supreme-court) | `ohio` | todo | — | — | — | 0 |
+| [Ohio Court of Appeals](courts/sixth-circuit/ohio/state/court-of-appeals) | `ohioctapp` | in progress | — | — | — | 14 |
+| [Ohio Court of Claims](courts/sixth-circuit/ohio/state/court-of-claims) | `ohioctcl` | in progress | — | — | — | 0 |
+| [Ohio Supreme Court](courts/sixth-circuit/ohio/state/supreme-court) | `ohio` | in progress | — | — | — | 14 |
 
 ### Tennessee
 
@@ -417,61 +417,61 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, E.D. Tennessee](courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district) | `tneb` | todo | — | — | — | 0 |
 | [United States Bankruptcy Court, M.D. Tennessee](courts/sixth-circuit/tennessee/federal/bankruptcy-middle-district) | `tnmb` | todo | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Tennessee](courts/sixth-circuit/tennessee/federal/bankruptcy-western-district) | `tnwb` | todo | — | — | — | 0 |
-| [District Court, E.D. Tennessee](courts/sixth-circuit/tennessee/federal/eastern-district) | `tned` | todo | — | — | — | 0 |
-| [District Court, M.D. Tennessee](courts/sixth-circuit/tennessee/federal/middle-district) | `tnmd` | todo | — | — | — | 0 |
+| [District Court, E.D. Tennessee](courts/sixth-circuit/tennessee/federal/eastern-district) | `tned` | in progress | — | — | — | 14 |
+| [District Court, M.D. Tennessee](courts/sixth-circuit/tennessee/federal/middle-district) | `tnmd` | in progress | — | — | — | 14 |
 | [District Court, W.D. Tennessee](courts/sixth-circuit/tennessee/federal/western-district) | `tnwd` | todo | — | — | — | 0 |
-| [Court of Appeals of Tennessee](courts/sixth-circuit/tennessee/state/court-of-appeals) | `tennctapp` | todo | — | — | — | 0 |
-| [Court of Criminal Appeals of Tennessee](courts/sixth-circuit/tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | todo | — | — | — | 0 |
-| [Tennessee Supreme Court](courts/sixth-circuit/tennessee/state/supreme-court) | `tenn` | todo | — | — | — | 0 |
+| [Court of Appeals of Tennessee](courts/sixth-circuit/tennessee/state/court-of-appeals) | `tennctapp` | in progress | — | — | — | 14 |
+| [Court of Criminal Appeals of Tennessee](courts/sixth-circuit/tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | in progress | — | — | — | 14 |
+| [Tennessee Supreme Court](courts/sixth-circuit/tennessee/state/supreme-court) | `tenn` | in progress | — | — | — | 14 |
 
 ## Seventh Circuit
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Seventh Circuit](courts/seventh-circuit/court-of-appeals) | `ca7` | todo | — | — | — | 0 |
+| [Court of Appeals for the Seventh Circuit](courts/seventh-circuit/court-of-appeals) | `ca7` | in progress | — | — | — | 14 |
 
 ### Illinois
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, C.D. Illinois](courts/seventh-circuit/illinois/federal/bankruptcy-central-district) | `ilcb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, N.D. Illinois](courts/seventh-circuit/illinois/federal/bankruptcy-northern-district) | `ilnb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, S.D. Illinois](courts/seventh-circuit/illinois/federal/bankruptcy-southern-district) | `ilsb` | todo | — | — | — | 0 |
-| [District Court, C.D. Illinois](courts/seventh-circuit/illinois/federal/central-district) | `ilcd` | todo | — | — | — | 0 |
-| [District Court, N.D. Illinois](courts/seventh-circuit/illinois/federal/northern-district) | `ilnd` | todo | — | — | — | 0 |
-| [District Court, S.D. Illinois](courts/seventh-circuit/illinois/federal/southern-district) | `ilsd` | todo | — | — | — | 0 |
-| [Appellate Court of Illinois](courts/seventh-circuit/illinois/state/appellate-court) | `illappct` | todo | — | — | — | 0 |
-| [Illinois Supreme Court](courts/seventh-circuit/illinois/state/supreme-court) | `ill` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, C.D. Illinois](courts/seventh-circuit/illinois/federal/bankruptcy-central-district) | `ilcb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, N.D. Illinois](courts/seventh-circuit/illinois/federal/bankruptcy-northern-district) | `ilnb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, S.D. Illinois](courts/seventh-circuit/illinois/federal/bankruptcy-southern-district) | `ilsb` | in progress | — | — | — | 14 |
+| [District Court, C.D. Illinois](courts/seventh-circuit/illinois/federal/central-district) | `ilcd` | in progress | — | — | — | 14 |
+| [District Court, N.D. Illinois](courts/seventh-circuit/illinois/federal/northern-district) | `ilnd` | in progress | — | — | — | 14 |
+| [District Court, S.D. Illinois](courts/seventh-circuit/illinois/federal/southern-district) | `ilsd` | in progress | — | — | — | 14 |
+| [Appellate Court of Illinois](courts/seventh-circuit/illinois/state/appellate-court) | `illappct` | in progress | — | — | — | 14 |
+| [Illinois Supreme Court](courts/seventh-circuit/illinois/state/supreme-court) | `ill` | in progress | — | — | — | 14 |
 
 ### Indiana
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, N.D. Indiana](courts/seventh-circuit/indiana/federal/bankruptcy-northern-district) | `innb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, S.D. Indiana](courts/seventh-circuit/indiana/federal/bankruptcy-southern-district) | `insb` | todo | — | — | — | 0 |
-| [District Court, N.D. Indiana](courts/seventh-circuit/indiana/federal/northern-district) | `innd` | todo | — | — | — | 0 |
-| [District Court, S.D. Indiana](courts/seventh-circuit/indiana/federal/southern-district) | `insd` | todo | — | — | — | 0 |
-| [Indiana Court of Appeals](courts/seventh-circuit/indiana/state/court-of-appeals) | `indctapp` | todo | — | — | — | 0 |
-| [Indiana Supreme Court](courts/seventh-circuit/indiana/state/supreme-court) | `ind` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, N.D. Indiana](courts/seventh-circuit/indiana/federal/bankruptcy-northern-district) | `innb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, S.D. Indiana](courts/seventh-circuit/indiana/federal/bankruptcy-southern-district) | `insb` | in progress | — | — | — | 14 |
+| [District Court, N.D. Indiana](courts/seventh-circuit/indiana/federal/northern-district) | `innd` | in progress | — | — | — | 14 |
+| [District Court, S.D. Indiana](courts/seventh-circuit/indiana/federal/southern-district) | `insd` | in progress | — | — | — | 14 |
+| [Indiana Court of Appeals](courts/seventh-circuit/indiana/state/court-of-appeals) | `indctapp` | in progress | — | — | — | 14 |
+| [Indiana Supreme Court](courts/seventh-circuit/indiana/state/supreme-court) | `ind` | in progress | — | — | — | 14 |
 | [Indiana Tax Court](courts/seventh-circuit/indiana/state/tax-court) | `indtc` | todo | — | — | — | 0 |
 
 ### Wisconsin
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district) | `wieb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, W.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district) | `wiwb` | todo | — | — | — | 0 |
-| [District Court, E.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/eastern-district) | `wied` | todo | — | — | — | 0 |
-| [District Court, W.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/western-district) | `wiwd` | todo | — | — | — | 0 |
-| [Court of Appeals of Wisconsin](courts/seventh-circuit/wisconsin/state/court-of-appeals) | `wisctapp` | todo | — | — | — | 0 |
-| [Wisconsin Supreme Court](courts/seventh-circuit/wisconsin/state/supreme-court) | `wis` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, E.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district) | `wieb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district) | `wiwb` | in progress | — | — | — | 14 |
+| [District Court, E.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/eastern-district) | `wied` | in progress | — | — | — | 14 |
+| [District Court, W.D. Wisconsin](courts/seventh-circuit/wisconsin/federal/western-district) | `wiwd` | in progress | — | — | — | 14 |
+| [Court of Appeals of Wisconsin](courts/seventh-circuit/wisconsin/state/court-of-appeals) | `wisctapp` | in progress | — | — | — | 14 |
+| [Wisconsin Supreme Court](courts/seventh-circuit/wisconsin/state/supreme-court) | `wis` | in progress | — | — | — | 14 |
 
 ## Eighth Circuit
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The Eighth Circuit](courts/eighth-circuit/bankruptcy-appellate-panel) | `bap8` | todo | — | — | — | 0 |
-| [Court of Appeals for the Eighth Circuit](courts/eighth-circuit/court-of-appeals) | `ca8` | todo | — | — | — | 0 |
+| [United States Bankruptcy Appellate Panel of The Eighth Circuit](courts/eighth-circuit/bankruptcy-appellate-panel) | `bap8` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Eighth Circuit](courts/eighth-circuit/court-of-appeals) | `ca8` | in progress | — | — | — | 14 |
 
 ### Arkansas
 
@@ -479,10 +479,10 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, E.D. Arkansas](courts/eighth-circuit/arkansas/federal/bankruptcy-eastern-district) | `areb` | todo | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Arkansas](courts/eighth-circuit/arkansas/federal/bankruptcy-western-district) | `arwb` | todo | — | — | — | 0 |
-| [United States District Court for the Eastern District of Arkansas](courts/eighth-circuit/arkansas/federal/eastern-district) | `ared` | todo | — | — | — | 0 |
+| [United States District Court for the Eastern District of Arkansas](courts/eighth-circuit/arkansas/federal/eastern-district) | `ared` | in progress | — | — | — | 14 |
 | [United States District Court for the Western District of Arkansas](courts/eighth-circuit/arkansas/federal/western-district) | `arwd` | todo | — | — | — | 0 |
-| [Arkansas Court of Appeals](courts/eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | todo | — | — | — | 0 |
-| [Arkansas Supreme Court](courts/eighth-circuit/arkansas/state/supreme-court) | `ark` | todo | — | — | — | 0 |
+| [Arkansas Court of Appeals](courts/eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 14 |
+| [Arkansas Supreme Court](courts/eighth-circuit/arkansas/state/supreme-court) | `ark` | in progress | — | — | — | 14 |
 | [Arkansas Workers' Compensation Commission](courts/eighth-circuit/arkansas/state/workers-compensation-commission) | `arkworkcompcom` | todo | — | — | — | 0 |
 
 ### Iowa
@@ -493,181 +493,181 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, S.D. Iowa](courts/eighth-circuit/iowa/federal/bankruptcy-southern-district) | `iasb` | todo | — | — | — | 0 |
 | [District Court, N.D. Iowa](courts/eighth-circuit/iowa/federal/northern-district) | `iand` | todo | — | — | — | 0 |
 | [District Court, S.D. Iowa](courts/eighth-circuit/iowa/federal/southern-district) | `iasd` | todo | — | — | — | 0 |
-| [Court of Appeals of Iowa](courts/eighth-circuit/iowa/state/court-of-appeals) | `iowactapp` | todo | — | — | — | 0 |
-| [Supreme Court of Iowa](courts/eighth-circuit/iowa/state/supreme-court) | `iowa` | todo | — | — | — | 0 |
+| [Court of Appeals of Iowa](courts/eighth-circuit/iowa/state/court-of-appeals) | `iowactapp` | in progress | — | — | — | 14 |
+| [Supreme Court of Iowa](courts/eighth-circuit/iowa/state/supreme-court) | `iowa` | in progress | — | — | — | 14 |
 
 ### Minnesota
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | todo | — | — | — | 0 |
-| [District Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/district) | `mnd` | todo | — | — | — | 0 |
-| [Court of Appeals of Minnesota](courts/eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | todo | — | — | — | 0 |
-| [Supreme Court of Minnesota](courts/eighth-circuit/minnesota/state/supreme-court) | `minn` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | in progress | — | — | — | 14 |
+| [District Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/district) | `mnd` | in progress | — | — | — | 14 |
+| [Court of Appeals of Minnesota](courts/eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | in progress | — | — | — | 14 |
+| [Supreme Court of Minnesota](courts/eighth-circuit/minnesota/state/supreme-court) | `minn` | in progress | — | — | — | 14 |
 
 ### Missouri
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Missouri](courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district) | `moeb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, W.D. Missouri](courts/eighth-circuit/missouri/federal/bankruptcy-western-district) | `mowb` | todo | — | — | — | 0 |
-| [District Court, E.D. Missouri](courts/eighth-circuit/missouri/federal/eastern-district) | `moed` | todo | — | — | — | 0 |
-| [District Court, W.D. Missouri](courts/eighth-circuit/missouri/federal/western-district) | `mowd` | todo | — | — | — | 0 |
-| [Missouri Court of Appeals](courts/eighth-circuit/missouri/state/court-of-appeals) | `moctapp` | todo | — | — | — | 0 |
-| [Missouri Court of Appeals, Eastern District](courts/eighth-circuit/missouri/state/court-of-appeals-eastern-district) | `moctapped` | todo | — | — | — | 0 |
-| [Missouri Court of Appeals, Southern District](courts/eighth-circuit/missouri/state/court-of-appeals-southern-district) | `moctappsd` | todo | — | — | — | 0 |
-| [Missouri Court of Appeals, Western District](courts/eighth-circuit/missouri/state/court-of-appeals-western-district) | `moctappwd` | todo | — | — | — | 0 |
-| [Supreme Court of Missouri](courts/eighth-circuit/missouri/state/supreme-court) | `mo` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, E.D. Missouri](courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district) | `moeb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. Missouri](courts/eighth-circuit/missouri/federal/bankruptcy-western-district) | `mowb` | in progress | — | — | — | 14 |
+| [District Court, E.D. Missouri](courts/eighth-circuit/missouri/federal/eastern-district) | `moed` | in progress | — | — | — | 14 |
+| [District Court, W.D. Missouri](courts/eighth-circuit/missouri/federal/western-district) | `mowd` | in progress | — | — | — | 14 |
+| [Missouri Court of Appeals](courts/eighth-circuit/missouri/state/court-of-appeals) | `moctapp` | in progress | — | — | — | 14 |
+| [Missouri Court of Appeals, Eastern District](courts/eighth-circuit/missouri/state/court-of-appeals-eastern-district) | `moctapped` | in progress | — | — | — | 14 |
+| [Missouri Court of Appeals, Southern District](courts/eighth-circuit/missouri/state/court-of-appeals-southern-district) | `moctappsd` | in progress | — | — | — | 14 |
+| [Missouri Court of Appeals, Western District](courts/eighth-circuit/missouri/state/court-of-appeals-western-district) | `moctappwd` | in progress | — | — | — | 14 |
+| [Supreme Court of Missouri](courts/eighth-circuit/missouri/state/supreme-court) | `mo` | in progress | — | — | — | 14 |
 
 ### Nebraska
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Nebraska](courts/eighth-circuit/nebraska/federal/bankruptcy-district) | `nebraskab` | todo | — | — | — | 0 |
-| [United States District Court, Nebraska](courts/eighth-circuit/nebraska/federal/district) | `ned` | todo | — | — | — | 0 |
-| [Nebraska Court of Appeals](courts/eighth-circuit/nebraska/state/court-of-appeals) | `nebctapp` | todo | — | — | — | 0 |
-| [Nebraska Supreme Court](courts/eighth-circuit/nebraska/state/supreme-court) | `neb` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Nebraska](courts/eighth-circuit/nebraska/federal/bankruptcy-district) | `nebraskab` | in progress | — | — | — | 14 |
+| [United States District Court, Nebraska](courts/eighth-circuit/nebraska/federal/district) | `ned` | in progress | — | — | — | 14 |
+| [Nebraska Court of Appeals](courts/eighth-circuit/nebraska/state/court-of-appeals) | `nebctapp` | in progress | — | — | — | 14 |
+| [Nebraska Supreme Court](courts/eighth-circuit/nebraska/state/supreme-court) | `neb` | in progress | — | — | — | 14 |
 
 ### North Dakota
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. North Dakota](courts/eighth-circuit/north-dakota/federal/bankruptcy-district) | `ndb` | todo | — | — | — | 0 |
-| [District Court, D. North Dakota](courts/eighth-circuit/north-dakota/federal/district) | `ndd` | todo | — | — | — | 0 |
-| [North Dakota Court of Appeals](courts/eighth-circuit/north-dakota/state/court-of-appeals) | `ndctapp` | todo | — | — | — | 0 |
-| [North Dakota Supreme Court](courts/eighth-circuit/north-dakota/state/supreme-court) | `nd` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. North Dakota](courts/eighth-circuit/north-dakota/federal/bankruptcy-district) | `ndb` | in progress | — | — | — | 14 |
+| [District Court, D. North Dakota](courts/eighth-circuit/north-dakota/federal/district) | `ndd` | in progress | — | — | — | 14 |
+| [North Dakota Court of Appeals](courts/eighth-circuit/north-dakota/state/court-of-appeals) | `ndctapp` | in progress | — | — | — | 14 |
+| [North Dakota Supreme Court](courts/eighth-circuit/north-dakota/state/supreme-court) | `nd` | in progress | — | — | — | 14 |
 
 ### South Dakota
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/bankruptcy-district) | `sdb` | todo | — | — | — | 0 |
-| [District Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/district) | `sdd` | todo | — | — | — | 0 |
-| [Supreme Court of South Dakota](courts/eighth-circuit/south-dakota/state/supreme-court) | `sd` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/bankruptcy-district) | `sdb` | in progress | — | — | — | 14 |
+| [District Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/district) | `sdd` | in progress | — | — | — | 14 |
+| [Supreme Court of South Dakota](courts/eighth-circuit/south-dakota/state/supreme-court) | `sd` | in progress | — | — | — | 14 |
 
 ## Ninth Circuit
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The Ninth Circuit](courts/ninth-circuit/bankruptcy-appellate-panel) | `bap9` | todo | — | — | — | 0 |
-| [Court of Appeals for the Ninth Circuit](courts/ninth-circuit/court-of-appeals) | `ca9` | up for review | pass | pass | — | 75 |
+| [United States Bankruptcy Appellate Panel of The Ninth Circuit](courts/ninth-circuit/bankruptcy-appellate-panel) | `bap9` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Ninth Circuit](courts/ninth-circuit/court-of-appeals) | `ca9` | in progress | built | built | — | 57 |
 
 ### Alaska
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Alaska](courts/ninth-circuit/alaska/federal/bankruptcy-district) | `akb` | todo | — | — | — | 0 |
-| [United States District Court for the District of Alaska](courts/ninth-circuit/alaska/federal/district) | `akd` | todo | — | — | — | 0 |
-| [Alaska Court of Appeals](courts/ninth-circuit/alaska/state/court-of-appeals) | `alaskactapp` | todo | — | — | — | 0 |
-| [Alaska Supreme Court](courts/ninth-circuit/alaska/state/supreme-court) | `alaska` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Alaska](courts/ninth-circuit/alaska/federal/bankruptcy-district) | `akb` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Alaska](courts/ninth-circuit/alaska/federal/district) | `akd` | in progress | — | — | — | 14 |
+| [Alaska Court of Appeals](courts/ninth-circuit/alaska/state/court-of-appeals) | `alaskactapp` | in progress | — | — | — | 0 |
+| [Alaska Supreme Court](courts/ninth-circuit/alaska/state/supreme-court) | `alaska` | in progress | — | — | — | 14 |
 
 ### Arizona
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Arizona](courts/ninth-circuit/arizona/federal/bankruptcy-district) | `arb` | todo | — | — | — | 0 |
-| [United States District Court for the District of Arizona](courts/ninth-circuit/arizona/federal/district) | `azd` | todo | — | — | — | 0 |
-| [Arizona Court of Appeals](courts/ninth-circuit/arizona/state/court-of-appeals) | `arizctapp` | todo | — | — | — | 0 |
-| [Arizona Supreme Court](courts/ninth-circuit/arizona/state/supreme-court) | `ariz` | todo | — | — | — | 0 |
-| [Arizona Tax Court](courts/ninth-circuit/arizona/state/tax-court) | `ariztaxct` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Arizona](courts/ninth-circuit/arizona/federal/bankruptcy-district) | `arb` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Arizona](courts/ninth-circuit/arizona/federal/district) | `azd` | in progress | — | — | — | 14 |
+| [Arizona Court of Appeals](courts/ninth-circuit/arizona/state/court-of-appeals) | `arizctapp` | in progress | — | — | — | 14 |
+| [Arizona Supreme Court](courts/ninth-circuit/arizona/state/supreme-court) | `ariz` | in progress | — | — | — | 14 |
+| [Arizona Tax Court](courts/ninth-circuit/arizona/state/tax-court) | `ariztaxct` | in progress | — | — | — | 0 |
 
 ### California
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, C.D. California](courts/ninth-circuit/california/federal/bankruptcy-central-district) | `cacb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, E.D. California](courts/ninth-circuit/california/federal/bankruptcy-eastern-district) | `caeb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, N.D. California](courts/ninth-circuit/california/federal/bankruptcy-northern-district) | `canb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, S.D. California](courts/ninth-circuit/california/federal/bankruptcy-southern-district) | `casb` | todo | — | — | — | 0 |
-| [United States District Court for the Central District of California](courts/ninth-circuit/california/federal/central-district) | `cacd` | todo | — | — | — | 0 |
-| [United States District Court for the Eastern District of California](courts/ninth-circuit/california/federal/eastern-district) | `caed` | todo | — | — | — | 0 |
-| [United States District Court for the Northern District of California](courts/ninth-circuit/california/federal/northern-district) | `cand` | todo | — | — | — | 0 |
-| [United States District Court for the Southern District of California](courts/ninth-circuit/california/federal/southern-district) | `casd` | in progress | — | — | — | 0 |
-| [California Court of Appeal, Fifth Appellate District](courts/ninth-circuit/california/state/court-of-appeal-fifth-district) | `calctapp5d` | todo | — | — | — | 0 |
-| [California Court of Appeal, First Appellate District](courts/ninth-circuit/california/state/court-of-appeal-first-district) | `calctapp1d` | todo | — | — | — | 0 |
-| [California Court of Appeal, Fourth Appellate District](courts/ninth-circuit/california/state/court-of-appeal-fourth-district) | `calctapp4d` | todo | — | — | — | 0 |
-| [California Court of Appeal, Second Appellate District](courts/ninth-circuit/california/state/court-of-appeal-second-district) | `calctapp2d` | todo | — | — | — | 0 |
-| [California Court of Appeal, Sixth Appellate District](courts/ninth-circuit/california/state/court-of-appeal-sixth-district) | `calctapp6d` | todo | — | — | — | 0 |
-| [California Court of Appeal, Third Appellate District](courts/ninth-circuit/california/state/court-of-appeal-third-district) | `calctapp3d` | todo | — | — | — | 0 |
-| [California Courts of Appeal](courts/ninth-circuit/california/state/courts-of-appeal) | `calctapp` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, C.D. California](courts/ninth-circuit/california/federal/bankruptcy-central-district) | `cacb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, E.D. California](courts/ninth-circuit/california/federal/bankruptcy-eastern-district) | `caeb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, N.D. California](courts/ninth-circuit/california/federal/bankruptcy-northern-district) | `canb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, S.D. California](courts/ninth-circuit/california/federal/bankruptcy-southern-district) | `casb` | in progress | — | — | — | 14 |
+| [United States District Court for the Central District of California](courts/ninth-circuit/california/federal/central-district) | `cacd` | in progress | — | — | — | 14 |
+| [United States District Court for the Eastern District of California](courts/ninth-circuit/california/federal/eastern-district) | `caed` | in progress | — | — | — | 14 |
+| [United States District Court for the Northern District of California](courts/ninth-circuit/california/federal/northern-district) | `cand` | in progress | — | — | — | 14 |
+| [United States District Court for the Southern District of California](courts/ninth-circuit/california/federal/southern-district) | `casd` | in progress | — | — | — | 14 |
+| [California Court of Appeal, Fifth Appellate District](courts/ninth-circuit/california/state/court-of-appeal-fifth-district) | `calctapp5d` | in progress | — | — | — | 14 |
+| [California Court of Appeal, First Appellate District](courts/ninth-circuit/california/state/court-of-appeal-first-district) | `calctapp1d` | in progress | — | — | — | 14 |
+| [California Court of Appeal, Fourth Appellate District](courts/ninth-circuit/california/state/court-of-appeal-fourth-district) | `calctapp4d` | in progress | — | — | — | 14 |
+| [California Court of Appeal, Second Appellate District](courts/ninth-circuit/california/state/court-of-appeal-second-district) | `calctapp2d` | in progress | — | — | — | 14 |
+| [California Court of Appeal, Sixth Appellate District](courts/ninth-circuit/california/state/court-of-appeal-sixth-district) | `calctapp6d` | in progress | — | — | — | 14 |
+| [California Court of Appeal, Third Appellate District](courts/ninth-circuit/california/state/court-of-appeal-third-district) | `calctapp3d` | in progress | — | — | — | 14 |
+| [California Courts of Appeal](courts/ninth-circuit/california/state/courts-of-appeal) | `calctapp` | in progress | — | — | — | 14 |
 | [California Superior Court](courts/ninth-circuit/california/state/superior-court) | `calsuperct` | todo | — | — | — | 0 |
-| [California Superior Court, San Diego County](courts/ninth-circuit/california/state/superior-court/san-diego-county) | `calsuperct-sandiego` | in progress | — | — | — | 0 |
+| [California Superior Court, San Diego County](courts/ninth-circuit/california/state/superior-court/san-diego-county) | `calsuperct-sandiego` | todo | — | — | — | 0 |
 | [California Superior Court, Appellate Division](courts/ninth-circuit/california/state/superior-court-appellate-division) | `calappdeptsuper` | todo | — | — | — | 0 |
-| [California Supreme Court](courts/ninth-circuit/california/state/supreme-court) | `cal` | todo | — | — | — | 0 |
+| [California Supreme Court](courts/ninth-circuit/california/state/supreme-court) | `cal` | in progress | — | — | — | 14 |
 
 ### Guam
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Guam](courts/ninth-circuit/guam/federal/bankruptcy-district) | `gub` | todo | — | — | — | 0 |
-| [District Court, D. Guam](courts/ninth-circuit/guam/federal/district) | `gud` | todo | — | — | — | 0 |
-| [Supreme Court of Guam](courts/ninth-circuit/guam/state/supreme-court) | `guam` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Guam](courts/ninth-circuit/guam/federal/bankruptcy-district) | `gub` | in progress | — | — | — | 14 |
+| [District Court, D. Guam](courts/ninth-circuit/guam/federal/district) | `gud` | in progress | — | — | — | 14 |
+| [Supreme Court of Guam](courts/ninth-circuit/guam/state/supreme-court) | `guam` | in progress | — | — | — | 14 |
 
 ### Hawaii
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Hawaii](courts/ninth-circuit/hawaii/federal/bankruptcy-district) | `hib` | todo | — | — | — | 0 |
-| [United States District Court for the District of Hawaii](courts/ninth-circuit/hawaii/federal/district) | `hid` | todo | — | — | — | 0 |
-| [Hawaii Intermediate Court of Appeals](courts/ninth-circuit/hawaii/state/intermediate-court-of-appeals) | `hawapp` | todo | — | — | — | 0 |
-| [Hawaii State Tax Appeal Court](courts/ninth-circuit/hawaii/state/state-tax-appeal-court) | `hawtax` | todo | — | — | — | 0 |
-| [Supreme Court of Hawaii](courts/ninth-circuit/hawaii/state/supreme-court) | `haw` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Hawaii](courts/ninth-circuit/hawaii/federal/bankruptcy-district) | `hib` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Hawaii](courts/ninth-circuit/hawaii/federal/district) | `hid` | in progress | — | — | — | 14 |
+| [Hawaii Intermediate Court of Appeals](courts/ninth-circuit/hawaii/state/intermediate-court-of-appeals) | `hawapp` | in progress | — | — | — | 14 |
+| [Hawaii State Tax Appeal Court](courts/ninth-circuit/hawaii/state/state-tax-appeal-court) | `hawtax` | in progress | — | — | — | 14 |
+| [Supreme Court of Hawaii](courts/ninth-circuit/hawaii/state/supreme-court) | `haw` | in progress | — | — | — | 14 |
 
 ### Idaho
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Idaho](courts/ninth-circuit/idaho/federal/bankruptcy-district) | `idb` | todo | — | — | — | 0 |
-| [United States District Court for the District of Idaho](courts/ninth-circuit/idaho/federal/district) | `idd` | todo | — | — | — | 0 |
-| [Idaho Court of Appeals](courts/ninth-circuit/idaho/state/court-of-appeals) | `idahoctapp` | todo | — | — | — | 0 |
-| [Idaho Supreme Court](courts/ninth-circuit/idaho/state/supreme-court) | `idaho` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Idaho](courts/ninth-circuit/idaho/federal/bankruptcy-district) | `idb` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Idaho](courts/ninth-circuit/idaho/federal/district) | `idd` | in progress | — | — | — | 14 |
+| [Idaho Court of Appeals](courts/ninth-circuit/idaho/state/court-of-appeals) | `idahoctapp` | in progress | — | — | — | 14 |
+| [Idaho Supreme Court](courts/ninth-circuit/idaho/state/supreme-court) | `idaho` | in progress | — | — | — | 14 |
 
 ### Montana
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Montana](courts/ninth-circuit/montana/federal/bankruptcy-district) | `mtb` | todo | — | — | — | 0 |
-| [District Court, D. Montana](courts/ninth-circuit/montana/federal/district) | `mtd` | todo | — | — | — | 0 |
-| [Montana Supreme Court](courts/ninth-circuit/montana/state/supreme-court) | `mont` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Montana](courts/ninth-circuit/montana/federal/bankruptcy-district) | `mtb` | in progress | — | — | — | 14 |
+| [District Court, D. Montana](courts/ninth-circuit/montana/federal/district) | `mtd` | in progress | — | — | — | 14 |
+| [Montana Supreme Court](courts/ninth-circuit/montana/state/supreme-court) | `mont` | in progress | — | — | — | 14 |
 | [Montana Tax Appeal Board](courts/ninth-circuit/montana/state/tax-appeal-board) | `monttc` | todo | — | — | — | 0 |
 
 ### Nevada
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Nevada](courts/ninth-circuit/nevada/federal/bankruptcy-district) | `nvb` | todo | — | — | — | 0 |
-| [District Court, D. Nevada](courts/ninth-circuit/nevada/federal/district) | `nvd` | todo | — | — | — | 0 |
-| [Court of Appeals of Nevada](courts/ninth-circuit/nevada/state/court-of-appeals) | `nevapp` | todo | — | — | — | 0 |
-| [Nevada Supreme Court](courts/ninth-circuit/nevada/state/supreme-court) | `nev` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Nevada](courts/ninth-circuit/nevada/federal/bankruptcy-district) | `nvb` | in progress | — | — | — | 14 |
+| [District Court, D. Nevada](courts/ninth-circuit/nevada/federal/district) | `nvd` | in progress | — | — | — | 14 |
+| [Court of Appeals of Nevada](courts/ninth-circuit/nevada/state/court-of-appeals) | `nevapp` | in progress | — | — | — | 14 |
+| [Nevada Supreme Court](courts/ninth-circuit/nevada/state/supreme-court) | `nev` | in progress | — | — | — | 14 |
 
 ### Northern Mariana Islands
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, Northern Mariana Islands](courts/ninth-circuit/northern-mariana-islands/federal/bankruptcy-district) | `nmib` | todo | — | — | — | 0 |
-| [District Court, Northern Mariana Islands](courts/ninth-circuit/northern-mariana-islands/federal/district) | `nmid` | todo | — | — | — | 0 |
-| [Supreme Court of The Commonwealth of The Northern Mariana Islands](courts/ninth-circuit/northern-mariana-islands/state/supreme-court) | `nmi` | todo | — | — | — | 0 |
+| [District Court, Northern Mariana Islands](courts/ninth-circuit/northern-mariana-islands/federal/district) | `nmid` | in progress | — | — | — | 14 |
+| [Supreme Court of The Commonwealth of The Northern Mariana Islands](courts/ninth-circuit/northern-mariana-islands/state/supreme-court) | `nmi` | in progress | — | — | — | 0 |
 
 ### Oregon
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Oregon](courts/ninth-circuit/oregon/federal/bankruptcy-district) | `orb` | todo | — | — | — | 0 |
-| [District Court, D. Oregon](courts/ninth-circuit/oregon/federal/district) | `ord` | todo | — | — | — | 0 |
-| [Court of Appeals of Oregon](courts/ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | todo | — | — | — | 0 |
-| [Oregon Supreme Court](courts/ninth-circuit/oregon/state/supreme-court) | `or` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Oregon](courts/ninth-circuit/oregon/federal/bankruptcy-district) | `orb` | in progress | — | — | — | 14 |
+| [District Court, D. Oregon](courts/ninth-circuit/oregon/federal/district) | `ord` | in progress | — | — | — | 14 |
+| [Court of Appeals of Oregon](courts/ninth-circuit/oregon/state/court-of-appeals) | `orctapp` | in progress | — | — | — | 14 |
+| [Oregon Supreme Court](courts/ninth-circuit/oregon/state/supreme-court) | `or` | in progress | — | — | — | 14 |
 | [Oregon Tax Court](courts/ninth-circuit/oregon/state/tax-court) | `ortc` | todo | — | — | — | 0 |
 
 ### Washington
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Washington](courts/ninth-circuit/washington/federal/bankruptcy-eastern-district) | `waeb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, W.D. Washington](courts/ninth-circuit/washington/federal/bankruptcy-western-district) | `wawb` | todo | — | — | — | 0 |
-| [District Court, E.D. Washington](courts/ninth-circuit/washington/federal/eastern-district) | `waed` | todo | — | — | — | 0 |
-| [District Court, W.D. Washington](courts/ninth-circuit/washington/federal/western-district) | `wawd` | todo | — | — | — | 0 |
-| [Court of Appeals of Washington](courts/ninth-circuit/washington/state/court-of-appeals) | `washctapp` | todo | — | — | — | 0 |
-| [Washington Supreme Court](courts/ninth-circuit/washington/state/supreme-court) | `wash` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, E.D. Washington](courts/ninth-circuit/washington/federal/bankruptcy-eastern-district) | `waeb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. Washington](courts/ninth-circuit/washington/federal/bankruptcy-western-district) | `wawb` | in progress | — | — | — | 14 |
+| [District Court, E.D. Washington](courts/ninth-circuit/washington/federal/eastern-district) | `waed` | in progress | — | — | — | 14 |
+| [District Court, W.D. Washington](courts/ninth-circuit/washington/federal/western-district) | `wawd` | in progress | — | — | — | 14 |
+| [Court of Appeals of Washington](courts/ninth-circuit/washington/state/court-of-appeals) | `washctapp` | in progress | — | — | — | 14 |
+| [Washington Supreme Court](courts/ninth-circuit/washington/state/supreme-court) | `wash` | in progress | — | — | — | 14 |
 
 ### American Samoa
 
@@ -688,9 +688,9 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Colorado](courts/tenth-circuit/colorado/federal/bankruptcy-district) | `cob` | todo | — | — | — | 0 |
 | [United States District Court for the District of Colorado](courts/tenth-circuit/colorado/federal/district) | `cod` | todo | — | — | — | 0 |
-| [Colorado Court of Appeals](courts/tenth-circuit/colorado/state/court-of-appeals) | `coloctapp` | todo | — | — | — | 0 |
+| [Colorado Court of Appeals](courts/tenth-circuit/colorado/state/court-of-appeals) | `coloctapp` | in progress | — | — | — | 14 |
 | [Colorado Industrial Claim Appeals office](courts/tenth-circuit/colorado/state/industrial-claim-appeals-office) | `coloworkcompcom` | todo | — | — | — | 0 |
-| [Colorado Supreme Court](courts/tenth-circuit/colorado/state/supreme-court) | `colo` | todo | — | — | — | 0 |
+| [Colorado Supreme Court](courts/tenth-circuit/colorado/state/supreme-court) | `colo` | in progress | — | — | — | 14 |
 
 ### Kansas
 
@@ -698,8 +698,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Kansas](courts/tenth-circuit/kansas/federal/bankruptcy-district) | `ksb` | todo | — | — | — | 0 |
 | [District Court, D. Kansas](courts/tenth-circuit/kansas/federal/district) | `ksd` | todo | — | — | — | 0 |
-| [Court of Appeals of Kansas](courts/tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | todo | — | — | — | 0 |
-| [Supreme Court of Kansas](courts/tenth-circuit/kansas/state/supreme-court) | `kan` | todo | — | — | — | 0 |
+| [Court of Appeals of Kansas](courts/tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | in progress | — | — | — | 14 |
+| [Supreme Court of Kansas](courts/tenth-circuit/kansas/state/supreme-court) | `kan` | in progress | — | — | — | 14 |
 
 ### New Mexico
 
@@ -707,8 +707,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. New Mexico](courts/tenth-circuit/new-mexico/federal/bankruptcy-district) | `nmb` | todo | — | — | — | 0 |
 | [District Court, D. New Mexico](courts/tenth-circuit/new-mexico/federal/district) | `nmd` | todo | — | — | — | 0 |
-| [New Mexico Court of Appeals](courts/tenth-circuit/new-mexico/state/court-of-appeals) | `nmctapp` | todo | — | — | — | 0 |
-| [New Mexico Supreme Court](courts/tenth-circuit/new-mexico/state/supreme-court) | `nm` | todo | — | — | — | 0 |
+| [New Mexico Court of Appeals](courts/tenth-circuit/new-mexico/state/court-of-appeals) | `nmctapp` | in progress | — | — | — | 14 |
+| [New Mexico Supreme Court](courts/tenth-circuit/new-mexico/state/supreme-court) | `nm` | in progress | — | — | — | 14 |
 
 ### Oklahoma
 
@@ -721,11 +721,11 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States District Court, Oklahoma Eastern](courts/tenth-circuit/oklahoma/federal/eastern-district) | `oked` | todo | — | — | — | 0 |
 | [United States District Court, Oklahoma Northern](courts/tenth-circuit/oklahoma/federal/northern-district) | `oknd` | todo | — | — | — | 0 |
 | [United States District Court, Oklahoma Western](courts/tenth-circuit/oklahoma/federal/western-district) | `okwd` | todo | — | — | — | 0 |
-| [Court of Civil Appeals of Oklahoma](courts/tenth-circuit/oklahoma/state/court-of-civil-appeals) | `oklacivapp` | todo | — | — | — | 0 |
-| [Court of Criminal Appeals of Oklahoma](courts/tenth-circuit/oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | todo | — | — | — | 0 |
+| [Court of Civil Appeals of Oklahoma](courts/tenth-circuit/oklahoma/state/court-of-civil-appeals) | `oklacivapp` | in progress | — | — | — | 0 |
+| [Court of Criminal Appeals of Oklahoma](courts/tenth-circuit/oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | in progress | — | — | — | 14 |
 | [Court on the Judiciary of Oklahoma](courts/tenth-circuit/oklahoma/state/court-on-the-judiciary) | `oklacoj` | todo | — | — | — | 0 |
 | [Oklahoma Judicial Ethics Advisory Panel](courts/tenth-circuit/oklahoma/state/judicial-ethics-advisory-panel) | `oklajeap` | todo | — | — | — | 0 |
-| [Supreme Court of Oklahoma](courts/tenth-circuit/oklahoma/state/supreme-court) | `okla` | todo | — | — | — | 0 |
+| [Supreme Court of Oklahoma](courts/tenth-circuit/oklahoma/state/supreme-court) | `okla` | in progress | — | — | — | 14 |
 
 ### Utah
 
@@ -733,8 +733,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Utah](courts/tenth-circuit/utah/federal/bankruptcy-district) | `utb` | todo | — | — | — | 0 |
 | [District Court, D. Utah](courts/tenth-circuit/utah/federal/district) | `utd` | todo | — | — | — | 0 |
-| [Court of Appeals of Utah](courts/tenth-circuit/utah/state/court-of-appeals) | `utahctapp` | todo | — | — | — | 0 |
-| [Utah Supreme Court](courts/tenth-circuit/utah/state/supreme-court) | `utah` | todo | — | — | — | 0 |
+| [Court of Appeals of Utah](courts/tenth-circuit/utah/state/court-of-appeals) | `utahctapp` | in progress | — | — | — | 14 |
+| [Utah Supreme Court](courts/tenth-circuit/utah/state/supreme-court) | `utah` | in progress | — | — | — | 14 |
 
 ### Wyoming
 
@@ -742,7 +742,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Wyoming](courts/tenth-circuit/wyoming/federal/bankruptcy-district) | `wyb` | todo | — | — | — | 0 |
 | [District Court, D. Wyoming](courts/tenth-circuit/wyoming/federal/district) | `wyd` | todo | — | — | — | 0 |
-| [Wyoming Supreme Court](courts/tenth-circuit/wyoming/state/supreme-court) | `wyo` | todo | — | — | — | 0 |
+| [Wyoming Supreme Court](courts/tenth-circuit/wyoming/state/supreme-court) | `wyo` | in progress | — | — | — | 14 |
 
 ## Eleventh Circuit
 
@@ -760,9 +760,9 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States District Court for the Middle District of Alabama](courts/eleventh-circuit/alabama/federal/middle-district) | `almd` | todo | — | — | — | 0 |
 | [United States District Court for the Northern District of Alabama](courts/eleventh-circuit/alabama/federal/northern-district) | `alnd` | todo | — | — | — | 0 |
 | [United States District Court for the Southern District of Alabama](courts/eleventh-circuit/alabama/federal/southern-district) | `alsd` | todo | — | — | — | 0 |
-| [Alabama Court of Civil Appeals](courts/eleventh-circuit/alabama/state/court-of-civil-appeals) | `alacivapp` | todo | — | — | — | 0 |
-| [Alabama Court of Criminal Appeals](courts/eleventh-circuit/alabama/state/court-of-criminal-appeals) | `alacrimapp` | todo | — | — | — | 0 |
-| [Supreme Court of Alabama](courts/eleventh-circuit/alabama/state/supreme-court) | `ala` | todo | — | — | — | 0 |
+| [Alabama Court of Civil Appeals](courts/eleventh-circuit/alabama/state/court-of-civil-appeals) | `alacivapp` | in progress | — | — | — | 14 |
+| [Alabama Court of Criminal Appeals](courts/eleventh-circuit/alabama/state/court-of-criminal-appeals) | `alacrimapp` | in progress | — | — | — | 14 |
+| [Supreme Court of Alabama](courts/eleventh-circuit/alabama/state/supreme-court) | `ala` | in progress | — | — | — | 14 |
 
 ### Florida
 
@@ -774,14 +774,14 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States District Court for the Middle District of Florida](courts/eleventh-circuit/florida/federal/middle-district) | `flmd` | todo | — | — | — | 0 |
 | [United States District Court for the Northern District of Florida](courts/eleventh-circuit/florida/federal/northern-district) | `flnd` | todo | — | — | — | 0 |
 | [United States District Court for the Southern District of Florida](courts/eleventh-circuit/florida/federal/southern-district) | `flsd` | todo | — | — | — | 0 |
-| [Florida District Courts of Appeal](courts/eleventh-circuit/florida/state/district-courts-of-appeal) | `fladistctapp` | todo | — | — | — | 0 |
-| [Florida Fifth District Court of Appeal](courts/eleventh-circuit/florida/state/fifth-district-court-of-appeal) | `fladistctapp5` | todo | — | — | — | 0 |
-| [Florida First District Court of Appeal](courts/eleventh-circuit/florida/state/first-district-court-of-appeal) | `fladistctapp1` | todo | — | — | — | 0 |
-| [Florida Fourth District Court of Appeal](courts/eleventh-circuit/florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | todo | — | — | — | 0 |
-| [Florida Second District Court of Appeal](courts/eleventh-circuit/florida/state/second-district-court-of-appeal) | `fladistctapp2` | todo | — | — | — | 0 |
-| [Florida Sixth District Court of Appeal](courts/eleventh-circuit/florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | todo | — | — | — | 0 |
-| [Florida Supreme Court](courts/eleventh-circuit/florida/state/supreme-court) | `fla` | todo | — | — | — | 0 |
-| [Florida Third District Court of Appeal](courts/eleventh-circuit/florida/state/third-district-court-of-appeal) | `fladistctapp3` | todo | — | — | — | 0 |
+| [Florida District Courts of Appeal](courts/eleventh-circuit/florida/state/district-courts-of-appeal) | `fladistctapp` | in progress | — | — | — | 14 |
+| [Florida Fifth District Court of Appeal](courts/eleventh-circuit/florida/state/fifth-district-court-of-appeal) | `fladistctapp5` | in progress | — | — | — | 14 |
+| [Florida First District Court of Appeal](courts/eleventh-circuit/florida/state/first-district-court-of-appeal) | `fladistctapp1` | in progress | — | — | — | 14 |
+| [Florida Fourth District Court of Appeal](courts/eleventh-circuit/florida/state/fourth-district-court-of-appeal) | `fladistctapp4` | in progress | — | — | — | 14 |
+| [Florida Second District Court of Appeal](courts/eleventh-circuit/florida/state/second-district-court-of-appeal) | `fladistctapp2` | in progress | — | — | — | 14 |
+| [Florida Sixth District Court of Appeal](courts/eleventh-circuit/florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | in progress | — | — | — | 14 |
+| [Florida Supreme Court](courts/eleventh-circuit/florida/state/supreme-court) | `fla` | in progress | — | — | — | 14 |
+| [Florida Third District Court of Appeal](courts/eleventh-circuit/florida/state/third-district-court-of-appeal) | `fladistctapp3` | in progress | — | — | — | 14 |
 
 ### Georgia
 
@@ -793,22 +793,22 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States District Court for the Middle District of Georgia](courts/eleventh-circuit/georgia/federal/middle-district) | `gamd` | todo | — | — | — | 0 |
 | [United States District Court for the Northern District of Georgia](courts/eleventh-circuit/georgia/federal/northern-district) | `gand` | todo | — | — | — | 0 |
 | [United States District Court for the Southern District of Georgia](courts/eleventh-circuit/georgia/federal/southern-district) | `gasd` | todo | — | — | — | 0 |
-| [Georgia Court of Appeals](courts/eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | todo | — | — | — | 0 |
-| [Georgia Supreme Court](courts/eleventh-circuit/georgia/state/supreme-court) | `ga` | todo | — | — | — | 0 |
+| [Georgia Court of Appeals](courts/eleventh-circuit/georgia/state/court-of-appeals) | `gactapp` | in progress | — | — | — | 14 |
+| [Georgia Supreme Court](courts/eleventh-circuit/georgia/state/supreme-court) | `ga` | in progress | — | — | — | 14 |
 
 ## D.C. Circuit
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the D.C. Circuit](courts/dc-circuit/court-of-appeals) | `cadc` | todo | — | — | — | 0 |
+| [Court of Appeals for the D.C. Circuit](courts/dc-circuit/court-of-appeals) | `cadc` | in progress | — | — | — | 14 |
 
 ### District of Columbia
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, District of Columbia](courts/dc-circuit/district-of-columbia/federal/bankruptcy-district) | `dcb` | todo | — | — | — | 0 |
-| [District Court, District of Columbia](courts/dc-circuit/district-of-columbia/federal/district) | `dcd` | todo | — | — | — | 0 |
-| [District of Columbia Court of Appeals](courts/dc-circuit/district-of-columbia/state/court-of-appeals) | `dc` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, District of Columbia](courts/dc-circuit/district-of-columbia/federal/bankruptcy-district) | `dcb` | in progress | — | — | — | 14 |
+| [District Court, District of Columbia](courts/dc-circuit/district-of-columbia/federal/district) | `dcd` | in progress | — | — | — | 14 |
+| [District of Columbia Court of Appeals](courts/dc-circuit/district-of-columbia/state/court-of-appeals) | `dc` | in progress | — | — | — | 14 |
 
 ## Unplaced
 
@@ -831,45 +831,45 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 <!-- tracker:start -->
 | Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Supreme Court of the United States | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 14.0% |
 |  | 1 | 0 | 0 | 0 | 1 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Supreme Court of the United States | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Federal Circuit and feeder courts | 6 | 0 | 0 | 1 | 5 | 0.0% | 0.0% | 0 | 0 | 0 | 2.1% |
-| Military courts | 6 | 0 | 0 | 0 | 6 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| National courts and tribunals | 5 | 0 | 0 | 0 | 5 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| First Circuit | 23 | 0 | 0 | 0 | 23 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Second Circuit | 23 | 0 | 0 | 0 | 23 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Third Circuit | 23 | 0 | 0 | 0 | 23 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Fourth Circuit | 32 | 0 | 0 | 0 | 32 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Fifth Circuit | 30 | 0 | 0 | 0 | 30 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Sixth Circuit | 30 | 0 | 0 | 0 | 30 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Seventh Circuit | 22 | 0 | 0 | 0 | 22 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Eighth Circuit | 39 | 0 | 0 | 0 | 39 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Ninth Circuit | 65 | 0 | 1 | 2 | 62 | 0.0% | 1.5% | 1 | 1 | 0 | 1.1% |
-| Tenth Circuit | 34 | 0 | 0 | 0 | 34 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Eleventh Circuit | 32 | 0 | 0 | 0 | 32 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| D.C. Circuit | 4 | 0 | 0 | 0 | 4 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| **Total** | 376 | 0 | 1 | 4 | 371 | 0.0% | 0.2% | 1 | 1 | 0 | 0.2% |
+| Federal Circuit and feeder courts | 6 | 0 | 0 | 6 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 14.0% |
+| Military courts | 6 | 0 | 0 | 5 | 1 | 0.0% | 0.0% | 0 | 0 | 0 | 11.6% |
+| National courts and tribunals | 5 | 0 | 0 | 5 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 14.0% |
+| First Circuit | 23 | 0 | 0 | 19 | 4 | 0.0% | 0.0% | 0 | 0 | 0 | 11.5% |
+| Second Circuit | 23 | 0 | 0 | 19 | 4 | 0.0% | 0.0% | 0 | 0 | 0 | 11.5% |
+| Third Circuit | 23 | 0 | 0 | 19 | 4 | 0.0% | 0.0% | 0 | 0 | 0 | 10.9% |
+| Fourth Circuit | 32 | 0 | 0 | 12 | 20 | 0.0% | 0.0% | 0 | 0 | 0 | 5.2% |
+| Fifth Circuit | 30 | 0 | 0 | 16 | 14 | 0.0% | 0.0% | 0 | 0 | 0 | 7.0% |
+| Sixth Circuit | 30 | 0 | 0 | 18 | 12 | 0.0% | 0.0% | 0 | 0 | 0 | 7.9% |
+| Seventh Circuit | 22 | 0 | 0 | 21 | 1 | 0.0% | 0.0% | 0 | 0 | 0 | 13.3% |
+| Eighth Circuit | 39 | 0 | 0 | 31 | 8 | 0.0% | 0.0% | 0 | 0 | 0 | 11.1% |
+| Ninth Circuit | 65 | 0 | 0 | 58 | 7 | 0.0% | 0.0% | 0 | 0 | 0 | 12.5% |
+| Tenth Circuit | 34 | 0 | 0 | 12 | 22 | 0.0% | 0.0% | 0 | 0 | 0 | 4.5% |
+| Eleventh Circuit | 32 | 0 | 0 | 13 | 19 | 0.0% | 0.0% | 0 | 0 | 0 | 5.6% |
+| D.C. Circuit | 4 | 0 | 0 | 4 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 14.0% |
+| **Total** | 376 | 0 | 0 | 259 | 117 | 0.0% | 0.0% | 0 | 0 | 0 | 9.4% |
 
-Typst per doc type (a doc type is complete with template, sample, render, exemplar and overlay; per-doc-type rows in STATUS.md):
+Typst per doc type (a doc type is complete with template, sample, render and exemplar; per-doc-type rows in STATUS.md):
 
-| Group | Doc types | Template | Sample | Render | Exemplar | Overlay | Typst complete | % complete | Gates pass |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-|  | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 100.0% | 0 |
-| Supreme Court of the United States | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 100.0% | 0 |
-| Federal Circuit and feeder courts | 13 | 13 | 13 | 13 | 13 | 13 | 13 | 100.0% | 0 |
-| Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 11 | 91.6% | 0 |
-| National courts and tribunals | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 100.0% | 0 |
-| First Circuit | 26 | 26 | 26 | 26 | 25 | 25 | 25 | 96.1% | 0 |
-| Second Circuit | 32 | 32 | 32 | 32 | 32 | 32 | 32 | 100.0% | 0 |
-| Third Circuit | 27 | 27 | 27 | 27 | 27 | 27 | 27 | 100.0% | 0 |
-| Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 0 |
-| Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 0 |
-| Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 0 |
-| Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 0 |
-| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 45 | 97.8% | 0 |
-| Ninth Circuit | 72 | 72 | 72 | 72 | 71 | 71 | 71 | 98.6% | 1 |
-| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 36 | 92.3% | 0 |
-| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 0 |
-| D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 0 |
-| **Total** | 491 | 491 | 491 | 491 | 484 | 484 | 484 | 98.5% | 1 |
+| Group | Doc types | Template | Sample | Render | Exemplar | Typst complete | % complete | Gates pass |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+|  | 2 | 2 | 2 | 2 | 2 | 2 | 100.0% | 0 |
+| Supreme Court of the United States | 3 | 3 | 3 | 3 | 3 | 3 | 100.0% | 0 |
+| Federal Circuit and feeder courts | 13 | 13 | 13 | 13 | 13 | 13 | 100.0% | 0 |
+| Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 91.6% | 0 |
+| National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 0 |
+| First Circuit | 26 | 26 | 26 | 26 | 25 | 25 | 96.1% | 0 |
+| Second Circuit | 32 | 32 | 32 | 32 | 32 | 32 | 100.0% | 0 |
+| Third Circuit | 27 | 27 | 27 | 27 | 27 | 27 | 100.0% | 0 |
+| Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 0 |
+| Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 0 |
+| Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 0 |
+| Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 0 |
+| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 0 |
+| Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 0 |
+| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 0 |
+| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 0 |
+| D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 0 |
+| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 0 |
 <!-- tracker:end -->

@@ -1,12 +1,14 @@
+<!-- fb:generated:start -->
 # Minnesota
 
 Courts under `courts/eighth-circuit/minnesota` (4).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Minnesota](federal/bankruptcy-district) | `mnb` | todo | — | — | — | 0 |
-| [District Court, D. Minnesota](federal/district) | `mnd` | todo | — | — | — | 0 |
-| [Court of Appeals of Minnesota](state/court-of-appeals) | `minnctapp` | todo | — | — | — | 0 |
-| [Supreme Court of Minnesota](state/supreme-court) | `minn` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Minnesota](federal/bankruptcy-district) | `mnb` | in progress | — | — | — | 14 |
+| [District Court, D. Minnesota](federal/district) | `mnd` | in progress | — | — | — | 14 |
+| [Court of Appeals of Minnesota](state/court-of-appeals) | `minnctapp` | in progress | — | — | — | 14 |
+| [Supreme Court of Minnesota](state/supreme-court) | `minn` | in progress | — | — | — | 14 |
 
 [Formbook index](../../../README.md)
+<!-- fb:generated:end -->

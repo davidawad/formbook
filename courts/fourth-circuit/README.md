@@ -1,10 +1,11 @@
+<!-- fb:generated:start -->
 # Fourth Circuit
 
 Courts under `courts/fourth-circuit` (32).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Fourth Circuit](court-of-appeals) | `ca4` | todo | — | — | — | 0 |
+| [Court of Appeals for the Fourth Circuit](court-of-appeals) | `ca4` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Maryland](maryland/federal/bankruptcy-district) | `mdb` | todo | — | — | — | 0 |
 | [District Court, D. Maryland](maryland/federal/district) | `mdd` | todo | — | — | — | 0 |
 | [United States Bankruptcy Court, E.D. North Carolina](north-carolina/federal/bankruptcy-eastern-district) | `nceb` | todo | — | — | — | 0 |
@@ -23,18 +24,19 @@ Courts under `courts/fourth-circuit` (32).
 | [United States Bankruptcy Court, S.D. West Virginia](west-virginia/federal/bankruptcy-southern-district) | `wvsb` | todo | — | — | — | 0 |
 | [District Court, N.D. West Virginia](west-virginia/federal/northern-district) | `wvnd` | todo | — | — | — | 0 |
 | [District Court, S.D. West Virginia](west-virginia/federal/southern-district) | `wvsd` | todo | — | — | — | 0 |
-| [Court of Appeals of Maryland](maryland/state/court-of-appeals) | `md` | todo | — | — | — | 0 |
-| [Court of Special Appeals of Maryland](maryland/state/court-of-special-appeals) | `mdctspecapp` | todo | — | — | — | 0 |
-| [Court of Appeals of North Carolina](north-carolina/state/court-of-appeals) | `ncctapp` | todo | — | — | — | 0 |
+| [Court of Appeals of Maryland](maryland/state/court-of-appeals) | `md` | in progress | — | — | — | 14 |
+| [Court of Special Appeals of Maryland](maryland/state/court-of-special-appeals) | `mdctspecapp` | in progress | — | — | — | 14 |
+| [Court of Appeals of North Carolina](north-carolina/state/court-of-appeals) | `ncctapp` | in progress | — | — | — | 14 |
 | [North Carolina Industrial Commission](north-carolina/state/industrial-commission) | `ncworkcompcom` | todo | — | — | — | 0 |
-| [Superior Court of North Carolina](north-carolina/state/superior-court) | `ncsuperct` | todo | — | — | — | 0 |
-| [Supreme Court of North Carolina](north-carolina/state/supreme-court) | `nc` | todo | — | — | — | 0 |
-| [Court of Appeals of South Carolina](south-carolina/state/court-of-appeals) | `scctapp` | todo | — | — | — | 0 |
+| [Superior Court of North Carolina](north-carolina/state/superior-court) | `ncsuperct` | in progress | — | — | — | 14 |
+| [Supreme Court of North Carolina](north-carolina/state/supreme-court) | `nc` | in progress | — | — | — | 14 |
+| [Court of Appeals of South Carolina](south-carolina/state/court-of-appeals) | `scctapp` | in progress | — | — | — | 14 |
 | [Court of Chancery of South Carolina](south-carolina/state/court-of-chancery) | `ctchansc` | todo | — | — | — | 0 |
-| [Supreme Court of South Carolina](south-carolina/state/supreme-court) | `sc` | todo | — | — | — | 0 |
-| [Court of Appeals of Virginia](virginia/state/court-of-appeals) | `vactapp` | todo | — | — | — | 0 |
-| [Supreme Court of Virginia](virginia/state/supreme-court) | `va` | todo | — | — | — | 0 |
-| [Intermediate Court of Appeals of West Virginia](west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | todo | — | — | — | 0 |
-| [West Virginia Supreme Court](west-virginia/state/supreme-court) | `wva` | todo | — | — | — | 0 |
+| [Supreme Court of South Carolina](south-carolina/state/supreme-court) | `sc` | in progress | — | — | — | 14 |
+| [Court of Appeals of Virginia](virginia/state/court-of-appeals) | `vactapp` | in progress | — | — | — | 14 |
+| [Supreme Court of Virginia](virginia/state/supreme-court) | `va` | in progress | — | — | — | 14 |
+| [Intermediate Court of Appeals of West Virginia](west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | in progress | — | — | — | 14 |
+| [West Virginia Supreme Court](west-virginia/state/supreme-court) | `wva` | in progress | — | — | — | 14 |
 
 [Formbook index](../../README.md)
+<!-- fb:generated:end -->

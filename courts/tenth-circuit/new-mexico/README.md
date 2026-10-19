@@ -1,3 +1,4 @@
+<!-- fb:generated:start -->
 # New Mexico
 
 Courts under `courts/tenth-circuit/new-mexico` (4).
@@ -6,7 +7,8 @@ Courts under `courts/tenth-circuit/new-mexico` (4).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. New Mexico](federal/bankruptcy-district) | `nmb` | todo | — | — | — | 0 |
 | [District Court, D. New Mexico](federal/district) | `nmd` | todo | — | — | — | 0 |
-| [New Mexico Court of Appeals](state/court-of-appeals) | `nmctapp` | todo | — | — | — | 0 |
-| [New Mexico Supreme Court](state/supreme-court) | `nm` | todo | — | — | — | 0 |
+| [New Mexico Court of Appeals](state/court-of-appeals) | `nmctapp` | in progress | — | — | — | 14 |
+| [New Mexico Supreme Court](state/supreme-court) | `nm` | in progress | — | — | — | 14 |
 
 [Formbook index](../../../README.md)
+<!-- fb:generated:end -->

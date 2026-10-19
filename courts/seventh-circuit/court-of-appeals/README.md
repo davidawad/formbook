@@ -1,26 +1,41 @@
+<!-- fb:generated:start -->
 # Court of Appeals for the Seventh Circuit
 
 - Alias: `ca7`
 - CourtListener: [ca7](https://www.courtlistener.com/?court=ca7)
 - Level: appellate
 - Circuit: `ca7`
-- Status: **todo** (0%); manual status in `court.json`: `todo`
+- Status: **in progress** (14%); manual status in `court.json`: `todo`
 
 ## Checklist
 
-- [ ] `rules.md` present
-- [ ] `usage/` has at least 2 filed PDFs (different filers)
-- [ ] `usage/` has at least 2 .md samples
+- [x] `rules.md` present
+- [ ] `usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)
+- [ ] `usage/` has at least 2 INPUT .md samples
 - [ ] typst engine passes (`usage/.check-typst.txt` valid)
 - [ ] latex engine passes (`usage/.check-latex.txt` valid)
 - [ ] docx engine passes (`usage/.check-docx.txt` valid)
-- [ ] overlay PDF present (`usage/*-overlay.pdf`)
 - [ ] a review file in `reviews/`
 
 Engines: typst `—`, latex `—`, docx `—`.
 
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
+
+## Folders
+
+- `typst/` Typst template (primary)
+- `latex/` LaTeX template
+- `docx/` Word template (reference.docx + filters)
+- `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
+
+[Formbook index](../../../README.md) | [Status table](../../../STATUS.md)
+<!-- fb:generated:end -->
+
+- [ ] `usage/` has at least 2 filed PDFs (different filers)
+- [ ] `usage/` has at least 2 .md samples
+
+- [ ] overlay PDF present (`usage/*-overlay.pdf`)
 
 ## Typeface
 
@@ -34,12 +49,5 @@ The rules name no face. Fed. R. App. P. 32(a)(5)(A) requires a proportionally sp
 
 The Seventh Circuit's typography handbook (<https://www.ca7.uscourts.gov/assets/pdf/type.pdf>, 2018) is guidance, not a rule. It recommends Century and Bookman families and calls Times and Garamond less legible. It is not adopted here: the rule allows any proportional serif, and the handbook is not the court's rule. TeX Gyre Schola (Century) is now vendored, so a switch is one line per template. Open question for David: switch the three doc types to Schola, or keep EB Garamond?
 
-## Folders
-
-- `typst/` Typst template (primary)
-- `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`
-
-[Formbook index](../../../README.md) | [Status table](../../../STATUS.md)

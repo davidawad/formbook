@@ -1,3 +1,4 @@
+<!-- fb:generated:start -->
 # Wyoming
 
 Courts under `courts/tenth-circuit/wyoming` (3).
@@ -6,6 +7,7 @@ Courts under `courts/tenth-circuit/wyoming` (3).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Wyoming](federal/bankruptcy-district) | `wyb` | todo | — | — | — | 0 |
 | [District Court, D. Wyoming](federal/district) | `wyd` | todo | — | — | — | 0 |
-| [Wyoming Supreme Court](state/supreme-court) | `wyo` | todo | — | — | — | 0 |
+| [Wyoming Supreme Court](state/supreme-court) | `wyo` | in progress | — | — | — | 14 |
 
 [Formbook index](../../../README.md)
+<!-- fb:generated:end -->

@@ -1,3 +1,4 @@
+<!-- fb:generated:start -->
 # South Carolina
 
 Courts under `courts/fourth-circuit/south-carolina` (5).
@@ -6,8 +7,9 @@ Courts under `courts/fourth-circuit/south-carolina` (5).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. South Carolina](federal/bankruptcy-district) | `scb` | todo | — | — | — | 0 |
 | [District Court, D. South Carolina](federal/district) | `scd` | todo | — | — | — | 0 |
-| [Court of Appeals of South Carolina](state/court-of-appeals) | `scctapp` | todo | — | — | — | 0 |
+| [Court of Appeals of South Carolina](state/court-of-appeals) | `scctapp` | in progress | — | — | — | 14 |
 | [Court of Chancery of South Carolina](state/court-of-chancery) | `ctchansc` | todo | — | — | — | 0 |
-| [Supreme Court of South Carolina](state/supreme-court) | `sc` | todo | — | — | — | 0 |
+| [Supreme Court of South Carolina](state/supreme-court) | `sc` | in progress | — | — | — | 14 |
 
 [Formbook index](../../../README.md)
+<!-- fb:generated:end -->

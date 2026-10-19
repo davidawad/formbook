@@ -1,3 +1,4 @@
+<!-- fb:generated:start -->
 # American Samoa
 
 Courts under `courts/ninth-circuit/american-samoa` (1).
@@ -7,3 +8,4 @@ Courts under `courts/ninth-circuit/american-samoa` (1).
 | [High Court of American Samoa](state/high-court) | `amsamoa` | todo | — | — | — | 0 |
 
 [Formbook index](../../../README.md)
+<!-- fb:generated:end -->

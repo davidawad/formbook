@@ -1,3 +1,4 @@
+<!-- fb:generated:start -->
 # Tenth Circuit
 
 Courts under `courts/tenth-circuit` (34).
@@ -23,20 +24,21 @@ Courts under `courts/tenth-circuit` (34).
 | [District Court, D. Utah](utah/federal/district) | `utd` | todo | — | — | — | 0 |
 | [United States Bankruptcy Court, D. Wyoming](wyoming/federal/bankruptcy-district) | `wyb` | todo | — | — | — | 0 |
 | [District Court, D. Wyoming](wyoming/federal/district) | `wyd` | todo | — | — | — | 0 |
-| [Colorado Court of Appeals](colorado/state/court-of-appeals) | `coloctapp` | todo | — | — | — | 0 |
+| [Colorado Court of Appeals](colorado/state/court-of-appeals) | `coloctapp` | in progress | — | — | — | 14 |
 | [Colorado Industrial Claim Appeals office](colorado/state/industrial-claim-appeals-office) | `coloworkcompcom` | todo | — | — | — | 0 |
-| [Colorado Supreme Court](colorado/state/supreme-court) | `colo` | todo | — | — | — | 0 |
-| [Court of Appeals of Kansas](kansas/state/court-of-appeals) | `kanctapp` | todo | — | — | — | 0 |
-| [Supreme Court of Kansas](kansas/state/supreme-court) | `kan` | todo | — | — | — | 0 |
-| [New Mexico Court of Appeals](new-mexico/state/court-of-appeals) | `nmctapp` | todo | — | — | — | 0 |
-| [New Mexico Supreme Court](new-mexico/state/supreme-court) | `nm` | todo | — | — | — | 0 |
-| [Court of Civil Appeals of Oklahoma](oklahoma/state/court-of-civil-appeals) | `oklacivapp` | todo | — | — | — | 0 |
-| [Court of Criminal Appeals of Oklahoma](oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | todo | — | — | — | 0 |
+| [Colorado Supreme Court](colorado/state/supreme-court) | `colo` | in progress | — | — | — | 14 |
+| [Court of Appeals of Kansas](kansas/state/court-of-appeals) | `kanctapp` | in progress | — | — | — | 14 |
+| [Supreme Court of Kansas](kansas/state/supreme-court) | `kan` | in progress | — | — | — | 14 |
+| [New Mexico Court of Appeals](new-mexico/state/court-of-appeals) | `nmctapp` | in progress | — | — | — | 14 |
+| [New Mexico Supreme Court](new-mexico/state/supreme-court) | `nm` | in progress | — | — | — | 14 |
+| [Court of Civil Appeals of Oklahoma](oklahoma/state/court-of-civil-appeals) | `oklacivapp` | in progress | — | — | — | 0 |
+| [Court of Criminal Appeals of Oklahoma](oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | in progress | — | — | — | 14 |
 | [Court on the Judiciary of Oklahoma](oklahoma/state/court-on-the-judiciary) | `oklacoj` | todo | — | — | — | 0 |
 | [Oklahoma Judicial Ethics Advisory Panel](oklahoma/state/judicial-ethics-advisory-panel) | `oklajeap` | todo | — | — | — | 0 |
-| [Supreme Court of Oklahoma](oklahoma/state/supreme-court) | `okla` | todo | — | — | — | 0 |
-| [Court of Appeals of Utah](utah/state/court-of-appeals) | `utahctapp` | todo | — | — | — | 0 |
-| [Utah Supreme Court](utah/state/supreme-court) | `utah` | todo | — | — | — | 0 |
-| [Wyoming Supreme Court](wyoming/state/supreme-court) | `wyo` | todo | — | — | — | 0 |
+| [Supreme Court of Oklahoma](oklahoma/state/supreme-court) | `okla` | in progress | — | — | — | 14 |
+| [Court of Appeals of Utah](utah/state/court-of-appeals) | `utahctapp` | in progress | — | — | — | 14 |
+| [Utah Supreme Court](utah/state/supreme-court) | `utah` | in progress | — | — | — | 14 |
+| [Wyoming Supreme Court](wyoming/state/supreme-court) | `wyo` | in progress | — | — | — | 14 |
 
 [Formbook index](../../README.md)
+<!-- fb:generated:end -->

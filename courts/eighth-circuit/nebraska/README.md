@@ -1,12 +1,14 @@
+<!-- fb:generated:start -->
 # Nebraska
 
 Courts under `courts/eighth-circuit/nebraska` (4).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Nebraska](federal/bankruptcy-district) | `nebraskab` | todo | — | — | — | 0 |
-| [United States District Court, Nebraska](federal/district) | `ned` | todo | — | — | — | 0 |
-| [Nebraska Court of Appeals](state/court-of-appeals) | `nebctapp` | todo | — | — | — | 0 |
-| [Nebraska Supreme Court](state/supreme-court) | `neb` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Nebraska](federal/bankruptcy-district) | `nebraskab` | in progress | — | — | — | 14 |
+| [United States District Court, Nebraska](federal/district) | `ned` | in progress | — | — | — | 14 |
+| [Nebraska Court of Appeals](state/court-of-appeals) | `nebctapp` | in progress | — | — | — | 14 |
+| [Nebraska Supreme Court](state/supreme-court) | `neb` | in progress | — | — | — | 14 |
 
 [Formbook index](../../../README.md)
+<!-- fb:generated:end -->

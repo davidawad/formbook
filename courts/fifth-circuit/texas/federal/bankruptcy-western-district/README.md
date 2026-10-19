@@ -1,3 +1,4 @@
+<!-- fb:generated:start -->
 # United States Bankruptcy Court, W.D. Texas
 
 - Alias: `txwb`
@@ -10,18 +11,32 @@
 ## Checklist
 
 - [ ] `rules.md` present
-- [ ] `usage/` has at least 2 filed PDFs (different filers)
-- [ ] `usage/` has at least 2 .md samples
+- [ ] `usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)
+- [ ] `usage/` has at least 2 INPUT .md samples
 - [ ] typst engine passes (`usage/.check-typst.txt` valid)
 - [ ] latex engine passes (`usage/.check-latex.txt` valid)
 - [ ] docx engine passes (`usage/.check-docx.txt` valid)
-- [ ] overlay PDF present (`usage/*-overlay.pdf`)
 - [ ] a review file in `reviews/`
 
 Engines: typst `—`, latex `—`, docx `—`.
 
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
+
+## Folders
+
+- `typst/` Typst template (primary)
+- `latex/` LaTeX template
+- `docx/` Word template (reference.docx + filters)
+- `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
+
+[Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
+<!-- fb:generated:end -->
+
+- [ ] `usage/` has at least 2 filed PDFs (different filers)
+- [ ] `usage/` has at least 2 .md samples
+
+- [ ] overlay PDF present (`usage/*-overlay.pdf`)
 
 ## Typeface
 
@@ -32,12 +47,5 @@ Checked 2026-10-14 against FRBP 9004(a) and the W.D. Tex. local rules (2014 redl
 | `adversary-complaint` | none | none needed | EB Garamond |
 | `motion-brief` | none | none needed | EB Garamond |
 
-## Folders
-
-- `typst/` Typst template (primary)
-- `latex/` LaTeX template
-- `docx/` Word template (reference.docx + filters)
 - `usage/` real filed examples from different filers (PDF) and `SOURCE.md`
 - `usage/` sample inputs (.md); renders `<id>.pdf`, `<id>.latex.pdf`, `<id>.docx`, `<id>.docx.pdf`; stamps `.check-<engine>.txt`
-
-[Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)

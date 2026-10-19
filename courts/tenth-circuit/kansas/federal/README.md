@@ -1,3 +1,4 @@
+<!-- fb:generated:start -->
 # Federal
 
 Courts under `courts/tenth-circuit/kansas/federal` (2).
@@ -8,3 +9,4 @@ Courts under `courts/tenth-circuit/kansas/federal` (2).
 | [District Court, D. Kansas](district) | `ksd` | todo | — | — | — | 0 |
 
 [Formbook index](../../../../README.md)
+<!-- fb:generated:end -->
