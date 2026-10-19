@@ -138,19 +138,19 @@
 }
 
 // ---------------------------------------------------------------------------
-// Body: paragraphs are unnumbered; "@signature" and "@service" place the blocks (footnotes stay in one render call)
+// Body: paragraphs are unnumbered; "<!-- signature -->" and "<!-- service -->" place the blocks (footnotes stay in one render call)
 // ---------------------------------------------------------------------------
 
 /// Render the body. Blank-line-separated chunks are gathered into one markdown render per run of text,
-/// so footnote definitions resolve. "@signature" and "@service" lines are replaced by the blocks.
+/// so footnote definitions resolve. "<!-- signature -->" and "<!-- service -->" lines are replaced by the blocks.
 #let body-blocks(meta, body) = {
   let out = ()
   let buf = ""
   for raw in body.split(regex("\n[ \t]*\n")) {
     let c = raw.trim()
-    if c == "@signature" or c == "@service" {
+    if c == "<!-- signature -->" or c == "<!-- service -->" {
       if buf != "" { out.push(md(buf)); buf = "" }
-      if c == "@signature" {
+      if c == "<!-- signature -->" {
         out.push(signature-block(need(meta, "signature")))
       } else {
         out.push(service-block(need(meta, "certificate")))
