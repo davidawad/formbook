@@ -5,10 +5,10 @@ Courts under `courts/federal-circuit` (6).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Federal Circuit](court-of-appeals) | `cafc` | in progress | — | — | — | 14 |
-| [United States Court of Federal Claims](court-of-federal-claims) | `uscfc` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Federal Circuit](court-of-appeals) | `cafc` | up for review | — | — | — | 14 |
+| [United States Court of Federal Claims](court-of-federal-claims) | `uscfc` | up for review | — | — | — | 14 |
 | [United States Court of International Trade](court-of-international-trade) | `cit` | in progress | — | — | — | 14 |
-| [United States Court of Veteran Appeals](court-of-veteran-appeals) | `cavc` | in progress | — | — | — | 14 |
+| [United States Court of Veteran Appeals](court-of-veteran-appeals) | `cavc` | up for review | — | — | — | 14 |
 | [Patent Trial and Appeal Board](patent-trial-and-appeal-board) | `ptab` | in progress | — | — | — | 14 |
 | [Trademark Trial and Appeal Board](trademark-trial-and-appeal-board) | `ttab` | in progress | — | — | — | 14 |
 

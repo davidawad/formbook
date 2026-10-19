@@ -6,17 +6,17 @@ Courts under `courts/first-circuit` (23).
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Appellate Panel of The First Circuit](bankruptcy-appellate-panel) | `bap1` | in progress | — | — | — | 14 |
-| [Court of Appeals for the First Circuit](court-of-appeals) | `ca1` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Maine](maine/federal/bankruptcy-district) | `meb` | in progress | — | — | — | 14 |
-| [District Court, D. Maine](maine/federal/district) | `med` | in progress | — | — | — | 14 |
+| [Court of Appeals for the First Circuit](court-of-appeals) | `ca1` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Maine](maine/federal/bankruptcy-district) | `meb` | up for review | — | — | — | 14 |
+| [District Court, D. Maine](maine/federal/district) | `med` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Massachusetts](massachusetts/federal/bankruptcy-district) | `mab` | in progress | — | — | — | 14 |
 | [District Court, D. Massachusetts](massachusetts/federal/district) | `mad` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, D. New Hampshire](new-hampshire/federal/bankruptcy-district) | `nhb` | in progress | — | — | — | 14 |
-| [District Court, D. New Hampshire](new-hampshire/federal/district) | `nhd` | in progress | — | — | — | 14 |
+| [District Court, D. New Hampshire](new-hampshire/federal/district) | `nhd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Puerto Rico](puerto-rico/federal/bankruptcy-district) | `prb` | in progress | — | — | — | 14 |
-| [District Court, D. Puerto Rico](puerto-rico/federal/district) | `prd` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Rhode Island](rhode-island/federal/bankruptcy-district) | `rib` | in progress | — | — | — | 14 |
-| [District Court, D. Rhode Island](rhode-island/federal/district) | `rid` | in progress | — | — | — | 14 |
+| [District Court, D. Puerto Rico](puerto-rico/federal/district) | `prd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Rhode Island](rhode-island/federal/bankruptcy-district) | `rib` | up for review | — | — | — | 14 |
+| [District Court, D. Rhode Island](rhode-island/federal/district) | `rid` | up for review | — | — | — | 14 |
 | [Supreme Judicial Court of Maine](maine/state/supreme-judicial-court) | `me` | in progress | — | — | — | 14 |
 | [Massachusetts Appeals Court](massachusetts/state/appeals-court) | `massappct` | in progress | — | — | — | 14 |
 | [Massachusetts Appellate Tax Board](massachusetts/state/appellate-tax-board) | `masstaxbd` | todo | — | — | — | 0 |

@@ -8,16 +8,16 @@ Courts under `courts/third-circuit` (23).
 | [Court of Appeals for the Third Circuit](court-of-appeals) | `ca3` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Delaware](delaware/federal/bankruptcy-district) | `deb` | in progress | — | — | — | 14 |
 | [United States District Court for the District of Delaware](delaware/federal/district) | `ded` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, D. New Jersey](new-jersey/federal/bankruptcy-district) | `njb` | in progress | — | — | — | 14 |
-| [District Court, D. New Jersey](new-jersey/federal/district) | `njd` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, E.D. Pennsylvania](pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, M.D. Pennsylvania](pennsylvania/federal/bankruptcy-middle-district) | `pamb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. New Jersey](new-jersey/federal/bankruptcy-district) | `njb` | up for review | — | — | — | 14 |
+| [District Court, D. New Jersey](new-jersey/federal/district) | `njd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, E.D. Pennsylvania](pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, M.D. Pennsylvania](pennsylvania/federal/bankruptcy-middle-district) | `pamb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Pennsylvania](pennsylvania/federal/bankruptcy-western-district) | `pawb` | in progress | — | — | — | 14 |
 | [District Court, E.D. Pennsylvania](pennsylvania/federal/eastern-district) | `paed` | in progress | — | — | — | 14 |
 | [District Court, M.D. Pennsylvania](pennsylvania/federal/middle-district) | `pamd` | in progress | — | — | — | 14 |
-| [District Court, W.D. Pennsylvania](pennsylvania/federal/western-district) | `pawd` | in progress | — | — | — | 14 |
+| [District Court, W.D. Pennsylvania](pennsylvania/federal/western-district) | `pawd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Virgin Islands](virgin-islands/federal/bankruptcy-district) | `vib` | in progress | — | — | — | 14 |
-| [District Court, Virgin Islands](virgin-islands/federal/district) | `vid` | in progress | — | — | — | 14 |
+| [District Court, Virgin Islands](virgin-islands/federal/district) | `vid` | up for review | — | — | — | 14 |
 | [Delaware Court of Chancery](delaware/state/court-of-chancery) | `delch` | todo | — | — | — | 0 |
 | [Court on the Judiciary of Delaware](delaware/state/court-on-the-judiciary) | `deljudct` | todo | — | — | — | 0 |
 | [Delaware Family Court](delaware/state/family-court) | `delfamct` | todo | — | — | — | 0 |

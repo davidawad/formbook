@@ -1,0 +1,2 @@
+PASS
+693c46fd91cbf84837d3a0749fb0e9b401ce2496ee035c8523302557c5179151  usage/OUTPUT-trial-brief.typst.pdf

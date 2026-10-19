@@ -6,7 +6,7 @@
 - Level: state-trial
 - Circuit: `ca9`
 - State / territory: California
-- Status: **todo** (0%); manual status in `court.json`: `todo`
+- Status: **in progress** (0%); manual status in `court.json`: `todo`
 
 ## Checklist
 
@@ -21,7 +21,16 @@
 Engines: typst `—`, latex `—`, docx `—`.
 
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
-A court is `up for review` when `rules.md` is present and the typst engine passes `tools/check.sh` (valid stamp).
+A court is `up for review` when `rules.md` is present and every doc folder under it with a `usage/INPUT-*.md` has a valid `usage/.check-typst.txt` stamp (`just eval` writes them; the default checks are `data/checks-default.yaml`).
+
+## Doc folders
+
+0 of 2 doc folders with an INPUT pass the typst eval.
+
+| Doc folder | Status | Eval |
+|---|---|---|
+| [complaint](complaint) | in progress | not passing |
+| [motion-brief](motion-brief) | in progress | not passing |
 
 ## Folders
 
@@ -34,7 +43,7 @@ A court is `up for review` when `rules.md` is present and the typst engine passe
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [California Superior Court, San Diego County](san-diego-county) | `calsuperct-sandiego` | todo | — | — | — | 0 |
+| [California Superior Court, San Diego County](san-diego-county) | `calsuperct-sandiego` | in progress | — | — | — | 0 |
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
 <!-- fb:generated:end -->

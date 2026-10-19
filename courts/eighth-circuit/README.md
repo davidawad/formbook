@@ -5,24 +5,24 @@ Courts under `courts/eighth-circuit` (39).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The Eighth Circuit](bankruptcy-appellate-panel) | `bap8` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The Eighth Circuit](bankruptcy-appellate-panel) | `bap8` | up for review | — | — | — | 14 |
 | [Court of Appeals for the Eighth Circuit](court-of-appeals) | `ca8` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, E.D. Arkansas](arkansas/federal/bankruptcy-eastern-district) | `areb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, W.D. Arkansas](arkansas/federal/bankruptcy-western-district) | `arwb` | todo | — | — | — | 0 |
+| [United States Bankruptcy Court, E.D. Arkansas](arkansas/federal/bankruptcy-eastern-district) | `areb` | in progress | — | — | — | 0 |
+| [United States Bankruptcy Court, W.D. Arkansas](arkansas/federal/bankruptcy-western-district) | `arwb` | in progress | — | — | — | 0 |
 | [United States District Court for the Eastern District of Arkansas](arkansas/federal/eastern-district) | `ared` | in progress | — | — | — | 14 |
-| [United States District Court for the Western District of Arkansas](arkansas/federal/western-district) | `arwd` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, N.D. Iowa](iowa/federal/bankruptcy-northern-district) | `ianb` | todo | — | — | — | 0 |
-| [United States Bankruptcy Court, S.D. Iowa](iowa/federal/bankruptcy-southern-district) | `iasb` | todo | — | — | — | 0 |
-| [District Court, N.D. Iowa](iowa/federal/northern-district) | `iand` | todo | — | — | — | 0 |
-| [District Court, S.D. Iowa](iowa/federal/southern-district) | `iasd` | todo | — | — | — | 0 |
+| [United States District Court for the Western District of Arkansas](arkansas/federal/western-district) | `arwd` | in progress | — | — | — | 0 |
+| [United States Bankruptcy Court, N.D. Iowa](iowa/federal/bankruptcy-northern-district) | `ianb` | in progress | — | — | — | 0 |
+| [United States Bankruptcy Court, S.D. Iowa](iowa/federal/bankruptcy-southern-district) | `iasb` | in progress | — | — | — | 0 |
+| [District Court, N.D. Iowa](iowa/federal/northern-district) | `iand` | in progress | — | — | — | 0 |
+| [District Court, S.D. Iowa](iowa/federal/southern-district) | `iasd` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, D. Minnesota](minnesota/federal/bankruptcy-district) | `mnb` | in progress | — | — | — | 14 |
-| [District Court, D. Minnesota](minnesota/federal/district) | `mnd` | in progress | — | — | — | 14 |
+| [District Court, D. Minnesota](minnesota/federal/district) | `mnd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Missouri](missouri/federal/bankruptcy-eastern-district) | `moeb` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, W.D. Missouri](missouri/federal/bankruptcy-western-district) | `mowb` | in progress | — | — | — | 14 |
-| [District Court, E.D. Missouri](missouri/federal/eastern-district) | `moed` | in progress | — | — | — | 14 |
-| [District Court, W.D. Missouri](missouri/federal/western-district) | `mowd` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. Missouri](missouri/federal/bankruptcy-western-district) | `mowb` | up for review | — | — | — | 14 |
+| [District Court, E.D. Missouri](missouri/federal/eastern-district) | `moed` | up for review | — | — | — | 14 |
+| [District Court, W.D. Missouri](missouri/federal/western-district) | `mowd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Nebraska](nebraska/federal/bankruptcy-district) | `nebraskab` | in progress | — | — | — | 14 |
-| [United States District Court, Nebraska](nebraska/federal/district) | `ned` | in progress | — | — | — | 14 |
+| [United States District Court, Nebraska](nebraska/federal/district) | `ned` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. North Dakota](north-dakota/federal/bankruptcy-district) | `ndb` | in progress | — | — | — | 14 |
 | [District Court, D. North Dakota](north-dakota/federal/district) | `ndd` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, D. South Dakota](south-dakota/federal/bankruptcy-district) | `sdb` | in progress | — | — | — | 14 |

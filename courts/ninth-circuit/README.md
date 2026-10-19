@@ -7,8 +7,8 @@ Courts under `courts/ninth-circuit` (65).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](bankruptcy-appellate-panel) | `bap9` | in progress | — | — | — | 14 |
 | [Court of Appeals for the Ninth Circuit](court-of-appeals) | `ca9` | in progress | built | built | — | 57 |
-| [United States Bankruptcy Court, D. Alaska](alaska/federal/bankruptcy-district) | `akb` | in progress | — | — | — | 14 |
-| [United States District Court for the District of Alaska](alaska/federal/district) | `akd` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Alaska](alaska/federal/bankruptcy-district) | `akb` | up for review | — | — | — | 14 |
+| [United States District Court for the District of Alaska](alaska/federal/district) | `akd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Arizona](arizona/federal/bankruptcy-district) | `arb` | in progress | — | — | — | 14 |
 | [United States District Court for the District of Arizona](arizona/federal/district) | `azd` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, C.D. California](california/federal/bankruptcy-central-district) | `cacb` | in progress | — | — | — | 14 |
@@ -21,15 +21,15 @@ Courts under `courts/ninth-circuit` (65).
 | [United States District Court for the Southern District of California](california/federal/southern-district) | `casd` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Guam](guam/federal/bankruptcy-district) | `gub` | in progress | — | — | — | 14 |
 | [District Court, D. Guam](guam/federal/district) | `gud` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Hawaii](hawaii/federal/bankruptcy-district) | `hib` | in progress | — | — | — | 14 |
-| [United States District Court for the District of Hawaii](hawaii/federal/district) | `hid` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Hawaii](hawaii/federal/bankruptcy-district) | `hib` | up for review | — | — | — | 14 |
+| [United States District Court for the District of Hawaii](hawaii/federal/district) | `hid` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Idaho](idaho/federal/bankruptcy-district) | `idb` | in progress | — | — | — | 14 |
 | [United States District Court for the District of Idaho](idaho/federal/district) | `idd` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Montana](montana/federal/bankruptcy-district) | `mtb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Montana](montana/federal/bankruptcy-district) | `mtb` | up for review | — | — | — | 14 |
 | [District Court, D. Montana](montana/federal/district) | `mtd` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Nevada](nevada/federal/bankruptcy-district) | `nvb` | in progress | — | — | — | 14 |
-| [District Court, D. Nevada](nevada/federal/district) | `nvd` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, Northern Mariana Islands](northern-mariana-islands/federal/bankruptcy-district) | `nmib` | todo | — | — | — | 0 |
+| [District Court, D. Nevada](nevada/federal/district) | `nvd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, Northern Mariana Islands](northern-mariana-islands/federal/bankruptcy-district) | `nmib` | in progress | — | — | — | 0 |
 | [District Court, Northern Mariana Islands](northern-mariana-islands/federal/district) | `nmid` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Oregon](oregon/federal/bankruptcy-district) | `orb` | in progress | — | — | — | 14 |
 | [District Court, D. Oregon](oregon/federal/district) | `ord` | in progress | — | — | — | 14 |
@@ -50,8 +50,8 @@ Courts under `courts/ninth-circuit` (65).
 | [California Court of Appeal, Sixth Appellate District](california/state/court-of-appeal-sixth-district) | `calctapp6d` | in progress | — | — | — | 14 |
 | [California Court of Appeal, Third Appellate District](california/state/court-of-appeal-third-district) | `calctapp3d` | in progress | — | — | — | 14 |
 | [California Courts of Appeal](california/state/courts-of-appeal) | `calctapp` | in progress | — | — | — | 14 |
-| [California Superior Court](california/state/superior-court) | `calsuperct` | todo | — | — | — | 0 |
-| [California Superior Court, San Diego County](california/state/superior-court/san-diego-county) | `calsuperct-sandiego` | todo | — | — | — | 0 |
+| [California Superior Court](california/state/superior-court) | `calsuperct` | in progress | — | — | — | 0 |
+| [California Superior Court, San Diego County](california/state/superior-court/san-diego-county) | `calsuperct-sandiego` | in progress | — | — | — | 0 |
 | [California Superior Court, Appellate Division](california/state/superior-court-appellate-division) | `calappdeptsuper` | todo | — | — | — | 0 |
 | [California Supreme Court](california/state/supreme-court) | `cal` | in progress | — | — | — | 14 |
 | [Supreme Court of Guam](guam/state/supreme-court) | `guam` | in progress | — | — | — | 14 |
