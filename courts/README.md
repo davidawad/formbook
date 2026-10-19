@@ -246,7 +246,7 @@ Courts under `courts` (375).
 | [North Dakota Supreme Court](eighth-circuit/north-dakota/state/supreme-court) | `nd` | in progress | — | — | — | 14 |
 | [Supreme Court of South Dakota](eighth-circuit/south-dakota/state/supreme-court) | `sd` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](ninth-circuit/bankruptcy-appellate-panel) | `bap9` | in progress | — | — | — | 14 |
-| [Court of Appeals for the Ninth Circuit](ninth-circuit/court-of-appeals) | `ca9` | in progress | built | built | — | 57 |
+| [Court of Appeals for the Ninth Circuit](ninth-circuit/court-of-appeals) | `ca9` | in progress | pass | built | — | 71 |
 | [United States Bankruptcy Court, D. Alaska](ninth-circuit/alaska/federal/bankruptcy-district) | `akb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Alaska](ninth-circuit/alaska/federal/district) | `akd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Arizona](ninth-circuit/arizona/federal/bankruptcy-district) | `arb` | in progress | — | — | — | 14 |

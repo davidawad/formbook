@@ -41,6 +41,9 @@ fn default_out(doc: &Path, sample: &Path, engine: &str) -> Res<PathBuf> {
         })
 }
 
+/// The creation date every engine stamps into its PDF (SOURCE_DATE_EPOCH for latex and docx).
+const REPRO_EPOCH: &str = "1767225600";
+
 /// Whether a typst warning is tolerated or fails the render.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Warnings {
@@ -109,6 +112,8 @@ fn typst(root: &Path, court: &Path, sample_rel: &Path, out: &Path, warnings: War
     }
     command
         .arg("--ignore-system-fonts")
+        // reproducible output: a fixed creation date, so a re-render never changes the bytes that stamps and reviews hash
+        .args(["--creation-timestamp", REPRO_EPOCH])
         .arg("--package-cache-path")
         .arg(root.join("vendor/typst-packages"))
         .arg("--input")
@@ -151,6 +156,7 @@ pub fn render_one(
     out: &Path,
     warnings: Warnings,
 ) -> Res<()> {
+    std::env::set_var("SOURCE_DATE_EPOCH", REPRO_EPOCH);
     let sample_arg = if sample.is_absolute() {
         sample.to_path_buf()
     } else {
@@ -186,6 +192,30 @@ mod tests {
 
     fn v(a: &[&str]) -> Vec<String> {
         a.iter().map(|s| s.to_string()).collect()
+    }
+
+    /// Two renders of the same sample are byte-identical (skipped where typst is not installed).
+    #[test]
+    fn typst_render_is_reproducible() {
+        let Ok(root) = repo_root() else { return };
+        let court = root.join("courts/supreme-court-of-the-united-states/cert-petition");
+        let have_typst = Command::new("typst").arg("--version").output().is_ok();
+        if !have_typst || !court.is_dir() {
+            return;
+        }
+        let tmp = std::env::temp_dir().join(format!("fb-repro-{}", std::process::id()));
+        std::fs::create_dir_all(&tmp).unwrap();
+        let sample = Path::new("usage/INPUT-cert-petition.md");
+        let go = |n: &str| {
+            let out = tmp.join(n);
+            render_one(&root, "typst", &court, sample, &out, Warnings::Allow).unwrap();
+            std::fs::read(out).unwrap()
+        };
+        let (a, b) = (go("a.pdf"), go("b.pdf"));
+        std::thread::sleep(std::time::Duration::from_millis(1100));
+        let c = go("c.pdf");
+        let _ = std::fs::remove_dir_all(&tmp);
+        assert!(a == b && b == c);
     }
 
     #[test]

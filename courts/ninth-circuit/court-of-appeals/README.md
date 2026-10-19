@@ -5,30 +5,30 @@
 - CourtListener: [ca9](https://www.courtlistener.com/?court=ca9)
 - Level: appellate
 - Circuit: `ca9`
-- Status: **in progress** (57%); manual status in `court.json`: `todo`
+- Status: **in progress** (71%); manual status in `court.json`: `todo`
 
 ## Checklist
 
 - [x] `rules.md` present
 - [x] `usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)
 - [x] `usage/` has at least 2 INPUT .md samples
-- [ ] typst engine passes (`usage/.check-typst.txt` valid)
+- [x] typst engine passes (`usage/.check-typst.txt` valid)
 - [ ] latex engine passes (`usage/.check-latex.txt` valid)
 - [ ] docx engine passes (`usage/.check-docx.txt` valid)
 - [x] a review file in `reviews/`
 
-Engines: typst `built`, latex `built`, docx `—`.
+Engines: typst `pass`, latex `built`, docx `—`.
 
 `done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
 A court is `up for review` when `rules.md` is present and every doc folder under it with a `usage/INPUT-*.md` has a valid `usage/.check-typst.txt` stamp (`just eval` writes them; the default checks are `data/checks-default.yaml`).
 
 ## Doc folders
 
-1 of 3 doc folders with an INPUT pass the typst eval.
+2 of 3 doc folders with an INPUT pass the typst eval.
 
 | Doc folder | Status | Eval |
 |---|---|---|
-| [(court root)](.) | in progress | not passing |
+| [(court root)](.) | up for review | pass |
 | [answering-brief](answering-brief) | up for review | pass |
 | [reply-brief](reply-brief) | in progress | not passing |
 
