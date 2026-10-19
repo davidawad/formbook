@@ -17,7 +17,7 @@ Courts under `courts/second-circuit` (23).
 | [District Court, S.D. New York](new-york/federal/southern-district) | `nysd` | in progress | — | — | — | 14 |
 | [District Court, W.D. New York](new-york/federal/western-district) | `nywd` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Vermont](vermont/federal/bankruptcy-district) | `vtb` | up for review | — | — | — | 14 |
-| [District Court, D. Vermont](vermont/federal/district) | `vtd` | in progress | — | — | — | 14 |
+| [District Court, D. Vermont](vermont/federal/district) | `vtd` | up for review | — | — | — | 14 |
 | [Connecticut Compensation Review Board](connecticut/state/compensation-review-board) | `connworkcompcom` | todo | — | — | — | 0 |
 | [Connecticut Court of Appeals](connecticut/state/court-of-appeals) | `connappct` | in progress | — | — | — | 14 |
 | [Connecticut Supreme Court](connecticut/state/supreme-court) | `conn` | in progress | — | — | — | 14 |

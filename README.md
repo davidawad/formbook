@@ -87,7 +87,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [Court of Appeals for the Federal Circuit](courts/federal-circuit/court-of-appeals) | `cafc` | up for review | — | — | — | 14 |
 | [United States Court of Federal Claims](courts/federal-circuit/court-of-federal-claims) | `uscfc` | up for review | — | — | — | 14 |
-| [United States Court of International Trade](courts/federal-circuit/court-of-international-trade) | `cit` | in progress | — | — | — | 14 |
+| [United States Court of International Trade](courts/federal-circuit/court-of-international-trade) | `cit` | up for review | — | — | — | 14 |
 | [United States Court of Veteran Appeals](courts/federal-circuit/court-of-veteran-appeals) | `cavc` | up for review | — | — | — | 14 |
 | [Patent Trial and Appeal Board](courts/federal-circuit/patent-trial-and-appeal-board) | `ptab` | in progress | — | — | — | 14 |
 | [Trademark Trial and Appeal Board](courts/federal-circuit/trademark-trial-and-appeal-board) | `ttab` | in progress | — | — | — | 14 |
@@ -117,7 +117,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The First Circuit](courts/first-circuit/bankruptcy-appellate-panel) | `bap1` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The First Circuit](courts/first-circuit/bankruptcy-appellate-panel) | `bap1` | up for review | — | — | — | 14 |
 | [Court of Appeals for the First Circuit](courts/first-circuit/court-of-appeals) | `ca1` | up for review | — | — | — | 14 |
 
 ### Maine
@@ -144,7 +144,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. New Hampshire](courts/first-circuit/new-hampshire/federal/bankruptcy-district) | `nhb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. New Hampshire](courts/first-circuit/new-hampshire/federal/bankruptcy-district) | `nhb` | up for review | — | — | — | 14 |
 | [District Court, D. New Hampshire](courts/first-circuit/new-hampshire/federal/district) | `nhd` | up for review | — | — | — | 14 |
 | [Supreme Court of New Hampshire](courts/first-circuit/new-hampshire/state/supreme-court) | `nh` | in progress | — | — | — | 14 |
 
@@ -206,20 +206,20 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Vermont](courts/second-circuit/vermont/federal/bankruptcy-district) | `vtb` | up for review | — | — | — | 14 |
-| [District Court, D. Vermont](courts/second-circuit/vermont/federal/district) | `vtd` | in progress | — | — | — | 14 |
+| [District Court, D. Vermont](courts/second-circuit/vermont/federal/district) | `vtd` | up for review | — | — | — | 14 |
 | [Supreme Court of Vermont](courts/second-circuit/vermont/state/supreme-court) | `vt` | in progress | — | — | — | 14 |
 
 ## Third Circuit
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Third Circuit](courts/third-circuit/court-of-appeals) | `ca3` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Third Circuit](courts/third-circuit/court-of-appeals) | `ca3` | up for review | — | — | — | 14 |
 
 ### Delaware
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Delaware](courts/third-circuit/delaware/federal/bankruptcy-district) | `deb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Delaware](courts/third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Delaware](courts/third-circuit/delaware/federal/district) | `ded` | in progress | — | — | — | 14 |
 | [Delaware Court of Chancery](courts/third-circuit/delaware/state/court-of-chancery) | `delch` | todo | — | — | — | 0 |
 | [Court on the Judiciary of Delaware](courts/third-circuit/delaware/state/court-on-the-judiciary) | `deljudct` | todo | — | — | — | 0 |
@@ -242,7 +242,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district) | `pamb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/bankruptcy-western-district) | `pawb` | in progress | — | — | — | 14 |
-| [District Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/eastern-district) | `paed` | in progress | — | — | — | 14 |
+| [District Court, E.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/eastern-district) | `paed` | up for review | — | — | — | 14 |
 | [District Court, M.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/middle-district) | `pamd` | in progress | — | — | — | 14 |
 | [District Court, W.D. Pennsylvania](courts/third-circuit/pennsylvania/federal/western-district) | `pawd` | up for review | — | — | — | 14 |
 | [Commonwealth Court of Pennsylvania](courts/third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | in progress | — | — | — | 14 |
@@ -261,7 +261,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Fourth Circuit](courts/fourth-circuit/court-of-appeals) | `ca4` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Fourth Circuit](courts/fourth-circuit/court-of-appeals) | `ca4` | up for review | — | — | — | 14 |
 
 ### Maryland
 
@@ -833,13 +833,13 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Supreme Court of the United States | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 14.0% |
 |  | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |
-| Federal Circuit and feeder courts | 6 | 0 | 3 | 3 | 0 | 0.0% | 50.0% | 0 | 0 | 0 | 14.0% |
+| Federal Circuit and feeder courts | 6 | 0 | 4 | 2 | 0 | 0.0% | 66.6% | 0 | 0 | 0 | 14.0% |
 | Military courts | 6 | 0 | 3 | 3 | 0 | 0.0% | 50.0% | 0 | 0 | 0 | 11.6% |
 | National courts and tribunals | 5 | 0 | 3 | 2 | 0 | 0.0% | 60.0% | 0 | 0 | 0 | 14.0% |
-| First Circuit | 23 | 0 | 7 | 12 | 4 | 0.0% | 30.4% | 0 | 0 | 0 | 11.5% |
-| Second Circuit | 23 | 0 | 4 | 15 | 4 | 0.0% | 17.3% | 0 | 0 | 0 | 11.5% |
-| Third Circuit | 23 | 0 | 6 | 13 | 4 | 0.0% | 26.0% | 0 | 0 | 0 | 10.9% |
-| Fourth Circuit | 32 | 0 | 0 | 30 | 2 | 0.0% | 0.0% | 0 | 0 | 0 | 5.2% |
+| First Circuit | 23 | 0 | 9 | 10 | 4 | 0.0% | 39.1% | 0 | 0 | 0 | 11.5% |
+| Second Circuit | 23 | 0 | 5 | 14 | 4 | 0.0% | 21.7% | 0 | 0 | 0 | 11.5% |
+| Third Circuit | 23 | 0 | 9 | 10 | 4 | 0.0% | 39.1% | 0 | 0 | 0 | 10.9% |
+| Fourth Circuit | 32 | 0 | 1 | 29 | 2 | 0.0% | 3.1% | 0 | 0 | 0 | 5.2% |
 | Fifth Circuit | 30 | 0 | 1 | 28 | 1 | 0.0% | 3.3% | 0 | 0 | 0 | 7.0% |
 | Sixth Circuit | 30 | 0 | 3 | 27 | 0 | 0.0% | 10.0% | 0 | 0 | 0 | 7.9% |
 | Seventh Circuit | 22 | 0 | 5 | 16 | 1 | 0.0% | 22.7% | 0 | 0 | 0 | 13.3% |
@@ -848,7 +848,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Tenth Circuit | 34 | 0 | 0 | 31 | 3 | 0.0% | 0.0% | 0 | 0 | 0 | 4.5% |
 | Eleventh Circuit | 32 | 0 | 0 | 32 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 5.6% |
 | D.C. Circuit | 4 | 0 | 2 | 2 | 0 | 0.0% | 50.0% | 0 | 0 | 0 | 14.0% |
-| **Total** | 376 | 0 | 50 | 302 | 24 | 0.0% | 13.2% | 1 | 0 | 0 | 9.5% |
+| **Total** | 376 | 0 | 58 | 294 | 24 | 0.0% | 15.4% | 1 | 0 | 0 | 9.5% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -856,14 +856,14 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 |  | 2 | 2 | 2 | 2 | 2 | 2 | 100.0% | 1 |
 | Supreme Court of the United States | 3 | 3 | 3 | 3 | 3 | 3 | 100.0% | 0 |
-| Federal Circuit and feeder courts | 13 | 13 | 13 | 13 | 13 | 13 | 100.0% | 9 |
+| Federal Circuit and feeder courts | 13 | 13 | 13 | 13 | 13 | 13 | 100.0% | 10 |
 | Military courts | 12 | 12 | 12 | 12 | 11 | 11 | 91.6% | 8 |
 | National courts and tribunals | 6 | 6 | 6 | 6 | 5 | 5 | 83.3% | 3 |
-| First Circuit | 26 | 26 | 26 | 26 | 25 | 25 | 96.1% | 21 |
-| Second Circuit | 32 | 32 | 32 | 32 | 32 | 32 | 100.0% | 13 |
-| Third Circuit | 27 | 27 | 27 | 27 | 27 | 27 | 100.0% | 19 |
-| Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 29 |
-| Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 21 |
+| First Circuit | 26 | 26 | 26 | 26 | 25 | 25 | 96.1% | 23 |
+| Second Circuit | 32 | 32 | 32 | 32 | 32 | 32 | 100.0% | 18 |
+| Third Circuit | 27 | 27 | 27 | 27 | 27 | 27 | 100.0% | 23 |
+| Fourth Circuit | 39 | 39 | 39 | 39 | 39 | 39 | 100.0% | 32 |
+| Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 24 |
 | Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 22 |
 | Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 19 |
 | Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 30 |
@@ -871,5 +871,5 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 23 |
 | Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 29 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 6 |
-| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 282 |
+| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 300 |
 <!-- tracker:end -->

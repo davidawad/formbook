@@ -5,7 +5,7 @@ Courts under `courts/fourth-circuit` (32).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Court of Appeals for the Fourth Circuit](court-of-appeals) | `ca4` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Fourth Circuit](court-of-appeals) | `ca4` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Maryland](maryland/federal/bankruptcy-district) | `mdb` | in progress | — | — | — | 0 |
 | [District Court, D. Maryland](maryland/federal/district) | `mdd` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, E.D. North Carolina](north-carolina/federal/bankruptcy-eastern-district) | `nceb` | in progress | — | — | — | 0 |

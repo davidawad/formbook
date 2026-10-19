@@ -5,13 +5,13 @@ Courts under `courts/first-circuit` (23).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The First Circuit](bankruptcy-appellate-panel) | `bap1` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The First Circuit](bankruptcy-appellate-panel) | `bap1` | up for review | — | — | — | 14 |
 | [Court of Appeals for the First Circuit](court-of-appeals) | `ca1` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Maine](maine/federal/bankruptcy-district) | `meb` | up for review | — | — | — | 14 |
 | [District Court, D. Maine](maine/federal/district) | `med` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Massachusetts](massachusetts/federal/bankruptcy-district) | `mab` | in progress | — | — | — | 14 |
 | [District Court, D. Massachusetts](massachusetts/federal/district) | `mad` | in progress | — | — | — | 14 |
-| [United States Bankruptcy Court, D. New Hampshire](new-hampshire/federal/bankruptcy-district) | `nhb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. New Hampshire](new-hampshire/federal/bankruptcy-district) | `nhb` | up for review | — | — | — | 14 |
 | [District Court, D. New Hampshire](new-hampshire/federal/district) | `nhd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Puerto Rico](puerto-rico/federal/bankruptcy-district) | `prb` | in progress | — | — | — | 14 |
 | [District Court, D. Puerto Rico](puerto-rico/federal/district) | `prd` | up for review | — | — | — | 14 |
