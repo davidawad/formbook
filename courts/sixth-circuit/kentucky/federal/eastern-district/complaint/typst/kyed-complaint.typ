@@ -146,7 +146,7 @@
       has-pending = false
     } else {
       // A paragraph: numbered, unless it is marked `:: ` (the opening sentence and the prayer lead-in).
-      let unnumbered = t.starts-with("::")
+      let unnumbered = t.starts-with("~ ")
       let text-body = if unnumbered { t.slice(2).trim() } else { t }
       let piece = if unnumbered {
         on-grid([#h(para-indent)#inl(text-body)])

@@ -5,7 +5,7 @@ Courts under `courts/seventh-circuit/wisconsin` (6).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Wisconsin](federal/bankruptcy-eastern-district) | `wieb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, E.D. Wisconsin](federal/bankruptcy-eastern-district) | `wieb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Wisconsin](federal/bankruptcy-western-district) | `wiwb` | in progress | — | — | — | 14 |
 | [District Court, E.D. Wisconsin](federal/eastern-district) | `wied` | up for review | — | — | — | 14 |
 | [District Court, W.D. Wisconsin](federal/western-district) | `wiwd` | up for review | — | — | — | 14 |

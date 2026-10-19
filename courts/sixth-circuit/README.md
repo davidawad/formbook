@@ -23,7 +23,7 @@ Courts under `courts/sixth-circuit` (30).
 | [United States Bankruptcy Court, M.D. Tennessee](tennessee/federal/bankruptcy-middle-district) | `tnmb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Tennessee](tennessee/federal/bankruptcy-western-district) | `tnwb` | in progress | — | — | — | 0 |
 | [District Court, E.D. Tennessee](tennessee/federal/eastern-district) | `tned` | up for review | — | — | — | 14 |
-| [District Court, M.D. Tennessee](tennessee/federal/middle-district) | `tnmd` | in progress | — | — | — | 14 |
+| [District Court, M.D. Tennessee](tennessee/federal/middle-district) | `tnmd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Tennessee](tennessee/federal/western-district) | `tnwd` | in progress | — | — | — | 0 |
 | [Court of Appeals of Kentucky](kentucky/state/court-of-appeals) | `kyctapp` | in progress | — | — | — | 14 |
 | [Kentucky Supreme Court](kentucky/state/supreme-court) | `ky` | in progress | — | — | — | 14 |

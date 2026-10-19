@@ -28,7 +28,7 @@ signature:
     - "Attorney for Plaintiff"
 ---
 
-:: COMES NOW the Plaintiff, Dubya J Brands LLC d/b/a Man-O-War Harley Davidson, Man-O-War Buell, Mineshaft Harley Davidson, by and through counsel, and for its Complaint against Markel Insurance Company, would respectfully state as follows:
+~ COMES NOW the Plaintiff, Dubya J Brands LLC d/b/a Man-O-War Harley Davidson, Man-O-War Buell, Mineshaft Harley Davidson, by and through counsel, and for its Complaint against Markel Insurance Company, would respectfully state as follows:
 
 # PARTIES AND JURISDICTION
 
@@ -181,7 +181,7 @@ Defendant's failure to promptly and fully pay Plaintiff's claim was and is witho
 
 Defendant failed to settle Plaintiff's claim within 30 days of being provided adequate information to adjust the claim and its delay was without reasonable foundation. Plaintiff is entitled to recovery of its attorney's fees and costs incurred in obtaining a claim settlement.
 
-:: WHEREFORE, as a result of the foregoing, Plaintiff would respectfully request that this Honorable Court award a judgment against Defendant as follows:
+~ WHEREFORE, as a result of the foregoing, Plaintiff would respectfully request that this Honorable Court award a judgment against Defendant as follows:
 
 1. For specific performance of the Policy issued by Defendant to Plaintiff;
 2. For compensatory damages and consequential damages to Plaintiff as a result of Defendant's breach of contract, in an amount to be determined by jury;
@@ -195,4 +195,4 @@ Defendant failed to settle Plaintiff's claim within 30 days of being provided ad
 
 # JURY DEMAND
 
-:: Plaintiff demands a jury.
+~ Plaintiff demands a jury.

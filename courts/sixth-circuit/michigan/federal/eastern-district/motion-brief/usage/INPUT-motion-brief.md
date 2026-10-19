@@ -35,7 +35,7 @@ Defendant Earth Protect LLC (“Earth Protect”) hereby moves to dismiss Count 
 
 Pursuant to L.R. 7.1(a)(1), on June 9, 2026, counsel for Defendant sought Plaintiff’s consent to the relief sought in this Motion. Counsel for Defendant explained the nature of the requested relief and the legal bases for same. Plaintiff’s counsel indicated Plaintiff opposes this Motion.
 
-[[brief]]
+<!-- brief -->
 
 # STATEMENT OF ISSUES PRESENTED
 
@@ -70,15 +70,15 @@ Plaintiff’s Answer: NO.
 
 - 47 U.S.C. § 227
 
-[[toc]]
+<!-- toc -->
 
-[[body]]
+<!-- body -->
 
 # INTRODUCTION
 
 Plaintiff’s first cause of action in this case is for alleged violations of 47 U.S.C. § 227(c)(5) of the Telephone Consumer Protection Act of 1991 (“TCPA”), based on allegations that Defendant sent Plaintiff unsolicited marketing text messages while Plaintiff’s cellphone number was registered on the National Do-Not-Call Registry. See Compl. (ECF No. 1), ¶¶ 9, 13-15, 74. Under principles of statutory construction required by the U.S. Supreme Court’s recent decisions in *McLaughlin Chiropractic Assocs., Inc. v. McKesson Corp.*, 606 U.S. 146, 155 (2025) and *Loper Bright Enters. v. Raimondo*, 603 U.S. 369, 402 (2024), overruling *Chevron, U.S.A., Inc. v. Nat. Res. Def. Council, Inc.*, 467 U.S. 837 (1984), Section 227(c)(5) of the TCPA does not apply to text messages. As such, Plaintiff’s cause of action under Section 227(c)(5) must be dismissed.
 
-The Northern District of Ohio and several other courts have applied *McLaughlin* and *Loper Bright* and reached this same conclusion, dismissing claims under Section 227(c)(5) involving text messages at the pleading stage. See *Stockdale v. Skymount Prop. Gr., LLC*, 2026 WL 591842, at *2 (N.D. Ohio Mar. 3, 2026) (“[T]his Court joins several others in holding that the term ‘telephone call’ as used in Section 227(c)(5) of the TCPA does not encompass ‘text messages.’”; dismissing TCPA complaint under Rule 12(b)(6)); see also *Jones v. Blackstone Med. Servs., LLC*, 792 F. Supp. 3d 894, 899 (C.D. Ill. 2025) (“Pursuant to McLaughlin and Loper Bright, the Court agrees with the Defendant that based on a plain reading of the TCPA and its implementing regulations, Section 227(c)(5) does not apply to text messages.”). This Court should follow these well-reasoned decisions and dismiss Count I with prejudice, as Section 227(c)(5), on its face, does not apply to text messages.
+The Northern District of Ohio and several other courts have applied *McLaughlin* and *Loper Bright* and reached this same conclusion, dismissing claims under Section 227(c)(5) involving text messages at the pleading stage. See *Stockdale v. Skymount Prop. Gr., LLC*, 2026 WL 591842, at \*2 (N.D. Ohio Mar. 3, 2026) (“[T]his Court joins several others in holding that the term ‘telephone call’ as used in Section 227(c)(5) of the TCPA does not encompass ‘text messages.’”; dismissing TCPA complaint under Rule 12(b)(6)); see also *Jones v. Blackstone Med. Servs., LLC*, 792 F. Supp. 3d 894, 899 (C.D. Ill. 2025) (“Pursuant to McLaughlin and Loper Bright, the Court agrees with the Defendant that based on a plain reading of the TCPA and its implementing regulations, Section 227(c)(5) does not apply to text messages.”). This Court should follow these well-reasoned decisions and dismiss Count I with prejudice, as Section 227(c)(5), on its face, does not apply to text messages.
 
 Plaintiff also identifies a single voicemail that she allegedly received (see Compl. (ECF No. 1), ¶¶ 22-25), but that voicemail is insufficient. To state a claim under Section 227(c)(5), Plaintiff must plead facts showing that she received “more than one telephone call within any 12–month period” from Defendant Earth Protect. 47 U.S.C. § 227(c)(5). Accordingly, Count I should be dismissed with prejudice for this additional reason.
 
@@ -90,7 +90,7 @@ Under Rule 12(b)(6), dismissal is warranted when the plaintiff’s complaint fai
 
 ## II. Under Principles of Statutory Interpretation Required by Loper Bright and McLaughlin, Section 227(c)(5) Does Not Cover Text Messages.
 
-Count I of Plaintiff’s Complaint alleges a violation of Section 227(c)(5) based on Plaintiff’s contention that Earth Protect sent marketing text messages without consent to her cellphone number while it was listed on the Do-Not-Call Registry. Compl. (ECF No. 1) ¶¶ 9, 13-15, 35-36, 74. Section 227(c)(5), however, only permits a cause of action for “telephone call[s].” 47 U.S.C. § 227(c)(5). This conclusion is compelled by recent Supreme Court decisions which have “redefined how courts consider agency guidance when interpreting statutes.” *Stockdale*, 2026 WL 591842, at *2 (citing *Loper Bright Enters. v. Raimondo*, 603 U.S. 369 (2024) and *McLaughlin Chiropractic Assocs., Inc. v. McKesson Corp.*, 606 U.S. 146 (2025)).
+Count I of Plaintiff’s Complaint alleges a violation of Section 227(c)(5) based on Plaintiff’s contention that Earth Protect sent marketing text messages without consent to her cellphone number while it was listed on the Do-Not-Call Registry. Compl. (ECF No. 1) ¶¶ 9, 13-15, 35-36, 74. Section 227(c)(5), however, only permits a cause of action for “telephone call[s].” 47 U.S.C. § 227(c)(5). This conclusion is compelled by recent Supreme Court decisions which have “redefined how courts consider agency guidance when interpreting statutes.” *Stockdale*, 2026 WL 591842, at \*2 (citing *Loper Bright Enters. v. Raimondo*, 603 U.S. 369 (2024) and *McLaughlin Chiropractic Assocs., Inc. v. McKesson Corp.*, 606 U.S. 146 (2025)).
 
 ### A. A Statute Must Be Interpreted According To Its Plain Meaning.
 
@@ -106,21 +106,21 @@ According to its plain and contemporary meaning, Section 227(c) cannot be interp
 
 ### B. Consistent With Recent Supreme Court Precedent, Courts Have Recently Held That Section 227(c)(5) Does Not Apply To Text Messages.
 
-Following *McLaughlin* and *Loper Bright*, “[c]ourts around the country are split” as to whether text messages are “telephone calls” under Section 227(c)(5). See *Stockdale*, 2026 WL 591842, at *2. The better reasoned decisions hold that, under the plain language of the statute, Section 227(c)(5) does not cover text messages. See *Stockdale*, 2026 WL 591842, at *2 (“[T]his Court joins several others in holding that the term ‘telephone call’ as used in Section 227(c)(5) of the TCPA does not encompass ‘text messages.’”; dismissing TCPA complaint under Rule 12(b)(6)); *James v. Smarter Contact, Inc.*, -- F. Supp. 3d --, 2026 WL 879244, at *5, *3-*4 (M.D. Fla. Mar. 31, 2026) (dismissing TCPA complaint with prejudice “[b]ecause Section 227(c)(5) does not apply to text messages.”); *Richards v. Fashion Nova, LLC*, 2026 WL 847568, at *5 (S.D. Ind. Mar. 26, 2026) (“Because the Court conclude[s] that ‘telephone call’ under § 227(c)(5) of the TCPA does not include text messages, [Plaintiff] fails to state a claim, and Defendants motion to dismiss must be granted.”); *Richards v. Shein Distrib. Corp.*, 2026 WL 847584, at *5 (S.D. Ind. Mar. 26, 2026) (same).
+Following *McLaughlin* and *Loper Bright*, “[c]ourts around the country are split” as to whether text messages are “telephone calls” under Section 227(c)(5). See *Stockdale*, 2026 WL 591842, at \*2. The better reasoned decisions hold that, under the plain language of the statute, Section 227(c)(5) does not cover text messages. See *Stockdale*, 2026 WL 591842, at \*2 (“[T]his Court joins several others in holding that the term ‘telephone call’ as used in Section 227(c)(5) of the TCPA does not encompass ‘text messages.’”; dismissing TCPA complaint under Rule 12(b)(6)); *James v. Smarter Contact, Inc.*, -- F. Supp. 3d --, 2026 WL 879244, at \*5, \*3-\*4 (M.D. Fla. Mar. 31, 2026) (dismissing TCPA complaint with prejudice “[b]ecause Section 227(c)(5) does not apply to text messages.”); *Richards v. Fashion Nova, LLC*, 2026 WL 847568, at \*5 (S.D. Ind. Mar. 26, 2026) (“Because the Court conclude[s] that ‘telephone call’ under § 227(c)(5) of the TCPA does not include text messages, [Plaintiff] fails to state a claim, and Defendants motion to dismiss must be granted.”); *Richards v. Shein Distrib. Corp.*, 2026 WL 847584, at \*5 (S.D. Ind. Mar. 26, 2026) (same).
 
-Applying statutory interpretation principles, the Northern District of Ohio recently held that, under a plain reading of the TCPA, Section 227(c)(5) does not extend to text messages. *Stockdale*, 2026 WL 591842, at *2. This Court should do the same and dismiss Count I of Plaintiff’s Complaint.
+Applying statutory interpretation principles, the Northern District of Ohio recently held that, under a plain reading of the TCPA, Section 227(c)(5) does not extend to text messages. *Stockdale*, 2026 WL 591842, at \*2. This Court should do the same and dismiss Count I of Plaintiff’s Complaint.
 
 ### C. The Text of Section 227(c)(5) Makes No Reference to Text Messages.
 
 The decisions referenced above are grounded in proper application of statutory interpretation principles. The phrases “text message” and “SMS message” are wholly absent from Section 227(c)(5) and its implementing regulations, 47 C.F.R. § 64.1200(c) and (d). Indeed, only “call”, “telephone call”, and “artificial or prerecorded-voice telephone call” appear in Section 227(c) and its implementing regulations. 47 U.S.C. §§ 227(c)(1)(D), (c)(5); 47 C.F.R. § 64.1200(c)(2)(iii), (d).
 
-Section 227(c)(5) provides for a private right of action by “[a] person who has received more than one telephone call within any 12-month period by or on behalf of the same entity in violation of the regulations prescribed under [Section 227(c)] ....” 47 U.S.C. § 227(c)(5) (emphasis added). Section 227(c)(5) simultaneously explicitly refers to a “telephone call,” a term not defined in the statute itself, and remains silent as to its application to text messages. See *Stockdale*, 2026 WL 591842, at *2 (“The TCPA does not define ‘telephone call’ as used in Section 227(c)(5).”). Therefore, the term “telephone call” must be understood as it was commonly used in 1991 when the statute was enacted. See id. at *3 (“The Court starts with the plain meaning of ‘telephone call’ at the time Congress enacted the TCPA.”) (citing *Jimenez v. Quarterman*, 555 U.S. 113, 118 (2009)).
+Section 227(c)(5) provides for a private right of action by “[a] person who has received more than one telephone call within any 12-month period by or on behalf of the same entity in violation of the regulations prescribed under [Section 227(c)] ....” 47 U.S.C. § 227(c)(5) (emphasis added). Section 227(c)(5) simultaneously explicitly refers to a “telephone call,” a term not defined in the statute itself, and remains silent as to its application to text messages. See *Stockdale*, 2026 WL 591842, at \*2 (“The TCPA does not define ‘telephone call’ as used in Section 227(c)(5).”). Therefore, the term “telephone call” must be understood as it was commonly used in 1991 when the statute was enacted. See id. at \*3 (“The Court starts with the plain meaning of ‘telephone call’ at the time Congress enacted the TCPA.”) (citing *Jimenez v. Quarterman*, 555 U.S. 113, 118 (2009)).
 
 The plain meaning of “telephone call” at the time the TCPA was enacted confirms that it could not have applied to text messages. The Northern District of Ohio recently considered the meaning of the phrase, concluding that:
 
 > In 1990, Webster’s Dictionary defined the noun ‘call’ as ‘the act of calling on the telephone’ and ‘telephone’ as ‘an instrument for reproducing sounds at a distance ... ‘one in which sound is converted into electrical impulses for transmission by wire.’ Merriam-Webster New Collegiate Dictionary (9th ed. 1990).
 
-*Stockdale*, 2026 WL 591842, at *3. As the *Stockdale* court correctly held, “‘telephone call’ could not include modern-day text messages because text messages do not use a telephone to reproduce sounds at a distance.” *Id.*
+*Stockdale*, 2026 WL 591842, at \*3. As the *Stockdale* court correctly held, “‘telephone call’ could not include modern-day text messages because text messages do not use a telephone to reproduce sounds at a distance.” *Id.*
 
 Additionally, as the Sixth Circuit has noted in a case involving the term “call” under a separate provision of the TCPA (Section 227(b)), text messaging was not an available technology in 1991 when the TCPA was enacted, so the TCPA did not cover it:
 

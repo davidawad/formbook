@@ -23,7 +23,7 @@ signature:
   - "*Counsel to Eva M. Lemeh, Trustee*"
 ---
 
-§ Eva M. Lemeh, the Trustee in the above-captioned case, files this action against the above-named Defendant for successor liability/alter ego and related relief, and would further state:
+~ Eva M. Lemeh, the Trustee in the above-captioned case, files this action against the above-named Defendant for successor liability/alter ego and related relief, and would further state:
 
 # PARTIES
 
@@ -39,7 +39,7 @@ This adversary proceeding constitutes a core proceeding within the meaning of 28
 
 Venue is proper in this Court pursuant to 28 U.S.C. § 1409(a).
 
-§ The statutory predicate for the relief sought herein includes, but is not limited to, 11 U.S.C. §§ 541, 544, 550 and 551, and Rule 7001 of the Federal Rules of Bankruptcy Procedure.
+~ The statutory predicate for the relief sought herein includes, but is not limited to, 11 U.S.C. §§ 541, 544, 550 and 551, and Rule 7001 of the Federal Rules of Bankruptcy Procedure.
 
 # BACKGROUND
 
@@ -67,7 +67,7 @@ As outlined in *RXAR Co., LLC v. Rheumatology Assoc., P.A.*, the United States D
 
 > 1\) The predecessor “transferred its assets” to the successor, 2) the successor company “pays less than adequate consideration for the assets”, 3) the successor company continues the predecessor’s business, 4) both companies “share one common officer who was instrumental in the transfer”, and 5) the predecessor company “is left incapable of paying its creditors.”
 
-§ *RXAR Co., LLC v. Rheumatology Assoc., P.A.*, 2017 U.S. Dist. LEXIS 64354 (M.D. Tenn. 2017).
+~ *RXAR Co., LLC v. Rheumatology Assoc., P.A.*, 2017 U.S. Dist. LEXIS 64354 (M.D. Tenn. 2017).
 
 No Name utilizes the same equipment as the Debtor and employs the same or substantially similar employees.
 
@@ -79,7 +79,7 @@ Zebell and No Name sought to shift any valuable assets (including intellectual p
 
 Given that No Name is nothing more than a mere continuation and alter ego of the Debtor, the Trustee requests that the court enter a judgment against No Name in the full amount of the indebtedness owed by the Debtor, plus all attorneys’ fees and costs incurred by the Trustee and the estate for the pursuit of this action.
 
-§ WHEREFORE, the Trustee requests that the Court enter a judgment:
+~ WHEREFORE, the Trustee requests that the Court enter a judgment:
 
 1. Granting the Trustee a monetary judgment against Defendant No Name Group, LLC in an amount to be proven at trial;
 2. Finding that No Name Group, LLC is a mere continuation of the Debtor and, as such, is liable for all debts owed by the Debtor, plus all attorneys’ fees and costs incurred by the Trustee and the estate for the pursuit of this action, pursuant to Tennessee state law on successor liability;

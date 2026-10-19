@@ -172,7 +172,7 @@ Courts under `courts` (375).
 | [United States Bankruptcy Court, M.D. Tennessee](sixth-circuit/tennessee/federal/bankruptcy-middle-district) | `tnmb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Tennessee](sixth-circuit/tennessee/federal/bankruptcy-western-district) | `tnwb` | in progress | — | — | — | 0 |
 | [District Court, E.D. Tennessee](sixth-circuit/tennessee/federal/eastern-district) | `tned` | up for review | — | — | — | 14 |
-| [District Court, M.D. Tennessee](sixth-circuit/tennessee/federal/middle-district) | `tnmd` | in progress | — | — | — | 14 |
+| [District Court, M.D. Tennessee](sixth-circuit/tennessee/federal/middle-district) | `tnmd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Tennessee](sixth-circuit/tennessee/federal/western-district) | `tnwd` | in progress | — | — | — | 0 |
 | [Court of Appeals of Kentucky](sixth-circuit/kentucky/state/court-of-appeals) | `kyctapp` | in progress | — | — | — | 14 |
 | [Kentucky Supreme Court](sixth-circuit/kentucky/state/supreme-court) | `ky` | in progress | — | — | — | 14 |
@@ -195,7 +195,7 @@ Courts under `courts` (375).
 | [United States Bankruptcy Court, S.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-southern-district) | `insb` | in progress | — | — | — | 14 |
 | [District Court, N.D. Indiana](seventh-circuit/indiana/federal/northern-district) | `innd` | in progress | — | — | — | 14 |
 | [District Court, S.D. Indiana](seventh-circuit/indiana/federal/southern-district) | `insd` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-eastern-district) | `wieb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-eastern-district) | `wieb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-western-district) | `wiwb` | in progress | — | — | — | 14 |
 | [District Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/eastern-district) | `wied` | up for review | — | — | — | 14 |
 | [District Court, W.D. Wisconsin](seventh-circuit/wisconsin/federal/western-district) | `wiwd` | up for review | — | — | — | 14 |

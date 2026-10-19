@@ -199,7 +199,7 @@
           cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
           v(body-leading)
         }
-      } else if t.starts-with("::") {
+      } else if t.starts-with("~ ") {
         on-grid({ set par(leading: body-leading); h(para-indent); cmarker.render(t.slice(2).trim(), raw-typst: false, smart-punctuation: true, h1-level: 1) })
       } else {
         // A numbered paragraph breaks across pages like any text; only a heading in front of it is kept with its first line.
