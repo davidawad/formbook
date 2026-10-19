@@ -247,16 +247,21 @@
 
   // Paragraph spacing equals the leading, so the pitch across a paragraph break matches the pitch within one.
   set par(leading: body-leading, spacing: body-leading, first-line-indent: para-indent)
+  // Footnote definitions follow the conclusion heading in the markdown, but a footnote reference is only
+  // resolved in the same render call: the definitions are moved ahead of the split and rendered with the body.
+  let lines = body.split("\n")
+  let footnote-defs = lines.filter(l => l.starts-with("[^")).join("\n")
+  let text-body = lines.filter(l => not l.starts-with("[^")).join("\n")
   // The conclusion and the signature block go on one page: the conclusion is kept with the signature.
-  let parts = body.split("\n# CONCLUSION\n")
+  let parts = text-body.split("\n# CONCLUSION\n")
   if parts.len() == 2 {
-    cmarker.render(parts.at(0), raw-typst: false, smart-punctuation: true)
+    cmarker.render(parts.at(0) + "\n\n" + footnote-defs, raw-typst: false, smart-punctuation: true)
     block(breakable: false, width: 100%, {
       cmarker.render("# CONCLUSION\n\n" + parts.at(1), raw-typst: false, smart-punctuation: true)
       signature-block(meta)
     })
   } else {
-    cmarker.render(body, raw-typst: false, smart-punctuation: true)
+    cmarker.render(text-body + "\n\n" + footnote-defs, raw-typst: false, smart-punctuation: true)
     signature-block(meta)
   }
 

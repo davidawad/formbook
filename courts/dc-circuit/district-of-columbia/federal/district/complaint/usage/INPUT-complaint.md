@@ -135,6 +135,6 @@ A declaration that the Challenged Agency Actions do not establish a presently pa
 
 7. Award Auberge its costs and reasonable attorneys’ fees to the extent authorized by law; and
 
-8. Expedite merits briefing and review as necessary to permit prompt resolution of the record-based APA claims while interim relief remains in effect; and 
+8. Expedite merits briefing and review as necessary to permit prompt resolution of the record-based APA claims while interim relief remains in effect; and 
 
 9. Grant such other and further relief as the Court deems just and proper.
