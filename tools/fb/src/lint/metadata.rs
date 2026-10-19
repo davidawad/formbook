@@ -38,10 +38,9 @@ fn string_list(value: Option<&Value>) -> bool {
 
 fn canonical(map: &serde_yaml::Mapping) -> Vec<String> {
     let mut errors = Vec::new();
-    for key in ["filing_type"] {
-        if !is_nonempty_string(get(map, key)) {
-            errors.push(format!("`{key}` must be a non-empty string"));
-        }
+    let key = "filing_type";
+    if !is_nonempty_string(get(map, key)) {
+        errors.push(format!("`{key}` must be a non-empty string"));
     }
     if !is_nonempty_string(get(map, "caption")) {
         errors.push("`caption` must be a non-empty string".into());

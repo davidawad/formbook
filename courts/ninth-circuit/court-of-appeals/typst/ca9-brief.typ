@@ -15,6 +15,8 @@
 #let type-size = 14pt                      // CA9-FORM-004: 14-point or larger, everywhere.
 #let body-leading = 0.94em                 // CA9-FORM-003: with the metric-aligned line box below this
                                            // gives a baseline pitch of about 2.2 x type size (double spacing).
+#let line-box-pad = 0.25em                 // CA9-FORM-003: Times New Roman's ascender-to-descender line box is only 0.909 em; this
+                                           // pads each body line so the baseline pitch is 2.1 x type size (29.4 pt), still double.
 #let single-leading = 0.12em               // headings, quotations, footnotes, TOC/TOA: single-spaced.
 #let page-margin = 1in                     // CA9-FORM-002
 #let para-indent = 0.5in
@@ -507,7 +509,7 @@
     top-edge: "ascender", bottom-edge: "descender",
   )
   set par(
-    leading: body-leading, spacing: body-leading,
+    leading: body-leading + line-box-pad, spacing: body-leading + line-box-pad,
     first-line-indent: (amount: para-indent, all: true), justify: false,
   )
   set heading(numbering: none)

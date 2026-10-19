@@ -124,7 +124,7 @@ chk_fonts_embedded() {
       name = $1; emb = ""; for (i = 1; i <= NF; i++) if ($i == "yes" || $i == "no") { emb = $i; break }
       sub(/^[A-Z]+\+/, "", name)
       if (emb != "yes") { bad++; msg[bad] = $1 " is not embedded" }
-      if (name !~ "^" pre "-") { bad++; msg[bad] = $1 " is not " pre "-*  (a fallback font was used)" } }
+      if (name !~ "^" pre) { bad++; msg[bad] = $1 " is not " pre "*  (a fallback font was used)" } }
     END { printf "%d fonts\n", n; for (i = 1; i <= bad; i++) print "!" msg[i]; exit (bad > 0) }' "$W/fonts.txt") && ST=PASS || ST=FAIL
   MEAS=$(printf '%s\n' "$out" | head -1)
   DETAIL=$(printf '%s\n' "$out" | sed -n 's/^!//p')

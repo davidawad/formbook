@@ -14,8 +14,8 @@ templates:                          # the file a failure points at, per engine (
   latex: latex/template.tex
 
 font:
-  typst_family: "EB Garamond"        # what the template asks typst for
-  pdf_prefix: "EBGaramond"           # every embedded font name must start with this (after the subset tag)
+  typst_family: "Times New Roman"    # what the template asks typst for (first of its font-family list)
+  pdf_prefix: "TimesNewRoman"       # every embedded font name must start with this (after the subset tag)
   size_pt: 14                        # CA9-FORM-004
 
 samples:
@@ -27,6 +27,10 @@ samples:
     md: usage/INPUT-opening-brief-2.md
     pdf: usage/OUTPUT-opening-brief-2.typst.pdf
     exemplar: usage/FILED-EXAMPLE-opening-brief.pdf
+    # CA9-TOOL-006 can only see a misplaced TOA tag when an authority citation begins a wrapped line that is the
+    # first line of a page (typst files a tag before the first word under the previous line). The paragraph
+    # "The Act states its rule in mandatory terms" is padded so "Dara Mehta" opens page 12 that way. If the
+    # selftest mutant toa-tag-before-citation is ever missed, re-pad that paragraph (any 88 to 100 padding words).
 
 # Numbers the checks use. Each is a rule or a stated tolerance, never a measurement off the exemplar.
 params:

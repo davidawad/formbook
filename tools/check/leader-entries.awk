@@ -20,11 +20,11 @@ $2 >= footer_top { next }          # page numbers in the bottom margin are not p
 {
   t = $7
   if (have) {   # the page number may sit in its own run, on the same line as the leaders
-    if ($1 == ppage && $2 > ptop - 1 && $2 < ptop + 1 && ppages == "" && t !~ /( \.){3,}/) { ppages = t; gsub(/^[ \t]+|[ \t]+$/, "", ppages); flush(); next }
+    if ($1 == ppage && $2 > ptop - 1 && $2 < ptop + 1 && ppages == "" && t !~ /( \.){2,}/) { ppages = t; gsub(/^[ \t]+|[ \t]+$/, "", ppages); flush(); next }
     flush()
   }
   if (skip != "" && t ~ skip) { acc = ""; next }
-  if (match(t, /( \.){3,}/)) {
+  if (match(t, /( \.){2,}/)) {
     ptitle = acc substr(t, 1, RSTART - 1)
     ppages = substr(t, RSTART + RLENGTH); gsub(/^[ \t]+|[ \t]+$/, "", ppages)
     ppage = $1; ptop = $2; have = 1

@@ -15,6 +15,8 @@ FILENAME == ARGV[2] { row++; if (row in kind) rk[$1 "\t" key($2)] = kind[row]; n
 {
   if ($6 < hmin) next
   k = $1 "\t" key($3)
+  # a line whose words straddle a half-point rounding boundary is still one line
+  for (d = -1; d <= 1; d += 2) { kk = $1 "\t" (key($3) + d); if (!(k in n) && (kk in n) && $3 - top[kk] < 0.5 && top[kk] - $3 < 0.5) k = kk }
   if (!(k in n)) { top[k] = $3; left[k] = $2; right[k] = $4; pg[k] = $1; kd[k] = "-"
     for (d = -1; d <= 1; d++) { kk = $1 "\t" (key($3) + d); if (kk in rk) kd[k] = rk[kk] } }
   n[k]++

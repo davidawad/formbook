@@ -4,14 +4,15 @@ use super::Ctx;
 use crate::Res;
 use std::process::Stdio;
 
-/// `awk -F'\t' '$1 == 5 { printf "%.5f", $10 / 100; exit }'` over pdftotext -tsv.
+/// The smallest word height per point among the level-5 rows of pdftotext -tsv: the calibration text is set in
+/// regular, bold and italic, and a bold or italic face can report a shorter line box than the regular one.
 pub fn calib_of(tsv: &str) -> String {
     awk_rows(tsv)
         .iter()
-        .find(|r| awk_cmp(r[0], 5.0, "5").is_eq())
-        .map_or(String::new(), |r| {
-            format!("{:.5}", awk_num(r.get(9).copied().unwrap_or("")) / 100.0)
-        })
+        .filter(|r| awk_cmp(r[0], 5.0, "5").is_eq())
+        .map(|r| awk_num(r.get(9).copied().unwrap_or("")) / 100.0)
+        .reduce(f64::min)
+        .map_or(String::new(), |h| format!("{h:.5}"))
 }
 
 /// How tall a word of the declared font is at 1 pt, as pdftotext reports it ("" when typst fails,
@@ -20,7 +21,7 @@ pub fn calibrate(c: &Ctx) -> Res<String> {
     let d = format!("{}/calib", c.out);
     std::fs::create_dir_all(&d).map_err(|e| io_fail(&d, e))?;
     let fam = cfg(&c.env, &c.court, ".font.typst_family")?;
-    let typ = format!("#set page(width: 400pt, height: 220pt, margin: 20pt)\n#set text(font: \"{fam}\", size: 100pt, top-edge: \"ascender\", bottom-edge: \"descender\")\nHxg\n");
+    let typ = format!("#set page(width: 1000pt, height: 220pt, margin: 20pt)\n#set text(font: \"{fam}\", size: 100pt, top-edge: \"ascender\", bottom-edge: \"descender\")\nHxg #strong[Hxg] #emph[Hxg]\n");
     let (ctyp, cpdf, err) = (
         format!("{d}/c.typ"),
         format!("{d}/c.pdf"),
@@ -211,8 +212,8 @@ mod tests {
 
     #[test]
     fn calibration_row() {
-        let tsv = "level\tpage_num\tpar_num\tblock_num\tline_num\tword_num\tleft\ttop\twidth\theight\ttext\n5\t1\t0\t0\t0\t0\t20\t20\t200\t113.4\tHxg\n";
-        assert_eq!(calib_of(tsv), "1.13400");
+        let tsv = "level\tpage_num\tpar_num\tblock_num\tline_num\tword_num\tleft\ttop\twidth\theight\ttext\n5\t1\t0\t0\t0\t0\t20\t20\t200\t113.4\tHxg\n5\t1\t0\t0\t0\t1\t220\t20\t200\t111.2\tHxg\n";
+        assert_eq!(calib_of(tsv), "1.11200");
         assert_eq!(calib_of("level\n"), "");
     }
 

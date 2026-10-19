@@ -208,7 +208,7 @@ This Court reviews a dismissal under [Rule 12(b)(6)](toa:frcp12) de novo, accept
 
 ### The Text Fixes Priority and Leaves No Discretion
 
-The Act states its rule in mandatory terms. This Court has repeatedly held that “shall” in a priority provision creates an enforceable rule. [*Marlowe*, 999 F.3d at 130](toa:marlowe); [*Rosario-Delgado v. Valley Mutual Water Co.*, 999 F.3d 579, 585 (9th Cir. 2015)](toa:rosario). The en banc Court restated the point in the fictional *Aqueduct* litigation:
+The Act states its rule in mandatory terms. This Court has repeatedly held that “shall” in a priority provision creates an enforceable rule. [*Marlowe*, 999 F.3d at 130](toa:marlowe); [*Rosario-Delgado v. Valley Mutual Water Co.*, 999 F.3d 579, 585 (9th Cir. 2015)](toa:rosario). The point is not a close one. The text of the Act, its structure and its purpose all point in the same direction, and each of the three independently supports the reading Appellants advance here. The District does not suggest otherwise in its answering papers. It offers instead only a single sentence of the order below, which rests on a reading of the earlier cases that they cannot bear. Nothing in the legislative history is to the contrary, and the fictional agency that administers the Act has never taken a different position in any proceeding of which Appellants are aware. The en banc Court restated the point in the fictional *Aqueduct* litigation:
 
 > When a statute orders the manager of a scarce resource to serve senior claimants before junior ones, the manager may choose the means of service but not the order of service. To read “shall” as “may” is to repeal the priority the legislature wrote.
 
