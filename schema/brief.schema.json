@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Formbook brief metadata",
+  "description": "YAML frontmatter accepted by the shared brief contract. The ca9 branch preserves the established Ninth Circuit opening, answering, and reply brief inputs.",
+  "oneOf": [
+    { "$ref": "#/$defs/shared" },
+    { "$ref": "#/$defs/ca9Legacy" }
+  ],
+  "$defs": {
+    "nonEmptyString": { "type": "string", "minLength": 1 },
+    "stringList": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/nonEmptyString" }
+    },
+    "counselGroup": {
+      "type": "object",
+      "required": ["names", "lines"],
+      "properties": {
+        "names": { "$ref": "#/$defs/stringList" },
+        "lines": { "$ref": "#/$defs/stringList" }
+      },
+      "additionalProperties": true
+    },
+    "shared": {
+      "type": "object",
+      "required": ["filing_type", "caption", "parties", "lower_court", "counsel"],
+      "properties": {
+        "filing_type": { "$ref": "#/$defs/nonEmptyString" },
+        "caption": { "$ref": "#/$defs/nonEmptyString" },
+        "parties": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "role"],
+            "properties": {
+              "name": { "$ref": "#/$defs/nonEmptyString" },
+              "role": { "$ref": "#/$defs/nonEmptyString" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "lower_court": {
+          "type": "object",
+          "required": ["name", "case_number"],
+          "properties": {
+            "name": { "$ref": "#/$defs/nonEmptyString" },
+            "case_number": { "$ref": "#/$defs/nonEmptyString" },
+            "judge": { "$ref": "#/$defs/nonEmptyString" }
+          },
+          "additionalProperties": true
+        },
+        "counsel": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/counselGroup" }
+        },
+        "signature": {
+          "type": "object",
+          "required": ["signer", "lines"],
+          "properties": {
+            "signer": { "$ref": "#/$defs/nonEmptyString" },
+            "lines": { "$ref": "#/$defs/stringList" }
+          },
+          "additionalProperties": true
+        },
+        "certificates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "text"],
+            "properties": {
+              "type": { "enum": ["service", "compliance", "other"] },
+              "text": { "$ref": "#/$defs/nonEmptyString" },
+              "date": { "$ref": "#/$defs/nonEmptyString" },
+              "signer": { "$ref": "#/$defs/nonEmptyString" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "authorities": { "type": "object" }
+      },
+      "additionalProperties": true
+    },
+    "ca9Legacy": {
+      "type": "object",
+      "required": ["case_number", "caption", "proceeding", "brief_title", "counsel", "phone", "signature"],
+      "properties": {
+        "case_number": { "$ref": "#/$defs/nonEmptyString" },
+        "caption": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["names", "designation"],
+            "properties": {
+              "names": { "$ref": "#/$defs/stringList" },
+              "designation": { "$ref": "#/$defs/nonEmptyString" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "proceeding": { "$ref": "#/$defs/nonEmptyString" },
+        "brief_title": { "$ref": "#/$defs/nonEmptyString" },
+        "counsel": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/counselGroup" }
+        },
+        "phone": { "$ref": "#/$defs/nonEmptyString" },
+        "signature": {
+          "type": "object",
+          "required": ["signer", "lines"],
+          "properties": {
+            "signer": { "$ref": "#/$defs/nonEmptyString" },
+            "lines": { "$ref": "#/$defs/stringList" }
+          },
+          "additionalProperties": true
+        },
+        "authorities": { "type": "object" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

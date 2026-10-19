@@ -44,3 +44,6 @@ diff DIR:
 lint:
     {{fb}} lint fonts
     {{fb}} lint paths
+
+lint-metadata sample:
+    {{fb}} lint metadata "{{sample}}"

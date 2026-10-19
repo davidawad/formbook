@@ -1,5 +1,6 @@
-//! `fb lint <doc-dir> [--engine typst|latex|all]` checks a doc dir; `fb lint fonts` checks audited faces
-//! globally; `fb lint paths` checks the usage/ layout under courts/ (see paths.rs).
+//! `fb lint <doc-dir> [--engine typst|latex|all]` checks a doc dir; `fb lint metadata <input.md>`
+//! validates brief frontmatter; `fb lint fonts` checks audited faces globally; `fb lint paths`
+//! checks the usage/ layout under courts/ (see paths.rs).
 //!   (a) ngram      a template file shares a run of 5+ words with a FILED-EXAMPLE's text, and the run
 //!                  is not rule text (rules.md of the doc dir or an enclosing court folder);
 //!   (b) break/vspace  forced line breaks or literal vertical space outside the parameter block
@@ -10,6 +11,7 @@
 //! `RESULT: LINT FAIL (<n> findings)`; exit 1 on findings.
 pub(crate) mod fonts;
 mod input;
+mod metadata;
 mod ngram;
 pub(crate) mod paths;
 mod tex;
@@ -20,7 +22,8 @@ use std::collections::HashSet;
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
-const USAGE: &str = "usage: fb lint <doc-dir> [--engine typst|latex|all]";
+const USAGE: &str =
+    "usage: fb lint <doc-dir> [--engine typst|latex|all] | fb lint metadata <input.md>";
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Finding {
@@ -128,6 +131,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     match args {
         [a] if a == "fonts" => return fonts::main(),
         [a] if a == "paths" => return paths::main(),
+        [a, path] if a == "metadata" => return metadata::main(Path::new(path)),
         _ => {}
     }
     let (dir, engine) = parse_opts(args)?;
