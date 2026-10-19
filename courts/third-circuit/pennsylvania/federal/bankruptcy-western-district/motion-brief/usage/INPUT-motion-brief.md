@@ -115,7 +115,7 @@ The Preamble to the Rules of Professional Conduct makes quite clear that the Rul
 
 The Creditors Trust's Complaint contains a reservation of rights as follows: "The Plaintiff reserves the right to amend this Complaint, upon completion of his investigation and discovery, to assert any additional claims for relief against the Defendants as may be warranted under the circumstances and allowed by law." (ECF Adv. Doc. 1, ¶118). There is no such right in the Bankruptcy Rules or the Federal Rules of Procedure. Rule 8 requires a short and plain statement of the claim. FRCP 8(a). It contains no option to reserve the right to add claims.
 
-Moreover, it has been held to be improper to include a reservation of rights in a pleading. *See, Avocent Redmond Corp. v. United States*, 85 Fed. Cl. 724, 726 (2009); *Paducah River Painting, Inc. v. McNational Inc.*, 2011 WL 5525938, at *5 (W.D. Ky. Nov. 14, 2011). Defendants are entitled to know the nature of the claim. If Creditors Trust believes that at some future time, there is a need for amendment, it may follow the procedural requirements of the Federal Rules to attempt to make such amendment. *See*, FRCP 15.
+Moreover, it has been held to be improper to include a reservation of rights in a pleading. *See, Avocent Redmond Corp. v. United States*, 85 Fed. Cl. 724, 726 (2009); *Paducah River Painting, Inc. v. McNational Inc.*, 2011 WL 5525938, at \*5 (W.D. Ky. Nov. 14, 2011). Defendants are entitled to know the nature of the claim. If Creditors Trust believes that at some future time, there is a need for amendment, it may follow the procedural requirements of the Federal Rules to attempt to make such amendment. *See*, FRCP 15.
 
 ## CONCLUSION
 
