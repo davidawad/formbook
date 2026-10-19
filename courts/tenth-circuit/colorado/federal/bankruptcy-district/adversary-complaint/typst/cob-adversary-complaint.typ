@@ -236,18 +236,18 @@
   for blk in blocks {
     // The FRBP 7008(a) statement is paragraph 1. It follows the unnumbered opening paragraphs
     // ("Plaintiffs ... state and allege as follows") and comes before the first numbered paragraph.
-    if not consent-done and not blk.starts-with("+") {
+    if not consent-done and not blk.starts-with("^") {
       consent-done = true
       n += 1
       consent-para(n, meta)
     }
     if blk.starts-with("#") {
       cmarker.render(blk, raw-typst: false, smart-punctuation: true)
-    } else if blk.starts-with("%") {
+    } else if blk.starts-with("~ ") {
       // Centered, single-spaced, unnumbered lines (claim sub-captions). One line per source line.
       set par(first-line-indent: 0pt, leading: single-leading, justify: false)
-      align(center, blk.slice(1).split("\n").map(l => inl(l.trim())).join(linebreak()))
-    } else if blk.starts-with("+") {
+      align(center, blk.slice(2).split("\n").map(l => inl(l.trim())).join(linebreak()))
+    } else if blk.starts-with("^") {
       // Unnumbered body paragraph (the opening "Plaintiffs ... state as follows", prayer items).
       par(first-line-indent: 0pt, [#h(para-indent) #inl(blk.slice(1).trim())])
     } else if blk.starts-with("- ") or blk.match(regex("^\\d+\\. ")) != none {

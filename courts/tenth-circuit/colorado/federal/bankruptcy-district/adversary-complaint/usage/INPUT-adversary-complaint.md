@@ -52,7 +52,7 @@ signature:
         - "michelle@fsaspenlaw.com"
 ---
 
-+Thomas Golec ("Golec"), Mara Lynn Looney ("Looney"), Mark K. Nicholson ("Nicholson"), Andrew H. Soliday ("Andrew"), Laurie A. Soliday ("Laurie"), Andrew A. Soliday ("Drew"), and Jeanne M. Wicks ("Wicks") (collectively "Plaintiffs"), by and through their counsel, Coan, Payton & Payne LLC, and Ferguson Schindler Law Firm, P.C., pursuant to 11 U.S.C. §523, for its Complaint to Determine Dischargeability of Debt, state and allege as follows:
+^Thomas Golec ("Golec"), Mara Lynn Looney ("Looney"), Mark K. Nicholson ("Nicholson"), Andrew H. Soliday ("Andrew"), Laurie A. Soliday ("Laurie"), Andrew A. Soliday ("Drew"), and Jeanne M. Wicks ("Wicks") (collectively "Plaintiffs"), by and through their counsel, Coan, Payton & Payne LLC, and Ferguson Schindler Law Firm, P.C., pursuant to 11 U.S.C. §523, for its Complaint to Determine Dischargeability of Debt, state and allege as follows:
 
 # Summary of the Case
 
@@ -86,7 +86,7 @@ Venue is proper in this Court pursuant to 28 U.S.C. §1409(a).
 
 # First Claim for Relief
 
-%(Determination of Dischargeability of Debt Pursuant to 11 U.S.C. § 523(a)(6))
+~ (Determination of Dischargeability of Debt Pursuant to 11 U.S.C. § 523(a)(6))
 Golec, Looney, Laurie, Andrew, Drew, and Wicks against the Debtor
 
 Plaintiffs incorporate by reference the allegations contained in paragraphs 1 through 13 as if fully set forth herein.
@@ -116,7 +116,7 @@ The amount of the judgments against the Debtor are as follows:
 
 # Second Claim for Relief
 
-%(Determination of Dischargeability of Debt Pursuant to 11 U.S.C. § 523(a)(6))
+~ (Determination of Dischargeability of Debt Pursuant to 11 U.S.C. § 523(a)(6))
 Nicholson against the Debtor
 
 Plaintiffs incorporate by reference the allegations contained in paragraphs 1 through 13 as if fully set forth herein.
@@ -137,30 +137,30 @@ Judgment was entered in Nicholson's favor against the Debtor in the amount of $1
 
 # Reservation of Rights
 
-+Plaintiffs reserve the right to amend this complaint.
+^Plaintiffs reserve the right to amend this complaint.
 
 # Prayer for Relief
 
-+WHEREFORE, Plaintiffs respectfully request that this Court enter judgment in favor of Plaintiff, and against Individual Defendants on each of the Counts herein as follows:
+^WHEREFORE, Plaintiffs respectfully request that this Court enter judgment in favor of Plaintiff, and against Individual Defendants on each of the Counts herein as follows:
 
-+A. On the First Claim for Relief, an order denying the Debtor a discharge pursuant to 11 U.S.C. § 523(a)(6) of the judgments entered against the Debtor in the State Court Action in favor of Plaintiffs in the following amounts:
+^A. On the First Claim for Relief, an order denying the Debtor a discharge pursuant to 11 U.S.C. § 523(a)(6) of the judgments entered against the Debtor in the State Court Action in favor of Plaintiffs in the following amounts:
 
-+i. Golec - $130,000.00;
+^i. Golec - $130,000.00;
 
-+ii. Looney - $60,000.00;
+^ii. Looney - $60,000.00;
 
-+iii. Drew - $5,000.00;
+^iii. Drew - $5,000.00;
 
-+iv. Andrew - $80,000.00;
+^iv. Andrew - $80,000.00;
 
-+v. Laurie - $88,750.00, and;
+^v. Laurie - $88,750.00, and;
 
-+vi. Wicks - $55,000.00.
+^vi. Wicks - $55,000.00.
 
-+B. On the Second Claim for Relief, an order denying the Debtor a discharge pursuant to 11 U.S.C. § 523(a)(6) of the judgement entered in favor of Nicholson and against the Debtor in the amount of $12,090.00;
+^B. On the Second Claim for Relief, an order denying the Debtor a discharge pursuant to 11 U.S.C. § 523(a)(6) of the judgement entered in favor of Nicholson and against the Debtor in the amount of $12,090.00;
 
-+C. Pre- and post-judgment interest at the rate of 8% per annum;
+^C. Pre- and post-judgment interest at the rate of 8% per annum;
 
-+D. Attorney's fees and costs, and;
+^D. Attorney's fees and costs, and;
 
-+E. For such other and further relief this Court deems just and appropriate.
+^E. For such other and further relief this Court deems just and appropriate.

@@ -287,7 +287,7 @@ As a direct and proximate result of the retaliation described above, Plaintiff h
 
 # RELIEF REQUESTED
 
-[unnumbered] WHEREFORE, Plaintiff respectfully requests that this Court find in Plaintiff’s favor and against Defendant as follows:
+~ WHEREFORE, Plaintiff respectfully requests that this Court find in Plaintiff’s favor and against Defendant as follows:
 
 1. Back pay;
 2. Payment of interest on all back pay and benefits recoverable;
@@ -300,4 +300,4 @@ As a direct and proximate result of the retaliation described above, Plaintiff h
 
 # DEMAND FOR JURY TRIAL
 
-[unnumbered] Plaintiff hereby requests that all issues be submitted to and determined by a jury.
+~ Plaintiff hereby requests that all issues be submitted to and determined by a jury.

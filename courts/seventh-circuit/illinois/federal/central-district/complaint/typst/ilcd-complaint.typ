@@ -162,13 +162,13 @@
       has-pending = false
     } else {
       // A numbered paragraph breaks across pages like any text; only a heading in front of it is kept with its first line.
-      // A chunk that starts with "[unnumbered]" is an indented paragraph outside the numbering (the WHEREFORE
+      // A chunk that starts with "~ " is an indented paragraph outside the numbering (the WHEREFORE
       // clause and the jury demand sentence in the filing are not numbered).
-      let unnumbered = t.starts-with("[unnumbered]")
+      let unnumbered = t.starts-with("~ ")
       let piece = block(width: 100%, {
         if not unnumbered { para-counter.step() }
         set par(leading: body-leading, first-line-indent: 0pt)
-        let text-md = if unnumbered { t.slice(12).trim() } else { t }
+        let text-md = if unnumbered { t.slice(2).trim() } else { t }
         context [#h(para-indent)#if not unnumbered [#(para-counter.display()).#h(0.3in)]#cmarker.render(text-md, raw-typst: false, smart-punctuation: true)]
         v(body-leading)
       })
