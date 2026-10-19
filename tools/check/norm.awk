@@ -12,6 +12,7 @@ function norm1(s) {
   gsub(/ﬀ/, "ff", s); gsub(/ﬁ/, "fi", s); gsub(/ﬂ/, "fl", s); gsub(/ﬃ/, "ffi", s); gsub(/ﬄ/, "ffl", s)
   gsub(/…/, "...", s)
   gsub(WS_RE, "", s)
+  if (DEHYPHEN != "") gsub("[-" sprintf("%c%c%c%c", 8208, 8209, 8211, 8212) "]", "", s)   # default checks: templates may hyphenate; a hyphen is not content
   return s
 }
 

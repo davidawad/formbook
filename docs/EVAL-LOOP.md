@@ -56,6 +56,27 @@ Commands: `sh tools/render.sh --engine latex|docx <doc-dir> usage/INPUT-<id>.md`
 - **Stamp.** On a full green run (no `--only`), `check.sh` writes `usage/.check-<engine>.txt`: the line `PASS`, then `sha256  path` for every PDF checked (and the `.docx`). Any failing run removes it. The tracker counts an engine as passing only if the stamp exists and every hash still matches the file on disk, so regenerating a PDF without re-running the check turns the engine back to "built".
 - **BLOCKED / partial docx.** If a docx cannot reach green, the PR delivers it as BLOCKED and lists the exact failing check IDs and why (a Word limit, a LibreOffice rendering difference, a missing feature). That is acceptable. A docx that is silently missing or silently failing is not. The same applies to latex.
 
+## Default checks and `just eval`
+
+A court that has a `checks.yaml` (today only `courts/ninth-circuit/court-of-appeals/`) is judged by it. Every other doc folder is judged by the court-agnostic tier-1 set in [`data/checks-default.yaml`](../data/checks-default.yaml): `fb check <doc folder>` falls back to it when `<doc folder>/checks.yaml` does not exist, with one sample per `usage/INPUT-<id>.md`. It writes the same stamp (`usage/.check-typst.txt`) on a full green run, so the tracker needs nothing court-specific.
+
+| Id | Gate | What it checks |
+|---|---|---|
+| `DEF-RENDER-001` | (driver) | the INPUT renders with `fb render --deny-warnings` (no typst warning, a PDF exists) |
+| `DEF-CONT-001` | 0 | every INPUT block (section heading, paragraph, quote, list item) appears in the PDF, in order, unaltered; hyphens are ignored on both sides because templates may hyphenate |
+| `DEF-FORM-001` | 1 | every page is US letter, 612 x 792 pt |
+| `DEF-FORM-002` | 1 | no text in the 1 in margins (page numbers in the bottom margin excepted) |
+| `DEF-FORM-003` | 1 | body text (the most common word height) is at least 12 pt |
+| `DEF-FONT-001` | 1 | every font in the PDF is embedded |
+| `DEF-FONT-002` | 1 | every embedded font starts with a family the template declares (`#let font-family|face|typeface|body-font|font-name = ...` in `typst/*.typ`; the repo default `Times New Roman`/`Liberation Serif` when it declares none), so a silent fallback fails |
+| `DEF-LEN-001` | 1 | page count <= `params.page_limit`; SKIP while no limit is set |
+
+Rules that need court data and have none in machine-readable form are skipped, never guessed: `rules.md` is prose, so the page limit, a size other than 12 pt and a margin other than 1 in are SKIP/defaults until someone supplies them. To state a number for a court (or one doc folder), add an `eval.yaml` beside `rules.md` (or in the doc folder); its keys are merged over the default file (`font.size_pt`, `params.margin_pt`, `params.page_limit`, `params.page_width_pt`/`page_height_pt`). The merged file is written to `out/check/<alias>/<doc>/checks-effective.yaml`. Nothing else court-specific (cover contents, section order, certificates, TOC/TOA, pleading-paper line numbers, word counts) is checked by default; that is what a court-level `checks.yaml` is for.
+
+A court is **up for review** when it has `rules.md` and every doc folder under it that holds at least one `INPUT` has a valid typst stamp (and at least one does). A doc folder is **up for review** when its own stamp is valid, **in progress** when something is present, **todo** otherwise. `done` stays manual (`court.json`).
+
+`just eval DIR` runs `fb check` on every doc folder with an INPUT under DIR (folders with their own `checks.yaml` are left to `just check`) and then regenerates the tracker (README index, STATUS.md, folder READMEs); `just eval-all` does `courts/`. Re-run it after any template or INPUT change: a folder that now passes gets a stamp and is marked up for review, one that regressed loses its stamp. `fb eval` always exits 0; the failing check ids are printed per folder and counted at the end.
+
 ## Why the loop is built this way
 
 The loop exists because the first attempt at this repo failed in a specific way, and every rule below answers one of the failures.

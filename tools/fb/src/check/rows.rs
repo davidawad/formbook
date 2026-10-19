@@ -3,7 +3,7 @@ use super::sh::{cmd, pipe_capture, Env};
 use crate::Res;
 
 /// The jq program of check.sh: one tab-separated row per check.
-const JQ: &str = r#".[] | [.id, (.gate|tostring), .method, .name, .expect, (.fix.anchor // ""), ((.engines // ["*"]) | join(",")), (.engines_reason // "-"), ((.args // []) | join("\u001f"))] | @tsv"#;
+const JQ: &str = r#".[] | [.id, (.gate|tostring), .method, .name, .expect, (.fix.anchor // ""), ((.engines // ["*"]) | join(",")), (.engines_reason // "-"), (.requires // "-"), ((.args // []) | join("\u001f"))] | @tsv"#;
 
 #[derive(Debug, Clone, PartialEq, Default)]
 pub struct Row {
@@ -15,6 +15,7 @@ pub struct Row {
     pub anchor: String,
     pub engines: String,
     pub ereason: String,
+    pub requires: String,
     pub args: String,
 }
 
@@ -34,7 +35,7 @@ pub fn read_fields(line: &str, n: usize) -> Vec<String> {
 }
 
 pub fn parse_row(line: &str) -> Row {
-    let f = read_fields(line, 9);
+    let f = read_fields(line, 10);
     Row {
         id: f[0].clone(),
         gate: f[1].clone(),
@@ -44,14 +45,14 @@ pub fn parse_row(line: &str) -> Row {
         anchor: f[5].clone(),
         engines: f[6].clone(),
         ereason: f[7].clone(),
-        args: f[8].clone(),
+        requires: f[8].clone(),
+        args: f[9].clone(),
     }
 }
 
-/// `yq -o=json e '.checks' checks.yaml | jq -r ...`, one Row per line.
-pub fn load(env: &Env, court: &str) -> Res<Vec<Row>> {
-    let file = format!("{court}/checks.yaml");
-    let yq = cmd(env, "yq", &["-o=json", "e", ".checks", &file]);
+/// `yq -o=json e '.checks' <checks file> | jq -r ...`, one Row per line.
+pub fn load(env: &Env, file: &str) -> Res<Vec<Row>> {
+    let yq = cmd(env, "yq", &["-o=json", "e", ".checks", file]);
     let jq = cmd(env, "jq", &["-r", JQ]);
     let text = pipe_capture(yq, jq)?;
     Ok(match text.is_empty() {
@@ -95,6 +96,16 @@ pub fn skip_text(r: &Row, engine: &str) -> String {
     )
 }
 
+pub fn needs_text(r: &Row) -> String {
+    format!(
+        "  SKIP  {} {}\n          needs {} (not machine-readable in rules.md): {}\n",
+        pad14(&r.id),
+        r.name,
+        r.requires,
+        r.ereason
+    )
+}
+
 pub fn pass_text(r: &Row, meas: &str) -> String {
     format!("  PASS  {} {}\n          {meas}\n", pad14(&r.id), r.name)
 }
@@ -132,11 +143,11 @@ mod tests {
 
     #[test]
     fn rows() {
-        let r = parse_row("CA9-X\t1\theading_present\tn\te\tanc\t*\t-\t^a\u{1f}b");
+        let r = parse_row("CA9-X\t1\theading_present\tn\te\tanc\t*\t-\t-\t^a\u{1f}b");
         assert_eq!(r.method, "heading_present");
         assert_eq!(split_args(&r.args), vec!["^a", "b"]);
         // an empty args column (trailing tab) is no argument at all
-        let r = parse_row("CA9-X\t1\tm\tn\te\tanc\t*\t-\t");
+        let r = parse_row("CA9-X\t1\tm\tn\te\tanc\t*\t-\t-\t");
         assert_eq!((r.ereason.as_str(), r.args.as_str()), ("-", ""));
         assert!(split_args("").is_empty());
         assert_eq!(
@@ -144,7 +155,7 @@ mod tests {
             vec!["", "x", "", "y"]
         );
         // an empty anchor collapses: the following columns shift left, as in check.sh
-        let r = parse_row("I\t0\tm\tn\te\t\t*\t-\t");
+        let r = parse_row("I\t0\tm\tn\te\t\t*\t-\t-\t");
         assert_eq!((r.anchor.as_str(), r.engines.as_str()), ("*", "-"));
     }
 

@@ -1,6 +1,7 @@
 //! `fb check`: the eval loop's mechanical gates for one court or doc-type folder (was tools/check.sh).
 //! The checks themselves stay in tools/check/lib.sh; see bridge.rs.
 mod bridge;
+mod declared;
 mod opts;
 mod prepare;
 mod rows;
@@ -18,6 +19,10 @@ pub struct Ctx {
     pub root: String,
     pub doc: String,
     pub court: String,
+    /// The checks file in force: the folder's own checks.yaml, else data/checks-default.yaml merged (declared.rs).
+    pub checks: String,
+    /// True when `checks` is the court-agnostic default set (one sample per INPUT of the folder).
+    pub default: bool,
     pub engine: String,
     pub render: bool,
     pub out: String,
@@ -84,6 +89,32 @@ fn court_field(court: &str, key: &str) -> Res<String> {
     })
 }
 
+impl Ctx {
+    /// The sample ids: checks.yaml `samples`, or every usage/INPUT-<id>.md of the folder in a default run.
+    fn sample_ids(&self) -> Res<Vec<String>> {
+        match self.default {
+            true => Ok(crate::layout::Doc::open(std::path::Path::new(&self.doc))?
+                .ids(crate::layout::INPUT)),
+            false => Ok(cfg(&self.env, &self.checks, ".samples[].id")?
+                .split_whitespace()
+                .map(String::from)
+                .collect()),
+        }
+    }
+
+    /// The sample's markdown, relative to the folder.
+    fn md_rel(&self, sid: &str) -> Res<String> {
+        match self.default {
+            true => Ok(crate::layout::Doc::rel(&crate::layout::input_name(sid))),
+            false => cfg(
+                &self.env,
+                &self.checks,
+                &format!(".samples[] | select(.id == \"{sid}\") | .md"),
+            ),
+        }
+    }
+}
+
 pub fn main(args: &[String]) -> Res<ExitCode> {
     let (dir, rest) = args.split_first().ok_or_else(|| fail(2, opts::USAGE))?;
     let doc = opts::logical_dir(dir)?;
@@ -114,11 +145,17 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     let alias = court_field(&court, "alias")?;
     let out_dir = format!("{root}/out/check/{alias}/{}", opts::doc_key(&doc, &root));
     std::fs::create_dir_all(&out_dir).map_err(|e| io_fail(&out_dir, e))?;
+    let own = format!("{doc}/checks.yaml");
+    let default = !std::path::Path::new(&own).is_file();
+    let checks = match default {
+        true => declared::effective(&env, &root, &court, &doc, &out_dir)?,
+        false => own,
+    };
     let tq = match o.engine.as_str() {
         "typst" => ".template".to_string(),
         e => format!(".templates.{e} // \"\""),
     };
-    let template = Some(cfg(&env, &court, &tq)?)
+    let template = Some(cfg(&env, &checks, &tq)?)
         .filter(|t| !t.is_empty())
         .unwrap_or_else(|| o.engine.clone());
     env.push(("TEMPLATE".into(), template.clone()));
@@ -127,6 +164,8 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         root,
         doc,
         court,
+        checks,
+        default,
         engine: o.engine.clone(),
         render: o.render,
         out: out_dir,
@@ -138,9 +177,9 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         env,
     };
     c.calib = prepare::calibrate(&c)?;
-    c.ph = int(&cfg(&c.env, &c.court, ".params.page_height_pt")?)?;
-    c.ftop = c.ph - int(&cfg(&c.env, &c.court, ".params.margin_pt")?)?;
-    c.second = cfg(&c.env, &c.court, ".generalization.second_sample")?;
+    c.ph = int(&cfg(&c.env, &c.checks, ".params.page_height_pt")?)?;
+    c.ftop = c.ph - int(&cfg(&c.env, &c.checks, ".params.margin_pt")?)?;
+    c.second = cfg(&c.env, &c.checks, ".generalization.second_sample")?;
     run(&c, &alias, &o.only)
 }
 
@@ -156,10 +195,10 @@ fn run(c: &Ctx, alias: &str, only: &str) -> Res<ExitCode> {
         "formbook check: {alias} ({name})  font calibration: 14 pt = {h} pt word height\n"
     ));
     let mut t = Tally::default();
-    let ids = cfg(&c.env, &c.court, ".samples[].id")?;
-    for sid in ids
-        .split_whitespace()
-        .filter(|s| only.is_empty() || *s == only)
+    for sid in c
+        .sample_ids()?
+        .iter()
+        .filter(|s| only.is_empty() || s.as_str() == only)
     {
         sample(c, sid, &mut t)?;
     }
@@ -195,11 +234,7 @@ fn run(c: &Ctx, alias: &str, only: &str) -> Res<ExitCode> {
 /// The sample's markdown (checks.yaml `md`, usage/INPUT-<id>.md) and the engine's render of it
 /// (usage/OUTPUT-<id>.<engine>.pdf, from the layout; checks.yaml `pdf` is not consulted).
 fn sample_paths(c: &Ctx, sid: &str) -> Res<(String, String)> {
-    let mdrel = cfg(
-        &c.env,
-        &c.court,
-        &format!(".samples[] | select(.id == \"{sid}\") | .md"),
-    )?;
+    let mdrel = c.md_rel(sid)?;
     Ok((
         format!("{}/{mdrel}", c.doc),
         format!("{}/{}", c.doc, render_rel(&mdrel, &c.engine)?),
@@ -228,7 +263,13 @@ fn sample(c: &Ctx, sid: &str, t: &mut Tally) -> Res<()> {
     out(&format!("\n=== sample {sid}\n"));
     let w = format!("{}/{sid}", c.out);
     let Some(p) = prepare::prepare(c, sid, &md, &pdf, &w)? else {
-        out(&format!("  could not prepare {sid}\n"));
+        match c.default {
+            true => out(&format!(
+                "  FAIL  {} render succeeds with no typst warnings\n          measured: fb render --deny-warnings failed or produced no PDF for {md}\n",
+                rows::pad14("DEF-RENDER-001")
+            )),
+            false => out(&format!("  could not prepare {sid}\n")),
+        }
         t.fail += 1;
         return append(&f(".tally"), "F\n");
     };
@@ -311,6 +352,7 @@ fn verdict(c: &Ctx, s: &Sample, r: &rows::Row, fails: u64) -> Res<(bool, String,
             let vars = [
                 ("ROOT", c.root.as_str()),
                 ("COURT", c.court.as_str()),
+                ("CHECKS", c.checks.as_str()),
                 ("DOC", c.doc.as_str()),
                 ("OUT", c.out.as_str()),
                 ("SID", s.sid.as_str()),
@@ -331,7 +373,7 @@ fn verdict(c: &Ctx, s: &Sample, r: &rows::Row, fails: u64) -> Res<(bool, String,
 fn run_checks(c: &Ctx, s: &Sample, gates: &str, t: &mut Tally) -> Res<()> {
     let tally = format!("{}/.tally", c.out);
     let fs = format!("{}/.fails_sample", c.out);
-    for r in rows::load(&c.env, &c.court)?
+    for r in rows::load(&c.env, &c.checks)?
         .iter()
         .filter(|r| rows::in_gates(gates, &r.gate))
     {
@@ -340,6 +382,11 @@ fn run_checks(c: &Ctx, s: &Sample, gates: &str, t: &mut Tally) -> Res<()> {
             continue;
         }
         if r.gate == "3" && s.sid != c.second {
+            continue;
+        }
+        if r.requires != "-" && matches!(cfg(&c.env, &c.checks, &r.requires)?.as_str(), "" | "null")
+        {
+            out(&rows::needs_text(r));
             continue;
         }
         let (pass, meas, detail) = verdict(c, s, r, t.fails)?;

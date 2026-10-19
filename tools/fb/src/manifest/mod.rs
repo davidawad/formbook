@@ -1,6 +1,6 @@
 //! `fb manifest [--doctypes] [repo-root]`: one line per court (or per Typst doc type) for the tracker.
 //!
-//! Court lines:    alias|group|level|name|path|manual|flags   (flags: see keys::court_flags)
+//! Court lines:    alias|group|level|name|path|manual|flags   (flags: keys::court_flags, then keys::docs_flag)
 //! Doc-type lines: alias|group|doctype|path|flags             (flags: see keys::doctype_flags)
 //! Order follows data/index.json; courts missing from it sort with position 0, ties bytewise.
 mod files;
@@ -47,13 +47,13 @@ pub fn court_lines(root: &Path) -> Res<String> {
                 Value::Null | Value::Bool(false) => "todo".to_string(),
                 v => jq_str(v),
             };
-            let rest = [
-                jq_str(&j["level"]),
-                name,
-                jq_str(&j["path"]),
-                manual,
-                keys::court_flags(&root.join(dir)),
-            ];
+            let abs = root.join(&dir);
+            let flags = format!(
+                "{}{}",
+                keys::court_flags(&abs),
+                keys::docs_flag(&doc_folders(&abs))
+            );
+            let rest = [jq_str(&j["level"]), name, jq_str(&j["path"]), manual, flags];
             Ok(order.row(&alias, &rest, &[]))
         })
         .collect::<Res<Vec<_>>>()?;
@@ -85,6 +85,18 @@ pub fn doctype_lines(root: &Path) -> Res<String> {
         })
         .collect::<Res<Vec<_>>>()?;
     Ok(Order::render(rows.into_iter().flatten().collect()))
+}
+
+/// The doc folders of a court: the court folder itself and each doc-type subfolder.
+fn doc_folders(court: &Path) -> Vec<PathBuf> {
+    std::iter::once(court.to_path_buf())
+        .chain(
+            files::visible(court)
+                .into_iter()
+                .map(|n| court.join(n))
+                .filter(|p| is_doctype(p)),
+        )
+        .collect()
 }
 
 /// A subfolder is a doc type when it is no court of its own and holds typst/ or usage/.

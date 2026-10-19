@@ -16,8 +16,8 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             let root = crate::repo_root()?;
             let man = crate::manifest::court_lines(&root)?;
             let dts = crate::manifest::doctype_lines(&root)?;
-            let rows = crate::tracker::compute(&man, &dts).rows;
-            println!("{}", write_all(&root, &man, &rows)?);
+            let s = crate::tracker::compute(&man, &dts);
+            println!("{}", write_all(&root, &man, &s.rows, &s.docrows)?);
             Ok(ExitCode::SUCCESS)
         }
         _ => Err(fail(2, "usage: fb readmes")),
@@ -50,7 +50,7 @@ fn put(p: &Path, generated: &str) -> Res<()> {
 }
 
 /// Writes every README from the manifest and the tracker rows; returns the summary line.
-pub fn write_all(root: &Path, manifest: &str, rows: &str) -> Res<String> {
+pub fn write_all(root: &Path, manifest: &str, rows: &str, docrows: &str) -> Res<String> {
     let idx = crate::manifest::read_json(&root.join("data/index.json"))?;
     let empty = serde_json::Map::new();
     let inputs = gen::Inputs {
@@ -59,6 +59,7 @@ pub fn write_all(root: &Path, manifest: &str, rows: &str) -> Res<String> {
         unplaced: idx["unplaced"].as_array().map_or(&[][..], Vec::as_slice),
         manual: gen::manual(manifest),
         rows: gen::rows(rows),
+        docs: gen::docs(docrows),
     };
     let e1 = |e: String| fail(1, format!("fb readmes: {e}"));
     inputs.courts.iter().try_for_each(|(a, c)| {

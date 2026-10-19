@@ -84,17 +84,15 @@ pub fn dirname(p: &str) -> &str {
     }
 }
 
-/// The nearest folder at or above DOC with court.json, and its checks.yaml.
+/// The nearest folder at or above DOC with court.json.
 pub fn resolve_court(doc: &str) -> Res<String> {
     let mut c = doc.to_string();
     while !Path::new(&format!("{c}/court.json")).is_file() && c != "/" {
         c = dirname(&c).to_string();
     }
-    let has = |f: &str| Path::new(&format!("{}/{f}", c.trim_end_matches('/'))).is_file();
-    match (has("court.json"), has("checks.yaml")) {
-        (false, _) => Err(fail(2, format!("no court.json found above {doc}"))),
-        (true, false) => Err(fail(2, format!("no court-level checks.yaml at {c}"))),
-        (true, true) => Ok(c),
+    match Path::new(&format!("{}/court.json", c.trim_end_matches('/'))).is_file() {
+        false => Err(fail(2, format!("no court.json found above {doc}"))),
+        true => Ok(c),
     }
 }
 

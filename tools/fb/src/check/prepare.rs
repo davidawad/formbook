@@ -20,7 +20,7 @@ pub fn calib_of(tsv: &str) -> String {
 pub fn calibrate(c: &Ctx) -> Res<String> {
     let d = format!("{}/calib", c.out);
     std::fs::create_dir_all(&d).map_err(|e| io_fail(&d, e))?;
-    let fam = cfg(&c.env, &c.court, ".font.typst_family")?;
+    let fam = cfg(&c.env, &c.checks, ".font.typst_family")?;
     let typ = format!("#set page(width: 1000pt, height: 220pt, margin: 20pt)\n#set text(font: \"{fam}\", size: 100pt, top-edge: \"ascender\", bottom-edge: \"descender\")\nHxg #strong[Hxg] #emph[Hxg]\n");
     let (ctyp, cpdf, err) = (
         format!("{d}/c.typ"),
@@ -98,22 +98,15 @@ pub fn prepare(c: &Ctx, sid: &str, md: &str, pdf: &str, w: &str) -> Res<Option<P
     let rendered = match c.render {
         false => true,
         true => {
-            let mdrel = cfg(
-                &c.env,
-                &c.court,
-                &format!(".samples[] | select(.id == \"{sid}\") | .md"),
-            )?;
+            let mdrel = c.md_rel(sid)?;
             let mut r =
                 std::process::Command::new(std::env::current_exe().map_err(|e| io_fail("fb", e))?);
             r.envs(c.env.iter().map(|(k, v)| (k.as_str(), v.as_str())));
-            r.current_dir(&c.root).args([
-                "render",
-                "--engine",
-                &c.engine,
-                &c.doc,
-                mdrel.as_str(),
-                pdf,
-            ]);
+            let deny = ["--deny-warnings"].into_iter().filter(|_| c.default);
+            r.current_dir(&c.root)
+                .args(["render", "--engine", &c.engine])
+                .args(deny)
+                .args([c.doc.as_str(), mdrel.as_str(), pdf]);
             r.stdout(Stdio::null());
             super::sh::flush();
             r.status().map_err(|e| io_fail("sh", e))?.success()
@@ -154,13 +147,35 @@ pub fn prepare(c: &Ctx, sid: &str, md: &str, pdf: &str, w: &str) -> Res<Option<P
         &["-xml", "-zoom", "2", "-i", "-q", "-stdout", pdf],
     );
     pipe_to_file(html, gawk(&["-f", &runs_awk]), &f("runs.tsv"))?;
+    if c.default {
+        // pleading-paper line numbers (digit-only runs left of the 1 in margin) are decoration, not content
+        let (raw, kept) = (f("runs-all.tsv"), f("runs.tsv"));
+        std::fs::rename(&kept, &raw).map_err(|e| io_fail(&raw, e))?;
+        to_file(
+            gawk(&[
+                "-F",
+                "\t",
+                "-v",
+                "OFS=\t",
+                "!($3 + 0 < 72 && $7 ~ /^[0-9]+$/)",
+                &raw,
+            ]),
+            &kept,
+        )?;
+    }
+    let dehyphen = format!(
+        "DEHYPHEN={}",
+        ["1"].into_iter().filter(|_| c.default).collect::<String>()
+    );
     to_file(
-        gawk(&["-f", &format!("{chk}/md-blocks.awk"), md]),
+        gawk(&["-v", &dehyphen, "-f", &format!("{chk}/md-blocks.awk"), md]),
         &f("blocks.tsv"),
     )?;
     let (g0, ft) = (format!("out={}", f("g0")), format!("footer_top={}", c.ftop));
     let (norm, gate0) = (format!("{chk}/norm.awk"), format!("{chk}/gate0.awk"));
     let mut g = gawk(&[
+        "-v",
+        &dehyphen,
         "-v",
         &g0,
         "-v",
@@ -174,7 +189,7 @@ pub fn prepare(c: &Ctx, sid: &str, md: &str, pdf: &str, w: &str) -> Res<Option<P
     ]);
     super::sh::flush();
     g.status().map_err(|e| io_fail("gawk", e))?;
-    let size = cfg(&c.env, &c.court, ".font.size_pt")?;
+    let size = cfg(&c.env, &c.checks, ".font.size_pt")?;
     let hmin = format!("hmin={:.2}", awk_num(&c.calib) * awk_num(&size) * 0.8);
     let lines = gawk(&[
         "-v",

@@ -5,7 +5,7 @@ use std::fs;
 use std::path::Path;
 use std::process::ExitCode;
 
-const DOCTYPE_INTRO: &str = "\nTypst per doc type (a doc type is complete with template, sample, render and exemplar; per-doc-type rows in STATUS.md):\n\n";
+const DOCTYPE_INTRO: &str = "\nTypst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):\n\n";
 
 pub fn main(args: &[String]) -> Res<ExitCode> {
     match args {
@@ -37,7 +37,7 @@ fn run(root: &Path) -> Res<ExitCode> {
     let current = fs::read_to_string(&readme).map_err(|e| io_fail(&readme, e))?;
     write(&readme, &splice(&current, &block))?;
     write(&root.join("STATUS.md"), &status_md(&s))?;
-    println!("{}", readmes::write_all(root, &man, &s.rows)?);
+    println!("{}", readmes::write_all(root, &man, &s.rows, &s.docrows)?);
     Ok(ExitCode::SUCCESS)
 }
 
@@ -86,7 +86,7 @@ fn status_md(s: &tracker::Sections) -> String {
         "\n## Typst per doc type: summary\n\n",
         "One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself as \"(court root)\" when it has its own `typst/main.typ`. ",
         "Complete = all four present, each keyed on committed text so a checkout without PDFs counts the same: Typst template (`typst/main.typ`), sample (`usage/INPUT-<doctype>[-<n>].md`), render (template and sample committed), ",
-        "exemplar (a `FILED-EXAMPLE-<doctype>[-<n>].pdf` named in `usage/SOURCE.md`). Overlays are generated on demand into `.overlay/` and are not counted. Gates = `tools/check.sh` left a valid typst stamp (shown, not required).\n\n",
+        "exemplar (a `FILED-EXAMPLE-<doctype>[-<n>].pdf` named in `usage/SOURCE.md`). Overlays are generated on demand into `.overlay/` and are not counted. Status: **up for review** = `fb check` (court checks.yaml, else the default set in `data/checks-default.yaml`) left a valid typst stamp for the folder (`just eval` re-runs it); **in progress** = something is present; **todo** = nothing. A court is up for review when it has `rules.md` and every doc folder under it with an INPUT is up for review. `done` is set by hand in `court.json`.\n\n",
         &s.dsummary,
         "\n## Typst per doc type\n\n",
         &s.doctypes,

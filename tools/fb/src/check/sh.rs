@@ -87,10 +87,9 @@ pub fn pipe_capture(mut a: Command, b: Command) -> Res<String> {
     r.map(|(s, _)| s)
 }
 
-/// `yq e EXPR <court>/checks.yaml` (lib.sh's `cfg`).
-pub fn cfg(env: &Env, court: &str, expr: &str) -> Res<String> {
-    let file = format!("{court}/checks.yaml");
-    capture(cmd(env, "yq", &["e", expr, &file])).map(|(s, _)| s)
+/// `yq e EXPR <checks file>` (lib.sh's `cfg`).
+pub fn cfg(env: &Env, file: &str, expr: &str) -> Res<String> {
+    capture(cmd(env, "yq", &["e", expr, file])).map(|(s, _)| s)
 }
 
 pub fn strip_nl(s: &str) -> &str {

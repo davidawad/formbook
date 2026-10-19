@@ -43,12 +43,13 @@ fn empty_input() {
         .ends_with("---:|\n| **Total** | 0 | 0 | 0 | 0 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |\n"));
     assert_eq!(
         s.doctypes,
-        "| Alias | Doc type | Template | Samples | Render | Exemplars | Gates | Typst |\n\
+        "| Alias | Doc type | Template | Samples | Render | Exemplars | Status | Typst |\n\
          |---|---|---|---:|---|---:|---|---|\n"
     );
     assert!(s
         .dsummary
         .ends_with("| **Total** | 0 | 0 | 0 | 0 | 0 | 0 | 0.0% | 0 |\n"));
+    assert_eq!(s.docrows, "");
 }
 
 /// Groups are runs: "G" reappearing after "" opens a new group (from bend on cases/malformed).
@@ -56,7 +57,7 @@ fn empty_input() {
 fn malformed_and_runs() {
     let m = "m1|G|l|Short flags|p|done|199222\nm2|G|l|Six fields|p|todo\n\
              m3|G|l|Extra|p|todo|0002000|zzz|yy\n\n\nm4|G|l|Empty flags|p|todo|\n\
-             m5|G|l|Long flags|p|todo|100200012345\nm6\n|||||||\n\
+             m5|G|l|Long flags|p|todo|100200022345\nm6\n|||||||\n\
              m7|G|l|Letters|p|todo|xyzabcd\nm8|G|l|eight chars|p|todo|00000001\n\
              m9|G|l|Empty manual|p||0000000\nmA|G|l|No newline at end|p|done|1\n\
              mB|G|l|Last|p|todo|1111111";
@@ -67,8 +68,8 @@ fn malformed_and_runs() {
         [
             "| G | 4 | 0 | 1 | 1 | 2 | 0.0% | 25.0% | 2 | 0 | 0 | 10.7% |",
             "|  | 1 | 0 | 0 | 0 | 1 | 0.0% | 0.0% | 0 | 0 | 0 | 0.0% |",
-            "| G | 5 | 0 | 0 | 2 | 3 | 0.0% | 0.0% | 0 | 0 | 0 | 11.6% |",
-            "| **Total** | 10 | 0 | 1 | 3 | 6 | 0.0% | 10.0% | 2 | 0 | 0 | 10.1% |",
+            "| G | 5 | 0 | 0 | 3 | 2 | 0.0% | 0.0% | 0 | 0 | 0 | 11.6% |",
+            "| **Total** | 10 | 0 | 1 | 4 | 5 | 0.0% | 10.0% | 2 | 0 | 0 | 10.1% |",
         ]
     );
     let rows: Vec<&str> = s.rows.lines().collect();
@@ -81,7 +82,7 @@ fn malformed_and_runs() {
             "m5|up for review|29|pass|—|—|1001000",
             "|todo|0|—|—|—|",
             "m7|in progress|29|—|—|—|0110000",
-            "m8|todo|0|—|—|—|0000000",
+            "m8|in progress|0|—|—|—|0000000",
             "m9|todo|0|—|—|—|0000000",
             "mA|todo|0|—|—|—|",
             "mB|in progress|29|built|built|built|1000001",
@@ -92,8 +93,8 @@ fn malformed_and_runs() {
     assert_eq!(
         dt,
         [
-            "| d6 | [dt](p) | — | b | yes | d | — | missing template |",
-            "| d7 | [](p) | — | — | — | — | — | missing template, sample, render, exemplar |",
+            "| d6 | [dt](p) | — | b | yes | d | in progress | missing template |",
+            "| d7 | [](p) | — | — | — | — | todo | missing template, sample, render, exemplar |",
         ]
     );
 }
@@ -116,4 +117,25 @@ fn unicode_flags() {
     let d = compute("", "u1|Q — é|brief—x|courts/é|1é1é1\nu3|G|dt|p|ééé").dsummary;
     assert!(d.contains("\n| Q — é | 1 | 1 | 1 | 1 | 1 | 1 | 100.0% | 0 |\n"));
     assert!(d.ends_with("| **Total** | 1 | 1 | 1 | 1 | 1 | 1 | 100.0% | 0 |\n"));
+}
+
+/// A doc type is up for review when its typst stamp is valid (fifth bit); it shows in the table and the README rows.
+#[test]
+fn doc_type_status() {
+    let d = "a|G|brief|courts/a/brief|11211\nb|G|motion|courts/a/motion|11110\nc|G|empty|courts/a/empty|00000";
+    let s = compute("", d);
+    let rows: Vec<&str> = s.doctypes.lines().skip(2).collect();
+    assert_eq!(
+        rows,
+        [
+            "| a | [brief](courts/a/brief) | yes | 1 | yes | 1 | up for review | **complete** |",
+            "| b | [motion](courts/a/motion) | yes | 1 | yes | 1 | in progress | **complete** |",
+            "| c | [empty](courts/a/empty) | — | — | — | — | todo | missing template, sample, render, exemplar |",
+        ]
+    );
+    assert_eq!(
+        s.docrows,
+        "a|brief|courts/a/brief|up for review|1|1\nb|motion|courts/a/motion|in progress|1|0\nc|empty|courts/a/empty|todo|0|0\n"
+    );
+    assert!(s.dsummary.contains("| Up for review |"));
 }

@@ -35,6 +35,14 @@ check DIR:
 check-all:
     find courts -name checks.yaml | sed 's|/checks.yaml$||' | sort | xargs -n1 {{fb}} check
 
+# judge every doc folder under DIR that has an INPUT (fb check: its checks.yaml, else data/checks-default.yaml), then regenerate the tracker
+eval DIR:
+    {{fb}} eval {{DIR}}
+
+# `just eval` over every court
+eval-all:
+    {{fb}} eval courts
+
 # mutation-test the checker of court folder DIR: every mutant must be caught (fb check-selftest)
 check-selftest DIR:
     {{fb}} check-selftest {{DIR}}

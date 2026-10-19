@@ -8,6 +8,7 @@ mod contribute;
 mod diff;
 mod diffselftest;
 mod engines;
+mod eval;
 mod fetch;
 mod filing;
 mod fonts;
@@ -35,6 +36,7 @@ fn main() -> ExitCode {
         .map_or(("", &[][..]), |(c, r)| (c.as_str(), r));
     let result = match cmd {
         "check" => check::main(rest),
+        "eval" => eval::main(rest),
         "manifest" => manifest::main(rest),
         "tracker" => track::main(rest),
         "readmes" => readmes::main(rest),
@@ -57,7 +59,7 @@ fn main() -> ExitCode {
         "find" => filing::find(rest),
         "new-filing" => filing::new_filing(rest),
         "render-filing" => filing::render_filing(rest),
-        _ => Err(fail(2, "usage: fb check|check-selftest|bootstrap|showcase|render|render-filing|overlay|fonts|manifest|tracker|worklist|claim|contribute|find|new-filing|readmes|measure|diff|fetch|lint|match-stamp|diff-selftest|usage ...")),
+        _ => Err(fail(2, "usage: fb check|eval|check-selftest|bootstrap|showcase|render|render-filing|overlay|fonts|manifest|tracker|worklist|claim|contribute|find|new-filing|readmes|measure|diff|fetch|lint|match-stamp|diff-selftest|usage ...")),
     };
     result.unwrap_or_else(|e| {
         eprintln!("{}", e.msg);

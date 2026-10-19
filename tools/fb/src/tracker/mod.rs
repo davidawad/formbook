@@ -11,6 +11,7 @@ pub struct Sections {
     pub rows: String,
     pub dsummary: String,
     pub doctypes: String,
+    pub docrows: String,
 }
 
 fn text(ls: Vec<String>) -> String {
@@ -28,6 +29,7 @@ pub fn compute(manifest: &str, doctypes: &str) -> Sections {
         rows: text(render::rows(&cs)),
         dsummary: text(render::dsummary(&ds)),
         doctypes: text(render::doctypes(&ds)),
+        docrows: text(render::docrows(&ds)),
     }
 }
 

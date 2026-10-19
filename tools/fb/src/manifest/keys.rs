@@ -41,7 +41,7 @@ fn sources(dir: &Path) -> char {
 }
 
 /// The INPUT ids of the folder (none when it is not under a court.json).
-fn input_ids(dir: &Path) -> Vec<String> {
+pub(super) fn input_ids(dir: &Path) -> Vec<String> {
     Doc::open(dir).map(|d| d.ids(INPUT)).unwrap_or_default()
 }
 
@@ -71,7 +71,7 @@ pub fn stamp_ok(
         })
 }
 
-fn stamp(dir: &Path, engine: &str) -> bool {
+pub(super) fn stamp(dir: &Path, engine: &str) -> bool {
     let Ok(doc) = Doc::open(dir) else {
         return false;
     };
@@ -102,6 +102,23 @@ fn has_template(dir: &Path) -> bool {
 
 fn present(dir: &Path, prefix: &str, suffix: &str) -> char {
     bit(!matching(dir, prefix, suffix).is_empty())
+}
+
+/// Eighth court character: '0' no doc folder under the court has an INPUT, '2' every one that has does and
+/// holds a valid typst stamp, '1' some do not. `folders` are the court's doc folders (see `doc_folders`).
+pub fn docs_flag(folders: &[std::path::PathBuf]) -> char {
+    let with_input: Vec<&std::path::PathBuf> = folders
+        .iter()
+        .filter(|d| !input_ids(d).is_empty())
+        .collect();
+    match (
+        with_input.is_empty(),
+        with_input.iter().all(|d| stamp(d, "typst")),
+    ) {
+        (true, _) => '0',
+        (false, true) => '2',
+        (false, false) => '1',
+    }
 }
 
 /// Seven characters: rules, sources, inputs, typst, latex, docx, review.

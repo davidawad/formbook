@@ -13,7 +13,7 @@
 AWKU="env LC_ALL=en_US.UTF-8 gawk"
 CHK="$ROOT/tools/check"
 
-cfg() { yq e "$1" "$COURT/checks.yaml"; }
+cfg() { yq e "$1" "${CHECKS:-$COURT/checks.yaml}"; }
 meta() { yq --front-matter=extract e "$1" "$MD"; }
 norm() { $AWKU -f "$CHK/norm.awk" -f "$CHK/normline.awk"; } # stdin -> normal form
 nstr() { printf '%s\n' "$1" | sed 's/[*]//g' | norm; }      # a metadata string -> normal form
@@ -124,10 +124,62 @@ chk_fonts_embedded() {
       name = $1; emb = ""; for (i = 1; i <= NF; i++) if ($i == "yes" || $i == "no") { emb = $i; break }
       sub(/^[A-Z]+\+/, "", name)
       if (emb != "yes") { bad++; msg[bad] = $1 " is not embedded" }
-      if (name !~ "^" pre) { bad++; msg[bad] = $1 " is not " pre "*  (a fallback font was used)" } }
+      if (name !~ "^(" pre ")") { bad++; msg[bad] = $1 " is not " pre "*  (a fallback font was used)" } }
     END { printf "%d fonts\n", n; for (i = 1; i <= bad; i++) print "!" msg[i]; exit (bad > 0) }' "$W/fonts.txt") && ST=PASS || ST=FAIL
   MEAS=$(printf '%s\n' "$out" | head -1)
   DETAIL=$(printf '%s\n' "$out" | sed -n 's/^!//p')
+}
+
+# ---- court-agnostic defaults (data/checks-default.yaml; docs/EVAL-LOOP.md "Default checks")
+chk_fonts_all_embedded() {
+  out=$(awk 'NR > 2 { n++; emb = ""; for (i = 1; i <= NF; i++) if ($i == "yes" || $i == "no") { emb = $i; break }
+      if (emb != "yes") { bad++; msg[bad] = $1 " is not embedded" } }
+    END { printf "%d fonts\n", n; if (n == 0) { bad++; msg[bad] = "no fonts in the PDF" } for (i = 1; i <= bad && i <= 8; i++) print "!" msg[i]; exit (bad > 0) }' "$W/fonts.txt") && ST=PASS || ST=FAIL
+  MEAS=$(printf '%s\n' "$out" | head -1)
+  DETAIL=$(printf '%s\n' "$out" | sed -n 's/^!//p')
+}
+
+# default checks: the four edges of body text (a word centred inside the top or bottom margin is a running header or
+# footer and is not judged; digit-only words left of the margin are line numbers); vertical tolerance covers glyph boxes
+chk_margins_body() {
+  eval "$(cfg '.params | "M=\(.margin_pt) E=\(.eps_pt) EV=\(.eps_v_pt) PW=\(.page_width_pt) PH=\(.page_height_pt)"')"
+  out=$(awk -F'\t' -v M="$M" -v E="$E" -v EV="$EV" -v PW="$PW" -v PH="$PH" '
+    { left = $2; top = $3; right = $4; bot = $5
+      c = (top + bot) / 2
+      if (c < M || c > PH - M) next                  # running header or footer: not judged
+      if ($7 ~ /^[0-9]+$/ && left < M) next          # pleading-paper line numbers sit in the left margin by design
+      b++
+      if (left < minl || b == 1) { minl = left; wl = $1 ": \"" $7 "\"" }
+      if (right > maxr) { maxr = right; wr = $1 ": \"" $7 "\"" }
+      if (top < mint || b == 1) { mint = top; wt = $1 ": \"" $7 "\"" }
+      if (bot > maxb) { maxb = bot; wb = $1 ": \"" $7 "\"" } }
+    END {
+      printf "body left %.2f right %.2f top %.2f bottom %.2f\n", minl, maxr, mint, maxb
+      if (minl < M - E) { bad++; msg[bad] = "left edge " minl " < " M " at page " wl }
+      if (maxr > PW - M + E) { bad++; msg[bad] = "right edge " maxr " > " PW - M " at page " wr }
+      if (mint < M - EV) { bad++; msg[bad] = "body top edge " mint " < " M " at page " wt }
+      if (maxb > PH - M + EV) { bad++; msg[bad] = "body bottom edge " maxb " > " PH - M " at page " wb }
+      for (i = 1; i <= bad; i++) print "!" msg[i]
+      exit (bad > 0) }' "$W/words.tsv") && ST=PASS || ST=FAIL
+  MEAS=$(printf '%s\n' "$out" | head -1)
+  DETAIL=$(printf '%s\n' "$out" | sed -n 's/^!//p')
+}
+
+# the most common word height (the body text) is at least the configured size (footnotes and headings may differ)
+chk_body_size() {
+  want=$(awk -v r="$CALIB" -v s="$(cfg .font.size_pt)" 'BEGIN { printf "%.2f", r * s }')
+  out=$(awk -F'\t' -v want="$want" -v size="$(cfg .font.size_pt)" '$7 ~ /[A-Za-z]/ { h = sprintf("%.1f", $6); c[h]++ }
+    END { for (k in c) if (c[k] > bm) { bm = c[k]; mode = k }
+      printf "body word height %s (%d words); %s pt = %s\n", mode, bm, size, want
+      exit (mode + 0 < want - 0.1) }' "$W/words.tsv") && ST=PASS || ST=FAIL
+  MEAS=$(printf '%s\n' "$out" | head -1)
+  DETAIL=""
+}
+
+chk_page_limit() {
+  lim=$(cfg .params.page_limit)
+  MEAS="$NPAGES pages; limit $lim"
+  pass_if $((NPAGES > lim))
 }
 
 chk_page_numbers() {

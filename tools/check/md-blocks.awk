@@ -39,6 +39,7 @@ function resolve(s,    out, i, c, n, d, j, depth, txt, url, k, ital) {
       out = out c; i++; continue
     }
     if (c == "*") {
+      if (DEHYPHEN != "" && !ital && index(substr(s, i + 1), "*") == 0) { out = out c; i++; continue }   # a lone star ("*3" star page) is literal
       if (substr(s, i + 1, 1) == "*") { i += 2; continue }     # bold: no text effect
       ital = !ital; out = out (ital ? "\002" : "\003"); i++; continue
     }
@@ -141,8 +142,9 @@ line ~ /^>/ {
 line ~ /^[ \t]*([-*+]|[0-9]+[.)])[ \t]+/ {
   flush()
   m = line; sub(/^[ \t]*/, "", m)
-  if (m ~ /^[0-9]/) { num = m; sub(/[.)].*$/, "", num); sub(/^[0-9]+[.)][ \t]+/, "", m); buf = num ". " m }
-  else { sub(/^[-*+][ \t]+/, "", m); buf = "• " m }
+  # default checks (-v DEHYPHEN=1): templates number and bullet lists their own way, so the marker is not content
+  if (m ~ /^[0-9]/) { num = m; sub(/[.)].*$/, "", num); sub(/^[0-9]+[.)][ \t]+/, "", m); buf = (DEHYPHEN != "" ? "" : num ". ") m }
+  else { sub(/^[-*+][ \t]+/, "", m); buf = (DEHYPHEN != "" ? "" : "• ") m }
   bkind = "L"
   next
 }
@@ -150,6 +152,11 @@ line ~ /^[ \t]*([-*+]|[0-9]+[.)])[ \t]+/ {
 # paragraph text (continuation lines are joined with a space)
 {
   t = line; sub(/^[ \t]+/, "", t)
+  if (DEHYPHEN != "") {   # default checks: template-local paragraph markers ("~ ", "^") and pipe-table syntax are not content
+    if (t ~ /^\|[ \t:|-]+\|?[ \t]*$/) next
+    sub(/^~ /, "", t); sub(/^\^/, "", t)
+    if (t ~ /^\|/) gsub(/\|/, " ", t)
+  }
   if (bkind == "") bkind = "P"
   buf = (buf == "" ? t : buf " " t)
 }

@@ -19,7 +19,7 @@ pub struct Agg {
     pub dp: u32,
 }
 
-/// Per-group counts of doc types: items present, complete, gates pass.
+/// Per-group counts of doc types: items present, complete, up for review (typst eval passes).
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct DAgg {
     pub n: u32,
@@ -169,7 +169,7 @@ pub fn dsummary(ds: &[DocType]) -> Vec<String> {
     let gs = groups(ds, |d| d.group.as_str(), DAgg::bump);
     let total = gs.iter().fold(DAgg::default(), |t, (_, a)| t.merge(*a));
     table(
-        "| Group | Doc types | Template | Sample | Render | Exemplar | Typst complete | % complete | Gates pass |",
+        "| Group | Doc types | Template | Sample | Render | Exemplar | Typst complete | % complete | Up for review |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
         &gs,
         total,
@@ -265,7 +265,7 @@ pub fn verdict(bits: &[u32; 5]) -> String {
 }
 
 fn dtrow(d: &DocType) -> String {
-    let [t, _, r, _, g] = d.bits;
+    let [t, _, r, _, _] = d.bits;
     format!(
         "| {} | [{}]({}) | {} | {} | {} | {} | {} | {} |",
         d.alias,
@@ -275,15 +275,32 @@ fn dtrow(d: &DocType) -> String {
         num(d.samples),
         yes(r),
         num(d.exemplars),
-        if g == 1 { "pass" } else { "—" },
+        d.status.name(),
         verdict(&d.bits)
     )
 }
 
 pub fn doctypes(ds: &[DocType]) -> Vec<String> {
     with_head(
-        "| Alias | Doc type | Template | Samples | Render | Exemplars | Gates | Typst |",
+        "| Alias | Doc type | Template | Samples | Render | Exemplars | Status | Typst |",
         "|---|---|---|---:|---|---:|---|---|",
         ds.iter().map(dtrow),
     )
+}
+
+/// One line per doc type for the folder READMEs: alias|doctype|path|status|inputs|gates.
+pub fn docrows(ds: &[DocType]) -> Vec<String> {
+    ds.iter()
+        .map(|d| {
+            format!(
+                "{}|{}|{}|{}|{}|{}",
+                d.alias,
+                d.doctype,
+                d.path,
+                d.status.name(),
+                d.samples,
+                d.bits[4]
+            )
+        })
+        .collect()
 }

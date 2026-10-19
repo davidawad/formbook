@@ -4,7 +4,9 @@
 //! least seven fields and a doc-type line at least five (extra fields are ignored, shorter lines
 //! dropped). Flags are compared as characters (Unicode scalar values, as Bend's String holds them).
 //! Overlays are no longer committed, so neither flag string carries an overlay character: courts have
-//! seven checklist items, doc types four.
+//! seven checklist items, doc types four. A court's flags carry an eighth character (docs: '0' no doc folder
+//! has an INPUT, '1' some do but not every one passes its typst eval, '2' every one with an INPUT passes and
+//! at least one exists); a court is "up for review" when rules.md is present and docs is '2'.
 
 /// Court status, in increasing order of completion.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -40,10 +42,12 @@ pub struct Court {
     pub items: String,
 }
 
-/// One doc-type line. `bits` = template, sample, render, exemplar, gates (0/1 each);
+/// One doc-type line (its status: up for review when its typst stamp is valid, in progress when anything is
+/// present, todo otherwise; "done" belongs to courts and is set by hand). `bits` = template, sample, render, exemplar, gates (0/1 each);
 /// `samples` / `exemplars` are the raw count characters (INPUT files, FILED-EXAMPLEs named in SOURCE.md).
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct DocType {
+    pub status: Status,
     pub alias: String,
     pub group: String,
     pub doctype: String,
@@ -86,6 +90,7 @@ pub fn percent(items: u32) -> u32 {
 /// Status, percent, engine states and checklist bits from the manual field and the flags.
 pub fn score(manual: &str, flags: &str) -> (Status, u32, Option<[char; 3]>, String) {
     let cs: Vec<char> = flags.chars().collect();
+    let docs = cs.get(7).copied().unwrap_or('0');
     let [r, e, s, t, l, d, v] = match cs.get(..7) {
         Some(&[r, e, s, t, l, d, v]) => [r, e, s, t, l, d, v],
         _ => return (Status::Todo, 0, None, String::new()),
@@ -100,10 +105,10 @@ pub fn score(manual: &str, flags: &str) -> (Status, u32, Option<[char; 3]>, Stri
         is(v, '1'),
     ];
     let present: u32 = xs.iter().sum();
-    let any = cs[..7].iter().any(|&c| c != '0');
+    let any = cs[..7].iter().any(|&c| c != '0') || docs != '0';
     let status = if manual == "done" {
         Status::Done
-    } else if xs[0] * xs[3] == 1 {
+    } else if xs[0] == 1 && docs == '2' {
         Status::Review
     } else if any {
         Status::InProgress
@@ -160,6 +165,7 @@ pub fn doctype(line: &str) -> Option<DocType> {
     };
     let (samples, exemplars, bits) = doc_bits(flags)?;
     Some(DocType {
+        status: doc_status(&bits),
         alias: alias.into(),
         group: group.into(),
         doctype: doctype.into(),
@@ -168,6 +174,15 @@ pub fn doctype(line: &str) -> Option<DocType> {
         exemplars,
         bits,
     })
+}
+
+/// A doc folder's status from its bits (template, sample, render, exemplar, gates).
+pub fn doc_status(bits: &[u32; 5]) -> Status {
+    match (bits[4], bits[..4].iter().sum::<u32>()) {
+        (1, _) => Status::Review,
+        (_, 0) => Status::Todo,
+        _ => Status::InProgress,
+    }
 }
 
 /// 1 iff template, sample, render and exemplar are all present.
@@ -196,10 +211,18 @@ mod tests {
     fn status_rules() {
         assert_eq!(st("todo", "0000000"), ("todo", 0, "0000000".into()));
         assert_eq!(st("todo", "0100000"), ("in progress", 0, "0000000".into()));
+        // up for review needs rules.md and docs '2' (every doc folder with an INPUT passes), not the court-root typst stamp
         assert_eq!(
-            st("todo", "1002000"),
+            st("todo", "10020002"),
             ("up for review", 29, "1001000".into())
         );
+        assert_eq!(
+            st("todo", "10020001"),
+            ("in progress", 29, "1001000".into())
+        );
+        assert_eq!(st("todo", "1002000"), ("in progress", 29, "1001000".into()));
+        assert_eq!(st("todo", "00000002"), ("in progress", 0, "0000000".into()));
+        assert_eq!(st("done", "00000000"), ("done", 100, "0000000".into()));
         assert_eq!(st("todo", "1020000"), ("in progress", 29, "1010000".into()));
         assert_eq!(st("todo", "0002000"), ("in progress", 14, "0001000".into()));
         assert_eq!(st("done", "0000000"), ("done", 100, "0000000".into()));
@@ -207,8 +230,9 @@ mod tests {
         assert_eq!(st("Done", "1111111"), ("in progress", 29, "1000001".into()));
         // fewer than seven flags: todo, 0, no items, even when done
         assert_eq!(st("done", "192222"), ("todo", 0, String::new()));
-        // extra characters are ignored; any non-'0' character counts as present
-        assert_eq!(st("todo", "00000001"), ("todo", 0, "0000000".into()));
+        // a ninth character is ignored; any non-'0' character counts as present
+        assert_eq!(st("todo", "000000009"), ("todo", 0, "0000000".into()));
+        assert_eq!(st("todo", "00000001"), ("in progress", 0, "0000000".into()));
         assert_eq!(st("todo", "0x00000"), ("in progress", 14, "0100000".into()));
     }
 
@@ -217,7 +241,7 @@ mod tests {
         let got: Vec<u32> = (0..=7).map(percent).collect();
         assert_eq!(got, [0, 14, 29, 43, 57, 71, 86, 100]);
         assert_eq!(
-            st("todo", "1992221"),
+            st("todo", "19922212"),
             ("up for review", 100, "1111111".into())
         );
         assert_eq!(st("todo", "1290010"), ("in progress", 43, "1110000".into()));
@@ -255,6 +279,10 @@ mod tests {
         assert!(doctype("a|g|dt|p").is_none());
         assert!(doctype("a|g|dt|p|111").is_none());
         assert_eq!(complete(&[1, 1, 1, 1, 0]), 1);
+        assert_eq!(doc_status(&[0, 0, 0, 0, 0]), Status::Todo);
+        assert_eq!(doc_status(&[0, 1, 0, 0, 0]), Status::InProgress);
+        assert_eq!(doc_status(&[1, 1, 1, 1, 1]), Status::Review);
+        assert_eq!(doc_status(&[0, 0, 0, 0, 1]), Status::Review);
         assert_eq!(complete(&[1, 1, 1, 0, 1]), 0);
     }
 }

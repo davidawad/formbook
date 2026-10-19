@@ -1,0 +1,81 @@
+# Court-agnostic tier-1 checks (docs/EVAL-LOOP.md, "Default checks"). `fb check <doc folder>` uses this file for every doc
+# folder that has no checks.yaml of its own, with one INPUT per sample (usage/INPUT-<id>.md) rendered by the folder's typst
+# template. Only properties that hold for essentially any US court filing are here. Numbers a court's rules.md fixes can be
+# supplied (not guessed) in an `eval.yaml` beside rules.md or in the doc folder: its keys are merged over this file.
+#
+# Not in this file on purpose: pleading-paper line numbers, 14 pt rules, cover contents, section order, certificates, TOC/TOA.
+# Those need court data; they belong in a court-level checks.yaml (see courts/ninth-circuit/court-of-appeals/).
+
+template: typst/main.typ
+templates:
+  latex: latex/template.tex
+
+font:
+  # Overridden per folder by the family the template declares (`#let font-family = (...)`); this is the fallback.
+  typst_family: "Times New Roman"
+  pdf_prefix: "TimesNewRoman|LiberationSerif"   # regex alternation; every embedded font name must start with one
+  size_pt: 12                                   # body text floor; set font.size_pt in eval.yaml when rules.md states another
+
+params:
+  page_width_pt: 612                 # US letter
+  page_height_pt: 792
+  margin_pt: 72                      # 1 in; set params.margin_pt in eval.yaml when rules.md states another
+  eps_v_pt: 3.0                      # vertical tolerance (glyph boxes include ascent and descent)
+  eps_pt: 3.0                        # horizontal tolerance: glyph advance boxes of text set exactly at the margin overhang it by 1-3 pt
+  # page_limit: 30                   # unset on purpose: no rules.md states its limit in machine-readable form
+
+checks:
+  - id: DEF-CONT-001
+    gate: 0
+    kind: T
+    name: every INPUT block (section, paragraph, quote, list item) appears in the PDF, in order, unaltered
+    method: g0_content
+    expect: "0 blocks missing or altered"
+    fix: {anchor: "set page("}
+  - id: DEF-FORM-001
+    gate: 1
+    kind: M
+    name: every page is US letter, 612 x 792 pt
+    method: page_size
+    expect: "all pages 612 x 792"
+    fix: {anchor: "set page("}
+  - id: DEF-FORM-002
+    gate: 1
+    kind: M
+    name: no body text in the 1 in margins (running headers and footers and pleading line numbers excepted)
+    method: margins_body
+    expect: "body text left >= 72, right <= 540, top >= 72, bottom <= 720"
+    fix: {anchor: "margin"}
+  - id: DEF-FORM-003
+    gate: 1
+    kind: M
+    name: body text is at least the stated size (12 pt unless the folder's eval.yaml says otherwise)
+    method: body_size
+    expect: "the most common word height is >= the height of the stated size in this font"
+    fix: {anchor: "size"}
+  - id: DEF-FONT-001
+    gate: 1
+    kind: M
+    name: every font in the PDF is embedded
+    method: fonts_all_embedded
+    expect: "all fonts emb=yes"
+    fix: {anchor: "font"}
+  - id: DEF-FONT-002
+    gate: 1
+    kind: T
+    name: every font is the family the template declares (Times New Roman or its metric twin unless it declares otherwise)
+    method: fonts_embedded
+    expect: "all embedded font names start with a declared family (no fallback)"
+    fix: {anchor: "font-family"}
+  - id: DEF-LEN-001
+    gate: 1
+    kind: M
+    name: the page count is within the court's page limit
+    method: page_limit
+    requires: ".params.page_limit"
+    engines_reason: "no rules.md states a page limit in machine-readable form; set params.page_limit in eval.yaml"
+    expect: "<= params.page_limit pages"
+    fix: {anchor: "set page("}
+
+# Reported as SKIP by `fb check` (no rule data to test against). DEF-RENDER-001, render succeeds with no typst warnings,
+# is run by the driver itself (`fb render --deny-warnings`) before any of the above.
