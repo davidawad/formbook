@@ -1,0 +1,7 @@
+# Numbers the Court's Rules state (rules.md). The default checks (data/checks-default.yaml) assume US letter pages with 1 in margins.
+# Rule 33.1(a): booklet format, 6 1/8 x 9 1/4 inches (SCOTUS-FORM-001, 441 x 666 pt).
+# Rule 33.1(c): margins at least three-fourths of an inch on all sides (SCOTUS-FORM-007, 54 pt).
+params:
+  page_width_pt: 441
+  page_height_pt: 666
+  margin_pt: 54
