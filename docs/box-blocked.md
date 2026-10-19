@@ -671,3 +671,7 @@ RESOLVED ohioctapp/motion-brief: courts/sixth-circuit/ohio/state/court-of-appeal
 BLOCKED ohioctapp/petition-for-discretionary-review: no such filing in Ohio courts of appeals; closest analog, an App.R. 5 motion for leave to appeal, has no public filed copy found (web search, Buckeye/ACLU Ohio/Earthjustice Wayback CDX) (fb-l129.1 pass 2, 2026-10-18)
 RESOLVED ohioctcl/motion-brief: courts/sixth-circuit/ohio/state/court-of-claims/usage/FILED-EXAMPLE-motion-brief.pdf (Waitt v. Kent State Univ., No. 2020-00392JD, motion to dismiss, e-filing stamp) (fb-l129.1 pass 2, 2026-10-18)
 BLOCKED ohioctcl/amicus-brief: no public copy; Court of Claims docket portal is login-walled (403 direct), court site posts no party filings, documentcloud 403, web search found none (fb-l129.1 pass 2, 2026-10-18)
+RESOLVED fladistctapp2/petition-for-review: FILED-EXAMPLE-petition-for-review.pdf (fb-l129.1 pass 2, 2026-10-18)
+RESOLVED fladistctapp4/petition-for-review: FILED-EXAMPLE-petition-for-review.pdf (fb-l129.1 pass 2, 2026-10-18)
+RESOLVED fladistctapp5/petition-for-review: FILED-EXAMPLE-petition-for-review.pdf (fb-l129.1 pass 2, 2026-10-18)
+BLOCKED fladistctapp6/petition-for-review: no Review Non-Final Agency Action case ever docketed in the 6th DCA; its 2 order-excluding-press petitions are secured on ACIS; no 6th DCA petition on any DOAH docket; ACIS full-text search found only certiorari petitions (fb-l129.1 pass 2, 2026-10-18)
