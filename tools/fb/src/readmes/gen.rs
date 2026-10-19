@@ -407,6 +407,41 @@ fn first_seen(it: impl Iterator<Item = String>) -> Vec<String> {
     })
 }
 
+/// The "Doc folders" section of a court README (with a trailing blank line): the eval tally, one row per doc folder.
+fn docs_text(ds: &[Doc]) -> String {
+    let with: Vec<&Doc> = ds.iter().filter(|d| d.has_input).collect();
+    let eval = |d: &Doc| match (d.has_input, d.pass) {
+        (false, _) => "no INPUT",
+        (true, true) => "pass",
+        (true, false) => "not passing",
+    };
+    let link = |d: &Doc| match d.doctype.as_str() {
+        "(court root)" => ".".to_string(),
+        n => n.to_string(),
+    };
+    let rows: Vec<String> = ds
+        .iter()
+        .map(|d| {
+            format!(
+                "| [{}]({}) | {} | {} |",
+                d.doctype,
+                link(d),
+                d.status,
+                eval(d)
+            )
+        })
+        .collect();
+    match ds.is_empty() {
+        true => String::new(),
+        false => format!(
+            "## Doc folders\n\n{} of {} doc folders with an INPUT pass the typst eval.\n\n| Doc folder | Status | Eval |\n|---|---|---|\n{}\n",
+            with.iter().filter(|d| d.pass).count(),
+            with.len(),
+            rows.join("\n")
+        ),
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -442,40 +477,5 @@ mod tests {
     fn relative_links() {
         assert_eq!(relto("", "courts/a"), "courts/a");
         assert_eq!(relto("courts", "courts/a/b"), "a/b");
-    }
-}
-
-/// The "Doc folders" section of a court README (with a trailing blank line): the eval tally, one row per doc folder.
-fn docs_text(ds: &[Doc]) -> String {
-    let with: Vec<&Doc> = ds.iter().filter(|d| d.has_input).collect();
-    let eval = |d: &Doc| match (d.has_input, d.pass) {
-        (false, _) => "no INPUT",
-        (true, true) => "pass",
-        (true, false) => "not passing",
-    };
-    let link = |d: &Doc| match d.doctype.as_str() {
-        "(court root)" => ".".to_string(),
-        n => n.to_string(),
-    };
-    let rows: Vec<String> = ds
-        .iter()
-        .map(|d| {
-            format!(
-                "| [{}]({}) | {} | {} |",
-                d.doctype,
-                link(d),
-                d.status,
-                eval(d)
-            )
-        })
-        .collect();
-    match ds.is_empty() {
-        true => String::new(),
-        false => format!(
-            "## Doc folders\n\n{} of {} doc folders with an INPUT pass the typst eval.\n\n| Doc folder | Status | Eval |\n|---|---|---|\n{}\n",
-            with.iter().filter(|d| d.pass).count(),
-            with.len(),
-            rows.join("\n")
-        ),
     }
 }
