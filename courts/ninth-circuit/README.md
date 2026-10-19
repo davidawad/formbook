@@ -5,7 +5,7 @@ Courts under `courts/ninth-circuit` (65).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The Ninth Circuit](bankruptcy-appellate-panel) | `bap9` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Appellate Panel of The Ninth Circuit](bankruptcy-appellate-panel) | `bap9` | up for review | — | — | — | 14 |
 | [Court of Appeals for the Ninth Circuit](court-of-appeals) | `ca9` | up for review | pass | built | — | 71 |
 | [United States Bankruptcy Court, D. Alaska](alaska/federal/bankruptcy-district) | `akb` | up for review | — | — | — | 14 |
 | [United States District Court for the District of Alaska](alaska/federal/district) | `akd` | up for review | — | — | — | 14 |

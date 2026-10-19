@@ -389,7 +389,7 @@
   set par(first-line-indent: 0pt, leading: body-leading, spacing: body-leading, justify: false)
   [This brief complies with the type-volume limit of Fed. R. App. P. 32(a)(7)(B) #if basis == "cross-appeal" [(as applied by Fed. R. App. P. 28.1(e)(2)(A)(ii))] because, excluding the parts of the brief exempted by Fed. R. App. P. 32(f) and 11th Cir. R. 32-4, it contains #group-digits(words) words#if meta.at("manual_image_words", default: 0) > 0 [, including #meta.manual_image_words words manually counted in visual images].]
   parbreak()
-  [This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because it has been prepared in a proportionally spaced typeface, #font-family, #str(int(type-size / 1pt))-point, set with Typst #str(sys.version).]
+  [This brief complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style requirements of Fed. R. App. P. 32(a)(6) because it has been prepared in a proportionally spaced typeface, #font-family.first(), #str(int(type-size / 1pt))-point, set with Typst #str(sys.version).]
   form-sig-line(meta)
 }
 

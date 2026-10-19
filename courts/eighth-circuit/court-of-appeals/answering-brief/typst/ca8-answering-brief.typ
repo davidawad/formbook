@@ -390,7 +390,7 @@
 #let certificate-of-compliance(meta, words) = {
   heading(level: 1, numbering: none)[Certificate of Compliance]
   set par(first-line-indent: para-indent)
-  [This brief complies with the type-volume limitations imposed by Federal Rule of Appellate Procedure 32(a)(7)(B)(i) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Rule 32(f). This brief complies with the typeface and typestyle requirements of Federal Rules of Appellate Procedure 32(a)(5) and 32(a)(6) because it has been prepared in a proportionally spaced typeface, #int(type-size / 1pt)-point #font-family. This brief complies with the electronic-filing requirements of Local Rule 28A(h)(2) because it was #need(meta, "virus_check").]
+  [This brief complies with the type-volume limitations imposed by Federal Rule of Appellate Procedure 32(a)(7)(B)(i) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Rule 32(f). This brief complies with the typeface and typestyle requirements of Federal Rules of Appellate Procedure 32(a)(5) and 32(a)(6) because it has been prepared in a proportionally spaced typeface, #int(type-size / 1pt)-point #font-family.first(). This brief complies with the electronic-filing requirements of Local Rule 28A(h)(2) because it was #need(meta, "virus_check").]
   form-sig-line(meta)
 }
 

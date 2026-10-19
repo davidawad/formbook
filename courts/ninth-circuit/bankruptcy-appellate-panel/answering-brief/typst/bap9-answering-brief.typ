@@ -249,7 +249,7 @@
     certificate("Certificate of Compliance", {
       [This brief complies with the type-volume limitation of Fed. R. Bankr. P. 8015(a)(7) because it contains #group-digits(words) words, excluding the parts of the brief exempted by Fed. R. Bankr. P. 8015(g).]
       parbreak()
-      [This brief complies with the typeface and type-style requirements of Fed. R. Bankr. P. 8015(a)(5) and (6) because it has been prepared in a proportionally spaced typeface, 14-point #font-family, with plain roman type and italics for emphasis.]
+      [This brief complies with the typeface and type-style requirements of Fed. R. Bankr. P. 8015(a)(5) and (6) because it has been prepared in a proportionally spaced typeface, 14-point #font-family.first(), with plain roman type and italics for emphasis.]
       sigline
     })
   }
