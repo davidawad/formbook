@@ -680,3 +680,5 @@ BLOCKED nyappterm/answering-brief: no public Appellate Term respondent's brief; 
 BLOCKED nyappterm/petition-for-discretionary-review: Appellate Term leave applications are unpublished motions; none found on any public host (fb-l129.1 pass 2, 2026-10-18)
 BLOCKED nyappterm/motion-brief: no public Appellate Term motion papers found; nycourts/NYSCEF 403 (fb-l129.1 pass 2, 2026-10-18)
 BLOCKED nyappdiv/petition-for-review: no public EDPL 207 or CPLR 7804(g) transferred petition; nycourts/NYSCEF 403, AG and advocacy archives hold only briefs (fb-l129.1 pass 2, 2026-10-18)
+BLOCKED dc/petition-for-discretionary-review: no filed application for allowance of appeal public; web search finds only Form 3, guide, rules and an opinion; dccourts.gov 403 (fb-l129.1 pass 2, 2026-10-18)
+BLOCKED dc/petition-for-writ: no public DCCA Rule 21 petition; disb.dc.gov (587 publications) has only 20-OA-8 orders and status reports; web search finds only orders and federal petitions (fb-l129.1 pass 2, 2026-10-18)
