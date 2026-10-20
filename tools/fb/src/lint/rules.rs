@@ -1,6 +1,6 @@
 //! `fb lint rules`: the format of every `courts/**/rules.md`, offline (no URL is fetched).
 //!   - a Sources table (a table under a heading that names sources) with at least one http(s) URL;
-//!   - requirement tables (first column `ID` or `Stable ID`): every ID matches `^[A-Z0-9]+-[A-Z]+-[0-9]{3}$`
+//!   - requirement tables (first column `ID` or `Stable ID`): every ID matches `^[A-Z0-9]+(-[A-Z0-9]+)+-[0-9]{3}$`
 //!     and is unique in the file; the Kind cell starts with one of M, C, T, A (a qualifier may follow:
 //!     `M (conditional)`); a row of Kind M has a non-empty source cell (the first column whose header
 //!     names a source, else a rule);
@@ -24,13 +24,21 @@ fn is_separator(c: &[String]) -> bool {
         .all(|x| x.chars().all(|ch| matches!(ch, '-' | ':' | ' ')))
 }
 
-/// `^[A-Z0-9]+-[A-Z]+-[0-9]{3}$`
+/// `^[A-Z0-9]+(-[A-Z0-9]+)+-[0-9]{3}$`: a court prefix, one or more scope segments (`FORM`, or `OB-CONT` for a
+/// doc type), and a three-digit number.
 pub fn valid_id(id: &str) -> bool {
     let parts: Vec<&str> = id.split('-').collect();
-    matches!(parts.as_slice(), [a, b, c]
-        if !a.is_empty() && a.chars().all(|ch| ch.is_ascii_uppercase() || ch.is_ascii_digit())
-        && !b.is_empty() && b.chars().all(|ch| ch.is_ascii_uppercase())
-        && c.len() == 3 && c.chars().all(|ch| ch.is_ascii_digit()))
+    let [head @ .., last] = parts.as_slice() else {
+        return false;
+    };
+    head.len() >= 2
+        && head.iter().all(|p| {
+            !p.is_empty()
+                && p.chars()
+                    .all(|ch| ch.is_ascii_uppercase() || ch.is_ascii_digit())
+        })
+        && last.len() == 3
+        && last.chars().all(|ch| ch.is_ascii_digit())
 }
 
 /// The Kind letter of a cell: `M`, `C`, `T` or `A`, optionally followed by a qualifier.
@@ -114,7 +122,7 @@ pub fn check_text(name: &str, text: &str) -> Vec<String> {
             if !valid_id(id) {
                 found.push(f(
                     n,
-                    format!("ID `{id}` does not match ^[A-Z0-9]+-[A-Z]+-[0-9]{{3}}$"),
+                    format!("ID `{id}` does not match ^[A-Z0-9]+(-[A-Z0-9]+)+-[0-9]{{3}}$"),
                 ));
             }
             if let Some(first) = seen.insert(id.to_string(), n) {
@@ -204,12 +212,12 @@ mod tests {
 
     #[test]
     fn ids_and_kinds() {
-        assert!(valid_id("CA9-FORM-001") && valid_id("A-B-123"));
+        assert!(valid_id("CA9-FORM-001") && valid_id("A-B-123") && valid_id("CAFC-OB-LEN-001"));
         for bad in [
-            "CAFC-OB-LEN-001",
+            "CAFC-OB-LEN-1",
             "ca9-FORM-001",
             "CA9-FORM-01",
-            "CA9-FORM1-001",
+            "CA9--001",
             "CA9-001",
             "",
         ] {
@@ -237,7 +245,7 @@ mod tests {
         assert!(check_text("r.md", &no_ver)[0].contains("Verified against"));
         let no_url = GOOD.replace("https://example.gov/r.pdf", "see the court site");
         assert!(check_text("r.md", &no_url)[0].contains("no Sources table"));
-        let bad_id = GOOD.replace("AB1-FORM-002", "AB1-OB-FORM-002");
+        let bad_id = GOOD.replace("AB1-FORM-002", "AB1-form-002");
         assert!(check_text("r.md", &bad_id)[0].contains("does not match"));
         let dup = GOOD.replace("AB1-CONT-001", "AB1-FORM-001");
         assert!(check_text("r.md", &dup)[0].contains("repeats"));

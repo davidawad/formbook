@@ -156,7 +156,7 @@ The appellant's reply brief. Exemplars: `reply-brief/usage/SOURCE.md` (MoneyLion
 | CA2-COVER-031 | Cover color gray (paper copies). | FRAP 32(a)(2); BRIEF-PAGE | M (paper only) |
 | CA2-CONV-030 | Body sections: an untitled or "Introduction"/"Preliminary Statement" opening (MoneyLion: "Introduction"), then "Argument" with roman points, then "Conclusion". Alisigwe goes straight to the argument points. Seen across both filers: Argument points I., II. with A., B. sub-points; Conclusion; certificates last. | EX-RB | C |
 | CA2-CONV-031 | Certificate order differs between filers (MoneyLion: compliance then service; Alisigwe: service then compliance): order is a filer's choice. | EX-RB | C (either order) |
-| CA2-CONV-032 | Alisigwe's cover carries "To be argued by: <name>" at the top right and "Of Counsel" under the counsel block: one filer's (Federal Defenders') style, not a convention. | EX-RB | tier 3 |
+| CA2-CONV-032 | Alisigwe's cover carries "To be argued by: <name>" at the top right and "Of Counsel" under the counsel block: one filer's (Federal Defenders') style, not a convention. | EX-RB | C (tier 3: one filer's style) |
 
 ## Template-only requirements
 

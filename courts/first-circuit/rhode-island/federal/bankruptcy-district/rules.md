@@ -92,7 +92,7 @@ Findings:
 | RIB-CONT-016 | Form B1040 adversary cover sheet, "most current version" (required with non-electronically filed complaints; LBR 7003-1(b) points to LBR 5005-1(b)). Separate paper; not templated. | LBR 7003-1(b); LBR 5005-1(b) | M (separate filing) |
 | RIB-CONT-017 | Summons and complaint also served on the debtor's attorney in the bankruptcy case. | LBR 7004-1 | A |
 | RIB-CONT-018 | A non-governmental corporate party files a corporate disclosure statement with its initial pleading (separate paper). | LBR 5005-2; FRBP 7007.1 | M (separate filing) |
-| RIB-LEN-010 | No page limit for a complaint (LBR 9013-1(b) limits motions, responses, briefs and memoranda). | LBR 9013-1(b) | (none) |
+| RIB-LEN-010 | No page limit for a complaint (LBR 9013-1(b) limits motions, responses, briefs and memoranda). | LBR 9013-1(b) | M (none) |
 
 ## Doc type: motion-brief
 

@@ -34,7 +34,7 @@ Alias `nvd`. Verified against the court-posted Local Rules amended 2020 (PDF mod
 |---|---|---|---|
 | NVD-CONT-003 | Motion and supporting points-and-authorities memorandum are combined into one document. | LR 7-2(a) | M |
 | NVD-LEN-001 | Motions other than summary judgment are limited to 24 pages, excluding exhibits. | LR 7-3(b) | M |
-| NVD-COVER-001 | Notice of hearing is a separate document stating date, time, place, relief description, objection deadline, and prescribed warning. | LR 9014(b)(1) | M |
+| NVD-COVER-003 | Notice of hearing is a separate document stating date, time, place, relief description, objection deadline, and prescribed warning. | LR 9014(b)(1) | M |
 | NVD-CONT-004 | Motion states facts and includes legal memorandum. | LR 9014(c)(1) | M |
 | NVD-LEN-002 | Opening brief or points and authorities in a contested matter is limited to 20 pages, excluding exhibits, tables, and caption. | LR 9014(e)(1) | M |
 | NVD-CERT-001 | Proof of service is filed within seven days of the motion. | LR 9014(b)(2) | M |

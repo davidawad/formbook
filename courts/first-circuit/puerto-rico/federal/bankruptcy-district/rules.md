@@ -88,7 +88,7 @@ Findings:
 | PRB-CONT-016 | Form B1040 adversary cover sheet filed with the complaint (a separate paper; not templated). | LBR 7003-1 | M (separate filing) |
 | PRB-CONT-017 | Summons issued by the clerk on LBF D (not part of the complaint; not templated). | LBR 7004-2 | M (separate filing) |
 | PRB-CONT-018 | A nongovernmental corporate party (other than the debtor) files a corporate ownership statement with its first pleading (separate paper). | FRBP 7007.1(a)-(b) | M (separate filing) |
-| PRB-LEN-010 | No page limit for a complaint (L.Cv.R. 7(e) limits are for motions and memoranda). | LCVR 7(e) | (none) |
+| PRB-LEN-010 | No page limit for a complaint (L.Cv.R. 7(e) limits are for motions and memoranda). | LCVR 7(e) | M (none) |
 
 ## Doc type: motion-brief
 

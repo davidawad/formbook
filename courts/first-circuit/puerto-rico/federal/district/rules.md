@@ -66,7 +66,7 @@ Findings:
 | PRD-CONT-014 | Section headings centered in bold capitals (e.g. INTRODUCTION, PARTIES, JURISDICTION AND VENUE, claims, PRAYER FOR RELIEF), numbered paragraphs running continuously through the headings, lettered prayer items: EX-C1 (A to G under PRAYER FOR RELIEF) and EX-C2 ("WHEREFORE", a-d). | EX-C1, EX-C2 | C |
 | PRD-CONT-015 | Civil Cover Sheet (JS-44) and Category Sheet accompany the complaint (separate papers; not templated). | LCVR 3(a) | M (separate filing) |
 | PRD-CONT-016 | Disclosure statement of a nongovernmental corporate party, and the diversity citizenship statement, filed with the first appearance (separate paper). | FRCP 7.1(a)-(b); LCVR 7.1 | M (separate filing) |
-| PRD-LEN-010 | No page limit for a complaint. | LCVR 7(e) (limits are for motions and memoranda) | (none) |
+| PRD-LEN-010 | No page limit for a complaint. | LCVR 7(e) (limits are for motions and memoranda) | M (none) |
 
 ## Doc type: motion-brief
 
