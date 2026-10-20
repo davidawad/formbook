@@ -26,6 +26,12 @@
   show heading: set par(first-line-indent: 0pt)
   show quote.where(block: true): set par(leading: 0.65em)
   show quote.where(block: true): it => pad(left: 0.5in, right: 0.5in, it)
+  // A footnote is kept whole on one page, not split across a page break (size and leading inherit the body).
+  show footnote.entry: it => block(breakable: false, {
+    set text(size: body-size)
+    set par(leading: body-leading, justify: false)
+    it
+  })
 
   set page(
     paper: "us-letter",
