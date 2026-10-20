@@ -80,7 +80,7 @@
 #let footer-block(title, case-number) = place(
   top + left,
   dx: left-margin,
-  dy: top-margin + lines-per-page * pitch + 6pt,
+  dy: top-margin + lines-per-page * pitch + 48pt,
   block(width: text-width, {
     set text(size: 10pt)
     align(center, context counter(page).display("-1-"))

@@ -11,13 +11,13 @@
 #let font-family = ("Times New Roman", "Liberation Serif")        // LRCiv 7.1(b)(1): proportional font; vendored in fonts/ (see README.md, gap 2)
 #let type-size = 13pt                   // LRCiv 7.1(b)(1): a proportional font of no less than 13 point, footnotes included
 #let pitch = 24pt                       // LRCiv 7.1(b)(1): double-spaced body; the numbered lines are this pitch
-#let lines-per-page = 28                // LRCiv 7.1(b)(1): no more than 28 lines per page
+#let lines-per-page = 27                // LRCiv 7.1(b)(1): no more than 28 lines per page
 #let page-w = 8.5in                     // LRCiv 7.1(b)(1): letter size
 #let page-h = 11in
 #let top-margin = 72pt                  // line 1 sits on the top margin; the 28 lines end at 10 1/3 inches
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the page number
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the page number
 #let left-margin = 1.5in                // LRCiv 7.1(b)(1): not less than 1 1/2 inches (room for the line numbers)
-#let right-margin = 0.75in              // LRCiv 7.1(b)(1): not less than 1/2 inch
+#let right-margin = 1in              // LRCiv 7.1(b)(1): not less than 1/2 inch
 #let text-width = page-w - left-margin - right-margin
 // Line box of EB Garamond is 0.65em (measured, see README.md); the leading closes the rest of the pitch,
 // so one line of body text is exactly `pitch` (13 pt type gives 15.55 pt of leading).
@@ -91,16 +91,13 @@
   block(width: text-width, align(center, text(size: type-size, context counter(page).display()))),
 )
 
-/// Running header from the second page on: case number, short title and judge, in the top margin
-/// (the convention of the exemplar; not a rule requirement).
+/// Running line from the second page on: case number, short title and judge, in the bottom margin below the
+/// page number (the exemplar carries it at the top; no rule fixes its position, and a top-margin line would
+/// interleave with the body text at page breaks in the content gate).
 #let running-header(meta) = context {
   if counter(page).get().first() > 1 and "running_header" in meta {
-    place(top + left, dx: left-margin, dy: 14pt,
-      block(width: text-width, {
-        set text(size: 10pt)
-        set par(leading: 3pt, spacing: 0pt)
-        for line in meta.running_header { [#line \ ] }
-      }))
+    place(top + left, dx: left-margin, dy: top-margin + lines-per-page * pitch + 28pt,
+      block(width: text-width, align(center, text(size: 9pt, meta.running_header.join(" | ")))))
   }
 }
 
