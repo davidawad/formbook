@@ -12,13 +12,13 @@
 #let font-family = ("Times New Roman", "Liberation Serif")        // LRCiv 7.1(b)(1): proportional font; vendored in fonts/ (see README.md, gap 2)
 #let type-size = 13pt                   // LRCiv 7.1(b)(1): a proportional font of no less than 13 point, footnotes included
 #let pitch = 24pt                       // LRCiv 7.1(b)(1): double-spaced body; the numbered lines are this pitch
-#let lines-per-page = 28                // LRCiv 7.1(b)(1): no more than 28 lines per page
+#let lines-per-page = 27                // LRCiv 7.1(b)(1): no more than 28 lines per page
 #let page-w = 8.5in                     // LRCiv 7.1(b)(1): letter size
 #let page-h = 11in
 #let top-margin = 72pt                  // line 1 sits on the top margin; the 28 lines end at 10 1/3 inches
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the page number
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the page number
 #let left-margin = 1.5in                // LRCiv 7.1(b)(1): not less than 1 1/2 inches (room for the line numbers)
-#let right-margin = 0.75in              // LRCiv 7.1(b)(1): not less than 1/2 inch
+#let right-margin = 1in              // LRCiv 7.1(b)(1): not less than 1/2 inch
 #let text-width = page-w - left-margin - right-margin
 // Line box of EB Garamond is 0.65em (measured, see README.md); the leading closes the rest of the pitch,
 // so one line of body text is exactly `pitch` (13 pt type gives 15.55 pt of leading).

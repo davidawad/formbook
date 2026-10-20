@@ -15,13 +15,13 @@
 #let type-size = 13pt                   // LRBP 9004-1(g): "a proportional font size no smaller than 13 point"
 #let footnote-size = 12pt               // LRBP 9004-1(g): footnotes may be 12 point
 #let pitch = 24pt                       // LRBP 9004-1(g): double spacing; the numbered lines are this pitch
-#let lines-per-page = 28                // LRBP 9004-1(g): no more than 28 lines per page
+#let lines-per-page = 27                // LRBP 9004-1(g): no more than 28 lines per page
 #let page-w = 8.5in                     // LRBP 9004-1(g): paper 8 1/2 by 11 inches
 #let page-h = 11in
 #let top-margin = 72pt                  // numbered line 1 sits on the top margin
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the footer
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the footer
 #let left-margin = 1.5in                // LRBP 9004-1(g): left margin at least 1 1/2 inches
-#let right-margin = 0.75in              // LRBP 9004-1(g): right margin at least 1/2 inch
+#let right-margin = 1in              // LRBP 9004-1(g): right margin at least 1/2 inch
 #let text-width = page-w - left-margin - right-margin
 // 8.45 pt is EB Garamond's natural line pitch at 13 pt (0.65 em, measured); 15.55 pt of leading makes
 // the baseline pitch exactly 24 pt. Measured with pdftotext -bbox on the render (README.md).
