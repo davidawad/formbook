@@ -236,8 +236,18 @@ mod tests {
 
     /// DEF-CONT-001 on a one-page document: `blocks_missing` for `md` against PDF text `runs`.
     fn g0_missing(md: &str, runs: &[&str]) -> String {
+        let paged: Vec<(u32, &str)> = runs.iter().map(|t| (1, *t)).collect();
+        g0_metric(md, &paged, "blocks_missing")
+    }
+
+    /// One metric of gate0 for `md` against PDF text runs given as (page, text).
+    fn g0_metric(md: &str, runs: &[(u32, &str)], metric: &str) -> String {
         let chk = format!("{}/../check", env!("CARGO_MANIFEST_DIR"));
-        let dir = std::env::temp_dir().join(format!("fb-g0-{}-{}", std::process::id(), md.len()));
+        let dir = std::env::temp_dir().join(format!(
+            "fb-g0-{}-{:x}",
+            std::process::id(),
+            md.len() * 31 + runs.len() * 7 + metric.len()
+        ));
         std::fs::create_dir_all(&dir).unwrap();
         let (mdf, runsf, blocks) = (
             dir.join("a.md"),
@@ -248,7 +258,7 @@ mod tests {
         let rows: String = runs
             .iter()
             .enumerate()
-            .map(|(i, t)| format!("1\t{}\t0\t0\t0\t0\t{t}\n", 100 + 20 * i))
+            .map(|(i, (pg, t))| format!("{pg}\t{}\t0\t0\t0\t0\t{t}\n", 100 + 20 * i))
             .collect();
         std::fs::write(&runsf, rows).unwrap();
         let b = std::process::Command::new("gawk")
@@ -275,7 +285,7 @@ mod tests {
         assert!(ok);
         let m = std::fs::read_to_string(dir.join("g0.metrics")).unwrap();
         m.lines()
-            .find_map(|l| l.strip_prefix("blocks_missing=").map(String::from))
+            .find_map(|l| l.strip_prefix(&format!("{metric}=")).map(String::from))
             .unwrap()
     }
 
@@ -294,5 +304,146 @@ mod tests {
         // the literal text around the placeholder is still required
         let runs = ["First paragraph.", "Word total: 1,577.", "Last paragraph."];
         assert_ne!(g0_missing(md, &runs), "0");
+    }
+
+    /// pdf-runs.awk on a page of the given point size, as `pdftohtml -zoom 2` prints it.
+    fn runs_tsv(w_pt: u32, h_pt: u32, top_pt: u32) -> String {
+        use std::io::Write;
+        let chk = format!("{}/../check", env!("CARGO_MANIFEST_DIR"));
+        let xml = format!(
+            "<page number=\"1\" position=\"absolute\" top=\"0\" left=\"0\" height=\"{}\" width=\"{}\">\n<text top=\"{}\" left=\"144\" width=\"200\" height=\"24\" font=\"0\">hello</text>\n",
+            h_pt * 2,
+            w_pt * 2,
+            top_pt * 2
+        );
+        let mut child = std::process::Command::new("gawk")
+            .args(["-f", &format!("{chk}/pdf-runs.awk")])
+            .stdin(Stdio::piped())
+            .stdout(Stdio::piped())
+            .spawn()
+            .unwrap();
+        child
+            .stdin
+            .take()
+            .unwrap()
+            .write_all(xml.as_bytes())
+            .unwrap();
+        String::from_utf8(child.wait_with_output().unwrap().stdout).unwrap()
+    }
+
+    #[test]
+    fn run_geometry_is_in_points_on_any_page_size() {
+        assert_eq!(
+            runs_tsv(612, 792, 700),
+            "1\t700.00\t72.00\t100.00\t12.00\t0\thello\n"
+        );
+        // a 441 x 666 booklet page: y must not be inflated by 441/612 (fb-1m3z)
+        assert_eq!(
+            runs_tsv(441, 666, 600),
+            "1\t600.00\t72.00\t100.00\t12.00\t0\thello\n"
+        );
+    }
+
+    /// md-blocks.awk (default checks) on `md`: the TEXT column of every block.
+    fn block_texts(md: &str) -> Vec<String> {
+        let chk = format!("{}/../check", env!("CARGO_MANIFEST_DIR"));
+        let f =
+            std::env::temp_dir().join(format!("fb-mdb-{}-{:x}.md", std::process::id(), md.len()));
+        std::fs::write(&f, md).unwrap();
+        let out = std::process::Command::new("gawk")
+            .args(["-v", "DEHYPHEN=1", "-f", &format!("{chk}/md-blocks.awk")])
+            .arg(&f)
+            .output()
+            .unwrap();
+        String::from_utf8(out.stdout)
+            .unwrap()
+            .lines()
+            .map(|l| l.splitn(4, '\t').nth(3).unwrap_or("").to_string())
+            .collect()
+    }
+
+    #[test]
+    fn template_directives_are_not_content() {
+        let md = "[[TOC]]\n\n[[TOA]]\n\n[[MEMO]]\n\n[unnumbered] WHEREFORE, x.\n\n[signature]\n\n[sig] Dated now.\n[sig] /s/ A\n\n: Idaho para.\n\n%Missouri para.\n\n%*Id.* at 5.\n\nPlain.\n";
+        assert_eq!(
+            block_texts(md),
+            [
+                "WHEREFORE, x.",
+                "Dated now. /s/ A",
+                "Idaho para.",
+                "Missouri para.",
+                "\u{2}Id.\u{3} at 5.",
+                "Plain."
+            ]
+        );
+    }
+
+    #[test]
+    fn footnote_continued_on_the_next_page_is_reassembled() {
+        let md = "Body one.[^1] More body.\n\nBody two.\n\n[^1]: The note begins here and then it continues onto the next page.\n";
+        // the note's first part is at the foot of page 1, its rest at the foot of page 2
+        let split = [
+            (1, "Body one.1 More body."),
+            (1, "1 The note begins here and then"),
+            (2, "Body two."),
+            (2, "it continues onto the next page."),
+        ];
+        assert_eq!(g0_metric(md, &split, "footnotes_bad"), "0");
+        assert_eq!(g0_metric(md, &split, "blocks_missing"), "0");
+        // a missing tail still fails
+        let cut = [
+            (1, "Body one.1 More body."),
+            (1, "1 The note begins here and then"),
+            (2, "Body two."),
+        ];
+        assert_eq!(g0_metric(md, &cut, "footnotes_bad"), "1");
+    }
+
+    #[test]
+    fn frontmatter_footnote_is_checked_by_its_key() {
+        let md = "---\nlead: Intro.[^1]\nfootnotes:\n  \"1\": >-\n    Note text that wraps\n    over two lines.\nother: x\n---\n\nBody.\n";
+        let ok = [
+            (1, "Intro.1"),
+            (1, "Body."),
+            (1, "1 Note text that wraps over two lines."),
+        ];
+        assert_eq!(g0_metric(md, &ok, "footnotes_bad"), "0");
+        assert_eq!(g0_metric(md, &ok, "footnotes"), "1");
+        let bad = [(1, "Intro.1"), (1, "Body."), (1, "1 Note text that wraps")];
+        assert_eq!(g0_metric(md, &bad, "footnotes_bad"), "1");
+    }
+
+    #[test]
+    fn table_cells_may_interleave_lines_but_must_all_be_present() {
+        let md = "Intro.\n\n| Term | Summary | Ref |\n|---|---|---|\n| Alpha | The first long summary that wraps | \u{b6} 6 |\n| Beta | Second summary | \u{b6} 7 |\n\nAfter.\n";
+        // the PDF reads each row line by line: the short third cell comes before the wrapped second line of the middle cell
+        let ok = [
+            "Intro.",
+            "Term Summary Ref",
+            "Alpha The first long \u{b6} 6",
+            "summary that wraps",
+            "Beta Second summary \u{b6} 7",
+            "After.",
+        ];
+        assert_eq!(g0_missing(md, &ok), "0");
+        // a cell that is not in the PDF at all still fails
+        let bad = [
+            "Intro.",
+            "Term Summary Ref",
+            "Alpha The first long \u{b6} 6",
+            "Beta Second summary \u{b6} 7",
+            "After.",
+        ];
+        assert_ne!(g0_missing(md, &bad), "0");
+        // rows still have to come in order
+        let swapped = [
+            "Intro.",
+            "Term Summary Ref",
+            "Beta Second summary \u{b6} 7",
+            "Alpha The first long \u{b6} 6",
+            "summary that wraps",
+            "After.",
+        ];
+        assert_ne!(g0_missing(md, &swapped), "0");
     }
 }

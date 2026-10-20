@@ -40,6 +40,12 @@ function resolve(s,    out, i, c, n, d, j, depth, txt, url, k, ital) {
     }
     if (c == "*") {
       if (DEHYPHEN != "" && !ital && index(substr(s, i + 1), "*") == 0) { out = out c; i++; continue }   # a lone star ("*3" star page) is literal
+      # CommonMark: a star that cannot open emphasis is literal text. "* * *" (an ellipsis: stars before a space) and
+      # "Jones*," (a star after a letter, before punctuation) open nothing.
+      if (DEHYPHEN != "" && !ital) {
+        d = substr(s, i + 1, 1)
+        if (d == "" || d ~ /[ \t]/ || (d ~ /[[:punct:]]/ && d != "*" && i > 1 && substr(s, i - 1, 1) ~ /[[:alnum:]]/)) { out = out c; i++; continue }
+      }
       if (substr(s, i + 1, 1) == "*") { i += 2; continue }     # bold: no text effect
       ital = !ital; out = out (ital ? "\002" : "\003"); i++; continue
     }
@@ -93,7 +99,29 @@ BEGIN { fm = 0; incomment = 0; section = ""; addendum = 0 }
 
 # frontmatter
 NR == 1 && /^---[ \t]*$/ { fm = 1; next }
-fm == 1 { if ($0 ~ /^---[ \t]*$/) fm = 2; next }
+# A "footnotes:" map in the frontmatter (a template that takes its notes from there, with the [^n] reference in
+# a frontmatter field) is emitted as footnote definitions flagged "fm" in the LABEL column.
+function fm_note_end() {
+  if (fmkey != "") print "F\t" fmkey "\tfm\t" resolve(fmval)
+  fmkey = ""; fmval = ""
+}
+fm == 1 {
+  if ($0 ~ /^---[ \t]*$/) { fm_note_end(); fm = 2; infn = 0; next }
+  if ($0 ~ /^footnotes:[ \t]*$/) { infn = 1; next }
+  if (infn && $0 ~ /^[^ \t#]/) { fm_note_end(); infn = 0 }
+  if (infn) {
+    if ($0 ~ /^  ["']?[^"':]+["']?:/) {
+      fm_note_end()
+      fmkey = $0; sub(/^  ["']?/, "", fmkey); sub(/["']?:.*$/, "", fmkey)
+      v = $0; sub(/^  ["']?[^"':]+["']?:[ \t]*/, "", v)
+      if (v !~ /^[>|][-+]?[ \t]*$/) { gsub(/^["']|["']$/, "", v); fmval = v }
+    } else if ($0 !~ /^[ \t]*$/) {
+      v = $0; sub(/^[ \t]+/, "", v)
+      fmval = (fmval == "" ? v : fmval " " v)
+    }
+  }
+  next
+}
 
 # html comments (single or multi-line)
 {
@@ -137,9 +165,14 @@ line ~ /^#{1,6}[ \t]+/ {
 line ~ /^>/ {
   q = line; sub(/^>[ \t]?/, "", q)
   if (bkind != "Q") { flush(); bkind = "Q" }
+  # default checks: a list inside a quote is bulleted or numbered by the template; each item is its own block
+  if (DEHYPHEN != "" && q ~ /^[ \t]*([-*+]|[0-9]+[.)])[ \t]+/) { flush(); bkind = "Q"; sub(/^[ \t]*([-*+]|[0-9]+[.)])[ \t]+/, "", q) }
   buf = (buf == "" ? q : buf " " q)
   next
 }
+
+# default checks: a thematic break ("* * *", "---", "___") is not text
+DEHYPHEN != "" && line ~ /^[ \t]*([-*_][ \t]*){3,}$/ { flush(); next }
 
 # list item (unescaped marker): its own block
 line ~ /^[ \t]*([-*+]|[0-9]+[.)])[ \t]+/ {
@@ -157,8 +190,20 @@ line ~ /^[ \t]*([-*+]|[0-9]+[.)])[ \t]+/ {
   t = line; sub(/^[ \t]+/, "", t)
   if (DEHYPHEN != "") {   # default checks: template-local paragraph markers ("~ ", "^") and pipe-table syntax are not content
     if (t ~ /^\|[ \t:|-]+\|?[ \t]*$/) next
+    if (t ~ /^\|/) {          # pipe-table row: one record per row, cells joined by \001, so the gate can read them in any order
+      flush()
+      sub(/^\|/, "", t); sub(/\|[ \t]*$/, "", t)
+      ncell = split(t, cells, /\|/); t = ""
+      for (ci = 1; ci <= ncell; ci++) { c1 = cells[ci]; gsub(/^[ \t]+|[ \t]+$/, "", c1); t = t (ci > 1 ? "\001" : "") c1 }
+      buf = t; bkind = "R"; flush()
+      next
+    }
     sub(/^~ /, "", t); sub(/^\^/, "", t)
-    if (t ~ /^\|/) gsub(/\|/, " ", t)
+    # template directives consumed (not printed) by court templates: the content is what follows them
+    if (t ~ /^(\[\[(TOC|TOA|MEMO)\]\]|\[signature\])[ \t]*$/) next      # table / section / signature markers print no INPUT text
+    sub(/^\[unnumbered\][ \t]*/, "", t); sub(/^\[sig\][ \t]*/, "", t)    # unnumbered paragraph, signature-block line
+    sub(/^§ /, "", t)                                                     # Guam "§ " unnumbered-paragraph marker
+    sub(/^: /, "", t); sub(/^%/, "", t)                                   # Idaho ": " and Missouri "%" paragraph markers
   }
   if (bkind == "") bkind = "P"
   buf = (buf == "" ? t : buf " " t)
