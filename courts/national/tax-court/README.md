@@ -4,7 +4,7 @@
 - Alias: `tax`
 - CourtListener: [tax](https://www.courtlistener.com/?court=tax)
 - Level: national
-- Status: **in progress** (14%); manual status in `court.json`: `todo`
+- Status: **up for review** (14%); manual status in `court.json`: `todo`
 
 ## Checklist
 
@@ -23,12 +23,12 @@ A court is `up for review` when `rules.md` is present and every doc folder under
 
 ## Doc folders
 
-0 of 2 doc folders with an INPUT pass the typst eval.
+2 of 2 doc folders with an INPUT pass the typst eval.
 
 | Doc folder | Status | Eval |
 |---|---|---|
-| [petition](petition) | in progress | not passing |
-| [pretrial-memorandum](pretrial-memorandum) | in progress | not passing |
+| [petition](petition) | up for review | pass |
+| [pretrial-memorandum](pretrial-memorandum) | up for review | pass |
 
 ## Folders
 

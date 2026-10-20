@@ -12,26 +12,26 @@ Courts under `courts` (375).
 | [United States Court of Veteran Appeals](federal-circuit/court-of-veteran-appeals) | `cavc` | up for review | — | — | — | 14 |
 | [Patent Trial and Appeal Board](federal-circuit/patent-trial-and-appeal-board) | `ptab` | in progress | — | — | — | 14 |
 | [Trademark Trial and Appeal Board](federal-circuit/trademark-trial-and-appeal-board) | `ttab` | in progress | — | — | — | 14 |
-| [U S Air Force Court of Criminal Appeals](military/air-force-court-of-criminal-appeals) | `afcca` | in progress | — | — | — | 14 |
-| [U S Army Court of Criminal Appeals](military/army-court-of-criminal-appeals) | `acca` | in progress | — | — | — | 14 |
+| [U S Air Force Court of Criminal Appeals](military/air-force-court-of-criminal-appeals) | `afcca` | up for review | — | — | — | 14 |
+| [U S Army Court of Criminal Appeals](military/army-court-of-criminal-appeals) | `acca` | up for review | — | — | — | 14 |
 | [U S Coast Guard Court of Criminal Appeals](military/coast-guard-court-of-criminal-appeals) | `uscgcoca` | up for review | — | — | — | 14 |
 | [United States Court of Appeals For The Armed Forces](military/court-of-appeals-for-the-armed-forces) | `armfor` | up for review | — | — | — | 14 |
 | [United States Court of Military Commission Review](military/court-of-military-commission-review) | `mc` | up for review | — | — | — | 14 |
 | [U S Navy Marine Corps Court of Criminal Appeals](military/navy-marine-corps-court-of-criminal-appeals) | `nmcca` | in progress | — | — | — | 0 |
 | [United States Department of Justice Board of Immigration Appeals](national/board-of-immigration-appeals) | `bia` | up for review | — | — | — | 14 |
-| [United States Foreign Intelligence Surveillance Court](national/foreign-intelligence-surveillance-court) | `fisc` | in progress | — | — | — | 14 |
+| [United States Foreign Intelligence Surveillance Court](national/foreign-intelligence-surveillance-court) | `fisc` | up for review | — | — | — | 14 |
 | [United States Foreign Intelligence Surveillance Court of Review](national/foreign-intelligence-surveillance-court-of-review) | `fiscr` | up for review | — | — | — | 14 |
 | [United States Judicial Panel on Multidistrict Litigation](national/judicial-panel-on-multidistrict-litigation) | `jpml` | up for review | — | — | — | 14 |
-| [United States Tax Court](national/tax-court) | `tax` | in progress | — | — | — | 14 |
+| [United States Tax Court](national/tax-court) | `tax` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Appellate Panel of The First Circuit](first-circuit/bankruptcy-appellate-panel) | `bap1` | up for review | — | — | — | 14 |
 | [Court of Appeals for the First Circuit](first-circuit/court-of-appeals) | `ca1` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Maine](first-circuit/maine/federal/bankruptcy-district) | `meb` | up for review | — | — | — | 14 |
 | [District Court, D. Maine](first-circuit/maine/federal/district) | `med` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Massachusetts](first-circuit/massachusetts/federal/bankruptcy-district) | `mab` | in progress | — | — | — | 14 |
-| [District Court, D. Massachusetts](first-circuit/massachusetts/federal/district) | `mad` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Massachusetts](first-circuit/massachusetts/federal/bankruptcy-district) | `mab` | up for review | — | — | — | 14 |
+| [District Court, D. Massachusetts](first-circuit/massachusetts/federal/district) | `mad` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. New Hampshire](first-circuit/new-hampshire/federal/bankruptcy-district) | `nhb` | up for review | — | — | — | 14 |
 | [District Court, D. New Hampshire](first-circuit/new-hampshire/federal/district) | `nhd` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Puerto Rico](first-circuit/puerto-rico/federal/bankruptcy-district) | `prb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Puerto Rico](first-circuit/puerto-rico/federal/bankruptcy-district) | `prb` | up for review | — | — | — | 14 |
 | [District Court, D. Puerto Rico](first-circuit/puerto-rico/federal/district) | `prd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Rhode Island](first-circuit/rhode-island/federal/bankruptcy-district) | `rib` | up for review | — | — | — | 14 |
 | [District Court, D. Rhode Island](first-circuit/rhode-island/federal/district) | `rid` | up for review | — | — | — | 14 |
@@ -46,17 +46,17 @@ Courts under `courts` (375).
 | [Supreme Court of Puerto Rico](first-circuit/puerto-rico/state/supreme-court) | `prsupreme` | in progress | — | — | — | 14 |
 | [Superior Court of Rhode Island](first-circuit/rhode-island/state/superior-court) | `risuperct` | todo | — | — | — | 0 |
 | [Supreme Court of Rhode Island](first-circuit/rhode-island/state/supreme-court) | `ri` | in progress | — | — | — | 14 |
-| [Court of Appeals for the Second Circuit](second-circuit/court-of-appeals) | `ca2` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Second Circuit](second-circuit/court-of-appeals) | `ca2` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Connecticut](second-circuit/connecticut/federal/bankruptcy-district) | `ctb` | in progress | — | — | — | 14 |
-| [United States District Court for the District of Connecticut](second-circuit/connecticut/federal/district) | `ctd` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Connecticut](second-circuit/connecticut/federal/district) | `ctd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. New York](second-circuit/new-york/federal/bankruptcy-eastern-district) | `nyeb` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, N.D. New York](second-circuit/new-york/federal/bankruptcy-northern-district) | `nynb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, N.D. New York](second-circuit/new-york/federal/bankruptcy-northern-district) | `nynb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, S.D. New York](second-circuit/new-york/federal/bankruptcy-southern-district) | `nysb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. New York](second-circuit/new-york/federal/bankruptcy-western-district) | `nywb` | up for review | — | — | — | 14 |
 | [District Court, E.D. New York](second-circuit/new-york/federal/eastern-district) | `nyed` | up for review | — | — | — | 14 |
-| [District Court, N.D. New York](second-circuit/new-york/federal/northern-district) | `nynd` | in progress | — | — | — | 14 |
-| [District Court, S.D. New York](second-circuit/new-york/federal/southern-district) | `nysd` | in progress | — | — | — | 14 |
-| [District Court, W.D. New York](second-circuit/new-york/federal/western-district) | `nywd` | in progress | — | — | — | 14 |
+| [District Court, N.D. New York](second-circuit/new-york/federal/northern-district) | `nynd` | up for review | — | — | — | 14 |
+| [District Court, S.D. New York](second-circuit/new-york/federal/southern-district) | `nysd` | up for review | — | — | — | 14 |
+| [District Court, W.D. New York](second-circuit/new-york/federal/western-district) | `nywd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Vermont](second-circuit/vermont/federal/bankruptcy-district) | `vtb` | up for review | — | — | — | 14 |
 | [District Court, D. Vermont](second-circuit/vermont/federal/district) | `vtd` | up for review | — | — | — | 14 |
 | [Connecticut Compensation Review Board](second-circuit/connecticut/state/compensation-review-board) | `connworkcompcom` | todo | — | — | — | 0 |
@@ -71,16 +71,16 @@ Courts under `courts` (375).
 | [Supreme Court of Vermont](second-circuit/vermont/state/supreme-court) | `vt` | in progress | — | — | — | 14 |
 | [Court of Appeals for the Third Circuit](third-circuit/court-of-appeals) | `ca3` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Delaware](third-circuit/delaware/federal/bankruptcy-district) | `deb` | up for review | — | — | — | 14 |
-| [United States District Court for the District of Delaware](third-circuit/delaware/federal/district) | `ded` | in progress | — | — | — | 14 |
+| [United States District Court for the District of Delaware](third-circuit/delaware/federal/district) | `ded` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. New Jersey](third-circuit/new-jersey/federal/bankruptcy-district) | `njb` | up for review | — | — | — | 14 |
 | [District Court, D. New Jersey](third-circuit/new-jersey/federal/district) | `njd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Pennsylvania](third-circuit/pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, M.D. Pennsylvania](third-circuit/pennsylvania/federal/bankruptcy-middle-district) | `pamb` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, W.D. Pennsylvania](third-circuit/pennsylvania/federal/bankruptcy-western-district) | `pawb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. Pennsylvania](third-circuit/pennsylvania/federal/bankruptcy-western-district) | `pawb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Pennsylvania](third-circuit/pennsylvania/federal/eastern-district) | `paed` | up for review | — | — | — | 14 |
-| [District Court, M.D. Pennsylvania](third-circuit/pennsylvania/federal/middle-district) | `pamd` | in progress | — | — | — | 14 |
+| [District Court, M.D. Pennsylvania](third-circuit/pennsylvania/federal/middle-district) | `pamd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Pennsylvania](third-circuit/pennsylvania/federal/western-district) | `pawd` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, D. Virgin Islands](third-circuit/virgin-islands/federal/bankruptcy-district) | `vib` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Virgin Islands](third-circuit/virgin-islands/federal/bankruptcy-district) | `vib` | up for review | — | — | — | 14 |
 | [District Court, Virgin Islands](third-circuit/virgin-islands/federal/district) | `vid` | up for review | — | — | — | 14 |
 | [Delaware Court of Chancery](third-circuit/delaware/state/court-of-chancery) | `delch` | todo | — | — | — | 0 |
 | [Court on the Judiciary of Delaware](third-circuit/delaware/state/court-on-the-judiciary) | `deljudct` | todo | — | — | — | 0 |
@@ -124,16 +124,16 @@ Courts under `courts` (375).
 | [Supreme Court of Virginia](fourth-circuit/virginia/state/supreme-court) | `va` | in progress | — | — | — | 14 |
 | [Intermediate Court of Appeals of West Virginia](fourth-circuit/west-virginia/state/intermediate-court-of-appeals) | `wvactapp` | in progress | — | — | — | 14 |
 | [West Virginia Supreme Court](fourth-circuit/west-virginia/state/supreme-court) | `wva` | in progress | — | — | — | 14 |
-| [Court of Appeals for the Fifth Circuit](fifth-circuit/court-of-appeals) | `ca5` | in progress | — | — | — | 14 |
+| [Court of Appeals for the Fifth Circuit](fifth-circuit/court-of-appeals) | `ca5` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Louisiana](fifth-circuit/louisiana/federal/bankruptcy-eastern-district) | `laeb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, M.D. Louisiana](fifth-circuit/louisiana/federal/bankruptcy-middle-district) | `lamb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Louisiana](fifth-circuit/louisiana/federal/bankruptcy-western-district) | `lawb` | in progress | — | — | — | 0 |
-| [United States District Court Eastern District of Louisiana](fifth-circuit/louisiana/federal/eastern-district) | `laed` | in progress | — | — | — | 14 |
-| [District Court, M.D. Louisiana](fifth-circuit/louisiana/federal/middle-district) | `lamd` | in progress | — | — | — | 14 |
-| [District Court, W.D. Louisiana](fifth-circuit/louisiana/federal/western-district) | `lawd` | in progress | — | — | — | 14 |
+| [United States District Court Eastern District of Louisiana](fifth-circuit/louisiana/federal/eastern-district) | `laed` | up for review | — | — | — | 14 |
+| [District Court, M.D. Louisiana](fifth-circuit/louisiana/federal/middle-district) | `lamd` | up for review | — | — | — | 14 |
+| [District Court, W.D. Louisiana](fifth-circuit/louisiana/federal/western-district) | `lawd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, N.D. Mississippi](fifth-circuit/mississippi/federal/bankruptcy-northern-district) | `msnb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, S.D. Mississippi](fifth-circuit/mississippi/federal/bankruptcy-southern-district) | `mssb` | in progress | — | — | — | 0 |
-| [District Court, N.D. Mississippi](fifth-circuit/mississippi/federal/northern-district) | `msnd` | in progress | — | — | — | 14 |
+| [District Court, N.D. Mississippi](fifth-circuit/mississippi/federal/northern-district) | `msnd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Mississippi](fifth-circuit/mississippi/federal/southern-district) | `mssd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Texas](fifth-circuit/texas/federal/bankruptcy-eastern-district) | `txeb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, N.D. Texas](fifth-circuit/texas/federal/bankruptcy-northern-district) | `txnb` | in progress | — | — | — | 0 |
