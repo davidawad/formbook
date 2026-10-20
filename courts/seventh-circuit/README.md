@@ -17,7 +17,7 @@ Courts under `courts/seventh-circuit` (22).
 | [District Court, N.D. Indiana](indiana/federal/northern-district) | `innd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Indiana](indiana/federal/southern-district) | `insd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Wisconsin](wisconsin/federal/bankruptcy-eastern-district) | `wieb` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, W.D. Wisconsin](wisconsin/federal/bankruptcy-western-district) | `wiwb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. Wisconsin](wisconsin/federal/bankruptcy-western-district) | `wiwb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Wisconsin](wisconsin/federal/eastern-district) | `wied` | up for review | — | — | — | 14 |
 | [District Court, W.D. Wisconsin](wisconsin/federal/western-district) | `wiwd` | up for review | — | — | — | 14 |
 | [Appellate Court of Illinois](illinois/state/appellate-court) | `illappct` | in progress | — | — | — | 14 |

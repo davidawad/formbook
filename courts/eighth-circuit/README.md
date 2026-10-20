@@ -25,7 +25,7 @@ Courts under `courts/eighth-circuit` (39).
 | [United States District Court, Nebraska](nebraska/federal/district) | `ned` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. North Dakota](north-dakota/federal/bankruptcy-district) | `ndb` | up for review | — | — | — | 14 |
 | [District Court, D. North Dakota](north-dakota/federal/district) | `ndd` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, D. South Dakota](south-dakota/federal/bankruptcy-district) | `sdb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. South Dakota](south-dakota/federal/bankruptcy-district) | `sdb` | up for review | — | — | — | 14 |
 | [District Court, D. South Dakota](south-dakota/federal/district) | `sdd` | up for review | — | — | — | 14 |
 | [Arkansas Court of Appeals](arkansas/state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 14 |
 | [Arkansas Supreme Court](arkansas/state/supreme-court) | `ark` | in progress | — | — | — | 14 |

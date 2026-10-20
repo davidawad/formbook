@@ -11,7 +11,7 @@ Courts under `courts` (375).
 | [United States Court of International Trade](federal-circuit/court-of-international-trade) | `cit` | up for review | — | — | — | 14 |
 | [United States Court of Veteran Appeals](federal-circuit/court-of-veteran-appeals) | `cavc` | up for review | — | — | — | 14 |
 | [Patent Trial and Appeal Board](federal-circuit/patent-trial-and-appeal-board) | `ptab` | up for review | — | — | — | 14 |
-| [Trademark Trial and Appeal Board](federal-circuit/trademark-trial-and-appeal-board) | `ttab` | in progress | — | — | — | 14 |
+| [Trademark Trial and Appeal Board](federal-circuit/trademark-trial-and-appeal-board) | `ttab` | up for review | — | — | — | 14 |
 | [U S Air Force Court of Criminal Appeals](military/air-force-court-of-criminal-appeals) | `afcca` | up for review | — | — | — | 14 |
 | [U S Army Court of Criminal Appeals](military/army-court-of-criminal-appeals) | `acca` | up for review | — | — | — | 14 |
 | [U S Coast Guard Court of Criminal Appeals](military/coast-guard-court-of-criminal-appeals) | `uscgcoca` | up for review | — | — | — | 14 |
@@ -196,7 +196,7 @@ Courts under `courts` (375).
 | [District Court, N.D. Indiana](seventh-circuit/indiana/federal/northern-district) | `innd` | up for review | — | — | — | 14 |
 | [District Court, S.D. Indiana](seventh-circuit/indiana/federal/southern-district) | `insd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-eastern-district) | `wieb` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, W.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-western-district) | `wiwb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-western-district) | `wiwb` | up for review | — | — | — | 14 |
 | [District Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/eastern-district) | `wied` | up for review | — | — | — | 14 |
 | [District Court, W.D. Wisconsin](seventh-circuit/wisconsin/federal/western-district) | `wiwd` | up for review | — | — | — | 14 |
 | [Appellate Court of Illinois](seventh-circuit/illinois/state/appellate-court) | `illappct` | in progress | — | — | — | 14 |
@@ -226,7 +226,7 @@ Courts under `courts` (375).
 | [United States District Court, Nebraska](eighth-circuit/nebraska/federal/district) | `ned` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. North Dakota](eighth-circuit/north-dakota/federal/bankruptcy-district) | `ndb` | up for review | — | — | — | 14 |
 | [District Court, D. North Dakota](eighth-circuit/north-dakota/federal/district) | `ndd` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, D. South Dakota](eighth-circuit/south-dakota/federal/bankruptcy-district) | `sdb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. South Dakota](eighth-circuit/south-dakota/federal/bankruptcy-district) | `sdb` | up for review | — | — | — | 14 |
 | [District Court, D. South Dakota](eighth-circuit/south-dakota/federal/district) | `sdd` | up for review | — | — | — | 14 |
 | [Arkansas Court of Appeals](eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 14 |
 | [Arkansas Supreme Court](eighth-circuit/arkansas/state/supreme-court) | `ark` | in progress | — | — | — | 14 |

@@ -192,18 +192,24 @@ fn times_doc_dirs(root: &Path) -> Res<Vec<PathBuf>> {
         .ok_or_else(|| fail(2, "font audit has no exemplars map"))?;
     let mut dirs = std::collections::BTreeSet::new();
     for (rel, item) in examples {
-        let body = item
-            .get("body")
-            .and_then(Value::as_str)
-            .unwrap_or("")
-            .to_ascii_lowercase();
-        if body.contains("timesnewroman") || body == "times" {
+        if wants_tnr(item) {
             if let Some(doc) = audit_doc(rel) {
                 dirs.insert(root.join(doc));
             }
         }
     }
     Ok(dirs.into_iter().collect())
+}
+
+/// True when the audited exemplar calls for Times New Roman in the template (and so for an
+/// embedded `TimesNewRomanPSMT`). A Times New Roman body does. Adobe Times (`body == "times"`)
+/// does only when the audit maps it to Times itself; when the audit maps it to `TeX Gyre Termes`
+/// the template declares Termes (what `fb lint fonts` demands) and no TNR is expected.
+fn wants_tnr(record: &Value) -> bool {
+    let text = |k: &str| record.get(k).and_then(Value::as_str).unwrap_or("");
+    let body = text("body").to_ascii_lowercase();
+    body.contains("timesnewroman")
+        || (body == "times" && matches!(text("face"), "Times New Roman" | "Times" | "Times-Roman"))
 }
 
 /// The doc folder of a font-audit key `<doc>/usage/FILED-EXAMPLE-<id>.pdf`.
@@ -222,14 +228,9 @@ pub fn has_times_exemplar(root: &Path, doc: &Path) -> Res<bool> {
         .and_then(Value::as_object)
         .ok_or_else(|| fail(2, "font audit has no exemplars map"))?;
     let rel = doc.strip_prefix(root).unwrap_or(doc).to_string_lossy();
-    Ok(examples.iter().any(|(path, record)| {
-        let body = record
-            .get("body")
-            .and_then(Value::as_str)
-            .unwrap_or("")
-            .to_ascii_lowercase();
-        audit_doc(path) == Some(&*rel) && (body.contains("timesnewroman") || body == "times")
-    }))
+    Ok(examples
+        .iter()
+        .any(|(path, record)| audit_doc(path) == Some(&*rel) && wants_tnr(record)))
 }
 
 /// Migrate Typst/Latex declarations for audited Times exemplars.
@@ -387,5 +388,14 @@ mod tests {
         );
         assert_eq!(audit_doc("courts/x/usage/SAMPLE-ca9-a1.pdf"), None);
         assert_eq!(audit_doc("courts/x/usage/OUTPUT-complaint.typst.pdf"), None);
+    }
+
+    #[test]
+    fn adobe_times_mapped_to_termes_does_not_want_tnr() {
+        let j = |s: &str| serde_json::from_str::<Value>(s).unwrap();
+        assert!(wants_tnr(&j(r#"{"body":"timesnewroman","face":"Times New Roman"}"#)));
+        assert!(wants_tnr(&j(r#"{"body":"times","face":"Times"}"#)));
+        assert!(!wants_tnr(&j(r#"{"body":"times","face":"TeX Gyre Termes"}"#)));
+        assert!(!wants_tnr(&j(r#"{"body":"garamond","face":""}"#)));
     }
 }
