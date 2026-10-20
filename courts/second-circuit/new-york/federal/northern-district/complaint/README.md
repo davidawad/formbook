@@ -41,7 +41,7 @@ No page limit applies to complaints in the N.D.N.Y. Local Rules (L.R. 7.1 limits
 
 - Caption: court title at the top left (two single-spaced lines). Below it, the party block in a left column, a rule under it, the designations indented, "-against-" between parties. Right column: the case number with the judges' initials, then the title of the paper in bold capitals.
 - No pleading-paper line numbers or margin rules. L.R. 10.1 does not require them and the exemplar has none (this differs from the cand complaint template).
-- Body: numbered paragraphs with a 0.5 inch first-line indent (number, then the text one tab later). Headings: level 1 centered capitals, level 2 centered bold, level 3 bold left. A chunk starting with `{unnumbered}` is an unnumbered indented paragraph (the prayer lead-in and the jury-demand sentence). A chunk wrapped in parentheses is a centered, unnumbered subtitle.
+- Body: numbered paragraphs with a 0.5 inch first-line indent (number, then the text one tab later). Headings: level 1 centered capitals, level 2 centered bold, level 3 bold left. A chunk starting with `<!-- unnumbered -->` (an HTML comment, which the template strips) is an unnumbered indented paragraph (the prayer lead-in and the jury-demand sentence). A chunk wrapped in parentheses is a centered, unnumbered subtitle.
 - Prayer items: markdown list, lettered a., b., ... by the template.
 - Signature block: date at the left; firm name in bold capitals, signature line, each signer's typed name, bar roll number and e-mail, then office address, telephone, and the role line in italics, at the right.
 - Footer: centered page number only. No header: the CM/ECF header (case number, document number, filing date) is added by the court's system at filing and is not reproduced.

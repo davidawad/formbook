@@ -178,7 +178,7 @@
   }
   let para-counter = counter("allegation")
 
-  set page(paper: "us-letter", margin: margin, numbering: "1", number-align: center + top)
+  set page(paper: "us-letter", margin: margin, numbering: "1", number-align: center + bottom)
   set document(
     title: need(meta, "title") + ", No. " + need(meta, "case_number"),
     author: need(meta, "signature").signer,

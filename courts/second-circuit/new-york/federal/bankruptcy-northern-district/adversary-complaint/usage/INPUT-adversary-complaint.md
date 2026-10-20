@@ -112,7 +112,7 @@ Upon information and belief, under 11 U.S.C. Section 544 the plaintiff is given 
 
 Upon information and belief, under 11 U.S.C. Section 551 the transfers, upon avoidance, are preserved for the benefit of the bankruptcy estate which the plaintiff is trustee.
 
-% WHEREFORE plaintiff demands judgment against the defendant:
+<!-- unnumbered --> WHEREFORE plaintiff demands judgment against the defendant:
 
 (a) Declaring that the transaction evidenced by the Putative Lease Agreement is to be recharacterized as a secured transaction falling within the scope of Article 9 (Secured Transactions) of the Uniform Commercial Code with AJAX Integrated LLC as debtor and the defendant a secured party;
 

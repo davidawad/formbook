@@ -82,7 +82,7 @@
 
 // ---------------------------------------------------------------------------
 // Body: blank-line-separated blocks; a block is a heading (#, ##, ###), a block quotation (>), a list
-// of "1." items (lettered (a), (b) ...), an unnumbered paragraph ("::" prefix), or a numbered paragraph.
+// of "1." items (lettered (a), (b) ...), an unnumbered paragraph (a leading "<!-- unnumbered -->" HTML comment), or a numbered paragraph.
 // ---------------------------------------------------------------------------
 
 #let heading-block(lvl, t) = {
@@ -135,8 +135,8 @@
       quote-block(c.split("\n").map(l => l.trim(">", at: start).trim()).join(" "))
     } else if c.split("\n").all(l => l.match(regex("^\\d+\\. ")) != none) {
       item-list(c.split("\n").map(l => l.match(regex("^\\d+\\. (.*)$")).captures.at(0)))
-    } else if c.starts-with("::") {
-      unnumbered-par(c.slice(2).trim())
+    } else if c.starts-with("<!-- unnumbered -->") {
+      unnumbered-par(c.slice("<!-- unnumbered -->".len()).trim())
     } else {
       n += 1
       numbered-par(n, c.replace("\n", " "))

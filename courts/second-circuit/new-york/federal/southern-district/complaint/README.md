@@ -40,7 +40,7 @@ Not produced by this template (separate filings, not verified here): civil cover
 
 ## Layout
 
-- Letter paper, one-inch margins, page number centered at the top of the page (the rule does not name a footer; the exemplar has a centered page number).
+- Letter paper, one-inch margins, page number centered in the bottom margin (the rule does not name a position; the exemplar's page numbers sit in the bottom margin, 744 pt from the top). A number at the top of the page printed inside a paragraph that runs over a page break, which the content check reads as altered text.
 - No pleading-paper line numbers and no rules at the margins: the SDNY joint rules have no numbered-line requirement, and the exemplar is not on pleading paper.
 - Caption: court name centered (bold caps), the parties on the left with a rule at the right and bottom, and on the right `ELECTRONICALLY FILED`, the file number, `Hon. ___`, the legends (`CLASS ACTION`), the title (`COMPLAINT`) and `JURY TRIAL DEMANDED`. The layout is a convention; the rules set no caption layout.
 - The lead-in ("Plaintiff ... hereby alleges as follows:") follows the caption on page 1; the body begins on page 1 (the exemplar does too).

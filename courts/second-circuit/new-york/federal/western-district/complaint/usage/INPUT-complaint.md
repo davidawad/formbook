@@ -99,9 +99,9 @@ On or around August 22, 2024, Kerrick served the Town with a Notice of Claim con
 
 ## FIRST AMENDMENT RETALIATION UNDER 42 U.S.C. § 1983 AND THE FOURTEENTH AMENDMENT TO THE U.S. CONSTITUTION
 
-::Defendant Town of Gorham
+<!-- unnumbered --> Defendant Town of Gorham
 
-::Defendants Frederick Lightfoote, Zachary Eddinger, and Brandon Ayers in their individual capacities
+<!-- unnumbered --> Defendants Frederick Lightfoote, Zachary Eddinger, and Brandon Ayers in their individual capacities
 
 All paragraphs of this Complaint are realleged herein.
 
@@ -137,9 +137,9 @@ As a result of Defendants’ unlawful conduct, Kerrick has suffered harm for whi
 
 ## DEPRIVATION OF DUE PROCESS PURSUANT TO 42 U.S.C. § 1983 AND THE FOURTEENTH AMENDMENT TO THE U.S. CONSTITUTION
 
-::Defendant Town of Gorham
+<!-- unnumbered --> Defendant Town of Gorham
 
-::Defendants Frederick Lightfoote and Zachary Eddinger in their individual capacities
+<!-- unnumbered --> Defendants Frederick Lightfoote and Zachary Eddinger in their individual capacities
 
 All paragraphs of this Complaint are realleged herein.
 
@@ -171,7 +171,7 @@ As a result of Defendants’ unlawful conduct, Kerrick has suffered harm for whi
 
 ## WHISTLEBLOWER RETALIATION UNDER CIVIL SERVICE LAW § 75-B
 
-::Defendant Town of Gorham
+<!-- unnumbered --> Defendant Town of Gorham
 
 All paragraphs of this Complaint are realleged herein.
 
@@ -183,7 +183,7 @@ As a direct and proximate result of Defendants’ unlawful retaliatory conduct, 
 
 # REQUESTS FOR RELIEF
 
-::Plaintiff Clair “Bubby” Kerrick respectfully requests that this Court enter a judgment:
+<!-- unnumbered --> Plaintiff Clair “Bubby” Kerrick respectfully requests that this Court enter a judgment:
 
 1. Reinstating Plaintiff to his former employment with the Town, along with full backpay and all prior benefits and rights;
 2. Awarding compensatory and punitive damages, civil penalties or liquidated damages, and other statutory relief and damages in an amount to be determined at trial, including without limitation back pay, front pay, lost wages, benefits, and other remuneration;
@@ -192,5 +192,5 @@ As a direct and proximate result of Defendants’ unlawful retaliatory conduct, 
 
 # DEMAND FOR JURY TRIAL
 
-::Plaintiff demands a jury trial on all matters triable by jury.
+<!-- unnumbered --> Plaintiff demands a jury trial on all matters triable by jury.
 

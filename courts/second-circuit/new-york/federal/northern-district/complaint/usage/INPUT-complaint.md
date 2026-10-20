@@ -195,7 +195,7 @@ Said acts by Defendant Coll are part of an ongoing and continuous pattern of unw
 
 As a direct and proximate result of the Defendants’ misconduct and abuse of authority detailed above, Plaintiff sustained the damages hereinbefore alleged.
 
-{unnumbered} WHEREFORE, Plaintiff respectfully requests that this Court enter judgment in his favor and grant the following relief:
+<!-- unnumbered --> WHEREFORE, Plaintiff respectfully requests that this Court enter judgment in his favor and grant the following relief:
 
 1. Compensatory and consequential damages in an amount to be determined at trial, including lost wages, reputational harm, emotional distress, and other economic and non-economic injuries;
 2. Awarding punitive damages;
@@ -204,4 +204,4 @@ As a direct and proximate result of the Defendants’ misconduct and abuse of au
 
 # DEMAND FOR JURY TRIAL
 
-{unnumbered} Plaintiff hereby demands a jury trial as to all claims triable in this action.
+<!-- unnumbered --> Plaintiff hereby demands a jury trial as to all claims triable in this action.

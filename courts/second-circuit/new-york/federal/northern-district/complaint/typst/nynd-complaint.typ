@@ -77,9 +77,9 @@
 // Body: numbered paragraphs (Fed. R. Civ. P. 10(b)), headings, lists, quotations
 // ---------------------------------------------------------------------------
 
-/// A markdown chunk beginning with "{unnumbered}" is an unnumbered paragraph (e.g. the prayer lead-in);
+/// A markdown chunk beginning with "<!-- unnumbered -->" (an HTML comment; the template strips it) is an unnumbered paragraph (e.g. the prayer lead-in);
 /// one wrapped in parentheses is a centered, unnumbered subtitle (e.g. "(Against Defendants ...)").
-#let marker-free(t) = t.slice(t.position("}") + 1).trim()
+#let marker-free(t) = t.slice("<!-- unnumbered -->".len()).trim()
 
 /// Numbered allegations: each blank-line-separated chunk that is neither a heading, a list, a quotation
 /// nor a marked paragraph is one numbered paragraph. Numbering is applied per chunk, not with a `show par`
@@ -98,7 +98,7 @@
         cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
         gap(body-leading)
       })
-    } else if t.starts-with("{unnumbered}") {
+    } else if t.starts-with("<!-- unnumbered -->") {
       block(width: 100%, above: 0pt, below: body-leading,
         [#h(para-indent)#inl(marker-free(t))])
     } else if t.starts-with("(") and t.ends-with(")") {

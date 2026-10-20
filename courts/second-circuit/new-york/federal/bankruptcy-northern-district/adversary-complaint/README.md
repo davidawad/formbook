@@ -36,7 +36,7 @@ The sample starts with a YAML block. The template reads these keys:
 
 Body: blank-line-separated chunks. `#` is a centred bold heading, `##` a bold heading flush left. Every other chunk is a
 numbered paragraph (FRCP 10(b) via FRBP 7010), except: a chunk starting `(a) ` is an unnumbered prayer item, and a chunk
-starting `% ` is an unnumbered paragraph (the WHEREFORE clause).
+starting `<!-- unnumbered -->` (an HTML comment, which the template strips) is an unnumbered paragraph (the WHEREFORE clause). It replaces a bare `% ` prefix, which the content check read as text the filing does not show.
 
 ## Governing rules
 
