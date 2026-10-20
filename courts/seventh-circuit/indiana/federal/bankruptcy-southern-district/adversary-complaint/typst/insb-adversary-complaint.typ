@@ -164,7 +164,7 @@
     } else if t.starts-with("[") {
       on-grid({ set par(leading: body-leading); align(center, inl(t)) })
     } else if labeled != none {
-      let label = labeled.captures.at(0) + "."
+      let label = "(" + labeled.captures.at(0) + ")"
       let rest = t.slice(labeled.end)
       pad(left: para-indent, on-grid(w: text-width - para-indent, grid(
         columns: (0.6in, 1fr),

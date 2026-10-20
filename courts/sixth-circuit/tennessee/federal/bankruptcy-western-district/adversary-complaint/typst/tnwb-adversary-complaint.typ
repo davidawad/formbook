@@ -181,6 +181,7 @@
       blk(align(center, block(width: 80%)[
         #set par(leading: single-leading)
         #show table: set table(stroke: 0.4pt, inset: (x: 8pt, y: 3pt), align: (left, right))
+        #set table.header(repeat: false)
         #inl(b)
       ]))
     } else if b.starts-with(">") {

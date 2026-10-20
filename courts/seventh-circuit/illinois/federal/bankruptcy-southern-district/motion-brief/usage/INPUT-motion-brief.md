@@ -126,15 +126,15 @@ For the foregoing reasons, Defendants respectfully ask that this Court grant an 
 
 [^1]: Capitalized terms not defined in this memorandum have the same meanings as ascribed to them in Defendants’ Motion to Withdraw the Reference (the “Motion”), to which this memorandum is attached.
 
-[^2]: Hereafter, citations to a section of title 11 (the “Bankruptcy Code”) will be “Section __” or “§ __.”
+[^2]: Hereafter, citations to a section of title 11 (the “Bankruptcy Code”) will be “Section \_\_” or “§ \_\_.”
 
-[^3]: Rule 61 of the Federal Rules of Civil Procedure, made applicable to this case under Federal Rule of Bankruptcy Procedure 9005, provides that “[a]t every stage of the proceeding, the court must disregard all errors and defects that do not affect any party’s substantial rights.” Fed. R. Civ. P. 61 (emphasis added). Hereafter, references to a Federal Rule of Bankruptcy Procedure will be “Rule __.”
+[^3]: Rule 61 of the Federal Rules of Civil Procedure, made applicable to this case under Federal Rule of Bankruptcy Procedure 9005, provides that “[a]t every stage of the proceeding, the court must disregard all errors and defects that do not affect any party’s substantial rights.” Fed. R. Civ. P. 61 (emphasis added). Hereafter, references to a Federal Rule of Bankruptcy Procedure will be “Rule \_\_.”
 
 [^4]: See Complaint, Doc.1, at ¶ 104;
 
 [^5]: See Complaint, Doc.1, passim.
 
-[^6]: See Chapter 7 Voluntary Petition, Doc. 1 in In re Burns, Bankr. Case No. 19-60349-lkg (Bankr. S.D. Ill.) (the “Burns Bankruptcy”). Hereafter, citations to docket entries and filings in the Debtors’ Bankruptcy will be “Doc. __ in 19-60349.”
+[^6]: See Chapter 7 Voluntary Petition, Doc. 1 in In re Burns, Bankr. Case No. 19-60349-lkg (Bankr. S.D. Ill.) (the “Burns Bankruptcy”). Hereafter, citations to docket entries and filings in the Debtors’ Bankruptcy will be “Doc. \_\_ in 19-60349.”
 
 [^7]: See Order of Discharge, Doc. 41 in 19-60349.
 

@@ -15,7 +15,7 @@ debtor:
 title: "MOTION FOR RELIEF FROM THE AUTOMATIC STAY AND BRIEF IN SUPPORT"
 signature:
   firm: "[FIRM NAME]"
-  signer: "[Attorney Name] (Bar No. [______])"
+  signer: "[Attorney Name] (Bar No. [\_\_\_\_\_\_])"
   lines: ["[Mailing address]", "[City], AL [ZIP]", "Tel: [TELEPHONE]", "Email: [address]", "Counsel for Movant [Movant Name]"]
 certificate: "I certify that on [DATE], I served a copy of this motion on the debtor, the debtor's counsel, the chapter trustee and all parties requesting notice by [method] at the addresses shown in the Court's CM/ECF system and by mail to the addresses shown on the attached list. [Signature block]"
 ---
@@ -48,7 +48,7 @@ certificate: "I certify that on [DATE], I served a copy of this motion on the de
 
 ## C. The Debtor's Default and Movant's Demand
 
-10. The Debtor's failure to pay is a default under Section [__] of the Security Agreement. On [DATE], Movant sent the Debtor a written notice of default and demand for payment, a copy of which is attached as Exhibit C. The Debtor did not cure the default within the time stated in that notice.
+10. The Debtor's failure to pay is a default under Section [\_\_] of the Security Agreement. On [DATE], Movant sent the Debtor a written notice of default and demand for payment, a copy of which is attached as Exhibit C. The Debtor did not cure the default within the time stated in that notice.
 
 11. Movant has not consented to the Debtor's use of the Collateral in the ordinary course of business since the date of the default, and no cash collateral order authorizing that use has been entered in this case.
 

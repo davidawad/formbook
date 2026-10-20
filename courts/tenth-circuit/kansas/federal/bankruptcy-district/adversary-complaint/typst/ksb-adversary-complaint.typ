@@ -145,6 +145,7 @@
   )
   set enum(spacing: 0pt)
   set table(stroke: none, inset: (x: 6pt, y: 3pt))
+  set table.header(repeat: false)
   show table: set par(leading: single-leading, first-line-indent: 0pt)
 
   // Numbered paragraphs: "1." at the number indent, text after it, wrapped lines to the margin.

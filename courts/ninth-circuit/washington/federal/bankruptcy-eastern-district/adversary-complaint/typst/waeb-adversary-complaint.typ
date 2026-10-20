@@ -167,7 +167,7 @@
         out.push(pad(left: para-indent, grid(columns: (0.5in, 1fr), [#numbering("(a)", li)], inl(item.slice(2)))))
       }
     } else if c.starts-with("|") {
-      out.push(block(above: body-leading, below: body-leading, inl(c)))
+      out.push(block(above: body-leading, below: body-leading, { set table.header(repeat: false); inl(c) }))
     } else if c.starts-with("~ ") {
       out.push(block(width: 100%, sticky: true, [#h(para-indent)#inl(c.slice(2))]))
     } else {
