@@ -301,6 +301,8 @@
   }))
   v(1.2em)
   align(left, need(meta, "date"))
+  // Keeps the last line's descenders inside the 1 in bottom margin (NY-FORM-001).
+  v(0.3em)
 }
 
 // ---------------------------------------------------------------------------

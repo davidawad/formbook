@@ -51,7 +51,7 @@ Not produced by this template (separate filings): the motion itself; the propose
 
 - YAML frontmatter, then the body.
 - Frontmatter: `title` (cover title, caps applied by the template); `caption` (rows: `left`, optional `indent` in inches, optional `right`; one row per caption line; colons are generated); `date` (optional, shown as "Dated:"); `signature.firm` (single-spaced lines above "By:"), `signature.lines` (signer, address, email, role).
-- Body: blank-line-separated chunks. `#`, `##`, `###` headings (levels 1–3). A `1.` list is lettered (a), (b) ... A chunk starting with `~` is a single-spaced block with no first-line indent (service lists, addresses). Any other chunk is an unnumbered paragraph with a first-line indent.
+- Body: blank-line-separated chunks. `#`, `##`, `###` headings (levels 1–3). A `1.` list is lettered (a), (b) ... A chunk whose lines end in a hard break (trailing `\`) is a single-spaced block with no first-line indent (service lists, addresses); no marker is written. Any other chunk is an unnumbered paragraph with a first-line indent.
 - Hard line breaks inside a chunk: a trailing backslash at the end of the line.
 - Not supported: tables, footnotes, raw typst, forced line breaks in the template (the court title is stacked, not broken).
 

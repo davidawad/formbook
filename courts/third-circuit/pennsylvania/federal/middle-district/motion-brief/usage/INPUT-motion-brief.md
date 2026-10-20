@@ -107,13 +107,13 @@ As of the date of this certification, I have received no response from either co
 
 I, Leticia J. Santiago, Esquire, do hereby certify that the attached document was filed electronically with the Court and was sent to the following via the ECF System on October 9, 2026:
 
-~Matthew D. Fogal, Esquire\
+Matthew D. Fogal, Esquire\
 Matt Fogal Law Office, LLC\
 52 West King Street, Chambersburg, PA 17201\
 matt@fogal.law\
 Counsel for Plaintiff
 
-~Joshua P. Geist, Esquire\
+Joshua P. Geist, Esquire\
 Geist & Geist, P.C.\
 3634 California Avenue, Pittsburgh, PA 15212\
 josh@goodrichandgeist.com\

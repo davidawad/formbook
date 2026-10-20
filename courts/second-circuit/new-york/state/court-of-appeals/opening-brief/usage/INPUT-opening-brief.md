@@ -129,6 +129,6 @@ Under *Cortelle*, therefore, and as the Supreme Court correctly held, because th
 
 For the foregoing reasons, the Decision should be reversed.
 
-[^2]: Citations to the record on appeal are to “A. __” and citations to the addendum are to “Add. __.”
+[^2]: Citations to the record on appeal are to “A. \_\_” and citations to the addendum are to “Add. \_\_.”
 
 [^3]: The record in *Schwab* shows that the AG did raise the standalone issue in its motion to reargue. See the AG’s Memorandum of Law in Support of Motion to Reargue, *People v Charles Schwab & Co., Inc.* (Add. 54-72); Reply Memorandum of Law in Support of Motion to Reargue. (Add. 73-88.) The *Schwab* Court denied the reargument motion and adhered to its holding that § 63(12) does not create a standalone claim. *People v Charles Schwab & Co., Inc.*, 2013 NY Slip Op 95413\[U\] \[1st Dept 2013\].
