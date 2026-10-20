@@ -170,7 +170,7 @@ All gates green on every sample, for an engine, writes that engine's stamp. A co
 | `tools/render.sh [--engine typst\|latex\|docx] <doc-dir> usage/INPUT-<id>.md` | Compile one sample with vendored fonts only; any typst warning fails. Dispatches to `tools/render-latex.sh` / `tools/render-docx.sh`. |
 | `tools/check.sh <court-dir> [--engine E] [--no-render] [--only ID]` | Gates 0 to 3 as far as they can be mechanical, on that engine's PDF. Exit 0 only if every check passes; writes/removes `usage/.check-<engine>.txt`. |
 | `tools/overlay.sh <doc-dir> <id> [FILED-EXAMPLE.pdf]` | Red/blue overlay of `OUTPUT-<id>.typst.pdf` on `FILED-EXAMPLE-<id>.pdf`, into the gitignored `.overlay/`. A diagnostic (tier 3), not a score. |
-| `justfile` | `just render\|overlay\|check\|diff <doc-dir>`, `just render-all\|overlay-all\|check-all`, `just lint` (`fb lint fonts`, `fb lint paths`). Straight pipelines into `fb` and the scripts above. |
+| `justfile` | `just render\|overlay\|check\|diff <doc-dir>`, `just render-all\|overlay-all\|check-all`, `just lint` (`fb lint fonts`, `fb lint paths`, `fb lint rules`). Straight pipelines into `fb` and the scripts above. |
 | `fb usage doctype\|dir\|inputs\|examples\|pairs\|input\|example\|pair\|output\|overlay <doc-dir> ...` | Prints the `usage/` and `.overlay/` names of a doc folder, so no script parses file names. |
 | `tools/check-selftest.sh <court-dir>` | Mutation test of the checker. |
 | `tools/check/*.awk`, `tools/check/lib.sh` | The checks. Dependencies: gawk, yq (mikefarah), jq, typst, poppler (`pdfinfo pdffonts pdftotext pdftohtml pdfimages`), `shasum`; latex: pandoc, tectonic or xelatex; docx: pandoc, LibreOffice (`soffice`), unzip, xmllint. |

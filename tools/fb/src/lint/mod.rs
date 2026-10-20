@@ -1,6 +1,7 @@
 //! `fb lint <doc-dir> [--engine typst|latex|all]` checks a doc dir; `fb lint metadata <input.md>`
 //! validates brief frontmatter; `fb lint fonts` checks audited faces globally; `fb lint paths`
-//! checks the usage/ layout under courts/ (see paths.rs).
+//! checks the usage/ layout under courts/ (see paths.rs); `fb lint rules` checks the format of every
+//! courts/**/rules.md (see rules.rs).
 //!   (a) ngram      a template file shares a run of 5+ words with a FILED-EXAMPLE's text, and the run
 //!                  is not rule text (rules.md of the doc dir or an enclosing court folder);
 //!   (b) break/vspace  forced line breaks or literal vertical space outside the parameter block
@@ -14,6 +15,7 @@ mod input;
 mod metadata;
 mod ngram;
 pub(crate) mod paths;
+pub(crate) mod rules;
 mod tex;
 mod typst;
 
@@ -23,7 +25,7 @@ use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
 const USAGE: &str =
-    "usage: fb lint <doc-dir> [--engine typst|latex|all] | fb lint metadata <input.md>";
+    "usage: fb lint <doc-dir> [--engine typst|latex|all] | fb lint metadata <input.md> | fb lint fonts|paths|rules";
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Finding {
@@ -131,6 +133,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     match args {
         [a] if a == "fonts" => return fonts::main(),
         [a] if a == "paths" => return paths::main(),
+        [a] if a == "rules" => return rules::main(),
         [a, path] if a == "metadata" => return metadata::main(Path::new(path)),
         _ => {}
     }
