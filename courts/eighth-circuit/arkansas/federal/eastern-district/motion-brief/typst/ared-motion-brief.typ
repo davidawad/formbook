@@ -125,10 +125,10 @@
 
 /// Brief body. Unlike a complaint, the paragraphs of a brief are not numbered. Each blank-line-separated
 /// chunk of markdown is one of:
-///   `# TEXT` ... heading level 1: numbered I., II., ... (a leading "~ " makes it unnumbered, e.g. CONCLUSION)
+///   `# TEXT` ... heading level 1: numbered I., II., ... (a leading <!--unnumbered--> makes it unnumbered, e.g. CONCLUSION)
 /// Brief body. Unlike a complaint, the paragraphs of a brief are not numbered. Each blank-line-separated
 /// chunk of markdown is one of:
-///   `# TEXT` ... heading level 1: numbered I., II., ... (a leading "~ " makes it unnumbered, e.g. CONCLUSION)
+///   `# TEXT` ... heading level 1: numbered I., II., ... (a leading <!--unnumbered--> makes it unnumbered, e.g. CONCLUSION)
 ///   `## TEXT` ... heading level 2: lettered A., B., ...
 ///   `### TEXT` ... heading level 3: numbered 1., 2., ...
 ///   `| ... |` ... a pipe table: single-spaced, not indented
@@ -148,8 +148,8 @@
     if t.starts-with("#") {
       let level = t.match(regex("^#+")).end
       let title = t.slice(level).trim()
-      let unnumbered = title.starts-with("~ ")
-      if unnumbered { title = title.slice(2) }
+      let unnumbered = title.starts-with("<!--unnumbered-->")
+      if unnumbered { title = title.slice("<!--unnumbered-->".len()).trim() }
       let heading = if level == 1 {
         if not unnumbered { h1 += 1; h2 = 0; h3 = 0 }
         on-grid(align(center, text(weight: "bold", if unnumbered {

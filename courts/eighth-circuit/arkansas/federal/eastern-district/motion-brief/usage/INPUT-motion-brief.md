@@ -16,7 +16,7 @@ signature:
 
 Defendant Ensurety Ventures, LLC respectfully moves the Court for an Order dismissing Plaintiff's Complaint with prejudice for failing to allege any facts that Defendant initiated more than one telephone call, which is necessary to maintain the sole alleged cause of action. In support thereof, Defendant states:
 
-# ~ INTRODUCTION AND BACKGROUND
+# <!--unnumbered--> INTRODUCTION AND BACKGROUND
 
 Plaintiff Mary Ann Campbell ("Plaintiff") brings this action under the Telephone Consumer Protection Act ("TCPA"), 47 U.S.C. § 227, against "Defendant Ensurety Ventures LLC d/b/a Omega Auto Care" ("Ensurety"), based on three telephone calls that Plaintiff alleges to have received from Ensurety. Specifically, Plaintiff's single cause of action, alleging telephone solicitations to a phone number on the Federal Do Not Call Registry, is predicated on the receipt of more than one offending phone call in a twelve-month period. 47 U.S.C. § 227(c)(5). The Complaint is devoid of any factual allegations to attribute any of the three alleged calls to Ensurety, let alone the multiple calls necessary to maintain this action.
 
@@ -73,6 +73,6 @@ Warciak v. Subway Restaurants, Inc., 949 F.3d 354, 357 (7th Cir. 2020); Gonzales
 
 Even if this Court found that the mere mention of "Omega Auto Care" during the Third Call is enough to plausibly allege that Ensurety initiated the Third Call, or is vicariously liable for whomever initiated the call, this single call does not rise to the legally cognizable injury identified in 47 U.S.C. 227(c)(5). Unless Plaintiff has plausibly alleged that multiple calls originated from Ensurety which violated the law, Plaintiff has not stated a claim for relief under Section 227(c)(5). As Plaintiff may have at best alleged a single call of this nature, Plaintiff's Complaint does not allege the harm addressed by Section 227(c)(5) and should be dismissed for failure to state a claim.
 
-# ~ CONCLUSION
+# <!--unnumbered--> CONCLUSION
 
 For the foregoing reasons, Plaintiff's Complaint fails to state any plausible claim for relief against Ensurety. Accordingly, Ensurety respectfully requests that the Court grant this Motion to Dismiss and enter an order dismissing Plaintiff's Complaint with prejudice.

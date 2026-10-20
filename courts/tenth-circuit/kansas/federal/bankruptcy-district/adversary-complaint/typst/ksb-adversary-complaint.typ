@@ -180,13 +180,13 @@
   align(center, strong(upper(inl(need(meta, "title")))))
   v(line-pitch * 0.5)
 
-  // ---- the body, with the signature block where the author puts [[signature]] ----
+  // ---- the body, with the signature block where the author puts <!--signature--> ----
   set par(
     leading: body-leading, spacing: 0pt,
     first-line-indent: (amount: para-indent, all: true), justify: false,
   )
-  let parts = md.split("[[signature]]")
-  if parts.len() != 2 { panic("ksb-adversary-complaint: the body must contain exactly one [[signature]] marker") }
+  let parts = md.split("<!--signature-->")
+  if parts.len() != 2 { panic("ksb-adversary-complaint: the body must contain exactly one <!--signature--> marker") }
   cmarker.render(parts.at(0), raw-typst: false, smart-punctuation: true)
   signature-block(meta)
   // Anything after the signature (exhibits) starts on its own page.

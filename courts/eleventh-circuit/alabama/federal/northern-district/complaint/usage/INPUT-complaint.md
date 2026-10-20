@@ -130,7 +130,7 @@ These harms are ongoing. They will continue for as long as Defendants are free t
 
 ### DECLARATORY AND INJUNCTIVE RELIEF BASED ON ACTUAL AND THREATENED VIOLATIONS OF THE FIRST AMENDMENT AND 42 U.S.C. § 1983
 
-{centered} (Against All Defendants)
+<!--centered--> (Against All Defendants)
 
 The SEC incorporates by reference all allegations in the preceding paragraphs as if fully set forth herein.
 
@@ -144,7 +144,7 @@ Further, Section 1983 provides that “[e]very person who, under color of any st
 
 ## PRAYER FOR RELIEF
 
-{unnumbered} WHEREFORE, Plaintiff the Southeastern Conference respectfully requests that this Court enter judgment in its favor and against Defendants, and grant the following relief:
+<!--unnumbered--> WHEREFORE, Plaintiff the Southeastern Conference respectfully requests that this Court enter judgment in its favor and against Defendants, and grant the following relief:
 
 1. Enter a declaratory judgment that the First Amendment protects the Conference’s right to disassociate from Defendants’ conduct;
 2. Enter a preliminary and permanent injunction prohibiting Defendants from violating the Conference’s First Amendment rights by compelling the Conference to associate with conduct that is contrary to the Conference’s purpose and mission;

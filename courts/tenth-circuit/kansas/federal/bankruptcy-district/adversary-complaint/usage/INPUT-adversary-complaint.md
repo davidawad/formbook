@@ -103,7 +103,7 @@ WHEREFORE, the Trustee prays for a judgment in his favor and against Defendant d
 
 WHEREFORE, the Trustee prays for a judgment in his favor and against Defendant disallowing any claim filed by Defendant pursuant to 11 U.S.C. § 502(d) against Debtor's bankruptcy estate and for such other and further relief that this Court deems just and proper.
 
-[[signature]]
+<!--signature-->
 
 # EXHIBIT A
 

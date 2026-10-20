@@ -479,7 +479,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, E.D. Arkansas](courts/eighth-circuit/arkansas/federal/bankruptcy-eastern-district) | `areb` | in progress | — | — | — | 0 |
 | [United States Bankruptcy Court, W.D. Arkansas](courts/eighth-circuit/arkansas/federal/bankruptcy-western-district) | `arwb` | in progress | — | — | — | 0 |
-| [United States District Court for the Eastern District of Arkansas](courts/eighth-circuit/arkansas/federal/eastern-district) | `ared` | in progress | — | — | — | 14 |
+| [United States District Court for the Eastern District of Arkansas](courts/eighth-circuit/arkansas/federal/eastern-district) | `ared` | up for review | — | — | — | 14 |
 | [United States District Court for the Western District of Arkansas](courts/eighth-circuit/arkansas/federal/western-district) | `arwd` | in progress | — | — | — | 0 |
 | [Arkansas Court of Appeals](courts/eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 14 |
 | [Arkansas Supreme Court](courts/eighth-circuit/arkansas/state/supreme-court) | `ark` | in progress | — | — | — | 14 |
@@ -843,12 +843,12 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Fifth Circuit | 30 | 0 | 1 | 28 | 1 | 0.0% | 3.3% | 0 | 0 | 0 | 7.0% |
 | Sixth Circuit | 30 | 0 | 7 | 23 | 0 | 0.0% | 23.3% | 0 | 0 | 0 | 7.9% |
 | Seventh Circuit | 22 | 0 | 11 | 10 | 1 | 0.0% | 50.0% | 0 | 0 | 0 | 13.3% |
-| Eighth Circuit | 39 | 0 | 10 | 28 | 1 | 0.0% | 25.6% | 0 | 0 | 0 | 11.1% |
+| Eighth Circuit | 39 | 0 | 11 | 27 | 1 | 0.0% | 28.2% | 0 | 0 | 0 | 11.1% |
 | Ninth Circuit | 65 | 0 | 14 | 47 | 4 | 0.0% | 21.5% | 1 | 0 | 0 | 12.7% |
 | Tenth Circuit | 34 | 0 | 0 | 31 | 3 | 0.0% | 0.0% | 0 | 0 | 0 | 4.5% |
 | Eleventh Circuit | 32 | 0 | 0 | 32 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 5.6% |
 | D.C. Circuit | 4 | 0 | 3 | 1 | 0 | 0.0% | 75.0% | 0 | 0 | 0 | 14.0% |
-| **Total** | 376 | 0 | 80 | 272 | 24 | 0.0% | 21.2% | 1 | 0 | 0 | 9.5% |
+| **Total** | 376 | 0 | 81 | 271 | 24 | 0.0% | 21.5% | 1 | 0 | 0 | 9.5% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -866,10 +866,10 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 25 |
 | Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 37 |
 | Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 27 |
-| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 37 |
+| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 38 |
 | Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 46 |
 | Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 34 |
-| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 40 |
+| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 41 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
-| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 373 |
+| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 375 |
 <!-- tracker:end -->

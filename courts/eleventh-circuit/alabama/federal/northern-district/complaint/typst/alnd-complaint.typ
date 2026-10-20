@@ -106,8 +106,8 @@
 /// Each blank-line-separated chunk of markdown is one unit:
 ///   - a heading (`#`, `##`, `###`) is set by its show rule;
 ///   - a list (`1.`, `-`) is lettered A., B., ... (prayer for relief);
-///   - a chunk starting with `{unnumbered}` is an unnumbered paragraph with a first-line indent (the prayer lead-in);
-///   - a chunk starting with `{centered}` is an unnumbered centered line (the "(Against All Defendants)" legend);
+///   - a chunk starting with `<!--unnumbered-->` is an unnumbered paragraph with a first-line indent (the prayer lead-in);
+///   - a chunk starting with `<!--centered-->` is an unnumbered centered line (the "(Against All Defendants)" legend);
 ///   - any other chunk is one numbered paragraph.
 /// Numbering is applied per chunk, not with a `show par` rule: a show rule that re-wraps paragraph
 /// content recurses without end in typst 0.15.
@@ -125,14 +125,14 @@
         cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)
         v(body-leading)
       }
-    } else if t.starts-with("{unnumbered}") {
-      let rest = t.slice("{unnumbered}".len()).trim()
+    } else if t.starts-with("<!--unnumbered-->") {
+      let rest = t.slice("<!--unnumbered-->".len()).trim()
       para-block({
         set par(leading: body-leading, first-line-indent: para-indent)
         cmarker.render(rest, raw-typst: false, smart-punctuation: true, h1-level: 1)
       })
-    } else if t.starts-with("{centered}") {
-      let rest = t.slice("{centered}".len()).trim()
+    } else if t.starts-with("<!--centered-->") {
+      let rest = t.slice("<!--centered-->".len()).trim()
       para-block({
         set par(leading: body-leading, first-line-indent: 0pt)
         align(center, cmarker.render(rest, raw-typst: false, smart-punctuation: true, h1-level: 1))
