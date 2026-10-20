@@ -216,7 +216,7 @@ Courts under `courts` (375).
 | [United States Bankruptcy Court, S.D. Iowa](eighth-circuit/iowa/federal/bankruptcy-southern-district) | `iasb` | in progress | — | — | — | 0 |
 | [District Court, N.D. Iowa](eighth-circuit/iowa/federal/northern-district) | `iand` | in progress | — | — | — | 0 |
 | [District Court, S.D. Iowa](eighth-circuit/iowa/federal/southern-district) | `iasd` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, D. Minnesota](eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Minnesota](eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | up for review | — | — | — | 14 |
 | [District Court, D. Minnesota](eighth-circuit/minnesota/federal/district) | `mnd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, E.D. Missouri](eighth-circuit/missouri/federal/bankruptcy-eastern-district) | `moeb` | in progress | — | — | — | 14 |
 | [United States Bankruptcy Court, W.D. Missouri](eighth-circuit/missouri/federal/bankruptcy-western-district) | `mowb` | up for review | — | — | — | 14 |
@@ -227,7 +227,7 @@ Courts under `courts` (375).
 | [United States Bankruptcy Court, D. North Dakota](eighth-circuit/north-dakota/federal/bankruptcy-district) | `ndb` | in progress | — | — | — | 14 |
 | [District Court, D. North Dakota](eighth-circuit/north-dakota/federal/district) | `ndd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. South Dakota](eighth-circuit/south-dakota/federal/bankruptcy-district) | `sdb` | in progress | — | — | — | 14 |
-| [District Court, D. South Dakota](eighth-circuit/south-dakota/federal/district) | `sdd` | in progress | — | — | — | 14 |
+| [District Court, D. South Dakota](eighth-circuit/south-dakota/federal/district) | `sdd` | up for review | — | — | — | 14 |
 | [Arkansas Court of Appeals](eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | in progress | — | — | — | 14 |
 | [Arkansas Supreme Court](eighth-circuit/arkansas/state/supreme-court) | `ark` | in progress | — | — | — | 14 |
 | [Arkansas Workers' Compensation Commission](eighth-circuit/arkansas/state/workers-compensation-commission) | `arkworkcompcom` | todo | — | — | — | 0 |

@@ -500,7 +500,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | in progress | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | up for review | — | — | — | 14 |
 | [District Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/district) | `mnd` | up for review | — | — | — | 14 |
 | [Court of Appeals of Minnesota](courts/eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | in progress | — | — | — | 14 |
 | [Supreme Court of Minnesota](courts/eighth-circuit/minnesota/state/supreme-court) | `minn` | in progress | — | — | — | 14 |
@@ -542,7 +542,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/bankruptcy-district) | `sdb` | in progress | — | — | — | 14 |
-| [District Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/district) | `sdd` | in progress | — | — | — | 14 |
+| [District Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/district) | `sdd` | up for review | — | — | — | 14 |
 | [Supreme Court of South Dakota](courts/eighth-circuit/south-dakota/state/supreme-court) | `sd` | in progress | — | — | — | 14 |
 
 ## Ninth Circuit
@@ -843,12 +843,12 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Fifth Circuit | 30 | 0 | 1 | 28 | 1 | 0.0% | 3.3% | 0 | 0 | 0 | 7.0% |
 | Sixth Circuit | 30 | 0 | 6 | 24 | 0 | 0.0% | 20.0% | 0 | 0 | 0 | 7.9% |
 | Seventh Circuit | 22 | 0 | 11 | 10 | 1 | 0.0% | 50.0% | 0 | 0 | 0 | 13.3% |
-| Eighth Circuit | 39 | 0 | 9 | 29 | 1 | 0.0% | 23.0% | 0 | 0 | 0 | 11.1% |
+| Eighth Circuit | 39 | 0 | 11 | 27 | 1 | 0.0% | 28.2% | 0 | 0 | 0 | 11.1% |
 | Ninth Circuit | 65 | 0 | 12 | 49 | 4 | 0.0% | 18.4% | 1 | 0 | 0 | 12.7% |
 | Tenth Circuit | 34 | 0 | 0 | 31 | 3 | 0.0% | 0.0% | 0 | 0 | 0 | 4.5% |
 | Eleventh Circuit | 32 | 0 | 0 | 32 | 0 | 0.0% | 0.0% | 0 | 0 | 0 | 5.6% |
 | D.C. Circuit | 4 | 0 | 3 | 1 | 0 | 0.0% | 75.0% | 0 | 0 | 0 | 14.0% |
-| **Total** | 376 | 0 | 76 | 276 | 24 | 0.0% | 20.2% | 1 | 0 | 0 | 9.5% |
+| **Total** | 376 | 0 | 78 | 274 | 24 | 0.0% | 20.7% | 1 | 0 | 0 | 9.5% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -866,10 +866,10 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Fifth Circuit | 46 | 46 | 46 | 46 | 46 | 46 | 100.0% | 25 |
 | Sixth Circuit | 42 | 42 | 42 | 42 | 42 | 42 | 100.0% | 34 |
 | Seventh Circuit | 31 | 31 | 31 | 31 | 31 | 31 | 100.0% | 27 |
-| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 36 |
+| Eighth Circuit | 46 | 46 | 46 | 46 | 45 | 45 | 97.8% | 39 |
 | Ninth Circuit | 72 | 72 | 72 | 72 | 70 | 70 | 97.2% | 44 |
-| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 32 |
-| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 40 |
+| Tenth Circuit | 39 | 39 | 39 | 39 | 36 | 36 | 92.3% | 33 |
+| Eleventh Circuit | 48 | 48 | 48 | 48 | 48 | 48 | 100.0% | 41 |
 | D.C. Circuit | 7 | 7 | 7 | 7 | 7 | 7 | 100.0% | 7 |
-| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 365 |
+| **Total** | 491 | 491 | 491 | 491 | 482 | 482 | 98.1% | 370 |
 <!-- tracker:end -->
