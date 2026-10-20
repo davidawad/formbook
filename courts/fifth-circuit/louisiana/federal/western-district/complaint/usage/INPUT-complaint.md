@@ -36,7 +36,7 @@ signature:
     - "Attorneys for Plaintiff"
 ---
 
-:::unnumbered
+<!-- unnumbered -->
 
 NOW COMES Louisiana Dental Implant Lab, LLC (“Plaintiff” or “Louisiana Dental”), by and through its attorneys and for its Complaint against JDENTALCARE SRL (“Defendant” or “JDC”), states as follows:
 
@@ -81,7 +81,7 @@ Upon information and belief, Defendant manufactures, imports, offer for sale, an
 
 An infringement comparison chart demonstrating substantial similarity between the claimed design of the ’155 Patent and the Accused Product is seen below:
 
-:::unnumbered
+<!-- unnumbered -->
 
 *[Image, not transcribed: a side-by-side comparison chart headed “U.S. Patent No. D1,046,155” and “The Infringing EVS112 Product by JDentalCare”, running across filed pages 5 and 6.]*
 
@@ -107,11 +107,11 @@ Plaintiff is entitled to preliminary and permanent injunctive relief under 35 U.
 
 # PRAYER FOR RELIEF
 
-:::unnumbered
+<!-- unnumbered -->
 
 WHEREFORE, Plaintiff respectfully requests that this Court enter judgment in its favor and grant the following relief:
 
-:::upper
+<!-- upper -->
 
 1. A judgment that Defendant has infringed U.S. Design Patent No. D1,046,155;
 2. Preliminary and permanent injunctions enjoining Defendant from further acts of infringement with respect to the ‘155 Patent;

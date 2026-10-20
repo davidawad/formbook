@@ -33,7 +33,7 @@ No font, type size, margin, paper, or spacing rule was found in FRBP 7010, FRBP 
 - Caption: court title, then a grid of single-spaced rows: "IN RE:", the debtor's names, the address (LBR 7010-1(2)), the last four digits of the TIN (fill-in `____`), the party designations, "v.", and the adversary number beside "v.". The § column is drawn on every row.
 - Title centered and bold in capitals.
 - Body: double spaced. "# " headings are centered bold (roman-numeral sections); "## " headings are bold, indented (count headings). Numbered paragraphs use a 0.5-inch first-line indent. "> " block quotations are single spaced and indented both sides. "- " items are the prayer. "~ " is an unnumbered paragraph (the lead-in).
-- Signature block: "Dated" at left, the signer's block at right (`<<signature>>` marks its place).
+- Signature block: "Dated" at left, the signer's block at right (`<!-- signature -->` marks its place).
 - Footer: title in capitals and "PAGE n OF N".
 
 ## What the overlay shows

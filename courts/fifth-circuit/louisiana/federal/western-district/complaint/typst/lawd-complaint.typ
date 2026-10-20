@@ -45,7 +45,7 @@
 
 /// Chunk kinds of the body: headings (# ## ###), directives (:::), lists (1. or -), paragraphs.
 #let kind(c) = {
-  if c.starts-with("### ") { "h3" } else if c.starts-with("## ") { "h2" } else if c.starts-with("# ") { "h1" } else if c.starts-with(":::") { "directive" } else if c.match(regex("^(\\d+\\.|-) ")) != none { "list" } else { "para" }
+  if c.starts-with("### ") { "h3" } else if c.starts-with("## ") { "h2" } else if c.starts-with("# ") { "h1" } else if c.starts-with("<!-- ") { "directive" } else if c.match(regex("^(\\d+\\.|-) ")) != none { "list" } else { "para" }
 }
 
 /// The items of a markdown list chunk; a line without a marker continues the item before it.
@@ -153,8 +153,8 @@
   for c in chunks {
     let k = kind(c)
     if k == "directive" {
-      if c == ":::upper" { letters = "A." }
-      if c == ":::unnumbered" { unnumbered = true }
+      if c == "<!-- upper -->" { letters = "A." }
+      if c == "<!-- unnumbered -->" { unnumbered = true }
       continue
     }
     if k == "h1" or k == "h2" or k == "h3" {
@@ -162,7 +162,7 @@
       parts.push(v(pitch))
       parts.push(on-grid(heading(level: lvl, outlined: true)[#inl(c.slice(lvl + 1).trim())], sticky: true))
     } else if k == "list" {
-      let items = list-items(c).map(i => on-grid(inl(i), width: text-width - 1in))
+      let items = list-items(c).map(i => inl(i))
       parts.push(enum(numbering: letters, spacing: 0pt, indent: 0.5in, body-indent: 0.5in, ..items))
       letters = "a."
     } else if unnumbered {

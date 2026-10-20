@@ -36,7 +36,7 @@ signature:
 
 This Court has jurisdiction pursuant to 28 U.S.C. § 1334 and § 157. This adversary proceeding relates to the bankruptcy proceeding of Margaret B. Hall, Bankruptcy No. 20-12866-JDW, pending in the U. S. Bankruptcy Court for the Northern District of Mississippi. This is a core proceeding pursuant to 28 U.S.C. § 157(b)(2)(A) and (K).
 
-The Debtor is indebted to the Bank under Promissory Note no. ***6332, a copy of which is attached as Exhibit "A". As of October 5, 2020, the balance due was $312,202.64 plus interest accruing thereafter, attorney fees and expenses. The Note has matured and is in default.
+The Debtor is indebted to the Bank under Promissory Note no. \*\*\*6332, a copy of which is attached as Exhibit "A". As of October 5, 2020, the balance due was $312,202.64 plus interest accruing thereafter, attorney fees and expenses. The Note has matured and is in default.
 
 As collateral for the indebtedness due, the Debtor pledged to the Bank certain real property and improvements located at 109 Glen Eagle Road, Oxford, Mississippi (the "Property"). According to the Debtor's schedules, the value of the Property is $408,360.00.
 

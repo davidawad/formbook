@@ -41,7 +41,7 @@ signature:
     - "ATTORNEYS FOR PLAINTIFF LRK-96 LLC"
 ---
 
-~ Plaintiff LRK-96 LLC (“LRK” or “Plaintiff”) hereby files this Complaint (the “Complaint”) complaining of Defendant-Debtor Dana Brenton Simpson. In support thereof, Plaintiff respectfully shows the Court as follows:
+<!-- unnumbered --> Plaintiff LRK-96 LLC (“LRK” or “Plaintiff”) hereby files this Complaint (the “Complaint”) complaining of Defendant-Debtor Dana Brenton Simpson. In support thereof, Plaintiff respectfully shows the Court as follows:
 
 # I. JURISDICTION AND VENUE
 
@@ -237,7 +237,7 @@ Therefore, the debt owed to LRK by Simpson should be excepted from discharge pur
 
 # V. PRAYER
 
-~ Plaintiff respectfully requests that this Court enter an order and judgment as follows:
+<!-- unnumbered --> Plaintiff respectfully requests that this Court enter an order and judgment as follows:
 
 - (i) for actual damages in an amount to be proven at trial;
 - (ii) avoiding and recovering the Acuity Transfers and/or the value of the Acuity Transfers for the benefit of LRK;
@@ -247,4 +247,4 @@ Therefore, the debt owed to LRK by Simpson should be excepted from discharge pur
 - (vi) pre- and post-judgment interest as provided by law; and
 - (vii) for such other and further relief as LRK may show itself to be justly entitled in law or in equity.
 
-<<signature>>
+<!-- signature -->
