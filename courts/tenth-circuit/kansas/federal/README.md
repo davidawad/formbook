@@ -5,8 +5,8 @@ Courts under `courts/tenth-circuit/kansas/federal` (2).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, D. Kansas](bankruptcy-district) | `ksb` | in progress | — | — | — | 0 |
-| [District Court, D. Kansas](district) | `ksd` | in progress | — | — | — | 0 |
+| [United States Bankruptcy Court, D. Kansas](bankruptcy-district) | `ksb` | up for review | — | — | — | 14 |
+| [District Court, D. Kansas](district) | `ksd` | up for review | — | — | — | 14 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->

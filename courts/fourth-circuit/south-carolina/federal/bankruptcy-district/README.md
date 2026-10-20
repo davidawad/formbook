@@ -6,11 +6,11 @@
 - Level: bankruptcy
 - Circuit: `ca4`
 - State / territory: South Carolina
-- Status: **in progress** (0%); manual status in `court.json`: `todo`
+- Status: **up for review** (14%); manual status in `court.json`: `todo`
 
 ## Checklist
 
-- [ ] `rules.md` present
+- [x] `rules.md` present
 - [ ] `usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)
 - [ ] `usage/` has at least 2 INPUT .md samples
 - [ ] typst engine passes (`usage/.check-typst.txt` valid)

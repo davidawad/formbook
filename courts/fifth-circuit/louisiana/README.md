@@ -5,9 +5,9 @@ Courts under `courts/fifth-circuit/louisiana` (8).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, E.D. Louisiana](federal/bankruptcy-eastern-district) | `laeb` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, M.D. Louisiana](federal/bankruptcy-middle-district) | `lamb` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, W.D. Louisiana](federal/bankruptcy-western-district) | `lawb` | in progress | — | — | — | 0 |
+| [United States Bankruptcy Court, E.D. Louisiana](federal/bankruptcy-eastern-district) | `laeb` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, M.D. Louisiana](federal/bankruptcy-middle-district) | `lamb` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. Louisiana](federal/bankruptcy-western-district) | `lawb` | up for review | — | — | — | 14 |
 | [United States District Court Eastern District of Louisiana](federal/eastern-district) | `laed` | up for review | — | — | — | 14 |
 | [District Court, M.D. Louisiana](federal/middle-district) | `lamd` | up for review | — | — | — | 14 |
 | [District Court, W.D. Louisiana](federal/western-district) | `lawd` | up for review | — | — | — | 14 |

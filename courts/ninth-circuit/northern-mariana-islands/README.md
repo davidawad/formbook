@@ -5,7 +5,7 @@ Courts under `courts/ninth-circuit/northern-mariana-islands` (3).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Court, Northern Mariana Islands](federal/bankruptcy-district) | `nmib` | in progress | — | — | — | 0 |
+| [United States Bankruptcy Court, Northern Mariana Islands](federal/bankruptcy-district) | `nmib` | up for review | — | — | — | 14 |
 | [District Court, Northern Mariana Islands](federal/district) | `nmid` | up for review | — | — | — | 14 |
 | [Supreme Court of The Commonwealth of The Northern Mariana Islands](state/supreme-court) | `nmi` | in progress | — | — | — | 0 |
 

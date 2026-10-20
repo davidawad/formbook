@@ -29,7 +29,7 @@ Courts under `courts/ninth-circuit` (65).
 | [District Court, D. Montana](montana/federal/district) | `mtd` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Nevada](nevada/federal/bankruptcy-district) | `nvb` | up for review | — | — | — | 14 |
 | [District Court, D. Nevada](nevada/federal/district) | `nvd` | up for review | — | — | — | 14 |
-| [United States Bankruptcy Court, Northern Mariana Islands](northern-mariana-islands/federal/bankruptcy-district) | `nmib` | in progress | — | — | — | 0 |
+| [United States Bankruptcy Court, Northern Mariana Islands](northern-mariana-islands/federal/bankruptcy-district) | `nmib` | up for review | — | — | — | 14 |
 | [District Court, Northern Mariana Islands](northern-mariana-islands/federal/district) | `nmid` | up for review | — | — | — | 14 |
 | [United States Bankruptcy Court, D. Oregon](oregon/federal/bankruptcy-district) | `orb` | up for review | — | — | — | 14 |
 | [District Court, D. Oregon](oregon/federal/district) | `ord` | up for review | — | — | — | 14 |

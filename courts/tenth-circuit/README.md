@@ -5,25 +5,25 @@ Courts under `courts/tenth-circuit` (34).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [United States Bankruptcy Appellate Panel of The Tenth Circuit](bankruptcy-appellate-panel) | `bap10` | in progress | — | — | — | 0 |
-| [Court of Appeals for the Tenth Circuit](court-of-appeals) | `ca10` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, D. Colorado](colorado/federal/bankruptcy-district) | `cob` | in progress | — | — | — | 0 |
-| [United States District Court for the District of Colorado](colorado/federal/district) | `cod` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, D. Kansas](kansas/federal/bankruptcy-district) | `ksb` | in progress | — | — | — | 0 |
-| [District Court, D. Kansas](kansas/federal/district) | `ksd` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, D. New Mexico](new-mexico/federal/bankruptcy-district) | `nmb` | in progress | — | — | — | 0 |
-| [District Court, D. New Mexico](new-mexico/federal/district) | `nmd` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, E.D. Oklahoma](oklahoma/federal/bankruptcy-eastern-district) | `okeb` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, N.D. Oklahoma](oklahoma/federal/bankruptcy-northern-district) | `oknb` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, W.D. Oklahoma](oklahoma/federal/bankruptcy-western-district) | `okwb` | in progress | — | — | — | 0 |
-| [United States District Court for the District of Oklahoma](oklahoma/federal/district) | `okd` | in progress | — | — | — | 0 |
-| [United States District Court, Oklahoma Eastern](oklahoma/federal/eastern-district) | `oked` | in progress | — | — | — | 0 |
-| [United States District Court, Oklahoma Northern](oklahoma/federal/northern-district) | `oknd` | in progress | — | — | — | 0 |
-| [United States District Court, Oklahoma Western](oklahoma/federal/western-district) | `okwd` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, D. Utah](utah/federal/bankruptcy-district) | `utb` | in progress | — | — | — | 0 |
-| [District Court, D. Utah](utah/federal/district) | `utd` | in progress | — | — | — | 0 |
-| [United States Bankruptcy Court, D. Wyoming](wyoming/federal/bankruptcy-district) | `wyb` | in progress | — | — | — | 0 |
-| [District Court, D. Wyoming](wyoming/federal/district) | `wyd` | in progress | — | — | — | 0 |
+| [United States Bankruptcy Appellate Panel of The Tenth Circuit](bankruptcy-appellate-panel) | `bap10` | up for review | — | — | — | 14 |
+| [Court of Appeals for the Tenth Circuit](court-of-appeals) | `ca10` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Colorado](colorado/federal/bankruptcy-district) | `cob` | up for review | — | — | — | 14 |
+| [United States District Court for the District of Colorado](colorado/federal/district) | `cod` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Kansas](kansas/federal/bankruptcy-district) | `ksb` | up for review | — | — | — | 14 |
+| [District Court, D. Kansas](kansas/federal/district) | `ksd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, D. New Mexico](new-mexico/federal/bankruptcy-district) | `nmb` | up for review | — | — | — | 14 |
+| [District Court, D. New Mexico](new-mexico/federal/district) | `nmd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, E.D. Oklahoma](oklahoma/federal/bankruptcy-eastern-district) | `okeb` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, N.D. Oklahoma](oklahoma/federal/bankruptcy-northern-district) | `oknb` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, W.D. Oklahoma](oklahoma/federal/bankruptcy-western-district) | `okwb` | up for review | — | — | — | 14 |
+| [United States District Court for the District of Oklahoma](oklahoma/federal/district) | `okd` | up for review | — | — | — | 14 |
+| [United States District Court, Oklahoma Eastern](oklahoma/federal/eastern-district) | `oked` | up for review | — | — | — | 14 |
+| [United States District Court, Oklahoma Northern](oklahoma/federal/northern-district) | `oknd` | up for review | — | — | — | 14 |
+| [United States District Court, Oklahoma Western](oklahoma/federal/western-district) | `okwd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Utah](utah/federal/bankruptcy-district) | `utb` | up for review | — | — | — | 14 |
+| [District Court, D. Utah](utah/federal/district) | `utd` | up for review | — | — | — | 14 |
+| [United States Bankruptcy Court, D. Wyoming](wyoming/federal/bankruptcy-district) | `wyb` | up for review | — | — | — | 14 |
+| [District Court, D. Wyoming](wyoming/federal/district) | `wyd` | up for review | — | — | — | 14 |
 | [Colorado Court of Appeals](colorado/state/court-of-appeals) | `coloctapp` | in progress | — | — | — | 14 |
 | [Colorado Industrial Claim Appeals office](colorado/state/industrial-claim-appeals-office) | `coloworkcompcom` | todo | — | — | — | 0 |
 | [Colorado Supreme Court](colorado/state/supreme-court) | `colo` | in progress | — | — | — | 14 |
