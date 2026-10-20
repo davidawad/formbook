@@ -12,13 +12,13 @@
 #let font-family = "TeX Gyre Termes"        // no point size or face is set by GNLR 5.1; a proportional serif, vendored in fonts/
 #let type-size = 12pt                   // the exemplar is 12 pt Times; EB Garamond at 12 pt is the same size on the grid
 #let pitch = 24pt                       // GNLR 5.1(a): double-spaced; the numbered lines are this pitch
-#let lines-per-page = 28                // the exemplar's pleading form: 28 numbered lines (a convention, not a GNLR rule)
+#let lines-per-page = 27                // 27 numbered lines fit between 1 in margins (the exemplar has 28, a convention, not a GNLR rule)
 #let page-w = 8.5in                     // GNLR 5.1(a): 8 1/2 by 11 inch paper
 #let page-h = 11in
 #let top-margin = 72pt                  // the numbered lines start at the top margin
-#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 48 pt: holds the page number
+#let bottom-margin = page-h - top-margin - lines-per-page * pitch   // 72 pt: holds the page number
 #let left-margin = 1.5in                // room for the line numbers and the rules
-#let right-margin = 0.75in
+#let right-margin = 1in                 // GNLR 5.1 sets no margin; 1 in, as the default tier-1 checks require (the exemplar is narrower)
 #let text-width = page-w - left-margin - right-margin
 #let body-leading = 1.35em              // double spacing: 1.35em leading on a 0.65em line box gives a 24 pt pitch at 12 pt
 #let single-leading = 0.5em             // single spacing for counsel, caption and signature
@@ -57,11 +57,11 @@
 // Page furniture
 // ---------------------------------------------------------------------------
 
-/// Numbers 1 to 28 down the left margin, one per numbered line.
+/// Numbers 1 to 27 down the left margin, one per numbered line.
 #let line-numbers() = {
   for i in range(1, lines-per-page + 1) {
     place(top + left, dx: 0pt, dy: top-margin + (i - 1) * pitch,
-      block(width: left-margin - 0.42in, height: pitch,
+      block(width: left-margin - 0.5in, height: pitch,   // numbers end at the 1 in line, inside the margin
         align(right, text(size: type-size, str(i)))))
   }
 }

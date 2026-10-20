@@ -127,7 +127,8 @@
 #let gamd-motion-brief(meta, body) = {
   set page(
     paper: "us-letter",
-    margin: margin,
+    // 4 pt more than 1 in at the top: a footnote reference (a raised digit) on the first line of a page must not rise into the 1 in margin
+    margin: (top: margin + 4pt, rest: margin),
     // Page 1 carries no number (exemplar); the rest are numbered at the bottom centre.
     footer: context {
       if counter(page).get().first() > 1 {

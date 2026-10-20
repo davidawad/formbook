@@ -37,7 +37,7 @@ Official Form 416A (the full caption for a complaint) was not read: `uscourts.go
 
 ## Layout
 
-- Numbered lines 1 to 28 down the left margin, a double rule at the text's left edge and a single rule at the right (the pleading form). This is the exemplar's convention; GNLR 5.1 does not mention line numbers.
+- Numbered lines 1 to 27 down the left margin (the exemplar has 28; 27 are what fit between 1 in margins), a double rule at the text's left edge and a single rule at the right (the pleading form). This is the exemplar's convention; GNLR 5.1 does not mention line numbers.
 - Counsel block single-spaced in lines 1 to 8, court title on line 9 ("IN THE DISTRICT COURT OF GUAM / TERRITORY OF GUAM / BANKRUPTCY DIVISION"), caption on lines 13 to 18.
 - Paragraphs numbered 1, 2, ... by the template; a paragraph beginning `§ ` in the sample is unnumbered (the consent sentence, WHEREFORE, the signing line). Headings and the prayer list stay with the paragraph that follows.
 - Prayer items (markdown list) are lettered (a), (b), ...
@@ -83,10 +83,10 @@ Pages reviewed: 4 of 4.
 Files: `docx/make-reference.sh` (builds `docx/reference.docx` from pandoc's default), `docx/gub-adversary-complaint.lua` (cover, caption, numbering, signature). Sample output: `usage/OUTPUT-adversary-complaint.docx`. Checked: valid zip, every XML part well-formed (xmllint). Not rendered: no page of the docx was looked at (pages_reviewed = 0).
 
 What the XML sets (in `styles.xml`, `sectPr` and the footer part; set, not rendered):
-- EB Garamond 12 pt everywhere; body, headings and numbered paragraphs on an exact 24 pt line pitch (double spacing; 28 lines fill the body area).
+- EB Garamond 12 pt everywhere; body, headings and numbered paragraphs on an exact 24 pt line pitch (double spacing; 27 lines fill the body area).
 - Body paragraphs 0.5 in first-line indent. Level 1 and 2 headings centred and bold, one numbered line each, level 3 bold left.
 - Footnote Text 11 pt, single spaced.
-- US Letter; top margin 1 in, left 1.5 in, right 0.75 in, bottom 48 pt (the 28 lines end at the bottom margin); footer distance 0.42 in.
+- US Letter; top margin 1 in, left 1.5 in, right 1 in, bottom 72 pt (the 27 lines end at the bottom margin); footer distance 0.42 in.
 - Double rule at the text's left and a single rule at its right (page borders, offset from text).
 - Word section line numbers 1 to 28, restarting each page (`w:lnNumType`).
 - Footer: a centred PAGE field (GNLR 5.1(a)).
@@ -98,7 +98,7 @@ What the filter does (not a style):
 
 Differs from typst:
 - The footer title (`footer_title`) is not drawn. It is case-specific text, and the footer part of the reference must not carry it.
-- Line numbers: Word numbers the text lines that flow in the body, so the single-spaced counsel and caption lines on page 1 are numbered too (more than 28 numbers there), table rows are not numbered, and the last page stops at its last text line. Typst always draws 1 to 28 on every page.
+- Line numbers: Word numbers the text lines that flow in the body, so the single-spaced counsel and caption lines on page 1 are numbered too (more than 28 numbers there), table rows are not numbered, and the last page stops at its last text line. Typst always draws 1 to 27 on every page.
 - The page break before the body is a break run in the paragraph after the caption table; Word may show that paragraph's line at the top of page 2.
 - Typed numbers do not renumber in Word when a paragraph is added; the typst template numbers by itself.
 - The 24 pt pitch and the 0.5 in indent are exact; typst's paragraph gaps (`spacing = 1.35em`) are reproduced only as that pitch.
