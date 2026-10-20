@@ -157,6 +157,12 @@
 #let allegations(body, tail) = {
   let n = 0
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim() != "" and not c.trim().starts-with("[^"))
+  let notes = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).filter(c => c.trim().starts-with("[^"))
+  // A paragraph's footnote references ([^key]) are set by giving cmarker the definitions it uses, in the same chunk.
+  let with-notes(t) = {
+    let used = notes.filter(d => t.contains("[^" + d.trim().match(regex("^\\[\\^([^\\]]+)\\]")).captures.at(0) + "]"))
+    if used.len() == 0 { t } else { t + "\n\n" + used.join("\n\n") }
+  }
   let doc = []
   // A heading is kept in one unbreakable block with the chunk after it, so it never ends a page.
   let pending = []
@@ -193,7 +199,7 @@
       n += 1
       out = block(width: text-width, below: gap, {
         set par(leading: gap, spacing: 0pt, first-line-indent: 0pt, justify: false)
-        [#h(para-indent)#n.#h(number-gap)#cmarker.render(t, raw-typst: false, smart-punctuation: true, h1-level: 1)]
+        [#h(para-indent)#n.#h(number-gap)#cmarker.render(with-notes(t), raw-typst: false, smart-punctuation: true, h1-level: 1)]
       })
     }
     if pending != [] {
